@@ -28,8 +28,8 @@
     },
     {
       "path": ".github/workflows/ci.yml",
-      "sha256": "2876adc82676e3dfd1c922bc0361aa8a936c8b2b7c27b030eb1bbf32afda31dc",
-      "bytes": 2954,
+      "sha256": "93afdcfd0e511f2b9ff5a78c32f5f06312acdf4f7a334f92ca2dbd8a366cb59d",
+      "bytes": 3468,
       "category": "reviewed-build-and-ci"
     },
     {
@@ -40,14 +40,14 @@
     },
     {
       "path": ".github/workflows/e2e.yml",
-      "sha256": "8baf39b46a990d2c17156a891f49fa3b0bb1d20fc5cb16d84110b6f414bccb37",
-      "bytes": 7450,
+      "sha256": "a99d8ef90cee70264c22b4aa61806965dcaf6bd3775849d8cde8630860e71d81",
+      "bytes": 7964,
       "category": "reviewed-build-and-ci"
     },
     {
       "path": ".github/workflows/images.yml",
-      "sha256": "20e5937ecffbc513969095e3fa1453333379dc777c8243f37b7437326589a4a7",
-      "bytes": 3716,
+      "sha256": "bb6587e20962de7ff8950b39e788e69450d34223274917e7eb0c3b8f44c13f26",
+      "bytes": 4150,
       "category": "reviewed-build-and-ci"
     },
     {
