@@ -1,0 +1,122 @@
+{
+  "$schema": "../../schema/plugin-manifest.v1.schema.json",
+  "manifest_version": 1,
+  "id": "zrzur.focus-timer",
+  "name": "Focus Timer",
+  "version": "1.0.0",
+  "description": "Work in focused rounds with short breaks. While a round runs, notification sounds and previews stay quiet; you get a notice when it is time for a break.",
+  "author": { "name": "Zrzur" },
+  "category": "productivity",
+  "icon": "timer",
+  "api_version": 1,
+  "min_app_version": "26.0.0",
+  "platforms": ["web", "pwa", "desktop"],
+  "entrypoint": { "type": "worker", "file": "main.js" },
+  "permissions": ["ui.commands", "ui.panels", "keybinds", "storage.settings", "notifications.show", "notifications.display"],
+  "contributes": {
+    "settings": [
+      {
+        "key": "work_minutes",
+        "type": "number",
+        "title": { "en": "Focus round (minutes)", "ar": "جولة التركيز (دقائق)", "de": "Fokusrunde (Minuten)" },
+        "default": 25,
+        "min": 5,
+        "max": 90,
+        "step": 5
+      },
+      {
+        "key": "break_minutes",
+        "type": "number",
+        "title": { "en": "Break (minutes)", "ar": "الاستراحة (دقائق)", "de": "Pause (Minuten)" },
+        "default": 5,
+        "min": 1,
+        "max": 30,
+        "step": 1
+      },
+      {
+        "key": "quiet",
+        "type": "boolean",
+        "title": { "en": "Quiet notifications while focusing", "ar": "إسكات الإشعارات أثناء التركيز", "de": "Benachrichtigungen beim Fokus stumm" },
+        "default": true
+      },
+      {
+        "key": "focusing",
+        "type": "boolean",
+        "title": { "en": "A round is running", "ar": "جولة قيد التشغيل", "de": "Eine Runde läuft" },
+        "description": { "en": "Set by the timer itself.", "ar": "يضبطه المؤقت تلقائياً.", "de": "Wird vom Timer gesetzt." },
+        "default": false
+      }
+    ],
+    "notifications": {
+      "hide_previews": "$setting:focusing",
+      "mute_sound": "$setting:focusing"
+    },
+    "commands": [
+      { "id": "toggle", "title": { "en": "Start or pause a round", "ar": "بدء جولة أو إيقافها", "de": "Runde starten oder anhalten" }, "action": { "type": "worker", "handler": "toggle" } },
+      { "id": "status", "title": { "en": "Show the timer", "ar": "عرض المؤقت", "de": "Timer anzeigen" }, "action": { "type": "worker", "handler": "status" } },
+      { "id": "reset", "title": { "en": "Reset the timer", "ar": "إعادة ضبط المؤقت", "de": "Timer zurücksetzen" }, "action": { "type": "worker", "handler": "reset" } }
+    ],
+    "keybinds": [
+      { "command": "toggle", "keys": "Alt+Shift+P" },
+      { "command": "status", "keys": "Alt+Shift+O" }
+    ],
+    "events": ["app.locale_change"]
+  },
+  "locales": {
+    "ar": {
+      "name": "مؤقت التركيز",
+      "description": "اعمل في جولات مركزة مع استراحات قصيرة. أثناء الجولة تبقى أصوات الإشعارات ومعايناتها هادئة، وتصلك ملاحظة عندما يحين وقت الاستراحة.",
+      "strings": {
+        "title": "مؤقت التركيز",
+        "idle": "لا توجد جولة الآن.",
+        "work": "تركيز: بقي {m} دقيقة.",
+        "break": "استراحة: بقي {m} دقيقة.",
+        "paused": "متوقف مؤقتاً: بقي {m} دقيقة.",
+        "start": "بدء جولة",
+        "pause": "إيقاف مؤقت",
+        "resume": "متابعة",
+        "reset": "إعادة الضبط",
+        "today": "جولات اليوم: {n}",
+        "break_now": "أحسنت! خذ استراحة {m} دقائق.",
+        "back": "انتهت الاستراحة. جاهز لجولة جديدة؟",
+        "started": "بدأت جولة تركيز مدتها {m} دقيقة."
+      }
+    },
+    "de": {
+      "name": "Fokus-Timer",
+      "description": "Arbeite in fokussierten Runden mit kurzen Pausen. Während einer Runde bleiben Benachrichtigungstöne und -vorschauen still; zur Pause bekommst du einen Hinweis.",
+      "strings": {
+        "title": "Fokus-Timer",
+        "idle": "Gerade läuft keine Runde.",
+        "work": "Fokus: noch {m} Min.",
+        "break": "Pause: noch {m} Min.",
+        "paused": "Angehalten: noch {m} Min.",
+        "start": "Runde starten",
+        "pause": "Anhalten",
+        "resume": "Fortsetzen",
+        "reset": "Zurücksetzen",
+        "today": "Runden heute: {n}",
+        "break_now": "Gut gemacht! Mach {m} Minuten Pause.",
+        "back": "Die Pause ist vorbei. Bereit für die nächste Runde?",
+        "started": "Eine Fokusrunde von {m} Minuten läuft."
+      }
+    },
+    "en": {
+      "strings": {
+        "title": "Focus Timer",
+        "idle": "No round is running.",
+        "work": "Focus: {m} min left.",
+        "break": "Break: {m} min left.",
+        "paused": "Paused: {m} min left.",
+        "start": "Start a round",
+        "pause": "Pause",
+        "resume": "Resume",
+        "reset": "Reset",
+        "today": "Rounds today: {n}",
+        "break_now": "Well done! Take a {m} minute break.",
+        "back": "Break's over. Ready for another round?",
+        "started": "A {m} minute focus round is running."
+      }
+    }
+  }
+}

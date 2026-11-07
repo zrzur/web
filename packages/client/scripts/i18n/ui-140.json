@@ -1,0 +1,83 @@
+{
+  "Month and year of birth": ["شهر الميلاد وسنته", "Geburtsmonat und -jahr"],
+  "We keep only the month and year. They decide which content you can see.": [
+    "نحتفظ بالشهر والسنة فقط، ويحددان المحتوى الذي يمكنك رؤيته.",
+    "Wir speichern nur Monat und Jahr. Sie bestimmen, welche Inhalte du sehen kannst."
+  ],
+  "Month of birth": ["شهر الميلاد", "Geburtsmonat"],
+  "Month": ["الشهر", "Monat"],
+  "Year of birth": ["سنة الميلاد", "Geburtsjahr"],
+  "Year": ["السنة", "Jahr"],
+  "Sorry, you can't create a Zrzur account.": [
+    "عذرًا، لا يمكنك إنشاء حساب في زرزور.",
+    "Du kannst leider kein Zrzur-Konto erstellen."
+  ],
+  "Your age can't be changed this way. If it is wrong, contact privacy@zrzur.com.": [
+    "لا يمكن تغيير عمرك بهذه الطريقة. إن كان غير صحيح، فتواصل مع privacy@zrzur.com.",
+    "Dein Alter kann so nicht geändert werden. Wenn es falsch ist, wende dich an privacy@zrzur.com."
+  ],
+  "This content is only for adults.": [
+    "هذا المحتوى للبالغين فقط.",
+    "Diese Inhalte sind nur für Erwachsene."
+  ],
+  "Add your month and year of birth": [
+    "أضف شهر ميلادك وسنته",
+    "Gib deinen Geburtsmonat und dein Geburtsjahr an"
+  ],
+  "Zrzur now asks everyone for this, to keep younger people safe. We keep only the month and year. Until you add it, content marked as mature stays closed.": [
+    "يطلب زرزور هذا الآن من الجميع لحماية صغار السن. نحتفظ بالشهر والسنة فقط. وإلى أن تضيفهما، يبقى المحتوى المحدد للبالغين مغلقًا.",
+    "Zrzur fragt das jetzt alle, um junge Menschen zu schützen. Wir speichern nur Monat und Jahr. Bis du sie angibst, bleiben Inhalte für Erwachsene geschlossen."
+  ],
+  "Not now": ["ليس الآن", "Nicht jetzt"],
+  "OK": ["حسنًا", "OK"],
+  "Your account is limited": ["حسابك مقيّد", "Dein Konto ist eingeschränkt"],
+  "The month and year of birth on this account are below the minimum age for Zrzur. Content marked as mature is closed, and our team may review the account. If the date is wrong, contact privacy@zrzur.com.": [
+    "شهر الميلاد وسنته في هذا الحساب دون الحد الأدنى للعمر في زرزور. لذلك يُغلق المحتوى المحدد للبالغين، وقد يراجع فريقنا الحساب. وإن كان التاريخ غير صحيح، فتواصل مع privacy@zrzur.com.",
+    "Geburtsmonat und -jahr dieses Kontos liegen unter dem Mindestalter für Zrzur. Inhalte für Erwachsene sind geschlossen, und unser Team kann das Konto prüfen. Wenn das Datum falsch ist, wende dich an privacy@zrzur.com."
+  ],
+  "This channel is marked as mature and is only open to adults.": [
+    "هذه القناة محددة كمحتوى للبالغين، وهي متاحة للبالغين فقط.",
+    "Dieser Kanal ist als \"für Erwachsene\" markiert und nur für Erwachsene zugänglich."
+  ],
+  "This channel is marked as mature. Add your month and year of birth to open it.": [
+    "هذه القناة محددة كمحتوى للبالغين. أضف شهر ميلادك وسنته لفتحها.",
+    "Dieser Kanal ist als \"für Erwachsene\" markiert. Gib deinen Geburtsmonat und dein Geburtsjahr an, um ihn zu öffnen."
+  ],
+  "Content marked as mature needs an age check that Zrzur doesn't offer yet, so it is closed for everyone.": [
+    "يحتاج المحتوى المحدد للبالغين إلى تحقق من العمر لا يوفّره زرزور بعد، لذلك هو مغلق أمام الجميع.",
+    "Inhalte für Erwachsene brauchen eine Altersprüfung, die Zrzur noch nicht anbietet. Deshalb sind sie für alle geschlossen."
+  ],
+  "Add month and year of birth": [
+    "أضف شهر الميلاد وسنته",
+    "Geburtsmonat und -jahr angeben"
+  ],
+  "This channel is marked as mature. It may show content that is not suitable for everyone.": [
+    "هذه القناة محددة كمحتوى للبالغين، وقد تعرض محتوى لا يناسب الجميع.",
+    "Dieser Kanal ist als \"für Erwachsene\" markiert. Er kann Inhalte zeigen, die nicht für alle geeignet sind."
+  ],
+  "It is open to you because you stated that you are 18 or over. Zrzur does not verify ages.": [
+    "هي متاحة لك لأنك صرّحت بأن عمرك 18 عامًا أو أكثر. ولا يتحقق زرزور من الأعمار.",
+    "Er ist für dich offen, weil du angegeben hast, 18 oder älter zu sein. Zrzur prüft das Alter nicht."
+  ],
+  "Not added": ["لم يُضف بعد", "Nicht angegeben"],
+  "Content marked as mature stays closed until you add it.": [
+    "يبقى المحتوى المحدد للبالغين مغلقًا إلى أن تضيفه.",
+    "Inhalte für Erwachsene bleiben geschlossen, bis du es angibst."
+  ],
+  "Below the minimum age: your account is limited and may be reviewed.": [
+    "دون الحد الأدنى للعمر: حسابك مقيّد وقد تتم مراجعته.",
+    "Unter dem Mindestalter: Dein Konto ist eingeschränkt und kann geprüft werden."
+  ],
+  "Mature content is hidden for your age.": [
+    "يُخفى المحتوى المخصص للبالغين بحسب عمرك.",
+    "Inhalte für Erwachsene sind für dein Alter ausgeblendet."
+  ],
+  "Stated by you, not verified.": [
+    "صرّحت به أنت، ولم يُتحقق منه.",
+    "Von dir angegeben, nicht geprüft."
+  ],
+  "You can make yourself younger at any time. You can make yourself older only once, and only within the same age group. For anything else, contact privacy@zrzur.com.": [
+    "يمكنك تصغير عمرك في أي وقت، ولا يمكنك تكبيره إلا مرة واحدة وضمن الفئة العمرية نفسها. ولأي تغيير آخر، تواصل مع privacy@zrzur.com.",
+    "Du kannst dich jederzeit jünger machen. Älter machen kannst du dich nur einmal und nur innerhalb derselben Altersgruppe. Für alles andere wende dich an privacy@zrzur.com."
+  ]
+}

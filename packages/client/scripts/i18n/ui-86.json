@@ -1,0 +1,21 @@
+{
+  "Coloured name": ["اسم ملوّن", "Farbiger Name"],
+  "Fitting room": ["غرفة التجربة", "Anprobe"],
+  "Font": ["الخط", "Schrift"],
+  "Gradient name": ["اسم متدرّج", "Name mit Verlauf"],
+  "Mono": ["أحادي المسافة", "Mono"],
+  "Not saved yet": ["لم يُحفظ بعد", "Noch nicht gespeichert"],
+  "Nothing matches.": ["لا توجد نتائج مطابقة.", "Nichts gefunden."],
+  "Nothing on yet. Pick something to try on.": ["لم تختر شيئًا بعد. اختر ما تريد تجربته.", "Noch nichts an. Wähle etwas zum Anprobieren."],
+  "Own colours": ["ألوان خاصة", "Eigene Farben"],
+  "Pixel": ["بكسل", "Pixel"],
+  "Rounded": ["مستدير", "Rund"],
+  "Save to profile": ["حفظ في الملف الشخصي", "Im Profil speichern"],
+  "Saved to your profile.": ["حُفظ في ملفك الشخصي.", "In deinem Profil gespeichert."],
+  "Script": ["خط يدوي", "Schreibschrift"],
+  "Serif": ["مُذيّل", "Serif"],
+  "Take off {0}": ["إزالة {0}", "{0} ablegen"],
+  "Tap anything to try it on. Your profile changes only when you save.": ["اضغط على أي شيء لتجربته. لا يتغيّر ملفك الشخصي إلا عندما تحفظ.", "Tippe auf etwas, um es anzuprobieren. Dein Profil ändert sich erst, wenn du speicherst."],
+  "Wide": ["عريض", "Breit"],
+  "Your look": ["إطلالتك", "Dein Look"]
+}

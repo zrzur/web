@@ -1,0 +1,633 @@
+/* Media picker surfaces use the active Zrzur theme, including light variants. */
+.z-media-picker {
+  box-sizing: border-box;
+  --picker-bg: var(--z-bg-sidebar, #171925);
+  --picker-raised: var(--z-bg-raised, #242638);
+  --picker-input: var(--z-bg-input, #0d0e16);
+  --picker-border: var(--z-border-subtle, #342c40);
+  --picker-text: var(--z-fg-primary, #e6e1ee);
+  --picker-muted: var(--z-fg-muted, #968da6);
+  --picker-accent: var(--z-accent, #e0195f);
+  width: min(360px, calc(100vw - 16px));
+  height: min(
+    420px,
+    calc(100dvh - 100px),
+    var(--z-picker-available-height, 420px)
+  );
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  /* the same layered floating surface as menus and popovers */
+  border: 1px solid var(--z-popover-border, var(--picker-border));
+  border-radius: 12px;
+  background: var(--z-popover-bg, var(--picker-bg));
+  color: var(--picker-text);
+  box-shadow: var(
+    --z-popover-lift,
+    0 16px 48px rgb(0 0 0 / 35%),
+    0 4px 12px rgb(0 0 0 / 20%)
+  );
+  z-index: 1000;
+  font-size: 14px;
+  isolation: isolate;
+}
+.z-media-picker *,
+.z-media-picker *::before,
+.z-media-picker *::after {
+  box-sizing: border-box;
+}
+.z-media-picker button,
+.z-media-picker input {
+  font: inherit;
+}
+.z-media-picker button {
+  cursor: pointer;
+}
+.z-media-picker button:focus-visible,
+.z-media-picker input:focus-visible {
+  outline: 2px solid var(--picker-accent);
+  outline-offset: -2px;
+}
+.z-picker-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 10px 12px;
+  border-bottom: 1px solid var(--picker-border);
+  flex-shrink: 0;
+}
+.z-picker-tabs {
+  display: flex;
+  gap: 4px;
+  min-width: 0;
+}
+.z-picker-tabs button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 34px;
+  padding: 6px 12px;
+  background: transparent;
+  color: var(--picker-muted);
+  border: 0;
+  border-radius: 6px;
+  font-weight: 600;
+  transition:
+    background-color 0.12s ease,
+    color 0.12s ease;
+}
+.z-picker-tabs button:hover,
+.z-picker-icon-button:hover {
+  background: var(--picker-raised);
+  color: var(--picker-text);
+}
+.z-picker-tabs button[aria-selected="true"] {
+  background: var(--picker-raised);
+  color: var(--picker-text);
+}
+.z-media-picker .z-icon {
+  --z-icon-color: currentColor;
+}
+.z-picker-icon-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 28px;
+  width: 28px;
+  height: 28px;
+  padding: 0;
+  border: 0;
+  border-radius: 5px;
+  background: transparent;
+  color: var(--picker-muted);
+}
+.z-picker-panel {
+  flex: 1;
+  min-height: 0;
+  min-width: 0;
+  display: flex;
+  overflow: hidden;
+}
+.z-gif-picker,
+.z-emoji-picker {
+  flex: 1;
+  width: 100%;
+  min-width: 0;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+}
+.z-picker-search {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 8px 8px 0;
+  min-height: 40px;
+  padding: 4px 8px 4px 12px;
+  border: 1px solid var(--picker-border);
+  border-radius: 7px;
+  background: var(--picker-input);
+  color: var(--picker-muted);
+}
+.z-picker-search:focus-within {
+  border-color: var(--picker-accent);
+}
+.z-picker-search input {
+  width: 100%;
+  min-width: 0;
+  flex: 1;
+  background: transparent;
+  color: var(--picker-text);
+  border: 0;
+  outline: none;
+  padding: 4px 0;
+  height: 30px;
+}
+.z-picker-search input:focus-visible {
+  outline: none;
+}
+.z-picker-search input::placeholder {
+  color: var(--picker-muted);
+  opacity: 1;
+}
+.z-picker-search input:disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+.z-picker-search input::-webkit-search-cancel-button {
+  display: none;
+}
+.z-picker-section-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 8px 10px;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--picker-muted);
+}
+.z-picker-result-count {
+  font-size: 11px;
+  font-weight: 500;
+}
+.z-picker-scroll {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  padding: 0 8px 8px;
+}
+.z-gif-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 6px;
+}
+.z-gif-category {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  overflow: hidden;
+  min-width: 0;
+  aspect-ratio: 2;
+  padding: 8px;
+  border: 1px solid transparent;
+  border-radius: 8px;
+  background: var(--picker-raised);
+  color: #fff;
+  text-align: center;
+}
+.z-gif-category img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.z-gif-category::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(transparent 10%, rgb(0 0 0 / 75%));
+  pointer-events: none;
+}
+.z-gif-category > span {
+  position: relative;
+  z-index: 1;
+  font-weight: 700;
+  overflow-wrap: anywhere;
+}
+.z-gif-category > .z-icon {
+  z-index: 1;
+  color: #fff;
+}
+.z-gif-trending {
+  background: linear-gradient(
+    130deg,
+    color-mix(in srgb, var(--picker-accent) 75%, var(--z-bg-sidebar, #171925)),
+    color-mix(in srgb, var(--picker-accent) 28%, var(--z-bg-sidebar, #171925))
+  );
+}
+.z-gif-trending::after {
+  background: linear-gradient(transparent, rgb(0 0 0 / 25%));
+}
+.z-gif-category:hover,
+.z-gif-tile:hover {
+  border-color: var(--picker-accent);
+}
+.z-gif-masonry {
+  columns: 2;
+  column-gap: 8px;
+}
+.z-gif-tile {
+  position: relative;
+  display: block;
+  width: 100%;
+  min-height: 72px;
+  padding: 0;
+  margin: 0 0 8px;
+  break-inside: avoid;
+  overflow: hidden;
+  border: 1px solid transparent;
+  border-radius: 8px;
+  background: var(--picker-raised);
+  color: var(--picker-text);
+}
+.z-gif-tile video,
+.z-gif-tile img {
+  display: block;
+  width: 100%;
+  height: auto;
+  min-height: 72px;
+  object-fit: cover;
+}
+.z-gif-send-label {
+  position: absolute;
+  inset-inline: 0;
+  bottom: 0;
+  padding: 12px 8px 8px;
+  background: linear-gradient(transparent, rgb(0 0 0 / 75%));
+  color: #fff;
+  font-size: 11px;
+  opacity: 0;
+}
+.z-gif-tile:hover .z-gif-send-label,
+.z-gif-tile:focus-visible .z-gif-send-label {
+  opacity: 1;
+}
+.z-gif-preview-failed {
+  min-height: 120px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  padding: 12px;
+  font-size: 12px;
+  color: var(--picker-muted);
+}
+.z-picker-state {
+  min-height: 140px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+  padding: 18px 14px;
+  text-align: center;
+}
+.z-picker-state-icon {
+  display: grid;
+  place-items: center;
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  background: var(--picker-raised);
+  color: var(--picker-muted);
+}
+.z-picker-state strong {
+  font-size: 16px;
+  line-height: 22px;
+}
+.z-picker-state-body {
+  max-width: 290px;
+  color: var(--picker-muted);
+  line-height: 20px;
+  font-size: 13px;
+}
+.z-picker-action {
+  display: block;
+  margin: 16px auto 0;
+  padding: 8px 14px;
+  border: 0;
+  border-radius: 6px;
+  background: var(--z-accent-fill, var(--picker-accent));
+  color: var(--z-on-accent, #ffffff);
+  font-weight: 600;
+}
+
+.z-picker-end {
+  padding: 12px;
+  text-align: center;
+  color: var(--picker-muted);
+  font-size: 12px;
+}
+.z-gif-skeleton {
+  height: 112px;
+  border-radius: 8px;
+  background: var(--picker-raised);
+  animation: z-gif-pulse 1.2s ease-in-out infinite alternate;
+}
+@keyframes z-gif-pulse {
+  to {
+    opacity: 0.35;
+  }
+}
+.z-media-picker--phone {
+  position: fixed;
+  inset-inline: 8px;
+  bottom: max(72px, env(keyboard-inset-height, 0px));
+  width: calc(100vw - 16px);
+  height: min(420px, calc(100dvh - 100px));
+}
+@media (max-width: 380px) {
+  .z-picker-tabs button {
+    padding-inline: 9px;
+  }
+  .z-picker-state {
+    padding-inline: 12px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .z-gif-skeleton {
+    animation: none;
+  }
+  .z-picker-tabs button {
+    transition: none;
+  }
+}
+
+/* Emoji picker: search + add, tip, then one tight grid per section */
+.z-emoji-top {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 8px 0;
+  flex-shrink: 0;
+}
+.z-emoji-picker .z-picker-search {
+  flex: 1;
+  margin: 0;
+  min-height: 34px;
+  padding: 0 6px 0 10px;
+}
+.z-emoji-picker .z-picker-search input {
+  height: 32px;
+}
+.z-emoji-add {
+  display: inline-grid;
+  place-items: center;
+  flex: 0 0 34px;
+  height: 34px;
+  padding: 0;
+  border: 1px solid var(--picker-border);
+  border-radius: 7px;
+  background: var(--picker-input);
+  color: var(--picker-muted);
+}
+.z-emoji-add:hover {
+  color: var(--picker-text);
+  background: var(--picker-raised);
+}
+.z-emoji-results {
+  flex: 1;
+  min-height: 0;
+  min-width: 0;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  padding: 0 6px 6px;
+}
+.z-emoji-tip {
+  margin: 8px 2px 4px;
+  font-size: 12px;
+  line-height: 16px;
+  color: var(--picker-muted);
+}
+.z-emoji-heading {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin: 0;
+  padding: 8px 2px 4px;
+  background: var(--picker-bg);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  color: var(--picker-muted);
+}
+.z-emoji-heading span {
+  min-width: 0;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+.z-emoji-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(36px, 1fr));
+}
+.z-emoji-grid--search {
+  padding-top: 6px;
+}
+.z-media-picker .z-emoji-cell {
+  --emoji-size: 28px;
+  aspect-ratio: 1;
+  display: grid;
+  place-items: center;
+  padding: 0;
+  border: 0;
+  border-radius: 6px;
+  background: transparent;
+  font-size: 28px;
+  line-height: 1;
+  /* skip layout and paint for rows that are scrolled away */
+  content-visibility: auto;
+  contain-intrinsic-size: 36px;
+}
+.z-media-picker .z-emoji-cell:hover {
+  background: var(--picker-raised);
+}
+.z-media-picker .z-emoji-cell .emoji {
+  margin: 0;
+  padding-block: 0;
+  line-height: 1.2;
+}
+@media (forced-colors: active) {
+  .z-picker-scroll,
+  .z-emoji-results {
+    scrollbar-width: auto;
+  }
+}
+
+/* Independent compact popovers: each composer button opens its own surface. */
+.z-media-picker[data-picker-type="emoji"] {
+  width: min(352px, calc(100vw - 16px));
+  height: min(
+    400px,
+    calc(100dvh - 100px),
+    var(--z-picker-available-height, 400px)
+  );
+}
+.z-media-picker--phone {
+  inset-inline: auto;
+  left: 50%;
+  transform: translateX(-50%);
+  width: min(360px, calc(100vw - 16px));
+}
+.z-gif-category > span {
+  text-align: center;
+  font-size: 13px;
+  line-height: 18px;
+  text-shadow: 0 1px 3px #000;
+}
+.z-gif-category > .z-icon {
+  display: none;
+}
+.z-gif-category::after {
+  background: rgb(0 0 0 / 30%);
+}
+.z-gif-picker .z-picker-search {
+  margin-bottom: 6px;
+}
+.z-picker-state {
+  gap: 10px;
+  padding: 16px 12px;
+}
+.z-picker-state strong {
+  font-size: 14px;
+  line-height: 20px;
+}
+.z-picker-state-icon {
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
+}
+
+/* KLIPY GIFs: picture tiles with a centred label, two balanced columns */
+.z-gif-picker .z-picker-scroll {
+  padding-top: 2px;
+}
+.z-gif-category {
+  aspect-ratio: auto;
+  height: 84px;
+  border-radius: 8px;
+  background: var(--picker-raised);
+}
+.z-gif-category > span {
+  font-size: 14px;
+  font-weight: 700;
+  color: #fff;
+}
+.z-gif-category::after {
+  background: rgb(0 0 0 / 40%);
+}
+.z-gif-category:hover::after {
+  background: rgb(0 0 0 / 20%);
+}
+.z-gif-columns {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 6px;
+  align-items: start;
+}
+.z-gif-column {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  min-width: 0;
+}
+.z-gif-columns .z-gif-tile {
+  margin: 0;
+  min-height: 0;
+}
+.z-gif-columns .z-gif-tile img,
+.z-gif-columns .z-gif-tile video {
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+  object-fit: cover;
+}
+.z-gif-skeleton {
+  height: 84px;
+}
+.z-gif-more {
+  min-height: 1px;
+  padding-top: 6px;
+}
+.z-gif-attribution {
+  flex-shrink: 0;
+  padding: 6px 10px;
+  border-top: 1px solid var(--picker-border);
+  font-size: 11px;
+  font-weight: 600;
+  text-align: center;
+  color: var(--picker-muted);
+}
+
+/* Virtual emoji list: rows are absolutely placed inside a full-height
+   spacer, so only what's on screen is in the DOM. */
+.z-emoji-virtual {
+  position: relative;
+}
+.z-emoji-row {
+  position: absolute;
+  inset-inline: 0;
+  top: 0;
+  height: 40px;
+  display: grid;
+  align-items: center;
+}
+.z-emoji-row > .z-emoji-tip,
+.z-emoji-row > .z-emoji-heading {
+  grid-column: 1 / -1;
+  position: static;
+}
+.z-emoji-row .z-emoji-cell {
+  height: 38px;
+  aspect-ratio: auto;
+}
+@media (pointer: coarse) {
+  .z-emoji-row {
+    height: 44px;
+  }
+  .z-emoji-row .z-emoji-cell {
+    height: 44px;
+  }
+  .z-emoji-add {
+    flex-basis: 44px;
+    height: 44px;
+  }
+}
+/* section title pinned to the top of the list while scrolling */
+.z-emoji-pinned {
+  position: sticky;
+  top: 0;
+  height: 0;
+  z-index: 2;
+}
+.z-emoji-pinned > .z-emoji-heading {
+  position: absolute;
+  inset-inline: 0;
+  top: 0;
+  background: var(--picker-bg, var(--z-bg-popover));
+}

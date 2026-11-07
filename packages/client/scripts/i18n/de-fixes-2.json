@@ -1,0 +1,16 @@
+{
+  "{0} was banned": "{0} wurde gesperrt",
+  "<0/> has been banned from the server": "<0/> wurde vom Server gesperrt",
+  "Are you sure you want to go to ": "Willst du wirklich weiter zu ",
+  "Ban": "Sperren",
+  "Ban lower-ranking members from the server": "Mitglieder mit niedrigerem Rang vom Server sperren",
+  "Ban member": "Mitglied sperren",
+  "Ban Member": "Mitglied sperren",
+  "Ban user": "Benutzer sperren",
+  "Ban User": "Benutzer sperren",
+  "Bans": "Sperren",
+  "Multi-factor authentication is already enabled for this account.": "Die Multi-Faktor-Authentifizierung ist für dieses Konto bereits aktiviert.",
+  "This user is not part of the server and may already be banned": "Dieser Benutzer ist nicht auf dem Server und ist möglicherweise bereits gesperrt",
+  "Username": "Benutzername",
+  "Edit your identity": "Deine Identität bearbeiten"
+}

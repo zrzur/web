@@ -1,0 +1,10 @@
+{
+  "Hand-picked": ["مختار بعناية", "Handverlesen"],
+  "All servers": ["كل السيرفرات", "Alle Server"],
+  "All bots": ["كل البوتات", "Alle Bots"],
+  "Clear filters": ["امسح عوامل التصفية", "Filter zurücksetzen"],
+  "Remove filter": ["أزل عامل التصفية", "Filter entfernen"],
+  "Add <0>{0}</0> to Discover": ["أضف <0>{0}</0> إلى «اكتشف»", "<0>{0}</0> zu Entdecken hinzufügen"],
+  "Find your <0>community</0>": ["اعثر على <0>مجتمعك</0>", "Finde deine <0>Community</0>"],
+  "Find the right <0>bot</0>": ["اعثر على <0>البوت</0> المناسب", "Finde den passenden <0>Bot</0>"]
+}

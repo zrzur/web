@@ -1,0 +1,282 @@
+{
+  "Falling stars": [
+    "نجوم متساقطة",
+    "Sternschnuppen"
+  ],
+  "Lanterns": [
+    "فوانيس",
+    "Laternen"
+  ],
+  "Cherry petals": [
+    "بتلات الكرز",
+    "Kirschblätter"
+  ],
+  "Embers": [
+    "جمر",
+    "Glut"
+  ],
+  "Paper planes": [
+    "طائرات ورقية",
+    "Papierflieger"
+  ],
+  "Butterflies": [
+    "فراشات",
+    "Schmetterlinge"
+  ],
+  "Ink drops": [
+    "قطرات حبر",
+    "Tintentropfen"
+  ],
+  "Crystal shards": [
+    "شظايا بلورية",
+    "Kristallsplitter"
+  ],
+  "Comet": [
+    "مذنب",
+    "Komet"
+  ],
+  "Rain on glass": [
+    "مطر على الزجاج",
+    "Regen auf Glas"
+  ],
+  "Sparkle dust": [
+    "غبار لامع",
+    "Glitzerstaub"
+  ],
+  "Sun rays": [
+    "أشعة الشمس",
+    "Sonnenstrahlen"
+  ],
+  "Moon phases": [
+    "أطوار القمر",
+    "Mondphasen"
+  ],
+  "Geometric bloom": [
+    "زهرة هندسية",
+    "Geometrische Blüte"
+  ],
+  "Wave lines": [
+    "خطوط الموج",
+    "Wellenlinien"
+  ],
+  "Confetti burst": [
+    "انفجار قصاصات",
+    "Konfettiregen"
+  ],
+  "Feathers": [
+    "ريش",
+    "Federn"
+  ],
+  "Dandelion seeds": [
+    "بذور الهندباء",
+    "Pusteblumen"
+  ],
+  "Rising hearts": [
+    "قلوب صاعدة",
+    "Aufsteigende Herzen"
+  ],
+  "Crown of light": [
+    "تاج من نور",
+    "Lichtkrone"
+  ],
+  "Rings": [
+    "حلقات",
+    "Ringe"
+  ],
+  "Ivy": [
+    "لبلاب",
+    "Efeu"
+  ],
+  "Thorn roses": [
+    "ورود وأشواك",
+    "Dornenrosen"
+  ],
+  "Ice crystal": [
+    "بلورة جليد",
+    "Eiskristall"
+  ],
+  "Flame ring": [
+    "حلقة لهب",
+    "Flammenring"
+  ],
+  "Moon halo": [
+    "هالة القمر",
+    "Mondhof"
+  ],
+  "Stars in orbit": [
+    "نجوم في مدار",
+    "Kreisende Sterne"
+  ],
+  "Cherry branch": [
+    "غصن كرز",
+    "Kirschzweig"
+  ],
+  "Hexagon": [
+    "سداسي",
+    "Sechseck"
+  ],
+  "Wing frame": [
+    "إطار الجناحين",
+    "Flügelrahmen"
+  ],
+  "Gears": [
+    "تروس",
+    "Zahnräder"
+  ],
+  "Circuit": [
+    "دارة",
+    "Schaltkreis"
+  ],
+  "Waves": [
+    "أمواج",
+    "Wellen"
+  ],
+  "Autumn wreath": [
+    "إكليل الخريف",
+    "Herbstkranz"
+  ],
+  "Music notes": [
+    "نوتات موسيقية",
+    "Musiknoten"
+  ],
+  "Shield": [
+    "درع",
+    "Schild"
+  ],
+  "Autumn": [
+    "الخريف",
+    "Herbst"
+  ],
+  "Cherry blossoms": [
+    "أزهار الكرز",
+    "Kirschblüten"
+  ],
+  "Clouds": [
+    "غيوم",
+    "Wolken"
+  ],
+  "Aries": [
+    "الحمل",
+    "Widder"
+  ],
+  "Taurus": [
+    "الثور",
+    "Stier"
+  ],
+  "Gemini": [
+    "الجوزاء",
+    "Zwillinge"
+  ],
+  "Cancer": [
+    "السرطان",
+    "Krebs"
+  ],
+  "Leo": [
+    "الأسد",
+    "Löwe"
+  ],
+  "Virgo": [
+    "العذراء",
+    "Jungfrau"
+  ],
+  "Libra": [
+    "الميزان",
+    "Waage"
+  ],
+  "Scorpio": [
+    "العقرب",
+    "Skorpion"
+  ],
+  "Sagittarius": [
+    "القوس",
+    "Schütze"
+  ],
+  "Capricorn": [
+    "الجدي",
+    "Steinbock"
+  ],
+  "Aquarius": [
+    "الدلو",
+    "Wassermann"
+  ],
+  "Pisces": [
+    "الحوت",
+    "Fische"
+  ],
+  "Themes": [
+    "سمات",
+    "Themen"
+  ],
+  "Zodiac": [
+    "الأبراج",
+    "Sternzeichen"
+  ],
+  "Countries": [
+    "الدول",
+    "Länder"
+  ],
+  "Arab countries": [
+    "الدول العربية",
+    "Arabische Länder"
+  ],
+  "Search nameplates": [
+    "ابحث في لوحات الأسماء",
+    "Namensschilder suchen"
+  ],
+  "Geometric": [
+    "هندسي",
+    "Geometrisch"
+  ],
+  "Modern": [
+    "عصري",
+    "Modern"
+  ],
+  "Elegant": [
+    "أنيق",
+    "Elegant"
+  ],
+  "Strong": [
+    "قوي",
+    "Kräftig"
+  ],
+  "Clear": [
+    "واضح",
+    "Klar"
+  ],
+  "Soft": [
+    "ناعم",
+    "Weich"
+  ],
+  "Slab": [
+    "مربّع",
+    "Slab"
+  ],
+  "Classic": [
+    "كلاسيكي",
+    "Klassisch"
+  ],
+  "Comic": [
+    "مرح",
+    "Comic"
+  ],
+  "Typewriter": [
+    "آلة كاتبة",
+    "Schreibmaschine"
+  ],
+  "Code": [
+    "برمجي",
+    "Code"
+  ],
+  "Arabic sans": [
+    "عربي بسيط",
+    "Arabisch serifenlos"
+  ],
+  "Salma": [
+    "سلمى",
+    "Salma"
+  ],
+  "Zaid": [
+    "زيد",
+    "Zaid"
+  ]
+}

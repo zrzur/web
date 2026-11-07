@@ -1,0 +1,227 @@
+{
+  "A background behind your name in member lists. Community designs are made by verified creators and free to use.": [
+    "خلفية خلف اسمك في قوائم الأعضاء. زينة المجتمع من تصميم مصممين معتمدين واستخدامها مجاني.",
+    "Ein Hintergrund hinter deinem Namen in Mitgliederlisten. Community-Designs stammen von verifizierten Designern und sind kostenlos."
+  ],
+  "A frame around your avatar. Pick an included one or a community design made by verified creators. All of them are free.": [
+    "إطار حول صورتك الرمزية. اختر إطارًا مضمّنًا أو تصميمًا من زينة المجتمع صنعه مصممون معتمدون. كلها مجانية.",
+    "Ein Rahmen um deinen Avatar. Wähle einen enthaltenen oder ein Community-Design von verifizierten Designern. Alle sind kostenlos."
+  ],
+  "All caught up. Nothing waiting here.": [
+    "لا شيء متبقٍ. لا يوجد ما ينتظر هنا.",
+    "Alles erledigt. Hier wartet nichts."
+  ],
+  "All designs": ["كل التصاميم", "Alle Designs"],
+  "Another reviewer acted on this first. The list is updated.": [
+    "سبقك مراجع آخر إلى هذا التصميم. تم تحديث القائمة.",
+    "Jemand anderes hat das zuerst geprüft. Die Liste ist aktualisiert."
+  ],
+  "Approve, reject or send back submitted designs.": [
+    "وافق على التصاميم المرسلة أو ارفضها أو أعدها لمصممها.",
+    "Eingereichte Designs annehmen, ablehnen oder zurückschicken."
+  ],
+  "Approved": ["تمت الموافقة", "Angenommen"],
+  "Archive": ["أرشفة", "Archivieren"],
+  "Archive?": ["أرشفة؟", "Archivieren?"],
+  "Archived": ["مؤرشف", "Archiviert"],
+  "by <0>{0}</0>": ["من تصميم <0>{0}</0>", "Erstellt von <0>{0}</0>"],
+  "Changes requested": ["مطلوب تعديلات", "Änderungen angefragt"],
+  "Choose an image": ["اختر صورة", "Bild auswählen"],
+  "Choose an image to see it here.": [
+    "اختر صورة لتراها هنا.",
+    "Wähle ein Bild, um es hier zu sehen."
+  ],
+  "Community creations": ["تصاميمه في زينة المجتمع", "Community-Designs"],
+  "Community designs": ["زينة المجتمع", "Community-Designs"],
+  "Community designs to review": [
+    "تصاميم بانتظار المراجعة",
+    "Community-Designs zur Prüfung"
+  ],
+  "Creator": ["مصمم", "Designer"],
+  "Creator Studio": ["استوديو المصممين", "Creator-Studio"],
+  "Creators": ["المصممون", "Designer"],
+  "Decorations and nameplates made by creators. Everything is reviewed before it is public.": [
+    "إطارات ولوحات أسماء من تصميم المصممين. تتم مراجعة كل شيء قبل نشره.",
+    "Rahmen und Namensschilder von Designern. Alles wird geprüft, bevor es öffentlich ist."
+  ],
+  "Draft": ["مسودة", "Entwurf"],
+  "Drafts": ["المسودات", "Entwürfe"],
+  "Everything you submit is reviewed before anyone else can see it. Published designs are free for everyone and show your name.": [
+    "تتم مراجعة كل ما ترسله قبل أن يراه أي أحد. التصاميم المنشورة مجانية للجميع وتظهر باسمك.",
+    "Alles, was du einreichst, wird geprüft, bevor andere es sehen. Veröffentlichte Designs sind für alle kostenlos und zeigen deinen Namen."
+  ],
+  "Filter": ["تصفية", "Filter"],
+  "History": ["السجل", "Verlauf"],
+  "Keep it": ["إبقاؤه", "Behalten"],
+  "Made creator": ["أصبح مصممًا", "Zum Designer gemacht"],
+  "Make creator": ["اجعله مصممًا", "Zum Designer machen"],
+  "Make reviewer": ["اجعله مراجعًا", "Zum Prüfer machen"],
+  "Make someone a creator, or pause or revoke them.": [
+    "امنح أحدًا صفة مصمم، أو أوقفها مؤقتًا أو اسحبها.",
+    "Mache jemanden zum Designer, pausiere oder entziehe es."
+  ],
+  "Manage creators": ["إدارة المصممين", "Designer verwalten"],
+  "Manage own designs": ["إدارة تصاميمه", "Eigene Designs verwalten"],
+  "My creations": ["تصاميمي", "Meine Designs"],
+  "New submission": ["تصميم جديد", "Neue Einreichung"],
+  "New version": ["النسخة الجديدة", "Neue Version"],
+  "New version {0}": ["النسخة الجديدة {0}", "Neue Version {0}"],
+  "New versions": ["نسخ جديدة", "Neue Versionen"],
+  "Newest": ["الأحدث", "Neueste"],
+  "No changes yet.": ["لا توجد تغييرات بعد.", "Noch keine Änderungen."],
+  "No community designs yet. Approved designs from creators show up here.": [
+    "لا توجد زينة مجتمع بعد. ستظهر هنا تصاميم المصممين بعد الموافقة عليها.",
+    "Noch keine Community-Designs. Angenommene Designs von Designern erscheinen hier."
+  ],
+  "No creators yet. Search for someone to add one.": [
+    "لا يوجد مصممون بعد. ابحث عن شخص لإضافته.",
+    "Noch keine Designer. Suche jemanden, um ihn hinzuzufügen."
+  ],
+  "No drafts. Start a new submission to make one.": [
+    "لا توجد مسودات. ابدأ تصميمًا جديدًا لإنشاء واحدة.",
+    "Keine Entwürfe. Starte eine neue Einreichung."
+  ],
+  "No history yet.": ["لا يوجد سجل بعد.", "Noch kein Verlauf."],
+  "No users match your search.": [
+    "لا يوجد مستخدمون يطابقون بحثك.",
+    "Keine Nutzer passen zu deiner Suche."
+  ],
+  "Nothing here.": ["لا شيء هنا.", "Hier ist nichts."],
+  "Nothing is public until you approve it. Give creators a clear reason when you send something back.": [
+    "لا يُنشر شيء قبل موافقتك. اكتب للمصمم سببًا واضحًا عندما تعيد له تصميمًا.",
+    "Nichts ist öffentlich, bevor du es annimmst. Gib Designern einen klaren Grund, wenn du etwas zurückschickst."
+  ],
+  "Only people you make creators can submit designs. Revoking stops new submissions right away; published designs stay.": [
+    "لا يستطيع إرسال التصاميم إلا من تجعلهم مصممين. سحب الصفة يوقف الإرسال فورًا، وتبقى التصاميم المنشورة.",
+    "Nur Personen, die du zu Designern machst, können Designs einreichen. Entziehen stoppt neue Einreichungen sofort; veröffentlichte Designs bleiben."
+  ],
+  "Only submit work you made or have the right to share. Reviewers check every design before it is public.": [
+    "أرسل فقط أعمالًا صممتها أو يحق لك مشاركتها. يراجع المراجعون كل تصميم قبل نشره.",
+    "Reiche nur eigene Werke ein oder solche, die du teilen darfst. Prüfer sehen sich jedes Design vor der Veröffentlichung an."
+  ],
+  "Only verified creators and Zrzur staff can do this.": [
+    "هذا متاح فقط للمصممين المعتمدين وفريق زرزور.",
+    "Das können nur verifizierte Designer und das Zrzur-Team."
+  ],
+  "Pending review": ["بانتظار المراجعة", "Wird geprüft"],
+  "Permissions changed": ["تغيّرت الصلاحيات", "Berechtigungen geändert"],
+  "Pick a font and colour for your display name.": [
+    "اختر خطًا ولونًا لاسمك الظاهر.",
+    "Wähle Schrift und Farbe für deinen Anzeigenamen."
+  ],
+  "PNG, animated PNG, GIF or WebP · up to 2.5 MB · {COMMUNITY_MAX_DIMENSION} px": [
+    "PNG أو PNG متحرك أو GIF أو WebP · حتى 2.5 ميغابايت · {COMMUNITY_MAX_DIMENSION} بكسل",
+    "PNG, animiertes PNG, GIF oder WebP · bis 2,5 MB · {COMMUNITY_MAX_DIMENSION} px"
+  ],
+  "Published": ["منشور", "Veröffentlicht"],
+  "Published {0}": ["نُشر في {0}", "Veröffentlicht am {0}"],
+  "Published now": ["المنشور حاليًا", "Aktuell veröffentlicht"],
+  "Reason (saved in the history)": [
+    "السبب (يُحفظ في السجل)",
+    "Grund (wird im Verlauf gespeichert)"
+  ],
+  "Reason for the creator": ["سبب للمصمم", "Grund für den Designer"],
+  "Reinstate": ["إعادة التفعيل", "Wiederherstellen"],
+  "Reinstated": ["أعيد تفعيله", "Wiederhergestellt"],
+  "Reject": ["رفض", "Ablehnen"],
+  "Rejected": ["مرفوض", "Abgelehnt"],
+  "Remove reviewer": ["إزالة صفة المراجع", "Prüfer entfernen"],
+  "Reopened by an admin": ["أعاد مشرف فتحه", "Von einem Admin neu geöffnet"],
+  "Replace the image (optional)": [
+    "استبدال الصورة (اختياري)",
+    "Bild ersetzen (optional)"
+  ],
+  "Reported": ["مُبلَّغ عنه", "Gemeldet"],
+  "Reports": ["البلاغات", "Meldungen"],
+  "Request changes": ["طلب تعديلات", "Änderungen anfragen"],
+  "Required to reject, request changes or suspend": [
+    "مطلوب عند الرفض أو طلب التعديلات أو الإيقاف",
+    "Nötig zum Ablehnen, Ändern-Anfragen oder Sperren"
+  ],
+  "Reviewer": ["مراجع", "Prüfer"],
+  "Revoke": ["سحب الصفة", "Entziehen"],
+  "Revoked": ["مسحوبة", "Entzogen"],
+  "Save draft": ["حفظ كمسودة", "Entwurf speichern"],
+  "Search by design or creator": [
+    "ابحث باسم التصميم أو المصمم",
+    "Nach Design oder Designer suchen"
+  ],
+  "Search users by name or id": [
+    "ابحث عن مستخدم بالاسم أو المعرّف",
+    "Nutzer nach Name oder ID suchen"
+  ],
+  "Sending…": ["جارٍ الإرسال…", "Wird gesendet…"],
+  "Show more": ["عرض المزيد", "Mehr anzeigen"],
+  "Someone else changed this design first. Reload and try again.": [
+    "غيّر شخص آخر هذا التصميم قبلك. أعد التحميل وحاول مجددًا.",
+    "Jemand anderes hat dieses Design zuerst geändert. Lade neu und versuche es nochmal."
+  ],
+  "Submit designs": ["إرسال التصاميم", "Designs einreichen"],
+  "Submit designs and see what reviewers said.": [
+    "أرسل تصاميمك واطّلع على ملاحظات المراجعين.",
+    "Reiche Designs ein und sieh, was Prüfer gesagt haben."
+  ],
+  "Submit for review": ["إرسال للمراجعة", "Zur Prüfung einreichen"],
+  "Submitted": ["أُرسل", "Eingereicht"],
+  "Suspend": ["إيقاف", "Sperren"],
+  "Suspended": ["موقوف", "Gesperrt"],
+  "Tap the heart on a design to save it here.": [
+    "اضغط على القلب في أي تصميم لحفظه هنا.",
+    "Tippe auf das Herz eines Designs, um es hier zu speichern."
+  ],
+  "Thanks, reviewers will take a look.": [
+    "شكرًا، سيلقي المراجعون نظرة عليه.",
+    "Danke, Prüfer sehen sich das an."
+  ],
+  "That file isn't an image we can read.": [
+    "هذا الملف ليس صورة يمكننا قراءتها.",
+    "Diese Datei ist kein Bild, das wir lesen können."
+  ],
+  "That image is too large. Keep it within {COMMUNITY_MAX_DIMENSION} × {COMMUNITY_MAX_DIMENSION} pixels.": [
+    "أبعاد الصورة كبيرة جدًا. اجعلها ضمن {COMMUNITY_MAX_DIMENSION} × {COMMUNITY_MAX_DIMENSION} بكسل.",
+    "Das Bild ist zu groß. Bleib bei höchstens {COMMUNITY_MAX_DIMENSION} × {COMMUNITY_MAX_DIMENSION} Pixeln."
+  ],
+  "The review queue couldn't be loaded.": [
+    "تعذّر تحميل قائمة المراجعة.",
+    "Die Prüfliste konnte nicht geladen werden."
+  ],
+  "This makes a new version. The published one stays as it is until a reviewer approves the change.": [
+    "سيُنشئ هذا نسخة جديدة. تبقى النسخة المنشورة كما هي حتى يوافق مراجع على التغيير.",
+    "Das erstellt eine neue Version. Die veröffentlichte bleibt, bis ein Prüfer die Änderung annimmt."
+  ],
+  "Up to 8, separated by commas": [
+    "حتى 8، مفصولة بفواصل",
+    "Bis zu 8, durch Kommas getrennt"
+  ],
+  "Used by {0}": ["يستخدمه {0}", "Verwendet von {0}"],
+  "Verified creator": ["مصمم معتمد", "Verifizierter Designer"],
+  "Who can publish community designs": [
+    "من يمكنه نشر زينة المجتمع",
+    "Wer Community-Designs veröffentlichen darf"
+  ],
+  "Write a reason first. The creator will see it.": [
+    "اكتب السبب أولًا. سيراه المصمم.",
+    "Schreib zuerst einen Grund. Der Designer sieht ihn."
+  ],
+  "You can't review your own design.": [
+    "لا يمكنك مراجعة تصميمك.",
+    "Du kannst dein eigenes Design nicht prüfen."
+  ],
+  "You wear this": ["تستخدمه حاليًا", "Trägst du gerade"],
+  "You're no longer a creator. Your published designs stay up, but you can't submit new ones.": [
+    "لم تعد مصممًا. تبقى تصاميمك المنشورة، لكن لا يمكنك إرسال تصاميم جديدة.",
+    "Du bist kein Designer mehr. Deine veröffentlichten Designs bleiben, aber du kannst keine neuen einreichen."
+  ],
+  "Your community designs": [
+    "تصاميمك في زينة المجتمع",
+    "Deine Community-Designs"
+  ],
+  "Your creator access is paused. Your published designs stay up, but you can't submit or change designs for now.": [
+    "صلاحية التصميم لديك موقوفة مؤقتًا. تبقى تصاميمك المنشورة، لكن لا يمكنك إرسال تصاميم أو تعديلها حاليًا.",
+    "Dein Designer-Zugang ist pausiert. Deine veröffentlichten Designs bleiben, aber du kannst vorerst nichts einreichen oder ändern."
+  ],
+  "Your designs couldn't be loaded.": [
+    "تعذّر تحميل تصاميمك.",
+    "Deine Designs konnten nicht geladen werden."
+  ]
+}

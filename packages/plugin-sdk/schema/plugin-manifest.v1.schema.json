@@ -1,0 +1,272 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://zrzur.com/schemas/plugin-manifest.v1.json",
+  "title": "Zrzur plugin manifest v1",
+  "description": "Structure of a Zrzur plugin manifest. Cross-field rules (permissions each contribution needs, setting bindings, contrast, reserved shortcuts, integrity) are enforced by src/manifest.ts and again by the server.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "manifest_version",
+    "id",
+    "name",
+    "version",
+    "description",
+    "author",
+    "category",
+    "api_version",
+    "min_app_version",
+    "platforms",
+    "entrypoint",
+    "permissions"
+  ],
+  "$defs": {
+    "semver": {
+      "type": "string",
+      "pattern": "^(0|[1-9]\\d{0,3})\\.(0|[1-9]\\d{0,3})\\.(0|[1-9]\\d{0,3})(-[0-9A-Za-z.-]{1,20})?$"
+    },
+    "localId": { "type": "string", "pattern": "^[a-z][a-z0-9-]{0,39}$" },
+    "settingKey": { "type": "string", "pattern": "^[a-z][a-z0-9_]{0,31}$" },
+    "color": { "type": "string", "pattern": "^#[0-9a-fA-F]{6}$" },
+    "time": { "type": "string", "pattern": "^([01]\\d|2[0-3]):[0-5]\\d$" },
+    "binding": { "type": "string", "pattern": "^\\$setting:[a-z][a-z0-9_]{0,31}$" },
+    "localText": {
+      "oneOf": [
+        { "type": "string", "minLength": 1, "maxLength": 600 },
+        {
+          "type": "object",
+          "required": ["en"],
+          "propertyNames": { "pattern": "^[a-z]{2,3}(-[A-Za-z0-9]{2,8})?$" },
+          "additionalProperties": { "type": "string", "minLength": 1, "maxLength": 600 }
+        }
+      ]
+    },
+    "action": {
+      "oneOf": [
+        { "type": "object", "additionalProperties": false, "required": ["type", "key"], "properties": { "type": { "const": "setting.toggle" }, "key": { "enum": ["appearance:compact_mode"] } } },
+        { "type": "object", "additionalProperties": false, "required": ["type"], "properties": { "type": { "enum": ["theme.toggle", "accessibility.toggle"] } } },
+        { "type": "object", "additionalProperties": false, "required": ["type", "panel"], "properties": { "type": { "const": "panel.open" }, "panel": { "$ref": "#/$defs/localId" } } },
+        { "type": "object", "additionalProperties": false, "required": ["type", "text"], "properties": { "type": { "const": "notify" }, "text": { "$ref": "#/$defs/localText" } } },
+        { "type": "object", "additionalProperties": false, "required": ["type", "text"], "properties": { "type": { "const": "composer.insert" }, "text": { "type": "string", "minLength": 1, "maxLength": 2000 } } },
+        { "type": "object", "additionalProperties": false, "required": ["type", "to"], "properties": { "type": { "const": "navigate" }, "to": { "enum": ["home", "friends", "discover"] } } },
+        { "type": "object", "additionalProperties": false, "required": ["type", "handler"], "properties": { "type": { "const": "worker" }, "handler": { "$ref": "#/$defs/localId" } } }
+      ]
+    }
+  },
+  "properties": {
+    "$schema": { "type": "string" },
+    "manifest_version": { "const": 1 },
+    "id": { "type": "string", "maxLength": 64, "pattern": "^[a-z][a-z0-9]*(\\.[a-z][a-z0-9-]*){1,4}$" },
+    "name": { "type": "string", "minLength": 2, "maxLength": 48 },
+    "version": { "$ref": "#/$defs/semver" },
+    "description": { "type": "string", "minLength": 1, "maxLength": 300 },
+    "author": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["name"],
+      "properties": {
+        "name": { "type": "string", "minLength": 1, "maxLength": 64 },
+        "url": { "type": "string", "pattern": "^https://" }
+      }
+    },
+    "category": { "enum": ["appearance", "productivity", "accessibility", "notifications", "integration", "developer"] },
+    "icon": { "type": "string", "pattern": "^[a-z0-9_-]{1,40}$" },
+    "api_version": { "const": 1 },
+    "min_app_version": { "$ref": "#/$defs/semver" },
+    "platforms": { "type": "array", "minItems": 1, "uniqueItems": true, "items": { "enum": ["web", "pwa", "desktop"] } },
+    "entrypoint": {
+      "oneOf": [
+        { "type": "object", "additionalProperties": false, "required": ["type"], "properties": { "type": { "const": "declarative" } } },
+        { "type": "object", "additionalProperties": false, "required": ["type", "file"], "properties": { "type": { "const": "worker" }, "file": { "type": "string", "pattern": "^[a-z0-9_-]{1,40}\\.js$" } } }
+      ]
+    },
+    "permissions": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "enum": [
+          "ui.commands",
+          "ui.panels",
+          "keybinds",
+          "theme.colors",
+          "accessibility.display",
+          "app.preferences",
+          "storage.settings",
+          "notifications.show",
+          "notifications.display",
+          "composer.insert",
+          "context.channel",
+          "context.message.selected",
+          "devtools.diagnostics"
+        ]
+      }
+    },
+    "contributes": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "theme": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["colors"],
+          "properties": {
+            "colors": {
+              "type": "object",
+              "minProperties": 1,
+              "propertyNames": {
+                "enum": [
+                  "primary", "on-primary", "primary-container", "on-primary-container",
+                  "secondary", "on-secondary", "secondary-container", "on-secondary-container",
+                  "tertiary", "on-tertiary", "tertiary-container", "on-tertiary-container",
+                  "background", "on-background", "surface", "on-surface", "surface-variant", "on-surface-variant",
+                  "surface-container-lowest", "surface-container-low", "surface-container",
+                  "surface-container-high", "surface-container-highest", "outline", "outline-variant"
+                ]
+              },
+              "additionalProperties": { "anyOf": [{ "$ref": "#/$defs/color" }, { "$ref": "#/$defs/binding" }] }
+            }
+          }
+        },
+        "accessibility": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "font_scale": { "anyOf": [{ "type": "number", "minimum": 0.85, "maximum": 1.5 }, { "$ref": "#/$defs/binding" }] },
+            "line_height": { "anyOf": [{ "type": "number", "minimum": 1.2, "maximum": 2 }, { "$ref": "#/$defs/binding" }] },
+            "letter_spacing": { "anyOf": [{ "type": "number", "minimum": 0, "maximum": 0.12 }, { "$ref": "#/$defs/binding" }] },
+            "underline_links": { "anyOf": [{ "type": "boolean" }, { "$ref": "#/$defs/binding" }] },
+            "reduce_motion": { "anyOf": [{ "type": "boolean" }, { "$ref": "#/$defs/binding" }] },
+            "focus_ring": { "anyOf": [{ "type": "boolean" }, { "$ref": "#/$defs/binding" }] }
+          }
+        },
+        "notifications": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "quiet_hours": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["start", "end"],
+              "properties": {
+                "start": { "anyOf": [{ "$ref": "#/$defs/time" }, { "$ref": "#/$defs/binding" }] },
+                "end": { "anyOf": [{ "$ref": "#/$defs/time" }, { "$ref": "#/$defs/binding" }] }
+              }
+            },
+            "quiet_hours_enabled": { "anyOf": [{ "type": "boolean" }, { "$ref": "#/$defs/binding" }] },
+            "hide_previews": { "anyOf": [{ "type": "boolean" }, { "$ref": "#/$defs/binding" }] },
+            "mute_sound": { "anyOf": [{ "type": "boolean" }, { "$ref": "#/$defs/binding" }] }
+          }
+        },
+        "commands": {
+          "type": "array",
+          "maxItems": 20,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["id", "title", "action"],
+            "properties": { "id": { "$ref": "#/$defs/localId" }, "title": { "$ref": "#/$defs/localText" }, "action": { "$ref": "#/$defs/action" } }
+          }
+        },
+        "keybinds": {
+          "type": "array",
+          "maxItems": 10,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["command", "keys"],
+            "properties": {
+              "command": { "$ref": "#/$defs/localId" },
+              "keys": { "type": "string", "pattern": "^(Ctrl\\+Shift|Alt\\+Shift|Ctrl\\+Alt)\\+[A-Z0-9]$" }
+            }
+          }
+        },
+        "settings": {
+          "type": "array",
+          "maxItems": 20,
+          "items": {
+            "type": "object",
+            "required": ["key", "type", "title", "default"],
+            "properties": {
+              "key": { "$ref": "#/$defs/settingKey" },
+              "type": { "enum": ["boolean", "text", "number", "select", "color", "time"] },
+              "title": { "$ref": "#/$defs/localText" },
+              "description": { "$ref": "#/$defs/localText" },
+              "default": {},
+              "max_length": { "type": "integer", "minimum": 1, "maximum": 500 },
+              "min": { "type": "number" },
+              "max": { "type": "number" },
+              "step": { "type": "number", "exclusiveMinimum": 0 },
+              "options": {
+                "type": "array",
+                "minItems": 1,
+                "maxItems": 20,
+                "items": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": ["value", "label"],
+                  "properties": { "value": { "$ref": "#/$defs/settingKey" }, "label": { "$ref": "#/$defs/localText" } }
+                }
+              }
+            },
+            "additionalProperties": false
+          }
+        },
+        "panels": {
+          "type": "array",
+          "maxItems": 5,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["id", "title", "blocks"],
+            "properties": {
+              "id": { "$ref": "#/$defs/localId" },
+              "title": { "$ref": "#/$defs/localText" },
+              "blocks": {
+                "type": "array",
+                "maxItems": 40,
+                "items": {
+                  "oneOf": [
+                    { "type": "object", "additionalProperties": false, "required": ["type", "text"], "properties": { "type": { "enum": ["heading", "text"] }, "text": { "$ref": "#/$defs/localText" } } },
+                    { "type": "object", "additionalProperties": false, "required": ["type"], "properties": { "type": { "const": "divider" } } },
+                    { "type": "object", "additionalProperties": false, "required": ["type", "label", "command"], "properties": { "type": { "const": "button" }, "label": { "$ref": "#/$defs/localText" }, "command": { "$ref": "#/$defs/localId" } } },
+                    { "type": "object", "additionalProperties": false, "required": ["type", "key"], "properties": { "type": { "const": "setting" }, "key": { "$ref": "#/$defs/settingKey" } } }
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "message_actions": {
+          "type": "array",
+          "maxItems": 5,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["id", "title", "handler"],
+            "properties": { "id": { "$ref": "#/$defs/localId" }, "title": { "$ref": "#/$defs/localText" }, "handler": { "$ref": "#/$defs/localId" } }
+          }
+        },
+        "events": { "type": "array", "uniqueItems": true, "items": { "enum": ["channel.switch", "app.locale_change", "app.theme_change"] } }
+      }
+    },
+    "locales": {
+      "type": "object",
+      "maxProperties": 40,
+      "propertyNames": { "pattern": "^[a-z]{2,3}(-[A-Za-z0-9]{2,8})?$" },
+      "additionalProperties": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "name": { "type": "string", "minLength": 2, "maxLength": 48 },
+          "description": { "type": "string", "minLength": 1, "maxLength": 300 },
+          "strings": { "type": "object", "maxProperties": 200, "additionalProperties": { "type": "string", "maxLength": 300 } }
+        }
+      }
+    },
+    "integrity": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["sha256"],
+      "properties": { "sha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" } }
+    }
+  }
+}

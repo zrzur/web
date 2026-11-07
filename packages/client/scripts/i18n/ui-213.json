@@ -1,0 +1,13 @@
+{
+  "Class or course": ["فصل أو دورة", "Klasse oder Kurs"],
+  "Start here": ["ابدأ هنا", "Hier starten"],
+  "welcome": ["الترحيب", "willkommen"],
+  "rules": ["القواعد", "regeln"],
+  "Class": ["الفصل", "Klasse"],
+  "course-info": ["معلومات الدورة", "kursinfo"],
+  "Voice rooms": ["غرف صوتية", "Sprachräume"],
+  "Classroom": ["قاعة الدرس", "Klassenraum"],
+  "Teacher": ["المعلّم", "Lehrkraft"],
+  "Teaching assistant": ["المعلّم المساعد", "Lehrassistenz"],
+  "Private: not listed on Discover, and only teachers and assistants can invite. Announcements and rules are read-only for students.": ["خاص: غير مدرج في «اكتشف»، ولا يدعو إليه إلا المعلّمون والمساعدون. الإعلانات والقواعد للقراءة فقط بالنسبة إلى الطلاب.", "Privat: nicht auf Entdecken gelistet, und nur Lehrkräfte und Assistenz können einladen. Ankündigungen und Regeln sind für Lernende nur lesbar."]
+}

@@ -1,0 +1,40 @@
+{
+  "Your creator access is paused. Your designs are hidden from everyone until it is lifted. You can still see them and download a copy.": [
+    "صلاحية التصميم لديك موقوفة مؤقتًا. تصاميمك مخفية عن الجميع حتى رفع الإيقاف، ويمكنك أن تراها وتنزّل نسخة منها.",
+    "Dein Creator-Zugang ist pausiert. Deine Designs sind für alle verborgen, bis die Pause endet. Du kannst sie weiter sehen und eine Kopie herunterladen."
+  ],
+  "Reason": ["السبب", "Grund"],
+  "Since": ["منذ", "Seit"],
+  "Your appeal is with a reviewer.": [
+    "طعنك قيد المراجعة.",
+    "Dein Einspruch liegt bei einer prüfenden Person."
+  ],
+  "Your appeal was declined.": ["رُفض طعنك.", "Dein Einspruch wurde abgelehnt."],
+  "Appeal this decision": ["الطعن في هذا القرار", "Einspruch einlegen"],
+  "Why should this decision change?": [
+    "لماذا ينبغي تغيير هذا القرار؟",
+    "Warum sollte diese Entscheidung geändert werden?"
+  ],
+  "Say in a sentence why.": ["اذكر السبب في جملة.", "Sag in einem Satz, warum."],
+  "Send appeal": ["إرسال الطعن", "Einspruch senden"],
+  "Download a copy": ["تنزيل نسخة", "Kopie herunterladen"],
+  "The copy could not be downloaded.": [
+    "تعذّر تنزيل النسخة.",
+    "Die Kopie konnte nicht heruntergeladen werden."
+  ],
+  "Off by default. Designs.zrzur.com is open to everyone and search engines, without an account. Switched on, your name and avatar appear on your designs there, and anyone can open a page of all your work. Switched off, visitors see the designs without any name and nobody gets that page. Your #tag never shows.": [
+    "معطّل افتراضيًا. موقع Designs.zrzur.com مفتوح للجميع ولمحركات البحث، بلا حساب. عند التفعيل يظهر اسمك وصورتك على تصاميمك هناك، ويستطيع أي شخص فتح صفحة تضم كل أعمالك. وعند التعطيل يرى الزوار التصاميم بلا أي اسم، ولا تظهر تلك الصفحة لأحد. ولا تظهر علامتك # أبدًا.",
+    "Standardmäßig aus. Designs.zrzur.com ist für alle und für Suchmaschinen offen, ohne Konto. Eingeschaltet erscheinen dein Name und dein Avatar dort auf deinen Designs, und alle können eine Seite mit all deinen Werken öffnen. Ausgeschaltet sehen Besucher die Designs ohne Namen, und niemand bekommt diese Seite. Dein #Tag erscheint nie."
+  ],
+  "Creator access paused": ["إيقاف صلاحية التصميم مؤقتًا", "Creator-Zugang pausiert"],
+  "Privacy policy (https://…)": ["سياسة الخصوصية (https://…)", "Datenschutzerklärung (https://…)"],
+  "Terms of service (https://…)": ["شروط الخدمة (https://…)", "Nutzungsbedingungen (https://…)"],
+  "Link to the bot's privacy policy, starting with https://.": [
+    "أدخل رابط سياسة خصوصية البوت، على أن يبدأ بـ https://.",
+    "Gib den Link zur Datenschutzerklärung des Bots an, beginnend mit https://."
+  ],
+  "Link to the bot's terms of service, starting with https://.": [
+    "أدخل رابط شروط خدمة البوت، على أن يبدأ بـ https://.",
+    "Gib den Link zu den Nutzungsbedingungen des Bots an, beginnend mit https://."
+  ]
+}

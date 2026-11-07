@@ -1,0 +1,320 @@
+{
+ "Authenticated": {
+  "type": "Authenticated"
+ },
+ "Ready": {
+  "type": "Ready",
+  "users": [
+   {
+    "_id": "01JC0000000000000000000001",
+    "username": "example_user",
+    "discriminator": "1234",
+    "bot": {
+     "owner": "01JC0000000000000000000002"
+    },
+    "relationship": "User",
+    "online": true
+   }
+  ],
+  "servers": [
+   {
+    "_id": "01JC0000000000000000000003",
+    "owner": "01JC0000000000000000000002",
+    "name": "Docs examples",
+    "channels": [
+     "01JC0000000000000000000004",
+     "01JC0000000000000000000005"
+    ],
+    "roles": {
+     "01JC0000000000000000000006": {
+      "_id": "01JC0000000000000000000006",
+      "name": "Moderators",
+      "permissions": {
+       "a": 256,
+       "d": 0
+      },
+      "rank": 1
+     },
+     "01JC0000000000000000000007": {
+      "_id": "01JC0000000000000000000007",
+      "name": "Bots",
+      "permissions": {
+       "a": 4398045478879,
+       "d": 0
+      },
+      "rank": 0
+     }
+    },
+    "default_permissions": 2276038022144,
+    "approximate_member_count": 1
+   }
+  ],
+  "channels": [
+   {
+    "channel_type": "TextChannel",
+    "_id": "01JC0000000000000000000004",
+    "server": "01JC0000000000000000000003",
+    "name": "General",
+    "last_message_id": "01JC0000000000000000000008"
+   }
+  ],
+  "members": [
+   {
+    "_id": {
+     "server": "01JC0000000000000000000003",
+     "user": "01JC0000000000000000000001"
+    },
+    "joined_at": "2026-11-06T08:26:49.699Z",
+    "roles": [
+     "01JC0000000000000000000007"
+    ]
+   }
+  ],
+  "emojis": []
+ },
+ "Message": {
+  "type": "Message",
+  "_id": "01JC0000000000000000000009",
+  "nonce": "01JC0000000000000000000010",
+  "channel": "01JC0000000000000000000004",
+  "author": "01JC0000000000000000000002",
+  "user": {
+   "_id": "01JC0000000000000000000002",
+   "username": "example_user",
+   "discriminator": "1234",
+   "style": {
+    "theme": [
+     "#3d1e6d",
+     "#035aa6"
+    ],
+    "name_font": "bold",
+    "name_colour": [
+     "#8e2de2",
+     "#e100ff"
+    ],
+    "decoration": "glow",
+    "nameplate": "galaxy"
+   },
+   "relationship": "None",
+   "online": false
+  },
+  "member": {
+   "_id": {
+    "server": "01JC0000000000000000000003",
+    "user": "01JC0000000000000000000002"
+   },
+   "joined_at": "2026-11-06T08:26:49.199Z",
+   "nickname": "مشرف"
+  },
+  "content": "Hello"
+ },
+ "MessageUpdate": {
+  "type": "MessageUpdate",
+  "id": "01JC0000000000000000000009",
+  "channel": "01JC0000000000000000000004",
+  "data": {
+   "content": "Hello again",
+   "edited": "2026-11-06T08:27:41.701Z",
+   "embeds": []
+  },
+  "clear": []
+ },
+ "MessageReact": {
+  "type": "MessageReact",
+  "id": "01JC0000000000000000000009",
+  "channel_id": "01JC0000000000000000000004",
+  "user_id": "01JC0000000000000000000002",
+  "emoji_id": "👍"
+ },
+ "MessageUnreact": {
+  "type": "MessageUnreact",
+  "id": "01JC0000000000000000000009",
+  "channel_id": "01JC0000000000000000000004",
+  "user_id": "01JC0000000000000000000002",
+  "emoji_id": "👍"
+ },
+ "MessageDelete": {
+  "type": "MessageDelete",
+  "id": "01JC0000000000000000000009",
+  "channel": "01JC0000000000000000000004"
+ },
+ "ServerUpdate": {
+  "type": "ServerUpdate",
+  "id": "01JC0000000000000000000003",
+  "data": {
+   "channels": [
+    "01JC0000000000000000000004",
+    "01JC0000000000000000000005"
+   ]
+  },
+  "clear": []
+ },
+ "ChannelCreate": {
+  "type": "ChannelCreate",
+  "channel_type": "TextChannel",
+  "_id": "01JC0000000000000000000011",
+  "server": "01JC0000000000000000000003",
+  "name": "samples"
+ },
+ "ChannelUpdate": {
+  "type": "ChannelUpdate",
+  "id": "01JC0000000000000000000011",
+  "data": {
+   "description": "Sample"
+  },
+  "clear": []
+ },
+ "ChannelDelete": {
+  "type": "ChannelDelete",
+  "id": "01JC0000000000000000000011"
+ },
+ "ServerRoleUpdate": {
+  "type": "ServerRoleUpdate",
+  "id": "01JC0000000000000000000003",
+  "role_id": "01JC0000000000000000000012",
+  "data": {
+   "id": "01JC0000000000000000000012",
+   "name": "Sample",
+   "permissions": {
+    "a": 0,
+    "d": 0
+   },
+   "hoist": false,
+   "rank": 2
+  },
+  "clear": []
+ },
+ "ServerRoleDelete": {
+  "type": "ServerRoleDelete",
+  "id": "01JC0000000000000000000003",
+  "role_id": "01JC0000000000000000000012"
+ },
+ "ServerMemberLeave": {
+  "type": "ServerMemberLeave",
+  "id": "01JC0000000000000000000003",
+  "user": "01JC0000000000000000000013",
+  "reason": "Leave"
+ },
+ "ServerMemberJoin": {
+  "type": "ServerMemberJoin",
+  "id": "01JC0000000000000000000003",
+  "user": "01JC0000000000000000000013",
+  "member": {
+   "_id": {
+    "server": "01JC0000000000000000000003",
+    "user": "01JC0000000000000000000013"
+   },
+   "joined_at": "2026-11-06T08:27:42.068Z"
+  }
+ },
+ "ServerMemberUpdate": {
+  "type": "ServerMemberUpdate",
+  "id": {
+   "server": "01JC0000000000000000000003",
+   "user": "01JC0000000000000000000013"
+  },
+  "data": {
+   "nickname": "Sample"
+  },
+  "clear": []
+ },
+ "ChannelStartTyping": {
+  "type": "ChannelStartTyping",
+  "id": "01JC0000000000000000000004",
+  "user": "01JC0000000000000000000001"
+ },
+ "ApplicationCommandsUpdate": {
+  "type": "ApplicationCommandsUpdate",
+  "application_id": "01JC0000000000000000000001",
+  "server_id": "01JC0000000000000000000003"
+ },
+ "InteractionCreate": {
+  "type": "InteractionCreate",
+  "interaction": {
+   "_id": "01JC0000000000000000000014",
+   "version": 1,
+   "application_id": "01JC0000000000000000000001",
+   "type": "Command",
+   "token": "YOUR_TOKEN_HERE",
+   "user": {
+    "_id": "01JC0000000000000000000013",
+    "username": "example_user",
+    "discriminator": "1234",
+    "style": {
+     "name_font": "wide"
+    },
+    "relationship": "None",
+    "online": true
+   },
+   "member": {
+    "_id": {
+     "server": "01JC0000000000000000000003",
+     "user": "01JC0000000000000000000013"
+    },
+    "joined_at": "2026-11-06T08:27:42.068Z",
+    "nickname": "Sample"
+   },
+   "server_id": "01JC0000000000000000000003",
+   "channel_id": "01JC0000000000000000000004",
+   "user_permissions": 2276038022144,
+   "app_permissions": 4398045478879,
+   "user_permissions_string": "2276038022144",
+   "app_permissions_string": "4398045478879",
+   "command": {
+    "id": "01JC0000000000000000000015",
+    "name": "sample",
+    "type": "ChatInput",
+    "version": "01JC0000000000000000000016",
+    "options": [
+     {
+      "name": "who",
+      "type": "User",
+      "value": "01JC0000000000000000000002"
+     }
+    ],
+    "resolved": {
+     "users": {
+      "01JC0000000000000000000002": {
+       "_id": "01JC0000000000000000000002",
+       "username": "example_user",
+       "discriminator": "1234",
+       "style": {
+        "theme": [
+         "#3d1e6d",
+         "#035aa6"
+        ],
+        "name_font": "bold",
+        "name_colour": [
+         "#8e2de2",
+         "#e100ff"
+        ],
+        "decoration": "glow",
+        "nameplate": "galaxy"
+       },
+       "relationship": "None",
+       "online": false
+      }
+     },
+     "members": {
+      "01JC0000000000000000000002": {
+       "_id": {
+        "server": "01JC0000000000000000000003",
+        "user": "01JC0000000000000000000002"
+       },
+       "joined_at": "2026-11-06T08:26:49.199Z",
+       "nickname": "مشرف"
+      }
+     }
+    }
+   },
+   "respond_by": "2026-11-06T08:27:46.336Z",
+   "expires_at": "2026-11-06T08:42:43.336Z"
+  }
+ },
+ "__headers": {
+  "x-ratelimit-bucket": "10916110026516615864",
+  "x-ratelimit-limit": "20",
+  "x-ratelimit-remaining": "13",
+  "x-ratelimit-reset-after": "2932"
+ }
+}

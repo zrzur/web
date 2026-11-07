@@ -1,0 +1,99 @@
+name: Container images
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: images-${{ github.ref }}
+  cancel-in-progress: false
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+          submodules: recursive
+      - name: Verify reviewed public source files
+        run: python3 scripts/publication_guard.py
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      - name: Install dependencies
+        run: |
+          corepack enable
+          pnpm install --frozen-lockfile
+      - name: Build dependencies and generated sources
+        run: |
+          set -eu
+          pnpm --filter @zrzur/sdk build
+          pnpm --filter solid-livekit-components build
+          pnpm --filter client exec lingui compile --typescript
+          pnpm --filter client exec node scripts/copyAssets.mjs
+          pnpm --filter client exec panda codegen
+      - name: Unit tests
+        run: pnpm --filter client run test:unit
+      - name: Typecheck
+        run: pnpm --filter client exec tsc --noEmit
+
+  image:
+    needs: test
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    permissions:
+      contents: read
+      packages: write
+    env:
+      IMAGE: ghcr.io/zrzur/web
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+          submodules: recursive
+      - name: Build image
+        run: |
+          docker build \
+            --label "org.opencontainers.image.source=https://github.com/${GITHUB_REPOSITORY}" \
+            --label "org.opencontainers.image.revision=${GITHUB_SHA}" \
+            --label "org.opencontainers.image.version=$(node -p "require('./package.json').version")" \
+            -t "${IMAGE}:sha-${GITHUB_SHA}" \
+            -t "${IMAGE}:main" \
+            .
+      - name: Smoke test runtime injection
+        run: |
+          set -eu
+          docker run -d --name smoke -p 127.0.0.1:5000:5000 \
+            -e VITE_HOST=app.example.test \
+            -e VITE_API_URL=https://api.example.test \
+            -e VITE_DEV_WS_URL=wss://ws.example.test \
+            -e VITE_DEV_MEDIA_URL=https://cdn.example.test \
+            -e VITE_INVITE_ORIGIN=https://invite.example.test \
+            "${IMAGE}:sha-${GITHUB_SHA}"
+          for _ in $(seq 30); do curl -fsS http://127.0.0.1:5000/ -o index.html && break; sleep 2; done
+          grep -q 'id="root"' index.html
+          docker exec smoke sh -c 'grep -rl "https://api.example.test" dist_injected | head -1' | grep -q .
+          if docker exec smoke sh -c 'grep -rl "__VITE_API_URL__" dist_injected'; then
+            echo 'API placeholder was not injected.'
+            exit 1
+          fi
+          docker exec smoke sh -c 'grep -rl "https://invite.example.test" dist_injected | head -1' | grep -q .
+          if docker exec smoke sh -c 'grep -rl "__VITE_INVITE_ORIGIN__" dist_injected'; then
+            echo 'Invite origin placeholder was not injected.'
+            exit 1
+          fi
+          docker rm -f smoke >/dev/null
+      - uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+      - name: Push image
+        run: |
+          set -eu
+          docker push "${IMAGE}:sha-${GITHUB_SHA}"
+          docker push "${IMAGE}:main"
+          digest=$(docker image inspect --format '{{index .RepoDigests 0}}' "${IMAGE}:sha-${GITHUB_SHA}")
+          echo "web: \`${digest}\`" >> "$GITHUB_STEP_SUMMARY"

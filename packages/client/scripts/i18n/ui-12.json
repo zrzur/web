@@ -1,0 +1,63 @@
+{
+  "{0} is full. Pay {1} now and start automatically when a place frees up.": [
+    "{0} ممتلئ. ادفع {1} الآن ويبدأ تلقائياً عندما يتوفر مكان.",
+    "{0} ist voll. Zahl jetzt {1} und es startet automatisch, sobald ein Platz frei wird."
+  ],
+  "{0} of {1} places left": [
+    "متبقٍ {0} من {1} أماكن",
+    "Noch {0} von {1} Plätzen frei"
+  ],
+  "{0} until {1}": ["{0} حتى {1}", "{0} bis {1}"],
+  "/ {0} days": ["/ {0} أيام", "/ {0} Tage"],
+  "Above every promoted listing, the first thing people see on Discover.": [
+    "فوق كل القوائم المروَّجة، أول ما يراه الناس في الاستكشاف.",
+    "Über allen beworbenen Einträgen, das Erste, was man auf Discover sieht."
+  ],
+  "Adds": ["الإضافات", "Hinzufügungen"],
+  "Move it up the list or take a place in the top row.": [
+    "ارفعه في القائمة أو احجز له مكاناً في الصف الأول.",
+    "Schieb es in der Liste nach oben oder sichere dir einen Platz in der obersten Reihe."
+  ],
+  "Each tier has a fixed number of places so every guarantee can be kept. Bigger listings land even higher. Only your biggest promotion counts; buying the same one again adds {0} days.": [
+    "لكل مستوى عدد ثابت من الأماكن حتى يُحترم كل ضمان. القوائم الأكبر تصعد أعلى. يُحتسب أكبر ترويج لديك فقط، وشراء الترويج نفسه مرة أخرى يضيف {0} أيام.",
+    "Jede Stufe hat eine feste Anzahl Plätze, damit jede Garantie gehalten werden kann. Größere Einträge landen noch höher. Nur deine größte Hervorhebung zählt; dieselbe noch einmal zu kaufen, fügt {0} Tage hinzu."
+  ],
+  "Full · {0} waiting": ["ممتلئ · {0} بالانتظار", "Voll · {0} warten"],
+  "Get it": ["احصل عليه", "Holen"],
+  "Gold Mega": ["ميغا ذهبي", "Gold-Mega"],
+  "Join the line": ["انضم إلى الدور", "In die Warteschlange"],
+  "Listed on Discover": ["مُدرج في الاستكشاف", "Auf Discover gelistet"],
+  "Not listed on Discover": [
+    "غير مُدرج في الاستكشاف",
+    "Nicht auf Discover gelistet"
+  ],
+  "Paid listings follow the same rules as everyone else. One that's locked, renamed to something blocked, or removed for breaking the rules stops showing, with no refund.": [
+    "القوائم المدفوعة تخضع للقواعد نفسها مثل الجميع. ما يُقفل، أو يُغيَّر اسمه إلى اسم محظور، أو يُزال لمخالفة القواعد يتوقف عن الظهور دون استرداد المبلغ.",
+    "Bezahlte Einträge folgen denselben Regeln wie alle anderen. Was gesperrt, in etwas Verbotenes umbenannt oder wegen Regelverstößen entfernt wird, wird nicht mehr angezeigt, ohne Erstattung."
+  ],
+  "Paid. You're in line for {0} and start automatically when a place frees up.": [
+    "تمّ الدفع. أنت في الدور لـ {0} وستبدأ تلقائياً عندما يتوفر مكان.",
+    "Bezahlt. Du stehst für {0} in der Warteschlange und startest automatisch, sobald ein Platz frei wird."
+  ],
+  "Promote": ["روّج", "Bewerben"],
+  "Promote your bot": ["روّج لبوتك", "Bewirb deinen Bot"],
+  "Promoted bots show up first for everyone who looks for bots on Discover. Get added to more servers.": [
+    "البوتات المروَّجة تظهر أولاً لكل من يبحث عن بوتات في الاستكشاف. اجعله يُضاف إلى سيرفرات أكثر.",
+    "Beworbene Bots erscheinen bei allen, die auf Discover nach Bots suchen, ganz oben. Werde zu mehr Servern hinzugefügt."
+  ],
+  "This bot isn't on Discover yet. Make it public and submit it from its settings. Moderators review every bot before it can be promoted.": [
+    "هذا البوت ليس في الاستكشاف بعد. اجعله عاماً وأرسله من إعداداته. يراجع المشرفون كل بوت قبل أن يمكن الترويج له.",
+    "Dieser Bot ist noch nicht auf Discover. Mach ihn öffentlich und reiche ihn in seinen Einstellungen ein. Moderatoren prüfen jeden Bot, bevor er beworben werden kann."
+  ],
+  "Top {0}": ["ضمن أول {0}", "Top {0}"],
+  "Top row": ["الصف الأول", "Oberste Reihe"],
+  "you'd be #{0} on Discover": [
+    "ستكون #{0} في الاستكشاف",
+    "du wärst #{0} auf Discover"
+  ],
+  "You're #{0} in line": [
+    "أنت رقم {0} في الدور",
+    "Du bist #{0} in der Warteschlange"
+  ],
+  "Your bot here": ["بوتك هنا", "Dein Bot hier"]
+}

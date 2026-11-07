@@ -1,0 +1,106 @@
+{
+  "{0} / {1} days": ["{0} لكل {1} أيام", "{0} / {1} Tage"],
+  "{0} days · climb the Discover list": [
+    "{0} أيام · اصعد في قائمة الاستكشاف",
+    "{0} Tage · steig in der Discover-Liste auf"
+  ],
+  "{0} for {1} days: {2}, paid once.": [
+    "{0} لمدة {1} أيام: {2}، دفعة واحدة.",
+    "{0} für {1} Tage: {2}, einmalig."
+  ],
+  "{0} is on. It may take a moment to show.": [
+    "تم تفعيل {0}. قد يستغرق ظهوره لحظات.",
+    "{0} ist aktiv. Bis es sichtbar ist, kann es einen Moment dauern."
+  ],
+  "{0} of {1} open": ["{0} من {1} متاحة", "{0} von {1} frei"],
+  "~{0} people browsed Discover this week": [
+    "تصفّح الاستكشاف هذا الأسبوع قرابة {0} شخص",
+    "~{0} Leute haben diese Woche Discover angesehen"
+  ],
+  "Above every boosted server, the first thing people see when they open Discover.": [
+    "فوق كل السيرفرات المعزّزة، أول ما يراه الناس عند فتح الاستكشاف.",
+    "Über allen geboosteten Servern, das Erste, was man beim Öffnen von Discover sieht."
+  ],
+  "Add {0} days": ["أضف {0} أيام", "{0} Tage hinzufügen"],
+  "Boosted label": ["شارة «معزَّز»", "„Geboostet“-Label"],
+  "Clicks": ["النقرات", "Klicks"],
+  "Confirm purchase": ["تأكيد الشراء", "Kauf bestätigen"],
+  "Discover rank": ["الترتيب في الاستكشاف", "Platz auf Discover"],
+  "Get {0}": ["احصل على {0}", "{0} holen"],
+  "Get {0} in front of more people on Discover.": [
+    "اجعل {0} أمام عدد أكبر من الناس في الاستكشاف.",
+    "Bring {0} auf Discover vor mehr Leute."
+  ],
+  "Gold Mega label": ["شارة «ميغا» الذهبية", "Goldenes Mega-Label"],
+  "Guaranteed top {0}, top {1} or top {2} (bigger servers land even higher). Only your biggest boost counts; buying the same one again adds {3} days.": [
+    "مضمون ضمن أول {0} أو أول {1} أو أول {2} (السيرفرات الأكبر تصعد أعلى). يُحتسب أكبر تعزيز لديك فقط، وشراء التعزيز نفسه مرة أخرى يضيف {3} أيام.",
+    "Garantiert unter den Top {0}, Top {1} oder Top {2} (größere Server landen noch höher). Nur dein größter Boost zählt; denselben noch einmal zu kaufen, fügt {3} Tage hinzu."
+  ],
+  "In the top row until {0}": [
+    "في الصف الأول حتى {0}",
+    "In der obersten Reihe bis {0}"
+  ],
+  "Joins": ["الانضمامات", "Beitritte"],
+  "Live views, clicks and joins": [
+    "مشاهدات ونقرات وانضمامات مباشرة",
+    "Aufrufe, Klicks und Beitritte live"
+  ],
+  "Headline": ["في الصدارة", "Schlagzeile"],
+  "Headline": ["في الصدارة", "Schlagzeile"],
+  "Most popular": ["الأكثر طلباً", "Am beliebtesten"],
+  "Not listed": ["غير مُدرج", "Nicht gelistet"],
+  "on Discover": ["في الاستكشاف", "auf Discover"],
+  "Only {0} spots, all shown at once": [
+    "{0} أماكن فقط، تظهر كلها معاً",
+    "Nur {0} Plätze, alle gleichzeitig sichtbar"
+  ],
+  "Paid servers follow the same rules as everyone else. A server that's locked, renamed to something blocked, or removed for breaking the rules stops showing, with no refund.": [
+    "السيرفرات المدفوعة تخضع للقواعد نفسها مثل الجميع. السيرفر الذي يُقفل، أو يُغيَّر اسمه إلى اسم محظور، أو يُزال لمخالفة القواعد يتوقف عن الظهور دون استرداد المبلغ.",
+    "Bezahlte Server folgen denselben Regeln wie alle anderen. Ein Server, der gesperrt, in etwas Verbotenes umbenannt oder wegen Regelverstößen entfernt wird, wird nicht mehr angezeigt, ohne Erstattung."
+  ],
+  "Promote {0}": ["روّج لـ {0}", "{0} bewerben"],
+  "Promote now": ["روّج الآن", "Jetzt bewerben"],
+  "Promote on Discover": ["الترويج في الاستكشاف", "Auf Discover bewerben"],
+  "Promote your server": ["روّج لسيرفرك", "Bewirb deinen Server"],
+  "Promoted": ["مُروَّج", "Beworben"],
+  "Promoted servers show up first for everyone who opens Discover. Get seen and grow faster.": [
+    "السيرفرات المروَّجة تظهر أولاً لكل من يفتح الاستكشاف. احصل على ظهور أكبر ونمُ أسرع.",
+    "Beworbene Server erscheinen bei allen, die Discover öffnen, ganz oben. Werde gesehen und wachse schneller."
+  ],
+  "Running until {0}": ["فعّال حتى {0}", "Läuft bis {0}"],
+  "Servers need {0} members to be listed. A promotion lists you right away.": [
+    "يحتاج السيرفر إلى {0} أعضاء ليظهر في القائمة. الترويج يُدرجه فوراً.",
+    "Server brauchen {0} Mitglieder, um gelistet zu werden. Eine Hervorhebung listet dich sofort."
+  ],
+  "Spotlight": ["تحت الأضواء", "Im Rampenlicht"],
+  "The top row of Discover": [
+    "الصف الأول في الاستكشاف",
+    "Die oberste Reihe von Discover"
+  ],
+  "This server isn't on Discover yet. Submit it in Server settings, Discover. Moderators review every server before it can be promoted.": [
+    "هذا السيرفر ليس في الاستكشاف بعد. أرسله من إعدادات السيرفر ← الاستكشاف. يراجع المشرفون كل سيرفر قبل أن يمكن الترويج له.",
+    "Dieser Server ist noch nicht auf Discover. Reiche ihn unter Servereinstellungen → Discover ein. Moderatoren prüfen jeden Server, bevor er beworben werden kann."
+  ],
+  "Views": ["المشاهدات", "Aufrufe"],
+  "Your server here": ["سيرفرك هنا", "Dein Server hier"],
+  "You can't send a gift to this person.": [
+    "لا يمكنك إرسال هدية لهذا الشخص.",
+    "Du kannst dieser Person nichts schenken."
+  ],
+  "You have as many supercharges as one member can hold.": [
+    "وصلت إلى الحد الأقصى من الشحنات المسموح للعضو الواحد.",
+    "Du hast so viele Aufladungen, wie ein Mitglied haben kann."
+  ],
+  "Every spot in the top row is taken. Try again when one opens.": [
+    "كل الأماكن في الصف الأول محجوزة. حاول مجدداً عندما يتوفر مكان.",
+    "Alle Plätze in der obersten Reihe sind belegt. Versuch es wieder, wenn einer frei wird."
+  ],
+  "This server has to be approved for Discover first.": [
+    "يجب أن يُعتمد هذا السيرفر في الاستكشاف أولاً.",
+    "Dieser Server muss zuerst für Discover freigegeben werden."
+  ],
+  "You need the Manage Server permission for this.": [
+    "تحتاج إلى صلاحية «إدارة السيرفر» لهذا.",
+    "Dafür brauchst du die Berechtigung „Server verwalten“."
+  ]
+}

@@ -1,0 +1,166 @@
+{
+  "Keyboard shortcuts": [
+    "اختصارات لوحة المفاتيح",
+    "Tastenkürzel"
+  ],
+  "Mute or unmute": [
+    "كتم الميكروفون أو إلغاء كتمه",
+    "Stummschalten oder Stummschaltung aufheben"
+  ],
+  "During a call.": [
+    "أثناء المكالمة.",
+    "Während eines Anrufs."
+  ],
+  "Deafen or undeafen": [
+    "كتم الصوت الوارد أو إلغاء كتمه",
+    "Taub schalten oder aufheben"
+  ],
+  "Messages": [
+    "الرسائل",
+    "Nachrichten"
+  ],
+  "Send": [
+    "إرسال",
+    "Senden"
+  ],
+  "New line": [
+    "سطر جديد",
+    "Neue Zeile"
+  ],
+  "Edit your last message": [
+    "تعديل آخر رسالة لك",
+    "Deine letzte Nachricht bearbeiten"
+  ],
+  "When the message box is empty.": [
+    "عندما يكون مربع الرسالة فارغًا.",
+    "Wenn das Nachrichtenfeld leer ist."
+  ],
+  "Cancel editing": [
+    "إلغاء التعديل",
+    "Bearbeiten abbrechen"
+  ],
+  "Start typing": [
+    "بدء الكتابة",
+    "Mit dem Schreiben beginnen"
+  ],
+  "Any letter jumps into the message box.": [
+    "أي حرف ينقلك إلى مربع الرسالة.",
+    "Jeder Buchstabe springt ins Nachrichtenfeld."
+  ],
+  "Any letter": [
+    "أي حرف",
+    "Beliebiger Buchstabe"
+  ],
+  "Jump to the newest message": [
+    "الانتقال إلى أحدث رسالة",
+    "Zur neuesten Nachricht springen"
+  ],
+  "Also marks the channel as read.": [
+    "ويعلّم القناة كمقروءة أيضًا.",
+    "Markiert den Kanal auch als gelesen."
+  ],
+  "Mark the server as read": [
+    "تعليم السيرفر كمقروء",
+    "Server als gelesen markieren"
+  ],
+  "Navigation": [
+    "التنقل",
+    "Navigation"
+  ],
+  "Previous or next channel": [
+    "القناة السابقة أو التالية",
+    "Vorheriger oder nächster Kanal"
+  ],
+  "Previous or next server": [
+    "السيرفر السابق أو التالي",
+    "Vorheriger oder nächster Server"
+  ],
+  "Search Discover": [
+    "البحث في «اكتشف»",
+    "Entdecken durchsuchen"
+  ],
+  "On the Discover page.": [
+    "في صفحة «اكتشف».",
+    "Auf der Entdecken-Seite."
+  ],
+  "General": [
+    "عام",
+    "Allgemein"
+  ],
+  "Show keyboard shortcuts": [
+    "عرض اختصارات لوحة المفاتيح",
+    "Tastenkürzel anzeigen"
+  ],
+  "Close a window or menu": [
+    "إغلاق نافذة أو قائمة",
+    "Fenster oder Menü schließen"
+  ],
+  "Push to talk": [
+    "اضغط للتحدث",
+    "Push-to-Talk"
+  ],
+  "Hold one key to talk instead of an open microphone. Works while Zrzur is the active window.": [
+    "اضغط مطولًا على مفتاح واحد لتتحدث بدل إبقاء الميكروفون مفتوحًا. يعمل عندما تكون نافذة زرزور هي النشطة.",
+    "Halte eine Taste gedrückt, um zu sprechen, statt das Mikrofon offen zu lassen. Funktioniert, solange Zrzur das aktive Fenster ist."
+  ],
+  "On": [
+    "مفعّل",
+    "An"
+  ],
+  "Off": [
+    "متوقف",
+    "Aus"
+  ],
+  "Input mode": [
+    "وضع الإدخال",
+    "Eingabemodus"
+  ],
+  "Push to talk works while Zrzur is the active window and you are not typing.": [
+    "تعمل ميزة اضغط للتحدث عندما تكون نافذة زرزور هي النشطة ولا تكتب.",
+    "Push-to-Talk funktioniert, solange Zrzur das aktive Fenster ist und du nicht schreibst."
+  ],
+  "Others hear you only while you hold the key.": [
+    "يسمعك الآخرون فقط أثناء ضغطك على المفتاح.",
+    "Andere hören dich nur, solange du die Taste hältst."
+  ],
+  "Your microphone sends whenever you speak.": [
+    "يُرسل الميكروفون صوتك كلما تحدثت.",
+    "Dein Mikrofon sendet, sobald du sprichst."
+  ],
+  "Voice activity": [
+    "تفعيل بالصوت",
+    "Sprachaktivierung"
+  ],
+  "Push-to-talk key": [
+    "مفتاح اضغط للتحدث",
+    "Push-to-Talk-Taste"
+  ],
+  "That key is needed elsewhere. Press another key, or Esc to cancel.": [
+    "هذا المفتاح مستخدم لوظيفة أخرى. اضغط مفتاحًا آخر، أو Esc للإلغاء.",
+    "Diese Taste wird anderswo gebraucht. Drücke eine andere Taste oder Esc zum Abbrechen."
+  ],
+  "Press the key you want to hold. Esc cancels.": [
+    "اضغط المفتاح الذي تريد الضغط عليه مطولًا. Esc للإلغاء.",
+    "Drücke die Taste, die du halten möchtest. Esc bricht ab."
+  ],
+  "Press a key…": [
+    "اضغط مفتاحًا…",
+    "Drücke eine Taste…"
+  ],
+  "Cancel": [
+    "إلغاء",
+    "Abbrechen"
+  ],
+  "Change key": [
+    "تغيير المفتاح",
+    "Taste ändern"
+  ],
+  "Calls": [
+    "المكالمات",
+    "Anrufe"
+  ],
+  "Turn it on and choose the key in voice settings.": [
+    "فعّله واختر المفتاح من إعدادات الصوت.",
+    "Schalte es in den Einstellungen „Sprache & Video“ ein und wähle die Taste."
+  ]
+}

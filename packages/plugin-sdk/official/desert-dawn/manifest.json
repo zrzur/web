@@ -1,0 +1,59 @@
+{
+  "$schema": "../../schema/plugin-manifest.v1.schema.json",
+  "manifest_version": 1,
+  "id": "zrzur.desert-dawn",
+  "name": "Desert Dawn",
+  "version": "1.0.0",
+  "description": "A warm dark theme in sand and copper tones, easy on the eyes in the evening. Pick your own accent colour.",
+  "author": { "name": "Zrzur" },
+  "category": "appearance",
+  "icon": "sun",
+  "api_version": 1,
+  "min_app_version": "26.0.0",
+  "platforms": ["web", "pwa", "desktop"],
+  "entrypoint": { "type": "declarative" },
+  "permissions": ["theme.colors", "storage.settings", "ui.commands", "keybinds"],
+  "contributes": {
+    "settings": [
+      {
+        "key": "accent",
+        "type": "color",
+        "title": { "en": "Accent colour", "ar": "لون التمييز", "de": "Akzentfarbe" },
+        "default": "#e0995a"
+      }
+    ],
+    "theme": {
+      "colors": {
+        "primary": "$setting:accent",
+        "on-primary": "#1c1208",
+        "primary-container": "#5a3a1c",
+        "on-primary-container": "#ffe2c4",
+        "background": "#15110d",
+        "on-background": "#f3e9dc",
+        "surface": "#1c1712",
+        "on-surface": "#f3e9dc",
+        "surface-variant": "#2a2119",
+        "on-surface-variant": "#cbb9a4",
+        "surface-container-lowest": "#120e0a",
+        "surface-container-low": "#211a14",
+        "surface-container": "#251d16",
+        "surface-container-high": "#2a2119",
+        "surface-container-highest": "#31271d",
+        "outline": "#6b5a47",
+        "outline-variant": "#3d3126"
+      }
+    },
+    "commands": [
+      {
+        "id": "toggle",
+        "title": { "en": "Turn Desert Dawn on or off", "ar": "تشغيل فجر الصحراء أو إيقافه", "de": "Wüstenmorgen ein- oder ausschalten" },
+        "action": { "type": "theme.toggle" }
+      }
+    ],
+    "keybinds": [{ "command": "toggle", "keys": "Alt+Shift+E" }]
+  },
+  "locales": {
+    "ar": { "name": "فجر الصحراء", "description": "سمة داكنة دافئة بألوان الرمل والنحاس، مريحة للعين في المساء. اختر لون التمييز الذي تحبه." },
+    "de": { "name": "Wüstenmorgen", "description": "Ein warmes dunkles Design in Sand- und Kupfertönen, angenehm für die Augen am Abend. Wähle deine eigene Akzentfarbe." }
+  }
+}

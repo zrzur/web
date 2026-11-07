@@ -1,0 +1,66 @@
+{
+  "Start threads in the text channels of this category": [
+    "بدء خيوط في القنوات النصية لهذه الفئة",
+    "Threads in den Textkanälen dieser Kategorie starten"
+  ],
+  "Write in the threads and forum posts of this category": [
+    "الكتابة في الخيوط ومنشورات المنتديات في هذه الفئة",
+    "In den Threads und Forenbeiträgen dieser Kategorie schreiben"
+  ],
+  "Start posts in the forums of this category": [
+    "بدء منشورات في منتديات هذه الفئة",
+    "Beiträge in den Foren dieser Kategorie starten"
+  ],
+  "A frame drawn over the avatar. Square image, 1024 × 1024 px. The avatar fills the middle two thirds, so leave that circle transparent.": [
+    "إطار يُرسم فوق الصورة الرمزية. صورة مربعة بمقاس 1024 × 1024 بكسل. تملأ الصورة الرمزية الثلثين الأوسطين، فاترك تلك الدائرة شفافة.",
+    "Ein Rahmen, der über den Avatar gezeichnet wird. Quadratisches Bild, 1024 × 1024 px. Der Avatar füllt die mittleren zwei Drittel, lass diesen Kreis also durchsichtig."
+  ],
+  "Shown behind the name in the member list. 1024 × 192 px; 16 px are cropped at the top and bottom. It fades toward the avatar, on the left or the right by language; the image itself never flips.": [
+    "تظهر خلف الاسم في قائمة الأعضاء. المقاس 1024 × 192 بكسل، ويُقصّ 16 بكسل من الأعلى ومثلها من الأسفل. تتلاشى نحو الصورة الرمزية، يسارًا أو يمينًا بحسب اللغة، أما الصورة نفسها فلا تنعكس أبدًا.",
+    "Erscheint hinter dem Namen in der Mitgliederliste. 1024 × 192 px; oben und unten werden 16 px abgeschnitten. Es blendet zum Avatar hin aus, je nach Sprache links oder rechts; das Bild selbst wird nie gespiegelt."
+  ],
+  "Templates are guides: draw on a copy, then export without the guide marks. PNG, animated PNG, GIF or WebP, up to 2.5 MB and 1024 px on each side. Animations play up to 12 seconds.": [
+    "القوالب للإرشاد فقط: ارسم على نسخة منها، ثم صدّر عملك من دون علامات الإرشاد. PNG أو PNG متحرك أو GIF أو WebP، بحجم يصل إلى 2.5 ميغابايت و1024 بكسل لكل ضلع. تعمل الرسوم المتحركة حتى 12 ثانية.",
+    "Vorlagen sind nur Hilfen: Zeichne auf einer Kopie und exportiere dann ohne die Hilfslinien. PNG, animiertes PNG, GIF oder WebP, bis 2,5 MB und 1024 px pro Seite. Animationen laufen bis zu 12 Sekunden."
+  ],
+  "Cropped": [
+    "يُقصّ",
+    "Wird abgeschnitten"
+  ],
+  "Fully seen from here": [
+    "يظهر كاملًا من هنا",
+    "Ab hier ganz sichtbar"
+  ],
+  "Fully seen up to here": [
+    "يظهر كاملًا حتى هنا",
+    "Bis hier ganz sichtbar"
+  ],
+  "Left-to-right languages": [
+    "اللغات من اليسار إلى اليمين",
+    "Sprachen von links nach rechts"
+  ],
+  "Right-to-left languages": [
+    "اللغات من اليمين إلى اليسار",
+    "Sprachen von rechts nach links"
+  ],
+  "Seen in both directions, never fully": [
+    "يظهر في الاتجاهين، لكن ليس كاملًا",
+    "In beiden Richtungen sichtbar, nie ganz"
+  ],
+  "No drafts.": [
+    "لا توجد مسودات.",
+    "Keine Entwürfe."
+  ],
+  "The designs you made": [
+    "التصاميم التي أنشأتها",
+    "Deine Designs"
+  ],
+  "The designs you made, kept here.": [
+    "التصاميم التي أنشأتها، محفوظة هنا.",
+    "Deine Designs, hier aufbewahrt."
+  ],
+  "The first design here could be yours": [
+    "قد يكون أول تصميم هنا من إبداعك",
+    "Das erste Design hier könnte von dir sein"
+  ]
+}

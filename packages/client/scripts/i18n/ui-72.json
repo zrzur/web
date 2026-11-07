@@ -1,0 +1,7 @@
+{
+  "used <0>/{0}</0>": ["استخدم <0>/{0}</0>", "hat <0>/{0}</0> verwendet"],
+  "{name} is thinking…": ["{name} يفكّر…", "{name} denkt nach…"],
+  "Sending command…": ["جارٍ إرسال الأمر…", "Befehl wird gesendet…"],
+  "Dismiss message": ["إخفاء الرسالة", "Nachricht ausblenden"],
+  "and {0} more — type / in a channel to see them all": ["و{0} أخرى؛ اكتب / في قناة لعرضها كلها", "und {0} weitere – tippe / in einem Kanal, um alle zu sehen"]
+}

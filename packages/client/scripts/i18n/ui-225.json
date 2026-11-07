@@ -1,0 +1,38 @@
+{
+  "Privileged intents": [
+    "الصلاحيات الخاصة للاتصال",
+    "Privilegierte Intents"
+  ],
+  "Turn these on only if your bot needs them. Without them it still works with commands, buttons and messages that mention it.": [
+    "فعّلها فقط إذا احتاج إليها بوتك. يعمل البوت من دونها مع الأوامر والأزرار والرسائل التي تذكره.",
+    "Schalte sie nur ein, wenn dein Bot sie braucht. Ohne sie funktioniert er weiter mit Befehlen, Buttons und Nachrichten, die ihn erwähnen."
+  ],
+  "Message content": [
+    "محتوى الرسائل",
+    "Nachrichteninhalt"
+  ],
+  "Read the text, embeds and files of messages that don't mention the bot.": [
+    "قراءة نص الرسائل التي لا تذكر البوت وبطاقاتها وملفاتها.",
+    "Text, Embeds und Dateien von Nachrichten lesen, die den Bot nicht erwähnen."
+  ],
+  "Server members": [
+    "أعضاء السيرفر",
+    "Servermitglieder"
+  ],
+  "See members join, leave and change, and load the member list.": [
+    "معرفة انضمام الأعضاء ومغادرتهم وتغييراتهم، وتحميل قائمة الأعضاء.",
+    "Sehen, wenn Mitglieder beitreten, gehen oder sich ändern, und die Mitgliederliste laden."
+  ],
+  "Presence": [
+    "الحضور",
+    "Präsenz"
+  ],
+  "See who is online and their status.": [
+    "معرفة من المتصل وحالته.",
+    "Sehen, wer online ist und welchen Status jemand hat."
+  ],
+  "Couldn't save. Try again.": [
+    "تعذّر الحفظ. حاول مرة أخرى.",
+    "Speichern fehlgeschlagen. Versuche es erneut."
+  ]
+}

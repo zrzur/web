@@ -1,0 +1,22 @@
+{
+  "Direct message": [
+    "رسالة خاصة",
+    "Direktnachricht"
+  ],
+  "Mentions couldn't load. Try again soon.": [
+    "تعذّر تحميل الإشارات. حاول مرة أخرى بعد قليل.",
+    "Erwähnungen konnten nicht geladen werden. Versuch es gleich noch einmal."
+  ],
+  "Mentions, {0} unread": [
+    "الإشارات، {0} غير مقروءة",
+    "Erwähnungen, {0} ungelesen"
+  ],
+  "No mentions in the last 30 days.": [
+    "لا توجد إشارات إليك في آخر 30 يوماً.",
+    "Keine Erwähnungen in den letzten 30 Tagen."
+  ],
+  "The last 30 days. Select one to jump to it.": [
+    "آخر 30 يوماً. اختر واحدة للانتقال إليها.",
+    "Die letzten 30 Tage. Wähle eine aus, um hinzuspringen."
+  ]
+}

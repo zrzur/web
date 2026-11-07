@@ -1,0 +1,51 @@
+{
+  "$schema": "../../schema/plugin-manifest.v1.schema.json",
+  "manifest_version": 1,
+  "id": "zrzur.paper",
+  "name": "Paper",
+  "version": "1.0.0",
+  "description": "A calm light theme in soft paper tones for bright rooms and daytime reading.",
+  "author": { "name": "Zrzur" },
+  "category": "appearance",
+  "icon": "palette",
+  "api_version": 1,
+  "min_app_version": "26.0.0",
+  "platforms": ["web", "pwa", "desktop"],
+  "entrypoint": { "type": "declarative" },
+  "permissions": ["theme.colors", "ui.commands", "keybinds"],
+  "contributes": {
+    "theme": {
+      "colors": {
+        "primary": "#6a52c7",
+        "on-primary": "#ffffff",
+        "primary-container": "#e6e0fb",
+        "on-primary-container": "#2c1f6b",
+        "background": "#ede6da",
+        "on-background": "#2b2620",
+        "surface": "#fbf8f2",
+        "on-surface": "#2b2620",
+        "surface-variant": "#e8e0d2",
+        "on-surface-variant": "#5c5348",
+        "surface-container-lowest": "#ffffff",
+        "surface-container-low": "#f3ede3",
+        "surface-container": "#efe8dc",
+        "surface-container-high": "#f7f3ec",
+        "surface-container-highest": "#e9e1d4",
+        "outline": "#8a7f70",
+        "outline-variant": "#d8cdbb"
+      }
+    },
+    "commands": [
+      {
+        "id": "toggle",
+        "title": { "en": "Turn Paper on or off", "ar": "تشغيل سمة الورق أو إيقافها", "de": "Papier ein- oder ausschalten" },
+        "action": { "type": "theme.toggle" }
+      }
+    ],
+    "keybinds": [{ "command": "toggle", "keys": "Alt+Shift+W" }]
+  },
+  "locales": {
+    "ar": { "name": "الورق", "description": "سمة فاتحة هادئة بألوان الورق الناعمة، مناسبة للغرف المضيئة والقراءة نهاراً." },
+    "de": { "name": "Papier", "description": "Ein ruhiges helles Design in sanften Papiertönen für helle Räume und Lesen am Tag." }
+  }
+}

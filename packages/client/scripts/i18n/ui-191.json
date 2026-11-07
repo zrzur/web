@@ -1,0 +1,11 @@
+{
+  "Presets": ["إعدادات مسبقة", "Vorlagen"],
+  "Colours": ["الألوان", "Farben"],
+  "Page layout": ["تخطيط الصفحة", "Seitenlayout"],
+  "Sizing": ["الأحجام", "Größen"],
+  "Show on lobby": ["يظهر في اللوبي", "In der Lobby anzeigen"],
+  "Make the lobby yours. Colours, spacing and layout are applied to the actual lobby after saving.": [
+    "اجعل اللوبي على ذوقك. تُطبَّق الألوان والمسافات والتخطيط على اللوبي الفعلي بعد الحفظ.",
+    "Gestalte die Lobby nach deinem Geschmack. Farben, Abstände und Layout gelten nach dem Speichern für die echte Lobby."
+  ]
+}

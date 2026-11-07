@@ -1,0 +1,99 @@
+{
+  "$schema": "../../schema/plugin-manifest.v1.schema.json",
+  "manifest_version": 1,
+  "id": "zrzur.high-contrast",
+  "name": "High Contrast",
+  "version": "1.0.0",
+  "description": "Pure black and white with a bright accent, larger text, clear focus rings and underlined links, for low vision and bright screens.",
+  "author": { "name": "Zrzur" },
+  "category": "accessibility",
+  "icon": "circle-half",
+  "api_version": 1,
+  "min_app_version": "26.0.0",
+  "platforms": ["web", "pwa", "desktop"],
+  "entrypoint": { "type": "declarative" },
+  "permissions": ["theme.colors", "accessibility.display", "storage.settings", "ui.commands", "ui.panels", "keybinds"],
+  "contributes": {
+    "settings": [
+      {
+        "key": "text_size",
+        "type": "number",
+        "title": { "en": "Text size", "ar": "حجم النص", "de": "Textgröße" },
+        "default": 1.1,
+        "min": 1,
+        "max": 1.5,
+        "step": 0.05
+      },
+      {
+        "key": "motion",
+        "type": "boolean",
+        "title": { "en": "Reduce motion", "ar": "تقليل الحركة", "de": "Bewegung reduzieren" },
+        "default": true
+      }
+    ],
+    "theme": {
+      "colors": {
+        "primary": "#4cc2ff",
+        "on-primary": "#000000",
+        "primary-container": "#003a57",
+        "on-primary-container": "#ffffff",
+        "background": "#000000",
+        "on-background": "#ffffff",
+        "surface": "#000000",
+        "on-surface": "#ffffff",
+        "surface-variant": "#1f1f1f",
+        "on-surface-variant": "#f0f0f0",
+        "surface-container-lowest": "#000000",
+        "surface-container-low": "#0b0b0b",
+        "surface-container": "#121212",
+        "surface-container-high": "#1a1a1a",
+        "surface-container-highest": "#242424",
+        "outline": "#bdbdbd",
+        "outline-variant": "#8a8a8a"
+      }
+    },
+    "accessibility": {
+      "font_scale": "$setting:text_size",
+      "focus_ring": true,
+      "underline_links": true,
+      "reduce_motion": "$setting:motion"
+    },
+    "commands": [
+      {
+        "id": "theme",
+        "title": { "en": "Turn the colours on or off", "ar": "تشغيل الألوان أو إيقافها", "de": "Farben ein- oder ausschalten" },
+        "action": { "type": "theme.toggle" }
+      },
+      {
+        "id": "reading",
+        "title": { "en": "Turn the reading aids on or off", "ar": "تشغيل مساعدات القراءة أو إيقافها", "de": "Lesehilfen ein- oder ausschalten" },
+        "action": { "type": "accessibility.toggle" }
+      },
+      {
+        "id": "options",
+        "title": { "en": "Show the options", "ar": "عرض الخيارات", "de": "Optionen anzeigen" },
+        "action": { "type": "panel.open", "panel": "options" }
+      }
+    ],
+    "keybinds": [
+      { "command": "theme", "keys": "Alt+Shift+X" },
+      { "command": "options", "keys": "Alt+Shift+V" }
+    ],
+    "panels": [
+      {
+        "id": "options",
+        "title": { "en": "High Contrast", "ar": "تباين عالٍ", "de": "Hoher Kontrast" },
+        "blocks": [
+          { "type": "setting", "key": "motion" },
+          { "type": "divider" },
+          { "type": "button", "label": { "en": "Turn the colours on or off", "ar": "تشغيل الألوان أو إيقافها", "de": "Farben ein- oder ausschalten" }, "command": "theme" },
+          { "type": "button", "label": { "en": "Turn the reading aids on or off", "ar": "تشغيل مساعدات القراءة أو إيقافها", "de": "Lesehilfen ein- oder ausschalten" }, "command": "reading" }
+        ]
+      }
+    ]
+  },
+  "locales": {
+    "ar": { "name": "تباين عالٍ", "description": "أسود وأبيض صافيان مع لون تمييز ساطع، ونص أكبر، وحلقات تركيز واضحة، وروابط مسطّرة، لضعف البصر والشاشات الساطعة." },
+    "de": { "name": "Hoher Kontrast", "description": "Reines Schwarz und Weiß mit hellem Akzent, größerer Text, klare Fokusringe und unterstrichene Links, für schwache Sicht und helle Bildschirme." }
+  }
+}

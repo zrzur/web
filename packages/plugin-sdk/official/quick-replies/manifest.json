@@ -1,0 +1,71 @@
+{
+  "$schema": "../../schema/plugin-manifest.v1.schema.json",
+  "manifest_version": 1,
+  "id": "zrzur.quick-replies",
+  "name": "Quick Replies",
+  "version": "1.0.0",
+  "description": "Save up to five replies you type often and put any of them in your message box with one shortcut. You still decide when to send.",
+  "author": { "name": "Zrzur" },
+  "category": "productivity",
+  "icon": "chats-circle",
+  "api_version": 1,
+  "min_app_version": "26.0.0",
+  "platforms": ["web", "pwa", "desktop"],
+  "entrypoint": { "type": "worker", "file": "main.js" },
+  "permissions": ["ui.commands", "ui.panels", "keybinds", "storage.settings", "composer.insert", "notifications.show"],
+  "contributes": {
+    "settings": [
+      { "key": "reply_1", "type": "text", "title": { "en": "Reply 1", "ar": "الرد 1", "de": "Antwort 1" }, "default": "Thanks, I'll get back to you soon!", "max_length": 500 },
+      { "key": "reply_2", "type": "text", "title": { "en": "Reply 2", "ar": "الرد 2", "de": "Antwort 2" }, "default": "Welcome to the server! Please read the rules first.", "max_length": 500 },
+      { "key": "reply_3", "type": "text", "title": { "en": "Reply 3", "ar": "الرد 3", "de": "Antwort 3" }, "default": "", "max_length": 500 },
+      { "key": "reply_4", "type": "text", "title": { "en": "Reply 4", "ar": "الرد 4", "de": "Antwort 4" }, "default": "", "max_length": 500 },
+      { "key": "reply_5", "type": "text", "title": { "en": "Reply 5", "ar": "الرد 5", "de": "Antwort 5" }, "default": "", "max_length": 500 }
+    ],
+    "commands": [
+      { "id": "reply-1", "title": { "en": "Insert reply 1", "ar": "إدراج الرد 1", "de": "Antwort 1 einfügen" }, "action": { "type": "worker", "handler": "reply-1" } },
+      { "id": "reply-2", "title": { "en": "Insert reply 2", "ar": "إدراج الرد 2", "de": "Antwort 2 einfügen" }, "action": { "type": "worker", "handler": "reply-2" } },
+      { "id": "reply-3", "title": { "en": "Insert reply 3", "ar": "إدراج الرد 3", "de": "Antwort 3 einfügen" }, "action": { "type": "worker", "handler": "reply-3" } },
+      { "id": "reply-4", "title": { "en": "Insert reply 4", "ar": "إدراج الرد 4", "de": "Antwort 4 einfügen" }, "action": { "type": "worker", "handler": "reply-4" } },
+      { "id": "reply-5", "title": { "en": "Insert reply 5", "ar": "إدراج الرد 5", "de": "Antwort 5 einfügen" }, "action": { "type": "worker", "handler": "reply-5" } },
+      { "id": "list", "title": { "en": "Show my replies", "ar": "عرض ردودي", "de": "Meine Antworten anzeigen" }, "action": { "type": "worker", "handler": "list" } }
+    ],
+    "keybinds": [
+      { "command": "reply-1", "keys": "Alt+Shift+1" },
+      { "command": "reply-2", "keys": "Alt+Shift+2" },
+      { "command": "reply-3", "keys": "Alt+Shift+3" },
+      { "command": "reply-4", "keys": "Alt+Shift+4" },
+      { "command": "reply-5", "keys": "Alt+Shift+5" },
+      { "command": "list", "keys": "Alt+Shift+0" }
+    ]
+  },
+  "locales": {
+    "ar": {
+      "name": "ردود سريعة",
+      "description": "احفظ حتى خمسة ردود تكتبها كثيراً وضع أياً منها في مربع الرسالة باختصار واحد. يبقى قرار الإرسال لك.",
+      "strings": {
+        "empty": "الرد {n} فارغ. اكتبه في إعدادات الإضافة.",
+        "title": "ردودي السريعة",
+        "none": "لا توجد ردود محفوظة بعد. اكتبها في إعدادات الإضافة.",
+        "hint": "اضغط على رد لإدراجه، أو استخدم Alt+Shift مع رقمه."
+      }
+    },
+    "de": {
+      "name": "Schnellantworten",
+      "description": "Speichere bis zu fünf Antworten, die du oft schreibst, und setze jede mit einem Tastenkürzel in dein Nachrichtenfeld. Senden entscheidest du.",
+      "strings": {
+        "empty": "Antwort {n} ist leer. Schreibe sie in den Einstellungen des Plugins.",
+        "title": "Meine Schnellantworten",
+        "none": "Noch keine Antworten gespeichert. Schreibe sie in den Einstellungen des Plugins.",
+        "hint": "Klicke auf eine Antwort, um sie einzufügen, oder nutze Alt+Shift mit ihrer Nummer."
+      }
+    },
+    "en": {
+      "strings": {
+        "empty": "Reply {n} is empty. Write it in the plugin's settings.",
+        "title": "My quick replies",
+        "none": "No replies saved yet. Write them in the plugin's settings.",
+        "hint": "Click a reply to insert it, or use Alt+Shift with its number."
+      }
+    }
+  }
+}

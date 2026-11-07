@@ -1,0 +1,8 @@
+{
+  "{0} of {MAX_INTERESTS} chosen.": ["تم اختيار {0} من {MAX_INTERESTS}.", "{0} von {MAX_INTERESTS} ausgewählt."],
+  "Links must start with https://": ["يجب أن تبدأ الروابط بـ https://", "Links müssen mit https:// beginnen"],
+  "No links yet.": ["لا توجد روابط بعد.", "Noch keine Links."],
+  "None chosen yet.": ["لم تختر شيئًا بعد.", "Noch nichts ausgewählt."],
+  "That's the limit of {MAX_INTERESTS}.": ["هذا هو الحد الأقصى وهو {MAX_INTERESTS}.", "Das ist das Limit von {MAX_INTERESTS}."],
+  "Use a real site address, such as https://example.com": ["استخدم عنوان موقع حقيقيًا، مثل https://example.com", "Verwende eine echte Website-Adresse, zum Beispiel https://example.com"]
+}

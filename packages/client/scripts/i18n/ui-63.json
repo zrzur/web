@@ -1,0 +1,18 @@
+{
+  "Please fill in this field.": [
+    "يرجى ملء هذا الحقل.",
+    "Bitte fülle dieses Feld aus."
+  ],
+  "Enter a valid email address.": [
+    "أدخل عنوان بريد إلكتروني صحيحًا.",
+    "Gib eine gültige E-Mail-Adresse ein."
+  ],
+  "Use at least {minimum} characters.": [
+    "استخدم {minimum} أحرف على الأقل.",
+    "Verwende mindestens {minimum} Zeichen."
+  ],
+  "Sort results": [
+    "ترتيب النتائج",
+    "Ergebnisse sortieren"
+  ]
+}

@@ -1,0 +1,63 @@
+{
+  "$schema": "../../schema/plugin-manifest.v1.schema.json",
+  "manifest_version": 1,
+  "id": "zrzur.focus-tools",
+  "name": "Focus Tools",
+  "version": "1.0.0",
+  "description": "Keyboard shortcuts for compact mode, a code block in your message box and a quick jump to Friends.",
+  "author": { "name": "Zrzur" },
+  "category": "productivity",
+  "icon": "lightning",
+  "api_version": 1,
+  "min_app_version": "26.0.0",
+  "platforms": ["web", "pwa", "desktop"],
+  "entrypoint": { "type": "declarative" },
+  "permissions": ["ui.commands", "ui.panels", "keybinds", "app.preferences", "composer.insert"],
+  "contributes": {
+    "commands": [
+      {
+        "id": "compact",
+        "title": { "en": "Toggle compact mode", "ar": "تبديل الوضع المضغوط" },
+        "action": { "type": "setting.toggle", "key": "appearance:compact_mode" }
+      },
+      {
+        "id": "code-block",
+        "title": { "en": "Insert a code block", "ar": "إدراج كتلة شيفرة" },
+        "action": { "type": "composer.insert", "text": "```\n\n```" }
+      },
+      {
+        "id": "friends",
+        "title": { "en": "Go to Friends", "ar": "الذهاب إلى الأصدقاء" },
+        "action": { "type": "navigate", "to": "friends" }
+      },
+      {
+        "id": "help",
+        "title": { "en": "Show the shortcuts", "ar": "عرض الاختصارات" },
+        "action": { "type": "panel.open", "panel": "help" }
+      }
+    ],
+    "keybinds": [
+      { "command": "compact", "keys": "Alt+Shift+C" },
+      { "command": "code-block", "keys": "Alt+Shift+K" },
+      { "command": "friends", "keys": "Alt+Shift+F" },
+      { "command": "help", "keys": "Alt+Shift+H" }
+    ],
+    "panels": [
+      {
+        "id": "help",
+        "title": { "en": "Focus Tools", "ar": "أدوات التركيز" },
+        "blocks": [
+          { "type": "text", "text": { "en": "Alt+Shift+C — compact mode\nAlt+Shift+K — code block\nAlt+Shift+F — Friends", "ar": "Alt+Shift+C — الوضع المضغوط\nAlt+Shift+K — كتلة شيفرة\nAlt+Shift+F — الأصدقاء" } },
+          { "type": "divider" },
+          { "type": "button", "label": { "en": "Toggle compact mode", "ar": "تبديل الوضع المضغوط" }, "command": "compact" }
+        ]
+      }
+    ]
+  },
+  "locales": {
+    "ar": {
+      "name": "أدوات التركيز",
+      "description": "اختصارات للوضع المضغوط، وكتلة شيفرة في مربع الرسالة، وانتقال سريع إلى الأصدقاء."
+    }
+  }
+}

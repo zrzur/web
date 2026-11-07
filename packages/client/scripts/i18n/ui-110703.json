@@ -1,0 +1,13 @@
+{
+  "Effects": ["التأثيرات", "Effekte"],
+  "Add a note": ["أضف ملاحظة", "Notiz hinzufügen"],
+  "Only you can see this. It stays on this device.": [
+    "لا يراها أحد غيرك، وتبقى على هذا الجهاز.",
+    "Nur du siehst das. Es bleibt auf diesem Gerät."
+  ],
+  "Copy ID": ["انسخ المعرّف", "ID kopieren"],
+  "Couldn't load this profile.": [
+    "تعذّر تحميل هذا الملف الشخصي.",
+    "Dieses Profil konnte nicht geladen werden."
+  ]
+}

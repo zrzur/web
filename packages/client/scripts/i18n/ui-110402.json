@@ -1,0 +1,726 @@
+{
+  "{0} collection": [
+    "مجموعة {0}",
+    "Kollektion {0}"
+  ],
+  "A verified maker": [
+    "مصمم موثّق",
+    "Verifizierter Creator"
+  ],
+  "Every bird in this flock is a design for your Zrzur profile. Tap one and it lands on you.": [
+    "كل طائر في هذا السرب تصميم لملفك الشخصي في زرزور. المسه فيحطّ عليك.",
+    "Jeder Vogel in diesem Schwarm ist ein Design für dein Zrzur-Profil. Tippe einen an und er landet bei dir."
+  ],
+  "Every lit bird in this sky is someone who draws for Zrzur.": [
+    "كل طائر مضيء في هذه السماء شخص يرسم لزرزور.",
+    "Jeder leuchtende Vogel an diesem Himmel ist jemand, der für Zrzur zeichnet."
+  ],
+  "Everything": [
+    "الكل",
+    "Alles"
+  ],
+  "Everything that ships with Zrzur": [
+    "كل ما يأتي مع زرزور",
+    "Alles, was bei Zrzur dabei ist"
+  ],
+  "Gallery": [
+    "المعرض",
+    "Galerie"
+  ],
+  "Hadi": [
+    "هادي",
+    "Hadi"
+  ],
+  "Maya": [
+    "مايا",
+    "Maya"
+  ],
+  "Most worn": [
+    "الأكثر ارتداءً",
+    "Meistgetragen"
+  ],
+  "Nothing in the flock matches": [
+    "لا شيء في السرب يطابق بحثك",
+    "Nichts im Schwarm passt"
+  ],
+  "Pick a bird. Wear its colours.": [
+    "اختر طائراً. وارتدِ ألوانه.",
+    "Such dir einen Vogel aus. Trag seine Farben."
+  ],
+  "Rana": [
+    "رنا",
+    "Rana"
+  ],
+  "Remove filter {0}": [
+    "إزالة الفلتر {0}",
+    "Filter {0} entfernen"
+  ],
+  "Tap any design to try it on": [
+    "المس أي تصميم لتجرّبه",
+    "Tippe ein Design an, um es anzuprobieren"
+  ],
+  "Tarek": [
+    "طارق",
+    "Tarek"
+  ],
+  "The flock": [
+    "السرب",
+    "Der Schwarm"
+  ],
+  "Try another word, or a creator's name.": [
+    "جرّب كلمة أخرى أو اسم مصمم.",
+    "Versuch ein anderes Wort oder den Namen eines Creators."
+  ],
+  "A button": [
+    "زر",
+    "Eine Schaltfläche"
+  ],
+  "A button or a short sum gives new members their role.": [
+    "زر أو عملية حسابية قصيرة تمنح الأعضاء الجدد رتبتهم.",
+    "Eine Schaltfläche oder eine kurze Rechenaufgabe gibt neuen Mitgliedern ihre Rolle."
+  ],
+  "A card with the Hijri date when someone joins or leaves.": [
+    "بطاقة بالتاريخ الهجري عند انضمام أحد أو مغادرته.",
+    "Eine Karte mit dem Hidschri-Datum, wenn jemand beitritt oder geht."
+  ],
+  "A private channel": [
+    "قناة خاصة",
+    "Ein privater Kanal"
+  ],
+  "A short sum": [
+    "عملية حسابية قصيرة",
+    "Eine kurze Rechenaufgabe"
+  ],
+  "A staff thread and direct messages": [
+    "موضوع للفريق ورسائل خاصة",
+    "Ein Team-Thread und Direktnachrichten"
+  ],
+  "Active modules": [
+    "الوحدات المفعّلة",
+    "Aktive Module"
+  ],
+  "Add it": [
+    "أضفه",
+    "Hinzufügen"
+  ],
+  "Add Zrzur Assistant to this server first.": [
+    "أضف زرزور المساعد إلى هذا السيرفر أولاً.",
+    "Füge den Zrzur-Assistenten zuerst diesem Server hinzu."
+  ],
+  "Add…": [
+    "إضافة…",
+    "Hinzufügen…"
+  ],
+  "All permissions are in place": [
+    "الصلاحيات كلها متوفرة",
+    "Alle Berechtigungen sind vorhanden"
+  ],
+  "Allow ban appeals": [
+    "السماح باستئناف الحظر",
+    "Einsprüche gegen Banns erlauben"
+  ],
+  "Arabic presets and a ladder of steps on Zrzur's own filters.": [
+    "قوالب عربية وخطوات تصاعدية فوق فلاتر زرزور نفسها.",
+    "Arabische Vorlagen und eine Stufenleiter auf Zrzurs eigenen Filtern."
+  ],
+  "Ask members to rate the help": [
+    "طلب تقييم الخدمة من الأعضاء",
+    "Mitglieder um eine Bewertung bitten"
+  ],
+  "Ask moderators for a reason": [
+    "إلزام المشرفين بذكر السبب",
+    "Von Moderatoren einen Grund verlangen"
+  ],
+  "Automatic roles and panels members pick from.": [
+    "رتب تلقائية ولوحات يختار منها الأعضاء.",
+    "Automatische Rollen und Panels zur Auswahl."
+  ],
+  "AutoMod Rules": [
+    "الفلترة التلقائية",
+    "AutoMod-Regeln"
+  ],
+  "Channel and role changes": [
+    "تغييرات القنوات والرتب",
+    "Änderungen an Kanälen und Rollen"
+  ],
+  "Channel for appeals": [
+    "قناة الاستئنافات",
+    "Kanal für Einsprüche"
+  ],
+  "Channels the rules skip": [
+    "قنوات تتجاوزها القواعد",
+    "Kanäle ohne diese Regeln"
+  ],
+  "Channels where its commands work": [
+    "القنوات التي تعمل فيها أوامرها",
+    "Kanäle, in denen die Befehle funktionieren"
+  ],
+  "Check again": [
+    "فحص مرة أخرى",
+    "Erneut prüfen"
+  ],
+  "Choose modules and set them up.": [
+    "اختر الوحدات واضبطها.",
+    "Wähle Module und richte sie ein."
+  ],
+  "Close quiet tickets after this many hours (0 is off)": [
+    "إغلاق التذاكر الخاملة بعد هذا العدد من الساعات (0 يعني إيقاف)",
+    "Ruhige Tickets nach so vielen Stunden schließen (0 ist aus)"
+  ],
+  "Configure": [
+    "ضبط",
+    "Einrichten"
+  ],
+  "Configure {0}": [
+    "ضبط {0}",
+    "{0} einrichten"
+  ],
+  "Connect Zrzur Assistant": [
+    "ربط زرزور المساعد",
+    "Zrzur-Assistenten verbinden"
+  ],
+  "Data and retention": [
+    "البيانات ومدة الحفظ",
+    "Daten und Aufbewahrung"
+  ],
+  "Data of a module that stays off is deleted after 30 days. The server owner gets a copy first. No IP addresses are ever kept.": [
+    "تُحذف بيانات الوحدة المعطّلة بعد 30 يوماً، ويتلقى مالك السيرفر نسخة منها أولاً. لا تُحفظ عناوين IP مطلقاً.",
+    "Daten eines Moduls, das aus bleibt, werden nach 30 Tagen gelöscht. Der Serverinhaber bekommt vorher eine Kopie. IP-Adressen werden nie gespeichert."
+  ],
+  "Delete data": [
+    "حذف البيانات",
+    "Daten löschen"
+  ],
+  "Delete data now": [
+    "حذف البيانات الآن",
+    "Daten jetzt löschen"
+  ],
+  "Delete this module's data?": [
+    "هل تحذف بيانات هذه الوحدة؟",
+    "Daten dieses Moduls löschen?"
+  ],
+  "Deletions that count as an attack": [
+    "عدد عمليات الحذف الذي يُعد هجوماً",
+    "Löschungen, die als Angriff zählen"
+  ],
+  "Deletions within this many seconds": [
+    "عمليات الحذف خلال هذا العدد من الثواني",
+    "Löschungen innerhalb so vieler Sekunden"
+  ],
+  "Direct message for a ban": [
+    "الرسالة الخاصة عند الحظر",
+    "Direktnachricht bei einem Bann"
+  ],
+  "Direct message for a kick": [
+    "الرسالة الخاصة عند الطرد",
+    "Direktnachricht bei einem Kick"
+  ],
+  "Direct message for a temporary ban": [
+    "الرسالة الخاصة عند الحظر المؤقت",
+    "Direktnachricht bei einem temporären Bann"
+  ],
+  "Direct message for a timeout": [
+    "الرسالة الخاصة عند الإسكات",
+    "Direktnachricht bei einem Timeout"
+  ],
+  "Direct message for a warning": [
+    "الرسالة الخاصة عند التحذير",
+    "Direktnachricht bei einer Verwarnung"
+  ],
+  "Direct message when a ticket closes": [
+    "الرسالة الخاصة عند إغلاق التذكرة",
+    "Direktnachricht, wenn ein Ticket schließt"
+  ],
+  "Direct messages to the bot open a ticket": [
+    "تفتح الرسائل الخاصة إلى البوت تذكرة",
+    "Direktnachrichten an den Bot öffnen ein Ticket"
+  ],
+  "Edited and deleted messages": [
+    "الرسائل المعدّلة والمحذوفة",
+    "Bearbeitete und gelöschte Nachrichten"
+  ],
+  "Empty lists follow the staff levels and work everywhere.": [
+    "القوائم الفارغة تتبع مستويات الفريق وتعمل في كل مكان.",
+    "Leere Listen folgen den Teamstufen und gelten überall."
+  ],
+  "Export data": [
+    "تصدير البيانات",
+    "Daten exportieren"
+  ],
+  "Friends server": [
+    "سيرفر أصدقاء",
+    "Freunde-Server"
+  ],
+  "Goodbye channel": [
+    "قناة الوداع",
+    "Abschiedskanal"
+  ],
+  "Goodbye text": [
+    "نص الوداع",
+    "Abschiedstext"
+  ],
+  "How members verify": [
+    "طريقة تحقق الأعضاء",
+    "Wie Mitglieder sich verifizieren"
+  ],
+  "Insults": [
+    "الشتائم",
+    "Beleidigungen"
+  ],
+  "Islamic or educational": [
+    "إسلامي أو تعليمي",
+    "Islamisch oder Bildung"
+  ],
+  "It learns your username, so it knows you may change these settings. You can remove it under Authorized apps.": [
+    "يعرف اسم المستخدم الخاص بك فقط ليتأكد أنك مخول بتغيير هذه الإعدادات. يمكنك إزالته من التطبيقات المصرّح لها.",
+    "Er erfährt deinen Benutzernamen, damit er weiß, dass du diese Einstellungen ändern darfst. Du kannst ihn unter „Autorisierte Apps“ entfernen."
+  ],
+  "Joins that count as a raid": [
+    "عدد الانضمامات الذي يُعد غارة",
+    "Beitritte, die als Raid zählen"
+  ],
+  "Keep encrypted transcripts": [
+    "حفظ نصوص مشفّرة للتذاكر",
+    "Verschlüsselte Protokolle aufbewahren"
+  ],
+  "Keep message text for this many days (90 at most)": [
+    "حفظ نص الرسائل هذا العدد من الأيام (90 كحد أقصى)",
+    "Nachrichtentext so viele Tage aufbewahren (höchstens 90)"
+  ],
+  "Keep the text of messages": [
+    "حفظ نص الرسائل",
+    "Text der Nachrichten aufbewahren"
+  ],
+  "Kick at this many strikes (0 is off)": [
+    "الطرد عند هذا العدد من المخالفات (0 يعني إيقاف)",
+    "Kick bei so vielen Verstößen (0 ist aus)"
+  ],
+  "Language of the bot's messages": [
+    "لغة رسائل البوت",
+    "Sprache der Bot-Nachrichten"
+  ],
+  "Language, time and who counts as staff.": [
+    "اللغة والوقت ومن يُعد من الفريق.",
+    "Sprache, Zeit und wer zum Team gehört."
+  ],
+  "Leave a box empty to use the standard text.": [
+    "اترك الحقل فارغاً لاستخدام النص الافتراضي.",
+    "Lass ein Feld leer, um den Standardtext zu verwenden."
+  ],
+  "Links from new members": [
+    "روابط الأعضاء الجدد",
+    "Links neuer Mitglieder"
+  ],
+  "Load settings file": [
+    "تحميل ملف الإعدادات",
+    "Einstellungsdatei laden"
+  ],
+  "Log channel": [
+    "قناة السجلات",
+    "Log-Kanal"
+  ],
+  "Logs": [
+    "السجلات",
+    "Protokolle"
+  ],
+  "Manager": [
+    "مدير",
+    "Manager"
+  ],
+  "Members joining, leaving and changing roles": [
+    "انضمام الأعضاء ومغادرتهم وتغير رتبهم",
+    "Mitglieder, die beitreten, gehen oder Rollen wechseln"
+  ],
+  "Messages & Embeds": [
+    "صانع الرسائل",
+    "Nachrichten & Embeds"
+  ],
+  "Moderation & Cases": [
+    "الإشراف والمخالفات",
+    "Moderation & Fälle"
+  ],
+  "Moderator": [
+    "مشرف",
+    "Moderator"
+  ],
+  "Module sections": [
+    "أقسام الوحدة",
+    "Modulbereiche"
+  ],
+  "Note": [
+    "ملاحظة",
+    "Notiz"
+  ],
+  "Only people who manage the server can change this.": [
+    "لا يغيّر هذا إلا من يدير السيرفر.",
+    "Nur wer den Server verwaltet, kann das ändern."
+  ],
+  "Pause for this many hours": [
+    "الإيقاف لهذا العدد من الساعات",
+    "So viele Stunden pausieren"
+  ],
+  "Pause invites during a raid": [
+    "إيقاف الدعوات أثناء الغارة",
+    "Einladungen bei einem Raid pausieren"
+  ],
+  "Pick what your server is like; modules turn on to match.": [
+    "اختر ما يشبه سيرفرك، وستُفعّل الوحدات المناسبة.",
+    "Wähle, was zu deinem Server passt; die Module schalten sich passend ein."
+  ],
+  "Presets": [
+    "القوالب",
+    "Vorlagen"
+  ],
+  "Public community": [
+    "مجتمع عام",
+    "Öffentliche Community"
+  ],
+  "Purge": [
+    "حذف جماعي",
+    "Massenlöschung"
+  ],
+  "Quarantine": [
+    "عزل",
+    "Quarantäne"
+  ],
+  "Quarantine role": [
+    "رتبة العزل",
+    "Quarantäne-Rolle"
+  ],
+  "Quick setup": [
+    "الإعداد السريع",
+    "Schnelleinrichtung"
+  ],
+  "Recent cases": [
+    "المخالفات الأخيرة",
+    "Letzte Fälle"
+  ],
+  "Recent tickets": [
+    "التذاكر الأخيرة",
+    "Letzte Tickets"
+  ],
+  "Role given after verifying": [
+    "الرتبة الممنوحة بعد التحقق",
+    "Rolle nach der Verifizierung"
+  ],
+  "Roles given on joining": [
+    "الرتب الممنوحة عند الانضمام",
+    "Rollen beim Beitritt"
+  ],
+  "Roles Shield trusts": [
+    "الرتب الموثوقة لدى الدرع",
+    "Rollen, denen der Schild vertraut"
+  ],
+  "Roles that may use this module": [
+    "الرتب التي يمكنها استخدام هذه الوحدة",
+    "Rollen, die dieses Modul nutzen dürfen"
+  ],
+  "Roles the rules skip": [
+    "رتب تتجاوزها القواعد",
+    "Rollen ohne diese Regeln"
+  ],
+  "Save settings file": [
+    "حفظ ملف الإعدادات",
+    "Einstellungsdatei speichern"
+  ],
+  "Save these settings as a file, or load them back.": [
+    "احفظ هذه الإعدادات في ملف، أو حمّلها منه.",
+    "Speichere diese Einstellungen als Datei oder lade sie zurück."
+  ],
+  "Scams": [
+    "الاحتيال",
+    "Betrug"
+  ],
+  "Settings file": [
+    "ملف الإعدادات",
+    "Einstellungsdatei"
+  ],
+  "Shield": [
+    "الدرع",
+    "Schild"
+  ],
+  "Show as a card": [
+    "العرض على شكل بطاقة",
+    "Als Karte anzeigen"
+  ],
+  "Show the Hijri date": [
+    "إظهار التاريخ الهجري",
+    "Hidschri-Datum anzeigen"
+  ],
+  "Some permissions are missing": [
+    "بعض الصلاحيات ناقصة",
+    "Einige Berechtigungen fehlen"
+  ],
+  "Staff queue channel": [
+    "قناة صندوق الفريق",
+    "Kanal für die Team-Warteschlange"
+  ],
+  "Stop mass deletions": [
+    "إيقاف الحذف الجماعي",
+    "Massenlöschungen stoppen"
+  ],
+  "Stops raids and mass deletions, and locks the server in one step.": [
+    "يوقف الغارات والحذف الجماعي، ويغلق السيرفر بخطوة واحدة.",
+    "Stoppt Raids und Massenlöschungen und sperrt den Server mit einem Schritt."
+  ],
+  "Strikes count for this many days": [
+    "تُحتسب المخالفات خلال هذا العدد من الأيام",
+    "Verstöße zählen so viele Tage"
+  ],
+  "Support": [
+    "الدعم",
+    "Support"
+  ],
+  "Support ends at hour": [
+    "ساعة انتهاء الدعم",
+    "Support endet um"
+  ],
+  "Support Inbox": [
+    "صندوق الدعم",
+    "Support-Eingang"
+  ],
+  "Support or store": [
+    "دعم أو متجر",
+    "Support oder Shop"
+  ],
+  "Support roles": [
+    "رتب الدعم",
+    "Support-Rollen"
+  ],
+  "Support starts at hour": [
+    "ساعة بدء الدعم",
+    "Support beginnt um"
+  ],
+  "Tell members by direct message": [
+    "إبلاغ الأعضاء برسالة خاصة",
+    "Mitglieder per Direktnachricht informieren"
+  ],
+  "Temporary ban": [
+    "حظر مؤقت",
+    "Temporärer Bann"
+  ],
+  "Text of the verification panel": [
+    "نص لوحة التحقق",
+    "Text des Verifizierungs-Panels"
+  ],
+  "Text outside support hours": [
+    "النص خارج ساعات الدعم",
+    "Text außerhalb der Supportzeiten"
+  ],
+  "That change wasn't saved. Check it and try again.": [
+    "لم يُحفظ هذا التغيير. تحقق منه وحاول مرة أخرى.",
+    "Diese Änderung wurde nicht gespeichert. Prüfe sie und versuche es erneut."
+  ],
+  "That file can't be read.": [
+    "تعذّرت قراءة هذا الملف.",
+    "Diese Datei lässt sich nicht lesen."
+  ],
+  "The official bot: safety, community and support in one place.": [
+    "البوت الرسمي: الأمان والمجتمع والدعم في مكان واحد.",
+    "Der offizielle Bot: Sicherheit, Community und Support an einem Ort."
+  ],
+  "These roles are above the Assistant": [
+    "هذه الرتب أعلى من رتبة المساعد",
+    "Diese Rollen stehen über dem Assistenten"
+  ],
+  "This can't be undone.": [
+    "لا يمكن التراجع عن هذا.",
+    "Das lässt sich nicht rückgängig machen."
+  ],
+  "This module has no settings. Use its slash commands.": [
+    "لا إعدادات لهذه الوحدة. استخدم أوامرها.",
+    "Dieses Modul hat keine Einstellungen. Nutze seine Slash-Befehle."
+  ],
+  "This module's data will be deleted on {0}.": [
+    "ستُحذف بيانات هذه الوحدة في {0}.",
+    "Die Daten dieses Moduls werden am {0} gelöscht."
+  ],
+  "Ticket categories, one per line": [
+    "أقسام التذاكر، كل قسم في سطر",
+    "Ticket-Bereiche, einer pro Zeile"
+  ],
+  "Tickets and direct messages in one queue.": [
+    "التذاكر والرسائل الخاصة في صندوق واحد.",
+    "Tickets und Direktnachrichten in einer Warteschlange."
+  ],
+  "Time out at this many strikes (0 is off)": [
+    "الإسكات عند هذا العدد من المخالفات (0 يعني إيقاف)",
+    "Timeout bei so vielen Verstößen (0 ist aus)"
+  ],
+  "Time zone": [
+    "المنطقة الزمنية",
+    "Zeitzone"
+  ],
+  "Timeout ended": [
+    "إنهاء الإسكات",
+    "Timeout beendet"
+  ],
+  "Timeout length in minutes": [
+    "مدة الإسكات بالدقائق",
+    "Timeout-Dauer in Minuten"
+  ],
+  "Use support hours": [
+    "استخدام ساعات الدعم",
+    "Supportzeiten verwenden"
+  ],
+  "Use the Hijri calendar": [
+    "استخدام التقويم الهجري",
+    "Hidschri-Kalender verwenden"
+  ],
+  "Utilities": [
+    "الأدوات",
+    "Werkzeuge"
+  ],
+  "Warn at this many strikes (0 is off)": [
+    "التحذير عند هذا العدد من المخالفات (0 يعني إيقاف)",
+    "Verwarnung bei so vielen Verstößen (0 ist aus)"
+  ],
+  "Warn, time out, kick and ban with numbered cases and appeals.": [
+    "تحذير وإسكات وطرد وحظر، بمخالفات مرقّمة واستئناف.",
+    "Verwarnen, stummschalten, kicken und bannen, mit nummerierten Fällen und Einsprüchen."
+  ],
+  "Welcome & Goodbye": [
+    "الترحيب والوداع",
+    "Willkommen & Abschied"
+  ],
+  "Welcome channel": [
+    "قناة الترحيب",
+    "Willkommenskanal"
+  ],
+  "Welcome text": [
+    "نص الترحيب",
+    "Willkommenstext"
+  ],
+  "What happens in the server, in one staff channel.": [
+    "ما يجري في السيرفر، في قناة واحدة للفريق.",
+    "Was auf dem Server passiert, in einem Team-Kanal."
+  ],
+  "What the Assistant needs, and what happened lately.": [
+    "ما يحتاجه المساعد، وما جرى مؤخراً.",
+    "Was der Assistent braucht und was zuletzt passiert ist."
+  ],
+  "Where tickets open": [
+    "مكان فتح التذاكر",
+    "Wo Tickets öffnen"
+  ],
+  "Within this many seconds": [
+    "خلال هذا العدد من الثواني",
+    "Innerhalb so vieler Sekunden"
+  ],
+  "Write, schedule and edit messages for the bot to post.": [
+    "اكتب رسائل وجدولها وعدّلها لينشرها البوت.",
+    "Schreibe, plane und bearbeite Nachrichten, die der Bot veröffentlicht."
+  ],
+  "Youngest account allowed, in days": [
+    "أقل عمر مسموح للحساب بالأيام",
+    "Mindestalter des Kontos in Tagen"
+  ],
+  "Zrzur Assistant": [
+    "زرزور المساعد",
+    "Zrzur-Assistent"
+  ],
+  "Zrzur Assistant can't be reached right now. Try again soon.": [
+    "تعذّر الوصول إلى زرزور المساعد الآن. حاول مرة أخرى بعد قليل.",
+    "Der Zrzur-Assistent ist gerade nicht erreichbar. Versuche es bald erneut."
+  ],
+  "Channels of posts with a title and tags in this server.": [
+    "قنوات لمنشورات ذات عنوان ووسوم في هذا السيرفر.",
+    "Kanäle für Beiträge mit Titel und Tags auf diesem Server."
+  ],
+  "Create forum posts": [
+    "إنشاء منشورات في المنتديات",
+    "Forenbeiträge erstellen"
+  ],
+  "Create threads": [
+    "إنشاء خيوط",
+    "Threads erstellen"
+  ],
+  "Forums": [
+    "المنتديات",
+    "Foren"
+  ],
+  "Forums are off in this server. Existing posts can only be read.": [
+    "المنتديات متوقفة في هذا السيرفر. يمكن قراءة المنشورات الموجودة فقط.",
+    "Foren sind auf diesem Server ausgeschaltet. Vorhandene Beiträge können nur gelesen werden."
+  ],
+  "Forums are off in this server. This post can only be read.": [
+    "المنتديات متوقفة في هذا السيرفر. يمكن قراءة هذا المنشور فقط.",
+    "Foren sind auf diesem Server ausgeschaltet. Dieser Beitrag kann nur gelesen werden."
+  ],
+  "Forums are off in this server. You can still read the posts.": [
+    "المنتديات متوقفة في هذا السيرفر. يمكنك قراءة المنشورات.",
+    "Foren sind auf diesem Server ausgeschaltet. Die Beiträge kannst du weiterhin lesen."
+  ],
+  "No posts yet.": [
+    "لا توجد منشورات بعد.",
+    "Noch keine Beiträge."
+  ],
+  "Send messages in threads": [
+    "إرسال رسائل في الخيوط",
+    "Nachrichten in Threads senden"
+  ],
+  "Side conversations in the text channels of this server.": [
+    "محادثات جانبية في القنوات النصية لهذا السيرفر.",
+    "Nebengespräche in den Textkanälen dieses Servers."
+  ],
+  "Start posts in the forums of this server": [
+    "بدء منشورات في منتديات هذا السيرفر",
+    "Beiträge in den Foren dieses Servers starten"
+  ],
+  "Start posts in this forum": [
+    "بدء منشورات في هذا المنتدى",
+    "Beiträge in diesem Forum starten"
+  ],
+  "Start threads in the text channels of this server": [
+    "بدء خيوط في القنوات النصية لهذا السيرفر",
+    "Threads in den Textkanälen dieses Servers starten"
+  ],
+  "Start threads in this channel": [
+    "بدء خيوط في هذه القناة",
+    "Threads in diesem Kanal starten"
+  ],
+  "Threads and forums": [
+    "الخيوط والمنتديات",
+    "Threads und Foren"
+  ],
+  "Threads are off in this server. Existing ones can only be read.": [
+    "الخيوط متوقفة في هذا السيرفر. يمكن قراءة الخيوط الموجودة فقط.",
+    "Threads sind auf diesem Server ausgeschaltet. Vorhandene Threads können nur gelesen werden."
+  ],
+  "Threads are off in this server. This thread can only be read.": [
+    "الخيوط متوقفة في هذا السيرفر. يمكن قراءة هذا الخيط فقط.",
+    "Threads sind auf diesem Server ausgeschaltet. Dieser Thread kann nur gelesen werden."
+  ],
+  "Threads are off in this server. You can still read the ones it has.": [
+    "الخيوط متوقفة في هذا السيرفر. يمكنك قراءة الخيوط الموجودة.",
+    "Threads sind auf diesem Server ausgeschaltet. Vorhandene Threads kannst du weiterhin lesen."
+  ],
+  "Turn them on or off for this server.": [
+    "شغّلها أو أوقفها في هذا السيرفر.",
+    "Für diesen Server ein- oder ausschalten."
+  ],
+  "When one is off, nobody can add to it, the owner included. Nothing is deleted: everything already there can still be read.": [
+    "عند إيقاف أحدهما لا يمكن لأحد الإضافة إليه، حتى مالك السيرفر. لا يُحذف شيء، ويبقى كل ما فيه متاحًا للقراءة.",
+    "Ist eines davon aus, kann niemand etwas hinzufügen, auch der Eigentümer nicht. Nichts wird gelöscht: Alles Vorhandene bleibt lesbar."
+  ],
+  "Write in the threads and forum posts of this server": [
+    "الكتابة في الخيوط ومنشورات المنتديات في هذا السيرفر",
+    "In den Threads und Forenbeiträgen dieses Servers schreiben"
+  ],
+  "Write in the threads and posts of this channel": [
+    "الكتابة في خيوط هذه القناة ومنشوراتها",
+    "In den Threads und Beiträgen dieses Kanals schreiben"
+  ],
+  "You can't start posts in this forum.": [
+    "لا يمكنك بدء منشورات في هذا المنتدى.",
+    "Du kannst in diesem Forum keine Beiträge starten."
+  ],
+  "You can't start threads in this channel.": [
+    "لا يمكنك بدء خيوط في هذه القناة.",
+    "Du kannst in diesem Kanal keine Threads starten."
+  ],
+  "You can't write in this thread.": [
+    "لا يمكنك الكتابة في هذا الخيط.",
+    "Du kannst in diesem Thread nicht schreiben."
+  ]
+}

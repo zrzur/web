@@ -1,0 +1,78 @@
+{
+  "\"{0}\" stops filtering messages right away.": [
+    "تتوقف «{0}» عن تصفية الرسائل فوراً.",
+    "„{0}“ filtert ab sofort keine Nachrichten mehr."
+  ],
+  "A webhook posts into one channel through its address.": [
+    "يرسل الويب هوك رسائل إلى قناة واحدة عبر عنوانه.",
+    "Ein Webhook postet über seine Adresse in einen Kanal."
+  ],
+  "Anything that still posts with its address will stop working.": [
+    "كل ما يزال ينشر عبر عنوانه سيتوقف عن العمل.",
+    "Alles, was noch über seine Adresse postet, funktioniert nicht mehr."
+  ],
+  "Copy address": [
+    "نسخ العنوان",
+    "Adresse kopieren"
+  ],
+  "Create one above.": [
+    "أنشئ واحداً في الأعلى.",
+    "Erstelle oben einen."
+  ],
+  "Delete rule": [
+    "حذف القاعدة",
+    "Regel löschen"
+  ],
+  "Delete this invite?": [
+    "حذف هذه الدعوة؟",
+    "Diese Einladung löschen?"
+  ],
+  "Delete this rule?": [
+    "حذف هذه القاعدة؟",
+    "Diese Regel löschen?"
+  ],
+  "Delete this webhook?": [
+    "حذف هذا الويب هوك؟",
+    "Diesen Webhook löschen?"
+  ],
+  "Edit webhook": [
+    "تعديل الويب هوك",
+    "Webhook bearbeiten"
+  ],
+  "Every channel and message is removed and it can't be undone. Type the server name to confirm. If you use two-step sign-in, you will be asked for your code next.": [
+    "تُحذف كل القنوات والرسائل ولا يمكن التراجع. اكتب اسم السيرفر للتأكيد. إن كنت تستخدم التحقق بخطوتين فسيُطلب منك رمزك بعد ذلك.",
+    "Alle Kanäle und Nachrichten werden entfernt, das lässt sich nicht rückgängig machen. Gib zur Bestätigung den Servernamen ein. Bei Zwei-Schritt-Anmeldung wirst du danach nach deinem Code gefragt."
+  ],
+  "Legal hold is on, but no copy of this content exists. It could not be found, or this kind of content cannot be copied. Keep your own record of it.": [
+    "الحفظ القانوني مفعّل، لكن لا توجد نسخة من هذا المحتوى: تعذّر العثور عليه أو لا يمكن نسخ هذا النوع من المحتوى. احتفظ بسجل خاص بك عنه.",
+    "Die rechtliche Sperre ist aktiv, aber es gibt keine Kopie dieses Inhalts. Er wurde nicht gefunden, oder diese Art von Inhalt lässt sich nicht kopieren. Halte ihn selbst fest."
+  ],
+  "Lift this ban?": [
+    "رفع هذا الحظر؟",
+    "Diesen Bann aufheben?"
+  ],
+  "New webhook": [
+    "ويب هوك جديد",
+    "Neuer Webhook"
+  ],
+  "Terms of Service": [
+    "شروط الخدمة",
+    "Nutzungsbedingungen"
+  ],
+  "The link stops working at once for everyone who has it.": [
+    "يتوقف الرابط عن العمل فوراً لدى كل من يملكه.",
+    "Der Link funktioniert sofort für niemanden mehr."
+  ],
+  "There is no channel where you can manage webhooks.": [
+    "لا توجد قناة يمكنك فيها إدارة الويب هوك.",
+    "Es gibt keinen Kanal, in dem du Webhooks verwalten darfst."
+  ],
+  "Use at most 32 characters.": [
+    "استخدم 32 حرفاً كحد أقصى.",
+    "Verwende höchstens 32 Zeichen."
+  ],
+  "{0} can join the server again.": [
+    "يستطيع {0} الانضمام إلى السيرفر مجدداً.",
+    "{0} kann dem Server wieder beitreten."
+  ]
+}

@@ -1,0 +1,38 @@
+{
+  "Choose what interests you to get its role instantly; choose it again to remove it. Your other roles stay with you.": [
+    "اختر ما يهمّك لتحصل على دوره فورًا، واختره مرة أخرى لإزالته. تبقى أدوارك الأخرى كما هي.",
+    "Wähle, was dich interessiert, um sofort die Rolle dazu zu erhalten; wähle es erneut, um sie zu entfernen. Deine anderen Rollen bleiben."
+  ],
+  "You have this role. Choose again to remove it.": [
+    "لديك هذا الدور. اختره مرة أخرى لإزالته.",
+    "Du hast diese Rolle. Wähle erneut, um sie zu entfernen."
+  ],
+  "Get the {0} role": [
+    "احصل على دور {0}",
+    "Rolle {0} erhalten"
+  ],
+  "Role: {0}": [
+    "الدور: {0}",
+    "Rolle: {0}"
+  ],
+  "Move answer {0} up": [
+    "انقل الإجابة {0} إلى الأعلى",
+    "Antwort {0} nach oben"
+  ],
+  "Move answer {0} down": [
+    "انقل الإجابة {0} إلى الأسفل",
+    "Antwort {0} nach unten"
+  ],
+  "Write the question.": [
+    "اكتب السؤال.",
+    "Schreib die Frage."
+  ],
+  "Write the answer.": [
+    "اكتب الإجابة.",
+    "Schreib die Antwort."
+  ],
+  "Choose the role this answer gives.": [
+    "اختر الدور الذي تمنحه هذه الإجابة.",
+    "Wähle die Rolle, die diese Antwort vergibt."
+  ]
+}

@@ -1,0 +1,66 @@
+{
+  "{0, plural, one {# message} other {# messages}}": [
+    "{0, plural, zero {لا رسائل} one {رسالة واحدة} two {رسالتان} few {# رسائل} many {# رسالةً} other {# رسالة}}",
+    "{0, plural, one {# Nachricht} other {# Nachrichten}}"
+  ],
+  "Add tag": ["إضافة وسم", "Tag hinzufügen"],
+  "Archive thread": ["أرشفة الخيط", "Thread archivieren"],
+  "archived": ["مؤرشف", "archiviert"],
+  "Every post needs a tag": ["كل منشور يحتاج وسمًا", "Jeder Beitrag braucht einen Tag"],
+  "Filter posts": ["تصفية المنشورات", "Beiträge filtern"],
+  "First message (optional)": ["الرسالة الأولى (اختيارية)", "Erste Nachricht (optional)"],
+  "Forum": ["منتدى", "Forum"],
+  "Lock thread": ["قفل الخيط", "Thread sperren"],
+  "Lock thread: only moderators can write": [
+    "قفل الخيط: لا يكتب فيه إلا المشرفون",
+    "Thread sperren: nur Moderatoren können schreiben"
+  ],
+  "Members pick up to five tags for each post, and everyone can filter posts by tag.": [
+    "يختار الأعضاء حتى خمسة وسوم لكل منشور، ويستطيع الجميع تصفية المنشورات حسب الوسم.",
+    "Mitglieder wählen bis zu fünf Tags pro Beitrag, und alle können Beiträge nach Tag filtern."
+  ],
+  "New post": ["منشور جديد", "Neuer Beitrag"],
+  "New posts need at least one of the tags above.": [
+    "تحتاج المنشورات الجديدة إلى وسم واحد على الأقل من الوسوم أعلاه.",
+    "Neue Beiträge brauchen mindestens einen der Tags oben."
+  ],
+  "New thread": ["خيط جديد", "Neuer Thread"],
+  "No archived threads.": ["لا توجد خيوط مؤرشفة.", "Keine archivierten Threads."],
+  "No posts yet. Start the first one.": [
+    "لا توجد منشورات بعد. ابدأ أول منشور.",
+    "Noch keine Beiträge. Schreib den ersten."
+  ],
+  "No tags yet.": ["لا توجد وسوم بعد.", "Noch keine Tags."],
+  "No threads yet. Start one from a message or here.": [
+    "لا توجد خيوط بعد. ابدأ خيطًا من رسالة أو من هنا.",
+    "Noch keine Threads. Starte einen aus einer Nachricht oder hier."
+  ],
+  "Nothing matches this filter.": ["لا شيء يطابق هذه التصفية.", "Nichts passt zu diesem Filter."],
+  "Open thread": ["فتح الخيط", "Thread öffnen"],
+  "Post": ["نشر", "Veröffentlichen"],
+  "Post text": ["نص المنشور", "Text des Beitrags"],
+  "Posting": ["النشر", "Beiträge"],
+  "Posts couldn't be loaded.": ["تعذّر تحميل المنشورات.", "Beiträge konnten nicht geladen werden."],
+  "Posts with a title and tags; each post has its own conversation.": [
+    "منشورات بعنوان ووسوم، ولكل منشور محادثته الخاصة.",
+    "Beiträge mit Titel und Tags; jeder Beitrag hat sein eigenes Gespräch."
+  ],
+  "Remove tag {0}": ["إزالة الوسم {0}", "Tag {0} entfernen"],
+  "Reopen thread": ["إعادة فتح الخيط", "Thread wieder öffnen"],
+  "Start a thread": ["بدء خيط", "Thread starten"],
+  "Start thread": ["بدء خيط", "Thread starten"],
+  "Tag name": ["اسم الوسم", "Tag-Name"],
+  "Tags (choose at least one)": ["الوسوم (اختر واحدًا على الأقل)", "Tags (wähle mindestens einen)"],
+  "This thread is archived. A new message reopens it.": [
+    "هذا الخيط مؤرشف، وأي رسالة جديدة تعيد فتحه.",
+    "Dieser Thread ist archiviert. Eine neue Nachricht öffnet ihn wieder."
+  ],
+  "This thread is locked. Only moderators can write.": [
+    "هذا الخيط مقفل، ولا يكتب فيه إلا المشرفون.",
+    "Dieser Thread ist gesperrt. Nur Moderatoren können schreiben."
+  ],
+  "Thread name": ["اسم الخيط", "Name des Threads"],
+  "Threads": ["الخيوط", "Threads"],
+  "Threads couldn't be loaded.": ["تعذّر تحميل الخيوط.", "Threads konnten nicht geladen werden."],
+  "Unlock thread": ["فتح قفل الخيط", "Thread entsperren"]
+}

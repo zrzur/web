@@ -1,0 +1,198 @@
+{
+  "The bot": ["البوت", "Der Bot"],
+  "The bot did not respond in time.": [
+    "لم يستجب البوت في الوقت المحدد.",
+    "Der Bot hat nicht rechtzeitig geantwortet."
+  ],
+  "The bot is offline right now.": [
+    "البوت غير متصل حاليًا.",
+    "Der Bot ist gerade offline."
+  ],
+  "This bot is not available in this channel.": [
+    "هذا البوت غير متاح في هذه القناة.",
+    "Dieser Bot ist in diesem Kanal nicht verfügbar."
+  ],
+  "This command no longer exists.": [
+    "هذا الأمر لم يعد موجودًا.",
+    "Diesen Befehl gibt es nicht mehr."
+  ],
+  "You are not allowed to do this.": [
+    "لا تملك صلاحية القيام بهذا.",
+    "Das darfst du nicht."
+  ],
+  "Some of the values are not valid.": [
+    "بعض القيم غير صالحة.",
+    "Einige Werte sind ungültig."
+  ],
+  "This has expired.": ["انتهت صلاحية هذا.", "Das ist abgelaufen."],
+  "Slow down a little and try again.": [
+    "تمهّل قليلًا ثم حاول مجددًا.",
+    "Mach kurz langsamer und versuch es dann noch einmal."
+  ],
+  "Something went wrong.": ["حدث خطأ ما.", "Etwas ist schiefgelaufen."],
+  "is thinking…": ["يفكّر…", "denkt nach…"],
+  "Only you can see this": [
+    "هذه الرسالة تظهر لك وحدك",
+    "Nur du kannst das sehen"
+  ],
+  "Dismiss": ["إخفاء", "Ausblenden"],
+  "Fill in \"{0}\".": ["املأ «{0}».", "Fülle „{0}“ aus."],
+  "\"{0}\" needs at least {1} characters.": [
+    "«{0}» يحتاج {1} أحرف على الأقل.",
+    "„{0}“ braucht mindestens {1} Zeichen."
+  ],
+  "Choose an option for \"{0}\".": [
+    "اختر قيمة لـ«{0}».",
+    "Wähle eine Option für „{0}“."
+  ],
+  "This form has expired.": [
+    "انتهت صلاحية هذا النموذج.",
+    "Dieses Formular ist abgelaufen."
+  ],
+  "The form could not be sent.": [
+    "تعذّر إرسال النموذج.",
+    "Das Formular konnte nicht gesendet werden."
+  ],
+  "Submit": ["إرسال", "Absenden"],
+  "Choose…": ["اختر…", "Auswählen…"],
+  "Make a selection": ["اختر من القائمة", "Triff eine Auswahl"],
+  "Nothing found": ["لا نتائج", "Nichts gefunden"],
+  "{0} of {1} selected": ["تم اختيار {0} من {1}", "{0} von {1} ausgewählt"],
+  "Commands": ["الأوامر", "Befehle"],
+  "The command could not be used.": [
+    "تعذّر استخدام الأمر.",
+    "Der Befehl konnte nicht verwendet werden."
+  ],
+  "Sending…": ["جارٍ الإرسال…", "Wird gesendet…"],
+  "Send": ["إرسال", "Senden"],
+  "Yes": ["نعم", "Ja"],
+  "No": ["لا", "Nein"],
+  "Choose a role…": ["اختر دورًا…", "Rolle wählen…"],
+  "Choose a channel…": ["اختر قناة…", "Kanal wählen…"],
+  "Choose a member…": ["اختر عضوًا…", "Mitglied wählen…"],
+  "File options are not supported yet.": [
+    "خيارات الملفات غير مدعومة بعد.",
+    "Datei-Optionen werden noch nicht unterstützt."
+  ],
+  "Developer Portal": ["بوابة المطورين", "Entwicklerportal"],
+  "My applications": ["تطبيقاتي", "Meine Anwendungen"],
+  "New application": ["تطبيق جديد", "Neue Anwendung"],
+  "Overview": ["نظرة عامة", "Übersicht"],
+  "Interactions": ["التفاعلات", "Interaktionen"],
+  "Quickstart": ["البدء السريع", "Schnellstart"],
+  "Build bots for Zrzur": ["اصنع بوتات لزرزور", "Baue Bots für Zrzur"],
+  "An application is a bot account. Create one, register slash commands, and answer them with buttons, menus, forms and private replies.": [
+    "التطبيق هو حساب بوت. أنشئ واحدًا، وسجّل أوامر الشرطة المائلة، وأجب عنها بالأزرار والقوائم والنماذج والردود الخاصة.",
+    "Eine Anwendung ist ein Bot-Konto. Erstelle eins, registriere Slash-Befehle und beantworte sie mit Buttons, Menüs, Formularen und privaten Antworten."
+  ],
+  "Public application": ["تطبيق عام", "Öffentliche Anwendung"],
+  "Private application": ["تطبيق خاص", "Private Anwendung"],
+  "Copied": ["تم النسخ", "Kopiert"],
+  "Application ID (also the bot's user ID)": [
+    "معرّف التطبيق (وهو معرّف مستخدم البوت أيضًا)",
+    "Anwendungs-ID (zugleich die Benutzer-ID des Bots)"
+  ],
+  "Token and profile": ["الرمز والملف الشخصي", "Token und Profil"],
+  "The token, name, avatar, visibility and deletion are managed in the bot settings. Never share the token; anyone who has it controls the bot.": [
+    "تُدار الرموز والاسم والصورة والظهور والحذف من إعدادات البوت. لا تشارك الرمز أبدًا؛ فمن يملكه يتحكم بالبوت.",
+    "Token, Name, Avatar, Sichtbarkeit und Löschen verwaltest du in den Bot-Einstellungen. Teile das Token nie; wer es hat, steuert den Bot."
+  ],
+  "Open bot settings": ["فتح إعدادات البوت", "Bot-Einstellungen öffnen"],
+  "This is not valid JSON.": [
+    "هذا ليس JSON صالحًا.",
+    "Das ist kein gültiges JSON."
+  ],
+  "Confirm delete": ["تأكيد الحذف", "Löschen bestätigen"],
+  "Global commands appear in every server the bot is installed in. Bots usually register them from code with the SDK (syncCommands); you can also paste a JSON list here.": [
+    "تظهر الأوامر العامة في كل سيرفر ثُبّت فيه البوت. عادةً يسجّلها البوت من الكود عبر SDK (syncCommands)، ويمكنك أيضًا لصق قائمة JSON هنا.",
+    "Globale Befehle erscheinen auf jedem Server, auf dem der Bot installiert ist. Meist registriert der Bot sie im Code mit dem SDK (syncCommands); du kannst hier auch eine JSON-Liste einfügen."
+  ],
+  "No commands registered yet.": [
+    "لا توجد أوامر مسجّلة بعد.",
+    "Noch keine Befehle registriert."
+  ],
+  "Command": ["الأمر", "Befehl"],
+  "Type": ["النوع", "Typ"],
+  "Options": ["الخيارات", "Optionen"],
+  "Revision": ["المراجعة", "Revision"],
+  "Replace all global commands (JSON list)": [
+    "استبدال كل الأوامر العامة (قائمة JSON)",
+    "Alle globalen Befehle ersetzen (JSON-Liste)"
+  ],
+  "Saving…": ["جارٍ الحفظ…", "Wird gespeichert…"],
+  "Save commands": ["حفظ الأوامر", "Befehle speichern"],
+  "Gateway delivery": ["التسليم عبر البوابة", "Zustellung über das Gateway"],
+  "Interactions arrive as InteractionCreate events on the bot's own gateway connection. Answer within 3 seconds (or defer); the token then works for 15 minutes for edits and follow-ups. Interaction protocol version 1.": [
+    "تصل التفاعلات كأحداث InteractionCreate على اتصال البوابة الخاص بالبوت. أجب خلال 3 ثوانٍ (أو أجّل الرد)، ثم يبقى الرمز صالحًا 15 دقيقة للتعديل والمتابعات. إصدار بروتوكول التفاعلات 1.",
+    "Interaktionen kommen als InteractionCreate-Ereignisse über die eigene Gateway-Verbindung des Bots. Antworte innerhalb von 3 Sekunden (oder verschiebe die Antwort); danach gilt das Token 15 Minuten für Bearbeitungen und Folgenachrichten. Interaktionsprotokoll Version 1."
+  ],
+  "HTTP endpoint": ["نقطة HTTP", "HTTP-Endpunkt"],
+  "Not available yet. Bots receive interactions through the gateway.": [
+    "غير متاحة بعد. يتلقى البوت التفاعلات عبر البوابة.",
+    "Noch nicht verfügbar. Bots erhalten Interaktionen über das Gateway."
+  ],
+  "Copy the token from the bot settings into ZRZUR_BOT_TOKEN (never into code).": [
+    "انسخ الرمز من إعدادات البوت إلى المتغير ZRZUR_BOT_TOKEN (وليس داخل الكود أبدًا).",
+    "Kopiere das Token aus den Bot-Einstellungen in ZRZUR_BOT_TOKEN (nie in den Code)."
+  ],
+  "Invite the bot to a test server.": [
+    "ادعُ البوت إلى سيرفر تجريبي.",
+    "Lade den Bot auf einen Testserver ein."
+  ],
+  "Run the bot, then type / in a channel of that server.": [
+    "شغّل البوت، ثم اكتب / في قناة من ذلك السيرفر.",
+    "Starte den Bot und tippe dann / in einem Kanal dieses Servers."
+  ],
+  "Revoke access": ["إبطال الوصول", "Zugriff entziehen"],
+  "Confirm revoke": ["تأكيد الإبطال", "Entziehen bestätigen"],
+  "Authorized apps": ["التطبيقات المصرّح لها", "Autorisierte Apps"],
+  "Authorize": ["تفويض", "Autorisieren"],
+  "OAuth2": ["OAuth2", "OAuth2"],
+  "Client ID": ["معرّف العميل", "Client-ID"],
+  "Can't continue": ["تعذّرت المتابعة", "Weiter geht es nicht"],
+  "This authorization link is not valid.": [
+    "رابط التفويض هذا غير صالح.",
+    "Dieser Autorisierungslink ist ungültig."
+  ],
+  "wants to access your Zrzur account": [
+    "يريد الوصول إلى حسابك في زرزور",
+    "möchte auf dein Zrzur-Konto zugreifen"
+  ],
+  "This will allow it to:": ["سيسمح له هذا بأن:", "Damit darf es:"],
+  "Know your username and avatar": [
+    "يعرف اسم المستخدم والصورة",
+    "deinen Benutzernamen und dein Avatar sehen"
+  ],
+  "See the names and icons of your servers": [
+    "يرى أسماء سيرفراتك وأيقوناتها",
+    "Namen und Symbole deiner Server sehen"
+  ],
+  "Let its commands be used in the server": [
+    "يتيح استخدام أوامره في السيرفر",
+    "seine Befehle auf dem Server nutzbar machen"
+  ],
+  "Add its bot to a server you manage": [
+    "يضيف بوته إلى سيرفر تديره",
+    "seinen Bot zu einem Server hinzufügen, den du verwaltest"
+  ],
+  "Add to server": ["إضافة إلى سيرفر", "Zu Server hinzufügen"],
+  "Choose a server…": ["اختر سيرفرًا…", "Server wählen…"],
+  "The bot's permissions there:": [
+    "صلاحيات البوت هناك:",
+    "Rechte des Bots dort:"
+  ],
+  "Other permissions": ["صلاحيات أخرى", "Weitere Rechte"],
+  "You don't manage any server it can be added to.": [
+    "لا تدير أي سيرفر يمكن إضافته إليه.",
+    "Du verwaltest keinen Server, zu dem er hinzugefügt werden kann."
+  ],
+  "You can't give the bot permissions you don't have in that server.": [
+    "لا يمكنك منح البوت صلاحيات لا تملكها في ذلك السيرفر.",
+    "Du kannst dem Bot keine Rechte geben, die du dort selbst nicht hast."
+  ],
+  "The bot is already in that server.": [
+    "البوت موجود في ذلك السيرفر.",
+    "Der Bot ist schon auf diesem Server."
+  ],
+  "No apps yet.": ["لا توجد تطبيقات بعد.", "Noch keine Apps."]
+}

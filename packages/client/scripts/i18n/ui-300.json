@@ -1,0 +1,458 @@
+{
+  "30 minutes": [
+    "30 دقيقة",
+    "30 Minuten"
+  ],
+  "1 hour": [
+    "ساعة واحدة",
+    "1 Stunde"
+  ],
+  "6 hours": [
+    "6 ساعات",
+    "6 Stunden"
+  ],
+  "12 hours": [
+    "12 ساعة",
+    "12 Stunden"
+  ],
+  "1 day": [
+    "يوم واحد",
+    "1 Tag"
+  ],
+  "7 days": [
+    "7 أيام",
+    "7 Tage"
+  ],
+  "Never": [
+    "أبدًا",
+    "Nie"
+  ],
+  "Expires after": [
+    "تنتهي الصلاحية بعد",
+    "Läuft ab nach"
+  ],
+  "Max uses": [
+    "الحد الأقصى للاستخدام",
+    "Max. Nutzungen"
+  ],
+  "This link never expires.": [
+    "لا تنتهي صلاحية هذا الرابط.",
+    "Dieser Link läuft nie ab."
+  ],
+  "This link expires after {0}.": [
+    "تنتهي صلاحية هذا الرابط بعد {0}.",
+    "Dieser Link läuft nach {0} ab."
+  ],
+  "{0} of {1} uses": [
+    "استُخدم {0} من {1}",
+    "{0} von {1} Nutzungen"
+  ],
+  "{0} uses": [
+    "استُخدم {0} مرة",
+    "{0} Nutzungen"
+  ],
+  "Never expires": [
+    "لا تنتهي صلاحيته",
+    "Läuft nie ab"
+  ],
+  "{0} min left": [
+    "بقيت {0} دقيقة",
+    "noch {0} Min."
+  ],
+  "{0} h left": [
+    "بقيت {0} ساعة",
+    "noch {0} Std."
+  ],
+  "{0} days left": [
+    "بقي {0} يوم",
+    "noch {0} Tage"
+  ],
+  "Load more members": [
+    "حمّل مزيدًا من الأعضاء",
+    "Weitere Mitglieder laden"
+  ],
+  "Sent by {0}": [
+    "أرسلها {0}",
+    "Gesendet von {0}"
+  ],
+  "via {0}": [
+    "عبر {0}",
+    "über {0}"
+  ],
+  "Everyone can post under another name": [
+    "يستطيع الجميع النشر باسم آخر",
+    "Alle können unter einem anderen Namen schreiben"
+  ],
+  "Members can send messages with any name and picture, for example “Admin”. Turn this off unless your server needs it; you can still give it to a role.": [
+    "يستطيع الأعضاء إرسال رسائل بأي اسم وصورة، مثل «المشرف». أوقِف هذا الخيار ما لم يحتجه سيرفرك، ويمكنك منحه لرتبة بعينها.",
+    "Mitglieder können Nachrichten mit beliebigem Namen und Bild senden, zum Beispiel „Admin“. Schalte das aus, wenn dein Server es nicht braucht; du kannst es weiterhin einer Rolle geben."
+  ],
+  "Turn off": [
+    "أوقِف",
+    "Ausschalten"
+  ],
+  "Safety": [
+    "الأمان",
+    "Sicherheit"
+  ],
+  "Verification level": [
+    "مستوى التحقق",
+    "Verifizierungsstufe"
+  ],
+  "What new members need before they can send messages, react or join voice. Members with any role are exempt.": [
+    "ما يحتاجه الأعضاء الجدد قبل أن يرسلوا الرسائل أو يتفاعلوا أو ينضموا إلى الصوت. الأعضاء الذين لديهم أي رتبة مستثنون.",
+    "Was neue Mitglieder brauchen, bevor sie Nachrichten senden, reagieren oder dem Sprachkanal beitreten können. Mitglieder mit einer Rolle sind ausgenommen."
+  ],
+  "Anyone in the server can talk right away.": [
+    "يستطيع كل من في السيرفر التحدث فورًا.",
+    "Alle im Server können sofort schreiben."
+  ],
+  "A verified email address.": [
+    "بريد إلكتروني مؤكَّد.",
+    "Eine bestätigte E-Mail-Adresse."
+  ],
+  "A verified email, and an account older than 5 minutes.": [
+    "بريد إلكتروني مؤكَّد، وحساب أقدم من 5 دقائق.",
+    "Eine bestätigte E-Mail-Adresse und ein Konto, das älter als 5 Minuten ist."
+  ],
+  "All of the above, and 10 minutes in this server.": [
+    "كل ما سبق، و10 دقائق في هذا السيرفر.",
+    "Alles oben Genannte und 10 Minuten in diesem Server."
+  ],
+  "This server asks you to verify your email address before you talk here.": [
+    "يطلب هذا السيرفر تأكيد بريدك الإلكتروني قبل أن تتحدث فيه.",
+    "Dieser Server verlangt eine bestätigte E-Mail-Adresse, bevor du hier schreibst."
+  ],
+  "This server asks for accounts older than 5 minutes. You can talk here in {minutes} min.": [
+    "يطلب هذا السيرفر حسابات أقدم من 5 دقائق. يمكنك التحدث هنا بعد {minutes} دقيقة.",
+    "Dieser Server verlangt Konten, die älter als 5 Minuten sind. Du kannst hier in {minutes} Min. schreiben."
+  ],
+  "New members can talk here 10 minutes after joining. You can talk in {minutes} min.": [
+    "يستطيع الأعضاء الجدد التحدث هنا بعد 10 دقائق من الانضمام. يمكنك التحدث بعد {minutes} دقيقة.",
+    "Neue Mitglieder können hier 10 Minuten nach dem Beitritt schreiben. Du kannst in {minutes} Min. schreiben."
+  ],
+  "That name belongs to someone in this server.": [
+    "هذا الاسم يخص شخصًا في هذا السيرفر.",
+    "Dieser Name gehört jemandem in diesem Server."
+  ],
+  "{0} people joined within {1} min. This can be a raid.": [
+    "انضم {0} أشخاص خلال {1} دقيقة. قد يكون هذا هجومًا منسَّقًا.",
+    "{0} Personen sind innerhalb von {1} Min. beigetreten. Das kann ein Raid sein."
+  ],
+  "Invites are paused for 1 hour.": [
+    "الدعوات متوقفة لمدة ساعة.",
+    "Einladungen sind für 1 Stunde pausiert."
+  ],
+  "Pause invites": [
+    "أوقِف الدعوات",
+    "Einladungen pausieren"
+  ],
+  "Security actions": [
+    "إجراءات الأمان",
+    "Sicherheitsmaßnahmen"
+  ],
+  "Use these during a raid or spam wave. They end by themselves.": [
+    "استخدمها أثناء هجوم منسَّق أو موجة رسائل مزعجة. تنتهي من تلقاء نفسها.",
+    "Nutze sie bei einem Raid oder einer Spamwelle. Sie enden von selbst."
+  ],
+  "Nobody can join with an invite, the custom link or Discover.": [
+    "لا يستطيع أحد الانضمام بدعوة أو بالرابط المخصّص أو من «اكتشف».",
+    "Niemand kann über eine Einladung, den eigenen Link oder Entdecken beitreten."
+  ],
+  "Paused until {0}.": [
+    "متوقف حتى {0}.",
+    "Pausiert bis {0}."
+  ],
+  "Pause direct messages": [
+    "أوقِف الرسائل الخاصة",
+    "Direktnachrichten pausieren"
+  ],
+  "Members who aren't friends can't message each other.": [
+    "لا يستطيع الأعضاء غير الأصدقاء مراسلة بعضهم.",
+    "Mitglieder, die nicht befreundet sind, können sich nicht schreiben."
+  ],
+  "Pause for": [
+    "أوقِف لمدة",
+    "Pausieren für"
+  ],
+  "Pause for…": [
+    "أوقِف لمدة…",
+    "Pausieren für …"
+  ],
+  "Resume": [
+    "استأنِف",
+    "Fortsetzen"
+  ],
+  "This server paused new members for now. Try again later.": [
+    "أوقف هذا السيرفر انضمام أعضاء جدد مؤقتًا. حاول لاحقًا.",
+    "Dieser Server nimmt gerade keine neuen Mitglieder auf. Versuch es später noch einmal."
+  ],
+  "A server you share paused direct messages between members for now.": [
+    "أوقف سيرفر مشترك بينكما الرسائل الخاصة بين الأعضاء مؤقتًا.",
+    "Ein gemeinsamer Server hat Direktnachrichten zwischen Mitgliedern gerade pausiert."
+  ],
+  "Blocked words": [
+    "كلمات محظورة",
+    "Gesperrte Wörter"
+  ],
+  "Mention spam": [
+    "إشارات مزعجة",
+    "Erwähnungsspam"
+  ],
+  "Link spam": [
+    "روابط مزعجة",
+    "Linkspam"
+  ],
+  "Repeated messages": [
+    "رسائل مكرَّرة",
+    "Wiederholte Nachrichten"
+  ],
+  "blocks": [
+    "تحجب",
+    "blockiert"
+  ],
+  "alerts": [
+    "تنبّه",
+    "warnt"
+  ],
+  "times out": [
+    "تكتم مؤقتًا",
+    "schaltet stumm"
+  ],
+  "AutoMod": [
+    "الإشراف التلقائي",
+    "AutoMod"
+  ],
+  "Add rule": [
+    "أضف قاعدة",
+    "Regel hinzufügen"
+  ],
+  "Loading rules…": [
+    "جارٍ تحميل القواعد…",
+    "Regeln werden geladen …"
+  ],
+  "No rules yet": [
+    "لا توجد قواعد بعد",
+    "Noch keine Regeln"
+  ],
+  "New rule": [
+    "قاعدة جديدة",
+    "Neue Regel"
+  ],
+  "Edit rule": [
+    "عدّل القاعدة",
+    "Regel bearbeiten"
+  ],
+  "Looks for": [
+    "تبحث عن",
+    "Sucht nach"
+  ],
+  "Words and phrases": [
+    "كلمات وعبارات",
+    "Wörter und Sätze"
+  ],
+  "Always allowed": [
+    "مسموح دائمًا",
+    "Immer erlaubt"
+  ],
+  "When it matches": [
+    "عند المطابقة",
+    "Bei einem Treffer"
+  ],
+  "Not checked": [
+    "غير مشمول بالفحص",
+    "Nicht geprüft"
+  ],
+  "Block the message": [
+    "احجب الرسالة",
+    "Nachricht blockieren"
+  ],
+  "Send an alert to": [
+    "أرسل تنبيهًا إلى",
+    "Warnung senden an"
+  ],
+  "Time out for": [
+    "اكتم مؤقتًا لمدة",
+    "Stummschalten für"
+  ],
+  "Check the numbers.": [
+    "تحقّق من الأرقام.",
+    "Prüf die Zahlen."
+  ],
+  "1 minute": [
+    "دقيقة واحدة",
+    "1 Minute"
+  ],
+  "10 minutes": [
+    "10 دقائق",
+    "10 Minuten"
+  ],
+  "Rules couldn't be loaded": [
+    "تعذّر تحميل القواعد",
+    "Regeln konnten nicht geladen werden"
+  ],
+  "Rules the server checks before a message is posted. Bots and the owner are not checked.": [
+    "قواعد يفحص بها السيرفر الرسائل قبل نشرها. لا تشمل البوتات ولا المالك.",
+    "Regeln, die der Server vor dem Senden einer Nachricht prüft. Bots und der Eigentümer werden nicht geprüft."
+  ],
+  "Block words, mention spam, links from new members or the same message in many channels.": [
+    "احجب كلمات، أو الإشارات المزعجة، أو روابط الأعضاء الجدد، أو الرسالة نفسها في قنوات كثيرة.",
+    "Blockiere Wörter, Erwähnungsspam, Links von neuen Mitgliedern oder dieselbe Nachricht in vielen Kanälen."
+  ],
+  "Give the rule a name.": [
+    "سمِّ القاعدة.",
+    "Gib der Regel einen Namen."
+  ],
+  "Add at least one word or phrase.": [
+    "أضف كلمة أو عبارة واحدة على الأقل.",
+    "Füge mindestens ein Wort oder einen Satz hinzu."
+  ],
+  "Choose new members, allowed domains, or both.": [
+    "اختر الأعضاء الجدد أو النطاقات المسموح بها أو كليهما.",
+    "Wähle neue Mitglieder, erlaubte Domains oder beides."
+  ],
+  "Choose at least one action.": [
+    "اختر إجراءً واحدًا على الأقل.",
+    "Wähle mindestens eine Aktion."
+  ],
+  "One per line. Put * at the start or end to match part of a word.": [
+    "واحدة في كل سطر. ضع * في البداية أو النهاية لمطابقة جزء من كلمة.",
+    "Eins pro Zeile. Setze * an den Anfang oder das Ende, um einen Teil eines Wortes zu treffen."
+  ],
+  "Words that are fine, one per line": [
+    "كلمات مقبولة، واحدة في كل سطر",
+    "Wörter, die in Ordnung sind, eins pro Zeile"
+  ],
+  "Arabic matches with or without hamza, tashkeel and tatweel, and ة / ه, ى / ي alike.": [
+    "تُطابَق العربية بالهمزة وبدونها، وبالتشكيل والتطويل وبدونهما، وتُعامَل ة / ه و ى / ي معاملة واحدة.",
+    "Arabisch wird mit und ohne Hamza, Taschkil und Tatwil erkannt; ة / ه und ى / ي gelten als gleich."
+  ],
+  "Most mentions in one message": [
+    "أقصى عدد للإشارات في رسالة واحدة",
+    "Höchstens Erwähnungen pro Nachricht"
+  ],
+  "Links from members who joined less than": [
+    "روابط الأعضاء الذين انضموا قبل أقل من",
+    "Links von Mitgliedern, die beigetreten sind vor weniger als"
+  ],
+  "Allowed domains (optional)": [
+    "النطاقات المسموح بها (اختياري)",
+    "Erlaubte Domains (optional)"
+  ],
+  "One per line, for example zrzur.com": [
+    "واحد في كل سطر، مثل zrzur.com",
+    "Eine pro Zeile, zum Beispiel zrzur.com"
+  ],
+  "Same text in channels": [
+    "النص نفسه في عدد قنوات",
+    "Gleicher Text in Kanälen"
+  ],
+  "Within seconds": [
+    "خلال ثوانٍ",
+    "Innerhalb von Sekunden"
+  ],
+  "The member sees the rule's name as the reason.": [
+    "يرى العضو اسم القاعدة سببًا للحجب.",
+    "Das Mitglied sieht den Namen der Regel als Grund."
+  ],
+  "AutoMod flagged <0/> in <1/> ({0}):": [
+    "نبّه الإشراف التلقائي على <0/> في <1/> ({0}):",
+    "AutoMod hat <0/> in <1/> markiert ({0}):"
+  ],
+  "This server's AutoMod blocked your message: {0}": [
+    "حجب الإشراف التلقائي في هذا السيرفر رسالتك: {0}",
+    "Der AutoMod dieses Servers hat deine Nachricht blockiert: {0}"
+  ],
+  "was stopped by the AutoMod rule {0} in {1}": [
+    "أوقفته قاعدة الإشراف التلقائي {0} في {1}",
+    "wurde von der AutoMod-Regel {0} in {1} gestoppt"
+  ],
+  "Accept the server rules to start writing here.": [
+    "اقبل قواعد السيرفر لتبدأ الكتابة هنا.",
+    "Akzeptiere die Serverregeln, um hier zu schreiben."
+  ],
+  "Accept the rules": [
+    "اقبل القواعد",
+    "Regeln akzeptieren"
+  ],
+  "New members accept the rules": [
+    "الأعضاء الجدد يقبلون القواعد",
+    "Neue Mitglieder akzeptieren die Regeln"
+  ],
+  "Choose a rules channel first, in Channels.": [
+    "اختر قناة القواعد أولًا من «القنوات».",
+    "Wähle zuerst einen Regelkanal unter „Kanäle“."
+  ],
+  "People who join from now on accept the rules (in the Lobby or above the message box) before they can write.": [
+    "من ينضم من الآن فصاعدًا يقبل القواعد (في الردهة أو فوق مربع الرسالة) قبل أن يكتب.",
+    "Wer ab jetzt beitritt, akzeptiert die Regeln (in der Lobby oder über dem Nachrichtenfeld), bevor er schreiben kann."
+  ],
+  "Accept the server rules before you write here.": [
+    "اقبل قواعد السيرفر قبل أن تكتب هنا.",
+    "Akzeptiere die Serverregeln, bevor du hier schreibst."
+  ],
+  "Description (optional)": [
+    "الوصف (اختياري)",
+    "Beschreibung (optional)"
+  ],
+  "What this channel is for": [
+    "ما الغرض من هذه القناة",
+    "Wofür dieser Kanal da ist"
+  ],
+  "Only you and the roles or members you add can see it.": [
+    "لا يراها إلا أنت والرتب أو الأعضاء الذين تضيفهم.",
+    "Nur du und die Rollen oder Mitglieder, die du hinzufügst, sehen ihn."
+  ],
+  "Pinned at the top of the channel list, with a \"Read the rules\" button in the Lobby.": [
+    "مثبّتة أعلى قائمة القنوات، مع زر «اقرأ القواعد» في الردهة.",
+    "Oben in der Kanalliste angeheftet, mit der Schaltfläche „Regeln lesen“ in der Lobby."
+  ],
+  "Use emojis from other servers": [
+    "استخدام رموز تعبيرية من سيرفرات أخرى",
+    "Emojis aus anderen Servern verwenden"
+  ],
+  "Send and react with custom emojis from other servers": [
+    "الإرسال والتفاعل برموز تعبيرية مخصّصة من سيرفرات أخرى",
+    "Eigene Emojis aus anderen Servern senden und damit reagieren"
+  ],
+  "Powerful: give it only to people you trust.": [
+    "صلاحية قوية: امنحها فقط لمن تثق به.",
+    "Mächtig: gib das nur Leuten, denen du vertraust."
+  ],
+  "This can change almost anything in the server": [
+    "هذا يتيح تغيير كل شيء تقريبًا في السيرفر",
+    "Damit lässt sich fast alles im Server ändern"
+  ],
+  "Manage server, permissions and roles together are close to full control.": [
+    "إدارة السيرفر والصلاحيات والرتب معًا تعني تحكّمًا شبه كامل.",
+    "Server, Berechtigungen und Rollen verwalten zusammen ist fast volle Kontrolle."
+  ],
+  "At or above your highest role: only someone higher can change it.": [
+    "في مستوى أعلى رتبة لديك أو فوقها: لا يغيّرها إلا من هو أعلى.",
+    "Auf oder über deiner höchsten Rolle: Nur jemand weiter oben kann sie ändern."
+  ],
+  "You can't change this role": [
+    "لا يمكنك تغيير هذه الرتبة",
+    "Du kannst diese Rolle nicht ändern"
+  ],
+  "It is at or above your highest role. Only someone higher can change it.": [
+    "إنها في مستوى أعلى رتبة لديك أو فوقها. لا يغيّرها إلا من هو أعلى.",
+    "Sie liegt auf oder über deiner höchsten Rolle. Nur jemand weiter oben kann sie ändern."
+  ],
+  "Reason (optional)": [
+    "السبب (اختياري)",
+    "Grund (optional)"
+  ],
+  "Shown in the audit log": [
+    "يظهر في سجل التدقيق",
+    "Wird im Audit-Log angezeigt"
+  ],
+  "Join muted": [
+    "انضم مكتوم الصوت",
+    "Stumm beitreten"
+  ],
+  "Join with microphone on": [
+    "انضم والميكروفون مفعّل",
+    "Mit Mikrofon beitreten"
+  ]
+}

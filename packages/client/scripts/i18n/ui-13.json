@@ -1,0 +1,70 @@
+{
+  "{0} Wings": ["الأجنحة: {0}", "{0} Flügel"],
+  "{0} free Wing": ["أجنحة مجانية: {0}", "{0} kostenloser Flügel"],
+  "Bigger uploads, longer messages, sharper streams and a free Wing, for {0} a month.": [
+    "ملفات أكبر، رسائل أطول، بث أوضح، وجناح مجاني، مقابل {0} شهرياً.",
+    "Größere Uploads, längere Nachrichten, schärfere Streams und ein kostenloser Flügel für {0} im Monat."
+  ],
+  "Each Wing counts towards a server's level. Move them any time; they leave a server with you.": [
+    "كل جناح يُحسب في مستوى السيرفر. انقله متى شئت، وهو يخرج معك إذا غادرت السيرفر.",
+    "Jeder Flügel zählt zur Stufe eines Servers. Du kannst ihn jederzeit verschieben; verlässt du einen Server, geht er mit."
+  ],
+  "Every Wing lifts this server for everyone in it. Any member can give one.": [
+    "كل جناح يرفع هذا السيرفر لكل من فيه. أي عضو يستطيع أن يهدي جناحاً.",
+    "Jeder Flügel hebt diesen Server für alle darin. Jedes Mitglied kann einen schenken."
+  ],
+  "Wings renewal, {name}": [
+    "تجديد الأجنحة، {name}",
+    "Verlängerung Flügel, {name}"
+  ],
+  "Wing, {name}": ["جناح، {name}", "Flügel, {name}"],
+  "Wings for {0}": ["أجنحة لـ {0}", "Flügel für {0}"],
+  "Wings for servers": ["أجنحة للسيرفرات", "Flügel für Server"],
+  "Gave Wings": ["أهدوا أجنحة", "Haben Flügel geschenkt"],
+  "Give": ["إهداء", "Schenken"],
+  "Give a Wing": ["أهدِ جناحاً", "Einen Flügel schenken"],
+  "Give Wing": ["إهداء جناح", "Flügel schenken"],
+  "Give Wings": ["أهدِ أجنحة", "Flügel schenken"],
+  "Give your free Wing": [
+    "أهدِ جناحك المجاني",
+    "Deinen kostenlosen Flügel schenken"
+  ],
+  "Highest level!": ["أعلى مستوى!", "Höchste Stufe!"],
+  "Included Wings": ["الأجنحة المشمولة", "Enthaltene Flügel"],
+  "Level {0} unlocked for everyone here": [
+    "المستوى {0} مفتوح لكل من هنا",
+    "Stufe {0} für alle hier freigeschaltet"
+  ],
+  "Move Wing": ["نقل الجناح", "Flügel verschieben"],
+  "No Wings yet": ["لا توجد أجنحة بعد", "Noch keine Flügel"],
+  "Open a server's menu and choose Give Wings. Each one is {0} a month.": [
+    "افتح قائمة السيرفر واختر «أهدِ أجنحة». كل جناح بـ {0} شهرياً.",
+    "Öffne das Menü eines Servers und wähle „Flügel schenken“. Jeder kostet {0} im Monat."
+  ],
+  "Feather comes with a free Wing": [
+    "ريشة تأتي مع جناح مجاني",
+    "Feather enthält einen kostenlosen Flügel"
+  ],
+  "Put it on any server you love: more emoji slots, bigger uploads and better voice for everyone there. Server menu, then Give Wings.": [
+    "أهدِه لأي سيرفر تحبه: خانات إيموجي أكثر، ورفع ملفات أكبر، وصوت أوضح للجميع هناك. من قائمة السيرفر، ثم «أهدِ أجنحة».",
+    "Schenk ihn einem Server, den du magst: mehr Emoji-Plätze, größere Uploads und bessere Sprache für alle dort. Servermenü, dann „Flügel schenken“."
+  ],
+  "Servers level up when members give them Wings, for {0} a month each. Every level unlocks perks for everyone in the server, and you can see it from the server's menu, under Give Wings.": [
+    "ترتفع مستويات السيرفرات عندما يهديها الأعضاء أجنحة، بـ {0} شهرياً لكل جناح. كل مستوى يفتح مزايا لكل من في السيرفر، وتراه من قائمة السيرفر تحت «أهدِ أجنحة».",
+    "Server steigen auf, wenn Mitglieder ihnen Flügel schenken, für {0} im Monat pro Flügel. Jede Stufe schaltet Vorteile für alle auf dem Server frei; du siehst sie im Servermenü unter „Flügel schenken“."
+  ],
+  "Take one back": ["استرجع واحدًا", "Einen zurücknehmen"],
+  "Unlocked": ["مفتوح", "Freigeschaltet"],
+  "Voice quality. Servers with more feathers sound clearer.": [
+    "جودة الصوت. السيرفرات التي فيها ريش أكثر صوتها أوضح.",
+    "Sprachqualität. Server mit mehr Federn klingen klarer."
+  ],
+  "You gave this server ×{0}": [
+    "أهديت هذا السيرفر ×{0}",
+    "Du hast diesem Server ×{0} geschenkt"
+  ],
+  "You have as many Wings as one member can hold.": [
+    "وصلت إلى الحد الأقصى من الأجنحة المسموح بها للعضو الواحد.",
+    "Du hast so viele Flügel, wie ein Mitglied haben kann."
+  ]
+}

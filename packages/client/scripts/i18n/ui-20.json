@@ -1,0 +1,29 @@
+{
+  "{0} / month": ["{0} / شهرياً", "{0} / Monat"],
+  "{0} / month each": ["{0} / شهرياً لكل ريشة", "{0} / Monat pro Feder"],
+  "A note on money": ["كلمة عن المال", "Ein Wort zum Geld"],
+  "A server's members share the cost of better uploads and voice.": [
+    "أعضاء السيرفر يتقاسمون تكلفة رفع أكبر وصوت أنقى.",
+    "Die Mitglieder eines Servers teilen sich die Kosten für größere Uploads und besseren Sound."
+  ],
+  "Big files kept for good and sharp streams cost the most.": [
+    "الملفات الكبيرة المحفوظة للأبد والبث الواضح هي الأكثر تكلفة.",
+    "Große Dateien, die für immer bleiben, und scharfe Streams kosten am meisten."
+  ],
+  "Discover promotion": ["الترويج في الاستكشاف", "Werbung auf Discover"],
+  "Every new person adds to those bills. Talking stays free for everyone, so the paid extras are what keep the lights on, for the people who pay and the people who don't.": [
+    "كل شخص جديد يزيد هذه الفواتير. الحديث يبقى مجانياً للجميع، والإضافات المدفوعة هي ما يُبقي المكان قائماً، لمن يدفع ولمن لا يدفع.",
+    "Jede neue Person erhöht diese Rechnungen. Reden bleibt für alle kostenlos, also halten die bezahlten Extras das Licht an, für alle, die zahlen, und alle, die es nicht tun."
+  ],
+  "I built Zrzur and I pay for every part of it myself: the servers, the storage, the voice. No investors, no ads based on your data or messages, and your data isn't for sale.": [
+    "بنيتُ زرزور وأدفع كل تكاليفه بنفسي: السيرفرات، والتخزين، والصوت. لا مستثمرين، ولا إعلانات مبنية على بياناتك أو رسائلك، وبياناتك ليست للبيع.",
+    "Ich habe Zrzur gebaut und bezahle jeden Teil davon selbst: die Server, den Speicher, die Sprache. Keine Investoren, keine Werbung auf Basis deiner Daten oder Nachrichten, und deine Daten stehen nicht zum Verkauf."
+  ],
+  "Paid once, never renews. Today's prices are launch prices.": [
+    "تدفع مرة واحدة، ولا يتجدد. أسعار اليوم أسعار إطلاق.",
+    "Einmal bezahlt, verlängert sich nie. Die heutigen Preise sind Startpreise."
+  ],
+  "per 7 days": ["لكل 7 أيام", "pro 7 Tage"],
+  "Thanks for being here.": ["شكراً لوجودك هنا.", "Danke, dass du hier bist."],
+  "Where your money goes": ["أين يذهب مالك", "Wohin dein Geld geht"]
+}

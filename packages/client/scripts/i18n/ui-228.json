@@ -1,0 +1,54 @@
+{
+  "Verification": ["التوثيق", "Verifizierung"],
+  "Unverified bots can join up to 100 servers. Past 100 servers, privileged intents stay on only after Trust & Safety approves them.": [
+    "يمكن للبوتات غير الموثّقة الانضمام إلى 100 سيرفر كحد أقصى. وبعد 100 سيرفر لا تبقى الصلاحيات المميّزة مفعّلة إلا بعد موافقة فريق الثقة والأمان.",
+    "Nicht verifizierte Bots können bis zu 100 Servern beitreten. Ab 100 Servern bleiben privilegierte Intents nur aktiv, wenn Trust & Safety sie genehmigt."
+  ],
+  "Request sent": ["أُرسل الطلب", "Anfrage gesendet"],
+  "Trust & Safety will look at it and answer here.": [
+    "سيراجعه فريق الثقة والأمان ويردّ هنا.",
+    "Trust & Safety prüft sie und antwortet hier."
+  ],
+  "This bot can join any number of servers.": [
+    "يمكن لهذا البوت الانضمام إلى أي عدد من السيرفرات.",
+    "Dieser Bot kann beliebig vielen Servern beitreten."
+  ],
+  "Request declined": ["رُفض الطلب", "Anfrage abgelehnt"],
+  "You can send a new request with more detail.": [
+    "يمكنك إرسال طلب جديد بتفاصيل أكثر.",
+    "Du kannst eine neue Anfrage mit mehr Details senden."
+  ],
+  "Why does your bot need this?": [
+    "لماذا يحتاج بوتك إلى هذا؟",
+    "Wofür braucht dein Bot das?"
+  ],
+  "Request verification": ["طلب التوثيق", "Verifizierung anfragen"],
+  "Say in a sentence or two what the bot does with them.": [
+    "اذكر في جملة أو جملتين ما يفعله البوت بها.",
+    "Beschreibe in ein, zwei Sätzen, was der Bot damit macht."
+  ],
+  "Verified bot": ["بوت موثّق", "Verifizierter Bot"],
+  "Bots": ["البوتات", "Bots"],
+  "Bot requests couldn't be loaded.": [
+    "تعذّر تحميل طلبات البوتات.",
+    "Bot-Anfragen konnten nicht geladen werden."
+  ],
+  "No bot requests waiting.": [
+    "لا توجد طلبات بوتات بانتظار المراجعة.",
+    "Keine Bot-Anfragen offen."
+  ],
+  "Message content": ["محتوى الرسائل", "Nachrichteninhalt"],
+  "Server members": ["أعضاء السيرفر", "Servermitglieder"],
+  "Presence": ["الحالة", "Präsenz"],
+  "Tell the owner why, so they can try again.": [
+    "أخبر المالك بالسبب ليتمكن من المحاولة مجددًا.",
+    "Sag dem Inhaber, warum, damit er es erneut versuchen kann."
+  ],
+  "Owner": ["المالك", "Inhaber"],
+  "Servers: {0}": ["السيرفرات: {0}", "Server: {0}"],
+  "Verification only": ["توثيق فقط", "Nur Verifizierung"],
+  "Intents: {0}": ["الصلاحيات: {0}", "Intents: {0}"],
+  "Note to the owner": ["ملاحظة للمالك", "Notiz an den Inhaber"],
+  "Decline": ["رفض", "Ablehnen"],
+  "Verify and approve": ["توثيق وموافقة", "Verifizieren und genehmigen"]
+}

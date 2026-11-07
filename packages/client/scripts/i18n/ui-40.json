@@ -1,0 +1,126 @@
+{
+  "{count} Wings, {name}": [
+    "{count} أجنحة، {name}",
+    "{count} Flügel, {name}"
+  ],
+  "Being confirmed": ["قيد التأكيد", "Wird bestätigt"],
+  "Cancel purchase": ["إلغاء الشراء", "Kauf abbrechen"],
+  "Change your card, download invoices and see past payments on our payment partner's secure page.": [
+    "غيّر بطاقتك ونزّل الفواتير واطّلع على مدفوعاتك السابقة في صفحة شريك الدفع الآمنة.",
+    "Ändere deine Karte, lade Rechnungen herunter und sieh dir frühere Zahlungen auf der sicheren Seite unseres Zahlungspartners an."
+  ],
+  "Continue to payment": ["المتابعة إلى الدفع", "Weiter zur Zahlung"],
+  "Disputed": ["معترَض عليها", "Angefochten"],
+  "Finish paying on the secure payment page that opened. This window updates by itself once the payment is confirmed.": [
+    "أكمل الدفع في صفحة الدفع الآمنة التي فُتحت. تتحدّث هذه النافذة تلقائيًا بعد تأكيد الدفع.",
+    "Schließe die Zahlung auf der sicheren Zahlungsseite ab, die sich geöffnet hat. Dieses Fenster aktualisiert sich von selbst, sobald die Zahlung bestätigt ist."
+  ],
+  "Given by Zrzur. Ends on {0}, nothing renews.": [
+    "مقدَّم من زرزور. ينتهي في {0}، ولا يتجدد.",
+    "Von Zrzur geschenkt. Endet am {0}, nichts verlängert sich."
+  ],
+  "Invoice": ["الفاتورة", "Rechnung"],
+  "Needs your confirmation": ["بحاجة إلى تأكيدك", "Braucht deine Bestätigung"],
+  "Not open yet": ["غير متاح بعد", "Noch nicht geöffnet"],
+  "Open payment page": ["افتح صفحة الدفع", "Zahlungsseite öffnen"],
+  "Partly refunded": ["مسترَدّ جزئيًا", "Teilweise erstattet"],
+  "Payment": ["الدفع", "Zahlung"],
+  "Payment complete": ["تمّ الدفع", "Zahlung abgeschlossen"],
+  "Payment failed": ["فشل الدفع", "Zahlung fehlgeschlagen"],
+  "Payment methods and invoices": [
+    "طرق الدفع والفواتير",
+    "Zahlungsmethoden und Rechnungen"
+  ],
+  "Payment updated": ["تم تحديث الدفع", "Zahlung aktualisiert"],
+  "Purchase cancelled": ["أُلغي الشراء", "Kauf abgebrochen"],
+  "Purchases aren't open yet.": [
+    "الشراء غير متاح بعد.",
+    "Käufe sind noch nicht geöffnet."
+  ],
+  "Purchases aren't open yet. Nothing can be bought or charged right now.": [
+    "الشراء غير متاح بعد. لا يمكن شراء أي شيء أو خصم أي مبلغ حاليًا.",
+    "Käufe sind noch nicht geöffnet. Im Moment kann nichts gekauft oder belastet werden."
+  ],
+  "Purchases aren't open yet. Nothing was charged.": [
+    "الشراء غير متاح بعد. لم يُخصم أي مبلغ.",
+    "Käufe sind noch nicht geöffnet. Es wurde nichts belastet."
+  ],
+  "Purchases aren't open yet. You can look around, but nothing can be bought or charged right now.": [
+    "الشراء غير متاح بعد. يمكنك التصفّح، لكن لا يمكن شراء أي شيء أو خصم أي مبلغ حاليًا.",
+    "Käufe sind noch nicht geöffnet. Du kannst dich umsehen, aber im Moment kann nichts gekauft oder belastet werden."
+  ],
+  "Receipt": ["الإيصال", "Beleg"],
+  "Renewal payment failed": [
+    "فشل دفع التجديد",
+    "Verlängerungszahlung fehlgeschlagen"
+  ],
+  "Still waiting. If you paid, it will show up in Subscriptions as soon as the payment is confirmed.": [
+    "ما زلنا ننتظر. إذا كنت قد دفعت، فسيظهر ذلك في الاشتراكات فور تأكيد الدفع.",
+    "Wir warten noch. Wenn du bezahlt hast, erscheint es unter Abonnements, sobald die Zahlung bestätigt ist."
+  ],
+  "Test mode: no real money is charged.": [
+    "وضع الاختبار: لا يُخصم أي مال حقيقي.",
+    "Testmodus: Es wird kein echtes Geld belastet."
+  ],
+  "Test mode: no real money is charged. Card details are only ever entered on the payment provider's own page.": [
+    "وضع الاختبار: لا يُخصم أي مال حقيقي. تُدخَل بيانات البطاقة فقط في صفحة مزوّد الدفع نفسه.",
+    "Testmodus: Es wird kein echtes Geld belastet. Kartendaten werden nur auf der eigenen Seite des Zahlungsanbieters eingegeben."
+  ],
+  "Test mode: payments run in the payment provider's test environment. Use its test cards; no real money is charged.": [
+    "وضع الاختبار: تتم المدفوعات في بيئة الاختبار لدى مزوّد الدفع. استخدم بطاقات الاختبار الخاصة به؛ لا يُخصم أي مال حقيقي.",
+    "Testmodus: Zahlungen laufen in der Testumgebung des Zahlungsanbieters. Nutze dessen Testkarten; es wird kein echtes Geld belastet."
+  ],
+  "Test mode: use a test card from the payment provider. No real money is charged.": [
+    "وضع الاختبار: استخدم بطاقة اختبار من مزوّد الدفع. لا يُخصم أي مال حقيقي.",
+    "Testmodus: Nutze eine Testkarte des Zahlungsanbieters. Es wird kein echtes Geld belastet."
+  ],
+  "Thank you! Everything you bought is ready to use.": [
+    "شكرًا لك! كل ما اشتريته جاهز للاستخدام.",
+    "Danke! Alles, was du gekauft hast, ist bereit."
+  ],
+  "The payment didn't go through, so nothing was bought. You can try again with another payment method.": [
+    "لم يتم الدفع، لذا لم يُشترَ أي شيء. يمكنك المحاولة مجددًا بطريقة دفع أخرى.",
+    "Die Zahlung ist nicht durchgegangen, also wurde nichts gekauft. Du kannst es mit einer anderen Zahlungsmethode erneut versuchen."
+  ],
+  "The payment is being confirmed. This can take a little while.": [
+    "جارٍ تأكيد الدفع. قد يستغرق ذلك بعض الوقت.",
+    "Die Zahlung wird bestätigt. Das kann einen Moment dauern."
+  ],
+  "The payment page address looked wrong, so it wasn't opened. Try again.": [
+    "بدا عنوان صفحة الدفع غير صحيح، لذا لم تُفتح. حاول مرة أخرى.",
+    "Die Adresse der Zahlungsseite sah falsch aus, deshalb wurde sie nicht geöffnet. Versuch es noch einmal."
+  ],
+  "The payment provider couldn't be reached. Nothing was charged; try again in a moment.": [
+    "تعذّر الوصول إلى مزوّد الدفع. لم يُخصم أي مبلغ؛ حاول بعد قليل.",
+    "Der Zahlungsanbieter war nicht erreichbar. Es wurde nichts belastet; versuch es gleich noch einmal."
+  ],
+  "This payment is disputed with your bank. Contact support if you have questions.": [
+    "هذه الدفعة معترَض عليها لدى مصرفك. تواصل مع الدعم إذا كانت لديك أسئلة.",
+    "Diese Zahlung wird bei deiner Bank angefochten. Wende dich bei Fragen an den Support."
+  ],
+  "This payment was refunded.": [
+    "تم استرداد هذه الدفعة.",
+    "Diese Zahlung wurde erstattet."
+  ],
+  "This purchase was closed without payment. Nothing was charged.": [
+    "أُغلق هذا الشراء دون دفع. لم يُخصم أي مبلغ.",
+    "Dieser Kauf wurde ohne Zahlung geschlossen. Es wurde nichts belastet."
+  ],
+  "Waiting for your payment": ["بانتظار دفعتك", "Warte auf deine Zahlung"],
+  "You pay on our payment partner's secure page. Zrzur never sees your card details.": [
+    "تدفع في صفحة شريك الدفع الآمنة. لا يرى زرزور بيانات بطاقتك أبدًا.",
+    "Du bezahlst auf der sicheren Seite unseres Zahlungspartners. Zrzur sieht deine Kartendaten nie."
+  ],
+  "Your bank needs you to confirm this payment on the payment page.": [
+    "يطلب مصرفك تأكيد هذه الدفعة في صفحة الدفع.",
+    "Deine Bank möchte, dass du diese Zahlung auf der Zahlungsseite bestätigst."
+  ],
+  "Your last payment didn't go through. Update your payment method; Feather continues until {0} while the payment is retried.": [
+    "لم تنجح دفعتك الأخيرة. حدّث طريقة الدفع؛ يستمر اشتراك ريشة حتى {0} بينما تُعاد محاولة الدفع.",
+    "Deine letzte Zahlung ist nicht durchgegangen. Aktualisiere deine Zahlungsmethode; Feather läuft bis {0} weiter, während die Zahlung erneut versucht wird."
+  ],
+  "Your payment was received. Setting things up…": [
+    "تم استلام دفعتك. جارٍ تجهيز كل شيء…",
+    "Deine Zahlung ist eingegangen. Alles wird eingerichtet…"
+  ]
+}

@@ -1,0 +1,10 @@
+{
+  "Start your bot": [
+    "ابدأ ببوتك",
+    "Starte deinen Bot"
+  ],
+  "You need Node.js 22 or newer. @zrzur/sdk/bot, the bot part of the official Zrzur library, handles the gateway, commands and replies for you. You can also work without any library: the API is plain HTTP and WebSocket.": [
+    "تحتاج إلى Node.js 22 أو أحدث. تتولى ‎@zrzur/sdk/bot، جزء البوتات من مكتبة زرزور الرسمية، البوابة والأوامر والردود عنك. ويمكنك أيضًا العمل دون أي مكتبة، فالواجهة البرمجية مجرد HTTP وWebSocket.",
+    "Du brauchst Node.js 22 oder neuer. @zrzur/sdk/bot, der Bot-Teil der offiziellen Zrzur-Bibliothek, übernimmt Gateway, Befehle und Antworten für dich. Es geht auch ohne Bibliothek: Die API ist reines HTTP und WebSocket."
+  ]
+}

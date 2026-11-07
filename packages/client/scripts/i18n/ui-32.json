@@ -1,0 +1,342 @@
+{
+  "{0} – {1}": ["{0} – {1}", "{0} – {1}"],
+  "{0} contributions": ["المساهمات: {0}", "{0} Beiträge"],
+  "A member of the official Zrzur team. Server moderators don't get this badge.": [
+    "عضو في فريق زرزور الرسمي. مشرفو السيرفرات لا يحصلون على هذه الشارة.",
+    "Mitglied des offiziellen Zrzur-Teams. Server-Moderatoren bekommen dieses Abzeichen nicht."
+  ],
+  "A one-off badge.": ["شارة لمرة واحدة.", "Ein einmaliges Abzeichen."],
+  "A small thank-you badge.": [
+    "شارة شكر صغيرة.",
+    "Ein kleines Dankeschön-Abzeichen."
+  ],
+  "Accept invitation": ["اقبل الدعوة", "Einladung annehmen"],
+  "Accounts created before the early adopter cut-off.": [
+    "للحسابات التي أُنشئت قبل موعد المستخدمين الأوائل.",
+    "Konten, die vor dem Stichtag für frühe Nutzer erstellt wurden."
+  ],
+  "Active": ["نشط", "Aktiv"],
+  "Active creator": ["مصمم نشط", "Aktiver Designer"],
+  "Active tester": ["مختبر نشط", "Aktiver Tester"],
+  "Actual": ["ما حدث فعلاً", "Tatsächlich"],
+  "Add feature (off)": ["أضف ميزة (متوقفة)", "Funktion hinzufügen (aus)"],
+  "All testers": ["كل المختبرين", "Alle Tester"],
+  "An approved Zrzur partner or partner community.": [
+    "شريك معتمد لزرزور أو مجتمع شريك.",
+    "Ein bestätigter Zrzur-Partner oder eine Partner-Community."
+  ],
+  "An outstanding designer of Zrzur profile designs and decorations, chosen by the team.": [
+    "مصمم متميز لتصاميم الملفات الشخصية والزينة في زرزور، يختاره الفريق.",
+    "Ein herausragender Designer von Zrzur-Profildesigns und -Dekorationen, vom Team ausgewählt."
+  ],
+  "Apply as a partner; the Zrzur team reviews every application against the partner criteria.": [
+    "قدّم طلب شراكة؛ يراجع فريق زرزور كل طلب وفق معايير الشراكة.",
+    "Bewirb dich als Partner; das Zrzur-Team prüft jede Bewerbung anhand der Partnerkriterien."
+  ],
+  "Ask to join": ["اطلب الانضمام", "Beitritt anfragen"],
+  "Badges you can earn": [
+    "شارات يمكنك الحصول عليها",
+    "Abzeichen, die du verdienen kannst"
+  ],
+  "Become a Zrzur creator and publish your first decoration or nameplate. Making bots doesn't count.": [
+    "كن مصممًا في زرزور وانشر أول إطار أو خلفية اسم. صنع البوتات لا يُحتسب.",
+    "Werde Zrzur-Designer und veröffentliche deine erste Dekoration oder Namensplakette. Bots zählen nicht."
+  ],
+  "Beta feature": ["ميزة تجريبية", "Beta-Funktion"],
+  "Beta features you can use: {0}": [
+    "الميزات التجريبية المتاحة لك: {0}",
+    "Beta-Funktionen für dich: {0}"
+  ],
+  "Beta feedback": ["ملاحظات تجريبية", "Beta-Feedback"],
+  "Beta program": ["البرنامج التجريبي", "Beta-Programm"],
+  "Beta Tester": ["مختبر تجريبي", "Beta-Tester"],
+  "Beta Veteran": ["مختبر مخضرم", "Beta-Veteran"],
+  "Bug": ["خطأ برمجي", "Fehler"],
+  "Bug Hunter": ["صائد الأخطاء", "Fehlerjäger"],
+  "Bug Hunter comes with your first verified report. Security reports stay private and never appear on your profile.": [
+    "تحصل على «صائد الأخطاء» مع أول بلاغ يتم التحقق منه. بلاغات الأمان تبقى خاصة ولا تظهر على ملفك أبدًا.",
+    "Fehlerjäger bekommst du mit deiner ersten bestätigten Meldung. Sicherheitsmeldungen bleiben privat und erscheinen nie auf deinem Profil."
+  ],
+  "Bug reports": ["بلاغات الأخطاء", "Fehlermeldungen"],
+  "Bugs and feedback": ["الأخطاء والملاحظات", "Fehler und Feedback"],
+  "Builds Zrzur itself.": ["يطوّر زرزور نفسه.", "Entwickelt Zrzur selbst."],
+  "Chosen testers": ["مختبرون محددون", "Ausgewählte Tester"],
+  "Closed": ["مغلقة", "Geschlossen"],
+  "Complete (Beta Veteran)": [
+    "إنهاء (مختبر مخضرم)",
+    "Abschließen (Beta-Veteran)"
+  ],
+  "Complete the beta as an active tester who sent feedback or a bug report. It stays, but gives no beta access.": [
+    "أكمل البرنامج التجريبي كمختبر نشط أرسل ملاحظات أو بلاغ خطأ. تبقى الشارة، لكنها لا تمنح وصولًا تجريبيًا.",
+    "Schließe die Beta als aktiver Tester ab, der Feedback oder eine Fehlermeldung geschickt hat. Es bleibt, gibt aber keinen Beta-Zugang."
+  ],
+  "Completed": ["مكتمل", "Abgeschlossen"],
+  "Completed a Zrzur beta program.": [
+    "أكمل برنامجًا تجريبيًا في زرزور.",
+    "Hat ein Zrzur-Beta-Programm abgeschlossen."
+  ],
+  "Confirmed": ["مؤكد", "Bestätigt"],
+  "Creator program": ["برنامج المصممين", "Designer-Programm"],
+  "Creators make profile designs and decorations. The Zrzur team invites creators; making bots is separate and never needs this.": [
+    "المصممون يصنعون تصاميم وزينة الملفات الشخصية. فريق زرزور يدعو المصممين؛ صنع البوتات أمر منفصل ولا يحتاج هذا أبدًا.",
+    "Designer gestalten Profildesigns und Dekorationen. Das Zrzur-Team lädt Designer ein; Bots zu bauen ist davon getrennt und braucht das nie."
+  ],
+  "Critical": ["حرجة", "Kritisch"],
+  "Device (optional)": ["الجهاز (اختياري)", "Gerät (optional)"],
+  "Early Adopter": ["من المستخدمين الأوائل", "Früher Nutzer"],
+  "Early Supporter": ["داعم مبكر", "Früher Unterstützer"],
+  "Earned {0}": ["حصلت عليها في {0}", "Erhalten am {0}"],
+  "Elite Bug Hunter": ["صائد الأخطاء النخبة", "Elite-Fehlerjäger"],
+  "Exceptional bug and security contributions, recognised by the team.": [
+    "مساهمات استثنائية في الأخطاء والأمان، يقدّرها الفريق.",
+    "Außergewöhnliche Beiträge zu Fehlern und Sicherheit, vom Team gewürdigt."
+  ],
+  "Expected": ["المتوقع", "Erwartet"],
+  "Expired": ["منتهية", "Abgelaufen"],
+  "Expires (optional)": ["تنتهي في (اختياري)", "Läuft ab (optional)"],
+  "Feature flags": ["مفاتيح الميزات", "Funktionsschalter"],
+  "Feature id": ["معرّف الميزة", "Funktions-ID"],
+  "Fixed": ["تم الإصلاح", "Behoben"],
+  "For example: Windows 11, Firefox": [
+    "مثال: Windows 11، Firefox",
+    "Zum Beispiel: Windows 11, Firefox"
+  ],
+  "Found a real bug that the Zrzur team verified.": [
+    "وجد خطأً حقيقيًا تحقق منه فريق زرزور.",
+    "Hat einen echten Fehler gefunden, den das Zrzur-Team bestätigt hat."
+  ],
+  "Founded Zrzur.": ["أسّس زرزور.", "Hat Zrzur gegründet."],
+  "Given to people who supported Zrzur during the early supporter period.": [
+    "تُمنح لمن دعم زرزور خلال فترة الدعم المبكر.",
+    "Für alle, die Zrzur in der Zeit der frühen Unterstützer unterstützt haben."
+  ],
+  "Given to Zrzur's own developers.": [
+    "تُمنح لمطوّري زرزور أنفسهم.",
+    "Für Zrzurs eigene Entwickler."
+  ],
+  "Given to Zrzur's platform moderation team.": [
+    "تُمنح لفريق الإشراف على منصة زرزور.",
+    "Für Zrzurs Plattform-Moderationsteam."
+  ],
+  "Grant": ["امنح", "Vergeben"],
+  "Granted": ["مُنحت", "Vergeben"],
+  "Held": ["مملوكة", "Vorhanden"],
+  "Helped translate Zrzur.": [
+    "ساعد في ترجمة زرزور.",
+    "Hat bei der Übersetzung von Zrzur geholfen."
+  ],
+  "Hidden by owner": ["أخفاها صاحبها", "Vom Besitzer ausgeblendet"],
+  "Hidden from your profile": [
+    "مخفية من ملفك",
+    "In deinem Profil ausgeblendet"
+  ],
+  "Hide": ["إخفاء", "Ausblenden"],
+  "High": ["عالية", "Hoch"],
+  "Historical": ["تاريخية", "Historisch"],
+  "Hold Bug Hunter, then have 10 verified reports or a verified serious security report. The team decides; it is never automatic.": [
+    "احمل شارة «صائد الأخطاء»، ثم احصل على 10 بلاغات مؤكدة أو بلاغ أمني خطير مؤكد. القرار للفريق؛ ولا تُمنح تلقائيًا أبدًا.",
+    "Habe Fehlerjäger und dann 10 bestätigte Meldungen oder eine bestätigte schwere Sicherheitsmeldung. Das Team entscheidet; es passiert nie automatisch."
+  ],
+  "Invite again": ["ادعُ مجددًا", "Erneut einladen"],
+  "Invite by name or id": [
+    "ادعُ بالاسم أو المعرّف",
+    "Per Name oder ID einladen"
+  ],
+  "Invited": ["مدعو", "Eingeladen"],
+  "Join the closed beta program by invitation or request. It is shown while you are in the program.": [
+    "انضم إلى البرنامج التجريبي المغلق بدعوة أو بطلب. تظهر الشارة ما دمت في البرنامج.",
+    "Tritt dem geschlossenen Beta-Programm per Einladung oder Anfrage bei. Es wird angezeigt, solange du dabei bist."
+  ],
+  "Joined Zrzur in its first days.": [
+    "انضم إلى زرزور في أيامه الأولى.",
+    "Ist Zrzur in den ersten Tagen beigetreten."
+  ],
+  "Keeps Zrzur safe for everyone.": [
+    "يحافظ على أمان زرزور للجميع.",
+    "Hält Zrzur für alle sicher."
+  ],
+  "Leave the beta": ["غادر البرنامج التجريبي", "Beta verlassen"],
+  "Low": ["منخفضة", "Niedrig"],
+  "Makes profile designs and decorations for Zrzur's community gallery.": [
+    "يصمم تصاميم وزينة الملفات الشخصية لمعرض مجتمع زرزور.",
+    "Gestaltet Profildesigns und Dekorationen für Zrzurs Community-Galerie."
+  ],
+  "Manage badges": ["إدارة الشارات", "Abzeichen verwalten"],
+  "Manage the beta": ["إدارة البرنامج التجريبي", "Beta verwalten"],
+  "Medium": ["متوسطة", "Mittel"],
+  "My Badges": ["شاراتي", "Meine Abzeichen"],
+  "My reports": ["بلاغاتي", "Meine Meldungen"],
+  "Needs info": ["يحتاج معلومات", "Braucht Infos"],
+  "Needs more info": ["يحتاج معلومات أكثر", "Braucht mehr Infos"],
+  "No badges yet. See below how to earn them.": [
+    "لا شارات بعد. اطّلع أدناه على طريقة الحصول عليها.",
+    "Noch keine Abzeichen. Unten siehst du, wie du sie bekommst."
+  ],
+  "No beta features are open to you right now.": [
+    "لا توجد ميزات تجريبية متاحة لك حاليًا.",
+    "Gerade sind keine Beta-Funktionen für dich offen."
+  ],
+  "No beta features yet.": [
+    "لا توجد ميزات تجريبية بعد.",
+    "Noch keine Beta-Funktionen."
+  ],
+  "No longer eligible": ["لم يعد مؤهلًا", "Nicht mehr berechtigt"],
+  "Nobody here yet.": ["لا أحد هنا بعد.", "Noch niemand hier."],
+  "Not a bug": ["ليس خطأً", "Kein Fehler"],
+  "Not in the program": ["خارج البرنامج", "Nicht im Programm"],
+  "Note to the reporter": [
+    "ملاحظة لصاحب البلاغ",
+    "Notiz an die meldende Person"
+  ],
+  "Only for the Zrzur team; it is never requested or bought.": [
+    "لفريق زرزور فقط؛ لا تُطلب ولا تُشترى أبدًا.",
+    "Nur für das Zrzur-Team; man kann es weder beantragen noch kaufen."
+  ],
+  "Only you and Zrzur's security reviewers can read a security report. Nothing about it is shown on your profile.": [
+    "لا يقرأ البلاغ الأمني إلا أنت ومراجعو الأمان في زرزور. لا يظهر أي شيء عنه على ملفك.",
+    "Nur du und Zrzurs Sicherheitsprüfer können eine Sicherheitsmeldung lesen. Auf deinem Profil erscheint nichts davon."
+  ],
+  "Owns this server.": ["يملك هذا السيرفر.", "Besitzt diesen Server."],
+  "Past badges": ["شارات سابقة", "Frühere Abzeichen"],
+  "Paw": ["مخلب", "Pfote"],
+  "Possible duplicates: {0}": ["تكرار محتمل: {0}", "Mögliche Duplikate: {0}"],
+  "Programs": ["البرامج", "Programme"],
+  "Publish a design to get the Creator badge.": [
+    "انشر تصميمًا لتحصل على شارة «مصمم».",
+    "Veröffentliche ein Design, um das Designer-Abzeichen zu bekommen."
+  ],
+  "Publish at least 3 designs as a Creator; the Zrzur team picks Super Creators by hand.": [
+    "انشر 3 تصاميم على الأقل كمصمم؛ فريق زرزور يختار «المصمم المتميز» يدويًا.",
+    "Veröffentliche als Designer mindestens 3 Designs; das Zrzur-Team wählt Top-Designer von Hand aus."
+  ],
+  "Published designs: {0}": [
+    "التصاميم المنشورة: {0}",
+    "Veröffentlichte Designs: {0}"
+  ],
+  "Reason (required, saved in the audit log)": [
+    "السبب (مطلوب، يُحفظ في سجل التدقيق)",
+    "Grund (Pflicht, wird im Prüfprotokoll gespeichert)"
+  ],
+  "Removed": ["أُزيلت", "Entfernt"],
+  "Report a bug": ["أبلغ عن خطأ", "Fehler melden"],
+  "Report a bug in Feedback. You get it when a reviewer confirms your report, not for sending it.": [
+    "أبلغ عن خطأ من صفحة «الملاحظات». تحصل على الشارة عندما يؤكد مراجع بلاغك، لا بمجرد إرساله.",
+    "Melde einen Fehler unter Feedback. Du bekommst es, wenn eine Prüfperson deine Meldung bestätigt, nicht fürs Absenden."
+  ],
+  "Reported a security issue responsibly.": [
+    "أبلغ عن ثغرة أمنية بمسؤولية.",
+    "Hat eine Sicherheitslücke verantwortungsvoll gemeldet."
+  ],
+  "Requested": ["طلب انضمام", "Angefragt"],
+  "Responsible Disclosure": ["إفصاح مسؤول", "Verantwortungsvolle Offenlegung"],
+  "Review bug reports": ["مراجعة بلاغات الأخطاء", "Fehlermeldungen prüfen"],
+  "Screenshot": ["لقطة شاشة", "Screenshot"],
+  "Screenshots (up to {MAX_SHOTS})": [
+    "لقطات الشاشة (حتى {MAX_SHOTS})",
+    "Screenshots (bis zu {MAX_SHOTS})"
+  ],
+  "Security (private)": ["الأمان (خاص)", "Sicherheit (privat)"],
+  "Security issue (private)": [
+    "مشكلة أمنية (خاصة)",
+    "Sicherheitsproblem (privat)"
+  ],
+  "Send a bug or a private security report to the Zrzur team and follow its status. Verified reports earn Bug Hunter.": [
+    "أرسل بلاغ خطأ أو بلاغًا أمنيًا خاصًا إلى فريق زرزور وتابع حالته. البلاغات المؤكدة تمنح «صائد الأخطاء».",
+    "Schicke dem Zrzur-Team eine Fehler- oder private Sicherheitsmeldung und verfolge ihren Status. Bestätigte Meldungen bringen Fehlerjäger."
+  ],
+  "Send feedback": ["أرسل ملاحظات", "Feedback senden"],
+  "Send report": ["أرسل البلاغ", "Meldung senden"],
+  "Severity": ["الخطورة", "Schweregrad"],
+  "Show": ["عرض", "Anzeigen"],
+  "Show on profile": ["أظهرها في الملف", "Im Profil zeigen"],
+  "Shown by owner": ["أظهرها صاحبها", "Vom Besitzer eingeblendet"],
+  "Shown while your Feather subscription is active. You can hide it.": [
+    "تظهر ما دام اشتراك ريشة فعّالًا. يمكنك إخفاؤها.",
+    "Wird angezeigt, solange dein Feather-Abo aktiv ist. Du kannst es ausblenden."
+  ],
+  "Special badge": ["شارة خاصة", "Besonderes Abzeichen"],
+  "Staff tools": ["أدوات الفريق", "Team-Werkzeuge"],
+  "Steps to reproduce": ["خطوات إعادة الإنتاج", "Schritte zum Nachstellen"],
+  "Super Creator": ["مصمم متميز", "Top-Designer"],
+  "Super Creator is chosen by the team after at least {0} published designs.": [
+    "يختار الفريق «المصمم المتميز» بعد {0} تصاميم منشورة على الأقل.",
+    "Top-Designer wählt das Team nach mindestens {0} veröffentlichten Designs aus."
+  ],
+  "Supported Zrzur in its early days.": [
+    "دعم زرزور في أيامه الأولى.",
+    "Hat Zrzur in den Anfängen unterstützt."
+  ],
+  "Supported Zrzur.": ["دعم زرزور.", "Hat Zrzur unterstützt."],
+  "Supports Zrzur with an active Feather subscription.": [
+    "يدعم زرزور باشتراك ريشة فعّال.",
+    "Unterstützt Zrzur mit einem aktiven Feather-Abo."
+  ],
+  "Testers": ["المختبرون", "Tester"],
+  "Thanks! Your report was sent. Reviewers will look at it.": [
+    "شكرًا! تم إرسال بلاغك وسيراجعه الفريق.",
+    "Danke! Deine Meldung wurde gesendet. Das Team sieht sie sich an."
+  ],
+  "The beta is closed: ask to join and the team may invite you.": [
+    "البرنامج التجريبي مغلق: اطلب الانضمام وقد يدعوك الفريق.",
+    "Die Beta ist geschlossen: Frag an, und das Team lädt dich vielleicht ein."
+  ],
+  "Title": ["العنوان", "Titel"],
+  "Translator": ["مترجم", "Übersetzer"],
+  "Triage": ["فرز", "Sichten"],
+  "Triaged": ["تم الفرز", "Gesichtet"],
+  "Tries Zrzur features before everyone else.": [
+    "يجرّب ميزات زرزور قبل الجميع.",
+    "Testet Zrzur-Funktionen vor allen anderen."
+  ],
+  "Unchanged": ["بدون تغيير", "Unverändert"],
+  "Until {0}": ["حتى {0}", "Bis {0}"],
+  "Verified reports: {0}": [
+    "البلاغات المؤكدة: {0}",
+    "Bestätigte Meldungen: {0}"
+  ],
+  "Waiting for approval": ["بانتظار الموافقة", "Wartet auf Freigabe"],
+  "Waiting for review": ["بانتظار المراجعة", "Wartet auf Prüfung"],
+  "What happened?": ["ماذا حدث؟", "Was ist passiert?"],
+  "You haven't sent any reports yet.": [
+    "لم ترسل أي بلاغ بعد.",
+    "Du hast noch keine Meldungen gesendet."
+  ],
+  "Your badges": ["شاراتك", "Deine Abzeichen"],
+  "Zrzur Partner": ["شريك زرزور", "Zrzur-Partner"],
+  "Zrzur Staff": ["فريق زرزور", "Zrzur-Team"],
+  "Zrzur Founder": ["مؤسس زرزور", "Zrzur-Gründer"],
+  "Zrzur Developer": ["مطوّر زرزور", "Zrzur-Entwickler"],
+  "Platform Moderator": ["مشرف المنصة", "Plattform-Moderator"],
+  "Creator": ["مصمم", "Designer"],
+  "Server owner": ["مالك السيرفر", "Serverbesitzer"],
+  "Zrzur Feather": ["ريشة زرزور", "Zrzur Feather"],
+  "Profile badges": ["شارات الملف الشخصي", "Profilabzeichen"],
+  "Badges": ["الشارات", "Abzeichen"],
+  "Supporter": ["داعم", "Unterstützer"],
+  "Manage": ["إدارة", "Verwalten"],
+  "Revoke": ["اسحب", "Entziehen"],
+  "Revoked": ["مسحوبة", "Entzogen"],
+  "Approve": ["موافقة", "Annehmen"],
+  "Remove": ["إزالة", "Entfernen"],
+  "Invite": ["دعوة", "Einladen"],
+  "Name": ["الاسم", "Name"],
+  "On": ["مفعّل", "An"],
+  "Off": ["متوقف", "Aus"],
+  "Everyone": ["الجميع", "Alle"],
+  "General": ["عام", "Allgemein"],
+  "Type": ["النوع", "Typ"],
+  "Confirm": ["تأكيد", "Bestätigen"],
+  "Duplicate": ["مكرر", "Duplikat"],
+  "Open": ["مفتوح", "Offen"],
+  "Verified": ["مؤكدة", "Bestätigt"],
+  "Private": ["خاص", "Privat"],
+  "Suspended": ["موقوف", "Gesperrt"],
+  "Search users by name or id": [
+    "ابحث عن مستخدمين بالاسم أو المعرّف",
+    "Nutzer nach Name oder ID suchen"
+  ],
+  "No users match your search.": [
+    "لا يوجد مستخدمون يطابقون بحثك.",
+    "Keine Nutzer passen zu deiner Suche."
+  ]
+}

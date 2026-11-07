@@ -1,0 +1,11 @@
+{
+  "\"{name}\" needs a number.": ["يحتاج «{name}» إلى رقم.", "„{name}“ braucht eine Zahl."],
+  "Choose \"{name}\" from the list.": ["اختر «{name}» من القائمة.", "Wähle „{name}“ aus der Liste."],
+  "Choose a file": ["اختيار ملف", "Datei wählen"],
+  "Choose a sub-command": ["اختر أمرًا فرعيًا", "Unterbefehl wählen"],
+  "Choose a sub-command first.": ["اختر أمرًا فرعيًا أولًا.", "Wähle zuerst einen Unterbefehl."],
+  "Choose one of the listed values for \"{name}\".": ["اختر إحدى القيم المعروضة لـ«{name}».", "Wähle einen der angezeigten Werte für „{name}“."],
+  "Command options": ["خيارات الأمر", "Befehlsoptionen"],
+  "optional": ["اختياري", "optional"],
+  "Upload a file for \"{name}\".": ["ارفع ملفًا لـ«{name}».", "Lade eine Datei für „{name}“ hoch."]
+}

@@ -1,0 +1,33 @@
+{
+  "Who can message you": ["من يمكنه مراسلتك", "Wer dir schreiben darf"],
+  "Friends can always message you, and blocked people never can. Anyone you write to first can reply.": [
+    "يمكن لأصدقائك مراسلتك دائمًا، ولا يمكن ذلك أبدًا لمن حظرتهم. ويستطيع كل من تراسله أولًا أن يرد عليك.",
+    "Freunde können dir immer schreiben, blockierte Personen nie. Wem du zuerst schreibst, kann dir antworten."
+  ],
+  "Friends and server members": [
+    "الأصدقاء وأعضاء سيرفراتي",
+    "Freunde und Servermitglieder"
+  ],
+  "Friends only": ["الأصدقاء فقط", "Nur Freunde"],
+  "Who can add you to group chats": [
+    "من يمكنه إضافتك إلى المجموعات",
+    "Wer dich zu Gruppenchats hinzufügen darf"
+  ],
+  "With Nobody, no one can put you in a group chat, not even friends. You can still make your own.": [
+    "عند اختيار «لا أحد» لا يستطيع أحد إضافتك إلى مجموعة، ولا حتى أصدقاؤك. ويبقى بإمكانك إنشاء مجموعاتك الخاصة.",
+    "Bei „Niemand“ kann dich niemand zu einem Gruppenchat hinzufügen, auch keine Freunde. Eigene Gruppen kannst du weiterhin erstellen."
+  ],
+  "Nobody": ["لا أحد", "Niemand"],
+  "This person's privacy settings don't let you message them. Try sending a friend request.": [
+    "لا تسمح إعدادات الخصوصية لدى هذا الشخص بمراسلته. جرّب أن ترسل إليه طلب صداقة.",
+    "Die Privatsphäre-Einstellungen dieser Person lassen keine Nachricht von dir zu. Schick ihr doch eine Freundschaftsanfrage."
+  ],
+  "This person's privacy settings don't let you add them to group chats.": [
+    "لا تسمح إعدادات الخصوصية لدى هذا الشخص بإضافته إلى المجموعات.",
+    "Die Privatsphäre-Einstellungen dieser Person lassen nicht zu, dass du sie zu Gruppenchats hinzufügst."
+  ],
+  "These settings aren't available yet.": [
+    "هذه الإعدادات غير متاحة بعد.",
+    "Diese Einstellungen sind noch nicht verfügbar."
+  ]
+}

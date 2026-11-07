@@ -1,0 +1,245 @@
+{
+  "{0, plural, =0 {No mutual friends} one {# mutual friend} other {# mutual friends}}": [
+    "{0, plural, =0 {لا أصدقاء مشتركون} one {صديق مشترك واحد} two {صديقان مشتركان} few {# أصدقاء مشتركين} many {# صديقًا مشتركًا} other {# صديق مشترك}}",
+    "{0, plural, =0 {Keine gemeinsamen Freunde} one {# gemeinsamer Freund} other {# gemeinsame Freunde}}"
+  ],
+  "{0, plural, =0 {No mutual servers} one {# mutual server} other {# mutual servers}}": [
+    "{0, plural, =0 {لا سيرفرات مشتركة} one {سيرفر مشترك واحد} two {سيرفران مشتركان} few {# سيرفرات مشتركة} many {# سيرفرًا مشتركًا} other {# سيرفر مشترك}}",
+    "{0, plural, =0 {Keine gemeinsamen Server} one {# gemeinsamer Server} other {# gemeinsame Server}}"
+  ],
+  "{0, plural, one {# mutual friend} other {# mutual friends}}": [
+    "{0, plural, zero {لا أصدقاء مشتركون} one {صديق مشترك واحد} two {صديقان مشتركان} few {# أصدقاء مشتركين} many {# صديقًا مشتركًا} other {# صديق مشترك}}",
+    "{0, plural, one {# gemeinsamer Freund} other {# gemeinsame Freunde}}"
+  ],
+  "{0, plural, one {# mutual server} other {# mutual servers}}": [
+    "{0, plural, zero {لا سيرفرات مشتركة} one {سيرفر مشترك واحد} two {سيرفران مشتركان} few {# سيرفرات مشتركة} many {# سيرفرًا مشتركًا} other {# سيرفر مشترك}}",
+    "{0, plural, one {# gemeinsamer Server} other {# gemeinsame Server}}"
+  ],
+  "{0} of {1} slots left. Members use them as :name:.": [
+    "تبقّى {0} من {1} خانة. يستخدمها الأعضاء بالشكل :name:.",
+    "{0} von {1} Plätzen frei. Mitglieder nutzen sie als :name:."
+  ],
+  "{0}#{1}. Change it in My Account.": [
+    "{0}#{1}. يمكنك تغييره من «حسابي».",
+    "{0}#{1}. Ändere ihn unter „Mein Konto“."
+  ],
+  "{0}% translated": ["مترجمة بنسبة {0}٪", "{0} % übersetzt"],
+  "12-hour": ["12 ساعة", "12-Stunden"],
+  "2 to 32 characters. Your number tag may change if this name is taken.": [
+    "من 2 إلى 32 حرفًا. قد يتغيّر رقمك المميّز إذا كان هذا الاسم مستخدمًا.",
+    "2 bis 32 Zeichen. Deine Nummer kann sich ändern, wenn der Name schon vergeben ist."
+  ],
+  "24-hour": ["24 ساعة", "24-Stunden"],
+  "A place for your people.": ["مكان يجمعك بناسك.", "Ein Ort für deine Leute."],
+  "A place for your people. Start fresh or choose ready-made channels.": [
+    "مكان يجمعك بناسك. ابدأ من الصفر أو اختر قنوات جاهزة.",
+    "Ein Ort für deine Leute. Starte bei null oder wähle fertige Kanäle."
+  ],
+  "About me": ["نبذة عني", "Über mich"],
+  "Accent {c}": ["لون التمييز {c}", "Akzent {c}"],
+  "Accent colour": ["لون التمييز", "Akzentfarbe"],
+  "Accept request": ["قبول الطلب", "Anfrage annehmen"],
+  "Account information": ["معلومات الحساب", "Kontoinformationen"],
+  "Account management": ["إدارة الحساب", "Kontoverwaltung"],
+  "Active invites": ["الدعوات النشطة", "Aktive Einladungen"],
+  "Add a friend": ["إضافة صديق", "Freund hinzufügen"],
+  "Add bot": ["إضافة البوت", "Bot hinzufügen"],
+  "Add people by their username to chat, call and play together.": [
+    "أضف الأشخاص باسم المستخدم لتتحدثوا وتتصلوا وتلعبوا معًا.",
+    "Füge Leute über ihren Benutzernamen hinzu, um gemeinsam zu chatten, zu telefonieren und zu spielen."
+  ],
+  "Add reaction": ["إضافة تفاعل", "Reaktion hinzufügen"],
+  "Add to a server": ["إضافة إلى سيرفر", "Zu einem Server hinzufügen"],
+  "Added by {0}": ["أضافها {0}", "Hinzugefügt von {0}"],
+  "Age-restricted server": [
+    "سيرفر مقيّد بالعمر",
+    "Server mit Altersbeschränkung"
+  ],
+  "Alerts": ["التنبيهات", "Hinweise"],
+  "All friends": ["كل الأصدقاء", "Alle Freunde"],
+  "Allow": ["سماح", "Erlauben"],
+  "Allow anyone to invite this bot. When off, only you can add it to servers.": [
+    "اسمح لأي شخص بدعوة هذا البوت. عند الإيقاف، أنت وحدك من يستطيع إضافته إلى السيرفرات.",
+    "Jeder darf diesen Bot einladen. Wenn aus, kannst nur du ihn zu Servern hinzufügen."
+  ],
+  "Already have an invite?": ["لديك دعوة بالفعل؟", "Schon eine Einladung?"],
+  "AMOLED": ["AMOLED", "AMOLED"],
+  "announcements": ["الإعلانات", "ankündigungen"],
+  "Anyone up for ranked tonight?": [
+    "مين جاهز لمباراة رانكد الليلة؟",
+    "Wer ist heute Abend bei Ranked dabei?"
+  ],
+  "Anyone with one of these links can join. Delete a link to stop it working.": [
+    "يستطيع أي شخص لديه أحد هذه الروابط الانضمام. احذف الرابط لإيقافه.",
+    "Jeder mit einem dieser Links kann beitreten. Lösche einen Link, damit er nicht mehr funktioniert."
+  ],
+  "Appearance preview": ["معاينة المظهر", "Vorschau der Darstellung"],
+  "Ask every time": ["اسأل في كل مرة", "Jedes Mal fragen"],
+  "Ask the browser to deliver notifications while Zrzur is closed. Delivery depends on the server's push service.": [
+    "اطلب من المتصفح إيصال الإشعارات وزرزور مغلق. يعتمد الإيصال على خدمة الدفع في السيرفر.",
+    "Bitte den Browser, Benachrichtigungen zuzustellen, während Zrzur geschlossen ist. Die Zustellung hängt vom Push-Dienst des Servers ab."
+  ],
+  "Audio player": ["مشغّل الصوت", "Audioplayer"],
+  "Authenticator app": ["تطبيق المصادقة", "Authenticator-App"],
+  "Automatic gain control": [
+    "التحكم التلقائي في مستوى الصوت",
+    "Automatische Lautstärkeregelung"
+  ],
+  "Banned members": ["الأعضاء المحظورون", "Gesperrte Mitglieder"],
+  "Banned people can't rejoin until they're unbanned, even with an invite.": [
+    "لا يستطيع المحظورون الانضمام مجددًا حتى يُرفع الحظر، حتى مع وجود دعوة.",
+    "Gesperrte Personen können nicht wieder beitreten, bis die Sperre aufgehoben ist – auch nicht mit Einladung."
+  ],
+  "Bans couldn't be loaded": [
+    "تعذّر تحميل قائمة الحظر",
+    "Sperren konnten nicht geladen werden"
+  ],
+  "Bio": ["النبذة", "Bio"],
+  "Blocked people can't message you or send requests.": [
+    "لا يستطيع المحظورون مراسلتك أو إرسال طلبات إليك.",
+    "Blockierte Personen können dir weder schreiben noch Anfragen senden."
+  ],
+  "BOT": ["بوت", "BOT"],
+  "Bot ID": ["معرّف البوت", "Bot-ID"],
+  "Bot token": ["رمز البوت", "Bot-Token"],
+  "Bots are accounts you control through the API. Bots you create are subject to the Acceptable Usage Policy.": [
+    "البوتات حسابات تتحكم بها عبر واجهة البرمجة. تخضع البوتات التي تنشئها لسياسة الاستخدام المقبول.",
+    "Bots sind Konten, die du über die API steuerst. Deine Bots unterliegen der Richtlinie zur akzeptablen Nutzung."
+  ],
+  "Bots are not verified by Zrzur.": [
+    "البوتات غير موثّقة من زرزور.",
+    "Bots werden von Zrzur nicht überprüft."
+  ],
+  "bring the new strat.": ["جيب الخطة الجديدة.", "bring die neue Taktik mit."],
+  "Buttons, switches, links and selected items.": [
+    "الأزرار ومفاتيح التبديل والروابط والعناصر المحددة.",
+    "Schaltflächen, Schalter, Links und ausgewählte Elemente."
+  ],
+  "Change avatar": ["تغيير الصورة الرمزية", "Avatar ändern"],
+  "Change banner": ["تغيير البانر", "Banner ändern"],
+  "Change email": ["تغيير البريد الإلكتروني", "E-Mail ändern"],
+  "Change password": ["تغيير كلمة المرور", "Passwort ändern"],
+  "Change role icon": ["تغيير أيقونة الدور", "Rollensymbol ändern"],
+  "Change server avatar": ["تغيير صورتك في السيرفر", "Server-Avatar ändern"],
+  "Change server banner": ["تغيير بانر السيرفر", "Server-Banner ändern"],
+  "Change server icon": ["تغيير أيقونة السيرفر", "Server-Symbol ändern"],
+  "Change the password you use to sign in.": [
+    "غيّر كلمة المرور التي تسجّل الدخول بها.",
+    "Ändere das Passwort, mit dem du dich anmeldest."
+  ],
+  "Change your email": ["غيّر بريدك الإلكتروني", "Deine E-Mail ändern"],
+  "Change your password": ["غيّر كلمة مرورك", "Dein Passwort ändern"],
+  "Change your username": ["غيّر اسم المستخدم", "Deinen Benutzernamen ändern"],
+  "Channel preview": ["معاينة القنوات", "Kanalvorschau"],
+  "Channels visible to you": [
+    "القنوات الظاهرة لك",
+    "Für dich sichtbare Kanäle"
+  ],
+  "Check your connection and try again.": [
+    "تحقق من اتصالك وحاول مرة أخرى.",
+    "Prüfe deine Verbindung und versuche es erneut."
+  ],
+  "Check your inbox": ["تفقّد بريدك الوارد", "Sieh in deinen Posteingang"],
+  "Checking…": ["جارٍ التحقق…", "Wird geprüft…"],
+  "Choose emoji image": ["اختر صورة الإيموجي", "Emoji-Bild auswählen"],
+  "Choose image": ["اختر صورة", "Bild auswählen"],
+  "Choose one of your servers to add it to.": [
+    "اختر أحد سيرفراتك لإضافته إليه.",
+    "Wähle einen deiner Server aus, um ihn hinzuzufügen."
+  ],
+  "Choose the quality each time you start a stream.": [
+    "اختر الجودة في كل مرة تبدأ فيها بثًا.",
+    "Wähle die Qualität bei jedem Stream-Start."
+  ],
+  "Clean light surfaces with deep ink text and a cool indigo accent.": [
+    "أسطح فاتحة ونظيفة مع نص داكن ولون نيلي هادئ للتمييز.",
+    "Klare helle Flächen mit dunkler Schrift und kühlem Indigo-Akzent."
+  ],
+  "clips": ["مقاطع", "clips"],
+  "Close (Esc)": ["إغلاق (Esc)", "Schließen (Esc)"],
+  "Close settings": ["إغلاق الإعدادات", "Einstellungen schließen"],
+  "Close settings (Esc)": [
+    "إغلاق الإعدادات (Esc)",
+    "Einstellungen schließen (Esc)"
+  ],
+  "Club": ["النادي", "Club"],
+  "Club Room": ["غرفة النادي", "Clubraum"],
+  "Code font": ["خط الشيفرة", "Code-Schriftart"],
+  "Colours": ["الألوان", "Farben"],
+  "Comfortable": ["مريح", "Komfortabel"],
+  "Compact": ["مضغوط", "Kompakt"],
+  "Compact mode": ["الوضع المضغوط", "Kompaktmodus"],
+  "Confirm new password": [
+    "تأكيد كلمة المرور الجديدة",
+    "Neues Passwort bestätigen"
+  ],
+  "Connecting…": ["جارٍ الاتصال…", "Verbinde…"],
+  "Continue setup": ["متابعة الإعداد", "Einrichtung fortsetzen"],
+  "Copy token": ["نسخ الرمز", "Token kopieren"],
+  "Copy username": ["نسخ اسم المستخدم", "Benutzernamen kopieren"],
+  "Corner rounding": ["استدارة الزوايا", "Eckenrundung"],
+  "Could not save. Check browser storage and the limit of 32 themes.": [
+    "تعذّر الحفظ. تحقق من مساحة تخزين المتصفح ومن حد الـ32 سمة.",
+    "Speichern fehlgeschlagen. Prüfe den Browserspeicher und das Limit von 32 Designs."
+  ],
+  "Couldn't clear your status. Please try again.": [
+    "تعذّر مسح حالتك. حاول مرة أخرى.",
+    "Dein Status konnte nicht gelöscht werden. Bitte versuche es erneut."
+  ],
+  "Couldn't copy your user ID.": [
+    "تعذّر نسخ معرّف المستخدم.",
+    "Deine Benutzer-ID konnte nicht kopiert werden."
+  ],
+  "Couldn't finish setting up your server. Please try again.": [
+    "تعذّر إكمال إعداد سيرفرك. حاول مرة أخرى.",
+    "Die Einrichtung deines Servers konnte nicht abgeschlossen werden. Bitte versuche es erneut."
+  ],
+  "Couldn't play this media.": [
+    "تعذّر تشغيل هذا الملف.",
+    "Dieses Medium konnte nicht abgespielt werden."
+  ],
+  "Couldn't update your status. Please try again.": [
+    "تعذّر تحديث حالتك. حاول مرة أخرى.",
+    "Dein Status konnte nicht aktualisiert werden. Bitte versuche es erneut."
+  ],
+  "Create bot": ["إنشاء بوت", "Bot erstellen"],
+  "Create my own": ["إنشاء خاص بي", "Eigenen erstellen"],
+  "Create one to bring people into this server.": [
+    "أنشئ دعوة لتجلب الناس إلى هذا السيرفر.",
+    "Erstelle eine, um Leute auf diesen Server zu holen."
+  ],
+  "Create one to get a token and add it to your servers.": [
+    "أنشئ بوتًا لتحصل على رمز وتضيفه إلى سيرفراتك.",
+    "Erstelle einen, um ein Token zu erhalten und ihn zu deinen Servern hinzuzufügen."
+  ],
+  "Create or join a server": [
+    "أنشئ سيرفرًا أو انضم إلى سيرفر",
+    "Server erstellen oder beitreten"
+  ],
+  "Create role": ["إنشاء دور", "Rolle erstellen"],
+  "Create your server": ["أنشئ سيرفرك", "Erstelle deinen Server"],
+  "Created": ["أُنشئ في", "Erstellt"],
+  "Created by": ["أنشأه", "Erstellt von"],
+  "Current password": ["كلمة المرور الحالية", "Aktuelles Passwort"],
+  "Current preferences could not be saved as a theme.": [
+    "تعذّر حفظ التفضيلات الحالية كسمة.",
+    "Die aktuellen Einstellungen konnten nicht als Design gespeichert werden."
+  ],
+  "Custom accent colour": ["لون تمييز مخصص", "Eigene Akzentfarbe"],
+  "Custom icon colour": ["لون أيقونات مخصص", "Eigene Symbolfarbe"],
+  "Danger zone": ["منطقة الخطر", "Gefahrenbereich"],
+  "Date and time": ["التاريخ والوقت", "Datum und Uhrzeit"],
+  "Day first": ["اليوم أولًا", "Tag zuerst"],
+  "Daylight": ["نهاري", "Tageslicht"],
+  "Deeper navy base with cool blue accent.": [
+    "قاعدة كحلية أعمق مع لون أزرق هادئ للتمييز.",
+    "Tieferes Marineblau mit kühlem blauem Akzent."
+  ],
+  "Default (inherit)": ["افتراضي (موروث)", "Standard (geerbt)"],
+  "Default permissions": ["الصلاحيات الافتراضية", "Standardberechtigungen"],
+  "Delete (Shift to skip confirmation)": [
+    "حذف (Shift لتخطي التأكيد)",
+    "Löschen (Umschalt, um die Bestätigung zu überspringen)"
+  ],
+  "Delete account": ["حذف الحساب", "Konto löschen"]
+}

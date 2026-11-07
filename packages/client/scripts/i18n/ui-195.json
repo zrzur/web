@@ -1,0 +1,10 @@
+{
+  "{0, plural, one {# new member} other {# new members}}": [
+    "{0, plural, zero {لا أعضاء جدد} one {عضو جديد واحد} two {عضوان جديدان} few {# أعضاء جدد} many {# عضوًا جديدًا} other {# عضو جديد}}",
+    "{0, plural, one {# neues Mitglied} other {# neue Mitglieder}}"
+  ],
+  "That was a lot at once. {seconds, plural, one {Try again in # second.} other {Try again in # seconds.}}": [
+    "كان هذا كثيرًا دفعة واحدة. {seconds, plural, zero {حاول مرة أخرى الآن.} one {حاول مرة أخرى بعد ثانية واحدة.} two {حاول مرة أخرى بعد ثانيتين.} few {حاول مرة أخرى بعد # ثوانٍ.} many {حاول مرة أخرى بعد # ثانية.} other {حاول مرة أخرى بعد # ثانية.}}",
+    "Das war viel auf einmal. {seconds, plural, one {Versuch es in # Sekunde noch einmal.} other {Versuch es in # Sekunden noch einmal.}}"
+  ]
+}

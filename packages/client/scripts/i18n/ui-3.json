@@ -1,0 +1,215 @@
+{
+  "More": ["المزيد", "Mehr"],
+  "Mutual friends": ["الأصدقاء المشتركون", "Gemeinsame Freunde"],
+  "Mutual servers": ["السيرفرات المشتركة", "Gemeinsame Server"],
+  "My account": ["حسابي", "Mein Konto"],
+  "Name this look": ["سمِّ هذا المظهر", "Benenne diesen Look"],
+  "name@example.com": ["name@example.com", "name@beispiel.de"],
+  "Neutral cool grey workspace for long sessions.": [
+    "مساحة عمل رمادية هادئة ومحايدة للجلسات الطويلة.",
+    "Neutral kühles Grau für lange Sitzungen."
+  ],
+  "New email address": ["البريد الإلكتروني الجديد", "Neue E-Mail-Adresse"],
+  "New password": ["كلمة المرور الجديدة", "Neues Passwort"],
+  "No active invites": ["لا توجد دعوات نشطة", "Keine aktiven Einladungen"],
+  "No ban matches that search": [
+    "لا يوجد حظر يطابق هذا البحث",
+    "Keine Sperre passt zu dieser Suche"
+  ],
+  "No custom emojis yet": [
+    "لا توجد إيموجي مخصصة بعد",
+    "Noch keine eigenen Emojis"
+  ],
+  "No description provided.": ["لا يوجد وصف.", "Keine Beschreibung angegeben."],
+  "No language matches “{0}”.": [
+    "لا توجد لغة تطابق «{0}».",
+    "Keine Sprache passt zu „{0}“."
+  ],
+  "No one is banned": ["لا يوجد أي محظور", "Niemand ist gesperrt"],
+  "No one matches that search": [
+    "لا أحد يطابق هذا البحث",
+    "Niemand passt zu dieser Suche"
+  ],
+  "No pending requests": ["لا توجد طلبات معلّقة", "Keine offenen Anfragen"],
+  "No reason given": ["لم يُذكر سبب", "Kein Grund angegeben"],
+  "No roles yet": ["لا توجد أدوار بعد", "Noch keine Rollen"],
+  "Noise suppression": ["كتم الضوضاء", "Rauschunterdrückung"],
+  "Not installed": ["غير مثبّت", "Nicht installiert"],
+  "Not set up": ["غير مُعدّ", "Nicht eingerichtet"],
+  "Nothing here yet.": ["لا شيء هنا بعد.", "Hier ist noch nichts."],
+  "Official Zrzur server": [
+    "سيرفر زرزور الرسمي",
+    "Offizieller Zrzur-Server"
+  ],
+  "One-time backup codes for when you can't use your authenticator.": [
+    "رموز احتياطية لمرة واحدة عندما لا تستطيع استخدام تطبيق المصادقة.",
+    "Einmalige Backup-Codes für den Fall, dass du deinen Authenticator nicht nutzen kannst."
+  ],
+  "ONLINE — 3": ["متصل — 3", "ONLINE – 3"],
+  "Only shown on {0}.": ["يظهر فقط في {0}.", "Nur auf {0} sichtbar."],
+  "Open GIF picker": ["افتح منتقي الصور المتحركة", "GIF-Auswahl öffnen"],
+  "Outgoing": ["الصادرة", "Ausgehend"],
+  "Outgoing friend request": [
+    "طلب صداقة صادر",
+    "Ausgehende Freundschaftsanfrage"
+  ],
+  "Outline": ["محدّد", "Kontur"],
+  "Output volume": ["مستوى صوت الإخراج", "Ausgangslautstärke"],
+  "Partly translated": ["مترجمة جزئيًا", "Teilweise übersetzt"],
+  "party_parrot": ["party_parrot", "party_parrot"],
+  "Passwords don't match.": [
+    "كلمتا المرور غير متطابقتين.",
+    "Die Passwörter stimmen nicht überein."
+  ],
+  "People you ban from the member list show up here.": [
+    "يظهر هنا من تحظرهم من قائمة الأعضاء.",
+    "Personen, die du über die Mitgliederliste sperrst, erscheinen hier."
+  ],
+  "Permanently deletes this bot. This can't be undone.": [
+    "يحذف هذا البوت نهائيًا. لا يمكن التراجع عن ذلك.",
+    "Löscht diesen Bot dauerhaft. Das kann nicht rückgängig gemacht werden."
+  ],
+  "photos": ["الصور", "fotos"],
+  "Pick a starting look. You can still fine-tune it below.": [
+    "اختر مظهرًا للبداية، ويمكنك ضبطه بدقة بالأسفل.",
+    "Wähle einen Ausgangslook. Unten kannst du ihn noch feinjustieren."
+  ],
+  "Pinned messages": ["الرسائل المثبّتة", "Angeheftete Nachrichten"],
+  "Pinned Messages": ["الرسائل المثبّتة", "Angeheftete Nachrichten"],
+  "planning": ["التخطيط", "planung"],
+  "plans": ["الخطط", "pläne"],
+  "Play all": ["تشغيل الكل", "Alle abspielen"],
+  "Please wait…": ["يرجى الانتظار…", "Bitte warten…"],
+  "Post an automatic message when members join, leave or are removed.": [
+    "انشر رسالة تلقائية عند انضمام الأعضاء أو مغادرتهم أو إزالتهم.",
+    "Eine automatische Nachricht posten, wenn Mitglieder beitreten, gehen oder entfernt werden."
+  ],
+  "Preview · sample data": [
+    "معاينة · بيانات تجريبية",
+    "Vorschau · Beispieldaten"
+  ],
+  "Preview: {0}": ["معاينة: {0}", "Vorschau: {0}"],
+  "Previews play even when a sound is switched off. Sounds use the speaker selected in Voice & Video.": [
+    "تُشغَّل المعاينات حتى لو كان الصوت متوقفًا. تستخدم الأصوات مكبّر الصوت المحدد في «الصوت والفيديو».",
+    "Vorschauen werden auch bei ausgeschaltetem Ton abgespielt. Töne nutzen den Lautsprecher aus „Sprache & Video“."
+  ],
+  "Private": ["خاص", "Privat"],
+  "Profile and status": ["الملف الشخصي والحالة", "Profil und Status"],
+  "Profile badges": ["شارات الملف الشخصي", "Profilabzeichen"],
+  "Profile preview": ["معاينة الملف الشخصي", "Profilvorschau"],
+  "Public": ["عام", "Öffentlich"],
+  "Public bot": ["بوت عام", "Öffentlicher Bot"],
+  "Push notifications": ["الإشعارات الفورية", "Push-Benachrichtigungen"],
+  "questions": ["الأسئلة", "fragen"],
+  "Reactions": ["التفاعلات", "Reaktionen"],
+  "Recommended: 512 × 512 px (1:1). Up to {0}. Cropped to a circle; keep faces and logos in the center.": [
+    "المقاس المقترح: 512 × 512 بكسل (1:1). بحد أقصى {0}. تُقص بشكل دائري، فاجعل الوجوه والشعارات في المنتصف.",
+    "Empfohlen: 512 × 512 px (1:1). Bis {0}. Wird rund zugeschnitten – Gesichter und Logos mittig halten."
+  ],
+  "Recommended: 512 × 512 px (1:1). Up to {0}. Keep your logo in the center, away from the edges.": [
+    "المقاس المقترح: 512 × 512 بكسل (1:1). بحد أقصى {0}. اجعل شعارك في المنتصف بعيدًا عن الأطراف.",
+    "Empfohlen: 512 × 512 px (1:1). Bis {0}. Halte dein Logo mittig, weg von den Rändern."
+  ],
+  "Recommended: 680 × 240 px (17:6). Up to {0}. Edges may be cropped on different screens; keep important details in the center.": [
+    "المقاس المقترح: 680 × 240 بكسل (17:6). بحد أقصى {0}. قد تُقص الأطراف على بعض الشاشات، فاجعل التفاصيل المهمة في المنتصف.",
+    "Empfohlen: 680 × 240 px (17:6). Bis {0}. Auf manchen Bildschirmen werden die Ränder abgeschnitten – Wichtiges mittig halten."
+  ],
+  "Recommended: 960 × 540 px (16:9). Up to {0}. Edges may be cropped above the channel list; keep important details in the center.": [
+    "المقاس المقترح: 960 × 540 بكسل (16:9). بحد أقصى {0}. قد تُقص الأطراف فوق قائمة القنوات، فاجعل التفاصيل المهمة في المنتصف.",
+    "Empfohlen: 960 × 540 px (16:9). Bis {0}. Über der Kanalliste können Ränder abgeschnitten werden – Wichtiges mittig halten."
+  ],
+  "Reconnect now": ["أعد الاتصال الآن", "Jetzt neu verbinden"],
+  "Reconnecting…": [
+    "جارٍ إعادة الاتصال…",
+    "Verbindung wird wiederhergestellt…"
+  ],
+  "Recovery codes": ["رموز الاسترداد", "Wiederherstellungscodes"],
+  "Remove avatar": ["إزالة الصورة الرمزية", "Avatar entfernen"],
+  "Remove banner": ["إزالة البانر", "Banner entfernen"],
+  "Remove image": ["إزالة الصورة", "Bild entfernen"],
+  "Remove role icon": ["إزالة أيقونة الدور", "Rollensymbol entfernen"],
+  "Remove server banner": ["إزالة بانر السيرفر", "Server-Banner entfernen"],
+  "Remove server icon": ["إزالة أيقونة السيرفر", "Server-Symbol entfernen"],
+  "Replaces your current codes": [
+    "يستبدل رموزك الحالية",
+    "Ersetzt deine aktuellen Codes"
+  ],
+  "Reset to default": ["إعادة إلى الافتراضي", "Auf Standard zurücksetzen"],
+  "Reset token": ["إعادة تعيين الرمز", "Token zurücksetzen"],
+  "resources": ["المصادر", "ressourcen"],
+  "Resources": ["المصادر", "Ressourcen"],
+  "Retry": ["إعادة المحاولة", "Erneut versuchen"],
+  "Retrying…": ["جارٍ إعادة المحاولة…", "Neuer Versuch…"],
+  "Reveal": ["إظهار", "Anzeigen"],
+  "Reveal email address": [
+    "إظهار البريد الإلكتروني",
+    "E-Mail-Adresse anzeigen"
+  ],
+  "Role": ["الدور", "Rolle"],
+  "Role icon": ["أيقونة الدور", "Rollensymbol"],
+  "Role ID": ["معرّف الدور", "Rollen-ID"],
+  "Role name": ["اسم الدور", "Rollenname"],
+  "Roles group members and give them permissions and a colour.": [
+    "تجمع الأدوار الأعضاء وتمنحهم صلاحيات ولونًا.",
+    "Rollen gruppieren Mitglieder und geben ihnen Berechtigungen und eine Farbe."
+  ],
+  "Save current": ["حفظ الحالي", "Aktuellen speichern"],
+  "Save username": ["حفظ اسم المستخدم", "Benutzernamen speichern"],
+  "Save your current look to switch back to it later, or share it as a file.": [
+    "احفظ مظهرك الحالي لتعود إليه لاحقًا أو تشاركه كملف.",
+    "Speichere deinen aktuellen Look, um später zurückzuwechseln oder ihn als Datei zu teilen."
+  ],
+  "Saved themes": ["السمات المحفوظة", "Gespeicherte Designs"],
+  "Saved themes could not be read. Export or repair local browser storage before saving.": [
+    "تعذّرت قراءة السمات المحفوظة. صدّرها أو أصلح تخزين المتصفح قبل الحفظ.",
+    "Gespeicherte Designs konnten nicht gelesen werden. Exportiere oder repariere den Browserspeicher, bevor du speicherst."
+  ],
+  "Saving message…": ["جارٍ حفظ الرسالة…", "Nachricht wird gespeichert…"],
+  "Saving the new order…": [
+    "جارٍ حفظ الترتيب الجديد…",
+    "Neue Reihenfolge wird gespeichert…"
+  ],
+  "School club": ["نادٍ مدرسي", "Schul-AG"],
+  "Screen share": ["مشاركة الشاشة", "Bildschirmübertragung"],
+  "Search bans": ["البحث في المحظورين", "Sperren durchsuchen"],
+  "Search by name or reason": [
+    "ابحث بالاسم أو السبب",
+    "Nach Name oder Grund suchen"
+  ],
+  "Search friends": ["ابحث في الأصدقاء", "Freunde durchsuchen"],
+  "Search KLIPY": ["ابحث في KLIPY", "KLIPY durchsuchen"],
+  "Search languages": ["ابحث عن لغة", "Sprachen durchsuchen"],
+  "Search messages": ["ابحث في الرسائل", "Nachrichten durchsuchen"],
+  "Search Results": ["نتائج البحث", "Suchergebnisse"],
+  "Security": ["الأمان", "Sicherheit"],
+  "See where you're signed in and sign out devices.": [
+    "اطّلع على الأجهزة المسجّل دخولك منها وسجّل خروجها.",
+    "Sieh, wo du angemeldet bist, und melde Geräte ab."
+  ],
+  "Send": ["إرسال", "Senden"],
+  "Server avatar": ["الصورة الرمزية في السيرفر", "Server-Avatar"],
+  "Server banner": ["بانر السيرفر", "Server-Banner"],
+  "Server details": ["تفاصيل السيرفر", "Serverdetails"],
+  "Server ID": ["معرّف السيرفر", "Server-ID"],
+  "Server info": ["معلومات السيرفر", "Serverinfo"],
+  "Server information": ["معلومات السيرفر", "Serverinformationen"],
+  "Server menu": ["قائمة السيرفر", "Servermenü"],
+  "Server name": ["اسم السيرفر", "Servername"],
+  "Server only. Empty fields use your main profile.": [
+    "للسيرفر فقط. الحقول الفارغة تستخدم ملفك الشخصي الأساسي.",
+    "Nur für diesen Server. Leere Felder nutzen dein Hauptprofil."
+  ],
+  "Server owner": ["مالك السيرفر", "Serverbesitzer"],
+  "Server profiles": ["ملفات السيرفرات", "Serverprofile"],
+  "Server profiles appear here once you join one.": [
+    "تظهر ملفات السيرفرات هنا بعد انضمامك إلى سيرفر.",
+    "Serverprofile erscheinen hier, sobald du einem Server beitrittst."
+  ],
+  "Server settings": ["إعدادات السيرفر", "Servereinstellungen"],
+  "Set up": ["إعداد", "Einrichten"],
+  "Setting up your server…": [
+    "جارٍ إعداد سيرفرك…",
+    "Dein Server wird eingerichtet…"
+  ],
+  "Setting up…": ["جارٍ الإعداد…", "Wird eingerichtet…"]
+}

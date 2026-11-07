@@ -1,0 +1,8 @@
+{
+  "{0} on Discover, {name}": ["{0} في «اكتشف»، {name}", "{0} auf Discover, {name}"],
+  "Mature channels are paused: nobody can open mature content until Zrzur offers an age check.": [
+    "القنوات المخصصة للبالغين متوقفة مؤقتاً: لا يمكن لأحد فتح المحتوى المخصص للبالغين حتى يوفّر زرزور التحقق من العمر.",
+    "Kanäle für Erwachsene sind pausiert: Niemand kann Inhalte für Erwachsene öffnen, bis Zrzur eine Altersprüfung anbietet."
+  ],
+  "Pick {0}": ["اختر {0}", "{0} wählen"]
+}

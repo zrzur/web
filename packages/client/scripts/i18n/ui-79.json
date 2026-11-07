@@ -1,0 +1,422 @@
+{
+  "All messages": [
+    "كل الرسائل",
+    "Alle Nachrichten"
+  ],
+  "Assign roles": [
+    "منح الأدوار",
+    "Rollen zuweisen"
+  ],
+  "Authenticator app": [
+    "تطبيق المصادقة",
+    "Authentifizierungs-App"
+  ],
+  "Ban member": [
+    "حظر العضو",
+    "Mitglied sperren"
+  ],
+  "Ban members": [
+    "حظر الأعضاء",
+    "Mitglieder sperren"
+  ],
+  "Ban user": [
+    "حظر المستخدم",
+    "Benutzer sperren"
+  ],
+  "Blocked user": [
+    "مستخدم محجوب",
+    "Blockierter Nutzer"
+  ],
+  "Bug tracker": [
+    "متعقب الأخطاء",
+    "Bug-Tracker"
+  ],
+  "Bypass slowmode": [
+    "تجاوز الوضع البطيء",
+    "Langsamen Modus umgehen"
+  ],
+  "Change avatar": [
+    "تغيير الصورة الرمزية",
+    "Avatar ändern"
+  ],
+  "Change nickname": [
+    "تغيير اللقب",
+    "Spitznamen ändern"
+  ],
+  "Channel description": [
+    "وصف القناة",
+    "Kanalbeschreibung"
+  ],
+  "Channel info": [
+    "معلومات القناة",
+    "Kanalinfo"
+  ],
+  "Channel name": [
+    "اسم القناة",
+    "Kanalname"
+  ],
+  "Channel slowmode": [
+    "الوضع البطيء للقناة",
+    "Kanal-Slowmode"
+  ],
+  "Client settings": [
+    "إعدادات التطبيق",
+    "Clienteinstellungen"
+  ],
+  "Create role": [
+    "إنشاء دور",
+    "Rolle erstellen"
+  ],
+  "Create webhook": [
+    "إنشاء ويب هوك",
+    "Webhook erstellen"
+  ],
+  "Crop avatar": [
+    "قص الصورة الرمزية",
+    "Avatar zuschneiden"
+  ],
+  "Crop banner": [
+    "قص البانر",
+    "Banner zuschneiden"
+  ],
+  "Crop channel icon": [
+    "قص أيقونة القناة",
+    "Kanalsymbol zuschneiden"
+  ],
+  "Crop emoji": [
+    "قص الإيموجي",
+    "Emoji zuschneiden"
+  ],
+  "Crop role icon": [
+    "قص أيقونة الدور",
+    "Rollensymbol zuschneiden"
+  ],
+  "Crop server banner": [
+    "قص بانر السيرفر",
+    "Server-Banner zuschneiden"
+  ],
+  "Crop server icon": [
+    "قص أيقونة السيرفر",
+    "Server-Symbol zuschneiden"
+  ],
+  "Current session": [
+    "الجلسة الحالية",
+    "Aktuelle Sitzung"
+  ],
+  "Deafen members": [
+    "كتم سماعة الأعضاء",
+    "Taubgeschaltete Mitglieder"
+  ],
+  "Delete message history": [
+    "حذف سجل الرسائل",
+    "Lösche Nachrichtenverlauf"
+  ],
+  "Direct messages": [
+    "الرسائل الخاصة",
+    "Direktnachrichten"
+  ],
+  "Do not disturb": [
+    "عدم الإزعاج",
+    "Bitte nicht stören"
+  ],
+  "Edit identity": [
+    "تعديل الهوية",
+    "Identität bearbeiten"
+  ],
+  "Emoji name": [
+    "اسم الإيموجي",
+    "Emojiname"
+  ],
+  "Enter channel": [
+    "دخول القناة",
+    "Kanal beitreten"
+  ],
+  "Enter code": [
+    "أدخل الرمز",
+    "Code eingeben"
+  ],
+  "Give wing": [
+    "إهداء جناح",
+    "Flügel schenken"
+  ],
+  "Group name": [
+    "اسم المجموعة",
+    "Gruppenname"
+  ],
+  "Hardware acceleration": [
+    "تسريع العتاد",
+    "Hardwarebeschleunigung"
+  ],
+  "Hide others": [
+    "إخفاء الآخرين",
+    "Andere verstecken"
+  ],
+  "Invite code": [
+    "رمز الدعوة",
+    "Einladungscode"
+  ],
+  "Invite others": [
+    "دعوة الآخرين",
+    "Andere einladen"
+  ],
+  "Kick member": [
+    "طرد العضو",
+    "Mitglied kicken"
+  ],
+  "Kick members": [
+    "طرد الأعضاء",
+    "Mitglieder kicken"
+  ],
+  "Log out": [
+    "تسجيل الخروج",
+    "Abmelden"
+  ],
+  "Log out other sessions": [
+    "تسجيل الخروج من الجلسات الأخرى",
+    "Aus anderen Sitzungen abmelden"
+  ],
+  "Manage channel": [
+    "إدارة القناة",
+    "Kanal verwalten"
+  ],
+  "Manage customisation": [
+    "إدارة التخصيص",
+    "Personalisierung verwalten"
+  ],
+  "Manage messages": [
+    "إدارة الرسائل",
+    "Nachrichten verwalten"
+  ],
+  "Manage nicknames": [
+    "إدارة الألقاب",
+    "Spitznamen verwalten"
+  ],
+  "Manage permissions": [
+    "إدارة الصلاحيات",
+    "Berechtigungen verwalten"
+  ],
+  "Manage roles": [
+    "إدارة الأدوار",
+    "Rollen verwalten"
+  ],
+  "Manage server": [
+    "إدارة السيرفر",
+    "Server verwalten"
+  ],
+  "Manage webhooks": [
+    "إدارة الويب هوك",
+    "Webhooks verwalten"
+  ],
+  "Mention everyone": [
+    "الإشارة إلى الجميع",
+    "Alle erwähnen"
+  ],
+  "Mention roles": [
+    "الإشارة إلى الأدوار",
+    "Rollen erwähnen"
+  ],
+  "Mentions only": [
+    "الإشارات فقط",
+    "Nur Erwähnungen"
+  ],
+  "Move members": [
+    "نقل الأعضاء",
+    "Mitglieder verschieben"
+  ],
+  "Move wing": [
+    "نقل الجناح",
+    "Flügel verschieben"
+  ],
+  "Mute channel": [
+    "كتم القناة",
+    "Kanal stummschalten"
+  ],
+  "Mute members": [
+    "كتم الأعضاء",
+    "Mitglieder stummschalten"
+  ],
+  "Mute screen share": [
+    "كتم مشاركة الشاشة",
+    "Bildschirmübertragung stummschalten"
+  ],
+  "Mute server": [
+    "كتم السيرفر",
+    "Server stummschalten"
+  ],
+  "Mutual friends": [
+    "الأصدقاء المشتركون",
+    "Gemeinsame Freunde"
+  ],
+  "Mutual groups": [
+    "المجموعات المشتركة",
+    "Gemeinsame Gruppen"
+  ],
+  "My account": [
+    "حسابي",
+    "Mein Konto"
+  ],
+  "My bots": [
+    "بوتاتي",
+    "Meine Bots"
+  ],
+  "New password": [
+    "كلمة المرور الجديدة",
+    "Neues Passwort"
+  ],
+  "Pinned messages": [
+    "الرسائل المثبّتة",
+    "Angeheftete Nachrichten"
+  ],
+  "Private channel": [
+    "قناة خاصة",
+    "Privater Kanal"
+  ],
+  "Read message history": [
+    "قراءة سجل الرسائل",
+    "Nachrichtenverlauf lesen"
+  ],
+  "Recovery code": [
+    "رمز الاسترداد",
+    "Wiederherstellungscode"
+  ],
+  "Remote channel": [
+    "قناة خارجية",
+    "Entfernter Kanal"
+  ],
+  "Remote server": [
+    "سيرفر خارجي",
+    "Entfernter Server"
+  ],
+  "Remove avatars": [
+    "إزالة الصور الرمزية",
+    "Avatare entfernen"
+  ],
+  "Remove member": [
+    "إزالة العضو",
+    "Mitglied entfernen"
+  ],
+  "Remove timeout": [
+    "رفع الإيقاف المؤقت",
+    "Timeout aufheben"
+  ],
+  "Rename session": [
+    "إعادة تسمية الجلسة",
+    "Sitzung umbenennen"
+  ],
+  "Role colour": [
+    "لون الدور",
+    "Rollenfarbe"
+  ],
+  "Role name": [
+    "اسم الدور",
+    "Rollenname"
+  ],
+  "Role overrides": [
+    "صلاحيات الأدوار المخصصة",
+    "Rollenüberschreibungen"
+  ],
+  "Saved notes": [
+    "الملاحظات المحفوظة",
+    "Gespeicherte Notizen"
+  ],
+  "Screen share settings": [
+    "إعدادات مشاركة الشاشة",
+    "Einstellungen für Bildschirmübertragung"
+  ],
+  "Screen share volume": [
+    "مستوى صوت مشاركة الشاشة",
+    "Screensharelautstärke"
+  ],
+  "Search results": [
+    "نتائج البحث",
+    "Suchergebnisse"
+  ],
+  "Send embeds": [
+    "إرسال محتوى مضمّن",
+    "Einbettungen senden"
+  ],
+  "Send messages": [
+    "إرسال الرسائل",
+    "Nachrichten senden"
+  ],
+  "Send request": [
+    "إرسال الطلب",
+    "Anfrage schicken"
+  ],
+  "Server default": [
+    "الإعداد الافتراضي للسيرفر",
+    "Server-Standard"
+  ],
+  "Server name": [
+    "اسم السيرفر",
+    "Servername"
+  ],
+  "Show others": [
+    "إظهار الآخرين",
+    "Andere anzeigen"
+  ],
+  "Slowmode immune": [
+    "مستثنى من الوضع البطيء",
+    "Vom Slowmode ausgenommen"
+  ],
+  "Source code": [
+    "الشيفرة المصدرية",
+    "Quellcode"
+  ],
+  "Timeout member": [
+    "إيقاف العضو مؤقتًا",
+    "Mitglied in Timeout versetzen"
+  ],
+  "Timeout members": [
+    "إيقاف الأعضاء مؤقتًا",
+    "Mitglieder Timeouten"
+  ],
+  "Unknown server": [
+    "سيرفر غير معروف",
+    "Unbekannter Server"
+  ],
+  "Unmute channel": [
+    "إلغاء كتم القناة",
+    "Kanalstummschaltung aufheben"
+  ],
+  "Unmute server": [
+    "إلغاء كتم السيرفر",
+    "Serverstummschaltung aufheben"
+  ],
+  "Upload files": [
+    "رفع الملفات",
+    "Dateien hochladen"
+  ],
+  "User management": [
+    "إدارة المستخدمين",
+    "Benutzerverwaltung"
+  ],
+  "User settings": [
+    "إعدادات المستخدم",
+    "Benutzereinstellungen"
+  ],
+  "View channel": [
+    "عرض القناة",
+    "Kanal ansehen"
+  ],
+  "Voice channel": [
+    "قناة صوتية",
+    "Sprachkanal"
+  ],
+  "Voice connected": [
+    "متصل بالصوت",
+    "Sprache verbunden"
+  ],
+  "Webhook icon": [
+    "أيقونة الويب هوك",
+    "Webhook-Icon"
+  ],
+  "Webhook name": [
+    "اسم الويب هوك",
+    "Webhook-Name"
+  ],
+  "Leave designs": [
+    "مغادرة التصاميم",
+    "Designs verlassen"
+  ]
+}

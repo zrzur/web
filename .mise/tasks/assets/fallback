@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+#MISE description="Verify bundled Zrzur assets without touching local checkouts"
+set -e
+test -d packages/client/public/brand

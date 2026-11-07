@@ -1,0 +1,4 @@
+{
+  "Something went wrong. Try again in a moment.": ["حدث خطأ ما. حاول مرة أخرى بعد قليل.", "Etwas ist schiefgelaufen. Versuch es gleich noch einmal."],
+  "That was a lot at once. Try again in {seconds} seconds.": ["طلبات كثيرة في وقت قصير. حاول مرة أخرى بعد {seconds} ثانية.", "Das war viel auf einmal. Versuch es in {seconds} Sekunden noch einmal."]
+}

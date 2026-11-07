@@ -1,0 +1,9 @@
+{
+  "[Yesterday at] LT": ["[أمس الساعة] LT", "[Gestern um] LT"],
+  "[Today at] LT": ["[اليوم الساعة] LT", "[Heute um] LT"],
+  "[Tomorrow at] LT": ["[غدًا الساعة] LT", "[Morgen um] LT"],
+  "[Last] dddd [at] LT": ["dddd [الماضي الساعة] LT", "[Letzten] dddd [um] LT"],
+  "dddd [at] LT": ["dddd [الساعة] LT", "dddd [um] LT"],
+  "New messages since {0}": ["رسائل جديدة {0}", "Neue Nachrichten {0}"],
+  "Drag to reorder": ["اسحب لإعادة الترتيب", "Zum Sortieren ziehen"]
+}

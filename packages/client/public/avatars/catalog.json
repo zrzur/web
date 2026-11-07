@@ -1,0 +1,240 @@
+{
+  "pack": "Zrzur Expressive Default Avatars",
+  "version": 2,
+  "mark": "B silhouette / character expressions",
+  "designs": 20,
+  "sizes": [
+    64,
+    128,
+    256,
+    512,
+    1024
+  ],
+  "shapes": [
+    "circle",
+    "square"
+  ],
+  "assignmentVersion": "zrzur-default-v1",
+  "avatars": [
+    {
+      "id": "avatar-01-raspberry",
+      "name": "ابتسامة",
+      "background": "#E0195F",
+      "foreground": "#FFFFFF",
+      "contrast": 4.69,
+      "colorName": "توتي",
+      "expression": "smile",
+      "motion": "blink",
+      "apng": "animated-png/avatar-01-raspberry.apng"
+    },
+    {
+      "id": "avatar-02-cherry",
+      "name": "غمزة يمين",
+      "background": "#C92A46",
+      "foreground": "#FFFFFF",
+      "contrast": 5.38,
+      "colorName": "كرزي",
+      "expression": "wink-right",
+      "motion": "wink-right",
+      "apng": "animated-png/avatar-02-cherry.apng"
+    },
+    {
+      "id": "avatar-03-coral",
+      "name": "غمزة يسار",
+      "background": "#F28A78",
+      "foreground": "#0D0E16",
+      "contrast": 7.95,
+      "colorName": "مرجاني",
+      "expression": "wink-left",
+      "motion": "wink-left",
+      "apng": "animated-png/avatar-03-coral.apng"
+    },
+    {
+      "id": "avatar-04-tangerine",
+      "name": "عيون واسعة",
+      "background": "#F4A261",
+      "foreground": "#0D0E16",
+      "contrast": 9.33,
+      "colorName": "يوسفي",
+      "expression": "wide-eyes",
+      "motion": "look",
+      "apng": "animated-png/avatar-04-tangerine.apng"
+    },
+    {
+      "id": "avatar-05-amber",
+      "name": "ضحكة فرح",
+      "background": "#F6C65B",
+      "foreground": "#0D0E16",
+      "contrast": 12.04,
+      "colorName": "كهرماني",
+      "expression": "joy",
+      "motion": "bounce",
+      "apng": "animated-png/avatar-05-amber.apng"
+    },
+    {
+      "id": "avatar-06-lemon",
+      "name": "عيون قلوب",
+      "background": "#E5D566",
+      "foreground": "#0D0E16",
+      "contrast": 12.86,
+      "colorName": "ليموني",
+      "expression": "heart-eyes",
+      "motion": "pulse",
+      "apng": "animated-png/avatar-06-lemon.apng"
+    },
+    {
+      "id": "avatar-07-lime",
+      "name": "عيون نجوم",
+      "background": "#B9D874",
+      "foreground": "#0D0E16",
+      "contrast": 12.04,
+      "colorName": "ليموني أخضر",
+      "expression": "star-eyes",
+      "motion": "twist",
+      "apng": "animated-png/avatar-07-lime.apng"
+    },
+    {
+      "id": "avatar-08-leaf",
+      "name": "نظارات شمسية",
+      "background": "#4A9560",
+      "foreground": "#0D0E16",
+      "contrast": 5.28,
+      "colorName": "أخضر",
+      "expression": "sunglasses",
+      "motion": "tilt",
+      "apng": "animated-png/avatar-08-leaf.apng"
+    },
+    {
+      "id": "avatar-09-mint",
+      "name": "فضولي",
+      "background": "#83D7B9",
+      "foreground": "#0D0E16",
+      "contrast": 11.35,
+      "colorName": "نعناعي",
+      "expression": "curious",
+      "motion": "look",
+      "apng": "animated-png/avatar-09-mint.apng"
+    },
+    {
+      "id": "avatar-10-teal",
+      "name": "نعسان",
+      "background": "#287F83",
+      "foreground": "#FFFFFF",
+      "contrast": 4.72,
+      "colorName": "بترولي",
+      "expression": "sleepy",
+      "motion": "sleep",
+      "apng": "animated-png/avatar-10-teal.apng"
+    },
+    {
+      "id": "avatar-11-cyan",
+      "name": "عيون ألعاب",
+      "background": "#6CC9DE",
+      "foreground": "#0D0E16",
+      "contrast": 10.12,
+      "colorName": "سماوي",
+      "expression": "plus-eyes",
+      "motion": "pulse",
+      "apng": "animated-png/avatar-11-cyan.apng"
+    },
+    {
+      "id": "avatar-12-ocean",
+      "name": "عيون مشاكسة",
+      "background": "#3279BE",
+      "foreground": "#FFFFFF",
+      "contrast": 4.55,
+      "colorName": "أزرق",
+      "expression": "chevrons",
+      "motion": "bounce",
+      "apng": "animated-png/avatar-12-ocean.apng"
+    },
+    {
+      "id": "avatar-13-royal",
+      "name": "عيون لامعة",
+      "background": "#435CC8",
+      "foreground": "#FFFFFF",
+      "contrast": 5.83,
+      "colorName": "أزرق ملكي",
+      "expression": "diamond-eyes",
+      "motion": "pulse",
+      "apng": "animated-png/avatar-13-royal.apng"
+    },
+    {
+      "id": "avatar-14-indigo",
+      "name": "عيون بكسل",
+      "background": "#5A4CA4",
+      "foreground": "#FFFFFF",
+      "contrast": 6.99,
+      "colorName": "نيلي",
+      "expression": "pixel-eyes",
+      "motion": "look",
+      "apng": "animated-png/avatar-14-indigo.apng"
+    },
+    {
+      "id": "avatar-15-violet",
+      "name": "عيون فقاعات",
+      "background": "#9B88D4",
+      "foreground": "#0D0E16",
+      "contrast": 6.29,
+      "colorName": "بنفسجي",
+      "expression": "bubble-eyes",
+      "motion": "blink",
+      "apng": "animated-png/avatar-15-violet.apng"
+    },
+    {
+      "id": "avatar-16-lavender",
+      "name": "ضحكة بدموع",
+      "background": "#CEC1E9",
+      "foreground": "#0D0E16",
+      "contrast": 11.39,
+      "colorName": "لافندر",
+      "expression": "laugh-tears",
+      "motion": "bounce",
+      "apng": "animated-png/avatar-16-lavender.apng"
+    },
+    {
+      "id": "avatar-17-rose",
+      "name": "خجول",
+      "background": "#E6A5BE",
+      "foreground": "#0D0E16",
+      "contrast": 9.61,
+      "colorName": "وردي",
+      "expression": "shy",
+      "motion": "sleep",
+      "apng": "animated-png/avatar-17-rose.apng"
+    },
+    {
+      "id": "avatar-18-berry",
+      "name": "عيون دوّامة",
+      "background": "#9D3B73",
+      "foreground": "#FFFFFF",
+      "contrast": 6.35,
+      "colorName": "توتي داكن",
+      "expression": "spiral-eyes",
+      "motion": "spiral",
+      "apng": "animated-png/avatar-18-berry.apng"
+    },
+    {
+      "id": "avatar-19-slate",
+      "name": "عيون كبسولات",
+      "background": "#8191AA",
+      "foreground": "#0D0E16",
+      "contrast": 6.01,
+      "colorName": "رمادي مزرق",
+      "expression": "goggles",
+      "motion": "look",
+      "apng": "animated-png/avatar-19-slate.apng"
+    },
+    {
+      "id": "avatar-20-midnight",
+      "name": "قلب وغمزة",
+      "background": "#0D0E16",
+      "foreground": "#E0195F",
+      "contrast": 4.1,
+      "colorName": "ليلي",
+      "expression": "heart-wink",
+      "motion": "wink-right",
+      "apng": "animated-png/avatar-20-midnight.apng"
+    }
+  ]
+}

@@ -1,0 +1,4 @@
+{
+  "Member overrides": ["صلاحيات الأعضاء المخصصة", "Mitgliederüberschreibungen"],
+  "changed permissions of {0} in {1}": ["غيّر صلاحيات العضو {0} في {1}", "hat die Berechtigungen des Mitglieds {0} in {1} geändert"]
+}

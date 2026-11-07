@@ -1,0 +1,13 @@
+{
+  "Online now": ["متصلون الآن", "Gerade online"],
+  "In your chat": ["في محادثتك", "In deinem Chat"],
+  "Named in the bot's description.": ["مذكورة في وصف البوت.", "Aus der Beschreibung des Bots."],
+  "{0, plural, one {# result} other {# results}}": [
+    "{0, plural, zero {لا نتائج} one {نتيجة واحدة} two {نتيجتان} few {# نتائج} many {# نتيجة} other {# نتيجة}}",
+    "{0, plural, one {# Ergebnis} other {# Ergebnisse}}"
+  ],
+  "{0, plural, one {# member online in these servers right now} other {# members online in these servers right now}}": [
+    "{0, plural, zero {لا أحد متصل الآن في هذه السيرفرات} one {عضو واحد متصل الآن في هذه السيرفرات} two {عضوان متصلان الآن في هذه السيرفرات} few {# أعضاء متصلون الآن في هذه السيرفرات} many {# عضواً متصلاً الآن في هذه السيرفرات} other {# عضو متصل الآن في هذه السيرفرات}}",
+    "{0, plural, one {# Mitglied gerade online auf diesen Servern} other {# Mitglieder gerade online auf diesen Servern}}"
+  ]
+}

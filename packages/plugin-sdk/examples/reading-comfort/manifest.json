@@ -1,0 +1,57 @@
+{
+  "$schema": "../../schema/plugin-manifest.v1.schema.json",
+  "manifest_version": 1,
+  "id": "zrzur.reading-comfort",
+  "name": "Reading Comfort",
+  "version": "1.0.0",
+  "description": "Larger text, more line spacing, underlined links, clear focus rings and less motion.",
+  "author": { "name": "Zrzur" },
+  "category": "accessibility",
+  "icon": "text-aa",
+  "api_version": 1,
+  "min_app_version": "26.0.0",
+  "platforms": ["web", "pwa", "desktop"],
+  "entrypoint": { "type": "declarative" },
+  "permissions": ["accessibility.display", "storage.settings", "ui.commands", "ui.panels", "keybinds"],
+  "contributes": {
+    "settings": [
+      { "key": "font_scale", "type": "number", "title": { "en": "Text size", "ar": "حجم النص" }, "default": 1.15, "min": 0.85, "max": 1.5, "step": 0.05 },
+      { "key": "line_height", "type": "number", "title": { "en": "Line spacing", "ar": "تباعد الأسطر" }, "default": 1.6, "min": 1.2, "max": 2, "step": 0.1 },
+      { "key": "underline_links", "type": "boolean", "title": { "en": "Underline links", "ar": "تسطير الروابط" }, "default": true },
+      { "key": "focus_ring", "type": "boolean", "title": { "en": "Clear focus ring", "ar": "إطار تركيز واضح" }, "default": true },
+      { "key": "reduce_motion", "type": "boolean", "title": { "en": "Reduce motion", "ar": "تقليل الحركة" }, "default": true }
+    ],
+    "accessibility": {
+      "font_scale": "$setting:font_scale",
+      "line_height": "$setting:line_height",
+      "underline_links": "$setting:underline_links",
+      "focus_ring": "$setting:focus_ring",
+      "reduce_motion": "$setting:reduce_motion"
+    },
+    "commands": [
+      { "id": "toggle", "title": { "en": "Turn Reading Comfort on or off", "ar": "تشغيل راحة القراءة أو إيقافها" }, "action": { "type": "accessibility.toggle" } },
+      { "id": "panel", "title": { "en": "Open Reading Comfort", "ar": "فتح راحة القراءة" }, "action": { "type": "panel.open", "panel": "main" } }
+    ],
+    "keybinds": [{ "command": "toggle", "keys": "Alt+Shift+R" }],
+    "panels": [
+      {
+        "id": "main",
+        "title": { "en": "Reading Comfort", "ar": "راحة القراءة" },
+        "blocks": [
+          { "type": "text", "text": { "en": "Change these any time; text size and spacing are in the plugin's settings.", "ar": "غيّرها متى شئت؛ حجم النص والتباعد في إعدادات الإضافة." } },
+          { "type": "setting", "key": "underline_links" },
+          { "type": "setting", "key": "focus_ring" },
+          { "type": "setting", "key": "reduce_motion" },
+          { "type": "divider" },
+          { "type": "button", "label": { "en": "Turn off for now", "ar": "إيقاف مؤقتًا" }, "command": "toggle" }
+        ]
+      }
+    ]
+  },
+  "locales": {
+    "ar": {
+      "name": "راحة القراءة",
+      "description": "نص أكبر، وتباعد أسطر أكثر، وروابط مسطّرة، وإطار تركيز واضح، وحركة أقل."
+    }
+  }
+}

@@ -1,0 +1,6 @@
+{
+  "Pay with": ["ادفع عبر", "Bezahlen mit"],
+  "Card": ["بطاقة", "Karte"],
+  "Credit or debit card, on Stripe's secure page.": ["بطاقة ائتمان أو بطاقة خصم، على صفحة Stripe الآمنة.", "Kredit- oder Debitkarte, auf der sicheren Seite von Stripe."],
+  "Your PayPal balance, bank or card, on PayPal's page.": ["رصيدك في PayPal أو حسابك المصرفي أو بطاقتك، على صفحة PayPal.", "Dein PayPal-Guthaben, Bankkonto oder deine Karte, auf der Seite von PayPal."]
+}

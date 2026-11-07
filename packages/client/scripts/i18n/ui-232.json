@@ -1,0 +1,27 @@
+{
+  "Add a role": ["إضافة دور", "Rolle hinzufügen"],
+  "All permissions": ["كل الصلاحيات", "Alle Berechtigungen"],
+  "Channels synced with this category use these permissions: {0} of {1}.": [
+    "القنوات المتزامنة مع هذه الفئة تستعمل هذه الصلاحيات: {0} من {1}.",
+    "Mit dieser Kategorie synchronisierte Kanäle nutzen diese Berechtigungen: {0} von {1}."
+  ],
+  "Edit permissions": ["تعديل الصلاحيات", "Berechtigungen bearbeiten"],
+  "Not synced with {0}": ["غير متزامنة مع {0}", "Nicht mit {0} synchronisiert"],
+  "Permissions come from the category. Changing one here stops following it.": [
+    "الصلاحيات مأخوذة من الفئة. وتغيير أيّ منها هنا يوقف اتّباعها.",
+    "Die Berechtigungen kommen aus der Kategorie. Änderst du hier eine, folgt der Kanal ihr nicht mehr."
+  ],
+  "Permissions of {0}": ["صلاحيات {0}", "Berechtigungen von {0}"],
+  "Sync": ["مزامنة", "Synchronisieren"],
+  "Sync now": ["زامِن الآن", "Jetzt synchronisieren"],
+  "Sync with {0}?": ["مزامنة مع {0}؟", "Mit {0} synchronisieren?"],
+  "Synced with {0}": ["متزامنة مع {0}", "Mit {0} synchronisiert"],
+  "The channel's own permissions for everyone and for roles are removed and it uses the category's. Member overrides stay.": [
+    "تُحذف صلاحيات القناة الخاصة بالجميع وبالأدوار، وتستعمل صلاحيات الفئة. وتبقى صلاحيات الأعضاء المخصصة.",
+    "Die eigenen Berechtigungen des Kanals für alle und für Rollen werden entfernt, und er nutzt die der Kategorie. Mitgliederüberschreibungen bleiben."
+  ],
+  "This channel uses its own permissions.": [
+    "تستعمل هذه القناة صلاحياتها الخاصة.",
+    "Dieser Kanal nutzt seine eigenen Berechtigungen."
+  ]
+}

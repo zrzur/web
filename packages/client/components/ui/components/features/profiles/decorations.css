@@ -1,0 +1,173 @@
+/* Avatar decorations: artwork around the avatar */
+.z-deco {
+  position: relative;
+  display: inline-flex;
+  flex-shrink: 0;
+  line-height: 0;
+  /* on the baseline it sits 3 px above the middle of its row */
+  vertical-align: top;
+  isolation: isolate;
+  /* the art reaches past the avatar; never let a parent rule clip it */
+  overflow: visible !important;
+}
+/* illustrated artwork: 1.5x the avatar, centred on it */
+.z-deco-art {
+  position: absolute;
+  z-index: 2;
+  left: -25%;
+  top: -25%;
+  width: 150%;
+  height: 150%;
+  max-width: none;
+  pointer-events: none;
+  user-select: none;
+  filter: drop-shadow(0 1px 1.5px rgb(0 0 0 / 35%));
+}
+.z-deco-art[data-hidden] {
+  visibility: hidden;
+}
+
+/*
+ * Nameplates keep their emblem at the end of the row, which is the other side
+ * in right-to-left: these two switch which address of the file is used. Flags
+ * move and are never flipped. The angle turns the mask to the name.
+ */
+:root {
+  --z-plate-ltr: initial;
+  --z-plate-rtl: /* off */;
+  --z-plate-angle: 90deg;
+}
+:root[dir="rtl"] {
+  --z-plate-ltr: /* off */;
+  --z-plate-rtl: initial;
+  --z-plate-angle: 270deg;
+}
+
+/*
+ * Every nameplate, in one place: give an element this class and `--plate`.
+ * The plate is clear from the name's start to about the middle, then comes in
+ * towards the emblem, so what is behind the row shows through under the name.
+ * It sits on a layer of its own: the mask must not touch the row's content.
+ * The element is its own positioned box, relative or absolute as it needs.
+ */
+.z-plate {
+  isolation: isolate;
+  overflow: hidden;
+}
+.z-plate::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  border-radius: inherit;
+  background: var(--plate);
+  pointer-events: none;
+}
+.z-plate::before,
+.z-plate-motion {
+  -webkit-mask-image: linear-gradient(
+    var(--z-plate-angle, 90deg),
+    transparent 35%,
+    #000 65%
+  );
+  mask-image: linear-gradient(
+    var(--z-plate-angle, 90deg),
+    transparent 35%,
+    #000 65%
+  );
+}
+
+/*
+ * A plate as a small picture in a tile: its emblem end at full height, with
+ * nothing to fade for, since no name sits on it.
+ */
+.z-plate-tile::before {
+  -webkit-mask-image: none;
+  mask-image: none;
+  background-size: auto 100%;
+  background-position: 100% 50%;
+}
+:root[dir="rtl"] .z-plate-tile::before {
+  background-position: 0% 50%;
+}
+
+.z-plate-motion {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  overflow: hidden;
+  border-radius: inherit;
+  pointer-events: none;
+}
+/* a band of light that crosses slowly, then waits */
+.z-plate-motion::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  inset-inline-start: -40%;
+  width: 36%;
+  background: linear-gradient(
+    100deg,
+    rgb(255 255 255 / 0%),
+    rgb(255 255 255 / 24%) 44%,
+    rgb(255 255 255 / 36%) 50%,
+    rgb(255 255 255 / 24%) 56%,
+    rgb(255 255 255 / 0%)
+  );
+  animation: z-plate-sheen 8s ease-in-out infinite;
+  animation-play-state: var(--z-plate-run, paused);
+}
+/* plain themes: a second layer of their art, drifting; asked for on hover only */
+.z-plate-motion::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  inset-inline-start: 0;
+  width: 200%;
+  background: var(--z-plate-drifting, none) 0 0 / 50% 100% repeat-x;
+  animation: z-plate-drift 28s linear infinite;
+  animation-play-state: var(--z-plate-run, paused);
+}
+:hover > .z-plate-motion,
+:hover > [data-nameplate] > .z-plate-motion,
+.z-plate-motion[data-live] {
+  --z-plate-run: running;
+  --z-plate-drifting: var(--z-plate-drift);
+}
+:root[dir="rtl"] .z-plate-motion::before {
+  animation-name: z-plate-sheen-rtl;
+}
+:root[dir="rtl"] .z-plate-motion::after {
+  animation-name: z-plate-drift-rtl;
+}
+
+@keyframes z-plate-sheen {
+  70%,
+  100% {
+    transform: translateX(440%);
+  }
+}
+@keyframes z-plate-sheen-rtl {
+  70%,
+  100% {
+    transform: translateX(-440%);
+  }
+}
+@keyframes z-plate-drift {
+  to {
+    transform: translateX(-50%);
+  }
+}
+@keyframes z-plate-drift-rtl {
+  to {
+    transform: translateX(50%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .z-plate-motion {
+    display: none;
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "Announcement": ["إعلانات", "Ankündigungen"],
+  "Announcement channel": ["قناة إعلانات", "Ankündigungskanal"],
+  "Channels: {0}": ["القنوات: {0}", "Kanäle: {0}"],
+  "Live counters at the top of the channel list. They update by themselves and nobody can open them.": ["عدّادات حيّة في أعلى قائمة القنوات. تتحدّث وحدها ولا يستطيع أحد فتحها.", "Live-Zähler oben in der Kanalliste. Sie aktualisieren sich selbst, und niemand kann sie öffnen."],
+  "Members: {0}": ["الأعضاء: {0}", "Mitglieder: {0}"],
+  "News and updates. Only moderators post, everyone reads.": ["أخبار وتحديثات. المشرفون فقط ينشرون، والجميع يقرأ.", "Neuigkeiten und Updates. Nur Moderatoren posten, alle lesen."],
+  "Only people who can manage messages post here. Everyone else reads.": ["ينشر هنا فقط من يملك صلاحية إدارة الرسائل، والبقية يقرؤون.", "Hier posten nur Personen, die Nachrichten verwalten dürfen. Alle anderen lesen."],
+  "Roles: {0}": ["الأدوار: {0}", "Rollen: {0}"],
+  "Rules": ["القواعد", "Regeln"],
+  "Rules channel": ["قناة القواعد", "Regelkanal"],
+  "Server stats": ["إحصاءات السيرفر", "Serverstatistik"],
+  "The channel with your server rules gets its own icon at the top of the list.": ["قناة قواعد سيرفرك تأخذ أيقونة خاصة بها في القائمة.", "Der Kanal mit deinen Serverregeln bekommt ein eigenes Symbol in der Liste."],
+  "This is an announcement channel. Only people who can manage messages post here.": ["هذه قناة إعلانات. ينشر فيها فقط من يملك صلاحية إدارة الرسائل.", "Dies ist ein Ankündigungskanal. Hier posten nur Personen, die Nachrichten verwalten dürfen."],
+  "Updates by itself. Nobody can open it.": ["يتحدّث وحده، ولا يستطيع أحد فتحه.", "Aktualisiert sich selbst. Niemand kann ihn öffnen."],
+  "Wings: {0}": ["الأجنحة: {0}", "Flügel: {0}"]
+}

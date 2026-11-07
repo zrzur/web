@@ -1,0 +1,86 @@
+{
+  "Start from scratch": [
+    "ابدأ من الصفر",
+    "Bei null anfangen"
+  ],
+  "Gaming community": [
+    "مجتمع ألعاب",
+    "Gaming-Community"
+  ],
+  "Make it yours": [
+    "اجعله سيرفرك",
+    "Mach ihn zu deinem"
+  ],
+  "Add a server icon": [
+    "أضف أيقونة للسيرفر",
+    "Server-Icon hinzufügen"
+  ],
+  "{name}'s server": [
+    "سيرفر {name}",
+    "Server von {name}"
+  ],
+  "I agree to <0>Zrzur's rules for server owners</0>": [
+    "أوافق على <0>قواعد زرزور لمالكي السيرفرات</0>",
+    "Ich stimme den <0>Zrzur-Regeln für Serverinhaber</0> zu"
+  ],
+  "Moderators": [
+    "المشرفون",
+    "Moderatoren"
+  ],
+  "Make your server": [
+    "أنشئ سيرفرك",
+    "Erstelle deinen Server"
+  ],
+  "Or start ready-made": [
+    "أو ابدأ بقالب جاهز",
+    "Oder fertig starten"
+  ],
+  "Got an invite?": [
+    "هل لديك دعوة؟",
+    "Hast du eine Einladung?"
+  ],
+  "Join with an invite": [
+    "انضم بدعوة",
+    "Mit Einladung beitreten"
+  ],
+  "Who will gather here?": [
+    "من سيجتمع هنا؟",
+    "Wer trifft sich hier?"
+  ],
+  "A wider community": [
+    "مجتمع أوسع",
+    "Eine größere Community"
+  ],
+  "Just friends": [
+    "الأصدقاء فقط",
+    "Nur Freunde"
+  ],
+  "Decide later": [
+    "قرّر لاحقًا",
+    "Später entscheiden"
+  ],
+  "Leave setup?": [
+    "أتغادر الإعداد؟",
+    "Einrichtung verlassen?"
+  ],
+  "Leave setup": [
+    "غادر الإعداد",
+    "Einrichtung verlassen"
+  ],
+  "Keep setting up": [
+    "تابع الإعداد",
+    "Weiter einrichten"
+  ],
+  "Zrzur did not answer in time.": [
+    "لم يستجب زرزور في الوقت المحدد.",
+    "Zrzur hat nicht rechtzeitig geantwortet."
+  ],
+  "Your server is not finished. Some channels, roles or permissions may be missing, and you can only fix them by hand in Server settings.": [
+    "لم يكتمل سيرفرك بعد. قد تنقصه بعض القنوات أو الأدوار أو الصلاحيات، ولن تتمكن من إصلاحها إلا يدويًا من إعدادات السيرفر.",
+    "Dein Server ist noch nicht fertig. Einige Kanäle, Rollen oder Rechte fehlen vielleicht, und du kannst sie nur von Hand in den Servereinstellungen ergänzen."
+  ],
+  "Your server exists but is not finished. Some channels, roles or permissions may be missing. Continue setup to finish it.": [
+    "سيرفرك موجود لكنه لم يكتمل. قد تنقصه بعض القنوات أو الأدوار أو الصلاحيات. تابع الإعداد لإكماله.",
+    "Dein Server existiert, ist aber noch nicht fertig. Einige Kanäle, Rollen oder Rechte fehlen vielleicht. Mach mit der Einrichtung weiter, um ihn fertigzustellen."
+  ]
+}

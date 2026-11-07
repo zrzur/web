@@ -1,0 +1,221 @@
+/* Voice note player: one rounded pill, accent play button, waveform, time */
+.z-voice {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  width: min(320px, 100%);
+  height: 48px;
+  padding-inline: 8px 14px;
+  border-radius: 999px;
+  border: 1px solid var(--z-border-subtle);
+  background: var(--z-bg-raised);
+  color: var(--z-fg-primary);
+}
+.z-voice audio {
+  display: none;
+}
+.z-voice-play,
+.z-recorder-send {
+  flex-shrink: 0;
+  display: grid;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: var(--z-accent-fill, #e0195f);
+  color: var(--z-on-accent, #fff);
+  cursor: pointer;
+  --z-icon-color: currentColor;
+  transition:
+    scale 0.12s ease,
+    background-color 0.12s ease;
+}
+.z-voice-play:hover,
+.z-recorder-send:hover:not(:disabled) {
+  background: var(--z-accent-hover, var(--z-accent, #e0195f));
+  scale: 1.06;
+}
+.z-voice-play:disabled,
+.z-recorder-send:disabled {
+  opacity: 0.4;
+  cursor: default;
+}
+.z-voice-wave,
+.z-recorder-wave {
+  flex: 1;
+  min-width: 0;
+  height: 26px;
+  display: flex;
+  align-items: center;
+  gap: 2px;
+}
+.z-voice-wave {
+  cursor: pointer;
+  touch-action: none;
+  border-radius: 4px;
+}
+.z-voice-wave:focus-visible,
+.z-voice-play:focus-visible,
+.z-recorder button:focus-visible {
+  outline: 2px solid var(--z-focus, var(--z-accent));
+  outline-offset: 2px;
+}
+.z-voice-wave > span,
+.z-recorder-wave > span {
+  flex: 1;
+  min-width: 2px;
+  max-width: 4px;
+  border-radius: 2px;
+  background: color-mix(in srgb, var(--z-fg-primary) 28%, transparent);
+  transition: background-color 0.1s linear;
+}
+.z-voice-wave > span[data-played="true"] {
+  background: var(--z-accent-text, var(--z-accent, #e0195f));
+}
+.z-voice-time,
+.z-recorder-time {
+  flex-shrink: 0;
+  min-width: 34px;
+  font-size: 12px;
+  font-variant-numeric: tabular-nums;
+  color: var(--z-fg-muted);
+  text-align: end;
+}
+
+/* Recording bar above the message box */
+.z-recorder {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 8px;
+  padding: 7px 8px;
+  border-radius: calc(var(--z-radius, 10px) + 4px);
+  border: 1px solid var(--z-border-subtle);
+  background: var(--z-bg-raised);
+  color: var(--z-fg-primary);
+}
+.z-recorder-cancel {
+  flex-shrink: 0;
+  display: grid;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: transparent;
+  color: var(--z-fg-muted);
+  cursor: pointer;
+  --z-icon-color: currentColor;
+}
+.z-recorder-cancel:hover {
+  color: var(--z-danger, #f27488);
+  background: color-mix(in srgb, var(--z-danger, #f27488) 12%, transparent);
+}
+.z-recorder-dot {
+  flex-shrink: 0;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--z-danger-strong, #b85867);
+  animation: z-recorder-pulse 1.2s ease-in-out infinite;
+}
+.z-recorder-dot[data-paused="true"] {
+  animation: none;
+  opacity: 0.5;
+}
+.z-recorder-time {
+  text-align: start;
+  color: var(--z-fg-primary);
+}
+.z-recorder-wave > span {
+  background: color-mix(in srgb, var(--z-accent, #e0195f) 70%, transparent);
+  transition: height 0.1s linear;
+}
+.z-recorder-note {
+  flex: 1;
+  font-size: 13px;
+  color: var(--z-fg-muted);
+}
+.z-recorder-wave + .z-recorder-note {
+  flex: 0 0 auto;
+}
+@keyframes z-recorder-pulse {
+  50% {
+    opacity: 0.35;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .z-recorder-dot {
+    animation: none;
+  }
+  .z-voice-play,
+  .z-recorder-send,
+  .z-recorder-wave > span {
+    transition: none;
+  }
+}
+
+/* Music and other audio files: the same pill, a little taller, with the
+   file name over the waveform and a download button */
+.z-voice[data-kind="track"] {
+  width: min(420px, 100%);
+  height: 64px;
+  gap: 12px;
+  padding-inline: 10px 8px;
+  border-radius: calc(var(--z-radius, 10px) + 8px);
+}
+.z-voice[data-kind="track"] .z-voice-play {
+  width: 40px;
+  height: 40px;
+}
+.z-voice-main {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.z-voice-main .z-voice-wave {
+  flex: 0 0 auto;
+  height: 20px;
+}
+.z-voice-title {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  min-width: 0;
+}
+.z-voice-title strong {
+  min-width: 0;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  font-size: 13.5px;
+  font-weight: 650;
+}
+.z-voice-title span {
+  flex-shrink: 0;
+  font-size: 11.5px;
+  color: var(--z-fg-muted);
+}
+.z-voice-download {
+  flex-shrink: 0;
+  display: grid;
+  place-items: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  color: var(--z-fg-muted);
+  --z-icon-color: currentColor;
+}
+.z-voice-download:hover {
+  color: var(--z-fg-primary);
+  background: color-mix(in srgb, var(--z-fg-primary) 8%, transparent);
+}
+.z-voice-download:focus-visible {
+  outline: 2px solid var(--z-focus, var(--z-accent));
+  outline-offset: 2px;
+}

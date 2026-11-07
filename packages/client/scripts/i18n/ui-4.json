@@ -1,0 +1,276 @@
+{
+  "Show “Copy ID” in context menus": [
+    "إظهار «نسخ المعرّف» في القوائم المنبثقة",
+    "„ID kopieren“ in Kontextmenüs anzeigen"
+  ],
+  "Show admin panel shortcuts in context menus": [
+    "إظهار اختصارات لوحة الإدارة في القوائم المنبثقة",
+    "Admin-Verknüpfungen in Kontextmenüs anzeigen"
+  ],
+  "Show members separately": [
+    "إظهار الأعضاء بشكل منفصل",
+    "Mitglieder getrennt anzeigen"
+  ],
+  "Show notifications while the app is open or in the background.": [
+    "إظهار الإشعارات والتطبيق مفتوح أو في الخلفية.",
+    "Benachrichtigungen anzeigen, während die App geöffnet oder im Hintergrund ist."
+  ],
+  "Show notifications while this tab is open.": [
+    "إظهار الإشعارات وهذه الصفحة مفتوحة.",
+    "Benachrichtigungen anzeigen, solange dieser Tab geöffnet ist."
+  ],
+  "Show password": ["إظهار كلمة المرور", "Passwort anzeigen"],
+  "Show Zrzur using Discord rich presence.": [
+    "أظهر أنك تستخدم زرزور عبر حالة Discord.",
+    "Zeige über Discord Rich Presence, dass du Zrzur nutzt."
+  ],
+  "Shown in the server info and invites. Markdown is supported.": [
+    "يظهر في معلومات السيرفر والدعوات. يدعم Markdown.",
+    "Wird in der Serverinfo und in Einladungen angezeigt. Markdown wird unterstützt."
+  ],
+  "Shown instead of your username. Leave empty to use your username.": [
+    "يظهر بدلًا من اسم المستخدم. اتركه فارغًا لاستخدام اسم المستخدم.",
+    "Wird statt deines Benutzernamens angezeigt. Leer lassen, um den Benutzernamen zu nutzen."
+  ],
+  "Shown next to members' names.": [
+    "يظهر بجانب أسماء الأعضاء.",
+    "Wird neben den Namen der Mitglieder angezeigt."
+  ],
+  "Sign in with a one-time code from your phone.": [
+    "سجّل الدخول برمز لمرة واحدة من هاتفك.",
+    "Melde dich mit einem Einmalcode von deinem Handy an."
+  ],
+  "Social links": ["روابط التواصل", "Soziale Links"],
+  "Soft Indigo": ["نيلي ناعم", "Sanftes Indigo"],
+  "Solid shapes. Easiest to spot at a glance.": [
+    "أشكال ممتلئة، الأسهل في التمييز من النظرة الأولى.",
+    "Volle Formen. Auf einen Blick am leichtesten zu erkennen."
+  ],
+  "Something went wrong. Please contact support.": [
+    "حدث خطأ ما. يرجى التواصل مع الدعم.",
+    "Etwas ist schiefgelaufen. Bitte wende dich an den Support."
+  ],
+  "Spacious": ["واسع", "Großzügig"],
+  "Speaker": ["مكبّر الصوت", "Lautsprecher"],
+  "Squad": ["الفريق", "Squad"],
+  "Start from a template": ["ابدأ من قالب", "Mit einer Vorlage starten"],
+  "Stream ended": ["انتهاء البث", "Stream beendet"],
+  "Stream quality": ["جودة البث", "Streamqualität"],
+  "Stream sounds": ["أصوات البث", "Stream-Töne"],
+  "Stream started": ["بدء البث", "Stream gestartet"],
+  "Study group": ["مجموعة دراسة", "Lerngruppe"],
+  "Study Room": ["غرفة الدراسة", "Lernraum"],
+  "Study rooms": ["غرف الدراسة", "Lernräume"],
+  "Study together": ["ندرس معًا", "Gemeinsam lernen"],
+  "Suggest new Zrzur features once the public repository is available.": [
+    "اقترح ميزات جديدة لزرزور عندما يصبح المستودع العام متاحًا.",
+    "Schlage neue Zrzur-Funktionen vor, sobald das öffentliche Repository verfügbar ist."
+  ],
+  "Supporter": ["داعم", "Unterstützer"],
+  "System emoji": ["إيموجي النظام", "System-Emojis"],
+  "System follows your device's light or dark setting.": [
+    "«النظام» يتبع إعداد الوضع الفاتح أو الداكن في جهازك.",
+    "„System“ folgt der Hell-/Dunkel-Einstellung deines Geräts."
+  ],
+  "System messages": ["رسائل النظام", "Systemnachrichten"],
+  "Team": ["الفريق", "Team"],
+  "TEXT": ["نصية", "TEXT"],
+  "That name was already taken with your previous number, so you are now <0>{0}#{1}</0>.": [
+    "كان هذا الاسم مستخدمًا مع رقمك السابق، لذا أصبحت الآن <0>{0}#{1}</0>.",
+    "Dieser Name war mit deiner bisherigen Nummer schon vergeben, deshalb bist du jetzt <0>{0}#{1}</0>."
+  ],
+  "The bot will not be granted any permissions.": [
+    "لن يُمنح البوت أي صلاحيات.",
+    "Der Bot erhält keine Berechtigungen."
+  ],
+  "The server could not apply this voice change. Check the participant state before retrying.": [
+    "تعذّر على السيرفر تطبيق هذا التغيير الصوتي. تحقق من حالة المشارك قبل إعادة المحاولة.",
+    "Der Server konnte diese Sprachänderung nicht anwenden. Prüfe den Status des Teilnehmers, bevor du es erneut versuchst."
+  ],
+  "The token logs in as your bot. Keep it secret, never paste it in chats or screenshots.": [
+    "يسجّل الرمز الدخول باسم بوتك. احتفظ به سرًا ولا تلصقه أبدًا في المحادثات أو لقطات الشاشة.",
+    "Mit dem Token meldet sich dein Bot an. Halte es geheim und füge es nie in Chats oder Screenshots ein."
+  ],
+  "Theme name": ["اسم السمة", "Designname"],
+  "Themes are stored in this browser and contain appearance preferences only.": [
+    "تُحفظ السمات في هذا المتصفح وتحتوي على تفضيلات المظهر فقط.",
+    "Designs werden in diesem Browser gespeichert und enthalten nur Darstellungseinstellungen."
+  ],
+  "Thin lines. The calmest look.": [
+    "خطوط رفيعة، المظهر الأهدأ.",
+    "Dünne Linien. Der ruhigste Look."
+  ],
+  "This sound couldn't be played. Check your output device.": [
+    "تعذّر تشغيل هذا الصوت. تحقق من جهاز الإخراج.",
+    "Dieser Ton konnte nicht abgespielt werden. Prüfe dein Ausgabegerät."
+  ],
+  "Today 19:02": ["اليوم 19:02", "Heute 19:02"],
+  "Today 19:04": ["اليوم 19:04", "Heute 19:04"],
+  "Toggle colour theme": ["تبديل الوضع اللوني", "Farbschema wechseln"],
+  "Token": ["الرمز", "Token"],
+  "Too long": ["طويلة جدًا", "Zu lang"],
+  "Too many actions. Wait a moment and try again.": [
+    "إجراءات كثيرة جدًا. انتظر لحظة وحاول مرة أخرى.",
+    "Zu viele Aktionen. Warte einen Moment und versuche es erneut."
+  ],
+  "Transparency and blur": ["الشفافية والتمويه", "Transparenz und Unschärfe"],
+  "True black surfaces for OLED displays.": [
+    "أسطح سوداء بالكامل لشاشات OLED.",
+    "Echtes Schwarz für OLED-Displays."
+  ],
+  "Turn off to give icons a colour of their own.": [
+    "أوقفه لتمنح الأيقونات لونًا خاصًا بها.",
+    "Ausschalten, um Symbolen eine eigene Farbe zu geben."
+  ],
+  "Two-factor authentication protects your account even if your password leaks.": [
+    "تحمي المصادقة الثنائية حسابك حتى لو تسرّبت كلمة مرورك.",
+    "Die Zwei-Faktor-Authentifizierung schützt dein Konto, selbst wenn dein Passwort bekannt wird."
+  ],
+  "Type a new name above, then rename": [
+    "اكتب اسمًا جديدًا بالأعلى ثم أعد التسمية",
+    "Gib oben einen neuen Namen ein und benenne dann um"
+  ],
+  "Unban": ["رفع الحظر", "Sperre aufheben"],
+  "Unblock": ["إلغاء الحظر", "Blockierung aufheben"],
+  "Unknown role": ["دور غير معروف", "Unbekannte Rolle"],
+  "Unknown user": ["مستخدم غير معروف", "Unbekannter Benutzer"],
+  "Unsaved changes": ["تغييرات غير محفوظة", "Ungespeicherte Änderungen"],
+  "Untranslated text falls back to English. Flags are markers only.": [
+    "يظهر النص غير المترجم بالإنجليزية. الأعلام للدلالة فقط.",
+    "Nicht übersetzter Text erscheint auf Englisch. Flaggen dienen nur als Markierung."
+  ],
+  "Up to {0}": ["حتى {0}", "Bis {0}"],
+  "updates": ["التحديثات", "updates"],
+  "Upload emoji": ["رفع إيموجي", "Emoji hochladen"],
+  "Upload one above to get started.": [
+    "ارفع واحدًا بالأعلى للبدء.",
+    "Lade oben eines hoch, um loszulegen."
+  ],
+  "Uploading…": ["جارٍ الرفع…", "Wird hochgeladen…"],
+  "Use a different nickname or avatar in a specific server.": [
+    "استخدم لقبًا أو صورة رمزية مختلفة في سيرفر معيّن.",
+    "Nutze auf einem bestimmten Server einen anderen Spitznamen oder Avatar."
+  ],
+  "Use at least 2 characters.": [
+    "استخدم حرفين على الأقل.",
+    "Verwende mindestens 2 Zeichen."
+  ],
+  "Use letters, numbers, underscores (_), dots (.) or dashes (-).": [
+    "استخدم الأحرف أو الأرقام أو الشرطات السفلية (_) أو النقاط (.) أو الشرطات (-).",
+    "Verwende Buchstaben, Ziffern, Unterstriche (_), Punkte (.) oder Bindestriche (-)."
+  ],
+  "Use lowercase letters, numbers and underscores.": [
+    "استخدم أحرفًا لاتينية صغيرة وأرقامًا وشرطات سفلية.",
+    "Verwende Kleinbuchstaben, Ziffern und Unterstriche."
+  ],
+  "Used in message timestamps and lists.": [
+    "يُستخدم في أوقات الرسائل والقوائم.",
+    "Wird in Zeitstempeln von Nachrichten und in Listen verwendet."
+  ],
+  "User joined call": [
+    "انضمام مستخدم إلى المكالمة",
+    "Benutzer ist dem Anruf beigetreten"
+  ],
+  "User left call": [
+    "مغادرة مستخدم للمكالمة",
+    "Benutzer hat den Anruf verlassen"
+  ],
+  "User settings": ["إعدادات المستخدم", "Benutzereinstellungen"],
+  "Uses the browser's echo cancellation.": [
+    "يستخدم إلغاء الصدى الخاص بالمتصفح.",
+    "Nutzt die Echounterdrückung des Browsers."
+  ],
+  "Using your main avatar": [
+    "تُستخدم صورتك الرمزية الأساسية",
+    "Dein Hauptavatar wird verwendet"
+  ],
+  "Verified server": ["سيرفر موثّق", "Verifizierter Server"],
+  "Video player": ["مشغّل الفيديو", "Videoplayer"],
+  "View": ["عرض", "Anzeigen"],
+  "View full profile": [
+    "عرض الملف الشخصي كاملًا",
+    "Vollständiges Profil anzeigen"
+  ],
+  "Visibility": ["الظهور", "Sichtbarkeit"],
+  "VOICE": ["صوتية", "SPRACHE"],
+  "Voice and call sounds": ["أصوات الصوت والمكالمات", "Sprach- und Anruftöne"],
+  "Voice processing": ["معالجة الصوت", "Sprachverarbeitung"],
+  "We couldn't finish logging you in. Try again, and if it keeps happening, check your connection to Zrzur.": [
+    "تعذّر إكمال تسجيل دخولك. حاول مرة أخرى، وإن تكرر ذلك فتحقق من اتصالك بزرزور.",
+    "Wir konnten dich nicht fertig anmelden. Versuche es erneut, und wenn es weiter passiert, prüfe deine Verbindung zu Zrzur."
+  ],
+  "We sent a confirmation link to <0>{0}</0>. Your login email changes once you open it.": [
+    "أرسلنا رابط تأكيد إلى <0>{0}</0>. يتغيّر بريد تسجيل الدخول بمجرد فتحه.",
+    "Wir haben einen Bestätigungslink an <0>{0}</0> gesendet. Deine Login-E-Mail ändert sich, sobald du ihn öffnest."
+  ],
+  "What every member can do before any role is added.": [
+    "ما يستطيع كل عضو فعله قبل إضافة أي دور.",
+    "Was jedes Mitglied darf, bevor eine Rolle vergeben wird."
+  ],
+  "When your friends come online, they show up here.": [
+    "عندما يتصل أصدقاؤك، سيظهرون هنا.",
+    "Wenn deine Freunde online sind, erscheinen sie hier."
+  ],
+  "You": ["أنت", "Du"],
+  "You don't share any servers yet.": [
+    "لا تشتركان في أي سيرفر بعد.",
+    "Ihr teilt noch keine Server."
+  ],
+  "You have no friends in common yet.": [
+    "لا يوجد أصدقاء مشتركون بينكما بعد.",
+    "Ihr habt noch keine gemeinsamen Freunde."
+  ],
+  "You haven't blocked anyone": [
+    "لم تحظر أحدًا",
+    "Du hast niemanden blockiert"
+  ],
+  "You haven't created a bot yet": [
+    "لم تنشئ أي بوت بعد",
+    "Du hast noch keinen Bot erstellt"
+  ],
+  "You sign in with this address and we use it for account security notices. Enter your current password to confirm.": [
+    "تسجّل الدخول بهذا العنوان ونستخدمه لتنبيهات أمان الحساب. أدخل كلمة مرورك الحالية للتأكيد.",
+    "Mit dieser Adresse meldest du dich an, und wir nutzen sie für Sicherheitshinweise. Gib zur Bestätigung dein aktuelles Passwort ein."
+  ],
+  "You're not in any servers yet": [
+    "لست في أي سيرفر بعد",
+    "Du bist noch auf keinem Server"
+  ],
+  "Your account has been queued for deletion.": [
+    "تمت جدولة حسابك للحذف.",
+    "Dein Konto wurde zur Löschung vorgemerkt."
+  ],
+  "Your bots": ["بوتاتك", "Deine Bots"],
+  "Your bots couldn't be loaded": [
+    "تعذّر تحميل بوتاتك",
+    "Deine Bots konnten nicht geladen werden"
+  ],
+  "Your browser blocked playback. Click the page once, then try again.": [
+    "منع متصفحك التشغيل. انقر على الصفحة مرة ثم حاول مجددًا.",
+    "Dein Browser hat die Wiedergabe blockiert. Klicke einmal auf die Seite und versuche es erneut."
+  ],
+  "Your friends list is empty": [
+    "قائمة أصدقائك فارغة",
+    "Deine Freundesliste ist leer"
+  ],
+  "Your login email has been changed.": [
+    "تم تغيير بريد تسجيل الدخول.",
+    "Deine Login-E-Mail wurde geändert."
+  ],
+  "Your server has been created. Continue setup to add the remaining channels.": [
+    "تم إنشاء سيرفرك. تابع الإعداد لإضافة بقية القنوات.",
+    "Dein Server wurde erstellt. Setze die Einrichtung fort, um die restlichen Kanäle hinzuzufügen."
+  ],
+  "Your username has been updated.": [
+    "تم تحديث اسم المستخدم.",
+    "Dein Benutzername wurde aktualisiert."
+  ],
+  "Zrzur": ["زرزور", "Zrzur"],
+  "Zrzur home": ["الصفحة الرئيسية لزرزور", "Zrzur-Startseite"],
+  "Zrzur Lounge": ["استراحة زرزور", "Zrzur Lounge"],
+  "Zrzur on Android": ["زرزور على أندرويد", "Zrzur für Android"],
+  "Zrzur's own palette: one indigo family from the logo for panels, text and accent, with teal for anything live.": [
+    "لوحة ألوان زرزور الخاصة: درجات نيلية من الشعار للوحات والنصوص والتمييز، مع الأخضر المزرق لكل ما هو مباشر.",
+    "Zrzurs eigene Palette: eine Indigo-Familie aus dem Logo für Flächen, Text und Akzent, mit Petrol für alles, was live ist."
+  ]
+}

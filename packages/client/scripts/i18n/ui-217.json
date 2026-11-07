@@ -1,0 +1,18 @@
+{
+  "Stream volume": [
+    "مستوى صوت البث",
+    "Stream-Lautstärke"
+  ],
+  "Mute stream sound": [
+    "كتم صوت البث",
+    "Stream-Ton stummschalten"
+  ],
+  "Unmute stream sound": [
+    "تشغيل صوت البث",
+    "Stream-Ton einschalten"
+  ],
+  "Start sharing": [
+    "ابدأ المشاركة",
+    "Teilen starten"
+  ]
+}

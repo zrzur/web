@@ -1,0 +1,58 @@
+{
+  "{0} Wings · {1} more to level {2}": [
+    "{0} من الأجنحة · يتبقى {1} للمستوى {2}",
+    "{0} Flügel · noch {1} bis Stufe {2}"
+  ],
+  "{0} Wings · highest level reached": [
+    "{0} من الأجنحة · بلغ أعلى مستوى",
+    "{0} Flügel · höchste Stufe erreicht"
+  ],
+  "Automatic messages": [
+    "الرسائل التلقائية",
+    "Automatische Nachrichten"
+  ],
+  "Counters": [
+    "العدادات",
+    "Zähler"
+  ],
+  "From {0} Wings": [
+    "ابتداءً من {0} من الأجنحة",
+    "Ab {0} Flügeln"
+  ],
+  "Members give the server Wings. More Wings unlock higher levels and their perks for everyone.": [
+    "يمنح الأعضاء السيرفر أجنحة. المزيد من الأجنحة يفتح مستويات أعلى ومزاياها للجميع.",
+    "Mitglieder schenken dem Server Flügel. Mehr Flügel schalten höhere Stufen und ihre Vorteile für alle frei."
+  ],
+  "No level yet": [
+    "لا مستوى بعد",
+    "Noch keine Stufe"
+  ],
+  "Square, 512 × 512 px, up to {0}.": [
+    "مربعة، 512 × 512 بكسل، حتى {0}.",
+    "Quadratisch, 512 × 512 px, bis {0}."
+  ],
+  "Technology": [
+    "التقنية",
+    "Technologie"
+  ],
+  "Special channels": [
+    "القنوات الخاصة",
+    "Besondere Kanäle"
+  ],
+  "Where your rules live, and where an automatic message is posted when members join, leave or are removed.": [
+    "مكان قواعدك، والقناة التي تُنشر فيها رسالة تلقائية عند انضمام الأعضاء أو مغادرتهم أو إزالتهم.",
+    "Wo deine Regeln stehen und wo eine automatische Nachricht erscheint, wenn Mitglieder beitreten, gehen oder entfernt werden."
+  ],
+  "Gets the book icon and a \"Read the rules\" button.": [
+    "تحصل على أيقونة الكتاب وزر «اقرأ القواعد».",
+    "Bekommt das Buch-Symbol und eine Schaltfläche „Regeln lesen“."
+  ],
+  "Up to three buttons under the name, each opening a channel. Read the rules is added by itself when you pick a rules channel under Channels.": [
+    "حتى ثلاثة أزرار تحت الاسم، يفتح كل منها قناة. يُضاف زر «اقرأ القواعد» تلقائيًا عند اختيار قناة القواعد في إعدادات القنوات.",
+    "Bis zu drei Schaltflächen unter dem Namen, jede öffnet einen Kanal. „Regeln lesen“ kommt von selbst dazu, wenn du unter Kanäle einen Regelkanal wählst."
+  ],
+  "Progress": [
+    "التقدم",
+    "Fortschritt"
+  ]
+}

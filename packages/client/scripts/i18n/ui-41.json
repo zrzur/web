@@ -1,0 +1,485 @@
+{
+  "{0} reporters": ["{0} مُبلِّغين", "{0} Meldende"],
+  "{0} selected": ["{0} محدد", "{0} ausgewählt"],
+  "A bot sends spam, abuses commands or asks for too much": [
+    "بوت يرسل رسائل مزعجة أو يسيء استخدام الأوامر أو يطلب أكثر من اللازم",
+    "Ein Bot verschickt Spam, missbraucht Befehle oder verlangt zu viel"
+  ],
+  "A reviewer asked:": ["سأل أحد المراجعين:", "Eine prüfende Person fragt:"],
+  "Abuses commands": ["يسيء استخدام الأوامر", "Missbraucht Befehle"],
+  "Account banned": ["الحساب محظور", "Konto gesperrt"],
+  "Account standing": ["وضع الحساب", "Kontostatus"],
+  "Account suspended": ["الحساب موقوف مؤقتًا", "Konto vorübergehend gesperrt"],
+  "Action": ["الإجراء", "Maßnahme"],
+  "Action taken": ["تم اتخاذ إجراء", "Maßnahme ergriffen"],
+  "Actions": ["الإجراءات", "Maßnahmen"],
+  "Actions are never automatic. Check the evidence first. The affected user sees only the reason below, never the reporter or your notes.": [
+    "الإجراءات لا تُتخذ تلقائيًا أبدًا. راجع الأدلة أولًا. يرى المستخدم المعني السبب أدناه فقط، ولا يرى المُبلِّغ ولا ملاحظاتك.",
+    "Maßnahmen passieren nie automatisch. Prüfe zuerst die Beweise. Die betroffene Person sieht nur den Grund unten, nie die meldende Person oder deine Notizen."
+  ],
+  "Add note": ["أضف ملاحظة", "Notiz hinzufügen"],
+  "Address or documents": ["عنوان أو وثائق", "Adresse oder Dokumente"],
+  "All good": ["كل شيء على ما يرام", "Alles in Ordnung"],
+  "All reasons": ["كل الأسباب", "Alle Gründe"],
+  "All types": ["كل الأنواع", "Alle Arten"],
+  "An app that misrepresents what it does or where its links go": [
+    "تطبيق يضلّل بشأن ما يفعله أو إلى أين تقود روابطه",
+    "Eine App, die falsch darstellt, was sie tut oder wohin ihre Links führen"
+  ],
+  "Another reviewer must decide appeals against your own actions.": [
+    "يجب أن يبتّ مراجع آخر في الطعون على إجراءاتك أنت.",
+    "Einsprüche gegen deine eigenen Maßnahmen muss jemand anderes entscheiden."
+  ],
+  "Answer to the user": ["الرد على المستخدم", "Antwort an die Person"],
+  "Any priority": ["أي أولوية", "Jede Priorität"],
+  "Anyone": ["أي شخص", "Alle"],
+  "Anything else we should know? (optional)": [
+    "هل هناك ما يجب أن نعرفه أيضًا؟ (اختياري)",
+    "Sollten wir noch etwas wissen? (optional)"
+  ],
+  "Appeal": ["طعن", "Einspruch"],
+  "Appeal accepted": ["قُبل الطعن", "Einspruch angenommen"],
+  "Appeal declined": ["رُفض الطعن", "Einspruch abgelehnt"],
+  "Appeal pending": ["الطعن قيد النظر", "Einspruch offen"],
+  "Appeal resolved": ["تم البتّ في الطعن", "Einspruch entschieden"],
+  "Appealed": ["مطعون فيه", "Einspruch eingelegt"],
+  "Appealing doesn't lift anything by itself. A different reviewer decides.": [
+    "تقديم الطعن لا يرفع أي إجراء بحد ذاته. يقرر فيه مراجع آخر.",
+    "Ein Einspruch hebt nichts von selbst auf. Eine andere prüfende Person entscheidet."
+  ],
+  "Appeals": ["الطعون", "Einsprüche"],
+  "Appeals couldn't be loaded.": [
+    "تعذّر تحميل الطعون.",
+    "Die Einsprüche konnten nicht geladen werden."
+  ],
+  "Application": ["تطبيق", "Anwendung"],
+  "Apply action": ["طبّق الإجراء", "Maßnahme anwenden"],
+  "Asks for too many permissions": [
+    "يطلب صلاحيات أكثر من اللازم",
+    "Verlangt zu viele Berechtigungen"
+  ],
+  "Assign to me": ["أسنده إليّ", "Mir zuweisen"],
+  "Assigned": ["المُسنَد إليه", "Zugewiesen"],
+  "Assigned to me": ["المسندة إليّ", "Mir zugewiesen"],
+  "Assignee": ["المُسنَد إليه", "Zuständig"],
+  "At risk": ["معرّض للخطر", "Gefährdet"],
+  "Attachment": ["مرفق", "Anhang"],
+  "Attacks on a group, or threats of violence": [
+    "هجوم على فئة من الناس، أو تهديد بالعنف",
+    "Angriffe auf eine Gruppe oder Gewaltdrohungen"
+  ],
+  "Bot abuse": ["إساءة استخدام البوت", "Bot-Missbrauch"],
+  "Bot disabled": ["تم تعطيل البوت", "Bot deaktiviert"],
+  "Bullying": ["تنمّر", "Mobbing"],
+  "Channel": ["قناة", "Kanal"],
+  "Clear": ["مسح", "Leeren"],
+  "Collecting or misusing people's data": [
+    "جمع بيانات الناس أو إساءة استخدامها",
+    "Daten von Menschen sammeln oder missbrauchen"
+  ],
+  "Community design": ["تصميم من زينة المجتمع", "Community-Design"],
+  "Content shared without the owner's permission": [
+    "محتوى نُشر دون إذن صاحبه",
+    "Inhalte ohne Erlaubnis der Eigentümer geteilt"
+  ],
+  "Copyright": ["حقوق النشر", "Urheberrecht"],
+  "Copyright or trademark": [
+    "حقوق النشر أو العلامة التجارية",
+    "Urheberrecht oder Marke"
+  ],
+  "Days": ["أيام", "Tage"],
+  "Decided": ["تم البتّ فيها", "Entschieden"],
+  "Describe what happened. Don't paste private information you don't need to share.": [
+    "صف ما حدث. لا تلصق معلومات خاصة لا داعي لمشاركتها.",
+    "Beschreibe, was passiert ist. Füge keine privaten Informationen ein, die nicht nötig sind."
+  ],
+  "Design suspended": ["تم إيقاف التصميم", "Design gesperrt"],
+  "Details": ["التفاصيل", "Details"],
+  "Discover bot listing": ["عرض بوت في «اكتشف»", "Bot-Eintrag in Entdecken"],
+  "Discover server listing": [
+    "عرض سيرفر في «اكتشف»",
+    "Server-Eintrag in Entdecken"
+  ],
+  "Ends": ["ينتهي", "Endet"],
+  "Escalated": ["مُصعَّد", "Eskaliert"],
+  "Evidence": ["الأدلة", "Beweise"],
+  "Extreme violence or gore": [
+    "عنف شديد أو مشاهد دموية",
+    "Extreme Gewalt oder Gore"
+  ],
+  "Fake engagement": ["تفاعل مزيّف", "Gefälschte Interaktion"],
+  "Fake features": ["ميزات مزيّفة", "Vorgetäuschte Funktionen"],
+  "Fake giveaway": ["مسابقة أو هدايا وهمية", "Fake-Gewinnspiel"],
+  "Filed": ["تاريخ الإبلاغ", "Eingereicht"],
+  "Files or links that try to harm devices": [
+    "ملفات أو روابط تحاول إلحاق الضرر بالأجهزة",
+    "Dateien oder Links, die Geräten schaden wollen"
+  ],
+  "Fraudulent links": ["روابط احتيالية", "Betrügerische Links"],
+  "Further violations may lead to a suspension.": [
+    "قد تؤدي مخالفات أخرى إلى إيقاف حسابك.",
+    "Weitere Verstöße können zu einer Sperre führen."
+  ],
+  "Hacking": ["اختراق", "Hacking"],
+  "Harassment or bullying": ["مضايقة أو تنمّر", "Belästigung oder Mobbing"],
+  "Hate or threats": ["كراهية أو تهديد", "Hass oder Drohungen"],
+  "Hate speech": ["خطاب كراهية", "Hassrede"],
+  "If someone is in immediate danger, contact your local emergency services now.": [
+    "إذا كان أحد في خطر داهم، فاتصل بخدمات الطوارئ المحلية فورًا.",
+    "Wenn jemand in unmittelbarer Gefahr ist, ruf jetzt den örtlichen Notruf an."
+  ],
+  "Illegal content": ["محتوى غير قانوني", "Illegale Inhalte"],
+  "Illegal goods, extortion, hacking or extreme violence": [
+    "سلع غير قانونية أو ابتزاز أو اختراق أو عنف شديد",
+    "Illegale Waren, Erpressung, Hacking oder extreme Gewalt"
+  ],
+  "In review": ["قيد المراجعة", "In Prüfung"],
+  "Insults, targeting someone, unwanted contact or raids": [
+    "إهانات، أو استهداف شخص ما، أو تواصل غير مرغوب فيه، أو غارات",
+    "Beleidigungen, gezielte Angriffe, unerwünschter Kontakt oder Raids"
+  ],
+  "Internal note": ["ملاحظة داخلية", "Interne Notiz"],
+  "Internal note (reviewers only)": [
+    "ملاحظة داخلية (للمراجعين فقط)",
+    "Interne Notiz (nur für Prüfende)"
+  ],
+  "Involves a minor": ["يتعلق بقاصر", "Betrifft eine minderjährige Person"],
+  "Keep the action": ["أبقِ الإجراء", "Maßnahme beibehalten"],
+  "Keep this evidence past its retention period? Only do this when legally required.": [
+    "هل تريد الاحتفاظ بهذه الأدلة بعد انتهاء مدة حفظها؟ افعل ذلك فقط إذا كان مطلوبًا قانونيًا.",
+    "Diese Beweise über die Aufbewahrungsfrist hinaus behalten? Nur wenn es rechtlich nötig ist."
+  ],
+  "Keys: j / k next and previous, r reload": [
+    "المفاتيح: j / k التالي والسابق، r إعادة التحميل",
+    "Tasten: j / k nächster und vorheriger, r neu laden"
+  ],
+  "Legal hold": ["حفظ قانوني", "Rechtliche Sperre"],
+  "Lift legal hold": ["ارفع الحفظ القانوني", "Rechtliche Sperre aufheben"],
+  "Limited": ["محدود", "Eingeschränkt"],
+  "Links that lead to phishing or harmful sites": [
+    "روابط تقود إلى تصيّد أو مواقع ضارة",
+    "Links zu Phishing oder schädlichen Seiten"
+  ],
+  "Malicious links": ["روابط ضارة", "Schädliche Links"],
+  "Malware": ["برمجيات خبيثة", "Malware"],
+  "Mark as duplicate": ["علّمه كمكرر", "Als Duplikat markieren"],
+  "Mark the selected reports as \"no violation found\"?": [
+    "هل تريد تعليم البلاغات المحددة بأنه «لا توجد مخالفة»؟",
+    "Die ausgewählten Meldungen als „kein Verstoß gefunden“ markieren?"
+  ],
+  "Mass mentions": ["إشارات جماعية", "Massen-Erwähnungen"],
+  "Message removed": ["تمت إزالة الرسالة", "Nachricht entfernt"],
+  "Message to the reporter (more information, decision)": [
+    "رسالة إلى المُبلِّغ (طلب معلومات، قرار)",
+    "Nachricht an die meldende Person (Rückfrage, Entscheidung)"
+  ],
+  "Misleading application": ["تطبيق مضلِّل", "Irreführende Anwendung"],
+  "Misleading sign-in or permissions": [
+    "تسجيل دخول أو صلاحيات مضلِّلة",
+    "Irreführende Anmeldung oder Berechtigungen"
+  ],
+  "Money scam": ["احتيال مالي", "Geldbetrug"],
+  "More information required": [
+    "مطلوب مزيد من المعلومات",
+    "Weitere Informationen nötig"
+  ],
+  "Newest first": ["الأحدث أولًا", "Neueste zuerst"],
+  "Next": ["التالي", "Weiter"],
+  "No actions have been taken on your account.": [
+    "لم يُتخذ أي إجراء على حسابك.",
+    "Gegen dein Konto wurden keine Maßnahmen ergriffen."
+  ],
+  "No appeals waiting.": [
+    "لا توجد طعون بانتظار البتّ.",
+    "Keine offenen Einsprüche."
+  ],
+  "No violation found": ["لا توجد مخالفة", "Kein Verstoß gefunden"],
+  "Normal": ["عادية", "Normal"],
+  "Nothing here. The queue is clear.": [
+    "لا شيء هنا. القائمة فارغة.",
+    "Hier ist nichts. Die Warteschlange ist leer."
+  ],
+  "Oldest first": ["الأقدم أولًا", "Älteste zuerst"],
+  "Open the review dashboard": ["افتح لوحة المراجعة", "Prüf-Dashboard öffnen"],
+  "Original case id": ["معرّف الحالة الأصلية", "ID des ursprünglichen Falls"],
+  "Other reports about this": [
+    "بلاغات أخرى عن نفس الشيء",
+    "Weitere Meldungen dazu"
+  ],
+  "Overturn and reverse": [
+    "اقبل الطعن وألغِ الإجراء",
+    "Aufheben und rückgängig machen"
+  ],
+  "Phishing": ["تصيّد احتيالي", "Phishing"],
+  "Phishing, fake giveaways or money scams": [
+    "تصيّد احتيالي، أو هدايا وهمية، أو احتيال مالي",
+    "Phishing, Fake-Gewinnspiele oder Geldbetrug"
+  ],
+  "Pretending to be you, someone else or Zrzur": [
+    "انتحال شخصيتك أو شخصية غيرك أو زرزور",
+    "Gibt sich als du, jemand anderes oder Zrzur aus"
+  ],
+  "Pretends to be me": ["ينتحل شخصيتي", "Gibt sich als ich aus"],
+  "Pretends to be someone else": [
+    "ينتحل شخصية شخص آخر",
+    "Gibt sich als jemand anderes aus"
+  ],
+  "Pretends to be Zrzur staff": [
+    "ينتحل صفة فريق زرزور",
+    "Gibt sich als Zrzur-Team aus"
+  ],
+  "Previous": ["السابق", "Zurück"],
+  "Priority": ["الأولوية", "Priorität"],
+  "Privacy violation": ["انتهاك الخصوصية", "Verletzung der Privatsphäre"],
+  "Private images": ["صور خاصة", "Private Bilder"],
+  "Queued": ["في قائمة الانتظار", "In der Warteschlange"],
+  "Raid": ["غارة", "Raid"],
+  "Reason shown to the user": [
+    "السبب الذي سيظهر للمستخدم",
+    "Grund, den die Person sieht"
+  ],
+  "Received": ["تم الاستلام", "Eingegangen"],
+  "Reference": ["الرقم المرجعي", "Referenz"],
+  "Reference, user or target id": [
+    "الرقم المرجعي أو معرّف المستخدم أو الهدف",
+    "Referenz, Nutzer- oder Ziel-ID"
+  ],
+  "Removed from Discover": ["أُزيل من «اكتشف»", "Aus Entdecken entfernt"],
+  "Report application": ["الإبلاغ عن التطبيق", "Anwendung melden"],
+  "Report attachment": ["الإبلاغ عن المرفق", "Anhang melden"],
+  "Report bot": ["الإبلاغ عن البوت", "Bot melden"],
+  "Report channel": ["الإبلاغ عن القناة", "Kanal melden"],
+  "Report design": ["الإبلاغ عن التصميم", "Design melden"],
+  "Report Discover listing": [
+    "الإبلاغ عن العرض في «اكتشف»",
+    "Eintrag in Entdecken melden"
+  ],
+  "Report invite": ["الإبلاغ عن الدعوة", "Einladung melden"],
+  "Report webhook": ["الإبلاغ عن الويب هوك", "Webhook melden"],
+  "Reporter": ["المُبلِّغ", "Meldende Person"],
+  "Reporter says": ["يقول المُبلِّغ", "Die meldende Person schreibt"],
+  "Reporting doesn't remove anything by itself. A reviewer checks the report against the Zrzur guidelines.": [
+    "الإبلاغ لا يزيل أي شيء بحد ذاته. يراجع أحد المراجعين البلاغ وفق إرشادات زرزور.",
+    "Eine Meldung entfernt nichts von selbst. Jemand prüft sie anhand der Zrzur-Richtlinien."
+  ],
+  "Reports & standing": ["البلاغات ووضع الحساب", "Meldungen & Kontostatus"],
+  "Reports from users about content and accounts across Zrzur. Everything you open and decide is recorded on the case. Keep reporter identities and evidence inside this team.": [
+    "بلاغات المستخدمين عن المحتوى والحسابات في زرزور. كل ما تفتحه وتقرره يُسجَّل في الحالة. أبقِ هويات المُبلِّغين والأدلة داخل هذا الفريق.",
+    "Meldungen zu Inhalten und Konten auf Zrzur. Alles, was du öffnest und entscheidest, wird am Fall vermerkt. Identitäten der Meldenden und Beweise bleiben in diesem Team."
+  ],
+  "Reports you sent to Zrzur Trust & Safety. The people you report never see your name.": [
+    "البلاغات التي أرسلتها إلى فريق الثقة والأمان في زرزور. لا يرى الأشخاص الذين تبلّغ عنهم اسمك أبدًا.",
+    "Meldungen, die du an Zrzur Trust & Safety geschickt hast. Gemeldete Personen sehen deinen Namen nie."
+  ],
+  "Responsible account": ["الحساب المسؤول", "Verantwortliches Konto"],
+  "Reverse": ["ألغِ", "Rückgängig machen"],
+  "Reversed": ["تم الإلغاء", "Rückgängig gemacht"],
+  "Review myself": ["سأراجعها بنفسي", "Selbst prüfen"],
+  "Reviewer's answer:": ["رد المراجع:", "Antwort der prüfenden Person:"],
+  "Scam or fraud": ["احتيال أو نصب", "Betrug"],
+  "Self-harm": ["إيذاء النفس", "Selbstverletzung"],
+  "Self-harm or suicide": [
+    "إيذاء النفس أو الانتحار",
+    "Selbstverletzung oder Suizid"
+  ],
+  "Selling or trading accounts": [
+    "بيع الحسابات أو المتاجرة بها",
+    "Verkauf oder Handel mit Konten"
+  ],
+  "Send appeal": ["أرسل الطعن", "Einspruch senden"],
+  "Sends spam DMs": ["يرسل رسائل خاصة مزعجة", "Verschickt Spam-DMs"],
+  "Sexual or exploitative content": [
+    "محتوى جنسي أو استغلالي",
+    "Sexuelle oder ausbeuterische Inhalte"
+  ],
+  "Shared without consent": ["نُشر دون موافقة", "Ohne Einwilligung geteilt"],
+  "Sharing personal information": [
+    "نشر معلومات شخصية",
+    "Teilen persönlicher Informationen"
+  ],
+  "Skip": ["تخطَّ", "Überspringen"],
+  "Snapshot taken when the report was filed. It stays even if the content is deleted, until its retention ends. Opening this case is recorded.": [
+    "لقطة أُخذت عند تقديم البلاغ. تبقى حتى لو حُذف المحتوى، إلى أن تنتهي مدة حفظها. فتحُ هذه الحالة يُسجَّل.",
+    "Momentaufnahme vom Zeitpunkt der Meldung. Sie bleibt auch nach dem Löschen des Inhalts, bis die Aufbewahrungsfrist endet. Das Öffnen dieses Falls wird protokolliert."
+  ],
+  "Someone else changed this case. It has been reloaded.": [
+    "عدّل شخص آخر هذه الحالة. تمت إعادة تحميلها.",
+    "Jemand anderes hat diesen Fall geändert. Er wurde neu geladen."
+  ],
+  "Someone may be at risk": [
+    "قد يكون أحدهم في خطر",
+    "Jemand könnte in Gefahr sein"
+  ],
+  "Someone's address, documents or private images without consent": [
+    "عنوان شخص ما أو وثائقه أو صوره الخاصة دون موافقته",
+    "Adresse, Dokumente oder private Bilder einer Person ohne Einwilligung"
+  ],
+  "Something else": ["شيء آخر", "Etwas anderes"],
+  "Spam": ["رسائل مزعجة", "Spam"],
+  "Standing": ["وضع الحساب", "Status"],
+  "Suicide": ["انتحار", "Suizid"],
+  "Take action": ["اتخذ إجراء", "Maßnahme ergreifen"],
+  "Take this action? It applies immediately and is recorded on the case.": [
+    "هل تريد اتخاذ هذا الإجراء؟ سيُطبَّق فورًا ويُسجَّل في الحالة.",
+    "Diese Maßnahme ergreifen? Sie gilt sofort und wird am Fall vermerkt."
+  ],
+  "Target": ["الهدف", "Ziel"],
+  "Targeted at me or someone else": [
+    "موجّهة إليّ أو إلى شخص آخر",
+    "Gegen mich oder jemand anderen gerichtet"
+  ],
+  "Tell us what's wrong in your own words": [
+    "أخبرنا بالمشكلة بكلماتك",
+    "Beschreib das Problem in deinen Worten"
+  ],
+  "Thanks for following the Zrzur guidelines.": [
+    "شكرًا لالتزامك بإرشادات زرزور.",
+    "Danke, dass du dich an die Zrzur-Richtlinien hältst."
+  ],
+  "Thanks. Your report was sent to Zrzur Trust & Safety.": [
+    "شكرًا. تم إرسال بلاغك إلى فريق الثقة والأمان في زرزور.",
+    "Danke. Deine Meldung wurde an Zrzur Trust & Safety geschickt."
+  ],
+  "The queue couldn't be loaded.": [
+    "تعذّر تحميل القائمة.",
+    "Die Warteschlange konnte nicht geladen werden."
+  ],
+  "The reasons couldn't be loaded.": [
+    "تعذّر تحميل الأسباب.",
+    "Die Gründe konnten nicht geladen werden."
+  ],
+  "The user appears to be too young for Zrzur": [
+    "يبدو أن المستخدم أصغر من السن المسموح به في زرزور",
+    "Die Person scheint zu jung für Zrzur zu sein"
+  ],
+  "This action can't be appealed, or you already appealed it.": [
+    "لا يمكن الطعن في هذا الإجراء، أو أنك طعنت فيه مسبقًا.",
+    "Gegen diese Maßnahme ist kein Einspruch möglich, oder du hast schon Einspruch eingelegt."
+  ],
+  "This can't be reported. It may have been deleted, or you can't see it any more.": [
+    "لا يمكن الإبلاغ عن هذا. ربما حُذف، أو لم تعد قادرًا على رؤيته.",
+    "Das kann nicht gemeldet werden. Es wurde vielleicht gelöscht, oder du kannst es nicht mehr sehen."
+  ],
+  "This case couldn't be loaded.": [
+    "تعذّر تحميل هذه الحالة.",
+    "Dieser Fall konnte nicht geladen werden."
+  ],
+  "Threat of violence": ["تهديد بالعنف", "Gewaltdrohung"],
+  "Trademark": ["علامة تجارية", "Marke"],
+  "Trust & Safety": ["الثقة والأمان", "Trust & Safety"],
+  "Unassign": ["ألغِ الإسناد", "Zuweisung aufheben"],
+  "Unassigned": ["غير مُسندة", "Nicht zugewiesen"],
+  "Unauthorised content": ["محتوى غير مصرّح به", "Nicht autorisierte Inhalte"],
+  "Under minimum age": ["دون السن الأدنى", "Unter dem Mindestalter"],
+  "Unsolicited ads": ["إعلانات غير مرغوب فيها", "Unerwünschte Werbung"],
+  "Unwanted ads, mass mentions or fake engagement": [
+    "إعلانات غير مرغوب فيها، أو إشارات جماعية، أو تفاعل مزيّف",
+    "Unerwünschte Werbung, Massen-Erwähnungen oder gefälschte Interaktion"
+  ],
+  "Unwanted contact": ["تواصل غير مرغوب فيه", "Unerwünschter Kontakt"],
+  "Unwanted sexual content": [
+    "محتوى جنسي غير مرغوب فيه",
+    "Unerwünschte sexuelle Inhalte"
+  ],
+  "Unwanted sexual content, or anything involving a minor": [
+    "محتوى جنسي غير مرغوب فيه، أو أي شيء يتعلق بقاصر",
+    "Unerwünschte sexuelle Inhalte oder alles, was Minderjährige betrifft"
+  ],
+  "Urgent": ["عاجلة", "Dringend"],
+  "User": ["مستخدم", "Nutzer"],
+  "Very limited": ["محدود جدًا", "Stark eingeschränkt"],
+  "Violent extremism": ["تطرّف عنيف", "Gewaltbereiter Extremismus"],
+  "Warning": ["تحذير", "Verwarnung"],
+  "We automatically include the reported content and, for messages, a few messages around it. You don't need to describe anything graphic.": [
+    "نُرفق المحتوى المُبلَّغ عنه تلقائيًا، ومع الرسائل بضع رسائل حولها. لا تحتاج إلى وصف أي تفاصيل صادمة.",
+    "Wir fügen den gemeldeten Inhalt automatisch bei, bei Nachrichten auch ein paar Nachrichten davor und danach. Du musst nichts Drastisches beschreiben."
+  ],
+  "We need more information": [
+    "نحتاج إلى مزيد من المعلومات",
+    "Wir brauchen mehr Informationen"
+  ],
+  "What happened? (required)": [
+    "ماذا حدث؟ (مطلوب)",
+    "Was ist passiert? (erforderlich)"
+  ],
+  "What's the problem? Your report goes to Zrzur's Trust & Safety team, not to the server's moderators, and the reported person won't know it was you.": [
+    "ما المشكلة؟ يصل بلاغك إلى فريق الثقة والأمان في زرزور، لا إلى مشرفي السيرفر، ولن يعرف الشخص المُبلَّغ عنه أنك أنت من أبلغ.",
+    "Was ist das Problem? Deine Meldung geht an das Trust-&-Safety-Team von Zrzur, nicht an die Moderation des Servers, und die gemeldete Person erfährt nicht, dass sie von dir kommt."
+  ],
+  "Where": ["المكان", "Wo"],
+  "Which describes it best?": [
+    "أيّها يصف المشكلة أفضل؟",
+    "Was trifft am besten zu?"
+  ],
+  "Why are you reversing this action?": [
+    "لماذا تلغي هذا الإجراء؟",
+    "Warum machst du diese Maßnahme rückgängig?"
+  ],
+  "Why should we look at this again?": [
+    "لماذا يجب أن نعيد النظر في هذا؟",
+    "Warum sollten wir uns das noch einmal ansehen?"
+  ],
+  "Write the answer the user will see.": [
+    "اكتب الرد الذي سيراه المستخدم.",
+    "Schreib die Antwort, die die Person sieht."
+  ],
+  "Write the reason the user will see.": [
+    "اكتب السبب الذي سيراه المستخدم.",
+    "Schreib den Grund, den die Person sieht."
+  ],
+  "Write what you need from the reporter first.": [
+    "اكتب أولًا ما تحتاجه من المُبلِّغ.",
+    "Schreib zuerst, was du von der meldenden Person brauchst."
+  ],
+  "You already reported this. Your earlier report is still being handled.": [
+    "سبق أن أبلغت عن هذا. بلاغك السابق ما زال قيد المعالجة.",
+    "Du hast das schon gemeldet. Deine frühere Meldung wird noch bearbeitet."
+  ],
+  "You can follow it under Settings → Reports & standing.": [
+    "يمكنك متابعته من الإعدادات ← البلاغات ووضع الحساب.",
+    "Du kannst sie unter Einstellungen → Meldungen & Kontostatus verfolgen."
+  ],
+  "You can't report yourself or your own content.": [
+    "لا يمكنك الإبلاغ عن نفسك أو عن محتواك.",
+    "Du kannst dich selbst oder deine eigenen Inhalte nicht melden."
+  ],
+  "You don't have permission for this.": [
+    "ليست لديك صلاحية لهذا.",
+    "Dafür hast du keine Berechtigung."
+  ],
+  "You have a recent violation. Keep to the guidelines and it will expire.": [
+    "لديك مخالفة حديثة. التزم بالإرشادات وستنتهي مدتها.",
+    "Du hast einen aktuellen Verstoß. Halte dich an die Richtlinien, dann läuft er ab."
+  ],
+  "You have several recent violations.": [
+    "لديك عدة مخالفات حديثة.",
+    "Du hast mehrere aktuelle Verstöße."
+  ],
+  "You haven't reported anything.": [
+    "لم تُبلّغ عن أي شيء.",
+    "Du hast noch nichts gemeldet."
+  ],
+  "You've sent a lot of reports today. Try again tomorrow, or choose an urgent reason if someone is in danger.": [
+    "أرسلت بلاغات كثيرة اليوم. حاول مجددًا غدًا، أو اختر سببًا عاجلًا إذا كان أحد في خطر.",
+    "Du hast heute sehr viele Meldungen geschickt. Versuch es morgen wieder, oder wähle einen dringenden Grund, wenn jemand in Gefahr ist."
+  ],
+  "Your account is suspended.": [
+    "حسابك موقوف مؤقتًا.",
+    "Dein Konto ist vorübergehend gesperrt."
+  ],
+  "Your account standing couldn't be loaded.": [
+    "تعذّر تحميل وضع حسابك.",
+    "Dein Kontostatus konnte nicht geladen werden."
+  ],
+  "Your answer": ["إجابتك", "Deine Antwort"],
+  "Your reports": ["بلاغاتك", "Deine Meldungen"],
+  "Your reports couldn't be loaded.": [
+    "تعذّر تحميل بلاغاتك.",
+    "Deine Meldungen konnten nicht geladen werden."
+  ],
+  "Your work or brand used without permission": [
+    "استُخدم عملك أو علامتك التجارية دون إذن",
+    "Dein Werk oder deine Marke ohne Erlaubnis verwendet"
+  ],
+  "Open reports": ["البلاغات المفتوحة", "Offene Meldungen"]
+}

@@ -1,0 +1,42 @@
+{
+  "{inside} in the room now": [
+    "{inside} في الغرفة الآن",
+    "{inside} gerade im Raum"
+  ],
+  "{n, plural, one {# person} other {# people}}": [
+    "{n, plural, zero {لا أحد} one {شخص واحد} two {شخصان} few {# أشخاص} many {# شخصًا} other {# شخص}}",
+    "{n, plural, one {# Person} other {# Personen}}"
+  ],
+  "Add a channel here": ["أضف قناة هنا", "Hier einen Kanal hinzufügen"],
+  "Delete {0}": ["حذف {0}", "{0} löschen"],
+  "Every channel by category. Change slow mode and room size here; the gear opens all settings of a channel.": [
+    "كل القنوات مرتبة حسب الفئة. غيّر الوضع البطيء وسعة الغرفة من هنا، وتفتح أيقونة الترس كل إعدادات القناة.",
+    "Alle Kanäle nach Kategorie. Ändere Slowmode und Raumgröße hier; das Zahnrad öffnet alle Einstellungen eines Kanals."
+  ],
+  "How many people fit in each room and who is talking right now.": [
+    "كم شخصًا تتسع له كل غرفة، ومن يتحدث الآن.",
+    "Wie viele Personen in jeden Raum passen und wer gerade spricht."
+  ],
+  "In voice now": ["في الصوت الآن", "Gerade im Sprachchat"],
+  "New category": ["فئة جديدة", "Neue Kategorie"],
+  "New channel": ["قناة جديدة", "Neuer Kanal"],
+  "New voice room": ["غرفة صوتية جديدة", "Neuer Sprachkanal"],
+  "No channels yet": ["لا توجد قنوات بعد", "Noch keine Kanäle"],
+  "Nobody in the room": ["لا أحد في الغرفة", "Niemand im Raum"],
+  "Room size of {0}": ["سعة الغرفة {0}", "Raumgröße von {0}"],
+  "Save or reset your changes first.": [
+    "احفظ تغييراتك أو تراجع عنها أولًا.",
+    "Speichere oder verwirf zuerst deine Änderungen."
+  ],
+  "Settings of {0}": ["إعدادات {0}", "Einstellungen von {0}"],
+  "Slow mode in {0}": ["الوضع البطيء في {0}", "Slowmode in {0}"],
+  "Slow mode off": ["الوضع البطيء متوقف", "Slowmode aus"],
+  "Slow mode: {0}": ["الوضع البطيء: {0}", "Slowmode: {0}"],
+  "Text channel": ["قناة نصية", "Textkanal"],
+  "Use + to add the first one to this category.": [
+    "استخدم + لإضافة أول قناة إلى هذه الفئة.",
+    "Nutze +, um den ersten Kanal zu dieser Kategorie hinzuzufügen."
+  ],
+  "Voice rooms": ["الغرف الصوتية", "Sprachkanäle"],
+  "Without category": ["بلا فئة", "Ohne Kategorie"]
+}

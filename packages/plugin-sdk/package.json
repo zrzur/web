@@ -1,0 +1,23 @@
+{
+  "name": "@zrzur/plugin-sdk",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Types, manifest validator, CLI and examples for Zrzur plugins. Not published to npm.",
+  "license": "AGPL-3.0-or-later",
+  "type": "module",
+  "bin": {
+    "zrzur-plugin": "./bin/zrzur-plugin.ts"
+  },
+  "exports": {
+    ".": "./src/manifest.ts",
+    "./worker": "./src/worker.d.ts",
+    "./schema": "./schema/plugin-manifest.v1.schema.json"
+  },
+  "scripts": {
+    "test": "node --test test/manifest.test.ts",
+    "validate:examples": "node bin/zrzur-plugin.ts validate examples/midnight-theme --official && node bin/zrzur-plugin.ts validate examples/focus-tools --official && node bin/zrzur-plugin.ts validate examples/quiet-hours --official && node bin/zrzur-plugin.ts validate examples/reading-comfort --official"
+  },
+  "engines": {
+    "node": ">=22.6"
+  }
+}

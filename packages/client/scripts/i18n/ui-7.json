@@ -1,0 +1,16 @@
+{
+  "Premium": ["بريميوم", "Premium"],
+  "Pay": ["ادفع", "Bezahlen"],
+  "Zrzur for Web ({name} on {os})": [
+    "زرزور للويب ({name} على {os})",
+    "Zrzur für Web ({name} auf {os})"
+  ],
+  "Zrzur for Web (unknown device)": [
+    "زرزور للويب (جهاز غير معروف)",
+    "Zrzur für Web (unbekanntes Gerät)"
+  ],
+  "GIF picker": ["منتقي الصور المتحركة", "GIF-Auswahl"],
+  "Plugins": ["الإضافات", "Plugins"],
+  "Not available yet.": ["غير متاح بعد.", "Noch nicht verfügbar."],
+  "Zrzur for Desktop": ["زرزور لسطح المكتب", "Zrzur für den Desktop"]
+}

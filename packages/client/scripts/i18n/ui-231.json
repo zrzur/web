@@ -1,0 +1,14 @@
+{
+  "Say in a sentence or two what the bot does.": [
+    "اكتب في جملة أو جملتين ما يفعله البوت.",
+    "Beschreibe in ein oder zwei Sätzen, was der Bot macht."
+  ],
+  "Verified bots show a mark next to their name and can join more than 100 servers. Past 100 servers, privileged intents stay on only once they are approved.": [
+    "تظهر علامة بجانب اسم البوت الموثَّق، ويمكنه الانضمام إلى أكثر من 100 سيرفر. وبعد 100 سيرفر لا تبقى الصلاحيات الخاصة للاتصال مفعّلة إلا بعد الموافقة عليها.",
+    "Verifizierte Bots tragen ein Zeichen neben ihrem Namen und können mehr als 100 Servern beitreten. Ab 100 Servern bleiben privilegierte Intents nur aktiv, wenn sie genehmigt wurden."
+  ],
+  "The verified mark was removed": [
+    "أُزيلت علامة التوثيق",
+    "Das Verifizierungszeichen wurde entfernt"
+  ]
+}

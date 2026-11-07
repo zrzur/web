@@ -1,0 +1,6 @@
+{
+  "Invite link": ["رابط الدعوة", "Einladungslink"],
+  "On a server the bot gets:": ["يحصل البوت في السيرفر على:", "Auf einem Server erhält der Bot:"],
+  "Share this link: it opens Zrzur, the person picks a server and the bot joins with the permissions above.": ["شارك هذا الرابط: يفتح زرزور، فيختار الشخص سيرفراً وينضم البوت إليه بالصلاحيات المحددة أعلاه.", "Teile diesen Link: Er öffnet Zrzur, die Person wählt einen Server und der Bot tritt mit den oben gewählten Berechtigungen bei."],
+  "For your app's sign-in: the app puts a new state and code challenge into it for every sign-in. Opened as it is, the link does not work.": ["لتسجيل الدخول عبر تطبيقك: يضع التطبيق فيه قيمتَي state وcode challenge جديدتين عند كل تسجيل دخول. لا يعمل الرابط إذا فُتح كما هو.", "Für die Anmeldung über deine App: Die App setzt bei jeder Anmeldung einen neuen state und code challenge ein. So wie er ist, funktioniert der Link nicht."]
+}

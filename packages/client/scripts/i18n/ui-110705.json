@@ -1,0 +1,794 @@
+{
+  "Afghanistan": [
+    "أفغانستان",
+    "Afghanistan"
+  ],
+  "Albania": [
+    "ألبانيا",
+    "Albanien"
+  ],
+  "Algeria": [
+    "الجزائر",
+    "Algerien"
+  ],
+  "Andorra": [
+    "أندورا",
+    "Andorra"
+  ],
+  "Angola": [
+    "أنغولا",
+    "Angola"
+  ],
+  "Antigua and Barbuda": [
+    "أنتيغوا وبربودا",
+    "Antigua und Barbuda"
+  ],
+  "Argentina": [
+    "الأرجنتين",
+    "Argentinien"
+  ],
+  "Armenia": [
+    "أرمينيا",
+    "Armenien"
+  ],
+  "Australia": [
+    "أستراليا",
+    "Australien"
+  ],
+  "Austria": [
+    "النمسا",
+    "Österreich"
+  ],
+  "Azerbaijan": [
+    "أذربيجان",
+    "Aserbaidschan"
+  ],
+  "Bahamas": [
+    "جزر البهاما",
+    "Bahamas"
+  ],
+  "Bahrain": [
+    "البحرين",
+    "Bahrain"
+  ],
+  "Barbados": [
+    "بربادوس",
+    "Barbados"
+  ],
+  "Belarus": [
+    "بيلاروس",
+    "Belarus"
+  ],
+  "Belgium": [
+    "بلجيكا",
+    "Belgien"
+  ],
+  "Belize": [
+    "بليز",
+    "Belize"
+  ],
+  "Benin": [
+    "بنين",
+    "Benin"
+  ],
+  "Bhutan": [
+    "بوتان",
+    "Bhutan"
+  ],
+  "Bolivia": [
+    "بوليفيا",
+    "Bolivien"
+  ],
+  "Bosnia and Herzegovina": [
+    "البوسنة والهرسك",
+    "Bosnien und Herzegowina"
+  ],
+  "Botswana": [
+    "بوتسوانا",
+    "Botsuana"
+  ],
+  "Brazil": [
+    "البرازيل",
+    "Brasilien"
+  ],
+  "Brunei": [
+    "بروناي",
+    "Brunei"
+  ],
+  "Bulgaria": [
+    "بلغاريا",
+    "Bulgarien"
+  ],
+  "Burkina Faso": [
+    "بوركينا فاسو",
+    "Burkina Faso"
+  ],
+  "Burundi": [
+    "بوروندي",
+    "Burundi"
+  ],
+  "Cape Verde": [
+    "الرأس الأخضر",
+    "Kap Verde"
+  ],
+  "Cambodia": [
+    "كمبوديا",
+    "Kambodscha"
+  ],
+  "Cameroon": [
+    "الكاميرون",
+    "Kamerun"
+  ],
+  "Canada": [
+    "كندا",
+    "Kanada"
+  ],
+  "Central African Republic": [
+    "جمهورية أفريقيا الوسطى",
+    "Zentralafrikanische Republik"
+  ],
+  "Chad": [
+    "تشاد",
+    "Tschad"
+  ],
+  "Chile": [
+    "تشيلي",
+    "Chile"
+  ],
+  "China": [
+    "الصين",
+    "China"
+  ],
+  "Colombia": [
+    "كولومبيا",
+    "Kolumbien"
+  ],
+  "Comoros": [
+    "جزر القمر",
+    "Komoren"
+  ],
+  "Congo": [
+    "الكونغو",
+    "Kongo"
+  ],
+  "DR Congo": [
+    "جمهورية الكونغو الديمقراطية",
+    "Demokratische Republik Kongo"
+  ],
+  "Costa Rica": [
+    "كوستاريكا",
+    "Costa Rica"
+  ],
+  "Ivory Coast": [
+    "ساحل العاج",
+    "Elfenbeinküste"
+  ],
+  "Croatia": [
+    "كرواتيا",
+    "Kroatien"
+  ],
+  "Cuba": [
+    "كوبا",
+    "Kuba"
+  ],
+  "Cyprus": [
+    "قبرص",
+    "Zypern"
+  ],
+  "Czechia": [
+    "التشيك",
+    "Tschechien"
+  ],
+  "Denmark": [
+    "الدانمرك",
+    "Dänemark"
+  ],
+  "Djibouti": [
+    "جيبوتي",
+    "Dschibuti"
+  ],
+  "Dominica": [
+    "دومينيكا",
+    "Dominica"
+  ],
+  "Dominican Republic": [
+    "جمهورية الدومينيكان",
+    "Dominikanische Republik"
+  ],
+  "Ecuador": [
+    "الإكوادور",
+    "Ecuador"
+  ],
+  "Egypt": [
+    "مصر",
+    "Ägypten"
+  ],
+  "El Salvador": [
+    "السلفادور",
+    "El Salvador"
+  ],
+  "Equatorial Guinea": [
+    "غينيا الاستوائية",
+    "Äquatorialguinea"
+  ],
+  "Eritrea": [
+    "إريتريا",
+    "Eritrea"
+  ],
+  "Estonia": [
+    "إستونيا",
+    "Estland"
+  ],
+  "Eswatini": [
+    "إسواتيني",
+    "Eswatini"
+  ],
+  "Ethiopia": [
+    "إثيوبيا",
+    "Äthiopien"
+  ],
+  "Fiji": [
+    "فيجي",
+    "Fidschi"
+  ],
+  "Finland": [
+    "فنلندا",
+    "Finnland"
+  ],
+  "France": [
+    "فرنسا",
+    "Frankreich"
+  ],
+  "Gabon": [
+    "الغابون",
+    "Gabun"
+  ],
+  "Gambia": [
+    "غامبيا",
+    "Gambia"
+  ],
+  "Georgia": [
+    "جورجيا",
+    "Georgien"
+  ],
+  "Germany": [
+    "ألمانيا",
+    "Deutschland"
+  ],
+  "Ghana": [
+    "غانا",
+    "Ghana"
+  ],
+  "Greece": [
+    "اليونان",
+    "Griechenland"
+  ],
+  "Grenada": [
+    "غرينادا",
+    "Grenada"
+  ],
+  "Guatemala": [
+    "غواتيمالا",
+    "Guatemala"
+  ],
+  "Guinea": [
+    "غينيا",
+    "Guinea"
+  ],
+  "Guinea-Bissau": [
+    "غينيا بيساو",
+    "Guinea-Bissau"
+  ],
+  "Guyana": [
+    "غيانا",
+    "Guyana"
+  ],
+  "Haiti": [
+    "هايتي",
+    "Haiti"
+  ],
+  "Honduras": [
+    "هندوراس",
+    "Honduras"
+  ],
+  "Hungary": [
+    "هنغاريا",
+    "Ungarn"
+  ],
+  "Iceland": [
+    "آيسلندا",
+    "Island"
+  ],
+  "India": [
+    "الهند",
+    "Indien"
+  ],
+  "Indonesia": [
+    "إندونيسيا",
+    "Indonesien"
+  ],
+  "Iran": [
+    "إيران",
+    "Iran"
+  ],
+  "Iraq": [
+    "العراق",
+    "Irak"
+  ],
+  "Ireland": [
+    "أيرلندا",
+    "Irland"
+  ],
+  "Israel": [
+    "إسرائيل",
+    "Israel"
+  ],
+  "Italy": [
+    "إيطاليا",
+    "Italien"
+  ],
+  "Jamaica": [
+    "جامايكا",
+    "Jamaika"
+  ],
+  "Jordan": [
+    "الأردن",
+    "Jordanien"
+  ],
+  "Kazakhstan": [
+    "كازاخستان",
+    "Kasachstan"
+  ],
+  "Kenya": [
+    "كينيا",
+    "Kenia"
+  ],
+  "Kiribati": [
+    "كيريباتي",
+    "Kiribati"
+  ],
+  "Kuwait": [
+    "الكويت",
+    "Kuwait"
+  ],
+  "Kyrgyzstan": [
+    "قيرغيزستان",
+    "Kirgisistan"
+  ],
+  "Latvia": [
+    "لاتفيا",
+    "Lettland"
+  ],
+  "Lebanon": [
+    "لبنان",
+    "Libanon"
+  ],
+  "Lesotho": [
+    "ليسوتو",
+    "Lesotho"
+  ],
+  "Liberia": [
+    "ليبيريا",
+    "Liberia"
+  ],
+  "Libya": [
+    "ليبيا",
+    "Libyen"
+  ],
+  "Liechtenstein": [
+    "ليختنشتاين",
+    "Liechtenstein"
+  ],
+  "Lithuania": [
+    "ليتوانيا",
+    "Litauen"
+  ],
+  "Luxembourg": [
+    "لوكسمبورغ",
+    "Luxemburg"
+  ],
+  "Madagascar": [
+    "مدغشقر",
+    "Madagaskar"
+  ],
+  "Malawi": [
+    "ملاوي",
+    "Malawi"
+  ],
+  "Malaysia": [
+    "ماليزيا",
+    "Malaysia"
+  ],
+  "Maldives": [
+    "جزر المالديف",
+    "Malediven"
+  ],
+  "Mali": [
+    "مالي",
+    "Mali"
+  ],
+  "Malta": [
+    "مالطا",
+    "Malta"
+  ],
+  "Marshall Islands": [
+    "جزر مارشال",
+    "Marshallinseln"
+  ],
+  "Mauritania": [
+    "موريتانيا",
+    "Mauretanien"
+  ],
+  "Mauritius": [
+    "موريشيوس",
+    "Mauritius"
+  ],
+  "Mexico": [
+    "المكسيك",
+    "Mexiko"
+  ],
+  "Moldova": [
+    "مولدوفا",
+    "Republik Moldau"
+  ],
+  "Monaco": [
+    "موناكو",
+    "Monaco"
+  ],
+  "Mongolia": [
+    "منغوليا",
+    "Mongolei"
+  ],
+  "Montenegro": [
+    "الجبل الأسود",
+    "Montenegro"
+  ],
+  "Morocco": [
+    "المغرب",
+    "Marokko"
+  ],
+  "Mozambique": [
+    "موزمبيق",
+    "Mosambik"
+  ],
+  "Myanmar": [
+    "ميانمار",
+    "Myanmar"
+  ],
+  "Namibia": [
+    "ناميبيا",
+    "Namibia"
+  ],
+  "Nauru": [
+    "ناورو",
+    "Nauru"
+  ],
+  "Netherlands": [
+    "هولندا",
+    "Niederlande"
+  ],
+  "New Zealand": [
+    "نيوزيلندا",
+    "Neuseeland"
+  ],
+  "Nicaragua": [
+    "نيكاراغوا",
+    "Nicaragua"
+  ],
+  "Nigeria": [
+    "نيجيريا",
+    "Nigeria"
+  ],
+  "North Macedonia": [
+    "مقدونيا الشمالية",
+    "Nordmazedonien"
+  ],
+  "Norway": [
+    "النرويج",
+    "Norwegen"
+  ],
+  "Oman": [
+    "عُمان",
+    "Oman"
+  ],
+  "Pakistan": [
+    "باكستان",
+    "Pakistan"
+  ],
+  "Palestine": [
+    "فلسطين",
+    "Palästina"
+  ],
+  "Papua New Guinea": [
+    "بابوا غينيا الجديدة",
+    "Papua-Neuguinea"
+  ],
+  "Paraguay": [
+    "باراغواي",
+    "Paraguay"
+  ],
+  "Peru": [
+    "بيرو",
+    "Peru"
+  ],
+  "Philippines": [
+    "الفلبين",
+    "Philippinen"
+  ],
+  "Poland": [
+    "بولندا",
+    "Polen"
+  ],
+  "Portugal": [
+    "البرتغال",
+    "Portugal"
+  ],
+  "Qatar": [
+    "قطر",
+    "Katar"
+  ],
+  "Romania": [
+    "رومانيا",
+    "Rumänien"
+  ],
+  "Russia": [
+    "روسيا",
+    "Russland"
+  ],
+  "Rwanda": [
+    "رواندا",
+    "Ruanda"
+  ],
+  "Saint Kitts and Nevis": [
+    "سانت كيتس ونيفيس",
+    "St. Kitts und Nevis"
+  ],
+  "Saint Lucia": [
+    "سانت لوسيا",
+    "St. Lucia"
+  ],
+  "Saint Vincent and the Grenadines": [
+    "سانت فنسنت وجزر غرينادين",
+    "St. Vincent und die Grenadinen"
+  ],
+  "Samoa": [
+    "ساموا",
+    "Samoa"
+  ],
+  "San Marino": [
+    "سان مارينو",
+    "San Marino"
+  ],
+  "Sao Tome and Principe": [
+    "ساو تومي وبرينسيبي",
+    "São Tomé und Príncipe"
+  ],
+  "Saudi Arabia": [
+    "السعودية",
+    "Saudi-Arabien"
+  ],
+  "Senegal": [
+    "السنغال",
+    "Senegal"
+  ],
+  "Serbia": [
+    "صربيا",
+    "Serbien"
+  ],
+  "Seychelles": [
+    "سيشل",
+    "Seychellen"
+  ],
+  "Sierra Leone": [
+    "سيراليون",
+    "Sierra Leone"
+  ],
+  "Singapore": [
+    "سنغافورة",
+    "Singapur"
+  ],
+  "Slovakia": [
+    "سلوفاكيا",
+    "Slowakei"
+  ],
+  "Slovenia": [
+    "سلوفينيا",
+    "Slowenien"
+  ],
+  "Solomon Islands": [
+    "جزر سليمان",
+    "Salomonen"
+  ],
+  "Somalia": [
+    "الصومال",
+    "Somalia"
+  ],
+  "South Africa": [
+    "جنوب أفريقيا",
+    "Südafrika"
+  ],
+  "South Sudan": [
+    "جنوب السودان",
+    "Südsudan"
+  ],
+  "Spain": [
+    "إسبانيا",
+    "Spanien"
+  ],
+  "Sri Lanka": [
+    "سريلانكا",
+    "Sri Lanka"
+  ],
+  "Sudan": [
+    "السودان",
+    "Sudan"
+  ],
+  "Suriname": [
+    "سورينام",
+    "Suriname"
+  ],
+  "Sweden": [
+    "السويد",
+    "Schweden"
+  ],
+  "Syria": [
+    "سوريا",
+    "Syrien"
+  ],
+  "Tajikistan": [
+    "طاجيكستان",
+    "Tadschikistan"
+  ],
+  "Tanzania": [
+    "تنزانيا",
+    "Tansania"
+  ],
+  "Thailand": [
+    "تايلاند",
+    "Thailand"
+  ],
+  "Timor-Leste": [
+    "تيمور الشرقية",
+    "Timor-Leste"
+  ],
+  "Togo": [
+    "توغو",
+    "Togo"
+  ],
+  "Tonga": [
+    "تونغا",
+    "Tonga"
+  ],
+  "Trinidad and Tobago": [
+    "ترينيداد وتوباغو",
+    "Trinidad und Tobago"
+  ],
+  "Tunisia": [
+    "تونس",
+    "Tunesien"
+  ],
+  "Turkey": [
+    "تركيا",
+    "Türkei"
+  ],
+  "Turkmenistan": [
+    "تركمانستان",
+    "Turkmenistan"
+  ],
+  "Tuvalu": [
+    "توفالو",
+    "Tuvalu"
+  ],
+  "Uganda": [
+    "أوغندا",
+    "Uganda"
+  ],
+  "Ukraine": [
+    "أوكرانيا",
+    "Ukraine"
+  ],
+  "United Arab Emirates": [
+    "الإمارات العربية المتحدة",
+    "Vereinigte Arabische Emirate"
+  ],
+  "United Kingdom": [
+    "المملكة المتحدة",
+    "Vereinigtes Königreich"
+  ],
+  "United States": [
+    "الولايات المتحدة",
+    "Vereinigte Staaten"
+  ],
+  "Uruguay": [
+    "أورغواي",
+    "Uruguay"
+  ],
+  "Uzbekistan": [
+    "أوزبكستان",
+    "Usbekistan"
+  ],
+  "Vanuatu": [
+    "فانواتو",
+    "Vanuatu"
+  ],
+  "Vatican City": [
+    "الفاتيكان",
+    "Vatikanstadt"
+  ],
+  "Venezuela": [
+    "فنزويلا",
+    "Venezuela"
+  ],
+  "Vietnam": [
+    "فيتنام",
+    "Vietnam"
+  ],
+  "Yemen": [
+    "اليمن",
+    "Jemen"
+  ],
+  "Zambia": [
+    "زامبيا",
+    "Sambia"
+  ],
+  "Zimbabwe": [
+    "زيمبابوي",
+    "Simbabwe"
+  ],
+  "Bangladesh": [
+    "بنغلاديش",
+    "Bangladesch"
+  ],
+  "Japan": [
+    "اليابان",
+    "Japan"
+  ],
+  "Laos": [
+    "لاوس",
+    "Laos"
+  ],
+  "Niger": [
+    "النيجر",
+    "Niger"
+  ],
+  "Palau": [
+    "بالاو",
+    "Palau"
+  ],
+  "North Korea": [
+    "كوريا الشمالية",
+    "Nordkorea"
+  ],
+  "South Korea": [
+    "كوريا الجنوبية",
+    "Südkorea"
+  ],
+  "Switzerland": [
+    "سويسرا",
+    "Schweiz"
+  ],
+  "Micronesia": [
+    "ميكرونيزيا",
+    "Mikronesien"
+  ],
+  "Nepal": [
+    "نيبال",
+    "Nepal"
+  ],
+  "Panama": [
+    "بنما",
+    "Panama"
+  ],
+  "England": [
+    "إنجلترا",
+    "England"
+  ],
+  "Scotland": [
+    "اسكتلندا",
+    "Schottland"
+  ],
+  "Kurdistan": [
+    "كردستان",
+    "Kurdistan"
+  ]
+}

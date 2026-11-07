@@ -1,0 +1,9 @@
+{
+  "Who can find this server and who can bring people in.": ["من يستطيع العثور على هذا السيرفر ومن يستطيع دعوة الناس إليه.", "Wer diesen Server finden kann und wer Leute einladen darf."],
+  "Public": ["عام", "Öffentlich"],
+  "Not listed anywhere. People join only with an invite.": ["غير مدرج في أي مكان. ينضم الناس بدعوة فقط.", "Nirgends gelistet. Beitreten geht nur mit einer Einladung."],
+  "Listed on Discover. Anyone can find and join it.": ["مدرج في «اكتشف». يستطيع أي شخص العثور عليه والانضمام إليه.", "Auf Entdecken gelistet. Alle können ihn finden und beitreten."],
+  "Discover settings": ["إعدادات «اكتشف»", "Entdecken-Einstellungen"],
+  "Members can invite people": ["يستطيع الأعضاء دعوة الناس", "Mitglieder dürfen Leute einladen"],
+  "Off: only roles with the Invite others permission can create invites.": ["عند الإيقاف: تستطيع إنشاء الدعوات الأدوارُ التي لديها صلاحية «دعوة الآخرين» فقط.", "Aus: Nur Rollen mit der Berechtigung „Andere einladen“ können Einladungen erstellen."]
+}

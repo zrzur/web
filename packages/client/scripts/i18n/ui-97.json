@@ -1,0 +1,36 @@
+{
+  "\"{label}\" needs at least {0} characters.": [
+    "يحتاج «{label}» إلى {0} حرفاً على الأقل.",
+    "„{label}“ braucht mindestens {0} Zeichen."
+  ],
+  "Add a file to \"{label}\".": [
+    "أضف ملفاً إلى «{label}».",
+    "Füge bei „{label}“ eine Datei hinzu."
+  ],
+  "Choose an option for \"{label}\".": [
+    "اختر خياراً في «{label}».",
+    "Wähle bei „{label}“ eine Option."
+  ],
+  "Choose at least {min} for \"{label}\".": [
+    "اختر {min} على الأقل في «{label}».",
+    "Wähle bei „{label}“ mindestens {min} aus."
+  ],
+  "Fill in \"{label}\".": [
+    "املأ «{label}».",
+    "Fülle „{label}“ aus."
+  ],
+  "Image": ["صورة", "Bild"],
+  "Image not available": ["الصورة غير متاحة", "Bild nicht verfügbar"],
+  "This field takes at most {max} files.": [
+    "يقبل هذا الحقل {max} ملفات على الأكثر.",
+    "Dieses Feld nimmt höchstens {max} Dateien an."
+  ],
+  "Your answers go to {0}. Never share passwords or other private data here.": [
+    "تصل إجاباتك إلى {0}. لا تشارك هنا كلمات المرور أو أي بيانات خاصة أبداً.",
+    "Deine Antworten gehen an {0}. Teile hier niemals Passwörter oder andere private Daten."
+  ],
+  "Your answers go to the app that opened this form. Never share passwords or other private data here.": [
+    "تصل إجاباتك إلى التطبيق الذي فتح هذا النموذج. لا تشارك هنا كلمات المرور أو أي بيانات خاصة أبداً.",
+    "Deine Antworten gehen an die App, die dieses Formular geöffnet hat. Teile hier niemals Passwörter oder andere private Daten."
+  ]
+}

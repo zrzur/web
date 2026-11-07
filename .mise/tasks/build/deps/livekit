@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+#MISE description="Build public LiveKit dependencies"
+set -e
+pnpm --filter solid-livekit-components build

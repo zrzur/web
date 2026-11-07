@@ -1,0 +1,155 @@
+{
+  "Animations": ["الحركات", "Animationen"],
+  "Use animations": ["استخدام الحركات", "Animationen verwenden"],
+  "Nothing moves. This is the default.": [
+    "لا شيء يتحرك. هذا هو الإعداد الافتراضي.",
+    "Nichts bewegt sich. Das ist die Standardeinstellung."
+  ],
+  "Only on strong devices. This device is not strong enough, so animations stay off.": [
+    "على الأجهزة القوية فقط. هذا الجهاز ليس قويًا بما يكفي، لذا تبقى الحركات متوقفة.",
+    "Nur auf leistungsstarken Geräten. Dieses Gerät ist nicht stark genug, daher bleiben Animationen aus."
+  ],
+  "Only on strong devices. This device is strong enough, so animations play.": [
+    "على الأجهزة القوية فقط. هذا الجهاز قوي بما يكفي، لذا تعمل الحركات.",
+    "Nur auf leistungsstarken Geräten. Dieses Gerät ist stark genug, daher laufen Animationen."
+  ],
+  "Animations always play, with the settings below.": [
+    "تعمل الحركات دائمًا بالإعدادات التالية.",
+    "Animationen laufen immer, mit den Einstellungen unten."
+  ],
+  "Automatic": ["تلقائي", "Automatisch"],
+  "Animations are off on this device, so the preview stays still.": [
+    "الحركات متوقفة على هذا الجهاز، لذا تبقى المعاينة ثابتة.",
+    "Animationen sind auf diesem Gerät aus, daher bleibt die Vorschau still."
+  ],
+  "Choose how each part of Zrzur moves. The preview shows every change right away.": [
+    "اختر كيف يتحرك كل جزء من زرزور. تعرض المعاينة كل تغيير فورًا.",
+    "Wähle, wie sich jeder Teil von Zrzur bewegt. Die Vorschau zeigt jede Änderung sofort."
+  ],
+  "Reduce motion": ["تقليل الحركة", "Bewegung reduzieren"],
+  "Swaps movement and zoom for short fades.": [
+    "يستبدل الحركة والتكبير بتلاشٍ قصير.",
+    "Ersetzt Bewegung und Zoom durch kurzes Einblenden."
+  ],
+  "Your device allows full motion.": [
+    "يسمح جهازك بالحركة الكاملة.",
+    "Dein Gerät erlaubt volle Bewegung."
+  ],
+  "Your device asks for less motion.": [
+    "يطلب جهازك حركة أقل.",
+    "Dein Gerät wünscht weniger Bewegung."
+  ],
+  "Follow device": ["حسب الجهاز", "Wie das Gerät"],
+  "Reduce": ["تقليل", "Reduzieren"],
+  "Full": ["كاملة", "Voll"],
+  "Separate opening and closing": [
+    "الفتح والإغلاق كلٌّ على حدة",
+    "Öffnen und Schließen getrennt"
+  ],
+  "Set how things appear and how they leave on their own.": [
+    "اضبط طريقة ظهور العناصر وطريقة اختفائها كلًّا على حدة.",
+    "Lege getrennt fest, wie Dinge erscheinen und wie sie verschwinden."
+  ],
+  "Part of the app": ["جزء التطبيق", "Teil der App"],
+  "Motion is reduced, so the preview shows a short fade.": [
+    "الحركة مقلَّلة، لذا تعرض المعاينة تلاشيًا قصيرًا.",
+    "Die Bewegung ist reduziert, daher zeigt die Vorschau ein kurzes Einblenden."
+  ],
+  "Play preview": ["تشغيل المعاينة", "Vorschau abspielen"],
+  "Animate this part": ["تحريك هذا الجزء", "Diesen Teil animieren"],
+  "Opening": ["الفتح", "Öffnen"],
+  "Closing": ["الإغلاق", "Schließen"],
+  "This part only animates as it opens.": [
+    "يتحرك هذا الجزء عند فتحه فقط.",
+    "Dieser Teil wird nur beim Öffnen animiert."
+  ],
+  "Reset this part": ["إعادة ضبط هذا الجزء", "Diesen Teil zurücksetzen"],
+  "Reset all animations": [
+    "إعادة ضبط كل الحركات",
+    "Alle Animationen zurücksetzen"
+  ],
+  "Style": ["النمط", "Stil"],
+  "Direction": ["الاتجاه", "Richtung"],
+  "Speed curve": ["منحنى السرعة", "Tempokurve"],
+  "{v} ms": ["{v} مللي ثانية", "{v} ms"],
+
+  "Switching servers": ["التنقل بين السيرفرات", "Serverwechsel"],
+  "The channel list and page when you open another server.": [
+    "قائمة القنوات والصفحة عند فتح سيرفر آخر.",
+    "Kanalliste und Seite, wenn du einen anderen Server öffnest."
+  ],
+  "Switching channels": ["التنقل بين القنوات", "Kanalwechsel"],
+  "The page when you open another channel or conversation.": [
+    "الصفحة عند فتح قناة أو محادثة أخرى.",
+    "Die Seite, wenn du einen anderen Kanal oder Chat öffnest."
+  ],
+  "Settings pages": ["صفحات الإعدادات", "Einstellungsseiten"],
+  "Each settings page as it opens.": [
+    "كل صفحة إعدادات عند فتحها.",
+    "Jede Einstellungsseite beim Öffnen."
+  ],
+  "Popouts": ["البطاقات المنبثقة", "Pop-outs"],
+  "Profile cards and suggestions while you type.": [
+    "بطاقات الملفات الشخصية والاقتراحات أثناء الكتابة.",
+    "Profilkarten und Vorschläge beim Tippen."
+  ],
+  "Context menus": ["قوائم السياق", "Kontextmenüs"],
+  "Menus that open with a right-click.": [
+    "القوائم التي تُفتح بالنقر بزر الفأرة الأيمن.",
+    "Menüs, die sich per Rechtsklick öffnen."
+  ],
+  "Tooltips": ["التلميحات", "Tooltips"],
+  "Small labels that appear when you point at a button.": [
+    "تسميات صغيرة تظهر عند الإشارة إلى زر.",
+    "Kleine Hinweise, die erscheinen, wenn du auf eine Schaltfläche zeigst."
+  ],
+  "New and deleted messages": [
+    "الرسائل الجديدة والمحذوفة",
+    "Neue und gelöschte Nachrichten"
+  ],
+  "Messages from others as they arrive, and messages as they are removed.": [
+    "رسائل الآخرين عند وصولها، والرسائل عند حذفها.",
+    "Nachrichten anderer beim Eintreffen und Nachrichten beim Entfernen."
+  ],
+  "Channel categories": ["فئات القنوات", "Kanalkategorien"],
+  "Channel rows when you open or close a category.": [
+    "صفوف القنوات عند فتح فئة أو إغلاقها.",
+    "Kanalzeilen, wenn du eine Kategorie öffnest oder schließt."
+  ],
+  "Dialogs": ["النوافذ الحوارية", "Dialoge"],
+  "Windows that open on top of the app.": [
+    "النوافذ التي تُفتح فوق التطبيق.",
+    "Fenster, die sich über der App öffnen."
+  ],
+  "Dialog background": ["خلفية النافذة الحوارية", "Dialoghintergrund"],
+  "The dimmed page behind a dialog.": [
+    "الصفحة المعتمة خلف النافذة الحوارية.",
+    "Die abgedunkelte Seite hinter einem Dialog."
+  ],
+  "Side panels": ["اللوحات الجانبية", "Seitenleisten"],
+  "Member list, search results and pinned messages.": [
+    "قائمة الأعضاء ونتائج البحث والرسائل المثبتة.",
+    "Mitgliederliste, Suchergebnisse und angeheftete Nachrichten."
+  ],
+
+  "Fade": ["تلاشٍ", "Einblenden"],
+  "Slide": ["انزلاق", "Schieben"],
+  "Scale": ["تكبير", "Skalieren"],
+  "Blur": ["ضبابية", "Unschärfe"],
+  "Rise": ["صعود", "Aufsteigen"],
+  "Glide": ["انسياب", "Gleiten"],
+  "Pop": ["قفزة", "Aufploppen"],
+  "Unfold": ["انبساط", "Entfalten"],
+
+  "Smooth": ["سلس", "Sanft"],
+  "Soft landing": ["توقف هادئ", "Weiches Abbremsen"],
+  "Speed up": ["تسارع", "Beschleunigen"],
+  "Even": ["متوازن", "Gleichmäßig"],
+  "Bouncy": ["مرن", "Federnd"],
+  "Steady": ["ثابت", "Konstant"],
+
+  "From below": ["من الأسفل", "Von unten"],
+  "From above": ["من الأعلى", "Von oben"],
+  "From the start": ["من جهة البداية", "Vom Anfang"],
+  "From the end": ["من جهة النهاية", "Vom Ende"]
+}

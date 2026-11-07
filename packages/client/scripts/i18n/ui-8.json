@@ -1,0 +1,308 @@
+{
+  "{0} a month, renews automatically until you cancel. Cancel any time in Settings, Subscriptions.": [
+    "{0} شهرياً، يتجدد تلقائياً حتى تلغيه. يمكنك الإلغاء متى شئت من الإعدادات ← الاشتراكات.",
+    "{0} im Monat, verlängert sich automatisch, bis du kündigst. Kündigen kannst du jederzeit unter Einstellungen → Abos."
+  ],
+  "{0} a month. Renews on {1}.": [
+    "{0} شهرياً. يتجدد في {1}.",
+    "{0} im Monat. Verlängert sich am {1}."
+  ],
+  "{0} bots": ["{0} بوتات", "{0} Bots"],
+  "{0} character messages": [
+    "رسائل حتى {0} حرف",
+    "Nachrichten mit {0} Zeichen"
+  ],
+  "{0} emoji slots": ["{0} خانة إيموجي", "{0} Emoji-Plätze"],
+  "{0} free supercharge": ["شحنات مجانية: {0}", "{0} kostenlose Aufladung"],
+  "{0} included": ["{0} مشمولة", "{0} inklusive"],
+  "{0} kbps voice": ["صوت بجودة {0} kbps", "Sprache mit {0} kbit/s"],
+  "{0} more for Level {1}": [
+    "باقي {0} للوصول إلى المستوى {1}",
+    "Noch {0} bis Stufe {1}"
+  ],
+  "{0} now has Zrzur Feather. They'll see your note in their subscriptions.": [
+    "صار لدى {0} اشتراك ريشة زرزور الآن. سيرى رسالتك في صفحة الاشتراكات.",
+    "{0} hat jetzt Zrzur Feather. Deine Nachricht steht in den Abos."
+  ],
+  "{0} screen share": ["مشاركة شاشة {0}", "Bildschirmübertragung in {0}"],
+  "{0} streams": ["بث بجودة {0}", "Streams in {0}"],
+  "{0} supercharges": ["الشحنات: {0}", "Aufladungen: {0}"],
+  "{0} uploads": ["رفع ملفات حتى {0}", "Uploads bis {0}"],
+  "{0} uploads for everyone": [
+    "رفع ملفات حتى {0} للجميع",
+    "Uploads bis {0} für alle"
+  ],
+  "{0}/month": ["{0}/شهرياً", "{0}/Monat"],
+  "{count} months": ["{count} أشهر", "{count} Monate"],
+  "/month": ["/شهرياً", "/Monat"],
+  "1 month": ["شهر واحد", "1 Monat"],
+  "1 month, 3 months or a year, paid once.": [
+    "شهر أو 3 أشهر أو سنة، بدفعة واحدة.",
+    "1 Monat, 3 Monate oder ein Jahr, einmal bezahlt."
+  ],
+  "1 year": ["سنة", "1 Jahr"],
+  "a friend": ["صديق", "einer Freundin oder einem Freund"],
+  "A Plus role in the official Zrzur server, with the members-only channels and permissions HQ gives it. Staff hang out there and new things show up first.": [
+    "دور بلس في سيرفر زرزور الرسمي، مع القنوات والصلاحيات الخاصة التي يمنحها له المقر. الفريق موجود هناك، والجديد يظهر هناك أولاً.",
+    "Eine Plus-Rolle auf dem offiziellen Zrzur-Server, mit den Kanälen und Rechten, die HQ ihr gibt. Das Team ist dort, und Neues gibt es dort zuerst."
+  ],
+  "A small feather next to your name so people know you help keep the lights on. Hide it any time.": [
+    "ريشة صغيرة بجانب اسمك، ليعرف الناس أنك تساعد في إبقاء زرزور يعمل. يمكنك إخفاؤها متى شئت.",
+    "Eine kleine Feder neben deinem Namen, damit alle sehen, dass du Zrzur am Laufen hältst. Jederzeit ausblendbar."
+  ],
+  "Animated avatars and emoji": [
+    "الصور الرمزية والإيموجي المتحركة",
+    "Animierte Avatare und Emojis"
+  ],
+  "Bigger uploads, longer messages, sharper streams and a free supercharge, for {0} a month.": [
+    "ملفات أكبر، رسائل أطول، بث أوضح، وشحنة مجانية، مقابل {0} شهرياً.",
+    "Größere Uploads, längere Nachrichten, schärfere Streams und eine kostenlose Aufladung für {0} im Monat."
+  ],
+  "Bots can't have Feather.": [
+    "لا يمكن للبوتات الاشتراك في ريشة.",
+    "Bots können kein Feather haben."
+  ],
+  "Cancel any time": ["ألغِ متى شئت", "Jederzeit kündbar"],
+  "Cancel any time in Settings, Subscriptions. You keep Feather until the end of the month you paid for.": [
+    "ألغِ متى شئت من الإعدادات ← الاشتراكات. يبقى اشتراك ريشة معك حتى نهاية الشهر المدفوع.",
+    "Kündige jederzeit unter Einstellungen → Abos. Feather bleibt bis zum Ende des bezahlten Monats."
+  ],
+  "Cancel Feather": ["إلغاء اشتراك ريشة", "Feather kündigen"],
+  "Cancelled, ends on {0}": ["أُلغيت، تنتهي في {0}", "Gekündigt, endet am {0}"],
+  "Cancelled, ends on {date}": [
+    "أُلغي، ينتهي في {date}",
+    "Gekündigt, endet am {date}"
+  ],
+  "Cancelled. You keep Feather until {0}.": [
+    "أُلغي الاشتراك. يبقى اشتراك ريشة معك حتى {0}.",
+    "Gekündigt. Feather bleibt dir bis {0}."
+  ],
+  "Crisp and smooth for everyone watching. A 1080p60 stream sends about four times the data of 720p30 through our voice servers.": [
+    "صورة واضحة وسلسة لكل من يشاهد. بث 1080p60 ينقل عبر سيرفرات الصوت عندنا قرابة أربعة أضعاف بيانات 720p30.",
+    "Scharf und flüssig für alle, die zusehen. Ein 1080p60-Stream schickt etwa viermal so viele Daten durch unsere Sprachserver wie 720p30."
+  ],
+  "Decorations and nameplates": [
+    "الإطارات ولوحات الأسماء",
+    "Rahmen und Namensschilder"
+  ],
+  "Discover review": ["مراجعة الاستكشاف", "Discover-Prüfung"],
+  "Each supercharge counts towards a server's level. Move them any time; they leave a server with you.": [
+    "كل شحنة تُحسب في مستوى السيرفر. انقلها متى شئت، وهي تخرج معك إذا غادرت السيرفر.",
+    "Jede Aufladung zählt zur Stufe eines Servers. Du kannst sie jederzeit verschieben; verlässt du einen Server, geht sie mit."
+  ],
+  "Everything you need to chat is free. Plus is the big files, the sharp streams, the lounge and the badge.": [
+    "كل ما تحتاجه للدردشة مجاني. بلس يعني الملفات الكبيرة، والبث الواضح، والصالة، والشارة.",
+    "Alles zum Chatten ist kostenlos. Plus bringt die großen Dateien, die scharfen Streams, die Lounge und das Abzeichen."
+  ],
+  "First in line": ["في أول الدور", "Ganz vorne"],
+  "Free": ["مجاني", "Kostenlos"],
+  "Full clips, big GIFs, whole albums. Every file stays on our storage for good, so this is the perk that costs us the most.": [
+    "مقاطع كاملة، صور GIF كبيرة، ألبومات كاملة. كل ملف يبقى محفوظاً عندنا للأبد، لذلك هذه الميزة هي الأعلى كلفة علينا.",
+    "Ganze Clips, große GIFs, komplette Alben. Jede Datei bleibt dauerhaft bei uns gespeichert, deshalb kostet uns dieser Vorteil am meisten."
+  ],
+  "Get Feather for {0}/month": [
+    "احصل على ريشة بـ {0} شهرياً",
+    "Feather für {0}/Monat holen"
+  ],
+  "Get Zrzur Feather": ["احصل على ريشة زرزور", "Zrzur Feather holen"],
+  "Gift from {0}. Ends on {1}, nothing renews.": [
+    "هدية من {0}. تنتهي في {1}، ولا يتجدد شيء.",
+    "Geschenk von {0}. Endet am {1}, nichts verlängert sich."
+  ],
+  "Gift length": ["مدة الهدية", "Dauer des Geschenks"],
+  "Gift Feather to a friend": ["أهدِ ريشة لصديق", "Feather verschenken"],
+  "Gift Feather to a friend: one payment, straight onto their account, with a note from you. 1 month, 3 months or a year.": [
+    "أهدِ ريشة لصديق: دفعة واحدة، تصل مباشرة إلى حسابه مع رسالة منك. شهر أو 3 أشهر أو سنة.",
+    "Feather verschenken: eine Zahlung, direkt auf das Konto, mit einer Nachricht von dir. 1 Monat, 3 Monate oder ein Jahr."
+  ],
+  "Gift sent": ["أُرسلت الهدية", "Geschenk gesendet"],
+  "Gifted Feather, ends on {date}": [
+    "ريشة مُهداة، تنتهي في {date}",
+    "Geschenktes Feather, endet am {date}"
+  ],
+  "Gifts don't renew. Nothing more is charged later.": [
+    "الهدايا لا تتجدد، ولن يُدفع أي مبلغ لاحقاً.",
+    "Geschenke verlängern sich nicht. Später wird nichts mehr berechnet."
+  ],
+  "Happy birthday!": ["عيد ميلاد سعيد!", "Alles Gute zum Geburtstag!"],
+  "How long?": ["كم المدة؟", "Wie lange?"],
+  "Included supercharges": ["الشحنات المشمولة", "Enthaltene Aufladungen"],
+  "Included with Feather": ["مشمول مع ريشة", "In Feather enthalten"],
+  "It comes with your Feather subscription. You can move it to another server any time.": [
+    "يأتي مع اشتراك ريشة. يمكنك نقله إلى سيرفر آخر متى شئت.",
+    "Er gehört zu deinem Feather-Abo. Du kannst ihn jederzeit auf einen anderen Server verschieben."
+  ],
+  "Keep": ["إبقاء", "Behalten"],
+  "Keep Feather": ["إبقاء اشتراك ريشة", "Feather behalten"],
+  "Level {0}": ["المستوى {0}", "Stufe {0}"],
+  "Make up to {0} bots instead of {1}.": [
+    "أنشئ حتى {0} بوتات بدلاً من {1}.",
+    "Erstelle bis zu {0} Bots statt {1}."
+  ],
+  "Manage subscription": ["إدارة الاشتراك", "Abo verwalten"],
+  "Message length": ["طول الرسالة", "Nachrichtenlänge"],
+  "More room. More reach. More Zrzur.": [
+    "مساحة أكبر. وصول أبعد. زرزور أكثر.",
+    "Mehr Platz. Mehr Reichweite. Mehr Zrzur."
+  ],
+  "Move": ["نقل", "Verschieben"],
+  "Move supercharge": ["نقل الشحنة", "Aufladung verschieben"],
+  "Next renewal": ["التجديد القادم", "Nächste Verlängerung"],
+  "No": ["لا", "Nein"],
+  "No badge": ["بدون شارة", "Kein Abzeichen"],
+  "No friends to show. Add someone as a friend first.": [
+    "لا يوجد أصدقاء لعرضهم. أضف صديقاً أولاً.",
+    "Keine Freunde zum Anzeigen. Füge zuerst jemanden als Freund hinzu."
+  ],
+  "No servers to show.": [
+    "لا توجد سيرفرات لعرضها.",
+    "Keine Server zum Anzeigen."
+  ],
+  "No supercharges yet": ["لا توجد شحنات بعد", "Noch keine Aufladungen"],
+  "Normal queue": ["الدور العادي", "Normale Warteschlange"],
+  "Not on a server yet": ["ليست على سيرفر بعد", "Noch auf keinem Server"],
+  "Note (optional)": ["رسالة (اختياري)", "Nachricht (optional)"],
+  "Note from {0}": ["رسالة من {0}", "Nachricht von {0}"],
+  "One payment, straight onto their account, with a note from you. If they already have Feather, the time is added on.": [
+    "دفعة واحدة تصل مباشرة إلى حسابه مع رسالة منك. إذا كان لديه اشتراك ريشة، تُضاف المدة إلى اشتراكه.",
+    "Eine Zahlung, direkt auf das Konto, mit einer Nachricht von dir. Hat die Person schon Feather, wird die Zeit angehängt."
+  ],
+  "Open a server's menu and choose Supercharge server. Each one is {0} a month.": [
+    "افتح قائمة السيرفر واختر «اشحن السيرفر». كل شحنة بـ {0} شهرياً.",
+    "Öffne das Menü eines Servers und wähle „Server aufladen“. Jede Aufladung kostet {0} im Monat."
+  ],
+  "Paid": ["مدفوعة", "Kostenpflichtig"],
+  "Perk": ["الميزة", "Vorteil"],
+  "Pick a server you're in.": [
+    "اختر سيرفراً أنت عضو فيه.",
+    "Wähle einen Server, auf dem du bist."
+  ],
+  "Place": ["وضع", "Platzieren"],
+  "Place supercharge": ["وضع الشحنة", "Aufladung platzieren"],
+  "Feather": ["ريشة", "Feather"],
+  "Feather badge": ["شارة ريشة", "Feather-Abzeichen"],
+  "Plus comes with a free supercharge": [
+    "بلس يأتي مع شحنة مجانية",
+    "Plus enthält eine kostenlose Aufladung"
+  ],
+  "Plus lounge in Zrzur HQ": [
+    "صالة بلس في مقر زرزور",
+    "Plus-Lounge im Zrzur HQ"
+  ],
+  "Plus role and lounge": ["دور بلس والصالة", "Plus-Rolle und Lounge"],
+  "Price": ["السعر", "Preis"],
+  "Priority review": ["مراجعة بأولوية", "Bevorzugte Prüfung"],
+  "Purchases aren't available right now.": [
+    "الشراء غير متاح حالياً.",
+    "Käufe sind gerade nicht möglich."
+  ],
+  "Put it on any server you love: more emoji slots, bigger uploads and better voice for everyone there. Server menu, then Supercharge.": [
+    "ضعها على أي سيرفر تحبه: خانات إيموجي أكثر، ورفع ملفات أكبر، وصوت أوضح للجميع هناك. من قائمة السيرفر، ثم «اشحن السيرفر».",
+    "Gib sie einem Server, den du magst: mehr Emoji-Plätze, größere Uploads und bessere Sprache für alle dort. Servermenü, dann „Server aufladen“."
+  ],
+  "Refresh": ["تحديث", "Aktualisieren"],
+  "Renews automatically every month until you cancel.": [
+    "يتجدد تلقائياً كل شهر حتى تلغيه.",
+    "Verlängert sich jeden Monat automatisch, bis du kündigst."
+  ],
+  "Renews on {date}": ["يتجدد في {date}", "Verlängert sich am {date}"],
+  "See Feather": ["تعرّف على ريشة", "Feather ansehen"],
+  "Send gift for {0}": ["أرسل الهدية بـ {0}", "Geschenk für {0} senden"],
+  "Servers and bots you send to Discover are reviewed ahead of the queue. Same rules, just faster.": [
+    "السيرفرات والبوتات التي ترسلها إلى الاستكشاف تُراجع قبل غيرها. القواعد نفسها، لكن أسرع.",
+    "Server und Bots, die du bei Discover einreichst, werden vor der Warteschlange geprüft. Gleiche Regeln, nur schneller."
+  ],
+  "Show Feather badge": ["إظهار شارة ريشة", "Feather-Abzeichen anzeigen"],
+  "Something went wrong. Try again.": [
+    "حدث خطأ ما. حاول مرة أخرى.",
+    "Etwas ist schiefgelaufen. Versuch es noch einmal."
+  ],
+  "Start Feather": ["ابدأ اشتراك ريشة", "Feather starten"],
+  "Still free for everyone": [
+    "يبقى مجانياً للجميع",
+    "Bleibt für alle kostenlos"
+  ],
+  "Supercharge": ["اشحن", "Aufladen"],
+  "Supercharge {0}": ["اشحن {0}", "{0} aufladen"],
+  "Supercharge level {0}": ["مستوى الشحن {0}", "Aufladestufe {0}"],
+  "Supercharge server": ["اشحن السيرفر", "Server aufladen"],
+  "Supercharge this server": ["اشحن هذا السيرفر", "Diesen Server aufladen"],
+  "Supercharges": ["الشحنات", "Aufladungen"],
+  "Supercharging this server": [
+    "يشحنون هذا السيرفر",
+    "Laden diesen Server auf"
+  ],
+  "Take off": ["إزالة", "Entfernen"],
+  "Take one off": ["أزل واحدة", "Eine entfernen"],
+  "Test mode: nothing is charged and no card details are needed.": [
+    "وضع التجربة: لا يُدفع أي مبلغ ولا حاجة لبيانات بطاقة.",
+    "Testmodus: Es wird nichts berechnet und keine Kartendaten werden gebraucht."
+  ],
+  "Test mode: purchases are simulated and nothing is charged. No card details are asked for or stored.": [
+    "وضع التجربة: عمليات الشراء محاكاة فقط ولا يُدفع أي مبلغ. لا نطلب بيانات بطاقة ولا نحفظها.",
+    "Testmodus: Käufe werden nur simuliert, es wird nichts berechnet. Kartendaten werden weder abgefragt noch gespeichert."
+  ],
+  "That can't be done right now.": [
+    "لا يمكن تنفيذ ذلك الآن.",
+    "Das geht gerade nicht."
+  ],
+  "That couldn't be found. It may have changed, try again.": [
+    "تعذّر العثور عليه. ربما تغيّر، حاول مرة أخرى.",
+    "Das wurde nicht gefunden. Vielleicht hat es sich geändert, versuch es noch einmal."
+  ],
+  "That user couldn't be found.": [
+    "تعذّر العثور على هذا المستخدم.",
+    "Diese Person wurde nicht gefunden."
+  ],
+  "The Feather badge next to your name on your profile.": [
+    "شارة ريشة بجانب اسمك في ملفك الشخصي.",
+    "Das Feather-Abzeichen neben deinem Namen im Profil."
+  ],
+  "The Feather lounge in Zrzur HQ": [
+    "صالة ريشة في مقر زرزور",
+    "Die Feather-Lounge im Zrzur HQ"
+  ],
+  "Themes": ["السمات", "Designs"],
+  "Top level reached": ["وصل إلى أعلى مستوى", "Höchste Stufe erreicht"],
+  "Total, paid once": ["الإجمالي، دفعة واحدة", "Gesamt, einmalig"],
+  "Twice the room. Long stories, patch notes, a whole recipe, one message. Edits get the same room.": [
+    "ضعف المساحة. قصص طويلة، ملاحظات تحديث، وصفة كاملة، في رسالة واحدة. والتعديل يحصل على المساحة نفسها.",
+    "Doppelt so viel Platz. Lange Geschichten, Patchnotes, ein ganzes Rezept in einer Nachricht. Beim Bearbeiten gilt dasselbe."
+  ],
+  "Unlock perks for everyone here. Any member can chip in.": [
+    "افتح مزايا لكل من هنا. أي عضو يستطيع المساهمة.",
+    "Schalte Vorteile für alle hier frei. Jedes Mitglied kann mitmachen."
+  ],
+  "Uploads": ["رفع الملفات", "Uploads"],
+  "Use your free supercharge": [
+    "استخدم شحنتك المجانية",
+    "Kostenlose Aufladung nutzen"
+  ],
+  "Video uploads": ["رفع الفيديو", "Video-Uploads"],
+  "Voice and screen share": [
+    "الصوت ومشاركة الشاشة",
+    "Sprache und Bildschirmübertragung"
+  ],
+  "Who is it for?": ["لمن الهدية؟", "Für wen ist es?"],
+  "Why charge for anything?": [
+    "لماذا ندفع مقابل أي شيء؟",
+    "Warum überhaupt etwas kosten lassen?"
+  ],
+  "Yes, hide it any time": ["نعم، ويمكن إخفاؤها", "Ja, jederzeit ausblendbar"],
+  "You don't have Feather": ["ليس لديك اشتراك ريشة", "Du hast kein Feather"],
+  "You have Zrzur Feather": ["لديك ريشة زرزور", "Du hast Zrzur Feather"],
+  "You're supercharging this server ×{0}": [
+    "أنت تشحن هذا السيرفر ×{0}",
+    "Du lädst diesen Server auf ×{0}"
+  ],
+  "Your emoji in every server": [
+    "إيموجيك في كل سيرفر",
+    "Deine Emojis auf jedem Server"
+  ],
+  "Zrzur has no investors. Servers, storage, voice bandwidth and moderation tools are paid for out of pocket. Expression, meaning your emoji, animated avatars, themes, voice and screen share, is free and stays free. Plus covers the things that grow with cost, file size and stream quality, and says thanks with the rest.": [
+    "زرزور بلا مستثمرين. السيرفرات والتخزين وسعة الصوت وأدوات الإشراف ندفعها من جيبنا. التعبير عن نفسك، أي الإيموجي والصور الرمزية المتحركة والسمات والصوت ومشاركة الشاشة، مجاني وسيبقى مجانياً. بلس يغطي ما تزيد كلفته مع الاستخدام، مثل حجم الملفات وجودة البث، ويقول لك شكراً بالباقي.",
+    "Zrzur hat keine Investoren. Server, Speicher, Sprachbandbreite und Moderationswerkzeuge zahlen wir selbst. Ausdruck, also deine Emojis, animierte Avatare, Designs, Sprache und Bildschirmübertragung, ist kostenlos und bleibt es. Plus deckt, was mit den Kosten wächst, Dateigröße und Streamqualität, und sagt mit dem Rest danke."
+  ],
+  "Zrzur Feather": ["ريشة زرزور", "Zrzur Feather"],
+  "Zrzur Feather, monthly": ["ريشة زرزور، شهرياً", "Zrzur Feather, monatlich"]
+}

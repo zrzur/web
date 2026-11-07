@@ -1,0 +1,178 @@
+{
+  "$schema": "../../schema/plugin-manifest.v1.schema.json",
+  "manifest_version": 1,
+  "id": "zrzur.dice",
+  "name": "Dice and Picks",
+  "version": "1.0.2",
+  "description": "Roll dice, flip a coin or let chance pick a number, for games and quick decisions. Results go into your message box so everyone sees them.",
+  "author": {
+    "name": "Zrzur"
+  },
+  "category": "productivity",
+  "icon": "sparkle",
+  "api_version": 1,
+  "min_app_version": "26.0.0",
+  "platforms": [
+    "web",
+    "pwa",
+    "desktop"
+  ],
+  "entrypoint": {
+    "type": "worker",
+    "file": "main.js"
+  },
+  "permissions": [
+    "ui.commands",
+    "ui.panels",
+    "keybinds",
+    "storage.settings",
+    "composer.insert"
+  ],
+  "contributes": {
+    "settings": [
+      {
+        "key": "sides",
+        "type": "select",
+        "title": {
+          "en": "Dice",
+          "ar": "النرد",
+          "de": "Würfel"
+        },
+        "default": "d6",
+        "options": [
+          {
+            "value": "d4",
+            "label": "d4"
+          },
+          {
+            "value": "d6",
+            "label": "d6"
+          },
+          {
+            "value": "d8",
+            "label": "d8"
+          },
+          {
+            "value": "d10",
+            "label": "d10"
+          },
+          {
+            "value": "d12",
+            "label": "d12"
+          },
+          {
+            "value": "d20",
+            "label": "d20"
+          },
+          {
+            "value": "d100",
+            "label": "d100"
+          }
+        ]
+      },
+      {
+        "key": "count",
+        "type": "number",
+        "title": {
+          "en": "How many dice",
+          "ar": "عدد قطع النرد",
+          "de": "Anzahl Würfel"
+        },
+        "default": 1,
+        "min": 1,
+        "max": 10,
+        "step": 1
+      }
+    ],
+    "commands": [
+      {
+        "id": "roll",
+        "title": {
+          "en": "Roll the dice",
+          "ar": "رمي النرد",
+          "de": "Würfeln"
+        },
+        "action": {
+          "type": "worker",
+          "handler": "roll"
+        }
+      },
+      {
+        "id": "coin",
+        "title": {
+          "en": "Flip a coin",
+          "ar": "رمي عملة",
+          "de": "Münze werfen"
+        },
+        "action": {
+          "type": "worker",
+          "handler": "coin"
+        }
+      },
+      {
+        "id": "panel",
+        "title": {
+          "en": "Open the dice table",
+          "ar": "فتح طاولة النرد",
+          "de": "Würfeltisch öffnen"
+        },
+        "action": {
+          "type": "worker",
+          "handler": "panel"
+        }
+      }
+    ],
+    "keybinds": [
+      {
+        "command": "roll",
+        "keys": "Alt+Shift+G"
+      },
+      {
+        "command": "panel",
+        "keys": "Alt+Shift+J"
+      }
+    ]
+  },
+  "locales": {
+    "ar": {
+      "name": "النرد والقرعة",
+      "description": "ارمِ النرد أو اقلب عملة أو دع الصدفة تختار رقماً، للألعاب والقرارات السريعة. تُدرج النتائج في مربع الرسالة ليراها الجميع.",
+      "strings": {
+        "rolled": "🎲 رميتُ {dice}: {rolls} = **{total}**",
+        "coin": "🪙 قلبتُ عملة: **{side}**",
+        "heads": "وجه",
+        "tails": "كتابة",
+        "pick": "🎯 اخترتُ رقماً من 1 إلى {max}: **{n}**",
+        "title": "طاولة النرد",
+        "last": "آخر رمية: {text}",
+        "number": "رقم من 1 إلى {max}"
+      }
+    },
+    "de": {
+      "name": "Würfel und Los",
+      "description": "Würfle, wirf eine Münze oder lass den Zufall eine Zahl wählen, für Spiele und schnelle Entscheidungen. Ergebnisse landen in deinem Nachrichtenfeld, damit alle sie sehen.",
+      "strings": {
+        "rolled": "🎲 Gewürfelt {dice}: {rolls} = **{total}**",
+        "coin": "🪙 Münzwurf: **{side}**",
+        "heads": "Kopf",
+        "tails": "Zahl",
+        "pick": "🎯 Zahl von 1 bis {max}: **{n}**",
+        "title": "Würfeltisch",
+        "last": "Letzter Wurf: {text}",
+        "number": "Zahl von 1 bis {max}"
+      }
+    },
+    "en": {
+      "strings": {
+        "rolled": "🎲 Rolled {dice}: {rolls} = **{total}**",
+        "coin": "🪙 Flipped a coin: **{side}**",
+        "heads": "Heads",
+        "tails": "Tails",
+        "pick": "🎯 Picked a number from 1 to {max}: **{n}**",
+        "title": "Dice table",
+        "last": "Last roll: {text}",
+        "number": "Number from 1 to {max}"
+      }
+    }
+  }
+}

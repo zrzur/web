@@ -1,0 +1,109 @@
+{
+  "$schema": "../../schema/plugin-manifest.v1.schema.json",
+  "manifest_version": 1,
+  "id": "zrzur.markdown-kit",
+  "name": "Markdown Kit",
+  "version": "1.0.0",
+  "description": "Ready-made formatting for your messages: quotes, spoilers, tables, lists and code, each one shortcut away, plus a cheat sheet.",
+  "author": { "name": "Zrzur" },
+  "category": "productivity",
+  "icon": "text-aa",
+  "api_version": 1,
+  "min_app_version": "26.0.0",
+  "platforms": ["web", "pwa", "desktop"],
+  "entrypoint": { "type": "declarative" },
+  "permissions": ["ui.commands", "ui.panels", "keybinds", "composer.insert"],
+  "contributes": {
+    "commands": [
+      {
+        "id": "quote",
+        "title": { "en": "Insert a quote", "ar": "إدراج اقتباس", "de": "Zitat einfügen" },
+        "action": { "type": "composer.insert", "text": "> " }
+      },
+      {
+        "id": "spoiler",
+        "title": { "en": "Insert a spoiler", "ar": "إدراج نص مخفي", "de": "Spoiler einfügen" },
+        "action": { "type": "composer.insert", "text": "||spoiler||" }
+      },
+      {
+        "id": "table",
+        "title": { "en": "Insert a table", "ar": "إدراج جدول", "de": "Tabelle einfügen" },
+        "action": { "type": "composer.insert", "text": "| Column | Column |\n| --- | --- |\n|  |  |\n" }
+      },
+      {
+        "id": "checklist",
+        "title": { "en": "Insert a checklist", "ar": "إدراج قائمة مهام", "de": "Checkliste einfügen" },
+        "action": { "type": "composer.insert", "text": "- [ ] \n- [ ] \n- [ ] " }
+      },
+      {
+        "id": "list",
+        "title": { "en": "Insert a numbered list", "ar": "إدراج قائمة مرقمة", "de": "Nummerierte Liste einfügen" },
+        "action": { "type": "composer.insert", "text": "1. \n2. \n3. " }
+      },
+      {
+        "id": "code",
+        "title": { "en": "Insert a code block", "ar": "إدراج كتلة شيفرة", "de": "Codeblock einfügen" },
+        "action": { "type": "composer.insert", "text": "```\n\n```" }
+      },
+      {
+        "id": "heading",
+        "title": { "en": "Insert a heading", "ar": "إدراج عنوان", "de": "Überschrift einfügen" },
+        "action": { "type": "composer.insert", "text": "## " }
+      },
+      {
+        "id": "cheatsheet",
+        "title": { "en": "Show the cheat sheet", "ar": "عرض دليل التنسيق", "de": "Spickzettel anzeigen" },
+        "action": { "type": "panel.open", "panel": "cheatsheet" }
+      }
+    ],
+    "keybinds": [
+      { "command": "quote", "keys": "Alt+Shift+Q" },
+      { "command": "spoiler", "keys": "Alt+Shift+S" },
+      { "command": "table", "keys": "Alt+Shift+T" },
+      { "command": "checklist", "keys": "Alt+Shift+L" },
+      { "command": "code", "keys": "Alt+Shift+B" },
+      { "command": "cheatsheet", "keys": "Alt+Shift+D" }
+    ],
+    "panels": [
+      {
+        "id": "cheatsheet",
+        "title": { "en": "Formatting cheat sheet", "ar": "دليل التنسيق", "de": "Formatierung" },
+        "blocks": [
+          { "type": "heading", "text": { "en": "Text", "ar": "النص", "de": "Text" } },
+          {
+            "type": "text",
+            "text": {
+              "en": "**bold**  *italic*  ~~strike~~  `code`  ||spoiler||",
+              "ar": "**عريض**  *مائل*  ~~مشطوب~~  `شيفرة`  ||مخفي||",
+              "de": "**fett**  *kursiv*  ~~durchgestrichen~~  `Code`  ||Spoiler||"
+            }
+          },
+          { "type": "divider" },
+          { "type": "heading", "text": { "en": "Shortcuts", "ar": "الاختصارات", "de": "Tastenkürzel" } },
+          {
+            "type": "text",
+            "text": {
+              "en": "Alt+Shift+Q quote · S spoiler · T table · L checklist · B code block",
+              "ar": "Alt+Shift+Q اقتباس · S نص مخفي · T جدول · L قائمة مهام · B كتلة شيفرة",
+              "de": "Alt+Shift+Q Zitat · S Spoiler · T Tabelle · L Checkliste · B Codeblock"
+            }
+          },
+          { "type": "divider" },
+          { "type": "button", "label": { "en": "Insert a table", "ar": "إدراج جدول", "de": "Tabelle einfügen" }, "command": "table" },
+          { "type": "button", "label": { "en": "Insert a numbered list", "ar": "إدراج قائمة مرقمة", "de": "Nummerierte Liste einfügen" }, "command": "list" },
+          { "type": "button", "label": { "en": "Insert a heading", "ar": "إدراج عنوان", "de": "Überschrift einfügen" }, "command": "heading" }
+        ]
+      }
+    ]
+  },
+  "locales": {
+    "ar": {
+      "name": "عدّة التنسيق",
+      "description": "تنسيقات جاهزة لرسائلك: اقتباسات ونصوص مخفية وجداول وقوائم وشيفرة، لكل منها اختصار، مع دليل سريع."
+    },
+    "de": {
+      "name": "Markdown-Kit",
+      "description": "Fertige Formatierungen für deine Nachrichten: Zitate, Spoiler, Tabellen, Listen und Code, jeweils mit Tastenkürzel, dazu ein Spickzettel."
+    }
+  }
+}

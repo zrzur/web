@@ -1,0 +1,480 @@
+{
+ "endpoints": {
+  "POST /bots/create": {
+   "status": "unsupported",
+   "restrictions": [
+    "Bots cannot create bots: the owner's user session creates them in the Developer Portal (IsBot)."
+   ],
+   "errors": [
+    "IsBot"
+   ]
+  },
+  "GET /bots/@me": {
+   "status": "unsupported",
+   "restrictions": [
+    "Lists the bots a user owns; a bot token gets an empty list. Use the Developer Portal."
+   ]
+  },
+  "PATCH /bots/{bot_id}": {
+   "status": "unsupported",
+   "restrictions": [
+    "Only the bot's owner (user session) can edit it; a bot token gets NotFound."
+   ]
+  },
+  "DELETE /bots/{bot_id}": {
+   "status": "unsupported",
+   "restrictions": [
+    "Only the bot's owner, with an MFA ticket, can delete it; a bot token gets NotFound."
+   ]
+  },
+  "POST /webhooks/{webhook_id}/{token}/github": {
+   "errors": [
+    "InvalidOperation"
+   ],
+   "restrictions": [
+    "Accepts GitHub webhook deliveries (X-GitHub-Event header); unsupported event types get InvalidOperation."
+   ]
+  },
+  "POST /channels/{target}/messages": {
+   "events": [
+    "Message"
+   ],
+   "errors": [
+    "EmptyMessage",
+    "PayloadTooLarge"
+   ],
+   "restrictions": [
+    "A message with no content, embeds or attachments gets 422 EmptyMessage; one over the size limits gets 422 PayloadTooLarge (other validation errors are 400 FailedValidation)."
+   ]
+  },
+  "PATCH /channels/{target}/messages/{msg}": {
+   "events": [
+    "MessageUpdate"
+   ],
+   "errors": [
+    "EmptyMessage",
+    "PayloadTooLarge"
+   ]
+  },
+  "DELETE /channels/{target}/messages/{msg}": {
+   "events": [
+    "MessageDelete"
+   ]
+  },
+  "DELETE /channels/{target}/messages/bulk": {
+   "events": [
+    "BulkMessageDelete"
+   ]
+  },
+  "PUT /channels/{target}/messages/{msg}/reactions/{emoji}": {
+   "events": [
+    "MessageReact"
+   ]
+  },
+  "DELETE /channels/{target}/messages/{msg}/reactions/{emoji}": {
+   "events": [
+    "MessageUnreact"
+   ]
+  },
+  "DELETE /channels/{target}/messages/{msg}/reactions": {
+   "events": [
+    "MessageRemoveReaction"
+   ]
+  },
+  "POST /channels/{target}/messages/{msg}/pin": {
+   "events": [
+    "MessageUpdate"
+   ]
+  },
+  "DELETE /channels/{target}/messages/{msg}/pin": {
+   "events": [
+    "MessageUpdate"
+   ]
+  },
+  "POST /servers/{server}/channels": {
+   "events": [
+    "ChannelCreate"
+   ]
+  },
+  "PATCH /channels/{target}": {
+   "events": [
+    "ChannelUpdate"
+   ]
+  },
+  "DELETE /channels/{target}": {
+   "events": [
+    "ChannelDelete"
+   ]
+  },
+  "PUT /channels/{target}/permissions/{role_id}": {
+   "events": [
+    "ChannelUpdate"
+   ]
+  },
+  "PUT /channels/{target}/permissions/default": {
+   "events": [
+    "ChannelUpdate"
+   ]
+  },
+  "PATCH /servers/{target}": {
+   "events": [
+    "ServerUpdate"
+   ]
+  },
+  "DELETE /servers/{target}": {
+   "events": [
+    "ServerMemberLeave",
+    "ServerDelete"
+   ]
+  },
+  "PUT /servers/{target}/permissions/{role_id}": {
+   "events": [
+    "ServerRoleUpdate"
+   ]
+  },
+  "PUT /servers/{target}/permissions/default": {
+   "events": [
+    "ServerUpdate"
+   ]
+  },
+  "POST /servers/{target}/roles": {
+   "events": [
+    "ServerRoleUpdate"
+   ]
+  },
+  "PATCH /servers/{target}/roles/{role_id}": {
+   "events": [
+    "ServerRoleUpdate"
+   ]
+  },
+  "DELETE /servers/{target}/roles/{role_id}": {
+   "events": [
+    "ServerRoleDelete"
+   ]
+  },
+  "PATCH /servers/{target}/roles/ranks": {
+   "events": [
+    "ServerRoleRanksUpdate"
+   ]
+  },
+  "PATCH /servers/{server_id}/members/{member_id}": {
+   "events": [
+    "ServerMemberUpdate"
+   ]
+  },
+  "DELETE /servers/{server_id}/members/{member_id}": {
+   "events": [
+    "ServerMemberLeave"
+   ]
+  },
+  "PUT /servers/{server}/bans/{target}": {
+   "events": [
+    "ServerMemberLeave"
+   ]
+  },
+  "PUT /custom/emoji/{emoji_id}": {
+   "events": [
+    "EmojiCreate"
+   ]
+  },
+  "PATCH /custom/emoji/{emoji_id}": {
+   "events": [
+    "EmojiUpdate"
+   ]
+  },
+  "DELETE /custom/emoji/{emoji_id}": {
+   "events": [
+    "EmojiDelete"
+   ]
+  },
+  "POST /channels/{channel_id}/webhooks": {
+   "events": [
+    "WebhookCreate"
+   ]
+  },
+  "PATCH /webhooks/{webhook_id}": {
+   "events": [
+    "WebhookUpdate"
+   ]
+  },
+  "PATCH /webhooks/{webhook_id}/{token}": {
+   "events": [
+    "WebhookUpdate"
+   ]
+  },
+  "DELETE /webhooks/{webhook_id}": {
+   "events": [
+    "WebhookDelete"
+   ]
+  },
+  "DELETE /webhooks/{webhook_id}/{token}": {
+   "events": [
+    "WebhookDelete"
+   ]
+  },
+  "POST /webhooks/{webhook_id}/{token}": {
+   "events": [
+    "Message"
+   ],
+   "errors": [
+    "EmptyMessage",
+    "PayloadTooLarge"
+   ],
+   "restrictions": [
+    "A message with no content, embeds or attachments gets 422 EmptyMessage; one over the size limits gets 422 PayloadTooLarge (other validation errors are 400 FailedValidation)."
+   ]
+  },
+  "PATCH /webhooks/{webhook_id}/{token}/{message_id}": {
+   "events": [
+    "MessageUpdate"
+   ]
+  },
+  "DELETE /webhooks/{webhook_id}/{token}/{message_id}": {
+   "events": [
+    "MessageDelete"
+   ]
+  },
+  "PATCH /users/{target}": {
+   "events": [
+    "UserUpdate"
+   ]
+  },
+  "POST /interactions/{interaction_id}/{token}/callback": {
+   "events": [
+    "Message",
+    "EphemeralMessageCreate",
+    "MessageUpdate",
+    "InteractionModal",
+    "InteractionAutocompleteResult",
+    "InteractionStateUpdate"
+   ]
+  },
+  "PATCH /interactions/{interaction_id}/{token}/original": {
+   "events": [
+    "MessageUpdate",
+    "EphemeralMessageUpdate"
+   ]
+  },
+  "DELETE /interactions/{interaction_id}/{token}/original": {
+   "events": [
+    "MessageDelete",
+    "EphemeralMessageDelete"
+   ]
+  },
+  "POST /interactions/{interaction_id}/{token}/followups": {
+   "events": [
+    "Message",
+    "EphemeralMessageCreate"
+   ]
+  },
+  "PATCH /interactions/{interaction_id}/{token}/messages/{message_id}": {
+   "events": [
+    "MessageUpdate",
+    "EphemeralMessageUpdate"
+   ]
+  },
+  "DELETE /interactions/{interaction_id}/{token}/messages/{message_id}": {
+   "events": [
+    "MessageDelete",
+    "EphemeralMessageDelete"
+   ]
+  },
+  "PUT /applications/{application_id}/commands": {
+   "events": [
+    "ApplicationCommandsUpdate"
+   ]
+  },
+  "POST /applications/{application_id}/commands": {
+   "events": [
+    "ApplicationCommandsUpdate"
+   ]
+  },
+  "PATCH /applications/{application_id}/commands/{command_id}": {
+   "events": [
+    "ApplicationCommandsUpdate"
+   ]
+  },
+  "DELETE /applications/{application_id}/commands/{command_id}": {
+   "events": [
+    "ApplicationCommandsUpdate"
+   ]
+  },
+  "PUT /applications/{application_id}/servers/{server_id}/commands": {
+   "events": [
+    "ApplicationCommandsUpdate"
+   ]
+  },
+  "POST /applications/{application_id}/servers/{server_id}/commands": {
+   "events": [
+    "ApplicationCommandsUpdate"
+   ]
+  },
+  "PATCH /applications/{application_id}/servers/{server_id}/commands/{command_id}": {
+   "events": [
+    "ApplicationCommandsUpdate"
+   ]
+  },
+  "DELETE /applications/{application_id}/servers/{server_id}/commands/{command_id}": {
+   "events": [
+    "ApplicationCommandsUpdate"
+   ]
+  },
+  "DELETE /servers/{server_id}/applications/{application_id}": {
+   "events": [
+    "ServerMemberLeave"
+   ]
+  },
+  "POST /channels/{target}/join_call": {
+   "events": [
+    "VoiceChannelJoin"
+   ],
+   "restrictions": [
+    "The ticket only lets the bot connect to LiveKit; VoiceChannelJoin is sent once it actually joins the room. Bots cannot use force_disconnect."
+   ]
+  },
+  "GET /users/{target}/dm": {
+   "restrictions": [
+    "Opening a DM can work while sending into it is refused: the person's privacy settings and blocks decide (DirectMessagesRestricted, Blocked)."
+   ]
+  },
+  "GET /servers/{target}/bans": {
+   "restrictions": [
+    "The API returns users[].avatar as null for users without an avatar, although the OpenAPI schema says object."
+   ]
+  },
+  "POST /channels/{target}/search": {
+   "status": "partial",
+   "restrictions": [
+    "Bots may only list pinned messages (`pinned: true`); text search answers IsBot."
+   ],
+   "errors": [
+    "IsBot"
+   ]
+  },
+  "POST /bots/{target}/interactions/secret": {
+   "status": "unsupported",
+   "restrictions": [
+    "Only the bot's owner, with an MFA ticket, can make a signing secret; a bot token gets IsBot."
+   ],
+   "errors": [
+    "IsBot"
+   ]
+  },
+  "PUT /bots/{target}/interactions/endpoint": {
+   "status": "unsupported",
+   "restrictions": [
+    "Only the bot's owner (user session) can call it; a bot token gets IsBot."
+   ],
+   "errors": [
+    "IsBot",
+    "SignedDeliveryRejected"
+   ]
+  },
+  "DELETE /bots/{target}/interactions/endpoint": {
+   "status": "unsupported",
+   "restrictions": [
+    "Only the bot's owner (user session) can call it; a bot token gets IsBot."
+   ],
+   "errors": [
+    "IsBot"
+   ]
+  }
+ },
+ "gateway": {
+  "Logout": {
+   "audience": "users"
+  },
+  "UserSettingsUpdate": {
+   "audience": "users"
+  },
+  "CreateAccount": {
+   "audience": "users",
+   "docs": "An account was created (internal, sent to that account only)"
+  },
+  "CreateSession": {
+   "audience": "users",
+   "docs": "A session was created for this account"
+  },
+  "DeleteSession": {
+   "audience": "users",
+   "docs": "A session of this account was deleted"
+  },
+  "DeleteAllSessions": {
+   "audience": "users",
+   "docs": "All sessions of this account were deleted"
+  },
+  "AccountAgeUpdate": {
+   "audience": "users"
+  },
+  "ChannelAck": {
+   "audience": "users"
+  },
+  "UserRelationship": {
+   "audience": "users"
+  },
+  "ReportCreate": {
+   "audience": "users"
+  },
+  "InteractionStateUpdate": {
+   "audience": "users"
+  },
+  "EphemeralMessageCreate": {
+   "audience": "users"
+  },
+  "EphemeralMessageUpdate": {
+   "audience": "users"
+  },
+  "EphemeralMessageDelete": {
+   "audience": "users"
+  },
+  "InteractionModal": {
+   "audience": "users"
+  },
+  "InteractionAutocompleteResult": {
+   "audience": "users"
+  },
+  "UserSlowmodes": {
+   "audience": "users"
+  },
+  "Bees": {
+   "audience": "users",
+   "docs": "Easter egg; ignore it"
+  },
+  "InteractionCreate": {
+   "audience": "bots"
+  },
+  "VoiceChannelJoin": {
+   "docs": "Someone joined a voice channel"
+  },
+  "VoiceChannelLeave": {
+   "docs": "Someone left a voice channel"
+  },
+  "VoiceChannelMove": {
+   "docs": "Someone was moved to another voice channel"
+  },
+  "UserVoiceStateUpdate": {
+   "docs": "Someone muted, deafened, started video or screen sharing"
+  },
+  "UserMoveVoiceChannel": {
+   "docs": "You are asked to move to another voice channel"
+  },
+  "VoiceCallUpdate": {
+   "docs": "A call in a DM or group started or ended"
+  },
+  "UserPlatformWipe": {
+   "docs": "A user was removed from the platform; drop their messages, DMs and memberships from your cache"
+  },
+  "Bulk": {
+   "docs": "Several events in one packet (field v); handle each one"
+  },
+  "Error": {
+   "docs": "Authentication or protocol error (field data.type)"
+  },
+  "Ready": {
+   "docs": "First event after Authenticate: the users, servers, channels, members and emojis the bot can see"
+  },
+  "Authenticated": {
+   "docs": "The token was accepted; Ready follows"
+  }
+ }
+}

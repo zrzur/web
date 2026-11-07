@@ -1,0 +1,69 @@
+import { describe, expect, it } from "vitest";
+
+import { precacheShell, shellFiles } from "./precacheShell.mjs";
+
+const chunk = (
+  fileName: string,
+  extra: {
+    isEntry?: boolean;
+    facadeModuleId?: string;
+    imports?: string[];
+    css?: string[];
+  } = {},
+) => ({
+  type: "chunk",
+  fileName,
+  isEntry: extra.isEntry ?? false,
+  facadeModuleId: extra.facadeModuleId ?? null,
+  imports: extra.imports ?? [],
+  viteMetadata: { importedCss: new Set(extra.css ?? []) },
+});
+
+const bundle = Object.fromEntries(
+  [
+    chunk("assets/index.js", {
+      isEntry: true,
+      imports: ["assets/shared.js"],
+      css: ["assets/index.css"],
+    }),
+    chunk("assets/shared.js"),
+    chunk("assets/ChannelPage.js", {
+      facadeModuleId:
+        "/x/packages/client/src/interface/channels/ChannelPage.tsx",
+      imports: ["assets/message.js"],
+    }),
+    chunk("assets/message.js"),
+    chunk("assets/Settings.js", {
+      facadeModuleId: "/x/packages/client/components/Settings.tsx",
+    }),
+    chunk("assets/messages-ar.js"),
+  ].map((c) => [c.fileName, c]),
+);
+
+describe("precache shell", () => {
+  it("takes the entry, its CSS and imports, and the chat screens", () => {
+    expect([...shellFiles(bundle)].sort()).toEqual([
+      "assets/ChannelPage.js",
+      "assets/index.css",
+      "assets/index.js",
+      "assets/message.js",
+      "assets/shared.js",
+    ]);
+  });
+
+  it("leaves out languages and rarely opened screens", () => {
+    const files = shellFiles(bundle);
+    expect(files.has("assets/Settings.js")).toBe(false);
+    expect(files.has("assets/messages-ar.js")).toBe(false);
+  });
+
+  it("filters the workbox list by the shell of the build", () => {
+    const { plugin, manifestTransform } = precacheShell();
+    plugin.generateBundle({}, bundle);
+    const entries = [
+      { url: "assets/index.js", revision: null, size: 1 },
+      { url: "assets/messages-ar.js", revision: null, size: 1 },
+    ];
+    expect(manifestTransform(entries).manifest).toEqual([entries[0]]);
+  });
+});

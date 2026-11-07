@@ -1,0 +1,47 @@
+{
+  "Close picker": ["إغلاق المنتقي", "Auswahl schließen"],
+  "Discover is not available on this Zrzur build. A Zrzur-hosted Discover service has not been configured.": [
+    "«اكتشف» غير متاح في هذا الإصدار من زرزور، لأنه لم تُضبط خدمة «اكتشف» تابعة لزرزور.",
+    "„Entdecken“ ist in diesem Zrzur-Build nicht verfügbar. Es wurde kein von Zrzur betriebener Entdecken-Dienst eingerichtet."
+  ],
+  "Emoji categories": ["فئات الإيموجي", "Emoji-Kategorien"],
+  "Enter an invite link or code to join a server.": [
+    "أدخل رابط دعوة أو رمزها للانضمام إلى سيرفر.",
+    "Gib einen Einladungslink oder -code ein, um einem Server beizutreten."
+  ],
+  "GIFs and emoji": ["الصور المتحركة والإيموجي", "GIFs und Emojis"],
+  "Media type": ["نوع الوسائط", "Medientyp"],
+  "Nature & animals": ["الطبيعة والحيوانات", "Natur & Tiere"],
+  "Only people on {0} see this. Leave a field empty to use your main profile.": [
+    "لا يرى هذا إلا الموجودون في {0}. اترك الحقل فارغًا لاستخدام ملفك الأساسي.",
+    "Nur Leute auf {0} sehen das. Lass ein Feld leer, um dein Hauptprofil zu nutzen."
+  ],
+  "People & body": ["الأشخاص والجسم", "Menschen & Körper"],
+  "Preview unavailable": ["المعاينة غير متاحة", "Vorschau nicht verfügbar"],
+  "Search emoji": ["ابحث عن إيموجي", "Emojis suchen"],
+  "Search GIFs": ["ابحث عن صور متحركة", "GIFs suchen"],
+  "Search results": ["نتائج البحث", "Suchergebnisse"],
+  "Smileys & emotion": ["الوجوه والمشاعر", "Smileys & Gefühle"],
+  "Square image, up to {0}. You can crop it after choosing.": [
+    "صورة مربعة حتى {0}. يمكنك قصها بعد اختيارها.",
+    "Quadratisches Bild, bis {0}. Du kannst es nach der Auswahl zuschneiden."
+  ],
+  "Start a new community with channels and roles.": [
+    "ابدأ مجتمعًا جديدًا بقنوات وأدوار.",
+    "Starte eine neue Community mit Kanälen und Rollen."
+  ],
+  "Try the Emoji tab instead.": [
+    "جرّب تبويب الإيموجي بدلًا من ذلك.",
+    "Versuch es stattdessen im Emoji-Tab."
+  ],
+  "Wide image above the channel list, up to {0}.": [
+    "صورة عريضة فوق قائمة القنوات، حتى {0}.",
+    "Breites Bild über der Kanalliste, bis {0}."
+  ],
+  "Wide image shown at the top of your profile, up to {0}.": [
+    "صورة عريضة أعلى ملفك الشخصي، حتى {0}.",
+    "Breites Bild oben in deinem Profil, bis {0}."
+  ],
+  "You've reached the end": ["وصلت إلى النهاية", "Du bist am Ende angekommen"],
+  "Owner": ["المالك", "Besitzer"]
+}

@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+#MISE description="Use the locally bundled Zrzur brand assets"
+set -e
+test -d packages/client/public/brand
+printf '%s\n' 'Using bundled Zrzur assets; no upstream private asset fetch.'

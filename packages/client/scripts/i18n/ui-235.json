@@ -1,0 +1,342 @@
+{
+  "{0} becomes the owner and can remove you. Type the server name to confirm.": [
+    "سيصبح {0} المالك ويستطيع إزالتك. اكتب اسم السيرفر للتأكيد.",
+    "{0} wird Inhaber und kann dich entfernen. Gib zur Bestätigung den Servernamen ein."
+  ],
+  "{0} in total": [
+    "{0} إجمالًا",
+    "{0} insgesamt"
+  ],
+  "{0} uploaded": [
+    "{0} مرفوعة",
+    "{0} hochgeladen"
+  ],
+  "Access": [
+    "الدخول",
+    "Zugang"
+  ],
+  "Access join public private locked requests invite": [
+    "الدخول انضمام عام خاص مغلق طلبات دعوة access join",
+    "Zugang beitreten öffentlich privat gesperrt Anfragen Einladung"
+  ],
+  "Anyone with an invite joins right away.": [
+    "ينضم كل من لديه دعوة مباشرة.",
+    "Wer eine Einladung hat, tritt sofort bei."
+  ],
+  "Bans unban": [
+    "المحظورون حظر إلغاء الحظر bans",
+    "Sperren entsperren Bann"
+  ],
+  "Block spam, links and words before they post.": [
+    "امنع الرسائل المزعجة والروابط والكلمات قبل نشرها.",
+    "Blockiert Spam, Links und Wörter, bevor sie erscheinen."
+  ],
+  "Bots and the owner are not checked.": [
+    "لا تُطبَّق على البوتات ولا على المالك.",
+    "Bots und der Inhaber werden nicht geprüft."
+  ],
+  "Bots apps remove": [
+    "البوتات تطبيقات إزالة bots",
+    "Bots Apps entfernen"
+  ],
+  "Bots you add show up here.": [
+    "تظهر هنا البوتات التي تضيفها.",
+    "Bots, die du hinzufügst, erscheinen hier."
+  ],
+  "Channels categories order": [
+    "القنوات الفئات الترتيب channels",
+    "Kanäle Kategorien Reihenfolge"
+  ],
+  "Choose a rules channel": [
+    "اختر قناة القواعد",
+    "Regelkanal wählen"
+  ],
+  "Couldn't load the bots.": [
+    "تعذّر تحميل البوتات.",
+    "Die Bots konnten nicht geladen werden."
+  ],
+  "Create one in a channel's settings, under Webhooks.": [
+    "أنشئ خطافًا من إعدادات القناة، في قسم الخطافات.",
+    "Erstelle einen in den Kanaleinstellungen unter Webhooks."
+  ],
+  "Discover listing category language tags": [
+    "الاكتشاف الظهور الفئة اللغة الوسوم discover",
+    "Entdecken Eintrag Kategorie Sprache Tags"
+  ],
+  "Emergency": [
+    "الطوارئ",
+    "Notfall"
+  ],
+  "Emergency pause invites direct messages raid": [
+    "الطوارئ إيقاف الدعوات الرسائل الخاصة هجوم emergency",
+    "Notfall pausieren Einladungen Direktnachrichten Raid"
+  ],
+  "Emojis upload": [
+    "الإيموجي رفع emojis",
+    "Emojis hochladen"
+  ],
+  "End now": [
+    "أنهِ الآن",
+    "Jetzt beenden"
+  ],
+  "Every member can share an invite link.": [
+    "يستطيع كل عضو مشاركة رابط دعوة.",
+    "Jedes Mitglied kann einen Einladungslink teilen."
+  ],
+  "Everyone in the server.": [
+    "كل من في السيرفر.",
+    "Alle auf dem Server."
+  ],
+  "Filters": [
+    "التصفية",
+    "Filter"
+  ],
+  "Filters AutoMod spam words links mentions": [
+    "التصفية الإشراف التلقائي رسائل مزعجة كلمات روابط إشارات automod",
+    "Filter AutoMod Spam Wörter Links Erwähnungen"
+  ],
+  "Give the server to a member. You stay a member.": [
+    "سلّم السيرفر لعضو آخر. تبقى أنت عضوًا.",
+    "Übergib den Server an ein Mitglied. Du bleibst Mitglied."
+  ],
+  "Give the server to someone else, or delete it.": [
+    "سلّم السيرفر لشخص آخر، أو احذفه.",
+    "Übergib den Server an jemand anderen oder lösche ihn."
+  ],
+  "Groups of members and what they may do.": [
+    "مجموعات الأعضاء وما يحق لهم فعله.",
+    "Gruppen von Mitgliedern und was sie dürfen."
+  ],
+  "How people join": [
+    "طريقة الانضمام",
+    "Wie man beitritt"
+  ],
+  "Invites link custom vanity": [
+    "الدعوات رابط مخصص invites",
+    "Einladungen Link eigener Link"
+  ],
+  "Lasting protection": [
+    "حماية دائمة",
+    "Dauerhafter Schutz"
+  ],
+  "Level": [
+    "المستوى",
+    "Stufe"
+  ],
+  "Links that bring people in.": [
+    "روابط تُدخل الناس إلى السيرفر.",
+    "Links, über die Leute beitreten."
+  ],
+  "Links that let other services post.": [
+    "روابط تتيح لخدمات أخرى النشر.",
+    "Links, über die andere Dienste posten."
+  ],
+  "Lobby welcome rules accept interests questions design": [
+    "اللوبي الترحيب القواعد قبول الاهتمامات الأسئلة التصميم lobby",
+    "Lobby Willkommen Regeln akzeptieren Interessen Fragen Design"
+  ],
+  "Log": [
+    "السجل",
+    "Protokoll"
+  ],
+  "Log audit history": [
+    "السجل سجل التدقيق التاريخ log",
+    "Protokoll Audit Verlauf"
+  ],
+  "Member": [
+    "العضو",
+    "Mitglied"
+  ],
+  "Members can invite": [
+    "الأعضاء يدعون",
+    "Mitglieder laden ein"
+  ],
+  "Members kick ban timeout nickname roles": [
+    "الأعضاء طرد حظر إيقاف مؤقت لقب أدوار members",
+    "Mitglieder rauswerfen sperren Timeout Spitzname Rollen"
+  ],
+  "Members with any role, bots and the owner are exempt.": [
+    "يُستثنى من ذلك أصحاب أي دور والبوتات والمالك.",
+    "Mitglieder mit einer Rolle, Bots und der Inhaber sind ausgenommen."
+  ],
+  "Needs a rules channel first.": [
+    "يحتاج أولًا إلى قناة للقواعد.",
+    "Braucht zuerst einen Regelkanal."
+  ],
+  "New members accept the rules before they write.": [
+    "يقبل الأعضاء الجدد القواعد قبل الكتابة.",
+    "Neue Mitglieder akzeptieren die Regeln, bevor sie schreiben."
+  ],
+  "New members can talk right away.": [
+    "يستطيع الأعضاء الجدد الكتابة مباشرة.",
+    "Neue Mitglieder können sofort schreiben."
+  ],
+  "New members can write right away.": [
+    "يستطيع الأعضاء الجدد الكتابة مباشرة.",
+    "Neue Mitglieder können sofort schreiben."
+  ],
+  "No bots in this server.": [
+    "لا توجد بوتات في هذا السيرفر.",
+    "Keine Bots auf diesem Server."
+  ],
+  "No webhooks yet.": [
+    "لا توجد خطافات بعد.",
+    "Noch keine Webhooks."
+  ],
+  "Not listed.": [
+    "غير معروض.",
+    "Nicht gelistet."
+  ],
+  "Notices": [
+    "التنبيهات",
+    "Hinweise"
+  ],
+  "Notices system messages welcome rules channel counters": [
+    "التنبيهات رسائل النظام الترحيب قناة القواعد العدادات notices",
+    "Hinweise Systemnachrichten Willkommen Regelkanal Zähler"
+  ],
+  "Now: {0}. Raise it during a raid.": [
+    "الآن: {0}. ارفعه أثناء الهجوم.",
+    "Jetzt: {0}. Bei einem Raid erhöhen."
+  ],
+  "Only invites from people allowed to invite. No requests.": [
+    "الدعوات فقط ممّن يحق لهم الدعوة. بلا طلبات.",
+    "Nur Einladungen von Berechtigten. Keine Anfragen."
+  ],
+  "Only public servers can be listed.": [
+    "لا يُعرض إلا السيرفر العام.",
+    "Nur öffentliche Server können gelistet werden."
+  ],
+  "Only roles with Invite others can share invites.": [
+    "لا يشارك الدعوات إلا أصحاب دور يملك صلاحية دعوة الآخرين.",
+    "Nur Rollen mit „Andere einladen“ können Einladungen teilen."
+  ],
+  "Order": [
+    "الترتيب",
+    "Reihenfolge"
+  ],
+  "Ownership": [
+    "الملكية",
+    "Inhaber"
+  ],
+  "Ownership transfer owner delete server": [
+    "الملكية نقل المالك حذف السيرفر ownership",
+    "Inhaber übertragen Besitzer Server löschen"
+  ],
+  "Pause invites or messages during a raid.": [
+    "أوقف الدعوات أو الرسائل مؤقتًا أثناء الهجوم.",
+    "Einladungen oder Nachrichten bei einem Raid pausieren."
+  ],
+  "Pauses": [
+    "الإيقاف المؤقت",
+    "Pausen"
+  ],
+  "People": [
+    "الأشخاص",
+    "Personen"
+  ],
+  "People ask to join, and someone you allow lets them in.": [
+    "يطلب الناس الانضمام، ويقبلهم من تسمح له.",
+    "Leute fragen an, und jemand mit Erlaubnis lässt sie herein."
+  ],
+  "People who can't come back.": [
+    "من لا يستطيعون العودة.",
+    "Wer nicht zurückkommen kann."
+  ],
+  "Profile name icon banner description picture": [
+    "الملف الاسم الأيقونة الغلاف الوصف الصورة profile",
+    "Profil Name Symbol Banner Beschreibung Bild"
+  ],
+  "Removes every channel and message. It can't be undone.": [
+    "يحذف كل القنوات والرسائل. لا يمكن التراجع عنه.",
+    "Entfernt alle Kanäle und Nachrichten. Lässt sich nicht rückgängig machen."
+  ],
+  "Review who asked to join.": [
+    "راجع من طلب الانضمام.",
+    "Prüfe, wer beitreten möchte."
+  ],
+  "Roles permissions everyone colour": [
+    "الأدوار الصلاحيات الجميع اللون roles",
+    "Rollen Berechtigungen alle Farbe"
+  ],
+  "Rules that stop spam and bad words.": [
+    "قواعد توقف الرسائل المزعجة والكلمات السيئة.",
+    "Regeln gegen Spam und schlimme Wörter."
+  ],
+  "Search settings": [
+    "ابحث في الإعدادات",
+    "Einstellungen durchsuchen"
+  ],
+  "Searching…": [
+    "جارٍ البحث…",
+    "Suche…"
+  ],
+  "The bots in this server.": [
+    "البوتات في هذا السيرفر.",
+    "Die Bots auf diesem Server."
+  ],
+  "The channels and their order.": [
+    "القنوات وترتيبها.",
+    "Die Kanäle und ihre Reihenfolge."
+  ],
+  "The name, picture and description people see.": [
+    "الاسم والصورة والوصف كما يراها الناس.",
+    "Name, Bild und Beschreibung, wie andere sie sehen."
+  ],
+  "The server's level and its perks.": [
+    "مستوى السيرفر ومزاياه.",
+    "Stufe des Servers und ihre Vorteile."
+  ],
+  "The server's own emojis.": [
+    "إيموجي السيرفر الخاصة.",
+    "Die eigenen Emojis des Servers."
+  ],
+  "Transfer": [
+    "انقل",
+    "Übertragen"
+  ],
+  "Transfer ownership": [
+    "نقل الملكية",
+    "Inhaberschaft übertragen"
+  ],
+  "Type a name": [
+    "اكتب اسمًا",
+    "Namen eingeben"
+  ],
+  "Verification level email": [
+    "التحقق المستوى البريد verification",
+    "Prüfung Stufe E-Mail"
+  ],
+  "Webhooks integrations": [
+    "الخطافات تكامل webhooks",
+    "Webhooks Integrationen"
+  ],
+  "What new members need before they can talk.": [
+    "ما يحتاجه الأعضاء الجدد قبل أن يكتبوا.",
+    "Was neue Mitglieder brauchen, bevor sie schreiben."
+  ],
+  "What new members see first, and the rules.": [
+    "أول ما يراه الأعضاء الجدد، والقواعد.",
+    "Was neue Mitglieder zuerst sehen, und die Regeln."
+  ],
+  "Where join and leave messages go, and the rules.": [
+    "أين تظهر رسائل الانضمام والمغادرة، والقواعد.",
+    "Wohin Beitritts- und Austrittsnachrichten gehen, und die Regeln."
+  ],
+  "Whether people can find the server.": [
+    "هل يستطيع الناس إيجاد السيرفر.",
+    "Ob man den Server finden kann."
+  ],
+  "Who can join the server, and how.": [
+    "من يستطيع الانضمام، وكيف.",
+    "Wer beitreten kann, und wie."
+  ],
+  "Who changed what, and when.": [
+    "من غيّر ماذا، ومتى.",
+    "Wer was wann geändert hat."
+  ],
+  "Wings level perks boost": [
+    "الأجنحة المستوى المزايا wings",
+    "Flügel Stufe Vorteile Boost"
+  ]
+}

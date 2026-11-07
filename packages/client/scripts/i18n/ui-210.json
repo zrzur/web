@@ -1,0 +1,15 @@
+{
+  "Enter the year with 4 digits, for example 1994.": [
+    "أدخل السنة بأربعة أرقام، مثل 1994.",
+    "Gib das Jahr mit 4 Ziffern ein, zum Beispiel 1994."
+  ],
+  "Check the month and year of birth.": [
+    "تحقّق من شهر الميلاد وسنته.",
+    "Prüfe Geburtsmonat und -jahr."
+  ],
+  "Account help": ["المساعدة في الحساب", "Hilfe zum Konto"],
+  "The security check didn't work. Please try again.": [
+    "لم ينجح التحقق الأمني. يُرجى المحاولة مرة أخرى.",
+    "Die Sicherheitsprüfung hat nicht funktioniert. Bitte versuche es noch einmal."
+  ]
+}

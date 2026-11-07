@@ -1,0 +1,62 @@
+{
+  "$schema": "../../schema/plugin-manifest.v1.schema.json",
+  "manifest_version": 1,
+  "id": "zrzur.plugin-inspector",
+  "name": "Plugin Inspector",
+  "version": "1.0.0",
+  "description": "For plugin makers: see the app version, platform and how every running plugin is doing (start time, calls, errors), and watch app events as they happen.",
+  "author": { "name": "Zrzur" },
+  "category": "developer",
+  "icon": "terminal",
+  "api_version": 1,
+  "min_app_version": "26.0.0",
+  "platforms": ["web", "pwa", "desktop"],
+  "entrypoint": { "type": "worker", "file": "main.js" },
+  "permissions": ["ui.commands", "ui.panels", "keybinds", "devtools.diagnostics", "context.channel"],
+  "contributes": {
+    "commands": [
+      { "id": "inspect", "title": { "en": "Inspect plugins", "ar": "فحص الإضافات", "de": "Plugins prüfen" }, "action": { "type": "worker", "handler": "inspect" } }
+    ],
+    "keybinds": [{ "command": "inspect", "keys": "Alt+Shift+I" }],
+    "events": ["channel.switch", "app.locale_change", "app.theme_change"]
+  },
+  "locales": {
+    "ar": {
+      "name": "فاحص الإضافات",
+      "description": "لصانعي الإضافات: اعرف إصدار التطبيق والمنصة وحال كل إضافة تعمل (وقت البدء والاستدعاءات والأخطاء)، وتابع أحداث التطبيق لحظة وقوعها.",
+      "strings": {
+        "title": "فاحص الإضافات",
+        "version": "الإصدار {v} · {p}",
+        "row": "{id}: {s} · بدء {ms} م.ث · {c} استدعاء · {e} خطأ",
+        "events": "آخر الأحداث",
+        "no_events": "لا أحداث بعد.",
+        "dev_only": "التشخيص متاح في نسخ التطوير فقط.",
+        "refresh": "تحديث"
+      }
+    },
+    "de": {
+      "name": "Plugin-Inspektor",
+      "description": "Für Plugin-Entwickler: App-Version, Plattform und Zustand jedes laufenden Plugins (Startzeit, Aufrufe, Fehler) sehen und App-Ereignisse live verfolgen.",
+      "strings": {
+        "title": "Plugin-Inspektor",
+        "version": "Version {v} · {p}",
+        "row": "{id}: {s} · Start {ms} ms · {c} Aufrufe · {e} Fehler",
+        "events": "Letzte Ereignisse",
+        "no_events": "Noch keine Ereignisse.",
+        "dev_only": "Diagnose gibt es nur in Entwicklungs-Builds.",
+        "refresh": "Aktualisieren"
+      }
+    },
+    "en": {
+      "strings": {
+        "title": "Plugin Inspector",
+        "version": "Version {v} · {p}",
+        "row": "{id}: {s} · start {ms} ms · {c} calls · {e} errors",
+        "events": "Recent events",
+        "no_events": "No events yet.",
+        "dev_only": "Diagnostics are only available in development builds.",
+        "refresh": "Refresh"
+      }
+    }
+  }
+}

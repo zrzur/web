@@ -1,0 +1,38 @@
+{
+  "server-settings::Server": [
+    "السيرفر",
+    "Server"
+  ],
+  "server-settings::Profile": [
+    "الملف",
+    "Profil"
+  ],
+  "server-settings::Lobby": [
+    "اللوبي",
+    "Lobby"
+  ],
+  "server-settings::Discover": [
+    "الاكتشاف",
+    "Entdecken"
+  ],
+  "server-settings::Wings": [
+    "الأجنحة",
+    "Flügel"
+  ],
+  "server-settings::Safety": [
+    "الحماية",
+    "Schutz"
+  ],
+  "server-settings::Verification": [
+    "التحقق",
+    "Prüfung"
+  ],
+  "server-settings::Webhooks": [
+    "الخطافات",
+    "Webhooks"
+  ],
+  "Untranslated text falls back to English.": [
+    "يظهر النص غير المترجم بالإنجليزية.",
+    "Nicht übersetzter Text erscheint auf Englisch."
+  ]
+}

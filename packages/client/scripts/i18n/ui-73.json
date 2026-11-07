@@ -1,0 +1,20 @@
+{
+  "Add a redirect URI above to generate the URL.": ["أضف عنوان إعادة توجيه أعلاه لتوليد الرابط.", "Füge oben eine Weiterleitungs-URI hinzu, um die URL zu erzeugen."],
+  "Anyone with this link can add the bot to a server they manage.": ["يستطيع كل من يملك هذا الرابط إضافة البوت إلى سيرفر يديره.", "Wer diesen Link hat, kann den Bot zu einem Server hinzufügen, den er verwaltet."],
+  "Bot permissions": ["صلاحيات البوت", "Bot-Berechtigungen"],
+  "Bot rules": ["قواعد البوتات", "Bot-Regeln"],
+  "Collect only the data your bot needs, say what it keeps, and delete it when asked.": ["لا تجمع إلا البيانات التي يحتاجها البوت، ووضّح ما يحتفظ به، واحذفها عند الطلب.", "Erhebe nur die Daten, die dein Bot braucht, sag, was er speichert, und lösche sie auf Wunsch."],
+  "Follow each server's own rules and never get around permissions.": ["التزم بقواعد كل سيرفر، ولا تتحايل على الصلاحيات أبدًا.", "Halte dich an die Regeln jedes Servers und umgehe niemals Berechtigungen."],
+  "Generated URL": ["الرابط المولَّد", "Erzeugte URL"],
+  "I have read the bot rules and the <0>Developer Terms</0> and I accept them.": ["قرأت قواعد البوتات و<0>شروط المطورين</0> وأوافق عليها.", "Ich habe die Bot-Regeln und die <0>Entwicklerbedingungen</0> gelesen und akzeptiere sie."],
+  "Install link": ["رابط الإضافة", "Installationslink"],
+  "Keep the token secret. You are responsible for everything your bot does.": ["احفظ الرمز السري سرًّا. أنت مسؤول عن كل ما يفعله البوت.", "Halte das Token geheim. Du bist für alles verantwortlich, was dein Bot tut."],
+  "Link": ["الرابط", "Link"],
+  "Never pretend to be a person, the Zrzur team, or another app.": ["لا تنتحل أبدًا شخصية إنسان أو فريق زرزور أو تطبيق آخر.", "Gib dich niemals als Mensch, als Zrzur-Team oder als andere App aus."],
+  "No spam: send messages only when people ask for them or expect them.": ["لا رسائل مزعجة: أرسل الرسائل فقط حين يطلبها الناس أو يتوقعونها.", "Kein Spam: Sende Nachrichten nur, wenn Leute sie wollen oder erwarten."],
+  "Only you can add this bot while it is private. Make it public in the bot settings to share this link.": ["لا يستطيع إضافة هذا البوت غيرك ما دام خاصًا. اجعله عامًا من إعدادات البوت لمشاركة هذا الرابط.", "Solange der Bot privat ist, kannst nur du ihn hinzufügen. Mach ihn in den Bot-Einstellungen öffentlich, um diesen Link zu teilen."],
+  "Pick what your app needs. For every sign-in your app fills in its own state and PKCE code challenge in the URL, then exchanges the code at POST /oauth2/token. Codes last 10 minutes, access tokens 1 hour, refresh tokens 30 days.": ["اختر ما يحتاجه تطبيقك. في كل عملية تسجيل دخول يضيف تطبيقك قيمة state وقيمة تحدي PKCE الخاصتين به إلى الرابط، ثم يستبدل الرمز عبر POST /oauth2/token. تبقى الرموز صالحة ١٠ دقائق، ورموز الوصول ساعة واحدة، ورموز التحديث ٣٠ يومًا.", "Wähle, was deine App braucht. Bei jeder Anmeldung setzt deine App ihren eigenen state und die PKCE-Challenge in die URL und tauscht den Code dann über POST /oauth2/token ein. Codes gelten 10 Minuten, Access-Tokens 1 Stunde, Refresh-Tokens 30 Tage."],
+  "Redirect URI": ["عنوان إعادة التوجيه", "Weiterleitungs-URI"],
+  "Scopes": ["النطاقات", "Bereiche"],
+  "URL generator": ["مولّد الروابط", "URL-Generator"]
+}

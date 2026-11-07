@@ -1,0 +1,860 @@
+import type { SelectedTheme } from "@revolt/state/stores/Theme";
+
+/**
+ * Optional theme library (Appearance → Theme). The default Midnight Pulse
+ * look lives in zrzurTheme.ts and is never touched by these.
+ *
+ * Every theme is a full, coordinated palette: surfaces for rail, channel
+ * list, chat, cards, inputs and popovers; hover / selected states; text in
+ * three strengths; and one colour per job (accent for actions, highlight
+ * for mentions and invites, link, online, idle, error). Values were built
+ * so that every text colour, link and filled button reaches WCAG AA
+ * (4.5:1) on its surfaces; zrzurTheme.test.ts keeps it that way.
+ * Status colours stay the same family in every dark theme (and in every
+ * light theme) so people recognise them anywhere.
+ */
+export type ThemeCollectionId = "luxury" | "midnight" | "warm" | "light";
+
+export type LibraryTheme = {
+  id: string;
+  name: string;
+  collection: ThemeCollectionId;
+  mode: "dark" | "light";
+  /** server rail and top bar */
+  rail: string;
+  /** channel list */
+  nav: string;
+  /** chat, channel header, member list */
+  chat: string;
+  /** cards, buttons on the chat */
+  raised: string;
+  /** message input, account panel */
+  input: string;
+  /** popovers, tooltips, menus */
+  floating: string;
+  hover: string;
+  selected: string;
+  borderSoft: string;
+  fg: string;
+  fg2: string;
+  muted: string;
+  /** icons, focus, active marker */
+  accent: string;
+  /** filled primary buttons */
+  fill: string;
+  /** text on those buttons, for a bright fill; white without it */
+  onFill?: string;
+  fillHover: string;
+  fillPressed: string;
+  /** accent used as text */
+  accentText: string;
+  link: string;
+  /** mentions, invites, highlights */
+  highlight: string;
+  online: string;
+  idle: string;
+  error: string;
+  /** destructive filled buttons (white text) */
+  danger: string;
+  offline: string;
+  /** a quiet wash on the chat panel */
+  gradient: string;
+  /** shown with Zrzur's own themes, right after the default */
+  featured?: boolean;
+  /** one line on the Appearance page (featured themes) */
+  description?: string;
+  /** reading aids that come with the theme, on while it is in effect */
+  accessibility?: ThemeAccessibility;
+};
+
+export type ThemeAccessibility = {
+  /** text size, 1 is the usual size */
+  fontScale?: number;
+  focusRing?: boolean;
+  underlineLinks?: boolean;
+  reduceMotion?: boolean;
+};
+
+/** Collections in the order they appear */
+export const THEME_COLLECTIONS: ThemeCollectionId[] = [
+  "luxury",
+  "midnight",
+  "warm",
+  "light",
+];
+
+export const THEME_LIBRARY: LibraryTheme[] = [
+  // Zrzur Blue: the blue, navy and amber of the bird logo, as a candidate
+  // for the main look (Midnight Pulse stays the default until chosen)
+  {
+    id: "zrzur-blue",
+    name: "Zrzur Blue",
+    description:
+      "The colours of the bird: navy panels, Zrzur Blue for actions and warm amber for mentions.",
+    featured: true,
+    collection: "midnight",
+    mode: "dark",
+    rail: "#0F1220",
+    nav: "#151A2B",
+    chat: "#191E31",
+    raised: "#222944",
+    input: "#1F2640",
+    floating: "#0C0F1A",
+    hover: "#1F2640",
+    selected: "#23366B",
+    borderSoft: "#2C3555",
+    fg: "#F3F5FC",
+    fg2: "#B9C1D9",
+    muted: "#9AA3BD",
+    accent: "#4D8DFF",
+    fill: "#1062EB",
+    fillHover: "#0D55CF",
+    fillPressed: "#0B4AB5",
+    accentText: "#74A6FF",
+    link: "#82BBFF",
+    highlight: "#F6AB2D",
+    online: "#3DD9B4",
+    idle: "#F3B96B",
+    error: "#F27488",
+    danger: "#CC4159",
+    offline: "#7D86A0",
+    gradient: "linear-gradient(#191E31, #191E31)",
+  },
+  {
+    id: "zrzur-blue-light",
+    name: "Zrzur Blue Light",
+    description:
+      "Bright and friendly: white panels, Zrzur Blue for actions and amber for mentions.",
+    featured: true,
+    collection: "light",
+    mode: "light",
+    rail: "#E8EDF7",
+    nav: "#F1F4FA",
+    chat: "#FFFFFF",
+    raised: "#F3F6FB",
+    input: "#EEF2F9",
+    floating: "#FFFFFF",
+    hover: "#E6ECF7",
+    selected: "#D9E4F7",
+    borderSoft: "#DCE2EE",
+    fg: "#191C2A",
+    fg2: "#4A5168",
+    muted: "#646B80",
+    accent: "#1062EB",
+    fill: "#1062EB",
+    fillHover: "#0D55CF",
+    fillPressed: "#0B4AB5",
+    accentText: "#0F5BD9",
+    link: "#0B4FB8",
+    highlight: "#9A5C00",
+    online: "#1C8577",
+    idle: "#926400",
+    error: "#B4233B",
+    danger: "#C0334F",
+    offline: "#7E8896",
+    gradient: "linear-gradient(#FFFFFF, #FFFFFF)",
+  },
+  {
+    id: "obsidian-rose",
+    name: "Obsidian Rose",
+    collection: "luxury",
+    mode: "dark",
+    rail: "#0B0A0D",
+    nav: "#141117",
+    chat: "#19151C",
+    raised: "#231D26",
+    input: "#231D26",
+    floating: "#09080A",
+    hover: "#201A23",
+    selected: "#322C34",
+    borderSoft: "#342E36",
+    fg: "#F3EEF2",
+    fg2: "#B5A8B2",
+    muted: "#998E97",
+    accent: "#E0628F",
+    fill: "#B85075",
+    fillHover: "#A24667",
+    fillPressed: "#903E5B",
+    accentText: "#E0628F",
+    link: "#8AB4FF",
+    highlight: "#F2A65A",
+    online: "#55DCC8",
+    idle: "#F3B96B",
+    error: "#F27488",
+    danger: "#CC4159",
+    offline: "#867C85",
+    gradient: "linear-gradient(160deg, #19151C 0%, #231922 100%)",
+  },
+  {
+    id: "carbon-black",
+    name: "Carbon Black",
+    collection: "luxury",
+    mode: "dark",
+    rail: "#0A0A0B",
+    nav: "#121314",
+    chat: "#17181A",
+    raised: "#212327",
+    input: "#212327",
+    floating: "#080809",
+    hover: "#1E1F22",
+    selected: "#2F3135",
+    borderSoft: "#313337",
+    fg: "#ECEEF1",
+    fg2: "#A7ADB6",
+    muted: "#8D929A",
+    accent: "#9AA5B5",
+    fill: "#6C747F",
+    fillHover: "#5F6670",
+    fillPressed: "#545A63",
+    accentText: "#9AA5B5",
+    link: "#7FB0FF",
+    highlight: "#E3B65C",
+    online: "#55DCC8",
+    idle: "#F3B96B",
+    error: "#F27488",
+    danger: "#CC4159",
+    offline: "#7C8087",
+    gradient: "linear-gradient(160deg, #17181A 0%, #1E1F22 100%)",
+  },
+  {
+    id: "graphite-steel",
+    name: "Graphite Steel",
+    collection: "luxury",
+    mode: "dark",
+    rail: "#0E1013",
+    nav: "#161A1F",
+    chat: "#1B2026",
+    raised: "#252B33",
+    input: "#252B33",
+    floating: "#0B0D0F",
+    hover: "#22272E",
+    selected: "#333941",
+    borderSoft: "#353B43",
+    fg: "#EAF0F6",
+    fg2: "#A3AEBB",
+    muted: "#8B94A0",
+    accent: "#6E9BD1",
+    fill: "#54769F",
+    fillHover: "#4A688C",
+    fillPressed: "#425C7C",
+    accentText: "#6E9BD1",
+    link: "#7DB6FF",
+    highlight: "#E8A25F",
+    online: "#55DCC8",
+    idle: "#F3B96B",
+    error: "#F27488",
+    danger: "#CC4159",
+    offline: "#7A838E",
+    gradient: "linear-gradient(160deg, #1B2026 0%, #1F262F 100%)",
+  },
+  {
+    id: "amoled-pure",
+    name: "AMOLED Pure",
+    collection: "luxury",
+    mode: "dark",
+    rail: "#000000",
+    nav: "#000000",
+    chat: "#000000",
+    raised: "#121214",
+    input: "#121214",
+    floating: "#000000",
+    hover: "#0C0C0D",
+    selected: "#222224",
+    borderSoft: "#242426",
+    fg: "#F2F2F5",
+    fg2: "#A6A6B0",
+    muted: "#888890",
+    accent: "#9D7BFF",
+    fill: "#7E62CC",
+    fillHover: "#6F56B4",
+    fillPressed: "#624C9F",
+    accentText: "#9D7BFF",
+    link: "#64A9FF",
+    highlight: "#FF5BA8",
+    online: "#55DCC8",
+    idle: "#F3B96B",
+    error: "#F27488",
+    danger: "#CC4159",
+    offline: "#74747B",
+    gradient: "linear-gradient(160deg, #000000 0%, #08060D 100%)",
+  },
+  {
+    id: "midnight-purple",
+    name: "Midnight Purple",
+    collection: "midnight",
+    mode: "dark",
+    rail: "#0E0A18",
+    nav: "#161126",
+    chat: "#1B152E",
+    raised: "#261E3E",
+    input: "#261E3E",
+    floating: "#0B0813",
+    hover: "#221B38",
+    selected: "#342D4B",
+    borderSoft: "#362F4D",
+    fg: "#F2EEFB",
+    fg2: "#ABA3C2",
+    muted: "#9189A7",
+    accent: "#B497FF",
+    fill: "#7A67AD",
+    fillHover: "#6B5B98",
+    fillPressed: "#5F5087",
+    accentText: "#B497FF",
+    link: "#7DB2FF",
+    highlight: "#FF7FC1",
+    online: "#55DCC8",
+    idle: "#F3B96B",
+    error: "#F27488",
+    danger: "#CC4159",
+    offline: "#807896",
+    gradient: "linear-gradient(160deg, #1B152E 0%, #231C38 100%)",
+  },
+  {
+    id: "royal-navy",
+    name: "Royal Navy",
+    collection: "midnight",
+    mode: "dark",
+    rail: "#070C1A",
+    nav: "#0D1428",
+    chat: "#111A33",
+    raised: "#1A2546",
+    input: "#1A2546",
+    floating: "#060A15",
+    hover: "#17213F",
+    selected: "#293353",
+    borderSoft: "#2B3554",
+    fg: "#EEF2FA",
+    fg2: "#A0AAC3",
+    muted: "#8690A9",
+    accent: "#4D8DFF",
+    fill: "#3E71CC",
+    fillHover: "#3763B4",
+    fillPressed: "#30589F",
+    accentText: "#4D8DFF",
+    link: "#7CB6FF",
+    highlight: "#F2C14E",
+    online: "#55DCC8",
+    idle: "#F3B96B",
+    error: "#F27488",
+    danger: "#CC4159",
+    offline: "#757F98",
+    gradient: "linear-gradient(160deg, #111A33 0%, #14203D 100%)",
+  },
+  {
+    id: "deep-ocean",
+    name: "Deep Ocean",
+    collection: "midnight",
+    mode: "dark",
+    rail: "#051216",
+    nav: "#0A1C22",
+    chat: "#0D232B",
+    raised: "#15313B",
+    input: "#15313B",
+    floating: "#040E12",
+    hover: "#122C35",
+    selected: "#243F48",
+    borderSoft: "#26414A",
+    fg: "#ECF6F7",
+    fg2: "#9DB6BC",
+    muted: "#839CA2",
+    accent: "#2EC4C4",
+    fill: "#1E8181",
+    fillHover: "#1A7272",
+    fillPressed: "#176565",
+    accentText: "#2EC4C4",
+    link: "#6FC0FF",
+    highlight: "#FF9F7A",
+    online: "#55DCC8",
+    idle: "#F3B96B",
+    error: "#F27488",
+    danger: "#CC4159",
+    offline: "#728A91",
+    gradient: "linear-gradient(160deg, #0D232B 0%, #0F2B33 100%)",
+  },
+  {
+    id: "nebula",
+    name: "Nebula",
+    collection: "midnight",
+    mode: "dark",
+    rail: "#0C0B1D",
+    nav: "#15132E",
+    chat: "#1A1838",
+    raised: "#252249",
+    input: "#252249",
+    floating: "#0A0917",
+    hover: "#211F43",
+    selected: "#333055",
+    borderSoft: "#353257",
+    fg: "#F1EFFB",
+    fg2: "#AAA6C6",
+    muted: "#908CAC",
+    accent: "#D17BFF",
+    fill: "#9659B8",
+    fillHover: "#844EA2",
+    fillPressed: "#754590",
+    accentText: "#D17BFF",
+    link: "#7DB2FF",
+    highlight: "#7FD8FF",
+    online: "#55DCC8",
+    idle: "#F3B96B",
+    error: "#F27488",
+    danger: "#CC4159",
+    offline: "#7F7B9B",
+    gradient: "linear-gradient(160deg, #1A1838 0%, #231D42 100%)",
+  },
+  {
+    id: "emerald-night",
+    name: "Emerald Night",
+    collection: "warm",
+    mode: "dark",
+    rail: "#070F0C",
+    nav: "#0D1A15",
+    chat: "#11201A",
+    raised: "#192D25",
+    input: "#192D25",
+    floating: "#060C0A",
+    hover: "#162821",
+    selected: "#283B33",
+    borderSoft: "#2A3D35",
+    fg: "#ECF5F0",
+    fg2: "#A0B5AA",
+    muted: "#869A90",
+    accent: "#34C98B",
+    fill: "#218159",
+    fillHover: "#1D724E",
+    fillPressed: "#1A6545",
+    accentText: "#34C98B",
+    link: "#78B8FF",
+    highlight: "#F2C14E",
+    online: "#55DCC8",
+    idle: "#F3B96B",
+    error: "#F27488",
+    danger: "#CC4159",
+    offline: "#75887F",
+    gradient: "linear-gradient(160deg, #11201A 0%, #132820 100%)",
+  },
+  {
+    id: "forest-shadow",
+    name: "Forest Shadow",
+    collection: "warm",
+    mode: "dark",
+    rail: "#0D0F0B",
+    nav: "#161A13",
+    chat: "#1B2018",
+    raised: "#262C21",
+    input: "#262C21",
+    floating: "#0A0C09",
+    hover: "#22281E",
+    selected: "#343A2F",
+    borderSoft: "#363C31",
+    fg: "#EFF1EA",
+    fg2: "#AAB09E",
+    muted: "#909686",
+    accent: "#A9BE5E",
+    fill: "#6C7A3C",
+    fillHover: "#5F6B35",
+    fillPressed: "#545F2F",
+    accentText: "#A9BE5E",
+    link: "#82B7F5",
+    highlight: "#E8A25F",
+    online: "#55DCC8",
+    idle: "#F3B96B",
+    error: "#F27488",
+    danger: "#CC4159",
+    offline: "#7F8576",
+    gradient: "linear-gradient(160deg, #1B2018 0%, #22281C 100%)",
+  },
+  {
+    id: "crimson-eclipse",
+    name: "Crimson Eclipse",
+    collection: "warm",
+    mode: "dark",
+    rail: "#12070A",
+    nav: "#1C0D12",
+    chat: "#221117",
+    raised: "#2F1921",
+    input: "#2F1921",
+    floating: "#0E0608",
+    hover: "#2A161E",
+    selected: "#3D282F",
+    borderSoft: "#3F2A31",
+    fg: "#F7EDEF",
+    fg2: "#B9A2A8",
+    muted: "#9E888E",
+    accent: "#F0526E",
+    fill: "#CA455C",
+    fillHover: "#B23D51",
+    fillPressed: "#9E3648",
+    accentText: "#F0526E",
+    link: "#8DB4FF",
+    highlight: "#FFB86B",
+    online: "#55DCC8",
+    idle: "#F3B96B",
+    error: "#F27488",
+    danger: "#CC4159",
+    offline: "#8C777D",
+    gradient: "linear-gradient(160deg, #221117 0%, #2C141B 100%)",
+  },
+  {
+    id: "amber-noir",
+    name: "Amber Noir",
+    collection: "warm",
+    mode: "dark",
+    rail: "#0F0C08",
+    nav: "#18140E",
+    chat: "#1D1811",
+    raised: "#29221A",
+    input: "#29221A",
+    floating: "#0C0A06",
+    hover: "#251F17",
+    selected: "#373029",
+    borderSoft: "#39332B",
+    fg: "#F6F1EA",
+    fg2: "#B5AB9C",
+    muted: "#9A9183",
+    accent: "#F2A93B",
+    fill: "#966925",
+    fillHover: "#845C21",
+    fillPressed: "#75521D",
+    accentText: "#F2A93B",
+    link: "#86B6FF",
+    highlight: "#FF7A6B",
+    online: "#55DCC8",
+    idle: "#F3B96B",
+    error: "#F27488",
+    danger: "#CC4159",
+    offline: "#877F72",
+    gradient: "linear-gradient(160deg, #1D1811 0%, #281F13 100%)",
+  },
+  {
+    id: "arctic-light",
+    name: "Arctic Light",
+    collection: "light",
+    mode: "light",
+    rail: "#E3ECF5",
+    nav: "#F2F6FB",
+    chat: "#FFFFFF",
+    raised: "#FFFFFF",
+    input: "#EBF1F8",
+    floating: "#FFFFFF",
+    hover: "#E7EBF1",
+    selected: "#DBE7F8",
+    borderSoft: "#D1D9E1",
+    fg: "#0F1B2D",
+    fg2: "#475569",
+    muted: "#646F7F",
+    accent: "#2F7DE1",
+    fill: "#2B73CF",
+    fillHover: "#2665B6",
+    fillPressed: "#225AA1",
+    accentText: "#296EC6",
+    link: "#1D63C2",
+    highlight: "#B84371",
+    online: "#1C8577",
+    idle: "#926400",
+    error: "#B4233B",
+    danger: "#C0334F",
+    offline: "#7E8896",
+    gradient: "linear-gradient(160deg, #FFFFFF 0%, #F8FAFE 100%)",
+  },
+  {
+    id: "pearl-rose",
+    name: "Pearl Rose",
+    collection: "light",
+    mode: "light",
+    rail: "#F1E5EA",
+    nav: "#F9F2F5",
+    chat: "#FFFDFD",
+    raised: "#FFFFFF",
+    input: "#F5ECF0",
+    floating: "#FFFFFF",
+    hover: "#EDE7EB",
+    selected: "#F4DFE7",
+    borderSoft: "#DED3D7",
+    fg: "#2A1720",
+    fg2: "#5C4651",
+    muted: "#796770",
+    accent: "#D2557F",
+    fill: "#BD4D72",
+    fillHover: "#A64464",
+    fillPressed: "#933C59",
+    accentText: "#B5496D",
+    link: "#3A64B8",
+    highlight: "#7557CD",
+    online: "#1C8577",
+    idle: "#926400",
+    error: "#B4233B",
+    danger: "#C0334F",
+    offline: "#8D7D85",
+    gradient: "linear-gradient(160deg, #FFFDFD 0%, #FDF7F9 100%)",
+  },
+  {
+    id: "cloud-slate",
+    name: "Cloud Slate",
+    collection: "light",
+    mode: "light",
+    rail: "#E1E5EA",
+    nav: "#EFF2F5",
+    chat: "#FAFBFC",
+    raised: "#FFFFFF",
+    input: "#E8ECF0",
+    floating: "#FFFFFF",
+    hover: "#E4E7EB",
+    selected: "#DCE2E8",
+    borderSoft: "#CFD3D7",
+    fg: "#1A2129",
+    fg2: "#4A5562",
+    muted: "#646C76",
+    accent: "#4F6D8A",
+    fill: "#4F6D8A",
+    fillHover: "#466079",
+    fillPressed: "#3E556C",
+    accentText: "#4F6D8A",
+    link: "#2F66A8",
+    highlight: "#AB4D6B",
+    online: "#1C8577",
+    idle: "#926400",
+    error: "#B4233B",
+    danger: "#C0334F",
+    offline: "#7F8790",
+    gradient: "linear-gradient(160deg, #FAFBFC 0%, #F4F6F8 100%)",
+  },
+
+  // Three themes that began as official plugins. Same colours; only what
+  // failed AA changed. Appearance lists them after the four packs.
+  {
+    id: "high-contrast",
+    name: "High Contrast",
+    description:
+      "Pure black and white with a bright accent, larger text, clear focus rings and underlined links, for low vision and bright screens.",
+    collection: "midnight",
+    mode: "dark",
+    rail: "#000000",
+    nav: "#0B0B0B",
+    chat: "#000000",
+    raised: "#1A1A1A",
+    input: "#242424",
+    floating: "#1A1A1A",
+    hover: "#1F1F1F",
+    selected: "#003A57",
+    borderSoft: "#8A8A8A",
+    fg: "#FFFFFF",
+    fg2: "#F0F0F0",
+    muted: "#BDBDBD",
+    accent: "#4CC2FF",
+    fill: "#4CC2FF",
+    onFill: "#000000",
+    fillHover: "#68CBFF",
+    fillPressed: "#41A5D9",
+    accentText: "#4CC2FF",
+    link: "#7FD4FF",
+    highlight: "#FFD24C",
+    online: "#3DD9B4",
+    idle: "#F3B96B",
+    error: "#FF8A8A",
+    danger: "#C8102E",
+    offline: "#A0A0A0",
+    gradient: "linear-gradient(#000000, #000000)",
+    accessibility: {
+      fontScale: 1.1,
+      focusRing: true,
+      underlineLinks: true,
+      reduceMotion: true,
+    },
+  },
+  {
+    id: "paper",
+    name: "Paper",
+    description:
+      "A calm light theme in soft paper tones for bright rooms and daytime reading.",
+    collection: "light",
+    mode: "light",
+    rail: "#EDE6DA",
+    nav: "#F3EDE3",
+    chat: "#FBF8F2",
+    raised: "#F7F3EC",
+    input: "#E9E1D4",
+    floating: "#F7F3EC",
+    hover: "#E8E0D2",
+    selected: "#E6E0FB",
+    borderSoft: "#D8CDBB",
+    fg: "#2B2620",
+    fg2: "#5C5348",
+    muted: "#6B6154",
+    accent: "#6A52C7",
+    fill: "#6A52C7",
+    fillHover: "#5C45B5",
+    fillPressed: "#4F3A9E",
+    accentText: "#6A52C7",
+    link: "#2B5A9E",
+    highlight: "#94491F",
+    online: "#1C8577",
+    idle: "#926400",
+    error: "#B4233B",
+    danger: "#C0334F",
+    offline: "#7F8790",
+    gradient: "linear-gradient(#FBF8F2, #FBF8F2)",
+  },
+  {
+    id: "desert-dawn",
+    name: "Desert Dawn",
+    description:
+      "A warm dark theme in sand and copper tones, easy on the eyes in the evening.",
+    collection: "warm",
+    mode: "dark",
+    rail: "#15110D",
+    nav: "#211A14",
+    chat: "#1C1712",
+    raised: "#2A2119",
+    input: "#31271D",
+    floating: "#2A2119",
+    hover: "#2A2119",
+    selected: "#5A3A1C",
+    borderSoft: "#3D3126",
+    fg: "#F3E9DC",
+    fg2: "#CBB9A4",
+    muted: "#A99781",
+    accent: "#E0995A",
+    fill: "#E0995A",
+    onFill: "#1C1208",
+    fillHover: "#E4A773",
+    fillPressed: "#BE824D",
+    accentText: "#E0995A",
+    link: "#8FC1E8",
+    highlight: "#F2C265",
+    online: "#3DD9B4",
+    idle: "#F3B96B",
+    error: "#F2837B",
+    danger: "#B8453A",
+    offline: "#8A7B6B",
+    gradient: "linear-gradient(#1C1712, #1C1712)",
+  },
+];
+
+const byId = new Map(THEME_LIBRARY.map((theme) => [theme.id, theme]));
+
+/**
+ * The library theme in effect: the chosen preset is a library theme and
+ * the current mode is the one it was made for
+ */
+export function activeLibraryTheme(
+  theme: Pick<SelectedTheme, "appearancePreset" | "darkMode">,
+): LibraryTheme | undefined {
+  const picked = byId.get(theme.appearancePreset);
+  if (!picked) return;
+  return (picked.mode === "dark") === theme.darkMode ? picked : undefined;
+}
+
+/**
+ * CSS for the reading aids of the library theme in effect. The focus ring
+ * uses the theme's own focus colour; empty when there are none
+ */
+export function themeAccessibilityCss(
+  theme: Pick<SelectedTheme, "appearancePreset" | "darkMode">,
+) {
+  const aids = activeLibraryTheme(theme)?.accessibility;
+  if (!aids) return "";
+  let css = "";
+  if (aids.fontScale) {
+    css += `html{font-size:${(aids.fontScale * 100).toFixed(1)}% !important;}`;
+  }
+  if (aids.underlineLinks) css += "a{text-decoration:underline !important;}";
+  if (aids.focusRing) {
+    css +=
+      ":focus-visible{outline:3px solid var(--z-focus) !important;outline-offset:2px !important;}";
+  }
+  if (aids.reduceMotion) {
+    css +=
+      "*,*::before,*::after{animation-duration:0.01ms !important;animation-iteration-count:1 !important;transition-duration:0.01ms !important;scroll-behavior:auto !important;}";
+  }
+  return css;
+}
+
+/**
+ * Semantic --z-* tokens of a library theme, applied on top of the derived
+ * ones; nothing when no library theme is in effect
+ */
+export function themeLibraryVariables(
+  theme: Pick<SelectedTheme, "appearancePreset" | "darkMode">,
+): Record<string, string> {
+  const t = activeLibraryTheme(theme);
+  if (!t) return {};
+  const dark = t.mode === "dark";
+  return {
+    "--z-bg-app": t.rail,
+    "--z-bg-rail": t.rail,
+    "--z-bg-frame": t.rail,
+    "--z-bg-sidebar": t.nav,
+    // channel_bar matches the room (chat), same as Midnight Pulse default
+    "--z-bg-nav": "var(--z-bg-shell)",
+    "--z-bg-chat": t.chat,
+    "--z-bg-shell": "var(--z-bg-chat)",
+    "--z-bg-members": "var(--z-bg-shell)",
+    "--z-bg-raised": t.raised,
+    "--z-bg-input": t.input,
+    "--z-bg-dock": t.input,
+    "--z-bg-floating": t.floating,
+    "--z-bg-modal": t.chat,
+    "--z-shell-gradient": t.gradient,
+    "--z-nav-hover": t.hover,
+    "--z-nav-selected": t.selected,
+    "--z-border-subtle": dark
+      ? "rgb(255 255 255 / 0.06)"
+      : "rgb(15 27 45 / 0.09)",
+    "--z-border-soft": t.borderSoft,
+    "--z-border-strong": t.borderSoft,
+    "--z-header-primary": t.fg,
+    "--z-fg-primary": t.fg,
+    "--z-fg-secondary": t.fg2,
+    "--z-fg-muted": t.muted,
+    "--z-channels-default": t.muted,
+    "--z-accent": t.accent,
+    "--z-icon-accent": t.accent,
+    "--z-accent-fill": t.fill,
+    "--z-accent-strong": t.fill,
+    "--z-accent-hover": t.fillHover,
+    "--z-accent-pressed": t.fillPressed,
+    "--z-on-accent": t.onFill ?? "#FFFFFF",
+    "--z-accent-text": t.accentText,
+    "--z-accent-muted": `color-mix(in srgb, ${t.accent} 16%, transparent)`,
+    "--z-focus": t.accent,
+    "--z-focus-ring": `0 0 0 3px color-mix(in srgb, ${t.accent} 40%, transparent)`,
+    "--z-link": t.link,
+    "--z-highlight": t.highlight,
+    "--z-highlight-text": t.highlight,
+    "--z-highlight-muted": `color-mix(in srgb, ${t.highlight} 14%, transparent)`,
+    "--z-mention-bg": `color-mix(in srgb, ${t.highlight} 10%, transparent)`,
+    "--z-mention-pill": `color-mix(in srgb, ${t.highlight} 26%, transparent)`,
+    "--z-mention-text": t.highlight,
+    "--z-mention-bar": t.highlight,
+    "--z-slate-1": t.selected,
+    "--z-slate-2": t.borderSoft,
+    "--z-slate-3": `color-mix(in srgb, ${t.borderSoft} 70%, ${t.fg2})`,
+    "--z-live": t.online,
+    "--z-presence-online": t.online,
+    "--z-presence-idle": t.idle,
+    "--z-presence-dnd": t.error,
+    "--z-presence-offline": t.offline,
+    "--z-status-success": t.online,
+    "--z-status-warning": t.idle,
+    "--z-status-error": t.error,
+    "--z-danger": t.error,
+    "--z-danger-strong": t.danger,
+    "--z-danger-hover": `color-mix(in srgb, ${t.danger} 88%, black)`,
+    "--z-unread": t.fg,
+    // accent shades and washes: from this theme's accent, never the default violet
+    "--z-accent-light": `color-mix(in srgb, ${t.accent} 45%, white)`,
+    "--z-accent-bright": `color-mix(in srgb, ${t.accent} 70%, white)`,
+    "--z-accent-deep": `color-mix(in srgb, ${t.accent} 28%, ${t.floating})`,
+    "--z-accent-gradient": `linear-gradient(135deg, color-mix(in srgb, ${t.fill} 70%, white), ${t.fill} 60%, ${t.fillHover})`,
+    "--z-accent-hero": `radial-gradient(90% 120% at 100% 0%, color-mix(in srgb, ${t.accent} 30%, ${t.floating}) 0%, transparent 60%), linear-gradient(160deg, ${t.chat} 0%, ${t.nav} 100%)`,
+    "--z-atmosphere": dark
+      ? `radial-gradient(1200px 600px at 70% 0%, color-mix(in srgb, ${t.accent} 8%, transparent), transparent 60%)`
+      : "none",
+    "--z-surface-gradient": `linear-gradient(160deg, ${t.chat}, ${t.raised})`,
+    // text fields show their edge at 3:1 against the page (WCAG 1.4.11)
+    "--z-field-border": `color-mix(in srgb, ${t.fg} 35%, transparent)`,
+    "--z-field-border-hover": `color-mix(in srgb, ${t.fg} 50%, transparent)`,
+    "--z-slate-5": `color-mix(in srgb, ${t.borderSoft} 45%, ${t.fg2})`,
+  };
+}

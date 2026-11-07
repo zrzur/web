@@ -1,0 +1,15 @@
+{
+  "{0} of {1} badges": ["{0} من {1} شارة", "{0} von {1} Abzeichen"],
+  "Badges collected": ["الشارات المجمّعة", "Gesammelte Abzeichen"],
+  "Given automatically": ["تُمنح تلقائيًا", "Automatisch vergeben"],
+  "Grant, remove and look up badges.": ["منح الشارات وإزالتها والبحث عنها.", "Abzeichen vergeben, entfernen und nachschlagen."],
+  "Invite testers and turn beta features on.": ["دعوة المختبرين وتفعيل الميزات التجريبية.", "Tester einladen und Beta-Funktionen einschalten."],
+  "No badges yet. Each one below says how to earn it.": ["لا شارات بعد. كل شارة أدناه توضّح طريقة الحصول عليها.", "Noch keine Abzeichen. Bei jedem unten steht, wie du es bekommst."],
+  "Rare": ["نادرة", "Selten"],
+  "The team will let you know when you are in.": ["سيُعلمك الفريق عند قبولك.", "Das Team sagt dir Bescheid, sobald du dabei bist."],
+  "Top tier": ["أعلى فئة", "Höchste Stufe"],
+  "Turn a badge off to hide it from your profile.": ["أوقف شارة لإخفائها من ملفك الشخصي.", "Schalte ein Abzeichen aus, um es in deinem Profil auszublenden."],
+  "Verified: {0}": ["المؤكَّدة: {0}", "Bestätigt: {0}"],
+  "Verify reports and award Bug Hunter.": ["تأكيد البلاغات ومنح شارة صائد الأخطاء.", "Meldungen bestätigen und Bug Hunter vergeben."],
+  "Your collection": ["مجموعتك", "Deine Sammlung"]
+}

@@ -1,0 +1,11 @@
+{
+  "package": "@fluentui-emoji/svg",
+  "version": "2.2.0",
+  "license": "MIT",
+  "repository": {
+    "url": "git+https://github.com/MKAbuMattar/fluentui-emoji.git",
+    "type": "git",
+    "directory": "packages/svg"
+  },
+  "integrity": "sha512-5l4RrbkFPbPtyJtL0NRqEYOFKCTZh6Fbw4ueXchkWnncf19ksRiOmv8tlZzAgv1GfxMUOuSA0V9Si0vGQ5eqdQ=="
+}

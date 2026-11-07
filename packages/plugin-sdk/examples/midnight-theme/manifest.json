@@ -1,0 +1,63 @@
+{
+  "$schema": "../../schema/plugin-manifest.v1.schema.json",
+  "manifest_version": 1,
+  "id": "zrzur.midnight-theme",
+  "name": "Midnight",
+  "version": "1.0.0",
+  "description": "A deep blue theme with an accent colour you choose. Warning colours stay Zrzur's own.",
+  "author": { "name": "Zrzur" },
+  "category": "appearance",
+  "icon": "palette",
+  "api_version": 1,
+  "min_app_version": "26.0.0",
+  "platforms": ["web", "pwa", "desktop"],
+  "entrypoint": { "type": "declarative" },
+  "permissions": ["theme.colors", "storage.settings", "ui.commands", "keybinds"],
+  "contributes": {
+    "settings": [
+      {
+        "key": "accent",
+        "type": "color",
+        "title": { "en": "Accent colour", "ar": "لون التمييز" },
+        "default": "#7aa2ff"
+      }
+    ],
+    "theme": {
+      "colors": {
+        "primary": "$setting:accent",
+        "on-primary": "#0b1020",
+        "primary-container": "#1d2f66",
+        "on-primary-container": "#dbe4ff",
+        "secondary-container": "#1f2a4d",
+        "on-secondary-container": "#d6defa",
+        "background": "#0b1020",
+        "on-background": "#e6e9f5",
+        "surface": "#0b1020",
+        "on-surface": "#e6e9f5",
+        "surface-variant": "#1a2340",
+        "on-surface-variant": "#b7bfd9",
+        "surface-container-lowest": "#080c18",
+        "surface-container-low": "#0f162a",
+        "surface-container": "#121a30",
+        "surface-container-high": "#18213b",
+        "surface-container-highest": "#1e2846",
+        "outline": "#3a4670",
+        "outline-variant": "#263052"
+      }
+    },
+    "commands": [
+      {
+        "id": "toggle",
+        "title": { "en": "Turn Midnight on or off", "ar": "تشغيل أو إيقاف منتصف الليل" },
+        "action": { "type": "theme.toggle" }
+      }
+    ],
+    "keybinds": [{ "command": "toggle", "keys": "Alt+Shift+M" }]
+  },
+  "locales": {
+    "ar": {
+      "name": "منتصف الليل",
+      "description": "سمة زرقاء داكنة بلون تمييز تختاره. تبقى ألوان التحذير ألوان زرزور."
+    }
+  }
+}

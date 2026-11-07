@@ -1,0 +1,54 @@
+{
+  "Can't reach Zrzur. Check your connection.": [
+    "لا يمكن الوصول إلى زرزور. تحقّق من اتصالك بالإنترنت.",
+    "Zrzur ist nicht erreichbar. Prüfe deine Verbindung."
+  ],
+  "No trackers, and no ads based on your data. The code is open under AGPL-3.0.": [
+    "لا متتبّعات، ولا إعلانات مبنية على بياناتك. الشيفرة مفتوحة بترخيص AGPL-3.0.",
+    "Keine Tracker und keine Werbung auf Basis deiner Daten. Der Code ist offen unter AGPL-3.0."
+  ],
+  "Paid placement for <0>{0}</0>, bought by a manager of this server. Everyone who can see this server on Discover sees it in the same place. It is not chosen using your data or messages.": [
+    "ظهور مدفوع لـ<0>{0}</0>، اشتراه أحد مديري هذا السيرفر. يراه في المكان نفسه كلُّ من يستطيع رؤية هذا السيرفر في «اكتشف»، ولا يُختار بناءً على بياناتك أو رسائلك.",
+    "Bezahlte Platzierung für <0>{0}</0>, gekauft von einer Person, die diesen Server verwaltet. Alle, die diesen Server in Discover sehen können, sehen ihn an derselben Stelle. Er wird nicht anhand deiner Daten oder Nachrichten ausgewählt."
+  ],
+  "Paid placement for <0>{0}</0>, bought by the owner of this bot. Everyone browsing bots on Discover sees it in the same place. It is not chosen using your data or messages.": [
+    "ظهور مدفوع لـ<0>{0}</0>، اشتراه مالك هذا البوت. يراه في المكان نفسه كلُّ من يتصفح البوتات في «اكتشف»، ولا يُختار بناءً على بياناتك أو رسائلك.",
+    "Bezahlte Platzierung für <0>{0}</0>, gekauft von der Person, der dieser Bot gehört. Alle, die in Discover Bots ansehen, sehen ihn an derselben Stelle. Er wird nicht anhand deiner Daten oder Nachrichten ausgewählt."
+  ],
+  "Still loading. Try again in a moment.": [
+    "ما زال التحميل جارياً. حاول مجدداً بعد لحظة.",
+    "Wird noch geladen. Versuch es gleich noch einmal."
+  ],
+  "The month and year of birth on this account are below the minimum age for Zrzur. Content marked as mature is closed, and our team may review the account. If the date is wrong, write to privacy@zrzur.com.": [
+    "شهر وسنة الميلاد المسجّلان في هذا الحساب أقل من الحد الأدنى للعمر في زرزور. المحتوى المصنّف للبالغين مغلق، وقد يراجع فريقنا الحساب. إذا كان التاريخ خاطئاً فراسلنا على privacy@zrzur.com.",
+    "Monat und Jahr der Geburt in diesem Konto liegen unter dem Mindestalter für Zrzur. Als nicht jugendfrei markierte Inhalte bleiben gesperrt, und unser Team kann das Konto prüfen. Wenn das Datum falsch ist, schreib an privacy@zrzur.com."
+  ],
+  "This page couldn't load": [
+    "تعذّر تحميل هذه الصفحة",
+    "Diese Seite konnte nicht geladen werden"
+  ],
+  "We couldn't download your copy. Please try again.": [
+    "تعذّر تنزيل نسختك. يرجى المحاولة مرة أخرى.",
+    "Wir konnten deine Kopie nicht herunterladen. Bitte versuch es noch einmal."
+  ],
+  "Why am I seeing this?": [
+    "لماذا أرى هذا؟",
+    "Warum sehe ich das?"
+  ],
+  "You can make yourself younger at any time. You can make yourself older only once, and only within the same age group. For anything else, write to privacy@zrzur.com.": [
+    "يمكنك تصغير عمرك في أي وقت. ويمكنك تكبيره مرة واحدة فقط، وضمن الفئة العمرية نفسها. وفي أي حالة أخرى راسلنا على privacy@zrzur.com.",
+    "Du kannst dich jederzeit jünger machen. Älter machen kannst du dich nur einmal und nur innerhalb derselben Altersgruppe. Für alles andere schreib an privacy@zrzur.com."
+  ],
+  "You've reached the limit for this. Remove one and try again.": [
+    "لقد بلغت الحد الأقصى لهذا. أزل واحدًا ثم حاول مجددًا.",
+    "Du hast das Limit dafür erreicht. Entferne eins und versuche es erneut."
+  ],
+  "Zrzur is only for people aged 16 and older. If you continue, a new account is removed. An account that already exists is limited and our team reviews it; entering an older age afterwards does not lift the limit. If you made a mistake, go back.": [
+    "زرزور مخصص لمن بلغ 16 عاماً فأكثر. إذا تابعت فسيُزال الحساب الجديد. أما الحساب القائم فيُقيَّد ويراجعه فريقنا، ولا يرفع القيد إدخال عمر أكبر لاحقاً. وإذا أخطأت في الإدخال فارجع.",
+    "Zrzur ist nur für Menschen ab 16 Jahren. Wenn du fortfährst, wird ein neues Konto entfernt. Ein bestehendes Konto wird eingeschränkt und von unserem Team geprüft; ein höheres Alter, das du später angibst, hebt die Einschränkung nicht auf. Wenn du dich vertippt hast, geh zurück."
+  ],
+  "discover.paid.ad": [
+    "إعلان",
+    "Anzeige"
+  ]
+}

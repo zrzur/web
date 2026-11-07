@@ -1,0 +1,68 @@
+# Internal, never published
+_internal/
+.claude/
+
+# Secrets
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.p12
+*.jks
+*.keystore
+Revolt.overrides.toml
+google-services.json
+
+# Data and logs
+*.log
+*.sqlite
+*.bson
+*.dump
+uploads/
+
+# Build output
+node_modules/
+target/
+dist/
+build/
+out/
+.gradle/
+
+# Personal editor files
+.DS_Store
+.idea/
+.vscode/*
+!.vscode/extensions.json
+
+# ----- project-specific -----
+node_modules
+coverage
+dist
+dev-dist
+
+*.log
+
+.env*
+!.env.example
+.vercel
+
+.idea
+
+# Local audit output is not source
+/packages/client/dist-release-audit/
+*.tsbuildinfo
+
+# Unpublished local asset checkout; product assets are bundled in public/brand
+/packages/client/assets/
+packages/client/scripts/missing-ar.json
+
+# keep tracked task/build-script folders (generic build/ rule above is for outputs)
+!.mise/tasks/build/
+!.github/build/
+CLAUDE.local.md
+screenshots/
+test-results/
+playwright-report/
+coverage/
+*.har

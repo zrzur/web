@@ -1,0 +1,48 @@
+Zrzur (زرزور) - web
+https://github.com/zrzur/web
+Copyright (C) 2026 Zrzur contributors
+
+This repository is a modified version ("fork") of software from the Stoat
+project (formerly Revolt), https://github.com/stoatchat. It is NOT affiliated
+with, endorsed by, or sponsored by Stoat or Revolt Platforms Ltd.
+
+Upstream source (forked on 2026-10-12):
+  stoatchat/for-web @ f080e84d8072478c8b7f494130dfdf52f5d60041
+  Licence: AGPL-3.0
+
+Original authors: Paul (Pawel) Makles and the Stoat/Revolt contributors.
+All upstream copyright notices are retained in the files concerned.
+Git history was not carried over; this repository starts with a single initial
+commit. Modifications are summarised in MODIFICATIONS.md.
+
+Third-party source kept in this repository:
+
+- packages/solid-livekit-components: copy of
+  https://github.com/revoltchat/solid-livekit-components at
+  a67176da7f0580ea9fdad22e58a963668f047fca, unmodified, with its own LICENSE.
+
+Third-party components in the public Discover/Designs site server
+(packages/public-pages):
+
+- @resvg/resvg-js (and the resvg, usvg, tiny-skia and fontdb Rust crates it
+  contains) renders the preview images. Licence: Mozilla Public License 2.0
+  (MPL-2.0). Source: https://github.com/yisibl/resvg-js and
+  https://github.com/linebender/resvg. Used unmodified. The MPL-2.0 text ships
+  with the package and in THIRD-PARTY-NOTICES.txt of the build; the crates
+  compiled into its native binary are listed in that project's Cargo.lock.
+- IBM Plex Sans Arabic (through @fontsource/ibm-plex-sans-arabic) is used in the
+  preview images. Copyright 2019 IBM Corp. Licence: SIL Open Font License 1.1
+  (OFL-1.1), https://openfontlicense.org. The licence file travels with the font
+  files in the package and is in THIRD-PARTY-NOTICES.txt of the build.
+
+Emoji: Fluent (MIT) and Twemoji (CC-BY 4.0 graphics, MIT code) are bundled;
+Noto is available from a configured CDN only. Licences and sources are next to
+the files in packages/client/public/emoji and packages/client/public/third-party.
+
+
+"Stoat", the Stoat logo and "Toast" are trademarks of Revolt Platforms Ltd.
+"Revolt" is a trademark of its respective owner. Used only to identify the
+origin of the code.
+
+"Zrzur", "زرزور" and the Zrzur logo are trademarks of the Zrzur project and are
+not covered by the source code licence.

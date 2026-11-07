@@ -1,0 +1,46 @@
+{
+  "This device": [
+    "هذا الجهاز",
+    "Dieses Gerät"
+  ],
+  "Last used <0/>": [
+    "آخر استخدام <0/>",
+    "Zuletzt verwendet <0/>"
+  ],
+  "Log out of all other sessions?": [
+    "أتريد تسجيل الخروج من كل الجلسات الأخرى؟",
+    "Von allen anderen Sitzungen abmelden?"
+  ],
+  "Log out of this device?": [
+    "أتريد تسجيل الخروج من هذا الجهاز؟",
+    "Von diesem Gerät abmelden?"
+  ],
+  "This device stays signed in.": [
+    "يبقى هذا الجهاز مسجَّل الدخول.",
+    "Dieses Gerät bleibt angemeldet."
+  ],
+  "You will need to sign in again.": [
+    "ستحتاج إلى تسجيل الدخول مرة أخرى.",
+    "Du musst dich erneut anmelden."
+  ],
+  "We could not load your sessions.": [
+    "تعذّر تحميل جلساتك.",
+    "Deine Sitzungen konnten nicht geladen werden."
+  ],
+  "Devices signed in to your account. Unused ones log out by themselves.": [
+    "الأجهزة التي سجّلت الدخول إلى حسابك. يُسجَّل خروج الأجهزة غير المستخدمة تلقائيًا.",
+    "Geräte, die bei deinem Konto angemeldet sind. Unbenutzte werden automatisch abgemeldet."
+  ],
+  "No other device is signed in.": [
+    "لا يوجد جهاز آخر مسجَّل الدخول.",
+    "Kein anderes Gerät ist angemeldet."
+  ],
+  "That device will need to sign in again.": [
+    "سيحتاج ذلك الجهاز إلى تسجيل الدخول مرة أخرى.",
+    "Das Gerät muss sich erneut anmelden."
+  ],
+  "Log out of <0>{name}</0>?": [
+    "أتريد تسجيل الخروج من <0>{name}</0>؟",
+    "Von <0>{name}</0> abmelden?"
+  ]
+}

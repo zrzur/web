@@ -1,0 +1,81 @@
+{
+  "{0} in voice": ["{0} في الصوت", "{0} im Sprachkanal"],
+  "{0} members": ["{0} عضو", "{0} Mitglieder"],
+  "Active {when}": ["نشِط {when}", "Aktiv {when}"],
+  "Active now": ["نشِط الآن", "Gerade aktiv"],
+  "Add a button": ["إضافة زر", "Schaltfläche hinzufügen"],
+  "Add a question": ["إضافة سؤال", "Frage hinzufügen"],
+  "Answer": ["الجواب", "Antwort"],
+  "Answer what new members ask most. Up to twenty.": [
+    "أجب عمّا يسأل عنه الأعضاء الجدد أكثر شيء. حتى عشرين سؤالاً.",
+    "Beantworte, was neue Mitglieder am häufigsten fragen. Bis zu zwanzig."
+  ],
+  "App colour": ["لون التطبيق", "App-Farbe"],
+  "Buttons": ["الأزرار", "Schaltflächen"],
+  "How do I get a role?": ["كيف أحصل على رتبة؟", "Wie bekomme ich eine Rolle?"],
+  "Jump back in": ["تابع من حيث توقفت", "Weitermachen, wo du warst"],
+  "Label": ["النص", "Beschriftung"],
+  "Live now": ["مباشر الآن", "Jetzt live"],
+  "Main channels": ["القنوات الرئيسية", "Wichtige Kanäle"],
+  "Make this page yours in Server settings, Lobby: a welcome text, buttons, questions and your team.": [
+    "خصّص هذه الصفحة من إعدادات السيرفر، الردهة: نص ترحيب وأزرار وأسئلة وفريقك.",
+    "Gestalte diese Seite unter Servereinstellungen, Lobby: Begrüßungstext, Schaltflächen, Fragen und dein Team."
+  ],
+  "Markdown is supported.": ["يدعم تنسيق Markdown.", "Markdown wird unterstützt."],
+  "Move up": ["نقل للأعلى", "Nach oben"],
+  "No messages yet": ["لا رسائل بعد", "Noch keine Nachrichten"],
+  "No question matches.": ["لا يوجد سؤال مطابق.", "Keine Frage passt."],
+  "Off: only managers see the lobby, as a preview.": [
+    "عند الإيقاف: يرى المشرفون الردهة فقط، كمعاينة.",
+    "Aus: Nur Verwalter sehen die Lobby, als Vorschau."
+  ],
+  "One line under the server name. Empty: the server description.": [
+    "سطر واحد تحت اسم السيرفر. إن تُرك فارغاً: وصف السيرفر.",
+    "Eine Zeile unter dem Servernamen. Leer: die Serverbeschreibung."
+  ],
+  "Only managers see this until the lobby is turned on.": [
+    "يراها المشرفون فقط حتى تُفعَّل الردهة.",
+    "Nur Verwalter sehen das, bis die Lobby eingeschaltet ist."
+  ],
+  "Open the server on its lobby": ["افتح السيرفر على الردهة", "Server mit der Lobby öffnen"],
+  "Pick up to nine. None picked: the busiest channels are shown.": [
+    "اختر حتى تسع قنوات. إن لم تختر شيئاً: تظهر القنوات الأكثر نشاطاً.",
+    "Wähle bis zu neun. Keine gewählt: die aktivsten Kanäle werden gezeigt."
+  ],
+  "Preview the lobby": ["معاينة الردهة", "Lobby ansehen"],
+  "Question": ["السؤال", "Frage"],
+  "Questions and answers": ["أسئلة وأجوبة", "Fragen und Antworten"],
+  "Read the rules": ["اقرأ القواعد", "Regeln lesen"],
+  "Remove button": ["إزالة الزر", "Schaltfläche entfernen"],
+  "Remove question": ["إزالة السؤال", "Frage entfernen"],
+  "Say hi": ["قل مرحباً", "Sag Hallo"],
+  "Search questions": ["ابحث في الأسئلة", "Fragen durchsuchen"],
+  "Show voice rooms with people in them": [
+    "إظهار الغرف الصوتية التي فيها أشخاص",
+    "Sprachräume mit Leuten darin zeigen"
+  ],
+  "Tagline": ["العبارة التعريفية", "Slogan"],
+  "The first page of your server: what it is about, where to start and who runs it.": [
+    "الصفحة الأولى في سيرفرك: عمّ يدور، ومن أين يبدأ العضو، ومن يديره.",
+    "Die erste Seite deines Servers: worum es geht, wo man anfängt und wer ihn leitet."
+  ],
+  "The owner is always listed. Pick the roles whose members are shown too, up to ten.": [
+    "يظهر المالك دائماً. اختر الرتب التي يظهر أعضاؤها أيضاً، حتى عشر رتب.",
+    "Der Eigentümer wird immer gezeigt. Wähle bis zu zehn Rollen, deren Mitglieder ebenfalls erscheinen."
+  ],
+  "Up to three buttons under the name, each opening a channel. Read the rules is added by itself when a rules channel is set.": [
+    "حتى ثلاثة أزرار تحت الاسم، كل زر يفتح قناة. يُضاف زر «اقرأ القواعد» تلقائياً عند تحديد قناة القواعد.",
+    "Bis zu drei Schaltflächen unter dem Namen, jede öffnet einen Kanal. „Regeln lesen“ kommt von selbst dazu, wenn ein Regelkanal gesetzt ist."
+  ],
+  "Welcome": ["الترحيب", "Willkommen"],
+  "What happens here, and how to take part.": [
+    "ماذا يحدث هنا، وكيف تشارك.",
+    "Was hier passiert und wie man mitmacht."
+  ],
+  "Where people who love games meet": [
+    "حيث يلتقي محبّو الألعاب",
+    "Wo sich Menschen treffen, die Spiele lieben"
+  ],
+  "Who runs it": ["من يدير السيرفر", "Wer ihn leitet"],
+  "Wings level {0}": ["أجنحة المستوى {0}", "Flügel-Stufe {0}"]
+}

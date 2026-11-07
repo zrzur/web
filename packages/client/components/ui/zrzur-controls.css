@@ -1,0 +1,246 @@
+/**
+ * Zrzur control layer — neutralize remaining MDUI / Material chrome
+ * until each host component is fully migrated off MDUI.
+ */
+
+/* Soften global MDUI surface tokens toward Unified Dark when present */
+:root,
+body {
+  --mdui-shape-corner-extra-small: var(--z-radius, 10px);
+  --mdui-shape-corner-small: var(--z-radius, 10px);
+  --mdui-shape-corner-medium: calc(var(--z-radius, 10px) + 2px);
+  --mdui-shape-corner-large: 14px;
+  --mdui-shape-corner-extra-large: 18px;
+}
+
+/* Kill Material filled-field / underline aesthetics if any mdui fields linger */
+mdui-text-field,
+mdui-select,
+mdui-slider,
+mdui-checkbox,
+mdui-radio,
+mdui-segmented-button,
+mdui-navigation-rail,
+mdui-navigation-rail-item,
+mdui-fab {
+  --mdui-color-primary: var(--z-accent-fill, #e0195f) !important;
+  --mdui-color-on-primary: var(--z-on-accent, #ffffff) !important;
+  --mdui-color-surface: var(--z-bg-chat, #1d1f2d) !important;
+  --mdui-color-on-surface: var(--z-fg-primary, #e6e1ee) !important;
+  --mdui-color-surface-container: var(--z-bg-raised, #242638) !important;
+  --mdui-color-surface-container-high: var(--z-bg-raised, #242638) !important;
+  --mdui-color-outline: color-mix(
+    in srgb,
+    var(--z-fg-muted, #968da6) 45%,
+    transparent
+  ) !important;
+  border-radius: var(--z-radius, 10px) !important;
+}
+
+mdui-menu-item {
+  border-radius: 8px !important;
+  min-height: 36px !important;
+}
+
+mdui-snackbar {
+  border-radius: 12px !important;
+  background: var(--z-bg-raised, #242638) !important;
+  color: var(--z-fg-primary, #e6e1ee) !important;
+}
+
+/* Compact circular progress */
+mdui-circular-progress {
+  color: var(--z-accent, #e0195f) !important;
+}
+
+/*
+ * One scroll treatment for the whole app: panels scroll normally (wheel,
+ * touchpad, touch, keyboard, programmatic) but draw no scrollbar chrome.
+ * Forced-colors / high-contrast users keep native scrollbars, and any
+ * container can opt back in with .z-scrollbar-visible.
+ */
+@media not (forced-colors: active) {
+  #root *:not(.z-scrollbar-visible),
+  #floating *:not(.z-scrollbar-visible) {
+    scrollbar-width: none;
+  }
+  #root *:not(.z-scrollbar-visible)::-webkit-scrollbar,
+  #floating *:not(.z-scrollbar-visible)::-webkit-scrollbar {
+    width: 0;
+    height: 0;
+  }
+}
+
+@keyframes zSpin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.z-control-feedback {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  background: currentColor;
+  opacity: 0;
+  transition: opacity 120ms ease;
+}
+:hover > .z-control-feedback:not([data-disabled="true"]) {
+  opacity: 0.04;
+}
+:active > .z-control-feedback:not([data-disabled="true"]) {
+  opacity: 0.08;
+}
+@media (prefers-reduced-motion: reduce) {
+  .z-control-feedback {
+    transition: none;
+  }
+}
+
+/* Native controls and text selection carry the accent */
+:root {
+  accent-color: var(--z-accent, #e0195f);
+}
+::selection {
+  background: color-mix(in srgb, var(--z-accent, #e0195f) 35%, transparent);
+}
+
+/*
+ * Motion stays subtle (120-220 ms). People who ask for less motion get
+ * none: animations and transitions finish instantly everywhere.
+ */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Dialog surface consistency when CSS vars lag */
+.z-dialog .dialog,
+.dialog.z-dialog {
+  /* class hook for diagnostics */
+}
+
+/*
+ * Native checkboxes and radios: one Zrzur look everywhere instead of the
+ * browser's (Android-like) default. A rounded box on the field surface that
+ * fills with the accent and shows a white tick when checked.
+ */
+/* in Panda's base layer, so components that style their own input still win */
+/* this file can load first: fixes the order of the first two layers, the rest
+   follow from src/index.css. Never list all five here: Panda writes its whole
+   stylesheet at every statement that names all its layers */
+@layer reset, base;
+@layer base {
+  input[type="checkbox"],
+  input[type="radio"] {
+    appearance: none;
+    -webkit-appearance: none;
+    flex-shrink: 0;
+    width: 18px;
+    height: 18px;
+    margin: 0;
+    display: inline-grid;
+    place-content: center;
+    vertical-align: middle;
+    border: 1.5px solid
+      var(
+        --z-field-border,
+        color-mix(in srgb, var(--z-fg-primary) 28%, transparent)
+      );
+    border-radius: 5px;
+    background: var(
+      --z-bg-input,
+      color-mix(in srgb, black 18%, var(--z-bg-chat))
+    );
+    cursor: pointer;
+    transition:
+      background-color 0.12s ease,
+      border-color 0.12s ease,
+      box-shadow 0.12s ease;
+  }
+
+  input[type="radio"] {
+    border-radius: 50%;
+  }
+
+  input[type="checkbox"]::before,
+  input[type="radio"]::before {
+    content: "";
+    width: 10px;
+    height: 10px;
+    transform: scale(0);
+    transition: transform 0.12s ease;
+  }
+
+  /* the tick: a mask so it takes the on-accent colour */
+  input[type="checkbox"]::before {
+    background: var(--z-on-accent, #ffffff);
+    -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12'%3E%3Cpath d='M2.5 6.2 5 8.6l4.6-5.1' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E")
+      center / contain no-repeat;
+    mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12'%3E%3Cpath d='M2.5 6.2 5 8.6l4.6-5.1' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E")
+      center / contain no-repeat;
+  }
+
+  input[type="radio"]::before {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--z-on-accent, #ffffff);
+  }
+
+  input[type="checkbox"]:hover:not(:disabled),
+  input[type="radio"]:hover:not(:disabled) {
+    border-color: var(
+      --z-field-border-hover,
+      color-mix(in srgb, var(--z-fg-primary) 45%, transparent)
+    );
+  }
+
+  input[type="checkbox"]:checked,
+  input[type="checkbox"]:indeterminate,
+  input[type="radio"]:checked {
+    background: var(--z-accent-fill, var(--z-accent, #e0195f));
+    border-color: var(--z-accent-fill, var(--z-accent, #e0195f));
+  }
+
+  input[type="checkbox"]:checked::before,
+  input[type="radio"]:checked::before {
+    transform: scale(1);
+  }
+
+  input[type="checkbox"]:indeterminate::before {
+    -webkit-mask: none;
+    mask: none;
+    height: 2px;
+    border-radius: 1px;
+    transform: scale(1);
+  }
+
+  input[type="checkbox"]:focus-visible,
+  input[type="radio"]:focus-visible {
+    outline: 2px solid var(--z-focus, var(--z-accent));
+    outline-offset: 2px;
+  }
+
+  input[type="checkbox"]:disabled,
+  input[type="radio"]:disabled {
+    opacity: 0.45;
+    cursor: not-allowed;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    input[type="checkbox"],
+    input[type="radio"],
+    input[type="checkbox"]::before,
+    input[type="radio"]::before {
+      transition: none;
+    }
+  }
+}

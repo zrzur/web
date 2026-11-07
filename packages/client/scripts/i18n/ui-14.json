@@ -1,0 +1,80 @@
+{
+  "{0} days, paid once. Your place on the list is held for you.": [
+    "{0} أيام، تدفعها مرة واحدة. مكانك في القائمة محجوز لك.",
+    "{0} Tage, einmal bezahlt. Dein Platz in der Liste ist dir sicher."
+  ],
+  "{0} more to unlock": ["باقي {0} للفتح", "Noch {0} zum Freischalten"],
+  "A place on Discover": ["مكان في الاستكشاف", "Ein Platz auf Discover"],
+  "A Feather role in the official Zrzur server, with the channels HQ opens to Feather members.": [
+    "رتبة ريشة في سيرفر زرزور الرسمي، مع القنوات التي يفتحها المقر لمشتركي ريشة.",
+    "Eine Feather-Rolle im offiziellen Zrzur-Server, mit den Kanälen, die HQ für Feather-Mitglieder öffnet."
+  ],
+  "A whole server gets bigger uploads and better voice, so the members who care most share that cost between them.": [
+    "السيرفر كله يحصل على رفع أكبر وصوت أنقى، فيتقاسم التكلفة الأعضاء الأكثر اهتماماً به.",
+    "Ein ganzer Server bekommt größere Uploads und besseren Sound, also teilen sich die Mitglieder, denen er am meisten bedeutet, die Kosten."
+  ],
+  "Bots, as many as you like": ["بوتات بلا حد", "Bots, so viele du willst"],
+  "Covers what one heavy user costs: big files that stay stored for good and high quality streams, with a little left over for everyone else.": [
+    "يغطي ما يكلّفه مستخدم واحد كثير الاستخدام: ملفات كبيرة تبقى محفوظة للأبد وبث عالي الجودة، ويبقى منه قليل للجميع.",
+    "Deckt, was eine Person mit viel Nutzung kostet: große Dateien, die dauerhaft gespeichert bleiben, und Streams in hoher Qualität, mit etwas übrig für alle anderen."
+  ],
+  "Discover promotion, paid once per 7 days": [
+    "الترويج في الاستكشاف، دفعة واحدة كل 7 أيام",
+    "Werbung auf Discover, einmal bezahlt pro 7 Tage"
+  ],
+  "Everything you need to talk is free, and stays free. Feather gives you bigger files, sharper streams and longer messages, and pays for the servers everyone else uses too.": [
+    "كل ما تحتاجه للحديث مجاني، وسيبقى مجانياً. ريشة تمنحك ملفات أكبر وبثاً أوضح ورسائل أطول، وتدفع ثمن السيرفرات التي يستخدمها الجميع.",
+    "Alles, was du zum Reden brauchst, ist kostenlos und bleibt es. Feather gibt dir größere Dateien, schärfere Streams und längere Nachrichten und bezahlt die Server, die alle anderen auch nutzen."
+  ],
+  "Feathers, {0} a month each": [
+    "الريش، {0} شهرياً لكل ريشة",
+    "Federn, je {0} im Monat"
+  ],
+  "For owners who want more people to find them. Nothing renews, and nothing about chatting depends on it. Today's prices are launch prices.": [
+    "لأصحاب السيرفرات والبوتات الذين يريدون أن يجدهم ناس أكثر. لا شيء يتجدد تلقائياً، ولا شيء في المحادثة يعتمد عليه. أسعار اليوم أسعار إطلاق.",
+    "Für alle, die von mehr Leuten gefunden werden wollen. Nichts verlängert sich, und nichts am Chatten hängt davon ab. Die heutigen Preise sind Startpreise."
+  ],
+  "For the people who keep Zrzur flying.": [
+    "لمن يُبقون زرزور محلّقاً.",
+    "Für alle, die Zrzur in der Luft halten."
+  ],
+  "Launch prices": ["أسعار الإطلاق", "Startpreise"],
+  "Not listed on Discover yet": [
+    "غير مدرج في الاستكشاف بعد",
+    "Noch nicht auf Discover"
+  ],
+  "Plus, {0} a month": ["بلس، {0} شهرياً", "Plus, {0} im Monat"],
+  "Put {0} in front of the people browsing Discover.": [
+    "اجعل {0} أمام الناس الذين يتصفحون الاستكشاف.",
+    "Bring {0} vor die Leute, die Discover durchstöbern."
+  ],
+  "Recommended": ["ننصح به", "Empfohlen"],
+  "Room for a long story, patch notes or a whole recipe in one message. Edits get the same room.": [
+    "مساحة لقصة طويلة أو ملاحظات تحديث أو وصفة كاملة في رسالة واحدة. والتعديل يحصل على المساحة نفسها.",
+    "Platz für eine lange Geschichte, Patchnotes oder ein ganzes Rezept in einer Nachricht. Bearbeitungen bekommen denselben Platz."
+  ],
+  "That is all the paid plans are for: keeping the servers, storage and voice running for everybody, including the people who never pay. You are not buying permission to chat. You are helping keep the place open.": [
+    "هذا كل ما وُجدت الخطط المدفوعة لأجله: أن تبقى السيرفرات والتخزين والصوت تعمل للجميع، حتى لمن لا يدفع أبداً. أنت لا تشتري إذناً بالمحادثة، بل تساعد في إبقاء المكان مفتوحاً.",
+    "Genau dafür gibt es die bezahlten Pläne: damit Server, Speicher und Sprache für alle laufen, auch für die, die nie zahlen. Du kaufst keine Erlaubnis zum Chatten. Du hilfst, den Ort offen zu halten."
+  ],
+  "Those bills grow with every person who joins. More people means more messages to keep, more files to store, more voice and video to carry. Talking here has to stay free for everyone, so something has to pay for that growth.": [
+    "وهذه الفواتير تكبر مع كل شخص ينضم. ناس أكثر يعني رسائل أكثر تُحفظ، وملفات أكثر تُخزَّن، وصوتاً وفيديو أكثر يُنقل. والحديث هنا يجب أن يبقى مجانياً للجميع، فلا بد من شيء يدفع ثمن هذا النمو.",
+    "Diese Rechnungen wachsen mit jeder Person, die dazukommt. Mehr Leute heißt mehr Nachrichten zu behalten, mehr Dateien zu speichern, mehr Sprache und Video zu übertragen. Reden muss hier für alle kostenlos bleiben, also muss etwas dieses Wachstum bezahlen."
+  ],
+  "Where the prices come from": [
+    "من أين جاءت الأسعار",
+    "Woher die Preise kommen"
+  ],
+  "Why there are paid plans at all": [
+    "لماذا توجد خطط مدفوعة أصلاً",
+    "Warum es überhaupt bezahlte Pläne gibt"
+  ],
+  "You'd be #{0} on Discover": [
+    "ستكون في المرتبة #{0} في الاستكشاف",
+    "Du wärst #{0} auf Discover"
+  ],
+  "Zrzur is built and paid for by one person. There are no investors and no ads, and your data is not for sale. Every server, every gigabyte of storage and every minute of voice is paid for out of that one pocket.": [
+    "زرزور يبنيه ويدفع تكاليفه شخص واحد. لا مستثمرين ولا إعلانات، وبياناتك ليست للبيع. كل سيرفر، وكل غيغابايت تخزين، وكل دقيقة صوت، تُدفع من جيب واحد.",
+    "Zrzur wird von einer einzigen Person gebaut und bezahlt. Keine Investoren, keine Werbung, und deine Daten stehen nicht zum Verkauf. Jeder Server, jedes Gigabyte Speicher und jede Minute Sprache wird aus dieser einen Tasche bezahlt."
+  ]
+}

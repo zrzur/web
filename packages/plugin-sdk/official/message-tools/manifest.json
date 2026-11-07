@@ -1,0 +1,158 @@
+{
+  "$schema": "../../schema/plugin-manifest.v1.schema.json",
+  "manifest_version": 1,
+  "id": "zrzur.message-tools",
+  "name": "Message Tools",
+  "version": "1.0.0",
+  "description": "Handy actions on any message: quote it in your reply, see its length and reading time, or copy it as a code block. Plus times that show in each reader's own time zone.",
+  "author": {
+    "name": "Zrzur"
+  },
+  "category": "productivity",
+  "icon": "wrench",
+  "api_version": 1,
+  "min_app_version": "26.0.0",
+  "platforms": [
+    "web",
+    "pwa",
+    "desktop"
+  ],
+  "entrypoint": {
+    "type": "worker",
+    "file": "main.js"
+  },
+  "permissions": [
+    "ui.commands",
+    "keybinds",
+    "composer.insert",
+    "notifications.show",
+    "context.message.selected"
+  ],
+  "contributes": {
+    "message_actions": [
+      {
+        "id": "quote",
+        "title": {
+          "en": "Quote in my reply",
+          "ar": "اقتباس في ردي",
+          "de": "In meiner Antwort zitieren"
+        },
+        "handler": "quote"
+      },
+      {
+        "id": "stats",
+        "title": {
+          "en": "Length and reading time",
+          "ar": "الطول ومدة القراءة",
+          "de": "Länge und Lesezeit"
+        },
+        "handler": "stats"
+      },
+      {
+        "id": "code",
+        "title": {
+          "en": "Copy as a code block",
+          "ar": "نسخ ككتلة شيفرة",
+          "de": "Als Codeblock übernehmen"
+        },
+        "handler": "code"
+      },
+      {
+        "id": "time",
+        "title": {
+          "en": "When was this sent?",
+          "ar": "متى أُرسلت؟",
+          "de": "Wann gesendet?"
+        },
+        "handler": "time"
+      }
+    ],
+    "commands": [
+      {
+        "id": "now",
+        "title": {
+          "en": "Insert the time now",
+          "ar": "إدراج الوقت الآن",
+          "de": "Aktuelle Uhrzeit einfügen"
+        },
+        "action": {
+          "type": "worker",
+          "handler": "now"
+        }
+      },
+      {
+        "id": "in-hour",
+        "title": {
+          "en": "Insert \"in one hour\"",
+          "ar": "إدراج «بعد ساعة»",
+          "de": "\"In einer Stunde\" einfügen"
+        },
+        "action": {
+          "type": "worker",
+          "handler": "in-hour"
+        }
+      },
+      {
+        "id": "tomorrow",
+        "title": {
+          "en": "Insert tomorrow at this time",
+          "ar": "إدراج الغد في هذا الوقت",
+          "de": "Morgen um diese Zeit einfügen"
+        },
+        "action": {
+          "type": "worker",
+          "handler": "tomorrow"
+        }
+      }
+    ],
+    "keybinds": [
+      {
+        "command": "now",
+        "keys": "Alt+Shift+N"
+      },
+      {
+        "command": "in-hour",
+        "keys": "Alt+Shift+U"
+      }
+    ]
+  },
+  "locales": {
+    "ar": {
+      "name": "أدوات الرسائل",
+      "description": "إجراءات مفيدة على أي رسالة: اقتبسها في ردك، واعرف طولها ومدة قراءتها، أو انسخها ككتلة شيفرة. إضافة إلى أوقات تظهر لكل قارئ بتوقيته المحلي.",
+      "strings": {
+        "stats": "{w} كلمة · {c} حرف · قراءة نحو {r}",
+        "seconds": "{n} ثانية",
+        "minutes": "{n} دقيقة",
+        "sent": "أُرسلت قبل {ago} ({date})",
+        "empty": "هذه الرسالة بلا نص.",
+        "hours": "{n} ساعة",
+        "days": "{n} يوم"
+      }
+    },
+    "de": {
+      "name": "Nachrichtenwerkzeuge",
+      "description": "Praktische Aktionen für jede Nachricht: in deiner Antwort zitieren, Länge und Lesezeit sehen oder als Codeblock übernehmen. Dazu Zeiten, die jeder in seiner eigenen Zeitzone sieht.",
+      "strings": {
+        "stats": "{w} Wörter · {c} Zeichen · etwa {r} Lesezeit",
+        "seconds": "{n} Sek.",
+        "minutes": "{n} Min.",
+        "sent": "Gesendet vor {ago} ({date})",
+        "empty": "Diese Nachricht hat keinen Text.",
+        "hours": "{n} Std.",
+        "days": "{n} Tagen"
+      }
+    },
+    "en": {
+      "strings": {
+        "stats": "{w} words · {c} characters · about {r} to read",
+        "seconds": "{n} s",
+        "minutes": "{n} min",
+        "sent": "Sent {ago} ago ({date})",
+        "empty": "This message has no text.",
+        "hours": "{n} h",
+        "days": "{n} days"
+      }
+    }
+  }
+}

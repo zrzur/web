@@ -1,0 +1,190 @@
+{
+  "A reviewer looks at your effect first. It goes live when they approve it. Effects are free.": [
+    "يطّلع مراجع على مؤثرك أولًا، ويصبح متاحًا عند موافقته. والمؤثرات مجانية.",
+    "Zuerst sieht sich jemand aus dem Review-Team deinen Effekt an. Er geht online, sobald er freigegeben ist. Effekte sind kostenlos."
+  ],
+  "A transparent animation that plays once over a profile. 576 × 1024 px, up to 4 seconds, up to 2 MB. Reviewers look at it before it goes live.": [
+    "حركة شفافة تُعرض مرة واحدة فوق الملف الشخصي. 576 × 1024 بكسل، حتى 4 ثوانٍ، وحتى 2 ميغابايت. ويطّلع عليها المراجعون قبل نشرها.",
+    "Eine transparente Animation, die einmal über einem Profil abläuft. 576 × 1024 px, bis zu 4 Sekunden, bis zu 2 MB. Das Review-Team prüft sie vor der Veröffentlichung."
+  ],
+  "An effect has the shape of a profile: 9 by 16, such as 576 × 1024 px.": [
+    "شكل المؤثر هو شكل الملف الشخصي: 9 إلى 16، مثل 576 × 1024 بكسل.",
+    "Ein Effekt hat die Form eines Profils: 9 zu 16, zum Beispiel 576 × 1024 px."
+  ],
+  "An effect has to move. This file has only one frame.": [
+    "يجب أن يتحرك المؤثر، وهذا الملف فيه إطار واحد فقط.",
+    "Ein Effekt muss sich bewegen. Diese Datei hat nur ein Einzelbild."
+  ],
+  "Checking and sending…": [
+    "جارٍ الفحص والإرسال…",
+    "Wird geprüft und gesendet …"
+  ],
+  "Community effect": [
+    "مؤثر من المجتمع",
+    "Community-Effekt"
+  ],
+  "Confirm that you may share this effect first.": [
+    "أكّد أولًا أنه يحق لك مشاركة هذا المؤثر.",
+    "Bestätige zuerst, dass du diesen Effekt teilen darfst."
+  ],
+  "Creators haven't published any effects yet. Designs is where they appear first.": [
+    "لم ينشر المصممون أي مؤثرات بعد، وستظهر أولًا في صفحة التصاميم.",
+    "Noch haben keine Designer Effekte veröffentlicht. Sie erscheinen zuerst unter Designs."
+  ],
+  "Decorations and nameplates go live at once; effects wait here for your approval. Take down anything that breaks the rules, with a clear reason for the creator.": [
+    "تُنشر الإطارات ولوحات الأسماء فورًا، أما المؤثرات فتنتظر موافقتك هنا. أزل كل ما يخالف القواعد، مع ذكر سبب واضح للمصمم.",
+    "Rahmen und Namensschilder gehen sofort online, Effekte warten hier auf deine Freigabe. Entferne alles, was gegen die Regeln verstößt, und nenne einen klaren Grund."
+  ],
+  "Effects": [
+    "المؤثرات",
+    "Effekte"
+  ],
+  "Effects play once, with no sound and a transparent background. Animated PNG, GIF or WebP only. Files set to repeat, files that flash, and files that cover more than half of the profile are refused automatically.": [
+    "تُعرض المؤثرات مرة واحدة، دون صوت وبخلفية شفافة. ولا تُقبل إلا بصيغة PNG متحرك أو GIF أو WebP. وتُرفض تلقائيًا الملفات المضبوطة على التكرار، والملفات الوامضة، والملفات التي تغطي أكثر من نصف الملف الشخصي.",
+    "Effekte laufen einmal ab, ohne Ton und mit transparentem Hintergrund. Nur animiertes PNG, GIF oder WebP. Dateien mit Wiederholung, blinkende Dateien und Dateien, die mehr als die Hälfte des Profils verdecken, werden automatisch abgelehnt."
+  ],
+  "Effects you save or make on Designs show up here.": [
+    "تظهر هنا المؤثرات التي تحفظها أو تصنعها في صفحة التصاميم.",
+    "Effekte, die du unter Designs speicherst oder erstellst, erscheinen hier."
+  ],
+  "Flashing or harmful: it could cause seizures": [
+    "وميض أو ضرر: قد يسبب نوبات صرع",
+    "Blinkend oder schädlich: Es könnte Anfälle auslösen"
+  ],
+  "I made this or hold the rights to it, it shows no real person, and I accept the <0>Creator Terms</0>.": [
+    "صنعت هذا العمل أو أملك حقوقه، ولا يظهر فيه شخص حقيقي، وأوافق على <0>شروط المصممين</0>.",
+    "Ich habe das selbst gemacht oder halte die Rechte daran, es zeigt keine echte Person, und ich akzeptiere die <0>Bedingungen für Designer</0>."
+  ],
+  "Make decorations, nameplates and effects for everyone. Designs go live with your name on them; effects go to a reviewer first, and reviewers can take down anything that breaks the rules.": [
+    "اصنع إطارات ولوحات أسماء ومؤثرات للجميع. تُنشر التصاميم باسمك، وتمر المؤثرات على مراجع أولًا، ويمكن للمراجعين إزالة كل ما يخالف القواعد.",
+    "Erstelle Rahmen, Namensschilder und Effekte für alle. Designs gehen mit deinem Namen online, Effekte prüft zuerst das Review-Team. Es kann alles entfernen, was gegen die Regeln verstößt."
+  ],
+  "Open Designs": [
+    "افتح التصاميم",
+    "Designs öffnen"
+  ],
+  "Parts made by others": [
+    "أجزاء من صنع آخرين",
+    "Teile von anderen"
+  ],
+  "Parts made with AI tools": [
+    "أجزاء مصنوعة بأدوات الذكاء الاصطناعي",
+    "Mit KI-Werkzeugen erstellte Teile"
+  ],
+  "Play again": [
+    "شغّله مرة أخرى",
+    "Noch einmal abspielen"
+  ],
+  "Report this effect": [
+    "أبلغ عن هذا المؤثر",
+    "Diesen Effekt melden"
+  ],
+  "Send for review": [
+    "أرسله للمراجعة",
+    "Zur Prüfung senden"
+  ],
+  "Some frames are too short. Each frame must show for at least 33 ms.": [
+    "بعض الإطارات قصيرة جدًا. يجب أن يظهر كل إطار 33 ملي ثانية على الأقل.",
+    "Einige Einzelbilder sind zu kurz. Jedes muss mindestens 33 ms zu sehen sein."
+  ],
+  "That effect is too big. The limit is 2 MB.": [
+    "هذا المؤثر كبير جدًا. الحد الأقصى 2 ميغابايت.",
+    "Dieser Effekt ist zu groß. Die Grenze liegt bei 2 MB."
+  ],
+  "The effects couldn't be loaded.": [
+    "تعذّر تحميل المؤثرات.",
+    "Die Effekte konnten nicht geladen werden."
+  ],
+  "The live version stays up until a reviewer approves the new one.": [
+    "تبقى النسخة المنشورة ظاهرة إلى أن يوافق مراجع على النسخة الجديدة.",
+    "Die veröffentlichte Version bleibt online, bis die neue freigegeben ist."
+  ],
+  "There's nothing to see in this file. Every frame is transparent.": [
+    "لا يوجد ما يُرى في هذا الملف، فكل إطاراته شفافة.",
+    "In dieser Datei ist nichts zu sehen. Alle Einzelbilder sind transparent."
+  ],
+  "This effect covers too much of the profile. Keep at least half of each frame transparent so text stays readable.": [
+    "يغطي هذا المؤثر جزءًا كبيرًا من الملف الشخصي. اجعل نصف كل إطار شفافًا على الأقل ليبقى النص مقروءًا.",
+    "Dieser Effekt verdeckt zu viel vom Profil. Lass mindestens die Hälfte jedes Einzelbilds transparent, damit Text lesbar bleibt."
+  ],
+  "This effect flashes too much to be safe for people with photosensitive epilepsy. Keep to 3 flashes a second or fewer, or make the flashing part smaller.": [
+    "يومض هذا المؤثر بدرجة غير آمنة للمصابين بالصرع الحساس للضوء. التزم بثلاث ومضات في الثانية أو أقل، أو صغّر الجزء الوامض.",
+    "Dieser Effekt blinkt zu stark und ist für Menschen mit fotosensitiver Epilepsie nicht sicher. Bleibe bei höchstens 3 Blitzen pro Sekunde oder verkleinere den blinkenden Teil."
+  ],
+  "This effect has too many frames. The limit is 120.": [
+    "عدد إطارات هذا المؤثر كبير جدًا. الحد الأقصى 120.",
+    "Dieser Effekt hat zu viele Einzelbilder. Die Grenze liegt bei 120."
+  ],
+  "This effect is too long. The limit is 4 seconds.": [
+    "هذا المؤثر طويل جدًا. الحد الأقصى 4 ثوانٍ.",
+    "Dieser Effekt ist zu lang. Die Grenze liegt bei 4 Sekunden."
+  ],
+  "This file couldn't be checked, so it can't be used. Export it again and try once more.": [
+    "تعذّر فحص هذا الملف، لذا لا يمكن استخدامه. صدّره من جديد وحاول مرة أخرى.",
+    "Diese Datei konnte nicht geprüft werden und kann daher nicht verwendet werden. Exportiere sie neu und versuche es noch einmal."
+  ],
+  "This file is set to repeat. Export it to play once.": [
+    "هذا الملف مضبوط على التكرار. صدّره ليُعرض مرة واحدة.",
+    "Diese Datei ist auf Wiederholung eingestellt. Exportiere sie so, dass sie einmal abläuft."
+  ],
+  "This uses a name that isn't allowed: Zrzur's own, a staff title or another brand.": [
+    "يستخدم هذا اسمًا غير مسموح به: اسم زرزور أو لقبًا وظيفيًا أو علامة تجارية أخرى.",
+    "Das verwendet einen nicht erlaubten Namen: den von Zrzur, eine Team-Bezeichnung oder eine andere Marke."
+  ],
+  "Which parts and which tool, if any": [
+    "أي الأجزاء وبأي أداة، إن وُجدت",
+    "Welche Teile und welches Werkzeug, falls zutreffend"
+  ],
+  "Who made them and under which licence, if any": [
+    "من صنعها وبأي ترخيص، إن وُجدت",
+    "Wer sie gemacht hat und unter welcher Lizenz, falls zutreffend"
+  ],
+  "Rights confirmed on {0}": [
+    "أُكّدت الحقوق في {0}",
+    "Rechte bestätigt am {0}"
+  ],
+  "Keep this readable: leave it mostly transparent": [
+    "اجعل هذا مقروءًا: اترك معظمه شفافًا",
+    "Das muss lesbar bleiben: Lass es größtenteils transparent"
+  ],
+  "4 seconds, one play, no flashing": [
+    "4 ثوانٍ، مرة واحدة، دون وميض",
+    "4 Sekunden, einmal abspielen, kein Blinken"
+  ],
+  "Use a PNG, animated PNG, GIF, WebP or WebM file.": [
+    "استخدم ملف PNG أو PNG متحركًا أو GIF أو WebP أو WebM.",
+    "Verwende eine PNG-, animierte PNG-, GIF-, WebP- oder WebM-Datei."
+  ],
+  "That WebM is too big. The limit is 8 MB.": [
+    "ملف WebM هذا كبير جدًا. الحد الأقصى 8 ميغابايت.",
+    "Diese WebM-Datei ist zu groß. Die Grenze liegt bei 8 MB."
+  ],
+  "That WebM can't be read. Export it again and try once more.": [
+    "تعذّرت قراءة ملف WebM هذا. صدّره من جديد وحاول مرة أخرى.",
+    "Diese WebM-Datei kann nicht gelesen werden. Exportiere sie neu und versuche es noch einmal."
+  ],
+  "That WebM can't be read. Use VP8 or VP9, at most {COMMUNITY_MAX_DIMENSION} px on each side, and export it again.": [
+    "تعذّرت قراءة ملف WebM هذا. استخدم VP8 أو VP9، بما لا يزيد على {COMMUNITY_MAX_DIMENSION} بكسل لكل جانب، وصدّره من جديد.",
+    "Diese WebM-Datei kann nicht gelesen werden. Verwende VP8 oder VP9, höchstens {COMMUNITY_MAX_DIMENSION} px pro Seite, und exportiere sie neu."
+  ],
+  "That WebM couldn't be turned into an image in time. Try a shorter one, or try again in a moment.": [
+    "تعذّر تحويل ملف WebM هذا إلى صورة في الوقت المحدد. جرّب ملفًا أقصر، أو حاول بعد قليل.",
+    "Diese WebM-Datei konnte nicht rechtzeitig in ein Bild umgewandelt werden. Versuche eine kürzere oder probiere es gleich noch einmal."
+  ],
+  "Templates are guides: draw on a copy, then export without the guide marks. PNG, animated PNG, GIF or WebP, up to 2.5 MB and 1024 px on each side, or a WebM of up to 8 MB. Animations play up to 12 seconds.": [
+    "القوالب للإرشاد: ارسم على نسخة، ثم صدّرها دون علامات الإرشاد. PNG أو PNG متحرك أو GIF أو WebP، حتى 2.5 ميغابايت و1024 بكسل لكل جانب، أو WebM حتى 8 ميغابايت. وتُعرض الحركات حتى 12 ثانية.",
+    "Vorlagen sind Hilfen: Zeichne auf einer Kopie und exportiere ohne die Hilfslinien. PNG, animiertes PNG, GIF oder WebP, bis 2,5 MB und 1024 px pro Seite, oder ein WebM bis 8 MB. Animationen laufen bis zu 12 Sekunden."
+  ],
+  "Effects play once, with no sound and a transparent background. Animated PNG, GIF, WebP or WebM only. Files set to repeat, files that flash, and files that cover more than half of the profile are refused automatically.": [
+    "تُعرض المؤثرات مرة واحدة، دون صوت وبخلفية شفافة. ولا تُقبل إلا بصيغة PNG متحرك أو GIF أو WebP أو WebM. وتُرفض تلقائيًا الملفات المضبوطة على التكرار، والملفات الوامضة، والملفات التي تغطي أكثر من نصف الملف الشخصي.",
+    "Effekte laufen einmal ab, ohne Ton und mit transparentem Hintergrund. Nur animiertes PNG, GIF, WebP oder WebM. Dateien mit Wiederholung, blinkende Dateien und Dateien, die mehr als die Hälfte des Profils verdecken, werden automatisch abgelehnt."
+  ],
+  "A WebM becomes an animated image when you upload it: its transparency stays, its sound is dropped, and the image must fit the limits above.": [
+    "يتحول ملف WebM إلى صورة متحركة عند رفعه: تبقى شفافيته، ويُحذف صوته، ويجب أن تلتزم الصورة بالحدود المذكورة أعلاه.",
+    "Ein WebM wird beim Hochladen zu einem animierten Bild: Die Transparenz bleibt, der Ton fällt weg, und das Bild muss in die Grenzen oben passen."
+  ],
+  "PNG, animated PNG, GIF, WebP or WebM · up to 2.5 MB, WebM 8 MB · {COMMUNITY_MAX_DIMENSION} px": [
+    "PNG أو PNG متحرك أو GIF أو WebP أو WebM · حتى 2.5 ميغابايت، وWebM حتى 8 ميغابايت · {COMMUNITY_MAX_DIMENSION} بكسل",
+    "PNG, animiertes PNG, GIF, WebP oder WebM · bis 2,5 MB, WebM 8 MB · {COMMUNITY_MAX_DIMENSION} px"
+  ]
+}

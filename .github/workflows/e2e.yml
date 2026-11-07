@@ -1,0 +1,201 @@
+name: E2E
+# Heavy: builds the backend and runs the browser suites against a real stack.
+# By hand or nightly, never on a commit. A schedule only fires from the
+# repository's default branch.
+on:
+  workflow_dispatch:
+    inputs:
+      backend_ref:
+        description: Backend branch to test against
+        default: main
+  schedule:
+    - cron: "23 1 * * *"
+permissions:
+  contents: read
+concurrency:
+  group: e2e
+  cancel-in-progress: false
+
+jobs:
+  e2e:
+    name: Browser suites, ar en de, desktop and 375 px
+    runs-on: ubuntu-latest
+    timeout-minutes: 180
+    env:
+      E2E_APP: http://localhost:31133
+      E2E_SITE: http://127.0.0.1:31133
+      E2E_API: http://127.0.0.1:14702
+      E2E_WS: ws://127.0.0.1:14703
+      MAILDEV_URL: http://127.0.0.1:14080
+      ZRZUR_DEV_ACCOUNTS: ${{ github.workspace }}/e2e-accounts.json
+    services:
+      redis:
+        image: valkey/valkey:9-alpine
+        ports: ["6379:6379"]
+      rabbit:
+        image: rabbitmq:4
+        env:
+          RABBITMQ_DEFAULT_USER: rabbituser
+          RABBITMQ_DEFAULT_PASS: rabbitpass
+        ports: ["5672:5672"]
+      mongo:
+        image: mongo:9.0.4
+        ports: ["27017:27017"]
+      maildev:
+        image: maildev/maildev:2.2.1
+        env:
+          MAILDEV_SMTP_PORT: 25
+          MAILDEV_WEB_PORT: 8080
+          MAILDEV_INCOMING_USER: smtp
+          MAILDEV_INCOMING_PASS: smtp
+        ports: ["14025:25", "14080:8080"]
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          submodules: recursive
+          persist-credentials: false
+      - uses: actions/checkout@v4
+        with:
+          repository: zrzur/backend
+          ref: ${{ inputs.backend_ref || 'main' }}
+          path: .stack/backend
+          persist-credentials: false
+
+      - name: MinIO for files
+        run: |
+          docker run -d --rm -p 127.0.0.1:14009:9000 -e MINIO_ROOT_USER=minioautumn \
+            -e MINIO_ROOT_PASSWORD=minioautumn -e MINIO_REGION=minio \
+            docker.io/pgsty/silo:RELEASE.2026-10-18T00-00-00Z server /data
+      - name: System libraries
+        run: sudo apt-get update && sudo apt-get install -y --no-install-recommends pkg-config libssl-dev libdav1d-dev
+      - uses: dtolnay/rust-toolchain@1.92.0
+      - uses: Swatinem/rust-cache@v2
+        with:
+          workspaces: .stack/backend
+      - name: Build the backend
+        working-directory: .stack/backend
+        run: cargo build --locked -p revolt-delta -p revolt-bonfire -p revolt-autumn -p revolt-january
+
+      - name: Start the backend (test values only)
+        working-directory: .stack/backend
+        run: |
+          cat > Revolt.overrides.toml <<'TOML'
+          [database]
+          mongodb = "mongodb://127.0.0.1:27017"
+          redis = "redis://127.0.0.1:6379/"
+
+          [hosts]
+          app = "http://localhost:31133"
+
+          [api.security.ratelimits]
+          auth = 600
+
+          [rabbit]
+          host = "127.0.0.1"
+
+          [api.smtp]
+          host = "127.0.0.1"
+          username = "smtp"
+          password = "smtp"
+          from_address = "development@zrzur.com"
+          reply_to = "support@zrzur.com"
+          port = 14025
+          use_tls = false
+
+          [api.sessions]
+          limit = 1000
+          TOML
+          sed -i 's/^ *//' Revolt.overrides.toml
+          export ZRZUR_CORS_ORIGINS=http://127.0.0.1:31133
+          for bin in revolt-delta revolt-bonfire revolt-autumn revolt-january; do
+            nohup "target/debug/$bin" > "$RUNNER_TEMP/$bin.log" 2>&1 &
+          done
+          for i in $(seq 1 60); do
+            curl -fsS http://127.0.0.1:14702/ > /dev/null && exit 0
+            sleep 2
+          done
+          cat "$RUNNER_TEMP/revolt-delta.log"
+          exit 1
+
+      - uses: pnpm/action-setup@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm --filter @zrzur/sdk build
+      - run: pnpm --filter solid-livekit-components build
+      - run: pnpm --filter client exec node scripts/copyAssets.mjs
+      - name: Build the app for this stack
+        working-directory: packages/client
+        env:
+          VITE_HOST: localhost:31133
+          VITE_API_URL: http://127.0.0.1:14702
+          VITE_DEV_WS_URL: ws://127.0.0.1:14703
+          VITE_DEV_MEDIA_URL: http://127.0.0.1:14704
+          VITE_DEV_PROXY_URL: http://127.0.0.1:14705
+          VITE_INVITE_ORIGIN: http://localhost:31133
+          VITE_DISCOVER_URL: http://127.0.0.1:31133
+          VITE_DESIGNS_HOST: designs.localhost
+          NODE_OPTIONS: --max-old-space-size=4096
+        run: |
+          pnpm exec lingui compile --typescript
+          pnpm exec vite build
+      - name: Serve the app
+        working-directory: packages/client
+        run: nohup pnpm exec vite preview --host 0.0.0.0 --port 31133 --strictPort > "$RUNNER_TEMP/preview.log" 2>&1 &
+      - name: Browsers
+        working-directory: packages/client
+        run: pnpm exec playwright install --with-deps chromium
+      - name: Test accounts for this run
+        working-directory: packages/client
+        run: node e2e/ci-seed.mjs
+
+      - name: Discover, all languages and sizes
+        working-directory: packages/client
+        env:
+          PLAYWRIGHT_BASE_URL: http://localhost:31133
+        run: >-
+          pnpm exec playwright test --project=chromium --reporter=line,github
+          e2e/discover-journey.spec.ts e2e/discover-parity.spec.ts e2e/discover-ad-label.spec.ts
+      - name: Discover by keyboard, all languages and sizes
+        if: ${{ !cancelled() }}
+        working-directory: packages/client
+        run: node e2e/discover-keyboard.mjs
+
+      # Suites needing billing, LiveKit or private URLs wait until this stack has them.
+      - name: Server, privacy, lobby and bot surfaces
+        if: ${{ !cancelled() }}
+        working-directory: packages/client
+        run: rc=0; for s in category-check privacy-e2e lobby-functional bot-surface-e2e; do node e2e/$s.mjs || rc=1; done; exit $rc
+      - name: Bot buttons, selects and embeds, all languages
+        if: ${{ !cancelled() }}
+        working-directory: packages/client
+        run: rc=0; for l in ar en de; do for s in buttons-e2e selects-e2e embeds-e2e; do LOCALE=$l node e2e/$s.mjs || rc=1; done; done; exit $rc
+      - name: Paging, interactions, builders and member permissions, all languages and sizes
+        if: ${{ !cancelled() }}
+        working-directory: packages/client
+        run: rc=0; for l in ar en de; do for p in "" 1; do for s in paging-e2e interactions-matrix builders-e2e member-perms-ui; do LOCALE=$l PHONE=$p node e2e/$s.mjs || rc=1; done; done; done; exit $rc
+      - name: Webhooks
+        if: ${{ !cancelled() }}
+        working-directory: packages/client
+        run: node e2e/webhooks-ui.mjs
+      - name: Phone layout
+        if: ${{ !cancelled() }}
+        working-directory: packages/client
+        run: node e2e/mobile-polish.mjs
+      - name: Sign-in flows
+        if: ${{ !cancelled() }}
+        working-directory: packages/client
+        run: node e2e/auth-flows.mjs
+
+      - name: Keep the report and the logs
+        if: ${{ !cancelled() }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: e2e-results
+          retention-days: 7
+          path: |
+            packages/client/playwright-report
+            packages/client/test-results
+            ${{ runner.temp }}/*.log

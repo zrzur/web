@@ -1,0 +1,30 @@
+{
+  "$schema": "../../schema/plugin-manifest.v1.schema.json",
+  "manifest_version": 1,
+  "id": "zrzur.word-count",
+  "name": "Word Count",
+  "version": "1.0.0",
+  "description": "Counts the words in a message you pick. A small example of a sandboxed worker plugin.",
+  "author": { "name": "Zrzur" },
+  "category": "developer",
+  "icon": "list-numbers",
+  "api_version": 1,
+  "min_app_version": "26.0.0",
+  "platforms": ["web", "pwa", "desktop"],
+  "entrypoint": { "type": "worker", "file": "main.js" },
+  "permissions": ["context.message.selected", "notifications.show", "ui.commands", "ui.panels"],
+  "contributes": {
+    "message_actions": [
+      { "id": "count", "title": { "en": "Count words", "ar": "عدّ الكلمات" }, "handler": "count" }
+    ],
+    "commands": [
+      { "id": "stats", "title": { "en": "Show word count stats", "ar": "عرض إحصاءات العدّ" }, "action": { "type": "worker", "handler": "stats" } }
+    ]
+  },
+  "locales": {
+    "ar": {
+      "name": "عدّاد الكلمات",
+      "description": "يعدّ كلمات رسالة تختارها. مثال صغير على إضافة تعمل داخل بيئة معزولة."
+    }
+  }
+}

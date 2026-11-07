@@ -1,0 +1,71 @@
+{
+  "{0} of {1} done": ["أُنجز {0} من {1}", "{0} von {1} erledigt"],
+  "Add a profile picture": ["أضف صورة شخصية", "Profilbild hinzufügen"],
+  "Answers to what new members ask most.": [
+    "أجوبة عمّا يسأل عنه الأعضاء الجدد أكثر شيء.",
+    "Antworten auf das, was neue Mitglieder am meisten fragen."
+  ],
+  "Automatic": ["تلقائي", "Automatisch"],
+  "Choose what the lobby shows and in which order. Sections with nothing to show stay hidden by themselves.": [
+    "اختر ما تعرضه الردهة وبأي ترتيب. الأقسام التي ليس فيها شيء تختفي تلقائياً.",
+    "Wähle, was die Lobby zeigt und in welcher Reihenfolge. Abschnitte ohne Inhalt bleiben von selbst ausgeblendet."
+  ],
+  "Drop into a voice room": ["ادخل غرفة صوتية", "Schau in einen Sprachraum"],
+  "Edit lobby": ["تعديل الردهة", "Lobby bearbeiten"],
+  "Hello channel": ["قناة الترحيب", "Hallo-Kanal"],
+  "Its newest message is the latest news. Empty: your first announcement channel.": [
+    "أحدث رسالة فيها هي آخر الأخبار. إن تُركت فارغة: أول قناة إعلانات لديك.",
+    "Ihre neueste Nachricht sind die letzten Neuigkeiten. Leer: dein erster Ankündigungskanal."
+  ],
+  "Latest news": ["آخر الأخبار", "Neuigkeiten"],
+  "Move down": ["نقل للأسفل", "Nach unten"],
+  "News channel": ["قناة الأخبار", "Nachrichtenkanal"],
+  "Opens": ["يفتح", "Öffnet"],
+  "Question {0}": ["السؤال {0}", "Frage {0}"],
+  "Read in #{0}": ["اقرأ في #{0}", "In #{0} lesen"],
+  "Say hello in #{0}": ["قل مرحباً في #{0}", "Sag Hallo in #{0}"],
+  "Sections": ["الأقسام", "Abschnitte"],
+  "Start here": ["ابدأ من هنا", "Hier anfangen"],
+  "Steps for new members that tick themselves off.": [
+    "خطوات للأعضاء الجدد تُعلَّم تلقائياً عند إنجازها.",
+    "Schritte für neue Mitglieder, die sich selbst abhaken."
+  ],
+  "The first page of your server: what it is about, what to do first and who runs it.": [
+    "الصفحة الأولى في سيرفرك: عمّ يدور، وماذا يفعل العضو أولاً، ومن يديره.",
+    "Die erste Seite deines Servers: worum es geht, was man zuerst tut und wer ihn leitet."
+  ],
+  "The newest message of your announcements.": [
+    "أحدث رسالة في إعلاناتك.",
+    "Die neueste Nachricht deiner Ankündigungen."
+  ],
+  "The owner and the roles you pick.": [
+    "المالك والرتب التي تختارها.",
+    "Der Eigentümer und die Rollen, die du wählst."
+  ],
+  "Voice rooms with people in them.": [
+    "الغرف الصوتية التي فيها أشخاص.",
+    "Sprachräume, in denen gerade Leute sind."
+  ],
+  "Welcome back, {0}. Member since {1}.": [
+    "أهلاً بعودتك يا {0}. عضو منذ {1}.",
+    "Willkommen zurück, {0}. Mitglied seit {1}."
+  ],
+  "Welcome them in #{0}": ["رحّب بهم في #{0}", "Begrüße sie in #{0}"],
+  "Welcome, {0}! Glad you are here.": [
+    "أهلاً بك يا {0}! يسعدنا وجودك هنا.",
+    "Willkommen, {0}! Schön, dass du da bist."
+  ],
+  "Where new members say hello. Empty: the first button.": [
+    "حيث يلقي الأعضاء الجدد التحية. إن تُركت فارغة: أول زر.",
+    "Wo neue Mitglieder Hallo sagen. Leer: die erste Schaltfläche."
+  ],
+  "Where to talk, with how busy each one is.": [
+    "أين تتحدث، ومدى نشاط كل قناة.",
+    "Wo geredet wird und wie viel dort los ist."
+  ],
+  "Who joined in the last seven days.": [
+    "من انضم في الأيام السبعة الأخيرة.",
+    "Wer in den letzten sieben Tagen beigetreten ist."
+  ],
+  "Your welcome text.": ["نص الترحيب الخاص بك.", "Dein Begrüßungstext."]
+}

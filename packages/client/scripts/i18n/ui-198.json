@@ -1,0 +1,86 @@
+{
+  "Another server already uses this link name.": [
+    "يستخدم سيرفر آخر اسم الرابط هذا.",
+    "Ein anderer Server nutzt diesen Linknamen bereits."
+  ],
+  "Claim link": [
+    "احجز الرابط",
+    "Link sichern"
+  ],
+  "Custom invite link": [
+    "رابط دعوة مخصص",
+    "Eigener Einladungslink"
+  ],
+  "Custom invite link zrzur.cc/your-name": [
+    "رابط دعوة مخصص zrzur.cc/your-name",
+    "Eigener Einladungslink zrzur.cc/dein-name"
+  ],
+  "Ending soon": [
+    "ينتهي قريبًا",
+    "Endet bald"
+  ],
+  "First channel everyone can read": [
+    "أول قناة يستطيع الجميع قراءتها",
+    "Erster Kanal, den alle lesen können"
+  ],
+  "Letters, numbers and single hyphens. 3–32 characters.": [
+    "أحرف وأرقام وشرطات مفردة، من 3 إلى 32 حرفًا.",
+    "Buchstaben, Zahlen und einzelne Bindestriche. 3–32 Zeichen."
+  ],
+  "Link name": [
+    "اسم الرابط",
+    "Linkname"
+  ],
+  "New members land in": [
+    "يصل الأعضاء الجدد إلى",
+    "Neue Mitglieder landen in"
+  ],
+  "One short, memorable link for your server, like zrzur.cc/your-name. Unlocked at Wings level {0}.": [
+    "رابط واحد قصير يسهل تذكره لسيرفرك، مثل zrzur.cc/your-name. يُفتح عند مستوى الأجنحة {0}.",
+    "Ein kurzer Link, den man sich merkt, z. B. zrzur.cc/dein-name. Freigeschaltet ab Flügel-Stufe {0}."
+  ],
+  "Paused": [
+    "متوقف مؤقتًا",
+    "Pausiert"
+  ],
+  "Press again to remove": [
+    "اضغط مرة أخرى للإزالة",
+    "Zum Entfernen erneut drücken"
+  ],
+  "Reach level {0} to unlock ({1} Wings)": [
+    "بلّغ المستوى {0} لفتحه ({1} من الأجنحة)",
+    "Erreiche Stufe {0} zum Freischalten ({1} Flügel)"
+  ],
+  "See levels": [
+    "عرض المستويات",
+    "Stufen ansehen"
+  ],
+  "The link is paused. The name stays yours until {0}. Reach level {1} again to turn it back on.": [
+    "الرابط متوقف مؤقتًا. يبقى الاسم لك حتى {0}. بلّغ المستوى {1} مجددًا لتشغيله.",
+    "Der Link ist pausiert. Der Name bleibt bis {0} reserviert. Erreiche wieder Stufe {1}, um ihn einzuschalten."
+  ],
+  "This invite link is paused right now.": [
+    "رابط الدعوة هذا متوقف مؤقتًا الآن.",
+    "Dieser Einladungslink ist gerade pausiert."
+  ],
+  "This server is at level {0} with {1} Wings.": [
+    "هذا السيرفر في المستوى {0} ولديه {1} من الأجنحة.",
+    "Dieser Server ist auf Stufe {0} mit {1} Flügeln."
+  ],
+  "This server is below level {0}. The link keeps working until {1}, then pauses.": [
+    "هذا السيرفر دون المستوى {0}. يبقى الرابط يعمل حتى {1}، ثم يتوقف مؤقتًا.",
+    "Dieser Server ist unter Stufe {0}. Der Link funktioniert bis {1} und pausiert dann."
+  ],
+  "This server needs a higher Wings level for a custom link.": [
+    "يحتاج هذا السيرفر إلى مستوى أجنحة أعلى للحصول على رابط مخصص.",
+    "Dieser Server braucht eine höhere Flügel-Stufe für einen eigenen Link."
+  ],
+  "Use 3–32 letters, numbers or single hyphens.": [
+    "استخدم من 3 إلى 32 حرفًا أو رقمًا أو شرطة مفردة.",
+    "Nutze 3–32 Buchstaben, Zahlen oder einzelne Bindestriche."
+  ],
+  "Use 3–32 letters, numbers or single hyphens. Some names are reserved.": [
+    "استخدم من 3 إلى 32 حرفًا أو رقمًا أو شرطة مفردة. بعض الأسماء محجوزة.",
+    "Nutze 3–32 Buchstaben, Zahlen oder einzelne Bindestriche. Manche Namen sind reserviert."
+  ]
+}

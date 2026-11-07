@@ -1,0 +1,51 @@
+{
+  "$schema": "../../schema/plugin-manifest.v1.schema.json",
+  "manifest_version": 1,
+  "id": "nightowl.night-owl",
+  "name": "Night Owl",
+  "version": "1.0.0",
+  "description": "A deep night-blue theme that turns on quiet hours automatically while you sleep, so late messages don't wake you.",
+  "author": { "name": "Night Owl Studio" },
+  "category": "notifications",
+  "icon": "moon",
+  "api_version": 1,
+  "min_app_version": "26.0.0",
+  "platforms": ["web", "pwa", "desktop"],
+  "entrypoint": { "type": "declarative" },
+  "permissions": ["theme.colors", "notifications.display", "notifications.show", "storage.settings", "ui.commands"],
+  "contributes": {
+    "settings": [
+      { "key": "sleep", "type": "time", "title": { "en": "Bedtime", "ar": "وقت النوم", "de": "Schlafenszeit" }, "default": "23:00" },
+      { "key": "wake", "type": "time", "title": { "en": "Wake up", "ar": "وقت الاستيقاظ", "de": "Aufstehen" }, "default": "07:00" },
+      { "key": "quiet", "type": "boolean", "title": { "en": "Quiet at night", "ar": "هدوء ليلاً", "de": "Nachts still" }, "default": true }
+    ],
+    "theme": {
+      "colors": {
+        "primary": "#8fa8ff",
+        "on-primary": "#0a0f2c",
+        "background": "#070a1f",
+        "on-background": "#e4e8ff",
+        "surface": "#0b1028",
+        "on-surface": "#e4e8ff",
+        "surface-container-low": "#0f1531",
+        "surface-container-high": "#161d3d",
+        "surface-container-highest": "#1c2447",
+        "on-surface-variant": "#b4bce6",
+        "surface-variant": "#161d3d",
+        "outline-variant": "#262f57"
+      }
+    },
+    "notifications": {
+      "quiet_hours": { "start": "$setting:sleep", "end": "$setting:wake" },
+      "quiet_hours_enabled": "$setting:quiet"
+    },
+    "commands": [
+      { "id": "theme", "title": { "en": "Turn the night colours on or off", "ar": "تشغيل ألوان الليل أو إيقافها", "de": "Nachtfarben ein- oder ausschalten" }, "action": { "type": "theme.toggle" } },
+      { "id": "goodnight", "title": { "en": "Say good night", "ar": "قل تصبح على خير", "de": "Gute Nacht sagen" }, "action": { "type": "notify", "text": { "en": "Good night! Quiet hours keep late messages silent.", "ar": "تصبح على خير! ساعات الهدوء تُبقي الرسائل المتأخرة صامتة.", "de": "Gute Nacht! Die Ruhezeit hält späte Nachrichten still." } } }
+    ]
+  },
+  "locales": {
+    "ar": { "name": "بومة الليل", "description": "سمة زرقاء ليلية عميقة تشغّل ساعات الهدوء تلقائياً أثناء نومك، فلا توقظك الرسائل المتأخرة." },
+    "de": { "name": "Nachteule", "description": "Ein tiefes Nachtblau-Design, das Ruhezeiten automatisch einschaltet, während du schläfst, damit späte Nachrichten dich nicht wecken." }
+  }
+}

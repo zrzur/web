@@ -1,0 +1,42 @@
+{
+  "Designs you publish go live right away, free for everyone and with your name on them. Reviewers can still take a design down if it breaks the rules.": [
+    "التصاميم التي تنشرها تظهر للجميع فورًا، مجانًا وباسمك. ويبقى بإمكان المراجعين إزالة أي تصميم يخالف القواعد.",
+    "Was du veröffentlichst, ist sofort live, kostenlos für alle und mit deinem Namen. Prüfer können ein Design trotzdem entfernen, wenn es gegen die Regeln verstößt."
+  ],
+  "Publish": ["نشر", "Veröffentlichen"],
+  "Publishing…": ["جارٍ النشر…", "Wird veröffentlicht…"],
+  "New design": ["تصميم جديد", "Neues Design"],
+  "Publishing replaces the live version straight away, also for people wearing it. Save a draft to keep working on it first.": [
+    "النشر يستبدل النسخة الحالية فورًا، حتى لدى من يستخدمها. احفظه كمسودة إذا أردت متابعة العمل عليه أولًا.",
+    "Veröffentlichen ersetzt die Live-Version sofort, auch bei allen, die sie tragen. Speichere einen Entwurf, wenn du erst weiterarbeiten willst."
+  ],
+  "Only publish work you made or have the right to share. It is public as soon as you publish it.": [
+    "انشر فقط ما صممته بنفسك أو ما يحق لك مشاركته. يصبح التصميم عامًا لحظة نشره.",
+    "Veröffentliche nur, was du selbst gemacht hast oder teilen darfst. Es ist sofort öffentlich."
+  ],
+  "Published by the creator": ["نشره المصمم", "Vom Designer veröffentlicht"],
+  "Creators publish directly. Check what people report and take down anything that breaks the rules, with a clear reason for the creator.": [
+    "المصممون ينشرون مباشرة. راجع البلاغات وأزل ما يخالف القواعد، مع سبب واضح للمصمم.",
+    "Designer veröffentlichen direkt. Prüf Meldungen und entferne, was gegen die Regeln verstößt, mit einem klaren Grund für den Designer."
+  ],
+  "Every design here is made by a verified Zrzur creator. Wearing them is free.": [
+    "كل تصميم هنا من صنع مصمم معتمد في زرزور. واستخدامه مجاني.",
+    "Jedes Design hier stammt von einem verifizierten Zrzur-Designer. Tragen ist kostenlos."
+  ],
+  "Designs appear here as soon as a creator publishes one.": [
+    "تظهر التصاميم هنا فور أن ينشرها مصمم.",
+    "Designs erscheinen hier, sobald ein Designer eins veröffentlicht."
+  ],
+  "Decorations and nameplates made by Zrzur's verified creators.": [
+    "إطارات ولوحات أسماء من صنع مصممي زرزور المعتمدين.",
+    "Avatar-Rahmen und Namensschilder von Zrzurs verifizierten Designern."
+  ],
+  "Publish your designs and manage the ones you made.": [
+    "انشر تصاميمك وأدِر ما صممته.",
+    "Veröffentliche deine Designs und verwalte, was du gemacht hast."
+  ],
+  "Check reported designs and take down what breaks the rules.": [
+    "راجع التصاميم المُبلَّغ عنها وأزل ما يخالف القواعد.",
+    "Prüf gemeldete Designs und entferne, was gegen die Regeln verstößt."
+  ]
+}

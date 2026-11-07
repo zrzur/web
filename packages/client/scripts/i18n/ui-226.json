@@ -1,0 +1,26 @@
+{
+  "Your new token": [
+    "الرمز الجديد",
+    "Dein neuer Token"
+  ],
+  "Copy it now and keep it secret. Zrzur can't show it again.": [
+    "انسخه الآن واحفظه سرًا، فلن يستطيع زرزور عرضه مرة أخرى.",
+    "Kopiere ihn jetzt und halte ihn geheim. Zrzur kann ihn nicht noch einmal anzeigen."
+  ],
+  "Zrzur keeps only a fingerprint of it, so it can't be shown again. Reset it to get a new one.": [
+    "يحتفظ زرزور ببصمته فقط، لذا لا يمكن عرضه مرة أخرى. أعد تعيينه للحصول على رمز جديد.",
+    "Zrzur speichert nur einen Fingerabdruck davon und kann ihn nicht erneut anzeigen. Setze ihn zurück, um einen neuen zu bekommen."
+  ],
+  "Copy it now. It won't be shown again.": [
+    "انسخه الآن، فلن يُعرض مرة أخرى.",
+    "Kopiere ihn jetzt. Er wird nicht noch einmal angezeigt."
+  ],
+  "Copy token": [
+    "نسخ الرمز",
+    "Token kopieren"
+  ],
+  "Done": [
+    "تم",
+    "Fertig"
+  ]
+}

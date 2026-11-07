@@ -1,0 +1,44 @@
+{
+  "$schema": "../../schema/plugin-manifest.v1.schema.json",
+  "manifest_version": 1,
+  "id": "zrzur.quiet-hours",
+  "name": "Quiet Hours",
+  "version": "1.0.0",
+  "description": "No notification sounds or pop-ups during the hours you choose, and optional hidden message previews.",
+  "author": { "name": "Zrzur" },
+  "category": "notifications",
+  "icon": "bell-slash",
+  "api_version": 1,
+  "min_app_version": "26.0.0",
+  "platforms": ["web", "pwa", "desktop"],
+  "entrypoint": { "type": "declarative" },
+  "permissions": ["notifications.display", "notifications.show", "storage.settings", "ui.commands"],
+  "contributes": {
+    "settings": [
+      { "key": "enabled", "type": "boolean", "title": { "en": "Use quiet hours", "ar": "استخدام ساعات الهدوء" }, "default": true },
+      { "key": "start", "type": "time", "title": { "en": "Starts at", "ar": "تبدأ عند" }, "default": "22:00" },
+      { "key": "end", "type": "time", "title": { "en": "Ends at", "ar": "تنتهي عند" }, "default": "07:00" },
+      { "key": "hide_previews", "type": "boolean", "title": { "en": "Hide message previews", "ar": "إخفاء معاينة الرسائل" }, "description": { "en": "Notifications say “New message” instead of the text.", "ar": "تظهر الإشعارات «رسالة جديدة» بدل النص." }, "default": false },
+      { "key": "mute_sound", "type": "boolean", "title": { "en": "Mute the notification sound", "ar": "كتم صوت الإشعار" }, "default": false }
+    ],
+    "notifications": {
+      "quiet_hours": { "start": "$setting:start", "end": "$setting:end" },
+      "quiet_hours_enabled": "$setting:enabled",
+      "hide_previews": "$setting:hide_previews",
+      "mute_sound": "$setting:mute_sound"
+    },
+    "commands": [
+      {
+        "id": "test",
+        "title": { "en": "Show a test notice", "ar": "عرض تنبيه تجريبي" },
+        "action": { "type": "notify", "text": { "en": "Quiet Hours is on.", "ar": "ساعات الهدوء تعمل." } }
+      }
+    ]
+  },
+  "locales": {
+    "ar": {
+      "name": "ساعات الهدوء",
+      "description": "لا أصوات ولا نوافذ إشعارات خلال الساعات التي تختارها، مع إمكانية إخفاء معاينة الرسائل."
+    }
+  }
+}

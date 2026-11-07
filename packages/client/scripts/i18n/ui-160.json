@@ -1,0 +1,274 @@
+{
+  "Page not found": [
+    "الصفحة غير موجودة",
+    "Seite nicht gefunden"
+  ],
+  "Go to the overview": [
+    "انتقل إلى النظرة العامة",
+    "Zur Übersicht"
+  ],
+  "Getting started": [
+    "البداية",
+    "Erste Schritte"
+  ],
+  "Authentication": [
+    "المصادقة",
+    "Authentifizierung"
+  ],
+  "Gateway and events": [
+    "البوابة والأحداث",
+    "Gateway und Ereignisse"
+  ],
+  "Commands and interactions": [
+    "الأوامر والتفاعلات",
+    "Befehle und Interaktionen"
+  ],
+  "Channels and webhooks": [
+    "القنوات والويب هوك",
+    "Kanäle und Webhooks"
+  ],
+  "Users and members": [
+    "المستخدمون والأعضاء",
+    "Nutzer und Mitglieder"
+  ],
+  "Roles and permissions": [
+    "الأدوار والصلاحيات",
+    "Rollen und Berechtigungen"
+  ],
+  "Errors and rate limits": [
+    "الأخطاء وحدود المعدّل",
+    "Fehler und Ratenlimits"
+  ],
+  "Hello World": [
+    "مرحبًا بالعالم",
+    "Hallo Welt"
+  ],
+  "Slash commands": [
+    "أوامر الشرطة المائلة",
+    "Slash-Befehle"
+  ],
+  "Events": [
+    "الأحداث",
+    "Ereignisse"
+  ],
+  "Moderation bot": [
+    "بوت الإشراف",
+    "Moderations-Bot"
+  ],
+  "Welcome messages": [
+    "رسائل الترحيب",
+    "Willkommensnachrichten"
+  ],
+  "Games with buttons": [
+    "ألعاب بالأزرار",
+    "Spiele mit Schaltflächen"
+  ],
+  "Many servers": [
+    "سيرفرات متعددة",
+    "Viele Server"
+  ],
+  "File upload": [
+    "رفع الملفات",
+    "Datei-Upload"
+  ],
+  "Voice bot": [
+    "بوت صوتي",
+    "Sprach-Bot"
+  ],
+  "Deployment": [
+    "النشر",
+    "Bereitstellung"
+  ],
+  "SDKs": [
+    "حزم التطوير",
+    "SDKs"
+  ],
+  "Status and coverage": [
+    "الحالة والتغطية",
+    "Status und Abdeckung"
+  ],
+  "Guides and reference": [
+    "الأدلة والمرجع",
+    "Anleitungen und Referenz"
+  ],
+  "Tutorials": [
+    "دروس تطبيقية",
+    "Tutorials"
+  ],
+  "Page": [
+    "صفحة",
+    "Seite"
+  ],
+  "Section": [
+    "قسم",
+    "Abschnitt"
+  ],
+  "Endpoint": [
+    "نقطة نهاية",
+    "Endpunkt"
+  ],
+  "Event": [
+    "حدث",
+    "Ereignis"
+  ],
+  "Documentation": [
+    "التوثيق",
+    "Dokumentation"
+  ],
+  "Search the documentation": [
+    "ابحث في التوثيق",
+    "Dokumentation durchsuchen"
+  ],
+  "Search pages, endpoints, events": [
+    "ابحث في الصفحات ونقاط النهاية والأحداث",
+    "Seiten, Endpunkte, Ereignisse suchen"
+  ],
+  "Nothing found.": [
+    "لم يُعثر على شيء.",
+    "Nichts gefunden."
+  ],
+  "Close contents": [
+    "أغلق المحتويات",
+    "Inhalt schließen"
+  ],
+  "Contents": [
+    "المحتويات",
+    "Inhalt"
+  ],
+  "In about ten minutes you will have a bot that answers a slash command in your own test server.": [
+    "خلال نحو عشر دقائق سيكون لديك بوت يجيب عن أمر بالشرطة المائلة في سيرفر الاختبار الخاص بك.",
+    "In etwa zehn Minuten hast du einen Bot, der in deinem eigenen Testserver auf einen Slash-Befehl antwortet."
+  ],
+  "1. Create an application": [
+    "1. أنشئ تطبيقًا",
+    "1. Erstelle eine Anwendung"
+  ],
+  "In the Developer Portal, choose New application and give it a name. The application comes with a bot account.": [
+    "في بوابة المطورين، اختر «تطبيق جديد» وأعطه اسمًا. يأتي التطبيق مع حساب بوت.",
+    "Wähle im Entwicklerportal „Neue Anwendung“ und gib ihr einen Namen. Zur Anwendung gehört ein Bot-Konto."
+  ],
+  "Open My applications": [
+    "افتح تطبيقاتي",
+    "Meine Anwendungen öffnen"
+  ],
+  "2. Copy the token": [
+    "2. انسخ الرمز",
+    "2. Kopiere das Token"
+  ],
+  "Open the bot's settings and copy its token. Whoever has the token controls the bot.": [
+    "افتح إعدادات البوت وانسخ رمزه. من يملك الرمز يتحكم في البوت.",
+    "Öffne die Einstellungen des Bots und kopiere sein Token. Wer das Token hat, steuert den Bot."
+  ],
+  "Keep the token in an environment variable or a secret store. Never put it in code, in a repository or in a screenshot. If it leaks, reset it at once.": [
+    "احفظ الرمز في متغير بيئة أو في مخزن أسرار. لا تضعه أبدًا في الشيفرة أو في مستودع أو في لقطة شاشة. وإذا تسرّب، فأعد تعيينه فورًا.",
+    "Bewahre das Token in einer Umgebungsvariable oder einem Secret-Speicher auf. Schreib es nie in Code, in ein Repository oder auf einen Screenshot. Wenn es bekannt wird, setze es sofort zurück."
+  ],
+  "3. Install the bot in a test server": [
+    "3. ثبّت البوت في سيرفر اختبار",
+    "3. Installiere den Bot in einem Testserver"
+  ],
+  "Open the OAuth2 tab of your application, choose the permissions the bot needs and open the install link. Pick a server where you have Manage Server.": [
+    "افتح تبويب OAuth2 في تطبيقك، واختر الصلاحيات التي يحتاجها البوت، ثم افتح رابط التثبيت. اختر سيرفرًا تملك فيه صلاحية «إدارة السيرفر».",
+    "Öffne den Tab OAuth2 deiner Anwendung, wähle die Berechtigungen, die der Bot braucht, und öffne den Installationslink. Wähle einen Server, auf dem du „Server verwalten“ hast."
+  ],
+  "4. Get the SDK": [
+    "4. احصل على حزمة التطوير",
+    "4. Hol dir das SDK"
+  ],
+  "You need Node.js 22 or newer. The zrzur-bot SDK handles the gateway, commands and replies for you. You can also work without any library: the API is plain HTTP and WebSocket.": [
+    "تحتاج إلى Node.js 22 أو أحدث. تتولى حزمة zrzur-bot البوابة والأوامر والردود عنك. ويمكنك أيضًا العمل دون أي مكتبة، فالواجهة البرمجية مجرد HTTP وWebSocket.",
+    "Du brauchst Node.js 22 oder neuer. Das SDK zrzur-bot übernimmt Gateway, Befehle und Antworten für dich. Es geht auch ohne Bibliothek: Die API ist reines HTTP und WebSocket."
+  ],
+  "About the SDKs": [
+    "عن حزم التطوير",
+    "Über die SDKs"
+  ],
+  "5. Write your first bot": [
+    "5. اكتب بوتك الأول",
+    "5. Schreib deinen ersten Bot"
+  ],
+  "Save this as hello.mjs. It registers /hello and answers it.": [
+    "احفظ هذا باسم hello.mjs. فهو يسجّل الأمر ‎/hello ويجيب عنه.",
+    "Speichere das als hello.mjs. Es registriert /hello und beantwortet den Befehl."
+  ],
+  "6. Run it": [
+    "6. شغّله",
+    "6. Starte ihn"
+  ],
+  "Set the token and the server addresses, then start the bot:": [
+    "اضبط الرمز وعناوين السيرفر، ثم شغّل البوت:",
+    "Setze das Token und die Serveradressen und starte dann den Bot:"
+  ],
+  "When the terminal shows ready, type /hello in a channel of your test server.": [
+    "عندما تظهر كلمة ready في الطرفية، اكتب ‎/hello في قناة من قنوات سيرفر الاختبار.",
+    "Sobald das Terminal ready anzeigt, tippe /hello in einem Kanal deines Testservers."
+  ],
+  "7. Receive events": [
+    "7. استقبل الأحداث",
+    "7. Empfange Ereignisse"
+  ],
+  "The bot keeps a WebSocket connection to the gateway. Commands, button clicks, new messages and member changes arrive there as events.": [
+    "يحافظ البوت على اتصال WebSocket بالبوابة. وتصل عبره الأوامر ونقرات الأزرار والرسائل الجديدة وتغييرات الأعضاء على شكل أحداث.",
+    "Der Bot hält eine WebSocket-Verbindung zum Gateway. Befehle, Klicks auf Schaltflächen, neue Nachrichten und Änderungen an Mitgliedern kommen dort als Ereignisse an."
+  ],
+  "8. Deploy": [
+    "8. انشر البوت",
+    "8. Bereitstellen"
+  ],
+  "Run the bot on a server that stays on, with the token in its secret store, a health check and automatic restarts.": [
+    "شغّل البوت على سيرفر يعمل باستمرار، مع حفظ الرمز في مخزن الأسرار، وفحص للحالة، وإعادة تشغيل تلقائية.",
+    "Betreibe den Bot auf einem Server, der durchläuft, mit dem Token im Secret-Speicher, einem Health-Check und automatischen Neustarts."
+  ],
+  "Deployment tutorial": [
+    "درس النشر",
+    "Tutorial zur Bereitstellung"
+  ],
+  "Next steps": [
+    "الخطوات التالية",
+    "Nächste Schritte"
+  ],
+  "Slash commands with options": [
+    "أوامر الشرطة المائلة مع خيارات",
+    "Slash-Befehle mit Optionen"
+  ],
+  "Buttons, menus and forms": [
+    "الأزرار والقوائم والنماذج",
+    "Schaltflächen, Menüs und Formulare"
+  ],
+  "The guides and the API reference are in English.": [
+    "الأدلة ومرجع الواجهة البرمجية باللغة الإنجليزية.",
+    "Die Anleitungen und die API-Referenz sind auf Englisch."
+  ],
+  "Copy code": [
+    "انسخ الشيفرة",
+    "Code kopieren"
+  ],
+  "Read the documentation": [
+    "اقرأ التوثيق",
+    "Dokumentation lesen"
+  ],
+  "Voice calls": [
+    "المكالمات الصوتية",
+    "Sprachanrufe"
+  ],
+  "Open your application's Overview tab and copy its token. Whoever has the token controls the bot.": [
+    "افتح تبويب «نظرة عامة» في تطبيقك وانسخ رمز البوت. من يملك الرمز يتحكم في البوت.",
+    "Öffne den Tab „Übersicht“ deiner Anwendung und kopiere das Token. Wer das Token hat, steuert den Bot."
+  ],
+  "How commands work": [
+    "كيف تعمل الأوامر",
+    "So funktionieren Befehle"
+  ],
+  "How OAuth2 sign-in works": [
+    "كيف يعمل تسجيل الدخول عبر OAuth2",
+    "So funktioniert die Anmeldung mit OAuth2"
+  ],
+  "Guides, tutorials and the full Bot API reference.": [
+    "أدلة ودروس تطبيقية والمرجع الكامل لواجهة البوتات البرمجية.",
+    "Anleitungen, Tutorials und die vollständige Referenz der Bot-API."
+  ],
+  "No applications yet. Create one to get a bot account and its token.": [
+    "لا توجد تطبيقات بعد. أنشئ تطبيقًا لتحصل على حساب بوت ورمزه.",
+    "Noch keine Anwendungen. Erstelle eine, um ein Bot-Konto und sein Token zu bekommen."
+  ]
+}

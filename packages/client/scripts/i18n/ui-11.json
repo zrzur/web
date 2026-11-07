@@ -1,0 +1,17 @@
+{
+  "{0}p{1} streams": ["بث {0}p{1}", "Streams in {0}p{1}"],
+  "Everything you need to chat is free. Plus is the big files, the sharp streams, the longer messages and the badge, and it helps keep Zrzur running for everyone.": [
+    "كل ما تحتاجه للدردشة مجاني. بلس يعني الملفات الكبيرة، والبث الواضح، والرسائل الأطول، والشارة، ويساعد في إبقاء زرزور شغّالاً للجميع.",
+    "Alles zum Chatten ist kostenlos. Plus bringt die großen Dateien, die scharfen Streams, längere Nachrichten und das Abzeichen, und hilft, Zrzur für alle am Laufen zu halten."
+  ],
+  "Feather gift for {name}, {0} months": [
+    "هدية ريشة لـ {name}، {0} أشهر",
+    "Feather-Geschenk für {name}, {0} Monate"
+  ],
+  "With Feather": ["مع ريشة", "Mit Feather"],
+  "Zrzur Feather, monthly renewal": [
+    "ريشة زرزور، تجديد شهري",
+    "Zrzur Feather, monatliche Verlängerung"
+  ],
+  "Payment received": ["تم الدفع", "Bezahlt"]
+}

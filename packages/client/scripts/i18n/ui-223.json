@@ -1,0 +1,3 @@
+{
+  "{0, plural, one {# install.} other {# installs.}}": ["{0, plural, zero {لا تثبيتات بعد.} one {تثبيت واحد.} two {تثبيتان.} few {# تثبيتات.} many {# تثبيتًا.} other {# تثبيت.}}", "{0, plural, one {# Installation.} other {# Installationen.}}"]
+}

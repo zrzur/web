@@ -1,0 +1,113 @@
+{
+  "General": ["عام", "Allgemein"],
+  "Overview": ["نظرة عامة", "Übersicht"],
+  "How the server looks, how people find and join it, and its main switches.": [
+    "شكل السيرفر، وكيف يجده الناس وينضمون إليه، ومفاتيحه الرئيسية.",
+    "Wie der Server aussieht, wie Leute ihn finden und beitreten, und seine wichtigsten Schalter."
+  ],
+  "The channels and their categories.": [
+    "القنوات وفئاتها.",
+    "Die Kanäle und ihre Kategorien."
+  ],
+  "Community": ["المجتمع", "Community"],
+  "Joining & onboarding": ["الانضمام والترحيب", "Beitritt & Willkommen"],
+  "Who can join, what they must accept, and what they see first.": [
+    "من يمكنه الانضمام، وما يجب أن يوافق عليه، وما يراه أولاً.",
+    "Wer beitreten darf, was akzeptiert werden muss und was zuerst zu sehen ist."
+  ],
+  "Emoji": ["الإيموجي", "Emoji"],
+  "The server's own emoji.": [
+    "الإيموجي الخاصة بالسيرفر.",
+    "Die eigenen Emoji des Servers."
+  ],
+  "Emergency tools, and filters against spam and unwanted links.": [
+    "أدوات الطوارئ، ومرشحات ضد الرسائل المزعجة والروابط غير المرغوبة.",
+    "Notfall-Werkzeuge und Filter gegen Spam und unerwünschte Links."
+  ],
+  "Audit log": ["سجل التدقيق", "Protokoll"],
+  "Everyone in the server, and its invites.": [
+    "كل من في السيرفر، ودعواته.",
+    "Alle auf dem Server und seine Einladungen."
+  ],
+  "Apps": ["التطبيقات", "Apps"],
+  "Bots and webhooks.": ["البوتات والويب هوك.", "Bots und Webhooks."],
+  "Extras": ["إضافات", "Extras"],
+  "Server profile": ["ملف السيرفر", "Serverprofil"],
+  "Discovery": ["الاكتشاف", "Entdecken"],
+  "Whether people can find the server in Discover.": [
+    "هل يمكن للناس العثور على السيرفر في «اكتشف».",
+    "Ob Leute den Server in Entdecken finden können."
+  ],
+  "Only the owner of the server can change how it appears in Discover.": [
+    "وحده مالك السيرفر يستطيع تغيير ظهوره في «اكتشف».",
+    "Nur der Inhaber des Servers kann ändern, wie er in Entdecken erscheint."
+  ],
+  "Invites and sharing": ["الدعوات والمشاركة", "Einladungen und Teilen"],
+  "A short link people remember.": [
+    "رابط قصير يسهل تذكره.",
+    "Ein kurzer Link, den man sich merkt."
+  ],
+  "One short, memorable link for your server, like zrzur.cc/your-name.": [
+    "رابط قصير سهل التذكر لسيرفرك، مثل zrzur.cc/اسمك.",
+    "Ein kurzer, einprägsamer Link für deinen Server, wie zrzur.cc/dein-name."
+  ],
+  "Features": ["الميزات", "Funktionen"],
+  "The rules channel, system messages and counters.": [
+    "قناة القواعد ورسائل النظام والعدادات.",
+    "Der Regelkanal, Systemnachrichten und Zähler."
+  ],
+  "Danger zone": ["منطقة الخطر", "Gefahrenbereich"],
+  "Channels and categories": ["القنوات والفئات", "Kanäle und Kategorien"],
+  "Create, rename and delete them, and set slow mode and room size.": [
+    "أنشئها وأعد تسميتها واحذفها، واضبط الوضع البطيء وحجم الغرفة.",
+    "Erstellen, umbenennen und löschen, dazu Langsammodus und Raumgröße."
+  ],
+  "Who can join": ["من يمكنه الانضمام", "Wer beitreten darf"],
+  "How people get in, and who may invite them.": [
+    "كيف يدخل الناس، ومن يحق له دعوتهم.",
+    "Wie Leute hineinkommen und wer sie einladen darf."
+  ],
+  "Rules to accept": ["القواعد المطلوب قبولها", "Zu akzeptierende Regeln"],
+  "New members agree to the rules before they write.": [
+    "يوافق الأعضاء الجدد على القواعد قبل أن يكتبوا.",
+    "Neue Mitglieder stimmen den Regeln zu, bevor sie schreiben."
+  ],
+  "Welcome questions": ["أسئلة الترحيب", "Willkommensfragen"],
+  "Let new members pick their interests and get roles.": [
+    "دع الأعضاء الجدد يختارون اهتماماتهم ويحصلون على أدوار.",
+    "Neue Mitglieder wählen ihre Interessen und erhalten Rollen."
+  ],
+  "What new members see first.": [
+    "ما يراه الأعضاء الجدد أولاً.",
+    "Was neue Mitglieder zuerst sehen."
+  ],
+  "Lobby design": ["تصميم الردهة", "Lobby-Design"],
+  "Colours, layout, welcome text, buttons and questions of the lobby.": [
+    "ألوان الردهة وتخطيطها ونص الترحيب والأزرار والأسئلة.",
+    "Farben, Layout, Willkommenstext, Schaltflächen und Fragen der Lobby."
+  ],
+  "Custom emoji": ["إيموجي مخصصة", "Eigene Emoji"],
+  "The server's own emoji, for everyone in it.": [
+    "إيموجي السيرفر الخاصة، لكل من فيه.",
+    "Die eigenen Emoji des Servers, für alle darin."
+  ],
+  "Pause invites or messages during a raid.": [
+    "أوقف الدعوات أو الرسائل مؤقتاً أثناء غارة.",
+    "Einladungen oder Nachrichten bei einem Raid pausieren."
+  ],
+  "Rules that stop spam, bad words and unwanted links.": [
+    "قواعد توقف الرسائل المزعجة والكلمات السيئة والروابط غير المرغوبة.",
+    "Regeln gegen Spam, Schimpfwörter und unerwünschte Links."
+  ],
+  "Everyone in the server": ["كل من في السيرفر", "Alle auf dem Server"],
+  "Search, change roles, time out, kick or ban.": [
+    "ابحث، غيّر الأدوار، أوقف مؤقتاً، اطرد أو احظر.",
+    "Suchen, Rollen ändern, Timeout, kicken oder bannen."
+  ],
+  "Active invites": ["الدعوات النشطة", "Aktive Einladungen"],
+  "Who made them, how often used, when they end.": [
+    "من أنشأها، وكم مرة استُخدمت، ومتى تنتهي.",
+    "Wer sie erstellt hat, wie oft genutzt, wann sie enden."
+  ],
+  "Preview": ["معاينة", "Vorschau"]
+}

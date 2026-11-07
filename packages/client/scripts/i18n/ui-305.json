@@ -1,0 +1,6 @@
+{
+  "You can see this but not change it. It needs the permission \"{permission}\".": [
+    "يمكنك رؤية هذا دون تغييره. يتطلب الصلاحية «{permission}».",
+    "Du kannst das ansehen, aber nicht ändern. Dafür brauchst du die Berechtigung „{permission}“."
+  ]
+}

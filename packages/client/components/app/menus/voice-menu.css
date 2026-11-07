@@ -1,0 +1,106 @@
+.z-voice-menu {
+  max-height: min(640px, calc(100dvh - 24px));
+  overflow-y: auto;
+  min-width: 250px;
+}
+.z-voice-menu-heading {
+  padding: 7px 10px;
+  color: var(--z-fg-muted);
+  font-size: 11px;
+  font-weight: 700;
+  overflow-wrap: anywhere;
+}
+.z-voice-volume {
+  display: grid;
+  gap: 10px;
+  padding: 10px;
+  color: var(--z-fg-secondary);
+  font-size: 12px;
+}
+.z-voice-volume > span {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+}
+.z-voice-volume input {
+  width: 100%;
+  accent-color: var(--z-accent);
+}
+.z-voice-destinations {
+  margin: 4px 8px;
+  border-inline-start: 1px solid var(--z-border-strong);
+  padding-inline-start: 6px;
+  max-height: 180px;
+  overflow: auto;
+}
+.z-voice-destinations p,
+.z-voice-feedback {
+  padding: 8px 10px;
+  font-size: 12px;
+  line-height: 1.5;
+  color: var(--z-fg-secondary);
+}
+.z-voice-feedback[role="alert"] {
+  color: var(--z-danger);
+}
+.z-voice-menu [aria-disabled="true"] {
+  opacity: 0.5;
+  cursor: wait;
+}
+/* participant count (and limit) pill, right of a voice channel name */
+.z-voice-occupancy {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: stretch;
+  margin-inline-start: auto;
+  height: 18px;
+  border-radius: 6px;
+  overflow: hidden;
+  font-size: 11px;
+  font-weight: 600;
+  line-height: 18px;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+  color: var(--z-fg-secondary);
+  background: color-mix(in srgb, var(--z-fg-primary) 8%, var(--z-bg-raised));
+  border: 1px solid var(--z-border-subtle);
+}
+/* phones: readable count (phone rules: nothing under 12 px) */
+@media (max-width: 600px) {
+  .z-voice-occupancy {
+    height: 20px;
+    font-size: 12px;
+    line-height: 20px;
+  }
+}
+.z-voice-occupancy > span {
+  padding-inline: 5px;
+}
+.z-voice-occupancy > span + span {
+  color: var(--z-fg-muted);
+  background: color-mix(in srgb, var(--z-fg-primary) 4%, var(--z-bg-app));
+  border-inline-start: 1px solid var(--z-border-subtle);
+}
+.z-voice-occupancy[data-full="true"] {
+  color: var(--z-status-warning, #edbc68);
+  border-color: color-mix(
+    in srgb,
+    var(--z-status-warning, #edbc68) 45%,
+    transparent
+  );
+}
+
+/* the row's invite / settings actions take this spot on hover */
+a:hover .z-voice-occupancy.hover-hide {
+  display: none;
+}
+
+@keyframes zSignalPulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.35;
+  }
+}

@@ -1,0 +1,270 @@
+{
+  "{0}: position {1}": [
+    "{0}: الموضع {1}",
+    "{0}: Position {1}"
+  ],
+  "Add link": [
+    "إضافة رابط",
+    "Link hinzufügen"
+  ],
+  "Allow again": [
+    "السماح مجددًا",
+    "Wieder erlauben"
+  ],
+  "Anime": [
+    "أنمي",
+    "Anime"
+  ],
+  "Art": [
+    "الفن",
+    "Kunst"
+  ],
+  "Board games": [
+    "ألعاب الطاولة",
+    "Brettspiele"
+  ],
+  "Bubbles": [
+    "فقاعات",
+    "Blasen"
+  ],
+  "Cars": [
+    "السيارات",
+    "Autos"
+  ],
+  "Choose up to {MAX_INTERESTS}. They only show on your profile, nothing else uses them. Others can see this.": [
+    "اختر حتى {MAX_INTERESTS}. تظهر في ملفك الشخصي فقط، ولا يستخدمها شيء آخر. يستطيع الآخرون رؤيتها.",
+    "Wähle bis zu {MAX_INTERESTS} aus. Sie erscheinen nur auf deinem Profil, nichts anderes nutzt sie. Andere können das sehen."
+  ],
+  "Choose what shows on your profile and in what order. Hidden sections are not sent to anyone.": [
+    "اختر ما يظهر في ملفك الشخصي وبأي ترتيب. لا تُرسَل الأقسام المخفية إلى أي شخص.",
+    "Wähle, was auf deinem Profil erscheint und in welcher Reihenfolge. Ausgeblendete Bereiche werden an niemanden gesendet."
+  ],
+  "Confetti": [
+    "قصاصات ملونة",
+    "Konfetti"
+  ],
+  "Cooking": [
+    "الطبخ",
+    "Kochen"
+  ],
+  "Decoration": [
+    "الزينة",
+    "Dekoration"
+  ],
+  "edited": [
+    "مُعدَّل",
+    "bearbeitet"
+  ],
+  "Effect": [
+    "المؤثر",
+    "Effekt"
+  ],
+  "Effects are off on this device, so the preview stays still. Other people still see yours.": [
+    "المؤثرات معطلة على هذا الجهاز، لذا تبقى المعاينة ثابتة. ويظل بإمكان الآخرين رؤية مؤثرك.",
+    "Effekte sind auf diesem Gerät aus, deshalb bleibt die Vorschau still. Andere sehen deinen Effekt trotzdem."
+  ],
+  "Effects by creators are coming later.": [
+    "ستتوفر مؤثرات المبدعين لاحقًا.",
+    "Effekte von Creators kommen später."
+  ],
+  "Everything you wrote on profiles. You can always delete it.": [
+    "كل ما كتبته في الملفات الشخصية. يمكنك حذفه في أي وقت.",
+    "Alles, was du auf Profilen geschrieben hast. Du kannst es jederzeit löschen."
+  ],
+  "Fashion": [
+    "الأزياء",
+    "Mode"
+  ],
+  "Film": [
+    "السينما",
+    "Film"
+  ],
+  "Fireflies": [
+    "يراعات",
+    "Glühwürmchen"
+  ],
+  "Fitness": [
+    "اللياقة البدنية",
+    "Fitness"
+  ],
+  "Football": [
+    "كرة القدم",
+    "Fußball"
+  ],
+  "Full profile": [
+    "الملف الشخصي الكامل",
+    "Vollständiges Profil"
+  ],
+  "Interests": [
+    "الاهتمامات",
+    "Interessen"
+  ],
+  "It breaks the rules.": [
+    "إنه يخالف القواعد.",
+    "Er verstößt gegen die Regeln."
+  ],
+  "It looks like harassment.": [
+    "يبدو أنه مضايقة.",
+    "Er sieht nach Belästigung aus."
+  ],
+  "It looks like hate or a threat.": [
+    "يبدو أنه كراهية أو تهديد.",
+    "Er sieht nach Hass oder einer Drohung aus."
+  ],
+  "It looks like sexual content.": [
+    "يبدو أنه محتوى جنسي.",
+    "Er sieht nach sexuellen Inhalten aus."
+  ],
+  "It looks like spam.": [
+    "يبدو أنه رسالة مزعجة.",
+    "Er sieht nach Spam aus."
+  ],
+  "Kites": [
+    "طائرات ورقية",
+    "Drachen"
+  ],
+  "Leaves": [
+    "أوراق الشجر",
+    "Blätter"
+  ],
+  "Link {0}": [
+    "الرابط {0}",
+    "Link {0}"
+  ],
+  "Links": [
+    "الروابط",
+    "Links"
+  ],
+  "Mine": [
+    "مؤثراتي",
+    "Meine"
+  ],
+  "Move {0} down": [
+    "تحريك {0} إلى الأسفل",
+    "{0} nach unten verschieben"
+  ],
+  "Move {0} up": [
+    "تحريك {0} إلى الأعلى",
+    "{0} nach oben verschieben"
+  ],
+  "Nature": [
+    "الطبيعة",
+    "Natur"
+  ],
+  "No effect": [
+    "بلا مؤثر",
+    "Kein Effekt"
+  ],
+  "No effects match your search.": [
+    "لا توجد مؤثرات تطابق بحثك.",
+    "Keine Effekte passen zu deiner Suche."
+  ],
+  "Our automatic filter stopped this. {reason} If you think this is a mistake, ask for a review through Support.": [
+    "أوقف مرشحنا الآلي هذا النص. {reason} إذا كنت تعتقد أن هذا خطأ، فاطلب مراجعته عبر الدعم.",
+    "Unser automatischer Filter hat das gestoppt. {reason} Wenn du das für einen Fehler hältst, bitte im Support um eine Prüfung."
+  ],
+  "People can write on your profile if you let them.": [
+    "يمكن للآخرين الكتابة في ملفك الشخصي إذا سمحت لهم.",
+    "Andere können auf deinem Profil schreiben, wenn du es erlaubst."
+  ],
+  "Petals": [
+    "بتلات",
+    "Blütenblätter"
+  ],
+  "Pets": [
+    "الحيوانات الأليفة",
+    "Haustiere"
+  ],
+  "Photography": [
+    "التصوير",
+    "Fotografie"
+  ],
+  "Play the short effects people add to their profiles. They never play with reduced motion on.": [
+    "تشغيل المؤثرات القصيرة التي يضيفها الأشخاص إلى ملفاتهم الشخصية. ولا تعمل أبدًا عند تفعيل تقليل الحركة.",
+    "Spielt die kurzen Effekte ab, die andere ihren Profilen hinzufügen. Bei reduzierter Bewegung laufen sie nie."
+  ],
+  "Plays once when someone opens your profile, for up to 4 seconds.": [
+    "يعمل مرة واحدة عند فتح ملفك الشخصي، لمدة تصل إلى 4 ثوانٍ.",
+    "Läuft einmal, wenn jemand dein Profil öffnet, höchstens 4 Sekunden lang."
+  ],
+  "Profile effect": [
+    "مؤثر الملف الشخصي",
+    "Profileffekt"
+  ],
+  "Profile sections": [
+    "أقسام الملف الشخصي",
+    "Profilbereiche"
+  ],
+  "Programming": [
+    "البرمجة",
+    "Programmieren"
+  ],
+  "Rain": [
+    "مطر",
+    "Regen"
+  ],
+  "Reading": [
+    "القراءة",
+    "Lesen"
+  ],
+  "Remove link {0}": [
+    "إزالة الرابط {0}",
+    "Link {0} entfernen"
+  ],
+  "Removed by Zrzur": [
+    "أزاله زرزور",
+    "Von Zrzur entfernt"
+  ],
+  "Ripples": [
+    "تموجات",
+    "Wellenringe"
+  ],
+  "Roles, mutual servers and the message box keep their place.": [
+    "تبقى الأدوار والسيرفرات المشتركة ومربع الرسالة في مكانها.",
+    "Rollen, gemeinsame Server und das Nachrichtenfeld behalten ihren Platz."
+  ],
+  "Search effects": [
+    "ابحث في المؤثرات",
+    "Effekte suchen"
+  ],
+  "Show profile effects": [
+    "إظهار مؤثرات الملف الشخصي",
+    "Profileffekte anzeigen"
+  ],
+  "Showing": [
+    "ظاهر",
+    "Sichtbar"
+  ],
+  "Sparks": [
+    "شرارات",
+    "Funken"
+  ],
+  "Their creations": [
+    "إبداعاته",
+    "Kreationen"
+  ],
+  "Travel": [
+    "السفر",
+    "Reisen"
+  ],
+  "Up to {MAX_LINKS} links, starting with https://. People see the real site address and a warning before they leave Zrzur. Others can see this.": [
+    "حتى {MAX_LINKS} روابط تبدأ بـ https://. يرى الأشخاص عنوان الموقع الحقيقي وتحذيرًا قبل مغادرة زرزور. يستطيع الآخرون رؤية ذلك.",
+    "Bis zu {MAX_LINKS} Links, beginnend mit https://. Man sieht die echte Website-Adresse und eine Warnung, bevor man Zrzur verlässt. Andere können das sehen."
+  ],
+  "Waiting for your approval": [
+    "بانتظار موافقتك",
+    "Warten auf deine Freigabe"
+  ],
+  "Which effects": [
+    "أي المؤثرات",
+    "Welche Effekte"
+  ],
+  "Writing": [
+    "الكتابة",
+    "Schreiben"
+  ],
+  "Home address or phone number": [
+    "عنوان المنزل أو رقم الهاتف",
+    "Wohnadresse oder Telefonnummer"
+  ]
+}

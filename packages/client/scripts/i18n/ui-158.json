@@ -1,0 +1,4 @@
+{
+  "Arabic insults": ["الشتائم العربية", "Arabische Beleidigungen"],
+  "An optional list that blocks common Arabic insults. Switch it on and it becomes a rule you can edit.": ["قائمة اختيارية تحجب الشتائم العربية الشائعة. عند تفعيلها تصبح قاعدة يمكنك تعديلها.", "Eine optionale Liste, die verbreitete arabische Beleidigungen blockiert. Schalte sie ein, dann wird sie zu einer Regel, die du bearbeiten kannst."]
+}

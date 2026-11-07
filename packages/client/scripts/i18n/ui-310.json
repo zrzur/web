@@ -1,0 +1,18 @@
+{
+  "Off: each site like YouTube or Spotify asks you once. On: every player loads at once and the site learns your IP address.": [
+    "معطّل: يسألك كل موقع مثل YouTube أو Spotify مرة واحدة. مفعّل: تُحمَّل المشغّلات كلها فورًا ويعرف الموقع عنوان IP الخاص بك.",
+    "Aus: Jede Seite wie YouTube oder Spotify fragt dich einmal. An: Alle Player laden sofort und die Seite erfährt deine IP-Adresse."
+  ],
+  "Sites you allowed": [
+    "المواقع التي سمحت لها",
+    "Erlaubte Seiten"
+  ],
+  "Forget": [
+    "انسَ",
+    "Vergessen"
+  ],
+  "Impressum": [
+    "بيانات الناشر",
+    "Impressum"
+  ]
+}

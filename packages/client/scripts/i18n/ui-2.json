@@ -1,0 +1,238 @@
+{
+  "Delete bot": ["حذف البوت", "Bot löschen"],
+  "Delete emoji": ["حذف الإيموجي", "Emoji löschen"],
+  "Delete invite": ["حذف الدعوة", "Einladung löschen"],
+  "Delete role": ["حذف الدور", "Rolle löschen"],
+  "Delete server": ["حذف السيرفر", "Server löschen"],
+  "Delete webhook": ["حذف الويب هوك", "Webhook löschen"],
+  "Density": ["الكثافة", "Dichte"],
+  "Description": ["الوصف", "Beschreibung"],
+  "Desktop notifications": ["إشعارات سطح المكتب", "Desktop-Benachrichtigungen"],
+  "Developer documentation": ["توثيق المطوّرين", "Entwicklerdokumentation"],
+  "Device is offline": ["الجهاز غير متصل", "Gerät ist offline"],
+  "Device names appear after you allow access once.": [
+    "تظهر أسماء الأجهزة بعد أن تسمح بالوصول مرة واحدة.",
+    "Gerätenamen erscheinen, sobald du den Zugriff einmal erlaubst."
+  ],
+  "Devices": ["الأجهزة", "Geräte"],
+  "Disable": ["تعطيل", "Deaktivieren"],
+  "Disable account": ["تعطيل الحساب", "Konto deaktivieren"],
+  "Dismiss": ["إغلاق", "Schließen"],
+  "Display": ["العرض", "Anzeige"],
+  "Display name": ["الاسم المعروض", "Anzeigename"],
+  "Do not disturb": ["عدم الإزعاج", "Bitte nicht stören"],
+  "Download {0}": ["تنزيل {0}", "{0} herunterladen"],
+  "Drag to reorder {0}": [
+    "اسحب لإعادة ترتيب {0}",
+    "Ziehen, um {0} neu anzuordnen"
+  ],
+  "Drag to reorder. Roles higher in the list rank above lower ones.": [
+    "اسحب لإعادة الترتيب. الأدوار الأعلى في القائمة تتقدّم على الأدوار الأدنى.",
+    "Zum Sortieren ziehen. Weiter oben stehende Rollen haben Vorrang vor tieferen."
+  ],
+  "Duplicate": ["تكرار", "Duplizieren"],
+  "e.g. she/her, they/them": ["مثلًا: هي، هو", "z. B. sie/ihr, er/ihm"],
+  "e.g. they/them": ["مثلًا: هي، هو", "z. B. sie/ihr"],
+  "Echo cancellation": ["إلغاء الصدى", "Echounterdrückung"],
+  "Edit": ["تعديل", "Bearbeiten"],
+  "Edit emoji": ["تعديل الإيموجي", "Emoji bearbeiten"],
+  "Edit profile": ["تعديل الملف الشخصي", "Profil bearbeiten"],
+  "Emoji style": ["نمط الإيموجي", "Emoji-Stil"],
+  "Emojis — {0}": ["الإيموجي — {0}", "Emojis – {0}"],
+  "Enabled": ["مفعّل", "Aktiviert"],
+  "Enhanced filters keyboard and fan noise on your device.": [
+    "يرشّح الوضع المحسّن ضجيج لوحة المفاتيح والمروحة على جهازك.",
+    "„Verbessert“ filtert Tastatur- und Lüftergeräusche direkt auf deinem Gerät."
+  ],
+  "Enter a valid email address.": [
+    "أدخل بريدًا إلكترونيًا صالحًا.",
+    "Gib eine gültige E-Mail-Adresse ein."
+  ],
+  "Enter your current password, then choose a new one you don't use anywhere else.": [
+    "أدخل كلمة مرورك الحالية، ثم اختر كلمة جديدة لا تستخدمها في أي مكان آخر.",
+    "Gib dein aktuelles Passwort ein und wähle dann ein neues, das du nirgendwo sonst verwendest."
+  ],
+  "events": ["الفعاليات", "events"],
+  "Exit fullscreen": ["الخروج من ملء الشاشة", "Vollbild beenden"],
+  "Export": ["تصدير", "Exportieren"],
+  "Expressive": ["معبّر", "Ausdrucksstark"],
+  "File too large": ["الملف كبير جدًا", "Datei zu groß"],
+  "Files too large": ["الملفات كبيرة جدًا", "Dateien zu groß"],
+  "Filled": ["ممتلئ", "Gefüllt"],
+  "Find new servers to join": [
+    "اعثر على سيرفرات جديدة للانضمام",
+    "Neue Server zum Beitreten finden"
+  ],
+  "Get the Zrzur app": ["حمّل تطبيق زرزور", "Zrzur-App holen"],
+  "First 1,000 members (preview)": [
+    "أول 1,000 عضو (معاينة)",
+    "Erste 1.000 Mitglieder (Vorschau)"
+  ],
+  "First 1,000 servers (preview)": [
+    "أول 1,000 سيرفر (معاينة)",
+    "Erste 1.000 Server (Vorschau)"
+  ],
+  "First 100 members (preview)": [
+    "أول 100 عضو (معاينة)",
+    "Erste 100 Mitglieder (Vorschau)"
+  ],
+  "First 100 servers (preview)": [
+    "أول 100 سيرفر (معاينة)",
+    "Erste 100 Server (Vorschau)"
+  ],
+  "Fixed ratio": ["نسبة ثابتة", "Festes Seitenverhältnis"],
+  "Font ": ["الخط ", "Schrift "],
+  "Fonts": ["الخطوط", "Schriftarten"],
+  "Friend requests you send or receive wait here.": [
+    "تنتظر هنا طلبات الصداقة التي ترسلها أو تستقبلها.",
+    "Freundschaftsanfragen, die du sendest oder erhältst, warten hier."
+  ],
+  "Friends filter": ["تصفية الأصدقاء", "Freundesfilter"],
+  "Friends use your username and number tag to find you. Enter your current password to confirm.": [
+    "يجدك أصدقاؤك باسم المستخدم ورقمك المميّز. أدخل كلمة مرورك الحالية للتأكيد.",
+    "Freunde finden dich über Benutzernamen und Nummer. Gib zur Bestätigung dein aktuelles Passwort ein."
+  ],
+  "Frosted menus and overlays. Turn off on older computers.": [
+    "قوائم وطبقات بتأثير الزجاج المصقول. أوقفها على الأجهزة القديمة.",
+    "Milchglas-Menüs und -Overlays. Auf älteren Computern ausschalten."
+  ],
+  "Fullscreen": ["ملء الشاشة", "Vollbild"],
+  "Fully translated": ["مترجمة بالكامل", "Vollständig übersetzt"],
+  "Gaming rooms": ["غرف الألعاب", "Gaming-Räume"],
+  "general": ["عام", "allgemein"],
+  "General": ["عام", "Allgemein"],
+  "Generate": ["إنشاء", "Erzeugen"],
+  "Generate a new token if it was lost or leaked. The old one stops working.": [
+    "أنشئ رمزًا جديدًا إذا ضاع أو تسرّب. يتوقف الرمز القديم عن العمل.",
+    "Erzeuge ein neues Token, falls es verloren ging oder durchgesickert ist. Das alte funktioniert dann nicht mehr."
+  ],
+  "Good conversations. Shared moments. Your communities, together in Zrzur.": [
+    "أحاديث ممتعة. لحظات مشتركة. مجتمعاتك معًا في زرزور.",
+    "Gute Gespräche. Gemeinsame Momente. Deine Communitys, vereint in Zrzur."
+  ],
+  "Graphite": ["جرافيت", "Graphit"],
+  "Group": ["مجموعة", "Gruppe"],
+  "Hang out": ["الدردشة الصوتية", "Abhängen"],
+  "Hangout": ["جلسة", "Treffpunkt"],
+  "Help translate Zrzur into an existing or new language": [
+    "ساعد في ترجمة زرزور إلى لغة موجودة أو جديدة",
+    "Hilf mit, Zrzur in eine bestehende oder neue Sprache zu übersetzen"
+  ],
+  "Hidden. Copy it straight into your bot.": [
+    "مخفي. انسخه مباشرة إلى بوتك.",
+    "Verborgen. Kopiere es direkt in deinen Bot."
+  ],
+  "Hide password": ["إخفاء كلمة المرور", "Passwort verbergen"],
+  "Higher quality uses more upload bandwidth.": [
+    "الجودة الأعلى تستهلك سرعة رفع أكبر.",
+    "Höhere Qualität braucht mehr Upload-Bandbreite."
+  ],
+  "How much space lists and messages use.": [
+    "المساحة التي تشغلها القوائم والرسائل.",
+    "Wie viel Platz Listen und Nachrichten einnehmen."
+  ],
+  "I've read and reviewed the changes.": [
+    "قرأت التغييرات وراجعتها.",
+    "Ich habe die Änderungen gelesen und geprüft."
+  ],
+  "Icon accent matches accent colour": [
+    "لون الأيقونات يطابق لون التمييز",
+    "Symbolfarbe entspricht der Akzentfarbe"
+  ],
+  "Icon colour": ["لون الأيقونات", "Symbolfarbe"],
+  "Icon colour {c}": ["لون الأيقونات {c}", "Symbolfarbe {c}"],
+  "Icon style": ["نمط الأيقونات", "Symbolstil"],
+  "Icons": ["الأيقونات", "Symbole"],
+  "Icons have their own colour, chosen below.": [
+    "للأيقونات لونها الخاص، تختاره بالأسفل.",
+    "Symbole haben eine eigene Farbe, die du unten wählst."
+  ],
+  "Icons use the accent colour": [
+    "الأيقونات تستخدم لون التمييز",
+    "Symbole nutzen die Akzentfarbe"
+  ],
+  "Identity": ["الهوية", "Identität"],
+  "Ignore": ["تجاهل", "Ignorieren"],
+  "Images": ["الصور", "Bilder"],
+  "Import": ["استيراد", "Importieren"],
+  "In!": ["أنا معكم!", "Bin dabei!"],
+  "Incoming": ["الواردة", "Eingehend"],
+  "Incoming friend request": [
+    "طلب صداقة وارد",
+    "Eingehende Freundschaftsanfrage"
+  ],
+  "Input volume": ["مستوى صوت الإدخال", "Eingangslautstärke"],
+  "Interface font": ["خط الواجهة", "Oberflächenschrift"],
+  "Interface sounds and call audio both use the speaker chosen here.": [
+    "تستخدم أصوات الواجهة وصوت المكالمات مكبّر الصوت المختار هنا.",
+    "Oberflächentöne und Anrufton nutzen beide den hier gewählten Lautsprecher."
+  ],
+  "Invalid mention": ["إشارة غير صالحة", "Ungültige Erwähnung"],
+  "Invalid theme file. Only validated Zrzur JSON themes up to 64 KB are supported.": [
+    "ملف سمة غير صالح. لا تُدعم إلا سمات زرزور بصيغة JSON حتى 64 كيلوبايت.",
+    "Ungültige Designdatei. Nur geprüfte Zrzur-JSON-Designs bis 64 KB werden unterstützt."
+  ],
+  "Invites couldn't be loaded": [
+    "تعذّر تحميل الدعوات",
+    "Einladungen konnten nicht geladen werden"
+  ],
+  "ISO 8601": ["ISO 8601", "ISO 8601"],
+  "Join call": ["الانضمام إلى المكالمة", "Anruf beitreten"],
+  "Keeps your microphone at a steady level.": [
+    "يحافظ على مستوى ثابت لصوت الميكروفون.",
+    "Hält dein Mikrofon auf einem gleichmäßigen Pegel."
+  ],
+  "Layout and text": ["التخطيط والنص", "Layout und Text"],
+  "Learn how to build and run bots on Zrzur.": [
+    "تعلّم كيف تبني البوتات وتشغّلها على زرزور.",
+    "Erfahre, wie du Bots für Zrzur baust und betreibst."
+  ],
+  "Legal": ["قانوني", "Rechtliches"],
+  "Lines with a soft fill in your icon colour.": [
+    "خطوط مع تعبئة خفيفة بلون أيقوناتك.",
+    "Linien mit sanfter Füllung in deiner Symbolfarbe."
+  ],
+  "List members with this role in their own group in the member list.": [
+    "اعرض أعضاء هذا الدور في مجموعة خاصة بهم في قائمة الأعضاء.",
+    "Mitglieder mit dieser Rolle in der Mitgliederliste als eigene Gruppe anzeigen."
+  ],
+  "Loading": ["جارٍ التحميل", "Wird geladen"],
+  "Loading bans…": ["جارٍ تحميل قائمة الحظر…", "Sperren werden geladen…"],
+  "Loading invites…": ["جارٍ تحميل الدعوات…", "Einladungen werden geladen…"],
+  "Loading your bots…": ["جارٍ تحميل بوتاتك…", "Deine Bots werden geladen…"],
+  "Lobby": ["الردهة", "Lobby"],
+  "Lowercase letters, numbers and underscores.": [
+    "أحرف لاتينية صغيرة وأرقام وشرطات سفلية.",
+    "Kleinbuchstaben, Ziffern und Unterstriche."
+  ],
+  "Manage": ["إدارة", "Verwalten"],
+  "Markdown and emoji are supported.": [
+    "يدعم Markdown والإيموجي.",
+    "Markdown und Emojis werden unterstützt."
+  ],
+  "Meet up": ["اللقاءات", "Treffen"],
+  "Meeting Room": ["غرفة الاجتماعات", "Besprechungsraum"],
+  "Meetings": ["الاجتماعات", "Besprechungen"],
+  "Member banned": ["حُظر عضو", "Mitglied gesperrt"],
+  "Member joined": ["انضم عضو", "Mitglied beigetreten"],
+  "Member kicked": ["طُرد عضو", "Mitglied entfernt"],
+  "Member left": ["غادر عضو", "Mitglied gegangen"],
+  "Member list": ["قائمة الأعضاء", "Mitgliederliste"],
+  "Member since": ["عضو منذ", "Mitglied seit"],
+  "Member since {0}": ["عضو منذ {0}", "Mitglied seit {0}"],
+  "Members (approximate)": ["الأعضاء (تقريبيًا)", "Mitglieder (ungefähr)"],
+  "Members lose this role and its permissions.": [
+    "يفقد الأعضاء هذا الدور وصلاحياته.",
+    "Mitglieder verlieren diese Rolle und ihre Berechtigungen."
+  ],
+  "Message @{0}": ["راسل @{0}", "Nachricht an @{0}"],
+  "Message #general": ["راسل #عام", "Nachricht an #allgemein"],
+  "Message actions": ["إجراءات الرسالة", "Nachrichtenaktionen"],
+  "Message received": ["استلام رسالة", "Nachricht empfangen"],
+  "Message sounds": ["أصوات الرسائل", "Nachrichtentöne"],
+  "Message text size": ["حجم نص الرسائل", "Textgröße in Nachrichten"],
+  "Microphone": ["الميكروفون", "Mikrofon"],
+  "Minimise": ["تصغير", "Minimieren"],
+  "Mode": ["الوضع", "Modus"],
+  "Month first": ["الشهر أولًا", "Monat zuerst"]
+}

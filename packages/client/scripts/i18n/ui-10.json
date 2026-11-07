@@ -1,0 +1,191 @@
+{
+  "{0} kbps": ["{0} كيلوبت/ث", "{0} kbit/s"],
+  "{0} now has Zrzur Wings. They'll see your note in their subscriptions.": [
+    "صار لدى {0} أجنحة زرزور الآن، وسيرى رسالتك في صفحة الاشتراكات.",
+    "{0} hat jetzt Zrzur Wings. Deine Nachricht steht in den Abos."
+  ],
+  "{0} per photo, video or file": [
+    "{0} لكل صورة أو فيديو أو ملف",
+    "{0} pro Foto, Video oder Datei"
+  ],
+  "{0}/{1}": ["{0}/{1}", "{0}/{1}"],
+  "{0}p at {1} fps": ["{0}p بـ {1} إطاراً/ث", "{0}p mit {1} fps"],
+  "{tier} on Discover, {name}": [
+    "{tier} في الاستكشاف، {name}",
+    "{tier} auf Discover, {name}"
+  ],
+  "1 included": ["واحدة مشمولة", "1 inklusive"],
+  "A free supercharge": ["شحنة مجانية", "Eine kostenlose Aufladung"],
+  "A small badge on your profile so people know you help keep Zrzur running. Hide it any time.": [
+    "شارة صغيرة في ملفك الشخصي ليعرف الناس أنك تساعد في إبقاء زرزور شغّالاً. يمكنك إخفاؤها متى شئت.",
+    "Ein kleines Abzeichen im Profil, damit alle sehen, dass du Zrzur am Laufen hältst. Jederzeit ausblendbar."
+  ],
+  "A Wings role in the official Zrzur server, with the members-only channels HQ gives it.": [
+    "دور «الأجنحة» في سيرفر زرزور الرسمي، مع القنوات الخاصة التي يمنحها المقر لأصحابه.",
+    "Eine Wings-Rolle auf dem offiziellen Zrzur-Server, mit den Mitgliederkanälen, die HQ ihr gibt."
+  ],
+  "Badge": ["الشارة", "Abzeichen"],
+  "Bigger files. Sharper streams. More room to talk.": [
+    "ملفات أكبر. بث أوضح. مساحة أكبر للكلام.",
+    "Größere Dateien. Schärfere Streams. Mehr Platz zum Reden."
+  ],
+  "Billing history": ["سجل المدفوعات", "Zahlungsverlauf"],
+  "Bots can't have Wings.": [
+    "لا يمكن للبوتات الاشتراك في الأجنحة.",
+    "Bots können kein Wings haben."
+  ],
+  "Bought separately": ["تُشترى بشكل منفصل", "Separat erhältlich"],
+  "Cancel Wings": ["إلغاء الأجنحة", "Wings kündigen"],
+  "Cancelled": ["ملغى", "Storniert"],
+  "Cancelled. You keep Wings until {0}.": [
+    "أُلغي الاشتراك. تبقى الأجنحة معك حتى {0}.",
+    "Gekündigt. Wings bleibt dir bis {0}."
+  ],
+  "Every payment and renewal. Test payments are marked.": [
+    "كل عملية دفع وتجديد. المدفوعات التجريبية مُعلَّمة.",
+    "Jede Zahlung und Verlängerung. Testzahlungen sind markiert."
+  ],
+  "Get Wings for {0}/month": [
+    "احصل على الأجنحة بـ {0} شهرياً",
+    "Wings für {0}/Monat holen"
+  ],
+  "Get Zrzur Wings": ["احصل على أجنحة زرزور", "Zrzur Wings holen"],
+  "Gift Wings": ["أهدِ الأجنحة", "Wings verschenken"],
+  "Gift Wings to a friend: one payment, straight onto their account, with a note from you. 1 month, 3 months or a year.": [
+    "أهدِ الأجنحة لصديق: دفعة واحدة تصل مباشرة إلى حسابه مع رسالة منك. شهر أو 3 أشهر أو سنة.",
+    "Wings verschenken: eine Zahlung, direkt auf das Konto, mit einer Nachricht von dir. 1 Monat, 3 Monate oder ein Jahr."
+  ],
+  "Gifted, ends on {date}": [
+    "هدية، تنتهي في {date}",
+    "Geschenkt, endet am {date}"
+  ],
+  "Included with Wings": ["مشمولة مع الأجنحة", "In Wings enthalten"],
+  "Instead of {0}. Full clips, big GIFs and whole albums, in every server and DM. Files stay on our storage, which is what costs us the most.": [
+    "بدلاً من {0}. مقاطع كاملة وصور GIF كبيرة وألبومات كاملة، في كل سيرفر ورسالة خاصة. الملفات تبقى محفوظة عندنا، وهذا أكثر ما يكلّفنا.",
+    "Statt {0}. Ganze Clips, große GIFs und komplette Alben, auf jedem Server und in jeder DM. Dateien bleiben bei uns gespeichert, und das kostet uns am meisten."
+  ],
+  "Instead of {0}. You pick the quality each time you share, and everyone watching gets it smooth.": [
+    "بدلاً من {0}. تختار الجودة في كل مرة تشارك فيها، ويشاهدها الجميع بسلاسة.",
+    "Statt {0}. Du wählst die Qualität bei jeder Übertragung, und alle sehen sie flüssig."
+  ],
+  "Keep Wings": ["إبقاء الأجنحة", "Wings behalten"],
+  "Level {0} server": ["سيرفر بالمستوى {0}", "Server auf Stufe {0}"],
+  "No payments yet.": ["لا توجد مدفوعات بعد.", "Noch keine Zahlungen."],
+  "One payment, straight onto their account, with a note from you. If they already have Wings, the time is added on.": [
+    "دفعة واحدة تصل مباشرة إلى حسابه مع رسالة منك. إذا كانت لديه الأجنحة، تُضاف المدة إلى اشتراكه.",
+    "Eine Zahlung, direkt auf das Konto, mit einer Nachricht von dir. Hat die Person schon Wings, wird die Zeit angehängt."
+  ],
+  "One plan. Cancel any time.": [
+    "خطة واحدة. ألغِ متى شئت.",
+    "Ein Abo. Jederzeit kündbar."
+  ],
+  "Payment went through but this couldn't be delivered any more, so it was refunded.": [
+    "تمّ الدفع لكن لم يعد بالإمكان تسليم هذا، لذلك استُرد المبلغ.",
+    "Die Zahlung ging durch, aber das konnte nicht mehr geliefert werden, deshalb wurde sie erstattet."
+  ],
+  "Photos, videos and other files share one size limit per file. Up to {0} files per message. When you send in a server, the bigger of your limit and the server's level counts.": [
+    "الصور والفيديوهات وباقي الملفات لها حد حجم واحد لكل ملف، وحتى {0} ملفات في الرسالة. عندما ترسل في سيرفر، يُحتسب الأكبر بين حدك وحد مستوى السيرفر.",
+    "Fotos, Videos und andere Dateien teilen sich eine Größengrenze pro Datei. Bis zu {0} Dateien pro Nachricht. Auf einem Server zählt das Höhere aus deiner Grenze und der Stufe des Servers."
+  ],
+  "Priority Discover review": [
+    "مراجعة بأولوية في الاستكشاف",
+    "Bevorzugte Discover-Prüfung"
+  ],
+  "Put it on any server you're in: more emoji slots, bigger uploads and clearer voice for everyone there. Server menu, then Supercharge server.": [
+    "ضعها على أي سيرفر أنت فيه: خانات إيموجي أكثر، ورفع ملفات أكبر، وصوت أوضح للجميع هناك. من قائمة السيرفر، ثم «اشحن السيرفر».",
+    "Gib sie einem Server, auf dem du bist: mehr Emoji-Plätze, größere Uploads und klarere Sprache für alle dort. Servermenü, dann „Server aufladen“."
+  ],
+  "Refunded": ["مُسترد", "Erstattet"],
+  "Screen share at {0}": [
+    "مشاركة الشاشة بجودة {0}",
+    "Bildschirmübertragung in {0}"
+  ],
+  "See Wings": ["تعرّف على الأجنحة", "Wings ansehen"],
+  "Servers and bots you send to Discover are reviewed before the rest of the queue. Same rules, just faster.": [
+    "السيرفرات والبوتات التي ترسلها إلى الاستكشاف تُراجَع قبل باقي الطلبات. القواعد نفسها، لكن أسرع.",
+    "Server und Bots, die du bei Discover einreichst, werden vor dem Rest der Warteschlange geprüft. Gleiche Regeln, nur schneller."
+  ],
+  "Servers level up when members supercharge them, for {0} a month each. Every level unlocks perks for everyone in the server, and the level shows next to the server's name.": [
+    "ترتفع مستويات السيرفرات عندما يشحنها الأعضاء، بـ {0} شهرياً لكل شحنة. كل مستوى يفتح مزايا لكل من في السيرفر، ويظهر المستوى بجانب اسم السيرفر.",
+    "Server steigen auf, wenn Mitglieder sie aufladen, für {0} im Monat pro Aufladung. Jede Stufe schaltet Vorteile für alle auf dem Server frei; die Stufe steht neben dem Servernamen."
+  ],
+  "Show Wings badge": ["إظهار شارة الأجنحة", "Wings-Abzeichen anzeigen"],
+  "Streams at {0}": ["بث بجودة {0}", "Streams in {0}"],
+  "Supercharge a server": ["اشحن سيرفراً", "Einen Server aufladen"],
+  "Supercharge renewal, {name}": [
+    "تجديد شحنة، {name}",
+    "Verlängerung Aufladung, {name}"
+  ],
+  "Supercharge, {name}": ["شحنة، {name}", "Aufladung, {name}"],
+  "Test": ["تجريبي", "Test"],
+  "The Wings badge on your profile.": [
+    "شارة الأجنحة في ملفك الشخصي.",
+    "Das Wings-Abzeichen in deinem Profil."
+  ],
+  "The Wings lounge in Zrzur HQ": [
+    "صالة الأجنحة في مقر زرزور",
+    "Die Wings-Lounge im Zrzur HQ"
+  ],
+  "These are fixed rules, not a trial. We don't lower them for people who already have them.": [
+    "هذه قواعد ثابتة وليست تجربة. لا نخفّضها لمن حصل عليها.",
+    "Das sind feste Regeln, keine Testphase. Wir senken sie nicht für Leute, die sie schon haben."
+  ],
+  "This purchase was cancelled. Start it again.": [
+    "أُلغيت عملية الشراء هذه. ابدأها من جديد.",
+    "Dieser Kauf wurde abgebrochen. Starte ihn erneut."
+  ],
+  "Top level": ["أعلى مستوى", "Höchste Stufe"],
+  "Top row on Discover, {name}": [
+    "الصف الأول في الاستكشاف، {name}",
+    "Oberste Reihe auf Discover, {name}"
+  ],
+  "Twice the {0} characters everyone gets, for long stories, patch notes or a whole recipe in one message. Edits get the same room.": [
+    "ضعف الـ {0} حرف المتاحة للجميع، لقصص طويلة أو ملاحظات تحديث أو وصفة كاملة في رسالة واحدة. والتعديل يحصل على المساحة نفسها.",
+    "Doppelt so viel wie die {0} Zeichen für alle, für lange Geschichten, Patchnotes oder ein ganzes Rezept in einer Nachricht. Beim Bearbeiten gilt dasselbe."
+  ],
+  "Upload limits": ["حدود رفع الملفات", "Upload-Grenzen"],
+  "Upload size per file": ["حجم الرفع لكل ملف", "Upload-Größe pro Datei"],
+  "Voice and video calls": [
+    "المكالمات الصوتية والمرئية",
+    "Sprach- und Videoanrufe"
+  ],
+  "Voice quality of this server's level {0}": [
+    "جودة الصوت لمستوى هذا السيرفر {0}",
+    "Sprachqualität der Stufe {0} dieses Servers"
+  ],
+  "Voice quality. Supercharged servers sound clearer.": [
+    "جودة الصوت. السيرفرات المشحونة صوتها أوضح.",
+    "Sprachqualität. Aufgeladene Server klingen klarer."
+  ],
+  "Waiting for payment": ["بانتظار الدفع", "Wartet auf Zahlung"],
+  "Wings badge": ["شارة الأجنحة", "Wings-Abzeichen"],
+  "Wings comes with a free supercharge": [
+    "الأجنحة تأتي مع شحنة مجانية",
+    "Wings enthält eine kostenlose Aufladung"
+  ],
+  "Wings gift for {name}, {0} months": [
+    "هدية أجنحة لـ {name}، {0} أشهر",
+    "Wings-Geschenk für {name}, {0} Monate"
+  ],
+  "With Wings": ["مع الأجنحة", "Mit Wings"],
+  "You don't have Wings": ["ليست لديك الأجنحة", "Du hast kein Wings"],
+  "You have Zrzur Wings": ["لديك أجنحة زرزور", "Du hast Zrzur Wings"],
+  "You've made the most bots allowed this week. Try again in a few days.": [
+    "أنشأت أقصى عدد من البوتات المسموح هذا الأسبوع. حاول بعد بضعة أيام.",
+    "Du hast diese Woche die maximale Anzahl Bots erstellt. Versuch es in ein paar Tagen wieder."
+  ],
+  "Zrzur has no investors. Servers, storage, voice bandwidth and moderation are paid for out of pocket. Talking, calling and expressing yourself are free and stay free. Wings and supercharges cover what grows with cost, like file size and stream quality, so Zrzur can serve more people.": [
+    "زرزور بلا مستثمرين. السيرفرات والتخزين وسعة الصوت والإشراف ندفعها من جيبنا. الكلام والمكالمات والتعبير عن نفسك مجانية وستبقى مجانية. الأجنحة والشحنات تغطي ما تزيد كلفته مع الاستخدام، مثل حجم الملفات وجودة البث، ليخدم زرزور عدداً أكبر من الناس.",
+    "Zrzur hat keine Investoren. Server, Speicher, Sprachbandbreite und Moderation zahlen wir selbst. Reden, Anrufen und dich ausdrücken ist kostenlos und bleibt es. Wings und Aufladungen decken, was mit den Kosten wächst, wie Dateigröße und Streamqualität, damit Zrzur mehr Menschen dienen kann."
+  ],
+  "Zrzur is free and stays free. Wings is one simple subscription that gives you more room and helps pay for the servers that keep Zrzur running for everyone.": [
+    "زرزور مجاني وسيبقى مجانياً. الأجنحة اشتراك واحد بسيط يمنحك مساحة أكبر ويساعد في دفع تكاليف السيرفرات التي تُبقي زرزور شغّالاً للجميع.",
+    "Zrzur ist kostenlos und bleibt es. Wings ist ein einfaches Abo, das dir mehr Platz gibt und die Server mitbezahlt, die Zrzur für alle am Laufen halten."
+  ],
+  "Zrzur Wings": ["أجنحة زرزور", "Zrzur Wings"],
+  "Zrzur Wings, monthly": ["أجنحة زرزور، شهرياً", "Zrzur Wings, monatlich"],
+  "Zrzur Wings, monthly renewal": [
+    "أجنحة زرزور، تجديد شهري",
+    "Zrzur Wings, monatliche Verlängerung"
+  ]
+}

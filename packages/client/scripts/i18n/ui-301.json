@@ -1,0 +1,650 @@
+{
+  "A command with this name already exists.": [
+    "يوجد أمر بهذا الاسم مسبقًا.",
+    "Es gibt schon einen Befehl mit diesem Namen."
+  ],
+  "A file didn't finish uploading. Add it again and try once more.": [
+    "لم يكتمل رفع أحد الملفات. أضفه مجددًا ثم حاول مرة أخرى.",
+    "Eine Datei wurde nicht fertig hochgeladen. Füge sie erneut hinzu und versuche es noch einmal."
+  ],
+  "A forum has at most {MAX_TAGS} tags.": [
+    "يضم المنتدى {MAX_TAGS} وسمًا على الأكثر.",
+    "Ein Forum hat höchstens {MAX_TAGS} Tags."
+  ],
+  "A notice of illegal content.": [
+    "إشعار بمحتوى مخالف للقانون.",
+    "Eine Meldung rechtswidriger Inhalte."
+  ],
+  "A report from another person.": [
+    "بلاغ من شخص آخر.",
+    "Eine Meldung einer anderen Person."
+  ],
+  "A server can have up to {max} roles.": [
+    "{max, plural, one {يمكن أن يضم السيرفر دورًا واحدًا فقط.} two {يمكن أن يضم السيرفر دورين كحد أقصى.} few {يمكن أن يضم السيرفر حتى # أدوار.} many {يمكن أن يضم السيرفر حتى # دورًا.} other {يمكن أن يضم السيرفر حتى # دور.}}",
+    "Ein Server kann bis zu {max} Rollen haben."
+  ],
+  "Add one so members can sort posts.": [
+    "أضف وسمًا ليتمكن الأعضاء من تصنيف المنشورات.",
+    "Füge einen hinzu, damit Mitglieder Beiträge sortieren können."
+  ],
+  "All Discover places are taken right now. Try again later.": [
+    "جميع أماكن الاستكشاف محجوزة الآن. حاول لاحقًا.",
+    "Alle Plätze in Entdecken sind gerade belegt. Versuche es später erneut."
+  ],
+  "Always load media players from other sites": [
+    "تحميل مشغّلات الوسائط من المواقع الأخرى دائمًا",
+    "Medienplayer anderer Seiten immer laden"
+  ],
+  "An app can have up to {max} commands.": [
+    "{max, plural, one {يمكن أن يضم التطبيق أمرًا واحدًا فقط.} two {يمكن أن يضم التطبيق أمرين كحد أقصى.} few {يمكن أن يضم التطبيق حتى # أوامر.} many {يمكن أن يضم التطبيق حتى # أمرًا.} other {يمكن أن يضم التطبيق حتى # أمر.}}",
+    "Eine App kann bis zu {max} Befehle haben."
+  ],
+  "Automated tools found this content": [
+    "اكتشفت أدوات آلية هذا المحتوى",
+    "Automatisierte Werkzeuge haben diesen Inhalt gefunden"
+  ],
+  "Automation": [
+    "الأتمتة",
+    "Automatisierung"
+  ],
+  "Before you join": [
+    "قبل أن تنضم",
+    "Bevor du beitrittst"
+  ],
+  "Bots can't do this.": [
+    "لا تستطيع البوتات فعل ذلك.",
+    "Bots können das nicht."
+  ],
+  "Breadcrumb": [
+    "مسار الصفحة",
+    "Brotkrumen-Navigation"
+  ],
+  "Breaks our rules": [
+    "يخالف قواعدنا",
+    "Verstößt gegen unsere Regeln"
+  ],
+  "Browse Designs": [
+    "تصفّح التصاميم",
+    "Designs durchsuchen"
+  ],
+  "Browse Discover": [
+    "تصفّح «اكتشف»",
+    "Entdecken durchsuchen"
+  ],
+  "Browsing needs no account. You sign in or create one before joining, then come back to this server.": [
+    "لا تحتاج إلى حساب للتصفّح. تسجّل الدخول أو تنشئ حسابًا قبل الانضمام، ثم تعود إلى هذا السيرفر.",
+    "Zum Stöbern brauchst du kein Konto. Vor dem Beitritt meldest du dich an oder erstellst eines und kommst dann zu diesem Server zurück."
+  ],
+  "Change the emoji of {0}": [
+    "تغيير رمز {0} التعبيري",
+    "Emoji von {0} ändern"
+  ],
+  "Choose an emoji": [
+    "اختر رمزًا تعبيريًا",
+    "Emoji wählen"
+  ],
+  "Community guidelines": [
+    "إرشادات المجتمع",
+    "Community-Richtlinien"
+  ],
+  "Continue in the browser": [
+    "تابع في المتصفح",
+    "Im Browser fortfahren"
+  ],
+  "Continue in your browser, nothing to install. If the desktop app is installed, it can open there instead. After you sign in you come back here.": [
+    "تابع في متصفحك دون تثبيت أي شيء. وإن كان تطبيق سطح المكتب مثبّتًا فيمكن أن يُفتح فيه. بعد تسجيل الدخول تعود إلى هنا.",
+    "Mach im Browser weiter, ohne etwas zu installieren. Ist die Desktop-App installiert, kann sie sich stattdessen öffnen. Nach der Anmeldung kommst du hierher zurück."
+  ],
+  "Countries": [
+    "الدول",
+    "Länder"
+  ],
+  "Discover rules": [
+    "قواعد «اكتشف»",
+    "Regeln für Entdecken"
+  ],
+  "Download the desktop app": [
+    "نزّل تطبيق سطح المكتب",
+    "Desktop-App herunterladen"
+  ],
+  "Duration: {0}": [
+    "المدة: {0}",
+    "Dauer: {0}"
+  ],
+  "End now: {0}": [
+    "إنهاء الآن: {0}",
+    "Jetzt beenden: {0}"
+  ],
+  "Facts shown to the user": [
+    "الوقائع التي تظهر للمستخدم",
+    "Fakten, die die Person sieht"
+  ],
+  "Get a ZIP file with your account, profile, messages you sent, files you uploaded, servers, purchases, reports you filed, support requests and settings.": [
+    "احصل على ملف ZIP يضم حسابك وملفك الشخصي والرسائل التي أرسلتها والملفات التي رفعتها وسيرفراتك ومشترياتك والبلاغات التي قدّمتها وطلبات الدعم وإعداداتك.",
+    "Erhalte eine ZIP-Datei mit deinem Konto, deinem Profil, deinen gesendeten Nachrichten, hochgeladenen Dateien, Servern, Käufen, eingereichten Meldungen, Support-Anfragen und Einstellungen."
+  ],
+  "Go back": [
+    "رجوع",
+    "Zurück"
+  ],
+  "Go to the message": [
+    "الانتقال إلى الرسالة",
+    "Zur Nachricht"
+  ],
+  "Guide": [
+    "الدليل",
+    "Anleitung"
+  ],
+  "If you sent a lot of messages": [
+    "إذا أرسلت رسائل كثيرة",
+    "Wenn du sehr viele Nachrichten gesendet hast"
+  ],
+  "Illegal under a law": [
+    "مخالف لقانون",
+    "Rechtswidrig nach einem Gesetz"
+  ],
+  "It may have been taken down, or the link is mistyped.": [
+    "ربما أُزيل، أو أن الرابط مكتوب خطأً.",
+    "Es wurde vielleicht entfernt, oder der Link ist falsch geschrieben."
+  ],
+  "Its owner may have taken it off, or the link is mistyped.": [
+    "ربما أزاله مالكه من «اكتشف»، أو أن الرابط مكتوب خطأً.",
+    "Der Inhaber hat ihn vielleicht entfernt, oder der Link ist falsch geschrieben."
+  ],
+  "Join {0}": [
+    "انضم إلى {0}",
+    "{0} beitreten"
+  ],
+  "Joining is closed": [
+    "الانضمام مغلق",
+    "Beitritt geschlossen"
+  ],
+  "Joining is closed right now": [
+    "الانضمام مغلق حاليًا",
+    "Der Beitritt ist gerade geschlossen"
+  ],
+  "Language: {0}": [
+    "اللغة: {0}",
+    "Sprache: {0}"
+  ],
+  "Law": [
+    "القانون",
+    "Gesetz"
+  ],
+  "Load": [
+    "تحميل",
+    "Laden"
+  ],
+  "Load {provider} player": [
+    "تحميل مشغّل {provider}",
+    "{provider}-Player laden"
+  ],
+  "Load {provider} player: {title}": [
+    "تحميل مشغّل {provider}: {title}",
+    "{provider}-Player laden: {title}"
+  ],
+  "Loading this connects to {0}. They get your IP address and may store cookies.": [
+    "يؤدي التحميل إلى الاتصال بـ {0}. يتلقّى {0} عنوان IP الخاص بك وقد يخزّن ملفات تعريف الارتباط.",
+    "Beim Laden wird eine Verbindung zu {0} hergestellt. Dabei erhält {0} deine IP-Adresse und kann Cookies speichern."
+  ],
+  "Made by": [
+    "من تصميم",
+    "Gestaltet von"
+  ],
+  "Menu": [
+    "القائمة",
+    "Menü"
+  ],
+  "More like this": [
+    "تصاميم مشابهة",
+    "Mehr davon"
+  ],
+  "Name the countries, or choose worldwide.": [
+    "اذكر الدول أو اختر «في جميع أنحاء العالم».",
+    "Nenne die Länder oder wähle „Weltweit“."
+  ],
+  "Name the law and the provision.": [
+    "اذكر القانون والمادة.",
+    "Nenne das Gesetz und die Vorschrift."
+  ],
+  "No trackers and no ads on our sites. The code is open under AGPL-3.0.": [
+    "لا متتبّعات ولا إعلانات على مواقعنا. الشيفرة مفتوحة بترخيص AGPL-3.0.",
+    "Keine Tracker und keine Werbung auf unseren Seiten. Der Code ist offen unter AGPL-3.0."
+  ],
+  "Off: players from YouTube, Spotify and similar sites wait for your click. On: they load at once and the site learns your IP address.": [
+    "مُعطَّل: تنتظر المشغّلات من يوتيوب وسبوتيفاي ومواقع مشابهة نقرتك. مُفعَّل: تُحمَّل فورًا ويعرف الموقع عنوان IP الخاص بك.",
+    "Aus: Player von YouTube, Spotify und ähnlichen Seiten warten auf deinen Klick. An: Sie laden sofort und die Seite erfährt deine IP-Adresse."
+  ],
+  "On your profile now": [
+    "على ملفك الشخصي الآن",
+    "Jetzt auf deinem Profil"
+  ],
+  "Only Zrzur staff can do this.": [
+    "فريق زرزور وحده يستطيع فعل ذلك.",
+    "Nur das Zrzur-Team kann das."
+  ],
+  "Only bots can do this.": [
+    "البوتات وحدها تستطيع فعل ذلك.",
+    "Nur Bots können das."
+  ],
+  "Only some countries": [
+    "بعض الدول فقط",
+    "Nur einige Länder"
+  ],
+  "Only the owner can do this.": [
+    "المالك وحده يستطيع فعل ذلك.",
+    "Nur der Eigentümer kann das."
+  ],
+  "Open the desktop app": [
+    "افتح تطبيق سطح المكتب",
+    "Desktop-App öffnen"
+  ],
+  "Open to everyone": [
+    "مفتوح للجميع",
+    "Offen für alle"
+  ],
+  "Open {0} in Zrzur": [
+    "افتح {0} في زرزور",
+    "{0} in Zrzur öffnen"
+  ],
+  "Our own review.": [
+    "مراجعتنا الخاصة.",
+    "Unsere eigene Prüfung."
+  ],
+  "Profile look": [
+    "مظهر الملف الشخصي",
+    "Profil-Look"
+  ],
+  "Provision": [
+    "المادة",
+    "Vorschrift"
+  ],
+  "Remember my choice on this device": [
+    "تذكّر اختياري على هذا الجهاز",
+    "Meine Wahl auf diesem Gerät merken"
+  ],
+  "Remove the emoji": [
+    "إزالة الرمز التعبيري",
+    "Emoji entfernen"
+  ],
+  "Remove “{0}”?": [
+    "إزالة «{0}»؟",
+    "„{0}“ entfernen?"
+  ],
+  "Shown on a sample profile.": [
+    "معروض على ملف تجريبي.",
+    "Auf einem Beispielprofil gezeigt."
+  ],
+  "Shown on your own profile.": [
+    "معروض على ملفك الشخصي.",
+    "Auf deinem eigenen Profil gezeigt."
+  ],
+  "Similar communities": [
+    "مجتمعات مشابهة",
+    "Ähnliche Communitys"
+  ],
+  "Sites": [
+    "المواقع",
+    "Seiten"
+  ],
+  "Slow mode is on here. {0, plural, one {You can write again in # second.} other {You can write again in # seconds.}}": [
+    "الوضع البطيء مفعّل هنا. {0, plural, zero {يمكنك الكتابة مجددًا الآن.} one {يمكنك الكتابة مجددًا بعد ثانية واحدة.} two {يمكنك الكتابة مجددًا بعد ثانيتين.} few {يمكنك الكتابة مجددًا بعد # ثوانٍ.} many {يمكنك الكتابة مجددًا بعد # ثانية.} other {يمكنك الكتابة مجددًا بعد # ثانية.}}",
+    "Hier ist der langsame Modus an. {0, plural, one {Du kannst in # Sekunde wieder schreiben.} other {Du kannst in # Sekunden wieder schreiben.}}"
+  ],
+  "Someone else changed this case first. Reload and try again.": [
+    "عدّل شخص آخر هذه الحالة قبلك. أعد التحميل ثم حاول مجددًا.",
+    "Jemand anderes hat diesen Fall zuerst geändert. Lade neu und versuche es erneut."
+  ],
+  "Something went wrong on our side. Try again in a moment.": [
+    "حدث خطأ من جهتنا. حاول مجددًا بعد قليل.",
+    "Bei uns ist etwas schiefgelaufen. Versuche es gleich noch einmal."
+  ],
+  "Something you entered isn't valid. Check it and try again.": [
+    "بعض ما أدخلته غير صالح. راجعه ثم حاول مجددًا.",
+    "Etwas, das du eingegeben hast, ist ungültig. Prüfe es und versuche es erneut."
+  ],
+  "Sorry, we can't create your account": [
+    "عذراً، لا يمكننا إنشاء حسابك",
+    "Leider können wir dein Konto nicht erstellen"
+  ],
+  "The European Commission publishes the list of certified bodies on its website.": [
+    "تنشر المفوضية الأوروبية قائمة الهيئات المعتمدة على موقعها.",
+    "Die Europäische Kommission veröffentlicht die Liste der zertifizierten Stellen auf ihrer Website."
+  ],
+  "The Zrzur team": [
+    "فريق زرزور",
+    "Das Zrzur-Team"
+  ],
+  "The date you entered is under 16": [
+    "التاريخ الذي أدخلته يعني أن عمرك أقل من 16 عاماً",
+    "Das eingegebene Datum bedeutet, dass du unter 16 bist"
+  ],
+  "The decision was made by automated means": [
+    "اتُّخذ القرار بوسائل آلية",
+    "Die Entscheidung wurde automatisiert getroffen"
+  ],
+  "The email couldn't be sent. Try again in a few minutes.": [
+    "تعذّر إرسال البريد. حاول مجددًا بعد بضع دقائق.",
+    "Die E-Mail konnte nicht gesendet werden. Versuche es in ein paar Minuten erneut."
+  ],
+  "The file holds the newest 50,000 messages you sent. For the rest, write to {0}; we answer within one month.": [
+    "يحتوي الملف على أحدث 50,000 رسالة أرسلتها. للحصول على الباقي راسلنا على {0}، ونردّ خلال شهر واحد.",
+    "Die Datei enthält die neuesten 50.000 Nachrichten, die du gesendet hast. Für den Rest schreib an {0}; wir antworten innerhalb eines Monats."
+  ],
+  "Then the file is deleted.": [
+    "بعد ذلك يُحذف الملف.",
+    "Danach wird die Datei gelöscht."
+  ],
+  "Third-party notices": [
+    "إشعارات الجهات الخارجية",
+    "Hinweise zu Drittanbieter-Komponenten"
+  ],
+  "This action doesn't exist any more.": [
+    "لم يعد هذا الإجراء موجودًا.",
+    "Diese Aktion gibt es nicht mehr."
+  ],
+  "This action has already been answered.": [
+    "تمّت الإجابة عن هذا الإجراء مسبقًا.",
+    "Auf diese Aktion wurde schon geantwortet."
+  ],
+  "This action has expired. Try it again.": [
+    "انتهت صلاحية هذا الإجراء. جرّبه مجددًا.",
+    "Diese Aktion ist abgelaufen. Versuche es erneut."
+  ],
+  "This action has too many replies.": [
+    "لهذا الإجراء ردود كثيرة جدًا.",
+    "Diese Aktion hat zu viele Antworten."
+  ],
+  "This app doesn't exist any more.": [
+    "لم يعد هذا التطبيق موجودًا.",
+    "Diese App gibt es nicht mehr."
+  ],
+  "This app isn't added to the server.": [
+    "هذا التطبيق غير مضاف إلى السيرفر.",
+    "Diese App ist nicht zum Server hinzugefügt."
+  ],
+  "This app isn't answering right now. Try again later.": [
+    "لا يستجيب هذا التطبيق الآن. حاول لاحقًا.",
+    "Diese App antwortet gerade nicht. Versuche es später erneut."
+  ],
+  "This bot isn't allowed to do this.": [
+    "لا يُسمح لهذا البوت بفعل ذلك.",
+    "Dieser Bot darf das nicht."
+  ],
+  "This bot needs to be verified before it can join more servers.": [
+    "يجب توثيق هذا البوت قبل أن ينضم إلى سيرفرات أخرى.",
+    "Dieser Bot muss verifiziert werden, bevor er weiteren Servern beitreten kann."
+  ],
+  "This can't be done right now. Check what you entered and try again.": [
+    "لا يمكن تنفيذ ذلك الآن. راجع ما أدخلته ثم حاول مجددًا.",
+    "Das geht gerade nicht. Prüfe deine Eingaben und versuche es erneut."
+  ],
+  "This channel doesn't exist any more.": [
+    "لم تعد هذه القناة موجودة.",
+    "Diesen Kanal gibt es nicht mehr."
+  ],
+  "This command doesn't exist any more.": [
+    "لم يعد هذا الأمر موجودًا.",
+    "Diesen Befehl gibt es nicht mehr."
+  ],
+  "This design isn't available.": [
+    "هذا التصميم غير متاح.",
+    "Dieses Design ist nicht verfügbar."
+  ],
+  "This email address can't be used.": [
+    "لا يمكن استخدام عنوان البريد هذا.",
+    "Diese E-Mail-Adresse kann nicht verwendet werden."
+  ],
+  "This file is empty.": [
+    "هذا الملف فارغ.",
+    "Diese Datei ist leer."
+  ],
+  "This file is too large.": [
+    "هذا الملف كبير جدًا.",
+    "Diese Datei ist zu groß."
+  ],
+  "This invite has expired or doesn't exist.": [
+    "انتهت صلاحية هذه الدعوة أو أنها غير موجودة.",
+    "Diese Einladung ist abgelaufen oder existiert nicht."
+  ],
+  "This isn't a voice channel.": [
+    "هذه ليست قناة صوتية.",
+    "Das ist kein Sprachkanal."
+  ],
+  "This link couldn't be loaded.": [
+    "تعذّر تحميل هذا الرابط.",
+    "Dieser Link konnte nicht geladen werden."
+  ],
+  "This link has expired or was already used. Ask for a new one.": [
+    "انتهت صلاحية هذا الرابط أو استُخدم مسبقًا. اطلب رابطًا جديدًا.",
+    "Dieser Link ist abgelaufen oder wurde schon benutzt. Fordere einen neuen an."
+  ],
+  "This link has no preview.": [
+    "لا توجد معاينة لهذا الرابط.",
+    "Für diesen Link gibt es keine Vorschau."
+  ],
+  "This message doesn't exist any more.": [
+    "لم تعد هذه الرسالة موجودة.",
+    "Diese Nachricht gibt es nicht mehr."
+  ],
+  "This message has too many embeds.": [
+    "تحتوي هذه الرسالة على عناصر مضمّنة كثيرة جدًا.",
+    "Diese Nachricht hat zu viele Einbettungen."
+  ],
+  "This message isn't pinned.": [
+    "هذه الرسالة غير مثبّتة.",
+    "Diese Nachricht ist nicht angeheftet."
+  ],
+  "This page couldn't be loaded right now.": [
+    "تعذّر تحميل هذه الصفحة حاليًا.",
+    "Diese Seite konnte gerade nicht geladen werden."
+  ],
+  "This page couldn't be shown. Try again.": [
+    "تعذّر عرض هذه الصفحة. حاول مجددًا.",
+    "Diese Seite konnte nicht angezeigt werden. Versuche es erneut."
+  ],
+  "This person doesn't exist any more.": [
+    "لم يعد هذا الشخص موجودًا.",
+    "Diese Person gibt es nicht mehr."
+  ],
+  "This request is too large. Try again.": [
+    "هذا الطلب كبير جدًا. حاول مجددًا.",
+    "Diese Anfrage ist zu groß. Versuche es erneut."
+  ],
+  "This role doesn't exist any more.": [
+    "لم يعد هذا الدور موجودًا.",
+    "Diese Rolle gibt es nicht mehr."
+  ],
+  "This server doesn't exist any more.": [
+    "لم يعد هذا السيرفر موجودًا.",
+    "Diesen Server gibt es nicht mehr."
+  ],
+  "This server has to be on Discover first.": [
+    "يجب أن يكون السيرفر في الاستكشاف أولًا.",
+    "Dieser Server muss zuerst in Entdecken sein."
+  ],
+  "This server isn't on Discover.": [
+    "هذا السيرفر غير موجود في «اكتشف».",
+    "Dieser Server ist nicht in Entdecken."
+  ],
+  "This sign up is marked as spam.": [
+    "صُنّف هذا التسجيل على أنه رسائل مزعجة.",
+    "Diese Registrierung wurde als Spam markiert."
+  ],
+  "This way of confirming isn't allowed here. Choose another one.": [
+    "طريقة التأكيد هذه غير مسموحة هنا. اختر طريقة أخرى.",
+    "Diese Bestätigungsart ist hier nicht erlaubt. Wähle eine andere."
+  ],
+  "Try again later, or look at similar communities.": [
+    "حاول لاحقًا، أو اطّلع على مجتمعات مشابهة.",
+    "Versuch es später noch einmal oder sieh dir ähnliche Communitys an."
+  ],
+  "Try it in the fitting room": [
+    "جرّبه في غرفة التجربة",
+    "In der Anprobe ausprobieren"
+  ],
+  "Use Appeal below. You can appeal for at least 6 months after the decision. If you cannot sign in, write to {contact} and give the reference {reference}. A person reviews it.": [
+    "استخدم «طعن» أدناه. يمكنك الطعن مدة 6 أشهر على الأقل بعد القرار. وإن تعذّر عليك تسجيل الدخول فراسلنا على {contact} واذكر الرقم المرجعي {reference}. يراجعه شخص مختص.",
+    "Nutze unten „Einspruch“. Du kannst mindestens 6 Monate nach der Entscheidung Einspruch einlegen. Wenn du dich nicht anmelden kannst, schreib an {contact} und nenne das Aktenzeichen {reference}. Ein Mensch prüft ihn."
+  ],
+  "Use this design": [
+    "استخدم هذا التصميم",
+    "Dieses Design verwenden"
+  ],
+  "Voice isn't available right now. Try again later.": [
+    "الصوت غير متاح الآن. حاول لاحقًا.",
+    "Sprachchat ist gerade nicht verfügbar. Versuche es später erneut."
+  ],
+  "We couldn't prepare your copy. Ask again, or write to {0} and we will answer within one month.": [
+    "تعذّر تجهيز نسختك. اطلبها مرة أخرى، أو راسلنا على {0} ونردّ خلال شهر واحد.",
+    "Wir konnten deine Kopie nicht vorbereiten. Fordere sie erneut an oder schreib an {0}; wir antworten innerhalb eines Monats."
+  ],
+  "We prepare it in the background and e-mail you when it's ready. You can ask once every 24 hours.": [
+    "نجهّزها في الخلفية ونراسلك بالبريد الإلكتروني عندما تصبح جاهزة. يمكنك الطلب مرة واحدة كل 24 ساعة.",
+    "Wir bereiten sie im Hintergrund vor und schicken dir eine E-Mail, sobald sie fertig ist. Du kannst einmal alle 24 Stunden anfragen."
+  ],
+  "What happened, in short plain sentences, in the user's language if you can. No internal ids.": [
+    "ما الذي حدث، بجمل قصيرة وواضحة وبلغة المستخدم إن أمكن. دون معرّفات داخلية.",
+    "Was passiert ist, in kurzen, einfachen Sätzen, wenn möglich in der Sprache der Person. Keine internen IDs."
+  ],
+  "What this followed": [
+    "ما سبق هذا القرار",
+    "Worauf das folgte"
+  ],
+  "Without an account": [
+    "بدون حساب",
+    "Ohne Konto"
+  ],
+  "Write the facts the user will see.": [
+    "اكتب الوقائع التي سيراها المستخدم.",
+    "Schreib die Fakten, die die Person sieht."
+  ],
+  "You can add up to {max} files to one message.": [
+    "{max, plural, one {يمكنك إضافة ملف واحد فقط إلى الرسالة.} two {يمكنك إضافة ملفين كحد أقصى إلى الرسالة.} few {يمكنك إضافة حتى # ملفات إلى الرسالة.} many {يمكنك إضافة حتى # ملفًا إلى الرسالة.} other {يمكنك إضافة حتى # ملف إلى الرسالة.}}",
+    "Du kannst bis zu {max} Dateien zu einer Nachricht hinzufügen."
+  ],
+  "You can also take this to a certified out-of-court dispute settlement body of your choice (Article 21 of the Digital Services Act). It does not affect your right to go to court.": [
+    "يمكنك أيضاً عرض هذا على هيئة معتمدة لتسوية النزاعات خارج المحكمة تختارها بنفسك (المادة 21 من قانون الخدمات الرقمية). ولا يمس ذلك حقك في اللجوء إلى القضاء.",
+    "Du kannst das auch einer zertifizierten außergerichtlichen Streitbeilegungsstelle deiner Wahl vorlegen (Artikel 21 des Digital Services Act). Dein Recht, ein Gericht anzurufen, bleibt unberührt."
+  ],
+  "You can reply to up to {max} messages at once.": [
+    "{max, plural, one {يمكنك الرد على رسالة واحدة فقط في كل مرة.} two {يمكنك الرد على رسالتين كحد أقصى في كل مرة.} few {يمكنك الرد على حتى # رسائل في كل مرة.} many {يمكنك الرد على حتى # رسالة في كل مرة.} other {يمكنك الرد على حتى # رسالة في كل مرة.}}",
+    "Du kannst auf bis zu {max} Nachrichten gleichzeitig antworten."
+  ],
+  "You can share up to {max} designs. Remove one and try again.": [
+    "{max, plural, one {يمكنك مشاركة تصميم واحد فقط. أزله ثم حاول مجددًا.} two {يمكنك مشاركة تصميمين كحد أقصى. أزل أحدهما ثم حاول مجددًا.} few {يمكنك مشاركة حتى # تصاميم. أزل واحدًا ثم حاول مجددًا.} many {يمكنك مشاركة حتى # تصميمًا. أزل واحدًا ثم حاول مجددًا.} other {يمكنك مشاركة حتى # تصميم. أزل واحدًا ثم حاول مجددًا.}}",
+    "Du kannst bis zu {max} Designs teilen. Entferne eins und versuche es erneut."
+  ],
+  "You can't delete this message.": [
+    "لا يمكنك حذف هذه الرسالة.",
+    "Du kannst diese Nachricht nicht löschen."
+  ],
+  "You can't do this to someone with a higher role.": [
+    "لا يمكنك فعل ذلك بمن يملك دورًا أعلى منك.",
+    "Das kannst du bei jemandem mit einer höheren Rolle nicht tun."
+  ],
+  "You join right away after accepting the rules.": [
+    "تنضم فورًا بعد قبول القواعد.",
+    "Du trittst sofort bei, nachdem du die Regeln akzeptiert hast."
+  ],
+  "You need an account to use it. After you sign in, the app opens on this design.": [
+    "تحتاج إلى حساب لاستخدامه. بعد تسجيل الدخول يُفتح التطبيق على هذا التصميم.",
+    "Zum Verwenden brauchst du ein Konto. Nach der Anmeldung öffnet sich die App bei diesem Design."
+  ],
+  "You need an invite to sign up.": [
+    "تحتاج إلى دعوة لتسجيل حساب.",
+    "Du brauchst eine Einladung, um dich zu registrieren."
+  ],
+  "You need to be friends with this person first.": [
+    "يجب أن تكون صديقًا لهذا الشخص أولًا.",
+    "Ihr müsst zuerst befreundet sein."
+  ],
+  "You read the server's rules and accept them when you join. Discover lists only servers whose owners asked to be here, and the Zrzur team checks each one first.": [
+    "تقرأ قواعد السيرفر وتقبلها عند الانضمام. لا يعرض «اكتشف» إلا السيرفرات التي طلب أصحابها ظهورها، ويراجع فريق زرزور كلًّا منها أولًا.",
+    "Beim Beitritt liest du die Regeln des Servers und akzeptierst sie. Entdecken zeigt nur Server, deren Inhaber das beantragt haben, und das Zrzur-Team prüft jeden vorher."
+  ],
+  "You'll join as soon as a moderator approves it.": [
+    "ستنضم فور موافقة أحد المشرفين.",
+    "Du trittst bei, sobald eine Moderatorin oder ein Moderator zustimmt."
+  ],
+  "You're a member": [
+    "أنت عضو",
+    "Du bist Mitglied"
+  ],
+  "You're already in this call.": [
+    "أنت في هذه المكالمة بالفعل.",
+    "Du bist schon in diesem Anruf."
+  ],
+  "You're not in this call.": [
+    "لست في هذه المكالمة.",
+    "Du bist nicht in diesem Anruf."
+  ],
+  "You're not in this group any more.": [
+    "لم تعد في هذه المجموعة.",
+    "Du bist nicht mehr in dieser Gruppe."
+  ],
+  "You've sent many reports today. Try again tomorrow.": [
+    "أرسلت بلاغات كثيرة اليوم. حاول مجددًا غدًا.",
+    "Du hast heute viele Meldungen gesendet. Versuche es morgen erneut."
+  ],
+  "You've used all your Wings. You can give up to {max}.": [
+    "{max, plural, one {استخدمت كل أجنحتك. يمكنك منح جناح واحد فقط.} two {استخدمت كل أجنحتك. يمكنك منح جناحين كحد أقصى.} few {استخدمت كل أجنحتك. يمكنك منح حتى # أجنحة.} many {استخدمت كل أجنحتك. يمكنك منح حتى # جناحًا.} other {استخدمت كل أجنحتك. يمكنك منح حتى # جناح.}}",
+    "Du hast alle deine Flügel vergeben. Du kannst bis zu {max} vergeben."
+  ],
+  "Your account and your data (including your messages and friends list) will be erased after you confirm by email and a waiting period. Some records we must keep by law, such as payments, stay for the time the law requires. You can cancel before then by writing to {0}. Download a copy of your data first: after you confirm, you can no longer sign in.": [
+    "سيُمحى حسابك وبياناتك (بما فيها رسائلك وقائمة أصدقائك) بعد تأكيدك عبر البريد الإلكتروني وانتهاء مهلة الانتظار. تبقى بعض السجلات التي يوجب القانون حفظها، مثل المدفوعات، للمدة التي يحددها القانون. يمكنك الإلغاء قبل ذلك بمراسلتنا على {0}. نزّل نسخة من بياناتك أولاً، فبعد التأكيد لن تستطيع تسجيل الدخول.",
+    "Dein Konto und deine Daten (einschließlich deiner Nachrichten und Freundesliste) werden nach deiner Bestätigung per E-Mail und einer Wartezeit gelöscht. Einige Unterlagen, die wir gesetzlich aufbewahren müssen, etwa Zahlungen, bleiben so lange bestehen, wie das Gesetz es verlangt. Bis dahin kannst du die Löschung abbrechen, indem du an {0} schreibst. Lade zuerst eine Kopie deiner Daten herunter: Nach der Bestätigung kannst du dich nicht mehr anmelden."
+  ],
+  "Your account and your data (including your messages and friends list) will be erased {0} days after you confirm by email. Some records we must keep by law, such as payments, stay for the time the law requires. You can cancel before then by writing to {1}. Download a copy of your data first: after you confirm, you can no longer sign in.": [
+    "سيُمحى حسابك وبياناتك (بما فيها رسائلك وقائمة أصدقائك) بعد مرور {0} يوماً من تأكيدك عبر البريد الإلكتروني. تبقى بعض السجلات التي يوجب القانون حفظها، مثل المدفوعات، للمدة التي يحددها القانون. يمكنك الإلغاء قبل ذلك بمراسلتنا على {1}. نزّل نسخة من بياناتك أولاً، فبعد التأكيد لن تستطيع تسجيل الدخول.",
+    "Dein Konto und deine Daten (einschließlich deiner Nachrichten und Freundesliste) werden {0} Tage nach deiner Bestätigung per E-Mail gelöscht. Einige Unterlagen, die wir gesetzlich aufbewahren müssen, etwa Zahlungen, bleiben so lange bestehen, wie das Gesetz es verlangt. Bis dahin kannst du die Löschung abbrechen, indem du an {1} schreibst. Lade zuerst eine Kopie deiner Daten herunter: Nach der Bestätigung kannst du dich nicht mehr anmelden."
+  ],
+  "Your account can't create servers.": [
+    "لا يستطيع حسابك إنشاء سيرفرات.",
+    "Dein Konto kann keine Server erstellen."
+  ],
+  "Your age can't be changed this way. If it is wrong, write to privacy@zrzur.com.": [
+    "لا يمكن تغيير عمرك بهذه الطريقة. إذا كان غير صحيح فراسلنا على privacy@zrzur.com.",
+    "Dein Alter kann so nicht geändert werden. Wenn es falsch ist, schreib an privacy@zrzur.com."
+  ],
+  "Your name": [
+    "اسمك",
+    "Dein Name"
+  ],
+  "Zrzur also works with:": [
+    "يتعاون زرزور أيضاً مع:",
+    "Zrzur arbeitet außerdem mit:"
+  ],
+  "Zrzur is only for people aged 16 and older. If you continue, your new account will be removed. If you made a mistake, go back.": [
+    "زرزور مخصص لمن بلغ 16 عاماً فأكثر. إذا تابعت فسيُزال حسابك الجديد. وإذا أخطأت في الإدخال فارجع.",
+    "Zrzur ist nur für Menschen ab 16 Jahren. Wenn du fortfährst, wird dein neues Konto entfernt. Wenn du dich vertippt hast, geh zurück."
+  ],
+  "Zrzur is only for people aged 16 and older. We did not keep anything from your sign-up.": [
+    "زرزور مخصص لمن بلغ 16 عاماً فأكثر. لم نحتفظ بأي شيء من بيانات تسجيلك.",
+    "Zrzur ist nur für Menschen ab 16 Jahren. Wir haben nichts aus deiner Anmeldung behalten."
+  ],
+  "Zrzur sites": [
+    "مواقع زرزور",
+    "Zrzur-Seiten"
+  ],
+  "Zrzur — official website": [
+    "زرزور — الموقع الرسمي",
+    "Zrzur – offizielle Website"
+  ],
+  "this tag": [
+    "هذا الوسم",
+    "diesen Tag"
+  ],
+  "{0, plural, one {# online} other {# online}}": [
+    "{0, plural, zero {لا أحد متصل} one {متصل واحد} two {متصلان} few {# متصلين} many {# متصلًا} other {# متصل}}",
+    "{0, plural, one {# online} other {# online}}"
+  ],
+  "{0} — Zrzur Designs": [
+    "{0} — تصاميم زرزور",
+    "{0} — Zrzur Designs"
+  ],
+  "{0} — Zrzur Discover": [
+    "{0} — اكتشف زرزور",
+    "{0} — Zrzur entdecken"
+  ]
+}

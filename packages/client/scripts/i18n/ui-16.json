@@ -1,0 +1,98 @@
+{
+  "Overview": ["نظرة عامة", "Übersicht"],
+  "Avatar decorations": ["زينة الصورة الرمزية", "Avatar-Rahmen"],
+  "For creators": ["للمصممين", "Für Designer"],
+  "Every design here is made by a verified creator and checked by our reviewers. Wearing them is free.": [
+    "كل تصميم هنا من صنع مصمم معتمد وراجعه فريق المراجعة. واستخدامه مجاني.",
+    "Jedes Design hier stammt von einem verifizierten Designer und wurde geprüft. Tragen ist kostenlos."
+  ],
+  "Made by verified creators": [
+    "من تصميم مصممين معتمدين",
+    "Von verifizierten Designern"
+  ],
+  "Make your profile yours": [
+    "اجعل ملفك الشخصي يشبهك",
+    "Mach dein Profil zu deinem"
+  ],
+  "Avatar decorations and nameplates from Zrzur's creators. Try them on with your own avatar, save the ones you like and wear them for free.": [
+    "إطارات ولوحات أسماء من مصممي زرزور. جرّبها على صورتك، احفظ ما يعجبك، واستخدمها مجانًا.",
+    "Avatar-Rahmen und Namensschilder von Zrzurs Designern. Probier sie mit deinem Avatar aus, speichere deine Favoriten und trage sie kostenlos."
+  ],
+  "Designs you saved with the heart.": [
+    "التصاميم التي حفظتها بالقلب.",
+    "Designs, die du mit dem Herz gespeichert hast."
+  ],
+  "The people who make Zrzur's community designs.": [
+    "الأشخاص الذين يصنعون زينة المجتمع في زرزور.",
+    "Die Menschen hinter Zrzurs Community-Designs."
+  ],
+  "Search designs, tags or creators": [
+    "ابحث عن تصميم أو وسم أو مصمم",
+    "Designs, Tags oder Designer suchen"
+  ],
+  "No community designs yet": [
+    "لا توجد زينة مجتمع بعد",
+    "Noch keine Community-Designs"
+  ],
+  "Designs appear here once a creator publishes one and a reviewer approves it.": [
+    "تظهر التصاميم هنا بعد أن ينشرها مصمم ويوافق عليها مراجع.",
+    "Designs erscheinen hier, sobald ein Designer eins einreicht und es angenommen wird."
+  ],
+  "Creators to know": ["مصممون مميزون", "Designer zum Entdecken"],
+  "Popular decorations": ["الإطارات الأكثر شعبية", "Beliebte Avatar-Rahmen"],
+  "New this week": ["جديد هذا الأسبوع", "Neu diese Woche"],
+  "Nothing found": ["لا توجد نتائج", "Nichts gefunden"],
+  "Try another word, a tag like “glow”, or a creator's name.": [
+    "جرّب كلمة أخرى، أو وسمًا مثل «glow»، أو اسم مصمم.",
+    "Versuch ein anderes Wort, einen Tag wie „glow“ oder den Namen eines Designers."
+  ],
+  "A background behind your name in member lists.": [
+    "خلفية خلف اسمك في قوائم الأعضاء.",
+    "Ein Hintergrund hinter deinem Namen in Mitgliederlisten."
+  ],
+  "A frame around your avatar, everywhere you appear.": [
+    "إطار حول صورتك الرمزية أينما ظهرت.",
+    "Ein Rahmen um deinen Avatar, überall wo du erscheinst."
+  ],
+  "Nothing here yet": ["لا شيء هنا بعد", "Hier ist noch nichts"],
+  "No favourites yet": ["لا توجد مفضلة بعد", "Noch keine Favoriten"],
+  "Browse designs": ["تصفّح التصاميم", "Designs ansehen"],
+  "No creators yet": ["لا يوجد مصممون بعد", "Noch keine Designer"],
+  "Creators show up here once their first design is published.": [
+    "يظهر المصممون هنا بعد نشر أول تصميم لهم.",
+    "Designer erscheinen hier, sobald ihr erstes Design veröffentlicht ist."
+  ],
+  "All creators": ["كل المصممين", "Alle Designer"],
+  "Creator not found": ["لم يُعثر على المصمم", "Designer nicht gefunden"],
+  "This creator has no published designs.": [
+    "لا توجد تصاميم منشورة لهذا المصمم.",
+    "Dieser Designer hat keine veröffentlichten Designs."
+  ],
+  "{0} designs": [
+    "{0, plural, one {تصميم واحد} two {تصميمان} few {# تصاميم} many {# تصميمًا} other {# تصميم}}",
+    "{0} Designs"
+  ],
+  "Worn by {0}": ["يستخدمه {0}", "Getragen von {0}"],
+  "{0} designs · worn by {1}": [
+    "{0} تصاميم · يستخدمها {1}",
+    "{0} Designs · getragen von {1}"
+  ],
+  "Wearing": ["تستخدمه", "Getragen"],
+  "Save": ["حفظ", "Speichern"],
+  "Saved": ["محفوظ", "Gespeichert"],
+  "You're wearing this. Everyone sees it on your profile.": [
+    "أنت تستخدم هذا التصميم. يراه الجميع في ملفك الشخصي.",
+    "Du trägst das. Alle sehen es auf deinem Profil."
+  ],
+  "Designs couldn't be loaded": [
+    "تعذّر تحميل التصاميم",
+    "Designs konnten nicht geladen werden"
+  ],
+  "Check your connection and try again in a moment.": [
+    "تحقق من اتصالك وحاول مجددًا بعد قليل.",
+    "Prüf deine Verbindung und versuch es gleich nochmal."
+  ],
+  "New from creators": ["جديد من المصممين", "Neu von Designern"],
+  "Manage creators": ["إدارة المصممين", "Designer verwalten"],
+  "Nameplates": ["لوحات الأسماء", "Namensschilder"]
+}

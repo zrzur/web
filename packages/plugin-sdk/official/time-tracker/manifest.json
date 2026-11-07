@@ -1,0 +1,78 @@
+{
+  "$schema": "../../schema/plugin-manifest.v1.schema.json",
+  "manifest_version": 1,
+  "id": "zrzur.time-tracker",
+  "name": "Time Tracker",
+  "version": "1.0.0",
+  "description": "See where your time goes: how long you spent in each channel today, kept only on this device, with a gentle reminder when you pass your daily limit.",
+  "author": { "name": "Zrzur" },
+  "category": "productivity",
+  "icon": "hourglass",
+  "api_version": 1,
+  "min_app_version": "26.0.0",
+  "platforms": ["web", "pwa", "desktop"],
+  "entrypoint": { "type": "worker", "file": "main.js" },
+  "permissions": ["ui.commands", "ui.panels", "keybinds", "storage.settings", "notifications.show", "context.channel"],
+  "contributes": {
+    "settings": [
+      {
+        "key": "limit_minutes",
+        "type": "number",
+        "title": { "en": "Daily reminder after (minutes)", "ar": "تذكير يومي بعد (دقائق)", "de": "Tägliche Erinnerung nach (Minuten)" },
+        "description": { "en": "0 turns the reminder off.", "ar": "صفر يوقف التذكير.", "de": "0 schaltet die Erinnerung aus." },
+        "default": 120,
+        "min": 0,
+        "max": 720,
+        "step": 15
+      }
+    ],
+    "commands": [
+      { "id": "report", "title": { "en": "Show today's time", "ar": "عرض وقت اليوم", "de": "Heutige Zeit anzeigen" }, "action": { "type": "worker", "handler": "report" } },
+      { "id": "clear", "title": { "en": "Clear today's time", "ar": "مسح وقت اليوم", "de": "Heutige Zeit löschen" }, "action": { "type": "worker", "handler": "clear" } }
+    ],
+    "keybinds": [{ "command": "report", "keys": "Alt+Shift+Y" }],
+    "events": ["channel.switch"]
+  },
+  "locales": {
+    "ar": {
+      "name": "متتبع الوقت",
+      "description": "اعرف أين يذهب وقتك: كم قضيت في كل قناة اليوم، محفوظاً على هذا الجهاز فقط، مع تذكير لطيف عند تجاوز حدك اليومي.",
+      "strings": {
+        "title": "وقتك اليوم",
+        "total": "المجموع: {t}",
+        "none": "لم يُسجّل وقت بعد اليوم. افتح قناة لتبدأ.",
+        "dm": "رسائل خاصة",
+        "clear": "مسح اليوم",
+        "limit": "قضيت {t} في زرزور اليوم. ربما حان وقت استراحة؟",
+        "min": "{n} د",
+        "hour": "{h} س {m} د"
+      }
+    },
+    "de": {
+      "name": "Zeiterfassung",
+      "description": "Sieh, wo deine Zeit bleibt: wie lange du heute in jedem Kanal warst, nur auf diesem Gerät gespeichert, mit einer sanften Erinnerung über deinem Tageslimit.",
+      "strings": {
+        "title": "Deine Zeit heute",
+        "total": "Gesamt: {t}",
+        "none": "Heute noch keine Zeit erfasst. Öffne einen Kanal, um zu beginnen.",
+        "dm": "Direktnachrichten",
+        "clear": "Heute löschen",
+        "limit": "Du warst heute {t} in Zrzur. Zeit für eine Pause?",
+        "min": "{n} Min.",
+        "hour": "{h} Std. {m} Min."
+      }
+    },
+    "en": {
+      "strings": {
+        "title": "Your time today",
+        "total": "Total: {t}",
+        "none": "No time recorded yet today. Open a channel to start.",
+        "dm": "Direct messages",
+        "clear": "Clear today",
+        "limit": "You've spent {t} in Zrzur today. Time for a break?",
+        "min": "{n} min",
+        "hour": "{h} h {m} min"
+      }
+    }
+  }
+}
