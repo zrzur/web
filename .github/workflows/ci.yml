@@ -19,6 +19,11 @@ jobs:
         with:
           fetch-depth: 0
           persist-credentials: false
+      - name: Private submodules (sdk-js)
+        env:
+          SUBMODULE_TOKEN: ${{ secrets.SUBMODULE_TOKEN }}
+        run: |
+          git -c url."https://x-access-token:${SUBMODULE_TOKEN}@github.com/zrzur/sdk-js".insteadOf="https://github.com/zrzur/sdk-js" submodule update --init --recursive
       - name: Reviewed public source files
         run: python3 scripts/publication_guard.py
       - name: Secrets in the new commits
@@ -37,9 +42,12 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
-          token: ${{ secrets.SUBMODULE_TOKEN }}
-          submodules: recursive
           persist-credentials: false
+      - name: Private submodules (sdk-js)
+        env:
+          SUBMODULE_TOKEN: ${{ secrets.SUBMODULE_TOKEN }}
+        run: |
+          git -c url."https://x-access-token:${SUBMODULE_TOKEN}@github.com/zrzur/sdk-js".insteadOf="https://github.com/zrzur/sdk-js" submodule update --init --recursive
       - uses: pnpm/action-setup@v4
       - uses: actions/setup-node@v4
         with:

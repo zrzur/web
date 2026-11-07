@@ -52,9 +52,12 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
-          token: ${{ secrets.SUBMODULE_TOKEN }}
-          submodules: recursive
           persist-credentials: false
+      - name: Private submodules (sdk-js)
+        env:
+          SUBMODULE_TOKEN: ${{ secrets.SUBMODULE_TOKEN }}
+        run: |
+          git -c url."https://x-access-token:${SUBMODULE_TOKEN}@github.com/zrzur/sdk-js".insteadOf="https://github.com/zrzur/sdk-js" submodule update --init --recursive
       - uses: actions/checkout@v4
         with:
           repository: zrzur/backend
@@ -62,6 +65,11 @@ jobs:
           path: .stack/backend
           persist-credentials: false
 
+      - name: Private submodules (sdk-js)
+        env:
+          SUBMODULE_TOKEN: ${{ secrets.SUBMODULE_TOKEN }}
+        run: |
+          git -c url."https://x-access-token:${SUBMODULE_TOKEN}@github.com/zrzur/sdk-js".insteadOf="https://github.com/zrzur/sdk-js" submodule update --init --recursive
       - name: MinIO for files
         run: |
           docker run -d --rm -p 127.0.0.1:14009:9000 -e MINIO_ROOT_USER=minioautumn \
