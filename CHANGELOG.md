@@ -41,6 +41,7 @@
 
 ### Bug Fixes
 
+* **Updates reach every browser:** a browser could stay on an old copy of the app after a release or a server address change (for example "Connection lost" against an old WebSocket address), until the user cleared the site's data by hand. The container now moves the app's files to a folder named after the build and its addresses, so any change gives every file a new address; caches and the service worker can no longer hand out old copies. A new service worker takes over at once and the page reloads onto it. The app's files are cached for a year, the page, the service worker and the manifest are always checked.
 * **Errors in plain words:** a refused form says what the field needs ("Description: Between 20 and 1000 characters.") in Arabic, English and German. Text from the server's validator, source paths, error types and JSON no longer reach a screen; Details keeps the error type and one plain line.
 * **Bot limit:** reaching it says the limit and the day you can make another bot.
 * **Profile settings:** boxes have the same padding and save bar as their siblings. A link that isn't https says so next to the field before anything is sent. A chosen interest is filled, and the limit of 10 shows. Settings rows keep text 12 px from the border of their box.

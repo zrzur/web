@@ -1,11 +1,13 @@
 // Static server for the built web client (replaces `sirv` without cache
 // headers, which made every visit re-download the whole app).
 //
-// - /assets/* (hashed names): cached for a week. Not "immutable": inject.js
-//   writes runtime URLs into these files after the build, so the same name
-//   can change when the deployment's URLs change.
+// - /assets/<release>/* (files Vite emitted, moved there by inject.js): cached
+//   for a year, immutable. The release folder changes whenever the build or
+//   any injected URL changes, so a name never gets new bytes.
+// - other /assets/* (stable names in sub-folders such as assets/web/): a week.
 // - emoji, badges, decorations and other static art: cached for 30 days.
-// - index.html and anything else: always revalidated, so updates roll out.
+// - index.html, serviceWorker.js, the web manifest and anything else: always
+//   revalidated, so a new release reaches every browser on its next visit.
 // - ETags on everything, so revalidation is a cheap 304.
 // - Text files (JS, CSS, HTML, SVG, JSON) are gzipped once and kept in memory.
 // - Unknown paths fall back to index.html (single-page app), CORS open as
@@ -50,7 +52,10 @@ const COMPRESSIBLE = /\.(html|js|mjs|css|json|webmanifest|svg|txt|map)$/i;
 const LONG_LIVED = /^\/(emoji|badges|decorations|brand|assets_fallback|third-party|sounds)\//;
 
 /** Cache-Control for a request path */
+const RELEASE = /^\/assets\/[0-9a-f]{12}\//;
+
 function cacheControl(path) {
+  if (RELEASE.test(path)) return "public, max-age=31536000, immutable";
   if (path.startsWith("/assets/")) return "public, max-age=604800";
   if (LONG_LIVED.test(path)) return "public, max-age=2592000";
   return "no-cache";

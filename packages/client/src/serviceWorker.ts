@@ -71,6 +71,17 @@ self.addEventListener("push", (event) => {
   );
 });
 
+// A new release takes over at once: it installs without waiting for open tabs
+// to close and controls them right away; registerSW (autoUpdate) then reloads
+// the page onto the new files. Without this a tab could stay on an old release
+// (old URLs included) until every Zrzur tab was closed.
+self.addEventListener("install", () => {
+  void self.skipWaiting();
+});
+self.addEventListener("activate", (event) => {
+  event.waitUntil(self.clients.claim());
+});
+
 cleanupOutdatedCaches();
 
 // Only the shell is listed (scripts/precacheShell.mjs); the rest of the app is

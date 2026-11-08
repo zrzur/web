@@ -370,9 +370,13 @@ export async function handle(req, res) {
           TYPES[extname(file)] ?? "application/octet-stream",
           readFileSync(file),
           {
-            "Cache-Control": path.startsWith("/assets/")
+            // files Vite emitted live in assets/<release>/ (docker/inject.js),
+            // whose name changes with every build or URL change
+            "Cache-Control": /^\/assets\/[0-9a-f]{12}\//.test(path)
               ? "public, max-age=31536000, immutable"
-              : "public, max-age=3600",
+              : path.startsWith("/assets/")
+                ? "public, max-age=604800"
+                : "public, max-age=3600",
           },
         );
     }
