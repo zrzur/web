@@ -152,6 +152,20 @@ export function TextChannel(props: ChannelPageProps) {
     ),
   );
 
+  // When the newest message is your own (sent from this or another device,
+  // or an older read mark the server kept), you have caught up: the
+  // "new messages" bar and divider go
+  createEffect(
+    on(
+      () => props.channel.lastMessage?.authorId,
+      (authorId) => {
+        if (authorId && authorId === client().user?.id && lastId()) {
+          setLastId(undefined);
+        }
+      },
+    ),
+  );
+
   // Mark as read on re-focus
   function onFocus() {
     if (props.channel.unread && atEnd()) {
