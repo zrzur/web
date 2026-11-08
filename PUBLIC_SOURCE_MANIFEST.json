@@ -292,8 +292,8 @@
     },
     {
       "path": "CHANGELOG.md",
-      "sha256": "19069258a60d0ed304cf8d4e37d3fbc268055de22d2ae8bead74ba7ba9ba7dbf",
-      "bytes": 93888,
+      "sha256": "92427a99a50e13607e886ffdc9a9053c997f282ba7f68db2d7d7235a4310a441",
+      "bytes": 94470,
       "category": "public-documentation"
     },
     {
@@ -2560,8 +2560,8 @@
     },
     {
       "path": "packages/client/components/i18n/catalogs/ar/messages.po",
-      "sha256": "a2e5e0fba85994cab5a3caede2c6d6d6acc228c8df2957748aa5e5b4dc02b3ab",
-      "bytes": 849879,
+      "sha256": "42668725e460d5ad3e25ee72bdbc998eac7e10d6c9e08f33c807a14120f4cde1",
+      "bytes": 849890,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -5368,8 +5368,8 @@
     },
     {
       "path": "packages/client/components/ui/components/features/profiles/decorations.css",
-      "sha256": "846ba0a6930df276515f59e5aefe997b2c47b0f586d1fac0e81e7708817030bb",
-      "bytes": 4081,
+      "sha256": "8c8a5b5eb6a9747364ff9ff2d3e88e997af1cc730d2e595a01f32d736362540f",
+      "bytes": 4456,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -37366,8 +37366,8 @@
     },
     {
       "path": "packages/client/scripts/i18n/ui-110402.json",
-      "sha256": "5c7ecb99d8eebb571b834db4873b23a161953058bfa663ef6ab7aba06bb6cbb4",
-      "bytes": 25134,
+      "sha256": "c373c513f717bd4463db6c4fb5e85e1449d45d1e45035aeed0f076a885cb2653",
+      "bytes": 25162,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -37498,8 +37498,8 @@
     },
     {
       "path": "packages/client/scripts/i18n/ui-14.json",
-      "sha256": "a8a4df744cd15e04ba8ccc53f226bc9621d233d3d7f058cb7657ebe4dab21725",
-      "bytes": 7170,
+      "sha256": "4b1b5b35bae0a936dd47146b25187e2193638821022863894a1fe71b065c1bfd",
+      "bytes": 7168,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -37582,8 +37582,8 @@
     },
     {
       "path": "packages/client/scripts/i18n/ui-174.json",
-      "sha256": "86cfd190a601b27461a1ea234f89d730f87c14d60f98b524a9b904fbcc0c1675",
-      "bytes": 7501,
+      "sha256": "62c171360e72a4ae773fcf1c0362828cc8ef7f638ec2654f30fa8b6038129869",
+      "bytes": 7523,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -37678,8 +37678,8 @@
     },
     {
       "path": "packages/client/scripts/i18n/ui-200.json",
-      "sha256": "37225bc78d0d34a0e1d9c95ac5d61aa33d4338a8af86837418837f5c5f85db6f",
-      "bytes": 1259,
+      "sha256": "bfc6201ab999fcf0c270e5ec84ddbb62253ffe2aa86dab47ed11d206b0f5d07b",
+      "bytes": 1253,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -37852,8 +37852,8 @@
     },
     {
       "path": "packages/client/scripts/i18n/ui-300.json",
-      "sha256": "b4f8b8120124326e35e97ce1505aa04c64f8390fd887734492d4d5819f1ff60f",
-      "bytes": 17127,
+      "sha256": "d1eb2b315db663b47e998b1292fd5cd0aa89fdee4724409ea5370696ecfc413a",
+      "bytes": 17113,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -38224,14 +38224,14 @@
     },
     {
       "path": "packages/client/scripts/i18n/ui-98.json",
-      "sha256": "aa43b59e3c83fdfa7cb88c5538cec1785a95238a226a8d7c5d13b6e251d5d4f9",
-      "bytes": 5207,
+      "sha256": "6c950e06a68ded7475c67b5c272661fd7d65669a05cbe71c42ad5a44314347e0",
+      "bytes": 5215,
       "category": "product-source-or-build-manifest"
     },
     {
       "path": "packages/client/scripts/i18n/ui-99.json",
-      "sha256": "fd691e402496ba66f902ded7fa026de2021b27c26a8960c70b99bcf5740129bd",
-      "bytes": 3912,
+      "sha256": "71874b8c96a7c92863ffde86550cf6ca677b71a00c140826fff2b4972855ee45",
+      "bytes": 3916,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -38338,14 +38338,14 @@
     },
     {
       "path": "packages/client/scripts/voice-translations.mjs",
-      "sha256": "16ce76ef780f6dda68f2299ae49aa15ebbb56d5da722c92198a86288a0601712",
-      "bytes": 8237,
+      "sha256": "c9f69d85dbb73e42a9a25b4fd74ffe6cab82384ae33402477129a8f225b69e74",
+      "bytes": 8212,
       "category": "product-source-or-build-manifest"
     },
     {
       "path": "packages/client/scripts/zrzur-translations.mjs",
-      "sha256": "fc020914c4b04e61ac005ac9e1e665a8b320b2017cf4d45fd9ff397516cc5044",
-      "bytes": 90584,
+      "sha256": "7fd053142f79f9e77e9d68d8bb86f11a658af18d2160995ce6fc6153fc3a288f",
+      "bytes": 90580,
       "category": "product-source-or-build-manifest"
     },
     {
