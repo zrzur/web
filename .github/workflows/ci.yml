@@ -68,6 +68,8 @@ jobs:
         run: pnpm exec tsc --noEmit
       - name: Lint
         run: pnpm exec eslint .
+      - name: Container scripts (runtime URLs, release folder)
+        run: node --test docker/inject.test.js
       - name: No native select
         run: |
           # ESLint sees <select>; a styled("select") wrapper needs this search.

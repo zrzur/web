@@ -82,6 +82,13 @@ jobs:
             "${IMAGE}:sha-${GITHUB_SHA}"
           for _ in $(seq 30); do curl -fsS http://127.0.0.1:5000/ -o index.html && break; sleep 2; done
           grep -q 'id="root"' index.html
+          # files come from a release folder with a long cache; the page and
+          # service worker are always checked, so updates reach every browser
+          release=$(grep -oE '/assets/[0-9a-f]{12}/[^"]+\.js' index.html | head -1)
+          test -n "$release" || { echo 'index.html loads no file from a release folder.'; exit 1; }
+          curl -fsSI "http://127.0.0.1:5000$release" | grep -qi 'cache-control: public, max-age=31536000, immutable'
+          curl -fsSI http://127.0.0.1:5000/serviceWorker.js | grep -qi 'cache-control: no-cache'
+          curl -fsSI http://127.0.0.1:5000/ | grep -qi 'cache-control: no-cache'
           docker exec smoke sh -c 'grep -rl "https://api.example.test" dist_injected | head -1' | grep -q .
           if docker exec smoke sh -c 'grep -rl "__VITE_API_URL__" dist_injected'; then
             echo 'API placeholder was not injected.'
