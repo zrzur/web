@@ -292,8 +292,8 @@
     },
     {
       "path": "CHANGELOG.md",
-      "sha256": "5e1bc354041878b2c5037bd82300e84908deaf5042f04d12622fb67479d91703",
-      "bytes": 93585,
+      "sha256": "19069258a60d0ed304cf8d4e37d3fbc268055de22d2ae8bead74ba7ba9ba7dbf",
+      "bytes": 93888,
       "category": "public-documentation"
     },
     {
@@ -5206,8 +5206,8 @@
     },
     {
       "path": "packages/client/components/ui/components/features/profiles/AvatarDecoration.tsx",
-      "sha256": "ba93ef8060477186abe156ad209ade669a7223960c3d06ffc5210d3debbf50e6",
-      "bytes": 3272,
+      "sha256": "725b073c818f2625daf3ce7769857514a9d21137873a06563948cd8e7d821242",
+      "bytes": 3490,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -5464,14 +5464,14 @@
     },
     {
       "path": "packages/client/components/ui/components/features/profiles/userStyle.test.ts",
-      "sha256": "d605e9fa82bc55f4f322e9e26a323b994300766962067881f5d5b17d76e176d3",
-      "bytes": 7007,
+      "sha256": "240b9f8b9460d101d2191b7956dac9d87a9ab4d0623714bf4c3f88b0c6b6fcc9",
+      "bytes": 7084,
       "category": "synthetic-test-source-or-fixture"
     },
     {
       "path": "packages/client/components/ui/components/features/profiles/userStyle.ts",
-      "sha256": "b55f113b1f479d89decec65403d3d4a4d5804a2298fb74d83107e790fcfb0456",
-      "bytes": 13625,
+      "sha256": "d9fc8e4d2ee7bf89cd83f3829d370272720c487a5e0bd8524178998ec05bf629",
+      "bytes": 13840,
       "category": "product-source-or-build-manifest"
     },
     {
