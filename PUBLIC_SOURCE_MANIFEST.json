@@ -292,8 +292,8 @@
     },
     {
       "path": "CHANGELOG.md",
-      "sha256": "940684f08431569d233df775867581bba907c7fb63aaaee5b6bf7721159a386b",
-      "bytes": 94705,
+      "sha256": "9f346b2e1243e4cc53c1af131ab82bccba0dedcf88e24d26ece0464cf7d21426",
+      "bytes": 95336,
       "category": "public-documentation"
     },
     {
@@ -5206,8 +5206,8 @@
     },
     {
       "path": "packages/client/components/ui/components/features/profiles/AvatarDecoration.tsx",
-      "sha256": "725b073c818f2625daf3ce7769857514a9d21137873a06563948cd8e7d821242",
-      "bytes": 3490,
+      "sha256": "071f205176ea87265aba46d24392acf09d25cf8dd60eb7dd5bac561cbe1f07b9",
+      "bytes": 3545,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -5218,8 +5218,8 @@
     },
     {
       "path": "packages/client/components/ui/components/features/profiles/NameplateMotion.tsx",
-      "sha256": "3131cb0a0f079bb2fbb50a38f30a784edc0450a2ff9f2396cc094facd1419c8c",
-      "bytes": 1164,
+      "sha256": "4be93bac1698d5073c099f4051ba6f3a9e6ec578f59ef7df0caf51fb80115f82",
+      "bytes": 2743,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -5368,8 +5368,8 @@
     },
     {
       "path": "packages/client/components/ui/components/features/profiles/decorations.css",
-      "sha256": "8c8a5b5eb6a9747364ff9ff2d3e88e997af1cc730d2e595a01f32d736362540f",
-      "bytes": 4456,
+      "sha256": "3224c44f1494c0b47177ced3b3eb6c11282d68b1ff6d839d31f97ade3ddcc85b",
+      "bytes": 4732,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -38638,8 +38638,8 @@
     },
     {
       "path": "packages/client/src/interface/designs/Wall.tsx",
-      "sha256": "e82f514de9c16f8c34de9d1aa1d7d02bf4b9b45734d922cce19f262d4ad7fd4e",
-      "bytes": 34011,
+      "sha256": "77ddc6b450170da76a57ec8912b39b7ae3d6b74a23b8455dd9dbd9176a5e39ce",
+      "bytes": 34967,
       "category": "product-source-or-build-manifest"
     },
     {
