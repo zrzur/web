@@ -28,8 +28,8 @@
     },
     {
       "path": ".github/workflows/ci.yml",
-      "sha256": "a15ec9a38a6e214fa2d8debee42a856e5d8d0acd9d1d1d4459ce05a63979586c",
-      "bytes": 3578,
+      "sha256": "fc59ec0c663edf134a65e180ff51b90d954278db2f53333f60c0091f45d0d059",
+      "bytes": 3628,
       "category": "reviewed-build-and-ci"
     },
     {
