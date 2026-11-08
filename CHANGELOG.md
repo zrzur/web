@@ -41,6 +41,7 @@
 
 ### Bug Fixes
 
+* **Designs scrolls lightly:** every nameplate tile kept a resting light layer (two animated boxes) that Chrome had to place on every frame, and tiles sliding under a still pointer while the wall scrolled each started their effect and changed the mirror. The light layer now exists only while a plate is hovered or focused, effects and the mirror wait until the pointer rests on a tile for 200 ms (clicks and the keyboard act at once), and the shadow under decorations is kept for large ones. Measured on the wall: endless animations 37 to 0, frame callbacks while scrolling about 22 to 2 a second, layer work 754 to about 490 ms.
 * **Nameplates in the member list have room:** a plate filled its whole row, so two plated members touched. A plate now keeps 3 px above and below (a 6 px gap between rows), keeps its shape from that height and sits at the emblem end.
 * **Nameplates come in gently:** a plate was hidden up to a third of the row and then appeared over a short stretch, which read as a hard edge. It now starts as a faint trace beside the avatar, rises on an even curve that stays low under the name, and is whole from the middle of the row to its emblem, in both reading directions.
 * **One Arabic word for roles:** the Arabic app said both «رتبة» and «دور» for a role. Every role is now «دور / أدوار», as on the Roles page; «رتبة» stays only where it means rank («الأعضاء الأدنى رتبة»).

@@ -21,6 +21,13 @@
   max-width: none;
   pointer-events: none;
   user-select: none;
+}
+/*
+ * A soft shadow lifts large art off the card. On small avatars (lists, chat)
+ * it is under a pixel and invisible, but a filter on every picture doubled the
+ * slow frames while a page of them scrolled, so only large ones get it.
+ */
+.z-deco[data-large] > .z-deco-art {
   filter: drop-shadow(0 1px 1.5px rgb(0 0 0 / 35%));
 }
 .z-deco-art[data-hidden] {

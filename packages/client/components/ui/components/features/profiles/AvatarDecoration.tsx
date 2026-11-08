@@ -68,6 +68,7 @@ export function AvatarDecoration(props: {
       <span
         class="z-deco"
         data-deco={props.decoration}
+        data-large={props.size >= 64 ? "" : undefined}
         style={{ "--deco-size": `${props.size}px` }}
         onPointerEnter={() => setHovered(true)}
         onPointerLeave={() => {

@@ -384,15 +384,41 @@ export function Wall(props: {
   );
 }
 
+/**
+ * How long the pointer rests on a tile before it plays or shows on you. While
+ * the wall scrolls, tiles slide under a still pointer: each would start its
+ * effect and repaint the mirror, which made scrolling heavy. A resting pointer
+ * is a choice; a passing one is not. Clicks and the keyboard act at once.
+ */
+const REST_MS = 200;
+
+/** Calls `then` once the pointer has rested for REST_MS; `cancel` on leave */
+function useRest() {
+  let timer: ReturnType<typeof setTimeout> | undefined;
+  const cancel = () => clearTimeout(timer);
+  onCleanup(cancel);
+  return {
+    after: (then: () => void) => {
+      cancel();
+      timer = setTimeout(then, REST_MS);
+    },
+    cancel,
+  };
+}
+
 /** A tap tries it on and sends it flying to you */
 function useTileActions(wear: () => Wear | undefined, name: () => string) {
   const tryOn = useTryOn();
+  const rest = useRest();
   return {
     pressed: () => !!wear() && tryOn.wearing(wear()!),
     onPointerEnter: (e: PointerEvent) => {
-      if (e.pointerType === "mouse") tryOn.peek(wear());
+      if (e.pointerType === "mouse") rest.after(() => tryOn.peek(wear()));
     },
-    onPointerLeave: () => tryOn.peek(undefined),
+    onPointerLeave: () => {
+      rest.cancel();
+      tryOn.peek(undefined);
+    },
     onFocus: () => tryOn.peek(wear()),
     onBlur: () => tryOn.peek(undefined),
     tap: (el: HTMLElement) => {
@@ -455,7 +481,9 @@ function DesignTile(props: {
   // an effect plays while the pointer or the keyboard rests on its tile
   const [playing, setPlaying] = createSignal(false);
   const [play, setPlay] = createSignal(0);
+  const rest = useRest();
   const start = () => {
+    rest.cancel();
     setPlaying(true);
     setPlay((n) => n + 1);
   };
@@ -471,10 +499,11 @@ function DesignTile(props: {
         aria-pressed={act.pressed()}
         aria-label={t`Try on ${props.tile.name}`}
         onPointerEnter={(e) => {
-          if (e.pointerType === "mouse") start();
+          if (e.pointerType === "mouse") rest.after(start);
           act.onPointerEnter(e);
         }}
         onPointerLeave={() => {
+          rest.cancel();
           setPlaying(false);
           act.onPointerLeave();
         }}
@@ -608,6 +637,7 @@ function MakerTile(props: { tile: Tile; onMaker?: (id: string) => void }) {
 function PaintBand() {
   const labels = useStyleLabels();
   const tryOn = useTryOn();
+  const rest = useRest();
   return (
     <Paint>
       <Index each={THEME_PRESETS}>
@@ -620,9 +650,12 @@ function PaintBand() {
             }}
             onPointerEnter={(e) => {
               if (e.pointerType === "mouse")
-                tryOn.peek({ theme: [...preset().colours] });
+                rest.after(() => tryOn.peek({ theme: [...preset().colours] }));
             }}
-            onPointerLeave={() => tryOn.peek(undefined)}
+            onPointerLeave={() => {
+              rest.cancel();
+              tryOn.peek(undefined);
+            }}
             onClick={(e) => {
               if (isDesignsSite()) return;
               flyToDock(e.currentTarget);
