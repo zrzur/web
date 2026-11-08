@@ -45,11 +45,25 @@
 
 /*
  * Every nameplate, in one place: give an element this class and `--plate`.
- * The plate is clear from the name's start to about the middle, then comes in
- * towards the emblem, so what is behind the row shows through under the name.
+ * The plate starts as a faint trace beside the avatar and comes in on an
+ * ease-in curve: barely there under the name, then faster, whole at the
+ * middle of the row and from there to the emblem. No visible edge anywhere,
+ * the name stays readable, and the art is complete where it matters.
  * It sits on a layer of its own: the mask must not touch the row's content.
  * The element is its own positioned box, relative or absolute as it needs.
  */
+:root {
+  --z-plate-fade:
+    rgb(0 0 0 / 0.02) 0%,
+    rgb(0 0 0 / 0.02) 6.25%,
+    rgb(0 0 0 / 0.04) 12.5%,
+    rgb(0 0 0 / 0.08) 18.75%,
+    rgb(0 0 0 / 0.15) 25%,
+    rgb(0 0 0 / 0.27) 31.25%,
+    rgb(0 0 0 / 0.45) 37.5%,
+    rgb(0 0 0 / 0.7) 43.75%,
+    #000 50%;
+}
 .z-plate {
   isolation: isolate;
   overflow: hidden;
@@ -67,14 +81,9 @@
 .z-plate-motion {
   -webkit-mask-image: linear-gradient(
     var(--z-plate-angle, 90deg),
-    transparent 35%,
-    #000 65%
+    var(--z-plate-fade)
   );
-  mask-image: linear-gradient(
-    var(--z-plate-angle, 90deg),
-    transparent 35%,
-    #000 65%
-  );
+  mask-image: linear-gradient(var(--z-plate-angle, 90deg), var(--z-plate-fade));
 }
 
 /*
