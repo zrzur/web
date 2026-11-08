@@ -28,8 +28,8 @@
     },
     {
       "path": ".github/workflows/ci.yml",
-      "sha256": "93afdcfd0e511f2b9ff5a78c32f5f06312acdf4f7a334f92ca2dbd8a366cb59d",
-      "bytes": 3468,
+      "sha256": "a15ec9a38a6e214fa2d8debee42a856e5d8d0acd9d1d1d4459ce05a63979586c",
+      "bytes": 3578,
       "category": "reviewed-build-and-ci"
     },
     {
@@ -46,8 +46,8 @@
     },
     {
       "path": ".github/workflows/images.yml",
-      "sha256": "bb6587e20962de7ff8950b39e788e69450d34223274917e7eb0c3b8f44c13f26",
-      "bytes": 4150,
+      "sha256": "e864751e56c226741c79952cfa284225b9e7cd3100eedf981815b10c57c1419b",
+      "bytes": 4784,
       "category": "reviewed-build-and-ci"
     },
     {
@@ -292,8 +292,8 @@
     },
     {
       "path": "CHANGELOG.md",
-      "sha256": "44316d3daa9faa6324e701d525b76bcdf5b4e5ca73deb9b8f0fba4f6e9d8f6f9",
-      "bytes": 92967,
+      "sha256": "5e1bc354041878b2c5037bd82300e84908deaf5042f04d12622fb67479d91703",
+      "bytes": 93585,
       "category": "public-documentation"
     },
     {
@@ -514,9 +514,15 @@
     },
     {
       "path": "docker/inject.js",
-      "sha256": "588f94cd2d84719dbf03ad91ad2e8065b7ebc7d6128c8bbbdd9d49343fa93c53",
-      "bytes": 1865,
+      "sha256": "c7191836ab83d23c24f02a852d1d3c226d331bf54c0a815401a848b4849a23f9",
+      "bytes": 4489,
       "category": "product-source-or-build-manifest"
+    },
+    {
+      "path": "docker/inject.test.js",
+      "sha256": "8fcc3aea8df284f0bc7c3e75c843eab57f4e77015c99d0b551cddeeaa168458e",
+      "bytes": 4477,
+      "category": "synthetic-test-source-or-fixture"
     },
     {
       "path": "docker/package.json",
@@ -526,8 +532,8 @@
     },
     {
       "path": "docker/server.js",
-      "sha256": "346755c072fb5eace2b263c98866326472fc6dccb5e1ee79cb3b2cdda037b472",
-      "bytes": 5012,
+      "sha256": "a57f73ec56040a315468a0acce385222803760445b6e08fd10f5b848974ed677",
+      "bytes": 5304,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -39604,8 +39610,8 @@
     },
     {
       "path": "packages/client/src/serviceWorker.ts",
-      "sha256": "1b8f456497568924d5c97499806b9039f71ca16edd0fafe5a7ee12e81b19e3af",
-      "bytes": 2836,
+      "sha256": "569ef7a4968f8baa5abce8b92a8cec7be8a67ace0170dcd5d0e1358ae5e5d298",
+      "bytes": 3296,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -39958,8 +39964,8 @@
     },
     {
       "path": "packages/public-pages/src/server.mjs",
-      "sha256": "83ec395f15fbfafdca8a1d0cb3fd48e4f65ba5bbcecf81c3a2d2a7a19c009ddf",
-      "bytes": 13803,
+      "sha256": "baa10bf86ed4579970999daf2855709b57c834cf9fc0886637cead28d74c0488",
+      "bytes": 14048,
       "category": "product-source-or-build-manifest"
     },
     {
