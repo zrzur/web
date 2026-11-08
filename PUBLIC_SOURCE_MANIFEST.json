@@ -292,8 +292,8 @@
     },
     {
       "path": "CHANGELOG.md",
-      "sha256": "92427a99a50e13607e886ffdc9a9053c997f282ba7f68db2d7d7235a4310a441",
-      "bytes": 94470,
+      "sha256": "940684f08431569d233df775867581bba907c7fb63aaaee5b6bf7721159a386b",
+      "bytes": 94705,
       "category": "public-documentation"
     },
     {
@@ -38512,8 +38512,8 @@
     },
     {
       "path": "packages/client/src/interface/channels/text/MemberSidebar.tsx",
-      "sha256": "de92a602d198884947926a11d178faa19b52e8e10b5536fba78a530a1b9bd14b",
-      "bytes": 15231,
+      "sha256": "de2e850787e48f64da02728ca10e1f78c2704891245104515c632911e2fd38dd",
+      "bytes": 15444,
       "category": "product-source-or-build-manifest"
     },
     {
