@@ -500,10 +500,15 @@ export type NameplateGroup = "arab" | "flag" | "theme" | "zodiac";
 const plateFile = (id: string) =>
   `${import.meta.env.BASE_URL}nameplates/${id}.svg`;
 
-/** A plate's art. `#rtl` puts its emblem at the other end, see `decorations.css` */
+/**
+ * A plate's art. `#rtl` puts its emblem at the other end, see `decorations.css`.
+ * The right-to-left copy has its own address (?rtl): browsers keep one copy of
+ * an SVG image per address and ignore the fragment, so `#rtl` alone could show
+ * the copy already loaded for left-to-right.
+ */
 const plateArt = (id: string) => {
   const url = plateFile(id);
-  return `var(--z-plate-ltr, url("${url}")) var(--z-plate-rtl, url("${url}#rtl")) center / 100% 100% no-repeat`;
+  return `var(--z-plate-ltr, url("${url}")) var(--z-plate-rtl, url("${url}?rtl#rtl")) center / 100% 100% no-repeat`;
 };
 
 const plateEntry = (id: string, group: NameplateGroup) => ({

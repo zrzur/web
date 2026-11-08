@@ -158,7 +158,8 @@ describe("user style", () => {
     expect(plain).toContain("flag-sy.svg");
     // no wash in the art or over it: the mask in decorations.css does the fade
     expect(plain).not.toContain("linear-gradient");
-    expect(plain).toContain("flag-sy.svg#rtl");
+    // its own address, so the left-to-right copy is never reused for it
+    expect(plain).toContain("flag-sy.svg?rtl#rtl");
     expect(plain).not.toContain("cover");
   });
 

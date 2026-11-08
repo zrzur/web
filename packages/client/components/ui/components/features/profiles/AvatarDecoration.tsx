@@ -53,7 +53,10 @@ export function AvatarDecoration(props: {
   const movingSrc = () =>
     community()
       ? communityFileUrl(instance.mediaUrl, props.file)
-      : art() && `${art()}#play`;
+      : // its own address (?play): browsers keep one copy of an SVG image per
+        // address and ignore the fragment, so after the still file had loaded,
+        // `#play` reused it and never started moving
+        art() && `${art()}?play#play`;
   const playing = () =>
     !!movingSrc() && motion() && (hovered() || !!props.live);
 
