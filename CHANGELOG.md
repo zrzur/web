@@ -41,6 +41,7 @@
 
 ### Bug Fixes
 
+* **Nameplates in the member list have room:** a plate filled its whole row, so two plated members touched. A plate now keeps 3 px above and below (a 6 px gap between rows), keeps its shape from that height and sits at the emblem end.
 * **Nameplates come in gently:** a plate was hidden up to a third of the row and then appeared over a short stretch, which read as a hard edge. It now starts as a faint trace beside the avatar, rises on an even curve that stays low under the name, and is whole from the middle of the row to its emblem, in both reading directions.
 * **One Arabic word for roles:** the Arabic app said both «رتبة» and «دور» for a role. Every role is now «دور / أدوار», as on the Roles page; «رتبة» stays only where it means rank («الأعضاء الأدنى رتبة»).
 * **Moving avatar decorations move again:** on a profile the still picture loaded first, and browsers keep one copy of an SVG picture per address whatever follows `#`, so the moving copy reused the still one and never moved. The moving copy and the right-to-left nameplate now have their own addresses.

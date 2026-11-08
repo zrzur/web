@@ -350,16 +350,19 @@ const memberRow = css({
 });
 
 /**
- * Nameplate behind a member row: the same shape as everywhere, half the size of
- * the art in a 240 px list, and the row's words sit on it in white.
+ * Nameplate behind a member row: the same shape as everywhere, and the row's
+ * words sit on it in white. It takes the row's height less 3 px above and
+ * below, so two plated rows never touch (a 6 px gap), keeps the art's shape
+ * from that height and sits at the emblem end; its faint start runs under the
+ * avatar.
  */
 const nameplateLayer = css({
   position: "absolute",
-  insetInline: "8px",
-  top: "50%",
-  transform: "translateY(-50%)",
-  height: "auto !important",
+  insetInlineEnd: "8px",
+  top: "3px",
+  height: "calc(var(--z-member-row-height, 44px) - 6px) !important",
   aspectRatio: "448 / 84",
+  maxWidth: "calc(100% - 16px)",
   borderRadius: "var(--z-radius, 10px)",
   pointerEvents: "none",
 });
