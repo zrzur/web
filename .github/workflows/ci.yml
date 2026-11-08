@@ -92,4 +92,5 @@ jobs:
           VITE_HOST: https://app.zrzur.com
           VITE_API_URL: https://api.zrzur.com
           VITE_INVITE_ORIGIN: https://zrzur.cc
+          NODE_OPTIONS: --max-old-space-size=4096
         run: pnpm exec vite build
