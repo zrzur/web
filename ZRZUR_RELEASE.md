@@ -1,6 +1,6 @@
-# Zrzur 26 — shared development version
+# Zrzur 26 — release 26.0.0
 
-This repository is one component of Zrzur. The shared product version is **26.0.0-dev**, on **main**. This is a development source snapshot, not a stable public-service release. Original dependency, SDK and protocol versions remain compatibility identifiers.
+This repository is one component of Zrzur. The shared product version is **26.0.0**, the first official release, on **main** (tag `v26.0.0`). Original dependency, SDK and protocol versions remain compatibility identifiers.
 
 | Component | Source |
 |---|---|
@@ -13,12 +13,8 @@ This repository is one component of Zrzur. The shared product version is **26.0.
 
 Upstream licences, copyright notices and attribution are retained (see NOTICE). Git history was not carried over: this repository starts with a single initial commit.
 
-## Current limits
+## Known limits of 26.0.0
 
-Local integration tests were exercised, but release readiness remains open: dependency advisories, production TLS/endpoints/email, attachment privacy policy, real multi-device voice, backups/restore, signed desktop installers/updates, and production acceptance require work. Do not publish development configuration or reuse demo credentials in production.
-
-## SDK and local assets
-
-Initialize only the public dependencies with `git submodule update --init packages/stoat.js packages/solid-livekit-components`, then run `mise build:deps`. The SDK submodule points at https://github.com/zrzur/sdk-js (package `@zrzur/sdk`, still imported as `stoat.js` through a pnpm workspace alias); it carries the Zrzur SDK changes directly, so no SDK patch is applied. Private upstream brand assets are not required; Zrzur public/brand assets are bundled. Backend production build requires an appropriate Rust/Linux toolchain. Web production builds require explicit VITE_HOST and VITE_API_URL. Desktop requires an explicit Zrzur application URL until a release default is approved.
-
-The SDK pointer is a zrzur/sdk-js commit (d20286017b39d76e0c453f120f5efd74d54a4b58). The LiveKit components pointer uses a verified upstream pin (a67176da7f0580ea9fdad22e58a963668f047fca) and is built unmodified.
+- Desktop apps are not code-signed: Windows SmartScreen and macOS Gatekeeper ask before the first start. There is no automatic update yet; new versions are downloaded from zrzur.com/download.
+- The Linux app needs the system NSS libraries (`libnss3`).
+- Do not publish development configuration or reuse demo credentials in production.

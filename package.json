@@ -1,6 +1,6 @@
 {
   "name": "zrzur-web",
-  "version": "26.0.0-dev",
+  "version": "26.0.0",
   "description": "Zrzur web app (AGPL-3.0)",
   "devDependencies": {
     "@eslint/js": "^9.39.1",
