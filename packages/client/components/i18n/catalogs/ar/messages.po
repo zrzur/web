@@ -5033,7 +5033,7 @@ msgstr "هذا العضو ليس في غرفة صوتية."
 
 #: components/rtc/messages.ts
 msgid "That member's role is too high."
-msgstr "رتبة هذا العضو أعلى من الصلاحية المتاحة."
+msgstr "دور هذا العضو أعلى من دورك."
 
 #. placeholder {0}: props.client.user!.username
 #. placeholder {1}: newTag()
@@ -6969,7 +6969,7 @@ msgstr "جليد"
 
 #: components/app/interface/settings/user/profile/StyleEditors.tsx
 msgid "In a server, a role colour wins over yours, but your font stays."
-msgstr "داخل السيرفر يتقدّم لون الرتبة على لونك، لكن خطك يبقى."
+msgstr "داخل السيرفر يتقدّم لون الدور على لونك، لكن خطك يبقى."
 
 #: components/app/interface/settings/user/profile/StyleEditors.tsx
 msgid "Laurel"
@@ -7085,7 +7085,7 @@ msgstr "أجنحة"
 
 #: components/app/interface/settings/user/profile/StyleEditors.tsx
 msgid "In a server, a role colour wins over yours, but your font stays. On a profile card with a theme, your name turns white so it stays readable."
-msgstr "داخل السيرفر يتقدّم لون الرتبة على لونك، لكن خطك يبقى. وعلى بطاقة ملف شخصي ملوّنة يصبح اسمك أبيض ليبقى واضحًا."
+msgstr "داخل السيرفر يتقدّم لون الدور على لونك، لكن خطك يبقى. وعلى بطاقة ملف شخصي ملوّنة يصبح اسمك أبيض ليبقى واضحًا."
 
 #: components/app/interface/settings/user/profile/StyleEditors.tsx
 msgid "now"
@@ -7385,7 +7385,7 @@ msgstr "مكان في الاستكشاف"
 
 #: components/app/interface/settings/user/subscriptions/PlusPage.tsx
 msgid "A Feather role in the official Zrzur server, with the channels HQ opens to Feather members."
-msgstr "رتبة ريشة في سيرفر زرزور الرسمي، مع القنوات التي يفتحها المقر لمشتركي ريشة."
+msgstr "دور ريشة في سيرفر زرزور الرسمي، مع القنوات التي يفتحها المقر لمشتركي ريشة."
 
 #: components/app/interface/settings/user/safety/ReportsAndStanding.tsx
 msgid "A reviewer asked:"
@@ -13442,7 +13442,7 @@ msgstr "قناة الترحيب"
 
 #: components/app/interface/settings/server/LobbySettings.tsx
 msgid "How do I get a role?"
-msgstr "كيف أحصل على رتبة؟"
+msgstr "كيف أحصل على دور؟"
 
 #: components/app/interface/settings/server/LobbySettings.tsx
 msgid "Its newest message is the latest news. Empty: your first announcement channel."
@@ -13602,11 +13602,11 @@ msgstr "أحدث رسالة في إعلاناتك."
 
 #: components/app/interface/settings/server/LobbySettings.tsx
 msgid "The owner and the roles you pick."
-msgstr "المالك والرتب التي تختارها."
+msgstr "المالك والأدوار التي تختارها."
 
 #: components/app/interface/settings/server/LobbySettings.tsx
 msgid "The owner is always listed. Pick the roles whose members are shown too, up to ten."
-msgstr "يظهر المالك دائماً. اختر الرتب التي يظهر أعضاؤها أيضاً، حتى عشر رتب."
+msgstr "يظهر المالك دائماً. اختر الأدوار التي يظهر أعضاؤها أيضاً، حتى عشرة أدوار."
 
 #: components/app/interface/settings/server/LobbySettings.tsx
 msgid "Up to three buttons under the name, each opening a channel. Read the rules is added by itself when a rules channel is set."
@@ -14446,7 +14446,7 @@ msgstr "أضف <0>{0}</0> إلى «اكتشف»"
 
 #: components/app/interface/settings/server/LobbyRoleQuestionsEditor.tsx
 msgid "Add a role question"
-msgstr "إضافة سؤال للرتب"
+msgstr "إضافة سؤال للأدوار"
 
 #: components/app/interface/settings/server/LobbyRoleQuestionsEditor.tsx
 msgid "Add an answer"
@@ -14499,11 +14499,11 @@ msgstr "القنوات المعروضة"
 
 #: components/app/interface/settings/server/LobbyRoleQuestionsEditor.tsx
 msgid "Choose a role"
-msgstr "اختر رتبة"
+msgstr "اختر دورًا"
 
 #: src/interface/lobby/Lobby.tsx
 msgid "Choose an interest to receive its role instantly. Your existing roles stay with you."
-msgstr "اختر اهتمامًا لتحصل على رتبته فورًا. رتبك الحالية تبقى معك."
+msgstr "اختر اهتمامًا لتحصل على دوره فورًا. أدوارك الحالية تبقى معك."
 
 #: components/app/interface/settings/server/LobbySettings.tsx
 msgid "Choose text and background colours with at least 4.5:1 contrast."
@@ -14535,7 +14535,7 @@ msgstr "أكمل كل سؤال وجوابه."
 
 #: components/app/interface/settings/server/LobbySettings.tsx
 msgid "Complete every role question and choose a role for each answer."
-msgstr "أكمل كل سؤال للرتب واختر رتبة لكل إجابة."
+msgstr "أكمل كل سؤال للأدوار واختر دورًا لكل إجابة."
 
 #: components/app/interface/settings/server/LobbyAppearanceEditor.tsx
 msgid "Corner radius"
@@ -14652,7 +14652,7 @@ msgstr "عدد الأعضاء"
 
 #: components/app/interface/settings/server/LobbySettings.tsx
 msgid "Members pick what interests them and get its role right away. Their other roles stay, and they can pick more than one."
-msgstr "يختار الأعضاء ما يهمهم ويحصلون على رتبته فورًا. تبقى رتبهم الأخرى، ويمكنهم اختيار أكثر من اهتمام."
+msgstr "يختار الأعضاء ما يهمهم ويحصلون على دوره فورًا. تبقى أدوارهم الأخرى، ويمكنهم اختيار أكثر من اهتمام."
 
 #: src/interface/designs/Home.tsx
 msgid "Mix your own"
@@ -14664,7 +14664,7 @@ msgstr "الأعضاء الجدد المعروضون"
 
 #: components/app/interface/settings/server/LobbyRoleQuestionsEditor.tsx
 msgid "Only ordinary member roles can be offered: no managed roles and none with moderation or admin permissions."
-msgstr "يمكن عرض رتب الأعضاء العادية فقط: لا رتب مُدارة ولا رتب بصلاحيات إشراف أو إدارة."
+msgstr "يمكن عرض أدوار الأعضاء العادية فقط: لا أدوار مُدارة ولا أدوار بصلاحيات إشراف أو إدارة."
 
 #: src/interface/lobby/Lobby.tsx
 msgid "Open chat"
@@ -14722,19 +14722,19 @@ msgstr "إعادة تعيين {0}"
 #. placeholder {0}: oi() + 1
 #: components/app/interface/settings/server/LobbyRoleQuestionsEditor.tsx
 msgid "Role for answer {0}"
-msgstr "رتبة الإجابة {0}"
+msgstr "دور الإجابة {0}"
 
 #: components/app/interface/settings/server/LobbyRoleQuestionsEditor.tsx
 msgid "Role it gives"
-msgstr "الرتبة التي يمنحها"
+msgstr "الدور الذي يمنحه"
 
 #: components/app/interface/settings/server/LobbyRoleQuestionsEditor.tsx
 msgid "Role unavailable"
-msgstr "الرتبة غير متاحة"
+msgstr "الدور غير متاح"
 
 #: components/app/interface/settings/server/LobbySettings.tsx
 msgid "Roles by interest"
-msgstr "رتب حسب الاهتمام"
+msgstr "أدوار حسب الاهتمام"
 
 #: components/app/interface/settings/server/LobbyAppearanceEditor.tsx
 msgid "Room between cards and inside them."
@@ -14830,7 +14830,7 @@ msgstr "ما الذي أتى بك إلى هنا؟"
 
 #: components/app/interface/settings/server/LobbyRoleQuestionsEditor.tsx
 msgid "You need Assign Roles permission to change these questions."
-msgstr "تحتاج صلاحية «تعيين الرتب» لتغيير هذه الأسئلة."
+msgstr "تحتاج صلاحية «منح الأدوار» لتغيير هذه الأسئلة."
 
 #: src/interface/designs/Home.tsx
 msgid "You, right now"
@@ -15342,7 +15342,7 @@ msgstr "سطر جديد"
 
 #: components/app/interface/settings/server/roles/RoleQuestions.tsx
 msgid "New members answer these in a window when they first open the server, and get each answer's role right away. They can skip it and change their answers later from the server menu."
-msgstr "يجيب الأعضاء الجدد عن هذه الأسئلة في نافذة عند فتح السيرفر أول مرة، ويحصلون على رتبة كل إجابة فورًا. يمكنهم تخطيها وتغيير إجاباتهم لاحقًا من قائمة السيرفر."
+msgstr "يجيب الأعضاء الجدد عن هذه الأسئلة في نافذة عند فتح السيرفر أول مرة، ويحصلون على دور كل إجابة فورًا. يمكنهم تخطيها وتغيير إجاباتهم لاحقًا من قائمة السيرفر."
 
 #: components/app/interface/settings/server/invites/VanityInvite.tsx
 msgid "New members land in"
@@ -15435,7 +15435,7 @@ msgstr "ينضم من لديه رابط الانضمام فورًا. ولن يظ
 
 #: components/modal/modals/InterestsModal.tsx
 msgid "Pick what interests you. You get each role right away and can change it any time from the server menu."
-msgstr "اختر ما يهمك. تحصل على كل رتبة فورًا، ويمكنك تغييرها في أي وقت من قائمة السيرفر."
+msgstr "اختر ما يهمك. تحصل على كل دور فورًا، ويمكنك تغييره في أي وقت من قائمة السيرفر."
 
 #: components/app/interface/settings/user/voice/PushToTalkOptions.tsx
 msgid "Press a key…"
@@ -16100,7 +16100,7 @@ msgstr "يستطيع الجميع النشر باسم آخر"
 
 #: components/app/interface/settings/server/roles/ServerRoleOverview.tsx
 msgid "Members can send messages with any name and picture, for example “Admin”. Turn this off unless your server needs it; you can still give it to a role."
-msgstr "يستطيع الأعضاء إرسال رسائل بأي اسم وصورة، مثل «المشرف». أوقِف هذا الخيار ما لم يحتجه سيرفرك، ويمكنك منحه لرتبة بعينها."
+msgstr "يستطيع الأعضاء إرسال رسائل بأي اسم وصورة، مثل «المشرف». أوقِف هذا الخيار ما لم يحتجه سيرفرك، ويمكنك منحه لدور بعينه."
 
 #. placeholder {0}: realName()
 #: components/app/interface/channels/text/Message.tsx
@@ -16158,7 +16158,7 @@ msgstr "مستوى التحقق"
 
 #: components/app/interface/settings/server/ServerSafety.tsx
 msgid "What new members need before they can send messages, react or join voice. Members with any role are exempt."
-msgstr "ما يحتاجه الأعضاء الجدد قبل أن يرسلوا الرسائل أو يتفاعلوا أو ينضموا إلى الصوت. الأعضاء الذين لديهم أي رتبة مستثنون."
+msgstr "ما يحتاجه الأعضاء الجدد قبل أن يرسلوا الرسائل أو يتفاعلوا أو ينضموا إلى الصوت. الأعضاء الذين لديهم أي دور مستثنون."
 
 #. placeholder {0}: props.message.joins
 #. placeholder {1}: props.message.minutes
@@ -16431,7 +16431,7 @@ msgstr "الوصف (اختياري)"
 
 #: components/modal/modals/CreateChannel.tsx
 msgid "Only you and the roles or members you add can see it."
-msgstr "لا يراها إلا أنت والرتب أو الأعضاء الذين تضيفهم."
+msgstr "لا يراها إلا أنت والأدوار أو الأعضاء الذين تضيفهم."
 
 #: components/modal/modals/CreateChannel.tsx
 msgid "What this channel is for"
@@ -16443,7 +16443,7 @@ msgstr "مثبّتة أعلى قائمة القنوات، مع زر «اقرأ �
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 msgid "Manage server, permissions and roles together are close to full control."
-msgstr "إدارة السيرفر والصلاحيات والرتب معًا تعني تحكّمًا شبه كامل."
+msgstr "إدارة السيرفر والصلاحيات والأدوار معًا تعني تحكّمًا شبه كامل."
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 msgid "Powerful: give it only to people you trust."
@@ -16463,15 +16463,15 @@ msgstr "استخدام رموز تعبيرية من سيرفرات أخرى"
 
 #: components/app/interface/settings/server/roles/ServerRoleOverview.tsx
 msgid "At or above your highest role: only someone higher can change it."
-msgstr "في مستوى أعلى رتبة لديك أو فوقها: لا يغيّرها إلا من هو أعلى."
+msgstr "في مستوى أعلى دور لديك أو فوقه: لا يغيّره إلا من هو أعلى."
 
 #: components/app/interface/settings/server/roles/ServerRoleEditor.tsx
 msgid "It is at or above your highest role. Only someone higher can change it."
-msgstr "إنها في مستوى أعلى رتبة لديك أو فوقها. لا يغيّرها إلا من هو أعلى."
+msgstr "إنه في مستوى أعلى دور لديك أو فوقه. لا يغيّره إلا من هو أعلى."
 
 #: components/app/interface/settings/server/roles/ServerRoleEditor.tsx
 msgid "You can't change this role"
-msgstr "لا يمكنك تغيير هذه الرتبة"
+msgstr "لا يمكنك تغيير هذا الدور"
 
 #: components/modal/modals/KickMember.tsx
 msgid "Reason (optional)"
@@ -18950,7 +18950,7 @@ msgstr "زر"
 
 #: components/app/interface/settings/server/assistant/labels.ts
 msgid "A button or a short sum gives new members their role."
-msgstr "زر أو عملية حسابية قصيرة تمنح الأعضاء الجدد رتبتهم."
+msgstr "زر أو عملية حسابية قصيرة تمنح الأعضاء الجدد دورهم."
 
 #: components/app/interface/settings/server/assistant/labels.ts
 msgid "A card with the Hijri date when someone joins or leaves."
@@ -19006,7 +19006,7 @@ msgstr "إلزام المشرفين بذكر السبب"
 
 #: components/app/interface/settings/server/assistant/labels.ts
 msgid "Automatic roles and panels members pick from."
-msgstr "رتب تلقائية ولوحات يختار منها الأعضاء."
+msgstr "أدوار تلقائية ولوحات يختار منها الأعضاء."
 
 #: components/app/interface/settings/server/assistant/labels.ts
 msgid "AutoMod Rules"
@@ -19014,7 +19014,7 @@ msgstr "الفلترة التلقائية"
 
 #: components/app/interface/settings/server/assistant/labels.ts
 msgid "Channel and role changes"
-msgstr "تغييرات القنوات والرتب"
+msgstr "تغييرات القنوات والأدوار"
 
 #: components/app/interface/settings/server/assistant/labels.ts
 msgid "Channel for appeals"
@@ -19204,7 +19204,7 @@ msgstr "مدير"
 
 #: components/app/interface/settings/server/assistant/labels.ts
 msgid "Members joining, leaving and changing roles"
-msgstr "انضمام الأعضاء ومغادرتهم وتغير رتبهم"
+msgstr "انضمام الأعضاء ومغادرتهم وتغيّر أدوارهم"
 
 #: components/app/interface/settings/server/assistant/labels.ts
 msgid "Messages & Embeds"
@@ -19260,7 +19260,7 @@ msgstr "عزل"
 
 #: components/app/interface/settings/server/assistant/labels.ts
 msgid "Quarantine role"
-msgstr "رتبة العزل"
+msgstr "دور العزل"
 
 #: components/app/interface/settings/server/assistant/AssistantPage.tsx
 msgid "Quick setup"
@@ -19276,23 +19276,23 @@ msgstr "التذاكر الأخيرة"
 
 #: components/app/interface/settings/server/assistant/labels.ts
 msgid "Role given after verifying"
-msgstr "الرتبة الممنوحة بعد التحقق"
+msgstr "الدور الممنوح بعد التحقق"
 
 #: components/app/interface/settings/server/assistant/labels.ts
 msgid "Roles given on joining"
-msgstr "الرتب الممنوحة عند الانضمام"
+msgstr "الأدوار الممنوحة عند الانضمام"
 
 #: components/app/interface/settings/server/assistant/labels.ts
 msgid "Roles Shield trusts"
-msgstr "الرتب الموثوقة لدى الدرع"
+msgstr "الأدوار الموثوقة لدى الدرع"
 
 #: components/app/interface/settings/server/assistant/AssistantPage.tsx
 msgid "Roles that may use this module"
-msgstr "الرتب التي يمكنها استخدام هذه الوحدة"
+msgstr "الأدوار التي يمكنها استخدام هذه الوحدة"
 
 #: components/app/interface/settings/server/assistant/labels.ts
 msgid "Roles the rules skip"
-msgstr "رتب تتجاوزها القواعد"
+msgstr "أدوار تتجاوزها القواعد"
 
 #: components/app/interface/settings/server/assistant/AssistantPage.tsx
 msgid "Save settings file"
@@ -19360,7 +19360,7 @@ msgstr "دعم أو متجر"
 
 #: components/app/interface/settings/server/assistant/labels.ts
 msgid "Support roles"
-msgstr "رتب الدعم"
+msgstr "أدوار الدعم"
 
 #: components/app/interface/settings/server/assistant/labels.ts
 msgid "Support starts at hour"
@@ -19396,7 +19396,7 @@ msgstr "البوت الرسمي: الأمان والمجتمع والدعم في
 
 #: components/app/interface/settings/server/assistant/AssistantPage.tsx
 msgid "These roles are above the Assistant"
-msgstr "هذه الرتب أعلى من رتبة المساعد"
+msgstr "هذه الأدوار أعلى من دور المساعد"
 
 #: components/app/interface/settings/server/assistant/AssistantPage.tsx
 msgid "This can't be undone."

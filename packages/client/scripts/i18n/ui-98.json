@@ -12,7 +12,7 @@
   ],
   "App colour": ["لون التطبيق", "App-Farbe"],
   "Buttons": ["الأزرار", "Schaltflächen"],
-  "How do I get a role?": ["كيف أحصل على رتبة؟", "Wie bekomme ich eine Rolle?"],
+  "How do I get a role?": ["كيف أحصل على دور؟", "Wie bekomme ich eine Rolle?"],
   "Jump back in": ["تابع من حيث توقفت", "Weitermachen, wo du warst"],
   "Label": ["النص", "Beschriftung"],
   "Live now": ["مباشر الآن", "Jetzt live"],
@@ -60,7 +60,7 @@
     "Die erste Seite deines Servers: worum es geht, wo man anfängt und wer ihn leitet."
   ],
   "The owner is always listed. Pick the roles whose members are shown too, up to ten.": [
-    "يظهر المالك دائماً. اختر الرتب التي يظهر أعضاؤها أيضاً، حتى عشر رتب.",
+    "يظهر المالك دائماً. اختر الأدوار التي يظهر أعضاؤها أيضاً، حتى عشرة أدوار.",
     "Der Eigentümer wird immer gezeigt. Wähle bis zu zehn Rollen, deren Mitglieder ebenfalls erscheinen."
   ],
   "Up to three buttons under the name, each opening a channel. Read the rules is added by itself when a rules channel is set.": [

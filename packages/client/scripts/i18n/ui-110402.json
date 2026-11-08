@@ -76,7 +76,7 @@
     "Eine Schaltfläche"
   ],
   "A button or a short sum gives new members their role.": [
-    "زر أو عملية حسابية قصيرة تمنح الأعضاء الجدد رتبتهم.",
+    "زر أو عملية حسابية قصيرة تمنح الأعضاء الجدد دورهم.",
     "Eine Schaltfläche oder eine kurze Rechenaufgabe gibt neuen Mitgliedern ihre Rolle."
   ],
   "A card with the Hijri date when someone joins or leaves.": [
@@ -132,7 +132,7 @@
     "Von Moderatoren einen Grund verlangen"
   ],
   "Automatic roles and panels members pick from.": [
-    "رتب تلقائية ولوحات يختار منها الأعضاء.",
+    "أدوار تلقائية ولوحات يختار منها الأعضاء.",
     "Automatische Rollen und Panels zur Auswahl."
   ],
   "AutoMod Rules": [
@@ -140,7 +140,7 @@
     "AutoMod-Regeln"
   ],
   "Channel and role changes": [
-    "تغييرات القنوات والرتب",
+    "تغييرات القنوات والأدوار",
     "Änderungen an Kanälen und Rollen"
   ],
   "Channel for appeals": [
@@ -328,7 +328,7 @@
     "Manager"
   ],
   "Members joining, leaving and changing roles": [
-    "انضمام الأعضاء ومغادرتهم وتغير رتبهم",
+    "انضمام الأعضاء ومغادرتهم وتغيّر أدوارهم",
     "Mitglieder, die beitreten, gehen oder Rollen wechseln"
   ],
   "Messages & Embeds": [
@@ -384,7 +384,7 @@
     "Quarantäne"
   ],
   "Quarantine role": [
-    "رتبة العزل",
+    "دور العزل",
     "Quarantäne-Rolle"
   ],
   "Quick setup": [
@@ -400,23 +400,23 @@
     "Letzte Tickets"
   ],
   "Role given after verifying": [
-    "الرتبة الممنوحة بعد التحقق",
+    "الدور الممنوح بعد التحقق",
     "Rolle nach der Verifizierung"
   ],
   "Roles given on joining": [
-    "الرتب الممنوحة عند الانضمام",
+    "الأدوار الممنوحة عند الانضمام",
     "Rollen beim Beitritt"
   ],
   "Roles Shield trusts": [
-    "الرتب الموثوقة لدى الدرع",
+    "الأدوار الموثوقة لدى الدرع",
     "Rollen, denen der Schild vertraut"
   ],
   "Roles that may use this module": [
-    "الرتب التي يمكنها استخدام هذه الوحدة",
+    "الأدوار التي يمكنها استخدام هذه الوحدة",
     "Rollen, die dieses Modul nutzen dürfen"
   ],
   "Roles the rules skip": [
-    "رتب تتجاوزها القواعد",
+    "أدوار تتجاوزها القواعد",
     "Rollen ohne diese Regeln"
   ],
   "Save settings file": [
@@ -484,7 +484,7 @@
     "Support oder Shop"
   ],
   "Support roles": [
-    "رتب الدعم",
+    "أدوار الدعم",
     "Support-Rollen"
   ],
   "Support starts at hour": [
@@ -520,7 +520,7 @@
     "Der offizielle Bot: Sicherheit, Community und Support an einem Ort."
   ],
   "These roles are above the Assistant": [
-    "هذه الرتب أعلى من رتبة المساعد",
+    "هذه الأدوار أعلى من دور المساعد",
     "Diese Rollen stehen über dem Assistenten"
   ],
   "This can't be undone.": [

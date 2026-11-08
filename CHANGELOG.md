@@ -41,6 +41,8 @@
 
 ### Bug Fixes
 
+* **Nameplates come in gently:** a plate was hidden up to a third of the row and then appeared over a short stretch, which read as a hard edge. It now starts as a faint trace beside the avatar, rises on an even curve that stays low under the name, and is whole from the middle of the row to its emblem, in both reading directions.
+* **One Arabic word for roles:** the Arabic app said both «رتبة» and «دور» for a role. Every role is now «دور / أدوار», as on the Roles page; «رتبة» stays only where it means rank («الأعضاء الأدنى رتبة»).
 * **Moving avatar decorations move again:** on a profile the still picture loaded first, and browsers keep one copy of an SVG picture per address whatever follows `#`, so the moving copy reused the still one and never moved. The moving copy and the right-to-left nameplate now have their own addresses.
 * **Updates reach every browser:** a browser could stay on an old copy of the app after a release or a server address change (for example "Connection lost" against an old WebSocket address), until the user cleared the site's data by hand. The container now moves the app's files to a folder named after the build and its addresses, so any change gives every file a new address; caches and the service worker can no longer hand out old copies. A new service worker takes over at once and the page reloads onto it. The app's files are cached for a year, the page, the service worker and the manifest are always checked.
 * **Errors in plain words:** a refused form says what the field needs ("Description: Between 20 and 1000 characters.") in Arabic, English and German. Text from the server's validator, source paths, error types and JSON no longer reach a screen; Details keeps the error type and one plain line.

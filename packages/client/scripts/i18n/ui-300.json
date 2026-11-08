@@ -84,7 +84,7 @@
     "Alle können unter einem anderen Namen schreiben"
   ],
   "Members can send messages with any name and picture, for example “Admin”. Turn this off unless your server needs it; you can still give it to a role.": [
-    "يستطيع الأعضاء إرسال رسائل بأي اسم وصورة، مثل «المشرف». أوقِف هذا الخيار ما لم يحتجه سيرفرك، ويمكنك منحه لرتبة بعينها.",
+    "يستطيع الأعضاء إرسال رسائل بأي اسم وصورة، مثل «المشرف». أوقِف هذا الخيار ما لم يحتجه سيرفرك، ويمكنك منحه لدور بعينه.",
     "Mitglieder können Nachrichten mit beliebigem Namen und Bild senden, zum Beispiel „Admin“. Schalte das aus, wenn dein Server es nicht braucht; du kannst es weiterhin einer Rolle geben."
   ],
   "Turn off": [
@@ -100,7 +100,7 @@
     "Verifizierungsstufe"
   ],
   "What new members need before they can send messages, react or join voice. Members with any role are exempt.": [
-    "ما يحتاجه الأعضاء الجدد قبل أن يرسلوا الرسائل أو يتفاعلوا أو ينضموا إلى الصوت. الأعضاء الذين لديهم أي رتبة مستثنون.",
+    "ما يحتاجه الأعضاء الجدد قبل أن يرسلوا الرسائل أو يتفاعلوا أو ينضموا إلى الصوت. الأعضاء الذين لديهم أي دور مستثنون.",
     "Was neue Mitglieder brauchen, bevor sie Nachrichten senden, reagieren oder dem Sprachkanal beitreten können. Mitglieder mit einer Rolle sind ausgenommen."
   ],
   "Anyone in the server can talk right away.": [
@@ -400,7 +400,7 @@
     "Wofür dieser Kanal da ist"
   ],
   "Only you and the roles or members you add can see it.": [
-    "لا يراها إلا أنت والرتب أو الأعضاء الذين تضيفهم.",
+    "لا يراها إلا أنت والأدوار أو الأعضاء الذين تضيفهم.",
     "Nur du und die Rollen oder Mitglieder, die du hinzufügst, sehen ihn."
   ],
   "Pinned at the top of the channel list, with a \"Read the rules\" button in the Lobby.": [
@@ -424,19 +424,19 @@
     "Damit lässt sich fast alles im Server ändern"
   ],
   "Manage server, permissions and roles together are close to full control.": [
-    "إدارة السيرفر والصلاحيات والرتب معًا تعني تحكّمًا شبه كامل.",
+    "إدارة السيرفر والصلاحيات والأدوار معًا تعني تحكّمًا شبه كامل.",
     "Server, Berechtigungen und Rollen verwalten zusammen ist fast volle Kontrolle."
   ],
   "At or above your highest role: only someone higher can change it.": [
-    "في مستوى أعلى رتبة لديك أو فوقها: لا يغيّرها إلا من هو أعلى.",
+    "في مستوى أعلى دور لديك أو فوقه: لا يغيّره إلا من هو أعلى.",
     "Auf oder über deiner höchsten Rolle: Nur jemand weiter oben kann sie ändern."
   ],
   "You can't change this role": [
-    "لا يمكنك تغيير هذه الرتبة",
+    "لا يمكنك تغيير هذا الدور",
     "Du kannst diese Rolle nicht ändern"
   ],
   "It is at or above your highest role. Only someone higher can change it.": [
-    "إنها في مستوى أعلى رتبة لديك أو فوقها. لا يغيّرها إلا من هو أعلى.",
+    "إنه في مستوى أعلى دور لديك أو فوقه. لا يغيّره إلا من هو أعلى.",
     "Sie liegt auf oder über deiner höchsten Rolle. Nur jemand weiter oben kann sie ändern."
   ],
   "Reason (optional)": [

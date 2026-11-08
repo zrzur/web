@@ -64,7 +64,7 @@ const translations = {
     "Dir fehlt die Berechtigung.",
   ],
   "That member's role is too high.": [
-    "رتبة هذا العضو أعلى من الصلاحية المتاحة.",
+    "دور هذا العضو أعلى من دورك.",
     "Die Rolle dieses Mitglieds ist zu hoch.",
   ],
   "You can't do that to the server owner.": [

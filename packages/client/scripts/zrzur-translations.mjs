@@ -276,7 +276,7 @@ const ar = {
   Gradient: "تدرّج",
   "Pick a colour": "اختر لونًا",
   "In a server, a role colour wins over yours, but your font stays.":
-    "داخل السيرفر يتقدّم لون الرتبة على لونك، لكن خطك يبقى.",
+    "داخل السيرفر يتقدّم لون الدور على لونك، لكن خطك يبقى.",
   "Surprise me": "فاجئني",
   "does anyone read this?": "هل يقرأ أحد هذا؟",
   "Change avatar decoration": "تغيير زينة الصورة",
@@ -284,7 +284,7 @@ const ar = {
   now: "الآن",
   "Today at 12:00": "اليوم الساعة 12:00",
   "In a server, a role colour wins over yours, but your font stays. On a profile card with a theme, your name turns white so it stays readable.":
-    "داخل السيرفر يتقدّم لون الرتبة على لونك، لكن خطك يبقى. وعلى بطاقة ملف شخصي ملوّنة يصبح اسمك أبيض ليبقى واضحًا.",
+    "داخل السيرفر يتقدّم لون الدور على لونك، لكن خطك يبقى. وعلى بطاقة ملف شخصي ملوّنة يصبح اسمك أبيض ليبقى واضحًا.",
   Selected: "المحدّد",
   Apply: "تطبيق",
   Reset: "إعادة ضبط",
