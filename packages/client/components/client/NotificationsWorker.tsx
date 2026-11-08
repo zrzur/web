@@ -17,6 +17,7 @@ import { useNavigate, useSmartParams } from "@revolt/routing";
 import { useState } from "@revolt/state";
 
 import { useClient, useNotifications, useSound } from ".";
+import { skipDesktopNotification } from "./notificationRules";
 
 /**
  * Process and display desktop notifications
@@ -38,11 +39,18 @@ export function NotificationsWorker() {
   function onMessage(message: Message) {
     const us = client().user!;
 
-    // Ignore if we are currently looking at the channel
-    if (params().channelId === message.channelId && document.hasFocus()) return;
-
-    // Ignore our own messages
-    if (message.author?.self) return;
+    // Ignore our own messages (from any device) and the channel being read
+    if (
+      skipDesktopNotification({
+        selfId: us?.id,
+        authorId: message.authorId,
+        channelId: message.channelId,
+        viewingChannelId: params().channelId,
+        focused: document.hasFocus(),
+        visible: document.visibilityState === "visible",
+      })
+    )
+      return;
 
     // Ignore blocked users
     if (message.author?.relationship === "Blocked") return;

@@ -5,6 +5,8 @@ import {
   precacheAndRoute,
 } from "workbox-precaching";
 
+import { pageHandlesPush } from "../components/client/notificationRules";
+
 import { RUNTIME_CACHE, isRuntimeAsset, overLimit } from "./runtimeAssets";
 
 declare let self: ServiceWorkerGlobalScope;
@@ -21,6 +23,8 @@ interface StoatPushNotification {
   icon?: string;
   channel?: ChannelPartial;
   url?: string;
+  /** Usually the channel id */
+  tag?: string;
 }
 
 self.addEventListener("message", (event) => {
@@ -63,11 +67,23 @@ self.addEventListener("push", (event) => {
   notification.url ||= self.registration.scope;
 
   event.waitUntil(
-    self.registration.showNotification(notification.title || "Zrzur", {
-      icon: notification.icon,
-      body: notification.body,
-      data: notification.url,
-    }),
+    self.clients
+      .matchAll({ type: "window", includeUncontrolled: true })
+      .then((clients) => {
+        // an open, visible page shows its own notification (and none for
+        // the channel being read): a push on top would be a second one
+        if (pageHandlesPush(clients as WindowClient[])) return;
+        return self.registration.showNotification(
+          notification.title || "Zrzur",
+          {
+            icon: notification.icon,
+            body: notification.body,
+            data: notification.url,
+            // one notification per channel: a newer one replaces it
+            tag: notification.tag,
+          },
+        );
+      }),
   );
 });
 
