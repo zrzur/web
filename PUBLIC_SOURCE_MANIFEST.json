@@ -292,8 +292,8 @@
     },
     {
       "path": "CHANGELOG.md",
-      "sha256": "9f346b2e1243e4cc53c1af131ab82bccba0dedcf88e24d26ece0464cf7d21426",
-      "bytes": 95336,
+      "sha256": "add0a45d68320128fdea0af83e7314ea33c0065bd2f8b766221a31b81330946f",
+      "bytes": 96002,
       "category": "public-documentation"
     },
     {
@@ -2296,8 +2296,8 @@
     },
     {
       "path": "packages/client/components/client/NotificationsWorker.tsx",
-      "sha256": "91008727d574b85b4a150193195ea9b113b13e4ada8da59f28c930866649c953",
-      "bytes": 8131,
+      "sha256": "76922026c1272cdb39356926c78b93d9a2564bf3fdff68dea1917b63d02cd7af",
+      "bytes": 8371,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -2340,6 +2340,18 @@
       "path": "packages/client/components/client/index.tsx",
       "sha256": "59b61168cbbd55d0774f57590269344f5ee2410dad59fd0143285e43e65c88bb",
       "bytes": 4862,
+      "category": "product-source-or-build-manifest"
+    },
+    {
+      "path": "packages/client/components/client/notificationRules.test.ts",
+      "sha256": "2b0480344bdde0d66fdc6021732576c7af5252529c851d1db021977d728f384b",
+      "bytes": 1979,
+      "category": "synthetic-test-source-or-fixture"
+    },
+    {
+      "path": "packages/client/components/client/notificationRules.ts",
+      "sha256": "03316ddbaf4620b95a8f692ed5ce5d9e0e034f26edebbc6be2a63481e1788aa4",
+      "bytes": 1290,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -38524,8 +38536,8 @@
     },
     {
       "path": "packages/client/src/interface/channels/text/TextChannel.tsx",
-      "sha256": "116f321124a6c7fd23480903ad598a1f51e95f7efe75be51a8b82eb40736f800",
-      "bytes": 14898,
+      "sha256": "0dc965d552517280cafcb44996ac98e601cd334049abe37f32d97f83ff9d296a",
+      "bytes": 15311,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -39610,8 +39622,8 @@
     },
     {
       "path": "packages/client/src/serviceWorker.ts",
-      "sha256": "569ef7a4968f8baa5abce8b92a8cec7be8a67ace0170dcd5d0e1358ae5e5d298",
-      "bytes": 3296,
+      "sha256": "e0ab8c63272ebe11376af3b436a12f9e0b7f636143d11877d35a81849de49c42",
+      "bytes": 3916,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -40278,7 +40290,7 @@
   "submodules": [
     {
       "path": "packages/stoat.js",
-      "commit": "29663e770e55be4576d20f912602338e24899445"
+      "commit": "5579f3afc1b05a9de92c9b97148a8e1b903670b9"
     }
   ]
 }
