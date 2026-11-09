@@ -1,18 +1,8 @@
-import {
-  For,
-  Match,
-  Show,
-  Switch,
-  createEffect,
-  createSignal,
-  on,
-} from "solid-js";
+import { For, Match, Show, Switch, createEffect, on } from "solid-js";
 
 import { Trans, useLingui } from "@lingui/solid/macro";
 import { styled } from "styled-system/jsx";
 
-import { useDevice } from "@revolt/common";
-import { Keybind, KeybindAction } from "@revolt/keybinds";
 import { useUsers } from "@revolt/markdown/users";
 import { useNavigate } from "@revolt/routing";
 import { useVoice } from "@revolt/rtc";
@@ -23,27 +13,16 @@ import { Icon } from "@revolt/ui/icons/Icon";
 
 import { ChannelHeader } from "../ChannelHeader";
 import { ChannelPageProps } from "../ChannelPage";
-import { ChannelChat } from "../text/ChannelChat";
 
 /**
- * Server voice channel: the call, and its chat beside it (desktop) or over
- * it (phone) when opened. Viewing a channel never changes the active call.
- * Joining requires an explicit action; leaving the call from here returns
- * to the server.
+ * Server voice channel: the call alone, no chat panel on this page (owner,
+ * 2026-11-09). Viewing a channel never changes the active call. Joining
+ * requires an explicit action; leaving the call from here returns to the
+ * server.
  */
 export function VoiceChannel(props: ChannelPageProps) {
-  const { t } = useLingui();
   const voice = useVoice();
   const navigate = useNavigate();
-  const { layout } = useDevice();
-  const [chatOpen, setChatOpen] = createSignal(false);
-  const canChat = () => props.channel.havePermission("ReadMessageHistory");
-  createEffect(
-    on(
-      () => props.channel.id,
-      () => setChatOpen(false),
-    ),
-  );
 
   const inThisCall = () => voice.channel()?.id === props.channel.id;
   // left the call while looking at it: nothing to show here any more
@@ -67,40 +46,7 @@ export function VoiceChannel(props: ChannelPageProps) {
           <Show when={inThisCall()} fallback={<Unavailable {...props} />}>
             <VoiceChannelCallCardMount channel={props.channel} stage />
           </Show>
-          <Show when={canChat()}>
-            <ChatToggle
-              type="button"
-              aria-pressed={chatOpen()}
-              aria-label={chatOpen() ? t`Close chat` : t`Open chat`}
-              title={chatOpen() ? t`Close chat` : t`Open chat`}
-              onClick={() => setChatOpen((open) => !open)}
-            >
-              <Icon name="chat-circle" size={20} />
-              <Show when={!chatOpen() && props.channel.unread}>
-                <Dot aria-hidden="true" />
-              </Show>
-            </ChatToggle>
-          </Show>
         </Stage>
-        <Show when={chatOpen() && canChat()}>
-          <ChatPanel data-overlay={layout() !== "desktop"}>
-            <ChatTitle>
-              <Trans>Chat</Trans>
-              <CloseChat
-                type="button"
-                aria-label={t`Close chat`}
-                onClick={() => setChatOpen(false)}
-              >
-                <Icon name="x" size={18} />
-              </CloseChat>
-            </ChatTitle>
-            <ChannelChat channel={props.channel} />
-            <Keybind
-              keybind={KeybindAction.CLOSE_SIDEBAR}
-              onPressed={() => setChatOpen(false)}
-            />
-          </ChatPanel>
-        </Show>
       </Row>
     </>
   );
@@ -113,97 +59,6 @@ const Row = styled("div", {
     flexGrow: 1,
     minHeight: 0,
     minWidth: 0,
-  },
-});
-
-const ChatToggle = styled("button", {
-  base: {
-    position: "absolute",
-    insetBlockStart: "12px",
-    insetInlineEnd: "12px",
-    width: "40px",
-    height: "40px",
-    display: "grid",
-    placeItems: "center",
-    borderRadius: "var(--z-radius-pill)",
-    border: "1px solid var(--z-border-subtle, transparent)",
-    background: "var(--z-bg-raised)",
-    color: "var(--z-fg-primary)",
-    "--z-icon-color": "currentColor",
-    cursor: "pointer",
-    transition: "background 120ms ease",
-    _hover: { background: "var(--z-slate-1, var(--z-bg-raised))" },
-    _focusVisible: {
-      outline: "2px solid var(--z-accent)",
-      outlineOffset: "2px",
-    },
-    "&[aria-pressed=true]": { background: "var(--z-accent-muted)" },
-    _phone: { width: "44px", height: "44px" },
-  },
-});
-
-const Dot = styled("span", {
-  base: {
-    position: "absolute",
-    insetBlockStart: "6px",
-    insetInlineEnd: "6px",
-    width: "8px",
-    height: "8px",
-    borderRadius: "50%",
-    background: "var(--z-highlight, var(--z-accent))",
-  },
-});
-
-const ChatPanel = styled("aside", {
-  base: {
-    display: "flex",
-    flexDirection: "column",
-    width: "min(380px, 40%)",
-    minWidth: "300px",
-    minHeight: 0,
-    borderInlineStart: "1px solid var(--z-border-subtle, transparent)",
-    background: "var(--z-bg-chat, var(--z-bg-app))",
-    "&[data-overlay=true]": {
-      position: "absolute",
-      inset: 0,
-      width: "100%",
-      minWidth: 0,
-      zIndex: 2,
-      borderInlineStart: "none",
-    },
-  },
-});
-
-const ChatTitle = styled("div", {
-  base: {
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "space-between",
-    padding: "8px 8px 8px 16px",
-    fontWeight: 600,
-    fontSize: "15px",
-    borderBlockEnd: "1px solid var(--z-border-subtle, transparent)",
-  },
-});
-
-const CloseChat = styled("button", {
-  base: {
-    width: "36px",
-    height: "36px",
-    display: "grid",
-    placeItems: "center",
-    border: "none",
-    borderRadius: "var(--z-radius-md, 8px)",
-    background: "transparent",
-    color: "var(--z-fg-secondary, var(--z-fg-primary))",
-    "--z-icon-color": "currentColor",
-    cursor: "pointer",
-    _hover: { background: "var(--z-bg-raised)" },
-    _focusVisible: {
-      outline: "2px solid var(--z-accent)",
-      outlineOffset: "2px",
-    },
-    _phone: { width: "44px", height: "44px" },
   },
 });
 

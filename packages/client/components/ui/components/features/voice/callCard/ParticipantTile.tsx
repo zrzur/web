@@ -281,7 +281,8 @@ export const tile = cva({
     cursor: "pointer",
 
     color: "var(--z-fg-primary)",
-    background: "var(--z-bg-raised)",
+    // same surface as the channel list beside the call (owner, 2026-11-09)
+    background: "var(--z-bg-nav, var(--z-bg-sidebar))",
     border: "1px solid var(--z-border-subtle)",
 
     overflow: "hidden",
