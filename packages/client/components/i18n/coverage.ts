@@ -45,7 +45,7 @@ export const LANGUAGE_COVERAGE: Record<string, number> = {
   "pt-BR": 13,
   "pt-PT": 11,
   "ro": 4,
-  "ru": 13,
+  "ru": 100,
   "si": 3,
   "sk": 7,
   "sl": 3,
