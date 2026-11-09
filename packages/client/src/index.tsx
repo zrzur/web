@@ -99,6 +99,12 @@ const Designs = lazy(() =>
 const Developers = lazy(() =>
   import("./interface/Developers").then((m) => ({ default: m.Developers })),
 );
+// the developer docs: their own chunk, shown without the chat client
+const DevelopersDocs = lazy(() =>
+  import("./interface/DevelopersDocs").then((m) => ({
+    default: m.DevelopersDocs,
+  })),
+);
 const DevelopmentPage = lazy(() =>
   import("./interface/Development").then((m) => ({
     default: m.DevelopmentPage,
@@ -275,6 +281,8 @@ const discoverSiteRoutes = () => (
 const appRoutes = () => (
   <Route component={MountContext}>
     {loginRoutes()}
+    {/* the docs never wait for the gateway, signed in or not */}
+    <Route path="/developers/docs/*" component={DevelopersDocs} />
     <Route path="/" component={Interface}>
       <Route path="/pwa" component={PWARedirect} />
       <Route path="/dev" component={DevelopmentPage} />

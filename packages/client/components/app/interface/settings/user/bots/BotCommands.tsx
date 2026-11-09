@@ -18,7 +18,9 @@ export function BotCommands(props: { botId: string }) {
 
   const [commands] = createResource(async () => {
     const response = await client()
-      .api.get(`/applications/${props.botId as ""}/commands` as "/applications/{application_id}/commands")
+      .api.get(
+        `/applications/${props.botId as ""}/commands` as "/applications/{application_id}/commands",
+      )
       .catch(() => undefined);
     return (response ?? []) as BotCommand[];
   });
@@ -35,8 +37,8 @@ export function BotCommands(props: { botId: string }) {
       title={<Trans>Commands</Trans>}
       description={
         <Trans>
-          Commands your bot registered for every server. Register them from
-          your bot's code; changes show here at once.
+          Commands your bot registered for every server. Register them from your
+          bot's code; changes show here at once.
         </Trans>
       }
     >

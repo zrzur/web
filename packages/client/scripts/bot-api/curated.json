@@ -378,6 +378,11 @@
    "errors": [
     "IsBot"
    ]
+  },
+  "POST /channels/{target}/threads": {
+   "restrictions": [
+    "The first message (content, up to 2000 characters) is sent like any message of the bot: Send Messages and the mention rules apply, and if it is refused no thread is made. It takes no embeds, components or attachments yet; send those in a second message."
+   ]
   }
  },
  "gateway": {

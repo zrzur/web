@@ -441,6 +441,12 @@ msgstr ""
 #~ msgid "{0} now has Zrzur Plus. They'll see your note in their subscriptions."
 #~ msgstr ""
 
+#. placeholder {0}: draft.options.length
+#. placeholder {1}: LIMITS.options
+#: components/app/interface/settings/user/bots/CommandManager.tsx
+msgid "{0} of {1}"
+msgstr ""
+
 #. placeholder {0}: held().length
 #. placeholder {1}: collectable()
 #: components/app/interface/settings/user/badges/MyBadges.tsx
@@ -477,6 +483,13 @@ msgstr ""
 msgid "{0} of {1} selected"
 msgstr ""
 
+#. placeholder {0}: count("ChatInput")
+#. placeholder {1}: LIMITS.chatInput
+#. placeholder {2}: count("User") + count("Message")
+#: components/app/interface/settings/user/bots/CommandManager.tsx
+msgid "{0} of {1} slash commands · {2} menu commands"
+msgstr ""
+
 #. placeholder {0}: Math.max(0, limit() - props.server.emojis.length)
 #. placeholder {1}: limit()
 #: components/app/interface/settings/server/emojis/EmojiList.tsx
@@ -492,6 +505,11 @@ msgstr ""
 #. placeholder {0}: tierName("TopRow")
 #: components/app/interface/settings/user/subscriptions/BillingHistory.tsx
 msgid "{0} on Discover, {name}"
+msgstr ""
+
+#. placeholder {0}: props.command.options!.length
+#: components/app/interface/settings/user/bots/CommandManager.tsx
+msgid "{0} options"
 msgstr ""
 
 #. placeholder {0}: count()
@@ -998,6 +1016,10 @@ msgstr ""
 msgid "A card with the Hijri date when someone joins or leaves."
 msgstr ""
 
+#: components/app/interface/settings/user/bots/CommandManager.tsx
+msgid "A command of this type already has this name."
+msgstr ""
+
 #: components/i18n/errors.tsx
 msgid "A command with this name already exists."
 msgstr ""
@@ -1056,6 +1078,18 @@ msgstr ""
 
 #: src/interface/designs/Looks.tsx
 msgid "A galaxy around you."
+msgstr ""
+
+#: components/app/interface/settings/user/bots/CommandManager.tsx
+msgid "A group holds only sub-commands."
+msgstr ""
+
+#: components/app/interface/settings/user/bots/CommandManager.tsx
+msgid "A group needs at least one sub-command."
+msgstr ""
+
+#: components/app/interface/settings/user/bots/CommandManager.tsx
+msgid "A language tag is not valid."
 msgstr ""
 
 #: components/ui/components/features/profiles/badges/useBadgeText.ts
@@ -1152,6 +1186,14 @@ msgstr ""
 
 #: components/app/interface/settings/server/assistant/labels.ts
 msgid "A staff thread and direct messages"
+msgstr ""
+
+#: components/app/interface/settings/user/bots/CommandManager.tsx
+msgid "A sub-command cannot hold sub-commands."
+msgstr ""
+
+#: components/app/interface/settings/user/bots/CommandManager.tsx
+msgid "A sub-command takes only a name, a description and options."
 msgstr ""
 
 #: components/app/interface/settings/user/profile/CreatorStudio.tsx
@@ -1475,6 +1517,10 @@ msgstr ""
 msgid "Add bot"
 msgstr ""
 
+#: components/app/interface/settings/user/bots/CommandManager.tsx
+msgid "Add choice"
+msgstr ""
+
 #: components/app/interface/settings/user/plugins/text.ts
 msgid "Add commands"
 msgstr ""
@@ -1532,6 +1578,10 @@ msgstr ""
 
 #: components/app/interface/settings/channel/ForumTags.tsx
 msgid "Add one so members can sort posts."
+msgstr ""
+
+#: components/app/interface/settings/user/bots/CommandManager.tsx
+msgid "Add option"
 msgstr ""
 
 #: src/interface/You.tsx
@@ -1655,6 +1705,10 @@ msgstr ""
 msgid "Advanced"
 msgstr ""
 
+#: components/app/interface/settings/user/bots/CommandManager.tsx
+msgid "Advanced: JSON import and export"
+msgstr ""
+
 #: components/ui/components/features/profiles/plateNames.ts
 msgid "Afghanistan"
 msgstr ""
@@ -1764,6 +1818,10 @@ msgstr ""
 #: components/app/menus/shared/NotificationContextMenu.tsx
 #~ msgid "All Messages"
 #~ msgstr "Gach Teachtaireacht"
+
+#: components/app/interface/settings/user/bots/CommandManager.tsx
+msgid "All names, descriptions and choices together have more than {max} characters."
+msgstr ""
 
 #: components/app/interface/settings/server/ServerVerification.tsx
 msgid "All of the above, and 10 minutes in this server."
@@ -2088,6 +2146,10 @@ msgstr ""
 msgid "Anything that still posts with its address will stop working."
 msgstr ""
 
+#: src/interface/developers/docs/DocsPortal.tsx
+msgid "API changelog"
+msgstr ""
+
 #: components/app/interface/settings/server/LobbyAppearanceEditor.tsx
 msgid "App theme"
 msgstr ""
@@ -2223,6 +2285,10 @@ msgstr ""
 msgid "Arab countries"
 msgstr ""
 
+#: components/app/interface/settings/user/bots/CommandManager.tsx
+msgid "Arabic"
+msgstr ""
+
 #: components/app/interface/settings/server/AutoModSettings.tsx
 msgid "Arabic insults"
 msgstr ""
@@ -2337,6 +2403,10 @@ msgstr ""
 msgid "Asked {0}"
 msgstr ""
 
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "Asks first if you changed something."
+msgstr ""
+
 #: components/app/interface/safety/labels.tsx
 msgid "Asks for too many permissions"
 msgstr ""
@@ -2382,8 +2452,20 @@ msgstr ""
 msgid "At most {max} characters."
 msgstr ""
 
+#: components/app/interface/settings/user/bots/CommandManager.tsx
+msgid "At most {max} commands of this type."
+msgstr ""
+
 #: components/i18n/errors.tsx
 msgid "At most {max} items."
+msgstr ""
+
+#: components/app/interface/settings/user/bots/CommandManager.tsx
+msgid "At most {max} languages."
+msgstr ""
+
+#: components/app/interface/settings/user/bots/CommandManager.tsx
+msgid "At most {max} options on each level."
 msgstr ""
 
 #: components/i18n/errors.tsx
@@ -2949,7 +3031,7 @@ msgstr ""
 #~ msgid "Bots can't have Plus."
 #~ msgstr ""
 
-#. placeholder {0}: endpoint.auth.botRejectedWith
+#. placeholder {0}: endpoint.botRejectedWith
 #: src/interface/developers/docs/Directives.tsx
 msgid "Bots get {0}."
 msgstr ""
@@ -3232,6 +3314,7 @@ msgstr ""
 #: components/app/interface/settings/server/ServerOwnership.tsx
 #: components/app/interface/settings/server/webhooks/ServerWebhooks.tsx
 #: components/app/interface/settings/user/account/AgeSettings.tsx
+#: components/app/interface/settings/user/bots/CommandManager.tsx
 #: components/app/interface/settings/user/plugins/PluginDetail.tsx
 #: components/app/interface/settings/user/profile/CreatorStudio.tsx
 #: components/app/interface/settings/user/profile/CreatorSuspension.tsx
@@ -3373,6 +3456,10 @@ msgstr ""
 
 #: components/ui/components/features/profiles/plateNames.ts
 msgid "Cape Verde"
+msgstr ""
+
+#: components/app/interface/settings/user/bots/CommandManager.tsx
+msgid "Capitals and spaces are allowed."
 msgstr ""
 
 #: components/app/interface/settings/user/profile/StyleEditors.tsx
@@ -3603,6 +3690,7 @@ msgstr ""
 
 #: components/app/interface/safety/labels.tsx
 #: components/app/interface/settings/server/webhooks/ServerWebhooks.tsx
+#: components/app/interface/settings/user/bots/CommandManager.tsx
 msgid "Channel"
 msgstr ""
 
@@ -3665,6 +3753,10 @@ msgstr ""
 #: components/app/interface/settings/channel/Overview.tsx
 #~ msgid "Channel Slowmode"
 #~ msgstr ""
+
+#: components/app/interface/settings/user/bots/CommandManager.tsx
+msgid "Channel types"
+msgstr ""
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 #: components/app/interface/settings/server/audit/AuditLog.tsx
@@ -3730,6 +3822,10 @@ msgstr ""
 msgid "Check again"
 msgstr ""
 
+#: components/app/interface/settings/user/bots/CommandManager.tsx
+msgid "Check and import"
+msgstr ""
+
 #: components/app/interface/settings/user/plugins/index.tsx
 msgid "Check for updates"
 msgstr ""
@@ -3792,6 +3888,10 @@ msgstr ""
 
 #: components/ui/components/features/profiles/plateNames.ts
 msgid "China"
+msgstr ""
+
+#: components/app/interface/settings/user/bots/CommandManager.tsx
+msgid "Choices"
 msgstr ""
 
 #: components/app/interface/channels/text/interactions/CommandPicker.tsx
@@ -4249,7 +4349,11 @@ msgid "Comic"
 msgstr ""
 
 #: src/interface/Developers.tsx
-msgid "Command"
+#~ msgid "Command"
+#~ msgstr ""
+
+#: components/app/interface/settings/user/bots/CommandManager.tsx
+msgid "Command deleted."
 msgstr ""
 
 #: components/app/interface/channels/text/interactions/CommandPicker.tsx
@@ -4259,6 +4363,7 @@ msgstr ""
 #: components/app/interface/channels/text/interactions/CommandPicker.tsx
 #: components/app/interface/discover/Detail.tsx
 #: components/app/interface/settings/user/bots/BotCommands.tsx
+#: components/app/interface/settings/user/bots/CommandManager.tsx
 #: components/ui/components/features/profiles/ProfileCommands.tsx
 #: src/interface/channels/text/Composition.tsx
 #: src/interface/Developers.tsx
@@ -4268,6 +4373,10 @@ msgstr ""
 #: src/interface/developers/docs/DocsPortal.tsx
 #~ msgid "Commands and interactions"
 #~ msgstr ""
+
+#: components/app/interface/settings/user/bots/CommandManager.tsx
+msgid "Commands imported and saved."
+msgstr ""
 
 #: src/interface/developers/docs/DocsPortal.tsx
 msgid "Commands with options"
@@ -4411,7 +4520,7 @@ msgstr ""
 msgid "Confirm action"
 msgstr ""
 
-#: src/interface/Developers.tsx
+#: components/app/interface/settings/user/bots/CommandManager.tsx
 msgid "Confirm delete"
 msgstr ""
 
@@ -4560,6 +4669,7 @@ msgstr ""
 #: components/app/interface/discover/ServerPage.tsx
 #: components/app/interface/settings/server/invites/VanityInvite.tsx
 #: components/app/interface/settings/server/webhooks/ServerWebhooks.tsx
+#: components/app/interface/settings/user/bots/CommandManager.tsx
 #: components/modal/modals/CreateInvite.tsx
 #: src/interface/designs/DesignPage.tsx
 #: src/interface/Developers.tsx
@@ -4620,6 +4730,10 @@ msgstr ""
 
 #: components/app/interface/settings/user/bots/ViewBot.tsx
 msgid "Copy it now. It won't be shown again."
+msgstr ""
+
+#: components/app/interface/settings/user/bots/CommandManager.tsx
+msgid "Copy JSON"
 msgstr ""
 
 #: components/app/interface/discover/ServerPage.tsx
@@ -4734,6 +4848,10 @@ msgstr ""
 msgid "Couldn't load the bots."
 msgstr ""
 
+#: components/app/interface/settings/user/bots/PrivilegedIntents.tsx
+msgid "Couldn't load the saved intents."
+msgstr ""
+
 #: components/ui/components/design/ImageCropper.tsx
 msgid "Couldn't load this image."
 msgstr ""
@@ -4747,8 +4865,8 @@ msgid "Couldn't play this media."
 msgstr ""
 
 #: components/app/interface/settings/user/bots/ViewBot.tsx
-msgid "Couldn't save. Try again."
-msgstr ""
+#~ msgid "Couldn't save. Try again."
+#~ msgstr ""
 
 #: components/modal/modals/CustomStatus.tsx
 #: src/interface/navigation/servers/UserMenu.tsx
@@ -5114,6 +5232,10 @@ msgstr ""
 msgid "Crystal shards"
 msgstr ""
 
+#: components/app/interface/settings/user/bots/CommandManager.tsx
+msgid "Ctrl+Enter saves · Esc goes back"
+msgstr ""
+
 #: components/ui/components/features/profiles/plateNames.ts
 msgid "Cuba"
 msgstr ""
@@ -5337,6 +5459,10 @@ msgstr ""
 msgid "Default font"
 msgstr ""
 
+#: components/app/interface/settings/user/bots/CommandManager.tsx
+msgid "Default member permissions"
+msgstr ""
+
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsOverview.tsx
 #: components/app/interface/settings/server/audit/AuditLog.tsx
 #: components/app/interface/settings/server/roles/ServerRoleOverview.tsx
@@ -5354,6 +5480,7 @@ msgstr ""
 #: components/app/interface/settings/server/webhooks/ServerWebhooks.tsx
 #: components/app/interface/settings/user/Account.tsx
 #: components/app/interface/settings/user/appearance/MyThemes.tsx
+#: components/app/interface/settings/user/bots/CommandManager.tsx
 #: components/app/interface/settings/user/bots/ViewBot.tsx
 #: components/modal/modals/DeleteBot.tsx
 #: components/modal/modals/DeleteCategory.tsx
@@ -5363,7 +5490,6 @@ msgstr ""
 #: components/modal/modals/DeleteRole.tsx
 #: components/modal/modals/DeleteServer.tsx
 #: components/ui/components/features/messaging/elements/MessageToolbar.tsx
-#: src/interface/Developers.tsx
 msgid "Delete"
 msgstr "Scrios"
 
@@ -5566,9 +5692,14 @@ msgstr ""
 msgid "Describe what happened. Don't paste private information you don't need to share."
 msgstr ""
 
+#: components/app/interface/settings/user/bots/CommandManager.tsx
+msgid "description"
+msgstr ""
+
 #: components/app/interface/settings/server/audit/AuditLog.tsx
 #: components/app/interface/settings/server/LobbyRoleQuestionsEditor.tsx
 #: components/app/interface/settings/server/Overview.tsx
+#: components/app/interface/settings/user/bots/CommandManager.tsx
 #: components/app/interface/settings/user/profile/CreatorStudio.tsx
 #: components/i18n/errors.tsx
 msgid "Description"
@@ -5667,6 +5798,7 @@ msgstr ""
 msgid "Developer documentation"
 msgstr ""
 
+#: components/app/interface/settings/user/Keybinds.tsx
 #: components/app/interface/settings/UserSettings.tsx
 #: src/interface/Developers.tsx
 #: src/interface/Discover.tsx
@@ -5899,6 +6031,10 @@ msgstr ""
 #~ msgid "Do Not Disturb"
 #~ msgstr "Ná Cur As Dom"
 
+#: src/interface/developers/docs/GettingStarted.tsx
+msgid "Do this before the first run. A bot that is not in the server gets 403 MissingPermission for its channels, which looks like a missing permission."
+msgstr ""
+
 #: src/interface/Developers.tsx
 #: src/interface/developers/docs/DocsPortal.tsx
 msgid "Documentation"
@@ -6094,6 +6230,7 @@ msgstr ""
 
 #: components/app/interface/settings/server/webhooks/ServerWebhooks.tsx
 #: components/app/interface/settings/user/Account.tsx
+#: components/app/interface/settings/user/bots/CommandManager.tsx
 #: components/app/interface/settings/user/profile/CreatorStudio.tsx
 #: components/ui/components/features/messaging/elements/MessageToolbar.tsx
 msgid "Edit"
@@ -6114,6 +6251,10 @@ msgstr ""
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 msgid "Edit channel-specific role and default permissions"
+msgstr ""
+
+#: components/app/interface/settings/user/bots/CommandManager.tsx
+msgid "Edit command"
 msgstr ""
 
 #: components/app/interface/settings/server/emojis/EmojiList.tsx
@@ -6383,6 +6524,10 @@ msgstr ""
 msgid "England"
 msgstr ""
 
+#: components/app/interface/settings/user/bots/CommandManager.tsx
+msgid "English"
+msgstr ""
+
 #: components/app/interface/settings/user/voice/VoiceProcessingOptions.tsx
 msgid "Enhanced (RNNoise)"
 msgstr ""
@@ -6399,6 +6544,10 @@ msgstr ""
 msgid "Enter a new password."
 msgstr "Cuir isteach pasfhocal nua."
 
+#: components/app/interface/settings/user/bots/CommandManager.tsx
+msgid "Enter a number between -9007199254740991 and 9007199254740991."
+msgstr ""
+
 #: components/modal/modals/InteractionsEndpoint.tsx
 msgid "Enter a plain https:// address."
 msgstr ""
@@ -6406,6 +6555,10 @@ msgstr ""
 #: components/auth/src/flows/Form.tsx
 #: components/modal/modals/EditEmail.tsx
 msgid "Enter a valid email address."
+msgstr ""
+
+#: components/app/interface/settings/user/bots/CommandManager.tsx
+msgid "Enter a whole number."
 msgstr ""
 
 #: src/interface/channels/AgeGate.tsx
@@ -6452,6 +6605,11 @@ msgstr "Cuir isteach d'ainm úsáideora."
 
 #: components/app/interface/discover/categories.tsx
 msgid "Entertainment"
+msgstr ""
+
+#. placeholder {0}: (parsed.index ?? 0) + 1
+#: components/app/interface/settings/user/bots/CommandManager.tsx
+msgid "Entry {0} has a field of the wrong type. The Slash commands page shows each field."
 msgstr ""
 
 #: components/ui/components/features/profiles/plateNames.ts
@@ -6529,6 +6687,10 @@ msgstr ""
 #~ msgid "Every creator here is verified. Open one to see everything they made."
 #~ msgstr ""
 
+#: components/app/interface/settings/user/bots/CommandManager.tsx
+msgid "Every entry needs at least a name."
+msgstr ""
+
 #: components/modal/modals/SuperchargeServer.tsx
 #~ msgid "Every feather lifts this server for everyone in it. Any member can give one."
 #~ msgstr ""
@@ -6597,6 +6759,10 @@ msgstr ""
 #: components/app/interface/settings/server/members/ListMembers.tsx
 #~ msgid "Everyone in this server. Right-click a member, or use ⋯, for every action."
 #~ msgstr ""
+
+#: components/app/interface/settings/user/bots/CommandManager.tsx
+msgid "Everyone who can write in the channel. Pick permissions to limit it."
+msgstr ""
 
 #: src/interface/designs/Home.tsx
 msgid "Everything"
@@ -6669,6 +6835,7 @@ msgstr ""
 #~ msgstr ""
 
 #: components/app/interface/settings/user/appearance/MyThemes.tsx
+#: components/app/interface/settings/user/bots/CommandManager.tsx
 msgid "Export"
 msgstr ""
 
@@ -6847,6 +7014,10 @@ msgstr ""
 msgid "Fiji"
 msgstr ""
 
+#: components/app/interface/settings/user/bots/CommandManager.tsx
+msgid "File"
+msgstr ""
+
 #: src/interface/channels/text/searchLabels.ts
 msgctxt "search filter"
 msgid "File"
@@ -7020,6 +7191,10 @@ msgstr ""
 
 #: src/interface/developers/docs/Directives.tsx
 msgid "Fix"
+msgstr ""
+
+#: components/app/interface/settings/user/bots/CommandManager.tsx
+msgid "Fix these before saving:"
 msgstr ""
 
 #: components/app/interface/settings/user/badges/BugQueue.tsx
@@ -7473,6 +7648,10 @@ msgstr ""
 msgid "Georgia"
 msgstr ""
 
+#: components/app/interface/settings/user/bots/CommandManager.tsx
+msgid "German"
+msgstr ""
+
 #: components/ui/components/features/profiles/plateNames.ts
 msgid "Germany"
 msgstr ""
@@ -7597,6 +7776,10 @@ msgstr ""
 
 #: components/modal/modals/MoveSupercharge.tsx
 msgid "Give"
+msgstr ""
+
+#: components/app/interface/settings/user/bots/CommandManager.tsx
+msgid "Give 1 to {max} choices."
 msgstr ""
 
 #: components/modal/modals/SuperchargeServer.tsx
@@ -7837,6 +8020,10 @@ msgstr ""
 #: components/modal/modals/CreateGroup.tsx
 #~ msgid "Group Name"
 #~ msgstr "Ainm an Ghrúpa"
+
+#: components/app/interface/settings/user/bots/CommandManager.tsx
+msgid "Groups can only be at the top level."
+msgstr ""
 
 #: components/app/interface/settings/ServerSettings.tsx
 msgid "Groups of members and what they may do."
@@ -8292,6 +8479,10 @@ msgstr ""
 msgid "If you sent a lot of messages"
 msgstr ""
 
+#: components/app/interface/settings/user/bots/CommandManager.tsx
+msgid "If your bot sends its list when it starts, that list replaces what you save here."
+msgstr ""
+
 #: components/ui/components/features/messaging/elements/RaidAlert.tsx
 #: components/ui/components/features/profiles/ProfileActions.tsx
 #: src/interface/Friends.tsx
@@ -8342,6 +8533,7 @@ msgid "Impersonation"
 msgstr ""
 
 #: components/app/interface/settings/user/appearance/MyThemes.tsx
+#: components/app/interface/settings/user/bots/CommandManager.tsx
 msgid "Import"
 msgstr ""
 
@@ -8378,6 +8570,10 @@ msgstr ""
 
 #: components/app/interface/safety/labels.tsx
 msgid "In review"
+msgstr ""
+
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "In the command editor."
 msgstr ""
 
 #: src/interface/developers/docs/GettingStarted.tsx
@@ -8652,6 +8848,10 @@ msgstr ""
 
 #: components/ui/components/features/profiles/plateNames.ts
 msgid "Ireland"
+msgstr ""
+
+#: src/interface/developers/docs/GettingStarted.tsx
+msgid "Is the bot in that server?"
 msgstr ""
 
 #: components/app/interface/channels/text/interactions/EphemeralMessages.tsx
@@ -9110,6 +9310,10 @@ msgstr ""
 msgid "Laos"
 msgstr ""
 
+#: components/app/interface/settings/user/bots/CommandManager.tsx
+msgid "Largest value"
+msgstr ""
+
 #: components/app/interface/settings/user/Sync.tsx
 msgid "Last sync <0/>"
 msgstr ""
@@ -9199,6 +9403,10 @@ msgstr "Fhagant friothálaí"
 msgid "Leave the beta"
 msgstr ""
 
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "Leave the command editor"
+msgstr ""
+
 #: components/app/menus/VoiceParticipantContextMenu.tsx
 msgid "Leave voice"
 msgstr ""
@@ -9225,6 +9433,10 @@ msgstr ""
 
 #: components/app/interface/settings/user/safety/SafetyDashboard.tsx
 msgid "Legal hold is on, but no copy of this content exists. It could not be found, or this kind of content cannot be copied. Keep your own record of it."
+msgstr ""
+
+#: components/app/interface/settings/user/bots/CommandManager.tsx
+msgid "Lengths go from 0 to {max}, and the minimum is not above the maximum."
 msgstr ""
 
 #: components/app/interface/settings/user/profile/StyleEditors.tsx
@@ -9346,6 +9558,10 @@ msgstr ""
 
 #: components/ui/components/features/voice/callCard/ParticipantTile.tsx
 msgid "Limited by network"
+msgstr ""
+
+#: components/app/interface/settings/user/bots/CommandManager.tsx
+msgid "Limited by permissions"
 msgstr ""
 
 #: src/interface/designs/Scenes.tsx
@@ -9528,6 +9744,8 @@ msgstr ""
 #: components/app/interface/settings/server/ServerApps.tsx
 #: components/app/interface/settings/server/webhooks/ServerWebhooks.tsx
 #: components/app/interface/settings/user/badges/MyBadges.tsx
+#: components/app/interface/settings/user/bots/CommandManager.tsx
+#: components/app/interface/settings/user/bots/PrivilegedIntents.tsx
 #: components/app/interface/settings/user/plugins/BrowseTab.tsx
 #: components/app/interface/settings/user/plugins/PluginDetail.tsx
 #: components/app/interface/settings/user/plugins/ReviewTab.tsx
@@ -9544,6 +9762,7 @@ msgstr ""
 #: src/interface/channels/text/ThreadsPanel.tsx
 #: src/interface/Designs.tsx
 #: src/interface/Developers.tsx
+#: src/interface/developers/docs/DocsPortal.tsx
 #: src/interface/Discover.tsx
 #: src/interface/OAuth.tsx
 msgid "Loading…"
@@ -9666,6 +9885,10 @@ msgstr ""
 msgid "Logs you out of all sessions except this device."
 msgstr ""
 
+#: components/app/interface/settings/user/bots/CommandManager.tsx
+msgid "Longest text"
+msgstr ""
+
 #: components/app/interface/settings/user/profile/UserProfileEditor.tsx
 msgid "Look"
 msgstr ""
@@ -9707,6 +9930,10 @@ msgstr ""
 
 #: components/app/interface/settings/user/plugins/text.ts
 msgid "Low risk"
+msgstr ""
+
+#: components/app/interface/settings/user/bots/CommandManager.tsx
+msgid "Lowercase letters of any script, digits, - and _."
 msgstr ""
 
 #: components/app/interface/settings/server/emojis/EmojiList.tsx
@@ -10169,6 +10396,10 @@ msgstr ""
 msgid "Member list, search results and pinned messages."
 msgstr ""
 
+#: components/app/interface/settings/user/bots/CommandManager.tsx
+msgid "Member menu · Apps"
+msgstr ""
+
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsOverview.tsx
 msgid "Member overrides"
 msgstr ""
@@ -10253,6 +10484,10 @@ msgstr ""
 msgid "Members with any role, bots and the owner are exempt."
 msgstr ""
 
+#: components/app/interface/settings/user/bots/CommandManager.tsx
+msgid "Members without the permissions do not see it."
+msgstr ""
+
 #. placeholder {0}: format(value(stat))
 #: src/interface/navigation/channels/ServerStats.tsx
 msgid "Members: {0}"
@@ -10326,6 +10561,10 @@ msgstr ""
 #~ msgid "Menu"
 #~ msgstr ""
 
+#: components/app/interface/settings/user/bots/CommandManager.tsx
+msgid "Menu commands have no description and no options."
+msgstr ""
+
 #: components/app/interface/settings/user/appearance/AnimationSettings.tsx
 msgid "Menus that open with a right-click."
 msgstr ""
@@ -10359,7 +10598,7 @@ msgstr ""
 msgid "Message actions"
 msgstr ""
 
-#: components/app/interface/settings/user/bots/ViewBot.tsx
+#: components/app/interface/settings/user/bots/PrivilegedIntents.tsx
 msgid "Message content"
 msgstr ""
 
@@ -10368,7 +10607,12 @@ msgid "Message length"
 msgstr ""
 
 #: components/app/interface/settings/user/bots/BotCommands.tsx
+#: components/app/interface/settings/user/bots/CommandManager.tsx
 msgid "Message menu"
+msgstr ""
+
+#: components/app/interface/settings/user/bots/CommandManager.tsx
+msgid "Message menu · Apps"
 msgstr ""
 
 #: components/ui/components/features/messaging/elements/MessageReply.tsx
@@ -10678,6 +10922,7 @@ msgstr ""
 
 #: components/app/interface/settings/server/LobbyRoleQuestionsEditor.tsx
 #: components/app/interface/settings/server/LobbySettings.tsx
+#: components/app/interface/settings/user/bots/CommandManager.tsx
 msgid "Move down"
 msgstr ""
 
@@ -10707,6 +10952,7 @@ msgstr ""
 
 #: components/app/interface/settings/server/LobbyRoleQuestionsEditor.tsx
 #: components/app/interface/settings/server/LobbySettings.tsx
+#: components/app/interface/settings/user/bots/CommandManager.tsx
 msgid "Move up"
 msgstr ""
 
@@ -10866,11 +11112,16 @@ msgstr ""
 msgid "Myanmar"
 msgstr ""
 
+#: components/app/interface/settings/user/bots/CommandManager.tsx
+msgid "name"
+msgstr ""
+
 #: components/app/interface/settings/server/audit/AuditLog.tsx
 #: components/app/interface/settings/server/AutoModSettings.tsx
 #: components/app/interface/settings/server/emojis/EmojiList.tsx
 #: components/app/interface/settings/server/members/ListMembers.tsx
 #: components/app/interface/settings/user/badges/BetaAdmin.tsx
+#: components/app/interface/settings/user/bots/CommandManager.tsx
 #: components/app/interface/settings/user/plugins/DeveloperTab.tsx
 #: components/app/interface/settings/user/profile/CreatorStudio.tsx
 #: components/i18n/errors.tsx
@@ -10924,6 +11175,10 @@ msgstr ""
 
 #: src/interface/designs/Home.tsx
 msgid "Nameplates"
+msgstr ""
+
+#: components/app/interface/settings/user/bots/CommandManager.tsx
+msgid "Names in other languages"
 msgstr ""
 
 #: components/ui/components/features/profiles/plateNames.ts
@@ -11033,6 +11288,10 @@ msgstr ""
 msgid "New channel"
 msgstr ""
 
+#: components/app/interface/settings/user/bots/CommandManager.tsx
+msgid "New command"
+msgstr ""
+
 #: src/interface/Designs.tsx
 #~ msgid "New design"
 #~ msgstr ""
@@ -11110,6 +11369,10 @@ msgstr ""
 #: src/interface/Discover.tsx
 #~ msgid "New on Zrzur"
 #~ msgstr ""
+
+#: components/app/interface/settings/user/bots/CommandManager.tsx
+msgid "New option"
+msgstr ""
 
 #: components/auth/src/flows/Form.tsx
 #: components/modal/modals/EditPassword.tsx
@@ -11351,11 +11614,15 @@ msgid "No commands match"
 msgstr ""
 
 #: src/interface/Developers.tsx
-msgid "No commands registered yet."
-msgstr ""
+#~ msgid "No commands registered yet."
+#~ msgstr ""
 
 #: components/app/interface/settings/user/bots/BotCommands.tsx
 msgid "No commands yet"
+msgstr ""
+
+#: components/app/interface/settings/user/bots/CommandManager.tsx
+msgid "No commands yet. Add one here, or let your bot register its list when it starts."
 msgstr ""
 
 #: src/interface/Designs.tsx
@@ -11613,6 +11880,10 @@ msgstr ""
 msgid "No servers to show."
 msgstr ""
 
+#: components/app/interface/settings/user/bots/CommandManager.tsx
+msgid "No spaces at the start or the end."
+msgstr ""
+
 #: components/modal/modals/CreateBot.tsx
 msgid "No spam: send messages only when people ask for them or expect them."
 msgstr ""
@@ -11700,6 +11971,10 @@ msgstr ""
 
 #: src/interface/developers/docs/Directives.tsx
 msgid "none needed"
+msgstr ""
+
+#: components/app/interface/settings/user/bots/CommandManager.tsx
+msgid "None picked: every channel."
 msgstr ""
 
 #: src/interface/developers/docs/EndpointReference.tsx
@@ -11801,6 +12076,10 @@ msgstr ""
 
 #: src/interface/designs/Dock.tsx
 msgid "Not saved yet"
+msgstr ""
+
+#: components/app/interface/settings/user/bots/PrivilegedIntents.tsx
+msgid "Not saved. The switch shows what is saved."
 msgstr ""
 
 #: components/app/interface/settings/shared/Discoverable.tsx
@@ -11953,6 +12232,10 @@ msgstr ""
 msgid "Now: {0}. Raise it during a raid."
 msgstr ""
 
+#: components/app/interface/settings/user/bots/CommandManager.tsx
+msgid "Number"
+msgstr ""
+
 #: src/interface/Developers.tsx
 #: src/interface/developers/docs/DocsPortal.tsx
 msgid "OAuth2"
@@ -11975,6 +12258,10 @@ msgstr ""
 #: components/ui/components/features/messaging/composition/MessageReplyPreview.tsx
 msgid "Off"
 msgstr "As faidhm"
+
+#: components/app/interface/settings/user/bots/PrivilegedIntents.tsx
+msgid "Off (saved)"
+msgstr ""
 
 #: components/app/interface/settings/user/profile/CreatorPublicName.tsx
 msgid "Off by default. Designs.zrzur.com is open to everyone and search engines, without an account. Switched on, your name and avatar appear on your designs there, and anyone can open a page of all your work. Switched off, visitors see the designs without any name and nobody gets that page. Your #tag never shows."
@@ -12062,6 +12349,10 @@ msgstr ""
 #: src/interface/designs/Looks.tsx
 msgid "On"
 msgstr "Ar Siúl"
+
+#: components/app/interface/settings/user/bots/PrivilegedIntents.tsx
+msgid "On (saved)"
+msgstr ""
 
 #: components/app/interface/discover/Detail.tsx
 #: components/modal/modals/AddBot.tsx
@@ -12175,12 +12466,20 @@ msgstr ""
 msgid "Only for the Zrzur team; it is never requested or bought."
 msgstr ""
 
+#: components/app/interface/settings/user/bots/CommandManager.tsx
+msgid "Only in channels marked for adults"
+msgstr ""
+
 #: components/app/interface/settings/server/ServerAccess.tsx
 msgid "Only invites from people allowed to invite. No requests."
 msgstr ""
 
 #: src/interface/lobby/LobbyLink.tsx
 msgid "Only managers see this until the lobby is turned on."
+msgstr ""
+
+#: components/app/interface/settings/user/bots/CommandManager.tsx
+msgid "Only members with all the permissions picked below see and use it. Your bot should still check them."
 msgstr ""
 
 #: components/app/interface/support/OfficialBanner.tsx
@@ -12250,6 +12549,18 @@ msgstr ""
 
 #: components/app/interface/channels/text/interactions/MessageComponents.tsx
 msgid "Only some people can use this."
+msgstr ""
+
+#: components/app/interface/settings/user/bots/CommandManager.tsx
+msgid "Only sub-commands and groups hold options."
+msgstr ""
+
+#: components/app/interface/settings/user/bots/CommandManager.tsx
+msgid "Only text and number options can suggest while typing."
+msgstr ""
+
+#: components/app/interface/settings/user/bots/CommandManager.tsx
+msgid "Only text and number options take choices."
 msgstr ""
 
 #: src/interface/developers/docs/EndpointReference.tsx
@@ -12435,6 +12746,18 @@ msgstr ""
 msgid "Opens"
 msgstr ""
 
+#: components/app/interface/settings/user/bots/CommandManager.tsx
+msgid "Option description"
+msgstr ""
+
+#: components/app/interface/settings/user/bots/CommandManager.tsx
+msgid "Option name"
+msgstr ""
+
+#: components/app/interface/settings/user/bots/CommandManager.tsx
+msgid "Option type"
+msgstr ""
+
 #: components/app/interface/channels/text/interactions/CommandPicker.tsx
 msgid "optional"
 msgstr ""
@@ -12447,7 +12770,7 @@ msgstr ""
 msgid "Optional: one line under the question."
 msgstr ""
 
-#: src/interface/Developers.tsx
+#: components/app/interface/settings/user/bots/CommandManager.tsx
 msgid "Options"
 msgstr ""
 
@@ -12706,6 +13029,10 @@ msgstr ""
 msgid "Past badges"
 msgstr ""
 
+#: components/app/interface/settings/user/bots/CommandManager.tsx
+msgid "Paste a list: [ { … }, { … } ]."
+msgstr ""
+
 #: src/interface/developers/docs/EndpointReference.tsx
 msgid "Path parameters"
 msgstr ""
@@ -12807,6 +13134,18 @@ msgstr ""
 #: components/modal/modals/CreateServer.tsx
 #~ msgid "People ask to join. You or someone you allow approves them first."
 #~ msgstr ""
+
+#: components/app/interface/settings/user/bots/CommandManager.tsx
+msgid "People pick one of these. None: they type any value."
+msgstr ""
+
+#: components/app/interface/settings/user/bots/CommandManager.tsx
+msgid "People see the name in their language. Your bot always gets the main name."
+msgstr ""
+
+#: components/app/interface/settings/user/bots/CommandManager.tsx
+msgid "People type it after / in a server channel."
+msgstr ""
 
 #: components/app/interface/settings/server/JoinRequests.tsx
 msgid "People who asked to join this private server. They can't see anything inside until you approve them."
@@ -12961,6 +13300,14 @@ msgstr ""
 #: components/auth/src/flows/FlowLogin.tsx
 msgid "Pick a username that you want people to be able to find you by. This can be changed later in your user settings."
 msgstr "Roghnaigh ainm úsáideora a theastaíonn uait go mbeadh daoine in ann tú a aimsiú, is féidir é seo a athrú níos déanaí i socruithe."
+
+#: components/app/interface/settings/user/bots/CommandManager.tsx
+msgid "Pick each channel type once."
+msgstr ""
+
+#: components/app/interface/settings/user/bots/CommandManager.tsx
+msgid "Pick the permissions from the list."
+msgstr ""
 
 #: components/app/interface/settings/server/LobbySettings.tsx
 msgid "Pick up to nine. None picked: the busiest channels are shown."
@@ -13238,7 +13585,7 @@ msgstr ""
 msgid "Powerful: give it only to people you trust."
 msgstr ""
 
-#: components/app/interface/settings/user/bots/ViewBot.tsx
+#: components/app/interface/settings/user/bots/PrivilegedIntents.tsx
 msgid "Presence"
 msgstr ""
 
@@ -13252,6 +13599,10 @@ msgstr ""
 
 #: components/app/interface/settings/server/invites/VanityInvite.tsx
 msgid "Press again to remove"
+msgstr ""
+
+#: components/app/interface/settings/user/bots/CommandManager.tsx
+msgid "Press Esc again to discard your changes."
 msgstr ""
 
 #: components/app/interface/settings/user/voice/PushToTalkOptions.tsx
@@ -13277,6 +13628,7 @@ msgstr ""
 #: components/app/interface/settings/server/roles/ServerRoleEditor.tsx
 #: components/app/interface/settings/server/ServerPreview.tsx
 #: components/app/interface/settings/shared/Discoverable.tsx
+#: components/app/interface/settings/user/bots/CommandManager.tsx
 #: components/app/interface/settings/user/profile/CreatorStudio.tsx
 #: components/app/interface/settings/user/profile/UserProfileEditor.tsx
 #: src/interface/designs/DesignPage.tsx
@@ -13293,6 +13645,10 @@ msgstr ""
 
 #: components/app/interface/settings/user/plugins/DeveloperTab.tsx
 msgid "Preview here"
+msgstr ""
+
+#: components/app/interface/settings/user/bots/CommandManager.tsx
+msgid "Preview language"
 msgstr ""
 
 #. placeholder {0}: entry.label()
@@ -13391,7 +13747,7 @@ msgstr ""
 #~ msgid "Private: not listed on Discover, and only teachers and assistants can invite. Announcements and rules are read-only for students."
 #~ msgstr ""
 
-#: components/app/interface/settings/user/bots/ViewBot.tsx
+#: components/app/interface/settings/user/bots/PrivilegedIntents.tsx
 msgid "Privileged intents"
 msgstr ""
 
@@ -13820,7 +14176,7 @@ msgstr ""
 msgid "Read the rules"
 msgstr ""
 
-#: components/app/interface/settings/user/bots/ViewBot.tsx
+#: components/app/interface/settings/user/bots/PrivilegedIntents.tsx
 msgid "Read the text, embeds and files of messages that don't mention the bot."
 msgstr ""
 
@@ -14139,6 +14495,10 @@ msgstr ""
 msgid "Remove channel icon"
 msgstr ""
 
+#: components/app/interface/settings/user/bots/CommandManager.tsx
+msgid "Remove choice"
+msgstr ""
+
 #: src/interface/Discover.tsx
 msgid "Remove filter"
 msgstr ""
@@ -14183,6 +14543,11 @@ msgstr ""
 #: components/modal/modals/RemoveMember.tsx
 #~ msgid "Remove Member"
 #~ msgstr ""
+
+#. placeholder {0}: label()
+#: components/app/interface/settings/user/bots/CommandManager.tsx
+msgid "Remove option {0}"
+msgstr ""
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 msgid "Remove other members' avatars"
@@ -14237,6 +14602,10 @@ msgstr ""
 
 #: components/app/interface/settings/channel/ForumTags.tsx
 msgid "Remove the emoji"
+msgstr ""
+
+#: components/app/interface/settings/user/bots/CommandManager.tsx
+msgid "Remove the hidden control characters."
 msgstr ""
 
 #: components/app/menus/UserContextMenu.tsx
@@ -14339,9 +14708,13 @@ msgstr ""
 msgid "Repeated messages"
 msgstr ""
 
-#: src/interface/Developers.tsx
-msgid "Replace all global commands (JSON list)"
+#: components/app/interface/settings/user/bots/CommandManager.tsx
+msgid "Replace all commands"
 msgstr ""
+
+#: src/interface/Developers.tsx
+#~ msgid "Replace all global commands (JSON list)"
+#~ msgstr ""
 
 #: components/modal/modals/InteractionsEndpoint.tsx
 msgid "Replace secret"
@@ -14553,6 +14926,14 @@ msgstr ""
 msgid "required"
 msgstr ""
 
+#: components/app/interface/settings/user/bots/CommandManager.tsx
+msgid "Required"
+msgstr ""
+
+#: components/app/interface/settings/user/bots/CommandManager.tsx
+msgid "Required options come before optional ones."
+msgstr ""
+
 #: components/app/interface/settings/user/profile/ReviewQueue.tsx
 msgid "Required to reject, request changes or suspend"
 msgstr ""
@@ -14743,8 +15124,8 @@ msgid "Reviewer's answer:"
 msgstr ""
 
 #: src/interface/Developers.tsx
-msgid "Revision"
-msgstr ""
+#~ msgid "Revision"
+#~ msgstr ""
 
 #: components/app/interface/settings/user/badges/BadgeAdmin.tsx
 #: components/app/interface/settings/user/profile/CreatorsAdmin.tsx
@@ -14794,6 +15175,7 @@ msgid "Rising hearts"
 msgstr ""
 
 #: components/app/interface/settings/server/roles/ServerRoleEditor.tsx
+#: components/app/interface/settings/user/bots/CommandManager.tsx
 msgid "Role"
 msgstr ""
 
@@ -15101,6 +15483,10 @@ msgstr ""
 msgid "Save"
 msgstr "Sábháil"
 
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "Save a command"
+msgstr ""
+
 #: components/app/interface/settings/server/LobbySettings.tsx
 msgid "Save and open lobby"
 msgstr ""
@@ -15112,9 +15498,13 @@ msgstr ""
 msgid "Save changes"
 msgstr ""
 
-#: src/interface/Developers.tsx
-msgid "Save commands"
+#: components/app/interface/settings/user/bots/CommandManager.tsx
+msgid "Save command"
 msgstr ""
+
+#: src/interface/Developers.tsx
+#~ msgid "Save commands"
+#~ msgstr ""
 
 #: components/app/interface/settings/user/appearance/MyThemes.tsx
 msgid "Save current"
@@ -15211,6 +15601,24 @@ msgstr ""
 msgid "Saved to your profile."
 msgstr ""
 
+#: components/app/interface/settings/user/bots/PrivilegedIntents.tsx
+msgid "Saved, but couldn't read it back. The switches may be out of date."
+msgstr ""
+
+#. placeholder {0}: intent.title()
+#: components/app/interface/settings/user/bots/PrivilegedIntents.tsx
+msgid "Saved: {0} is off. It counts from the bot's next connection."
+msgstr ""
+
+#. placeholder {0}: intent.title()
+#: components/app/interface/settings/user/bots/PrivilegedIntents.tsx
+msgid "Saved: {0} is on. It counts from the bot's next connection."
+msgstr ""
+
+#: components/app/interface/settings/user/bots/CommandManager.tsx
+msgid "Saved. People see the change at once."
+msgstr ""
+
 #: components/app/interface/channels/text/EditMessage.tsx
 msgid "Saving message…"
 msgstr ""
@@ -15219,11 +15627,12 @@ msgstr ""
 msgid "Saving the new order…"
 msgstr ""
 
+#: components/app/interface/settings/user/bots/CommandManager.tsx
+#: components/app/interface/settings/user/bots/PrivilegedIntents.tsx
 #: components/app/interface/settings/user/profile/UserProfileEditor.tsx
 #: components/modal/modals/CustomStatus.tsx
 #: components/ui/components/design/SettingsForm.tsx
 #: src/interface/designs/Dock.tsx
-#: src/interface/Developers.tsx
 msgid "Saving…"
 msgstr ""
 
@@ -15522,7 +15931,7 @@ msgstr ""
 msgid "See levels"
 msgstr ""
 
-#: components/app/interface/settings/user/bots/ViewBot.tsx
+#: components/app/interface/settings/user/bots/PrivilegedIntents.tsx
 msgid "See members join, leave and change, and load the member list."
 msgstr ""
 
@@ -15546,7 +15955,7 @@ msgstr ""
 msgid "See who changed what on the server"
 msgstr ""
 
-#: components/app/interface/settings/user/bots/ViewBot.tsx
+#: components/app/interface/settings/user/bots/PrivilegedIntents.tsx
 msgid "See who is online and their status."
 msgstr ""
 
@@ -15822,7 +16231,7 @@ msgstr ""
 msgid "Server information"
 msgstr ""
 
-#: components/app/interface/settings/user/bots/ViewBot.tsx
+#: components/app/interface/settings/user/bots/PrivilegedIntents.tsx
 msgid "Server members"
 msgstr ""
 
@@ -16036,6 +16445,10 @@ msgstr ""
 msgid "Short in-app notices that start with its name."
 msgstr ""
 
+#: components/app/interface/settings/user/bots/CommandManager.tsx
+msgid "Shortest text"
+msgstr ""
+
 #: components/app/interface/settings/user/badges/BetaAdmin.tsx
 #: components/app/interface/settings/user/badges/BugQueue.tsx
 msgid "Show"
@@ -16152,6 +16565,10 @@ msgstr ""
 msgid "Show Zrzur using Discord rich presence."
 msgstr ""
 
+#: components/app/interface/settings/user/bots/CommandManager.tsx
+msgid "Shown as"
+msgstr ""
+
 #: components/app/interface/settings/user/profile/CreatorStudio.tsx
 msgid "Shown behind the name in the member list. 1024 × 192 px; 16 px are cropped at the top and bottom. It fades toward the avatar, on the left or the right by language; the image itself never flips."
 msgstr ""
@@ -16166,6 +16583,14 @@ msgstr ""
 
 #: components/app/interface/settings/server/LobbyAppearanceEditor.tsx
 msgid "Shown in the lobby"
+msgstr ""
+
+#: components/app/interface/settings/user/bots/CommandManager.tsx
+msgid "Shown in the menu of a member, under Apps."
+msgstr ""
+
+#: components/app/interface/settings/user/bots/CommandManager.tsx
+msgid "Shown in the menu of a message, under Apps."
 msgstr ""
 
 #: components/app/interface/settings/server/Overview.tsx
@@ -16262,6 +16687,7 @@ msgid "Slab"
 msgstr ""
 
 #: components/app/interface/settings/user/bots/BotCommands.tsx
+#: components/app/interface/settings/user/bots/CommandManager.tsx
 msgid "Slash command"
 msgstr ""
 
@@ -16335,6 +16761,10 @@ msgstr ""
 
 #: components/app/interface/settings/user/appearance/AnimationSettings.tsx
 msgid "Small labels that appear when you point at a button."
+msgstr ""
+
+#: components/app/interface/settings/user/bots/CommandManager.tsx
+msgid "Smallest value"
 msgstr ""
 
 #: components/ui/components/features/messaging/composition/picker/EmojiPicker.tsx
@@ -16931,6 +17361,22 @@ msgstr ""
 #~ msgid "Style your <0>profile</0>"
 #~ msgstr ""
 
+#: components/app/interface/settings/user/bots/CommandManager.tsx
+msgid "Sub-command"
+msgstr ""
+
+#: components/app/interface/settings/user/bots/CommandManager.tsx
+msgid "Sub-command group"
+msgstr ""
+
+#: components/app/interface/settings/user/bots/CommandManager.tsx
+msgid "Sub-commands and plain options cannot be mixed on one level."
+msgstr ""
+
+#: components/app/interface/settings/user/bots/CommandManager.tsx
+msgid "Sub-commands go at most one group deep."
+msgstr ""
+
 #: components/app/interface/settings/user/support/ContactSupport.tsx
 #: components/i18n/errors.tsx
 msgid "Subject"
@@ -16987,6 +17433,10 @@ msgstr ""
 
 #: components/app/interface/settings/user/Feedback.tsx
 msgid "Suggest new Zrzur features once the public repository is available."
+msgstr ""
+
+#: components/app/interface/settings/user/bots/CommandManager.tsx
+msgid "Suggest values while people type (your bot answers)"
 msgstr ""
 
 #: components/app/interface/safety/labels.tsx
@@ -17418,6 +17868,7 @@ msgstr ""
 msgid "Testers"
 msgstr ""
 
+#: components/app/interface/settings/user/bots/CommandManager.tsx
 #: components/modal/modals/CreateChannel.tsx
 msgid "Text"
 msgstr ""
@@ -17441,6 +17892,7 @@ msgid "Text channel"
 msgstr ""
 
 #: components/app/interface/settings/server/channels/ChannelsSettings.tsx
+#: components/app/interface/settings/user/bots/CommandManager.tsx
 #: src/interface/navigation/channels/ServerSidebar.tsx
 msgid "Text channels"
 msgstr ""
@@ -17812,12 +18264,20 @@ msgstr ""
 msgid "The link stops working at once for everyone who has it."
 msgstr ""
 
+#: components/app/interface/settings/user/bots/CommandManager.tsx
+msgid "The list changed since you opened it. It was reloaded: check it and save again."
+msgstr ""
+
 #: components/app/interface/settings/user/profile/CreatorStudio.tsx
 msgid "The live version stays up until a reviewer approves the new one."
 msgstr ""
 
 #: components/app/interface/settings/server/AutoModSettings.tsx
 msgid "The member sees the rule's name as the reason."
+msgstr ""
+
+#: components/app/interface/settings/user/bots/CommandManager.tsx
+msgid "The minimum is larger than the maximum."
 msgstr ""
 
 #: components/client/AgePrompt.tsx
@@ -17924,6 +18384,10 @@ msgstr ""
 msgid "The rules channel, system messages and counters."
 msgstr ""
 
+#: components/app/interface/settings/user/bots/CommandManager.tsx
+msgid "The same list your bot sends with PUT to its commands route. Importing replaces every global command."
+msgstr ""
+
 #: components/i18n/errors.tsx
 msgid "The security check didn't work. Please try again."
 msgstr ""
@@ -17966,6 +18430,10 @@ msgstr ""
 
 #: components/app/interface/safety/labels.tsx
 msgid "The user appears to be too young for Zrzur"
+msgstr ""
+
+#: components/app/interface/settings/user/bots/CommandManager.tsx
+msgid "The value must fit the option type."
 msgstr ""
 
 #: components/app/interface/settings/user/bots/BotVerification.tsx
@@ -18274,6 +18742,10 @@ msgstr ""
 msgid "This email address can't be used."
 msgstr ""
 
+#: components/app/interface/settings/user/bots/CommandManager.tsx
+msgid "This entry has a field of the wrong type."
+msgstr ""
+
 #: components/i18n/errors.tsx
 msgid "This feature is currently disabled."
 msgstr ""
@@ -18371,7 +18843,7 @@ msgstr ""
 msgid "This is not a valid invite link or code."
 msgstr ""
 
-#: src/interface/Developers.tsx
+#: components/app/interface/settings/user/bots/CommandManager.tsx
 msgid "This is not valid JSON."
 msgstr ""
 
@@ -18453,6 +18925,10 @@ msgstr ""
 msgid "This module's data will be deleted on {0}."
 msgstr ""
 
+#: components/app/interface/settings/user/bots/CommandManager.tsx
+msgid "This option type has no such limit."
+msgstr ""
+
 #: components/app/interface/discover/ServerPage.tsx
 msgid "This page couldn't be loaded right now."
 msgstr ""
@@ -18463,6 +18939,10 @@ msgstr ""
 
 #: components/app/interface/settings/user/myData/MyData.tsx
 msgid "This page couldn't load"
+msgstr ""
+
+#: src/interface/developers/docs/DocsPortal.tsx
+msgid "This page couldn't load. Check your connection."
 msgstr ""
 
 #: components/app/interface/settings/user/appearance/AnimationSettings.tsx
@@ -18989,6 +19469,7 @@ msgstr ""
 #: components/app/interface/discover/ServerPage.tsx
 #: components/app/interface/settings/server/webhooks/ServerWebhooks.tsx
 #: components/app/interface/settings/user/badges/MyBadges.tsx
+#: components/app/interface/settings/user/bots/PrivilegedIntents.tsx
 #: components/app/interface/settings/user/myData/MyData.tsx
 #: components/app/interface/settings/user/plugins/PluginDetail.tsx
 #: components/app/interface/settings/user/profile/CommunityGallery.tsx
@@ -19007,6 +19488,7 @@ msgstr ""
 #: src/interface/Designs.tsx
 #: src/interface/designs/Makers.tsx
 #: src/interface/designs/parts.tsx
+#: src/interface/developers/docs/DocsPortal.tsx
 #: src/interface/Discover.tsx
 msgid "Try again"
 msgstr ""
@@ -19113,7 +19595,11 @@ msgid "Turn them on or off for this server."
 msgstr ""
 
 #: components/app/interface/settings/user/bots/ViewBot.tsx
-msgid "Turn these on only if your bot needs them. Without them it still works with commands, buttons and messages that mention it."
+#~ msgid "Turn these on only if your bot needs them. Without them it still works with commands, buttons and messages that mention it."
+#~ msgstr ""
+
+#: components/app/interface/settings/user/bots/PrivilegedIntents.tsx
+msgid "Turn these on only if your bot needs them. Without them it still works with commands, buttons and messages that mention it. A switch is saved at once and applies from the bot's next connection to the gateway: restart or reconnect your bot."
 msgstr ""
 
 #: components/app/interface/settings/user/plugins/text.ts
@@ -19128,6 +19614,14 @@ msgstr ""
 msgid "Tuvalu"
 msgstr ""
 
+#: components/app/interface/settings/user/bots/CommandManager.tsx
+msgid "Two choices have this name."
+msgstr ""
+
+#: components/app/interface/settings/user/bots/CommandManager.tsx
+msgid "Two options have this name."
+msgstr ""
+
 #: components/auth/src/flows/FlowConfirmChange.tsx
 msgid "Two-factor authentication is off. Sign in with your email and password."
 msgstr ""
@@ -19137,10 +19631,10 @@ msgid "Two-factor authentication protects your account even if your password lea
 msgstr ""
 
 #: components/app/interface/settings/user/badges/BugReportDialog.tsx
+#: components/app/interface/settings/user/bots/CommandManager.tsx
 #: components/app/interface/settings/user/profile/CreatorStudio.tsx
 #: components/app/interface/settings/user/safety/SafetyDashboard.tsx
 #: components/modal/modals/CreateChannel.tsx
-#: src/interface/Developers.tsx
 #: src/interface/developers/docs/Directives.tsx
 #: src/interface/developers/docs/EndpointReference.tsx
 msgid "Type"
@@ -19164,6 +19658,11 @@ msgstr ""
 
 #: src/interface/developers/docs/EndpointReference.tsx
 msgid "Type-checked only."
+msgstr ""
+
+#. placeholder {0}: types[draft.type]
+#: components/app/interface/settings/user/bots/CommandManager.tsx
+msgid "Type: {0}. The type of a saved command cannot change."
 msgstr ""
 
 #: components/app/interface/settings/user/profile/StyleEditors.tsx
@@ -19576,6 +20075,10 @@ msgstr ""
 msgid "Use + to add the first one to this category."
 msgstr ""
 
+#: components/app/interface/settings/user/bots/CommandManager.tsx
+msgid "Use 1 to {max} characters."
+msgstr ""
+
 #: components/app/interface/settings/server/invites/VanityInvite.tsx
 msgid "Use 3–32 letters, numbers or single hyphens."
 msgstr ""
@@ -19636,12 +20139,20 @@ msgstr ""
 msgid "Use at most {WEBHOOK_NAME_MAX} characters."
 msgstr ""
 
+#: components/app/interface/settings/user/bots/CommandManager.tsx
+msgid "Use choices or suggestions while typing, not both."
+msgstr ""
+
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 msgid "Use emojis from other servers"
 msgstr ""
 
 #: components/modal/modals/EditUsername.tsx
 msgid "Use letters, numbers, underscores (_), dots (.) or dashes (-)."
+msgstr ""
+
+#: components/app/interface/settings/user/bots/CommandManager.tsx
+msgid "Use lowercase letters, digits, - and _ only, without spaces."
 msgstr ""
 
 #: components/app/interface/settings/server/emojis/EmojiList.tsx
@@ -19695,6 +20206,7 @@ msgid "Used to find it:"
 msgstr ""
 
 #: components/app/interface/safety/labels.tsx
+#: components/app/interface/settings/user/bots/CommandManager.tsx
 msgid "User"
 msgstr "Úsáideoir"
 
@@ -19725,7 +20237,12 @@ msgstr ""
 #~ msgstr "Bainistaíocht Úsáideoir"
 
 #: components/app/interface/settings/user/bots/BotCommands.tsx
+#: components/app/interface/settings/user/bots/CommandManager.tsx
 msgid "User menu"
+msgstr ""
+
+#: components/app/interface/settings/user/bots/CommandManager.tsx
+msgid "User or role"
 msgstr ""
 
 #: src/interface/developers/docs/EndpointReference.tsx
@@ -19800,6 +20317,10 @@ msgstr ""
 
 #: src/interface/developers/docs/Directives.tsx
 msgid "Value"
+msgstr ""
+
+#: components/app/interface/settings/user/bots/CommandManager.tsx
+msgid "Value sent to the bot"
 msgstr ""
 
 #: components/ui/components/features/profiles/plateNames.ts
@@ -20053,6 +20574,7 @@ msgid "Voice channel settings"
 msgstr ""
 
 #: components/app/interface/settings/server/channels/ChannelsSettings.tsx
+#: components/app/interface/settings/user/bots/CommandManager.tsx
 #: src/interface/navigation/channels/ServerSidebar.tsx
 msgid "Voice channels"
 msgstr ""
@@ -20574,6 +21096,10 @@ msgstr ""
 msgid "Who can publish community designs"
 msgstr ""
 
+#: components/app/interface/settings/user/bots/CommandManager.tsx
+msgid "Who can use it"
+msgstr ""
+
 #: components/app/interface/settings/ServerSettings.tsx
 msgid "Who changed what, and when."
 msgstr ""
@@ -20613,6 +21139,10 @@ msgstr ""
 
 #: components/app/interface/settings/server/webhooks/ServerWebhooks.tsx
 msgid "Whoever runs this Zrzur server can turn them on in its configuration."
+msgstr ""
+
+#: components/app/interface/settings/user/bots/CommandManager.tsx
+msgid "Whole number"
 msgstr ""
 
 #: src/interface/channels/text/TextSearchSidebar.tsx
@@ -20850,6 +21380,10 @@ msgstr ""
 #: src/interface/channels/text/searchLabels.ts
 #: src/interface/developers/docs/Directives.tsx
 msgid "Yes"
+msgstr ""
+
+#: components/app/interface/settings/user/bots/CommandManager.tsx
+msgid "Yes or no"
 msgstr ""
 
 #: components/app/interface/settings/user/subscriptions/PlusPage.tsx

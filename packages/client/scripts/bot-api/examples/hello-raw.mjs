@@ -41,8 +41,9 @@ await rest("PUT", `/applications/${me._id}/commands`, [
 
 // 3. Connect to the gateway and answer interactions.
 const socket = new WebSocket(`${ws}/?version=1&format=json`);
+// intents 33 = SERVERS (1) + INTERACTIONS (32): commands, nothing else
 socket.addEventListener("open", () =>
-  socket.send(JSON.stringify({ type: "Authenticate", token })),
+  socket.send(JSON.stringify({ type: "Authenticate", token, intents: 33 })),
 );
 
 async function handle(event) {

@@ -105,7 +105,7 @@ export function Directive(props: {
       <Match when={props.name === "unsupported"}>
         <Table
           head={[t`Endpoint`, t`Why bots cannot use it`]}
-          rows={inventory.endpoints
+          rows={inventory.index
             .filter((endpoint) => endpoint.status === "unsupported")
             .map((endpoint) => [
               <a
@@ -119,9 +119,9 @@ export function Directive(props: {
               >
                 <code dir="ltr">{endpoint.id}</code>
               </a>,
-              endpoint.restrictions[0] ??
-                (endpoint.auth.botRejectedWith
-                  ? t`Bots get ${endpoint.auth.botRejectedWith}.`
+              endpoint.restriction ??
+                (endpoint.botRejectedWith
+                  ? t`Bots get ${endpoint.botRejectedWith}.`
                   : t`Needs a user session.`),
             ])}
         />
@@ -277,7 +277,7 @@ function ErrorTable(props: { audience: string }) {
 
 function bucketRows() {
   const where = new Map<string, Set<string>>();
-  for (const endpoint of inventory.endpoints) {
+  for (const endpoint of inventory.index) {
     const set = where.get(endpoint.rateLimit.bucket) ?? new Set();
     set.add(
       `/${endpoint.path.split("/")[1] ?? ""}${endpoint.rateLimit.scope ? ` (${endpoint.rateLimit.scope})` : ""}`,

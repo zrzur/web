@@ -15,7 +15,13 @@ Zrzur-Sprache läuft auf LiveKit. Die API gibt Tickets aus; der Ton selbst läuf
 
 ## Beitreten {#join}
 
+Hole ein Ticket mit einfachem HTTP:
+
 @@0
+
+Verbinde dich dann mit einem LiveKit-Client. Mit dem SDK (noch nicht veröffentlicht) und `@livekit/rtc-node`:
+
+@@1
 
 Erstelle dann eine `AudioSource` mit 48 kHz, packe sie in einen `LocalAudioTrack`, sende ihn mit `room.localParticipant.publishTrack(...)` und füttere ihn mit 10-ms-Frames. Andere Mitglieder sehen `VoiceChannelJoin`, wenn der Bot im Raum ist.
 
@@ -25,4 +31,4 @@ Das [Sprach-Tutorial](/developers/docs/tutorial-voice) hat einen vollständigen 
 
 ## Referenz {#reference}
 
-@@1
+@@2

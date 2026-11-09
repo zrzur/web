@@ -1,9 +1,15 @@
-import inventoryJson from "../data/botApi.json";
+import meta from "../data/botApi/meta.json";
+
+import { loadOnce } from "./loadOnce";
 
 /**
  * Typed access to the Bot API inventory. The inventory is generated from the
  * backend source, its OpenAPI document and both SDKs by
  * `scripts/bot-api/extract.mjs`; the live doc tests add verification.
+ *
+ * The app loads it in parts (`scripts/bot-api/split.mjs`): the small
+ * `meta` part at once, everything else when a page that shows it opens
+ * (`loadParts`, `partsForMarkdown`). Read a part only after it loaded.
  */
 
 export type Status = "supported" | "partial" | "unverified" | "unsupported";
@@ -148,7 +154,99 @@ export interface Inventory {
   schemas: Record<string, Schema>;
 }
 
-export const inventory = inventoryJson as unknown as Inventory;
+/** One line per endpoint, for search and the overview tables */
+export interface EndpointSummary extends Pick<
+  Endpoint,
+  "id" | "title" | "method" | "path" | "section" | "status" | "rateLimit"
+> {
+  restriction: string | null;
+  botRejectedWith: string | null;
+}
+
+export const inventory: Inventory & { index: EndpointSummary[] } = {
+  ...(meta as unknown as Pick<
+    Inventory,
+    "generated" | "counts" | "rateLimits" | "permissions" | "errorStatus"
+  >),
+  index: [],
+  endpoints: [],
+  gateway: { events: [], clientMessages: [], types: {} },
+  errors: [],
+  outOfScope: [],
+  schemas: {},
+};
+
+/** A part of the inventory that loads on its own */
+export type Part =
+  | "index"
+  | "gateway"
+  | "errors"
+  | "out-of-scope"
+  | `section-${string}`;
+
+// meta is imported above; every other part is its own chunk
+const partLoaders = import.meta.glob<unknown>(
+  ["../data/botApi/*.json", "!../data/botApi/meta.json"],
+  { import: "default" },
+);
+
+const partOf = (path: string) =>
+  path
+    .split("/")
+    .at(-1)!
+    .replace(/\.json$/, "") as Part | "meta";
+
+/** Every part there is (sections included), for the tests */
+export const ALL_PARTS = Object.keys(partLoaders)
+  .map(partOf)
+  .filter((part): part is Part => part !== "meta");
+
+const pending = new Map<string, Promise<void>>();
+
+function apply(part: Part, data: unknown) {
+  if (part === "index") inventory.index = data as EndpointSummary[];
+  else if (part === "gateway") inventory.gateway = data as Inventory["gateway"];
+  else if (part === "errors") inventory.errors = data as ErrorInfo[];
+  else if (part === "out-of-scope")
+    inventory.outOfScope = data as Inventory["outOfScope"];
+  else {
+    const section = data as {
+      endpoints: Endpoint[];
+      schemas: Record<string, Schema>;
+    };
+    inventory.endpoints.push(...section.endpoints);
+    Object.assign(inventory.schemas, section.schemas);
+  }
+}
+
+/** Load parts of the inventory; each one is fetched once */
+export function loadParts(parts: Part[]) {
+  return Promise.all(
+    parts.map((part) => {
+      const load = partLoaders[`../data/botApi/${part}.json`];
+      if (!load) return Promise.resolve();
+      // a failed part is forgotten, so Try again fetches it anew
+      return loadOnce(pending, part, () =>
+        load().then((data) => apply(part, data)),
+      );
+    }),
+  ).then(() => undefined);
+}
+
+/** The parts the generated blocks of a page show */
+export function partsForMarkdown(source: string): Part[] {
+  const parts = new Set<Part>();
+  for (const [, name, argument] of source.matchAll(
+    /^```([a-z-]+)[ \t]*([^\n]*)$/gm,
+  )) {
+    if (name === "endpoints") parts.add(`section-${argument.trim()}`);
+    if (name === "events" || name === "types" || name === "client-messages")
+      parts.add("gateway");
+    if (name === "errors") parts.add("errors");
+    if (name === "unsupported" || name === "ratelimits") parts.add("index");
+  }
+  return [...parts];
+}
 
 /** Anchor id of an endpoint: `post-channels-target-messages` */
 export function endpointSlug(endpoint: Pick<Endpoint, "method" | "path">) {
@@ -158,6 +256,13 @@ export function endpointSlug(endpoint: Pick<Endpoint, "method" | "path">) {
     .replace(/[^a-z0-9]+/g, "-")
     .replace(/^-|-$/g, "");
 }
+
+/**
+ * Helpers of the bot SDK only: the web app's own SDK (`@zrzur/sdk/solid`)
+ * is not for bots, and naming it on bot pages sent authors the wrong way
+ */
+export const botSdk = (endpoint: Pick<Endpoint, "sdk">) =>
+  endpoint.sdk.filter((fn) => fn.package === "@zrzur/sdk/bot");
 
 /** Page that shows the endpoints of a section */
 export function pageOfSection(section: string) {

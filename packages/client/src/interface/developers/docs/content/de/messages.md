@@ -11,7 +11,8 @@ Ein Bot sendet, bearbeitet und löscht eigene Nachrichten, reagiert, heftet an u
 - **Stille Nachrichten**: `flags: 1` sendet ohne Benachrichtigungen.
 - **Maskerade**: `masquerade: { name, avatar }` zeigt einen anderen Namen und Avatar auf der Nachricht (braucht Masquerade; `colour` braucht auch „Rollen verwalten“).
 - **Komponenten**: Schaltflächen, Menüs und Layoutblöcke; nur Bots können sie senden. Siehe [Schaltflächen, Menüs und Formulare](/developers/docs/components).
-- **Erwähnungen**: `<@user id>` erwähnt einen Benutzer, `<%role id>` eine Rolle (braucht Mention Roles), `@everyone` und `@online` brauchen Mention Everyone.
+- **Erwähnungen**: `<@user id>` erwähnt einen Benutzer, `<%role id>` eine Rolle (braucht Mention Roles), `@everyone` und `@online` brauchen Mention Everyone. Ohne die Berechtigung wird die ganze Nachricht mit `MissingPermission` abgelehnt; sie geht nicht ohne die Erwähnung raus. Auf einem selbst gehosteten Server mit `mass_mentions_enabled = false` gehen Rollen-, `@everyone`- und `@online`-Erwähnungen stattdessen ohne Benachrichtigung raus.
+- **Kanal-Links**: `<#channel id>` zeigt einen Link auf einen Kanal oder Thread. Er benachrichtigt niemanden.
 
 ## Antworten {#reply}
 
@@ -46,7 +47,7 @@ Die genauen Felder und Limits stehen in der [Referenz unten](/developers/docs/me
 
 ## Anhänge {#attachments}
 
-Eine Nachricht verweist per ID auf Dateien. Erst hochladen, dann senden. Jede ID geht einmal: Eine zweite Nutzung antwortet `404 NotFound`. Senden braucht Upload Files.
+Eine Nachricht verweist per ID auf Dateien. Erst hochladen, dann senden. Jede ID geht einmal: Eine zweite Nutzung antwortet `404 NotFound`. Senden braucht Upload Files. Eine Datei, die eine Person deinem Bot über die Option `Attachment` eines Befehls gegeben hat, ist von diesem Befehl schon verwendet; siehe [Slash-Befehle](/developers/docs/commands#attachments).
 
 @@2
 
@@ -54,7 +55,22 @@ Größen und Typen stehen unter [Dateien](/developers/docs/files).
 
 ## Nachrichten lesen {#read-messages}
 
-`GET /channels/{target}/messages` liefert bis zu 100 Nachrichten; blättere mit `before`, `after` oder `nearby`. Mit `include_users=true` kommen die Autoren in derselben Antwort. Lesen braucht „Kanal sehen“ und „Ältere Nachrichten lesen“.
+`GET /channels/{target}/messages` liefert 50 Nachrichten, mit `limit` bis zu 100. Lesen braucht „Kanal sehen“ und „Ältere Nachrichten lesen“.
+
+| Query-Parameter | Bedeutung                                                                                 |
+| --------------- | ----------------------------------------------------------------------------------------- |
+| `limit`         | 1 bis 100. Standard 50                                                                    |
+| `before`        | Eine Nachrichten-ID: nur ältere Nachrichten                                               |
+| `after`         | Eine Nachrichten-ID: nur neuere Nachrichten                                               |
+| `sort`          | `Latest` (Standard, neueste zuerst) oder `Oldest` (älteste zuerst). `Relevance` antwortet `InvalidOperation` |
+| `nearby`        | Eine Nachrichten-ID: Nachrichten um sie herum, sie selbst eingeschlossen. `before`, `after` und `sort` werden ignoriert |
+| `include_users` | `true` fügt die Autoren hinzu                                                             |
+
+Die Antwort ist eine Liste von Nachrichten. Mit `include_users=true` ist sie stattdessen ein Objekt: `{ "messages": [...], "users": [...], "members": [...] }`. `members` gibt es nur in Serverkanälen.
+
+Um nach einem Neuverbinden aufzuholen, frage nach `after` deiner letzten Nachricht mit `sort=Oldest`: Du bekommst die nächsten Nachrichten der Reihe nach. Mit der Standardreihenfolge kämen die neuesten, und in der Mitte bliebe eine Lücke. Wiederhole mit der ID der letzten erhaltenen Nachricht, bis weniger als `limit` zurückkommen.
+
+@@3
 
 Textsuche ist nur für Menschen; Bots bekommen `IsBot`, denn sonst könnten sie lesen, was ihre Intents verbergen. Bots können angeheftete Nachrichten listen (siehe [Anheften und Reaktionen](/developers/docs/messages#pins-and-reactions)). Auch der Erwähnungseingang ist nur für Menschen.
 
@@ -68,7 +84,7 @@ Textsuche ist nur für Menschen; Bots bekommen `IsBot`, denn sonst könnten sie 
 
 ## Referenz {#reference}
 
-@@3
+@@4
 
 ## Anheften und Reaktionen {#pins-and-reactions}
 

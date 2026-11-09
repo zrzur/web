@@ -29,9 +29,21 @@ Diese Seiten sind alles, was du brauchst. Beginne mit [Starte deinen Bot](/devel
 | Dateien             | `https://cdn.zrzur.com` |
 | Sprache (LiveKit)   | `wss://voice.zrzur.com` |
 
-Selbst gehostete Server haben eigene Adressen. `GET /` auf der API liefert sie, zusammen mit den Limits dieses Servers.
+Selbst gehostete Server haben eigene Adressen. `GET /` auf der API liefert sie, zusammen mit den Limits dieses Servers. Lies diese Felder (die Antwort hat mehr; diese ist gekürzt):
 
 @@0
+
+| Feld                               | Was es ist                                   |
+| ---------------------------------- | -------------------------------------------- |
+| `zrzur`                            | Version des Servers; siehe [API-Änderungsprotokoll](/developers/docs/changelog) |
+| `ws`                               | Gateway-Adresse                              |
+| `features.autumn.url`              | Dateiserver: Hoch- und Herunterladen         |
+| `features.january.url`             | Medien-Proxy für Linkvorschauen              |
+| `features.livekit.nodes[].public_url` | Sprachserver                              |
+| `features.limits.default`          | Limits eines Kontos, etwa die Nachrichtenlänge |
+| `app`                              | Web-App, für Links, die du Menschen zeigst   |
+
+@@1
 
 ## Was nicht unterstützt wird {#not-supported}
 
@@ -46,4 +58,4 @@ Selbst gehostete Server haben eigene Adressen. `GET /` auf der API liefert sie, 
 
 Jeder Endpunkt in dieser Referenz zeigt eine dieser Markierungen.
 
-@@1
+@@2

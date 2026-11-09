@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0">
+  <channel>
+    <title>Zrzur API changelog</title>
+    <link>https://app.zrzur.com/developers/docs/changelog</link>
+    <description>Changes to the Zrzur Bot API and its documentation.</description>
+    <language>en</language>
+    <item>
+      <title>Documentation, 2026-11-09</title>
+      <link>https://app.zrzur.com/developers/docs/changelog#docs-2026-11-09</link>
+      <guid isPermaLink="true">https://app.zrzur.com/developers/docs/changelog#docs-2026-11-09</guid>
+      <pubDate>Mon, 09 Nov 2026 12:00:00 GMT</pubDate>
+      <description>No change to the API. These pages now say what a bot author had to find out by trying:
+
+- The docs open at once, without signing in and without waiting for a connection.
+- Event reference: the channel types, and how to tell a direct message from a server message.
+- Gateway: what to do when a privileged intent is off, and when a switch counts.
+- Without a library: the Node example sends intents: 33, like the text and the Python example.
+- Channels and webhooks: plain HTTP comes first, the body of POST /servers/{server}/channels with private and category, and the rules of a thread's first message.
+- Slash commands: where an Attachment option's file arrives, and why its id cannot be sent again.
+- Messages: channel links &lt;#id&gt;, the answer of GET /channels/{target}/messages and its order.
+- Overview: a sample GET / answer.
+- Errors: which answer means &quot;the bot is not in that server&quot;.
+- The reference names only the bot SDK, and its status badge agrees with the check below it.</description>
+    </item>
+    <item>
+      <title>26.0.0 (2026-11-08)</title>
+      <link>https://app.zrzur.com/developers/docs/changelog#v26-0-0</link>
+      <guid isPermaLink="true">https://app.zrzur.com/developers/docs/changelog#v26-0-0</guid>
+      <pubDate>Sun, 08 Nov 2026 12:00:00 GMT</pubDate>
+      <description>The first Zrzur release. Everything in these pages describes it.
+
+- Interactions: slash commands with options, choices, sub-commands, localised names and autocomplete; user and message menu commands; buttons, selects and forms; private, deferred and follow-up answers. Buttons and forms also work in a direct message with the bot.
+- Interactions over HTTP, signed requests to your own address.
+- Gateway intents decide what a connection receives. MESSAGE_CONTENT, SERVER_MEMBERS and PRESENCE are privileged and switched on in the Developer Portal. GET /gateway/schema describes every event.
+- Threads and forums: POST and GET /channels/{target}/threads, PATCH /channels/{target}/thread, with the permissions CreateThreads, CreateForumPosts and SendMessageInThreads.
+- Over REST: POST /channels/{target}/typing, and pinned messages through POST /channels/{target}/search with pinned: true.
+- Webhooks: tokens are shown once, start with zrzur_wh_ and can be replaced.
+- Rate limits: a 429 body has retry_after in milliseconds and global. Every error has a stable type.
+- OAuth2 with PKCE.</description>
+    </item>
+  </channel>
+</rss>

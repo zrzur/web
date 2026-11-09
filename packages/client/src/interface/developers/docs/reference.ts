@@ -1,9 +1,6 @@
-import { createMemo } from "solid-js";
+import { createMemo, createSignal } from "solid-js";
 
 import { useLingui } from "@lingui/solid/macro";
-
-import arabic from "../data/reference.ar.json";
-import german from "../data/reference.de.json";
 
 /** Translated text of the generated reference */
 export interface Reference {
@@ -13,13 +10,25 @@ export interface Reference {
   errors?: Record<string, string[]>;
 }
 
-const TEXT: Record<string, Reference> = {
-  ar: arabic as Reference,
-  de: german as Reference,
+// one chunk per language, loaded when a page opens in it
+const LOADERS: Record<string, () => Promise<{ default: unknown }>> = {
+  ar: () => import("../data/reference.ar.json"),
+  de: () => import("../data/reference.de.json"),
 };
+
+const [texts, setTexts] = createSignal<Record<string, Reference>>({});
+
+/** Load the reference text of a language (nothing for English) */
+export async function loadReference(language: string) {
+  const locale = language.slice(0, 2);
+  const load = LOADERS[locale];
+  if (!load || texts()[locale]) return;
+  const module = await load();
+  setTexts((all) => ({ ...all, [locale]: module.default as Reference }));
+}
 
 /** Reference text of the active language; empty for English */
 export function useReference() {
   const { i18n } = useLingui();
-  return createMemo<Reference>(() => TEXT[i18n().locale.slice(0, 2)] ?? {});
+  return createMemo<Reference>(() => texts()[i18n().locale.slice(0, 2)] ?? {});
 }

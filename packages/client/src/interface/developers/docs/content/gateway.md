@@ -40,7 +40,7 @@ Anything else you send is limited to 1 MiB per message.
 | What you receive                                                     | Cause                                       | What to do                               |
 | -------------------------------------------------------------------- | ------------------------------------------- | ---------------------------------------- |
 | `{ "type": "Error", "data": { "type": "InvalidSession" } }`, closes  | Wrong or reset token, suspended bot, or no `Authenticate` in 15 seconds | Stop. Do not reconnect in a loop          |
-| `{ "type": "Error", "data": { "type": "MissingIntent", "intent": "SERVER_MEMBERS" } }`, closes with code `4014` | A privileged intent that is off | Switch it on in the Developer Portal, or do not ask for it |
+| `{ "type": "Error", "data": { "type": "MissingIntent", "intent": "SERVER_MEMBERS" } }`, closes with code `4014` | A privileged intent that is off | Switch it on in the Developer Portal and connect again, or [connect without it](/developers/docs/gateway#intent-off) |
 
 ## Stay connected {#stay-connected}
 
@@ -65,7 +65,7 @@ A connection can end at any time: a deployment on our side, a network problem, y
 
 ## Resume is not supported {#resume}
 
-There is no resume and there are no sequence numbers. Events sent while you were away are gone. After each `Ready`, fetch over REST what your bot cannot miss, such as recent messages of a channel (`GET /channels/{target}/messages` with `after`). A command used while your bot was away fails for the person who used it, and they can try again.
+There is no resume and there are no sequence numbers yet; both are planned for the next release (see the [changelog](/developers/docs/changelog)). Events sent while you were away are gone. After each `Ready`, fetch over REST what your bot cannot miss, such as recent messages of a channel (`GET /channels/{target}/messages` with `after` and `sort=Oldest`, see [Messages](/developers/docs/messages#read-messages)). A command used while your bot was away fails for the person who used it, and they can try again.
 
 ## Sharding is not supported {#sharding}
 
@@ -98,7 +98,7 @@ Intents say what a connection receives. The gateway applies them, so a bot never
 
 | Intent            | Value  | Receives                                                                 |
 | ----------------- | ------ | ------------------------------------------------------------------------ |
-| `SERVERS`         | `1`    | Server, server channel, role, emoji and webhook events; servers and their channels in `Ready`. Direct messages and groups arrive either way |
+| `SERVERS`         | `1`    | Server, server channel, role, emoji and webhook events; servers and their channels in `Ready`. Direct messages and groups arrive either way, in `Ready` and as `ChannelCreate` |
 | `SERVER_MESSAGES` | `2`    | Messages and typing in server channels                                   |
 | `DIRECT_MESSAGES` | `4`    | Messages and typing in direct messages and groups                        |
 | `REACTIONS`       | `8`    | Reactions being added and removed                                        |
@@ -119,6 +119,47 @@ The same rules hold over REST:
 - Without `PRESENCE` every user shows as offline, without a status. The bot still sees itself.
 
 A change of a bot's intents takes effect on its next connection.
+
+## When a privileged intent is off {#intent-off}
+
+A switch in the Developer Portal is saved the moment you flip it, and the portal says so. The gateway reads the switches when a connection starts, so an open connection keeps the intents it started with: close the socket and connect again. The token stays the same. REST reads them on every request, so REST answers follow a switch at once.
+
+`MissingIntent` names the intents that are off. If your bot can work without one, connect again without it instead of stopping:
+
+```js
+const MESSAGE_CONTENT = 1024;
+// SERVERS + SERVER_MESSAGES + DIRECT_MESSAGES + INTERACTIONS + MESSAGE_CONTENT
+let intents = 1 + 2 + 4 + 32 + MESSAGE_CONTENT;
+
+function connect() {
+  const socket = new WebSocket("wss://events.zrzur.com/?version=1&format=json");
+  socket.addEventListener("open", () =>
+    socket.send(
+      JSON.stringify({
+        type: "Authenticate",
+        token: process.env.ZRZUR_BOT_TOKEN,
+        intents,
+      }),
+    ),
+  );
+  socket.addEventListener("message", ({ data }) => {
+    const event = JSON.parse(data);
+    if (event.type === "Error" && event.data.type === "MissingIntent")
+      console.warn(`Switched off in the Developer Portal: ${event.data.intent}`);
+  });
+  socket.addEventListener("close", ({ code }) => {
+    if (code === 4014 && intents & MESSAGE_CONTENT) {
+      // go on without message text: mentions and direct messages keep theirs
+      intents &= ~MESSAGE_CONTENT;
+      connect();
+    }
+  });
+}
+
+connect();
+```
+
+Without `MESSAGE_CONTENT` your bot still reads messages that mention it, its own messages and direct messages with it. Add the reconnect loop from [Reconnect](/developers/docs/gateway#reconnect) for every other close.
 
 ## Machine-readable schema {#schema}
 

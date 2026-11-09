@@ -23,7 +23,7 @@ Gibt es denselben Namen in beiden Bereichen, sehen Menschen beide.
 
 @@0
 
-`POST /applications/{application_id}/commands` fügt einen Befehl hinzu, `PATCH /applications/{application_id}/commands/{command_id}` ändert einen, `DELETE` entfernt einen. Ohne Code öffnest du deine Anwendung im Entwicklerportal, Tab **Befehle**, und fügst die JSON-Liste ein.
+`POST /applications/{application_id}/commands` fügt einen Befehl hinzu, `PATCH /applications/{application_id}/commands/{command_id}` ändert einen, `DELETE` entfernt einen. Ohne Code öffnest du deine Anwendung im Entwicklerportal, Tab **Befehle**: Ein Formular fügt Befehle hinzu, ändert und löscht sie, mit Optionen, Auswahlwerten, Namen in anderen Sprachen und wer sie nutzen darf, und zeigt eine Vorschau. **JSON importieren** und **JSON exportieren** dort nehmen und liefern dieselbe Liste wie `PUT`. Speichern im Portal ersetzt die globale Liste wie `PUT`; ein Bot, der seine Liste beim Start sendet, überschreibt also, was du gespeichert hast.
 
 ## Ein Befehl {#fields}
 
@@ -75,13 +75,21 @@ Regeln, die der Server beim Registrieren prüft:
 - `choices` und `autocomplete` schließen sich aus.
 - Zahlen bleiben innerhalb von 9007199254740991, damit JavaScript sie halten kann.
 
-Der Server prüft Pflichtoptionen, Limits und Auswahlwerte, bevor dein Bot die Interaktion sieht. Für `User`, `Role`, `Channel` und `Attachment` kommen die ganzen Objekte in `command.resolved`.
+Der Server prüft Pflichtoptionen, Limits und Auswahlwerte, bevor dein Bot die Interaktion sieht. Für `User`, `Role`, `Channel`, `Mentionable` und `Attachment` ist der Wert eine ID, und das ganze Objekt kommt in `command.resolved`, unter `users` (auf einem Server mit `members`), `roles`, `channels` oder `attachments`, mit dieser ID als Schlüssel.
+
+## Dateien aus einer Option {#attachments}
+
+Der Wert einer `Attachment`-Option ist eine Datei-ID. Die Datei kommt in `command.resolved.attachments`:
+
+@@2
+
+Lade sie von `https://cdn.zrzur.com/attachments/FILE_ID/screenshot.png` (der `tag`, die ID und der `filename`). Der Befehl hat die ID verwendet, sie geht also nicht in eine eigene Nachricht deines Bots: Das antwortet `404 NotFound`. Um die Datei zu posten, sende ihre Adresse, oder lade sie herunter und [lade eine Kopie hoch](/developers/docs/files).
 
 ## Unterbefehle {#sub-commands}
 
 Fasse Aktionen unter einem Namen zusammen: `/note add`, `/note list`.
 
-@@2
+@@3
 
 Regeln:
 
@@ -92,19 +100,19 @@ Regeln:
 
 Der gewählte Pfad kommt in den Optionen an, die Werte darin:
 
-@@3
+@@4
 
 ## Namen in anderen Sprachen {#localisation}
 
 Gib jeden Text pro Sprache an. Die Schlüssel sind Sprachtags: `ar`, `de`, `pt-BR`.
 
-@@4
+@@5
 
 Optionen und Auswahlwerte nehmen dieselben Felder. Übersetzte Namen folgen denselben Regeln wie `name`, arabische Buchstaben sind also erlaubt. Die Interaktion trägt immer den Basisnamen `name`, dein Code hat also einen Fall pro Befehl. Sie trägt auch die Sprache der Person in `locale`, damit du darin antworten kannst.
 
 ## Wer einen Befehl nutzen kann {#who}
 
-`default_member_permissions` ist eine Zahl aus [Berechtigungsbits](/developers/docs/roles#permission-bits). Ein Mitglied ohne diese Berechtigungen sieht den Befehl nicht, und eine Anfrage bekommt `MissingPermission`. `256` ist „Mitglieder in Timeout versetzen“. Dein Bot sollte trotzdem `user_permissions` prüfen: Admins können Rollen ändern, und ein Befehl ist keine Sicherheitsmauer für das, was dein Bot selbst tut.
+`default_member_permissions` ist eine Zahl: Addiere die Werte der Berechtigungen, die ein Mitglied braucht, aus der [Berechtigungstabelle](/developers/docs/roles#permission-bits). Ein Mitglied, dem eine davon fehlt, sieht den Befehl nicht, und eine Anfrage bekommt `MissingPermission`. `256` ist „Mitglieder in Timeout versetzen“; Nachrichten verwalten (`8388608`) plus Mitglieder kicken (`64`) ist `8388672`. Im Entwicklerportal wählst du die Berechtigungen stattdessen aus einer Liste. Dein Bot sollte trotzdem `user_permissions` prüfen: Admins können Rollen ändern, und ein Befehl ist keine Sicherheitsmauer für das, was dein Bot selbst tut.
 
 ## Menübefehle {#menu-commands}
 

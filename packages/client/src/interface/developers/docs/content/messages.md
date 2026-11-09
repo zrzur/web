@@ -19,7 +19,8 @@ POST /channels/{target}/messages
 - **Silent messages**: `flags: 1` sends without push or desktop notifications.
 - **Masquerade**: `masquerade: { name, avatar }` shows another name and avatar on the message (needs Masquerade; a `colour` also needs Manage Roles).
 - **Components**: buttons, selects and layout blocks; only bots can send them. See [Commands and interactions](/developers/docs/components).
-- **Mentions**: `<@user id>` pings a user, `<%role id>` a role (needs Mention Roles), `@everyone` and `@online` need Mention Everyone.
+- **Mentions**: `<@user id>` pings a user, `<%role id>` a role (needs Mention Roles), `@everyone` and `@online` need Mention Everyone. Without the permission the whole message is refused with `MissingPermission`, it is not sent without the ping. On a self-hosted server with `mass_mentions_enabled = false`, role, `@everyone` and `@online` mentions are sent without notifying anyone instead.
+- **Channel links**: `<#channel id>` shows a link to a channel or thread. It notifies nobody.
 
 ## Reply {#reply}
 
@@ -59,7 +60,7 @@ The exact fields and limits are in the [reference below](/developers/docs/messag
 
 ## Attachments {#attachments}
 
-A message refers to files by id. Upload first, then send. Each id can be used once: a second use answers `404 NotFound`. Sending needs Upload Files.
+A message refers to files by id. Upload first, then send. Each id can be used once: a second use answers `404 NotFound`. Sending needs Upload Files. A file a person gave your bot through a command's `Attachment` option is already used by that command; see [Slash commands](/developers/docs/commands#attachments).
 
 ```bash
 curl -X POST "https://cdn.zrzur.com/attachments" \
@@ -77,7 +78,25 @@ See [Files](/developers/docs/files) for sizes and types.
 
 ## Read messages
 
-`GET /channels/{target}/messages` returns up to 100 messages; page with `before`, `after` or `nearby`. Add `include_users=true` to get the authors in the same response. Reading needs View Channel and Read Message History.
+`GET /channels/{target}/messages` returns 50 messages, or up to 100 with `limit`. Reading needs View Channel and Read Message History.
+
+| Query           | Meaning                                                                                   |
+| --------------- | ----------------------------------------------------------------------------------------- |
+| `limit`         | 1 to 100. Default 50                                                                      |
+| `before`        | A message id: only older messages                                                         |
+| `after`         | A message id: only newer messages                                                         |
+| `sort`          | `Latest` (the default, newest first) or `Oldest` (oldest first). `Relevance` answers `InvalidOperation` |
+| `nearby`        | A message id: messages around it, that message included. `before`, `after` and `sort` are ignored |
+| `include_users` | `true` adds the authors                                                                   |
+
+The answer is a list of messages. With `include_users=true` it is an object instead: `{ "messages": [...], "users": [...], "members": [...] }`. `members` is there in server channels only.
+
+To catch up after a reconnect, ask for `after` your last message with `sort=Oldest`: you get the next messages in order. With the default order you would get the newest ones, and a gap would stay in the middle. Repeat with the id of the last message you got until fewer than `limit` come back.
+
+```bash
+curl "https://api.zrzur.com/channels/CHANNEL_ID/messages?after=LAST_SEEN_ID&sort=Oldest&limit=100" \
+  -H "x-bot-token: YOUR_BOT_TOKEN"
+```
 
 Text search is for people only; bots get `IsBot`, because it would let them read what their intents hide. Bots can list pinned messages (see [Pins and reactions](/developers/docs/messages#pins-and-reactions)). The mentions inbox is for people only too.
 

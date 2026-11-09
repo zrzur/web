@@ -10,9 +10,9 @@
   "inScope": 161,
   "botAccepted": 137,
   "byStatus": {
-   "supported": 90,
+   "supported": 93,
    "partial": 3,
-   "unverified": 37,
+   "unverified": 34,
    "unsupported": 31
   }
  },
@@ -7636,7 +7636,7 @@
    "title": "Create Bot",
    "method": "POST",
    "path": "/bots/create",
-   "description": "Create a new Zrzur bot.",
+   "description": "Create a new bot.",
    "tag": "Bots",
    "section": "authentication",
    "inScope": true,
@@ -8682,7 +8682,7 @@
    "tag": "Threads",
    "section": "channels",
    "inScope": true,
-   "status": "unverified",
+   "status": "supported",
    "auth": {
     "mode": "user-or-bot",
     "botAccepted": true,
@@ -8774,7 +8774,7 @@
    "tag": "Threads",
    "section": "channels",
    "inScope": true,
-   "status": "unverified",
+   "status": "supported",
    "auth": {
     "mode": "user-or-bot",
     "botAccepted": true,
@@ -8898,7 +8898,7 @@
    "tag": "Threads",
    "section": "channels",
    "inScope": true,
-   "status": "unverified",
+   "status": "supported",
    "auth": {
     "mode": "user-or-bot",
     "botAccepted": true,
@@ -8985,7 +8985,9 @@
    "events": [
     "ChannelCreate"
    ],
-   "restrictions": [],
+   "restrictions": [
+    "The first message (content, up to 2000 characters) is sent like any message of the bot: Send Messages and the mention rules apply, and if it is refused no thread is made. It takes no embeds, components or attachments yet; send those in a second message."
+   ],
    "example": null,
    "verification": {
     "level": "live",

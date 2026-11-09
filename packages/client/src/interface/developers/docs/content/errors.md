@@ -28,6 +28,17 @@ Branch on `type`, never on the text. Types are stable: they are never renamed or
 
 Errors raised by the web server itself (no token, unknown route, a body that is not JSON) are JSON too. Check the status before you parse a body, because a proxy in between can still answer with HTML.
 
+## Is the bot in that server? {#not-installed}
+
+A bot sees only the servers it was installed in. For a server it is not in, the answers differ by route:
+
+| Call                                              | Answer today              |
+| ------------------------------------------------- | ------------------------- |
+| `GET /servers/{target}`                           | `404 NotFound`            |
+| `GET /channels/{target}` for one of its channels  | `403 MissingPermission`   |
+
+So a `403 MissingPermission` on a channel id someone gave your bot can mean that the bot is not installed there. Ask `GET /servers/{target}`: `404 NotFound` means install the bot first, with the invite link from the Developer Portal. A `200` means the bot is there and cannot see the channel: a private channel needs View Channel for one of the bot's roles. From the next release, the channel answers `404 NotFound` too (see the [changelog](/developers/docs/changelog#upcoming)).
+
 ## Errors a bot can get {#bot-errors}
 
 ```errors bots

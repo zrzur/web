@@ -113,6 +113,21 @@ export function KeybindsSettings() {
       ],
     },
     {
+      title: <Trans>Developer Portal</Trans>,
+      rows: [
+        {
+          title: <Trans>Save a command</Trans>,
+          description: <Trans>In the command editor.</Trans>,
+          keys: [["Mod", "Enter"]],
+        },
+        {
+          title: <Trans>Leave the command editor</Trans>,
+          description: <Trans>Asks first if you changed something.</Trans>,
+          keys: [["Esc"]],
+        },
+      ],
+    },
+    {
       title: <Trans>General</Trans>,
       rows: [
         { title: <Trans>Show keyboard shortcuts</Trans>, keys: [["Mod", "/"]] },

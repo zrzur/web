@@ -24,6 +24,17 @@ Entscheide nach `type`, nie nach dem Text. Typen sind stabil: Sie werden nie umb
 
 Fehler des Webservers selbst (kein Token, unbekannte Route, kein JSON im Text) sind ebenfalls JSON. Prüfe den Status, bevor du den Text parst, denn ein Proxy dazwischen kann noch mit HTML antworten.
 
+## Ist der Bot auf diesem Server? {#not-installed}
+
+Ein Bot sieht nur die Server, auf denen er installiert wurde. Für einen Server, auf dem er nicht ist, unterscheiden sich die Antworten je nach Route:
+
+| Aufruf                                            | Antwort heute             |
+| ------------------------------------------------- | ------------------------- |
+| `GET /servers/{target}`                           | `404 NotFound`            |
+| `GET /channels/{target}` für einen seiner Kanäle  | `403 MissingPermission`   |
+
+Ein `403 MissingPermission` auf eine Kanal-ID, die jemand deinem Bot gegeben hat, kann also heißen, dass der Bot dort nicht installiert ist. Frage `GET /servers/{target}`: `404 NotFound` heißt, installiere den Bot zuerst, mit dem Einladungslink aus dem Entwicklerportal. Ein `200` heißt, der Bot ist da und sieht den Kanal nicht: Ein privater Kanal braucht „Kanal sehen“ für eine der Rollen des Bots. Ab der nächsten Version antwortet auch der Kanal `404 NotFound` (siehe [Änderungsprotokoll](/developers/docs/changelog#upcoming)).
+
 ## Fehler, die ein Bot bekommen kann {#bot-errors}
 
 @@1

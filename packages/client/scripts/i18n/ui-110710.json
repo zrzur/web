@@ -1,0 +1,549 @@
+{
+  "{0} of {1}": ["{0} من {1}", "{0} von {1}", "{0} sur {1}", "{0} de {1}", "{0} из {1}", "{0} / {1}"],
+  "{0} of {1} slash commands · {2} menu commands": [
+    "{0} من {1} من أوامر الشرطة المائلة · {2} من أوامر القوائم",
+    "{0} von {1} Slash-Befehlen · {2} Menübefehle",
+    "{0} commandes slash sur {1} · {2} commandes de menu",
+    "{0} de {1} comandos de barra · {2} comandos de menú",
+    "Слеш-команд: {0} из {1} · команд меню: {2}",
+    "斜杠命令 {0} / {1} · 菜单命令 {2}"
+  ],
+  "{0} options": ["الخيارات: {0}", "{0} Optionen", "Options : {0}", "Opciones: {0}", "Параметров: {0}", "{0} 个选项"],
+  "A command of this type already has this name.": [
+    "يوجد أمر من هذا النوع بهذا الاسم.",
+    "Ein Befehl dieser Art hat diesen Namen schon.",
+    "Une commande de ce type porte déjà ce nom.",
+    "Ya hay un comando de este tipo con este nombre.",
+    "Команда этого типа с таким именем уже есть.",
+    "已有同类型的命令使用此名称。"
+  ],
+  "A group holds only sub-commands.": [
+    "لا تضم المجموعة إلا أوامر فرعية.",
+    "Eine Gruppe enthält nur Unterbefehle.",
+    "Un groupe ne contient que des sous-commandes.",
+    "Un grupo solo contiene subcomandos.",
+    "Группа содержит только подкоманды.",
+    "命令组只能包含子命令。"
+  ],
+  "A group needs at least one sub-command.": [
+    "تحتاج المجموعة إلى أمر فرعي واحد على الأقل.",
+    "Eine Gruppe braucht mindestens einen Unterbefehl.",
+    "Un groupe a besoin d’au moins une sous-commande.",
+    "Un grupo necesita al menos un subcomando.",
+    "В группе должна быть хотя бы одна подкоманда.",
+    "命令组至少需要一个子命令。"
+  ],
+  "A language tag is not valid.": [
+    "أحد رموز اللغات غير صالح.",
+    "Ein Sprachkürzel ist ungültig.",
+    "Un code de langue n’est pas valide.",
+    "Un código de idioma no es válido.",
+    "Неверный код языка.",
+    "某个语言代码无效。"
+  ],
+  "A sub-command cannot hold sub-commands.": [
+    "لا يضم الأمر الفرعي أوامر فرعية.",
+    "Ein Unterbefehl kann keine Unterbefehle enthalten.",
+    "Une sous-commande ne peut pas contenir de sous-commandes.",
+    "Un subcomando no puede contener subcomandos.",
+    "Подкоманда не может содержать подкоманды.",
+    "子命令不能再包含子命令。"
+  ],
+  "A sub-command takes only a name, a description and options.": [
+    "لا يأخذ الأمر الفرعي إلا اسمًا ووصفًا وخيارات.",
+    "Ein Unterbefehl nimmt nur einen Namen, eine Beschreibung und Optionen.",
+    "Une sous-commande n’a qu’un nom, une description et des options.",
+    "Un subcomando solo lleva nombre, descripción y opciones.",
+    "У подкоманды есть только имя, описание и параметры.",
+    "子命令只有名称、描述和选项。"
+  ],
+  "Add choice": ["أضف اختيارًا", "Auswahlwert hinzufügen", "Ajouter un choix", "Añadir opción de lista", "Добавить вариант", "添加选项值"],
+  "Add option": ["أضف خيارًا", "Option hinzufügen", "Ajouter une option", "Añadir opción", "Добавить параметр", "添加选项"],
+  "Advanced: JSON import and export": [
+    "متقدم: استيراد JSON وتصديره",
+    "Erweitert: JSON importieren und exportieren",
+    "Avancé : import et export JSON",
+    "Avanzado: importar y exportar JSON",
+    "Дополнительно: импорт и экспорт JSON",
+    "高级：JSON 导入与导出"
+  ],
+  "All names, descriptions and choices together have more than {max} characters.": [
+    "مجموع الأسماء والأوصاف والاختيارات يتجاوز {max} حرف.",
+    "Alle Namen, Beschreibungen und Auswahlwerte zusammen haben mehr als {max} Zeichen.",
+    "Les noms, descriptions et choix dépassent ensemble {max} caractères.",
+    "Nombres, descripciones y opciones superan juntos {max} caracteres.",
+    "Имена, описания и варианты вместе длиннее {max} символов.",
+    "名称、描述和选项值合计超过 {max} 个字符。"
+  ],
+  "API changelog": ["سجل تغييرات واجهة البرمجة", "API-Änderungsprotokoll", "Journal des modifications de l’API", "Registro de cambios de la API", "Журнал изменений API", "API 更新日志"],
+  "Arabic": ["العربية", "Arabisch", "Arabe", "Árabe", "Арабский", "阿拉伯语"],
+  "At most {max} commands of this type.": [
+    "{max} أمرًا من هذا النوع على الأكثر.",
+    "Höchstens {max} Befehle dieser Art.",
+    "Au plus {max} commandes de ce type.",
+    "Como máximo {max} comandos de este tipo.",
+    "Не больше {max} команд этого типа.",
+    "此类型最多 {max} 个命令。"
+  ],
+  "At most {max} languages.": ["{max} لغةً على الأكثر.", "Höchstens {max} Sprachen.", "Au plus {max} langues.", "Como máximo {max} idiomas.", "Не больше {max} языков.", "最多 {max} 种语言。"],
+  "At most {max} options on each level.": [
+    "{max} خيارًا على الأكثر في كل مستوى.",
+    "Höchstens {max} Optionen auf jeder Ebene.",
+    "Au plus {max} options par niveau.",
+    "Como máximo {max} opciones por nivel.",
+    "Не больше {max} параметров на уровне.",
+    "每一层最多 {max} 个选项。"
+  ],
+  "Capitals and spaces are allowed.": [
+    "يُسمح بالأحرف الكبيرة والمسافات.",
+    "Großbuchstaben und Leerzeichen sind erlaubt.",
+    "Majuscules et espaces autorisés.",
+    "Se permiten mayúsculas y espacios.",
+    "Можно использовать заглавные буквы и пробелы.",
+    "可以使用大写字母和空格。"
+  ],
+  "Channel types": ["أنواع القنوات", "Kanaltypen", "Types de salons", "Tipos de canal", "Типы каналов", "频道类型"],
+  "Check and import": ["افحص واستورد", "Prüfen und importieren", "Vérifier et importer", "Comprobar e importar", "Проверить и импортировать", "检查并导入"],
+  "Choices": ["الاختيارات", "Auswahlwerte", "Choix", "Opciones de lista", "Варианты", "选项值"],
+  "Command deleted.": ["حُذف الأمر.", "Befehl gelöscht.", "Commande supprimée.", "Comando eliminado.", "Команда удалена.", "命令已删除。"],
+  "Commands imported and saved.": [
+    "استُوردت الأوامر وحُفظت.",
+    "Befehle importiert und gespeichert.",
+    "Commandes importées et enregistrées.",
+    "Comandos importados y guardados.",
+    "Команды импортированы и сохранены.",
+    "命令已导入并保存。"
+  ],
+  "Copy JSON": ["انسخ JSON", "JSON kopieren", "Copier le JSON", "Copiar JSON", "Копировать JSON", "复制 JSON"],
+  "Couldn't load the saved intents.": [
+    "تعذّر تحميل النيّات المحفوظة.",
+    "Die gespeicherten Intents konnten nicht geladen werden.",
+    "Impossible de charger les intents enregistrés.",
+    "No se pudieron cargar los intents guardados.",
+    "Не удалось загрузить сохранённые интенты.",
+    "无法加载已保存的 Intent。"
+  ],
+  "Ctrl+Enter saves · Esc goes back": [
+    "Ctrl+Enter للحفظ · Esc للرجوع",
+    "Strg+Eingabe speichert · Esc geht zurück",
+    "Ctrl+Entrée enregistre · Échap revient",
+    "Ctrl+Intro guarda · Esc vuelve",
+    "Ctrl+Enter сохраняет · Esc — назад",
+    "Ctrl+Enter 保存 · Esc 返回"
+  ],
+  "Default member permissions": [
+    "صلاحيات الأعضاء الافتراضية",
+    "Standard-Berechtigungen für Mitglieder",
+    "Permissions par défaut des membres",
+    "Permisos predeterminados de miembros",
+    "Разрешения участников по умолчанию",
+    "成员默认权限"
+  ],
+  "description": ["الوصف", "Beschreibung", "description", "descripción", "описание", "描述"],
+  "Do this before the first run. A bot that is not in the server gets 403 MissingPermission for its channels, which looks like a missing permission.": [
+    "افعل هذا قبل التشغيل الأول. البوت الذي ليس في السيرفر يحصل على 403 MissingPermission لقنواته، فيبدو الأمر كأن صلاحية تنقصه.",
+    "Mach das vor dem ersten Start. Ein Bot, der nicht auf dem Server ist, bekommt für dessen Kanäle 403 MissingPermission, und das sieht aus wie eine fehlende Berechtigung.",
+    "Fais-le avant le premier lancement. Un bot qui n’est pas sur le serveur reçoit 403 MissingPermission pour ses salons, ce qui ressemble à une permission manquante.",
+    "Hazlo antes del primer arranque. Un bot que no está en el servidor recibe 403 MissingPermission en sus canales, y parece que le falta un permiso.",
+    "Сделайте это до первого запуска. Бот, которого нет на сервере, получает 403 MissingPermission для его каналов, и это похоже на нехватку разрешения.",
+    "请在首次运行前完成此步骤。不在服务器中的机器人访问其频道会收到 403 MissingPermission，看起来像是缺少权限。"
+  ],
+  "Edit command": ["عدّل الأمر", "Befehl bearbeiten", "Modifier la commande", "Editar comando", "Изменить команду", "编辑命令"],
+  "English": ["الإنجليزية", "Englisch", "Anglais", "Inglés", "Английский", "英语"],
+  "Enter a number between -9007199254740991 and 9007199254740991.": [
+    "أدخل رقمًا بين ‎-9007199254740991 و9007199254740991.",
+    "Gib eine Zahl zwischen -9007199254740991 und 9007199254740991 ein.",
+    "Saisis un nombre entre -9007199254740991 et 9007199254740991.",
+    "Escribe un número entre -9007199254740991 y 9007199254740991.",
+    "Введите число от -9007199254740991 до 9007199254740991.",
+    "请输入 -9007199254740991 到 9007199254740991 之间的数字。"
+  ],
+  "Enter a whole number.": ["أدخل عددًا صحيحًا.", "Gib eine ganze Zahl ein.", "Saisis un nombre entier.", "Escribe un número entero.", "Введите целое число.", "请输入整数。"],
+  "Every entry needs at least a name.": [
+    "يحتاج كل عنصر إلى اسم على الأقل.",
+    "Jeder Eintrag braucht mindestens einen Namen.",
+    "Chaque entrée a besoin au moins d’un nom.",
+    "Cada entrada necesita al menos un nombre.",
+    "У каждой записи должно быть хотя бы имя.",
+    "每一项至少需要一个名称。"
+  ],
+  "Everyone who can write in the channel. Pick permissions to limit it.": [
+    "كل من يستطيع الكتابة في القناة. اختر صلاحيات لتقييده.",
+    "Alle, die im Kanal schreiben können. Wähle Berechtigungen, um es einzuschränken.",
+    "Toute personne pouvant écrire dans le salon. Choisis des permissions pour limiter.",
+    "Cualquiera que pueda escribir en el canal. Elige permisos para limitarlo.",
+    "Все, кто может писать в канале. Выберите разрешения, чтобы ограничить.",
+    "所有能在频道发言的人。选择权限即可限制。"
+  ],
+  "File": ["ملف", "Datei", "Fichier", "Archivo", "Файл", "文件"],
+  "Fix these before saving:": ["أصلح هذه قبل الحفظ:", "Behebe das vor dem Speichern:", "Corrige ceci avant d’enregistrer :", "Corrige esto antes de guardar:", "Исправьте перед сохранением:", "保存前请修正以下问题："],
+  "German": ["الألمانية", "Deutsch", "Allemand", "Alemán", "Немецкий", "德语"],
+  "Give 1 to {max} choices.": [
+    "أعطِ من 1 إلى {max} اختيارًا.",
+    "Gib 1 bis {max} Auswahlwerte an.",
+    "Indique entre 1 et {max} choix.",
+    "Indica de 1 a {max} opciones.",
+    "Укажите от 1 до {max} вариантов.",
+    "请提供 1 到 {max} 个选项值。"
+  ],
+  "Groups can only be at the top level.": [
+    "لا تكون المجموعات إلا في المستوى الأعلى.",
+    "Gruppen stehen nur auf der obersten Ebene.",
+    "Les groupes ne peuvent être qu’au premier niveau.",
+    "Los grupos solo pueden estar en el nivel superior.",
+    "Группы могут быть только на верхнем уровне.",
+    "命令组只能位于最上层。"
+  ],
+  "Is the bot in that server?": [
+    "هل البوت في ذلك السيرفر؟",
+    "Ist der Bot auf diesem Server?",
+    "Le bot est-il sur ce serveur ?",
+    "¿Está el bot en ese servidor?",
+    "Есть ли бот на этом сервере?",
+    "机器人在该服务器中吗？"
+  ],
+  "Largest value": ["أكبر قيمة", "Größter Wert", "Valeur maximale", "Valor máximo", "Наибольшее значение", "最大值"],
+  "Lengths go from 0 to {max}, and the minimum is not above the maximum.": [
+    "الأطوال من 0 إلى {max}، ولا يتجاوز الحد الأدنى الحد الأعلى.",
+    "Längen gehen von 0 bis {max}, und das Minimum liegt nicht über dem Maximum.",
+    "Les longueurs vont de 0 à {max}, et le minimum ne dépasse pas le maximum.",
+    "Las longitudes van de 0 a {max} y el mínimo no supera el máximo.",
+    "Длина от 0 до {max}, минимум не больше максимума.",
+    "长度范围为 0 到 {max}，且最小值不能大于最大值。"
+  ],
+  "Limited by permissions": ["مقيّد بالصلاحيات", "Durch Berechtigungen begrenzt", "Limitée par des permissions", "Limitado por permisos", "Ограничено разрешениями", "受权限限制"],
+  "Longest text": ["أطول نص", "Längster Text", "Texte le plus long", "Texto más largo", "Самый длинный текст", "最长文本"],
+  "Lowercase letters of any script, digits, - and _.": [
+    "أحرف صغيرة من أي أبجدية، وأرقام، و- و_.",
+    "Kleinbuchstaben jeder Schrift, Ziffern, - und _.",
+    "Lettres minuscules de toute écriture, chiffres, - et _.",
+    "Minúsculas de cualquier alfabeto, dígitos, - y _.",
+    "Строчные буквы любой письменности, цифры, - и _.",
+    "任意文字的小写字母、数字、- 和 _。"
+  ],
+  "Member menu · Apps": ["قائمة العضو · التطبيقات", "Mitgliedermenü · Apps", "Menu du membre · Applications", "Menú del miembro · Aplicaciones", "Меню участника · Приложения", "成员菜单 · 应用"],
+  "Members without the permissions do not see it.": [
+    "لا يراه الأعضاء الذين لا يملكون الصلاحيات.",
+    "Mitglieder ohne die Berechtigungen sehen ihn nicht.",
+    "Les membres sans ces permissions ne la voient pas.",
+    "Los miembros sin esos permisos no lo ven.",
+    "Участники без этих разрешений её не видят.",
+    "没有这些权限的成员看不到它。"
+  ],
+  "Menu commands have no description and no options.": [
+    "ليس لأوامر القوائم وصف ولا خيارات.",
+    "Menübefehle haben keine Beschreibung und keine Optionen.",
+    "Les commandes de menu n’ont ni description ni options.",
+    "Los comandos de menú no tienen descripción ni opciones.",
+    "У команд меню нет описания и параметров.",
+    "菜单命令没有描述和选项。"
+  ],
+  "Message menu · Apps": ["قائمة الرسالة · التطبيقات", "Nachrichtenmenü · Apps", "Menu du message · Applications", "Menú del mensaje · Aplicaciones", "Меню сообщения · Приложения", "消息菜单 · 应用"],
+  "name": ["الاسم", "Name", "nom", "nombre", "имя", "名称"],
+  "Names in other languages": ["الأسماء بلغات أخرى", "Namen in anderen Sprachen", "Noms dans d’autres langues", "Nombres en otros idiomas", "Имена на других языках", "其他语言的名称"],
+  "New command": ["أمر جديد", "Neuer Befehl", "Nouvelle commande", "Nuevo comando", "Новая команда", "新建命令"],
+  "New option": ["خيار جديد", "Neue Option", "Nouvelle option", "Nueva opción", "Новый параметр", "新选项"],
+  "No commands yet. Add one here, or let your bot register its list when it starts.": [
+    "لا أوامر بعد. أضف أمرًا هنا، أو دع بوتك يسجّل قائمته حين يبدأ.",
+    "Noch keine Befehle. Füge hier einen hinzu, oder lass deinen Bot seine Liste beim Start registrieren.",
+    "Aucune commande pour l’instant. Ajoutes-en une ici, ou laisse ton bot enregistrer sa liste au démarrage.",
+    "Aún no hay comandos. Añade uno aquí o deja que tu bot registre su lista al arrancar.",
+    "Команд пока нет. Добавьте команду здесь или пусть бот зарегистрирует свой список при запуске.",
+    "还没有命令。在这里添加，或让你的机器人在启动时注册它的列表。"
+  ],
+  "No spaces at the start or the end.": [
+    "دون مسافات في البداية أو النهاية.",
+    "Keine Leerzeichen am Anfang oder Ende.",
+    "Pas d’espace au début ni à la fin.",
+    "Sin espacios al principio ni al final.",
+    "Без пробелов в начале и в конце.",
+    "开头和结尾不能有空格。"
+  ],
+  "None picked: every channel.": ["إن لم تختر شيئًا: كل القنوات.", "Nichts gewählt: jeder Kanal.", "Aucun choisi : tous les salons.", "Ninguno elegido: todos los canales.", "Ничего не выбрано: любой канал.", "未选择：所有频道。"],
+  "Not saved. The switch shows what is saved.": [
+    "لم يُحفظ. يعرض المفتاح ما هو محفوظ.",
+    "Nicht gespeichert. Der Schalter zeigt, was gespeichert ist.",
+    "Non enregistré. L’interrupteur montre ce qui est enregistré.",
+    "No se guardó. El interruptor muestra lo guardado.",
+    "Не сохранено. Переключатель показывает сохранённое состояние.",
+    "未保存。开关显示的是已保存的状态。"
+  ],
+  "Number": ["رقم", "Zahl", "Nombre", "Número", "Число", "数字"],
+  "Off (saved)": ["معطّل (محفوظ)", "Aus (gespeichert)", "Désactivé (enregistré)", "Desactivado (guardado)", "Выключено (сохранено)", "关闭（已保存）"],
+  "On (saved)": ["مفعّل (محفوظ)", "An (gespeichert)", "Activé (enregistré)", "Activado (guardado)", "Включено (сохранено)", "开启（已保存）"],
+  "Only in channels marked for adults": [
+    "في القنوات المخصصة للبالغين فقط",
+    "Nur in Kanälen für Erwachsene",
+    "Uniquement dans les salons réservés aux adultes",
+    "Solo en canales para adultos",
+    "Только в каналах 18+",
+    "仅限成人内容频道"
+  ],
+  "Only members with all the permissions picked below see and use it. Your bot should still check them.": [
+    "لا يراه ولا يستخدمه إلا الأعضاء الذين يملكون كل الصلاحيات المختارة أدناه. ويبقى على بوتك أن يتحقق منها.",
+    "Nur Mitglieder mit allen unten gewählten Berechtigungen sehen und nutzen ihn. Dein Bot sollte sie trotzdem prüfen.",
+    "Seuls les membres ayant toutes les permissions choisies ci-dessous la voient et l’utilisent. Ton bot doit quand même les vérifier.",
+    "Solo los miembros con todos los permisos elegidos abajo lo ven y lo usan. Tu bot debe comprobarlos igualmente.",
+    "Видят и используют её только участники со всеми выбранными ниже разрешениями. Боту всё равно стоит их проверять.",
+    "只有拥有下方所选全部权限的成员才能看到并使用它。你的机器人仍应自行检查。"
+  ],
+  "Only sub-commands and groups hold options.": [
+    "لا تضم الخيارات إلا الأوامر الفرعية والمجموعات.",
+    "Nur Unterbefehle und Gruppen enthalten Optionen.",
+    "Seuls les sous-commandes et les groupes contiennent des options.",
+    "Solo los subcomandos y los grupos contienen opciones.",
+    "Параметры есть только у подкоманд и групп.",
+    "只有子命令和命令组可以包含选项。"
+  ],
+  "Only text and number options can suggest while typing.": [
+    "لا تقترح في أثناء الكتابة إلا خيارات النص والأرقام.",
+    "Nur Text- und Zahlenoptionen können beim Tippen vorschlagen.",
+    "Seules les options texte et nombre peuvent suggérer pendant la saisie.",
+    "Solo las opciones de texto y número pueden sugerir al escribir.",
+    "Подсказывать при вводе могут только текстовые и числовые параметры.",
+    "只有文本和数字选项可以在输入时提供建议。"
+  ],
+  "Only text and number options take choices.": [
+    "لا تأخذ الاختيارات إلا خيارات النص والأرقام.",
+    "Nur Text- und Zahlenoptionen nehmen Auswahlwerte.",
+    "Seules les options texte et nombre acceptent des choix.",
+    "Solo las opciones de texto y número admiten opciones de lista.",
+    "Варианты бывают только у текстовых и числовых параметров.",
+    "只有文本和数字选项可以设置选项值。"
+  ],
+  "Option description": ["وصف الخيار", "Beschreibung der Option", "Description de l’option", "Descripción de la opción", "Описание параметра", "选项描述"],
+  "Option name": ["اسم الخيار", "Name der Option", "Nom de l’option", "Nombre de la opción", "Имя параметра", "选项名称"],
+  "Option type": ["نوع الخيار", "Art der Option", "Type d’option", "Tipo de opción", "Тип параметра", "选项类型"],
+  "Paste a list: [ { … }, { … } ].": [
+    "الصق قائمة: [ { … }, { … } ].",
+    "Füge eine Liste ein: [ { … }, { … } ].",
+    "Colle une liste : [ { … }, { … } ].",
+    "Pega una lista: [ { … }, { … } ].",
+    "Вставьте список: [ { … }, { … } ].",
+    "请粘贴一个列表：[ { … }, { … } ]。"
+  ],
+  "People pick one of these. None: they type any value.": [
+    "يختار الناس أحدها. وإن لم توجد: يكتبون أي قيمة.",
+    "Man wählt einen davon. Keine: Man tippt einen beliebigen Wert.",
+    "Les gens choisissent l’un d’eux. Aucun : ils tapent n’importe quelle valeur.",
+    "La gente elige una de estas. Ninguna: escriben cualquier valor.",
+    "Пользователи выбирают один из вариантов. Если их нет — вводят любое значение.",
+    "用户从中选择一个。若没有，则可输入任意值。"
+  ],
+  "People see the name in their language. Your bot always gets the main name.": [
+    "يرى الناس الاسم بلغتهم. ويتلقى بوتك الاسم الأساسي دائمًا.",
+    "Man sieht den Namen in der eigenen Sprache. Dein Bot bekommt immer den Hauptnamen.",
+    "Les gens voient le nom dans leur langue. Ton bot reçoit toujours le nom principal.",
+    "La gente ve el nombre en su idioma. Tu bot siempre recibe el nombre principal.",
+    "Пользователи видят имя на своём языке. Бот всегда получает основное имя.",
+    "用户会看到自己语言的名称。你的机器人始终收到主名称。"
+  ],
+  "People type it after / in a server channel.": [
+    "يكتبه الناس بعد / في قناة سيرفر.",
+    "Man tippt ihn nach / in einem Serverkanal.",
+    "Les gens la tapent après / dans un salon de serveur.",
+    "La gente lo escribe tras / en un canal del servidor.",
+    "Её вводят после / в канале сервера.",
+    "用户在服务器频道中输入 / 后使用。"
+  ],
+  "Pick each channel type once.": [
+    "اختر كل نوع قناة مرة واحدة.",
+    "Wähle jeden Kanaltyp einmal.",
+    "Choisis chaque type de salon une seule fois.",
+    "Elige cada tipo de canal una sola vez.",
+    "Выберите каждый тип канала один раз.",
+    "每种频道类型只能选一次。"
+  ],
+  "Pick the permissions from the list.": [
+    "اختر الصلاحيات من القائمة.",
+    "Wähle die Berechtigungen aus der Liste.",
+    "Choisis les permissions dans la liste.",
+    "Elige los permisos de la lista.",
+    "Выберите разрешения из списка.",
+    "请从列表中选择权限。"
+  ],
+  "Preview language": ["لغة المعاينة", "Sprache der Vorschau", "Langue de l’aperçu", "Idioma de la vista previa", "Язык предпросмотра", "预览语言"],
+  "Remove choice": ["احذف الاختيار", "Auswahlwert entfernen", "Retirer le choix", "Quitar opción de lista", "Убрать вариант", "移除选项值"],
+  "Remove option {0}": ["احذف الخيار {0}", "Option {0} entfernen", "Retirer l’option {0}", "Quitar la opción {0}", "Убрать параметр {0}", "移除选项 {0}"],
+  "Remove the hidden control characters.": [
+    "احذف أحرف التحكم المخفية.",
+    "Entferne die versteckten Steuerzeichen.",
+    "Retire les caractères de contrôle cachés.",
+    "Quita los caracteres de control ocultos.",
+    "Уберите скрытые управляющие символы.",
+    "请移除隐藏的控制字符。"
+  ],
+  "Replace all commands": ["استبدل كل الأوامر", "Alle Befehle ersetzen", "Remplacer toutes les commandes", "Reemplazar todos los comandos", "Заменить все команды", "替换全部命令"],
+  "Required": ["مطلوب", "Pflichtfeld", "Obligatoire", "Obligatorio", "Обязательно", "必填"],
+  "Required options come before optional ones.": [
+    "تأتي الخيارات المطلوبة قبل الاختيارية.",
+    "Pflichtoptionen kommen vor den optionalen.",
+    "Les options obligatoires viennent avant les facultatives.",
+    "Las opciones obligatorias van antes que las opcionales.",
+    "Обязательные параметры идут перед необязательными.",
+    "必填选项必须排在可选选项之前。"
+  ],
+  "Save command": ["احفظ الأمر", "Befehl speichern", "Enregistrer la commande", "Guardar comando", "Сохранить команду", "保存命令"],
+  "Saved: {0} is off. It counts from the bot's next connection.": [
+    "حُفظ: {0} معطّل. يسري ذلك من اتصال البوت التالي.",
+    "Gespeichert: {0} ist aus. Es gilt ab der nächsten Verbindung des Bots.",
+    "Enregistré : {0} est désactivé. Pris en compte à la prochaine connexion du bot.",
+    "Guardado: {0} está desactivado. Cuenta desde la próxima conexión del bot.",
+    "Сохранено: {0} выключено. Действует со следующего подключения бота.",
+    "已保存：{0} 已关闭。从机器人下次连接起生效。"
+  ],
+  "Saved: {0} is on. It counts from the bot's next connection.": [
+    "حُفظ: {0} مفعّل. يسري ذلك من اتصال البوت التالي.",
+    "Gespeichert: {0} ist an. Es gilt ab der nächsten Verbindung des Bots.",
+    "Enregistré : {0} est activé. Pris en compte à la prochaine connexion du bot.",
+    "Guardado: {0} está activado. Cuenta desde la próxima conexión del bot.",
+    "Сохранено: {0} включено. Действует со следующего подключения бота.",
+    "已保存：{0} 已开启。从机器人下次连接起生效。"
+  ],
+  "Saved. People see the change at once.": [
+    "حُفظ. يرى الناس التغيير فورًا.",
+    "Gespeichert. Alle sehen die Änderung sofort.",
+    "Enregistré. Le changement est visible tout de suite.",
+    "Guardado. Todos ven el cambio al instante.",
+    "Сохранено. Изменение видно сразу.",
+    "已保存。所有人会立即看到更改。"
+  ],
+  "Shortest text": ["أقصر نص", "Kürzester Text", "Texte le plus court", "Texto más corto", "Самый короткий текст", "最短文本"],
+  "Shown as": ["يظهر باسم", "Angezeigt als", "Affiché comme", "Se muestra como", "Отображается как", "显示为"],
+  "Shown in the menu of a member, under Apps.": [
+    "يظهر في قائمة العضو، تحت التطبيقات.",
+    "Erscheint im Menü eines Mitglieds, unter Apps.",
+    "Affichée dans le menu d’un membre, sous Applications.",
+    "Aparece en el menú de un miembro, en Aplicaciones.",
+    "Показывается в меню участника, в разделе «Приложения».",
+    "显示在成员菜单的“应用”下。"
+  ],
+  "Shown in the menu of a message, under Apps.": [
+    "يظهر في قائمة الرسالة، تحت التطبيقات.",
+    "Erscheint im Menü einer Nachricht, unter Apps.",
+    "Affichée dans le menu d’un message, sous Applications.",
+    "Aparece en el menú de un mensaje, en Aplicaciones.",
+    "Показывается в меню сообщения, в разделе «Приложения».",
+    "显示在消息菜单的“应用”下。"
+  ],
+  "Smallest value": ["أصغر قيمة", "Kleinster Wert", "Valeur minimale", "Valor mínimo", "Наименьшее значение", "最小值"],
+  "Sub-command": ["أمر فرعي", "Unterbefehl", "Sous-commande", "Subcomando", "Подкоманда", "子命令"],
+  "Sub-command group": ["مجموعة أوامر فرعية", "Unterbefehlsgruppe", "Groupe de sous-commandes", "Grupo de subcomandos", "Группа подкоманд", "子命令组"],
+  "Sub-commands and plain options cannot be mixed on one level.": [
+    "لا تُجمع الأوامر الفرعية والخيارات العادية في مستوى واحد.",
+    "Unterbefehle und einfache Optionen lassen sich auf einer Ebene nicht mischen.",
+    "Sous-commandes et options simples ne se mélangent pas sur un même niveau.",
+    "No se pueden mezclar subcomandos y opciones simples en un nivel.",
+    "Подкоманды и обычные параметры нельзя смешивать на одном уровне.",
+    "同一层不能混用子命令和普通选项。"
+  ],
+  "Sub-commands go at most one group deep.": [
+    "لا تتداخل الأوامر الفرعية بأكثر من مجموعة واحدة.",
+    "Unterbefehle liegen höchstens eine Gruppe tief.",
+    "Les sous-commandes vont au plus à un groupe de profondeur.",
+    "Los subcomandos llegan como mucho a un grupo de profundidad.",
+    "Подкоманды вкладываются не глубже одной группы.",
+    "子命令最多只能嵌套在一层命令组中。"
+  ],
+  "Suggest values while people type (your bot answers)": [
+    "اقترح قيمًا في أثناء الكتابة (يجيب بوتك)",
+    "Werte beim Tippen vorschlagen (dein Bot antwortet)",
+    "Suggérer des valeurs pendant la saisie (ton bot répond)",
+    "Sugerir valores mientras se escribe (responde tu bot)",
+    "Подсказывать значения при вводе (отвечает бот)",
+    "在输入时建议值（由你的机器人回答）"
+  ],
+  "The minimum is larger than the maximum.": [
+    "الحد الأدنى أكبر من الحد الأعلى.",
+    "Das Minimum ist größer als das Maximum.",
+    "Le minimum est plus grand que le maximum.",
+    "El mínimo es mayor que el máximo.",
+    "Минимум больше максимума.",
+    "最小值大于最大值。"
+  ],
+  "The same list your bot sends with PUT to its commands route. Importing replaces every global command.": [
+    "القائمة نفسها التي يرسلها بوتك بـPUT إلى مسار أوامره. والاستيراد يستبدل كل الأوامر العامة.",
+    "Dieselbe Liste, die dein Bot mit PUT an seine Befehlsroute sendet. Importieren ersetzt alle globalen Befehle.",
+    "La même liste que ton bot envoie avec PUT à sa route de commandes. Importer remplace toutes les commandes globales.",
+    "La misma lista que tu bot envía con PUT a su ruta de comandos. Importar reemplaza todos los comandos globales.",
+    "Тот же список, который бот отправляет через PUT в свой маршрут команд. Импорт заменяет все глобальные команды.",
+    "与你的机器人通过 PUT 发送到命令路由的列表相同。导入会替换所有全局命令。"
+  ],
+  "The value must fit the option type.": [
+    "يجب أن تناسب القيمة نوع الخيار.",
+    "Der Wert muss zur Art der Option passen.",
+    "La valeur doit correspondre au type de l’option.",
+    "El valor debe ajustarse al tipo de la opción.",
+    "Значение должно соответствовать типу параметра.",
+    "值必须符合选项类型。"
+  ],
+  "This option type has no such limit.": [
+    "ليس لهذا النوع من الخيارات حد كهذا.",
+    "Diese Art von Option hat keine solche Grenze.",
+    "Ce type d’option n’a pas cette limite.",
+    "Este tipo de opción no tiene ese límite.",
+    "У этого типа параметра нет такого ограничения.",
+    "此类选项没有这种限制。"
+  ],
+  "Turn these on only if your bot needs them. Without them it still works with commands, buttons and messages that mention it. A switch is saved at once and applies from the bot's next connection to the gateway: restart or reconnect your bot.": [
+    "فعّلها فقط إذا احتاج إليها بوتك. ودونها يبقى يعمل مع الأوامر والأزرار والرسائل التي تذكره. يُحفظ المفتاح فورًا ويسري من اتصال البوت التالي بالبوابة: أعد تشغيل بوتك أو أعد وصله.",
+    "Schalte sie nur ein, wenn dein Bot sie braucht. Ohne sie funktioniert er weiter mit Befehlen, Schaltflächen und Nachrichten, die ihn erwähnen. Ein Schalter wird sofort gespeichert und gilt ab der nächsten Gateway-Verbindung des Bots: Starte deinen Bot neu oder verbinde ihn neu.",
+    "Active-les seulement si ton bot en a besoin. Sans eux, il fonctionne toujours avec les commandes, les boutons et les messages qui le mentionnent. Un interrupteur est enregistré tout de suite et s’applique à la prochaine connexion du bot au gateway : redémarre ou reconnecte ton bot.",
+    "Actívalos solo si tu bot los necesita. Sin ellos sigue funcionando con comandos, botones y mensajes que lo mencionan. Cada interruptor se guarda al momento y se aplica desde la próxima conexión del bot al gateway: reinicia o reconecta tu bot.",
+    "Включайте их, только если они нужны боту. Без них он работает с командами, кнопками и сообщениями, где его упоминают. Переключатель сохраняется сразу и действует со следующего подключения бота к шлюзу: перезапустите или переподключите бота.",
+    "仅在你的机器人需要时开启。即使不开启，它仍可处理命令、按钮和提及它的消息。开关会立即保存，并从机器人下次连接网关时生效：请重启或重新连接你的机器人。"
+  ],
+  "Two choices have this name.": [
+    "لاختيارين هذا الاسم نفسه.",
+    "Zwei Auswahlwerte haben diesen Namen.",
+    "Deux choix portent ce nom.",
+    "Dos opciones de lista tienen este nombre.",
+    "Два варианта с таким именем.",
+    "有两个选项值使用了此名称。"
+  ],
+  "Two options have this name.": [
+    "لخيارين هذا الاسم نفسه.",
+    "Zwei Optionen haben diesen Namen.",
+    "Deux options portent ce nom.",
+    "Dos opciones tienen este nombre.",
+    "Два параметра с таким именем.",
+    "有两个选项使用了此名称。"
+  ],
+  "Type: {0}. The type of a saved command cannot change.": [
+    "النوع: {0}. لا يتغير نوع أمر محفوظ.",
+    "Art: {0}. Die Art eines gespeicherten Befehls lässt sich nicht ändern.",
+    "Type : {0}. Le type d’une commande enregistrée ne peut pas changer.",
+    "Tipo: {0}. El tipo de un comando guardado no puede cambiar.",
+    "Тип: {0}. Тип сохранённой команды изменить нельзя.",
+    "类型：{0}。已保存命令的类型无法更改。"
+  ],
+  "Use 1 to {max} characters.": [
+    "استخدم من 1 إلى {max} حرف.",
+    "Verwende 1 bis {max} Zeichen.",
+    "Utilise de 1 à {max} caractères.",
+    "Usa de 1 a {max} caracteres.",
+    "Используйте от 1 до {max} символов.",
+    "请使用 1 到 {max} 个字符。"
+  ],
+  "Use choices or suggestions while typing, not both.": [
+    "استخدم الاختيارات أو الاقتراحات في أثناء الكتابة، لا كليهما.",
+    "Nutze Auswahlwerte oder Vorschläge beim Tippen, nicht beides.",
+    "Utilise des choix ou des suggestions pendant la saisie, pas les deux.",
+    "Usa opciones de lista o sugerencias al escribir, no ambas.",
+    "Используйте либо варианты, либо подсказки при вводе, но не то и другое.",
+    "请使用选项值或输入建议，不能同时使用。"
+  ],
+  "Use lowercase letters, digits, - and _ only, without spaces.": [
+    "استخدم الأحرف الصغيرة والأرقام و- و_ فقط، دون مسافات.",
+    "Verwende nur Kleinbuchstaben, Ziffern, - und _, ohne Leerzeichen.",
+    "Utilise seulement des minuscules, des chiffres, - et _, sans espaces.",
+    "Usa solo minúsculas, dígitos, - y _, sin espacios.",
+    "Используйте только строчные буквы, цифры, - и _, без пробелов.",
+    "只能使用小写字母、数字、- 和 _，不能有空格。"
+  ],
+  "User or role": ["مستخدم أو دور", "Nutzer oder Rolle", "Utilisateur ou rôle", "Usuario o rol", "Пользователь или роль", "用户或身份组"],
+  "Value sent to the bot": ["القيمة المرسلة إلى البوت", "An den Bot gesendeter Wert", "Valeur envoyée au bot", "Valor enviado al bot", "Значение для бота", "发送给机器人的值"],
+  "Who can use it": ["من يستطيع استخدامه", "Wer ihn nutzen kann", "Qui peut l’utiliser", "Quién puede usarlo", "Кто может использовать", "谁可以使用"],
+  "Whole number": ["عدد صحيح", "Ganze Zahl", "Nombre entier", "Número entero", "Целое число", "整数"],
+  "Yes or no": ["نعم أو لا", "Ja oder nein", "Oui ou non", "Sí o no", "Да или нет", "是或否"]
+}
