@@ -1,6 +1,6 @@
-import { describe, expect, it } from "vitest";
+import { describe, expect, it, vi } from "vitest";
 
-import { addPreloads, appPreloads } from "./preloadApp.mjs";
+import { addPreloads, appPreloads, preloadApp } from "./preloadApp.mjs";
 
 const chunk = (
   fileName: string,
@@ -61,5 +61,25 @@ describe("app preload", () => {
     expect(addPreloads("<head></head>", ["assets/app-b.js"], "/")).toBe(
       "<head></head>",
     );
+  });
+
+  it("warns when the build has no src/app.tsx to preload", () => {
+    const plugin = preloadApp() as any;
+    const warn = vi.fn();
+    plugin.generateBundle.call(
+      { warn },
+      {},
+      {
+        "assets/index.js": chunk("assets/index.js", { isEntry: true }),
+      },
+    );
+    plugin.closeBundle.call({ warn });
+    expect(warn).toHaveBeenCalledWith(expect.stringMatching(/app\.tsx/));
+
+    const found = preloadApp() as any;
+    const quiet = vi.fn();
+    found.generateBundle.call({ warn: quiet }, {}, bundle);
+    found.closeBundle.call({ warn: quiet });
+    expect(quiet).not.toHaveBeenCalled();
   });
 });

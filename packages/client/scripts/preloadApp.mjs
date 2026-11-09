@@ -65,6 +65,14 @@ export function preloadApp() {
       const found = appPreloads(bundle);
       if (found.length) files = found;
     },
+    closeBundle() {
+      // without it the page loads the app one round trip later: still
+      // works, but the speed-up is gone
+      if (!files.length)
+        this.warn(
+          "preload-app: no chunk for src/app.tsx found, index.html gets no app preloads",
+        );
+    },
     writeBundle: {
       order: "post",
       handler() {
