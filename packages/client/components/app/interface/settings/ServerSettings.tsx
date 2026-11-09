@@ -1,6 +1,7 @@
 import { Trans, useLingui } from "@lingui/solid/macro";
 import { Server } from "@zrzur/sdk/solid";
 
+import { useClient } from "@revolt/client";
 import { billingAvailable } from "@revolt/client/billing";
 import { useModals } from "@revolt/modal";
 import { Icon } from "@revolt/ui/icons/Icon";
@@ -15,6 +16,8 @@ import {
   canOpenServerSettings,
   canSeeMembers as canSeeMembersOf,
 } from "./server/access";
+import { ServerAppPage } from "./server/apps/ServerAppPage";
+import { AssistantPage } from "./server/assistant/AssistantPage";
 import {
   AppsPage,
   BansPage,
@@ -27,7 +30,6 @@ import {
   RolesPage,
   SafetyPage,
 } from "./server/pages";
-import { AssistantPage } from "./server/assistant/AssistantPage";
 import {
   type PageId,
   pageKeywords,
@@ -135,6 +137,10 @@ const Config: SettingsConfiguration<Server> = {
       return t`Join requests`;
     if (key === "lobby" || key === "joining/lobby") return t`Lobby design`;
     if (key === "apps/assistant") return t`Zrzur Assistant`;
+    if (key.startsWith("apps/bot/")) {
+      const bot = useClient()().users.get(key.substring(9));
+      return bot?.displayName ?? bot?.username ?? t`App`;
+    }
 
     return ctx.entries
       .flatMap((category) => category.entries)
@@ -153,6 +159,10 @@ const Config: SettingsConfiguration<Server> = {
     if (!server.$exists) {
       useModals().pop();
       return null;
+    }
+
+    if (id.startsWith("apps/bot/")) {
+      return <ServerAppPage server={server} appId={id.substring(9)} />;
     }
 
     if (id.startsWith("roles/")) {
