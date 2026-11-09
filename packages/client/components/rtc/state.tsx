@@ -44,6 +44,7 @@ import {
   transmitting,
 } from "../keybinds/shortcuts";
 import { audioCaptureFor, audioPublishFor, callBitrate } from "./audioQuality";
+import { deviceFallback } from "./callHealth";
 import { InRoom } from "./components/InRoom";
 import { desktopPushToTalk } from "./desktopPushToTalk";
 import { RoomState, TrackSource } from "./livekitConstants";
@@ -99,6 +100,17 @@ const REJOIN_DELAYS = [1000, 2000, 4000, 8000, 15000, 15000, 15000];
 
 export type VoiceLayout = "fullscreen" | "expanded" | "collapsed" | undefined;
 
+/** Short notices about the call, shown next to its status for a few seconds */
+export type CallNotice =
+  | "reconnected"
+  | "inputFallback"
+  | "inputRestored"
+  | "outputFallback"
+  | "outputRestored";
+
+/** How long a call notice stays */
+const NOTICE_MS = 6000;
+
 /** Global push to talk (desktop): not asked, holding the combination, refused */
 export type GlobalPttState = "off" | "on" | "unavailable";
 
@@ -146,6 +158,13 @@ class Voice {
    */
   pttLatched: Accessor<boolean>;
   #setPttLatched: Setter<boolean>;
+
+  /** A short notice about the call (reconnected, device unplugged) */
+  notice: Accessor<CallNotice | undefined>;
+  #setNotice: Setter<CallNotice | undefined>;
+  #noticeTimer?: ReturnType<typeof setTimeout>;
+  /** Ends the wait before the next rejoin attempt (the network came back) */
+  #wake?: () => void;
 
   /** Whether the desktop app holds the global combination right now */
   globalPtt: Accessor<GlobalPttState>;
@@ -213,6 +232,10 @@ class Voice {
     const [pttLatched, setPttLatched] = createSignal(false);
     this.pttLatched = pttLatched;
     this.#setPttLatched = setPttLatched;
+
+    const [notice, setNotice] = createSignal<CallNotice>();
+    this.notice = notice;
+    this.#setNotice = setNotice;
 
     const [globalPtt, setGlobalPtt] = createSignal<GlobalPttState>("off");
     this.globalPtt = globalPtt;
@@ -437,6 +460,7 @@ class Voice {
 
     room.addListener("connected", () => {
       this.#setState("CONNECTED");
+      if (previousSession) this.showNotice("reconnected");
       void this.enableMicrophone(room);
       for (const p of room.remoteParticipants.values()) {
         const screenShareTrack = p.getTrackPublication(TrackSource.ScreenShare);
@@ -473,7 +497,15 @@ class Voice {
     };
     room.addListener("signalReconnecting", rejoin);
     room.addListener("reconnecting", rejoin);
-    room.addListener("reconnected", () => this.#setState("CONNECTED"));
+    room.addListener("reconnected", () => {
+      this.#setState("CONNECTED");
+      this.showNotice("reconnected");
+    });
+    // an unplugged headset: the call moves to the system default and says
+    // so; plugged in again, it moves back
+    room.addListener("mediaDevicesChanged", () => {
+      if (this.room() === room) void this.followDevices(room);
+    });
 
     room.addListener("localTrackPublished", (pub) => {
       if (pub.audioTrack && pub.audioTrack.source === TrackSource.Microphone) {
@@ -568,9 +600,15 @@ class Voice {
         type !== "VoiceRejoinRefused"
       ) {
         this.#setState("RECONNECTING");
-        await new Promise((resolve) =>
-          setTimeout(resolve, REJOIN_DELAYS[retry]),
-        );
+        // wait, unless the network comes back first (see networkBack)
+        await new Promise<void>((resolve) => {
+          const timer = setTimeout(resolve, REJOIN_DELAYS[retry]);
+          this.#wake = () => {
+            clearTimeout(timer);
+            resolve();
+          };
+        });
+        this.#wake = undefined;
         if (attempt !== this.#connectionAttempt) return;
         return this.connect(channel, undefined, previousSession, retry + 1);
       }
@@ -666,6 +704,66 @@ class Voice {
       }
     } catch (e) {
       this.onErr(e);
+    }
+  }
+
+  /** Show a short notice next to the call status */
+  showNotice(notice: CallNotice) {
+    clearTimeout(this.#noticeTimer);
+    this.#setNotice(notice);
+    this.#noticeTimer = setTimeout(() => this.#setNotice(), NOTICE_MS);
+  }
+
+  /**
+   * The browser is online again: try the next rejoin now instead of after
+   * the rest of the wait
+   */
+  networkBack() {
+    this.#wake?.();
+  }
+
+  /** Join the same channel again after the call gave up reconnecting */
+  rejoin() {
+    const channel = this.channel();
+    if (channel && this.state() === "DISCONNECTED") void this.connect(channel);
+  }
+
+  /** Apply deviceFallback to the microphone and the speaker */
+  private async followDevices(room: Room) {
+    let devices: MediaDeviceInfo[];
+    try {
+      devices = await navigator.mediaDevices.enumerateDevices();
+    } catch {
+      return;
+    }
+    for (const kind of ["audioinput", "audiooutput"] as const) {
+      const preferred =
+        kind === "audioinput"
+          ? this.#settings.preferredAudioInputDevice
+          : this.#settings.preferredAudioOutputDevice;
+      const { switchTo, notice } = deviceFallback({
+        preferred,
+        active: room.getActiveDevice(kind) ?? preferred,
+        available: devices.filter((device) => device.kind === kind),
+      });
+      if (switchTo) {
+        try {
+          await room.switchActiveDevice(kind, switchTo);
+        } catch (error) {
+          console.warn("[rtc] could not switch device", error);
+          continue;
+        }
+      }
+      if (notice)
+        this.showNotice(
+          kind === "audioinput"
+            ? notice === "fallback"
+              ? "inputFallback"
+              : "inputRestored"
+            : notice === "fallback"
+              ? "outputFallback"
+              : "outputRestored",
+        );
     }
   }
 
@@ -1172,11 +1270,14 @@ export function VoiceContext(props: { children: JSX.Element }) {
   // a key released in another window never reaches us: stop talking
   const release = () => voice.setPushToTalk(false);
   const onVisibility = () => document.hidden && release();
+  const onOnline = () => voice.networkBack();
+  window.addEventListener("online", onOnline);
   window.addEventListener("keydown", onKeyDown, true);
   window.addEventListener("keyup", onKeyUp, true);
   window.addEventListener("blur", release);
   document.addEventListener("visibilitychange", onVisibility);
   onCleanup(() => {
+    window.removeEventListener("online", onOnline);
     window.removeEventListener("keydown", onKeyDown, true);
     window.removeEventListener("keyup", onKeyUp, true);
     window.removeEventListener("blur", release);

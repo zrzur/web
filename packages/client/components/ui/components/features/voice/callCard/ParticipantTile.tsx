@@ -27,6 +27,11 @@ import { Row } from "@revolt/ui/components/layout";
 import { OverflowingText } from "@revolt/ui/components/utils";
 import { Icon } from "@revolt/ui/icons/Icon";
 
+import {
+  type ConnectionQualityName,
+  qualityLevel,
+} from "@revolt/rtc/callHealth";
+
 import { VoiceParticipantContextMenu } from "../VoiceParticipantMenu";
 import { VoiceStatefulUserIcons } from "../VoiceStatefulUserIcons";
 
@@ -53,6 +58,16 @@ export function ParticipantTile(props: TileProps) {
       : undefined;
 
   let videoRef: HTMLVideoElement | undefined;
+
+  // connection quality as LiveKit measures it; the tile only points out a
+  // weak or lost connection, so a good call stays uncluttered
+  const [quality, setQuality] = createSignal<ConnectionQualityName>(
+    participant.connectionQuality as ConnectionQualityName,
+  );
+  const onQuality = (next: unknown) =>
+    setQuality(next as ConnectionQualityName);
+  participant.on("connectionQualityChanged", onQuality);
+  onCleanup(() => participant.off("connectionQualityChanged", onQuality));
 
   const [videoDims, setVideoDims] = createSignal<{
     height: number;
@@ -204,6 +219,27 @@ export function ParticipantTile(props: TileProps) {
               {member()?.displayName ?? user().username}
             </OverflowingText>
             <Row gap="md">
+              <Show when={!isScreenShare() && qualityLevel(quality()).warn}>
+                <WeakConnection
+                  role="img"
+                  data-connection-quality={quality()}
+                  aria-label={
+                    quality() === "lost"
+                      ? t`Connection lost`
+                      : t`Weak connection`
+                  }
+                  title={
+                    quality() === "lost"
+                      ? t`Connection lost`
+                      : t`Weak connection`
+                  }
+                >
+                  <Icon
+                    size={16}
+                    name={quality() === "lost" ? "wifi-slash" : "warning"}
+                  />
+                </WeakConnection>
+              </Show>
               <Show when={live()}>
                 {(stats) => (
                   <LiveQuality
@@ -392,6 +428,16 @@ const Overlay = styled("div", {
   },
   defaultVariants: {
     showOnHover: false,
+  },
+});
+
+/** A weak or lost connection: warning colour plus its own icon shape */
+const WeakConnection = styled("span", {
+  base: {
+    display: "inline-flex",
+    alignItems: "center",
+    color: "var(--z-status-warning)",
+    "--z-icon-color": "var(--z-status-warning)",
   },
 });
 
