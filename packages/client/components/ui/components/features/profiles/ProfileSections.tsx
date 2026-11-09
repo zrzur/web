@@ -5,6 +5,7 @@ import { ServerMember, User, UserProfile } from "@zrzur/sdk/solid";
 import { styled } from "styled-system/jsx";
 
 import { ProfileBio } from "./ProfileBio";
+import { ProfileBotAbout } from "./ProfileBotAbout";
 import { ProfileCard, ProfileSkeleton } from "./ProfileCard";
 import { ProfileCommands } from "./ProfileCommands";
 import { ProfileJoined } from "./ProfileJoined";
@@ -58,6 +59,7 @@ export function ProfileBody(props: {
           onClose={props.onClose}
         />
         <Show when={props.bot}>
+          <ProfileBotAbout botId={props.user.id} />
           <ProfileOwner bot={props.bot!} />
           <ProfileCommands
             botId={props.user.id}

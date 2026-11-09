@@ -75,8 +75,8 @@ export function once<T extends { id: string }>(
 }
 
 /**
- * Slash commands a bot's own description mentions. Discover has no public
- * command list, so this is what can honestly be shown: only the words the
+ * Slash commands a bot's own description mentions: the fallback when its
+ * registered commands cannot be read (an older server). Only the words the
  * owner wrote, and never pieces of an address.
  */
 export function commandsIn(description?: string, limit = 8) {
@@ -89,4 +89,45 @@ export function commandsIn(description?: string, limit = 8) {
     if (found.size === limit) break;
   }
   return [...found];
+}
+
+type RegisteredCommand = {
+  name: string;
+  description?: string;
+  description_localizations?: Record<string, string> | null;
+  type?: string;
+};
+
+/**
+ * The commands a bot's page lists: its registered global slash commands
+ * (`GET /bots/{id}/commands`), with the description in the reader's
+ * language. Only when that list could not be read (`undefined`) are the
+ * commands its description names shown instead, marked as such.
+ */
+export function listedCommands(
+  registered: RegisteredCommand[] | undefined,
+  description: string | undefined,
+  locale: string,
+):
+  | { source: "registered"; items: { name: string; description: string }[] }
+  | { source: "description"; items: { name: string }[] } {
+  if (!registered)
+    return {
+      source: "description",
+      items: commandsIn(description).map((name) => ({ name })),
+    };
+  const language = locale.split("-")[0];
+  return {
+    source: "registered",
+    items: registered
+      .filter((command) => (command.type ?? "ChatInput") === "ChatInput")
+      .map((command) => ({
+        name: command.name,
+        description:
+          command.description_localizations?.[locale] ??
+          command.description_localizations?.[language] ??
+          command.description ??
+          "",
+      })),
+  };
 }

@@ -3,13 +3,19 @@ import { describe, expect, it } from "vitest";
 import {
   commandsIn,
   findLocal,
+  listedCommands,
   mergeResults,
   normalise,
   once,
   score,
 } from "./find";
 
-const item = (id: string, name: string, description = "", tags: string[] = []) => ({
+const item = (
+  id: string,
+  name: string,
+  description = "",
+  tags: string[] = [],
+) => ({
   id,
   name,
   description,
@@ -96,5 +102,41 @@ describe("commands a bot's description mentions", () => {
 
   it("handles no description", () => {
     expect(commandsIn(undefined)).toEqual([]);
+  });
+});
+
+describe("listedCommands", () => {
+  const registered = [
+    { name: "play", description: "Play a song", type: "ChatInput" },
+    {
+      name: "skip",
+      description: "Skip",
+      description_localizations: { ar: "تخطَّ", de: "Überspringen" },
+      type: "ChatInput",
+    },
+    { name: "Report", description: "", type: "Message" },
+  ];
+
+  it("shows the bot's registered slash commands, not words from its description", () => {
+    const shown = listedCommands(registered, "Try /fake", "de");
+    expect(shown.source).toBe("registered");
+    expect(shown.items).toEqual([
+      { name: "play", description: "Play a song" },
+      { name: "skip", description: "Überspringen" },
+    ]);
+  });
+
+  it("an empty registered list means no commands, not a guess", () => {
+    expect(listedCommands([], "Use /play", "en")).toEqual({
+      source: "registered",
+      items: [],
+    });
+  });
+
+  it("falls back to the description only when the list could not be read", () => {
+    expect(listedCommands(undefined, "Use /play", "en")).toEqual({
+      source: "description",
+      items: [{ name: "play" }],
+    });
   });
 });
