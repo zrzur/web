@@ -176,6 +176,17 @@ export interface Problem {
 /** Characters as the server counts them (Unicode scalar values) */
 export const chars = (text: string) => [...text].length;
 
+/** At most `max` characters, never cutting one in half */
+export const clip = (text: string, max: number) =>
+  chars(text) > max ? [...text].slice(0, max).join("") : text;
+
+/**
+ * Rust's `str::trim`: Unicode White_Space only. JavaScript's `trim` also
+ * removes U+FEFF, which the server keeps (and accepts) in a name.
+ */
+export const rustTrim = (text: string) =>
+  text.replace(/^\p{White_Space}+|\p{White_Space}+$/gu, "");
+
 const RE_COMMAND_NAME = /^[\p{Ll}\p{Lm}\p{Lo}\p{M}\p{N}_-]+$/u;
 const RE_LOCALE = /^[a-z]{2,3}(-[A-Za-z0-9]{2,8})?$/;
 const RE_CONTROL = /\p{Cc}/u;
@@ -193,7 +204,7 @@ const checkMenuName: Check = (path, name, out) => {
   const length = chars(name);
   if (length === 0 || length > LIMITS.name)
     out.push({ path, rule: "nameLength", max: LIMITS.name });
-  else if (name.trim() !== name || RE_CONTROL.test(name))
+  else if (rustTrim(name) !== name || RE_CONTROL.test(name))
     out.push({ path, rule: "menuNameSpaces" });
 };
 
@@ -650,22 +661,22 @@ export function fromCommand(
 /** Localised texts that were typed; empty fields are left out */
 function filled(map: Localizations) {
   const entries = Object.entries(map)
-    .map(([locale, value]) => [locale, value.trim()] as const)
+    .map(([locale, value]) => [locale, rustTrim(value)] as const)
     .filter(([, value]) => value);
   return entries.length ? Object.fromEntries(entries) : undefined;
 }
 
 /** A number field: empty is "not set", anything else must be a number */
 function number(value: string) {
-  const trimmed = value.trim();
+  const trimmed = rustTrim(value);
   return trimmed === "" ? undefined : Number(trimmed);
 }
 
 function optionData(draft: OptionDraft): OptionData {
   const data: OptionData = {
     type: draft.type,
-    name: draft.name.trim(),
-    description: draft.description.trim(),
+    name: rustTrim(draft.name),
+    description: rustTrim(draft.description),
   };
   const names = filled(draft.name_localizations);
   if (names) data.name_localizations = names;
@@ -681,7 +692,7 @@ function optionData(draft: OptionDraft): OptionData {
     if (draft.choices.length)
       data.choices = draft.choices.map((choice) => {
         const out: ChoiceData = {
-          name: choice.name.trim(),
+          name: rustTrim(choice.name),
           value:
             draft.type === "String"
               ? choice.value
@@ -716,11 +727,11 @@ function optionData(draft: OptionDraft): OptionData {
  * switching the type in the form never leaves hidden values behind.
  */
 export function toData(draft: CommandDraft): CommandData {
-  const data: CommandData = { type: draft.type, name: draft.name.trim() };
+  const data: CommandData = { type: draft.type, name: rustTrim(draft.name) };
   const names = filled(draft.name_localizations);
   if (names) data.name_localizations = names;
   if (draft.type === "ChatInput") {
-    data.description = draft.description.trim();
+    data.description = rustTrim(draft.description);
     const descriptions = filled(draft.description_localizations);
     if (descriptions) data.description_localizations = descriptions;
     if (draft.options.length) data.options = draft.options.map(optionData);

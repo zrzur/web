@@ -119,5 +119,14 @@ if (
     for (const [name, value] of Object.entries(parts))
       writeFileSync(join(OUT, name), serialise(value));
     console.log(`wrote ${Object.keys(parts).length} parts to ${OUT}`);
+    // a section that no longer exists leaves its old file behind; this
+    // script never deletes: it names them and fails, a person moves them
+    const stale = readdirSync(OUT).filter((name) => !(name in parts));
+    if (stale.length) {
+      console.error(
+        `stale parts in ${OUT}, move them to internal/to-review: ${stale.join(", ")}`,
+      );
+      process.exit(1);
+    }
   }
 }

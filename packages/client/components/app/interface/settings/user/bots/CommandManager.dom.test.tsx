@@ -499,3 +499,40 @@ describe("saving against a list that changed", () => {
     );
   });
 });
+
+describe("leaving the editor", () => {
+  it("asks before Esc throws away changes", async () => {
+    mount();
+    button("New command").click();
+    type(field("Name"), "roll");
+    field("Name").dispatchEvent(
+      new KeyboardEvent("keydown", { key: "Escape", bubbles: true }),
+    );
+    // still editing, with a question
+    expect(field("Name").value).toBe("roll");
+    expect(document.body.textContent).toContain(
+      "Press Esc again to discard your changes.",
+    );
+    field("Name").dispatchEvent(
+      new KeyboardEvent("keydown", { key: "Escape", bubbles: true }),
+    );
+    expect(field("Name")).toBeUndefined();
+  });
+
+  it("leaves at once when nothing changed", () => {
+    mount();
+    button("New command").click();
+    field("Name").dispatchEvent(
+      new KeyboardEvent("keydown", { key: "Escape", bubbles: true }),
+    );
+    expect(field("Name")).toBeUndefined();
+  });
+
+  it("does not cut a name in the middle of a character", () => {
+    mount();
+    button("New command").click();
+    expect(field("Name").hasAttribute("maxlength")).toBe(false);
+    type(field("Name"), "😀".repeat(33));
+    expect(field("Name").value).toBe("😀".repeat(32));
+  });
+});

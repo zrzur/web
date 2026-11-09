@@ -1,11 +1,15 @@
 import { describe, expect, it } from "vitest";
 
+import { readFileSync } from "node:fs";
+import { join } from "node:path";
+
 import {
   type CommandData,
   type OptionData,
   LIMITS,
   blankCommand,
   blankOption,
+  clip,
   fromCommand,
   hasPermission,
   parseCommandList,
@@ -371,5 +375,28 @@ describe("parseCommandList", () => {
       ok: false,
       reason: "notCommand",
     });
+  });
+});
+
+describe("server parity details", () => {
+  it("treats U+FEFF as the server does: not a space, not a control", () => {
+    expect(validateCommand({ type: "User", name: "﻿Report" })).toEqual([]);
+    expect(
+      validateCommand({ type: "User", name: " Report" }).map((p) => p.rule),
+    ).toContain("menuNameSpaces");
+  });
+
+  it("clips typed text by characters, not UTF-16 units", () => {
+    expect(clip("😀".repeat(33), 32)).toBe("😀".repeat(32));
+    expect(clip("ب".repeat(10), 32)).toBe("ب".repeat(10));
+  });
+
+  it("lists the editor's keys in the shortcuts screen", () => {
+    const screen = readFileSync(
+      join(import.meta.dirname, "../Keybinds.tsx"),
+      "utf8",
+    );
+    expect(screen).toContain("Save a command");
+    expect(screen).toContain("Leave the command editor");
   });
 });

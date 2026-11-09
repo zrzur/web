@@ -39,6 +39,7 @@ import {
   blankChoice,
   blankCommand,
   blankOption,
+  clip,
   exportCommands,
   fromCommand,
   hasPermission,
@@ -52,6 +53,16 @@ import {
   togglePermission,
   validateCommandSet,
 } from "./commandForm";
+
+/**
+ * Text typed into a field, cut at `max` characters as the server counts
+ * them (a native maxlength counts UTF-16 units and splits an emoji)
+ */
+function clipInput(event: { currentTarget: HTMLInputElement }, max: number) {
+  const value = clip(event.currentTarget.value, max);
+  if (value !== event.currentTarget.value) event.currentTarget.value = value;
+  return value;
+}
 
 export type PermissionNames = readonly (readonly [number, string])[];
 
@@ -399,7 +410,13 @@ function CommandEditor(props: {
   const types = useCommandTypeNames();
   const problemText = useProblemText();
   // the editor starts from a copy of the command
+  // what the command was when the editor opened, to tell if it changed
+  // eslint-disable-next-line solid/reactivity -- read once, on purpose
+  const opened = JSON.stringify(toData(props.initial));
   const [draft, setDraft] = createStore<CommandDraft>(props.initial);
+  const dirty = () => JSON.stringify(toData(draft)) !== opened;
+  // Esc on a changed command asks first; a second Esc leaves
+  const [leaving, setLeaving] = createSignal(false);
   const [tried, setTried] = createSignal(false);
   const [busy, setBusy] = createSignal(false);
   const [error, setError] = createSignal<unknown>();
@@ -480,8 +497,9 @@ function CommandEditor(props: {
           void save();
         } else if (event.key === "Escape" && !event.defaultPrevented) {
           event.preventDefault();
-          props.onCancel();
-        }
+          if (dirty() && !leaving()) setLeaving(true);
+          else props.onCancel();
+        } else if (event.key !== "Shift") setLeaving(false);
       }}
     >
       <Head>
@@ -526,9 +544,8 @@ function CommandEditor(props: {
           <TextField
             label={t`Name`}
             value={draft.name}
-            maxlength={LIMITS.name}
             autoFocus
-            onInput={(e) => setDraft("name", e.currentTarget.value)}
+            onInput={(e) => setDraft("name", clipInput(e, LIMITS.name))}
             error={errorAt("name")}
             helper={
               draft.type === "ChatInput"
@@ -540,8 +557,9 @@ function CommandEditor(props: {
             <TextField
               label={t`Description`}
               value={draft.description}
-              maxlength={LIMITS.description}
-              onInput={(e) => setDraft("description", e.currentTarget.value)}
+              onInput={(e) =>
+                setDraft("description", clipInput(e, LIMITS.description))
+              }
               error={errorAt("description")}
             />
           </Show>
@@ -642,6 +660,11 @@ function CommandEditor(props: {
           </ul>
         </ErrorBox>
       </Show>
+      <Show when={leaving()}>
+        <ErrorBox role="alert">
+          <Trans>Press Esc again to discard your changes.</Trans>
+        </ErrorBox>
+      </Show>
       <Show when={changed()}>
         <ErrorBox role="alert">
           <Trans>
@@ -707,8 +730,7 @@ function Localized(props: {
             <TextField
               label={`${languages()[locale]}: ${t`name`}`}
               value={props.names[locale] ?? ""}
-              maxlength={LIMITS.name}
-              onInput={(e) => props.onName(locale, e.currentTarget.value)}
+              onInput={(e) => props.onName(locale, clipInput(e, LIMITS.name))}
               error={props.errorAt("name_localizations", locale)}
             />
             <Show when={props.descriptions}>
@@ -716,9 +738,11 @@ function Localized(props: {
                 <TextField
                   label={`${languages()[locale]}: ${t`description`}`}
                   value={descriptions()[locale] ?? ""}
-                  maxlength={LIMITS.description}
                   onInput={(e) =>
-                    props.onDescription(locale, e.currentTarget.value)
+                    props.onDescription(
+                      locale,
+                      clipInput(e, LIMITS.description),
+                    )
                   }
                   error={props.errorAt("description_localizations", locale)}
                 />
@@ -873,9 +897,8 @@ function OptionEditor(props: {
         <TextField
           label={t`Option name`}
           value={props.option.name}
-          maxlength={LIMITS.name}
           onInput={(e) => {
-            const value = e.currentTarget.value;
+            const value = clipInput(e, LIMITS.name);
             set((o) => {
               o.name = value;
             });
@@ -885,9 +908,8 @@ function OptionEditor(props: {
         <TextField
           label={t`Option description`}
           value={props.option.description}
-          maxlength={LIMITS.description}
           onInput={(e) => {
-            const value = e.currentTarget.value;
+            const value = clipInput(e, LIMITS.description);
             set((o) => {
               o.description = value;
             });
@@ -1073,9 +1095,8 @@ function Choices(props: {
             <TextField
               label={t`Shown as`}
               value={choice.name}
-              maxlength={LIMITS.choiceName}
               onInput={(e) => {
-                const value = e.currentTarget.value;
+                const value = clipInput(e, LIMITS.choiceName);
                 props.set((o) => {
                   o.choices[index()].name = value;
                 });
@@ -1085,10 +1106,9 @@ function Choices(props: {
             <TextField
               label={t`Value sent to the bot`}
               value={choice.value}
-              maxlength={LIMITS.choiceValue}
               dir="ltr"
               onInput={(e) => {
-                const value = e.currentTarget.value;
+                const value = clipInput(e, LIMITS.choiceValue);
                 props.set((o) => {
                   o.choices[index()].value = value;
                 });
