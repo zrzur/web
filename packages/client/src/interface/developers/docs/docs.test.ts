@@ -75,6 +75,26 @@ describe("Inventory parts", () => {
       ).toBe(JSON.stringify(value) + "\n");
   });
 
+  it("has shell examples that run when pasted (no literal \\n, no lost \\)", () => {
+    const shells = PAGES.flatMap((page) =>
+      [
+        page.source,
+        translatedSource(page.id, "ar"),
+        translatedSource(page.id, "de"),
+      ].flatMap((source) =>
+        codeBlocksOf(source ?? "")
+          .filter((block) => ["bash", "sh", "shell"].includes(block.lang))
+          .map((block) => ({ page: page.id, code: block.value })),
+      ),
+    );
+    expect(shells.length).toBeGreaterThan(10);
+    for (const { page, code } of shells) {
+      expect(code, `${page}: literal \\n`).not.toMatch(/\\n/);
+      // a continuation lost on the way leaves "   -H" inside one line
+      expect(code, `${page}: lost line break`).not.toMatch(/\S {3,}-[A-Za-z]/);
+    }
+  });
+
   it("a page loads only the parts its blocks show", () => {
     expect(partsForMarkdown("# Hi\n\nText only.")).toEqual([]);
     expect(

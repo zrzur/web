@@ -94,7 +94,8 @@ The answer is a list of messages. With `include_users=true` it is an object inst
 To catch up after a reconnect, ask for `after` your last message with `sort=Oldest`: you get the next messages in order. With the default order you would get the newest ones, and a gap would stay in the middle. Repeat with the id of the last message you got until fewer than `limit` come back.
 
 ```bash
-curl "https://api.zrzur.com/channels/CHANNEL_ID/messages?after=LAST_SEEN_ID&sort=Oldest&limit=100"   -H "x-bot-token: YOUR_BOT_TOKEN"
+curl "https://api.zrzur.com/channels/CHANNEL_ID/messages?after=LAST_SEEN_ID&sort=Oldest&limit=100" \
+  -H "x-bot-token: YOUR_BOT_TOKEN"
 ```
 
 Text search is for people only; bots get `IsBot`, because it would let them read what their intents hide. Bots can list pinned messages (see [Pins and reactions](/developers/docs/messages#pins-and-reactions)). The mentions inbox is for people only too.

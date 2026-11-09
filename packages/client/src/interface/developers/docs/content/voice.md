@@ -18,7 +18,10 @@ Zrzur voice runs on LiveKit. The API hands out tickets; the audio itself goes th
 Ask for a ticket over plain HTTP:
 
 ```bash
-curl -X POST "https://api.zrzur.com/channels/CHANNEL_ID/join_call" \n  -H "x-bot-token: YOUR_BOT_TOKEN" \n  -H "content-type: application/json" \n  -d '{}'
+curl -X POST "https://api.zrzur.com/channels/CHANNEL_ID/join_call" \
+  -H "x-bot-token: YOUR_BOT_TOKEN" \
+  -H "content-type: application/json" \
+  -d '{}'
 # answer: { "token": "LIVEKIT_TOKEN", "url": "wss://voice.zrzur.com" }
 ```
 
