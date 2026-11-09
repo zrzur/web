@@ -85,19 +85,35 @@ export function PrivilegedIntents(props: {
       : current | intent.bit;
     try {
       await props.save(intended);
-      // read it back: the screen shows what is stored, not what was sent
+    } catch (err) {
+      setError(err);
+      setSaving(undefined);
+      return;
+    }
+    // read it back: the screen shows what is stored, not what was sent
+    await readBack(intent);
+    setSaving(undefined);
+  }
+
+  // saved, but the read-back failed: the switches wait for a new read
+  const [unread, setUnread] = createSignal<{
+    error: unknown;
+    intent?: (typeof INTENTS)[number];
+  }>();
+  async function readBack(intent?: (typeof INTENTS)[number]) {
+    setUnread(undefined);
+    try {
       const value = await props.load();
       setIntents(value);
       props.onChange?.(value);
-      setSaved(
-        (value & intent.bit) !== 0
-          ? t`Saved: ${intent.title()} is on. It counts from the bot's next connection.`
-          : t`Saved: ${intent.title()} is off. It counts from the bot's next connection.`,
-      );
+      if (intent)
+        setSaved(
+          (value & intent.bit) !== 0
+            ? t`Saved: ${intent.title()} is on. It counts from the bot's next connection.`
+            : t`Saved: ${intent.title()} is off. It counts from the bot's next connection.`,
+        );
     } catch (err) {
-      setError(err);
-    } finally {
-      setSaving(undefined);
+      setUnread({ error: err, intent });
     }
   }
 
@@ -151,7 +167,11 @@ export function PrivilegedIntents(props: {
               control={(ids) => (
                 <Toggle
                   checked={isOn(intent.bit)}
-                  disabled={intents() === undefined || saving() !== undefined}
+                  disabled={
+                    intents() === undefined ||
+                    saving() !== undefined ||
+                    !!unread()
+                  }
                   onChange={() => void flip(intent)}
                   aria-labelledby={ids.labelId}
                   aria-describedby={ids.descriptionId}
@@ -163,6 +183,23 @@ export function PrivilegedIntents(props: {
       </Show>
       <Show when={saved()}>
         <Status role="status">{saved()}</Status>
+      </Show>
+      <Show when={unread()}>
+        {(state) => (
+          <Status role="alert" data-error>
+            <Trans>
+              Saved, but couldn't read it back. The switches may be out of date.
+            </Trans>{" "}
+            <TranslatedError error={state().error} />{" "}
+            <Button
+              size="sm"
+              variant="tonal"
+              onPress={() => void readBack(state().intent)}
+            >
+              <Trans>Try again</Trans>
+            </Button>
+          </Status>
+        )}
       </Show>
       <Show when={error()}>
         <Status role="alert" data-error>

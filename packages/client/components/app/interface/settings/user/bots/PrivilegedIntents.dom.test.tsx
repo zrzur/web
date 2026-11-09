@@ -155,6 +155,34 @@ describe("privileged intents", () => {
     expect(switches()[0].getAttribute("aria-checked")).toBe("true");
   });
 
+  it("says when the save worked but reading it back failed", async () => {
+    let stored = 0;
+    let readFails = false;
+    mount(
+      async () => {
+        if (readFails) throw { type: "InternalError" };
+        return stored;
+      },
+      async (n) => (stored = n),
+    );
+    await tick();
+    readFails = true;
+    switches()[0].click();
+    await tick();
+    await tick();
+    expect(document.querySelector('[role="alert"]')?.textContent).toContain(
+      "Saved, but couldn't read it back.",
+    );
+    // not "Not saved": the save went through
+    expect(document.body.textContent).not.toContain("Not saved.");
+    readFails = false;
+    [...document.querySelectorAll("button")]
+      .find((b) => b.textContent === "Try again")!
+      .click();
+    await tick();
+    expect(switches()[0].getAttribute("aria-checked")).toBe("true");
+  });
+
   it("keeps the switch on the saved value when saving fails", async () => {
     mount(
       async () => 0,
