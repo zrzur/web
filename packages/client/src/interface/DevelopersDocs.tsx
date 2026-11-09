@@ -1,6 +1,7 @@
 import { Trans } from "@lingui/solid/macro";
 import { styled } from "styled-system/jsx";
 
+import { Titlebar } from "@revolt/app/interface/desktop/Titlebar";
 import { LanguageSwitch } from "@revolt/app/interface/discover/SiteFrame";
 import { useLocation } from "@revolt/routing";
 import { Header } from "@revolt/ui";
@@ -9,10 +10,11 @@ import { Icon } from "@revolt/ui/icons/Icon";
 import { DocsPortal } from "./developers/docs/DocsPortal";
 
 /**
- * The developer documentation for visitors: no account and no chat client,
- * because a developer reads it before signing up. People who are signed in
- * read the same pages inside the app. A link can ask for a language with
- * `?hl=ar`, as everywhere else.
+ * The developer documentation, for everyone: it never waits for the chat
+ * client or the gateway, so a direct link or a reload shows the page at
+ * once, signed in or not (its route sits outside the app interface, see
+ * index.tsx). A link can ask for a language with `?hl=ar`, as everywhere
+ * else.
  */
 export function DevelopersDocs() {
   const location = useLocation();
@@ -20,6 +22,8 @@ export function DevelopersDocs() {
 
   return (
     <Base>
+      {/* window controls in the desktop app; nothing on the web */}
+      <Titlebar bare />
       <Header placement="primary">
         <Brand>
           <Icon name="code" size={22} />

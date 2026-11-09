@@ -27,7 +27,6 @@ import { Icon } from "@revolt/ui/icons/Icon";
 
 import { usePermissionNames } from "./OAuth";
 import { HeaderIcon } from "./common/CommonHeader";
-import { DocsPortal } from "./developers/docs/DocsPortal";
 
 const TABS = ["overview", "commands", "oauth2"] as const;
 type Tab = (typeof TABS)[number];
@@ -74,184 +73,178 @@ export function Developers() {
           <Trans>Developer Portal</Trans>
         </Title>
       </Header>
-      <Show
-        when={selectedId() !== "docs"}
-        fallback={<DocsPortal page={segments()[3]} />}
-      >
-        {/* one column, like Designs: the home sidebar stays the only one */}
-        <Main>
-          <Page>
-            <Switch>
-              <Match when={bots.loading}>
-                <Muted>
-                  <Trans>Loading…</Trans>
-                </Muted>
-              </Match>
-              <Match when={!selected()}>
-                <Intro>
-                  <h1>
-                    <Trans>Build bots for Zrzur</Trans>
-                  </h1>
-                  <p>
+      {/* /developers/docs has its own route outside the app (index.tsx) */}
+      {/* one column, like Designs: the home sidebar stays the only one */}
+      <Main>
+        <Page>
+          <Switch>
+            <Match when={bots.loading}>
+              <Muted>
+                <Trans>Loading…</Trans>
+              </Muted>
+            </Match>
+            <Match when={!selected()}>
+              <Intro>
+                <h1>
+                  <Trans>Build bots for Zrzur</Trans>
+                </h1>
+                <p>
+                  <Trans>
+                    An application is a bot account. Create one, register slash
+                    commands, and answer them with buttons, menus, forms and
+                    private replies.
+                  </Trans>
+                </p>
+              </Intro>
+
+              <DocsCard
+                href="/developers/docs"
+                onClick={(event) => {
+                  event.preventDefault();
+                  navigate("/developers/docs");
+                }}
+              >
+                <Icon name="books" size={24} />
+                <span>
+                  <strong>
+                    <Trans>Documentation</Trans>
+                  </strong>
+                  <Muted>
                     <Trans>
-                      An application is a bot account. Create one, register
-                      slash commands, and answer them with buttons, menus, forms
-                      and private replies.
+                      Guides, tutorials and the full Bot API reference.
                     </Trans>
-                  </p>
-                </Intro>
+                  </Muted>
+                </span>
+                <Icon name="caret-right" size={16} class="end" />
+              </DocsCard>
 
-                <DocsCard
-                  href="/developers/docs"
-                  onClick={(event) => {
-                    event.preventDefault();
-                    navigate("/developers/docs");
-                  }}
-                >
-                  <Icon name="books" size={24} />
-                  <span>
-                    <strong>
-                      <Trans>Documentation</Trans>
-                    </strong>
-                    <Muted>
-                      <Trans>
-                        Guides, tutorials and the full Bot API reference.
-                      </Trans>
-                    </Muted>
-                  </span>
-                  <Icon name="caret-right" size={16} class="end" />
-                </DocsCard>
-
-                <SectionHead>
-                  <h2>
-                    <Trans>My applications</Trans>
-                  </h2>
-                  <PrimaryButton
-                    type="button"
-                    onClick={() =>
-                      openModal({
-                        type: "create_bot",
-                        client: client(),
-                        onCreate: (bot) => {
-                          refetch();
-                          navigate(`/developers/${bot.id}`);
-                        },
-                      })
-                    }
-                  >
-                    <Icon name="plus" size={16} />
-                    <Trans>New application</Trans>
-                  </PrimaryButton>
-                </SectionHead>
-                <Show
-                  when={bots()?.length}
-                  fallback={
-                    <Muted>
-                      <Trans>
-                        No applications yet. Create one to get a bot account and
-                        its token.
-                      </Trans>
-                    </Muted>
+              <SectionHead>
+                <h2>
+                  <Trans>My applications</Trans>
+                </h2>
+                <PrimaryButton
+                  type="button"
+                  onClick={() =>
+                    openModal({
+                      type: "create_bot",
+                      client: client(),
+                      onCreate: (bot) => {
+                        refetch();
+                        navigate(`/developers/${bot.id}`);
+                      },
+                    })
                   }
                 >
-                  <AppGrid>
-                    <For each={bots()}>
-                      {(bot) => (
-                        <AppCard
-                          href={`/developers/${bot.id}`}
-                          onClick={(event) => {
-                            event.preventDefault();
-                            navigate(`/developers/${bot.id}`);
-                          }}
+                  <Icon name="plus" size={16} />
+                  <Trans>New application</Trans>
+                </PrimaryButton>
+              </SectionHead>
+              <Show
+                when={bots()?.length}
+                fallback={
+                  <Muted>
+                    <Trans>
+                      No applications yet. Create one to get a bot account and
+                      its token.
+                    </Trans>
+                  </Muted>
+                }
+              >
+                <AppGrid>
+                  <For each={bots()}>
+                    {(bot) => (
+                      <AppCard
+                        href={`/developers/${bot.id}`}
+                        onClick={(event) => {
+                          event.preventDefault();
+                          navigate(`/developers/${bot.id}`);
+                        }}
+                      >
+                        <Avatar
+                          size={40}
+                          src={bot.user?.animatedAvatarURL}
+                          fallback={bot.user?.username}
+                        />
+                        <span>
+                          <strong>
+                            {bot.user?.displayName ?? bot.user?.username}
+                          </strong>
+                          <Muted>
+                            {bot.public
+                              ? t`Public application`
+                              : t`Private application`}
+                          </Muted>
+                        </span>
+                      </AppCard>
+                    )}
+                  </For>
+                </AppGrid>
+              </Show>
+            </Match>
+            <Match when={selected()}>
+              {(bot) => (
+                <>
+                  <BackButton
+                    type="button"
+                    onClick={() => navigate("/developers")}
+                  >
+                    <Icon name="caret-left" size={16} />
+                    <Trans>My applications</Trans>
+                  </BackButton>
+                  <AppHeader>
+                    <Avatar
+                      size={48}
+                      src={bot().user?.animatedAvatarURL}
+                      fallback={bot().user?.username}
+                    />
+                    <div>
+                      <h2>{bot().user?.displayName ?? bot().user?.username}</h2>
+                      <Muted>
+                        {bot().public
+                          ? t`Public application`
+                          : t`Private application`}
+                      </Muted>
+                    </div>
+                  </AppHeader>
+                  <Tabs role="tablist">
+                    <For each={tabs()}>
+                      {(item) => (
+                        <TabButton
+                          role="tab"
+                          type="button"
+                          aria-selected={tab() === item.id}
+                          onClick={() =>
+                            navigate(`/developers/${bot().id}/${item.id}`)
+                          }
                         >
-                          <Avatar
-                            size={40}
-                            src={bot.user?.animatedAvatarURL}
-                            fallback={bot.user?.username}
-                          />
-                          <span>
-                            <strong>
-                              {bot.user?.displayName ?? bot.user?.username}
-                            </strong>
-                            <Muted>
-                              {bot.public
-                                ? t`Public application`
-                                : t`Private application`}
-                            </Muted>
-                          </span>
-                        </AppCard>
+                          {item.label}
+                        </TabButton>
                       )}
                     </For>
-                  </AppGrid>
-                </Show>
-              </Match>
-              <Match when={selected()}>
-                {(bot) => (
-                  <>
-                    <BackButton
-                      type="button"
-                      onClick={() => navigate("/developers")}
-                    >
-                      <Icon name="caret-left" size={16} />
-                      <Trans>My applications</Trans>
-                    </BackButton>
-                    <AppHeader>
-                      <Avatar
-                        size={48}
-                        src={bot().user?.animatedAvatarURL}
-                        fallback={bot().user?.username}
+                  </Tabs>
+                  <Switch>
+                    <Match when={tab() === "overview"}>
+                      <ViewBot
+                        bot={bot()}
+                        onDelete={() => {
+                          refetch();
+                          navigate("/developers");
+                        }}
                       />
-                      <div>
-                        <h2>
-                          {bot().user?.displayName ?? bot().user?.username}
-                        </h2>
-                        <Muted>
-                          {bot().public
-                            ? t`Public application`
-                            : t`Private application`}
-                        </Muted>
-                      </div>
-                    </AppHeader>
-                    <Tabs role="tablist">
-                      <For each={tabs()}>
-                        {(item) => (
-                          <TabButton
-                            role="tab"
-                            type="button"
-                            aria-selected={tab() === item.id}
-                            onClick={() =>
-                              navigate(`/developers/${bot().id}/${item.id}`)
-                            }
-                          >
-                            {item.label}
-                          </TabButton>
-                        )}
-                      </For>
-                    </Tabs>
-                    <Switch>
-                      <Match when={tab() === "overview"}>
-                        <ViewBot
-                          bot={bot()}
-                          onDelete={() => {
-                            refetch();
-                            navigate("/developers");
-                          }}
-                        />
-                      </Match>
-                      <Match when={tab() === "commands"}>
-                        <Commands bot={bot()} />
-                      </Match>
-                      <Match when={tab() === "oauth2"}>
-                        <OAuth2 bot={bot()} />
-                      </Match>
-                    </Switch>
-                  </>
-                )}
-              </Match>
-            </Switch>
-          </Page>
-        </Main>
-      </Show>
+                    </Match>
+                    <Match when={tab() === "commands"}>
+                      <Commands bot={bot()} />
+                    </Match>
+                    <Match when={tab() === "oauth2"}>
+                      <OAuth2 bot={bot()} />
+                    </Match>
+                  </Switch>
+                </>
+              )}
+            </Match>
+          </Switch>
+        </Page>
+      </Main>
     </Base>
   );
 }

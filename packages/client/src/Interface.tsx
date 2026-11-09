@@ -2,7 +2,6 @@ import {
   createEffect,
   createSignal,
   JSX,
-  lazy,
   Match,
   on,
   onCleanup,
@@ -21,8 +20,8 @@ import { NoticeCenter } from "@revolt/app/interface/support/NoticeCenter";
 import { useClient, useClientLifecycle } from "@revolt/client";
 import { State } from "@revolt/client/Controller";
 import { NotificationsWorker } from "@revolt/client/NotificationsWorker";
-import { PluginHostGate } from "@revolt/plugins/PluginHostGate";
 import { useModals } from "@revolt/modal";
+import { PluginHostGate } from "@revolt/plugins/PluginHostGate";
 import { Navigate, useBeforeLeave, useLocation } from "@revolt/routing";
 import { useState } from "@revolt/state";
 import { LAYOUT_SECTIONS } from "@revolt/state/stores/Layout";
@@ -36,12 +35,6 @@ import { NEXT_SCREENS, preloadWhenIdle } from "./interface/idlePreload";
 
 /** Longest wait for unread state before Home draws without it */
 const UNREADS_WAIT = 800;
-
-const DevelopersDocs = lazy(() =>
-  import("./interface/DevelopersDocs").then((m) => ({
-    default: m.DevelopersDocs,
-  })),
-);
 
 /**
  * Application layout
@@ -161,14 +154,7 @@ const Interface = (props: { children?: JSX.Element }) => {
       <AppRoot ref={rootRef} class="app_root">
         <Titlebar />
         <Switch fallback={<FirstScreen />}>
-          {/* the developer docs are open to everyone */}
-          <Match
-            when={
-              !isLoggedIn() && /\/developers\/docs(\/|$)/.test(location.pathname)
-            }
-          >
-            <DevelopersDocs />
-          </Match>
+          {/* the developer docs have their own route (index.tsx) */}
           <Match when={!isLoggedIn()}>
             <Navigate href="/login" />
           </Match>
