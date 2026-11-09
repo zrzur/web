@@ -754,8 +754,8 @@
     },
     {
       "path": "packages/client/components/app/interface/channels/text/interactions/CommandPicker.tsx",
-      "sha256": "c706a08346ff162f20af24a830b5ac1328b777f58604d5da1a5e3772ae4caa9d",
-      "bytes": 41990,
+      "sha256": "7696e9db9b7701e8ef67ee5b32081c55d798fac90e2928c6e5c7d85bdbb0ea2a",
+      "bytes": 43907,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -808,14 +808,14 @@
     },
     {
       "path": "packages/client/components/app/interface/channels/text/interactions/ephemeralStorage.test.ts",
-      "sha256": "14f0ed364c53da18076295df7dd4b089f90479f00e4b55dc9f2b60752c38fb3d",
-      "bytes": 1358,
+      "sha256": "10678a16ca6f8e5255b64aa40e92cdc52b66030a3da7d0da0f06fe55874ff767",
+      "bytes": 2818,
       "category": "synthetic-test-source-or-fixture"
     },
     {
       "path": "packages/client/components/app/interface/channels/text/interactions/ephemeralStorage.ts",
-      "sha256": "0590c904f8c754516bde978ce7eb8cd1dd018ac391ae8f726e90ac95e6a1d2e7",
-      "bytes": 1670,
+      "sha256": "f9057f17691b6cfcdff986eb047c90be0bf3f38f96f9baf03709a0f89315057a",
+      "bytes": 3077,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -844,14 +844,14 @@
     },
     {
       "path": "packages/client/components/app/interface/channels/text/interactions/store.test.ts",
-      "sha256": "42a7f8cf4e848fc0922dbdbb88d74d9b0e4e370c0d900152b8ce0c786f092e09",
-      "bytes": 4564,
+      "sha256": "7930e2897719f7ba3d58ca515b16b7715bb60560a9c0bc515efdc2a93848b121",
+      "bytes": 5503,
       "category": "synthetic-test-source-or-fixture"
     },
     {
       "path": "packages/client/components/app/interface/channels/text/interactions/store.ts",
-      "sha256": "2ba1d3382cb2add04ca1e66d4214e303b57d881a52bb7ee9a4f4ac3fa3296b94",
-      "bytes": 16744,
+      "sha256": "658707f51ac18041932f5c0a20cba5da3e34055891e4f7371980e9af36333776",
+      "bytes": 17333,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -1288,20 +1288,20 @@
     },
     {
       "path": "packages/client/components/app/interface/settings/server/apps/RulesEditor.tsx",
-      "sha256": "4ad19a8ce8f0f1caf586ff921969736042476353bce7bb0a45ffd66c9756b997",
-      "bytes": 8525,
+      "sha256": "1a5bfc932ed62e4ef2d4f429ce1e8d24acf98dd14c15d2d256bff51b3f057229",
+      "bytes": 9391,
       "category": "product-source-or-build-manifest"
     },
     {
       "path": "packages/client/components/app/interface/settings/server/apps/ServerAppPage.tsx",
-      "sha256": "0377f34fb741bf2209b2bab608d0cbf74023444234244042809af6b539d9e1e1",
-      "bytes": 12763,
+      "sha256": "91f9162ce9fb46cbdd8159cf7334d8d134c49c4edb86b29fee8d4b56aececf06",
+      "bytes": 14358,
       "category": "product-source-or-build-manifest"
     },
     {
       "path": "packages/client/components/app/interface/settings/server/apps/api.ts",
-      "sha256": "8b27de3b89569cbed2947b12b4e95865c377ae2ba7c109ca69eb9ba06a03643a",
-      "bytes": 1489,
+      "sha256": "88467bd6d1a9db2af2c15eb9d607f05772b49cc611c061c9bb046f259f7f5df1",
+      "bytes": 1778,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -1666,8 +1666,8 @@
     },
     {
       "path": "packages/client/components/app/interface/settings/user/Keybinds.tsx",
-      "sha256": "2cfd84421fe2463a86eda59484e4de28fd195e38e544e3a808c9fa2f2585d730",
-      "bytes": 5506,
+      "sha256": "cdea944d430bcb0e4845cb97bc0f582802f3d4b3f0827820b59810a4828f97a1",
+      "bytes": 6255,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -2356,8 +2356,8 @@
     },
     {
       "path": "packages/client/components/client/Controller.ts",
-      "sha256": "7f754591f32173ea602edc465e452d92869c9a750262edb4c7686905d6e44ead",
-      "bytes": 20273,
+      "sha256": "8fe66b7bc030e4cdc59911eded7be53985c5857bec79e6222ef308e773a8f2c2",
+      "bytes": 20518,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -2644,8 +2644,8 @@
     },
     {
       "path": "packages/client/components/i18n/catalogs/ar/messages.po",
-      "sha256": "3483c3ca64a592d72e00d3d0254af0b56d95c5aae31961d28549d545366ff320",
-      "bytes": 858715,
+      "sha256": "3b85597cf2d422bdd704f503cfaf787aa65abd426b497582b86ffa3dace1d579",
+      "bytes": 861004,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -2788,8 +2788,8 @@
     },
     {
       "path": "packages/client/components/i18n/catalogs/de/messages.po",
-      "sha256": "225891e20a18bbfa847809983864ba5b061f8da7a4ac9c08fad947bd4cf53bdd",
-      "bytes": 790359,
+      "sha256": "acbdc19016258a98529ecb825136d9639e178024d1276c618915dcc23e3dc607",
+      "bytes": 792512,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -2824,8 +2824,8 @@
     },
     {
       "path": "packages/client/components/i18n/catalogs/en/messages.po",
-      "sha256": "e442fc7405110ea689ed9f4ad660935602c80970fce2d4b0c4f768b362458d8a",
-      "bytes": 771023,
+      "sha256": "4f2d35ae45e81f6e99b8787ad5e0447a9805e0eb75f22b77a96f932fd98d0463",
+      "bytes": 773059,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -2848,8 +2848,8 @@
     },
     {
       "path": "packages/client/components/i18n/catalogs/es/messages.po",
-      "sha256": "54a9008e9405af6e8bb4dde0708cbc2d62f86ddfd6a3ddb7a95b4a7bb70e3f62",
-      "bytes": 572285,
+      "sha256": "55b1affcf8351c596fb8b7c48aeb60fdad6d51992f71d0fb65f8763e5b6f157c",
+      "bytes": 575388,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -2908,8 +2908,8 @@
     },
     {
       "path": "packages/client/components/i18n/catalogs/fr/messages.po",
-      "sha256": "6d4e4f89d71c8df6db6e9bef4b29fc6d8477f6bd4d072a2a6a3eec46b013b116",
-      "bytes": 575230,
+      "sha256": "1449b6d6cac3b0493aa70bbb46a94d02aa7458b331fbe1d81b4281a3fc00a40c",
+      "bytes": 578522,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -3172,8 +3172,8 @@
     },
     {
       "path": "packages/client/components/i18n/catalogs/ru/messages.po",
-      "sha256": "ec882930f1746696bf9038326c58a5812935678523a1576da7d83a676dc321e0",
-      "bytes": 589603,
+      "sha256": "d50ae1ce031e3d909b1666bc5272fa589ca88076cefb82bdf2f8999a06858f88",
+      "bytes": 593744,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -3340,8 +3340,8 @@
     },
     {
       "path": "packages/client/components/i18n/catalogs/zh-Hans/messages.po",
-      "sha256": "e2035d3a25c93fe45221f32a05d760ed962ccf83e909c2165e96b09cf4f47f2d",
-      "bytes": 555380,
+      "sha256": "0893309aa18fb05191152324dc5e9a41bdd626b40837bb18ed9bb997dc07a35b",
+      "bytes": 558289,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -3778,8 +3778,8 @@
     },
     {
       "path": "packages/client/components/modal/modals/AddBot.tsx",
-      "sha256": "b572e374220dad34abd865cf1bb131ac14f22372bc75e5bd806a1de332232b6f",
-      "bytes": 13203,
+      "sha256": "df10677c0c8db5ce8767d772818e805f8833096755c77ea63f197a0ae0e9ce73",
+      "bytes": 12799,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -4228,14 +4228,14 @@
     },
     {
       "path": "packages/client/components/modal/modals/addBotPermissions.test.ts",
-      "sha256": "de1d8b80358ea3399ac436cc2794a6adc4106ab066d2213d120014348fbc3c90",
-      "bytes": 1880,
+      "sha256": "98ffdf9ecbb902a4d28124eb4fa03521d197c557416c0e4648d40d71f7d93dc2",
+      "bytes": 2821,
       "category": "synthetic-test-source-or-fixture"
     },
     {
       "path": "packages/client/components/modal/modals/addBotPermissions.ts",
-      "sha256": "1d8740accb1cfa95b56a10770b3564c1a1fc4ee7778e955829315c4e54c68063",
-      "bytes": 1127,
+      "sha256": "b26a42bdacd1f2dee6af7683704ac8f1b558feb4351d2ef755929a151d76f759",
+      "bytes": 2786,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -4302,6 +4302,12 @@
       "path": "packages/client/components/modal/modals/openableUrl.ts",
       "sha256": "1b623473e77bae1a0948ba3572b264c335ad70aee84ea2dd4e4636b4d1ea3430",
       "bytes": 470,
+      "category": "product-source-or-build-manifest"
+    },
+    {
+      "path": "packages/client/components/modal/modals/permissionTitles.ts",
+      "sha256": "662246070d682349a425f14a09cc66537102d4a54e24be165d8e16eb8d01f5e5",
+      "bytes": 1686,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -37588,8 +37594,8 @@
     },
     {
       "path": "packages/client/scripts/i18n/ui-110920.json",
-      "sha256": "363683241044d7bdfa5d2688fe7042530e12206a4649be3c40dee42b49d52cba",
-      "bytes": 18429,
+      "sha256": "111785c99ffc2b698dd743428b0a94a4a92b99db98ca62fa92a6b2b368d0de87",
+      "bytes": 32097,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -40386,7 +40392,7 @@
   "submodules": [
     {
       "path": "packages/stoat.js",
-      "commit": "8ef796eab64b6639e64608ed4512baef313a770c"
+      "commit": "cc10a5fc1612f5a0d1031d255a5d928e59c9dfb9"
     }
   ]
 }
