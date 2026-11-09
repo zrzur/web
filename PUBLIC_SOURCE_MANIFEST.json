@@ -292,8 +292,8 @@
     },
     {
       "path": "CHANGELOG.md",
-      "sha256": "add0a45d68320128fdea0af83e7314ea33c0065bd2f8b766221a31b81330946f",
-      "bytes": 96002,
+      "sha256": "f9e5488b681ace7fda717ed96db4156a9b7a9f5b3f84dcc5d0849168082701b5",
+      "bytes": 96524,
       "category": "public-documentation"
     },
     {
@@ -729,9 +729,15 @@
       "category": "product-source-or-build-manifest"
     },
     {
+      "path": "packages/client/components/app/interface/channels/text/ForwardedFrame.tsx",
+      "sha256": "f450844e632b8ce5586ea4ce3238266377ba0243d3b853bcb3fed997cbba586d",
+      "bytes": 3431,
+      "category": "product-source-or-build-manifest"
+    },
+    {
       "path": "packages/client/components/app/interface/channels/text/Message.tsx",
-      "sha256": "5fec07bdfa02b947d4e77501efc3d28372788ac333f548873047f300556cc853",
-      "bytes": 16546,
+      "sha256": "66ac6a79156e95ced9d110266a926d37fe8deb1f0aa819a5aa8aff607ca201fd",
+      "bytes": 16741,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -742,14 +748,26 @@
     },
     {
       "path": "packages/client/components/app/interface/channels/text/Messages.tsx",
-      "sha256": "064070335682e98c45b2fc57e880d9211169ec3c709998ef8a567641724e8bd7",
-      "bytes": 31309,
+      "sha256": "234b48873896d6b9428d24fa4550bcfaf841aaa79c5de89b7f5a33b89fa5de59",
+      "bytes": 31402,
       "category": "product-source-or-build-manifest"
     },
     {
       "path": "packages/client/components/app/interface/channels/text/ThreadChip.tsx",
       "sha256": "d3701655011fb6e09e0756d2653f34d379c32633ffed97cdffa073e4d9bac057",
       "bytes": 2242,
+      "category": "product-source-or-build-manifest"
+    },
+    {
+      "path": "packages/client/components/app/interface/channels/text/forwardOrigin.test.ts",
+      "sha256": "0600a4edea4990b966cfc2b744ebf4b0c31a81c055d5ca5309b5b440463c073e",
+      "bytes": 1141,
+      "category": "synthetic-test-source-or-fixture"
+    },
+    {
+      "path": "packages/client/components/app/interface/channels/text/forwardOrigin.ts",
+      "sha256": "9698c981b422bfb82c39b75d55c7b0f99bebed3a156ad66d00c3ad535152f87f",
+      "bytes": 938,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -1594,8 +1612,8 @@
     },
     {
       "path": "packages/client/components/app/interface/settings/user/Keybinds.tsx",
-      "sha256": "2cfd84421fe2463a86eda59484e4de28fd195e38e544e3a808c9fa2f2585d730",
-      "bytes": 5506,
+      "sha256": "ea26e44f859408edac5c3598338e85e3668cdd5f6f6ca9afca3bb0a5118ece33",
+      "bytes": 5781,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -2116,8 +2134,8 @@
     },
     {
       "path": "packages/client/components/app/menus/MessageContextMenu.tsx",
-      "sha256": "05cc94979b1f4491a660a603fc61ce5e996b24927f9e664d4e4887b20757e1b5",
-      "bytes": 16959,
+      "sha256": "a998174720df747740ecc259b84462484896ffc8a259b9cd430d827fee666137",
+      "bytes": 17623,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -2572,8 +2590,8 @@
     },
     {
       "path": "packages/client/components/i18n/catalogs/ar/messages.po",
-      "sha256": "42668725e460d5ad3e25ee72bdbc998eac7e10d6c9e08f33c807a14120f4cde1",
-      "bytes": 849890,
+      "sha256": "3e48e5021fedd92188cd9ed8f424429409cf3d12bdf6e5e0a82b11b9fbb3bc07",
+      "bytes": 852600,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -2716,8 +2734,8 @@
     },
     {
       "path": "packages/client/components/i18n/catalogs/de/messages.po",
-      "sha256": "602390be7ad86152f67fe37e09c80fc18c991e156544dafabe2a1613ee5e69b1",
-      "bytes": 782098,
+      "sha256": "d87889026d02326fc177def39ec81b32eb7f075fa92a085dc9c147299b7b8d26",
+      "bytes": 784586,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -2752,8 +2770,8 @@
     },
     {
       "path": "packages/client/components/i18n/catalogs/en/messages.po",
-      "sha256": "417d36cf934d0d7396e9c15273a0f3ec70840d5ca1de020726802c68ccd299f5",
-      "bytes": 763175,
+      "sha256": "df0e6a833e373f20bc3066086c0966a9775a7f56950351a5ecf1ee5f276d7299",
+      "bytes": 765517,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -3316,8 +3334,8 @@
     },
     {
       "path": "packages/client/components/i18n/errorTypes.json",
-      "sha256": "ddacefe8fe2ccc74c54f0400e21bd165a887df8113ae662d7c7c0dab73cb25e2",
-      "bytes": 3056,
+      "sha256": "99bd696c597afebb60915096720433dc0b3e4afeb8a5c1d182e11d2866049bc4",
+      "bytes": 3082,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -3334,8 +3352,8 @@
     },
     {
       "path": "packages/client/components/i18n/errors.tsx",
-      "sha256": "2f1181b2f24135212b2b6056f4893828914b2ce369b5c60110c9a89224eac309",
-      "bytes": 29386,
+      "sha256": "ade6ee1590b14437d488c2582a69d344b907f5142d784525bc00143cf2b353a7",
+      "bytes": 29554,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -3700,8 +3718,8 @@
     },
     {
       "path": "packages/client/components/modal/modals.tsx",
-      "sha256": "fc14c25d4f8d5243f3e69de18840a8257c39de1cbc2c1bbb3fe6974d5cae4cd4",
-      "bytes": 16276,
+      "sha256": "185c80338c9d1fafafdd010d84c433f3aa144cf4e869272b47c3f435fbd3f5be",
+      "bytes": 16494,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -3930,6 +3948,12 @@
       "path": "packages/client/components/modal/modals/Error2.tsx",
       "sha256": "36cc062ce9d5479cd654949bda89012b7d904402779c184ee0e339f86897a98f",
       "bytes": 779,
+      "category": "product-source-or-build-manifest"
+    },
+    {
+      "path": "packages/client/components/modal/modals/ForwardMessage.tsx",
+      "sha256": "161bb5470ed771e6cf014a7a697fdf6af7044bc13950aa60a56bc09405eaed5d",
+      "bytes": 11073,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -4173,6 +4197,18 @@
       "category": "product-source-or-build-manifest"
     },
     {
+      "path": "packages/client/components/modal/modals/forwardTargets.test.ts",
+      "sha256": "b12585fe90b6bd738402ec259ee9b5a0d64a6e5777955a7572532dc5e5de2cff",
+      "bytes": 4382,
+      "category": "synthetic-test-source-or-fixture"
+    },
+    {
+      "path": "packages/client/components/modal/modals/forwardTargets.ts",
+      "sha256": "0b169ae52792b82bac57a921912ab87fe75e01c3db9d8dcca301811256a9a04f",
+      "bytes": 2948,
+      "category": "product-source-or-build-manifest"
+    },
+    {
       "path": "packages/client/components/modal/modals/interestsAsk.test.ts",
       "sha256": "37bcbab9e9439c31c50ba54b04e65cadef98f6607e60b694199122de470a623a",
       "bytes": 1140,
@@ -4222,8 +4258,8 @@
     },
     {
       "path": "packages/client/components/modal/types.ts",
-      "sha256": "c31edb56a7d57ab197052e3fe13dffea1b98bb7a86bc2b4afc73212be97f29f6",
-      "bytes": 8970,
+      "sha256": "1d10498ad27c4cf24ccb68ad03f20615d48cf668dfabe1d249e8b07897b2ced1",
+      "bytes": 9037,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -5104,8 +5140,8 @@
     },
     {
       "path": "packages/client/components/ui/components/features/messaging/elements/MessageToolbar.tsx",
-      "sha256": "406e9d8fe1d70aca490d26080d1a76b71f558c2a539f445e830b4e2d6727287b",
-      "bytes": 4707,
+      "sha256": "1890ded4bd8d064a9715b960c3ebd92fc63a35de9f30b4271ee48ea3c6e7b0d9",
+      "bytes": 5628,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -37497,6 +37533,12 @@
       "category": "product-source-or-build-manifest"
     },
     {
+      "path": "packages/client/scripts/i18n/ui-110991.json",
+      "sha256": "4202e7ce8c12a184352ec32c032d73712f018fd727ab5f27ee05fff63da81355",
+      "bytes": 2152,
+      "category": "product-source-or-build-manifest"
+    },
+    {
       "path": "packages/client/scripts/i18n/ui-12.json",
       "sha256": "d6462d3292ad5dc9367bd37a8bb0575e1737ea0b531801c4f97e96bee45cf87c",
       "bytes": 4639,
@@ -40290,7 +40332,7 @@
   "submodules": [
     {
       "path": "packages/stoat.js",
-      "commit": "2282f55961ce5862812f088c8a9ac542dd792908"
+      "commit": "7586a4ba3248c16dc7142c5809adcdb896afc7a0"
     }
   ]
 }
