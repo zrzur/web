@@ -219,17 +219,23 @@ try {
       });
 
       /** Server menu > Notifications, moving into the submenu the way a hand does */
+      let onChannelList = false;
       async function openNotifications() {
         await page.mouse.move(viewport.width / 2, viewport.height / 2);
         const menuButton = page.getByRole("button", { name: t("Server menu") }).filter({ visible: true }).first();
         if (size === "phone") {
-          // phones show the channel list (with the server menu) one step back
-          const back = page
-            .getByRole("button", { name: new RegExp(`^(${t("Back")}|${t("Toggle main sidebar")})$`) })
-            .filter({ visible: true })
-            .first();
-          await back.click({ timeout: 8000 });
-          await page.waitForTimeout(600);
+          // phones show the channel list (with the server menu) one step
+          // back; the menu button is in the page but off screen until then
+          // the first time the channel is open; after Back the list stays
+          if (!onChannelList) {
+            onChannelList = true;
+            await page
+              .getByRole("button", { name: new RegExp(`^(${t("Back")}|${t("Toggle main sidebar")})$`) })
+              .filter({ visible: true })
+              .first()
+              .click({ timeout: 8000 });
+            await page.waitForTimeout(600);
+          }
         }
         await page.waitForTimeout(800);
         await menuButton.click({ timeout: 15000 });
@@ -277,6 +283,21 @@ try {
         await again.click({ timeout: 8000 });
         await page.keyboard.press("Escape").catch(() => {});
       });
+
+      if (size === "phone") {
+        await r.step(`${tag} Mute server opens its choices in the sheet`, async () => {
+          await page.getByRole("button", { name: t("Server menu") }).filter({ visible: true }).first().click({ timeout: 15000 });
+          await page.waitForTimeout(500);
+          const mute = page.getByText(t("Mute server"), { exact: true }).filter({ visible: true }).first();
+          await mute.tap({ timeout: 8000 });
+          await page.getByText(t("For 15 minutes"), { exact: true }).filter({ visible: true }).first().waitFor({ timeout: 8000 });
+          if (!(await page.getByText(t("Server info"), { exact: true }).filter({ visible: true }).count()))
+            throw new Error("the sheet closed");
+          await page.screenshot({ path: shot(`${tag}-mute-choices`) });
+          await noSideways(page);
+          await page.keyboard.press("Escape").catch(() => {});
+        });
+      }
 
       await r.step(`${tag} no page errors`, async () => {
         if (session.errors.length) throw new Error(session.errors.join(" | "));
