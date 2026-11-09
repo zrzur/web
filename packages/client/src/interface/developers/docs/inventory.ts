@@ -159,6 +159,13 @@ export function endpointSlug(endpoint: Pick<Endpoint, "method" | "path">) {
     .replace(/^-|-$/g, "");
 }
 
+/**
+ * Helpers of the bot SDK only: the web app's own SDK (`@zrzur/sdk/solid`)
+ * is not for bots, and naming it on bot pages sent authors the wrong way
+ */
+export const botSdk = (endpoint: Pick<Endpoint, "sdk">) =>
+  endpoint.sdk.filter((fn) => fn.package === "@zrzur/sdk/bot");
+
 /** Page that shows the endpoints of a section */
 export function pageOfSection(section: string) {
   if (section === "getting-started") return "overview";

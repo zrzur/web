@@ -7,6 +7,7 @@ import { CodeBlock } from "./CodeBlock";
 import {
   type Endpoint,
   type Status,
+  botSdk,
   curlExample,
   endpointSlug,
   fieldsOf,
@@ -191,10 +192,10 @@ export function EndpointReference(props: {
         <dt>SDK</dt>
         <dd>
           <Show
-            when={e().sdk.length}
+            when={botSdk(e()).length}
             fallback={t`No helper yet; call it with client.rest.req (@zrzur/sdk/bot) or fetch.`}
           >
-            <For each={e().sdk}>
+            <For each={botSdk(e())}>
               {(fn, i) => (
                 <>
                   {i() ? ", " : ""}

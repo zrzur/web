@@ -5,7 +5,7 @@ import { fileURLToPath } from "node:url";
 import { describe, expect, it } from "vitest";
 
 import { DIRECTIVES, exampleFiles, exampleSource } from "./examples";
-import { endpointSlug, inventory, pageOfSection } from "./inventory";
+import { botSdk, endpointSlug, inventory, pageOfSection } from "./inventory";
 import {
   anchorsOf,
   codeBlocksOf,
@@ -157,6 +157,26 @@ describe("Bot API inventory", () => {
         e.id,
       ).toBe(true);
     }
+  });
+
+  it("never shows an Unverified badge over a passed live check", () => {
+    // the badge and the status line under it say the same (docs gap 5)
+    for (const e of inventory.endpoints)
+      if (e.verification.level === "live")
+        expect(e.status, e.id).not.toBe("unverified");
+  });
+
+  it("names only the bot SDK on bot pages", () => {
+    // docs gap 13: the web app's SDK is not for bots
+    const both = inventory.endpoints.find((e) =>
+      e.sdk.some((fn) => fn.package === "@zrzur/sdk/solid"),
+    )!;
+    expect(both).toBeTruthy();
+    expect(botSdk(both).every((fn) => fn.package === "@zrzur/sdk/bot")).toBe(
+      true,
+    );
+    const reference = readFileSync(join(here, "EndpointReference.tsx"), "utf8");
+    expect(reference).not.toMatch(/each=\{e\(\)\.sdk\}/);
   });
 
   it("only names gateway events that exist", () => {

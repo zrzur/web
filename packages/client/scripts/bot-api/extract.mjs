@@ -737,6 +737,11 @@ for (const route of routes) {
   else if (verified?.level === "live" && verified.expected && verified.schemaOk)
     status = "supported";
   else if (verified?.level === "live" && verified.expected) status = "partial";
+  // a docs example ran it live with a bot token and it did what the page
+  // says (examples-check records no schema comparison): the badge must not
+  // say "Unverified" over a "Verified live" status line
+  else if (verified?.level === "live" && /^examples-check/.test(verified.test ?? ""))
+    status = "supported";
   else status = "unverified";
   const verifiedProblems =
     verified?.problems?.map(
