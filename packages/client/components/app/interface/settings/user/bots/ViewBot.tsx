@@ -85,15 +85,24 @@ export function ViewBot(props: { bot: Bot; onDelete?: () => void }) {
             name: "public",
             value: props.bot.public,
           },
+          {
+            name: "showCreator",
+            value: props.bot.showCreator,
+          },
         ]}
         onSubmit={(g) => {
           props.bot.edit({
             public: (g.controls["public"] as IFormControl<boolean>).value,
+            show_creator: (g.controls["showCreator"] as IFormControl<boolean>)
+              .value,
           });
         }}
         onReset={(g) => {
           (g.controls["public"] as IFormControl<boolean>).setValue(
             props.bot.public || false,
+          );
+          (g.controls["showCreator"] as IFormControl<boolean>).setValue(
+            props.bot.showCreator,
           );
         }}
       >
@@ -102,6 +111,11 @@ export function ViewBot(props: { bot: Bot; onDelete?: () => void }) {
           const toggle = () => {
             control.setValue(!control.value);
             control.markDirty(true);
+          };
+          const creator = g.controls["showCreator"] as IFormControl<boolean>;
+          const toggleCreator = () => {
+            creator.setValue(!creator.value);
+            creator.markDirty(true);
           };
 
           return (
@@ -120,6 +134,25 @@ export function ViewBot(props: { bot: Bot; onDelete?: () => void }) {
                   <Toggle
                     checked={!!control.value}
                     onChange={toggle}
+                    aria-labelledby={ids.labelId}
+                    aria-describedby={ids.descriptionId}
+                  />
+                )}
+              />
+              <SettingsRow
+                icon={<Icon name="user" size={20} />}
+                title={<Trans>Show your name on the bot's page</Trans>}
+                description={
+                  <Trans>
+                    When on, people who open this bot's invite page see that
+                    you made it. Off by default.
+                  </Trans>
+                }
+                onClick={toggleCreator}
+                control={(ids) => (
+                  <Toggle
+                    checked={!!creator.value}
+                    onChange={toggleCreator}
                     aria-labelledby={ids.labelId}
                     aria-describedby={ids.descriptionId}
                   />

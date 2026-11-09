@@ -17658,6 +17658,10 @@ msgstr "إظهار التاريخ الهجري"
 msgid "Show webhooks made by"
 msgstr "عرض الويب هوك الذي أنشأه"
 
+#: components/app/interface/settings/user/bots/ViewBot.tsx
+msgid "Show your name on the bot's page"
+msgstr "إظهار اسمك في صفحة البوت"
+
 #: components/app/interface/settings/user/Native.tsx
 msgid "Show Zrzur using Discord rich presence."
 msgstr "أظهر أنك تستخدم زرزور عبر حالة Discord."
@@ -22348,6 +22352,10 @@ msgstr "ما المشكلة؟"
 #: components/app/interface/settings/server/AutoModSettings.tsx
 msgid "When it matches"
 msgstr "عند المطابقة"
+
+#: components/app/interface/settings/user/bots/ViewBot.tsx
+msgid "When on, people who open this bot's invite page see that you made it. Off by default."
+msgstr "عند التشغيل، يرى من يفتح صفحة دعوة هذا البوت أنك صانعه. متوقف افتراضيًا."
 
 #: components/app/interface/settings/server/ThreadFeatures.tsx
 msgid "When one is off, nobody can add to it, the owner included. Nothing is deleted: everything already there can still be read."

@@ -16825,6 +16825,10 @@ msgstr ""
 msgid "Show webhooks made by"
 msgstr ""
 
+#: components/app/interface/settings/user/bots/ViewBot.tsx
+msgid "Show your name on the bot's page"
+msgstr ""
+
 #: components/app/interface/settings/user/Native.tsx
 msgid "Show Zrzur using Discord rich presence."
 msgstr ""
@@ -21301,6 +21305,10 @@ msgstr ""
 
 #: components/app/interface/settings/server/AutoModSettings.tsx
 msgid "When it matches"
+msgstr ""
+
+#: components/app/interface/settings/user/bots/ViewBot.tsx
+msgid "When on, people who open this bot's invite page see that you made it. Off by default."
 msgstr ""
 
 #: components/app/interface/settings/server/ThreadFeatures.tsx

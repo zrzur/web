@@ -17658,6 +17658,10 @@ msgstr "Hidschri-Datum anzeigen"
 msgid "Show webhooks made by"
 msgstr "Webhooks anzeigen, erstellt von"
 
+#: components/app/interface/settings/user/bots/ViewBot.tsx
+msgid "Show your name on the bot's page"
+msgstr "Deinen Namen auf der Seite des Bots zeigen"
+
 #: components/app/interface/settings/user/Native.tsx
 msgid "Show Zrzur using Discord rich presence."
 msgstr "Zeige über Discord Rich Presence, dass du Zrzur nutzt."
@@ -22348,6 +22352,10 @@ msgstr "Was stimmt nicht?"
 #: components/app/interface/settings/server/AutoModSettings.tsx
 msgid "When it matches"
 msgstr "Bei einem Treffer"
+
+#: components/app/interface/settings/user/bots/ViewBot.tsx
+msgid "When on, people who open this bot's invite page see that you made it. Off by default."
+msgstr "Wenn eingeschaltet, sehen alle, die die Einladungsseite dieses Bots öffnen, dass du ihn gemacht hast. Standardmäßig aus."
 
 #: components/app/interface/settings/server/ThreadFeatures.tsx
 msgid "When one is off, nobody can add to it, the owner included. Nothing is deleted: everything already there can still be read."

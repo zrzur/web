@@ -16825,6 +16825,10 @@ msgstr "显示伊斯兰历日期"
 msgid "Show webhooks made by"
 msgstr "显示由谁创建的 Webhook"
 
+#: components/app/interface/settings/user/bots/ViewBot.tsx
+msgid "Show your name on the bot's page"
+msgstr "在机器人页面上显示你的名字"
+
 #: components/app/interface/settings/user/Native.tsx
 msgid "Show Zrzur using Discord rich presence."
 msgstr "用 Discord 富状态展示 Zrzur。"
@@ -21302,6 +21306,10 @@ msgstr "哪里出了问题？"
 #: components/app/interface/settings/server/AutoModSettings.tsx
 msgid "When it matches"
 msgstr "匹配时"
+
+#: components/app/interface/settings/user/bots/ViewBot.tsx
+msgid "When on, people who open this bot's invite page see that you made it. Off by default."
+msgstr "开启后，打开此机器人邀请页面的人会看到它是你制作的。默认关闭。"
 
 #: components/app/interface/settings/server/ThreadFeatures.tsx
 msgid "When one is off, nobody can add to it, the owner included. Nothing is deleted: everything already there can still be read."

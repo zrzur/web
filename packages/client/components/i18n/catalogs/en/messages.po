@@ -17661,6 +17661,10 @@ msgstr "Show the Hijri date"
 msgid "Show webhooks made by"
 msgstr "Show webhooks made by"
 
+#: components/app/interface/settings/user/bots/ViewBot.tsx
+msgid "Show your name on the bot's page"
+msgstr "Show your name on the bot's page"
+
 #: components/app/interface/settings/user/Native.tsx
 msgid "Show Zrzur using Discord rich presence."
 msgstr "Show Zrzur using Discord rich presence."
@@ -22351,6 +22355,10 @@ msgstr "What's wrong?"
 #: components/app/interface/settings/server/AutoModSettings.tsx
 msgid "When it matches"
 msgstr "When it matches"
+
+#: components/app/interface/settings/user/bots/ViewBot.tsx
+msgid "When on, people who open this bot's invite page see that you made it. Off by default."
+msgstr "When on, people who open this bot's invite page see that you made it. Off by default."
 
 #: components/app/interface/settings/server/ThreadFeatures.tsx
 msgid "When one is off, nobody can add to it, the owner included. Nothing is deleted: everything already there can still be read."

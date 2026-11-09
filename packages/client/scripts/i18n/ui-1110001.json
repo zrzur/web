@@ -1,0 +1,18 @@
+{
+  "Show your name on the bot's page": [
+    "إظهار اسمك في صفحة البوت",
+    "Deinen Namen auf der Seite des Bots zeigen",
+    "Afficher ton nom sur la page du bot",
+    "Mostrar tu nombre en la página del bot",
+    "Показывать ваше имя на странице бота",
+    "在机器人页面上显示你的名字"
+  ],
+  "When on, people who open this bot's invite page see that you made it. Off by default.": [
+    "عند التشغيل، يرى من يفتح صفحة دعوة هذا البوت أنك صانعه. متوقف افتراضيًا.",
+    "Wenn eingeschaltet, sehen alle, die die Einladungsseite dieses Bots öffnen, dass du ihn gemacht hast. Standardmäßig aus.",
+    "Si activé, les personnes qui ouvrent la page d’invitation de ce bot voient que tu l’as créé. Désactivé par défaut.",
+    "Si está activado, quienes abran la página de invitación de este bot verán que lo creaste tú. Desactivado de forma predeterminada.",
+    "Если включено, все, кто открывает страницу приглашения этого бота, видят, что его создали вы. По умолчанию выключено.",
+    "开启后，打开此机器人邀请页面的人会看到它是你制作的。默认关闭。"
+  ]
+}
