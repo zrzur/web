@@ -282,7 +282,8 @@ test("an unknown filter value gives a plain problem line and no search", async (
   await type(c, field, "from:nobody-zz-e2e");
   await c.page.keyboard.press("Enter");
   await c.page
-    .getByText(c.t('No member called "{value}".').replace("{value}", "nobody-zz-e2e"), { exact: true })
+    // the value is wrapped in Unicode isolates (U+2068 … U+2069) so it reads right in Arabic
+    .getByText(c.t('No member called "{value}".').replace("{value}", "⁨nobody-zz-e2e⁩"), { exact: true })
     .waitFor({ timeout: 15000 });
   await c.page.screenshot({ path: `${SHOTS}search-problem-${c.lang}-${c.size}.png` });
 });
