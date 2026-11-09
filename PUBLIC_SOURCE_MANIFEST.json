@@ -292,8 +292,8 @@
     },
     {
       "path": "CHANGELOG.md",
-      "sha256": "f9e5488b681ace7fda717ed96db4156a9b7a9f5b3f84dcc5d0849168082701b5",
-      "bytes": 96524,
+      "sha256": "1db924a3954254d1166c1afa7f9cc99cd595a4a44ce556693223e44e6dccfed7",
+      "bytes": 96667,
       "category": "public-documentation"
     },
     {
@@ -760,14 +760,14 @@
     },
     {
       "path": "packages/client/components/app/interface/channels/text/forwardOrigin.test.ts",
-      "sha256": "0600a4edea4990b966cfc2b744ebf4b0c31a81c055d5ca5309b5b440463c073e",
-      "bytes": 1141,
+      "sha256": "b2b4dff50557d2ed52c514f7b0016e72e155d7c647193cad37b717df99d11ee1",
+      "bytes": 1434,
       "category": "synthetic-test-source-or-fixture"
     },
     {
       "path": "packages/client/components/app/interface/channels/text/forwardOrigin.ts",
-      "sha256": "9698c981b422bfb82c39b75d55c7b0f99bebed3a156ad66d00c3ad535152f87f",
-      "bytes": 938,
+      "sha256": "95867adb3473e3429e98d69b8407f8be2cbe9d025c55ca5255f0487e76a0fc6a",
+      "bytes": 977,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -2590,8 +2590,8 @@
     },
     {
       "path": "packages/client/components/i18n/catalogs/ar/messages.po",
-      "sha256": "3e48e5021fedd92188cd9ed8f424429409cf3d12bdf6e5e0a82b11b9fbb3bc07",
-      "bytes": 852600,
+      "sha256": "0cdb1f563928c0ad23a6550676eba496e6dd154e598210b44e3efcb50bde8621",
+      "bytes": 852611,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -2734,8 +2734,8 @@
     },
     {
       "path": "packages/client/components/i18n/catalogs/de/messages.po",
-      "sha256": "d87889026d02326fc177def39ec81b32eb7f075fa92a085dc9c147299b7b8d26",
-      "bytes": 784586,
+      "sha256": "0b888fab8a0bb6ad8b55aabdecf2289d021a718ad9b104ae2345ccc56684d652",
+      "bytes": 784588,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -2770,8 +2770,8 @@
     },
     {
       "path": "packages/client/components/i18n/catalogs/en/messages.po",
-      "sha256": "df0e6a833e373f20bc3066086c0966a9775a7f56950351a5ecf1ee5f276d7299",
-      "bytes": 765517,
+      "sha256": "e291d309292aecc9c1121b920fffad5fd3b987005579f2ccc616ed3a7dce66d1",
+      "bytes": 765519,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -3952,8 +3952,8 @@
     },
     {
       "path": "packages/client/components/modal/modals/ForwardMessage.tsx",
-      "sha256": "161bb5470ed771e6cf014a7a697fdf6af7044bc13950aa60a56bc09405eaed5d",
-      "bytes": 11073,
+      "sha256": "125bd707dcce0a8d9435d72664566c2a8efa04f7e2180235d140697e4699663c",
+      "bytes": 11740,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -4198,14 +4198,14 @@
     },
     {
       "path": "packages/client/components/modal/modals/forwardTargets.test.ts",
-      "sha256": "b12585fe90b6bd738402ec259ee9b5a0d64a6e5777955a7572532dc5e5de2cff",
-      "bytes": 4382,
+      "sha256": "d6891460b254ad3e3e1abcae4738b0d1cb6fc6428132f42ded67322b84c42182",
+      "bytes": 5834,
       "category": "synthetic-test-source-or-fixture"
     },
     {
       "path": "packages/client/components/modal/modals/forwardTargets.ts",
-      "sha256": "0b169ae52792b82bac57a921912ab87fe75e01c3db9d8dcca301811256a9a04f",
-      "bytes": 2948,
+      "sha256": "a449a036d061c9a22e44d5e4a13d02483c294fdb69c0a1133598c6de523da376",
+      "bytes": 4009,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -37534,8 +37534,8 @@
     },
     {
       "path": "packages/client/scripts/i18n/ui-110991.json",
-      "sha256": "4202e7ce8c12a184352ec32c032d73712f018fd727ab5f27ee05fff63da81355",
-      "bytes": 2152,
+      "sha256": "f51035c785bf39dcf815f570fa11d97708d26cbd736251b80bcecae2a3aa349c",
+      "bytes": 5075,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -40332,7 +40332,7 @@
   "submodules": [
     {
       "path": "packages/stoat.js",
-      "commit": "88abaed019dcb225e82e4786a8340315d2eb455d"
+      "commit": "00acb86e930e43b04eb0a680a933f9c3dde73fb2"
     }
   ]
 }
