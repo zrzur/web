@@ -98,6 +98,20 @@ export default defineConfig([
     rules: { "@typescript-eslint/no-require-imports": "off" },
   },
   {
+    // the voice gate runs in an AudioWorkletGlobalScope (built from gateKernel by a test)
+    files: ["packages/client/public/voice-gate-worklet.js"],
+    languageOptions: {
+      sourceType: "script",
+      globals: {
+        AudioWorkletProcessor: "readonly",
+        registerProcessor: "readonly",
+        sampleRate: "readonly",
+        currentTime: "readonly",
+      },
+    },
+    rules: { "@typescript-eslint/no-this-alias": "off" },
+  },
+  {
     // plugin code runs in a Web Worker with the `zrzur` API
     files: [
       "packages/plugin-sdk/examples/**/*.js",

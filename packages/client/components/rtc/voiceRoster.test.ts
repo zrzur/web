@@ -121,11 +121,10 @@ describe("voice room roster", () => {
     expect(roster()).toEqual([ALI]);
   });
 
-  // Not the reported bug (it shows too many people, not too few), found on
-  // the way: Ready only rewrites rooms it lists, and the server leaves out
-  // empty rooms, so people who left during a gateway drop stay listed.
-  // SDK: src/solid/events/v1.ts, Ready, `voice_states` loop.
-  it.fails(
+  // Found on the way (it showed too many people, not too few): Ready only
+  // rewrote rooms it listed, so people who left during a gateway drop stayed.
+  // Fixed in the SDK (src/solid/events/v1.ts, Ready, `voice_states`).
+  it(
     "a reconnect clears a room that emptied while it was down",
     async () => {
       await connect([ALI]);
