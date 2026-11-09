@@ -16,6 +16,7 @@ export const DEFAULT_SEQUENCES: Record<KeybindAction, (string | RegExp)[]> = {
   [KeybindAction.CLOSE_MODAL]: ["Escape"],
   [KeybindAction.CLOSE_FLOATING]: ["Escape"],
   [KeybindAction.CLOSE_SIDEBAR]: ["Escape"],
+  [KeybindAction.CANCEL_MESSAGE_SELECTION]: ["Escape"],
 };
 
 /**
@@ -44,4 +45,5 @@ export const DEFAULT_MAC_SEQUENCES: Record<KeybindAction, (string | RegExp)[]> =
     [KeybindAction.CLOSE_MODAL]: ["Escape"],
     [KeybindAction.CLOSE_FLOATING]: ["Escape"],
     [KeybindAction.CLOSE_SIDEBAR]: ["Escape"],
+    [KeybindAction.CANCEL_MESSAGE_SELECTION]: ["Escape"],
   };

@@ -53,6 +53,7 @@ import {
 
 import { createIsTimedOut } from "@revolt/common/lib/createIsTimedOut";
 import { EditMessage } from "./EditMessage";
+import { MessageSelectOverlay } from "./MessageSelectOverlay";
 import { ThreadChip } from "./ThreadChip";
 import { InteractionHeader } from "./interactions/InteractionHeader";
 import {
@@ -246,6 +247,10 @@ export function Message(props: Props) {
         tail={props.tail || state.settings.getValue("appearance:compact_mode")}
         header={
           <>
+            <MessageSelectOverlay
+              message={props.message}
+              enabled={props.isLink === undefined}
+            />
             <Show when={props.message.interaction?.name}>
               <InteractionHeader
                 userId={props.message.interaction!.user}

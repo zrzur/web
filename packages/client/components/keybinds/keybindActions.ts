@@ -60,6 +60,11 @@ export enum KeybindAction {
    * Close the open and ephemeral sidebar
    */
   CLOSE_SIDEBAR = "close_sidebar",
+
+  /**
+   * Leave message selection mode
+   */
+  CANCEL_MESSAGE_SELECTION = "cancel_message_selection",
 }
 
 /**
@@ -69,6 +74,7 @@ export const ACTION_PRIORITY: KeybindAction[] = [
   // 'Escape' bindings
   KeybindAction.CLOSE_FLOATING,
   KeybindAction.CLOSE_MODAL,
+  KeybindAction.CANCEL_MESSAGE_SELECTION,
   KeybindAction.CLOSE_SIDEBAR,
   KeybindAction.CHAT_CANCEL_EDITING,
   KeybindAction.CHAT_REMOVE_COMPOSITION_ELEMENT,

@@ -44,6 +44,9 @@ import {
 } from "@revolt/app/interface/channels/text/interactions";
 import { Channel } from "@zrzur/sdk/solid";
 
+import { MessageSelectionBar } from "@revolt/app/interface/channels/text/MessageSelectionBar";
+import { isSelecting } from "@revolt/app/interface/channels/text/messageSelection";
+
 import { MessageComposition } from "./Composition";
 import { isLargeServer } from "./largeServer";
 import { MemberSidebar } from "./MemberSidebar";
@@ -331,6 +334,9 @@ export function TextChannel(props: ChannelPageProps) {
                   />
                 }
               >
+                <Match when={isSelecting(props.channel.id)}>
+                  <MessageSelectionBar channel={props.channel} />
+                </Match>
                 <Match
                   when={
                     threadBlock() === "switched-off" &&

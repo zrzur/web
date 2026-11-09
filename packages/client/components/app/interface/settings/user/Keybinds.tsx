@@ -61,6 +61,15 @@ export function KeybindsSettings() {
           title: <Trans>Mark the server as read</Trans>,
           keys: [["Shift", "Esc"]],
         },
+        {
+          title: <Trans>Select a range of messages</Trans>,
+          description: <Trans>While selecting messages to delete.</Trans>,
+          keys: [["Shift", t`Click`]],
+        },
+        {
+          title: <Trans>Stop selecting messages</Trans>,
+          keys: [["Esc"]],
+        },
       ],
     },
     {

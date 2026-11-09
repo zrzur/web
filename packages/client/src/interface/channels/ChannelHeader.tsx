@@ -26,6 +26,11 @@ import { Symbol } from "@revolt/ui/components/utils/Symbol";
 import { Icon } from "@revolt/ui/icons/Icon";
 import { RulesIcon } from "@revolt/ui/icons/RulesIcon";
 
+import {
+  cancelSelection,
+  isSelecting,
+  startSelection,
+} from "@revolt/app/interface/channels/text/messageSelection";
 import { writeAccess } from "@revolt/app/interface/channels/threadAccess";
 import { isOfficialChannel } from "@revolt/app/interface/support/official";
 import { ContextMenu, ContextMenuButton } from "@revolt/app/menus/ContextMenu";
@@ -79,7 +84,19 @@ export function ChannelHeader(props: Props) {
     !props.channel.isVoice &&
     !props.channel.isThread &&
     !props.channel.isForum;
+  /** moderators can select messages to delete them together */
+  const canSelectMessages = () =>
+    !!props.sidebarState &&
+    props.channel.type === "TextChannel" &&
+    props.channel.havePermission("ManageMessages");
+
+  const toggleSelecting = () =>
+    isSelecting(props.channel.id)
+      ? cancelSelection()
+      : startSelection(props.channel.id);
+
   const hasMoreActions = () =>
+    canSelectMessages() ||
     canOpenSettings() ||
     canListThreads() ||
     !!props.sidebarState ||
@@ -426,6 +443,25 @@ export function ChannelHeader(props: Props) {
           </IconButton>
         </Show>
 
+        <Show when={!phone() && canSelectMessages()}>
+          <IconButton
+            variant="toolbar"
+            size="xs"
+            aria-pressed={isSelecting(props.channel.id)}
+            aria-label={t`Select messages`}
+            data-testid="select-messages"
+            use:floating={{
+              tooltip: {
+                placement: "bottom",
+                content: t`Select messages to delete them together`,
+              },
+            }}
+            onPress={toggleSelecting}
+          >
+            <Icon name="list-checks" size={20} />
+          </IconButton>
+        </Show>
+
         <Show
           when={
             !phone() &&
@@ -594,6 +630,16 @@ export function ChannelHeader(props: Props) {
             use:floating={{
               contextMenu: () => (
                 <ContextMenu>
+                  <Show when={canSelectMessages()}>
+                    <ContextMenuButton
+                      icon={<Icon name="list-checks" size={20} />}
+                      onClick={toggleSelecting}
+                    >
+                      {isSelecting(props.channel.id)
+                        ? t`Stop selecting messages`
+                        : t`Select messages`}
+                    </ContextMenuButton>
+                  </Show>
                   <Show when={canOpenSettings()}>
                     <ContextMenuButton
                       icon={<Icon name="gear-six" size={20} />}

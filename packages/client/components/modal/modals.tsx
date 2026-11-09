@@ -109,6 +109,11 @@ const DeleteChannelModal = lazy(() =>
 const DeleteEmojiModal = lazy(() =>
   import("./modals/DeleteEmoji").then((m) => ({ default: m.DeleteEmojiModal })),
 );
+const BulkDeleteMessagesModal = lazy(() =>
+  import("./modals/BulkDeleteMessages").then((m) => ({
+    default: m.BulkDeleteMessagesModal,
+  })),
+);
 const DeleteMessageModal = lazy(() =>
   import("./modals/DeleteMessage").then((m) => ({
     default: m.DeleteMessageModal,
@@ -374,6 +379,8 @@ export function RenderModal(props: ActiveModal & { onClose: () => void }) {
       return <DeleteCategoryModal {...modalProps} />;
     case "delete_message":
       return <DeleteMessageModal {...modalProps} />;
+    case "bulk_delete_messages":
+      return <BulkDeleteMessagesModal {...modalProps} />;
     case "delete_role":
       return <DeleteRoleModal {...modalProps} />;
     case "delete_server":
