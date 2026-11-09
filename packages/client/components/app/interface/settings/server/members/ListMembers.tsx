@@ -44,7 +44,10 @@ export function ListServerMembers(props: { server: Server }) {
   const query = useInfiniteQuery(() => ({
     queryKey: ["members", props.server.id],
     queryFn: ({ pageParam }: { pageParam: string | undefined }) =>
-      fetchMemberPage(client(), props.server, { limit: 1000, after: pageParam }),
+      fetchMemberPage(client(), props.server, {
+        limit: 1000,
+        after: pageParam,
+      }),
     initialPageParam: undefined as string | undefined,
     getNextPageParam: (last: { next?: string }) => last.next,
   }));
@@ -71,6 +74,15 @@ export function ListServerMembers(props: { server: Server }) {
   const [shown, setShown] = createSignal(PAGE);
 
   const canManageRoles = () => props.server.havePermission("AssignRoles");
+  /**
+   * As the API decides: the owner changes anyone's roles; with Assign roles
+   * you change your own and those of members below your highest role
+   */
+  const canEditMember = (member: ServerMember) =>
+    !!props.server.owner?.self ||
+    (canManageRoles() &&
+      member.id.user !== props.server.ownerId &&
+      (!!member.user?.self || member.inferiorTo(props.server.member!)));
   const date = (value: Date) =>
     new Intl.DateTimeFormat(i18n.locale, { dateStyle: "medium" }).format(value);
 
@@ -242,7 +254,7 @@ export function ListServerMembers(props: { server: Server }) {
                             }}
                           />
                           <span dir="auto">{item.name}</span>
-                          <Show when={canManageRoles()}>
+                          <Show when={canEditMember(member) && !item.isManaged}>
                             <ChipRemove
                               type="button"
                               aria-label={t`Remove ${item.name}`}
@@ -254,7 +266,7 @@ export function ListServerMembers(props: { server: Server }) {
                         </Chip>
                       )}
                     </For>
-                    <Show when={canManageRoles()}>
+                    <Show when={canEditMember(member)}>
                       <AddRole
                         type="button"
                         aria-label={t`Edit roles`}

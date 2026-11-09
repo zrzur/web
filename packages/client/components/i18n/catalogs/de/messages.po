@@ -21985,3 +21985,57 @@ msgstr "Wenn das aktiv ist, laufen Animationen und Bewegungseffekte nicht oder s
 #: components/ui/components/design/DataTable.tsx
 msgid "Rows per page:"
 msgstr "Zeilen pro Seite:"
+
+#: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
+msgid "Allow View channel"
+msgstr "Kanal ansehen erlauben"
+
+#: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
+msgid "Allow: this role also sees private channels, unless a channel denies it. Default: only the channels everyone sees."
+msgstr "Erlauben: Diese Rolle sieht auch private Kanäle, außer ein Kanal verbietet es ihr. Standard: nur die Kanäle, die alle sehen."
+
+#: components/app/interface/settings/channel/permissions/ChannelVisibility.tsx
+msgid "Can see this channel"
+msgstr "Sieht diesen Kanal"
+
+#: components/app/interface/settings/channel/permissions/ChannelVisibility.tsx
+msgid "Can't see this channel"
+msgstr "Sieht diesen Kanal nicht"
+
+#: components/app/interface/settings/channel/permissions/ChannelVisibility.tsx
+msgid "Everyone in the server can see it."
+msgstr "Alle auf dem Server sehen ihn."
+
+#. placeholder {0}: role.name
+#: components/app/interface/settings/channel/permissions/ChannelVisibility.tsx
+msgid "Hide this channel from {0}"
+msgstr "Diesen Kanal vor {0} verbergen"
+
+#: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
+msgid "It doesn't see private channels yet"
+msgstr "Sieht noch keine privaten Kanäle"
+
+#. placeholder {0}: role.name
+#: components/app/interface/settings/channel/permissions/ChannelVisibility.tsx
+msgid "Let {0} see this channel"
+msgstr "{0} diesen Kanal sehen lassen"
+
+#: components/app/interface/settings/channel/permissions/ChannelVisibility.tsx
+msgid "Let in"
+msgstr "Zulassen"
+
+#: components/app/interface/settings/channel/permissions/ChannelVisibility.tsx
+msgid "Only the roles you let in below can see it."
+msgstr "Nur die Rollen, die du unten zulässt, sehen ihn."
+
+#: components/app/interface/settings/channel/permissions/ChannelVisibility.tsx
+msgid "The server owner sees every channel."
+msgstr "Der Serverbesitzer sieht alle Kanäle."
+
+#: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
+msgid "View channel is on Default. Allow it so this role sees every channel, private ones too."
+msgstr "„Kanal ansehen“ steht auf Standard. Erlaube es, damit diese Rolle alle Kanäle sieht, auch private."
+
+#: components/app/interface/settings/channel/permissions/ChannelVisibility.tsx
+msgid "Who can see this channel"
+msgstr "Wer diesen Kanal sieht"

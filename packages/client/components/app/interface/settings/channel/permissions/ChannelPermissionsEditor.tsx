@@ -10,6 +10,7 @@ import {
 import { styled } from "styled-system/jsx";
 
 import {
+  Button,
   Column,
   SettingsRow,
   SettingsSaveBar,
@@ -19,6 +20,8 @@ import {
 } from "@revolt/ui";
 import { Icon } from "@revolt/ui/icons/Icon";
 import { isAdminLike, isDangerous } from "./dangerous";
+
+const VIEW_CHANNEL = 2n ** 20n;
 
 type Props = (
   | { type: "server_default"; context: Server }
@@ -243,6 +246,8 @@ export function ChannelPermissionsEditor(props: Props) {
     description: Partial<Record<Context | "Any", string>>;
     /** Where the usual wording says "this channel" and a category has many */
     categoryDescription?: string;
+    /** For a server role, where Allow means more than on @everyone */
+    roleDescription?: string;
   }[] = [
     {
       heading: t`Admin`,
@@ -378,6 +383,7 @@ export function ChannelPermissionsEditor(props: Props) {
         TextChannel: t`Able to access this channel`,
         Server: t`Able to access channels on this server`,
       },
+      roleDescription: t`Allow: this role also sees private channels, unless a channel denies it. Default: only the channels everyone sees.`,
     },
     {
       key: "ReadMessageHistory",
@@ -615,6 +621,9 @@ export function ChannelPermissionsEditor(props: Props) {
     ) {
       return entry.categoryDescription;
     }
+    if (entry.roleDescription && props.type === "server_role") {
+      return entry.roleDescription;
+    }
     const desc = entry.description;
     return desc[context] ?? desc.Any;
   }
@@ -675,6 +684,31 @@ export function ChannelPermissionsEditor(props: Props) {
           title={t`This can change almost anything in the server`}
           description={t`Manage server, permissions and roles together are close to full control.`}
         />
+        <Show
+          when={
+            props.type === "server_role" &&
+            (value()[0] & VIEW_CHANNEL) !== VIEW_CHANNEL &&
+            (value()[1] & VIEW_CHANNEL) !== VIEW_CHANNEL
+          }
+        >
+          <SettingsRow
+            icon={<Icon name="lock-simple" size={20} />}
+            title={t`It doesn't see private channels yet`}
+            description={t`View channel is on Default. Allow it so this role sees every channel, private ones too.`}
+            control={() => (
+              <Button
+                size="sm"
+                variant="tonal"
+                data-testid="role-allow-private-channels"
+                onPress={() =>
+                  setValue((v) => [v[0] | VIEW_CHANNEL, v[1] & ~VIEW_CHANNEL])
+                }
+              >
+                {t`Allow View channel`}
+              </Button>
+            )}
+          />
+        </Show>
       </Show>
 
       <For each={groups()}>

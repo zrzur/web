@@ -21976,3 +21976,57 @@ msgstr "عند تفعيل هذا الخيار، لن تعمل الرسوم ال�
 #: components/ui/components/design/DataTable.tsx
 msgid "Rows per page:"
 msgstr "عدد الصفوف في الصفحة:"
+
+#: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
+msgid "Allow View channel"
+msgstr "السماح بعرض القناة"
+
+#: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
+msgid "Allow: this role also sees private channels, unless a channel denies it. Default: only the channels everyone sees."
+msgstr "سماح: يرى هذا الدور القنوات الخاصة أيضًا، ما لم تمنعه قناة. افتراضي: القنوات التي يراها الجميع فقط."
+
+#: components/app/interface/settings/channel/permissions/ChannelVisibility.tsx
+msgid "Can see this channel"
+msgstr "يرى هذه القناة"
+
+#: components/app/interface/settings/channel/permissions/ChannelVisibility.tsx
+msgid "Can't see this channel"
+msgstr "لا يرى هذه القناة"
+
+#: components/app/interface/settings/channel/permissions/ChannelVisibility.tsx
+msgid "Everyone in the server can see it."
+msgstr "يراها كل من في السيرفر."
+
+#. placeholder {0}: role.name
+#: components/app/interface/settings/channel/permissions/ChannelVisibility.tsx
+msgid "Hide this channel from {0}"
+msgstr "إخفاء هذه القناة عن {0}"
+
+#: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
+msgid "It doesn't see private channels yet"
+msgstr "لا يرى القنوات الخاصة بعد"
+
+#. placeholder {0}: role.name
+#: components/app/interface/settings/channel/permissions/ChannelVisibility.tsx
+msgid "Let {0} see this channel"
+msgstr "السماح لـ {0} برؤية هذه القناة"
+
+#: components/app/interface/settings/channel/permissions/ChannelVisibility.tsx
+msgid "Let in"
+msgstr "سماح"
+
+#: components/app/interface/settings/channel/permissions/ChannelVisibility.tsx
+msgid "Only the roles you let in below can see it."
+msgstr "لا يراها إلا الأدوار التي تسمح لها أدناه."
+
+#: components/app/interface/settings/channel/permissions/ChannelVisibility.tsx
+msgid "The server owner sees every channel."
+msgstr "يرى مالك السيرفر كل القنوات."
+
+#: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
+msgid "View channel is on Default. Allow it so this role sees every channel, private ones too."
+msgstr "«عرض القناة» على الافتراضي. اسمح به ليرى هذا الدور كل القنوات، والخاصة منها أيضًا."
+
+#: components/app/interface/settings/channel/permissions/ChannelVisibility.tsx
+msgid "Who can see this channel"
+msgstr "من يرى هذه القناة"

@@ -18,6 +18,8 @@ import { Icon } from "@revolt/ui/icons/Icon";
 
 import { useSettingsNavigation } from "../../Settings";
 
+import { ChannelVisibility } from "./ChannelVisibility";
+
 /**
  * Count set bits
  * @param v Number
@@ -115,6 +117,8 @@ export function ChannelPermissionsOverview(props: { context: Channel }) {
 
   return (
     <Column gap="xl">
+      <ChannelVisibility context={props.context} />
+
       <Show when={category()}>
         {(current) => (
           <SettingsSection title={<Trans>Category</Trans>}>
@@ -145,8 +149,8 @@ export function ChannelPermissionsOverview(props: { context: Channel }) {
                 title={<Trans>Synced with {current().title}</Trans>}
                 description={
                   <Trans>
-                    Permissions come from the category. Changing one here
-                    stops following it.
+                    Permissions come from the category. Changing one here stops
+                    following it.
                   </Trans>
                 }
               />

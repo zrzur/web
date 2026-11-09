@@ -1,0 +1,34 @@
+{
+  "Allow: this role also sees private channels, unless a channel denies it. Default: only the channels everyone sees.": [
+    "سماح: يرى هذا الدور القنوات الخاصة أيضًا، ما لم تمنعه قناة. افتراضي: القنوات التي يراها الجميع فقط.",
+    "Erlauben: Diese Rolle sieht auch private Kanäle, außer ein Kanal verbietet es ihr. Standard: nur die Kanäle, die alle sehen."
+  ],
+  "Who can see this channel": ["من يرى هذه القناة", "Wer diesen Kanal sieht"],
+  "Private channel": ["قناة خاصة", "Privater Kanal"],
+  "Only the roles you let in below can see it.": [
+    "لا يراها إلا الأدوار التي تسمح لها أدناه.",
+    "Nur die Rollen, die du unten zulässt, sehen ihn."
+  ],
+  "Everyone in the server can see it.": [
+    "يراها كل من في السيرفر.",
+    "Alle auf dem Server sehen ihn."
+  ],
+  "Can see this channel": ["يرى هذه القناة", "Sieht diesen Kanal"],
+  "Can't see this channel": ["لا يرى هذه القناة", "Sieht diesen Kanal nicht"],
+  "Hide this channel from {0}": ["إخفاء هذه القناة عن {0}", "Diesen Kanal vor {0} verbergen"],
+  "Let {0} see this channel": ["السماح لـ {0} برؤية هذه القناة", "{0} diesen Kanal sehen lassen"],
+  "Let in": ["سماح", "Zulassen"],
+  "The server owner sees every channel.": [
+    "يرى مالك السيرفر كل القنوات.",
+    "Der Serverbesitzer sieht alle Kanäle."
+  ],
+  "It doesn't see private channels yet": [
+    "لا يرى القنوات الخاصة بعد",
+    "Sieht noch keine privaten Kanäle"
+  ],
+  "View channel is on Default. Allow it so this role sees every channel, private ones too.": [
+    "«عرض القناة» على الافتراضي. اسمح به ليرى هذا الدور كل القنوات، والخاصة منها أيضًا.",
+    "„Kanal ansehen“ steht auf Standard. Erlaube es, damit diese Rolle alle Kanäle sieht, auch private."
+  ],
+  "Allow View channel": ["السماح بعرض القناة", "Kanal ansehen erlauben"]
+}
