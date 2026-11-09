@@ -23,7 +23,7 @@ export const LANGUAGE_COVERAGE: Record<string, number> = {
   "fa": 3,
   "fi": 9,
   "fil": 3,
-  "fr": 13,
+  "fr": 100,
   "ga": 2,
   "hi": 3,
   "hr": 3,
