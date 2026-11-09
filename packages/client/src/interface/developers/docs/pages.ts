@@ -8,6 +8,8 @@
  * languages.
  */
 
+import { loadOnce } from "./loadOnce";
+
 const loaders = import.meta.glob<string>("./content/**/*.md", {
   query: "?raw",
   import: "default",
@@ -73,16 +75,11 @@ const pathOf = (id: string, locale?: string) =>
 
 const cache = new Map<string, Promise<string | undefined>>();
 
-/** One Markdown file, fetched once */
+/** One Markdown file, fetched once (a failed fetch is tried again) */
 function file(path: string): Promise<string | undefined> {
   const load = loaders[path];
   if (!load) return Promise.resolve(undefined);
-  let pending = cache.get(path);
-  if (!pending) {
-    pending = load();
-    cache.set(path, pending);
-  }
-  return pending;
+  return loadOnce(cache, path, load);
 }
 
 const FENCE = /^```[^\n]*\n[\s\S]*?^```$/gm;

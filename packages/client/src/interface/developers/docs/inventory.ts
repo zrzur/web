@@ -1,5 +1,7 @@
 import meta from "../data/botApi/meta.json";
 
+import { loadOnce } from "./loadOnce";
+
 /**
  * Typed access to the Bot API inventory. The inventory is generated from the
  * backend source, its OpenAPI document and both SDKs by
@@ -199,7 +201,7 @@ export const ALL_PARTS = Object.keys(partLoaders)
   .map(partOf)
   .filter((part): part is Part => part !== "meta");
 
-const pending = new Map<Part, Promise<void>>();
+const pending = new Map<string, Promise<void>>();
 
 function apply(part: Part, data: unknown) {
   if (part === "index") inventory.index = data as EndpointSummary[];
@@ -221,15 +223,12 @@ function apply(part: Part, data: unknown) {
 export function loadParts(parts: Part[]) {
   return Promise.all(
     parts.map((part) => {
-      let promise = pending.get(part);
-      if (!promise) {
-        const load = partLoaders[`../data/botApi/${part}.json`];
-        promise = load
-          ? load().then((data) => apply(part, data))
-          : Promise.resolve();
-        pending.set(part, promise);
-      }
-      return promise;
+      const load = partLoaders[`../data/botApi/${part}.json`];
+      if (!load) return Promise.resolve();
+      // a failed part is forgotten, so Try again fetches it anew
+      return loadOnce(pending, part, () =>
+        load().then((data) => apply(part, data)),
+      );
     }),
   ).then(() => undefined);
 }

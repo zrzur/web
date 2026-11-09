@@ -58,12 +58,16 @@ export function DocsPortal(props: { page?: string }) {
     locale: string;
     source?: string;
   }>();
+  // a failed load says so; Try again counts up and loads once more
+  const [failed, setFailed] = createSignal<string>();
+  const [attempt, setAttempt] = createSignal(0);
   createEffect(
-    on([() => page()?.id, () => i18n().locale], ([id, locale]) => {
+    on([() => page()?.id, () => i18n().locale, attempt], ([id, locale]) => {
       const current = pageById(id);
       if (!current) return;
       let alive = true;
       onCleanup(() => (alive = false));
+      setFailed(undefined);
       const ready = current.hasSource
         ? loadSource(current.id, locale).then(async (source) => {
             await Promise.all([
@@ -74,9 +78,14 @@ export function DocsPortal(props: { page?: string }) {
             return source;
           })
         : loadExample("hello-raw.mjs").then(() => undefined);
-      void ready.then((source) => {
-        if (alive) setContent({ id: current.id, locale, source });
-      });
+      ready.then(
+        (source) => {
+          if (alive) setContent({ id: current.id, locale, source });
+        },
+        () => {
+          if (alive) setFailed(`${current.id}:${locale}`);
+        },
+      );
     }),
   );
   const shown = () => {
@@ -97,12 +106,16 @@ export function DocsPortal(props: { page?: string }) {
       ...PAGES.filter((p) => p.hasSource).map(
         async (p) => [p.id, (await loadSource(p.id, locale)) ?? ""] as const,
       ),
-    ]).then(([, ...entries]) => {
-      if (searchLocale === locale)
-        setSearchSources(
-          Object.fromEntries(entries as (readonly [string, string])[]),
-        );
-    });
+    ]).then(
+      ([, ...entries]) => {
+        if (searchLocale === locale)
+          setSearchSources(
+            Object.fromEntries(entries as (readonly [string, string])[]),
+          );
+      },
+      // offline: the next focus tries again
+      () => (searchLocale = undefined),
+    );
   }
 
   const titles = (): Record<string, string> => ({
@@ -209,17 +222,27 @@ export function DocsPortal(props: { page?: string }) {
     navigate(href);
   }
 
-  // jump to the anchor, or to the top of a new page
+  // jump to the anchor, or to the top of a new page, once its content is
+  // on screen: before that the anchor does not exist yet
   createEffect(
-    on([() => props.page, () => location.hash], ([, hash]) => {
-      requestAnimationFrame(() => {
-        const target = hash
-          ? document.getElementById(decodeURIComponent(hash.slice(1)))
-          : null;
-        if (target) target.scrollIntoView({ block: "start" });
-        else main?.scrollTo({ top: 0 });
-      });
-    }),
+    on(
+      [
+        () => props.page,
+        () => location.hash,
+        () => shown()?.id,
+        () => shown()?.locale,
+      ],
+      ([, hash, shownId]) => {
+        if (!shownId) return;
+        requestAnimationFrame(() => {
+          const target = hash
+            ? document.getElementById(decodeURIComponent(hash.slice(1)))
+            : null;
+          if (target) target.scrollIntoView({ block: "start" });
+          else main?.scrollTo({ top: 0 });
+        });
+      },
+    ),
   );
 
   const kindLabel = (kind: SearchEntry["kind"]) =>
@@ -367,9 +390,26 @@ export function DocsPortal(props: { page?: string }) {
             <Show
               when={shown()}
               fallback={
-                <Article aria-busy="true">
-                  <Loading>{t`Loading…`}</Loading>
-                </Article>
+                <Show
+                  when={failed() === `${current().id}:${i18n().locale}`}
+                  fallback={
+                    <Article aria-busy="true">
+                      <Loading>{t`Loading…`}</Loading>
+                    </Article>
+                  }
+                >
+                  <Article role="alert">
+                    <Loading>
+                      {t`This page couldn't load. Check your connection.`}
+                    </Loading>
+                    <RetryButton
+                      type="button"
+                      onClick={() => setAttempt((n) => n + 1)}
+                    >
+                      {t`Try again`}
+                    </RetryButton>
+                  </Article>
+                </Show>
               }
             >
               <Show
@@ -637,6 +677,22 @@ const Article = styled("article", {
 
 const Loading = styled("p", {
   base: { color: "var(--z-fg-muted)" },
+});
+
+const RetryButton = styled("button", {
+  base: {
+    minHeight: "36px",
+    paddingInline: "16px",
+    borderRadius: "var(--z-radius-md, 10px)",
+    border: "1px solid var(--z-border-strong)",
+    background: "var(--z-card-bg)",
+    color: "var(--z-fg-primary)",
+    fontWeight: 600,
+    cursor: "pointer",
+    _hover: { background: "var(--z-btn-surface-hover)" },
+    _focusVisible: { outline: "2px solid var(--z-focus)" },
+    _phone: { minHeight: "44px" },
+  },
 });
 
 const Footer = styled("p", {

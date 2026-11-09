@@ -29,6 +29,6 @@ export default defineConfig({
   test: {
     environment: "jsdom",
 
-    include: ["components/**/*.dom.test.tsx"],
+    include: ["components/**/*.dom.test.tsx", "src/**/*.dom.test.tsx"],
   },
 });
