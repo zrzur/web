@@ -5,6 +5,7 @@ import {
   createMemo,
   createSignal,
   on,
+  onCleanup,
 } from "solid-js";
 
 import { Trans, useLingui } from "@lingui/solid/macro";
@@ -13,12 +14,15 @@ import { styled } from "styled-system/jsx";
 import { useLocation, useNavigate } from "@revolt/routing";
 import { Icon } from "@revolt/ui/icons/Icon";
 
+import { loadExample, loadExamplesFor } from "./examples";
 import { GettingStarted } from "./GettingStarted";
 import {
   type SearchEntry,
   endpointSlug,
   inventory,
+  loadParts,
   pageOfSection,
+  partsForMarkdown,
 } from "./inventory";
 import { Markdown } from "./Markdown";
 import { headingsOf } from "./markdownTree";
@@ -26,9 +30,10 @@ import {
   type PageGroup,
   DEFAULT_PAGE,
   PAGES,
+  loadSource,
   pageById,
-  sourceFor,
 } from "./pages";
+import { loadReference } from "./reference";
 
 /**
  * Bot API documentation inside the Developer Portal:
@@ -43,6 +48,62 @@ export function DocsPortal(props: { page?: string }) {
   let main: HTMLDivElement | undefined;
 
   const page = () => pageById(props.page ?? DEFAULT_PAGE);
+
+  // The open page and only what it shows: its Markdown in this language,
+  // the inventory parts of its generated blocks, its examples. Plain
+  // signals, not a resource: a resource would suspend the whole docs page
+  // into the app's loading screen on every page change.
+  const [content, setContent] = createSignal<{
+    id: string;
+    locale: string;
+    source?: string;
+  }>();
+  createEffect(
+    on([() => page()?.id, () => i18n().locale], ([id, locale]) => {
+      const current = pageById(id);
+      if (!current) return;
+      let alive = true;
+      onCleanup(() => (alive = false));
+      const ready = current.hasSource
+        ? loadSource(current.id, locale).then(async (source) => {
+            await Promise.all([
+              loadParts(partsForMarkdown(source ?? "")),
+              loadExamplesFor(source ?? ""),
+              loadReference(locale),
+            ]);
+            return source;
+          })
+        : loadExample("hello-raw.mjs").then(() => undefined);
+      void ready.then((source) => {
+        if (alive) setContent({ id: current.id, locale, source });
+      });
+    }),
+  );
+  const shown = () => {
+    const value = content();
+    return value?.id === page()?.id ? value : undefined;
+  };
+
+  // Search needs every page of this language: fetched on first use only
+  const [searchSources, setSearchSources] =
+    createSignal<Record<string, string>>();
+  let searchLocale: string | undefined;
+  function prepareSearch() {
+    const locale = i18n().locale;
+    if (searchLocale === locale) return;
+    searchLocale = locale;
+    void Promise.all([
+      loadParts(["index", "gateway"]),
+      ...PAGES.filter((p) => p.hasSource).map(
+        async (p) => [p.id, (await loadSource(p.id, locale)) ?? ""] as const,
+      ),
+    ]).then(([, ...entries]) => {
+      if (searchLocale === locale)
+        setSearchSources(
+          Object.fromEntries(entries as (readonly [string, string])[]),
+        );
+    });
+  }
 
   const titles = (): Record<string, string> => ({
     overview: t`Overview`,
@@ -95,6 +156,7 @@ export function DocsPortal(props: { page?: string }) {
   /** Pages, page sections, endpoints and events */
   const index = createMemo<SearchEntry[]>(() => {
     const entries: SearchEntry[] = [];
+    const sources = searchSources() ?? {};
     for (const p of PAGES) {
       const title = titles()[p.id] ?? p.id;
       entries.push({
@@ -103,9 +165,7 @@ export function DocsPortal(props: { page?: string }) {
         detail: p.id,
         href: `/developers/docs/${p.id}`,
       });
-      for (const heading of p.source
-        ? headingsOf(sourceFor(p, i18n().locale) ?? p.source)
-        : [])
+      for (const heading of sources[p.id] ? headingsOf(sources[p.id]) : [])
         entries.push({
           kind: "heading",
           label: heading.text,
@@ -113,7 +173,7 @@ export function DocsPortal(props: { page?: string }) {
           href: `/developers/docs/${p.id}#${heading.id}`,
         });
     }
-    for (const endpoint of inventory.endpoints)
+    for (const endpoint of inventory.index)
       entries.push({
         kind: "endpoint",
         label: endpoint.id,
@@ -201,7 +261,11 @@ export function DocsPortal(props: { page?: string }) {
             value={query()}
             autocomplete="off"
             aria-controls="docs-search-results"
-            onInput={(event) => setQuery(event.currentTarget.value)}
+            onFocus={prepareSearch}
+            onInput={(event) => {
+              prepareSearch();
+              setQuery(event.currentTarget.value);
+            }}
             onKeyDown={(event) => {
               if (event.key === "Enter" && results()[0]) go(results()[0].href);
               if (event.key === "Escape") setQuery("");
@@ -301,29 +365,35 @@ export function DocsPortal(props: { page?: string }) {
         >
           {(current) => (
             <Show
-              when={current().source}
+              when={shown()}
               fallback={
-                <Article>
-                  <GettingStarted onNavigate={go} />
+                <Article aria-busy="true">
+                  <Loading>{t`Loading…`}</Loading>
                 </Article>
               }
             >
-              {(source) => (
-                <Article>
-                  <Markdown
-                    source={sourceFor(current(), i18n().locale) ?? source()}
-                    onNavigate={go}
-                  />
-                  <Footer>
-                    <Trans>
-                      Reference generated from backend{" "}
-                      {inventory.generated.backend} and OpenAPI{" "}
-                      {inventory.generated.openapi}. Descriptions that come from
-                      the API stay in English.
-                    </Trans>
-                  </Footer>
-                </Article>
-              )}
+              <Show
+                when={current().hasSource && shown()?.source}
+                fallback={
+                  <Article>
+                    <GettingStarted onNavigate={go} />
+                  </Article>
+                }
+              >
+                {(source) => (
+                  <Article>
+                    <Markdown source={source()} onNavigate={go} />
+                    <Footer>
+                      <Trans>
+                        Reference generated from backend{" "}
+                        {inventory.generated.backend} and OpenAPI{" "}
+                        {inventory.generated.openapi}. Descriptions that come
+                        from the API stay in English.
+                      </Trans>
+                    </Footer>
+                  </Article>
+                )}
+              </Show>
             </Show>
           )}
         </Show>
@@ -563,6 +633,10 @@ const Article = styled("article", {
       margin: "24px 0",
     },
   },
+});
+
+const Loading = styled("p", {
+  base: { color: "var(--z-fg-muted)" },
 });
 
 const Footer = styled("p", {

@@ -4,8 +4,21 @@ import { fileURLToPath } from "node:url";
 
 import { describe, expect, it } from "vitest";
 
-import { DIRECTIVES, exampleFiles, exampleSource } from "./examples";
-import { botSdk, endpointSlug, inventory, pageOfSection } from "./inventory";
+import {
+  DIRECTIVES,
+  exampleFiles,
+  exampleSource,
+  loadExample,
+} from "./examples";
+import {
+  ALL_PARTS,
+  botSdk,
+  endpointSlug,
+  inventory,
+  loadParts,
+  pageOfSection,
+  partsForMarkdown,
+} from "./inventory";
 import {
   anchorsOf,
   codeBlocksOf,
@@ -13,9 +26,66 @@ import {
   inlineCodeOf,
   linksOf,
 } from "./markdownTree";
-import { PAGES, markdownFiles, translatedSource } from "./pages";
+import {
+  PAGES as PAGE_LIST,
+  loadSource,
+  loadTranslated,
+  markdownFiles,
+} from "./pages";
 
 const here = dirname(fileURLToPath(import.meta.url));
+
+// The app loads pages, inventory parts and examples one by one; the tests
+// load everything first and check it all
+await loadParts(ALL_PARTS);
+await Promise.all(exampleFiles().map(loadExample));
+const PAGES = await Promise.all(
+  PAGE_LIST.map(async (page) => ({
+    ...page,
+    source: page.hasSource ? await loadSource(page.id, "en") : undefined,
+  })),
+);
+const TRANSLATED: Record<"ar" | "de", Record<string, string | undefined>> = {
+  ar: {},
+  de: {},
+};
+for (const locale of ["ar", "de"] as const)
+  for (const page of PAGES)
+    TRANSLATED[locale][page.id] = await loadTranslated(page.id, locale);
+const translatedSource = (id: string, locale: "ar" | "de") =>
+  TRANSLATED[locale][id];
+
+describe("Inventory parts", () => {
+  it("are exactly what split.mjs makes of botApi.json", async () => {
+    const { splitInventory } = (await import(
+      // @ts-expect-error -- a plain Node script without types
+      "../../../../scripts/bot-api/split.mjs"
+    )) as { splitInventory: (inventory: unknown) => Record<string, unknown> };
+    const parts = splitInventory(
+      JSON.parse(
+        readFileSync(join(here, "../data/botApi.json"), "utf8"),
+      ) as unknown,
+    );
+    const files = readdirSync(join(here, "../data/botApi")).sort();
+    expect(files).toEqual(Object.keys(parts).sort());
+    for (const [name, value] of Object.entries(parts))
+      expect(
+        readFileSync(join(here, "../data/botApi", name), "utf8"),
+        `${name} is stale: run node scripts/bot-api/split.mjs`,
+      ).toBe(JSON.stringify(value) + "\n");
+  });
+
+  it("a page loads only the parts its blocks show", () => {
+    expect(partsForMarkdown("# Hi\n\nText only.")).toEqual([]);
+    expect(
+      partsForMarkdown(
+        "```endpoints channels\n\n```\n\n```events\n\n```\n\n```json\n{}\n```",
+      ).sort(),
+    ).toEqual(["gateway", "section-channels"]);
+    expect(partsForMarkdown("```errors bots\n\n```")).toEqual(["errors"]);
+    expect(partsForMarkdown("```ratelimits\n\n```")).toEqual(["index"]);
+  });
+});
 const verification = JSON.parse(
   readFileSync(
     join(here, "../../../../scripts/bot-api/verification.json"),

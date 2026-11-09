@@ -1008,6 +1008,10 @@ if (args.check) {
   console.log("botApi.json is up to date");
 } else {
   writeFileSync(OUT, json);
+  // the parts the docs pages load one by one (scripts/bot-api/split.mjs)
+  execFileSync(process.execPath, [join(here, "split.mjs")], {
+    stdio: "inherit",
+  });
   console.log(
     `routes ${inventory.counts.routesDiscovered}, openapi ${inventory.counts.openapiOperations}, in scope ${inventory.counts.inScope}, bot accepted ${inventory.counts.botAccepted}`,
     inventory.counts.byStatus,
