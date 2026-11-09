@@ -53,6 +53,7 @@ import {
 
 import { createIsTimedOut } from "@revolt/common/lib/createIsTimedOut";
 import { EditMessage } from "./EditMessage";
+import { ForwardedFrame } from "./ForwardedFrame";
 import { ThreadChip } from "./ThreadChip";
 import { InteractionHeader } from "./interactions/InteractionHeader";
 import {
@@ -442,28 +443,31 @@ export function Message(props: Props) {
             return <></>;
           }}
         </CompositionMediaPicker>
-        <Switch>
-          <Match when={props.editing}>
-            <EditMessage message={props.message} />
-          </Match>
-          <Match when={props.message.content && !isOnlyGIF()}>
-            <BreakText>
-              <Markdown content={props.message.content!} />
-            </BreakText>
-          </Match>
-        </Switch>
-        <For
-          each={props.message.attachments?.filter(
-            (file) => !placedAttachments(props.message.components).has(file.id),
-          )}
-        >
-          {(attachment) => (
-            <Attachment message={props.message} file={attachment} />
-          )}
-        </For>
-        <For each={props.message.embeds}>
-          {(embed) => <Embed embed={embed} />}
-        </For>
+        <ForwardedFrame origin={props.message.forwarded}>
+          <Switch>
+            <Match when={props.editing}>
+              <EditMessage message={props.message} />
+            </Match>
+            <Match when={props.message.content && !isOnlyGIF()}>
+              <BreakText>
+                <Markdown content={props.message.content!} />
+              </BreakText>
+            </Match>
+          </Switch>
+          <For
+            each={props.message.attachments?.filter(
+              (file) =>
+                !placedAttachments(props.message.components).has(file.id),
+            )}
+          >
+            {(attachment) => (
+              <Attachment message={props.message} file={attachment} />
+            )}
+          </For>
+          <For each={props.message.embeds}>
+            {(embed) => <Embed embed={embed} />}
+          </For>
+        </ForwardedFrame>
         <MessageComponents
           blocks={props.message.components}
           channelId={props.message.channelId}

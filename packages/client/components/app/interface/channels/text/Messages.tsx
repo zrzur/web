@@ -1018,8 +1018,9 @@ export function Messages(props: Props) {
       () => state.draft.editingMessageId,
       (shouldSetEditingMessageId) => {
         if (shouldSetEditingMessageId === true) {
+          // a forwarded copy holds someone else's words: not editable
           const chosenMessage = messages().find(
-            (message) => message.author?.self,
+            (message) => message.author?.self && !message.forwarded,
           );
           state.draft.setEditingMessage(chosenMessage);
           if (chosenMessage) {

@@ -1027,6 +1027,10 @@ msgstr "بطاقة بالتاريخ الهجري عند انضمام أحد أو
 msgid "A command with this name already exists."
 msgstr "يوجد أمر بهذا الاسم مسبقًا."
 
+#: components/modal/modals/ForwardMessage.tsx
+msgid "A copy goes to the place you choose. Nobody it mentions is notified."
+msgstr "تُرسَل نسخة إلى المكان الذي تختاره، ولا يُنبَّه أحد ممن ذُكروا فيها."
+
 #: components/app/interface/settings/user/subscriptions/PlusPage.tsx
 msgid "A Feather role in the official Zrzur server, with the channels HQ opens to Feather members."
 msgstr "دور ريشة في سيرفر زرزور الرسمي، مع القنوات التي يفتحها المقر لمشتركي ريشة."
@@ -1454,6 +1458,10 @@ msgstr "إضافة صديق جديد"
 #: components/ui/components/features/profiles/ProfileNote.tsx
 msgid "Add a note"
 msgstr "أضف ملاحظة"
+
+#: components/modal/modals/ForwardMessage.tsx
+msgid "Add a note (optional)"
+msgstr "أضف ملاحظة (اختياري)"
 
 #: src/interface/lobby/Lobby.tsx
 msgid "Add a profile picture"
@@ -3354,6 +3362,7 @@ msgstr "كندا"
 #: components/modal/modals/EditPassword.tsx
 #: components/modal/modals/EditServerFolder.tsx
 #: components/modal/modals/EditUsername.tsx
+#: components/modal/modals/ForwardMessage.tsx
 #: components/modal/modals/GiftPlus.tsx
 #: components/modal/modals/Invite.tsx
 #: components/modal/modals/KickMember.tsx
@@ -4080,6 +4089,10 @@ msgstr "اختر ما يظهر في ملفك الشخصي وبأي ترتيب. �
 #: components/app/interface/settings/server/LobbySettings.tsx
 msgid "Choose what the lobby shows and in which order. Sections with nothing to show stay hidden by themselves."
 msgstr "اختر ما تعرضه الردهة وبأي ترتيب. الأقسام التي ليس فيها شيء تختفي تلقائياً."
+
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "Choose where to forward"
+msgstr "اختيار وجهة إعادة التوجيه"
 
 #: components/app/interface/channels/text/interactions/CommandPicker.tsx
 #: components/app/interface/channels/text/interactions/InteractionModal.tsx
@@ -5890,6 +5903,10 @@ msgstr "إشعارات سطح المكتب"
 msgid "Destination voice channel"
 msgstr "الغرفة الصوتية الوجهة"
 
+#: components/modal/modals/ForwardMessage.tsx
+msgid "Destinations"
+msgstr "الوجهات"
+
 #: components/i18n/errors.tsx
 #: components/modal/modals/InteractionsEndpoint.tsx
 #: components/modal/modals/ReportContent.tsx
@@ -5953,6 +5970,7 @@ msgstr "النوافذ الحوارية"
 msgid "Didn't open? Continue in the browser."
 msgstr "لم يُفتح؟ تابع في المتصفح."
 
+#: components/modal/modals/ForwardMessage.tsx
 #: src/interface/navigation/MentionsPanel.tsx
 msgid "Direct message"
 msgstr "رسالة خاصة"
@@ -6536,6 +6554,10 @@ msgstr "البريد الإلكتروني"
 msgctxt "search filter"
 msgid "Embed"
 msgstr "تضمين"
+
+#: components/modal/modals/ForwardMessage.tsx
+msgid "Embed only"
+msgstr "محتوى مضمَّن فقط"
 
 #: src/interface/designs/Looks.tsx
 msgid "Ember"
@@ -7156,6 +7178,10 @@ msgstr "تاريخ الإبلاغ"
 msgid "Files"
 msgstr "الملفات"
 
+#: components/modal/modals/ForwardMessage.tsx
+msgid "Files only"
+msgstr "ملفات فقط"
+
 #: components/app/interface/safety/labels.tsx
 msgid "Files or links that try to harm devices"
 msgstr "ملفات أو روابط تحاول إلحاق الضرر بالأجهزة"
@@ -7483,6 +7509,25 @@ msgstr "المنتديات متوقفة في هذا السيرفر. يمكن ق�
 msgid "Forums are off in this server. You can still read the posts."
 msgstr "المنتديات متوقفة في هذا السيرفر. يمكنك قراءة المنشورات."
 
+#: components/app/menus/MessageContextMenu.tsx
+#: components/modal/modals/ForwardMessage.tsx
+#: components/ui/components/features/messaging/elements/MessageToolbar.tsx
+msgid "Forward"
+msgstr "إعادة توجيه"
+
+#: components/modal/modals/ForwardMessage.tsx
+msgid "Forward message"
+msgstr "إعادة توجيه الرسالة"
+
+#: components/app/interface/channels/text/ForwardedFrame.tsx
+msgid "Forwarded"
+msgstr "رسالة مُعاد توجيهها"
+
+#. placeholder {0}: label(target)
+#: components/modal/modals/ForwardMessage.tsx
+msgid "Forwarded to {0}"
+msgstr "أُعيد توجيهها إلى {0}"
+
 #: components/ui/components/features/profiles/badges/useBadgeText.ts
 msgid "Found a real bug that the Zrzur team verified."
 msgstr "وجد خطأً حقيقيًا تحقق منه فريق زرزور."
@@ -7567,6 +7612,12 @@ msgstr "يجدك أصدقاؤك باسم المستخدم ورقمك الممي�
 msgctxt "search filter"
 msgid "From"
 msgstr "من"
+
+#. placeholder {0}: target().place
+#. placeholder {1}: sentAt()
+#: components/app/interface/channels/text/ForwardedFrame.tsx
+msgid "From {0} · {1}"
+msgstr "من {0} · {1}"
 
 #. placeholder {0}: entry.supercharges
 #: components/app/interface/settings/server/WingsSettings.tsx
@@ -8107,6 +8158,7 @@ msgid "Ground"
 msgstr "الأساس"
 
 #: components/modal/modals/CreateGroupOrServer.tsx
+#: components/modal/modals/ForwardMessage.tsx
 msgid "Group"
 msgstr "مجموعة"
 
@@ -8712,6 +8764,10 @@ msgstr "قيد المراجعة"
 #: src/interface/developers/docs/GettingStarted.tsx
 msgid "In the Developer Portal, choose New application, give it a name and choose Create. The application comes with a bot account."
 msgstr "في بوابة المطورين، اختر «تطبيق جديد» ثم أدخل اسمًا واختر «إنشاء». يأتي التطبيق مع حساب بوت."
+
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "In the forward window: move through the list, then send."
+msgstr "في نافذة إعادة التوجيه: تنقّل في القائمة ثم أرسِل."
 
 #: src/AndroidNag.tsx
 msgid "In the meantime, install Zrzur from Google Play for a faster, smoother experience designed for Android."
@@ -10856,6 +10912,10 @@ msgstr "رسائل وروابط تحفظها لوقت لاحق"
 msgid "Messages before a day"
 msgstr "رسائل قبل يوم محدد"
 
+#: components/i18n/errors.tsx
+msgid "Messages from a mature channel can only be forwarded to another mature channel."
+msgstr "لا يمكن إعادة توجيه رسائل قناة مخصصة للبالغين إلا إلى قناة أخرى مخصصة للبالغين."
+
 #: src/interface/channels/text/searchLabels.ts
 msgid "Messages from a member"
 msgstr "رسائل من عضو"
@@ -12375,6 +12435,10 @@ msgstr "لا توجد نتائج"
 msgid "Nothing found."
 msgstr "لم يُعثر على شيء."
 
+#: components/modal/modals/ForwardMessage.tsx
+msgid "Nothing found. Try another name."
+msgstr "لم يُعثَر على شيء. جرّب اسمًا آخر."
+
 #: components/app/interface/settings/server/audit/AuditLog.tsx
 msgid "Nothing here yet"
 msgstr "لا شيء هنا بعد"
@@ -12819,6 +12883,10 @@ msgstr "وحده مالك السيرفر يستطيع تغيير ظهوره في
 #: components/i18n/errors.tsx
 msgid "Only verified creators and Zrzur staff can do this."
 msgstr "هذا متاح فقط للمصممين المعتمدين وفريق زرزور."
+
+#: components/modal/modals/ForwardMessage.tsx
+msgid "Only you"
+msgstr "أنت فقط"
 
 #: components/modal/modals/CreateChannel.tsx
 msgid "Only you and the roles or members you add can see it."
@@ -15902,6 +15970,7 @@ msgid "Saved"
 msgstr "تم الحفظ"
 
 #: components/app/interface/desktop/Titlebar.tsx
+#: components/modal/modals/ForwardMessage.tsx
 #: src/interface/channels/ChannelHeader.tsx
 #: src/interface/navigation/channels/HomeSidebar.tsx
 #: src/interface/navigation/MentionsPanel.tsx
@@ -16082,6 +16151,10 @@ msgstr "البحث بالاسم أو المعرّف"
 #: components/app/interface/settings/server/bans/ListBans.tsx
 msgid "Search by name or reason"
 msgstr "ابحث بالاسم أو السبب"
+
+#: components/modal/modals/ForwardMessage.tsx
+msgid "Search conversations and channels"
+msgstr "ابحث في المحادثات والقنوات"
 
 #: components/app/interface/settings/user/profile/StyleEditors.tsx
 msgid "Search decorations"
@@ -16420,6 +16493,10 @@ msgstr "إرسال الطلب"
 msgid "Send test"
 msgstr "إرسال تجربة"
 
+#: components/modal/modals/ForwardMessage.tsx
+msgid "Send to"
+msgstr "أرسِل إلى"
+
 #: src/interface/Developers.tsx
 #~ msgid "Send users to /oauth2/authorize with client_id, redirect_uri, response_type=code, scope (identify, servers.read, applications.commands, bot.install), state, code_challenge and code_challenge_method=S256. Exchange the code at POST /oauth2/token. Codes last 10 minutes, access tokens 1 hour, refresh tokens 30 days."
 #~ msgstr "وجّه المستخدمين إلى /oauth2/authorize مع: client_id، وredirect_uri، وresponse_type=code، وscope (identify، servers.read، applications.commands، bot.install)، وstate، وcode_challenge، وcode_challenge_method=S256. ثم استبدل الرمز عبر POST /oauth2/token. صلاحية الرموز 10 دقائق، ورموز الوصول ساعة واحدة، ورموز التحديث 30 يومًا."
@@ -16452,6 +16529,11 @@ msgstr "السنغال"
 #: components/ui/components/features/messaging/elements/Container.tsx
 msgid "Sent"
 msgstr "أُرسلت"
+
+#. placeholder {0}: sentAt()
+#: components/app/interface/channels/text/ForwardedFrame.tsx
+msgid "Sent {0}"
+msgstr "أُرسلت في {0}"
 
 #. placeholder {0}: message.attachments!.length
 #: components/client/NotificationsWorker.tsx

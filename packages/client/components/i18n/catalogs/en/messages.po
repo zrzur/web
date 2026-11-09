@@ -1027,6 +1027,10 @@ msgstr "A card with the Hijri date when someone joins or leaves."
 msgid "A command with this name already exists."
 msgstr "A command with this name already exists."
 
+#: components/modal/modals/ForwardMessage.tsx
+msgid "A copy goes to the place you choose. Nobody it mentions is notified."
+msgstr "A copy goes to the place you choose. Nobody it mentions is notified."
+
 #: components/app/interface/settings/user/subscriptions/PlusPage.tsx
 msgid "A Feather role in the official Zrzur server, with the channels HQ opens to Feather members."
 msgstr "A Feather role in the official Zrzur server, with the channels HQ opens to Feather members."
@@ -1454,6 +1458,10 @@ msgstr "Add a new friend"
 #: components/ui/components/features/profiles/ProfileNote.tsx
 msgid "Add a note"
 msgstr "Add a note"
+
+#: components/modal/modals/ForwardMessage.tsx
+msgid "Add a note (optional)"
+msgstr "Add a note (optional)"
 
 #: src/interface/lobby/Lobby.tsx
 msgid "Add a profile picture"
@@ -3354,6 +3362,7 @@ msgstr "Canada"
 #: components/modal/modals/EditPassword.tsx
 #: components/modal/modals/EditServerFolder.tsx
 #: components/modal/modals/EditUsername.tsx
+#: components/modal/modals/ForwardMessage.tsx
 #: components/modal/modals/GiftPlus.tsx
 #: components/modal/modals/Invite.tsx
 #: components/modal/modals/KickMember.tsx
@@ -4080,6 +4089,10 @@ msgstr "Choose what shows on your profile and in what order. Hidden sections are
 #: components/app/interface/settings/server/LobbySettings.tsx
 msgid "Choose what the lobby shows and in which order. Sections with nothing to show stay hidden by themselves."
 msgstr "Choose what the lobby shows and in which order. Sections with nothing to show stay hidden by themselves."
+
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "Choose where to forward"
+msgstr "Choose where to forward"
 
 #: components/app/interface/channels/text/interactions/CommandPicker.tsx
 #: components/app/interface/channels/text/interactions/InteractionModal.tsx
@@ -5890,6 +5903,10 @@ msgstr "Desktop notifications"
 msgid "Destination voice channel"
 msgstr "Destination voice channel"
 
+#: components/modal/modals/ForwardMessage.tsx
+msgid "Destinations"
+msgstr "Destinations"
+
 #: components/i18n/errors.tsx
 #: components/modal/modals/InteractionsEndpoint.tsx
 #: components/modal/modals/ReportContent.tsx
@@ -5953,6 +5970,7 @@ msgstr "Dialogs"
 msgid "Didn't open? Continue in the browser."
 msgstr "Didn't open? Continue in the browser."
 
+#: components/modal/modals/ForwardMessage.tsx
 #: src/interface/navigation/MentionsPanel.tsx
 msgid "Direct message"
 msgstr "Direct message"
@@ -6537,6 +6555,10 @@ msgstr "Email"
 msgctxt "search filter"
 msgid "Embed"
 msgstr "Embed"
+
+#: components/modal/modals/ForwardMessage.tsx
+msgid "Embed only"
+msgstr "Embed only"
 
 #: src/interface/designs/Looks.tsx
 msgid "Ember"
@@ -7159,6 +7181,10 @@ msgstr "Filed"
 msgid "Files"
 msgstr "Files"
 
+#: components/modal/modals/ForwardMessage.tsx
+msgid "Files only"
+msgstr "Files only"
+
 #: components/app/interface/safety/labels.tsx
 msgid "Files or links that try to harm devices"
 msgstr "Files or links that try to harm devices"
@@ -7486,6 +7512,25 @@ msgstr "Forums are off in this server. This post can only be read."
 msgid "Forums are off in this server. You can still read the posts."
 msgstr "Forums are off in this server. You can still read the posts."
 
+#: components/app/menus/MessageContextMenu.tsx
+#: components/modal/modals/ForwardMessage.tsx
+#: components/ui/components/features/messaging/elements/MessageToolbar.tsx
+msgid "Forward"
+msgstr "Forward"
+
+#: components/modal/modals/ForwardMessage.tsx
+msgid "Forward message"
+msgstr "Forward message"
+
+#: components/app/interface/channels/text/ForwardedFrame.tsx
+msgid "Forwarded"
+msgstr "Forwarded"
+
+#. placeholder {0}: label(target)
+#: components/modal/modals/ForwardMessage.tsx
+msgid "Forwarded to {0}"
+msgstr "Forwarded to {0}"
+
 #: components/ui/components/features/profiles/badges/useBadgeText.ts
 msgid "Found a real bug that the Zrzur team verified."
 msgstr "Found a real bug that the Zrzur team verified."
@@ -7570,6 +7615,12 @@ msgstr "Friends use your username and number tag to find you. Enter your current
 msgctxt "search filter"
 msgid "From"
 msgstr "From"
+
+#. placeholder {0}: target().place
+#. placeholder {1}: sentAt()
+#: components/app/interface/channels/text/ForwardedFrame.tsx
+msgid "From {0} · {1}"
+msgstr "From {0} · {1}"
 
 #. placeholder {0}: entry.supercharges
 #: components/app/interface/settings/server/WingsSettings.tsx
@@ -8110,6 +8161,7 @@ msgid "Ground"
 msgstr "Ground"
 
 #: components/modal/modals/CreateGroupOrServer.tsx
+#: components/modal/modals/ForwardMessage.tsx
 msgid "Group"
 msgstr "Group"
 
@@ -8715,6 +8767,10 @@ msgstr "In review"
 #: src/interface/developers/docs/GettingStarted.tsx
 msgid "In the Developer Portal, choose New application, give it a name and choose Create. The application comes with a bot account."
 msgstr "In the Developer Portal, choose New application, give it a name and choose Create. The application comes with a bot account."
+
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "In the forward window: move through the list, then send."
+msgstr "In the forward window: move through the list, then send."
 
 #: src/AndroidNag.tsx
 msgid "In the meantime, install Zrzur from Google Play for a faster, smoother experience designed for Android."
@@ -10859,6 +10915,10 @@ msgstr "Messages and links you keep for later"
 msgid "Messages before a day"
 msgstr "Messages before a day"
 
+#: components/i18n/errors.tsx
+msgid "Messages from a mature channel can only be forwarded to another mature channel."
+msgstr "Messages from a mature channel can only be forwarded to another mature channel."
+
 #: src/interface/channels/text/searchLabels.ts
 msgid "Messages from a member"
 msgstr "Messages from a member"
@@ -12378,6 +12438,10 @@ msgstr "Nothing found"
 msgid "Nothing found."
 msgstr "Nothing found."
 
+#: components/modal/modals/ForwardMessage.tsx
+msgid "Nothing found. Try another name."
+msgstr "Nothing found. Try another name."
+
 #: components/app/interface/settings/server/audit/AuditLog.tsx
 msgid "Nothing here yet"
 msgstr "Nothing here yet"
@@ -12822,6 +12886,10 @@ msgstr "Only the owner of the server can change how it appears in Discover."
 #: components/i18n/errors.tsx
 msgid "Only verified creators and Zrzur staff can do this."
 msgstr "Only verified creators and Zrzur staff can do this."
+
+#: components/modal/modals/ForwardMessage.tsx
+msgid "Only you"
+msgstr "Only you"
 
 #: components/modal/modals/CreateChannel.tsx
 msgid "Only you and the roles or members you add can see it."
@@ -15905,6 +15973,7 @@ msgid "Saved"
 msgstr "Saved"
 
 #: components/app/interface/desktop/Titlebar.tsx
+#: components/modal/modals/ForwardMessage.tsx
 #: src/interface/channels/ChannelHeader.tsx
 #: src/interface/navigation/channels/HomeSidebar.tsx
 #: src/interface/navigation/MentionsPanel.tsx
@@ -16085,6 +16154,10 @@ msgstr "Search by name or ID"
 #: components/app/interface/settings/server/bans/ListBans.tsx
 msgid "Search by name or reason"
 msgstr "Search by name or reason"
+
+#: components/modal/modals/ForwardMessage.tsx
+msgid "Search conversations and channels"
+msgstr "Search conversations and channels"
 
 #: components/app/interface/settings/user/profile/StyleEditors.tsx
 msgid "Search decorations"
@@ -16423,6 +16496,10 @@ msgstr "Send request"
 msgid "Send test"
 msgstr "Send test"
 
+#: components/modal/modals/ForwardMessage.tsx
+msgid "Send to"
+msgstr "Send to"
+
 #: src/interface/Developers.tsx
 #~ msgid "Send users to /oauth2/authorize with client_id, redirect_uri, response_type=code, scope (identify, servers.read, applications.commands, bot.install), state, code_challenge and code_challenge_method=S256. Exchange the code at POST /oauth2/token. Codes last 10 minutes, access tokens 1 hour, refresh tokens 30 days."
 #~ msgstr "Send users to /oauth2/authorize with client_id, redirect_uri, response_type=code, scope (identify, servers.read, applications.commands, bot.install), state, code_challenge and code_challenge_method=S256. Exchange the code at POST /oauth2/token. Codes last 10 minutes, access tokens 1 hour, refresh tokens 30 days."
@@ -16455,6 +16532,11 @@ msgstr "Senegal"
 #: components/ui/components/features/messaging/elements/Container.tsx
 msgid "Sent"
 msgstr "Sent"
+
+#. placeholder {0}: sentAt()
+#: components/app/interface/channels/text/ForwardedFrame.tsx
+msgid "Sent {0}"
+msgstr "Sent {0}"
 
 #. placeholder {0}: message.attachments!.length
 #: components/client/NotificationsWorker.tsx

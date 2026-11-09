@@ -1027,6 +1027,10 @@ msgstr "Eine Karte mit dem Hidschri-Datum, wenn jemand beitritt oder geht."
 msgid "A command with this name already exists."
 msgstr "Es gibt schon einen Befehl mit diesem Namen."
 
+#: components/modal/modals/ForwardMessage.tsx
+msgid "A copy goes to the place you choose. Nobody it mentions is notified."
+msgstr "Eine Kopie geht an den Ort, den du auswählst. Niemand, der darin erwähnt wird, wird benachrichtigt."
+
 #: components/app/interface/settings/user/subscriptions/PlusPage.tsx
 msgid "A Feather role in the official Zrzur server, with the channels HQ opens to Feather members."
 msgstr "Eine Feather-Rolle im offiziellen Zrzur-Server, mit den Kanälen, die HQ für Feather-Mitglieder öffnet."
@@ -1454,6 +1458,10 @@ msgstr "Einen neuen Freund hinzufügen"
 #: components/ui/components/features/profiles/ProfileNote.tsx
 msgid "Add a note"
 msgstr "Notiz hinzufügen"
+
+#: components/modal/modals/ForwardMessage.tsx
+msgid "Add a note (optional)"
+msgstr "Notiz hinzufügen (optional)"
 
 #: src/interface/lobby/Lobby.tsx
 msgid "Add a profile picture"
@@ -3354,6 +3362,7 @@ msgstr "Kanada"
 #: components/modal/modals/EditPassword.tsx
 #: components/modal/modals/EditServerFolder.tsx
 #: components/modal/modals/EditUsername.tsx
+#: components/modal/modals/ForwardMessage.tsx
 #: components/modal/modals/GiftPlus.tsx
 #: components/modal/modals/Invite.tsx
 #: components/modal/modals/KickMember.tsx
@@ -4080,6 +4089,10 @@ msgstr "Wähle, was auf deinem Profil erscheint und in welcher Reihenfolge. Ausg
 #: components/app/interface/settings/server/LobbySettings.tsx
 msgid "Choose what the lobby shows and in which order. Sections with nothing to show stay hidden by themselves."
 msgstr "Wähle, was die Lobby zeigt und in welcher Reihenfolge. Abschnitte ohne Inhalt bleiben von selbst ausgeblendet."
+
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "Choose where to forward"
+msgstr "Ziel zum Weiterleiten wählen"
 
 #: components/app/interface/channels/text/interactions/CommandPicker.tsx
 #: components/app/interface/channels/text/interactions/InteractionModal.tsx
@@ -5890,6 +5903,10 @@ msgstr "Desktop-Benachrichtigungen"
 msgid "Destination voice channel"
 msgstr "Zielsprachkanal"
 
+#: components/modal/modals/ForwardMessage.tsx
+msgid "Destinations"
+msgstr "Ziele"
+
 #: components/i18n/errors.tsx
 #: components/modal/modals/InteractionsEndpoint.tsx
 #: components/modal/modals/ReportContent.tsx
@@ -5953,6 +5970,7 @@ msgstr "Dialoge"
 msgid "Didn't open? Continue in the browser."
 msgstr "Hat es sich nicht geöffnet? Im Browser fortfahren."
 
+#: components/modal/modals/ForwardMessage.tsx
 #: src/interface/navigation/MentionsPanel.tsx
 msgid "Direct message"
 msgstr "Direktnachricht"
@@ -6536,6 +6554,10 @@ msgstr "E-Mail"
 msgctxt "search filter"
 msgid "Embed"
 msgstr "Einbettung"
+
+#: components/modal/modals/ForwardMessage.tsx
+msgid "Embed only"
+msgstr "Nur eingebetteter Inhalt"
 
 #: src/interface/designs/Looks.tsx
 msgid "Ember"
@@ -7156,6 +7178,10 @@ msgstr "Eingereicht"
 msgid "Files"
 msgstr "Dateien"
 
+#: components/modal/modals/ForwardMessage.tsx
+msgid "Files only"
+msgstr "Nur Dateien"
+
 #: components/app/interface/safety/labels.tsx
 msgid "Files or links that try to harm devices"
 msgstr "Dateien oder Links, die Geräten schaden wollen"
@@ -7483,6 +7509,25 @@ msgstr "Foren sind auf diesem Server ausgeschaltet. Dieser Beitrag kann nur gele
 msgid "Forums are off in this server. You can still read the posts."
 msgstr "Foren sind auf diesem Server ausgeschaltet. Die Beiträge kannst du weiterhin lesen."
 
+#: components/app/menus/MessageContextMenu.tsx
+#: components/modal/modals/ForwardMessage.tsx
+#: components/ui/components/features/messaging/elements/MessageToolbar.tsx
+msgid "Forward"
+msgstr "Weiterleiten"
+
+#: components/modal/modals/ForwardMessage.tsx
+msgid "Forward message"
+msgstr "Nachricht weiterleiten"
+
+#: components/app/interface/channels/text/ForwardedFrame.tsx
+msgid "Forwarded"
+msgstr "Weitergeleitet"
+
+#. placeholder {0}: label(target)
+#: components/modal/modals/ForwardMessage.tsx
+msgid "Forwarded to {0}"
+msgstr "Weitergeleitet an {0}"
+
 #: components/ui/components/features/profiles/badges/useBadgeText.ts
 msgid "Found a real bug that the Zrzur team verified."
 msgstr "Hat einen echten Fehler gefunden, den das Zrzur-Team bestätigt hat."
@@ -7567,6 +7612,12 @@ msgstr "Freunde finden dich über Benutzernamen und Nummer. Gib zur Bestätigung
 msgctxt "search filter"
 msgid "From"
 msgstr "Von"
+
+#. placeholder {0}: target().place
+#. placeholder {1}: sentAt()
+#: components/app/interface/channels/text/ForwardedFrame.tsx
+msgid "From {0} · {1}"
+msgstr "Aus {0} · {1}"
 
 #. placeholder {0}: entry.supercharges
 #: components/app/interface/settings/server/WingsSettings.tsx
@@ -8107,6 +8158,7 @@ msgid "Ground"
 msgstr "Grundlage"
 
 #: components/modal/modals/CreateGroupOrServer.tsx
+#: components/modal/modals/ForwardMessage.tsx
 msgid "Group"
 msgstr "Gruppe"
 
@@ -8712,6 +8764,10 @@ msgstr "In Prüfung"
 #: src/interface/developers/docs/GettingStarted.tsx
 msgid "In the Developer Portal, choose New application, give it a name and choose Create. The application comes with a bot account."
 msgstr "Wähle im Entwicklerportal „Neue Anwendung“, gib einen Namen ein und wähle „Erstellen“. Die Anwendung bringt ein Bot-Konto mit."
+
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "In the forward window: move through the list, then send."
+msgstr "Im Fenster zum Weiterleiten: durch die Liste gehen, dann senden."
 
 #: src/AndroidNag.tsx
 msgid "In the meantime, install Zrzur from Google Play for a faster, smoother experience designed for Android."
@@ -10856,6 +10912,10 @@ msgstr "Nachrichten und Links, die du für später aufhebst"
 msgid "Messages before a day"
 msgstr "Nachrichten vor einem Tag"
 
+#: components/i18n/errors.tsx
+msgid "Messages from a mature channel can only be forwarded to another mature channel."
+msgstr "Nachrichten aus einem Kanal für Erwachsene können nur in einen anderen Kanal für Erwachsene weitergeleitet werden."
+
 #: src/interface/channels/text/searchLabels.ts
 msgid "Messages from a member"
 msgstr "Nachrichten von einem Mitglied"
@@ -12375,6 +12435,10 @@ msgstr "Nichts gefunden"
 msgid "Nothing found."
 msgstr "Nichts gefunden."
 
+#: components/modal/modals/ForwardMessage.tsx
+msgid "Nothing found. Try another name."
+msgstr "Nichts gefunden. Versuch einen anderen Namen."
+
 #: components/app/interface/settings/server/audit/AuditLog.tsx
 msgid "Nothing here yet"
 msgstr "Hier ist noch nichts"
@@ -12819,6 +12883,10 @@ msgstr "Nur der Inhaber des Servers kann ändern, wie er in Entdecken erscheint.
 #: components/i18n/errors.tsx
 msgid "Only verified creators and Zrzur staff can do this."
 msgstr "Das können nur verifizierte Designer und das Zrzur-Team."
+
+#: components/modal/modals/ForwardMessage.tsx
+msgid "Only you"
+msgstr "Nur du"
 
 #: components/modal/modals/CreateChannel.tsx
 msgid "Only you and the roles or members you add can see it."
@@ -15902,6 +15970,7 @@ msgid "Saved"
 msgstr "Gespeichert"
 
 #: components/app/interface/desktop/Titlebar.tsx
+#: components/modal/modals/ForwardMessage.tsx
 #: src/interface/channels/ChannelHeader.tsx
 #: src/interface/navigation/channels/HomeSidebar.tsx
 #: src/interface/navigation/MentionsPanel.tsx
@@ -16082,6 +16151,10 @@ msgstr "Nach Name oder ID suchen"
 #: components/app/interface/settings/server/bans/ListBans.tsx
 msgid "Search by name or reason"
 msgstr "Nach Name oder Grund suchen"
+
+#: components/modal/modals/ForwardMessage.tsx
+msgid "Search conversations and channels"
+msgstr "Unterhaltungen und Kanäle durchsuchen"
 
 #: components/app/interface/settings/user/profile/StyleEditors.tsx
 msgid "Search decorations"
@@ -16420,6 +16493,10 @@ msgstr "Anfrage schicken"
 msgid "Send test"
 msgstr "Test senden"
 
+#: components/modal/modals/ForwardMessage.tsx
+msgid "Send to"
+msgstr "Senden an"
+
 #: src/interface/Developers.tsx
 #~ msgid "Send users to /oauth2/authorize with client_id, redirect_uri, response_type=code, scope (identify, servers.read, applications.commands, bot.install), state, code_challenge and code_challenge_method=S256. Exchange the code at POST /oauth2/token. Codes last 10 minutes, access tokens 1 hour, refresh tokens 30 days."
 #~ msgstr "Leite Nutzer zu /oauth2/authorize mit client_id, redirect_uri, response_type=code, scope (identify, servers.read, applications.commands, bot.install), state, code_challenge und code_challenge_method=S256. Tausche den Code über POST /oauth2/token ein. Codes gelten 10 Minuten, Access-Tokens 1 Stunde, Refresh-Tokens 30 Tage."
@@ -16452,6 +16529,11 @@ msgstr "Senegal"
 #: components/ui/components/features/messaging/elements/Container.tsx
 msgid "Sent"
 msgstr "Gesendet"
+
+#. placeholder {0}: sentAt()
+#: components/app/interface/channels/text/ForwardedFrame.tsx
+msgid "Sent {0}"
+msgstr "Gesendet am {0}"
 
 #. placeholder {0}: message.attachments!.length
 #: components/client/NotificationsWorker.tsx

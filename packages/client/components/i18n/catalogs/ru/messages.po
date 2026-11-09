@@ -1002,6 +1002,10 @@ msgstr "Карточка с датой по хиджре, когда кто-то
 msgid "A command with this name already exists."
 msgstr "Команда с таким названием уже существует."
 
+#: components/modal/modals/ForwardMessage.tsx
+msgid "A copy goes to the place you choose. Nobody it mentions is notified."
+msgstr "Копия отправится туда, куда вы выберете. Упомянутые в ней не получат уведомлений."
+
 #: components/app/interface/settings/user/subscriptions/PlusPage.tsx
 msgid "A Feather role in the official Zrzur server, with the channels HQ opens to Feather members."
 msgstr "Роль Feather на официальном сервере Zrzur с каналами, которые HQ открывает участникам Feather."
@@ -1421,6 +1425,10 @@ msgstr "Добавить нового друга"
 #: components/ui/components/features/profiles/ProfileNote.tsx
 msgid "Add a note"
 msgstr "Добавить заметку"
+
+#: components/modal/modals/ForwardMessage.tsx
+msgid "Add a note (optional)"
+msgstr "Добавить заметку (необязательно)"
 
 #: src/interface/lobby/Lobby.tsx
 msgid "Add a profile picture"
@@ -3256,6 +3264,7 @@ msgstr "Канада"
 #: components/modal/modals/EditPassword.tsx
 #: components/modal/modals/EditServerFolder.tsx
 #: components/modal/modals/EditUsername.tsx
+#: components/modal/modals/ForwardMessage.tsx
 #: components/modal/modals/GiftPlus.tsx
 #: components/modal/modals/Invite.tsx
 #: components/modal/modals/KickMember.tsx
@@ -3942,6 +3951,10 @@ msgstr "Выберите, что показывать в профиле и в к
 #: components/app/interface/settings/server/LobbySettings.tsx
 msgid "Choose what the lobby shows and in which order. Sections with nothing to show stay hidden by themselves."
 msgstr "Выберите, что показывает лобби и в каком порядке. Разделы без содержимого скрываются сами."
+
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "Choose where to forward"
+msgstr "Выбрать, куда переслать"
 
 #: components/app/interface/channels/text/interactions/CommandPicker.tsx
 #: components/app/interface/channels/text/interactions/InteractionModal.tsx
@@ -5635,6 +5648,10 @@ msgstr "Уведомления на рабочем столе"
 msgid "Destination voice channel"
 msgstr "Целевой голосовой канал"
 
+#: components/modal/modals/ForwardMessage.tsx
+msgid "Destinations"
+msgstr "Куда отправить"
+
 #: components/i18n/errors.tsx
 #: components/modal/modals/InteractionsEndpoint.tsx
 #: components/modal/modals/ReportContent.tsx
@@ -5698,6 +5715,7 @@ msgstr "Диалоги"
 msgid "Didn't open? Continue in the browser."
 msgstr "Не открылось? Продолжите в браузере."
 
+#: components/modal/modals/ForwardMessage.tsx
 #: src/interface/navigation/MentionsPanel.tsx
 msgid "Direct message"
 msgstr "Личное сообщение"
@@ -6251,6 +6269,10 @@ msgstr "Электронная почта"
 msgctxt "search filter"
 msgid "Embed"
 msgstr "Встраивание"
+
+#: components/modal/modals/ForwardMessage.tsx
+msgid "Embed only"
+msgstr "Только встроенное содержимое"
 
 #: src/interface/designs/Looks.tsx
 msgid "Ember"
@@ -6856,6 +6878,10 @@ msgstr "Подана"
 msgid "Files"
 msgstr "Файлы"
 
+#: components/modal/modals/ForwardMessage.tsx
+msgid "Files only"
+msgstr "Только файлы"
+
 #: components/app/interface/safety/labels.tsx
 msgid "Files or links that try to harm devices"
 msgstr "Файлы или ссылки, которые пытаются навредить устройствам"
@@ -7143,6 +7169,25 @@ msgstr "Форумы на этом сервере отключены. Эту п�
 msgid "Forums are off in this server. You can still read the posts."
 msgstr "Форумы на этом сервере отключены. Публикации по-прежнему можно читать."
 
+#: components/app/menus/MessageContextMenu.tsx
+#: components/modal/modals/ForwardMessage.tsx
+#: components/ui/components/features/messaging/elements/MessageToolbar.tsx
+msgid "Forward"
+msgstr "Переслать"
+
+#: components/modal/modals/ForwardMessage.tsx
+msgid "Forward message"
+msgstr "Переслать сообщение"
+
+#: components/app/interface/channels/text/ForwardedFrame.tsx
+msgid "Forwarded"
+msgstr "Переслано"
+
+#. placeholder {0}: label(target)
+#: components/modal/modals/ForwardMessage.tsx
+msgid "Forwarded to {0}"
+msgstr "Переслано в {0}"
+
 #: components/ui/components/features/profiles/badges/useBadgeText.ts
 msgid "Found a real bug that the Zrzur team verified."
 msgstr "Найдена настоящая ошибка, подтверждённая командой Zrzur."
@@ -7223,6 +7268,12 @@ msgstr "Друзья находят вас по имени пользовате�
 msgctxt "search filter"
 msgid "From"
 msgstr "От"
+
+#. placeholder {0}: target().place
+#. placeholder {1}: sentAt()
+#: components/app/interface/channels/text/ForwardedFrame.tsx
+msgid "From {0} · {1}"
+msgstr "Из {0} · {1}"
 
 #. placeholder {0}: entry.supercharges
 #: components/app/interface/settings/server/WingsSettings.tsx
@@ -7775,6 +7826,7 @@ msgid "Ground"
 msgstr "Основание"
 
 #: components/modal/modals/CreateGroupOrServer.tsx
+#: components/modal/modals/ForwardMessage.tsx
 msgid "Group"
 msgstr "Группа"
 
@@ -8335,6 +8387,10 @@ msgstr "На проверке"
 #: src/interface/developers/docs/GettingStarted.tsx
 msgid "In the Developer Portal, choose New application, give it a name and choose Create. The application comes with a bot account."
 msgstr "В портале разработчика выберите «Новое приложение», введите название и нажмите «Создать». У приложения сразу есть учётная запись бота."
+
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "In the forward window: move through the list, then send."
+msgstr "В окне пересылки: перемещайтесь по списку, затем отправьте."
 
 #: src/AndroidNag.tsx
 msgid "In the meantime, install Zrzur from Google Play for a faster, smoother experience designed for Android."
@@ -10369,6 +10425,10 @@ msgstr "Сообщения и ссылки, которые вы оставляе
 msgid "Messages before a day"
 msgstr "Сообщения до определённого дня"
 
+#: components/i18n/errors.tsx
+msgid "Messages from a mature channel can only be forwarded to another mature channel."
+msgstr "Сообщения из канала 18+ можно переслать только в другой канал 18+."
+
 #: src/interface/channels/text/searchLabels.ts
 msgid "Messages from a member"
 msgstr "Сообщения участника"
@@ -11808,6 +11868,10 @@ msgstr "Ничего не найдено"
 msgid "Nothing found."
 msgstr "Ничего не найдено."
 
+#: components/modal/modals/ForwardMessage.tsx
+msgid "Nothing found. Try another name."
+msgstr "Ничего не найдено. Попробуйте другое название."
+
 #: components/app/interface/settings/server/audit/AuditLog.tsx
 msgid "Nothing here yet"
 msgstr "Здесь пока ничего нет"
@@ -12215,6 +12279,10 @@ msgstr "Менять, как сервер выглядит в «Обзоре», 
 #: components/i18n/errors.tsx
 msgid "Only verified creators and Zrzur staff can do this."
 msgstr "Это могут делать только проверенные авторы и команда Zrzur."
+
+#: components/modal/modals/ForwardMessage.tsx
+msgid "Only you"
+msgstr "Только вы"
 
 #: components/modal/modals/CreateChannel.tsx
 msgid "Only you and the roles or members you add can see it."
@@ -15117,6 +15185,7 @@ msgid "Saved"
 msgstr "Сохранено"
 
 #: components/app/interface/desktop/Titlebar.tsx
+#: components/modal/modals/ForwardMessage.tsx
 #: src/interface/channels/ChannelHeader.tsx
 #: src/interface/navigation/channels/HomeSidebar.tsx
 #: src/interface/navigation/MentionsPanel.tsx
@@ -15289,6 +15358,10 @@ msgstr "Поиск по имени или ID"
 #: components/app/interface/settings/server/bans/ListBans.tsx
 msgid "Search by name or reason"
 msgstr "Поиск по имени или причине"
+
+#: components/modal/modals/ForwardMessage.tsx
+msgid "Search conversations and channels"
+msgstr "Поиск бесед и каналов"
 
 #: components/app/interface/settings/user/profile/StyleEditors.tsx
 msgid "Search decorations"
@@ -15615,6 +15688,10 @@ msgstr "Отправить запрос"
 msgid "Send test"
 msgstr "Отправить тест"
 
+#: components/modal/modals/ForwardMessage.tsx
+msgid "Send to"
+msgstr "Отправить в"
+
 #: components/ui/components/features/messaging/composition/VoiceRecorder.tsx
 msgid "Send voice message"
 msgstr "Отправить голосовое сообщение"
@@ -15643,6 +15720,11 @@ msgstr "Сенегал"
 #: components/ui/components/features/messaging/elements/Container.tsx
 msgid "Sent"
 msgstr "Отправлено"
+
+#. placeholder {0}: sentAt()
+#: components/app/interface/channels/text/ForwardedFrame.tsx
+msgid "Sent {0}"
+msgstr "Отправлено {0}"
 
 #. placeholder {0}: message.attachments!.length
 #: components/client/NotificationsWorker.tsx

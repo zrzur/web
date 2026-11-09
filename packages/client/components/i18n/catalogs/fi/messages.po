@@ -1002,6 +1002,10 @@ msgstr ""
 msgid "A command with this name already exists."
 msgstr ""
 
+#: components/modal/modals/ForwardMessage.tsx
+msgid "A copy goes to the place you choose. Nobody it mentions is notified."
+msgstr ""
+
 #: components/app/interface/settings/user/subscriptions/PlusPage.tsx
 msgid "A Feather role in the official Zrzur server, with the channels HQ opens to Feather members."
 msgstr ""
@@ -1420,6 +1424,10 @@ msgstr "Lisää uusi kaveri"
 
 #: components/ui/components/features/profiles/ProfileNote.tsx
 msgid "Add a note"
+msgstr ""
+
+#: components/modal/modals/ForwardMessage.tsx
+msgid "Add a note (optional)"
 msgstr ""
 
 #: src/interface/lobby/Lobby.tsx
@@ -3256,6 +3264,7 @@ msgstr ""
 #: components/modal/modals/EditPassword.tsx
 #: components/modal/modals/EditServerFolder.tsx
 #: components/modal/modals/EditUsername.tsx
+#: components/modal/modals/ForwardMessage.tsx
 #: components/modal/modals/GiftPlus.tsx
 #: components/modal/modals/Invite.tsx
 #: components/modal/modals/KickMember.tsx
@@ -3941,6 +3950,10 @@ msgstr ""
 
 #: components/app/interface/settings/server/LobbySettings.tsx
 msgid "Choose what the lobby shows and in which order. Sections with nothing to show stay hidden by themselves."
+msgstr ""
+
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "Choose where to forward"
 msgstr ""
 
 #: components/app/interface/channels/text/interactions/CommandPicker.tsx
@@ -5635,6 +5648,10 @@ msgstr ""
 msgid "Destination voice channel"
 msgstr ""
 
+#: components/modal/modals/ForwardMessage.tsx
+msgid "Destinations"
+msgstr ""
+
 #: components/i18n/errors.tsx
 #: components/modal/modals/InteractionsEndpoint.tsx
 #: components/modal/modals/ReportContent.tsx
@@ -5698,6 +5715,7 @@ msgstr ""
 msgid "Didn't open? Continue in the browser."
 msgstr ""
 
+#: components/modal/modals/ForwardMessage.tsx
 #: src/interface/navigation/MentionsPanel.tsx
 msgid "Direct message"
 msgstr ""
@@ -6250,6 +6268,10 @@ msgstr "Sähköpostiosoite"
 #: src/interface/channels/text/searchLabels.ts
 msgctxt "search filter"
 msgid "Embed"
+msgstr ""
+
+#: components/modal/modals/ForwardMessage.tsx
+msgid "Embed only"
 msgstr ""
 
 #: src/interface/designs/Looks.tsx
@@ -6856,6 +6878,10 @@ msgstr ""
 msgid "Files"
 msgstr ""
 
+#: components/modal/modals/ForwardMessage.tsx
+msgid "Files only"
+msgstr ""
+
 #: components/app/interface/safety/labels.tsx
 msgid "Files or links that try to harm devices"
 msgstr ""
@@ -7143,6 +7169,25 @@ msgstr ""
 msgid "Forums are off in this server. You can still read the posts."
 msgstr ""
 
+#: components/app/menus/MessageContextMenu.tsx
+#: components/modal/modals/ForwardMessage.tsx
+#: components/ui/components/features/messaging/elements/MessageToolbar.tsx
+msgid "Forward"
+msgstr ""
+
+#: components/modal/modals/ForwardMessage.tsx
+msgid "Forward message"
+msgstr ""
+
+#: components/app/interface/channels/text/ForwardedFrame.tsx
+msgid "Forwarded"
+msgstr ""
+
+#. placeholder {0}: label(target)
+#: components/modal/modals/ForwardMessage.tsx
+msgid "Forwarded to {0}"
+msgstr ""
+
 #: components/ui/components/features/profiles/badges/useBadgeText.ts
 msgid "Found a real bug that the Zrzur team verified."
 msgstr ""
@@ -7222,6 +7267,12 @@ msgstr ""
 #: src/interface/channels/text/searchLabels.ts
 msgctxt "search filter"
 msgid "From"
+msgstr ""
+
+#. placeholder {0}: target().place
+#. placeholder {1}: sentAt()
+#: components/app/interface/channels/text/ForwardedFrame.tsx
+msgid "From {0} · {1}"
 msgstr ""
 
 #. placeholder {0}: entry.supercharges
@@ -7775,6 +7826,7 @@ msgid "Ground"
 msgstr ""
 
 #: components/modal/modals/CreateGroupOrServer.tsx
+#: components/modal/modals/ForwardMessage.tsx
 msgid "Group"
 msgstr ""
 
@@ -8334,6 +8386,10 @@ msgstr ""
 
 #: src/interface/developers/docs/GettingStarted.tsx
 msgid "In the Developer Portal, choose New application, give it a name and choose Create. The application comes with a bot account."
+msgstr ""
+
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "In the forward window: move through the list, then send."
 msgstr ""
 
 #: src/AndroidNag.tsx
@@ -10369,6 +10425,10 @@ msgstr ""
 msgid "Messages before a day"
 msgstr ""
 
+#: components/i18n/errors.tsx
+msgid "Messages from a mature channel can only be forwarded to another mature channel."
+msgstr ""
+
 #: src/interface/channels/text/searchLabels.ts
 msgid "Messages from a member"
 msgstr ""
@@ -11808,6 +11868,10 @@ msgstr ""
 msgid "Nothing found."
 msgstr ""
 
+#: components/modal/modals/ForwardMessage.tsx
+msgid "Nothing found. Try another name."
+msgstr ""
+
 #: components/app/interface/settings/server/audit/AuditLog.tsx
 msgid "Nothing here yet"
 msgstr ""
@@ -12214,6 +12278,10 @@ msgstr ""
 
 #: components/i18n/errors.tsx
 msgid "Only verified creators and Zrzur staff can do this."
+msgstr ""
+
+#: components/modal/modals/ForwardMessage.tsx
+msgid "Only you"
 msgstr ""
 
 #: components/modal/modals/CreateChannel.tsx
@@ -15117,6 +15185,7 @@ msgid "Saved"
 msgstr ""
 
 #: components/app/interface/desktop/Titlebar.tsx
+#: components/modal/modals/ForwardMessage.tsx
 #: src/interface/channels/ChannelHeader.tsx
 #: src/interface/navigation/channels/HomeSidebar.tsx
 #: src/interface/navigation/MentionsPanel.tsx
@@ -15288,6 +15357,10 @@ msgstr ""
 
 #: components/app/interface/settings/server/bans/ListBans.tsx
 msgid "Search by name or reason"
+msgstr ""
+
+#: components/modal/modals/ForwardMessage.tsx
+msgid "Search conversations and channels"
 msgstr ""
 
 #: components/app/interface/settings/user/profile/StyleEditors.tsx
@@ -15615,6 +15688,10 @@ msgstr ""
 msgid "Send test"
 msgstr ""
 
+#: components/modal/modals/ForwardMessage.tsx
+msgid "Send to"
+msgstr ""
+
 #: components/ui/components/features/messaging/composition/VoiceRecorder.tsx
 msgid "Send voice message"
 msgstr ""
@@ -15643,6 +15720,11 @@ msgstr ""
 #: components/ui/components/features/messaging/elements/Container.tsx
 msgid "Sent"
 msgstr "Lähetetty"
+
+#. placeholder {0}: sentAt()
+#: components/app/interface/channels/text/ForwardedFrame.tsx
+msgid "Sent {0}"
+msgstr ""
 
 #. placeholder {0}: message.attachments!.length
 #: components/client/NotificationsWorker.tsx

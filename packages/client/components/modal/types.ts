@@ -144,6 +144,10 @@ export type Modals =
       message: Message;
     }
   | {
+      type: "forward_message";
+      message: Message;
+    }
+  | {
       type: "delete_server";
       server: Server;
     }

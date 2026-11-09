@@ -9,13 +9,18 @@ import {
   canSend,
   threadIsReadOnly,
 } from "@revolt/app/interface/channels/threadAccess";
-import { useUser } from "@revolt/client";
+import { useClient, useUser } from "@revolt/client";
 import { useModals } from "@revolt/modal";
+import {
+  canForwardMessage,
+  forwardingEnabled,
+} from "@revolt/modal/modals/forwardTargets";
 import { useState } from "@revolt/state";
 import { Icon } from "@revolt/ui/icons/Icon";
 
 export function MessageToolbar() {
   const user = useUser();
+  const client = useClient();
   const state = useState();
   const { openModal } = useModals();
   const { message, reactPicker } = useMessage();
@@ -74,7 +79,32 @@ export function MessageToolbar() {
         </button>
       </Show>
       <Show
-        when={message?.author?.self && message.channel && canSend(message.channel)}
+        when={
+          message &&
+          !message.author?.official &&
+          forwardingEnabled(client()) &&
+          canForwardMessage(message)
+        }
+      >
+        <button
+          type="button"
+          class={tool({ mirror: true })}
+          aria-label={t`Forward`}
+          use:floating={tip(t`Forward`)}
+          onClick={() =>
+            openModal({ type: "forward_message", message: message! })
+          }
+        >
+          <Icon name="arrow-bend-up-right" size={20} />
+        </button>
+      </Show>
+      <Show
+        when={
+          message?.author?.self &&
+          !message.forwarded &&
+          message.channel &&
+          canSend(message.channel)
+        }
       >
         <button
           type="button"
@@ -168,6 +198,12 @@ const tool = cva({
     },
   },
   variants: {
+    /** arrows that point a way turn round in right-to-left text */
+    mirror: {
+      true: {
+        "&:dir(rtl) svg": { transform: "scaleX(-1)" },
+      },
+    },
     danger: {
       true: {
         "&:hover": {

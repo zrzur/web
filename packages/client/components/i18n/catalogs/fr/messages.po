@@ -1002,6 +1002,10 @@ msgstr "Une carte avec la date hégirienne quand quelqu’un arrive ou part."
 msgid "A command with this name already exists."
 msgstr "Une commande portant ce nom existe déjà."
 
+#: components/modal/modals/ForwardMessage.tsx
+msgid "A copy goes to the place you choose. Nobody it mentions is notified."
+msgstr "Une copie part à l’endroit que tu choisis. Les personnes mentionnées ne sont pas notifiées."
+
 #: components/app/interface/settings/user/subscriptions/PlusPage.tsx
 msgid "A Feather role in the official Zrzur server, with the channels HQ opens to Feather members."
 msgstr "Un rôle Feather sur le serveur officiel de Zrzur, avec les salons que le QG ouvre aux membres Feather."
@@ -1421,6 +1425,10 @@ msgstr "Ajouter un nouvel ami"
 #: components/ui/components/features/profiles/ProfileNote.tsx
 msgid "Add a note"
 msgstr "Ajouter une note"
+
+#: components/modal/modals/ForwardMessage.tsx
+msgid "Add a note (optional)"
+msgstr "Ajouter une note (facultatif)"
 
 #: src/interface/lobby/Lobby.tsx
 msgid "Add a profile picture"
@@ -3256,6 +3264,7 @@ msgstr "Canada"
 #: components/modal/modals/EditPassword.tsx
 #: components/modal/modals/EditServerFolder.tsx
 #: components/modal/modals/EditUsername.tsx
+#: components/modal/modals/ForwardMessage.tsx
 #: components/modal/modals/GiftPlus.tsx
 #: components/modal/modals/Invite.tsx
 #: components/modal/modals/KickMember.tsx
@@ -3942,6 +3951,10 @@ msgstr "Choisis ce qui s’affiche sur ton profil et dans quel ordre. Les sectio
 #: components/app/interface/settings/server/LobbySettings.tsx
 msgid "Choose what the lobby shows and in which order. Sections with nothing to show stay hidden by themselves."
 msgstr "Choisis ce que la salle d’attente affiche et dans quel ordre. Les sections sans contenu restent masquées d’elles-mêmes."
+
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "Choose where to forward"
+msgstr "Choisir où transférer"
 
 #: components/app/interface/channels/text/interactions/CommandPicker.tsx
 #: components/app/interface/channels/text/interactions/InteractionModal.tsx
@@ -5635,6 +5648,10 @@ msgstr "Notifications du bureau"
 msgid "Destination voice channel"
 msgstr "Salon vocal de destination"
 
+#: components/modal/modals/ForwardMessage.tsx
+msgid "Destinations"
+msgstr "Destinations"
+
 #: components/i18n/errors.tsx
 #: components/modal/modals/InteractionsEndpoint.tsx
 #: components/modal/modals/ReportContent.tsx
@@ -5698,6 +5715,7 @@ msgstr "Fenêtres"
 msgid "Didn't open? Continue in the browser."
 msgstr "Rien ne s’est ouvert ? Continue dans le navigateur."
 
+#: components/modal/modals/ForwardMessage.tsx
 #: src/interface/navigation/MentionsPanel.tsx
 msgid "Direct message"
 msgstr "Message privé"
@@ -6251,6 +6269,10 @@ msgstr "Adresse e-mail"
 msgctxt "search filter"
 msgid "Embed"
 msgstr "Intégration"
+
+#: components/modal/modals/ForwardMessage.tsx
+msgid "Embed only"
+msgstr "Contenu intégré uniquement"
 
 #: src/interface/designs/Looks.tsx
 msgid "Ember"
@@ -6856,6 +6878,10 @@ msgstr "Déposé"
 msgid "Files"
 msgstr "Fichiers"
 
+#: components/modal/modals/ForwardMessage.tsx
+msgid "Files only"
+msgstr "Fichiers uniquement"
+
 #: components/app/interface/safety/labels.tsx
 msgid "Files or links that try to harm devices"
 msgstr "Fichiers ou liens qui tentent de nuire aux appareils"
@@ -7143,6 +7169,25 @@ msgstr "Les forums sont désactivés sur ce serveur. Ce post ne peut qu’être 
 msgid "Forums are off in this server. You can still read the posts."
 msgstr "Les forums sont désactivés sur ce serveur. Tu peux toujours lire les posts."
 
+#: components/app/menus/MessageContextMenu.tsx
+#: components/modal/modals/ForwardMessage.tsx
+#: components/ui/components/features/messaging/elements/MessageToolbar.tsx
+msgid "Forward"
+msgstr "Transférer"
+
+#: components/modal/modals/ForwardMessage.tsx
+msgid "Forward message"
+msgstr "Transférer le message"
+
+#: components/app/interface/channels/text/ForwardedFrame.tsx
+msgid "Forwarded"
+msgstr "Transféré"
+
+#. placeholder {0}: label(target)
+#: components/modal/modals/ForwardMessage.tsx
+msgid "Forwarded to {0}"
+msgstr "Transféré vers {0}"
+
 #: components/ui/components/features/profiles/badges/useBadgeText.ts
 msgid "Found a real bug that the Zrzur team verified."
 msgstr "A trouvé un vrai bug que l’équipe Zrzur a vérifié."
@@ -7223,6 +7268,12 @@ msgstr "Tes amis utilisent ton nom d’utilisateur et ton numéro d’identifica
 msgctxt "search filter"
 msgid "From"
 msgstr "De"
+
+#. placeholder {0}: target().place
+#. placeholder {1}: sentAt()
+#: components/app/interface/channels/text/ForwardedFrame.tsx
+msgid "From {0} · {1}"
+msgstr "De {0} · {1}"
 
 #. placeholder {0}: entry.supercharges
 #: components/app/interface/settings/server/WingsSettings.tsx
@@ -7775,6 +7826,7 @@ msgid "Ground"
 msgstr "Motif"
 
 #: components/modal/modals/CreateGroupOrServer.tsx
+#: components/modal/modals/ForwardMessage.tsx
 msgid "Group"
 msgstr "Groupe"
 
@@ -8335,6 +8387,10 @@ msgstr "En cours d’examen"
 #: src/interface/developers/docs/GettingStarted.tsx
 msgid "In the Developer Portal, choose New application, give it a name and choose Create. The application comes with a bot account."
 msgstr "Dans le portail développeur, choisis Nouvelle application, donne-lui un nom et choisis Créer. L’application est fournie avec un compte de bot."
+
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "In the forward window: move through the list, then send."
+msgstr "Dans la fenêtre de transfert : parcours la liste, puis envoie."
 
 #: src/AndroidNag.tsx
 msgid "In the meantime, install Zrzur from Google Play for a faster, smoother experience designed for Android."
@@ -10369,6 +10425,10 @@ msgstr "Messages et liens à garder pour plus tard"
 msgid "Messages before a day"
 msgstr "Messages avant un jour donné"
 
+#: components/i18n/errors.tsx
+msgid "Messages from a mature channel can only be forwarded to another mature channel."
+msgstr "Les messages d’un salon réservé aux adultes ne peuvent être transférés que vers un autre salon réservé aux adultes."
+
 #: src/interface/channels/text/searchLabels.ts
 msgid "Messages from a member"
 msgstr "Messages d’un membre"
@@ -11808,6 +11868,10 @@ msgstr "Rien trouvé"
 msgid "Nothing found."
 msgstr "Rien trouvé."
 
+#: components/modal/modals/ForwardMessage.tsx
+msgid "Nothing found. Try another name."
+msgstr "Aucun résultat. Essaie un autre nom."
+
 #: components/app/interface/settings/server/audit/AuditLog.tsx
 msgid "Nothing here yet"
 msgstr "Rien ici pour l’instant"
@@ -12215,6 +12279,10 @@ msgstr "Seul le propriétaire du serveur peut modifier la façon dont il appara�
 #: components/i18n/errors.tsx
 msgid "Only verified creators and Zrzur staff can do this."
 msgstr "Seuls les créateurs vérifiés et l’équipe Zrzur peuvent faire cela."
+
+#: components/modal/modals/ForwardMessage.tsx
+msgid "Only you"
+msgstr "Seulement toi"
 
 #: components/modal/modals/CreateChannel.tsx
 msgid "Only you and the roles or members you add can see it."
@@ -15117,6 +15185,7 @@ msgid "Saved"
 msgstr "Enregistré"
 
 #: components/app/interface/desktop/Titlebar.tsx
+#: components/modal/modals/ForwardMessage.tsx
 #: src/interface/channels/ChannelHeader.tsx
 #: src/interface/navigation/channels/HomeSidebar.tsx
 #: src/interface/navigation/MentionsPanel.tsx
@@ -15289,6 +15358,10 @@ msgstr "Rechercher par nom ou ID"
 #: components/app/interface/settings/server/bans/ListBans.tsx
 msgid "Search by name or reason"
 msgstr "Rechercher par nom ou motif"
+
+#: components/modal/modals/ForwardMessage.tsx
+msgid "Search conversations and channels"
+msgstr "Rechercher des conversations et des salons"
 
 #: components/app/interface/settings/user/profile/StyleEditors.tsx
 msgid "Search decorations"
@@ -15615,6 +15688,10 @@ msgstr "Envoyer la demande"
 msgid "Send test"
 msgstr "Envoyer un test"
 
+#: components/modal/modals/ForwardMessage.tsx
+msgid "Send to"
+msgstr "Envoyer à"
+
 #: components/ui/components/features/messaging/composition/VoiceRecorder.tsx
 msgid "Send voice message"
 msgstr "Envoyer un message vocal"
@@ -15643,6 +15720,11 @@ msgstr "Sénégal"
 #: components/ui/components/features/messaging/elements/Container.tsx
 msgid "Sent"
 msgstr "Envoyé"
+
+#. placeholder {0}: sentAt()
+#: components/app/interface/channels/text/ForwardedFrame.tsx
+msgid "Sent {0}"
+msgstr "Envoyé le {0}"
 
 #. placeholder {0}: message.attachments!.length
 #: components/client/NotificationsWorker.tsx

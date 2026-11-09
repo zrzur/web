@@ -1002,6 +1002,10 @@ msgstr "有人加入或离开时，显示带有回历日期的卡片。"
 msgid "A command with this name already exists."
 msgstr "已存在同名命令。"
 
+#: components/modal/modals/ForwardMessage.tsx
+msgid "A copy goes to the place you choose. Nobody it mentions is notified."
+msgstr "副本会发送到你选择的位置。其中提及的人不会收到通知。"
+
 #: components/app/interface/settings/user/subscriptions/PlusPage.tsx
 msgid "A Feather role in the official Zrzur server, with the channels HQ opens to Feather members."
 msgstr "Zrzur 官方服务器中的 Feather 角色，并开放总部中仅限 Feather 成员的频道。"
@@ -1421,6 +1425,10 @@ msgstr "添加新好友"
 #: components/ui/components/features/profiles/ProfileNote.tsx
 msgid "Add a note"
 msgstr "添加备注"
+
+#: components/modal/modals/ForwardMessage.tsx
+msgid "Add a note (optional)"
+msgstr "添加备注（可选）"
 
 #: src/interface/lobby/Lobby.tsx
 msgid "Add a profile picture"
@@ -3256,6 +3264,7 @@ msgstr "加拿大"
 #: components/modal/modals/EditPassword.tsx
 #: components/modal/modals/EditServerFolder.tsx
 #: components/modal/modals/EditUsername.tsx
+#: components/modal/modals/ForwardMessage.tsx
 #: components/modal/modals/GiftPlus.tsx
 #: components/modal/modals/Invite.tsx
 #: components/modal/modals/KickMember.tsx
@@ -3942,6 +3951,10 @@ msgstr "选择个人资料中显示的内容及顺序。隐藏的部分不会发
 #: components/app/interface/settings/server/LobbySettings.tsx
 msgid "Choose what the lobby shows and in which order. Sections with nothing to show stay hidden by themselves."
 msgstr "选择大厅显示的内容及顺序。没有内容可显示的部分会自动隐藏。"
+
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "Choose where to forward"
+msgstr "选择转发位置"
 
 #: components/app/interface/channels/text/interactions/CommandPicker.tsx
 #: components/app/interface/channels/text/interactions/InteractionModal.tsx
@@ -5635,6 +5648,10 @@ msgstr "桌面通知"
 msgid "Destination voice channel"
 msgstr "目标语音频道"
 
+#: components/modal/modals/ForwardMessage.tsx
+msgid "Destinations"
+msgstr "目标位置"
+
 #: components/i18n/errors.tsx
 #: components/modal/modals/InteractionsEndpoint.tsx
 #: components/modal/modals/ReportContent.tsx
@@ -5698,6 +5715,7 @@ msgstr "对话框"
 msgid "Didn't open? Continue in the browser."
 msgstr "没有打开？请在浏览器中继续。"
 
+#: components/modal/modals/ForwardMessage.tsx
 #: src/interface/navigation/MentionsPanel.tsx
 msgid "Direct message"
 msgstr "私信"
@@ -6251,6 +6269,10 @@ msgstr "电子邮件地址"
 msgctxt "search filter"
 msgid "Embed"
 msgstr "嵌入内容"
+
+#: components/modal/modals/ForwardMessage.tsx
+msgid "Embed only"
+msgstr "仅嵌入内容"
 
 #: src/interface/designs/Looks.tsx
 msgid "Ember"
@@ -6856,6 +6878,10 @@ msgstr "已提交"
 msgid "Files"
 msgstr "文件"
 
+#: components/modal/modals/ForwardMessage.tsx
+msgid "Files only"
+msgstr "仅文件"
+
 #: components/app/interface/safety/labels.tsx
 msgid "Files or links that try to harm devices"
 msgstr "企图损害设备的文件或链接"
@@ -7143,6 +7169,25 @@ msgstr "此服务器已关闭论坛。这篇帖子只能阅读。"
 msgid "Forums are off in this server. You can still read the posts."
 msgstr "此服务器已关闭论坛。你仍然可以阅读这些帖子。"
 
+#: components/app/menus/MessageContextMenu.tsx
+#: components/modal/modals/ForwardMessage.tsx
+#: components/ui/components/features/messaging/elements/MessageToolbar.tsx
+msgid "Forward"
+msgstr "转发"
+
+#: components/modal/modals/ForwardMessage.tsx
+msgid "Forward message"
+msgstr "转发消息"
+
+#: components/app/interface/channels/text/ForwardedFrame.tsx
+msgid "Forwarded"
+msgstr "已转发"
+
+#. placeholder {0}: label(target)
+#: components/modal/modals/ForwardMessage.tsx
+msgid "Forwarded to {0}"
+msgstr "已转发到 {0}"
+
 #: components/ui/components/features/profiles/badges/useBadgeText.ts
 msgid "Found a real bug that the Zrzur team verified."
 msgstr "发现了一个经 Zrzur 团队确认的真实漏洞。"
@@ -7223,6 +7268,12 @@ msgstr "好友通过你的用户名和数字标签找到你。请输入当前密
 msgctxt "search filter"
 msgid "From"
 msgstr "来自"
+
+#. placeholder {0}: target().place
+#. placeholder {1}: sentAt()
+#: components/app/interface/channels/text/ForwardedFrame.tsx
+msgid "From {0} · {1}"
+msgstr "来自 {0} · {1}"
 
 #. placeholder {0}: entry.supercharges
 #: components/app/interface/settings/server/WingsSettings.tsx
@@ -7775,6 +7826,7 @@ msgid "Ground"
 msgstr "依据"
 
 #: components/modal/modals/CreateGroupOrServer.tsx
+#: components/modal/modals/ForwardMessage.tsx
 msgid "Group"
 msgstr "群组"
 
@@ -8335,6 +8387,10 @@ msgstr "审核中"
 #: src/interface/developers/docs/GettingStarted.tsx
 msgid "In the Developer Portal, choose New application, give it a name and choose Create. The application comes with a bot account."
 msgstr "在开发者门户中，选择“新建应用”，为它命名，然后选择“创建”。应用自带一个机器人账号。"
+
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "In the forward window: move through the list, then send."
+msgstr "在转发窗口中：在列表中移动，然后发送。"
 
 #: src/AndroidNag.tsx
 msgid "In the meantime, install Zrzur from Google Play for a faster, smoother experience designed for Android."
@@ -10369,6 +10425,10 @@ msgstr "你保存起来稍后查看的消息和链接"
 msgid "Messages before a day"
 msgstr "某天之前的消息"
 
+#: components/i18n/errors.tsx
+msgid "Messages from a mature channel can only be forwarded to another mature channel."
+msgstr "成人内容频道中的消息只能转发到另一个成人内容频道。"
+
 #: src/interface/channels/text/searchLabels.ts
 msgid "Messages from a member"
 msgstr "某位成员发送的消息"
@@ -11808,6 +11868,10 @@ msgstr "未找到任何内容"
 msgid "Nothing found."
 msgstr "未找到任何内容。"
 
+#: components/modal/modals/ForwardMessage.tsx
+msgid "Nothing found. Try another name."
+msgstr "未找到结果。试试其他名称。"
+
 #: components/app/interface/settings/server/audit/AuditLog.tsx
 msgid "Nothing here yet"
 msgstr "这里还没有内容"
@@ -12215,6 +12279,10 @@ msgstr "只有服务器所有者才能更改它在“发现”中的显示方式
 #: components/i18n/errors.tsx
 msgid "Only verified creators and Zrzur staff can do this."
 msgstr "只有已验证的创作者和 Zrzur 工作人员可以这样做。"
+
+#: components/modal/modals/ForwardMessage.tsx
+msgid "Only you"
+msgstr "仅你自己"
 
 #: components/modal/modals/CreateChannel.tsx
 msgid "Only you and the roles or members you add can see it."
@@ -15117,6 +15185,7 @@ msgid "Saved"
 msgstr "已保存"
 
 #: components/app/interface/desktop/Titlebar.tsx
+#: components/modal/modals/ForwardMessage.tsx
 #: src/interface/channels/ChannelHeader.tsx
 #: src/interface/navigation/channels/HomeSidebar.tsx
 #: src/interface/navigation/MentionsPanel.tsx
@@ -15289,6 +15358,10 @@ msgstr "按名称或 ID 搜索"
 #: components/app/interface/settings/server/bans/ListBans.tsx
 msgid "Search by name or reason"
 msgstr "按名称或原因搜索"
+
+#: components/modal/modals/ForwardMessage.tsx
+msgid "Search conversations and channels"
+msgstr "搜索对话和频道"
 
 #: components/app/interface/settings/user/profile/StyleEditors.tsx
 msgid "Search decorations"
@@ -15615,6 +15688,10 @@ msgstr "发送请求"
 msgid "Send test"
 msgstr "发送测试"
 
+#: components/modal/modals/ForwardMessage.tsx
+msgid "Send to"
+msgstr "发送到"
+
 #: components/ui/components/features/messaging/composition/VoiceRecorder.tsx
 msgid "Send voice message"
 msgstr "发送语音消息"
@@ -15643,6 +15720,11 @@ msgstr "塞内加尔"
 #: components/ui/components/features/messaging/elements/Container.tsx
 msgid "Sent"
 msgstr "已发送"
+
+#. placeholder {0}: sentAt()
+#: components/app/interface/channels/text/ForwardedFrame.tsx
+msgid "Sent {0}"
+msgstr "发送于 {0}"
 
 #. placeholder {0}: message.attachments!.length
 #: components/client/NotificationsWorker.tsx

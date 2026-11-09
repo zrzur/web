@@ -77,6 +77,15 @@ export function KeybindsSettings() {
           title: <Trans>Mark the server as read</Trans>,
           keys: [["Shift", "Esc"]],
         },
+        {
+          title: <Trans>Choose where to forward</Trans>,
+          description: (
+            <Trans>
+              In the forward window: move through the list, then send.
+            </Trans>
+          ),
+          keys: [["↑"], ["↓"], ["Enter"]],
+        },
       ],
     },
     {
