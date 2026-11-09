@@ -292,8 +292,8 @@
     },
     {
       "path": "CHANGELOG.md",
-      "sha256": "add0a45d68320128fdea0af83e7314ea33c0065bd2f8b766221a31b81330946f",
-      "bytes": 96002,
+      "sha256": "65a85fafd6621385601867f4d634c74dd31d137cf1aa3f79625d8250291d9e1c",
+      "bytes": 96596,
       "category": "public-documentation"
     },
     {
@@ -2043,9 +2043,21 @@
       "category": "product-source-or-build-manifest"
     },
     {
+      "path": "packages/client/components/app/interface/settings/user/voice/InputSensitivityOptions.dom.test.tsx",
+      "sha256": "c77f346090046efb39b3564a1b2c428dd4cd3712f0a9d526b0ec1cabaa1c6563",
+      "bytes": 4631,
+      "category": "synthetic-test-source-or-fixture"
+    },
+    {
+      "path": "packages/client/components/app/interface/settings/user/voice/InputSensitivityOptions.tsx",
+      "sha256": "dfcab61d8dc37779e2fb7ca066caea53f35819319dfbcbe9af8fbfa0bdb00119",
+      "bytes": 8759,
+      "category": "product-source-or-build-manifest"
+    },
+    {
       "path": "packages/client/components/app/interface/settings/user/voice/PushToTalkOptions.tsx",
-      "sha256": "f9bb9e3cdd5a142fb508f752bde681cd30d018f8fc5107e21ffe652d69a4ecc4",
-      "bytes": 5258,
+      "sha256": "b618a60f04db93031ea32b137640d5323573542826034173423ebf523b54e99c",
+      "bytes": 5889,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -2068,8 +2080,8 @@
     },
     {
       "path": "packages/client/components/app/interface/settings/user/voice/VoiceSettings.tsx",
-      "sha256": "0721780a4884249d792245d0badc04721a2e6018f60f6b7d58a3875abeae8415",
-      "bytes": 690,
+      "sha256": "33d9278837518007f7e5132c61d092d0c91477b68a9ac72c1cbf6c83a3349bee",
+      "bytes": 933,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -2572,8 +2584,8 @@
     },
     {
       "path": "packages/client/components/i18n/catalogs/ar/messages.po",
-      "sha256": "42668725e460d5ad3e25ee72bdbc998eac7e10d6c9e08f33c807a14120f4cde1",
-      "bytes": 849890,
+      "sha256": "f6b4857d126677fce8c4d9cee5a45d6192864cab646bc63b41dffdf95ee959ea",
+      "bytes": 852187,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -2716,8 +2728,8 @@
     },
     {
       "path": "packages/client/components/i18n/catalogs/de/messages.po",
-      "sha256": "602390be7ad86152f67fe37e09c80fc18c991e156544dafabe2a1613ee5e69b1",
-      "bytes": 782098,
+      "sha256": "8fab14bfcc9a1a67df55e2e4b05a99ee02aa4fc54c941e909288a193bb8a1c1c",
+      "bytes": 784215,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -2752,8 +2764,8 @@
     },
     {
       "path": "packages/client/components/i18n/catalogs/en/messages.po",
-      "sha256": "417d36cf934d0d7396e9c15273a0f3ec70840d5ca1de020726802c68ccd299f5",
-      "bytes": 763175,
+      "sha256": "496e5f3b8618672e892b5c28f9ba76720c4db8aa0fec344fd3b63deb8e6df0e5",
+      "bytes": 765189,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -4300,14 +4312,14 @@
     },
     {
       "path": "packages/client/components/rtc/VoiceProcessor.test.ts",
-      "sha256": "cfd062ff9adc285ff93a3d51da41a5a134cb372270aa1cc5b7b29f31209fd4bf",
-      "bytes": 3738,
+      "sha256": "564c7690d5bc0350312457be0df76b9acebf2f5a7858797a1e3e19de3ca8a4ee",
+      "bytes": 6514,
       "category": "synthetic-test-source-or-fixture"
     },
     {
       "path": "packages/client/components/rtc/VoiceProcessor.ts",
-      "sha256": "3c37597403929ece5034e2e586e195ca3d8390b3d6f6200c7f3422401a1b9612",
-      "bytes": 6015,
+      "sha256": "73ca8f62cf22bda4d36bdf823e895cb0d05a196f2919b68a4397eb52793bc25b",
+      "bytes": 8940,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -4329,9 +4341,27 @@
       "category": "product-source-or-build-manifest"
     },
     {
+      "path": "packages/client/components/rtc/desktopPushToTalk.test.ts",
+      "sha256": "9aa85e6afd919c3448d870a218f0ccca9c7d3da20fbe08876606f164f95f6811",
+      "bytes": 1396,
+      "category": "synthetic-test-source-or-fixture"
+    },
+    {
+      "path": "packages/client/components/rtc/desktopPushToTalk.ts",
+      "sha256": "d21f59f06b052e428a751550e29011f92349bd976bd653d66aa5c439ebcd19ed",
+      "bytes": 1501,
+      "category": "product-source-or-build-manifest"
+    },
+    {
       "path": "packages/client/components/rtc/index.ts",
       "sha256": "9ee63e7d1f0f519b0d0510c030f95b67b83cf46d489f5b49b2f624684a6815c7",
       "bytes": 1442,
+      "category": "product-source-or-build-manifest"
+    },
+    {
+      "path": "packages/client/components/rtc/inputLevel.ts",
+      "sha256": "851f26fa1527f88060a9dbfd02efc5284ddf7d8d1da9f77a6ed6ca4971398bab",
+      "bytes": 551,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -4390,8 +4420,8 @@
     },
     {
       "path": "packages/client/components/rtc/state.tsx",
-      "sha256": "861d08578dac755a83ea8a8859004c140388bcebe3f1099470b111906ba7c004",
-      "bytes": 39338,
+      "sha256": "28449efb0d65e737ea1b507b71a4b13d5306c8293303b2afaef8f62fd910bb05",
+      "bytes": 41918,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -4411,6 +4441,18 @@
       "sha256": "272e0d6a6e235e42cb451777a621f3533c626730ff74edfc2dee4d21574d7ada",
       "bytes": 2149,
       "category": "synthetic-test-source-or-fixture"
+    },
+    {
+      "path": "packages/client/components/rtc/voiceGate.test.ts",
+      "sha256": "83aad9d29c890806967d443e9cd11e0390e1978d304d7cd7edc2fadf411725fa",
+      "bytes": 7151,
+      "category": "synthetic-test-source-or-fixture"
+    },
+    {
+      "path": "packages/client/components/rtc/voiceGate.ts",
+      "sha256": "dd34a7844e302931b94e30c7edb5855e29886ffc788b914da9fc0b9d2d937601",
+      "bytes": 6852,
+      "category": "product-source-or-build-manifest"
     },
     {
       "path": "packages/client/components/state/.gitignore",
@@ -4576,14 +4618,14 @@
     },
     {
       "path": "packages/client/components/state/stores/Voice.test.ts",
-      "sha256": "3ff37146b8775909afef19ccae8e25f506fb5493331b5efb9296987e025ab979",
-      "bytes": 3023,
+      "sha256": "e1392b0df6fcd6634b094391240f5b8aed4bd24fa757e55ccc987d75493741d0",
+      "bytes": 4051,
       "category": "synthetic-test-source-or-fixture"
     },
     {
       "path": "packages/client/components/state/stores/Voice.ts",
-      "sha256": "48e6251f69ed9d33d10c0a1ccd315d43a9cafa912b44627783fcea9085288404",
-      "bytes": 11969,
+      "sha256": "fd19b50a799e8b2d84f37b6edae2d857c156cf2eb51200f1f9f04984d5d4dc01",
+      "bytes": 13394,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -37494,6 +37536,12 @@
       "path": "packages/client/scripts/i18n/ui-110709.json",
       "sha256": "848373e56b97441915e9124ab8394af3f86f42177ce07c37128a79c4088d73cd",
       "bytes": 516,
+      "category": "product-source-or-build-manifest"
+    },
+    {
+      "path": "packages/client/scripts/i18n/ui-1109861.json",
+      "sha256": "315e940b1032e2b6dd4fdf34841a78ec09d8d98b03c2a9203189b1c3b308cd16",
+      "bytes": 4641,
       "category": "product-source-or-build-manifest"
     },
     {
