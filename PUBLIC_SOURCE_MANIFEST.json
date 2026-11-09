@@ -610,8 +610,8 @@
     },
     {
       "path": "eslint.config.mjs",
-      "sha256": "724e427af2a33c5f900772e97d68d4c6f25e214d75e72592c7b53d806ea386d7",
-      "bytes": 3246,
+      "sha256": "9a64cf6bdc4a6414ff61442fcf880fd0bd8a100bd82b96ea4f9246476a31c951",
+      "bytes": 3696,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -4522,8 +4522,8 @@
     },
     {
       "path": "packages/client/components/rtc/voiceRoster.test.ts",
-      "sha256": "f993a0452bda7d928b4c2a522523ddf59c1bce742751533c2d3942d4edcf8198",
-      "bytes": 4052,
+      "sha256": "dc397f266f515ab2e7043628e3b0b4a92c2e2f49f227c8f486088662213f6a72",
+      "bytes": 3985,
       "category": "synthetic-test-source-or-fixture"
     },
     {
