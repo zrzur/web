@@ -303,7 +303,9 @@ describe("Bot API inventory", () => {
   });
 });
 
-describe("Documentation pages", () => {
+// these parse every page in three languages and scan the source tree:
+// under a full parallel run they need more than the 5 s default
+describe("Documentation pages", { timeout: 30_000 }, () => {
   it("has no empty pages and no orphan Markdown files", () => {
     for (const page of PAGES)
       expect(
@@ -423,7 +425,7 @@ describe("Documentation pages", () => {
   });
 });
 
-describe("Links from the app into the docs", () => {
+describe("Links from the app into the docs", { timeout: 30_000 }, () => {
   const root = join(here, "../../../..");
   const sources = ["src", "components"].flatMap((folder) =>
     (readdirSync(join(root, folder), { recursive: true }) as string[])

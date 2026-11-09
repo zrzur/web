@@ -22037,7 +22037,7 @@ msgstr "مجموع الأسماء والأوصاف والاختيارات يتج
 
 #: src/interface/developers/docs/DocsPortal.tsx
 msgid "API changelog"
-msgstr "سجل تغييرات الواجهة"
+msgstr "سجل تغييرات واجهة البرمجة"
 
 #: components/app/interface/settings/user/bots/CommandManager.tsx
 msgid "Arabic"
@@ -22049,7 +22049,7 @@ msgstr "{max} أمرًا من هذا النوع على الأكثر."
 
 #: components/app/interface/settings/user/bots/CommandManager.tsx
 msgid "At most {max} languages."
-msgstr "{max} لغة على الأكثر."
+msgstr "{max} لغةً على الأكثر."
 
 #: components/app/interface/settings/user/bots/CommandManager.tsx
 msgid "At most {max} options on each level."
@@ -22141,7 +22141,7 @@ msgstr "الألمانية"
 
 #: components/app/interface/settings/user/bots/CommandManager.tsx
 msgid "Give 1 to {max} choices."
-msgstr "أعطِ من 1 إلى {max} اختيار."
+msgstr "أعطِ من 1 إلى {max} اختيارًا."
 
 #: components/app/interface/settings/user/bots/CommandManager.tsx
 msgid "Groups can only be at the top level."
@@ -22438,3 +22438,48 @@ msgstr "عدد صحيح"
 #: components/app/interface/settings/user/bots/CommandManager.tsx
 msgid "Yes or no"
 msgstr "نعم أو لا"
+
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "Asks first if you changed something."
+msgstr "يسأل أولًا إن غيّرت شيئًا."
+
+#. placeholder {0}: (parsed.index ?? 0) + 1
+#: components/app/interface/settings/user/bots/CommandManager.tsx
+msgid "Entry {0} has a field of the wrong type. The Slash commands page shows each field."
+msgstr "في العنصر {0} حقل من نوع خاطئ. تعرض صفحة أوامر الشرطة المائلة كل حقل."
+
+#: components/app/interface/settings/user/bots/CommandManager.tsx
+msgid "If your bot sends its list when it starts, that list replaces what you save here."
+msgstr "إذا أرسل بوتك قائمته حين يبدأ، فإن تلك القائمة تستبدل ما تحفظه هنا."
+
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "In the command editor."
+msgstr "في محرر الأوامر."
+
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "Leave the command editor"
+msgstr "اخرج من محرر الأوامر"
+
+#: components/app/interface/settings/user/bots/CommandManager.tsx
+msgid "Press Esc again to discard your changes."
+msgstr "اضغط Esc مرة أخرى لتتخلى عن تغييراتك."
+
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "Save a command"
+msgstr "احفظ أمرًا"
+
+#: components/app/interface/settings/user/bots/PrivilegedIntents.tsx
+msgid "Saved, but couldn't read it back. The switches may be out of date."
+msgstr "حُفظ، لكن تعذّرت قراءته من جديد. قد لا تعرض المفاتيح الحالة الحالية."
+
+#: components/app/interface/settings/user/bots/CommandManager.tsx
+msgid "The list changed since you opened it. It was reloaded: check it and save again."
+msgstr "تغيّرت القائمة منذ فتحتها. أُعيد تحميلها: راجعها واحفظ مرة أخرى."
+
+#: components/app/interface/settings/user/bots/CommandManager.tsx
+msgid "This entry has a field of the wrong type."
+msgstr "في هذا العنصر حقل من نوع خاطئ."
+
+#: src/interface/developers/docs/DocsPortal.tsx
+msgid "This page couldn't load. Check your connection."
+msgstr "تعذّر تحميل هذه الصفحة. تحقق من اتصالك."

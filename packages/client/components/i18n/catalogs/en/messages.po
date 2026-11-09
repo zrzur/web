@@ -22647,3 +22647,48 @@ msgstr "Whole number"
 #: components/app/interface/settings/user/bots/CommandManager.tsx
 msgid "Yes or no"
 msgstr "Yes or no"
+
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "Asks first if you changed something."
+msgstr "Asks first if you changed something."
+
+#. placeholder {0}: (parsed.index ?? 0) + 1
+#: components/app/interface/settings/user/bots/CommandManager.tsx
+msgid "Entry {0} has a field of the wrong type. The Slash commands page shows each field."
+msgstr "Entry {0} has a field of the wrong type. The Slash commands page shows each field."
+
+#: components/app/interface/settings/user/bots/CommandManager.tsx
+msgid "If your bot sends its list when it starts, that list replaces what you save here."
+msgstr "If your bot sends its list when it starts, that list replaces what you save here."
+
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "In the command editor."
+msgstr "In the command editor."
+
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "Leave the command editor"
+msgstr "Leave the command editor"
+
+#: components/app/interface/settings/user/bots/CommandManager.tsx
+msgid "Press Esc again to discard your changes."
+msgstr "Press Esc again to discard your changes."
+
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "Save a command"
+msgstr "Save a command"
+
+#: components/app/interface/settings/user/bots/PrivilegedIntents.tsx
+msgid "Saved, but couldn't read it back. The switches may be out of date."
+msgstr "Saved, but couldn't read it back. The switches may be out of date."
+
+#: components/app/interface/settings/user/bots/CommandManager.tsx
+msgid "The list changed since you opened it. It was reloaded: check it and save again."
+msgstr "The list changed since you opened it. It was reloaded: check it and save again."
+
+#: components/app/interface/settings/user/bots/CommandManager.tsx
+msgid "This entry has a field of the wrong type."
+msgstr "This entry has a field of the wrong type."
+
+#: src/interface/developers/docs/DocsPortal.tsx
+msgid "This page couldn't load. Check your connection."
+msgstr "This page couldn't load. Check your connection."

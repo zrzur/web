@@ -75,7 +75,7 @@
     "Имена, описания и варианты вместе длиннее {max} символов.",
     "名称、描述和选项值合计超过 {max} 个字符。"
   ],
-  "API changelog": ["سجل تغييرات الواجهة", "API-Änderungsprotokoll", "Journal des modifications de l’API", "Registro de cambios de la API", "Журнал изменений API", "API 更新日志"],
+  "API changelog": ["سجل تغييرات واجهة البرمجة", "API-Änderungsprotokoll", "Journal des modifications de l’API", "Registro de cambios de la API", "Журнал изменений API", "API 更新日志"],
   "Arabic": ["العربية", "Arabisch", "Arabe", "Árabe", "Арабский", "阿拉伯语"],
   "At most {max} commands of this type.": [
     "{max} أمرًا من هذا النوع على الأكثر.",
@@ -85,7 +85,7 @@
     "Не больше {max} команд этого типа.",
     "此类型最多 {max} 个命令。"
   ],
-  "At most {max} languages.": ["{max} لغة على الأكثر.", "Höchstens {max} Sprachen.", "Au plus {max} langues.", "Como máximo {max} idiomas.", "Не больше {max} языков.", "最多 {max} 种语言。"],
+  "At most {max} languages.": ["{max} لغةً على الأكثر.", "Höchstens {max} Sprachen.", "Au plus {max} langues.", "Como máximo {max} idiomas.", "Не больше {max} языков.", "最多 {max} 种语言。"],
   "At most {max} options on each level.": [
     "{max} خيارًا على الأكثر في كل مستوى.",
     "Höchstens {max} Optionen auf jeder Ebene.",
@@ -179,7 +179,7 @@
   "Fix these before saving:": ["أصلح هذه قبل الحفظ:", "Behebe das vor dem Speichern:", "Corrige ceci avant d’enregistrer :", "Corrige esto antes de guardar:", "Исправьте перед сохранением:", "保存前请修正以下问题："],
   "German": ["الألمانية", "Deutsch", "Allemand", "Alemán", "Немецкий", "德语"],
   "Give 1 to {max} choices.": [
-    "أعطِ من 1 إلى {max} اختيار.",
+    "أعطِ من 1 إلى {max} اختيارًا.",
     "Gib 1 bis {max} Auswahlwerte an.",
     "Indique entre 1 et {max} choix.",
     "Indica de 1 a {max} opciones.",

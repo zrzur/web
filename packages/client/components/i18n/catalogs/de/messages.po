@@ -22447,3 +22447,48 @@ msgstr "Ganze Zahl"
 #: components/app/interface/settings/user/bots/CommandManager.tsx
 msgid "Yes or no"
 msgstr "Ja oder nein"
+
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "Asks first if you changed something."
+msgstr "Fragt zuerst, wenn du etwas geändert hast."
+
+#. placeholder {0}: (parsed.index ?? 0) + 1
+#: components/app/interface/settings/user/bots/CommandManager.tsx
+msgid "Entry {0} has a field of the wrong type. The Slash commands page shows each field."
+msgstr "Eintrag {0} hat ein Feld vom falschen Typ. Die Seite Slash-Befehle zeigt jedes Feld."
+
+#: components/app/interface/settings/user/bots/CommandManager.tsx
+msgid "If your bot sends its list when it starts, that list replaces what you save here."
+msgstr "Wenn dein Bot seine Liste beim Start sendet, ersetzt diese Liste, was du hier speicherst."
+
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "In the command editor."
+msgstr "Im Befehlseditor."
+
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "Leave the command editor"
+msgstr "Befehlseditor verlassen"
+
+#: components/app/interface/settings/user/bots/CommandManager.tsx
+msgid "Press Esc again to discard your changes."
+msgstr "Drücke noch einmal Esc, um deine Änderungen zu verwerfen."
+
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "Save a command"
+msgstr "Befehl speichern"
+
+#: components/app/interface/settings/user/bots/PrivilegedIntents.tsx
+msgid "Saved, but couldn't read it back. The switches may be out of date."
+msgstr "Gespeichert, aber das Zurücklesen ist fehlgeschlagen. Die Schalter sind vielleicht nicht aktuell."
+
+#: components/app/interface/settings/user/bots/CommandManager.tsx
+msgid "The list changed since you opened it. It was reloaded: check it and save again."
+msgstr "Die Liste hat sich geändert, seit du sie geöffnet hast. Sie wurde neu geladen: Prüfe sie und speichere noch einmal."
+
+#: components/app/interface/settings/user/bots/CommandManager.tsx
+msgid "This entry has a field of the wrong type."
+msgstr "Dieser Eintrag hat ein Feld vom falschen Typ."
+
+#: src/interface/developers/docs/DocsPortal.tsx
+msgid "This page couldn't load. Check your connection."
+msgstr "Diese Seite konnte nicht geladen werden. Prüfe deine Verbindung."

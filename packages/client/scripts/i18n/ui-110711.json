@@ -1,0 +1,83 @@
+{
+  "Asks first if you changed something.": [
+    "يسأل أولًا إن غيّرت شيئًا.",
+    "Fragt zuerst, wenn du etwas geändert hast.",
+    "Demande d’abord si tu as modifié quelque chose.",
+    "Pregunta antes si cambiaste algo.",
+    "Сначала спрашивает, если вы что-то изменили.",
+    "如果你改过内容，会先询问。"
+  ],
+  "Entry {0} has a field of the wrong type. The Slash commands page shows each field.": [
+    "في العنصر {0} حقل من نوع خاطئ. تعرض صفحة أوامر الشرطة المائلة كل حقل.",
+    "Eintrag {0} hat ein Feld vom falschen Typ. Die Seite Slash-Befehle zeigt jedes Feld.",
+    "L’entrée {0} a un champ du mauvais type. La page Commandes slash montre chaque champ.",
+    "La entrada {0} tiene un campo de tipo incorrecto. La página Comandos de barra muestra cada campo.",
+    "В записи {0} поле неверного типа. Все поля описаны на странице «Слеш-команды».",
+    "第 {0} 项中有字段类型错误。“斜杠命令”页面列出了每个字段。"
+  ],
+  "If your bot sends its list when it starts, that list replaces what you save here.": [
+    "إذا أرسل بوتك قائمته حين يبدأ، فإن تلك القائمة تستبدل ما تحفظه هنا.",
+    "Wenn dein Bot seine Liste beim Start sendet, ersetzt diese Liste, was du hier speicherst.",
+    "Si ton bot envoie sa liste au démarrage, cette liste remplace ce que tu enregistres ici.",
+    "Si tu bot envía su lista al arrancar, esa lista reemplaza lo que guardes aquí.",
+    "Если бот отправляет свой список при запуске, этот список заменит то, что вы сохраните здесь.",
+    "如果你的机器人在启动时发送它的列表，该列表会替换你在这里保存的内容。"
+  ],
+  "In the command editor.": [
+    "في محرر الأوامر.",
+    "Im Befehlseditor.",
+    "Dans l’éditeur de commandes.",
+    "En el editor de comandos.",
+    "В редакторе команд.",
+    "在命令编辑器中。"
+  ],
+  "Leave the command editor": [
+    "اخرج من محرر الأوامر",
+    "Befehlseditor verlassen",
+    "Quitter l’éditeur de commandes",
+    "Salir del editor de comandos",
+    "Выйти из редактора команд",
+    "离开命令编辑器"
+  ],
+  "Press Esc again to discard your changes.": [
+    "اضغط Esc مرة أخرى لتتخلى عن تغييراتك.",
+    "Drücke noch einmal Esc, um deine Änderungen zu verwerfen.",
+    "Appuie encore sur Échap pour abandonner tes modifications.",
+    "Pulsa Esc otra vez para descartar tus cambios.",
+    "Нажмите Esc ещё раз, чтобы отменить изменения.",
+    "再按一次 Esc 即放弃你的更改。"
+  ],
+  "Save a command": ["احفظ أمرًا", "Befehl speichern", "Enregistrer une commande", "Guardar un comando", "Сохранить команду", "保存命令"],
+  "Saved, but couldn't read it back. The switches may be out of date.": [
+    "حُفظ، لكن تعذّرت قراءته من جديد. قد لا تعرض المفاتيح الحالة الحالية.",
+    "Gespeichert, aber das Zurücklesen ist fehlgeschlagen. Die Schalter sind vielleicht nicht aktuell.",
+    "Enregistré, mais impossible de le relire. Les interrupteurs ne sont peut-être pas à jour.",
+    "Guardado, pero no se pudo volver a leer. Puede que los interruptores no estén al día.",
+    "Сохранено, но прочитать заново не удалось. Переключатели могут быть неактуальны.",
+    "已保存，但无法重新读取。开关显示的状态可能不是最新的。"
+  ],
+  "The list changed since you opened it. It was reloaded: check it and save again.": [
+    "تغيّرت القائمة منذ فتحتها. أُعيد تحميلها: راجعها واحفظ مرة أخرى.",
+    "Die Liste hat sich geändert, seit du sie geöffnet hast. Sie wurde neu geladen: Prüfe sie und speichere noch einmal.",
+    "La liste a changé depuis que tu l’as ouverte. Elle a été rechargée : vérifie-la et enregistre à nouveau.",
+    "La lista cambió desde que la abriste. Se volvió a cargar: revísala y guarda de nuevo.",
+    "Список изменился с тех пор, как вы его открыли. Он перезагружен: проверьте его и сохраните снова.",
+    "自你打开后列表已更改。它已重新加载：请检查后再次保存。"
+  ],
+  "This entry has a field of the wrong type.": [
+    "في هذا العنصر حقل من نوع خاطئ.",
+    "Dieser Eintrag hat ein Feld vom falschen Typ.",
+    "Cette entrée a un champ du mauvais type.",
+    "Esta entrada tiene un campo de tipo incorrecto.",
+    "В этой записи поле неверного типа.",
+    "此项中有字段类型错误。"
+  ],
+  "This page couldn't load. Check your connection.": [
+    "تعذّر تحميل هذه الصفحة. تحقق من اتصالك.",
+    "Diese Seite konnte nicht geladen werden. Prüfe deine Verbindung.",
+    "Impossible de charger cette page. Vérifie ta connexion.",
+    "No se pudo cargar esta página. Comprueba tu conexión.",
+    "Не удалось загрузить страницу. Проверьте подключение.",
+    "无法加载此页面。请检查你的网络连接。"
+  ]
+}
