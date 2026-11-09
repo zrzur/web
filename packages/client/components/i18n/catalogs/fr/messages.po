@@ -1684,7 +1684,7 @@ msgstr ""
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 #: components/ui/components/design/Switch.tsx
 msgid "Allow"
-msgstr ""
+msgstr "Autoriser"
 
 #. placeholder {0}: name()
 #: components/app/interface/settings/user/plugins/PluginDetail.tsx
@@ -2032,7 +2032,7 @@ msgstr ""
 #: components/app/interface/settings/ServerSettings.tsx
 #: components/app/menus/shared/AppsSubMenu.tsx
 msgid "Apps"
-msgstr ""
+msgstr "Applis"
 
 #: src/interface/OAuth.tsx
 msgid "Apps you allowed to use your account. Revoking one ends its access at once; bots it added stay in servers until their managers remove them."
@@ -3761,7 +3761,7 @@ msgstr ""
 #: src/interface/channels/text/Composition.tsx
 #: src/interface/Developers.tsx
 msgid "Commands"
-msgstr ""
+msgstr "Commandes"
 
 #: src/interface/developers/docs/DocsPortal.tsx
 msgid "Commands and interactions"
@@ -4925,7 +4925,7 @@ msgstr ""
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 #: components/ui/components/design/Switch.tsx
 msgid "Deny"
-msgstr ""
+msgstr "Refuser"
 
 #: src/interface/developers/docs/DocsPortal.tsx
 msgid "Deployment"
@@ -13226,7 +13226,7 @@ msgstr ""
 
 #: src/interface/Developers.tsx
 msgid "Scopes"
-msgstr ""
+msgstr "Portées"
 
 #: src/interface/navigation/channels/AccountBar.tsx
 msgid "Screen"
@@ -17170,7 +17170,7 @@ msgstr "Vérifié"
 
 #: components/ui/components/features/profiles/ProfileIdentity.tsx
 msgid "Verified bot"
-msgstr ""
+msgstr "Bot vérifié"
 
 #: components/app/interface/settings/user/bots/BotVerification.tsx
 msgid "Verified bots show a mark next to their name and can join more than 100 servers. Past 100 servers, privileged intents stay on only once they are approved."
@@ -19040,3 +19040,218 @@ msgstr "Zrzur, directement sur <0>votre ordinateur.</0>"
 #: components/app/interface/settings/user/appearance/AppearanceMenu.tsx
 #~ msgid "Zrzur's own look: calm dark panels in one slate family, pink for Plus and teal for anything live."
 #~ msgstr ""
+
+#. placeholder {0}: props.rules
+#: components/app/interface/settings/server/apps/ServerAppPage.tsx
+msgid "{0, plural, one {# rule} other {# rules}}"
+msgstr "{0, plural, one {# règle} other {# règles}}"
+
+#: components/app/interface/settings/server/apps/RulesEditor.tsx
+msgid "A channel"
+msgstr "Un salon"
+
+#: components/app/interface/settings/server/apps/RulesEditor.tsx
+msgid "A member"
+msgstr "Un membre"
+
+#: components/app/interface/settings/server/apps/RulesEditor.tsx
+msgid "A role"
+msgstr "Un rôle"
+
+#. placeholder {0}: new Date(install!.installed_at).toLocaleDateString()
+#: components/app/interface/settings/server/ServerApps.tsx
+msgid "Added {0}"
+msgstr "Ajouté le {0}"
+
+#: components/app/interface/settings/server/apps/ServerAppPage.tsx
+msgid "Added before Zrzur kept a record of who adds apps."
+msgstr "Ajoutée avant que Zrzur garde une trace de qui ajoute les applis."
+
+#. placeholder {0}: installer()!.displayName ?? installer()!.username
+#. placeholder {1}: date(install().installed_at)
+#: components/app/interface/settings/server/apps/ServerAppPage.tsx
+msgid "Added by <0>{0}</0> on {1}"
+msgstr "Ajoutée par <0>{0}</0> le {1}"
+
+#. placeholder {0}: date(install().installed_at)
+#: components/app/interface/settings/server/apps/ServerAppPage.tsx
+msgid "Added on {0}"
+msgstr "Ajoutée le {0}"
+
+#: components/app/interface/settings/server/apps/ServerAppPage.tsx
+msgid "All commands"
+msgstr "Toutes les commandes"
+
+#: components/app/interface/settings/server/apps/RulesEditor.tsx
+msgid "Allow or deny"
+msgstr "Autoriser ou refuser"
+
+#. placeholder {0}: name(rule)
+#: components/app/interface/settings/server/apps/RulesEditor.tsx
+msgid "Allow or deny {0}"
+msgstr "Autoriser ou refuser : {0}"
+
+#: components/app/interface/settings/ServerSettings.tsx
+msgid "App"
+msgstr "Appli"
+
+#: components/app/interface/settings/server/audit/AuditLog.tsx
+msgid "Apps and bots"
+msgstr "Applis et bots"
+
+#: components/app/interface/channels/text/interactions/CommandPicker.tsx
+msgid "Asking the bot for suggestions…"
+msgstr "Demande de suggestions au bot…"
+
+#: components/app/interface/settings/UserSettings.tsx
+msgid "Authorised apps"
+msgstr "Applis autorisées"
+
+#. placeholder {0}: userName(raw.bot)
+#: components/app/interface/settings/server/audit/AuditLog.tsx
+msgid "changed who can use a command of {0}"
+msgstr "a changé qui peut utiliser une commande de {0}"
+
+#. placeholder {0}: userName(raw.bot)
+#: components/app/interface/settings/server/audit/AuditLog.tsx
+msgid "changed who can use the commands of {0}"
+msgstr "a changé qui peut utiliser les commandes de {0}"
+
+#: components/app/interface/settings/server/apps/ServerAppPage.tsx
+msgid "Commands and who can use them"
+msgstr "Commandes et qui peut les utiliser"
+
+#: components/app/interface/channels/text/interactions/CommandPicker.tsx
+msgid "Couldn't get suggestions. Type a value yourself."
+msgstr "Impossible d’obtenir des suggestions. Saisis une valeur toi-même."
+
+#: components/app/interface/settings/server/apps/ServerAppPage.tsx
+msgid "Couldn't load this app."
+msgstr "Impossible de charger cette appli."
+
+#: components/app/interface/channels/text/interactions/errorText.ts
+msgid "Couldn't reach the bot. Try again."
+msgstr "Impossible de joindre le bot. Réessaie."
+
+#: components/app/interface/settings/server/apps/RulesEditor.tsx
+msgid "Deleted role"
+msgstr "Rôle supprimé"
+
+#: components/app/interface/settings/server/apps/RulesEditor.tsx
+msgid "Every channel"
+msgstr "Tous les salons"
+
+#. placeholder {0}: creator().displayName ?? creator().username
+#: components/modal/modals/AddBot.tsx
+msgid "Made by <0>{0}</0>"
+msgstr "Créé par <0>{0}</0>"
+
+#: components/app/interface/settings/server/webhooks/ServerWebhooks.tsx
+msgid "Made by bots"
+msgstr "Créés par des bots"
+
+#: components/app/interface/settings/server/webhooks/ServerWebhooks.tsx
+msgid "Made by people"
+msgstr "Créés par des personnes"
+
+#: components/app/interface/settings/server/apps/ServerAppPage.tsx
+msgid "Managed by the app. Change what it may do in the role."
+msgstr "Géré par l’appli. Modifie ce qu’elle peut faire dans le rôle."
+
+#: components/app/interface/settings/server/apps/ServerAppPage.tsx
+msgid "No permissions were given when it was added."
+msgstr "Aucune permission n’a été donnée lors de l’ajout."
+
+#: components/app/interface/settings/server/apps/RulesEditor.tsx
+msgid "No rules: everyone who has the permissions the bot asks for can use it, in every channel."
+msgstr "Aucune règle : toute personne qui a les permissions demandées par le bot peut l’utiliser, dans tous les salons."
+
+#: components/app/interface/channels/text/interactions/CommandPicker.tsx
+msgid "No suggestions match. You can still type a value."
+msgstr "Aucune suggestion ne correspond. Tu peux quand même saisir une valeur."
+
+#: components/app/interface/settings/server/webhooks/ServerWebhooks.tsx
+msgid "No webhooks match this filter."
+msgstr "Aucun webhook ne correspond à ce filtre."
+
+#: components/ui/components/features/profiles/ProfileBotAbout.tsx
+msgid "Not verified by Zrzur"
+msgstr "Non vérifié par Zrzur"
+
+#: components/app/interface/settings/server/apps/ServerAppPage.tsx
+msgid "Remove app"
+msgstr "Retirer l’appli"
+
+#. placeholder {0}: name(rule)
+#: components/app/interface/settings/server/apps/RulesEditor.tsx
+msgid "Remove the rule for {0}"
+msgstr "Retirer la règle pour {0}"
+
+#: components/app/interface/settings/server/apps/ServerAppPage.tsx
+msgid "Remove this app?"
+msgstr "Retirer cette appli ?"
+
+#: components/app/interface/settings/server/apps/RulesEditor.tsx
+msgid "Rule for"
+msgstr "Règle pour"
+
+#. placeholder {0}: command.name
+#: components/app/interface/settings/server/apps/ServerAppPage.tsx
+msgid "Rules for {0}"
+msgstr "Règles pour {0}"
+
+#: components/app/interface/settings/server/apps/ServerAppPage.tsx
+msgid "Rules for all commands"
+msgstr "Règles pour toutes les commandes"
+
+#: components/app/interface/settings/server/apps/ServerAppPage.tsx
+msgid "Rules for one command come before the rules for the whole app. A rule for a member beats their roles, a Deny on any of their roles beats an Allow on another, and Everyone counts last."
+msgstr "Les règles d’une commande passent avant celles de toute l’appli. Une règle pour un membre l’emporte sur ses rôles, un Refuser sur l’un de ses rôles l’emporte sur un Autoriser sur un autre, et Tout le monde compte en dernier."
+
+#: components/app/interface/settings/server/webhooks/ServerWebhooks.tsx
+msgid "Show webhooks made by"
+msgstr "Afficher les webhooks créés par"
+
+#: components/ui/components/features/profiles/ProfileBotAbout.tsx
+msgid "Terms of service"
+msgstr "Conditions d’utilisation"
+
+#: components/app/interface/channels/text/interactions/CommandPicker.tsx
+msgid "The bot did not answer. Type a value yourself."
+msgstr "Le bot n’a pas répondu. Saisis une valeur toi-même."
+
+#: components/app/interface/settings/server/apps/ServerAppPage.tsx
+msgid "The bot leaves the server. Its role, its commands here and their rules go too. You can add it again later."
+msgstr "Le bot quitte le serveur. Son rôle, ses commandes ici et leurs règles partent aussi. Tu pourras l’ajouter à nouveau plus tard."
+
+#: components/app/interface/settings/server/apps/ServerAppPage.tsx
+msgid "The permissions it was given when it was added, through its own role."
+msgstr "Les permissions reçues lors de l’ajout, via son propre rôle."
+
+#: components/app/interface/settings/server/apps/ServerAppPage.tsx
+msgid "This app has no commands here."
+msgstr "Cette appli n’a pas de commandes ici."
+
+#: components/modal/modals/AddBot.tsx
+msgid "This bot is not verified by Zrzur."
+msgstr "Ce bot n’est pas vérifié par Zrzur."
+
+#: components/modal/modals/AddBot.tsx
+msgid "Untick anything you do not want to give it."
+msgstr "Décoche tout ce que tu ne veux pas lui donner."
+
+#: components/ui/components/features/profiles/ProfileBotAbout.tsx
+msgid "Verified by Zrzur"
+msgstr "Vérifié par Zrzur"
+
+#: components/app/interface/settings/server/apps/ServerAppPage.tsx
+msgid "What it can do"
+msgstr "Ce qu’elle peut faire"
+
+#: components/app/interface/settings/server/apps/RulesEditor.tsx
+msgid "Which one"
+msgstr "Lequel"
+
+#: components/modal/modals/AddBot.tsx
+msgid "Zrzur verified who runs this bot."
+msgstr "Zrzur a vérifié qui gère ce bot."

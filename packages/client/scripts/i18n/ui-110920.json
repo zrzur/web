@@ -1,0 +1,220 @@
+{
+  "{0, plural, one {# rule} other {# rules}}": [
+    "{0, plural, zero {لا قواعد} one {قاعدة واحدة} two {قاعدتان} few {# قواعد} many {# قاعدةً} other {# قاعدة}}",
+    "{0, plural, one {# Regel} other {# Regeln}}",
+    "{0, plural, one {# règle} other {# règles}}",
+    "{0, plural, one {# regla} other {# reglas}}",
+    "{0, plural, one {# правило} few {# правила} many {# правил} other {# правила}}",
+    "{0, plural, other {# 条规则}}"
+  ],
+  "A channel": ["قناة", "Ein Kanal", "Un salon", "Un canal", "Канал", "一个频道"],
+  "A member": ["عضو", "Ein Mitglied", "Un membre", "Un miembro", "Участник", "一位成员"],
+  "A role": ["دور", "Eine Rolle", "Un rôle", "Un rol", "Роль", "一个身份组"],
+  "Added {0}": ["أُضيف في {0}", "Hinzugefügt am {0}", "Ajouté le {0}", "Añadido el {0}", "Добавлен {0}", "添加于 {0}"],
+  "Added before Zrzur kept a record of who adds apps.": [
+    "أُضيف قبل أن يحتفظ زرزور بسجلّ لمن يضيف التطبيقات.",
+    "Hinzugefügt, bevor Zrzur festgehalten hat, wer Apps hinzufügt.",
+    "Ajoutée avant que Zrzur garde une trace de qui ajoute les applis.",
+    "Se añadió antes de que Zrzur guardara quién añade las apps.",
+    "Добавлено до того, как Zrzur начал записывать, кто добавляет приложения.",
+    "添加时 Zrzur 尚未记录是谁添加了应用。"
+  ],
+  "Added by <0>{0}</0> on {1}": [
+    "أضافه <0>{0}</0> في {1}",
+    "Hinzugefügt von <0>{0}</0> am {1}",
+    "Ajoutée par <0>{0}</0> le {1}",
+    "Añadida por <0>{0}</0> el {1}",
+    "Добавил(а) <0>{0}</0> {1}",
+    "由 <0>{0}</0> 于 {1} 添加"
+  ],
+  "Added on {0}": ["أُضيف في {0}", "Hinzugefügt am {0}", "Ajoutée le {0}", "Añadida el {0}", "Добавлено {0}", "添加于 {0}"],
+  "All commands": ["كل الأوامر", "Alle Befehle", "Toutes les commandes", "Todos los comandos", "Все команды", "所有命令"],
+  "Allow or deny": ["سماح أو رفض", "Erlauben oder ablehnen", "Autoriser ou refuser", "Permitir o denegar", "Разрешить или запретить", "允许或拒绝"],
+  "Allow or deny {0}": ["السماح لـ{0} أو رفضه", "{0} erlauben oder ablehnen", "Autoriser ou refuser : {0}", "Permitir o denegar: {0}", "Разрешить или запретить: {0}", "允许或拒绝：{0}"],
+  "App": ["تطبيق", "App", "Appli", "App", "Приложение", "应用"],
+  "Apps and bots": ["التطبيقات والبوتات", "Apps und Bots", "Applis et bots", "Apps y bots", "Приложения и боты", "应用和机器人"],
+  "Asking the bot for suggestions…": [
+    "جارٍ طلب الاقتراحات من البوت…",
+    "Der Bot wird nach Vorschlägen gefragt …",
+    "Demande de suggestions au bot…",
+    "Pidiendo sugerencias al bot…",
+    "Запрашиваем подсказки у бота…",
+    "正在向机器人请求建议…"
+  ],
+  "Authorised apps": ["التطبيقات المأذون لها", "Autorisierte Apps", "Applis autorisées", "Apps autorizadas", "Разрешённые приложения", "已授权的应用"],
+  "changed who can use a command of {0}": [
+    "غيّر من يستطيع استخدام أحد أوامر {0}",
+    "hat geändert, wer einen Befehl von {0} nutzen darf",
+    "a changé qui peut utiliser une commande de {0}",
+    "cambió quién puede usar un comando de {0}",
+    "изменил(а), кто может использовать команду {0}",
+    "更改了谁可以使用 {0} 的某个命令"
+  ],
+  "changed who can use the commands of {0}": [
+    "غيّر من يستطيع استخدام أوامر {0}",
+    "hat geändert, wer die Befehle von {0} nutzen darf",
+    "a changé qui peut utiliser les commandes de {0}",
+    "cambió quién puede usar los comandos de {0}",
+    "изменил(а), кто может использовать команды {0}",
+    "更改了谁可以使用 {0} 的命令"
+  ],
+  "Commands and who can use them": [
+    "الأوامر ومن يستطيع استخدامها",
+    "Befehle und wer sie nutzen darf",
+    "Commandes et qui peut les utiliser",
+    "Comandos y quién puede usarlos",
+    "Команды и кто может их использовать",
+    "命令及其使用者"
+  ],
+  "Couldn't get suggestions. Type a value yourself.": [
+    "تعذّر جلب الاقتراحات. اكتب قيمة بنفسك.",
+    "Vorschläge konnten nicht geladen werden. Gib selbst einen Wert ein.",
+    "Impossible d’obtenir des suggestions. Saisis une valeur toi-même.",
+    "No se pudieron obtener sugerencias. Escribe un valor tú mismo.",
+    "Не удалось получить подсказки. Введите значение сами.",
+    "无法获取建议。请自行输入一个值。"
+  ],
+  "Couldn't load this app.": [
+    "تعذّر تحميل هذا التطبيق.",
+    "Diese App konnte nicht geladen werden.",
+    "Impossible de charger cette appli.",
+    "No se pudo cargar esta app.",
+    "Не удалось загрузить это приложение.",
+    "无法加载此应用。"
+  ],
+  "Couldn't reach the bot. Try again.": [
+    "تعذّر الوصول إلى البوت. حاول مرة أخرى.",
+    "Der Bot ist nicht erreichbar. Versuch es noch einmal.",
+    "Impossible de joindre le bot. Réessaie.",
+    "No se pudo contactar con el bot. Inténtalo de nuevo.",
+    "Не удалось связаться с ботом. Попробуйте ещё раз.",
+    "无法连接到机器人。请重试。"
+  ],
+  "Deleted role": ["دور محذوف", "Gelöschte Rolle", "Rôle supprimé", "Rol eliminado", "Удалённая роль", "已删除的身份组"],
+  "Every channel": ["كل القنوات", "Alle Kanäle", "Tous les salons", "Todos los canales", "Все каналы", "所有频道"],
+  "Made by <0>{0}</0>": ["من صنع <0>{0}</0>", "Erstellt von <0>{0}</0>", "Créé par <0>{0}</0>", "Creado por <0>{0}</0>", "Автор: <0>{0}</0>", "由 <0>{0}</0> 制作"],
+  "Made by bots": ["أنشأتها البوتات", "Von Bots erstellt", "Créés par des bots", "Creados por bots", "Созданы ботами", "由机器人创建"],
+  "Made by people": ["أنشأها أشخاص", "Von Menschen erstellt", "Créés par des personnes", "Creados por personas", "Созданы людьми", "由真人创建"],
+  "Managed by the app. Change what it may do in the role.": [
+    "يديره التطبيق. غيّر ما يُسمح له به من خلال الدور.",
+    "Wird von der App verwaltet. Was sie darf, änderst du in der Rolle.",
+    "Géré par l’appli. Modifie ce qu’elle peut faire dans le rôle.",
+    "Lo gestiona la app. Cambia lo que puede hacer en el rol.",
+    "Управляется приложением. Что ему разрешено, меняется в роли.",
+    "由应用管理。在身份组中更改它能做什么。"
+  ],
+  "No permissions were given when it was added.": [
+    "لم تُمنح أي صلاحيات عند إضافته.",
+    "Beim Hinzufügen wurden keine Berechtigungen vergeben.",
+    "Aucune permission n’a été donnée lors de l’ajout.",
+    "No se dieron permisos al añadirla.",
+    "При добавлении разрешения не выдавались.",
+    "添加时未授予任何权限。"
+  ],
+  "No rules: everyone who has the permissions the bot asks for can use it, in every channel.": [
+    "لا قواعد: يستطيع استخدامه كل من يملك الصلاحيات التي يطلبها البوت، في كل القنوات.",
+    "Keine Regeln: Alle mit den Berechtigungen, die der Bot verlangt, können ihn in jedem Kanal nutzen.",
+    "Aucune règle : toute personne qui a les permissions demandées par le bot peut l’utiliser, dans tous les salons.",
+    "Sin reglas: cualquiera con los permisos que pide el bot puede usarlo, en todos los canales.",
+    "Правил нет: им может пользоваться любой, у кого есть нужные боту разрешения, во всех каналах.",
+    "没有规则：拥有机器人所需权限的任何人都可以在所有频道中使用。"
+  ],
+  "No suggestions match. You can still type a value.": [
+    "لا اقتراحات مطابقة. ما زال بإمكانك كتابة قيمة.",
+    "Keine passenden Vorschläge. Du kannst trotzdem einen Wert eingeben.",
+    "Aucune suggestion ne correspond. Tu peux quand même saisir une valeur.",
+    "Ninguna sugerencia coincide. Aun así puedes escribir un valor.",
+    "Нет подходящих подсказок. Вы всё равно можете ввести значение.",
+    "没有匹配的建议。你仍然可以输入一个值。"
+  ],
+  "No webhooks match this filter.": [
+    "لا يوجد ويب هوك يطابق هذه التصفية.",
+    "Keine Webhooks passen zu diesem Filter.",
+    "Aucun webhook ne correspond à ce filtre.",
+    "Ningún webhook coincide con este filtro.",
+    "Нет вебхуков, подходящих под этот фильтр.",
+    "没有符合此筛选条件的 Webhook。"
+  ],
+  "Not verified by Zrzur": ["غير موثّق من زرزور", "Nicht von Zrzur verifiziert", "Non vérifié par Zrzur", "No verificado por Zrzur", "Не проверен Zrzur", "未经 Zrzur 验证"],
+  "Remove app": ["إزالة التطبيق", "App entfernen", "Retirer l’appli", "Quitar la app", "Удалить приложение", "移除应用"],
+  "Remove the rule for {0}": ["إزالة قاعدة {0}", "Regel für {0} entfernen", "Retirer la règle pour {0}", "Quitar la regla de {0}", "Удалить правило для {0}", "移除 {0} 的规则"],
+  "Remove this app?": ["إزالة هذا التطبيق؟", "Diese App entfernen?", "Retirer cette appli ?", "¿Quitar esta app?", "Удалить это приложение?", "移除此应用？"],
+  "Rule for": ["قاعدة لـ", "Regel für", "Règle pour", "Regla para", "Правило для", "规则对象"],
+  "Rules for {0}": ["قواعد {0}", "Regeln für {0}", "Règles pour {0}", "Reglas de {0}", "Правила для {0}", "{0} 的规则"],
+  "Rules for all commands": ["قواعد كل الأوامر", "Regeln für alle Befehle", "Règles pour toutes les commandes", "Reglas para todos los comandos", "Правила для всех команд", "所有命令的规则"],
+  "Rules for one command come before the rules for the whole app. A rule for a member beats their roles, a Deny on any of their roles beats an Allow on another, and Everyone counts last.": [
+    "قواعد الأمر الواحد تسبق قواعد التطبيق كله. قاعدة العضو تتقدّم على أدواره، والرفض على أي دور من أدواره يتقدّم على السماح في دور آخر، و«الجميع» يُحتسب أخيرًا.",
+    "Regeln für einen Befehl gehen den Regeln für die ganze App vor. Eine Regel für ein Mitglied schlägt seine Rollen, ein Ablehnen bei einer seiner Rollen schlägt ein Erlauben bei einer anderen, und „Alle“ zählt zuletzt.",
+    "Les règles d’une commande passent avant celles de toute l’appli. Une règle pour un membre l’emporte sur ses rôles, un Refuser sur l’un de ses rôles l’emporte sur un Autoriser sur un autre, et Tout le monde compte en dernier.",
+    "Las reglas de un comando van antes que las de toda la app. Una regla para un miembro gana a sus roles, un Denegar en cualquiera de sus roles gana a un Permitir en otro, y Todos cuenta al final.",
+    "Правила для одной команды важнее правил для всего приложения. Правило для участника важнее его ролей, запрет в любой из его ролей важнее разрешения в другой, а «Все» учитывается последним.",
+    "单个命令的规则优先于整个应用的规则。针对成员的规则优先于其身份组；其任一身份组的“拒绝”优先于另一身份组的“允许”；“所有人”最后计算。"
+  ],
+  "Show webhooks made by": ["عرض الويب هوك الذي أنشأه", "Webhooks anzeigen, erstellt von", "Afficher les webhooks créés par", "Mostrar webhooks creados por", "Показать вебхуки, созданные", "显示由谁创建的 Webhook"],
+  "Terms of service": ["شروط الخدمة", "Nutzungsbedingungen", "Conditions d’utilisation", "Términos del servicio", "Условия использования", "服务条款"],
+  "The bot did not answer. Type a value yourself.": [
+    "لم يُجب البوت. اكتب قيمة بنفسك.",
+    "Der Bot hat nicht geantwortet. Gib selbst einen Wert ein.",
+    "Le bot n’a pas répondu. Saisis une valeur toi-même.",
+    "El bot no respondió. Escribe un valor tú mismo.",
+    "Бот не ответил. Введите значение сами.",
+    "机器人没有回应。请自行输入一个值。"
+  ],
+  "The bot leaves the server. Its role, its commands here and their rules go too. You can add it again later.": [
+    "سيغادر البوت السيرفر، ويُزال معه دوره وأوامره هنا وقواعدها. يمكنك إضافته مرة أخرى لاحقًا.",
+    "Der Bot verlässt den Server. Seine Rolle, seine Befehle hier und deren Regeln verschwinden auch. Du kannst ihn später wieder hinzufügen.",
+    "Le bot quitte le serveur. Son rôle, ses commandes ici et leurs règles partent aussi. Tu pourras l’ajouter à nouveau plus tard.",
+    "El bot sale del servidor. Su rol, sus comandos aquí y sus reglas también se van. Puedes volver a añadirlo más tarde.",
+    "Бот покинет сервер. Его роль, команды здесь и их правила тоже будут удалены. Позже его можно добавить снова.",
+    "机器人将离开服务器，它的身份组、在这里的命令及其规则也会一并移除。你之后可以再次添加它。"
+  ],
+  "The permissions it was given when it was added, through its own role.": [
+    "الصلاحيات التي مُنحت له عند إضافته، عبر دوره الخاص.",
+    "Die Berechtigungen, die er beim Hinzufügen über seine eigene Rolle bekommen hat.",
+    "Les permissions reçues lors de l’ajout, via son propre rôle.",
+    "Los permisos que recibió al añadirse, a través de su propio rol.",
+    "Разрешения, выданные при добавлении через его собственную роль.",
+    "添加时通过其专属身份组授予的权限。"
+  ],
+  "This app has no commands here.": [
+    "ليس لهذا التطبيق أوامر هنا.",
+    "Diese App hat hier keine Befehle.",
+    "Cette appli n’a pas de commandes ici.",
+    "Esta app no tiene comandos aquí.",
+    "У этого приложения здесь нет команд.",
+    "此应用在这里没有命令。"
+  ],
+  "This bot is not verified by Zrzur.": [
+    "هذا البوت غير موثّق من زرزور.",
+    "Dieser Bot ist nicht von Zrzur verifiziert.",
+    "Ce bot n’est pas vérifié par Zrzur.",
+    "Este bot no está verificado por Zrzur.",
+    "Этот бот не проверен Zrzur.",
+    "此机器人未经 Zrzur 验证。"
+  ],
+  "Untick anything you do not want to give it.": [
+    "ألغِ تحديد ما لا تريد منحه إياه.",
+    "Entferne den Haken bei allem, was du ihm nicht geben willst.",
+    "Décoche tout ce que tu ne veux pas lui donner.",
+    "Desmarca lo que no quieras darle.",
+    "Снимите отметку со всего, что не хотите ему давать.",
+    "取消勾选你不想授予它的权限。"
+  ],
+  "Verified by Zrzur": ["موثّق من زرزور", "Von Zrzur verifiziert", "Vérifié par Zrzur", "Verificado por Zrzur", "Проверен Zrzur", "已通过 Zrzur 验证"],
+  "What it can do": ["ما يستطيع فعله", "Was er darf", "Ce qu’elle peut faire", "Lo que puede hacer", "Что оно может", "它能做什么"],
+  "Which one": ["أيّها", "Welche", "Lequel", "Cuál", "Какой", "选择哪一个"],
+  "Zrzur verified who runs this bot.": [
+    "تحقّق زرزور ممّن يدير هذا البوت.",
+    "Zrzur hat überprüft, wer diesen Bot betreibt.",
+    "Zrzur a vérifié qui gère ce bot.",
+    "Zrzur verificó quién gestiona este bot.",
+    "Zrzur проверил, кто управляет этим ботом.",
+    "Zrzur 已核实此机器人的运营者。"
+  ],
+  "Allow": ["سماح", "Erlauben", "Autoriser", "Permitir", "Разрешить", "允许"],
+  "Deny": ["رفض", "Ablehnen", "Refuser", "Denegar", "Запретить", "拒绝"],
+  "Verified bot": ["بوت موثّق", "Verifizierter Bot", "Bot vérifié", "Bot verificado", "Проверенный бот", "已验证的机器人"],
+  "Scopes": ["النطاقات", "Bereiche", "Portées", "Ámbitos", "Области доступа", "权限范围"],
+  "Commands": ["الأوامر", "Befehle", "Commandes", "Comandos", "Команды", "命令"],
+  "Apps": ["التطبيقات", "Apps", "Applis", "Apps", "Приложения", "应用"]
+}

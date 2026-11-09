@@ -1684,7 +1684,7 @@ msgstr ""
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 #: components/ui/components/design/Switch.tsx
 msgid "Allow"
-msgstr ""
+msgstr "允许"
 
 #. placeholder {0}: name()
 #: components/app/interface/settings/user/plugins/PluginDetail.tsx
@@ -2032,7 +2032,7 @@ msgstr ""
 #: components/app/interface/settings/ServerSettings.tsx
 #: components/app/menus/shared/AppsSubMenu.tsx
 msgid "Apps"
-msgstr ""
+msgstr "应用"
 
 #: src/interface/OAuth.tsx
 msgid "Apps you allowed to use your account. Revoking one ends its access at once; bots it added stay in servers until their managers remove them."
@@ -3761,7 +3761,7 @@ msgstr ""
 #: src/interface/channels/text/Composition.tsx
 #: src/interface/Developers.tsx
 msgid "Commands"
-msgstr ""
+msgstr "命令"
 
 #: src/interface/developers/docs/DocsPortal.tsx
 msgid "Commands and interactions"
@@ -4925,7 +4925,7 @@ msgstr ""
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 #: components/ui/components/design/Switch.tsx
 msgid "Deny"
-msgstr ""
+msgstr "拒绝"
 
 #: src/interface/developers/docs/DocsPortal.tsx
 msgid "Deployment"
@@ -13226,7 +13226,7 @@ msgstr ""
 
 #: src/interface/Developers.tsx
 msgid "Scopes"
-msgstr ""
+msgstr "权限范围"
 
 #: src/interface/navigation/channels/AccountBar.tsx
 msgid "Screen"
@@ -17170,7 +17170,7 @@ msgstr ""
 
 #: components/ui/components/features/profiles/ProfileIdentity.tsx
 msgid "Verified bot"
-msgstr ""
+msgstr "已验证的机器人"
 
 #: components/app/interface/settings/user/bots/BotVerification.tsx
 msgid "Verified bots show a mark next to their name and can join more than 100 servers. Past 100 servers, privileged intents stay on only once they are approved."
@@ -19040,3 +19040,218 @@ msgstr ""
 #: components/app/interface/settings/user/appearance/AppearanceMenu.tsx
 #~ msgid "Zrzur's own look: calm dark panels in one slate family, pink for Plus and teal for anything live."
 #~ msgstr ""
+
+#. placeholder {0}: props.rules
+#: components/app/interface/settings/server/apps/ServerAppPage.tsx
+msgid "{0, plural, one {# rule} other {# rules}}"
+msgstr "{0, plural, other {# 条规则}}"
+
+#: components/app/interface/settings/server/apps/RulesEditor.tsx
+msgid "A channel"
+msgstr "一个频道"
+
+#: components/app/interface/settings/server/apps/RulesEditor.tsx
+msgid "A member"
+msgstr "一位成员"
+
+#: components/app/interface/settings/server/apps/RulesEditor.tsx
+msgid "A role"
+msgstr "一个身份组"
+
+#. placeholder {0}: new Date(install!.installed_at).toLocaleDateString()
+#: components/app/interface/settings/server/ServerApps.tsx
+msgid "Added {0}"
+msgstr "添加于 {0}"
+
+#: components/app/interface/settings/server/apps/ServerAppPage.tsx
+msgid "Added before Zrzur kept a record of who adds apps."
+msgstr "添加时 Zrzur 尚未记录是谁添加了应用。"
+
+#. placeholder {0}: installer()!.displayName ?? installer()!.username
+#. placeholder {1}: date(install().installed_at)
+#: components/app/interface/settings/server/apps/ServerAppPage.tsx
+msgid "Added by <0>{0}</0> on {1}"
+msgstr "由 <0>{0}</0> 于 {1} 添加"
+
+#. placeholder {0}: date(install().installed_at)
+#: components/app/interface/settings/server/apps/ServerAppPage.tsx
+msgid "Added on {0}"
+msgstr "添加于 {0}"
+
+#: components/app/interface/settings/server/apps/ServerAppPage.tsx
+msgid "All commands"
+msgstr "所有命令"
+
+#: components/app/interface/settings/server/apps/RulesEditor.tsx
+msgid "Allow or deny"
+msgstr "允许或拒绝"
+
+#. placeholder {0}: name(rule)
+#: components/app/interface/settings/server/apps/RulesEditor.tsx
+msgid "Allow or deny {0}"
+msgstr "允许或拒绝：{0}"
+
+#: components/app/interface/settings/ServerSettings.tsx
+msgid "App"
+msgstr "应用"
+
+#: components/app/interface/settings/server/audit/AuditLog.tsx
+msgid "Apps and bots"
+msgstr "应用和机器人"
+
+#: components/app/interface/channels/text/interactions/CommandPicker.tsx
+msgid "Asking the bot for suggestions…"
+msgstr "正在向机器人请求建议…"
+
+#: components/app/interface/settings/UserSettings.tsx
+msgid "Authorised apps"
+msgstr "已授权的应用"
+
+#. placeholder {0}: userName(raw.bot)
+#: components/app/interface/settings/server/audit/AuditLog.tsx
+msgid "changed who can use a command of {0}"
+msgstr "更改了谁可以使用 {0} 的某个命令"
+
+#. placeholder {0}: userName(raw.bot)
+#: components/app/interface/settings/server/audit/AuditLog.tsx
+msgid "changed who can use the commands of {0}"
+msgstr "更改了谁可以使用 {0} 的命令"
+
+#: components/app/interface/settings/server/apps/ServerAppPage.tsx
+msgid "Commands and who can use them"
+msgstr "命令及其使用者"
+
+#: components/app/interface/channels/text/interactions/CommandPicker.tsx
+msgid "Couldn't get suggestions. Type a value yourself."
+msgstr "无法获取建议。请自行输入一个值。"
+
+#: components/app/interface/settings/server/apps/ServerAppPage.tsx
+msgid "Couldn't load this app."
+msgstr "无法加载此应用。"
+
+#: components/app/interface/channels/text/interactions/errorText.ts
+msgid "Couldn't reach the bot. Try again."
+msgstr "无法连接到机器人。请重试。"
+
+#: components/app/interface/settings/server/apps/RulesEditor.tsx
+msgid "Deleted role"
+msgstr "已删除的身份组"
+
+#: components/app/interface/settings/server/apps/RulesEditor.tsx
+msgid "Every channel"
+msgstr "所有频道"
+
+#. placeholder {0}: creator().displayName ?? creator().username
+#: components/modal/modals/AddBot.tsx
+msgid "Made by <0>{0}</0>"
+msgstr "由 <0>{0}</0> 制作"
+
+#: components/app/interface/settings/server/webhooks/ServerWebhooks.tsx
+msgid "Made by bots"
+msgstr "由机器人创建"
+
+#: components/app/interface/settings/server/webhooks/ServerWebhooks.tsx
+msgid "Made by people"
+msgstr "由真人创建"
+
+#: components/app/interface/settings/server/apps/ServerAppPage.tsx
+msgid "Managed by the app. Change what it may do in the role."
+msgstr "由应用管理。在身份组中更改它能做什么。"
+
+#: components/app/interface/settings/server/apps/ServerAppPage.tsx
+msgid "No permissions were given when it was added."
+msgstr "添加时未授予任何权限。"
+
+#: components/app/interface/settings/server/apps/RulesEditor.tsx
+msgid "No rules: everyone who has the permissions the bot asks for can use it, in every channel."
+msgstr "没有规则：拥有机器人所需权限的任何人都可以在所有频道中使用。"
+
+#: components/app/interface/channels/text/interactions/CommandPicker.tsx
+msgid "No suggestions match. You can still type a value."
+msgstr "没有匹配的建议。你仍然可以输入一个值。"
+
+#: components/app/interface/settings/server/webhooks/ServerWebhooks.tsx
+msgid "No webhooks match this filter."
+msgstr "没有符合此筛选条件的 Webhook。"
+
+#: components/ui/components/features/profiles/ProfileBotAbout.tsx
+msgid "Not verified by Zrzur"
+msgstr "未经 Zrzur 验证"
+
+#: components/app/interface/settings/server/apps/ServerAppPage.tsx
+msgid "Remove app"
+msgstr "移除应用"
+
+#. placeholder {0}: name(rule)
+#: components/app/interface/settings/server/apps/RulesEditor.tsx
+msgid "Remove the rule for {0}"
+msgstr "移除 {0} 的规则"
+
+#: components/app/interface/settings/server/apps/ServerAppPage.tsx
+msgid "Remove this app?"
+msgstr "移除此应用？"
+
+#: components/app/interface/settings/server/apps/RulesEditor.tsx
+msgid "Rule for"
+msgstr "规则对象"
+
+#. placeholder {0}: command.name
+#: components/app/interface/settings/server/apps/ServerAppPage.tsx
+msgid "Rules for {0}"
+msgstr "{0} 的规则"
+
+#: components/app/interface/settings/server/apps/ServerAppPage.tsx
+msgid "Rules for all commands"
+msgstr "所有命令的规则"
+
+#: components/app/interface/settings/server/apps/ServerAppPage.tsx
+msgid "Rules for one command come before the rules for the whole app. A rule for a member beats their roles, a Deny on any of their roles beats an Allow on another, and Everyone counts last."
+msgstr "单个命令的规则优先于整个应用的规则。针对成员的规则优先于其身份组；其任一身份组的“拒绝”优先于另一身份组的“允许”；“所有人”最后计算。"
+
+#: components/app/interface/settings/server/webhooks/ServerWebhooks.tsx
+msgid "Show webhooks made by"
+msgstr "显示由谁创建的 Webhook"
+
+#: components/ui/components/features/profiles/ProfileBotAbout.tsx
+msgid "Terms of service"
+msgstr "服务条款"
+
+#: components/app/interface/channels/text/interactions/CommandPicker.tsx
+msgid "The bot did not answer. Type a value yourself."
+msgstr "机器人没有回应。请自行输入一个值。"
+
+#: components/app/interface/settings/server/apps/ServerAppPage.tsx
+msgid "The bot leaves the server. Its role, its commands here and their rules go too. You can add it again later."
+msgstr "机器人将离开服务器，它的身份组、在这里的命令及其规则也会一并移除。你之后可以再次添加它。"
+
+#: components/app/interface/settings/server/apps/ServerAppPage.tsx
+msgid "The permissions it was given when it was added, through its own role."
+msgstr "添加时通过其专属身份组授予的权限。"
+
+#: components/app/interface/settings/server/apps/ServerAppPage.tsx
+msgid "This app has no commands here."
+msgstr "此应用在这里没有命令。"
+
+#: components/modal/modals/AddBot.tsx
+msgid "This bot is not verified by Zrzur."
+msgstr "此机器人未经 Zrzur 验证。"
+
+#: components/modal/modals/AddBot.tsx
+msgid "Untick anything you do not want to give it."
+msgstr "取消勾选你不想授予它的权限。"
+
+#: components/ui/components/features/profiles/ProfileBotAbout.tsx
+msgid "Verified by Zrzur"
+msgstr "已通过 Zrzur 验证"
+
+#: components/app/interface/settings/server/apps/ServerAppPage.tsx
+msgid "What it can do"
+msgstr "它能做什么"
+
+#: components/app/interface/settings/server/apps/RulesEditor.tsx
+msgid "Which one"
+msgstr "选择哪一个"
+
+#: components/modal/modals/AddBot.tsx
+msgid "Zrzur verified who runs this bot."
+msgstr "Zrzur 已核实此机器人的运营者。"
