@@ -665,7 +665,7 @@ msgstr "{0}：第 {1} 位"
 #. placeholder {0}: props.member.displayName
 #: components/modal/modals/UserProfileRoles.tsx
 msgid "{0}'s roles"
-msgstr "{0} 的身份组"
+msgstr "{0} 的角色"
 
 #. placeholder {0}: props.member.user?.username
 #: components/modal/modals/RemoveTimeout.tsx
@@ -988,7 +988,7 @@ msgstr "一个按钮"
 
 #: components/app/interface/settings/server/assistant/labels.ts
 msgid "A button or a short sum gives new members their role."
-msgstr "点一下按钮或回答一道简单的算术题，新成员即可获得身份组。"
+msgstr "点一下按钮或回答一道简单的算术题，新成员即可获得角色。"
 
 #: components/app/interface/settings/user/appearance/AppearanceMenu.tsx
 msgid "A calm light theme in soft paper tones for bright rooms and daytime reading."
@@ -1004,7 +1004,7 @@ msgstr "已存在同名命令。"
 
 #: components/app/interface/settings/user/subscriptions/PlusPage.tsx
 msgid "A Feather role in the official Zrzur server, with the channels HQ opens to Feather members."
-msgstr "Zrzur 官方服务器中的 Feather 身份组，并开放总部中仅限 Feather 成员的频道。"
+msgstr "Zrzur 官方服务器中的 Feather 角色，并开放总部中仅限 Feather 成员的频道。"
 
 #: components/i18n/errors.tsx
 msgid "A file didn't finish uploading. Add it again and try once more."
@@ -1112,7 +1112,7 @@ msgstr "密钥已存在。重置后，旧密钥会立即失效。"
 
 #: components/i18n/errors.tsx
 msgid "A server can have up to {max} roles."
-msgstr "一个服务器最多可以有 {max} 个身份组。"
+msgstr "一个服务器最多可以有 {max} 个角色。"
 
 #: components/i18n/errors.tsx
 msgid "A server you share paused direct messages between members for now."
@@ -1436,11 +1436,11 @@ msgstr "请先在上方添加重定向 URI，以生成该 URL。"
 
 #: components/modal/modals/CategoryPermissions.tsx
 msgid "Add a role"
-msgstr "添加身份组"
+msgstr "添加角色"
 
 #: components/app/interface/settings/server/LobbyRoleQuestionsEditor.tsx
 msgid "Add a role question"
-msgstr "添加身份组问题"
+msgstr "添加角色问题"
 
 #: src/interface/Home.tsx
 msgid "Add a server"
@@ -1775,11 +1775,11 @@ msgstr "所有原因"
 
 #: components/app/interface/settings/server/members/ListMembers.tsx
 msgid "All roles"
-msgstr "所有身份组"
+msgstr "所有角色"
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsOverview.tsx
 msgid "All roles have overrides."
-msgstr "所有身份组都设有覆盖设置。"
+msgstr "所有角色都设有覆盖设置。"
 
 #: src/interface/Discover.tsx
 msgid "All servers"
@@ -2335,12 +2335,12 @@ msgstr "索取过多权限"
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 msgid "Assign lower-ranked roles to lower-ranking members"
-msgstr "可为级别较低的成员分配级别较低的身份组"
+msgstr "可为级别较低的成员分配级别较低的角色"
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 #: src/interface/OAuth.tsx
 msgid "Assign roles"
-msgstr "分配身份组"
+msgstr "分配角色"
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 #~ msgid "Assign Roles"
@@ -2384,7 +2384,7 @@ msgstr "最多 {max}。"
 
 #: components/app/interface/settings/server/roles/ServerRoleOverview.tsx
 msgid "At or above your highest role: only someone higher can change it."
-msgstr "等于或高于你的最高身份组：只有级别更高的人才能更改。"
+msgstr "等于或高于你的最高角色：只有级别更高的人才能更改。"
 
 #: components/app/interface/safety/labels.tsx
 msgid "At risk"
@@ -2470,7 +2470,7 @@ msgstr "自动增益控制"
 
 #: components/app/interface/settings/server/assistant/labels.ts
 msgid "Automatic roles and panels members pick from."
-msgstr "成员可自行选择的自动身份组和面板。"
+msgstr "成员可自行选择的自动角色和面板。"
 
 #: components/app/interface/settings/user/safety/SafetyDashboard.tsx
 msgid "Automation"
@@ -3506,7 +3506,7 @@ msgstr "更改密码"
 
 #: components/app/interface/settings/server/roles/ServerRoleEditor.tsx
 msgid "Change role icon"
-msgstr "更换身份组图标"
+msgstr "更换角色图标"
 
 #: components/modal/modals/ServerIdentity.tsx
 msgid "Change server avatar"
@@ -3571,7 +3571,7 @@ msgstr "更改了 {0} 的昵称"
 #. placeholder {0}: userName(a.user)
 #: components/app/interface/settings/server/audit/AuditLog.tsx
 msgid "changed {0}'s roles"
-msgstr "更改了 {0} 的身份组"
+msgstr "更改了 {0} 的角色"
 
 #. placeholder {0}: userName(other.member)
 #. placeholder {1}: channelName(other.channel)
@@ -3599,7 +3599,7 @@ msgstr "频道"
 
 #: components/app/interface/settings/server/assistant/labels.ts
 msgid "Channel and role changes"
-msgstr "频道和身份组变更"
+msgstr "频道和角色变更"
 
 #: components/app/interface/settings/user/appearance/AnimationSettings.tsx
 msgid "Channel categories"
@@ -3820,7 +3820,7 @@ msgstr "选择插件包"
 
 #: components/app/interface/settings/server/LobbyRoleQuestionsEditor.tsx
 msgid "Choose a role"
-msgstr "选择身份组"
+msgstr "选择角色"
 
 #: components/app/interface/channels/text/interactions/CommandPicker.tsx
 #~ msgid "Choose a role…"
@@ -3925,7 +3925,7 @@ msgstr "每次开始直播时选择画质。"
 
 #: components/app/interface/settings/server/LobbyRoleQuestionsEditor.tsx
 msgid "Choose the role this answer gives."
-msgstr "选择此答案对应的身份组。"
+msgstr "选择此答案对应的角色。"
 
 #: components/modal/modals/Onboarding.tsx
 msgid "Choose username"
@@ -4353,7 +4353,7 @@ msgstr "请填写所有问题和答案。"
 
 #: components/app/interface/settings/server/roles/RoleQuestions.tsx
 msgid "Complete every role question and choose a role for each answer."
-msgstr "请填写所有身份组问题，并为每个答案选择一个身份组。"
+msgstr "请填写所有角色问题，并为每个答案选择一个角色。"
 
 #: components/ui/components/features/profiles/badges/useBadgeText.ts
 msgid "Complete the beta as an active tester who sent feedback or a bug report. It stays, but gives no beta access."
@@ -4807,7 +4807,7 @@ msgstr "创建账号"
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 msgid "Create and edit server roles"
-msgstr "创建和编辑服务器身份组"
+msgstr "创建和编辑服务器角色"
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 msgid "Create and edit webhooks"
@@ -4874,7 +4874,7 @@ msgstr "创建插件"
 #: components/app/interface/settings/server/roles/ServerRoleOverview.tsx
 #: components/modal/modals/CreateRole.tsx
 msgid "Create role"
-msgstr "创建身份组"
+msgstr "创建角色"
 
 #: components/modal/modals/CreateRole.tsx
 #~ msgid "Create Role"
@@ -4943,7 +4943,7 @@ msgstr "为 {1} 创建了邀请 {0}"
 #. placeholder {0}: roleName(a.role, a.name)
 #: components/app/interface/settings/server/audit/AuditLog.tsx
 msgid "created role {0}"
-msgstr "创建了身份组 {0}"
+msgstr "创建了角色 {0}"
 
 #. placeholder {0}: a.name
 #. placeholder {1}: channelName(a.channel)
@@ -5061,7 +5061,7 @@ msgstr "裁剪图片"
 
 #: components/app/interface/settings/server/roles/ServerRoleEditor.tsx
 msgid "Crop role icon"
-msgstr "裁剪身份组图标"
+msgstr "裁剪角色图标"
 
 #: components/app/interface/settings/server/roles/ServerRoleEditor.tsx
 #~ msgid "Crop Role Icon"
@@ -5440,7 +5440,7 @@ msgstr "删除消息记录"
 
 #: components/app/interface/settings/server/roles/ServerRoleEditor.tsx
 msgid "Delete role"
-msgstr "删除身份组"
+msgstr "删除角色"
 
 #: components/app/interface/settings/server/AutoModSettings.tsx
 msgid "Delete rule"
@@ -5503,12 +5503,12 @@ msgstr "删除了邀请 {0}"
 
 #: components/app/interface/settings/server/audit/AuditLog.tsx
 msgid "deleted role"
-msgstr "删除了身份组"
+msgstr "删除了角色"
 
 #. placeholder {0}: a.name
 #: components/app/interface/settings/server/audit/AuditLog.tsx
 msgid "deleted role {0}"
-msgstr "删除了身份组 {0}"
+msgstr "删除了角色 {0}"
 
 #. placeholder {0}: a.name
 #: components/app/interface/settings/server/audit/AuditLog.tsx
@@ -5984,7 +5984,7 @@ msgstr "拖动以重新排序 {0}"
 
 #: components/app/interface/settings/server/roles/ServerRoleOverview.tsx
 msgid "Drag to reorder. Roles higher in the list rank above lower ones."
-msgstr "拖动以重新排序。列表中位置靠前的身份组，级别高于靠后的。"
+msgstr "拖动以重新排序。列表中位置靠前的角色，级别高于靠后的。"
 
 #: components/app/interface/settings/user/profile/CreatorStudio.tsx
 msgid "Draw around the circle"
@@ -6084,7 +6084,7 @@ msgstr "编辑"
 #. placeholder {0}: props.member.displayName
 #: components/modal/modals/UserProfileRoles.tsx
 msgid "Edit {0}'s roles"
-msgstr "编辑 {0} 的身份组"
+msgstr "编辑 {0} 的角色"
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 msgid "Edit and delete channel"
@@ -6096,7 +6096,7 @@ msgstr "编辑服务器上的任何权限"
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 msgid "Edit channel-specific role and default permissions"
-msgstr "编辑频道专属的身份组权限和默认权限"
+msgstr "编辑频道专属的角色权限和默认权限"
 
 #: components/app/interface/settings/server/emojis/EmojiList.tsx
 msgid "Edit emoji"
@@ -6143,7 +6143,7 @@ msgstr "编辑个人资料"
 #: components/app/interface/settings/server/members/ListMembers.tsx
 #: components/app/menus/UserContextMenu.tsx
 msgid "Edit roles"
-msgstr "编辑身份组"
+msgstr "编辑角色"
 
 #: components/app/interface/settings/server/AutoModSettings.tsx
 msgid "Edit rule"
@@ -6190,7 +6190,7 @@ msgstr "已编辑和已删除的消息"
 #. placeholder {0}: roleName(a.role)
 #: components/app/interface/settings/server/audit/AuditLog.tsx
 msgid "edited role {0}"
-msgstr "编辑了身份组 {0}"
+msgstr "编辑了角色 {0}"
 
 #. placeholder {0}: a.name
 #: components/app/interface/settings/server/audit/AuditLog.tsx
@@ -6891,7 +6891,7 @@ msgstr "按人员筛选"
 
 #: components/app/interface/settings/server/members/ListMembers.tsx
 msgid "Filter by role"
-msgstr "按身份组筛选"
+msgstr "按角色筛选"
 
 #: components/app/interface/channels/text/interactions/CommandPicker.tsx
 msgid "Filter commands by app"
@@ -7452,7 +7452,7 @@ msgstr "在 Google Play 获取"
 #. placeholder {0}: role()!.name
 #: components/modal/modals/InterestsModal.tsx
 msgid "Get the {0} role"
-msgstr "获得 {0} 身份组"
+msgstr "获得 {0} 角色"
 
 #: components/auth/src/AppUpsell.tsx
 msgid "Get the desktop app for Windows, macOS and Linux and keep your conversations one click away."
@@ -8063,7 +8063,7 @@ msgstr "命令如何运作"
 
 #: components/app/interface/settings/server/LobbySettings.tsx
 msgid "How do I get a role?"
-msgstr "如何获得身份组？"
+msgstr "如何获得角色？"
 
 #: components/modal/modals/GiftPlus.tsx
 msgid "How long?"
@@ -8310,7 +8310,7 @@ msgstr "自 {1} 起在 {0}"
 
 #: components/app/interface/settings/user/profile/StyleEditors.tsx
 msgid "In a server, a role colour wins over yours, but your font stays. On a profile card with a theme, your name turns white so it stays readable."
-msgstr "在服务器中，身份组颜色会优先于你的颜色，但你的字体不变。在带主题的个人资料卡上，你的名字会变成白色以保证可读性。"
+msgstr "在服务器中，角色颜色会优先于你的颜色，但你的字体不变。在带主题的个人资料卡上，你的名字会变成白色以保证可读性。"
 
 #: src/interface/developers/docs/GettingStarted.tsx
 #~ msgid "In about ten minutes you will have a bot that answers a slash command in your own test server."
@@ -8640,7 +8640,7 @@ msgstr "名称至少有 2 个字母"
 
 #: components/app/interface/settings/server/roles/ServerRoleEditor.tsx
 msgid "It is at or above your highest role. Only someone higher can change it."
-msgstr "它等于或高于你的最高身份组。只有更高级别的人才能更改。"
+msgstr "它等于或高于你的最高角色。只有更高级别的人才能更改。"
 
 #: src/interface/channels/AgeGate.tsx
 msgid "It is open to you because you stated that you are 18 or over. Zrzur does not verify ages."
@@ -9189,7 +9189,7 @@ msgstr "让更多人加入？"
 
 #: components/app/interface/settings/server/pages.tsx
 msgid "Let new members pick their interests and get roles."
-msgstr "让新成员选择兴趣并获得身份组。"
+msgstr "让新成员选择兴趣并获得角色。"
 
 #: components/app/interface/settings/shared/Discoverable.tsx
 msgid "Let people find and join your server. A moderator reviews every request, and you can take it off at any time."
@@ -9359,7 +9359,7 @@ msgstr "允许其他服务发帖的链接。"
 
 #: components/app/interface/settings/server/roles/ServerRoleEditor.tsx
 msgid "List members with this role in their own group in the member list."
-msgstr "在成员列表中，将拥有此身份组的成员单独分组显示。"
+msgstr "在成员列表中，将拥有此角色的成员单独分组显示。"
 
 #: components/modal/modals/PromoteServer.tsx
 msgid "Listed on Discover"
@@ -9904,7 +9904,7 @@ msgstr "管理权限"
 #: components/app/interface/settings/server/layout.tsx
 #: src/interface/OAuth.tsx
 msgid "Manage roles"
-msgstr "管理身份组"
+msgstr "管理角色"
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 #~ msgid "Manage Roles"
@@ -9922,7 +9922,7 @@ msgstr "管理服务器"
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 msgid "Manage server, permissions and roles together are close to full control."
-msgstr "“管理服务器”“管理权限”和“管理身份组”合在一起几乎等同于完全控制。"
+msgstr "“管理服务器”“管理权限”和“管理角色”合在一起几乎等同于完全控制。"
 
 #: components/app/interface/settings/user/subscriptions/PlusPage.tsx
 msgid "Manage subscription"
@@ -10158,7 +10158,7 @@ msgstr "成员可以邀请"
 
 #: components/app/interface/settings/server/roles/ServerRoleOverview.tsx
 msgid "Members can send messages with any name and picture, for example “Admin”. Turn this off unless your server needs it; you can still give it to a role."
-msgstr "成员可以用任意名称和头像发送消息，例如“管理员”。除非你的服务器需要，否则请关闭；你仍然可以把它授予某个身份组。"
+msgstr "成员可以用任意名称和头像发送消息，例如“管理员”。除非你的服务器需要，否则请关闭；你仍然可以把它授予某个角色。"
 
 #. placeholder {0}: slowmodeWaitTime()
 #: components/app/interface/channels/text/CompositionInfo.tsx
@@ -10175,11 +10175,11 @@ msgstr "成员为服务器赠送羽翼。羽翼越多，就能解锁越高的等
 
 #: components/app/interface/settings/server/assistant/labels.ts
 msgid "Members joining, leaving and changing roles"
-msgstr "成员加入、离开以及身份组变更"
+msgstr "成员加入、离开以及角色变更"
 
 #: components/app/interface/settings/server/roles/ServerRoleEditor.tsx
 msgid "Members lose this role and its permissions."
-msgstr "成员将失去此身份组及其权限。"
+msgstr "成员将失去此角色及其权限。"
 
 #: components/app/interface/settings/channel/ForumTags.tsx
 msgid "Members pick up to five tags for each post, and everyone can filter posts by tag."
@@ -10195,7 +10195,7 @@ msgstr "不是好友的成员之间无法互发消息。"
 
 #: components/app/interface/settings/server/ServerVerification.tsx
 msgid "Members with any role, bots and the owner are exempt."
-msgstr "拥有任意身份组的成员、机器人和所有者不受影响。"
+msgstr "拥有任意角色的成员、机器人和所有者不受影响。"
 
 #. placeholder {0}: format(value(stat))
 #: src/interface/navigation/channels/ServerStats.tsx
@@ -10221,7 +10221,7 @@ msgstr "在服务器内提及所有人和在线成员"
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 msgid "Mention roles"
-msgstr "提及身份组"
+msgstr "提及角色"
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 #~ msgid "Mention Roles"
@@ -10233,7 +10233,7 @@ msgstr "提及垃圾信息"
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 msgid "Mention specific roles"
-msgstr "提及特定身份组"
+msgstr "提及特定角色"
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 #: src/interface/navigation/channels/AccountBar.tsx
@@ -11012,7 +11012,7 @@ msgstr "新成员需先同意规则才能发言。"
 
 #: components/app/interface/settings/server/roles/RoleQuestions.tsx
 msgid "New members answer these in a window when they first open the server, and get each answer's role right away. They can skip it and change their answers later from the server menu."
-msgstr "新成员首次打开服务器时，会在窗口中回答这些问题，并立即获得每个答案对应的身份组。他们可以跳过，之后也能通过服务器菜单修改答案。"
+msgstr "新成员首次打开服务器时，会在窗口中回答这些问题，并立即获得每个答案对应的角色。他们可以跳过，之后也能通过服务器菜单修改答案。"
 
 #: components/i18n/errors.tsx
 msgid "New members can talk here 10 minutes after joining. You can talk in {minutes} min."
@@ -11531,11 +11531,11 @@ msgstr "没有待处理的请求"
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsOverview.tsx
 #: components/modal/modals/CategoryPermissions.tsx
 msgid "No role overrides have been configured."
-msgstr "尚未配置身份组覆盖设置。"
+msgstr "尚未配置角色覆盖设置。"
 
 #: components/app/interface/settings/server/roles/ServerRoleOverview.tsx
 msgid "No roles yet"
-msgstr "还没有身份组"
+msgstr "还没有角色"
 
 #: components/app/interface/settings/server/AutoModSettings.tsx
 msgid "No rules yet"
@@ -12137,7 +12137,7 @@ msgstr "只使用一个 mentions: 筛选，因此忽略了“{value}”。"
 
 #: components/app/interface/settings/server/LobbyRoleQuestionsEditor.tsx
 msgid "Only ordinary member roles can be offered: no managed roles and none with moderation or admin permissions."
-msgstr "只能提供普通成员身份组：不能是托管身份组，也不能是带有管理或管理员权限的身份组。"
+msgstr "只能提供普通成员角色：不能是托管角色，也不能是带有管理或管理员权限的角色。"
 
 #: components/app/interface/settings/channel/Overview.tsx
 msgid "Only people who can manage messages post here. Everyone else reads."
@@ -12173,7 +12173,7 @@ msgstr "只发布你自己制作或有权分享的作品。发布后立即公开
 
 #: components/app/interface/settings/server/ServerAccess.tsx
 msgid "Only roles with Invite others can share invites."
-msgstr "只有拥有“邀请他人”权限的身份组才能分享邀请。"
+msgstr "只有拥有“邀请他人”权限的角色才能分享邀请。"
 
 #. placeholder {0}: props.member.server!.name
 #: components/modal/modals/ServerIdentity.tsx
@@ -12218,7 +12218,7 @@ msgstr "只有已验证的创作者和 Zrzur 工作人员可以这样做。"
 
 #: components/modal/modals/CreateChannel.tsx
 msgid "Only you and the roles or members you add can see it."
-msgstr "只有你以及你添加的身份组或成员可以看到。"
+msgstr "只有你以及你添加的角色或成员可以看到。"
 
 #: components/app/interface/settings/user/badges/BugReportDialog.tsx
 msgid "Only you and Zrzur's security reviewers can read a security report. Nothing about it is shown on your profile."
@@ -12797,7 +12797,7 @@ msgstr "权限"
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsOverview.tsx
 msgid "Permissions available when no role overrides apply"
-msgstr "没有身份组覆盖设置时可用的权限"
+msgstr "没有角色覆盖设置时可用的权限"
 
 #: components/app/interface/settings/user/profile/CreatorsAdmin.tsx
 msgid "Permissions changed"
@@ -12900,7 +12900,7 @@ msgstr "最多选九个。未选择时，显示最活跃的频道。"
 
 #: components/modal/modals/InterestsModal.tsx
 msgid "Pick what interests you. You get each role right away and can change it any time from the server menu."
-msgstr "选择你感兴趣的内容。你会立即获得对应的身份组，之后可随时在服务器菜单中更改。"
+msgstr "选择你感兴趣的内容。你会立即获得对应的角色，之后可随时在服务器菜单中更改。"
 
 #: components/app/interface/settings/server/assistant/AssistantPage.tsx
 msgid "Pick what your server is like; modules turn on to match."
@@ -13605,7 +13605,7 @@ msgstr "隔离"
 
 #: components/app/interface/settings/server/assistant/labels.ts
 msgid "Quarantine role"
-msgstr "隔离身份组"
+msgstr "隔离角色"
 
 #: components/app/interface/settings/user/plugins/common.tsx
 msgid "Quarantined"
@@ -14135,7 +14135,7 @@ msgstr "移除审核员"
 
 #: components/app/interface/settings/server/roles/ServerRoleEditor.tsx
 msgid "Remove role icon"
-msgstr "移除身份组图标"
+msgstr "移除角色图标"
 
 #: components/app/interface/settings/server/Overview.tsx
 msgid "Remove server banner"
@@ -14264,7 +14264,7 @@ msgstr "已由管理员重新开启"
 
 #: components/app/interface/settings/server/audit/AuditLog.tsx
 msgid "reordered the roles"
-msgstr "调整了身份组顺序"
+msgstr "调整了角色顺序"
 
 #: components/app/interface/settings/server/assistant/labels.ts
 #: components/app/interface/settings/server/AutoModSettings.tsx
@@ -14727,11 +14727,11 @@ msgstr "上升的爱心"
 
 #: components/app/interface/settings/server/roles/ServerRoleEditor.tsx
 msgid "Role"
-msgstr "身份组"
+msgstr "角色"
 
 #: components/app/interface/settings/server/roles/ServerRoleEditor.tsx
 msgid "Role colour"
-msgstr "身份组颜色"
+msgstr "角色颜色"
 
 #: components/app/interface/settings/server/roles/ServerRoleEditor.tsx
 #~ msgid "Role Colour"
@@ -14740,28 +14740,28 @@ msgstr "身份组颜色"
 #. placeholder {0}: oi + 1
 #: components/app/interface/settings/server/LobbyRoleQuestionsEditor.tsx
 msgid "Role for answer {0}"
-msgstr "答案 {0} 对应的身份组"
+msgstr "答案 {0} 对应的角色"
 
 #: components/app/interface/settings/server/assistant/labels.ts
 msgid "Role given after verifying"
-msgstr "验证后授予的身份组"
+msgstr "验证后授予的角色"
 
 #: components/app/interface/settings/server/roles/ServerRoleEditor.tsx
 msgid "Role icon"
-msgstr "身份组图标"
+msgstr "角色图标"
 
 #: components/app/interface/settings/server/roles/ServerRoleEditor.tsx
 msgid "Role ID"
-msgstr "身份组 ID"
+msgstr "角色 ID"
 
 #: components/app/interface/settings/server/LobbyRoleQuestionsEditor.tsx
 msgid "Role it gives"
-msgstr "授予的身份组"
+msgstr "授予的角色"
 
 #: components/app/interface/settings/server/roles/ServerRoleEditor.tsx
 #: components/modal/modals/CreateRole.tsx
 msgid "Role name"
-msgstr "身份组名称"
+msgstr "角色名称"
 
 #: components/app/interface/settings/server/roles/ServerRoleEditor.tsx
 #: components/modal/modals/CreateRole.tsx
@@ -14771,7 +14771,7 @@ msgstr "身份组名称"
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsOverview.tsx
 #: components/modal/modals/CategoryPermissions.tsx
 msgid "Role overrides"
-msgstr "身份组覆盖设置"
+msgstr "角色覆盖设置"
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsOverview.tsx
 #~ msgid "Role Overrides"
@@ -14779,16 +14779,16 @@ msgstr "身份组覆盖设置"
 
 #: components/app/interface/settings/server/audit/AuditLog.tsx
 msgid "Role permissions"
-msgstr "身份组权限"
+msgstr "角色权限"
 
 #: components/app/interface/settings/server/LobbyRoleQuestionsEditor.tsx
 msgid "Role unavailable"
-msgstr "身份组不可用"
+msgstr "角色不可用"
 
 #. placeholder {0}: role()!.name
 #: components/modal/modals/InterestsModal.tsx
 msgid "Role: {0}"
-msgstr "身份组：{0}"
+msgstr "角色：{0}"
 
 #: components/app/interface/settings/server/assistant/labels.ts
 #: components/app/interface/settings/server/audit/AuditLog.tsx
@@ -14802,44 +14802,44 @@ msgstr "角色"
 
 #: src/interface/developers/docs/DocsPortal.tsx
 msgid "Roles and permissions"
-msgstr "身份组与权限"
+msgstr "角色与权限"
 
 #: components/app/interface/settings/server/roles/RoleQuestions.tsx
 msgid "Roles by interest"
-msgstr "按兴趣划分的身份组"
+msgstr "按兴趣划分的角色"
 
 #: components/app/interface/settings/server/assistant/labels.ts
 msgid "Roles given on joining"
-msgstr "加入时授予的身份组"
+msgstr "加入时授予的角色"
 
 #: components/app/interface/settings/server/roles/ServerRoleOverview.tsx
 msgid "Roles group members and give them permissions and a colour."
-msgstr "身份组可以将成员分组，并赋予他们权限和颜色。"
+msgstr "角色可以将成员分组，并赋予他们权限和颜色。"
 
 #: components/app/interface/settings/server/assistant/labels.ts
 msgid "Roles Shield trusts"
-msgstr "Shield 信任的身份组"
+msgstr "Shield 信任的角色"
 
 #: components/app/interface/settings/server/assistant/AssistantPage.tsx
 msgid "Roles that may use this module"
-msgstr "可使用此模块的身份组"
+msgstr "可使用此模块的角色"
 
 #: components/app/interface/settings/server/assistant/labels.ts
 msgid "Roles the rules skip"
-msgstr "不受规则限制的身份组"
+msgstr "不受规则限制的角色"
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsOverview.tsx
 msgid "Roles with No Overrides"
-msgstr "没有覆盖设置的身份组"
+msgstr "没有覆盖设置的角色"
 
 #: components/app/interface/settings/user/profile/ProfileExtras.tsx
 msgid "Roles, mutual servers and the message box keep their place."
-msgstr "身份组、共同服务器和消息框会保持原位。"
+msgstr "角色、共同服务器和消息框会保持原位。"
 
 #. placeholder {0}: format(value(stat))
 #: src/interface/navigation/channels/ServerStats.tsx
 msgid "Roles: {0}"
-msgstr "身份组：{0}"
+msgstr "角色：{0}"
 
 #: components/ui/components/features/profiles/plateNames.ts
 msgid "Romania"
@@ -15401,7 +15401,7 @@ msgstr "按名称或 ID 搜索用户"
 
 #: components/app/interface/settings/server/pages.tsx
 msgid "Search, change roles, time out, kick or ban."
-msgstr "搜索、更改身份组、禁言、踢出或封禁。"
+msgstr "搜索、更改角色、禁言、踢出或封禁。"
 
 #: components/app/interface/settings/server/ServerOwnership.tsx
 msgid "Searching…"
@@ -15852,7 +15852,7 @@ msgstr "设置内容如何出现，以及如何自动消失。"
 
 #: components/app/interface/settings/server/roles/ServerRoleEditor.tsx
 msgid "Set role colour to {colour}"
-msgstr "将身份组颜色设为 {colour}"
+msgstr "将角色颜色设为 {colour}"
 
 #: src/interface/developers/docs/GettingStarted.tsx
 #~ msgid "Set the token and the server addresses, then start the bot:"
@@ -16961,7 +16961,7 @@ msgstr "支持或商店"
 
 #: components/app/interface/settings/server/assistant/labels.ts
 msgid "Support roles"
-msgstr "支持身份组"
+msgstr "支持角色"
 
 #: components/app/interface/settings/server/assistant/labels.ts
 msgid "Support starts at hour"
@@ -17479,7 +17479,7 @@ msgstr "该成员不在语音频道中。"
 
 #: components/rtc/messages.ts
 msgid "That member's role is too high."
-msgstr "该成员的身份组等级过高。"
+msgstr "该成员的角色等级过高。"
 
 #: components/i18n/errors.tsx
 msgid "That name belongs to someone in this server."
@@ -17586,7 +17586,7 @@ msgstr "打开其他服务器时的频道列表和页面。"
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsOverview.tsx
 msgid "The channel's own permissions for everyone and for roles are removed and it uses the category's. Member overrides stay."
-msgstr "该频道自身针对所有人和身份组的权限将被移除，改为使用分类的权限。成员覆盖设置会保留。"
+msgstr "该频道自身针对所有人和角色的权限将被移除，改为使用分类的权限。成员覆盖设置会保留。"
 
 #: components/app/interface/settings/ServerSettings.tsx
 msgid "The channels and their categories."
@@ -17768,11 +17768,11 @@ msgstr "官方机器人：安全、社区和支持，一站齐全。"
 
 #: components/app/interface/settings/server/LobbySettings.tsx
 msgid "The owner and the roles you pick."
-msgstr "所有者和你选择的身份组。"
+msgstr "所有者和你选择的角色。"
 
 #: components/app/interface/settings/server/LobbySettings.tsx
 msgid "The owner is always listed. Pick the roles whose members are shown too, up to ten."
-msgstr "所有者始终会列出。还可选择要显示其成员的身份组，最多十个。"
+msgstr "所有者始终会列出。还可选择要显示其成员的角色，最多十个。"
 
 #: components/app/interface/settings/user/appearance/AnimationSettings.tsx
 msgid "The page when you open another channel or conversation."
@@ -17953,7 +17953,7 @@ msgstr "这些是固定规则，不是试用。我们不会为已经拥有它们
 
 #: components/app/interface/settings/server/assistant/AssistantPage.tsx
 msgid "These roles are above the Assistant"
-msgstr "这些身份组高于助手"
+msgstr "这些角色高于助手"
 
 #: components/app/interface/settings/user/Privacy.tsx
 msgid "These settings aren't available yet."
@@ -18433,7 +18433,7 @@ msgstr "此请求太大。请重试。"
 
 #: components/i18n/errors.tsx
 msgid "This role doesn't exist any more."
-msgstr "该身份组已不存在。"
+msgstr "该角色已不存在。"
 
 #: components/i18n/errors.tsx
 msgid "This server asks for accounts older than 5 minutes. You can talk here in {minutes} min."
@@ -19201,7 +19201,7 @@ msgstr "未知频道"
 
 #: components/markdown/plugins/mentions.tsx
 msgid "Unknown role"
-msgstr "未知身份组"
+msgstr "未知角色"
 
 #: components/markdown/plugins/anchors.tsx
 msgid "Unknown server"
@@ -20308,7 +20308,7 @@ msgstr "你的机器人是做什么的，谁在使用它，它保存哪些数据
 
 #: components/app/interface/settings/server/roles/ServerRoleOverview.tsx
 msgid "What every member can do before any role is added."
-msgstr "在添加任何身份组之前，每位成员可以做的事。"
+msgstr "在添加任何角色之前，每位成员可以做的事。"
 
 #: components/app/interface/settings/user/safety/ReportsAndStanding.tsx
 msgid "What happened"
@@ -20892,7 +20892,7 @@ msgstr "你最多只能加入 {0} 个服务器，请先退出一个再试。"
 
 #: components/app/interface/settings/server/roles/ServerRoleEditor.tsx
 msgid "You can't change this role"
-msgstr "你无法更改此身份组"
+msgstr "你无法更改此角色"
 
 #: components/i18n/errors.tsx
 msgid "You can't delete this message."
@@ -20904,7 +20904,7 @@ msgstr "你不能对服务器所有者这样做。"
 
 #: components/i18n/errors.tsx
 msgid "You can't do this to someone with a higher role."
-msgstr "你不能对身份组比你高的人这样做。"
+msgstr "你不能对角色比你高的人这样做。"
 
 #: components/i18n/errors.tsx
 msgid "You can't do this with an official account. To reply, open a ticket."
@@ -21056,7 +21056,7 @@ msgstr "你最近有多次违规。"
 
 #: components/modal/modals/InterestsModal.tsx
 msgid "You have this role. Choose again to remove it."
-msgstr "你拥有此身份组。再次选择即可移除。"
+msgstr "你拥有此角色。再次选择即可移除。"
 
 #: components/i18n/errors.tsx
 msgid "You have this user blocked."
@@ -21128,7 +21128,7 @@ msgstr "你需要邀请才能注册。"
 
 #: components/app/interface/settings/server/LobbyRoleQuestionsEditor.tsx
 msgid "You need Assign Roles permission to change these questions."
-msgstr "你需要“分配身份组”权限才能更改这些问题。"
+msgstr "你需要“分配角色”权限才能更改这些问题。"
 
 #: src/interface/developers/docs/GettingStarted.tsx
 #~ msgid "You need Node.js 22 or newer. @zrzur/sdk/bot, the bot part of the official Zrzur library, handles the gateway, commands and replies for you. You can also work without any library: the API is plain HTTP and WebSocket."
@@ -21565,7 +21565,7 @@ msgstr "你在 {0} 提交的请求正在等待审核。"
 
 #: components/i18n/errors.tsx
 msgid "Your role ranking is too low to take this action."
-msgstr "你的身份组等级过低，无法执行此操作。"
+msgstr "你的角色等级过低，无法执行此操作。"
 
 #: src/interface/Designs.tsx
 msgid "Your saved designs"
