@@ -25,7 +25,7 @@
 | الخدمة             | العنوان                 |
 | ------------------- | ----------------------- |
 | واجهة REST          | `https://api.zrzur.com` |
-| البوابة (WebSocket) | `wss://ws.zrzur.com`    |
+| البوابة (WebSocket) | `wss://events.zrzur.com`    |
 | الملفات             | `https://cdn.zrzur.com` |
 | الصوت (LiveKit)     | `wss://voice.zrzur.com` |
 

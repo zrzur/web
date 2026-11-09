@@ -11,7 +11,7 @@ Create an application, install it in a test server and set three environment var
 ```bash
 export ZRZUR_BOT_TOKEN=YOUR_BOT_TOKEN
 export ZRZUR_API_URL=https://api.zrzur.com
-export ZRZUR_WS_URL=wss://ws.zrzur.com
+export ZRZUR_WS_URL=wss://events.zrzur.com
 ```
 
 Then switch on the **Server Members** intent for the bot in the Developer Portal: without it the bot never hears of new members, and connecting with it asked for but off fails. See [Intents](/developers/docs/gateway#intents).

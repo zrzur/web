@@ -9,7 +9,7 @@ import { readFileSync, renameSync, writeFileSync } from "node:fs";
 
 const TOKEN = process.env.ZRZUR_BOT_TOKEN;
 const API = process.env.ZRZUR_API_URL ?? "https://api.zrzur.com";
-const GATEWAY = process.env.ZRZUR_WS_URL ?? "wss://ws.zrzur.com";
+const GATEWAY = process.env.ZRZUR_WS_URL ?? "wss://events.zrzur.com";
 const DATA_FILE = process.env.DATA_FILE ?? "bot-data.json";
 const TEST_SERVER = process.env.ZRZUR_TEST_SERVER; // optional, see register()
 

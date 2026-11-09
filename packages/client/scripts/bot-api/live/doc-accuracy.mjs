@@ -134,7 +134,7 @@ function sanitise(value, key = "") {
     .replace(/http:\/\/127\.0\.0\.1:31704/g, "https://cdn.zrzur.com")
     .replace(/http:\/\/127\.0\.0\.1:31705/g, "https://proxy.zrzur.com")
     .replace(/ws:\/\/127\.0\.0\.1:7880/g, "wss://voice.zrzur.com")
-    .replaceAll(new URL(WS).origin, "wss://ws.zrzur.com")
+    .replaceAll(new URL(WS).origin, "wss://events.zrzur.com")
     // the web app of the test stack, and anything else on loopback
     .replace(/https?:\/\/127\.0\.0\.1:310\d\d/g, "https://app.zrzur.com")
     .replace(

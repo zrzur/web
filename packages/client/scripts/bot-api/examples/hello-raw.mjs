@@ -4,7 +4,7 @@
 
 const token = process.env.ZRZUR_BOT_TOKEN;
 const api = process.env.ZRZUR_API_URL ?? "https://api.zrzur.com";
-const ws = process.env.ZRZUR_WS_URL ?? "wss://ws.zrzur.com";
+const ws = process.env.ZRZUR_WS_URL ?? "wss://events.zrzur.com";
 
 if (!token) {
   console.error("Set ZRZUR_BOT_TOKEN first.");

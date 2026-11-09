@@ -25,7 +25,7 @@ These pages are all you need. Start with [Start your bot](/developers/docs/getti
 | Service             | URL                     |
 | ------------------- | ----------------------- |
 | REST API            | `https://api.zrzur.com` |
-| Gateway (WebSocket) | `wss://ws.zrzur.com`    |
+| Gateway (WebSocket) | `wss://events.zrzur.com`    |
 | Files               | `https://cdn.zrzur.com` |
 | Voice (LiveKit)     | `wss://voice.zrzur.com` |
 

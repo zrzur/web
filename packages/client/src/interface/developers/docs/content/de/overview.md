@@ -25,7 +25,7 @@ Diese Seiten sind alles, was du brauchst. Beginne mit [Starte deinen Bot](/devel
 | Dienst              | URL                     |
 | ------------------- | ----------------------- |
 | REST-API            | `https://api.zrzur.com` |
-| Gateway (WebSocket) | `wss://ws.zrzur.com`    |
+| Gateway (WebSocket) | `wss://events.zrzur.com`    |
 | Dateien             | `https://cdn.zrzur.com` |
 | Sprache (LiveKit)   | `wss://voice.zrzur.com` |
 

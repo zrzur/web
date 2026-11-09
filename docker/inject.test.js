@@ -91,7 +91,7 @@ test("same build and URLs give the same release; a changed URL gives a new one",
   const { root, dist } = fakeBuild();
   const a = run(dist, root, ENV, "a");
   const b = run(dist, root, ENV, "b");
-  const c = run(dist, root, { ...ENV, VITE_DEV_WS_URL: "wss://ws.zrzur.com" }, "c");
+  const c = run(dist, root, { ...ENV, VITE_DEV_WS_URL: "wss://events.zrzur.com" }, "c");
   assert.equal(a.release, b.release);
   assert.notEqual(a.release, c.release);
   // the service worker's bytes change too, so browsers install the new one

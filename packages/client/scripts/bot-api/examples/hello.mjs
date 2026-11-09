@@ -1,7 +1,7 @@
 // Hello World with @zrzur/sdk/bot.
 //
 //   ZRZUR_BOT_TOKEN=... ZRZUR_API_URL=https://api.zrzur.com \
-//   ZRZUR_WS_URL=wss://ws.zrzur.com node hello.mjs
+//   ZRZUR_WS_URL=wss://events.zrzur.com node hello.mjs
 
 import { Client } from "@zrzur/sdk/bot";
 

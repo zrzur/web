@@ -27,7 +27,7 @@ Die Antwort ist `{ "id": "FILE_ID" }`. Sende sie in `attachments` einer Nachrich
 ## Die ganze Schleife {#loop}
 
 1. `PUT /applications/{application_id}/commands` mit deinen Befehlen.
-2. Öffne `wss://ws.zrzur.com/?version=1&format=json`.
+2. Öffne `wss://events.zrzur.com/?version=1&format=json`.
 3. Sende `{ "type": "Authenticate", "token": "YOUR_BOT_TOKEN", "intents": 33 }`.
 4. Sende alle 20 Sekunden `{ "type": "Ping", "data": 1 }`.
 5. Für jedes Paket: Ist `type` gleich `Bulk`, behandle jeden Eintrag von `v`.

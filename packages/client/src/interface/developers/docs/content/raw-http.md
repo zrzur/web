@@ -38,7 +38,7 @@ The answer is `{ "id": "FILE_ID" }`. Send it in `attachments` of a message.
 ## The whole loop {#loop}
 
 1. `PUT /applications/{application_id}/commands` with your commands.
-2. Open `wss://ws.zrzur.com/?version=1&format=json`.
+2. Open `wss://events.zrzur.com/?version=1&format=json`.
 3. Send `{ "type": "Authenticate", "token": "YOUR_BOT_TOKEN", "intents": 33 }`.
 4. Every 20 seconds send `{ "type": "Ping", "data": 1 }`.
 5. For each packet: if `type` is `Bulk`, handle each item of `v`.
@@ -82,7 +82,7 @@ async def main():
     rest("PUT", f"/applications/{me['_id']}/commands",
          [{"name": "hello", "description": "Say hello"}])
 
-    async with websockets.connect("wss://ws.zrzur.com/?version=1&format=json") as socket:
+    async with websockets.connect("wss://events.zrzur.com/?version=1&format=json") as socket:
         await socket.send(json.dumps({"type": "Authenticate", "token": TOKEN, "intents": 33}))
 
         async def ping():

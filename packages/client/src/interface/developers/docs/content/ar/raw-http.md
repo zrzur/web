@@ -27,7 +27,7 @@
 ## الحلقة كاملة {#loop}
 
 1. `PUT /applications/{application_id}/commands` مع أوامرك.
-2. افتح `wss://ws.zrzur.com/?version=1&format=json`.
+2. افتح `wss://events.zrzur.com/?version=1&format=json`.
 3. أرسل `{ "type": "Authenticate", "token": "YOUR_BOT_TOKEN", "intents": 33 }`.
 4. كل 20 ثانية أرسل `{ "type": "Ping", "data": 1 }`.
 5. لكل حزمة: إذا كان `type` يساوي `Bulk` فعالج كل عنصر في `v`.

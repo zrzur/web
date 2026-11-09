@@ -9,7 +9,7 @@ Node 22 or newer has `WebSocket` built in. Any WebSocket client works. You need 
 ## Connect {#connect}
 
 ```text
-wss://ws.zrzur.com/?version=1&format=json
+wss://events.zrzur.com/?version=1&format=json
 ```
 
 | Query parameter | Values                                                            | Default    |

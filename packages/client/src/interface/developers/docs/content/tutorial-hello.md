@@ -9,7 +9,7 @@ Create an application, install it in a test server and set three environment var
 ```bash
 export ZRZUR_BOT_TOKEN=YOUR_BOT_TOKEN
 export ZRZUR_API_URL=https://api.zrzur.com
-export ZRZUR_WS_URL=wss://ws.zrzur.com
+export ZRZUR_WS_URL=wss://events.zrzur.com
 ```
 
 ## Without a library
