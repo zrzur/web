@@ -1,5 +1,5 @@
-import type { Setter } from "solid-js";
 import type { Client } from "@zrzur/sdk/solid";
+import type { Setter } from "solid-js";
 import { expect, it, vi } from "vitest";
 import { handleEvent } from "../../../stoat.js/src/solid/events/v1";
 import { hydrate } from "../../../stoat.js/src/solid/hydration/index";

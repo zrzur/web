@@ -11,8 +11,8 @@ import {
   useTracks,
 } from "solid-livekit-components";
 
-import { Track } from "livekit-client";
 import { Channel } from "@zrzur/sdk/solid";
+import { Track } from "livekit-client";
 import { css } from "styled-system/css";
 import { styled } from "styled-system/jsx";
 

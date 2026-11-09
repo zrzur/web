@@ -175,7 +175,12 @@ describe("static worklet file", () => {
   it("public/voice-gate-worklet.js is the current kernel (UPDATE_VOICE_GATE_WORKLET=1 rewrites it)", () => {
     if (process.env.UPDATE_VOICE_GATE_WORKLET)
       writeFileSync(STATIC_WORKLET, voiceGateWorkletSource());
-    expect(readFileSync(STATIC_WORKLET, "utf8")).toBe(voiceGateWorkletSource());
+    // a Windows checkout may turn the file's line ends into CRLF
+    expect(readFileSync(STATIC_WORKLET, "utf8").replace(/
+/g, "
+")).toBe(
+      voiceGateWorkletSource(),
+    );
   });
 
   it("is loaded from this origin, with a version that changes with the code", () => {

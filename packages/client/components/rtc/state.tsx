@@ -7,7 +7,6 @@ import {
   createSignal,
   JSX,
   lazy,
-  on,
   onCleanup,
   Setter,
   untrack,
@@ -43,7 +42,12 @@ import {
   matchGlobalShortcut,
   transmitting,
 } from "../keybinds/shortcuts";
-import { audioCaptureFor, audioPublishFor, callBitrate } from "./audioQuality";
+import {
+  audioCaptureFor,
+  audioPublishFor,
+  callBitrate,
+  watchAudioSettings,
+} from "./audioQuality";
 import { deviceFallback } from "./callHealth";
 import { InRoom } from "./components/InRoom";
 import { desktopPushToTalk } from "./desktopPushToTalk";
@@ -306,43 +310,26 @@ class Voice {
   // Dynamically set echo cancellation and gain control when the settings are changed
   // These functions are needed to maintain reactivity. Don't ask me why but if you make them not functions it breaks.
   private settingsListeners() {
-    const getSettings = () => this.#settings;
-
-    // echo cancellation, gain control and browser noise suppression are
-    // capture constraints: restart the microphone with the new ones
-    createEffect(() => {
-      const capture = audioCaptureFor(
-        {
-          echoCancellation: getSettings().echoCancellation,
-          autoGainControl: getSettings().autoGainControl,
-          noiseSupression: getSettings().noiseSupression ?? "browser",
-        },
-        getSettings().highQualityAudio,
-      );
-      const track = untrack(() => this.getMicrophoneTrack()?.audioTrack);
-      if (!track) return;
-      track.constraints.echoCancellation = capture.echoCancellation;
-      track.constraints.autoGainControl = capture.autoGainControl;
-      track.constraints.noiseSuppression = capture.noiseSuppression;
-      //@ts-expect-error voiceIsolation is not yet standard, but it supported by livekit and most chromium based browsers, including electron.
-      track.constraints.voiceIsolation = capture.voiceIsolation;
-      track.constraints.channelCount = capture.channelCount;
-      void track.restartTrack();
+    watchAudioSettings(this.#settings, {
+      // capture constraints changed: restart the microphone with them
+      restartCapture: (capture) => {
+        const track = untrack(() => this.getMicrophoneTrack()?.audioTrack);
+        if (!track) return;
+        track.constraints.echoCancellation = capture.echoCancellation;
+        track.constraints.autoGainControl = capture.autoGainControl;
+        track.constraints.noiseSuppression = capture.noiseSuppression;
+        //@ts-expect-error voiceIsolation is not yet standard, but it supported by livekit and most chromium based browsers, including electron.
+        track.constraints.voiceIsolation = capture.voiceIsolation;
+        track.constraints.channelCount = capture.channelCount;
+        void track.restartTrack();
+      },
+      // high quality audio changes the encoder (stereo, DTX)
+      republish: () => {
+        const room = untrack(this.room);
+        if (!room || untrack(this.state) !== "CONNECTED") return;
+        void this.republishMicrophone(room);
+      },
     });
-
-    // high quality audio changes the encoder (stereo, DTX): publish the
-    // microphone again with the new settings
-    createEffect(
-      on(
-        () => getSettings().highQualityAudio,
-        (music, previous) => {
-          if (previous === undefined || music === previous) return;
-          const room = untrack(this.room);
-          if (!room || untrack(this.state) !== "CONNECTED") return;
-          void this.republishMicrophone(room);
-        },
-      ),
-    );
   }
 
   /**

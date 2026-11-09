@@ -1,4 +1,5 @@
 import type { AudioCaptureOptions, TrackPublishDefaults } from "livekit-client";
+import { createEffect, on, untrack } from "solid-js";
 
 import type { NoiseSuppresionState } from "@revolt/state/stores/Voice";
 
@@ -61,4 +62,58 @@ export function audioCaptureFor(
     autoGainControl: music ? false : (settings.autoGainControl ?? true),
     channelCount: music ? 2 : 1,
   };
+}
+
+/**
+ * Follow the audio settings during a call. A processing change (echo
+ * cancellation, gain control, browser noise suppression) restarts the
+ * capture with new constraints; switching high quality audio publishes the
+ * microphone again, which captures anew by itself, so it must not also
+ * restart the capture (that opened the microphone twice).
+ * Call inside a reactive root.
+ */
+export function watchAudioSettings(
+  settings: {
+    echoCancellation?: boolean;
+    autoGainControl?: boolean;
+    noiseSupression?: NoiseSuppresionState;
+    highQualityAudio: boolean;
+  },
+  actions: {
+    restartCapture: (capture: AudioCaptureOptions) => void;
+    republish: () => void;
+  },
+) {
+  createEffect(
+    on(
+      () =>
+        [
+          settings.echoCancellation,
+          settings.autoGainControl,
+          settings.noiseSupression,
+        ] as const,
+      ([echoCancellation, autoGainControl, noiseSupression]) => {
+        actions.restartCapture(
+          audioCaptureFor(
+            {
+              echoCancellation,
+              autoGainControl,
+              noiseSupression: noiseSupression ?? "browser",
+            },
+            untrack(() => settings.highQualityAudio),
+          ),
+        );
+      },
+    ),
+  );
+
+  createEffect(
+    on(
+      () => settings.highQualityAudio,
+      (music, previous) => {
+        if (previous === undefined || music === previous) return;
+        actions.republish();
+      },
+    ),
+  );
 }
