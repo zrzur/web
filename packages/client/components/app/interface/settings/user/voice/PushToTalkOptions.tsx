@@ -3,7 +3,12 @@ import { Show, createSignal, onCleanup } from "solid-js";
 import { Trans, useLingui } from "@lingui/solid/macro";
 import { styled } from "styled-system/jsx";
 
-import { keyLabel, readPttKey } from "@revolt/keybinds/shortcuts";
+import { isMac, keyLabel, readPttKey } from "@revolt/keybinds/shortcuts";
+import { useVoice } from "@revolt/rtc";
+import {
+  desktopPushToTalk,
+  globalPttCombo,
+} from "@revolt/rtc/desktopPushToTalk";
 import { useState } from "@revolt/state";
 import {
   Button,
@@ -19,7 +24,11 @@ import { Icon } from "@revolt/ui/icons/Icon";
  */
 export function PushToTalkOptions() {
   const { voice } = useState();
+  const call = useVoice();
   const { t } = useLingui();
+  // the desktop app adds a toggle that works from other apps
+  const desktop = !!desktopPushToTalk();
+  const combo = () => globalPttCombo(voice.pttKey, isMac());
   const [recording, setRecording] = createSignal(false);
   const [refused, setRefused] = createSignal(false);
 
@@ -66,10 +75,14 @@ export function PushToTalkOptions() {
     <SettingsSection
       title={<Trans>Push to talk</Trans>}
       description={
-        <Trans>
-          Push to talk works while Zrzur is the active window and you are not
-          typing.
-        </Trans>
+        desktop ? (
+          t`Hold the key while Zrzur is in front. From other apps, ${combo()} turns talking on and off.`
+        ) : (
+          <Trans>
+            Push to talk works while Zrzur is the active window and you are not
+            typing.
+          </Trans>
+        )
       }
     >
       <SettingsRow
@@ -109,7 +122,9 @@ export function PushToTalkOptions() {
               ? refused()
                 ? t`That key is needed elsewhere. Press another key, or Esc to cancel.`
                 : t`Press the key you want to hold. Esc cancels.`
-              : undefined
+              : desktop && call?.globalPtt() === "unavailable"
+                ? t`${combo()} is not available from other apps. Try another key.`
+                : undefined
           }
           control={(ids) => (
             <Controls>

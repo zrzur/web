@@ -14,8 +14,8 @@ import {
 import type { TrackReferenceOrPlaceholder } from "solid-livekit-components";
 
 import { useLocation, useNavigate } from "@solidjs/router";
-import type { LocalTrackPublication, Room } from "livekit-client";
 import { Channel } from "@zrzur/sdk/solid";
+import type { LocalTrackPublication, Room } from "livekit-client";
 
 import { SoundController, useClient, useSound } from "@revolt/client";
 import {
@@ -42,6 +42,7 @@ import {
   transmitting,
 } from "../keybinds/shortcuts";
 import { InRoom } from "./components/InRoom";
+import { desktopPushToTalk } from "./desktopPushToTalk";
 import { RoomState, TrackSource } from "./livekitConstants";
 import { type VoiceRuntime, loadVoiceRuntime } from "./loadVoiceRuntime";
 import { useVoiceError } from "./messages";
@@ -95,6 +96,9 @@ const REJOIN_DELAYS = [1000, 2000, 4000, 8000, 15000, 15000, 15000];
 
 export type VoiceLayout = "fullscreen" | "expanded" | "collapsed" | undefined;
 
+/** Global push to talk (desktop): not asked, holding the combination, refused */
+export type GlobalPttState = "off" | "on" | "unavailable";
+
 class Voice {
   #client = useClient();
   #connectionAttempt = 0;
@@ -132,6 +136,17 @@ class Voice {
   /** Push to talk: whether the key is held right now */
   pttHeld: Accessor<boolean>;
   #setPttHeld: Setter<boolean>;
+
+  /**
+   * Push to talk from other apps (desktop app): turned on and off by the
+   * global combination, because the desktop cannot see the key's release
+   */
+  pttLatched: Accessor<boolean>;
+  #setPttLatched: Setter<boolean>;
+
+  /** Whether the desktop app holds the global combination right now */
+  globalPtt: Accessor<GlobalPttState>;
+  #setGlobalPtt: Setter<GlobalPttState>;
 
   video: Accessor<boolean>;
   #setVideo: Setter<boolean>;
@@ -192,11 +207,20 @@ class Voice {
     this.pttHeld = pttHeld;
     this.#setPttHeld = setPttHeld;
 
+    const [pttLatched, setPttLatched] = createSignal(false);
+    this.pttLatched = pttLatched;
+    this.#setPttLatched = setPttLatched;
+
+    const [globalPtt, setGlobalPtt] = createSignal<GlobalPttState>("off");
+    this.globalPtt = globalPtt;
+    this.#setGlobalPtt = setGlobalPtt;
+
     this.deafen = () => voiceSettings.deafen;
     this.unmuted = () =>
       voiceSettings.micOn && !voiceSettings.deafen && this.speakingPermission;
     this.microphone = () =>
-      this.unmuted() && transmitting(voiceSettings.inputMode, pttHeld());
+      this.unmuted() &&
+      transmitting(voiceSettings.inputMode, pttHeld() || pttLatched());
 
     const [video, setVideo] = createSignal(false);
     this.video = video;
@@ -625,6 +649,26 @@ class Voice {
    */
   setPushToTalk(held: boolean) {
     this.#setPttHeld(held);
+  }
+
+  /**
+   * Push to talk from other apps (desktop): the global combination was
+   * pressed. A sound says which way it went, since the window may be hidden.
+   */
+  togglePushToTalkLatch() {
+    const on = !this.pttLatched();
+    this.#setPttLatched(on);
+    if (this.unmuted()) this.sound.playSound(on ? "unmute" : "mute");
+  }
+
+  /** Stop talking from other apps (leaving the call, leaving push to talk) */
+  clearPushToTalkLatch() {
+    this.#setPttLatched(false);
+  }
+
+  /** What the desktop app answered when asked for the global combination */
+  setGlobalPtt(state: GlobalPttState) {
+    this.#setGlobalPtt(state);
   }
 
   async toggleMute() {
@@ -1112,8 +1156,40 @@ export function VoiceContext(props: { children: JSX.Element }) {
     document.removeEventListener("visibilitychange", onVisibility);
   });
   createEffect(() => {
-    if (!inCall() || state.voice.inputMode !== "ptt") release();
+    if (!inCall() || state.voice.inputMode !== "ptt") {
+      release();
+      voice.clearPushToTalkLatch();
+    }
   });
+
+  // Desktop app: Ctrl+Shift (⌘⇧) with the push-to-talk key works from other
+  // apps too, as a toggle. Held only during a push-to-talk call, so the
+  // combination stays free for other apps the rest of the time. Browsers
+  // keep the in-window key and stop talking when the window loses focus.
+  const desktopPtt = desktopPushToTalk();
+  if (desktopPtt) {
+    const stopListening = desktopPtt.onToggle(() => {
+      if (inCall() && state.voice.inputMode === "ptt")
+        voice.togglePushToTalkLatch();
+    });
+    onCleanup(() => stopListening());
+    createEffect(() => {
+      const key = state.voice.pttKey;
+      if (!inCall() || state.voice.inputMode !== "ptt") {
+        voice.setGlobalPtt("off");
+        return;
+      }
+      let current = true;
+      desktopPtt
+        .register(key)
+        .catch(() => false)
+        .then((ok) => current && voice.setGlobalPtt(ok ? "on" : "unavailable"));
+      onCleanup(() => {
+        current = false;
+        desktopPtt.unregister();
+      });
+    });
+  }
   createEffect(() => {
     const instance = client();
     const onMove = (move: {
