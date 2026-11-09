@@ -22185,3 +22185,143 @@ msgstr "If this is enabled, animations and motion effects won't play or will be 
 #: components/ui/components/design/DataTable.tsx
 msgid "Rows per page:"
 msgstr "Rows per page:"
+
+#: src/interface/channels/text/searchLabels.ts
+msgid "From"
+msgstr "From"
+
+#: src/interface/channels/text/searchLabels.ts
+msgid "Has"
+msgstr "Has"
+
+#: src/interface/channels/text/searchLabels.ts
+msgid "Before"
+msgstr "Before"
+
+#: src/interface/channels/text/searchLabels.ts
+msgid "After"
+msgstr "After"
+
+#: src/interface/channels/text/searchLabels.ts
+msgid "On day"
+msgstr "On day"
+
+#: src/interface/channels/text/searchLabels.ts
+msgid "In"
+msgstr "In"
+
+#: src/interface/channels/text/searchLabels.ts
+msgid "Pinned"
+msgstr "Pinned"
+
+#: src/interface/channels/text/searchLabels.ts
+msgid "Messages from a member"
+msgstr "Messages from a member"
+
+#: src/interface/channels/text/searchLabels.ts
+msgid "Messages that mention a member"
+msgstr "Messages that mention a member"
+
+#: src/interface/channels/text/searchLabels.ts
+msgid "Messages with a link, file, image, video, embed or sound"
+msgstr "Messages with a link, file, image, video, embed or sound"
+
+#: src/interface/channels/text/searchLabels.ts
+msgid "Messages before a day"
+msgstr "Messages before a day"
+
+#: src/interface/channels/text/searchLabels.ts
+msgid "Messages after a day"
+msgstr "Messages after a day"
+
+#: src/interface/channels/text/searchLabels.ts
+msgid "Messages on a day"
+msgstr "Messages on a day"
+
+#: src/interface/channels/text/searchLabels.ts
+msgid "Messages in a channel, across the server"
+msgstr "Messages in a channel, across the server"
+
+#: src/interface/channels/text/searchLabels.ts
+msgid "Only pinned messages"
+msgstr "Only pinned messages"
+
+#: src/interface/channels/text/searchLabels.ts
+msgid "Embed"
+msgstr "Embed"
+
+#: src/interface/channels/text/searchLabels.ts
+msgid "File"
+msgstr "File"
+
+#: src/interface/channels/text/searchLabels.ts
+msgid "Sound"
+msgstr "Sound"
+
+#: src/interface/channels/text/searchLabels.ts
+msgid "No member called \"{value}\"."
+msgstr "No member called \"{value}\"."
+
+#: src/interface/channels/text/searchLabels.ts
+msgid "No channel called \"{value}\"."
+msgstr "No channel called \"{value}\"."
+
+#: src/interface/channels/text/searchLabels.ts
+msgid "\"{value}\" is not a day. Write it like 2026-11-09."
+msgstr "\"{value}\" is not a day. Write it like 2026-11-09."
+
+#: src/interface/channels/text/searchLabels.ts
+msgid "has: takes link, file, image, video, embed or sound."
+msgstr "has: takes link, file, image, video, embed or sound."
+
+#: src/interface/channels/text/searchLabels.ts
+msgid "pinned: takes true or false."
+msgstr "pinned: takes true or false."
+
+#: src/interface/channels/text/SearchBox.tsx
+msgid "Today"
+msgstr "Today"
+
+#: src/interface/channels/text/SearchBox.tsx
+msgid "Yesterday"
+msgstr "Yesterday"
+
+#: src/interface/channels/text/SearchBox.tsx
+msgid "Search filters"
+msgstr "Search filters"
+
+#: src/interface/channels/text/TextSearchSidebar.tsx
+msgid "Where to search"
+msgstr "Where to search"
+
+#: src/interface/channels/text/TextSearchSidebar.tsx
+msgid "This channel"
+msgstr "This channel"
+
+#: src/interface/channels/text/TextSearchSidebar.tsx
+msgid "Whole server"
+msgstr "Whole server"
+
+#: src/interface/channels/text/TextSearchSidebar.tsx
+msgid "in: works in servers only."
+msgstr "in: works in servers only."
+
+#: src/interface/channels/text/TextSearchSidebar.tsx
+msgid "Type words to search, or a filter like from:, has: or before:."
+msgstr "Type words to search, or a filter like from:, has: or before:."
+
+#: src/interface/channels/text/TextSearchSidebar.tsx
+msgid "Unknown channel"
+msgstr "Unknown channel"
+
+#: src/interface/channels/text/TextSearchSidebar.tsx
+msgid "Jump to message"
+msgstr "Jump to message"
+
+#: src/interface/channels/text/TextSearchSidebar.tsx
+msgid "No messages in this channel match your search."
+msgstr "No messages in this channel match your search."
+
+#: src/interface/channels/text/TextSearchSidebar.tsx
+msgid "No messages in this server match your search."
+msgstr "No messages in this server match your search."

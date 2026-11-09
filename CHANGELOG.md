@@ -4,6 +4,7 @@
 
 ### Features
 
+* **Message search with filters:** the search box understands `from:`, `mentions:`, `has:` (link, file, image, video, embed, sound), `before:`, `after:`, `during:` (a day, YYYY-MM-DD, or a message id), `in:` and `pinned:`, and suggests members, channels and values as you type. Search this channel or the whole server; server results come grouped by channel, each one jumps to its message. The keywords stay English in every language, the chips and hints are in Arabic, English and German.
 * **Plugins are off for now:** the server decides with `features.plugins`, and anything but a clear yes means off. Off, the app shows no plugin entry in Settings, starts no plugin host, makes no sandbox or iframe and asks the server for nothing about plugins, also for people who installed one. Their installs stay stored and come back when the server turns plugins on. `PluginsDisabled` has plain words in Arabic, English and German.
 * **Three new themes:** High Contrast, Paper and Desert Dawn are built into Settings, Appearance, after the four packs. High Contrast keeps its larger text, clear focus rings, underlined links and reduced motion.
 * **Creator effects:** creators upload profile effects in Creator Studio, with a rights box, the reason for any refusal in the same screen and a template. The Effects tab on Designs shows Zrzur's effects and approved uploads together; an uploaded effect is worn from Designs and plays on the card and the full profile. Anyone can report one from the profile menu, with an urgent flashing reason.

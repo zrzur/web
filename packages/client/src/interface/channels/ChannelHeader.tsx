@@ -32,6 +32,7 @@ import { ContextMenu, ContextMenuButton } from "@revolt/app/menus/ContextMenu";
 
 import { HeaderIcon } from "../common/CommonHeader";
 
+import { SearchBox } from "./text/SearchBox";
 import { canIHasSidebar, SidebarState } from "./text/TextChannel";
 
 interface Props {
@@ -108,34 +109,15 @@ export function ChannelHeader(props: Props) {
       >
         <Icon name="arrow-left" size={22} />
       </PhoneBack>
-      <SearchField data-phone>
-        <Icon name="magnifying-glass" size={16} />
-        <input
-          ref={(el) => queueMicrotask(() => el.focus())}
-          type="search"
-          enterkeyhint="search"
-          placeholder={t`Search messages`}
-          aria-label={t`Search messages`}
-          value={searchValue() ?? ""}
-          onChange={(e) =>
-            props.setSidebarState!({
-              state: "search",
-              query: e.currentTarget.value,
-            })
-          }
-        />
-        <Show when={searchValue()}>
-          <button
-            type="button"
-            aria-label={t`Clear search`}
-            onClick={() =>
-              props.setSidebarState!({ state: "search", query: "" })
-            }
-          >
-            <Icon name="x" size={14} />
-          </button>
-        </Show>
-      </SearchField>
+      <SearchBox
+        channel={props.channel}
+        phone
+        autofocus
+        placeholder={t`Search messages`}
+        value={searchValue() ?? ""}
+        onCommit={(query) => props.setSidebarState!({ state: "search", query })}
+        onClear={() => props.setSidebarState!({ state: "search", query: "" })}
+      />
     </>
   );
 
@@ -426,12 +408,7 @@ export function ChannelHeader(props: Props) {
           </IconButton>
         </Show>
 
-        <Show
-          when={
-            !phone() &&
-            canListThreads()
-          }
-        >
+        <Show when={!phone() && canListThreads()}>
           <IconButton
             variant="toolbar"
             size="xs"
@@ -555,34 +532,15 @@ export function ChannelHeader(props: Props) {
               </IconButton>
             }
           >
-            <SearchField>
-              <Icon name="magnifying-glass" size={16} />
-              <input
-                type="search"
-                placeholder={t`Search`}
-                aria-label={t`Search messages`}
-                value={searchValue()!}
-                onChange={(e) =>
-                  e.currentTarget.value
-                    ? props.setSidebarState!({
-                        state: "search",
-                        query: e.currentTarget.value,
-                      })
-                    : props.setSidebarState!({
-                        state: "default",
-                      })
-                }
-              />
-              <Show when={searchValue()}>
-                <button
-                  type="button"
-                  aria-label={t`Clear search`}
-                  onClick={() => props.setSidebarState!({ state: "default" })}
-                >
-                  <Icon name="x" size={14} />
-                </button>
-              </Show>
-            </SearchField>
+            <SearchBox
+              channel={props.channel}
+              placeholder={t`Search`}
+              value={searchValue()!}
+              onCommit={(query) =>
+                props.setSidebarState!({ state: "search", query })
+              }
+              onClear={() => props.setSidebarState!({ state: "default" })}
+            />
           </Show>
         </Show>
 
@@ -713,83 +671,6 @@ const PhoneBack = styled("button", {
     "& .z-icon": { _rtl: { transform: "scaleX(-1)" } },
     _active: { background: "var(--z-nav-selected)" },
     _focusVisible: { outline: "2px solid var(--z-focus)" },
-  },
-});
-
-/** Rounded search field: magnifier inside, grows while in use */
-const SearchField = styled("label", {
-  base: {
-    display: "flex",
-    alignItems: "center",
-    gap: "8px",
-    height: "32px",
-    width: "200px",
-    marginInlineStart: "4px",
-    paddingInline: "10px 6px",
-    borderRadius: "var(--z-shape-field, var(--z-radius, 10px))",
-    // same recessed field language as TextField / composer
-    border: "1px solid var(--z-field-border)",
-    background: "var(--z-field-bg)",
-    boxShadow: "var(--z-field-shadow)",
-    color: "var(--z-fg-muted)",
-    cursor: "text",
-    transition:
-      "width 160ms ease, border-color 160ms ease, box-shadow 220ms ease, color 160ms ease",
-    "--z-icon-color": "currentColor",
-    _motionReduce: { transition: "none" },
-
-    _hover: {
-      borderColor: "color-mix(in srgb, var(--z-fg-primary) 18%, transparent)",
-    },
-    "&:focus-within, &:has(input:not(:placeholder-shown))": {
-      width: "260px",
-      borderColor: "var(--z-accent)",
-      color: "var(--z-accent)",
-      boxShadow: "var(--z-field-focus-shadow)",
-    },
-
-    // phones: share the header with the title instead of a fixed width
-    _phone: {
-      "&[data-phone]": { height: "40px", fontSize: "16px" },
-      flex: "1 1 120px",
-      minWidth: 0,
-      width: "auto",
-      "&:focus-within, &:has(input:not(:placeholder-shown))": {
-        width: "auto",
-      },
-    },
-
-    "& input": {
-      flex: 1,
-      minWidth: 0,
-      height: "100%",
-      padding: 0,
-      border: "none",
-      outline: "none",
-      background: "transparent",
-      color: "var(--z-fg-primary)",
-      font: "inherit",
-      fontSize: "13px",
-    },
-    "& input::placeholder": { color: "var(--z-fg-muted)" },
-    "& input::-webkit-search-cancel-button": { display: "none" },
-
-    "& button": {
-      display: "grid",
-      placeItems: "center",
-      width: "22px",
-      height: "22px",
-      padding: 0,
-      border: "none",
-      borderRadius: "6px",
-      background: "transparent",
-      color: "inherit",
-      cursor: "pointer",
-      _hover: {
-        background: "var(--z-bg-raised)",
-        color: "var(--z-fg-primary)",
-      },
-    },
   },
 });
 
