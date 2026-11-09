@@ -13,12 +13,12 @@ Every entry says whether existing bots must change. A removal is announced here 
 
 Not available yet. Do not build on these until they appear under a version below.
 
-- **Gateway: resume.** Events get a sequence number, and a bot that lost its connection can resume it and receive what it missed, instead of fetching it over REST. The [Gateway](/developers/docs/gateway#resume) page will show how.
-- **A bot reads its own settings.** `GET /bots/{target}` with the bot's own id and token will return its `privileged_intents`, so a bot can check what its owner switched on.
-- **Clearer intent refusals.** The `4014` close will name the intents that are switched on. A connection that fails for another reason will close without `4014`, so a bot tries again instead of stopping.
-- **Threads: a richer first message.** `POST /channels/{target}/threads` will take `embeds` and `components` for the first message, with the same rules as sending a message.
-- **"Not installed" answers 404.** A channel of a server your bot is not in will answer `404 NotFound`, like the server itself. Today it answers `403 MissingPermission`.
-- **SDK: rate limits.** The SDK will wait out a `429` and try again by itself.
+- **Gateway: resume.** Every event carries `seq`, counted per session from 1. Send `Authenticate` with `"resumable": true` and `Ready` carries `session_id`. After a drop the session is kept for 2 minutes, with its last 1000 events. On a new socket, send `{ "type": "Resume", "token": "YOUR_BOT_TOKEN", "session_id": "…", "seq": 41 }` as the first message: the events after `seq` arrive in order, then `Resumed`. If the session is gone you get `InvalidSession` with `"resumable": false`; then send `Authenticate` on the same socket and catch up over REST. Some events can be left out of a replay, so `seq` can have gaps. `GET /gateway/schema` will list the close codes and the resume limits.
+- **A bot reads its own settings.** `GET /bots/{target}` with the bot's own id and token returns its `privileged_intents`. Another bot's id still answers `IsBot`.
+- **Clearer intent refusals.** The `4014` close reason names what the server read, for example `Disallowed intents: MESSAGE_CONTENT (switched on: none)`. If the server cannot read the bot's settings, it sends `InternalError` and closes with `1013`: try again later, do not stop.
+- **Threads: a richer first message.** `POST /channels/{target}/threads` takes `embeds` and `components` next to `content`, with the rules of sending a message: Send Embeds applies, and a role ping without Mention Roles is refused with `403 MissingPermission` (`permission: MentionRoles`) and no thread is made.
+- **"Not installed" answers 404.** `GET /channels/{target}` answers `404 NotFound` to anyone who is not in the channel's server, like the server itself and like a channel that does not exist. Members without access still get `403 MissingPermission`.
+- **SDK: rate limits and resume.** The SDK resumes by default for bots, waits out a `429`, and waits for the reset when a bucket is empty.
 
 Existing bots keep working. Nothing above removes a field or changes one.
 

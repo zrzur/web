@@ -10,12 +10,12 @@ Jeder Eintrag sagt, ob bestehende Bots sich ändern müssen. Ein Wegfall wird hi
 
 Noch nicht verfügbar. Baue nicht darauf, bis es unter einer Version weiter unten steht.
 
-- **Gateway: Fortsetzen.** Ereignisse bekommen eine Sequenznummer, und ein Bot, der seine Verbindung verloren hat, kann sie fortsetzen und bekommt, was er verpasst hat, statt es per REST zu holen. Die Seite [Gateway](/developers/docs/gateway#resume) wird zeigen, wie.
-- **Ein Bot liest seine eigenen Einstellungen.** `GET /bots/{target}` mit der eigenen ID und dem eigenen Token des Bots wird seine `privileged_intents` liefern, damit ein Bot prüfen kann, was sein Eigentümer eingeschaltet hat.
-- **Klarere Intent-Ablehnungen.** Das Schließen mit `4014` wird die eingeschalteten Intents nennen. Eine Verbindung, die aus einem anderen Grund scheitert, schließt ohne `4014`, damit ein Bot es erneut versucht, statt anzuhalten.
-- **Threads: eine reichere erste Nachricht.** `POST /channels/{target}/threads` wird `embeds` und `components` für die erste Nachricht nehmen, mit denselben Regeln wie beim Senden einer Nachricht.
-- **„Nicht installiert“ antwortet 404.** Ein Kanal eines Servers, in dem dein Bot nicht ist, wird `404 NotFound` antworten, wie der Server selbst. Heute antwortet er `403 MissingPermission`.
-- **SDK: Ratenlimits.** Das SDK wird ein `429` abwarten und es von selbst erneut versuchen.
+- **Gateway: Fortsetzen.** Jedes Ereignis trägt `seq`, pro Sitzung ab 1 gezählt. Sende `Authenticate` mit `"resumable": true`, dann trägt `Ready` eine `session_id`. Nach einem Abbruch bleibt die Sitzung 2 Minuten erhalten, mit ihren letzten 1000 Ereignissen. Sende auf einem neuen Socket als erste Nachricht `{ "type": "Resume", "token": "YOUR_BOT_TOKEN", "session_id": "…", "seq": 41 }`: Die Ereignisse nach `seq` kommen der Reihe nach, dann `Resumed`. Ist die Sitzung weg, kommt `InvalidSession` mit `"resumable": false`; sende dann `Authenticate` auf demselben Socket und hole per REST auf. Manche Ereignisse können bei der Wiedergabe fehlen, `seq` kann also Lücken haben. `GET /gateway/schema` wird die Close-Codes und die Grenzen des Fortsetzens auflisten.
+- **Ein Bot liest seine eigenen Einstellungen.** `GET /bots/{target}` mit der eigenen ID und dem eigenen Token des Bots liefert seine `privileged_intents`. Die ID eines anderen Bots antwortet weiter `IsBot`.
+- **Klarere Intent-Ablehnungen.** Der Grund beim Schließen mit `4014` nennt, was der Server gelesen hat, etwa `Disallowed intents: MESSAGE_CONTENT (switched on: none)`. Kann der Server die Einstellungen des Bots nicht lesen, sendet er `InternalError` und schließt mit `1013`: Versuche es später erneut, halte nicht an.
+- **Threads: eine reichere erste Nachricht.** `POST /channels/{target}/threads` nimmt `embeds` und `components` neben `content`, mit den Regeln des Nachrichtensendens: „Embeds senden“ gilt, und eine Rollenerwähnung ohne Mention Roles wird mit `403 MissingPermission` (`permission: MentionRoles`) abgelehnt, und kein Thread entsteht.
+- **„Nicht installiert“ antwortet 404.** `GET /channels/{target}` antwortet `404 NotFound` an alle, die nicht im Server des Kanals sind, wie der Server selbst und wie ein Kanal, den es nicht gibt. Mitglieder ohne Zugang bekommen weiterhin `403 MissingPermission`.
+- **SDK: Ratenlimits und Fortsetzen.** Das SDK setzt für Bots standardmäßig fort, wartet ein `429` ab und wartet auf das Zurücksetzen, wenn ein Bucket leer ist.
 
 Bestehende Bots laufen weiter. Nichts davon entfernt oder ändert ein Feld.
 
