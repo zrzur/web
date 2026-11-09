@@ -176,11 +176,11 @@ describe("static worklet file", () => {
     if (process.env.UPDATE_VOICE_GATE_WORKLET)
       writeFileSync(STATIC_WORKLET, voiceGateWorkletSource());
     // a Windows checkout may turn the file's line ends into CRLF
-    expect(readFileSync(STATIC_WORKLET, "utf8").replace(/
-/g, "
-")).toBe(
-      voiceGateWorkletSource(),
+    const served = readFileSync(STATIC_WORKLET, "utf8").replaceAll(
+      "\r\n",
+      "\n",
     );
+    expect(served).toBe(voiceGateWorkletSource());
   });
 
   it("is loaded from this origin, with a version that changes with the code", () => {
