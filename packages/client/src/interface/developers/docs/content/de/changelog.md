@@ -4,7 +4,7 @@ Was sich an der Bot-API und an diesen Seiten geändert hat, das Neueste zuerst. 
 
 @@0
 
-Jeder Eintrag sagt, ob bestehende Bots sich ändern müssen. Ein Wegfall wird hier mit seinem Datum angekündigt, bevor er passiert.
+Jeder Eintrag sagt, ob bestehende Bots sich ändern müssen. Ein Wegfall wird hier mit seinem Datum angekündigt, bevor er passiert. Verfolge es in einem Feedreader: [RSS-Feed](/developers/api-changelog.xml).
 
 ## Kommt in der nächsten Version {#upcoming}
 

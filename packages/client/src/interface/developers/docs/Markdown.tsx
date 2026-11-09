@@ -129,13 +129,16 @@ function Node(props: {
         {(node) => {
           const link = node() as { url: string };
           const external = /^https?:\/\//.test(link.url);
+          // files such as the changelog feed are not pages of the app: the
+          // browser opens them itself
+          const file = /\.xml$/.test(link.url);
           return (
             <a
               href={link.url}
               target={external ? "_blank" : undefined}
               rel={external ? "noreferrer noopener" : undefined}
               onClick={(event) => {
-                if (external || event.ctrlKey || event.metaKey) return;
+                if (external || file || event.ctrlKey || event.metaKey) return;
                 event.preventDefault();
                 props.onNavigate(link.url);
               }}

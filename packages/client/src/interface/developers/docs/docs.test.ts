@@ -95,6 +95,24 @@ describe("Inventory parts", () => {
     }
   });
 
+  it("publishes the changelog as an RSS feed, up to date", async () => {
+    const { feedFrom } = (await import(
+      // @ts-expect-error -- a plain Node script without types
+      "../../../../scripts/bot-api/changelog-feed.mjs"
+    )) as { feedFrom: (markdown: string) => string };
+    const page = PAGES.find((p) => p.id === "changelog")!.source!;
+    const feed = readFileSync(
+      join(here, "../../../../public/developers/api-changelog.xml"),
+      "utf8",
+    );
+    expect(feed, "run node scripts/bot-api/changelog-feed.mjs").toBe(
+      feedFrom(page),
+    );
+    expect(feed).toContain("#v26-0-0</link>");
+    expect(feed).not.toContain("#upcoming");
+    expect(linksOf(page)).toContain("/developers/api-changelog.xml");
+  });
+
   it("a page loads only the parts its blocks show", () => {
     expect(partsForMarkdown("# Hi\n\nText only.")).toEqual([]);
     expect(
@@ -351,6 +369,14 @@ describe("Documentation pages", () => {
           true,
         );
         if (link === "/developers") continue;
+        // a static file served from public/ (the changelog feed)
+        if (/.xml$/.test(link)) {
+          expect(
+            readdirSync(join(here, "../../../../public/developers")),
+            `${page.id}: ${link}`,
+          ).toContain(link.split("/").at(-1));
+          continue;
+        }
         const [path, anchor] = link.split("#");
         const id = path.replace(/^\/developers\/docs\/?/, "") || "overview";
         const anchors = anchorsOfPage(id);

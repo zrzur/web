@@ -7,7 +7,7 @@ curl "https://api.zrzur.com/"
 # answer, shortened: { "zrzur": "26.0.0", ... }
 ```
 
-Every entry says whether existing bots must change. A removal is announced here with its date before it happens.
+Every entry says whether existing bots must change. A removal is announced here with its date before it happens. Follow it in a feed reader: [RSS feed](/developers/api-changelog.xml).
 
 ## Coming in the next release {#upcoming}
 
