@@ -5,9 +5,13 @@ import babelMacrosPlugin from "vite-plugin-babel-macros";
 import solid from "vite-plugin-solid";
 import { defineConfig } from "vitest/config";
 
+import { dndFlip } from "./scripts/dndFlip.mjs";
+
 /** Component tests: real Solid components in jsdom (`pnpm run test:dom`). */
 export default defineConfig({
   plugins: [
+    // as in the app build (vite.config.ts)
+    dndFlip(),
     babelMacrosPlugin(),
     solid({
       hot: false,

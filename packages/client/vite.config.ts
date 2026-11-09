@@ -12,6 +12,7 @@ import solidSvg from "vite-plugin-solid-svg";
 
 import { assertBuildEnvSafe } from "./buildEnv";
 import codegenPlugin from "./codegen.plugin";
+import { dndFlip } from "./scripts/dndFlip.mjs";
 import { emitterInspect } from "./scripts/emitterInspect.mjs";
 import { polyfillGate } from "./scripts/polyfillGate.mjs";
 import { precacheShell } from "./scripts/precacheShell.mjs";
@@ -93,6 +94,8 @@ export default defineConfig(({ command }) => {
       codegenPlugin(),
       // the SDK's event emitter without its 45 KB copy of util.inspect
       emitterInspect(),
+      // drag zones measure their rows only after a drag, not on every change
+      dndFlip(),
       babelMacrosPlugin(),
       solidPlugin({
         babel: {
