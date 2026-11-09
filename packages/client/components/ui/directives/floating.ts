@@ -76,7 +76,8 @@ export function unregisterFloatingElement(element: HTMLElement) {
   if (!entries) return;
   registered.delete(element);
   for (const dispose of entries.values()) dispose();
-  if (floatingElements().some((entry) => entries.has(entry)))
+  // called from cleanups, which may run inside a computation
+  if (untrack(floatingElements).some((entry) => entries.has(entry)))
     setFloatingElements((elements) =>
       elements.filter((entry) => !entries.has(entry)),
     );

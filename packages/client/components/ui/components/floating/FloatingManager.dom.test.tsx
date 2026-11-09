@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any -- test doubles */
-import { createSignal } from "solid-js";
+import { createComputed, createRoot, createSignal } from "solid-js";
 import { render } from "solid-js/web";
 import { css } from "styled-system/css";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
@@ -141,5 +141,36 @@ describe("the floating layer", () => {
       "Opened twice",
     );
     for (const anchor of anchors) unregisterFloatingElement(anchor);
+  });
+
+  it("does not tie the computation that unregisters to the layer's list", () => {
+    const gone = document.createElement("span");
+    const [show] = createSignal<any>({ tooltip: { content: "x" } });
+    registerFloatingElement({
+      config: () => ({}) as never,
+      element: gone,
+      hide: () => undefined,
+      show,
+    });
+    let runs = 0;
+    const stop = createRoot((dispose) => {
+      createComputed(() => {
+        runs++;
+        unregisterFloatingElement(gone);
+      });
+      return dispose;
+    });
+    expect(runs).toBe(1);
+    // another element opens: the list changes
+    const other = document.createElement("span");
+    registerFloatingElement({
+      config: () => ({}) as never,
+      element: other,
+      hide: () => undefined,
+      show,
+    });
+    expect(runs).toBe(1);
+    unregisterFloatingElement(other);
+    stop();
   });
 });
