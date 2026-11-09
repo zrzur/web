@@ -10,7 +10,7 @@ import {
   type GateConfig,
   GATE_HOLD_MS,
   VOICE_GATE_WORKLET,
-  voiceGateWorkletSource,
+  voiceGateWorkletUrl,
 } from "./voiceGate";
 
 /** Audio contexts that already have the gate worklet */
@@ -26,19 +26,12 @@ function loadGate(context: BaseAudioContext): Promise<boolean> {
     loading = (async () => {
       if (!context.audioWorklet || typeof AudioWorkletNode === "undefined")
         return false;
-      const url = URL.createObjectURL(
-        new Blob([voiceGateWorkletSource()], {
-          type: "application/javascript",
-        }),
-      );
       try {
-        await context.audioWorklet.addModule(url);
+        await context.audioWorklet.addModule(voiceGateWorkletUrl());
         return true;
       } catch (error) {
         console.warn("[rtc] input sensitivity unavailable", error);
         return false;
-      } finally {
-        URL.revokeObjectURL(url);
       }
     })();
     gateLoaded.set(context, loading);
@@ -249,11 +242,27 @@ export class VoiceProcessor implements TrackProcessor<
         numberOfOutputs: 1,
       });
       gate.port.onmessage = (event) => setCallInputLevel(event.data);
+      // a worklet that throws outputs silence: take it out of the path
+      gate.onprocessorerror = () => this.bypassGate(gate);
       gate.port.postMessage(this.gateConfig());
       return gate;
     } catch (error) {
       console.warn("[rtc] input sensitivity unavailable", error);
       return undefined;
+    }
+  }
+
+  /** Wire the volume straight to the call, without the gate */
+  private bypassGate(gate: AudioWorkletNode) {
+    if (this.gateNode !== gate) return;
+    console.warn("[rtc] input sensitivity stopped; sending ungated");
+    gate.port.onmessage = null;
+    gate.disconnect();
+    this.gateNode = undefined;
+    setCallInputLevel(undefined);
+    if (this.gainNode && this.destinationNode) {
+      this.gainNode.disconnect();
+      this.gainNode.connect(this.destinationNode);
     }
   }
 

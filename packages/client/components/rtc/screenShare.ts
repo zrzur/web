@@ -142,14 +142,14 @@ export function screenShareQualities(
 
 /**
  * A stored quality, or the best one below it that the plan still allows
- * (1080p 30 FPS when nothing was stored)
+ * (720p 30 FPS when nothing was stored)
  */
 export function resolveQuality(
   qualities: Partial<Record<ScreenShareQualityName, ScreenShareQuality>>,
   name: ScreenShareQualityName | undefined,
 ): ScreenShareQuality {
   if (name && qualities[name]) return qualities[name]!;
-  const wanted = SCREEN_SHARE_QUALITY_NAMES.indexOf(name ?? "1080p30");
+  const wanted = SCREEN_SHARE_QUALITY_NAMES.indexOf(name ?? "720p30");
   for (let i = Math.min(wanted, 1); i >= 0; i--) {
     const quality = qualities[SCREEN_SHARE_QUALITY_NAMES[i]];
     if (quality) return quality;

@@ -124,7 +124,7 @@ export class Voice extends AbstractStore<"voice", TypeVoice> {
       echoCancellation: true,
       noiseSupression: "enhanced",
       autoGainControl: true,
-      screenShareQuality: "1080p30",
+      screenShareQuality: "720p30",
       screenShareContent: "detail",
       screenShareQualityAsk: true,
       screenShareAudio: true,

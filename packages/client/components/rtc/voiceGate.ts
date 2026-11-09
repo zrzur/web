@@ -23,7 +23,7 @@ export const DEFAULT_THRESHOLD_DB = -50;
 export const GATE_HOLD_MS = 300;
 /** Automatic mode stays between these bounds; the cap keeps speech passing */
 export const AUTO_THRESHOLD_MIN_DB = -70;
-export const AUTO_THRESHOLD_MAX_DB = -50;
+export const AUTO_THRESHOLD_MAX_DB = -55;
 
 export interface GateConfig {
   /** Off in push to talk: the key decides, the gate stays open */
@@ -39,8 +39,14 @@ export interface GateState {
   open: boolean;
   /** Time the level was last at or above the threshold (ms) */
   lastAboveMs: number;
-  /** Learnt background noise level (automatic mode, dBFS) */
+  /** Learnt background noise level (automatic mode, dBFS; NaN until heard) */
   noiseFloorDb: number;
+  /** Quietest level of the current one-second window */
+  windowMinDb: number;
+  /** Quietest level of the window before it */
+  previousMinDb: number;
+  /** Time spent in the current window (ms) */
+  windowMs: number;
 }
 
 /**
@@ -50,12 +56,21 @@ export interface GateState {
 function gateKernel() {
   const SILENCE = -100;
   const AUTO_MIN = -70;
-  const AUTO_MAX = -50;
+  const AUTO_MAX = -55;
   /** Automatic threshold sits this far above the learnt noise */
-  const AUTO_MARGIN = 10;
-  /** Noise floor follows a quieter room fast, a louder one slowly */
+  const AUTO_MARGIN = 6;
+  /**
+   * Minimum tracking: the room is the quietest level of the last one to two
+   * seconds. The floor follows it down fast, and up slowly only while it
+   * stays near the floor (a quieter room, a fan turned up a little); a
+   * minimum far above the floor is speech without pauses and is ignored.
+   */
+  const WINDOW_MS = 1000;
   const FLOOR_DOWN_MS = 200;
   const FLOOR_UP_MS = 2000;
+  const RISE_BAND = 12;
+  /** Digital silence (a muted or switching device) says nothing about the room */
+  const DIGITAL_SILENCE = -90;
 
   function levelDb(samples: ArrayLike<number>): number {
     const n = samples.length;
@@ -68,11 +83,19 @@ function gateKernel() {
   }
 
   function autoThreshold(noiseFloorDb: number): number {
+    if (!(noiseFloorDb > -1000)) return AUTO_MIN;
     return Math.min(AUTO_MAX, Math.max(AUTO_MIN, noiseFloorDb + AUTO_MARGIN));
   }
 
   function initialGateState(): GateState {
-    return { open: true, lastAboveMs: -1e12, noiseFloorDb: AUTO_MIN - 20 };
+    return {
+      open: true,
+      lastAboveMs: -1e12,
+      noiseFloorDb: NaN,
+      windowMinDb: 1000,
+      previousMinDb: 1000,
+      windowMs: 0,
+    };
   }
 
   function gateStep(
@@ -82,20 +105,39 @@ function gateKernel() {
     dtMs: number,
     config: GateConfig,
   ): GateState {
-    let floor = state.noiseFloorDb;
-    const tau = level < floor ? FLOOR_DOWN_MS : FLOOR_UP_MS;
-    floor += (level - floor) * Math.min(1, dtMs / tau);
-
-    if (!config.enabled) {
-      return { open: true, lastAboveMs: nowMs, noiseFloorDb: floor };
+    let windowMin = state.windowMinDb;
+    let previousMin = state.previousMinDb;
+    let windowMs = state.windowMs + dtMs;
+    if (level > DIGITAL_SILENCE) windowMin = Math.min(windowMin, level);
+    if (windowMs >= WINDOW_MS) {
+      previousMin = windowMin;
+      windowMin = 1000;
+      windowMs = 0;
     }
-    const threshold = config.auto ? autoThreshold(floor) : config.thresholdDb;
-    const lastAbove = level >= threshold ? nowMs : state.lastAboveMs;
-    return {
-      open: nowMs - lastAbove < config.holdMs,
-      lastAboveMs: lastAbove,
+    const roomMin = Math.min(windowMin, previousMin);
+
+    let floor = state.noiseFloorDb;
+    if (roomMin < 1000) {
+      if (!(floor > -1000)) floor = roomMin;
+      else if (roomMin < floor)
+        floor += (roomMin - floor) * Math.min(1, dtMs / FLOOR_DOWN_MS);
+      else if (roomMin < floor + RISE_BAND)
+        floor += (roomMin - floor) * Math.min(1, dtMs / FLOOR_UP_MS);
+    }
+
+    const next = {
+      open: true,
+      lastAboveMs: nowMs,
       noiseFloorDb: floor,
+      windowMinDb: windowMin,
+      previousMinDb: previousMin,
+      windowMs: windowMs,
     };
+    if (!config.enabled) return next;
+    const threshold = config.auto ? autoThreshold(floor) : config.thresholdDb;
+    next.lastAboveMs = level >= threshold ? nowMs : state.lastAboveMs;
+    next.open = nowMs - next.lastAboveMs < config.holdMs;
+    return next;
   }
 
   return {
@@ -134,6 +176,23 @@ export function thresholdPercent(db: number): number {
 
 /** Name the worklet registers under */
 export const VOICE_GATE_WORKLET = "zrzur-voice-gate";
+
+/**
+ * The worklet file in public/ (same origin, so a `script-src 'self'` policy
+ * keeps it working). It is voiceGateWorkletSource() written out; a unit
+ * test fails when the two differ.
+ */
+export const VOICE_GATE_WORKLET_FILE = "voice-gate-worklet.js";
+
+/** Address of the worklet, versioned by its content so updates are fetched */
+export function voiceGateWorkletUrl(): string {
+  const source = voiceGateWorkletSource();
+  let hash = 5381;
+  for (let i = 0; i < source.length; i++)
+    hash = ((hash * 33) ^ source.charCodeAt(i)) >>> 0;
+  const base = import.meta.env?.BASE_URL ?? "/";
+  return `${base}${VOICE_GATE_WORKLET_FILE}?v=${hash.toString(36)}`;
+}
 
 /**
  * Source of the audio worklet: the kernel above, a short fade so opening

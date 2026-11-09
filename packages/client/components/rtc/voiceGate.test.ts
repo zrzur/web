@@ -1,3 +1,5 @@
+import { readFileSync, writeFileSync } from "node:fs";
+import { resolve } from "node:path";
 import { describe, expect, it } from "vitest";
 
 import {
@@ -13,7 +15,11 @@ import {
   levelDb,
   thresholdPercent,
   voiceGateWorkletSource,
+  voiceGateWorkletUrl,
 } from "./voiceGate";
+
+/** The worklet as the app serves it (public/, same origin) */
+const STATIC_WORKLET = resolve(__dirname, "../../public/voice-gate-worklet.js");
 
 const manual = (thresholdDb: number): GateConfig => ({
   enabled: true,
@@ -116,10 +122,36 @@ describe("automatic", () => {
     expect(talking.opens.every(Boolean)).toBe(true);
   });
 
-  it("keeps the automatic threshold between its bounds", () => {
+  it("keeps the automatic threshold 6 dB over the room, between -70 and -55 dBFS", () => {
+    expect(AUTO_THRESHOLD_MIN_DB).toBe(-70);
+    expect(AUTO_THRESHOLD_MAX_DB).toBe(-55);
     expect(autoThreshold(-200)).toBe(AUTO_THRESHOLD_MIN_DB);
     expect(autoThreshold(0)).toBe(AUTO_THRESHOLD_MAX_DB);
-    expect(autoThreshold(-70)).toBe(-60);
+    expect(autoThreshold(-70)).toBe(-64);
+  });
+
+  it("ten seconds of quiet speech after a quiet room stay open (it does not learn speech as noise)", () => {
+    const room = run(Array(300).fill(-70), auto);
+    // learnt the room
+    expect(room.state.noiseFloorDb).toBeCloseTo(-70, 0);
+    const speech = run(Array(1000).fill(-55), auto, 10, room.state);
+    expect(speech.opens.every(Boolean)).toBe(true);
+    expect(speech.state.noiseFloorDb).toBeLessThan(-66);
+  });
+
+  it("a short drop to digital silence does not teach it a silent room", () => {
+    const room = run(Array(300).fill(-70), auto);
+    const dropout = run(Array(50).fill(-100), auto, 10, room.state);
+    const back = run(Array(300).fill(-70), auto, 10, dropout.state);
+    expect(back.state.noiseFloorDb).toBeCloseTo(-70, 0);
+    expect(back.opens.at(-1)).toBe(false);
+  });
+
+  it("follows a room that gets a little louder", () => {
+    const room = run(Array(300).fill(-75), auto);
+    const fan = run(Array(1500).fill(-66), auto, 10, room.state);
+    expect(fan.state.noiseFloorDb).toBeGreaterThan(-68);
+    expect(fan.opens.at(-1)).toBe(false);
   });
 });
 
@@ -136,6 +168,20 @@ describe("settings helpers", () => {
     expect(thresholdPercent(0)).toBe(100);
     expect(thresholdPercent(-40)).toBe(50);
     expect(thresholdPercent(-120)).toBe(0);
+  });
+});
+
+describe("static worklet file", () => {
+  it("public/voice-gate-worklet.js is the current kernel (UPDATE_VOICE_GATE_WORKLET=1 rewrites it)", () => {
+    if (process.env.UPDATE_VOICE_GATE_WORKLET)
+      writeFileSync(STATIC_WORKLET, voiceGateWorkletSource());
+    expect(readFileSync(STATIC_WORKLET, "utf8")).toBe(voiceGateWorkletSource());
+  });
+
+  it("is loaded from this origin, with a version that changes with the code", () => {
+    const url = voiceGateWorkletUrl();
+    expect(url).toMatch(/^\/voice-gate-worklet\.js\?v=[0-9a-z]+$/);
+    expect(url).toBe(voiceGateWorkletUrl());
   });
 });
 
@@ -163,7 +209,7 @@ describe("audio worklet source", () => {
       "registerProcessor",
       "AudioWorkletProcessor",
       "scope",
-      voiceGateWorkletSource(),
+      readFileSync(STATIC_WORKLET, "utf8"),
     )(
       scope.sampleRate,
       scope.registerProcessor,

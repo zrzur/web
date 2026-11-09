@@ -12,16 +12,14 @@ import { VideoTrack } from "solid-livekit-components";
 import { Show } from "solid-js";
 import { Modals } from "../types";
 
-/** A quality name present in the dialog's list (1080p 30 FPS when offered) */
+/** A quality name present in the dialog's list (the first when the saved one is not) */
 export function offeredQuality(
   qualities: { name: string }[],
   stored: ScreenShareQualityName | undefined,
 ): ScreenShareQualityName {
   const names = qualities.map((quality) => quality.name);
   if (stored && names.includes(stored)) return stored;
-  return (
-    names.includes("1080p30") ? "1080p30" : names[0]
-  ) as ScreenShareQualityName;
+  return names[0] as ScreenShareQualityName;
 }
 
 /**

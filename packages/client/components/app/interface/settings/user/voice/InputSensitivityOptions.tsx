@@ -10,6 +10,7 @@ import {
 import { Trans, useLingui } from "@lingui/solid/macro";
 import { styled } from "styled-system/jsx";
 
+import { audioCaptureFor } from "@revolt/rtc/audioQuality";
 import { callInputLevel } from "@revolt/rtc/inputLevel";
 import {
   GATE_HOLD_MS,
@@ -46,7 +47,8 @@ export function InputSensitivityOptions() {
   // the microphone, only while the slider is shown
   const local = useLocalMicLevel(
     () => manual() && !callInputLevel(),
-    () => voice.preferredAudioInputDevice,
+    // the same capture a call would use (device, processing, music mode)
+    () => audioCaptureFor(voice, voice.highQualityAudio),
     () => voice.inputThreshold,
     () => voice.inputVolume,
   );
@@ -133,7 +135,8 @@ export function SensitivityMeter(props: {
         step={1}
         value={props.threshold}
         onInput={(event) => props.onThreshold(event.currentTarget.value)}
-        labelFormatter={(value) => t`${value} dB`}
+        // isolated, so "-50 dB" never turns into "dB 50-" in Arabic
+        labelFormatter={(value) => `⁨${t`${value} dB`}⁩`}
       />
       <Status data-open={open()} data-testid="sensitivity-status">
         <Dot data-open={open()} aria-hidden="true" />
@@ -149,7 +152,7 @@ export function SensitivityMeter(props: {
  */
 function useLocalMicLevel(
   active: Accessor<boolean>,
-  deviceId: Accessor<string | undefined>,
+  capture: Accessor<ReturnType<typeof audioCaptureFor>>,
   threshold: Accessor<number>,
   volume: Accessor<number>,
 ) {
@@ -161,7 +164,13 @@ function useLocalMicLevel(
       setReading(undefined);
       return;
     }
-    const device = deviceId();
+    const {
+      deviceId,
+      echoCancellation,
+      noiseSuppression,
+      autoGainControl,
+      channelCount,
+    } = capture();
     let stopped = false;
     let frame = 0;
     let stream: MediaStream | undefined;
@@ -182,7 +191,14 @@ function useLocalMicLevel(
 
     navigator.mediaDevices
       .getUserMedia({
-        audio: device ? { deviceId: { ideal: device } } : true,
+        audio: {
+          // a plain id is a preference: another microphone still works
+          deviceId,
+          echoCancellation,
+          noiseSuppression,
+          autoGainControl,
+          channelCount,
+        },
       })
       .then((media) => {
         stream = media;
@@ -287,7 +303,7 @@ const MeterMark = styled("div", {
     insetInlineStart: "calc(9px + (100% - 18px) * var(--z-meter-pos))",
     width: "2px",
     marginInlineStart: "-1px",
-    background: "var(--z-fg)",
+    background: "var(--z-fg-primary)",
   },
 });
 

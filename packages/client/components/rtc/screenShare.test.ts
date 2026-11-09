@@ -103,7 +103,7 @@ describe("resolveQuality", () => {
     });
     expect(resolveQuality(q30, "1080p60").name).toBe("1080p30");
     expect(resolveQuality(screenShareQualities(plus), undefined).name).toBe(
-      "1080p30",
+      "720p30",
     );
     expect(resolveQuality(screenShareQualities(plus), "1080p60").name).toBe(
       "1080p60",

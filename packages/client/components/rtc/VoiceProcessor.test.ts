@@ -131,6 +131,7 @@ describe("VoiceProcessor input sensitivity gate", () => {
     kind = "gate";
     links = new Set<{ kind: string }>();
     sent: unknown[] = [];
+    onprocessorerror: (() => void) | null = null;
     port = {
       onmessage: null as ((event: { data: unknown }) => void) | null,
       postMessage: (message: unknown) => this.sent.push(message),
@@ -153,8 +154,6 @@ describe("VoiceProcessor input sensitivity gate", () => {
 
   async function start(extra: Record<string, unknown>, mode = "voice") {
     globalThis.AudioWorkletNode = FakeWorkletNode as never;
-    URL.createObjectURL ??= () => "blob:gate";
-    URL.revokeObjectURL ??= () => undefined;
     const made = setup("browser", extra);
     made.settings.inputMode = mode;
     await made.processor.init({
@@ -167,6 +166,10 @@ describe("VoiceProcessor input sensitivity gate", () => {
   it("sends the microphone through the gate when the browser has audio worklets", async () => {
     const { find } = await start({ audioWorklet: { addModule } });
     expect(addModule).toHaveBeenCalledOnce();
+    // same origin, never a blob: (a script-src 'self' policy allows it)
+    expect(addModule).toHaveBeenCalledWith(
+      expect.stringMatching(/^\/voice-gate-worklet\.js\?v=/),
+    );
     const gate = gates.at(-1)!;
     expect(gate.name).toBe("zrzur-voice-gate");
     expect(targets(find("gain"))).toEqual(["gate"]);
@@ -183,6 +186,14 @@ describe("VoiceProcessor input sensitivity gate", () => {
     });
     await start({ audioWorklet: { addModule } }, "ptt");
     expect(gates.at(-1)!.sent.at(-1)).toMatchObject({ enabled: false });
+  });
+
+  it("a gate that fails while running is bypassed, so the call keeps sound", async () => {
+    const { find } = await start({ audioWorklet: { addModule } });
+    const gate = gates.at(-1)!;
+    gate.onprocessorerror!();
+    expect(targets(find("gain"))).toEqual(["destination"]);
+    expect(targets(gate)).toEqual([]);
   });
 
   it("without audio worklets the microphone still reaches the call", async () => {

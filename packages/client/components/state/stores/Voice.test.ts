@@ -135,9 +135,9 @@ describe("Voice store: high quality audio", () => {
 });
 
 describe("Voice store: screen share quality", () => {
-  it("starts at 1080p 30 FPS for text and slides", () => {
+  it("starts new users at 720p 30 FPS for text and slides", () => {
     const data = store().default();
-    expect(data.screenShareQuality).toBe("1080p30");
+    expect(data.screenShareQuality).toBe("720p30");
     expect(data.screenShareContent).toBe("detail");
   });
 
@@ -175,7 +175,7 @@ describe("Voice store: screen share quality", () => {
         screenShareContent: "cinema",
       } as never),
     ).toMatchObject({
-      screenShareQuality: "1080p30",
+      screenShareQuality: "720p30",
       screenShareContent: "detail",
     });
   });

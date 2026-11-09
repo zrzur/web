@@ -18,6 +18,10 @@ const voice = createMutable({
   inputThreshold: -50,
   inputVolume: 1,
   preferredAudioInputDevice: undefined as string | undefined,
+  echoCancellation: true,
+  autoGainControl: true,
+  noiseSupression: "browser",
+  highQualityAudio: false,
 });
 vi.mock("@revolt/state", () => ({ useState: () => ({ voice }) }));
 
@@ -33,6 +37,7 @@ beforeEach(() => {
   document.body.innerHTML = '<div id="root"></div>';
   voice.inputSensitivityAuto = true;
   voice.inputThreshold = -50;
+  voice.highQualityAudio = false;
   setCallInputLevel(undefined);
   getUserMedia.mockClear();
   Object.defineProperty(navigator, "mediaDevices", {
@@ -85,6 +90,31 @@ describe("Input sensitivity settings", () => {
     expect(range.value).toBe("-50");
     expect(document.body.textContent).toContain("-50 dB");
     expect(getUserMedia).toHaveBeenCalledOnce();
+  });
+
+  it("tests the microphone with the same capture a call uses", () => {
+    voice.inputSensitivityAuto = false;
+    mount();
+    expect(getUserMedia).toHaveBeenLastCalledWith({
+      audio: {
+        deviceId: undefined,
+        echoCancellation: true,
+        noiseSuppression: true,
+        autoGainControl: true,
+        channelCount: 1,
+      },
+    });
+    // music mode: no voice treatment, stereo
+    voice.highQualityAudio = true;
+    expect(getUserMedia).toHaveBeenLastCalledWith({
+      audio: {
+        deviceId: undefined,
+        echoCancellation: false,
+        noiseSuppression: false,
+        autoGainControl: false,
+        channelCount: 2,
+      },
+    });
   });
 
   it("moving the slider saves the threshold and moves the mark on the meter", () => {
