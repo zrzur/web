@@ -22185,3 +22185,53 @@ msgstr "If this is enabled, animations and motion effects won't play or will be 
 #: components/ui/components/design/DataTable.tsx
 msgid "Rows per page:"
 msgstr "Rows per page:"
+
+#. placeholder {0}: combo()
+#: components/app/interface/settings/user/voice/PushToTalkOptions.tsx
+msgid "{0} is not available from other apps. Try another key."
+msgstr "{0} is not available from other apps. Try another key."
+
+#: components/app/interface/settings/user/voice/InputSensitivityOptions.tsx
+msgid "{value} dB"
+msgstr "{value} dB"
+
+#: components/app/interface/settings/user/voice/InputSensitivityOptions.tsx
+msgid "Allow microphone access to see your level."
+msgstr "Allow microphone access to see your level."
+
+#: components/app/interface/settings/user/voice/InputSensitivityOptions.tsx
+msgid "Below the threshold, others hear silence."
+msgstr "Below the threshold, others hear silence."
+
+#. placeholder {0}: combo()
+#: components/app/interface/settings/user/voice/PushToTalkOptions.tsx
+msgid "Hold the key while Zrzur is in front. From other apps, {0} turns talking on and off."
+msgstr "Hold the key while Zrzur is in front. From other apps, {0} turns talking on and off."
+
+#: components/app/interface/settings/user/voice/InputSensitivityOptions.tsx
+msgid "Input sensitivity"
+msgstr "Input sensitivity"
+
+#: components/app/interface/settings/user/voice/InputSensitivityOptions.tsx
+msgid "Input sensitivity threshold"
+msgstr "Input sensitivity threshold"
+
+#: components/app/interface/settings/user/voice/InputSensitivityOptions.tsx
+msgid "Others hear you"
+msgstr "Others hear you"
+
+#: components/app/interface/settings/user/voice/InputSensitivityOptions.tsx
+msgid "Silence is sent"
+msgstr "Silence is sent"
+
+#: components/app/interface/settings/user/voice/InputSensitivityOptions.tsx
+msgid "Speak and watch the bar: green means others hear you."
+msgstr "Speak and watch the bar: green means others hear you."
+
+#: components/app/interface/settings/user/voice/InputSensitivityOptions.tsx
+msgid "Threshold"
+msgstr "Threshold"
+
+#: components/app/interface/settings/user/voice/InputSensitivityOptions.tsx
+msgid "Zrzur finds the right level for your room."
+msgstr "Zrzur finds the right level for your room."

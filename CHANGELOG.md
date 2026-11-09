@@ -4,6 +4,8 @@
 
 ### Features
 
+* **Input sensitivity:** in voice activity, Settings, Voice has Automatic (on by default) or a threshold slider on a live level meter. Below the threshold the call carries silence (the microphone stays on, the speaking ring follows), with a 300 ms hold so word ends are not cut. Works with every noise suppression setting; stored on this device.
+* **Push to talk from other apps (desktop app):** during a push-to-talk call, Ctrl+Shift (⌘⇧ on a Mac) with the push-to-talk key turns talking on and off while Zrzur is in the background, with a sound each way. Browsers keep the in-window key.
 * **Plugins are off for now:** the server decides with `features.plugins`, and anything but a clear yes means off. Off, the app shows no plugin entry in Settings, starts no plugin host, makes no sandbox or iframe and asks the server for nothing about plugins, also for people who installed one. Their installs stay stored and come back when the server turns plugins on. `PluginsDisabled` has plain words in Arabic, English and German.
 * **Three new themes:** High Contrast, Paper and Desert Dawn are built into Settings, Appearance, after the four packs. High Contrast keeps its larger text, clear focus rings, underlined links and reduced motion.
 * **Creator effects:** creators upload profile effects in Creator Studio, with a rights box, the reason for any refusal in the same screen and a template. The Effects tab on Designs shows Zrzur's effects and approved uploads together; an uploaded effect is worn from Designs and plays on the card and the full profile. Anyone can report one from the profile menu, with an urgent flashing reason.

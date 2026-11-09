@@ -21976,3 +21976,53 @@ msgstr "عند تفعيل هذا الخيار، لن تعمل الرسوم ال�
 #: components/ui/components/design/DataTable.tsx
 msgid "Rows per page:"
 msgstr "عدد الصفوف في الصفحة:"
+
+#. placeholder {0}: combo()
+#: components/app/interface/settings/user/voice/PushToTalkOptions.tsx
+msgid "{0} is not available from other apps. Try another key."
+msgstr "الاختصار {0} غير متاح من التطبيقات الأخرى. جرّب مفتاحًا آخر."
+
+#: components/app/interface/settings/user/voice/InputSensitivityOptions.tsx
+msgid "{value} dB"
+msgstr "{value} ديسيبل"
+
+#: components/app/interface/settings/user/voice/InputSensitivityOptions.tsx
+msgid "Allow microphone access to see your level."
+msgstr "اسمح بالوصول إلى الميكروفون لترى مستوى صوتك."
+
+#: components/app/interface/settings/user/voice/InputSensitivityOptions.tsx
+msgid "Below the threshold, others hear silence."
+msgstr "تحت العتبة يسمع الآخرون صمتًا."
+
+#. placeholder {0}: combo()
+#: components/app/interface/settings/user/voice/PushToTalkOptions.tsx
+msgid "Hold the key while Zrzur is in front. From other apps, {0} turns talking on and off."
+msgstr "اضغط المفتاح مطوّلًا وزرزور في المقدمة. ومن التطبيقات الأخرى يشغّل {0} التحدث ويوقفه."
+
+#: components/app/interface/settings/user/voice/InputSensitivityOptions.tsx
+msgid "Input sensitivity"
+msgstr "حساسية الإدخال"
+
+#: components/app/interface/settings/user/voice/InputSensitivityOptions.tsx
+msgid "Input sensitivity threshold"
+msgstr "عتبة حساسية الإدخال"
+
+#: components/app/interface/settings/user/voice/InputSensitivityOptions.tsx
+msgid "Others hear you"
+msgstr "الآخرون يسمعونك"
+
+#: components/app/interface/settings/user/voice/InputSensitivityOptions.tsx
+msgid "Silence is sent"
+msgstr "يُرسَل صمت"
+
+#: components/app/interface/settings/user/voice/InputSensitivityOptions.tsx
+msgid "Speak and watch the bar: green means others hear you."
+msgstr "تحدّث وراقب الشريط: الأخضر يعني أن الآخرين يسمعونك."
+
+#: components/app/interface/settings/user/voice/InputSensitivityOptions.tsx
+msgid "Threshold"
+msgstr "العتبة"
+
+#: components/app/interface/settings/user/voice/InputSensitivityOptions.tsx
+msgid "Zrzur finds the right level for your room."
+msgstr "يجد زرزور المستوى المناسب لمكانك."
