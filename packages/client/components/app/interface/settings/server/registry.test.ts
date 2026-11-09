@@ -40,6 +40,11 @@ describe("server settings registry", () => {
     expect(find("überprüfung")).toContain("joining#verification");
     expect(find("نقل الملكية")).toContain("overview#danger");
     expect(find("löschen")).toContain("overview#danger");
+    expect(find("default notifications")).toContain("overview#notifications");
+    expect(find("الإشعارات الافتراضية")).toContain("overview#notifications");
+    expect(find("standard benachrichtigungen")).toContain(
+      "overview#notifications",
+    );
   });
 
   it("matches a page by anything in it", () => {

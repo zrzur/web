@@ -46,6 +46,7 @@ import {
   ContextMenuDivider,
   ContextMenuSubMenu,
 } from "./ContextMenu";
+import { SuppressMentionsMenuItems } from "./shared/SuppressMentionsMenuItems";
 
 /**
  * Context menu for servers
@@ -331,10 +332,31 @@ export function ServerContextMenu(props: {
         buttonContent={<Trans>Notifications</Trans>}
       >
         <ContextMenuButton
+          onClick={() => state.notifications.setServer(props.server, undefined)}
+          actionSymbol={
+            typeof state.notifications.getServer(props.server) === "undefined"
+              ? MdRadioButtonChecked
+              : MdRadioButtonUnchecked
+          }
+          _titleCase={false}
+        >
+          <Column gap="none">
+            <Trans>Server default</Trans>
+            <Text class="label" size="small">
+              <Show
+                when={props.server.defaultNotifications === "All"}
+                fallback={<Trans>Mentions only</Trans>}
+              >
+                <Trans>All messages</Trans>
+              </Show>
+            </Text>
+          </Column>
+        </ContextMenuButton>
+        <ContextMenuButton
           icon={MdNotificationsActive}
           onClick={() => state.notifications.setServer(props.server, "all")}
           actionSymbol={
-            state.notifications.computeForServer(props.server) === "all"
+            state.notifications.getServer(props.server) === "all"
               ? MdRadioButtonChecked
               : MdRadioButtonUnchecked
           }
@@ -345,7 +367,7 @@ export function ServerContextMenu(props: {
           icon={MdAlternateEmail}
           onClick={() => state.notifications.setServer(props.server, "mention")}
           actionSymbol={
-            state.notifications.computeForServer(props.server) === "mention"
+            state.notifications.getServer(props.server) === "mention"
               ? MdRadioButtonChecked
               : MdRadioButtonUnchecked
           }
@@ -356,13 +378,15 @@ export function ServerContextMenu(props: {
           icon={MdNotificationsOff}
           onClick={() => state.notifications.setServer(props.server, "none")}
           actionSymbol={
-            state.notifications.computeForServer(props.server) === "none"
+            state.notifications.getServer(props.server) === "none"
               ? MdRadioButtonChecked
               : MdRadioButtonUnchecked
           }
         >
           <Trans>None</Trans>
         </ContextMenuButton>
+        <ContextMenuDivider />
+        <SuppressMentionsMenuItems target={props.server} />
       </ContextMenuSubMenu>
       <ContextMenuDivider />
 

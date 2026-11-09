@@ -21,7 +21,13 @@ import {
   radio_button_unchecked as MdRadioButtonUnchecked,
 } from "@revolt/ui/icons/legacy";
 
-import { ContextMenuButton, ContextMenuSubMenu } from "../ContextMenu";
+import {
+  ContextMenuButton,
+  ContextMenuDivider,
+  ContextMenuSubMenu,
+} from "../ContextMenu";
+
+import { SuppressMentionsMenuItems } from "./SuppressMentionsMenuItems";
 
 export function NotificationContextMenu(props: { channel: Channel }) {
   const state = useState();
@@ -175,6 +181,10 @@ export function NotificationContextMenu(props: { channel: Channel }) {
         >
           <Trans>None</Trans>
         </ContextMenuButton>
+        <Show when={props.channel.server}>
+          <ContextMenuDivider />
+          <SuppressMentionsMenuItems target={props.channel} />
+        </Show>
       </ContextMenuSubMenu>
     </>
   );
