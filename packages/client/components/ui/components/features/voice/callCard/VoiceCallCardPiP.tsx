@@ -10,20 +10,34 @@ import {
   VideoTrack,
 } from "solid-livekit-components";
 
+import { useLingui } from "@lingui/solid/macro";
+import { useNavigate } from "@solidjs/router";
 import { Track } from "livekit-client";
 import { styled } from "styled-system/jsx";
 
 import { useUser } from "@revolt/markdown/users";
 import { useVoice } from "@revolt/rtc";
+import { useState } from "@revolt/state";
 import { Avatar } from "@revolt/ui/components/design";
 import { Row } from "@revolt/ui/components/layout";
 import { Symbol } from "@revolt/ui/components/utils/Symbol";
 
 import { VoiceCallCardActions } from "./VoiceCallCardActions";
-import { VoiceCallCardStatus } from "./VoiceCallCardStatus";
 
+/**
+ * The call while you look at another page: who is in it (tap to go back to
+ * the call), microphone and hang up. No status or error text here; the call
+ * page shows those (owner, 2026-11-09).
+ */
 export function VoiceCallCardPiP() {
   const voice = useVoice();
+  const state = useState();
+  const navigate = useNavigate();
+  const { t } = useLingui();
+  const backToCall = () => {
+    navigate(voice.channel()?.path ?? "");
+    state.appDrawer()?.setShown(true);
+  };
   const audTracks = useTracks(
     [{ source: Track.Source.Microphone, withPlaceholder: true }],
     { onlySubscribed: false },
@@ -44,12 +58,18 @@ export function VoiceCallCardPiP() {
 
   return (
     <MiniCard>
-      <VoiceCallCardStatus pip />
-      <Show when={!hasFocusVideo()} fallback={<MiniVideoTile />}>
-        <Row align justify grow wrap>
-          <TrackLoop tracks={audTracks}>{() => <ConnectedUser />}</TrackLoop>
-        </Row>
-      </Show>
+      <Back
+        type="button"
+        aria-label={t`Return to voice channel`}
+        title={t`Return to voice channel`}
+        onClick={backToCall}
+      >
+        <Show when={!hasFocusVideo()} fallback={<MiniVideoTile />}>
+          <Row align justify grow wrap>
+            <TrackLoop tracks={audTracks}>{() => <ConnectedUser />}</TrackLoop>
+          </Row>
+        </Show>
+      </Back>
       <VoiceCallCardActions size="xs" />
     </MiniCard>
   );
@@ -126,6 +146,26 @@ const UserIcon = styled("div", {
         outlineOffset: "1px",
         outline: "2px solid var(--z-presence-online)",
       },
+    },
+  },
+});
+
+/** the people (or the video) of the call; a tap goes back to it */
+const Back = styled("button", {
+  base: {
+    all: "unset",
+    position: "relative",
+    flexGrow: 1,
+    alignSelf: "stretch",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    minHeight: "44px",
+    borderRadius: "var(--borderRadius-md)",
+    cursor: "pointer",
+    _focusVisible: {
+      outline: "2px solid var(--z-focus)",
+      outlineOffset: "2px",
     },
   },
 });

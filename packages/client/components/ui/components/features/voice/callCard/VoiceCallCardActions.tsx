@@ -1,4 +1,3 @@
-import { useNavigate } from "@solidjs/router";
 import { JSX, Show, splitProps } from "solid-js";
 
 import { useLingui } from "@lingui/solid/macro";
@@ -13,7 +12,6 @@ import { Icon } from "@revolt/ui/icons/Icon";
 export function VoiceCallCardActions(props: { size: "xs" | "sm" }) {
   const voice = useVoice();
   const state = useState();
-  const navigate = useNavigate();
   const { t } = useLingui();
   const { limits } = useInstance();
 
@@ -29,18 +27,6 @@ export function VoiceCallCardActions(props: { size: "xs" | "sm" }) {
       data-mic-preference={state.voice.micOn}
       data-deafen-preference={state.voice.deafen}
     >
-      <Show when={props.size === "xs"}>
-        <ControlButton
-          size={props.size}
-          label={t`Return to voice channel`}
-          onClick={() => {
-            navigate(voice.channel()?.path ?? "");
-            state.appDrawer()?.setShown(true);
-          }}
-        >
-          <Icon name="arrow-left" size={iconSize()} />
-        </ControlButton>
-      </Show>
       <ControlButton
         size={props.size}
         tone={voice.unmuted() ? "neutral" : "off"}
@@ -65,77 +51,80 @@ export function VoiceCallCardActions(props: { size: "xs" | "sm" }) {
           <Icon name="microphone" size={iconSize()} />
         </Show>
       </ControlButton>
-      <ControlButton
-        size={props.size}
-        tone={voice.deafen() || !voice.listenPermission ? "off" : "neutral"}
-        data-voice-control="deafen"
-        aria-pressed={voice.deafen()}
-        disabled={!voice.listenPermission}
-        label={
-          voice.serverDeafened
-            ? t`Server deafened`
-            : voice.listenPermission
-              ? voice.deafen()
-                ? t`Undeafen`
-                : t`Deafen`
-              : t`Missing permission`
-        }
-        onClick={() => voice.toggleDeafen()}
-      >
-        <Show
-          when={voice.deafen() || !voice.listenPermission}
-          fallback={<Icon name="headphones" size={iconSize()} />}
+      {/* the floating card keeps two buttons: microphone and hang up */}
+      <Show when={props.size !== "xs"}>
+        <ControlButton
+          size={props.size}
+          tone={voice.deafen() || !voice.listenPermission ? "off" : "neutral"}
+          data-voice-control="deafen"
+          aria-pressed={voice.deafen()}
+          disabled={!voice.listenPermission}
+          label={
+            voice.serverDeafened
+              ? t`Server deafened`
+              : voice.listenPermission
+                ? voice.deafen()
+                  ? t`Undeafen`
+                  : t`Deafen`
+                : t`Missing permission`
+          }
+          onClick={() => voice.toggleDeafen()}
         >
-          <Icon name="headphones-slash" size={iconSize()} />
-        </Show>
-      </ControlButton>
-      <ControlButton
-        size={props.size}
-        tone={limits().video && voice.video() ? "on" : "neutral"}
-        data-voice-control="camera"
-        aria-pressed={!!voice.video()}
-        disabled={
-          voice.state() !== "CONNECTED" ||
-          !limits().video ||
-          (!voice.videoPermission && !voice.video())
-        }
-        label={
-          limits().video
-            ? voice.video()
-              ? t`Stop camera`
-              : t`Start camera`
-            : t`Camera unavailable`
-        }
-        onClick={() => limits().video && voice.toggleCamera()}
-      >
-        <Show
-          when={voice.video()}
-          fallback={<Icon name="video-camera-slash" size={iconSize()} />}
+          <Show
+            when={voice.deafen() || !voice.listenPermission}
+            fallback={<Icon name="headphones" size={iconSize()} />}
+          >
+            <Icon name="headphones-slash" size={iconSize()} />
+          </Show>
+        </ControlButton>
+        <ControlButton
+          size={props.size}
+          tone={limits().video && voice.video() ? "on" : "neutral"}
+          data-voice-control="camera"
+          aria-pressed={!!voice.video()}
+          disabled={
+            voice.state() !== "CONNECTED" ||
+            !limits().video ||
+            (!voice.videoPermission && !voice.video())
+          }
+          label={
+            limits().video
+              ? voice.video()
+                ? t`Stop camera`
+                : t`Start camera`
+              : t`Camera unavailable`
+          }
+          onClick={() => limits().video && voice.toggleCamera()}
         >
-          <Icon name="video-camera" size={iconSize()} />
-        </Show>
-      </ControlButton>
-      <ControlButton
-        size={props.size}
-        tone={limits().video && voice.screenshare() ? "on" : "neutral"}
-        data-voice-control="screenshare"
-        aria-pressed={!!voice.screenshare()}
-        disabled={
-          voice.state() !== "CONNECTED" ||
-          !limits().video ||
-          (!voice.videoPermission && !voice.screenshare())
-        }
-        label={
-          limits().video
-            ? voice.screenshare()
-              ? t`Stop sharing`
-              : t`Share screen`
-            : t`Screen share unavailable`
-        }
-        onClick={() => limits().video && voice.toggleScreenshare()}
-      >
-        <Icon name="monitor-arrow-up" size={iconSize()} />
-      </ControlButton>
+          <Show
+            when={voice.video()}
+            fallback={<Icon name="video-camera-slash" size={iconSize()} />}
+          >
+            <Icon name="video-camera" size={iconSize()} />
+          </Show>
+        </ControlButton>
+        <ControlButton
+          size={props.size}
+          tone={limits().video && voice.screenshare() ? "on" : "neutral"}
+          data-voice-control="screenshare"
+          aria-pressed={!!voice.screenshare()}
+          disabled={
+            voice.state() !== "CONNECTED" ||
+            !limits().video ||
+            (!voice.videoPermission && !voice.screenshare())
+          }
+          label={
+            limits().video
+              ? voice.screenshare()
+                ? t`Stop sharing`
+                : t`Share screen`
+              : t`Screen share unavailable`
+          }
+          onClick={() => limits().video && voice.toggleScreenshare()}
+        >
+          <Icon name="monitor-arrow-up" size={iconSize()} />
+        </ControlButton>
+      </Show>
       <ControlButton
         size={props.size}
         tone="danger"
