@@ -1,5 +1,5 @@
-import { ApiError, withoutNull } from "@zrzur/sdk/solid";
 import type { API, Client, WithoutNull } from "@zrzur/sdk/solid";
+import { ApiError, withoutNull } from "@zrzur/sdk/solid";
 
 import type { CreateInteraction } from "./types";
 
@@ -13,6 +13,10 @@ export type InteractionError = ApiError;
 export const interactionApi = {
   serverCommands: async (client: Client, serverId: string) =>
     withoutNull(await client.api.get(`/servers/${serverId}/commands`)),
+
+  /** A bot's global commands, for its DM and its pages */
+  botCommands: async (client: Client, botId: string) =>
+    withoutNull(await client.api.get(`/bots/${botId}/commands`)),
 
   create: (client: Client, data: CreateInteraction) =>
     client.api.post("/interactions/", data),
@@ -36,8 +40,7 @@ export const interactionApi = {
     client: Client,
     data: CreateInteraction,
     signal: AbortSignal,
-  ) =>
-    client.api.post("/interactions/autocomplete", data, { signal }),
+  ) => client.api.post("/interactions/autocomplete", data, { signal }),
 };
 
 /** Unique per click or submit, so retries never run an action twice */

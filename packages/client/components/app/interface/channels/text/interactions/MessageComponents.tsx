@@ -28,6 +28,7 @@ import { useModals } from "@revolt/modal";
 import { useState } from "@revolt/state";
 import { Attachment } from "@revolt/ui";
 
+import { useInteractionErrorText } from "./errorText";
 import { Gallery, Thumbnail, Veil } from "./MediaBlocks";
 import { type Restriction, restrictionAllows } from "./restriction";
 import { interactionState, useComponent } from "./store";
@@ -336,73 +337,108 @@ function ComponentView(props: {
       customId,
       values,
     ).catch(() => {
-      // the failure is shown with the channel's pending interactions
+      // the failure is shown next to this component (componentErrors)
     });
   };
 
+  const errorText = useInteractionErrorText();
+  const failure = () => {
+    const customId = (props.component as { custom_id?: string }).custom_id;
+    return customId
+      ? interactionState.componentErrors[`${props.messageId}:${customId}`]
+      : undefined;
+  };
+
   return (
-    <Switch>
-      <Match when={props.component.type === "Button" && props.component}>
-        {(button) => (
-          <Switch>
-            <Match when={button().style === "Link" && button().url}>
-              {(url) => (
-                <LinkButton
-                  href={safeUrl(url())}
-                  target="_blank"
-                  rel="noopener noreferrer nofollow"
-                  aria-disabled={button().disabled}
-                  onClick={(event) => warnBeforeLeaving(event, url())}
+    <>
+      <Switch>
+        <Match when={props.component.type === "Button" && props.component}>
+          {(button) => (
+            <Switch>
+              <Match when={button().style === "Link" && button().url}>
+                {(url) => (
+                  <LinkButton
+                    href={safeUrl(url())}
+                    target="_blank"
+                    rel="noopener noreferrer nofollow"
+                    aria-disabled={button().disabled}
+                    onClick={(event) => warnBeforeLeaving(event, url())}
+                  >
+                    <ButtonContent
+                      emoji={button().emoji}
+                      label={button().label}
+                    />
+                    <Icon name="arrow-square-out" size={16} />
+                  </LinkButton>
+                )}
+              </Match>
+              <Match when={button().style !== "Link"}>
+                <ActionButton
+                  type="button"
+                  tone={button().style as Exclude<ButtonStyle, "Link">}
+                  disabled={button().disabled || busy() || !allowed()}
+                  aria-busy={busy()}
+                  title={notForYou()}
+                  data-restricted={allowed() ? undefined : ""}
+                  // emoji-only buttons are square, so game boards line up
+                  data-square={
+                    !button().label?.replace(/[\s\u200b]/g, "") || undefined
+                  }
+                  onClick={() => use()}
                 >
                   <ButtonContent
                     emoji={button().emoji}
                     label={button().label}
                   />
-                  <Icon name="arrow-square-out" size={16} />
-                </LinkButton>
-              )}
-            </Match>
-            <Match when={button().style !== "Link"}>
-              <ActionButton
-                type="button"
-                tone={button().style as Exclude<ButtonStyle, "Link">}
-                disabled={button().disabled || busy() || !allowed()}
-                aria-busy={busy()}
-                title={notForYou()}
-                data-restricted={allowed() ? undefined : ""}
-                // emoji-only buttons are square, so game boards line up
-                data-square={
-                  !button().label?.replace(/[\s\u200b]/g, "") || undefined
-                }
-                onClick={() => use()}
-              >
-                <ButtonContent emoji={button().emoji} label={button().label} />
-                <Show when={busy()}>
-                  <Spinner aria-hidden="true" data-spinner />
-                </Show>
-              </ActionButton>
-            </Match>
-          </Switch>
-        )}
-      </Match>
-      <Match when={isSelect(props.component)}>
-        <SelectMenu
-          component={
-            {
-              ...(props.component as SelectComponent),
-              disabled:
-                (props.component as SelectComponent).disabled || !allowed(),
-            } as SelectComponent
-          }
-          serverId={props.serverId}
-          busy={busy()}
-          title={notForYou()}
-          onSubmit={use}
-        />
-      </Match>
-    </Switch>
+                  <Show when={busy()}>
+                    <Spinner aria-hidden="true" data-spinner />
+                  </Show>
+                </ActionButton>
+              </Match>
+            </Switch>
+          )}
+        </Match>
+        <Match when={isSelect(props.component)}>
+          <SelectMenu
+            component={
+              {
+                ...(props.component as SelectComponent),
+                disabled:
+                  (props.component as SelectComponent).disabled || !allowed(),
+              } as SelectComponent
+            }
+            serverId={props.serverId}
+            busy={busy()}
+            title={notForYou()}
+            onSubmit={use}
+          />
+        </Match>
+      </Switch>
+      <Show when={failure()}>
+        <ComponentError role="alert" data-component-error>
+          <Icon name="warning-circle" size={14} />
+          <span>{errorText(failure())}</span>
+        </ComponentError>
+      </Show>
+    </>
   );
 }
+
+/** Why the button or menu next to it did not work */
+const ComponentError = styled("span", {
+  base: {
+    display: "inline-flex",
+    alignItems: "center",
+    alignSelf: "center",
+    gap: "4px",
+    minWidth: 0,
+    fontSize: "12px",
+    lineHeight: "16px",
+    color: "var(--z-status-error)",
+    "--z-icon-color": "var(--z-status-error)",
+    "& svg": { flexShrink: 0 },
+  },
+});
 
 /** Only http(s) links, as the server already checks */
 function safeUrl(url: string) {

@@ -3,7 +3,14 @@ import { createStore, produce } from "solid-js/store";
 import { type Client, withoutNull } from "@zrzur/sdk/solid";
 
 import { InteractionError, interactionApi, nonce } from "./api";
-import { isInteractionEvent } from "./types";
+import { dmCommands } from "./commandList";
+import {
+  EPHEMERAL_LIFETIME_MS,
+  EPHEMERAL_STORAGE_KEY,
+  ephemeralExpiry,
+  ephemeralStorage,
+  readStoredEphemeral,
+} from "./ephemeralStorage";
 import type {
   ApplicationCommand,
   CreateInteraction,
@@ -15,6 +22,7 @@ import type {
   OptionChoice,
   ServerCommands,
 } from "./types";
+import { isInteractionEvent } from "./types";
 
 /** An interaction this user started and is waiting on */
 export type PendingInteraction = {
@@ -38,6 +46,8 @@ type InteractionState = {
   pending: Record<string, PendingInteraction>;
   /** Components waiting for an answer, by `messageId:customId` */
   busy: Record<string, true>;
+  /** Why a button or menu just failed, shown next to it, by `messageId:customId` */
+  componentErrors: Record<string, string>;
   modal?: {
     id: string;
     channelId: string;
@@ -50,10 +60,17 @@ type InteractionState = {
   labels: Record<string, string>;
 };
 
+// private answers of this tab survive a reload until they expire
+const restored = readStoredEphemeral(
+  ephemeralStorage()?.getItem(EPHEMERAL_STORAGE_KEY) ?? null,
+  Date.now(),
+);
+
 const [state, setState] = createStore<InteractionState>({
-  ephemeral: {},
+  ephemeral: restored,
   pending: {},
   busy: {},
+  componentErrors: {},
   commands: {},
   labels: {},
 });
@@ -62,8 +79,6 @@ export { state as interactionState };
 
 /** How long after the deadline we wait before calling it a timeout */
 const GRACE_MS = 1500;
-/** Private answers live as long as their interaction token */
-const EPHEMERAL_LIFETIME_MS = 15 * 60 * 1000;
 
 const autocompleteWaiters = new Map<
   string,
@@ -94,9 +109,14 @@ function finish(id: string) {
 
 function fail(id: string, error: string) {
   const pending = state.pending[id];
+  const key = pending?.componentKey;
   setState(
     produce((draft) => {
-      if (pending?.componentKey) delete draft.busy[pending.componentKey];
+      if (key) {
+        delete draft.busy[key];
+        // shown at the button or menu that was used
+        draft.componentErrors[key] = error;
+      }
       const entry = draft.pending[id];
       if (entry) {
         entry.state = "failed";
@@ -107,8 +127,37 @@ function fail(id: string, error: string) {
   // the message stays a little while so it can be read
   setTimeout(() => {
     if (state.pending[id]?.state === "failed") finish(id);
+    if (key && state.componentErrors[key] === error) {
+      setState(
+        produce((draft) => {
+          delete draft.componentErrors[key];
+        }),
+      );
+    }
   }, 8000);
 }
+
+/** Keep this tab's private answers for a reload */
+function saveEphemeral() {
+  try {
+    ephemeralStorage()?.setItem(
+      EPHEMERAL_STORAGE_KEY,
+      JSON.stringify(state.ephemeral),
+    );
+  } catch {
+    // full or blocked storage: they just do not survive a reload
+  }
+}
+
+/** Remove a private answer when its token expires */
+function expireLater(message: EphemeralMessage) {
+  const expiry = ephemeralExpiry(message) ?? Date.now() + EPHEMERAL_LIFETIME_MS;
+  setTimeout(
+    () => dismissEphemeral(message.channel_id, message._id),
+    Math.max(expiry - Date.now(), 0),
+  );
+}
+for (const list of Object.values(restored)) list.forEach(expireLater);
 
 function addEphemeral(message: EphemeralMessage) {
   setState(
@@ -119,10 +168,8 @@ function addEphemeral(message: EphemeralMessage) {
       else list.push(message);
     }),
   );
-  setTimeout(
-    () => dismissEphemeral(message.channel_id, message._id),
-    EPHEMERAL_LIFETIME_MS,
-  );
+  saveEphemeral();
+  expireLater(message);
 }
 
 export function dismissEphemeral(channelId: string, messageId: string) {
@@ -130,10 +177,13 @@ export function dismissEphemeral(channelId: string, messageId: string) {
     produce((draft) => {
       const list = draft.ephemeral[channelId];
       if (list) {
-        draft.ephemeral[channelId] = list.filter((m) => m._id !== messageId);
+        const left = list.filter((m) => m._id !== messageId);
+        if (left.length) draft.ephemeral[channelId] = left;
+        else delete draft.ephemeral[channelId];
       }
     }),
   );
+  saveEphemeral();
 }
 
 function onEvent(event: InteractionEvent) {
@@ -193,6 +243,16 @@ function onEvent(event: InteractionEvent) {
           delete draft.commands[event.server_id];
         }),
       );
+      // a bot's global commands changed: its DM lists load again too
+      for (const key of Object.keys(state.commands)) {
+        if (!key.startsWith("dm:")) continue;
+        commandRequests.delete(key);
+        setState(
+          produce((draft) => {
+            delete draft.commands[key];
+          }),
+        );
+      }
       break;
   }
 }
@@ -204,6 +264,53 @@ export function attachInteractions(client: Client) {
   client.events.on("event", (event) => {
     if (isInteractionEvent(event)) onEvent(withoutNull(event));
   });
+}
+
+/**
+ * Where a channel's commands come from: its server, or the bot of a DM with
+ * a bot (`dm:<bot id>`). Nothing for groups and DMs with people.
+ */
+export function commandsKey(channel: {
+  type: string;
+  serverId?: string;
+  recipient?: { id: string; bot?: unknown };
+}): string | undefined {
+  if (channel.type === "TextChannel") return channel.serverId;
+  if (channel.type === "DirectMessage" && channel.recipient?.bot)
+    return `dm:${channel.recipient.id}`;
+  return undefined;
+}
+
+/** Load the commands for a key from `commandsKey` */
+export function loadCommands(client: Client, key: string) {
+  return key.startsWith("dm:")
+    ? loadDmCommands(client, key.slice(3))
+    : loadServerCommands(client, key);
+}
+
+/** A bot's global commands for the DM with it, fetched once until they change */
+export function loadDmCommands(client: Client, botId: string) {
+  const key = `dm:${botId}`;
+  if (state.commands[key]) return Promise.resolve(state.commands[key]);
+  let request = commandRequests.get(key);
+  if (!request) {
+    request = interactionApi.botCommands(client, botId).then((commands) => {
+      const user = client.users.get(botId);
+      const list = dmCommands(
+        {
+          _id: botId,
+          username: user?.username ?? "",
+          display_name: user?.displayName,
+        },
+        commands,
+      );
+      setState("commands", key, list);
+      return list;
+    });
+    request.catch(() => commandRequests.delete(key));
+    commandRequests.set(key, request);
+  }
+  return request;
 }
 
 /** Commands of the bots installed in a server, fetched once until they change */
@@ -229,7 +336,15 @@ async function start(
   data: CreateInteraction,
   extra: { label?: string; componentKey?: string },
 ) {
-  if (extra.componentKey) setState("busy", extra.componentKey, true);
+  if (extra.componentKey) {
+    setState("busy", extra.componentKey, true);
+    // a new try clears the last error
+    setState(
+      produce((draft) => {
+        delete draft.componentErrors[extra.componentKey!];
+      }),
+    );
+  }
   try {
     const accepted = await interactionApi.create(client, data);
     // a retried request returns an interaction we may already track
@@ -295,6 +410,7 @@ async function start(
       applicationId: data.application_id ?? "",
       label: extra.label,
       state: "pending",
+      componentKey: extra.componentKey,
       createdAt: Date.now(),
     });
     fail(id, error instanceof InteractionError ? error.type : "Unknown");
@@ -377,9 +493,18 @@ export function closeModal() {
   setState("modal", undefined);
 }
 
+/** The bot did not send suggestions in time */
+export class AutocompleteTimeout extends Error {
+  constructor() {
+    super("The bot did not answer");
+    this.name = "AutocompleteTimeout";
+  }
+}
+
 /**
- * Ask the bot for suggestions. Resolves with no choices on timeout or when
- * `signal` aborts (a newer keystroke).
+ * Ask the bot for suggestions. Resolves with no choices when `signal`
+ * aborts (a newer keystroke); rejects with `AutocompleteTimeout` when the
+ * bot does not answer in time, so "no matches" and "no answer" differ.
  */
 export async function requestAutocomplete(
   client: Client,
@@ -409,10 +534,10 @@ export async function requestAutocomplete(
     earlyChoices.delete(accepted._id);
     return early;
   }
-  return new Promise((resolve) => {
+  return new Promise((resolve, reject) => {
     const timer = setTimeout(() => {
       autocompleteWaiters.delete(accepted._id);
-      resolve([]);
+      reject(new AutocompleteTimeout());
     }, 3000 + GRACE_MS);
     signal.addEventListener("abort", () => {
       clearTimeout(timer);

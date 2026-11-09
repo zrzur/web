@@ -3,8 +3,10 @@ import { For, Show, createMemo, createResource } from "solid-js";
 import { i18n } from "@lingui/core";
 import { Trans } from "@lingui/solid/macro";
 
+import { dedupeCommands } from "@revolt/app/interface/channels/text/interactions/commandList";
 import {
-  loadServerCommands,
+  commandsKey,
+  loadCommands,
   runCommand,
 } from "@revolt/app/interface/channels/text/interactions/store";
 import { localized } from "@revolt/app/interface/channels/text/interactions/types";
@@ -15,8 +17,8 @@ import { Icon } from "@revolt/ui/icons/Icon";
 import { ContextMenuButton, ContextMenuSubMenu } from "../ContextMenu";
 
 /**
- * "Apps": user and message commands of the bots in this server, run on the
- * user or message the menu was opened for
+ * "Apps": user and message commands of the bots in this server (or, in a DM
+ * with a bot, that bot's), run on the user or message the menu was opened for
  */
 export function AppsSubMenu(props: {
   kind: "User" | "Message";
@@ -26,15 +28,21 @@ export function AppsSubMenu(props: {
   onClose?: () => void;
 }) {
   const client = useClient();
-  const [commands] = createResource(
-    () => props.serverId,
-    (serverId) => loadServerCommands(client(), serverId).catch(() => undefined),
+  const key = () => {
+    if (props.serverId) return props.serverId;
+    const channel = props.channelId
+      ? client().channels.get(props.channelId)
+      : undefined;
+    return channel ? commandsKey(channel) : undefined;
+  };
+  const [commands] = createResource(key, (key) =>
+    loadCommands(client(), key).catch(() => undefined),
   );
 
   const entries = createMemo(() => {
     const data = commands();
     if (!data || !props.channelId) return [];
-    return data.commands
+    return dedupeCommands(data.commands)
       .filter((command) => command.type === props.kind)
       .map((command) => ({
         command,

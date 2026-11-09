@@ -1,6 +1,8 @@
 import {
   For,
+  Match,
   Show,
+  Switch,
   createEffect,
   createMemo,
   createSignal,
@@ -39,9 +41,12 @@ import {
 import { Icon } from "@revolt/ui/icons/Icon";
 
 import { InteractionError } from "./api";
+import { dedupeCommands, typedCommand } from "./commandList";
 import {
+  AutocompleteTimeout,
+  commandsKey,
   interactionState,
-  loadServerCommands,
+  loadCommands,
   requestAutocomplete,
   runCommand,
 } from "./store";
@@ -68,17 +73,22 @@ const SUBCOMMAND_TYPES = ["SubCommand", "SubCommandGroup"];
 
 /** Runs the command being filled in (set while the command bar is shown) */
 const [activeRun, setActiveRun] = createSignal<() => void>();
+/** Chooses a command typed in full (`/close`, then Enter) when none is chosen */
+const [typedChooser, setTypedChooser] = createSignal<() => boolean>();
 
 /**
  * Run the chosen command instead of sending the draft as a message. The
  * message box calls this first, so Enter and the send button run a picked
- * command. Returns false when no command is chosen.
+ * command. A draft that is one command typed in full chooses that command
+ * instead of being sent as text. Returns false when nothing was done.
  */
 export function runActiveCommand(): boolean {
   const run = activeRun();
-  if (!run) return false;
-  run();
-  return true;
+  if (run) {
+    run();
+    return true;
+  }
+  return typedChooser()?.() ?? false;
 }
 
 /** Name in the user's language */
@@ -107,15 +117,15 @@ export function CommandPicker(props: Props) {
   const client = useClient();
   const locale = () => i18n.locale;
 
-  const serverId = () =>
-    props.channel.type === "TextChannel" ? props.channel.serverId : undefined;
+  // the server's commands, or in a DM with a bot that bot's own
+  const serverId = () => commandsKey(props.channel);
 
   // Load when the user starts a command; ApplicationCommandsUpdate clears the
   // stored list, which loads it again the next time
   createEffect(() => {
     const id = serverId();
     if (id && props.content.startsWith("/") && !interactionState.commands[id]) {
-      loadServerCommands(client(), id).catch(() => undefined);
+      loadCommands(client(), id).catch(() => undefined);
     }
   });
   const commands = () =>
@@ -149,10 +159,13 @@ export function CommandPicker(props: Props) {
   );
 
   const channelNsfw = () => (props.channel as { nsfw?: boolean }).nsfw ?? false;
-  const usable = () =>
+  // every copy, for finding a command by its id
+  const everyUsable = () =>
     (commands()?.commands ?? [])
       .filter((command) => command.type === "ChatInput")
       .filter((command) => !command.nsfw || channelNsfw());
+  // one entry per bot and name: the list and typing never offer two copies
+  const usable = createMemo(() => dedupeCommands(everyUsable()));
 
   // bots that have at least one command here, in list order
   const apps = createMemo(() => {
@@ -230,6 +243,35 @@ export function CommandPicker(props: Props) {
     }),
   );
 
+  // `/name` then Enter with nothing chosen (the list closed, or not loaded
+  // yet): choose that command rather than send the text as a message
+  const chooseTyped = () => {
+    const id = serverId();
+    if (!id || chosen()) return false;
+    const text = props.content;
+    if (!/^\/\S+\s*$/.test(text)) return false;
+    if (!commands()) {
+      // still loading: wait for the list, then choose it if it is there
+      loadCommands(client(), id)
+        .then(() => {
+          const command = typedCommand(props.content, usable(), label);
+          if (command && !chosen()) {
+            setDismissed(false);
+            pick(command);
+          }
+        })
+        .catch(() => undefined);
+      return true;
+    }
+    const command = typedCommand(text, usable(), label);
+    if (!command) return false;
+    setDismissed(false);
+    pick(command);
+    return true;
+  };
+  setTypedChooser(() => chooseTyped);
+  onCleanup(() => setTypedChooser(undefined));
+
   // A command mention in a message was clicked: start that command
   createEffect(() => {
     const request = requestedCommand();
@@ -237,13 +279,11 @@ export function CommandPicker(props: Props) {
     if (!request || !id) return;
     const loaded = commands();
     if (!loaded) {
-      loadServerCommands(client(), id).catch(() =>
-        setRequestedCommand(undefined),
-      );
+      loadCommands(client(), id).catch(() => setRequestedCommand(undefined));
       return;
     }
     setRequestedCommand(undefined);
-    const command = usable().find((entry) => entry._id === request.id);
+    const command = everyUsable().find((entry) => entry._id === request.id);
     if (!command) return;
     setDismissed(false);
     pick(command, request.path);
@@ -435,6 +475,10 @@ function CommandBar(props: {
   const uploads = new Map<string, string>();
   const autoValues = new Map<string, string | number>();
   const [autoChoices, setAutoChoices] = createSignal<OptionChoice[]>([]);
+  // where the bot's suggestions are: asked, none matched, or no answer
+  const [autoState, setAutoState] = createSignal<
+    "idle" | "loading" | "empty" | "silent" | "failed"
+  >("idle");
 
   const word = () => `/${label(props.command)}`;
 
@@ -603,7 +647,11 @@ function CommandBar(props: {
       ([option, typed]) => {
         clearTimeout(timer);
         controller?.abort();
-        if (!option?.autocomplete) return setAutoChoices([]);
+        if (!option?.autocomplete) {
+          setAutoState("idle");
+          return setAutoChoices([]);
+        }
+        setAutoState("loading");
         timer = setTimeout(async () => {
           controller = new AbortController();
           const signal = controller.signal;
@@ -629,8 +677,13 @@ function CommandBar(props: {
               autoValues.set(label(choice), choice.value);
             }
             setAutoChoices(choices);
-          } catch {
-            if (!signal.aborted) setAutoChoices([]);
+            setAutoState(choices.length ? "idle" : "empty");
+          } catch (error) {
+            if (signal.aborted) return;
+            setAutoChoices([]);
+            setAutoState(
+              error instanceof AutocompleteTimeout ? "silent" : "failed",
+            );
           }
         }, 250);
       },
@@ -917,6 +970,36 @@ function CommandBar(props: {
               </CommandRow>
             )}
           </For>
+        </Stack>
+      </Show>
+
+      <Show
+        when={
+          current()?.autocomplete &&
+          !suggestions().length &&
+          autoState() !== "idle"
+        }
+      >
+        <Stack aria-live="polite" data-autocomplete-state={autoState()}>
+          <PanelTitle>
+            <bdi>{current() ? label(current()!) : ""}</bdi>
+          </PanelTitle>
+          <EmptyLine>
+            <Switch>
+              <Match when={autoState() === "loading"}>
+                {t`Asking the bot for suggestions…`}
+              </Match>
+              <Match when={autoState() === "empty"}>
+                {t`No suggestions match. You can still type a value.`}
+              </Match>
+              <Match when={autoState() === "silent"}>
+                {t`The bot did not answer. Type a value yourself.`}
+              </Match>
+              <Match when={autoState() === "failed"}>
+                {t`Couldn't get suggestions. Type a value yourself.`}
+              </Match>
+            </Switch>
+          </EmptyLine>
         </Stack>
       </Show>
 

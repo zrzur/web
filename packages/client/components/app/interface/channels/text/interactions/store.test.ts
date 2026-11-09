@@ -1,6 +1,12 @@
-import { describe, expect, it } from "vitest";
+import { describe, expect, it, vi } from "vitest";
 
-import { attachInteractions, interactionState } from "./store";
+import {
+  AutocompleteTimeout,
+  attachInteractions,
+  interactionState,
+  requestAutocomplete,
+  useComponent,
+} from "./store";
 
 /** A client whose gateway events the test sends itself */
 function fakeClient() {
@@ -10,7 +16,9 @@ function fakeClient() {
       on: (_: string, fn: (event: unknown) => void) => listeners.push(fn),
     },
   };
-  attachInteractions(client as unknown as Parameters<typeof attachInteractions>[0]);
+  attachInteractions(
+    client as unknown as Parameters<typeof attachInteractions>[0],
+  );
   return (event: unknown) => listeners.forEach((fn) => fn(event));
 }
 
@@ -38,5 +46,92 @@ describe("private bot answers", () => {
 
     send({ type: "EphemeralMessageDelete", id: "A", channel_id: "CH" });
     expect(interactionState.ephemeral.CH.map((m) => m._id)).toEqual(["B"]);
+  });
+});
+
+describe("autocomplete", () => {
+  const command = {
+    _id: "CMD",
+    application_id: "BOT",
+    name: "play",
+    type: "ChatInput",
+    version: "1",
+  } as Parameters<typeof requestAutocomplete>[2];
+  const client = (id: string) =>
+    ({
+      api: { post: async () => ({ _id: id }) },
+    }) as unknown as Parameters<typeof requestAutocomplete>[0];
+
+  it("says the bot did not answer when no suggestions arrive in time", async () => {
+    vi.useFakeTimers();
+    try {
+      const asked = requestAutocomplete(
+        client("A1"),
+        "CH",
+        command,
+        [],
+        "song",
+        new AbortController().signal,
+      );
+      const outcome = asked.then(
+        () => "answered",
+        (error) => (error instanceof AutocompleteTimeout ? "silent" : "other"),
+      );
+      await vi.advanceTimersByTimeAsync(5000);
+      expect(await outcome).toBe("silent");
+    } finally {
+      vi.useRealTimers();
+    }
+  });
+
+  it("an empty answer from the bot is no matches, not silence", async () => {
+    const send = fakeClient();
+    const asked = requestAutocomplete(
+      client("A2"),
+      "CH",
+      command,
+      [],
+      "song",
+      new AbortController().signal,
+    );
+    await new Promise((r) => setTimeout(r, 0));
+    send({ type: "InteractionAutocompleteResult", id: "A2", choices: [] });
+    expect(await asked).toEqual([]);
+  });
+
+  it("a newer keystroke cancels quietly", async () => {
+    const controller = new AbortController();
+    const asked = requestAutocomplete(
+      client("A3"),
+      "CH",
+      command,
+      [],
+      "song",
+      controller.signal,
+    );
+    await new Promise((r) => setTimeout(r, 0));
+    controller.abort();
+    expect(await asked).toEqual([]);
+  });
+});
+
+describe("a failed button or menu", () => {
+  it("keeps its error at the component that was used", async () => {
+    const failing = {
+      api: {
+        post: async () => {
+          throw new Error("offline");
+        },
+      },
+    } as unknown as Parameters<typeof useComponent>[0];
+    await useComponent(failing, "CH", "MSG", "vote").catch(() => undefined);
+    expect(interactionState.componentErrors["MSG:vote"]).toBe("Unknown");
+    expect(interactionState.busy["MSG:vote"]).toBeUndefined();
+    // the timeline does not show it a second time
+    expect(
+      Object.values(interactionState.pending).some(
+        (entry) => entry.componentKey === "MSG:vote" && !entry.label,
+      ),
+    ).toBe(true);
   });
 });
