@@ -591,6 +591,24 @@
       "category": "synthetic-test-source-or-fixture"
     },
     {
+      "path": "e2e/stack-runner/overnight-forward.mjs",
+      "sha256": "b04a8f56a0f7c8a48cc0e0bf6c0bf30d09d510797f3b4c554d55c35b327aefe3",
+      "bytes": 8970,
+      "category": "synthetic-test-source-or-fixture"
+    },
+    {
+      "path": "e2e/stack-runner/overnight-lib.mjs",
+      "sha256": "19893fed1407c13f0f335f881ffa1ce1f92be0b3d4856ed231fb07f2a8e6b8f0",
+      "bytes": 11538,
+      "category": "synthetic-test-source-or-fixture"
+    },
+    {
+      "path": "e2e/stack-runner/overnight-search.mjs",
+      "sha256": "4bb85d8a06a80f012e075d78213db0931d9bafa45ec7bbb896bc29b27ac1e32b",
+      "bytes": 13612,
+      "category": "synthetic-test-source-or-fixture"
+    },
+    {
       "path": "e2e/stack-runner/safety-statement.mjs",
       "sha256": "5e2ead0b2ff2bf1545d287eadd6f3deffcdafaeb45d41b3d1a4adff570b88acb",
       "bytes": 11865,
@@ -40848,7 +40866,7 @@
   "submodules": [
     {
       "path": "packages/stoat.js",
-      "commit": "7cb975cccb66947bc875bf29e0d2add3b4aca78f"
+      "commit": "39cb812e01278771d2e26eb6a99ef254d6d82b15"
     }
   ]
 }
