@@ -12,6 +12,7 @@ import solidSvg from "vite-plugin-solid-svg";
 
 import { assertBuildEnvSafe } from "./buildEnv";
 import codegenPlugin from "./codegen.plugin";
+import { emitterInspect } from "./scripts/emitterInspect.mjs";
 import { polyfillGate } from "./scripts/polyfillGate.mjs";
 import { precacheShell } from "./scripts/precacheShell.mjs";
 import { buildDefine, readReleaseInfo } from "./scripts/release-info.mjs";
@@ -88,6 +89,8 @@ export default defineConfig(({ command }) => {
       // slows the dev server a lot; opt in with ZRZUR_DEVTOOLS=1.
       ...(process.env.ZRZUR_DEVTOOLS ? [Inspect(), devtools()] : []),
       codegenPlugin(),
+      // the SDK's event emitter without its 45 KB copy of util.inspect
+      emitterInspect(),
       babelMacrosPlugin(),
       solidPlugin({
         babel: {
