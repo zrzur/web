@@ -78,14 +78,18 @@ const overlay = cva({
     zIndex: 2,
     display: "flex",
     alignItems: "flex-start",
-    justifyContent: "flex-end",
-    paddingBlock: "var(--z-space-2)",
-    paddingInline: "var(--z-space-3)",
+    justifyContent: "flex-start",
+    // the box sits in the avatar column (12 + 36 + 12 px), centred on it,
+    // so it never covers the name, the time or the text
+    paddingBlockStart: "var(--z-space-1)",
+    paddingInlineStart: "var(--z-space-5)",
     border: "none",
     background: "transparent",
     cursor: "pointer",
-    _hover: {
-      background: "var(--z-message-hover)",
+    "@media (hover: hover)": {
+      _hover: {
+        background: "var(--z-message-hover)",
+      },
     },
     _focusVisible: {
       outline: "2px solid var(--z-focus)",
@@ -96,8 +100,10 @@ const overlay = cva({
     selected: {
       true: {
         background: "var(--z-accent-muted)",
-        _hover: {
-          background: "var(--z-accent-muted)",
+        "@media (hover: hover)": {
+          _hover: {
+            background: "var(--z-accent-muted)",
+          },
         },
       },
     },
@@ -113,6 +119,7 @@ const box = cva({
     borderRadius: "var(--z-radius-xs)",
     border: "2px solid var(--z-border-strong)",
     background: "var(--z-bg-raised)",
+    boxShadow: "0 0 0 2px var(--z-bg-chat)",
     color: "var(--z-on-accent)",
   },
   variants: {
