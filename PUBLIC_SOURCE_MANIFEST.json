@@ -2578,8 +2578,8 @@
     },
     {
       "path": "packages/client/components/i18n/catalog.test.ts",
-      "sha256": "b0d00f61a3e0b5c598de23a7c7948053d7118568817c7dbe642b41cead4bf1bb",
-      "bytes": 3819,
+      "sha256": "2d0c961904cb950e959643743e307557efde2fdf4cd162b170e57480d750f56b",
+      "bytes": 3907,
       "category": "synthetic-test-source-or-fixture"
     },
     {
@@ -37276,14 +37276,14 @@
     },
     {
       "path": "packages/client/scripts/emitterInspect.mjs",
-      "sha256": "f64364bd9168dc911de3f69e99338671a9e95fe477cffe5a8b67f686751c92ac",
-      "bytes": 1858,
+      "sha256": "51332fccbe2bf2291971be1bbffbe107ef520aa418098e56077abac5ecf740dd",
+      "bytes": 1980,
       "category": "product-source-or-build-manifest"
     },
     {
       "path": "packages/client/scripts/emitterInspect.test.ts",
-      "sha256": "f67eba93d05b62a8d9d6372d2a1ae8b6a0c86bd09f803081256e32277ac41870",
-      "bytes": 2500,
+      "sha256": "443badac2539e0c476ec2d0411818ae1bae1978fcacef79b24731c54dbeb4536",
+      "bytes": 2597,
       "category": "synthetic-test-source-or-fixture"
     },
     {
@@ -38434,8 +38434,8 @@
     },
     {
       "path": "packages/client/scripts/siteCatalogs.test.ts",
-      "sha256": "df8bd4d3dce30497426b686c1283e5fd49a0cab8059756704e96492ba93d7a1f",
-      "bytes": 3344,
+      "sha256": "a96b446779cb08383b203224894096493dad0bf0658c6a66903f0ec6ca26331a",
+      "bytes": 3416,
       "category": "synthetic-test-source-or-fixture"
     },
     {
