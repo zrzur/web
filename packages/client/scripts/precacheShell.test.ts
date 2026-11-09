@@ -88,4 +88,35 @@ describe("precache shell", () => {
     ];
     expect(manifestTransform(entries).manifest).toEqual([entries[0]]);
   });
+
+  it("leaves out the polyfills, which only old browsers fetch (and keep on first use)", () => {
+    const withPolyfills = {
+      ...bundle,
+      "assets/polyfills-abc.js": chunk("assets/polyfills-abc.js", {
+        isEntry: true,
+      }),
+    };
+    expect(shellFiles(withPolyfills).has("assets/polyfills-abc.js")).toBe(
+      false,
+    );
+  });
+
+  it("stops the build when the shell grows past 2,000,000 bytes", () => {
+    const { plugin, manifestTransform } = precacheShell();
+    plugin.generateBundle({}, bundle);
+    expect(() =>
+      manifestTransform([
+        { url: "assets/index.js", revision: null, size: 1_500_000 },
+        { url: "assets/shared.js", revision: null, size: 500_001 },
+      ]),
+    ).toThrow(/2,000,001 bytes/);
+    expect(
+      manifestTransform([
+        { url: "assets/index.js", revision: null, size: 1_500_000 },
+        { url: "assets/shared.js", revision: null, size: 500_000 },
+        // outside the shell: not counted
+        { url: "assets/messages-ar.js", revision: null, size: 900_000 },
+      ]).manifest,
+    ).toHaveLength(2);
+  });
 });
