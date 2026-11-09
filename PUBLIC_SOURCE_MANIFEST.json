@@ -1762,14 +1762,14 @@
     },
     {
       "path": "packages/client/components/app/interface/settings/user/bots/PrivilegedIntents.dom.test.tsx",
-      "sha256": "dd5deb933858998840ee16ab8875f1879f6b6368a2ba75cbb418a2c34a3bfa63",
-      "bytes": 4942,
+      "sha256": "452411176a68872213591c4fc524a6b72b749eae48e12d4f17eab0b1c91be17f",
+      "bytes": 6078,
       "category": "synthetic-test-source-or-fixture"
     },
     {
       "path": "packages/client/components/app/interface/settings/user/bots/PrivilegedIntents.tsx",
-      "sha256": "ab66d4833f3bf9a55fe1684e16a597c1a108ffb8c659af0f71bc21b9468e3e1e",
-      "bytes": 6050,
+      "sha256": "1c2b085e72a7bfdaf84e4252e29ff8fba0b8ed3741ccee8aa738e5e848e41c5a",
+      "bytes": 6381,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -38464,8 +38464,8 @@
     },
     {
       "path": "packages/client/src/interface/Developers.tsx",
-      "sha256": "e3287d51c275fe84e790b85e28dd9539cc601421a5c74235f4f31c714ed7de1a",
-      "bytes": 27522,
+      "sha256": "5956d739f34ae8d24245efc2e616ea7f7afe3c91309259c17b6db08aed66c8af",
+      "bytes": 27784,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -38824,8 +38824,8 @@
     },
     {
       "path": "packages/client/src/interface/developers/docs/content/ar/changelog.md",
-      "sha256": "fc96fe009f09b80ecaa5117ea31b2e570b5ae90f537e5399689163b05f64ec0d",
-      "bytes": 5428,
+      "sha256": "d4f0d4301c376514ae6eeca7d160502c4635de7934ec89509f16eaea7086cfe4",
+      "bytes": 6462,
       "category": "public-documentation"
     },
     {
@@ -39040,8 +39040,8 @@
     },
     {
       "path": "packages/client/src/interface/developers/docs/content/changelog.md",
-      "sha256": "0be676a895ab513b6f87b08b16174053bb8b67667a5aebf33ec57a05e880a5e8",
-      "bytes": 4213,
+      "sha256": "8c416d186568e514d8007f0b7400978a6b7036cd983fd2c154883d8de912eda9",
+      "bytes": 5017,
       "category": "public-documentation"
     },
     {
@@ -39082,8 +39082,8 @@
     },
     {
       "path": "packages/client/src/interface/developers/docs/content/de/changelog.md",
-      "sha256": "ce6db8eec9cdfeee1f1065ae14dbeb0e8b15f0446419fee9cb0db161d04bca9e",
-      "bytes": 4638,
+      "sha256": "07f2c1475fbdf38821894c117908d7e3c45579149938d9c4dda83140fcb5e658",
+      "bytes": 5494,
       "category": "public-documentation"
     },
     {
@@ -39505,6 +39505,12 @@
       "sha256": "c2356acbdcf5d7f82686fe0fc2068b525a0751f276c97e284de5673d02f9ec10",
       "bytes": 732,
       "category": "product-source-or-build-manifest"
+    },
+    {
+      "path": "packages/client/src/interface/developersKeyed.test.ts",
+      "sha256": "5dbed4cbfe605113304a4f075218d481d68b58e7fcb55e41766384b5b357a7f1",
+      "bytes": 875,
+      "category": "synthetic-test-source-or-fixture"
     },
     {
       "path": "packages/client/src/interface/home/FirstScreen.tsx",
