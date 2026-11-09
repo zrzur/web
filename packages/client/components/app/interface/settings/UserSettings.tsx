@@ -351,7 +351,7 @@ const Config: SettingsConfiguration<{ server: Server }> = {
             {
               // apps you let act for you through OAuth2; revoked there
               icon: <Icon name="key" size={20} />,
-              title: <Trans>Authorised apps</Trans>,
+              title: <Trans>Authorized apps</Trans>,
               onClick() {
                 pop();
                 navigate("/oauth2/authorized");

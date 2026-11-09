@@ -22191,3 +22191,5 @@ msgstr "أيّها"
 #: components/modal/modals/AddBot.tsx
 msgid "Zrzur verified who runs this bot."
 msgstr "تحقّق زرزور ممّن يدير هذا البوت."
+
+

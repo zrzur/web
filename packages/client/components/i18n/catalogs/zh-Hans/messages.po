@@ -2217,7 +2217,7 @@ msgstr ""
 
 #: src/interface/OAuth.tsx
 msgid "Authorized apps"
-msgstr ""
+msgstr "已授权的应用"
 
 #: components/app/interface/settings/user/safety/ReportsAndStanding.tsx
 msgid "Automated tools"
@@ -19102,10 +19102,6 @@ msgstr "应用和机器人"
 #: components/app/interface/channels/text/interactions/CommandPicker.tsx
 msgid "Asking the bot for suggestions…"
 msgstr "正在向机器人请求建议…"
-
-#: components/app/interface/settings/UserSettings.tsx
-msgid "Authorised apps"
-msgstr "已授权的应用"
 
 #. placeholder {0}: userName(raw.bot)
 #: components/app/interface/settings/server/audit/AuditLog.tsx

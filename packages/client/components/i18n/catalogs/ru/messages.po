@@ -2217,7 +2217,7 @@ msgstr ""
 
 #: src/interface/OAuth.tsx
 msgid "Authorized apps"
-msgstr ""
+msgstr "Разрешённые приложения"
 
 #: components/app/interface/settings/user/safety/ReportsAndStanding.tsx
 msgid "Automated tools"
@@ -19102,10 +19102,6 @@ msgstr "Приложения и боты"
 #: components/app/interface/channels/text/interactions/CommandPicker.tsx
 msgid "Asking the bot for suggestions…"
 msgstr "Запрашиваем подсказки у бота…"
-
-#: components/app/interface/settings/UserSettings.tsx
-msgid "Authorised apps"
-msgstr "Разрешённые приложения"
 
 #. placeholder {0}: userName(raw.bot)
 #: components/app/interface/settings/server/audit/AuditLog.tsx
