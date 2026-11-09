@@ -790,8 +790,8 @@
     },
     {
       "path": "packages/client/components/app/interface/channels/text/interactions/api.ts",
-      "sha256": "a484c658ab72d903076cc59eb91d89cd68c6494b18eb0abe25e5d2c8d997f892",
-      "bytes": 3805,
+      "sha256": "46ca613968258fbf78cccfe7a6e86b5bbb762f70e9abdebcf4ce1546d99e1668",
+      "bytes": 3998,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -844,14 +844,14 @@
     },
     {
       "path": "packages/client/components/app/interface/channels/text/interactions/store.test.ts",
-      "sha256": "ac4ca22c880629fa2b9894976037e533041a9e664dcd9be6a17be40680ff7851",
-      "bytes": 3856,
+      "sha256": "42a7f8cf4e848fc0922dbdbb88d74d9b0e4e370c0d900152b8ce0c786f092e09",
+      "bytes": 4564,
       "category": "synthetic-test-source-or-fixture"
     },
     {
       "path": "packages/client/components/app/interface/channels/text/interactions/store.ts",
-      "sha256": "b5bbefba084a523ea12bc25178d6cb053055a0cbf2474cdee1c2fea6dc94d2de",
-      "bytes": 15722,
+      "sha256": "2ba1d3382cb2add04ca1e66d4214e303b57d881a52bb7ee9a4f4ac3fa3296b94",
+      "bytes": 16744,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -2230,8 +2230,8 @@
     },
     {
       "path": "packages/client/components/app/menus/shared/AppsSubMenu.tsx",
-      "sha256": "489850e1aa306305114f33655c548211a700091d6c3bfb2cd57c8f7322764c11",
-      "bytes": 2837,
+      "sha256": "831efb55ee15976e8a53d3daf04245a69bba3fec362e113cffea6eb6d838b3f8",
+      "bytes": 2913,
       "category": "product-source-or-build-manifest"
     },
     {
