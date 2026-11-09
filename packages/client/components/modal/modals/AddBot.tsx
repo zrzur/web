@@ -8,9 +8,11 @@ import { styled } from "styled-system/jsx";
 import { decodeTime } from "ulid";
 
 import { useClient } from "@revolt/client";
+import { TranslatedError } from "@revolt/i18n/errors";
 import { Markdown } from "@revolt/markdown";
 import {
   Avatar,
+  Checkbox,
   Column,
   Dialog,
   DialogProps,
@@ -20,11 +22,19 @@ import {
   TextField,
   Time,
 } from "@revolt/ui";
+import { BotLabel } from "@revolt/ui/components/features/profiles/BotLabel";
 import { Icon } from "@revolt/ui/icons/Icon";
 
-import { useModals } from "..";
-import { usePermissionNames } from "../../../src/interface/OAuth";
 import { Modals } from "../types";
+
+import {
+  askedGroups,
+  askedPermissions,
+  hasBit,
+  inviteQuery,
+  toggleBit,
+} from "./addBotPermissions";
+import { usePermissionTitles } from "./permissionTitles";
 
 /** Permissions that let a bot change the server or remove people */
 const SENSITIVE = [2 ** 1, 2 ** 2, 2 ** 3, 2 ** 6, 2 ** 7, 2 ** 37];
@@ -35,31 +45,24 @@ const SENSITIVE = [2 ** 1, 2 ** 2, 2 ** 3, 2 ** 6, 2 ** 7, 2 ** 37];
 export function AddBotModal(props: DialogProps & Modals & { type: "add_bot" }) {
   const { t } = useLingui();
   const client = useClient();
-  const { showError } = useModals();
-  const permissionNames = usePermissionNames();
+  const titles = usePermissionTitles();
 
-  const has = (bit: number) =>
-    props.permissions !== undefined &&
-    Math.floor(props.permissions / bit) % 2 === 1;
-  const permissionName = (bit: number) =>
-    permissionNames.find(([entry]) => entry === bit)?.[1];
+  // what the link asks for, else the bot's own default permissions
+  // eslint-disable-next-line solid/reactivity
+  const asked = askedPermissions(props.invite, props.permissions) ?? 0;
+  // the person adding the bot may untick any of them
+  const [granted, setGranted] = createSignal(asked);
+  const [error, setError] = createSignal<unknown>();
 
-  // the permissions the invite link asks for, grouped by what they touch
+  const has = (bit: number) => hasBit(asked, bit);
+  const permissionName = (bit: number) => titles.name(bit);
+
+  // every permission asked for, grouped by what it touches; none is hidden
   const groups = () =>
-    [
-      {
-        title: t`Server`,
-        bits: [2 ** 1, 2 ** 0, 2 ** 2, 2 ** 3, 2 ** 24, 2 ** 20],
-      },
-      { title: t`Members`, bits: [2 ** 6, 2 ** 7, 2 ** 8, 2 ** 9, 2 ** 11] },
-      {
-        title: t`Messages`,
-        bits: [2 ** 21, 2 ** 22, 2 ** 23, 2 ** 26, 2 ** 27, 2 ** 29, 2 ** 37],
-      },
-      { title: t`Voice`, bits: [2 ** 30, 2 ** 31] },
-    ]
-      .map((group) => ({ ...group, bits: group.bits.filter(has) }))
-      .filter((group) => group.bits.length);
+    askedGroups(asked).map((group) => ({
+      title: titles.group(group.id),
+      bits: group.bits,
+    }));
 
   const [filter, setFilter] = createSignal("");
 
@@ -89,17 +92,15 @@ export function AddBotModal(props: DialogProps & Modals & { type: "add_bot" }) {
   });
 
   async function onSubmit() {
+    setError(undefined);
     try {
       const entry = availableGroups().find(
         (entry) => entry.value === group.controls.id.value[0],
       )!;
 
-      // straight to the API so errors reach the user and the link's
+      // straight to the API so errors reach the user and the ticked
       // permissions are granted on a server
-      const query =
-        entry.item instanceof Server && props.permissions
-          ? `?permissions=${props.permissions}`
-          : "";
+      const query = inviteQuery(entry.item instanceof Server, granted());
       await client().api.post(
         `/bots/${props.invite.id as ""}/invite${query as ""}`,
         entry.item instanceof Server
@@ -109,7 +110,8 @@ export function AddBotModal(props: DialogProps & Modals & { type: "add_bot" }) {
 
       props.onClose();
     } catch (error) {
-      showError(error);
+      // shown here, in the same dialog
+      setError(error);
     }
   }
 
@@ -148,7 +150,20 @@ export function AddBotModal(props: DialogProps & Modals & { type: "add_bot" }) {
               fallback={props.invite.username}
             />
             <HeaderText>
-              <Text class="title">{props.invite.username}</Text>
+              <TitleLine>
+                <Text class="title">{props.invite.username}</Text>
+                <BotLabel verified={props.invite.verified} />
+              </TitleLine>
+              <Show when={props.invite.creator}>
+                {(creator) => (
+                  <Text class="label" size="small">
+                    <Trans>
+                      Made by{" "}
+                      <bdi>{creator().displayName ?? creator().username}</bdi>
+                    </Trans>
+                  </Text>
+                )}
+              </Show>
               <Text class="label" size="small">
                 <Trans>
                   Registered since{" "}
@@ -211,6 +226,9 @@ export function AddBotModal(props: DialogProps & Modals & { type: "add_bot" }) {
               <PermsTitle>
                 <Trans>On a server the bot gets:</Trans>
               </PermsTitle>
+              <PermsHint>
+                <Trans>Untick anything you do not want to give it.</Trans>
+              </PermsHint>
               <Show when={SENSITIVE.some(has)}>
                 <Legend>
                   <Icon name="warning" size={12} />
@@ -227,13 +245,18 @@ export function AddBotModal(props: DialogProps & Modals & { type: "add_bot" }) {
                       <For each={entry.bits}>
                         {(bit) => (
                           <Perm data-sensitive={SENSITIVE.includes(bit)}>
-                            <Icon
-                              name={
-                                SENSITIVE.includes(bit) ? "warning" : "check"
+                            <Checkbox
+                              name={`permission-${bit}`}
+                              checked={hasBit(granted(), bit)}
+                              onChange={() =>
+                                setGranted((value) => toggleBit(value, bit))
                               }
-                              size={14}
-                            />
-                            <span>{permissionName(bit)}</span>
+                            >
+                              <span>{permissionName(bit)}</span>
+                              <Show when={SENSITIVE.includes(bit)}>
+                                <Icon name="warning" size={14} />
+                              </Show>
+                            </Checkbox>
                           </Perm>
                         )}
                       </For>
@@ -244,8 +267,17 @@ export function AddBotModal(props: DialogProps & Modals & { type: "add_bot" }) {
             </Perms>
           </Show>
 
-          <Note>
-            <Trans>Bots are not verified by Zrzur.</Trans>
+          <Show when={error()}>
+            <TranslatedError error={error()} />
+          </Show>
+
+          <Note data-verified={!!props.invite.verified}>
+            <Show
+              when={props.invite.verified}
+              fallback={<Trans>This bot is not verified by Zrzur.</Trans>}
+            >
+              <Trans>Zrzur verified who runs this bot.</Trans>
+            </Show>
           </Note>
         </Column>
       </form>
@@ -259,6 +291,23 @@ const Header = styled("div", {
     alignItems: "center",
     gap: "12px",
     minWidth: 0,
+  },
+});
+
+const TitleLine = styled("div", {
+  base: {
+    display: "flex",
+    alignItems: "center",
+    flexWrap: "wrap",
+    gap: "8px",
+    minWidth: 0,
+  },
+});
+
+const PermsHint = styled("div", {
+  base: {
+    fontSize: "12px",
+    color: "var(--z-fg-muted)",
   },
 });
 
@@ -371,24 +420,18 @@ const Perm = styled("div", {
   base: {
     display: "flex",
     alignItems: "flex-start",
-    gap: "6px",
     minWidth: 0,
     fontSize: "13px",
     lineHeight: "20px",
-    color: "var(--z-fg-secondary, #C4C7D6)",
-    "--z-icon-color": "var(--z-status-success, #55DCC8)",
-    "& > :first-child": {
-      flexShrink: 0,
-      // level with the first line (20px line, 14px icon)
-      marginBlockStart: "3px",
-      color: "var(--z-status-success, #55DCC8)",
-    },
-    "& > span": { minWidth: 0, overflowWrap: "anywhere" },
+    color: "var(--z-fg-secondary)",
+    "& span": { minWidth: 0, overflowWrap: "anywhere" },
+    // a permission that lets the bot change the server or remove people
     "&[data-sensitive='true']": {
-      "--z-icon-color": "var(--z-status-warning, #F3B96B)",
+      "--z-icon-color": "var(--z-status-warning)",
     },
-    "&[data-sensitive='true'] > :first-child": {
-      color: "var(--z-status-warning, #F3B96B)",
+    "&[data-sensitive='true'] svg": {
+      flexShrink: 0,
+      color: "var(--z-status-warning)",
     },
   },
 });

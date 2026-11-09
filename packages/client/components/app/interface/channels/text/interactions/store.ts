@@ -3,7 +3,14 @@ import { createStore, produce } from "solid-js/store";
 import { type Client, withoutNull } from "@zrzur/sdk/solid";
 
 import { InteractionError, interactionApi, nonce } from "./api";
-import { isInteractionEvent } from "./types";
+import { dmCommands } from "./commandList";
+import {
+  EPHEMERAL_LIFETIME_MS,
+  ephemeralExpiry,
+  ephemeralKey,
+  ephemeralStorage,
+  takeStoredEphemeral,
+} from "./ephemeralStorage";
 import type {
   ApplicationCommand,
   CreateInteraction,
@@ -15,6 +22,7 @@ import type {
   OptionChoice,
   ServerCommands,
 } from "./types";
+import { isInteractionEvent } from "./types";
 
 /** An interaction this user started and is waiting on */
 export type PendingInteraction = {
@@ -38,6 +46,8 @@ type InteractionState = {
   pending: Record<string, PendingInteraction>;
   /** Components waiting for an answer, by `messageId:customId` */
   busy: Record<string, true>;
+  /** Why a button or menu just failed, shown next to it, by `messageId:customId` */
+  componentErrors: Record<string, string>;
   modal?: {
     id: string;
     channelId: string;
@@ -54,6 +64,7 @@ const [state, setState] = createStore<InteractionState>({
   ephemeral: {},
   pending: {},
   busy: {},
+  componentErrors: {},
   commands: {},
   labels: {},
 });
@@ -62,8 +73,6 @@ export { state as interactionState };
 
 /** How long after the deadline we wait before calling it a timeout */
 const GRACE_MS = 1500;
-/** Private answers live as long as their interaction token */
-const EPHEMERAL_LIFETIME_MS = 15 * 60 * 1000;
 
 const autocompleteWaiters = new Map<
   string,
@@ -94,9 +103,14 @@ function finish(id: string) {
 
 function fail(id: string, error: string) {
   const pending = state.pending[id];
+  const key = pending?.componentKey;
   setState(
     produce((draft) => {
-      if (pending?.componentKey) delete draft.busy[pending.componentKey];
+      if (key) {
+        delete draft.busy[key];
+        // shown at the button or menu that was used
+        draft.componentErrors[key] = error;
+      }
       const entry = draft.pending[id];
       if (entry) {
         entry.state = "failed";
@@ -107,7 +121,55 @@ function fail(id: string, error: string) {
   // the message stays a little while so it can be read
   setTimeout(() => {
     if (state.pending[id]?.state === "failed") finish(id);
+    if (key && state.componentErrors[key] === error) {
+      setState(
+        produce((draft) => {
+          delete draft.componentErrors[key];
+        }),
+      );
+    }
   }, 8000);
+}
+
+/** Keep this tab's private answers for a reload */
+function saveEphemeral() {
+  if (!ephemeralOwner) return;
+  try {
+    ephemeralStorage()?.setItem(
+      ephemeralKey(ephemeralOwner),
+      JSON.stringify(state.ephemeral),
+    );
+  } catch {
+    // full or blocked storage: they just do not survive a reload
+  }
+}
+
+/** Remove a private answer when its token expires */
+function expireLater(message: EphemeralMessage) {
+  const expiry = ephemeralExpiry(message) ?? Date.now() + EPHEMERAL_LIFETIME_MS;
+  setTimeout(
+    () => dismissEphemeral(message.channel_id, message._id),
+    Math.max(expiry - Date.now(), 0),
+  );
+}
+/** The account whose private answers are in memory */
+let ephemeralOwner: string | undefined;
+
+/**
+ * Private answers of this tab survive a reload until they expire, for the
+ * account that received them only: another account signing in starts empty
+ * and the old answers are removed.
+ */
+export function useEphemeralFor(userId: string | undefined) {
+  if (!userId || userId === ephemeralOwner) return;
+  ephemeralOwner = userId;
+  const restored = takeStoredEphemeral(ephemeralStorage(), userId, Date.now());
+  setState(
+    produce((draft) => {
+      draft.ephemeral = restored;
+    }),
+  );
+  for (const list of Object.values(restored)) list.forEach(expireLater);
 }
 
 function addEphemeral(message: EphemeralMessage) {
@@ -119,10 +181,8 @@ function addEphemeral(message: EphemeralMessage) {
       else list.push(message);
     }),
   );
-  setTimeout(
-    () => dismissEphemeral(message.channel_id, message._id),
-    EPHEMERAL_LIFETIME_MS,
-  );
+  saveEphemeral();
+  expireLater(message);
 }
 
 export function dismissEphemeral(channelId: string, messageId: string) {
@@ -130,10 +190,13 @@ export function dismissEphemeral(channelId: string, messageId: string) {
     produce((draft) => {
       const list = draft.ephemeral[channelId];
       if (list) {
-        draft.ephemeral[channelId] = list.filter((m) => m._id !== messageId);
+        const left = list.filter((m) => m._id !== messageId);
+        if (left.length) draft.ephemeral[channelId] = left;
+        else delete draft.ephemeral[channelId];
       }
     }),
   );
+  saveEphemeral();
 }
 
 function onEvent(event: InteractionEvent) {
@@ -186,19 +249,36 @@ function onEvent(event: InteractionEvent) {
         remember(earlyChoices, event.id, event.choices);
       }
       break;
-    case "ApplicationCommandsUpdate":
-      commandRequests.delete(event.server_id);
-      setState(
-        produce((draft) => {
-          delete draft.commands[event.server_id];
-        }),
-      );
+    case "ApplicationCommandsUpdate": {
+      // the server's lists (whole and per channel) and, as a bot's global
+      // commands may have changed, the DM lists load again; answers still
+      // on their way are dropped (see `loadInto`)
+      const stale = (key: string) =>
+        key === event.server_id ||
+        key.startsWith(`${event.server_id}#`) ||
+        key.startsWith("dm:");
+      const keys = new Set([
+        ...Object.keys(state.commands),
+        ...commandRequests.keys(),
+      ]);
+      for (const key of keys) {
+        if (!stale(key)) continue;
+        commandRequests.delete(key);
+        generations.set(key, (generations.get(key) ?? 0) + 1);
+        setState(
+          produce((draft) => {
+            delete draft.commands[key];
+          }),
+        );
+      }
       break;
+    }
   }
 }
 
 /** Listen to the gateway once per client */
 export function attachInteractions(client: Client) {
+  useEphemeralFor(client.user?.id);
   if (attached.has(client)) return;
   attached.add(client);
   client.events.on("event", (event) => {
@@ -206,22 +286,92 @@ export function attachInteractions(client: Client) {
   });
 }
 
-/** Commands of the bots installed in a server, fetched once until they change */
-export function loadServerCommands(client: Client, serverId: string) {
-  if (state.commands[serverId])
-    return Promise.resolve(state.commands[serverId]);
-  let request = commandRequests.get(serverId);
+/**
+ * Where a channel's commands come from: its server, asked for this channel
+ * so the server's channel rules apply (`<server>#<channel>`), or the bot of a
+ * DM with a bot (`dm:<bot id>`). Nothing for groups and DMs with people.
+ */
+export function commandsKey(channel: {
+  id: string;
+  type: string;
+  serverId?: string;
+  /** The channel a thread or forum post is in */
+  parentId?: string;
+  recipient?: { id: string; bot?: unknown };
+}): string | undefined {
+  // a thread follows the rules of its channel, as the server does
+  if (channel.type === "TextChannel" && channel.serverId)
+    return `${channel.serverId}#${channel.parentId ?? channel.id}`;
+  if (channel.type === "DirectMessage" && channel.recipient?.bot)
+    return `dm:${channel.recipient.id}`;
+  return undefined;
+}
+
+/** Load the commands for a key from `commandsKey` */
+export function loadCommands(client: Client, key: string) {
+  if (key.startsWith("dm:")) return loadDmCommands(client, key.slice(3));
+  const [serverId, channelId] = key.split("#");
+  return channelId
+    ? loadChannelCommands(client, serverId, channelId)
+    : loadServerCommands(client, serverId);
+}
+
+/** Bumped when a list goes stale, so an answer already on its way is dropped */
+const generations = new Map<string, number>();
+
+/** Fetch a list once per key until it changes; stale answers are not kept */
+function loadInto(key: string, fetch: () => Promise<ServerCommands>) {
+  if (state.commands[key]) return Promise.resolve(state.commands[key]);
+  let request = commandRequests.get(key);
   if (!request) {
-    request = interactionApi
-      .serverCommands(client, serverId)
-      .then((commands) => {
-        setState("commands", serverId, commands);
-        return commands;
-      });
-    request.catch(() => commandRequests.delete(serverId));
-    commandRequests.set(serverId, request);
+    const generation = generations.get(key) ?? 0;
+    request = fetch().then((commands) => {
+      if ((generations.get(key) ?? 0) === generation) {
+        setState("commands", key, commands);
+      }
+      return commands;
+    });
+    request.catch(() => {
+      if (commandRequests.get(key) === request) commandRequests.delete(key);
+    });
+    commandRequests.set(key, request);
   }
   return request;
+}
+
+/** The commands this member may use in one channel of a server */
+export function loadChannelCommands(
+  client: Client,
+  serverId: string,
+  channelId: string,
+) {
+  return loadInto(`${serverId}#${channelId}`, () =>
+    interactionApi.serverCommands(client, serverId, channelId),
+  );
+}
+
+/** A bot's global commands for the DM with it, fetched once until they change */
+export function loadDmCommands(client: Client, botId: string) {
+  return loadInto(`dm:${botId}`, () =>
+    interactionApi.botCommands(client, botId).then((commands) => {
+      const user = client.users.get(botId);
+      return dmCommands(
+        {
+          _id: botId,
+          username: user?.username ?? "",
+          display_name: user?.displayName,
+        },
+        commands,
+      );
+    }),
+  );
+}
+
+/** Commands of the bots installed in a server, fetched once until they change */
+export function loadServerCommands(client: Client, serverId: string) {
+  return loadInto(serverId, () =>
+    interactionApi.serverCommands(client, serverId),
+  );
 }
 
 async function start(
@@ -229,7 +379,15 @@ async function start(
   data: CreateInteraction,
   extra: { label?: string; componentKey?: string },
 ) {
-  if (extra.componentKey) setState("busy", extra.componentKey, true);
+  if (extra.componentKey) {
+    setState("busy", extra.componentKey, true);
+    // a new try clears the last error
+    setState(
+      produce((draft) => {
+        delete draft.componentErrors[extra.componentKey!];
+      }),
+    );
+  }
   try {
     const accepted = await interactionApi.create(client, data);
     // a retried request returns an interaction we may already track
@@ -295,6 +453,7 @@ async function start(
       applicationId: data.application_id ?? "",
       label: extra.label,
       state: "pending",
+      componentKey: extra.componentKey,
       createdAt: Date.now(),
     });
     fail(id, error instanceof InteractionError ? error.type : "Unknown");
@@ -377,9 +536,18 @@ export function closeModal() {
   setState("modal", undefined);
 }
 
+/** The bot did not send suggestions in time */
+export class AutocompleteTimeout extends Error {
+  constructor() {
+    super("The bot did not answer");
+    this.name = "AutocompleteTimeout";
+  }
+}
+
 /**
- * Ask the bot for suggestions. Resolves with no choices on timeout or when
- * `signal` aborts (a newer keystroke).
+ * Ask the bot for suggestions. Resolves with no choices when `signal`
+ * aborts (a newer keystroke); rejects with `AutocompleteTimeout` when the
+ * bot does not answer in time, so "no matches" and "no answer" differ.
  */
 export async function requestAutocomplete(
   client: Client,
@@ -409,10 +577,10 @@ export async function requestAutocomplete(
     earlyChoices.delete(accepted._id);
     return early;
   }
-  return new Promise((resolve) => {
+  return new Promise((resolve, reject) => {
     const timer = setTimeout(() => {
       autocompleteWaiters.delete(accepted._id);
-      resolve([]);
+      reject(new AutocompleteTimeout());
     }, 3000 + GRACE_MS);
     signal.addEventListener("abort", () => {
       clearTimeout(timer);

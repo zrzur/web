@@ -501,7 +501,9 @@ function Member(props: {
                   userStyle={(props.user ?? props.member?.user)?.style}
                 />
                 <Show when={(props.user ?? props.member?.user)?.bot}>
-                  <BotLabel />
+                  <BotLabel
+                    verified={(props.user ?? props.member?.user)?.verifiedBot}
+                  />
                 </Show>
                 <Show
                   when={

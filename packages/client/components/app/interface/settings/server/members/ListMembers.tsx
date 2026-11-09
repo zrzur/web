@@ -44,7 +44,10 @@ export function ListServerMembers(props: { server: Server }) {
   const query = useInfiniteQuery(() => ({
     queryKey: ["members", props.server.id],
     queryFn: ({ pageParam }: { pageParam: string | undefined }) =>
-      fetchMemberPage(client(), props.server, { limit: 1000, after: pageParam }),
+      fetchMemberPage(client(), props.server, {
+        limit: 1000,
+        after: pageParam,
+      }),
     initialPageParam: undefined as string | undefined,
     getNextPageParam: (last: { next?: string }) => last.next,
   }));
@@ -211,7 +214,7 @@ export function ListServerMembers(props: { server: Server }) {
                           user()?.displayName ??
                           user()?.username}
                         <Show when={user()?.bot}>
-                          <BotLabel />
+                          <BotLabel verified={user()?.verifiedBot} />
                         </Show>
                         <Show when={props.server.ownerId === member.id.user}>
                           <BadgeMark id="server_owner" size="xs" mode="hover" />

@@ -79,10 +79,12 @@ msgstr "(مُعدّلة)"
 #~ msgid "{0, plural, =0 {No mutual servers} one {# mutual server} other {# mutual servers}}"
 #~ msgstr "{0, plural, =0 {لا سيرفرات مشتركة} one {سيرفر مشترك واحد} two {سيرفران مشتركان} few {# سيرفرات مشتركة} many {# سيرفرًا مشتركًا} other {# سيرفر مشترك}}"
 
+#. placeholder {0}: bot().serverCount
 #. placeholder {0}: props.count
 #. placeholder {0}: props.entry.count
 #: components/app/interface/discover/Cards.tsx
 #: components/app/interface/discover/ReviewQueue.tsx
+#: components/ui/components/features/profiles/ProfileBotAbout.tsx
 msgid "{0, plural, =0 {Not in any servers yet} one {In # server} other {In # servers}}"
 msgstr "{0, plural, =0 {ليس في أي سيرفر بعد} one {في سيرفر واحد} two {في سيرفرين} few {في # سيرفرات} many {في # سيرفرًا} other {في # سيرفر}}"
 
@@ -158,6 +160,11 @@ msgstr "{0, plural, zero {لا إشارات جديدة} one {إشارة جديد
 #: src/interface/Discover.tsx
 msgid "{0, plural, one {# result} other {# results}}"
 msgstr "{0, plural, zero {لا نتائج} one {نتيجة واحدة} two {نتيجتان} few {# نتائج} many {# نتيجة} other {# نتيجة}}"
+
+#. placeholder {0}: props.rules
+#: components/app/interface/settings/server/apps/ServerAppPage.tsx
+msgid "{0, plural, one {# rule} other {# rules}}"
+msgstr "{0, plural, zero {لا قواعد} one {قاعدة واحدة} two {قاعدتان} few {# قواعد} many {# قاعدةً} other {# قاعدة}}"
 
 #. placeholder {0}: items().length
 #: components/ui/components/utils/files/FileDropAnywhereCollector.tsx
@@ -1041,9 +1048,17 @@ msgstr "سمة فاتحة هادئة بألوان الورق الناعمة، م
 msgid "A card with the Hijri date when someone joins or leaves."
 msgstr "بطاقة بالتاريخ الهجري عند انضمام أحد أو مغادرته."
 
+#: components/app/interface/settings/server/apps/RulesEditor.tsx
+msgid "A channel"
+msgstr "قناة"
+
 #: components/app/interface/settings/user/bots/CommandManager.tsx
 msgid "A command of this type already has this name."
 msgstr "يوجد أمر من هذا النوع بهذا الاسم."
+
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "A command typed in full is chosen too."
+msgstr "يُختار الأمر المكتوب كاملًا أيضًا."
 
 #: components/i18n/errors.tsx
 msgid "A command with this name already exists."
@@ -1117,6 +1132,10 @@ msgstr "تحتاج المجموعة إلى أمر فرعي واحد على ال�
 msgid "A language tag is not valid."
 msgstr "أحد رموز اللغات غير صالح."
 
+#: components/app/interface/settings/server/apps/RulesEditor.tsx
+msgid "A member"
+msgstr "عضو"
+
 #: components/ui/components/features/profiles/badges/useBadgeText.ts
 msgid "A member of the official Zrzur team. Server moderators don't get this badge."
 msgstr "عضو في فريق زرزور الرسمي. مشرفو السيرفرات لا يحصلون على هذه الشارة."
@@ -1168,6 +1187,10 @@ msgstr "سأل أحد المراجعين:"
 #: components/app/interface/settings/user/profile/CreatorStudio.tsx
 msgid "A reviewer looks at your effect first. It goes live when they approve it. Effects are free."
 msgstr "يطّلع مراجع على مؤثرك أولًا، ويصبح متاحًا عند موافقته. والمؤثرات مجانية."
+
+#: components/app/interface/settings/server/apps/RulesEditor.tsx
+msgid "A role"
+msgstr "دور"
 
 #: src/interface/Developers.tsx
 msgid "A secret exists. Resetting it stops the old one at once."
@@ -1284,6 +1307,7 @@ msgid "About the SDKs"
 msgstr "عن حزم التطوير"
 
 #: components/app/interface/discover/Detail.tsx
+#: components/ui/components/features/profiles/ProfileBotAbout.tsx
 msgid "About this bot"
 msgstr "عن هذا البوت"
 
@@ -1638,6 +1662,7 @@ msgstr "أضف الأشخاص باسم المستخدم لتتحدثوا وتت�
 msgid "Add reaction"
 msgstr "إضافة تفاعل"
 
+#: components/app/interface/settings/server/apps/RulesEditor.tsx
 #: components/app/interface/settings/server/AutoModSettings.tsx
 msgid "Add rule"
 msgstr "أضف قاعدة"
@@ -1693,15 +1718,35 @@ msgstr "أضف زرزور المساعد إلى هذا السيرفر أولاً
 msgid "Add…"
 msgstr "إضافة…"
 
+#. placeholder {0}: new Date(install!.installed_at).toLocaleDateString()
+#: components/app/interface/settings/server/ServerApps.tsx
+msgid "Added {0}"
+msgstr "أُضيف في {0}"
+
+#: components/app/interface/settings/server/apps/ServerAppPage.tsx
+msgid "Added before Zrzur kept a record of who adds apps."
+msgstr "أُضيف قبل أن يحتفظ زرزور بسجلّ لمن يضيف التطبيقات."
+
 #. placeholder {0}: emoji.creator!.displayName
 #: components/app/interface/settings/server/emojis/EmojiList.tsx
 msgid "Added by {0}"
 msgstr "أضافها {0}"
 
+#. placeholder {0}: installer()!.displayName ?? installer()!.username
+#. placeholder {1}: date(install().installed_at)
+#: components/app/interface/settings/server/apps/ServerAppPage.tsx
+msgid "Added by <0>{0}</0> on {1}"
+msgstr "أضافه <0>{0}</0> في {1}"
+
 #. placeholder {0}: a.name
 #: components/app/interface/settings/server/audit/AuditLog.tsx
 msgid "added emoji :{0}:"
 msgstr "أضاف الإيموجي :{0}:"
+
+#. placeholder {0}: date(install().installed_at)
+#: components/app/interface/settings/server/apps/ServerAppPage.tsx
+msgid "Added on {0}"
+msgstr "أُضيف في {0}"
 
 #. placeholder {0}: userName(raw.bot)
 #: components/app/interface/settings/server/audit/AuditLog.tsx
@@ -1789,6 +1834,7 @@ msgstr "التنبيهات"
 msgid "Algeria"
 msgstr "الجزائر"
 
+#: components/app/interface/settings/server/webhooks/ServerWebhooks.tsx
 #: components/app/interface/settings/user/plugins/BrowseTab.tsx
 #: components/app/interface/settings/user/profile/CommunityGallery.tsx
 #: components/app/interface/settings/user/profile/StyleEditors.tsx
@@ -1828,6 +1874,10 @@ msgstr "كل البوتات"
 #: components/app/interface/settings/user/profile/ReviewQueue.tsx
 msgid "All caught up. Nothing waiting here."
 msgstr "لا شيء متبقٍ. لا يوجد ما ينتظر هنا."
+
+#: components/app/interface/settings/server/apps/ServerAppPage.tsx
+msgid "All commands"
+msgstr "كل الأوامر"
 
 #: src/interface/designs/Makers.tsx
 msgid "All creators"
@@ -1905,6 +1955,7 @@ msgid "All types"
 msgstr "كل الأنواع"
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
+#: components/app/interface/settings/server/apps/RulesEditor.tsx
 #: components/ui/components/design/Switch.tsx
 msgid "Allow"
 msgstr "سماح"
@@ -1941,6 +1992,15 @@ msgstr "اسمح بالوصول إلى الميكروفون لترى مستوى 
 #: components/rtc/messages.ts
 msgid "Allow microphone or camera access in your browser settings."
 msgstr "اسمح باستخدام الميكروفون أو الكاميرا من إعدادات المتصفح."
+
+#: components/app/interface/settings/server/apps/RulesEditor.tsx
+msgid "Allow or deny"
+msgstr "سماح أو رفض"
+
+#. placeholder {0}: name(rule())
+#: components/app/interface/settings/server/apps/RulesEditor.tsx
+msgid "Allow or deny {0}"
+msgstr "السماح لـ{0} أو رفضه"
 
 #: components/app/interface/settings/shared/Discoverable.tsx
 #~ msgid "Allow others to add your bot to their servers from Discover"
@@ -2219,6 +2279,10 @@ msgstr "كل ما يزال ينشر عبر عنوانه سيتوقف عن الع
 msgid "API changelog"
 msgstr "سجل تغييرات واجهة البرمجة"
 
+#: components/app/interface/settings/ServerSettings.tsx
+msgid "App"
+msgstr "تطبيق"
+
 #: components/app/interface/settings/server/LobbySettings.tsx
 #~ msgid "App colour"
 #~ msgstr "لون التطبيق"
@@ -2349,6 +2413,10 @@ msgstr "تمت الموافقة"
 #: components/app/menus/shared/AppsSubMenu.tsx
 msgid "Apps"
 msgstr "التطبيقات"
+
+#: components/app/interface/settings/server/audit/AuditLog.tsx
+msgid "Apps and bots"
+msgstr "التطبيقات والبوتات"
 
 #: src/interface/OAuth.tsx
 msgid "Apps you allowed to use your account. Revoking one ends its access at once; bots it added stay in servers until their managers remove them."
@@ -2492,6 +2560,10 @@ msgstr "اطلب الانضمام"
 msgid "Asked {0}"
 msgstr "طلب {0}"
 
+#: components/app/interface/channels/text/interactions/CommandPicker.tsx
+msgid "Asking the bot for suggestions…"
+msgstr "جارٍ طلب الاقتراحات من البوت…"
+
 #: components/app/interface/settings/user/Keybinds.tsx
 msgid "Asks first if you changed something."
 msgstr "يسأل أولًا إن غيّرت شيئًا."
@@ -2505,6 +2577,7 @@ msgid "Assign lower-ranked roles to lower-ranking members"
 msgstr "منح الأدوار الأدنى رتبة للأعضاء الأدنى رتبة"
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
+#: components/modal/modals/permissionTitles.ts
 #: src/interface/OAuth.tsx
 msgid "Assign roles"
 msgstr "منح الأدوار"
@@ -2624,6 +2697,7 @@ msgstr "تطبيق المصادقة"
 msgid "Authorize"
 msgstr "تفويض"
 
+#: components/app/interface/settings/UserSettings.tsx
 #: src/interface/OAuth.tsx
 msgid "Authorized apps"
 msgstr "التطبيقات المصرّح لها"
@@ -2772,6 +2846,7 @@ msgstr "حظر العضو"
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 #: components/app/interface/settings/server/layout.tsx
+#: components/modal/modals/permissionTitles.ts
 #: src/interface/OAuth.tsx
 msgid "Ban members"
 msgstr "حظر الأعضاء"
@@ -3043,6 +3118,10 @@ msgstr "إساءة استخدام البوت"
 msgid "Bot badges"
 msgstr "شارات البوت"
 
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "Bot commands"
+msgstr "أوامر البوتات"
+
 #: components/app/interface/safety/labels.tsx
 msgid "Bot disabled"
 msgstr "تم تعطيل البوت"
@@ -3098,8 +3177,8 @@ msgstr "البوتات والويب هوك."
 #~ msgstr "البوتات حسابات تتحكم بها عبر واجهة البرمجة. تخضع البوتات التي تنشئها لسياسة الاستخدام المقبول."
 
 #: components/modal/modals/AddBot.tsx
-msgid "Bots are not verified by Zrzur."
-msgstr "البوتات غير موثّقة من زرزور."
+#~ msgid "Bots are not verified by Zrzur."
+#~ msgstr "البوتات غير موثّقة من زرزور."
 
 #: src/interface/developers/docs/Directives.tsx
 msgid "Bots are refused; listed so you know."
@@ -3345,6 +3424,7 @@ msgstr "من تصميم <0>{0}</0>"
 #~ msgstr "بإنشائك هذا السيرفر، فإنك توافق على <0>سياسة الاستخدام المقبول</0>."
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
+#: components/modal/modals/permissionTitles.ts
 msgid "Bypass slowmode"
 msgstr "تجاوز الوضع البطيء"
 
@@ -3629,6 +3709,7 @@ msgstr "تغيير الوصول"
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 #: components/app/interface/settings/user/profile/UserProfileEditor.tsx
+#: components/modal/modals/permissionTitles.ts
 msgid "Change avatar"
 msgstr "تغيير الصورة الرمزية"
 
@@ -3682,6 +3763,7 @@ msgid "Change nameplate"
 msgstr "تغيير لوحة الاسم"
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
+#: components/modal/modals/permissionTitles.ts
 msgid "Change nickname"
 msgstr "تغيير اللقب"
 
@@ -3779,6 +3861,16 @@ msgstr "غيّر أدوار {0}"
 #: components/app/interface/settings/server/audit/AuditLog.tsx
 msgid "changed permissions of {0} in {1}"
 msgstr "غيّر صلاحيات العضو {0} في {1}"
+
+#. placeholder {0}: userName(raw.bot)
+#: components/app/interface/settings/server/audit/AuditLog.tsx
+msgid "changed who can use a command of {0}"
+msgstr "غيّر من يستطيع استخدام أحد أوامر {0}"
+
+#. placeholder {0}: userName(raw.bot)
+#: components/app/interface/settings/server/audit/AuditLog.tsx
+msgid "changed who can use the commands of {0}"
+msgstr "غيّر من يستطيع استخدام أوامر {0}"
 
 #: components/app/interface/settings/user/plugins/PluginDetail.tsx
 msgid "Changes how notifications are shown"
@@ -4035,6 +4127,10 @@ msgstr "اختر حزمة `.zplugin.json` (أو ملف manifest) لفحصها، 
 #: components/app/interface/channels/text/interactions/CommandPicker.tsx
 #~ msgid "Choose a channel…"
 #~ msgstr "اختر قناة…"
+
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "Choose a command or a suggestion"
+msgstr "اختيار أمر أو اقتراح"
 
 #: components/app/interface/channels/text/interactions/CommandPicker.tsx
 #: components/app/interface/channels/text/interactions/InteractionModal.tsx
@@ -4396,6 +4492,10 @@ msgstr "إغلاق الإعدادات"
 msgid "Close settings (Esc)"
 msgstr "إغلاق الإعدادات (Esc)"
 
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "Close the command list"
+msgstr "إغلاق قائمة الأوامر"
+
 #: components/app/interface/safety/labels.tsx
 #: components/app/interface/settings/user/badges/BugQueue.tsx
 #: components/app/interface/settings/user/support/ContactSupport.tsx
@@ -4539,6 +4639,10 @@ msgstr "الأوامر"
 #: src/interface/developers/docs/DocsPortal.tsx
 #~ msgid "Commands and interactions"
 #~ msgstr "الأوامر والتفاعلات"
+
+#: components/app/interface/settings/server/apps/ServerAppPage.tsx
+msgid "Commands and who can use them"
+msgstr "الأوامر ومن يستطيع استخدامها"
 
 #: components/app/interface/settings/user/bots/CommandManager.tsx
 msgid "Commands imported and saved."
@@ -4716,6 +4820,7 @@ msgstr "الكونغو"
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 #: components/app/interface/settings/server/assistant/AssistantPage.tsx
+#: components/modal/modals/permissionTitles.ts
 msgid "Connect"
 msgstr "اتصال"
 
@@ -5035,6 +5140,10 @@ msgstr "تعذّر نسخ معرّف المستخدم."
 msgid "Couldn't fetch Zrzur configuration from {hStr}."
 msgstr "تعذر جلب إعدادات زرزور من {hStr}."
 
+#: components/app/interface/channels/text/interactions/CommandPicker.tsx
+msgid "Couldn't get suggestions. Type a value yourself."
+msgstr "تعذّر جلب الاقتراحات. اكتب قيمة بنفسك."
+
 #: components/ui/components/features/messaging/composition/picker/GifPicker.tsx
 msgid "Couldn't load GIFs"
 msgstr "تعذّر تحميل صور GIF"
@@ -5043,9 +5152,17 @@ msgstr "تعذّر تحميل صور GIF"
 msgid "Couldn't load the bots."
 msgstr "تعذّر تحميل البوتات."
 
+#: components/app/interface/channels/text/interactions/CommandPicker.tsx
+msgid "Couldn't load the commands. Press Enter again to send it as a message."
+msgstr "تعذّر تحميل الأوامر. اضغط Enter مرة أخرى لإرسالها رسالةً."
+
 #: components/app/interface/settings/user/bots/PrivilegedIntents.tsx
 msgid "Couldn't load the saved intents."
 msgstr "تعذّر تحميل النيّات المحفوظة."
+
+#: components/app/interface/settings/server/apps/ServerAppPage.tsx
+msgid "Couldn't load this app."
+msgstr "تعذّر تحميل هذا التطبيق."
 
 #: components/ui/components/design/ImageCropper.tsx
 msgid "Couldn't load this image."
@@ -5058,6 +5175,10 @@ msgstr "تعذّر تحميل هذا الملف الشخصي."
 #: components/ui/components/features/messaging/elements/MediaPlayer.tsx
 msgid "Couldn't play this media."
 msgstr "تعذّر تشغيل هذا الملف."
+
+#: components/app/interface/channels/text/interactions/errorText.ts
+msgid "Couldn't reach the bot. Try again."
+msgstr "تعذّر الوصول إلى البوت. حاول مرة أخرى."
 
 #: components/app/interface/settings/user/bots/ViewBot.tsx
 #~ msgid "Couldn't save. Try again."
@@ -5163,6 +5284,7 @@ msgid "Create channel"
 msgstr "إنشاء قناة"
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
+#: components/modal/modals/permissionTitles.ts
 msgid "Create forum posts"
 msgstr "إنشاء منشورات في المنتديات"
 
@@ -5235,6 +5357,7 @@ msgid "Create server emoji"
 msgstr "إنشاء إيموجي للسيرفر"
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
+#: components/modal/modals/permissionTitles.ts
 msgid "Create threads"
 msgstr "إنشاء خيوط"
 
@@ -5590,6 +5713,7 @@ msgid "Deafen lower-ranking members in voice call"
 msgstr "كتم سماعة الأعضاء الأدنى رتبة في المكالمات الصوتية"
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
+#: components/modal/modals/permissionTitles.ts
 msgid "Deafen members"
 msgstr "كتم سماعة الأعضاء"
 
@@ -5881,6 +6005,7 @@ msgstr "حذف {0} رسالة في {1}"
 msgid "deleted a message by {0} in {1}"
 msgstr "حذف رسالة لـ {0} في {1}"
 
+#: components/app/interface/settings/server/apps/RulesEditor.tsx
 #: components/app/interface/settings/server/audit/AuditLog.tsx
 msgid "deleted channel"
 msgstr "قناة محذوفة"
@@ -5897,6 +6022,10 @@ msgstr "حذف الدعوة {0}"
 
 #: components/app/interface/settings/server/audit/AuditLog.tsx
 msgid "deleted role"
+msgstr "دور محذوف"
+
+#: components/app/interface/settings/server/apps/RulesEditor.tsx
+msgid "Deleted role"
 msgstr "دور محذوف"
 
 #. placeholder {0}: a.name
@@ -5931,6 +6060,7 @@ msgstr "الكثافة"
 
 #: components/app/interface/discover/ReviewQueue.tsx
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
+#: components/app/interface/settings/server/apps/RulesEditor.tsx
 #: components/ui/components/design/Switch.tsx
 msgid "Deny"
 msgstr "رفض"
@@ -6984,6 +7114,10 @@ msgstr "الأحداث"
 msgid "Every bird in this flock is a design for your Zrzur profile. Tap one and it lands on you."
 msgstr "كل طائر في هذا السرب تصميم لملفك الشخصي في زرزور. المسه فيحطّ عليك."
 
+#: components/app/interface/settings/server/apps/RulesEditor.tsx
+msgid "Every channel"
+msgstr "كل القنوات"
+
 #: components/app/interface/settings/server/ServerOwnership.tsx
 msgid "Every channel and message is removed and it can't be undone. Type the server name to confirm. If you use two-step sign-in, you will be asked for your code next."
 msgstr "تُحذف كل القنوات والرسائل ولا يمكن التراجع. اكتب اسم السيرفر للتأكيد. إن كنت تستخدم التحقق بخطوتين فسيُطلب منك رمزك بعد ذلك."
@@ -7038,6 +7172,7 @@ msgstr "كل جناح يرفع هذا السيرفر لكل من فيه. أي ع
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsOverview.tsx
 #: components/app/interface/settings/ChannelSettings.tsx
+#: components/app/interface/settings/server/apps/RulesEditor.tsx
 #: components/app/interface/settings/server/audit/AuditLog.tsx
 #: components/app/interface/settings/server/roles/ServerRoleOverview.tsx
 #: components/app/interface/settings/ServerSettings.tsx
@@ -7788,7 +7923,7 @@ msgctxt "search filter"
 msgid "From"
 msgstr "من"
 
-#. placeholder {0}: target().place
+#. placeholder {0}: `⁨${target().place}⁩`
 #. placeholder {1}: sentAt()
 #: components/app/interface/channels/text/ForwardedFrame.tsx
 msgid "From {0} · {1}"
@@ -8925,6 +9060,10 @@ msgstr "في"
 msgid "in {0} since {1}"
 msgstr "في {0} منذ {1}"
 
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "In a server channel or a DM with a bot."
+msgstr "في قناة سيرفر أو في محادثة خاصة مع بوت."
+
 #: components/app/interface/settings/user/profile/StyleEditors.tsx
 #~ msgid "In a server, a role colour wins over yours, but your font stays."
 #~ msgstr "داخل السيرفر يتقدّم لون الدور على لونك، لكن خطك يبقى."
@@ -9177,6 +9316,7 @@ msgid "Invite link"
 msgstr "رابط الدعوة"
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
+#: components/modal/modals/permissionTitles.ts
 msgid "Invite others"
 msgstr "دعوة الآخرين"
 
@@ -9657,6 +9797,7 @@ msgstr "طرد العضو"
 #~ msgstr "طرد العضو"
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
+#: components/modal/modals/permissionTitles.ts
 #: src/interface/OAuth.tsx
 msgid "Kick members"
 msgstr "طرد الأعضاء"
@@ -10098,6 +10239,7 @@ msgid "Listed on Discover."
 msgstr "مدرج في «اكتشف»."
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
+#: components/modal/modals/permissionTitles.ts
 msgid "Listen"
 msgstr "استماع"
 
@@ -10188,6 +10330,10 @@ msgstr "جارٍ تحميل القواعد…"
 msgid "Loading the audit log…"
 msgstr "جارٍ تحميل سجل التدقيق…"
 
+#: components/app/interface/channels/text/interactions/CommandPicker.tsx
+msgid "Loading the commands…"
+msgstr "جارٍ تحميل الأوامر…"
+
 #. placeholder {0}: props.company
 #: components/ui/components/features/messaging/elements/SpecialEmbedPlaceholder.tsx
 msgid "Loading this connects to {0}. They get your IP address and may store cookies."
@@ -10197,6 +10343,7 @@ msgstr "يؤدي التحميل إلى الاتصال بـ {0}. يتلقّى {0}
 #~ msgid "Loading your bots…"
 #~ msgstr "جارٍ تحميل بوتاتك…"
 
+#: components/app/interface/settings/server/apps/ServerAppPage.tsx
 #: components/app/interface/settings/server/ServerApps.tsx
 #: components/app/interface/settings/server/webhooks/ServerWebhooks.tsx
 #: components/app/interface/settings/user/badges/MyBadges.tsx
@@ -10441,6 +10588,19 @@ msgstr "أنشأ عنوانًا جديدًا للويب هوك {0}"
 msgid "Made by"
 msgstr "من تصميم"
 
+#. placeholder {0}: creator().displayName ?? creator().username
+#: components/modal/modals/AddBot.tsx
+msgid "Made by <0>{0}</0>"
+msgstr "من صنع <0>{0}</0>"
+
+#: components/app/interface/settings/server/webhooks/ServerWebhooks.tsx
+msgid "Made by bots"
+msgstr "أنشأتها البوتات"
+
+#: components/app/interface/settings/server/webhooks/ServerWebhooks.tsx
+msgid "Made by people"
+msgstr "أنشأها أشخاص"
+
 #: src/interface/Designs.tsx
 #~ msgid "Made by verified creators"
 #~ msgstr "من تصميم مصممين معتمدين"
@@ -10603,6 +10763,7 @@ msgstr "إدارة الشارات"
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 #: components/app/interface/settings/server/layout.tsx
+#: components/modal/modals/permissionTitles.ts
 msgid "Manage channel"
 msgstr "إدارة القناة"
 
@@ -10621,6 +10782,7 @@ msgstr "إدارة المصممين"
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 #: components/app/interface/settings/server/layout.tsx
+#: components/modal/modals/permissionTitles.ts
 msgid "Manage customisation"
 msgstr "إدارة التخصيص"
 
@@ -10629,10 +10791,12 @@ msgstr "إدارة التخصيص"
 #~ msgstr "إدارة التخصيص"
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
+#: components/modal/modals/permissionTitles.ts
 msgid "Manage join requests"
 msgstr "إدارة طلبات الانضمام"
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
+#: components/modal/modals/permissionTitles.ts
 #: src/interface/OAuth.tsx
 msgid "Manage messages"
 msgstr "إدارة الرسائل"
@@ -10642,6 +10806,7 @@ msgstr "إدارة الرسائل"
 #~ msgstr "إدارة الرسائل"
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
+#: components/modal/modals/permissionTitles.ts
 #: src/interface/OAuth.tsx
 msgid "Manage nicknames"
 msgstr "إدارة الألقاب"
@@ -10655,6 +10820,7 @@ msgid "Manage own designs"
 msgstr "إدارة تصاميمه"
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
+#: components/modal/modals/permissionTitles.ts
 #: src/interface/OAuth.tsx
 msgid "Manage permissions"
 msgstr "إدارة الصلاحيات"
@@ -10665,6 +10831,7 @@ msgstr "إدارة الصلاحيات"
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 #: components/app/interface/settings/server/layout.tsx
+#: components/modal/modals/permissionTitles.ts
 #: src/interface/OAuth.tsx
 msgid "Manage roles"
 msgstr "إدارة الأدوار"
@@ -10675,6 +10842,7 @@ msgstr "إدارة الأدوار"
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 #: components/app/interface/settings/server/layout.tsx
+#: components/modal/modals/permissionTitles.ts
 #: src/interface/OAuth.tsx
 msgid "Manage server"
 msgstr "إدارة السيرفر"
@@ -10697,6 +10865,7 @@ msgstr "إدارة البرنامج التجريبي"
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 #: components/app/interface/settings/server/layout.tsx
+#: components/modal/modals/permissionTitles.ts
 #: src/interface/OAuth.tsx
 msgid "Manage webhooks"
 msgstr "إدارة الويب هوك"
@@ -10704,6 +10873,10 @@ msgstr "إدارة الويب هوك"
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 #~ msgid "Manage Webhooks"
 #~ msgstr "إدارة الويب هوك"
+
+#: components/app/interface/settings/server/apps/ServerAppPage.tsx
+msgid "Managed by the app. Change what it may do in the role."
+msgstr "يديره التطبيق. غيّر ما يُسمح له به من خلال الدور."
 
 #: components/app/interface/settings/server/assistant/labels.ts
 msgid "Manager"
@@ -10769,6 +10942,7 @@ msgid "Marshall Islands"
 msgstr "جزر مارشال"
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
+#: components/modal/modals/permissionTitles.ts
 msgid "Masquerade"
 msgstr "التنكّر"
 
@@ -10900,7 +11074,7 @@ msgstr "عضو منذ {0}"
 #: components/app/interface/settings/server/channels/ChannelExtras.tsx
 #: components/app/interface/settings/ServerSettings.tsx
 #: components/modal/lib/serverTemplateText.ts
-#: components/modal/modals/AddBot.tsx
+#: components/modal/modals/permissionTitles.ts
 #: src/interface/designs/Mirror.tsx
 msgid "Members"
 msgstr "الأعضاء"
@@ -10985,6 +11159,7 @@ msgid "Mention"
 msgstr "إشارة"
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
+#: components/modal/modals/permissionTitles.ts
 #: src/interface/OAuth.tsx
 msgid "Mention everyone"
 msgstr "الإشارة إلى الجميع"
@@ -10998,6 +11173,7 @@ msgid "Mention everyone and online members inside the server"
 msgstr "الإشارة إلى الجميع وإلى الأعضاء المتصلين في السيرفر"
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
+#: components/modal/modals/permissionTitles.ts
 msgid "Mention roles"
 msgstr "الإشارة إلى الأدوار"
 
@@ -11134,7 +11310,7 @@ msgstr "أُرسلت هذه الرسالة من منصة أخرى"
 #: components/app/interface/settings/server/assistant/labels.ts
 #: components/app/interface/settings/server/audit/AuditLog.tsx
 #: components/app/interface/settings/user/Keybinds.tsx
-#: components/modal/modals/AddBot.tsx
+#: components/modal/modals/permissionTitles.ts
 #: src/interface/developers/docs/DocsPortal.tsx
 #: src/interface/navigation/PhoneTabs.tsx
 msgid "Messages"
@@ -11425,11 +11601,16 @@ msgstr "انقل الإجابة {0} إلى الأعلى"
 msgid "Move down"
 msgstr "نقل للأسفل"
 
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "Move in the list"
+msgstr "التنقّل في القائمة"
+
 #: components/app/interface/settings/shared/Discoverable.tsx
 msgid "Move it up the list or take a place in the top row."
 msgstr "ارفعه في القائمة أو احجز له مكاناً في الصف الأول."
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
+#: components/modal/modals/permissionTitles.ts
 msgid "Move members"
 msgstr "نقل الأعضاء"
 
@@ -11500,6 +11681,7 @@ msgid "Mute lower-ranking members in voice call"
 msgstr "كتم ميكروفون الأعضاء الأدنى رتبة في المكالمات الصوتية"
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
+#: components/modal/modals/permissionTitles.ts
 msgid "Mute members"
 msgstr "كتم الأعضاء"
 
@@ -12145,6 +12327,10 @@ msgid "No colour"
 msgstr "بدون لون"
 
 #: components/app/interface/channels/text/interactions/CommandPicker.tsx
+msgid "No command has this name. Press Enter again to send it as a message."
+msgstr "لا يوجد أمر بهذا الاسم. اضغط Enter مرة أخرى لإرسالها رسالةً."
+
+#: components/app/interface/channels/text/interactions/CommandPicker.tsx
 msgid "No commands match"
 msgstr "لا توجد أوامر مطابقة"
 
@@ -12354,6 +12540,10 @@ msgstr "لا توجد طلبات معلّقة"
 msgid "No permissions set yet"
 msgstr "لم تُحدَّد صلاحيات بعد"
 
+#: components/app/interface/settings/server/apps/ServerAppPage.tsx
+msgid "No permissions were given when it was added."
+msgstr "لم تُمنح أي صلاحيات عند إضافته."
+
 #: src/interface/channels/text/TextSearchSidebar.tsx
 msgid "No pinned messages in this channel yet."
 msgstr "لا توجد رسائل مثبّتة في هذه القناة بعد."
@@ -12415,6 +12605,10 @@ msgstr "لا توجد أدوار بعد"
 msgid "No rules yet"
 msgstr "لا توجد قواعد بعد"
 
+#: components/app/interface/settings/server/apps/RulesEditor.tsx
+msgid "No rules: everyone who has the permissions the bot asks for can use it, in every channel."
+msgstr "لا قواعد: يستطيع استخدامه كل من يملك الصلاحيات التي يطلبها البوت، في كل القنوات."
+
 #: src/interface/Developers.tsx
 msgid "No secret yet: the app is a public client and must use PKCE (it always must)."
 msgstr "لا يوجد مفتاح سري بعد: التطبيق عميل عام ويجب أن يستخدم PKCE (وهذا مطلوب دائمًا)."
@@ -12438,6 +12632,10 @@ msgstr "دون مسافات في البداية أو النهاية."
 #: components/modal/modals/CreateBot.tsx
 msgid "No spam: send messages only when people ask for them or expect them."
 msgstr "لا رسائل مزعجة: أرسل الرسائل فقط حين يطلبها الناس أو يتوقعونها."
+
+#: components/app/interface/channels/text/interactions/CommandPicker.tsx
+msgid "No suggestions match. You can still type a value."
+msgstr "لا اقتراحات مطابقة. ما زال بإمكانك كتابة قيمة."
 
 #: components/app/interface/settings/channel/ForumTags.tsx
 msgid "No tags yet."
@@ -12464,6 +12662,10 @@ msgstr "لا يوجد مستخدمون يطابقون بحثك."
 #: components/app/interface/safety/labels.tsx
 msgid "No violation found"
 msgstr "لا توجد مخالفة"
+
+#: components/app/interface/settings/server/webhooks/ServerWebhooks.tsx
+msgid "No webhooks match this filter."
+msgstr "لا يوجد ويب هوك يطابق هذه التصفية."
 
 #: components/app/interface/settings/server/webhooks/ServerWebhooks.tsx
 msgid "No webhooks yet."
@@ -12665,6 +12867,10 @@ msgstr "غير مدعومة هنا"
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsOverview.tsx
 msgid "Not synced with {0}"
 msgstr "غير متزامنة مع {0}"
+
+#: components/ui/components/features/profiles/ProfileBotAbout.tsx
+msgid "Not verified by Zrzur"
+msgstr "غير موثّق من زرزور"
 
 #: components/app/interface/settings/server/assistant/labels.ts
 #: components/ui/components/features/profiles/ProfileNote.tsx
@@ -13316,6 +13522,10 @@ msgstr "افتح الإعدادات"
 #~ msgid "Open the bot's settings and copy its token. Whoever has the token controls the bot."
 #~ msgstr "افتح إعدادات البوت وانسخ رمزه. من يملك الرمز يتحكم في البوت."
 
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "Open the command list"
+msgstr "فتح قائمة الأوامر"
+
 #: components/app/interface/discover/OpenInApp.tsx
 msgid "Open the desktop app"
 msgstr "افتح تطبيق سطح المكتب"
@@ -13409,6 +13619,7 @@ msgid "Original case id"
 msgstr "معرّف الحالة الأصلية"
 
 #: components/app/interface/discover/categories.tsx
+#: components/modal/modals/permissionTitles.ts
 msgid "Other"
 msgstr "أخرى"
 
@@ -13857,7 +14068,12 @@ msgstr "يحذف هذا البوت نهائيًا. لا يمكن التراجع 
 msgid "Permission"
 msgstr "الصلاحية"
 
+#: components/modal/modals/permissionTitles.ts
+msgid "Permission number {n}"
+msgstr "الصلاحية رقم {n}"
+
 #: components/app/interface/settings/ChannelSettings.tsx
+#: components/app/interface/settings/server/apps/ServerAppPage.tsx
 #: components/app/interface/settings/server/assistant/labels.ts
 #: components/app/interface/settings/server/audit/AuditLog.tsx
 #: src/interface/developers/docs/EndpointReference.tsx
@@ -14384,6 +14600,7 @@ msgstr "الخصوصية"
 #: components/app/interface/discover/Detail.tsx
 #: components/auth/src/flows/FlowCreate.tsx
 #: components/ui/components/features/messaging/elements/SpecialEmbedPlaceholder.tsx
+#: components/ui/components/features/profiles/ProfileBotAbout.tsx
 msgid "Privacy policy"
 msgstr "سياسة الخصوصية"
 
@@ -14828,6 +15045,7 @@ msgstr "بلّغ المستوى {0} لفتحه ({1} من الأجنحة)"
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 #: components/app/menus/MessageContextMenu.tsx
+#: components/modal/modals/permissionTitles.ts
 #: src/interface/OAuth.tsx
 msgid "React"
 msgstr "تفاعل"
@@ -14858,6 +15076,7 @@ msgid "Read in #{0}"
 msgstr "اقرأ في #{0}"
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
+#: components/modal/modals/permissionTitles.ts
 #: src/interface/OAuth.tsx
 msgid "Read message history"
 msgstr "قراءة سجل الرسائل"
@@ -15199,11 +15418,16 @@ msgstr "إزالة كل التفاعلات"
 msgid "Remove answer"
 msgstr "إزالة الإجابة"
 
+#: components/app/interface/settings/server/apps/ServerAppPage.tsx
+msgid "Remove app"
+msgstr "إزالة التطبيق"
+
 #: components/app/interface/settings/user/profile/UserProfileEditor.tsx
 msgid "Remove avatar"
 msgstr "إزالة الصورة الرمزية"
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
+#: components/modal/modals/permissionTitles.ts
 msgid "Remove avatars"
 msgstr "إزالة الصور الرمزية"
 
@@ -15335,6 +15559,15 @@ msgstr "إزالة الرمز التعبيري"
 #: components/app/interface/settings/user/bots/CommandManager.tsx
 msgid "Remove the hidden control characters."
 msgstr "احذف أحرف التحكم المخفية."
+
+#. placeholder {0}: name(rule())
+#: components/app/interface/settings/server/apps/RulesEditor.tsx
+msgid "Remove the rule for {0}"
+msgstr "إزالة قاعدة {0}"
+
+#: components/app/interface/settings/server/apps/ServerAppPage.tsx
+msgid "Remove this app?"
+msgstr "إزالة هذا التطبيق؟"
 
 #: components/app/menus/UserContextMenu.tsx
 #: components/modal/modals/RemoveTimeout.tsx
@@ -15989,6 +16222,8 @@ msgid "Role unavailable"
 msgstr "الدور غير متاح"
 
 #. placeholder {0}: role()!.name
+#. placeholder {0}: role().name
+#: components/app/interface/settings/server/apps/ServerAppPage.tsx
 #: components/modal/modals/InterestsModal.tsx
 msgid "Role: {0}"
 msgstr "الدور: {0}"
@@ -16089,6 +16324,10 @@ msgstr "مستدير"
 #~ msgid "Royal navy with bright blue."
 #~ msgstr "كحلي ملكي مع أزرق ساطع."
 
+#: components/app/interface/settings/server/apps/RulesEditor.tsx
+msgid "Rule for"
+msgstr "قاعدة لـ"
+
 #: components/modal/lib/serverTemplateText.ts
 msgid "rules"
 msgstr "القواعد"
@@ -16106,6 +16345,19 @@ msgstr "قناة القواعد"
 #: components/app/interface/settings/server/AutoModSettings.tsx
 msgid "Rules couldn't be loaded"
 msgstr "تعذّر تحميل القواعد"
+
+#. placeholder {0}: command.name
+#: components/app/interface/settings/server/apps/ServerAppPage.tsx
+msgid "Rules for {0}"
+msgstr "قواعد {0}"
+
+#: components/app/interface/settings/server/apps/ServerAppPage.tsx
+msgid "Rules for all commands"
+msgstr "قواعد كل الأوامر"
+
+#: components/app/interface/settings/server/apps/ServerAppPage.tsx
+msgid "Rules for one command come before the rules for the whole app. A rule for a member beats their roles, a Deny on any of their roles beats an Allow on another, and Everyone counts last."
+msgstr "قواعد الأمر الواحد تسبق قواعد التطبيق كله. قاعدة العضو تتقدّم على أدواره، والرفض على أي دور من أدواره يتقدّم على السماح في دور آخر، و«الجميع» يُحتسب أخيرًا."
 
 #: components/app/interface/settings/ServerSettings.tsx
 #~ msgid "Rules that stop spam and bad words."
@@ -16143,6 +16395,10 @@ msgstr "تشغيل الإضافات"
 #: src/interface/Developers.tsx
 #~ msgid "Run the bot, then type / in a channel of that server."
 #~ msgstr "شغّل البوت، ثم اكتب / في قناة من ذلك السيرفر."
+
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "Run the chosen command"
+msgstr "تشغيل الأمر المختار"
 
 #: components/app/interface/settings/user/plugins/common.tsx
 msgid "Running"
@@ -16478,6 +16734,7 @@ msgstr "علوم"
 #~ msgid "Science & Tech"
 #~ msgstr "علوم وتقنية"
 
+#: components/app/interface/settings/server/apps/ServerAppPage.tsx
 #: src/interface/Developers.tsx
 msgid "Scopes"
 msgstr "النطاقات"
@@ -16825,6 +17082,7 @@ msgid "Send embedded content such as link embeds or custom embeds"
 msgstr "إرسال محتوى مضمّن مثل معاينات الروابط أو التضمينات المخصصة"
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
+#: components/modal/modals/permissionTitles.ts
 #: src/interface/OAuth.tsx
 msgid "Send embeds"
 msgstr "إرسال محتوى مضمّن"
@@ -16860,6 +17118,7 @@ msgid "Send message"
 msgstr "إرسال رسالة"
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
+#: components/modal/modals/permissionTitles.ts
 #: src/interface/OAuth.tsx
 msgid "Send messages"
 msgstr "إرسال الرسائل"
@@ -16877,6 +17136,7 @@ msgid "Send messages in channels"
 msgstr "إرسال رسائل في القنوات"
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
+#: components/modal/modals/permissionTitles.ts
 msgid "Send messages in threads"
 msgstr "إرسال رسائل في الخيوط"
 
@@ -16987,8 +17247,8 @@ msgstr "مُذيّل"
 #: components/app/interface/discover/ReviewQueue.tsx
 #: components/app/interface/safety/labels.tsx
 #: components/app/interface/settings/UserSettings.tsx
-#: components/modal/modals/AddBot.tsx
 #: components/modal/modals/CreateGroupOrServer.tsx
+#: components/modal/modals/permissionTitles.ts
 #: src/interface/navigation/servers/railDrag.ts
 msgid "Server"
 msgstr "سيرفر"
@@ -17394,6 +17654,10 @@ msgstr "إظهار مؤثرات الملف الشخصي"
 msgid "Show the Hijri date"
 msgstr "إظهار التاريخ الهجري"
 
+#: components/app/interface/settings/server/webhooks/ServerWebhooks.tsx
+msgid "Show webhooks made by"
+msgstr "عرض الويب هوك الذي أنشأه"
+
 #: components/app/interface/settings/user/Native.tsx
 msgid "Show Zrzur using Discord rich presence."
 msgstr "أظهر أنك تستخدم زرزور عبر حالة Discord."
@@ -17545,7 +17809,7 @@ msgstr "سلوفاكيا"
 msgid "Slovenia"
 msgstr "سلوفينيا"
 
-#: components/app/interface/channels/text/interactions/EphemeralMessages.tsx
+#: components/app/interface/channels/text/interactions/errorText.ts
 msgid "Slow down a little and try again."
 msgstr "تمهّل قليلًا ثم حاول مجددًا."
 
@@ -17673,7 +17937,7 @@ msgstr "الصومال"
 msgid "Some frames are too short. Each frame must show for at least 33 ms."
 msgstr "بعض الإطارات قصيرة جدًا. يجب أن يظهر كل إطار 33 ملي ثانية على الأقل."
 
-#: components/app/interface/channels/text/interactions/EphemeralMessages.tsx
+#: components/app/interface/channels/text/interactions/errorText.ts
 msgid "Some of the values are not valid."
 msgstr "بعض القيم غير صالحة."
 
@@ -17743,7 +18007,7 @@ msgstr "حدث خطأ من جهتنا. حاول مجددًا بعد قليل."
 #~ msgid "Something went wrong! {error}"
 #~ msgstr "حدث خطأ ما! {error}"
 
-#: components/app/interface/channels/text/interactions/EphemeralMessages.tsx
+#: components/app/interface/channels/text/interactions/errorText.ts
 #: components/app/interface/settings/user/plugins/text.ts
 #: src/interface/OAuth.tsx
 msgid "Something went wrong."
@@ -17859,6 +18123,7 @@ msgid "Sparks"
 msgstr "شرارات"
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
+#: components/modal/modals/permissionTitles.ts
 #: src/interface/OAuth.tsx
 msgid "Speak"
 msgstr "التحدث"
@@ -18681,6 +18946,10 @@ msgstr "حظر مؤقت"
 msgid "Terms"
 msgstr "الشروط"
 
+#: components/ui/components/features/profiles/ProfileBotAbout.tsx
+msgid "Terms of service"
+msgstr "شروط الخدمة"
+
 #: components/app/interface/discover/Detail.tsx
 #: components/app/interface/settings/user/safety/ReportsAndStanding.tsx
 msgid "Terms of Service"
@@ -18949,7 +19218,11 @@ msgstr "البرنامج التجريبي مغلق: اطلب الانضمام و
 msgid "The bot"
 msgstr "البوت"
 
-#: components/app/interface/channels/text/interactions/EphemeralMessages.tsx
+#: components/app/interface/channels/text/interactions/CommandPicker.tsx
+msgid "The bot did not answer. Type a value yourself."
+msgstr "لم يُجب البوت. اكتب قيمة بنفسك."
+
+#: components/app/interface/channels/text/interactions/errorText.ts
 msgid "The bot did not respond in time."
 msgstr "لم يستجب البوت في الوقت المحدد."
 
@@ -18965,13 +19238,17 @@ msgstr "البوت موجود في ذلك السيرفر بالفعل."
 msgid "The bot is already on discover, the user must contact support to have it removed"
 msgstr "البوت موجود في «اكتشف» بالفعل، ويجب على صاحبه التواصل مع الدعم لإزالته"
 
-#: components/app/interface/channels/text/interactions/EphemeralMessages.tsx
+#: components/app/interface/channels/text/interactions/errorText.ts
 msgid "The bot is offline right now."
 msgstr "البوت غير متصل حاليًا."
 
 #: src/interface/developers/docs/GettingStarted.tsx
 msgid "The bot keeps a WebSocket connection to the gateway. Commands, button clicks, new messages and member changes arrive there as events."
 msgstr "يحافظ البوت على اتصال WebSocket بالبوابة. وتصل عبره الأوامر ونقرات الأزرار والرسائل الجديدة وتغييرات الأعضاء على شكل أحداث."
+
+#: components/app/interface/settings/server/apps/ServerAppPage.tsx
+msgid "The bot leaves the server. Its role, its commands here and their rules go too. You can add it again later."
+msgstr "سيغادر البوت السيرفر، ويُزال معه دوره وأوامره هنا وقواعدها. يمكنك إضافته مرة أخرى لاحقًا."
 
 #: components/app/interface/discover/Detail.tsx
 #: components/modal/modals/AddBot.tsx
@@ -19240,6 +19517,10 @@ msgstr "من يقفون وراء التصاميم"
 msgid "The people who make them"
 msgstr "الأشخاص الذين يصنعونها"
 
+#: components/app/interface/settings/server/apps/ServerAppPage.tsx
+msgid "The permissions it was given when it was added, through its own role."
+msgstr "الصلاحيات التي مُنحت له عند إضافته، عبر دوره الخاص."
+
 #: components/app/interface/settings/server/LobbyAppearanceEditor.tsx
 msgid "The picture at the top of the lobby."
 msgstr "الصورة في أعلى الردهة."
@@ -19263,6 +19544,10 @@ msgstr "تعذّر تحميل قائمة المراجعة."
 #: components/app/interface/settings/server/pages.tsx
 msgid "The rules channel, system messages and counters."
 msgstr "قناة القواعد ورسائل النظام والعدادات."
+
+#: components/app/interface/settings/server/apps/ServerAppPage.tsx
+msgid "The rules couldn't be loaded, so they can't be changed now."
+msgstr "تعذّر تحميل القواعد، لذا لا يمكن تغييرها الآن."
 
 #: components/app/interface/settings/user/bots/CommandManager.tsx
 msgid "The same list your bot sends with PUT to its commands route. Importing replaces every global command."
@@ -19466,6 +19751,10 @@ msgstr "يستخدم هذا العنوان أحرفًا خاصة قد تقلّد
 msgid "This app doesn't exist any more."
 msgstr "لم يعد هذا التطبيق موجودًا."
 
+#: components/app/interface/settings/server/apps/ServerAppPage.tsx
+msgid "This app has no commands here."
+msgstr "ليس لهذا التطبيق أوامر هنا."
+
 #: components/i18n/errors.tsx
 msgid "This app isn't added to the server."
 msgstr "هذا التطبيق غير مضاف إلى السيرفر."
@@ -19486,9 +19775,13 @@ msgstr "يمكن لهذا البوت الانضمام إلى أي عدد من ا
 msgid "This bot is listed on Discover"
 msgstr "هذا البوت معروض في «اكتشف»"
 
-#: components/app/interface/channels/text/interactions/EphemeralMessages.tsx
+#: components/app/interface/channels/text/interactions/errorText.ts
 msgid "This bot is not available in this channel."
 msgstr "هذا البوت غير متاح في هذه القناة."
+
+#: components/modal/modals/AddBot.tsx
+msgid "This bot is not verified by Zrzur."
+msgstr "هذا البوت غير موثّق من زرزور."
 
 #: components/i18n/errors.tsx
 msgid "This bot is private and can only be added by the creator."
@@ -19599,7 +19892,7 @@ msgstr "تستعمل هذه القناة صلاحياتها الخاصة."
 msgid "This command doesn't exist any more."
 msgstr "لم يعد هذا الأمر موجودًا."
 
-#: components/app/interface/channels/text/interactions/EphemeralMessages.tsx
+#: components/app/interface/channels/text/interactions/errorText.ts
 msgid "This command no longer exists."
 msgstr "هذا الأمر لم يعد موجودًا."
 
@@ -19696,7 +19989,7 @@ msgstr "هذه المجموعة كبيرة جدًا، الحد الأقصى {0} 
 msgid "This has already been sent."
 msgstr "أُرسل هذا بالفعل."
 
-#: components/app/interface/channels/text/interactions/EphemeralMessages.tsx
+#: components/app/interface/channels/text/interactions/errorText.ts
 msgid "This has expired."
 msgstr "انتهت صلاحية هذا."
 
@@ -19983,6 +20276,10 @@ msgstr "هذا السيرفر غير موجود في «اكتشف»."
 msgid "This server needs a higher Wings level for a custom link."
 msgstr "يحتاج هذا السيرفر إلى مستوى أجنحة أعلى للحصول على رابط مخصص."
 
+#: components/app/interface/settings/server/apps/ServerAppPage.tsx
+msgid "This server only"
+msgstr "لهذا السيرفر فقط"
+
 #: components/i18n/errors.tsx
 msgid "This server paused new members for now. Try again later."
 msgstr "أوقف هذا السيرفر انضمام أعضاء جدد مؤقتًا. حاول لاحقًا."
@@ -20201,6 +20498,7 @@ msgstr "إيقاف العضو مؤقتًا"
 #~ msgstr "إيقاف العضو مؤقتًا"
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
+#: components/modal/modals/permissionTitles.ts
 msgid "Timeout members"
 msgstr "إيقاف الأعضاء مؤقتًا"
 
@@ -20404,6 +20702,7 @@ msgid "Try a different word or explore the categories."
 msgstr "جرّب كلمة أخرى أو تصفّح الفئات."
 
 #: components/app/interface/discover/ServerPage.tsx
+#: components/app/interface/settings/server/apps/ServerAppPage.tsx
 #: components/app/interface/settings/server/webhooks/ServerWebhooks.tsx
 #: components/app/interface/settings/user/badges/MyBadges.tsx
 #: components/app/interface/settings/user/bots/PrivilegedIntents.tsx
@@ -20840,6 +21139,10 @@ msgstr "إعلانات غير مرغوب فيها"
 msgid "Untested: derived from the source code only."
 msgstr "غير مختبر: مستخلص من الشيفرة المصدرية فقط."
 
+#: components/modal/modals/AddBot.tsx
+msgid "Untick anything you do not want to give it."
+msgstr "ألغِ تحديد ما لا تريد منحه إياه."
+
 #. placeholder {0}: date(entry.grant!.expires_at!)
 #: components/app/interface/settings/user/badges/MyBadges.tsx
 msgid "Until {0}"
@@ -20978,6 +21281,7 @@ msgid "Upload file"
 msgstr "رفع ملف"
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
+#: components/modal/modals/permissionTitles.ts
 #: src/interface/OAuth.tsx
 msgid "Upload files"
 msgstr "رفع الملفات"
@@ -21101,6 +21405,7 @@ msgid "Use choices or suggestions while typing, not both."
 msgstr "استخدم الاختيارات أو الاقتراحات في أثناء الكتابة، لا كليهما."
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
+#: components/modal/modals/permissionTitles.ts
 msgid "Use emojis from other servers"
 msgstr "استخدام رموز تعبيرية من سيرفرات أخرى"
 
@@ -21356,6 +21661,7 @@ msgid "Verified"
 msgstr "موثّق"
 
 #: components/ui/components/features/profiles/badges/useBadgeText.ts
+#: components/ui/components/features/profiles/BotLabel.tsx
 msgid "Verified bot"
 msgstr "بوت موثّق"
 
@@ -21370,6 +21676,10 @@ msgstr "تظهر علامة بجانب اسم البوت الموثَّق، وي
 #: components/app/interface/settings/user/bots/BotVerification.tsx
 #~ msgid "Verified bots show a mark next to their name. Zrzur checks what the bot does and how it handles data before verifying it."
 #~ msgstr "تظهر علامة بجانب اسم البوت الموثّق. يراجع زرزور ما يفعله البوت وكيف يتعامل مع البيانات قبل توثيقه."
+
+#: components/ui/components/features/profiles/ProfileBotAbout.tsx
+msgid "Verified by Zrzur"
+msgstr "موثّق من زرزور"
 
 #: components/app/interface/settings/user/profile/CommunityParts.tsx
 #: components/app/interface/settings/user/profile/CreatorMark.tsx
@@ -21438,6 +21748,7 @@ msgid "Victory"
 msgstr "انتصار"
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
+#: components/modal/modals/permissionTitles.ts
 msgid "Video"
 msgstr "فيديو"
 
@@ -21465,10 +21776,12 @@ msgstr "عرض"
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 #: components/app/interface/settings/server/layout.tsx
+#: components/modal/modals/permissionTitles.ts
 msgid "View audit log"
 msgstr "عرض سجل التدقيق"
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
+#: components/modal/modals/permissionTitles.ts
 msgid "View channel"
 msgstr "عرض القناة"
 
@@ -21542,8 +21855,8 @@ msgstr "فتح"
 #: components/app/interface/settings/channel/Overview.tsx
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 #: components/app/interface/settings/UserSettings.tsx
-#: components/modal/modals/AddBot.tsx
 #: components/modal/modals/CreateChannel.tsx
+#: components/modal/modals/permissionTitles.ts
 msgid "Voice"
 msgstr "صوت"
 
@@ -21980,6 +22293,10 @@ msgstr "ما يجري في السيرفر، في قناة واحدة للفري�
 msgid "What it adds"
 msgstr "ما الذي تضيفه"
 
+#: components/app/interface/settings/server/apps/ServerAppPage.tsx
+msgid "What it can do"
+msgstr "ما يستطيع فعله"
+
 #: components/app/interface/settings/server/ServerSafety.tsx
 #~ msgid "What new members need before they can send messages, react or join voice. Members with any role are exempt."
 #~ msgstr "ما يحتاجه الأعضاء الجدد قبل أن يرسلوا الرسائل أو يتفاعلوا أو ينضموا إلى الصوت. الأعضاء الذين لديهم أي دور مستثنون."
@@ -22128,6 +22445,10 @@ msgstr "أيّها يصف المشكلة أفضل؟"
 #: components/app/interface/settings/user/profile/EffectDialog.tsx
 #~ msgid "Which effects"
 #~ msgstr "أي المؤثرات"
+
+#: components/app/interface/settings/server/apps/RulesEditor.tsx
+msgid "Which one"
+msgstr "أيّها"
 
 #: components/app/interface/settings/user/profile/CreatorStudio.tsx
 msgid "Which parts and which tool, if any"
@@ -22514,7 +22835,7 @@ msgstr "أنت على وشك طرد {0}"
 msgid "You are banned from this server."
 msgstr "تم حظرك من هذا السيرفر."
 
-#: components/app/interface/channels/text/interactions/EphemeralMessages.tsx
+#: components/app/interface/channels/text/interactions/errorText.ts
 msgid "You are not allowed to do this."
 msgstr "لا تملك صلاحية القيام بهذا."
 
@@ -23569,6 +23890,10 @@ msgstr "دعم زرزور"
 #: components/app/interface/settings/user/plugins/text.ts
 msgid "Zrzur suspended this plugin while it's being reviewed."
 msgstr "علّق زرزور هذه الإضافة أثناء مراجعتها."
+
+#: components/modal/modals/AddBot.tsx
+msgid "Zrzur verified who runs this bot."
+msgstr "تحقّق زرزور ممّن يدير هذا البوت."
 
 #: components/app/interface/support/OfficialBanner.tsx
 #~ msgid "Zrzur will never ask for your password or a login code."

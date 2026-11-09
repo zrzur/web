@@ -76,10 +76,12 @@ msgstr "(изменено)"
 #~ msgid "{0, plural, =0 {No mutual servers} one {# mutual server} other {# mutual servers}}"
 #~ msgstr ""
 
+#. placeholder {0}: bot().serverCount
 #. placeholder {0}: props.count
 #. placeholder {0}: props.entry.count
 #: components/app/interface/discover/Cards.tsx
 #: components/app/interface/discover/ReviewQueue.tsx
+#: components/ui/components/features/profiles/ProfileBotAbout.tsx
 msgid "{0, plural, =0 {Not in any servers yet} one {In # server} other {In # servers}}"
 msgstr "{0, plural, =0 {Пока ни на одном сервере} one {На # сервере} few {На # серверах} many {На # серверах} other {На # серверах}}"
 
@@ -155,6 +157,11 @@ msgstr "{0, plural, one {# новое упоминание} few {# новых у
 #: src/interface/Discover.tsx
 msgid "{0, plural, one {# result} other {# results}}"
 msgstr "{0, plural, one {# результат} few {# результата} many {# результатов} other {# результата}}"
+
+#. placeholder {0}: props.rules
+#: components/app/interface/settings/server/apps/ServerAppPage.tsx
+msgid "{0, plural, one {# rule} other {# rules}}"
+msgstr "{0, plural, one {# правило} few {# правила} many {# правил} other {# правила}}"
 
 #. placeholder {0}: items().length
 #: components/ui/components/utils/files/FileDropAnywhereCollector.tsx
@@ -1016,9 +1023,17 @@ msgstr "Спокойная светлая тема в мягких бумажн�
 msgid "A card with the Hijri date when someone joins or leaves."
 msgstr "Карточка с датой по хиджре, когда кто-то заходит на сервер или уходит."
 
+#: components/app/interface/settings/server/apps/RulesEditor.tsx
+msgid "A channel"
+msgstr "Канал"
+
 #: components/app/interface/settings/user/bots/CommandManager.tsx
 msgid "A command of this type already has this name."
 msgstr "Команда этого типа с таким именем уже есть."
+
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "A command typed in full is chosen too."
+msgstr "Полностью набранная команда тоже выбирается."
 
 #: components/i18n/errors.tsx
 msgid "A command with this name already exists."
@@ -1092,6 +1107,10 @@ msgstr "В группе должна быть хотя бы одна подко�
 msgid "A language tag is not valid."
 msgstr "Неверный код языка."
 
+#: components/app/interface/settings/server/apps/RulesEditor.tsx
+msgid "A member"
+msgstr "Участник"
+
 #: components/ui/components/features/profiles/badges/useBadgeText.ts
 msgid "A member of the official Zrzur team. Server moderators don't get this badge."
 msgstr "Участник официальной команды Zrzur. Модераторы серверов этот значок не получают."
@@ -1143,6 +1162,10 @@ msgstr "Проверяющий спросил:"
 #: components/app/interface/settings/user/profile/CreatorStudio.tsx
 msgid "A reviewer looks at your effect first. It goes live when they approve it. Effects are free."
 msgstr "Сначала эффект просматривает проверяющий. Он появится, когда его одобрят. Эффекты бесплатны."
+
+#: components/app/interface/settings/server/apps/RulesEditor.tsx
+msgid "A role"
+msgstr "Роль"
 
 #: src/interface/Developers.tsx
 msgid "A secret exists. Resetting it stops the old one at once."
@@ -1259,6 +1282,7 @@ msgid "About the SDKs"
 msgstr "Об SDK"
 
 #: components/app/interface/discover/Detail.tsx
+#: components/ui/components/features/profiles/ProfileBotAbout.tsx
 msgid "About this bot"
 msgstr "Об этом боте"
 
@@ -1597,6 +1621,7 @@ msgstr "Добавляйте людей по имени пользователя
 msgid "Add reaction"
 msgstr "Добавить реакцию"
 
+#: components/app/interface/settings/server/apps/RulesEditor.tsx
 #: components/app/interface/settings/server/AutoModSettings.tsx
 msgid "Add rule"
 msgstr "Добавить правило"
@@ -1652,15 +1677,35 @@ msgstr "Сначала добавьте Zrzur Assistant на этот серве
 msgid "Add…"
 msgstr "Добавить…"
 
+#. placeholder {0}: new Date(install!.installed_at).toLocaleDateString()
+#: components/app/interface/settings/server/ServerApps.tsx
+msgid "Added {0}"
+msgstr "Добавлен {0}"
+
+#: components/app/interface/settings/server/apps/ServerAppPage.tsx
+msgid "Added before Zrzur kept a record of who adds apps."
+msgstr "Добавлено до того, как Zrzur начал записывать, кто добавляет приложения."
+
 #. placeholder {0}: emoji.creator!.displayName
 #: components/app/interface/settings/server/emojis/EmojiList.tsx
 msgid "Added by {0}"
 msgstr "Добавлено: {0}"
 
+#. placeholder {0}: installer()!.displayName ?? installer()!.username
+#. placeholder {1}: date(install().installed_at)
+#: components/app/interface/settings/server/apps/ServerAppPage.tsx
+msgid "Added by <0>{0}</0> on {1}"
+msgstr "Добавил(а) <0>{0}</0> {1}"
+
 #. placeholder {0}: a.name
 #: components/app/interface/settings/server/audit/AuditLog.tsx
 msgid "added emoji :{0}:"
 msgstr "добавлен эмодзи :{0}:"
+
+#. placeholder {0}: date(install().installed_at)
+#: components/app/interface/settings/server/apps/ServerAppPage.tsx
+msgid "Added on {0}"
+msgstr "Добавлено {0}"
 
 #. placeholder {0}: userName(raw.bot)
 #: components/app/interface/settings/server/audit/AuditLog.tsx
@@ -1748,6 +1793,7 @@ msgstr "Уведомления"
 msgid "Algeria"
 msgstr "Алжир"
 
+#: components/app/interface/settings/server/webhooks/ServerWebhooks.tsx
 #: components/app/interface/settings/user/plugins/BrowseTab.tsx
 #: components/app/interface/settings/user/profile/CommunityGallery.tsx
 #: components/app/interface/settings/user/profile/StyleEditors.tsx
@@ -1787,6 +1833,10 @@ msgstr "Все боты"
 #: components/app/interface/settings/user/profile/ReviewQueue.tsx
 msgid "All caught up. Nothing waiting here."
 msgstr "Вы всё просмотрели. Здесь пока пусто."
+
+#: components/app/interface/settings/server/apps/ServerAppPage.tsx
+msgid "All commands"
+msgstr "Все команды"
 
 #: src/interface/designs/Makers.tsx
 msgid "All creators"
@@ -1864,6 +1914,7 @@ msgid "All types"
 msgstr "Все типы"
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
+#: components/app/interface/settings/server/apps/RulesEditor.tsx
 #: components/ui/components/design/Switch.tsx
 msgid "Allow"
 msgstr "Разрешить"
@@ -1900,6 +1951,15 @@ msgstr "Разрешите доступ к микрофону, чтобы вид
 #: components/rtc/messages.ts
 msgid "Allow microphone or camera access in your browser settings."
 msgstr "Разрешите доступ к микрофону или камере в настройках браузера."
+
+#: components/app/interface/settings/server/apps/RulesEditor.tsx
+msgid "Allow or deny"
+msgstr "Разрешить или запретить"
+
+#. placeholder {0}: name(rule())
+#: components/app/interface/settings/server/apps/RulesEditor.tsx
+msgid "Allow or deny {0}"
+msgstr "Разрешить или запретить: {0}"
 
 #: components/app/interface/settings/server/AutoModSettings.tsx
 msgid "Allowed domains (optional)"
@@ -2150,6 +2210,10 @@ msgstr "Всё, что по-прежнему публикует сообщени
 msgid "API changelog"
 msgstr "Журнал изменений API"
 
+#: components/app/interface/settings/ServerSettings.tsx
+msgid "App"
+msgstr "Приложение"
+
 #: components/app/interface/settings/server/LobbyAppearanceEditor.tsx
 msgid "App theme"
 msgstr "Тема приложения"
@@ -2272,6 +2336,10 @@ msgstr "Одобрено"
 #: components/app/menus/shared/AppsSubMenu.tsx
 msgid "Apps"
 msgstr "Приложения"
+
+#: components/app/interface/settings/server/audit/AuditLog.tsx
+msgid "Apps and bots"
+msgstr "Приложения и боты"
 
 #: src/interface/OAuth.tsx
 msgid "Apps you allowed to use your account. Revoking one ends its access at once; bots it added stay in servers until their managers remove them."
@@ -2403,6 +2471,10 @@ msgstr "Попросить вступить"
 msgid "Asked {0}"
 msgstr "Запрошено: {0}"
 
+#: components/app/interface/channels/text/interactions/CommandPicker.tsx
+msgid "Asking the bot for suggestions…"
+msgstr "Запрашиваем подсказки у бота…"
+
 #: components/app/interface/settings/user/Keybinds.tsx
 msgid "Asks first if you changed something."
 msgstr "Сначала спрашивает, если вы что-то изменили."
@@ -2416,6 +2488,7 @@ msgid "Assign lower-ranked roles to lower-ranking members"
 msgstr "Присвоить низкоранговые роли низкоранговым пользователям"
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
+#: components/modal/modals/permissionTitles.ts
 #: src/interface/OAuth.tsx
 msgid "Assign roles"
 msgstr "Назначать роли"
@@ -2531,6 +2604,7 @@ msgstr "Приложение-аутентификатор"
 msgid "Authorize"
 msgstr "Авторизовать"
 
+#: components/app/interface/settings/UserSettings.tsx
 #: src/interface/OAuth.tsx
 msgid "Authorized apps"
 msgstr "Авторизованные приложения"
@@ -2675,6 +2749,7 @@ msgstr "Забанить участника"
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 #: components/app/interface/settings/server/layout.tsx
+#: components/modal/modals/permissionTitles.ts
 #: src/interface/OAuth.tsx
 msgid "Ban members"
 msgstr "Банить участников"
@@ -2957,6 +3032,10 @@ msgstr "Злоупотребление ботом"
 msgid "Bot badges"
 msgstr "Значки ботов"
 
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "Bot commands"
+msgstr "Команды ботов"
+
 #: components/app/interface/safety/labels.tsx
 msgid "Bot disabled"
 msgstr "Бот отключён"
@@ -3004,8 +3083,8 @@ msgstr "Боты и вебхуки."
 #~ msgstr ""
 
 #: components/modal/modals/AddBot.tsx
-msgid "Bots are not verified by Zrzur."
-msgstr "Zrzur не верифицирует ботов."
+#~ msgid "Bots are not verified by Zrzur."
+#~ msgstr "Zrzur не верифицирует ботов."
 
 #: src/interface/developers/docs/Directives.tsx
 msgid "Bots are refused; listed so you know."
@@ -3247,6 +3326,7 @@ msgstr "от <0>{0}</0>"
 #~ msgstr "Создавая сервер вы соглашаетесь с <0>Политикой приемлемого использования</0>."
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
+#: components/modal/modals/permissionTitles.ts
 msgid "Bypass slowmode"
 msgstr "Обходить медленный режим"
 
@@ -3524,6 +3604,7 @@ msgstr "Изменить доступ"
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 #: components/app/interface/settings/user/profile/UserProfileEditor.tsx
+#: components/modal/modals/permissionTitles.ts
 msgid "Change avatar"
 msgstr "Изменить аватар"
 
@@ -3577,6 +3658,7 @@ msgid "Change nameplate"
 msgstr "Изменить плашку имени"
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
+#: components/modal/modals/permissionTitles.ts
 msgid "Change nickname"
 msgstr "Изменить никнейм"
 
@@ -3674,6 +3756,16 @@ msgstr "изменены роли: {0}"
 #: components/app/interface/settings/server/audit/AuditLog.tsx
 msgid "changed permissions of {0} in {1}"
 msgstr "изменены разрешения {0} в {1}"
+
+#. placeholder {0}: userName(raw.bot)
+#: components/app/interface/settings/server/audit/AuditLog.tsx
+msgid "changed who can use a command of {0}"
+msgstr "изменил(а), кто может использовать команду {0}"
+
+#. placeholder {0}: userName(raw.bot)
+#: components/app/interface/settings/server/audit/AuditLog.tsx
+msgid "changed who can use the commands of {0}"
+msgstr "изменил(а), кто может использовать команды {0}"
 
 #: components/app/interface/settings/user/plugins/PluginDetail.tsx
 msgid "Changes how notifications are shown"
@@ -3905,6 +3997,10 @@ msgstr "Выберите пакет `.zplugin.json` (или манифест), �
 #: components/app/interface/channels/text/interactions/CommandPicker.tsx
 #~ msgid "Choose a channel…"
 #~ msgstr ""
+
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "Choose a command or a suggestion"
+msgstr "Выбрать команду или подсказку"
 
 #: components/app/interface/channels/text/interactions/CommandPicker.tsx
 #: components/app/interface/channels/text/interactions/InteractionModal.tsx
@@ -4246,6 +4342,10 @@ msgstr "Закрыть настройки"
 msgid "Close settings (Esc)"
 msgstr "Закрыть настройки (Esc)"
 
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "Close the command list"
+msgstr "Закрыть список команд"
+
 #: components/app/interface/safety/labels.tsx
 #: components/app/interface/settings/user/badges/BugQueue.tsx
 #: components/app/interface/settings/user/support/ContactSupport.tsx
@@ -4373,6 +4473,10 @@ msgstr "Команды"
 #: src/interface/developers/docs/DocsPortal.tsx
 #~ msgid "Commands and interactions"
 #~ msgstr ""
+
+#: components/app/interface/settings/server/apps/ServerAppPage.tsx
+msgid "Commands and who can use them"
+msgstr "Команды и кто может их использовать"
 
 #: components/app/interface/settings/user/bots/CommandManager.tsx
 msgid "Commands imported and saved."
@@ -4550,6 +4654,7 @@ msgstr "Конго"
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 #: components/app/interface/settings/server/assistant/AssistantPage.tsx
+#: components/modal/modals/permissionTitles.ts
 msgid "Connect"
 msgstr "Подключаться"
 
@@ -4840,6 +4945,10 @@ msgstr "Не удалось получить конфигурацию Zrzur из
 #~ msgid "Couldn't finish setting up your server. Please try again."
 #~ msgstr ""
 
+#: components/app/interface/channels/text/interactions/CommandPicker.tsx
+msgid "Couldn't get suggestions. Type a value yourself."
+msgstr "Не удалось получить подсказки. Введите значение сами."
+
 #: components/ui/components/features/messaging/composition/picker/GifPicker.tsx
 msgid "Couldn't load GIFs"
 msgstr "Не удалось загрузить GIF"
@@ -4848,9 +4957,17 @@ msgstr "Не удалось загрузить GIF"
 msgid "Couldn't load the bots."
 msgstr "Не удалось загрузить ботов."
 
+#: components/app/interface/channels/text/interactions/CommandPicker.tsx
+msgid "Couldn't load the commands. Press Enter again to send it as a message."
+msgstr "Не удалось загрузить команды. Нажмите Enter ещё раз, чтобы отправить это сообщением."
+
 #: components/app/interface/settings/user/bots/PrivilegedIntents.tsx
 msgid "Couldn't load the saved intents."
 msgstr "Не удалось загрузить сохранённые интенты."
+
+#: components/app/interface/settings/server/apps/ServerAppPage.tsx
+msgid "Couldn't load this app."
+msgstr "Не удалось загрузить это приложение."
 
 #: components/ui/components/design/ImageCropper.tsx
 msgid "Couldn't load this image."
@@ -4863,6 +4980,10 @@ msgstr "Не удалось загрузить этот профиль."
 #: components/ui/components/features/messaging/elements/MediaPlayer.tsx
 msgid "Couldn't play this media."
 msgstr "Не удалось воспроизвести этот файл."
+
+#: components/app/interface/channels/text/interactions/errorText.ts
+msgid "Couldn't reach the bot. Try again."
+msgstr "Не удалось связаться с ботом. Попробуйте ещё раз."
 
 #: components/app/interface/settings/user/bots/ViewBot.tsx
 #~ msgid "Couldn't save. Try again."
@@ -4964,6 +5085,7 @@ msgid "Create channel"
 msgstr "Создать канал"
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
+#: components/modal/modals/permissionTitles.ts
 msgid "Create forum posts"
 msgstr "Создавать публикации на форуме"
 
@@ -5024,6 +5146,7 @@ msgid "Create server emoji"
 msgstr "Создать эмодзи сервера"
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
+#: components/modal/modals/permissionTitles.ts
 msgid "Create threads"
 msgstr "Создавать ветки"
 
@@ -5363,6 +5486,7 @@ msgid "Deafen lower-ranking members in voice call"
 msgstr "Заглушить низкоранговых участников в голосовом канале"
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
+#: components/modal/modals/permissionTitles.ts
 msgid "Deafen members"
 msgstr "Отключать звук участникам"
 
@@ -5626,6 +5750,7 @@ msgstr "удалено сообщений: {0} в {1}"
 msgid "deleted a message by {0} in {1}"
 msgstr "удалено сообщение пользователя {0} в {1}"
 
+#: components/app/interface/settings/server/apps/RulesEditor.tsx
 #: components/app/interface/settings/server/audit/AuditLog.tsx
 msgid "deleted channel"
 msgstr "удалён канал"
@@ -5643,6 +5768,10 @@ msgstr "удалено приглашение {0}"
 #: components/app/interface/settings/server/audit/AuditLog.tsx
 msgid "deleted role"
 msgstr "удалена роль"
+
+#: components/app/interface/settings/server/apps/RulesEditor.tsx
+msgid "Deleted role"
+msgstr "Удалённая роль"
 
 #. placeholder {0}: a.name
 #: components/app/interface/settings/server/audit/AuditLog.tsx
@@ -5676,6 +5805,7 @@ msgstr "Плотность"
 
 #: components/app/interface/discover/ReviewQueue.tsx
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
+#: components/app/interface/settings/server/apps/RulesEditor.tsx
 #: components/ui/components/design/Switch.tsx
 msgid "Deny"
 msgstr "Запретить"
@@ -6675,6 +6805,10 @@ msgstr "События"
 msgid "Every bird in this flock is a design for your Zrzur profile. Tap one and it lands on you."
 msgstr "Каждая птица в этой стае — дизайн для вашего профиля Zrzur. Нажмите на любую, и она сядет на вас."
 
+#: components/app/interface/settings/server/apps/RulesEditor.tsx
+msgid "Every channel"
+msgstr "Все каналы"
+
 #: components/app/interface/settings/server/ServerOwnership.tsx
 msgid "Every channel and message is removed and it can't be undone. Type the server name to confirm. If you use two-step sign-in, you will be asked for your code next."
 msgstr "Все каналы и сообщения будут удалены, это нельзя отменить. Введите название сервера для подтверждения. Если у вас включена двухфакторная аутентификация, далее у вас запросят код."
@@ -6733,6 +6867,7 @@ msgstr "Каждое Крыло поднимает этот сервер для 
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsOverview.tsx
 #: components/app/interface/settings/ChannelSettings.tsx
+#: components/app/interface/settings/server/apps/RulesEditor.tsx
 #: components/app/interface/settings/server/audit/AuditLog.tsx
 #: components/app/interface/settings/server/roles/ServerRoleOverview.tsx
 #: components/app/interface/settings/ServerSettings.tsx
@@ -7444,7 +7579,7 @@ msgctxt "search filter"
 msgid "From"
 msgstr "От"
 
-#. placeholder {0}: target().place
+#. placeholder {0}: `⁨${target().place}⁩`
 #. placeholder {1}: sentAt()
 #: components/app/interface/channels/text/ForwardedFrame.tsx
 msgid "From {0} · {1}"
@@ -8552,6 +8687,10 @@ msgstr "В"
 msgid "in {0} since {1}"
 msgstr "в {0} с {1}"
 
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "In a server channel or a DM with a bot."
+msgstr "В канале сервера или в ЛС с ботом."
+
 #: components/app/interface/settings/user/profile/StyleEditors.tsx
 msgid "In a server, a role colour wins over yours, but your font stays. On a profile card with a theme, your name turns white so it stays readable."
 msgstr "На сервере цвет роли перекрывает ваш, но шрифт остаётся. На карточке профиля с темой ваше имя становится белым, чтобы его можно было прочитать."
@@ -8781,6 +8920,7 @@ msgid "Invite link"
 msgstr "Ссылка-приглашение"
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
+#: components/modal/modals/permissionTitles.ts
 msgid "Invite others"
 msgstr "Пригласить других"
 
@@ -9229,6 +9369,7 @@ msgstr "Выгнать участника"
 #~ msgstr "Выгнать Участника"
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
+#: components/modal/modals/permissionTitles.ts
 #: src/interface/OAuth.tsx
 msgid "Kick members"
 msgstr "Выгонять участников"
@@ -9642,6 +9783,7 @@ msgid "Listed on Discover."
 msgstr "Размещён в «Обзоре»."
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
+#: components/modal/modals/permissionTitles.ts
 msgid "Listen"
 msgstr "Слушать"
 
@@ -9732,6 +9874,10 @@ msgstr "Загрузка правил…"
 msgid "Loading the audit log…"
 msgstr "Загрузка журнала аудита…"
 
+#: components/app/interface/channels/text/interactions/CommandPicker.tsx
+msgid "Loading the commands…"
+msgstr "Загрузка команд…"
+
 #. placeholder {0}: props.company
 #: components/ui/components/features/messaging/elements/SpecialEmbedPlaceholder.tsx
 msgid "Loading this connects to {0}. They get your IP address and may store cookies."
@@ -9741,6 +9887,7 @@ msgstr "При загрузке устанавливается соединен�
 #~ msgid "Loading your bots…"
 #~ msgstr ""
 
+#: components/app/interface/settings/server/apps/ServerAppPage.tsx
 #: components/app/interface/settings/server/ServerApps.tsx
 #: components/app/interface/settings/server/webhooks/ServerWebhooks.tsx
 #: components/app/interface/settings/user/badges/MyBadges.tsx
@@ -9965,6 +10112,19 @@ msgstr "создан новый адрес для вебхука {0}"
 msgid "Made by"
 msgstr "Автор"
 
+#. placeholder {0}: creator().displayName ?? creator().username
+#: components/modal/modals/AddBot.tsx
+msgid "Made by <0>{0}</0>"
+msgstr "Автор: <0>{0}</0>"
+
+#: components/app/interface/settings/server/webhooks/ServerWebhooks.tsx
+msgid "Made by bots"
+msgstr "Созданы ботами"
+
+#: components/app/interface/settings/server/webhooks/ServerWebhooks.tsx
+msgid "Made by people"
+msgstr "Созданы людьми"
+
 #: src/interface/Designs.tsx
 #~ msgid "Made by verified creators"
 #~ msgstr ""
@@ -10123,6 +10283,7 @@ msgstr "Управление значками"
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 #: components/app/interface/settings/server/layout.tsx
+#: components/modal/modals/permissionTitles.ts
 msgid "Manage channel"
 msgstr "Управление каналом"
 
@@ -10141,6 +10302,7 @@ msgstr "Управление авторами"
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 #: components/app/interface/settings/server/layout.tsx
+#: components/modal/modals/permissionTitles.ts
 msgid "Manage customisation"
 msgstr "Управление персонализацией"
 
@@ -10149,10 +10311,12 @@ msgstr "Управление персонализацией"
 #~ msgstr "Управление персонализацией"
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
+#: components/modal/modals/permissionTitles.ts
 msgid "Manage join requests"
 msgstr "Управление заявками на вступление"
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
+#: components/modal/modals/permissionTitles.ts
 #: src/interface/OAuth.tsx
 msgid "Manage messages"
 msgstr "Управление сообщениями"
@@ -10162,6 +10326,7 @@ msgstr "Управление сообщениями"
 #~ msgstr "Управлять сообщениями"
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
+#: components/modal/modals/permissionTitles.ts
 #: src/interface/OAuth.tsx
 msgid "Manage nicknames"
 msgstr "Управление никнеймами"
@@ -10175,6 +10340,7 @@ msgid "Manage own designs"
 msgstr "Управление своими дизайнами"
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
+#: components/modal/modals/permissionTitles.ts
 #: src/interface/OAuth.tsx
 msgid "Manage permissions"
 msgstr "Управление разрешениями"
@@ -10185,6 +10351,7 @@ msgstr "Управление разрешениями"
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 #: components/app/interface/settings/server/layout.tsx
+#: components/modal/modals/permissionTitles.ts
 #: src/interface/OAuth.tsx
 msgid "Manage roles"
 msgstr "Управление ролями"
@@ -10195,6 +10362,7 @@ msgstr "Управление ролями"
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 #: components/app/interface/settings/server/layout.tsx
+#: components/modal/modals/permissionTitles.ts
 #: src/interface/OAuth.tsx
 msgid "Manage server"
 msgstr "Управление сервером"
@@ -10217,6 +10385,7 @@ msgstr "Управление бетой"
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 #: components/app/interface/settings/server/layout.tsx
+#: components/modal/modals/permissionTitles.ts
 #: src/interface/OAuth.tsx
 msgid "Manage webhooks"
 msgstr "Управление вебхуками"
@@ -10224,6 +10393,10 @@ msgstr "Управление вебхуками"
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 #~ msgid "Manage Webhooks"
 #~ msgstr "Управлять вебхуками"
+
+#: components/app/interface/settings/server/apps/ServerAppPage.tsx
+msgid "Managed by the app. Change what it may do in the role."
+msgstr "Управляется приложением. Что ему разрешено, меняется в роли."
 
 #: components/app/interface/settings/server/assistant/labels.ts
 msgid "Manager"
@@ -10289,6 +10462,7 @@ msgid "Marshall Islands"
 msgstr "Маршалловы Острова"
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
+#: components/modal/modals/permissionTitles.ts
 msgid "Masquerade"
 msgstr "Маскарад"
 
@@ -10421,7 +10595,7 @@ msgstr "Участник с {0}"
 #: components/app/interface/settings/server/channels/ChannelExtras.tsx
 #: components/app/interface/settings/ServerSettings.tsx
 #: components/modal/lib/serverTemplateText.ts
-#: components/modal/modals/AddBot.tsx
+#: components/modal/modals/permissionTitles.ts
 #: src/interface/designs/Mirror.tsx
 msgid "Members"
 msgstr "Участники"
@@ -10498,6 +10672,7 @@ msgid "Mention"
 msgstr "Упомянуть"
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
+#: components/modal/modals/permissionTitles.ts
 #: src/interface/OAuth.tsx
 msgid "Mention everyone"
 msgstr "Упоминать всех"
@@ -10511,6 +10686,7 @@ msgid "Mention everyone and online members inside the server"
 msgstr "Упоминать всех и участников онлайн внутри сервера"
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
+#: components/modal/modals/permissionTitles.ts
 msgid "Mention roles"
 msgstr "Упоминать роли"
 
@@ -10647,7 +10823,7 @@ msgstr "Сообщение было отправлено на другой пл�
 #: components/app/interface/settings/server/assistant/labels.ts
 #: components/app/interface/settings/server/audit/AuditLog.tsx
 #: components/app/interface/settings/user/Keybinds.tsx
-#: components/modal/modals/AddBot.tsx
+#: components/modal/modals/permissionTitles.ts
 #: src/interface/developers/docs/DocsPortal.tsx
 #: src/interface/navigation/PhoneTabs.tsx
 msgid "Messages"
@@ -10930,11 +11106,16 @@ msgstr "Вниз"
 #~ msgid "Move feather"
 #~ msgstr ""
 
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "Move in the list"
+msgstr "Перемещаться по списку"
+
 #: components/app/interface/settings/shared/Discoverable.tsx
 msgid "Move it up the list or take a place in the top row."
 msgstr "Поднимите его выше в списке или займите место в верхней строке."
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
+#: components/modal/modals/permissionTitles.ts
 msgid "Move members"
 msgstr "Перемещать участников"
 
@@ -11001,6 +11182,7 @@ msgid "Mute lower-ranking members in voice call"
 msgstr "Заглушать низкоранговых участников в голосовом канале"
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
+#: components/modal/modals/permissionTitles.ts
 msgid "Mute members"
 msgstr "Отключать звук участникам"
 
@@ -11610,6 +11792,10 @@ msgid "No colour"
 msgstr "Без цвета"
 
 #: components/app/interface/channels/text/interactions/CommandPicker.tsx
+msgid "No command has this name. Press Enter again to send it as a message."
+msgstr "Команды с таким названием нет. Нажмите Enter ещё раз, чтобы отправить это сообщением."
+
+#: components/app/interface/channels/text/interactions/CommandPicker.tsx
 msgid "No commands match"
 msgstr "Подходящих команд нет"
 
@@ -11811,6 +11997,10 @@ msgstr "Нет ожидающих заявок"
 msgid "No permissions set yet"
 msgstr "Разрешений пока нет"
 
+#: components/app/interface/settings/server/apps/ServerAppPage.tsx
+msgid "No permissions were given when it was added."
+msgstr "При добавлении разрешения не выдавались."
+
 #: src/interface/channels/text/TextSearchSidebar.tsx
 msgid "No pinned messages in this channel yet."
 msgstr "В этом канале пока нет закреплённых сообщений."
@@ -11868,6 +12058,10 @@ msgstr "Ролей пока нет"
 msgid "No rules yet"
 msgstr "Правил пока нет"
 
+#: components/app/interface/settings/server/apps/RulesEditor.tsx
+msgid "No rules: everyone who has the permissions the bot asks for can use it, in every channel."
+msgstr "Правил нет: им может пользоваться любой, у кого есть нужные боту разрешения, во всех каналах."
+
 #: src/interface/Developers.tsx
 msgid "No secret yet: the app is a public client and must use PKCE (it always must)."
 msgstr "Секрета пока нет: приложение является публичным клиентом и должно использовать PKCE (так нужно всегда)."
@@ -11887,6 +12081,10 @@ msgstr "Без пробелов в начале и в конце."
 #: components/modal/modals/CreateBot.tsx
 msgid "No spam: send messages only when people ask for them or expect them."
 msgstr "Никакого спама: отправляйте сообщения только тогда, когда люди их просят или ждут."
+
+#: components/app/interface/channels/text/interactions/CommandPicker.tsx
+msgid "No suggestions match. You can still type a value."
+msgstr "Нет подходящих подсказок. Вы всё равно можете ввести значение."
 
 #: components/app/interface/settings/channel/ForumTags.tsx
 msgid "No tags yet."
@@ -11909,6 +12107,10 @@ msgstr "Подходящих пользователей нет."
 #: components/app/interface/safety/labels.tsx
 msgid "No violation found"
 msgstr "Нарушение не найдено"
+
+#: components/app/interface/settings/server/webhooks/ServerWebhooks.tsx
+msgid "No webhooks match this filter."
+msgstr "Нет вебхуков, подходящих под этот фильтр."
 
 #: components/app/interface/settings/server/webhooks/ServerWebhooks.tsx
 msgid "No webhooks yet."
@@ -12102,6 +12304,10 @@ msgstr "Здесь не поддерживается"
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsOverview.tsx
 msgid "Not synced with {0}"
 msgstr "Не синхронизировано с {0}"
+
+#: components/ui/components/features/profiles/ProfileBotAbout.tsx
+msgid "Not verified by Zrzur"
+msgstr "Не проверен Zrzur"
 
 #: components/app/interface/settings/server/assistant/labels.ts
 #: components/ui/components/features/profiles/ProfileNote.tsx
@@ -12701,6 +12907,10 @@ msgstr "Открыть настройки сервера"
 msgid "Open settings"
 msgstr "Открыть настройки"
 
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "Open the command list"
+msgstr "Открыть список команд"
+
 #: components/app/interface/discover/OpenInApp.tsx
 msgid "Open the desktop app"
 msgstr "Открыть приложение для компьютера"
@@ -12795,6 +13005,7 @@ msgid "Original case id"
 msgstr "ID исходного дела"
 
 #: components/app/interface/discover/categories.tsx
+#: components/modal/modals/permissionTitles.ts
 msgid "Other"
 msgstr "Другое"
 
@@ -13195,7 +13406,12 @@ msgstr "Окончательно удаляет этого бота. Это не
 msgid "Permission"
 msgstr "Разрешение"
 
+#: components/modal/modals/permissionTitles.ts
+msgid "Permission number {n}"
+msgstr "Разрешение номер {n}"
+
 #: components/app/interface/settings/ChannelSettings.tsx
+#: components/app/interface/settings/server/apps/ServerAppPage.tsx
 #: components/app/interface/settings/server/assistant/labels.ts
 #: components/app/interface/settings/server/audit/AuditLog.tsx
 #: src/interface/developers/docs/EndpointReference.tsx
@@ -13702,6 +13918,7 @@ msgstr "Конфиденциальность"
 #: components/app/interface/discover/Detail.tsx
 #: components/auth/src/flows/FlowCreate.tsx
 #: components/ui/components/features/messaging/elements/SpecialEmbedPlaceholder.tsx
+#: components/ui/components/features/profiles/ProfileBotAbout.tsx
 msgid "Privacy policy"
 msgstr "Политика конфиденциальности"
 
@@ -14121,6 +14338,7 @@ msgstr "Достигните уровня {0}, чтобы открыть ({1} К
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 #: components/app/menus/MessageContextMenu.tsx
+#: components/modal/modals/permissionTitles.ts
 #: src/interface/OAuth.tsx
 msgid "React"
 msgstr "Отреагировать"
@@ -14151,6 +14369,7 @@ msgid "Read in #{0}"
 msgstr "Читать в #{0}"
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
+#: components/modal/modals/permissionTitles.ts
 #: src/interface/OAuth.tsx
 msgid "Read message history"
 msgstr "Читать историю сообщений"
@@ -14471,11 +14690,16 @@ msgstr "Убрать все реакции"
 msgid "Remove answer"
 msgstr "Убрать ответ"
 
+#: components/app/interface/settings/server/apps/ServerAppPage.tsx
+msgid "Remove app"
+msgstr "Удалить приложение"
+
 #: components/app/interface/settings/user/profile/UserProfileEditor.tsx
 msgid "Remove avatar"
 msgstr "Убрать аватар"
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
+#: components/modal/modals/permissionTitles.ts
 msgid "Remove avatars"
 msgstr "Убрать аватары"
 
@@ -14607,6 +14831,15 @@ msgstr "Убрать эмодзи"
 #: components/app/interface/settings/user/bots/CommandManager.tsx
 msgid "Remove the hidden control characters."
 msgstr "Уберите скрытые управляющие символы."
+
+#. placeholder {0}: name(rule())
+#: components/app/interface/settings/server/apps/RulesEditor.tsx
+msgid "Remove the rule for {0}"
+msgstr "Удалить правило для {0}"
+
+#: components/app/interface/settings/server/apps/ServerAppPage.tsx
+msgid "Remove this app?"
+msgstr "Удалить это приложение?"
 
 #: components/app/menus/UserContextMenu.tsx
 #: components/modal/modals/RemoveTimeout.tsx
@@ -15236,6 +15469,8 @@ msgid "Role unavailable"
 msgstr "Роль недоступна"
 
 #. placeholder {0}: role()!.name
+#. placeholder {0}: role().name
+#: components/app/interface/settings/server/apps/ServerAppPage.tsx
 #: components/modal/modals/InterestsModal.tsx
 msgid "Role: {0}"
 msgstr "Роль: {0}"
@@ -15320,6 +15555,10 @@ msgstr "Розовый"
 msgid "Rounded"
 msgstr "Скруглённый"
 
+#: components/app/interface/settings/server/apps/RulesEditor.tsx
+msgid "Rule for"
+msgstr "Правило для"
+
 #: components/modal/lib/serverTemplateText.ts
 msgid "rules"
 msgstr "правила"
@@ -15337,6 +15576,19 @@ msgstr "Канал правил"
 #: components/app/interface/settings/server/AutoModSettings.tsx
 msgid "Rules couldn't be loaded"
 msgstr "Не удалось загрузить правила"
+
+#. placeholder {0}: command.name
+#: components/app/interface/settings/server/apps/ServerAppPage.tsx
+msgid "Rules for {0}"
+msgstr "Правила для {0}"
+
+#: components/app/interface/settings/server/apps/ServerAppPage.tsx
+msgid "Rules for all commands"
+msgstr "Правила для всех команд"
+
+#: components/app/interface/settings/server/apps/ServerAppPage.tsx
+msgid "Rules for one command come before the rules for the whole app. A rule for a member beats their roles, a Deny on any of their roles beats an Allow on another, and Everyone counts last."
+msgstr "Правила для одной команды важнее правил для всего приложения. Правило для участника важнее его ролей, запрет в любой из его ролей важнее разрешения в другой, а «Все» учитывается последним."
 
 #: components/app/interface/settings/server/pages.tsx
 msgid "Rules that stop spam, bad words and unwanted links."
@@ -15362,6 +15614,10 @@ msgstr "Запускать плагины"
 #: src/interface/developers/docs/GettingStarted.tsx
 #~ msgid "Run the bot on a server that stays on, with the token in its secret store, a health check and automatic restarts."
 #~ msgstr ""
+
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "Run the chosen command"
+msgstr "Выполнить выбранную команду"
 
 #: components/app/interface/settings/user/plugins/common.tsx
 msgid "Running"
@@ -15685,6 +15941,7 @@ msgstr "Наука"
 #~ msgid "Science & Tech"
 #~ msgstr ""
 
+#: components/app/interface/settings/server/apps/ServerAppPage.tsx
 #: src/interface/Developers.tsx
 msgid "Scopes"
 msgstr "Области доступа"
@@ -16020,6 +16277,7 @@ msgid "Send embedded content such as link embeds or custom embeds"
 msgstr "Отправить встроенное содержание, например как ссылки или свои вставки"
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
+#: components/modal/modals/permissionTitles.ts
 #: src/interface/OAuth.tsx
 msgid "Send embeds"
 msgstr "Отправлять встраиваемый контент"
@@ -16055,6 +16313,7 @@ msgid "Send message"
 msgstr "Отправить сообщение"
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
+#: components/modal/modals/permissionTitles.ts
 #: src/interface/OAuth.tsx
 msgid "Send messages"
 msgstr "Отправлять сообщения"
@@ -16072,6 +16331,7 @@ msgid "Send messages in channels"
 msgstr "Отправлять сообщения в каналы"
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
+#: components/modal/modals/permissionTitles.ts
 msgid "Send messages in threads"
 msgstr "Отправлять сообщения в ветках"
 
@@ -16178,8 +16438,8 @@ msgstr "С засечками"
 #: components/app/interface/discover/ReviewQueue.tsx
 #: components/app/interface/safety/labels.tsx
 #: components/app/interface/settings/UserSettings.tsx
-#: components/modal/modals/AddBot.tsx
 #: components/modal/modals/CreateGroupOrServer.tsx
+#: components/modal/modals/permissionTitles.ts
 #: src/interface/navigation/servers/railDrag.ts
 msgid "Server"
 msgstr "Серверы"
@@ -16561,6 +16821,10 @@ msgstr "Показывать эффекты профиля"
 msgid "Show the Hijri date"
 msgstr "Показывать дату по хиджре"
 
+#: components/app/interface/settings/server/webhooks/ServerWebhooks.tsx
+msgid "Show webhooks made by"
+msgstr "Показать вебхуки, созданные"
+
 #: components/app/interface/settings/user/Native.tsx
 msgid "Show Zrzur using Discord rich presence."
 msgstr "Показывать, что вы используете Zrzur, через статус Discord (Rich Presence)."
@@ -16716,7 +16980,7 @@ msgstr "Словакия"
 msgid "Slovenia"
 msgstr "Словения"
 
-#: components/app/interface/channels/text/interactions/EphemeralMessages.tsx
+#: components/app/interface/channels/text/interactions/errorText.ts
 msgid "Slow down a little and try again."
 msgstr "Помедленнее и попробуйте ещё раз."
 
@@ -16836,7 +17100,7 @@ msgstr "Сомали"
 msgid "Some frames are too short. Each frame must show for at least 33 ms."
 msgstr "Некоторые кадры слишком короткие. Каждый кадр должен показываться не менее 33 мс."
 
-#: components/app/interface/channels/text/interactions/EphemeralMessages.tsx
+#: components/app/interface/channels/text/interactions/errorText.ts
 msgid "Some of the values are not valid."
 msgstr "Некоторые значения недопустимы."
 
@@ -16906,7 +17170,7 @@ msgstr "Что-то пошло не так на нашей стороне. По�
 #~ msgid "Something went wrong! {error}"
 #~ msgstr "Что-то пошло не так! {error}"
 
-#: components/app/interface/channels/text/interactions/EphemeralMessages.tsx
+#: components/app/interface/channels/text/interactions/errorText.ts
 #: components/app/interface/settings/user/plugins/text.ts
 #: src/interface/OAuth.tsx
 msgid "Something went wrong."
@@ -17019,6 +17283,7 @@ msgid "Sparks"
 msgstr "Искры"
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
+#: components/modal/modals/permissionTitles.ts
 #: src/interface/OAuth.tsx
 msgid "Speak"
 msgstr "Говорить"
@@ -17809,6 +18074,10 @@ msgstr "Временный бан"
 msgid "Terms"
 msgstr "Условия"
 
+#: components/ui/components/features/profiles/ProfileBotAbout.tsx
+msgid "Terms of service"
+msgstr "Условия использования"
+
 #: components/app/interface/discover/Detail.tsx
 #: components/app/interface/settings/user/safety/ReportsAndStanding.tsx
 msgid "Terms of Service"
@@ -18065,7 +18334,11 @@ msgstr "Бета-версия закрыта: подайте заявку, и к
 msgid "The bot"
 msgstr "Бот"
 
-#: components/app/interface/channels/text/interactions/EphemeralMessages.tsx
+#: components/app/interface/channels/text/interactions/CommandPicker.tsx
+msgid "The bot did not answer. Type a value yourself."
+msgstr "Бот не ответил. Введите значение сами."
+
+#: components/app/interface/channels/text/interactions/errorText.ts
 msgid "The bot did not respond in time."
 msgstr "Бот не ответил вовремя."
 
@@ -18081,13 +18354,17 @@ msgstr "Бот уже на этом сервере."
 msgid "The bot is already on discover, the user must contact support to have it removed"
 msgstr "Бот уже добавлен в каталог. Чтобы удалить его, свяжитесь с поддержкой."
 
-#: components/app/interface/channels/text/interactions/EphemeralMessages.tsx
+#: components/app/interface/channels/text/interactions/errorText.ts
 msgid "The bot is offline right now."
 msgstr "Бот сейчас не в сети."
 
 #: src/interface/developers/docs/GettingStarted.tsx
 msgid "The bot keeps a WebSocket connection to the gateway. Commands, button clicks, new messages and member changes arrive there as events."
 msgstr "Бот поддерживает WebSocket-соединение со шлюзом. Команды, нажатия кнопок, новые сообщения и изменения участников приходят туда как события."
+
+#: components/app/interface/settings/server/apps/ServerAppPage.tsx
+msgid "The bot leaves the server. Its role, its commands here and their rules go too. You can add it again later."
+msgstr "Бот покинет сервер. Его роль, команды здесь и их правила тоже будут удалены. Позже его можно добавить снова."
 
 #: components/app/interface/discover/Detail.tsx
 #: components/modal/modals/AddBot.tsx
@@ -18352,6 +18629,10 @@ msgstr "Люди, создающие дизайны"
 msgid "The people who make them"
 msgstr "Люди, которые их создают"
 
+#: components/app/interface/settings/server/apps/ServerAppPage.tsx
+msgid "The permissions it was given when it was added, through its own role."
+msgstr "Разрешения, выданные при добавлении через его собственную роль."
+
 #: components/app/interface/settings/server/LobbyAppearanceEditor.tsx
 msgid "The picture at the top of the lobby."
 msgstr "Изображение в верхней части лобби."
@@ -18383,6 +18664,10 @@ msgstr "Не удалось загрузить очередь проверки."
 #: components/app/interface/settings/server/pages.tsx
 msgid "The rules channel, system messages and counters."
 msgstr "Канал правил, системные сообщения и счётчики."
+
+#: components/app/interface/settings/server/apps/ServerAppPage.tsx
+msgid "The rules couldn't be loaded, so they can't be changed now."
+msgstr "Не удалось загрузить правила, поэтому сейчас их нельзя изменить."
 
 #: components/app/interface/settings/user/bots/CommandManager.tsx
 msgid "The same list your bot sends with PUT to its commands route. Importing replaces every global command."
@@ -18561,6 +18846,10 @@ msgstr "В этом адресе есть специальные символы,
 msgid "This app doesn't exist any more."
 msgstr "Этого приложения больше не существует."
 
+#: components/app/interface/settings/server/apps/ServerAppPage.tsx
+msgid "This app has no commands here."
+msgstr "У этого приложения здесь нет команд."
+
 #: components/i18n/errors.tsx
 msgid "This app isn't added to the server."
 msgstr "Это приложение не добавлено на сервер."
@@ -18581,9 +18870,13 @@ msgstr "Этот бот может присоединиться к любому 
 msgid "This bot is listed on Discover"
 msgstr "Этот бот есть в «Обзоре»"
 
-#: components/app/interface/channels/text/interactions/EphemeralMessages.tsx
+#: components/app/interface/channels/text/interactions/errorText.ts
 msgid "This bot is not available in this channel."
 msgstr "Этот бот недоступен в этом канале."
+
+#: components/modal/modals/AddBot.tsx
+msgid "This bot is not verified by Zrzur."
+msgstr "Этот бот не проверен Zrzur."
 
 #: components/i18n/errors.tsx
 msgid "This bot is private and can only be added by the creator."
@@ -18690,7 +18983,7 @@ msgstr "Этот канал использует собственные разр
 msgid "This command doesn't exist any more."
 msgstr "Этой команды больше не существует."
 
-#: components/app/interface/channels/text/interactions/EphemeralMessages.tsx
+#: components/app/interface/channels/text/interactions/errorText.ts
 msgid "This command no longer exists."
 msgstr "Этой команды больше нет."
 
@@ -18787,7 +19080,7 @@ msgstr "Эта группа достигла своего лимита в {0} п
 msgid "This has already been sent."
 msgstr "Это уже было отправлено."
 
-#: components/app/interface/channels/text/interactions/EphemeralMessages.tsx
+#: components/app/interface/channels/text/interactions/errorText.ts
 msgid "This has expired."
 msgstr "Срок действия истёк."
 
@@ -19066,6 +19359,10 @@ msgstr "Этого сервера нет в «Обзоре»."
 msgid "This server needs a higher Wings level for a custom link."
 msgstr "Для собственной ссылки этому серверу нужен более высокий уровень Крыльев."
 
+#: components/app/interface/settings/server/apps/ServerAppPage.tsx
+msgid "This server only"
+msgstr "Только этот сервер"
+
 #: components/i18n/errors.tsx
 msgid "This server paused new members for now. Try again later."
 msgstr "Этот сервер пока приостановил приём новых участников. Попробуйте позже."
@@ -19284,6 +19581,7 @@ msgstr "Выдать тайм-аут участнику"
 #~ msgstr "Отправить в тайм-аут"
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
+#: components/modal/modals/permissionTitles.ts
 msgid "Timeout members"
 msgstr "Выдавать тайм-аут участникам"
 
@@ -19467,6 +19765,7 @@ msgid "Try a different word or explore the categories."
 msgstr "Попробуйте другое слово или изучите категории."
 
 #: components/app/interface/discover/ServerPage.tsx
+#: components/app/interface/settings/server/apps/ServerAppPage.tsx
 #: components/app/interface/settings/server/webhooks/ServerWebhooks.tsx
 #: components/app/interface/settings/user/badges/MyBadges.tsx
 #: components/app/interface/settings/user/bots/PrivilegedIntents.tsx
@@ -19891,6 +20190,10 @@ msgstr "Нежелательная реклама"
 msgid "Untested: derived from the source code only."
 msgstr "Не проверялось: получено только из исходного кода."
 
+#: components/modal/modals/AddBot.tsx
+msgid "Untick anything you do not want to give it."
+msgstr "Снимите отметку со всего, что не хотите ему давать."
+
 #. placeholder {0}: date(entry.grant!.expires_at!)
 #: components/app/interface/settings/user/badges/MyBadges.tsx
 msgid "Until {0}"
@@ -20029,6 +20332,7 @@ msgid "Upload file"
 msgstr "Загрузить файл"
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
+#: components/modal/modals/permissionTitles.ts
 #: src/interface/OAuth.tsx
 msgid "Upload files"
 msgstr "Загрузить файлы"
@@ -20144,6 +20448,7 @@ msgid "Use choices or suggestions while typing, not both."
 msgstr "Используйте либо варианты, либо подсказки при вводе, но не то и другое."
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
+#: components/modal/modals/permissionTitles.ts
 msgid "Use emojis from other servers"
 msgstr "Использовать эмодзи с других серверов"
 
@@ -20354,6 +20659,7 @@ msgid "Verified"
 msgstr "Подтверждён"
 
 #: components/ui/components/features/profiles/badges/useBadgeText.ts
+#: components/ui/components/features/profiles/BotLabel.tsx
 msgid "Verified bot"
 msgstr "Проверенный бот"
 
@@ -20364,6 +20670,10 @@ msgstr "Разработчик проверенного бота"
 #: components/app/interface/settings/user/bots/BotVerification.tsx
 msgid "Verified bots show a mark next to their name and can join more than 100 servers. Past 100 servers, privileged intents stay on only once they are approved."
 msgstr "Проверенные боты отображаются с отметкой рядом с названием и могут присоединяться более чем к 100 серверам. После 100 серверов привилегированные интенты остаются включёнными только после одобрения."
+
+#: components/ui/components/features/profiles/ProfileBotAbout.tsx
+msgid "Verified by Zrzur"
+msgstr "Проверен Zrzur"
 
 #: components/app/interface/settings/user/profile/CommunityParts.tsx
 #: components/app/interface/settings/user/profile/CreatorMark.tsx
@@ -20428,6 +20738,7 @@ msgid "Victory"
 msgstr "Победа"
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
+#: components/modal/modals/permissionTitles.ts
 msgid "Video"
 msgstr "Видео"
 
@@ -20455,10 +20766,12 @@ msgstr "Просмотр"
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 #: components/app/interface/settings/server/layout.tsx
+#: components/modal/modals/permissionTitles.ts
 msgid "View audit log"
 msgstr "Просматривать журнал аудита"
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
+#: components/modal/modals/permissionTitles.ts
 msgid "View channel"
 msgstr "Просматривать канал"
 
@@ -20528,8 +20841,8 @@ msgstr "Перейти"
 #: components/app/interface/settings/channel/Overview.tsx
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 #: components/app/interface/settings/UserSettings.tsx
-#: components/modal/modals/AddBot.tsx
 #: components/modal/modals/CreateChannel.tsx
+#: components/modal/modals/permissionTitles.ts
 msgid "Voice"
 msgstr "Голос"
 
@@ -20942,6 +21255,10 @@ msgstr "Что происходит на сервере, в одном кана�
 msgid "What it adds"
 msgstr "Что он добавляет"
 
+#: components/app/interface/settings/server/apps/ServerAppPage.tsx
+msgid "What it can do"
+msgstr "Что оно может"
+
 #: components/app/interface/settings/server/pages.tsx
 msgid "What new members need before they can talk."
 msgstr "Что нужно новым участникам, прежде чем они смогут писать."
@@ -21070,6 +21387,10 @@ msgstr "Могут ли люди найти сервер в «Обзоре»."
 #: components/modal/modals/ReportContent.tsx
 msgid "Which describes it best?"
 msgstr "Что описывает это лучше всего?"
+
+#: components/app/interface/settings/server/apps/RulesEditor.tsx
+msgid "Which one"
+msgstr "Какой"
 
 #: components/app/interface/settings/user/profile/CreatorStudio.tsx
 msgid "Which parts and which tool, if any"
@@ -21426,7 +21747,7 @@ msgstr "Вы собираетесь выгнать {0}"
 msgid "You are banned from this server."
 msgstr "Вы забанены на этом сервере."
 
-#: components/app/interface/channels/text/interactions/EphemeralMessages.tsx
+#: components/app/interface/channels/text/interactions/errorText.ts
 msgid "You are not allowed to do this."
 msgstr "Вам это не разрешено."
 
@@ -22440,6 +22761,10 @@ msgstr "Поддержка Zrzur"
 #: components/app/interface/settings/user/plugins/text.ts
 msgid "Zrzur suspended this plugin while it's being reviewed."
 msgstr "Zrzur приостановил этот плагин на время проверки."
+
+#: components/modal/modals/AddBot.tsx
+msgid "Zrzur verified who runs this bot."
+msgstr "Zrzur проверил, кто управляет этим ботом."
 
 #: components/app/interface/settings/user/Native.tsx
 msgid "Zrzur will start in the system tray."

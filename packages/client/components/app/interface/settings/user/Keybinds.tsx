@@ -89,6 +89,30 @@ export function KeybindsSettings() {
       ],
     },
     {
+      title: <Trans>Bot commands</Trans>,
+      rows: [
+        {
+          title: <Trans>Open the command list</Trans>,
+          description: <Trans>In a server channel or a DM with a bot.</Trans>,
+          keys: [["/"]],
+        },
+        {
+          title: <Trans>Move in the list</Trans>,
+          keys: [["↑"], ["↓"]],
+        },
+        {
+          title: <Trans>Choose a command or a suggestion</Trans>,
+          description: <Trans>A command typed in full is chosen too.</Trans>,
+          keys: [["Enter"], ["Tab"]],
+        },
+        {
+          title: <Trans>Run the chosen command</Trans>,
+          keys: [["Enter"]],
+        },
+        { title: <Trans>Close the command list</Trans>, keys: [["Esc"]] },
+      ],
+    },
+    {
       title: <Trans>Navigation</Trans>,
       rows: [
         {

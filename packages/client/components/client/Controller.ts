@@ -8,6 +8,10 @@ import { ModalControllerExtended } from "@revolt/modal";
 import type { State as ApplicationState } from "@revolt/state";
 import type { Session } from "@revolt/state/stores/Auth";
 
+import {
+  ephemeralStorage,
+  forgetStoredEphemeral,
+} from "../app/interface/channels/text/interactions/ephemeralStorage";
 import { forgetCreators } from "../common/lib/creatorCache";
 import Instance from "../instance/Instance";
 import { killServiceWorkerSubscription } from "./NotificationsController";
@@ -696,6 +700,8 @@ export default class ClientController {
 
   logout() {
     forgetCreators();
+    // private bot answers kept for a reload belong to this account only
+    forgetStoredEphemeral(ephemeralStorage());
     this.state.settings.resetNotificationsState();
     killServiceWorkerSubscription(this.instance.client, true);
     this.state.auth.removeSession();

@@ -17,3 +17,6 @@ export function auditQueryString(params: {
   for (const type of params.type ?? []) query.append("type", type);
   return query.toString();
 }
+
+/** Actions shown under the "Apps" filter: bots added, removed, and their command rules */
+export const APPS_ACTIONS = ["BotAdd", "BotRemove", "CommandPermissionsUpdate"];

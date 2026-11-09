@@ -23,15 +23,18 @@ import {
   FloatingSelect,
   Form2,
   MenuItem,
+  Segmented,
   SettingsFormPanel,
   SettingsRow,
   SettingsSection,
   TextField,
 } from "@revolt/ui";
+import { BotLabel } from "@revolt/ui/components/features/profiles/BotLabel";
 import { Icon } from "@revolt/ui/icons/Icon";
 
 import { channelLabel } from "../channels/channelLabel";
 import { useSaved } from "../savedNotice";
+import { type WebhookMaker, filterWebhooks } from "./webhookFilter";
 import { WEBHOOK_NAME_MAX, webhookNameProblem } from "./webhookName";
 
 /** Server settings: every webhook of the server */
@@ -86,10 +89,14 @@ export function WebhooksPanel(props: { server?: Server; channel?: Channel }) {
   );
   const refresh = () => setVersion((n) => n + 1);
 
+  // all webhooks, or only those a bot (or a person) made
+  const [maker, setMaker] = createSignal<WebhookMaker>("all");
+  const madeByBot = (id: string) => !!client().users.get(id)?.bot;
+
   // Newest first, grouped by channel
   const groups = createMemo(() => {
     const byChannel = new Map<string, ChannelWebhook[]>();
-    for (const hook of hooks() ?? []) {
+    for (const hook of filterWebhooks(hooks() ?? [], maker(), madeByBot)) {
       if (!byChannel.has(hook.channelId)) byChannel.set(hook.channelId, []);
       byChannel.get(hook.channelId)!.push(hook);
     }
@@ -380,7 +387,31 @@ export function WebhooksPanel(props: { server?: Server; channel?: Channel }) {
               />
             </SettingsSection>
           </Match>
-          <Match when={groups().length}>
+          <Match when={hooks()?.length}>
+            <Show
+              when={(hooks() ?? []).some((hook) => madeByBot(hook.creatorId))}
+            >
+              <MakerFilter>
+                <Segmented
+                  aria-label={t`Show webhooks made by`}
+                  value={maker()}
+                  options={[
+                    { value: "all", label: t`All` },
+                    { value: "bots", label: t`Made by bots` },
+                    { value: "people", label: t`Made by people` },
+                  ]}
+                  onChange={setMaker}
+                />
+              </MakerFilter>
+            </Show>
+            <Show when={!groups().length}>
+              <SettingsSection>
+                <SettingsRow
+                  icon={<Icon name="webhooks-logo" size={20} />}
+                  title={<Trans>No webhooks match this filter.</Trans>}
+                />
+              </SettingsSection>
+            </Show>
             <For each={groups()}>
               {(group) => (
                 <SettingsSection
@@ -397,7 +428,20 @@ export function WebhooksPanel(props: { server?: Server; channel?: Channel }) {
                           />
                         }
                         title={webhook.name}
-                        description={facts(webhook)}
+                        description={
+                          <>
+                            {facts(webhook)}
+                            <Show when={madeByBot(webhook.creatorId)}>
+                              {" "}
+                              <BotLabel
+                                verified={
+                                  client().users.get(webhook.creatorId)
+                                    ?.verifiedBot
+                                }
+                              />
+                            </Show>
+                          </>
+                        }
                         control={() => (
                           <Actions>
                             <Show when={webhook.url}>
@@ -592,6 +636,11 @@ export function WebhooksPanel(props: { server?: Server; channel?: Channel }) {
     </Stack>
   );
 }
+
+/** All, bots' or people's webhooks */
+const MakerFilter = styled("div", {
+  base: { display: "flex", justifyContent: "flex-start", minWidth: 0 },
+});
 
 const Stack = styled("div", {
   base: { display: "flex", flexDirection: "column", gap: "16px" },

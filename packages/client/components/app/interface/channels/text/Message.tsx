@@ -289,7 +289,10 @@ export function Message(props: Props) {
                 placement="top"
               >
                 <span tabindex="0" aria-label={t`Sent by the bot ${botName()}`}>
-                  <BotLabel official={props.message.author?.officialBot} />
+                  <BotLabel
+                    official={props.message.author?.officialBot}
+                    verified={props.message.author?.verifiedBot}
+                  />
                 </span>
               </Tooltip>
             </Match>
@@ -332,7 +335,10 @@ export function Message(props: Props) {
             </Match>
             <Match when={props.message.author?.bot}>
               {/* the same word tag as profiles and the member list */}
-              <BotLabel official={props.message.author?.officialBot} />
+              <BotLabel
+                official={props.message.author?.officialBot}
+                verified={props.message.author?.verifiedBot}
+              />
             </Match>
             <Match when={props.message.webhook}>
               <Tooltip content={t`Webhook`} placement="top">
@@ -477,9 +483,7 @@ export function Message(props: Props) {
           message={props.message}
         />
         <Reactions
-          reactions={
-            props.message.reactions
-          }
+          reactions={props.message.reactions}
           interactions={props.message.interactions}
           userId={client().user!.id}
           readOnly={

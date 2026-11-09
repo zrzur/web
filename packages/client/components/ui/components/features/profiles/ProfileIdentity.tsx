@@ -82,7 +82,10 @@ export function ProfileIdentity(props: {
           </Show>
           <CreatorMark user={props.user} />
           <Show when={props.user.bot}>
-            <BotLabel official={props.user.officialBot} />
+            <BotLabel
+              official={props.user.officialBot}
+              verified={props.user.verifiedBot}
+            />
           </Show>
           {/* set by Trust & Safety; the SDK passes the field through */}
           <Show when={(props.user.bot as { verified?: boolean })?.verified}>

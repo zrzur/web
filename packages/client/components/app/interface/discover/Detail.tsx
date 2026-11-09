@@ -13,10 +13,12 @@ import { Portal } from "solid-js/web";
 import { Trans, useLingui } from "@lingui/solid/macro";
 import { styled } from "styled-system/jsx";
 
+import type { API } from "@zrzur/sdk/solid";
+
 import { useClient } from "@revolt/client";
 import { Avatar } from "@revolt/ui";
-import { BotLabel } from "@revolt/ui/components/features/profiles/BotLabel";
 import { BadgeMark } from "@revolt/ui/components/features/profiles/badges/BadgeMark";
+import { BotLabel } from "@revolt/ui/components/features/profiles/BotLabel";
 import { Icon } from "@revolt/ui/icons/Icon";
 
 import { usePermissionNames } from "../../../../src/interface/OAuth";
@@ -32,7 +34,7 @@ import {
   useFileUrl,
 } from "./Cards";
 import { categoryIcon, useDiscoverLabels } from "./categories";
-import { commandsIn } from "./find";
+import { listedCommands } from "./find";
 import { paletteTokens } from "./palette";
 
 /** Permissions that let a bot change the server or remove people */
@@ -58,7 +60,7 @@ export function ListingDetail(props: {
   /** Quieter actions on the start side: report, copy link */
   secondary?: JSX.Element;
 }) {
-  const { t } = useLingui();
+  const { t, i18n } = useLingui();
   const client = useClient();
   const fileUrl = useFileUrl();
   const labels = useDiscoverLabels();
@@ -70,6 +72,8 @@ export function ListingDetail(props: {
 
   // a plain signal: a resource would suspend the page behind the dialog
   const [invite, setInvite] = createSignal<BotInvite>();
+  // undefined until read, or when this server cannot list them
+  const [registered, setRegistered] = createSignal<API.ApplicationCommand[]>();
   // not props: the answer can land after the dialog has closed
   let wanted: string | undefined;
   onCleanup(() => (wanted = undefined));
@@ -79,10 +83,15 @@ export function ListingDetail(props: {
       (id) => {
         wanted = isBot() ? id : undefined;
         setInvite(undefined);
+        setRegistered(undefined);
         if (!wanted) return;
         discoverApi
           .botInvite(client(), id)
           .then((answer) => wanted === id && setInvite(answer))
+          .catch(() => undefined);
+        discoverApi
+          .botCommands(client(), id)
+          .then((answer) => wanted === id && setRegistered(answer))
           .catch(() => undefined);
       },
     ),
@@ -110,7 +119,8 @@ export function ListingDetail(props: {
       .map((group) => ({ ...group, bits: group.bits.filter(has) }))
       .filter((group) => group.bits.length);
 
-  const commands = () => commandsIn(props.listing.description);
+  const commands = () =>
+    listedCommands(registered(), props.listing.description, i18n().locale);
   const moreToSay = () => (props.listing.description ?? "").includes("\n");
   /** What the bot's first message would read like: its own first line */
   const firstLine = () =>
@@ -283,19 +293,46 @@ export function ListingDetail(props: {
                   </Part>
                 </Show>
 
-                <Show when={commands().length}>
+                <Show when={commands().items.length}>
                   <Part>
                     <h3>
                       <Trans>Commands</Trans>
                     </h3>
-                    <Commands>
-                      <For each={commands()}>
-                        {(command) => <code dir="auto">/{command}</code>}
-                      </For>
-                    </Commands>
-                    <small>
-                      <Trans>Named in the bot's description.</Trans>
-                    </small>
+                    <Show
+                      when={commands().source === "registered"}
+                      fallback={
+                        <>
+                          <Commands>
+                            <For each={commands().items}>
+                              {(command) => (
+                                <code dir="auto">/{command.name}</code>
+                              )}
+                            </For>
+                          </Commands>
+                          <small>
+                            <Trans>Named in the bot's description.</Trans>
+                          </small>
+                        </>
+                      }
+                    >
+                      <CommandList data-testid="bot-commands">
+                        <For
+                          each={
+                            commands().items as {
+                              name: string;
+                              description: string;
+                            }[]
+                          }
+                        >
+                          {(command) => (
+                            <li>
+                              <code dir="auto">/{command.name}</code>
+                              <span dir="auto">{command.description}</span>
+                            </li>
+                          )}
+                        </For>
+                      </CommandList>
+                    </Show>
                   </Part>
                 </Show>
 
@@ -677,6 +714,39 @@ const Part = styled("section", {
       fontSize: "12px",
       lineHeight: "16px",
       color: "var(--z-fg-muted)",
+    },
+  },
+});
+
+/** Registered commands: the name, then what it does */
+const CommandList = styled("ul", {
+  base: {
+    display: "flex",
+    flexDirection: "column",
+    gap: "8px",
+    margin: 0,
+    padding: 0,
+    listStyle: "none",
+    "& li": {
+      display: "flex",
+      alignItems: "baseline",
+      flexWrap: "wrap",
+      gap: "4px 12px",
+      minWidth: 0,
+    },
+    "& code": {
+      fontFamily:
+        "var(--fonts-mono, 'IBM Plex Mono'), 'IBM Plex Sans Arabic', monospace",
+      fontSize: "14px",
+      color: "var(--dz-mark)",
+      unicodeBidi: "isolate",
+    },
+    "& span": {
+      fontSize: "13px",
+      lineHeight: "20px",
+      color: "var(--z-fg-secondary)",
+      minWidth: 0,
+      overflowWrap: "anywhere",
     },
   },
 });

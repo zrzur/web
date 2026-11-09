@@ -198,6 +198,13 @@ export const discoverApi = {
   /** The bot's public invite: the permissions it asks for, its legal links */
   botInvite: (client: Client, id: string) =>
     discoverRequest<BotInvite>(client, "GET", `/bots/${id}/invite`),
+  /** The bot's registered global commands */
+  botCommands: (client: Client, id: string) =>
+    discoverRequest<API.ApplicationCommand[]>(
+      client,
+      "GET",
+      `/bots/${id}/commands`,
+    ),
   queue: (client: Client) =>
     discoverRequest<DiscoverQueueEntry[]>(client, "GET", "/discover/requests"),
   decide: (

@@ -12,6 +12,7 @@ import { Symbol } from "@revolt/ui/components/utils/Symbol";
 
 import { BotLabel } from "@revolt/ui/components/features/profiles/BotLabel";
 
+import { useInteractionErrorText } from "./errorText";
 import { InteractionHeader } from "./InteractionHeader";
 import { MessageComponents } from "./MessageComponents";
 import {
@@ -44,9 +45,9 @@ export function EphemeralMessages(props: {
         (entry) =>
           entry.channelId === props.channelId &&
           // commands show their progress; buttons and menus only "thinking"
-          // and failures (their own wait shows on the button)
+          // (their own wait and their failures show at the component)
           (entry.label ||
-            entry.state === "failed" ||
+            (entry.state === "failed" && !entry.componentKey) ||
             entry.state === "deferred"),
       )
       .map((pending) => ({ kind: "pending", at: pending.createdAt, pending }));
@@ -60,28 +61,7 @@ export function EphemeralMessages(props: {
     return [...pending, ...ephemeral].sort((a, b) => a.at - b.at);
   });
 
-  const errorText = (error?: string) => {
-    switch (error) {
-      case "Timeout":
-        return t`The bot did not respond in time.`;
-      case "ApplicationOffline":
-        return t`The bot is offline right now.`;
-      case "ApplicationNotInstalled":
-        return t`This bot is not available in this channel.`;
-      case "UnknownCommand":
-        return t`This command no longer exists.`;
-      case "MissingPermission":
-        return t`You are not allowed to do this.`;
-      case "FailedValidation":
-        return t`Some of the values are not valid.`;
-      case "InteractionExpired":
-        return t`This has expired.`;
-      case "TooManyRequests":
-        return t`Slow down a little and try again.`;
-      default:
-        return t`Something went wrong.`;
-    }
-  };
+  const errorText = useInteractionErrorText();
 
   const thinking = (id: string) => {
     const name = botName(client, id, t`The bot`);
@@ -229,7 +209,7 @@ function BotMessage(props: {
       username={
         <Username username={botName(client, props.botId, t`The bot`)} />
       }
-      info={<BotLabel />}
+      info={<BotLabel verified={bot()?.verifiedBot} />}
     >
       {props.children}
     </MessageContainer>

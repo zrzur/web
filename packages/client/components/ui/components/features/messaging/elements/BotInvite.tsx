@@ -61,7 +61,7 @@ export function BotInvite(props: Props) {
               {query.data!.username}
             </Show>
           </span>
-          <BotLabel />
+          <BotLabel verified={query.data?.verified} />
         </Name>
         <Line>
           <Show

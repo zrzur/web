@@ -2,6 +2,7 @@ import { For, Show, createMemo, createResource } from "solid-js";
 
 import { i18n } from "@lingui/core";
 import { Trans } from "@lingui/solid/macro";
+import type { API } from "@zrzur/sdk/solid";
 import { styled } from "styled-system/jsx";
 
 import { loadServerCommands } from "@revolt/app/interface/channels/text/interactions/store";
@@ -14,17 +15,24 @@ import { ProfileSection } from "./ProfileCard";
 const SHOWN = 6;
 
 /**
- * Slash commands a bot offers in this server, so people can see what it does
+ * Slash commands a bot offers in this server, so people can see what it
+ * does; outside a server, its global commands (`GET /bots/{id}/commands`)
  */
 export function ProfileCommands(props: { botId: string; serverId?: string }) {
   const client = useClient();
   const [commands] = createResource(
-    () => props.serverId,
-    (serverId) => loadServerCommands(client(), serverId).catch(() => undefined),
+    () => [props.botId, props.serverId] as const,
+    ([botId, serverId]) =>
+      (serverId
+        ? loadServerCommands(client(), serverId).then((list) => list.commands)
+        : (client().api.get(
+            `/bots/${botId as ""}/commands` as "/bots/{target}/commands",
+          ) as Promise<API.ApplicationCommand[]>)
+      ).catch(() => undefined),
   );
 
   const list = createMemo(() =>
-    (commands()?.commands ?? [])
+    (commands() ?? [])
       .filter(
         (command) =>
           command.application_id === props.botId &&
