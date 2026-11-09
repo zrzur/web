@@ -33,6 +33,12 @@ const bundle = Object.fromEntries(
   ].map((c) => [c.fileName, c]),
 );
 
+/** The two hooks the warning uses, called with a stand-in plugin context */
+type Hooks = {
+  generateBundle: (this: unknown, options: object, bundle: object) => void;
+  closeBundle: (this: unknown) => void;
+};
+
 describe("app preload", () => {
   it("lists the app and what it imports, not what the entry already loads", () => {
     expect(appPreloads(bundle)).toEqual([
@@ -64,7 +70,7 @@ describe("app preload", () => {
   });
 
   it("warns when the build has no src/app.tsx to preload", () => {
-    const plugin = preloadApp() as any;
+    const plugin = preloadApp() as unknown as Hooks;
     const warn = vi.fn();
     plugin.generateBundle.call(
       { warn },
@@ -76,7 +82,7 @@ describe("app preload", () => {
     plugin.closeBundle.call({ warn });
     expect(warn).toHaveBeenCalledWith(expect.stringMatching(/app\.tsx/));
 
-    const found = preloadApp() as any;
+    const found = preloadApp() as unknown as Hooks;
     const quiet = vi.fn();
     found.generateBundle.call({ warn: quiet }, {}, bundle);
     found.closeBundle.call({ warn: quiet });
