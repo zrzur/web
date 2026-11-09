@@ -19,40 +19,68 @@ const free = { resolution: [1280, 720] as [number, number], framerate: 30 };
 const plus = { resolution: [1920, 1080] as [number, number], framerate: 60 };
 
 describe("screenShareQualities", () => {
-  it("offers 720p only within a 720p plan", () => {
+  it("offers 720p 30 FPS only within a 720p plan", () => {
     const q = screenShareQualities(free);
-    expect(Object.keys(q).sort()).toEqual(["low", "motion"]);
-    expect(q.low).toMatchObject({ width: 1280, height: 720, frameRate: 30 });
-    expect(q.motion).toMatchObject({ width: 1280, height: 720, frameRate: 30 });
+    expect(Object.keys(q)).toEqual(["720p30"]);
+    expect(q["720p30"]).toMatchObject({
+      width: 1280,
+      height: 720,
+      frameRate: 30,
+    });
   });
 
-  it("keeps the existing bitrate caps", () => {
+  it("offers 60 FPS only where Feather or the server level allow it", () => {
     const q30 = screenShareQualities({
       resolution: [1920, 1080],
       framerate: 30,
     });
-    expect(q30.low!.encoding.maxBitrate).toBe(2_000_000);
-    expect(q30.high!.encoding.maxBitrate).toBe(5_000_000);
-    expect(q30.text!.encoding.maxBitrate).toBe(7_000_000);
-    const q60 = screenShareQualities(plus);
-    expect(q60.low!.encoding).toEqual({
-      maxBitrate: 4_000_000,
-      maxFramerate: 60,
+    expect(Object.keys(q30)).toEqual(["720p30", "1080p30"]);
+    expect(Object.keys(screenShareQualities(plus))).toEqual([
+      "720p30",
+      "1080p30",
+      "1080p60",
+    ]);
+    // 60 FPS allowed but not 1080p: nothing above 720p 30 FPS
+    expect(
+      Object.keys(screenShareQualities({ ...free, framerate: 60 })),
+    ).toEqual(["720p30"]);
+  });
+
+  it("keeps the existing bitrate caps", () => {
+    const q = screenShareQualities(plus);
+    expect(q["720p30"]!.encoding).toEqual({
+      maxBitrate: 2_000_000,
+      maxFramerate: 30,
     });
-    expect(q60.motion!.encoding).toEqual({
+    expect(q["1080p30"]!.encoding.maxBitrate).toBe(5_000_000);
+    expect(q["1080p60"]!.encoding).toEqual({
       maxBitrate: 8_000_000,
       maxFramerate: 60,
     });
   });
 
-  it("uses a text-friendly hint for sharp profiles and motion only for motion", () => {
+  it("text and slides stay sharp, video and games stay smooth", () => {
+    const sharp = screenShareQualities(plus, "detail")["1080p60"]!;
+    expect(sharp.contentHint).toBe("detail");
+    expect(sharp.degradationPreference).toBe("maintain-resolution");
+    const smooth = screenShareQualities(plus, "motion")["1080p60"]!;
+    expect(smooth.contentHint).toBe("motion");
+    expect(smooth.degradationPreference).toBe("balanced");
+    // sharp is the default
+    expect(screenShareQualities(plus)["720p30"]!.contentHint).toBe("detail");
+  });
+
+  it("gives weak viewers smaller layers below every quality", () => {
     const q = screenShareQualities(plus);
-    expect(q.low!.contentHint).toBe("detail");
-    expect(q.high!.contentHint).toBe("detail");
-    expect(q.text!.contentHint).toBe("text");
-    expect(q.motion!.contentHint).toBe("motion");
-    expect(q.high!.degradationPreference).toBe("maintain-resolution");
-    expect(q.motion!.degradationPreference).toBe("balanced");
+    expect(q["720p30"]!.layers.map((l) => l.height)).toEqual([360]);
+    expect(q["1080p60"]!.layers.map((l) => l.height)).toEqual([360, 720]);
+    for (const quality of Object.values(q))
+      for (const layer of quality.layers) {
+        expect(layer.width).toBeLessThan(quality.width);
+        expect(layer.encoding.maxBitrate).toBeLessThan(
+          quality.encoding.maxBitrate,
+        );
+      }
   });
 
   it("never offers more than the plan allows", () => {
@@ -62,53 +90,52 @@ describe("screenShareQualities", () => {
       expect(quality.height).toBeLessThanOrEqual(1080);
       expect(quality.frameRate).toBeLessThanOrEqual(60);
     }
-    const q30 = screenShareQualities({
-      resolution: [1920, 1080],
-      framerate: 30,
-    });
-    for (const quality of Object.values(q30))
-      expect(quality.frameRate).toBeLessThanOrEqual(30);
-  });
-
-  it("text follows an unlimited plan at source size", () => {
-    const q = screenShareQualities({ resolution: [0, 0], framerate: 30 });
-    expect(q.text).toMatchObject({ width: 0, height: 0, frameRate: 15 });
   });
 });
 
 describe("resolveQuality", () => {
-  it("falls back when a stored quality is no longer offered", () => {
+  it("falls back to the best quality the plan still allows", () => {
     const q = screenShareQualities(free);
-    expect(resolveQuality(q, "high").name).toBe("low");
-    expect(resolveQuality(q, "motion").name).toBe("motion");
+    expect(resolveQuality(q, "1080p60").name).toBe("720p30");
+    const q30 = screenShareQualities({
+      resolution: [1920, 1080],
+      framerate: 30,
+    });
+    expect(resolveQuality(q30, "1080p60").name).toBe("1080p30");
     expect(resolveQuality(screenShareQualities(plus), undefined).name).toBe(
-      "high",
+      "720p30",
+    );
+    expect(resolveQuality(screenShareQualities(plus), "1080p60").name).toBe(
+      "1080p60",
     );
   });
 });
 
 describe("capture and publish options", () => {
   it("capture at the chosen quality, not a 640×480 start-up size", () => {
-    const high = screenShareQualities(plus).high!;
+    const high = screenShareQualities(plus)["1080p30"]!;
     expect(captureOptions(high, false)).toEqual({
       resolution: { width: 1920, height: 1080, frameRate: 30 },
       contentHint: "detail",
       audio: false,
+      selfBrowserSurface: "exclude",
+      surfaceSwitching: "include",
     });
     expect(publishOptions(high)).toEqual({
       screenShareEncoding: { maxBitrate: 5_000_000, maxFramerate: 30 },
+      simulcast: true,
+      screenShareSimulcastLayers: high.layers,
       degradationPreference: "maintain-resolution",
     });
   });
 
-  it("keeps the frame rate for source-size captures", () => {
-    const text = screenShareQualities({
-      resolution: [0, 0],
-      framerate: 30,
-    }).text!;
-    expect(captureOptions(text, false)).toMatchObject({
-      video: { frameRate: 15 },
+  it("asks for system or tab sound only when sharing sound", () => {
+    const q = screenShareQualities(plus)["720p30"]!;
+    expect(captureOptions(q, { echoCancellation: false })).toMatchObject({
+      systemAudio: "include",
+      suppressLocalAudioPlayback: false,
     });
+    expect(captureOptions(q, false)).not.toHaveProperty("systemAudio");
   });
 });
 
@@ -120,21 +147,21 @@ describe("display media cap", () => {
     const low = screenShareQualities({
       resolution: [1080, 720],
       framerate: 30,
-    }).low!;
+    })["720p30"]!;
     const start = publishSafeQuality(low, [1080, 720]);
     expect(start.width * start.height).toBeLessThanOrEqual(1080 * 720);
     expect(start.width / start.height).toBeCloseTo(16 / 9, 2);
     expect((start.width % 2) + (start.height % 2)).toBe(0);
     expect(start.encoding).toEqual(low.encoding);
     // within the plan: unchanged
-    const high = screenShareQualities(plus).high!;
+    const high = screenShareQualities(plus)["1080p30"]!;
     expect(publishSafeQuality(high, [1920, 1080])).toEqual(high);
-    // unlimited plans keep the source size
-    const text = screenShareQualities({
+    // unlimited plans are left alone
+    const unlimited = screenShareQualities({
       resolution: [0, 0],
       framerate: 30,
-    }).text!;
-    expect(publishSafeQuality(text, [0, 0])).toEqual(text);
+    })["1080p30"]!;
+    expect(publishSafeQuality(unlimited, [0, 0])).toEqual(unlimited);
   });
 
   it("clamps requested constraints but keeps the ideal", () => {
@@ -189,8 +216,11 @@ describe("applyQuality", () => {
         calls.push(`degradation ${p}`),
       ),
     };
-    const motion = screenShareQualities(plus).motion!;
-    await applyQuality({ videoTrack: track } as unknown as Parameters<typeof applyQuality>[0], motion);
+    const motion = screenShareQualities(plus, "motion")["1080p60"]!;
+    await applyQuality(
+      { videoTrack: track } as unknown as Parameters<typeof applyQuality>[0],
+      motion,
+    );
     expect(calls).toEqual(["apply dims=undefined", "degradation balanced"]);
     expect(track.applyScreenShareConstraints).toHaveBeenCalledWith(
       {
@@ -200,17 +230,17 @@ describe("applyQuality", () => {
       { maxBitrate: 8_000_000, maxFramerate: 60 },
     );
 
-    const text = screenShareQualities({
-      resolution: [0, 0],
-      framerate: 30,
-    }).text!;
-    await applyQuality({ videoTrack: track } as unknown as Parameters<typeof applyQuality>[0], text);
+    const sharp = screenShareQualities(plus, "detail")["720p30"]!;
+    await applyQuality(
+      { videoTrack: track } as unknown as Parameters<typeof applyQuality>[0],
+      sharp,
+    );
     expect(track.applyScreenShareConstraints).toHaveBeenLastCalledWith(
       {
-        resolution: { width: 2560, height: 1440, frameRate: 15 },
-        contentHint: "text",
+        resolution: { width: 1280, height: 720, frameRate: 30 },
+        contentHint: "detail",
       },
-      { maxBitrate: 7_000_000, maxFramerate: 15 },
+      { maxBitrate: 2_000_000, maxFramerate: 30 },
     );
   });
 });
@@ -235,7 +265,11 @@ describe("senderLiveStats", () => {
         },
       ],
     };
-    expect(await senderLiveStats(track as unknown as Parameters<typeof senderLiveStats>[0])).toEqual({
+    expect(
+      await senderLiveStats(
+        track as unknown as Parameters<typeof senderLiveStats>[0],
+      ),
+    ).toEqual({
       width: 1920,
       height: 1080,
       fps: 12,

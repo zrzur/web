@@ -364,6 +364,11 @@ msgstr "{0} est déjà tout en haut"
 msgid "{0} is full. Pay {1} now and start automatically when a place frees up."
 msgstr "{0} est complet. Paie {1} maintenant et la mise en avant démarrera automatiquement dès qu’une place se libère."
 
+#. placeholder {0}: combo()
+#: components/app/interface/settings/user/voice/PushToTalkOptions.tsx
+msgid "{0} is not available from other apps. Try another key."
+msgstr "{0} n'est pas disponible depuis d'autres applis. Essaie une autre touche."
+
 #. placeholder {0}: done()!.name
 #: components/modal/modals/PromoteServer.tsx
 msgid "{0} is on. It may take a moment to show."
@@ -546,6 +551,11 @@ msgstr "{0} sélectionnés"
 #: components/modal/modals/SuperchargeServer.tsx
 msgid "{0} streams"
 msgstr "Flux {0}"
+
+#. placeholder {0}: combo()
+#: components/app/interface/settings/user/voice/PushToTalkOptions.tsx
+msgid "{0} turns talking on and off while Zrzur is in the background."
+msgstr "{0} active ou coupe la parole quand Zrzur est en arrière-plan."
 
 #. placeholder {0}: (message.systemMessage as MessagePinnedSystemMessage).by?.username
 #: components/client/NotificationsWorker.tsx
@@ -733,6 +743,10 @@ msgstr "{usernames} ont réagi"
 #: components/app/interface/settings/user/appearance/AnimationSettings.tsx
 msgid "{v} ms"
 msgstr "{v} ms"
+
+#: components/app/interface/settings/user/voice/InputSensitivityOptions.tsx
+msgid "{value} dB"
+msgstr "{value} dB"
 
 #. placeholder {0}: s().days
 #: components/modal/modals/PromoteServer.tsx
@@ -1813,6 +1827,10 @@ msgstr "Autoriser les demandes de levée de bannissement"
 msgid "Allow members to change name and avatar per-message"
 msgstr "Autoriser les membres à modifier leur nom et leur avatar pour chaque message"
 
+#: components/app/interface/settings/user/voice/InputSensitivityOptions.tsx
+msgid "Allow microphone access to see your level."
+msgstr "Autorise l'accès au micro pour voir ton niveau."
+
 #: components/rtc/messages.ts
 msgid "Allow microphone or camera access in your browser settings."
 msgstr "Autorise l’accès au micro ou à la caméra dans les paramètres de ton navigateur."
@@ -2381,8 +2399,8 @@ msgid "Attacks on a group, or threats of violence"
 msgstr "Attaques contre un groupe ou menaces de violence"
 
 #: components/modal/modals/ScreenShareSettings.tsx
-msgid "Audio disabled by browser"
-msgstr "Audio désactivé par le navigateur"
+#~ msgid "Audio disabled by browser"
+#~ msgstr "Audio désactivé par le navigateur"
 
 #: components/ui/components/features/messaging/elements/MediaPlayer.tsx
 msgid "Audio player"
@@ -2438,6 +2456,7 @@ msgstr "Des outils automatisés ont détecté ce contenu"
 #: components/app/interface/settings/server/LobbyAppearanceEditor.tsx
 #: components/app/interface/settings/server/LobbySettings.tsx
 #: components/app/interface/settings/user/appearance/AnimationSettings.tsx
+#: components/app/interface/settings/user/voice/InputSensitivityOptions.tsx
 msgid "Automatic"
 msgstr "Automatique"
 
@@ -2663,6 +2682,10 @@ msgstr "Belize"
 #: components/app/interface/settings/user/account/AgeSettings.tsx
 msgid "Below the minimum age: your account is limited and may be reviewed."
 msgstr "En dessous de l’âge minimum : ton compte est limité et peut être examiné."
+
+#: components/app/interface/settings/user/voice/InputSensitivityOptions.tsx
+msgid "Below the threshold, others hear silence."
+msgstr "Sous le seuil, les autres n'entendent que du silence."
 
 #: components/ui/components/features/profiles/plateNames.ts
 msgid "Benin"
@@ -4433,6 +4456,14 @@ msgstr "Connexion en cours"
 msgid "Connecting…"
 msgstr "Connexion…"
 
+#: components/ui/components/features/voice/callCard/ParticipantTile.tsx
+msgid "Connection lost"
+msgstr "Connexion perdue"
+
+#: components/ui/components/features/voice/callCard/VoiceCallCardStatus.tsx
+msgid "Connection lost. Reconnecting…"
+msgstr "Connexion perdue. Reconnexion…"
+
 #: components/app/interface/settings/UserSettings.tsx
 msgid "Contact support"
 msgstr "Contacter le support"
@@ -5591,6 +5622,10 @@ msgstr "Designs que tu as enregistrés"
 #: components/app/interface/settings/UserSettings.tsx
 msgid "Desktop"
 msgstr "Bureau"
+
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "Desktop app, during a push-to-talk call, once turned on in voice settings."
+msgstr "Appli de bureau, pendant un appel en push-to-talk, une fois activé dans les réglages vocaux."
 
 #: components/app/interface/settings/user/notifications/Notifications.tsx
 msgid "Desktop notifications"
@@ -7060,6 +7095,10 @@ msgstr "Pour les créateurs"
 msgid "For example: Windows 11, Firefox"
 msgstr "Par exemple : Windows 11, Firefox"
 
+#: components/app/interface/settings/user/voice/VoiceProcessingOptions.tsx
+msgid "For music: 128 kbps stereo, with the processing below turned off."
+msgstr "Pour la musique : 128 kbit/s en stéréo, avec les traitements ci-dessous désactivés."
+
 #: components/app/interface/settings/user/subscriptions/PlusPage.tsx
 msgid "For the people who keep Zrzur flying."
 msgstr "Pour celles et ceux qui font voler Zrzur."
@@ -7968,6 +8007,10 @@ msgstr "Élevé"
 msgid "High Contrast"
 msgstr "Contraste élevé"
 
+#: components/app/interface/settings/user/voice/VoiceProcessingOptions.tsx
+msgid "High quality audio"
+msgstr "Audio haute qualité"
+
 #: components/app/interface/settings/user/plugins/text.ts
 msgid "High risk"
 msgstr "Risque élevé"
@@ -8361,6 +8404,14 @@ msgstr "Gouttes d’encre"
 #: components/app/interface/settings/user/voice/PushToTalkOptions.tsx
 msgid "Input mode"
 msgstr "Mode d’entrée"
+
+#: components/app/interface/settings/user/voice/InputSensitivityOptions.tsx
+msgid "Input sensitivity"
+msgstr "Sensibilité d'entrée"
+
+#: components/app/interface/settings/user/voice/InputSensitivityOptions.tsx
+msgid "Input sensitivity threshold"
+msgstr "Seuil de sensibilité d'entrée"
 
 #: components/app/interface/settings/user/voice/VoiceInputOptions.tsx
 msgid "Input volume"
@@ -10370,6 +10421,10 @@ msgstr "Micro"
 msgid "Microphone access is blocked. Allow it in your browser to record."
 msgstr "L’accès au micro est bloqué. Autorise-le dans ton navigateur pour enregistrer."
 
+#: components/ui/components/features/voice/callCard/VoiceCallCardStatus.tsx
+msgid "Microphone unplugged. Using the default microphone."
+msgstr "Micro débranché. Le micro par défaut est utilisé."
+
 #: components/app/interface/settings/user/profile/StyleEditors.tsx
 msgid "Midnight"
 msgstr "Minuit"
@@ -12352,6 +12407,11 @@ msgstr "ID du dossier d’origine"
 msgid "Other"
 msgstr "Autre"
 
+#. placeholder {0}: combo()
+#: components/app/interface/settings/user/voice/PushToTalkOptions.tsx
+msgid "Other apps use {0} for editing. Choose another key to use this."
+msgstr "D'autres applis utilisent {0} pour l'édition. Choisis une autre touche pour l'utiliser."
+
 #: src/interface/OAuth.tsx
 msgid "Other permissions"
 msgstr "Autres permissions"
@@ -12359,6 +12419,10 @@ msgstr "Autres permissions"
 #: components/app/interface/settings/user/safety/SafetyDashboard.tsx
 msgid "Other reports about this"
 msgstr "Autres signalements à ce sujet"
+
+#: components/app/interface/settings/user/voice/InputSensitivityOptions.tsx
+msgid "Others hear you"
+msgstr "Les autres t'entendent"
 
 #: components/app/interface/settings/user/voice/PushToTalkOptions.tsx
 msgid "Others hear you only while you hold the key."
@@ -13808,6 +13872,9 @@ msgid "Reconnect now"
 msgstr "Se reconnecter maintenant"
 
 #: components/ui/components/features/voice/callCard/VoiceCallCardStatus.tsx
+msgid "Reconnected"
+msgstr "Reconnecté"
+
 #: src/interface/navigation/channels/AccountBar.tsx
 msgid "Reconnecting"
 msgstr "Reconnecter"
@@ -13910,6 +13977,10 @@ msgstr "Rejeter la demande d'ami"
 #: components/app/interface/settings/user/profile/ReviewQueue.tsx
 msgid "Rejected"
 msgstr "Refusé"
+
+#: components/ui/components/features/voice/callCard/VoiceCallCardStatus.tsx
+msgid "Rejoin"
+msgstr "Rejoindre"
 
 #: src/interface/channels/text/TextSearchSidebar.tsx
 msgid "Relevance"
@@ -16063,6 +16134,10 @@ msgstr "Sierra Leone"
 msgid "Sign in with a one-time code from your phone."
 msgstr "Connecte-toi avec un code à usage unique depuis ton téléphone."
 
+#: components/app/interface/settings/user/voice/InputSensitivityOptions.tsx
+msgid "Silence is sent"
+msgstr "Du silence est envoyé"
+
 #: components/app/interface/channels/text/Message.tsx
 msgid "Silent"
 msgstr "Silencieux"
@@ -16436,9 +16511,17 @@ msgstr "Étincelles"
 msgid "Speak"
 msgstr "Parler"
 
+#: components/app/interface/settings/user/voice/InputSensitivityOptions.tsx
+msgid "Speak and watch the bar: green means others hear you."
+msgstr "Parle et regarde la barre : vert signifie que les autres t'entendent."
+
 #: components/app/interface/settings/user/voice/VoiceInputOptions.tsx
 msgid "Speaker"
 msgstr "Haut-parleur"
+
+#: components/ui/components/features/voice/callCard/VoiceCallCardStatus.tsx
+msgid "Speaker unplugged. Using the default speaker."
+msgstr "Haut-parleur débranché. Le haut-parleur par défaut est utilisé."
 
 #: components/ui/components/features/profiles/badges/useBadgeText.ts
 msgid "Special badge"
@@ -17083,9 +17166,21 @@ msgstr "Emportez vos communautés <0>avec vous.</0>"
 msgid "Takes people straight to the conversation."
 msgstr "Amène directement les gens dans la conversation."
 
+#: components/app/interface/settings/user/voice/PushToTalkOptions.tsx
+msgid "Talk from other apps"
+msgstr "Parler depuis d'autres applis"
+
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "Talk from other apps (on or off)"
+msgstr "Parler depuis d'autres applis (activer ou couper)"
+
 #: components/modal/modals/CreateChannel.tsx
 msgid "Talk, video and screen sharing"
 msgstr "Discussion vocale, vidéo et partage d’écran"
+
+#: components/ui/components/features/voice/callCard/VoiceCallCardStatus.tsx
+msgid "Talking (toggle on)"
+msgstr "Parole active (bascule)"
 
 #: components/ui/components/features/profiles/plateNames.ts
 msgid "Tanzania"
@@ -17248,6 +17343,16 @@ msgstr "Texte"
 #: components/app/interface/settings/user/appearance/LivePreview.tsx
 msgid "TEXT"
 msgstr "TEXTE"
+
+#: components/app/interface/settings/user/voice/ScreenShareOptions.tsx
+#: components/modal/modals/ScreenShareSettings.tsx
+msgid "Text and slides"
+msgstr "Texte et diapos"
+
+#: components/app/interface/settings/user/voice/ScreenShareOptions.tsx
+#: components/modal/modals/ScreenShareSettings.tsx
+msgid "Text and slides stay sharp; video and games stay smooth."
+msgstr "Le texte et les diapos restent nets ; la vidéo et les jeux restent fluides."
 
 #: components/app/interface/settings/server/channels/ChannelsSettings.tsx
 msgid "Text channel"
@@ -17962,6 +18067,10 @@ msgstr "Ce navigateur ne peut pas enregistrer de messages vocaux."
 msgid "This browser can't run it safely."
 msgstr "Ce navigateur ne peut pas l’exécuter en toute sécurité."
 
+#: components/modal/modals/ScreenShareSettings.tsx
+msgid "This browser cannot share sound from here."
+msgstr "Ce navigateur ne peut pas partager le son depuis cette source."
+
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 msgid "This can change almost anything in the server"
 msgstr "Cela peut modifier presque tout sur le serveur"
@@ -18533,6 +18642,10 @@ msgstr "Menace de violence"
 #: components/ui/components/features/profiles/badges/useBadgeText.ts
 msgid "Three Years on Zrzur"
 msgstr "Trois ans sur Zrzur"
+
+#: components/app/interface/settings/user/voice/InputSensitivityOptions.tsx
+msgid "Threshold"
+msgstr "Seuil"
 
 #: components/app/interface/settings/server/assistant/labels.ts
 msgid "Ticket categories, one per line"
@@ -19720,6 +19833,11 @@ msgctxt "search filter"
 msgid "Video"
 msgstr "Vidéo"
 
+#: components/app/interface/settings/user/voice/ScreenShareOptions.tsx
+#: components/modal/modals/ScreenShareSettings.tsx
+msgid "Video and games"
+msgstr "Vidéo et jeux"
+
 #: components/ui/components/features/messaging/elements/MediaPlayer.tsx
 msgid "Video player"
 msgstr "Lecteur vidéo"
@@ -20044,6 +20162,10 @@ msgstr "Nous préparons ta copie."
 msgid "We've sent you a verification email. Please allow up to 10 minutes for it to arrive."
 msgstr "Nous vous avons envoyé un e-mail de vérification. Merci d'attendre jusqu'à 10 minutes pour qu'il arrive."
 
+#: components/ui/components/features/voice/callCard/ParticipantTile.tsx
+msgid "Weak connection"
+msgstr "Connexion faible"
+
 #: src/interface/designs/Looks.tsx
 msgid "Wear this look"
 msgstr "Porter ce look"
@@ -20235,6 +20357,10 @@ msgstr "À quoi sert ce salon"
 #: components/app/interface/settings/user/safety/ReportsAndStanding.tsx
 msgid "What this followed"
 msgstr "Ce que cela suivait"
+
+#: components/app/interface/settings/user/voice/ScreenShareOptions.tsx
+msgid "What you usually share"
+msgstr "Ce que tu partages le plus"
 
 #: components/modal/modals/Changelog.tsx
 msgid "What's new"
@@ -21376,6 +21502,10 @@ msgstr "Ton message"
 msgid "Your message is too long, please remove some characters and try again."
 msgstr "Votre message est trop long, veuillez supprimer certains caractères et réessayer."
 
+#: components/ui/components/features/voice/callCard/VoiceCallCardStatus.tsx
+msgid "Your microphone is back."
+msgstr "Ton micro est de retour."
+
 #: components/app/interface/settings/user/voice/PushToTalkOptions.tsx
 msgid "Your microphone sends whenever you speak."
 msgstr "Ton micro émet dès que tu parles."
@@ -21485,6 +21615,10 @@ msgstr "Tes serveurs"
 msgid "Your session ended, possibly because you logged out on another device. Log in again to continue."
 msgstr "Votre session a pris fin, peut-être parce que vous vous êtes déconnecté(e) sur un autre appareil. Connectez-vous à nouveau pour continuer."
 
+#: components/ui/components/features/voice/callCard/VoiceCallCardStatus.tsx
+msgid "Your speaker is back."
+msgstr "Ton haut-parleur est de retour."
+
 #: src/interface/designs/Makers.tsx
 msgid "Your spot"
 msgstr "Ta place"
@@ -21588,6 +21722,10 @@ msgstr "Zrzur Feather, mensuel"
 #: components/app/interface/settings/user/subscriptions/BillingHistory.tsx
 msgid "Zrzur Feather, monthly renewal"
 msgstr "Zrzur Feather, renouvellement mensuel"
+
+#: components/app/interface/settings/user/voice/InputSensitivityOptions.tsx
+msgid "Zrzur finds the right level for your room."
+msgstr "Zrzur trouve le bon niveau pour ta pièce."
 
 #: components/app/interface/settings/user/Native.tsx
 #: components/app/interface/settings/UserSettings.tsx

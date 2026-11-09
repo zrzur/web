@@ -3,7 +3,13 @@ import { Show, createSignal, onCleanup } from "solid-js";
 import { Trans, useLingui } from "@lingui/solid/macro";
 import { styled } from "styled-system/jsx";
 
-import { keyLabel, readPttKey } from "@revolt/keybinds/shortcuts";
+import { isMac, keyLabel, readPttKey } from "@revolt/keybinds/shortcuts";
+import { useVoice } from "@revolt/rtc";
+import {
+  desktopPushToTalk,
+  globalPttCombo,
+  globalTalkAllowed,
+} from "@revolt/rtc/desktopPushToTalk";
 import { useState } from "@revolt/state";
 import {
   Button,
@@ -11,6 +17,7 @@ import {
   MenuItem,
   SettingsRow,
   SettingsSection,
+  Toggle,
 } from "@revolt/ui";
 import { Icon } from "@revolt/ui/icons/Icon";
 
@@ -19,7 +26,11 @@ import { Icon } from "@revolt/ui/icons/Icon";
  */
 export function PushToTalkOptions() {
   const { voice } = useState();
+  const call = useVoice();
   const { t } = useLingui();
+  // the desktop app adds a toggle that works from other apps
+  const desktop = !!desktopPushToTalk();
+  const combo = () => globalPttCombo(voice.pttKey, isMac());
   const [recording, setRecording] = createSignal(false);
   const [refused, setRefused] = createSignal(false);
 
@@ -133,6 +144,32 @@ export function PushToTalkOptions() {
                 {recording() ? t`Cancel` : t`Change key`}
               </Button>
             </Controls>
+          )}
+        />
+      </Show>
+      {/* desktop app only: a toggle that works while Zrzur is in the
+          background (Electron sees no key release outside the window) */}
+      <Show when={desktop && voice.inputMode === "ptt"}>
+        <SettingsRow
+          icon={<Icon name="desktop" size={20} />}
+          title={<Trans>Talk from other apps</Trans>}
+          description={
+            !globalTalkAllowed(voice.pttKey)
+              ? t`Other apps use ${combo()} for editing. Choose another key to use this.`
+              : voice.globalTalk && call?.globalPtt() === "unavailable"
+                ? t`${combo()} is not available from other apps. Try another key.`
+                : t`${combo()} turns talking on and off while Zrzur is in the background.`
+          }
+          disabled={!globalTalkAllowed(voice.pttKey)}
+          onClick={() => (voice.globalTalk = !voice.globalTalk)}
+          control={(ids) => (
+            <Toggle
+              checked={voice.globalTalk && globalTalkAllowed(voice.pttKey)}
+              disabled={!globalTalkAllowed(voice.pttKey)}
+              onChange={() => (voice.globalTalk = !voice.globalTalk)}
+              aria-labelledby={ids.labelId}
+              aria-describedby={ids.descriptionId}
+            />
           )}
         />
       </Show>

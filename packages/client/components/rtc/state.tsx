@@ -7,15 +7,17 @@ import {
   createSignal,
   JSX,
   lazy,
+  on,
   onCleanup,
   Setter,
+  untrack,
   useContext,
 } from "solid-js";
 import type { TrackReferenceOrPlaceholder } from "solid-livekit-components";
 
 import { useLocation, useNavigate } from "@solidjs/router";
-import type { LocalTrackPublication, Room } from "livekit-client";
 import { Channel } from "@zrzur/sdk/solid";
+import type { LocalTrackPublication, Room } from "livekit-client";
 
 import { SoundController, useClient, useSound } from "@revolt/client";
 import {
@@ -28,7 +30,7 @@ import { useInstance } from "@revolt/instance";
 import { ModalController, useModals } from "@revolt/modal";
 import { useState } from "@revolt/state";
 import {
-  NoiseSuppresionState,
+  ScreenShareContent,
   ScreenShareQualityName,
   Voice as VoiceSettings,
 } from "@revolt/state/stores/Voice";
@@ -41,7 +43,19 @@ import {
   matchGlobalShortcut,
   transmitting,
 } from "../keybinds/shortcuts";
+import {
+  audioCaptureFor,
+  audioPublishFor,
+  callBitrate,
+  watchAudioSettings,
+} from "./audioQuality";
+import { deviceFallback } from "./callHealth";
 import { InRoom } from "./components/InRoom";
+import {
+  desktopPushToTalk,
+  globalTalkAllowed,
+  latchPress,
+} from "./desktopPushToTalk";
 import { RoomState, TrackSource } from "./livekitConstants";
 import { type VoiceRuntime, loadVoiceRuntime } from "./loadVoiceRuntime";
 import { useVoiceError } from "./messages";
@@ -95,6 +109,20 @@ const REJOIN_DELAYS = [1000, 2000, 4000, 8000, 15000, 15000, 15000];
 
 export type VoiceLayout = "fullscreen" | "expanded" | "collapsed" | undefined;
 
+/** Short notices about the call, shown next to its status for a few seconds */
+export type CallNotice =
+  | "reconnected"
+  | "inputFallback"
+  | "inputRestored"
+  | "outputFallback"
+  | "outputRestored";
+
+/** How long a call notice stays */
+const NOTICE_MS = 6000;
+
+/** Global push to talk (desktop): not asked, holding the combination, refused */
+export type GlobalPttState = "off" | "on" | "unavailable";
+
 class Voice {
   #client = useClient();
   #connectionAttempt = 0;
@@ -132,6 +160,31 @@ class Voice {
   /** Push to talk: whether the key is held right now */
   pttHeld: Accessor<boolean>;
   #setPttHeld: Setter<boolean>;
+
+  /**
+   * Push to talk from other apps (desktop app): turned on and off by the
+   * global combination, because the desktop cannot see the key's release
+   */
+  pttLatched: Accessor<boolean>;
+  #setPttLatched: Setter<boolean>;
+
+  /**
+   * Whether Rejoin makes sense after the call ended: not when this seat was
+   * taken by another tab or device of the same account
+   */
+  canRejoin: Accessor<boolean>;
+  #setCanRejoin: Setter<boolean>;
+
+  /** A short notice about the call (reconnected, device unplugged) */
+  notice: Accessor<CallNotice | undefined>;
+  #setNotice: Setter<CallNotice | undefined>;
+  #noticeTimer?: ReturnType<typeof setTimeout>;
+  /** Ends the wait before the next rejoin attempt (the network came back) */
+  #wake?: () => void;
+
+  /** Whether the desktop app holds the global combination right now */
+  globalPtt: Accessor<GlobalPttState>;
+  #setGlobalPtt: Setter<GlobalPttState>;
 
   video: Accessor<boolean>;
   #setVideo: Setter<boolean>;
@@ -192,11 +245,37 @@ class Voice {
     this.pttHeld = pttHeld;
     this.#setPttHeld = setPttHeld;
 
+    const [pttLatched, setPttLatched] = createSignal(false);
+    this.pttLatched = pttLatched;
+    this.#setPttLatched = setPttLatched;
+
+    const [canRejoin, setCanRejoin] = createSignal(true);
+    this.canRejoin = canRejoin;
+    this.#setCanRejoin = setCanRejoin;
+
+    const [notice, setNotice] = createSignal<CallNotice>();
+    this.notice = notice;
+    this.#setNotice = setNotice;
+
+    const [globalPtt, setGlobalPtt] = createSignal<GlobalPttState>("off");
+    this.globalPtt = globalPtt;
+    this.#setGlobalPtt = setGlobalPtt;
+
     this.deafen = () => voiceSettings.deafen;
     this.unmuted = () =>
       voiceSettings.micOn && !voiceSettings.deafen && this.speakingPermission;
     this.microphone = () =>
-      this.unmuted() && transmitting(voiceSettings.inputMode, pttHeld());
+      this.unmuted() &&
+      transmitting(voiceSettings.inputMode, pttHeld() || pttLatched());
+
+    // talking from other apps stops on mute, deafen and any change of room
+    createEffect(
+      on(
+        [() => this.unmuted(), () => this.channel()],
+        () => this.#setPttLatched(false),
+        { defer: true },
+      ),
+    );
 
     const [video, setVideo] = createSignal(false);
     this.video = video;
@@ -233,7 +312,10 @@ class Voice {
     createEffect(() => {
       const room = this.room();
       const level = this.channel()?.server?.supercharge?.level;
-      const bitrate = voiceBitrateFor(level);
+      const bitrate = callBitrate(
+        voiceBitrateFor(level),
+        this.#settings.highQualityAudio,
+      );
       this.#setBitrate(bitrate);
       if (this.state() !== "CONNECTED" || !room) return;
       void this.applyVoiceBitrate(room, bitrate);
@@ -253,50 +335,52 @@ class Voice {
   // Dynamically set echo cancellation and gain control when the settings are changed
   // These functions are needed to maintain reactivity. Don't ask me why but if you make them not functions it breaks.
   private settingsListeners() {
-    const getSettings = () => this.#settings;
-
-    const setEchoCancellation = (echoCancellation: boolean) => {
-      const track = this.getMicrophoneTrack()?.audioTrack;
-      if (track) {
-        track.constraints.echoCancellation = echoCancellation;
-      }
-    };
-
-    const setAutoGainControl = (autoGainControl: boolean) => {
-      const track = this.getMicrophoneTrack()?.audioTrack;
-      if (track) {
-        track.constraints.autoGainControl = autoGainControl;
-      }
-    };
-
-    const setNoiseSuppression = (noiseSuppression: NoiseSuppresionState) => {
-      const track = this.getMicrophoneTrack()?.audioTrack;
-      if (track) {
-        if (noiseSuppression === "browser") {
-          track.constraints.noiseSuppression = true;
-          //@ts-expect-error voiceIsolation is not yet standard, but it supported by livekit and most chromium based browsers, including electron.
-          track.constraints.voiceIsolation = true;
-        } else {
-          track.constraints.noiseSuppression = false;
-          //@ts-expect-error voiceIsolation is not yet standard, but it supported by livekit and most chromium based browsers, including electron.
-          track.constraints.voiceIsolation = false;
-        }
-      }
-    };
-
-    const restartTrack = () => {
-      const track = this.getMicrophoneTrack()?.audioTrack;
-      if (track) {
-        track.restartTrack();
-      }
-    };
-
-    createEffect(() => {
-      setEchoCancellation(getSettings().echoCancellation ?? true);
-      setAutoGainControl(getSettings().autoGainControl ?? true);
-      setNoiseSuppression(getSettings().noiseSupression ?? "browser");
-      restartTrack();
+    watchAudioSettings(this.#settings, {
+      // capture constraints changed: restart the microphone with them
+      restartCapture: (capture) => {
+        const track = untrack(() => this.getMicrophoneTrack()?.audioTrack);
+        if (!track) return;
+        track.constraints.echoCancellation = capture.echoCancellation;
+        track.constraints.autoGainControl = capture.autoGainControl;
+        track.constraints.noiseSuppression = capture.noiseSuppression;
+        //@ts-expect-error voiceIsolation is not yet standard, but it supported by livekit and most chromium based browsers, including electron.
+        track.constraints.voiceIsolation = capture.voiceIsolation;
+        track.constraints.channelCount = capture.channelCount;
+        void track.restartTrack();
+      },
+      // high quality audio changes the encoder (stereo, DTX)
+      republish: () => {
+        const room = untrack(this.room);
+        if (!room || untrack(this.state) !== "CONNECTED") return;
+        void this.republishMicrophone(room);
+      },
     });
+  }
+
+  /**
+   * Publish the microphone again with the current audio settings (stereo
+   * and DTX are fixed when a track is published)
+   */
+  private async republishMicrophone(room: Room) {
+    const music = this.#settings.highQualityAudio;
+    Object.assign(
+      (room.options.publishDefaults ??= {}),
+      audioPublishFor(
+        voiceBitrateFor(this.channel()?.server?.supercharge?.level),
+        music,
+      ),
+    );
+    Object.assign(
+      (room.options.audioCaptureDefaults ??= {}),
+      audioCaptureFor(this.#settings, music),
+    );
+    try {
+      const track = this.getMicrophoneTrack()?.track;
+      if (track) await room.localParticipant.unpublishTrack(track);
+      await this.enableMicrophone(room);
+    } catch (error) {
+      this.onErr(error);
+    }
   }
 
   /**
@@ -316,13 +400,16 @@ class Voice {
     this.disconnect(!!previousSession);
     const attempt = ++this.#connectionAttempt;
     this.#setError();
+    this.#setCanRejoin(true);
 
     void this.device.setWakeLocked().catch(() => undefined);
 
     // the call carries the voice quality of the server's level; the call
     // bar shows the same number
     const voiceBitrate = voiceBitrateFor(channel.server?.supercharge?.level);
-    this.#setBitrate(voiceBitrate);
+    this.#setBitrate(
+      callBitrate(voiceBitrate, this.#settings.highQualityAudio),
+    );
 
     // LiveKit loads with the first call, not with the app
     let lk: VoiceRuntime;
@@ -340,13 +427,10 @@ class Voice {
       // join failed once with a 404 and retried. Use the supported path
       // directly until the server is upgraded.
       singlePeerConnection: false,
-      audioCaptureDefaults: {
-        deviceId: this.#settings.preferredAudioInputDevice,
-        echoCancellation: this.#settings.echoCancellation,
-        noiseSuppression: this.#settings.noiseSupression === "browser",
-        autoGainControl: this.#settings.autoGainControl,
-        voiceIsolation: this.#settings.noiseSupression === "browser",
-      },
+      audioCaptureDefaults: audioCaptureFor(
+        this.#settings,
+        this.#settings.highQualityAudio,
+      ),
       audioOutput: {
         deviceId: this.#settings.preferredAudioOutputDevice,
       },
@@ -358,8 +442,9 @@ class Voice {
       publishDefaults: {
         videoEncoding: lk.VideoPresets.h720.encoding,
         screenShareEncoding: lk.ScreenSharePresets.h720fps30.encoding,
-        // a supercharged server carries clearer voice for everyone
-        audioPreset: { maxBitrate: voiceBitrate },
+        // Opus with DTX and RED; a supercharged server carries clearer
+        // voice for everyone (see audioQuality.ts)
+        ...audioPublishFor(voiceBitrate, this.#settings.highQualityAudio),
       },
     });
 
@@ -388,6 +473,7 @@ class Voice {
 
     room.addListener("connected", () => {
       this.#setState("CONNECTED");
+      if (previousSession) this.showNotice("reconnected");
       void this.enableMicrophone(room);
       for (const p of room.remoteParticipants.values()) {
         const screenShareTrack = p.getTrackPublication(TrackSource.ScreenShare);
@@ -407,6 +493,9 @@ class Voice {
           if (channelId) this.#recentRemoval = { channelId, at: Date.now() };
           return;
         }
+        // the same account joined from another tab or device: that one
+        // has the seat now, a Rejoin here would only push it out
+        this.#setCanRejoin(reason !== lk.DisconnectReason.DUPLICATE_IDENTITY);
         this.#setState("DISCONNECTED");
         this.device.releaseWakeLock();
       }
@@ -424,7 +513,15 @@ class Voice {
     };
     room.addListener("signalReconnecting", rejoin);
     room.addListener("reconnecting", rejoin);
-    room.addListener("reconnected", () => this.#setState("CONNECTED"));
+    room.addListener("reconnected", () => {
+      this.#setState("CONNECTED");
+      this.showNotice("reconnected");
+    });
+    // an unplugged headset: the call moves to the system default and says
+    // so; plugged in again, it moves back
+    room.addListener("mediaDevicesChanged", () => {
+      if (this.room() === room) void this.followDevices(room);
+    });
 
     room.addListener("localTrackPublished", (pub) => {
       if (pub.audioTrack && pub.audioTrack.source === TrackSource.Microphone) {
@@ -519,12 +616,21 @@ class Voice {
         type !== "VoiceRejoinRefused"
       ) {
         this.#setState("RECONNECTING");
-        await new Promise((resolve) =>
-          setTimeout(resolve, REJOIN_DELAYS[retry]),
-        );
+        // wait, unless the network comes back first (see networkBack)
+        await new Promise<void>((resolve) => {
+          const timer = setTimeout(resolve, REJOIN_DELAYS[retry]);
+          this.#wake = () => {
+            clearTimeout(timer);
+            resolve();
+          };
+        });
+        this.#wake = undefined;
         if (attempt !== this.#connectionAttempt) return;
         return this.connect(channel, undefined, previousSession, retry + 1);
       }
+      this.#setCanRejoin(
+        type !== "AlreadyConnected" && type !== "VoiceRejoinRefused",
+      );
       this.#setState("DISCONNECTED");
       this.device.releaseWakeLock();
       this.onErr(e);
@@ -565,6 +671,9 @@ class Voice {
 
   disconnect(quiet = false) {
     this.#recentRemoval = undefined;
+    // notices belong to the call that ends here
+    clearTimeout(this.#noticeTimer);
+    this.#setNotice();
     ++this.#connectionAttempt;
     this.device.releaseWakeLock();
     try {
@@ -620,11 +729,92 @@ class Voice {
     }
   }
 
+  /** Show a short notice next to the call status */
+  showNotice(notice: CallNotice) {
+    clearTimeout(this.#noticeTimer);
+    this.#setNotice(notice);
+    this.#noticeTimer = setTimeout(() => this.#setNotice(), NOTICE_MS);
+  }
+
+  /**
+   * The browser is online again: try the next rejoin now instead of after
+   * the rest of the wait
+   */
+  networkBack() {
+    this.#wake?.();
+  }
+
+  /** Join the same channel again after the call gave up reconnecting */
+  rejoin() {
+    const channel = this.channel();
+    if (channel && this.state() === "DISCONNECTED" && this.canRejoin())
+      void this.connect(channel);
+  }
+
+  /** Apply deviceFallback to the microphone and the speaker */
+  private async followDevices(room: Room) {
+    let devices: MediaDeviceInfo[];
+    try {
+      devices = await navigator.mediaDevices.enumerateDevices();
+    } catch {
+      return;
+    }
+    for (const kind of ["audioinput", "audiooutput"] as const) {
+      const preferred =
+        kind === "audioinput"
+          ? this.#settings.preferredAudioInputDevice
+          : this.#settings.preferredAudioOutputDevice;
+      const { switchTo, notice } = deviceFallback({
+        preferred,
+        active: room.getActiveDevice(kind) ?? preferred,
+        available: devices.filter((device) => device.kind === kind),
+      });
+      if (switchTo) {
+        try {
+          await room.switchActiveDevice(kind, switchTo);
+        } catch (error) {
+          console.warn("[rtc] could not switch device", error);
+          continue;
+        }
+      }
+      if (notice)
+        this.showNotice(
+          kind === "audioinput"
+            ? notice === "fallback"
+              ? "inputFallback"
+              : "inputRestored"
+            : notice === "fallback"
+              ? "outputFallback"
+              : "outputRestored",
+        );
+    }
+  }
+
   /**
    * Push to talk: the key went down or up (or the window lost focus)
    */
   setPushToTalk(held: boolean) {
     this.#setPttHeld(held);
+  }
+
+  /**
+   * Push to talk from other apps (desktop): the global combination was
+   * pressed. A sound says which way it went, since the window may be hidden.
+   */
+  togglePushToTalkLatch() {
+    const { latched, sound } = latchPress(this.pttLatched(), this.unmuted());
+    this.#setPttLatched(latched);
+    this.sound.playSound(sound);
+  }
+
+  /** Stop talking from other apps (leaving the call, leaving push to talk) */
+  clearPushToTalkLatch() {
+    this.#setPttLatched(false);
+  }
+
+  /** What the desktop app answered when asked for the global combination */
+  setGlobalPtt(state: GlobalPttState) {
+    this.#setGlobalPtt(state);
   }
 
   async toggleMute() {
@@ -673,18 +863,14 @@ class Voice {
   }
 
   /**
-   * Get the enabled screen share qualities. "low" will always be enabled.
-   * Each screen share quality is checked against the limit if the limit is available on the client.
-   *
-   * TODO: Translate the fullNames here, I can't figure out how to do it.
-   *
-   * @param name The name of the screen share quality to get
-   * @returns A partial record of ScreenShareQualityName to ScreenShareQuality. Will always contain "low" quality.
+   * Screen share qualities the plan and the server's level allow (720p 30
+   * FPS always), tuned for what is shared
+   * @param content Text and slides (sharp) or video and games (smooth)
    */
-  getEnabledScreenShareQualities(): Partial<
-    Record<ScreenShareQualityName, ScreenShareQuality>
-  > {
-    return screenShareQualities(this.screenShareLimits());
+  getEnabledScreenShareQualities(
+    content: ScreenShareContent = this.#settings.screenShareContent,
+  ): Partial<Record<ScreenShareQualityName, ScreenShareQuality>> {
+    return screenShareQualities(this.screenShareLimits(), content);
   }
 
   /** Resolution and frame rate the plan and the server's level allow */
@@ -724,6 +910,7 @@ class Voice {
       const qualities = this.getEnabledScreenShareQualities();
       let screenPickerQualityName: ScreenShareQualityName | undefined;
       let screenPickerAudio: boolean | undefined;
+      let screenPickerContent: ScreenShareContent | undefined;
 
       // Register the modal on screen picker handler if it exists
       if (window.native && window.native.onceScreenPicker) {
@@ -737,10 +924,12 @@ class Voice {
               idx: number,
               qualityName: ScreenShareQualityName,
               audio: boolean,
+              content: ScreenShareContent,
             ) => {
               window.native.screenPickerCallback(idx, audio);
               screenPickerQualityName = qualityName;
               screenPickerAudio = audio;
+              screenPickerContent = content;
             },
             sources: sources,
             qualities: Object.keys(qualities).map((k) => {
@@ -797,10 +986,14 @@ class Voice {
           });
 
           const callback = async (
-            qualityName: ScreenShareQualityName,
+            qualityName: ScreenShareQualityName | undefined,
             audio: boolean,
+            content: ScreenShareContent,
           ) => {
-            const quality = resolveQuality(qualities, qualityName);
+            const quality = resolveQuality(
+              this.getEnabledScreenShareQualities(content),
+              qualityName,
+            );
 
             if (localTrack.videoTrack) {
               try {
@@ -818,11 +1011,14 @@ class Voice {
 
           if (screenPickerQualityName) {
             callback(
-              screenPickerQualityName || "low",
+              screenPickerQualityName,
               screenPickerAudio || false,
+              screenPickerContent ?? this.#settings.screenShareContent,
             );
           } else if (this.#settings.screenShareQualityAsk) {
-            if (Object.keys(qualities).length > 1) {
+            // the dialog also asks what is shared, so it opens even when
+            // the plan offers one size
+            {
               localTrack.pauseUpstream();
               screenAudioTrack?.pauseUpstream();
               this.openModal({
@@ -843,27 +1039,23 @@ class Voice {
                   return { name: k, fullName: v.fullName };
                 }),
                 audio: !!screenAudioTrack,
-                callback: async (qualityName, audio) => {
+                callback: async (qualityName, audio, content) => {
                   // apply first so viewers never get frames of the old size
-                  await callback(qualityName, audio);
+                  await callback(qualityName, audio, content);
                   localTrack.resumeUpstream();
                   if (audio) {
                     screenAudioTrack?.resumeUpstream();
                   }
                 },
               });
-            } else {
-              callback(
-                this.#settings.screenShareQuality || "low",
-                this.#settings.screenShareAudio,
-              );
             }
           } else {
             // "Don't ask again": use the saved choice (this path used to
             // keep the 640×480 / 5 FPS start-up capture for the whole share)
             callback(
-              this.#settings.screenShareQuality || "low",
+              this.#settings.screenShareQuality,
               this.#settings.screenShareAudio,
+              this.#settings.screenShareContent,
             );
           }
         }
@@ -1101,19 +1293,61 @@ export function VoiceContext(props: { children: JSX.Element }) {
   // a key released in another window never reaches us: stop talking
   const release = () => voice.setPushToTalk(false);
   const onVisibility = () => document.hidden && release();
+  const onOnline = () => voice.networkBack();
+  window.addEventListener("online", onOnline);
   window.addEventListener("keydown", onKeyDown, true);
   window.addEventListener("keyup", onKeyUp, true);
   window.addEventListener("blur", release);
   document.addEventListener("visibilitychange", onVisibility);
   onCleanup(() => {
+    window.removeEventListener("online", onOnline);
     window.removeEventListener("keydown", onKeyDown, true);
     window.removeEventListener("keyup", onKeyUp, true);
     window.removeEventListener("blur", release);
     document.removeEventListener("visibilitychange", onVisibility);
   });
   createEffect(() => {
-    if (!inCall() || state.voice.inputMode !== "ptt") release();
+    if (!inCall() || state.voice.inputMode !== "ptt") {
+      release();
+      voice.clearPushToTalkLatch();
+    }
   });
+
+  // Desktop app: Ctrl+Shift (⌘⇧) with the push-to-talk key works from other
+  // apps too, as a toggle. Held only during a push-to-talk call, so the
+  // combination stays free for other apps the rest of the time. Browsers
+  // keep the in-window key and stop talking when the window loses focus.
+  const desktopPtt = desktopPushToTalk();
+  if (desktopPtt) {
+    const stopListening = desktopPtt.onToggle(() => {
+      if (inCall() && state.voice.inputMode === "ptt")
+        voice.togglePushToTalkLatch();
+    });
+    onCleanup(() => stopListening());
+    createEffect(() => {
+      const key = state.voice.pttKey;
+      if (
+        !inCall() ||
+        state.voice.inputMode !== "ptt" ||
+        // off until the person turns "Talk from other apps" on, and never
+        // for keys other apps need with Ctrl+Shift
+        !state.voice.globalTalk ||
+        !globalTalkAllowed(key)
+      ) {
+        voice.setGlobalPtt("off");
+        return;
+      }
+      let current = true;
+      desktopPtt
+        .register(key)
+        .catch(() => false)
+        .then((ok) => current && voice.setGlobalPtt(ok ? "on" : "unavailable"));
+      onCleanup(() => {
+        current = false;
+        desktopPtt.unregister();
+      });
+    });
+  }
   createEffect(() => {
     const instance = client();
     const onMove = (move: {

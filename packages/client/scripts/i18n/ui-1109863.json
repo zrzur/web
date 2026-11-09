@@ -1,0 +1,50 @@
+{
+  "Talk from other apps": [
+    "التحدث من تطبيقات أخرى",
+    "Aus anderen Apps sprechen",
+    "Parler depuis d'autres applis",
+    "Hablar desde otras apps",
+    "Говорить из других приложений",
+    "在其他应用中说话"
+  ],
+  "{0} turns talking on and off while Zrzur is in the background.": [
+    "يشغّل {0} التحدث ويوقفه وزرزور في الخلفية.",
+    "{0} schaltet das Sprechen ein und aus, während Zrzur im Hintergrund ist.",
+    "{0} active ou coupe la parole quand Zrzur est en arrière-plan.",
+    "{0} activa o desactiva el habla mientras Zrzur está en segundo plano.",
+    "{0} включает и выключает передачу голоса, пока Zrzur в фоне.",
+    "Zrzur 在后台时，按 {0} 可开启或关闭说话。"
+  ],
+  "Other apps use {0} for editing. Choose another key to use this.": [
+    "تستخدم تطبيقات أخرى الاختصار {0} للتحرير. اختر مفتاحًا آخر لاستخدام هذه الميزة.",
+    "Andere Apps nutzen {0} zum Bearbeiten. Wähle eine andere Taste, um das zu nutzen.",
+    "D'autres applis utilisent {0} pour l'édition. Choisis une autre touche pour l'utiliser.",
+    "Otras apps usan {0} para editar. Elige otra tecla para usar esto.",
+    "Другие приложения используют {0} для редактирования. Выберите другую клавишу.",
+    "其他应用使用 {0} 进行编辑。请选择其他按键以使用此功能。"
+  ],
+  "Talk from other apps (on or off)": [
+    "التحدث من تطبيقات أخرى (تشغيل أو إيقاف)",
+    "Aus anderen Apps sprechen (ein oder aus)",
+    "Parler depuis d'autres applis (activer ou couper)",
+    "Hablar desde otras apps (activar o desactivar)",
+    "Говорить из других приложений (вкл. или выкл.)",
+    "在其他应用中说话（开启或关闭）"
+  ],
+  "Desktop app, during a push-to-talk call, once turned on in voice settings.": [
+    "في تطبيق سطح المكتب، أثناء مكالمة بوضع اضغط للتحدث، بعد تشغيله في إعدادات الصوت.",
+    "Desktop-App, in einem Push-to-Talk-Anruf, sobald es in den Spracheinstellungen eingeschaltet ist.",
+    "Appli de bureau, pendant un appel en push-to-talk, une fois activé dans les réglages vocaux.",
+    "App de escritorio, durante una llamada con pulsar para hablar, una vez activado en los ajustes de voz.",
+    "Приложение для компьютера, во время звонка в режиме «нажми и говори», если это включено в настройках голоса.",
+    "桌面应用中，按键说话通话期间，需先在语音设置中开启。"
+  ],
+  "Talking (toggle on)": [
+    "التحدث مفعّل (تبديل)",
+    "Sprechen (Umschalter an)",
+    "Parole active (bascule)",
+    "Hablando (interruptor activado)",
+    "Голос включён (переключатель)",
+    "正在说话（已开启）"
+  ]
+}

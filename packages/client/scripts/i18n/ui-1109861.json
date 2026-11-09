@@ -1,0 +1,98 @@
+{
+  "Input sensitivity": [
+    "حساسية الإدخال",
+    "Eingabeempfindlichkeit",
+    "Sensibilité d'entrée",
+    "Sensibilidad de entrada",
+    "Чувствительность ввода",
+    "输入灵敏度"
+  ],
+  "Below the threshold, others hear silence.": [
+    "تحت العتبة يسمع الآخرون صمتًا.",
+    "Unter der Schwelle hören andere nur Stille.",
+    "Sous le seuil, les autres n'entendent que du silence.",
+    "Por debajo del umbral, los demás oyen silencio.",
+    "Ниже порога остальные слышат тишину.",
+    "低于阈值时，其他人听到的是静音。"
+  ],
+  "Zrzur finds the right level for your room.": [
+    "يجد زرزور المستوى المناسب لمكانك.",
+    "Zrzur findet den passenden Pegel für deinen Raum.",
+    "Zrzur trouve le bon niveau pour ta pièce.",
+    "Zrzur encuentra el nivel adecuado para tu espacio.",
+    "Zrzur сам подберёт уровень для вашей комнаты.",
+    "Zrzur 会为你所在的环境找到合适的电平。"
+  ],
+  "Threshold": [
+    "العتبة",
+    "Schwelle",
+    "Seuil",
+    "Umbral",
+    "Порог",
+    "阈值"
+  ],
+  "Allow microphone access to see your level.": [
+    "اسمح بالوصول إلى الميكروفون لترى مستوى صوتك.",
+    "Erlaube den Zugriff aufs Mikrofon, um deinen Pegel zu sehen.",
+    "Autorise l'accès au micro pour voir ton niveau.",
+    "Permite el acceso al micrófono para ver tu nivel.",
+    "Разрешите доступ к микрофону, чтобы видеть уровень.",
+    "允许访问麦克风即可看到你的音量电平。"
+  ],
+  "Speak and watch the bar: green means others hear you.": [
+    "تحدّث وراقب الشريط: الأخضر يعني أن الآخرين يسمعونك.",
+    "Sprich und beobachte den Balken: Grün heißt, andere hören dich.",
+    "Parle et regarde la barre : vert signifie que les autres t'entendent.",
+    "Habla y mira la barra: verde significa que los demás te oyen.",
+    "Говорите и следите за полосой: зелёный цвет значит, что вас слышат.",
+    "说话并观察电平条：绿色表示其他人能听到你。"
+  ],
+  "Input sensitivity threshold": [
+    "عتبة حساسية الإدخال",
+    "Schwelle der Eingabeempfindlichkeit",
+    "Seuil de sensibilité d'entrée",
+    "Umbral de sensibilidad de entrada",
+    "Порог чувствительности ввода",
+    "输入灵敏度阈值"
+  ],
+  "{value} dB": [
+    "{value} ديسيبل",
+    "{value} dB",
+    "{value} dB",
+    "{value} dB",
+    "{value} дБ",
+    "{value} dB"
+  ],
+  "Others hear you": [
+    "الآخرون يسمعونك",
+    "Andere hören dich",
+    "Les autres t'entendent",
+    "Los demás te oyen",
+    "Вас слышат",
+    "其他人能听到你"
+  ],
+  "Silence is sent": [
+    "يُرسَل صمت",
+    "Es wird Stille gesendet",
+    "Du silence est envoyé",
+    "Se envía silencio",
+    "Передаётся тишина",
+    "正在发送静音"
+  ],
+  "Hold the key while Zrzur is in front. From other apps, {0} turns talking on and off.": [
+    "اضغط المفتاح مطوّلًا وزرزور في المقدمة. ومن التطبيقات الأخرى يشغّل {0} التحدث ويوقفه.",
+    "Halte die Taste, solange Zrzur im Vordergrund ist. Aus anderen Apps schaltet {0} das Sprechen ein und aus.",
+    "Maintiens la touche quand Zrzur est au premier plan. Depuis d'autres applis, {0} active ou coupe la parole.",
+    "Mantén la tecla cuando Zrzur está en primer plano. Desde otras apps, {0} activa o desactiva el habla.",
+    "Удерживайте клавишу, пока Zrzur на переднем плане. Из других приложений {0} включает и выключает передачу голоса.",
+    "Zrzur 在前台时按住该键说话。在其他应用中，按 {0} 可开启或关闭说话。"
+  ],
+  "{0} is not available from other apps. Try another key.": [
+    "الاختصار {0} غير متاح من التطبيقات الأخرى. جرّب مفتاحًا آخر.",
+    "{0} ist aus anderen Apps nicht verfügbar. Versuche eine andere Taste.",
+    "{0} n'est pas disponible depuis d'autres applis. Essaie une autre touche.",
+    "{0} no está disponible desde otras apps. Prueba otra tecla.",
+    "Сочетание {0} недоступно из других приложений. Выберите другую клавишу.",
+    "{0} 在其他应用中不可用。请换一个按键。"
+  ]
+}

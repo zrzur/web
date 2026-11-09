@@ -364,6 +364,11 @@ msgstr "{0} 已经在最顶部"
 msgid "{0} is full. Pay {1} now and start automatically when a place frees up."
 msgstr "{0} 已满员。现在支付 {1}，有名额空出时将自动开始。"
 
+#. placeholder {0}: combo()
+#: components/app/interface/settings/user/voice/PushToTalkOptions.tsx
+msgid "{0} is not available from other apps. Try another key."
+msgstr "{0} 在其他应用中不可用。请换一个按键。"
+
 #. placeholder {0}: done()!.name
 #: components/modal/modals/PromoteServer.tsx
 msgid "{0} is on. It may take a moment to show."
@@ -546,6 +551,11 @@ msgstr "已选择 {0} 项"
 #: components/modal/modals/SuperchargeServer.tsx
 msgid "{0} streams"
 msgstr "{0}直播"
+
+#. placeholder {0}: combo()
+#: components/app/interface/settings/user/voice/PushToTalkOptions.tsx
+msgid "{0} turns talking on and off while Zrzur is in the background."
+msgstr "Zrzur 在后台时，按 {0} 可开启或关闭说话。"
 
 #. placeholder {0}: (message.systemMessage as MessagePinnedSystemMessage).by?.username
 #: components/client/NotificationsWorker.tsx
@@ -733,6 +743,10 @@ msgstr "{usernames} 回应了"
 #: components/app/interface/settings/user/appearance/AnimationSettings.tsx
 msgid "{v} ms"
 msgstr "{v} 毫秒"
+
+#: components/app/interface/settings/user/voice/InputSensitivityOptions.tsx
+msgid "{value} dB"
+msgstr "{value} dB"
 
 #. placeholder {0}: s().days
 #: components/modal/modals/PromoteServer.tsx
@@ -1813,6 +1827,10 @@ msgstr "允许封禁申诉"
 msgid "Allow members to change name and avatar per-message"
 msgstr "允许成员按条消息更改名称和头像"
 
+#: components/app/interface/settings/user/voice/InputSensitivityOptions.tsx
+msgid "Allow microphone access to see your level."
+msgstr "允许访问麦克风即可看到你的音量电平。"
+
 #: components/rtc/messages.ts
 msgid "Allow microphone or camera access in your browser settings."
 msgstr "请在浏览器设置中允许使用麦克风或摄像头。"
@@ -2381,8 +2399,8 @@ msgid "Attacks on a group, or threats of violence"
 msgstr "对群组的攻击或暴力威胁"
 
 #: components/modal/modals/ScreenShareSettings.tsx
-msgid "Audio disabled by browser"
-msgstr "浏览器已禁用音频"
+#~ msgid "Audio disabled by browser"
+#~ msgstr "浏览器已禁用音频"
 
 #: components/ui/components/features/messaging/elements/MediaPlayer.tsx
 msgid "Audio player"
@@ -2438,6 +2456,7 @@ msgstr "自动化工具发现了此内容"
 #: components/app/interface/settings/server/LobbyAppearanceEditor.tsx
 #: components/app/interface/settings/server/LobbySettings.tsx
 #: components/app/interface/settings/user/appearance/AnimationSettings.tsx
+#: components/app/interface/settings/user/voice/InputSensitivityOptions.tsx
 msgid "Automatic"
 msgstr "自动"
 
@@ -2663,6 +2682,10 @@ msgstr "伯利兹"
 #: components/app/interface/settings/user/account/AgeSettings.tsx
 msgid "Below the minimum age: your account is limited and may be reviewed."
 msgstr "低于最低年龄：你的账号将受到限制，并可能接受审核。"
+
+#: components/app/interface/settings/user/voice/InputSensitivityOptions.tsx
+msgid "Below the threshold, others hear silence."
+msgstr "低于阈值时，其他人听到的是静音。"
 
 #: components/ui/components/features/profiles/plateNames.ts
 msgid "Benin"
@@ -4433,6 +4456,14 @@ msgstr "正在连接"
 msgid "Connecting…"
 msgstr "正在连接…"
 
+#: components/ui/components/features/voice/callCard/ParticipantTile.tsx
+msgid "Connection lost"
+msgstr "连接已断开"
+
+#: components/ui/components/features/voice/callCard/VoiceCallCardStatus.tsx
+msgid "Connection lost. Reconnecting…"
+msgstr "连接已断开，正在重新连接…"
+
 #: components/app/interface/settings/UserSettings.tsx
 msgid "Contact support"
 msgstr "联系支持"
@@ -5591,6 +5622,10 @@ msgstr "你收藏的设计"
 #: components/app/interface/settings/UserSettings.tsx
 msgid "Desktop"
 msgstr "桌面"
+
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "Desktop app, during a push-to-talk call, once turned on in voice settings."
+msgstr "桌面应用中，按键说话通话期间，需先在语音设置中开启。"
 
 #: components/app/interface/settings/user/notifications/Notifications.tsx
 msgid "Desktop notifications"
@@ -7060,6 +7095,10 @@ msgstr "创作者专区"
 msgid "For example: Windows 11, Firefox"
 msgstr "例如：Windows 11、Firefox"
 
+#: components/app/interface/settings/user/voice/VoiceProcessingOptions.tsx
+msgid "For music: 128 kbps stereo, with the processing below turned off."
+msgstr "适合音乐：128 kbps 立体声，并关闭下方的处理功能。"
+
 #: components/app/interface/settings/user/subscriptions/PlusPage.tsx
 msgid "For the people who keep Zrzur flying."
 msgstr "献给让 Zrzur 继续飞翔的人们。"
@@ -7968,6 +8007,10 @@ msgstr "高"
 msgid "High Contrast"
 msgstr "高对比度"
 
+#: components/app/interface/settings/user/voice/VoiceProcessingOptions.tsx
+msgid "High quality audio"
+msgstr "高品质音频"
+
 #: components/app/interface/settings/user/plugins/text.ts
 msgid "High risk"
 msgstr "高风险"
@@ -8361,6 +8404,14 @@ msgstr "墨滴"
 #: components/app/interface/settings/user/voice/PushToTalkOptions.tsx
 msgid "Input mode"
 msgstr "输入模式"
+
+#: components/app/interface/settings/user/voice/InputSensitivityOptions.tsx
+msgid "Input sensitivity"
+msgstr "输入灵敏度"
+
+#: components/app/interface/settings/user/voice/InputSensitivityOptions.tsx
+msgid "Input sensitivity threshold"
+msgstr "输入灵敏度阈值"
 
 #: components/app/interface/settings/user/voice/VoiceInputOptions.tsx
 msgid "Input volume"
@@ -10370,6 +10421,10 @@ msgstr "麦克风"
 msgid "Microphone access is blocked. Allow it in your browser to record."
 msgstr "麦克风访问已被阻止。请在浏览器中允许后再录音。"
 
+#: components/ui/components/features/voice/callCard/VoiceCallCardStatus.tsx
+msgid "Microphone unplugged. Using the default microphone."
+msgstr "麦克风已拔出，正在使用默认麦克风。"
+
 #: components/app/interface/settings/user/profile/StyleEditors.tsx
 msgid "Midnight"
 msgstr "午夜"
@@ -12352,6 +12407,11 @@ msgstr "原案件编号"
 msgid "Other"
 msgstr "其他"
 
+#. placeholder {0}: combo()
+#: components/app/interface/settings/user/voice/PushToTalkOptions.tsx
+msgid "Other apps use {0} for editing. Choose another key to use this."
+msgstr "其他应用使用 {0} 进行编辑。请选择其他按键以使用此功能。"
+
 #: src/interface/OAuth.tsx
 msgid "Other permissions"
 msgstr "其他权限"
@@ -12359,6 +12419,10 @@ msgstr "其他权限"
 #: components/app/interface/settings/user/safety/SafetyDashboard.tsx
 msgid "Other reports about this"
 msgstr "与此相关的其他举报"
+
+#: components/app/interface/settings/user/voice/InputSensitivityOptions.tsx
+msgid "Others hear you"
+msgstr "其他人能听到你"
 
 #: components/app/interface/settings/user/voice/PushToTalkOptions.tsx
 msgid "Others hear you only while you hold the key."
@@ -13808,6 +13872,9 @@ msgid "Reconnect now"
 msgstr "立即重新连接"
 
 #: components/ui/components/features/voice/callCard/VoiceCallCardStatus.tsx
+msgid "Reconnected"
+msgstr "已重新连接"
+
 #: src/interface/navigation/channels/AccountBar.tsx
 msgid "Reconnecting"
 msgstr "正在重新连接"
@@ -13910,6 +13977,10 @@ msgstr "拒绝好友请求"
 #: components/app/interface/settings/user/profile/ReviewQueue.tsx
 msgid "Rejected"
 msgstr "已拒绝"
+
+#: components/ui/components/features/voice/callCard/VoiceCallCardStatus.tsx
+msgid "Rejoin"
+msgstr "重新加入"
 
 #: src/interface/channels/text/TextSearchSidebar.tsx
 msgid "Relevance"
@@ -16063,6 +16134,10 @@ msgstr "塞拉利昂"
 msgid "Sign in with a one-time code from your phone."
 msgstr "使用手机上的一次性验证码登录。"
 
+#: components/app/interface/settings/user/voice/InputSensitivityOptions.tsx
+msgid "Silence is sent"
+msgstr "正在发送静音"
+
 #: components/app/interface/channels/text/Message.tsx
 msgid "Silent"
 msgstr "静默"
@@ -16436,9 +16511,17 @@ msgstr "火花"
 msgid "Speak"
 msgstr "发言"
 
+#: components/app/interface/settings/user/voice/InputSensitivityOptions.tsx
+msgid "Speak and watch the bar: green means others hear you."
+msgstr "说话并观察电平条：绿色表示其他人能听到你。"
+
 #: components/app/interface/settings/user/voice/VoiceInputOptions.tsx
 msgid "Speaker"
 msgstr "扬声器"
+
+#: components/ui/components/features/voice/callCard/VoiceCallCardStatus.tsx
+msgid "Speaker unplugged. Using the default speaker."
+msgstr "扬声器已拔出，正在使用默认扬声器。"
 
 #: components/ui/components/features/profiles/badges/useBadgeText.ts
 msgid "Special badge"
@@ -17083,9 +17166,21 @@ msgstr "把你的社区<0>随身带走。</0>"
 msgid "Takes people straight to the conversation."
 msgstr "直接带人们进入对话。"
 
+#: components/app/interface/settings/user/voice/PushToTalkOptions.tsx
+msgid "Talk from other apps"
+msgstr "在其他应用中说话"
+
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "Talk from other apps (on or off)"
+msgstr "在其他应用中说话（开启或关闭）"
+
 #: components/modal/modals/CreateChannel.tsx
 msgid "Talk, video and screen sharing"
 msgstr "语音、视频和屏幕共享"
+
+#: components/ui/components/features/voice/callCard/VoiceCallCardStatus.tsx
+msgid "Talking (toggle on)"
+msgstr "正在说话（已开启）"
 
 #: components/ui/components/features/profiles/plateNames.ts
 msgid "Tanzania"
@@ -17248,6 +17343,16 @@ msgstr "文字"
 #: components/app/interface/settings/user/appearance/LivePreview.tsx
 msgid "TEXT"
 msgstr "文字"
+
+#: components/app/interface/settings/user/voice/ScreenShareOptions.tsx
+#: components/modal/modals/ScreenShareSettings.tsx
+msgid "Text and slides"
+msgstr "文字和幻灯片"
+
+#: components/app/interface/settings/user/voice/ScreenShareOptions.tsx
+#: components/modal/modals/ScreenShareSettings.tsx
+msgid "Text and slides stay sharp; video and games stay smooth."
+msgstr "文字和幻灯片保持清晰，视频和游戏保持流畅。"
 
 #: components/app/interface/settings/server/channels/ChannelsSettings.tsx
 msgid "Text channel"
@@ -17962,6 +18067,10 @@ msgstr "此浏览器无法录制语音消息。"
 msgid "This browser can't run it safely."
 msgstr "此浏览器无法安全地运行它。"
 
+#: components/modal/modals/ScreenShareSettings.tsx
+msgid "This browser cannot share sound from here."
+msgstr "此浏览器无法共享这里的声音。"
+
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 msgid "This can change almost anything in the server"
 msgstr "这几乎可以更改服务器中的任何内容"
@@ -18533,6 +18642,10 @@ msgstr "暴力威胁"
 #: components/ui/components/features/profiles/badges/useBadgeText.ts
 msgid "Three Years on Zrzur"
 msgstr "陪伴 Zrzur 三年"
+
+#: components/app/interface/settings/user/voice/InputSensitivityOptions.tsx
+msgid "Threshold"
+msgstr "阈值"
 
 #: components/app/interface/settings/server/assistant/labels.ts
 msgid "Ticket categories, one per line"
@@ -19720,6 +19833,11 @@ msgctxt "search filter"
 msgid "Video"
 msgstr "视频"
 
+#: components/app/interface/settings/user/voice/ScreenShareOptions.tsx
+#: components/modal/modals/ScreenShareSettings.tsx
+msgid "Video and games"
+msgstr "视频和游戏"
+
 #: components/ui/components/features/messaging/elements/MediaPlayer.tsx
 msgid "Video player"
 msgstr "视频播放器"
@@ -20044,6 +20162,10 @@ msgstr "我们正在准备你的副本。"
 msgid "We've sent you a verification email. Please allow up to 10 minutes for it to arrive."
 msgstr "我们已向您发送验证邮件。请等待邮件送达，最长可能需要 10 分钟。"
 
+#: components/ui/components/features/voice/callCard/ParticipantTile.tsx
+msgid "Weak connection"
+msgstr "连接较弱"
+
 #: src/interface/designs/Looks.tsx
 msgid "Wear this look"
 msgstr "穿上这套造型"
@@ -20235,6 +20357,10 @@ msgstr "此频道的用途"
 #: components/app/interface/settings/user/safety/ReportsAndStanding.tsx
 msgid "What this followed"
 msgstr "它跟随的内容"
+
+#: components/app/interface/settings/user/voice/ScreenShareOptions.tsx
+msgid "What you usually share"
+msgstr "你通常共享的内容"
 
 #: components/modal/modals/Changelog.tsx
 msgid "What's new"
@@ -21376,6 +21502,10 @@ msgstr "你的消息"
 msgid "Your message is too long, please remove some characters and try again."
 msgstr "你的消息太长，请删减一些字符后重试。"
 
+#: components/ui/components/features/voice/callCard/VoiceCallCardStatus.tsx
+msgid "Your microphone is back."
+msgstr "你的麦克风已恢复。"
+
 #: components/app/interface/settings/user/voice/PushToTalkOptions.tsx
 msgid "Your microphone sends whenever you speak."
 msgstr "你的麦克风会在你说话时发送声音。"
@@ -21485,6 +21615,10 @@ msgstr "你的服务器"
 msgid "Your session ended, possibly because you logged out on another device. Log in again to continue."
 msgstr "你的会话已结束，可能是因为你在另一台设备上退出了登录。请重新登录以继续。"
 
+#: components/ui/components/features/voice/callCard/VoiceCallCardStatus.tsx
+msgid "Your speaker is back."
+msgstr "你的扬声器已恢复。"
+
 #: src/interface/designs/Makers.tsx
 msgid "Your spot"
 msgstr "你的位置"
@@ -21588,6 +21722,10 @@ msgstr "Zrzur Feather，按月"
 #: components/app/interface/settings/user/subscriptions/BillingHistory.tsx
 msgid "Zrzur Feather, monthly renewal"
 msgstr "Zrzur Feather，按月续订"
+
+#: components/app/interface/settings/user/voice/InputSensitivityOptions.tsx
+msgid "Zrzur finds the right level for your room."
+msgstr "Zrzur 会为你所在的环境找到合适的电平。"
 
 #: components/app/interface/settings/user/Native.tsx
 #: components/app/interface/settings/UserSettings.tsx

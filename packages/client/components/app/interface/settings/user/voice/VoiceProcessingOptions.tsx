@@ -17,10 +17,29 @@ import { Icon } from "@revolt/ui/icons/Icon";
 export function VoiceProcessingOptions() {
   const { voice } = useState();
   const { t } = useLingui();
+  // music turns every voice treatment off; the rows say so instead of
+  // pretending to work
+  const music = () => voice.highQualityAudio;
+  const toggleMusic = () => (voice.highQualityAudio = !voice.highQualityAudio);
 
   return (
     <SettingsSection title={<Trans>Voice processing</Trans>}>
       <SettingsRow
+        icon={<Icon name="music-note" size={20} />}
+        title={<Trans>High quality audio</Trans>}
+        description={t`For music: 128 kbps stereo, with the processing below turned off.`}
+        onClick={toggleMusic}
+        control={(ids) => (
+          <Toggle
+            checked={music()}
+            onChange={toggleMusic}
+            aria-labelledby={ids.labelId}
+            aria-describedby={ids.descriptionId}
+          />
+        )}
+      />
+      <SettingsRow
+        disabled={music()}
         icon={<Icon name="waveform" size={20} />}
         title={<Trans>Noise suppression</Trans>}
         description={
@@ -30,6 +49,7 @@ export function VoiceProcessingOptions() {
           <SelectWidth>
             <FloatingSelect
               aria-labelledby={ids.labelId}
+              disabled={music()}
               value={voice.noiseSupression}
               onChange={(e) => {
                 const v = e.currentTarget.value as
@@ -56,9 +76,11 @@ export function VoiceProcessingOptions() {
         icon={<Icon name="speaker-low" size={20} />}
         title={<Trans>Echo cancellation</Trans>}
         description={t`Uses the browser's echo cancellation.`}
+        disabled={music()}
         onClick={() => (voice.echoCancellation = !voice.echoCancellation)}
         control={(ids) => (
           <Toggle
+            disabled={music()}
             checked={!!voice.echoCancellation}
             onChange={() => (voice.echoCancellation = !voice.echoCancellation)}
             aria-labelledby={ids.labelId}
@@ -69,9 +91,11 @@ export function VoiceProcessingOptions() {
         icon={<Icon name="sliders-horizontal" size={20} />}
         title={<Trans>Automatic gain control</Trans>}
         description={t`Keeps your microphone at a steady level.`}
+        disabled={music()}
         onClick={() => (voice.autoGainControl = !voice.autoGainControl)}
         control={(ids) => (
           <Toggle
+            disabled={music()}
             checked={!!voice.autoGainControl}
             onChange={() => (voice.autoGainControl = !voice.autoGainControl)}
             aria-labelledby={ids.labelId}

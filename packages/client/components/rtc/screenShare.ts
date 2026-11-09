@@ -15,22 +15,38 @@ import type {
  * load it on its own.
  */
 
-export type ScreenShareQualityName = "low" | "high" | "motion" | "text";
+/** Size and frame rate of a share */
+export type ScreenShareQualityName = "720p30" | "1080p30" | "1080p60";
+
+/**
+ * What is shared, chosen by the person: text and slides stay sharp (the
+ * encoder keeps the resolution and drops frames under pressure), video and
+ * games stay smooth (it lowers the resolution instead)
+ */
+export type ScreenShareContent = "detail" | "motion";
 
 export type ScreenShareQuality = {
   name: ScreenShareQualityName;
   fullName: string;
-  /** 0 means the source size (no downscale) */
   width: number;
   height: number;
   frameRate: number;
-  /**
-   * "detail"/"text" keep text sharp (WebRTC screencast mode, no denoising);
-   * "motion" favours smoothness
-   */
-  contentHint: "detail" | "text" | "motion";
+  /** WebRTC content hint: "detail" is screencast mode, no denoising */
+  contentHint: "detail" | "motion";
   /** What the encoder gives up first when bandwidth or CPU run short */
   degradationPreference: RTCDegradationPreference;
+  encoding: VideoEncoding;
+  /**
+   * Lower simulcast layers, so a viewer on a weak connection or a small
+   * tile gets a smaller picture instead of a frozen one
+   */
+  layers: ScreenShareLayer[];
+};
+
+/** A simulcast layer, shaped like LiveKit's VideoPreset (no runtime import) */
+export type ScreenShareLayer = {
+  width: number;
+  height: number;
   encoding: VideoEncoding;
 };
 
@@ -41,100 +57,104 @@ export type ScreenShareLimits = {
   framerate: number;
 };
 
+/** Every quality, smallest first */
+export const SCREEN_SHARE_QUALITY_NAMES: ScreenShareQualityName[] = [
+  "720p30",
+  "1080p30",
+  "1080p60",
+];
+
+/** 360p at 15 FPS: the layer every share offers to weak connections */
+const LAYER_360: ScreenShareLayer = {
+  width: 640,
+  height: 360,
+  encoding: { maxBitrate: 400_000, maxFramerate: 15 },
+};
+
 /**
- * Quality profiles the user may pick from. "low" is always available; the
- * rest follow the resolution and frame rate the plan allows. Bitrate caps are
- * the ones the client used before (LiveKit's screen share presets and the
- * Plus 60 FPS values), they are not raised here.
+ * Qualities the plan allows. 720p 30 FPS always; 1080p when the plan's
+ * resolution reaches it; 60 FPS only when Feather or the server's Wings
+ * level allow 60 (ScreenShareLimits.framerate, see Voice.screenShareLimits).
+ * Bitrate caps are the ones the client used before.
  */
 export function screenShareQualities(
   limits: ScreenShareLimits,
+  content: ScreenShareContent = "detail",
 ): Partial<Record<ScreenShareQualityName, ScreenShareQuality>> {
   const [maxW, maxH] = limits.resolution;
   const fps60 = limits.framerate >= 60;
   const allows1080 =
     (maxW === 0 || maxW >= 1920) && (maxH === 0 || maxH >= 1080);
+  const sharp = content === "detail";
+  const base = {
+    contentHint: content,
+    degradationPreference: (sharp
+      ? "maintain-resolution"
+      : "balanced") as RTCDegradationPreference,
+  };
 
   const qualities: Partial<Record<ScreenShareQualityName, ScreenShareQuality>> =
     {
-      low: {
-        name: "low",
-        fullName: fps60 ? "720p 60FPS" : "720p 30FPS",
+      "720p30": {
+        ...base,
+        name: "720p30",
+        fullName: "720p · 30 FPS",
         width: 1280,
         height: 720,
-        frameRate: fps60 ? 60 : 30,
-        contentHint: "detail",
-        degradationPreference: "maintain-resolution",
-        encoding: fps60
-          ? { maxBitrate: 4_000_000, maxFramerate: 60 }
-          : { maxBitrate: 2_000_000, maxFramerate: 30 },
+        frameRate: 30,
+        encoding: { maxBitrate: 2_000_000, maxFramerate: 30 },
+        layers: [LAYER_360],
       },
     };
 
   if (allows1080) {
-    qualities.high = {
-      name: "high",
-      fullName: "1080p 30FPS",
+    const layer720 = (fps: number, bitrate: number): ScreenShareLayer => ({
+      width: 1280,
+      height: 720,
+      encoding: { maxBitrate: bitrate, maxFramerate: fps },
+    });
+    qualities["1080p30"] = {
+      ...base,
+      name: "1080p30",
+      fullName: "1080p · 30 FPS",
       width: 1920,
       height: 1080,
       frameRate: 30,
-      contentHint: "detail",
-      degradationPreference: "maintain-resolution",
       encoding: { maxBitrate: 5_000_000, maxFramerate: 30 },
+      layers: [LAYER_360, layer720(30, 2_000_000)],
     };
-  }
-
-  // Smoothness first (games, video): may lower resolution under pressure
-  // instead of dropping frames
-  qualities.motion = allows1080
-    ? {
-        name: "motion",
-        fullName: fps60 ? "1080p 60FPS" : "1080p 30FPS (Motion)",
+    if (fps60) {
+      qualities["1080p60"] = {
+        ...base,
+        name: "1080p60",
+        fullName: "1080p · 60 FPS",
         width: 1920,
         height: 1080,
-        frameRate: fps60 ? 60 : 30,
-        contentHint: "motion",
-        degradationPreference: "balanced",
-        encoding: fps60
-          ? { maxBitrate: 8_000_000, maxFramerate: 60 }
-          : { maxBitrate: 5_000_000, maxFramerate: 30 },
-      }
-    : {
-        name: "motion",
-        fullName: fps60 ? "720p 60FPS (Motion)" : "720p 30FPS (Motion)",
-        width: 1280,
-        height: 720,
-        frameRate: fps60 ? 60 : 30,
-        contentHint: "motion",
-        degradationPreference: "balanced",
-        encoding: fps60
-          ? { maxBitrate: 4_000_000, maxFramerate: 60 }
-          : { maxBitrate: 2_000_000, maxFramerate: 30 },
+        frameRate: 60,
+        encoding: { maxBitrate: 8_000_000, maxFramerate: 60 },
+        layers: [LAYER_360, layer720(30, 2_000_000)],
       };
-
-  if (allows1080) {
-    // Documents and code: full source size (within the plan), few frames
-    qualities.text = {
-      name: "text",
-      fullName: "Source 15FPS (Text)",
-      width: maxW,
-      height: maxH,
-      frameRate: 15,
-      contentHint: "text",
-      degradationPreference: "maintain-resolution",
-      encoding: { maxBitrate: 7_000_000, maxFramerate: 15 },
-    };
+    }
   }
 
   return qualities;
 }
 
-/** Pick a stored quality, falling back to one the plan still allows */
+/**
+ * A stored quality, or the best one below it that the plan still allows
+ * (720p 30 FPS when nothing was stored)
+ */
 export function resolveQuality(
   qualities: Partial<Record<ScreenShareQualityName, ScreenShareQuality>>,
   name: ScreenShareQualityName | undefined,
 ): ScreenShareQuality {
-  return (name && qualities[name]) || qualities.high || qualities.low!;
+  if (name && qualities[name]) return qualities[name]!;
+  const wanted = SCREEN_SHARE_QUALITY_NAMES.indexOf(name ?? "720p30");
+  for (let i = Math.min(wanted, 1); i >= 0; i--) {
+    const quality = qualities[SCREEN_SHARE_QUALITY_NAMES[i]];
+    if (quality) return quality;
+  }
+  return qualities["720p30"]!;
 }
 
 /** Capture options for LocalParticipant.setScreenShareEnabled */
@@ -161,6 +181,13 @@ export function captureOptions(
     },
     contentHint: quality.contentHint,
     audio,
+    // where the browser allows: offer the whole system's sound with a
+    // screen and the tab's sound with a tab, never this tab itself
+    ...(audio
+      ? { systemAudio: "include" as const, suppressLocalAudioPlayback: false }
+      : {}),
+    selfBrowserSurface: "exclude",
+    surfaceSwitching: "include",
   };
 }
 
@@ -171,6 +198,9 @@ export function publishOptions(
 ): TrackPublishOptions {
   return {
     screenShareEncoding: quality.encoding,
+    simulcast: true,
+    screenShareSimulcastLayers:
+      quality.layers as TrackPublishOptions["screenShareSimulcastLayers"],
     degradationPreference: quality.degradationPreference,
     ...(videoCodec ? { videoCodec } : {}),
   };

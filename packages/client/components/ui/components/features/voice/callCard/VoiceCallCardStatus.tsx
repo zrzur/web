@@ -1,13 +1,32 @@
-import { Trans } from "@lingui/solid/macro";
+import { Trans, useLingui } from "@lingui/solid/macro";
 import { Show } from "solid-js";
 import { styled } from "styled-system/jsx";
 
 import { useVoice } from "@revolt/rtc";
+import { Button } from "@revolt/ui/components/design/Button";
 
 import { SignalBars } from "../SignalBars";
 
 export function VoiceCallCardStatus(props: { pip?: boolean }) {
   const voice = useVoice();
+  const { t } = useLingui();
+
+  const notice = () => {
+    switch (voice.notice()) {
+      case "reconnected":
+        return t`Reconnected`;
+      case "inputFallback":
+        return t`Microphone unplugged. Using the default microphone.`;
+      case "inputRestored":
+        return t`Your microphone is back.`;
+      case "outputFallback":
+        return t`Speaker unplugged. Using the default speaker.`;
+      case "outputRestored":
+        return t`Your speaker is back.`;
+      default:
+        return undefined;
+    }
+  };
 
   const text = () => {
     switch (voice.state()) {
@@ -18,7 +37,7 @@ export function VoiceCallCardStatus(props: { pip?: boolean }) {
       case "DISCONNECTED":
         return <Trans>Disconnected</Trans>;
       case "RECONNECTING":
-        return <Trans>Reconnecting</Trans>;
+        return <Trans>Connection lost. Reconnecting…</Trans>;
       default:
         return null;
     }
@@ -36,6 +55,27 @@ export function VoiceCallCardStatus(props: { pip?: boolean }) {
       </Show>
       <SignalBars state={voice.state()} size={18} />{" "}
       <FadeOut fade={voice.state() === "CONNECTED"}>{text()}</FadeOut>
+      <Notice role="status">{notice()}</Notice>
+      {/* talking was turned on with the global toggle (desktop app) */}
+      <Show when={voice.pttLatched()}>
+        <Notice data-talk-latched>
+          <Trans>Talking (toggle on)</Trans>
+        </Notice>
+      </Show>
+      <Show
+        when={
+          voice.state() === "DISCONNECTED" &&
+          voice.channel() &&
+          voice.canRejoin()
+        }
+      >
+        {/* after reconnecting failed: one press joins the same channel */}
+        <RejoinSlot>
+          <Button size="sm" onPress={() => voice.rejoin()}>
+            <Trans>Rejoin</Trans>
+          </Button>
+        </RejoinSlot>
+      </Show>
     </Status>
   );
 }
@@ -55,6 +95,24 @@ const FadeOut = styled("div", {
       },
     },
   },
+});
+
+/** Reconnected, device unplugged: stays a few seconds, read out once */
+const Notice = styled("span", {
+  base: {
+    minWidth: 0,
+    marginInlineStart: "var(--gap-md)",
+    fontSize: "13px",
+    lineHeight: "18px",
+    fontWeight: 500,
+    color: "var(--z-fg-secondary)",
+    whiteSpace: "normal",
+    "&:empty": { display: "none" },
+  },
+});
+
+const RejoinSlot = styled("span", {
+  base: { marginInlineStart: "var(--gap-md)" },
 });
 
 const Status = styled("div", {

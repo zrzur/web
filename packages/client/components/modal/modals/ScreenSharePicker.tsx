@@ -2,13 +2,16 @@ import { Trans, useLingui } from "@lingui/solid/macro";
 import { createFormControl, createFormGroup } from "solid-forms";
 
 import { useState } from "@revolt/state";
-import { ScreenShareQualityName } from "@revolt/state/stores/Voice";
+import {
+  ScreenShareContent,
+  ScreenShareQualityName,
+} from "@revolt/state/stores/Voice";
 import { Avatar, Column, Dialog, DialogProps, Form2, Ripple } from "@revolt/ui";
 
 import { createMemo } from "solid-js";
 import { styled } from "styled-system/jsx";
 import { Modals } from "../types";
-import { offeredQuality } from "./ScreenShareSettings";
+import { ContentChoice, offeredQuality } from "./ScreenShareSettings";
 
 export function ScreenSharePickerModal(
   props: DialogProps & Modals & { type: "screen_share_picker" },
@@ -20,6 +23,7 @@ export function ScreenSharePickerModal(
     qualityName: createFormControl<ScreenShareQualityName>(
       offeredQuality(props.qualities, voice.screenShareQuality),
     ),
+    content: createFormControl<ScreenShareContent>(voice.screenShareContent),
     audio: createFormControl(voice.screenShareAudio),
     idx: createFormControl([0], { required: true }),
   });
@@ -29,6 +33,7 @@ export function ScreenSharePickerModal(
       group.controls.idx.value[0],
       group.controls.qualityName.value,
       group.controls.audio.value,
+      group.controls.content.value,
     );
     props.onClose();
   }
@@ -94,6 +99,7 @@ export function ScreenSharePickerModal(
               };
             })}
           />
+          <ContentChoice control={group.controls.content} />
           <Form2.Checkbox control={group.controls.audio}>
             <Trans>Share audio</Trans>
           </Form2.Checkbox>

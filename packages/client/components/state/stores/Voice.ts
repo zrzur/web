@@ -1,4 +1,5 @@
 import { type VoiceInputMode, pttKeyAllowed } from "../../keybinds/shortcuts";
+import { DEFAULT_THRESHOLD_DB, clampThreshold } from "../../rtc/voiceGate";
 
 import { State } from "..";
 
@@ -16,21 +17,33 @@ const NoiseSuppresionStates: NoiseSuppresionState[] = [
 ];
 
 /**
- * Possible screen share qualities (see rtc/screenShare.ts): low is 720p, high
- * 1080p for sharp text, motion favours smooth frames and text is the source
- * size at 15fps.
+ * Screen share size and frame rate (see rtc/screenShare.ts); 60 FPS only
+ * where the plan or the server's level allow it
  */
-export type ScreenShareQualityName = "low" | "high" | "motion" | "text";
+export type ScreenShareQualityName = "720p30" | "1080p30" | "1080p60";
 
 /**
  * Array of available screen share quality names.
  */
 export const ScreenShareQualityNames: ScreenShareQualityName[] = [
-  "low",
-  "high",
-  "motion",
-  "text",
+  "720p30",
+  "1080p30",
+  "1080p60",
 ];
+
+/** What is shared: text and slides (sharp) or video and games (smooth) */
+export type ScreenShareContent = "detail" | "motion";
+
+/** Qualities saved before 2026-11-09, as the new size and content */
+const LEGACY_QUALITIES: Record<
+  string,
+  [ScreenShareQualityName, ScreenShareContent]
+> = {
+  low: ["720p30", "detail"],
+  high: ["1080p30", "detail"],
+  text: ["1080p30", "detail"],
+  motion: ["1080p60", "motion"],
+};
 
 /** Per-person and per-stream volume: 0 to 300 %, anything else is 100 % */
 function clampVolume(volume: number) {
@@ -48,6 +61,7 @@ export interface TypeVoice {
   autoGainControl: boolean;
 
   screenShareQuality: ScreenShareQualityName;
+  screenShareContent: ScreenShareContent;
   screenShareQualityAsk: boolean;
   screenShareAudio: boolean;
 
@@ -60,6 +74,26 @@ export interface TypeVoice {
   inputMode: VoiceInputMode;
   /** Physical key (`KeyboardEvent.code`) held to talk */
   pttKey: string;
+  /**
+   * Desktop app: Ctrl/Cmd+Shift with the push-to-talk key turns talking on
+   * and off from other apps. Off until the person turns it on.
+   */
+  globalTalk: boolean;
+
+  /**
+   * Voice activity: let Zrzur pick the input sensitivity (true) or use
+   * `inputThreshold`. Stored on this device only (the store is not synced),
+   * because every microphone and room needs its own value.
+   */
+  inputSensitivityAuto: boolean;
+  /** Manual input sensitivity: level in dBFS (-80 to 0) the voice must reach */
+  inputThreshold: number;
+
+  /**
+   * High quality audio for music: 128 kbps stereo, every voice treatment
+   * off (see rtc/audioQuality.ts)
+   */
+  highQualityAudio: boolean;
 
   userVolumes: Record<string, number>;
   userMutes: Record<string, boolean>;
@@ -95,7 +129,8 @@ export class Voice extends AbstractStore<"voice", TypeVoice> {
       echoCancellation: true,
       noiseSupression: "enhanced",
       autoGainControl: true,
-      screenShareQuality: "low",
+      screenShareQuality: "720p30",
+      screenShareContent: "detail",
       screenShareQualityAsk: true,
       screenShareAudio: true,
       inputVolume: 1.0,
@@ -104,6 +139,10 @@ export class Voice extends AbstractStore<"voice", TypeVoice> {
       micOn: true,
       inputMode: "voice",
       pttKey: "Backquote",
+      globalTalk: false,
+      inputSensitivityAuto: true,
+      inputThreshold: DEFAULT_THRESHOLD_DB,
+      highQualityAudio: false,
       userVolumes: {},
       userMutes: {},
       screenShareVolumes: {},
@@ -154,6 +193,19 @@ export class Voice extends AbstractStore<"voice", TypeVoice> {
       ScreenShareQualityNames.includes(input.screenShareQuality)
     ) {
       data.screenShareQuality = input.screenShareQuality;
+    } else if (
+      typeof input.screenShareQuality === "string" &&
+      LEGACY_QUALITIES[input.screenShareQuality]
+    ) {
+      [data.screenShareQuality, data.screenShareContent] =
+        LEGACY_QUALITIES[input.screenShareQuality];
+    }
+
+    if (
+      input.screenShareContent === "detail" ||
+      input.screenShareContent === "motion"
+    ) {
+      data.screenShareContent = input.screenShareContent;
     }
 
     if (typeof input.screenShareQualityAsk === "boolean") {
@@ -186,6 +238,22 @@ export class Voice extends AbstractStore<"voice", TypeVoice> {
 
     if (typeof input.pttKey === "string" && pttKeyAllowed(input.pttKey)) {
       data.pttKey = input.pttKey;
+    }
+
+    if (typeof input.globalTalk === "boolean") {
+      data.globalTalk = input.globalTalk;
+    }
+
+    if (typeof input.inputSensitivityAuto === "boolean") {
+      data.inputSensitivityAuto = input.inputSensitivityAuto;
+    }
+
+    if (typeof input.inputThreshold === "number") {
+      data.inputThreshold = clampThreshold(input.inputThreshold);
+    }
+
+    if (typeof input.highQualityAudio === "boolean") {
+      data.highQualityAudio = input.highQualityAudio;
     }
 
     if (typeof input.userVolumes === "object") {
@@ -349,6 +417,20 @@ export class Voice extends AbstractStore<"voice", TypeVoice> {
   }
 
   /**
+   * Set what is usually shared (text and slides, or video and games)
+   */
+  set screenShareContent(value: ScreenShareContent) {
+    this.set("screenShareContent", value);
+  }
+
+  /**
+   * Get what is usually shared
+   */
+  get screenShareContent(): ScreenShareContent {
+    return this.get().screenShareContent ?? "detail";
+  }
+
+  /**
    * Set screen share quality always ask
    */
   set screenShareQualityAsk(value: boolean) {
@@ -507,5 +589,61 @@ export class Voice extends AbstractStore<"voice", TypeVoice> {
    */
   get pttKey(): string {
     return this.get().pttKey ?? "Backquote";
+  }
+
+  /**
+   * Set talking from other apps (desktop app)
+   */
+  set globalTalk(value: boolean) {
+    this.set("globalTalk", value);
+  }
+
+  /**
+   * Get talking from other apps (desktop app)
+   */
+  get globalTalk(): boolean {
+    return this.get().globalTalk ?? false;
+  }
+
+  /**
+   * Set whether the input sensitivity is automatic
+   */
+  set inputSensitivityAuto(value: boolean) {
+    this.set("inputSensitivityAuto", value);
+  }
+
+  /**
+   * Get whether the input sensitivity is automatic
+   */
+  get inputSensitivityAuto(): boolean {
+    return this.get().inputSensitivityAuto ?? true;
+  }
+
+  /**
+   * Set the manual input sensitivity (dBFS, kept between -80 and 0)
+   */
+  set inputThreshold(value: number) {
+    this.set("inputThreshold", clampThreshold(value));
+  }
+
+  /**
+   * Set high quality audio (music)
+   */
+  set highQualityAudio(value: boolean) {
+    this.set("highQualityAudio", value);
+  }
+
+  /**
+   * Get high quality audio (music)
+   */
+  get highQualityAudio(): boolean {
+    return this.get().highQualityAudio ?? false;
+  }
+
+  /**
+   * Get the manual input sensitivity (dBFS)
+   */
+  get inputThreshold(): number {
+    return this.get().inputThreshold ?? DEFAULT_THRESHOLD_DB;
   }
 }

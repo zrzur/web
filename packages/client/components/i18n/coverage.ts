@@ -8,7 +8,7 @@ export const LANGUAGE_COVERAGE: Record<string, number> = {
   "bg": 3,
   "bn": 3,
   "br": 3,
-  "ca": 11,
+  "ca": 10,
   "ceb": 1,
   "ckb": 3,
   "cs": 8,

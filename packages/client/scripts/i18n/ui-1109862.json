@@ -1,0 +1,130 @@
+{
+  "High quality audio": [
+    "صوت عالي الجودة",
+    "Audio in hoher Qualität",
+    "Audio haute qualité",
+    "Audio de alta calidad",
+    "Звук высокого качества",
+    "高品质音频"
+  ],
+  "For music: 128 kbps stereo, with the processing below turned off.": [
+    "للموسيقى: ستيريو بمعدل 128 كيلوبت في الثانية، مع إيقاف المعالجة أدناه.",
+    "Für Musik: 128 kbit/s Stereo, die Verarbeitung unten ist dann aus.",
+    "Pour la musique : 128 kbit/s en stéréo, avec les traitements ci-dessous désactivés.",
+    "Para música: 128 kbps en estéreo, con el procesamiento de abajo desactivado.",
+    "Для музыки: 128 кбит/с, стерео, обработка ниже отключается.",
+    "适合音乐：128 kbps 立体声，并关闭下方的处理功能。"
+  ],
+  "Text and slides": [
+    "نصوص وشرائح",
+    "Text und Folien",
+    "Texte et diapos",
+    "Texto y diapositivas",
+    "Текст и слайды",
+    "文字和幻灯片"
+  ],
+  "Video and games": [
+    "فيديو وألعاب",
+    "Video und Spiele",
+    "Vidéo et jeux",
+    "Vídeo y juegos",
+    "Видео и игры",
+    "视频和游戏"
+  ],
+  "Text and slides stay sharp; video and games stay smooth.": [
+    "تبقى النصوص والشرائح واضحة، ويبقى الفيديو والألعاب سلسين.",
+    "Text und Folien bleiben scharf, Video und Spiele bleiben flüssig.",
+    "Le texte et les diapos restent nets ; la vidéo et les jeux restent fluides.",
+    "El texto y las diapositivas se ven nítidos; el vídeo y los juegos, fluidos.",
+    "Текст и слайды остаются чёткими, видео и игры — плавными.",
+    "文字和幻灯片保持清晰，视频和游戏保持流畅。"
+  ],
+  "This browser cannot share sound from here.": [
+    "لا يستطيع هذا المتصفح مشاركة الصوت من هنا.",
+    "Dieser Browser kann von hier keinen Ton teilen.",
+    "Ce navigateur ne peut pas partager le son depuis cette source.",
+    "Este navegador no puede compartir el sonido desde aquí.",
+    "Этот браузер не может передавать звук отсюда.",
+    "此浏览器无法共享这里的声音。"
+  ],
+  "What you usually share": [
+    "ما تشاركه عادةً",
+    "Was du meistens teilst",
+    "Ce que tu partages le plus",
+    "Lo que sueles compartir",
+    "Что вы обычно показываете",
+    "你通常共享的内容"
+  ],
+  "Reconnected": [
+    "أُعيد الاتصال",
+    "Wieder verbunden",
+    "Reconnecté",
+    "Reconectado",
+    "Подключение восстановлено",
+    "已重新连接"
+  ],
+  "Microphone unplugged. Using the default microphone.": [
+    "فُصل الميكروفون. يُستخدم الميكروفون الافتراضي.",
+    "Mikrofon getrennt. Das Standardmikrofon wird verwendet.",
+    "Micro débranché. Le micro par défaut est utilisé.",
+    "Micrófono desconectado. Se usa el micrófono predeterminado.",
+    "Микрофон отключён. Используется микрофон по умолчанию.",
+    "麦克风已拔出，正在使用默认麦克风。"
+  ],
+  "Your microphone is back.": [
+    "عاد ميكروفونك.",
+    "Dein Mikrofon ist wieder da.",
+    "Ton micro est de retour.",
+    "Tu micrófono ha vuelto.",
+    "Ваш микрофон снова подключён.",
+    "你的麦克风已恢复。"
+  ],
+  "Speaker unplugged. Using the default speaker.": [
+    "فُصلت السماعة. تُستخدم السماعة الافتراضية.",
+    "Lautsprecher getrennt. Der Standardlautsprecher wird verwendet.",
+    "Haut-parleur débranché. Le haut-parleur par défaut est utilisé.",
+    "Altavoz desconectado. Se usa el altavoz predeterminado.",
+    "Динамик отключён. Используется динамик по умолчанию.",
+    "扬声器已拔出，正在使用默认扬声器。"
+  ],
+  "Your speaker is back.": [
+    "عادت سماعتك.",
+    "Dein Lautsprecher ist wieder da.",
+    "Ton haut-parleur est de retour.",
+    "Tu altavoz ha vuelto.",
+    "Ваш динамик снова подключён.",
+    "你的扬声器已恢复。"
+  ],
+  "Connection lost. Reconnecting…": [
+    "انقطع الاتصال. تجري إعادة الاتصال…",
+    "Verbindung verloren. Verbindung wird wiederhergestellt…",
+    "Connexion perdue. Reconnexion…",
+    "Se perdió la conexión. Reconectando…",
+    "Соединение потеряно. Переподключение…",
+    "连接已断开，正在重新连接…"
+  ],
+  "Rejoin": [
+    "انضم مجددًا",
+    "Erneut beitreten",
+    "Rejoindre",
+    "Volver a unirse",
+    "Подключиться снова",
+    "重新加入"
+  ],
+  "Connection lost": [
+    "انقطع الاتصال",
+    "Verbindung verloren",
+    "Connexion perdue",
+    "Conexión perdida",
+    "Соединение потеряно",
+    "连接已断开"
+  ],
+  "Weak connection": [
+    "اتصال ضعيف",
+    "Schwache Verbindung",
+    "Connexion faible",
+    "Conexión débil",
+    "Слабое соединение",
+    "连接较弱"
+  ]
+}

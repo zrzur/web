@@ -84,7 +84,107 @@ describe("Voice store: push to talk", () => {
     } as unknown as Parameters<ReturnType<typeof store>["clean"]>[0]);
     expect(data.inputMode).toBe("voice");
     expect(data.pttKey).toBe("Backquote");
-    expect(store().clean({ pttKey: 5 } as unknown as Parameters<ReturnType<typeof store>["clean"]>[0])
-        .pttKey).toBe("Backquote");
+    expect(
+      store().clean({ pttKey: 5 } as unknown as Parameters<
+        ReturnType<typeof store>["clean"]
+      >[0]).pttKey,
+    ).toBe("Backquote");
+  });
+});
+
+describe("Voice store: input sensitivity", () => {
+  it("starts on automatic with a -50 dB manual threshold ready", () => {
+    const data = store().default();
+    expect(data.inputSensitivityAuto).toBe(true);
+    expect(data.inputThreshold).toBe(-50);
+  });
+
+  it("keeps a saved manual threshold", () => {
+    const data = store().clean({
+      inputSensitivityAuto: false,
+      inputThreshold: -37,
+    });
+    expect(data.inputSensitivityAuto).toBe(false);
+    expect(data.inputThreshold).toBe(-37);
+  });
+
+  it("keeps thresholds inside the slider range and drops nonsense", () => {
+    expect(store().clean({ inputThreshold: -300 }).inputThreshold).toBe(-80);
+    expect(store().clean({ inputThreshold: 12 }).inputThreshold).toBe(0);
+    const bad = store().clean({
+      inputSensitivityAuto: "no",
+      inputThreshold: "loud",
+    } as unknown as Parameters<ReturnType<typeof store>["clean"]>[0]);
+    expect(bad.inputSensitivityAuto).toBe(true);
+    expect(bad.inputThreshold).toBe(-50);
+  });
+});
+
+describe("Voice store: high quality audio", () => {
+  it("is off until chosen, and a saved choice is kept", () => {
+    expect(store().default().highQualityAudio).toBe(false);
+    expect(store().clean({ highQualityAudio: true }).highQualityAudio).toBe(
+      true,
+    );
+    expect(
+      store().clean({ highQualityAudio: "yes" } as unknown as Parameters<
+        ReturnType<typeof store>["clean"]
+      >[0]).highQualityAudio,
+    ).toBe(false);
+  });
+});
+
+describe("Voice store: screen share quality", () => {
+  it("starts new users at 720p 30 FPS for text and slides", () => {
+    const data = store().default();
+    expect(data.screenShareQuality).toBe("720p30");
+    expect(data.screenShareContent).toBe("detail");
+  });
+
+  it("moves qualities saved before the split to a size and a content", () => {
+    expect(store().clean({ screenShareQuality: "low" } as never)).toMatchObject(
+      { screenShareQuality: "720p30", screenShareContent: "detail" },
+    );
+    expect(
+      store().clean({ screenShareQuality: "text" } as never),
+    ).toMatchObject({
+      screenShareQuality: "1080p30",
+      screenShareContent: "detail",
+    });
+    expect(
+      store().clean({ screenShareQuality: "motion" } as never),
+    ).toMatchObject({
+      screenShareQuality: "1080p60",
+      screenShareContent: "motion",
+    });
+  });
+
+  it("keeps new choices and drops unknown ones", () => {
+    expect(
+      store().clean({
+        screenShareQuality: "1080p60",
+        screenShareContent: "motion",
+      }),
+    ).toMatchObject({
+      screenShareQuality: "1080p60",
+      screenShareContent: "motion",
+    });
+    expect(
+      store().clean({
+        screenShareQuality: "4k",
+        screenShareContent: "cinema",
+      } as never),
+    ).toMatchObject({
+      screenShareQuality: "720p30",
+      screenShareContent: "detail",
+    });
+  });
+});
+
+describe("Voice store: talk from other apps", () => {
+  it("is off until turned on, and a saved choice is kept", () => {
+    expect(store().default().globalTalk).toBe(false);
+    expect(store().clean({ globalTalk: true }).globalTalk).toBe(true);
+    expect(store().clean({ globalTalk: 1 } as never).globalTalk).toBe(false);
   });
 });

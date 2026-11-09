@@ -5,6 +5,40 @@ import { createEffect, createRoot, on } from "solid-js";
 import { CONFIGURATION } from "@revolt/common";
 import { Voice } from "@revolt/state/stores/Voice";
 
+import { setCallInputLevel } from "./inputLevel";
+import {
+  type GateConfig,
+  GATE_HOLD_MS,
+  VOICE_GATE_WORKLET,
+  voiceGateWorkletUrl,
+} from "./voiceGate";
+
+/** Audio contexts that already have the gate worklet */
+const gateLoaded = new WeakMap<BaseAudioContext, Promise<boolean>>();
+
+/**
+ * Load the input gate into an audio context. False when the browser has no
+ * audio worklets or refuses the module: the call then runs without a gate.
+ */
+function loadGate(context: BaseAudioContext): Promise<boolean> {
+  let loading = gateLoaded.get(context);
+  if (!loading) {
+    loading = (async () => {
+      if (!context.audioWorklet || typeof AudioWorkletNode === "undefined")
+        return false;
+      try {
+        await context.audioWorklet.addModule(voiceGateWorkletUrl());
+        return true;
+      } catch (error) {
+        console.warn("[rtc] input sensitivity unavailable", error);
+        return false;
+      }
+    })();
+    gateLoaded.set(context, loading);
+  }
+  return loading;
+}
+
 export class VoiceProcessor implements TrackProcessor<
   Track.Kind.Audio,
   AudioProcessorOptions
@@ -20,6 +54,8 @@ export class VoiceProcessor implements TrackProcessor<
   private highpassNode?: BiquadFilterNode;
   private compressorNode?: DynamicsCompressorNode;
   private gainNode?: GainNode;
+  private gateNode?: AudioWorkletNode;
+  private gateReady = false;
   private destinationNode?: MediaStreamAudioDestinationNode;
 
   private disposeSolidjsContext: () => void = () => {};
@@ -37,20 +73,24 @@ export class VoiceProcessor implements TrackProcessor<
       // On noise suppression setting change, toggle noise suppression
       createEffect(
         on(
-          () => this.getSettings().noiseSupression,
+          () => this.enhanced(),
           (newNoiseSuppresion, oldNoiseSuppression) => {
-            // Only rebuild if noise supression has changed from enhanced to something else or vice versa
+            // Only rebuild when the RNNoise path turns on or off
             if (
-              oldNoiseSuppression &&
-              oldNoiseSuppression !== newNoiseSuppresion &&
-              (newNoiseSuppresion === "enhanced" ||
-                oldNoiseSuppression === "enhanced")
+              oldNoiseSuppression !== undefined &&
+              oldNoiseSuppression !== newNoiseSuppresion
             ) {
               this.rebuild();
             }
           },
         ),
       );
+
+      // Input sensitivity: the gate follows the settings during a call
+      createEffect(() => {
+        const config = this.gateConfig();
+        this.gateNode?.port.postMessage(config);
+      });
 
       // This is needed to destroy the solid context on unload
       this.disposeSolidjsContext = dispose;
@@ -59,6 +99,27 @@ export class VoiceProcessor implements TrackProcessor<
 
   private getSettings(): Voice {
     return this.settings;
+  }
+
+  /** RNNoise runs for Enhanced, never for high quality audio (music) */
+  private enhanced(): boolean {
+    const settings = this.getSettings();
+    return (
+      settings.noiseSupression === "enhanced" && !settings.highQualityAudio
+    );
+  }
+
+  /** What the gate should do with the current settings */
+  private gateConfig(): GateConfig {
+    const settings = this.getSettings();
+    return {
+      // push to talk: the key decides, the gate stays out of the way
+      // music: quiet passages must not be cut
+      enabled: settings.inputMode !== "ptt" && !settings.highQualityAudio,
+      auto: settings.inputSensitivityAuto,
+      thresholdDb: settings.inputThreshold,
+      holdMs: GATE_HOLD_MS,
+    };
   }
 
   private setGain(newGain: number) {
@@ -74,10 +135,14 @@ export class VoiceProcessor implements TrackProcessor<
   }
 
   async init(opts: AudioProcessorOptions): Promise<void> {
-    await RNNoiseNode.loadModule(
-      opts.audioContext,
-      CONFIGURATION.RNNOISE_WORKLET_CDN_URL,
-    );
+    const [gateReady] = await Promise.all([
+      opts.audioContext ? loadGate(opts.audioContext) : false,
+      RNNoiseNode.loadModule(
+        opts.audioContext,
+        CONFIGURATION.RNNOISE_WORKLET_CDN_URL,
+      ),
+    ]);
+    this.gateReady = gateReady;
     return this.build(opts);
   }
 
@@ -101,7 +166,7 @@ export class VoiceProcessor implements TrackProcessor<
     this.noiseSuppressionNode?.disconnect();
     this.highpassNode?.disconnect();
 
-    if (this.settings.noiseSupression === "enhanced") {
+    if (this.enhanced()) {
       // Create a new highpass filter
       this.highpassNode = context.createBiquadFilter();
       this.highpassNode.type = "highpass";
@@ -156,10 +221,49 @@ export class VoiceProcessor implements TrackProcessor<
 
     this.updateNoiseSuppression(context);
 
-    // Create the destination node, connect the gain node and send it off to livekit
+    // Create the destination node, connect the gain node (through the input
+    // gate where the browser can run it) and send it off to livekit
     this.destinationNode = context.createMediaStreamDestination();
-    this.gainNode.connect(this.destinationNode);
+    this.gateNode = this.createGate(context);
+    if (this.gateNode) {
+      this.gainNode.connect(this.gateNode);
+      this.gateNode.connect(this.destinationNode);
+    } else {
+      this.gainNode.connect(this.destinationNode);
+    }
     this.processedTrack = this.destinationNode.stream.getAudioTracks()[0];
+  }
+
+  private createGate(context: AudioContext): AudioWorkletNode | undefined {
+    if (!this.gateReady) return undefined;
+    try {
+      const gate = new AudioWorkletNode(context, VOICE_GATE_WORKLET, {
+        numberOfInputs: 1,
+        numberOfOutputs: 1,
+      });
+      gate.port.onmessage = (event) => setCallInputLevel(event.data);
+      // a worklet that throws outputs silence: take it out of the path
+      gate.onprocessorerror = () => this.bypassGate(gate);
+      gate.port.postMessage(this.gateConfig());
+      return gate;
+    } catch (error) {
+      console.warn("[rtc] input sensitivity unavailable", error);
+      return undefined;
+    }
+  }
+
+  /** Wire the volume straight to the call, without the gate */
+  private bypassGate(gate: AudioWorkletNode) {
+    if (this.gateNode !== gate) return;
+    console.warn("[rtc] input sensitivity stopped; sending ungated");
+    gate.port.onmessage = null;
+    gate.disconnect();
+    this.gateNode = undefined;
+    setCallInputLevel(undefined);
+    if (this.gainNode && this.destinationNode) {
+      this.gainNode.disconnect();
+      this.gainNode.connect(this.destinationNode);
+    }
   }
 
   private async teardown() {
@@ -168,7 +272,11 @@ export class VoiceProcessor implements TrackProcessor<
     this.noiseSuppressionNode?.disconnect();
     this.compressorNode?.disconnect();
     this.gainNode?.disconnect();
+    this.gateNode?.disconnect();
+    if (this.gateNode) this.gateNode.port.onmessage = null;
     this.destinationNode?.disconnect();
+    setCallInputLevel(undefined);
+    this.gateNode = undefined;
     this.sourceNode = undefined;
     this.highpassNode = undefined;
     this.noiseSuppressionNode = undefined;
