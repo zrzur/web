@@ -7,8 +7,10 @@ import {
   createSignal,
   JSX,
   lazy,
+  on,
   onCleanup,
   Setter,
+  untrack,
   useContext,
 } from "solid-js";
 import type { TrackReferenceOrPlaceholder } from "solid-livekit-components";
@@ -28,7 +30,6 @@ import { useInstance } from "@revolt/instance";
 import { ModalController, useModals } from "@revolt/modal";
 import { useState } from "@revolt/state";
 import {
-  NoiseSuppresionState,
   ScreenShareQualityName,
   Voice as VoiceSettings,
 } from "@revolt/state/stores/Voice";
@@ -41,6 +42,7 @@ import {
   matchGlobalShortcut,
   transmitting,
 } from "../keybinds/shortcuts";
+import { audioCaptureFor, audioPublishFor, callBitrate } from "./audioQuality";
 import { InRoom } from "./components/InRoom";
 import { desktopPushToTalk } from "./desktopPushToTalk";
 import { RoomState, TrackSource } from "./livekitConstants";
@@ -257,7 +259,10 @@ class Voice {
     createEffect(() => {
       const room = this.room();
       const level = this.channel()?.server?.supercharge?.level;
-      const bitrate = voiceBitrateFor(level);
+      const bitrate = callBitrate(
+        voiceBitrateFor(level),
+        this.#settings.highQualityAudio,
+      );
       this.#setBitrate(bitrate);
       if (this.state() !== "CONNECTED" || !room) return;
       void this.applyVoiceBitrate(room, bitrate);
@@ -279,48 +284,67 @@ class Voice {
   private settingsListeners() {
     const getSettings = () => this.#settings;
 
-    const setEchoCancellation = (echoCancellation: boolean) => {
-      const track = this.getMicrophoneTrack()?.audioTrack;
-      if (track) {
-        track.constraints.echoCancellation = echoCancellation;
-      }
-    };
-
-    const setAutoGainControl = (autoGainControl: boolean) => {
-      const track = this.getMicrophoneTrack()?.audioTrack;
-      if (track) {
-        track.constraints.autoGainControl = autoGainControl;
-      }
-    };
-
-    const setNoiseSuppression = (noiseSuppression: NoiseSuppresionState) => {
-      const track = this.getMicrophoneTrack()?.audioTrack;
-      if (track) {
-        if (noiseSuppression === "browser") {
-          track.constraints.noiseSuppression = true;
-          //@ts-expect-error voiceIsolation is not yet standard, but it supported by livekit and most chromium based browsers, including electron.
-          track.constraints.voiceIsolation = true;
-        } else {
-          track.constraints.noiseSuppression = false;
-          //@ts-expect-error voiceIsolation is not yet standard, but it supported by livekit and most chromium based browsers, including electron.
-          track.constraints.voiceIsolation = false;
-        }
-      }
-    };
-
-    const restartTrack = () => {
-      const track = this.getMicrophoneTrack()?.audioTrack;
-      if (track) {
-        track.restartTrack();
-      }
-    };
-
+    // echo cancellation, gain control and browser noise suppression are
+    // capture constraints: restart the microphone with the new ones
     createEffect(() => {
-      setEchoCancellation(getSettings().echoCancellation ?? true);
-      setAutoGainControl(getSettings().autoGainControl ?? true);
-      setNoiseSuppression(getSettings().noiseSupression ?? "browser");
-      restartTrack();
+      const capture = audioCaptureFor(
+        {
+          echoCancellation: getSettings().echoCancellation,
+          autoGainControl: getSettings().autoGainControl,
+          noiseSupression: getSettings().noiseSupression ?? "browser",
+        },
+        getSettings().highQualityAudio,
+      );
+      const track = untrack(() => this.getMicrophoneTrack()?.audioTrack);
+      if (!track) return;
+      track.constraints.echoCancellation = capture.echoCancellation;
+      track.constraints.autoGainControl = capture.autoGainControl;
+      track.constraints.noiseSuppression = capture.noiseSuppression;
+      //@ts-expect-error voiceIsolation is not yet standard, but it supported by livekit and most chromium based browsers, including electron.
+      track.constraints.voiceIsolation = capture.voiceIsolation;
+      track.constraints.channelCount = capture.channelCount;
+      void track.restartTrack();
     });
+
+    // high quality audio changes the encoder (stereo, DTX): publish the
+    // microphone again with the new settings
+    createEffect(
+      on(
+        () => getSettings().highQualityAudio,
+        (music, previous) => {
+          if (previous === undefined || music === previous) return;
+          const room = untrack(this.room);
+          if (!room || untrack(this.state) !== "CONNECTED") return;
+          void this.republishMicrophone(room);
+        },
+      ),
+    );
+  }
+
+  /**
+   * Publish the microphone again with the current audio settings (stereo
+   * and DTX are fixed when a track is published)
+   */
+  private async republishMicrophone(room: Room) {
+    const music = this.#settings.highQualityAudio;
+    Object.assign(
+      (room.options.publishDefaults ??= {}),
+      audioPublishFor(
+        voiceBitrateFor(this.channel()?.server?.supercharge?.level),
+        music,
+      ),
+    );
+    Object.assign(
+      (room.options.audioCaptureDefaults ??= {}),
+      audioCaptureFor(this.#settings, music),
+    );
+    try {
+      const track = this.getMicrophoneTrack()?.track;
+      if (track) await room.localParticipant.unpublishTrack(track);
+      await this.enableMicrophone(room);
+    } catch (error) {
+      this.onErr(error);
+    }
   }
 
   /**
@@ -346,7 +370,9 @@ class Voice {
     // the call carries the voice quality of the server's level; the call
     // bar shows the same number
     const voiceBitrate = voiceBitrateFor(channel.server?.supercharge?.level);
-    this.#setBitrate(voiceBitrate);
+    this.#setBitrate(
+      callBitrate(voiceBitrate, this.#settings.highQualityAudio),
+    );
 
     // LiveKit loads with the first call, not with the app
     let lk: VoiceRuntime;
@@ -364,13 +390,10 @@ class Voice {
       // join failed once with a 404 and retried. Use the supported path
       // directly until the server is upgraded.
       singlePeerConnection: false,
-      audioCaptureDefaults: {
-        deviceId: this.#settings.preferredAudioInputDevice,
-        echoCancellation: this.#settings.echoCancellation,
-        noiseSuppression: this.#settings.noiseSupression === "browser",
-        autoGainControl: this.#settings.autoGainControl,
-        voiceIsolation: this.#settings.noiseSupression === "browser",
-      },
+      audioCaptureDefaults: audioCaptureFor(
+        this.#settings,
+        this.#settings.highQualityAudio,
+      ),
       audioOutput: {
         deviceId: this.#settings.preferredAudioOutputDevice,
       },
@@ -382,8 +405,9 @@ class Voice {
       publishDefaults: {
         videoEncoding: lk.VideoPresets.h720.encoding,
         screenShareEncoding: lk.ScreenSharePresets.h720fps30.encoding,
-        // a supercharged server carries clearer voice for everyone
-        audioPreset: { maxBitrate: voiceBitrate },
+        // Opus with DTX and RED; a supercharged server carries clearer
+        // voice for everyone (see audioQuality.ts)
+        ...audioPublishFor(voiceBitrate, this.#settings.highQualityAudio),
       },
     });
 

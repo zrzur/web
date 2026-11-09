@@ -198,3 +198,15 @@ describe("VoiceProcessor input sensitivity gate", () => {
     expect(targets(find("gain"))).toEqual(["destination"]);
   });
 });
+
+describe("VoiceProcessor high quality audio (music)", () => {
+  it("skips RNNoise even when Enhanced is chosen", async () => {
+    const { processor, settings, context, source } = setup("enhanced");
+    (settings as Record<string, unknown>).highQualityAudio = true;
+    await processor.restart({
+      track: {},
+      audioContext: context,
+    } as unknown as Parameters<typeof processor.restart>[0]);
+    expect(targets(source())).toEqual(["gain"]);
+  });
+});

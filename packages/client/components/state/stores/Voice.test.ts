@@ -119,3 +119,17 @@ describe("Voice store: input sensitivity", () => {
     expect(bad.inputThreshold).toBe(-50);
   });
 });
+
+describe("Voice store: high quality audio", () => {
+  it("is off until chosen, and a saved choice is kept", () => {
+    expect(store().default().highQualityAudio).toBe(false);
+    expect(store().clean({ highQualityAudio: true }).highQualityAudio).toBe(
+      true,
+    );
+    expect(
+      store().clean({ highQualityAudio: "yes" } as unknown as Parameters<
+        ReturnType<typeof store>["clean"]
+      >[0]).highQualityAudio,
+    ).toBe(false);
+  });
+});

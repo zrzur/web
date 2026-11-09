@@ -80,14 +80,12 @@ export class VoiceProcessor implements TrackProcessor<
       // On noise suppression setting change, toggle noise suppression
       createEffect(
         on(
-          () => this.getSettings().noiseSupression,
+          () => this.enhanced(),
           (newNoiseSuppresion, oldNoiseSuppression) => {
-            // Only rebuild if noise supression has changed from enhanced to something else or vice versa
+            // Only rebuild when the RNNoise path turns on or off
             if (
-              oldNoiseSuppression &&
-              oldNoiseSuppression !== newNoiseSuppresion &&
-              (newNoiseSuppresion === "enhanced" ||
-                oldNoiseSuppression === "enhanced")
+              oldNoiseSuppression !== undefined &&
+              oldNoiseSuppression !== newNoiseSuppresion
             ) {
               this.rebuild();
             }
@@ -110,12 +108,21 @@ export class VoiceProcessor implements TrackProcessor<
     return this.settings;
   }
 
+  /** RNNoise runs for Enhanced, never for high quality audio (music) */
+  private enhanced(): boolean {
+    const settings = this.getSettings();
+    return (
+      settings.noiseSupression === "enhanced" && !settings.highQualityAudio
+    );
+  }
+
   /** What the gate should do with the current settings */
   private gateConfig(): GateConfig {
     const settings = this.getSettings();
     return {
       // push to talk: the key decides, the gate stays out of the way
-      enabled: settings.inputMode !== "ptt",
+      // music: quiet passages must not be cut
+      enabled: settings.inputMode !== "ptt" && !settings.highQualityAudio,
       auto: settings.inputSensitivityAuto,
       thresholdDb: settings.inputThreshold,
       holdMs: GATE_HOLD_MS,
@@ -166,7 +173,7 @@ export class VoiceProcessor implements TrackProcessor<
     this.noiseSuppressionNode?.disconnect();
     this.highpassNode?.disconnect();
 
-    if (this.settings.noiseSupression === "enhanced") {
+    if (this.enhanced()) {
       // Create a new highpass filter
       this.highpassNode = context.createBiquadFilter();
       this.highpassNode.type = "highpass";

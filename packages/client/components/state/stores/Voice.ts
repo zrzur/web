@@ -71,6 +71,12 @@ export interface TypeVoice {
   /** Manual input sensitivity: level in dBFS (-80 to 0) the voice must reach */
   inputThreshold: number;
 
+  /**
+   * High quality audio for music: 128 kbps stereo, every voice treatment
+   * off (see rtc/audioQuality.ts)
+   */
+  highQualityAudio: boolean;
+
   userVolumes: Record<string, number>;
   userMutes: Record<string, boolean>;
 
@@ -116,6 +122,7 @@ export class Voice extends AbstractStore<"voice", TypeVoice> {
       pttKey: "Backquote",
       inputSensitivityAuto: true,
       inputThreshold: DEFAULT_THRESHOLD_DB,
+      highQualityAudio: false,
       userVolumes: {},
       userMutes: {},
       screenShareVolumes: {},
@@ -206,6 +213,10 @@ export class Voice extends AbstractStore<"voice", TypeVoice> {
 
     if (typeof input.inputThreshold === "number") {
       data.inputThreshold = clampThreshold(input.inputThreshold);
+    }
+
+    if (typeof input.highQualityAudio === "boolean") {
+      data.highQualityAudio = input.highQualityAudio;
     }
 
     if (typeof input.userVolumes === "object") {
@@ -548,6 +559,20 @@ export class Voice extends AbstractStore<"voice", TypeVoice> {
    */
   set inputThreshold(value: number) {
     this.set("inputThreshold", clampThreshold(value));
+  }
+
+  /**
+   * Set high quality audio (music)
+   */
+  set highQualityAudio(value: boolean) {
+    this.set("highQualityAudio", value);
+  }
+
+  /**
+   * Get high quality audio (music)
+   */
+  get highQualityAudio(): boolean {
+    return this.get().highQualityAudio ?? false;
   }
 
   /**
