@@ -21979,7 +21979,7 @@ msgstr "عدد الصفوف في الصفحة:"
 
 #: components/modal/modals/ForwardMessage.tsx
 msgid "A copy goes to the place you choose. Nobody it mentions is notified."
-msgstr "تُرسَل نسخة إلى المكان الذي تختاره، ولا يُنبَّه أحد ممن تذكرهم."
+msgstr "تُرسَل نسخة إلى المكان الذي تختاره، ولا يُنبَّه أحد ممن ذُكروا فيها."
 
 #: components/modal/modals/ForwardMessage.tsx
 msgid "Add a note (optional)"
@@ -22054,3 +22054,5 @@ msgstr "أرسِل إلى"
 #: components/app/interface/channels/text/ForwardedFrame.tsx
 msgid "Sent {0}"
 msgstr "أُرسلت في {0}"
+
+

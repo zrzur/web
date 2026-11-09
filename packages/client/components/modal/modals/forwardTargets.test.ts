@@ -3,9 +3,54 @@ import { describe, expect, it } from "vitest";
 import {
   type TargetLike,
   canForwardMessage,
+  chosenTarget,
+  forwardChannels,
   forwardTargets,
   forwardingEnabled,
 } from "./forwardTargets";
+
+describe("forwardChannels", () => {
+  it("returns the very objects it was given, newest first", () => {
+    class Room {
+      constructor(
+        readonly id: string,
+        readonly minutes: number,
+      ) {}
+    }
+    const old = new Room("old", 1);
+    const recent = new Room("recent", 9);
+    const view = (room: Room): TargetLike => ({
+      id: room.id,
+      type: "TextChannel",
+      displayName: room.id,
+      active: true,
+      isForum: false,
+      mature: false,
+      updatedAt: new Date(Date.UTC(2026, 10, 9, 12, room.minutes)),
+      canSend: true,
+    });
+    const first = forwardChannels([old, recent], view, "", false);
+    const again = forwardChannels([old, recent], view, "", false);
+    expect(first).toEqual([recent, old]);
+    expect(first[0]).toBe(recent);
+    expect(again[1]).toBe(first[1]);
+  });
+});
+
+describe("chosenTarget", () => {
+  const list = [{ id: "a" }, { id: "b" }];
+  it("is the selected one while it is still listed", () => {
+    expect(chosenTarget(list, "b")?.id).toBe("b");
+  });
+  it("falls back to the first result for Enter", () => {
+    expect(chosenTarget(list, undefined, true)?.id).toBe("a");
+    expect(chosenTarget(list, "gone", true)?.id).toBe("a");
+  });
+  it("chooses nothing without a selection unless asked", () => {
+    expect(chosenTarget(list, undefined)).toBeUndefined();
+    expect(chosenTarget([], undefined, true)).toBeUndefined();
+  });
+});
 
 const at = (minutes: number) => new Date(Date.UTC(2026, 10, 9, 12, minutes));
 

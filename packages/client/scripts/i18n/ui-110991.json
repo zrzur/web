@@ -1,35 +1,90 @@
 {
-  "Forward": ["إعادة توجيه", "Weiterleiten"],
-  "Forward message": ["إعادة توجيه الرسالة", "Nachricht weiterleiten"],
-  "A copy goes to the place you choose. Nobody it mentions is notified.": [
-    "تُرسَل نسخة إلى المكان الذي تختاره، ولا يُنبَّه أحد ممن تذكرهم.",
-    "Eine Kopie geht an den Ort, den du auswählst. Niemand, der darin erwähnt wird, wird benachrichtigt."
+  "Forward": ["إعادة توجيه", "Weiterleiten", "Transférer", "Reenviar", "Переслать", "转发"],
+  "Forward message": [
+    "إعادة توجيه الرسالة",
+    "Nachricht weiterleiten",
+    "Transférer le message",
+    "Reenviar mensaje",
+    "Переслать сообщение",
+    "转发消息"
   ],
-  "Send to": ["أرسِل إلى", "Senden an"],
+  "A copy goes to the place you choose. Nobody it mentions is notified.": [
+    "تُرسَل نسخة إلى المكان الذي تختاره، ولا يُنبَّه أحد ممن ذُكروا فيها.",
+    "Eine Kopie geht an den Ort, den du auswählst. Niemand, der darin erwähnt wird, wird benachrichtigt.",
+    "Une copie part à l’endroit que tu choisis. Les personnes mentionnées ne sont pas notifiées.",
+    "Se envía una copia al lugar que elijas. Nadie mencionado en ella recibe una notificación.",
+    "Копия отправится туда, куда вы выберете. Упомянутые в ней не получат уведомлений.",
+    "副本会发送到你选择的位置。其中提及的人不会收到通知。"
+  ],
+  "Send to": ["أرسِل إلى", "Senden an", "Envoyer à", "Enviar a", "Отправить в", "发送到"],
   "Search conversations and channels": [
     "ابحث في المحادثات والقنوات",
-    "Unterhaltungen und Kanäle durchsuchen"
+    "Unterhaltungen und Kanäle durchsuchen",
+    "Rechercher des conversations et des salons",
+    "Buscar conversaciones y canales",
+    "Поиск бесед и каналов",
+    "搜索对话和频道"
   ],
-  "Destinations": ["الوجهات", "Ziele"],
+  "Destinations": ["الوجهات", "Ziele", "Destinations", "Destinos", "Куда отправить", "目标位置"],
   "Nothing found. Try another name.": [
     "لم يُعثَر على شيء. جرّب اسمًا آخر.",
-    "Nichts gefunden. Versuch einen anderen Namen."
+    "Nichts gefunden. Versuch einen anderen Namen.",
+    "Aucun résultat. Essaie un autre nom.",
+    "No se encontró nada. Prueba con otro nombre.",
+    "Ничего не найдено. Попробуйте другое название.",
+    "未找到结果。试试其他名称。"
   ],
-  "Add a note (optional)": ["أضف ملاحظة (اختياري)", "Notiz hinzufügen (optional)"],
-  "Forwarded to {0}": ["أُعيد توجيهها إلى {0}", "Weitergeleitet an {0}"],
-  "Only you": ["أنت فقط", "Nur du"],
-  "Files only": ["ملفات فقط", "Nur Dateien"],
-  "Embed only": ["محتوى مضمَّن فقط", "Nur eingebetteter Inhalt"],
-  "Forwarded": ["رسالة مُعاد توجيهها", "Weitergeleitet"],
-  "Sent {0}": ["أُرسلت في {0}", "Gesendet am {0}"],
-  "From {0} · {1}": ["من {0} · {1}", "Aus {0} · {1}"],
-  "Choose where to forward": ["اختيار وجهة إعادة التوجيه", "Ziel zum Weiterleiten wählen"],
+  "Add a note (optional)": [
+    "أضف ملاحظة (اختياري)",
+    "Notiz hinzufügen (optional)",
+    "Ajouter une note (facultatif)",
+    "Añadir una nota (opcional)",
+    "Добавить заметку (необязательно)",
+    "添加备注（可选）"
+  ],
+  "Forwarded to {0}": [
+    "أُعيد توجيهها إلى {0}",
+    "Weitergeleitet an {0}",
+    "Transféré vers {0}",
+    "Reenviado a {0}",
+    "Переслано в {0}",
+    "已转发到 {0}"
+  ],
+  "Only you": ["أنت فقط", "Nur du", "Seulement toi", "Solo tú", "Только вы", "仅你自己"],
+  "Files only": ["ملفات فقط", "Nur Dateien", "Fichiers uniquement", "Solo archivos", "Только файлы", "仅文件"],
+  "Embed only": [
+    "محتوى مضمَّن فقط",
+    "Nur eingebetteter Inhalt",
+    "Contenu intégré uniquement",
+    "Solo contenido incrustado",
+    "Только встроенное содержимое",
+    "仅嵌入内容"
+  ],
+  "Forwarded": ["رسالة مُعاد توجيهها", "Weitergeleitet", "Transféré", "Reenviado", "Переслано", "已转发"],
+  "Sent {0}": ["أُرسلت في {0}", "Gesendet am {0}", "Envoyé le {0}", "Enviado el {0}", "Отправлено {0}", "发送于 {0}"],
+  "From {0} · {1}": ["من {0} · {1}", "Aus {0} · {1}", "De {0} · {1}", "De {0} · {1}", "Из {0} · {1}", "来自 {0} · {1}"],
+  "Choose where to forward": [
+    "اختيار وجهة إعادة التوجيه",
+    "Ziel zum Weiterleiten wählen",
+    "Choisir où transférer",
+    "Elegir dónde reenviar",
+    "Выбрать, куда переслать",
+    "选择转发位置"
+  ],
   "In the forward window: move through the list, then send.": [
     "في نافذة إعادة التوجيه: تنقّل في القائمة ثم أرسِل.",
-    "Im Fenster zum Weiterleiten: durch die Liste gehen, dann senden."
+    "Im Fenster zum Weiterleiten: durch die Liste gehen, dann senden.",
+    "Dans la fenêtre de transfert : parcours la liste, puis envoie.",
+    "En la ventana de reenvío: recorre la lista y luego envía.",
+    "В окне пересылки: перемещайтесь по списку, затем отправьте.",
+    "在转发窗口中：在列表中移动，然后发送。"
   ],
   "Messages from a mature channel can only be forwarded to another mature channel.": [
     "لا يمكن إعادة توجيه رسائل قناة مخصصة للبالغين إلا إلى قناة أخرى مخصصة للبالغين.",
-    "Nachrichten aus einem Kanal für Erwachsene können nur in einen anderen Kanal für Erwachsene weitergeleitet werden."
+    "Nachrichten aus einem Kanal für Erwachsene können nur in einen anderen Kanal für Erwachsene weitergeleitet werden.",
+    "Les messages d’un salon réservé aux adultes ne peuvent être transférés que vers un autre salon réservé aux adultes.",
+    "Los mensajes de un canal para adultos solo se pueden reenviar a otro canal para adultos.",
+    "Сообщения из канала 18+ можно переслать только в другой канал 18+.",
+    "成人内容频道中的消息只能转发到另一个成人内容频道。"
   ]
 }

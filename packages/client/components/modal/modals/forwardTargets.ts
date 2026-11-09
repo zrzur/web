@@ -47,10 +47,34 @@ export function forwardTargets<T extends TargetLike>(
   sourceMature: boolean,
   limit = 50,
 ): T[] {
-  const needle = query.trim().toLocaleLowerCase();
-  const list: T[] = [];
+  return forwardChannels(
+    channels,
+    (channel) => channel,
+    query,
+    sourceMature,
+    limit,
+  );
+}
 
-  for (const channel of channels) {
+/**
+ * Places to forward to, returning the items given (the app's own channel
+ * objects), so a list keyed by them keeps its rows, focus and scroll when
+ * new messages reorder it
+ * @param items Every channel the app knows
+ * @param view What the list reads of an item
+ */
+export function forwardChannels<T>(
+  items: Iterable<T>,
+  view: (item: T) => TargetLike,
+  query: string,
+  sourceMature: boolean,
+  limit = 50,
+): T[] {
+  const needle = query.trim().toLocaleLowerCase();
+  const list: { item: T; updatedAt: number }[] = [];
+
+  for (const item of items) {
+    const channel = view(item);
     if (!KINDS.has(channel.type) || !channel.canSend || channel.isForum)
       continue;
     if (channel.type === "DirectMessage" && !channel.active) continue;
@@ -62,12 +86,28 @@ export function forwardTargets<T extends TargetLike>(
         .includes(needle)
     )
       continue;
-    list.push(channel);
+    list.push({ item, updatedAt: channel.updatedAt.getTime() });
   }
 
   return list
-    .sort((a, b) => b.updatedAt.getTime() - a.updatedAt.getTime())
-    .slice(0, limit);
+    .sort((a, b) => b.updatedAt - a.updatedAt)
+    .slice(0, limit)
+    .map((entry) => entry.item);
+}
+
+/**
+ * The destination a send goes to: the selected one while it is still in the
+ * list; with `firstIfNone` (Enter in the search field) the first result
+ */
+export function chosenTarget<T extends { id: string }>(
+  list: T[],
+  selected: string | undefined,
+  firstIfNone = false,
+): T | undefined {
+  return (
+    list.find((item) => item.id === selected) ??
+    (firstIfNone ? list[0] : undefined)
+  );
 }
 
 /** The part of the client this reads: the server's root config, once fetched */

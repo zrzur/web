@@ -1,4 +1,5 @@
 import { For, Show, createMemo, createSignal } from "solid-js";
+import { ulid } from "ulid";
 
 import { Trans, useLingui } from "@lingui/solid/macro";
 import type { Channel } from "@zrzur/sdk/solid";
@@ -20,19 +21,38 @@ import { Modals } from "../types";
 
 import {
   type TargetLike,
-  forwardTargets,
+  chosenTarget,
+  forwardChannels,
   isMatureTarget,
 } from "./forwardTargets";
 
 /** Longest note the server takes */
 const NOTE_MAX = 1000;
 
-type Target = TargetLike & { channel: Channel };
+type Target = Channel;
+
+/** What the destination list reads of a channel */
+function view(channel: Channel): TargetLike {
+  return {
+    id: channel.id,
+    type: channel.type,
+    displayName: channel.displayName,
+    server: channel.server
+      ? { name: channel.server.name, mature: channel.server.mature }
+      : undefined,
+    active: channel.active,
+    isForum: channel.isForum,
+    mature: channel.mature,
+    updatedAt: channel.updatedAt,
+    canSend: canSend(channel),
+  };
+}
 
 /**
  * Forward a copy of a message to another conversation or channel, with an
  * optional note. The list holds the places this person can write in, most
- * recent first; arrow keys move through it from the search field.
+ * recent first; arrow keys move through it from the search field and Enter
+ * sends to the chosen one (or the first result).
  */
 export function ForwardMessageModal(
   props: DialogProps & Modals & { type: "forward_message" },
@@ -47,6 +67,10 @@ export function ForwardMessageModal(
   const [error, setError] = createSignal<unknown>();
   const [sending, setSending] = createSignal(false);
 
+  // one key for this window, so a double press or a retry after a dropped
+  // connection sends once; a new one only after the server refused
+  let idempotencyKey = ulid();
+
   const sourceMature = () => {
     const channel = props.message.channel;
     return (
@@ -60,31 +84,13 @@ export function ForwardMessageModal(
     );
   };
 
+  // the app's own channel objects: rows keep their identity (and focus and
+  // scroll) when a new message moves a conversation up the list
   const targets = createMemo(() =>
-    forwardTargets<Target>(
-      client()
-        .channels.toList()
-        .map((channel) => ({
-          id: channel.id,
-          type: channel.type,
-          displayName: channel.displayName,
-          server: channel.server
-            ? { name: channel.server.name, mature: channel.server.mature }
-            : undefined,
-          active: channel.active,
-          isForum: channel.isForum,
-          mature: channel.mature,
-          updatedAt: channel.updatedAt,
-          canSend: canSend(channel),
-          channel,
-        })),
-      query(),
-      sourceMature(),
-    ),
+    forwardChannels(client().channels.toList(), view, query(), sourceMature()),
   );
 
-  const selectedTarget = () =>
-    targets().find((target) => target.id === selected());
+  const selectedTarget = () => chosenTarget(targets(), selected());
 
   /** Move the choice up or down the list */
   function move(step: number) {
@@ -112,22 +118,29 @@ export function ForwardMessageModal(
       move(-1);
     } else if (event.key === "Enter") {
       event.preventDefault();
-      void send();
+      void send(true);
     }
   }
 
-  async function send() {
-    const target = selectedTarget();
+  /**
+   * Send to the chosen destination
+   * @param firstIfNone Enter in the search field: the first result when none is chosen
+   */
+  async function send(firstIfNone = false) {
+    const target = chosenTarget(targets(), selected(), firstIfNone);
     if (!target || sending()) return;
+    setSelected(target.id);
     setError(undefined);
     setSending(true);
     try {
-      await props.message.forward(target.channel, note());
+      await props.message.forward(target, note(), idempotencyKey);
       props.onClose();
       snackbar.show({
         message: t`Forwarded to ${label(target)}`,
       });
     } catch (err) {
+      // a refusal from the server: the next try is a new request
+      if (!(err instanceof TypeError)) idempotencyKey = ulid();
       setError(err);
     } finally {
       setSending(false);
@@ -191,7 +204,7 @@ export function ForwardMessageModal(
       <Fields>
         <Preview data-testid="forward-preview">
           <PreviewAuthor>
-            {props.message.username ?? props.message.author?.username}
+            {props.message.username ?? props.message.author?.displayName}
           </PreviewAuthor>
           <PreviewText>{preview()}</PreviewText>
         </Preview>
@@ -244,10 +257,10 @@ export function ForwardMessageModal(
                       size={32}
                       src={
                         target.type === "DirectMessage"
-                          ? target.channel.recipient?.animatedAvatarURL
+                          ? target.recipient?.animatedAvatarURL
                           : target.type === "SavedMessages"
-                            ? target.channel.user?.animatedAvatarURL
-                            : target.channel.iconURL
+                            ? target.user?.animatedAvatarURL
+                            : target.iconURL
                       }
                       fallback={label(target)}
                     />
@@ -336,7 +349,7 @@ const Targets = styled("div", {
     gap: "4px",
     maxHeight: "280px",
     overflowY: "auto",
-    padding: "4px",
+    padding: "12px",
     borderRadius: "var(--z-radius-md)",
     border: "1px solid var(--z-border-subtle)",
     _phone: { maxHeight: "40vh" },

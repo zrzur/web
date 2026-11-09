@@ -14,9 +14,10 @@ type KnownChannel = {
  * @param channel Look up a channel the app knows
  */
 export function originLink(
-  origin: { channel: string; message: string },
+  origin: { channel?: string | null; message: string },
   channel: (id: string) => KnownChannel | undefined,
 ): { path: string; place: string } | undefined {
+  if (!origin.channel) return;
   const source = channel(origin.channel);
   if (!source) return;
 

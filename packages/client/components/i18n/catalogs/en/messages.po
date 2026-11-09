@@ -22263,3 +22263,5 @@ msgstr "Send to"
 #: components/app/interface/channels/text/ForwardedFrame.tsx
 msgid "Sent {0}"
 msgstr "Sent {0}"
+
+

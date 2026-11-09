@@ -6,7 +6,6 @@ const origin = {
   channel: "C1",
   server: "S1",
   message: "M1",
-  author: "U1",
   sent_at: "2026-11-09T12:00:00Z",
 };
 
@@ -35,6 +34,16 @@ describe("originLink", () => {
       displayName: "layla",
     }));
     expect(link).toEqual({ path: "/channel/C1/M1", place: "layla" });
+  });
+
+  it("gives no link when the origin names no place (DMs, groups, other names)", () => {
+    const lookups: string[] = [];
+    const link = originLink({ message: "M1" }, (id) => {
+      lookups.push(id);
+      return undefined;
+    });
+    expect(link).toBeUndefined();
+    expect(lookups).toEqual([]);
   });
 
   it("gives no link when the reader can't open the channel", () => {
