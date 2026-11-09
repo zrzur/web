@@ -22190,4 +22190,58 @@ msgstr "أيّها"
 msgid "Zrzur verified who runs this bot."
 msgstr "تحقّق زرزور ممّن يدير هذا البوت."
 
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "A command typed in full is chosen too."
+msgstr "يُختار الأمر المكتوب كاملًا أيضًا."
 
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "Bot commands"
+msgstr "أوامر البوتات"
+
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "Choose a command or a suggestion"
+msgstr "اختيار أمر أو اقتراح"
+
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "Close the command list"
+msgstr "إغلاق قائمة الأوامر"
+
+#: components/app/interface/channels/text/interactions/CommandPicker.tsx
+msgid "Couldn't load the commands. Press Enter again to send it as a message."
+msgstr "تعذّر تحميل الأوامر. اضغط Enter مرة أخرى لإرسالها رسالةً."
+
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "In a server channel or a DM with a bot."
+msgstr "في قناة سيرفر أو في محادثة خاصة مع بوت."
+
+#: components/app/interface/channels/text/interactions/CommandPicker.tsx
+msgid "Loading the commands…"
+msgstr "جارٍ تحميل الأوامر…"
+
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "Move in the list"
+msgstr "التنقّل في القائمة"
+
+#: components/app/interface/channels/text/interactions/CommandPicker.tsx
+msgid "No command has this name. Press Enter again to send it as a message."
+msgstr "لا يوجد أمر بهذا الاسم. اضغط Enter مرة أخرى لإرسالها رسالةً."
+
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "Open the command list"
+msgstr "فتح قائمة الأوامر"
+
+#: components/modal/modals/permissionTitles.ts
+msgid "Permission number {n}"
+msgstr "الصلاحية رقم {n}"
+
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "Run the chosen command"
+msgstr "تشغيل الأمر المختار"
+
+#: components/app/interface/settings/server/apps/ServerAppPage.tsx
+msgid "The rules couldn't be loaded, so they can't be changed now."
+msgstr "تعذّر تحميل القواعد، لذا لا يمكن تغييرها الآن."
+
+#: components/app/interface/settings/server/apps/ServerAppPage.tsx
+msgid "This server only"
+msgstr "لهذا السيرفر فقط"

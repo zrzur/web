@@ -2143,7 +2143,7 @@ msgstr "Attribuer les rôles de rang inférieur aux membres de rang inférieur"
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 #: src/interface/OAuth.tsx
 msgid "Assign roles"
-msgstr ""
+msgstr "Attribuer des rôles"
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 #~ msgid "Assign Roles"
@@ -2338,7 +2338,7 @@ msgstr "Bannir le membre"
 #: components/app/interface/settings/server/layout.tsx
 #: src/interface/OAuth.tsx
 msgid "Ban members"
-msgstr ""
+msgstr "Bannir des membres"
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 #~ msgid "Ban Members"
@@ -2761,7 +2761,7 @@ msgstr "En créant ce serveur, vous acceptez la <0>Politique d’utilisation</0>
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 msgid "Bypass slowmode"
-msgstr ""
+msgstr "Ignorer le mode lent"
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 #~ msgid "Bypass Slowmode"
@@ -2996,7 +2996,7 @@ msgstr ""
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 #: components/app/interface/settings/user/profile/UserProfileEditor.tsx
 msgid "Change avatar"
-msgstr ""
+msgstr "Changer d’avatar"
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 #~ msgid "Change Avatar"
@@ -3049,7 +3049,7 @@ msgstr ""
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 msgid "Change nickname"
-msgstr ""
+msgstr "Changer de pseudo"
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 #~ msgid "Change Nickname"
@@ -4635,7 +4635,7 @@ msgstr "Mettre en sourdine les membres de rôles inférieurs lors des appels voc
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 msgid "Deafen members"
-msgstr ""
+msgstr "Rendre sourds des membres"
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 #~ msgid "Deafen Members"
@@ -7484,7 +7484,7 @@ msgstr ""
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 msgid "Invite others"
-msgstr ""
+msgstr "Inviter d’autres personnes"
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 #~ msgid "Invite Others"
@@ -7849,7 +7849,7 @@ msgstr "Expulser le membre"
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 #: src/interface/OAuth.tsx
 msgid "Kick members"
-msgstr ""
+msgstr "Expulser des membres"
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 #~ msgid "Kick Members"
@@ -8551,7 +8551,7 @@ msgstr ""
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 #: components/app/interface/settings/server/layout.tsx
 msgid "Manage channel"
-msgstr ""
+msgstr "Gérer le salon"
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 #~ msgid "Manage Channel"
@@ -8569,7 +8569,7 @@ msgstr ""
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 #: components/app/interface/settings/server/layout.tsx
 msgid "Manage customisation"
-msgstr ""
+msgstr "Gérer la personnalisation"
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 #~ msgid "Manage Customisation"
@@ -8577,12 +8577,12 @@ msgstr ""
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 msgid "Manage join requests"
-msgstr ""
+msgstr "Gérer les demandes d’adhésion"
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 #: src/interface/OAuth.tsx
 msgid "Manage messages"
-msgstr ""
+msgstr "Gérer les messages"
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 #~ msgid "Manage Messages"
@@ -8591,7 +8591,7 @@ msgstr ""
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 #: src/interface/OAuth.tsx
 msgid "Manage nicknames"
-msgstr ""
+msgstr "Gérer les pseudos"
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 #~ msgid "Manage Nicknames"
@@ -8604,7 +8604,7 @@ msgstr ""
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 #: src/interface/OAuth.tsx
 msgid "Manage permissions"
-msgstr ""
+msgstr "Gérer les permissions"
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 #~ msgid "Manage Permissions"
@@ -8614,7 +8614,7 @@ msgstr ""
 #: components/app/interface/settings/server/layout.tsx
 #: src/interface/OAuth.tsx
 msgid "Manage roles"
-msgstr ""
+msgstr "Gérer les rôles"
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 #~ msgid "Manage Roles"
@@ -8624,7 +8624,7 @@ msgstr ""
 #: components/app/interface/settings/server/layout.tsx
 #: src/interface/OAuth.tsx
 msgid "Manage server"
-msgstr ""
+msgstr "Gérer le serveur"
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 #~ msgid "Manage Server"
@@ -8646,7 +8646,7 @@ msgstr ""
 #: components/app/interface/settings/server/layout.tsx
 #: src/interface/OAuth.tsx
 msgid "Manage webhooks"
-msgstr ""
+msgstr "Gérer les webhooks"
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 #~ msgid "Manage Webhooks"
@@ -8901,7 +8901,7 @@ msgstr "Mentionner"
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 #: src/interface/OAuth.tsx
 msgid "Mention everyone"
-msgstr ""
+msgstr "Mentionner tout le monde"
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 #~ msgid "Mention Everyone"
@@ -8913,7 +8913,7 @@ msgstr "Mentionner tout le monde et les membres en ligne sur le serveur"
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 msgid "Mention roles"
-msgstr ""
+msgstr "Mentionner des rôles"
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 #~ msgid "Mention Roles"
@@ -9037,7 +9037,7 @@ msgstr "Message envoyé depuis une autre plateforme"
 #: src/interface/developers/docs/DocsPortal.tsx
 #: src/interface/navigation/PhoneTabs.tsx
 msgid "Messages"
-msgstr ""
+msgstr "Messages"
 
 #: components/app/interface/settings/server/assistant/labels.ts
 msgid "Messages & Embeds"
@@ -9223,7 +9223,7 @@ msgstr ""
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 msgid "Move members"
-msgstr ""
+msgstr "Déplacer des membres"
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 #~ msgid "Move Members"
@@ -9280,7 +9280,7 @@ msgstr "Désactiver le son des membres de rang inférieur lors d'un appel vocal"
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 msgid "Mute members"
-msgstr ""
+msgstr "Rendre muets des membres"
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 #~ msgid "Mute Members"
@@ -11895,7 +11895,7 @@ msgstr ""
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 #: src/interface/OAuth.tsx
 msgid "Read message history"
-msgstr ""
+msgstr "Lire l’historique"
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 #~ msgid "Read Message History"
@@ -12200,7 +12200,7 @@ msgstr ""
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 msgid "Remove avatars"
-msgstr ""
+msgstr "Retirer des avatars"
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 #~ msgid "Remove Avatars"
@@ -13530,7 +13530,7 @@ msgstr "Envoyer du contenu intégré tel que des liens intégrés ou des intégr
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 #: src/interface/OAuth.tsx
 msgid "Send embeds"
-msgstr ""
+msgstr "Envoyer des intégrations"
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 #~ msgid "Send Embeds"
@@ -13561,7 +13561,7 @@ msgstr ""
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 #: src/interface/OAuth.tsx
 msgid "Send messages"
-msgstr ""
+msgstr "Envoyer des messages"
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 #~ msgid "Send Messages"
@@ -16285,7 +16285,7 @@ msgstr ""
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 msgid "Timeout members"
-msgstr ""
+msgstr "Exclure temporairement"
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 #~ msgid "Timeout Members"
@@ -16910,7 +16910,7 @@ msgstr ""
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 #: src/interface/OAuth.tsx
 msgid "Upload files"
-msgstr ""
+msgstr "Envoyer des fichiers"
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 #~ msgid "Upload Files"
@@ -16996,7 +16996,7 @@ msgstr ""
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 msgid "Use emojis from other servers"
-msgstr ""
+msgstr "Utiliser les émojis d’autres serveurs"
 
 #: components/modal/modals/EditUsername.tsx
 msgid "Use letters, numbers, underscores (_), dots (.) or dashes (-)."
@@ -17245,11 +17245,11 @@ msgstr ""
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 #: components/app/interface/settings/server/layout.tsx
 msgid "View audit log"
-msgstr ""
+msgstr "Voir le journal d’audit"
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 msgid "View channel"
-msgstr ""
+msgstr "Voir le salon"
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 #~ msgid "View Channel"
@@ -19251,3 +19251,71 @@ msgstr "Lequel"
 #: components/modal/modals/AddBot.tsx
 msgid "Zrzur verified who runs this bot."
 msgstr "Zrzur a vérifié qui gère ce bot."
+
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "A command typed in full is chosen too."
+msgstr "Une commande tapée en entier est aussi choisie."
+
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "Bot commands"
+msgstr "Commandes des bots"
+
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "Choose a command or a suggestion"
+msgstr "Choisir une commande ou une suggestion"
+
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "Close the command list"
+msgstr "Fermer la liste des commandes"
+
+#: components/app/interface/channels/text/interactions/CommandPicker.tsx
+msgid "Couldn't load the commands. Press Enter again to send it as a message."
+msgstr "Impossible de charger les commandes. Appuie encore sur Enter pour l’envoyer comme message."
+
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "In a server channel or a DM with a bot."
+msgstr "Dans un salon de serveur ou en MP avec un bot."
+
+#: components/app/interface/channels/text/interactions/CommandPicker.tsx
+msgid "Loading the commands…"
+msgstr "Chargement des commandes…"
+
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "Move in the list"
+msgstr "Se déplacer dans la liste"
+
+#: components/app/interface/channels/text/interactions/CommandPicker.tsx
+msgid "No command has this name. Press Enter again to send it as a message."
+msgstr "Aucune commande ne porte ce nom. Appuie encore sur Enter pour l’envoyer comme message."
+
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "Open the command list"
+msgstr "Ouvrir la liste des commandes"
+
+#: components/modal/modals/permissionTitles.ts
+msgid "Permission number {n}"
+msgstr "Permission numéro {n}"
+
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "Run the chosen command"
+msgstr "Lancer la commande choisie"
+
+#: components/app/interface/settings/server/apps/ServerAppPage.tsx
+msgid "The rules couldn't be loaded, so they can't be changed now."
+msgstr "Impossible de charger les règles, elles ne peuvent donc pas être modifiées pour l’instant."
+
+#: components/app/interface/settings/server/apps/ServerAppPage.tsx
+msgid "This server only"
+msgstr "Ce serveur uniquement"
+
+#: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
+msgid "Create threads"
+msgstr "Créer des fils"
+
+#: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
+msgid "Send messages in threads"
+msgstr "Envoyer des messages dans les fils"
+
+#: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
+msgid "Create forum posts"
+msgstr "Créer des publications de forum"

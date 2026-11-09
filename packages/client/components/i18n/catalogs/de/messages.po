@@ -22199,4 +22199,58 @@ msgstr "Welche"
 msgid "Zrzur verified who runs this bot."
 msgstr "Zrzur hat überprüft, wer diesen Bot betreibt."
 
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "A command typed in full is chosen too."
+msgstr "Ein vollständig getippter Befehl wird auch ausgewählt."
 
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "Bot commands"
+msgstr "Bot-Befehle"
+
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "Choose a command or a suggestion"
+msgstr "Befehl oder Vorschlag wählen"
+
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "Close the command list"
+msgstr "Befehlsliste schließen"
+
+#: components/app/interface/channels/text/interactions/CommandPicker.tsx
+msgid "Couldn't load the commands. Press Enter again to send it as a message."
+msgstr "Die Befehle konnten nicht geladen werden. Drück noch einmal Enter, um es als Nachricht zu senden."
+
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "In a server channel or a DM with a bot."
+msgstr "In einem Serverkanal oder einer Direktnachricht mit einem Bot."
+
+#: components/app/interface/channels/text/interactions/CommandPicker.tsx
+msgid "Loading the commands…"
+msgstr "Befehle werden geladen …"
+
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "Move in the list"
+msgstr "In der Liste bewegen"
+
+#: components/app/interface/channels/text/interactions/CommandPicker.tsx
+msgid "No command has this name. Press Enter again to send it as a message."
+msgstr "Kein Befehl heißt so. Drück noch einmal Enter, um es als Nachricht zu senden."
+
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "Open the command list"
+msgstr "Befehlsliste öffnen"
+
+#: components/modal/modals/permissionTitles.ts
+msgid "Permission number {n}"
+msgstr "Berechtigung Nummer {n}"
+
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "Run the chosen command"
+msgstr "Gewählten Befehl ausführen"
+
+#: components/app/interface/settings/server/apps/ServerAppPage.tsx
+msgid "The rules couldn't be loaded, so they can't be changed now."
+msgstr "Die Regeln konnten nicht geladen werden, darum lassen sie sich gerade nicht ändern."
+
+#: components/app/interface/settings/server/apps/ServerAppPage.tsx
+msgid "This server only"
+msgstr "Nur dieser Server"

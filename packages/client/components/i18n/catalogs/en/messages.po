@@ -22399,4 +22399,58 @@ msgstr "Which one"
 msgid "Zrzur verified who runs this bot."
 msgstr "Zrzur verified who runs this bot."
 
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "A command typed in full is chosen too."
+msgstr "A command typed in full is chosen too."
 
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "Bot commands"
+msgstr "Bot commands"
+
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "Choose a command or a suggestion"
+msgstr "Choose a command or a suggestion"
+
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "Close the command list"
+msgstr "Close the command list"
+
+#: components/app/interface/channels/text/interactions/CommandPicker.tsx
+msgid "Couldn't load the commands. Press Enter again to send it as a message."
+msgstr "Couldn't load the commands. Press Enter again to send it as a message."
+
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "In a server channel or a DM with a bot."
+msgstr "In a server channel or a DM with a bot."
+
+#: components/app/interface/channels/text/interactions/CommandPicker.tsx
+msgid "Loading the commands…"
+msgstr "Loading the commands…"
+
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "Move in the list"
+msgstr "Move in the list"
+
+#: components/app/interface/channels/text/interactions/CommandPicker.tsx
+msgid "No command has this name. Press Enter again to send it as a message."
+msgstr "No command has this name. Press Enter again to send it as a message."
+
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "Open the command list"
+msgstr "Open the command list"
+
+#: components/modal/modals/permissionTitles.ts
+msgid "Permission number {n}"
+msgstr "Permission number {n}"
+
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "Run the chosen command"
+msgstr "Run the chosen command"
+
+#: components/app/interface/settings/server/apps/ServerAppPage.tsx
+msgid "The rules couldn't be loaded, so they can't be changed now."
+msgstr "The rules couldn't be loaded, so they can't be changed now."
+
+#: components/app/interface/settings/server/apps/ServerAppPage.tsx
+msgid "This server only"
+msgstr "This server only"

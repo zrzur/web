@@ -2143,7 +2143,7 @@ msgstr ""
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 #: src/interface/OAuth.tsx
 msgid "Assign roles"
-msgstr ""
+msgstr "分配角色"
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 #~ msgid "Assign Roles"
@@ -2338,7 +2338,7 @@ msgstr "封禁成员"
 #: components/app/interface/settings/server/layout.tsx
 #: src/interface/OAuth.tsx
 msgid "Ban members"
-msgstr ""
+msgstr "封禁成员"
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 #~ msgid "Ban Members"
@@ -2761,7 +2761,7 @@ msgstr ""
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 msgid "Bypass slowmode"
-msgstr ""
+msgstr "无视慢速模式"
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 #~ msgid "Bypass Slowmode"
@@ -2996,7 +2996,7 @@ msgstr ""
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 #: components/app/interface/settings/user/profile/UserProfileEditor.tsx
 msgid "Change avatar"
-msgstr ""
+msgstr "更改头像"
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 #~ msgid "Change Avatar"
@@ -3049,7 +3049,7 @@ msgstr ""
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 msgid "Change nickname"
-msgstr ""
+msgstr "更改昵称"
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 #~ msgid "Change Nickname"
@@ -4635,7 +4635,7 @@ msgstr ""
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 msgid "Deafen members"
-msgstr ""
+msgstr "将成员设为听不见"
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 #~ msgid "Deafen Members"
@@ -7484,7 +7484,7 @@ msgstr ""
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 msgid "Invite others"
-msgstr ""
+msgstr "邀请他人"
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 #~ msgid "Invite Others"
@@ -7849,7 +7849,7 @@ msgstr "踢出成员"
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 #: src/interface/OAuth.tsx
 msgid "Kick members"
-msgstr ""
+msgstr "踢出成员"
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 #~ msgid "Kick Members"
@@ -8146,7 +8146,7 @@ msgstr ""
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 msgid "Listen"
-msgstr ""
+msgstr "收听"
 
 #: components/app/interface/settings/server/channels/ChannelExtras.tsx
 msgid "Live counters at the top of the channel list. They update by themselves and nobody can open them."
@@ -8551,7 +8551,7 @@ msgstr ""
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 #: components/app/interface/settings/server/layout.tsx
 msgid "Manage channel"
-msgstr ""
+msgstr "管理频道"
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 #~ msgid "Manage Channel"
@@ -8569,7 +8569,7 @@ msgstr ""
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 #: components/app/interface/settings/server/layout.tsx
 msgid "Manage customisation"
-msgstr ""
+msgstr "管理自定义内容"
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 #~ msgid "Manage Customisation"
@@ -8577,12 +8577,12 @@ msgstr ""
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 msgid "Manage join requests"
-msgstr ""
+msgstr "管理加入申请"
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 #: src/interface/OAuth.tsx
 msgid "Manage messages"
-msgstr ""
+msgstr "管理消息"
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 #~ msgid "Manage Messages"
@@ -8591,7 +8591,7 @@ msgstr ""
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 #: src/interface/OAuth.tsx
 msgid "Manage nicknames"
-msgstr ""
+msgstr "管理昵称"
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 #~ msgid "Manage Nicknames"
@@ -8604,7 +8604,7 @@ msgstr ""
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 #: src/interface/OAuth.tsx
 msgid "Manage permissions"
-msgstr ""
+msgstr "管理权限"
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 #~ msgid "Manage Permissions"
@@ -8614,7 +8614,7 @@ msgstr ""
 #: components/app/interface/settings/server/layout.tsx
 #: src/interface/OAuth.tsx
 msgid "Manage roles"
-msgstr ""
+msgstr "管理角色"
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 #~ msgid "Manage Roles"
@@ -8624,7 +8624,7 @@ msgstr ""
 #: components/app/interface/settings/server/layout.tsx
 #: src/interface/OAuth.tsx
 msgid "Manage server"
-msgstr ""
+msgstr "管理服务器"
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 #~ msgid "Manage Server"
@@ -8646,7 +8646,7 @@ msgstr ""
 #: components/app/interface/settings/server/layout.tsx
 #: src/interface/OAuth.tsx
 msgid "Manage webhooks"
-msgstr ""
+msgstr "管理 Webhook"
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 #~ msgid "Manage Webhooks"
@@ -8901,7 +8901,7 @@ msgstr "提及"
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 #: src/interface/OAuth.tsx
 msgid "Mention everyone"
-msgstr ""
+msgstr "提及所有人"
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 #~ msgid "Mention Everyone"
@@ -8913,7 +8913,7 @@ msgstr ""
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 msgid "Mention roles"
-msgstr ""
+msgstr "提及角色"
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 #~ msgid "Mention Roles"
@@ -9037,7 +9037,7 @@ msgstr "消息来自其他平台"
 #: src/interface/developers/docs/DocsPortal.tsx
 #: src/interface/navigation/PhoneTabs.tsx
 msgid "Messages"
-msgstr ""
+msgstr "消息"
 
 #: components/app/interface/settings/server/assistant/labels.ts
 msgid "Messages & Embeds"
@@ -9223,7 +9223,7 @@ msgstr ""
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 msgid "Move members"
-msgstr ""
+msgstr "移动成员"
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 #~ msgid "Move Members"
@@ -9280,7 +9280,7 @@ msgstr ""
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 msgid "Mute members"
-msgstr ""
+msgstr "将成员静音"
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 #~ msgid "Mute Members"
@@ -10778,7 +10778,7 @@ msgstr ""
 
 #: components/app/interface/discover/categories.tsx
 msgid "Other"
-msgstr ""
+msgstr "其他"
 
 #: src/interface/OAuth.tsx
 msgid "Other permissions"
@@ -11865,7 +11865,7 @@ msgstr ""
 #: components/app/menus/MessageContextMenu.tsx
 #: src/interface/OAuth.tsx
 msgid "React"
-msgstr ""
+msgstr "添加反应"
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 msgid "React to messages with emoji"
@@ -11895,7 +11895,7 @@ msgstr ""
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 #: src/interface/OAuth.tsx
 msgid "Read message history"
-msgstr ""
+msgstr "读取消息历史"
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 #~ msgid "Read Message History"
@@ -12200,7 +12200,7 @@ msgstr ""
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 msgid "Remove avatars"
-msgstr ""
+msgstr "移除头像"
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 #~ msgid "Remove Avatars"
@@ -13530,7 +13530,7 @@ msgstr ""
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 #: src/interface/OAuth.tsx
 msgid "Send embeds"
-msgstr ""
+msgstr "发送嵌入内容"
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 #~ msgid "Send Embeds"
@@ -13561,7 +13561,7 @@ msgstr ""
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 #: src/interface/OAuth.tsx
 msgid "Send messages"
-msgstr ""
+msgstr "发送消息"
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 #~ msgid "Send Messages"
@@ -13665,7 +13665,7 @@ msgstr ""
 #: components/modal/modals/CreateGroupOrServer.tsx
 #: src/interface/navigation/servers/railDrag.ts
 msgid "Server"
-msgstr ""
+msgstr "服务器"
 
 #: components/app/interface/settings/server/audit/AuditLog.tsx
 #: components/modal/modals/ServerIdentity.tsx
@@ -16285,7 +16285,7 @@ msgstr ""
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 msgid "Timeout members"
-msgstr ""
+msgstr "禁言成员"
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 #~ msgid "Timeout Members"
@@ -16910,7 +16910,7 @@ msgstr ""
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 #: src/interface/OAuth.tsx
 msgid "Upload files"
-msgstr ""
+msgstr "上传文件"
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 #~ msgid "Upload Files"
@@ -16996,7 +16996,7 @@ msgstr ""
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 msgid "Use emojis from other servers"
-msgstr ""
+msgstr "使用其他服务器的表情"
 
 #: components/modal/modals/EditUsername.tsx
 msgid "Use letters, numbers, underscores (_), dots (.) or dashes (-)."
@@ -17245,11 +17245,11 @@ msgstr ""
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 #: components/app/interface/settings/server/layout.tsx
 msgid "View audit log"
-msgstr ""
+msgstr "查看审计日志"
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 msgid "View channel"
-msgstr ""
+msgstr "查看频道"
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 #~ msgid "View Channel"
@@ -17312,7 +17312,7 @@ msgstr ""
 #: components/modal/modals/AddBot.tsx
 #: components/modal/modals/CreateChannel.tsx
 msgid "Voice"
-msgstr ""
+msgstr "语音"
 
 #: components/app/interface/settings/user/appearance/LivePreview.tsx
 msgid "VOICE"
@@ -19056,7 +19056,7 @@ msgstr "一位成员"
 
 #: components/app/interface/settings/server/apps/RulesEditor.tsx
 msgid "A role"
-msgstr "一个身份组"
+msgstr "一个角色"
 
 #. placeholder {0}: new Date(install!.installed_at).toLocaleDateString()
 #: components/app/interface/settings/server/ServerApps.tsx
@@ -19131,7 +19131,7 @@ msgstr "无法连接到机器人。请重试。"
 
 #: components/app/interface/settings/server/apps/RulesEditor.tsx
 msgid "Deleted role"
-msgstr "已删除的身份组"
+msgstr "已删除的角色"
 
 #: components/app/interface/settings/server/apps/RulesEditor.tsx
 msgid "Every channel"
@@ -19152,7 +19152,7 @@ msgstr "由真人创建"
 
 #: components/app/interface/settings/server/apps/ServerAppPage.tsx
 msgid "Managed by the app. Change what it may do in the role."
-msgstr "由应用管理。在身份组中更改它能做什么。"
+msgstr "由应用管理。在角色中更改它能做什么。"
 
 #: components/app/interface/settings/server/apps/ServerAppPage.tsx
 msgid "No permissions were given when it was added."
@@ -19202,7 +19202,7 @@ msgstr "所有命令的规则"
 
 #: components/app/interface/settings/server/apps/ServerAppPage.tsx
 msgid "Rules for one command come before the rules for the whole app. A rule for a member beats their roles, a Deny on any of their roles beats an Allow on another, and Everyone counts last."
-msgstr "单个命令的规则优先于整个应用的规则。针对成员的规则优先于其身份组；其任一身份组的“拒绝”优先于另一身份组的“允许”；“所有人”最后计算。"
+msgstr "单个命令的规则优先于整个应用的规则。针对成员的规则优先于其角色；其任一角色的“拒绝”优先于另一角色的“允许”；“所有人”最后计算。"
 
 #: components/app/interface/settings/server/webhooks/ServerWebhooks.tsx
 msgid "Show webhooks made by"
@@ -19218,11 +19218,11 @@ msgstr "机器人没有回应。请自行输入一个值。"
 
 #: components/app/interface/settings/server/apps/ServerAppPage.tsx
 msgid "The bot leaves the server. Its role, its commands here and their rules go too. You can add it again later."
-msgstr "机器人将离开服务器，它的身份组、在这里的命令及其规则也会一并移除。你之后可以再次添加它。"
+msgstr "机器人将离开服务器，它的角色、在这里的命令及其规则也会一并移除。你之后可以再次添加它。"
 
 #: components/app/interface/settings/server/apps/ServerAppPage.tsx
 msgid "The permissions it was given when it was added, through its own role."
-msgstr "添加时通过其专属身份组授予的权限。"
+msgstr "添加时通过其专属角色授予的权限。"
 
 #: components/app/interface/settings/server/apps/ServerAppPage.tsx
 msgid "This app has no commands here."
@@ -19251,3 +19251,71 @@ msgstr "选择哪一个"
 #: components/modal/modals/AddBot.tsx
 msgid "Zrzur verified who runs this bot."
 msgstr "Zrzur 已核实此机器人的运营者。"
+
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "A command typed in full is chosen too."
+msgstr "完整输入的命令也会被选中。"
+
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "Bot commands"
+msgstr "机器人命令"
+
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "Choose a command or a suggestion"
+msgstr "选择命令或建议"
+
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "Close the command list"
+msgstr "关闭命令列表"
+
+#: components/app/interface/channels/text/interactions/CommandPicker.tsx
+msgid "Couldn't load the commands. Press Enter again to send it as a message."
+msgstr "无法加载命令。再按一次 Enter 即可作为消息发送。"
+
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "In a server channel or a DM with a bot."
+msgstr "在服务器频道或与机器人的私信中。"
+
+#: components/app/interface/channels/text/interactions/CommandPicker.tsx
+msgid "Loading the commands…"
+msgstr "正在加载命令…"
+
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "Move in the list"
+msgstr "在列表中移动"
+
+#: components/app/interface/channels/text/interactions/CommandPicker.tsx
+msgid "No command has this name. Press Enter again to send it as a message."
+msgstr "没有这个名称的命令。再按一次 Enter 即可作为消息发送。"
+
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "Open the command list"
+msgstr "打开命令列表"
+
+#: components/modal/modals/permissionTitles.ts
+msgid "Permission number {n}"
+msgstr "权限编号 {n}"
+
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "Run the chosen command"
+msgstr "运行所选命令"
+
+#: components/app/interface/settings/server/apps/ServerAppPage.tsx
+msgid "The rules couldn't be loaded, so they can't be changed now."
+msgstr "无法加载规则，因此现在无法更改。"
+
+#: components/app/interface/settings/server/apps/ServerAppPage.tsx
+msgid "This server only"
+msgstr "仅限此服务器"
+
+#: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
+msgid "Create threads"
+msgstr "创建子区"
+
+#: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
+msgid "Send messages in threads"
+msgstr "在子区中发送消息"
+
+#: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
+msgid "Create forum posts"
+msgstr "创建论坛帖子"

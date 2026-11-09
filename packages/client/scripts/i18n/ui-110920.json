@@ -29,7 +29,7 @@
     "Un rôle",
     "Un rol",
     "Роль",
-    "一个身份组"
+    "一个角色"
   ],
   "Added {0}": [
     "أُضيف في {0}",
@@ -165,7 +165,7 @@
     "Rôle supprimé",
     "Rol eliminado",
     "Удалённая роль",
-    "已删除的身份组"
+    "已删除的角色"
   ],
   "Every channel": [
     "كل القنوات",
@@ -205,7 +205,7 @@
     "Géré par l’appli. Modifie ce qu’elle peut faire dans le rôle.",
     "Lo gestiona la app. Cambia lo que puede hacer en el rol.",
     "Управляется приложением. Что ему разрешено, меняется в роли.",
-    "由应用管理。在身份组中更改它能做什么。"
+    "由应用管理。在角色中更改它能做什么。"
   ],
   "No permissions were given when it was added.": [
     "لم تُمنح أي صلاحيات عند إضافته.",
@@ -301,7 +301,7 @@
     "Les règles d’une commande passent avant celles de toute l’appli. Une règle pour un membre l’emporte sur ses rôles, un Refuser sur l’un de ses rôles l’emporte sur un Autoriser sur un autre, et Tout le monde compte en dernier.",
     "Las reglas de un comando van antes que las de toda la app. Una regla para un miembro gana a sus roles, un Denegar en cualquiera de sus roles gana a un Permitir en otro, y Todos cuenta al final.",
     "Правила для одной команды важнее правил для всего приложения. Правило для участника важнее его ролей, запрет в любой из его ролей важнее разрешения в другой, а «Все» учитывается последним.",
-    "单个命令的规则优先于整个应用的规则。针对成员的规则优先于其身份组；其任一身份组的“拒绝”优先于另一身份组的“允许”；“所有人”最后计算。"
+    "单个命令的规则优先于整个应用的规则。针对成员的规则优先于其角色；其任一角色的“拒绝”优先于另一角色的“允许”；“所有人”最后计算。"
   ],
   "Show webhooks made by": [
     "عرض الويب هوك الذي أنشأه",
@@ -333,7 +333,7 @@
     "Le bot quitte le serveur. Son rôle, ses commandes ici et leurs règles partent aussi. Tu pourras l’ajouter à nouveau plus tard.",
     "El bot sale del servidor. Su rol, sus comandos aquí y sus reglas también se van. Puedes volver a añadirlo más tarde.",
     "Бот покинет сервер. Его роль, команды здесь и их правила тоже будут удалены. Позже его можно добавить снова.",
-    "机器人将离开服务器，它的身份组、在这里的命令及其规则也会一并移除。你之后可以再次添加它。"
+    "机器人将离开服务器，它的角色、在这里的命令及其规则也会一并移除。你之后可以再次添加它。"
   ],
   "The permissions it was given when it was added, through its own role.": [
     "الصلاحيات التي مُنحت له عند إضافته، عبر دوره الخاص.",
@@ -341,7 +341,7 @@
     "Les permissions reçues lors de l’ajout, via son propre rôle.",
     "Los permisos que recibió al añadirse, a través de su propio rol.",
     "Разрешения, выданные при добавлении через его собственную роль.",
-    "添加时通过其专属身份组授予的权限。"
+    "添加时通过其专属角色授予的权限。"
   ],
   "This app has no commands here.": [
     "ليس لهذا التطبيق أوامر هنا.",
@@ -454,5 +454,469 @@
     "Apps autorizadas",
     "Разрешённые приложения",
     "已授权的应用"
+  ],
+  "A command typed in full is chosen too.": [
+    "يُختار الأمر المكتوب كاملًا أيضًا.",
+    "Ein vollständig getippter Befehl wird auch ausgewählt.",
+    "Une commande tapée en entier est aussi choisie.",
+    "También se elige un comando escrito completo.",
+    "Полностью набранная команда тоже выбирается.",
+    "完整输入的命令也会被选中。"
+  ],
+  "Bot commands": [
+    "أوامر البوتات",
+    "Bot-Befehle",
+    "Commandes des bots",
+    "Comandos de bots",
+    "Команды ботов",
+    "机器人命令"
+  ],
+  "Choose a command or a suggestion": [
+    "اختيار أمر أو اقتراح",
+    "Befehl oder Vorschlag wählen",
+    "Choisir une commande ou une suggestion",
+    "Elegir un comando o una sugerencia",
+    "Выбрать команду или подсказку",
+    "选择命令或建议"
+  ],
+  "Close the command list": [
+    "إغلاق قائمة الأوامر",
+    "Befehlsliste schließen",
+    "Fermer la liste des commandes",
+    "Cerrar la lista de comandos",
+    "Закрыть список команд",
+    "关闭命令列表"
+  ],
+  "Couldn't load the commands. Press Enter again to send it as a message.": [
+    "تعذّر تحميل الأوامر. اضغط Enter مرة أخرى لإرسالها رسالةً.",
+    "Die Befehle konnten nicht geladen werden. Drück noch einmal Enter, um es als Nachricht zu senden.",
+    "Impossible de charger les commandes. Appuie encore sur Enter pour l’envoyer comme message.",
+    "No se pudieron cargar los comandos. Pulsa Enter otra vez para enviarlo como mensaje.",
+    "Не удалось загрузить команды. Нажмите Enter ещё раз, чтобы отправить это сообщением.",
+    "无法加载命令。再按一次 Enter 即可作为消息发送。"
+  ],
+  "In a server channel or a DM with a bot.": [
+    "في قناة سيرفر أو في محادثة خاصة مع بوت.",
+    "In einem Serverkanal oder einer Direktnachricht mit einem Bot.",
+    "Dans un salon de serveur ou en MP avec un bot.",
+    "En un canal de servidor o en un MD con un bot.",
+    "В канале сервера или в ЛС с ботом.",
+    "在服务器频道或与机器人的私信中。"
+  ],
+  "Loading the commands…": [
+    "جارٍ تحميل الأوامر…",
+    "Befehle werden geladen …",
+    "Chargement des commandes…",
+    "Cargando los comandos…",
+    "Загрузка команд…",
+    "正在加载命令…"
+  ],
+  "Move in the list": [
+    "التنقّل في القائمة",
+    "In der Liste bewegen",
+    "Se déplacer dans la liste",
+    "Moverse por la lista",
+    "Перемещаться по списку",
+    "在列表中移动"
+  ],
+  "No command has this name. Press Enter again to send it as a message.": [
+    "لا يوجد أمر بهذا الاسم. اضغط Enter مرة أخرى لإرسالها رسالةً.",
+    "Kein Befehl heißt so. Drück noch einmal Enter, um es als Nachricht zu senden.",
+    "Aucune commande ne porte ce nom. Appuie encore sur Enter pour l’envoyer comme message.",
+    "Ningún comando tiene este nombre. Pulsa Enter otra vez para enviarlo como mensaje.",
+    "Команды с таким названием нет. Нажмите Enter ещё раз, чтобы отправить это сообщением.",
+    "没有这个名称的命令。再按一次 Enter 即可作为消息发送。"
+  ],
+  "Open the command list": [
+    "فتح قائمة الأوامر",
+    "Befehlsliste öffnen",
+    "Ouvrir la liste des commandes",
+    "Abrir la lista de comandos",
+    "Открыть список команд",
+    "打开命令列表"
+  ],
+  "Permission number {n}": [
+    "الصلاحية رقم {n}",
+    "Berechtigung Nummer {n}",
+    "Permission numéro {n}",
+    "Permiso número {n}",
+    "Разрешение номер {n}",
+    "权限编号 {n}"
+  ],
+  "Run the chosen command": [
+    "تشغيل الأمر المختار",
+    "Gewählten Befehl ausführen",
+    "Lancer la commande choisie",
+    "Ejecutar el comando elegido",
+    "Выполнить выбранную команду",
+    "运行所选命令"
+  ],
+  "The rules couldn't be loaded, so they can't be changed now.": [
+    "تعذّر تحميل القواعد، لذا لا يمكن تغييرها الآن.",
+    "Die Regeln konnten nicht geladen werden, darum lassen sie sich gerade nicht ändern.",
+    "Impossible de charger les règles, elles ne peuvent donc pas être modifiées pour l’instant.",
+    "No se pudieron cargar las reglas, así que ahora no se pueden cambiar.",
+    "Не удалось загрузить правила, поэтому сейчас их нельзя изменить.",
+    "无法加载规则，因此现在无法更改。"
+  ],
+  "This server only": [
+    "لهذا السيرفر فقط",
+    "Nur dieser Server",
+    "Ce serveur uniquement",
+    "Solo este servidor",
+    "Только этот сервер",
+    "仅限此服务器"
+  ],
+  "Manage channel": [
+    "إدارة القناة",
+    "Kanal verwalten",
+    "Gérer le salon",
+    "Gestionar canal",
+    "Управлять каналом",
+    "管理频道"
+  ],
+  "Manage server": [
+    "إدارة السيرفر",
+    "Server verwalten",
+    "Gérer le serveur",
+    "Gestionar servidor",
+    "Управлять сервером",
+    "管理服务器"
+  ],
+  "Manage permissions": [
+    "إدارة الصلاحيات",
+    "Berechtigungen verwalten",
+    "Gérer les permissions",
+    "Gestionar permisos",
+    "Управлять разрешениями",
+    "管理权限"
+  ],
+  "Manage roles": [
+    "إدارة الأدوار",
+    "Rollen verwalten",
+    "Gérer les rôles",
+    "Gestionar roles",
+    "Управлять ролями",
+    "管理角色"
+  ],
+  "Manage customisation": [
+    "إدارة التخصيص",
+    "Personalisierung verwalten",
+    "Gérer la personnalisation",
+    "Gestionar personalización",
+    "Управлять оформлением",
+    "管理自定义内容"
+  ],
+  "Kick members": [
+    "طرد الأعضاء",
+    "Mitglieder kicken",
+    "Expulser des membres",
+    "Expulsar miembros",
+    "Выгонять участников",
+    "踢出成员"
+  ],
+  "Ban members": [
+    "حظر الأعضاء",
+    "Mitglieder sperren",
+    "Bannir des membres",
+    "Banear miembros",
+    "Банить участников",
+    "封禁成员"
+  ],
+  "Timeout members": [
+    "إيقاف الأعضاء مؤقتًا",
+    "Mitglieder Timeouten",
+    "Exclure temporairement",
+    "Aislar miembros",
+    "Давать тайм-аут",
+    "禁言成员"
+  ],
+  "Assign roles": [
+    "منح الأدوار",
+    "Rollen zuweisen",
+    "Attribuer des rôles",
+    "Asignar roles",
+    "Назначать роли",
+    "分配角色"
+  ],
+  "Change nickname": [
+    "تغيير اللقب",
+    "Spitznamen ändern",
+    "Changer de pseudo",
+    "Cambiar apodo",
+    "Менять свой ник",
+    "更改昵称"
+  ],
+  "Manage nicknames": [
+    "إدارة الألقاب",
+    "Spitznamen verwalten",
+    "Gérer les pseudos",
+    "Gestionar apodos",
+    "Управлять никами",
+    "管理昵称"
+  ],
+  "Change avatar": [
+    "تغيير الصورة الرمزية",
+    "Avatar ändern",
+    "Changer d’avatar",
+    "Cambiar avatar",
+    "Менять свой аватар",
+    "更改头像"
+  ],
+  "Remove avatars": [
+    "إزالة الصور الرمزية",
+    "Avatare entfernen",
+    "Retirer des avatars",
+    "Quitar avatares",
+    "Удалять аватары",
+    "移除头像"
+  ],
+  "View channel": [
+    "عرض القناة",
+    "Kanal ansehen",
+    "Voir le salon",
+    "Ver canal",
+    "Видеть канал",
+    "查看频道"
+  ],
+  "Read message history": [
+    "قراءة سجل الرسائل",
+    "Nachrichtenverlauf lesen",
+    "Lire l’historique",
+    "Leer el historial",
+    "Читать историю сообщений",
+    "读取消息历史"
+  ],
+  "Send messages": [
+    "إرسال الرسائل",
+    "Nachrichten senden",
+    "Envoyer des messages",
+    "Enviar mensajes",
+    "Отправлять сообщения",
+    "发送消息"
+  ],
+  "Manage messages": [
+    "إدارة الرسائل",
+    "Nachrichten verwalten",
+    "Gérer les messages",
+    "Gestionar mensajes",
+    "Управлять сообщениями",
+    "管理消息"
+  ],
+  "Manage webhooks": [
+    "إدارة الويب هوك",
+    "Webhooks verwalten",
+    "Gérer les webhooks",
+    "Gestionar webhooks",
+    "Управлять вебхуками",
+    "管理 Webhook"
+  ],
+  "Invite others": [
+    "دعوة الآخرين",
+    "Andere einladen",
+    "Inviter d’autres personnes",
+    "Invitar a otros",
+    "Приглашать других",
+    "邀请他人"
+  ],
+  "Send embeds": [
+    "إرسال محتوى مضمّن",
+    "Einbettungen senden",
+    "Envoyer des intégrations",
+    "Enviar contenido incrustado",
+    "Отправлять встраиваемый контент",
+    "发送嵌入内容"
+  ],
+  "Upload files": [
+    "رفع الملفات",
+    "Dateien hochladen",
+    "Envoyer des fichiers",
+    "Subir archivos",
+    "Загружать файлы",
+    "上传文件"
+  ],
+  "Masquerade": [
+    "التنكّر",
+    "Maskieren",
+    "Se faire passer pour un autre nom",
+    "Usar otro nombre",
+    "Писать под другим именем",
+    "使用伪装身份"
+  ],
+  "React": [
+    "تفاعل",
+    "Reagieren",
+    "Réagir",
+    "Reaccionar",
+    "Ставить реакции",
+    "添加反应"
+  ],
+  "Connect": [
+    "اتصال",
+    "Verbinden",
+    "Se connecter",
+    "Conectarse",
+    "Подключаться",
+    "连接"
+  ],
+  "Speak": [
+    "التحدث",
+    "Sprechen",
+    "Parler",
+    "Hablar",
+    "Говорить",
+    "说话"
+  ],
+  "Video": [
+    "فيديو",
+    "Video",
+    "Vidéo",
+    "Vídeo",
+    "Видео",
+    "视频"
+  ],
+  "Mute members": [
+    "كتم الأعضاء",
+    "Mitglieder stummschalten",
+    "Rendre muets des membres",
+    "Silenciar miembros",
+    "Отключать микрофон участникам",
+    "将成员静音"
+  ],
+  "Deafen members": [
+    "كتم سماعة الأعضاء",
+    "Taubgeschaltete Mitglieder",
+    "Rendre sourds des membres",
+    "Ensordecer miembros",
+    "Отключать звук участникам",
+    "将成员设为听不见"
+  ],
+  "Move members": [
+    "نقل الأعضاء",
+    "Mitglieder verschieben",
+    "Déplacer des membres",
+    "Mover miembros",
+    "Перемещать участников",
+    "移动成员"
+  ],
+  "Listen": [
+    "استماع",
+    "Zuhören",
+    "Écouter",
+    "Escuchar",
+    "Слушать",
+    "收听"
+  ],
+  "Mention everyone": [
+    "الإشارة إلى الجميع",
+    "Alle erwähnen",
+    "Mentionner tout le monde",
+    "Mencionar a todos",
+    "Упоминать всех",
+    "提及所有人"
+  ],
+  "Mention roles": [
+    "الإشارة إلى الأدوار",
+    "Rollen erwähnen",
+    "Mentionner des rôles",
+    "Mencionar roles",
+    "Упоминать роли",
+    "提及角色"
+  ],
+  "Bypass slowmode": [
+    "تجاوز الوضع البطيء",
+    "Langsamen Modus umgehen",
+    "Ignorer le mode lent",
+    "Saltarse el modo lento",
+    "Обходить медленный режим",
+    "无视慢速模式"
+  ],
+  "View audit log": [
+    "عرض سجل التدقيق",
+    "Audit-Log ansehen",
+    "Voir le journal d’audit",
+    "Ver el registro de auditoría",
+    "Смотреть журнал аудита",
+    "查看审计日志"
+  ],
+  "Use emojis from other servers": [
+    "استخدام رموز تعبيرية من سيرفرات أخرى",
+    "Emojis aus anderen Servern verwenden",
+    "Utiliser les émojis d’autres serveurs",
+    "Usar emojis de otros servidores",
+    "Использовать эмодзи других серверов",
+    "使用其他服务器的表情"
+  ],
+  "Manage join requests": [
+    "إدارة طلبات الانضمام",
+    "Beitrittsanfragen verwalten",
+    "Gérer les demandes d’adhésion",
+    "Gestionar solicitudes de unión",
+    "Управлять заявками на вступление",
+    "管理加入申请"
+  ],
+  "Create threads": [
+    "إنشاء خيوط",
+    "Threads erstellen",
+    "Créer des fils",
+    "Crear hilos",
+    "Создавать ветки",
+    "创建子区"
+  ],
+  "Send messages in threads": [
+    "إرسال رسائل في الخيوط",
+    "Nachrichten in Threads senden",
+    "Envoyer des messages dans les fils",
+    "Enviar mensajes en hilos",
+    "Писать в ветках",
+    "在子区中发送消息"
+  ],
+  "Create forum posts": [
+    "إنشاء منشورات في المنتديات",
+    "Forenbeiträge erstellen",
+    "Créer des publications de forum",
+    "Crear publicaciones en foros",
+    "Создавать посты в форуме",
+    "创建论坛帖子"
+  ],
+  "Server": [
+    "سيرفر",
+    "Server",
+    "Serveur",
+    "Servidor",
+    "Сервер",
+    "服务器"
+  ],
+  "Members": [
+    "الأعضاء",
+    "Mitglieder",
+    "Membres",
+    "Miembros",
+    "Участники",
+    "成员"
+  ],
+  "Messages": [
+    "الرسائل",
+    "Nachrichten",
+    "Messages",
+    "Mensajes",
+    "Сообщения",
+    "消息"
+  ],
+  "Voice": [
+    "صوت",
+    "Sprache",
+    "Vocal",
+    "Voz",
+    "Голос",
+    "语音"
+  ],
+  "Other": [
+    "أخرى",
+    "Andere",
+    "Autre",
+    "Otro",
+    "Другое",
+    "其他"
   ]
 }
