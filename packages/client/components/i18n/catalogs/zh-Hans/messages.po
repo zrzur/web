@@ -20243,7 +20243,7 @@ msgstr "用户菜单"
 
 #: components/app/interface/settings/user/bots/CommandManager.tsx
 msgid "User or role"
-msgstr "用户或身份组"
+msgstr "用户或角色"
 
 #: src/interface/developers/docs/EndpointReference.tsx
 msgid "User session only. Bots are refused."
