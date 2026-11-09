@@ -22035,3 +22035,70 @@ msgstr "Schwelle"
 #: components/app/interface/settings/user/voice/InputSensitivityOptions.tsx
 msgid "Zrzur finds the right level for your room."
 msgstr "Zrzur findet den passenden Pegel für deinen Raum."
+
+#: components/ui/components/features/voice/callCard/ParticipantTile.tsx
+msgid "Connection lost"
+msgstr "Verbindung verloren"
+
+#: components/ui/components/features/voice/callCard/VoiceCallCardStatus.tsx
+msgid "Connection lost. Reconnecting…"
+msgstr "Verbindung verloren. Neu verbinden…"
+
+#: components/app/interface/settings/user/voice/VoiceProcessingOptions.tsx
+msgid "For music: 128 kbps stereo, with the processing below turned off."
+msgstr "Für Musik: 128 kbit/s Stereo, die Verarbeitung unten ist dann aus."
+
+#: components/app/interface/settings/user/voice/VoiceProcessingOptions.tsx
+msgid "High quality audio"
+msgstr "Audio in hoher Qualität"
+
+#: components/ui/components/features/voice/callCard/VoiceCallCardStatus.tsx
+msgid "Microphone unplugged. Using the default microphone."
+msgstr "Mikrofon getrennt. Das Standardmikrofon wird verwendet."
+
+#: components/ui/components/features/voice/callCard/VoiceCallCardStatus.tsx
+msgid "Reconnected"
+msgstr "Wieder verbunden"
+
+#: components/ui/components/features/voice/callCard/VoiceCallCardStatus.tsx
+msgid "Rejoin"
+msgstr "Erneut beitreten"
+
+#: components/ui/components/features/voice/callCard/VoiceCallCardStatus.tsx
+msgid "Speaker unplugged. Using the default speaker."
+msgstr "Lautsprecher getrennt. Der Standardlautsprecher wird verwendet."
+
+#: components/app/interface/settings/user/voice/ScreenShareOptions.tsx
+#: components/modal/modals/ScreenShareSettings.tsx
+msgid "Text and slides"
+msgstr "Text und Folien"
+
+#: components/app/interface/settings/user/voice/ScreenShareOptions.tsx
+#: components/modal/modals/ScreenShareSettings.tsx
+msgid "Text and slides stay sharp; video and games stay smooth."
+msgstr "Text und Folien bleiben scharf, Video und Spiele bleiben flüssig."
+
+#: components/modal/modals/ScreenShareSettings.tsx
+msgid "This browser cannot share sound from here."
+msgstr "Dieser Browser kann von hier keinen Ton teilen."
+
+#: components/app/interface/settings/user/voice/ScreenShareOptions.tsx
+#: components/modal/modals/ScreenShareSettings.tsx
+msgid "Video and games"
+msgstr "Video und Spiele"
+
+#: components/ui/components/features/voice/callCard/ParticipantTile.tsx
+msgid "Weak connection"
+msgstr "Schwache Verbindung"
+
+#: components/app/interface/settings/user/voice/ScreenShareOptions.tsx
+msgid "What you usually share"
+msgstr "Was du meistens teilst"
+
+#: components/ui/components/features/voice/callCard/VoiceCallCardStatus.tsx
+msgid "Your microphone is back."
+msgstr "Dein Mikrofon ist wieder da."
+
+#: components/ui/components/features/voice/callCard/VoiceCallCardStatus.tsx
+msgid "Your speaker is back."
+msgstr "Dein Lautsprecher ist wieder da."
