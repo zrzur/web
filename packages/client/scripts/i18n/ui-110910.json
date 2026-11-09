@@ -1,0 +1,178 @@
+{
+  "search filter::From": [
+    "من",
+    "Von"
+  ],
+  "search filter::Mentions": [
+    "يذكر",
+    "Erwähnt"
+  ],
+  "search filter::Has": [
+    "يحتوي",
+    "Enthält"
+  ],
+  "search filter::Before": [
+    "قبل",
+    "Vor"
+  ],
+  "search filter::After": [
+    "بعد",
+    "Nach"
+  ],
+  "search filter::On day": [
+    "في يوم",
+    "Am Tag"
+  ],
+  "search filter::In": [
+    "في",
+    "In"
+  ],
+  "search filter::Pinned": [
+    "مثبّتة",
+    "Angeheftet"
+  ],
+  "search filter::Link": [
+    "رابط",
+    "Link"
+  ],
+  "search filter::File": [
+    "ملف",
+    "Datei"
+  ],
+  "search filter::Image": [
+    "صورة",
+    "Bild"
+  ],
+  "search filter::Video": [
+    "فيديو",
+    "Video"
+  ],
+  "search filter::Embed": [
+    "تضمين",
+    "Einbettung"
+  ],
+  "search filter::Sound": [
+    "صوت",
+    "Ton"
+  ],
+  "Messages from a member": [
+    "رسائل من عضو",
+    "Nachrichten von einem Mitglied"
+  ],
+  "Messages that mention a member": [
+    "رسائل تذكر عضوًا",
+    "Nachrichten, die ein Mitglied erwähnen"
+  ],
+  "Messages with a link, file, image, video, embed or sound": [
+    "رسائل فيها رابط أو ملف أو صورة أو فيديو أو تضمين أو صوت",
+    "Nachrichten mit Link, Datei, Bild, Video, Einbettung oder Ton"
+  ],
+  "Messages before a day": [
+    "رسائل قبل يوم محدد",
+    "Nachrichten vor einem Tag"
+  ],
+  "Messages after a day": [
+    "رسائل بعد يوم محدد",
+    "Nachrichten nach einem Tag"
+  ],
+  "Messages on a day": [
+    "رسائل في يوم محدد",
+    "Nachrichten an einem Tag"
+  ],
+  "Messages in a channel, across the server": [
+    "رسائل في قناة، على مستوى السيرفر",
+    "Nachrichten in einem Kanal, im ganzen Server"
+  ],
+  "Only pinned messages": [
+    "الرسائل المثبّتة فقط",
+    "Nur angeheftete Nachrichten"
+  ],
+  "No member called \"{value}\".": [
+    "لا يوجد عضو باسم \"{value}\".",
+    "Kein Mitglied heißt \"{value}\"."
+  ],
+  "No channel called \"{value}\".": [
+    "لا توجد قناة باسم \"{value}\".",
+    "Kein Kanal heißt \"{value}\"."
+  ],
+  "\"{value}\" is not a day. Write it like 2026-11-09.": [
+    "\"{value}\" ليس تاريخ يوم. اكتبه هكذا: 2026-11-09.",
+    "\"{value}\" ist kein Datum. Schreib es so: 2026-11-09."
+  ],
+  "has: takes link, file, image, video, embed or sound.": [
+    "has: يقبل link أو file أو image أو video أو embed أو sound.",
+    "has: nimmt link, file, image, video, embed oder sound."
+  ],
+  "pinned: takes true or false.": [
+    "pinned: يقبل true أو false.",
+    "pinned: nimmt true oder false."
+  ],
+  "Only one mentions: filter is used, so \"{value}\" was left out.": [
+    "يُستخدم عامل mentions: واحد فقط، لذلك تُرك \"{value}\".",
+    "Nur ein mentions:-Filter zählt, daher wurde \"{value}\" weggelassen."
+  ],
+  "Up to 50 in: filters are used, so \"{value}\" was left out.": [
+    "يُستخدم 50 عامل in: على الأكثر، لذلك تُرك \"{value}\".",
+    "Höchstens 50 in:-Filter zählen, daher wurde \"{value}\" weggelassen."
+  ],
+  "Up to 10 from: filters are used, so \"{value}\" was left out.": [
+    "يُستخدم 10 عوامل from: على الأكثر، لذلك تُرك \"{value}\".",
+    "Höchstens 10 from:-Filter zählen, daher wurde \"{value}\" weggelassen."
+  ],
+  "in: works in servers only.": [
+    "in: يعمل في السيرفرات فقط.",
+    "in: geht nur in Servern."
+  ],
+  "Today": [
+    "اليوم",
+    "Heute"
+  ],
+  "Yesterday": [
+    "أمس",
+    "Gestern"
+  ],
+  "Search filters": [
+    "عوامل تصفية البحث",
+    "Suchfilter"
+  ],
+  "Where to search": [
+    "مكان البحث",
+    "Wo suchen"
+  ],
+  "This channel": [
+    "هذه القناة",
+    "Dieser Kanal"
+  ],
+  "Whole server": [
+    "السيرفر كله",
+    "Ganzer Server"
+  ],
+  "Type words to search, or a filter like from:, has: or before:.": [
+    "اكتب كلمات للبحث، أو عامل تصفية مثل from: أو has: أو before:.",
+    "Gib Wörter ein oder einen Filter wie from:, has: oder before:."
+  ],
+  "Unknown channel": [
+    "قناة غير معروفة",
+    "Unbekannter Kanal"
+  ],
+  "Jump to message": [
+    "الانتقال إلى الرسالة",
+    "Zur Nachricht springen"
+  ],
+  "No messages in this channel match your search.": [
+    "لا توجد رسائل في هذه القناة تطابق بحثك.",
+    "Keine Nachricht in diesem Kanal passt zu deiner Suche."
+  ],
+  "No messages in this server match your search.": [
+    "لا توجد رسائل في هذا السيرفر تطابق بحثك.",
+    "Keine Nachricht in diesem Server passt zu deiner Suche."
+  ],
+  "Only the first 64 characters are searched.": [
+    "يُبحث في أول 64 حرفًا فقط.",
+    "Nur die ersten 64 Zeichen werden gesucht."
+  ],
+  "Too many searches. Wait a moment, then try again.": [
+    "عمليات بحث كثيرة جدًا. انتظر قليلًا ثم حاول مرة أخرى.",
+    "Zu viele Suchen. Warte kurz und versuch es dann noch einmal."
+  ]
+}

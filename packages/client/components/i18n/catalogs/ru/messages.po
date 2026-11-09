@@ -19040,3 +19040,194 @@ msgstr "Zrzur — прямо на <0>вашем рабочем столе.</0>"
 #: components/app/interface/settings/user/appearance/AppearanceMenu.tsx
 #~ msgid "Zrzur's own look: calm dark panels in one slate family, pink for Plus and teal for anything live."
 #~ msgstr ""
+
+#: src/interface/channels/text/searchLabels.ts
+msgid "\"{value}\" is not a day. Write it like 2026-11-09."
+msgstr "«{value}» — не дата. Пишите так: 2026-11-09."
+
+#: src/interface/channels/text/searchLabels.ts
+msgctxt "search filter"
+msgid "After"
+msgstr "После"
+
+#: src/interface/channels/text/searchLabels.ts
+msgctxt "search filter"
+msgid "Before"
+msgstr "До"
+
+#: src/interface/channels/text/searchLabels.ts
+msgctxt "search filter"
+msgid "Embed"
+msgstr "Встраивание"
+
+#: src/interface/channels/text/searchLabels.ts
+msgctxt "search filter"
+msgid "File"
+msgstr "Файл"
+
+#: src/interface/channels/text/searchLabels.ts
+msgctxt "search filter"
+msgid "From"
+msgstr "От"
+
+#: src/interface/channels/text/searchLabels.ts
+msgctxt "search filter"
+msgid "Has"
+msgstr "Содержит"
+
+#: src/interface/channels/text/searchLabels.ts
+msgid "has: takes link, file, image, video, embed or sound."
+msgstr "has: принимает link, file, image, video, embed или sound."
+
+#: src/interface/channels/text/searchLabels.ts
+msgctxt "search filter"
+msgid "Image"
+msgstr "Изображение"
+
+#: src/interface/channels/text/searchLabels.ts
+msgctxt "search filter"
+msgid "In"
+msgstr "В"
+
+#: src/interface/channels/text/searchLabels.ts
+msgid "in: works in servers only."
+msgstr "in: работает только на серверах."
+
+#: src/interface/channels/text/TextSearchSidebar.tsx
+msgid "Jump to message"
+msgstr "Перейти к сообщению"
+
+#: src/interface/channels/text/searchLabels.ts
+msgctxt "search filter"
+msgid "Link"
+msgstr "Ссылка"
+
+#: src/interface/channels/text/searchLabels.ts
+msgctxt "search filter"
+msgid "Mentions"
+msgstr "Упоминает"
+
+#: src/interface/channels/text/searchLabels.ts
+msgid "Messages after a day"
+msgstr "Сообщения после определённого дня"
+
+#: src/interface/channels/text/searchLabels.ts
+msgid "Messages before a day"
+msgstr "Сообщения до определённого дня"
+
+#: src/interface/channels/text/searchLabels.ts
+msgid "Messages from a member"
+msgstr "Сообщения участника"
+
+#: src/interface/channels/text/searchLabels.ts
+msgid "Messages in a channel, across the server"
+msgstr "Сообщения в канале, по всему серверу"
+
+#: src/interface/channels/text/searchLabels.ts
+msgid "Messages on a day"
+msgstr "Сообщения за определённый день"
+
+#: src/interface/channels/text/searchLabels.ts
+msgid "Messages that mention a member"
+msgstr "Сообщения с упоминанием участника"
+
+#: src/interface/channels/text/searchLabels.ts
+msgid "Messages with a link, file, image, video, embed or sound"
+msgstr "Сообщения со ссылкой, файлом, изображением, видео, встраиванием или звуком"
+
+#: src/interface/channels/text/searchLabels.ts
+msgid "No channel called \"{value}\"."
+msgstr "Нет канала с именем «{value}»."
+
+#: src/interface/channels/text/searchLabels.ts
+msgid "No member called \"{value}\"."
+msgstr "Нет участника с именем «{value}»."
+
+#: src/interface/channels/text/TextSearchSidebar.tsx
+msgid "No messages in this channel match your search."
+msgstr "В этом канале нет сообщений, подходящих под ваш поиск."
+
+#: src/interface/channels/text/TextSearchSidebar.tsx
+msgid "No messages in this server match your search."
+msgstr "На этом сервере нет сообщений, подходящих под ваш поиск."
+
+#: src/interface/channels/text/searchLabels.ts
+msgctxt "search filter"
+msgid "On day"
+msgstr "В день"
+
+#: src/interface/channels/text/searchLabels.ts
+msgid "Only one mentions: filter is used, so \"{value}\" was left out."
+msgstr "Используется только один фильтр mentions:, поэтому «{value}» пропущено."
+
+#: src/interface/channels/text/searchLabels.ts
+msgid "Only pinned messages"
+msgstr "Только закреплённые сообщения"
+
+#: src/interface/channels/text/TextSearchSidebar.tsx
+msgid "Only the first 64 characters are searched."
+msgstr "Поиск идёт только по первым 64 символам."
+
+#: src/interface/channels/text/searchLabels.ts
+msgctxt "search filter"
+msgid "Pinned"
+msgstr "Закреплено"
+
+#: src/interface/channels/text/searchLabels.ts
+msgid "pinned: takes true or false."
+msgstr "pinned: принимает true или false."
+
+#: src/interface/channels/text/SearchBox.tsx
+msgid "Search filters"
+msgstr "Фильтры поиска"
+
+#: src/interface/channels/text/searchLabels.ts
+msgctxt "search filter"
+msgid "Sound"
+msgstr "Звук"
+
+#: src/interface/channels/text/TextSearchSidebar.tsx
+msgid "This channel"
+msgstr "Этот канал"
+
+#: src/interface/channels/text/SearchBox.tsx
+msgid "Today"
+msgstr "Сегодня"
+
+#: src/interface/channels/text/TextSearchSidebar.tsx
+msgid "Too many searches. Wait a moment, then try again."
+msgstr "Слишком много поисковых запросов. Подождите немного и попробуйте снова."
+
+#: src/interface/channels/text/TextSearchSidebar.tsx
+msgid "Type words to search, or a filter like from:, has: or before:."
+msgstr "Введите слова для поиска или фильтр, например from:, has: или before:."
+
+#: src/interface/channels/text/TextSearchSidebar.tsx
+msgid "Unknown channel"
+msgstr "Неизвестный канал"
+
+#: src/interface/channels/text/searchLabels.ts
+msgid "Up to 10 from: filters are used, so \"{value}\" was left out."
+msgstr "Используется не больше 10 фильтров from:, поэтому «{value}» пропущено."
+
+#: src/interface/channels/text/searchLabels.ts
+msgid "Up to 50 in: filters are used, so \"{value}\" was left out."
+msgstr "Используется не больше 50 фильтров in:, поэтому «{value}» пропущено."
+
+#: src/interface/channels/text/searchLabels.ts
+msgctxt "search filter"
+msgid "Video"
+msgstr "Видео"
+
+#: src/interface/channels/text/TextSearchSidebar.tsx
+msgid "Where to search"
+msgstr "Где искать"
+
+#: src/interface/channels/text/TextSearchSidebar.tsx
+msgid "Whole server"
+msgstr "Весь сервер"
+
+#: src/interface/channels/text/SearchBox.tsx
+msgid "Yesterday"
+msgstr "Вчера"
+

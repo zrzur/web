@@ -51,6 +51,8 @@ export interface SearchResolver {
   user(name: string): string | undefined;
   /** Channel id for a name, case-insensitive */
   channel(name: string): string | undefined;
+  /** False in a conversation: `in:` needs a server (default true) */
+  inServer?: boolean;
 }
 
 export type SearchProblemReason =
@@ -58,7 +60,10 @@ export type SearchProblemReason =
   | "unknown-channel"
   | "bad-date"
   | "bad-has"
-  | "bad-pinned";
+  | "bad-pinned"
+  | "one-only"
+  | "too-many"
+  | "no-server";
 
 export interface SearchProblem {
   key: SearchKey;
@@ -78,9 +83,19 @@ export interface SearchRequest {
   problems: SearchProblem[];
   /** Nothing to search for yet */
   empty: boolean;
+  /** The words were longer than the server searches */
+  truncated: boolean;
 }
 
-const TOKEN = /(^|\s)([A-Za-z]+):("[^"]*"?|[^\s]*)/g;
+/** What the server takes (DataMessageSearch limits) */
+export const MAX_QUERY = 64;
+export const MAX_AUTHORS = 10;
+export const MAX_CHANNELS = 50;
+
+// a value: "quoted", or a quote left open (it ends before the next
+// filter), or one word; @ and # may come before the quote
+const TOKEN =
+  /(^|\s)([A-Za-z]+):([@#]?"[^"]*"|[@#]?"(?:(?!\s+[A-Za-z]+:)[^"])*|[^\s]*)/g;
 const ULID = /^[0-9A-HJKMNP-TV-Z]{26}$/i;
 
 function isKey(key: string): key is SearchKey {
@@ -88,7 +103,10 @@ function isKey(key: string): key is SearchKey {
 }
 
 function unquote(value: string) {
-  return value.replace(/^"/, "").replace(/"$/, "");
+  return value
+    .replace(/^([@#]?)"/, "$1")
+    .replace(/"$/, "")
+    .trimEnd();
 }
 
 /** Split the input into words and filters */
@@ -175,20 +193,32 @@ export function toSearchRequest(
 
   for (const token of parsed.tokens) {
     const value = token.value.trim();
-    if (token.key === "in") serverWide = true;
+    if (token.key === "in") {
+      if (resolver.inServer === false) {
+        // one plain problem, not "no channel called …" as well
+        if (!problems.some((p) => p.reason === "no-server"))
+          problem(token, "no-server");
+        continue;
+      }
+      serverWide = true;
+    }
     if (!value) continue;
 
     switch (token.key) {
       case "from": {
         const id = user(value);
         if (!id) problem(token, "unknown-user");
-        else if (!authors.includes(id)) authors.push(id);
+        else if (authors.includes(id)) break;
+        else if (authors.length >= MAX_AUTHORS) problem(token, "too-many");
+        else authors.push(id);
         break;
       }
       case "mentions": {
         const id = user(value);
         if (!id) problem(token, "unknown-user");
-        else params.mentions ??= id;
+        else if (params.mentions && params.mentions !== id)
+          problem(token, "one-only");
+        else params.mentions = id;
         break;
       }
       case "has": {
@@ -203,7 +233,9 @@ export function toSearchRequest(
           ? value.toUpperCase()
           : resolver.channel(value);
         if (!id) problem(token, "unknown-channel");
-        else if (!channels.includes(id)) channels.push(id);
+        else if (channels.includes(id)) break;
+        else if (channels.length >= MAX_CHANNELS) problem(token, "too-many");
+        else channels.push(id);
         break;
       }
       case "pinned": {
@@ -245,16 +277,19 @@ export function toSearchRequest(
     }
   }
 
-  if (parsed.words) params.query = parsed.words.slice(0, 64);
-  if (authors.length) params.authors = authors.slice(0, 10);
+  // by code points, so an emoji is never cut in half
+  const characters = [...parsed.words];
+  if (characters.length) params.query = characters.slice(0, MAX_QUERY).join("");
+  if (authors.length) params.authors = authors;
   if (has.length) params.has = has;
-  if (channels.length) params.channels = channels.slice(0, 50);
+  if (channels.length) params.channels = channels;
 
   return {
     params,
     serverWide,
     problems,
     empty: Object.keys(params).length === 0,
+    truncated: characters.length > MAX_QUERY,
   };
 }
 

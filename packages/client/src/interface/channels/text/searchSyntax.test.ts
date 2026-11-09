@@ -153,3 +153,61 @@ describe("autocomplete helpers", () => {
     });
   });
 });
+
+describe("review fixes", () => {
+  it("reads quoted names after @ and #", () => {
+    const parsed = parseSearch('from:@"John Doe" in:#"off topic"');
+    expect(parsed.tokens.map((t) => [t.key, t.value])).toEqual([
+      ["from", "John Doe"],
+      ["in", "off topic"],
+    ]);
+  });
+
+  it("ends an unclosed quote before the next filter", () => {
+    const parsed = parseSearch('from:"John Doe has:image');
+    expect(parsed.tokens.map((t) => [t.key, t.value])).toEqual([
+      ["from", "John Doe"],
+      ["has", "image"],
+    ]);
+  });
+
+  it("says when a second mentions: is not used", () => {
+    const { params, problems } = request("mentions:alice mentions:bob");
+    expect(params.mentions).toBe(ALICE);
+    expect(problems).toEqual([
+      { key: "mentions", value: "bob", reason: "one-only" },
+    ]);
+  });
+
+  it("says when there are more from: than the server takes", () => {
+    const ids = Array.from(
+      { length: 11 },
+      (_, i) => `01H${String(i).padStart(23, "0")}`,
+    );
+    const { params, problems } = request(
+      ids.map((id) => `from:${id}`).join(" "),
+    );
+    expect(params.authors).toHaveLength(10);
+    expect(problems[0].reason).toBe("too-many");
+  });
+
+  it("cuts long words by characters, not halves of emoji, and says so", () => {
+    const words = "😀".repeat(70);
+    const result = request(words);
+    expect([...result.params.query!]).toHaveLength(64);
+    expect(result.params.query).toBe("😀".repeat(64));
+    expect(result.truncated).toBe(true);
+    expect(request("short").truncated).toBe(false);
+  });
+
+  it("gives one plain problem for in: outside a server", () => {
+    const result = toSearchRequest(parseSearch("in:general hi"), {
+      ...resolver,
+      inServer: false,
+    });
+    expect(result.serverWide).toBe(false);
+    expect(result.problems).toEqual([
+      { key: "in", value: "general", reason: "no-server" },
+    ]);
+  });
+});

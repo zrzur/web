@@ -19040,3 +19040,194 @@ msgstr "Zrzur, directement sur <0>votre ordinateur.</0>"
 #: components/app/interface/settings/user/appearance/AppearanceMenu.tsx
 #~ msgid "Zrzur's own look: calm dark panels in one slate family, pink for Plus and teal for anything live."
 #~ msgstr ""
+
+#: src/interface/channels/text/searchLabels.ts
+msgid "\"{value}\" is not a day. Write it like 2026-11-09."
+msgstr "« {value} » n’est pas une date. Écris-la ainsi : 2026-11-09."
+
+#: src/interface/channels/text/searchLabels.ts
+msgctxt "search filter"
+msgid "After"
+msgstr "Après"
+
+#: src/interface/channels/text/searchLabels.ts
+msgctxt "search filter"
+msgid "Before"
+msgstr "Avant"
+
+#: src/interface/channels/text/searchLabels.ts
+msgctxt "search filter"
+msgid "Embed"
+msgstr "Intégration"
+
+#: src/interface/channels/text/searchLabels.ts
+msgctxt "search filter"
+msgid "File"
+msgstr "Fichier"
+
+#: src/interface/channels/text/searchLabels.ts
+msgctxt "search filter"
+msgid "From"
+msgstr "De"
+
+#: src/interface/channels/text/searchLabels.ts
+msgctxt "search filter"
+msgid "Has"
+msgstr "Contient"
+
+#: src/interface/channels/text/searchLabels.ts
+msgid "has: takes link, file, image, video, embed or sound."
+msgstr "has: accepte link, file, image, video, embed ou sound."
+
+#: src/interface/channels/text/searchLabels.ts
+msgctxt "search filter"
+msgid "Image"
+msgstr "Image"
+
+#: src/interface/channels/text/searchLabels.ts
+msgctxt "search filter"
+msgid "In"
+msgstr "Dans"
+
+#: src/interface/channels/text/searchLabels.ts
+msgid "in: works in servers only."
+msgstr "in: ne fonctionne que dans les serveurs."
+
+#: src/interface/channels/text/TextSearchSidebar.tsx
+msgid "Jump to message"
+msgstr "Aller au message"
+
+#: src/interface/channels/text/searchLabels.ts
+msgctxt "search filter"
+msgid "Link"
+msgstr "Lien"
+
+#: src/interface/channels/text/searchLabels.ts
+msgctxt "search filter"
+msgid "Mentions"
+msgstr "Mentionne"
+
+#: src/interface/channels/text/searchLabels.ts
+msgid "Messages after a day"
+msgstr "Messages après un jour donné"
+
+#: src/interface/channels/text/searchLabels.ts
+msgid "Messages before a day"
+msgstr "Messages avant un jour donné"
+
+#: src/interface/channels/text/searchLabels.ts
+msgid "Messages from a member"
+msgstr "Messages d’un membre"
+
+#: src/interface/channels/text/searchLabels.ts
+msgid "Messages in a channel, across the server"
+msgstr "Messages d’un salon, dans tout le serveur"
+
+#: src/interface/channels/text/searchLabels.ts
+msgid "Messages on a day"
+msgstr "Messages d’un jour donné"
+
+#: src/interface/channels/text/searchLabels.ts
+msgid "Messages that mention a member"
+msgstr "Messages qui mentionnent un membre"
+
+#: src/interface/channels/text/searchLabels.ts
+msgid "Messages with a link, file, image, video, embed or sound"
+msgstr "Messages avec un lien, un fichier, une image, une vidéo, une intégration ou un son"
+
+#: src/interface/channels/text/searchLabels.ts
+msgid "No channel called \"{value}\"."
+msgstr "Aucun salon ne s’appelle « {value} »."
+
+#: src/interface/channels/text/searchLabels.ts
+msgid "No member called \"{value}\"."
+msgstr "Aucun membre ne s’appelle « {value} »."
+
+#: src/interface/channels/text/TextSearchSidebar.tsx
+msgid "No messages in this channel match your search."
+msgstr "Aucun message de ce salon ne correspond à ta recherche."
+
+#: src/interface/channels/text/TextSearchSidebar.tsx
+msgid "No messages in this server match your search."
+msgstr "Aucun message de ce serveur ne correspond à ta recherche."
+
+#: src/interface/channels/text/searchLabels.ts
+msgctxt "search filter"
+msgid "On day"
+msgstr "Le"
+
+#: src/interface/channels/text/searchLabels.ts
+msgid "Only one mentions: filter is used, so \"{value}\" was left out."
+msgstr "Un seul filtre mentions: est utilisé, donc « {value} » a été ignoré."
+
+#: src/interface/channels/text/searchLabels.ts
+msgid "Only pinned messages"
+msgstr "Seulement les messages épinglés"
+
+#: src/interface/channels/text/TextSearchSidebar.tsx
+msgid "Only the first 64 characters are searched."
+msgstr "Seuls les 64 premiers caractères sont recherchés."
+
+#: src/interface/channels/text/searchLabels.ts
+msgctxt "search filter"
+msgid "Pinned"
+msgstr "Épinglé"
+
+#: src/interface/channels/text/searchLabels.ts
+msgid "pinned: takes true or false."
+msgstr "pinned: accepte true ou false."
+
+#: src/interface/channels/text/SearchBox.tsx
+msgid "Search filters"
+msgstr "Filtres de recherche"
+
+#: src/interface/channels/text/searchLabels.ts
+msgctxt "search filter"
+msgid "Sound"
+msgstr "Son"
+
+#: src/interface/channels/text/TextSearchSidebar.tsx
+msgid "This channel"
+msgstr "Ce salon"
+
+#: src/interface/channels/text/SearchBox.tsx
+msgid "Today"
+msgstr "Aujourd’hui"
+
+#: src/interface/channels/text/TextSearchSidebar.tsx
+msgid "Too many searches. Wait a moment, then try again."
+msgstr "Trop de recherches. Attends un instant, puis réessaie."
+
+#: src/interface/channels/text/TextSearchSidebar.tsx
+msgid "Type words to search, or a filter like from:, has: or before:."
+msgstr "Tape des mots à chercher, ou un filtre comme from:, has: ou before:."
+
+#: src/interface/channels/text/TextSearchSidebar.tsx
+msgid "Unknown channel"
+msgstr "Salon inconnu"
+
+#: src/interface/channels/text/searchLabels.ts
+msgid "Up to 10 from: filters are used, so \"{value}\" was left out."
+msgstr "10 filtres from: au maximum sont utilisés, donc « {value} » a été ignoré."
+
+#: src/interface/channels/text/searchLabels.ts
+msgid "Up to 50 in: filters are used, so \"{value}\" was left out."
+msgstr "50 filtres in: au maximum sont utilisés, donc « {value} » a été ignoré."
+
+#: src/interface/channels/text/searchLabels.ts
+msgctxt "search filter"
+msgid "Video"
+msgstr "Vidéo"
+
+#: src/interface/channels/text/TextSearchSidebar.tsx
+msgid "Where to search"
+msgstr "Où chercher"
+
+#: src/interface/channels/text/TextSearchSidebar.tsx
+msgid "Whole server"
+msgstr "Tout le serveur"
+
+#: src/interface/channels/text/SearchBox.tsx
+msgid "Yesterday"
+msgstr "Hier"
+

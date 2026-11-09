@@ -11,14 +11,14 @@ export function useSearchLabels() {
 
   const key = (key: SearchKey) =>
     ({
-      from: t`From`,
-      mentions: t`Mentions`,
-      has: t`Has`,
-      before: t`Before`,
-      after: t`After`,
-      during: t`On day`,
-      in: t`In`,
-      pinned: t`Pinned`,
+      from: t({ message: "From", context: "search filter" }),
+      mentions: t({ message: "Mentions", context: "search filter" }),
+      has: t({ message: "Has", context: "search filter" }),
+      before: t({ message: "Before", context: "search filter" }),
+      after: t({ message: "After", context: "search filter" }),
+      during: t({ message: "On day", context: "search filter" }),
+      in: t({ message: "In", context: "search filter" }),
+      pinned: t({ message: "Pinned", context: "search filter" }),
     })[key];
 
   const hint = (key: SearchKey) =>
@@ -35,12 +35,12 @@ export function useSearchLabels() {
 
   const has = (value: HasValue) =>
     ({
-      link: t`Link`,
-      file: t`File`,
-      image: t`Image`,
-      video: t`Video`,
-      embed: t`Embed`,
-      sound: t`Sound`,
+      link: t({ message: "Link", context: "search filter" }),
+      file: t({ message: "File", context: "search filter" }),
+      image: t({ message: "Image", context: "search filter" }),
+      video: t({ message: "Video", context: "search filter" }),
+      embed: t({ message: "Embed", context: "search filter" }),
+      sound: t({ message: "Sound", context: "search filter" }),
     })[value];
 
   const problem = (problem: SearchProblem) => {
@@ -56,6 +56,14 @@ export function useSearchLabels() {
         return t`has: takes link, file, image, video, embed or sound.`;
       case "bad-pinned":
         return t`pinned: takes true or false.`;
+      case "one-only":
+        return t`Only one mentions: filter is used, so "${value}" was left out.`;
+      case "too-many":
+        return problem.key === "in"
+          ? t`Up to 50 in: filters are used, so "${value}" was left out.`
+          : t`Up to 10 from: filters are used, so "${value}" was left out.`;
+      case "no-server":
+        return t`in: works in servers only.`;
     }
   };
 

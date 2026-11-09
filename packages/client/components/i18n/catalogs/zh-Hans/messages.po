@@ -19040,3 +19040,194 @@ msgstr ""
 #: components/app/interface/settings/user/appearance/AppearanceMenu.tsx
 #~ msgid "Zrzur's own look: calm dark panels in one slate family, pink for Plus and teal for anything live."
 #~ msgstr ""
+
+#: src/interface/channels/text/searchLabels.ts
+msgid "\"{value}\" is not a day. Write it like 2026-11-09."
+msgstr "“{value}”不是日期。请这样写：2026-11-09。"
+
+#: src/interface/channels/text/searchLabels.ts
+msgctxt "search filter"
+msgid "After"
+msgstr "晚于"
+
+#: src/interface/channels/text/searchLabels.ts
+msgctxt "search filter"
+msgid "Before"
+msgstr "早于"
+
+#: src/interface/channels/text/searchLabels.ts
+msgctxt "search filter"
+msgid "Embed"
+msgstr "嵌入内容"
+
+#: src/interface/channels/text/searchLabels.ts
+msgctxt "search filter"
+msgid "File"
+msgstr "文件"
+
+#: src/interface/channels/text/searchLabels.ts
+msgctxt "search filter"
+msgid "From"
+msgstr "来自"
+
+#: src/interface/channels/text/searchLabels.ts
+msgctxt "search filter"
+msgid "Has"
+msgstr "包含"
+
+#: src/interface/channels/text/searchLabels.ts
+msgid "has: takes link, file, image, video, embed or sound."
+msgstr "has: 可用 link、file、image、video、embed 或 sound。"
+
+#: src/interface/channels/text/searchLabels.ts
+msgctxt "search filter"
+msgid "Image"
+msgstr "图片"
+
+#: src/interface/channels/text/searchLabels.ts
+msgctxt "search filter"
+msgid "In"
+msgstr "位于"
+
+#: src/interface/channels/text/searchLabels.ts
+msgid "in: works in servers only."
+msgstr "in: 仅在服务器中可用。"
+
+#: src/interface/channels/text/TextSearchSidebar.tsx
+msgid "Jump to message"
+msgstr "跳转到消息"
+
+#: src/interface/channels/text/searchLabels.ts
+msgctxt "search filter"
+msgid "Link"
+msgstr "链接"
+
+#: src/interface/channels/text/searchLabels.ts
+msgctxt "search filter"
+msgid "Mentions"
+msgstr "提及"
+
+#: src/interface/channels/text/searchLabels.ts
+msgid "Messages after a day"
+msgstr "某天之后的消息"
+
+#: src/interface/channels/text/searchLabels.ts
+msgid "Messages before a day"
+msgstr "某天之前的消息"
+
+#: src/interface/channels/text/searchLabels.ts
+msgid "Messages from a member"
+msgstr "某位成员发送的消息"
+
+#: src/interface/channels/text/searchLabels.ts
+msgid "Messages in a channel, across the server"
+msgstr "某个频道中的消息（在整个服务器中搜索）"
+
+#: src/interface/channels/text/searchLabels.ts
+msgid "Messages on a day"
+msgstr "某一天的消息"
+
+#: src/interface/channels/text/searchLabels.ts
+msgid "Messages that mention a member"
+msgstr "提及某位成员的消息"
+
+#: src/interface/channels/text/searchLabels.ts
+msgid "Messages with a link, file, image, video, embed or sound"
+msgstr "包含链接、文件、图片、视频、嵌入内容或音频的消息"
+
+#: src/interface/channels/text/searchLabels.ts
+msgid "No channel called \"{value}\"."
+msgstr "没有名为“{value}”的频道。"
+
+#: src/interface/channels/text/searchLabels.ts
+msgid "No member called \"{value}\"."
+msgstr "没有名为“{value}”的成员。"
+
+#: src/interface/channels/text/TextSearchSidebar.tsx
+msgid "No messages in this channel match your search."
+msgstr "此频道中没有符合搜索条件的消息。"
+
+#: src/interface/channels/text/TextSearchSidebar.tsx
+msgid "No messages in this server match your search."
+msgstr "此服务器中没有符合搜索条件的消息。"
+
+#: src/interface/channels/text/searchLabels.ts
+msgctxt "search filter"
+msgid "On day"
+msgstr "当天"
+
+#: src/interface/channels/text/searchLabels.ts
+msgid "Only one mentions: filter is used, so \"{value}\" was left out."
+msgstr "只使用一个 mentions: 筛选，因此忽略了“{value}”。"
+
+#: src/interface/channels/text/searchLabels.ts
+msgid "Only pinned messages"
+msgstr "仅已置顶的消息"
+
+#: src/interface/channels/text/TextSearchSidebar.tsx
+msgid "Only the first 64 characters are searched."
+msgstr "只搜索前 64 个字符。"
+
+#: src/interface/channels/text/searchLabels.ts
+msgctxt "search filter"
+msgid "Pinned"
+msgstr "已置顶"
+
+#: src/interface/channels/text/searchLabels.ts
+msgid "pinned: takes true or false."
+msgstr "pinned: 可用 true 或 false。"
+
+#: src/interface/channels/text/SearchBox.tsx
+msgid "Search filters"
+msgstr "搜索筛选"
+
+#: src/interface/channels/text/searchLabels.ts
+msgctxt "search filter"
+msgid "Sound"
+msgstr "音频"
+
+#: src/interface/channels/text/TextSearchSidebar.tsx
+msgid "This channel"
+msgstr "此频道"
+
+#: src/interface/channels/text/SearchBox.tsx
+msgid "Today"
+msgstr "今天"
+
+#: src/interface/channels/text/TextSearchSidebar.tsx
+msgid "Too many searches. Wait a moment, then try again."
+msgstr "搜索次数过多。请稍候再试。"
+
+#: src/interface/channels/text/TextSearchSidebar.tsx
+msgid "Type words to search, or a filter like from:, has: or before:."
+msgstr "输入要搜索的词语，或使用 from:、has:、before: 等筛选。"
+
+#: src/interface/channels/text/TextSearchSidebar.tsx
+msgid "Unknown channel"
+msgstr "未知频道"
+
+#: src/interface/channels/text/searchLabels.ts
+msgid "Up to 10 from: filters are used, so \"{value}\" was left out."
+msgstr "最多使用 10 个 from: 筛选，因此忽略了“{value}”。"
+
+#: src/interface/channels/text/searchLabels.ts
+msgid "Up to 50 in: filters are used, so \"{value}\" was left out."
+msgstr "最多使用 50 个 in: 筛选，因此忽略了“{value}”。"
+
+#: src/interface/channels/text/searchLabels.ts
+msgctxt "search filter"
+msgid "Video"
+msgstr "视频"
+
+#: src/interface/channels/text/TextSearchSidebar.tsx
+msgid "Where to search"
+msgstr "搜索范围"
+
+#: src/interface/channels/text/TextSearchSidebar.tsx
+msgid "Whole server"
+msgstr "整个服务器"
+
+#: src/interface/channels/text/SearchBox.tsx
+msgid "Yesterday"
+msgstr "昨天"
+

@@ -6,6 +6,7 @@ import { API, Channel, Message as MessageClass } from "@zrzur/sdk/solid";
 
 import { Message } from "@revolt/app";
 import { useClient } from "@revolt/client";
+import { errorDetails } from "@revolt/i18n/errors";
 import { CircularProgress, Segmented } from "@revolt/ui";
 import { Icon } from "@revolt/ui/icons/Icon";
 import { styled } from "styled-system/jsx";
@@ -57,22 +58,39 @@ export function TextSearchSidebar(props: {
         (c) => c.name.toLowerCase() === wanted,
       )?.id;
     },
+    get inServer() {
+      return !!props.channel.server;
+    },
   };
 
-  const request = createMemo(() => {
-    const request = toSearchRequest(parsed(), resolver);
-    // in: needs a server
-    if (request.serverWide && !props.channel.server) {
-      return {
-        ...request,
-        problems: [
-          ...request.problems,
-          { key: "in" as const, value: "", reason: "unknown-channel" as const },
-        ],
-      };
-    }
-    return request;
-  });
+  const request = createMemo(() => toSearchRequest(parsed(), resolver));
+
+  // names this device has not loaded yet: ask the server before saying
+  // there is nobody of that name (the answer fills the member cache)
+  const unknownNames = createMemo(() =>
+    request()
+      .problems.filter((p) => p.reason === "unknown-user")
+      .map((p) => p.value),
+  );
+  const lookup = useQuery(() => ({
+    enabled: !!props.channel.server && unknownNames().length > 0,
+    queryKey: ["search-members", props.channel.serverId, unknownNames()],
+    queryFn: async () => {
+      for (const name of unknownNames())
+        await props.channel
+          .server!.queryMembersExperimental(name)
+          .catch(() => undefined);
+      return true;
+    },
+    staleTime: 60_000,
+  }));
+  const lookingUp = () => lookup.isFetching;
+
+  /** Problems to show: unknown names only once the server was asked */
+  const problems = () =>
+    request().problems.filter(
+      (p) => !(p.reason === "unknown-user" && lookingUp()),
+    );
 
   const effectiveScope = (): Scope =>
     props.channel.server && (request().serverWide || scope() === "server")
@@ -80,7 +98,11 @@ export function TextSearchSidebar(props: {
       : "channel";
 
   const ready = () =>
-    pinsList() || (!request().empty && request().problems.length === 0);
+    pinsList() ||
+    (!request().empty && request().problems.length === 0 && !lookingUp());
+
+  const rateLimited = () =>
+    (query.error as { status?: number } | null)?.status === 429;
 
   const query = useQuery(() => ({
     enabled: ready(),
@@ -174,22 +196,26 @@ export function TextSearchSidebar(props: {
         </Row>
       </Show>
 
-      <Show when={!pinsList() && request().problems.length}>
+      <Show when={!pinsList() && problems().length}>
         <Empty role="alert">
           <Icon name="warning-circle" size={22} />
-          <For each={request().problems}>
-            {(problem) => (
-              <span>
-                {problem.key === "in" && !props.channel.server
-                  ? t`in: works in servers only.`
-                  : labels.problem(problem)}
-              </span>
-            )}
+          <For each={problems()}>
+            {(problem) => <span>{labels.problem(problem)}</span>}
           </For>
         </Empty>
       </Show>
 
-      <Show when={!pinsList() && request().empty && !request().problems.length}>
+      <Show when={!pinsList() && request().truncated}>
+        <Note role="status">
+          <Trans>Only the first 64 characters are searched.</Trans>
+        </Note>
+      </Show>
+
+      <Show when={!pinsList() && lookingUp()}>
+        <CircularProgress />
+      </Show>
+
+      <Show when={!pinsList() && request().empty && !problems().length}>
         <Empty role="status">
           <Icon name="magnifying-glass" size={22} />
           <span>
@@ -243,8 +269,27 @@ export function TextSearchSidebar(props: {
             <Empty role="alert">
               <Icon name="warning-circle" size={22} />
               <span>
-                <Trans>Search isn't available right now. Try again soon.</Trans>
+                <Show
+                  when={rateLimited()}
+                  fallback={
+                    <Trans>
+                      Search isn't available right now. Try again soon.
+                    </Trans>
+                  }
+                >
+                  <Trans>
+                    Too many searches. Wait a moment, then try again.
+                  </Trans>
+                </Show>
               </span>
+              <Show when={errorDetails(query.error)}>
+                <details class="z-error-details">
+                  <summary>
+                    <Trans>Details</Trans>
+                  </summary>
+                  <code>{errorDetails(query.error)}</code>
+                </details>
+              </Show>
             </Empty>
           </Show>
           <Show when={query.isSuccess && !query.data?.length}>
@@ -309,6 +354,16 @@ const Empty = styled("div", {
   },
 });
 
+const Note = styled("p", {
+  base: {
+    margin: 0,
+    paddingInline: "12px",
+    fontSize: "12px",
+    textAlign: "center",
+    color: "var(--z-fg-muted)",
+  },
+});
+
 const Help = styled("ul", {
   base: {
     display: "flex",
@@ -324,9 +379,9 @@ const Help = styled("ul", {
     "& code": {
       alignSelf: "flex-start",
       direction: "ltr",
-      paddingInline: "6px",
-      paddingBlock: "2px",
-      borderRadius: "var(--z-radius-sm)",
+      paddingInline: "8px",
+      paddingBlock: "4px",
+      borderRadius: "var(--z-radius-xs)",
       background: "var(--z-bg-raised)",
       color: "var(--z-fg-primary)",
       fontFamily: "var(--fonts-monospace, monospace)",
@@ -347,7 +402,7 @@ const Chips = styled("div", {
   base: {
     display: "flex",
     flexWrap: "wrap",
-    gap: "4px",
+    gap: "8px",
     paddingInline: "12px",
   },
 });
@@ -357,7 +412,8 @@ const Chip = styled("span", {
     display: "inline-flex",
     alignItems: "center",
     minHeight: "24px",
-    paddingInline: "8px",
+    paddingInline: "12px",
+    paddingBlock: "4px",
     borderRadius: "var(--z-radius-pill)",
     border: "1px solid var(--z-border-soft)",
     background: "var(--z-bg-raised)",

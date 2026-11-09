@@ -6,6 +6,7 @@ import {
   createSignal,
   createUniqueId,
   on,
+  onCleanup,
   untrack,
 } from "solid-js";
 import { Portal } from "solid-js/web";
@@ -105,6 +106,40 @@ export function SearchBox(props: {
       { defer: true },
     ),
   );
+
+  // keep the list under the field when the page scrolls, the window
+  // resizes or the phone keyboard moves the visual viewport
+  createEffect(() => {
+    if (!showList()) return;
+    const follow = () => setRect(field.getBoundingClientRect());
+    const viewport = window.visualViewport;
+    window.addEventListener("resize", follow);
+    window.addEventListener("scroll", follow, true);
+    viewport?.addEventListener("resize", follow);
+    viewport?.addEventListener("scroll", follow);
+    onCleanup(() => {
+      window.removeEventListener("resize", follow);
+      window.removeEventListener("scroll", follow, true);
+      viewport?.removeEventListener("resize", follow);
+      viewport?.removeEventListener("scroll", follow);
+    });
+  });
+
+  // members this device has not loaded: ask the server for the name typed
+  // after from: / mentions: (a short pause first); the answer fills the
+  // member cache, so the suggestions update by themselves
+  createEffect(() => {
+    const at = tokenAt(draft(), caret());
+    const server = props.channel.server;
+    if (!server || (at.key !== "from" && at.key !== "mentions")) return;
+    const name = at.partial.trim();
+    if (name.length < 2) return;
+    const timer = setTimeout(
+      () => void server.queryMembersExperimental(name).catch(() => undefined),
+      300,
+    );
+    onCleanup(() => clearTimeout(timer));
+  });
 
   const suggestions = createMemo<Suggestion[]>(() => {
     const at = tokenAt(draft(), caret());
@@ -391,7 +426,7 @@ export const SearchField = styled("label", {
     height: "32px",
     width: "200px",
     marginInlineStart: "4px",
-    paddingInline: "10px 6px",
+    paddingInline: "12px 4px",
     borderRadius: "var(--z-shape-field, var(--z-radius, 10px))",
     // same recessed field language as TextField / composer
     border: "1px solid var(--z-field-border)",
@@ -416,7 +451,11 @@ export const SearchField = styled("label", {
 
     // phones: share the header with the title instead of a fixed width
     _phone: {
-      "&[data-phone]": { height: "40px", fontSize: "16px" },
+      "&[data-phone]": { height: "44px", paddingInlineEnd: 0 },
+      // 16 px stops phones zooming into the field
+      "& input": { fontSize: "16px" },
+      // a full 44 px target for clearing
+      "& button": { width: "44px", height: "44px" },
       flex: "1 1 120px",
       minWidth: 0,
       width: "auto",
@@ -443,11 +482,11 @@ export const SearchField = styled("label", {
     "& button": {
       display: "grid",
       placeItems: "center",
-      width: "22px",
-      height: "22px",
+      width: "24px",
+      height: "24px",
       padding: 0,
       border: "none",
-      borderRadius: "6px",
+      borderRadius: "var(--z-radius-xs)",
       background: "transparent",
       color: "inherit",
       cursor: "pointer",
