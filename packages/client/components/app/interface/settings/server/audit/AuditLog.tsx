@@ -22,9 +22,10 @@ import {
   SettingsRow,
   SettingsSection,
 } from "@revolt/ui";
+import { BotLabel } from "@revolt/ui/components/features/profiles/BotLabel";
 import { Icon } from "@revolt/ui/icons/Icon";
-import { auditQueryString } from "./auditQuery";
 import type { IconName } from "@revolt/ui/icons/registry";
+import { APPS_ACTIONS, auditQueryString } from "./auditQuery";
 
 type Entry = API.AuditLogEntry;
 type Action = Entry["action"];
@@ -58,8 +59,16 @@ const GROUPS: Record<string, Action["type"][]> = {
   ],
   roles: ["RoleCreate", "RoleEdit", "RoleDelete", "RolesReorder"],
   server: ["ServerEdit"],
-  invites: ["InviteCreate", "InviteDelete", "WebhookCreate", "WebhookUpdate", "WebhookTokenReset", "WebhookDelete"],
+  invites: [
+    "InviteCreate",
+    "InviteDelete",
+    "WebhookCreate",
+    "WebhookUpdate",
+    "WebhookTokenReset",
+    "WebhookDelete",
+  ],
   emojis: ["EmojiCreate", "EmojiUpdate", "EmojiDelete"],
+  apps: APPS_ACTIONS as Action["type"][],
 };
 
 const PAGE = 50;
@@ -96,7 +105,9 @@ export function AuditLog(props: { server: Server }) {
     };
     const result = {
       audit_logs: raw.audit_logs,
-      users: raw.users.map((user) => client().users.getOrCreate(user._id, user)),
+      users: raw.users.map((user) =>
+        client().users.getOrCreate(user._id, user),
+      ),
     };
     setUsers((map) => {
       const next = new Map(map);
@@ -169,6 +180,15 @@ export function AuditLog(props: { server: Server }) {
         kind: "delete",
         icon: "robot",
         text: t`removed the bot ${userName(raw.bot)}`,
+        bot: raw.bot,
+      };
+    if (raw.type === "CommandPermissionsUpdate")
+      return {
+        kind: "edit",
+        icon: "robot",
+        text: (raw as { command?: string }).command
+          ? t`changed who can use a command of ${userName(raw.bot)}`
+          : t`changed who can use the commands of ${userName(raw.bot)}`,
         bot: raw.bot,
       };
     const a = entry.action as Action & Record<string, never>;
@@ -486,6 +506,7 @@ export function AuditLog(props: { server: Server }) {
           <MenuItem value="server">{t`Server settings`}</MenuItem>
           <MenuItem value="invites">{t`Invites and webhooks`}</MenuItem>
           <MenuItem value="emojis">{t`Emojis`}</MenuItem>
+          <MenuItem value="apps">{t`Apps and bots`}</MenuItem>
         </FloatingSelect>
       </Toolbar>
 
@@ -557,7 +578,25 @@ export function AuditLog(props: { server: Server }) {
                             size={28}
                           />
                           <Text>
-                            <strong dir="auto">{userName(entry.user)}</strong>{" "}
+                            <strong dir="auto">{userName(entry.user)}</strong>
+                            <Show
+                              when={
+                                (
+                                  users().get(entry.user) ??
+                                  client().users.get(entry.user)
+                                )?.bot
+                              }
+                            >
+                              {" "}
+                              <BotLabel
+                                verified={
+                                  (
+                                    users().get(entry.user) ??
+                                    client().users.get(entry.user)
+                                  )?.verifiedBot
+                                }
+                              />
+                            </Show>{" "}
                             <span dir="auto">{info().text}</span>
                             <Show when={entry.reason}>
                               <Reason dir="auto">“{entry.reason}”</Reason>

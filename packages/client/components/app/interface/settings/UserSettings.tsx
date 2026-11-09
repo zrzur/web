@@ -5,29 +5,30 @@ import { Server } from "@zrzur/sdk/solid";
 import { css } from "styled-system/css";
 
 import { useClient, useClientLifecycle } from "@revolt/client";
-import { pluginsEnabled } from "@revolt/plugins/enabled";
 import { billingAvailable } from "@revolt/client/billing";
 import {
   SOURCE_CODE_URL,
-  serverBuildOf,
   THIRD_PARTY_NOTICES_URL,
+  serverBuildOf,
   shortCommit,
 } from "@revolt/common/lib/buildInfo";
 import { STAFF_TOOLS_ENABLED } from "@revolt/common/lib/staffTools";
 import { useInstance } from "@revolt/instance";
 import { useModals } from "@revolt/modal";
 import { fetchLatestChangelog } from "@revolt/modal/modals/changelogFeed";
+import { pluginsEnabled } from "@revolt/plugins/enabled";
 import { useNavigate } from "@revolt/routing";
 import { ColouredText, Column, Text, iconSize } from "@revolt/ui";
-import { Symbol } from "@revolt/ui/components/utils/Symbol";
 import { BadgeMark } from "@revolt/ui/components/features/profiles/badges/BadgeMark";
+import { Symbol } from "@revolt/ui/components/utils/Symbol";
 import { BotIcon } from "@revolt/ui/icons/BotIcon";
+import { Icon } from "@revolt/ui/icons/Icon";
 
 import {
   account_circle as MdAccountCircle,
   campaign as MdCampaign,
-  download as MdDownload,
   description as MdDescription,
+  download as MdDownload,
   keyboard as MdKeybinds,
   language as MdLanguage,
   logout as MdLogout,
@@ -53,6 +54,7 @@ import { MyBadges } from "./user/badges/MyBadges";
 import { Feedback } from "./user/Feedback";
 import { KeybindsSettings } from "./user/Keybinds";
 import { LanguageSettings } from "./user/Language";
+import { MyData } from "./user/myData/MyData";
 import Native from "./user/Native";
 import Notifications from "./user/notifications/Notifications";
 import { PluginsPage } from "./user/plugins";
@@ -62,10 +64,9 @@ import {
   SafetyReviewPage,
   safetyAccess,
 } from "./user/safety";
-import { MyData } from "./user/myData/MyData";
 import { Sessions } from "./user/Sessions";
-import { ContactSupport } from "./user/support/ContactSupport";
 import { PlusPage, Subscriptions } from "./user/subscriptions";
+import { ContactSupport } from "./user/support/ContactSupport";
 import { VoiceSettings } from "./user/voice/VoiceSettings";
 
 const Config: SettingsConfiguration<{ server: Server }> = {
@@ -242,7 +243,10 @@ const Config: SettingsConfiguration<{ server: Server }> = {
                 >
                   <bdi dir="ltr" class={css({ unicodeBidi: "isolate" })}>
                     {build().version}
-                    <Show when={build().commit}> ({build().commit.slice(0, 7)})</Show>
+                    <Show when={build().commit}>
+                      {" "}
+                      ({build().commit.slice(0, 7)})
+                    </Show>
                   </bdi>
                 </a>
               </Text>
@@ -343,6 +347,15 @@ const Config: SettingsConfiguration<{ server: Server }> = {
               id: "sessions",
               icon: <MdVerifiedUser {...iconSize(20)} />,
               title: <Trans>Sessions</Trans>,
+            },
+            {
+              // apps you let act for you through OAuth2; revoked there
+              icon: <Icon name="key" size={20} />,
+              title: <Trans>Authorised apps</Trans>,
+              onClick() {
+                pop();
+                navigate("/oauth2/authorized");
+              },
             },
             {
               id: "my-data",
