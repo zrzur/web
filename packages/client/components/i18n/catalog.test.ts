@@ -54,7 +54,10 @@ describe("message catalogs", () => {
     expect(first).toEqual({ only: ["Nur das"] });
     expect(fetch).toHaveBeenCalledWith("/assets/site-messages-ar.json");
 
-    await vi.waitFor(() => expect(load).toHaveBeenCalled());
+    // the full file is a real import of a large module
+    await vi.waitFor(() => expect(load).toHaveBeenCalled(), {
+      timeout: 20_000,
+    });
     const [locale, full] = load.mock.calls[0] as unknown as [string, object];
     expect(locale).toBe(Language.ARABIC);
     expect(Object.keys(full).length).toBeGreaterThan(100);

@@ -38,7 +38,11 @@ export function stripEmitterInspect(code) {
       /\/\*! Bundled license information:\s*node-inspect-extracted\/dist\/inspect\.js:\s*\(\*![^\n]*\*\)\s*\*\/\n?/,
       "",
     );
-  return code.slice(0, start) + SMALL_INSPECT + rest;
+  // the library's source map no longer matches the code
+  return (code.slice(0, start) + SMALL_INSPECT + rest).replace(
+    /\n\/\/# sourceMappingURL=\S+\s*$/,
+    "\n",
+  );
 }
 
 /** Vite plugin */

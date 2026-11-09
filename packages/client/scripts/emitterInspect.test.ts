@@ -32,6 +32,8 @@ describe("async event emitter without node-inspect", () => {
     const code = stripEmitterInspect(original);
     expect(original).toContain("node-inspect-extracted");
     expect(code).not.toContain("node-inspect-extracted");
+    // its source map was for the whole file
+    expect(code).not.toContain("sourceMappingURL");
     // most of the file was the inspect copy
     expect(code.length).toBeLessThan(original.length / 3);
   });

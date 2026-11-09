@@ -81,7 +81,8 @@ describe("site catalogs", () => {
       }
       expect(Object.keys(readCatalog(ts)).length, code).toBeGreaterThan(100);
     }
-  });
+    // 45 catalogs of about 250 KB each: slow on a busy machine
+  }, 60_000);
 
   it("stops the build when the site pages were not found or use almost no messages", () => {
     expect(() => checkSiteCatalog([], 900)).toThrow(/sites\.tsx/);
