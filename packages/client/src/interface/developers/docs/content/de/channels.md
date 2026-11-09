@@ -40,8 +40,9 @@ Die Antwort ist der Thread: ein Kanal mit `parent`. Also schreibt `POST /channel
 
 Die erste Nachricht folgt den Regeln jeder Nachricht, die dein Bot sendet:
 
-- Sie nimmt nur `content`, bis zu 2000 Zeichen. `embeds`, `components` und `attachments` gehen dort noch nicht; `embeds` und `components` sind für die nächste Version geplant (siehe [Änderungsprotokoll](/developers/docs/changelog#upcoming)).
-- „Nachrichten senden“ und die Erwähnungsregeln gelten. Eine Rollenerwähnung ohne Mention Roles oder `@everyone` ohne Mention Everyone lehnt den ganzen Aufruf mit `403 MissingPermission` ab, und kein Thread entsteht. Starte den Thread ohne die Erwähnung und erwähne in einer zweiten Nachricht.
+- Sie nimmt nur `content`, bis zu 2000 Zeichen. Andere Felder wie `embeds`, `components` oder `attachments` werden ohne Fehler ignoriert: Der Thread beginnt nur mit dem Text. `embeds` und `components` kommen in der nächsten Version (siehe [Änderungsprotokoll](/developers/docs/changelog#upcoming)).
+- „Nachrichten senden“ und die Erwähnungsregeln gelten. Eine Rollenerwähnung ohne Mention Roles oder `@everyone` ohne Mention Everyone lehnt den ganzen Aufruf mit `403 MissingPermission` ab, und kein Thread bleibt. Der Thread wird erst angelegt und dann wieder entfernt, dein Bot kann also `ChannelCreate` und danach `ChannelDelete` dafür bekommen. Starte den Thread ohne die Erwähnung und erwähne in einer zweiten Nachricht.
+- Auf einem selbst gehosteten Server, dessen Betreiber `mass_mentions_enabled = false` gesetzt hat, werden Rollen-, `@everyone`- und `@online`-Erwähnungen nicht abgelehnt: Die Nachricht geht raus, und niemand wird benachrichtigt.
 
 Für eine Karte mit Schaltflächen oben im Thread starte den Thread nur mit einem Namen und sende die Karte dann hinein:
 

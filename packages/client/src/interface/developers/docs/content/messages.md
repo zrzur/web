@@ -19,7 +19,7 @@ POST /channels/{target}/messages
 - **Silent messages**: `flags: 1` sends without push or desktop notifications.
 - **Masquerade**: `masquerade: { name, avatar }` shows another name and avatar on the message (needs Masquerade; a `colour` also needs Manage Roles).
 - **Components**: buttons, selects and layout blocks; only bots can send them. See [Commands and interactions](/developers/docs/components).
-- **Mentions**: `<@user id>` pings a user, `<%role id>` a role (needs Mention Roles), `@everyone` and `@online` need Mention Everyone. Without the permission the whole message is refused with `MissingPermission`, it is not sent without the ping.
+- **Mentions**: `<@user id>` pings a user, `<%role id>` a role (needs Mention Roles), `@everyone` and `@online` need Mention Everyone. Without the permission the whole message is refused with `MissingPermission`, it is not sent without the ping. On a self-hosted server with `mass_mentions_enabled = false`, role, `@everyone` and `@online` mentions are sent without notifying anyone instead.
 - **Channel links**: `<#channel id>` shows a link to a channel or thread. It notifies nobody.
 
 ## Reply {#reply}

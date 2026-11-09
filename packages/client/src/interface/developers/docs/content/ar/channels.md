@@ -40,8 +40,9 @@
 
 تتبع الرسالة الأولى قواعد كل رسالة يرسلها بوتك:
 
-- لا تأخذ إلا `content`، حتى 2000 حرف. ولا تُقبل فيها `embeds` و`components` و`attachments` بعد؛ و`embeds` و`components` مخططان للإصدار القادم (انظر [سجل التغييرات](/developers/docs/changelog#upcoming)).
-- تسري صلاحية إرسال الرسائل وقواعد الذكر. ذكر دور دون Mention Roles، أو `@everyone` دون Mention Everyone، يرفض الطلب كله بـ`403 MissingPermission`، ولا يُنشأ موضوع. ابدأ الموضوع دون الذكر، ثم اذكر في رسالة ثانية.
+- لا تأخذ إلا `content`، حتى 2000 حرف. وتُتجاهل الحقول الأخرى، مثل `embeds` و`components` و`attachments`، دون خطأ: يبدأ الموضوع بالنص وحده. ويأتي `embeds` و`components` في الإصدار القادم (انظر [سجل التغييرات](/developers/docs/changelog#upcoming)).
+- تسري صلاحية إرسال الرسائل وقواعد الذكر. ذكر دور دون Mention Roles، أو `@everyone` دون Mention Everyone، يرفض الطلب كله بـ`403 MissingPermission`، ولا يبقى موضوع. يُنشأ الموضوع أولًا ثم يُزال، فقد يصل بوتك `ChannelCreate` ثم `ChannelDelete` له. ابدأ الموضوع دون الذكر، ثم اذكر في رسالة ثانية.
+- في سيرفر مستضاف ذاتيًا ضبط مشغّله `mass_mentions_enabled = false` لا يُرفض ذكر الأدوار و`@everyone` و`@online`: تُرسل الرسالة ولا يُنبَّه أحد.
 
 لبطاقة بأزرار في أعلى الموضوع، ابدأ الموضوع باسم فقط، ثم أرسل البطاقة فيه:
 

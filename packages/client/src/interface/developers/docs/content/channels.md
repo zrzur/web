@@ -50,8 +50,9 @@ The answer is the thread: a channel with `parent` set. So `POST /channels/{targe
 
 The first message follows the rules of every message your bot sends:
 
-- It takes `content` only, up to 2000 characters. `embeds`, `components` and `attachments` are not accepted there yet; `embeds` and `components` are planned for the next release (see the [changelog](/developers/docs/changelog#upcoming)).
-- Send Messages and the mention rules apply. A role mention without Mention Roles, or `@everyone` without Mention Everyone, refuses the whole call with `403 MissingPermission`, and no thread is made. Start the thread without the ping, then ping in a second message.
+- It takes `content` only, up to 2000 characters. Other fields, such as `embeds`, `components` or `attachments`, are ignored without an error: the thread starts with the text alone. `embeds` and `components` come in the next release (see the [changelog](/developers/docs/changelog#upcoming)).
+- Send Messages and the mention rules apply. A role mention without Mention Roles, or `@everyone` without Mention Everyone, refuses the whole call with `403 MissingPermission`, and no thread is kept. The thread is made first and removed again, so your bot can get `ChannelCreate` and then `ChannelDelete` for it. Start the thread without the ping, then ping in a second message.
+- On a self-hosted server whose operator set `mass_mentions_enabled = false`, role, `@everyone` and `@online` mentions are not refused: the message is sent and nobody is notified.
 
 For a card with buttons at the top of a thread, start the thread with only a name, then send the card into it:
 

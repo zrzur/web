@@ -11,7 +11,7 @@ Ein Bot sendet, bearbeitet und löscht eigene Nachrichten, reagiert, heftet an u
 - **Stille Nachrichten**: `flags: 1` sendet ohne Benachrichtigungen.
 - **Maskerade**: `masquerade: { name, avatar }` zeigt einen anderen Namen und Avatar auf der Nachricht (braucht Masquerade; `colour` braucht auch „Rollen verwalten“).
 - **Komponenten**: Schaltflächen, Menüs und Layoutblöcke; nur Bots können sie senden. Siehe [Schaltflächen, Menüs und Formulare](/developers/docs/components).
-- **Erwähnungen**: `<@user id>` erwähnt einen Benutzer, `<%role id>` eine Rolle (braucht Mention Roles), `@everyone` und `@online` brauchen Mention Everyone. Ohne die Berechtigung wird die ganze Nachricht mit `MissingPermission` abgelehnt; sie geht nicht ohne die Erwähnung raus.
+- **Erwähnungen**: `<@user id>` erwähnt einen Benutzer, `<%role id>` eine Rolle (braucht Mention Roles), `@everyone` und `@online` brauchen Mention Everyone. Ohne die Berechtigung wird die ganze Nachricht mit `MissingPermission` abgelehnt; sie geht nicht ohne die Erwähnung raus. Auf einem selbst gehosteten Server mit `mass_mentions_enabled = false` gehen Rollen-, `@everyone`- und `@online`-Erwähnungen stattdessen ohne Benachrichtigung raus.
 - **Kanal-Links**: `<#channel id>` zeigt einen Link auf einen Kanal oder Thread. Er benachrichtigt niemanden.
 
 ## Antworten {#reply}
