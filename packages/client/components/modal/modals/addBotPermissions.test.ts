@@ -1,6 +1,8 @@
 import { describe, expect, it } from "vitest";
 
 import {
+  PERMISSION_GROUPS,
+  askedGroups,
   askedPermissions,
   hasBit,
   inviteQuery,
@@ -52,5 +54,29 @@ describe("inviteQuery", () => {
     expect(inviteQuery(true, 0)).toBe("");
     expect(inviteQuery(true, undefined)).toBe("");
     expect(inviteQuery(false, SEND)).toBe("");
+  });
+});
+
+describe("listing what a bot asks for", () => {
+  it("shows every bit that is asked for, in its group or under Other", () => {
+    const asked = 2 ** 1 + 2 ** 22 + 2 ** 41 + 2 ** 45 + 2 ** 50;
+    const listed = askedGroups(asked);
+    const shown = listed.flatMap((group) => group.bits);
+    expect(shown.sort((a, b) => a - b)).toEqual(
+      [2 ** 1, 2 ** 22, 2 ** 41, 2 ** 45, 2 ** 50].sort((a, b) => a - b),
+    );
+    expect(listed.find((group) => group.id === "other")?.bits).toEqual([
+      2 ** 50,
+    ]);
+  });
+
+  it("knows a name for every permission the server has", () => {
+    const named = PERMISSION_GROUPS.flatMap((group) => group.bits);
+    for (const bit of [
+      0, 1, 2, 3, 4, 6, 7, 8, 9, 10, 11, 12, 13, 20, 21, 22, 23, 24, 25, 26, 27,
+      28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45,
+    ]) {
+      expect(named).toContain(2 ** bit);
+    }
   });
 });

@@ -25,15 +25,16 @@ import {
 import { BotLabel } from "@revolt/ui/components/features/profiles/BotLabel";
 import { Icon } from "@revolt/ui/icons/Icon";
 
-import { usePermissionNames } from "../../../src/interface/OAuth";
 import { Modals } from "../types";
 
 import {
+  askedGroups,
   askedPermissions,
   hasBit,
   inviteQuery,
   toggleBit,
 } from "./addBotPermissions";
+import { usePermissionTitles } from "./permissionTitles";
 
 /** Permissions that let a bot change the server or remove people */
 const SENSITIVE = [2 ** 1, 2 ** 2, 2 ** 3, 2 ** 6, 2 ** 7, 2 ** 37];
@@ -44,7 +45,7 @@ const SENSITIVE = [2 ** 1, 2 ** 2, 2 ** 3, 2 ** 6, 2 ** 7, 2 ** 37];
 export function AddBotModal(props: DialogProps & Modals & { type: "add_bot" }) {
   const { t } = useLingui();
   const client = useClient();
-  const permissionNames = usePermissionNames();
+  const titles = usePermissionTitles();
 
   // what the link asks for, else the bot's own default permissions
   // eslint-disable-next-line solid/reactivity
@@ -54,25 +55,14 @@ export function AddBotModal(props: DialogProps & Modals & { type: "add_bot" }) {
   const [error, setError] = createSignal<unknown>();
 
   const has = (bit: number) => hasBit(asked, bit);
-  const permissionName = (bit: number) =>
-    permissionNames.find(([entry]) => entry === bit)?.[1];
+  const permissionName = (bit: number) => titles.name(bit);
 
-  // the permissions asked for, grouped by what they touch
+  // every permission asked for, grouped by what it touches; none is hidden
   const groups = () =>
-    [
-      {
-        title: t`Server`,
-        bits: [2 ** 1, 2 ** 0, 2 ** 2, 2 ** 3, 2 ** 24, 2 ** 20],
-      },
-      { title: t`Members`, bits: [2 ** 6, 2 ** 7, 2 ** 8, 2 ** 9, 2 ** 11] },
-      {
-        title: t`Messages`,
-        bits: [2 ** 21, 2 ** 22, 2 ** 23, 2 ** 26, 2 ** 27, 2 ** 29, 2 ** 37],
-      },
-      { title: t`Voice`, bits: [2 ** 30, 2 ** 31] },
-    ]
-      .map((group) => ({ ...group, bits: group.bits.filter(has) }))
-      .filter((group) => group.bits.length);
+    askedGroups(asked).map((group) => ({
+      title: titles.group(group.id),
+      bits: group.bits,
+    }));
 
   const [filter, setFilter] = createSignal("");
 
