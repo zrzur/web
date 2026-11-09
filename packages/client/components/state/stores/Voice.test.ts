@@ -180,3 +180,11 @@ describe("Voice store: screen share quality", () => {
     });
   });
 });
+
+describe("Voice store: talk from other apps", () => {
+  it("is off until turned on, and a saved choice is kept", () => {
+    expect(store().default().globalTalk).toBe(false);
+    expect(store().clean({ globalTalk: true }).globalTalk).toBe(true);
+    expect(store().clean({ globalTalk: 1 } as never).globalTalk).toBe(false);
+  });
+});

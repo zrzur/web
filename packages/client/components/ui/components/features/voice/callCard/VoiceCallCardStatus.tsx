@@ -56,7 +56,19 @@ export function VoiceCallCardStatus(props: { pip?: boolean }) {
       <SignalBars state={voice.state()} size={18} />{" "}
       <FadeOut fade={voice.state() === "CONNECTED"}>{text()}</FadeOut>
       <Notice role="status">{notice()}</Notice>
-      <Show when={voice.state() === "DISCONNECTED" && voice.channel()}>
+      {/* talking was turned on with the global toggle (desktop app) */}
+      <Show when={voice.pttLatched()}>
+        <Notice data-talk-latched>
+          <Trans>Talking (toggle on)</Trans>
+        </Notice>
+      </Show>
+      <Show
+        when={
+          voice.state() === "DISCONNECTED" &&
+          voice.channel() &&
+          voice.canRejoin()
+        }
+      >
         {/* after reconnecting failed: one press joins the same channel */}
         <RejoinSlot>
           <Button size="sm" onPress={() => voice.rejoin()}>

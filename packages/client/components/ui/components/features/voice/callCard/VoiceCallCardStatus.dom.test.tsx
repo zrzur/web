@@ -15,11 +15,15 @@ vi.mock("../SignalBars", () => ({ SignalBars: () => <span /> }));
 
 const [state, setState] = createSignal("CONNECTED");
 const [notice, setNotice] = createSignal<string>();
+const [latched, setLatched] = createSignal(false);
+const [canRejoin, setCanRejoin] = createSignal(true);
 const rejoin = vi.fn();
 vi.mock("@revolt/rtc", () => ({
   useVoice: () => ({
     state,
     notice,
+    pttLatched: latched,
+    canRejoin,
     error: () => undefined,
     channel: () => ({ id: "voice-1" }),
     rejoin,
@@ -35,6 +39,8 @@ beforeEach(() => {
   document.body.replaceChildren(document.createElement("div"));
   setState("CONNECTED");
   setNotice(undefined);
+  setLatched(false);
+  setCanRejoin(true);
   rejoin.mockClear();
   dispose = render(
     () => (
@@ -67,6 +73,18 @@ describe("call status", () => {
     );
     setNotice(undefined);
     expect(status().textContent).toBe("");
+  });
+
+  it("shows when talking was turned on from another app", () => {
+    expect(document.body.textContent).not.toContain("Talking (toggle on)");
+    setLatched(true);
+    expect(document.body.textContent).toContain("Talking (toggle on)");
+  });
+
+  it("offers no Rejoin when another tab or device took the seat", () => {
+    setCanRejoin(false);
+    setState("DISCONNECTED");
+    expect(document.querySelector("button")).toBeNull();
   });
 
   it("offers Rejoin once reconnecting gave up", () => {

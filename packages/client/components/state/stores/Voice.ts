@@ -74,6 +74,11 @@ export interface TypeVoice {
   inputMode: VoiceInputMode;
   /** Physical key (`KeyboardEvent.code`) held to talk */
   pttKey: string;
+  /**
+   * Desktop app: Ctrl/Cmd+Shift with the push-to-talk key turns talking on
+   * and off from other apps. Off until the person turns it on.
+   */
+  globalTalk: boolean;
 
   /**
    * Voice activity: let Zrzur pick the input sensitivity (true) or use
@@ -134,6 +139,7 @@ export class Voice extends AbstractStore<"voice", TypeVoice> {
       micOn: true,
       inputMode: "voice",
       pttKey: "Backquote",
+      globalTalk: false,
       inputSensitivityAuto: true,
       inputThreshold: DEFAULT_THRESHOLD_DB,
       highQualityAudio: false,
@@ -232,6 +238,10 @@ export class Voice extends AbstractStore<"voice", TypeVoice> {
 
     if (typeof input.pttKey === "string" && pttKeyAllowed(input.pttKey)) {
       data.pttKey = input.pttKey;
+    }
+
+    if (typeof input.globalTalk === "boolean") {
+      data.globalTalk = input.globalTalk;
     }
 
     if (typeof input.inputSensitivityAuto === "boolean") {
@@ -579,6 +589,20 @@ export class Voice extends AbstractStore<"voice", TypeVoice> {
    */
   get pttKey(): string {
     return this.get().pttKey ?? "Backquote";
+  }
+
+  /**
+   * Set talking from other apps (desktop app)
+   */
+  set globalTalk(value: boolean) {
+    this.set("globalTalk", value);
+  }
+
+  /**
+   * Get talking from other apps (desktop app)
+   */
+  get globalTalk(): boolean {
+    return this.get().globalTalk ?? false;
   }
 
   /**

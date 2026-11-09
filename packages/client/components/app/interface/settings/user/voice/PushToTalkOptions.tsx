@@ -8,6 +8,7 @@ import { useVoice } from "@revolt/rtc";
 import {
   desktopPushToTalk,
   globalPttCombo,
+  globalTalkAllowed,
 } from "@revolt/rtc/desktopPushToTalk";
 import { useState } from "@revolt/state";
 import {
@@ -16,6 +17,7 @@ import {
   MenuItem,
   SettingsRow,
   SettingsSection,
+  Toggle,
 } from "@revolt/ui";
 import { Icon } from "@revolt/ui/icons/Icon";
 
@@ -75,14 +77,10 @@ export function PushToTalkOptions() {
     <SettingsSection
       title={<Trans>Push to talk</Trans>}
       description={
-        desktop ? (
-          t`Hold the key while Zrzur is in front. From other apps, ${combo()} turns talking on and off.`
-        ) : (
-          <Trans>
-            Push to talk works while Zrzur is the active window and you are not
-            typing.
-          </Trans>
-        )
+        <Trans>
+          Push to talk works while Zrzur is the active window and you are not
+          typing.
+        </Trans>
       }
     >
       <SettingsRow
@@ -122,9 +120,7 @@ export function PushToTalkOptions() {
               ? refused()
                 ? t`That key is needed elsewhere. Press another key, or Esc to cancel.`
                 : t`Press the key you want to hold. Esc cancels.`
-              : desktop && call?.globalPtt() === "unavailable"
-                ? t`${combo()} is not available from other apps. Try another key.`
-                : undefined
+              : undefined
           }
           control={(ids) => (
             <Controls>
@@ -148,6 +144,32 @@ export function PushToTalkOptions() {
                 {recording() ? t`Cancel` : t`Change key`}
               </Button>
             </Controls>
+          )}
+        />
+      </Show>
+      {/* desktop app only: a toggle that works while Zrzur is in the
+          background (Electron sees no key release outside the window) */}
+      <Show when={desktop && voice.inputMode === "ptt"}>
+        <SettingsRow
+          icon={<Icon name="desktop" size={20} />}
+          title={<Trans>Talk from other apps</Trans>}
+          description={
+            !globalTalkAllowed(voice.pttKey)
+              ? t`Other apps use ${combo()} for editing. Choose another key to use this.`
+              : voice.globalTalk && call?.globalPtt() === "unavailable"
+                ? t`${combo()} is not available from other apps. Try another key.`
+                : t`${combo()} turns talking on and off while Zrzur is in the background.`
+          }
+          disabled={!globalTalkAllowed(voice.pttKey)}
+          onClick={() => (voice.globalTalk = !voice.globalTalk)}
+          control={(ids) => (
+            <Toggle
+              checked={voice.globalTalk && globalTalkAllowed(voice.pttKey)}
+              disabled={!globalTalkAllowed(voice.pttKey)}
+              onChange={() => (voice.globalTalk = !voice.globalTalk)}
+              aria-labelledby={ids.labelId}
+              aria-describedby={ids.descriptionId}
+            />
           )}
         />
       </Show>

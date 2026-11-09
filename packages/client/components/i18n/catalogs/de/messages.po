@@ -22042,7 +22042,7 @@ msgstr "Verbindung verloren"
 
 #: components/ui/components/features/voice/callCard/VoiceCallCardStatus.tsx
 msgid "Connection lost. Reconnecting…"
-msgstr "Verbindung verloren. Neu verbinden…"
+msgstr "Verbindung verloren. Verbindung wird wiederhergestellt…"
 
 #: components/app/interface/settings/user/voice/VoiceProcessingOptions.tsx
 msgid "For music: 128 kbps stereo, with the processing below turned off."
@@ -22102,3 +22102,29 @@ msgstr "Dein Mikrofon ist wieder da."
 #: components/ui/components/features/voice/callCard/VoiceCallCardStatus.tsx
 msgid "Your speaker is back."
 msgstr "Dein Lautsprecher ist wieder da."
+
+#. placeholder {0}: combo()
+#: components/app/interface/settings/user/voice/PushToTalkOptions.tsx
+msgid "{0} turns talking on and off while Zrzur is in the background."
+msgstr "{0} schaltet das Sprechen ein und aus, während Zrzur im Hintergrund ist."
+
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "Desktop app, during a push-to-talk call, once turned on in voice settings."
+msgstr "Desktop-App, in einem Push-to-Talk-Anruf, sobald es in den Spracheinstellungen eingeschaltet ist."
+
+#. placeholder {0}: combo()
+#: components/app/interface/settings/user/voice/PushToTalkOptions.tsx
+msgid "Other apps use {0} for editing. Choose another key to use this."
+msgstr "Andere Apps nutzen {0} zum Bearbeiten. Wähle eine andere Taste, um das zu nutzen."
+
+#: components/app/interface/settings/user/voice/PushToTalkOptions.tsx
+msgid "Talk from other apps"
+msgstr "Aus anderen Apps sprechen"
+
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "Talk from other apps (on or off)"
+msgstr "Aus anderen Apps sprechen (ein oder aus)"
+
+#: components/ui/components/features/voice/callCard/VoiceCallCardStatus.tsx
+msgid "Talking (toggle on)"
+msgstr "Sprechen (Umschalter an)"

@@ -4,6 +4,7 @@ import { Trans, useLingui } from "@lingui/solid/macro";
 import { styled } from "styled-system/jsx";
 
 import { comboLabel, isMac, keyLabel } from "@revolt/keybinds/shortcuts";
+import { desktopPushToTalk } from "@revolt/rtc/desktopPushToTalk";
 import { useState } from "@revolt/state";
 import { Column, SettingsRow, SettingsSection } from "@revolt/ui";
 
@@ -34,6 +35,21 @@ export function KeybindsSettings() {
           description: <Trans>During a call.</Trans>,
           keys: [["Mod", "Shift", "D"]],
         },
+        // desktop app: the global talk toggle, with the person's own key
+        ...(desktopPushToTalk()
+          ? [
+              {
+                title: <Trans>Talk from other apps (on or off)</Trans>,
+                description: (
+                  <Trans>
+                    Desktop app, during a push-to-talk call, once turned on in
+                    voice settings.
+                  </Trans>
+                ),
+                keys: [["Mod", "Shift", keyLabel(voice.pttKey)]],
+              },
+            ]
+          : []),
       ],
     },
     {

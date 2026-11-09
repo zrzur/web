@@ -37,3 +37,28 @@ export function desktopPushToTalk(): DesktopPushToTalk | undefined {
 export function globalPttCombo(code: string, mac: boolean): string {
   return comboLabel(["Mod", "Shift", keyLabel(code)], mac).join(mac ? "" : "+");
 }
+
+/**
+ * Keys the desktop app never takes with Ctrl/Cmd+Shift, because other apps
+ * use those combinations for editing and moving around (the desktop app's
+ * pushToTalkKeys.ts refuses the same list; this one only explains it here)
+ */
+const NOT_GLOBAL =
+  /^(Key[ACFNTVWXZ]|Arrow(Up|Down|Left|Right)|Space|Home|End|PageUp|PageDown)$/;
+
+/** Whether this push-to-talk key can also talk from other apps */
+export function globalTalkAllowed(code: string): boolean {
+  return !NOT_GLOBAL.test(code);
+}
+
+/**
+ * A press of the global toggle. While muted or deafened nothing turns on;
+ * the mute sound says why nothing happened.
+ */
+export function latchPress(
+  latched: boolean,
+  canTalk: boolean,
+): { latched: boolean; sound: "mute" | "unmute" } {
+  if (!canTalk || latched) return { latched: false, sound: "mute" };
+  return { latched: true, sound: "unmute" };
+}

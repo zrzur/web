@@ -22093,3 +22093,29 @@ msgstr "عاد ميكروفونك."
 #: components/ui/components/features/voice/callCard/VoiceCallCardStatus.tsx
 msgid "Your speaker is back."
 msgstr "عادت سماعتك."
+
+#. placeholder {0}: combo()
+#: components/app/interface/settings/user/voice/PushToTalkOptions.tsx
+msgid "{0} turns talking on and off while Zrzur is in the background."
+msgstr "يشغّل {0} التحدث ويوقفه وزرزور في الخلفية."
+
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "Desktop app, during a push-to-talk call, once turned on in voice settings."
+msgstr "في تطبيق سطح المكتب، أثناء مكالمة بوضع اضغط للتحدث، بعد تشغيله في إعدادات الصوت."
+
+#. placeholder {0}: combo()
+#: components/app/interface/settings/user/voice/PushToTalkOptions.tsx
+msgid "Other apps use {0} for editing. Choose another key to use this."
+msgstr "تستخدم تطبيقات أخرى الاختصار {0} للتحرير. اختر مفتاحًا آخر لاستخدام هذه الميزة."
+
+#: components/app/interface/settings/user/voice/PushToTalkOptions.tsx
+msgid "Talk from other apps"
+msgstr "التحدث من تطبيقات أخرى"
+
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "Talk from other apps (on or off)"
+msgstr "التحدث من تطبيقات أخرى (تشغيل أو إيقاف)"
+
+#: components/ui/components/features/voice/callCard/VoiceCallCardStatus.tsx
+msgid "Talking (toggle on)"
+msgstr "التحدث مفعّل (تبديل)"

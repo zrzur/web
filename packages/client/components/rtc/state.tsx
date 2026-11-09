@@ -7,6 +7,7 @@ import {
   createSignal,
   JSX,
   lazy,
+  on,
   onCleanup,
   Setter,
   untrack,
@@ -50,7 +51,11 @@ import {
 } from "./audioQuality";
 import { deviceFallback } from "./callHealth";
 import { InRoom } from "./components/InRoom";
-import { desktopPushToTalk } from "./desktopPushToTalk";
+import {
+  desktopPushToTalk,
+  globalTalkAllowed,
+  latchPress,
+} from "./desktopPushToTalk";
 import { RoomState, TrackSource } from "./livekitConstants";
 import { type VoiceRuntime, loadVoiceRuntime } from "./loadVoiceRuntime";
 import { useVoiceError } from "./messages";
@@ -163,6 +168,13 @@ class Voice {
   pttLatched: Accessor<boolean>;
   #setPttLatched: Setter<boolean>;
 
+  /**
+   * Whether Rejoin makes sense after the call ended: not when this seat was
+   * taken by another tab or device of the same account
+   */
+  canRejoin: Accessor<boolean>;
+  #setCanRejoin: Setter<boolean>;
+
   /** A short notice about the call (reconnected, device unplugged) */
   notice: Accessor<CallNotice | undefined>;
   #setNotice: Setter<CallNotice | undefined>;
@@ -237,6 +249,10 @@ class Voice {
     this.pttLatched = pttLatched;
     this.#setPttLatched = setPttLatched;
 
+    const [canRejoin, setCanRejoin] = createSignal(true);
+    this.canRejoin = canRejoin;
+    this.#setCanRejoin = setCanRejoin;
+
     const [notice, setNotice] = createSignal<CallNotice>();
     this.notice = notice;
     this.#setNotice = setNotice;
@@ -251,6 +267,15 @@ class Voice {
     this.microphone = () =>
       this.unmuted() &&
       transmitting(voiceSettings.inputMode, pttHeld() || pttLatched());
+
+    // talking from other apps stops on mute, deafen and any change of room
+    createEffect(
+      on(
+        [() => this.unmuted(), () => this.channel()],
+        () => this.#setPttLatched(false),
+        { defer: true },
+      ),
+    );
 
     const [video, setVideo] = createSignal(false);
     this.video = video;
@@ -375,6 +400,7 @@ class Voice {
     this.disconnect(!!previousSession);
     const attempt = ++this.#connectionAttempt;
     this.#setError();
+    this.#setCanRejoin(true);
 
     void this.device.setWakeLocked().catch(() => undefined);
 
@@ -467,6 +493,9 @@ class Voice {
           if (channelId) this.#recentRemoval = { channelId, at: Date.now() };
           return;
         }
+        // the same account joined from another tab or device: that one
+        // has the seat now, a Rejoin here would only push it out
+        this.#setCanRejoin(reason !== lk.DisconnectReason.DUPLICATE_IDENTITY);
         this.#setState("DISCONNECTED");
         this.device.releaseWakeLock();
       }
@@ -599,6 +628,9 @@ class Voice {
         if (attempt !== this.#connectionAttempt) return;
         return this.connect(channel, undefined, previousSession, retry + 1);
       }
+      this.#setCanRejoin(
+        type !== "AlreadyConnected" && type !== "VoiceRejoinRefused",
+      );
       this.#setState("DISCONNECTED");
       this.device.releaseWakeLock();
       this.onErr(e);
@@ -639,6 +671,9 @@ class Voice {
 
   disconnect(quiet = false) {
     this.#recentRemoval = undefined;
+    // notices belong to the call that ends here
+    clearTimeout(this.#noticeTimer);
+    this.#setNotice();
     ++this.#connectionAttempt;
     this.device.releaseWakeLock();
     try {
@@ -712,7 +747,8 @@ class Voice {
   /** Join the same channel again after the call gave up reconnecting */
   rejoin() {
     const channel = this.channel();
-    if (channel && this.state() === "DISCONNECTED") void this.connect(channel);
+    if (channel && this.state() === "DISCONNECTED" && this.canRejoin())
+      void this.connect(channel);
   }
 
   /** Apply deviceFallback to the microphone and the speaker */
@@ -766,9 +802,9 @@ class Voice {
    * pressed. A sound says which way it went, since the window may be hidden.
    */
   togglePushToTalkLatch() {
-    const on = !this.pttLatched();
-    this.#setPttLatched(on);
-    if (this.unmuted()) this.sound.playSound(on ? "unmute" : "mute");
+    const { latched, sound } = latchPress(this.pttLatched(), this.unmuted());
+    this.#setPttLatched(latched);
+    this.sound.playSound(sound);
   }
 
   /** Stop talking from other apps (leaving the call, leaving push to talk) */
@@ -1290,7 +1326,14 @@ export function VoiceContext(props: { children: JSX.Element }) {
     onCleanup(() => stopListening());
     createEffect(() => {
       const key = state.voice.pttKey;
-      if (!inCall() || state.voice.inputMode !== "ptt") {
+      if (
+        !inCall() ||
+        state.voice.inputMode !== "ptt" ||
+        // off until the person turns "Talk from other apps" on, and never
+        // for keys other apps need with Ctrl+Shift
+        !state.voice.globalTalk ||
+        !globalTalkAllowed(key)
+      ) {
         voice.setGlobalPtt("off");
         return;
       }
