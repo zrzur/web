@@ -228,6 +228,10 @@ export function SearchBox(props: {
     const next = replaceToken(draft(), at.start, at.end, suggestion.insert);
     setDraft(next.text);
     setActive(-1);
+    // A finished value (not a keyword like "from:") closes the list until the next
+    // keystroke, so the next Enter searches instead of picking whatever row the
+    // resting pointer now sits on.
+    if (!suggestion.insert.trimEnd().endsWith(":")) setOpen(false);
     queueMicrotask(() => {
       input.focus();
       input.setSelectionRange(next.caret, next.caret);
@@ -357,7 +361,11 @@ export function SearchBox(props: {
                     e.preventDefault();
                     choose(suggestion);
                   }}
-                  onMouseEnter={() => setActive(index())}
+                  // only a moving pointer picks a row: a list redrawn under a resting
+                  // pointer must not change what Enter does
+                  onMouseMove={() => {
+                    if (active() !== index()) setActive(index());
+                  }}
                 >
                   <Show when={suggestion.avatar !== undefined}>
                     <Avatar src={suggestion.avatar} size={24} />

@@ -38,7 +38,8 @@ function Frame(props: { origin: MessageForward; children: JSX.Element }) {
   const link = () =>
     originLink(props.origin, (id) => client().channels.get(id));
 
-  const sentAt = () => dayjs(props.origin.sent_at).format("LLL");
+  // Unicode isolates keep a Latin place name or date in one piece inside Arabic text
+  const sentAt = () => `⁨${dayjs(props.origin.sent_at).format("LLL")}⁩`;
 
   return (
     <>
@@ -61,7 +62,7 @@ function Frame(props: { origin: MessageForward; children: JSX.Element }) {
                 data-testid="forwarded-origin"
                 onClick={() => navigate(target().path)}
               >
-                {t`From ${target().place} · ${sentAt()}`}
+                {t`From ${`⁨${target().place}⁩`} · ${sentAt()}`}
               </OriginLink>
             )}
           </Show>

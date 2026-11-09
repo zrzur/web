@@ -44,7 +44,8 @@ export function useSearchLabels() {
     })[value];
 
   const problem = (problem: SearchProblem) => {
-    const value = problem.value;
+    // isolated, so a Latin value keeps its quotes and full stop on the right side in Arabic
+    const value = `⁨${problem.value ?? ""}⁩`;
     switch (problem.reason) {
       case "unknown-user":
         return t`No member called "${value}".`;
