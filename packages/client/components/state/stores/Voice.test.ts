@@ -84,7 +84,38 @@ describe("Voice store: push to talk", () => {
     } as unknown as Parameters<ReturnType<typeof store>["clean"]>[0]);
     expect(data.inputMode).toBe("voice");
     expect(data.pttKey).toBe("Backquote");
-    expect(store().clean({ pttKey: 5 } as unknown as Parameters<ReturnType<typeof store>["clean"]>[0])
-        .pttKey).toBe("Backquote");
+    expect(
+      store().clean({ pttKey: 5 } as unknown as Parameters<
+        ReturnType<typeof store>["clean"]
+      >[0]).pttKey,
+    ).toBe("Backquote");
+  });
+});
+
+describe("Voice store: input sensitivity", () => {
+  it("starts on automatic with a -50 dB manual threshold ready", () => {
+    const data = store().default();
+    expect(data.inputSensitivityAuto).toBe(true);
+    expect(data.inputThreshold).toBe(-50);
+  });
+
+  it("keeps a saved manual threshold", () => {
+    const data = store().clean({
+      inputSensitivityAuto: false,
+      inputThreshold: -37,
+    });
+    expect(data.inputSensitivityAuto).toBe(false);
+    expect(data.inputThreshold).toBe(-37);
+  });
+
+  it("keeps thresholds inside the slider range and drops nonsense", () => {
+    expect(store().clean({ inputThreshold: -300 }).inputThreshold).toBe(-80);
+    expect(store().clean({ inputThreshold: 12 }).inputThreshold).toBe(0);
+    const bad = store().clean({
+      inputSensitivityAuto: "no",
+      inputThreshold: "loud",
+    } as unknown as Parameters<ReturnType<typeof store>["clean"]>[0]);
+    expect(bad.inputSensitivityAuto).toBe(true);
+    expect(bad.inputThreshold).toBe(-50);
   });
 });

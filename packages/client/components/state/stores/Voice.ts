@@ -1,4 +1,5 @@
 import { type VoiceInputMode, pttKeyAllowed } from "../../keybinds/shortcuts";
+import { DEFAULT_THRESHOLD_DB, clampThreshold } from "../../rtc/voiceGate";
 
 import { State } from "..";
 
@@ -61,6 +62,15 @@ export interface TypeVoice {
   /** Physical key (`KeyboardEvent.code`) held to talk */
   pttKey: string;
 
+  /**
+   * Voice activity: let Zrzur pick the input sensitivity (true) or use
+   * `inputThreshold`. Stored on this device only (the store is not synced),
+   * because every microphone and room needs its own value.
+   */
+  inputSensitivityAuto: boolean;
+  /** Manual input sensitivity: level in dBFS (-80 to 0) the voice must reach */
+  inputThreshold: number;
+
   userVolumes: Record<string, number>;
   userMutes: Record<string, boolean>;
 
@@ -104,6 +114,8 @@ export class Voice extends AbstractStore<"voice", TypeVoice> {
       micOn: true,
       inputMode: "voice",
       pttKey: "Backquote",
+      inputSensitivityAuto: true,
+      inputThreshold: DEFAULT_THRESHOLD_DB,
       userVolumes: {},
       userMutes: {},
       screenShareVolumes: {},
@@ -186,6 +198,14 @@ export class Voice extends AbstractStore<"voice", TypeVoice> {
 
     if (typeof input.pttKey === "string" && pttKeyAllowed(input.pttKey)) {
       data.pttKey = input.pttKey;
+    }
+
+    if (typeof input.inputSensitivityAuto === "boolean") {
+      data.inputSensitivityAuto = input.inputSensitivityAuto;
+    }
+
+    if (typeof input.inputThreshold === "number") {
+      data.inputThreshold = clampThreshold(input.inputThreshold);
     }
 
     if (typeof input.userVolumes === "object") {
@@ -507,5 +527,33 @@ export class Voice extends AbstractStore<"voice", TypeVoice> {
    */
   get pttKey(): string {
     return this.get().pttKey ?? "Backquote";
+  }
+
+  /**
+   * Set whether the input sensitivity is automatic
+   */
+  set inputSensitivityAuto(value: boolean) {
+    this.set("inputSensitivityAuto", value);
+  }
+
+  /**
+   * Get whether the input sensitivity is automatic
+   */
+  get inputSensitivityAuto(): boolean {
+    return this.get().inputSensitivityAuto ?? true;
+  }
+
+  /**
+   * Set the manual input sensitivity (dBFS, kept between -80 and 0)
+   */
+  set inputThreshold(value: number) {
+    this.set("inputThreshold", clampThreshold(value));
+  }
+
+  /**
+   * Get the manual input sensitivity (dBFS)
+   */
+  get inputThreshold(): number {
+    return this.get().inputThreshold ?? DEFAULT_THRESHOLD_DB;
   }
 }
