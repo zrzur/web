@@ -87,8 +87,8 @@ export function GettingStarted(props: { onNavigate: (href: string) => void }) {
       </p>
       <p>
         <Trans>
-          Do this before the first run. A bot that is not in the server gets
-          403 MissingPermission for its channels, which looks like a missing
+          Do this before the first run. A bot that is not in the server gets 403
+          MissingPermission for its channels, which looks like a missing
           permission.
         </Trans>{" "}
         {link(
