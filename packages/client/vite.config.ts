@@ -15,6 +15,7 @@ import codegenPlugin from "./codegen.plugin";
 import { emitterInspect } from "./scripts/emitterInspect.mjs";
 import { polyfillGate } from "./scripts/polyfillGate.mjs";
 import { precacheShell } from "./scripts/precacheShell.mjs";
+import { preloadApp } from "./scripts/preloadApp.mjs";
 import { buildDefine, readReleaseInfo } from "./scripts/release-info.mjs";
 import { thirdPartyNotices } from "./scripts/third-party-notices.mjs";
 
@@ -115,6 +116,8 @@ export default defineConfig(({ command }) => {
         renderLegacyChunks: false,
       }),
       polyfillGate(),
+      // the app's files start with the small first file, not after it
+      preloadApp(),
       shell.plugin,
       VitePWA({
         srcDir: "src",

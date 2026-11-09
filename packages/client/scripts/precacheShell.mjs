@@ -1,11 +1,12 @@
 /**
- * The service worker installs only the shell: the entry, the screens every
+ * The service worker installs only the shell: the entry, the app it loads
+ * (src/app.tsx; not the Discover and Designs sites), the screens every
  * signed-in person opens, and the files they import. Everything else
  * (languages, settings, Discover, Designs, voice, fonts) is cached the first
  * time it is used, see src/serviceWorker.ts.
  */
 const SHELL_SCREENS =
-  /\/src\/(Interface|interface\/(Home|ServerHome|channels\/ChannelPage))\.tsx$/;
+  /\/src\/(app|Interface|interface\/(Home|ServerHome|channels\/ChannelPage))\.tsx$/;
 
 /** Output files of the shell, from a Rollup output bundle */
 export function shellFiles(bundle) {

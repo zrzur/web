@@ -51,6 +51,28 @@ describe("precache shell", () => {
     ]);
   });
 
+  it("takes the app the first file loads, and leaves out the Discover and Designs sites", () => {
+    const split = Object.fromEntries(
+      [
+        chunk("assets/index.js", { isEntry: true }),
+        chunk("assets/app.js", {
+          facadeModuleId: "/x/packages/client/src/app.tsx",
+          imports: ["assets/mount.js"],
+        }),
+        chunk("assets/mount.js"),
+        chunk("assets/sites.js", {
+          facadeModuleId: "/x/packages/client/src/sites.tsx",
+          imports: ["assets/mount.js"],
+        }),
+      ].map((c) => [c.fileName, c]),
+    );
+    expect([...shellFiles(split)].sort()).toEqual([
+      "assets/app.js",
+      "assets/index.js",
+      "assets/mount.js",
+    ]);
+  });
+
   it("leaves out languages and rarely opened screens", () => {
     const files = shellFiles(bundle);
     expect(files.has("assets/Settings.js")).toBe(false);
