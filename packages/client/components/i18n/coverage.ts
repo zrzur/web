@@ -59,6 +59,6 @@ export const LANGUAGE_COVERAGE: Record<string, number> = {
   "ur": 0,
   "vec": 1,
   "vi": 4,
-  "zh-Hans": 3,
+  "zh-Hans": 100,
   "zh-Hant": 4,
 };
