@@ -13,11 +13,12 @@ import type { Bot } from "@zrzur/sdk/solid";
 import { styled } from "styled-system/jsx";
 
 import {
-  type ApplicationCommand,
   interactionApi,
   oauthApi,
 } from "@revolt/app/interface/channels/text/interactions";
 import { ViewBot } from "@revolt/app/interface/settings/user/bots";
+import { CommandManager } from "@revolt/app/interface/settings/user/bots/CommandManager";
+import type { RegisteredCommand } from "@revolt/app/interface/settings/user/bots/commandForm";
 import { useClient } from "@revolt/client";
 import { useError } from "@revolt/i18n";
 import { useModals } from "@revolt/modal";
@@ -273,143 +274,46 @@ function CopyField(props: { label: string; value: string }) {
   );
 }
 
+/**
+ * The Commands tab: the form editor for the bot's global commands. Saving
+ * sends the whole list (PUT), deleting uses the command's own route; both
+ * are the routes a bot uses itself.
+ */
 function Commands(props: { bot: Bot }) {
-  const { t } = useLingui();
   const client = useClient();
+  const permissionNames = usePermissionNames();
   const [commands, { refetch }] = createResource(
     () => props.bot.id,
     (id) => interactionApi.commands(client(), id),
   );
-  const [json, setJson] = createSignal("");
-  const [error, setError] = createSignal<string>();
-  const [busy, setBusy] = createSignal(false);
-
-  const describeError = useError();
-  const describe = (error: unknown) =>
-    error instanceof SyntaxError
-      ? t`This is not valid JSON.`
-      : describeError(error);
-
-  async function sync() {
-    setError(undefined);
-    setBusy(true);
-    try {
-      const list = JSON.parse(json());
-      if (!Array.isArray(list)) throw new SyntaxError();
-      await interactionApi.syncCommands(client(), props.bot.id, list);
-      setJson("");
-      refetch();
-    } catch (err) {
-      setError(describe(err));
-    } finally {
-      setBusy(false);
-    }
-  }
-
-  // first click asks, second click deletes
-  const [confirming, setConfirming] = createSignal<string>();
-  async function remove(command: ApplicationCommand) {
-    if (confirming() !== command._id) {
-      setConfirming(command._id);
-      return;
-    }
-    setConfirming(undefined);
-    try {
-      await interactionApi.deleteCommand(client(), props.bot.id, command._id);
-      refetch();
-    } catch (err) {
-      setError(describe(err));
-    }
-  }
 
   return (
     <Section>
-      <DocsLink href="/developers/docs/commands#register">
-        <Trans>How commands work</Trans>
-      </DocsLink>
-      <Show
-        when={commands()?.length}
-        fallback={
-          <Muted>
-            <Trans>No commands registered yet.</Trans>
-          </Muted>
+      <CommandManager
+        commands={
+          commands.state === "ready"
+            ? (commands() as RegisteredCommand[])
+            : undefined
         }
-      >
-        <Table>
-          <thead>
-            <tr>
-              <th>{t`Command`}</th>
-              <th>{t`Type`}</th>
-              <th>{t`Options`}</th>
-              <th>{t`Revision`}</th>
-              <th />
-            </tr>
-          </thead>
-          <tbody>
-            <For each={commands()}>
-              {(command) => (
-                <tr>
-                  <td>
-                    <strong>
-                      <bdi>
-                        {command.type === "ChatInput"
-                          ? `/${command.name}`
-                          : command.name}
-                      </bdi>
-                    </strong>
-                    <Show when={command.description}>
-                      <div>
-                        <Muted>{command.description}</Muted>
-                      </div>
-                    </Show>
-                  </td>
-                  <td>{command.type}</td>
-                  <td>{command.options?.length ?? 0}</td>
-                  <td>
-                    <code title={command.version}>
-                      {command.version.slice(-6)}
-                    </code>
-                  </td>
-                  <td>
-                    <SmallButton
-                      type="button"
-                      data-danger=""
-                      onClick={() => remove(command)}
-                    >
-                      {confirming() === command._id
-                        ? t`Confirm delete`
-                        : t`Delete`}
-                    </SmallButton>
-                  </td>
-                </tr>
-              )}
-            </For>
-          </tbody>
-        </Table>
-      </Show>
-      <Field>
-        <span>{t`Replace all global commands (JSON list)`}</span>
-        <TextArea
-          rows={6}
-          spellcheck={false}
-          dir="ltr"
-          placeholder={'[{ "name": "hello", "description": "Say hello" }]'}
-          value={json()}
-          onInput={(e) => setJson(e.currentTarget.value)}
-        />
-      </Field>
-      <Show when={error()}>
-        <ErrorText role="alert">{error()}</ErrorText>
-      </Show>
-      <div>
-        <SmallButton
-          type="button"
-          disabled={busy() || !json().trim()}
-          onClick={sync}
-        >
-          {busy() ? t`Saving…` : t`Save commands`}
-        </SmallButton>
-      </div>
+        permissionNames={permissionNames}
+        save={async (list) => {
+          await interactionApi.syncCommands(
+            client(),
+            props.bot.id,
+            list as Parameters<typeof interactionApi.syncCommands>[2],
+          );
+          await refetch();
+        }}
+        remove={async (id) => {
+          await interactionApi.deleteCommand(client(), props.bot.id, id);
+          await refetch();
+        }}
+        docsLink={
+          <DocsLink href="/developers/docs/commands#register">
+            <Trans>How commands work</Trans>
+          </DocsLink>
+        }
+      />
     </Section>
   );
 }
@@ -990,26 +894,6 @@ const SmallButton = styled("button", {
     _disabled: { opacity: 0.5, cursor: "not-allowed" },
     "&:active": { boxShadow: "var(--z-btn-pressed)" },
     _focusVisible: { outline: "2px solid var(--z-focus)" },
-  },
-});
-
-const Table = styled("table", {
-  base: {
-    width: "100%",
-    borderCollapse: "collapse",
-    fontSize: "14px",
-    "& th": {
-      textAlign: "start",
-      color: "var(--z-fg-muted)",
-      fontSize: "12px",
-      fontWeight: 600,
-      padding: "6px 8px",
-    },
-    "& td": {
-      padding: "8px",
-      borderBlockStart: "1px solid var(--z-border-subtle)",
-      verticalAlign: "top",
-    },
   },
 });
 
