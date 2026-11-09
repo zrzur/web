@@ -28,12 +28,13 @@ export function AppsSubMenu(props: {
   onClose?: () => void;
 }) {
   const client = useClient();
+  // this channel's list (channel rules apply), or the server's, or the
+  // bot's own in a DM with it
   const key = () => {
-    if (props.serverId) return props.serverId;
     const channel = props.channelId
       ? client().channels.get(props.channelId)
       : undefined;
-    return channel ? commandsKey(channel) : undefined;
+    return (channel ? commandsKey(channel) : undefined) ?? props.serverId;
   };
   const [commands] = createResource(key, (key) =>
     loadCommands(client(), key).catch(() => undefined),

@@ -3,6 +3,7 @@ import { describe, expect, it, vi } from "vitest";
 import {
   AutocompleteTimeout,
   attachInteractions,
+  commandsKey,
   interactionState,
   requestAutocomplete,
   useComponent,
@@ -133,5 +134,27 @@ describe("a failed button or menu", () => {
         (entry) => entry.componentKey === "MSG:vote" && !entry.label,
       ),
     ).toBe(true);
+  });
+});
+
+describe("where a channel's commands come from", () => {
+  it("a server channel asks for that channel, so channel rules apply", () => {
+    expect(
+      commandsKey({ id: "CH", type: "TextChannel", serverId: "SRV" }),
+    ).toBe("SRV#CH");
+  });
+
+  it("a DM with a bot uses the bot's global commands; other DMs have none", () => {
+    expect(
+      commandsKey({
+        id: "D",
+        type: "DirectMessage",
+        recipient: { id: "BOT", bot: { owner: "o" } },
+      }),
+    ).toBe("dm:BOT");
+    expect(
+      commandsKey({ id: "D", type: "DirectMessage", recipient: { id: "P" } }),
+    ).toBeUndefined();
+    expect(commandsKey({ id: "G", type: "Group" })).toBeUndefined();
   });
 });

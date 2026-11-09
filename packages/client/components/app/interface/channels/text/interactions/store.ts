@@ -243,9 +243,11 @@ function onEvent(event: InteractionEvent) {
           delete draft.commands[event.server_id];
         }),
       );
-      // a bot's global commands changed: its DM lists load again too
+      // the server's channel lists and, as a bot's global commands may
+      // have changed, the DM lists load again too
       for (const key of Object.keys(state.commands)) {
-        if (!key.startsWith("dm:")) continue;
+        if (!key.startsWith("dm:") && !key.startsWith(`${event.server_id}#`))
+          continue;
         commandRequests.delete(key);
         setState(
           produce((draft) => {
@@ -267,15 +269,18 @@ export function attachInteractions(client: Client) {
 }
 
 /**
- * Where a channel's commands come from: its server, or the bot of a DM with
- * a bot (`dm:<bot id>`). Nothing for groups and DMs with people.
+ * Where a channel's commands come from: its server, asked for this channel
+ * so the server's channel rules apply (`<server>#<channel>`), or the bot of a
+ * DM with a bot (`dm:<bot id>`). Nothing for groups and DMs with people.
  */
 export function commandsKey(channel: {
+  id: string;
   type: string;
   serverId?: string;
   recipient?: { id: string; bot?: unknown };
 }): string | undefined {
-  if (channel.type === "TextChannel") return channel.serverId;
+  if (channel.type === "TextChannel" && channel.serverId)
+    return `${channel.serverId}#${channel.id}`;
   if (channel.type === "DirectMessage" && channel.recipient?.bot)
     return `dm:${channel.recipient.id}`;
   return undefined;
@@ -283,9 +288,33 @@ export function commandsKey(channel: {
 
 /** Load the commands for a key from `commandsKey` */
 export function loadCommands(client: Client, key: string) {
-  return key.startsWith("dm:")
-    ? loadDmCommands(client, key.slice(3))
-    : loadServerCommands(client, key);
+  if (key.startsWith("dm:")) return loadDmCommands(client, key.slice(3));
+  const [serverId, channelId] = key.split("#");
+  return channelId
+    ? loadChannelCommands(client, serverId, channelId)
+    : loadServerCommands(client, serverId);
+}
+
+/** The commands this member may use in one channel of a server */
+export function loadChannelCommands(
+  client: Client,
+  serverId: string,
+  channelId: string,
+) {
+  const key = `${serverId}#${channelId}`;
+  if (state.commands[key]) return Promise.resolve(state.commands[key]);
+  let request = commandRequests.get(key);
+  if (!request) {
+    request = interactionApi
+      .serverCommands(client, serverId, channelId)
+      .then((commands) => {
+        setState("commands", key, commands);
+        return commands;
+      });
+    request.catch(() => commandRequests.delete(key));
+    commandRequests.set(key, request);
+  }
+  return request;
 }
 
 /** A bot's global commands for the DM with it, fetched once until they change */

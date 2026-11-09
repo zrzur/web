@@ -11,8 +11,18 @@ export const InteractionError = ApiError;
 export type InteractionError = ApiError;
 
 export const interactionApi = {
-  serverCommands: async (client: Client, serverId: string) =>
-    withoutNull(await client.api.get(`/servers/${serverId}/commands`)),
+  /** With `channelId`, the server's channel rules are applied too */
+  serverCommands: async (
+    client: Client,
+    serverId: string,
+    channelId?: string,
+  ) =>
+    withoutNull(
+      await client.api.get(
+        `/servers/${serverId}/commands`,
+        channelId ? { channel: channelId } : undefined,
+      ),
+    ),
 
   /** A bot's global commands, for its DM and its pages */
   botCommands: async (client: Client, botId: string) =>
