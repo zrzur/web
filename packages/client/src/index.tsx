@@ -20,7 +20,7 @@ import {
 import type { Language } from "@revolt/i18n/Languages";
 
 import siteCatalogs from "virtual:zrzur-site-catalogs";
-import { opensSignIn } from "./boot";
+import { bootFailed, bootLoaded, opensSignIn } from "./boot";
 import "./index.css";
 import "./serviceWorkerInterface";
 import { isDesignsSite, isDiscoverSite } from "./siteKind";
@@ -44,22 +44,37 @@ function escapeSelfEmbed() {
 
 if (!escapeSelfEmbed()) {
   const site = isDesignsSite() || isDiscoverSite();
+  const signIn = opensSignIn(window.location.pathname);
   // the sites' own pages need a fifth of the messages: a small file first,
   // the full one right after (sign-in pages need the full one at once)
-  if (site && !opensSignIn(window.location.pathname))
-    preferSiteCatalogs(siteCatalogs);
+  if (site && !signIn) preferSiteCatalogs(siteCatalogs);
 
   // the provider asks for the same catalog and gets this download; a
   // failure is handled there (it falls back to English)
   importCatalog(browserPreferredLanguage() as Language).catch(() => {});
 
-  if (site) {
-    import("./sites");
-  } else {
-    if (opensSignIn(window.location.pathname)) {
-      import("./Auth");
-      import("@revolt/auth/src/flows/FlowLogin");
-    }
-    import("./app");
+  if (signIn) {
+    // on the sites too: their /login is the same sign-in page; a failure
+    // here shows when the page itself asks for it
+    import("./Auth").catch(() => {});
+    import("@revolt/auth/src/flows/FlowLogin").catch(() => {});
   }
+
+  const session = () => {
+    try {
+      return window.sessionStorage;
+    } catch {
+      return undefined;
+    }
+  };
+  (site ? import("./sites") : import("./app")).then(
+    () => bootLoaded(session()),
+    () =>
+      bootFailed({
+        storage: session(),
+        reload: () => window.location.reload(),
+        root: document.getElementById("root"),
+        languages: navigator.languages,
+      }),
+  );
 }

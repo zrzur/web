@@ -1,3 +1,4 @@
+/* @refresh reload */
 /**
  * What the app and the Designs / Discover sites share: the contexts every
  * page runs in, the sign-in routes and the render call

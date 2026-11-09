@@ -1,3 +1,4 @@
+/* @refresh reload */
 /**
  * The app: every page of the signed-in app, plus sign-in
  */

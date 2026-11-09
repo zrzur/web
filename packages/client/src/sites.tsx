@@ -1,3 +1,4 @@
+/* @refresh reload */
 /**
  * The standalone Designs and Discover sites: their own first download, without
  * the chat app's pages
