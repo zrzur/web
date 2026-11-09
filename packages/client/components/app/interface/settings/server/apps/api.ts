@@ -13,6 +13,14 @@ export const serverAppsApi = {
   remove: (client: Client, serverId: string, applicationId: string) =>
     client.api.delete(`/servers/${serverId}/applications/${applicationId}`),
 
+  /** Every command of the app in this server, unfiltered (managers only) */
+  commands: async (client: Client, serverId: string, applicationId: string) =>
+    withoutNull(
+      await client.api.get(
+        `/servers/${serverId}/applications/${applicationId}/commands`,
+      ),
+    ),
+
   rules: async (client: Client, serverId: string, applicationId: string) =>
     withoutNull(
       await client.api.get(

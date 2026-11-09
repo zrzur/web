@@ -11,16 +11,15 @@ import { Plural, Trans, useLingui } from "@lingui/solid/macro";
 import type { Server } from "@zrzur/sdk/solid";
 import { styled } from "styled-system/jsx";
 
-import { interactionApi } from "@revolt/app/interface/channels/text/interactions/api";
-import { dedupeCommands } from "@revolt/app/interface/channels/text/interactions/commandList";
 import { localized } from "@revolt/app/interface/channels/text/interactions/types";
 import { useClient } from "@revolt/client";
-import { hasBit } from "@revolt/modal/modals/addBotPermissions";
+import { useError } from "@revolt/i18n";
+import { askedGroups } from "@revolt/modal/modals/addBotPermissions";
+import { usePermissionTitles } from "@revolt/modal/modals/permissionTitles";
 import { Avatar, Button, SettingsRow, SettingsSection } from "@revolt/ui";
 import { BotLabel } from "@revolt/ui/components/features/profiles/BotLabel";
 import { Icon } from "@revolt/ui/icons/Icon";
 
-import { usePermissionNames } from "../../../../../../src/interface/OAuth";
 import { useSettingsNavigation } from "../../Settings";
 import { ConfirmDialog } from "../ConfirmDialog";
 import { Anchor, PageStack } from "../layout";
@@ -37,19 +36,17 @@ export function ServerAppPage(props: { server: Server; appId: string }) {
   const { t, i18n } = useLingui();
   const client = useClient();
   const { navigate } = useSettingsNavigation();
-  const permissionNames = usePermissionNames();
+  const titles = usePermissionTitles();
+  const describeError = useError();
   const [removing, setRemoving] = createSignal(false);
 
   const [data] = createResource(
     () => [props.server.id, props.appId] as const,
     async ([serverId, appId]) => {
-      const [installs, rules, commands] = await Promise.all([
+      // every command of the app here, unfiltered: managers see them all
+      const [installs, commands] = await Promise.all([
         serverAppsApi.installed(client(), serverId),
-        serverAppsApi.rules(client(), serverId, appId).catch(() => []),
-        interactionApi.serverCommands(client(), serverId).catch(() => ({
-          applications: [],
-          commands: [],
-        })),
+        serverAppsApi.commands(client(), serverId, appId),
       ]);
       if (!client().users.get(appId)) {
         await client()
@@ -58,14 +55,20 @@ export function ServerAppPage(props: { server: Server; appId: string }) {
       }
       return {
         install: installs.find((entry) => entry.application._id === appId),
-        rules,
-        commands: dedupeCommands(
-          commands.commands.filter(
-            (command) => command.application_id === appId,
-          ),
-        ).sort((a, b) => a.name.localeCompare(b.name)),
+        commands: commands.sort(
+          (a, b) =>
+            a.name.localeCompare(b.name) ||
+            Number(!!a.server_id) - Number(!!b.server_id),
+        ),
       };
     },
+  );
+
+  // the rules, on their own: a failure here is shown, never read as
+  // "no rules", and the editors stay locked until they load
+  const [rules, { refetch: reloadRules }] = createResource(
+    () => [props.server.id, props.appId] as const,
+    ([serverId, appId]) => serverAppsApi.rules(client(), serverId, appId),
   );
 
   const user = () => client().users.get(props.appId);
@@ -81,12 +84,14 @@ export function ServerAppPage(props: { server: Server; appId: string }) {
     return id ? client().users.get(id) : undefined;
   };
   const granted = () =>
-    permissionNames.filter(([bit]) =>
-      hasBit(data()?.install?.permissions ?? 0, bit),
+    askedGroups(data()?.install?.permissions ?? 0).flatMap((group) =>
+      group.bits.map((bit) => titles.name(bit)),
     );
+  const rulesReady = () => !rules.loading && !rules.error && !!rules();
   const rulesFor = (commandId?: string) =>
-    data()?.rules.find((entry) => (entry.command_id ?? undefined) === commandId)
-      ?.permissions ?? [];
+    (rulesReady() ? rules()! : []).find(
+      (entry) => (entry.command_id ?? undefined) === commandId,
+    )?.permissions ?? [];
   const date = (value?: string) =>
     value
       ? new Intl.DateTimeFormat(i18n().locale, { dateStyle: "long" }).format(
@@ -182,9 +187,7 @@ export function ServerAppPage(props: { server: Server; appId: string }) {
             <SettingsRow
               icon={<Icon name="key" size={20} />}
               title={<Trans>Permissions</Trans>}
-              description={granted()
-                .map(([, name]) => name)
-                .join(" · ")}
+              description={granted().join(" · ")}
             />
           </Show>
           <Show when={role()}>
@@ -229,7 +232,31 @@ export function ServerAppPage(props: { server: Server; appId: string }) {
           </Trans>
         }
       >
-        <Show when={data()}>
+        <Show when={rules.error}>
+          <SettingsSection>
+            <SettingsRow
+              danger
+              icon={<Icon name="warning-circle" size={20} />}
+              title={
+                <Trans>
+                  The rules couldn't be loaded, so they can't be changed now.
+                </Trans>
+              }
+              description={describeError(rules.error)}
+              control={() => (
+                <Button size="sm" variant="tonal" onPress={reloadRules}>
+                  <Trans>Try again</Trans>
+                </Button>
+              )}
+            />
+          </SettingsSection>
+        </Show>
+        <Show when={rules.loading}>
+          <SettingsSection>
+            <SettingsRow title={<Trans>Loading…</Trans>} />
+          </SettingsSection>
+        </Show>
+        <Show when={data() && rulesReady()}>
           <SettingsSection title={<Trans>All commands</Trans>}>
             <RulesEditor
               server={props.server}
@@ -270,6 +297,13 @@ export function ServerAppPage(props: { server: Server; appId: string }) {
                             i18n().locale,
                           )}
                         </bdi>
+                      }
+                      secondary={
+                        command.server_id ? (
+                          <ScopeTag>
+                            <Trans>This server only</Trans>
+                          </ScopeTag>
+                        ) : undefined
                       }
                       description={
                         <CommandMeta
@@ -388,6 +422,19 @@ const TitleLine = styled("div", {
       color: "var(--z-fg-primary)",
       overflowWrap: "anywhere",
     },
+  },
+});
+
+/** A command registered for this server only, next to its global twin */
+const ScopeTag = styled("span", {
+  base: {
+    fontSize: "12px",
+    lineHeight: "20px",
+    paddingInline: "8px",
+    borderRadius: "var(--z-radius-pill)",
+    background: "var(--z-bg-raised)",
+    color: "var(--z-fg-secondary)",
+    whiteSpace: "nowrap",
   },
 });
 

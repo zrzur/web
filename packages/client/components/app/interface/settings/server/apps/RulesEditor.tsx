@@ -30,6 +30,8 @@ export function RulesEditor(props: {
   /** Saves the whole list; rejects on failure */
   onSave: (rules: Rule[]) => Promise<unknown>;
   label: string;
+  /** Locks every control (the rules could not be loaded) */
+  disabled?: boolean;
 }) {
   const { t } = useLingui();
   const client = useClient();
@@ -37,6 +39,8 @@ export function RulesEditor(props: {
 
   const [rules, setRules] = createSignal<Rule[]>(props.rules);
   const [saving, setSaving] = createSignal(false);
+  // nothing can be changed while a save is on its way
+  const locked = () => saving() || !!props.disabled;
   const [error, setError] = createSignal<string>();
 
   const [kind, setKind] = createSignal<RuleType>("Role");
@@ -50,6 +54,7 @@ export function RulesEditor(props: {
   );
 
   async function save(next: Rule[]) {
+    if (locked()) return;
     const before = rules();
     setRules(next);
     setSaving(true);
@@ -86,6 +91,12 @@ export function RulesEditor(props: {
       : rule.type === "Channel"
         ? channelName(rule.id)
         : memberName(rule.id);
+
+  const ruleKeys = createMemo(() =>
+    sortRules(rules(), props.server.id).map(
+      (rule) => `${rule.type}:${rule.id}`,
+    ),
+  );
 
   /** What the second menu offers for the chosen kind */
   const targets = createMemo(() => {
@@ -134,7 +145,7 @@ export function RulesEditor(props: {
   }
 
   return (
-    <Editor aria-label={props.label} aria-busy={saving()}>
+    <Editor aria-label={props.label} aria-busy={saving()} disabled={locked()}>
       <Show
         when={rules().length}
         fallback={
@@ -147,49 +158,56 @@ export function RulesEditor(props: {
         }
       >
         <Rows>
-          <For each={sortRules(rules(), props.server.id)}>
-            {(rule) => (
-              <li data-rule={`${rule.type}:${rule.id}`}>
-                <Icon
-                  name={
-                    rule.type === "Role"
-                      ? "shield"
-                      : rule.type === "Channel"
-                        ? "hash"
-                        : "user"
-                  }
-                  size={16}
-                />
-                <RuleName dir="auto">{name(rule)}</RuleName>
-                <Segmented
-                  aria-label={t`Allow or deny ${name(rule)}`}
-                  value={rule.permission ? "allow" : "deny"}
-                  options={[
-                    { value: "allow", label: t`Allow` },
-                    { value: "deny", label: t`Deny` },
-                  ]}
-                  onChange={(value) =>
-                    void save(
-                      setRule(rules(), {
-                        ...rule,
-                        permission: value === "allow",
-                      }),
-                    )
-                  }
-                />
-                <Button
-                  size="sm"
-                  variant="text"
-                  aria-label={t`Remove the rule for ${name(rule)}`}
-                  isDisabled={saving()}
-                  onPress={() =>
-                    void save(removeRule(rules(), rule.type, rule.id))
-                  }
-                >
-                  <Icon name="x" size={16} />
-                </Button>
-              </li>
-            )}
+          {/* rows keyed by type:id, so a row is not rebuilt when its rule changes */}
+          <For each={ruleKeys()}>
+            {(key) => {
+              const rule = () =>
+                rules().find((entry) => `${entry.type}:${entry.id}` === key)!;
+              return (
+                <Show when={rule()}>
+                  <li data-rule={key}>
+                    <Icon
+                      name={
+                        rule().type === "Role"
+                          ? "shield"
+                          : rule().type === "Channel"
+                            ? "hash"
+                            : "user"
+                      }
+                      size={16}
+                    />
+                    <RuleName dir="auto">{name(rule())}</RuleName>
+                    <Segmented
+                      aria-label={t`Allow or deny ${name(rule())}`}
+                      value={rule().permission ? "allow" : "deny"}
+                      options={[
+                        { value: "allow", label: t`Allow` },
+                        { value: "deny", label: t`Deny` },
+                      ]}
+                      onChange={(value) =>
+                        void save(
+                          setRule(rules(), {
+                            ...rule(),
+                            permission: value === "allow",
+                          }),
+                        )
+                      }
+                    />
+                    <Button
+                      size="sm"
+                      variant="text"
+                      aria-label={t`Remove the rule for ${name(rule())}`}
+                      isDisabled={locked()}
+                      onPress={() =>
+                        void save(removeRule(rules(), rule().type, rule().id))
+                      }
+                    >
+                      <Icon name="x" size={16} />
+                    </Button>
+                  </li>
+                </Show>
+              );
+            }}
           </For>
         </Rows>
       </Show>
@@ -226,7 +244,7 @@ export function RulesEditor(props: {
           ]}
           onChange={setAllow}
         />
-        <Button size="sm" isDisabled={!target() || saving()} onPress={add}>
+        <Button size="sm" isDisabled={!target() || locked()} onPress={add}>
           <Trans>Add rule</Trans>
         </Button>
       </AddRow>
@@ -238,8 +256,11 @@ export function RulesEditor(props: {
   );
 }
 
-const Editor = styled("div", {
+const Editor = styled("fieldset", {
   base: {
+    margin: 0,
+    border: "none",
+    minInlineSize: 0,
     display: "flex",
     flexDirection: "column",
     gap: "12px",
