@@ -17,4 +17,5 @@ export function subsetCatalog<T>(
   used: Set<string>,
 ): Record<string, T>;
 export function readCatalog(ts: string): Record<string, unknown>;
+export function checkSiteCatalog(roots: string[], usedCount: number): void;
 export function siteCatalogs(options: { catalogDir: string }): Plugin;

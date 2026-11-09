@@ -49,6 +49,24 @@ export function siteModules(roots, getInfo) {
   return seen;
 }
 
+/** Fewer messages than this means the scan broke, not that the sites shrank */
+const FEWEST_MESSAGES = 50;
+
+/**
+ * A broken scan would ship sites that show message ids until the full file
+ * arrives: stop the build instead
+ */
+export function checkSiteCatalog(roots, usedCount) {
+  if (roots.length !== 1)
+    throw new Error(
+      `site catalogs: expected one src/sites.tsx in the build, found ${roots.length}`,
+    );
+  if (usedCount < FEWEST_MESSAGES)
+    throw new Error(
+      `site catalogs: only ${usedCount} messages found for the Discover and Designs pages (at least ${FEWEST_MESSAGES} expected)`,
+    );
+}
+
 /** The catalog with only the used messages */
 export function subsetCatalog(messages, used) {
   return Object.fromEntries(
@@ -128,6 +146,11 @@ export function siteCatalogs({ catalogDir }) {
       const used = new Set();
       for (const id of siteModules(roots, (id) => this.getModuleInfo(id)))
         keysByModule.get(id.split("?")[0])?.forEach((key) => used.add(key));
+      try {
+        checkSiteCatalog(roots, used.size);
+      } catch (problem) {
+        this.error(problem.message);
+      }
       for (const [code, ref] of refs)
         this.setAssetSource(
           ref,

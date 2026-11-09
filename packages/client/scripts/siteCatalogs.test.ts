@@ -1,6 +1,7 @@
 import { describe, expect, it } from "vitest";
 
 import {
+  checkSiteCatalog,
   messageKeysIn,
   readCatalog,
   siteModules,
@@ -80,5 +81,14 @@ describe("site catalogs", () => {
       }
       expect(Object.keys(readCatalog(ts)).length, code).toBeGreaterThan(100);
     }
+  });
+
+  it("stops the build when the site pages were not found or use almost no messages", () => {
+    expect(() => checkSiteCatalog([], 900)).toThrow(/sites\.tsx/);
+    expect(() =>
+      checkSiteCatalog(["/a/sites.tsx", "/b/sites.tsx"], 900),
+    ).toThrow(/sites\.tsx/);
+    expect(() => checkSiteCatalog(["/src/sites.tsx"], 12)).toThrow(/12/);
+    expect(() => checkSiteCatalog(["/src/sites.tsx"], 900)).not.toThrow();
   });
 });
