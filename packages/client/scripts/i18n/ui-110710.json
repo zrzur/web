@@ -1,0 +1,310 @@
+{
+  "{0} of {1}": ["{0} من {1}", "{0} von {1}"],
+  "{0} of {1} slash commands · {2} menu commands": [
+    "{0} من {1} من أوامر الشرطة المائلة · {2} من أوامر القوائم",
+    "{0} von {1} Slash-Befehlen · {2} Menübefehle"
+  ],
+  "{0} options": ["الخيارات: {0}", "{0} Optionen"],
+  "A command of this type already has this name.": [
+    "يوجد أمر من هذا النوع بهذا الاسم.",
+    "Ein Befehl dieser Art hat diesen Namen schon."
+  ],
+  "A group holds only sub-commands.": [
+    "لا تضم المجموعة إلا أوامر فرعية.",
+    "Eine Gruppe enthält nur Unterbefehle."
+  ],
+  "A group needs at least one sub-command.": [
+    "تحتاج المجموعة إلى أمر فرعي واحد على الأقل.",
+    "Eine Gruppe braucht mindestens einen Unterbefehl."
+  ],
+  "A language tag is not valid.": [
+    "أحد رموز اللغات غير صالح.",
+    "Ein Sprachkürzel ist ungültig."
+  ],
+  "A sub-command cannot hold sub-commands.": [
+    "لا يضم الأمر الفرعي أوامر فرعية.",
+    "Ein Unterbefehl kann keine Unterbefehle enthalten."
+  ],
+  "A sub-command takes only a name, a description and options.": [
+    "لا يأخذ الأمر الفرعي إلا اسمًا ووصفًا وخيارات.",
+    "Ein Unterbefehl nimmt nur einen Namen, eine Beschreibung und Optionen."
+  ],
+  "Add choice": ["أضف اختيارًا", "Auswahlwert hinzufügen"],
+  "Add option": ["أضف خيارًا", "Option hinzufügen"],
+  "Advanced: JSON import and export": [
+    "متقدم: استيراد JSON وتصديره",
+    "Erweitert: JSON importieren und exportieren"
+  ],
+  "All names, descriptions and choices together have more than {max} characters.": [
+    "مجموع الأسماء والأوصاف والاختيارات يتجاوز {max} حرف.",
+    "Alle Namen, Beschreibungen und Auswahlwerte zusammen haben mehr als {max} Zeichen."
+  ],
+  "API changelog": ["سجل تغييرات الواجهة", "API-Änderungsprotokoll"],
+  "Arabic": ["العربية", "Arabisch"],
+  "At most {max} commands of this type.": [
+    "{max} أمرًا من هذا النوع على الأكثر.",
+    "Höchstens {max} Befehle dieser Art."
+  ],
+  "At most {max} languages.": [
+    "{max} لغة على الأكثر.",
+    "Höchstens {max} Sprachen."
+  ],
+  "At most {max} options on each level.": [
+    "{max} خيارًا على الأكثر في كل مستوى.",
+    "Höchstens {max} Optionen auf jeder Ebene."
+  ],
+  "Capitals and spaces are allowed.": [
+    "يُسمح بالأحرف الكبيرة والمسافات.",
+    "Großbuchstaben und Leerzeichen sind erlaubt."
+  ],
+  "Channel types": ["أنواع القنوات", "Kanaltypen"],
+  "Check and import": ["افحص واستورد", "Prüfen und importieren"],
+  "Choices": ["الاختيارات", "Auswahlwerte"],
+  "Command deleted.": ["حُذف الأمر.", "Befehl gelöscht."],
+  "Commands imported and saved.": [
+    "استُوردت الأوامر وحُفظت.",
+    "Befehle importiert und gespeichert."
+  ],
+  "Copy JSON": ["انسخ JSON", "JSON kopieren"],
+  "Couldn't load the saved intents.": [
+    "تعذّر تحميل النيّات المحفوظة.",
+    "Die gespeicherten Intents konnten nicht geladen werden."
+  ],
+  "Ctrl+Enter saves · Esc goes back": [
+    "Ctrl+Enter للحفظ · Esc للرجوع",
+    "Strg+Eingabe speichert · Esc geht zurück"
+  ],
+  "Default member permissions": [
+    "صلاحيات الأعضاء الافتراضية",
+    "Standard-Berechtigungen für Mitglieder"
+  ],
+  "description": ["الوصف", "Beschreibung"],
+  "Do this before the first run. A bot that is not in the server gets 403 MissingPermission for its channels, which looks like a missing permission.": [
+    "افعل هذا قبل التشغيل الأول. البوت الذي ليس في السيرفر يحصل على 403 MissingPermission لقنواته، فيبدو الأمر كأن صلاحية تنقصه.",
+    "Mach das vor dem ersten Start. Ein Bot, der nicht auf dem Server ist, bekommt für dessen Kanäle 403 MissingPermission, und das sieht aus wie eine fehlende Berechtigung."
+  ],
+  "Edit command": ["عدّل الأمر", "Befehl bearbeiten"],
+  "English": ["الإنجليزية", "Englisch"],
+  "Enter a number between -9007199254740991 and 9007199254740991.": [
+    "أدخل رقمًا بين ‎-9007199254740991 و9007199254740991.",
+    "Gib eine Zahl zwischen -9007199254740991 und 9007199254740991 ein."
+  ],
+  "Enter a whole number.": ["أدخل عددًا صحيحًا.", "Gib eine ganze Zahl ein."],
+  "Every entry needs at least a name.": [
+    "يحتاج كل عنصر إلى اسم على الأقل.",
+    "Jeder Eintrag braucht mindestens einen Namen."
+  ],
+  "Everyone who can write in the channel. Pick permissions to limit it.": [
+    "كل من يستطيع الكتابة في القناة. اختر صلاحيات لتقييده.",
+    "Alle, die im Kanal schreiben können. Wähle Berechtigungen, um es einzuschränken."
+  ],
+  "File": ["ملف", "Datei"],
+  "Fix these before saving:": [
+    "أصلح هذه قبل الحفظ:",
+    "Behebe das vor dem Speichern:"
+  ],
+  "German": ["الألمانية", "Deutsch"],
+  "Give 1 to {max} choices.": [
+    "أعطِ من 1 إلى {max} اختيار.",
+    "Gib 1 bis {max} Auswahlwerte an."
+  ],
+  "Groups can only be at the top level.": [
+    "لا تكون المجموعات إلا في المستوى الأعلى.",
+    "Gruppen stehen nur auf der obersten Ebene."
+  ],
+  "Is the bot in that server?": [
+    "هل البوت في ذلك السيرفر؟",
+    "Ist der Bot auf diesem Server?"
+  ],
+  "Largest value": ["أكبر قيمة", "Größter Wert"],
+  "Lengths go from 0 to {max}, and the minimum is not above the maximum.": [
+    "الأطوال من 0 إلى {max}، ولا يتجاوز الحد الأدنى الحد الأعلى.",
+    "Längen gehen von 0 bis {max}, und das Minimum liegt nicht über dem Maximum."
+  ],
+  "Limited by permissions": ["مقيّد بالصلاحيات", "Durch Berechtigungen begrenzt"],
+  "Longest text": ["أطول نص", "Längster Text"],
+  "Lowercase letters of any script, digits, - and _.": [
+    "أحرف صغيرة من أي أبجدية، وأرقام، و- و_.",
+    "Kleinbuchstaben jeder Schrift, Ziffern, - und _."
+  ],
+  "Member menu · Apps": ["قائمة العضو · التطبيقات", "Mitgliedermenü · Apps"],
+  "Members without the permissions do not see it.": [
+    "لا يراه الأعضاء الذين لا يملكون الصلاحيات.",
+    "Mitglieder ohne die Berechtigungen sehen ihn nicht."
+  ],
+  "Menu commands have no description and no options.": [
+    "ليس لأوامر القوائم وصف ولا خيارات.",
+    "Menübefehle haben keine Beschreibung und keine Optionen."
+  ],
+  "Message menu · Apps": ["قائمة الرسالة · التطبيقات", "Nachrichtenmenü · Apps"],
+  "name": ["الاسم", "Name"],
+  "Names in other languages": ["الأسماء بلغات أخرى", "Namen in anderen Sprachen"],
+  "New command": ["أمر جديد", "Neuer Befehl"],
+  "New option": ["خيار جديد", "Neue Option"],
+  "No commands yet. Add one here, or let your bot register its list when it starts.": [
+    "لا أوامر بعد. أضف أمرًا هنا، أو دع بوتك يسجّل قائمته حين يبدأ.",
+    "Noch keine Befehle. Füge hier einen hinzu, oder lass deinen Bot seine Liste beim Start registrieren."
+  ],
+  "No spaces at the start or the end.": [
+    "دون مسافات في البداية أو النهاية.",
+    "Keine Leerzeichen am Anfang oder Ende."
+  ],
+  "None picked: every channel.": [
+    "إن لم تختر شيئًا: كل القنوات.",
+    "Nichts gewählt: jeder Kanal."
+  ],
+  "Not saved. The switch shows what is saved.": [
+    "لم يُحفظ. يعرض المفتاح ما هو محفوظ.",
+    "Nicht gespeichert. Der Schalter zeigt, was gespeichert ist."
+  ],
+  "Number": ["رقم", "Zahl"],
+  "Off (saved)": ["معطّل (محفوظ)", "Aus (gespeichert)"],
+  "On (saved)": ["مفعّل (محفوظ)", "An (gespeichert)"],
+  "Only in channels marked for adults": [
+    "في القنوات المخصصة للبالغين فقط",
+    "Nur in Kanälen für Erwachsene"
+  ],
+  "Only members with all the permissions picked below see and use it. Your bot should still check them.": [
+    "لا يراه ولا يستخدمه إلا الأعضاء الذين يملكون كل الصلاحيات المختارة أدناه. ويبقى على بوتك أن يتحقق منها.",
+    "Nur Mitglieder mit allen unten gewählten Berechtigungen sehen und nutzen ihn. Dein Bot sollte sie trotzdem prüfen."
+  ],
+  "Only sub-commands and groups hold options.": [
+    "لا تضم الخيارات إلا الأوامر الفرعية والمجموعات.",
+    "Nur Unterbefehle und Gruppen enthalten Optionen."
+  ],
+  "Only text and number options can suggest while typing.": [
+    "لا تقترح في أثناء الكتابة إلا خيارات النص والأرقام.",
+    "Nur Text- und Zahlenoptionen können beim Tippen vorschlagen."
+  ],
+  "Only text and number options take choices.": [
+    "لا تأخذ الاختيارات إلا خيارات النص والأرقام.",
+    "Nur Text- und Zahlenoptionen nehmen Auswahlwerte."
+  ],
+  "Option description": ["وصف الخيار", "Beschreibung der Option"],
+  "Option name": ["اسم الخيار", "Name der Option"],
+  "Option type": ["نوع الخيار", "Art der Option"],
+  "Paste a list: [ { … }, { … } ].": [
+    "الصق قائمة: [ { … }, { … } ].",
+    "Füge eine Liste ein: [ { … }, { … } ]."
+  ],
+  "People pick one of these. None: they type any value.": [
+    "يختار الناس أحدها. وإن لم توجد: يكتبون أي قيمة.",
+    "Man wählt einen davon. Keine: Man tippt einen beliebigen Wert."
+  ],
+  "People see the name in their language. Your bot always gets the main name.": [
+    "يرى الناس الاسم بلغتهم. ويتلقى بوتك الاسم الأساسي دائمًا.",
+    "Man sieht den Namen in der eigenen Sprache. Dein Bot bekommt immer den Hauptnamen."
+  ],
+  "People type it after / in a server channel.": [
+    "يكتبه الناس بعد / في قناة سيرفر.",
+    "Man tippt ihn nach / in einem Serverkanal."
+  ],
+  "Pick each channel type once.": [
+    "اختر كل نوع قناة مرة واحدة.",
+    "Wähle jeden Kanaltyp einmal."
+  ],
+  "Pick the permissions from the list.": [
+    "اختر الصلاحيات من القائمة.",
+    "Wähle die Berechtigungen aus der Liste."
+  ],
+  "Preview language": ["لغة المعاينة", "Sprache der Vorschau"],
+  "Remove choice": ["احذف الاختيار", "Auswahlwert entfernen"],
+  "Remove option {0}": ["احذف الخيار {0}", "Option {0} entfernen"],
+  "Remove the hidden control characters.": [
+    "احذف أحرف التحكم المخفية.",
+    "Entferne die versteckten Steuerzeichen."
+  ],
+  "Replace all commands": ["استبدل كل الأوامر", "Alle Befehle ersetzen"],
+  "Required": ["مطلوب", "Pflichtfeld"],
+  "Required options come before optional ones.": [
+    "تأتي الخيارات المطلوبة قبل الاختيارية.",
+    "Pflichtoptionen kommen vor den optionalen."
+  ],
+  "Save command": ["احفظ الأمر", "Befehl speichern"],
+  "Saved: {0} is off. It counts from the bot's next connection.": [
+    "حُفظ: {0} معطّل. يسري ذلك من اتصال البوت التالي.",
+    "Gespeichert: {0} ist aus. Es gilt ab der nächsten Verbindung des Bots."
+  ],
+  "Saved: {0} is on. It counts from the bot's next connection.": [
+    "حُفظ: {0} مفعّل. يسري ذلك من اتصال البوت التالي.",
+    "Gespeichert: {0} ist an. Es gilt ab der nächsten Verbindung des Bots."
+  ],
+  "Saved. People see the change at once.": [
+    "حُفظ. يرى الناس التغيير فورًا.",
+    "Gespeichert. Alle sehen die Änderung sofort."
+  ],
+  "Shortest text": ["أقصر نص", "Kürzester Text"],
+  "Shown as": ["يظهر باسم", "Angezeigt als"],
+  "Shown in the menu of a member, under Apps.": [
+    "يظهر في قائمة العضو، تحت التطبيقات.",
+    "Erscheint im Menü eines Mitglieds, unter Apps."
+  ],
+  "Shown in the menu of a message, under Apps.": [
+    "يظهر في قائمة الرسالة، تحت التطبيقات.",
+    "Erscheint im Menü einer Nachricht, unter Apps."
+  ],
+  "Smallest value": ["أصغر قيمة", "Kleinster Wert"],
+  "Sub-command": ["أمر فرعي", "Unterbefehl"],
+  "Sub-command group": ["مجموعة أوامر فرعية", "Unterbefehlsgruppe"],
+  "Sub-commands and plain options cannot be mixed on one level.": [
+    "لا تُجمع الأوامر الفرعية والخيارات العادية في مستوى واحد.",
+    "Unterbefehle und einfache Optionen lassen sich auf einer Ebene nicht mischen."
+  ],
+  "Sub-commands go at most one group deep.": [
+    "لا تتداخل الأوامر الفرعية بأكثر من مجموعة واحدة.",
+    "Unterbefehle liegen höchstens eine Gruppe tief."
+  ],
+  "Suggest values while people type (your bot answers)": [
+    "اقترح قيمًا في أثناء الكتابة (يجيب بوتك)",
+    "Werte beim Tippen vorschlagen (dein Bot antwortet)"
+  ],
+  "The minimum is larger than the maximum.": [
+    "الحد الأدنى أكبر من الحد الأعلى.",
+    "Das Minimum ist größer als das Maximum."
+  ],
+  "The same list your bot sends with PUT to its commands route. Importing replaces every global command.": [
+    "القائمة نفسها التي يرسلها بوتك بـPUT إلى مسار أوامره. والاستيراد يستبدل كل الأوامر العامة.",
+    "Dieselbe Liste, die dein Bot mit PUT an seine Befehlsroute sendet. Importieren ersetzt alle globalen Befehle."
+  ],
+  "The value must fit the option type.": [
+    "يجب أن تناسب القيمة نوع الخيار.",
+    "Der Wert muss zur Art der Option passen."
+  ],
+  "This option type has no such limit.": [
+    "ليس لهذا النوع من الخيارات حد كهذا.",
+    "Diese Art von Option hat keine solche Grenze."
+  ],
+  "Turn these on only if your bot needs them. Without them it still works with commands, buttons and messages that mention it. A switch is saved at once and applies from the bot's next connection to the gateway: restart or reconnect your bot.": [
+    "فعّلها فقط إذا احتاج إليها بوتك. ودونها يبقى يعمل مع الأوامر والأزرار والرسائل التي تذكره. يُحفظ المفتاح فورًا ويسري من اتصال البوت التالي بالبوابة: أعد تشغيل بوتك أو أعد وصله.",
+    "Schalte sie nur ein, wenn dein Bot sie braucht. Ohne sie funktioniert er weiter mit Befehlen, Schaltflächen und Nachrichten, die ihn erwähnen. Ein Schalter wird sofort gespeichert und gilt ab der nächsten Gateway-Verbindung des Bots: Starte deinen Bot neu oder verbinde ihn neu."
+  ],
+  "Two choices have this name.": [
+    "لاختيارين هذا الاسم نفسه.",
+    "Zwei Auswahlwerte haben diesen Namen."
+  ],
+  "Two options have this name.": [
+    "لخيارين هذا الاسم نفسه.",
+    "Zwei Optionen haben diesen Namen."
+  ],
+  "Type: {0}. The type of a saved command cannot change.": [
+    "النوع: {0}. لا يتغير نوع أمر محفوظ.",
+    "Art: {0}. Die Art eines gespeicherten Befehls lässt sich nicht ändern."
+  ],
+  "Use 1 to {max} characters.": [
+    "استخدم من 1 إلى {max} حرف.",
+    "Verwende 1 bis {max} Zeichen."
+  ],
+  "Use choices or suggestions while typing, not both.": [
+    "استخدم الاختيارات أو الاقتراحات في أثناء الكتابة، لا كليهما.",
+    "Nutze Auswahlwerte oder Vorschläge beim Tippen, nicht beides."
+  ],
+  "Use lowercase letters, digits, - and _ only, without spaces.": [
+    "استخدم الأحرف الصغيرة والأرقام و- و_ فقط، دون مسافات.",
+    "Verwende nur Kleinbuchstaben, Ziffern, - und _, ohne Leerzeichen."
+  ],
+  "User or role": ["مستخدم أو دور", "Nutzer oder Rolle"],
+  "Value sent to the bot": ["القيمة المرسلة إلى البوت", "An den Bot gesendeter Wert"],
+  "Who can use it": ["من يستطيع استخدامه", "Wer ihn nutzen kann"],
+  "Whole number": ["عدد صحيح", "Ganze Zahl"],
+  "Yes or no": ["نعم أو لا", "Ja oder nein"]
+}

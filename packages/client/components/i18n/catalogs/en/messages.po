@@ -22185,3 +22185,465 @@ msgstr "If this is enabled, animations and motion effects won't play or will be 
 #: components/ui/components/design/DataTable.tsx
 msgid "Rows per page:"
 msgstr "Rows per page:"
+
+#. placeholder {0}: draft.options.length
+#. placeholder {1}: LIMITS.options
+#: components/app/interface/settings/user/bots/CommandManager.tsx
+msgid "{0} of {1}"
+msgstr "{0} of {1}"
+
+#. placeholder {0}: count("ChatInput")
+#. placeholder {1}: LIMITS.chatInput
+#. placeholder {2}: count("User") + count("Message")
+#: components/app/interface/settings/user/bots/CommandManager.tsx
+msgid "{0} of {1} slash commands · {2} menu commands"
+msgstr "{0} of {1} slash commands · {2} menu commands"
+
+#. placeholder {0}: props.command.options!.length
+#: components/app/interface/settings/user/bots/CommandManager.tsx
+msgid "{0} options"
+msgstr "{0} options"
+
+#: components/app/interface/settings/user/bots/CommandManager.tsx
+msgid "A command of this type already has this name."
+msgstr "A command of this type already has this name."
+
+#: components/app/interface/settings/user/bots/CommandManager.tsx
+msgid "A group holds only sub-commands."
+msgstr "A group holds only sub-commands."
+
+#: components/app/interface/settings/user/bots/CommandManager.tsx
+msgid "A group needs at least one sub-command."
+msgstr "A group needs at least one sub-command."
+
+#: components/app/interface/settings/user/bots/CommandManager.tsx
+msgid "A language tag is not valid."
+msgstr "A language tag is not valid."
+
+#: components/app/interface/settings/user/bots/CommandManager.tsx
+msgid "A sub-command cannot hold sub-commands."
+msgstr "A sub-command cannot hold sub-commands."
+
+#: components/app/interface/settings/user/bots/CommandManager.tsx
+msgid "A sub-command takes only a name, a description and options."
+msgstr "A sub-command takes only a name, a description and options."
+
+#: components/app/interface/settings/user/bots/CommandManager.tsx
+msgid "Add choice"
+msgstr "Add choice"
+
+#: components/app/interface/settings/user/bots/CommandManager.tsx
+msgid "Add option"
+msgstr "Add option"
+
+#: components/app/interface/settings/user/bots/CommandManager.tsx
+msgid "Advanced: JSON import and export"
+msgstr "Advanced: JSON import and export"
+
+#: components/app/interface/settings/user/bots/CommandManager.tsx
+msgid "All names, descriptions and choices together have more than {max} characters."
+msgstr "All names, descriptions and choices together have more than {max} characters."
+
+#: src/interface/developers/docs/DocsPortal.tsx
+msgid "API changelog"
+msgstr "API changelog"
+
+#: components/app/interface/settings/user/bots/CommandManager.tsx
+msgid "Arabic"
+msgstr "Arabic"
+
+#: components/app/interface/settings/user/bots/CommandManager.tsx
+msgid "At most {max} commands of this type."
+msgstr "At most {max} commands of this type."
+
+#: components/app/interface/settings/user/bots/CommandManager.tsx
+msgid "At most {max} languages."
+msgstr "At most {max} languages."
+
+#: components/app/interface/settings/user/bots/CommandManager.tsx
+msgid "At most {max} options on each level."
+msgstr "At most {max} options on each level."
+
+#: components/app/interface/settings/user/bots/CommandManager.tsx
+msgid "Capitals and spaces are allowed."
+msgstr "Capitals and spaces are allowed."
+
+#: components/app/interface/settings/user/bots/CommandManager.tsx
+msgid "Channel types"
+msgstr "Channel types"
+
+#: components/app/interface/settings/user/bots/CommandManager.tsx
+msgid "Check and import"
+msgstr "Check and import"
+
+#: components/app/interface/settings/user/bots/CommandManager.tsx
+msgid "Choices"
+msgstr "Choices"
+
+#: components/app/interface/settings/user/bots/CommandManager.tsx
+msgid "Command deleted."
+msgstr "Command deleted."
+
+#: components/app/interface/settings/user/bots/CommandManager.tsx
+msgid "Commands imported and saved."
+msgstr "Commands imported and saved."
+
+#: components/app/interface/settings/user/bots/CommandManager.tsx
+msgid "Copy JSON"
+msgstr "Copy JSON"
+
+#: components/app/interface/settings/user/bots/PrivilegedIntents.tsx
+msgid "Couldn't load the saved intents."
+msgstr "Couldn't load the saved intents."
+
+#: components/app/interface/settings/user/bots/CommandManager.tsx
+msgid "Ctrl+Enter saves · Esc goes back"
+msgstr "Ctrl+Enter saves · Esc goes back"
+
+#: components/app/interface/settings/user/bots/CommandManager.tsx
+msgid "Default member permissions"
+msgstr "Default member permissions"
+
+#: components/app/interface/settings/user/bots/CommandManager.tsx
+msgid "description"
+msgstr "description"
+
+#: src/interface/developers/docs/GettingStarted.tsx
+msgid "Do this before the first run. A bot that is not in the server gets 403 MissingPermission for its channels, which looks like a missing permission."
+msgstr "Do this before the first run. A bot that is not in the server gets 403 MissingPermission for its channels, which looks like a missing permission."
+
+#: components/app/interface/settings/user/bots/CommandManager.tsx
+msgid "Edit command"
+msgstr "Edit command"
+
+#: components/app/interface/settings/user/bots/CommandManager.tsx
+msgid "English"
+msgstr "English"
+
+#: components/app/interface/settings/user/bots/CommandManager.tsx
+msgid "Enter a number between -9007199254740991 and 9007199254740991."
+msgstr "Enter a number between -9007199254740991 and 9007199254740991."
+
+#: components/app/interface/settings/user/bots/CommandManager.tsx
+msgid "Enter a whole number."
+msgstr "Enter a whole number."
+
+#: components/app/interface/settings/user/bots/CommandManager.tsx
+msgid "Every entry needs at least a name."
+msgstr "Every entry needs at least a name."
+
+#: components/app/interface/settings/user/bots/CommandManager.tsx
+msgid "Everyone who can write in the channel. Pick permissions to limit it."
+msgstr "Everyone who can write in the channel. Pick permissions to limit it."
+
+#: components/app/interface/settings/user/bots/CommandManager.tsx
+msgid "File"
+msgstr "File"
+
+#: components/app/interface/settings/user/bots/CommandManager.tsx
+msgid "Fix these before saving:"
+msgstr "Fix these before saving:"
+
+#: components/app/interface/settings/user/bots/CommandManager.tsx
+msgid "German"
+msgstr "German"
+
+#: components/app/interface/settings/user/bots/CommandManager.tsx
+msgid "Give 1 to {max} choices."
+msgstr "Give 1 to {max} choices."
+
+#: components/app/interface/settings/user/bots/CommandManager.tsx
+msgid "Groups can only be at the top level."
+msgstr "Groups can only be at the top level."
+
+#: src/interface/developers/docs/GettingStarted.tsx
+msgid "Is the bot in that server?"
+msgstr "Is the bot in that server?"
+
+#: components/app/interface/settings/user/bots/CommandManager.tsx
+msgid "Largest value"
+msgstr "Largest value"
+
+#: components/app/interface/settings/user/bots/CommandManager.tsx
+msgid "Lengths go from 0 to {max}, and the minimum is not above the maximum."
+msgstr "Lengths go from 0 to {max}, and the minimum is not above the maximum."
+
+#: components/app/interface/settings/user/bots/CommandManager.tsx
+msgid "Limited by permissions"
+msgstr "Limited by permissions"
+
+#: components/app/interface/settings/user/bots/CommandManager.tsx
+msgid "Longest text"
+msgstr "Longest text"
+
+#: components/app/interface/settings/user/bots/CommandManager.tsx
+msgid "Lowercase letters of any script, digits, - and _."
+msgstr "Lowercase letters of any script, digits, - and _."
+
+#: components/app/interface/settings/user/bots/CommandManager.tsx
+msgid "Member menu · Apps"
+msgstr "Member menu · Apps"
+
+#: components/app/interface/settings/user/bots/CommandManager.tsx
+msgid "Members without the permissions do not see it."
+msgstr "Members without the permissions do not see it."
+
+#: components/app/interface/settings/user/bots/CommandManager.tsx
+msgid "Menu commands have no description and no options."
+msgstr "Menu commands have no description and no options."
+
+#: components/app/interface/settings/user/bots/CommandManager.tsx
+msgid "Message menu · Apps"
+msgstr "Message menu · Apps"
+
+#: components/app/interface/settings/user/bots/CommandManager.tsx
+msgid "name"
+msgstr "name"
+
+#: components/app/interface/settings/user/bots/CommandManager.tsx
+msgid "Names in other languages"
+msgstr "Names in other languages"
+
+#: components/app/interface/settings/user/bots/CommandManager.tsx
+msgid "New command"
+msgstr "New command"
+
+#: components/app/interface/settings/user/bots/CommandManager.tsx
+msgid "New option"
+msgstr "New option"
+
+#: components/app/interface/settings/user/bots/CommandManager.tsx
+msgid "No commands yet. Add one here, or let your bot register its list when it starts."
+msgstr "No commands yet. Add one here, or let your bot register its list when it starts."
+
+#: components/app/interface/settings/user/bots/CommandManager.tsx
+msgid "No spaces at the start or the end."
+msgstr "No spaces at the start or the end."
+
+#: components/app/interface/settings/user/bots/CommandManager.tsx
+msgid "None picked: every channel."
+msgstr "None picked: every channel."
+
+#: components/app/interface/settings/user/bots/PrivilegedIntents.tsx
+msgid "Not saved. The switch shows what is saved."
+msgstr "Not saved. The switch shows what is saved."
+
+#: components/app/interface/settings/user/bots/CommandManager.tsx
+msgid "Number"
+msgstr "Number"
+
+#: components/app/interface/settings/user/bots/PrivilegedIntents.tsx
+msgid "Off (saved)"
+msgstr "Off (saved)"
+
+#: components/app/interface/settings/user/bots/PrivilegedIntents.tsx
+msgid "On (saved)"
+msgstr "On (saved)"
+
+#: components/app/interface/settings/user/bots/CommandManager.tsx
+msgid "Only in channels marked for adults"
+msgstr "Only in channels marked for adults"
+
+#: components/app/interface/settings/user/bots/CommandManager.tsx
+msgid "Only members with all the permissions picked below see and use it. Your bot should still check them."
+msgstr "Only members with all the permissions picked below see and use it. Your bot should still check them."
+
+#: components/app/interface/settings/user/bots/CommandManager.tsx
+msgid "Only sub-commands and groups hold options."
+msgstr "Only sub-commands and groups hold options."
+
+#: components/app/interface/settings/user/bots/CommandManager.tsx
+msgid "Only text and number options can suggest while typing."
+msgstr "Only text and number options can suggest while typing."
+
+#: components/app/interface/settings/user/bots/CommandManager.tsx
+msgid "Only text and number options take choices."
+msgstr "Only text and number options take choices."
+
+#: components/app/interface/settings/user/bots/CommandManager.tsx
+msgid "Option description"
+msgstr "Option description"
+
+#: components/app/interface/settings/user/bots/CommandManager.tsx
+msgid "Option name"
+msgstr "Option name"
+
+#: components/app/interface/settings/user/bots/CommandManager.tsx
+msgid "Option type"
+msgstr "Option type"
+
+#: components/app/interface/settings/user/bots/CommandManager.tsx
+msgid "Paste a list: [ { … }, { … } ]."
+msgstr "Paste a list: [ { … }, { … } ]."
+
+#: components/app/interface/settings/user/bots/CommandManager.tsx
+msgid "People pick one of these. None: they type any value."
+msgstr "People pick one of these. None: they type any value."
+
+#: components/app/interface/settings/user/bots/CommandManager.tsx
+msgid "People see the name in their language. Your bot always gets the main name."
+msgstr "People see the name in their language. Your bot always gets the main name."
+
+#: components/app/interface/settings/user/bots/CommandManager.tsx
+msgid "People type it after / in a server channel."
+msgstr "People type it after / in a server channel."
+
+#: components/app/interface/settings/user/bots/CommandManager.tsx
+msgid "Pick each channel type once."
+msgstr "Pick each channel type once."
+
+#: components/app/interface/settings/user/bots/CommandManager.tsx
+msgid "Pick the permissions from the list."
+msgstr "Pick the permissions from the list."
+
+#: components/app/interface/settings/user/bots/CommandManager.tsx
+msgid "Preview language"
+msgstr "Preview language"
+
+#: components/app/interface/settings/user/bots/CommandManager.tsx
+msgid "Remove choice"
+msgstr "Remove choice"
+
+#. placeholder {0}: label()
+#: components/app/interface/settings/user/bots/CommandManager.tsx
+msgid "Remove option {0}"
+msgstr "Remove option {0}"
+
+#: components/app/interface/settings/user/bots/CommandManager.tsx
+msgid "Remove the hidden control characters."
+msgstr "Remove the hidden control characters."
+
+#: components/app/interface/settings/user/bots/CommandManager.tsx
+msgid "Replace all commands"
+msgstr "Replace all commands"
+
+#: components/app/interface/settings/user/bots/CommandManager.tsx
+msgid "Required"
+msgstr "Required"
+
+#: components/app/interface/settings/user/bots/CommandManager.tsx
+msgid "Required options come before optional ones."
+msgstr "Required options come before optional ones."
+
+#: components/app/interface/settings/user/bots/CommandManager.tsx
+msgid "Save command"
+msgstr "Save command"
+
+#. placeholder {0}: intent.title()
+#: components/app/interface/settings/user/bots/PrivilegedIntents.tsx
+msgid "Saved: {0} is off. It counts from the bot's next connection."
+msgstr "Saved: {0} is off. It counts from the bot's next connection."
+
+#. placeholder {0}: intent.title()
+#: components/app/interface/settings/user/bots/PrivilegedIntents.tsx
+msgid "Saved: {0} is on. It counts from the bot's next connection."
+msgstr "Saved: {0} is on. It counts from the bot's next connection."
+
+#: components/app/interface/settings/user/bots/CommandManager.tsx
+msgid "Saved. People see the change at once."
+msgstr "Saved. People see the change at once."
+
+#: components/app/interface/settings/user/bots/CommandManager.tsx
+msgid "Shortest text"
+msgstr "Shortest text"
+
+#: components/app/interface/settings/user/bots/CommandManager.tsx
+msgid "Shown as"
+msgstr "Shown as"
+
+#: components/app/interface/settings/user/bots/CommandManager.tsx
+msgid "Shown in the menu of a member, under Apps."
+msgstr "Shown in the menu of a member, under Apps."
+
+#: components/app/interface/settings/user/bots/CommandManager.tsx
+msgid "Shown in the menu of a message, under Apps."
+msgstr "Shown in the menu of a message, under Apps."
+
+#: components/app/interface/settings/user/bots/CommandManager.tsx
+msgid "Smallest value"
+msgstr "Smallest value"
+
+#: components/app/interface/settings/user/bots/CommandManager.tsx
+msgid "Sub-command"
+msgstr "Sub-command"
+
+#: components/app/interface/settings/user/bots/CommandManager.tsx
+msgid "Sub-command group"
+msgstr "Sub-command group"
+
+#: components/app/interface/settings/user/bots/CommandManager.tsx
+msgid "Sub-commands and plain options cannot be mixed on one level."
+msgstr "Sub-commands and plain options cannot be mixed on one level."
+
+#: components/app/interface/settings/user/bots/CommandManager.tsx
+msgid "Sub-commands go at most one group deep."
+msgstr "Sub-commands go at most one group deep."
+
+#: components/app/interface/settings/user/bots/CommandManager.tsx
+msgid "Suggest values while people type (your bot answers)"
+msgstr "Suggest values while people type (your bot answers)"
+
+#: components/app/interface/settings/user/bots/CommandManager.tsx
+msgid "The minimum is larger than the maximum."
+msgstr "The minimum is larger than the maximum."
+
+#: components/app/interface/settings/user/bots/CommandManager.tsx
+msgid "The same list your bot sends with PUT to its commands route. Importing replaces every global command."
+msgstr "The same list your bot sends with PUT to its commands route. Importing replaces every global command."
+
+#: components/app/interface/settings/user/bots/CommandManager.tsx
+msgid "The value must fit the option type."
+msgstr "The value must fit the option type."
+
+#: components/app/interface/settings/user/bots/CommandManager.tsx
+msgid "This option type has no such limit."
+msgstr "This option type has no such limit."
+
+#: components/app/interface/settings/user/bots/PrivilegedIntents.tsx
+msgid "Turn these on only if your bot needs them. Without them it still works with commands, buttons and messages that mention it. A switch is saved at once and applies from the bot's next connection to the gateway: restart or reconnect your bot."
+msgstr "Turn these on only if your bot needs them. Without them it still works with commands, buttons and messages that mention it. A switch is saved at once and applies from the bot's next connection to the gateway: restart or reconnect your bot."
+
+#: components/app/interface/settings/user/bots/CommandManager.tsx
+msgid "Two choices have this name."
+msgstr "Two choices have this name."
+
+#: components/app/interface/settings/user/bots/CommandManager.tsx
+msgid "Two options have this name."
+msgstr "Two options have this name."
+
+#. placeholder {0}: types[draft.type]
+#: components/app/interface/settings/user/bots/CommandManager.tsx
+msgid "Type: {0}. The type of a saved command cannot change."
+msgstr "Type: {0}. The type of a saved command cannot change."
+
+#: components/app/interface/settings/user/bots/CommandManager.tsx
+msgid "Use 1 to {max} characters."
+msgstr "Use 1 to {max} characters."
+
+#: components/app/interface/settings/user/bots/CommandManager.tsx
+msgid "Use choices or suggestions while typing, not both."
+msgstr "Use choices or suggestions while typing, not both."
+
+#: components/app/interface/settings/user/bots/CommandManager.tsx
+msgid "Use lowercase letters, digits, - and _ only, without spaces."
+msgstr "Use lowercase letters, digits, - and _ only, without spaces."
+
+#: components/app/interface/settings/user/bots/CommandManager.tsx
+msgid "User or role"
+msgstr "User or role"
+
+#: components/app/interface/settings/user/bots/CommandManager.tsx
+msgid "Value sent to the bot"
+msgstr "Value sent to the bot"
+
+#: components/app/interface/settings/user/bots/CommandManager.tsx
+msgid "Who can use it"
+msgstr "Who can use it"
+
+#: components/app/interface/settings/user/bots/CommandManager.tsx
+msgid "Whole number"
+msgstr "Whole number"
+
+#: components/app/interface/settings/user/bots/CommandManager.tsx
+msgid "Yes or no"
+msgstr "Yes or no"
