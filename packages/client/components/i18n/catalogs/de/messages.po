@@ -721,6 +721,7 @@ msgstr "Autorisierungs-URL"
 msgid "Authorize"
 msgstr "Autorisieren"
 
+#: components/app/interface/settings/UserSettings.tsx
 #: src/interface/OAuth.tsx
 msgid "Authorized apps"
 msgstr "Autorisierte Apps"
@@ -22048,9 +22049,6 @@ msgstr "Apps und Bots"
 msgid "Asking the bot for suggestions…"
 msgstr "Der Bot wird nach Vorschlägen gefragt …"
 
-#: components/app/interface/settings/UserSettings.tsx
-msgid "Authorised apps"
-msgstr "Autorisierte Apps"
 
 #. placeholder {0}: userName(raw.bot)
 #: components/app/interface/settings/server/audit/AuditLog.tsx

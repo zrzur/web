@@ -721,6 +721,7 @@ msgstr "رابط التفويض"
 msgid "Authorize"
 msgstr "تفويض"
 
+#: components/app/interface/settings/UserSettings.tsx
 #: src/interface/OAuth.tsx
 msgid "Authorized apps"
 msgstr "التطبيقات المصرّح لها"
@@ -22039,9 +22040,6 @@ msgstr "التطبيقات والبوتات"
 msgid "Asking the bot for suggestions…"
 msgstr "جارٍ طلب الاقتراحات من البوت…"
 
-#: components/app/interface/settings/UserSettings.tsx
-msgid "Authorised apps"
-msgstr "التطبيقات المأذون لها"
 
 #. placeholder {0}: userName(raw.bot)
 #: components/app/interface/settings/server/audit/AuditLog.tsx
