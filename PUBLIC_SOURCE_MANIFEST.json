@@ -292,8 +292,8 @@
     },
     {
       "path": "CHANGELOG.md",
-      "sha256": "add0a45d68320128fdea0af83e7314ea33c0065bd2f8b766221a31b81330946f",
-      "bytes": 96002,
+      "sha256": "9f9f62e62617d7b5e917c6db47b5409a7e265add1546210baac814ab35aa0af9",
+      "bytes": 97252,
       "category": "public-documentation"
     },
     {
@@ -1749,9 +1749,45 @@
       "category": "product-source-or-build-manifest"
     },
     {
+      "path": "packages/client/components/app/interface/settings/user/bots/CommandManager.dom.test.tsx",
+      "sha256": "7be8afbb0a951f70ae1a456c7b99e4cf2ad82924b6f48416e31043a894a6e036",
+      "bytes": 13150,
+      "category": "synthetic-test-source-or-fixture"
+    },
+    {
+      "path": "packages/client/components/app/interface/settings/user/bots/CommandManager.tsx",
+      "sha256": "4f6364ce76a2ba8b8d84ccbfb33806794ab2a9d6459ef0b018d1874180078d63",
+      "bytes": 47408,
+      "category": "product-source-or-build-manifest"
+    },
+    {
+      "path": "packages/client/components/app/interface/settings/user/bots/PrivilegedIntents.dom.test.tsx",
+      "sha256": "dd5deb933858998840ee16ab8875f1879f6b6368a2ba75cbb418a2c34a3bfa63",
+      "bytes": 4942,
+      "category": "synthetic-test-source-or-fixture"
+    },
+    {
+      "path": "packages/client/components/app/interface/settings/user/bots/PrivilegedIntents.tsx",
+      "sha256": "ab66d4833f3bf9a55fe1684e16a597c1a108ffb8c659af0f71bc21b9468e3e1e",
+      "bytes": 6050,
+      "category": "product-source-or-build-manifest"
+    },
+    {
       "path": "packages/client/components/app/interface/settings/user/bots/ViewBot.tsx",
-      "sha256": "536fe07d454f2c5405a28c44dcef603a517148669f794ea572ca7d6a94198ac6",
-      "bytes": 11161,
+      "sha256": "353e7cbe5832986cc3a71eab10d849064d079d8826944582595160db9df09965",
+      "bytes": 9501,
+      "category": "product-source-or-build-manifest"
+    },
+    {
+      "path": "packages/client/components/app/interface/settings/user/bots/commandForm.test.ts",
+      "sha256": "0b816929eefe38cabdc942a339f5d70146d19de6c5bab1e20b032e4ef3ae38bf",
+      "bytes": 11009,
+      "category": "synthetic-test-source-or-fixture"
+    },
+    {
+      "path": "packages/client/components/app/interface/settings/user/bots/commandForm.ts",
+      "sha256": "afffdef1779f05fc2113c696c60466fc195634fa60e84e3e6487d39cc0f8e075",
+      "bytes": 24038,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -2572,8 +2608,8 @@
     },
     {
       "path": "packages/client/components/i18n/catalogs/ar/messages.po",
-      "sha256": "42668725e460d5ad3e25ee72bdbc998eac7e10d6c9e08f33c807a14120f4cde1",
-      "bytes": 849890,
+      "sha256": "9261a8b5bf72745d80ae77ceb6c4c070455aa060b9b8d0ae6c129b896d232eda",
+      "bytes": 869663,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -2716,8 +2752,8 @@
     },
     {
       "path": "packages/client/components/i18n/catalogs/de/messages.po",
-      "sha256": "602390be7ad86152f67fe37e09c80fc18c991e156544dafabe2a1613ee5e69b1",
-      "bytes": 782098,
+      "sha256": "38863d32e84fbcd01cc420ba0c04f95ad683cc65a129b3c7518dbc5276aeea6b",
+      "bytes": 800382,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -2752,8 +2788,8 @@
     },
     {
       "path": "packages/client/components/i18n/catalogs/en/messages.po",
-      "sha256": "417d36cf934d0d7396e9c15273a0f3ec70840d5ca1de020726802c68ccd299f5",
-      "bytes": 763175,
+      "sha256": "ddbdeb72868435d49ab46691e8838d5c92e798a17e571ca5eae3cb2f6a0f4be6",
+      "bytes": 780783,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -37042,8 +37078,8 @@
     },
     {
       "path": "packages/client/scripts/bot-api/curated.json",
-      "sha256": "2e3e2439385338003b2da9840b948d5385f8a7af9ceecf0eee8c76b924157be2",
-      "bytes": 10910,
+      "sha256": "5a4a96775eed82fa36e84a413e2571a5110afa8945df1a6d6a2205211a48188d",
+      "bytes": 11240,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -37096,8 +37132,8 @@
     },
     {
       "path": "packages/client/scripts/bot-api/examples/hello-raw.mjs",
-      "sha256": "4d237d5f89413932ccc0ec24a800167fb733fa773e98cba7aa2448646dd05b7e",
-      "bytes": 2348,
+      "sha256": "4d5c32aaa09cd190cbfd86c87fd13f41444ec92493e3f8529eadc42ceaf946ea",
+      "bytes": 2433,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -37144,8 +37180,8 @@
     },
     {
       "path": "packages/client/scripts/bot-api/extract.mjs",
-      "sha256": "e236acf6d8ec16e27c7dbc8415e75a5a14f71998b8b96066ec966f9eeea85127",
-      "bytes": 32835,
+      "sha256": "c624e905a4ed48c580c6a84f1fa737f4f9dbba7fd6476fd973a1bc41909adce7",
+      "bytes": 33154,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -37494,6 +37530,12 @@
       "path": "packages/client/scripts/i18n/ui-110709.json",
       "sha256": "848373e56b97441915e9124ab8394af3f86f42177ce07c37128a79c4088d73cd",
       "bytes": 516,
+      "category": "product-source-or-build-manifest"
+    },
+    {
+      "path": "packages/client/scripts/i18n/ui-110710.json",
+      "sha256": "cc48f2fe5b876d470dad0bb343255308a834a4abb1d0b7e142825a6eb7fa3e22",
+      "bytes": 16718,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -38386,9 +38428,15 @@
     },
     {
       "path": "packages/client/src/Interface.tsx",
-      "sha256": "a859ff1b79653de3d5db163f6d29edccc031fda5e82034593b4ee582174822cc",
-      "bytes": 9598,
+      "sha256": "e61abcf49ad61a8ab1efaa3f3af7171d1a1ddb0e64065fd803b813dec5ecc6fb",
+      "bytes": 9278,
       "category": "product-source-or-build-manifest"
+    },
+    {
+      "path": "packages/client/src/docsRoute.test.ts",
+      "sha256": "6f6c77bf4d9c597f5c5d3b93575ffb51b8e4fc7a671db5173364464c407e0b07",
+      "bytes": 1704,
+      "category": "synthetic-test-source-or-fixture"
     },
     {
       "path": "packages/client/src/index.css",
@@ -38398,8 +38446,8 @@
     },
     {
       "path": "packages/client/src/index.tsx",
-      "sha256": "2a88fa992bd3c317266fe4bafd962c6a141c76e91479f1c7f1b71be800dd316f",
-      "bytes": 11043,
+      "sha256": "294bf001a2b5bf754b5e4e3765b5d8e211fb53de642d1d18a3319ae5c61f61a0",
+      "bytes": 11375,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -38416,14 +38464,14 @@
     },
     {
       "path": "packages/client/src/interface/Developers.tsx",
-      "sha256": "fb33c894ba6ce361c3defbfa716e613bb0b30baa6515387b90be7cbf87005455",
-      "bytes": 31060,
+      "sha256": "e3287d51c275fe84e790b85e28dd9539cc601421a5c74235f4f31c714ed7de1a",
+      "bytes": 27522,
       "category": "product-source-or-build-manifest"
     },
     {
       "path": "packages/client/src/interface/DevelopersDocs.tsx",
-      "sha256": "3c20c260cdb77bcb44eae168adaf0201bf29ba0b88a6cd408af5ae7cd3ac33d4",
-      "bytes": 1748,
+      "sha256": "88e6b79ec7368eaad89b9270458e38326c6de28abaca05f8681532f9cc6dc75d",
+      "bytes": 1952,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -38704,8 +38752,8 @@
     },
     {
       "path": "packages/client/src/interface/developers/data/botApi.json",
-      "sha256": "dfbc39cfd054ca6dcf6afa1788936667a95fcaaf91824898daf8fa05c42f889c",
-      "bytes": 746744,
+      "sha256": "6bb033df8158576aef8457b40e0e8cbe0483e63b0a76efc419fa974e4c4163cd",
+      "bytes": 746999,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -38734,20 +38782,20 @@
     },
     {
       "path": "packages/client/src/interface/developers/docs/DocsPortal.tsx",
-      "sha256": "eaa17d626cf847dc28e80e1b23cc820b20bba0bcd48ef2ded9aa0b65f8c9b3bd",
-      "bytes": 15971,
+      "sha256": "a67ae982a0790b86f5129c75e5968b88861c724ce7d944a2087edb1439b3b803",
+      "bytes": 16004,
       "category": "product-source-or-build-manifest"
     },
     {
       "path": "packages/client/src/interface/developers/docs/EndpointReference.tsx",
-      "sha256": "a02b4c2347317c8ca4c3910b5d67cdcd70929d55127f9b18778004359d04bc2c",
-      "bytes": 12849,
+      "sha256": "8a788c3d60ee53adde005fcdcb4bdd791d55e121ed5482def520fb147adb4290",
+      "bytes": 12867,
       "category": "product-source-or-build-manifest"
     },
     {
       "path": "packages/client/src/interface/developers/docs/GettingStarted.tsx",
-      "sha256": "62bb8bc8412a78e1bd90fac67982e1dcf82bb5c741edd8e4c725fea380328d6f",
-      "bytes": 5001,
+      "sha256": "1d82dbead110393e2b5e95dd6397b3b8d11f6199f0abed219dbdf7d7b9ad4952",
+      "bytes": 5366,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -38758,14 +38806,14 @@
     },
     {
       "path": "packages/client/src/interface/developers/docs/content/applications.md",
-      "sha256": "ebfd724bba2084936721d8cbe6b42f961ab9252bd8d1a27b41f7aabf768bda15",
-      "bytes": 7166,
+      "sha256": "e109300430e58fb9b86c2a224a2bd79dc166944c143d34f64d3d44c674adae7b",
+      "bytes": 7311,
       "category": "public-documentation"
     },
     {
       "path": "packages/client/src/interface/developers/docs/content/ar/applications.md",
-      "sha256": "3699257d654547e83112b0c4abaf59ab95e14d02536d61d1451e2a5ad12561aa",
-      "bytes": 8573,
+      "sha256": "875f262b2b25a550ed954a8b17b5137c0e73a06459cec79734027d99942723af",
+      "bytes": 8755,
       "category": "public-documentation"
     },
     {
@@ -38775,21 +38823,27 @@
       "category": "public-documentation"
     },
     {
+      "path": "packages/client/src/interface/developers/docs/content/ar/changelog.md",
+      "sha256": "fc96fe009f09b80ecaa5117ea31b2e570b5ae90f537e5399689163b05f64ec0d",
+      "bytes": 5428,
+      "category": "public-documentation"
+    },
+    {
       "path": "packages/client/src/interface/developers/docs/content/ar/channels.md",
-      "sha256": "e36f6352aa817150f042299c2d8a71a3dc4c89c31db41233a056e478ba0501c4",
-      "bytes": 10270,
+      "sha256": "bd6ffa56c2e10c332952e8609cff0e0def93812c4f7fa6cdb87fb238532c7c11",
+      "bytes": 14026,
       "category": "public-documentation"
     },
     {
       "path": "packages/client/src/interface/developers/docs/content/ar/commands.md",
-      "sha256": "fdb73d01ee7f95f3300719aa70b31afddc2367b9e5492fb06f4fd2d5ce419bde",
-      "bytes": 9577,
+      "sha256": "53991a48c51d242567889b701d6364b0cfd98cce594799ba1f751b503ea1ac5d",
+      "bytes": 11061,
       "category": "public-documentation"
     },
     {
       "path": "packages/client/src/interface/developers/docs/content/ar/components.md",
-      "sha256": "d200b948564a574a8e6d570e3b0a97b9f4cedff5c2f29af2e2a61b10279c67f4",
-      "bytes": 8288,
+      "sha256": "a3b294343fc19e315df6ce3ccb2d1e5c02f4279134eb625f59b308034145df3d",
+      "bytes": 8542,
       "category": "public-documentation"
     },
     {
@@ -38800,14 +38854,14 @@
     },
     {
       "path": "packages/client/src/interface/developers/docs/content/ar/errors.md",
-      "sha256": "84fe6fefc061dbc528719b413d817961216028f0d185112a6cd72e1e780a9d8f",
-      "bytes": 2456,
+      "sha256": "e9d5970b124253c4cde4b50fd02bd9a686e580cd1925f4148f8f3d9c7c00d6f8",
+      "bytes": 3709,
       "category": "public-documentation"
     },
     {
       "path": "packages/client/src/interface/developers/docs/content/ar/events.md",
-      "sha256": "8249bde39059d69a3668f31ae92cc66772c2931a3300d2a74c8dfeece7748d36",
-      "bytes": 932,
+      "sha256": "bdab628069ba7fc80cc1f104a9d18d25591adb9097c24a4d87ba3885170119bb",
+      "bytes": 3207,
       "category": "public-documentation"
     },
     {
@@ -38818,8 +38872,8 @@
     },
     {
       "path": "packages/client/src/interface/developers/docs/content/ar/gateway.md",
-      "sha256": "73650ea67d79425da2da9b35134e5ae7b3420bc11c84bd15dbdae0914a0f60fa",
-      "bytes": 9352,
+      "sha256": "99a6a50f1a0841a9ad6829e9fe8ea679b80a93eca1cabfa7c229642d6513eabb",
+      "bytes": 10649,
       "category": "public-documentation"
     },
     {
@@ -38836,8 +38890,8 @@
     },
     {
       "path": "packages/client/src/interface/developers/docs/content/ar/messages.md",
-      "sha256": "541854d0629ffdb13cb9973c65e53208d906fcc3ece3276df099ed2234f65203",
-      "bytes": 5838,
+      "sha256": "60961cf798ac0fa94ad276a4f7dfcd4eef0ec720191c4a09878fbd651471cce7",
+      "bytes": 7916,
       "category": "public-documentation"
     },
     {
@@ -38854,8 +38908,8 @@
     },
     {
       "path": "packages/client/src/interface/developers/docs/content/ar/overview.md",
-      "sha256": "de0e64ab4c755bac8367574132048efc0ac05d3c69fc2f42216c0455e7798b2a",
-      "bytes": 4679,
+      "sha256": "46ebb2082fac6fed061340c19c24ead4d9b96eb08cf176c9539ae546a129f220",
+      "bytes": 5746,
       "category": "public-documentation"
     },
     {
@@ -38974,8 +39028,8 @@
     },
     {
       "path": "packages/client/src/interface/developers/docs/content/ar/voice.md",
-      "sha256": "e0997010e78f6d26afb21c5735752483dc64a8ea9f7f4299aeff96e9a0382e65",
-      "bytes": 2458,
+      "sha256": "7d8690d2cff36c4141f45018faa2164c7fa536c94930512ecb2852638b9e545b",
+      "bytes": 2612,
       "category": "public-documentation"
     },
     {
@@ -38985,21 +39039,27 @@
       "category": "public-documentation"
     },
     {
+      "path": "packages/client/src/interface/developers/docs/content/changelog.md",
+      "sha256": "0be676a895ab513b6f87b08b16174053bb8b67667a5aebf33ec57a05e880a5e8",
+      "bytes": 4213,
+      "category": "public-documentation"
+    },
+    {
       "path": "packages/client/src/interface/developers/docs/content/channels.md",
-      "sha256": "73dbe65a42ae7bfa673e9abe39d25b0e5064e9ea1e48104f849baf7d51822c24",
-      "bytes": 8684,
+      "sha256": "e86752733a92678bb6e3dae11fb81cf50f1eff02c45eb8e88766e0cb3a74a788",
+      "bytes": 13087,
       "category": "public-documentation"
     },
     {
       "path": "packages/client/src/interface/developers/docs/content/commands.md",
-      "sha256": "e1d5fdaa1ce9d7952bc2492f8957fa600ade4479c9bdb9c69dadcf41f0bfd0b9",
-      "bytes": 9334,
+      "sha256": "09263d31d98d98c28ebebf0ecd8757341dedb0e21ac9d89ae0f7730f8a1eb9a1",
+      "bytes": 10907,
       "category": "public-documentation"
     },
     {
       "path": "packages/client/src/interface/developers/docs/content/components.md",
-      "sha256": "c26120503413fdd9bacfbdf0370abfad621ebcde5266f11b211265bfda0e25b5",
-      "bytes": 8296,
+      "sha256": "cfce3778d93750bc65e9a5ab6b2bc1436e11684d1dbe4441105b21e964dbbf3d",
+      "bytes": 8477,
       "category": "public-documentation"
     },
     {
@@ -39010,8 +39070,8 @@
     },
     {
       "path": "packages/client/src/interface/developers/docs/content/de/applications.md",
-      "sha256": "d092b61f4c7d9072d6eaee7d4d539062abc9b475bed2f580dced3f02a08ae719",
-      "bytes": 6922,
+      "sha256": "ad81508b89f4453123312f1b19e16b376e1f402468139d71ab360168ee260579",
+      "bytes": 7083,
       "category": "public-documentation"
     },
     {
@@ -39021,21 +39081,27 @@
       "category": "public-documentation"
     },
     {
+      "path": "packages/client/src/interface/developers/docs/content/de/changelog.md",
+      "sha256": "ce6db8eec9cdfeee1f1065ae14dbeb0e8b15f0446419fee9cb0db161d04bca9e",
+      "bytes": 4638,
+      "category": "public-documentation"
+    },
+    {
       "path": "packages/client/src/interface/developers/docs/content/de/channels.md",
-      "sha256": "8400d8cf41e5eb5df7bf1962726d22f60e603edc6d44d782070a71a66129fb0e",
-      "bytes": 8489,
+      "sha256": "3ba5e112668eef31897599016cf84151499ae606bd725e7010fb6b234f4a1913",
+      "bytes": 11736,
       "category": "public-documentation"
     },
     {
       "path": "packages/client/src/interface/developers/docs/content/de/commands.md",
-      "sha256": "dbd76d8542f3afecebf546c08770a1bd77b21789c5dd28eb62ce789382169e84",
-      "bytes": 8078,
+      "sha256": "839afdb035f657d76e72ec2d33abddf4aa4454eac67e8d395533440937dc5fb1",
+      "bytes": 9344,
       "category": "public-documentation"
     },
     {
       "path": "packages/client/src/interface/developers/docs/content/de/components.md",
-      "sha256": "b24e6f60c16418ad5600d99c642e0130025849b9e19354189b96c938534b8d31",
-      "bytes": 7270,
+      "sha256": "3e746e367246420ef72253ebc0c0ccd389dbf899adb5ae037bafbe336fc82cab",
+      "bytes": 7480,
       "category": "public-documentation"
     },
     {
@@ -39046,14 +39112,14 @@
     },
     {
       "path": "packages/client/src/interface/developers/docs/content/de/errors.md",
-      "sha256": "e9a1de1e3844f26021880268586e1be0f0727144f23e2a6a073dd9676c39d254",
-      "bytes": 2037,
+      "sha256": "9b80872bfdfabc7bc192e6fe77049fb7778baa00e7c22825d61f740d372b00c0",
+      "bytes": 3115,
       "category": "public-documentation"
     },
     {
       "path": "packages/client/src/interface/developers/docs/content/de/events.md",
-      "sha256": "079d2b60b4f314bb0a5d7d3f73b726047942183de1e183ff2c064876b5052e64",
-      "bytes": 681,
+      "sha256": "68ea4ae5300e1f9d5cd966b5c6be36fa6f04b4a142f425e571428f429eb603ad",
+      "bytes": 2699,
       "category": "public-documentation"
     },
     {
@@ -39064,8 +39130,8 @@
     },
     {
       "path": "packages/client/src/interface/developers/docs/content/de/gateway.md",
-      "sha256": "98f6904cf1dab6658281ef8028a4031040b75c46759b584a6ac495cba0ed5d56",
-      "bytes": 7578,
+      "sha256": "fa40df06f8fa56a88ff815199b7610c40332f9fdc6279a8bfead640441511caf",
+      "bytes": 8693,
       "category": "public-documentation"
     },
     {
@@ -39082,8 +39148,8 @@
     },
     {
       "path": "packages/client/src/interface/developers/docs/content/de/messages.md",
-      "sha256": "427c1619b1608c262734f69a154374563a6a1c563a565b740dfd7d6e47801766",
-      "bytes": 4745,
+      "sha256": "39f8a818b5cf0500eff9fbd6800d58b565d7bae3b3c3635fe594e9dc0b1c4d60",
+      "bytes": 6572,
       "category": "public-documentation"
     },
     {
@@ -39100,8 +39166,8 @@
     },
     {
       "path": "packages/client/src/interface/developers/docs/content/de/overview.md",
-      "sha256": "2f58515b7e5fb35b95d5be5c257594ea7188717dc2b2913f03791aaddf277530",
-      "bytes": 3684,
+      "sha256": "e7123908cc92e2219d2a4e4a413e18f5dafaa5b827d59cf85bb272dedb4f656f",
+      "bytes": 4567,
       "category": "public-documentation"
     },
     {
@@ -39220,20 +39286,20 @@
     },
     {
       "path": "packages/client/src/interface/developers/docs/content/de/voice.md",
-      "sha256": "d65344c0c48a3f10b320117e959ed9da28b5e449445eb97dab78eb4a0e009685",
-      "bytes": 2140,
+      "sha256": "55ecc507f5517141745f98ff613b064f3c1e2ae16d4ade17503a544e51b2b1ba",
+      "bytes": 2294,
       "category": "public-documentation"
     },
     {
       "path": "packages/client/src/interface/developers/docs/content/errors.md",
-      "sha256": "eef007ffb11a6551f40f80e87b5ebfb86ad249c7ee2cdb6f5199f28e5c2e0bfd",
-      "bytes": 2216,
+      "sha256": "fd2b1e92c225fdfb446800fa30cd5fffff953c15b5859c2b2747d50533f5cf33",
+      "bytes": 3180,
       "category": "public-documentation"
     },
     {
       "path": "packages/client/src/interface/developers/docs/content/events.md",
-      "sha256": "b5ae473012cf3142f170a95c84c77bb2ff1d72e3a2213bc0e3420f98c5f2035e",
-      "bytes": 600,
+      "sha256": "193afffec86a77bcb3260881a25fef9a59408530065eee68061ffd14bb518c2f",
+      "bytes": 2765,
       "category": "public-documentation"
     },
     {
@@ -39244,8 +39310,8 @@
     },
     {
       "path": "packages/client/src/interface/developers/docs/content/gateway.md",
-      "sha256": "4c9abc57366006472c89b3393f7aeb17ff3f9cc925c6e30e030194d7fa374c08",
-      "bytes": 7364,
+      "sha256": "4c7053738c4f253798524fbbb7c691e0c9fc90162196da72a75f28b2e74bfe3f",
+      "bytes": 9339,
       "category": "public-documentation"
     },
     {
@@ -39262,8 +39328,8 @@
     },
     {
       "path": "packages/client/src/interface/developers/docs/content/messages.md",
-      "sha256": "d790569d080308c13a6882499686abd7fb32e7481de8aa124ede06b1f79e36c8",
-      "bytes": 5193,
+      "sha256": "d851732b58995bfcd1dfca2c81ba4d1097cee1409191671f3eb7fba5cdaa38bd",
+      "bytes": 7025,
       "category": "public-documentation"
     },
     {
@@ -39280,8 +39346,8 @@
     },
     {
       "path": "packages/client/src/interface/developers/docs/content/overview.md",
-      "sha256": "678a1e87d1a296fb6aacfe8389263f165f50f1d41bb283ee93f99f85931fb522",
-      "bytes": 3423,
+      "sha256": "c71497e6cdd2221b7bc9c45b4b517244129ea16c031464eda74ea8ded0906e32",
+      "bytes": 4845,
       "category": "public-documentation"
     },
     {
@@ -39400,14 +39466,14 @@
     },
     {
       "path": "packages/client/src/interface/developers/docs/content/voice.md",
-      "sha256": "9fd18dfbae66fc99bdcf4c8c68826c861353113f37e6598331d8928ac5ad3896",
-      "bytes": 2433,
+      "sha256": "ee80e61b41b1bdd53651632ea5f0564a2ff07a607a653aced0d9254de00f7119",
+      "bytes": 2803,
       "category": "public-documentation"
     },
     {
       "path": "packages/client/src/interface/developers/docs/docs.test.ts",
-      "sha256": "8b2252e8410b90254dd65ff7b4398a10c914b7eb05f3575fe8b18a7cb5ebced8",
-      "bytes": 15431,
+      "sha256": "66dcdb120edeb3a51212de3b7cc49b3f9b6e8c14b6c39fa641f38079e45cc889",
+      "bytes": 16228,
       "category": "synthetic-test-source-or-fixture"
     },
     {
@@ -39418,8 +39484,8 @@
     },
     {
       "path": "packages/client/src/interface/developers/docs/inventory.ts",
-      "sha256": "035393909e7bca9dff2e249ce1bc58aaf80c0f1511ab31ec60aa2f075cbea61b",
-      "bytes": 8872,
+      "sha256": "610d3f4657155ac39c51c4b45ca378d0ea58905d8462a2add4974ea57d211dd2",
+      "bytes": 9153,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -39430,8 +39496,8 @@
     },
     {
       "path": "packages/client/src/interface/developers/docs/pages.ts",
-      "sha256": "06ee93a3944a87901c6ea806f58df5196343878c7b6e5641a22f19063879f05c",
-      "bytes": 3008,
+      "sha256": "5bb406001178456e1211c6e833f95029d34915d07755b5bc808396b3039cc2f3",
+      "bytes": 3021,
       "category": "product-source-or-build-manifest"
     },
     {
