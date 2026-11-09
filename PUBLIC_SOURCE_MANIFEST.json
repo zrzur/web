@@ -586,8 +586,8 @@
     },
     {
       "path": "e2e/stack-runner/moderation-tools.mjs",
-      "sha256": "b2e106097accd138273064c431fe1d737a90c217bac6cd0b866ba9249233f93f",
-      "bytes": 13846,
+      "sha256": "aa18f988fdfae8d06176e5dd006a7bfdf761443eec4e43b20caf9f8eefe28c2f",
+      "bytes": 15020,
       "category": "synthetic-test-source-or-fixture"
     },
     {
@@ -2139,9 +2139,15 @@
       "category": "product-source-or-build-manifest"
     },
     {
+      "path": "packages/client/components/app/menus/ContextMenu.dom.test.tsx",
+      "sha256": "ff7300745e43d0127bf5810cceb04bc236a569cd49c4084391e7b7c747d339fd",
+      "bytes": 5454,
+      "category": "synthetic-test-source-or-fixture"
+    },
+    {
       "path": "packages/client/components/app/menus/ContextMenu.tsx",
-      "sha256": "6873174e146dd88d20dfea7bcc625106c4cccecfebccfce8618fa76f2b146b0c",
-      "bytes": 10428,
+      "sha256": "3bbc13e1f7c29d3406fca1f1c736e34cf222977e14dbde4b6736ce6a24a2d6cf",
+      "bytes": 12073,
       "category": "product-source-or-build-manifest"
     },
     {
