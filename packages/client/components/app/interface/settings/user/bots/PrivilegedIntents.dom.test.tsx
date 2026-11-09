@@ -102,10 +102,12 @@ describe("privileged intents", () => {
   });
 
   it("saves at once, shows what the server answered and when it counts", async () => {
-    const save = vi.fn(async (n: number) => n);
-    const onChange = mount(async () => 0, save);
+    let stored = 0;
+    const save = vi.fn(async (n: number) => (stored = n));
+    const onChange = mount(async () => stored, save);
     await tick();
     switches()[0].click();
+    await tick();
     await tick();
     expect(save).toHaveBeenCalledWith(PRIVILEGED_INTENTS.messageContent);
     expect(switches()[0].getAttribute("aria-checked")).toBe("true");
@@ -118,6 +120,39 @@ describe("privileged intents", () => {
     expect(document.body.textContent).toContain(
       "applies from the bot's next connection",
     );
+  });
+
+  it("saves the intended mask from the saved state, never switching others off", async () => {
+    let stored: number = PRIVILEGED_INTENTS.serverMembers;
+    const save = vi.fn(async (n: number) => (stored = n));
+    mount(async () => stored, save);
+    await tick();
+    switches()[0].click();
+    await tick();
+    await tick();
+    expect(save).toHaveBeenLastCalledWith(
+      PRIVILEGED_INTENTS.serverMembers | PRIVILEGED_INTENTS.messageContent,
+    );
+    switches()[0].click();
+    await tick();
+    await tick();
+    expect(save).toHaveBeenLastCalledWith(PRIVILEGED_INTENTS.serverMembers);
+  });
+
+  it("reads the switches again after saving and shows that", async () => {
+    let stored = 0;
+    const load = vi.fn(async () => stored);
+    mount(load, async (n) => {
+      stored = n;
+      // an answer that lags behind must not decide what is shown
+      return 0;
+    });
+    await tick();
+    switches()[0].click();
+    await tick();
+    await tick();
+    expect(load).toHaveBeenCalledTimes(2);
+    expect(switches()[0].getAttribute("aria-checked")).toBe("true");
   });
 
   it("keeps the switch on the saved value when saving fails", async () => {

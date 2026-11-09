@@ -78,8 +78,15 @@ export function PrivilegedIntents(props: {
     setSaving(intent.bit);
     setError(undefined);
     setSaved(undefined);
+    // the intended mask, built from what the server saved (never from a
+    // guess on screen): this switch flipped, every other one unchanged
+    const intended = isOn(intent.bit)
+      ? current & ~intent.bit
+      : current | intent.bit;
     try {
-      const value = await props.save(current ^ intent.bit);
+      await props.save(intended);
+      // read it back: the screen shows what is stored, not what was sent
+      const value = await props.load();
       setIntents(value);
       props.onChange?.(value);
       setSaved(

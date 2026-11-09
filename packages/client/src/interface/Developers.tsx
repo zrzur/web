@@ -223,23 +223,27 @@ export function Developers() {
                       )}
                     </For>
                   </Tabs>
-                  <Switch>
-                    <Match when={tab() === "overview"}>
-                      <ViewBot
-                        bot={bot()}
-                        onDelete={() => {
-                          refetch();
-                          navigate("/developers");
-                        }}
-                      />
-                    </Match>
-                    <Match when={tab() === "commands"}>
-                      <Commands bot={bot()} />
-                    </Match>
-                    <Match when={tab() === "oauth2"}>
-                      <OAuth2 bot={bot()} />
-                    </Match>
-                  </Switch>
+                  {/* rebuilt for each bot: nothing of the previous bot (its
+                      intents, a half-edited command) stays on screen */}
+                  <Show when={selectedId()} keyed>
+                    <Switch>
+                      <Match when={tab() === "overview"}>
+                        <ViewBot
+                          bot={bot()}
+                          onDelete={() => {
+                            refetch();
+                            navigate("/developers");
+                          }}
+                        />
+                      </Match>
+                      <Match when={tab() === "commands"}>
+                        <Commands bot={bot()} />
+                      </Match>
+                      <Match when={tab() === "oauth2"}>
+                        <OAuth2 bot={bot()} />
+                      </Match>
+                    </Switch>
+                  </Show>
                 </>
               )}
             </Match>
