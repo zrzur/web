@@ -1072,7 +1072,7 @@
     },
     {
       "path": "packages/client/components/app/interface/settings/UserSettings.tsx",
-      "sha256": "9d93ae79fd07fed42e9d648f711edf9a6d1b07623930c1cf2f03e879fa4d2b58",
+      "sha256": "9d128cf37ed54df85349142f004f98553007fcb716503ce3127773f88cc13976",
       "bytes": 17744,
       "category": "product-source-or-build-manifest"
     },
@@ -2644,8 +2644,8 @@
     },
     {
       "path": "packages/client/components/i18n/catalogs/ar/messages.po",
-      "sha256": "724b6ffa20c0a48d13e51a39355053913e80aa646b65de947d197b0af2fb3854",
-      "bytes": 858787,
+      "sha256": "3483c3ca64a592d72e00d3d0254af0b56d95c5aae31961d28549d545366ff320",
+      "bytes": 858715,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -2788,8 +2788,8 @@
     },
     {
       "path": "packages/client/components/i18n/catalogs/de/messages.po",
-      "sha256": "738b1a8c81fd042151a19bd9824a93e1b77bd70e75bfb62433dfb3b5e215fde5",
-      "bytes": 790408,
+      "sha256": "225891e20a18bbfa847809983864ba5b061f8da7a4ac9c08fad947bd4cf53bdd",
+      "bytes": 790359,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -2824,8 +2824,8 @@
     },
     {
       "path": "packages/client/components/i18n/catalogs/en/messages.po",
-      "sha256": "ab37df8fdf5808a1ae753eea67a1aa15cac476b1966ffaf6e36e4d3fa90752da",
-      "bytes": 771070,
+      "sha256": "e442fc7405110ea689ed9f4ad660935602c80970fce2d4b0c4f768b362458d8a",
+      "bytes": 771023,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -2848,8 +2848,8 @@
     },
     {
       "path": "packages/client/components/i18n/catalogs/es/messages.po",
-      "sha256": "f32f22d6d91158254226c03156f3f07e808b471af9d33b4939b5fab8b294a3ab",
-      "bytes": 572374,
+      "sha256": "54a9008e9405af6e8bb4dde0708cbc2d62f86ddfd6a3ddb7a95b4a7bb70e3f62",
+      "bytes": 572285,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -2908,8 +2908,8 @@
     },
     {
       "path": "packages/client/components/i18n/catalogs/fr/messages.po",
-      "sha256": "36dcf087ba2fd8b25f46d4c91a6287c8813eba72734768f2086a03aec4a95cd5",
-      "bytes": 575319,
+      "sha256": "6d4e4f89d71c8df6db6e9bef4b29fc6d8477f6bd4d072a2a6a3eec46b013b116",
+      "bytes": 575230,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -3172,8 +3172,8 @@
     },
     {
       "path": "packages/client/components/i18n/catalogs/ru/messages.po",
-      "sha256": "418c217f4e1806a106c75a12de4e6e90babf27eb583336945b9edd6f626beb97",
-      "bytes": 589692,
+      "sha256": "ec882930f1746696bf9038326c58a5812935678523a1576da7d83a676dc321e0",
+      "bytes": 589603,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -3340,8 +3340,8 @@
     },
     {
       "path": "packages/client/components/i18n/catalogs/zh-Hans/messages.po",
-      "sha256": "721820a19579c2df26ad79e56bb362692049566bd214ee8d2c659d5d63d9e86a",
-      "bytes": 555469,
+      "sha256": "e2035d3a25c93fe45221f32a05d760ed962ccf83e909c2165e96b09cf4f47f2d",
+      "bytes": 555380,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -37588,8 +37588,8 @@
     },
     {
       "path": "packages/client/scripts/i18n/ui-110920.json",
-      "sha256": "e7b908851344ea9c721986a167801d771d98e04ff4ffddaf7a2a41d7bdf1ff15",
-      "bytes": 17477,
+      "sha256": "363683241044d7bdfa5d2688fe7042530e12206a4649be3c40dee42b49d52cba",
+      "bytes": 18429,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -40386,7 +40386,7 @@
   "submodules": [
     {
       "path": "packages/stoat.js",
-      "commit": "49f841c7aebcec0d18135e4b9914021fd8335129"
+      "commit": "8ef796eab64b6639e64608ed4512baef313a770c"
     }
   ]
 }
