@@ -1,11 +1,53 @@
 // Kept small on purpose: the first code to run (src/index.tsx) starts the
 // catalog download from here, at the same time as the app's own code,
 // instead of after it.
-import type { Messages } from "@lingui/core";
+import { type Messages, i18n } from "@lingui/core";
 
 import { Language, Languages } from "./Languages";
 
 const downloads = new Map<string, Promise<Messages>>();
+
+/** Small catalogs of the Discover and Designs sites, by catalog code */
+let siteCatalogs: Record<string, string> | undefined;
+
+/**
+ * On the Discover and Designs sites: show a language's small file (only
+ * the messages those pages use, scripts/siteCatalogs.mjs) and add the full
+ * file as soon as it has arrived
+ */
+export function preferSiteCatalogs(urls: Record<string, string>) {
+  siteCatalogs = urls;
+}
+
+/** The full catalog file of a language */
+function fullCatalog(code: string) {
+  // explicit .ts: `lingui compile` (CommonJS by default) rewrites
+  // messages.js, which Vite can't import as `{ messages }` (white screen);
+  // the .ts twin is always an ES module
+  return import(`./catalogs/${code}/messages.ts`).then(
+    (module) => module.messages as Messages,
+  );
+}
+
+/** The small file of a site, then the full file added in the background */
+async function siteCatalog(key: Language, code: string, url: string) {
+  const response = await fetch(url);
+  if (!response.ok) throw new Error(`site catalog ${response.status}`);
+  const messages = (await response.json()) as Messages;
+  // after the page's own files and pictures have had their turn, at most
+  // a second later
+  const later = (fn: () => void) =>
+    typeof requestIdleCallback === "function"
+      ? requestIdleCallback(fn, { timeout: 1000 })
+      : setTimeout(fn, 200);
+  later(() =>
+    fullCatalog(code)
+      .then((full) => i18n.load(key, full))
+      // the small file stays; a dialog shows ids until a reload
+      .catch(() => undefined),
+  );
+  return messages;
+}
 
 /**
  * The message catalog of a language. Every caller asking for the same
@@ -17,12 +59,10 @@ export function importCatalog(key: Language): Promise<Messages> {
   if (!code) return Promise.reject(new Error(`no catalog for ${key}`));
   let download = downloads.get(code);
   if (!download) {
-    // explicit .ts: `lingui compile` (CommonJS by default) rewrites
-    // messages.js, which Vite can't import as `{ messages }` (white screen);
-    // the .ts twin is always an ES module
-    download = import(`./catalogs/${code}/messages.ts`).then(
-      (module) => module.messages as Messages,
-    );
+    const site = siteCatalogs?.[code];
+    download = site
+      ? siteCatalog(key, code, site).catch(() => fullCatalog(code))
+      : fullCatalog(code);
     downloads.set(code, download);
     download.catch(() => downloads.delete(code));
   }

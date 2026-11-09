@@ -12,9 +12,14 @@ import "@revolt/ui/zrzur-controls.css";
 /* @refresh reload */
 import "@revolt/ui/styles";
 
-import { browserPreferredLanguage, importCatalog } from "@revolt/i18n/catalog";
+import {
+  browserPreferredLanguage,
+  importCatalog,
+  preferSiteCatalogs,
+} from "@revolt/i18n/catalog";
 import type { Language } from "@revolt/i18n/Languages";
 
+import siteCatalogs from "virtual:zrzur-site-catalogs";
 import { opensSignIn } from "./boot";
 import "./index.css";
 import "./serviceWorkerInterface";
@@ -38,11 +43,17 @@ function escapeSelfEmbed() {
 }
 
 if (!escapeSelfEmbed()) {
+  const site = isDesignsSite() || isDiscoverSite();
+  // the sites' own pages need a fifth of the messages: a small file first,
+  // the full one right after (sign-in pages need the full one at once)
+  if (site && !opensSignIn(window.location.pathname))
+    preferSiteCatalogs(siteCatalogs);
+
   // the provider asks for the same catalog and gets this download; a
   // failure is handled there (it falls back to English)
   importCatalog(browserPreferredLanguage() as Language).catch(() => {});
 
-  if (isDesignsSite() || isDiscoverSite()) {
+  if (site) {
     import("./sites");
   } else {
     if (opensSignIn(window.location.pathname)) {

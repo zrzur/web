@@ -16,6 +16,7 @@ import { emitterInspect } from "./scripts/emitterInspect.mjs";
 import { polyfillGate } from "./scripts/polyfillGate.mjs";
 import { precacheShell } from "./scripts/precacheShell.mjs";
 import { preloadApp } from "./scripts/preloadApp.mjs";
+import { siteCatalogs } from "./scripts/siteCatalogs.mjs";
 import { buildDefine, readReleaseInfo } from "./scripts/release-info.mjs";
 import { thirdPartyNotices } from "./scripts/third-party-notices.mjs";
 
@@ -118,6 +119,10 @@ export default defineConfig(({ command }) => {
       polyfillGate(),
       // the app's files start with the small first file, not after it
       preloadApp(),
+      // the Discover and Designs sites start with only their own messages
+      siteCatalogs({
+        catalogDir: resolve(__dirname, "components/i18n/catalogs"),
+      }),
       shell.plugin,
       VitePWA({
         srcDir: "src",
