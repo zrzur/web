@@ -58,6 +58,10 @@ msgstr "“{label}”至少需要 {0} 个字符。"
 msgid "\"{name}\" needs a number."
 msgstr "“{name}”需要填写数字。"
 
+#: src/interface/channels/text/searchLabels.ts
+msgid "\"{value}\" is not a day. Write it like 2026-11-09."
+msgstr "“{value}”不是日期。请这样写：2026-11-09。"
+
 #: components/ui/components/features/messaging/elements/Container.tsx
 msgid "(edited)"
 msgstr "（已编辑）"
@@ -1633,6 +1637,11 @@ msgstr "高级"
 msgid "Afghanistan"
 msgstr "阿富汗"
 
+#: src/interface/channels/text/searchLabels.ts
+msgctxt "search filter"
+msgid "After"
+msgstr "晚于"
+
 #. placeholder {0}: new URL(data().redirect_uri).host
 #: src/interface/OAuth.tsx
 msgid "After you decide you will go to {0}. You can revoke this at any time under Authorized apps."
@@ -2621,6 +2630,11 @@ msgstr "巴巴多斯"
 #: components/ui/components/features/profiles/badges/useBadgeText.ts
 msgid "Become a Zrzur creator and publish your first decoration, nameplate or effect. Making bots doesn't count."
 msgstr "成为 Zrzur 创作者，发布你的第一个装饰、铭牌或特效。制作机器人不计入。"
+
+#: src/interface/channels/text/searchLabels.ts
+msgctxt "search filter"
+msgid "Before"
+msgstr "早于"
 
 #: components/app/interface/discover/ServerPage.tsx
 msgid "Before you join"
@@ -3971,7 +3985,7 @@ msgstr "清除筛选条件"
 
 #: components/ui/components/features/messaging/composition/picker/EmojiPicker.tsx
 #: components/ui/components/features/messaging/composition/picker/GifPicker.tsx
-#: src/interface/channels/ChannelHeader.tsx
+#: src/interface/channels/text/SearchBox.tsx
 #: src/interface/designs/Stage.tsx
 #: src/interface/designs/Wall.tsx
 #: src/interface/Discover.tsx
@@ -5589,6 +5603,7 @@ msgstr "目标语音频道"
 #: components/i18n/errors.tsx
 #: components/modal/modals/InteractionsEndpoint.tsx
 #: components/modal/modals/ReportContent.tsx
+#: src/interface/channels/text/TextSearchSidebar.tsx
 msgid "Details"
 msgstr "详情"
 
@@ -6197,6 +6212,11 @@ msgstr "顶级漏洞猎人"
 msgid "Email"
 msgstr "电子邮件地址"
 
+#: src/interface/channels/text/searchLabels.ts
+msgctxt "search filter"
+msgid "Embed"
+msgstr "嵌入内容"
+
 #: src/interface/designs/Looks.tsx
 msgid "Ember"
 msgstr "余烬"
@@ -6770,6 +6790,11 @@ msgstr "字段"
 msgid "Fiji"
 msgstr "斐济"
 
+#: src/interface/channels/text/searchLabels.ts
+msgctxt "search filter"
+msgid "File"
+msgstr "文件"
+
 #. placeholder {0}: humanFileSize(local.maxSize)
 #: components/ui/components/utils/Form2.tsx
 msgid "File must be smaller than {0}"
@@ -6844,6 +6869,7 @@ msgstr "筛选帖子"
 #: components/app/interface/settings/server/pages.tsx
 #: components/app/interface/settings/server/ServerEmergency.tsx
 #: components/app/interface/settings/ServerSettings.tsx
+#: src/interface/channels/text/TextSearchSidebar.tsx
 msgid "Filters"
 msgstr "筛选器"
 
@@ -7153,6 +7179,11 @@ msgstr "好友服务器"
 #: components/modal/modals/EditUsername.tsx
 msgid "Friends use your username and number tag to find you. Enter your current password to confirm."
 msgstr "好友通过你的用户名和数字标签找到你。请输入当前密码以确认。"
+
+#: src/interface/channels/text/searchLabels.ts
+msgctxt "search filter"
+msgid "From"
+msgstr "来自"
 
 #. placeholder {0}: entry.supercharges
 #: components/app/interface/settings/server/WingsSettings.tsx
@@ -7797,6 +7828,11 @@ msgstr "硬件加速"
 #~ msgid "Hardware Acceleration"
 #~ msgstr ""
 
+#: src/interface/channels/text/searchLabels.ts
+msgctxt "search filter"
+msgid "Has"
+msgstr "包含"
+
 #: components/ui/components/features/profiles/badges/useBadgeText.ts
 msgid "Has been on Zrzur for a year."
 msgstr "已使用 Zrzur 一年。"
@@ -7804,6 +7840,10 @@ msgstr "已使用 Zrzur 一年。"
 #: components/ui/components/features/profiles/badges/useBadgeText.ts
 msgid "Has been on Zrzur for three years."
 msgstr "已使用 Zrzur 三年。"
+
+#: src/interface/channels/text/searchLabels.ts
+msgid "has: takes link, file, image, video, embed or sound."
+msgstr "has: 可用 link、file、image、video、embed 或 sound。"
 
 #: components/app/interface/safety/labels.tsx
 msgid "Hate or threats"
@@ -8189,6 +8229,11 @@ msgstr "根据某项法律属于违法"
 msgid "Image"
 msgstr "图片"
 
+#: src/interface/channels/text/searchLabels.ts
+msgctxt "search filter"
+msgid "Image"
+msgstr "图片"
+
 #: components/app/interface/channels/text/interactions/MediaBlocks.tsx
 msgid "Image not available"
 msgstr "图片不可用"
@@ -8208,6 +8253,11 @@ msgstr "导入"
 #: components/app/interface/discover/SiteFrame.tsx
 msgid "Impressum"
 msgstr "法律声明"
+
+#: src/interface/channels/text/searchLabels.ts
+msgctxt "search filter"
+msgid "In"
+msgstr "位于"
 
 #. placeholder {0}: server()
 #. placeholder {1}: joined()
@@ -8259,6 +8309,10 @@ msgstr "正在语音中"
 #: components/app/interface/discover/Detail.tsx
 msgid "In your chat"
 msgstr "在你的聊天中"
+
+#: src/interface/channels/text/searchLabels.ts
+msgid "in: works in servers only."
+msgstr "in: 仅在服务器中可用。"
 
 #: components/app/interface/settings/user/appearance/LivePreview.tsx
 msgid "In!"
@@ -8731,6 +8785,10 @@ msgstr "约旦"
 msgid "Jump back in"
 msgstr "重新加入"
 
+#: src/interface/channels/text/TextSearchSidebar.tsx
+msgid "Jump to message"
+msgstr "跳转到消息"
+
 #: components/ui/components/features/messaging/bars/JumpToBottom.tsx
 msgid "Jump to present"
 msgstr "跳转到现在"
@@ -9193,6 +9251,11 @@ msgstr "莉娜"
 
 #: components/app/interface/discover/ServerPage.tsx
 #: src/interface/designs/DesignPage.tsx
+msgid "Link"
+msgstr "链接"
+
+#: src/interface/channels/text/searchLabels.ts
+msgctxt "search filter"
 msgid "Link"
 msgstr "链接"
 
@@ -10128,6 +10191,11 @@ msgstr "提及特定身份组"
 msgid "Mentions"
 msgstr "提及"
 
+#: src/interface/channels/text/searchLabels.ts
+msgctxt "search filter"
+msgid "Mentions"
+msgstr "提及"
+
 #: src/interface/navigation/MentionsPanel.tsx
 msgid "Mentions couldn't load. Try again soon."
 msgstr "无法加载提及。请稍后再试。"
@@ -10238,13 +10306,41 @@ msgstr "消息"
 msgid "Messages & Embeds"
 msgstr "消息与嵌入内容"
 
+#: src/interface/channels/text/searchLabels.ts
+msgid "Messages after a day"
+msgstr "某天之后的消息"
+
 #: src/interface/You.tsx
 msgid "Messages and links you keep for later"
 msgstr "你保存起来稍后查看的消息和链接"
 
+#: src/interface/channels/text/searchLabels.ts
+msgid "Messages before a day"
+msgstr "某天之前的消息"
+
+#: src/interface/channels/text/searchLabels.ts
+msgid "Messages from a member"
+msgstr "某位成员发送的消息"
+
 #: components/app/interface/settings/user/appearance/AnimationSettings.tsx
 msgid "Messages from others as they arrive, and messages as they are removed."
 msgstr "他人发来的新消息，以及被移除的消息。"
+
+#: src/interface/channels/text/searchLabels.ts
+msgid "Messages in a channel, across the server"
+msgstr "某个频道中的消息（在整个服务器中搜索）"
+
+#: src/interface/channels/text/searchLabels.ts
+msgid "Messages on a day"
+msgstr "某一天的消息"
+
+#: src/interface/channels/text/searchLabels.ts
+msgid "Messages that mention a member"
+msgstr "提及某位成员的消息"
+
+#: src/interface/channels/text/searchLabels.ts
+msgid "Messages with a link, file, image, video, embed or sound"
+msgstr "包含链接、文件、图片、视频、嵌入内容或音频的消息"
 
 #: components/modal/modals/CreateChannel.tsx
 msgid "Messages, images, GIFs and links"
@@ -11050,6 +11146,7 @@ msgstr "否"
 
 #: components/app/interface/channels/text/interactions/CommandPicker.tsx
 #: components/app/interface/settings/server/audit/AuditLog.tsx
+#: src/interface/channels/text/searchLabels.ts
 #: src/interface/developers/docs/Directives.tsx
 msgid "No"
 msgstr "否"
@@ -11121,6 +11218,10 @@ msgstr "无更新日志。"
 #: components/app/interface/settings/user/profile/CreatorsAdmin.tsx
 msgid "No changes yet."
 msgstr "暂无更改。"
+
+#: src/interface/channels/text/searchLabels.ts
+msgid "No channel called \"{value}\"."
+msgstr "没有名为“{value}”的频道。"
 
 #: components/app/interface/settings/server/channels/ChannelsSettings.tsx
 msgid "No channels yet"
@@ -11272,6 +11373,10 @@ msgstr "不再符合条件"
 msgid "No media device was found. Check your device settings."
 msgstr "未找到媒体设备。请检查你的设备设置。"
 
+#: src/interface/channels/text/searchLabels.ts
+msgid "No member called \"{value}\"."
+msgstr "没有名为“{value}”的成员。"
+
 #: components/app/interface/settings/server/members/ListMembers.tsx
 msgid "No member matches"
 msgstr "没有匹配的成员"
@@ -11281,8 +11386,16 @@ msgid "No mentions in the last 30 days."
 msgstr "过去 30 天内没有提及。"
 
 #: src/interface/channels/text/TextSearchSidebar.tsx
-msgid "No messages match your search."
-msgstr "没有符合搜索条件的消息。"
+msgid "No messages in this channel match your search."
+msgstr "此频道中没有符合搜索条件的消息。"
+
+#: src/interface/channels/text/TextSearchSidebar.tsx
+msgid "No messages in this server match your search."
+msgstr "此服务器中没有符合搜索条件的消息。"
+
+#: src/interface/channels/text/TextSearchSidebar.tsx
+#~ msgid "No messages match your search."
+#~ msgstr "没有符合搜索条件的消息。"
 
 #: src/interface/lobby/Lobby.tsx
 msgid "No messages yet"
@@ -11840,6 +11953,11 @@ msgstr "在服务器上，机器人将获得："
 msgid "On dark"
 msgstr "深色背景下"
 
+#: src/interface/channels/text/searchLabels.ts
+msgctxt "search filter"
+msgid "On day"
+msgstr "当天"
+
 #: components/app/interface/settings/user/profile/CreatorStudio.tsx
 msgid "On light"
 msgstr "浅色背景下"
@@ -11958,6 +12076,10 @@ msgstr "仅限性能强劲的设备。此设备性能不足，因此动画保持
 msgid "Only on strong devices. This device is strong enough, so animations play."
 msgstr "仅限性能强劲的设备。此设备性能足够，因此会播放动画。"
 
+#: src/interface/channels/text/searchLabels.ts
+msgid "Only one mentions: filter is used, so \"{value}\" was left out."
+msgstr "只使用一个 mentions: 筛选，因此忽略了“{value}”。"
+
 #: components/app/interface/settings/server/LobbyRoleQuestionsEditor.tsx
 msgid "Only ordinary member roles can be offered: no managed roles and none with moderation or admin permissions."
 msgstr "只能提供普通成员身份组：不能是托管身份组，也不能是带有管理或管理员权限的身份组。"
@@ -11977,6 +12099,10 @@ msgstr "只有管理服务器的人才能更改此项。"
 #: components/app/interface/settings/user/profile/CreatorsAdmin.tsx
 msgid "Only people you make creators can submit designs. Revoking stops new submissions right away; published designs stay."
 msgstr "只有被你设为创作者的人才能提交设计。撤销后会立即停止新的提交；已发布的设计会保留。"
+
+#: src/interface/channels/text/searchLabels.ts
+msgid "Only pinned messages"
+msgstr "仅已置顶的消息"
 
 #: components/app/interface/settings/shared/Discoverable.tsx
 msgid "Only public bots can be listed, so others can add them to their servers."
@@ -12014,6 +12140,10 @@ msgstr "仅需认证请求头。"
 #: src/interface/developers/docs/EndpointReference.tsx
 msgid "Only the common errors (see Errors)."
 msgstr "仅限常见错误（见“错误”）。"
+
+#: src/interface/channels/text/TextSearchSidebar.tsx
+msgid "Only the first 64 characters are searched."
+msgstr "只搜索前 64 个字符。"
 
 #: components/app/interface/settings/user/plugins/text.ts
 msgid "Only the one message you choose its action on, and only at that moment."
@@ -12721,6 +12851,11 @@ msgstr "置顶"
 msgid "Pin message"
 msgstr "置顶消息"
 
+#: src/interface/channels/text/searchLabels.ts
+msgctxt "search filter"
+msgid "Pinned"
+msgstr "已置顶"
+
 #. placeholder {0}: userName(a.author)
 #. placeholder {1}: channelName(a.channel)
 #: components/app/interface/settings/server/audit/AuditLog.tsx
@@ -12739,6 +12874,10 @@ msgstr "置顶消息"
 #: src/interface/channels/text/TextChannel.tsx
 #~ msgid "Pinned Messages"
 #~ msgstr ""
+
+#: src/interface/channels/text/searchLabels.ts
+msgid "pinned: takes true or false."
+msgstr "pinned: 可用 true 或 false。"
 
 #: components/app/interface/settings/user/profile/StyleEditors.tsx
 msgid "Pisces"
@@ -15100,6 +15239,10 @@ msgstr "搜索发现"
 msgid "Search effects"
 msgstr "搜索特效"
 
+#: src/interface/channels/text/SearchBox.tsx
+msgid "Search filters"
+msgstr "搜索筛选"
+
 #: components/modal/modals/CreateInvite.tsx
 msgid "Search for friends"
 msgstr "搜索好友"
@@ -15139,6 +15282,7 @@ msgid "Search members"
 msgstr "搜索成员"
 
 #: src/interface/channels/ChannelHeader.tsx
+#: src/interface/channels/text/SearchBox.tsx
 msgid "Search messages"
 msgstr "搜索消息"
 
@@ -16228,6 +16372,11 @@ msgstr "对成员排序"
 #: src/interface/channels/text/TextSearchSidebar.tsx
 msgid "Sort results"
 msgstr "对结果排序"
+
+#: src/interface/channels/text/searchLabels.ts
+msgctxt "search filter"
+msgid "Sound"
+msgstr "音频"
 
 #: src/interface/developers/docs/EndpointReference.tsx
 msgid "Source"
@@ -17837,6 +17986,10 @@ msgstr "此操作无法撤销。"
 msgid "This case couldn't be loaded."
 msgstr "无法加载此案件。"
 
+#: src/interface/channels/text/TextSearchSidebar.tsx
+msgid "This channel"
+msgstr "此频道"
+
 #: components/i18n/errors.tsx
 msgid "This channel doesn't exist any more."
 msgstr "该频道已不存在。"
@@ -18484,6 +18637,10 @@ msgstr "标题"
 msgid "To answer one, open a ticket."
 msgstr "要回答其中一个，请开启工单。"
 
+#: src/interface/channels/text/SearchBox.tsx
+msgid "Today"
+msgstr "今天"
+
 #: components/app/interface/settings/user/appearance/LivePreview.tsx
 msgid "Today 19:02"
 msgstr "今天 19:02"
@@ -18536,6 +18693,10 @@ msgstr "操作过多。请稍等片刻后重试。"
 #: components/i18n/errors.tsx
 msgid "Too many messages at once. Wait a moment and try again."
 msgstr "一次发送的消息过多。请稍等片刻后重试。"
+
+#: src/interface/channels/text/TextSearchSidebar.tsx
+msgid "Too many searches. Wait a moment, then try again."
+msgstr "搜索次数过多。请稍候再试。"
 
 #: components/app/interface/settings/user/appearance/AnimationSettings.tsx
 msgid "Tooltips"
@@ -18799,8 +18960,12 @@ msgid "Type a new name above, then rename"
 msgstr "在上方输入新名称，然后重命名"
 
 #: src/interface/channels/text/TextSearchSidebar.tsx
-msgid "Type to search messages in this channel."
-msgstr "输入内容以搜索此频道中的消息。"
+#~ msgid "Type to search messages in this channel."
+#~ msgstr "输入内容以搜索此频道中的消息。"
+
+#: src/interface/channels/text/TextSearchSidebar.tsx
+msgid "Type words to search, or a filter like from:, has: or before:."
+msgstr "输入要搜索的词语，或使用 from:、has:、before: 等筛选。"
 
 #: src/interface/developers/docs/EndpointReference.tsx
 msgid "Type-checked only."
@@ -18916,6 +19081,10 @@ msgstr "美国"
 #: components/ui/components/design/LoadingScreen.tsx
 msgid "Unknown"
 msgstr "未知"
+
+#: src/interface/channels/text/TextSearchSidebar.tsx
+msgid "Unknown channel"
+msgstr "未知频道"
 
 #: components/markdown/plugins/mentions.tsx
 msgid "Unknown role"
@@ -19078,6 +19247,14 @@ msgstr "最大 {0}"
 #: components/app/interface/settings/user/profile/ProfileExtras.tsx
 msgid "Up to {MAX_LINKS} links, starting with https://. People see the real site address and a warning before they leave Zrzur. Others can see this."
 msgstr "最多 {MAX_LINKS} 个链接，以 https:// 开头。人们离开 Zrzur 之前会看到真实的网站地址和警告。其他人可以看到这一内容。"
+
+#: src/interface/channels/text/searchLabels.ts
+msgid "Up to 10 from: filters are used, so \"{value}\" was left out."
+msgstr "最多使用 10 个 from: 筛选，因此忽略了“{value}”。"
+
+#: src/interface/channels/text/searchLabels.ts
+msgid "Up to 50 in: filters are used, so \"{value}\" was left out."
+msgstr "最多使用 50 个 in: 筛选，因此忽略了“{value}”。"
 
 #: components/app/interface/settings/user/plugins/text.ts
 msgid "Up to 8 KB of its own settings, kept with your account."
@@ -19535,6 +19712,11 @@ msgid "Victory"
 msgstr "胜利"
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
+msgid "Video"
+msgstr "视频"
+
+#: src/interface/channels/text/searchLabels.ts
+msgctxt "search filter"
 msgid "Video"
 msgstr "视频"
 
@@ -20127,6 +20309,10 @@ msgstr "工单开启的位置"
 msgid "Where to preview"
 msgstr "预览位置"
 
+#: src/interface/channels/text/TextSearchSidebar.tsx
+msgid "Where to search"
+msgstr "搜索范围"
+
 #: components/app/interface/settings/server/LobbySettings.tsx
 msgid "Where to talk, with how busy each one is."
 msgstr "聊天的地方，以及每个地方的热闹程度。"
@@ -20220,6 +20406,10 @@ msgstr "谁会聚集在这里？"
 #: components/app/interface/settings/server/webhooks/ServerWebhooks.tsx
 msgid "Whoever runs this Zrzur server can turn them on in its configuration."
 msgstr "运行此 Zrzur 服务器的人可以在其配置中开启它们。"
+
+#: src/interface/channels/text/TextSearchSidebar.tsx
+msgid "Whole server"
+msgstr "整个服务器"
 
 #: components/app/interface/discover/AdLabel.tsx
 msgid "Why am I seeing this?"
@@ -20449,6 +20639,7 @@ msgstr "是"
 
 #: components/app/interface/channels/text/interactions/CommandPicker.tsx
 #: components/app/interface/settings/server/audit/AuditLog.tsx
+#: src/interface/channels/text/searchLabels.ts
 #: src/interface/developers/docs/Directives.tsx
 msgid "Yes"
 msgstr "是"
@@ -20460,6 +20651,10 @@ msgstr "是，可随时隐藏"
 #: components/app/interface/settings/user/plugins/PluginDetail.tsx
 msgid "Yes, uninstall"
 msgstr "是，卸载"
+
+#: src/interface/channels/text/SearchBox.tsx
+msgid "Yesterday"
+msgstr "昨天"
 
 #: components/app/interface/desktop/Titlebar.tsx
 #: components/app/interface/settings/user/appearance/LivePreview.tsx

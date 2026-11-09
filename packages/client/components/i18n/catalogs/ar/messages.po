@@ -58,6 +58,10 @@ msgstr "يحتاج «{label}» إلى {0} حرفاً على الأقل."
 msgid "\"{name}\" needs a number."
 msgstr "يحتاج «{name}» إلى رقم."
 
+#: src/interface/channels/text/searchLabels.ts
+msgid "\"{value}\" is not a day. Write it like 2026-11-09."
+msgstr "\"{value}\" ليس تاريخ يوم. اكتبه هكذا: 2026-11-09."
+
 #~ msgid "(changes are being saved…)"
 #~ msgstr "(يتم حفظ التعديلات…)"
 
@@ -1674,6 +1678,11 @@ msgstr "متقدم"
 msgid "Afghanistan"
 msgstr "أفغانستان"
 
+#: src/interface/channels/text/searchLabels.ts
+msgctxt "search filter"
+msgid "After"
+msgstr "بعد"
+
 #. placeholder {0}: new URL(data().redirect_uri).host
 #: src/interface/OAuth.tsx
 msgid "After you decide you will go to {0}. You can revoke this at any time under Authorized apps."
@@ -2722,6 +2731,11 @@ msgstr "بربادوس"
 #: components/ui/components/features/profiles/badges/useBadgeText.ts
 msgid "Become a Zrzur creator and publish your first decoration, nameplate or effect. Making bots doesn't count."
 msgstr "كن مصممًا في زرزور وانشر أول إطار أو خلفية اسم أو مؤثر. صنع البوتات لا يُحتسب."
+
+#: src/interface/channels/text/searchLabels.ts
+msgctxt "search filter"
+msgid "Before"
+msgstr "قبل"
 
 #: components/app/interface/discover/ServerPage.tsx
 msgid "Before you join"
@@ -4113,7 +4127,7 @@ msgstr "امسح عوامل التصفية"
 
 #: components/ui/components/features/messaging/composition/picker/EmojiPicker.tsx
 #: components/ui/components/features/messaging/composition/picker/GifPicker.tsx
-#: src/interface/channels/ChannelHeader.tsx
+#: src/interface/channels/text/SearchBox.tsx
 #: src/interface/designs/Stage.tsx
 #: src/interface/designs/Wall.tsx
 #: src/interface/Discover.tsx
@@ -5844,6 +5858,7 @@ msgstr "الغرفة الصوتية الوجهة"
 #: components/i18n/errors.tsx
 #: components/modal/modals/InteractionsEndpoint.tsx
 #: components/modal/modals/ReportContent.tsx
+#: src/interface/channels/text/TextSearchSidebar.tsx
 msgid "Details"
 msgstr "التفاصيل"
 
@@ -6482,6 +6497,11 @@ msgstr "صائد الأخطاء النخبة"
 msgid "Email"
 msgstr "البريد الإلكتروني"
 
+#: src/interface/channels/text/searchLabels.ts
+msgctxt "search filter"
+msgid "Embed"
+msgstr "تضمين"
+
 #: src/interface/designs/Looks.tsx
 msgid "Ember"
 msgstr "جمر"
@@ -7070,6 +7090,11 @@ msgstr "الحقول"
 msgid "Fiji"
 msgstr "فيجي"
 
+#: src/interface/channels/text/searchLabels.ts
+msgctxt "search filter"
+msgid "File"
+msgstr "ملف"
+
 #. placeholder {0}: humanFileSize(local.maxSize)
 #: components/ui/components/utils/Form2.tsx
 msgid "File must be smaller than {0}"
@@ -7148,6 +7173,7 @@ msgstr "تصفية المنشورات"
 #: components/app/interface/settings/server/pages.tsx
 #: components/app/interface/settings/server/ServerEmergency.tsx
 #: components/app/interface/settings/ServerSettings.tsx
+#: src/interface/channels/text/TextSearchSidebar.tsx
 msgid "Filters"
 msgstr "التصفية"
 
@@ -7497,6 +7523,11 @@ msgstr "سيرفر أصدقاء"
 #: components/modal/modals/EditUsername.tsx
 msgid "Friends use your username and number tag to find you. Enter your current password to confirm."
 msgstr "يجدك أصدقاؤك باسم المستخدم ورقمك المميّز. أدخل كلمة مرورك الحالية للتأكيد."
+
+#: src/interface/channels/text/searchLabels.ts
+msgctxt "search filter"
+msgid "From"
+msgstr "من"
 
 #. placeholder {0}: entry.supercharges
 #: components/app/interface/settings/server/WingsSettings.tsx
@@ -8141,6 +8172,11 @@ msgstr "تسريع العتاد"
 #~ msgid "Hardware Acceleration"
 #~ msgstr "تسريع العتاد"
 
+#: src/interface/channels/text/searchLabels.ts
+msgctxt "search filter"
+msgid "Has"
+msgstr "يحتوي"
+
 #: components/ui/components/features/profiles/badges/useBadgeText.ts
 msgid "Has been on Zrzur for a year."
 msgstr "مضى عليه عام في زرزور."
@@ -8148,6 +8184,10 @@ msgstr "مضى عليه عام في زرزور."
 #: components/ui/components/features/profiles/badges/useBadgeText.ts
 msgid "Has been on Zrzur for three years."
 msgstr "مضت عليه ثلاثة أعوام في زرزور."
+
+#: src/interface/channels/text/searchLabels.ts
+msgid "has: takes link, file, image, video, embed or sound."
+msgstr "has: يقبل link أو file أو image أو video أو embed أو sound."
 
 #: components/app/interface/safety/labels.tsx
 msgid "Hate or threats"
@@ -8562,6 +8602,11 @@ msgstr "مخالف لقانون"
 msgid "Image"
 msgstr "صورة"
 
+#: src/interface/channels/text/searchLabels.ts
+msgctxt "search filter"
+msgid "Image"
+msgstr "صورة"
+
 #: components/app/interface/channels/text/interactions/MediaBlocks.tsx
 msgid "Image not available"
 msgstr "الصورة غير متاحة"
@@ -8581,6 +8626,11 @@ msgstr "استيراد"
 #: components/app/interface/discover/SiteFrame.tsx
 msgid "Impressum"
 msgstr "بيانات الناشر"
+
+#: src/interface/channels/text/searchLabels.ts
+msgctxt "search filter"
+msgid "In"
+msgstr "في"
 
 #. placeholder {0}: server()
 #. placeholder {1}: joined()
@@ -8636,6 +8686,10 @@ msgstr "في الصوت الآن"
 #: components/app/interface/discover/Detail.tsx
 msgid "In your chat"
 msgstr "في محادثتك"
+
+#: src/interface/channels/text/searchLabels.ts
+msgid "in: works in servers only."
+msgstr "in: يعمل في السيرفرات فقط."
 
 #: components/app/interface/settings/user/appearance/LivePreview.tsx
 msgid "In!"
@@ -9159,6 +9213,10 @@ msgstr "الأردن"
 msgid "Jump back in"
 msgstr "تابع من حيث توقفت"
 
+#: src/interface/channels/text/TextSearchSidebar.tsx
+msgid "Jump to message"
+msgstr "الانتقال إلى الرسالة"
+
 #: components/ui/components/features/messaging/bars/JumpToBottom.tsx
 msgid "Jump to present"
 msgstr "الانتقال إلى أحدث الرسائل"
@@ -9647,6 +9705,11 @@ msgstr "لينا"
 #: src/interface/designs/DesignPage.tsx
 msgid "Link"
 msgstr "الرابط"
+
+#: src/interface/channels/text/searchLabels.ts
+msgctxt "search filter"
+msgid "Link"
+msgstr "رابط"
 
 #. placeholder {0}: index + 1
 #: components/app/interface/settings/user/profile/ProfileExtras.tsx
@@ -10615,6 +10678,11 @@ msgstr "الإشارة إلى أدوار محددة"
 msgid "Mentions"
 msgstr "الإشارات"
 
+#: src/interface/channels/text/searchLabels.ts
+msgctxt "search filter"
+msgid "Mentions"
+msgstr "يذكر"
+
 #: src/interface/navigation/MentionsPanel.tsx
 msgid "Mentions couldn't load. Try again soon."
 msgstr "تعذّر تحميل الإشارات. حاول مرة أخرى بعد قليل."
@@ -10725,13 +10793,41 @@ msgstr "الرسائل"
 msgid "Messages & Embeds"
 msgstr "صانع الرسائل"
 
+#: src/interface/channels/text/searchLabels.ts
+msgid "Messages after a day"
+msgstr "رسائل بعد يوم محدد"
+
 #: src/interface/You.tsx
 msgid "Messages and links you keep for later"
 msgstr "رسائل وروابط تحفظها لوقت لاحق"
 
+#: src/interface/channels/text/searchLabels.ts
+msgid "Messages before a day"
+msgstr "رسائل قبل يوم محدد"
+
+#: src/interface/channels/text/searchLabels.ts
+msgid "Messages from a member"
+msgstr "رسائل من عضو"
+
 #: components/app/interface/settings/user/appearance/AnimationSettings.tsx
 msgid "Messages from others as they arrive, and messages as they are removed."
 msgstr "رسائل الآخرين عند وصولها، والرسائل عند حذفها."
+
+#: src/interface/channels/text/searchLabels.ts
+msgid "Messages in a channel, across the server"
+msgstr "رسائل في قناة، على مستوى السيرفر"
+
+#: src/interface/channels/text/searchLabels.ts
+msgid "Messages on a day"
+msgstr "رسائل في يوم محدد"
+
+#: src/interface/channels/text/searchLabels.ts
+msgid "Messages that mention a member"
+msgstr "رسائل تذكر عضوًا"
+
+#: src/interface/channels/text/searchLabels.ts
+msgid "Messages with a link, file, image, video, embed or sound"
+msgstr "رسائل فيها رابط أو ملف أو صورة أو فيديو أو تضمين أو صوت"
 
 #: components/modal/modals/CreateChannel.tsx
 msgid "Messages, images, GIFs and links"
@@ -11577,6 +11673,7 @@ msgstr "لا"
 
 #: components/app/interface/channels/text/interactions/CommandPicker.tsx
 #: components/app/interface/settings/server/audit/AuditLog.tsx
+#: src/interface/channels/text/searchLabels.ts
 #: src/interface/developers/docs/Directives.tsx
 msgid "No"
 msgstr "لا"
@@ -11656,6 +11753,10 @@ msgstr "لا يوجد سجل تغييرات."
 #: components/app/interface/settings/user/profile/CreatorsAdmin.tsx
 msgid "No changes yet."
 msgstr "لا توجد تغييرات بعد."
+
+#: src/interface/channels/text/searchLabels.ts
+msgid "No channel called \"{value}\"."
+msgstr "لا توجد قناة باسم \"{value}\"."
 
 #: components/app/interface/settings/server/channels/ChannelsSettings.tsx
 msgid "No channels yet"
@@ -11811,6 +11912,10 @@ msgstr "لم يعد مؤهلًا"
 msgid "No media device was found. Check your device settings."
 msgstr "لم يتم العثور على جهاز صوت أو فيديو. تحقق من إعدادات الأجهزة."
 
+#: src/interface/channels/text/searchLabels.ts
+msgid "No member called \"{value}\"."
+msgstr "لا يوجد عضو باسم \"{value}\"."
+
 #: components/app/interface/settings/server/members/ListMembers.tsx
 msgid "No member matches"
 msgstr "لا يوجد عضو مطابق"
@@ -11820,8 +11925,16 @@ msgid "No mentions in the last 30 days."
 msgstr "لا توجد إشارات إليك في آخر 30 يوماً."
 
 #: src/interface/channels/text/TextSearchSidebar.tsx
-msgid "No messages match your search."
-msgstr "لا توجد رسائل تطابق بحثك."
+msgid "No messages in this channel match your search."
+msgstr "لا توجد رسائل في هذه القناة تطابق بحثك."
+
+#: src/interface/channels/text/TextSearchSidebar.tsx
+msgid "No messages in this server match your search."
+msgstr "لا توجد رسائل في هذا السيرفر تطابق بحثك."
+
+#: src/interface/channels/text/TextSearchSidebar.tsx
+#~ msgid "No messages match your search."
+#~ msgstr "لا توجد رسائل تطابق بحثك."
 
 #: src/interface/lobby/Lobby.tsx
 msgid "No messages yet"
@@ -12427,6 +12540,11 @@ msgstr "يحصل البوت في السيرفر على:"
 msgid "On dark"
 msgstr "على خلفية داكنة"
 
+#: src/interface/channels/text/searchLabels.ts
+msgctxt "search filter"
+msgid "On day"
+msgstr "في يوم"
+
 #: components/app/interface/settings/user/profile/CreatorStudio.tsx
 msgid "On light"
 msgstr "على خلفية فاتحة"
@@ -12549,6 +12667,10 @@ msgstr "على الأجهزة القوية فقط. هذا الجهاز ليس ق
 msgid "Only on strong devices. This device is strong enough, so animations play."
 msgstr "على الأجهزة القوية فقط. هذا الجهاز قوي بما يكفي، لذا تعمل الحركات."
 
+#: src/interface/channels/text/searchLabels.ts
+msgid "Only one mentions: filter is used, so \"{value}\" was left out."
+msgstr "يُستخدم عامل mentions: واحد فقط، لذلك تُرك \"{value}\"."
+
 #: components/app/interface/settings/server/LobbyRoleQuestionsEditor.tsx
 msgid "Only ordinary member roles can be offered: no managed roles and none with moderation or admin permissions."
 msgstr "يمكن عرض أدوار الأعضاء العادية فقط: لا أدوار مُدارة ولا أدوار بصلاحيات إشراف أو إدارة."
@@ -12573,6 +12695,10 @@ msgstr "لا يغيّر هذا إلا من يدير السيرفر."
 #: components/app/interface/settings/user/profile/CreatorsAdmin.tsx
 msgid "Only people you make creators can submit designs. Revoking stops new submissions right away; published designs stay."
 msgstr "لا يستطيع إرسال التصاميم إلا من تجعلهم مصممين. سحب الصفة يوقف الإرسال فورًا، وتبقى التصاميم المنشورة."
+
+#: src/interface/channels/text/searchLabels.ts
+msgid "Only pinned messages"
+msgstr "الرسائل المثبّتة فقط"
 
 #: components/app/interface/settings/shared/Discoverable.tsx
 msgid "Only public bots can be listed, so others can add them to their servers."
@@ -12614,6 +12740,10 @@ msgstr "ترويسة المصادقة فقط."
 #: src/interface/developers/docs/EndpointReference.tsx
 msgid "Only the common errors (see Errors)."
 msgstr "الأخطاء الشائعة فقط (انظر صفحة الأخطاء)."
+
+#: src/interface/channels/text/TextSearchSidebar.tsx
+msgid "Only the first 64 characters are searched."
+msgstr "يُبحث في أول 64 حرفًا فقط."
 
 #: components/app/interface/settings/user/plugins/text.ts
 msgid "Only the one message you choose its action on, and only at that moment."
@@ -13403,6 +13533,11 @@ msgstr "تثبيت"
 msgid "Pin message"
 msgstr "تثبيت الرسالة"
 
+#: src/interface/channels/text/searchLabels.ts
+msgctxt "search filter"
+msgid "Pinned"
+msgstr "مثبّتة"
+
 #. placeholder {0}: userName(a.author)
 #. placeholder {1}: channelName(a.channel)
 #: components/app/interface/settings/server/audit/AuditLog.tsx
@@ -13421,6 +13556,10 @@ msgstr "الرسائل المثبّتة"
 #: src/interface/channels/text/TextChannel.tsx
 #~ msgid "Pinned Messages"
 #~ msgstr "الرسائل المثبّتة"
+
+#: src/interface/channels/text/searchLabels.ts
+msgid "pinned: takes true or false."
+msgstr "pinned: يقبل true أو false."
 
 #: components/app/interface/settings/user/profile/StyleEditors.tsx
 msgid "Pisces"
@@ -15897,6 +16036,10 @@ msgstr "ابحث في المؤثرات"
 #~ msgid "Search emoji"
 #~ msgstr "ابحث عن إيموجي"
 
+#: src/interface/channels/text/SearchBox.tsx
+msgid "Search filters"
+msgstr "عوامل تصفية البحث"
+
 #: components/modal/modals/CreateInvite.tsx
 msgid "Search for friends"
 msgstr "ابحث عن أصدقاء"
@@ -15944,6 +16087,7 @@ msgid "Search members"
 msgstr "البحث في الأعضاء"
 
 #: src/interface/channels/ChannelHeader.tsx
+#: src/interface/channels/text/SearchBox.tsx
 msgid "Search messages"
 msgstr "ابحث في الرسائل"
 
@@ -17064,6 +17208,11 @@ msgstr "ترتيب الأعضاء"
 #: src/interface/channels/text/TextSearchSidebar.tsx
 msgid "Sort results"
 msgstr "ترتيب النتائج"
+
+#: src/interface/channels/text/searchLabels.ts
+msgctxt "search filter"
+msgid "Sound"
+msgstr "صوت"
 
 #: src/interface/developers/docs/EndpointReference.tsx
 msgid "Source"
@@ -18746,6 +18895,10 @@ msgstr "لا يمكن التراجع عن هذا."
 msgid "This case couldn't be loaded."
 msgstr "تعذّر تحميل هذه الحالة."
 
+#: src/interface/channels/text/TextSearchSidebar.tsx
+msgid "This channel"
+msgstr "هذه القناة"
+
 #: components/i18n/errors.tsx
 msgid "This channel doesn't exist any more."
 msgstr "لم تعد هذه القناة موجودة."
@@ -19401,6 +19554,10 @@ msgstr "العنوان"
 msgid "To answer one, open a ticket."
 msgstr "للرد على إحداها افتح تذكرة."
 
+#: src/interface/channels/text/SearchBox.tsx
+msgid "Today"
+msgstr "اليوم"
+
 #: components/app/interface/settings/user/appearance/LivePreview.tsx
 msgid "Today 19:02"
 msgstr "اليوم 19:02"
@@ -19457,6 +19614,10 @@ msgstr "إجراءات كثيرة جدًا. انتظر لحظة وحاول مر�
 #: components/i18n/errors.tsx
 msgid "Too many messages at once. Wait a moment and try again."
 msgstr "رسائل كثيرة دفعة واحدة. انتظر قليلًا ثم حاول مرة أخرى."
+
+#: src/interface/channels/text/TextSearchSidebar.tsx
+msgid "Too many searches. Wait a moment, then try again."
+msgstr "عمليات بحث كثيرة جدًا. انتظر قليلًا ثم حاول مرة أخرى."
 
 #: src/interface/Designs.tsx
 #~ msgid "Tools"
@@ -19736,8 +19897,12 @@ msgid "Type a new name above, then rename"
 msgstr "اكتب اسمًا جديدًا بالأعلى ثم أعد التسمية"
 
 #: src/interface/channels/text/TextSearchSidebar.tsx
-msgid "Type to search messages in this channel."
-msgstr "اكتب للبحث في رسائل هذه القناة."
+#~ msgid "Type to search messages in this channel."
+#~ msgstr "اكتب للبحث في رسائل هذه القناة."
+
+#: src/interface/channels/text/TextSearchSidebar.tsx
+msgid "Type words to search, or a filter like from:, has: or before:."
+msgstr "اكتب كلمات للبحث، أو عامل تصفية مثل from: أو has: أو before:."
 
 #: src/interface/developers/docs/EndpointReference.tsx
 msgid "Type-checked only."
@@ -19853,6 +20018,10 @@ msgstr "الولايات المتحدة"
 #: components/ui/components/design/LoadingScreen.tsx
 msgid "Unknown"
 msgstr "غير معروف"
+
+#: src/interface/channels/text/TextSearchSidebar.tsx
+msgid "Unknown channel"
+msgstr "قناة غير معروفة"
 
 #: components/markdown/plugins/mentions.tsx
 msgid "Unknown role"
@@ -20031,6 +20200,14 @@ msgstr "حتى {0}"
 #: components/app/interface/settings/user/profile/ProfileExtras.tsx
 msgid "Up to {MAX_LINKS} links, starting with https://. People see the real site address and a warning before they leave Zrzur. Others can see this."
 msgstr "حتى {MAX_LINKS} روابط تبدأ بـ https://. يرى الأشخاص عنوان الموقع الحقيقي وتحذيرًا قبل مغادرة زرزور. يستطيع الآخرون رؤية ذلك."
+
+#: src/interface/channels/text/searchLabels.ts
+msgid "Up to 10 from: filters are used, so \"{value}\" was left out."
+msgstr "يُستخدم 10 عوامل from: على الأكثر، لذلك تُرك \"{value}\"."
+
+#: src/interface/channels/text/searchLabels.ts
+msgid "Up to 50 in: filters are used, so \"{value}\" was left out."
+msgstr "يُستخدم 50 عامل in: على الأكثر، لذلك تُرك \"{value}\"."
 
 #: components/app/interface/settings/user/plugins/text.ts
 msgid "Up to 8 KB of its own settings, kept with your account."
@@ -20545,6 +20722,11 @@ msgid "Victory"
 msgstr "انتصار"
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
+msgid "Video"
+msgstr "فيديو"
+
+#: src/interface/channels/text/searchLabels.ts
+msgctxt "search filter"
 msgid "Video"
 msgstr "فيديو"
 
@@ -21177,6 +21359,10 @@ msgstr "مكان فتح التذاكر"
 msgid "Where to preview"
 msgstr "مكان المعاينة"
 
+#: src/interface/channels/text/TextSearchSidebar.tsx
+msgid "Where to search"
+msgstr "مكان البحث"
+
 #: components/app/interface/settings/server/LobbySettings.tsx
 msgid "Where to talk, with how busy each one is."
 msgstr "أين تتحدث، ومدى نشاط كل قناة."
@@ -21290,6 +21476,10 @@ msgstr "من سيجتمع هنا؟"
 #: components/app/interface/settings/server/webhooks/ServerWebhooks.tsx
 msgid "Whoever runs this Zrzur server can turn them on in its configuration."
 msgstr "يستطيع مَن يدير سيرفر زرزور هذا تشغيله من إعداداته."
+
+#: src/interface/channels/text/TextSearchSidebar.tsx
+msgid "Whole server"
+msgstr "السيرفر كله"
 
 #: components/app/interface/discover/AdLabel.tsx
 msgid "Why am I seeing this?"
@@ -21537,6 +21727,7 @@ msgstr "نعم"
 
 #: components/app/interface/channels/text/interactions/CommandPicker.tsx
 #: components/app/interface/settings/server/audit/AuditLog.tsx
+#: src/interface/channels/text/searchLabels.ts
 #: src/interface/developers/docs/Directives.tsx
 msgid "Yes"
 msgstr "نعم"
@@ -21548,6 +21739,10 @@ msgstr "نعم، ويمكن إخفاؤها"
 #: components/app/interface/settings/user/plugins/PluginDetail.tsx
 msgid "Yes, uninstall"
 msgstr "نعم، ألغِ التثبيت"
+
+#: src/interface/channels/text/SearchBox.tsx
+msgid "Yesterday"
+msgstr "أمس"
 
 #: components/app/interface/desktop/Titlebar.tsx
 #: components/app/interface/settings/user/appearance/LivePreview.tsx

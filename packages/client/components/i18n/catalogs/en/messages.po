@@ -58,6 +58,10 @@ msgstr "\"{label}\" needs at least {0} characters."
 msgid "\"{name}\" needs a number."
 msgstr "\"{name}\" needs a number."
 
+#: src/interface/channels/text/searchLabels.ts
+msgid "\"{value}\" is not a day. Write it like 2026-11-09."
+msgstr "\"{value}\" is not a day. Write it like 2026-11-09."
+
 #~ msgid "(changes are being saved…)"
 #~ msgstr "(changes are being saved…)"
 
@@ -1674,6 +1678,11 @@ msgstr "Advanced"
 msgid "Afghanistan"
 msgstr "Afghanistan"
 
+#: src/interface/channels/text/searchLabels.ts
+msgctxt "search filter"
+msgid "After"
+msgstr "After"
+
 #. placeholder {0}: new URL(data().redirect_uri).host
 #: src/interface/OAuth.tsx
 msgid "After you decide you will go to {0}. You can revoke this at any time under Authorized apps."
@@ -2722,6 +2731,11 @@ msgstr "Barbados"
 #: components/ui/components/features/profiles/badges/useBadgeText.ts
 msgid "Become a Zrzur creator and publish your first decoration, nameplate or effect. Making bots doesn't count."
 msgstr "Become a Zrzur creator and publish your first decoration, nameplate or effect. Making bots doesn't count."
+
+#: src/interface/channels/text/searchLabels.ts
+msgctxt "search filter"
+msgid "Before"
+msgstr "Before"
 
 #: components/app/interface/discover/ServerPage.tsx
 msgid "Before you join"
@@ -4113,7 +4127,7 @@ msgstr "Clear filters"
 
 #: components/ui/components/features/messaging/composition/picker/EmojiPicker.tsx
 #: components/ui/components/features/messaging/composition/picker/GifPicker.tsx
-#: src/interface/channels/ChannelHeader.tsx
+#: src/interface/channels/text/SearchBox.tsx
 #: src/interface/designs/Stage.tsx
 #: src/interface/designs/Wall.tsx
 #: src/interface/Discover.tsx
@@ -5844,6 +5858,7 @@ msgstr "Destination voice channel"
 #: components/i18n/errors.tsx
 #: components/modal/modals/InteractionsEndpoint.tsx
 #: components/modal/modals/ReportContent.tsx
+#: src/interface/channels/text/TextSearchSidebar.tsx
 msgid "Details"
 msgstr "Details"
 
@@ -6483,6 +6498,11 @@ msgstr "Elite Bug Hunter"
 msgid "Email"
 msgstr "Email"
 
+#: src/interface/channels/text/searchLabels.ts
+msgctxt "search filter"
+msgid "Embed"
+msgstr "Embed"
+
 #: src/interface/designs/Looks.tsx
 msgid "Ember"
 msgstr "Ember"
@@ -7073,6 +7093,11 @@ msgstr "Fields"
 msgid "Fiji"
 msgstr "Fiji"
 
+#: src/interface/channels/text/searchLabels.ts
+msgctxt "search filter"
+msgid "File"
+msgstr "File"
+
 #. placeholder {0}: humanFileSize(local.maxSize)
 #: components/ui/components/utils/Form2.tsx
 msgid "File must be smaller than {0}"
@@ -7151,6 +7176,7 @@ msgstr "Filter posts"
 #: components/app/interface/settings/server/pages.tsx
 #: components/app/interface/settings/server/ServerEmergency.tsx
 #: components/app/interface/settings/ServerSettings.tsx
+#: src/interface/channels/text/TextSearchSidebar.tsx
 msgid "Filters"
 msgstr "Filters"
 
@@ -7500,6 +7526,11 @@ msgstr "Friends server"
 #: components/modal/modals/EditUsername.tsx
 msgid "Friends use your username and number tag to find you. Enter your current password to confirm."
 msgstr "Friends use your username and number tag to find you. Enter your current password to confirm."
+
+#: src/interface/channels/text/searchLabels.ts
+msgctxt "search filter"
+msgid "From"
+msgstr "From"
 
 #. placeholder {0}: entry.supercharges
 #: components/app/interface/settings/server/WingsSettings.tsx
@@ -8144,6 +8175,11 @@ msgstr "Hardware acceleration"
 #~ msgid "Hardware Acceleration"
 #~ msgstr "Hardware Acceleration"
 
+#: src/interface/channels/text/searchLabels.ts
+msgctxt "search filter"
+msgid "Has"
+msgstr "Has"
+
 #: components/ui/components/features/profiles/badges/useBadgeText.ts
 msgid "Has been on Zrzur for a year."
 msgstr "Has been on Zrzur for a year."
@@ -8151,6 +8187,10 @@ msgstr "Has been on Zrzur for a year."
 #: components/ui/components/features/profiles/badges/useBadgeText.ts
 msgid "Has been on Zrzur for three years."
 msgstr "Has been on Zrzur for three years."
+
+#: src/interface/channels/text/searchLabels.ts
+msgid "has: takes link, file, image, video, embed or sound."
+msgstr "has: takes link, file, image, video, embed or sound."
 
 #: components/app/interface/safety/labels.tsx
 msgid "Hate or threats"
@@ -8565,6 +8605,11 @@ msgstr "Illegal under a law"
 msgid "Image"
 msgstr "Image"
 
+#: src/interface/channels/text/searchLabels.ts
+msgctxt "search filter"
+msgid "Image"
+msgstr "Image"
+
 #: components/app/interface/channels/text/interactions/MediaBlocks.tsx
 msgid "Image not available"
 msgstr "Image not available"
@@ -8584,6 +8629,11 @@ msgstr "Import"
 #: components/app/interface/discover/SiteFrame.tsx
 msgid "Impressum"
 msgstr "Impressum"
+
+#: src/interface/channels/text/searchLabels.ts
+msgctxt "search filter"
+msgid "In"
+msgstr "In"
 
 #. placeholder {0}: server()
 #. placeholder {1}: joined()
@@ -8639,6 +8689,10 @@ msgstr "In voice now"
 #: components/app/interface/discover/Detail.tsx
 msgid "In your chat"
 msgstr "In your chat"
+
+#: src/interface/channels/text/searchLabels.ts
+msgid "in: works in servers only."
+msgstr "in: works in servers only."
 
 #: components/app/interface/settings/user/appearance/LivePreview.tsx
 msgid "In!"
@@ -9162,6 +9216,10 @@ msgstr "Jordan"
 msgid "Jump back in"
 msgstr "Jump back in"
 
+#: src/interface/channels/text/TextSearchSidebar.tsx
+msgid "Jump to message"
+msgstr "Jump to message"
+
 #: components/ui/components/features/messaging/bars/JumpToBottom.tsx
 msgid "Jump to present"
 msgstr "Jump to present"
@@ -9648,6 +9706,11 @@ msgstr "Lina"
 
 #: components/app/interface/discover/ServerPage.tsx
 #: src/interface/designs/DesignPage.tsx
+msgid "Link"
+msgstr "Link"
+
+#: src/interface/channels/text/searchLabels.ts
+msgctxt "search filter"
 msgid "Link"
 msgstr "Link"
 
@@ -10618,6 +10681,11 @@ msgstr "Mention specific roles"
 msgid "Mentions"
 msgstr "Mentions"
 
+#: src/interface/channels/text/searchLabels.ts
+msgctxt "search filter"
+msgid "Mentions"
+msgstr "Mentions"
+
 #: src/interface/navigation/MentionsPanel.tsx
 msgid "Mentions couldn't load. Try again soon."
 msgstr "Mentions couldn't load. Try again soon."
@@ -10728,13 +10796,41 @@ msgstr "Messages"
 msgid "Messages & Embeds"
 msgstr "Messages & Embeds"
 
+#: src/interface/channels/text/searchLabels.ts
+msgid "Messages after a day"
+msgstr "Messages after a day"
+
 #: src/interface/You.tsx
 msgid "Messages and links you keep for later"
 msgstr "Messages and links you keep for later"
 
+#: src/interface/channels/text/searchLabels.ts
+msgid "Messages before a day"
+msgstr "Messages before a day"
+
+#: src/interface/channels/text/searchLabels.ts
+msgid "Messages from a member"
+msgstr "Messages from a member"
+
 #: components/app/interface/settings/user/appearance/AnimationSettings.tsx
 msgid "Messages from others as they arrive, and messages as they are removed."
 msgstr "Messages from others as they arrive, and messages as they are removed."
+
+#: src/interface/channels/text/searchLabels.ts
+msgid "Messages in a channel, across the server"
+msgstr "Messages in a channel, across the server"
+
+#: src/interface/channels/text/searchLabels.ts
+msgid "Messages on a day"
+msgstr "Messages on a day"
+
+#: src/interface/channels/text/searchLabels.ts
+msgid "Messages that mention a member"
+msgstr "Messages that mention a member"
+
+#: src/interface/channels/text/searchLabels.ts
+msgid "Messages with a link, file, image, video, embed or sound"
+msgstr "Messages with a link, file, image, video, embed or sound"
 
 #: components/modal/modals/CreateChannel.tsx
 msgid "Messages, images, GIFs and links"
@@ -11580,6 +11676,7 @@ msgstr "no"
 
 #: components/app/interface/channels/text/interactions/CommandPicker.tsx
 #: components/app/interface/settings/server/audit/AuditLog.tsx
+#: src/interface/channels/text/searchLabels.ts
 #: src/interface/developers/docs/Directives.tsx
 msgid "No"
 msgstr "No"
@@ -11659,6 +11756,10 @@ msgstr "No changelog."
 #: components/app/interface/settings/user/profile/CreatorsAdmin.tsx
 msgid "No changes yet."
 msgstr "No changes yet."
+
+#: src/interface/channels/text/searchLabels.ts
+msgid "No channel called \"{value}\"."
+msgstr "No channel called \"{value}\"."
 
 #: components/app/interface/settings/server/channels/ChannelsSettings.tsx
 msgid "No channels yet"
@@ -11814,6 +11915,10 @@ msgstr "No longer eligible"
 msgid "No media device was found. Check your device settings."
 msgstr "No media device was found. Check your device settings."
 
+#: src/interface/channels/text/searchLabels.ts
+msgid "No member called \"{value}\"."
+msgstr "No member called \"{value}\"."
+
 #: components/app/interface/settings/server/members/ListMembers.tsx
 msgid "No member matches"
 msgstr "No member matches"
@@ -11823,8 +11928,16 @@ msgid "No mentions in the last 30 days."
 msgstr "No mentions in the last 30 days."
 
 #: src/interface/channels/text/TextSearchSidebar.tsx
-msgid "No messages match your search."
-msgstr "No messages match your search."
+msgid "No messages in this channel match your search."
+msgstr "No messages in this channel match your search."
+
+#: src/interface/channels/text/TextSearchSidebar.tsx
+msgid "No messages in this server match your search."
+msgstr "No messages in this server match your search."
+
+#: src/interface/channels/text/TextSearchSidebar.tsx
+#~ msgid "No messages match your search."
+#~ msgstr "No messages match your search."
 
 #: src/interface/lobby/Lobby.tsx
 msgid "No messages yet"
@@ -12430,6 +12543,11 @@ msgstr "On a server the bot gets:"
 msgid "On dark"
 msgstr "On dark"
 
+#: src/interface/channels/text/searchLabels.ts
+msgctxt "search filter"
+msgid "On day"
+msgstr "On day"
+
 #: components/app/interface/settings/user/profile/CreatorStudio.tsx
 msgid "On light"
 msgstr "On light"
@@ -12552,6 +12670,10 @@ msgstr "Only on strong devices. This device is not strong enough, so animations 
 msgid "Only on strong devices. This device is strong enough, so animations play."
 msgstr "Only on strong devices. This device is strong enough, so animations play."
 
+#: src/interface/channels/text/searchLabels.ts
+msgid "Only one mentions: filter is used, so \"{value}\" was left out."
+msgstr "Only one mentions: filter is used, so \"{value}\" was left out."
+
 #: components/app/interface/settings/server/LobbyRoleQuestionsEditor.tsx
 msgid "Only ordinary member roles can be offered: no managed roles and none with moderation or admin permissions."
 msgstr "Only ordinary member roles can be offered: no managed roles and none with moderation or admin permissions."
@@ -12576,6 +12698,10 @@ msgstr "Only people who manage the server can change this."
 #: components/app/interface/settings/user/profile/CreatorsAdmin.tsx
 msgid "Only people you make creators can submit designs. Revoking stops new submissions right away; published designs stay."
 msgstr "Only people you make creators can submit designs. Revoking stops new submissions right away; published designs stay."
+
+#: src/interface/channels/text/searchLabels.ts
+msgid "Only pinned messages"
+msgstr "Only pinned messages"
 
 #: components/app/interface/settings/shared/Discoverable.tsx
 msgid "Only public bots can be listed, so others can add them to their servers."
@@ -12617,6 +12743,10 @@ msgstr "Only the authentication header."
 #: src/interface/developers/docs/EndpointReference.tsx
 msgid "Only the common errors (see Errors)."
 msgstr "Only the common errors (see Errors)."
+
+#: src/interface/channels/text/TextSearchSidebar.tsx
+msgid "Only the first 64 characters are searched."
+msgstr "Only the first 64 characters are searched."
 
 #: components/app/interface/settings/user/plugins/text.ts
 msgid "Only the one message you choose its action on, and only at that moment."
@@ -13406,6 +13536,11 @@ msgstr "Pin"
 msgid "Pin message"
 msgstr "Pin message"
 
+#: src/interface/channels/text/searchLabels.ts
+msgctxt "search filter"
+msgid "Pinned"
+msgstr "Pinned"
+
 #. placeholder {0}: userName(a.author)
 #. placeholder {1}: channelName(a.channel)
 #: components/app/interface/settings/server/audit/AuditLog.tsx
@@ -13424,6 +13559,10 @@ msgstr "Pinned messages"
 #: src/interface/channels/text/TextChannel.tsx
 #~ msgid "Pinned Messages"
 #~ msgstr "Pinned Messages"
+
+#: src/interface/channels/text/searchLabels.ts
+msgid "pinned: takes true or false."
+msgstr "pinned: takes true or false."
 
 #: components/app/interface/settings/user/profile/StyleEditors.tsx
 msgid "Pisces"
@@ -15900,6 +16039,10 @@ msgstr "Search effects"
 #~ msgid "Search emoji"
 #~ msgstr "Search emoji"
 
+#: src/interface/channels/text/SearchBox.tsx
+msgid "Search filters"
+msgstr "Search filters"
+
 #: components/modal/modals/CreateInvite.tsx
 msgid "Search for friends"
 msgstr "Search for friends"
@@ -15947,6 +16090,7 @@ msgid "Search members"
 msgstr "Search members"
 
 #: src/interface/channels/ChannelHeader.tsx
+#: src/interface/channels/text/SearchBox.tsx
 msgid "Search messages"
 msgstr "Search messages"
 
@@ -17067,6 +17211,11 @@ msgstr "Sort members"
 #: src/interface/channels/text/TextSearchSidebar.tsx
 msgid "Sort results"
 msgstr "Sort results"
+
+#: src/interface/channels/text/searchLabels.ts
+msgctxt "search filter"
+msgid "Sound"
+msgstr "Sound"
 
 #: src/interface/developers/docs/EndpointReference.tsx
 msgid "Source"
@@ -18749,6 +18898,10 @@ msgstr "This can't be undone."
 msgid "This case couldn't be loaded."
 msgstr "This case couldn't be loaded."
 
+#: src/interface/channels/text/TextSearchSidebar.tsx
+msgid "This channel"
+msgstr "This channel"
+
 #: components/i18n/errors.tsx
 msgid "This channel doesn't exist any more."
 msgstr "This channel doesn't exist any more."
@@ -19404,6 +19557,10 @@ msgstr "Title"
 msgid "To answer one, open a ticket."
 msgstr "To answer one, open a ticket."
 
+#: src/interface/channels/text/SearchBox.tsx
+msgid "Today"
+msgstr "Today"
+
 #: components/app/interface/settings/user/appearance/LivePreview.tsx
 msgid "Today 19:02"
 msgstr "Today 19:02"
@@ -19460,6 +19617,10 @@ msgstr "Too many actions. Wait a moment and try again."
 #: components/i18n/errors.tsx
 msgid "Too many messages at once. Wait a moment and try again."
 msgstr "Too many messages at once. Wait a moment and try again."
+
+#: src/interface/channels/text/TextSearchSidebar.tsx
+msgid "Too many searches. Wait a moment, then try again."
+msgstr "Too many searches. Wait a moment, then try again."
 
 #: src/interface/Designs.tsx
 #~ msgid "Tools"
@@ -19739,8 +19900,12 @@ msgid "Type a new name above, then rename"
 msgstr "Type a new name above, then rename"
 
 #: src/interface/channels/text/TextSearchSidebar.tsx
-msgid "Type to search messages in this channel."
-msgstr "Type to search messages in this channel."
+#~ msgid "Type to search messages in this channel."
+#~ msgstr "Type to search messages in this channel."
+
+#: src/interface/channels/text/TextSearchSidebar.tsx
+msgid "Type words to search, or a filter like from:, has: or before:."
+msgstr "Type words to search, or a filter like from:, has: or before:."
 
 #: src/interface/developers/docs/EndpointReference.tsx
 msgid "Type-checked only."
@@ -19856,6 +20021,10 @@ msgstr "United States"
 #: components/ui/components/design/LoadingScreen.tsx
 msgid "Unknown"
 msgstr "Unknown"
+
+#: src/interface/channels/text/TextSearchSidebar.tsx
+msgid "Unknown channel"
+msgstr "Unknown channel"
 
 #: components/markdown/plugins/mentions.tsx
 msgid "Unknown role"
@@ -20034,6 +20203,14 @@ msgstr "Up to {0}"
 #: components/app/interface/settings/user/profile/ProfileExtras.tsx
 msgid "Up to {MAX_LINKS} links, starting with https://. People see the real site address and a warning before they leave Zrzur. Others can see this."
 msgstr "Up to {MAX_LINKS} links, starting with https://. People see the real site address and a warning before they leave Zrzur. Others can see this."
+
+#: src/interface/channels/text/searchLabels.ts
+msgid "Up to 10 from: filters are used, so \"{value}\" was left out."
+msgstr "Up to 10 from: filters are used, so \"{value}\" was left out."
+
+#: src/interface/channels/text/searchLabels.ts
+msgid "Up to 50 in: filters are used, so \"{value}\" was left out."
+msgstr "Up to 50 in: filters are used, so \"{value}\" was left out."
 
 #: components/app/interface/settings/user/plugins/text.ts
 msgid "Up to 8 KB of its own settings, kept with your account."
@@ -20548,6 +20725,11 @@ msgid "Victory"
 msgstr "Victory"
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
+msgid "Video"
+msgstr "Video"
+
+#: src/interface/channels/text/searchLabels.ts
+msgctxt "search filter"
 msgid "Video"
 msgstr "Video"
 
@@ -21180,6 +21362,10 @@ msgstr "Where tickets open"
 msgid "Where to preview"
 msgstr "Where to preview"
 
+#: src/interface/channels/text/TextSearchSidebar.tsx
+msgid "Where to search"
+msgstr "Where to search"
+
 #: components/app/interface/settings/server/LobbySettings.tsx
 msgid "Where to talk, with how busy each one is."
 msgstr "Where to talk, with how busy each one is."
@@ -21293,6 +21479,10 @@ msgstr "Who will gather here?"
 #: components/app/interface/settings/server/webhooks/ServerWebhooks.tsx
 msgid "Whoever runs this Zrzur server can turn them on in its configuration."
 msgstr "Whoever runs this Zrzur server can turn them on in its configuration."
+
+#: src/interface/channels/text/TextSearchSidebar.tsx
+msgid "Whole server"
+msgstr "Whole server"
 
 #: components/app/interface/discover/AdLabel.tsx
 msgid "Why am I seeing this?"
@@ -21540,6 +21730,7 @@ msgstr "yes"
 
 #: components/app/interface/channels/text/interactions/CommandPicker.tsx
 #: components/app/interface/settings/server/audit/AuditLog.tsx
+#: src/interface/channels/text/searchLabels.ts
 #: src/interface/developers/docs/Directives.tsx
 msgid "Yes"
 msgstr "Yes"
@@ -21551,6 +21742,10 @@ msgstr "Yes, hide it any time"
 #: components/app/interface/settings/user/plugins/PluginDetail.tsx
 msgid "Yes, uninstall"
 msgstr "Yes, uninstall"
+
+#: src/interface/channels/text/SearchBox.tsx
+msgid "Yesterday"
+msgstr "Yesterday"
 
 #: components/app/interface/desktop/Titlebar.tsx
 #: components/app/interface/settings/user/appearance/LivePreview.tsx

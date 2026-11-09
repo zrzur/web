@@ -3,7 +3,7 @@
 export const LANGUAGE_COVERAGE: Record<string, number> = {
   "ar": 100,
   "as": 1,
-  "az": 3,
+  "az": 2,
   "be": 5,
   "bg": 3,
   "bn": 3,
