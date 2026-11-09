@@ -292,8 +292,8 @@
     },
     {
       "path": "CHANGELOG.md",
-      "sha256": "add0a45d68320128fdea0af83e7314ea33c0065bd2f8b766221a31b81330946f",
-      "bytes": 96002,
+      "sha256": "b3795b839044627412e2ef18ca7ab0ab958efe9acf25a34fc24429d988f5fe64",
+      "bytes": 96492,
       "category": "public-documentation"
     },
     {
@@ -2572,8 +2572,8 @@
     },
     {
       "path": "packages/client/components/i18n/catalogs/ar/messages.po",
-      "sha256": "42668725e460d5ad3e25ee72bdbc998eac7e10d6c9e08f33c807a14120f4cde1",
-      "bytes": 849890,
+      "sha256": "9f1b928ec2c4f610939ee49d76bdd2a299e3e538d2921a1b41d1481c9f5e399d",
+      "bytes": 854155,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -2716,8 +2716,8 @@
     },
     {
       "path": "packages/client/components/i18n/catalogs/de/messages.po",
-      "sha256": "602390be7ad86152f67fe37e09c80fc18c991e156544dafabe2a1613ee5e69b1",
-      "bytes": 782098,
+      "sha256": "802af47150e84fdc8eb531a91c3a129556e16b1d326069614802061120f719d6",
+      "bytes": 786051,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -2752,8 +2752,8 @@
     },
     {
       "path": "packages/client/components/i18n/catalogs/en/messages.po",
-      "sha256": "417d36cf934d0d7396e9c15273a0f3ec70840d5ca1de020726802c68ccd299f5",
-      "bytes": 763175,
+      "sha256": "12bad5c3ca3f06ed9396849bed0cfbb21eaace237bf2fc9578fdff605f9258ef",
+      "bytes": 767044,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -38482,8 +38482,8 @@
     },
     {
       "path": "packages/client/src/interface/channels/ChannelHeader.tsx",
-      "sha256": "464e47e91ab4f698c835e61f9531b96b9d4809bbce94709c461d0384ac352515",
-      "bytes": 26575,
+      "sha256": "7a69f632e255032fe5c5faa6f330533ae59a7730f1b08d4ae19d2cf49e8ea9e5",
+      "bytes": 23210,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -38535,6 +38535,12 @@
       "category": "product-source-or-build-manifest"
     },
     {
+      "path": "packages/client/src/interface/channels/text/SearchBox.tsx",
+      "sha256": "d8f79fef954dca98437701b206b2bcd88aabb2ddee85e0f84063c1b219585f74",
+      "bytes": 13283,
+      "category": "product-source-or-build-manifest"
+    },
+    {
       "path": "packages/client/src/interface/channels/text/TextChannel.tsx",
       "sha256": "0dc965d552517280cafcb44996ac98e601cd334049abe37f32d97f83ff9d296a",
       "bytes": 15311,
@@ -38542,8 +38548,8 @@
     },
     {
       "path": "packages/client/src/interface/channels/text/TextSearchSidebar.tsx",
-      "sha256": "c589b5379b76c7d65673d83ed2d35fac5dc51acf0b4938f05683b6786c572d8a",
-      "bytes": 3659,
+      "sha256": "ae020e71ce597b7e761692aa2bb410f4b6854c542c189e3e697a5b87af98b256",
+      "bytes": 11494,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -38562,6 +38568,24 @@
       "path": "packages/client/src/interface/channels/text/largeServer.ts",
       "sha256": "eed23b0144bca7e6d82091a3cdb75980b77ecdd849cbb3ff527843d93ab53d57",
       "bytes": 291,
+      "category": "product-source-or-build-manifest"
+    },
+    {
+      "path": "packages/client/src/interface/channels/text/searchLabels.ts",
+      "sha256": "fc7929233f008504d6334acb8b0055b3ef3fe0e87ec4a3af64d18ab880c3b0f6",
+      "bytes": 1788,
+      "category": "product-source-or-build-manifest"
+    },
+    {
+      "path": "packages/client/src/interface/channels/text/searchSyntax.test.ts",
+      "sha256": "bf9c2caf4e44ead060f972877d21e90416db1ada7027afd6363f5aac6a5fbcd9",
+      "bytes": 5098,
+      "category": "synthetic-test-source-or-fixture"
+    },
+    {
+      "path": "packages/client/src/interface/channels/text/searchSyntax.ts",
+      "sha256": "b1879b97c2c0101cb885c09f5509ef47219505d9cc69c4fa1a81d0912fc4997b",
+      "bytes": 8862,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -40290,7 +40314,7 @@
   "submodules": [
     {
       "path": "packages/stoat.js",
-      "commit": "2282f55961ce5862812f088c8a9ac542dd792908"
+      "commit": "3c7a5932e7d49cd5f9ba6163c6e7600e673283fc"
     }
   ]
 }
