@@ -20,7 +20,7 @@ export function preferSiteCatalogs(urls: Record<string, string>) {
 }
 
 /** The full catalog file of a language */
-function fullCatalog(code: string) {
+function importFullCatalog(code: string) {
   // explicit .ts: `lingui compile` (CommonJS by default) rewrites
   // messages.js, which Vite can't import as `{ messages }` (white screen);
   // the .ts twin is always an ES module
@@ -28,6 +28,32 @@ function fullCatalog(code: string) {
     (module) => module.messages as Messages,
   );
 }
+
+let fullCatalog = importFullCatalog;
+
+/** Tests only: replace how the full file loads (no argument: the real one) */
+export function setFullCatalogLoader(
+  loader: (code: string) => Promise<Messages> = importFullCatalog,
+) {
+  fullCatalog = loader;
+}
+
+/** Languages whose full file failed after their small one was shown */
+const fullMissing = new Map<string, Language>();
+
+/** Add the full file of a language that shows its small one */
+function completeCatalog(key: Language, code: string) {
+  fullMissing.delete(code);
+  fullCatalog(code)
+    .then((full) => i18n.load(key, full))
+    // keep the small file and try again on the next ask or when online
+    .catch(() => fullMissing.set(code, key));
+}
+
+if (typeof window !== "undefined")
+  window.addEventListener("online", () => {
+    for (const [code, key] of [...fullMissing]) completeCatalog(key, code);
+  });
 
 /** The small file of a site, then the full file added in the background */
 async function siteCatalog(key: Language, code: string, url: string) {
@@ -40,12 +66,7 @@ async function siteCatalog(key: Language, code: string, url: string) {
     typeof requestIdleCallback === "function"
       ? requestIdleCallback(fn, { timeout: 1000 })
       : setTimeout(fn, 200);
-  later(() =>
-    fullCatalog(code)
-      .then((full) => i18n.load(key, full))
-      // the small file stays; a dialog shows ids until a reload
-      .catch(() => undefined),
-  );
+  later(() => completeCatalog(key, code));
   return messages;
 }
 
@@ -57,6 +78,7 @@ async function siteCatalog(key: Language, code: string, url: string) {
 export function importCatalog(key: Language): Promise<Messages> {
   const code = Languages[key]?.i18n;
   if (!code) return Promise.reject(new Error(`no catalog for ${key}`));
+  if (fullMissing.has(code)) completeCatalog(key, code);
   let download = downloads.get(code);
   if (!download) {
     const site = siteCatalogs?.[code];

@@ -5,6 +5,7 @@ import {
   browserPreferredLanguage,
   importCatalog,
   preferSiteCatalogs,
+  setFullCatalogLoader,
 } from "./catalog";
 import { Language } from "./Languages";
 
@@ -68,5 +69,33 @@ describe("message catalogs", () => {
     preferSiteCatalogs({ en: "/assets/site-messages-en.json" });
     const messages = await importCatalog(Language.ENGLISH);
     expect(Object.keys(messages).length).toBeGreaterThan(100);
+  });
+
+  it("tries the full file again on the next ask after it failed", async () => {
+    const load = vi.spyOn(i18n, "load").mockImplementation(() => undefined);
+    vi.stubGlobal(
+      "fetch",
+      vi.fn(async () => ({ ok: true, json: async () => ({ s: ["S"] }) })),
+    );
+    let calls = 0;
+    setFullCatalogLoader(async () => {
+      calls++;
+      if (calls === 1) throw new Error("offline");
+      return { full: ["Voll"] };
+    });
+    preferSiteCatalogs({ fr: "/assets/site-messages-fr.json" });
+    // a language no other test has loaded
+    await importCatalog(Language.FRENCH);
+    await vi.waitFor(() => expect(calls).toBe(1));
+    await new Promise((r) => setTimeout(r, 10));
+    expect(load).not.toHaveBeenCalled();
+
+    await importCatalog(Language.FRENCH);
+    await vi.waitFor(() =>
+      expect(load).toHaveBeenCalledWith("fr", { full: ["Voll"] }),
+    );
+    expect(calls).toBe(2);
+    load.mockRestore();
+    setFullCatalogLoader();
   });
 });
