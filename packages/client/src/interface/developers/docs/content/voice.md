@@ -15,6 +15,15 @@ Zrzur voice runs on LiveKit. The API hands out tickets; the audio itself goes th
 
 ## Join
 
+Ask for a ticket over plain HTTP:
+
+```bash
+curl -X POST "https://api.zrzur.com/channels/CHANNEL_ID/join_call" \n  -H "x-bot-token: YOUR_BOT_TOKEN" \n  -H "content-type: application/json" \n  -d '{}'
+# answer: { "token": "LIVEKIT_TOKEN", "url": "wss://voice.zrzur.com" }
+```
+
+Then connect with a LiveKit client. With the SDK (not published yet) and `@livekit/rtc-node`:
+
 ```js
 const ticket = await bot.voice.join(channelId); // { url, token, node }
 const room = new Room(); // from @livekit/rtc-node

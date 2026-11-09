@@ -29,7 +29,36 @@ These pages are all you need. Start with [Start your bot](/developers/docs/getti
 | Files               | `https://cdn.zrzur.com` |
 | Voice (LiveKit)     | `wss://voice.zrzur.com` |
 
-Self-hosted servers use their own addresses. `GET /` on the API returns them, with the limits of that server.
+Self-hosted servers use their own addresses. `GET /` on the API returns them, with the limits of that server. Read these fields (the answer has more; this one is shortened):
+
+```json
+{
+  "zrzur": "26.0.0",
+  "ws": "wss://events.zrzur.com",
+  "app": "https://app.zrzur.com",
+  "features": {
+    "autumn": { "enabled": true, "url": "https://cdn.zrzur.com" },
+    "january": { "enabled": true, "url": "https://proxy.zrzur.com" },
+    "livekit": {
+      "enabled": true,
+      "nodes": [{ "name": "main", "lat": 0, "lon": 0, "public_url": "wss://voice.zrzur.com" }]
+    },
+    "limits": {
+      "default": { "message_length": 2000, "message_attachments": 5, "file_upload_size_limits": { "attachments": 20000000 } }
+    }
+  }
+}
+```
+
+| Field                              | What it is                                   |
+| ---------------------------------- | -------------------------------------------- |
+| `zrzur`                            | Version of the server; see the [API changelog](/developers/docs/changelog) |
+| `ws`                               | Gateway address                              |
+| `features.autumn.url`              | File server: uploads and downloads           |
+| `features.january.url`             | Media proxy for link previews                |
+| `features.livekit.nodes[].public_url` | Voice server                              |
+| `features.limits.default`          | Limits of an account, such as message length |
+| `app`                              | Web app, for links you show people           |
 
 ```endpoints getting-started
 

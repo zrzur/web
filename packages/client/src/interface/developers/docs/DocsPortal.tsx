@@ -82,6 +82,7 @@ export function DocsPortal(props: { page?: string }) {
     "raw-http": t`Without a library`,
     sdk: t`SDKs`,
     coverage: t`Status and coverage`,
+    changelog: t`API changelog`,
   });
 
   const groups = (): { id: PageGroup; label: string }[] => [

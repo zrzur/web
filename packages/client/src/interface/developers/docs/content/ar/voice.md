@@ -15,7 +15,13 @@
 
 ## الانضمام {#join}
 
+اطلب تذكرة عبر HTTP مباشرة:
+
 @@0
+
+ثم اتصل بعميل LiveKit. بالحزمة (غير منشورة بعد) و`@livekit/rtc-node`:
+
+@@1
 
 ثم أنشئ `AudioSource` بتردد 48 كيلوهرتز، وغلّفه في `LocalAudioTrack`، وانشره بـ`room.localParticipant.publishTrack(...)` وغذّه بإطارات من 10 ميلي ثانية. يرى الأعضاء الآخرون `VoiceChannelJoin` حين يدخل البوت الغرفة.
 
@@ -25,4 +31,4 @@
 
 ## المرجع {#reference}
 
-@@1
+@@2

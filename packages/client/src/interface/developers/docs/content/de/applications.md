@@ -22,7 +22,7 @@ Eine Anwendung und ihr Bot sind dasselbe: Anwendungs-ID, Bot-ID und Benutzer-ID 
 | Einstellung            | Was sie tut                                                                                             |
 | ---------------------- | ------------------------------------------------------------------------------------------------------- |
 | Öffentlicher Bot       | An: Jeder mit „Server verwalten“ kann ihn installieren. Aus: nur du; andere bekommen `BotIsPrivate`     |
-| Privilegierte Intents  | Schalter für Nachrichteninhalt, Servermitglieder und Präsenz. Siehe [Intents](/developers/docs/gateway#intents) |
+| Privilegierte Intents  | Schalter für Nachrichteninhalt, Servermitglieder und Präsenz. Jeder Schalter wird sofort gespeichert und gilt ab der nächsten Gateway-Verbindung des Bots. Siehe [Intents](/developers/docs/gateway#intents) und [wenn ein Intent aus ist](/developers/docs/gateway#intent-off) |
 | Benutzername           | Der Name des Bots                                                                                       |
 | Bot-ID                 | Die ID für Routen unter `/applications/{id}/...`                                                        |
 | Zu einem Server hinzufügen | Installiert den Bot auf einem deiner Server                                                         |

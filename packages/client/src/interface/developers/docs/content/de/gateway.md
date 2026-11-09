@@ -36,7 +36,7 @@ Alles, was du sonst sendest, ist auf 1 MiB pro Nachricht begrenzt.
 | Was du bekommst                                                      | Ursache                                     | Was zu tun ist                           |
 | -------------------------------------------------------------------- | ------------------------------------------- | ---------------------------------------- |
 | `{ "type": "Error", "data": { "type": "InvalidSession" } }`, schließt | Falsches oder zurückgesetztes Token, gesperrter Bot, oder kein `Authenticate` in 15 Sekunden | Stoppe. Verbinde nicht in einer Schleife neu |
-| `{ "type": "Error", "data": { "type": "MissingIntent", "intent": "SERVER_MEMBERS" } }`, schließt mit Code `4014` | Ein privilegierter Intent ist aus | Schalte ihn im Entwicklerportal ein, oder fordere ihn nicht an |
+| `{ "type": "Error", "data": { "type": "MissingIntent", "intent": "SERVER_MEMBERS" } }`, schließt mit Code `4014` | Ein privilegierter Intent ist aus | Schalte ihn im Entwicklerportal ein und verbinde dich neu, oder [verbinde dich ohne ihn](/developers/docs/gateway#intent-off) |
 
 ## Verbunden bleiben {#stay-connected}
 
@@ -59,7 +59,7 @@ Eine Verbindung kann jederzeit enden: ein Update bei uns, ein Netzproblem, dein 
 
 ## Fortsetzen wird nicht unterstützt {#resume}
 
-Es gibt kein Fortsetzen und keine Sequenznummern. Ereignisse während deiner Abwesenheit sind weg. Hole nach jedem `Ready` per REST, was dein Bot nicht verpassen darf, etwa die neuesten Nachrichten eines Kanals (`GET /channels/{target}/messages` mit `after`). Ein Befehl während deiner Abwesenheit scheitert für die Person, und sie kann es erneut versuchen.
+Es gibt noch kein Fortsetzen und keine Sequenznummern; beides ist für die nächste Version geplant (siehe [Änderungsprotokoll](/developers/docs/changelog)). Ereignisse während deiner Abwesenheit sind weg. Hole nach jedem `Ready` per REST, was dein Bot nicht verpassen darf, etwa die neuesten Nachrichten eines Kanals (`GET /channels/{target}/messages` mit `after` und `sort=Oldest`, siehe [Nachrichten](/developers/docs/messages#read-messages)). Ein Befehl während deiner Abwesenheit scheitert für die Person, und sie kann es erneut versuchen.
 
 ## Sharding wird nicht unterstützt {#sharding}
 
@@ -85,7 +85,7 @@ Intents legen fest, was eine Verbindung empfängt. Das Gateway wendet sie an, al
 
 | Intent            | Wert   | Empfängt                                                                 |
 | ----------------- | ------ | ------------------------------------------------------------------------ |
-| `SERVERS`         | `1`    | Server-, Kanal-, Rollen-, Emoji- und Webhook-Ereignisse; Server und ihre Kanäle in `Ready`. Direktnachrichten und Gruppen kommen so oder so |
+| `SERVERS`         | `1`    | Server-, Kanal-, Rollen-, Emoji- und Webhook-Ereignisse; Server und ihre Kanäle in `Ready`. Direktnachrichten und Gruppen kommen so oder so, in `Ready` und als `ChannelCreate` |
 | `SERVER_MESSAGES` | `2`    | Nachrichten und Tippen in Serverkanälen                                  |
 | `DIRECT_MESSAGES` | `4`    | Nachrichten und Tippen in Direktnachrichten und Gruppen                  |
 | `REACTIONS`       | `8`    | Reaktionen, die hinzukommen oder wegfallen                               |
@@ -106,6 +106,16 @@ Dieselben Regeln gelten über REST:
 - Ohne `PRESENCE` erscheint jeder Benutzer offline und ohne Status. Sich selbst sieht der Bot weiterhin.
 
 Eine Änderung der Intents gilt ab der nächsten Verbindung.
+
+## Wenn ein privilegierter Intent aus ist {#intent-off}
+
+Ein Schalter im Entwicklerportal ist gespeichert, sobald du ihn umlegst, und das Portal bestätigt es. Das Gateway liest die Schalter, wenn eine Verbindung beginnt; eine offene Verbindung behält also die Intents, mit denen sie begann: Schließe den Socket und verbinde dich neu. Das Token bleibt dasselbe. REST liest sie bei jeder Anfrage, REST-Antworten folgen einem Schalter also sofort.
+
+`MissingIntent` nennt die Intents, die aus sind. Kommt dein Bot ohne einen aus, verbinde dich ohne ihn neu, statt anzuhalten:
+
+@@5
+
+Ohne `MESSAGE_CONTENT` liest dein Bot weiterhin Nachrichten, die ihn erwähnen, seine eigenen Nachrichten und Direktnachrichten mit ihm. Ergänze für jedes andere Schließen die Schleife aus [Neu verbinden](/developers/docs/gateway#reconnect).
 
 ## Maschinenlesbares Schema {#schema}
 

@@ -22,7 +22,7 @@ An application and its bot are one thing: the application id, the bot id and the
 | Setting            | What it does                                                                                                     |
 | ------------------ | ---------------------------------------------------------------------------------------------------------------- |
 | Public bot         | On: anyone with Manage Server can install it. Off: only you can, and others get `BotIsPrivate`                   |
-| Privileged intents | Switches for Message content, Server members and Presence. See [Intents](/developers/docs/gateway#intents)       |
+| Privileged intents | Switches for Message content, Server members and Presence. Each switch is saved at once and counts from the bot's next gateway connection. See [Intents](/developers/docs/gateway#intents) and [when an intent is off](/developers/docs/gateway#intent-off)       |
 | Username           | The bot's name                                                                                                   |
 | Bot ID             | The id you use in `/applications/{id}/...` routes                                                                |
 | Add to a server    | Installs the bot in one of your servers                                                                          |

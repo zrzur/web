@@ -62,7 +62,7 @@ const PAGE_ORDER: [PageGroup, string[]][] = [
       "tutorial-deploy",
     ],
   ],
-  ["resources", ["raw-http", "sdk", "coverage"]],
+  ["resources", ["raw-http", "sdk", "coverage", "changelog"]],
 ];
 
 const markdown = (id: string, locale?: string) =>

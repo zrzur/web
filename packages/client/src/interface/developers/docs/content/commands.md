@@ -28,7 +28,7 @@ curl -X PUT "https://api.zrzur.com/applications/YOUR_BOT_ID/commands" \
   -d '[{ "name": "ping", "description": "Check that the bot is awake" }]'
 ```
 
-`POST /applications/{application_id}/commands` adds one command, `PATCH /applications/{application_id}/commands/{command_id}` changes one, `DELETE` removes one. Without code, open your application in the Developer Portal, tab **Commands**, and paste the JSON list.
+`POST /applications/{application_id}/commands` adds one command, `PATCH /applications/{application_id}/commands/{command_id}` changes one, `DELETE` removes one. Without code, open your application in the Developer Portal, tab **Commands**: a form adds, changes and deletes commands, with options, choices, names in other languages and who may use them, and shows a preview. **Import JSON** and **Export JSON** there take and give the same list as `PUT`. Saving in the portal replaces the global list, like `PUT`, so a bot that sends its list at start-up overwrites what you saved.
 
 ## A command {#fields}
 
@@ -95,7 +95,35 @@ The rules the server checks when you register:
 - `choices` and `autocomplete` exclude each other.
 - Numbers stay within 9007199254740991, so JavaScript can hold them.
 
-The server checks required options, limits and choices before your bot sees the interaction. For `User`, `Role`, `Channel` and `Attachment` the full objects arrive in `command.resolved`.
+The server checks required options, limits and choices before your bot sees the interaction. For `User`, `Role`, `Channel`, `Mentionable` and `Attachment` the value is an id, and the full object arrives in `command.resolved`, under `users` (with `members` in a server), `roles`, `channels` or `attachments`, keyed by that id.
+
+## Files from an option {#attachments}
+
+An `Attachment` option's value is a file id. The file arrives in `command.resolved.attachments`:
+
+```json
+{
+  "type": "Command",
+  "command": {
+    "name": "report",
+    "options": [{ "name": "file", "type": "Attachment", "value": "FILE_ID" }],
+    "resolved": {
+      "attachments": {
+        "FILE_ID": {
+          "_id": "FILE_ID",
+          "tag": "attachments",
+          "filename": "screenshot.png",
+          "content_type": "image/png",
+          "size": 48213,
+          "metadata": { "type": "Image", "width": 1280, "height": 720 }
+        }
+      }
+    }
+  }
+}
+```
+
+Download it from `https://cdn.zrzur.com/attachments/FILE_ID/screenshot.png` (the `tag`, the id and the `filename`). The command has used the id, so it cannot go into your bot's own message: that answers `404 NotFound`. To post the file, send its address, or download it and [upload a copy](/developers/docs/files).
 
 ## Sub-commands {#sub-commands}
 
@@ -161,7 +189,7 @@ Options and choices take the same fields. Localised names follow the same rules 
 
 ## Who can use a command {#who}
 
-`default_member_permissions` is a number made of [permission bits](/developers/docs/roles#permission-bits). A member without those permissions does not see the command, and a request gets `MissingPermission`. `256` is Timeout Members. Your bot should still check `user_permissions`: an admin can change roles, and a command is not a security wall for what your bot itself does.
+`default_member_permissions` is a number: add the values of the permissions a member needs, from the [permission table](/developers/docs/roles#permission-bits). A member without all of them does not see the command, and a request gets `MissingPermission`. `256` is Timeout Members; Manage Messages (`8388608`) plus Kick Members (`64`) is `8388672`. In the Developer Portal you pick the permissions from a list instead. Your bot should still check `user_permissions`: an admin can change roles, and a command is not a security wall for what your bot itself does.
 
 ## Menu commands {#menu-commands}
 

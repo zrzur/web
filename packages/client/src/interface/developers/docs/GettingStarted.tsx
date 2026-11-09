@@ -85,6 +85,17 @@ export function GettingStarted(props: { onNavigate: (href: string) => void }) {
           <Trans>More about installing</Trans>,
         )}
       </p>
+      <p>
+        <Trans>
+          Do this before the first run. A bot that is not in the server gets
+          403 MissingPermission for its channels, which looks like a missing
+          permission.
+        </Trans>{" "}
+        {link(
+          "/developers/docs/errors#not-installed",
+          <Trans>Is the bot in that server?</Trans>,
+        )}
+      </p>
 
       <h2 id="get-the-sdk">
         <Trans>4. No library needed</Trans>
