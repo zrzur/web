@@ -21985,3 +21985,81 @@ msgstr "Wenn das aktiv ist, laufen Animationen und Bewegungseffekte nicht oder s
 #: components/ui/components/design/DataTable.tsx
 msgid "Rows per page:"
 msgstr "Zeilen pro Seite:"
+
+#: components/modal/modals/ForwardMessage.tsx
+msgid "A copy goes to the place you choose. Nobody it mentions is notified."
+msgstr "Eine Kopie geht an den Ort, den du auswählst. Niemand, der darin erwähnt wird, wird benachrichtigt."
+
+#: components/modal/modals/ForwardMessage.tsx
+msgid "Add a note (optional)"
+msgstr "Notiz hinzufügen (optional)"
+
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "Choose where to forward"
+msgstr "Ziel zum Weiterleiten wählen"
+
+#: components/modal/modals/ForwardMessage.tsx
+msgid "Destinations"
+msgstr "Ziele"
+
+#: components/modal/modals/ForwardMessage.tsx
+msgid "Embed only"
+msgstr "Nur eingebetteter Inhalt"
+
+#: components/modal/modals/ForwardMessage.tsx
+msgid "Files only"
+msgstr "Nur Dateien"
+
+#: components/app/menus/MessageContextMenu.tsx
+#: components/modal/modals/ForwardMessage.tsx
+#: components/ui/components/features/messaging/elements/MessageToolbar.tsx
+msgid "Forward"
+msgstr "Weiterleiten"
+
+#: components/modal/modals/ForwardMessage.tsx
+msgid "Forward message"
+msgstr "Nachricht weiterleiten"
+
+#: components/app/interface/channels/text/ForwardedFrame.tsx
+msgid "Forwarded"
+msgstr "Weitergeleitet"
+
+#. placeholder {0}: label(target)
+#: components/modal/modals/ForwardMessage.tsx
+msgid "Forwarded to {0}"
+msgstr "Weitergeleitet an {0}"
+
+#. placeholder {0}: target().place
+#. placeholder {1}: sentAt()
+#: components/app/interface/channels/text/ForwardedFrame.tsx
+msgid "From {0} · {1}"
+msgstr "Aus {0} · {1}"
+
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "In the forward window: move through the list, then send."
+msgstr "Im Fenster zum Weiterleiten: durch die Liste gehen, dann senden."
+
+#: components/i18n/errors.tsx
+msgid "Messages from a mature channel can only be forwarded to another mature channel."
+msgstr "Nachrichten aus einem Kanal für Erwachsene können nur in einen anderen Kanal für Erwachsene weitergeleitet werden."
+
+#: components/modal/modals/ForwardMessage.tsx
+msgid "Nothing found. Try another name."
+msgstr "Nichts gefunden. Versuch einen anderen Namen."
+
+#: components/modal/modals/ForwardMessage.tsx
+msgid "Only you"
+msgstr "Nur du"
+
+#: components/modal/modals/ForwardMessage.tsx
+msgid "Search conversations and channels"
+msgstr "Unterhaltungen und Kanäle durchsuchen"
+
+#: components/modal/modals/ForwardMessage.tsx
+msgid "Send to"
+msgstr "Senden an"
+
+#. placeholder {0}: sentAt()
+#: components/app/interface/channels/text/ForwardedFrame.tsx
+msgid "Sent {0}"
+msgstr "Gesendet am {0}"

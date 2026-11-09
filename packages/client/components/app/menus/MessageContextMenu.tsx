@@ -1,6 +1,12 @@
 import { Accessor, For, Match, Show, Switch } from "solid-js";
 
-import { File, ImageEmbed, Message, VideoEmbed, WebsiteEmbed } from "@zrzur/sdk/solid";
+import {
+  File,
+  ImageEmbed,
+  Message,
+  VideoEmbed,
+  WebsiteEmbed,
+} from "@zrzur/sdk/solid";
 
 import {
   canSend,
@@ -11,6 +17,10 @@ import { useClient, useUser } from "@revolt/client";
 import { useInstance } from "@revolt/instance";
 import { CustomEmoji, UnicodeEmoji } from "@revolt/markdown/emoji";
 import { useModals } from "@revolt/modal";
+import {
+  canForwardMessage,
+  forwardingEnabled,
+} from "@revolt/modal/modals/forwardTargets";
 import { useNavigate } from "@revolt/routing";
 import { useState } from "@revolt/state";
 import { MediaPickerProps } from "@revolt/ui/components/features/messaging/composition/picker/CompositionMediaPicker";
@@ -23,6 +33,7 @@ import {
   download as MdDownload,
   edit as MdEdit,
   emoji_emotions as MdEmojiEmotions,
+  forward as MdForward,
   link as MdLink,
   mark_chat_unread as MdMarkChatUnread,
   open_in_new as MdOpenInNew,
@@ -76,6 +87,13 @@ export function MessageContextMenu(props: {
    */
   function reply() {
     state.draft.addReply(props.message!, user()!.id);
+  }
+
+  /**
+   * Forward a copy of this message somewhere else
+   */
+  function forward() {
+    openModal({ type: "forward_message", message: props.message! });
   }
 
   /**
@@ -328,7 +346,13 @@ export function MessageContextMenu(props: {
   };
   const existingThread = () =>
     props.message?.channel?.threadOf(props.message.id);
-  const canEdit = () => !!props.message?.author?.self && canReply();
+  const canForward = () =>
+    !official() &&
+    !!props.message &&
+    forwardingEnabled(client()) &&
+    canForwardMessage(props.message);
+  const canEdit = () =>
+    !!props.message?.author?.self && !props.message.forwarded && canReply();
   const canPin = () =>
     !official() &&
     (props.message?.channel?.type === "DirectMessage" ||
@@ -398,6 +422,11 @@ export function MessageContextMenu(props: {
             <Trans>Reply</Trans>
           </ContextMenuButton>
         </Show>
+        <Show when={canForward()}>
+          <ContextMenuButton icon={MdForward} onClick={forward}>
+            <Trans>Forward</Trans>
+          </ContextMenuButton>
+        </Show>
         <Show when={canThread() || existingThread()}>
           <Show
             when={existingThread()}
@@ -432,7 +461,7 @@ export function MessageContextMenu(props: {
             targetId={props.message!.id}
           />
         </Show>
-        <Show when={canReact() || canReply()}>
+        <Show when={canReact() || canReply() || canForward()}>
           <ContextMenuDivider />
         </Show>
 

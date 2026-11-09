@@ -1,0 +1,35 @@
+{
+  "Forward": ["إعادة توجيه", "Weiterleiten"],
+  "Forward message": ["إعادة توجيه الرسالة", "Nachricht weiterleiten"],
+  "A copy goes to the place you choose. Nobody it mentions is notified.": [
+    "تُرسَل نسخة إلى المكان الذي تختاره، ولا يُنبَّه أحد ممن تذكرهم.",
+    "Eine Kopie geht an den Ort, den du auswählst. Niemand, der darin erwähnt wird, wird benachrichtigt."
+  ],
+  "Send to": ["أرسِل إلى", "Senden an"],
+  "Search conversations and channels": [
+    "ابحث في المحادثات والقنوات",
+    "Unterhaltungen und Kanäle durchsuchen"
+  ],
+  "Destinations": ["الوجهات", "Ziele"],
+  "Nothing found. Try another name.": [
+    "لم يُعثَر على شيء. جرّب اسمًا آخر.",
+    "Nichts gefunden. Versuch einen anderen Namen."
+  ],
+  "Add a note (optional)": ["أضف ملاحظة (اختياري)", "Notiz hinzufügen (optional)"],
+  "Forwarded to {0}": ["أُعيد توجيهها إلى {0}", "Weitergeleitet an {0}"],
+  "Only you": ["أنت فقط", "Nur du"],
+  "Files only": ["ملفات فقط", "Nur Dateien"],
+  "Embed only": ["محتوى مضمَّن فقط", "Nur eingebetteter Inhalt"],
+  "Forwarded": ["رسالة مُعاد توجيهها", "Weitergeleitet"],
+  "Sent {0}": ["أُرسلت في {0}", "Gesendet am {0}"],
+  "From {0} · {1}": ["من {0} · {1}", "Aus {0} · {1}"],
+  "Choose where to forward": ["اختيار وجهة إعادة التوجيه", "Ziel zum Weiterleiten wählen"],
+  "In the forward window: move through the list, then send.": [
+    "في نافذة إعادة التوجيه: تنقّل في القائمة ثم أرسِل.",
+    "Im Fenster zum Weiterleiten: durch die Liste gehen, dann senden."
+  ],
+  "Messages from a mature channel can only be forwarded to another mature channel.": [
+    "لا يمكن إعادة توجيه رسائل قناة مخصصة للبالغين إلا إلى قناة أخرى مخصصة للبالغين.",
+    "Nachrichten aus einem Kanal für Erwachsene können nur in einen anderen Kanal für Erwachsene weitergeleitet werden."
+  ]
+}

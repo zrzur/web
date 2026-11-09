@@ -196,6 +196,11 @@ const MoveSuperchargeModal = lazy(() =>
 const PinMessageModal = lazy(() =>
   import("./modals/PinMessage").then((m) => ({ default: m.PinMessageModal })),
 );
+const ForwardMessageModal = lazy(() =>
+  import("./modals/ForwardMessage").then((m) => ({
+    default: m.ForwardMessageModal,
+  })),
+);
 const RemoveMemberModal = lazy(() =>
   import("./modals/RemoveMember").then((m) => ({
     default: m.RemoveMemberModal,
@@ -463,6 +468,8 @@ export function RenderModal(props: ActiveModal & { onClose: () => void }) {
       return <RemoveMemberModal {...modalProps} />;
     case "pin_message":
       return <PinMessageModal {...modalProps} />;
+    case "forward_message":
+      return <ForwardMessageModal {...modalProps} />;
     case "edit_bot_username":
       return <EditBotUsernameModal {...modalProps} />;
     case "screen_share_settings":

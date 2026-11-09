@@ -21976,3 +21976,81 @@ msgstr "عند تفعيل هذا الخيار، لن تعمل الرسوم ال�
 #: components/ui/components/design/DataTable.tsx
 msgid "Rows per page:"
 msgstr "عدد الصفوف في الصفحة:"
+
+#: components/modal/modals/ForwardMessage.tsx
+msgid "A copy goes to the place you choose. Nobody it mentions is notified."
+msgstr "تُرسَل نسخة إلى المكان الذي تختاره، ولا يُنبَّه أحد ممن تذكرهم."
+
+#: components/modal/modals/ForwardMessage.tsx
+msgid "Add a note (optional)"
+msgstr "أضف ملاحظة (اختياري)"
+
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "Choose where to forward"
+msgstr "اختيار وجهة إعادة التوجيه"
+
+#: components/modal/modals/ForwardMessage.tsx
+msgid "Destinations"
+msgstr "الوجهات"
+
+#: components/modal/modals/ForwardMessage.tsx
+msgid "Embed only"
+msgstr "محتوى مضمَّن فقط"
+
+#: components/modal/modals/ForwardMessage.tsx
+msgid "Files only"
+msgstr "ملفات فقط"
+
+#: components/app/menus/MessageContextMenu.tsx
+#: components/modal/modals/ForwardMessage.tsx
+#: components/ui/components/features/messaging/elements/MessageToolbar.tsx
+msgid "Forward"
+msgstr "إعادة توجيه"
+
+#: components/modal/modals/ForwardMessage.tsx
+msgid "Forward message"
+msgstr "إعادة توجيه الرسالة"
+
+#: components/app/interface/channels/text/ForwardedFrame.tsx
+msgid "Forwarded"
+msgstr "رسالة مُعاد توجيهها"
+
+#. placeholder {0}: label(target)
+#: components/modal/modals/ForwardMessage.tsx
+msgid "Forwarded to {0}"
+msgstr "أُعيد توجيهها إلى {0}"
+
+#. placeholder {0}: target().place
+#. placeholder {1}: sentAt()
+#: components/app/interface/channels/text/ForwardedFrame.tsx
+msgid "From {0} · {1}"
+msgstr "من {0} · {1}"
+
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "In the forward window: move through the list, then send."
+msgstr "في نافذة إعادة التوجيه: تنقّل في القائمة ثم أرسِل."
+
+#: components/i18n/errors.tsx
+msgid "Messages from a mature channel can only be forwarded to another mature channel."
+msgstr "لا يمكن إعادة توجيه رسائل قناة مخصصة للبالغين إلا إلى قناة أخرى مخصصة للبالغين."
+
+#: components/modal/modals/ForwardMessage.tsx
+msgid "Nothing found. Try another name."
+msgstr "لم يُعثَر على شيء. جرّب اسمًا آخر."
+
+#: components/modal/modals/ForwardMessage.tsx
+msgid "Only you"
+msgstr "أنت فقط"
+
+#: components/modal/modals/ForwardMessage.tsx
+msgid "Search conversations and channels"
+msgstr "ابحث في المحادثات والقنوات"
+
+#: components/modal/modals/ForwardMessage.tsx
+msgid "Send to"
+msgstr "أرسِل إلى"
+
+#. placeholder {0}: sentAt()
+#: components/app/interface/channels/text/ForwardedFrame.tsx
+msgid "Sent {0}"
+msgstr "أُرسلت في {0}"
