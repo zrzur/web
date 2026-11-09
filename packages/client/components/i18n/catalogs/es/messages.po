@@ -19040,3 +19040,130 @@ msgstr "Zrzur, diseñado para <0>tu escritorio.</0>"
 #: components/app/interface/settings/user/appearance/AppearanceMenu.tsx
 #~ msgid "Zrzur's own look: calm dark panels in one slate family, pink for Plus and teal for anything live."
 #~ msgstr ""
+
+#. placeholder {0}: plan().tooOld
+#: components/modal/modals/BulkDeleteMessages.tsx
+msgid "{0, plural, one {# message is older than 7 days and stays; delete it on its own.} other {# messages are older than 7 days and stay; delete them one by one.}}"
+msgstr "{0, plural, one {# mensaje tiene más de 7 días y se queda; bórralo por separado.} other {# mensajes tienen más de 7 días y se quedan; bórralos uno a uno.}}"
+
+#. placeholder {0}: plan().ids.length
+#: components/modal/modals/BulkDeleteMessages.tsx
+msgid "{0, plural, one {# message will be deleted for everyone. This cannot be undone.} other {# messages will be deleted for everyone. This cannot be undone.}}"
+msgstr "{0, plural, one {# mensaje se borrará para todos. No se puede deshacer.} other {# mensajes se borrarán para todos. No se puede deshacer.}}"
+
+#. placeholder {0}: ids().length
+#: components/app/interface/channels/text/MessageSelectionBar.tsx
+msgid "{0, plural, one {# selected} other {# selected}}"
+msgstr "{0, plural, one {# seleccionado} other {# seleccionados}}"
+
+#. placeholder {0}: plan().ids.length
+#: components/modal/modals/BulkDeleteMessages.tsx
+msgid "{0, plural, one {Delete # message} other {Delete # messages}}"
+msgstr "{0, plural, one {Borrar # mensaje} other {Borrar # mensajes}}"
+
+#: components/modal/modals/BulkDeleteMessages.tsx
+msgid "{value, plural, one {Last # message} other {Last # messages}}"
+msgstr "{value, plural, one {El último mensaje} other {Los últimos # mensajes}}"
+
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "Click"
+msgstr "Clic"
+
+#: components/app/interface/channels/text/MessageSelectionBar.tsx
+msgid "Click messages to select them; Shift-click selects a range."
+msgstr "Haz clic en los mensajes para seleccionarlos; Mayús-clic selecciona un rango."
+
+#: components/app/interface/settings/server/pages.tsx
+msgid "Default notifications"
+msgstr "Notificaciones predeterminadas"
+
+#: components/modal/modals/BulkDeleteMessages.tsx
+msgid "Delete recent messages"
+msgstr "Borrar mensajes recientes"
+
+#: components/app/interface/channels/text/MessageSelectionBar.tsx
+msgid "Delete recent…"
+msgstr "Borrar recientes…"
+
+#: components/modal/modals/BulkDeleteMessages.tsx
+msgid "Delete selected messages"
+msgstr "Borrar los mensajes seleccionados"
+
+#: components/app/interface/settings/server/ServerDefaultNotifications.tsx
+msgid "Each member can still choose their own setting."
+msgstr "Cada miembro puede seguir eligiendo su propio ajuste."
+
+#: components/modal/modals/BulkDeleteMessages.tsx
+msgid "From"
+msgstr "De"
+
+#: components/modal/modals/BulkDeleteMessages.tsx
+msgid "How many"
+msgstr "Cuántos"
+
+#: components/modal/modals/BulkDeleteMessages.tsx
+msgid "Looking for messages…"
+msgstr "Buscando mensajes…"
+
+#: components/app/interface/settings/server/ServerDefaultNotifications.tsx
+msgid "Members are notified about every message."
+msgstr "Los miembros reciben una notificación por cada mensaje."
+
+#: components/app/interface/settings/server/ServerDefaultNotifications.tsx
+msgid "Members are notified only when someone mentions them."
+msgstr "Los miembros solo reciben una notificación cuando alguien los menciona."
+
+#: components/app/interface/channels/text/MessageSelectionBar.tsx
+msgid "Message selection"
+msgstr "Selección de mensajes"
+
+#: components/app/interface/settings/server/ServerDefaultNotifications.tsx
+msgid "Notify members about"
+msgstr "Notificar a los miembros de"
+
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "Select a range of messages"
+msgstr "Seleccionar un rango de mensajes"
+
+#. placeholder {0}: props.message.member?.nickname ?? props.message.author?.displayName ?? props.message.username ?? ""
+#: components/app/interface/channels/text/MessageSelectOverlay.tsx
+msgid "Select message from {0}"
+msgstr "Seleccionar el mensaje de {0}"
+
+#: components/app/menus/shared/SelectMessagesMenuItem.tsx
+#: src/interface/channels/ChannelHeader.tsx
+msgid "Select messages"
+msgstr "Seleccionar mensajes"
+
+#: src/interface/channels/ChannelHeader.tsx
+msgid "Select messages to delete them together"
+msgstr "Selecciona mensajes para borrarlos juntos"
+
+#: components/app/interface/settings/user/Keybinds.tsx
+#: src/interface/channels/ChannelHeader.tsx
+msgid "Stop selecting messages"
+msgstr "Dejar de seleccionar"
+
+#: components/app/menus/shared/SuppressMentionsMenuItems.tsx
+msgid "Suppress @everyone and @here"
+msgstr "Silenciar @everyone y @here"
+
+#: components/app/menus/shared/SuppressMentionsMenuItems.tsx
+msgid "Suppress role mentions"
+msgstr "Silenciar las menciones de rol"
+
+#: components/modal/modals/BulkDeleteMessages.tsx
+msgid "There is nothing to delete: only messages from the last 7 days can be deleted together."
+msgstr "No hay nada que borrar: solo los mensajes de los últimos 7 días se pueden borrar juntos."
+
+#: components/app/interface/channels/text/MessageSelectionBar.tsx
+msgid "Up to {BULK_DELETE_MAX} messages at a time."
+msgstr "Hasta {BULK_DELETE_MAX} mensajes a la vez."
+
+#: components/app/interface/settings/server/pages.tsx
+msgid "What members are notified about until they choose for themselves."
+msgstr "De qué se notifica a los miembros hasta que elijan por sí mismos."
+
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "While selecting messages to delete."
+msgstr "Mientras seleccionas mensajes para borrar."

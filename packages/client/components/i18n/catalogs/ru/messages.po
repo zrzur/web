@@ -19040,3 +19040,130 @@ msgstr "Zrzur — прямо на <0>вашем рабочем столе.</0>"
 #: components/app/interface/settings/user/appearance/AppearanceMenu.tsx
 #~ msgid "Zrzur's own look: calm dark panels in one slate family, pink for Plus and teal for anything live."
 #~ msgstr ""
+
+#. placeholder {0}: plan().tooOld
+#: components/modal/modals/BulkDeleteMessages.tsx
+msgid "{0, plural, one {# message is older than 7 days and stays; delete it on its own.} other {# messages are older than 7 days and stay; delete them one by one.}}"
+msgstr "{0, plural, one {# сообщение старше 7 дней и останется; удалите его отдельно.} few {# сообщения старше 7 дней и останутся; удаляйте их по одному.} many {# сообщений старше 7 дней и останутся; удаляйте их по одному.} other {# сообщения старше 7 дней и останутся; удаляйте их по одному.}}"
+
+#. placeholder {0}: plan().ids.length
+#: components/modal/modals/BulkDeleteMessages.tsx
+msgid "{0, plural, one {# message will be deleted for everyone. This cannot be undone.} other {# messages will be deleted for everyone. This cannot be undone.}}"
+msgstr "{0, plural, one {# сообщение будет удалено для всех. Это нельзя отменить.} few {# сообщения будут удалены для всех. Это нельзя отменить.} many {# сообщений будут удалены для всех. Это нельзя отменить.} other {# сообщения будут удалены для всех. Это нельзя отменить.}}"
+
+#. placeholder {0}: ids().length
+#: components/app/interface/channels/text/MessageSelectionBar.tsx
+msgid "{0, plural, one {# selected} other {# selected}}"
+msgstr "{0, plural, one {Выбрано: #} few {Выбрано: #} many {Выбрано: #} other {Выбрано: #}}"
+
+#. placeholder {0}: plan().ids.length
+#: components/modal/modals/BulkDeleteMessages.tsx
+msgid "{0, plural, one {Delete # message} other {Delete # messages}}"
+msgstr "{0, plural, one {Удалить # сообщение} few {Удалить # сообщения} many {Удалить # сообщений} other {Удалить # сообщения}}"
+
+#: components/modal/modals/BulkDeleteMessages.tsx
+msgid "{value, plural, one {Last # message} other {Last # messages}}"
+msgstr "{value, plural, one {Последнее # сообщение} few {Последние # сообщения} many {Последние # сообщений} other {Последние # сообщения}}"
+
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "Click"
+msgstr "Щелчок"
+
+#: components/app/interface/channels/text/MessageSelectionBar.tsx
+msgid "Click messages to select them; Shift-click selects a range."
+msgstr "Нажимайте на сообщения, чтобы выбрать их; Shift-щелчок выбирает диапазон."
+
+#: components/app/interface/settings/server/pages.tsx
+msgid "Default notifications"
+msgstr "Уведомления по умолчанию"
+
+#: components/modal/modals/BulkDeleteMessages.tsx
+msgid "Delete recent messages"
+msgstr "Удалить последние сообщения"
+
+#: components/app/interface/channels/text/MessageSelectionBar.tsx
+msgid "Delete recent…"
+msgstr "Удалить последние…"
+
+#: components/modal/modals/BulkDeleteMessages.tsx
+msgid "Delete selected messages"
+msgstr "Удалить выбранные сообщения"
+
+#: components/app/interface/settings/server/ServerDefaultNotifications.tsx
+msgid "Each member can still choose their own setting."
+msgstr "Каждый участник по-прежнему может выбрать свою настройку."
+
+#: components/modal/modals/BulkDeleteMessages.tsx
+msgid "From"
+msgstr "От"
+
+#: components/modal/modals/BulkDeleteMessages.tsx
+msgid "How many"
+msgstr "Сколько"
+
+#: components/modal/modals/BulkDeleteMessages.tsx
+msgid "Looking for messages…"
+msgstr "Ищем сообщения…"
+
+#: components/app/interface/settings/server/ServerDefaultNotifications.tsx
+msgid "Members are notified about every message."
+msgstr "Участники получают уведомление о каждом сообщении."
+
+#: components/app/interface/settings/server/ServerDefaultNotifications.tsx
+msgid "Members are notified only when someone mentions them."
+msgstr "Участники получают уведомление, только когда их упоминают."
+
+#: components/app/interface/channels/text/MessageSelectionBar.tsx
+msgid "Message selection"
+msgstr "Выбор сообщений"
+
+#: components/app/interface/settings/server/ServerDefaultNotifications.tsx
+msgid "Notify members about"
+msgstr "Уведомлять участников о"
+
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "Select a range of messages"
+msgstr "Выбрать диапазон сообщений"
+
+#. placeholder {0}: props.message.member?.nickname ?? props.message.author?.displayName ?? props.message.username ?? ""
+#: components/app/interface/channels/text/MessageSelectOverlay.tsx
+msgid "Select message from {0}"
+msgstr "Выбрать сообщение от {0}"
+
+#: components/app/menus/shared/SelectMessagesMenuItem.tsx
+#: src/interface/channels/ChannelHeader.tsx
+msgid "Select messages"
+msgstr "Выбрать сообщения"
+
+#: src/interface/channels/ChannelHeader.tsx
+msgid "Select messages to delete them together"
+msgstr "Выберите сообщения, чтобы удалить их вместе"
+
+#: components/app/interface/settings/user/Keybinds.tsx
+#: src/interface/channels/ChannelHeader.tsx
+msgid "Stop selecting messages"
+msgstr "Прекратить выбор сообщений"
+
+#: components/app/menus/shared/SuppressMentionsMenuItems.tsx
+msgid "Suppress @everyone and @here"
+msgstr "Игнорировать @everyone и @here"
+
+#: components/app/menus/shared/SuppressMentionsMenuItems.tsx
+msgid "Suppress role mentions"
+msgstr "Игнорировать упоминания ролей"
+
+#: components/modal/modals/BulkDeleteMessages.tsx
+msgid "There is nothing to delete: only messages from the last 7 days can be deleted together."
+msgstr "Удалять нечего: вместе можно удалить только сообщения за последние 7 дней."
+
+#: components/app/interface/channels/text/MessageSelectionBar.tsx
+msgid "Up to {BULK_DELETE_MAX} messages at a time."
+msgstr "Не более {BULK_DELETE_MAX} сообщений за раз."
+
+#: components/app/interface/settings/server/pages.tsx
+msgid "What members are notified about until they choose for themselves."
+msgstr "О чём получают уведомления участники, пока не выберут сами."
+
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "While selecting messages to delete."
+msgstr "Во время выбора сообщений для удаления."
