@@ -133,3 +133,50 @@ describe("Voice store: high quality audio", () => {
     ).toBe(false);
   });
 });
+
+describe("Voice store: screen share quality", () => {
+  it("starts at 1080p 30 FPS for text and slides", () => {
+    const data = store().default();
+    expect(data.screenShareQuality).toBe("1080p30");
+    expect(data.screenShareContent).toBe("detail");
+  });
+
+  it("moves qualities saved before the split to a size and a content", () => {
+    expect(store().clean({ screenShareQuality: "low" } as never)).toMatchObject(
+      { screenShareQuality: "720p30", screenShareContent: "detail" },
+    );
+    expect(
+      store().clean({ screenShareQuality: "text" } as never),
+    ).toMatchObject({
+      screenShareQuality: "1080p30",
+      screenShareContent: "detail",
+    });
+    expect(
+      store().clean({ screenShareQuality: "motion" } as never),
+    ).toMatchObject({
+      screenShareQuality: "1080p60",
+      screenShareContent: "motion",
+    });
+  });
+
+  it("keeps new choices and drops unknown ones", () => {
+    expect(
+      store().clean({
+        screenShareQuality: "1080p60",
+        screenShareContent: "motion",
+      }),
+    ).toMatchObject({
+      screenShareQuality: "1080p60",
+      screenShareContent: "motion",
+    });
+    expect(
+      store().clean({
+        screenShareQuality: "4k",
+        screenShareContent: "cinema",
+      } as never),
+    ).toMatchObject({
+      screenShareQuality: "1080p30",
+      screenShareContent: "detail",
+    });
+  });
+});

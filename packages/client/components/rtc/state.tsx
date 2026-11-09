@@ -30,6 +30,7 @@ import { useInstance } from "@revolt/instance";
 import { ModalController, useModals } from "@revolt/modal";
 import { useState } from "@revolt/state";
 import {
+  ScreenShareContent,
   ScreenShareQualityName,
   Voice as VoiceSettings,
 } from "@revolt/state/stores/Voice";
@@ -741,18 +742,14 @@ class Voice {
   }
 
   /**
-   * Get the enabled screen share qualities. "low" will always be enabled.
-   * Each screen share quality is checked against the limit if the limit is available on the client.
-   *
-   * TODO: Translate the fullNames here, I can't figure out how to do it.
-   *
-   * @param name The name of the screen share quality to get
-   * @returns A partial record of ScreenShareQualityName to ScreenShareQuality. Will always contain "low" quality.
+   * Screen share qualities the plan and the server's level allow (720p 30
+   * FPS always), tuned for what is shared
+   * @param content Text and slides (sharp) or video and games (smooth)
    */
-  getEnabledScreenShareQualities(): Partial<
-    Record<ScreenShareQualityName, ScreenShareQuality>
-  > {
-    return screenShareQualities(this.screenShareLimits());
+  getEnabledScreenShareQualities(
+    content: ScreenShareContent = this.#settings.screenShareContent,
+  ): Partial<Record<ScreenShareQualityName, ScreenShareQuality>> {
+    return screenShareQualities(this.screenShareLimits(), content);
   }
 
   /** Resolution and frame rate the plan and the server's level allow */
@@ -792,6 +789,7 @@ class Voice {
       const qualities = this.getEnabledScreenShareQualities();
       let screenPickerQualityName: ScreenShareQualityName | undefined;
       let screenPickerAudio: boolean | undefined;
+      let screenPickerContent: ScreenShareContent | undefined;
 
       // Register the modal on screen picker handler if it exists
       if (window.native && window.native.onceScreenPicker) {
@@ -805,10 +803,12 @@ class Voice {
               idx: number,
               qualityName: ScreenShareQualityName,
               audio: boolean,
+              content: ScreenShareContent,
             ) => {
               window.native.screenPickerCallback(idx, audio);
               screenPickerQualityName = qualityName;
               screenPickerAudio = audio;
+              screenPickerContent = content;
             },
             sources: sources,
             qualities: Object.keys(qualities).map((k) => {
@@ -865,10 +865,14 @@ class Voice {
           });
 
           const callback = async (
-            qualityName: ScreenShareQualityName,
+            qualityName: ScreenShareQualityName | undefined,
             audio: boolean,
+            content: ScreenShareContent,
           ) => {
-            const quality = resolveQuality(qualities, qualityName);
+            const quality = resolveQuality(
+              this.getEnabledScreenShareQualities(content),
+              qualityName,
+            );
 
             if (localTrack.videoTrack) {
               try {
@@ -886,11 +890,14 @@ class Voice {
 
           if (screenPickerQualityName) {
             callback(
-              screenPickerQualityName || "low",
+              screenPickerQualityName,
               screenPickerAudio || false,
+              screenPickerContent ?? this.#settings.screenShareContent,
             );
           } else if (this.#settings.screenShareQualityAsk) {
-            if (Object.keys(qualities).length > 1) {
+            // the dialog also asks what is shared, so it opens even when
+            // the plan offers one size
+            {
               localTrack.pauseUpstream();
               screenAudioTrack?.pauseUpstream();
               this.openModal({
@@ -911,27 +918,23 @@ class Voice {
                   return { name: k, fullName: v.fullName };
                 }),
                 audio: !!screenAudioTrack,
-                callback: async (qualityName, audio) => {
+                callback: async (qualityName, audio, content) => {
                   // apply first so viewers never get frames of the old size
-                  await callback(qualityName, audio);
+                  await callback(qualityName, audio, content);
                   localTrack.resumeUpstream();
                   if (audio) {
                     screenAudioTrack?.resumeUpstream();
                   }
                 },
               });
-            } else {
-              callback(
-                this.#settings.screenShareQuality || "low",
-                this.#settings.screenShareAudio,
-              );
             }
           } else {
             // "Don't ask again": use the saved choice (this path used to
             // keep the 640×480 / 5 FPS start-up capture for the whole share)
             callback(
-              this.#settings.screenShareQuality || "low",
+              this.#settings.screenShareQuality,
               this.#settings.screenShareAudio,
+              this.#settings.screenShareContent,
             );
           }
         }

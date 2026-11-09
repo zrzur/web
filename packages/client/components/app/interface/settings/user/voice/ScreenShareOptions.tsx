@@ -1,6 +1,6 @@
 import { For } from "solid-js";
 
-import { Trans } from "@lingui/solid/macro";
+import { Trans, useLingui } from "@lingui/solid/macro";
 import { styled } from "styled-system/jsx";
 
 import { useVoice } from "@revolt/rtc";
@@ -18,6 +18,7 @@ import { Icon } from "@revolt/ui/icons/Icon";
 export function ScreenShareOptions() {
   const { voice } = useState();
   const voiceContext = useVoice();
+  const { t } = useLingui();
 
   const qualities = voiceContext.getEnabledScreenShareQualities();
 
@@ -42,6 +43,31 @@ export function ScreenShareOptions() {
                   <MenuItem value={name}>{qualities[name]!.fullName}</MenuItem>
                 )}
               </For>
+            </FloatingSelect>
+          </SelectWidth>
+        )}
+      />
+      <SettingsRow
+        icon={<Icon name="monitor" size={20} />}
+        title={<Trans>What you usually share</Trans>}
+        description={
+          <Trans>
+            Text and slides stay sharp; video and games stay smooth.
+          </Trans>
+        }
+        control={(ids) => (
+          <SelectWidth>
+            <FloatingSelect
+              aria-labelledby={ids.labelId}
+              value={voice.screenShareContent}
+              onChange={(e) => {
+                const value = e.currentTarget.value;
+                if (value === "detail" || value === "motion")
+                  voice.screenShareContent = value;
+              }}
+            >
+              <MenuItem value="detail">{t`Text and slides`}</MenuItem>
+              <MenuItem value="motion">{t`Video and games`}</MenuItem>
             </FloatingSelect>
           </SelectWidth>
         )}

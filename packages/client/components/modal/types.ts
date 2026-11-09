@@ -24,7 +24,10 @@ import type { TrackReference } from "solid-livekit-components";
 import type { SettingsConfigurations } from "@revolt/app/interface/settings";
 import { CategoryData } from "@revolt/app/menus/CategoryContextMenu";
 import { ServerFolder } from "@revolt/state/stores/ServerFolders";
-import { ScreenShareQualityName } from "@revolt/state/stores/Voice";
+import {
+  ScreenShareContent,
+  ScreenShareQualityName,
+} from "@revolt/state/stores/Voice";
 
 import type { ReportTargetSpec } from "@revolt/app/interface/safety/safetyApi";
 import type { OrderCheckout, Supercharge } from "@revolt/client/billing";
@@ -396,7 +399,11 @@ export type Modals =
       trackReference: TrackReference;
       qualities: { name: string; fullName: string }[];
       audio: boolean;
-      callback: (qualityName: ScreenShareQualityName, audio: boolean) => void;
+      callback: (
+        qualityName: ScreenShareQualityName,
+        audio: boolean,
+        content: ScreenShareContent,
+      ) => void;
       onCancel: () => void;
     }
   | {
@@ -405,6 +412,7 @@ export type Modals =
         idx: number,
         qualityName: ScreenShareQualityName,
         audio: boolean,
+        content: ScreenShareContent,
       ) => void;
       qualities: { name: string; fullName: string }[];
       sources: {

@@ -17,21 +17,33 @@ const NoiseSuppresionStates: NoiseSuppresionState[] = [
 ];
 
 /**
- * Possible screen share qualities (see rtc/screenShare.ts): low is 720p, high
- * 1080p for sharp text, motion favours smooth frames and text is the source
- * size at 15fps.
+ * Screen share size and frame rate (see rtc/screenShare.ts); 60 FPS only
+ * where the plan or the server's level allow it
  */
-export type ScreenShareQualityName = "low" | "high" | "motion" | "text";
+export type ScreenShareQualityName = "720p30" | "1080p30" | "1080p60";
 
 /**
  * Array of available screen share quality names.
  */
 export const ScreenShareQualityNames: ScreenShareQualityName[] = [
-  "low",
-  "high",
-  "motion",
-  "text",
+  "720p30",
+  "1080p30",
+  "1080p60",
 ];
+
+/** What is shared: text and slides (sharp) or video and games (smooth) */
+export type ScreenShareContent = "detail" | "motion";
+
+/** Qualities saved before 2026-11-09, as the new size and content */
+const LEGACY_QUALITIES: Record<
+  string,
+  [ScreenShareQualityName, ScreenShareContent]
+> = {
+  low: ["720p30", "detail"],
+  high: ["1080p30", "detail"],
+  text: ["1080p30", "detail"],
+  motion: ["1080p60", "motion"],
+};
 
 /** Per-person and per-stream volume: 0 to 300 %, anything else is 100 % */
 function clampVolume(volume: number) {
@@ -49,6 +61,7 @@ export interface TypeVoice {
   autoGainControl: boolean;
 
   screenShareQuality: ScreenShareQualityName;
+  screenShareContent: ScreenShareContent;
   screenShareQualityAsk: boolean;
   screenShareAudio: boolean;
 
@@ -111,7 +124,8 @@ export class Voice extends AbstractStore<"voice", TypeVoice> {
       echoCancellation: true,
       noiseSupression: "enhanced",
       autoGainControl: true,
-      screenShareQuality: "low",
+      screenShareQuality: "1080p30",
+      screenShareContent: "detail",
       screenShareQualityAsk: true,
       screenShareAudio: true,
       inputVolume: 1.0,
@@ -173,6 +187,19 @@ export class Voice extends AbstractStore<"voice", TypeVoice> {
       ScreenShareQualityNames.includes(input.screenShareQuality)
     ) {
       data.screenShareQuality = input.screenShareQuality;
+    } else if (
+      typeof input.screenShareQuality === "string" &&
+      LEGACY_QUALITIES[input.screenShareQuality]
+    ) {
+      [data.screenShareQuality, data.screenShareContent] =
+        LEGACY_QUALITIES[input.screenShareQuality];
+    }
+
+    if (
+      input.screenShareContent === "detail" ||
+      input.screenShareContent === "motion"
+    ) {
+      data.screenShareContent = input.screenShareContent;
     }
 
     if (typeof input.screenShareQualityAsk === "boolean") {
@@ -377,6 +404,20 @@ export class Voice extends AbstractStore<"voice", TypeVoice> {
    */
   set screenShareQuality(value: ScreenShareQualityName) {
     this.set("screenShareQuality", value);
+  }
+
+  /**
+   * Set what is usually shared (text and slides, or video and games)
+   */
+  set screenShareContent(value: ScreenShareContent) {
+    this.set("screenShareContent", value);
+  }
+
+  /**
+   * Get what is usually shared
+   */
+  get screenShareContent(): ScreenShareContent {
+    return this.get().screenShareContent ?? "detail";
   }
 
   /**
