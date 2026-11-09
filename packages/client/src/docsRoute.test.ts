@@ -14,10 +14,11 @@ const here = dirname(fileURLToPath(import.meta.url));
 const read = (file: string) => readFileSync(join(here, file), "utf8");
 
 describe("developer docs route", () => {
-  const index = read("index.tsx");
+  // the app's routes live in app.tsx (index.tsx only boots app or sites)
+  const index = read("app.tsx");
   const appRoutes = index.slice(
     index.indexOf("const appRoutes"),
-    index.indexOf("const routes ="),
+    index.indexOf("renderRoutes(appRoutes)"),
   );
 
   it("is matched before, and outside, the app interface", () => {

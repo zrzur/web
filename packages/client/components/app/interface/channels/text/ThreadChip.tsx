@@ -5,6 +5,8 @@ import { useLingui } from "@lingui/solid/macro";
 import { Message } from "@zrzur/sdk/solid";
 import { styled } from "styled-system/jsx";
 
+import { useClient } from "@revolt/client";
+import { findThread } from "@revolt/client/threads";
 import { useNavigate } from "@revolt/routing";
 import { Icon } from "@revolt/ui/icons/Icon";
 
@@ -15,7 +17,11 @@ import { Icon } from "@revolt/ui/icons/Icon";
 export function ThreadChip(props: { message: Message }) {
   const { t } = useLingui();
   const navigate = useNavigate();
-  const thread = () => props.message.channel?.threadOf(props.message.id);
+  const client = useClient();
+  // from the client's thread index: searching every channel for each
+  // message made opening a channel slow
+  const thread = () =>
+    findThread(client().channels, props.message.channelId, props.message.id);
 
   return (
     <Show when={thread()}>

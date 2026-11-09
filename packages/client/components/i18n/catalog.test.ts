@@ -1,0 +1,104 @@
+import { i18n } from "@lingui/core";
+import { afterEach, describe, expect, it, vi } from "vitest";
+
+import {
+  browserPreferredLanguage,
+  importCatalog,
+  preferSiteCatalogs,
+  setFullCatalogLoader,
+} from "./catalog";
+import { Language } from "./Languages";
+
+describe("message catalogs", () => {
+  afterEach(() => vi.unstubAllGlobals());
+
+  it("starts one download per language, shared by the early start and the provider", async () => {
+    const early = importCatalog(Language.GERMAN);
+    const later = importCatalog(Language.GERMAN);
+    expect(later).toBe(early);
+    const messages = await early;
+    expect(Object.keys(messages).length).toBeGreaterThan(100);
+  });
+
+  it("tries again after a failed download", async () => {
+    const broken = "xx-broken" as Language;
+    const first = importCatalog(broken);
+    await expect(first).rejects.toBeTruthy();
+    const second = importCatalog(broken);
+    expect(second).not.toBe(first);
+    await expect(second).rejects.toBeTruthy();
+  });
+
+  it("picks the device language, exact match first", () => {
+    // an exact match anywhere in the list wins over a partial one
+    vi.stubGlobal("navigator", { languages: ["de-AT", "ar"] });
+    expect(browserPreferredLanguage()).toBe(Language.ARABIC);
+    vi.stubGlobal("navigator", { languages: ["de-AT"] });
+    expect(browserPreferredLanguage()).toBe(Language.GERMAN);
+    vi.stubGlobal("navigator", { languages: ["en-US"] });
+    expect(browserPreferredLanguage()).toBe(Language.ENGLISH_STUPEFIED);
+    vi.stubGlobal("navigator", { languages: ["xx"] });
+    expect(browserPreferredLanguage()).toBe(Language.ENGLISH);
+  });
+
+  it("on the Discover and Designs sites, shows the small file first and adds the full one after", async () => {
+    const load = vi.spyOn(i18n, "load").mockImplementation(() => undefined);
+    const fetch = vi.fn(async () => ({
+      ok: true,
+      json: async () => ({ only: ["Nur das"] }),
+    }));
+    vi.stubGlobal("fetch", fetch);
+    preferSiteCatalogs({ ar: "/assets/site-messages-ar.json" });
+
+    const first = await importCatalog(Language.ARABIC);
+    expect(first).toEqual({ only: ["Nur das"] });
+    expect(fetch).toHaveBeenCalledWith("/assets/site-messages-ar.json");
+
+    // the full file is a real import of a large module
+    await vi.waitFor(() => expect(load).toHaveBeenCalled(), {
+      timeout: 20_000,
+    });
+    const [locale, full] = load.mock.calls[0] as unknown as [string, object];
+    expect(locale).toBe(Language.ARABIC);
+    expect(Object.keys(full).length).toBeGreaterThan(100);
+    load.mockRestore();
+  });
+
+  it("falls back to the full file when the small one fails", async () => {
+    vi.stubGlobal(
+      "fetch",
+      vi.fn(async () => ({ ok: false, json: async () => ({}) })),
+    );
+    preferSiteCatalogs({ en: "/assets/site-messages-en.json" });
+    const messages = await importCatalog(Language.ENGLISH);
+    expect(Object.keys(messages).length).toBeGreaterThan(100);
+  });
+
+  it("tries the full file again on the next ask after it failed", async () => {
+    const load = vi.spyOn(i18n, "load").mockImplementation(() => undefined);
+    vi.stubGlobal(
+      "fetch",
+      vi.fn(async () => ({ ok: true, json: async () => ({ s: ["S"] }) })),
+    );
+    let calls = 0;
+    setFullCatalogLoader(async () => {
+      calls++;
+      if (calls === 1) throw new Error("offline");
+      return { full: ["Voll"] };
+    });
+    preferSiteCatalogs({ fr: "/assets/site-messages-fr.json" });
+    // a language no other test has loaded
+    await importCatalog(Language.FRENCH);
+    await vi.waitFor(() => expect(calls).toBe(1));
+    await new Promise((r) => setTimeout(r, 10));
+    expect(load).not.toHaveBeenCalled();
+
+    await importCatalog(Language.FRENCH);
+    await vi.waitFor(() =>
+      expect(load).toHaveBeenCalledWith("fr", { full: ["Voll"] }),
+    );
+    expect(calls).toBe(2);
+    load.mockRestore();
+    setFullCatalogLoader();
+  });
+});

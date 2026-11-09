@@ -3,9 +3,10 @@ import { type JSX, Show, createSignal } from "solid-js";
 import { i18n } from "@lingui/core";
 import { I18nProvider as LinguiProvider } from "@lingui/solid";
 
-import { type LocaleOptions, Language, Languages } from "./Languages";
+import { browserPreferredLanguage, importCatalog } from "./catalog";
 import { initTime, loadTimeLocale } from "./dayjs";
 import { updateDurationLocale } from "./durations";
+import { type LocaleOptions, Language, Languages } from "./Languages";
 
 export function I18nProvider(props: { children: JSX.Element }) {
   const [ready, setReady] = createSignal(false);
@@ -28,9 +29,10 @@ export function I18nProvider(props: { children: JSX.Element }) {
   );
 }
 
-export { Language, Languages } from "./Languages";
+export { browserPreferredLanguage } from "./catalog";
 export { timeLocale, useTime } from "./dayjs";
 export { translatedError, useError } from "./errors";
+export { Language, Languages } from "./Languages";
 
 /** Each switch gets a number; a slower, older one never wins the race */
 let latestSwitch = 0;
@@ -41,11 +43,7 @@ export async function loadAndSwitchLocale(
 ) {
   const mine = ++latestSwitch;
   if (key !== i18n.locale) {
-    // explicit .ts: `lingui compile` (CommonJS by default) rewrites
-    // messages.js, which Vite can't import as `{ messages }` (white screen);
-    // the .ts twin is always an ES module
-    const data = (await import(`./catalogs/${Languages[key].i18n}/messages.ts`))
-      .messages;
+    const data = await importCatalog(key);
     // e.g. the saved language still loading when a link asked for another
     if (mine !== latestSwitch) return;
 
@@ -76,27 +74,4 @@ function applyDocumentDirection(key: Language, localeOptions: LocaleOptions) {
   const root = document.documentElement;
   root.lang = key;
   root.dir = rtl ? "rtl" : "ltr";
-}
-
-/**
- * Preferred language as reported by the browser
- * @returns Preferred language
- */
-export function browserPreferredLanguage() {
-  const languages = Object.keys(Languages).map(
-    (x) => [x, Languages[x as keyof typeof Languages]] as const,
-  );
-
-  // Get the user's system language. Check for exact
-  // matches first, otherwise check for partial matches
-  return (
-    navigator.languages
-      .map((lang) => languages.find((l) => l[0].replace(/_/g, "-") == lang))
-      .filter((lang) => lang)[0]?.[0] ??
-    navigator.languages
-      .map((x) => x.split("-")[0])
-      .map((lang) => languages.find((l) => l[0] == lang))
-      .filter((lang) => lang)[0]?.[0] ??
-    Language.ENGLISH
-  );
 }

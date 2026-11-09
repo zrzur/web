@@ -15,14 +15,17 @@ afterEach(() => {
 
 type Row = { id: string; name: string };
 
-function mount(initial: Row[]) {
+function mount(
+  initial: Row[],
+  onChange: (ids: string[]) => void = () => undefined,
+) {
   const [items, setItems] = createSignal(initial);
   const drawn: string[] = [];
   const host = document.createElement("div");
   document.body.appendChild(host);
   dispose = render(
     () => (
-      <Draggable items={items()} onChange={() => undefined}>
+      <Draggable items={items()} onChange={onChange}>
         {({ item }) => {
           drawn.push(item.id);
           return <div data-row={item.id}>{item.name}</div>;
@@ -75,5 +78,40 @@ describe("Draggable", () => {
     await Promise.resolve();
 
     expect(host.querySelector('[data-row="a"]')?.textContent).toBe("A2");
+  });
+
+  it("reads no layout when a list opens or its items change (only a drag measures)", async () => {
+    const reads = vi.spyOn(Element.prototype, "getBoundingClientRect");
+    const { setItems } = mount([a, b, c]);
+    await new Promise((r) => setTimeout(r, 10));
+    setItems([c, a, b]);
+    await new Promise((r) => setTimeout(r, 10));
+    expect(reads).not.toHaveBeenCalled();
+    reads.mockRestore();
+  });
+
+  it("still reorders with the keyboard", async () => {
+    const changes: string[][] = [];
+    const { host } = mount([a, b, c], (ids) => changes.push(ids));
+    await new Promise((r) => setTimeout(r, 10));
+    const zone = host.querySelector("[data-drop-zone]") as HTMLElement;
+    expect(zone.getAttribute("role")).toBe("list");
+    const first = zone.children[0] as HTMLElement;
+    expect(first.getAttribute("role")).toBe("listitem");
+    expect(first.tabIndex).toBe(0);
+
+    const key = (el: Element, k: string) =>
+      el.dispatchEvent(new KeyboardEvent("keydown", { key: k, bubbles: true }));
+    first.focus();
+    key(first, " ");
+    await new Promise((r) => setTimeout(r, 10));
+    key(zone.children[0], "ArrowDown");
+    await new Promise((r) => setTimeout(r, 10));
+    key(
+      zone.querySelector('[data-row="a"]')!.parentElement ?? zone.children[1],
+      " ",
+    );
+    await new Promise((r) => setTimeout(r, 50));
+    expect(changes.at(-1)).toEqual(["b", "a", "c"]);
   });
 });

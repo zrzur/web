@@ -2,10 +2,13 @@ import { useDevice } from "@revolt/common";
 import {
   type Accessor,
   type JSX,
+  createComputed,
   createEffect,
+  createRoot,
   createSignal,
   on,
   onCleanup,
+  untrack,
 } from "solid-js";
 
 import { applyTooltipName } from "../components/floating/tooltipName";
@@ -20,18 +23,48 @@ export type FloatingElement = {
   show: Accessor<Props | undefined>;
 };
 
+/**
+ * Every server icon, name, avatar and button with a tooltip registers here,
+ * hundreds at once when a server or channel opens. The floating layer only
+ * draws the ones that have opened at least once: an element that never opens
+ * costs one small watcher, not a piece of the layer that is redrawn (and a
+ * list that is copied) every time any element comes or goes.
+ */
 const [floatingElements, setFloatingElements] = createSignal<FloatingElement[]>(
   [],
 );
 
+/** Elements that have opened at least once, for the floating layer */
 export { floatingElements };
+
+/** Registered elements and the watcher that waits for each to open */
+const registered = new Map<HTMLElement, Map<FloatingElement, () => void>>();
 
 /**
  * Register a new floating element
  * @param element element
  */
 export function registerFloatingElement(element: FloatingElement) {
-  setFloatingElements((elements) => [...elements, element]);
+  let entries = registered.get(element.element);
+  if (!entries) {
+    entries = new Map();
+    registered.set(element.element, entries);
+  }
+  entries.set(
+    element,
+    createRoot((dispose) => {
+      createComputed(() => {
+        if (!element.show()) return;
+        // from now on the layer draws it (and its closing animation)
+        untrack(() =>
+          setFloatingElements((elements) =>
+            elements.includes(element) ? elements : [...elements, element],
+          ),
+        );
+      });
+      return dispose;
+    }),
+  );
 }
 
 /**
@@ -39,9 +72,15 @@ export function registerFloatingElement(element: FloatingElement) {
  * @param element DOM Element
  */
 export function unregisterFloatingElement(element: HTMLElement) {
-  setFloatingElements((elements) =>
-    elements.filter((entry) => entry.element !== element),
-  );
+  const entries = registered.get(element);
+  if (!entries) return;
+  registered.delete(element);
+  for (const dispose of entries.values()) dispose();
+  // called from cleanups, which may run inside a computation
+  if (untrack(floatingElements).some((entry) => entries.has(entry)))
+    setFloatingElements((elements) =>
+      elements.filter((entry) => !entries.has(entry)),
+    );
 }
 
 /**
