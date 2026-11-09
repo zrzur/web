@@ -245,22 +245,57 @@ export function CommandPicker(props: Props) {
 
   // `/name` then Enter with nothing chosen (the list closed, or not loaded
   // yet): choose that command rather than send the text as a message
+  // what happened to the last `/name` + Enter that waited for the list;
+  // shown above the message box, and the next Enter sends the text
+  const [typedNote, setTypedNote] = createSignal<{
+    text: string;
+    state: "loading" | "missing" | "failed";
+  }>();
+  createEffect(
+    on(
+      () => props.content,
+      (content) => {
+        if (typedNote() && typedNote()!.text !== content) setTypedNote();
+      },
+    ),
+  );
+
   const chooseTyped = () => {
     const id = serverId();
     if (!id || chosen()) return false;
     const text = props.content;
     if (!/^\/\S+\s*$/.test(text)) return false;
+    // the list could not help a moment ago: this Enter sends the text
+    const note = typedNote();
+    if (note && note.text === text && note.state !== "loading") {
+      setTypedNote();
+      return false;
+    }
+    if (note?.state === "loading") return true;
     if (!commands()) {
       // still loading: wait for the list, then choose it if it is there
+      setTypedNote({ text, state: "loading" });
       loadCommands(client(), id)
-        .then(() => {
-          const command = typedCommand(props.content, usable(), label);
+        .then((list) => {
+          const command = typedCommand(
+            props.content,
+            dedupeCommands(
+              list.commands.filter(
+                (entry) =>
+                  entry.type === "ChatInput" && (!entry.nsfw || channelNsfw()),
+              ),
+            ),
+            label,
+          );
           if (command && !chosen()) {
+            setTypedNote();
             setDismissed(false);
             pick(command);
+          } else {
+            setTypedNote({ text, state: "missing" });
           }
         })
-        .catch(() => undefined);
+        .catch(() => setTypedNote({ text, state: "failed" }));
       return true;
     }
     const command = typedCommand(text, usable(), label);
@@ -319,6 +354,27 @@ export function CommandPicker(props: Props) {
 
   return (
     <>
+      <Show when={typedNote()}>
+        {(note) => (
+          <Panel>
+            <List aria-live="polite" data-typed-command={note().state}>
+              <EmptyLine>
+                <Switch>
+                  <Match when={note().state === "loading"}>
+                    {t`Loading the commands…`}
+                  </Match>
+                  <Match when={note().state === "missing"}>
+                    {t`No command has this name. Press Enter again to send it as a message.`}
+                  </Match>
+                  <Match when={note().state === "failed"}>
+                    {t`Couldn't load the commands. Press Enter again to send it as a message.`}
+                  </Match>
+                </Switch>
+              </EmptyLine>
+            </List>
+          </Panel>
+        )}
+      </Show>
       <Show when={showList()}>
         <Panel>
           <Show when={apps().length > 1}>

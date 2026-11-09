@@ -6,10 +6,10 @@ import { InteractionError, interactionApi, nonce } from "./api";
 import { dmCommands } from "./commandList";
 import {
   EPHEMERAL_LIFETIME_MS,
-  EPHEMERAL_STORAGE_KEY,
   ephemeralExpiry,
+  ephemeralKey,
   ephemeralStorage,
-  readStoredEphemeral,
+  takeStoredEphemeral,
 } from "./ephemeralStorage";
 import type {
   ApplicationCommand,
@@ -60,14 +60,8 @@ type InteractionState = {
   labels: Record<string, string>;
 };
 
-// private answers of this tab survive a reload until they expire
-const restored = readStoredEphemeral(
-  ephemeralStorage()?.getItem(EPHEMERAL_STORAGE_KEY) ?? null,
-  Date.now(),
-);
-
 const [state, setState] = createStore<InteractionState>({
-  ephemeral: restored,
+  ephemeral: {},
   pending: {},
   busy: {},
   componentErrors: {},
@@ -139,9 +133,10 @@ function fail(id: string, error: string) {
 
 /** Keep this tab's private answers for a reload */
 function saveEphemeral() {
+  if (!ephemeralOwner) return;
   try {
     ephemeralStorage()?.setItem(
-      EPHEMERAL_STORAGE_KEY,
+      ephemeralKey(ephemeralOwner),
       JSON.stringify(state.ephemeral),
     );
   } catch {
@@ -157,7 +152,25 @@ function expireLater(message: EphemeralMessage) {
     Math.max(expiry - Date.now(), 0),
   );
 }
-for (const list of Object.values(restored)) list.forEach(expireLater);
+/** The account whose private answers are in memory */
+let ephemeralOwner: string | undefined;
+
+/**
+ * Private answers of this tab survive a reload until they expire, for the
+ * account that received them only: another account signing in starts empty
+ * and the old answers are removed.
+ */
+export function useEphemeralFor(userId: string | undefined) {
+  if (!userId || userId === ephemeralOwner) return;
+  ephemeralOwner = userId;
+  const restored = takeStoredEphemeral(ephemeralStorage(), userId, Date.now());
+  setState(
+    produce((draft) => {
+      draft.ephemeral = restored;
+    }),
+  );
+  for (const list of Object.values(restored)) list.forEach(expireLater);
+}
 
 function addEphemeral(message: EphemeralMessage) {
   setState(
@@ -236,19 +249,22 @@ function onEvent(event: InteractionEvent) {
         remember(earlyChoices, event.id, event.choices);
       }
       break;
-    case "ApplicationCommandsUpdate":
-      commandRequests.delete(event.server_id);
-      setState(
-        produce((draft) => {
-          delete draft.commands[event.server_id];
-        }),
-      );
-      // the server's channel lists and, as a bot's global commands may
-      // have changed, the DM lists load again too
-      for (const key of Object.keys(state.commands)) {
-        if (!key.startsWith("dm:") && !key.startsWith(`${event.server_id}#`))
-          continue;
+    case "ApplicationCommandsUpdate": {
+      // the server's lists (whole and per channel) and, as a bot's global
+      // commands may have changed, the DM lists load again; answers still
+      // on their way are dropped (see `loadInto`)
+      const stale = (key: string) =>
+        key === event.server_id ||
+        key.startsWith(`${event.server_id}#`) ||
+        key.startsWith("dm:");
+      const keys = new Set([
+        ...Object.keys(state.commands),
+        ...commandRequests.keys(),
+      ]);
+      for (const key of keys) {
+        if (!stale(key)) continue;
         commandRequests.delete(key);
+        generations.set(key, (generations.get(key) ?? 0) + 1);
         setState(
           produce((draft) => {
             delete draft.commands[key];
@@ -256,11 +272,13 @@ function onEvent(event: InteractionEvent) {
         );
       }
       break;
+    }
   }
 }
 
 /** Listen to the gateway once per client */
 export function attachInteractions(client: Client) {
+  useEphemeralFor(client.user?.id);
   if (attached.has(client)) return;
   attached.add(client);
   client.events.on("event", (event) => {
@@ -277,10 +295,13 @@ export function commandsKey(channel: {
   id: string;
   type: string;
   serverId?: string;
+  /** The channel a thread or forum post is in */
+  parentId?: string;
   recipient?: { id: string; bot?: unknown };
 }): string | undefined {
+  // a thread follows the rules of its channel, as the server does
   if (channel.type === "TextChannel" && channel.serverId)
-    return `${channel.serverId}#${channel.id}`;
+    return `${channel.serverId}#${channel.parentId ?? channel.id}`;
   if (channel.type === "DirectMessage" && channel.recipient?.bot)
     return `dm:${channel.recipient.id}`;
   return undefined;
@@ -295,37 +316,46 @@ export function loadCommands(client: Client, key: string) {
     : loadServerCommands(client, serverId);
 }
 
+/** Bumped when a list goes stale, so an answer already on its way is dropped */
+const generations = new Map<string, number>();
+
+/** Fetch a list once per key until it changes; stale answers are not kept */
+function loadInto(key: string, fetch: () => Promise<ServerCommands>) {
+  if (state.commands[key]) return Promise.resolve(state.commands[key]);
+  let request = commandRequests.get(key);
+  if (!request) {
+    const generation = generations.get(key) ?? 0;
+    request = fetch().then((commands) => {
+      if ((generations.get(key) ?? 0) === generation) {
+        setState("commands", key, commands);
+      }
+      return commands;
+    });
+    request.catch(() => {
+      if (commandRequests.get(key) === request) commandRequests.delete(key);
+    });
+    commandRequests.set(key, request);
+  }
+  return request;
+}
+
 /** The commands this member may use in one channel of a server */
 export function loadChannelCommands(
   client: Client,
   serverId: string,
   channelId: string,
 ) {
-  const key = `${serverId}#${channelId}`;
-  if (state.commands[key]) return Promise.resolve(state.commands[key]);
-  let request = commandRequests.get(key);
-  if (!request) {
-    request = interactionApi
-      .serverCommands(client, serverId, channelId)
-      .then((commands) => {
-        setState("commands", key, commands);
-        return commands;
-      });
-    request.catch(() => commandRequests.delete(key));
-    commandRequests.set(key, request);
-  }
-  return request;
+  return loadInto(`${serverId}#${channelId}`, () =>
+    interactionApi.serverCommands(client, serverId, channelId),
+  );
 }
 
 /** A bot's global commands for the DM with it, fetched once until they change */
 export function loadDmCommands(client: Client, botId: string) {
-  const key = `dm:${botId}`;
-  if (state.commands[key]) return Promise.resolve(state.commands[key]);
-  let request = commandRequests.get(key);
-  if (!request) {
-    request = interactionApi.botCommands(client, botId).then((commands) => {
+  return loadInto(`dm:${botId}`, () =>
+    interactionApi.botCommands(client, botId).then((commands) => {
       const user = client.users.get(botId);
-      const list = dmCommands(
+      return dmCommands(
         {
           _id: botId,
           username: user?.username ?? "",
@@ -333,31 +363,15 @@ export function loadDmCommands(client: Client, botId: string) {
         },
         commands,
       );
-      setState("commands", key, list);
-      return list;
-    });
-    request.catch(() => commandRequests.delete(key));
-    commandRequests.set(key, request);
-  }
-  return request;
+    }),
+  );
 }
 
 /** Commands of the bots installed in a server, fetched once until they change */
 export function loadServerCommands(client: Client, serverId: string) {
-  if (state.commands[serverId])
-    return Promise.resolve(state.commands[serverId]);
-  let request = commandRequests.get(serverId);
-  if (!request) {
-    request = interactionApi
-      .serverCommands(client, serverId)
-      .then((commands) => {
-        setState("commands", serverId, commands);
-        return commands;
-      });
-    request.catch(() => commandRequests.delete(serverId));
-    commandRequests.set(serverId, request);
-  }
-  return request;
+  return loadInto(serverId, () =>
+    interactionApi.serverCommands(client, serverId),
+  );
 }
 
 async function start(

@@ -5,6 +5,7 @@ import {
   attachInteractions,
   commandsKey,
   interactionState,
+  loadServerCommands,
   requestAutocomplete,
   useComponent,
 } from "./store";
@@ -144,6 +145,17 @@ describe("where a channel's commands come from", () => {
     ).toBe("SRV#CH");
   });
 
+  it("a thread or forum post uses the list of the channel it is in", () => {
+    expect(
+      commandsKey({
+        id: "THREAD",
+        type: "TextChannel",
+        serverId: "SRV",
+        parentId: "CH",
+      }),
+    ).toBe("SRV#CH");
+  });
+
   it("a DM with a bot uses the bot's global commands; other DMs have none", () => {
     expect(
       commandsKey({
@@ -156,5 +168,20 @@ describe("where a channel's commands come from", () => {
       commandsKey({ id: "D", type: "DirectMessage", recipient: { id: "P" } }),
     ).toBeUndefined();
     expect(commandsKey({ id: "G", type: "Group" })).toBeUndefined();
+  });
+});
+
+describe("command lists that change while loading", () => {
+  it("drop an answer that started before the bot changed its commands", async () => {
+    const send = fakeClient();
+    let answer: (value: unknown) => void = () => {};
+    const slow = {
+      api: { get: () => new Promise((resolve) => (answer = resolve)) },
+    } as unknown as Parameters<typeof loadServerCommands>[0];
+    const loading = loadServerCommands(slow, "STALE");
+    send({ type: "ApplicationCommandsUpdate", server_id: "STALE" });
+    answer({ applications: [], commands: [] });
+    await loading.catch(() => undefined);
+    expect(interactionState.commands.STALE).toBeUndefined();
   });
 });
