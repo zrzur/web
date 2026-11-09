@@ -4,6 +4,8 @@
 
 ### Features
 
+* **Administrator:** a role permission that gives every right in every channel, private ones too, whatever their settings say. It sits first under Admin on a role (never on Everyone or a channel), says the role can do everything except what only the owner can do, and only an administrator or the owner can switch it. Who can see this channel marks such a role as seeing every channel.
+
 * **Plugins are off for now:** the server decides with `features.plugins`, and anything but a clear yes means off. Off, the app shows no plugin entry in Settings, starts no plugin host, makes no sandbox or iframe and asks the server for nothing about plugins, also for people who installed one. Their installs stay stored and come back when the server turns plugins on. `PluginsDisabled` has plain words in Arabic, English and German.
 * **Three new themes:** High Contrast, Paper and Desert Dawn are built into Settings, Appearance, after the four packs. High Contrast keeps its larger text, clear focus rings, underlined links and reduced motion.
 * **Creator effects:** creators upload profile effects in Creator Studio, with a rights box, the reason for any refusal in the same screen and a template. The Effects tab on Designs shows Zrzur's effects and approved uploads together; an uploaded effect is worn from Designs and plays on the card and the full profile. Anyone can report one from the profile menu, with an urgent flashing reason.
@@ -142,6 +144,8 @@
 
 ### Features
 
+* **Administrator:** a role permission that gives every right in every channel, private ones too, whatever their settings say. It sits first under Admin on a role (never on Everyone or a channel), says the role can do everything except what only the owner can do, and only an administrator or the owner can switch it. Who can see this channel marks such a role as seeing every channel.
+
 
 * Add discover buttons and flow for bots and servers ([#1572](https://github.com/stoatchat/for-web/issues/1572)) ([fbba89e](https://github.com/stoatchat/for-web/commit/fbba89e68977ff60ed911fef401723914d9bbf3c))
 * add functionality to mark attachments as spoilers ([#1597](https://github.com/stoatchat/for-web/issues/1597)) ([de5379b](https://github.com/stoatchat/for-web/commit/de5379b12c37af0a5b777998693565c5cfe3f86d))
@@ -239,6 +243,8 @@
 
 ### Features
 
+* **Administrator:** a role permission that gives every right in every channel, private ones too, whatever their settings say. It sits first under Admin on a role (never on Everyone or a channel), says the role can do everything except what only the owner can do, and only an administrator or the owner can switch it. Who can see this channel marks such a role as seeing every channel.
+
 
 * "add bot" on ProfileActions ([#1261](https://github.com/stoatchat/for-web/issues/1261)) ([2df4d1a](https://github.com/stoatchat/for-web/commit/2df4d1acf9da831a811ac538e085462500bea6f0))
 * Add a virtual mic for linux wayland screen sharing ([#1438](https://github.com/stoatchat/for-web/issues/1438)) ([973cd4b](https://github.com/stoatchat/for-web/commit/973cd4b90d43880f5be154c041c21aa0e74a3daf))
@@ -294,6 +300,8 @@
 
 ### Features
 
+* **Administrator:** a role permission that gives every right in every channel, private ones too, whatever their settings say. It sits first under Admin on a role (never on Everyone or a channel), says the role can do everything except what only the owner can do, and only an administrator or the owner can switch it. Who can see this channel marks such a role as seeing every channel.
+
 
 * Add create channel/category opts to respective context menus ([#1076](https://github.com/stoatchat/for-web/issues/1076)) ([8992d07](https://github.com/stoatchat/for-web/commit/8992d079c39099666fb5c073146b3d7a18ee25d2))
 * add emoji name and where it is from at the bottom of emoji picker ([#1289](https://github.com/stoatchat/for-web/issues/1289)) ([54b6631](https://github.com/stoatchat/for-web/commit/54b6631bc95d5e4025f7083aeb5079a5c46fec03))
@@ -339,6 +347,8 @@
 
 ### Features
 
+* **Administrator:** a role permission that gives every right in every channel, private ones too, whatever their settings say. It sits first under Admin on a role (never on Everyone or a channel), says the role can do everything except what only the owner can do, and only an administrator or the owner can switch it. Who can see this channel marks such a role as seeing every channel.
+
 
 * add pronouns ([#1340](https://github.com/stoatchat/for-web/issues/1340)) ([16cf0e2](https://github.com/stoatchat/for-web/commit/16cf0e275d21bced5fc14c8467bcd7475f91fe61))
 * pin message modal ([#1270](https://github.com/stoatchat/for-web/issues/1270)) ([c692b9d](https://github.com/stoatchat/for-web/commit/c692b9d69d81f8f75478e0594bffb8cdcfc7bbcd))
@@ -361,6 +371,8 @@
 
 ### Features
 
+* **Administrator:** a role permission that gives every right in every channel, private ones too, whatever their settings say. It sits first under Admin on a role (never on Everyone or a channel), says the role can do everything except what only the owner can do, and only an administrator or the owner can switch it. Who can see this channel marks such a role as seeing every channel.
+
 
 * Add a latency checker for all available livekit nodes and choose ([64bdbbb](https://github.com/stoatchat/for-web/commit/64bdbbbac47046fd0dead3391d526bd5b7c91820))
 
@@ -373,6 +385,8 @@
 
 
 ### Features
+
+* **Administrator:** a role permission that gives every right in every channel, private ones too, whatever their settings say. It sits first under Admin on a role (never on Everyone or a channel), says the role can do everything except what only the owner can do, and only an administrator or the owner can switch it. Who can see this channel marks such a role as seeing every channel.
 
 
 * add legal links to the settings page ([#1288](https://github.com/stoatchat/for-web/issues/1288)) ([19866fc](https://github.com/stoatchat/for-web/commit/19866fc3209828dbe2a66121ae3a6679eca3d673))
@@ -392,6 +406,8 @@
 
 
 ### Features
+
+* **Administrator:** a role permission that gives every right in every channel, private ones too, whatever their settings say. It sits first under Admin on a role (never on Everyone or a channel), says the role can do everything except what only the owner can do, and only an administrator or the owner can switch it. Who can see this channel marks such a role as seeing every channel.
 
 
 * add ability to copy links from messages ([#1161](https://github.com/stoatchat/for-web/issues/1161)) ([ff8f37d](https://github.com/stoatchat/for-web/commit/ff8f37d735b2cbcd2cd4757e10b49f312e6a851f))
@@ -439,6 +455,8 @@
 
 ### Features
 
+* **Administrator:** a role permission that gives every right in every channel, private ones too, whatever their settings say. It sits first under Admin on a role (never on Everyone or a channel), says the role can do everything except what only the owner can do, and only an administrator or the owner can switch it. Who can see this channel marks such a role as seeing every channel.
+
 
 * add gif providers regex to detect gif providers ([#1243](https://github.com/stoatchat/for-web/issues/1243)) ([26b248e](https://github.com/stoatchat/for-web/commit/26b248e0ea3f8a886e5e3071aa97929fa555b7c3))
 * add NFKC normalization to autocomplete ([#1267](https://github.com/stoatchat/for-web/issues/1267)) ([79dc800](https://github.com/stoatchat/for-web/commit/79dc800e8c5f06d6e5b655c36028088b664e1995))
@@ -459,6 +477,8 @@
 
 
 ### Features
+
+* **Administrator:** a role permission that gives every right in every channel, private ones too, whatever their settings say. It sits first under Admin on a role (never on Everyone or a channel), says the role can do everything except what only the owner can do, and only an administrator or the owner can switch it. Who can see this channel marks such a role as seeing every channel.
 
 
 * Add push notifications to the service worker of the PWA ([#882](https://github.com/stoatchat/for-web/issues/882)) ([d5abc61](https://github.com/stoatchat/for-web/commit/d5abc61575b5b23a492fae2d323de5a734e6e2f0))
@@ -502,6 +522,8 @@
 
 ### Features
 
+* **Administrator:** a role permission that gives every right in every channel, private ones too, whatever their settings say. It sits first under Admin on a role (never on Everyone or a channel), says the role can do everything except what only the owner can do, and only an administrator or the owner can switch it. Who can see this channel marks such a role as seeing every channel.
+
 
 * changelogs ([#1175](https://github.com/stoatchat/for-web/issues/1175)) ([e5ab20b](https://github.com/stoatchat/for-web/commit/e5ab20bda7a8b67c55255c937aeb13b9a959067a))
 * role icons ([#1173](https://github.com/stoatchat/for-web/issues/1173)) ([ae04583](https://github.com/stoatchat/for-web/commit/ae0458349cf2f7568bf2cfa2e7c8148d7f00ed07))
@@ -524,6 +546,8 @@
 
 
 ### Features
+
+* **Administrator:** a role permission that gives every right in every channel, private ones too, whatever their settings say. It sits first under Admin on a role (never on Everyone or a channel), says the role can do everything except what only the owner can do, and only an administrator or the owner can switch it. Who can see this channel marks such a role as seeing every channel.
 
 
 * Add an error for messages being too long and a countdown ([#1131](https://github.com/stoatchat/for-web/issues/1131)) ([e146e26](https://github.com/stoatchat/for-web/commit/e146e26167f5ef3aa5287674a2f30e6f1b22d47c))
@@ -556,6 +580,8 @@
 
 ### Features
 
+* **Administrator:** a role permission that gives every right in every channel, private ones too, whatever their settings say. It sits first under Admin on a role (never on Everyone or a channel), says the role can do everything except what only the owner can do, and only an administrator or the owner can switch it. Who can see this channel marks such a role as seeing every channel.
+
 
 * Remember mic mute setting ([#1087](https://github.com/stoatchat/for-web/issues/1087)) ([899a6c1](https://github.com/stoatchat/for-web/commit/899a6c11bf8714fff31771926b7ad807301741d7))
 
@@ -571,6 +597,8 @@
 
 
 ### Features
+
+* **Administrator:** a role permission that gives every right in every channel, private ones too, whatever their settings say. It sits first under Admin on a role (never on Everyone or a channel), says the role can do everything except what only the owner can do, and only an administrator or the owner can switch it. Who can see this channel marks such a role as seeing every channel.
 
 
 * Accept autocomplete suggestion w/ tab ([#1003](https://github.com/stoatchat/for-web/issues/1003)) ([cfdbcd3](https://github.com/stoatchat/for-web/commit/cfdbcd37c096af390858383ef28ae6984a53edf6))
@@ -608,6 +636,8 @@
 
 ### Features
 
+* **Administrator:** a role permission that gives every right in every channel, private ones too, whatever their settings say. It sits first under Admin on a role (never on Everyone or a channel), says the role can do everything except what only the owner can do, and only an administrator or the owner can switch it. Who can see this channel marks such a role as seeing every channel.
+
 
 * add button to rename categories ([#633](https://github.com/stoatchat/for-web/issues/633)) ([c3042a0](https://github.com/stoatchat/for-web/commit/c3042a094e4159705b176e4d312d9018cdcb97bb))
 * add delete bot button back to ViewBot component ([#808](https://github.com/stoatchat/for-web/issues/808)) ([64fd6af](https://github.com/stoatchat/for-web/commit/64fd6af7b7e2aeea76bc564025062ce73bef93e9))
@@ -644,6 +674,8 @@
 
 ### Features
 
+* **Administrator:** a role permission that gives every right in every channel, private ones too, whatever their settings say. It sits first under Admin on a role (never on Everyone or a channel), says the role can do everything except what only the owner can do, and only an administrator or the owner can switch it. Who can see this channel marks such a role as seeing every channel.
+
 
 * create invite button in invite management tab ([#596](https://github.com/stoatchat/for-web/issues/596)) ([0e93bf8](https://github.com/stoatchat/for-web/commit/0e93bf85b2159e63d1b28bc5c15997ee2bcca9fd))
 * new stable message list view ([#580](https://github.com/stoatchat/for-web/issues/580)) ([f9cda02](https://github.com/stoatchat/for-web/commit/f9cda02c280a6094a8fd889566c10d1536c6d714))
@@ -668,6 +700,8 @@
 
 
 ### Features
+
+* **Administrator:** a role permission that gives every right in every channel, private ones too, whatever their settings say. It sits first under Admin on a role (never on Everyone or a channel), says the role can do everything except what only the owner can do, and only an administrator or the owner can switch it. Who can see this channel marks such a role as seeing every channel.
 
 
 * add custom accent picker for appearance ([#535](https://github.com/stoatchat/for-web/issues/535)) ([72ef98b](https://github.com/stoatchat/for-web/commit/72ef98b51f66f2d96f41c8dd52616bd675631062))

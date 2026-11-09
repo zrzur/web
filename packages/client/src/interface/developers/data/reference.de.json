@@ -92,7 +92,8 @@
   "ManageJoinRequests": "Beitrittsanfragen annehmen oder ablehnen",
   "CreateThreads": "Einen Thread in einem Textkanal starten",
   "SendMessageInThreads": "In Threads und Forenbeiträgen schreiben",
-  "CreateForumPosts": "Einen Beitrag in einem Forum starten"
+  "CreateForumPosts": "Einen Beitrag in einem Forum starten",
+  "Administrator": "Alle Rechte in allen Kanälen des Servers, egal was deren Einstellungen sagen"
  },
  "errors": {
   "UnknownUser": ["Den Benutzer gibt es nicht, oder der Bot sieht ihn nicht.", "Prüfe die ID. Vielleicht wurde das Konto gelöscht."],

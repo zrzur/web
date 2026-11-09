@@ -73,3 +73,23 @@ describe("changing it", () => {
     expect(sees(server, closed, { ...wideView, override: wide })).toBe(false);
   });
 });
+
+describe("Administrator", () => {
+  const admin = { permissions: { a: Permission.Administrator, d: 0n } };
+
+  it("an administrator role sees a private channel, even one that denies it", () => {
+    expect(sees(server, closed, admin)).toBe(true);
+    expect(
+      sees(server, closed, { ...admin, override: { a: 0n, d: VIEW } }),
+    ).toBe(true);
+  });
+
+  it("Administrator on a channel override gives nothing", () => {
+    expect(
+      sees(server, closed, {
+        ...plainRole,
+        override: { a: Permission.Administrator, d: 0n },
+      }),
+    ).toBe(false);
+  });
+});

@@ -8,6 +8,7 @@ import { useError } from "@revolt/i18n";
 import { Button, SettingsRow, SettingsSection, Toggle } from "@revolt/ui";
 import { Icon } from "@revolt/ui/icons/Icon";
 
+import { isAdministrator } from "./dangerous";
 import {
   type Pair,
   everyoneOverride,
@@ -141,6 +142,8 @@ export function ChannelVisibility(props: { context: Channel }) {
       <For each={roles()}>
         {(role) => {
           const visible = () => sees(role);
+          // an administrator sees every channel; nothing here changes that
+          const admin = () => isAdministrator(pair(role.permissions).a);
           return (
             <SettingsRow
               icon={
@@ -155,30 +158,34 @@ export function ChannelVisibility(props: { context: Channel }) {
                 </span>
               }
               description={
-                visible() ? (
+                admin() ? (
+                  <Trans>Administrator: sees every channel</Trans>
+                ) : visible() ? (
                   <Trans>Can see this channel</Trans>
                 ) : (
                   <Trans>Can't see this channel</Trans>
                 )
               }
               control={() => (
-                <Button
-                  data-testid={`channel-visibility-role-${role.id}`}
-                  data-visible={visible()}
-                  size="sm"
-                  variant={visible() ? "text" : "tonal"}
-                  isDisabled={!canEdit() || !!busy()}
-                  onPress={() => void setRole(role, !visible())}
-                  aria-label={
-                    visible()
-                      ? t`Hide this channel from ${role.name}`
-                      : t`Let ${role.name} see this channel`
-                  }
-                >
-                  <Show when={visible()} fallback={<Trans>Let in</Trans>}>
-                    <Trans>Hide</Trans>
-                  </Show>
-                </Button>
+                <Show when={!admin()}>
+                  <Button
+                    data-testid={`channel-visibility-role-${role.id}`}
+                    data-visible={visible()}
+                    size="sm"
+                    variant={visible() ? "text" : "tonal"}
+                    isDisabled={!canEdit() || !!busy()}
+                    onPress={() => void setRole(role, !visible())}
+                    aria-label={
+                      visible()
+                        ? t`Hide this channel from ${role.name}`
+                        : t`Let ${role.name} see this channel`
+                    }
+                  >
+                    <Show when={visible()} fallback={<Trans>Let in</Trans>}>
+                      <Trans>Hide</Trans>
+                    </Show>
+                  </Button>
+                </Show>
               )}
             />
           );

@@ -30,5 +30,22 @@
     "«عرض القناة» على الافتراضي. اسمح به ليرى هذا الدور كل القنوات، والخاصة منها أيضًا.",
     "„Kanal ansehen“ steht auf Standard. Erlaube es, damit diese Rolle alle Kanäle sieht, auch private."
   ],
-  "Allow View channel": ["السماح بعرض القناة", "Kanal ansehen erlauben"]
+  "Allow View channel": ["السماح بعرض القناة", "Kanal ansehen erlauben"],
+  "Administrator": ["مسؤول", "Administrator"],
+  "Every right in every channel, private ones too, whatever their settings say. Only an administrator or the owner can give it.": [
+    "كل الحقوق في كل القنوات، والخاصة منها أيضًا، مهما كانت إعداداتها. لا يمنحه إلا مسؤول أو المالك.",
+    "Alle Rechte in allen Kanälen, auch in privaten, egal was deren Einstellungen sagen. Nur ein Administrator oder der Besitzer kann es vergeben."
+  ],
+  "This role can do everything in the server": [
+    "هذا الدور يستطيع فعل كل شيء في السيرفر",
+    "Diese Rolle kann alles auf dem Server"
+  ],
+  "Its members see every channel and have every right, except what only the owner can do.": [
+    "يرى أعضاؤه كل القنوات ولهم كل الحقوق، إلا ما يقتصر على المالك.",
+    "Ihre Mitglieder sehen alle Kanäle und haben alle Rechte, außer dem, was nur der Besitzer darf."
+  ],
+  "Administrator: sees every channel": [
+    "مسؤول: يرى كل القنوات",
+    "Administrator: sieht alle Kanäle"
+  ]
 }

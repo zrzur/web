@@ -19,7 +19,7 @@ import {
   Switch as UiSwitch,
 } from "@revolt/ui";
 import { Icon } from "@revolt/ui/icons/Icon";
-import { isAdminLike, isDangerous } from "./dangerous";
+import { isAdminLike, isAdministrator, isDangerous } from "./dangerous";
 
 const VIEW_CHANNEL = 2n ** 20n;
 
@@ -251,6 +251,14 @@ export function ChannelPermissionsEditor(props: Props) {
   }[] = [
     {
       heading: t`Admin`,
+      key: "Administrator",
+      value: 2n ** 46n,
+      title: t`Administrator`,
+      description: {
+        Server: t`Every right in every channel, private ones too, whatever their settings say. Only an administrator or the owner can give it.`,
+      },
+    },
+    {
       key: "ManageChannel",
       value: 1n ** 0n,
       title: t`Manage channel`,
@@ -621,6 +629,10 @@ export function ChannelPermissionsEditor(props: Props) {
     ) {
       return entry.categoryDescription;
     }
+    // only a role can make someone an administrator, never @everyone
+    if (entry.key === "Administrator" && props.type !== "server_role") {
+      return undefined;
+    }
     if (entry.roleDescription && props.type === "server_role") {
       return entry.roleDescription;
     }
@@ -678,7 +690,15 @@ export function ChannelPermissionsEditor(props: Props) {
         </Legend>
       </Show>
 
-      <Show when={isAdminLike(value()[0])}>
+      <Show when={isAdministrator(value()[0])}>
+        <SettingsRow
+          icon={<Icon name="warning-circle" size={20} />}
+          title={t`This role can do everything in the server`}
+          description={t`Its members see every channel and have every right, except what only the owner can do.`}
+        />
+      </Show>
+
+      <Show when={!isAdministrator(value()[0]) && isAdminLike(value()[0])}>
         <SettingsRow
           icon={<Icon name="warning-circle" size={20} />}
           title={t`This can change almost anything in the server`}

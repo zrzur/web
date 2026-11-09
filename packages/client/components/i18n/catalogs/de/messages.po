@@ -22039,3 +22039,23 @@ msgstr "„Kanal ansehen“ steht auf Standard. Erlaube es, damit diese Rolle al
 #: components/app/interface/settings/channel/permissions/ChannelVisibility.tsx
 msgid "Who can see this channel"
 msgstr "Wer diesen Kanal sieht"
+
+#: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
+msgid "Administrator"
+msgstr "Administrator"
+
+#: components/app/interface/settings/channel/permissions/ChannelVisibility.tsx
+msgid "Administrator: sees every channel"
+msgstr "Administrator: sieht alle Kanäle"
+
+#: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
+msgid "Every right in every channel, private ones too, whatever their settings say. Only an administrator or the owner can give it."
+msgstr "Alle Rechte in allen Kanälen, auch in privaten, egal was deren Einstellungen sagen. Nur ein Administrator oder der Besitzer kann es vergeben."
+
+#: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
+msgid "Its members see every channel and have every right, except what only the owner can do."
+msgstr "Ihre Mitglieder sehen alle Kanäle und haben alle Rechte, außer dem, was nur der Besitzer darf."
+
+#: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
+msgid "This role can do everything in the server"
+msgstr "Diese Rolle kann alles auf dem Server"

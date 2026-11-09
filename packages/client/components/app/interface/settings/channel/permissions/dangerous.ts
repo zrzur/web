@@ -3,6 +3,7 @@
  * allowed, and says so louder when together they make a role an admin.
  */
 export const DANGEROUS: Record<string, bigint> = {
+  Administrator: 2n ** 46n,
   ManageServer: 2n ** 1n,
   ManagePermissions: 2n ** 2n,
   ManageRole: 2n ** 3n,
@@ -18,4 +19,9 @@ export function isAdminLike(allow: bigint) {
   const admin =
     DANGEROUS.ManageServer | DANGEROUS.ManagePermissions | DANGEROUS.ManageRole;
   return (allow & admin) === admin;
+}
+
+/** Every right in every channel of the server */
+export function isAdministrator(allow: bigint) {
+  return (allow & DANGEROUS.Administrator) === DANGEROUS.Administrator;
 }
