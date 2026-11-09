@@ -148,10 +148,13 @@ const registered = (
 let dispose: (() => void) | undefined;
 let save: ReturnType<typeof vi.fn>;
 let remove: ReturnType<typeof vi.fn>;
+let reload: ReturnType<typeof vi.fn>;
 
 function mount(commands: RegisteredCommand[] = []) {
   save = vi.fn(async (_list: CommandData[]) => undefined);
   remove = vi.fn(async (_id: string) => undefined);
+  // the server's list right before a save: the same unless a test says so
+  reload = vi.fn(async () => commands);
   dispose = render(
     () => (
       <I18nProvider i18n={i18n}>
@@ -160,6 +163,7 @@ function mount(commands: RegisteredCommand[] = []) {
           permissionNames={PERMISSIONS}
           save={save as never}
           remove={remove as never}
+          reload={reload as never}
         />
       </I18nProvider>
     ),
@@ -421,5 +425,77 @@ describe("JSON import and export", () => {
     expect(save).toHaveBeenCalledWith([
       { name: "hello", description: "Say hello" },
     ]);
+  });
+});
+
+describe("saving against a list that changed", () => {
+  it("stops when the list changed since the editor opened, then saves", async () => {
+    const ping = registered({ name: "ping" });
+    mount([ping]);
+    reload.mockResolvedValueOnce([{ ...ping, version: "v2" }]);
+    button("New command").click();
+    type(field("Name"), "roll");
+    type(field("Description"), "Roll");
+    button("Save command").click();
+    await tick();
+    await tick();
+    expect(save).not.toHaveBeenCalled();
+    expect(document.body.textContent).toContain(
+      "The list changed since you opened it.",
+    );
+    // checked again with what is there now: saves
+    reload.mockResolvedValueOnce([{ ...ping, version: "v2" }]);
+    button("Save command").click();
+    await tick();
+    await tick();
+    expect(save).toHaveBeenCalledTimes(1);
+  });
+
+  it("sends commands nobody edited exactly as the server has them", async () => {
+    const other = registered({
+      name: "other",
+      options: [
+        { type: "String", name: "o", description: "d", required: false },
+      ],
+    });
+    mount([other]);
+    button("New command").click();
+    type(field("Name"), "roll");
+    type(field("Description"), "Roll");
+    button("Save command").click();
+    await tick();
+    await tick();
+    const [sent] = save.mock.calls[0][0] as CommandData[];
+    expect(sent).toEqual({
+      type: "ChatInput",
+      name: "other",
+      description: "A command",
+      options: [
+        { type: "String", name: "o", description: "d", required: false },
+      ],
+    });
+  });
+
+  it("checks the list before an import replaces it", async () => {
+    const ping = registered({ name: "ping" });
+    mount([ping]);
+    reload.mockResolvedValueOnce([]);
+    type(field("Import"), '[{ "name": "hello", "description": "Say hello" }]');
+    button("Check and import").click();
+    await tick();
+    button("Replace all commands").click();
+    await tick();
+    await tick();
+    expect(save).not.toHaveBeenCalled();
+    expect(document.body.textContent).toContain(
+      "The list changed since you opened it.",
+    );
+  });
+
+  it("says that a bot's own list replaces what is saved here", () => {
+    mount();
+    expect(document.body.textContent).toContain(
+      "If your bot sends its list when it starts, that list replaces what you save here.",
+    );
   });
 });

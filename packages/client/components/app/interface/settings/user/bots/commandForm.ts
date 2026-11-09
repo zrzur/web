@@ -162,7 +162,8 @@ export type Rule =
   | "totalCharacters"
   | "negativePermissions"
   | "duplicateCommand"
-  | "tooManyCommands";
+  | "tooManyCommands"
+  | "badShape";
 
 export interface Problem {
   /** Field the problem is in: `name`, `options.0.choices.2.value`, … */
@@ -496,6 +497,11 @@ export function validateCommandSet(commands: CommandData[]): Problem[] {
   const seen = new Set<string>();
   const counts: Partial<Record<CommandType, number>> = {};
   commands.forEach((command, index) => {
+    // imported JSON can hold anything: a wrong shape is a problem, not a crash
+    if (!isCommandShape(command)) {
+      out.push({ path: `${index}`, rule: "badShape" });
+      return;
+    }
     for (const problem of validateCommand(command))
       out.push({ ...problem, path: `${index}.${problem.path}` });
     const type = command.type ?? "ChatInput";
@@ -729,6 +735,45 @@ export function toData(draft: CommandDraft): CommandData {
 export const dataOf = (command: RegisteredCommand): CommandData =>
   toData(fromCommand(command));
 
+const DATA_FIELDS = [
+  "type",
+  "name",
+  "name_localizations",
+  "description",
+  "description_localizations",
+  "options",
+  "default_member_permissions",
+  "nsfw",
+] as const;
+
+/**
+ * A registered command exactly as the server has it, without the fields the
+ * server adds: what a full `PUT` sends for a command nobody edited, so it
+ * keeps its id and version
+ */
+export function rawData(command: RegisteredCommand): CommandData {
+  const out: Record<string, unknown> = {};
+  for (const field of DATA_FIELDS) {
+    const value = command[field];
+    if (value !== undefined && value !== null) out[field] = value;
+  }
+  return out as unknown as CommandData;
+}
+
+/** What the server's list is now: every id with its revision */
+export const signatureOf = (commands: RegisteredCommand[]) =>
+  commands
+    .map((command) => `${command._id}:${command.version}`)
+    .sort()
+    .join(",");
+
+/** The list on the server changed since the form read it */
+export class ListChangedError extends Error {
+  constructor(readonly signature: string) {
+    super("ListChanged");
+  }
+}
+
 /* ------------------------------------------------------------------ */
 /* Permissions                                                          */
 /* ------------------------------------------------------------------ */
@@ -751,7 +796,78 @@ export function togglePermission(value: number | null, bit: number) {
 
 export type ParseResult =
   | { ok: true; commands: CommandData[] }
-  | { ok: false; reason: "notJson" | "notList" | "notCommand" };
+  | {
+      ok: false;
+      reason: "notJson" | "notList" | "notCommand" | "badShape";
+      /** Index of the first command with a wrong shape */
+      index?: number;
+    };
+
+const isObject = (value: unknown): value is Record<string, unknown> =>
+  !!value && typeof value === "object" && !Array.isArray(value);
+const isText = (value: unknown) => typeof value === "string";
+const optional = (value: unknown, check: (value: unknown) => boolean) =>
+  value === undefined || value === null || check(value);
+const isTextMap = (value: unknown) =>
+  isObject(value) && Object.values(value).every(isText);
+const isNumber = (value: unknown) => typeof value === "number";
+const isFlag = (value: unknown) => typeof value === "boolean";
+
+function isChoiceShape(value: unknown) {
+  return (
+    isObject(value) &&
+    isText(value.name) &&
+    (isText(value.value) || isNumber(value.value)) &&
+    optional(value.name_localizations, isTextMap)
+  );
+}
+
+function isOptionShape(value: unknown): boolean {
+  return (
+    isObject(value) &&
+    isText(value.type) &&
+    isText(value.name) &&
+    isText(value.description) &&
+    optional(value.name_localizations, isTextMap) &&
+    optional(value.description_localizations, isTextMap) &&
+    optional(value.required, isFlag) &&
+    optional(value.autocomplete, isFlag) &&
+    optional(value.min_value, isNumber) &&
+    optional(value.max_value, isNumber) &&
+    optional(value.min_length, isNumber) &&
+    optional(value.max_length, isNumber) &&
+    optional(
+      value.choices,
+      (list) => Array.isArray(list) && list.every(isChoiceShape),
+    ) &&
+    optional(
+      value.channel_types,
+      (list) => Array.isArray(list) && list.every(isText),
+    ) &&
+    optional(
+      value.options,
+      (list) => Array.isArray(list) && list.every(isOptionShape),
+    )
+  );
+}
+
+/** Every field has the type the API expects (values are checked later) */
+export function isCommandShape(value: unknown): value is CommandData {
+  return (
+    isObject(value) &&
+    isText(value.name) &&
+    optional(value.type, isText) &&
+    optional(value.description, isText) &&
+    optional(value.name_localizations, isTextMap) &&
+    optional(value.description_localizations, isTextMap) &&
+    optional(value.default_member_permissions, isNumber) &&
+    optional(value.nsfw, isFlag) &&
+    optional(
+      value.options,
+      (list) => Array.isArray(list) && list.every(isOptionShape),
+    )
+  );
+}
 
 /** Read the JSON list `PUT` takes; the rules are checked separately */
 export function parseCommandList(source: string): ParseResult {
@@ -772,6 +888,8 @@ export function parseCommandList(source: string): ParseResult {
     )
   )
     return { ok: false, reason: "notCommand" };
+  const index = value.findIndex((item) => !isCommandShape(item));
+  if (index !== -1) return { ok: false, reason: "badShape", index };
   return { ok: true, commands: value as CommandData[] };
 }
 

@@ -34,17 +34,19 @@ import {
   type RegisteredCommand,
   FORM_LOCALES,
   LIMITS,
+  ListChangedError,
   OPTION_TYPES,
   blankChoice,
   blankCommand,
   blankOption,
-  dataOf,
   exportCommands,
   fromCommand,
   hasPermission,
   isNumeric,
   isSubcommand,
   parseCommandList,
+  rawData,
+  signatureOf,
   takesChoices,
   toData,
   togglePermission,
@@ -67,6 +69,8 @@ export function CommandManager(props: {
   permissionNames: PermissionNames;
   save: (commands: CommandData[]) => Promise<unknown>;
   remove: (id: string) => Promise<unknown>;
+  /** The server's list now, read right before a save */
+  reload: () => Promise<RegisteredCommand[]>;
   docsLink?: JSX.Element;
 }) {
   const { t } = useLingui();
@@ -78,6 +82,18 @@ export function CommandManager(props: {
   const list = () => props.commands ?? [];
   const count = (type: CommandType) =>
     list().filter((command) => (command.type ?? "ChatInput") === type).length;
+
+  /**
+   * Save only if nobody changed the list since `baseline` was read (the
+   * bot itself at start-up, another tab): otherwise their change would be
+   * overwritten without a word
+   */
+  async function saveChecked(list: CommandData[], baseline: string) {
+    const fresh = await props.reload();
+    const now = signatureOf(fresh);
+    if (now !== baseline) throw new ListChangedError(now);
+    await props.save(list);
+  }
 
   function open(draft: CommandDraft) {
     setNotice(undefined);
@@ -124,6 +140,12 @@ export function CommandManager(props: {
                 <Trans>New command</Trans>
               </Button>
             </Head>
+            <Muted>
+              <Trans>
+                If your bot sends its list when it starts, that list replaces
+                what you save here.
+              </Trans>
+            </Muted>
             {props.docsLink}
             <Show when={notice()}>
               <Notice role="status">{notice()}</Notice>
@@ -164,8 +186,8 @@ export function CommandManager(props: {
             </Switch>
             <JsonTools
               commands={list()}
-              onImport={async (commands) => {
-                await props.save(commands);
+              onImport={async (commands, baseline) => {
+                await saveChecked(commands, baseline);
                 setNotice(t`Commands imported and saved.`);
               }}
             />
@@ -178,8 +200,8 @@ export function CommandManager(props: {
             others={list()}
             permissionNames={props.permissionNames}
             onCancel={() => setEditing(undefined)}
-            onSave={async (commands) => {
-              await props.save(commands);
+            onSave={async (commands, baseline) => {
+              await saveChecked(commands, baseline);
               setEditing(undefined);
               setNotice(t`Saved. People see the change at once.`);
             }}
@@ -295,6 +317,8 @@ export function useProblemText() {
         return t`Pick the permissions from the list.`;
       case "duplicateCommand":
         return t`A command of this type already has this name.`;
+      case "badShape":
+        return t`This entry has a field of the wrong type.`;
       case "tooManyCommands":
         return t`At most ${max} commands of this type.`;
     }
@@ -369,7 +393,7 @@ function CommandEditor(props: {
   others: RegisteredCommand[];
   permissionNames: PermissionNames;
   onCancel: () => void;
-  onSave: (commands: CommandData[]) => Promise<void>;
+  onSave: (commands: CommandData[], baseline: string) => Promise<void>;
 }) {
   const { t } = useLingui();
   const types = useCommandTypeNames();
@@ -379,11 +403,16 @@ function CommandEditor(props: {
   const [tried, setTried] = createSignal(false);
   const [busy, setBusy] = createSignal(false);
   const [error, setError] = createSignal<unknown>();
+  // the list as it was when the editor opened; a save checks it first
+  // eslint-disable-next-line solid/reactivity -- read once, on purpose
+  const [baseline, setBaseline] = createSignal(signatureOf(props.others));
+  const [changed, setChanged] = createSignal(false);
 
   /** The whole list as it would be saved, this command in its place */
   const nextList = createMemo(() => {
     const mine = toData(draft);
-    const others = props.others.filter((c) => c._id !== draft.id).map(dataOf);
+    // commands nobody edits go back exactly as the server has them
+    const others = props.others.filter((c) => c._id !== draft.id).map(rawData);
     const at = props.others.findIndex((c) => c._id === draft.id);
     const list = [...others];
     list.splice(at === -1 ? list.length : at, 0, mine);
@@ -423,10 +452,15 @@ function CommandEditor(props: {
     setError(undefined);
     if (problems().length || otherProblems().length || busy()) return;
     setBusy(true);
+    setChanged(false);
     try {
-      await props.onSave(nextList().list);
+      await props.onSave(nextList().list, baseline());
     } catch (err) {
-      setError(err);
+      if (err instanceof ListChangedError) {
+        // reloaded: the next save checks against what is there now
+        setBaseline(err.signature);
+        setChanged(true);
+      } else setError(err);
     } finally {
       setBusy(false);
     }
@@ -606,6 +640,14 @@ function CommandEditor(props: {
               {(problem) => <li>{problemText(problem)}</li>}
             </For>
           </ul>
+        </ErrorBox>
+      </Show>
+      <Show when={changed()}>
+        <ErrorBox role="alert">
+          <Trans>
+            The list changed since you opened it. It was reloaded: check it and
+            save again.
+          </Trans>
         </ErrorBox>
       </Show>
       <Show when={error()}>
@@ -1192,7 +1234,7 @@ function Preview(props: { draft: CommandDraft }) {
 /** Advanced: the list as JSON, out and in */
 function JsonTools(props: {
   commands: RegisteredCommand[];
-  onImport: (commands: CommandData[]) => Promise<void>;
+  onImport: (commands: CommandData[], baseline: string) => Promise<void>;
 }) {
   const { t } = useLingui();
   const problemText = useProblemText();
@@ -1201,7 +1243,10 @@ function JsonTools(props: {
   const [error, setError] = createSignal<unknown>();
   const [confirm, setConfirm] = createSignal(false);
   const [copied, setCopied] = createSignal(false);
-  const json = () => exportCommands(props.commands.map(dataOf));
+  const json = () => exportCommands(props.commands.map(rawData));
+  // the list when the import was checked; replacing checks it again
+  const [baseline, setBaseline] = createSignal("");
+  const [changed, setChanged] = createSignal(false);
 
   async function importList() {
     setProblem(undefined);
@@ -1214,7 +1259,9 @@ function JsonTools(props: {
           ? t`This is not valid JSON.`
           : parsed.reason === "notList"
             ? t`Paste a list: [ { … }, { … } ].`
-            : t`Every entry needs at least a name.`,
+            : parsed.reason === "badShape"
+              ? t`Entry ${(parsed.index ?? 0) + 1} has a field of the wrong type. The Slash commands page shows each field.`
+              : t`Every entry needs at least a name.`,
       );
       return;
     }
@@ -1228,15 +1275,18 @@ function JsonTools(props: {
       return;
     }
     if (!confirm()) {
+      setBaseline(signatureOf(props.commands));
+      setChanged(false);
       setConfirm(true);
       return;
     }
     setConfirm(false);
     try {
-      await props.onImport(parsed.commands);
+      await props.onImport(parsed.commands, baseline());
       setSource("");
     } catch (err) {
-      setError(err);
+      if (err instanceof ListChangedError) setChanged(true);
+      else setError(err);
     }
   }
 
@@ -1286,6 +1336,14 @@ function JsonTools(props: {
         }}
         error={problem()}
       />
+      <Show when={changed()}>
+        <ErrorBox role="alert">
+          <Trans>
+            The list changed since you opened it. It was reloaded: check it and
+            save again.
+          </Trans>
+        </ErrorBox>
+      </Show>
       <Show when={error()}>
         <ErrorBox role="alert">
           <TranslatedError error={error()} />

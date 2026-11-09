@@ -308,6 +308,7 @@ function Commands(props: { bot: Bot }) {
           );
           await refetch();
         }}
+        reload={async () => ((await refetch()) ?? []) as RegisteredCommand[]}
         remove={async (id) => {
           await interactionApi.deleteCommand(client(), props.bot.id, id);
           await refetch();

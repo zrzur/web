@@ -348,6 +348,19 @@ describe("parseCommandList", () => {
     });
   });
 
+  it("refuses wrong shapes in words instead of throwing", () => {
+    for (const source of [
+      '[{ "name": "a", "description": "b", "options": "x" }]',
+      '[{ "name": "a", "description": "b", "options": [null] }]',
+      '[{ "name": "a", "description": "b", "options": [{ "type": "String", "name": "o", "description": "d", "choices": 3 }] }]',
+      '[{ "name": "a", "description": 5 }]',
+    ]) {
+      const result = parseCommandList(source);
+      expect(result, source).toMatchObject({ ok: false, reason: "badShape" });
+      expect(() => validateCommandSet(JSON.parse(source))).not.toThrow();
+    }
+  });
+
   it("says why a text is not a command list", () => {
     expect(parseCommandList("{").ok).toBe(false);
     expect(parseCommandList('{ "name": "x" }')).toMatchObject({
