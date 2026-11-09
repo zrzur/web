@@ -1,4 +1,4 @@
-import { For, Show, createSignal, onMount } from "solid-js";
+import { Show, createSignal } from "solid-js";
 
 import { Trans, useLingui } from "@lingui/solid/macro";
 import { IFormControl } from "solid-forms";
@@ -24,6 +24,7 @@ import { UserSummary } from "../account/index";
 import { UserProfileEditor } from "../profile/UserProfileEditor";
 import { BotCommands } from "./BotCommands";
 import { BotVerification } from "./BotVerification";
+import { PrivilegedIntents } from "./PrivilegedIntents";
 
 /**
  * Manage a bot: identity, profile, visibility, invite & credentials, danger
@@ -46,57 +47,20 @@ export function ViewBot(props: { bot: Bot; onDelete?: () => void }) {
   };
 
   // Privileged gateway intents (the bot object from the SDK doesn't carry
-  // them yet, so they are read and saved here)
+  // them yet, so they are read and saved here, with the server's answer)
   const client = useClient();
   const [intents, setIntents] = createSignal(0);
-  const [saving, setSaving] = createSignal(false);
-  onMount(async () => {
-    const response = await client()
-      .api.get(`/bots/${props.bot.id}`)
-      .catch(() => undefined);
-    setIntents(response?.bot?.privileged_intents ?? 0);
-  });
-  async function flip(bit: number) {
-    if (saving()) return;
-    setSaving(true);
-    const next = intents() ^ bit;
-    try {
-      await client().api.patch(`/bots/${props.bot.id}`, {
-        privileged_intents: next,
-      });
-      setIntents(next);
-    } catch {
-      snackbar.show({
-        message: t`Couldn't save. Try again.`,
-        placement: "bottom",
-        closeable: true,
-      });
-    } finally {
-      setSaving(false);
-    }
-  }
-  const PRIVILEGED = [
-    {
-      bit: 1 << 10,
-      icon: "chat-circle" as const,
-      title: () => t`Message content`,
-      text: () =>
-        t`Read the text, embeds and files of messages that don't mention the bot.`,
-    },
-    {
-      bit: 1 << 11,
-      icon: "users" as const,
-      title: () => t`Server members`,
-      text: () =>
-        t`See members join, leave and change, and load the member list.`,
-    },
-    {
-      bit: 1 << 12,
-      icon: "circle" as const,
-      title: () => t`Presence`,
-      text: () => t`See who is online and their status.`,
-    },
-  ];
+  const loadIntents = async () => {
+    const response = await client().api.get(`/bots/${props.bot.id}`);
+    return response.bot.privileged_intents ?? 0;
+  };
+  const saveIntents = async (next: number) => {
+    const response = await client().api.patch(`/bots/${props.bot.id}`, {
+      privileged_intents: next,
+    });
+    // the bot comes flattened next to its user
+    return response.privileged_intents ?? next;
+  };
 
   const copyButton = (label: string, onPress: () => void) => (
     <Button size="sm" variant="tonal" shape="square" onPress={onPress}>
@@ -166,35 +130,11 @@ export function ViewBot(props: { bot: Bot; onDelete?: () => void }) {
         }}
       </UserProfileEditor>
 
-      <SettingsSection
-        title={<Trans>Privileged intents</Trans>}
-        description={
-          <Trans>
-            Turn these on only if your bot needs them. Without them it still
-            works with commands, buttons and messages that mention it.
-          </Trans>
-        }
-      >
-        <For each={PRIVILEGED}>
-          {(intent) => (
-            <SettingsRow
-              icon={<Icon name={intent.icon} size={20} />}
-              title={intent.title()}
-              description={intent.text()}
-              onClick={() => void flip(intent.bit)}
-              control={(ids) => (
-                <Toggle
-                  checked={(intents() & intent.bit) !== 0}
-                  disabled={saving()}
-                  onChange={() => void flip(intent.bit)}
-                  aria-labelledby={ids.labelId}
-                  aria-describedby={ids.descriptionId}
-                />
-              )}
-            />
-          )}
-        </For>
-      </SettingsSection>
+      <PrivilegedIntents
+        load={loadIntents}
+        save={saveIntents}
+        onChange={setIntents}
+      />
 
       <BotCommands botId={props.bot.id} />
 
