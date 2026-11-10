@@ -4,19 +4,23 @@
  * position (`event.code`), so they stay the same on Arabic, German or any
  * other keyboard layout.
  *
- * The combos are also in the plugin SDK's RESERVED_KEYS, so a plugin can
- * never take them over.
+ * The default combos are also in the plugin SDK's RESERVED_KEYS, so a
+ * plugin can never take them over.
  */
+import { shortcutFor } from "./active";
 
-export type GlobalShortcut = "toggle_mute" | "toggle_deafen" | "open_shortcuts";
+export type GlobalShortcut =
+  | "toggle_mute"
+  | "toggle_deafen"
+  | "open_shortcuts"
+  | "toggle_streamer";
 
-type Combo = { code: string; mod: boolean; shift: boolean; alt: boolean };
-
-const GLOBAL_SHORTCUTS: Record<GlobalShortcut, Combo> = {
-  toggle_mute: { code: "KeyM", mod: true, shift: true, alt: false },
-  toggle_deafen: { code: "KeyD", mod: true, shift: true, alt: false },
-  open_shortcuts: { code: "Slash", mod: true, shift: false, alt: false },
-};
+const GLOBAL = new Set<string>([
+  "toggle_mute",
+  "toggle_deafen",
+  "open_shortcuts",
+  "toggle_streamer",
+]);
 
 type KeyLike = Pick<
   KeyboardEvent,
@@ -24,7 +28,8 @@ type KeyLike = Pick<
 > & { key?: string };
 
 /**
- * Which app-wide shortcut this key press is, if any
+ * Which app-wide shortcut this key press is, if any (with the person's own
+ * keys, see keymap.ts)
  * @param event Key press
  * @param mac Whether Command takes the place of Ctrl
  */
@@ -32,21 +37,8 @@ export function matchGlobalShortcut(
   event: KeyLike,
   mac: boolean,
 ): GlobalShortcut | undefined {
-  const mod = mac ? event.metaKey : event.ctrlKey;
-  const other = mac ? event.ctrlKey : event.metaKey;
-  if (other) return;
-  // Ctrl+/ by the character: on German, Spanish, Italian and Nordic
-  // layouts "/" is Shift+7, a different key than the US slash
-  if (mod && !event.altKey && event.key === "/") return "open_shortcuts";
-  return (Object.keys(GLOBAL_SHORTCUTS) as GlobalShortcut[]).find((id) => {
-    const combo = GLOBAL_SHORTCUTS[id];
-    return (
-      combo.code === event.code &&
-      combo.mod === mod &&
-      combo.shift === event.shiftKey &&
-      combo.alt === event.altKey
-    );
-  });
+  const id = shortcutFor(event, mac);
+  return id && GLOBAL.has(id) ? (id as GlobalShortcut) : undefined;
 }
 
 const NOT_TYPING_INPUTS = new Set([
@@ -138,6 +130,7 @@ const NAMED: Record<string, string> = {
   ArrowLeft: "←",
   ArrowRight: "→",
   ContextMenu: "Menu",
+  Escape: "Esc",
 };
 
 /**

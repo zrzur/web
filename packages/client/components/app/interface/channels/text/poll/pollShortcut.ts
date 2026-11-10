@@ -8,6 +8,8 @@
  * (AltGr on Windows); no browser uses Ctrl+Shift+8, and plugins can't take
  * it (RESERVED_KEYS).
  */
+import { shortcutFor } from "../../../../../keybinds/active";
+
 type KeyLike = Pick<
   KeyboardEvent,
   "code" | "key" | "altKey" | "shiftKey" | "ctrlKey" | "metaKey"
@@ -17,20 +19,12 @@ type KeyLike = Pick<
 export const CREATE_POLL_PLUGIN_KEYS = ["Ctrl+Shift+8"];
 
 /**
- * Whether this key press is the "Create poll" shortcut
+ * Whether this key press is the "Create poll" shortcut (the person's own
+ * keys if they changed it in Ctrl+/)
  * @param mac Whether Command takes the place of Ctrl
  */
 export function isCreatePollShortcut(event: KeyLike, mac: boolean): boolean {
-  const mod = mac ? event.metaKey : event.ctrlKey;
-  const other = mac ? event.ctrlKey : event.metaKey;
-  return (
-    event.code === "Digit8" &&
-    event.key !== "/" &&
-    mod &&
-    !other &&
-    event.shiftKey &&
-    !event.altKey
-  );
+  return shortcutFor(event, mac) === "create_poll";
 }
 
 /** Message boxes on screen, in the order they appeared */

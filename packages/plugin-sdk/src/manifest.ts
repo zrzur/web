@@ -438,6 +438,8 @@ export const RESERVED_KEYS = [
   "Ctrl+Shift+8",
   // Zrzur: open the server's events
   "Ctrl+Shift+9",
+  // Zrzur: streamer mode
+  "Ctrl+Shift+L",
 ];
 
 /** Reserved for Zrzur's own plugins */
