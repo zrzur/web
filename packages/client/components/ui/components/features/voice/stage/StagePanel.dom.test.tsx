@@ -48,23 +48,31 @@ vi.mock("@revolt/i18n", () => ({
   useError: () => (err: unknown) => `plain: ${String(err)}`,
 }));
 
-// the requests go to the fake channel, which plays the server
-vi.mock("@zrzur/sdk/solid/voiceExtras", () => {
+// the stage the panel shows is the fake channel's, and its requests go to
+// the fake channel, which plays the server
+const stages = new Map<
+  string,
+  { state: () => unknown; set: (state: unknown) => unknown }
+>();
+vi.mock("@revolt/rtc/voiceExtrasStore", () => {
   type Fake = Record<string, (...args: unknown[]) => Promise<unknown>>;
   const call =
     (name: string) =>
     (_client: unknown, channel: Fake, ...args: unknown[]) =>
       channel[name](...args);
-  return Object.fromEntries(
-    [
-      "editStage",
-      "endStage",
-      "inviteToSpeak",
-      "lowerHand",
-      "moveToAudience",
-      "raiseHand",
-    ].map((name) => [name, call(name)]),
-  );
+  return {
+    stageOf: (id: string) => stages.get(id),
+    ...Object.fromEntries(
+      [
+        "editStage",
+        "endStage",
+        "inviteToSpeak",
+        "lowerHand",
+        "moveToAudience",
+        "raiseHand",
+      ].map((name) => [name, call(name)]),
+    ),
+  };
 });
 
 import StagePanel from "./StagePanel";
@@ -78,7 +86,12 @@ function fakeChannel(moderator: boolean) {
     ["host", {}],
     ["asker", {}],
   ]);
+  stages.set("stage-1", {
+    state: stage,
+    set: (next) => setStage(next as State),
+  });
   const channel = {
+    id: "stage-1",
     stage,
     voiceParticipants: participants,
     havePermission: (name: string) => moderator && name === "MuteMembers",
@@ -169,7 +182,7 @@ describe("stage panel, moderator", () => {
     expect(hand.textContent).toContain("name-asker");
     (
       [...hand.querySelectorAll("button")].find((b) =>
-        b.textContent?.includes("Invite to speak"),
+        b.textContent?.includes("Give the floor"),
       ) as HTMLButtonElement
     ).click();
     await flush();

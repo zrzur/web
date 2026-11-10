@@ -9,8 +9,8 @@
 /** Longest a sound plays (the server refuses longer ones too) */
 export const SOUND_MAX_MS = 5_200;
 
-/** Sounds kept decoded at once (a server has at most 32) */
-const MAX_BUFFERS = 48;
+/** Memory decoded sounds may take (32-bit samples) */
+const MAX_BYTES = 16_000_000;
 
 /** Sounds that may overlap; the oldest stops for a new one */
 const MAX_PLAYING = 3;
@@ -34,9 +34,35 @@ const fetchBytes: Fetcher = async (url) => {
   return response.arrayBuffer();
 };
 
+/**
+ * The first 5.2 s of a decoded sound, copied into a buffer of that size (a
+ * longer file never keeps its whole length in memory)
+ */
+export function clip(
+  context: BaseAudioContext,
+  decoded: AudioBuffer,
+): AudioBuffer {
+  const max = Math.floor((SOUND_MAX_MS / 1000) * decoded.sampleRate);
+  if (decoded.length <= max) return decoded;
+  const buffer = context.createBuffer(
+    decoded.numberOfChannels,
+    max,
+    decoded.sampleRate,
+  );
+  for (let channel = 0; channel < decoded.numberOfChannels; channel++) {
+    buffer.copyToChannel(
+      decoded.getChannelData(channel).subarray(0, max),
+      channel,
+    );
+  }
+  return buffer;
+}
+
 export class SoundboardPlayer {
   #context?: AudioContext;
   #buffers = new Map<string, Promise<AudioBuffer>>();
+  #bytes = new Map<string, number>();
+  #total = 0;
   #playing: AudioBufferSourceNode[] = [];
   #fetch: Fetcher;
   #createContext: () => AudioContext;
@@ -58,6 +84,20 @@ export class SoundboardPlayer {
     return this.#buffers.size;
   }
 
+  /** Memory the decoded sounds take */
+  get cachedBytes() {
+    return this.#total;
+  }
+
+  /** Drop the least recently used sounds until the cache fits again */
+  #trim() {
+    for (const id of this.#buffers.keys()) {
+      if (this.cachedBytes <= MAX_BYTES) return;
+      if (!this.#bytes.has(id)) continue; // still loading
+      this.forget(id);
+    }
+  }
+
   /**
    * The decoded sound, from memory after the first time
    * @param id Sound id
@@ -72,24 +112,32 @@ export class SoundboardPlayer {
       return known;
     }
 
-    const loading = this.#fetch(url).then((bytes) =>
-      this.context.decodeAudioData(bytes),
-    );
+    const loading = this.#fetch(url)
+      .then((bytes) => this.context.decodeAudioData(bytes))
+      .then((decoded) => {
+        // keep at most the length a sound may have, in a buffer of its own
+        const buffer = clip(this.context, decoded);
+        if (this.#buffers.get(id) === loading) {
+          const bytes = buffer.length * buffer.numberOfChannels * 4;
+          this.#bytes.set(id, bytes);
+          this.#total += bytes;
+          this.#trim();
+        }
+        return buffer;
+      });
     // a failed download may be tried again
     loading.catch(() => {
-      if (this.#buffers.get(id) === loading) this.#buffers.delete(id);
+      if (this.#buffers.get(id) === loading) this.forget(id);
     });
     this.#buffers.set(id, loading);
-    while (this.#buffers.size > MAX_BUFFERS) {
-      const oldest = this.#buffers.keys().next().value as string;
-      this.#buffers.delete(oldest);
-    }
     return loading;
   }
 
-  /** Forget a removed sound */
+  /** Forget a sound (removed, or the cache is full) */
   forget(id: string) {
     this.#buffers.delete(id);
+    this.#total -= this.#bytes.get(id) ?? 0;
+    this.#bytes.delete(id);
   }
 
   /**
@@ -118,7 +166,7 @@ export class SoundboardPlayer {
       this.#playing = this.#playing.filter((playing) => playing !== source);
       source.disconnect();
     };
-    source.start(0, 0, Math.min(buffer.duration, SOUND_MAX_MS / 1000));
+    source.start(0);
   }
 
   #stop(source: AudioBufferSourceNode) {

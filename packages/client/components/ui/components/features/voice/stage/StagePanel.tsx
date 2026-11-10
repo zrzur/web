@@ -2,14 +2,6 @@ import { For, Show, createMemo, createSignal } from "solid-js";
 
 import { Trans, useLingui } from "@lingui/solid/macro";
 import type { Channel } from "@zrzur/sdk/solid";
-import {
-  editStage,
-  endStage,
-  inviteToSpeak,
-  lowerHand,
-  moveToAudience,
-  raiseHand,
-} from "@zrzur/sdk/solid/voiceExtras";
 import { styled } from "styled-system/jsx";
 
 import { useClient } from "@revolt/client";
@@ -17,6 +9,17 @@ import { useError } from "@revolt/i18n";
 import { useUsers } from "@revolt/markdown/users";
 import { Avatar, Button, TextField } from "@revolt/ui/components/design";
 import { Icon } from "@revolt/ui/icons/Icon";
+
+import {
+  type StageState,
+  editStage,
+  endStage,
+  inviteToSpeak,
+  lowerHand,
+  moveToAudience,
+  raiseHand,
+  stageOf,
+} from "@revolt/rtc/voiceExtrasStore";
 
 import { stageRoles } from "./stageRoles";
 
@@ -30,10 +33,13 @@ export default function StagePanel(props: { channel: Channel }) {
   const describeError = useError();
 
   const me = () => client().user?.id ?? "";
+  const stage = () => stageOf(props.channel.id);
+  /** An answer carries the whole state: show it at once */
+  const keep = (state: StageState) => stage().set(state);
   const moderator = () => props.channel.havePermission("MuteMembers");
   const roles = createMemo(() =>
     stageRoles(
-      props.channel.stage(),
+      stage().state(),
       [...props.channel.voiceParticipants.keys()],
       me(),
     ),
@@ -62,7 +68,7 @@ export default function StagePanel(props: { channel: Channel }) {
   }
 
   function startEdit() {
-    setTopic(props.channel.stage().topic ?? "");
+    setTopic(stage().state().topic ?? "");
     setEditing(true);
   }
 
@@ -74,7 +80,7 @@ export default function StagePanel(props: { channel: Channel }) {
           when={editing()}
           fallback={
             <Topic data-stage-topic>
-              {props.channel.stage().topic ?? (
+              {stage().state().topic ?? (
                 <Muted>
                   <Trans>No topic yet</Trans>
                 </Muted>
@@ -87,7 +93,7 @@ export default function StagePanel(props: { channel: Channel }) {
             onSubmit={(event) => {
               event.preventDefault();
               void act(async () => {
-                await editStage(client(), props.channel, topic());
+                await editStage(client(), props.channel, topic()).then(keep);
                 setEditing(false);
               });
             }}
@@ -143,10 +149,12 @@ export default function StagePanel(props: { channel: Channel }) {
                     variant="text"
                     isDisabled={busy()}
                     onPress={() =>
-                      act(() => moveToAudience(client(), props.channel, id))
+                      act(() =>
+                        moveToAudience(client(), props.channel, id).then(keep),
+                      )
                     }
                   >
-                    <Trans>Move to audience</Trans>
+                    <Trans>Back to listeners</Trans>
                   </Button>
                 </Show>
               </Person>
@@ -156,7 +164,7 @@ export default function StagePanel(props: { channel: Channel }) {
       </Show>
 
       <Show when={moderator() && roles().hands.length}>
-        <People aria-label={t`Raised hands`} data-stage-hands>
+        <People aria-label={t`Asking to speak`} data-stage-hands>
           <For each={roles().hands}>
             {(id, index) => (
               <Person data-stage-hand={id}>
@@ -171,20 +179,22 @@ export default function StagePanel(props: { channel: Channel }) {
                   size="xs"
                   isDisabled={busy()}
                   onPress={() =>
-                    act(() => inviteToSpeak(client(), props.channel, id))
+                    act(() =>
+                      inviteToSpeak(client(), props.channel, id).then(keep),
+                    )
                   }
                 >
-                  <Trans>Invite to speak</Trans>
+                  <Trans>Give the floor</Trans>
                 </Button>
                 <Button
                   size="xs"
                   variant="text"
                   isDisabled={busy()}
                   onPress={() =>
-                    act(() => lowerHand(client(), props.channel, id))
+                    act(() => lowerHand(client(), props.channel, id).then(keep))
                   }
                 >
-                  <Trans>Lower hand</Trans>
+                  <Trans>Put hand down</Trans>
                 </Button>
               </Person>
             )}
@@ -198,10 +208,12 @@ export default function StagePanel(props: { channel: Channel }) {
             size="sm"
             data-stage-action="raise-hand"
             isDisabled={busy()}
-            onPress={() => act(() => raiseHand(client(), props.channel))}
+            onPress={() =>
+              act(() => raiseHand(client(), props.channel).then(keep))
+            }
           >
             <Icon name="hand-waving" size={18} />
-            <Trans>Raise hand</Trans>
+            <Trans>Ask to speak</Trans>
           </Button>
         </Show>
         <Show when={roles().mine === "hand"}>
@@ -210,9 +222,11 @@ export default function StagePanel(props: { channel: Channel }) {
             variant="tonal"
             data-stage-action="lower-hand"
             isDisabled={busy()}
-            onPress={() => act(() => lowerHand(client(), props.channel))}
+            onPress={() =>
+              act(() => lowerHand(client(), props.channel).then(keep))
+            }
           >
-            <Trans>Lower hand</Trans>
+            <Trans>Put hand down</Trans>
           </Button>
         </Show>
         <Show when={roles().mine === "speaker"}>
@@ -221,9 +235,11 @@ export default function StagePanel(props: { channel: Channel }) {
             variant="tonal"
             data-stage-action="stop-speaking"
             isDisabled={busy()}
-            onPress={() => act(() => moveToAudience(client(), props.channel))}
+            onPress={() =>
+              act(() => moveToAudience(client(), props.channel).then(keep))
+            }
           >
-            <Trans>Move to audience</Trans>
+            <Trans>Back to listeners</Trans>
           </Button>
         </Show>
         <Show when={moderator() && roles().mine !== "speaker"}>
@@ -233,7 +249,9 @@ export default function StagePanel(props: { channel: Channel }) {
             data-stage-action="speak"
             isDisabled={busy()}
             onPress={() =>
-              act(() => inviteToSpeak(client(), props.channel, "@me"))
+              act(() =>
+                inviteToSpeak(client(), props.channel, "@me").then(keep),
+              )
             }
           >
             <Icon name="microphone" size={18} />
@@ -250,11 +268,11 @@ export default function StagePanel(props: { channel: Channel }) {
                 data-stage-action="end"
                 onPress={() => setConfirmEnd(true)}
               >
-                <Trans>End stage</Trans>
+                <Trans>Close the stage</Trans>
               </Button>
             }
           >
-            <Confirm role="group" aria-label={t`End stage`}>
+            <Confirm role="group" aria-label={t`Close the stage`}>
               <span>
                 <Trans>Everyone leaves the stage.</Trans>
               </span>
@@ -265,12 +283,12 @@ export default function StagePanel(props: { channel: Channel }) {
                 isDisabled={busy()}
                 onPress={() =>
                   act(async () => {
-                    await endStage(client(), props.channel);
+                    await endStage(client(), props.channel).then(keep);
                     setConfirmEnd(false);
                   })
                 }
               >
-                <Trans>End stage</Trans>
+                <Trans>Close the stage</Trans>
               </Button>
               <Button
                 size="sm"
@@ -293,6 +311,8 @@ export default function StagePanel(props: { channel: Channel }) {
 
 const Panel = styled("section", {
   base: {
+    // phones: every control is at least 44 px tall
+    _phone: { "& button": { minHeight: "44px" } },
     display: "flex",
     flexDirection: "column",
     gap: "12px",

@@ -34,6 +34,10 @@ export function previewOf(
   const url = fetch().catch(() => undefined);
   entries.delete(key);
   entries.set(key, { at: now, url });
+  // no still (yet): ask again next time instead of remembering nothing
+  void url.then((found) => {
+    if (!found && entries.get(key)?.url === url) entries.delete(key);
+  });
   while (entries.size > MAX_ENTRIES) {
     entries.delete(entries.keys().next().value as string);
   }

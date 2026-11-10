@@ -24904,3 +24904,56 @@ msgstr "Use soundboard"
 #: components/app/interface/settings/user/voice/SoundboardOptions.tsx
 msgid "You hear no soundboard sounds in calls."
 msgstr "You hear no soundboard sounds in calls."
+
+#. placeholder {0}: a.name
+#: components/app/interface/settings/server/audit/AuditLog.tsx
+msgid "added the sound {0}"
+msgstr "added the sound {0}"
+
+#. placeholder {0}: Math.round(maxBytes() / 1000)
+#: components/app/interface/settings/server/soundboard/SoundboardList.tsx
+msgid "An MP3, OGG or WAV file of up to {0} KB, then a name. WAV files are big: longer sounds fit as MP3 or OGG."
+msgstr "An MP3, OGG or WAV file of up to {0} KB, then a name. WAV files are big: longer sounds fit as MP3 or OGG."
+
+#: components/ui/components/features/voice/stage/StagePanel.tsx
+msgid "Ask to speak"
+msgstr "Ask to speak"
+
+#: components/ui/components/features/voice/stage/StagePanel.tsx
+msgid "Asking to speak"
+msgstr "Asking to speak"
+
+#: components/ui/components/features/voice/stage/StagePanel.tsx
+msgid "Back to listeners"
+msgstr "Back to listeners"
+
+#: components/ui/components/features/voice/stage/StagePanel.tsx
+msgid "Close the stage"
+msgstr "Close the stage"
+
+#. placeholder {0}: channelName(a.channel)
+#: components/app/interface/settings/server/audit/AuditLog.tsx
+msgid "closed the stage {0}"
+msgstr "closed the stage {0}"
+
+#: components/ui/components/features/voice/stage/StagePanel.tsx
+msgid "Give the floor"
+msgstr "Give the floor"
+
+#: components/ui/components/features/voice/stage/StagePanel.tsx
+msgid "Put hand down"
+msgstr "Put hand down"
+
+#. placeholder {0}: a.name
+#: components/app/interface/settings/server/audit/AuditLog.tsx
+msgid "removed the sound {0}"
+msgstr "removed the sound {0}"
+
+#. placeholder {0}: err.max
+#: components/i18n/errors.tsx
+msgid "This is full ({0}). Remove one first."
+msgstr "This is full ({0}). Remove one first."
+
+#: components/app/interface/settings/server/soundboard/SoundboardList.tsx
+msgid "Use a single emoji."
+msgstr "Use a single emoji."

@@ -24901,3 +24901,56 @@ msgstr "استخدام لوحة الأصوات"
 #: components/app/interface/settings/user/voice/SoundboardOptions.tsx
 msgid "You hear no soundboard sounds in calls."
 msgstr "لن تسمع أصوات لوحة الأصوات في المكالمات."
+
+#. placeholder {0}: a.name
+#: components/app/interface/settings/server/audit/AuditLog.tsx
+msgid "added the sound {0}"
+msgstr "أضاف الصوت {0}"
+
+#. placeholder {0}: Math.round(maxBytes() / 1000)
+#: components/app/interface/settings/server/soundboard/SoundboardList.tsx
+msgid "An MP3, OGG or WAV file of up to {0} KB, then a name. WAV files are big: longer sounds fit as MP3 or OGG."
+msgstr "ملف MP3 أو OGG أو WAV حتى {0} كيلوبايت، ثم اسم. ملفات WAV كبيرة، لذا تناسب الأصوات الأطول صيغة MP3 أو OGG."
+
+#: components/ui/components/features/voice/stage/StagePanel.tsx
+msgid "Ask to speak"
+msgstr "اطلب الكلمة"
+
+#: components/ui/components/features/voice/stage/StagePanel.tsx
+msgid "Asking to speak"
+msgstr "يطلبون الكلمة"
+
+#: components/ui/components/features/voice/stage/StagePanel.tsx
+msgid "Back to listeners"
+msgstr "العودة إلى المستمعين"
+
+#: components/ui/components/features/voice/stage/StagePanel.tsx
+msgid "Close the stage"
+msgstr "إغلاق المنصة"
+
+#. placeholder {0}: channelName(a.channel)
+#: components/app/interface/settings/server/audit/AuditLog.tsx
+msgid "closed the stage {0}"
+msgstr "أغلق المنصة {0}"
+
+#: components/ui/components/features/voice/stage/StagePanel.tsx
+msgid "Give the floor"
+msgstr "امنح الكلمة"
+
+#: components/ui/components/features/voice/stage/StagePanel.tsx
+msgid "Put hand down"
+msgstr "أنزل يدك"
+
+#. placeholder {0}: a.name
+#: components/app/interface/settings/server/audit/AuditLog.tsx
+msgid "removed the sound {0}"
+msgstr "أزال الصوت {0}"
+
+#. placeholder {0}: err.max
+#: components/i18n/errors.tsx
+msgid "This is full ({0}). Remove one first."
+msgstr "هذا ممتلئ ({0}). أزل واحدًا أولًا."
+
+#: components/app/interface/settings/server/soundboard/SoundboardList.tsx
+msgid "Use a single emoji."
+msgstr "استخدم إيموجي واحدًا."

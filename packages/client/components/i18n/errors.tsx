@@ -505,9 +505,8 @@ export function useError() {
         case "TooManyEmoji":
           return t`You can't have more than ${err.max} emojis on this server.`;
         case "TooManySounds":
-          return t`This server has as many sounds as it can have (${err.max}). Remove one first.`;
         case "TooManySpeakers":
-          return t`This stage has as many speakers as it can have (${err.max}). Move someone to the audience first.`;
+          return t`This is full (${err.max}). Remove one first.`;
         case "TooManyChannelWebhooks":
           return t`This channel has as many webhooks as it can have (${err.max}). Delete one first.`;
         case "TooManyServerEvents":

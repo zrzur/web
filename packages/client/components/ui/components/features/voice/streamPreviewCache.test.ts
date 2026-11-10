@@ -28,6 +28,16 @@ describe("stream preview cache", () => {
     expect(fetch).toHaveBeenCalledTimes(3);
   });
 
+  it("does not remember that there was no still", async () => {
+    const fetch = vi
+      .fn<() => Promise<string | undefined>>()
+      .mockResolvedValueOnce(undefined)
+      .mockResolvedValue("data:x");
+    expect(await previewOf("vc", "late", fetch, 0)).toBeUndefined();
+    expect(await previewOf("vc", "late", fetch, 1)).toBe("data:x");
+    expect(fetch).toHaveBeenCalledTimes(2);
+  });
+
   it("a failed fetch shows nothing instead of throwing", async () => {
     const fetch = vi.fn(async () => {
       throw new Error("NotFound");

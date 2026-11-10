@@ -7,6 +7,18 @@ import {
   soundUrl,
 } from "./soundboardPlayer";
 
+/** A decoded sound stand-in */
+function buffer(channels: number, length: number, rate: number) {
+  return {
+    numberOfChannels: channels,
+    length,
+    sampleRate: rate,
+    duration: length / rate,
+    getChannelData: () => new Float32Array(length),
+    copyToChannel: vi.fn(),
+  } as unknown as AudioBuffer;
+}
+
 /** A Web Audio stand-in that records what plays */
 function fakeContext() {
   const started: { duration: number; gain: number }[] = [];
@@ -16,10 +28,13 @@ function fakeContext() {
     state: "running",
     destination: {},
     resume: vi.fn(async () => undefined),
+    // a sound of n bytes decodes to n seconds at 100 samples a second
     decodeAudioData: vi.fn(async (bytes: ArrayBuffer) => {
       decoded++;
-      return { duration: bytes.byteLength } as unknown as AudioBuffer;
+      return buffer(1, bytes.byteLength * 100, 100);
     }),
+    createBuffer: (channels: number, length: number, rate: number) =>
+      buffer(channels, length, rate),
     createGain() {
       const node = {
         gain: { value: 1 },
@@ -38,8 +53,11 @@ function fakeContext() {
         },
         gain: undefined as undefined | { gain: { value: number } },
         disconnect: vi.fn(),
-        start: (_when: number, _offset: number, duration: number) =>
-          started.push({ duration, gain: source.gain!.gain.value }),
+        start: () =>
+          started.push({
+            duration: source.buffer!.duration,
+            gain: source.gain!.gain.value,
+          }),
         stop: () => stopped.push(index),
       };
       return source;
@@ -97,6 +115,24 @@ describe("soundboard player", () => {
     expect(audio.stopped).toEqual([0]);
     player.stopAll();
     expect(audio.stopped).toEqual([0, 1, 2, 3]);
+  });
+
+  it("keeps the decoded sounds under a memory budget, oldest out first", async () => {
+    const audio = fakeContext();
+    // the fake decodes n bytes to n seconds at 100 samples a second, and the
+    // player keeps 5.2 s of it: 520 samples, 2,080 bytes, whatever n is
+    const player = new SoundboardPlayer(
+      async () => new ArrayBuffer(30),
+      () => audio.context,
+    );
+    await player.load("a", "a");
+    expect(player.cachedBytes).toBe(520 * 4);
+    // 16 MB holds 7,692 such sounds; one more pushes the oldest out
+    for (let i = 0; i < 7_692; i++) await player.load(`s${i}`, "u");
+    expect(player.cached).toBe(7_692);
+    expect(player.cachedBytes).toBeLessThanOrEqual(16_000_000);
+    await player.load("a", "a");
+    expect(audio.decoded()).toBe(7_694);
   });
 
   it("tries a failed download again next time", async () => {

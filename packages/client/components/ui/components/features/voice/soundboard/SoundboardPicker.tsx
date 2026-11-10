@@ -2,11 +2,16 @@ import { For, Show, createResource, createSignal } from "solid-js";
 
 import { Trans, useLingui } from "@lingui/solid/macro";
 import type { Channel } from "@zrzur/sdk/solid";
-import { fetchSoundboard, playSound } from "@zrzur/sdk/solid/voiceExtras";
 import { styled } from "styled-system/jsx";
 
 import { useClient } from "@revolt/client";
 import { useError } from "@revolt/i18n";
+import { TextWithEmoji } from "@revolt/markdown";
+import {
+  followVoiceEvents,
+  playSound,
+  soundboardOf,
+} from "@revolt/rtc/voiceExtrasStore";
 import { Button, IconButton } from "@revolt/ui/components/design";
 import { Icon } from "@revolt/ui/icons/Icon";
 
@@ -23,10 +28,14 @@ export default function SoundboardPicker(props: { channel: Channel }) {
   const client = useClient();
   const server = () => props.channel.server;
 
-  const [loaded] = createResource(server, (server) =>
-    fetchSoundboard(client(), server),
-  );
-  const sounds = () => [...(server()?.soundboard.values() ?? [])];
+  const board = () => {
+    const current = server();
+    if (!current) return;
+    followVoiceEvents(client());
+    return soundboardOf(client(), current);
+  };
+  const [loaded] = createResource(board, (entry) => entry.load());
+  const sounds = () => [...(board()?.sounds.values() ?? [])];
 
   const [error, setError] = createSignal<string>();
   const [playing, setPlaying] = createSignal<string>();
@@ -96,7 +105,9 @@ export default function SoundboardPicker(props: { channel: Channel }) {
                     onPress={() => play(sound._id)}
                   >
                     <Show when={sound.emoji}>
-                      <span aria-hidden="true">{sound.emoji}</span>
+                      <span aria-hidden="true">
+                        <TextWithEmoji content={sound.emoji!} />
+                      </span>
                     </Show>
                     <SoundName>{sound.name}</SoundName>
                   </Button>
@@ -130,7 +141,13 @@ const Panel = styled("section", {
 });
 
 const Head = styled("div", {
-  base: { display: "flex", alignItems: "center", gap: "8px" },
+  base: {
+    display: "flex",
+    alignItems: "center",
+    gap: "8px",
+    // phones: the close button is a 44 px target
+    _phone: { "& button": { minWidth: "44px", minHeight: "44px" } },
+  },
 });
 
 const Title = styled("h2", {

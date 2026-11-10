@@ -2,17 +2,21 @@ import { For, Show, createResource, createSignal, onCleanup } from "solid-js";
 
 import { Trans, useLingui } from "@lingui/solid/macro";
 import type { Server } from "@zrzur/sdk/solid";
-import {
-  createSound,
-  deleteSound,
-  fetchSoundboard,
-} from "@zrzur/sdk/solid/voiceExtras";
 import { styled } from "styled-system/jsx";
 
 import { useClient } from "@revolt/client";
 import { useError } from "@revolt/i18n";
 import { useInstance } from "@revolt/instance";
-import type { SoundboardPlayer } from "@revolt/rtc/soundboardPlayer";
+import { TextWithEmoji } from "@revolt/markdown";
+import {
+  SoundboardPlayer,
+  createSound,
+  deleteSound,
+  followVoiceEvents,
+  soundGain,
+  soundUrl,
+  soundboardOf,
+} from "@revolt/rtc/voiceExtrasStore";
 import {
   Button,
   Column,
@@ -28,6 +32,7 @@ import {
   SOUND_DEFAULT_BYTES,
   SOUND_MAX_MS,
   checkSound,
+  isOneEmoji,
   nameFromFile,
 } from "./soundFile";
 
@@ -40,12 +45,13 @@ export function SoundboardList(props: { server: Server }) {
   const instance = useInstance();
   const describeError = useError();
 
-  const [loaded] = createResource(
-    () => props.server,
-    (server) => fetchSoundboard(client(), server),
-  );
-  const sounds = () => [...props.server.soundboard.values()];
-  const limit = () => props.server.soundboardLimit();
+  const board = () => {
+    followVoiceEvents(client());
+    return soundboardOf(client(), props.server);
+  };
+  const [loaded] = createResource(board, (entry) => entry.load());
+  const sounds = () => [...board().sounds.values()];
+  const limit = () => board().limit();
   const isFull = () => !!limit() && sounds().length >= limit();
   const maxBytes = () =>
     instance.limits().file_upload_size_limits["sounds"] ?? SOUND_DEFAULT_BYTES;
@@ -87,7 +93,10 @@ export function SoundboardList(props: { server: Server }) {
     if (!name()) setName(nameFromFile(picked.name));
   }
 
+  // one emoji, as a character (custom server emoji are not offered here)
+  const emojiValid = () => !emoji().trim() || isOneEmoji(emoji().trim());
   const canAdd = () =>
+    emojiValid() &&
     !!file() &&
     !!durationMs() &&
     name().trim().length > 0 &&
@@ -104,11 +113,12 @@ export function SoundboardList(props: { server: Server }) {
         file()!,
         instance.mediaUrl,
       );
-      await createSound(client(), props.server, id, {
+      const sound = await createSound(client(), props.server, id, {
         name: name().trim(),
         duration_ms: durationMs()!,
         ...(emoji().trim() ? { emoji: emoji().trim() } : {}),
       });
+      board().sounds.set(sound._id, sound);
       setFile(undefined);
       setDurationMs(undefined);
       setName("");
@@ -121,21 +131,15 @@ export function SoundboardList(props: { server: Server }) {
     }
   }
 
-  // listening here plays on this device only, from the same cache as calls
-  let player: Promise<SoundboardPlayer> | undefined;
+  // listening here plays on this device only (its own player)
+  let player: SoundboardPlayer | undefined;
   async function listen(id: string, volume: number) {
-    const module = await import("@revolt/rtc/soundboardPlayer");
-    player ??= Promise.resolve(new module.SoundboardPlayer());
-    const soundboard = await player;
-    await soundboard
-      .play(
-        id,
-        module.soundUrl(instance.mediaUrl, id),
-        module.soundGain(volume, 1),
-      )
+    player ??= new SoundboardPlayer();
+    await player
+      .play(id, soundUrl(instance.mediaUrl, id), soundGain(volume, 1))
       .catch((err) => setError(describeError(err)));
   }
-  onCleanup(() => void player?.then((soundboard) => soundboard.stopAll()));
+  onCleanup(() => player?.stopAll());
 
   // removing asks once more, in the row itself
   const [confirming, setConfirming] = createSignal<string>();
@@ -144,6 +148,7 @@ export function SoundboardList(props: { server: Server }) {
     setError(undefined);
     try {
       await deleteSound(client(), props.server, id);
+      board().sounds.delete(id);
     } catch (err) {
       setError(describeError(err));
     }
@@ -225,10 +230,16 @@ export function SoundboardList(props: { server: Server }) {
                   <Show
                     when={isFull()}
                     fallback={
-                      <Trans>
-                        An MP3, OGG or WAV file of up to{" "}
-                        {Math.round(maxBytes() / 1000)} KB, then a name.
-                      </Trans>
+                      <Show
+                        when={emojiValid()}
+                        fallback={<Trans>Use a single emoji.</Trans>}
+                      >
+                        <Trans>
+                          An MP3, OGG or WAV file of up to{" "}
+                          {Math.round(maxBytes() / 1000)} KB, then a name. WAV
+                          files are big: longer sounds fit as MP3 or OGG.
+                        </Trans>
+                      </Show>
                     }
                   >
                     <Trans>
@@ -267,7 +278,12 @@ export function SoundboardList(props: { server: Server }) {
                 <SettingsRow
                   icon={
                     <Glyph aria-hidden="true">
-                      {sound.emoji || <Icon name="music-note" size={20} />}
+                      <Show
+                        when={sound.emoji}
+                        fallback={<Icon name="music-note" size={20} />}
+                      >
+                        <TextWithEmoji content={sound.emoji!} />
+                      </Show>
                     </Glyph>
                   }
                   title={<span data-sound-row={sound._id}>{sound.name}</span>}
@@ -391,5 +407,10 @@ const Glyph = styled("span", {
 });
 
 const Row = styled("div", {
-  base: { display: "flex", gap: "8px" },
+  base: {
+    display: "flex",
+    gap: "8px",
+    // phones: 44 px targets
+    _phone: { "& button": { minWidth: "44px", minHeight: "44px" } },
+  },
 });

@@ -188,24 +188,3 @@ describe("Voice store: talk from other apps", () => {
     expect(store().clean({ globalTalk: 1 } as never).globalTalk).toBe(false);
   });
 });
-
-describe("Voice store: soundboard", () => {
-  it("plays at full volume until the person chooses otherwise", () => {
-    const data = store().default();
-    expect(data.soundboardVolume).toBe(1);
-    expect(data.soundboardMuted).toBe(false);
-  });
-
-  it("keeps a saved choice inside 0-1 and drops nonsense", () => {
-    expect(store().clean({ soundboardVolume: 0.4 }).soundboardVolume).toBe(0.4);
-    expect(store().clean({ soundboardVolume: 7 }).soundboardVolume).toBe(1);
-    expect(store().clean({ soundboardVolume: -1 }).soundboardVolume).toBe(0);
-    expect(
-      store().clean({ soundboardVolume: Number.NaN }).soundboardVolume,
-    ).toBe(1);
-    expect(store().clean({ soundboardMuted: true }).soundboardMuted).toBe(true);
-    expect(
-      store().clean({ soundboardMuted: "yes" } as never).soundboardMuted,
-    ).toBe(false);
-  });
-});

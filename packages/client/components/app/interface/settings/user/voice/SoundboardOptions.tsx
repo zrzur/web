@@ -1,7 +1,10 @@
 import { Trans, useLingui } from "@lingui/solid/macro";
 import { styled } from "styled-system/jsx";
 
-import { useState } from "@revolt/state";
+import {
+  setSoundboardChoice,
+  soundboardChoices,
+} from "@revolt/rtc/voiceExtrasStore";
 import { SettingsRow, SettingsSection, Slider, Toggle } from "@revolt/ui";
 import { Icon } from "@revolt/ui/icons/Icon";
 
@@ -9,9 +12,9 @@ import { Icon } from "@revolt/ui/icons/Icon";
  * Soundboard: how loud sounds others play are, or not at all
  */
 export function SoundboardOptions() {
-  const { voice } = useState();
   const { t } = useLingui();
-  const toggleMuted = () => (voice.soundboardMuted = !voice.soundboardMuted);
+  const muted = () => soundboardChoices().muted;
+  const toggleMuted = () => setSoundboardChoice({ muted: !muted() });
 
   return (
     <SettingsSection
@@ -28,7 +31,7 @@ export function SoundboardOptions() {
         control={(ids) => (
           <Toggle
             data-setting="soundboard-muted"
-            checked={voice.soundboardMuted}
+            checked={muted()}
             onChange={toggleMuted}
             aria-labelledby={ids.labelId}
             aria-describedby={ids.descriptionId}
@@ -36,7 +39,7 @@ export function SoundboardOptions() {
         )}
       />
       <SettingsRow
-        disabled={voice.soundboardMuted}
+        disabled={muted()}
         icon={<Icon name="music-note" size={20} />}
         title={<Trans>Soundboard volume</Trans>}
         control={() => (
@@ -46,9 +49,9 @@ export function SoundboardOptions() {
               min={0}
               max={1}
               step={0.05}
-              value={voice.soundboardVolume}
+              value={soundboardChoices().volume}
               onInput={(event) =>
-                (voice.soundboardVolume = event.currentTarget.value)
+                setSoundboardChoice({ volume: event.currentTarget.value })
               }
               labelFormatter={(value) => (value * 100).toFixed(0) + "%"}
             />

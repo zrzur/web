@@ -1,4 +1,4 @@
-import { JSX, Show, splitProps } from "solid-js";
+import { JSX, Show, lazy, splitProps } from "solid-js";
 
 import { useLingui } from "@lingui/solid/macro";
 import { cva } from "styled-system/css";
@@ -9,10 +9,8 @@ import { useVoice } from "@revolt/rtc";
 import { useState } from "@revolt/state";
 import { Icon } from "@revolt/ui/icons/Icon";
 
-import {
-  setSoundboardOpen,
-  soundboardOpen,
-} from "../soundboard/soundboardOpen";
+// the soundboard button and its state are not in the app's first download
+const SoundboardButton = lazy(() => import("../soundboard/SoundboardButton"));
 
 export function VoiceCallCardActions(props: { size: "xs" | "sm" }) {
   const voice = useVoice();
@@ -129,27 +127,9 @@ export function VoiceCallCardActions(props: { size: "xs" | "sm" }) {
         >
           <Icon name="monitor-arrow-up" size={iconSize()} />
         </ControlButton>
-        {/* server calls only: a server's sounds, for those who may play them */}
+        {/* server calls only; the button loads with the first one */}
         <Show when={voice.channel()?.server}>
-          <ControlButton
-            size={props.size}
-            tone={soundboardOpen() ? "on" : "neutral"}
-            data-voice-control="soundboard"
-            aria-pressed={soundboardOpen()}
-            disabled={
-              voice.state() !== "CONNECTED" ||
-              !voice.speakingPermission ||
-              !voice.channel()?.havePermission("UseSoundboard")
-            }
-            label={
-              voice.channel()?.havePermission("UseSoundboard")
-                ? t`Soundboard`
-                : t`Missing permission`
-            }
-            onClick={() => setSoundboardOpen(!soundboardOpen())}
-          >
-            <Icon name="music-note" size={iconSize()} />
-          </ControlButton>
+          <SoundboardButton size={props.size} />
         </Show>
       </Show>
       <ControlButton
@@ -179,7 +159,7 @@ type ControlProps = {
 /**
  * Round call control (mute, deafen, camera, share, disconnect)
  */
-function ControlButton(props: ControlProps) {
+export function ControlButton(props: ControlProps) {
   const [local, rest] = splitProps(props, [
     "size",
     "tone",

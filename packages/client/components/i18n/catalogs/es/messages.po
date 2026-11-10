@@ -545,6 +545,13 @@ msgstr "{0} de {1} comandos de barra · {2} comandos de menú"
 msgid "{0} of {1} slots left. Members use them as :name:."
 msgstr "Quedan {0} de {1} ranuras. Los miembros las usan como :nombre:."
 
+#. placeholder {0}: Math.max(0, limit() - sounds().length)
+#. placeholder {1}: limit()
+#. placeholder {2}: SOUND_MAX_MS / 1000
+#: components/app/interface/settings/server/soundboard/SoundboardList.tsx
+msgid "{0} of {1} sounds left. Up to {2} seconds each."
+msgstr "Quedan {0} de {1} sonidos. Hasta {2} segundos cada uno."
+
 #. placeholder {0}: invite.uses
 #. placeholder {1}: invite.maxUses
 #: components/app/interface/settings/server/invites/ListServerInvites.tsx
@@ -602,6 +609,11 @@ msgstr "{0} denunciantes"
 #: src/interface/developers/docs/EndpointReference.tsx
 msgid "{0} requests per {1} s"
 msgstr "{0} solicitudes cada {1} s"
+
+#. placeholder {0}: seconds(sound.duration_ms)
+#: components/app/interface/settings/server/soundboard/SoundboardList.tsx
+msgid "{0} s"
+msgstr "{0} s"
 
 #. placeholder {0}: stream(plans().plus)
 #: components/app/interface/settings/user/subscriptions/PlusPage.tsx
@@ -1608,6 +1620,10 @@ msgstr "Añadir un servidor"
 msgid "Add a server icon"
 msgstr "Añadir un icono de servidor"
 
+#: components/app/interface/settings/server/soundboard/SoundboardList.tsx
+msgid "Add a sound"
+msgstr "Añadir un sonido"
+
 #: components/app/interface/settings/shared/Discoverable.tsx
 msgid "Add a tag"
 msgstr "Añadir una etiqueta"
@@ -1615,6 +1631,10 @@ msgstr "Añadir una etiqueta"
 #: components/app/interface/settings/server/LobbyRoleQuestionsEditor.tsx
 msgid "Add an answer"
 msgstr "Añadir una respuesta"
+
+#: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
+msgid "Add and remove the server's sounds"
+msgstr "Añadir y quitar los sonidos del servidor"
 
 #: components/modal/modals/CreatePoll.tsx
 msgid "Add answer"
@@ -1722,6 +1742,10 @@ msgstr "Añadir regla"
 msgid "Add some friends first, or share the link below."
 msgstr "Primero añade algunos amigos o comparte el enlace de abajo."
 
+#: components/app/interface/settings/server/soundboard/SoundboardList.tsx
+msgid "Add sound"
+msgstr "Añadir sonido"
+
 #: src/interface/navigation/servers/UserMenu.tsx
 msgid "Add status text"
 msgstr "Añadir estado"
@@ -1803,6 +1827,11 @@ msgstr "Añadida el {0}"
 #: components/app/interface/settings/server/audit/AuditLog.tsx
 msgid "added the bot {0}"
 msgstr "añadió el bot {0}"
+
+#. placeholder {0}: a.name
+#: components/app/interface/settings/server/audit/AuditLog.tsx
+msgid "added the sound {0}"
+msgstr "añadió el sonido {0}"
 
 #: components/modal/modals/InteractionsEndpoint.tsx
 msgid "Address"
@@ -2175,6 +2204,11 @@ msgstr "Hay una imagen en el lienzo"
 #: components/i18n/errors.tsx
 #~ msgid "An internal error occurred. ({0})"
 #~ msgstr "Se ha producido un error interno. ({0})"
+
+#. placeholder {0}: Math.round(maxBytes() / 1000)
+#: components/app/interface/settings/server/soundboard/SoundboardList.tsx
+msgid "An MP3, OGG or WAV file of up to {0} KB, then a name. WAV files are big: longer sounds fit as MP3 or OGG."
+msgstr "Un archivo MP3, OGG o WAV de hasta {0} KB y luego un nombre. Los WAV pesan mucho: los sonidos más largos caben mejor en MP3 u OGG."
 
 #: components/app/interface/settings/server/AutoModSettings.tsx
 msgid "An optional list that blocks common Arabic insults. Switch it on and it becomes a rule you can edit."
@@ -2600,6 +2634,10 @@ msgstr "Pregunta al equipo de Zrzur sobre tu cuenta, pagos, seguridad o cualquie
 msgid "Ask to join"
 msgstr "Pedir unirse"
 
+#: components/ui/components/features/voice/stage/StagePanel.tsx
+msgid "Ask to speak"
+msgstr "Pedir la palabra"
+
 #. placeholder {0}: dayjs(item.request.created_at).fromNow()
 #: components/app/interface/settings/server/JoinRequests.tsx
 msgid "Asked {0}"
@@ -2608,6 +2646,10 @@ msgstr "Solicitado {0}"
 #: components/app/interface/channels/text/interactions/CommandPicker.tsx
 msgid "Asking the bot for suggestions…"
 msgstr "Pidiendo sugerencias al bot…"
+
+#: components/ui/components/features/voice/stage/StagePanel.tsx
+msgid "Asking to speak"
+msgstr "Piden la palabra"
 
 #: components/app/interface/settings/user/Keybinds.tsx
 msgid "Asks first if you changed something."
@@ -2836,6 +2878,10 @@ msgstr "Atrás"
 #: components/ui/components/features/messaging/composition/picker/GifPicker.tsx
 msgid "Back to categories"
 msgstr "Volver a las categorías"
+
+#: components/ui/components/features/voice/stage/StagePanel.tsx
+msgid "Back to listeners"
+msgstr "Volver a los oyentes"
 
 #: components/app/interface/settings/user/profile/CreatorStudio.tsx
 msgid "Background"
@@ -3535,6 +3581,7 @@ msgstr "Canadá"
 #: components/app/interface/settings/server/ConfirmDialog.tsx
 #: components/app/interface/settings/server/ServerAccess.tsx
 #: components/app/interface/settings/server/ServerOwnership.tsx
+#: components/app/interface/settings/server/soundboard/SoundboardList.tsx
 #: components/app/interface/settings/server/webhooks/ServerWebhooks.tsx
 #: components/app/interface/settings/user/account/AgeSettings.tsx
 #: components/app/interface/settings/user/bots/CommandManager.tsx
@@ -3596,6 +3643,7 @@ msgstr "Canadá"
 #: components/modal/modals/ServerIdentity.tsx
 #: components/modal/modals/SignOutSessions.tsx
 #: components/modal/modals/TimeoutMember.tsx
+#: components/ui/components/features/voice/stage/StagePanel.tsx
 #: src/interface/OAuth.tsx
 msgid "Cancel"
 msgstr "Cancelar"
@@ -4225,6 +4273,10 @@ msgstr "Elige un canal de reglas"
 msgid "Choose a server…"
 msgstr "Elige un servidor…"
 
+#: components/app/interface/settings/server/soundboard/SoundboardList.tsx
+msgid "Choose a sound"
+msgstr "Elegir un sonido"
+
 #: components/app/interface/channels/text/interactions/CommandPicker.tsx
 msgid "Choose a sub-command"
 msgstr "Elige un subcomando"
@@ -4560,15 +4612,28 @@ msgstr "Cerrar ajustes"
 msgid "Close settings (Esc)"
 msgstr "Cerrar ajustes (Esc)"
 
+#: components/ui/components/features/voice/soundboard/SoundboardPicker.tsx
+msgid "Close soundboard"
+msgstr "Cerrar la mesa de sonidos"
+
 #: components/app/interface/settings/user/Keybinds.tsx
 msgid "Close the command list"
 msgstr "Cerrar la lista de comandos"
+
+#: components/ui/components/features/voice/stage/StagePanel.tsx
+msgid "Close the stage"
+msgstr "Cerrar el escenario"
 
 #: components/app/interface/safety/labels.tsx
 #: components/app/interface/settings/user/badges/BugQueue.tsx
 #: components/app/interface/settings/user/support/ContactSupport.tsx
 msgid "Closed"
 msgstr "Cerrado"
+
+#. placeholder {0}: channelName(a.channel)
+#: components/app/interface/settings/server/audit/AuditLog.tsx
+msgid "closed the stage {0}"
+msgstr "cerró el escenario {0}"
 
 #: components/app/interface/settings/user/appearance/AnimationSettings.tsx
 msgid "Closing"
@@ -6735,6 +6800,10 @@ msgstr "Editar estado"
 msgid "Edit the server's information and settings"
 msgstr "Editar la información y ajustes del servidor"
 
+#: components/ui/components/features/voice/stage/StagePanel.tsx
+msgid "Edit topic"
+msgstr "Editar el tema"
+
 #: components/app/interface/settings/server/webhooks/ServerWebhooks.tsx
 msgid "Edit webhook"
 msgstr "Editar webhook"
@@ -6857,6 +6926,10 @@ msgstr "Herramientas de emergencia y filtros contra el spam y los enlaces no des
 #: components/ui/components/features/messaging/composition/picker/CompositionMediaPicker.tsx
 msgid "Emoji"
 msgstr "Emoji"
+
+#: components/app/interface/settings/server/soundboard/SoundboardList.tsx
+msgid "Emoji (optional)"
+msgstr "Emoji (opcional)"
 
 #. placeholder {0}: index() + 1
 #: components/modal/modals/CreatePoll.tsx
@@ -7241,6 +7314,10 @@ msgstr "Todos en el servidor y sus invitaciones."
 #: components/app/interface/settings/server/members/ListMembers.tsx
 #~ msgid "Everyone in this server. Right-click a member, or use ⋯, for every action."
 #~ msgstr ""
+
+#: components/ui/components/features/voice/stage/StagePanel.tsx
+msgid "Everyone leaves the stage."
+msgstr "Todos salen del escenario."
 
 #: components/app/interface/settings/user/bots/CommandManager.tsx
 msgid "Everyone who can write in the channel. Pick permissions to limit it."
@@ -8291,6 +8368,10 @@ msgstr "Dar un Ala"
 #: src/interface/Home.tsx
 msgid "Give feedback"
 msgstr "Enviar comentarios"
+
+#: components/ui/components/features/voice/stage/StagePanel.tsx
+msgid "Give the floor"
+msgstr "Dar la palabra"
 
 #: components/app/interface/settings/server/AutoModSettings.tsx
 msgid "Give the rule a name."
@@ -10208,6 +10289,16 @@ msgstr "Aparece en Discover."
 msgid "Listen"
 msgstr "Escuchar"
 
+#. placeholder {0}: sound.name
+#: components/app/interface/settings/server/soundboard/SoundboardList.tsx
+msgid "Listen to {0}"
+msgstr "Escuchar {0}"
+
+#. placeholder {0}: roles().audience.length
+#: components/ui/components/features/voice/stage/StagePanel.tsx
+msgid "Listening: {0}"
+msgstr "Escuchando: {0}"
+
 #: components/ui/components/features/profiles/plateNames.ts
 msgid "Lithuania"
 msgstr "Lituania"
@@ -10314,6 +10405,7 @@ msgstr "Al cargar esto se conecta a {0}. Recibirán tu dirección IP y pueden gu
 
 #: components/app/interface/settings/server/apps/ServerAppPage.tsx
 #: components/app/interface/settings/server/ServerApps.tsx
+#: components/app/interface/settings/server/soundboard/SoundboardList.tsx
 #: components/app/interface/settings/server/webhooks/ServerWebhooks.tsx
 #: components/app/interface/settings/user/badges/MyBadges.tsx
 #: components/app/interface/settings/user/bots/CommandManager.tsx
@@ -10330,6 +10422,8 @@ msgstr "Al cargar esto se conecta a {0}. Recibirán tu dirección IP y pueden gu
 #: components/app/interface/settings/user/subscriptions/BillingHistory.tsx
 #: components/modal/modals/PromoteServer.tsx
 #: components/modal/modals/ReportContent.tsx
+#: components/ui/components/features/voice/soundboard/SoundboardPicker.tsx
+#: components/ui/components/features/voice/StreamPreviewCard.tsx
 #: src/interface/channels/forum/ForumChannel.tsx
 #: src/interface/channels/text/ThreadsPanel.tsx
 #: src/interface/Designs.tsx
@@ -10803,6 +10897,11 @@ msgstr "Gestionar servidor"
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 msgid "Manage server, permissions and roles together are close to full control."
 msgstr "Gestionar servidor, permisos y roles juntos equivalen casi a un control total."
+
+#: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
+#: components/app/interface/settings/server/layout.tsx
+msgid "Manage soundboard"
+msgstr "Gestionar la mesa de sonidos"
 
 #: components/app/interface/settings/user/subscriptions/PlusPage.tsx
 msgid "Manage subscription"
@@ -11380,6 +11479,7 @@ msgid "Misleading sign-in or permissions"
 msgstr "Inicio de sesión o permisos engañosos"
 
 #: components/ui/components/features/voice/callCard/VoiceCallCardActions.tsx
+#: components/ui/components/features/voice/soundboard/SoundboardButton.tsx
 #: src/interface/navigation/channels/AccountBar.tsx
 msgid "Missing permission"
 msgstr "Faltan permisos"
@@ -11671,6 +11771,10 @@ msgstr "Silenciar servidor"
 msgid "Mute stream sound"
 msgstr "Silenciar el sonido del stream"
 
+#: components/app/interface/settings/user/voice/SoundboardOptions.tsx
+msgid "Mute the soundboard"
+msgstr "Silenciar la mesa de sonidos"
+
 #: src/interface/navigation/servers/ServerList.tsx
 msgid "Muted"
 msgstr "Silenciado"
@@ -11754,6 +11858,7 @@ msgstr "nombre"
 #: components/app/interface/settings/server/AutoModSettings.tsx
 #: components/app/interface/settings/server/emojis/EmojiList.tsx
 #: components/app/interface/settings/server/members/ListMembers.tsx
+#: components/app/interface/settings/server/soundboard/SoundboardList.tsx
 #: components/app/interface/settings/user/badges/BetaAdmin.tsx
 #: components/app/interface/settings/user/bots/CommandManager.tsx
 #: components/app/interface/settings/user/plugins/DeveloperTab.tsx
@@ -12489,6 +12594,10 @@ msgstr "Aún no hay publicaciones."
 msgid "No posts yet. Start the first one."
 msgstr "Aún no hay publicaciones. Crea la primera."
 
+#: components/ui/components/features/voice/StreamPreviewCard.tsx
+msgid "No preview yet"
+msgstr "Aún no hay vista previa"
+
 #: src/interface/lobby/Lobby.tsx
 msgid "No question matches."
 msgstr "Ninguna pregunta coincide."
@@ -12534,6 +12643,14 @@ msgstr "Aún no hay servidores publicados."
 msgid "No servers to show."
 msgstr "No hay servidores que mostrar."
 
+#: components/app/interface/settings/server/soundboard/SoundboardList.tsx
+msgid "No sounds yet."
+msgstr "Aún no hay sonidos."
+
+#: components/ui/components/features/voice/soundboard/SoundboardPicker.tsx
+msgid "No sounds yet. People who manage the soundboard add them in Server settings, Soundboard."
+msgstr "Aún no hay sonidos. Quienes gestionan la mesa de sonidos los añaden en Ajustes del servidor, Mesa de sonidos."
+
 #: components/app/interface/settings/user/bots/CommandManager.tsx
 msgid "No spaces at the start or the end."
 msgstr "Sin espacios al principio ni al final."
@@ -12553,6 +12670,10 @@ msgstr "Aún no hay etiquetas."
 #: src/interface/channels/text/ThreadsPanel.tsx
 msgid "No threads yet. Start one from a message or here."
 msgstr "Aún no hay hilos. Empieza uno desde un mensaje o aquí."
+
+#: components/ui/components/features/voice/stage/StagePanel.tsx
+msgid "No topic yet"
+msgstr "Aún no hay tema"
 
 #: components/app/interface/discover/SiteFrame.tsx
 #~ msgid "No trackers, and no ads based on your data. The code is open under AGPL-3.0."
@@ -14024,6 +14145,10 @@ msgstr "Elige un servidor en el que estés."
 msgid "Pick a username that you want people to be able to find you by. This can be changed later in your user settings."
 msgstr "Elige un nombre de usuario por el cual quieres que la gente pueda encontrarte. Puedes cambiarlo más tarde desde la configuración."
 
+#: components/app/interface/settings/server/soundboard/SoundboardList.tsx
+msgid "Pick an MP3, OGG or WAV file."
+msgstr "Elige un archivo MP3, OGG o WAV."
+
 #: components/app/interface/settings/user/bots/CommandManager.tsx
 msgid "Pick each channel type once."
 msgstr "Elige cada tipo de canal una sola vez."
@@ -14129,6 +14254,10 @@ msgstr "Reproducir todo"
 #: components/app/interface/settings/user/appearance/AnimationSettings.tsx
 msgid "Play preview"
 msgstr "Reproducir vista previa"
+
+#: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
+msgid "Play the server's sounds in a voice call"
+msgstr "Reproducir los sonidos del servidor en una llamada de voz"
 
 #: components/app/interface/settings/user/Advanced.tsx
 msgid "Play the short effects people add to their profiles. They never play with reduced motion on."
@@ -14749,6 +14878,10 @@ msgstr "Tecla de pulsar para hablar"
 msgid "Put {0} in front of the people browsing Discover."
 msgstr "Pon {0} delante de las personas que exploran Discover."
 
+#: components/ui/components/features/voice/stage/StagePanel.tsx
+msgid "Put hand down"
+msgstr "Bajar la mano"
+
 #: components/app/interface/settings/user/subscriptions/PlusPage.tsx
 #~ msgid "Put it on any server you love: more emoji slots, bigger uploads and better voice for everyone there. Server menu, then Give feathers."
 #~ msgstr ""
@@ -15174,6 +15307,7 @@ msgstr "Servidor remoto"
 #: components/app/interface/settings/channel/ForumTags.tsx
 #: components/app/interface/settings/server/invites/VanityInvite.tsx
 #: components/app/interface/settings/server/ServerApps.tsx
+#: components/app/interface/settings/server/soundboard/SoundboardList.tsx
 #: components/app/interface/settings/user/Account.tsx
 #: components/app/interface/settings/user/badges/BetaAdmin.tsx
 #: components/app/interface/settings/user/plugins/PluginDetail.tsx
@@ -15197,6 +15331,7 @@ msgstr "¿Quitar «{0}»?"
 #: components/app/interface/channels/text/interactions/InteractionModal.tsx
 #: components/app/interface/settings/server/assistant/AssistantFields.tsx
 #: components/app/interface/settings/server/members/ListMembers.tsx
+#: components/app/interface/settings/server/soundboard/SoundboardList.tsx
 #: components/ui/components/features/messaging/composition/FileCarousel.tsx
 msgid "Remove {0}"
 msgstr "Quitar {0}"
@@ -15406,6 +15541,11 @@ msgstr "Quitado de Discover"
 #: components/app/interface/settings/server/audit/AuditLog.tsx
 msgid "removed the bot {0}"
 msgstr "quitó el bot {0}"
+
+#. placeholder {0}: a.name
+#: components/app/interface/settings/server/audit/AuditLog.tsx
+msgid "removed the sound {0}"
+msgstr "quitó el sonido {0}"
 
 #: components/app/interface/settings/server/ServerOwnership.tsx
 msgid "Removes every channel and message. It can't be undone."
@@ -16272,6 +16412,7 @@ msgstr "Arabia Saudí"
 #: components/modal/modals/EditServerFolder.tsx
 #: components/modal/modals/ServerEventEditor.tsx
 #: components/modal/modals/ServerIdentity.tsx
+#: components/ui/components/features/voice/stage/StagePanel.tsx
 #: src/interface/Designs.tsx
 #: src/interface/designs/Dock.tsx
 msgid "Save"
@@ -16507,6 +16648,11 @@ msgstr "Escocia"
 #: src/interface/navigation/channels/AccountBar.tsx
 msgid "Screen"
 msgstr "Pantalla"
+
+#. placeholder {0}: props.name
+#: components/ui/components/features/voice/StreamPreviewCard.tsx
+msgid "Screen of {0}"
+msgstr "Pantalla de {0}"
 
 #: components/app/interface/settings/user/subscriptions/PlusPage.tsx
 #: components/app/interface/settings/user/voice/ScreenShareOptions.tsx
@@ -17273,6 +17419,10 @@ msgstr "Compartido sin consentimiento"
 msgid "Sharing personal information"
 msgstr "Compartir información personal"
 
+#: components/ui/components/features/voice/StreamPreviewCard.tsx
+msgid "Sharing their screen"
+msgstr "Comparte su pantalla"
+
 #: components/app/interface/settings/server/assistant/labels.ts
 #: components/app/interface/settings/user/profile/StyleEditors.tsx
 msgid "Shield"
@@ -17281,6 +17431,15 @@ msgstr "Escudo"
 #: components/app/interface/settings/user/plugins/text.ts
 msgid "Short in-app notices that start with its name."
 msgstr "Avisos breves dentro de la app que empiezan con su nombre."
+
+#: components/app/interface/settings/server/soundboard/SoundboardList.tsx
+#: components/app/interface/settings/ServerSettings.tsx
+msgid "Short sounds members play in voice calls."
+msgstr "Sonidos cortos que los miembros reproducen en las llamadas de voz."
+
+#: components/app/interface/settings/user/voice/SoundboardOptions.tsx
+msgid "Short sounds people play in a voice call, on your device."
+msgstr "Sonidos cortos que se reproducen en una llamada de voz, en tu dispositivo."
 
 #: components/app/interface/settings/user/bots/CommandManager.tsx
 msgid "Shortest text"
@@ -17816,6 +17975,21 @@ msgctxt "search filter"
 msgid "Sound"
 msgstr "Sonido"
 
+#: components/app/interface/settings/ServerSettings.tsx
+#: components/app/interface/settings/user/voice/SoundboardOptions.tsx
+#: components/ui/components/features/voice/soundboard/SoundboardButton.tsx
+#: components/ui/components/features/voice/soundboard/SoundboardPicker.tsx
+msgid "Soundboard"
+msgstr "Mesa de sonidos"
+
+#: components/app/interface/settings/user/voice/SoundboardOptions.tsx
+msgid "Soundboard volume"
+msgstr "Volumen de la mesa de sonidos"
+
+#: components/app/interface/settings/server/soundboard/SoundboardList.tsx
+msgid "Sounds"
+msgstr "Sonidos"
+
 #: src/interface/developers/docs/EndpointReference.tsx
 msgid "Source"
 msgstr "Origen"
@@ -17871,6 +18045,7 @@ msgstr "Chispas"
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 #: components/modal/modals/permissionTitles.ts
+#: components/ui/components/features/voice/stage/StagePanel.tsx
 #: src/interface/OAuth.tsx
 msgid "Speak"
 msgstr "Hablar"
@@ -17886,6 +18061,15 @@ msgstr "Altavoz"
 #: components/ui/components/features/voice/callCard/VoiceCallCardStatus.tsx
 msgid "Speaker unplugged. Using the default speaker."
 msgstr "Altavoz desconectado. Se usa el altavoz predeterminado."
+
+#: components/ui/components/features/voice/stage/StagePanel.tsx
+msgid "Speakers"
+msgstr "Oradores"
+
+#. placeholder {0}: roles().speakers.length
+#: components/ui/components/features/voice/stage/StagePanel.tsx
+msgid "Speakers: {0}"
+msgstr "Oradores: {0}"
 
 #: components/ui/components/features/profiles/badges/useBadgeText.ts
 msgid "Special badge"
@@ -17956,6 +18140,16 @@ msgstr "Canal de la cola del personal"
 #: components/app/interface/settings/user/badges/MyBadges.tsx
 msgid "Staff tools"
 msgstr "Herramientas del personal"
+
+#: components/modal/modals/CreateChannel.tsx
+#: components/ui/components/features/voice/stage/StagePanel.tsx
+msgid "Stage"
+msgstr "Escenario"
+
+#: components/modal/modals/CreateChannel.tsx
+msgctxt "channel-type"
+msgid "Stage"
+msgstr "Escenario"
 
 #: components/app/interface/settings/user/safety/ReportsAndStanding.tsx
 msgid "Standing"
@@ -18586,6 +18780,10 @@ msgstr "Voz, vídeo y pantalla compartida"
 #: components/ui/components/features/voice/callCard/VoiceCallCardStatus.tsx
 msgid "Talking (toggle on)"
 msgstr "Hablando (interruptor activado)"
+
+#: components/modal/modals/CreateChannel.tsx
+msgid "Talks: speakers on stage, everyone else listens and can raise a hand."
+msgstr "Para charlas: oradores en el escenario; los demás escuchan y pueden levantar la mano."
 
 #: components/ui/components/features/profiles/plateNames.ts
 msgid "Tanzania"
@@ -19350,6 +19548,10 @@ msgstr "El nivel del servidor y sus ventajas."
 msgid "The server's own emoji."
 msgstr "Los emojis propios del servidor."
 
+#: components/app/interface/settings/server/soundboard/SoundboardList.tsx
+msgid "The soundboard is full. Remove a sound, or add Wings to the server for more."
+msgstr "La mesa de sonidos está llena. Quita un sonido o añade Alas al servidor para tener más."
+
 #: components/modal/modals/ServerEventEditor.tsx
 msgid "The start time has passed. Choose a later time."
 msgstr "La hora de inicio ya pasó. Elige una hora posterior."
@@ -19712,6 +19914,10 @@ msgstr "Esta función está desactivada."
 msgid "This field takes at most {max} files."
 msgstr "Este campo admite como máximo {max} archivos."
 
+#: components/app/interface/settings/server/soundboard/SoundboardList.tsx
+msgid "This file can't be played as a sound."
+msgstr "Este archivo no se puede reproducir como sonido."
+
 #: components/app/interface/settings/user/profile/CreatorStudio.tsx
 msgid "This file couldn't be checked, so it can't be used. Export it again and try once more."
 msgstr "No se pudo comprobar este archivo, así que no se puede usar. Expórtalo de nuevo e inténtalo otra vez."
@@ -19723,6 +19929,11 @@ msgstr "Este archivo está vacío."
 #: components/app/interface/settings/user/profile/CreatorStudio.tsx
 msgid "This file is set to repeat. Export it to play once."
 msgstr "Este archivo está configurado para repetirse. Expórtalo para que se reproduzca una sola vez."
+
+#. placeholder {0}: Math.round(maxBytes() / 1000)
+#: components/app/interface/settings/server/soundboard/SoundboardList.tsx
+msgid "This file is too big. Sounds can be up to {0} KB."
+msgstr "Este archivo es demasiado grande. Los sonidos pueden pesar hasta {0} KB."
 
 #: components/i18n/errors.tsx
 msgid "This file is too large."
@@ -19792,6 +20003,11 @@ msgstr "Este es un canal de anuncios. Solo pueden publicar aquí las personas qu
 #: components/modal/modals/AddFriend.tsx
 msgid "This is an official Zrzur account. It can't be added."
 msgstr "Esta es una cuenta oficial de Zrzur. No se puede añadir."
+
+#. placeholder {0}: err.max
+#: components/i18n/errors.tsx
+msgid "This is full ({0}). Remove one first."
+msgstr "Está lleno ({0}). Quita uno primero."
 
 #: components/app/interface/settings/shared/Discoverable.tsx
 msgid "This is how it will look on Discover."
@@ -20073,6 +20289,11 @@ msgstr "Este sitio no usa una conexión segura (sin HTTPS). Otras personas de tu
 #: components/app/interface/settings/user/notifications/Sounds.tsx
 msgid "This sound couldn't be played. Check your output device."
 msgstr "No se pudo reproducir este sonido. Revisa tu dispositivo de salida."
+
+#. placeholder {0}: SOUND_MAX_MS / 1000
+#: components/app/interface/settings/server/soundboard/SoundboardList.tsx
+msgid "This sound is too long. Sounds can be up to {0} seconds."
+msgstr "Este sonido es demasiado largo. Los sonidos pueden durar hasta {0} segundos."
 
 #: components/app/interface/settings/channel/ForumTags.tsx
 msgid "this tag"
@@ -20389,6 +20610,10 @@ msgstr "Fila superior"
 #: components/app/interface/settings/user/badges/MyBadges.tsx
 msgid "Top tier"
 msgstr "Nivel superior"
+
+#: components/ui/components/features/voice/stage/StagePanel.tsx
+msgid "Topic"
+msgstr "Tema"
 
 #: components/modal/modals/GiftPlus.tsx
 msgid "Total, paid once"
@@ -21061,6 +21286,7 @@ msgstr "Sube tus diseños"
 #: components/app/interface/channels/text/interactions/CommandPicker.tsx
 #: components/app/interface/channels/text/interactions/InteractionModal.tsx
 #: components/app/interface/settings/server/emojis/EmojiList.tsx
+#: components/app/interface/settings/server/soundboard/SoundboardList.tsx
 msgid "Uploading…"
 msgstr "Subiendo…"
 
@@ -21120,6 +21346,10 @@ msgstr "Usa un archivo PNG, PNG animado, GIF, WebP o WebM."
 msgid "Use a real site address, such as https://example.com"
 msgstr "Usa la dirección de un sitio real, como https://example.com"
 
+#: components/app/interface/settings/server/soundboard/SoundboardList.tsx
+msgid "Use a single emoji."
+msgstr "Usa un solo emoji."
+
 #: components/app/interface/settings/server/LobbySettings.tsx
 #~ msgid "Use a six-digit colour such as #9075FF."
 #~ msgstr ""
@@ -21168,6 +21398,10 @@ msgstr "Usa solo minúsculas, dígitos, - y _, sin espacios."
 #: components/app/interface/settings/server/emojis/EmojiList.tsx
 msgid "Use lowercase letters, numbers and underscores."
 msgstr "Usa letras minúsculas, números y guiones bajos."
+
+#: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
+msgid "Use soundboard"
+msgstr "Usar la mesa de sonidos"
 
 #: components/app/interface/settings/server/assistant/labels.ts
 msgid "Use support hours"
@@ -22793,6 +23027,10 @@ msgstr "Aún no has enviado ninguna denuncia."
 #: components/app/interface/settings/user/support/ContactSupport.tsx
 msgid "You haven't written to support yet."
 msgstr "Aún no has escrito al soporte."
+
+#: components/app/interface/settings/user/voice/SoundboardOptions.tsx
+msgid "You hear no soundboard sounds in calls."
+msgstr "No oyes ningún sonido de la mesa de sonidos en las llamadas."
 
 #: components/app/interface/discover/ServerPage.tsx
 msgid "You join right away."

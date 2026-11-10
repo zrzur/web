@@ -201,6 +201,10 @@ class Voice {
   showBar: Accessor<boolean>;
   #setShowBar: Setter<boolean>;
 
+  /** On a stage: whether you may speak */
+  stageGate: Accessor<(() => boolean) | undefined>;
+  #setStageGate: Setter<(() => boolean) | undefined>;
+
   private sound: SoundController;
   private device: Device;
 
@@ -296,6 +300,8 @@ class Voice {
     const [showBar, setShowBar] = createSignal(true);
     this.showBar = showBar;
     this.#setShowBar = setShowBar;
+
+    [this.stageGate, this.#setStageGate] = createSignal<() => boolean>();
 
     const inst = useInstance();
     this.config = inst.config;
@@ -1123,21 +1129,20 @@ class Voice {
     return !!this.channel()?.havePermission("Listen") && !this.serverDeafened;
   }
 
+  /** Who may open their microphone on a stage (unset: nobody) */
+  setStageGate(gate: (() => boolean) | undefined) {
+    this.#setStageGate(() => gate);
+  }
+
   get speakingPermission() {
     const channel = this.channel();
     return (
       !!channel?.havePermission("Speak") &&
       !this.serverMuted &&
-      // on a stage only speakers talk: the audience never opens its
-      // microphone (no prompt, no track), and an invite opens it
-      (!channel.isStage || this.isStageSpeaker)
+      // on a stage only speakers talk (rtc/voiceExtras.ts sets the gate);
+      // until it loads nobody opens a microphone
+      (!channel.isStage || !!this.stageGate()?.())
     );
-  }
-
-  /** Whether you may speak on the stage you are in */
-  get isStageSpeaker() {
-    const self = this.#client().user?.id;
-    return !!self && !!this.channel()?.isStageSpeaker(self);
   }
 
   get ownMember() {
@@ -1260,7 +1265,6 @@ export function VoiceContext(props: { children: JSX.Element }) {
   const client = useClient();
   const navigate = useNavigate();
   const location = useLocation();
-  const { mediaUrl } = useInstance();
 
   // App-wide shortcuts (listed in Ctrl+/) and push to talk. Physical keys,
   // so they match on every keyboard layout.
@@ -1413,27 +1417,6 @@ export function VoiceContext(props: { children: JSX.Element }) {
     });
   });
 
-  // stage, soundboard and screen share stills: loaded with the first call
-  createEffect(() => {
-    const channel = voice.channel();
-    if (!channel) return;
-    let detach: (() => void) | undefined;
-    let cancelled = false;
-    void import("./voiceExtras").then(({ attachVoiceExtras }) => {
-      if (cancelled) return;
-      detach = attachVoiceExtras(
-        client(),
-        channel,
-        voice,
-        state.voice,
-        mediaUrl,
-      );
-    });
-    onCleanup(() => {
-      cancelled = true;
-      detach?.();
-    });
-  });
   onCleanup(() => voice.disconnect());
 
   return (

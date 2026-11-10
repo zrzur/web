@@ -24901,3 +24901,56 @@ msgstr "Soundboard verwenden"
 #: components/app/interface/settings/user/voice/SoundboardOptions.tsx
 msgid "You hear no soundboard sounds in calls."
 msgstr "Du hörst in Anrufen keine Soundboard-Sounds."
+
+#. placeholder {0}: a.name
+#: components/app/interface/settings/server/audit/AuditLog.tsx
+msgid "added the sound {0}"
+msgstr "hat den Sound {0} hinzugefügt"
+
+#. placeholder {0}: Math.round(maxBytes() / 1000)
+#: components/app/interface/settings/server/soundboard/SoundboardList.tsx
+msgid "An MP3, OGG or WAV file of up to {0} KB, then a name. WAV files are big: longer sounds fit as MP3 or OGG."
+msgstr "Eine MP3-, OGG- oder WAV-Datei bis {0} KB, dann ein Name. WAV-Dateien sind groß: Längere Sounds passen als MP3 oder OGG."
+
+#: components/ui/components/features/voice/stage/StagePanel.tsx
+msgid "Ask to speak"
+msgstr "Wort erbitten"
+
+#: components/ui/components/features/voice/stage/StagePanel.tsx
+msgid "Asking to speak"
+msgstr "Bitten ums Wort"
+
+#: components/ui/components/features/voice/stage/StagePanel.tsx
+msgid "Back to listeners"
+msgstr "Zurück zu den Zuhörenden"
+
+#: components/ui/components/features/voice/stage/StagePanel.tsx
+msgid "Close the stage"
+msgstr "Bühne schließen"
+
+#. placeholder {0}: channelName(a.channel)
+#: components/app/interface/settings/server/audit/AuditLog.tsx
+msgid "closed the stage {0}"
+msgstr "hat die Bühne {0} geschlossen"
+
+#: components/ui/components/features/voice/stage/StagePanel.tsx
+msgid "Give the floor"
+msgstr "Das Wort geben"
+
+#: components/ui/components/features/voice/stage/StagePanel.tsx
+msgid "Put hand down"
+msgstr "Hand runter"
+
+#. placeholder {0}: a.name
+#: components/app/interface/settings/server/audit/AuditLog.tsx
+msgid "removed the sound {0}"
+msgstr "hat den Sound {0} entfernt"
+
+#. placeholder {0}: err.max
+#: components/i18n/errors.tsx
+msgid "This is full ({0}). Remove one first."
+msgstr "Das ist voll ({0}). Entferne zuerst einen Eintrag."
+
+#: components/app/interface/settings/server/soundboard/SoundboardList.tsx
+msgid "Use a single emoji."
+msgstr "Verwende ein einzelnes Emoji."

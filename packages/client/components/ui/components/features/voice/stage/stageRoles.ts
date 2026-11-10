@@ -1,4 +1,4 @@
-import type { StageState } from "@zrzur/sdk/solid";
+import type { StageState } from "@revolt/rtc/voiceExtrasStore";
 
 /** Where someone is on a stage */
 export type StageRole = "speaker" | "hand" | "audience";

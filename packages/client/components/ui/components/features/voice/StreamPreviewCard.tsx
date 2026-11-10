@@ -1,31 +1,30 @@
 import { Show, createResource } from "solid-js";
+import { render } from "solid-js/web";
 
-import { Trans, useLingui } from "@lingui/solid/macro";
-import type { Channel } from "@zrzur/sdk/solid";
-import { fetchStreamPreview } from "@zrzur/sdk/solid/voiceExtras";
+import { t } from "@lingui/core/macro";
+import type { Channel, Client } from "@zrzur/sdk/solid";
 import { styled } from "styled-system/jsx";
 
-import { useClient } from "@revolt/client";
+import { fetchStreamPreview } from "@revolt/rtc/voiceExtrasStore";
 
 import { previewOf } from "./streamPreviewCache";
 
 /**
  * A still of someone's screen share, shown while you hover them in the
- * channel list before joining. Lazy, and it asks for the still only once it
- * is on screen (at most every 30 seconds per share).
+ * channel list before joining. It asks for the still only once it is on
+ * screen (at most every 30 seconds per share).
  */
-export default function StreamPreviewCard(props: {
+export function StreamPreviewCard(props: {
+  client: Client;
   channel: Channel;
   userId: string;
   name: string;
 }) {
-  const { t } = useLingui();
-  const client = useClient();
   const [still] = createResource(
     () => [props.channel, props.userId] as const,
     ([channel, userId]) =>
       previewOf(channel.id, userId, () =>
-        fetchStreamPreview(client(), channel, userId),
+        fetchStreamPreview(props.client, channel, userId),
       ),
   );
 
@@ -34,11 +33,7 @@ export default function StreamPreviewCard(props: {
       <Show
         when={still()}
         fallback={
-          <Empty>
-            <Show when={!still.loading} fallback={<Trans>Loading…</Trans>}>
-              <Trans>No preview yet</Trans>
-            </Show>
-          </Empty>
+          <Empty>{still.loading ? t`Loading…` : t`No preview yet`}</Empty>
         }
       >
         {(url) => (
@@ -51,11 +46,44 @@ export default function StreamPreviewCard(props: {
           />
         )}
       </Show>
-      <Live>
-        <Trans>Sharing their screen</Trans>
-      </Live>
+      <Live>{t`Sharing their screen`}</Live>
     </Card>
   );
+}
+
+/**
+ * Show the card on a row of the channel list until the pointer or the
+ * focus leaves it (loaded with the first hover, not with the app)
+ */
+export function show(
+  row: HTMLElement,
+  client: Client,
+  channel: Channel,
+  userId: string,
+  name: string,
+) {
+  if (row.querySelector("[data-stream-preview]")) return;
+  const holder = document.createElement("div");
+  row.append(holder);
+  const dispose = render(
+    () => (
+      <StreamPreviewCard
+        client={client}
+        channel={channel}
+        userId={userId}
+        name={name}
+      />
+    ),
+    holder,
+  );
+  const hide = () => {
+    dispose();
+    holder.remove();
+    row.removeEventListener("pointerleave", hide);
+    row.removeEventListener("focusout", hide);
+  };
+  row.addEventListener("pointerleave", hide);
+  row.addEventListener("focusout", hide);
 }
 
 const Card = styled("div", {
@@ -69,9 +97,9 @@ const Card = styled("div", {
     display: "flex",
     flexDirection: "column",
     gap: "8px",
-    borderRadius: "var(--z-radius, 10px)",
+    borderRadius: "var(--z-radius)",
     border: "1px solid var(--z-border-subtle)",
-    background: "var(--z-bg-raised)",
+    background: "var(--z-bg-popover)",
     boxShadow: "var(--z-shadow-md)",
     pointerEvents: "none",
     "& img": {
@@ -80,8 +108,8 @@ const Card = styled("div", {
       height: "auto",
       aspectRatio: "16 / 9",
       objectFit: "contain",
-      borderRadius: "6px",
-      background: "var(--z-bg-sunken, black)",
+      borderRadius: "var(--z-radius-sm)",
+      background: "var(--z-bg-input)",
     },
   },
 });
@@ -92,8 +120,8 @@ const Empty = styled("div", {
     display: "grid",
     placeItems: "center",
     padding: "12px",
-    borderRadius: "6px",
-    background: "var(--z-bg-sunken, var(--z-bg-input))",
+    borderRadius: "var(--z-radius-sm)",
+    background: "var(--z-bg-input)",
     fontSize: "13px",
     color: "var(--z-fg-muted)",
     textAlign: "center",

@@ -60,6 +60,26 @@ export function toBase64(bytes: Uint8Array) {
 }
 
 /**
+ * Resolves when the video element shows a new frame (or after a second,
+ * for browsers without requestVideoFrameCallback or a still screen)
+ */
+export function nextFrame(video: HTMLVideoElement, timeoutMs = 1000) {
+  return new Promise<void>((resolve) => {
+    const timer = setTimeout(resolve, timeoutMs);
+    const done = () => {
+      clearTimeout(timer);
+      resolve();
+    };
+    if (typeof video.requestVideoFrameCallback === "function")
+      video.requestVideoFrameCallback(done);
+    else
+      (video as HTMLVideoElement).addEventListener("loadeddata", done, {
+        once: true,
+      });
+  });
+}
+
+/**
  * Take stills of a screen share track until stopped
  * @param track The local screen share video track
  * @param send Sends one still (base64 JPEG)
@@ -79,7 +99,10 @@ export function startPreviewCapture(
   async function capture() {
     if (stopped || track.readyState !== "live") return;
     try {
-      if (video.readyState < 2) await video.play();
+      // a paused element keeps its last frame: play, then wait for a new one
+      await video.play();
+      await nextFrame(video);
+      if (stopped) return;
       const size = previewSize(video.videoWidth, video.videoHeight);
       canvas.width = size.width;
       canvas.height = size.height;

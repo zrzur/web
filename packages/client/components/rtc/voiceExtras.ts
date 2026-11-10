@@ -6,15 +6,24 @@
 import { createEffect, createRoot, onCleanup } from "solid-js";
 
 import type { Channel, Client } from "@zrzur/sdk/solid";
-import {
-  fetchSoundboard,
-  fetchStage,
-  sendStreamPreview,
-} from "@zrzur/sdk/solid/voiceExtras";
 import type { Room } from "livekit-client";
 
 import { TrackSource } from "./livekitConstants";
-import { SoundboardPlayer, soundGain, soundUrl } from "./soundboardPlayer";
+import { startPreviewCapture } from "./streamPreview";
+import {
+  SoundboardPlayer,
+  fetchStage,
+  followVoiceEvents,
+  isStageSpeaker,
+  onSoundPlayed,
+  onSoundRemoved,
+  sendStreamPreview,
+  soundGain,
+  soundUrl,
+  soundboardChoices,
+  soundboardOf,
+  stageOf,
+} from "./voiceExtrasStore";
 
 /** The parts of the call this needs */
 export type CallView = {
@@ -22,12 +31,8 @@ export type CallView = {
   screenshare: () => boolean;
   deafen: () => boolean;
   serverDeafened: boolean;
-};
-
-/** The listener's soundboard choices */
-export type SoundboardSettings = {
-  soundboardMuted: boolean;
-  soundboardVolume: number;
+  /** Who may open their microphone on a stage (unset: nobody) */
+  setStageGate: (gate: (() => boolean) | undefined) => void;
 };
 
 /** One player for every call: decoded sounds stay cached between calls */
@@ -42,41 +47,52 @@ export function attachVoiceExtras(
   client: Client,
   channel: Channel,
   view: CallView,
-  settings: SoundboardSettings,
   mediaUrl: string,
 ) {
+  followVoiceEvents(client);
   const deafened = () => view.deafen() || view.serverDeafened;
   return createRoot((dispose) => {
-    // a stage: who speaks and who raised a hand
-    if (channel.isStage)
-      void fetchStage(client, channel).catch(() => undefined);
+    // a stage: who speaks and who asked to; only speakers open a microphone
+    if (channel.isStage) {
+      const me = client.user?.id ?? "";
+      view.setStageGate(() => isStageSpeaker(channel, me));
+      void fetchStage(client, channel).then(
+        (state) => stageOf(channel.id).set(state),
+        () => undefined,
+      );
+      onCleanup(() => view.setStageGate(undefined));
+    }
 
     // soundboard: a sound someone played here plays on this device
     const server = channel.server;
     if (server) {
-      const onSound = (channelId: string, soundId: string) => {
+      const sounds = soundboardOf(client, server);
+      const stopPlayed = onSoundPlayed((channelId, soundId) => {
         if (channelId !== channel.id) return;
-        if (settings.soundboardMuted || deafened()) return;
+        if (soundboardChoices().muted || deafened()) return;
         const play = () => {
-          const sound = server.soundboard.get(soundId);
+          const sound = sounds.sounds.get(soundId);
           if (!sound) return;
           void soundboard()
             .play(
               sound._id,
               soundUrl(mediaUrl, sound._id),
-              soundGain(sound.volume, settings.soundboardVolume),
+              soundGain(sound.volume, soundboardChoices().volume),
             )
             .catch(() => undefined);
         };
-        if (server.soundboard.has(soundId)) play();
-        else void fetchSoundboard(client, server).then(play, () => undefined);
-      };
-      client.on("soundboardPlay", onSound);
-      onCleanup(() => client.off("soundboardPlay", onSound));
+        if (sounds.sounds.has(soundId)) play();
+        else void sounds.load().then(play, () => undefined);
+      });
+      const stopRemoved = onSoundRemoved((id) => player?.forget(id));
+      onCleanup(() => {
+        stopPlayed();
+        stopRemoved();
+      });
     }
     // deafening or muting the soundboard stops what plays, and so does leaving
     createEffect(() => {
-      if (deafened() || settings.soundboardMuted) player?.stopAll();
+      if (deafened() || soundboardChoices().muted) player?.stopAll();
     });
     onCleanup(() => player?.stopAll());
 
@@ -89,18 +105,10 @@ export function attachVoiceExtras(
         TrackSource.ScreenShare,
       )?.track?.mediaStreamTrack;
       if (!track) return;
-      let stop: (() => void) | undefined;
-      let cancelled = false;
-      void import("./streamPreview").then(({ startPreviewCapture }) => {
-        if (cancelled) return;
-        stop = startPreviewCapture(track, (image) =>
-          sendStreamPreview(client, channel, image),
-        );
-      });
-      onCleanup(() => {
-        cancelled = true;
-        stop?.();
-      });
+      const stop = startPreviewCapture(track, (image) =>
+        sendStreamPreview(client, channel, image),
+      );
+      onCleanup(stop);
     });
 
     return dispose;

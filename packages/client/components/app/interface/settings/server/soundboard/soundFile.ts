@@ -57,3 +57,11 @@ export function nameFromFile(fileName: string) {
     .trim()
     .slice(0, 32);
 }
+
+const ONE_EMOJI =
+  /^\p{Extended_Pictographic}(️|\p{Emoji_Modifier}|‍\p{Extended_Pictographic}️?)*$/u;
+
+/** Whether a text is one emoji (with its skin tone or joined parts) */
+export function isOneEmoji(text: string) {
+  return ONE_EMOJI.test(text);
+}

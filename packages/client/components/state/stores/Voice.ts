@@ -95,10 +95,6 @@ export interface TypeVoice {
    */
   highQualityAudio: boolean;
 
-  /** Soundboard sounds others play: volume 0-1, or not at all */
-  soundboardVolume: number;
-  soundboardMuted: boolean;
-
   userVolumes: Record<string, number>;
   userMutes: Record<string, boolean>;
 
@@ -147,8 +143,6 @@ export class Voice extends AbstractStore<"voice", TypeVoice> {
       inputSensitivityAuto: true,
       inputThreshold: DEFAULT_THRESHOLD_DB,
       highQualityAudio: false,
-      soundboardVolume: 1,
-      soundboardMuted: false,
       userVolumes: {},
       userMutes: {},
       screenShareVolumes: {},
@@ -260,17 +254,6 @@ export class Voice extends AbstractStore<"voice", TypeVoice> {
 
     if (typeof input.highQualityAudio === "boolean") {
       data.highQualityAudio = input.highQualityAudio;
-    }
-
-    if (
-      typeof input.soundboardVolume === "number" &&
-      Number.isFinite(input.soundboardVolume)
-    ) {
-      data.soundboardVolume = Math.min(1, Math.max(0, input.soundboardVolume));
-    }
-
-    if (typeof input.soundboardMuted === "boolean") {
-      data.soundboardMuted = input.soundboardMuted;
     }
 
     if (typeof input.userVolumes === "object") {
@@ -655,24 +638,6 @@ export class Voice extends AbstractStore<"voice", TypeVoice> {
    */
   get highQualityAudio(): boolean {
     return this.get().highQualityAudio ?? false;
-  }
-
-  /** Volume of soundboard sounds (0-1) */
-  set soundboardVolume(value: number) {
-    this.set("soundboardVolume", Math.min(1, Math.max(0, value)));
-  }
-
-  get soundboardVolume(): number {
-    return this.get().soundboardVolume ?? 1;
-  }
-
-  /** Whether soundboard sounds others play stay silent */
-  set soundboardMuted(value: boolean) {
-    this.set("soundboardMuted", value);
-  }
-
-  get soundboardMuted(): boolean {
-    return this.get().soundboardMuted ?? false;
   }
 
   /**

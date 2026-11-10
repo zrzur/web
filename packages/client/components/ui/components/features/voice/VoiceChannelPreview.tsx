@@ -1,12 +1,4 @@
-import {
-  For,
-  Show,
-  Suspense,
-  createEffect,
-  createSignal,
-  lazy,
-  splitProps,
-} from "solid-js";
+import { For, Show, Suspense, createEffect, lazy, splitProps } from "solid-js";
 
 import { Channel, VoiceParticipant } from "@zrzur/sdk/solid";
 import { cva } from "styled-system/css";
@@ -49,9 +41,6 @@ export function VoiceChannelPreview(props: { channel: Channel }) {
 
 /** Who is in the call per LiveKit, loaded with it (the first call) */
 const VariantLive = lazy(() => import("./LiveVoiceChannelPreview"));
-
-/** A still of a screen share, loaded the first time someone hovers one */
-const StreamPreviewCard = lazy(() => import("./StreamPreviewCard"));
 
 /**
  * Use the API as the source of truth
@@ -130,13 +119,20 @@ export function CommonUser(props: {
   });
 
   // Before joining, hovering (or focusing) someone who shares their screen
-  // shows a still of it; nothing is fetched until then
-  const [hovered, setHovered] = createSignal(false);
-  const showPreview = () =>
-    hovered() &&
+  // shows a still of it; the card and the still load only then
+  const preview = (event: Event) =>
     iconProps.screenshare &&
     !rest.isLive &&
-    !draggedVoiceParticipant();
+    !draggedVoiceParticipant() &&
+    void import("./StreamPreviewCard").then((card) =>
+      card.show(
+        event.currentTarget as HTMLElement,
+        client(),
+        rest.channel,
+        rest.userId,
+        member()?.displayName ?? user().username,
+      ),
+    );
 
   // Moderators drag participants onto another voice channel (Discord-style).
   const canDrag = () => voiceModeration(rest.channel, member()).move;
@@ -173,10 +169,8 @@ export function CommonUser(props: {
         });
       }}
       on:dragend={() => setDraggedVoiceParticipant()}
-      onPointerEnter={() => setHovered(true)}
-      onPointerLeave={() => setHovered(false)}
-      onFocus={() => setHovered(true)}
-      onBlur={() => setHovered(false)}
+      onPointerEnter={preview}
+      onFocus={preview}
       use:floating={{
         userCard: {
           user: user().user!,
@@ -195,13 +189,6 @@ export function CommonUser(props: {
       }}
     >
       <Ripple />
-      <Show when={showPreview()}>
-        <StreamPreviewCard
-          channel={rest.channel}
-          userId={rest.userId}
-          name={member()?.displayName ?? user().username}
-        />
-      </Show>
       <Avatar size={24} src={user().avatar} fallback={user().username} />{" "}
       <PreviewUsername>
         {member()?.displayName ?? user().username}

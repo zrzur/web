@@ -4,6 +4,7 @@ import {
   PREVIEW_MAX_BYTES,
   PREVIEW_QUALITIES,
   encodeStill,
+  nextFrame,
   previewSize,
   toBase64,
 } from "./streamPreview";
@@ -46,5 +47,30 @@ describe("stream preview stills", () => {
     expect(toBase64(new Uint8Array([0xff, 0xd8, 0xff]))).toBe("/9j/");
     const big = new Uint8Array(70_000).fill(65);
     expect(atob(toBase64(big))).toBe("A".repeat(70_000));
+  });
+});
+
+describe("waiting for a frame", () => {
+  it("takes the next frame the browser paints", async () => {
+    let paint: (() => void) | undefined;
+    const video = {
+      requestVideoFrameCallback: (fn: () => void) => (paint = fn),
+    } as unknown as HTMLVideoElement;
+    let done = false;
+    const waiting = nextFrame(video, 5000).then(() => (done = true));
+    await Promise.resolve();
+    expect(done).toBe(false);
+    paint!();
+    await waiting;
+    expect(done).toBe(true);
+  });
+
+  it("does not wait for ever on a still screen", async () => {
+    const video = {
+      requestVideoFrameCallback: () => 0,
+    } as unknown as HTMLVideoElement;
+    const start = Date.now();
+    await nextFrame(video, 20);
+    expect(Date.now() - start).toBeGreaterThanOrEqual(15);
   });
 });

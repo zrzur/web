@@ -1,6 +1,11 @@
 import { describe, expect, it } from "vitest";
 
-import { SOUND_MAX_MS, checkSound, nameFromFile } from "./soundFile";
+import {
+  SOUND_MAX_MS,
+  checkSound,
+  isOneEmoji,
+  nameFromFile,
+} from "./soundFile";
 
 const file = (name: string, type: string, size = 1000) =>
   new File([new Uint8Array(size)], name, { type });
@@ -52,5 +57,20 @@ describe("picking a soundboard sound", () => {
     expect(nameFromFile("air-horn.mp3")).toBe("air horn");
     expect(nameFromFile("drum_roll_2.WAV")).toBe("drum roll 2");
     expect(nameFromFile("x".repeat(50) + ".ogg")).toHaveLength(32);
+  });
+});
+
+describe("the emoji of a sound", () => {
+  it("is one emoji, skin tones and joined emoji included", () => {
+    for (const ok of ["🎉", "👍🏽", "❤️", "👩‍💻"])
+      expect(isOneEmoji(ok), ok).toBe(true);
+    for (const bad of [
+      "🎉🎉",
+      "tada",
+      ":tada:",
+      "01ARZ3NDEKTSV4RRFFQ69G5FAV",
+      "a🎉",
+    ])
+      expect(isOneEmoji(bad), bad).toBe(false);
   });
 });
