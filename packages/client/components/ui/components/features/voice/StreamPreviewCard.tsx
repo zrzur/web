@@ -61,7 +61,7 @@ export function show(
   channel: Channel,
   userId: string,
   name: string,
-) {
+): (() => void) | undefined {
   if (row.querySelector("[data-stream-preview]")) return;
   const holder = document.createElement("div");
   row.append(holder);
@@ -76,7 +76,10 @@ export function show(
     ),
     holder,
   );
+  let hidden = false;
   const hide = () => {
+    if (hidden) return;
+    hidden = true;
     dispose();
     holder.remove();
     row.removeEventListener("pointerleave", hide);
@@ -84,6 +87,7 @@ export function show(
   };
   row.addEventListener("pointerleave", hide);
   row.addEventListener("focusout", hide);
+  return hide;
 }
 
 const Card = styled("div", {

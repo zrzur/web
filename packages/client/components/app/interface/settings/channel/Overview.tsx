@@ -3,8 +3,8 @@ import { Match, Show, Switch } from "solid-js";
 
 import { Trans, useLingui } from "@lingui/solid/macro";
 
-import { matureAccess } from "@revolt/client/age";
 import { useClient } from "@revolt/client";
+import { matureAccess } from "@revolt/client/age";
 import { useDurationFormat } from "@revolt/i18n/durations";
 import { useInstance } from "@revolt/instance";
 import { useModals } from "@revolt/modal";
@@ -26,7 +26,7 @@ import { Icon } from "@revolt/ui/icons/Icon";
 import { styled } from "styled-system/jsx";
 
 import { cropProcess } from "@revolt/modal/modals/CropProcess";
-import { parseUserLimit } from "@revolt/rtc/moderation";
+import { parseUserLimit, userLimitChange } from "@revolt/rtc/moderation";
 import { ChannelSettingsProps } from "../ChannelSettings";
 import { UserLimitSlider } from "./UserLimitSlider";
 
@@ -109,9 +109,9 @@ export default function ChannelOverview(props: ChannelSettingsProps) {
       changes.announcement = editGroup.controls.announcement.value;
     }
     if (props.channel.isVoice && editGroup.controls.userLimit.isDirty) {
-      changes.voice = {
-        max_users: parseUserLimit(editGroup.controls.userLimit.value),
-      };
+      changes.voice = userLimitChange(
+        parseUserLimit(editGroup.controls.userLimit.value),
+      );
     }
 
     await props.channel.edit(changes);

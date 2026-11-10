@@ -7,7 +7,7 @@ import { styled } from "styled-system/jsx";
 
 import { useDurationFormat } from "@revolt/i18n/durations";
 import { useModals } from "@revolt/modal";
-import { MAX_VOICE_USER_LIMIT } from "@revolt/rtc/moderation";
+import { MAX_VOICE_USER_LIMIT, userLimitChange } from "@revolt/rtc/moderation";
 import {
   Button,
   Column,
@@ -327,10 +327,9 @@ export function ChannelsSettings(props: { server: Server; voice?: boolean }) {
                                 value={String(channel.voice?.maxUsers ?? 0)}
                                 onChange={(e) =>
                                   edit(channel, {
-                                    voice: {
-                                      max_users:
-                                        Number(e.currentTarget.value) || null,
-                                    },
+                                    voice: userLimitChange(
+                                      Number(e.currentTarget.value),
+                                    ),
                                   } as Parameters<Channel["edit"]>[0])
                                 }
                               >
