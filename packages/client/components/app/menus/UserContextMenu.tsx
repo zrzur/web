@@ -291,7 +291,9 @@ export function UserContextMenu(props: {
       props.member &&
       (props.member?.server?.owner?.self ||
         (props.member?.server?.havePermission("AssignRoles") &&
-          props.member.inferiorTo(props.member.server.member!)))
+          // the API lets you change your own roles too
+          (props.user.self ||
+            props.member.inferiorTo(props.member.server.member!))))
     );
   }
 

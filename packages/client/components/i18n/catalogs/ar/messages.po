@@ -1859,6 +1859,14 @@ msgstr "مسؤول"
 #~ msgid "Admin Panel"
 #~ msgstr "لوحة المسؤول"
 
+#: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
+msgid "Administrator"
+msgstr "مسؤول"
+
+#: components/app/interface/settings/channel/permissions/ChannelVisibility.tsx
+msgid "Administrator: sees every channel"
+msgstr "مسؤول: يرى كل القنوات"
+
 #: components/app/interface/settings/UserSettings.tsx
 msgid "Advanced"
 msgstr "متقدم"
@@ -2085,6 +2093,14 @@ msgstr "السماح لـ{0} أو رفضه"
 #: components/app/interface/settings/shared/Discoverable.tsx
 #~ msgid "Allow others to join your server from Discover"
 #~ msgstr "اسمح للآخرين بالانضمام إلى سيرفرك من «اكتشف»"
+
+#: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
+msgid "Allow View channel"
+msgstr "السماح بعرض القناة"
+
+#: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
+msgid "Allow: this role also sees private channels, unless a channel denies it. Default: only the channels everyone sees."
+msgstr "سماح: يرى هذا الدور القنوات الخاصة أيضًا، ما لم تمنعه قناة. افتراضي: القنوات التي يراها الجميع فقط."
 
 #: components/app/interface/settings/server/AutoModSettings.tsx
 msgid "Allowed domains (optional)"
@@ -3554,6 +3570,10 @@ msgstr "الكاميرا غير متاحة"
 msgid "Cameroon"
 msgstr "الكاميرون"
 
+#: components/app/interface/settings/channel/permissions/ChannelVisibility.tsx
+msgid "Can see this channel"
+msgstr "يرى هذه القناة"
+
 #: src/interface/OAuth.tsx
 msgid "Can't continue"
 msgstr "لا يمكن المتابعة"
@@ -3569,6 +3589,10 @@ msgstr "لا يمكن الوصول إلى زرزور. تحقّق من اتصال
 #: components/app/interface/settings/user/plugins/common.tsx
 msgid "Can't run"
 msgstr "لا يمكن تشغيلها"
+
+#: components/app/interface/settings/channel/permissions/ChannelVisibility.tsx
+msgid "Can't see this channel"
+msgstr "لا يرى هذه القناة"
 
 #: components/ui/components/features/profiles/plateNames.ts
 msgid "Canada"
@@ -7415,6 +7439,10 @@ msgstr "راجع زرزور كل إضافة هنا. تحقّق مما تطلبه
 msgid "Every post needs a tag"
 msgstr "كل منشور يحتاج وسمًا"
 
+#: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
+msgid "Every right in every channel, private ones too, whatever their settings say. Only an administrator or the owner can give it."
+msgstr "كل الحقوق في كل القنوات، والخاصة منها أيضًا، مهما كانت إعداداتها. لا يمنحه إلا مسؤول أو المالك."
+
 #: components/modal/modals/billingErrors.ts
 msgid "Every spot in the top row is taken. Try again when one opens."
 msgstr "كل الأماكن في الصف الأول محجوزة. حاول مجدداً عندما يتوفر مكان."
@@ -7449,6 +7477,10 @@ msgstr "يستطيع الجميع النشر باسم آخر"
 #: components/app/interface/settings/ServerSettings.tsx
 msgid "Everyone in the server"
 msgstr "كل من في السيرفر"
+
+#: components/app/interface/settings/channel/permissions/ChannelVisibility.tsx
+msgid "Everyone in the server can see it."
+msgstr "يراها كل من في السيرفر."
 
 #: components/app/interface/settings/ServerSettings.tsx
 msgid "Everyone in the server, and its invites."
@@ -8971,9 +9003,9 @@ msgstr "أخفاها صاحبها"
 #~ msgid "Hidden. Copy it straight into your bot."
 #~ msgstr "مخفي. انسخه مباشرة إلى بوتك."
 
-#: components/app/interface/settings/user/badges/MyBadges.tsx
-#~ msgid "Hide"
-#~ msgstr "إخفاء"
+#: components/app/interface/settings/channel/permissions/ChannelVisibility.tsx
+msgid "Hide"
+msgstr "إخفاء"
 
 #: components/app/interface/settings/user/plugins/ReviewTab.tsx
 msgid "Hide code"
@@ -8994,6 +9026,11 @@ msgstr "إخفاء كلمة المرور"
 #: src/interface/designs/Dock.tsx
 msgid "Hide preview"
 msgstr "إخفاء المعاينة"
+
+#. placeholder {0}: role.name
+#: components/app/interface/settings/channel/permissions/ChannelVisibility.tsx
+msgid "Hide this channel from {0}"
+msgstr "إخفاء هذه القناة عن {0}"
 
 #: components/app/interface/safety/labels.tsx
 #: components/app/interface/settings/server/ServerEmergency.tsx
@@ -9738,6 +9775,10 @@ msgstr "تعطّلت."
 msgid "It didn't work"
 msgstr "لم تنجح العملية"
 
+#: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
+msgid "It doesn't see private channels yet"
+msgstr "لا يرى القنوات الخاصة بعد"
+
 #: components/app/interface/settings/user/profile/CreatorStudio.tsx
 msgid "It has a name of at least 2 letters"
 msgstr "له اسم من حرفين على الأقل"
@@ -9809,6 +9850,10 @@ msgstr "إيطاليا"
 #: components/app/interface/settings/user/plugins/text.ts
 msgid "Its code didn't match the reviewed version, so it was blocked."
 msgstr "لم يطابق كودها النسخة التي تمت مراجعتها، فحُظرت."
+
+#: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
+msgid "Its members see every channel and have every right, except what only the owner can do."
+msgstr "يرى أعضاؤه كل القنوات ولهم كل الحقوق، إلا ما يقتصر على المالك."
 
 #: components/app/interface/settings/server/LobbySettings.tsx
 msgid "Its newest message is the latest news. Empty: your first announcement channel."
@@ -10329,6 +10374,15 @@ msgstr "الأسد"
 #: components/ui/components/features/profiles/plateNames.ts
 msgid "Lesotho"
 msgstr "ليسوتو"
+
+#. placeholder {0}: role.name
+#: components/app/interface/settings/channel/permissions/ChannelVisibility.tsx
+msgid "Let {0} see this channel"
+msgstr "السماح لـ {0} برؤية هذه القناة"
+
+#: components/app/interface/settings/channel/permissions/ChannelVisibility.tsx
+msgid "Let in"
+msgstr "سماح"
 
 #: src/interface/OAuth.tsx
 msgid "Let its commands be used in the server"
@@ -13721,6 +13775,10 @@ msgstr "المالك وحده يستطيع فعل ذلك."
 msgid "Only the owner of the server can change how it appears in Discover."
 msgstr "وحده مالك السيرفر يستطيع تغيير ظهوره في «اكتشف»."
 
+#: components/app/interface/settings/channel/permissions/ChannelVisibility.tsx
+msgid "Only the roles you let in below can see it."
+msgstr "لا يراها إلا الأدوار التي تسمح لها أدناه."
+
 #: components/app/interface/settings/user/Advanced.tsx
 #~ msgid "Only useful for Zrzur staff."
 #~ msgstr "مفيد لفريق زرزور فقط."
@@ -15001,6 +15059,7 @@ msgstr "خاص"
 msgid "Private application"
 msgstr "تطبيق خاص"
 
+#: components/app/interface/settings/channel/permissions/ChannelVisibility.tsx
 #: components/markdown/plugins/anchors.tsx
 #: components/modal/modals/CreateChannel.tsx
 msgid "Private channel"
@@ -20041,6 +20100,10 @@ msgstr "لم يؤكد السيرفر التغيير الصوتي. تحقق من 
 msgid "The server is already on discover, the user must contact support to have it removed."
 msgstr "السيرفر موجود في «اكتشف» بالفعل، ويجب على صاحبه التواصل مع الدعم لإزالته."
 
+#: components/app/interface/settings/channel/permissions/ChannelVisibility.tsx
+msgid "The server owner sees every channel."
+msgstr "يرى مالك السيرفر كل القنوات."
+
 #: components/app/interface/settings/ServerSettings.tsx
 msgid "The server's level and its perks."
 msgstr "مستوى السيرفر ومزاياه."
@@ -20686,6 +20749,10 @@ msgstr "أُغلق هذا الشراء دون دفع. لم يُخصم أي مب�
 #: components/i18n/errors.tsx
 msgid "This request is too large. Try again."
 msgstr "هذا الطلب كبير جدًا. حاول مجددًا."
+
+#: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
+msgid "This role can do everything in the server"
+msgstr "هذا الدور يستطيع فعل كل شيء في السيرفر"
 
 #: components/i18n/errors.tsx
 msgid "This role doesn't exist any more."
@@ -22301,6 +22368,10 @@ msgstr "عرض القناة"
 #~ msgid "View Channel"
 #~ msgstr "عرض القناة"
 
+#: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
+msgid "View channel is on Default. Allow it so this role sees every channel, private ones too."
+msgstr "«عرض القناة» على الافتراضي. اسمح به ليرى هذا الدور كل القنوات، والخاصة منها أيضًا."
+
 #: src/interface/OAuth.tsx
 msgid "View channels"
 msgstr "عرض القنوات"
@@ -23020,6 +23091,10 @@ msgstr "من يمكنه مراسلتك"
 #: components/app/interface/settings/user/profile/CreatorsAdmin.tsx
 msgid "Who can publish community designs"
 msgstr "من يمكنه نشر زينة المجتمع"
+
+#: components/app/interface/settings/channel/permissions/ChannelVisibility.tsx
+msgid "Who can see this channel"
+msgstr "من يرى هذه القناة"
 
 #: components/app/interface/settings/user/bots/CommandManager.tsx
 msgid "Who can use it"

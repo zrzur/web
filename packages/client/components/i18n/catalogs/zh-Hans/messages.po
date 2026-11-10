@@ -1818,6 +1818,14 @@ msgstr "管理员"
 #~ msgid "Admin Panel"
 #~ msgstr ""
 
+#: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
+msgid "Administrator"
+msgstr "管理员"
+
+#: components/app/interface/settings/channel/permissions/ChannelVisibility.tsx
+msgid "Administrator: sees every channel"
+msgstr "管理员：可查看所有频道"
+
 #: components/app/interface/settings/UserSettings.tsx
 msgid "Advanced"
 msgstr "高级"
@@ -2036,6 +2044,14 @@ msgstr "允许或拒绝"
 #: components/app/interface/settings/server/apps/RulesEditor.tsx
 msgid "Allow or deny {0}"
 msgstr "允许或拒绝：{0}"
+
+#: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
+msgid "Allow View channel"
+msgstr "允许查看频道"
+
+#: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
+msgid "Allow: this role also sees private channels, unless a channel denies it. Default: only the channels everyone sees."
+msgstr "允许：此角色也能看到私密频道，除非某个频道禁止。默认：只能看到所有人可见的频道。"
 
 #: components/app/interface/settings/server/AutoModSettings.tsx
 msgid "Allowed domains (optional)"
@@ -3456,6 +3472,10 @@ msgstr "摄像头不可用"
 msgid "Cameroon"
 msgstr "喀麦隆"
 
+#: components/app/interface/settings/channel/permissions/ChannelVisibility.tsx
+msgid "Can see this channel"
+msgstr "可查看此频道"
+
 #: src/interface/OAuth.tsx
 msgid "Can't continue"
 msgstr "无法继续"
@@ -3471,6 +3491,10 @@ msgstr "无法连接到 Zrzur，请检查你的网络连接。"
 #: components/app/interface/settings/user/plugins/common.tsx
 msgid "Can't run"
 msgstr "无法运行"
+
+#: components/app/interface/settings/channel/permissions/ChannelVisibility.tsx
+msgid "Can't see this channel"
+msgstr "无法查看此频道"
 
 #: components/ui/components/features/profiles/plateNames.ts
 msgid "Canada"
@@ -7110,6 +7134,10 @@ msgstr "这里的每个插件都经过 Zrzur 审核。安装前请先查看它�
 msgid "Every post needs a tag"
 msgstr "每篇帖子都需要一个标签"
 
+#: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
+msgid "Every right in every channel, private ones too, whatever their settings say. Only an administrator or the owner can give it."
+msgstr "在所有频道（包括私密频道）中拥有全部权限，无论其设置如何。只有管理员或所有者可以授予。"
+
 #: components/modal/modals/billingErrors.ts
 msgid "Every spot in the top row is taken. Try again when one opens."
 msgstr "置顶行的位置已被全部占用，有空位时请再试。"
@@ -7144,6 +7172,10 @@ msgstr "所有人都可以用其他名字发布消息"
 #: components/app/interface/settings/ServerSettings.tsx
 msgid "Everyone in the server"
 msgstr "服务器中的所有人"
+
+#: components/app/interface/settings/channel/permissions/ChannelVisibility.tsx
+msgid "Everyone in the server can see it."
+msgstr "服务器中的所有人都能看到它。"
 
 #: components/app/interface/settings/ServerSettings.tsx
 msgid "Everyone in the server, and its invites."
@@ -8614,9 +8646,9 @@ msgstr "已被所有者隐藏"
 #~ msgid "Hidden. Copy it straight into your bot."
 #~ msgstr ""
 
-#: components/app/interface/settings/user/badges/MyBadges.tsx
-#~ msgid "Hide"
-#~ msgstr ""
+#: components/app/interface/settings/channel/permissions/ChannelVisibility.tsx
+msgid "Hide"
+msgstr "隐藏"
 
 #: components/app/interface/settings/user/plugins/ReviewTab.tsx
 msgid "Hide code"
@@ -8637,6 +8669,11 @@ msgstr "隐藏密码"
 #: src/interface/designs/Dock.tsx
 msgid "Hide preview"
 msgstr "隐藏预览"
+
+#. placeholder {0}: role.name
+#: components/app/interface/settings/channel/permissions/ChannelVisibility.tsx
+msgid "Hide this channel from {0}"
+msgstr "对 {0} 隐藏此频道"
 
 #: components/app/interface/safety/labels.tsx
 #: components/app/interface/settings/server/ServerEmergency.tsx
@@ -9318,6 +9355,10 @@ msgstr "它崩溃了。"
 msgid "It didn't work"
 msgstr "没有成功"
 
+#: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
+msgid "It doesn't see private channels yet"
+msgstr "尚不能查看私密频道"
+
 #: components/app/interface/settings/user/profile/CreatorStudio.tsx
 msgid "It has a name of at least 2 letters"
 msgstr "名称至少有 2 个字母"
@@ -9389,6 +9430,10 @@ msgstr "意大利"
 #: components/app/interface/settings/user/plugins/text.ts
 msgid "Its code didn't match the reviewed version, so it was blocked."
 msgstr "它的代码与已审核的版本不一致，因此被阻止。"
+
+#: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
+msgid "Its members see every channel and have every right, except what only the owner can do."
+msgstr "其成员可以查看所有频道并拥有全部权限，仅所有者可执行的操作除外。"
 
 #: components/app/interface/settings/server/LobbySettings.tsx
 msgid "Its newest message is the latest news. Empty: your first announcement channel."
@@ -9885,6 +9930,15 @@ msgstr "狮子座"
 #: components/ui/components/features/profiles/plateNames.ts
 msgid "Lesotho"
 msgstr "莱索托"
+
+#. placeholder {0}: role.name
+#: components/app/interface/settings/channel/permissions/ChannelVisibility.tsx
+msgid "Let {0} see this channel"
+msgstr "允许 {0} 查看此频道"
+
+#: components/app/interface/settings/channel/permissions/ChannelVisibility.tsx
+msgid "Let in"
+msgstr "允许"
 
 #: src/interface/OAuth.tsx
 msgid "Let its commands be used in the server"
@@ -13121,6 +13175,10 @@ msgstr "只有所有者可以这样做。"
 msgid "Only the owner of the server can change how it appears in Discover."
 msgstr "只有服务器所有者才能更改它在“发现”中的显示方式。"
 
+#: components/app/interface/settings/channel/permissions/ChannelVisibility.tsx
+msgid "Only the roles you let in below can see it."
+msgstr "只有你在下方允许的角色才能看到它。"
+
 #: components/i18n/errors.tsx
 msgid "Only verified creators and Zrzur staff can do this."
 msgstr "只有已验证的创作者和 Zrzur 工作人员可以这样做。"
@@ -14319,6 +14377,7 @@ msgstr "私密"
 msgid "Private application"
 msgstr "私有应用"
 
+#: components/app/interface/settings/channel/permissions/ChannelVisibility.tsx
 #: components/markdown/plugins/anchors.tsx
 #: components/modal/modals/CreateChannel.tsx
 msgid "Private channel"
@@ -19161,6 +19220,10 @@ msgstr "服务器尚未确认此语音更改。重试前请检查参与者状态
 msgid "The server is already on discover, the user must contact support to have it removed."
 msgstr "该服务器已在发现中，用户须联系支持团队才能将其移除。"
 
+#: components/app/interface/settings/channel/permissions/ChannelVisibility.tsx
+msgid "The server owner sees every channel."
+msgstr "服务器所有者可以查看所有频道。"
+
 #: components/app/interface/settings/ServerSettings.tsx
 msgid "The server's level and its perks."
 msgstr "服务器的等级及其特权。"
@@ -19769,6 +19832,10 @@ msgstr "此次购买未付款即被关闭。未扣款。"
 #: components/i18n/errors.tsx
 msgid "This request is too large. Try again."
 msgstr "此请求太大。请重试。"
+
+#: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
+msgid "This role can do everything in the server"
+msgstr "此角色可以在服务器中执行所有操作"
 
 #: components/i18n/errors.tsx
 msgid "This role doesn't exist any more."
@@ -21291,6 +21358,10 @@ msgstr "查看频道"
 #~ msgid "View Channel"
 #~ msgstr "查看频道"
 
+#: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
+msgid "View channel is on Default. Allow it so this role sees every channel, private ones too."
+msgstr "“查看频道”为默认。允许它，此角色即可查看所有频道，包括私密频道。"
+
 #: src/interface/OAuth.tsx
 msgid "View channels"
 msgstr "查看频道"
@@ -21954,6 +22025,10 @@ msgstr "谁可以给你发消息"
 #: components/app/interface/settings/user/profile/CreatorsAdmin.tsx
 msgid "Who can publish community designs"
 msgstr "谁可以发布社区设计"
+
+#: components/app/interface/settings/channel/permissions/ChannelVisibility.tsx
+msgid "Who can see this channel"
+msgstr "谁可以查看此频道"
 
 #: components/app/interface/settings/user/bots/CommandManager.tsx
 msgid "Who can use it"

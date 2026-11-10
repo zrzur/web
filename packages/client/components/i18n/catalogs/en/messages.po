@@ -1859,6 +1859,14 @@ msgstr "Admin"
 #~ msgid "Admin Panel"
 #~ msgstr "Admin Panel"
 
+#: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
+msgid "Administrator"
+msgstr "Administrator"
+
+#: components/app/interface/settings/channel/permissions/ChannelVisibility.tsx
+msgid "Administrator: sees every channel"
+msgstr "Administrator: sees every channel"
+
 #: components/app/interface/settings/UserSettings.tsx
 msgid "Advanced"
 msgstr "Advanced"
@@ -2085,6 +2093,14 @@ msgstr "Allow or deny {0}"
 #: components/app/interface/settings/shared/Discoverable.tsx
 #~ msgid "Allow others to join your server from Discover"
 #~ msgstr "Allow others to join your server from Discover"
+
+#: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
+msgid "Allow View channel"
+msgstr "Allow View channel"
+
+#: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
+msgid "Allow: this role also sees private channels, unless a channel denies it. Default: only the channels everyone sees."
+msgstr "Allow: this role also sees private channels, unless a channel denies it. Default: only the channels everyone sees."
 
 #: components/app/interface/settings/server/AutoModSettings.tsx
 msgid "Allowed domains (optional)"
@@ -3554,6 +3570,10 @@ msgstr "Camera unavailable"
 msgid "Cameroon"
 msgstr "Cameroon"
 
+#: components/app/interface/settings/channel/permissions/ChannelVisibility.tsx
+msgid "Can see this channel"
+msgstr "Can see this channel"
+
 #: src/interface/OAuth.tsx
 msgid "Can't continue"
 msgstr "Can't continue"
@@ -3569,6 +3589,10 @@ msgstr "Can't reach Zrzur. Check your connection."
 #: components/app/interface/settings/user/plugins/common.tsx
 msgid "Can't run"
 msgstr "Can't run"
+
+#: components/app/interface/settings/channel/permissions/ChannelVisibility.tsx
+msgid "Can't see this channel"
+msgstr "Can't see this channel"
 
 #: components/ui/components/features/profiles/plateNames.ts
 msgid "Canada"
@@ -7416,6 +7440,10 @@ msgstr "Every plugin here was reviewed by Zrzur. Check what each one asks for be
 msgid "Every post needs a tag"
 msgstr "Every post needs a tag"
 
+#: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
+msgid "Every right in every channel, private ones too, whatever their settings say. Only an administrator or the owner can give it."
+msgstr "Every right in every channel, private ones too, whatever their settings say. Only an administrator or the owner can give it."
+
 #: components/modal/modals/billingErrors.ts
 msgid "Every spot in the top row is taken. Try again when one opens."
 msgstr "Every spot in the top row is taken. Try again when one opens."
@@ -7450,6 +7478,10 @@ msgstr "Everyone can post under another name"
 #: components/app/interface/settings/ServerSettings.tsx
 msgid "Everyone in the server"
 msgstr "Everyone in the server"
+
+#: components/app/interface/settings/channel/permissions/ChannelVisibility.tsx
+msgid "Everyone in the server can see it."
+msgstr "Everyone in the server can see it."
 
 #: components/app/interface/settings/ServerSettings.tsx
 msgid "Everyone in the server, and its invites."
@@ -8974,9 +9006,9 @@ msgstr "Hidden by owner"
 #~ msgid "Hidden. Copy it straight into your bot."
 #~ msgstr "Hidden. Copy it straight into your bot."
 
-#: components/app/interface/settings/user/badges/MyBadges.tsx
-#~ msgid "Hide"
-#~ msgstr "Hide"
+#: components/app/interface/settings/channel/permissions/ChannelVisibility.tsx
+msgid "Hide"
+msgstr "Hide"
 
 #: components/app/interface/settings/user/plugins/ReviewTab.tsx
 msgid "Hide code"
@@ -8997,6 +9029,11 @@ msgstr "Hide password"
 #: src/interface/designs/Dock.tsx
 msgid "Hide preview"
 msgstr "Hide preview"
+
+#. placeholder {0}: role.name
+#: components/app/interface/settings/channel/permissions/ChannelVisibility.tsx
+msgid "Hide this channel from {0}"
+msgstr "Hide this channel from {0}"
 
 #: components/app/interface/safety/labels.tsx
 #: components/app/interface/settings/server/ServerEmergency.tsx
@@ -9741,6 +9778,10 @@ msgstr "It crashed."
 msgid "It didn't work"
 msgstr "It didn't work"
 
+#: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
+msgid "It doesn't see private channels yet"
+msgstr "It doesn't see private channels yet"
+
 #: components/app/interface/settings/user/profile/CreatorStudio.tsx
 msgid "It has a name of at least 2 letters"
 msgstr "It has a name of at least 2 letters"
@@ -9812,6 +9853,10 @@ msgstr "Italy"
 #: components/app/interface/settings/user/plugins/text.ts
 msgid "Its code didn't match the reviewed version, so it was blocked."
 msgstr "Its code didn't match the reviewed version, so it was blocked."
+
+#: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
+msgid "Its members see every channel and have every right, except what only the owner can do."
+msgstr "Its members see every channel and have every right, except what only the owner can do."
 
 #: components/app/interface/settings/server/LobbySettings.tsx
 msgid "Its newest message is the latest news. Empty: your first announcement channel."
@@ -10332,6 +10377,15 @@ msgstr "Leo"
 #: components/ui/components/features/profiles/plateNames.ts
 msgid "Lesotho"
 msgstr "Lesotho"
+
+#. placeholder {0}: role.name
+#: components/app/interface/settings/channel/permissions/ChannelVisibility.tsx
+msgid "Let {0} see this channel"
+msgstr "Let {0} see this channel"
+
+#: components/app/interface/settings/channel/permissions/ChannelVisibility.tsx
+msgid "Let in"
+msgstr "Let in"
 
 #: src/interface/OAuth.tsx
 msgid "Let its commands be used in the server"
@@ -13724,6 +13778,10 @@ msgstr "Only the owner can do this."
 msgid "Only the owner of the server can change how it appears in Discover."
 msgstr "Only the owner of the server can change how it appears in Discover."
 
+#: components/app/interface/settings/channel/permissions/ChannelVisibility.tsx
+msgid "Only the roles you let in below can see it."
+msgstr "Only the roles you let in below can see it."
+
 #: components/app/interface/settings/user/Advanced.tsx
 #~ msgid "Only useful for Zrzur staff."
 #~ msgstr "Only useful for Zrzur staff."
@@ -15004,6 +15062,7 @@ msgstr "Private"
 msgid "Private application"
 msgstr "Private application"
 
+#: components/app/interface/settings/channel/permissions/ChannelVisibility.tsx
 #: components/markdown/plugins/anchors.tsx
 #: components/modal/modals/CreateChannel.tsx
 msgid "Private channel"
@@ -20044,6 +20103,10 @@ msgstr "The server has not confirmed the voice change. Check the participant sta
 msgid "The server is already on discover, the user must contact support to have it removed."
 msgstr "The server is already on discover, the user must contact support to have it removed."
 
+#: components/app/interface/settings/channel/permissions/ChannelVisibility.tsx
+msgid "The server owner sees every channel."
+msgstr "The server owner sees every channel."
+
 #: components/app/interface/settings/ServerSettings.tsx
 msgid "The server's level and its perks."
 msgstr "The server's level and its perks."
@@ -20689,6 +20752,10 @@ msgstr "This purchase was closed without payment. Nothing was charged."
 #: components/i18n/errors.tsx
 msgid "This request is too large. Try again."
 msgstr "This request is too large. Try again."
+
+#: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
+msgid "This role can do everything in the server"
+msgstr "This role can do everything in the server"
 
 #: components/i18n/errors.tsx
 msgid "This role doesn't exist any more."
@@ -22304,6 +22371,10 @@ msgstr "View channel"
 #~ msgid "View Channel"
 #~ msgstr "View Channel"
 
+#: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
+msgid "View channel is on Default. Allow it so this role sees every channel, private ones too."
+msgstr "View channel is on Default. Allow it so this role sees every channel, private ones too."
+
 #: src/interface/OAuth.tsx
 msgid "View channels"
 msgstr "View channels"
@@ -23023,6 +23094,10 @@ msgstr "Who can message you"
 #: components/app/interface/settings/user/profile/CreatorsAdmin.tsx
 msgid "Who can publish community designs"
 msgstr "Who can publish community designs"
+
+#: components/app/interface/settings/channel/permissions/ChannelVisibility.tsx
+msgid "Who can see this channel"
+msgstr "Who can see this channel"
 
 #: components/app/interface/settings/user/bots/CommandManager.tsx
 msgid "Who can use it"

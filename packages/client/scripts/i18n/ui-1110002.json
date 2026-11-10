@@ -1,0 +1,154 @@
+{
+  "Administrator": [
+    "مسؤول",
+    "Administrator",
+    "Administrateur",
+    "Administrador",
+    "Администратор",
+    "管理员"
+  ],
+  "Administrator: sees every channel": [
+    "مسؤول: يرى كل القنوات",
+    "Administrator: sieht alle Kanäle",
+    "Administrateur : voit tous les salons",
+    "Administrador: ve todos los canales",
+    "Администратор: видит все каналы",
+    "管理员：可查看所有频道"
+  ],
+  "Allow View channel": [
+    "السماح برؤية القناة",
+    "Kanal ansehen erlauben",
+    "Autoriser Voir le salon",
+    "Permitir Ver canal",
+    "Разрешить «Просмотр канала»",
+    "允许查看频道"
+  ],
+  "Allow: this role also sees private channels, unless a channel denies it. Default: only the channels everyone sees.": [
+    "السماح: يرى هذا الدور القنوات الخاصة أيضًا، ما لم تمنعه قناة. الافتراضي: القنوات التي يراها الجميع فقط.",
+    "Erlauben: Diese Rolle sieht auch private Kanäle, außer ein Kanal verbietet es ihr. Standard: nur die Kanäle, die alle sehen.",
+    "Autoriser : ce rôle voit aussi les salons privés, sauf si un salon l’interdit. Par défaut : seulement les salons que tout le monde voit.",
+    "Permitir: este rol también ve los canales privados, salvo que un canal lo impida. Predeterminado: solo los canales que ve todo el mundo.",
+    "Разрешить: эта роль видит и закрытые каналы, если канал это не запрещает. По умолчанию: только каналы, которые видят все.",
+    "允许：此角色也能看到私密频道，除非某个频道禁止。默认：只能看到所有人可见的频道。"
+  ],
+  "Can see this channel": [
+    "يرى هذه القناة",
+    "Sieht diesen Kanal",
+    "Voit ce salon",
+    "Ve este canal",
+    "Видит этот канал",
+    "可查看此频道"
+  ],
+  "Can't see this channel": [
+    "لا يرى هذه القناة",
+    "Sieht diesen Kanal nicht",
+    "Ne voit pas ce salon",
+    "No ve este canal",
+    "Не видит этот канал",
+    "无法查看此频道"
+  ],
+  "Every right in every channel, private ones too, whatever their settings say. Only an administrator or the owner can give it.": [
+    "كل الصلاحيات في كل القنوات، والخاصة منها أيضًا، أيًّا كانت إعداداتها. لا يمنحها إلا مسؤول أو المالك.",
+    "Alle Rechte in allen Kanälen, auch in privaten, egal was deren Einstellungen sagen. Nur ein Administrator oder der Besitzer kann es vergeben.",
+    "Tous les droits dans tous les salons, même privés, quels que soient leurs réglages. Seul un administrateur ou le propriétaire peut l’accorder.",
+    "Todos los permisos en todos los canales, también en los privados, digan lo que digan sus ajustes. Solo un administrador o el propietario puede darlo.",
+    "Все права во всех каналах, включая закрытые, независимо от их настроек. Выдать его может только администратор или владелец.",
+    "在所有频道（包括私密频道）中拥有全部权限，无论其设置如何。只有管理员或所有者可以授予。"
+  ],
+  "Everyone in the server can see it.": [
+    "يراها كل من في السيرفر.",
+    "Alle auf dem Server sehen ihn.",
+    "Tout le monde sur le serveur peut le voir.",
+    "Todo el mundo en el servidor puede verlo.",
+    "Его видят все на сервере.",
+    "服务器中的所有人都能看到它。"
+  ],
+  "Hide": [
+    "إخفاء",
+    "Ausblenden",
+    "Masquer",
+    "Ocultar",
+    "Скрыть",
+    "隐藏"
+  ],
+  "Hide this channel from {0}": [
+    "إخفاء هذه القناة عن {0}",
+    "Diesen Kanal vor {0} verbergen",
+    "Masquer ce salon pour {0}",
+    "Ocultar este canal a {0}",
+    "Скрыть этот канал от {0}",
+    "对 {0} 隐藏此频道"
+  ],
+  "It doesn't see private channels yet": [
+    "لا يرى القنوات الخاصة بعد",
+    "Sieht noch keine privaten Kanäle",
+    "Il ne voit pas encore les salons privés",
+    "Todavía no ve los canales privados",
+    "Пока не видит закрытые каналы",
+    "尚不能查看私密频道"
+  ],
+  "Its members see every channel and have every right, except what only the owner can do.": [
+    "يرى أعضاؤه كل القنوات ولهم كل الصلاحيات، إلا ما يقتصر على المالك.",
+    "Ihre Mitglieder sehen alle Kanäle und haben alle Rechte, außer dem, was nur der Besitzer darf.",
+    "Ses membres voient tous les salons et ont tous les droits, sauf ce que seul le propriétaire peut faire.",
+    "Sus miembros ven todos los canales y tienen todos los permisos, excepto lo que solo puede hacer el propietario.",
+    "Его участники видят все каналы и имеют все права, кроме того, что может только владелец.",
+    "其成员可以查看所有频道并拥有全部权限，仅所有者可执行的操作除外。"
+  ],
+  "Let {0} see this channel": [
+    "السماح لـ {0} برؤية هذه القناة",
+    "{0} diesen Kanal sehen lassen",
+    "Permettre à {0} de voir ce salon",
+    "Permitir que {0} vea este canal",
+    "Разрешить {0} видеть этот канал",
+    "允许 {0} 查看此频道"
+  ],
+  "Let in": [
+    "السماح",
+    "Zulassen",
+    "Autoriser",
+    "Permitir",
+    "Разрешить",
+    "允许"
+  ],
+  "Only the roles you let in below can see it.": [
+    "لا يراها إلا الأدوار التي تسمح لها أدناه.",
+    "Nur die Rollen, die du unten zulässt, sehen ihn.",
+    "Seuls les rôles que tu autorises ci-dessous peuvent le voir.",
+    "Solo pueden verlo los roles que permitas abajo.",
+    "Его видят только роли, которым вы разрешите ниже.",
+    "只有你在下方允许的角色才能看到它。"
+  ],
+  "The server owner sees every channel.": [
+    "يرى مالك السيرفر كل القنوات.",
+    "Der Serverbesitzer sieht alle Kanäle.",
+    "Le propriétaire du serveur voit tous les salons.",
+    "El propietario del servidor ve todos los canales.",
+    "Владелец сервера видит все каналы.",
+    "服务器所有者可以查看所有频道。"
+  ],
+  "This role can do everything in the server": [
+    "يستطيع هذا الدور فعل كل شيء في السيرفر",
+    "Diese Rolle kann alles auf dem Server",
+    "Ce rôle peut tout faire sur le serveur",
+    "Este rol puede hacer de todo en el servidor",
+    "Эта роль может делать на сервере всё",
+    "此角色可以在服务器中执行所有操作"
+  ],
+  "View channel is on Default. Allow it so this role sees every channel, private ones too.": [
+    "رؤية القناة على الافتراضي. اسمح بها ليرى هذا الدور كل القنوات، والخاصة منها أيضًا.",
+    "„Kanal ansehen“ steht auf Standard. Erlaube es, damit diese Rolle alle Kanäle sieht, auch private.",
+    "« Voir le salon » est sur Par défaut. Autorise-le pour que ce rôle voie tous les salons, même privés.",
+    "«Ver canal» está en Predeterminado. Permítelo para que este rol vea todos los canales, también los privados.",
+    "«Просмотр канала» стоит на «По умолчанию». Разрешите его, чтобы эта роль видела все каналы, включая закрытые.",
+    "“查看频道”为默认。允许它，此角色即可查看所有频道，包括私密频道。"
+  ],
+  "Who can see this channel": [
+    "من يرى هذه القناة",
+    "Wer diesen Kanal sieht",
+    "Qui peut voir ce salon",
+    "Quién puede ver este canal",
+    "Кто видит этот канал",
+    "谁可以查看此频道"
+  ]
+}

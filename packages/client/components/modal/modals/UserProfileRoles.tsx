@@ -1,8 +1,9 @@
-import { For, Match, Switch } from "solid-js";
+import { For, Match, Show, Switch, createSignal } from "solid-js";
 
 import { Trans } from "@lingui/solid/macro";
 import { styled } from "styled-system/jsx";
 
+import { useError } from "@revolt/i18n";
 import { Checkbox, Column, Dialog, DialogProps, Row } from "@revolt/ui";
 
 import { Modals } from "../types";
@@ -10,10 +11,40 @@ import { Modals } from "../types";
 export function UserProfileRolesModal(
   props: DialogProps & Modals & { type: "user_profile_roles" },
 ) {
+  const describeError = useError();
+  const [error, setError] = createSignal<string>();
+
+  /** The API lets you change your own roles, and those of members below you */
   const editMode = () =>
     props.member.server?.owner?.self ||
     (props.member.server?.havePermission("AssignRoles") &&
-      props.member.inferiorTo(props.member.server.member!));
+      (props.member.user?.self ||
+        props.member.inferiorTo(props.member.server.member!)));
+
+  /**
+   * As the API decides: a bot's role is never given by hand, and only roles
+   * strictly below your own highest role (the owner may give any)
+   */
+  const canToggle = (role: { rank?: number; isManaged: boolean }) =>
+    !role.isManaged &&
+    (!!props.member.server?.owner?.self ||
+      (role.rank ?? 0) > (props.member.server?.member?.ranking ?? -Infinity));
+
+  async function toggle(roleId: string) {
+    setError(undefined);
+    try {
+      await props.member.edit({
+        roles: [
+          ...props.member.roles.filter((id) => id !== roleId),
+          ...(props.member.roles.includes(roleId) ? [] : [roleId]),
+        ].filter((id) =>
+          props.member.server ? props.member.server.roles.has(id) : true,
+        ),
+      });
+    } catch (err) {
+      setError(describeError(err));
+    }
+  }
 
   return (
     <Dialog
@@ -38,8 +69,7 @@ export function UserProfileRolesModal(
                 <RoleName>{role.name}</RoleName>
                 <RoleIcon
                   style={{
-                    background:
-                      role.colour ?? "var(--md-sys-color-outline-variant)",
+                    background: role.colour ?? "var(--z-fg-muted)",
                   }}
                 />
               </Row>
@@ -49,41 +79,21 @@ export function UserProfileRolesModal(
       >
         <Match when={editMode()}>
           <Column>
+            <Show when={error()}>
+              <ErrorLine role="alert">{error()}</ErrorLine>
+            </Show>
             <For each={props.member.server?.orderedRoles}>
               {(role) => (
                 <Checkbox
                   checked={props.member.roles.includes(role.id)}
-                  disabled={
-                    // this needs a better API
-                    // not sure if this actually works
-                    !props.member.server?.owner?.self &&
-                    (role.rank ?? 0) <
-                      (props.member.server?.member?.orderedRoles.toReversed()[0]
-                        ?.rank ?? 0)
-                  }
-                  onChange={() =>
-                    props.member.edit({
-                      roles: [
-                        ...props.member.roles.filter(
-                          (roleId) => roleId !== role.id,
-                        ),
-                        ...(props.member.roles.includes(role.id)
-                          ? []
-                          : [role.id]),
-                      ].filter((roleId) =>
-                        props.member.server
-                          ? props.member.server.roles.has(roleId)
-                          : true,
-                      ),
-                    })
-                  }
+                  disabled={!canToggle(role)}
+                  onChange={() => void toggle(role.id)}
                 >
                   <Row align grow>
                     <RoleName>{role.name}</RoleName>
                     <RoleIcon
                       style={{
-                        background:
-                          role.colour ?? "var(--md-sys-color-outline-variant)",
+                        background: role.colour ?? "var(--z-fg-muted)",
                       }}
                     />
                   </Row>
@@ -96,6 +106,13 @@ export function UserProfileRolesModal(
     </Dialog>
   );
 }
+
+const ErrorLine = styled("span", {
+  base: {
+    color: "var(--z-danger)",
+    fontSize: "13px",
+  },
+});
 
 const RoleName = styled("span", {
   base: {

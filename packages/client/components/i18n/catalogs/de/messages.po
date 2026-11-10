@@ -1859,6 +1859,14 @@ msgstr "Admin"
 #~ msgid "Admin Panel"
 #~ msgstr "Verwaltungsbereich"
 
+#: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
+msgid "Administrator"
+msgstr "Administrator"
+
+#: components/app/interface/settings/channel/permissions/ChannelVisibility.tsx
+msgid "Administrator: sees every channel"
+msgstr "Administrator: sieht alle Kanäle"
+
 #: components/app/interface/settings/UserSettings.tsx
 msgid "Advanced"
 msgstr "Erweitert"
@@ -2085,6 +2093,14 @@ msgstr "{0} erlauben oder ablehnen"
 #: components/app/interface/settings/shared/Discoverable.tsx
 #~ msgid "Allow others to join your server from Discover"
 #~ msgstr "Anderen erlauben, deinem Server über Entdecken beizutreten"
+
+#: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
+msgid "Allow View channel"
+msgstr "Kanal ansehen erlauben"
+
+#: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
+msgid "Allow: this role also sees private channels, unless a channel denies it. Default: only the channels everyone sees."
+msgstr "Erlauben: Diese Rolle sieht auch private Kanäle, außer ein Kanal verbietet es ihr. Standard: nur die Kanäle, die alle sehen."
 
 #: components/app/interface/settings/server/AutoModSettings.tsx
 msgid "Allowed domains (optional)"
@@ -3554,6 +3570,10 @@ msgstr "Kamera nicht verfügbar"
 msgid "Cameroon"
 msgstr "Kamerun"
 
+#: components/app/interface/settings/channel/permissions/ChannelVisibility.tsx
+msgid "Can see this channel"
+msgstr "Sieht diesen Kanal"
+
 #: src/interface/OAuth.tsx
 msgid "Can't continue"
 msgstr "Fortfahren nicht möglich"
@@ -3569,6 +3589,10 @@ msgstr "Zrzur ist nicht erreichbar. Prüfe deine Verbindung."
 #: components/app/interface/settings/user/plugins/common.tsx
 msgid "Can't run"
 msgstr "Kann nicht ausgeführt werden"
+
+#: components/app/interface/settings/channel/permissions/ChannelVisibility.tsx
+msgid "Can't see this channel"
+msgstr "Sieht diesen Kanal nicht"
 
 #: components/ui/components/features/profiles/plateNames.ts
 msgid "Canada"
@@ -7415,6 +7439,10 @@ msgstr "Jedes Plugin hier wurde von Zrzur geprüft. Sieh dir an, was es verlangt
 msgid "Every post needs a tag"
 msgstr "Jeder Beitrag braucht einen Tag"
 
+#: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
+msgid "Every right in every channel, private ones too, whatever their settings say. Only an administrator or the owner can give it."
+msgstr "Alle Rechte in allen Kanälen, auch in privaten, egal was deren Einstellungen sagen. Nur ein Administrator oder der Besitzer kann es vergeben."
+
 #: components/modal/modals/billingErrors.ts
 msgid "Every spot in the top row is taken. Try again when one opens."
 msgstr "Alle Plätze in der obersten Reihe sind belegt. Versuch es wieder, wenn einer frei wird."
@@ -7449,6 +7477,10 @@ msgstr "Alle können unter einem anderen Namen schreiben"
 #: components/app/interface/settings/ServerSettings.tsx
 msgid "Everyone in the server"
 msgstr "Alle auf dem Server"
+
+#: components/app/interface/settings/channel/permissions/ChannelVisibility.tsx
+msgid "Everyone in the server can see it."
+msgstr "Alle auf dem Server sehen ihn."
 
 #: components/app/interface/settings/ServerSettings.tsx
 msgid "Everyone in the server, and its invites."
@@ -8971,9 +9003,9 @@ msgstr "Vom Besitzer ausgeblendet"
 #~ msgid "Hidden. Copy it straight into your bot."
 #~ msgstr "Verborgen. Kopiere es direkt in deinen Bot."
 
-#: components/app/interface/settings/user/badges/MyBadges.tsx
-#~ msgid "Hide"
-#~ msgstr "Ausblenden"
+#: components/app/interface/settings/channel/permissions/ChannelVisibility.tsx
+msgid "Hide"
+msgstr "Ausblenden"
 
 #: components/app/interface/settings/user/plugins/ReviewTab.tsx
 msgid "Hide code"
@@ -8994,6 +9026,11 @@ msgstr "Passwort verbergen"
 #: src/interface/designs/Dock.tsx
 msgid "Hide preview"
 msgstr "Vorschau ausblenden"
+
+#. placeholder {0}: role.name
+#: components/app/interface/settings/channel/permissions/ChannelVisibility.tsx
+msgid "Hide this channel from {0}"
+msgstr "Diesen Kanal vor {0} verbergen"
 
 #: components/app/interface/safety/labels.tsx
 #: components/app/interface/settings/server/ServerEmergency.tsx
@@ -9738,6 +9775,10 @@ msgstr "Es ist abgestürzt."
 msgid "It didn't work"
 msgstr "Das hat nicht geklappt"
 
+#: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
+msgid "It doesn't see private channels yet"
+msgstr "Sieht noch keine privaten Kanäle"
+
 #: components/app/interface/settings/user/profile/CreatorStudio.tsx
 msgid "It has a name of at least 2 letters"
 msgstr "Der Name hat mindestens 2 Zeichen"
@@ -9809,6 +9850,10 @@ msgstr "Italien"
 #: components/app/interface/settings/user/plugins/text.ts
 msgid "Its code didn't match the reviewed version, so it was blocked."
 msgstr "Sein Code stimmte nicht mit der geprüften Version überein, daher wurde es blockiert."
+
+#: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
+msgid "Its members see every channel and have every right, except what only the owner can do."
+msgstr "Ihre Mitglieder sehen alle Kanäle und haben alle Rechte, außer dem, was nur der Besitzer darf."
 
 #: components/app/interface/settings/server/LobbySettings.tsx
 msgid "Its newest message is the latest news. Empty: your first announcement channel."
@@ -10329,6 +10374,15 @@ msgstr "Löwe"
 #: components/ui/components/features/profiles/plateNames.ts
 msgid "Lesotho"
 msgstr "Lesotho"
+
+#. placeholder {0}: role.name
+#: components/app/interface/settings/channel/permissions/ChannelVisibility.tsx
+msgid "Let {0} see this channel"
+msgstr "{0} diesen Kanal sehen lassen"
+
+#: components/app/interface/settings/channel/permissions/ChannelVisibility.tsx
+msgid "Let in"
+msgstr "Zulassen"
 
 #: src/interface/OAuth.tsx
 msgid "Let its commands be used in the server"
@@ -13721,6 +13775,10 @@ msgstr "Nur der Eigentümer kann das."
 msgid "Only the owner of the server can change how it appears in Discover."
 msgstr "Nur der Inhaber des Servers kann ändern, wie er in Entdecken erscheint."
 
+#: components/app/interface/settings/channel/permissions/ChannelVisibility.tsx
+msgid "Only the roles you let in below can see it."
+msgstr "Nur die Rollen, die du unten zulässt, sehen ihn."
+
 #: components/app/interface/settings/user/Advanced.tsx
 #~ msgid "Only useful for Zrzur staff."
 #~ msgstr "Nur für das Zrzur-Team nützlich."
@@ -15001,6 +15059,7 @@ msgstr "Privat"
 msgid "Private application"
 msgstr "Private Anwendung"
 
+#: components/app/interface/settings/channel/permissions/ChannelVisibility.tsx
 #: components/markdown/plugins/anchors.tsx
 #: components/modal/modals/CreateChannel.tsx
 msgid "Private channel"
@@ -20041,6 +20100,10 @@ msgstr "Der Server hat die Änderung nicht bestätigt. Prüfe den Teilnehmerstat
 msgid "The server is already on discover, the user must contact support to have it removed."
 msgstr "Der Server ist bereits in „Entdecken“. Zum Entfernen muss sich die Person an den Support wenden."
 
+#: components/app/interface/settings/channel/permissions/ChannelVisibility.tsx
+msgid "The server owner sees every channel."
+msgstr "Der Serverbesitzer sieht alle Kanäle."
+
 #: components/app/interface/settings/ServerSettings.tsx
 msgid "The server's level and its perks."
 msgstr "Stufe des Servers und ihre Vorteile."
@@ -20686,6 +20749,10 @@ msgstr "Dieser Kauf wurde ohne Zahlung geschlossen. Es wurde nichts belastet."
 #: components/i18n/errors.tsx
 msgid "This request is too large. Try again."
 msgstr "Diese Anfrage ist zu groß. Versuche es erneut."
+
+#: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
+msgid "This role can do everything in the server"
+msgstr "Diese Rolle kann alles auf dem Server"
 
 #: components/i18n/errors.tsx
 msgid "This role doesn't exist any more."
@@ -22301,6 +22368,10 @@ msgstr "Kanal ansehen"
 #~ msgid "View Channel"
 #~ msgstr "Kanal ansehen"
 
+#: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
+msgid "View channel is on Default. Allow it so this role sees every channel, private ones too."
+msgstr "„Kanal ansehen“ steht auf Standard. Erlaube es, damit diese Rolle alle Kanäle sieht, auch private."
+
 #: src/interface/OAuth.tsx
 msgid "View channels"
 msgstr "Kanäle ansehen"
@@ -23020,6 +23091,10 @@ msgstr "Wer dir schreiben darf"
 #: components/app/interface/settings/user/profile/CreatorsAdmin.tsx
 msgid "Who can publish community designs"
 msgstr "Wer Community-Designs veröffentlichen darf"
+
+#: components/app/interface/settings/channel/permissions/ChannelVisibility.tsx
+msgid "Who can see this channel"
+msgstr "Wer diesen Kanal sieht"
 
 #: components/app/interface/settings/user/bots/CommandManager.tsx
 msgid "Who can use it"
