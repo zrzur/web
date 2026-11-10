@@ -6137,6 +6137,10 @@ msgid "Delete server"
 msgstr "Eliminar servidor"
 
 #: src/interface/events/EventCard.tsx
+msgid "Delete the whole series"
+msgstr "Eliminar toda la serie"
+
+#: src/interface/events/EventCard.tsx
 msgid "Delete this event and its interested list for good?"
 msgstr "¿Eliminar para siempre este evento y su lista de interesados?"
 
@@ -6148,9 +6152,17 @@ msgstr "¿Eliminar esta invitación?"
 msgid "Delete this module's data?"
 msgstr "¿Eliminar los datos de este módulo?"
 
+#: src/interface/events/EventCard.tsx
+msgid "Delete this one and every one after it for good? Nothing more of this series is scheduled."
+msgstr "¿Eliminar para siempre este y todos los siguientes? No se programará nada más de esta serie."
+
 #: components/app/interface/settings/server/AutoModSettings.tsx
 msgid "Delete this rule?"
 msgstr "¿Eliminar esta regla?"
+
+#: src/interface/events/EventCard.tsx
+msgid "Delete this time"
+msgstr "Eliminar esta vez"
 
 #: src/interface/events/EventCard.tsx
 msgid "Delete this time and its interested list for good? The next one stays scheduled."
@@ -6213,6 +6225,14 @@ msgstr "eliminó el rol {0}"
 #: components/app/interface/settings/server/audit/AuditLog.tsx
 msgid "deleted webhook {0}"
 msgstr "eliminó el webhook {0}"
+
+#: src/interface/events/EventsPage.tsx
+msgid "Deleted."
+msgstr "Eliminado."
+
+#: src/interface/events/EventsPage.tsx
+msgid "Deleted. The next one is on {date}."
+msgstr "Eliminado. El próximo es el {date}."
 
 #: components/modal/modals/DeleteEmoji.tsx
 msgid "Deleting this emoji will disallow future use. All past uses will remain."

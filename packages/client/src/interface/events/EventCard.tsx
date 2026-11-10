@@ -31,6 +31,8 @@ type Props = {
   now: number;
   /** Opened from a shared link */
   highlighted?: boolean;
+  /** After a delete: the page says what happens next for a series */
+  onDeleted?: (info: { id: string; series: boolean }) => void;
 };
 
 /**
@@ -44,7 +46,9 @@ export function EventCard(props: Props) {
   const [error, setError] = createSignal<unknown>();
   const [busy, setBusy] = createSignal(false);
   const [copied, setCopied] = createSignal<"yes" | "failed">();
-  const [confirm, setConfirm] = createSignal<"cancel" | "series" | "delete">();
+  const [confirm, setConfirm] = createSignal<
+    "cancel" | "series" | "delete" | "delete-series"
+  >();
   // a mark on its way: further presses wait (the button keeps its focus)
   const [marking, setMarking] = createSignal(false);
   const [people, setPeople] = createSignal<User[]>();
@@ -415,15 +419,28 @@ export function EventCard(props: Props) {
                       <Trans>Cancel the whole series</Trans>
                     </Button>
                   </Show>
-                  <Show when={props.server.havePermission("ManageServer")}>
+                  <Button
+                    size="sm"
+                    variant="text"
+                    onPress={() => setConfirm("delete")}
+                    data-testid="event-delete"
+                  >
+                    <Icon name="trash" size={16} />
+                    {repeating() ? (
+                      <Trans>Delete this time</Trans>
+                    ) : (
+                      <Trans context="scheduled events">Delete</Trans>
+                    )}
+                  </Button>
+                  <Show when={repeating()}>
                     <Button
                       size="sm"
                       variant="text"
-                      onPress={() => setConfirm("delete")}
-                      data-testid="event-delete"
+                      onPress={() => setConfirm("delete-series")}
+                      data-testid="event-delete-series"
                     >
                       <Icon name="trash" size={16} />
-                      <Trans context="scheduled events">Delete</Trans>
+                      <Trans>Delete the whole series</Trans>
                     </Button>
                   </Show>
                 </>
@@ -449,6 +466,12 @@ export function EventCard(props: Props) {
                         this series is scheduled.
                       </Trans>
                     </Match>
+                    <Match when={confirm() === "delete-series"}>
+                      <Trans>
+                        Delete this one and every one after it for good? Nothing
+                        more of this series is scheduled.
+                      </Trans>
+                    </Match>
                     <Match when={repeating()}>
                       <Trans>
                         Delete this time and its interested list for good? The
@@ -468,33 +491,48 @@ export function EventCard(props: Props) {
                   isDisabled={busy()}
                   onPress={() =>
                     void act(async () => {
-                      if (confirm() !== "delete")
+                      const choice = confirm();
+                      if (choice === "cancel" || choice === "series") {
                         await client().serverEvents.cancel(
                           props.server.id,
                           props.event._id,
-                          confirm() === "series",
+                          choice === "series",
                         );
-                      else
-                        await client().serverEvents.delete(
-                          props.server.id,
-                          props.event._id,
-                        );
+                        setConfirm(undefined);
+                        return;
+                      }
+                      const id = props.event._id;
+                      const series = choice === "delete-series";
+                      await client().serverEvents.delete(
+                        props.server.id,
+                        id,
+                        series,
+                      );
                       setConfirm(undefined);
+                      props.onDeleted?.({ id, series });
                     })
                   }
                   data-testid="event-confirm"
                 >
-                  {confirm() === "series" ? (
-                    <Trans>Cancel the whole series</Trans>
-                  ) : confirm() === "cancel" ? (
-                    repeating() ? (
+                  <Switch
+                    fallback={<Trans context="scheduled events">Delete</Trans>}
+                  >
+                    <Match when={confirm() === "series"}>
+                      <Trans>Cancel the whole series</Trans>
+                    </Match>
+                    <Match when={confirm() === "cancel" && repeating()}>
                       <Trans>Cancel this time</Trans>
-                    ) : (
+                    </Match>
+                    <Match when={confirm() === "cancel"}>
                       <Trans>Cancel event</Trans>
-                    )
-                  ) : (
-                    <Trans context="scheduled events">Delete</Trans>
-                  )}
+                    </Match>
+                    <Match when={confirm() === "delete-series"}>
+                      <Trans>Delete the whole series</Trans>
+                    </Match>
+                    <Match when={repeating()}>
+                      <Trans>Delete this time</Trans>
+                    </Match>
+                  </Switch>
                 </Button>
                 <Button
                   size="sm"

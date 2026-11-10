@@ -25276,3 +25276,23 @@ msgstr "إظهار الردهة"
 #: components/app/interface/settings/server/EventsLobbySwitches.tsx
 msgid "Turning one off hides its row and keeps what you made: planned events and the lobby design stay saved."
 msgstr "إيقاف أحدهما يخفي صفه ويحتفظ بما صنعته: تبقى الفعاليات المخطط لها وتصميم الردهة محفوظة."
+
+#: src/interface/events/EventCard.tsx
+msgid "Delete the whole series"
+msgstr "حذف السلسلة كلها"
+
+#: src/interface/events/EventCard.tsx
+msgid "Delete this one and every one after it for good? Nothing more of this series is scheduled."
+msgstr "أتريد حذف هذه المرة وكل ما يليها نهائيًا؟ لن يُجدول شيء آخر من هذه السلسلة."
+
+#: src/interface/events/EventCard.tsx
+msgid "Delete this time"
+msgstr "حذف هذه المرة"
+
+#: src/interface/events/EventsPage.tsx
+msgid "Deleted."
+msgstr "حُذفت."
+
+#: src/interface/events/EventsPage.tsx
+msgid "Deleted. The next one is on {date}."
+msgstr "حُذفت. المرة التالية في {date}."

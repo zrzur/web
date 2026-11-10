@@ -25276,3 +25276,23 @@ msgstr "Lobby anzeigen"
 #: components/app/interface/settings/server/EventsLobbySwitches.tsx
 msgid "Turning one off hides its row and keeps what you made: planned events and the lobby design stay saved."
 msgstr "Ausschalten blendet die Zeile aus und behält, was du erstellt hast: geplante Events und das Lobby-Design bleiben gespeichert."
+
+#: src/interface/events/EventCard.tsx
+msgid "Delete the whole series"
+msgstr "Ganze Reihe löschen"
+
+#: src/interface/events/EventCard.tsx
+msgid "Delete this one and every one after it for good? Nothing more of this series is scheduled."
+msgstr "Diesen und alle folgenden Termine endgültig löschen? Von dieser Reihe wird nichts mehr geplant."
+
+#: src/interface/events/EventCard.tsx
+msgid "Delete this time"
+msgstr "Dieses Mal löschen"
+
+#: src/interface/events/EventsPage.tsx
+msgid "Deleted."
+msgstr "Gelöscht."
+
+#: src/interface/events/EventsPage.tsx
+msgid "Deleted. The next one is on {date}."
+msgstr "Gelöscht. Der nächste Termin ist am {date}."

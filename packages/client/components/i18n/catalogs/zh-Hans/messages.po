@@ -6137,6 +6137,10 @@ msgid "Delete server"
 msgstr "删除服务器"
 
 #: src/interface/events/EventCard.tsx
+msgid "Delete the whole series"
+msgstr "删除整个系列"
+
+#: src/interface/events/EventCard.tsx
 msgid "Delete this event and its interested list for good?"
 msgstr "要永久删除这个活动及其感兴趣名单吗？"
 
@@ -6148,9 +6152,17 @@ msgstr "要删除此邀请吗？"
 msgid "Delete this module's data?"
 msgstr "要删除此模块的数据吗？"
 
+#: src/interface/events/EventCard.tsx
+msgid "Delete this one and every one after it for good? Nothing more of this series is scheduled."
+msgstr "永久删除这一次及之后的所有活动？此系列将不再安排任何活动。"
+
 #: components/app/interface/settings/server/AutoModSettings.tsx
 msgid "Delete this rule?"
 msgstr "要删除此规则吗？"
+
+#: src/interface/events/EventCard.tsx
+msgid "Delete this time"
+msgstr "删除这一次"
 
 #: src/interface/events/EventCard.tsx
 msgid "Delete this time and its interested list for good? The next one stays scheduled."
@@ -6213,6 +6225,14 @@ msgstr "删除了角色 {0}"
 #: components/app/interface/settings/server/audit/AuditLog.tsx
 msgid "deleted webhook {0}"
 msgstr "删除了 Webhook {0}"
+
+#: src/interface/events/EventsPage.tsx
+msgid "Deleted."
+msgstr "已删除。"
+
+#: src/interface/events/EventsPage.tsx
+msgid "Deleted. The next one is on {date}."
+msgstr "已删除。下一次在 {date}。"
 
 #: components/modal/modals/DeleteEmoji.tsx
 msgid "Deleting this emoji will disallow future use. All past uses will remain."

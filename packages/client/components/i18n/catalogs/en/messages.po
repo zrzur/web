@@ -25279,3 +25279,23 @@ msgstr "Show the lobby"
 #: components/app/interface/settings/server/EventsLobbySwitches.tsx
 msgid "Turning one off hides its row and keeps what you made: planned events and the lobby design stay saved."
 msgstr "Turning one off hides its row and keeps what you made: planned events and the lobby design stay saved."
+
+#: src/interface/events/EventCard.tsx
+msgid "Delete the whole series"
+msgstr "Delete the whole series"
+
+#: src/interface/events/EventCard.tsx
+msgid "Delete this one and every one after it for good? Nothing more of this series is scheduled."
+msgstr "Delete this one and every one after it for good? Nothing more of this series is scheduled."
+
+#: src/interface/events/EventCard.tsx
+msgid "Delete this time"
+msgstr "Delete this time"
+
+#: src/interface/events/EventsPage.tsx
+msgid "Deleted."
+msgstr "Deleted."
+
+#: src/interface/events/EventsPage.tsx
+msgid "Deleted. The next one is on {date}."
+msgstr "Deleted. The next one is on {date}."

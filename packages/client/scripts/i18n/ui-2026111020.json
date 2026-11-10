@@ -30,5 +30,25 @@
   "Turning one off hides its row and keeps what you made: planned events and the lobby design stay saved.": [
     "إيقاف أحدهما يخفي صفه ويحتفظ بما صنعته: تبقى الفعاليات المخطط لها وتصميم الردهة محفوظة.",
     "Ausschalten blendet die Zeile aus und behält, was du erstellt hast: geplante Events und das Lobby-Design bleiben gespeichert."
+  ],
+  "Delete this time": [
+    "حذف هذه المرة",
+    "Dieses Mal löschen"
+  ],
+  "Delete the whole series": [
+    "حذف السلسلة كلها",
+    "Ganze Reihe löschen"
+  ],
+  "Delete this one and every one after it for good? Nothing more of this series is scheduled.": [
+    "أتريد حذف هذه المرة وكل ما يليها نهائيًا؟ لن يُجدول شيء آخر من هذه السلسلة.",
+    "Diesen und alle folgenden Termine endgültig löschen? Von dieser Reihe wird nichts mehr geplant."
+  ],
+  "Deleted.": [
+    "حُذفت.",
+    "Gelöscht."
+  ],
+  "Deleted. The next one is on {date}.": [
+    "حُذفت. المرة التالية في {date}.",
+    "Gelöscht. Der nächste Termin ist am {date}."
   ]
 }
