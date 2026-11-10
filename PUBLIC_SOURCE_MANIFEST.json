@@ -4198,8 +4198,8 @@
     },
     {
       "path": "packages/client/components/modal/modals/CustomStatus.tsx",
-      "sha256": "5fe499c38538524dc228a7c579f8ba0f5fef2d1a8a7ee1e8d075bdafcd8cbe41",
-      "bytes": 8125,
+      "sha256": "04ee7557f559d757d7b03056c01fbd1b0f794178903cc471c4f36dc7f2d9ef98",
+      "bytes": 8190,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -5812,8 +5812,8 @@
     },
     {
       "path": "packages/client/components/ui/components/features/profiles/ProfileBanner.tsx",
-      "sha256": "210ad8c80341edd7bcfde42c7a947fd6a1e6624fc1f9c343c58da47b6f244db4",
-      "bytes": 6189,
+      "sha256": "3a4b1faad5812cb576329036fa4e18248140b8bee950587ba4a19e05bf18ae3e",
+      "bytes": 6280,
       "category": "product-source-or-build-manifest"
     },
     {
