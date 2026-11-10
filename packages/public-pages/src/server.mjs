@@ -5,8 +5,9 @@ import { fileURLToPath } from "node:url";
 
 import { builtInSlugs, isBuiltIn } from "./catalogue.mjs";
 import {
-  LANGUAGES,
+  COMMUNITY_LANGUAGES,
   TOPICS,
+  alternateLinks,
   humanize,
   injectHead,
   pageMeta,
@@ -17,8 +18,8 @@ import { designSvg, renderPng, serverSvg, siteSvg } from "./og.mjs";
 
 /**
  * The public sites discover.zrzur.com and designs.zrzur.com: the web app's
- * build, with each page's own head (title, description, canonical, ar /
- * en / de links, preview image) filled in on the server, so search
+ * build, with each page's own head (title, description, canonical, links
+ * to the page in the seven site languages, preview image) filled in on the server, so search
  * engines and link previews (WhatsApp, X, Telegram) see the page without
  * running JavaScript. Also /sitemap.xml, /robots.txt and the preview
  * images under /og/.
@@ -274,11 +275,23 @@ async function ogImage(path) {
   return null;
 }
 
+/** One page in the sitemap, with the same page in every display language */
+export function sitemapEntry(path) {
+  const loc = `${ORIGIN}${path}`;
+  const links = alternateLinks(loc)
+    .map(
+      (alt) =>
+        `<xhtml:link rel="alternate" hreflang="${alt.hreflang}" href="${alt.href}"/>`,
+    )
+    .join("");
+  return `<url><loc>${loc}</loc>${links}</url>`;
+}
+
 async function sitemap() {
   const urls = ["/"];
   if (SITE === "discover") {
     urls.push(...Object.keys(TOPICS).map((t) => `/${t}`));
-    urls.push(...LANGUAGES.map((l) => `/${l}`));
+    urls.push(...COMMUNITY_LANGUAGES.map((l) => `/${l}`));
     for (let offset = 0; offset < 2000; offset += 100) {
       const page =
         (await api(`/discover/servers?limit=100&offset=${offset}`).catch(
@@ -298,17 +311,7 @@ async function sitemap() {
       urls.push(...(page?.items ?? []).map((item) => `/${item._id}`));
     }
   }
-  const entry = (path) => {
-    const loc = `${ORIGIN}${path}`;
-    const links = [...LANGUAGES, "x-default"]
-      .map(
-        (hl) =>
-          `<xhtml:link rel="alternate" hreflang="${hl}" href="${hl === "x-default" ? loc : `${loc}?hl=${hl}`}"/>`,
-      )
-      .join("");
-    return `<url><loc>${loc}</loc>${links}</url>`;
-  };
-  return `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">\n${urls.map(entry).join("\n")}\n</urlset>\n`;
+  return `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">\n${urls.map(sitemapEntry).join("\n")}\n</urlset>\n`;
 }
 
 /** A file from the build, never outside it */

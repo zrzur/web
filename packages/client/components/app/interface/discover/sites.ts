@@ -1,5 +1,6 @@
 import { CONFIGURATION } from "@revolt/common";
 import { desktopScheme } from "./desktopScheme";
+import { reportPrefix } from "./siteLanguages";
 
 /**
  * Where each public Zrzur site lives, for the shared header and footer and
@@ -23,7 +24,7 @@ export function publicReportUrl(
   language?: string,
 ) {
   const query = new URLSearchParams({ kind, location });
-  const prefix = language === "ar" || language === "de" ? `/${language}` : "";
+  const prefix = reportPrefix(language);
   return `${WEBSITE_URL}${prefix}/report?${query}`;
 }
 
@@ -36,7 +37,9 @@ export function appUrl() {
     return trim((import.meta.env.VITE_DEV_APP_URL as string | undefined) ?? "");
   if (!host) return "";
   // a local test host has no certificate: plain http there only
-  const scheme = /^(localhost|127\.0\.0\.1)(:|$)/.test(host) ? "http://" : "https://";
+  const scheme = /^(localhost|127\.0\.0\.1)(:|$)/.test(host)
+    ? "http://"
+    : "https://";
   return trim(`${/^https?:\/\//.test(host) ? "" : scheme}${host}`);
 }
 
@@ -71,17 +74,9 @@ export function appLinks(path: string) {
   };
 }
 
-/** Languages a public page offers, by their own names (no flags) */
-export const SITE_LANGUAGES = [
-  { id: "ar", name: "العربية" },
-  { id: "en", name: "English" },
-  { id: "de", name: "Deutsch" },
-] as const;
-
-export type SiteLanguage = (typeof SITE_LANGUAGES)[number]["id"];
-
-/** The `?hl=` language a shared link asks for, if it is one we offer */
-export function linkLanguage(search: string): SiteLanguage | undefined {
-  const value = new URLSearchParams(search).get("hl");
-  return SITE_LANGUAGES.find((language) => language.id === value)?.id;
-}
+export {
+  type SiteLanguage,
+  linkLanguage,
+  SITE_LANGUAGES,
+  siteLanguage,
+} from "./siteLanguages";
