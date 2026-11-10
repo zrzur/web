@@ -2,7 +2,10 @@ import { Show, createResource } from "solid-js";
 
 import { Trans, useLingui } from "@lingui/solid/macro";
 import type { Channel } from "@zrzur/sdk/solid";
+import { fetchStreamPreview } from "@zrzur/sdk/solid/voiceExtras";
 import { styled } from "styled-system/jsx";
+
+import { useClient } from "@revolt/client";
 
 import { previewOf } from "./streamPreviewCache";
 
@@ -17,10 +20,13 @@ export default function StreamPreviewCard(props: {
   name: string;
 }) {
   const { t } = useLingui();
+  const client = useClient();
   const [still] = createResource(
     () => [props.channel, props.userId] as const,
     ([channel, userId]) =>
-      previewOf(channel.id, userId, () => channel.fetchStreamPreview(userId)),
+      previewOf(channel.id, userId, () =>
+        fetchStreamPreview(client(), channel, userId),
+      ),
   );
 
   return (

@@ -173,8 +173,8 @@ export function CommonUser(props: {
         });
       }}
       on:dragend={() => setDraggedVoiceParticipant()}
-      onMouseEnter={() => setHovered(true)}
-      onMouseLeave={() => setHovered(false)}
+      onPointerEnter={() => setHovered(true)}
+      onPointerLeave={() => setHovered(false)}
       onFocus={() => setHovered(true)}
       onBlur={() => setHovered(false)}
       use:floating={{

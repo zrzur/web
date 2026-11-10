@@ -2,6 +2,14 @@ import { For, Show, createMemo, createSignal } from "solid-js";
 
 import { Trans, useLingui } from "@lingui/solid/macro";
 import type { Channel } from "@zrzur/sdk/solid";
+import {
+  editStage,
+  endStage,
+  inviteToSpeak,
+  lowerHand,
+  moveToAudience,
+  raiseHand,
+} from "@zrzur/sdk/solid/voiceExtras";
 import { styled } from "styled-system/jsx";
 
 import { useClient } from "@revolt/client";
@@ -79,7 +87,7 @@ export default function StagePanel(props: { channel: Channel }) {
             onSubmit={(event) => {
               event.preventDefault();
               void act(async () => {
-                await props.channel.editStage(topic());
+                await editStage(client(), props.channel, topic());
                 setEditing(false);
               });
             }}
@@ -134,7 +142,9 @@ export default function StagePanel(props: { channel: Channel }) {
                     size="xs"
                     variant="text"
                     isDisabled={busy()}
-                    onPress={() => act(() => props.channel.moveToAudience(id))}
+                    onPress={() =>
+                      act(() => moveToAudience(client(), props.channel, id))
+                    }
                   >
                     <Trans>Move to audience</Trans>
                   </Button>
@@ -160,7 +170,9 @@ export default function StagePanel(props: { channel: Channel }) {
                 <Button
                   size="xs"
                   isDisabled={busy()}
-                  onPress={() => act(() => props.channel.inviteToSpeak(id))}
+                  onPress={() =>
+                    act(() => inviteToSpeak(client(), props.channel, id))
+                  }
                 >
                   <Trans>Invite to speak</Trans>
                 </Button>
@@ -168,7 +180,9 @@ export default function StagePanel(props: { channel: Channel }) {
                   size="xs"
                   variant="text"
                   isDisabled={busy()}
-                  onPress={() => act(() => props.channel.lowerHand(id))}
+                  onPress={() =>
+                    act(() => lowerHand(client(), props.channel, id))
+                  }
                 >
                   <Trans>Lower hand</Trans>
                 </Button>
@@ -184,7 +198,7 @@ export default function StagePanel(props: { channel: Channel }) {
             size="sm"
             data-stage-action="raise-hand"
             isDisabled={busy()}
-            onPress={() => act(() => props.channel.raiseHand())}
+            onPress={() => act(() => raiseHand(client(), props.channel))}
           >
             <Icon name="hand-waving" size={18} />
             <Trans>Raise hand</Trans>
@@ -196,7 +210,7 @@ export default function StagePanel(props: { channel: Channel }) {
             variant="tonal"
             data-stage-action="lower-hand"
             isDisabled={busy()}
-            onPress={() => act(() => props.channel.lowerHand())}
+            onPress={() => act(() => lowerHand(client(), props.channel))}
           >
             <Trans>Lower hand</Trans>
           </Button>
@@ -207,7 +221,7 @@ export default function StagePanel(props: { channel: Channel }) {
             variant="tonal"
             data-stage-action="stop-speaking"
             isDisabled={busy()}
-            onPress={() => act(() => props.channel.moveToAudience())}
+            onPress={() => act(() => moveToAudience(client(), props.channel))}
           >
             <Trans>Move to audience</Trans>
           </Button>
@@ -218,7 +232,9 @@ export default function StagePanel(props: { channel: Channel }) {
             variant="tonal"
             data-stage-action="speak"
             isDisabled={busy()}
-            onPress={() => act(() => props.channel.inviteToSpeak("@me"))}
+            onPress={() =>
+              act(() => inviteToSpeak(client(), props.channel, "@me"))
+            }
           >
             <Icon name="microphone" size={18} />
             <Trans>Speak</Trans>
@@ -249,7 +265,7 @@ export default function StagePanel(props: { channel: Channel }) {
                 isDisabled={busy()}
                 onPress={() =>
                   act(async () => {
-                    await props.channel.endStage();
+                    await endStage(client(), props.channel);
                     setConfirmEnd(false);
                   })
                 }

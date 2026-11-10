@@ -48,6 +48,25 @@ vi.mock("@revolt/i18n", () => ({
   useError: () => (err: unknown) => `plain: ${String(err)}`,
 }));
 
+// the requests go to the fake channel, which plays the server
+vi.mock("@zrzur/sdk/solid/voiceExtras", () => {
+  type Fake = Record<string, (...args: unknown[]) => Promise<unknown>>;
+  const call =
+    (name: string) =>
+    (_client: unknown, channel: Fake, ...args: unknown[]) =>
+      channel[name](...args);
+  return Object.fromEntries(
+    [
+      "editStage",
+      "endStage",
+      "inviteToSpeak",
+      "lowerHand",
+      "moveToAudience",
+      "raiseHand",
+    ].map((name) => [name, call(name)]),
+  );
+});
+
 import StagePanel from "./StagePanel";
 
 type State = { topic?: string; speakers: string[]; hands: string[] };

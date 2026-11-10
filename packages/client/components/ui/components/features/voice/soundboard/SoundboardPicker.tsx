@@ -2,8 +2,10 @@ import { For, Show, createResource, createSignal } from "solid-js";
 
 import { Trans, useLingui } from "@lingui/solid/macro";
 import type { Channel } from "@zrzur/sdk/solid";
+import { fetchSoundboard, playSound } from "@zrzur/sdk/solid/voiceExtras";
 import { styled } from "styled-system/jsx";
 
+import { useClient } from "@revolt/client";
 import { useError } from "@revolt/i18n";
 import { Button, IconButton } from "@revolt/ui/components/design";
 import { Icon } from "@revolt/ui/icons/Icon";
@@ -18,9 +20,12 @@ import { setSoundboardOpen } from "./soundboardOpen";
 export default function SoundboardPicker(props: { channel: Channel }) {
   const { t } = useLingui();
   const describeError = useError();
+  const client = useClient();
   const server = () => props.channel.server;
 
-  const [loaded] = createResource(server, (server) => server.fetchSoundboard());
+  const [loaded] = createResource(server, (server) =>
+    fetchSoundboard(client(), server),
+  );
   const sounds = () => [...(server()?.soundboard.values() ?? [])];
 
   const [error, setError] = createSignal<string>();
@@ -30,7 +35,7 @@ export default function SoundboardPicker(props: { channel: Channel }) {
     setError(undefined);
     setPlaying(id);
     try {
-      await props.channel.playSound(id);
+      await playSound(client(), props.channel, id);
     } catch (err) {
       setError(describeError(err));
     } finally {

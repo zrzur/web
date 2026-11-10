@@ -73,7 +73,6 @@ import {
   setDisplayMediaCap,
   watchRetiredCodecs,
 } from "./screenShare";
-import type { SoundboardPlayer } from "./soundboardPlayer";
 import type { VoiceProcessor } from "./VoiceProcessor";
 
 /** The call's audio, with LiveKit (loaded with the first call) */
@@ -331,30 +330,6 @@ class Voice {
         .setMicrophoneEnabled(enabled)
         .catch((error) => this.onErr(error));
     });
-
-    // while sharing, a small still of the share every 30 s for the people
-    // who hover it before joining (taken here, never decoded by the server)
-    createEffect(() => {
-      const room = this.room();
-      const channel = this.channel();
-      if (!this.screenshare() || !room || !channel?.isVoiceRoom) return;
-      const track = room.localParticipant.getTrackPublication(
-        TrackSource.ScreenShare,
-      )?.track?.mediaStreamTrack;
-      if (!track) return;
-      let stop: (() => void) | undefined;
-      let cancelled = false;
-      void import("./streamPreview").then(({ startPreviewCapture }) => {
-        if (cancelled) return;
-        stop = startPreviewCapture(track, (image) =>
-          channel.sendStreamPreview(image),
-        );
-      });
-      onCleanup(() => {
-        cancelled = true;
-        stop?.();
-      });
-    });
   }
 
   // Dynamically set echo cancellation and gain control when the settings are changed
@@ -487,9 +462,6 @@ class Voice {
         { room, onlySubscribed: false },
       );
     });
-
-    // a stage: who speaks and who raised a hand, before the room is up
-    if (channel.isStage) void channel.fetchStage().catch(() => undefined);
 
     batch(() => {
       this.#setRoom(room);
@@ -1441,43 +1413,26 @@ export function VoiceContext(props: { children: JSX.Element }) {
     });
   });
 
-  // Soundboard: a sound someone played in your call plays here, from this
-  // device's cache (the player loads with the first sound, not the app)
-  let player: Promise<SoundboardPlayer> | undefined;
-  const loadPlayer = () =>
-    (player ??= import("./soundboardPlayer").then(
-      (module) => new module.SoundboardPlayer(),
-    ));
+  // stage, soundboard and screen share stills: loaded with the first call
   createEffect(() => {
-    const instance = client();
-    const onSound = (channelId: string, soundId: string) => {
-      const channel = voice.channel();
-      if (channel?.id !== channelId || !channel.server) return;
-      if (state.voice.soundboardMuted || voice.deafen() || voice.serverDeafened)
-        return;
-      const server = channel.server;
-      const play = () => {
-        const sound = server.soundboard.get(soundId);
-        if (!sound) return;
-        void loadPlayer().then(async (soundboard) => {
-          const { soundGain, soundUrl } = await import("./soundboardPlayer");
-          await soundboard.play(
-            sound._id,
-            soundUrl(mediaUrl, sound._id),
-            soundGain(sound.volume, state.voice.soundboardVolume),
-          );
-        });
-      };
-      if (server.soundboard.has(soundId)) play();
-      else void server.fetchSoundboard().then(play, () => undefined);
-    };
-    instance.on("soundboardPlay", onSound);
-    onCleanup(() => instance.off("soundboardPlay", onSound));
-  });
-  // leaving, deafening or muting the soundboard stops what plays
-  createEffect(() => {
-    if (!voice.channel() || voice.deafen() || state.voice.soundboardMuted)
-      void player?.then((soundboard) => soundboard.stopAll());
+    const channel = voice.channel();
+    if (!channel) return;
+    let detach: (() => void) | undefined;
+    let cancelled = false;
+    void import("./voiceExtras").then(({ attachVoiceExtras }) => {
+      if (cancelled) return;
+      detach = attachVoiceExtras(
+        client(),
+        channel,
+        voice,
+        state.voice,
+        mediaUrl,
+      );
+    });
+    onCleanup(() => {
+      cancelled = true;
+      detach?.();
+    });
   });
   onCleanup(() => voice.disconnect());
 

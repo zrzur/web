@@ -2,6 +2,11 @@ import { For, Show, createResource, createSignal, onCleanup } from "solid-js";
 
 import { Trans, useLingui } from "@lingui/solid/macro";
 import type { Server } from "@zrzur/sdk/solid";
+import {
+  createSound,
+  deleteSound,
+  fetchSoundboard,
+} from "@zrzur/sdk/solid/voiceExtras";
 import { styled } from "styled-system/jsx";
 
 import { useClient } from "@revolt/client";
@@ -37,7 +42,7 @@ export function SoundboardList(props: { server: Server }) {
 
   const [loaded] = createResource(
     () => props.server,
-    (server) => server.fetchSoundboard(),
+    (server) => fetchSoundboard(client(), server),
   );
   const sounds = () => [...props.server.soundboard.values()];
   const limit = () => props.server.soundboardLimit();
@@ -99,7 +104,7 @@ export function SoundboardList(props: { server: Server }) {
         file()!,
         instance.mediaUrl,
       );
-      await props.server.createSound(id, {
+      await createSound(client(), props.server, id, {
         name: name().trim(),
         duration_ms: durationMs()!,
         ...(emoji().trim() ? { emoji: emoji().trim() } : {}),
@@ -138,7 +143,7 @@ export function SoundboardList(props: { server: Server }) {
     setConfirming(undefined);
     setError(undefined);
     try {
-      await props.server.deleteSound(id);
+      await deleteSound(client(), props.server, id);
     } catch (err) {
       setError(describeError(err));
     }

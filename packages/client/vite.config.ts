@@ -250,6 +250,10 @@ export default defineConfig(({ command }) => {
     resolve: {
       alias: {
         // the SDK from source; the most specific entry point first
+        "@zrzur/sdk/solid/voiceExtras": resolve(
+          __dirname,
+          "../stoat.js/src/solid/voiceExtras.ts",
+        ),
         "@zrzur/sdk/solid": resolve(__dirname, "../stoat.js/src/solid/index.ts"),
         "@zrzur/sdk/bot": resolve(__dirname, "../stoat.js/src/bot/index.ts"),
         "@zrzur/sdk": resolve(__dirname, "../stoat.js/src/index.ts"),
