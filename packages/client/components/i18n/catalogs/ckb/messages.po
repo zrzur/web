@@ -241,6 +241,11 @@ msgstr ""
 msgid "{0} / month each"
 msgstr ""
 
+#. placeholder {0}: maybe( totals()?.messages === null ? null : perDay(totals()?.messages ?? 0, rows().length), )
+#: components/app/interface/settings/server/insights/InsightsPage.tsx
+msgid "{0} a day on average"
+msgstr ""
+
 #. placeholder {0}: price()
 #: components/app/interface/settings/user/subscriptions/PlusPage.tsx
 #: components/modal/modals/SuperchargeServer.tsx
@@ -374,6 +379,11 @@ msgstr ""
 #. placeholder {0}: field().label
 #: components/app/interface/settings/server/LobbyAppearanceEditor.tsx
 msgid "{0} hex"
+msgstr ""
+
+#. placeholder {0}: signed(membersChange(), number())
+#: components/app/interface/settings/server/insights/InsightsPage.tsx
+msgid "{0} in this range"
 msgstr ""
 
 #. placeholder {0}: Math.max(props.server.approximateMemberCount, loaded().length)
@@ -773,6 +783,10 @@ msgstr ""
 
 #: components/app/interface/settings/user/subscriptions/BillingHistory.tsx
 msgid "{count} Wings, {name}"
+msgstr ""
+
+#: components/app/interface/settings/server/insights/InsightsPage.tsx
+msgid "{days, plural, one {# day} other {# days}}"
 msgstr ""
 
 #: components/app/interface/settings/server/channels/ChannelsSettings.tsx
@@ -1512,6 +1526,10 @@ msgstr ""
 msgid "Active invites"
 msgstr ""
 
+#: components/app/interface/settings/server/insights/InsightsPage.tsx
+msgid "Active members"
+msgstr ""
+
 #: components/app/interface/settings/server/assistant/AssistantPage.tsx
 msgid "Active modules"
 msgstr ""
@@ -2019,6 +2037,10 @@ msgstr ""
 
 #: components/app/interface/settings/user/safety/SafetyDashboard.tsx
 msgid "All types"
+msgstr ""
+
+#: components/app/interface/settings/server/insights/InsightsPage.tsx
+msgid "all voice channels together"
 msgstr ""
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
@@ -3422,6 +3444,10 @@ msgstr ""
 
 #: components/ui/components/features/profiles/plateNames.ts
 msgid "Burundi"
+msgstr ""
+
+#: components/app/interface/settings/server/insights/InsightsPage.tsx
+msgid "Busiest channels"
 msgstr ""
 
 #: components/ui/components/features/profiles/ProfileStatus.tsx
@@ -5229,6 +5255,11 @@ msgstr ""
 msgid "Count me in. Give me ten minutes."
 msgstr ""
 
+#. placeholder {0}: formatDay(since(), locale(), true)
+#: components/app/interface/settings/server/insights/InsightsPage.tsx
+msgid "Counted since {0}."
+msgstr ""
+
 #: components/app/interface/settings/server/channels/ChannelExtras.tsx
 msgid "Counters"
 msgstr ""
@@ -5655,9 +5686,9 @@ msgstr ""
 msgid "Custom invite link zrzur.cc/your-name"
 msgstr ""
 
-#: components/app/interface/settings/ServerSettings.tsx
-#~ msgid "Custom link"
-#~ msgstr ""
+#: components/app/interface/settings/server/insights/InsightsPage.tsx
+msgid "Custom link"
+msgstr ""
 
 #: components/modal/modals/CustomStatus.tsx
 msgid "Custom status"
@@ -5725,6 +5756,11 @@ msgstr ""
 
 #: components/app/interface/settings/user/safety/SafetyDashboard.tsx
 msgid "Days"
+msgstr ""
+
+#. placeholder {0}: value()?.time_zone ?? zone.time_zone ?? "UTC"
+#: components/app/interface/settings/server/insights/InsightsPage.tsx
+msgid "Days in your time ({0}). Updated every hour."
 msgstr ""
 
 #: components/app/interface/settings/user/notifications/Sounds.tsx
@@ -6348,6 +6384,11 @@ msgstr ""
 #: components/app/interface/settings/shared/Discoverable.tsx
 #: src/interface/Discover.tsx
 #: src/interface/navigation/PhoneTabs.tsx
+msgid "Discover"
+msgstr ""
+
+#: components/app/interface/settings/server/insights/InsightsPage.tsx
+msgctxt "server insights"
 msgid "Discover"
 msgstr ""
 
@@ -7493,6 +7534,10 @@ msgstr "فیدباک"
 
 #: components/app/interface/settings/UserSettings.tsx
 msgid "Feedback & reports"
+msgstr ""
+
+#: components/app/interface/settings/server/insights/InsightsPage.tsx
+msgid "fewer than 5"
 msgstr ""
 
 #: src/interface/developers/docs/Directives.tsx
@@ -9211,6 +9256,11 @@ msgstr ""
 msgid "Insert text in your message box"
 msgstr ""
 
+#: components/app/interface/settings/ServerSettings.tsx
+msgctxt "server insights"
+msgid "Insights"
+msgstr ""
+
 #: components/app/interface/settings/user/plugins/PluginDetail.tsx
 msgid "Install"
 msgstr ""
@@ -9324,6 +9374,10 @@ msgstr ""
 #: components/modal/modals/CreateInvite.tsx
 #: src/interface/Developers.tsx
 msgid "Invite link"
+msgstr ""
+
+#: components/app/interface/settings/server/insights/InsightsPage.tsx
+msgid "Invite links"
 msgstr ""
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
@@ -9612,6 +9666,11 @@ msgstr ""
 msgid "Joined"
 msgstr ""
 
+#: components/app/interface/settings/server/insights/InsightsPage.tsx
+msgctxt "server insights"
+msgid "Joined"
+msgstr ""
+
 #: components/app/interface/settings/server/members/ListMembers.tsx
 msgid "Joined Zrzur"
 msgstr ""
@@ -9642,6 +9701,10 @@ msgstr ""
 
 #: components/app/interface/settings/server/assistant/labels.ts
 msgid "Joins that count as a raid"
+msgstr ""
+
+#: components/app/interface/settings/ServerSettings.tsx
+msgid "Joins, messages and activity, day by day."
 msgstr ""
 
 #: components/ui/components/features/profiles/plateNames.ts
@@ -9994,6 +10057,11 @@ msgstr ""
 msgid "Left-to-right languages"
 msgstr ""
 
+#. placeholder {0}: maybe(totals()?.leaves)
+#: components/app/interface/settings/server/insights/InsightsPage.tsx
+msgid "Left: {0}"
+msgstr ""
+
 #: components/auth/src/AuthPage.tsx
 msgid "Legal"
 msgstr ""
@@ -10295,6 +10363,11 @@ msgstr ""
 
 #: components/ui/components/features/messaging/composition/picker/GifPicker.tsx
 msgid "Loading GIFs"
+msgstr ""
+
+#: components/app/interface/settings/server/insights/InsightsPage.tsx
+#: components/app/interface/settings/ServerSettings.tsx
+msgid "Loading insights…"
 msgstr ""
 
 #: components/app/interface/settings/server/invites/ListServerInvites.tsx
@@ -11056,6 +11129,11 @@ msgstr ""
 msgid "Members"
 msgstr "ئەندامەکان"
 
+#: components/app/interface/settings/server/insights/InsightsPage.tsx
+msgctxt "server insights"
+msgid "Members"
+msgstr ""
+
 #. placeholder {0}: query.data?.length ?? 0
 #: components/app/interface/settings/server/members/ListMembers.tsx
 #~ msgid "Members — {0}"
@@ -11295,6 +11373,11 @@ msgstr "پەیام لەسەر پلاتفۆرمێکی تر نێردرا"
 #: components/modal/modals/permissionTitles.ts
 #: src/interface/developers/docs/DocsPortal.tsx
 #: src/interface/navigation/PhoneTabs.tsx
+msgid "Messages"
+msgstr ""
+
+#: components/app/interface/settings/server/insights/InsightsPage.tsx
+msgctxt "server insights"
 msgid "Messages"
 msgstr ""
 
@@ -12441,6 +12524,10 @@ msgstr ""
 msgid "No messages in this channel match your search."
 msgstr ""
 
+#: components/app/interface/settings/server/insights/InsightsPage.tsx
+msgid "No messages in this range yet."
+msgstr ""
+
 #: src/interface/channels/text/TextSearchSidebar.tsx
 msgid "No messages in this server match your search."
 msgstr ""
@@ -12834,6 +12921,10 @@ msgstr ""
 
 #: components/auth/src/flows/FlowConfirmChange.tsx
 msgid "Nothing changes unless you confirm. If you didn't ask Zrzur for this, decline it and change your password."
+msgstr ""
+
+#: components/app/interface/settings/server/insights/InsightsPage.tsx
+msgid "Nothing counted yet. Joins show at once, messages within an hour."
 msgstr ""
 
 #: components/app/interface/channels/text/interactions/MessageComponents.tsx
@@ -13293,6 +13384,10 @@ msgstr ""
 msgid "Only the roles you let in below can see it."
 msgstr ""
 
+#: components/app/interface/settings/server/insights/InsightsPage.tsx
+msgid "Only totals, never who. Every count from 1 to 4 except the member total shows as “fewer than 5”, bots are not counted as active members or in voice time, and messages count only in channels you can see. Counts are kept for 90 days."
+msgstr ""
+
 #: components/i18n/errors.tsx
 msgid "Only verified creators and Zrzur staff can do this."
 msgstr ""
@@ -13547,6 +13642,10 @@ msgstr ""
 
 #: components/app/interface/settings/user/safety/SafetyDashboard.tsx
 msgid "Other reports about this"
+msgstr ""
+
+#: components/app/interface/settings/server/insights/InsightsPage.tsx
+msgid "Other ways"
 msgstr ""
 
 #: components/app/interface/settings/user/voice/InputSensitivityOptions.tsx
@@ -13899,6 +13998,10 @@ msgstr ""
 
 #: components/app/interface/settings/ServerSettings.tsx
 msgid "People who can't come back."
+msgstr ""
+
+#: components/app/interface/settings/server/insights/InsightsPage.tsx
+msgid "people who wrote, a day on average"
 msgstr ""
 
 #: components/app/interface/settings/server/ServerAccess.tsx
@@ -20246,6 +20349,10 @@ msgstr ""
 msgid "Time format"
 msgstr ""
 
+#: components/app/interface/settings/server/insights/InsightsPage.tsx
+msgid "Time in voice"
+msgstr ""
+
 #: components/app/interface/settings/server/assistant/labels.ts
 msgid "Time out at this many strikes (0 is off)"
 msgstr ""
@@ -20256,6 +20363,10 @@ msgstr ""
 
 #: src/interface/OAuth.tsx
 msgid "Time out members"
+msgstr ""
+
+#: components/app/interface/settings/server/insights/InsightsPage.tsx
+msgid "Time range"
 msgstr ""
 
 #: components/app/interface/settings/server/assistant/AssistantPage.tsx
@@ -20501,6 +20612,7 @@ msgstr ""
 
 #: components/app/interface/discover/ServerPage.tsx
 #: components/app/interface/settings/server/apps/ServerAppPage.tsx
+#: components/app/interface/settings/server/insights/InsightsPage.tsx
 #: components/app/interface/settings/server/webhooks/ServerWebhooks.tsx
 #: components/app/interface/settings/user/badges/MyBadges.tsx
 #: components/app/interface/settings/user/bots/PrivilegedIntents.tsx
@@ -20812,6 +20924,7 @@ msgstr ""
 msgid "Unknown"
 msgstr ""
 
+#: components/app/interface/settings/server/insights/InsightsPage.tsx
 #: src/interface/channels/text/TextSearchSidebar.tsx
 msgid "Unknown channel"
 msgstr ""
@@ -22113,6 +22226,10 @@ msgstr ""
 #: components/app/interface/settings/user/safety/ReportsAndStanding.tsx
 #: components/app/interface/settings/user/safety/SafetyDashboard.tsx
 msgid "Where it applies"
+msgstr ""
+
+#: components/app/interface/settings/server/insights/InsightsPage.tsx
+msgid "Where joins came from"
 msgstr ""
 
 #: components/app/interface/settings/server/LobbySettings.tsx

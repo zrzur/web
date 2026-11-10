@@ -7,6 +7,7 @@
 
 export type PageId =
   | "overview"
+  | "insights"
   | "channels"
   | "joining"
   | "emoji"
@@ -38,6 +39,8 @@ export const ALIASES: Record<string, string> = {
   verification: "joining#verification",
   filters: "safety#filters",
   audit: "log",
+  stats: "insights",
+  analytics: "insights",
   bots: "apps#bots",
   webhooks: "apps#webhooks",
   ownership: "overview#danger",
@@ -130,6 +133,15 @@ export const SECTIONS: SectionInfo[] = [
       en: "danger zone transfer ownership owner delete server",
       ar: "منطقة الخطر نقل الملكية المالك حذف السيرفر",
       de: "gefahrenbereich besitz übertragen inhaber server löschen",
+    },
+  },
+  {
+    id: "insights",
+    page: "insights",
+    words: {
+      en: "insights statistics stats growth joins leaves messages activity active members voice charts",
+      ar: "الإحصاءات إحصائيات النمو المنضمون المغادرون الرسائل النشاط الأعضاء النشطون الصوت رسوم بيانية",
+      de: "statistiken einblicke wachstum beitritte austritte nachrichten aktivität aktive mitglieder sprache diagramme",
     },
   },
   {
@@ -290,6 +302,7 @@ export const SECTIONS: SectionInfo[] = [
 /** Page names in the three languages (search only; the sidebar uses Lingui) */
 const PAGE_WORDS: Record<PageId, string> = {
   overview: "overview general نظرة عامة allgemein übersicht",
+  insights: "insights الإحصاءات einblicke",
   channels: "channels القنوات kanäle",
   joining: "joining onboarding الانضمام الترحيب beitritt willkommen",
   emoji: "emoji الإيموجي emojis",

@@ -241,6 +241,11 @@ msgstr "{0} / 月"
 msgid "{0} / month each"
 msgstr "每人 {0} / 月"
 
+#. placeholder {0}: maybe( totals()?.messages === null ? null : perDay(totals()?.messages ?? 0, rows().length), )
+#: components/app/interface/settings/server/insights/InsightsPage.tsx
+msgid "{0} a day on average"
+msgstr "平均每天 {0}"
+
 #. placeholder {0}: price()
 #: components/app/interface/settings/user/subscriptions/PlusPage.tsx
 #: components/modal/modals/SuperchargeServer.tsx
@@ -375,6 +380,11 @@ msgstr "还剩 {0} 小时"
 #: components/app/interface/settings/server/LobbyAppearanceEditor.tsx
 msgid "{0} hex"
 msgstr "{0} 十六进制值"
+
+#. placeholder {0}: signed(membersChange(), number())
+#: components/app/interface/settings/server/insights/InsightsPage.tsx
+msgid "{0} in this range"
+msgstr "此期间 {0}"
 
 #. placeholder {0}: Math.max(props.server.approximateMemberCount, loaded().length)
 #: components/app/interface/settings/server/members/ListMembers.tsx
@@ -774,6 +784,10 @@ msgstr "{count} 个月"
 #: components/app/interface/settings/user/subscriptions/BillingHistory.tsx
 msgid "{count} Wings, {name}"
 msgstr "{count} 个羽翼，{name}"
+
+#: components/app/interface/settings/server/insights/InsightsPage.tsx
+msgid "{days, plural, one {# day} other {# days}}"
+msgstr "{days, plural, other {# 天}}"
 
 #: components/app/interface/settings/server/channels/ChannelsSettings.tsx
 msgid "{inside} in the room now"
@@ -1512,6 +1526,10 @@ msgstr "活跃创作者"
 msgid "Active invites"
 msgstr "有效邀请"
 
+#: components/app/interface/settings/server/insights/InsightsPage.tsx
+msgid "Active members"
+msgstr "活跃成员"
+
 #: components/app/interface/settings/server/assistant/AssistantPage.tsx
 msgid "Active modules"
 msgstr "已启用的模块"
@@ -2020,6 +2038,10 @@ msgstr "所有测试员"
 #: components/app/interface/settings/user/safety/SafetyDashboard.tsx
 msgid "All types"
 msgstr "所有类型"
+
+#: components/app/interface/settings/server/insights/InsightsPage.tsx
+msgid "all voice channels together"
+msgstr "所有语音频道合计"
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 #: components/app/interface/settings/server/apps/RulesEditor.tsx
@@ -3423,6 +3445,10 @@ msgstr "布基纳法索"
 #: components/ui/components/features/profiles/plateNames.ts
 msgid "Burundi"
 msgstr "布隆迪"
+
+#: components/app/interface/settings/server/insights/InsightsPage.tsx
+msgid "Busiest channels"
+msgstr "最活跃的频道"
 
 #: components/ui/components/features/profiles/ProfileStatus.tsx
 #: src/interface/channels/text/MemberSidebar.tsx
@@ -5229,6 +5255,11 @@ msgstr "无法更新你的状态，请重试。"
 msgid "Count me in. Give me ten minutes."
 msgstr "算我一个，给我十分钟。"
 
+#. placeholder {0}: formatDay(since(), locale(), true)
+#: components/app/interface/settings/server/insights/InsightsPage.tsx
+msgid "Counted since {0}."
+msgstr "自 {0} 起统计。"
+
 #: components/app/interface/settings/server/channels/ChannelExtras.tsx
 msgid "Counters"
 msgstr "计数器"
@@ -5655,9 +5686,9 @@ msgstr "自定义邀请链接"
 msgid "Custom invite link zrzur.cc/your-name"
 msgstr "自定义邀请链接 zrzur.cc/你的名称"
 
-#: components/app/interface/settings/ServerSettings.tsx
-#~ msgid "Custom link"
-#~ msgstr ""
+#: components/app/interface/settings/server/insights/InsightsPage.tsx
+msgid "Custom link"
+msgstr "自定义链接"
 
 #: components/modal/modals/CustomStatus.tsx
 msgid "Custom status"
@@ -5726,6 +5757,11 @@ msgstr "日光"
 #: components/app/interface/settings/user/safety/SafetyDashboard.tsx
 msgid "Days"
 msgstr "天数"
+
+#. placeholder {0}: value()?.time_zone ?? zone.time_zone ?? "UTC"
+#: components/app/interface/settings/server/insights/InsightsPage.tsx
+msgid "Days in your time ({0}). Updated every hour."
+msgstr "按你的时区计日（{0}）。每小时更新。"
 
 #: components/app/interface/settings/user/notifications/Sounds.tsx
 #: components/ui/components/features/voice/callCard/VoiceCallCardActions.tsx
@@ -6348,6 +6384,11 @@ msgstr "Discord RPC"
 #: components/app/interface/settings/shared/Discoverable.tsx
 #: src/interface/Discover.tsx
 #: src/interface/navigation/PhoneTabs.tsx
+msgid "Discover"
+msgstr "发现"
+
+#: components/app/interface/settings/server/insights/InsightsPage.tsx
+msgctxt "server insights"
 msgid "Discover"
 msgstr "发现"
 
@@ -7494,6 +7535,10 @@ msgstr "反馈"
 #: components/app/interface/settings/UserSettings.tsx
 msgid "Feedback & reports"
 msgstr "反馈与举报"
+
+#: components/app/interface/settings/server/insights/InsightsPage.tsx
+msgid "fewer than 5"
+msgstr "少于 5"
 
 #: src/interface/developers/docs/Directives.tsx
 #: src/interface/developers/docs/EndpointReference.tsx
@@ -9211,6 +9256,11 @@ msgstr "输入音量"
 msgid "Insert text in your message box"
 msgstr "在你的消息框中插入文本"
 
+#: components/app/interface/settings/ServerSettings.tsx
+msgctxt "server insights"
+msgid "Insights"
+msgstr "数据洞察"
+
 #: components/app/interface/settings/user/plugins/PluginDetail.tsx
 msgid "Install"
 msgstr "安装"
@@ -9324,6 +9374,10 @@ msgstr "邀请好友加入 {0}"
 #: components/modal/modals/CreateInvite.tsx
 #: src/interface/Developers.tsx
 msgid "Invite link"
+msgstr "邀请链接"
+
+#: components/app/interface/settings/server/insights/InsightsPage.tsx
+msgid "Invite links"
 msgstr "邀请链接"
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
@@ -9612,6 +9666,11 @@ msgstr "开麦加入"
 msgid "Joined"
 msgstr "已加入"
 
+#: components/app/interface/settings/server/insights/InsightsPage.tsx
+msgctxt "server insights"
+msgid "Joined"
+msgstr "加入"
+
 #: components/app/interface/settings/server/members/ListMembers.tsx
 msgid "Joined Zrzur"
 msgstr "加入 Zrzur 的时间"
@@ -9643,6 +9702,10 @@ msgstr "加入数"
 #: components/app/interface/settings/server/assistant/labels.ts
 msgid "Joins that count as a raid"
 msgstr "算作突袭的加入数"
+
+#: components/app/interface/settings/ServerSettings.tsx
+msgid "Joins, messages and activity, day by day."
+msgstr "每天的加入、消息和活跃情况。"
 
 #: components/ui/components/features/profiles/plateNames.ts
 msgid "Jordan"
@@ -9994,6 +10057,11 @@ msgstr "黎巴嫩"
 msgid "Left-to-right languages"
 msgstr "从左到右的语言"
 
+#. placeholder {0}: maybe(totals()?.leaves)
+#: components/app/interface/settings/server/insights/InsightsPage.tsx
+msgid "Left: {0}"
+msgstr "离开：{0}"
+
 #: components/auth/src/AuthPage.tsx
 msgid "Legal"
 msgstr "法律"
@@ -10296,6 +10364,11 @@ msgstr "正在加载活动"
 #: components/ui/components/features/messaging/composition/picker/GifPicker.tsx
 msgid "Loading GIFs"
 msgstr "正在加载 GIF"
+
+#: components/app/interface/settings/server/insights/InsightsPage.tsx
+#: components/app/interface/settings/ServerSettings.tsx
+msgid "Loading insights…"
+msgstr "正在加载数据…"
 
 #: components/app/interface/settings/server/invites/ListServerInvites.tsx
 msgid "Loading invites…"
@@ -11056,6 +11129,11 @@ msgstr "{0} 起成为成员"
 msgid "Members"
 msgstr "成员"
 
+#: components/app/interface/settings/server/insights/InsightsPage.tsx
+msgctxt "server insights"
+msgid "Members"
+msgstr "成员"
+
 #. placeholder {0}: query.data?.length ?? 0
 #: components/app/interface/settings/server/members/ListMembers.tsx
 #~ msgid "Members — {0}"
@@ -11295,6 +11373,11 @@ msgstr "消息来自其他平台"
 #: components/modal/modals/permissionTitles.ts
 #: src/interface/developers/docs/DocsPortal.tsx
 #: src/interface/navigation/PhoneTabs.tsx
+msgid "Messages"
+msgstr "消息"
+
+#: components/app/interface/settings/server/insights/InsightsPage.tsx
+msgctxt "server insights"
 msgid "Messages"
 msgstr "消息"
 
@@ -12441,6 +12524,10 @@ msgstr "过去 30 天内没有提及。"
 msgid "No messages in this channel match your search."
 msgstr "此频道中没有符合搜索条件的消息。"
 
+#: components/app/interface/settings/server/insights/InsightsPage.tsx
+msgid "No messages in this range yet."
+msgstr "此期间还没有消息。"
+
 #: src/interface/channels/text/TextSearchSidebar.tsx
 msgid "No messages in this server match your search."
 msgstr "此服务器中没有符合搜索条件的消息。"
@@ -12835,6 +12922,10 @@ msgstr "此地址没有任何响应。请检查你的服务器是否正在运行
 #: components/auth/src/flows/FlowConfirmChange.tsx
 msgid "Nothing changes unless you confirm. If you didn't ask Zrzur for this, decline it and change your password."
 msgstr "除非你确认，否则不会有任何更改。如果这不是你向 Zrzur 发起的请求，请拒绝，并更改你的密码。"
+
+#: components/app/interface/settings/server/insights/InsightsPage.tsx
+msgid "Nothing counted yet. Joins show at once, messages within an hour."
+msgstr "还没有统计数据。加入会立即显示，消息会在一小时内显示。"
 
 #: components/app/interface/channels/text/interactions/MessageComponents.tsx
 #: components/app/interface/settings/_layout/Sidebar.tsx
@@ -13293,6 +13384,10 @@ msgstr "只有服务器所有者才能更改它在“发现”中的显示方式
 msgid "Only the roles you let in below can see it."
 msgstr "只有你在下方允许的角色才能看到它。"
 
+#: components/app/interface/settings/server/insights/InsightsPage.tsx
+msgid "Only totals, never who. Every count from 1 to 4 except the member total shows as “fewer than 5”, bots are not counted as active members or in voice time, and messages count only in channels you can see. Counts are kept for 90 days."
+msgstr "只显示总数，从不显示是谁。除成员总数外，1 到 4 的数字都显示为“少于 5”，机器人不计入活跃成员和语音时长，消息只统计你能看到的频道。统计数据保留 90 天。"
+
 #: components/i18n/errors.tsx
 msgid "Only verified creators and Zrzur staff can do this."
 msgstr "只有已验证的创作者和 Zrzur 工作人员可以这样做。"
@@ -13548,6 +13643,10 @@ msgstr "其他权限"
 #: components/app/interface/settings/user/safety/SafetyDashboard.tsx
 msgid "Other reports about this"
 msgstr "与此相关的其他举报"
+
+#: components/app/interface/settings/server/insights/InsightsPage.tsx
+msgid "Other ways"
+msgstr "其他方式"
 
 #: components/app/interface/settings/user/voice/InputSensitivityOptions.tsx
 msgid "Others hear you"
@@ -13900,6 +13999,10 @@ msgstr "申请加入此私密服务器的人。在你批准之前，他们看不
 #: components/app/interface/settings/ServerSettings.tsx
 msgid "People who can't come back."
 msgstr "无法再回来的人。"
+
+#: components/app/interface/settings/server/insights/InsightsPage.tsx
+msgid "people who wrote, a day on average"
+msgstr "平均每天发言的人数"
 
 #: components/app/interface/settings/server/ServerAccess.tsx
 msgid "People with a join link can send requests again, including the custom link."
@@ -20246,6 +20349,10 @@ msgstr "时间"
 msgid "Time format"
 msgstr "时间格式"
 
+#: components/app/interface/settings/server/insights/InsightsPage.tsx
+msgid "Time in voice"
+msgstr "语音时长"
+
 #: components/app/interface/settings/server/assistant/labels.ts
 msgid "Time out at this many strikes (0 is off)"
 msgstr "达到此违规次数时禁言（0 为关闭）"
@@ -20257,6 +20364,10 @@ msgstr "禁言时长"
 #: src/interface/OAuth.tsx
 msgid "Time out members"
 msgstr "禁言成员"
+
+#: components/app/interface/settings/server/insights/InsightsPage.tsx
+msgid "Time range"
+msgstr "时间范围"
 
 #: components/app/interface/settings/server/assistant/AssistantPage.tsx
 #: components/ui/components/design/DateTimeField.tsx
@@ -20501,6 +20612,7 @@ msgstr "换个词试试，或浏览分类。"
 
 #: components/app/interface/discover/ServerPage.tsx
 #: components/app/interface/settings/server/apps/ServerAppPage.tsx
+#: components/app/interface/settings/server/insights/InsightsPage.tsx
 #: components/app/interface/settings/server/webhooks/ServerWebhooks.tsx
 #: components/app/interface/settings/user/badges/MyBadges.tsx
 #: components/app/interface/settings/user/bots/PrivilegedIntents.tsx
@@ -20812,6 +20924,7 @@ msgstr "美国"
 msgid "Unknown"
 msgstr "未知"
 
+#: components/app/interface/settings/server/insights/InsightsPage.tsx
 #: src/interface/channels/text/TextSearchSidebar.tsx
 msgid "Unknown channel"
 msgstr "未知频道"
@@ -22114,6 +22227,10 @@ msgstr "地点"
 #: components/app/interface/settings/user/safety/SafetyDashboard.tsx
 msgid "Where it applies"
 msgstr "适用范围"
+
+#: components/app/interface/settings/server/insights/InsightsPage.tsx
+msgid "Where joins came from"
+msgstr "加入来源"
 
 #: components/app/interface/settings/server/LobbySettings.tsx
 msgid "Where new members say hello. Empty: the first button."

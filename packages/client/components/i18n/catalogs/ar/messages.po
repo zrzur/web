@@ -244,6 +244,11 @@ msgstr "{0} / شهرياً"
 msgid "{0} / month each"
 msgstr "{0} / شهرياً لكل ريشة"
 
+#. placeholder {0}: maybe( totals()?.messages === null ? null : perDay(totals()?.messages ?? 0, rows().length), )
+#: components/app/interface/settings/server/insights/InsightsPage.tsx
+msgid "{0} a day on average"
+msgstr "{0} يوميًا في المتوسط"
+
 #. placeholder {0}: price()
 #: components/app/interface/settings/user/subscriptions/PlusPage.tsx
 #: components/modal/modals/SuperchargeServer.tsx
@@ -381,6 +386,11 @@ msgstr "بقيت {0} ساعة"
 #: components/app/interface/settings/server/LobbyAppearanceEditor.tsx
 msgid "{0} hex"
 msgstr "{0} بنظام hex"
+
+#. placeholder {0}: signed(membersChange(), number())
+#: components/app/interface/settings/server/insights/InsightsPage.tsx
+msgid "{0} in this range"
+msgstr "{0} في هذه المدة"
 
 #. placeholder {0}: Math.max(props.server.approximateMemberCount, loaded().length)
 #: components/app/interface/settings/server/members/ListMembers.tsx
@@ -795,6 +805,10 @@ msgstr "{count} أشهر"
 #: components/app/interface/settings/user/subscriptions/BillingHistory.tsx
 msgid "{count} Wings, {name}"
 msgstr "{count} أجنحة، {name}"
+
+#: components/app/interface/settings/server/insights/InsightsPage.tsx
+msgid "{days, plural, one {# day} other {# days}}"
+msgstr "{days, plural, zero {لا أيام} one {يوم واحد} two {يومان} few {# أيام} many {# يومًا} other {# يوم}}"
 
 #: components/app/interface/settings/server/channels/ChannelsSettings.tsx
 msgid "{inside} in the room now"
@@ -1545,6 +1559,10 @@ msgstr "مصمم نشط"
 msgid "Active invites"
 msgstr "الدعوات النشطة"
 
+#: components/app/interface/settings/server/insights/InsightsPage.tsx
+msgid "Active members"
+msgstr "الأعضاء النشطون"
+
 #: components/app/interface/settings/server/assistant/AssistantPage.tsx
 msgid "Active modules"
 msgstr "الوحدات المفعّلة"
@@ -2061,6 +2079,10 @@ msgstr "كل المختبرين"
 #: components/app/interface/settings/user/safety/SafetyDashboard.tsx
 msgid "All types"
 msgstr "كل الأنواع"
+
+#: components/app/interface/settings/server/insights/InsightsPage.tsx
+msgid "all voice channels together"
+msgstr "كل القنوات الصوتية معًا"
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 #: components/app/interface/settings/server/apps/RulesEditor.tsx
@@ -3521,6 +3543,10 @@ msgstr "بوركينا فاسو"
 #: components/ui/components/features/profiles/plateNames.ts
 msgid "Burundi"
 msgstr "بوروندي"
+
+#: components/app/interface/settings/server/insights/InsightsPage.tsx
+msgid "Busiest channels"
+msgstr "أنشط القنوات"
 
 #: components/ui/components/features/profiles/ProfileStatus.tsx
 #: src/interface/channels/text/MemberSidebar.tsx
@@ -5424,6 +5450,11 @@ msgstr "تعذّر تحديث حالتك. حاول مرة أخرى."
 msgid "Count me in. Give me ten minutes."
 msgstr "أنا معكم. أمهلوني عشر دقائق."
 
+#. placeholder {0}: formatDay(since(), locale(), true)
+#: components/app/interface/settings/server/insights/InsightsPage.tsx
+msgid "Counted since {0}."
+msgstr "يُحسب منذ {0}."
+
 #: components/app/interface/settings/server/channels/ChannelExtras.tsx
 msgid "Counters"
 msgstr "العدادات"
@@ -5882,6 +5913,10 @@ msgstr "رابط دعوة مخصص"
 msgid "Custom invite link zrzur.cc/your-name"
 msgstr "رابط دعوة مخصص zrzur.cc/your-name"
 
+#: components/app/interface/settings/server/insights/InsightsPage.tsx
+msgid "Custom link"
+msgstr "الرابط المخصص"
+
 #: components/modal/modals/CustomStatus.tsx
 msgid "Custom status"
 msgstr "حالة مُخَصَّصة"
@@ -5953,6 +5988,11 @@ msgstr "نهاري"
 #: components/app/interface/settings/user/safety/SafetyDashboard.tsx
 msgid "Days"
 msgstr "أيام"
+
+#. placeholder {0}: value()?.time_zone ?? zone.time_zone ?? "UTC"
+#: components/app/interface/settings/server/insights/InsightsPage.tsx
+msgid "Days in your time ({0}). Updated every hour."
+msgstr "الأيام بتوقيتك ({0}). تُحدَّث كل ساعة."
 
 #: components/app/interface/settings/user/notifications/Sounds.tsx
 #: components/ui/components/features/voice/callCard/VoiceCallCardActions.tsx
@@ -6607,6 +6647,11 @@ msgstr "حالة Discord ‏(RPC)"
 #: components/app/interface/settings/shared/Discoverable.tsx
 #: src/interface/Discover.tsx
 #: src/interface/navigation/PhoneTabs.tsx
+msgid "Discover"
+msgstr "اكتشف"
+
+#: components/app/interface/settings/server/insights/InsightsPage.tsx
+msgctxt "server insights"
 msgid "Discover"
 msgstr "اكتشف"
 
@@ -7794,6 +7839,10 @@ msgstr "رأيك"
 #: components/app/interface/settings/UserSettings.tsx
 msgid "Feedback & reports"
 msgstr "الملاحظات والبلاغات"
+
+#: components/app/interface/settings/server/insights/InsightsPage.tsx
+msgid "fewer than 5"
+msgstr "أقل من 5"
 
 #: src/interface/developers/docs/Directives.tsx
 #: src/interface/developers/docs/EndpointReference.tsx
@@ -9584,6 +9633,11 @@ msgstr "مستوى صوت الإدخال"
 msgid "Insert text in your message box"
 msgstr "إدراج نص في مربع الرسالة"
 
+#: components/app/interface/settings/ServerSettings.tsx
+msgctxt "server insights"
+msgid "Insights"
+msgstr "الإحصاءات"
+
 #: components/app/interface/settings/user/plugins/PluginDetail.tsx
 msgid "Install"
 msgstr "تثبيت"
@@ -9721,6 +9775,10 @@ msgstr "ادعُ أصدقاءك إلى {0}"
 #: src/interface/Developers.tsx
 msgid "Invite link"
 msgstr "رابط الدعوة"
+
+#: components/app/interface/settings/server/insights/InsightsPage.tsx
+msgid "Invite links"
+msgstr "روابط الدعوة"
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 #: components/modal/modals/permissionTitles.ts
@@ -10040,6 +10098,11 @@ msgstr "انضم والميكروفون مفعّل"
 msgid "Joined"
 msgstr "انضم"
 
+#: components/app/interface/settings/server/insights/InsightsPage.tsx
+msgctxt "server insights"
+msgid "Joined"
+msgstr "انضموا"
+
 #: components/app/interface/settings/server/members/ListMembers.tsx
 msgid "Joined Zrzur"
 msgstr "انضم إلى زرزور"
@@ -10071,6 +10134,10 @@ msgstr "الانضمامات"
 #: components/app/interface/settings/server/assistant/labels.ts
 msgid "Joins that count as a raid"
 msgstr "عدد الانضمامات الذي يُعد غارة"
+
+#: components/app/interface/settings/ServerSettings.tsx
+msgid "Joins, messages and activity, day by day."
+msgstr "الانضمام والرسائل والنشاط، يومًا بيوم."
 
 #: components/ui/components/features/profiles/plateNames.ts
 msgid "Jordan"
@@ -10438,6 +10505,11 @@ msgstr "لبنان"
 msgid "Left-to-right languages"
 msgstr "اللغات من اليسار إلى اليمين"
 
+#. placeholder {0}: maybe(totals()?.leaves)
+#: components/app/interface/settings/server/insights/InsightsPage.tsx
+msgid "Left: {0}"
+msgstr "غادروا: {0}"
+
 #: components/auth/src/AuthPage.tsx
 msgid "Legal"
 msgstr "قانوني"
@@ -10752,6 +10824,11 @@ msgstr "جارٍ تحميل الفعاليات"
 #: components/ui/components/features/messaging/composition/picker/GifPicker.tsx
 msgid "Loading GIFs"
 msgstr "جارٍ تحميل صور GIF"
+
+#: components/app/interface/settings/server/insights/InsightsPage.tsx
+#: components/app/interface/settings/ServerSettings.tsx
+msgid "Loading insights…"
+msgstr "جارٍ تحميل الإحصاءات…"
 
 #: components/app/interface/settings/server/invites/ListServerInvites.tsx
 msgid "Loading invites…"
@@ -11535,6 +11612,11 @@ msgstr "عضو منذ {0}"
 msgid "Members"
 msgstr "الأعضاء"
 
+#: components/app/interface/settings/server/insights/InsightsPage.tsx
+msgctxt "server insights"
+msgid "Members"
+msgstr "الأعضاء"
+
 #. placeholder {0}: query.data?.length ?? 0
 #: components/app/interface/settings/server/members/ListMembers.tsx
 #~ msgid "Members — {0}"
@@ -11782,6 +11864,11 @@ msgstr "أُرسلت هذه الرسالة من منصة أخرى"
 #: components/modal/modals/permissionTitles.ts
 #: src/interface/developers/docs/DocsPortal.tsx
 #: src/interface/navigation/PhoneTabs.tsx
+msgid "Messages"
+msgstr "الرسائل"
+
+#: components/app/interface/settings/server/insights/InsightsPage.tsx
+msgctxt "server insights"
 msgid "Messages"
 msgstr "الرسائل"
 
@@ -12980,6 +13067,10 @@ msgstr "لا توجد إشارات إليك في آخر 30 يوماً."
 msgid "No messages in this channel match your search."
 msgstr "لا توجد رسائل في هذه القناة تطابق بحثك."
 
+#: components/app/interface/settings/server/insights/InsightsPage.tsx
+msgid "No messages in this range yet."
+msgstr "لا رسائل في هذه المدة بعد."
+
 #: src/interface/channels/text/TextSearchSidebar.tsx
 msgid "No messages in this server match your search."
 msgstr "لا توجد رسائل في هذا السيرفر تطابق بحثك."
@@ -13402,6 +13493,10 @@ msgstr "لم يصل أي رد من هذا العنوان. تأكد من أن س�
 #: components/auth/src/flows/FlowConfirmChange.tsx
 msgid "Nothing changes unless you confirm. If you didn't ask Zrzur for this, decline it and change your password."
 msgstr "لن يتغيّر شيء إلا إذا أكّدت. إذا لم تطلب ذلك من زرزور فارفض الطلب وغيّر كلمة المرور."
+
+#: components/app/interface/settings/server/insights/InsightsPage.tsx
+msgid "Nothing counted yet. Joins show at once, messages within an hour."
+msgstr "لم يُحسب شيء بعد. يظهر الانضمام فورًا، والرسائل خلال ساعة."
 
 #: components/app/interface/channels/text/interactions/MessageComponents.tsx
 #: components/app/interface/settings/_layout/Sidebar.tsx
@@ -13893,6 +13988,10 @@ msgstr "وحده مالك السيرفر يستطيع تغيير ظهوره في
 msgid "Only the roles you let in below can see it."
 msgstr "لا يراها إلا الأدوار التي تسمح لها أدناه."
 
+#: components/app/interface/settings/server/insights/InsightsPage.tsx
+msgid "Only totals, never who. Every count from 1 to 4 except the member total shows as “fewer than 5”, bots are not counted as active members or in voice time, and messages count only in channels you can see. Counts are kept for 90 days."
+msgstr "مجاميع فقط، لا أسماء أبدًا. كل عدد من 1 إلى 4 ما عدا مجموع الأعضاء يظهر «أقل من 5»، ولا تُحسب البوتات ضمن الأعضاء النشطين ولا في وقت الصوت، وتُحسب الرسائل في القنوات التي تراها فقط. تُحفظ الأعداد 90 يومًا."
+
 #: components/app/interface/settings/user/Advanced.tsx
 #~ msgid "Only useful for Zrzur staff."
 #~ msgstr "مفيد لفريق زرزور فقط."
@@ -14162,6 +14261,10 @@ msgstr "صلاحيات أخرى"
 #: components/app/interface/settings/user/safety/SafetyDashboard.tsx
 msgid "Other reports about this"
 msgstr "بلاغات أخرى عن نفس الشيء"
+
+#: components/app/interface/settings/server/insights/InsightsPage.tsx
+msgid "Other ways"
+msgstr "طرق أخرى"
 
 #: components/app/interface/settings/user/voice/InputSensitivityOptions.tsx
 msgid "Others hear you"
@@ -14558,6 +14661,10 @@ msgstr "من لا يستطيعون العودة."
 #: components/app/interface/settings/server/ServerSafety.tsx
 #~ msgid "People who join from now on accept the rules (in the Lobby or above the message box) before they can write."
 #~ msgstr "من ينضم من الآن فصاعدًا يقبل القواعد (في الردهة أو فوق مربع الرسالة) قبل أن يكتب."
+
+#: components/app/interface/settings/server/insights/InsightsPage.tsx
+msgid "people who wrote, a day on average"
+msgstr "أشخاص كتبوا، يوميًا في المتوسط"
 
 #: components/app/interface/settings/server/ServerAccess.tsx
 msgid "People with a join link can send requests again, including the custom link."
@@ -21163,6 +21270,10 @@ msgstr "الوقت"
 msgid "Time format"
 msgstr "تنسيق الوقت"
 
+#: components/app/interface/settings/server/insights/InsightsPage.tsx
+msgid "Time in voice"
+msgstr "الوقت في الصوت"
+
 #: components/app/interface/settings/server/assistant/labels.ts
 msgid "Time out at this many strikes (0 is off)"
 msgstr "الإسكات عند هذا العدد من المخالفات (0 يعني إيقاف)"
@@ -21174,6 +21285,10 @@ msgstr "اكتم مؤقتًا لمدة"
 #: src/interface/OAuth.tsx
 msgid "Time out members"
 msgstr "إيقاف الأعضاء مؤقتًا"
+
+#: components/app/interface/settings/server/insights/InsightsPage.tsx
+msgid "Time range"
+msgstr "المدة الزمنية"
 
 #: components/app/interface/settings/server/assistant/AssistantPage.tsx
 #: components/ui/components/design/DateTimeField.tsx
@@ -21438,6 +21553,7 @@ msgstr "جرّب كلمة أخرى أو تصفّح الفئات."
 
 #: components/app/interface/discover/ServerPage.tsx
 #: components/app/interface/settings/server/apps/ServerAppPage.tsx
+#: components/app/interface/settings/server/insights/InsightsPage.tsx
 #: components/app/interface/settings/server/webhooks/ServerWebhooks.tsx
 #: components/app/interface/settings/user/badges/MyBadges.tsx
 #: components/app/interface/settings/user/bots/PrivilegedIntents.tsx
@@ -21749,6 +21865,7 @@ msgstr "الولايات المتحدة"
 msgid "Unknown"
 msgstr "غير معروف"
 
+#: components/app/interface/settings/server/insights/InsightsPage.tsx
 #: src/interface/channels/text/TextSearchSidebar.tsx
 msgid "Unknown channel"
 msgstr "قناة غير معروفة"
@@ -23164,6 +23281,10 @@ msgstr "نطاق التطبيق"
 #: components/app/interface/settings/ServerSettings.tsx
 #~ msgid "Where join and leave messages go, and the rules."
 #~ msgstr "أين تظهر رسائل الانضمام والمغادرة، والقواعد."
+
+#: components/app/interface/settings/server/insights/InsightsPage.tsx
+msgid "Where joins came from"
+msgstr "من أين جاء المنضمون"
 
 #: components/app/interface/settings/server/LobbySettings.tsx
 msgid "Where new members say hello. Empty: the first button."

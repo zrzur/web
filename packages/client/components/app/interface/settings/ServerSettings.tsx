@@ -1,3 +1,5 @@
+import { Suspense, lazy } from "solid-js";
+
 import { Trans, useLingui } from "@lingui/solid/macro";
 import { Server } from "@zrzur/sdk/solid";
 
@@ -40,6 +42,9 @@ import {
 } from "./server/registry";
 import { ServerRoleEditor } from "./server/roles/ServerRoleEditor";
 import { BackCard } from "./user/_AccountCard";
+
+// charts and their strings load only when the page opens
+const InsightsPage = lazy(() => import("./server/insights/InsightsPage"));
 
 /**
  * Titles of the sections the settings search can jump to. The page name is
@@ -178,6 +183,20 @@ const Config: SettingsConfiguration<Server> = {
     switch (id) {
       case "overview":
         return <OverviewPage server={server} />;
+      case "insights":
+        // its own loading line while the chunk arrives, so the rest of
+        // settings never waits on it
+        return (
+          <Suspense
+            fallback={
+              <p role="status" data-testid="insights-chunk-loading">
+                <Trans>Loading insights…</Trans>
+              </p>
+            }
+          >
+            <InsightsPage server={server} />
+          </Suspense>
+        );
       case "channels":
         return <ChannelsPage server={server} />;
       case "joining":
@@ -249,6 +268,17 @@ const Config: SettingsConfiguration<Server> = {
               ),
               keywords: pageKeywords("overview"),
               sections: searchSections("overview"),
+            },
+            {
+              id: "insights",
+              hidden: !manage(),
+              icon: <Icon name="waveform" size={20} />,
+              title: <Trans context="server insights">Insights</Trans>,
+              description: (
+                <Trans>Joins, messages and activity, day by day.</Trans>
+              ),
+              keywords: pageKeywords("insights"),
+              sections: [],
             },
             {
               id: "channels",
