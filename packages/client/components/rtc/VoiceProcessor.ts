@@ -6,6 +6,7 @@ import { CONFIGURATION } from "@revolt/common";
 import { Voice } from "@revolt/state/stores/Voice";
 
 import { setCallInputLevel } from "./inputLevel";
+import { rnnoiseFolder } from "./rnnoiseUrl";
 import {
   type GateConfig,
   GATE_HOLD_MS,
@@ -139,7 +140,12 @@ export class VoiceProcessor implements TrackProcessor<
       opts.audioContext ? loadGate(opts.audioContext) : false,
       RNNoiseNode.loadModule(
         opts.audioContext,
-        CONFIGURATION.RNNOISE_WORKLET_CDN_URL,
+        rnnoiseFolder(
+          CONFIGURATION.RNNOISE_WORKLET_CDN_URL,
+          import.meta.env.BASE_URL,
+          // a page address always exists in the app; tests run without one
+          globalThis.location?.href ?? "http://localhost/",
+        ),
       ),
     ]);
     this.gateReady = gateReady;

@@ -2,6 +2,12 @@
 
 ## Unreleased
 
+### Security
+
+* **Page policy:** the web server sends a real Content-Security-Policy, built from the container's addresses and the API root (files, link proxy, events, voice nodes): scripts only from the app (no inline scripts, no eval), connections only to this instance's services, frames only for the embedded media players and hCaptcha, no plugins, no framing by other sites. The open `Access-Control-Allow-Origin: *` is gone. Extra origins: `CSP_CONNECT_EXTRA`, `CSP_FRAME_EXTRA`, `CSP_IMG_EXTRA`; `CSP_API_URL` when the container reaches the API under another address.
+* **Noise filter from the app itself:** the RNNoise worklet and its WebAssembly are served from `/assets/rnnoise/` (vendored, `vendor/rnnoise/SOURCES.md`) instead of jsDelivr, so the page policy allows no public CDN. The plugin sandbox's boot script is allowed by its hash; game frames follow `VITE_SANDBOX_DOMAIN`; the API root is read again every 15 to 30 s until it answers; `CSP_VOICE` names voice hosts.
+* **Sign-in step-up:** when the server asks for a captcha after many wrong passwords for an address, the login form runs it on the next try.
+
 ### Features
 
 * **Polls:** "Create poll" (the poll button next to GIF and emoji, a right-click on +, the + sheet on phones, or Ctrl+Shift+8 / ⌘⇧8 in the message box focused last, listed in the shortcuts screen and reserved from plugins) writes a question, two to ten answers with an emoji each if you like (add, remove, move up or down), how long it stays open (1 hour to 2 weeks) and whether people may pick more than one, with a preview. In the chat a poll is a card of large answer rows: press one to vote (radio buttons or checkboxes for screen readers, one tab stop, arrow keys move, focus stays put), live shares and counts, your choice marked, "N votes · Ends in …" or "Final results", and "See who voted" per answer. The author or a moderator ends it early from the message menu, after a confirm. When it closes, a reply names the winner. Shown only while the server has `features.polls` on. Strings in Arabic, English, German, French, Spanish, Russian and Simplified Chinese.

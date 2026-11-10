@@ -13,6 +13,7 @@ import {
   UnderMinimumConfirmText,
 } from "@revolt/client/ageTexts";
 import { State, TransitionType } from "@revolt/client/Controller";
+import { useInstance } from "@revolt/instance";
 import { useModals } from "@revolt/modal";
 import { A, Navigate } from "@revolt/routing";
 
@@ -25,6 +26,7 @@ import {
   FlowTitle,
 } from "./Flow";
 import { Fields, Form, SubmitButton } from "./Form";
+import { asksForCaptcha, loginCredentials } from "./loginStepUp";
 
 /**
  * Flow for logging into an account
@@ -37,6 +39,9 @@ export default function FlowLogin() {
   const { t } = useLingui();
   const state = useState();
   const modals = useModals();
+  const { config } = useInstance();
+  // set once the server asks for a captcha after many wrong passwords
+  const [stepUp, setStepUp] = createSignal(false);
   const {
     lifecycle,
     isLoggedIn,
@@ -61,13 +66,16 @@ export default function FlowLogin() {
 
     if (!email || !password) return false;
 
-    return login(
-      {
-        email,
-        password,
-      },
-      modals,
-    );
+    try {
+      return await login(
+        loginCredentials(email, password, data.get("captcha") as string),
+        modals,
+      );
+    } catch (error) {
+      if (asksForCaptcha(error) && config.features.captcha.enabled)
+        setStepUp(true);
+      throw error;
+    }
   }
 
   /**
@@ -141,6 +149,7 @@ export default function FlowLogin() {
           </FlowTitle>
           <Form
             onSubmit={performLogin}
+            captcha={stepUp() ? config.features.captcha.key : undefined}
             actions={
               <FlowActions>
                 <SubmitButton>

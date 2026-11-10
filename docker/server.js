@@ -10,9 +10,13 @@
 //   revalidated, so a new release reaches every browser on its next visit.
 // - ETags on everything, so revalidation is a cheap 304.
 // - Text files (JS, CSS, HTML, SVG, JSON) are gzipped once and kept in memory.
-// - Unknown paths fall back to index.html (single-page app), CORS open as
-//   before (`sirv --cors`).
+// - Unknown paths fall back to index.html (single-page app).
+// - A real page policy (csp.js), built from the container's addresses and
+//   the API root, read again every ten minutes. No CORS headers: nothing
+//   on another site loads the app's files (Discover and Designs serve their
+//   own copy).
 const { createServer } = require("node:http");
+const { contentSecurityPolicy, keepPolicyFresh } = require("./csp.js");
 const { createHash } = require("node:crypto");
 const { readFileSync, statSync, existsSync } = require("node:fs");
 const { join, extname, resolve, sep } = require("node:path");
@@ -91,7 +95,10 @@ function resolveFile(path) {
   return null;
 }
 
-createServer((req, res) => {
+// the policy from the addresses alone until the API root has been read
+let policy = contentSecurityPolicy(process.env);
+
+const server = createServer((req, res) => {
   if (req.method !== "GET" && req.method !== "HEAD") {
     res.writeHead(405, { allow: "GET, HEAD" });
     return res.end();
@@ -110,7 +117,7 @@ createServer((req, res) => {
   if (!file) {
     // a missing asset is a real 404; anything else is a client-side route
     if (/\.[a-z0-9]+$/i.test(path) && !path.endsWith(".html")) {
-      res.writeHead(404, { "access-control-allow-origin": "*" });
+      res.writeHead(404, { "x-content-type-options": "nosniff" });
       return res.end();
     }
     file = join(ROOT, "index.html");
@@ -122,11 +129,13 @@ createServer((req, res) => {
     "content-type": TYPES[extname(file).toLowerCase()] ?? "application/octet-stream",
     "cache-control": cacheControl(servedPath),
     etag,
-    "access-control-allow-origin": "*",
     "x-content-type-options": "nosniff",
-    // no other site may frame the app (clickjacking, e.g. the OAuth
-    // "Authorize" page); the app's own plugin iframes are unaffected
-    "content-security-policy": "frame-ancestors 'none'",
+    // scripts only from here, connections only to this instance's
+    // services, and no other site may frame the app (clickjacking, e.g. the
+    // OAuth "Authorize" page)
+    "content-security-policy": policy,
+    "permissions-policy":
+      "camera=(self), microphone=(self), display-capture=(self), geolocation=(), payment=(), usb=()",
     "x-frame-options": "DENY",
     "referrer-policy": "strict-origin-when-cross-origin",
     vary: "accept-encoding",
@@ -143,6 +152,25 @@ createServer((req, res) => {
   headers["content-length"] = payload.length;
   res.writeHead(200, headers);
   res.end(req.method === "HEAD" ? undefined : payload);
-}).listen(PORT, "0.0.0.0", () => {
+});
+
+server.listen(PORT, process.env.HOST || "0.0.0.0", () => {
   console.log(`Serving ${ROOT} on port ${PORT}`);
 });
+
+// the voice nodes, files and captcha come from the API root: read it now,
+// every 15-30 s until it answers, then every ten minutes (a failed read
+// keeps the last policy)
+let told = false;
+keepPolicyFresh({
+  env: process.env,
+  onPolicy: (next) => (policy = next),
+  onFirst: (ok) => {
+    if (ok) console.log("Page policy: from the API root");
+    else if (!told) console.log("Page policy: API root not reachable yet, addresses only; trying again");
+    told = true;
+  },
+});
+const sandbox = process.env.VITE_SANDBOX_DOMAIN?.trim();
+if (sandbox && !policy.includes(`*.${sandbox}`))
+  console.warn(`Page policy: VITE_SANDBOX_DOMAIN is not a plain host name on its own domain (${sandbox}); games are left out`);
