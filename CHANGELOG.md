@@ -4,7 +4,8 @@
 
 ### Design polish
 
-* **Select messages:** no longer a button in the desktop channel header; it is in the header's More menu (as on phones) and in a message's menu, with a check-box icon instead of the list icon.
+* **Select messages:** no longer a button in the desktop channel header; it starts from a message's own menu (on phones also from the header's More sheet), with a check-box icon instead of the list icon. While selecting, "Select all" picks every loaded message a bulk delete still takes (newest first, at most 100).
+* **Event date and time:** the day and the time sit on one line at one height; the pair is named by its heading ("Starts", "Ends") instead of a separate "Time" label.
 
 * **Stage:** someone who may manage the stage takes the floor with Speak; the "Ask to speak" button is only for listeners.
 

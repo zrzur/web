@@ -17200,6 +17200,10 @@ msgstr ""
 msgid "Select a range of messages"
 msgstr ""
 
+#: components/app/interface/channels/text/MessageSelectionBar.tsx
+msgid "Select all"
+msgstr ""
+
 #: components/modal/modals/CreateGroup.tsx
 msgid "Select members to add"
 msgstr "Selecteer leden om toe te voegen"

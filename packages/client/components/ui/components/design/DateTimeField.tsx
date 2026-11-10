@@ -1,6 +1,7 @@
 import { For, Show, createMemo, createSignal, createUniqueId } from "solid-js";
 
 import { useLingui } from "@lingui/solid/macro";
+import { css } from "styled-system/css";
 import { styled } from "styled-system/jsx";
 
 import { Icon } from "@revolt/ui/icons/Icon";
@@ -187,7 +188,10 @@ export function DateTimeField(props: Props) {
         </Control>
         <FloatingSelect
           id={`${id}-time`}
-          label={t`Time`}
+          // no label of its own: the legend names the pair, so the day and
+          // the time start on one line at one height
+          aria-label={`${props.label}: ${t`Time`}`}
+          class={timeTrigger}
           value={time() === undefined ? "" : String(time())}
           disabled={props.disabled}
           onChange={(event) => {
@@ -330,8 +334,20 @@ const Row = styled("div", {
   base: {
     display: "grid",
     gridTemplateColumns: "minmax(0, 3fr) minmax(0, 2fr)",
+    alignItems: "start",
     gap: "8px",
   },
+});
+
+/** The time list looks like the day box: same height, corners and type */
+// atomic classes of equal weight win by file order, so the heights here
+// must win over the select's own (36 px, 44 px on phones) on purpose
+const timeTrigger = css({
+  minHeight: "44px !important",
+  borderRadius: "var(--z-radius, 10px)",
+  fontSize: "15px",
+  // phones: the day button is 44 px inside a 1 px border
+  _phone: { fontSize: "16px", minHeight: "46px !important" },
 });
 
 const Control = styled("div", {

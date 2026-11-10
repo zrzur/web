@@ -17200,6 +17200,10 @@ msgstr "Видно в обе стороны, но никогда полност�
 msgid "Select a range of messages"
 msgstr "Выбрать диапазон сообщений"
 
+#: components/app/interface/channels/text/MessageSelectionBar.tsx
+msgid "Select all"
+msgstr "Выбрать все"
+
 #: components/modal/modals/CreateGroup.tsx
 msgid "Select members to add"
 msgstr "Выберите участников для добавления"

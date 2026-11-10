@@ -34,6 +34,10 @@ type FloatingSelectProps = FloatingSelectPropsLabel & {
   onOpened?: () => void;
   /** Lets a `<label for>` name the trigger */
   id?: string;
+  /** Names the trigger when there is no visible label */
+  "aria-label"?: string;
+  /** Extra styles for the trigger (for example, to match a field beside it) */
+  class?: string;
 };
 
 /**

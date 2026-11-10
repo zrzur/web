@@ -17200,6 +17200,10 @@ msgstr "双向可见，但从不完整"
 msgid "Select a range of messages"
 msgstr "选择一段消息"
 
+#: components/app/interface/channels/text/MessageSelectionBar.tsx
+msgid "Select all"
+msgstr "全选"
+
 #: components/modal/modals/CreateGroup.tsx
 msgid "Select members to add"
 msgstr "选择要添加的成员"

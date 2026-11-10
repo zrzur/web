@@ -4,6 +4,7 @@ import { Plural, Trans, useLingui } from "@lingui/solid/macro";
 import type { Channel } from "@zrzur/sdk/solid";
 import { styled } from "styled-system/jsx";
 
+import { useClient } from "@revolt/client";
 import { Keybind, KeybindAction } from "@revolt/keybinds";
 import { useModals } from "@revolt/modal";
 import { Button, Text } from "@revolt/ui";
@@ -12,6 +13,7 @@ import {
   BULK_DELETE_MAX,
   cancelSelection,
   messageSelection,
+  selectAll,
 } from "./messageSelection";
 
 /**
@@ -22,7 +24,13 @@ export function MessageSelectionBar(props: { channel: Channel }) {
   const { t } = useLingui();
   const { openModal } = useModals();
 
+  const client = useClient();
   const ids = () => [...(messageSelection()?.ids ?? [])];
+  /** The channel's messages loaded in the app */
+  const loadedIds = () =>
+    client()
+      .messages.filter((message) => message.channelId === props.channel.id)
+      .map((message) => message.id);
 
   // leaving the channel ends the selection
   onCleanup(cancelSelection);
@@ -55,6 +63,13 @@ export function MessageSelectionBar(props: { channel: Channel }) {
         </Text>
       </Summary>
       <Actions>
+        <Button
+          variant="text"
+          data-testid="select-all-messages"
+          onPress={() => selectAll(props.channel.id, loadedIds())}
+        >
+          <Trans>Select all</Trans>
+        </Button>
         <Button
           variant="text"
           onPress={() =>

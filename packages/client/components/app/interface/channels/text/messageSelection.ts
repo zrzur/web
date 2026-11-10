@@ -109,6 +109,22 @@ export function pickRecent(
   return deletable.sort((a, b) => (a < b ? 1 : a > b ? -1 : 0)).slice(0, limit);
 }
 
+/**
+ * "Select all": every loaded message a bulk delete still takes, the newest
+ * first when there are more than the limit (`full` says some were left)
+ */
+export function pickAll(
+  ordered: readonly string[],
+  now: number = Date.now(),
+): SelectionResult {
+  const { deletable } = splitByAge(ordered, now);
+  const newest = deletable.sort((a, b) => (a < b ? 1 : a > b ? -1 : 0));
+  return {
+    ids: new Set(newest.slice(0, BULK_DELETE_MAX)),
+    full: newest.length > BULK_DELETE_MAX,
+  };
+}
+
 /** The selection mode of the open channel: one channel at a time */
 interface SelectionState {
   channelId: string;
@@ -145,6 +161,14 @@ export function startSelection(channelId: string, messageId?: string) {
     anchor: messageId,
     full: false,
   });
+}
+
+/** Select every loaded message of the channel a bulk delete takes */
+export function selectAll(channelId: string, ordered: readonly string[]) {
+  const current = store.selection();
+  if (current?.channelId !== channelId) return;
+  const result = pickAll(ordered);
+  store.setSelection({ channelId, ...result, anchor: current.anchor });
 }
 
 /** Leave selection mode */

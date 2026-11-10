@@ -18009,6 +18009,10 @@ msgstr "In beiden Richtungen sichtbar, nie ganz"
 msgid "Select a range of messages"
 msgstr "Einen Bereich von Nachrichten auswählen"
 
+#: components/app/interface/channels/text/MessageSelectionBar.tsx
+msgid "Select all"
+msgstr "Alle auswählen"
+
 #: components/modal/modals/CreateGroup.tsx
 msgid "Select members to add"
 msgstr "Mitglieder zum Hinzufügen auswählen"

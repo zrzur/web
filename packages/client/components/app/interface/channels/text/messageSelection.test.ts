@@ -4,6 +4,7 @@ import { describe, expect, it } from "vitest";
 import {
   BULK_DELETE_MAX,
   BULK_DELETE_MAX_AGE_MS,
+  pickAll,
   pickRecent,
   selectRange,
   splitByAge,
@@ -13,6 +14,27 @@ import {
 const NOW = Date.UTC(2026, 10, 9, 12, 0, 0);
 const DAY = 24 * 60 * 60 * 1000;
 const at = (msAgo: number) => ulid(NOW - msAgo);
+
+describe("pickAll", () => {
+  it("takes every loaded message a bulk delete still takes", () => {
+    const fresh = [at(3_000), at(2_000), at(1_000)];
+    const old = at(8 * DAY);
+    const result = pickAll([old, ...fresh], NOW);
+    expect([...result.ids].sort()).toEqual([...fresh].sort());
+    expect(result.full).toBe(false);
+  });
+
+  it("keeps the newest when there are more than the limit", () => {
+    const ordered = Array.from({ length: BULK_DELETE_MAX + 5 }, (_, i) =>
+      at((BULK_DELETE_MAX + 5 - i) * 1000),
+    );
+    const result = pickAll(ordered, NOW);
+    expect(result.ids.size).toBe(BULK_DELETE_MAX);
+    expect(result.full).toBe(true);
+    expect(result.ids.has(ordered.at(-1)!)).toBe(true);
+    expect(result.ids.has(ordered[0])).toBe(false);
+  });
+});
 
 describe("toggleSelected", () => {
   it("adds and removes one message", () => {

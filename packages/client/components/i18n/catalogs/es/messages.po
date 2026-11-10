@@ -17200,6 +17200,10 @@ msgstr "Se ve en ambos sentidos, nunca del todo"
 msgid "Select a range of messages"
 msgstr "Seleccionar un rango de mensajes"
 
+#: components/app/interface/channels/text/MessageSelectionBar.tsx
+msgid "Select all"
+msgstr "Seleccionar todo"
+
 #: components/modal/modals/CreateGroup.tsx
 msgid "Select members to add"
 msgstr "Seleccionar miembros a añadir"

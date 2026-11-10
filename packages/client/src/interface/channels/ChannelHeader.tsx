@@ -564,14 +564,10 @@ export function ChannelHeader(props: Props) {
           </Show>
         </Show>
 
-        {/* the less-used actions share one "More" menu: on phones all of
-            them, so the channel name keeps the room it needs; on desktop
-            only selecting messages, a moderator tool that is rarely needed */}
-        <Show
-          when={
-            phone() ? !phoneSearch() && hasMoreActions() : canSelectMessages()
-          }
-        >
+        {/* phones: the less-used actions share one "More" sheet, so the
+            channel name keeps the room it needs. Desktop has no More menu:
+            selecting messages starts from a message's own menu. */}
+        <Show when={phone() && !phoneSearch() && hasMoreActions()}>
           <div
             style={{ display: "contents" }}
             use:floating={{
