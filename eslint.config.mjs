@@ -20,6 +20,11 @@ export default defineConfig([
       // local agent files and worktrees: ignored by git, other checkouts
       ".claude/**",
 
+      // third-party code kept as published (licence and hashes in vendor/rnnoise/SOURCES.md),
+      // and its copy made by scripts/copyAssets.mjs
+      "**/vendor/rnnoise/**",
+      "**/scripts/assets_fallback/**",
+
       // submodules, linted in their own repositories
       "packages/stoat.js/**",
       "packages/solid-livekit-components/**",
