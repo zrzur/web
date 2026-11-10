@@ -13,6 +13,9 @@ vi.mock("@revolt/ui/components/design", () => ({
     <button aria-label={props["aria-label"]}>{props.children as never}</button>
   ),
 }));
+vi.mock("@revolt/ui/components/utils/mediaSize", () => ({
+  fitMessageMedia: (width: number, height: number) => ({ width, height }),
+}));
 vi.mock("@revolt/ui/components/utils", () => ({
   SizedContent: (props: { children: unknown }) => (
     <div>{props.children as never}</div>
