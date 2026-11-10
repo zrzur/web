@@ -61,6 +61,8 @@ function SectionTitle(props: { id: string; page: PageId }) {
       return <Trans>Invites and sharing</Trans>;
     case "overview#features":
       return <Trans>Features</Trans>;
+    case "overview#events":
+      return <Trans>Events and lobby</Trans>;
     case "overview#danger":
       return <Trans>Danger zone</Trans>;
     case "channels#channels":
@@ -98,6 +100,7 @@ const SEARCHABLE = new Set([
   "overview#discovery",
   "overview#invites",
   "overview#features",
+  "overview#events",
   "overview#danger",
   "channels#channels",
   "joining#rules",

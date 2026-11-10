@@ -12,6 +12,7 @@ import { Discoverable } from "../shared/Discoverable";
 
 import Overview, { type ProfileDraft } from "./Overview";
 import { AutoModSettings } from "./AutoModSettings";
+import { EventsLobbySwitches } from "./EventsLobbySwitches";
 import { ServerBots } from "./ServerApps";
 import { ServerWebhooks } from "./webhooks/ServerWebhooks";
 import { ServerAccess } from "./ServerAccess";
@@ -110,6 +111,17 @@ export function OverviewPage(props: { server: Server }) {
           description={<Trans>Turn them on or off for this server.</Trans>}
         >
           <ThreadFeatures server={props.server} />
+        </Anchor>
+
+        <Anchor
+          id="events"
+          needs={missing(props.server, "ManageServer")}
+          title={<Trans>Events and lobby</Trans>}
+          description={
+            <Trans>Rows at the top of the channel list. Both start off.</Trans>
+          }
+        >
+          <EventsLobbySwitches server={props.server} />
         </Anchor>
 
         <Anchor

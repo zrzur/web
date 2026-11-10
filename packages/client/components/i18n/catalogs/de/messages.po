@@ -1409,6 +1409,10 @@ msgstr "Ein Webhook postet über seine Adresse in einen Kanal. Die Adresse wird 
 msgid "A WebM becomes an animated image when you upload it: its transparency stays, its sound is dropped, and the image must fit the limits above."
 msgstr "Ein WebM wird beim Hochladen zu einem animierten Bild: Die Transparenz bleibt, der Ton fällt weg, und das Bild muss in die Grenzen oben passen."
 
+#: components/app/interface/settings/server/EventsLobbySwitches.tsx
+msgid "A welcome page; a Lobby row shows for everyone and the server opens on it."
+msgstr "Eine Willkommensseite; alle sehen eine Zeile „Lobby“, und der Server öffnet sich darauf."
+
 #: components/modal/lib/CreateServerFlow.tsx
 msgid "A wider community"
 msgstr "Eine größere Community"
@@ -6412,6 +6416,10 @@ msgstr "Server löschen"
 #~ msgstr "Server löschen"
 
 #: src/interface/events/EventCard.tsx
+msgid "Delete the whole series"
+msgstr "Ganze Reihe löschen"
+
+#: src/interface/events/EventCard.tsx
 msgid "Delete this event and its interested list for good?"
 msgstr "Dieses Event und seine Interessiertenliste endgültig löschen?"
 
@@ -6423,9 +6431,17 @@ msgstr "Diese Einladung löschen?"
 msgid "Delete this module's data?"
 msgstr "Daten dieses Moduls löschen?"
 
+#: src/interface/events/EventCard.tsx
+msgid "Delete this one and every one after it for good? Nothing more of this series is scheduled."
+msgstr "Diesen und alle folgenden Termine endgültig löschen? Von dieser Reihe wird nichts mehr geplant."
+
 #: components/app/interface/settings/server/AutoModSettings.tsx
 msgid "Delete this rule?"
 msgstr "Diese Regel löschen?"
+
+#: src/interface/events/EventCard.tsx
+msgid "Delete this time"
+msgstr "Dieses Mal löschen"
 
 #: src/interface/events/EventCard.tsx
 msgid "Delete this time and its interested list for good? The next one stays scheduled."
@@ -6488,6 +6504,14 @@ msgstr "hat die Rolle {0} gelöscht"
 #: components/app/interface/settings/server/audit/AuditLog.tsx
 msgid "deleted webhook {0}"
 msgstr "hat Webhook {0} gelöscht"
+
+#: src/interface/events/EventsPage.tsx
+msgid "Deleted."
+msgstr "Gelöscht."
+
+#: src/interface/events/EventsPage.tsx
+msgid "Deleted. The next one is on {date}."
+msgstr "Gelöscht. Der nächste Termin ist am {date}."
 
 #: components/modal/modals/DeleteEmoji.tsx
 msgid "Deleting this emoji will disallow future use. All past uses will remain."
@@ -7622,11 +7646,22 @@ msgstr "events"
 msgid "Events"
 msgstr "Ereignisse"
 
+#: components/app/interface/settings/server/EventsLobbySwitches.tsx
 #: src/interface/events/EventsLink.tsx
 #: src/interface/events/EventsPage.tsx
 msgctxt "scheduled events"
 msgid "Events"
 msgstr "Events"
+
+#: components/app/interface/settings/server/pages.tsx
+#: components/app/interface/settings/ServerSettings.tsx
+msgid "Events and lobby"
+msgstr "Events und Lobby"
+
+#: components/i18n/errors.tsx
+#: src/interface/events/EventsPage.tsx
+msgid "Events are off in this server."
+msgstr "Events sind auf diesem Server ausgeschaltet."
 
 #: components/modal/modals/ServerEventEditor.tsx
 #: src/interface/events/EventCard.tsx
@@ -11075,6 +11110,7 @@ msgstr "Beim Laden wird eine Verbindung zu {0} hergestellt. Dabei erhält {0} de
 msgid "Loading…"
 msgstr "Wird geladen…"
 
+#: components/app/interface/settings/server/EventsLobbySwitches.tsx
 #: components/app/interface/settings/user/appearance/LivePreview.tsx
 #: components/modal/lib/serverTemplateText.ts
 #: src/interface/lobby/Lobby.tsx
@@ -13874,8 +13910,8 @@ msgid "Off: each site like YouTube or Spotify asks you once. On: every player lo
 msgstr "Aus: Jede Seite wie YouTube oder Spotify fragt dich einmal. An: Alle Player laden sofort und die Seite erfährt deine IP-Adresse."
 
 #: components/app/interface/settings/server/LobbySettings.tsx
-msgid "Off: only managers see the lobby, as a preview."
-msgstr "Aus: Nur Verwalter sehen die Lobby, als Vorschau."
+#~ msgid "Off: only managers see the lobby, as a preview."
+#~ msgstr "Aus: Nur Verwalter sehen die Lobby, als Vorschau."
 
 #: components/app/interface/settings/server/ServerPrivacy.tsx
 #~ msgid "Off: only roles with the Invite others permission can create invites."
@@ -13986,6 +14022,10 @@ msgstr "Wähle im Tab „Übersicht“ deiner Anwendung „Zu einem Server hinzu
 msgid "On your profile now"
 msgstr "Jetzt auf deinem Profil"
 
+#: components/app/interface/settings/server/LobbySettings.tsx
+msgid "On: everyone sees a Lobby row and the server opens on it. Off: nobody sees it; you can still edit and preview it here."
+msgstr "An: Alle sehen eine Zeile „Lobby“, und der Server öffnet sich darauf. Aus: Niemand sieht sie; du kannst sie hier trotzdem bearbeiten und ansehen."
+
 #: components/modal/modals/DeleteBot.tsx
 #: components/modal/modals/DeleteCategory.tsx
 #: components/modal/modals/DeleteChannel.tsx
@@ -14077,8 +14117,8 @@ msgid "Only invites from people allowed to invite. No requests."
 msgstr "Nur Einladungen von Berechtigten. Keine Anfragen."
 
 #: src/interface/lobby/LobbyLink.tsx
-msgid "Only managers see this until the lobby is turned on."
-msgstr "Nur Verwalter sehen das, bis die Lobby eingeschaltet ist."
+#~ msgid "Only managers see this until the lobby is turned on."
+#~ msgstr "Nur Verwalter sehen das, bis die Lobby eingeschaltet ist."
 
 #: components/app/interface/settings/user/bots/CommandManager.tsx
 msgid "Only members with all the permissions picked below see and use it. Your bot should still check them."
@@ -14346,6 +14386,7 @@ msgstr "Server öffnen"
 
 #: components/app/menus/ServerContextMenu.tsx
 #: components/modal/modals/PromoteServer.tsx
+#: src/interface/events/EventsPage.tsx
 msgid "Open server settings"
 msgstr "Servereinstellungen öffnen"
 
@@ -14378,8 +14419,8 @@ msgid "Open the review dashboard"
 msgstr "Prüf-Dashboard öffnen"
 
 #: components/app/interface/settings/server/LobbySettings.tsx
-msgid "Open the server on its lobby"
-msgstr "Server mit der Lobby öffnen"
+#~ msgid "Open the server on its lobby"
+#~ msgstr "Server mit der Lobby öffnen"
 
 #: components/app/interface/settings/user/Keybinds.tsx
 msgid "Open the server's events"
@@ -15143,6 +15184,10 @@ msgstr "Platzieren"
 #: src/interface/events/EventsPage.tsx
 msgid "Plan a game night, a talk or a meetup. Members can mark it Interested and hear when it starts."
 msgstr "Plane einen Spieleabend, einen Vortrag oder ein Treffen. Mitglieder können „Interessiert“ wählen und erfahren, wenn es losgeht."
+
+#: components/app/interface/settings/server/EventsLobbySwitches.tsx
+msgid "Plan game nights and meetups; an Events row shows for everyone."
+msgstr "Plane Spieleabende und Treffen; alle sehen eine Zeile „Events“."
 
 #: components/modal/lib/serverTemplateText.ts
 msgid "planning"
@@ -17264,6 +17309,10 @@ msgstr "Rosé"
 msgid "Rounded"
 msgstr "Rund"
 
+#: components/app/interface/settings/server/pages.tsx
+msgid "Rows at the top of the channel list. Both start off."
+msgstr "Zeilen oben in der Kanalliste. Beides ist zu Beginn aus."
+
 #: components/ui/components/design/DataTable.tsx
 #~ msgid "Rows per page:"
 #~ msgstr "Zeilen pro Seite:"
@@ -18686,6 +18735,10 @@ msgstr "Profileffekte anzeigen"
 #: components/app/interface/settings/server/assistant/labels.ts
 msgid "Show the Hijri date"
 msgstr "Hidschri-Datum anzeigen"
+
+#: components/app/interface/settings/server/LobbySettings.tsx
+msgid "Show the lobby"
+msgstr "Lobby anzeigen"
 
 #: components/app/interface/settings/server/webhooks/ServerWebhooks.tsx
 msgid "Show webhooks made by"
@@ -22104,6 +22157,10 @@ msgstr "Schalte sie nur ein, wenn dein Bot sie braucht. Ohne sie funktioniert er
 #: components/app/interface/settings/user/plugins/text.ts
 msgid "Turned off."
 msgstr "Ausgeschaltet."
+
+#: components/app/interface/settings/server/EventsLobbySwitches.tsx
+msgid "Turning one off hides its row and keeps what you made: planned events and the lobby design stay saved."
+msgstr "Ausschalten blendet die Zeile aus und behält, was du erstellt hast: geplante Events und das Lobby-Design bleiben gespeichert."
 
 #: src/interface/developers/docs/DocsPortal.tsx
 msgid "Tutorials"

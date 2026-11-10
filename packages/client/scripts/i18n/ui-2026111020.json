@@ -1,0 +1,54 @@
+{
+  "A welcome page; a Lobby row shows for everyone and the server opens on it.": [
+    "صفحة ترحيب؛ يظهر صف «الردهة» للجميع ويُفتح السيرفر عليها.",
+    "Eine Willkommensseite; alle sehen eine Zeile „Lobby“, und der Server öffnet sich darauf."
+  ],
+  "Events and lobby": [
+    "الفعاليات والردهة",
+    "Events und Lobby"
+  ],
+  "Events are off in this server.": [
+    "الفعاليات متوقفة في هذا السيرفر.",
+    "Events sind auf diesem Server ausgeschaltet."
+  ],
+  "On: everyone sees a Lobby row and the server opens on it. Off: nobody sees it; you can still edit and preview it here.": [
+    "عند التشغيل: يرى الجميع صف «الردهة» ويُفتح السيرفر عليها. عند الإيقاف: لا يراها أحد، ويمكنك مع ذلك تعديلها ومعاينتها هنا.",
+    "An: Alle sehen eine Zeile „Lobby“, und der Server öffnet sich darauf. Aus: Niemand sieht sie; du kannst sie hier trotzdem bearbeiten und ansehen."
+  ],
+  "Plan game nights and meetups; an Events row shows for everyone.": [
+    "خطّط لأمسيات الألعاب واللقاءات؛ يظهر صف «الفعاليات» للجميع.",
+    "Plane Spieleabende und Treffen; alle sehen eine Zeile „Events“."
+  ],
+  "Rows at the top of the channel list. Both start off.": [
+    "صفوف في أعلى قائمة القنوات. كلاهما متوقف في البداية.",
+    "Zeilen oben in der Kanalliste. Beides ist zu Beginn aus."
+  ],
+  "Show the lobby": [
+    "إظهار الردهة",
+    "Lobby anzeigen"
+  ],
+  "Turning one off hides its row and keeps what you made: planned events and the lobby design stay saved.": [
+    "إيقاف أحدهما يخفي صفه ويحتفظ بما صنعته: تبقى الفعاليات المخطط لها وتصميم الردهة محفوظة.",
+    "Ausschalten blendet die Zeile aus und behält, was du erstellt hast: geplante Events und das Lobby-Design bleiben gespeichert."
+  ],
+  "Delete this time": [
+    "حذف هذه المرة",
+    "Dieses Mal löschen"
+  ],
+  "Delete the whole series": [
+    "حذف السلسلة كلها",
+    "Ganze Reihe löschen"
+  ],
+  "Delete this one and every one after it for good? Nothing more of this series is scheduled.": [
+    "أتريد حذف هذه المرة وكل ما يليها نهائيًا؟ لن يُجدول شيء آخر من هذه السلسلة.",
+    "Diesen und alle folgenden Termine endgültig löschen? Von dieser Reihe wird nichts mehr geplant."
+  ],
+  "Deleted.": [
+    "حُذفت.",
+    "Gelöscht."
+  ],
+  "Deleted. The next one is on {date}.": [
+    "حُذفت. المرة التالية في {date}.",
+    "Gelöscht. Der nächste Termin ist am {date}."
+  ]
+}

@@ -73,11 +73,13 @@ const event = (extra: Record<string, unknown> = {}) => ({
 const server: any = { id: SV, havePermission: () => true };
 let dispose: (() => void) | undefined;
 let resolveMark: (() => void) | undefined;
+let deleted: { id: string; series: boolean }[] = [];
 
 beforeEach(() => {
   i18n.loadAndActivate({ locale: "en", messages: {} });
   document.body.innerHTML = '<div id="root"></div>';
   fake.serverEvents = new ServerEventCollection(fake);
+  deleted = [];
   fake.api = {
     get: async () => ({ events: [event()], interested: [] }),
     put: () =>
@@ -105,6 +107,7 @@ async function mount(extra: Record<string, unknown> = {}) {
               event={entry}
               server={server}
               now={Date.parse("2027-11-01T00:00:00Z")}
+              onDeleted={(info) => deleted.push(info)}
             />
           )}
         </For>
@@ -149,5 +152,65 @@ describe("EventCard", () => {
     await flush();
     const text = document.body.textContent ?? "";
     expect(text).toContain("The next one stays scheduled");
+  });
+
+  it("deletes the whole series apart, with its own words, and the card goes", async () => {
+    const calls: string[] = [];
+    fake.api.delete = async (path: string, params: unknown) => {
+      calls.push(`${path} ${JSON.stringify(params)}`);
+    };
+    await mount({ repeat: "Weekly" });
+    expect(
+      document.querySelector("[data-testid=event-delete]")!.textContent,
+    ).toContain("Delete this time");
+    document
+      .querySelector<HTMLButtonElement>("[data-testid=event-delete-series]")!
+      .click();
+    await flush();
+    expect(document.body.textContent).toContain(
+      "Delete this one and every one after it for good? Nothing more of this series is scheduled.",
+    );
+    const confirm = document.querySelector<HTMLButtonElement>(
+      "[data-testid=event-confirm]",
+    )!;
+    expect(confirm.textContent).toContain("Delete the whole series");
+    confirm.click();
+    await flush();
+    expect(calls).toEqual([`/servers/${SV}/events/${E1} {"series":true}`]);
+    expect(document.querySelector("[data-testid=event-card]")).toBeNull();
+  });
+
+  it("deleting this time only keeps the series and says so to the page", async () => {
+    const calls: string[] = [];
+    fake.api.delete = async (path: string, params: unknown) => {
+      calls.push(`${path} ${JSON.stringify(params)}`);
+    };
+    await mount({ repeat: "Weekly" });
+    document
+      .querySelector<HTMLButtonElement>("[data-testid=event-delete]")!
+      .click();
+    await flush();
+    expect(document.body.textContent).toContain("The next one stays scheduled");
+    const confirm = document.querySelector<HTMLButtonElement>(
+      "[data-testid=event-confirm]",
+    )!;
+    expect(confirm.textContent).toContain("Delete this time");
+    confirm.click();
+    await flush();
+    expect(calls).toEqual([`/servers/${SV}/events/${E1} {}`]);
+    expect(deleted).toEqual([{ id: E1, series: false }]);
+  });
+
+  it("a one-off event keeps a single Delete", async () => {
+    await mount();
+    expect(
+      document.querySelector("[data-testid=event-delete-series]"),
+    ).toBeNull();
+    expect(
+      document.querySelector("[data-testid=event-delete]")!.textContent,
+    ).toContain("Delete");
+    expect(
+      document.querySelector("[data-testid=event-delete]")!.textContent,
+    ).not.toContain("this time");
   });
 });

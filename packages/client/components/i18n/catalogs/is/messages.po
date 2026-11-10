@@ -1384,6 +1384,10 @@ msgstr ""
 msgid "A WebM becomes an animated image when you upload it: its transparency stays, its sound is dropped, and the image must fit the limits above."
 msgstr ""
 
+#: components/app/interface/settings/server/EventsLobbySwitches.tsx
+msgid "A welcome page; a Lobby row shows for everyone and the server opens on it."
+msgstr ""
+
 #: components/modal/lib/CreateServerFlow.tsx
 msgid "A wider community"
 msgstr ""
@@ -6153,6 +6157,10 @@ msgid "Delete server"
 msgstr ""
 
 #: src/interface/events/EventCard.tsx
+msgid "Delete the whole series"
+msgstr ""
+
+#: src/interface/events/EventCard.tsx
 msgid "Delete this event and its interested list for good?"
 msgstr ""
 
@@ -6164,8 +6172,16 @@ msgstr ""
 msgid "Delete this module's data?"
 msgstr ""
 
+#: src/interface/events/EventCard.tsx
+msgid "Delete this one and every one after it for good? Nothing more of this series is scheduled."
+msgstr ""
+
 #: components/app/interface/settings/server/AutoModSettings.tsx
 msgid "Delete this rule?"
+msgstr ""
+
+#: src/interface/events/EventCard.tsx
+msgid "Delete this time"
 msgstr ""
 
 #: src/interface/events/EventCard.tsx
@@ -6228,6 +6244,14 @@ msgstr ""
 #. placeholder {0}: a.name
 #: components/app/interface/settings/server/audit/AuditLog.tsx
 msgid "deleted webhook {0}"
+msgstr ""
+
+#: src/interface/events/EventsPage.tsx
+msgid "Deleted."
+msgstr ""
+
+#: src/interface/events/EventsPage.tsx
+msgid "Deleted. The next one is on {date}."
 msgstr ""
 
 #: components/modal/modals/DeleteEmoji.tsx
@@ -7309,10 +7333,21 @@ msgstr ""
 msgid "Events"
 msgstr ""
 
+#: components/app/interface/settings/server/EventsLobbySwitches.tsx
 #: src/interface/events/EventsLink.tsx
 #: src/interface/events/EventsPage.tsx
 msgctxt "scheduled events"
 msgid "Events"
+msgstr ""
+
+#: components/app/interface/settings/server/pages.tsx
+#: components/app/interface/settings/ServerSettings.tsx
+msgid "Events and lobby"
+msgstr ""
+
+#: components/i18n/errors.tsx
+#: src/interface/events/EventsPage.tsx
+msgid "Events are off in this server."
 msgstr ""
 
 #: components/modal/modals/ServerEventEditor.tsx
@@ -10615,6 +10650,7 @@ msgstr ""
 msgid "Loading…"
 msgstr ""
 
+#: components/app/interface/settings/server/EventsLobbySwitches.tsx
 #: components/app/interface/settings/user/appearance/LivePreview.tsx
 #: components/modal/lib/serverTemplateText.ts
 #: src/interface/lobby/Lobby.tsx
@@ -13287,8 +13323,8 @@ msgid "Off: each site like YouTube or Spotify asks you once. On: every player lo
 msgstr ""
 
 #: components/app/interface/settings/server/LobbySettings.tsx
-msgid "Off: only managers see the lobby, as a preview."
-msgstr ""
+#~ msgid "Off: only managers see the lobby, as a preview."
+#~ msgstr ""
 
 #: components/app/interface/settings/user/Privacy.tsx
 #~ msgid "Off: players from YouTube, Spotify and similar sites wait for your click. On: they load at once and the site learns your IP address."
@@ -13395,6 +13431,10 @@ msgstr ""
 msgid "On your profile now"
 msgstr ""
 
+#: components/app/interface/settings/server/LobbySettings.tsx
+msgid "On: everyone sees a Lobby row and the server opens on it. Off: nobody sees it; you can still edit and preview it here."
+msgstr ""
+
 #: components/modal/modals/DeleteBot.tsx
 #: components/modal/modals/DeleteCategory.tsx
 #: components/modal/modals/DeleteChannel.tsx
@@ -13486,8 +13526,8 @@ msgid "Only invites from people allowed to invite. No requests."
 msgstr ""
 
 #: src/interface/lobby/LobbyLink.tsx
-msgid "Only managers see this until the lobby is turned on."
-msgstr ""
+#~ msgid "Only managers see this until the lobby is turned on."
+#~ msgstr ""
 
 #: components/app/interface/settings/user/bots/CommandManager.tsx
 msgid "Only members with all the permissions picked below see and use it. Your bot should still check them."
@@ -13731,6 +13771,7 @@ msgstr ""
 
 #: components/app/menus/ServerContextMenu.tsx
 #: components/modal/modals/PromoteServer.tsx
+#: src/interface/events/EventsPage.tsx
 msgid "Open server settings"
 msgstr ""
 
@@ -13759,8 +13800,8 @@ msgid "Open the review dashboard"
 msgstr ""
 
 #: components/app/interface/settings/server/LobbySettings.tsx
-msgid "Open the server on its lobby"
-msgstr ""
+#~ msgid "Open the server on its lobby"
+#~ msgstr ""
 
 #: components/app/interface/settings/user/Keybinds.tsx
 msgid "Open the server's events"
@@ -14456,6 +14497,10 @@ msgstr ""
 
 #: src/interface/events/EventsPage.tsx
 msgid "Plan a game night, a talk or a meetup. Members can mark it Interested and hear when it starts."
+msgstr ""
+
+#: components/app/interface/settings/server/EventsLobbySwitches.tsx
+msgid "Plan game nights and meetups; an Events row shows for everyone."
 msgstr ""
 
 #: components/modal/lib/serverTemplateText.ts
@@ -16503,6 +16548,10 @@ msgstr ""
 msgid "Rounded"
 msgstr ""
 
+#: components/app/interface/settings/server/pages.tsx
+msgid "Rows at the top of the channel list. Both start off."
+msgstr ""
+
 #: components/app/interface/settings/server/apps/RulesEditor.tsx
 msgid "Rule for"
 msgstr ""
@@ -17848,6 +17897,10 @@ msgstr ""
 
 #: components/app/interface/settings/server/assistant/labels.ts
 msgid "Show the Hijri date"
+msgstr ""
+
+#: components/app/interface/settings/server/LobbySettings.tsx
+msgid "Show the lobby"
 msgstr ""
 
 #: components/app/interface/settings/server/webhooks/ServerWebhooks.tsx
@@ -21162,6 +21215,10 @@ msgstr ""
 
 #: components/app/interface/settings/user/plugins/text.ts
 msgid "Turned off."
+msgstr ""
+
+#: components/app/interface/settings/server/EventsLobbySwitches.tsx
+msgid "Turning one off hides its row and keeps what you made: planned events and the lobby design stay saved."
 msgstr ""
 
 #: src/interface/developers/docs/DocsPortal.tsx

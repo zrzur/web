@@ -14,14 +14,17 @@ import { type Server, isUpcoming } from "@zrzur/sdk/solid";
 import { styled } from "styled-system/jsx";
 
 import { useClient } from "@revolt/client";
+import { timeLocale } from "@revolt/i18n";
 import { TranslatedError } from "@revolt/i18n/errors";
 import { useModals } from "@revolt/modal";
 import { Navigate, useParams } from "@revolt/routing";
 import { Button, EmptyState, Header } from "@revolt/ui";
+import { hour12From } from "@revolt/ui/components/design/dateTime";
 import { Icon } from "@revolt/ui/icons/Icon";
 
 import { EventCard } from "./EventCard";
-import { eventsEnabled } from "./EventsLink";
+import { eventWhen } from "./eventFormat";
+import { eventsEnabled, serverEventsOn } from "./EventsLink";
 
 /**
  * A server's events: what is happening now and what is coming up, with
@@ -39,13 +42,63 @@ export function EventsPage() {
       when={server() && eventsEnabled(client())}
       fallback={<Navigate href={server() ? `/server/${params.server}` : "/"} />}
     >
-      <Events server={server()!} focus={params.event} />
+      <Show
+        when={serverEventsOn(client(), server())}
+        fallback={<EventsOff server={server()!} />}
+      >
+        <Events server={server()!} focus={params.event} />
+      </Show>
     </Show>
   );
 }
 
-function Events(props: { server: Server; focus?: string }) {
+/**
+ * The events page of a server whose managers have not turned events on:
+ * one plain line, and for managers the way to the switch
+ */
+export function EventsOff(props: { server: Server }) {
   const { t } = useLingui();
+  const { openModal } = useModals();
+  const canManage = () => props.server.havePermission("ManageServer");
+
+  return (
+    <Page data-testid="events-off">
+      <Header placement="primary">
+        <Title>
+          <Icon name="calendar" size={20} />
+          <h1>{t({ message: "Events", context: "scheduled events" })}</h1>
+        </Title>
+      </Header>
+      <Body>
+        <Off>
+          <p>
+            <Trans>Events are off in this server.</Trans>
+          </p>
+          <Show when={canManage()}>
+            <Button
+              size="sm"
+              variant="filled"
+              data-testid="events-off-settings"
+              onPress={() =>
+                openModal({
+                  type: "settings",
+                  config: "server",
+                  initialPage: "events",
+                  context: props.server,
+                })
+              }
+            >
+              <Trans>Open server settings</Trans>
+            </Button>
+          </Show>
+        </Off>
+      </Body>
+    </Page>
+  );
+}
+
+function Events(props: { server: Server; focus?: string }) {
+  const { t, i18n } = useLingui();
   const client = useClient();
   const { openModal } = useModals();
 
@@ -80,6 +133,30 @@ function Events(props: { server: Server; focus?: string }) {
   const canManage = () => props.server.havePermission("ManageServer");
   const schedule = () =>
     openModal({ type: "server_event", server: props.server });
+
+  // after "Delete this time" the next occurrence takes the card's place and
+  // looks the same: a short line says what happened, for a few seconds
+  const [deletedOne, setDeletedOne] = createSignal<string>();
+  let deletedTimer: ReturnType<typeof setTimeout> | undefined;
+  onCleanup(() => clearTimeout(deletedTimer));
+  const onDeleted = (info: { id: string; series: boolean }) => {
+    clearTimeout(deletedTimer);
+    if (info.series) return setDeletedOne(undefined);
+    setDeletedOne(info.id);
+    deletedTimer = setTimeout(() => setDeletedOne(undefined), 6000);
+  };
+  const deletedNote = createMemo(() => {
+    const id = deletedOne();
+    if (!id) return undefined;
+    const following = events().find((event) => event.previous === id);
+    if (!following) return t`Deleted.`;
+    const date = eventWhen(
+      following,
+      i18n().locale ?? "en",
+      hour12From(timeLocale()[1].formats?.LT),
+    );
+    return t`Deleted. The next one is on ${date}.`;
+  });
 
   return (
     <Page data-testid="events-page">
@@ -164,6 +241,7 @@ function Events(props: { server: Server; focus?: string }) {
                         server={props.server}
                         now={now()}
                         highlighted={event._id === props.focus}
+                        onDeleted={onDeleted}
                       />
                     )}
                   </For>
@@ -197,6 +275,11 @@ function Events(props: { server: Server; focus?: string }) {
                 <SectionTitle id="events-upcoming">
                   <Trans>Upcoming</Trans>
                 </SectionTitle>
+                <Show when={deletedNote()}>
+                  <Note role="status" data-testid="events-deleted-note">
+                    {deletedNote()}
+                  </Note>
+                </Show>
                 <List>
                   <For each={upcoming()}>
                     {(event) => (
@@ -205,6 +288,7 @@ function Events(props: { server: Server; focus?: string }) {
                         server={props.server}
                         now={now()}
                         highlighted={event._id === props.focus}
+                        onDeleted={onDeleted}
                       />
                     )}
                   </For>
@@ -266,6 +350,30 @@ const Body = styled("div", {
     marginInline: "auto",
     padding: "24px",
     _phone: { padding: "12px 16px" },
+  },
+});
+
+const Note = styled("p", {
+  base: {
+    margin: 0,
+    fontSize: "13px",
+    lineHeight: "20px",
+    color: "var(--z-fg-secondary)",
+  },
+});
+
+const Off = styled("div", {
+  base: {
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "flex-start",
+    gap: "12px",
+    padding: "16px",
+    borderRadius: "var(--z-radius-md, 14px)",
+    background: "var(--z-bg-raised)",
+    fontSize: "15px",
+    lineHeight: "24px",
+    "& p": { margin: 0 },
   },
 });
 

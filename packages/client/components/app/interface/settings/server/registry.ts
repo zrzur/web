@@ -26,6 +26,7 @@ export type PageId =
  */
 export const ALIASES: Record<string, string> = {
   lobby: "joining/lobby",
+  events: "overview#events",
   discover: "overview#discovery",
   emojis: "emoji",
   sounds: "soundboard",
@@ -117,6 +118,15 @@ export const SECTIONS: SectionInfo[] = [
       en: "threads forums posts switch on off disable",
       ar: "الخيوط المنتديات المنشورات تشغيل إيقاف تعطيل",
       de: "threads foren beiträge einschalten ausschalten deaktivieren",
+    },
+  },
+  {
+    id: "events",
+    page: "overview",
+    words: {
+      en: "events scheduled lobby welcome page switch on off channel list",
+      ar: "الفعاليات الأحداث المجدولة الردهة صفحة الترحيب تشغيل إيقاف قائمة القنوات",
+      de: "events veranstaltungen termine lobby willkommensseite einschalten ausschalten kanalliste",
     },
   },
   {

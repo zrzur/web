@@ -209,6 +209,32 @@ export function LobbySettings(props: ServerSettingsProps) {
     }
   }
 
+  /**
+   * The on/off switch saves at once (the stored lobby with only `enabled`
+   * changed), so the Lobby row appears or goes straight away; other edits
+   * on the page stay unsaved until Save.
+   */
+  const [switching, setSwitching] = createSignal(false);
+  async function switchLobby() {
+    if (switching() || saving()) return;
+    const next = !(props.server.lobby?.enabled ?? false);
+    setSwitching(true);
+    setError(undefined);
+    try {
+      await props.server.edit({
+        lobby: {
+          ...cloneLobbyData(props.server.lobby ?? {}),
+          enabled: next,
+        } as ServerLobby,
+      });
+      setDraft("enabled", next);
+    } catch (err) {
+      setError(describeError(err));
+    } finally {
+      setSwitching(false);
+    }
+  }
+
   /** Save first so opening the lobby never discards an edited design. */
   const saveAndOpen = async () => {
     if (!(await save())) return;
@@ -273,16 +299,22 @@ export function LobbySettings(props: ServerSettingsProps) {
         >
           <SettingsRow
             icon={<Icon name="house" size={20} />}
-            title={<Trans>Open the server on its lobby</Trans>}
+            title={<Trans>Show the lobby</Trans>}
             description={
-              <Trans>Off: only managers see the lobby, as a preview.</Trans>
+              <Trans>
+                On: everyone sees a Lobby row and the server opens on it. Off:
+                nobody sees it; you can still edit and preview it here.
+              </Trans>
             }
-            onClick={() => setDraft("enabled", (v) => !v)}
+            disabled={switching()}
+            onClick={() => void switchLobby()}
             control={(ids) => (
               <Toggle
-                checked={draft.enabled}
-                onChange={() => setDraft("enabled", (v) => !v)}
+                checked={props.server.lobby?.enabled ?? false}
+                disabled={switching()}
+                onChange={() => void switchLobby()}
                 aria-labelledby={ids.labelId}
+                aria-describedby={ids.descriptionId}
               />
             )}
           />

@@ -1409,6 +1409,10 @@ msgstr "يرسل الويب هوك رسائل إلى قناة واحدة عبر 
 msgid "A WebM becomes an animated image when you upload it: its transparency stays, its sound is dropped, and the image must fit the limits above."
 msgstr "يتحول ملف WebM إلى صورة متحركة عند رفعه: تبقى شفافيته، ويُحذف صوته، ويجب أن تلتزم الصورة بالحدود المذكورة أعلاه."
 
+#: components/app/interface/settings/server/EventsLobbySwitches.tsx
+msgid "A welcome page; a Lobby row shows for everyone and the server opens on it."
+msgstr "صفحة ترحيب؛ يظهر صف «الردهة» للجميع ويُفتح السيرفر عليها."
+
 #: components/modal/lib/CreateServerFlow.tsx
 msgid "A wider community"
 msgstr "مجتمع أوسع"
@@ -6412,6 +6416,10 @@ msgstr "حذف السيرفر"
 #~ msgstr "حذف السيرفر"
 
 #: src/interface/events/EventCard.tsx
+msgid "Delete the whole series"
+msgstr "حذف السلسلة كلها"
+
+#: src/interface/events/EventCard.tsx
 msgid "Delete this event and its interested list for good?"
 msgstr "أتريد حذف هذه الفعالية وقائمة المهتمين بها نهائيًا؟"
 
@@ -6423,9 +6431,17 @@ msgstr "حذف هذه الدعوة؟"
 msgid "Delete this module's data?"
 msgstr "هل تحذف بيانات هذه الوحدة؟"
 
+#: src/interface/events/EventCard.tsx
+msgid "Delete this one and every one after it for good? Nothing more of this series is scheduled."
+msgstr "أتريد حذف هذه المرة وكل ما يليها نهائيًا؟ لن يُجدول شيء آخر من هذه السلسلة."
+
 #: components/app/interface/settings/server/AutoModSettings.tsx
 msgid "Delete this rule?"
 msgstr "حذف هذه القاعدة؟"
+
+#: src/interface/events/EventCard.tsx
+msgid "Delete this time"
+msgstr "حذف هذه المرة"
 
 #: src/interface/events/EventCard.tsx
 msgid "Delete this time and its interested list for good? The next one stays scheduled."
@@ -6488,6 +6504,14 @@ msgstr "حذف الدور {0}"
 #: components/app/interface/settings/server/audit/AuditLog.tsx
 msgid "deleted webhook {0}"
 msgstr "حذف الويب هوك {0}"
+
+#: src/interface/events/EventsPage.tsx
+msgid "Deleted."
+msgstr "حُذفت."
+
+#: src/interface/events/EventsPage.tsx
+msgid "Deleted. The next one is on {date}."
+msgstr "حُذفت. المرة التالية في {date}."
 
 #: components/modal/modals/DeleteEmoji.tsx
 msgid "Deleting this emoji will disallow future use. All past uses will remain."
@@ -7622,11 +7646,22 @@ msgstr "الفعاليات"
 msgid "Events"
 msgstr "الأحداث"
 
+#: components/app/interface/settings/server/EventsLobbySwitches.tsx
 #: src/interface/events/EventsLink.tsx
 #: src/interface/events/EventsPage.tsx
 msgctxt "scheduled events"
 msgid "Events"
 msgstr "الفعاليات"
+
+#: components/app/interface/settings/server/pages.tsx
+#: components/app/interface/settings/ServerSettings.tsx
+msgid "Events and lobby"
+msgstr "الفعاليات والردهة"
+
+#: components/i18n/errors.tsx
+#: src/interface/events/EventsPage.tsx
+msgid "Events are off in this server."
+msgstr "الفعاليات متوقفة في هذا السيرفر."
 
 #: components/modal/modals/ServerEventEditor.tsx
 #: src/interface/events/EventCard.tsx
@@ -11075,6 +11110,7 @@ msgstr "يؤدي التحميل إلى الاتصال بـ {0}. يتلقّى {0}
 msgid "Loading…"
 msgstr "جارٍ التحميل…"
 
+#: components/app/interface/settings/server/EventsLobbySwitches.tsx
 #: components/app/interface/settings/user/appearance/LivePreview.tsx
 #: components/modal/lib/serverTemplateText.ts
 #: src/interface/lobby/Lobby.tsx
@@ -13874,8 +13910,8 @@ msgid "Off: each site like YouTube or Spotify asks you once. On: every player lo
 msgstr "معطّل: يسألك كل موقع مثل YouTube أو Spotify مرة واحدة. مفعّل: تُحمَّل المشغّلات كلها فورًا ويعرف الموقع عنوان IP الخاص بك."
 
 #: components/app/interface/settings/server/LobbySettings.tsx
-msgid "Off: only managers see the lobby, as a preview."
-msgstr "عند الإيقاف: يرى المشرفون الردهة فقط، كمعاينة."
+#~ msgid "Off: only managers see the lobby, as a preview."
+#~ msgstr "عند الإيقاف: يرى المشرفون الردهة فقط، كمعاينة."
 
 #: components/app/interface/settings/server/ServerPrivacy.tsx
 #~ msgid "Off: only roles with the Invite others permission can create invites."
@@ -13986,6 +14022,10 @@ msgstr "في تبويب «نظرة عامة» لتطبيقك اختر «إضاف
 msgid "On your profile now"
 msgstr "على ملفك الشخصي الآن"
 
+#: components/app/interface/settings/server/LobbySettings.tsx
+msgid "On: everyone sees a Lobby row and the server opens on it. Off: nobody sees it; you can still edit and preview it here."
+msgstr "عند التشغيل: يرى الجميع صف «الردهة» ويُفتح السيرفر عليها. عند الإيقاف: لا يراها أحد، ويمكنك مع ذلك تعديلها ومعاينتها هنا."
+
 #: components/modal/modals/DeleteBot.tsx
 #: components/modal/modals/DeleteCategory.tsx
 #: components/modal/modals/DeleteChannel.tsx
@@ -14077,8 +14117,8 @@ msgid "Only invites from people allowed to invite. No requests."
 msgstr "الدعوات فقط ممّن يحق لهم الدعوة. بلا طلبات."
 
 #: src/interface/lobby/LobbyLink.tsx
-msgid "Only managers see this until the lobby is turned on."
-msgstr "يراها المشرفون فقط حتى تُفعَّل الردهة."
+#~ msgid "Only managers see this until the lobby is turned on."
+#~ msgstr "يراها المشرفون فقط حتى تُفعَّل الردهة."
 
 #: components/app/interface/settings/user/bots/CommandManager.tsx
 msgid "Only members with all the permissions picked below see and use it. Your bot should still check them."
@@ -14346,6 +14386,7 @@ msgstr "افتح السيرفر"
 
 #: components/app/menus/ServerContextMenu.tsx
 #: components/modal/modals/PromoteServer.tsx
+#: src/interface/events/EventsPage.tsx
 msgid "Open server settings"
 msgstr "فتح إعدادات السيرفر"
 
@@ -14378,8 +14419,8 @@ msgid "Open the review dashboard"
 msgstr "افتح لوحة المراجعة"
 
 #: components/app/interface/settings/server/LobbySettings.tsx
-msgid "Open the server on its lobby"
-msgstr "افتح السيرفر على الردهة"
+#~ msgid "Open the server on its lobby"
+#~ msgstr "افتح السيرفر على الردهة"
 
 #: components/app/interface/settings/user/Keybinds.tsx
 msgid "Open the server's events"
@@ -15143,6 +15184,10 @@ msgstr "وضع"
 #: src/interface/events/EventsPage.tsx
 msgid "Plan a game night, a talk or a meetup. Members can mark it Interested and hear when it starts."
 msgstr "خطط لأمسية ألعاب أو حديث أو لقاء. يمكن للأعضاء تمييزها بـ«مهتم» ليعلموا حين تبدأ."
+
+#: components/app/interface/settings/server/EventsLobbySwitches.tsx
+msgid "Plan game nights and meetups; an Events row shows for everyone."
+msgstr "خطّط لأمسيات الألعاب واللقاءات؛ يظهر صف «الفعاليات» للجميع."
 
 #: components/modal/lib/serverTemplateText.ts
 msgid "planning"
@@ -17264,6 +17309,10 @@ msgstr "ورد"
 msgid "Rounded"
 msgstr "مستدير"
 
+#: components/app/interface/settings/server/pages.tsx
+msgid "Rows at the top of the channel list. Both start off."
+msgstr "صفوف في أعلى قائمة القنوات. كلاهما متوقف في البداية."
+
 #: components/ui/components/design/DataTable.tsx
 #~ msgid "Rows per page:"
 #~ msgstr "عدد الصفوف في الصفحة:"
@@ -18686,6 +18735,10 @@ msgstr "إظهار مؤثرات الملف الشخصي"
 #: components/app/interface/settings/server/assistant/labels.ts
 msgid "Show the Hijri date"
 msgstr "إظهار التاريخ الهجري"
+
+#: components/app/interface/settings/server/LobbySettings.tsx
+msgid "Show the lobby"
+msgstr "إظهار الردهة"
 
 #: components/app/interface/settings/server/webhooks/ServerWebhooks.tsx
 msgid "Show webhooks made by"
@@ -22104,6 +22157,10 @@ msgstr "فعّلها فقط إذا احتاج إليها بوتك. ودونها 
 #: components/app/interface/settings/user/plugins/text.ts
 msgid "Turned off."
 msgstr "متوقفة."
+
+#: components/app/interface/settings/server/EventsLobbySwitches.tsx
+msgid "Turning one off hides its row and keeps what you made: planned events and the lobby design stay saved."
+msgstr "إيقاف أحدهما يخفي صفه ويحتفظ بما صنعته: تبقى الفعاليات المخطط لها وتصميم الردهة محفوظة."
 
 #: src/interface/developers/docs/DocsPortal.tsx
 msgid "Tutorials"

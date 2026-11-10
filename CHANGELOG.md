@@ -2,6 +2,11 @@
 
 ## Unreleased
 
+### Events and Lobby off by default
+
+* **Deleting a repeating event:** the card offers "Delete this time" and "Delete the whole series", each with its own confirmation and button. Deleting the series ends it (before, Delete wrote the next weekly occurrence and the card looked unchanged). After "Delete this time" a short line under Upcoming says "Deleted. The next one is on <date>." for a few seconds.
+* **Events and Lobby** are off in every server. The owner (Manage Server) turns each on in Server settings > Overview > Events and lobby; the switch saves at once and the row appears at the top of everyone's channel list. The Lobby row no longer shows to managers while the lobby is off; the switch on the Lobby design page also saves at once. Events need the platform flag and the server's switch; while a server has them off its events page says "Events are off in this server." (managers get a button to the settings) and Ctrl+Shift+9 does nothing.
+
 ### Design polish
 
 * **Select messages:** no longer a button in the desktop channel header; it starts from a message's own menu (on phones also from the header's More sheet), with a check-box icon instead of the list icon. While selecting, "Select all" picks every loaded message a bulk delete still takes (newest first, at most 100).
