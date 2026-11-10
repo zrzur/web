@@ -4,8 +4,14 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport"
-    content="width=device-width, initial-scale=1, interactive-widget=resizes-content">
+    content="width=device-width, initial-scale=1, viewport-fit=cover, interactive-widget=resizes-content">
   <meta name="mobile-web-app-capable" content="yes">
+  <!-- Installed on iOS: the page runs under the status bar (black-translucent
+       = white clock and icons on our dark frame; #root keeps clear of them
+       with the safe-area insets, see components/ui/styles.css) -->
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Zrzur">
   <meta name="theme-color" content="#0D0E16">
   <meta name="theme-color" content="#0D0E16" media="(prefers-color-scheme: dark)">
   <meta http-equiv="cache-control" content="no-cache">

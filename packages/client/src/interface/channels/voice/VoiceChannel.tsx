@@ -260,7 +260,8 @@ const Person = styled("div", {
 const Dock = styled("div", {
   base: {
     flexShrink: 0,
-    padding: "12px 16px calc(16px + env(safe-area-inset-bottom))",
+    // #root already stops above the home bar (styles.css)
+    padding: "12px 16px 16px",
     "& > div": { padding: 0, flexGrow: 0 },
   },
 });

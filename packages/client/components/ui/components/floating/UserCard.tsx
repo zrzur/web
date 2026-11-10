@@ -155,9 +155,9 @@ const Card = styled("div", {
     _phone: {
       minWidth: "100vw",
       marginInline: "-8px",
-      marginBlockEnd: "calc(-12px - env(safe-area-inset-bottom))",
+      marginBlockEnd: "calc(-12px - var(--z-safe-bottom))",
       maxHeight: "calc(78dvh - 23px)",
-      paddingBlockEnd: "env(safe-area-inset-bottom)",
+      paddingBlockEnd: "var(--z-safe-bottom)",
       border: "none",
       borderRadius: "14px 14px 0 0",
       boxShadow: "none",

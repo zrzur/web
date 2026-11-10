@@ -625,17 +625,17 @@ const Container = styled("div", {
       minWidth: "0 !important",
       maxWidth: "100%",
       maxHeight:
-        "calc(100dvh - 40px - max(var(--keyboard-inset, 0px), env(keyboard-inset-height, 0px))) !important",
+        "calc(100dvh - 40px - var(--z-safe-top) - max(var(--keyboard-inset, 0px), env(keyboard-inset-height, 0px))) !important",
       // everything but a short confirmation fills the screen below a strip
       // at the top; the body grows and the actions stay on the bottom edge
       "&:not([data-size='sm'])": {
         height:
-          "calc(100dvh - 48px - max(var(--keyboard-inset, 0px), env(keyboard-inset-height, 0px)))",
+          "calc(100dvh - 48px - var(--z-safe-top) - max(var(--keyboard-inset, 0px), env(keyboard-inset-height, 0px)))",
         "& > [data-dialog-body]": { flex: "1 1 auto" },
       },
       paddingTop: "28px !important",
       paddingInline: "16px !important",
-      paddingBottom: "calc(16px + env(safe-area-inset-bottom)) !important",
+      paddingBottom: "calc(16px + var(--z-safe-bottom)) !important",
       borderRadius: "14px 14px 0 0 !important",
       borderInline: "none",
       borderBottom: "none",

@@ -20,7 +20,10 @@ export const Header = styled("div", {
     fontWeight: 600,
     userSelect: "none",
     overflow: "hidden",
-    height: "var(--z-header-height, 56px)",
+    // phones: the row sits a little lower, with room above it (styles.css)
+    boxSizing: "border-box",
+    paddingTop: "var(--z-phone-top-gap, 0px)",
+    height: "calc(var(--z-header-height, 56px) + var(--z-phone-top-gap, 0px))",
     borderRadius: 0,
     borderBottom: "1px solid var(--z-border-subtle)",
     "--z-icon-color": "var(--z-nav-icon)",

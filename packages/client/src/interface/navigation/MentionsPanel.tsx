@@ -190,7 +190,7 @@ const Frame = styled("div", {
       maxHeight: "85dvh",
       display: "flex",
       flexDirection: "column",
-      padding: "22px 8px calc(12px + env(safe-area-inset-bottom))",
+      padding: "22px 8px calc(12px + var(--z-safe-bottom))",
       borderRadius: "22px 22px 0 0",
       borderTop: "1px solid var(--z-border-strong)",
       background: "var(--z-bg-modal, var(--z-bg-raised))",

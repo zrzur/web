@@ -157,8 +157,8 @@ const Bar = styled("nav", {
       // equal columns, but never narrower than the label (German "Erwähnungen")
       gridTemplateColumns: "repeat(5, auto)",
       justifyContent: "space-around",
-      height: "calc(62px + env(safe-area-inset-bottom))",
-      paddingBottom: "env(safe-area-inset-bottom)",
+      // #root already stops above the home bar (styles.css), so no inset here
+      height: "62px",
       background: "var(--z-bg-frame)",
       borderTop: "1px solid var(--z-border-subtle)",
     },

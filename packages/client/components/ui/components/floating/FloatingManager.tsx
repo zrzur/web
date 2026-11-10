@@ -354,7 +354,7 @@ const SheetPanel = styled("div", {
     maxHeight: "78dvh",
     overflowY: "auto",
     overscrollBehavior: "contain",
-    padding: "22px 8px calc(12px + env(safe-area-inset-bottom))",
+    padding: "22px 8px calc(12px + var(--z-safe-bottom))",
     borderRadius: "22px 22px 0 0",
     background: "var(--z-bg-modal, var(--z-bg-raised))",
     borderTop: "1px solid var(--z-border-strong)",
