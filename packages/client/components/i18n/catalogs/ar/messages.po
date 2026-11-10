@@ -643,6 +643,7 @@ msgstr "{0} طلبًا كل {1} ثانية"
 
 #. placeholder {0}: seconds(sound.duration_ms)
 #: components/app/interface/settings/server/soundboard/SoundboardList.tsx
+#: components/app/interface/settings/server/soundboard/SoundLibrary.tsx
 msgid "{0} s"
 msgstr "{0} ث"
 
@@ -1637,6 +1638,7 @@ msgstr "ما حدث فعلاً"
 msgid "discover.paid.ad"
 msgstr "إعلان"
 
+#: components/app/interface/settings/server/soundboard/SoundLibrary.tsx
 #: components/modal/modals/AddBot.tsx
 #: components/modal/modals/AddMembersToGroup.tsx
 #: src/interface/channels/text/Composition.tsx
@@ -1842,6 +1844,7 @@ msgid "Add some friends first, or share the link below."
 msgstr "أضف بعض الأصدقاء أولًا، أو شارك الرابط أدناه."
 
 #: components/app/interface/settings/server/soundboard/SoundboardList.tsx
+#: components/app/interface/settings/server/soundboard/SoundLibrary.tsx
 msgid "Add sound"
 msgstr "أضف الصوت"
 
@@ -1891,6 +1894,10 @@ msgstr "أضف زرزور المساعد إلى هذا السيرفر أولاً
 #: components/app/interface/settings/server/assistant/AssistantFields.tsx
 msgid "Add…"
 msgstr "إضافة…"
+
+#: components/app/interface/settings/server/soundboard/SoundLibrary.tsx
+msgid "Added"
+msgstr "أُضيف"
 
 #. placeholder {0}: new Date(install!.installed_at).toLocaleDateString()
 #: components/app/interface/settings/server/ServerApps.tsx
@@ -2138,6 +2145,10 @@ msgstr "لكل الأدوار صلاحيات مخصصة."
 #: src/interface/Discover.tsx
 msgid "All servers"
 msgstr "كل السيرفرات"
+
+#: components/app/interface/settings/server/soundboard/SoundLibrary.tsx
+msgid "All sounds"
+msgstr "كل الأصوات"
 
 #: components/ui/components/design/LoadingScreen.tsx
 msgid "All Systems Operational"
@@ -3760,6 +3771,7 @@ msgstr "كندا"
 #: components/app/interface/settings/server/ServerAccess.tsx
 #: components/app/interface/settings/server/ServerOwnership.tsx
 #: components/app/interface/settings/server/soundboard/SoundboardList.tsx
+#: components/app/interface/settings/server/soundboard/SoundLibrary.tsx
 #: components/app/interface/settings/server/webhooks/ServerWebhooks.tsx
 #: components/app/interface/settings/user/account/AgeSettings.tsx
 #: components/app/interface/settings/user/bots/CommandManager.tsx
@@ -3979,6 +3991,7 @@ msgstr "الفئات"
 
 #: components/app/interface/discover/ServerPage.tsx
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsOverview.tsx
+#: components/app/interface/settings/server/soundboard/SoundLibrary.tsx
 #: components/app/interface/settings/shared/Discoverable.tsx
 #: components/app/interface/settings/user/plugins/BrowseTab.tsx
 #: components/app/interface/settings/user/plugins/DeveloperTab.tsx
@@ -10811,6 +10824,10 @@ msgstr "ليبيريا"
 msgid "Libra"
 msgstr "الميزان"
 
+#: components/app/interface/settings/server/soundboard/SoundboardList.tsx
+msgid "Library"
+msgstr "المكتبة"
+
 #: components/ui/components/features/profiles/plateNames.ts
 msgid "Libya"
 msgstr "ليبيا"
@@ -10958,8 +10975,10 @@ msgstr "مدرج في «اكتشف»."
 msgid "Listen"
 msgstr "استماع"
 
+#. placeholder {0}: name(sound)
 #. placeholder {0}: sound.name
 #: components/app/interface/settings/server/soundboard/SoundboardList.tsx
+#: components/app/interface/settings/server/soundboard/SoundLibrary.tsx
 msgid "Listen to {0}"
 msgstr "استمع إلى {0}"
 
@@ -11080,6 +11099,7 @@ msgstr "يؤدي التحميل إلى الاتصال بـ {0}. يتلقّى {0}
 #: components/app/interface/settings/server/apps/ServerAppPage.tsx
 #: components/app/interface/settings/server/ServerApps.tsx
 #: components/app/interface/settings/server/soundboard/SoundboardList.tsx
+#: components/app/interface/settings/server/soundboard/SoundLibrary.tsx
 #: components/app/interface/settings/server/webhooks/ServerWebhooks.tsx
 #: components/app/interface/settings/user/badges/MyBadges.tsx
 #: components/app/interface/settings/user/bots/CommandManager.tsx
@@ -12593,6 +12613,7 @@ msgstr "الاسم"
 #: components/app/interface/settings/server/emojis/EmojiList.tsx
 #: components/app/interface/settings/server/members/ListMembers.tsx
 #: components/app/interface/settings/server/soundboard/SoundboardList.tsx
+#: components/app/interface/settings/server/soundboard/SoundLibrary.tsx
 #: components/app/interface/settings/user/badges/BetaAdmin.tsx
 #: components/app/interface/settings/user/bots/CommandManager.tsx
 #: components/app/interface/settings/user/plugins/DeveloperTab.tsx
@@ -13445,6 +13466,10 @@ msgstr "لا سيرفرات ولا أصدقاء مشتركون بينكما."
 #: components/modal/modals/MoveSupercharge.tsx
 msgid "No servers to show."
 msgstr "لا توجد سيرفرات لعرضها."
+
+#: components/app/interface/settings/server/soundboard/SoundLibrary.tsx
+msgid "No sounds match your search."
+msgstr "لا أصوات تطابق بحثك."
 
 #: components/app/interface/settings/server/soundboard/SoundboardList.tsx
 msgid "No sounds yet."
@@ -16087,6 +16112,10 @@ msgstr "جاهزة"
 #~ msgid "Ready-made looks"
 #~ msgstr "إطلالات جاهزة"
 
+#: components/app/interface/settings/server/soundboard/SoundLibrary.tsx
+msgid "Ready-made sounds, free for everyone (CC0, from Kenney). Listen, then add the ones you like."
+msgstr "أصوات جاهزة ومجانية للجميع (CC0، من Kenney). استمع إليها، ثم أضف ما يعجبك منها."
+
 #: components/app/interface/settings/user/profile/CreatorSuspension.tsx
 #: components/app/interface/settings/user/safety/SafetyDashboard.tsx
 #: components/i18n/errors.tsx
@@ -17959,6 +17988,10 @@ msgstr "ابحث عن سيرفر"
 msgid "Search settings"
 msgstr "ابحث في الإعدادات"
 
+#: components/app/interface/settings/server/soundboard/SoundLibrary.tsx
+msgid "Search sounds"
+msgstr "ابحث في الأصوات"
+
 #: src/interface/developers/docs/DocsPortal.tsx
 msgid "Search the documentation"
 msgstr "ابحث في التوثيق"
@@ -18673,6 +18706,7 @@ msgstr "عرض أقل"
 msgid "Show members separately"
 msgstr "إظهار الأعضاء بشكل منفصل"
 
+#: components/app/interface/settings/server/soundboard/SoundLibrary.tsx
 #: components/app/interface/settings/user/profile/CommunityGallery.tsx
 #: components/modal/modals/PollVoters.tsx
 #: components/ui/components/features/messaging/elements/TextEmbed.tsx
@@ -20805,12 +20839,17 @@ msgstr "الإيموجي الخاصة بالسيرفر."
 #~ msgid "The server's own emojis."
 #~ msgstr "إيموجي السيرفر الخاصة."
 
+#: components/i18n/errors.tsx
+msgid "The sound library isn't ready yet. Try again in a minute."
+msgstr "مكتبة الأصوات ليست جاهزة بعد. حاول مجددًا بعد دقيقة."
+
 #. placeholder {0}: err.max
 #: components/i18n/errors.tsx
 msgid "The soundboard has {0} sounds already. Remove one first."
 msgstr "بلغ عدد الأصوات في لوحة الأصوات الحد الأقصى ({0}). أزل صوتًا أولًا."
 
 #: components/app/interface/settings/server/soundboard/SoundboardList.tsx
+#: components/app/interface/settings/server/soundboard/SoundLibrary.tsx
 msgid "The soundboard is full. Remove a sound, or add Wings to the server for more."
 msgstr "لوحة الأصوات ممتلئة. أزل صوتًا، أو أضف أجنحة إلى السيرفر لمزيد من الأصوات."
 
@@ -21584,6 +21623,10 @@ msgstr "هذا الموقع لا يستخدم اتصالًا آمنًا (بدو�
 #: components/app/interface/settings/user/notifications/Sounds.tsx
 msgid "This sound couldn't be played. Check your output device."
 msgstr "تعذّر تشغيل هذا الصوت. تحقق من جهاز الإخراج."
+
+#: components/i18n/errors.tsx
+msgid "This sound is on the soundboard already."
+msgstr "هذا الصوت موجود في لوحة الأصوات مسبقًا."
 
 #. placeholder {0}: maxSeconds()
 #: components/app/interface/settings/server/soundboard/SoundboardList.tsx
@@ -22590,6 +22633,7 @@ msgid "Updating…"
 msgstr "جارٍ التحديث…"
 
 #: components/app/interface/settings/server/emojis/EmojiList.tsx
+#: components/app/interface/settings/server/soundboard/SoundboardList.tsx
 msgid "Upload"
 msgstr "رفع"
 
@@ -23781,6 +23825,10 @@ msgstr "المكان الذي سيجده فيه من يتصفّح «اكتشف»
 #: components/app/interface/settings/server/LobbySettings.tsx
 msgid "Where people who love games meet"
 msgstr "حيث يلتقي محبّو الألعاب"
+
+#: components/app/interface/settings/server/soundboard/SoundboardList.tsx
+msgid "Where the sound comes from"
+msgstr "مصدر الصوت"
 
 #: components/app/interface/settings/server/assistant/labels.ts
 msgid "Where tickets open"

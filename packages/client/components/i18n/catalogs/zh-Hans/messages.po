@@ -627,6 +627,7 @@ msgstr "每 {1} 秒 {0} 次请求"
 
 #. placeholder {0}: seconds(sound.duration_ms)
 #: components/app/interface/settings/server/soundboard/SoundboardList.tsx
+#: components/app/interface/settings/server/soundboard/SoundLibrary.tsx
 msgid "{0} s"
 msgstr "{0} 秒"
 
@@ -1604,6 +1605,7 @@ msgstr "实际值"
 msgid "discover.paid.ad"
 msgstr "广告"
 
+#: components/app/interface/settings/server/soundboard/SoundLibrary.tsx
 #: components/modal/modals/AddBot.tsx
 #: components/modal/modals/AddMembersToGroup.tsx
 #: src/interface/channels/text/Composition.tsx
@@ -1801,6 +1803,7 @@ msgid "Add some friends first, or share the link below."
 msgstr "请先添加一些好友，或分享下方的链接。"
 
 #: components/app/interface/settings/server/soundboard/SoundboardList.tsx
+#: components/app/interface/settings/server/soundboard/SoundLibrary.tsx
 msgid "Add sound"
 msgstr "添加音效"
 
@@ -1850,6 +1853,10 @@ msgstr "请先将 Zrzur 助手添加到此服务器。"
 #: components/app/interface/settings/server/assistant/AssistantFields.tsx
 msgid "Add…"
 msgstr "添加…"
+
+#: components/app/interface/settings/server/soundboard/SoundLibrary.tsx
+msgid "Added"
+msgstr "已添加"
 
 #. placeholder {0}: new Date(install!.installed_at).toLocaleDateString()
 #: components/app/interface/settings/server/ServerApps.tsx
@@ -2097,6 +2104,10 @@ msgstr "所有角色都设有覆盖设置。"
 #: src/interface/Discover.tsx
 msgid "All servers"
 msgstr "所有服务器"
+
+#: components/app/interface/settings/server/soundboard/SoundLibrary.tsx
+msgid "All sounds"
+msgstr "全部音效"
 
 #: components/ui/components/design/LoadingScreen.tsx
 msgid "All Systems Operational"
@@ -3662,6 +3673,7 @@ msgstr "加拿大"
 #: components/app/interface/settings/server/ServerAccess.tsx
 #: components/app/interface/settings/server/ServerOwnership.tsx
 #: components/app/interface/settings/server/soundboard/SoundboardList.tsx
+#: components/app/interface/settings/server/soundboard/SoundLibrary.tsx
 #: components/app/interface/settings/server/webhooks/ServerWebhooks.tsx
 #: components/app/interface/settings/user/account/AgeSettings.tsx
 #: components/app/interface/settings/user/bots/CommandManager.tsx
@@ -3874,6 +3886,7 @@ msgstr "分类"
 
 #: components/app/interface/discover/ServerPage.tsx
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsOverview.tsx
+#: components/app/interface/settings/server/soundboard/SoundLibrary.tsx
 #: components/app/interface/settings/shared/Discoverable.tsx
 #: components/app/interface/settings/user/plugins/BrowseTab.tsx
 #: components/app/interface/settings/user/plugins/DeveloperTab.tsx
@@ -10363,6 +10376,10 @@ msgstr "利比里亚"
 msgid "Libra"
 msgstr "天秤座"
 
+#: components/app/interface/settings/server/soundboard/SoundboardList.tsx
+msgid "Library"
+msgstr "音效库"
+
 #: components/ui/components/features/profiles/plateNames.ts
 msgid "Libya"
 msgstr "利比亚"
@@ -10498,8 +10515,10 @@ msgstr "已上架“发现”。"
 msgid "Listen"
 msgstr "收听"
 
+#. placeholder {0}: name(sound)
 #. placeholder {0}: sound.name
 #: components/app/interface/settings/server/soundboard/SoundboardList.tsx
+#: components/app/interface/settings/server/soundboard/SoundLibrary.tsx
 msgid "Listen to {0}"
 msgstr "试听 {0}"
 
@@ -10620,6 +10639,7 @@ msgstr "加载此内容会连接到 {0}。它们会获取你的 IP 地址，并�
 #: components/app/interface/settings/server/apps/ServerAppPage.tsx
 #: components/app/interface/settings/server/ServerApps.tsx
 #: components/app/interface/settings/server/soundboard/SoundboardList.tsx
+#: components/app/interface/settings/server/soundboard/SoundLibrary.tsx
 #: components/app/interface/settings/server/webhooks/ServerWebhooks.tsx
 #: components/app/interface/settings/user/badges/MyBadges.tsx
 #: components/app/interface/settings/user/bots/CommandManager.tsx
@@ -12086,6 +12106,7 @@ msgstr "名称"
 #: components/app/interface/settings/server/emojis/EmojiList.tsx
 #: components/app/interface/settings/server/members/ListMembers.tsx
 #: components/app/interface/settings/server/soundboard/SoundboardList.tsx
+#: components/app/interface/settings/server/soundboard/SoundLibrary.tsx
 #: components/app/interface/settings/user/badges/BetaAdmin.tsx
 #: components/app/interface/settings/user/bots/CommandManager.tsx
 #: components/app/interface/settings/user/plugins/DeveloperTab.tsx
@@ -12890,6 +12911,10 @@ msgstr "没有共同的服务器或好友。"
 #: components/modal/modals/MoveSupercharge.tsx
 msgid "No servers to show."
 msgstr "没有可显示的服务器。"
+
+#: components/app/interface/settings/server/soundboard/SoundLibrary.tsx
+msgid "No sounds match your search."
+msgstr "没有符合搜索的音效。"
 
 #: components/app/interface/settings/server/soundboard/SoundboardList.tsx
 msgid "No sounds yet."
@@ -15368,6 +15393,10 @@ msgstr "就绪"
 #~ msgid "Ready-made looks"
 #~ msgstr ""
 
+#: components/app/interface/settings/server/soundboard/SoundLibrary.tsx
+msgid "Ready-made sounds, free for everyone (CC0, from Kenney). Listen, then add the ones you like."
+msgstr "现成的音效，所有人免费使用（CC0，来自 Kenney）。先试听，再添加你喜欢的。"
+
 #: components/app/interface/settings/user/profile/CreatorSuspension.tsx
 #: components/app/interface/settings/user/safety/SafetyDashboard.tsx
 #: components/i18n/errors.tsx
@@ -17150,6 +17179,10 @@ msgstr "搜索服务器"
 msgid "Search settings"
 msgstr "搜索设置"
 
+#: components/app/interface/settings/server/soundboard/SoundLibrary.tsx
+msgid "Search sounds"
+msgstr "搜索音效"
+
 #: src/interface/developers/docs/DocsPortal.tsx
 msgid "Search the documentation"
 msgstr "搜索文档"
@@ -17832,6 +17865,7 @@ msgstr "收起"
 msgid "Show members separately"
 msgstr "单独显示成员"
 
+#: components/app/interface/settings/server/soundboard/SoundLibrary.tsx
 #: components/app/interface/settings/user/profile/CommunityGallery.tsx
 #: components/modal/modals/PollVoters.tsx
 #: components/ui/components/features/messaging/elements/TextEmbed.tsx
@@ -19913,12 +19947,17 @@ msgstr "服务器的等级及其特权。"
 msgid "The server's own emoji."
 msgstr "服务器自己的表情。"
 
+#: components/i18n/errors.tsx
+msgid "The sound library isn't ready yet. Try again in a minute."
+msgstr "音效库尚未就绪，请一分钟后再试。"
+
 #. placeholder {0}: err.max
 #: components/i18n/errors.tsx
 msgid "The soundboard has {0} sounds already. Remove one first."
 msgstr "音效板已有 {0} 个音效。请先移除一个。"
 
 #: components/app/interface/settings/server/soundboard/SoundboardList.tsx
+#: components/app/interface/settings/server/soundboard/SoundLibrary.tsx
 msgid "The soundboard is full. Remove a sound, or add Wings to the server for more."
 msgstr "音效板已满。移除一个音效，或给服务器添加羽翼以获得更多位置。"
 
@@ -20663,6 +20702,10 @@ msgstr "此网站未使用安全连接（没有 HTTPS）。你所在网络中的
 #: components/app/interface/settings/user/notifications/Sounds.tsx
 msgid "This sound couldn't be played. Check your output device."
 msgstr "无法播放此声音。请检查你的输出设备。"
+
+#: components/i18n/errors.tsx
+msgid "This sound is on the soundboard already."
+msgstr "这个音效已在音效板中。"
 
 #. placeholder {0}: maxSeconds()
 #: components/app/interface/settings/server/soundboard/SoundboardList.tsx
@@ -21637,6 +21680,7 @@ msgid "Updating…"
 msgstr "正在更新…"
 
 #: components/app/interface/settings/server/emojis/EmojiList.tsx
+#: components/app/interface/settings/server/soundboard/SoundboardList.tsx
 msgid "Upload"
 msgstr "上传"
 
@@ -22727,6 +22771,10 @@ msgstr "浏览发现的人会在这里找到它。"
 #: components/app/interface/settings/server/LobbySettings.tsx
 msgid "Where people who love games meet"
 msgstr "热爱游戏的人聚集的地方"
+
+#: components/app/interface/settings/server/soundboard/SoundboardList.tsx
+msgid "Where the sound comes from"
+msgstr "音效来源"
 
 #: components/app/interface/settings/server/assistant/labels.ts
 msgid "Where tickets open"

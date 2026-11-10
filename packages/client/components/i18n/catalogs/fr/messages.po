@@ -627,6 +627,7 @@ msgstr "{0} requêtes par {1} s"
 
 #. placeholder {0}: seconds(sound.duration_ms)
 #: components/app/interface/settings/server/soundboard/SoundboardList.tsx
+#: components/app/interface/settings/server/soundboard/SoundLibrary.tsx
 msgid "{0} s"
 msgstr "{0} s"
 
@@ -1604,6 +1605,7 @@ msgstr "Résultat obtenu"
 msgid "discover.paid.ad"
 msgstr "Pub"
 
+#: components/app/interface/settings/server/soundboard/SoundLibrary.tsx
 #: components/modal/modals/AddBot.tsx
 #: components/modal/modals/AddMembersToGroup.tsx
 #: src/interface/channels/text/Composition.tsx
@@ -1801,6 +1803,7 @@ msgid "Add some friends first, or share the link below."
 msgstr "Ajoute d’abord quelques amis, ou partage le lien ci-dessous."
 
 #: components/app/interface/settings/server/soundboard/SoundboardList.tsx
+#: components/app/interface/settings/server/soundboard/SoundLibrary.tsx
 msgid "Add sound"
 msgstr "Ajouter le son"
 
@@ -1850,6 +1853,10 @@ msgstr "Ajoute d’abord Zrzur Assistant à ce serveur."
 #: components/app/interface/settings/server/assistant/AssistantFields.tsx
 msgid "Add…"
 msgstr "Ajouter…"
+
+#: components/app/interface/settings/server/soundboard/SoundLibrary.tsx
+msgid "Added"
+msgstr "Ajouté"
 
 #. placeholder {0}: new Date(install!.installed_at).toLocaleDateString()
 #: components/app/interface/settings/server/ServerApps.tsx
@@ -2097,6 +2104,10 @@ msgstr "Tous les rôles disposent de permissions spécifiques."
 #: src/interface/Discover.tsx
 msgid "All servers"
 msgstr "Tous les serveurs"
+
+#: components/app/interface/settings/server/soundboard/SoundLibrary.tsx
+msgid "All sounds"
+msgstr "Tous les sons"
 
 #: components/ui/components/design/LoadingScreen.tsx
 msgid "All Systems Operational"
@@ -3662,6 +3673,7 @@ msgstr "Canada"
 #: components/app/interface/settings/server/ServerAccess.tsx
 #: components/app/interface/settings/server/ServerOwnership.tsx
 #: components/app/interface/settings/server/soundboard/SoundboardList.tsx
+#: components/app/interface/settings/server/soundboard/SoundLibrary.tsx
 #: components/app/interface/settings/server/webhooks/ServerWebhooks.tsx
 #: components/app/interface/settings/user/account/AgeSettings.tsx
 #: components/app/interface/settings/user/bots/CommandManager.tsx
@@ -3874,6 +3886,7 @@ msgstr "Catégories"
 
 #: components/app/interface/discover/ServerPage.tsx
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsOverview.tsx
+#: components/app/interface/settings/server/soundboard/SoundLibrary.tsx
 #: components/app/interface/settings/shared/Discoverable.tsx
 #: components/app/interface/settings/user/plugins/BrowseTab.tsx
 #: components/app/interface/settings/user/plugins/DeveloperTab.tsx
@@ -10363,6 +10376,10 @@ msgstr "Liberia"
 msgid "Libra"
 msgstr "Balance"
 
+#: components/app/interface/settings/server/soundboard/SoundboardList.tsx
+msgid "Library"
+msgstr "Bibliothèque"
+
 #: components/ui/components/features/profiles/plateNames.ts
 msgid "Libya"
 msgstr "Libye"
@@ -10498,8 +10515,10 @@ msgstr "Listé dans Découvrir."
 msgid "Listen"
 msgstr "Écouter"
 
+#. placeholder {0}: name(sound)
 #. placeholder {0}: sound.name
 #: components/app/interface/settings/server/soundboard/SoundboardList.tsx
+#: components/app/interface/settings/server/soundboard/SoundLibrary.tsx
 msgid "Listen to {0}"
 msgstr "Écouter {0}"
 
@@ -10620,6 +10639,7 @@ msgstr "Ce chargement se connecte à {0}. Cette société obtient ton adresse IP
 #: components/app/interface/settings/server/apps/ServerAppPage.tsx
 #: components/app/interface/settings/server/ServerApps.tsx
 #: components/app/interface/settings/server/soundboard/SoundboardList.tsx
+#: components/app/interface/settings/server/soundboard/SoundLibrary.tsx
 #: components/app/interface/settings/server/webhooks/ServerWebhooks.tsx
 #: components/app/interface/settings/user/badges/MyBadges.tsx
 #: components/app/interface/settings/user/bots/CommandManager.tsx
@@ -12086,6 +12106,7 @@ msgstr "nom"
 #: components/app/interface/settings/server/emojis/EmojiList.tsx
 #: components/app/interface/settings/server/members/ListMembers.tsx
 #: components/app/interface/settings/server/soundboard/SoundboardList.tsx
+#: components/app/interface/settings/server/soundboard/SoundLibrary.tsx
 #: components/app/interface/settings/user/badges/BetaAdmin.tsx
 #: components/app/interface/settings/user/bots/CommandManager.tsx
 #: components/app/interface/settings/user/plugins/DeveloperTab.tsx
@@ -12890,6 +12911,10 @@ msgstr "Aucun serveur ni ami en commun."
 #: components/modal/modals/MoveSupercharge.tsx
 msgid "No servers to show."
 msgstr "Aucun serveur à afficher."
+
+#: components/app/interface/settings/server/soundboard/SoundLibrary.tsx
+msgid "No sounds match your search."
+msgstr "Aucun son ne correspond à ta recherche."
 
 #: components/app/interface/settings/server/soundboard/SoundboardList.tsx
 msgid "No sounds yet."
@@ -15368,6 +15393,10 @@ msgstr "Prêt"
 #~ msgid "Ready-made looks"
 #~ msgstr ""
 
+#: components/app/interface/settings/server/soundboard/SoundLibrary.tsx
+msgid "Ready-made sounds, free for everyone (CC0, from Kenney). Listen, then add the ones you like."
+msgstr "Des sons prêts à l’emploi, gratuits pour tous (CC0, de Kenney). Écoute-les, puis ajoute ceux qui te plaisent."
+
 #: components/app/interface/settings/user/profile/CreatorSuspension.tsx
 #: components/app/interface/settings/user/safety/SafetyDashboard.tsx
 #: components/i18n/errors.tsx
@@ -17150,6 +17179,10 @@ msgstr "Rechercher des serveurs"
 msgid "Search settings"
 msgstr "Rechercher dans les paramètres"
 
+#: components/app/interface/settings/server/soundboard/SoundLibrary.tsx
+msgid "Search sounds"
+msgstr "Rechercher des sons"
+
 #: src/interface/developers/docs/DocsPortal.tsx
 msgid "Search the documentation"
 msgstr "Rechercher dans la documentation"
@@ -17832,6 +17865,7 @@ msgstr "Afficher moins"
 msgid "Show members separately"
 msgstr "Afficher les membres séparément"
 
+#: components/app/interface/settings/server/soundboard/SoundLibrary.tsx
 #: components/app/interface/settings/user/profile/CommunityGallery.tsx
 #: components/modal/modals/PollVoters.tsx
 #: components/ui/components/features/messaging/elements/TextEmbed.tsx
@@ -19913,12 +19947,17 @@ msgstr "Le niveau du serveur et ses avantages."
 msgid "The server's own emoji."
 msgstr "Les émojis propres au serveur."
 
+#: components/i18n/errors.tsx
+msgid "The sound library isn't ready yet. Try again in a minute."
+msgstr "La bibliothèque de sons n’est pas encore prête. Réessaie dans une minute."
+
 #. placeholder {0}: err.max
 #: components/i18n/errors.tsx
 msgid "The soundboard has {0} sounds already. Remove one first."
 msgstr "La table de sons contient déjà {0} sons. Retires-en un d’abord."
 
 #: components/app/interface/settings/server/soundboard/SoundboardList.tsx
+#: components/app/interface/settings/server/soundboard/SoundLibrary.tsx
 msgid "The soundboard is full. Remove a sound, or add Wings to the server for more."
 msgstr "La table de sons est pleine. Retire un son, ou donne des Ailes au serveur pour en avoir plus."
 
@@ -20663,6 +20702,10 @@ msgstr "Ce site n’utilise pas de connexion sécurisée (pas de HTTPS). D’aut
 #: components/app/interface/settings/user/notifications/Sounds.tsx
 msgid "This sound couldn't be played. Check your output device."
 msgstr "Ce son n’a pas pu être lu. Vérifie ton périphérique de sortie."
+
+#: components/i18n/errors.tsx
+msgid "This sound is on the soundboard already."
+msgstr "Ce son est déjà sur la table de sons."
 
 #. placeholder {0}: maxSeconds()
 #: components/app/interface/settings/server/soundboard/SoundboardList.tsx
@@ -21637,6 +21680,7 @@ msgid "Updating…"
 msgstr "Mise à jour…"
 
 #: components/app/interface/settings/server/emojis/EmojiList.tsx
+#: components/app/interface/settings/server/soundboard/SoundboardList.tsx
 msgid "Upload"
 msgstr "Téléverser"
 
@@ -22727,6 +22771,10 @@ msgstr "Là où les personnes qui parcourent Découvrir la trouveront."
 #: components/app/interface/settings/server/LobbySettings.tsx
 msgid "Where people who love games meet"
 msgstr "Là où se retrouvent les passionnés de jeux"
+
+#: components/app/interface/settings/server/soundboard/SoundboardList.tsx
+msgid "Where the sound comes from"
+msgstr "Origine du son"
 
 #: components/app/interface/settings/server/assistant/labels.ts
 msgid "Where tickets open"

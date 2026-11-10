@@ -6,6 +6,9 @@
 
 * **Deleting a repeating event:** the card offers "Delete this time" and "Delete the whole series", each with its own confirmation and button. Deleting the series ends it (before, Delete wrote the next weekly occurrence and the card looked unchanged). After "Delete this time" a short line under Upcoming says "Deleted. The next one is on <date>." for a few seconds.
 * **Events and Lobby** are off in every server. The owner (Manage Server) turns each on in Server settings > Overview > Events and lobby; the switch saves at once and the row appears at the top of everyone's channel list. The Lobby row no longer shows to managers while the lobby is off; the switch on the Lobby design page also saves at once. Events need the platform flag and the server's switch; while a server has them off its events page says "Events are off in this server." (managers get a button to the settings) and Ctrl+Shift+9 does nothing.
+### Sound library
+
+- Server settings, Soundboard: a Library tab next to Upload with ready-made sounds (Kenney, CC0). Pick a category, search by name in the page language or in English, listen (one at a time, at your soundboard volume; a file is fetched only when played) and Add under the library name in your language, which you can change first. Sounds the server has show as Added; without Manage Soundboard there is no Add. The tab is its own chunk; the Soundboard page fetches it and the library list as it opens (and again on hover or focus of the tabs if that failed), so the tab opens at once; long lists show 24 sounds at a time. A library the server has not stored yet says to try again in a minute. Strings in en, ar, de, fr, es, ru and zh-Hans.
 
 ### Design polish
 
