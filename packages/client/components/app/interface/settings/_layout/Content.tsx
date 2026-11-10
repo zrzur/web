@@ -181,7 +181,7 @@ const InnerContent = styled("div", {
     zIndex: 1,
 
     _tablet: { padding: "16px" },
-    _phone: { height: "100vh" },
+    _phone: { height: "calc(100vh - var(--z-settings-frame-gap, 0px))" },
   },
 });
 
@@ -271,7 +271,7 @@ const ActionRail = styled("div", {
   base: {
     height: "calc(100vh - var(--z-settings-frame-gap, 0px))",
     minWidth: "56px",
-    padding: "24px 16px calc(var(--gap-xl) + env(safe-area-inset-bottom))",
+    padding: "24px 16px calc(var(--gap-xl) + var(--z-safe-bottom))",
 
     zIndex: 2,
     flexGrow: 1,
@@ -289,7 +289,7 @@ const ActionRail = styled("div", {
       insetInlineEnd: 0,
       height: "100dvh",
       padding: "12px",
-      paddingBlockEnd: "calc(12px + env(safe-area-inset-bottom))",
+      paddingBlockEnd: "calc(12px + var(--z-safe-bottom))",
       alignItems: "flex-end",
       justifyContent: "flex-end",
       pointerEvents: "none",

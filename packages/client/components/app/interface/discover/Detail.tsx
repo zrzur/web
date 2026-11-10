@@ -501,7 +501,7 @@ const Panel = styled("div", {
     width: "min(880px, 100%)",
     minWidth: 0,
     boxSizing: "border-box",
-    maxHeight: "calc(100dvh - 48px)",
+    maxHeight: "calc(100dvh - 48px - var(--z-safe-top))",
     display: "flex",
     flexDirection: "column",
     position: "relative",
@@ -881,7 +881,7 @@ const Actions = styled("div", {
     "@media (max-width: 600px)": {
       flexDirection: "column-reverse",
       alignItems: "stretch",
-      padding: "12px 16px calc(12px + env(safe-area-inset-bottom))",
+      padding: "12px 16px calc(12px + var(--z-safe-bottom))",
     },
   },
 });

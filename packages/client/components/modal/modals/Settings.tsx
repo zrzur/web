@@ -99,11 +99,16 @@ const settingsOverlay =
     // is a panel with a rounded top-start corner below a small top gap
     background: "var(--z-bg-frame)",
     paddingTop: "var(--z-settings-frame-gap)",
+    // settings cover the whole screen, outside #root: keep clear of the
+    // status bar / notch and, in landscape, of the side cut-outs
+    // (physical sides on purpose: the cut-outs do not mirror in Arabic)
+    paddingLeft: "var(--z-safe-left)",
+    paddingRight: "var(--z-safe-right)",
     // same gap as the main app's top bar
-    "--z-settings-frame-gap": "var(--z-titlebar-height, 32px)",
+    "--z-settings-frame-gap":
+      "calc(var(--z-titlebar-height, 32px) + var(--z-safe-top))",
 
     _phone: {
-      paddingTop: 0,
-      "--z-settings-frame-gap": "0px",
+      "--z-settings-frame-gap": "var(--z-safe-top)",
     },
   });

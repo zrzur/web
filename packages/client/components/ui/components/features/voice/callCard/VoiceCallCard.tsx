@@ -186,9 +186,17 @@ export function VoiceCallCardContext(props: { children: JSX.Element }) {
       .some((track) => track.publication && !track.publication.isMuted);
 
   function setFloat(float: FloatType) {
+    // the card is fixed to the screen, outside #root: its corners stay
+    // inside the safe area (notch, status bar, home bar)
     const sty = ref!.style,
-      x = float[1] === "l" ? PAD_X : `calc(100vw - var(--flt-w) - ${PAD_X})`,
-      y = float[0] === "t" ? PAD_Y : `calc(100vh - var(--flt-h) - ${PAD_Y})`;
+      x =
+        float[1] === "l"
+          ? `calc(${PAD_X} + var(--z-safe-left, 0px))`
+          : `calc(100vw - var(--flt-w) - ${PAD_X} - var(--z-safe-right, 0px))`,
+      y =
+        float[0] === "t"
+          ? `calc(${PAD_Y} + var(--z-safe-top, 0px))`
+          : `calc(100vh - var(--flt-h) - ${PAD_Y} - var(--z-safe-bottom, 0px))`;
     sty.transform = `translate(${x}, ${y})`;
     sty.width = "";
     sty.height = "";
@@ -280,6 +288,12 @@ const Float = styled("div", {
         zIndex: 100,
         height: "100vh",
         top: 0,
+        // the whole screen: the call controls stay clear of the notch and
+        // the home bar (physical sides: cut-outs do not mirror in Arabic)
+        paddingTop: "var(--z-safe-top)",
+        paddingBottom: "var(--z-safe-bottom)",
+        paddingLeft: "var(--z-safe-left)",
+        paddingRight: "var(--z-safe-right)",
         // Width is set by floating logic in effect above
       },
     },

@@ -280,7 +280,10 @@ export const Header = styled("div", {
     userSelect: "none",
     overflow: "hidden",
     textOverflow: "ellipsis",
-    height: "var(--z-header-height, 56px)",
+    // phones: room above the row, as on every screen header (styles.css)
+    boxSizing: "border-box",
+    paddingTop: "var(--z-phone-top-gap, 0px)",
+    height: "calc(var(--z-header-height, 56px) + var(--z-phone-top-gap, 0px))",
     lineHeight: "var(--z-header-height, 56px)",
     verticalAlign: "middle",
     margin: 0,

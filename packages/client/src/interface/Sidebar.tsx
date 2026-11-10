@@ -49,13 +49,13 @@ const MainBar = styled("div", {
       height: "100%",
 
       // the tab bar takes the bottom edge; the account card only stays
-      // for its call controls, just above the tabs
+      // for its call controls, just above the tabs (#root already stops
+      // above the home bar, so no safe-area inset here)
       "& > *:not([data-account-panel]):not([data-phone-tabs])": {
-        paddingBottom:
-          "calc(62px + env(safe-area-inset-bottom) + var(--z-voice-panel-space, 0px))",
+        paddingBottom: "calc(62px + var(--z-voice-panel-space, 0px))",
       },
       "& > [data-account-panel]": {
-        bottom: "calc(70px + env(safe-area-inset-bottom))",
+        bottom: "70px",
       },
       "& > [data-account-panel]:not([data-in-call='true'])": {
         display: "none",

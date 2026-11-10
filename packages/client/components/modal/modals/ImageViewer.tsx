@@ -92,7 +92,12 @@ export function ImageViewerModal(
                 width: "100%",
                 height: "100%",
 
-                paddingInline: "20px",
+                // full screen, outside #root: the zoom bar stays clear of
+                // the status bar / notch and the home bar
+                paddingTop: "var(--z-safe-top)",
+                paddingBottom: "var(--z-safe-bottom)",
+                paddingLeft: "calc(20px + var(--z-safe-left))",
+                paddingRight: "calc(20px + var(--z-safe-right))",
               })}
               initial={{ opacity: 0, scale: 1.1 }}
               animate={{ opacity: 1, scale: 1 }}

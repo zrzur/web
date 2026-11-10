@@ -134,9 +134,9 @@ const Layout = styled("div", {
 
     // edge to edge on a phone: `data-sheet-edge` takes the sheet's padding off
     _phone: {
-      paddingBlockEnd: "env(safe-area-inset-bottom)",
+      paddingBlockEnd: "var(--z-safe-bottom)",
       height:
-        "calc(100dvh - 48px - max(var(--keyboard-inset, 0px), env(keyboard-inset-height, 0px)))",
+        "calc(100dvh - 48px - var(--z-safe-top) - max(var(--keyboard-inset, 0px), env(keyboard-inset-height, 0px)))",
       maxHeight: "none",
     },
   },

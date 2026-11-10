@@ -994,7 +994,7 @@ const PrimaryButton = styled("button", {
     "@media (max-width: 900px)": {
       position: "fixed",
       insetInline: "16px",
-      bottom: "calc(16px + env(safe-area-inset-bottom))",
+      bottom: "calc(16px + var(--z-safe-bottom))",
       minHeight: "44px",
       zIndex: 10,
       boxShadow: "0 12px 32px rgb(0 0 0 / 0.45)",
