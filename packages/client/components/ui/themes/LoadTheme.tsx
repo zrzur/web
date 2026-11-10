@@ -9,10 +9,10 @@ import {
   createMduiColourTriplets,
   createStoatWebVariables,
 } from ".";
-import { SlideState } from "../components/navigation/SlideDrawer";
 import { Masks } from "./Masks";
 import { FONTS, MONOSPACE_FONTS, loadArabicFont } from "./fonts";
 import { LEGACY_COLOUR_KEYS } from "./legacyColourKeys";
+import { pwaThemeColour } from "./pwaThemeColour";
 import { themeAccessibilityCss, themeLibraryVariables } from "./themeLibrary";
 import { createZrzurSemanticVariables } from "./zrzurTheme";
 
@@ -85,20 +85,10 @@ export function LoadTheme() {
     style.textContent = css;
   });
 
-  //Set PWA theme color
+  // PWA theme colour: the frame colour of the active theme, the one around
+  // #root in the status bar strip (see pwaThemeColour)
   createEffect(() => {
-    const drawerShown =
-      state.appDrawer()?.state === SlideState.SHOWN ||
-      state.diagDrawer()?.state === SlideState.SHOWN;
-
-    const color =
-      getCssProps()[
-        bannerShown()
-          ? "--md-sys-color-primary-container"
-          : drawerShown
-            ? "--md-sys-color-surface-container-low"
-            : "--md-sys-color-surface-container-high"
-      ];
+    const color = pwaThemeColour(getCssProps(), bannerShown());
 
     for (const meta of document.head.querySelectorAll("meta[name=theme-color]"))
       (meta as HTMLMetaElement).content = color;
