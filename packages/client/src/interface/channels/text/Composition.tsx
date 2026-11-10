@@ -332,7 +332,7 @@ export function MessageComposition(props: Props) {
     openModal({ type: "create_poll", channel: props.channel });
   }
 
-  // Ctrl+Shift+7 (Command on a Mac) opens "Create poll" for the message box
+  // Ctrl+Shift+8 (Command on a Mac) opens "Create poll" for the message box
   // focused last (listed in the shortcuts screen); not while a window is
   // open or something else already took the key
   const composerKey = `${props.channel.id}:${Math.random().toString(36).slice(2)}`;

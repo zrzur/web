@@ -435,7 +435,7 @@ export const RESERVED_KEYS = [
   "Ctrl+Shift+Y",
   "Ctrl+Shift+H",
   // Zrzur: Create poll
-  "Ctrl+Shift+7",
+  "Ctrl+Shift+8",
 ];
 
 /** Reserved for Zrzur's own plugins */

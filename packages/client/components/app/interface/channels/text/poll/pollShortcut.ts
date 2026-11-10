@@ -1,17 +1,20 @@
 /**
- * "Create poll" opens with Ctrl+Shift+7 (Command+Shift+7 on a Mac). The key
+ * "Create poll" opens with Ctrl+Shift+8 (Command+Shift+8 on a Mac). The key
  * is matched by its place on the keyboard (`event.code`), so it is the same
- * on Arabic, German and French layouts. Never Alt+Shift (Windows switches
- * the keyboard layout with it) and never Ctrl+Alt (AltGr on Windows); no
- * browser uses Ctrl+Shift+7, and plugins can't take it (RESERVED_KEYS).
+ * on Arabic, German and French layouts. Not Shift+7: on German, Spanish,
+ * Italian and Nordic layouts that types "/", so Ctrl+Shift+7 is their Ctrl+/
+ * (the shortcuts screen); a press that types "/" is never taken. Never
+ * Alt+Shift (Windows switches the keyboard layout with it) and never Ctrl+Alt
+ * (AltGr on Windows); no browser uses Ctrl+Shift+8, and plugins can't take
+ * it (RESERVED_KEYS).
  */
 type KeyLike = Pick<
   KeyboardEvent,
-  "code" | "altKey" | "shiftKey" | "ctrlKey" | "metaKey"
+  "code" | "key" | "altKey" | "shiftKey" | "ctrlKey" | "metaKey"
 >;
 
 /** The same key as plugin manifests write it (kept in RESERVED_KEYS) */
-export const CREATE_POLL_PLUGIN_KEYS = ["Ctrl+Shift+7"];
+export const CREATE_POLL_PLUGIN_KEYS = ["Ctrl+Shift+8"];
 
 /**
  * Whether this key press is the "Create poll" shortcut
@@ -21,7 +24,12 @@ export function isCreatePollShortcut(event: KeyLike, mac: boolean): boolean {
   const mod = mac ? event.metaKey : event.ctrlKey;
   const other = mac ? event.ctrlKey : event.metaKey;
   return (
-    event.code === "Digit7" && mod && !other && event.shiftKey && !event.altKey
+    event.code === "Digit8" &&
+    event.key !== "/" &&
+    mod &&
+    !other &&
+    event.shiftKey &&
+    !event.altKey
   );
 }
 
