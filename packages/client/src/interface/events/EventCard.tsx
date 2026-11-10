@@ -18,6 +18,7 @@ import { Markdown } from "@revolt/markdown";
 import { useModals } from "@revolt/modal";
 import { useNavigate } from "@revolt/routing";
 import { useVoice } from "@revolt/rtc";
+import { useState } from "@revolt/state";
 import { Avatar, Button } from "@revolt/ui";
 import { hour12From } from "@revolt/ui/components/design/dateTime";
 import { Icon } from "@revolt/ui/icons/Icon";
@@ -529,6 +530,7 @@ export function JoinButton(props: {
 }) {
   const client = useClient();
   const voice = useVoice();
+  const state = useState();
   const navigate = useNavigate();
   const { openModal } = useModals();
   const channelId = () => serverEventChannel(props.event.place);
@@ -536,6 +538,8 @@ export function JoinButton(props: {
   function go() {
     const id = channelId();
     if (id) {
+      // phones: the channel slides over the channel list, as when chosen there
+      state.appDrawer()?.setShown(true);
       const channel = client().channels.get(id);
       if (props.event.place.type === "Voice" && channel) {
         if (voice.channel()?.id !== id) void voice.connect(channel);

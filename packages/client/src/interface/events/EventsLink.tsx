@@ -9,6 +9,7 @@ import { useClient } from "@revolt/client";
 import { isMac, isTypingTarget } from "@revolt/keybinds/shortcuts";
 import { useModals } from "@revolt/modal";
 import { A, useLocation, useNavigate } from "@revolt/routing";
+import { useState } from "@revolt/state";
 import { Icon } from "@revolt/ui/icons/Icon";
 
 import { JoinButton } from "./EventCard";
@@ -31,6 +32,9 @@ export function EventsLink(props: { server: Server }) {
   const location = useLocation();
   const navigate = useNavigate();
   const modals = useModals();
+  const state = useState();
+  // phones: like a channel, opening the events slides the channel list away
+  const showContent = () => state.appDrawer()?.setShown(true);
   const href = () => `/server/${props.server.id}/events`;
 
   // load once per server; the gateway keeps the list current afterwards
@@ -72,9 +76,10 @@ export function EventsLink(props: { server: Server }) {
         }
         aria-keyshortcuts="Control+Shift+9"
         data-testid="events-link"
+        onClick={showContent}
       >
         <Icon name="calendar" size={20} />
-        <span>{t({ message: "Events", context: "scheduled events" })}</span>
+        <Label>{t({ message: "Events", context: "scheduled events" })}</Label>
         <Show when={count()}>
           <Count
             data-testid="events-count"
@@ -95,7 +100,10 @@ export function EventsLink(props: { server: Server }) {
               <LiveDot aria-hidden="true" />
               <Trans>Happening now</Trans>
             </BannerHead>
-            <BannerTitle href={`${href()}/${event()._id}`}>
+            <BannerTitle
+              href={`${href()}/${event()._id}`}
+              onClick={showContent}
+            >
               {event().title}
             </BannerTitle>
             <JoinButton
@@ -131,8 +139,18 @@ const Row = styled(A, {
       background: "var(--z-nav-active)",
       color: "var(--z-fg-primary)",
     },
-    "& > span:first-of-type": { flex: 1, minWidth: 0 },
     _phone: { minHeight: "44px" },
+  },
+});
+
+/** The row's name takes the free space; the icon keeps its size */
+const Label = styled("span", {
+  base: {
+    flex: 1,
+    minWidth: 0,
+    overflow: "hidden",
+    textOverflow: "ellipsis",
+    whiteSpace: "nowrap",
   },
 });
 
