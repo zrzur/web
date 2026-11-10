@@ -18,7 +18,7 @@ import { styled } from "styled-system/jsx";
 import { TranslatedError } from "@revolt/i18n/errors";
 import { Icon } from "@revolt/ui/icons/Icon";
 
-import { AuthButton, useFlowBubble } from "./Flow";
+import { AuthButton } from "./Flow";
 
 const FormStack = styled("div", {
   base: {
@@ -372,7 +372,6 @@ export function Form(props: Props) {
   const [fieldErrors, setFieldErrors] = createSignal<Record<string, string>>(
     {},
   );
-  const bubble = useFlowBubble();
   let hcaptcha: HCaptchaFunctions | undefined;
   let successTimer: ReturnType<typeof setTimeout> | undefined;
   onCleanup(() => clearTimeout(successTimer));
@@ -472,14 +471,12 @@ export function Form(props: Props) {
             : 1,
         )[0];
       first?.focus();
-      bubble?.flashError();
       return;
     }
 
     const formData = new FormData(form);
     setError(undefined);
     setStatus("submitting");
-    const finishSubmit = bubble?.beginSubmit();
     let succeeded = false;
 
     try {
@@ -492,14 +489,11 @@ export function Form(props: Props) {
 
       if ((await props.onSubmit(formData)) !== false) {
         succeeded = true;
-        bubble?.flashSuccess();
       }
     } catch (err) {
       console.error(err);
       setError(err);
-      bubble?.flashError();
     } finally {
-      finishSubmit?.();
       if (succeeded) {
         setStatus("success");
         successTimer = setTimeout(() => setStatus("ready"), SUCCESS_HOLD_MS);

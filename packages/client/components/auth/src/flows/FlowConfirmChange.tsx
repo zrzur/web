@@ -8,7 +8,7 @@ import { useApi } from "@revolt/client";
 import { A, useParams } from "@revolt/routing";
 import { Button } from "@revolt/ui";
 
-import { FlowTitle, useFlowBubble } from "./Flow";
+import { FlowTitle } from "./Flow";
 
 type Change = API.AccountSecurityChangeView;
 
@@ -26,7 +26,6 @@ type State =
 export default function FlowConfirmChange() {
   const api = useApi();
   const params = useParams();
-  const bubble = useFlowBubble();
   const [state, setState] = createSignal<State>({ state: "loading" });
   const [busy, setBusy] = createSignal(false);
   const [failed, setFailed] = createSignal(false);
@@ -52,10 +51,8 @@ export default function FlowConfirmChange() {
     try {
       await api.post(path(), { accept }, { anonymous: true });
       setState({ state: "done", accepted: accept, kind: s.change.kind });
-      bubble?.flashSuccess();
     } catch {
       setFailed(true);
-      bubble?.flashError();
     } finally {
       setBusy(false);
     }
