@@ -131,6 +131,16 @@ msgstr "{0, plural, one {# install.} other {# installs.}}"
 msgid "{0, plural, one {# member} other {# members}}"
 msgstr "{0, plural, one {# member} other {# members}}"
 
+#. placeholder {0}: plan().tooOld
+#: components/modal/modals/BulkDeleteMessages.tsx
+msgid "{0, plural, one {# message is older than 7 days and stays; delete it on its own.} other {# messages are older than 7 days and stay; delete them one by one.}}"
+msgstr "{0, plural, one {# message is older than 7 days and stays; delete it on its own.} other {# messages are older than 7 days and stay; delete them one by one.}}"
+
+#. placeholder {0}: plan().ids.length
+#: components/modal/modals/BulkDeleteMessages.tsx
+msgid "{0, plural, one {# message will be deleted for everyone. This cannot be undone.} other {# messages will be deleted for everyone. This cannot be undone.}}"
+msgstr "{0, plural, one {# message will be deleted for everyone. This cannot be undone.} other {# messages will be deleted for everyone. This cannot be undone.}}"
+
 #. placeholder {0}: post.thread?.messageCount ?? 0
 #. placeholder {0}: thread().thread?.messageCount ?? 0
 #. placeholder {0}: thread.thread?.messageCount ?? 0
@@ -175,6 +185,11 @@ msgstr "{0, plural, one {# result} other {# results}}"
 msgid "{0, plural, one {# rule} other {# rules}}"
 msgstr "{0, plural, one {# rule} other {# rules}}"
 
+#. placeholder {0}: ids().length
+#: components/app/interface/channels/text/MessageSelectionBar.tsx
+msgid "{0, plural, one {# selected} other {# selected}}"
+msgstr "{0, plural, one {# selected} other {# selected}}"
+
 #. placeholder {0}: count()
 #: src/interface/events/EventsLink.tsx
 msgid "{0, plural, one {# upcoming event} other {# upcoming events}}"
@@ -187,6 +202,11 @@ msgstr "{0, plural, one {# upcoming event} other {# upcoming events}}"
 #: components/ui/components/features/messaging/elements/PollEnded.tsx
 msgid "{0, plural, one {# vote} other {# votes}}"
 msgstr "{0, plural, one {# vote} other {# votes}}"
+
+#. placeholder {0}: plan().ids.length
+#: components/modal/modals/BulkDeleteMessages.tsx
+msgid "{0, plural, one {Delete # message} other {Delete # messages}}"
+msgstr "{0, plural, one {Delete # message} other {Delete # messages}}"
 
 #. placeholder {0}: items().length
 #: components/ui/components/utils/files/FileDropAnywhereCollector.tsx
@@ -811,6 +831,10 @@ msgstr "{usernames} reacted"
 #: components/app/interface/settings/user/appearance/AnimationSettings.tsx
 msgid "{v} ms"
 msgstr "{v} ms"
+
+#: components/modal/modals/BulkDeleteMessages.tsx
+msgid "{value, plural, one {Last # message} other {Last # messages}}"
+msgstr "{value, plural, one {Last # message} other {Last # messages}}"
 
 #: components/app/interface/settings/user/voice/InputSensitivityOptions.tsx
 msgid "{value} dB"
@@ -1980,6 +2004,7 @@ msgstr "All friends"
 msgid "All good"
 msgstr "All good"
 
+#: components/app/interface/settings/server/ServerDefaultNotifications.tsx
 #: components/app/menus/ServerContextMenu.tsx
 #: components/app/menus/shared/NotificationContextMenu.tsx
 msgid "All messages"
@@ -2340,6 +2365,7 @@ msgid "Any priority"
 msgstr "Any priority"
 
 #: components/app/interface/settings/user/safety/SafetyDashboard.tsx
+#: components/modal/modals/BulkDeleteMessages.tsx
 msgid "Anyone"
 msgstr "Anyone"
 
@@ -3600,6 +3626,7 @@ msgstr "Canada"
 
 #: components/app/interface/channels/text/interactions/CommandPicker.tsx
 #: components/app/interface/channels/text/interactions/InteractionModal.tsx
+#: components/app/interface/channels/text/MessageSelectionBar.tsx
 #: components/app/interface/discover/OpenInApp.tsx
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsOverview.tsx
 #: components/app/interface/settings/server/AutoModSettings.tsx
@@ -3622,6 +3649,7 @@ msgstr "Canada"
 #: components/modal/modals/AddBot.tsx
 #: components/modal/modals/BanMember.tsx
 #: components/modal/modals/BanNonMember.tsx
+#: components/modal/modals/BulkDeleteMessages.tsx
 #: components/modal/modals/CreateBot.tsx
 #: components/modal/modals/CreateCategory.tsx
 #: components/modal/modals/CreateChannel.tsx
@@ -4555,9 +4583,17 @@ msgstr "Clear status"
 msgid "Clears its error history and starts it again."
 msgstr "Clears its error history and starts it again."
 
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "Click"
+msgstr "Click"
+
 #: components/app/interface/settings/shared/Discoverable.tsx
 msgid "Click again to confirm"
 msgstr "Click again to confirm"
+
+#: components/app/interface/channels/text/MessageSelectionBar.tsx
+msgid "Click messages to select them; Shift-click selects a range."
+msgstr "Click messages to select them; Shift-click selects a range."
 
 #: components/modal/modals/PolicyChange.tsx
 msgid "Click on the items below to learn more about different changes!"
@@ -6026,6 +6062,10 @@ msgstr "Default font"
 msgid "Default member permissions"
 msgstr "Default member permissions"
 
+#: components/app/interface/settings/server/pages.tsx
+msgid "Default notifications"
+msgstr "Default notifications"
+
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsOverview.tsx
 #: components/app/interface/settings/server/audit/AuditLog.tsx
 #: components/app/interface/settings/server/roles/ServerRoleOverview.tsx
@@ -6037,6 +6077,7 @@ msgstr "Default permissions"
 msgid "Degraded Performance"
 msgstr "Degraded Performance"
 
+#: components/app/interface/channels/text/MessageSelectionBar.tsx
 #: components/app/interface/settings/server/AutoModSettings.tsx
 #: components/app/interface/settings/server/roles/ServerRoleEditor.tsx
 #: components/app/interface/settings/server/ServerOwnership.tsx
@@ -6157,6 +6198,14 @@ msgstr "Delete message history"
 #~ msgid "Delete Message History"
 #~ msgstr "Delete Message History"
 
+#: components/modal/modals/BulkDeleteMessages.tsx
+msgid "Delete recent messages"
+msgstr "Delete recent messages"
+
+#: components/app/interface/channels/text/MessageSelectionBar.tsx
+msgid "Delete recent…"
+msgstr "Delete recent…"
+
 #: components/app/interface/settings/server/roles/ServerRoleEditor.tsx
 msgid "Delete role"
 msgstr "Delete role"
@@ -6168,6 +6217,10 @@ msgstr "Delete role"
 #: components/app/interface/settings/server/AutoModSettings.tsx
 msgid "Delete rule"
 msgstr "Delete rule"
+
+#: components/modal/modals/BulkDeleteMessages.tsx
+msgid "Delete selected messages"
+msgstr "Delete selected messages"
 
 #: components/app/interface/settings/server/ServerOwnership.tsx
 msgid "Delete server"
@@ -6820,6 +6873,10 @@ msgstr "e.g. she/her, they/them"
 #: components/modal/modals/ServerIdentity.tsx
 msgid "e.g. they/them"
 msgstr "e.g. they/them"
+
+#: components/app/interface/settings/server/ServerDefaultNotifications.tsx
+msgid "Each member can still choose their own setting."
+msgstr "Each member can still choose their own setting."
 
 #: components/app/interface/settings/user/appearance/AnimationSettings.tsx
 msgid "Each settings page as it opens."
@@ -8215,6 +8272,10 @@ msgstr "Friends server"
 msgid "Friends use your username and number tag to find you. Enter your current password to confirm."
 msgstr "Friends use your username and number tag to find you. Enter your current password to confirm."
 
+#: components/modal/modals/BulkDeleteMessages.tsx
+msgid "From"
+msgstr "From"
+
 #: src/interface/channels/text/searchLabels.ts
 msgctxt "search filter"
 msgid "From"
@@ -9115,6 +9176,10 @@ msgstr "How do I get a role?"
 #: components/modal/modals/GiftPlus.tsx
 msgid "How long?"
 msgstr "How long?"
+
+#: components/modal/modals/BulkDeleteMessages.tsx
+msgid "How many"
+msgstr "How many"
 
 #: components/app/interface/settings/server/LobbyAppearanceEditor.tsx
 msgid "How many people are in the server."
@@ -10879,6 +10944,10 @@ msgstr "Look at my new decoration"
 #~ msgid "Look of the day"
 #~ msgstr "Look of the day"
 
+#: components/modal/modals/BulkDeleteMessages.tsx
+msgid "Looking for messages…"
+msgstr "Looking for messages…"
+
 #: src/interface/designs/Home.tsx
 msgid "Looks"
 msgstr "Looks"
@@ -11459,6 +11528,14 @@ msgstr "Members (approximate)"
 msgid "Members and bans"
 msgstr "Members and bans"
 
+#: components/app/interface/settings/server/ServerDefaultNotifications.tsx
+msgid "Members are notified about every message."
+msgstr "Members are notified about every message."
+
+#: components/app/interface/settings/server/ServerDefaultNotifications.tsx
+msgid "Members are notified only when someone mentions them."
+msgstr "Members are notified only when someone mentions them."
+
 #: components/app/interface/settings/server/ServerAccess.tsx
 msgid "Members can invite"
 msgstr "Members can invite"
@@ -11572,6 +11649,7 @@ msgstr "Mentions"
 msgid "Mentions couldn't load. Try again soon."
 msgstr "Mentions couldn't load. Try again soon."
 
+#: components/app/interface/settings/server/ServerDefaultNotifications.tsx
 #: components/app/menus/ServerContextMenu.tsx
 #: components/app/menus/shared/NotificationContextMenu.tsx
 msgid "Mentions only"
@@ -11656,6 +11734,10 @@ msgstr "Message received"
 #: components/app/interface/safety/labels.tsx
 msgid "Message removed"
 msgstr "Message removed"
+
+#: components/app/interface/channels/text/MessageSelectionBar.tsx
+msgid "Message selection"
+msgstr "Message selection"
 
 #: components/app/interface/settings/user/notifications/Sounds.tsx
 msgid "Message sounds"
@@ -13384,6 +13466,10 @@ msgstr "Nothing published yet."
 #: components/app/menus/shared/NotificationContextMenu.tsx
 msgid "Notifications"
 msgstr "Notifications"
+
+#: components/app/interface/settings/server/ServerDefaultNotifications.tsx
+msgid "Notify members about"
+msgstr "Notify members about"
 
 #: components/app/interface/settings/user/profile/StyleEditors.tsx
 msgid "now"
@@ -17496,9 +17582,27 @@ msgstr "See who voted"
 msgid "Seen in both directions, never fully"
 msgstr "Seen in both directions, never fully"
 
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "Select a range of messages"
+msgstr "Select a range of messages"
+
 #: components/modal/modals/CreateGroup.tsx
 msgid "Select members to add"
 msgstr "Select members to add"
+
+#. placeholder {0}: props.message.member?.nickname ?? props.message.author?.displayName ?? props.message.username ?? ""
+#: components/app/interface/channels/text/MessageSelectOverlay.tsx
+msgid "Select message from {0}"
+msgstr "Select message from {0}"
+
+#: components/app/menus/shared/SelectMessagesMenuItem.tsx
+#: src/interface/channels/ChannelHeader.tsx
+msgid "Select messages"
+msgstr "Select messages"
+
+#: src/interface/channels/ChannelHeader.tsx
+msgid "Select messages to delete them together"
+msgstr "Select messages to delete them together"
 
 #: components/app/interface/settings/user/profile/StyleEditors.tsx
 msgid "Selected"
@@ -17760,6 +17864,7 @@ msgstr "Server deafen"
 msgid "Server deafened"
 msgstr "Server deafened"
 
+#: components/app/menus/ServerContextMenu.tsx
 #: components/app/menus/shared/NotificationContextMenu.tsx
 msgid "Server default"
 msgstr "Server default"
@@ -18895,6 +19000,11 @@ msgstr "Stop camera"
 msgid "Stop mass deletions"
 msgstr "Stop mass deletions"
 
+#: components/app/interface/settings/user/Keybinds.tsx
+#: src/interface/channels/ChannelHeader.tsx
+msgid "Stop selecting messages"
+msgstr "Stop selecting messages"
+
 #: components/ui/components/features/voice/callCard/VoiceCallCardActions.tsx
 #: src/interface/navigation/channels/AccountBar.tsx
 msgid "Stop sharing"
@@ -19120,6 +19230,14 @@ msgstr "Supporter"
 #: components/ui/components/features/profiles/badges/useBadgeText.ts
 msgid "Supports Zrzur with an active Feather subscription."
 msgstr "Supports Zrzur with an active Feather subscription."
+
+#: components/app/menus/shared/SuppressMentionsMenuItems.tsx
+msgid "Suppress @everyone and @here"
+msgstr "Suppress @everyone and @here"
+
+#: components/app/menus/shared/SuppressMentionsMenuItems.tsx
+msgid "Suppress role mentions"
+msgstr "Suppress role mentions"
 
 #: components/ui/components/features/profiles/plateNames.ts
 msgid "Suriname"
@@ -20215,6 +20333,10 @@ msgstr "Then the file is deleted."
 #: components/app/interface/settings/server/webhooks/ServerWebhooks.tsx
 msgid "There is no channel where you can manage webhooks."
 msgstr "There is no channel where you can manage webhooks."
+
+#: components/modal/modals/BulkDeleteMessages.tsx
+msgid "There is nothing to delete: only messages from the last 7 days can be deleted together."
+msgstr "There is nothing to delete: only messages from the last 7 days can be deleted together."
 
 #: components/app/interface/settings/user/profile/CreatorStudio.tsx
 msgid "There's nothing to see in this file. Every frame is transparent."
@@ -21772,6 +21894,10 @@ msgstr "Up late, {name}?"
 msgid "Up to {0}"
 msgstr "Up to {0}"
 
+#: components/app/interface/channels/text/MessageSelectionBar.tsx
+msgid "Up to {BULK_DELETE_MAX} messages at a time."
+msgstr "Up to {BULK_DELETE_MAX} messages at a time."
+
 #: components/app/interface/settings/user/profile/ProfileExtras.tsx
 msgid "Up to {MAX_LINKS} links, starting with https://. People see the real site address and a warning before they leave Zrzur. Others can see this."
 msgstr "Up to {MAX_LINKS} links, starting with https://. People see the real site address and a warning before they leave Zrzur. Others can see this."
@@ -22896,6 +23022,10 @@ msgstr "What it adds"
 msgid "What it can do"
 msgstr "What it can do"
 
+#: components/app/interface/settings/server/pages.tsx
+msgid "What members are notified about until they choose for themselves."
+msgstr "What members are notified about until they choose for themselves."
+
 #: components/app/interface/settings/server/ServerSafety.tsx
 #~ msgid "What new members need before they can send messages, react or join voice. Members with any role are exempt."
 #~ msgstr "What new members need before they can send messages, react or join voice. Members with any role are exempt."
@@ -23065,6 +23195,10 @@ msgstr "Which one"
 #: components/app/interface/settings/user/profile/CreatorStudio.tsx
 msgid "Which parts and which tool, if any"
 msgstr "Which parts and which tool, if any"
+
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "While selecting messages to delete."
+msgstr "While selecting messages to delete."
 
 #: components/app/interface/settings/user/Privacy.tsx
 msgid "Who can add you to group chats"

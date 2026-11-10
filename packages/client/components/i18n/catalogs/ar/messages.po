@@ -131,6 +131,16 @@ msgstr "{0, plural, zero {لا تثبيتات بعد.} one {تثبيت واحد.
 msgid "{0, plural, one {# member} other {# members}}"
 msgstr "{0, plural, zero {لا يوجد أعضاء} one {عضو واحد} two {عضوان} few {# أعضاء} many {# عضوًا} other {# عضو}}"
 
+#. placeholder {0}: plan().tooOld
+#: components/modal/modals/BulkDeleteMessages.tsx
+msgid "{0, plural, one {# message is older than 7 days and stays; delete it on its own.} other {# messages are older than 7 days and stay; delete them one by one.}}"
+msgstr "{0, plural, zero {لا توجد رسائل أقدم من 7 أيام.} one {رسالة واحدة أقدم من 7 أيام وستبقى؛ احذفها وحدها.} two {رسالتان أقدم من 7 أيام وستبقيان؛ احذفهما واحدة تلو الأخرى.} few {# رسائل أقدم من 7 أيام وستبقى؛ احذفها واحدة تلو الأخرى.} many {# رسالة أقدم من 7 أيام وستبقى؛ احذفها واحدة تلو الأخرى.} other {# رسالة أقدم من 7 أيام وستبقى؛ احذفها واحدة تلو الأخرى.}}"
+
+#. placeholder {0}: plan().ids.length
+#: components/modal/modals/BulkDeleteMessages.tsx
+msgid "{0, plural, one {# message will be deleted for everyone. This cannot be undone.} other {# messages will be deleted for everyone. This cannot be undone.}}"
+msgstr "{0, plural, zero {لن تُحذف أي رسالة.} one {ستُحذف رسالة واحدة لدى الجميع. لا يمكن التراجع عن ذلك.} two {ستُحذف رسالتان لدى الجميع. لا يمكن التراجع عن ذلك.} few {ستُحذف # رسائل لدى الجميع. لا يمكن التراجع عن ذلك.} many {ستُحذف # رسالة لدى الجميع. لا يمكن التراجع عن ذلك.} other {ستُحذف # رسالة لدى الجميع. لا يمكن التراجع عن ذلك.}}"
+
 #. placeholder {0}: post.thread?.messageCount ?? 0
 #. placeholder {0}: thread().thread?.messageCount ?? 0
 #. placeholder {0}: thread.thread?.messageCount ?? 0
@@ -175,6 +185,11 @@ msgstr "{0, plural, zero {لا نتائج} one {نتيجة واحدة} two {نت
 msgid "{0, plural, one {# rule} other {# rules}}"
 msgstr "{0, plural, zero {لا قواعد} one {قاعدة واحدة} two {قاعدتان} few {# قواعد} many {# قاعدةً} other {# قاعدة}}"
 
+#. placeholder {0}: ids().length
+#: components/app/interface/channels/text/MessageSelectionBar.tsx
+msgid "{0, plural, one {# selected} other {# selected}}"
+msgstr "{0, plural, zero {لم يُحدَّد شيء} one {رسالة واحدة محددة} two {رسالتان محددتان} few {# رسائل محددة} many {# رسالة محددة} other {# رسالة محددة}}"
+
 #. placeholder {0}: count()
 #: src/interface/events/EventsLink.tsx
 msgid "{0, plural, one {# upcoming event} other {# upcoming events}}"
@@ -187,6 +202,11 @@ msgstr "{0, plural, zero {لا فعاليات قادمة} one {فعالية قا
 #: components/ui/components/features/messaging/elements/PollEnded.tsx
 msgid "{0, plural, one {# vote} other {# votes}}"
 msgstr "{0, plural, zero {لا أصوات} one {صوت واحد} two {صوتان} few {# أصوات} many {# صوتًا} other {# صوت}}"
+
+#. placeholder {0}: plan().ids.length
+#: components/modal/modals/BulkDeleteMessages.tsx
+msgid "{0, plural, one {Delete # message} other {Delete # messages}}"
+msgstr "{0, plural, zero {حذف} one {حذف رسالة واحدة} two {حذف رسالتين} few {حذف # رسائل} many {حذف # رسالة} other {حذف # رسالة}}"
 
 #. placeholder {0}: items().length
 #: components/ui/components/utils/files/FileDropAnywhereCollector.tsx
@@ -811,6 +831,10 @@ msgstr "تفاعل {usernames}"
 #: components/app/interface/settings/user/appearance/AnimationSettings.tsx
 msgid "{v} ms"
 msgstr "{v} مللي ثانية"
+
+#: components/modal/modals/BulkDeleteMessages.tsx
+msgid "{value, plural, one {Last # message} other {Last # messages}}"
+msgstr "{value, plural, zero {لا شيء} one {آخر رسالة} two {آخر رسالتين} few {آخر # رسائل} many {آخر # رسالة} other {آخر # رسالة}}"
 
 #: components/app/interface/settings/user/voice/InputSensitivityOptions.tsx
 msgid "{value} dB"
@@ -1980,6 +2004,7 @@ msgstr "كل الأصدقاء"
 msgid "All good"
 msgstr "كل شيء على ما يرام"
 
+#: components/app/interface/settings/server/ServerDefaultNotifications.tsx
 #: components/app/menus/ServerContextMenu.tsx
 #: components/app/menus/shared/NotificationContextMenu.tsx
 msgid "All messages"
@@ -2340,6 +2365,7 @@ msgid "Any priority"
 msgstr "أي أولوية"
 
 #: components/app/interface/settings/user/safety/SafetyDashboard.tsx
+#: components/modal/modals/BulkDeleteMessages.tsx
 msgid "Anyone"
 msgstr "أي شخص"
 
@@ -3600,6 +3626,7 @@ msgstr "كندا"
 
 #: components/app/interface/channels/text/interactions/CommandPicker.tsx
 #: components/app/interface/channels/text/interactions/InteractionModal.tsx
+#: components/app/interface/channels/text/MessageSelectionBar.tsx
 #: components/app/interface/discover/OpenInApp.tsx
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsOverview.tsx
 #: components/app/interface/settings/server/AutoModSettings.tsx
@@ -3622,6 +3649,7 @@ msgstr "كندا"
 #: components/modal/modals/AddBot.tsx
 #: components/modal/modals/BanMember.tsx
 #: components/modal/modals/BanNonMember.tsx
+#: components/modal/modals/BulkDeleteMessages.tsx
 #: components/modal/modals/CreateBot.tsx
 #: components/modal/modals/CreateCategory.tsx
 #: components/modal/modals/CreateChannel.tsx
@@ -4555,9 +4583,17 @@ msgstr "مسح الحالة"
 msgid "Clears its error history and starts it again."
 msgstr "يمسح سجل أخطائها ويشغّلها من جديد."
 
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "Click"
+msgstr "نقرة"
+
 #: components/app/interface/settings/shared/Discoverable.tsx
 msgid "Click again to confirm"
 msgstr "اضغط مجدداً للتأكيد"
+
+#: components/app/interface/channels/text/MessageSelectionBar.tsx
+msgid "Click messages to select them; Shift-click selects a range."
+msgstr "انقر الرسائل لتحديدها؛ والنقر مع Shift يحدد نطاقًا."
 
 #: components/modal/modals/PolicyChange.tsx
 msgid "Click on the items below to learn more about different changes!"
@@ -6026,6 +6062,10 @@ msgstr "الخط الافتراضي"
 msgid "Default member permissions"
 msgstr "صلاحيات الأعضاء الافتراضية"
 
+#: components/app/interface/settings/server/pages.tsx
+msgid "Default notifications"
+msgstr "الإشعارات الافتراضية"
+
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsOverview.tsx
 #: components/app/interface/settings/server/audit/AuditLog.tsx
 #: components/app/interface/settings/server/roles/ServerRoleOverview.tsx
@@ -6037,6 +6077,7 @@ msgstr "الصلاحيات الافتراضية"
 msgid "Degraded Performance"
 msgstr "أداء متراجع"
 
+#: components/app/interface/channels/text/MessageSelectionBar.tsx
 #: components/app/interface/settings/server/AutoModSettings.tsx
 #: components/app/interface/settings/server/roles/ServerRoleEditor.tsx
 #: components/app/interface/settings/server/ServerOwnership.tsx
@@ -6157,6 +6198,14 @@ msgstr "حذف سجل الرسائل"
 #~ msgid "Delete Message History"
 #~ msgstr "حذف سجل الرسائل"
 
+#: components/modal/modals/BulkDeleteMessages.tsx
+msgid "Delete recent messages"
+msgstr "حذف الرسائل الأخيرة"
+
+#: components/app/interface/channels/text/MessageSelectionBar.tsx
+msgid "Delete recent…"
+msgstr "حذف الأخيرة…"
+
 #: components/app/interface/settings/server/roles/ServerRoleEditor.tsx
 msgid "Delete role"
 msgstr "حذف الدور"
@@ -6168,6 +6217,10 @@ msgstr "حذف الدور"
 #: components/app/interface/settings/server/AutoModSettings.tsx
 msgid "Delete rule"
 msgstr "حذف القاعدة"
+
+#: components/modal/modals/BulkDeleteMessages.tsx
+msgid "Delete selected messages"
+msgstr "حذف الرسائل المحددة"
 
 #: components/app/interface/settings/server/ServerOwnership.tsx
 msgid "Delete server"
@@ -6819,6 +6872,10 @@ msgstr "مثلًا: هي، هو"
 #: components/modal/modals/ServerIdentity.tsx
 msgid "e.g. they/them"
 msgstr "مثلًا: هي، هو"
+
+#: components/app/interface/settings/server/ServerDefaultNotifications.tsx
+msgid "Each member can still choose their own setting."
+msgstr "يظل بإمكان كل عضو اختيار إعداده الخاص."
 
 #: components/app/interface/settings/user/appearance/AnimationSettings.tsx
 msgid "Each settings page as it opens."
@@ -8212,6 +8269,10 @@ msgstr "سيرفر أصدقاء"
 msgid "Friends use your username and number tag to find you. Enter your current password to confirm."
 msgstr "يجدك أصدقاؤك باسم المستخدم ورقمك المميّز. أدخل كلمة مرورك الحالية للتأكيد."
 
+#: components/modal/modals/BulkDeleteMessages.tsx
+msgid "From"
+msgstr "من"
+
 #: src/interface/channels/text/searchLabels.ts
 msgctxt "search filter"
 msgid "From"
@@ -9112,6 +9173,10 @@ msgstr "كيف أحصل على دور؟"
 #: components/modal/modals/GiftPlus.tsx
 msgid "How long?"
 msgstr "كم المدة؟"
+
+#: components/modal/modals/BulkDeleteMessages.tsx
+msgid "How many"
+msgstr "كم رسالة"
 
 #: components/app/interface/settings/server/LobbyAppearanceEditor.tsx
 msgid "How many people are in the server."
@@ -10876,6 +10941,10 @@ msgstr "انظروا إلى زينتي الجديدة"
 #~ msgid "Look of the day"
 #~ msgstr "إطلالة اليوم"
 
+#: components/modal/modals/BulkDeleteMessages.tsx
+msgid "Looking for messages…"
+msgstr "جارٍ البحث عن الرسائل…"
+
 #: src/interface/designs/Home.tsx
 msgid "Looks"
 msgstr "إطلالات"
@@ -11456,6 +11525,14 @@ msgstr "الأعضاء (تقريبيًا)"
 msgid "Members and bans"
 msgstr "الأعضاء والحظر"
 
+#: components/app/interface/settings/server/ServerDefaultNotifications.tsx
+msgid "Members are notified about every message."
+msgstr "يُنبَّه الأعضاء إلى كل رسالة."
+
+#: components/app/interface/settings/server/ServerDefaultNotifications.tsx
+msgid "Members are notified only when someone mentions them."
+msgstr "يُنبَّه الأعضاء فقط عندما يشير إليهم أحد."
+
 #: components/app/interface/settings/server/ServerAccess.tsx
 msgid "Members can invite"
 msgstr "الأعضاء يدعون"
@@ -11569,6 +11646,7 @@ msgstr "يذكر"
 msgid "Mentions couldn't load. Try again soon."
 msgstr "تعذّر تحميل الإشارات. حاول مرة أخرى بعد قليل."
 
+#: components/app/interface/settings/server/ServerDefaultNotifications.tsx
 #: components/app/menus/ServerContextMenu.tsx
 #: components/app/menus/shared/NotificationContextMenu.tsx
 msgid "Mentions only"
@@ -11653,6 +11731,10 @@ msgstr "استلام رسالة"
 #: components/app/interface/safety/labels.tsx
 msgid "Message removed"
 msgstr "تمت إزالة الرسالة"
+
+#: components/app/interface/channels/text/MessageSelectionBar.tsx
+msgid "Message selection"
+msgstr "تحديد الرسائل"
 
 #: components/app/interface/settings/user/notifications/Sounds.tsx
 msgid "Message sounds"
@@ -13381,6 +13463,10 @@ msgstr "لم يُنشر شيء بعد."
 #: components/app/menus/shared/NotificationContextMenu.tsx
 msgid "Notifications"
 msgstr "الإشعارات"
+
+#: components/app/interface/settings/server/ServerDefaultNotifications.tsx
+msgid "Notify members about"
+msgstr "تنبيه الأعضاء إلى"
 
 #: components/app/interface/settings/user/profile/StyleEditors.tsx
 msgid "now"
@@ -17493,9 +17579,27 @@ msgstr "اعرض من صوّت"
 msgid "Seen in both directions, never fully"
 msgstr "يظهر في الاتجاهين، لكن ليس كاملًا"
 
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "Select a range of messages"
+msgstr "تحديد نطاق من الرسائل"
+
 #: components/modal/modals/CreateGroup.tsx
 msgid "Select members to add"
 msgstr "اختر الأعضاء لإضافتهم"
+
+#. placeholder {0}: props.message.member?.nickname ?? props.message.author?.displayName ?? props.message.username ?? ""
+#: components/app/interface/channels/text/MessageSelectOverlay.tsx
+msgid "Select message from {0}"
+msgstr "تحديد رسالة {0}"
+
+#: components/app/menus/shared/SelectMessagesMenuItem.tsx
+#: src/interface/channels/ChannelHeader.tsx
+msgid "Select messages"
+msgstr "تحديد الرسائل"
+
+#: src/interface/channels/ChannelHeader.tsx
+msgid "Select messages to delete them together"
+msgstr "حدّد رسائل لحذفها معًا"
 
 #: components/app/interface/settings/user/profile/StyleEditors.tsx
 msgid "Selected"
@@ -17757,6 +17861,7 @@ msgstr "إيقاف الصوت من السيرفر"
 msgid "Server deafened"
 msgstr "الصوت متوقف من السيرفر"
 
+#: components/app/menus/ServerContextMenu.tsx
 #: components/app/menus/shared/NotificationContextMenu.tsx
 msgid "Server default"
 msgstr "الإعداد الافتراضي للسيرفر"
@@ -18892,6 +18997,11 @@ msgstr "إيقاف الكاميرا"
 msgid "Stop mass deletions"
 msgstr "إيقاف الحذف الجماعي"
 
+#: components/app/interface/settings/user/Keybinds.tsx
+#: src/interface/channels/ChannelHeader.tsx
+msgid "Stop selecting messages"
+msgstr "إيقاف تحديد الرسائل"
+
 #: components/ui/components/features/voice/callCard/VoiceCallCardActions.tsx
 #: src/interface/navigation/channels/AccountBar.tsx
 msgid "Stop sharing"
@@ -19117,6 +19227,14 @@ msgstr "داعم"
 #: components/ui/components/features/profiles/badges/useBadgeText.ts
 msgid "Supports Zrzur with an active Feather subscription."
 msgstr "يدعم زرزور باشتراك ريشة فعّال."
+
+#: components/app/menus/shared/SuppressMentionsMenuItems.tsx
+msgid "Suppress @everyone and @here"
+msgstr "كتم ‎@everyone و‎@here"
+
+#: components/app/menus/shared/SuppressMentionsMenuItems.tsx
+msgid "Suppress role mentions"
+msgstr "كتم الإشارات إلى الأدوار"
 
 #: components/ui/components/features/profiles/plateNames.ts
 msgid "Suriname"
@@ -20212,6 +20330,10 @@ msgstr "بعد ذلك يُحذف الملف."
 #: components/app/interface/settings/server/webhooks/ServerWebhooks.tsx
 msgid "There is no channel where you can manage webhooks."
 msgstr "لا توجد قناة يمكنك فيها إدارة الويب هوك."
+
+#: components/modal/modals/BulkDeleteMessages.tsx
+msgid "There is nothing to delete: only messages from the last 7 days can be deleted together."
+msgstr "لا يوجد ما يُحذف: لا يمكن حذف الرسائل معًا إلا إذا كانت من آخر 7 أيام."
 
 #: components/app/interface/settings/user/profile/CreatorStudio.tsx
 msgid "There's nothing to see in this file. Every frame is transparent."
@@ -21769,6 +21891,10 @@ msgstr "ساهر حتى الآن يا {name}؟"
 msgid "Up to {0}"
 msgstr "حتى {0}"
 
+#: components/app/interface/channels/text/MessageSelectionBar.tsx
+msgid "Up to {BULK_DELETE_MAX} messages at a time."
+msgstr "حتى {BULK_DELETE_MAX} رسالة في المرة الواحدة."
+
 #: components/app/interface/settings/user/profile/ProfileExtras.tsx
 msgid "Up to {MAX_LINKS} links, starting with https://. People see the real site address and a warning before they leave Zrzur. Others can see this."
 msgstr "حتى {MAX_LINKS} روابط تبدأ بـ https://. يرى الأشخاص عنوان الموقع الحقيقي وتحذيرًا قبل مغادرة زرزور. يستطيع الآخرون رؤية ذلك."
@@ -22893,6 +23019,10 @@ msgstr "ما الذي تضيفه"
 msgid "What it can do"
 msgstr "ما يستطيع فعله"
 
+#: components/app/interface/settings/server/pages.tsx
+msgid "What members are notified about until they choose for themselves."
+msgstr "ما يُنبَّه إليه الأعضاء إلى أن يختاروا بأنفسهم."
+
 #: components/app/interface/settings/server/ServerSafety.tsx
 #~ msgid "What new members need before they can send messages, react or join voice. Members with any role are exempt."
 #~ msgstr "ما يحتاجه الأعضاء الجدد قبل أن يرسلوا الرسائل أو يتفاعلوا أو ينضموا إلى الصوت. الأعضاء الذين لديهم أي دور مستثنون."
@@ -23062,6 +23192,10 @@ msgstr "أيّها"
 #: components/app/interface/settings/user/profile/CreatorStudio.tsx
 msgid "Which parts and which tool, if any"
 msgstr "أي الأجزاء وبأي أداة، إن وُجدت"
+
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "While selecting messages to delete."
+msgstr "أثناء تحديد الرسائل لحذفها."
 
 #: components/app/interface/settings/user/Privacy.tsx
 msgid "Who can add you to group chats"

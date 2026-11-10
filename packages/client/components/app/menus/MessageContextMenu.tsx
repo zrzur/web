@@ -66,6 +66,7 @@ import { editableByMe } from "@revolt/app/interface/channels/text/editable";
 import { canEndPoll } from "@revolt/app/interface/channels/text/poll/pollModel";
 
 import { AppsSubMenu } from "./shared/AppsSubMenu";
+import { SelectMessagesMenuItem } from "./shared/SelectMessagesMenuItem";
 
 /**
  * Context menu for messages
@@ -600,6 +601,7 @@ export function MessageContextMenu(props: {
             <Trans>Delete message</Trans>
           </ContextMenuButton>
         </Show>
+        <SelectMessagesMenuItem message={props.message} />
         <Show when={canReport()}>
           <ContextMenuButton icon={MdReport} onClick={report} destructive>
             <Trans>Report message</Trans>

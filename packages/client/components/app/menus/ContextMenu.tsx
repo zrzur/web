@@ -16,6 +16,8 @@ import { styled } from "styled-system/jsx";
 import { iconSize, symbolSize, Text } from "@revolt/ui";
 import { Icon } from "@revolt/ui/icons/Icon";
 
+import Breakpoint from "../../common/Breakpoint";
+
 const Base = styled("div", {
   base: {
     display: "flex",
@@ -267,11 +269,49 @@ export function ContextMenuSubMenu(
   // the submenu ended up on the left of its button
   const onLeft = () => (position.placement ?? "").startsWith("left");
 
+  // phones show menus as a bottom sheet (FloatingManager, same query): there
+  // a submenu opens in place under its row, by tap only; a floating submenu
+  // beside the sheet had nowhere to go and the tap closed the whole sheet
+  const inSheet =
+    typeof window !== "undefined" &&
+    !!window.matchMedia?.(Breakpoint.phone).matches;
+
+  if (inSheet) {
+    const [open, setOpen] = createSignal(false);
+    return (
+      <>
+        <ContextMenuButton
+          aria-haspopup="menu"
+          aria-expanded={open()}
+          selected={open()}
+          actionIcon={
+            <Icon name={open() ? "caret-up" : "caret-down"} size={16} />
+          }
+          onpointerdown={(e) => e.stopImmediatePropagation()}
+          onClick={(e) => {
+            // the choices come first; the row's shortcut (e.g. mute until
+            // turned back on) is one of them
+            e.stopImmediatePropagation();
+            setOpen(!open());
+          }}
+          {...buttonProps}
+        >
+          {local.buttonContent}
+        </ContextMenuButton>
+        <Show when={open()}>
+          <SheetSubMenu role="group">{local.children}</SheetSubMenu>
+        </Show>
+      </>
+    );
+  }
+
   return (
     <>
       <ContextMenuButton
         ref={setAnchor}
         selected={isShowing()}
+        aria-haspopup="menu"
+        aria-expanded={isShowing()}
         actionIcon={<Icon name="caret-right" size={16} />}
         onpointerdown={(e) => {
           e.stopImmediatePropagation();
@@ -342,3 +382,15 @@ export function ContextMenuSubMenu(
     </>
   );
 }
+
+/** A submenu opened in place in the phone sheet: indented under its row */
+const SheetSubMenu = styled("div", {
+  base: {
+    display: "flex",
+    flexDirection: "column",
+    gap: "1px",
+    marginInlineStart: "var(--z-space-4)",
+    paddingInlineStart: "var(--z-space-2)",
+    borderInlineStart: "2px solid var(--z-border-subtle)",
+  },
+});

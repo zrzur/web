@@ -128,6 +128,16 @@ msgstr "{0, plural, other {# 次安装。}}"
 msgid "{0, plural, one {# member} other {# members}}"
 msgstr "{0, plural, other {# 位成员}}"
 
+#. placeholder {0}: plan().tooOld
+#: components/modal/modals/BulkDeleteMessages.tsx
+msgid "{0, plural, one {# message is older than 7 days and stays; delete it on its own.} other {# messages are older than 7 days and stay; delete them one by one.}}"
+msgstr "{0, plural, other {# 条消息超过 7 天，将会保留；请逐条删除。}}"
+
+#. placeholder {0}: plan().ids.length
+#: components/modal/modals/BulkDeleteMessages.tsx
+msgid "{0, plural, one {# message will be deleted for everyone. This cannot be undone.} other {# messages will be deleted for everyone. This cannot be undone.}}"
+msgstr "{0, plural, other {将为所有人删除 # 条消息。此操作无法撤销。}}"
+
 #. placeholder {0}: post.thread?.messageCount ?? 0
 #. placeholder {0}: thread().thread?.messageCount ?? 0
 #. placeholder {0}: thread.thread?.messageCount ?? 0
@@ -172,6 +182,11 @@ msgstr "{0, plural, other {# 条结果}}"
 msgid "{0, plural, one {# rule} other {# rules}}"
 msgstr "{0, plural, other {# 条规则}}"
 
+#. placeholder {0}: ids().length
+#: components/app/interface/channels/text/MessageSelectionBar.tsx
+msgid "{0, plural, one {# selected} other {# selected}}"
+msgstr "{0, plural, other {已选择 # 条}}"
+
 #. placeholder {0}: count()
 #: src/interface/events/EventsLink.tsx
 msgid "{0, plural, one {# upcoming event} other {# upcoming events}}"
@@ -184,6 +199,11 @@ msgstr "{0, plural, other {# 个即将举行的活动}}"
 #: components/ui/components/features/messaging/elements/PollEnded.tsx
 msgid "{0, plural, one {# vote} other {# votes}}"
 msgstr "{0, plural, other {# 票}}"
+
+#. placeholder {0}: plan().ids.length
+#: components/modal/modals/BulkDeleteMessages.tsx
+msgid "{0, plural, one {Delete # message} other {Delete # messages}}"
+msgstr "{0, plural, other {删除 # 条消息}}"
 
 #. placeholder {0}: items().length
 #: components/ui/components/utils/files/FileDropAnywhereCollector.tsx
@@ -790,6 +810,10 @@ msgstr "{usernames} 回应了"
 #: components/app/interface/settings/user/appearance/AnimationSettings.tsx
 msgid "{v} ms"
 msgstr "{v} 毫秒"
+
+#: components/modal/modals/BulkDeleteMessages.tsx
+msgid "{value, plural, one {Last # message} other {Last # messages}}"
+msgstr "{value, plural, other {最近 # 条消息}}"
 
 #: components/app/interface/settings/user/voice/InputSensitivityOptions.tsx
 msgid "{value} dB"
@@ -1939,6 +1963,7 @@ msgstr "所有好友"
 msgid "All good"
 msgstr "一切正常"
 
+#: components/app/interface/settings/server/ServerDefaultNotifications.tsx
 #: components/app/menus/ServerContextMenu.tsx
 #: components/app/menus/shared/NotificationContextMenu.tsx
 msgid "All messages"
@@ -2283,6 +2308,7 @@ msgid "Any priority"
 msgstr "任意优先级"
 
 #: components/app/interface/settings/user/safety/SafetyDashboard.tsx
+#: components/modal/modals/BulkDeleteMessages.tsx
 msgid "Anyone"
 msgstr "任何人"
 
@@ -3502,6 +3528,7 @@ msgstr "加拿大"
 
 #: components/app/interface/channels/text/interactions/CommandPicker.tsx
 #: components/app/interface/channels/text/interactions/InteractionModal.tsx
+#: components/app/interface/channels/text/MessageSelectionBar.tsx
 #: components/app/interface/discover/OpenInApp.tsx
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsOverview.tsx
 #: components/app/interface/settings/server/AutoModSettings.tsx
@@ -3524,6 +3551,7 @@ msgstr "加拿大"
 #: components/modal/modals/AddBot.tsx
 #: components/modal/modals/BanMember.tsx
 #: components/modal/modals/BanNonMember.tsx
+#: components/modal/modals/BulkDeleteMessages.tsx
 #: components/modal/modals/CreateBot.tsx
 #: components/modal/modals/CreateCategory.tsx
 #: components/modal/modals/CreateChannel.tsx
@@ -4413,9 +4441,17 @@ msgstr "清除状态"
 msgid "Clears its error history and starts it again."
 msgstr "清除其错误记录并重新启动。"
 
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "Click"
+msgstr "点击"
+
 #: components/app/interface/settings/shared/Discoverable.tsx
 msgid "Click again to confirm"
 msgstr "再次点击以确认"
+
+#: components/app/interface/channels/text/MessageSelectionBar.tsx
+msgid "Click messages to select them; Shift-click selects a range."
+msgstr "点击消息即可选择；按住 Shift 点击可选择一段范围。"
 
 #: components/modal/modals/PolicyChange.tsx
 msgid "Click on the items below to learn more about different changes!"
@@ -5791,6 +5827,10 @@ msgstr "默认字体"
 msgid "Default member permissions"
 msgstr "成员默认权限"
 
+#: components/app/interface/settings/server/pages.tsx
+msgid "Default notifications"
+msgstr "默认通知"
+
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsOverview.tsx
 #: components/app/interface/settings/server/audit/AuditLog.tsx
 #: components/app/interface/settings/server/roles/ServerRoleOverview.tsx
@@ -5802,6 +5842,7 @@ msgstr "默认权限"
 msgid "Degraded Performance"
 msgstr "性能下降"
 
+#: components/app/interface/channels/text/MessageSelectionBar.tsx
 #: components/app/interface/settings/server/AutoModSettings.tsx
 #: components/app/interface/settings/server/roles/ServerRoleEditor.tsx
 #: components/app/interface/settings/server/ServerOwnership.tsx
@@ -5910,6 +5951,14 @@ msgstr "删除消息记录"
 #~ msgid "Delete Message History"
 #~ msgstr ""
 
+#: components/modal/modals/BulkDeleteMessages.tsx
+msgid "Delete recent messages"
+msgstr "删除最近的消息"
+
+#: components/app/interface/channels/text/MessageSelectionBar.tsx
+msgid "Delete recent…"
+msgstr "删除最近的…"
+
 #: components/app/interface/settings/server/roles/ServerRoleEditor.tsx
 msgid "Delete role"
 msgstr "删除角色"
@@ -5917,6 +5966,10 @@ msgstr "删除角色"
 #: components/app/interface/settings/server/AutoModSettings.tsx
 msgid "Delete rule"
 msgstr "删除规则"
+
+#: components/modal/modals/BulkDeleteMessages.tsx
+msgid "Delete selected messages"
+msgstr "删除所选消息"
 
 #: components/app/interface/settings/server/ServerOwnership.tsx
 msgid "Delete server"
@@ -6541,6 +6594,10 @@ msgstr "例如：他们/他们的"
 #: components/app/interface/settings/user/subscriptions/Subscriptions.tsx
 #~ msgid "Each feather counts towards a server's level. Move them any time; they leave a server with you."
 #~ msgstr ""
+
+#: components/app/interface/settings/server/ServerDefaultNotifications.tsx
+msgid "Each member can still choose their own setting."
+msgstr "每位成员仍可自行选择。"
 
 #: components/app/interface/settings/user/appearance/AnimationSettings.tsx
 msgid "Each settings page as it opens."
@@ -7868,6 +7925,10 @@ msgstr "好友服务器"
 msgid "Friends use your username and number tag to find you. Enter your current password to confirm."
 msgstr "好友通过你的用户名和数字标签找到你。请输入当前密码以确认。"
 
+#: components/modal/modals/BulkDeleteMessages.tsx
+msgid "From"
+msgstr "来自"
+
 #: src/interface/channels/text/searchLabels.ts
 msgctxt "search filter"
 msgid "From"
@@ -8747,6 +8808,10 @@ msgstr "如何获得角色？"
 #: components/modal/modals/GiftPlus.tsx
 msgid "How long?"
 msgstr "多长时间？"
+
+#: components/modal/modals/BulkDeleteMessages.tsx
+msgid "How many"
+msgstr "数量"
 
 #: components/app/interface/settings/server/LobbyAppearanceEditor.tsx
 msgid "How many people are in the server."
@@ -10408,6 +10473,10 @@ msgstr "看看我的新装饰"
 #~ msgid "Look of the day"
 #~ msgstr ""
 
+#: components/modal/modals/BulkDeleteMessages.tsx
+msgid "Looking for messages…"
+msgstr "正在查找消息…"
+
 #: src/interface/designs/Home.tsx
 msgid "Looks"
 msgstr "造型"
@@ -10977,6 +11046,14 @@ msgstr "成员（约数）"
 msgid "Members and bans"
 msgstr "成员与封禁"
 
+#: components/app/interface/settings/server/ServerDefaultNotifications.tsx
+msgid "Members are notified about every message."
+msgstr "每条消息都会通知成员。"
+
+#: components/app/interface/settings/server/ServerDefaultNotifications.tsx
+msgid "Members are notified only when someone mentions them."
+msgstr "仅当有人提及成员时才会通知。"
+
 #: components/app/interface/settings/server/ServerAccess.tsx
 msgid "Members can invite"
 msgstr "成员可以邀请"
@@ -11082,6 +11159,7 @@ msgstr "提及"
 msgid "Mentions couldn't load. Try again soon."
 msgstr "无法加载提及。请稍后再试。"
 
+#: components/app/interface/settings/server/ServerDefaultNotifications.tsx
 #: components/app/menus/ServerContextMenu.tsx
 #: components/app/menus/shared/NotificationContextMenu.tsx
 msgid "Mentions only"
@@ -11166,6 +11244,10 @@ msgstr "收到消息"
 #: components/app/interface/safety/labels.tsx
 msgid "Message removed"
 msgstr "消息已移除"
+
+#: components/app/interface/channels/text/MessageSelectionBar.tsx
+msgid "Message selection"
+msgstr "消息选择"
 
 #: components/app/interface/settings/user/notifications/Sounds.tsx
 msgid "Message sounds"
@@ -12806,6 +12888,10 @@ msgstr "还没有发布任何内容。"
 #: components/app/menus/shared/NotificationContextMenu.tsx
 msgid "Notifications"
 msgstr "通知"
+
+#: components/app/interface/settings/server/ServerDefaultNotifications.tsx
+msgid "Notify members about"
+msgstr "通知成员的内容"
 
 #: components/app/interface/settings/user/profile/StyleEditors.tsx
 msgid "now"
@@ -16688,9 +16774,27 @@ msgstr "查看投票者"
 msgid "Seen in both directions, never fully"
 msgstr "双向可见，但从不完整"
 
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "Select a range of messages"
+msgstr "选择一段消息"
+
 #: components/modal/modals/CreateGroup.tsx
 msgid "Select members to add"
 msgstr "选择要添加的成员"
+
+#. placeholder {0}: props.message.member?.nickname ?? props.message.author?.displayName ?? props.message.username ?? ""
+#: components/app/interface/channels/text/MessageSelectOverlay.tsx
+msgid "Select message from {0}"
+msgstr "选择来自 {0} 的消息"
+
+#: components/app/menus/shared/SelectMessagesMenuItem.tsx
+#: src/interface/channels/ChannelHeader.tsx
+msgid "Select messages"
+msgstr "选择消息"
+
+#: src/interface/channels/ChannelHeader.tsx
+msgid "Select messages to delete them together"
+msgstr "选择消息以一起删除"
 
 #: components/app/interface/settings/user/profile/StyleEditors.tsx
 msgid "Selected"
@@ -16935,6 +17039,7 @@ msgstr "服务器拒听"
 msgid "Server deafened"
 msgstr "已被服务器拒听"
 
+#: components/app/menus/ServerContextMenu.tsx
 #: components/app/menus/shared/NotificationContextMenu.tsx
 msgid "Server default"
 msgstr "服务器默认"
@@ -18043,6 +18148,11 @@ msgstr "关闭摄像头"
 msgid "Stop mass deletions"
 msgstr "阻止批量删除"
 
+#: components/app/interface/settings/user/Keybinds.tsx
+#: src/interface/channels/ChannelHeader.tsx
+msgid "Stop selecting messages"
+msgstr "停止选择消息"
+
 #: components/ui/components/features/voice/callCard/VoiceCallCardActions.tsx
 #: src/interface/navigation/channels/AccountBar.tsx
 msgid "Stop sharing"
@@ -18277,6 +18387,14 @@ msgstr "通过有效的 Feather 订阅支持 Zrzur。"
 #: components/ui/components/features/profiles/badges/useBadgeText.ts
 #~ msgid "Supports Zrzur with an active Plus subscription."
 #~ msgstr ""
+
+#: components/app/menus/shared/SuppressMentionsMenuItems.tsx
+msgid "Suppress @everyone and @here"
+msgstr "屏蔽 @everyone 和 @here"
+
+#: components/app/menus/shared/SuppressMentionsMenuItems.tsx
+msgid "Suppress role mentions"
+msgstr "屏蔽角色提及"
 
 #: components/ui/components/features/profiles/plateNames.ts
 msgid "Suriname"
@@ -19312,6 +19430,10 @@ msgstr "随后该文件将被删除。"
 #: components/app/interface/settings/server/webhooks/ServerWebhooks.tsx
 msgid "There is no channel where you can manage webhooks."
 msgstr "没有你可以管理 Webhook 的频道。"
+
+#: components/modal/modals/BulkDeleteMessages.tsx
+msgid "There is nothing to delete: only messages from the last 7 days can be deleted together."
+msgstr "没有可删除的内容：只有最近 7 天内的消息才能一起删除。"
 
 #: components/app/interface/settings/user/profile/CreatorStudio.tsx
 msgid "There's nothing to see in this file. Every frame is transparent."
@@ -20816,6 +20938,10 @@ msgstr "还没睡吗，{name}？"
 msgid "Up to {0}"
 msgstr "最大 {0}"
 
+#: components/app/interface/channels/text/MessageSelectionBar.tsx
+msgid "Up to {BULK_DELETE_MAX} messages at a time."
+msgstr "每次最多 {BULK_DELETE_MAX} 条消息。"
+
 #: components/app/interface/settings/user/profile/ProfileExtras.tsx
 msgid "Up to {MAX_LINKS} links, starting with https://. People see the real site address and a warning before they leave Zrzur. Others can see this."
 msgstr "最多 {MAX_LINKS} 个链接，以 https:// 开头。人们离开 Zrzur 之前会看到真实的网站地址和警告。其他人可以看到这一内容。"
@@ -21856,6 +21982,10 @@ msgid "What it can do"
 msgstr "它能做什么"
 
 #: components/app/interface/settings/server/pages.tsx
+msgid "What members are notified about until they choose for themselves."
+msgstr "成员自行选择之前会收到哪些通知。"
+
+#: components/app/interface/settings/server/pages.tsx
 msgid "What new members need before they can talk."
 msgstr "新成员在发言之前需要做的事。"
 
@@ -22004,6 +22134,10 @@ msgstr "选择哪一个"
 #: components/app/interface/settings/user/profile/CreatorStudio.tsx
 msgid "Which parts and which tool, if any"
 msgstr "哪些部分、使用哪个工具（如有）"
+
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "While selecting messages to delete."
+msgstr "在选择要删除的消息时。"
 
 #: components/app/interface/settings/user/Privacy.tsx
 msgid "Who can add you to group chats"

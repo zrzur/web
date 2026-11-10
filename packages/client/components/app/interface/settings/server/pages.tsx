@@ -15,6 +15,7 @@ import { AutoModSettings } from "./AutoModSettings";
 import { ServerBots } from "./ServerApps";
 import { ServerWebhooks } from "./webhooks/ServerWebhooks";
 import { ServerAccess } from "./ServerAccess";
+import { ServerDefaultNotifications } from "./ServerDefaultNotifications";
 import { ServerEmergency } from "./ServerEmergency";
 import { ServerOwnership } from "./ServerOwnership";
 import { ServerPreview } from "./ServerPreview";
@@ -108,6 +109,20 @@ export function OverviewPage(props: { server: Server }) {
           description={<Trans>Turn them on or off for this server.</Trans>}
         >
           <ThreadFeatures server={props.server} />
+        </Anchor>
+
+        <Anchor
+          id="notifications"
+          needs={missing(props.server, "ManageServer")}
+          title={<Trans>Default notifications</Trans>}
+          description={
+            <Trans>
+              What members are notified about until they choose for
+              themselves.
+            </Trans>
+          }
+        >
+          <ServerDefaultNotifications server={props.server} />
         </Anchor>
 
         <Show when={isOwner(props.server)}>

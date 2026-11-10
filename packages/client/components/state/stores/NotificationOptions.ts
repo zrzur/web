@@ -1,14 +1,21 @@
 import { Accessor, createMemo } from "solid-js";
 
-import { Channel, Server } from "@zrzur/sdk/solid";
+import { Channel, Message, Server } from "@zrzur/sdk/solid";
 
 import { AbstractSyncedStore } from ".";
 import { State } from "..";
 
-/**
- * Possible notification states
- */
-export type NotificationState = "all" | "mention" | "none";
+import {
+  type NotificationState,
+  effectiveServerState,
+  effectiveSuppress,
+  mentionsForNotification,
+} from "./notificationLevels";
+
+export type { NotificationState };
+
+/** What a suppress option hides from notifications */
+export type SuppressKind = "everyone" | "roles";
 
 /**
  * Possible notification states
@@ -56,6 +63,16 @@ export interface TypeNotificationOptions {
    * Channel mute settings
    */
   channel_mutes: Record<string, MuteState | undefined>;
+
+  /**
+   * Suppress @everyone and @here, by server or channel id
+   */
+  suppress_everyone: Record<string, boolean | undefined>;
+
+  /**
+   * Suppress role mentions, by server or channel id
+   */
+  suppress_roles: Record<string, boolean | undefined>;
 }
 
 /**
@@ -93,6 +110,8 @@ export class NotificationOptions extends AbstractSyncedStore<
       channel: {},
       server_mutes: {},
       channel_mutes: {},
+      suppress_everyone: {},
+      suppress_roles: {},
     };
   }
 
@@ -137,6 +156,9 @@ export class NotificationOptions extends AbstractSyncedStore<
 
     const now = +new Date();
 
+    const suppress_everyone = cleanFlags(input.suppress_everyone);
+    const suppress_roles = cleanFlags(input.suppress_roles);
+
     if (typeof input.server_mutes === "object") {
       for (const serverId of Object.keys(input.server_mutes)) {
         const entry = input.server_mutes[serverId];
@@ -168,6 +190,8 @@ export class NotificationOptions extends AbstractSyncedStore<
       channel,
       server_mutes,
       channel_mutes,
+      suppress_everyone,
+      suppress_roles,
     };
   }
 
@@ -178,8 +202,74 @@ export class NotificationOptions extends AbstractSyncedStore<
    */
   computeForServer(server?: Server) {
     return server
-      ? (this.get().server[server.id] ?? DEFAULT_SERVER_STATE)
+      ? effectiveServerState(
+          this.get().server[server.id],
+          server.defaultNotifications,
+        )
       : undefined;
+  }
+
+  /**
+   * The member's own choice for a server, if any
+   * @param server Server
+   */
+  getServer(server: Server) {
+    return this.get().server[server.id];
+  }
+
+  /**
+   * Own suppress choice for a server or channel (undefined = inherit)
+   * @param kind What is suppressed
+   * @param target Server or channel
+   */
+  getSuppress(kind: SuppressKind, target: Server | Channel) {
+    return this.get()[`suppress_${kind}`][target.id];
+  }
+
+  /**
+   * Set a suppress choice for a server or channel (undefined = inherit)
+   * @param kind What is suppressed
+   * @param target Server or channel
+   * @param value Choice
+   */
+  setSuppress(
+    kind: SuppressKind,
+    target: Server | Channel,
+    value: boolean | undefined,
+  ) {
+    this.set(`suppress_${kind}`, target.id, value);
+  }
+
+  /**
+   * Whether a suppress option is on for a channel (inherits its server)
+   * @param kind What is suppressed
+   * @param channel Channel
+   */
+  isSuppressed(kind: SuppressKind, channel: Channel): boolean {
+    const values = this.get()[`suppress_${kind}`];
+    return effectiveSuppress(
+      values[channel.id],
+      channel.serverId ? values[channel.serverId] : undefined,
+    );
+  }
+
+  /**
+   * Whether a message mentions us, after our suppress options
+   * @param message Message
+   * @param selfId Our user id
+   */
+  mentionsForNotification(message: Message, selfId: string | undefined) {
+    const channel = message.channel;
+    return mentionsForNotification({
+      selfId,
+      mentionIds: message.mentionIds,
+      flags: message.flags,
+      mentionsMyRole: !!message.roleMentions?.some((role) => role.assigned),
+      suppressEveryone: channel
+        ? this.isSuppressed("everyone", channel)
+        : false,
+      suppressRoles: channel ? this.isSuppressed("roles", channel) : false,
+    });
   }
 
   /**
@@ -284,4 +374,19 @@ export class NotificationOptions extends AbstractSyncedStore<
     const value = this.get().channel_mutes[channel.id];
     return !!value && (!value.until || value.until > this.#now());
   }
+}
+
+/**
+ * Keep only true/false entries of a suppress map
+ */
+function cleanFlags(
+  input: Record<string, boolean | undefined> | undefined,
+): Record<string, boolean | undefined> {
+  const out: Record<string, boolean | undefined> = {};
+  if (typeof input === "object" && input) {
+    for (const id of Object.keys(input)) {
+      if (typeof input[id] === "boolean") out[id] = input[id];
+    }
+  }
+  return out;
 }

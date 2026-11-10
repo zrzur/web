@@ -78,6 +78,15 @@ export function KeybindsSettings() {
           keys: [["Shift", "Esc"]],
         },
         {
+          title: <Trans>Select a range of messages</Trans>,
+          description: <Trans>While selecting messages to delete.</Trans>,
+          keys: [["Shift", t`Click`]],
+        },
+        {
+          title: <Trans>Stop selecting messages</Trans>,
+          keys: [["Esc"]],
+        },
+        {
           title: <Trans>Choose where to forward</Trans>,
           description: (
             <Trans>

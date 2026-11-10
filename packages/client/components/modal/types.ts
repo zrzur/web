@@ -140,6 +140,12 @@ export type Modals =
       message: Message;
     }
   | {
+      type: "bulk_delete_messages";
+      channel: Channel;
+      /** The selected messages; left out = pick recent messages */
+      ids?: string[];
+    }
+  | {
       type: "pin_message";
       message: Message;
     }

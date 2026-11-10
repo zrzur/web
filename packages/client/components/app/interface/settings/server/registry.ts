@@ -115,6 +115,15 @@ export const SECTIONS: SectionInfo[] = [
     },
   },
   {
+    id: "notifications",
+    page: "overview",
+    words: {
+      en: "default notifications all messages mentions only notify members",
+      ar: "الإشعارات الافتراضية كل الرسائل الإشارات فقط تنبيه الأعضاء",
+      de: "standard benachrichtigungen alle nachrichten nur erwähnungen mitglieder",
+    },
+  },
+  {
     id: "danger",
     page: "overview",
     words: {

@@ -1,0 +1,221 @@
+{
+  "{0, plural, one {# message is older than 7 days and stays; delete it on its own.} other {# messages are older than 7 days and stay; delete them one by one.}}": [
+    "{0, plural, zero {لا توجد رسائل أقدم من 7 أيام.} one {رسالة واحدة أقدم من 7 أيام وستبقى؛ احذفها وحدها.} two {رسالتان أقدم من 7 أيام وستبقيان؛ احذفهما واحدة تلو الأخرى.} few {# رسائل أقدم من 7 أيام وستبقى؛ احذفها واحدة تلو الأخرى.} many {# رسالة أقدم من 7 أيام وستبقى؛ احذفها واحدة تلو الأخرى.} other {# رسالة أقدم من 7 أيام وستبقى؛ احذفها واحدة تلو الأخرى.}}",
+    "{0, plural, one {# Nachricht ist älter als 7 Tage und bleibt; lösche sie einzeln.} other {# Nachrichten sind älter als 7 Tage und bleiben; lösche sie einzeln.}}",
+    "{0, plural, one {# message a plus de 7 jours et reste ; supprime-le seul.} other {# messages ont plus de 7 jours et restent ; supprime-les un par un.}}",
+    "{0, plural, one {# mensaje tiene más de 7 días y se queda; bórralo por separado.} other {# mensajes tienen más de 7 días y se quedan; bórralos uno a uno.}}",
+    "{0, plural, one {# сообщение старше 7 дней и останется; удалите его отдельно.} few {# сообщения старше 7 дней и останутся; удаляйте их по одному.} many {# сообщений старше 7 дней и останутся; удаляйте их по одному.} other {# сообщения старше 7 дней и останутся; удаляйте их по одному.}}",
+    "{0, plural, other {# 条消息超过 7 天，将会保留；请逐条删除。}}"
+  ],
+  "{0, plural, one {# message will be deleted for everyone. This cannot be undone.} other {# messages will be deleted for everyone. This cannot be undone.}}": [
+    "{0, plural, zero {لن تُحذف أي رسالة.} one {ستُحذف رسالة واحدة لدى الجميع. لا يمكن التراجع عن ذلك.} two {ستُحذف رسالتان لدى الجميع. لا يمكن التراجع عن ذلك.} few {ستُحذف # رسائل لدى الجميع. لا يمكن التراجع عن ذلك.} many {ستُحذف # رسالة لدى الجميع. لا يمكن التراجع عن ذلك.} other {ستُحذف # رسالة لدى الجميع. لا يمكن التراجع عن ذلك.}}",
+    "{0, plural, one {# Nachricht wird für alle gelöscht. Das lässt sich nicht rückgängig machen.} other {# Nachrichten werden für alle gelöscht. Das lässt sich nicht rückgängig machen.}}",
+    "{0, plural, one {# message sera supprimé pour tout le monde. C’est irréversible.} other {# messages seront supprimés pour tout le monde. C’est irréversible.}}",
+    "{0, plural, one {# mensaje se borrará para todos. No se puede deshacer.} other {# mensajes se borrarán para todos. No se puede deshacer.}}",
+    "{0, plural, one {# сообщение будет удалено для всех. Это нельзя отменить.} few {# сообщения будут удалены для всех. Это нельзя отменить.} many {# сообщений будут удалены для всех. Это нельзя отменить.} other {# сообщения будут удалены для всех. Это нельзя отменить.}}",
+    "{0, plural, other {将为所有人删除 # 条消息。此操作无法撤销。}}"
+  ],
+  "{0, plural, one {# selected} other {# selected}}": [
+    "{0, plural, zero {لم يُحدَّد شيء} one {رسالة واحدة محددة} two {رسالتان محددتان} few {# رسائل محددة} many {# رسالة محددة} other {# رسالة محددة}}",
+    "{0, plural, one {# ausgewählt} other {# ausgewählt}}",
+    "{0, plural, one {# sélectionné} other {# sélectionnés}}",
+    "{0, plural, one {# seleccionado} other {# seleccionados}}",
+    "{0, plural, one {Выбрано: #} few {Выбрано: #} many {Выбрано: #} other {Выбрано: #}}",
+    "{0, plural, other {已选择 # 条}}"
+  ],
+  "{0, plural, one {Delete # message} other {Delete # messages}}": [
+    "{0, plural, zero {حذف} one {حذف رسالة واحدة} two {حذف رسالتين} few {حذف # رسائل} many {حذف # رسالة} other {حذف # رسالة}}",
+    "{0, plural, one {# Nachricht löschen} other {# Nachrichten löschen}}",
+    "{0, plural, one {Supprimer # message} other {Supprimer # messages}}",
+    "{0, plural, one {Borrar # mensaje} other {Borrar # mensajes}}",
+    "{0, plural, one {Удалить # сообщение} few {Удалить # сообщения} many {Удалить # сообщений} other {Удалить # сообщения}}",
+    "{0, plural, other {删除 # 条消息}}"
+  ],
+  "{value, plural, one {Last # message} other {Last # messages}}": [
+    "{value, plural, zero {لا شيء} one {آخر رسالة} two {آخر رسالتين} few {آخر # رسائل} many {آخر # رسالة} other {آخر # رسالة}}",
+    "{value, plural, one {Letzte # Nachricht} other {Letzte # Nachrichten}}",
+    "{value, plural, one {Le dernier message} other {Les # derniers messages}}",
+    "{value, plural, one {El último mensaje} other {Los últimos # mensajes}}",
+    "{value, plural, one {Последнее # сообщение} few {Последние # сообщения} many {Последние # сообщений} other {Последние # сообщения}}",
+    "{value, plural, other {最近 # 条消息}}"
+  ],
+  "Click": ["نقرة", "Klick", "Clic", "Clic", "Щелчок", "点击"],
+  "Click messages to select them; Shift-click selects a range.": [
+    "انقر الرسائل لتحديدها؛ والنقر مع Shift يحدد نطاقًا.",
+    "Klicke Nachrichten an, um sie auszuwählen; mit Shift-Klick wählst du einen Bereich.",
+    "Clique sur les messages pour les sélectionner ; Maj-clic sélectionne une plage.",
+    "Haz clic en los mensajes para seleccionarlos; Mayús-clic selecciona un rango.",
+    "Нажимайте на сообщения, чтобы выбрать их; Shift-щелчок выбирает диапазон.",
+    "点击消息即可选择；按住 Shift 点击可选择一段范围。"
+  ],
+  "Default notifications": [
+    "الإشعارات الافتراضية",
+    "Standard-Benachrichtigungen",
+    "Notifications par défaut",
+    "Notificaciones predeterminadas",
+    "Уведомления по умолчанию",
+    "默认通知"
+  ],
+  "Delete recent messages": [
+    "حذف الرسائل الأخيرة",
+    "Letzte Nachrichten löschen",
+    "Supprimer les messages récents",
+    "Borrar mensajes recientes",
+    "Удалить последние сообщения",
+    "删除最近的消息"
+  ],
+  "Delete recent…": [
+    "حذف الأخيرة…",
+    "Letzte löschen…",
+    "Supprimer les récents…",
+    "Borrar recientes…",
+    "Удалить последние…",
+    "删除最近的…"
+  ],
+  "Delete selected messages": [
+    "حذف الرسائل المحددة",
+    "Ausgewählte Nachrichten löschen",
+    "Supprimer les messages sélectionnés",
+    "Borrar los mensajes seleccionados",
+    "Удалить выбранные сообщения",
+    "删除所选消息"
+  ],
+  "Each member can still choose their own setting.": [
+    "يظل بإمكان كل عضو اختيار إعداده الخاص.",
+    "Jedes Mitglied kann weiterhin selbst wählen.",
+    "Chaque membre peut toujours choisir son propre réglage.",
+    "Cada miembro puede seguir eligiendo su propio ajuste.",
+    "Каждый участник по-прежнему может выбрать свою настройку.",
+    "每位成员仍可自行选择。"
+  ],
+  "From": ["من", "Von", "De", "De", "От", "来自"],
+  "How many": ["كم رسالة", "Wie viele", "Combien", "Cuántos", "Сколько", "数量"],
+  "Looking for messages…": [
+    "جارٍ البحث عن الرسائل…",
+    "Nachrichten werden gesucht…",
+    "Recherche des messages…",
+    "Buscando mensajes…",
+    "Ищем сообщения…",
+    "正在查找消息…"
+  ],
+  "Members are notified about every message.": [
+    "يُنبَّه الأعضاء إلى كل رسالة.",
+    "Mitglieder werden bei jeder Nachricht benachrichtigt.",
+    "Les membres sont notifiés pour chaque message.",
+    "Los miembros reciben una notificación por cada mensaje.",
+    "Участники получают уведомление о каждом сообщении.",
+    "每条消息都会通知成员。"
+  ],
+  "Members are notified only when someone mentions them.": [
+    "يُنبَّه الأعضاء فقط عندما يشير إليهم أحد.",
+    "Mitglieder werden nur benachrichtigt, wenn jemand sie erwähnt.",
+    "Les membres sont notifiés seulement quand quelqu’un les mentionne.",
+    "Los miembros solo reciben una notificación cuando alguien los menciona.",
+    "Участники получают уведомление, только когда их упоминают.",
+    "仅当有人提及成员时才会通知。"
+  ],
+  "Message selection": [
+    "تحديد الرسائل",
+    "Nachrichtenauswahl",
+    "Sélection de messages",
+    "Selección de mensajes",
+    "Выбор сообщений",
+    "消息选择"
+  ],
+  "Notify members about": [
+    "تنبيه الأعضاء إلى",
+    "Mitglieder benachrichtigen bei",
+    "Notifier les membres pour",
+    "Notificar a los miembros de",
+    "Уведомлять участников о",
+    "通知成员的内容"
+  ],
+  "Select a range of messages": [
+    "تحديد نطاق من الرسائل",
+    "Einen Bereich von Nachrichten auswählen",
+    "Sélectionner une plage de messages",
+    "Seleccionar un rango de mensajes",
+    "Выбрать диапазон сообщений",
+    "选择一段消息"
+  ],
+  "Select message from {0}": [
+    "تحديد رسالة {0}",
+    "Nachricht von {0} auswählen",
+    "Sélectionner le message de {0}",
+    "Seleccionar el mensaje de {0}",
+    "Выбрать сообщение от {0}",
+    "选择来自 {0} 的消息"
+  ],
+  "Select messages": [
+    "تحديد الرسائل",
+    "Nachrichten auswählen",
+    "Sélectionner des messages",
+    "Seleccionar mensajes",
+    "Выбрать сообщения",
+    "选择消息"
+  ],
+  "Select messages to delete them together": [
+    "حدّد رسائل لحذفها معًا",
+    "Nachrichten auswählen, um sie gemeinsam zu löschen",
+    "Sélectionne des messages pour les supprimer ensemble",
+    "Selecciona mensajes para borrarlos juntos",
+    "Выберите сообщения, чтобы удалить их вместе",
+    "选择消息以一起删除"
+  ],
+  "Stop selecting messages": [
+    "إيقاف تحديد الرسائل",
+    "Auswahl beenden",
+    "Arrêter la sélection",
+    "Dejar de seleccionar",
+    "Прекратить выбор сообщений",
+    "停止选择消息"
+  ],
+  "Suppress @everyone and @here": [
+    "كتم ‎@everyone و‎@here",
+    "@everyone und @here stummschalten",
+    "Ignorer @everyone et @here",
+    "Silenciar @everyone y @here",
+    "Игнорировать @everyone и @here",
+    "屏蔽 @everyone 和 @here"
+  ],
+  "Suppress role mentions": [
+    "كتم الإشارات إلى الأدوار",
+    "Rollen-Erwähnungen stummschalten",
+    "Ignorer les mentions de rôle",
+    "Silenciar las menciones de rol",
+    "Игнорировать упоминания ролей",
+    "屏蔽角色提及"
+  ],
+  "There is nothing to delete: only messages from the last 7 days can be deleted together.": [
+    "لا يوجد ما يُحذف: لا يمكن حذف الرسائل معًا إلا إذا كانت من آخر 7 أيام.",
+    "Es gibt nichts zu löschen: Nur Nachrichten der letzten 7 Tage lassen sich gemeinsam löschen.",
+    "Rien à supprimer : seuls les messages des 7 derniers jours peuvent être supprimés ensemble.",
+    "No hay nada que borrar: solo los mensajes de los últimos 7 días se pueden borrar juntos.",
+    "Удалять нечего: вместе можно удалить только сообщения за последние 7 дней.",
+    "没有可删除的内容：只有最近 7 天内的消息才能一起删除。"
+  ],
+  "Up to {BULK_DELETE_MAX} messages at a time.": [
+    "حتى {BULK_DELETE_MAX} رسالة في المرة الواحدة.",
+    "Bis zu {BULK_DELETE_MAX} Nachrichten auf einmal.",
+    "Jusqu’à {BULK_DELETE_MAX} messages à la fois.",
+    "Hasta {BULK_DELETE_MAX} mensajes a la vez.",
+    "Не более {BULK_DELETE_MAX} сообщений за раз.",
+    "每次最多 {BULK_DELETE_MAX} 条消息。"
+  ],
+  "What members are notified about until they choose for themselves.": [
+    "ما يُنبَّه إليه الأعضاء إلى أن يختاروا بأنفسهم.",
+    "Worüber Mitglieder benachrichtigt werden, bis sie selbst wählen.",
+    "Ce qui notifie les membres tant qu’ils n’ont pas choisi eux-mêmes.",
+    "De qué se notifica a los miembros hasta que elijan por sí mismos.",
+    "О чём получают уведомления участники, пока не выберут сами.",
+    "成员自行选择之前会收到哪些通知。"
+  ],
+  "While selecting messages to delete.": [
+    "أثناء تحديد الرسائل لحذفها.",
+    "Beim Auswählen von Nachrichten zum Löschen.",
+    "Pendant la sélection de messages à supprimer.",
+    "Mientras seleccionas mensajes para borrar.",
+    "Во время выбора сообщений для удаления.",
+    "在选择要删除的消息时。"
+  ]
+}

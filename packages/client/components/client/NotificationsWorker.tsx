@@ -58,18 +58,24 @@ export function NotificationsWorker() {
     // Ignore muted channels
     if (state.notifications.isMuted(message.channel)) return;
 
+    // a mention after the reader's suppress options (@everyone, roles)
+    const mentioned = state.notifications.mentionsForNotification(
+      message,
+      us?.id,
+    );
+
     // Check channel notification settings
     switch (state.notifications.computeForChannel(message.channel!)) {
       case "none":
         return; // ignore if muted/none
       case "mention":
-        if (!message.mentioned) return; // ignore if not mentioned
+        if (!mentioned) return; // ignore if not mentioned
     }
 
     // Ignore if we're busy or focused
     if (
       us.status?.presence === "Busy" ||
-      (us.status?.presence === "Focus" && !message.mentioned)
+      (us.status?.presence === "Focus" && !mentioned)
     )
       return;
 
