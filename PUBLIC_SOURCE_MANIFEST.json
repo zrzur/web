@@ -2872,14 +2872,14 @@
     },
     {
       "path": "packages/client/components/common/lib/statusWrite.test.ts",
-      "sha256": "7bbb01daa11944b952fc7470ed279a316398bc8ee3f9b168c38511a449c50e4f",
-      "bytes": 7262,
+      "sha256": "35f66d565dba928bb7e6aa93b328587e06baf6f8ae96c91c27fbf8d265b31471",
+      "bytes": 7476,
       "category": "synthetic-test-source-or-fixture"
     },
     {
       "path": "packages/client/components/common/lib/statusWrite.ts",
-      "sha256": "9566a51056d58247fa35a7ab4237c3062c17908b39219939f20cfde0c94b9ef5",
-      "bytes": 2271,
+      "sha256": "0e59f4ee62fa7ccd92c0f7cc3eb03e0e519fa802cde531aae13172a6ccbe2f99",
+      "bytes": 2595,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -2926,8 +2926,8 @@
     },
     {
       "path": "packages/client/components/i18n/catalogs/ar/messages.po",
-      "sha256": "da60e1351e4362b8d72a9d13d2171fc2bc8c850d74a798b80deece8fd0002ff1",
-      "bytes": 977003,
+      "sha256": "085ba29aff970cb3377ca24dacf3c7aa6d3bb216e05f575bb29b911b52caa5ee",
+      "bytes": 977441,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -3070,8 +3070,8 @@
     },
     {
       "path": "packages/client/components/i18n/catalogs/de/messages.po",
-      "sha256": "999758e28f93fbce0e165ca35e8c1cae6ca2e9fab11a88bf4939e2dc1e462fb8",
-      "bytes": 901637,
+      "sha256": "cf0bcc7469669f8a01d140ed3957fc743317ec9a5da2ab38774eb0e8d5a1b6e4",
+      "bytes": 902075,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -3106,8 +3106,8 @@
     },
     {
       "path": "packages/client/components/i18n/catalogs/en/messages.po",
-      "sha256": "404399a2bd8912965ccd16269c907feec65b2be54d5c76711627ca1bcdbdbe36",
-      "bytes": 868340,
+      "sha256": "2cbe35e4ef99db154955c2af5d11278e5a21e1d3f8e982a81bb3fd29cfabb6d5",
+      "bytes": 868778,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -4198,8 +4198,8 @@
     },
     {
       "path": "packages/client/components/modal/modals/CustomStatus.tsx",
-      "sha256": "a4a0f94bd8eda74262ca69dbd5ff852b6d2617079c010b31210bbb97dc6579ea",
-      "bytes": 8060,
+      "sha256": "5fe499c38538524dc228a7c579f8ba0f5fef2d1a8a7ee1e8d075bdafcd8cbe41",
+      "bytes": 8125,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -5398,14 +5398,14 @@
     },
     {
       "path": "packages/client/components/ui/components/design/floatingSelectValue.test.ts",
-      "sha256": "0000a956b142156b0dd7c092e0339da56f7ae18de43569489aff9bbebd21ac4b",
-      "bytes": 1164,
+      "sha256": "008d4fa9be1c56f7842d3428b3881b44008547641be838814d11ec0065074dcb",
+      "bytes": 1138,
       "category": "synthetic-test-source-or-fixture"
     },
     {
       "path": "packages/client/components/ui/components/design/floatingSelectValue.ts",
-      "sha256": "f63832b1e9b96729c705db365bdbe6e6e77073dd4cb991adf8ef49071c04d3fe",
-      "bytes": 631,
+      "sha256": "81ce3736f21f30776785e1300c538a0986e701ea4687724302cb10fcd502ab5d",
+      "bytes": 681,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -5812,8 +5812,8 @@
     },
     {
       "path": "packages/client/components/ui/components/features/profiles/ProfileBanner.tsx",
-      "sha256": "21cad3f11dc90f7f379c6630badcf020d6cacb8a2ff85d81a837d48ef67a0bf4",
-      "bytes": 6093,
+      "sha256": "210ad8c80341edd7bcfde42c7a947fd6a1e6624fc1f9c343c58da47b6f244db4",
+      "bytes": 6189,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -5866,8 +5866,8 @@
     },
     {
       "path": "packages/client/components/ui/components/features/profiles/ProfileMutuals.tsx",
-      "sha256": "0ee652c9e781c5e30fd2cf8daf5b83d1ac1782fc6b410c8f4507c013273cb00e",
-      "bytes": 4305,
+      "sha256": "9258a904824602a0df057b100149194a37ea5ed8b4a4b6f16b6245276c84d84e",
+      "bytes": 4411,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -6004,14 +6004,14 @@
     },
     {
       "path": "packages/client/components/ui/components/features/profiles/mutualCache.test.ts",
-      "sha256": "e6addc5d5c653f6c553e4b0728d499bd9d9b75d38617455061538372c022f25f",
-      "bytes": 1632,
+      "sha256": "e376238dc08f1c17df093a0b0a39f4ab7f43d15306c75ed3045b93d37fe8a531",
+      "bytes": 2632,
       "category": "synthetic-test-source-or-fixture"
     },
     {
       "path": "packages/client/components/ui/components/features/profiles/mutualCache.ts",
-      "sha256": "4f4041c4e426313b730e75d1a734ddc931b22a8ebb53bd7fe6bc5b67da9f1e21",
-      "bytes": 1271,
+      "sha256": "ec1948b51738cc3a47688b4d1ff2a8b78a0c5b5a5ea95f1930ef652356b9253c",
+      "bytes": 1593,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -39262,8 +39262,8 @@
     },
     {
       "path": "packages/client/src/interface/Friends.tsx",
-      "sha256": "e58719aeb7b30ec36e76fecc06c99aaa59bb2fd4df14df80c7007b4d9f936d12",
-      "bytes": 22800,
+      "sha256": "5e4562ed362ace1c430ba318d978878874e21f2049ac32dba3459db025a07777",
+      "bytes": 22828,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -39292,8 +39292,8 @@
     },
     {
       "path": "packages/client/src/interface/You.tsx",
-      "sha256": "86422363cee8de3f3097eb42dc90cff53626fb9107d28300f130fd1139cf7647",
-      "bytes": 12721,
+      "sha256": "dfd7aabc146b231a5d5f4adbc0398054d99a71bd4bb39ffd809bc3cca9fb4691",
+      "bytes": 12752,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -40528,8 +40528,8 @@
     },
     {
       "path": "packages/client/src/interface/navigation/channels/AccountBar.tsx",
-      "sha256": "fbe5b7381189400ad90cd76cbd8783edf2b038cc6a9b478b23e0eca270e8e3f0",
-      "bytes": 19837,
+      "sha256": "0d2ce20114952453ba25d3f576222346fab031ec3696e29c952e126c5b5b67ea",
+      "bytes": 19866,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -40600,8 +40600,8 @@
     },
     {
       "path": "packages/client/src/interface/navigation/servers/UserMenu.tsx",
-      "sha256": "58195ebc56eee8e23d92354bebc6b428bd36114754bda679049387f554831c52",
-      "bytes": 14505,
+      "sha256": "141d2833b3fd558461d350e64b55793ee2858af38fa5d71e1b06d427abbefe59",
+      "bytes": 14610,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -41370,7 +41370,7 @@
   "submodules": [
     {
       "path": "packages/stoat.js",
-      "commit": "99b5b48149d2323e5d194510b70fdc98dcfe4075"
+      "commit": "13a239037277c34f9e44d726d313db734d805e6b"
     }
   ]
 }
