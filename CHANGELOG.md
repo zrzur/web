@@ -15,6 +15,10 @@
 
 * **Server insights:** Server settings → Insights (Manage Server) shows members, joins and leaves, messages, active members and time in voice as a bar per day for 7, 30 or 90 days, counted in your time zone, plus where joins came from and the busiest channels. Only totals, never who: every count from 1 to 4 but the member total reads "fewer than 5" (joins, leaves, messages, sources, channels, active members, voice time), bots are neither active members nor voice time, and messages count only in channels you can see. Shows the day counting started. The page loads on its own when opened (with its own loading line) and asks once per range; bars use neutral ink, not the action colour. In Arabic the time axis runs right to left, like the text. SDK pin: packages/stoat.js at sdk-js `8e010b7`.
 
+### Brand
+
+* **Tab icon:** the app, Discover and Designs use the red Zrzur logo with no background in the browser tab, the same as zrzur.com.
+
 ### Performance
 
 * **Smaller install:** the app shell the service worker installs is back under its 2,000,000-byte budget (1,996,898). dayjs was bundled twice (the Arabic and British English date files pulled in the ESM copy), the maths parser now loads with KaTeX on the first message with `$$`, and moderators' selection mode loads on first use. A build over budget now names its biggest files.
