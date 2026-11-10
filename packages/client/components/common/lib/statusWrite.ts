@@ -17,6 +17,16 @@ export function statusRetryDelay(error: unknown): number | undefined {
 }
 
 /**
+ * The edit for a presence change: only the presence. Sending the text back
+ * would replace its emoji and expiry, or bring back one that ran out.
+ */
+export function presencePatch(
+  presence: NonNullable<NonNullable<API.DataEditUser["status"]>["presence"]>,
+): API.DataEditUser {
+  return { status: { presence } };
+}
+
+/**
  * The status as one line for `TextWithEmoji`: the emoji first (a custom
  * emoji as its `:id:` code), then the text
  */

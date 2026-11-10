@@ -2,6 +2,7 @@ import { autoUpdate, flip, offset, shift, size } from "@floating-ui/dom";
 import { useLingui } from "@lingui/solid/macro";
 import { useClient, useUser } from "@revolt/client";
 import {
+  presencePatch,
   statusLine,
   writeStatusWithRetry,
 } from "@revolt/common/lib/statusWrite";
@@ -76,7 +77,7 @@ export function UserMenu(props: Props) {
     save: async (presence) => {
       const account = user();
       if (!account) throw new Error("Account unavailable");
-      await account.edit({ status: { presence } });
+      await account.edit(presencePatch(presence));
     },
     pending: (presence) => {
       setPending(presence);

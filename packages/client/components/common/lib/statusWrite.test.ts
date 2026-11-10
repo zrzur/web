@@ -1,7 +1,7 @@
 import { afterEach, describe, expect, test, vi } from "vitest";
 import { User } from "../../../../stoat.js/src/solid/classes/User";
 import { customStatusPatch, statusExpiresAt } from "./statusPatch";
-import { statusLine, writeStatusWithRetry } from "./statusWrite";
+import { presencePatch, statusLine, writeStatusWithRetry } from "./statusWrite";
 
 afterEach(() => vi.useRealTimers());
 
@@ -79,6 +79,12 @@ describe("custom status text", () => {
       writeStatusWithRetry(write, { signal: new AbortController().signal }),
     ).rejects.toBe(failure);
     expect(write).toHaveBeenCalledTimes(1);
+  });
+});
+
+describe("presence change", () => {
+  test("sends only the presence, never the text, emoji or expiry", () => {
+    expect(presencePatch("Idle")).toEqual({ status: { presence: "Idle" } });
   });
 });
 
