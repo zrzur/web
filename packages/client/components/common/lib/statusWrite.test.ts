@@ -1,11 +1,7 @@
 import { afterEach, describe, expect, test, vi } from "vitest";
 import { User } from "../../../../stoat.js/src/solid/classes/User";
-import {
-  customStatusPatch,
-  statusExpiresAt,
-  statusLine,
-  writeStatusWithRetry,
-} from "./statusWrite";
+import { customStatusPatch, statusExpiresAt } from "./statusPatch";
+import { statusLine, writeStatusWithRetry } from "./statusWrite";
 
 afterEach(() => vi.useRealTimers());
 

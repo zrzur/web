@@ -20,8 +20,8 @@ import {
   type StatusExpiry,
   STATUS_EXPIRIES,
   customStatusPatch,
-  writeStatusWithRetry,
-} from "../../common/lib/statusWrite";
+} from "../../common/lib/statusPatch";
+import { writeStatusWithRetry } from "../../common/lib/statusWrite";
 import { Modals } from "../types";
 
 /**
@@ -46,6 +46,9 @@ export function CustomStatusModal(
   const [expiry, setExpiry] = createSignal<StatusExpiry | "keep">(
     keptExpiry ? "keep" : "never",
   );
+  const choices: (StatusExpiry | "keep")[] = keptExpiry
+    ? ["keep", ...STATUS_EXPIRIES]
+    : STATUS_EXPIRIES;
   const keptTime = () =>
     keptExpiry
       ? new Date(keptExpiry).toLocaleTimeString(undefined, {
@@ -59,8 +62,10 @@ export function CustomStatusModal(
   const cancellation = new AbortController();
   onCleanup(() => cancellation.abort());
 
-  const expiryLabel = (choice: StatusExpiry) => {
+  const expiryLabel = (choice: StatusExpiry | "keep") => {
     switch (choice) {
+      case "keep":
+        return t`Keep: until ${keptTime()}`;
       case "30m":
         return t`30 minutes`;
       case "1h":
@@ -199,10 +204,8 @@ export function CustomStatusModal(
                 setExpiry(event.currentTarget.value as StatusExpiry | "keep")
               }
             >
-              <Show when={keptExpiry}>
-                <MenuItem value="keep">{t`Keep: until ${keptTime()}`}</MenuItem>
-              </Show>
-              <For each={STATUS_EXPIRIES}>
+              {/* the select reads its items as elements: no empty <Show> here */}
+              <For each={choices}>
                 {(choice) => (
                   <MenuItem value={choice}>{expiryLabel(choice)}</MenuItem>
                 )}
