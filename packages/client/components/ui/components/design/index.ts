@@ -33,6 +33,7 @@ export { type CategorySelectOption, CategoryButton } from "./CategoryButton";
 export { Checkbox } from "./Checkbox";
 export { COLOUR_PALETTE, ColourPicker } from "./ColourPicker";
 export { DataTable } from "./DataTable";
+export { DateTimeField } from "./DateTimeField";
 export {
   type DialogProps,
   type DialogTone,
