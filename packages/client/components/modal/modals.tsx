@@ -249,6 +249,11 @@ const ServerIdentityModal = lazy(() =>
     default: m.ServerIdentityModal,
   })),
 );
+const ServerEventEditorModal = lazy(() =>
+  import("./modals/ServerEventEditor").then((m) => ({
+    default: m.ServerEventEditorModal,
+  })),
+);
 const ServerInfoModal = lazy(() =>
   import("./modals/ServerInfo").then((m) => ({ default: m.ServerInfoModal })),
 );
@@ -451,6 +456,8 @@ export function RenderModal(props: ActiveModal & { onClose: () => void }) {
       return <ServerIdentityModal {...modalProps} />;
     case "server_info":
       return <ServerInfoModal {...modalProps} />;
+    case "server_event":
+      return <ServerEventEditorModal {...modalProps} />;
     case "settings":
       return <SettingsModal {...modalProps} />;
     case "signed_out":

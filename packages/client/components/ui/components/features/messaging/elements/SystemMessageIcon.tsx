@@ -83,6 +83,9 @@ export function SystemMessageIcon(props: {
           <Match when={props.systemMessage.type === "call_started"}>
             <Icon name="phone" size={16} />
           </Match>
+          <Match when={props.systemMessage.type === "event_started"}>
+            <Icon name="calendar" size={16} />
+          </Match>
           <Match when={props.systemMessage.type === "raid_alert"}>
             <Icon name="warning-circle" size={16} />
           </Match>
@@ -147,6 +150,9 @@ const Base = styled("div", {
       },
       call_started: {
         color: "var(--md-sys-color-primary)",
+      },
+      event_started: {
+        color: "var(--z-live, var(--md-sys-color-primary))",
       },
       raid_alert: {
         color: "var(--z-warning, var(--md-sys-color-primary))",

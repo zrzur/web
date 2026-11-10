@@ -289,6 +289,12 @@ export type Modals =
       server: Server;
     }
   | {
+      type: "server_event";
+      server: Server;
+      /** the event to change; a new one when absent */
+      event?: API.ServerEvent;
+    }
+  | {
       type: "invite";
       invite: PublicChannelInvite;
     }

@@ -436,6 +436,8 @@ export const RESERVED_KEYS = [
   "Ctrl+Shift+H",
   // Zrzur: Create poll
   "Ctrl+Shift+8",
+  // Zrzur: open the server's events
+  "Ctrl+Shift+9",
 ];
 
 /** Reserved for Zrzur's own plugins */
@@ -508,7 +510,16 @@ function isObject(value: unknown): value is Record<string, unknown> {
  * smuggle in fields a later version might trust.
  */
 /** Words only official plugins may use in a name (as the server checks) */
-const RESERVED_NAME_WORDS = ["zrzur", "zarzour", "zarzur", "zarzoor", "زرزور", "official", "offiziell", "رسمي"];
+const RESERVED_NAME_WORDS = [
+  "zrzur",
+  "zarzour",
+  "zarzur",
+  "zarzoor",
+  "زرزور",
+  "official",
+  "offiziell",
+  "رسمي",
+];
 
 /** Whether a third-party name pretends to be Zrzur's own; spaces, marks and case don't hide it */
 export function reservedPluginName(text: unknown) {
@@ -615,11 +626,16 @@ export function validateManifest(
   }
   if (typeof m.id !== "string" || !ID_RE.test(m.id) || m.id.length > 64) {
     fail("id", "must look like `publisher.plugin-name` (lowercase, 2-5 parts)");
-  } else if ((m.id.startsWith(OFFICIAL_PREFIX) || m.id.startsWith(OFFICIAL_PREFIX_LEGACY)) && !options.official) {
+  } else if (
+    (m.id.startsWith(OFFICIAL_PREFIX) ||
+      m.id.startsWith(OFFICIAL_PREFIX_LEGACY)) &&
+    !options.official
+  ) {
     fail("id", "the `zrzur.` prefix is reserved for official plugins");
   }
   text(m.name, "name", 2, 48);
-  if (!options.official && reservedPluginName(m.name)) fail("name", "is reserved for official plugins");
+  if (!options.official && reservedPluginName(m.name))
+    fail("name", "is reserved for official plugins");
   if (typeof m.version !== "string" || !parseVersion(m.version)) {
     fail("version", "must be MAJOR.MINOR.PATCH");
   }
@@ -629,7 +645,8 @@ export function validateManifest(
   } else {
     known(m.author, "author", ["name", "url"]);
     text(m.author.name, "author.name", 1, 64);
-    if (!options.official && reservedPluginName(m.author.name)) fail("author.name", "is reserved for official plugins");
+    if (!options.official && reservedPluginName(m.author.name))
+      fail("author.name", "is reserved for official plugins");
     if (m.author.url !== undefined) {
       if (
         typeof m.author.url !== "string" ||
@@ -649,10 +666,7 @@ export function validateManifest(
     fail("icon", "must be a Material Symbols name (no images or URLs)");
   }
   if (m.api_version !== PLUGIN_API_VERSION) {
-    fail(
-      "api_version",
-      `this Zrzur supports plugin API ${PLUGIN_API_VERSION}`,
-    );
+    fail("api_version", `this Zrzur supports plugin API ${PLUGIN_API_VERSION}`);
   }
   if (
     typeof m.min_app_version !== "string" ||
@@ -708,10 +722,7 @@ export function validateManifest(
       const entry = PERMISSIONS[permission as Permission];
       if (!entry) return fail(path, `unknown permission \`${permission}\``);
       if (!entry.supported) {
-        fail(
-          path,
-          `\`${permission}\` is not supported by this Zrzur version`,
-        );
+        fail(path, `\`${permission}\` is not supported by this Zrzur version`);
       }
     });
   }
@@ -1318,7 +1329,8 @@ export function validateManifest(
         }
         known(entry, path, ["name", "description", "strings"]);
         if (entry.name !== undefined) text(entry.name, `${path}.name`, 2, 48);
-        if (!options.official && reservedPluginName(entry.name)) fail(`${path}.name`, "is reserved for official plugins");
+        if (!options.official && reservedPluginName(entry.name))
+          fail(`${path}.name`, "is reserved for official plugins");
         if (entry.description !== undefined) {
           text(entry.description, `${path}.description`, 1, LIMITS.textLong);
         }

@@ -1,0 +1,27 @@
+{
+  "{0, plural, one {# upcoming event} other {# upcoming events}}": [
+    "{0, plural, zero {لا فعاليات قادمة} one {فعالية قادمة واحدة} two {فعاليتان قادمتان} few {# فعاليات قادمة} many {# فعالية قادمة} other {# فعالية قادمة}}",
+    "{0, plural, one {# anstehendes Event} other {# anstehende Events}}",
+    "{0, plural, one {# événement à venir} other {# événements à venir}}",
+    "{0, plural, one {# evento próximo} other {# eventos próximos}}",
+    "{0, plural, one {# предстоящее событие} few {# предстоящих события} many {# предстоящих событий} other {# предстоящего события}}",
+    "{0, plural, other {# 个即将举行的活动}}"
+  ],
+  "Cancel the whole series": ["إلغاء السلسلة كلها", "Ganze Reihe absagen", "Annuler toute la série", "Cancelar toda la serie", "Отменить всю серию", "取消整个系列"],
+  "Cancel this time": ["إلغاء هذه المرة", "Nur dieses Mal absagen", "Annuler cette fois", "Cancelar esta vez", "Отменить этот раз", "取消这一次"],
+  "Cancel this time only? The next one stays scheduled.": ["أتريد إلغاء هذه المرة فقط؟ تبقى المرة التالية مجدولة.", "Nur dieses Mal absagen? Das nächste bleibt geplant.", "Annuler cette fois seulement ? Le suivant reste prévu.", "¿Cancelar solo esta vez? El siguiente sigue programado.", "Отменить только этот раз? Следующее останется в расписании.", "只取消这一次吗？下一次仍按计划进行。"],
+  "Cancel this one and every one after it? Nothing more of this series is scheduled.": ["أتريد إلغاء هذه المرة وكل ما بعدها؟ لن تُجدول أي مرة أخرى من هذه السلسلة.", "Dieses und alle folgenden absagen? Von dieser Reihe wird nichts mehr geplant.", "Annuler celui-ci et tous les suivants ? Plus rien de cette série ne sera prévu.", "¿Cancelar este y todos los siguientes? No se programará nada más de esta serie.", "Отменить этот раз и все следующие? Больше ничего из этой серии не будет запланировано.", "要取消这一次及之后的所有活动吗？这个系列不会再安排任何活动。"],
+  "Delete this time and its interested list for good? The next one stays scheduled.": ["أتريد حذف هذه المرة وقائمة المهتمين بها نهائيًا؟ تبقى المرة التالية مجدولة.", "Dieses Mal und seine Interessiertenliste endgültig löschen? Das nächste bleibt geplant.", "Supprimer définitivement cette fois et sa liste d’intéressés ? Le suivant reste prévu.", "¿Eliminar para siempre esta vez y su lista de interesados? El siguiente sigue programado.", "Удалить этот раз и список заинтересованных навсегда? Следующее останется в расписании.", "要永久删除这一次及其感兴趣名单吗？下一次仍按计划进行。"],
+  "The link could not be copied. Copy it from the address bar.": ["تعذّر نسخ الرابط. انسخه من شريط العنوان.", "Der Link konnte nicht kopiert werden. Kopiere ihn aus der Adressleiste.", "Impossible de copier le lien. Copie-le depuis la barre d’adresse.", "No se pudo copiar el enlace. Cópialo desde la barra de direcciones.", "Не удалось скопировать ссылку. Скопируйте её из адресной строки.", "无法复制链接，请从地址栏复制。"],
+  "scheduled events::Cancelled": ["ملغاة", "Abgesagt", "Annulé", "Cancelado", "Отменено", "已取消"],
+  "scheduled events::Delete": ["حذف", "Löschen", "Supprimer", "Eliminar", "Удалить", "删除"],
+  "scheduled events::Edit": ["تعديل", "Bearbeiten", "Modifier", "Editar", "Изменить", "编辑"],
+  "scheduled events::End now": ["إنهاء الآن", "Jetzt beenden", "Terminer maintenant", "Terminar ahora", "Завершить сейчас", "立即结束"],
+  "scheduled events::Ends": ["تنتهي", "Endet", "Fin", "Termina", "Окончание", "结束"],
+  "scheduled events::Join": ["انضم", "Beitreten", "Rejoindre", "Unirse", "Присоединиться", "加入"],
+  "scheduled events::Keep it": ["إبقاؤها", "Behalten", "La garder", "Mantenerlo", "Оставить", "保留"],
+  "scheduled events::Open": ["افتح", "Öffnen", "Ouvrir", "Abrir", "Открыть", "打开"],
+  "scheduled events::Repeat": ["التكرار", "Wiederholen", "Répétition", "Repetir", "Повтор", "重复"],
+  "scheduled events::Title": ["العنوان", "Titel", "Titre", "Título", "Название", "标题"],
+  "scheduled events::Where": ["المكان", "Wo", "Lieu", "Dónde", "Где", "地点"]
+}

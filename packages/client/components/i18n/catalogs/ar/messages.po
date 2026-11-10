@@ -83,6 +83,11 @@ msgstr "(مُعدّلة)"
 #~ msgid "{0, plural, =0 {No mutual servers} one {# mutual server} other {# mutual servers}}"
 #~ msgstr "{0, plural, =0 {لا سيرفرات مشتركة} one {سيرفر مشترك واحد} two {سيرفران مشتركان} few {# سيرفرات مشتركة} many {# سيرفرًا مشتركًا} other {# سيرفر مشترك}}"
 
+#. placeholder {0}: props.event.interested_count
+#: src/interface/events/EventCard.tsx
+msgid "{0, plural, =0 {Nobody is interested yet} one {# interested} other {# interested}}"
+msgstr "{0, plural, =0 {لا أحد مهتم بعد} zero {لا أحد مهتم بعد} one {شخص واحد مهتم} two {شخصان مهتمان} few {# أشخاص مهتمون} many {# شخصًا مهتمًا} other {# شخص مهتم}}"
+
 #. placeholder {0}: bot().serverCount
 #. placeholder {0}: props.count
 #. placeholder {0}: props.entry.count
@@ -169,6 +174,11 @@ msgstr "{0, plural, zero {لا نتائج} one {نتيجة واحدة} two {نت
 #: components/app/interface/settings/server/apps/ServerAppPage.tsx
 msgid "{0, plural, one {# rule} other {# rules}}"
 msgstr "{0, plural, zero {لا قواعد} one {قاعدة واحدة} two {قاعدتان} few {# قواعد} many {# قاعدةً} other {# قاعدة}}"
+
+#. placeholder {0}: count()
+#: src/interface/events/EventsLink.tsx
+msgid "{0, plural, one {# upcoming event} other {# upcoming events}}"
+msgstr "{0, plural, zero {لا فعاليات قادمة} one {فعالية قادمة واحدة} two {فعاليتان قادمتان} few {# فعاليات قادمة} many {# فعالية قادمة} other {# فعالية قادمة}}"
 
 #. placeholder {0}: answer().count ?? 0
 #. placeholder {0}: props.message.total
@@ -1277,6 +1287,10 @@ msgstr "لا يضم الأمر الفرعي أوامر فرعية."
 msgid "A sub-command takes only a name, a description and options."
 msgstr "لا يأخذ الأمر الفرعي إلا اسمًا ووصفًا وخيارات."
 
+#: src/interface/events/EventCard.tsx
+msgid "A text channel"
+msgstr "قناة نصية"
+
 #: components/app/interface/settings/user/profile/CreatorStudio.tsx
 msgid "A transparent animation that plays once over a profile. 576 × 1024 px, up to 4 seconds, up to 2 MB. Reviewers look at it before it goes live."
 msgstr "حركة شفافة تُعرض مرة واحدة فوق الملف الشخصي. 576 × 1024 بكسل، حتى 4 ثوانٍ، وحتى 2 ميغابايت. ويطّلع عليها المراجعون قبل نشرها."
@@ -1292,6 +1306,10 @@ msgstr "بريد إلكتروني مؤكَّد، وحساب أقدم من 5 دق
 #: src/interface/designs/Wall.tsx
 msgid "A verified maker"
 msgstr "مصمم موثّق"
+
+#: src/interface/events/EventCard.tsx
+msgid "A voice channel"
+msgstr "قناة صوتية"
 
 #: components/app/interface/settings/user/appearance/AppearanceMenu.tsx
 msgid "A warm dark theme in sand and copper tones, easy on the eyes in the evening."
@@ -1816,6 +1834,10 @@ msgstr "عنوان {0}"
 msgid "Address or documents"
 msgstr "عنوان أو وثائق"
 
+#: components/modal/modals/ServerEventEditor.tsx
+msgid "Address or link"
+msgstr "العنوان أو الرابط"
+
 #: components/modal/modals/InteractionsEndpoint.tsx
 msgid "Address saved. Interactions now go to your server."
 msgstr "حُفظ العنوان. ستصل التفاعلات الآن إلى سيرفرك."
@@ -2148,6 +2170,10 @@ msgstr "حدث خطأ أثناء معالجة الصورة: {0}"
 #: components/modal/modals/Error2.tsx
 msgid "An error occurred."
 msgstr "حدث خطأ."
+
+#: components/modal/modals/ServerEventEditor.tsx
+msgid "An event can last up to 31 days."
+msgstr "يمكن أن تستمر الفعالية 31 يومًا على الأكثر."
 
 #: components/app/interface/settings/user/support/ContactSupport.tsx
 msgid "An idea for Zrzur"
@@ -3612,6 +3638,7 @@ msgstr "كندا"
 #: components/modal/modals/ResetBotToken.tsx
 #: components/modal/modals/ScreenSharePicker.tsx
 #: components/modal/modals/ScreenShareSettings.tsx
+#: components/modal/modals/ServerEventEditor.tsx
 #: components/modal/modals/ServerIdentity.tsx
 #: components/modal/modals/SignOutSessions.tsx
 #: components/modal/modals/TimeoutMember.tsx
@@ -3635,6 +3662,10 @@ msgstr "ألغِ متى شئت من الإعدادات ← الاشتراكات.
 msgid "Cancel editing"
 msgstr "إلغاء التعديل"
 
+#: src/interface/events/EventCard.tsx
+msgid "Cancel event"
+msgstr "إلغاء الفعالية"
+
 #: components/app/interface/settings/user/subscriptions/Subscriptions.tsx
 msgid "Cancel Feather"
 msgstr "إلغاء اشتراك ريشة"
@@ -3657,6 +3688,26 @@ msgstr "إلغاء الشراء"
 msgid "Cancel request"
 msgstr "إلغاء الطلب"
 
+#: src/interface/events/EventCard.tsx
+msgid "Cancel the whole series"
+msgstr "إلغاء السلسلة كلها"
+
+#: src/interface/events/EventCard.tsx
+msgid "Cancel this event? Interested members see that it is off."
+msgstr "أتريد إلغاء هذه الفعالية؟ سيرى الأعضاء المهتمون أنها أُلغيت."
+
+#: src/interface/events/EventCard.tsx
+msgid "Cancel this one and every one after it? Nothing more of this series is scheduled."
+msgstr "أتريد إلغاء هذه المرة وكل ما بعدها؟ لن تُجدول أي مرة أخرى من هذه السلسلة."
+
+#: src/interface/events/EventCard.tsx
+msgid "Cancel this time"
+msgstr "إلغاء هذه المرة"
+
+#: src/interface/events/EventCard.tsx
+msgid "Cancel this time only? The next one stays scheduled."
+msgstr "أتريد إلغاء هذه المرة فقط؟ تبقى المرة التالية مجدولة."
+
 #: components/app/interface/settings/shared/Discoverable.tsx
 #~ msgid "Cancel your discover request and remove it from the review queue"
 #~ msgstr "ألغِ طلبك وأزِله من قائمة المراجعة"
@@ -3664,6 +3715,12 @@ msgstr "إلغاء الطلب"
 #: components/app/interface/settings/user/subscriptions/BillingHistory.tsx
 msgid "Cancelled"
 msgstr "ملغى"
+
+#: src/interface/events/EventCard.tsx
+#: src/interface/events/EventsPage.tsx
+msgctxt "scheduled events"
+msgid "Cancelled"
+msgstr "ملغاة"
 
 #. placeholder {0}: date(item.current_period_end)
 #: components/app/interface/settings/user/subscriptions/Subscriptions.tsx
@@ -4205,6 +4262,10 @@ msgstr "اختر حزمة `.zplugin.json` (أو ملف manifest) لفحصها، 
 msgid "Choose a command or a suggestion"
 msgstr "اختيار أمر أو اقتراح"
 
+#: components/ui/components/design/DateTimeField.tsx
+msgid "Choose a day"
+msgstr "اختر يومًا"
+
 #: components/app/interface/channels/text/interactions/CommandPicker.tsx
 #: components/app/interface/channels/text/interactions/InteractionModal.tsx
 msgid "Choose a file"
@@ -4373,6 +4434,14 @@ msgstr "اختر ما يظهر في ملفك الشخصي وبأي ترتيب. �
 #: components/app/interface/settings/server/LobbySettings.tsx
 msgid "Choose what the lobby shows and in which order. Sections with nothing to show stay hidden by themselves."
 msgstr "اختر ما تعرضه الردهة وبأي ترتيب. الأقسام التي ليس فيها شيء تختفي تلقائياً."
+
+#: components/modal/modals/ServerEventEditor.tsx
+msgid "Choose when it starts."
+msgstr "اختر موعد البدء."
+
+#: components/modal/modals/ServerEventEditor.tsx
+msgid "Choose where it takes place."
+msgstr "اختر مكان إقامتها."
 
 #: components/app/interface/settings/user/Keybinds.tsx
 msgid "Choose where to forward"
@@ -5123,6 +5192,7 @@ msgstr "انسخ JSON"
 #: components/app/menus/MessageContextMenu.tsx
 #: src/interface/designs/DesignPage.tsx
 #: src/interface/Discover.tsx
+#: src/interface/events/EventCard.tsx
 msgid "Copy link"
 msgstr "نسخ الرابط"
 
@@ -5294,6 +5364,14 @@ msgstr "الدول"
 #: components/modal/lib/serverTemplateText.ts
 msgid "course-info"
 msgstr "معلومات الدورة"
+
+#: components/modal/modals/ServerEventEditor.tsx
+msgid "Cover"
+msgstr "الغلاف"
+
+#: components/modal/modals/ServerEventEditor.tsx
+msgid "Cover image (optional)"
+msgstr "صورة الغلاف (اختيارية)"
 
 #: components/modal/lib/CreateServerFlow.tsx
 #: components/modal/modals/CreateBot.tsx
@@ -5617,6 +5695,10 @@ msgstr "قص أيقونة القناة"
 #: components/app/interface/settings/channel/Overview.tsx
 #~ msgid "Crop Channel Icon"
 #~ msgstr "قص أيقونة القناة"
+
+#: components/modal/modals/ServerEventEditor.tsx
+msgid "Crop cover image"
+msgstr "قص صورة الغلاف"
 
 #: components/app/interface/settings/server/emojis/EmojiList.tsx
 msgid "Crop emoji"
@@ -5950,6 +6032,11 @@ msgstr "أداء متراجع"
 msgid "Delete"
 msgstr "حذف"
 
+#: src/interface/events/EventCard.tsx
+msgctxt "scheduled events"
+msgid "Delete"
+msgstr "حذف"
+
 #. placeholder {0}: props.emoji.name
 #: components/modal/modals/DeleteEmoji.tsx
 msgid "Delete :{0}:?"
@@ -6066,6 +6153,10 @@ msgstr "حذف السيرفر"
 #~ msgid "Delete Server"
 #~ msgstr "حذف السيرفر"
 
+#: src/interface/events/EventCard.tsx
+msgid "Delete this event and its interested list for good?"
+msgstr "أتريد حذف هذه الفعالية وقائمة المهتمين بها نهائيًا؟"
+
 #: components/app/interface/settings/server/invites/ListServerInvites.tsx
 msgid "Delete this invite?"
 msgstr "حذف هذه الدعوة؟"
@@ -6077,6 +6168,10 @@ msgstr "هل تحذف بيانات هذه الوحدة؟"
 #: components/app/interface/settings/server/AutoModSettings.tsx
 msgid "Delete this rule?"
 msgstr "حذف هذه القاعدة؟"
+
+#: src/interface/events/EventCard.tsx
+msgid "Delete this time and its interested list for good? The next one stays scheduled."
+msgstr "أتريد حذف هذه المرة وقائمة المهتمين بها نهائيًا؟ تبقى المرة التالية مجدولة."
 
 #: components/app/interface/settings/server/webhooks/ServerWebhooks.tsx
 msgid "Delete this webhook?"
@@ -6185,10 +6280,12 @@ msgstr "الوصف"
 #: components/app/interface/settings/user/bots/CommandManager.tsx
 #: components/app/interface/settings/user/profile/CreatorStudio.tsx
 #: components/i18n/errors.tsx
+#: src/interface/events/EventCard.tsx
 msgid "Description"
 msgstr "الوصف"
 
 #: components/modal/modals/CreateChannel.tsx
+#: components/modal/modals/ServerEventEditor.tsx
 msgid "Description (optional)"
 msgstr "الوصف (اختياري)"
 
@@ -6546,6 +6643,10 @@ msgstr "التوثيق"
 msgid "does anyone read this?"
 msgstr "هل يقرأ أحد هذا؟"
 
+#: components/modal/modals/ServerEventEditor.tsx
+msgid "Does not repeat"
+msgstr "لا تتكرر"
+
 #: components/ui/components/features/profiles/plateNames.ts
 msgid "Dominica"
 msgstr "دومينيكا"
@@ -6737,6 +6838,11 @@ msgstr "الإكوادور"
 msgid "Edit"
 msgstr "تعديل"
 
+#: src/interface/events/EventCard.tsx
+msgctxt "scheduled events"
+msgid "Edit"
+msgstr "تعديل"
+
 #. placeholder {0}: props.member.displayName
 #: components/modal/modals/UserProfileRoles.tsx
 msgid "Edit {0}'s roles"
@@ -6765,6 +6871,10 @@ msgstr "تعديل الإيموجي"
 #: components/app/interface/settings/server/emojis/EmojiList.tsx
 #~ msgid "Edit Emoji"
 #~ msgstr "تعديل الرموز التعبيرية"
+
+#: components/modal/modals/ServerEventEditor.tsx
+msgid "Edit event"
+msgstr "تعديل الفعالية"
 
 #: components/app/menus/ServerFolderContextMenu.tsx
 #: components/modal/modals/EditServerFolder.tsx
@@ -7031,6 +7141,11 @@ msgstr "مفعّلة · لا تعمل"
 msgid "End now"
 msgstr "أنهِ الآن"
 
+#: src/interface/events/EventCard.tsx
+msgctxt "scheduled events"
+msgid "End now"
+msgstr "إنهاء الآن"
+
 #. placeholder {0}: p.label
 #: components/app/interface/settings/server/ServerEmergency.tsx
 msgid "End now: {0}"
@@ -7066,6 +7181,11 @@ msgstr "نقاط النهاية"
 #: components/app/interface/settings/user/safety/ReportsAndStanding.tsx
 msgid "Ends"
 msgstr "ينتهي"
+
+#: components/modal/modals/ServerEventEditor.tsx
+msgctxt "scheduled events"
+msgid "Ends"
+msgstr "تنتهي"
 
 #. placeholder {0}: ends()
 #: components/app/interface/channels/text/poll/PollCard.tsx
@@ -7227,6 +7347,17 @@ msgstr "الفعاليات"
 msgid "Events"
 msgstr "الأحداث"
 
+#: src/interface/events/EventsLink.tsx
+#: src/interface/events/EventsPage.tsx
+msgctxt "scheduled events"
+msgid "Events"
+msgstr "الفعاليات"
+
+#: components/modal/modals/ServerEventEditor.tsx
+#: src/interface/events/EventCard.tsx
+msgid "Every 2 weeks"
+msgstr "كل أسبوعين"
+
 #: src/interface/designs/Home.tsx
 msgid "Every bird in this flock is a design for your Zrzur profile. Tap one and it lands on you."
 msgstr "كل طائر في هذا السرب تصميم لملفك الشخصي في زرزور. المسه فيحطّ عليك."
@@ -7263,6 +7394,11 @@ msgstr "كل طائر مضيء في هذه السماء شخص يرسم لزرز
 msgid "Every member can share an invite link."
 msgstr "يستطيع كل عضو مشاركة رابط دعوة."
 
+#: components/modal/modals/ServerEventEditor.tsx
+#: src/interface/events/EventCard.tsx
+msgid "Every month"
+msgstr "كل شهر"
+
 #: components/app/interface/settings/user/subscriptions/PlusPage.tsx
 msgid "Every new person adds to those bills. Talking stays free for everyone, so the paid extras are what keep the lights on, for the people who pay and the people who don't."
 msgstr "كل شخص جديد يزيد هذه الفواتير. الحديث يبقى مجانياً للجميع، والإضافات المدفوعة هي ما يُبقي المكان قائماً، لمن يدفع ولمن لا يدفع."
@@ -7282,6 +7418,11 @@ msgstr "كل منشور يحتاج وسمًا"
 #: components/modal/modals/billingErrors.ts
 msgid "Every spot in the top row is taken. Try again when one opens."
 msgstr "كل الأماكن في الصف الأول محجوزة. حاول مجدداً عندما يتوفر مكان."
+
+#: components/modal/modals/ServerEventEditor.tsx
+#: src/interface/events/EventCard.tsx
+msgid "Every week"
+msgstr "كل أسبوع"
 
 #: components/modal/modals/SuperchargeServer.tsx
 msgid "Every Wing lifts this server for everyone in it. Any member can give one."
@@ -8686,6 +8827,12 @@ msgstr "الدردشة الصوتية"
 msgid "Hangout"
 msgstr "جلسة"
 
+#: src/interface/events/EventCard.tsx
+#: src/interface/events/EventsLink.tsx
+#: src/interface/events/EventsPage.tsx
+msgid "Happening now"
+msgstr "تجري الآن"
+
 #: components/modal/modals/GiftPlus.tsx
 msgid "Happy birthday!"
 msgstr "عيد ميلاد سعيد!"
@@ -9014,6 +9161,10 @@ msgstr "قرأت الكود وكل الصلاحيات، وتشغيلها آمن.
 msgid "I understand the consequences"
 msgstr "أتفهّم العواقب"
 
+#: src/interface/events/EventCard.tsx
+msgid "I'm interested"
+msgstr "أنا مهتم"
+
 #: components/modal/modals/PolicyChange.tsx
 msgid "I've read and reviewed the changes."
 msgstr "قرأت التغييرات وراجعتها."
@@ -9197,6 +9348,10 @@ msgstr "في قناة سيرفر أو في محادثة خاصة مع بوت."
 msgid "In a server, a role colour wins over yours, but your font stays. On a profile card with a theme, your name turns white so it stays readable."
 msgstr "داخل السيرفر يتقدّم لون الدور على لونك، لكن خطك يبقى. وعلى بطاقة ملف شخصي ملوّنة يصبح اسمك أبيض ليبقى واضحًا."
 
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "In a server."
+msgstr "داخل سيرفر."
+
 #: src/interface/developers/docs/GettingStarted.tsx
 #~ msgid "In about ten minutes you will have a bot that answers a slash command in your own test server."
 #~ msgstr "خلال نحو عشر دقائق سيكون لديك بوت يجيب عن أمر بالشرطة المائلة في سيرفر الاختبار الخاص بك."
@@ -9365,6 +9520,14 @@ msgstr "نية الاتصال:"
 #: src/interface/developers/docs/DocsPortal.tsx
 msgid "Interactions over HTTP"
 msgstr "التفاعلات عبر HTTP"
+
+#: src/interface/events/EventCard.tsx
+msgid "Interested"
+msgstr "مهتم"
+
+#: src/interface/events/EventCard.tsx
+msgid "Interested members"
+msgstr "الأعضاء المهتمون"
 
 #: components/app/interface/settings/user/profile/ProfileExtras.tsx
 #: components/ui/components/features/profiles/labels.ts
@@ -9681,6 +9844,11 @@ msgstr "اليابان"
 msgid "Join"
 msgstr "انضمام"
 
+#: src/interface/events/EventCard.tsx
+msgctxt "scheduled events"
+msgid "Join"
+msgstr "انضم"
+
 #. placeholder {0}: item().name
 #: components/app/interface/discover/ServerPage.tsx
 msgid "Join {0}"
@@ -9834,6 +10002,11 @@ msgstr "إبقاء اشتراك ريشة"
 #: components/app/interface/settings/user/profile/ReviewQueue.tsx
 msgid "Keep it"
 msgstr "إبقاؤه"
+
+#: src/interface/events/EventCard.tsx
+msgctxt "scheduled events"
+msgid "Keep it"
+msgstr "إبقاؤها"
 
 #: components/app/interface/settings/server/assistant/labels.ts
 msgid "Keep message text for this many days (90 at most)"
@@ -10305,6 +10478,10 @@ msgstr "رابط"
 msgid "Link {0}"
 msgstr "الرابط {0}"
 
+#: src/interface/events/EventCard.tsx
+msgid "Link copied"
+msgstr "نُسخ الرابط"
+
 #: components/app/interface/settings/server/invites/VanityInvite.tsx
 msgid "Link name"
 msgstr "اسم الرابط"
@@ -10426,6 +10603,10 @@ msgstr "جارٍ التحميل"
 #: components/app/interface/settings/server/bans/ListBans.tsx
 msgid "Loading bans…"
 msgstr "جارٍ تحميل قائمة الحظر…"
+
+#: src/interface/events/EventsPage.tsx
+msgid "Loading events"
+msgstr "جارٍ تحميل الفعاليات"
 
 #: components/ui/components/features/messaging/composition/picker/GifPicker.tsx
 msgid "Loading GIFs"
@@ -11061,6 +11242,10 @@ msgstr "يدعم Markdown والإيموجي."
 #: components/app/interface/settings/server/LobbySettings.tsx
 msgid "Markdown is supported."
 msgstr "يدعم تنسيق Markdown."
+
+#: components/modal/modals/ServerEventEditor.tsx
+msgid "Markdown works here."
+msgstr "يمكنك استخدام Markdown هنا."
 
 #: components/ui/components/features/profiles/plateNames.ts
 msgid "Marshall Islands"
@@ -12317,6 +12502,10 @@ msgstr "قناة الأخبار"
 msgid "Next"
 msgstr "التالي"
 
+#: components/ui/components/design/DateTimeField.tsx
+msgid "Next month"
+msgstr "الشهر التالي"
+
 #: components/modal/modals/PlusCheckout.tsx
 msgid "Next renewal"
 msgstr "التجديد القادم"
@@ -12543,6 +12732,10 @@ msgstr "لا توجد مؤثرات تطابق بحثك."
 #: components/ui/components/features/messaging/composition/picker/EmojiPicker.tsx
 msgid "No emoji found"
 msgstr "لم يُعثر على إيموجي"
+
+#: src/interface/events/EventsPage.tsx
+msgid "No events planned yet"
+msgstr "لا فعاليات مخططة بعد"
 
 #: src/interface/Designs.tsx
 msgid "No favourites yet"
@@ -13576,6 +13769,11 @@ msgstr "فريق زرزور وحده يستطيع فعل ذلك."
 msgid "Open"
 msgstr "فتح"
 
+#: src/interface/events/EventCard.tsx
+msgctxt "scheduled events"
+msgid "Open"
+msgstr "افتح"
+
 #. placeholder {0}: provider()![0]
 #: components/auth/src/flows/MailProvider.tsx
 msgid "Open {0}"
@@ -13637,6 +13835,10 @@ msgstr "مفتوح لمدة {0}"
 msgid "Open GIF picker"
 msgstr "افتح منتقي الصور المتحركة"
 
+#: src/interface/events/EventCard.tsx
+msgid "Open link"
+msgstr "افتح الرابط"
+
 #: src/interface/developers/docs/GettingStarted.tsx
 msgid "Open My applications"
 msgstr "افتح تطبيقاتي"
@@ -13689,6 +13891,10 @@ msgstr "افتح لوحة المراجعة"
 #: components/app/interface/settings/server/LobbySettings.tsx
 msgid "Open the server on its lobby"
 msgstr "افتح السيرفر على الردهة"
+
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "Open the server's events"
+msgstr "افتح فعاليات السيرفر"
 
 #: components/app/menus/MessageContextMenu.tsx
 msgid "Open thread"
@@ -13824,6 +14030,10 @@ msgstr "طلب صداقة صادر"
 #: components/app/interface/settings/user/voice/VoiceInputOptions.tsx
 msgid "Output volume"
 msgstr "مستوى صوت الإخراج"
+
+#: src/interface/events/EventCard.tsx
+msgid "Over"
+msgstr "انتهت"
 
 #: components/app/interface/settings/user/safety/SafetyDashboard.tsx
 msgid "Overturn and reverse"
@@ -14425,6 +14635,10 @@ msgstr "اسم بخط البكسل وحلقة نيون."
 msgid "Place"
 msgstr "وضع"
 
+#: src/interface/events/EventsPage.tsx
+msgid "Plan a game night, a talk or a meetup. Members can mark it Interested and hear when it starts."
+msgstr "خطط لأمسية ألعاب أو حديث أو لقاء. يمكن للأعضاء تمييزها بـ«مهتم» ليعلموا حين تبدأ."
+
 #: components/modal/lib/serverTemplateText.ts
 msgid "planning"
 msgstr "التخطيط"
@@ -14722,6 +14936,10 @@ msgstr "تُشغَّل المعاينات حتى لو كان الصوت متوق
 #: components/app/interface/settings/user/safety/SafetyDashboard.tsx
 msgid "Previous"
 msgstr "السابق"
+
+#: components/ui/components/design/DateTimeField.tsx
+msgid "Previous month"
+msgstr "الشهر السابق"
 
 #: components/app/interface/settings/user/Keybinds.tsx
 msgid "Previous or next channel"
@@ -15616,6 +15834,10 @@ msgstr "إزالة أيقونة القناة"
 msgid "Remove choice"
 msgstr "احذف الاختيار"
 
+#: components/modal/modals/ServerEventEditor.tsx
+msgid "Remove cover image"
+msgstr "إزالة صورة الغلاف"
+
 #: src/interface/Discover.tsx
 msgid "Remove filter"
 msgstr "أزل عامل التصفية"
@@ -15828,6 +16050,11 @@ msgstr "أعاد مشرف فتحه"
 #: components/app/interface/settings/server/audit/AuditLog.tsx
 msgid "reordered the roles"
 msgstr "أعاد ترتيب الأدوار"
+
+#: components/modal/modals/ServerEventEditor.tsx
+msgctxt "scheduled events"
+msgid "Repeat"
+msgstr "التكرار"
 
 #: components/app/interface/settings/server/assistant/labels.ts
 #: components/app/interface/settings/server/AutoModSettings.tsx
@@ -16679,6 +16906,7 @@ msgstr "السعودية"
 #: components/client/AgePrompt.tsx
 #: components/modal/modals/CustomStatus.tsx
 #: components/modal/modals/EditServerFolder.tsx
+#: components/modal/modals/ServerEventEditor.tsx
 #: components/modal/modals/ServerIdentity.tsx
 #: src/interface/Designs.tsx
 #: src/interface/designs/Dock.tsx
@@ -16886,6 +17114,18 @@ msgstr "امسح ضوئيًا باستخدام هاتفك، أو"
 #: components/app/interface/settings/user/plugins/DeveloperTab.tsx
 msgid "Scanner notes for the reviewer:"
 msgstr "ملاحظات الفاحص الآلي للمراجِع:"
+
+#: components/modal/modals/ServerEventEditor.tsx
+msgid "Schedule"
+msgstr "جدولة"
+
+#: components/modal/modals/ServerEventEditor.tsx
+msgid "Schedule an event"
+msgstr "جدولة فعالية"
+
+#: src/interface/events/EventsPage.tsx
+msgid "Schedule event"
+msgstr "جدولة فعالية"
 
 #: components/modal/lib/serverTemplateText.ts
 msgid "School club"
@@ -17591,6 +17831,10 @@ msgstr "يحتاج السيرفر إلى {0} أعضاء ليظهر في القا
 msgid "Sessions"
 msgstr "الجلسات"
 
+#: components/modal/modals/ServerEventEditor.tsx
+msgid "Set an end time"
+msgstr "تحديد وقت الانتهاء"
+
 #: components/ui/components/design/ColourPicker.tsx
 msgid "Set colour to {colour}"
 msgstr "تعيين اللون إلى {colour}"
@@ -17768,6 +18012,7 @@ msgstr "إظهار الأعضاء بشكل منفصل"
 #: components/ui/components/features/messaging/elements/TextEmbed.tsx
 #: components/ui/components/features/profiles/ProfileBio.tsx
 #: components/ui/components/features/profiles/ProfileTiles.tsx
+#: src/interface/events/EventCard.tsx
 msgid "Show more"
 msgstr "عرض المزيد"
 
@@ -18203,6 +18448,10 @@ msgstr "حدث خطأ ما. حاول مرة أخرى."
 msgid "Something you entered isn't valid. Check it and try again."
 msgstr "بعض ما أدخلته غير صالح. راجعه ثم حاول مجددًا."
 
+#: components/modal/modals/ServerEventEditor.tsx
+msgid "Somewhere else"
+msgstr "مكان آخر"
+
 #: src/interface/Home.tsx
 #~ msgid "Soon"
 #~ msgstr "قريباً"
@@ -18450,6 +18699,10 @@ msgstr "ابدأ هنا"
 msgid "Start Minimised to Tray"
 msgstr "البدء مصغّرًا في شريط الإشعارات"
 
+#: src/interface/events/EventCard.tsx
+msgid "Start now"
+msgstr "ابدأ الآن"
+
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 msgid "Start posts in the forums of this category"
 msgstr "بدء منشورات في منتديات هذه الفئة"
@@ -18516,6 +18769,10 @@ msgstr "جارٍ تشغيل الميكروفون…"
 #: components/app/interface/settings/user/plugins/common.tsx
 msgid "Starting…"
 msgstr "جارٍ التشغيل…"
+
+#: components/modal/modals/ServerEventEditor.tsx
+msgid "Starts"
+msgstr "تبدأ"
 
 #: components/app/interface/settings/user/account/AgeSettings.tsx
 msgid "Stated by you, not verified."
@@ -19203,6 +19460,7 @@ msgid "Text and slides stay sharp; video and games stay smooth."
 msgstr "تبقى النصوص والشرائح واضحة، ويبقى الفيديو والألعاب سلسين."
 
 #: components/app/interface/settings/server/channels/ChannelsSettings.tsx
+#: components/modal/modals/ServerEventEditor.tsx
 msgid "Text channel"
 msgstr "قناة نصية"
 
@@ -19526,9 +19784,22 @@ msgstr "رُفض طلب «اكتشف». لا يمكن حذف الطلبات ال
 msgid "The email couldn't be sent. Try again in a few minutes."
 msgstr "تعذّر إرسال البريد. حاول مجددًا بعد بضع دقائق."
 
+#: components/modal/modals/ServerEventEditor.tsx
+msgid "The end must be after the start."
+msgstr "يجب أن يكون الانتهاء بعد البدء."
+
 #: components/app/interface/settings/user/safety/ReportsAndStanding.tsx
 msgid "The European Commission publishes the list of certified bodies on its website."
 msgstr "تنشر المفوضية الأوروبية قائمة الهيئات المعتمدة على موقعها."
+
+#. placeholder {0}: (sm as EventStartedSystemMessage).title
+#: components/ui/components/features/messaging/elements/SystemMessage.tsx
+msgid "The event <0>{0}</0> has started."
+msgstr "بدأت الفعالية <0>{0}</0>."
+
+#: src/interface/events/EventsPage.tsx
+msgid "The events could not be loaded."
+msgstr "تعذّر تحميل الفعاليات."
 
 #: components/app/interface/settings/user/subscriptions/Subscriptions.tsx
 msgid "The Feather badge next to your name on your profile."
@@ -19592,6 +19863,10 @@ msgstr "آخر 30 يوماً. اختر واحدة للانتقال إليها."
 #: src/interface/developers/docs/EndpointReference.tsx
 msgid "The last live check failed."
 msgstr "فشل آخر فحص حي."
+
+#: src/interface/events/EventCard.tsx
+msgid "The link could not be copied. Copy it from the address bar."
+msgstr "تعذّر نسخ الرابط. انسخه من شريط العنوان."
 
 #. placeholder {0}: date((state() as { releasedAt: Date }).releasedAt)
 #. placeholder {1}: required()!.level
@@ -19781,6 +20056,10 @@ msgstr "الإيموجي الخاصة بالسيرفر."
 #: components/app/interface/settings/ServerSettings.tsx
 #~ msgid "The server's own emojis."
 #~ msgstr "إيموجي السيرفر الخاصة."
+
+#: components/modal/modals/ServerEventEditor.tsx
+msgid "The start time has passed. Choose a later time."
+msgstr "مضى وقت البدء. اختر وقتًا لاحقًا."
 
 #: components/app/interface/settings/user/badges/MyBadges.tsx
 msgid "The team will let you know when you are in."
@@ -20141,6 +20420,14 @@ msgstr "لا يمكن استخدام عنوان البريد هذا."
 msgid "This entry has a field of the wrong type."
 msgstr "في هذا العنصر حقل من نوع خاطئ."
 
+#: src/interface/events/EventsPage.tsx
+msgid "This event is not there any more, or you can't see where it takes place."
+msgstr "لم تعد هذه الفعالية موجودة، أو لا يمكنك رؤية مكان إقامتها."
+
+#: src/interface/events/EventsPage.tsx
+msgid "This event is over"
+msgstr "انتهت هذه الفعالية"
+
 #: components/i18n/errors.tsx
 msgid "This feature is currently disabled."
 msgstr "هذه الميزة معطّلة حاليًا."
@@ -20404,6 +20691,11 @@ msgstr "هذا الطلب كبير جدًا. حاول مجددًا."
 msgid "This role doesn't exist any more."
 msgstr "لم يعد هذا الدور موجودًا."
 
+#. placeholder {0}: err.max
+#: components/i18n/errors.tsx
+msgid "This server already has {0} upcoming events. Cancel or delete one first."
+msgstr "في هذا السيرفر {0} فعالية قادمة بالفعل. ألغِ إحداها أو احذفها أولًا."
+
 #: components/i18n/errors.tsx
 msgid "This server asks for accounts older than 5 minutes. You can talk here in {minutes} min."
 msgstr "يطلب هذا السيرفر حسابات أقدم من 5 دقائق. يمكنك التحدث هنا بعد {minutes} دقيقة."
@@ -20428,6 +20720,14 @@ msgstr "بلغ هذا السيرفر الحد الأقصى من الويب هو�
 #: src/interface/ServerHome.tsx
 msgid "This server has no channels yet"
 msgstr "لا توجد قنوات في هذا السيرفر بعد"
+
+#: components/modal/modals/ServerEventEditor.tsx
+msgid "This server has no text channel you can see."
+msgstr "لا توجد في هذا السيرفر قناة نصية يمكنك رؤيتها."
+
+#: components/modal/modals/ServerEventEditor.tsx
+msgid "This server has no voice channel you can see."
+msgstr "لا توجد في هذا السيرفر قناة صوتية يمكنك رؤيتها."
 
 #: components/modal/modals/billingErrors.ts
 msgid "This server has to be approved for Discover first."
@@ -20628,6 +20928,10 @@ msgstr "أقسام التذاكر، كل قسم في سطر"
 msgid "Tickets and direct messages in one queue."
 msgstr "التذاكر والرسائل الخاصة في صندوق واحد."
 
+#: components/ui/components/design/DateTimeField.tsx
+msgid "Time"
+msgstr "الوقت"
+
 #: components/app/interface/settings/user/Language.tsx
 msgid "Time format"
 msgstr "تنسيق الوقت"
@@ -20645,6 +20949,7 @@ msgid "Time out members"
 msgstr "إيقاف الأعضاء مؤقتًا"
 
 #: components/app/interface/settings/server/assistant/AssistantPage.tsx
+#: components/ui/components/design/DateTimeField.tsx
 msgid "Time zone"
 msgstr "المنطقة الزمنية"
 
@@ -20717,6 +21022,11 @@ msgstr "نصيحة: انقر بزر الفأرة الأيمن (أو اضغط م�
 
 #: components/app/interface/settings/user/badges/BugReportDialog.tsx
 #: components/modal/modals/CreateThread.tsx
+msgid "Title"
+msgstr "العنوان"
+
+#: components/modal/modals/ServerEventEditor.tsx
+msgctxt "scheduled events"
 msgid "Title"
 msgstr "العنوان"
 
@@ -20923,6 +21233,7 @@ msgstr "جرّب كلمة أخرى أو تصفّح الفئات."
 #: src/interface/designs/parts.tsx
 #: src/interface/developers/docs/DocsPortal.tsx
 #: src/interface/Discover.tsx
+#: src/interface/events/EventsPage.tsx
 msgid "Try again"
 msgstr "حاول مرة أخرى"
 
@@ -21426,6 +21737,10 @@ msgstr "حتى ثلاثة أزرار تحت الاسم، كل زر يفتح قن
 #: components/app/interface/settings/server/LobbySettings.tsx
 #~ msgid "Up to three buttons under the name, each opening a channel. Read the rules is added by itself when you pick a rules channel under Channels."
 #~ msgstr "حتى ثلاثة أزرار تحت الاسم، يفتح كل منها قناة. يُضاف زر «اقرأ القواعد» تلقائيًا عند اختيار قناة القواعد في إعدادات القنوات."
+
+#: src/interface/events/EventsPage.tsx
+msgid "Upcoming"
+msgstr "القادمة"
 
 #: components/app/interface/settings/user/plugins/PluginDetail.tsx
 msgid "Update"
@@ -22086,6 +22401,7 @@ msgid "Voice calls"
 msgstr "المكالمات الصوتية"
 
 #: components/modal/modals/CreateChannel.tsx
+#: components/modal/modals/ServerEventEditor.tsx
 msgid "Voice channel"
 msgstr "قناة صوتية"
 
@@ -22570,6 +22886,10 @@ msgstr "عند إيقاف أحدهما لا يمكن لأحد الإضافة إ�
 msgid "When someone opens a join link to this server, their request shows up here."
 msgstr "حين يفتح أحدهم رابط انضمام إلى هذا السيرفر، يظهر طلبه هنا."
 
+#: src/interface/events/EventsPage.tsx
+msgid "When the managers plan something, it shows up here."
+msgstr "حين يخطط المشرفون لشيء ما، سيظهر هنا."
+
 #: components/app/interface/settings/user/Keybinds.tsx
 msgid "When the message box is empty."
 msgstr "عندما يكون مربع الرسالة فارغًا."
@@ -22587,6 +22907,11 @@ msgid "When your friends come online, they show up here."
 msgstr "عندما يتصل أصدقاؤك، سيظهرون هنا."
 
 #: components/app/interface/settings/user/safety/SafetyDashboard.tsx
+msgid "Where"
+msgstr "المكان"
+
+#: components/modal/modals/ServerEventEditor.tsx
+msgctxt "scheduled events"
 msgid "Where"
 msgstr "المكان"
 
@@ -22741,6 +23066,10 @@ msgstr "من يدير السيرفر"
 msgid "Who will gather here?"
 msgstr "من سيجتمع هنا؟"
 
+#: src/interface/events/EventCard.tsx
+msgid "Who's interested"
+msgstr "من المهتمون"
+
 #: components/app/interface/settings/server/webhooks/ServerWebhooks.tsx
 msgid "Whoever runs this Zrzur server can turn them on in its configuration."
 msgstr "يستطيع مَن يدير سيرفر زرزور هذا تشغيله من إعداداته."
@@ -22886,6 +23215,10 @@ msgstr "بلا مكتبة"
 #: components/app/interface/settings/user/safety/SafetyDashboard.tsx
 msgid "Without an account"
 msgstr "بدون حساب"
+
+#: components/modal/modals/ServerEventEditor.tsx
+msgid "Without an end time it ends 12 hours after it starts, or when a manager ends it."
+msgstr "دون وقت انتهاء، تنتهي الفعالية بعد 12 ساعة من بدئها أو حين ينهيها أحد المشرفين."
 
 #: components/app/interface/settings/server/channels/ChannelsSettings.tsx
 msgid "Without category"

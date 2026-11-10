@@ -506,6 +506,8 @@ export function useError() {
           return t`You can't have more than ${err.max} emojis on this server.`;
         case "TooManyChannelWebhooks":
           return t`This channel has as many webhooks as it can have (${err.max}). Delete one first.`;
+        case "TooManyServerEvents":
+          return t`This server already has ${err.max} upcoming events. Cancel or delete one first.`;
         case "TooManyServerWebhooks":
           return t`This server has as many webhooks as it can have (${err.max}). Delete one first.`;
         case "ThreadsDisabled":

@@ -123,6 +123,7 @@
   "TooManyReplies",
   "TooManyReports",
   "TooManyRoles",
+  "TooManyServerEvents",
   "TooManyServerWebhooks",
   "TooManyServers",
   "TooManySupercharges",

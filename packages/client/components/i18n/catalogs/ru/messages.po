@@ -80,6 +80,11 @@ msgstr "(изменено)"
 #~ msgid "{0, plural, =0 {No mutual servers} one {# mutual server} other {# mutual servers}}"
 #~ msgstr ""
 
+#. placeholder {0}: props.event.interested_count
+#: src/interface/events/EventCard.tsx
+msgid "{0, plural, =0 {Nobody is interested yet} one {# interested} other {# interested}}"
+msgstr "{0, plural, =0 {Пока никто не заинтересовался} one {# заинтересован} few {# заинтересованы} many {# заинтересованы} other {# заинтересованы}}"
+
 #. placeholder {0}: bot().serverCount
 #. placeholder {0}: props.count
 #. placeholder {0}: props.entry.count
@@ -166,6 +171,11 @@ msgstr "{0, plural, one {# результат} few {# результата} many
 #: components/app/interface/settings/server/apps/ServerAppPage.tsx
 msgid "{0, plural, one {# rule} other {# rules}}"
 msgstr "{0, plural, one {# правило} few {# правила} many {# правил} other {# правила}}"
+
+#. placeholder {0}: count()
+#: src/interface/events/EventsLink.tsx
+msgid "{0, plural, one {# upcoming event} other {# upcoming events}}"
+msgstr "{0, plural, one {# предстоящее событие} few {# предстоящих события} many {# предстоящих событий} other {# предстоящего события}}"
 
 #. placeholder {0}: answer().count ?? 0
 #. placeholder {0}: props.message.total
@@ -1256,6 +1266,10 @@ msgstr "Подкоманда не может содержать подкоман
 msgid "A sub-command takes only a name, a description and options."
 msgstr "У подкоманды есть только имя, описание и параметры."
 
+#: src/interface/events/EventCard.tsx
+msgid "A text channel"
+msgstr "Текстовый канал"
+
 #: components/app/interface/settings/user/profile/CreatorStudio.tsx
 msgid "A transparent animation that plays once over a profile. 576 × 1024 px, up to 4 seconds, up to 2 MB. Reviewers look at it before it goes live."
 msgstr "Прозрачная анимация, которая один раз проигрывается поверх профиля. 576 × 1024 пикселей, до 4 секунд, до 2 МБ. Проверяющие просматривают её до публикации."
@@ -1271,6 +1285,10 @@ msgstr "Подтверждённая почта и аккаунт старше 5
 #: src/interface/designs/Wall.tsx
 msgid "A verified maker"
 msgstr "Подтверждённый автор"
+
+#: src/interface/events/EventCard.tsx
+msgid "A voice channel"
+msgstr "Голосовой канал"
 
 #: components/app/interface/settings/user/appearance/AppearanceMenu.tsx
 msgid "A warm dark theme in sand and copper tones, easy on the eyes in the evening."
@@ -1775,6 +1793,10 @@ msgstr "Адрес: {0}"
 msgid "Address or documents"
 msgstr "Адрес или документы"
 
+#: components/modal/modals/ServerEventEditor.tsx
+msgid "Address or link"
+msgstr "Адрес или ссылка"
+
 #: components/modal/modals/InteractionsEndpoint.tsx
 msgid "Address saved. Interactions now go to your server."
 msgstr "Адрес сохранён. Теперь взаимодействия приходят на ваш сервер."
@@ -2095,6 +2117,10 @@ msgstr "Шеф, всё пропало! Не удалось обработать 
 #: components/modal/modals/Error2.tsx
 msgid "An error occurred."
 msgstr "Призошла ошибка."
+
+#: components/modal/modals/ServerEventEditor.tsx
+msgid "An event can last up to 31 days."
+msgstr "Событие может длиться не больше 31 дня."
 
 #: components/app/interface/settings/user/support/ContactSupport.tsx
 msgid "An idea for Zrzur"
@@ -3514,6 +3540,7 @@ msgstr "Канада"
 #: components/modal/modals/ResetBotToken.tsx
 #: components/modal/modals/ScreenSharePicker.tsx
 #: components/modal/modals/ScreenShareSettings.tsx
+#: components/modal/modals/ServerEventEditor.tsx
 #: components/modal/modals/ServerIdentity.tsx
 #: components/modal/modals/SignOutSessions.tsx
 #: components/modal/modals/TimeoutMember.tsx
@@ -3536,6 +3563,10 @@ msgstr "Отменить можно в любой момент в разделе
 #: components/app/interface/settings/user/Keybinds.tsx
 msgid "Cancel editing"
 msgstr "Отменить редактирование"
+
+#: src/interface/events/EventCard.tsx
+msgid "Cancel event"
+msgstr "Отменить событие"
 
 #: components/app/interface/settings/user/subscriptions/Subscriptions.tsx
 msgid "Cancel Feather"
@@ -3563,7 +3594,33 @@ msgstr "Отменить покупку"
 msgid "Cancel request"
 msgstr "Отменить запрос"
 
+#: src/interface/events/EventCard.tsx
+msgid "Cancel the whole series"
+msgstr "Отменить всю серию"
+
+#: src/interface/events/EventCard.tsx
+msgid "Cancel this event? Interested members see that it is off."
+msgstr "Отменить событие? Заинтересованные участники увидят, что оно не состоится."
+
+#: src/interface/events/EventCard.tsx
+msgid "Cancel this one and every one after it? Nothing more of this series is scheduled."
+msgstr "Отменить этот раз и все следующие? Больше ничего из этой серии не будет запланировано."
+
+#: src/interface/events/EventCard.tsx
+msgid "Cancel this time"
+msgstr "Отменить этот раз"
+
+#: src/interface/events/EventCard.tsx
+msgid "Cancel this time only? The next one stays scheduled."
+msgstr "Отменить только этот раз? Следующее останется в расписании."
+
 #: components/app/interface/settings/user/subscriptions/BillingHistory.tsx
+msgid "Cancelled"
+msgstr "Отменено"
+
+#: src/interface/events/EventCard.tsx
+#: src/interface/events/EventsPage.tsx
+msgctxt "scheduled events"
 msgid "Cancelled"
 msgstr "Отменено"
 
@@ -4075,6 +4132,10 @@ msgstr "Выберите пакет `.zplugin.json` (или манифест), �
 msgid "Choose a command or a suggestion"
 msgstr "Выбрать команду или подсказку"
 
+#: components/ui/components/design/DateTimeField.tsx
+msgid "Choose a day"
+msgstr "Выберите день"
+
 #: components/app/interface/channels/text/interactions/CommandPicker.tsx
 #: components/app/interface/channels/text/interactions/InteractionModal.tsx
 msgid "Choose a file"
@@ -4235,6 +4296,14 @@ msgstr "Выберите, что показывать в профиле и в к
 #: components/app/interface/settings/server/LobbySettings.tsx
 msgid "Choose what the lobby shows and in which order. Sections with nothing to show stay hidden by themselves."
 msgstr "Выберите, что показывает лобби и в каком порядке. Разделы без содержимого скрываются сами."
+
+#: components/modal/modals/ServerEventEditor.tsx
+msgid "Choose when it starts."
+msgstr "Выберите, когда оно начнётся."
+
+#: components/modal/modals/ServerEventEditor.tsx
+msgid "Choose where it takes place."
+msgstr "Выберите, где оно пройдёт."
 
 #: components/app/interface/settings/user/Keybinds.tsx
 msgid "Choose where to forward"
@@ -4936,6 +5005,7 @@ msgstr "Копировать JSON"
 #: components/app/menus/MessageContextMenu.tsx
 #: src/interface/designs/DesignPage.tsx
 #: src/interface/Discover.tsx
+#: src/interface/events/EventCard.tsx
 msgid "Copy link"
 msgstr "Скопировать ссылку"
 
@@ -5099,6 +5169,14 @@ msgstr "Страны"
 #: components/modal/lib/serverTemplateText.ts
 msgid "course-info"
 msgstr "course-info"
+
+#: components/modal/modals/ServerEventEditor.tsx
+msgid "Cover"
+msgstr "Обложка"
+
+#: components/modal/modals/ServerEventEditor.tsx
+msgid "Cover image (optional)"
+msgstr "Обложка (необязательно)"
 
 #: components/modal/lib/CreateServerFlow.tsx
 #: components/modal/modals/CreateBot.tsx
@@ -5398,6 +5476,10 @@ msgstr "Обрезать значок канала"
 #: components/app/interface/settings/channel/Overview.tsx
 #~ msgid "Crop Channel Icon"
 #~ msgstr "Обрезать значок канала"
+
+#: components/modal/modals/ServerEventEditor.tsx
+msgid "Crop cover image"
+msgstr "Обрезать обложку"
 
 #: components/app/interface/settings/server/emojis/EmojiList.tsx
 msgid "Crop emoji"
@@ -5715,6 +5797,11 @@ msgstr "Проблемы с производительностью"
 msgid "Delete"
 msgstr "Удалить"
 
+#: src/interface/events/EventCard.tsx
+msgctxt "scheduled events"
+msgid "Delete"
+msgstr "Удалить"
+
 #. placeholder {0}: props.emoji.name
 #: components/modal/modals/DeleteEmoji.tsx
 msgid "Delete :{0}:?"
@@ -5811,6 +5898,10 @@ msgstr "Удалить правило"
 msgid "Delete server"
 msgstr "Удалить сервер"
 
+#: src/interface/events/EventCard.tsx
+msgid "Delete this event and its interested list for good?"
+msgstr "Удалить событие и список заинтересованных навсегда?"
+
 #: components/app/interface/settings/server/invites/ListServerInvites.tsx
 msgid "Delete this invite?"
 msgstr "Удалить это приглашение?"
@@ -5822,6 +5913,10 @@ msgstr "Удалить данные этого модуля?"
 #: components/app/interface/settings/server/AutoModSettings.tsx
 msgid "Delete this rule?"
 msgstr "Удалить это правило?"
+
+#: src/interface/events/EventCard.tsx
+msgid "Delete this time and its interested list for good? The next one stays scheduled."
+msgstr "Удалить этот раз и список заинтересованных навсегда? Следующее останется в расписании."
 
 #: components/app/interface/settings/server/webhooks/ServerWebhooks.tsx
 msgid "Delete this webhook?"
@@ -5930,10 +6025,12 @@ msgstr "описание"
 #: components/app/interface/settings/user/bots/CommandManager.tsx
 #: components/app/interface/settings/user/profile/CreatorStudio.tsx
 #: components/i18n/errors.tsx
+#: src/interface/events/EventCard.tsx
 msgid "Description"
 msgstr "Описание"
 
 #: components/modal/modals/CreateChannel.tsx
+#: components/modal/modals/ServerEventEditor.tsx
 msgid "Description (optional)"
 msgstr "Описание (необязательно)"
 
@@ -6272,6 +6369,10 @@ msgstr "Документация"
 msgid "does anyone read this?"
 msgstr "кто-нибудь вообще это читает?"
 
+#: components/modal/modals/ServerEventEditor.tsx
+msgid "Does not repeat"
+msgstr "Не повторяется"
+
 #: components/ui/components/features/profiles/plateNames.ts
 msgid "Dominica"
 msgstr "Доминика"
@@ -6464,6 +6565,11 @@ msgstr "Эквадор"
 msgid "Edit"
 msgstr "Изменить"
 
+#: src/interface/events/EventCard.tsx
+msgctxt "scheduled events"
+msgid "Edit"
+msgstr "Изменить"
+
 #. placeholder {0}: props.member.displayName
 #: components/modal/modals/UserProfileRoles.tsx
 msgid "Edit {0}'s roles"
@@ -6488,6 +6594,10 @@ msgstr "Изменить команду"
 #: components/app/interface/settings/server/emojis/EmojiList.tsx
 msgid "Edit emoji"
 msgstr "Изменить эмодзи"
+
+#: components/modal/modals/ServerEventEditor.tsx
+msgid "Edit event"
+msgstr "Изменить событие"
 
 #: components/app/menus/ServerFolderContextMenu.tsx
 #: components/modal/modals/EditServerFolder.tsx
@@ -6726,6 +6836,11 @@ msgstr "Включено · не запущено"
 msgid "End now"
 msgstr "Завершить сейчас"
 
+#: src/interface/events/EventCard.tsx
+msgctxt "scheduled events"
+msgid "End now"
+msgstr "Завершить сейчас"
+
 #. placeholder {0}: p.label
 #: components/app/interface/settings/server/ServerEmergency.tsx
 msgid "End now: {0}"
@@ -6761,6 +6876,11 @@ msgstr "Эндпоинты"
 #: components/app/interface/settings/user/safety/ReportsAndStanding.tsx
 msgid "Ends"
 msgstr "Заканчивается"
+
+#: components/modal/modals/ServerEventEditor.tsx
+msgctxt "scheduled events"
+msgid "Ends"
+msgstr "Окончание"
 
 #. placeholder {0}: ends()
 #: components/app/interface/channels/text/poll/PollCard.tsx
@@ -6918,6 +7038,17 @@ msgstr "события"
 msgid "Events"
 msgstr "События"
 
+#: src/interface/events/EventsLink.tsx
+#: src/interface/events/EventsPage.tsx
+msgctxt "scheduled events"
+msgid "Events"
+msgstr "События"
+
+#: components/modal/modals/ServerEventEditor.tsx
+#: src/interface/events/EventCard.tsx
+msgid "Every 2 weeks"
+msgstr "Раз в 2 недели"
+
 #: src/interface/designs/Home.tsx
 msgid "Every bird in this flock is a design for your Zrzur profile. Tap one and it lands on you."
 msgstr "Каждая птица в этой стае — дизайн для вашего профиля Zrzur. Нажмите на любую, и она сядет на вас."
@@ -6958,6 +7089,11 @@ msgstr "Каждая светящаяся птица в этом небе — ч
 msgid "Every member can share an invite link."
 msgstr "Любой участник может поделиться ссылкой-приглашением."
 
+#: components/modal/modals/ServerEventEditor.tsx
+#: src/interface/events/EventCard.tsx
+msgid "Every month"
+msgstr "Каждый месяц"
+
 #: components/app/interface/settings/user/subscriptions/PlusPage.tsx
 msgid "Every new person adds to those bills. Talking stays free for everyone, so the paid extras are what keep the lights on, for the people who pay and the people who don't."
 msgstr "Каждый новый человек увеличивает эти счета. Общение остаётся бесплатным для всех, поэтому платные дополнения и поддерживают работу проекта: и для тех, кто платит, и для тех, кто нет."
@@ -6977,6 +7113,11 @@ msgstr "У каждой публикации должен быть тег"
 #: components/modal/modals/billingErrors.ts
 msgid "Every spot in the top row is taken. Try again when one opens."
 msgstr "Все места в верхнем ряду заняты. Попробуйте снова, когда одно освободится."
+
+#: components/modal/modals/ServerEventEditor.tsx
+#: src/interface/events/EventCard.tsx
+msgid "Every week"
+msgstr "Каждую неделю"
 
 #: components/modal/modals/SuperchargeServer.tsx
 msgid "Every Wing lifts this server for everyone in it. Any member can give one."
@@ -8346,6 +8487,12 @@ msgstr "Пообщаться"
 msgid "Hangout"
 msgstr "Посиделки"
 
+#: src/interface/events/EventCard.tsx
+#: src/interface/events/EventsLink.tsx
+#: src/interface/events/EventsPage.tsx
+msgid "Happening now"
+msgstr "Идёт сейчас"
+
 #: components/modal/modals/GiftPlus.tsx
 msgid "Happy birthday!"
 msgstr "С днём рождения!"
@@ -8649,6 +8796,10 @@ msgstr "Код и все разрешения прочитаны, запуска
 msgid "I understand the consequences"
 msgstr "Я осознаю последствия"
 
+#: src/interface/events/EventCard.tsx
+msgid "I'm interested"
+msgstr "Мне интересно"
+
 #: components/modal/modals/PolicyChange.tsx
 msgid "I've read and reviewed the changes."
 msgstr "Изменения прочитаны и проверены."
@@ -8820,6 +8971,10 @@ msgstr "В канале сервера или в ЛС с ботом."
 msgid "In a server, a role colour wins over yours, but your font stays. On a profile card with a theme, your name turns white so it stays readable."
 msgstr "На сервере цвет роли перекрывает ваш, но шрифт остаётся. На карточке профиля с темой ваше имя становится белым, чтобы его можно было прочитать."
 
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "In a server."
+msgstr "На сервере."
+
 #: src/interface/developers/docs/GettingStarted.tsx
 #~ msgid "In about ten minutes you will have a bot that answers a slash command in your own test server."
 #~ msgstr ""
@@ -8975,6 +9130,14 @@ msgstr "Интент:"
 #: src/interface/developers/docs/DocsPortal.tsx
 msgid "Interactions over HTTP"
 msgstr "Взаимодействия по HTTP"
+
+#: src/interface/events/EventCard.tsx
+msgid "Interested"
+msgstr "Интересно"
+
+#: src/interface/events/EventCard.tsx
+msgid "Interested members"
+msgstr "Заинтересованные участники"
 
 #: components/app/interface/settings/user/plugins/text.ts
 msgid "Interface colours only. Warning colours can't change and text must stay readable."
@@ -9261,6 +9424,11 @@ msgstr "Япония"
 msgid "Join"
 msgstr "Присоединиться"
 
+#: src/interface/events/EventCard.tsx
+msgctxt "scheduled events"
+msgid "Join"
+msgstr "Присоединиться"
+
 #. placeholder {0}: item().name
 #: components/app/interface/discover/ServerPage.tsx
 msgid "Join {0}"
@@ -9404,6 +9572,11 @@ msgstr "Сохранить Feather"
 
 #: components/app/interface/settings/server/roles/ServerRoleOverview.tsx
 #: components/app/interface/settings/user/profile/ReviewQueue.tsx
+msgid "Keep it"
+msgstr "Оставить"
+
+#: src/interface/events/EventCard.tsx
+msgctxt "scheduled events"
 msgid "Keep it"
 msgstr "Оставить"
 
@@ -9853,6 +10026,10 @@ msgstr "Ссылка"
 msgid "Link {0}"
 msgstr "Ссылка {0}"
 
+#: src/interface/events/EventCard.tsx
+msgid "Link copied"
+msgstr "Ссылка скопирована"
+
 #: components/app/interface/settings/server/invites/VanityInvite.tsx
 msgid "Link name"
 msgstr "Название ссылки"
@@ -9970,6 +10147,10 @@ msgstr "Загрузка"
 #: components/app/interface/settings/server/bans/ListBans.tsx
 msgid "Loading bans…"
 msgstr "Загрузка банов…"
+
+#: src/interface/events/EventsPage.tsx
+msgid "Loading events"
+msgstr "Загрузка событий"
 
 #: components/ui/components/features/messaging/composition/picker/GifPicker.tsx
 msgid "Loading GIFs"
@@ -10581,6 +10762,10 @@ msgstr "Поддерживаются Markdown и эмодзи."
 #: components/app/interface/settings/server/LobbySettings.tsx
 msgid "Markdown is supported."
 msgstr "Поддерживается Markdown."
+
+#: components/modal/modals/ServerEventEditor.tsx
+msgid "Markdown works here."
+msgstr "Здесь работает Markdown."
 
 #: components/ui/components/features/profiles/plateNames.ts
 msgid "Marshall Islands"
@@ -11794,6 +11979,10 @@ msgstr "Канал новостей"
 msgid "Next"
 msgstr "Далее"
 
+#: components/ui/components/design/DateTimeField.tsx
+msgid "Next month"
+msgstr "Следующий месяц"
+
 #: components/modal/modals/PlusCheckout.tsx
 msgid "Next renewal"
 msgstr "Следующее продление"
@@ -12004,6 +12193,10 @@ msgstr "Подходящих эффектов нет."
 #: components/ui/components/features/messaging/composition/picker/EmojiPicker.tsx
 msgid "No emoji found"
 msgstr "Эмодзи не найдены"
+
+#: src/interface/events/EventsPage.tsx
+msgid "No events planned yet"
+msgstr "Пока событий не запланировано"
 
 #: src/interface/Designs.tsx
 msgid "No favourites yet"
@@ -12968,6 +13161,11 @@ msgstr "Это может сделать только команда Zrzur."
 msgid "Open"
 msgstr "Открыть"
 
+#: src/interface/events/EventCard.tsx
+msgctxt "scheduled events"
+msgid "Open"
+msgstr "Открыть"
+
 #. placeholder {0}: provider()![0]
 #: components/auth/src/flows/MailProvider.tsx
 msgid "Open {0}"
@@ -13026,6 +13224,10 @@ msgstr "Открыт: {0}"
 msgid "Open GIF picker"
 msgstr "Открыть выбор GIF"
 
+#: src/interface/events/EventCard.tsx
+msgid "Open link"
+msgstr "Открыть ссылку"
+
 #: src/interface/developers/docs/GettingStarted.tsx
 msgid "Open My applications"
 msgstr "Открыть «Мои приложения»"
@@ -13074,6 +13276,10 @@ msgstr "Открыть панель проверки"
 #: components/app/interface/settings/server/LobbySettings.tsx
 msgid "Open the server on its lobby"
 msgstr "Открыть сервер на лобби"
+
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "Open the server's events"
+msgstr "Открыть события сервера"
 
 #: components/app/menus/MessageContextMenu.tsx
 msgid "Open thread"
@@ -13206,6 +13412,10 @@ msgstr "Исходящая заявка в друзья"
 #: components/app/interface/settings/user/voice/VoiceInputOptions.tsx
 msgid "Output volume"
 msgstr "Громкость вывода"
+
+#: src/interface/events/EventCard.tsx
+msgid "Over"
+msgstr "Завершено"
 
 #: components/app/interface/settings/user/safety/SafetyDashboard.tsx
 msgid "Overturn and reverse"
@@ -13743,6 +13953,10 @@ msgstr "Пиксельное имя и неоновое кольцо."
 msgid "Place"
 msgstr "Разместить"
 
+#: src/interface/events/EventsPage.tsx
+msgid "Plan a game night, a talk or a meetup. Members can mark it Interested and hear when it starts."
+msgstr "Запланируйте игровой вечер, лекцию или встречу. Участники могут отметить «Интересно» и узнать, когда всё начнётся."
+
 #: components/modal/lib/serverTemplateText.ts
 msgid "planning"
 msgstr "планирование"
@@ -14045,6 +14259,10 @@ msgstr "Превью воспроизводятся, даже если звук 
 #: components/app/interface/settings/user/safety/SafetyDashboard.tsx
 msgid "Previous"
 msgstr "Назад"
+
+#: components/ui/components/design/DateTimeField.tsx
+msgid "Previous month"
+msgstr "Предыдущий месяц"
 
 #: components/app/interface/settings/user/Keybinds.tsx
 msgid "Previous or next channel"
@@ -14888,6 +15106,10 @@ msgstr "Убрать значок канала"
 msgid "Remove choice"
 msgstr "Убрать вариант"
 
+#: components/modal/modals/ServerEventEditor.tsx
+msgid "Remove cover image"
+msgstr "Убрать обложку"
+
 #: src/interface/Discover.tsx
 msgid "Remove filter"
 msgstr "Убрать фильтр"
@@ -15100,6 +15322,11 @@ msgstr "Снова открыто администратором"
 #: components/app/interface/settings/server/audit/AuditLog.tsx
 msgid "reordered the roles"
 msgstr "изменён порядок ролей"
+
+#: components/modal/modals/ServerEventEditor.tsx
+msgctxt "scheduled events"
+msgid "Repeat"
+msgstr "Повтор"
 
 #: components/app/interface/settings/server/assistant/labels.ts
 #: components/app/interface/settings/server/AutoModSettings.tsx
@@ -15898,6 +16125,7 @@ msgstr "Саудовская Аравия"
 #: components/client/AgePrompt.tsx
 #: components/modal/modals/CustomStatus.tsx
 #: components/modal/modals/EditServerFolder.tsx
+#: components/modal/modals/ServerEventEditor.tsx
 #: components/modal/modals/ServerIdentity.tsx
 #: src/interface/Designs.tsx
 #: src/interface/designs/Dock.tsx
@@ -16093,6 +16321,18 @@ msgstr "Отсканируйте телефоном или"
 #: components/app/interface/settings/user/plugins/DeveloperTab.tsx
 msgid "Scanner notes for the reviewer:"
 msgstr "Заметки сканера для проверяющего:"
+
+#: components/modal/modals/ServerEventEditor.tsx
+msgid "Schedule"
+msgstr "Запланировать"
+
+#: components/modal/modals/ServerEventEditor.tsx
+msgid "Schedule an event"
+msgstr "Запланировать событие"
+
+#: src/interface/events/EventsPage.tsx
+msgid "Schedule event"
+msgstr "Запланировать событие"
 
 #: components/modal/lib/serverTemplateText.ts
 msgid "School club"
@@ -16758,6 +16998,10 @@ msgstr "Чтобы попасть в список, серверу нужно {0}
 msgid "Sessions"
 msgstr "Сессии"
 
+#: components/modal/modals/ServerEventEditor.tsx
+msgid "Set an end time"
+msgstr "Указать время окончания"
+
 #: components/ui/components/design/ColourPicker.tsx
 msgid "Set colour to {colour}"
 msgstr "Установить цвет: {colour}"
@@ -16931,6 +17175,7 @@ msgstr "Показывать участников отдельно"
 #: components/ui/components/features/messaging/elements/TextEmbed.tsx
 #: components/ui/components/features/profiles/ProfileBio.tsx
 #: components/ui/components/features/profiles/ProfileTiles.tsx
+#: src/interface/events/EventCard.tsx
 msgid "Show more"
 msgstr "Показать ещё"
 
@@ -17366,6 +17611,10 @@ msgstr "Что-то пошло не так. Попробуйте ещё раз."
 msgid "Something you entered isn't valid. Check it and try again."
 msgstr "Введённые данные недопустимы. Проверьте их и попробуйте ещё раз."
 
+#: components/modal/modals/ServerEventEditor.tsx
+msgid "Somewhere else"
+msgstr "Другое место"
+
 #: src/interface/Home.tsx
 #~ msgid "Soon"
 #~ msgstr ""
@@ -17597,6 +17846,10 @@ msgstr "Начните здесь"
 msgid "Start Minimised to Tray"
 msgstr "Свернуть в трей"
 
+#: src/interface/events/EventCard.tsx
+msgid "Start now"
+msgstr "Начать сейчас"
+
 #: components/modal/modals/PlusCheckout.tsx
 #~ msgid "Start Plus"
 #~ msgstr ""
@@ -17667,6 +17920,10 @@ msgstr "Запуск микрофона…"
 #: components/app/interface/settings/user/plugins/common.tsx
 msgid "Starting…"
 msgstr "Запуск…"
+
+#: components/modal/modals/ServerEventEditor.tsx
+msgid "Starts"
+msgstr "Начало"
 
 #: components/app/interface/settings/user/account/AgeSettings.tsx
 msgid "Stated by you, not verified."
@@ -18331,6 +18588,7 @@ msgid "Text and slides stay sharp; video and games stay smooth."
 msgstr "Текст и слайды остаются чёткими, видео и игры — плавными."
 
 #: components/app/interface/settings/server/channels/ChannelsSettings.tsx
+#: components/modal/modals/ServerEventEditor.tsx
 msgid "Text channel"
 msgstr "Текстовый канал"
 
@@ -18638,9 +18896,22 @@ msgstr "Заявка на публикацию в каталоге была от
 msgid "The email couldn't be sent. Try again in a few minutes."
 msgstr "Не удалось отправить письмо. Попробуйте ещё раз через несколько минут."
 
+#: components/modal/modals/ServerEventEditor.tsx
+msgid "The end must be after the start."
+msgstr "Окончание должно быть позже начала."
+
 #: components/app/interface/settings/user/safety/ReportsAndStanding.tsx
 msgid "The European Commission publishes the list of certified bodies on its website."
 msgstr "Европейская комиссия публикует список сертифицированных органов на своём сайте."
+
+#. placeholder {0}: (sm as EventStartedSystemMessage).title
+#: components/ui/components/features/messaging/elements/SystemMessage.tsx
+msgid "The event <0>{0}</0> has started."
+msgstr "Событие <0>{0}</0> началось."
+
+#: src/interface/events/EventsPage.tsx
+msgid "The events could not be loaded."
+msgstr "Не удалось загрузить события."
 
 #: components/app/interface/settings/user/subscriptions/Subscriptions.tsx
 msgid "The Feather badge next to your name on your profile."
@@ -18704,6 +18975,10 @@ msgstr "Последние 30 дней. Выберите день, чтобы п
 #: src/interface/developers/docs/EndpointReference.tsx
 msgid "The last live check failed."
 msgstr "Последняя проверка вживую не удалась."
+
+#: src/interface/events/EventCard.tsx
+msgid "The link could not be copied. Copy it from the address bar."
+msgstr "Не удалось скопировать ссылку. Скопируйте её из адресной строки."
 
 #. placeholder {0}: date((state() as { releasedAt: Date }).releasedAt)
 #. placeholder {1}: required()!.level
@@ -18893,6 +19168,10 @@ msgstr "Уровень сервера и его возможности."
 #: components/app/interface/settings/ServerSettings.tsx
 msgid "The server's own emoji."
 msgstr "Собственные эмодзи сервера."
+
+#: components/modal/modals/ServerEventEditor.tsx
+msgid "The start time has passed. Choose a later time."
+msgstr "Время начала уже прошло. Выберите более позднее."
 
 #: components/app/interface/settings/user/badges/MyBadges.tsx
 msgid "The team will let you know when you are in."
@@ -19232,6 +19511,14 @@ msgstr "Этот адрес электронной почты нельзя ис�
 msgid "This entry has a field of the wrong type."
 msgstr "В этой записи поле неверного типа."
 
+#: src/interface/events/EventsPage.tsx
+msgid "This event is not there any more, or you can't see where it takes place."
+msgstr "Этого события больше нет, или вы не видите, где оно проходит."
+
+#: src/interface/events/EventsPage.tsx
+msgid "This event is over"
+msgstr "Это событие завершилось"
+
 #: components/i18n/errors.tsx
 msgid "This feature is currently disabled."
 msgstr "Эта функция пока недоступна."
@@ -19487,6 +19774,11 @@ msgstr "Этот запрос слишком большой. Попробуйт�
 msgid "This role doesn't exist any more."
 msgstr "Этой роли больше не существует."
 
+#. placeholder {0}: err.max
+#: components/i18n/errors.tsx
+msgid "This server already has {0} upcoming events. Cancel or delete one first."
+msgstr "На этом сервере уже {0} предстоящих событий. Сначала отмените или удалите одно."
+
 #: components/i18n/errors.tsx
 msgid "This server asks for accounts older than 5 minutes. You can talk here in {minutes} min."
 msgstr "Этот сервер принимает только учётные записи старше 5 минут. Писать здесь можно будет через {minutes} мин."
@@ -19511,6 +19803,14 @@ msgstr "На этом сервере уже максимальное число 
 #: src/interface/ServerHome.tsx
 msgid "This server has no channels yet"
 msgstr "На этом сервере пока нет каналов"
+
+#: components/modal/modals/ServerEventEditor.tsx
+msgid "This server has no text channel you can see."
+msgstr "На этом сервере нет текстовых каналов, которые вы видите."
+
+#: components/modal/modals/ServerEventEditor.tsx
+msgid "This server has no voice channel you can see."
+msgstr "На этом сервере нет голосовых каналов, которые вы видите."
 
 #: components/modal/modals/billingErrors.ts
 msgid "This server has to be approved for Discover first."
@@ -19711,6 +20011,10 @@ msgstr "Категории обращений, по одной на строку
 msgid "Tickets and direct messages in one queue."
 msgstr "Обращения и личные сообщения в одной очереди."
 
+#: components/ui/components/design/DateTimeField.tsx
+msgid "Time"
+msgstr "Время"
+
 #: components/app/interface/settings/user/Language.tsx
 msgid "Time format"
 msgstr "Формат времени"
@@ -19728,6 +20032,7 @@ msgid "Time out members"
 msgstr "Выдавать участникам тайм-аут"
 
 #: components/app/interface/settings/server/assistant/AssistantPage.tsx
+#: components/ui/components/design/DateTimeField.tsx
 msgid "Time zone"
 msgstr "Часовой пояс"
 
@@ -19800,6 +20105,11 @@ msgstr "Совет: нажмите правой кнопкой (или удер�
 
 #: components/app/interface/settings/user/badges/BugReportDialog.tsx
 #: components/modal/modals/CreateThread.tsx
+msgid "Title"
+msgstr "Название"
+
+#: components/modal/modals/ServerEventEditor.tsx
+msgctxt "scheduled events"
 msgid "Title"
 msgstr "Название"
 
@@ -19986,6 +20296,7 @@ msgstr "Попробуйте другое слово или изучите ка�
 #: src/interface/designs/parts.tsx
 #: src/interface/developers/docs/DocsPortal.tsx
 #: src/interface/Discover.tsx
+#: src/interface/events/EventsPage.tsx
 msgid "Try again"
 msgstr "Время ожидания истекло"
 
@@ -20477,6 +20788,10 @@ msgstr "До трёх кнопок под названием, каждая от�
 #: components/app/interface/settings/server/LobbySettings.tsx
 #~ msgid "Up to three buttons under the name, each opening a channel. Read the rules is added by itself when you pick a rules channel under Channels."
 #~ msgstr ""
+
+#: src/interface/events/EventsPage.tsx
+msgid "Upcoming"
+msgstr "Предстоящие"
 
 #: components/app/interface/settings/user/plugins/PluginDetail.tsx
 msgid "Update"
@@ -21072,6 +21387,7 @@ msgid "Voice calls"
 msgstr "Голосовые звонки"
 
 #: components/modal/modals/CreateChannel.tsx
+#: components/modal/modals/ServerEventEditor.tsx
 msgid "Voice channel"
 msgstr "Голосовой канал"
 
@@ -21524,6 +21840,10 @@ msgstr "Когда один из них отключён, добавлять в 
 msgid "When someone opens a join link to this server, their request shows up here."
 msgstr "Когда кто-то открывает ссылку-приглашение на этот сервер, его запрос появляется здесь."
 
+#: src/interface/events/EventsPage.tsx
+msgid "When the managers plan something, it shows up here."
+msgstr "Когда управляющие что-то запланируют, это появится здесь."
+
 #: components/app/interface/settings/user/Keybinds.tsx
 msgid "When the message box is empty."
 msgstr "Когда поле сообщения пусто."
@@ -21541,6 +21861,11 @@ msgid "When your friends come online, they show up here."
 msgstr "Когда ваши друзья появляются в сети, они показываются здесь."
 
 #: components/app/interface/settings/user/safety/SafetyDashboard.tsx
+msgid "Where"
+msgstr "Где"
+
+#: components/modal/modals/ServerEventEditor.tsx
+msgctxt "scheduled events"
 msgid "Where"
 msgstr "Где"
 
@@ -21670,6 +21995,10 @@ msgstr "Кто им управляет"
 #: components/modal/lib/CreateServerFlow.tsx
 msgid "Who will gather here?"
 msgstr "Кто здесь соберётся?"
+
+#: src/interface/events/EventCard.tsx
+msgid "Who's interested"
+msgstr "Кому интересно"
 
 #: components/app/interface/settings/server/webhooks/ServerWebhooks.tsx
 msgid "Whoever runs this Zrzur server can turn them on in its configuration."
@@ -21806,6 +22135,10 @@ msgstr "Без библиотеки"
 #: components/app/interface/settings/user/safety/SafetyDashboard.tsx
 msgid "Without an account"
 msgstr "Без учётной записи"
+
+#: components/modal/modals/ServerEventEditor.tsx
+msgid "Without an end time it ends 12 hours after it starts, or when a manager ends it."
+msgstr "Без времени окончания событие завершится через 12 часов после начала или когда его завершит управляющий."
 
 #: components/app/interface/settings/server/channels/ChannelsSettings.tsx
 msgid "Without category"

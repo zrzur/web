@@ -7,6 +7,7 @@ import {
   ChannelEditSystemMessage,
   ChannelOwnershipChangeSystemMessage,
   ChannelRenamedSystemMessage,
+  EventStartedSystemMessage,
   MessagePinnedSystemMessage,
   PollEndedSystemMessage,
   RaidAlertSystemMessage,
@@ -188,6 +189,19 @@ export function SystemMessage(props: Props) {
         </Match>
         <Match when={sm.type === "poll_ended"}>
           <PollEnded message={sm as PollEndedSystemMessage} />
+        </Match>
+        <Match when={sm.type === "event_started"}>
+          <Trans>
+            The event{" "}
+            <RenderAnchor
+              href={instance.href(
+                `/server/${(sm as EventStartedSystemMessage).serverId ?? params().serverId}/events/${(sm as EventStartedSystemMessage).eventId}`,
+              )}
+            >
+              {(sm as EventStartedSystemMessage).title}
+            </RenderAnchor>{" "}
+            has started.
+          </Trans>
         </Match>
         <Match when={sm.type === "raid_alert"}>
           <RaidAlert message={sm as RaidAlertSystemMessage} />
