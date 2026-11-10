@@ -10,11 +10,13 @@ import {
   Form2,
   IconButton,
   MenuItem,
+  typography,
 } from "@revolt/ui";
 import { CompositionMediaPicker } from "@revolt/ui/components/features/messaging/composition/picker/CompositionMediaPicker";
 import { Icon } from "@revolt/ui/icons/Icon";
 import { createFormControl, createFormGroup } from "solid-forms";
 import { For, Show, createSignal, onCleanup, untrack } from "solid-js";
+import { css } from "styled-system/css";
 import { styled } from "styled-system/jsx";
 import {
   type StatusExpiry,
@@ -49,13 +51,17 @@ export function CustomStatusModal(
   const choices: (StatusExpiry | "keep")[] = keptExpiry
     ? ["keep", ...STATUS_EXPIRIES]
     : STATUS_EXPIRIES;
-  const keptTime = () =>
-    keptExpiry
-      ? new Date(keptExpiry).toLocaleTimeString(undefined, {
-          hour: "2-digit",
-          minute: "2-digit",
-        })
-      : "";
+  // the time alone today, the day and time when it ends on another day
+  const keptTime = () => {
+    if (!keptExpiry) return "";
+    const at = new Date(keptExpiry);
+    const today = at.toDateString() === new Date().toDateString();
+    return at.toLocaleString(undefined, {
+      ...(today ? {} : { weekday: "short", day: "numeric", month: "short" }),
+      hour: "2-digit",
+      minute: "2-digit",
+    });
+  };
   const [saving, setSaving] = createSignal(false);
   const [retrying, setRetrying] = createSignal(false);
   const [error, setError] = createSignal<string>();
@@ -148,7 +154,14 @@ export function CustomStatusModal(
           style={{ border: 0, margin: 0, padding: 0, "min-width": 0 }}
         >
           <Column>
-            <TextRow>
+            <Form2.TextField
+              maxlength={128}
+              counter
+              name="text"
+              control={group.controls.text}
+              label={t`Custom status`}
+            />
+            <ChoiceRow>
               <CompositionMediaPicker
                 closeOnPick
                 placement="bottom-start"
@@ -158,67 +171,66 @@ export function CustomStatusModal(
                 }
               >
                 {(picker) => (
-                  <EmojiButton
-                    ref={picker.ref}
-                    type="button"
-                    data-testid="status-emoji"
-                    aria-label={
-                      emoji() ? t`Change the status emoji` : t`Choose an emoji`
-                    }
-                    onClick={(event) => picker.onClickEmoji(event)}
-                  >
-                    <Show
-                      when={emoji()}
-                      fallback={<Icon name="smiley" size={20} />}
+                  <span ref={picker.ref} class={anchor}>
+                    <IconButton
+                      variant="outlined"
+                      size="md"
+                      data-testid="status-emoji"
+                      aria-label={
+                        emoji()
+                          ? t`Change the status emoji`
+                          : t`Choose an emoji`
+                      }
+                      onPress={(event) => picker.onClickEmoji(event)}
                     >
-                      <Emoji emoji={emoji()!} />
-                    </Show>
-                  </EmojiButton>
+                      <Show
+                        when={emoji()}
+                        fallback={<Icon name="smiley" size={20} />}
+                      >
+                        <Emoji emoji={emoji()!} />
+                      </Show>
+                    </IconButton>
+                  </span>
                 )}
               </CompositionMediaPicker>
-              <TextGrow>
-                <Form2.TextField
-                  maxlength={128}
-                  counter
-                  name="text"
-                  control={group.controls.text}
-                  label={t`Custom status`}
-                />
-              </TextGrow>
               <Show when={emoji()}>
                 <IconButton
                   variant="toolbar"
-                  size="xs"
+                  size="sm"
                   aria-label={t`Remove the emoji`}
                   onPress={() => setEmoji(undefined)}
                 >
                   <Icon name="x" size={16} />
                 </IconButton>
               </Show>
-            </TextRow>
-            <FloatingSelect
-              label={t`Clear after`}
-              value={expiry()}
-              data-testid="status-expiry"
-              onChange={(event) =>
-                setExpiry(event.currentTarget.value as StatusExpiry | "keep")
-              }
-            >
-              {/* the select reads its items as elements: no empty <Show> here */}
-              <For each={choices}>
-                {(choice) => (
-                  <MenuItem value={choice}>{expiryLabel(choice)}</MenuItem>
-                )}
-              </For>
-            </FloatingSelect>
+              <SelectGrow>
+                <FloatingSelect
+                  label={t`Clear after`}
+                  value={expiry()}
+                  data-testid="status-expiry"
+                  onChange={(event) =>
+                    setExpiry(
+                      event.currentTarget.value as StatusExpiry | "keep",
+                    )
+                  }
+                >
+                  {/* the select reads its items as elements: no <Show> here */}
+                  <For each={choices}>
+                    {(choice) => (
+                      <MenuItem value={choice}>{expiryLabel(choice)}</MenuItem>
+                    )}
+                  </For>
+                </FloatingSelect>
+              </SelectGrow>
+            </ChoiceRow>
           </Column>
         </fieldset>
         <Show when={error()}>
           <p
             role="alert"
+            class={typography({ class: "body", size: "small" })}
             style={{
               color: "var(--z-status-error)",
-              "font-size": "13px",
               "margin-top": "12px",
             }}
           >
@@ -230,40 +242,23 @@ export function CustomStatusModal(
   );
 }
 
-const TextRow = styled("div", {
+const ChoiceRow = styled("div", {
   base: {
     display: "flex",
-    alignItems: "flex-start",
+    alignItems: "center",
     gap: "8px",
     minWidth: 0,
   },
 });
 
-const TextGrow = styled("div", {
+const SelectGrow = styled("div", {
   base: { flex: 1, minWidth: 0 },
 });
 
-const EmojiButton = styled("button", {
-  base: {
-    flexShrink: 0,
-    display: "inline-flex",
-    alignItems: "center",
-    justifyContent: "center",
-    inlineSize: "40px",
-    blockSize: "40px",
-    marginBlockStart: "20px",
-    borderRadius: "var(--z-radius-sm)",
-    border: "1px solid var(--z-border-subtle)",
-    background: "var(--z-bg-input)",
-    color: "var(--z-fg-secondary)",
-    cursor: "pointer",
-    fontSize: "20px",
-    "& img": { inlineSize: "20px", blockSize: "20px" },
-    "&:hover": { borderColor: "var(--z-border-strong)" },
-    _focusVisible: {
-      outline: "2px solid var(--z-focus)",
-      outlineOffset: "2px",
-    },
-    _phone: { inlineSize: "44px", blockSize: "44px" },
-  },
+/** The picker opens beside this box: the button itself takes no ref */
+const anchor = css({
+  display: "inline-flex",
+  flexShrink: 0,
+  "& img": { inlineSize: "20px", blockSize: "20px" },
+  fontSize: "20px",
 });

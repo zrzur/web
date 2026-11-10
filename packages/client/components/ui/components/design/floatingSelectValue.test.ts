@@ -27,6 +27,6 @@ describe("FloatingSelect item values", () => {
   it("skips a child that is not an element (an empty <Show>)", () => {
     // "Set your status" never opened: the select read `undefined` as an item
     expect(readItemValue(undefined)).toBeUndefined();
-    expect(readItemValue("text" as unknown as HTMLElement)).toBeUndefined();
+    expect(readItemValue("text")).toBeUndefined();
   });
 });
