@@ -243,7 +243,7 @@ export function KeybindsSettings() {
         }
       >
         <SettingsRow
-          icon={<Icon name="arrow-counter-clockwise" size={20} />}
+          icon={<Icon name="arrow-u-up-left" size={20} />}
           title={<Trans>Reset all shortcuts</Trans>}
           description={
             <Trans>
@@ -502,7 +502,7 @@ export function ShortcutRow(props: {
                 stop();
               }}
             >
-              <Icon name="arrow-counter-clockwise" size={16} />
+              <Icon name="arrow-u-up-left" size={16} />
             </IconButton>
           </Show>
           <KeysButton
