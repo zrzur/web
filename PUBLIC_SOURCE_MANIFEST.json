@@ -760,8 +760,8 @@
     },
     {
       "path": "packages/client/components/app/interface/channels/text/Message.tsx",
-      "sha256": "16b95725d85e91df0d78b31e86865f7236b252314ecb192dfa7ee97912384c10",
-      "bytes": 17059,
+      "sha256": "3c6652f566849a90e10111ca02f5c00452ca91a1e49ea9d56a5d0c7bd0334a69",
+      "bytes": 17209,
       "category": "product-source-or-build-manifest"
     },
     {
