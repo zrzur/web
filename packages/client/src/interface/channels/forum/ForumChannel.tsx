@@ -21,7 +21,7 @@ import { Button, Header } from "@revolt/ui";
 import { Icon } from "@revolt/ui/icons/Icon";
 
 import { startAccess } from "@revolt/app/interface/channels/threadAccess";
-import { Tag } from "@revolt/modal/modals/CreateThread";
+import { Tag } from "@revolt/modal/modals/ForumTag";
 
 import { ChannelHeader } from "../ChannelHeader";
 import { ChannelPageProps } from "../ChannelPage";
