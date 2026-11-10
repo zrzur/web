@@ -1,5 +1,4 @@
 import { JSX, Show, createMemo, splitProps } from "solid-js";
-import { Dynamic } from "solid-js/web";
 
 import { useState } from "@revolt/state";
 
@@ -47,16 +46,8 @@ export function Icon(props: Props) {
     return "outline" as const;
   });
 
-  const Component = createMemo(() => {
-    const e = iconRegistry[local.name];
-    if (!e) return undefined;
-    const v = variant();
-    return v === "filled"
-      ? e.filled
-      : v === "outline"
-        ? e.outline
-        : e.expressive;
-  });
+  // one drawing serves every style (icon.css sets the line weight)
+  const drawing = () => iconRegistry[local.name] as string | undefined;
 
   // legacy call sites size icons with width/height (iconSize()/symbolSize())
   const size = createMemo(() => {
@@ -88,14 +79,24 @@ export function Icon(props: Props) {
     >
       {/* bots are drawn with the Zrzur logo, never a generic robot */}
       <Show when={local.name !== "robot"} fallback={<BotIcon size={size()} />}>
-        <Dynamic
-          component={Component()}
-          {...rest}
-          width={size()}
-          height={size()}
-          viewBox="0 0 24 24"
-          style={{ width: "100%", height: "100%" }}
-        />
+        <Show when={drawing()}>
+          {(markup) => (
+            // the same <svg> every icon file has, with the drawing inside
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              {...rest}
+              width={size()}
+              height={size()}
+              viewBox="0 0 24 24"
+              style={{ width: "100%", height: "100%" }}
+              // only ever one of the constant drawings of drawings.ts, made
+              // at build time from our own SVG files; never user input
+              // eslint-disable-next-line solid/no-innerhtml
+              innerHTML={markup()}
+            />
+          )}
+        </Show>
       </Show>
     </span>
   );
