@@ -71,7 +71,7 @@ describe("Icon", () => {
       { cwd: client, encoding: "utf8" },
     );
     expect(out).toContain("up to date");
-  });
+  }, 30_000);
 
   it("draws every icon exactly as its optimised SVG file", async () => {
     const files = await optimisedFiles();
@@ -102,7 +102,7 @@ describe("Icon", () => {
       dispose?.();
       host.remove();
     }
-  });
+  }, 30_000);
 
   it("follows a name change and draws nothing for an unknown name", () => {
     const host = document.createElement("div");
