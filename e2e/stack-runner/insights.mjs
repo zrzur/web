@@ -182,13 +182,16 @@ test("open Insights → today's join by invite → 7 / 90 days", async (c) => {
   });
 
   c.step = "today's joins";
-  const joins = digits(await page.getByTestId("insights-joins").innerText());
-  if (joins < 1)
-    throw new Error(`joins shown: ${joins}, want at least the invite join`);
-  const invite = digits(
-    await page.locator("[data-source=invite] strong").innerText(),
-  );
-  if (invite < 1) throw new Error(`joins by invite: ${invite}`);
+  // 1 to 4 read "fewer than 5"; 5 or more are a number
+  const counted = (text) =>
+    text.trim() === c.t("fewer than 5") ? "few" : digits(text);
+  const joinsText = await page.getByTestId("insights-joins").innerText();
+  const joins = counted(joinsText);
+  if (joins !== "few" && joins < 1)
+    throw new Error(`joins shown: ${joinsText}, want at least the invite join`);
+  const inviteText = await page.locator("[data-source=invite] strong").innerText();
+  const invite = counted(inviteText);
+  if (invite !== "few" && invite < 1) throw new Error(`joins by invite: ${inviteText}`);
   const zone = await page.getByTestId("insights-zone").innerText();
   if (!zone.includes("/") && !zone.includes("UTC"))
     throw new Error(`no time zone named: ${zone}`);
