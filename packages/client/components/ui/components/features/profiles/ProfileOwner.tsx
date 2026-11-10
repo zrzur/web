@@ -9,15 +9,18 @@ import { useModals } from "@revolt/modal";
 
 import { Avatar } from "../../design";
 
-import { usePublicBot } from "./ProfileBotAbout";
 import { ProfileSection } from "./ProfileCard";
 import { showsCreator } from "./botAbout";
+import { usePublicBot } from "./usePublicBot";
 
 /**
  * Who made this bot; opens the owner's profile. Only when the owner chose
  * to show it (`show_creator`), or on your own bot.
  */
-export function ProfileOwner(props: { botId: string; bot: { owner: string } }) {
+export default function ProfileOwner(props: {
+  botId: string;
+  bot: { owner: string };
+}) {
   const client = useClient();
   const { openModal } = useModals();
   const publicBot = usePublicBot(() => props.botId);

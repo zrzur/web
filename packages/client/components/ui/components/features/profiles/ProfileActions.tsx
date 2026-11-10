@@ -12,7 +12,7 @@ import { Icon } from "@revolt/ui/icons/Icon";
 
 import { Button } from "../../design";
 
-import { usePublicBot } from "./ProfileBotAbout";
+import { usePublicBot } from "./usePublicBot";
 
 interface Props {
   user: User;

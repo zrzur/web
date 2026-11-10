@@ -1,18 +1,20 @@
-import { For, JSX, Match, Show, Switch, lazy } from "solid-js";
+import { For, JSX, Match, Show, Suspense, Switch, lazy } from "solid-js";
 
 import { Trans } from "@lingui/solid/macro";
 import { ServerMember, User, UserProfile } from "@zrzur/sdk/solid";
 import { styled } from "styled-system/jsx";
 
 import { ProfileBio } from "./ProfileBio";
-import { ProfileBotAbout } from "./ProfileBotAbout";
 import { ProfileCard, ProfileSkeleton } from "./ProfileCard";
-import { ProfileCommands } from "./ProfileCommands";
 import { ProfileJoined } from "./ProfileJoined";
 import { ProfileLinks } from "./ProfileLinks";
-import { ProfileOwner } from "./ProfileOwner";
 import { ProfileRoles } from "./ProfileRoles";
 import { visibleSections } from "./sections";
+
+// a bot's About, maker and commands: loaded when a bot's card first opens
+const ProfileBotAbout = lazy(() => import("./ProfileBotAbout"));
+const ProfileOwner = lazy(() => import("./ProfileOwner"));
+const ProfileCommands = lazy(() => import("./ProfileCommands"));
 
 // lazy: app code is loaded after the UI layer
 const CommunityCreations = lazy(
@@ -59,12 +61,15 @@ export function ProfileBody(props: {
           onClose={props.onClose}
         />
         <Show when={props.bot}>
-          <ProfileBotAbout botId={props.user.id} />
-          <ProfileOwner botId={props.user.id} bot={props.bot!} />
-          <ProfileCommands
-            botId={props.user.id}
-            serverId={props.member?.id.server}
-          />
+          {/* its own boundary: loading these never suspends the channel */}
+          <Suspense>
+            <ProfileBotAbout botId={props.user.id} />
+            <ProfileOwner botId={props.user.id} bot={props.bot!} />
+            <ProfileCommands
+              botId={props.user.id}
+              serverId={props.member?.id.server}
+            />
+          </Suspense>
         </Show>
         <ProfileRoles member={props.member} />
         {props.children}

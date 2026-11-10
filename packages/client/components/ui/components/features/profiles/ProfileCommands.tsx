@@ -18,7 +18,10 @@ const SHOWN = 6;
  * Slash commands a bot offers in this server, so people can see what it
  * does; outside a server, its global commands (`GET /bots/{id}/commands`)
  */
-export function ProfileCommands(props: { botId: string; serverId?: string }) {
+export default function ProfileCommands(props: {
+  botId: string;
+  serverId?: string;
+}) {
   const client = useClient();
   const [commands] = createResource(
     () => [props.botId, props.serverId] as const,

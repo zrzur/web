@@ -1,57 +1,23 @@
-import {
-  Accessor,
-  Show,
-  createEffect,
-  createSignal,
-  onCleanup,
-} from "solid-js";
+import { Show } from "solid-js";
 
 import { Plural, Trans } from "@lingui/solid/macro";
-import { PublicBot } from "@zrzur/sdk/solid";
 import { styled } from "styled-system/jsx";
 
-import { useClient } from "@revolt/client";
 import { Icon } from "@revolt/ui/icons/Icon";
 
 import { ProfileSection } from "./ProfileCard";
+import { usePublicBot } from "./usePublicBot";
 
 /** Only ordinary web addresses become links */
 export const safeLink = (url?: string) =>
   url && /^https?:\/\//i.test(url) ? url : undefined;
 
 /**
- * A bot's public page, from the SDK's cache when it is fresh (no request,
- * no flash), else fetched once however many parts of the card ask. A signal,
- * not a resource: a pending resource would suspend the channel's <Suspense>
- * and detach the message list behind the profile card.
- */
-export function usePublicBot(
-  botId: Accessor<string | undefined>,
-): Accessor<PublicBot | undefined> {
-  const client = useClient();
-  const [bot, setBot] = createSignal<PublicBot>();
-  createEffect(() => {
-    const id = botId();
-    if (!id) return setBot(undefined);
-    const kept = client().bots.getPublic(id);
-    setBot(kept);
-    if (kept) return;
-    let current = true;
-    onCleanup(() => (current = false));
-    client()
-      .bots.fetchPublic(id)
-      .then((answer) => current && setBot(answer))
-      .catch(() => undefined);
-  });
-  return bot;
-}
-
-/**
  * About a bot, from its public page: whether Zrzur verified it, how many
  * servers it is in, and its privacy policy and terms. Nothing is shown for a
  * private bot the reader cannot see.
  */
-export function ProfileBotAbout(props: { botId: string }) {
+export default function ProfileBotAbout(props: { botId: string }) {
   const bot = usePublicBot(() => props.botId);
 
   const privacy = () => safeLink(bot()?.privacyPolicyUrl);
