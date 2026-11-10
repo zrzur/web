@@ -10328,6 +10328,7 @@ msgstr "При загрузке устанавливается соединен�
 #: components/app/interface/settings/user/safety/ReportsAndStanding.tsx
 #: components/app/interface/settings/user/safety/SafetyDashboard.tsx
 #: components/app/interface/settings/user/subscriptions/BillingHistory.tsx
+#: components/app/interface/support/OfficialBanner.tsx
 #: components/modal/modals/PromoteServer.tsx
 #: components/modal/modals/ReportContent.tsx
 #: src/interface/channels/forum/ForumChannel.tsx
@@ -19358,6 +19359,10 @@ msgstr "Время начала уже прошло. Выберите более
 msgid "The team will let you know when you are in."
 msgstr "Команда сообщит вам, когда вы будете допущены."
 
+#: components/app/interface/support/OfficialBanner.tsx
+msgid "The ticket form couldn't be loaded. Check your connection and try again."
+msgstr "Не удалось загрузить форму обращения. Проверьте подключение и попробуйте ещё раз."
+
 #: src/interface/developers/docs/GettingStarted.tsx
 msgid "The token appears once, right after you create the application. Copy it now. Whoever has the token controls the bot."
 msgstr "Токен показывается один раз, сразу после создания приложения. Скопируйте его сейчас. Тот, у кого есть токен, управляет ботом."
@@ -20474,6 +20479,7 @@ msgstr "Попробуйте другое слово или изучите ка�
 #: components/app/interface/settings/user/safety/SafetyDashboard.tsx
 #: components/app/interface/settings/user/Sessions.tsx
 #: components/app/interface/settings/user/support/ContactSupport.tsx
+#: components/app/interface/support/OfficialBanner.tsx
 #: components/auth/src/flows/FlowLogin.tsx
 #: components/modal/modals/ReportContent.tsx
 #: components/ui/components/features/messaging/composition/picker/GifPicker.tsx

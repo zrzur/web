@@ -10328,6 +10328,7 @@ msgstr "Ce chargement se connecte à {0}. Cette société obtient ton adresse IP
 #: components/app/interface/settings/user/safety/ReportsAndStanding.tsx
 #: components/app/interface/settings/user/safety/SafetyDashboard.tsx
 #: components/app/interface/settings/user/subscriptions/BillingHistory.tsx
+#: components/app/interface/support/OfficialBanner.tsx
 #: components/modal/modals/PromoteServer.tsx
 #: components/modal/modals/ReportContent.tsx
 #: src/interface/channels/forum/ForumChannel.tsx
@@ -19358,6 +19359,10 @@ msgstr "L’heure de début est passée. Choisis une heure plus tardive."
 msgid "The team will let you know when you are in."
 msgstr "L’équipe te préviendra quand tu seras accepté."
 
+#: components/app/interface/support/OfficialBanner.tsx
+msgid "The ticket form couldn't be loaded. Check your connection and try again."
+msgstr "Impossible de charger le formulaire de ticket. Vérifie ta connexion et réessaie."
+
 #: src/interface/developers/docs/GettingStarted.tsx
 msgid "The token appears once, right after you create the application. Copy it now. Whoever has the token controls the bot."
 msgstr "Le jeton n’apparaît qu’une fois, juste après la création de l’application. Copie-le maintenant. Toute personne qui possède le jeton contrôle le bot."
@@ -20474,6 +20479,7 @@ msgstr "Essaie un autre mot ou explore les catégories."
 #: components/app/interface/settings/user/safety/SafetyDashboard.tsx
 #: components/app/interface/settings/user/Sessions.tsx
 #: components/app/interface/settings/user/support/ContactSupport.tsx
+#: components/app/interface/support/OfficialBanner.tsx
 #: components/auth/src/flows/FlowLogin.tsx
 #: components/modal/modals/ReportContent.tsx
 #: components/ui/components/features/messaging/composition/picker/GifPicker.tsx
