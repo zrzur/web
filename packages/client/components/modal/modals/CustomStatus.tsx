@@ -174,7 +174,7 @@ export function CustomStatusModal(
                   <span ref={picker.ref} class={anchor}>
                     <IconButton
                       variant="outlined"
-                      size="md"
+                      size="sm"
                       data-testid="status-emoji"
                       aria-label={
                         emoji()
@@ -245,7 +245,8 @@ export function CustomStatusModal(
 const ChoiceRow = styled("div", {
   base: {
     display: "flex",
-    alignItems: "center",
+    // the buttons line up with the select, not with its label
+    alignItems: "flex-end",
     gap: "8px",
     minWidth: 0,
   },

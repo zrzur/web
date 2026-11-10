@@ -79,7 +79,11 @@ export function ProfileBanner(props: {
         <StatusSlot>
           <Show when={status()}>
             {/* the tooltip is the text: a custom emoji's code means nothing */}
-            <Bubble dir="auto" title={props.user.status?.text ?? undefined}>
+            <Bubble
+              dir="auto"
+              data-testid="profile-status-bubble"
+              title={props.user.status?.text ?? undefined}
+            >
               <TextWithEmoji content={status()} />
             </Bubble>
           </Show>
