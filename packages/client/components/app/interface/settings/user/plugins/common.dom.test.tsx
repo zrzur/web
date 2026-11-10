@@ -34,3 +34,16 @@ it.each(["constructor", "toString", "__proto__", "no-such-icon"])(
     expect(icon.querySelector("svg")).not.toBeNull();
   },
 );
+
+it.each(["constructor", "toString", "__proto__", "unknown"])(
+  "uses the general icon for the category %s",
+  (category) => {
+    expect(categoryIcon(category)).toBe("squares-four");
+    const host = document.createElement("div");
+    document.body.append(host);
+    dispose = render(() => <PluginIcon category={category} />, host);
+    const icon = host.querySelector<HTMLElement>("[data-icon]")!;
+    expect(icon.dataset.icon).toBe("squares-four");
+    expect(icon.querySelector("svg")).not.toBeNull();
+  },
+);
