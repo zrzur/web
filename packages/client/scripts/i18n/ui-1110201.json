@@ -1,0 +1,122 @@
+{
+  "<0>{keys}</0> is already used for “{0}”. Swap them?": [
+    "<0>{keys}</0> مستخدم من قبل لـ «{0}». هل تريد التبديل بينهما؟",
+    "<0>{keys}</0> wird schon für „{0}“ verwendet. Tauschen?"
+  ],
+  "<0>{keys}</0> is needed for typing. Add {0} or use an F key.": [
+    "<0>{keys}</0> لازم للكتابة. أضف {0} أو استخدم أحد مفاتيح F.",
+    "<0>{keys}</0> wird zum Schreiben gebraucht. Nimm {0} dazu oder eine F-Taste."
+  ],
+  "<0>{keys}</0> replaces a browser shortcut while Zrzur is open.": [
+    "<0>{keys}</0> يحلّ محلّ اختصار في المتصفح ما دام زرزور مفتوحًا.",
+    "<0>{keys}</0> ersetzt ein Tastenkürzel des Browsers, solange Zrzur offen ist."
+  ],
+  "Change the keys for {0}: {1}": [
+    "غيّر مفاتيح «{0}»: {1}",
+    "Tasten für „{0}“ ändern: {1}"
+  ],
+  "Every shortcut and the push-to-talk key go back to the defaults.": [
+    "تعود كل الاختصارات ومفتاح «اضغط للتحدث» إلى القيم الافتراضية.",
+    "Alle Tastenkürzel und die Push-to-Talk-Taste gehen auf die Standardwerte zurück."
+  ],
+  "Goes off again when the share ends, unless you turned it on yourself.": [
+    "يتوقف من جديد عند انتهاء المشاركة، إلا إذا شغّلته بنفسك.",
+    "Geht wieder aus, wenn das Teilen endet, außer du hast ihn selbst eingeschaltet."
+  ],
+  "Hides your email, tag, invite links and DM previews on screen.": [
+    "يُخفي بريدك الإلكتروني ووسمك وروابط الدعوة ومعاينات الرسائل الخاصة عن الشاشة.",
+    "Verbirgt E-Mail, Tag, Einladungslinks und DM-Vorschauen auf dem Bildschirm."
+  ],
+  "Hides your email, your tag, invite links and codes, and message previews from DMs in notifications, so they never show on stream.": [
+    "يُخفي بريدك الإلكتروني ووسمك وروابط الدعوة ورموزها ومعاينات الرسائل الخاصة في الإشعارات، فلا تظهر أبدًا في البث.",
+    "Verbirgt deine E-Mail, deinen Tag, Einladungslinks und -codes sowie DM-Vorschauen in Benachrichtigungen, damit sie nie im Stream zu sehen sind."
+  ],
+  "Next channel": [
+    "القناة التالية",
+    "Nächster Kanal"
+  ],
+  "Next server": [
+    "السيرفر التالي",
+    "Nächster Server"
+  ],
+  "Press a shortcut's keys to choose new ones. Your shortcuts follow you to every device you sign in on.": [
+    "اضغط على مفاتيح اختصار لتختار مفاتيح جديدة. تنتقل اختصاراتك معك إلى كل جهاز تسجّل الدخول عليه.",
+    "Tippe auf die Tasten eines Kürzels, um neue zu wählen. Deine Tastenkürzel folgen dir auf jedes Gerät, auf dem du angemeldet bist."
+  ],
+  "Press keys…": [
+    "اضغط المفاتيح…",
+    "Tasten drücken…"
+  ],
+  "Press the new keys for {0}. Esc cancels.": [
+    "اضغط المفاتيح الجديدة لـ «{0}». للإلغاء اضغط Esc.",
+    "Drücke die neuen Tasten für „{0}“. Esc bricht ab."
+  ],
+  "Press the new keys. Esc cancels.": [
+    "اضغط المفاتيح الجديدة. للإلغاء اضغط Esc.",
+    "Drücke die neuen Tasten. Esc bricht ab."
+  ],
+  "Previous channel": [
+    "القناة السابقة",
+    "Vorheriger Kanal"
+  ],
+  "Previous server": [
+    "السيرفر السابق",
+    "Vorheriger Server"
+  ],
+  "Reset all": [
+    "أعِد ضبط الكل",
+    "Alle zurücksetzen"
+  ],
+  "Reset all shortcuts": [
+    "إعادة ضبط كل الاختصارات",
+    "Alle Tastenkürzel zurücksetzen"
+  ],
+  "Reset {0} to the default": [
+    "أعِد «{0}» إلى الافتراضي",
+    "„{0}“ auf den Standard zurücksetzen"
+  ],
+  "Shortcut: <0>{0}</0>. A small sign at the top shows while it is on.": [
+    "الاختصار: <0>{0}</0>. تظهر علامة صغيرة في الأعلى ما دام مفعّلًا.",
+    "Tastenkürzel: <0>{0}</0>. Solange er an ist, zeigt oben ein kleines Schild das an."
+  ],
+  "Streamer mode": [
+    "وضع البث",
+    "Streamer-Modus"
+  ],
+  "Streamer mode is on. Press to turn it off.": [
+    "وضع البث مفعّل. اضغط لإيقافه.",
+    "Streamer-Modus ist an. Zum Ausschalten drücken."
+  ],
+  "Streamer mode on or off": [
+    "تشغيل وضع البث أو إيقافه",
+    "Streamer-Modus an oder aus"
+  ],
+  "Swap": [
+    "بدّل",
+    "Tauschen"
+  ],
+  "Turn on while sharing your screen": [
+    "شغّله أثناء مشاركة الشاشة",
+    "Beim Teilen des Bildschirms einschalten"
+  ],
+  "Use anyway": [
+    "استخدمه على أي حال",
+    "Trotzdem verwenden"
+  ],
+  "Your browser keeps <0>{keys}</0> for itself. Choose other keys.": [
+    "يحتفظ متصفحك بـ <0>{keys}</0> لنفسه. اختر مفاتيح أخرى.",
+    "Dein Browser behält <0>{keys}</0> für sich. Wähle andere Tasten."
+  ],
+  "Your shortcuts": [
+    "اختصاراتك",
+    "Deine Tastenkürzel"
+  ],
+  "Your system keeps <0>{keys}</0> for itself. Choose other keys.": [
+    "يحتفظ نظامك بـ <0>{keys}</0> لنفسه. اختر مفاتيح أخرى.",
+    "Dein System behält <0>{keys}</0> für sich. Wähle andere Tasten."
+  ],
+  "{0} is one of your Zrzur shortcuts. Choose another key to use this.": [
+    "{0} من اختصاراتك في زرزور. اختر مفتاحًا آخر لاستخدام هذا.",
+    "{0} ist eines deiner Zrzur-Tastenkürzel. Wähle eine andere Taste, um das zu nutzen."
+  ]
+}

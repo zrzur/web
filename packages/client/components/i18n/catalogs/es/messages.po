@@ -423,6 +423,11 @@ msgstr "{0} no está disponible desde otras apps. Prueba otra tecla."
 msgid "{0} is on. It may take a moment to show."
 msgstr "{0} está activado. Puede tardar un momento en mostrarse."
 
+#. placeholder {0}: combo()
+#: components/app/interface/settings/user/voice/PushToTalkOptions.tsx
+msgid "{0} is one of your Zrzur shortcuts. Choose another key to use this."
+msgstr "{0} es uno de tus atajos de Zrzur. Elige otra tecla para usar esto."
+
 #. placeholder {0}: users()[0]!.username
 #: components/app/interface/channels/text/CompositionInfo.tsx
 #~ msgid "{0} is typing…"
@@ -908,6 +913,20 @@ msgstr "<0>{0}</0> y <1>{1}</1> están escribiendo…"
 #: components/app/interface/channels/text/CompositionInfo.tsx
 msgid "<0>{0}</0> is typing…"
 msgstr "<0>{0}</0> está escribiendo…"
+
+#. placeholder {0}: props.names[other()]()
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "<0>{keys}</0> is already used for “{0}”. Swap them?"
+msgstr "<0>{keys}</0> ya se usa para «{0}». ¿Intercambiarlos?"
+
+#. placeholder {0}: mac ? "⌘" : "Ctrl"
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "<0>{keys}</0> is needed for typing. Add {0} or use an F key."
+msgstr "<0>{keys}</0> se necesita para escribir. Añade {0} o usa una tecla F."
+
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "<0>{keys}</0> replaces a browser shortcut while Zrzur is open."
+msgstr "<0>{keys}</0> sustituye un atajo del navegador mientras Zrzur está abierto."
 
 #: components/modal/modals/LinkWarning.tsx
 msgid "<0>Be careful!</0><1/>This is not the same as the link that was displayed:"
@@ -3538,6 +3557,7 @@ msgstr "Canadá"
 #: components/app/interface/settings/server/webhooks/ServerWebhooks.tsx
 #: components/app/interface/settings/user/account/AgeSettings.tsx
 #: components/app/interface/settings/user/bots/CommandManager.tsx
+#: components/app/interface/settings/user/Keybinds.tsx
 #: components/app/interface/settings/user/plugins/PluginDetail.tsx
 #: components/app/interface/settings/user/profile/CreatorStudio.tsx
 #: components/app/interface/settings/user/profile/CreatorSuspension.tsx
@@ -3888,6 +3908,12 @@ msgstr "Cambiar el emoji de {0}"
 #: components/modal/modals/CreatePoll.tsx
 #~ msgid "Change the emoji of answer {0}"
 #~ msgstr "Cambiar el emoji de la respuesta {0}"
+
+#. placeholder {0}: props.name()
+#. placeholder {1}: label(state.keybinds.combo(props.id))
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "Change the keys for {0}: {1}"
+msgstr "Cambiar las teclas de «{0}»: {1}"
 
 #: components/app/interface/settings/user/Account.tsx
 msgid "Change the password you use to sign in."
@@ -7195,6 +7221,10 @@ msgstr "Cada publicación necesita una etiqueta"
 msgid "Every right in every channel, private ones too, whatever their settings say. Only an administrator or the owner can give it."
 msgstr "Todos los permisos en todos los canales, también en los privados, digan lo que digan sus ajustes. Solo un administrador o el propietario puede darlo."
 
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "Every shortcut and the push-to-talk key go back to the defaults."
+msgstr "Todos los atajos y la tecla de pulsar para hablar vuelven a los valores predeterminados."
+
 #: components/modal/modals/billingErrors.ts
 msgid "Every spot in the top row is taken. Try again when one opens."
 msgstr "Todos los lugares de la fila superior están ocupados. Inténtalo cuando se abra uno."
@@ -8392,6 +8422,10 @@ msgstr "Ir al mensaje"
 msgid "Go to the overview"
 msgstr "Ir al resumen"
 
+#: components/app/interface/settings/user/StreamerMode.tsx
+msgid "Goes off again when the share ends, unless you turned it on yourself."
+msgstr "Se apaga al terminar de compartir, salvo que lo hayas activado tú."
+
 #: components/app/interface/settings/user/profile/StyleEditors.tsx
 msgid "Gold"
 msgstr "Oro"
@@ -8735,6 +8769,14 @@ msgstr "Ocultar vista previa"
 #: components/app/interface/settings/channel/permissions/ChannelVisibility.tsx
 msgid "Hide this channel from {0}"
 msgstr "Ocultar este canal a {0}"
+
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "Hides your email, tag, invite links and DM previews on screen."
+msgstr "Oculta en pantalla tu correo, tu etiqueta, los enlaces de invitación y las vistas previas de MD."
+
+#: components/app/interface/settings/user/StreamerMode.tsx
+msgid "Hides your email, your tag, invite links and codes, and message previews from DMs in notifications, so they never show on stream."
+msgstr "Oculta tu correo, tu etiqueta, los enlaces y códigos de invitación y las vistas previas de MD en las notificaciones, para que nunca salgan en el directo."
 
 #: components/app/interface/safety/labels.tsx
 #: components/app/interface/settings/server/ServerEmergency.tsx
@@ -12115,6 +12157,10 @@ msgstr "Canal de noticias"
 msgid "Next"
 msgstr "Siguiente"
 
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "Next channel"
+msgstr "Canal siguiente"
+
 #: components/ui/components/design/DateTimeField.tsx
 msgid "Next month"
 msgstr "Mes siguiente"
@@ -12122,6 +12168,10 @@ msgstr "Mes siguiente"
 #: components/modal/modals/PlusCheckout.tsx
 msgid "Next renewal"
 msgstr "Próxima renovación"
+
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "Next server"
+msgstr "Servidor siguiente"
 
 #: src/interface/developers/docs/GettingStarted.tsx
 msgid "Next steps"
@@ -14328,6 +14378,10 @@ msgstr "Preajustes"
 msgid "Press a key…"
 msgstr "Pulsa una tecla…"
 
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "Press a shortcut's keys to choose new ones. Your shortcuts follow you to every device you sign in on."
+msgstr "Pulsa las teclas de un atajo para elegir otras. Tus atajos te acompañan en cada dispositivo donde inicies sesión."
+
 #: components/app/interface/settings/server/invites/VanityInvite.tsx
 msgid "Press again to remove"
 msgstr "Pulsa de nuevo para quitar"
@@ -14336,9 +14390,22 @@ msgstr "Pulsa de nuevo para quitar"
 msgid "Press Esc again to discard your changes."
 msgstr "Pulsa Esc otra vez para descartar tus cambios."
 
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "Press keys…"
+msgstr "Pulsa las teclas…"
+
 #: components/app/interface/settings/user/voice/PushToTalkOptions.tsx
 msgid "Press the key you want to hold. Esc cancels."
 msgstr "Pulsa la tecla que quieras mantener. Esc cancela."
+
+#. placeholder {0}: props.name()
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "Press the new keys for {0}. Esc cancels."
+msgstr "Pulsa las nuevas teclas para «{0}». Esc cancela."
+
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "Press the new keys. Esc cancels."
+msgstr "Pulsa las nuevas teclas. Esc cancela."
 
 #: components/app/interface/safety/labels.tsx
 msgid "Pretending to be you, someone else or Zrzur"
@@ -14404,17 +14471,25 @@ msgstr "Las vistas previas suenan aunque un sonido esté desactivado. Los sonido
 msgid "Previous"
 msgstr "Anterior"
 
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "Previous channel"
+msgstr "Canal anterior"
+
 #: components/ui/components/design/DateTimeField.tsx
 msgid "Previous month"
 msgstr "Mes anterior"
 
 #: components/app/interface/settings/user/Keybinds.tsx
-msgid "Previous or next channel"
-msgstr "Canal anterior o siguiente"
+#~ msgid "Previous or next channel"
+#~ msgstr "Canal anterior o siguiente"
 
 #: components/app/interface/settings/user/Keybinds.tsx
-msgid "Previous or next server"
-msgstr "Servidor anterior o siguiente"
+#~ msgid "Previous or next server"
+#~ msgstr "Servidor anterior o siguiente"
+
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "Previous server"
+msgstr "Servidor anterior"
 
 #: components/app/interface/settings/user/subscriptions/PlusPage.tsx
 msgid "Price"
@@ -15738,14 +15813,27 @@ msgstr "Restablecer"
 msgid "Reset {0}"
 msgstr "Restablecer {0}"
 
+#. placeholder {0}: props.name()
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "Reset {0} to the default"
+msgstr "Restablecer «{0}» al valor predeterminado"
+
 #. placeholder {0}: props.bot.user!.username
 #: components/modal/modals/ResetBotToken.tsx
 msgid "Reset {0}'s token?"
 msgstr "¿Resetear la token de {0}?"
 
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "Reset all"
+msgstr "Restablecer todo"
+
 #: components/app/interface/settings/user/appearance/AnimationSettings.tsx
 msgid "Reset all animations"
 msgstr "Restablecer todas las animaciones"
+
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "Reset all shortcuts"
+msgstr "Restablecer todos los atajos"
 
 #: components/auth/src/flows/FlowConfirmReset.tsx
 #: components/auth/src/flows/FlowReset.tsx
@@ -17282,6 +17370,11 @@ msgstr "Escudo"
 msgid "Short in-app notices that start with its name."
 msgstr "Avisos breves dentro de la app que empiezan con su nombre."
 
+#. placeholder {0}: combo()
+#: components/app/interface/settings/user/StreamerMode.tsx
+msgid "Shortcut: <0>{0}</0>. A small sign at the top shows while it is on."
+msgstr "Atajo: <0>{0}</0>. Mientras está activo, se ve un pequeño aviso arriba."
+
 #: components/app/interface/settings/user/bots/CommandManager.tsx
 msgid "Shortest text"
 msgstr "Texto más corto"
@@ -18190,6 +18283,19 @@ msgstr "Transmisión iniciada"
 msgid "Stream volume"
 msgstr "Volumen de la transmisión"
 
+#: components/app/interface/settings/user/StreamerMode.tsx
+#: components/app/interface/StreamerIndicator.tsx
+msgid "Streamer mode"
+msgstr "Modo streamer"
+
+#: components/app/interface/StreamerIndicator.tsx
+msgid "Streamer mode is on. Press to turn it off."
+msgstr "El modo streamer está activo. Pulsa para desactivarlo."
+
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "Streamer mode on or off"
+msgstr "Activar o desactivar el modo streamer"
+
 #: components/app/interface/settings/server/assistant/labels.ts
 msgid "Strikes count for this many days"
 msgstr "Las faltas cuentan durante este número de días"
@@ -18424,6 +18530,10 @@ msgstr "Suspender editor"
 #: components/app/interface/settings/user/profile/ReviewQueue.tsx
 msgid "Suspended"
 msgstr "Suspendido"
+
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "Swap"
+msgstr "Intercambiar"
 
 #: components/app/interface/settings/user/appearance/AnimationSettings.tsx
 msgid "Swaps movement and zoom for short fades."
@@ -20586,6 +20696,10 @@ msgstr "Desactívalo para iniciar el modo seguro, que detiene todos los compleme
 msgid "Turn off two-factor authentication?"
 msgstr "¿Desactivar la verificación en dos pasos?"
 
+#: components/app/interface/settings/user/StreamerMode.tsx
+msgid "Turn on while sharing your screen"
+msgstr "Activar al compartir pantalla"
+
 #: components/app/interface/settings/server/pages.tsx
 msgid "Turn them on or off for this server."
 msgstr "Actívalos o desactívalos para este servidor."
@@ -21131,6 +21245,10 @@ msgstr "Usa un color de seis dígitos, como #E0195F."
 #: components/app/interface/settings/user/appearance/AnimationSettings.tsx
 msgid "Use animations"
 msgstr "Usar animaciones"
+
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "Use anyway"
+msgstr "Usar de todos modos"
 
 #: components/app/interface/settings/user/safety/ReportsAndStanding.tsx
 msgid "Use Appeal below. You can appeal for at least 6 months after the decision. If you cannot sign in, write to {contact} and give the reference {reference}. A person reviews it."
@@ -23092,6 +23210,10 @@ msgstr "Tu bot no está en Discover"
 msgid "Your browser blocked playback. Click the page once, then try again."
 msgstr "Tu navegador bloqueó la reproducción. Haz clic una vez en la página e inténtalo de nuevo."
 
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "Your browser keeps <0>{keys}</0> for itself. Choose other keys."
+msgstr "Tu navegador se reserva <0>{keys}</0>. Elige otras teclas."
+
 #: components/app/interface/settings/user/badges/MyBadges.tsx
 msgid "Your collection"
 msgstr "Tu colección"
@@ -23315,6 +23437,10 @@ msgstr "Tus servidores"
 msgid "Your session ended, possibly because you logged out on another device. Log in again to continue."
 msgstr "Tu sesión ha finalizado, probablemente porque has cerrado sesión en otro dispositivo. Vuelve a iniciar sesión para continuar."
 
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "Your shortcuts"
+msgstr "Tus atajos"
+
 #: components/ui/components/features/voice/callCard/VoiceCallCardStatus.tsx
 msgid "Your speaker is back."
 msgstr "Tu altavoz ha vuelto."
@@ -23326,6 +23452,10 @@ msgstr "Tu lugar"
 #: components/app/interface/settings/UserSettings.tsx
 msgid "Your subscriptions"
 msgstr "Tus suscripciones"
+
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "Your system keeps <0>{keys}</0> for itself. Choose other keys."
+msgstr "Tu sistema se reserva <0>{keys}</0>. Elige otras teclas."
 
 #: components/app/interface/settings/user/support/ContactSupport.tsx
 msgid "Your tickets couldn't be loaded. Try again later."
