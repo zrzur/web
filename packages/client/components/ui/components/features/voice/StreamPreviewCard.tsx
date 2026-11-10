@@ -96,7 +96,9 @@ const Card = styled("div", {
     insetInlineStart: "8px",
     bottom: "calc(100% + 4px)",
     zIndex: 20,
-    width: "min(240px, calc(100vw - 32px))",
+    // inside the row's column: the sidebar clips anything wider
+    width: "calc(100% - 16px)",
+    maxWidth: "240px",
     padding: "8px",
     display: "flex",
     flexDirection: "column",
