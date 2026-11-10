@@ -9,17 +9,25 @@ import { useModals } from "@revolt/modal";
 
 import { Avatar } from "../../design";
 
+import { usePublicBot } from "./ProfileBotAbout";
 import { ProfileSection } from "./ProfileCard";
+import { showsCreator } from "./botAbout";
 
 /**
- * Who made this bot; opens the owner's profile
+ * Who made this bot; opens the owner's profile. Only when the owner chose
+ * to show it (`show_creator`), or on your own bot.
  */
-export function ProfileOwner(props: { bot: { owner: string } }) {
+export function ProfileOwner(props: { botId: string; bot: { owner: string } }) {
   const client = useClient();
   const { openModal } = useModals();
+  const publicBot = usePublicBot(() => props.botId);
+  const shown = () =>
+    showsCreator(publicBot(), props.bot.owner, client().user?.id);
 
   const query = useQuery(() => ({
     queryKey: ["owner", props.bot.owner],
+    // the owner is not even looked up unless they are shown
+    enabled: shown(),
     queryFn: async () => {
       const clnt = client();
       return (
@@ -30,7 +38,7 @@ export function ProfileOwner(props: { bot: { owner: string } }) {
   }));
 
   return (
-    <Show when={props.bot.owner && query.data}>
+    <Show when={shown() && query.data}>
       <ProfileSection title={<Trans>Created by</Trans>}>
         <Owner
           type="button"

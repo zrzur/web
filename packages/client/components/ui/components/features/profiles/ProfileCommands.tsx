@@ -25,10 +25,9 @@ export function ProfileCommands(props: { botId: string; serverId?: string }) {
     ([botId, serverId]) =>
       (serverId
         ? loadServerCommands(client(), serverId).then((list) => list.commands)
-        : (client().api.get(
-            `/bots/${botId as ""}/commands` as "/bots/{target}/commands",
-          ) as Promise<API.ApplicationCommand[]>)
-      ).catch(() => undefined),
+        : // kept by the SDK: opening the card again sends no request
+          client().bots.fetchPublicCommands(botId)
+      ).catch(() => undefined as API.ApplicationCommand[] | undefined),
   );
 
   const list = createMemo(() =>

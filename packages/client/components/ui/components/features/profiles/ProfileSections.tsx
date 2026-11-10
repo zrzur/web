@@ -60,7 +60,7 @@ export function ProfileBody(props: {
         />
         <Show when={props.bot}>
           <ProfileBotAbout botId={props.user.id} />
-          <ProfileOwner bot={props.bot!} />
+          <ProfileOwner botId={props.user.id} bot={props.bot!} />
           <ProfileCommands
             botId={props.user.id}
             serverId={props.member?.id.server}
