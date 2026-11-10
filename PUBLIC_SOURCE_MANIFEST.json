@@ -580,8 +580,8 @@
     },
     {
       "path": "e2e/stack-runner/events.mjs",
-      "sha256": "9ac7ace6f5e83df0b3f2575e8236c2258a58c11d011e6aef43b8f8db2f121efb",
-      "bytes": 9905,
+      "sha256": "d7b0957f87f0fd4adae620ab4bb6642b4ea68a254010137f46693b4665e1041e",
+      "bytes": 11053,
       "category": "synthetic-test-source-or-fixture"
     },
     {
@@ -40162,14 +40162,14 @@
     },
     {
       "path": "packages/client/src/interface/events/EventCard.tsx",
-      "sha256": "7912bc8cdfc86f8c282a001d77ece3f5a259c7f16c34ff0e61140b5b3181e256",
-      "bytes": 23479,
+      "sha256": "524c2276ef453f7f0b01b44db4a1ea20e5ac1aa6f6de45b0df38c974a3c325e7",
+      "bytes": 23670,
       "category": "product-source-or-build-manifest"
     },
     {
       "path": "packages/client/src/interface/events/EventsLink.tsx",
-      "sha256": "bb735315abaa828982d2505084d22307a5c552fe42a88a89c86c00f6ff34c601",
-      "bytes": 6136,
+      "sha256": "733dffd7c56c888f32efca3f1cca708d668cc01fddb8f954b2ff4097f66234a6",
+      "bytes": 6614,
       "category": "product-source-or-build-manifest"
     },
     {
