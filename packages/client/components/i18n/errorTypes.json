@@ -109,6 +109,7 @@
   "SafetyCaseConflict",
   "ShortPassword",
   "SignedDeliveryRejected",
+  "SoundAlreadyAdded",
   "ThreadsDisabled",
   "TooManyAttachments",
   "TooManyBotCreations",
