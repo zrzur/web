@@ -292,8 +292,8 @@
     },
     {
       "path": "CHANGELOG.md",
-      "sha256": "88f1185626c12d1e93780b71b3a3034927369b28991425b493f307ab19ed08ae",
-      "bytes": 120691,
+      "sha256": "2ac0d80d11c09217eb0b5ede28f87228a09f8a9abe7767deb827fbcd85336454",
+      "bytes": 120834,
       "category": "public-documentation"
     },
     {
@@ -8752,8 +8752,8 @@
     },
     {
       "path": "packages/client/index.html",
-      "sha256": "ff9ef2e292a1241c9f7dccd93157f4ac3de1d61fa64b3fe5f8b33ac16009bf35",
-      "bytes": 1196,
+      "sha256": "9789a8d41e1830f53b3c4b0ba7553577530f1176e07c12a232742aab2d387cdc",
+      "bytes": 1238,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -37930,32 +37930,32 @@
     },
     {
       "path": "packages/client/scripts/assets_fallback/web/apple-touch-icon.png",
-      "sha256": "7f13978417d5f26b10af2aef42cc02cfe02d603fbbd67a31a8824ed14cd8c095",
-      "bytes": 3681,
+      "sha256": "ce0a3dec6e024557fea94c112fe0699ef02bc2353458349f6feeeca61b45e42e",
+      "bytes": 2194,
       "category": "product-source-or-build-manifest"
     },
     {
       "path": "packages/client/scripts/assets_fallback/web/favicon-16.png",
-      "sha256": "1f27250bac777ec573c557e0974748467aab0bc9c8b8bf9c5dc78e0cf3a8a2e6",
-      "bytes": 417,
+      "sha256": "f611e45817ef337ddc924bddcd0a16fa2831f78de3bddbeef473becd83fb0009",
+      "bytes": 269,
       "category": "product-source-or-build-manifest"
     },
     {
       "path": "packages/client/scripts/assets_fallback/web/favicon-32.png",
-      "sha256": "330163f6feba7e69b5e6ae8dcea9ece57a82dcb662adb28f6e814378099dadbb",
-      "bytes": 737,
+      "sha256": "b10c6d16e46a27a40335fae8ab892e20ed142d0043c0646e111842e8d7e918ee",
+      "bytes": 461,
       "category": "product-source-or-build-manifest"
     },
     {
       "path": "packages/client/scripts/assets_fallback/web/favicon.svg",
-      "sha256": "8761242135b6e1906a96b16747ac536a141533f4ce33d52a33b4f3bae1c5792f",
-      "bytes": 811,
+      "sha256": "a43e826d75888c57aea042a1fa623bd44249dbf880f0d935700dd5be11dcaf60",
+      "bytes": 716,
       "category": "product-source-or-build-manifest"
     },
     {
       "path": "packages/client/scripts/assets_fallback/web/icon.ico",
-      "sha256": "ce1cee670fe33e67010b32a1ceac95f0beda4668eb948650a17fbd2c2d49292b",
-      "bytes": 2367,
+      "sha256": "701fe23ed1b54e8f69dc4ab08580b03f0f98999fa4afeb62ea88ad1e953f80d2",
+      "bytes": 768,
       "category": "product-source-or-build-manifest"
     },
     {
