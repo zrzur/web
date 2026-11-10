@@ -1420,8 +1420,8 @@ msgstr "操作绝不会自动执行。请先核实证据。受影响的用户只
 
 #. placeholder {0}: index() + 1
 #: components/modal/modals/CreatePoll.tsx
-msgid "Actions for answer {0}"
-msgstr "选项 {0} 的操作"
+#~ msgid "Actions for answer {0}"
+#~ msgstr "选项 {0} 的操作"
 
 #: components/app/interface/settings/server/invites/VanityInvite.tsx
 #: components/app/interface/settings/user/badges/BetaAdmin.tsx
@@ -3695,8 +3695,8 @@ msgstr "更改 {0} 的表情"
 
 #. placeholder {0}: index() + 1
 #: components/modal/modals/CreatePoll.tsx
-msgid "Change the emoji of answer {0}"
-msgstr "更改选项 {0} 的表情"
+#~ msgid "Change the emoji of answer {0}"
+#~ msgstr "更改选项 {0} 的表情"
 
 #: components/app/interface/settings/user/Account.tsx
 msgid "Change the password you use to sign in."
@@ -4034,8 +4034,8 @@ msgstr "选择表情"
 
 #. placeholder {0}: index() + 1
 #: components/modal/modals/CreatePoll.tsx
-msgid "Choose an emoji for answer {0}"
-msgstr "为选项 {0} 选择表情"
+#~ msgid "Choose an emoji for answer {0}"
+#~ msgstr "为选项 {0} 选择表情"
 
 #: components/app/interface/settings/user/profile/CreatorStudio.tsx
 #~ msgid "Choose an image"
@@ -6536,6 +6536,11 @@ msgstr "紧急工具，以及针对垃圾信息和不良链接的过滤器。"
 #: components/ui/components/features/messaging/composition/picker/CompositionMediaPicker.tsx
 msgid "Emoji"
 msgstr "表情"
+
+#. placeholder {0}: index() + 1
+#: components/modal/modals/CreatePoll.tsx
+msgid "Emoji for answer {0}"
+msgstr "选项 {0} 的表情"
 
 #: components/modal/modals/EditEmoji.tsx
 msgid "Emoji name"
@@ -12912,6 +12917,11 @@ msgstr "可选：问题下方的一行文字。"
 #: components/app/interface/settings/user/bots/CommandManager.tsx
 msgid "Options"
 msgstr "选项"
+
+#. placeholder {0}: index() + 1
+#: components/modal/modals/CreatePoll.tsx
+msgid "Options for answer {0}"
+msgstr "选项 {0} 的更多操作"
 
 #: components/app/interface/settings/user/profile/CreatorStudio.tsx
 msgid "or choose a file"

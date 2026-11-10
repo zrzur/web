@@ -207,11 +207,7 @@ export function CreatePollModal(
                     <EmojiButton
                       ref={picker.ref}
                       type="button"
-                      aria-label={
-                        answer.emoji
-                          ? t`Change the emoji of answer ${index() + 1}`
-                          : t`Choose an emoji for answer ${index() + 1}`
-                      }
+                      aria-label={t`Emoji for answer ${index() + 1}`}
                       onClick={(event) => picker.onClickEmoji(event)}
                     >
                       <Show
@@ -281,7 +277,7 @@ export function CreatePollModal(
                         variant="toolbar"
                         size="sm"
                         aria-haspopup="menu"
-                        aria-label={t`Actions for answer ${index() + 1}`}
+                        aria-label={t`Options for answer ${index() + 1}`}
                       >
                         <Icon name="dots-three-vertical" size={20} />
                       </IconButton>

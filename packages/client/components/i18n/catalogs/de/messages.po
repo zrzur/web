@@ -23786,3 +23786,13 @@ msgstr "„{text}“"
 #: components/modal/modals/CreatePoll.tsx
 msgid "Actions for answer {0}"
 msgstr "Aktionen für Antwort {0}"
+
+#. placeholder {0}: index() + 1
+#: components/modal/modals/CreatePoll.tsx
+msgid "Emoji for answer {0}"
+msgstr "Emoji für Antwort {0}"
+
+#. placeholder {0}: index() + 1
+#: components/modal/modals/CreatePoll.tsx
+msgid "Options for answer {0}"
+msgstr "Optionen für Antwort {0}"
