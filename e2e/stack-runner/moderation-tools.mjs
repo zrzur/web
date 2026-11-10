@@ -179,9 +179,28 @@ try {
         if ((await remaining(C, [ids[3]])).length !== 1) throw new Error("an unselected message was deleted");
       });
 
+      await r.step(`${tag} Select all selects every message still deletable`, async () => {
+        if (size === "desktop") {
+          await page.locator(`[id="${ids[3]}"]`).first().click({ button: "right" });
+          await page.getByText(t("Select messages"), { exact: true }).first().click({ timeout: 8000 });
+        } else {
+          await page.getByRole("button", { name: t("More") }).first().click({ timeout: 8000 });
+          await page.getByText(t("Select messages"), { exact: true }).first().click({ timeout: 8000 });
+        }
+        await bar.waitFor({ timeout: 8000 });
+        await bar.getByTestId("select-all-messages").click({ timeout: 8000 });
+        // the member's last message and the owner's own are left
+        await until(async () => (await checked()) === 2, 8000, "both left messages selected");
+        await page.screenshot({ path: shot(`${tag}-select-all`) });
+        await bar.getByRole("button", { name: t("Cancel"), exact: true }).click({ timeout: 8000 });
+        await until(async () => !(await bar.isVisible()), 8000, "selection ends");
+      });
+
       await r.step(`${tag} Esc stops selecting`, async () => {
         if (size === "desktop") {
-          await page.getByTestId("select-messages").click({ timeout: 8000 });
+          // desktop: selecting starts from a message's own menu (2026-11-10)
+          await page.locator(`[id="${ids[3]}"]`).first().click({ button: "right" });
+          await page.getByText(t("Select messages"), { exact: true }).first().click({ timeout: 8000 });
         } else {
           await page.getByRole("button", { name: t("More") }).first().click({ timeout: 8000 });
           await page.getByText(t("Select messages"), { exact: true }).first().click({ timeout: 8000 });
@@ -198,7 +217,9 @@ try {
         if (await bar.isVisible()) {
           // already selecting
         } else if (size === "desktop") {
-          await page.getByTestId("select-messages").click({ timeout: 8000 });
+          // desktop: selecting starts from a message's own menu (2026-11-10)
+          await page.locator(`[id="${ids[3]}"]`).first().click({ button: "right" });
+          await page.getByText(t("Select messages"), { exact: true }).first().click({ timeout: 8000 });
         } else {
           await page.getByRole("button", { name: t("More") }).first().click({ timeout: 8000 });
           await page.getByText(t("Select messages"), { exact: true }).first().click({ timeout: 8000 });
