@@ -70,6 +70,9 @@ async function ensureSetup() {
     await api(member, "POST", `/invites/${invite._id}`);
     await api(owner, "DELETE", `/invites/${invite._id}`).catch(() => {});
   }
+  // events are off until a manager turns them on (2026-11-10); the switch
+  // itself is tested in events-lobby-opt-in, here it is only the fixture
+  await api(owner, "PATCH", `/servers/${SERVER}`, { events_enabled: true });
   // events left by an earlier run would crowd the page
   const left = await api(owner, "GET", `/servers/${SERVER}/events`);
   for (const event of left.events) await api(owner, "DELETE", `/servers/${SERVER}/events/${event._id}`).catch(() => {});
