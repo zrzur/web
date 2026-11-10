@@ -4,7 +4,7 @@
 
 ### Features
 
-* **Server insights:** Server settings → Insights (Manage Server) shows members, joins and leaves, messages, active members and time in voice as a bar per day for 7, 30 or 90 days, counted in your time zone, plus where joins came from and the busiest channels. Only totals, never who: numbers from 1 to 4 (channels, active members, voice time) read "fewer than 5", bots are not active members, and messages count only in channels you can see. Shows the day counting started. The page loads on its own when opened (with its own loading line) and asks once per range; bars use neutral ink, not the action colour. In Arabic the time axis runs right to left, like the text. SDK pin: packages/stoat.js at sdk-js `e71ef8c`.
+* **Server insights:** Server settings → Insights (Manage Server) shows members, joins and leaves, messages, active members and time in voice as a bar per day for 7, 30 or 90 days, counted in your time zone, plus where joins came from and the busiest channels. Only totals, never who: every count from 1 to 4 but the member total reads "fewer than 5" (joins, leaves, messages, sources, channels, active members, voice time), bots are neither active members nor voice time, and messages count only in channels you can see. Shows the day counting started. The page loads on its own when opened (with its own loading line) and asks once per range; bars use neutral ink, not the action colour. In Arabic the time axis runs right to left, like the text. SDK pin: packages/stoat.js at sdk-js `8e010b7`.
 
 ### Performance
 

@@ -241,7 +241,7 @@ msgstr "{0} / mes"
 msgid "{0} / month each"
 msgstr "{0} / mes cada uno"
 
-#. placeholder {0}: number().format(perDay(totals()?.messages ?? 0, rows().length))
+#. placeholder {0}: maybe( totals()?.messages === null ? null : perDay(totals()?.messages ?? 0, rows().length), )
 #: components/app/interface/settings/server/insights/InsightsPage.tsx
 msgid "{0} a day on average"
 msgstr "{0} al día de media"
@@ -10035,7 +10035,7 @@ msgstr "Líbano"
 msgid "Left-to-right languages"
 msgstr "Idiomas de izquierda a derecha"
 
-#. placeholder {0}: number().format(totals()?.leaves ?? 0)
+#. placeholder {0}: maybe(totals()?.leaves)
 #: components/app/interface/settings/server/insights/InsightsPage.tsx
 msgid "Left: {0}"
 msgstr "Se fueron: {0}"
@@ -13357,8 +13357,8 @@ msgid "Only the roles you let in below can see it."
 msgstr "Solo pueden verlo los roles que permitas abajo."
 
 #: components/app/interface/settings/server/insights/InsightsPage.tsx
-msgid "Only totals, never who. Numbers from 1 to 4 show as “fewer than 5”, bots are not counted as active members, and messages count only in channels you can see. Counts are kept for 90 days."
-msgstr "Solo totales, nunca quién. Los números entre 1 y 4 aparecen como «menos de 5», los bots no cuentan como miembros activos y los mensajes solo cuentan en los canales que puedes ver. Los recuentos se guardan 90 días."
+msgid "Only totals, never who. Every count from 1 to 4 except the member total shows as “fewer than 5”, bots are not counted as active members or in voice time, and messages count only in channels you can see. Counts are kept for 90 days."
+msgstr "Solo totales, nunca quién. Cada número entre 1 y 4, salvo el total de miembros, aparece como «menos de 5», los bots no cuentan como miembros activos ni en el tiempo de voz y los mensajes solo cuentan en los canales que puedes ver. Los recuentos se guardan 90 días."
 
 #: components/i18n/errors.tsx
 msgid "Only verified creators and Zrzur staff can do this."

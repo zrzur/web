@@ -241,7 +241,7 @@ msgstr "{0} / 月"
 msgid "{0} / month each"
 msgstr "每人 {0} / 月"
 
-#. placeholder {0}: number().format(perDay(totals()?.messages ?? 0, rows().length))
+#. placeholder {0}: maybe( totals()?.messages === null ? null : perDay(totals()?.messages ?? 0, rows().length), )
 #: components/app/interface/settings/server/insights/InsightsPage.tsx
 msgid "{0} a day on average"
 msgstr "平均每天 {0}"
@@ -10035,7 +10035,7 @@ msgstr "黎巴嫩"
 msgid "Left-to-right languages"
 msgstr "从左到右的语言"
 
-#. placeholder {0}: number().format(totals()?.leaves ?? 0)
+#. placeholder {0}: maybe(totals()?.leaves)
 #: components/app/interface/settings/server/insights/InsightsPage.tsx
 msgid "Left: {0}"
 msgstr "离开：{0}"
@@ -13357,8 +13357,8 @@ msgid "Only the roles you let in below can see it."
 msgstr "只有你在下方允许的角色才能看到它。"
 
 #: components/app/interface/settings/server/insights/InsightsPage.tsx
-msgid "Only totals, never who. Numbers from 1 to 4 show as “fewer than 5”, bots are not counted as active members, and messages count only in channels you can see. Counts are kept for 90 days."
-msgstr "只显示总数，从不显示是谁。1 到 4 显示为“少于 5”，机器人不计为活跃成员，消息只统计你能看到的频道。统计数据保留 90 天。"
+msgid "Only totals, never who. Every count from 1 to 4 except the member total shows as “fewer than 5”, bots are not counted as active members or in voice time, and messages count only in channels you can see. Counts are kept for 90 days."
+msgstr "只显示总数，从不显示是谁。除成员总数外，1 到 4 的数字都显示为“少于 5”，机器人不计入活跃成员和语音时长，消息只统计你能看到的频道。统计数据保留 90 天。"
 
 #: components/i18n/errors.tsx
 msgid "Only verified creators and Zrzur staff can do this."

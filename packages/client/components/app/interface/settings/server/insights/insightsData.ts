@@ -9,10 +9,13 @@ export const RANGES: Range[] = [7, 30, 90];
 /** One day as the API sends it */
 export type InsightsDay = {
   day: string;
-  joins: number;
-  leaves: number;
+  /** null: 1 to 4 ("fewer than 5") */
+  joins?: number | null;
+  /** null: 1 to 4 ("fewer than 5") */
+  leaves?: number | null;
   members: number;
-  messages: number;
+  /** null: 1 to 4 ("fewer than 5") */
+  messages?: number | null;
   /** null: 1 to 4 ("fewer than 5") */
   active_members?: number | null;
   /** null: 1 to 4 ("fewer than 5") */
@@ -75,18 +78,23 @@ const some = (value: number | null | undefined) =>
 export function hasActivity(rows: InsightsDay[]) {
   return rows.some(
     (row) =>
-      row.joins ||
-      row.leaves ||
-      row.messages ||
+      some(row.joins) ||
+      some(row.leaves) ||
+      some(row.messages) ||
       some(row.active_members) ||
       some(row.voice_minutes),
   );
 }
 
-/** Shares of the joins by source, in percent, rounded to whole numbers */
-export function shares(counts: number[]): number[] {
-  const sum = counts.reduce((a, b) => a + b, 0);
-  return counts.map((n) => (sum ? Math.round((n / sum) * 100) : 0));
+/**
+ * Shares of the joins by source, in percent, rounded to whole numbers. A
+ * hidden 1 to 4 (null) gets a sliver, so it is not drawn as none.
+ */
+export function shares(counts: (number | null)[]): number[] {
+  const sum = counts.reduce<number>((a, b) => a + (b ?? 0), 0);
+  return counts.map((n) =>
+    n === null ? 3 : sum ? Math.round((n / sum) * 100) : 0,
+  );
 }
 
 /**

@@ -55,6 +55,8 @@ describe("server insights data", () => {
   it("gives shares that never divide by zero", () => {
     expect(shares([1, 1, 2, 0])).toEqual([25, 25, 50, 0]);
     expect(shares([0, 0])).toEqual([0, 0]);
+    // a hidden 1 to 4 is a sliver
+    expect(shares([null, 10])).toEqual([3, 100]);
   });
 
   it("labels a day by its own date, whatever the browser's zone", () => {

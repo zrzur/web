@@ -86,12 +86,9 @@ export default function InsightsPage(props: { server: Server }) {
 
   const sources = createMemo(() => {
     const s = value()?.join_sources;
-    const counts = [
-      s?.invite ?? 0,
-      s?.discover ?? 0,
-      s?.vanity ?? 0,
-      s?.other ?? 0,
-    ];
+    const counts = [s?.invite, s?.discover, s?.vanity, s?.other].map((n) =>
+      n === undefined ? 0 : n,
+    );
     const percent = shares(counts);
     return [
       {
@@ -206,8 +203,8 @@ export default function InsightsPage(props: { server: Server }) {
               <Stat
                 id="joins"
                 title={t({ message: "Joined", context: "server insights" })}
-                value={number().format(totals()?.joins ?? 0)}
-                detail={t`Left: ${number().format(totals()?.leaves ?? 0)}`}
+                value={maybe(totals()?.joins)}
+                detail={t`Left: ${maybe(totals()?.leaves)}`}
                 rows={rows()}
                 series="joins"
                 locale={locale()}
@@ -216,8 +213,12 @@ export default function InsightsPage(props: { server: Server }) {
               <Stat
                 id="messages"
                 title={t({ message: "Messages", context: "server insights" })}
-                value={number().format(totals()?.messages ?? 0)}
-                detail={t`${number().format(perDay(totals()?.messages ?? 0, rows().length))} a day on average`}
+                value={maybe(totals()?.messages)}
+                detail={t`${maybe(
+                  totals()?.messages === null
+                    ? null
+                    : perDay(totals()?.messages ?? 0, rows().length),
+                )} a day on average`}
                 rows={rows()}
                 series="messages"
                 locale={locale()}
@@ -258,7 +259,7 @@ export default function InsightsPage(props: { server: Server }) {
                       <li data-source={source.id}>
                         <Line>
                           <span>{source.label}</span>
-                          <strong>{number().format(source.count)}</strong>
+                          <strong>{maybe(source.count)}</strong>
                         </Line>
                         <Track aria-hidden="true">
                           <Fill
@@ -304,9 +305,10 @@ export default function InsightsPage(props: { server: Server }) {
 
             <Muted>
               <Trans>
-                Only totals, never who. Numbers from 1 to 4 show as “fewer than
-                5”, bots are not counted as active members, and messages count
-                only in channels you can see. Counts are kept for 90 days.
+                Only totals, never who. Every count from 1 to 4 except the
+                member total shows as “fewer than 5”, bots are not counted as
+                active members or in voice time, and messages count only in
+                channels you can see. Counts are kept for 90 days.
               </Trans>
             </Muted>
           </Match>
