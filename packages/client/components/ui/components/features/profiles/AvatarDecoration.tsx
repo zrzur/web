@@ -88,7 +88,12 @@ export function AvatarDecoration(props: {
               alt=""
               aria-hidden="true"
               draggable={false}
+              // a long list fetches and decodes only the art near the screen;
+              // CSS sizes it (150 %), the numbers only give its shape early
+              loading="lazy"
               decoding="async"
+              width={Math.round(props.size * 1.5)}
+              height={Math.round(props.size * 1.5)}
             />
           )}
         </Show>
