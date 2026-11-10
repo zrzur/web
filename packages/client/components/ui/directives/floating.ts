@@ -11,6 +11,7 @@ import {
   untrack,
 } from "solid-js";
 
+import { preloadBotCard } from "../components/features/profiles/preloadBotCard";
 import { applyTooltipName } from "../components/floating/tooltipName";
 import { addLongPressListener } from "./longPress";
 
@@ -254,6 +255,13 @@ export function floating(element: HTMLElement, accessor: Accessor<Props>) {
           element.style.cursor = "pointer";
           element.style.userSelect = "none";
           element.addEventListener("click", onClick);
+          // a bot's card loads its sections while the press is still down
+          if (userCard.bot) {
+            element.addEventListener("pointerdown", preloadBotCard);
+            onCleanup(() =>
+              element.removeEventListener("pointerdown", preloadBotCard),
+            );
+          }
 
           onCleanup(() => element.removeEventListener("click", onClick));
         }
