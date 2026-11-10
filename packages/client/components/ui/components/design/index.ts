@@ -27,11 +27,13 @@
 
 export { Avatar } from "./Avatar";
 export { Badge } from "./Badge";
+export { ReleaseBadge } from "./ReleaseBadge";
 export { BirthMonthField } from "./BirthMonthField";
 export { Button } from "./Button";
 export { type CategorySelectOption, CategoryButton } from "./CategoryButton";
 export { Checkbox } from "./Checkbox";
 export { COLOUR_PALETTE, ColourPicker } from "./ColourPicker";
+export { ColourWell } from "./ColourWell";
 export { DataTable } from "./DataTable";
 export { DateTimeField } from "./DateTimeField";
 export {

@@ -3061,6 +3061,10 @@ msgstr "低于阈值时，其他人听到的是静音。"
 msgid "Benin"
 msgstr "贝宁"
 
+#: components/ui/components/design/ReleaseBadge.tsx
+msgid "Beta"
+msgstr "测试版"
+
 #: components/app/interface/settings/user/badges/BugReportDialog.tsx
 msgid "Beta feature"
 msgstr "测试版功能"
@@ -3082,6 +3086,11 @@ msgstr "测试计划"
 #: components/ui/components/features/profiles/badges/useBadgeText.ts
 msgid "Beta Tester"
 msgstr "测试员"
+
+#: components/ui/components/design/ReleaseBadge.tsx
+#: src/interface/navigation/servers/ServerList.tsx
+msgid "Beta version: some things may still change."
+msgstr "测试版：部分内容可能还会变化。"
 
 #: components/ui/components/features/profiles/badges/useBadgeText.ts
 msgid "Beta Veteran"
@@ -14379,8 +14388,8 @@ msgid "Play again"
 msgstr "再玩一次"
 
 #: components/auth/src/AuthPage.tsx
-msgid "Play all"
-msgstr "全部播放"
+#~ msgid "Play all"
+#~ msgstr "全部播放"
 
 #: components/app/interface/settings/user/appearance/AnimationSettings.tsx
 msgid "Play preview"

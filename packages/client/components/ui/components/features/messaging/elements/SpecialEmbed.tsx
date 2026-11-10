@@ -2,7 +2,10 @@ import { Show, createSignal } from "solid-js";
 
 import type { WebsiteEmbed } from "@zrzur/sdk/solid";
 
+import { styled } from "styled-system/jsx";
+
 import { SizedContent } from "@revolt/ui/components/utils";
+import { fitMessageMedia } from "@revolt/ui/components/utils/mediaSize";
 
 import { SpecialEmbedPlaceholder } from "./SpecialEmbedPlaceholder";
 import {
@@ -90,19 +93,28 @@ export function SpecialEmbed(props: { embed: WebsiteEmbed }) {
       company: props.embed.siteName ?? "",
     };
 
+  const loaded = () =>
+    clicked() ||
+    alwaysLoadMediaPlayers() ||
+    isMediaPlayerAllowed(props.embed.specialContent?.type);
+
   return (
-    <SizedContent width={getSize()?.width} height={getSize()?.height}>
-      <Show
-        when={
-          clicked() ||
-          alwaysLoadMediaPlayers() ||
-          isMediaPlayerAllowed(props.embed.specialContent?.type)
-        }
-        fallback={
+    <Show
+      when={loaded()}
+      fallback={
+        // as wide as the player will be, but as tall as its words need: at
+        // the player's own height a narrow screen cut off Load and the link
+        <PlaceholderFrame
+          style={{
+            width: `${fitMessageMedia(getSize().width, getSize().height).width}px`,
+          }}
+        >
           <SpecialEmbedPlaceholder
             provider={provider().name}
             company={provider().company}
             title={props.embed.title ?? undefined}
+            // the embed around the card shows the site name and the title
+            heading={!props.embed.siteName}
             // proxied by our own link proxy, never the provider's address
             thumbnail={props.embed.image?.proxiedURL}
             onLoad={() => {
@@ -110,18 +122,29 @@ export function SpecialEmbed(props: { embed: WebsiteEmbed }) {
               allowMediaPlayer(props.embed.specialContent?.type);
             }}
           />
-        }
-      >
+        </PlaceholderFrame>
+      }
+    >
+      <SizedContent width={getSize()?.width} height={getSize()?.height}>
         <iframe
           loading="lazy"
           scrolling="no"
           allowfullscreen
           allowtransparency
           frameborder={0}
-          // style={{ width: getSize()?.width + "px" }}
           src={playerUrl()}
         />
-      </Show>
-    </SizedContent>
+      </SizedContent>
+    </Show>
   );
 }
+
+const PlaceholderFrame = styled("div", {
+  base: {
+    maxWidth: "100%",
+    minHeight: "120px",
+    display: "grid",
+    overflow: "hidden",
+    borderRadius: "var(--borderRadius-md)",
+  },
+});

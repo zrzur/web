@@ -219,7 +219,7 @@ export default function FlowLogin() {
         </FlowActions>
       </Match>
       <Match when={lifecycle.state() === State.LoggingIn}>
-        {/* the shared bubble shows the loading state */}
+        {/* the button shows that it is working */}
         <FlowTitle>
           <Trans>Logging you in…</Trans>
         </FlowTitle>

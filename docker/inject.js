@@ -42,6 +42,16 @@ const PLACEHOLDERS = {
   __VITE_INVITE_ORIGIN__: "VITE_INVITE_ORIGIN",
   __VITE_DISCOVER_URL__: "VITE_DISCOVER_URL",
   __VITE_DESIGNS_HOST__: "VITE_DESIGNS_HOST",
+  __VITE_RELEASE_CHANNEL__: "VITE_RELEASE_CHANNEL",
+};
+
+/**
+ * Written in when the container leaves a variable unset, where "unset" must
+ * not read as a local build: a local build without VITE_RELEASE_CHANNEL is a
+ * beta, a container without it is a stable release.
+ */
+const DEFAULTS = {
+  VITE_RELEASE_CHANNEL: "stable",
 };
 
 /** Text files that may hold placeholders or references to emitted files */
@@ -52,7 +62,7 @@ function releaseId(buildDir, env) {
   const hash = createHash("sha256");
   hash.update(readFileSync(join(buildDir, "index.html")));
   for (const name of Object.values(PLACEHOLDERS).sort())
-    hash.update(`\n${name}=${env[name] ?? ""}`);
+    hash.update(`\n${name}=${env[name] || DEFAULTS[name] || ""}`);
   return hash.digest("hex").slice(0, 12);
 }
 
@@ -88,7 +98,7 @@ function inject({ buildDir = "dist", outDir = "dist_injected", env = process.env
 
     for (const [placeholder, name] of Object.entries(PLACEHOLDERS)) {
       if (!data.includes(placeholder)) continue;
-      const value = env[name];
+      const value = env[name] || DEFAULTS[name];
       data = value
         ? data.replaceAll(placeholder, value)
         : data.replaceAll(`"${placeholder}"`, "void 0");
@@ -109,6 +119,6 @@ function inject({ buildDir = "dist", outDir = "dist_injected", env = process.env
   return { release, moved: emitted.size };
 }
 
-module.exports = { inject, releaseId, PLACEHOLDERS };
+module.exports = { inject, releaseId, PLACEHOLDERS, DEFAULTS };
 
 if (require.main === module) inject();

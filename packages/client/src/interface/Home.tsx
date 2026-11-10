@@ -413,7 +413,9 @@ const Hero = styled("section", {
     padding: "24px",
     borderRadius: "var(--z-shape-card, calc(var(--z-radius, 10px) + 4px))",
     border: "1px solid var(--z-card-border)",
-    color: "#fff",
+    // the theme's text colour; a profile theme sets it to its own ink. A
+    // fixed white vanished on the light theme without a profile colour.
+    color: "var(--z-fg-primary)",
     boxShadow: "var(--z-card-lift)",
     _phone: { padding: "16px", gap: "16px" },
   },
@@ -436,8 +438,9 @@ const Who = styled("div", {
     "& p": {
       margin: "4px 0 0",
       fontSize: "14px",
-      // full white: anything less was under 4.5:1 on a light profile colour
-      color: "#fff",
+      // full ink, not the secondary tint: anything less was under 4.5:1 on a
+      // light profile colour
+      color: "var(--z-fg-primary)",
     },
   },
 });

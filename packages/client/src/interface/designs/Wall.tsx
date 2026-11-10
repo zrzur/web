@@ -1091,6 +1091,8 @@ const CaptionLink = styled("button", {
       outlineOffset: "-2px",
       borderRadius: "var(--z-shape-button, 10px)",
     },
+    // 44 px tap target on phones
+    _phone: { minHeight: "44px", justifyContent: "center" },
   },
 });
 

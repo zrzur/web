@@ -14,7 +14,6 @@ import {
   FlowText,
   FlowTitle,
   showDevMocks,
-  useFlowBubble,
 } from "./Flow";
 
 type State =
@@ -39,7 +38,6 @@ export default function FlowVerify() {
   const modals = useModals();
   const navigate = useNavigate();
   const { login } = useClientLifecycle();
-  const bubble = useFlowBubble();
 
   const [state, setState] = createSignal<State>({
     state: "verifying",
@@ -50,17 +48,13 @@ export default function FlowVerify() {
   const [loginError, setLoginError] = createSignal<unknown>();
 
   onMount(async () => {
-    const finishVerifying = bubble?.beginSubmit();
-
     try {
       if (showDevMocks()) {
         if (confirm("Mock verification?")) {
           if (confirm("Successful verification?")) {
             setState({ state: "success", mfa_ticket: "token" });
-            bubble?.flashSuccess();
           } else {
             setState({ state: "error", error: "InvalidToken" });
-            bubble?.flashError();
           }
 
           return;
@@ -72,12 +66,8 @@ export default function FlowVerify() {
       };
 
       setState({ state: "success", mfa_ticket: data.ticket?.token });
-      bubble?.flashSuccess();
     } catch (err) {
       setState({ state: "error", error: err });
-      bubble?.flashError();
-    } finally {
-      finishVerifying?.();
     }
   });
 
@@ -112,7 +102,6 @@ export default function FlowVerify() {
         // the normal login (the ticket can't be used again)
         setLoginError(err);
         setState({ state: "success" });
-        bubble?.flashError();
         return;
       } finally {
         setContinuing("ready");

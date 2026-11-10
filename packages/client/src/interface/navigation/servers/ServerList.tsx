@@ -9,12 +9,13 @@ import { styled } from "styled-system/jsx";
 
 import { ServerFolderContextMenu } from "@revolt/app/menus";
 import { useClient } from "@revolt/client";
-import { useDevice } from "@revolt/common";
+import { CONFIGURATION, useDevice } from "@revolt/common";
 import { brandMarkSrc } from "@revolt/common/lib/brandMark";
 import { KeybindAction, createKeybind } from "@revolt/keybinds";
 import { useLocation, useNavigate } from "@revolt/routing";
 import { ResolvedEntry, useState } from "@revolt/state";
 import { Avatar, Column, Symbol, Text, Time, Unreads } from "@revolt/ui";
+import { ReleaseBadge } from "@revolt/ui/components/design/ReleaseBadge";
 import { VoiceStatus } from "@revolt/ui/components/design/VoiceStatus";
 import { Tooltip } from "@revolt/ui/components/floating";
 import { Icon } from "@revolt/ui/icons/Icon";
@@ -259,7 +260,9 @@ export const ServerList = (props: Props) => {
                       one: "You have # pending friend request.",
                       other: "You have # pending friend requests.",
                     })}`
-                  : t`Home`,
+                  : CONFIGURATION.RELEASE_CHANNEL === "beta"
+                    ? `${t`Home`} · ${t`Beta version: some things may still change.`}`
+                    : t`Home`,
               placement: "right",
             },
           }}
@@ -275,6 +278,8 @@ export const ServerList = (props: Props) => {
             <Show when={homeNotifications()}>
               <HomeBadge>{homeNotifications()}</HomeBadge>
             </Show>
+            {/* a beta deployment says so, quietly, under the logo */}
+            <ReleaseBadge channel={CONFIGURATION.RELEASE_CHANNEL} overlay />
           </HomeMark>
         </a>
         <For each={props.unreadConversations.slice(0, 9)}>

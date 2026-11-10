@@ -1,23 +1,9 @@
-import {
-  JSX,
-  Show,
-  createEffect,
-  createMemo,
-  createSignal,
-  on,
-  onCleanup,
-  onMount,
-} from "solid-js";
+import { JSX, Show, createEffect, on } from "solid-js";
 
 import { Trans, useLingui } from "@lingui/solid/macro";
 import { styled } from "styled-system/jsx";
 
 import { Titlebar } from "@revolt/app/interface/desktop/Titlebar";
-import {
-  ContextMenu,
-  ContextMenuButton,
-  ContextMenuDivider,
-} from "@revolt/app/menus/ContextMenu";
 import { useClientLifecycle } from "@revolt/client";
 import { State } from "@revolt/client/Controller";
 import { brandMarkSrc } from "@revolt/common/lib/brandMark";
@@ -25,13 +11,12 @@ import { SOURCE_CODE_URL } from "@revolt/common/lib/buildInfo";
 import { A, useLocation } from "@revolt/routing";
 import { useState } from "@revolt/state";
 import { IconButton, iconSize } from "@revolt/ui";
-import { Symbol } from "@revolt/ui/components/utils/Symbol";
 
 import { dark_mode as MdDarkMode } from "@revolt/ui/icons/legacy";
 
 import { BrandName } from "@revolt/ui/components/design/BrandName";
 import { Sky } from "@revolt/ui/components/design/Sky";
-import { BubbleMood, BubbleProvider, FlowBase, FlowBubble } from "./flows/Flow";
+import { FlowBase } from "./flows/Flow";
 
 import GitHub from "./flows/github.svg?component-solid";
 
@@ -229,21 +214,6 @@ const Socials = styled("nav", {
 let hasMountedAuthFlow = false;
 
 /**
- * How long after the last keystroke the bubble keeps showing typing
- */
-const TYPING_IDLE_MS = 1000;
-
-/**
- * How long the bubble shows an error before settling again
- */
-const ERROR_FLASH_MS = 900;
-
-/**
- * How long the bubble shows a success before settling again
- */
-const SUCCESS_FLASH_MS = 1400;
-
-/**
  * Shared layout for every logged-out account flow.
  */
 export function AuthPage(props: { children?: JSX.Element }) {
@@ -253,168 +223,11 @@ export function AuthPage(props: { children?: JSX.Element }) {
   const { lifecycle } = useClientLifecycle();
   const isCreate = () => location.pathname.includes("/login/create");
 
-  const [typing, setTyping] = createSignal(false);
-  const [pendingSubmits, setPendingSubmits] = createSignal(0);
-  const [erroring, setErroring] = createSignal(false);
-  const [succeeding, setSucceeding] = createSignal(false);
-  const [errorCount, setErrorCount] = createSignal(0);
-  let typingTimer: ReturnType<typeof setTimeout> | undefined;
-  let errorTimer: ReturnType<typeof setTimeout> | undefined;
-  let successTimer: ReturnType<typeof setTimeout> | undefined;
-
-  onCleanup(() => {
-    clearTimeout(typingTimer);
-    clearTimeout(errorTimer);
-    clearTimeout(successTimer);
-  });
-
-  // most important first: errors, waiting on the server, success, typing
-  const bubbleMood = createMemo<BubbleMood>(() => {
-    if (erroring()) return "error";
-    if (pendingSubmits() > 0 || lifecycle.state() === State.LoggingIn)
-      return "submitting";
-    if (succeeding()) return "success";
-    if (typing()) return "typing";
-    return "idle";
-  });
-
-  const bubbleControls = {
-    beginSubmit() {
-      setPendingSubmits((count) => count + 1);
-
-      let finished = false;
-      return () => {
-        if (finished) return;
-        finished = true;
-        setPendingSubmits((count) => count - 1);
-      };
-    },
-    flashError() {
-      clearTimeout(successTimer);
-      setSucceeding(false);
-      setErroring(true);
-      setErrorCount((count) => count + 1);
-      clearTimeout(errorTimer);
-      errorTimer = setTimeout(() => setErroring(false), ERROR_FLASH_MS);
-    },
-    flashSuccess() {
-      clearTimeout(errorTimer);
-      setErroring(false);
-      setSucceeding(true);
-      clearTimeout(successTimer);
-      successTimer = setTimeout(() => setSucceeding(false), SUCCESS_FLASH_MS);
-    },
-  };
-
-  /**
-   * Dev-only: keep typing for a couple of seconds
-   */
-  function debugType() {
-    const smash = setInterval(onFlowInput, 150);
-    setTimeout(() => clearInterval(smash), 2000);
-  }
-
-  /**
-   * Dev-only: pretend the server takes a while to answer
-   */
-  function debugSubmit() {
-    setTimeout(bubbleControls.beginSubmit(), 2500);
-  }
-
-  /**
-   * Dev-only: play every mood back to back
-   */
-  function debugChaos() {
-    onFlowInput();
-    setTimeout(() => {
-      const finish = bubbleControls.beginSubmit();
-      setTimeout(() => {
-        finish();
-        bubbleControls.flashError();
-        setTimeout(() => {
-          const finishAgain = bubbleControls.beginSubmit();
-          setTimeout(() => {
-            finishAgain();
-            bubbleControls.flashSuccess();
-          }, 1500);
-        }, 800);
-      }, 1500);
-    }, 900);
-  }
-
-  /**
-   * Treat any input inside the current flow as typing
-   */
-  function onFlowInput() {
-    setTyping(true);
-    clearTimeout(typingTimer);
-    typingTimer = setTimeout(() => setTyping(false), TYPING_IDLE_MS);
-  }
   const reduceMotion =
     typeof window !== "undefined" &&
     window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   let flowElement: HTMLDivElement | undefined;
-  let bubbleElement: HTMLDivElement | undefined;
   let activeFlowAnimation: Animation | undefined;
-  let activeBubbleAnimation: Animation | undefined;
-  let bubbleTop: number | undefined;
-  // until the first layout settles (e.g. web fonts swapping in), the bubble
-  // snaps to its position instead of gliding into view
-  let bubbleSettled = false;
-
-  /**
-   * Glide the shared bubble to its new position when the flow below it
-   * changes height, starting from wherever it is currently drawn.
-   */
-  function followFlowHeight() {
-    if (!bubbleElement) return;
-
-    const nextTop = bubbleElement.offsetTop;
-    const previousTop = bubbleTop;
-    bubbleTop = nextTop;
-
-    if (
-      !bubbleSettled ||
-      previousTop === undefined ||
-      previousTop === nextTop ||
-      reduceMotion
-    )
-      return;
-
-    // offset of an in-flight glide, relative to the previous position
-    const inFlight = new DOMMatrixReadOnly(
-      getComputedStyle(bubbleElement).transform,
-    ).m42;
-
-    activeBubbleAnimation?.cancel();
-    activeBubbleAnimation = bubbleElement.animate(
-      [
-        { transform: `translateY(${previousTop + inFlight - nextTop}px)` },
-        { transform: "translateY(0)" },
-      ],
-      {
-        duration: 140,
-        easing: "cubic-bezier(0.2, 0, 0, 1)",
-      },
-    );
-  }
-
-  onMount(() => {
-    followFlowHeight();
-
-    const observer = new ResizeObserver(followFlowHeight);
-    observer.observe(flowElement!);
-    onCleanup(() => observer.disconnect());
-
-    document.fonts.ready.then(() =>
-      requestAnimationFrame(() =>
-        requestAnimationFrame(() => {
-          bubbleTop = bubbleElement?.offsetTop;
-          bubbleSettled = true;
-        }),
-      ),
-    );
-  });
 
   createEffect(
     on(
@@ -514,58 +327,8 @@ export function AuthPage(props: { children?: JSX.Element }) {
 
             <FlowWrap>
               <FlowStack>
-                <FlowBubble
-                  ref={bubbleElement}
-                  mood={bubbleMood()}
-                  errorCount={errorCount()}
-                  contextMenu={
-                    import.meta.env.DEV
-                      ? () => (
-                          <ContextMenu>
-                            <ContextMenuButton
-                              icon={<Symbol size={16}>keyboard</Symbol>}
-                              onClick={debugType}
-                            >
-                              Typing
-                            </ContextMenuButton>
-                            <ContextMenuButton
-                              icon={<Symbol size={16}>hourglass_empty</Symbol>}
-                              onClick={debugSubmit}
-                            >
-                              Submitting
-                            </ContextMenuButton>
-                            <ContextMenuButton
-                              icon={<Symbol size={16}>error</Symbol>}
-                              onClick={() => bubbleControls.flashError()}
-                            >
-                              Error
-                            </ContextMenuButton>
-                            <ContextMenuButton
-                              icon={<Symbol size={16}>check_circle</Symbol>}
-                              onClick={() => bubbleControls.flashSuccess()}
-                            >
-                              Success
-                            </ContextMenuButton>
-                            <ContextMenuDivider />
-                            <ContextMenuButton
-                              icon={<Symbol size={16}>play_arrow</Symbol>}
-                              onClick={debugChaos}
-                            >
-                              <Trans>Play all</Trans>
-                            </ContextMenuButton>
-                          </ContextMenu>
-                        )
-                      : undefined
-                  }
-                />
-                <div
-                  ref={flowElement}
-                  style={{ width: "100%" }}
-                  onInput={onFlowInput}
-                >
-                  <BubbleProvider value={bubbleControls}>
-                    <FlowBase>{props.children}</FlowBase>
-                  </BubbleProvider>
+                <div ref={flowElement} style={{ width: "100%" }}>
+                  <FlowBase>{props.children}</FlowBase>
                 </div>
               </FlowStack>
             </FlowWrap>

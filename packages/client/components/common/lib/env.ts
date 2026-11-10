@@ -365,6 +365,22 @@ const ASSISTANT = resolveAssistant(
   getEnv("VITE_ASSISTANT_BOT_ID"),
 );
 
+/**
+ * Which release this deployment runs (VITE_RELEASE_CHANNEL, written in at
+ * container start like VITE_HOST). "beta" shows a quiet "Beta" label by the
+ * logo and in the version line; anything else is a stable release. A local
+ * build without the variable counts as a beta; the container writes
+ * "stable" when it is not set (docker/inject.js).
+ */
+export function resolveReleaseChannel(
+  value: string | undefined,
+): "beta" | "stable" {
+  const channel = value?.trim().toLowerCase();
+  return !channel || channel === "beta" ? "beta" : "stable";
+}
+
+const RELEASE_CHANNEL = resolveReleaseChannel(getEnv("VITE_RELEASE_CHANNEL"));
+
 const SUPPORT_URL = resolveSupportUrl(getEnv("VITE_SUPPORT_URL"));
 const DISCOVER_URL = resolveDiscoverUrl(getEnv("VITE_DISCOVER_URL"));
 const DESIGNS_HOST = resolveDesignsHost(getEnv("VITE_DESIGNS_HOST"));
@@ -400,6 +416,8 @@ export default {
   DISCOVER_URL,
   /** Host of the standalone Designs site (unset: Designs only in the app) */
   DESIGNS_HOST,
+  /** "beta" shows the Beta label (VITE_RELEASE_CHANNEL; local builds: beta) */
+  RELEASE_CHANNEL,
   /**
    * Session ID to set during development.
    */

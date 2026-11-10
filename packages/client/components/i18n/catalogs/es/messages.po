@@ -3061,6 +3061,10 @@ msgstr "Por debajo del umbral, los demás oyen silencio."
 msgid "Benin"
 msgstr "Benín"
 
+#: components/ui/components/design/ReleaseBadge.tsx
+msgid "Beta"
+msgstr "Beta"
+
 #: components/app/interface/settings/user/badges/BugReportDialog.tsx
 msgid "Beta feature"
 msgstr "Función beta"
@@ -3082,6 +3086,11 @@ msgstr "Programa beta"
 #: components/ui/components/features/profiles/badges/useBadgeText.ts
 msgid "Beta Tester"
 msgstr "Beta Tester"
+
+#: components/ui/components/design/ReleaseBadge.tsx
+#: src/interface/navigation/servers/ServerList.tsx
+msgid "Beta version: some things may still change."
+msgstr "Versión beta: algunas cosas aún pueden cambiar."
 
 #: components/ui/components/features/profiles/badges/useBadgeText.ts
 msgid "Beta Veteran"
@@ -14379,8 +14388,8 @@ msgid "Play again"
 msgstr "Reproducir de nuevo"
 
 #: components/auth/src/AuthPage.tsx
-msgid "Play all"
-msgstr "Reproducir todo"
+#~ msgid "Play all"
+#~ msgstr "Reproducir todo"
 
 #: components/app/interface/settings/user/appearance/AnimationSettings.tsx
 msgid "Play preview"
