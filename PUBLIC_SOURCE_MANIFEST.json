@@ -652,8 +652,8 @@
     },
     {
       "path": "eslint.config.mjs",
-      "sha256": "9a64cf6bdc4a6414ff61442fcf880fd0bd8a100bd82b96ea4f9246476a31c951",
-      "bytes": 3696,
+      "sha256": "53667c7826ea93b858d921af5cc7a71229f5a875e9aef4444d6e2eeabb7014f5",
+      "bytes": 3914,
       "category": "product-source-or-build-manifest"
     },
     {
