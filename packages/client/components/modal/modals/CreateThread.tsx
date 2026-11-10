@@ -11,6 +11,7 @@ import { useNavigate } from "@revolt/routing";
 import { Dialog, DialogProps, Form2 } from "@revolt/ui";
 
 import { Modals } from "../types";
+import { Tag } from "./ForumTag";
 
 /**
  * Start a thread in a channel (from a message, or with a first message), or
@@ -170,31 +171,4 @@ const Failure = styled("div", {
 
 const Tags = styled("div", {
   base: { display: "flex", flexWrap: "wrap", gap: "8px" },
-});
-
-/** A forum tag that can be switched on and off */
-export const Tag = styled("button", {
-  base: {
-    display: "inline-flex",
-    alignItems: "center",
-    gap: "6px",
-    minHeight: "32px",
-    padding: "4px 12px",
-    borderRadius: "var(--z-radius-pill)",
-    border: "1px solid var(--z-border-subtle)",
-    background: "var(--z-bg-raised)",
-    color: "var(--z-fg-primary)",
-    fontSize: "13px",
-    cursor: "pointer",
-    _hover: { background: "var(--z-slate-1, var(--z-bg-raised))" },
-    _focusVisible: {
-      outline: "2px solid var(--z-accent)",
-      outlineOffset: "2px",
-    },
-    "&[aria-pressed=true]": {
-      background: "var(--z-accent-muted)",
-      borderColor: "var(--z-accent)",
-    },
-    _phone: { minHeight: "44px" },
-  },
 });

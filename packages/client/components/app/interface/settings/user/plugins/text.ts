@@ -156,17 +156,18 @@ export function usePluginText() {
   return { permission, risk, riskLabel, category, reason };
 }
 
+const CATEGORY_ICONS: Record<string, IconName> = {
+  appearance: "palette",
+  productivity: "lightning",
+  accessibility: "person-arms-spread",
+  notifications: "bell",
+  integration: "share-network",
+  developer: "code",
+};
+
 export function categoryIcon(category: string): IconName {
-  return (
-    (
-      {
-        appearance: "palette",
-        productivity: "lightning",
-        accessibility: "person-arms-spread",
-        notifications: "bell",
-        integration: "share-network",
-        developer: "code",
-      } as Record<string, IconName>
-    )[category] ?? "squares-four"
-  );
+  // own keys only: a category like "constructor" is not one of ours
+  return Object.hasOwn(CATEGORY_ICONS, category)
+    ? CATEGORY_ICONS[category]
+    : "squares-four";
 }
