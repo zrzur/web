@@ -604,8 +604,8 @@
     },
     {
       "path": "e2e/stack-runner/insights.mjs",
-      "sha256": "959033bed0972c7b9c2315aada5251ed0e11796c89b1c1894f63ea214b9c1091",
-      "bytes": 10260,
+      "sha256": "3b0c933307fa3848b54ae25bde7d4b068897d92fcfdd9239c3c6f6d8dc335b1c",
+      "bytes": 10512,
       "category": "synthetic-test-source-or-fixture"
     },
     {
