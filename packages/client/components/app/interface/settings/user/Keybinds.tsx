@@ -14,12 +14,14 @@ import { styled } from "styled-system/jsx";
 import { deviceMac, pauseShortcuts } from "@revolt/keybinds/active";
 import {
   type Combo,
-  type ComboCheck,
   type ShortcutId,
-  checkCombo,
   comboKeys,
-  readCombo,
 } from "@revolt/keybinds/keymap";
+import {
+  type ComboCheck,
+  checkCombo,
+  readCombo,
+} from "@revolt/keybinds/keymapRules";
 import { comboLabel, keyLabel } from "@revolt/keybinds/shortcuts";
 import { desktopPushToTalk } from "@revolt/rtc/desktopPushToTalk";
 import { useState } from "@revolt/state";

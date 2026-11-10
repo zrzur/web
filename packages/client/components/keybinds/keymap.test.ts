@@ -3,15 +3,14 @@ import { describe, expect, it } from "vitest";
 import {
   type Combo,
   REMAPPABLE,
-  checkCombo,
   comboKeys,
   compileKeymap,
   defaultCombo,
   matchShortcut,
-  readCombo,
   sameCombo,
   swapCombos,
 } from "./keymap";
+import { checkCombo, readCombo } from "./keymapRules";
 
 const press = (
   code: string,
