@@ -5,6 +5,7 @@ import {
   createSignal,
   For,
   JSX,
+  lazy,
   Match,
   onMount,
   Show,
@@ -59,7 +60,10 @@ import {
   MessageComponents,
   placedAttachments,
 } from "./interactions/MessageComponents";
-import { PollCard } from "./poll/PollCard";
+// Polls are rare in a channel: their card loads with the first poll, not with the app
+const PollCard = lazy(() =>
+  import("./poll/PollCard").then((m) => ({ default: m.PollCard })),
+);
 import { ThreadChip } from "./ThreadChip";
 
 interface Props {
