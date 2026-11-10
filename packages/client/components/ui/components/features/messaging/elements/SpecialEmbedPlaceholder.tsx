@@ -141,10 +141,13 @@ const Action = styled("div", {
       color: "var(--z-link, var(--z-fg-primary))",
       textDecoration: "underline",
     },
+    // one row on phones too: the card is only as tall as the player, and a
+    // second row would sit below its edge
     "@media (max-width: 600px)": {
       width: "100%",
-      "& button": { width: "100%", minHeight: "44px" },
-      "& a": { minHeight: "44px" },
+      flexWrap: "nowrap",
+      "& button": { flex: "1 1 auto", minHeight: "44px" },
+      "& a": { flexShrink: 0, minHeight: "44px" },
     },
   },
 });

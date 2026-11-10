@@ -154,6 +154,13 @@ for (const lang of LANGS)
               (a) => !!a.parentElement.querySelector("button"),
             );
             assert(beside, "privacy link is not beside Load");
+            // inside the card, not cut off below its edge
+            const inside = await link.evaluate((a) => {
+              const box = a.closest('[data-testid="player-placeholder"]').getBoundingClientRect();
+              const b = a.getBoundingClientRect();
+              return b.top >= box.top - 1 && b.bottom <= box.bottom + 1;
+            });
+            assert(inside, "privacy link is cut off by the card");
             await card.screenshot({ path: shot(`embed-${lang}-${size}`) });
           },
         );
