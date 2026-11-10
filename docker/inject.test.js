@@ -91,9 +91,21 @@ test("same build and URLs give the same release; a changed URL gives a new one",
   const { root, dist } = fakeBuild();
   const a = run(dist, root, ENV, "a");
   const b = run(dist, root, ENV, "b");
-  const c = run(dist, root, { ...ENV, VITE_DEV_WS_URL: "wss://events.zrzur.com" }, "c");
+  // a URL other than ENV's
+  const c = run(dist, root, { ...ENV, VITE_DEV_WS_URL: "wss://ws.zrzur.com" }, "c");
   assert.equal(a.release, b.release);
   assert.notEqual(a.release, c.release);
   // the service worker's bytes change too, so browsers install the new one
   assert.notEqual(a.read("serviceWorker.js"), c.read("serviceWorker.js"));
+});
+
+test("the release channel: as set, and \"stable\" when the container sets nothing", () => {
+  const { root, dist } = fakeBuild();
+  writeFileSync(join(dist, "assets", "chunk-BBBB2222.js"), 'export const channel="__VITE_RELEASE_CHANNEL__";');
+  const beta = run(dist, root, { ...ENV, VITE_RELEASE_CHANNEL: "beta" }, "beta");
+  assert.match(beta.read(`assets/${beta.release}/chunk-BBBB2222.js`), /channel="beta"/);
+  // unset must not become undefined: a local build without the variable is a beta
+  const stable = run(dist, root, ENV, "stable");
+  assert.match(stable.read(`assets/${stable.release}/chunk-BBBB2222.js`), /channel="stable"/);
+  assert.notEqual(beta.release, stable.release);
 });

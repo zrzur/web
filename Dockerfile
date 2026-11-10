@@ -46,6 +46,8 @@ ENV VITE_INVITE_ORIGIN=__VITE_INVITE_ORIGIN__
 # the public Discover and Designs sites (discover.zrzur.com, designs.zrzur.com)
 ENV VITE_DISCOVER_URL=__VITE_DISCOVER_URL__
 ENV VITE_DESIGNS_HOST=__VITE_DESIGNS_HOST__
+# "beta" shows the Beta label by the logo; unset: a stable release
+ENV VITE_RELEASE_CHANNEL=__VITE_RELEASE_CHANNEL__
 
 # Source of this build, shown as the "Source code" link (AGPL section 13).
 # The image has no .git, so pass the commit (and the tag, if any) as build args:

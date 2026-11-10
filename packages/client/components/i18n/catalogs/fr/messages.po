@@ -23701,3 +23701,11 @@ msgstr "Zrzur, directement sur <0>votre ordinateur.</0>"
 #: components/app/interface/settings/user/appearance/AppearanceMenu.tsx
 #~ msgid "Zrzur's own look: calm dark panels in one slate family, pink for Plus and teal for anything live."
 #~ msgstr ""
+
+#: components/ui/components/design/ReleaseBadge.tsx
+msgid "Beta"
+msgstr "Bêta"
+
+#: components/ui/components/design/ReleaseBadge.tsx
+msgid "Beta version: some things may still change."
+msgstr "Version bêta : certaines choses peuvent encore changer."

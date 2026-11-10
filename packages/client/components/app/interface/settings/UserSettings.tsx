@@ -18,7 +18,9 @@ import { useModals } from "@revolt/modal";
 import { fetchLatestChangelog } from "@revolt/modal/modals/changelogFeed";
 import { pluginsEnabled } from "@revolt/plugins/enabled";
 import { useNavigate } from "@revolt/routing";
+import { CONFIGURATION } from "@revolt/common";
 import { ColouredText, Column, Text, iconSize } from "@revolt/ui";
+import { ReleaseBadge } from "@revolt/ui/components/design/ReleaseBadge";
 import { BadgeMark } from "@revolt/ui/components/features/profiles/badges/BadgeMark";
 import { Symbol } from "@revolt/ui/components/utils/Symbol";
 import { BotIcon } from "@revolt/ui/icons/BotIcon";
@@ -227,7 +229,8 @@ const Config: SettingsConfiguration<{ server: Server }> = {
             >
               <span data-testid="web-version">{pkg.version}</span>
               <Show when={shortCommit()}> ({shortCommit()})</Show>
-            </bdi>
+            </bdi>{" "}
+            <ReleaseBadge channel={CONFIGURATION.RELEASE_CHANNEL} />
           </Text>
           <Show when={serverBuild()}>
             {(build) => (

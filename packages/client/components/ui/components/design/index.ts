@@ -27,6 +27,7 @@
 
 export { Avatar } from "./Avatar";
 export { Badge } from "./Badge";
+export { ReleaseBadge } from "./ReleaseBadge";
 export { BirthMonthField } from "./BirthMonthField";
 export { Button } from "./Button";
 export { type CategorySelectOption, CategoryButton } from "./CategoryButton";

@@ -3116,6 +3116,10 @@ msgstr "تحت العتبة يسمع الآخرون صمتًا."
 msgid "Benin"
 msgstr "بنين"
 
+#: components/ui/components/design/ReleaseBadge.tsx
+msgid "Beta"
+msgstr "تجريبي"
+
 #: components/app/interface/settings/user/badges/BugReportDialog.tsx
 msgid "Beta feature"
 msgstr "ميزة تجريبية"
@@ -3137,6 +3141,11 @@ msgstr "البرنامج التجريبي"
 #: components/ui/components/features/profiles/badges/useBadgeText.ts
 msgid "Beta Tester"
 msgstr "مختبِر النسخة التجريبية"
+
+#: components/ui/components/design/ReleaseBadge.tsx
+#: src/interface/navigation/servers/ServerList.tsx
+msgid "Beta version: some things may still change."
+msgstr "نسخة تجريبية: قد تتغيّر بعض الأمور."
 
 #: components/ui/components/features/profiles/badges/useBadgeText.ts
 msgid "Beta Veteran"
@@ -14940,8 +14949,8 @@ msgid "Play again"
 msgstr "شغّله مرة أخرى"
 
 #: components/auth/src/AuthPage.tsx
-msgid "Play all"
-msgstr "تشغيل الكل"
+#~ msgid "Play all"
+#~ msgstr "تشغيل الكل"
 
 #: components/app/interface/settings/user/appearance/AnimationSettings.tsx
 msgid "Play preview"
