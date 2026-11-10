@@ -2,6 +2,10 @@
 
 ## Unreleased
 
+### Performance
+
+* **Smaller install:** the app shell the service worker installs is back under its 2,000,000-byte budget (1,996,898). dayjs was bundled twice (the Arabic and British English date files pulled in the ESM copy), the maths parser now loads with KaTeX on the first message with `$$`, and moderators' selection mode loads on first use. A build over budget now names its biggest files.
+
 ### Security
 
 * **Page policy:** the web server sends a real Content-Security-Policy, built from the container's addresses and the API root (files, link proxy, events, voice nodes): scripts only from the app (no inline scripts, no eval), connections only to this instance's services, frames only for the embedded media players and hCaptcha, no plugins, no framing by other sites. The open `Access-Control-Allow-Origin: *` is gone. Extra origins: `CSP_CONNECT_EXTRA`, `CSP_FRAME_EXTRA`, `CSP_IMG_EXTRA`; `CSP_API_URL` when the container reaches the API under another address.

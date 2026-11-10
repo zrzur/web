@@ -2,8 +2,10 @@ import { createSignal } from "solid-js";
 
 import { i18n } from "@lingui/core";
 import dayjs from "dayjs";
-import locale_ar_base from "dayjs/esm/locale/ar.js";
-import locale_en_GB from "dayjs/esm/locale/en-gb.js";
+// the CommonJS locale files share the one dayjs the app imports; the esm ones
+// pull in a second copy of dayjs (about 7 KB) into the app shell
+import locale_ar_base from "dayjs/locale/ar";
+import locale_en_GB from "dayjs/locale/en-gb";
 import advancedFormat from "dayjs/plugin/advancedFormat";
 import calendar from "dayjs/plugin/calendar";
 import localizedFormat from "dayjs/plugin/localizedFormat";
