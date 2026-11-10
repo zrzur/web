@@ -24689,3 +24689,28 @@ msgstr "زرزور، مباشرةً على <0>سطح مكتبك.</0>"
 #: components/app/interface/settings/user/appearance/AppearanceMenu.tsx
 #~ msgid "Zrzur's own look: very dark neutral panels with Zrzur Pink as the one accent."
 #~ msgstr "مظهر زرزور الخاص: لوحات داكنة جدًا بألوان محايدة، وزهري زرزور هو اللون المميز الوحيد."
+
+#: components/modal/modals/CustomStatus.tsx
+msgid "Change the status emoji"
+msgstr "غيّر الرمز التعبيري للحالة"
+
+#: components/modal/modals/CustomStatus.tsx
+msgid "Clear after"
+msgstr "تُمسح بعد"
+
+#: components/ui/components/features/profiles/ProfileMutuals.tsx
+msgid "In common"
+msgstr "مشترك بينكما"
+
+#. placeholder {0}: keptTime()
+#: components/modal/modals/CustomStatus.tsx
+msgid "Keep: until {0}"
+msgstr "إبقاؤها: حتى {0}"
+
+#: components/ui/components/features/profiles/ProfileMutuals.tsx
+msgid "No servers or friends in common."
+msgstr "لا سيرفرات ولا أصدقاء مشتركون بينكما."
+
+#: components/ui/components/features/profiles/ProfileMutuals.tsx
+msgid "Servers and friends in common"
+msgstr "السيرفرات والأصدقاء المشتركون"

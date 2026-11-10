@@ -24689,3 +24689,28 @@ msgstr "Zrzur, direkt auf <0>deinem Desktop.</0>"
 #: components/app/interface/settings/user/appearance/AppearanceMenu.tsx
 #~ msgid "Zrzur's own look: very dark neutral panels with Zrzur Pink as the one accent."
 #~ msgstr "Zrzurs eigener Look: sehr dunkle, neutrale Flächen mit Zrzur-Pink als einziger Akzentfarbe."
+
+#: components/modal/modals/CustomStatus.tsx
+msgid "Change the status emoji"
+msgstr "Status-Emoji ändern"
+
+#: components/modal/modals/CustomStatus.tsx
+msgid "Clear after"
+msgstr "Löschen nach"
+
+#: components/ui/components/features/profiles/ProfileMutuals.tsx
+msgid "In common"
+msgstr "Gemeinsam"
+
+#. placeholder {0}: keptTime()
+#: components/modal/modals/CustomStatus.tsx
+msgid "Keep: until {0}"
+msgstr "Beibehalten: bis {0}"
+
+#: components/ui/components/features/profiles/ProfileMutuals.tsx
+msgid "No servers or friends in common."
+msgstr "Keine gemeinsamen Server oder Freunde."
+
+#: components/ui/components/features/profiles/ProfileMutuals.tsx
+msgid "Servers and friends in common"
+msgstr "Gemeinsame Server und Freunde"

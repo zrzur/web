@@ -928,6 +928,7 @@ msgstr "1 天"
 #: components/app/interface/settings/server/ServerEmergency.tsx
 #: components/modal/modals/CreateInvite.tsx
 #: components/modal/modals/CreatePoll.tsx
+#: components/modal/modals/CustomStatus.tsx
 msgid "1 hour"
 msgstr "1 小时"
 
@@ -1005,10 +1006,12 @@ msgid "3. Install the bot in a test server"
 msgstr "3. 在测试服务器中安装机器人"
 
 #: components/modal/modals/CreateInvite.tsx
+#: components/modal/modals/CustomStatus.tsx
 msgid "30 minutes"
 msgstr "30 分钟"
 
 #: components/modal/modals/CreatePoll.tsx
+#: components/modal/modals/CustomStatus.tsx
 msgid "4 hours"
 msgstr "4 小时"
 
@@ -3893,6 +3896,10 @@ msgstr "更改 {0} 的表情"
 msgid "Change the password you use to sign in."
 msgstr "更改你登录时使用的密码。"
 
+#: components/modal/modals/CustomStatus.tsx
+msgid "Change the status emoji"
+msgstr "更改状态表情"
+
 #: components/app/interface/settings/user/subscriptions/Subscriptions.tsx
 msgid "Change your card, download invoices and see past payments on our payment partner's secure page."
 msgstr "在我们支付合作伙伴的安全页面上，你可以更换银行卡、下载发票并查看过往付款。"
@@ -4238,6 +4245,7 @@ msgid "Choose a username"
 msgstr "选择用户名"
 
 #: components/app/interface/settings/channel/ForumTags.tsx
+#: components/modal/modals/CustomStatus.tsx
 msgid "Choose an emoji"
 msgstr "选择表情"
 
@@ -4415,6 +4423,10 @@ msgstr "干净的浅色界面，深墨色文字，搭配覆盆子色的操作按
 #: components/app/interface/settings/user/safety/SafetyDashboard.tsx
 msgid "Clear"
 msgstr "清除"
+
+#: components/modal/modals/CustomStatus.tsx
+msgid "Clear after"
+msgstr "清除时间"
 
 #: src/interface/Discover.tsx
 #~ msgid "Clear filter"
@@ -7891,6 +7903,7 @@ msgstr "你发出或收到的好友请求会在这里等待处理。"
 #: components/app/interface/settings/user/Privacy.tsx
 #: components/modal/lib/serverTemplateText.ts
 #: components/modal/modals/GiftPlus.tsx
+#: components/ui/components/features/profiles/ProfileMutuals.tsx
 #: src/interface/Friends.tsx
 #: src/interface/navigation/channels/HomeSidebar.tsx
 #: src/interface/You.tsx
@@ -9085,6 +9098,10 @@ msgstr "在服务器中。"
 msgid "In about ten minutes you will have a bot that answers a slash command in your own test server. You need a Zrzur account, a server of your own and Node.js 22 or newer. There is nothing to install."
 msgstr "大约十分钟后，你就会拥有一个能在自己的测试服务器中响应斜杠命令的机器人。你需要一个 Zrzur 账号、一个自己的服务器和 Node.js 22 或更高版本。无需安装任何其他东西。"
 
+#: components/ui/components/features/profiles/ProfileMutuals.tsx
+msgid "In common"
+msgstr "共同"
+
 #: components/app/interface/settings/user/Language.tsx
 msgid "In progress"
 msgstr "进行中"
@@ -9725,6 +9742,11 @@ msgstr "超过保留期限后仍保留这份证据吗？仅在法律要求时才
 #: components/app/interface/settings/user/profile/CreatorStudio.tsx
 msgid "Keep this readable: leave it mostly transparent"
 msgstr "为保证可读性：请保持大部分透明"
+
+#. placeholder {0}: keptTime()
+#: components/modal/modals/CustomStatus.tsx
+msgid "Keep: until {0}"
+msgstr "保留：直到 {0}"
 
 #: src/interface/developers/docs/DocsPortal.tsx
 msgid "Keeping tokens safe"
@@ -11876,6 +11898,7 @@ msgstr "荷兰"
 #~ msgstr ""
 
 #: components/modal/modals/CreateInvite.tsx
+#: components/modal/modals/CustomStatus.tsx
 msgid "Never"
 msgstr "从不"
 
@@ -12529,6 +12552,10 @@ msgstr "暂无密钥：该应用是公共客户端，必须使用 PKCE（始终�
 #: src/interface/Discover.tsx
 msgid "No servers are listed yet."
 msgstr "还没有上架服务器。"
+
+#: components/ui/components/features/profiles/ProfileMutuals.tsx
+msgid "No servers or friends in common."
+msgstr "没有共同的服务器或好友。"
 
 #: components/modal/modals/MoveSupercharge.tsx
 msgid "No servers to show."
@@ -15357,6 +15384,7 @@ msgid "Remove tag {tag}"
 msgstr "移除标签 {tag}"
 
 #: components/app/interface/settings/channel/ForumTags.tsx
+#: components/modal/modals/CustomStatus.tsx
 msgid "Remove the emoji"
 msgstr "移除该表情"
 
@@ -17127,6 +17155,7 @@ msgid "Server stats"
 msgstr "服务器统计"
 
 #: components/modal/modals/MoveSupercharge.tsx
+#: components/ui/components/features/profiles/ProfileMutuals.tsx
 #: src/interface/developers/docs/DocsPortal.tsx
 #: src/interface/Discover.tsx
 #: src/interface/navigation/PhoneTabs.tsx
@@ -17136,6 +17165,10 @@ msgstr "服务器"
 #: components/app/interface/settings/user/subscriptions/PlusPage.tsx
 msgid "Servers and bots you send to Discover are reviewed ahead of the queue. Same rules, just faster."
 msgstr "提交到发现的服务器和机器人会优先审核。规则相同，只是更快。"
+
+#: components/ui/components/features/profiles/ProfileMutuals.tsx
+msgid "Servers and friends in common"
+msgstr "共同的服务器和好友"
 
 #. placeholder {0}: formatPrice(plans().supercharge_price, plans().currency, locale())
 #: components/app/interface/settings/user/subscriptions/PlusPage.tsx
@@ -20306,6 +20339,7 @@ msgstr "标题"
 msgid "To answer one, open a ticket."
 msgstr "要回答其中一个，请开启工单。"
 
+#: components/modal/modals/CustomStatus.tsx
 #: src/interface/channels/text/SearchBox.tsx
 msgid "Today"
 msgstr "今天"

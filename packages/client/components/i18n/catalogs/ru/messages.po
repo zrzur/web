@@ -928,6 +928,7 @@ msgstr "1 день"
 #: components/app/interface/settings/server/ServerEmergency.tsx
 #: components/modal/modals/CreateInvite.tsx
 #: components/modal/modals/CreatePoll.tsx
+#: components/modal/modals/CustomStatus.tsx
 msgid "1 hour"
 msgstr "1 час"
 
@@ -1005,10 +1006,12 @@ msgid "3. Install the bot in a test server"
 msgstr "3. Установите бота на тестовый сервер"
 
 #: components/modal/modals/CreateInvite.tsx
+#: components/modal/modals/CustomStatus.tsx
 msgid "30 minutes"
 msgstr "30 минут"
 
 #: components/modal/modals/CreatePoll.tsx
+#: components/modal/modals/CustomStatus.tsx
 msgid "4 hours"
 msgstr "4 часа"
 
@@ -3893,6 +3896,10 @@ msgstr "Изменить эмодзи: {0}"
 msgid "Change the password you use to sign in."
 msgstr "Смените пароль, с которым вы входите."
 
+#: components/modal/modals/CustomStatus.tsx
+msgid "Change the status emoji"
+msgstr "Изменить эмодзи статуса"
+
 #: components/app/interface/settings/user/subscriptions/Subscriptions.tsx
 msgid "Change your card, download invoices and see past payments on our payment partner's secure page."
 msgstr "Меняйте карту, скачивайте счета и смотрите прошлые платежи на защищённой странице нашего платёжного партнёра."
@@ -4238,6 +4245,7 @@ msgid "Choose a username"
 msgstr "Введие своё имя пользователя"
 
 #: components/app/interface/settings/channel/ForumTags.tsx
+#: components/modal/modals/CustomStatus.tsx
 msgid "Choose an emoji"
 msgstr "Выберите эмодзи"
 
@@ -4415,6 +4423,10 @@ msgstr "Чистые светлые поверхности, глубокий ч�
 #: components/app/interface/settings/user/safety/SafetyDashboard.tsx
 msgid "Clear"
 msgstr "Очистить"
+
+#: components/modal/modals/CustomStatus.tsx
+msgid "Clear after"
+msgstr "Очистить через"
 
 #: src/interface/Discover.tsx
 #~ msgid "Clear filter"
@@ -7891,6 +7903,7 @@ msgstr "Отправленные и полученные заявки в дру�
 #: components/app/interface/settings/user/Privacy.tsx
 #: components/modal/lib/serverTemplateText.ts
 #: components/modal/modals/GiftPlus.tsx
+#: components/ui/components/features/profiles/ProfileMutuals.tsx
 #: src/interface/Friends.tsx
 #: src/interface/navigation/channels/HomeSidebar.tsx
 #: src/interface/You.tsx
@@ -9085,6 +9098,10 @@ msgstr "На сервере."
 msgid "In about ten minutes you will have a bot that answers a slash command in your own test server. You need a Zrzur account, a server of your own and Node.js 22 or newer. There is nothing to install."
 msgstr "Минут через десять у вас будет бот, который отвечает на слэш-команду на вашем тестовом сервере. Вам понадобятся учётная запись Zrzur, собственный сервер и Node.js 22 или новее. Устанавливать ничего не нужно."
 
+#: components/ui/components/features/profiles/ProfileMutuals.tsx
+msgid "In common"
+msgstr "Общее"
+
 #: components/app/interface/settings/user/Language.tsx
 msgid "In progress"
 msgstr "В работе"
@@ -9725,6 +9742,11 @@ msgstr "Хранить эти доказательства дольше срок
 #: components/app/interface/settings/user/profile/CreatorStudio.tsx
 msgid "Keep this readable: leave it mostly transparent"
 msgstr "Это должно оставаться читаемым: сделайте его в основном прозрачным"
+
+#. placeholder {0}: keptTime()
+#: components/modal/modals/CustomStatus.tsx
+msgid "Keep: until {0}"
+msgstr "Оставить: до {0}"
 
 #: src/interface/developers/docs/DocsPortal.tsx
 msgid "Keeping tokens safe"
@@ -11876,6 +11898,7 @@ msgstr "Нидерланды"
 #~ msgstr ""
 
 #: components/modal/modals/CreateInvite.tsx
+#: components/modal/modals/CustomStatus.tsx
 msgid "Never"
 msgstr "Никогда"
 
@@ -12529,6 +12552,10 @@ msgstr "Секрета пока нет: приложение является п
 #: src/interface/Discover.tsx
 msgid "No servers are listed yet."
 msgstr "Серверов в списке пока нет."
+
+#: components/ui/components/features/profiles/ProfileMutuals.tsx
+msgid "No servers or friends in common."
+msgstr "Нет общих серверов и друзей."
 
 #: components/modal/modals/MoveSupercharge.tsx
 msgid "No servers to show."
@@ -15357,6 +15384,7 @@ msgid "Remove tag {tag}"
 msgstr "Убрать тег {tag}"
 
 #: components/app/interface/settings/channel/ForumTags.tsx
+#: components/modal/modals/CustomStatus.tsx
 msgid "Remove the emoji"
 msgstr "Убрать эмодзи"
 
@@ -17127,6 +17155,7 @@ msgid "Server stats"
 msgstr "Статистика сервера"
 
 #: components/modal/modals/MoveSupercharge.tsx
+#: components/ui/components/features/profiles/ProfileMutuals.tsx
 #: src/interface/developers/docs/DocsPortal.tsx
 #: src/interface/Discover.tsx
 #: src/interface/navigation/PhoneTabs.tsx
@@ -17136,6 +17165,10 @@ msgstr "Серверы"
 #: components/app/interface/settings/user/subscriptions/PlusPage.tsx
 msgid "Servers and bots you send to Discover are reviewed ahead of the queue. Same rules, just faster."
 msgstr "Серверы и боты, отправленные в «Обзор», проверяются вне очереди. Правила те же, просто быстрее."
+
+#: components/ui/components/features/profiles/ProfileMutuals.tsx
+msgid "Servers and friends in common"
+msgstr "Общие серверы и друзья"
 
 #. placeholder {0}: formatPrice(plans().supercharge_price, plans().currency, locale())
 #: components/app/interface/settings/user/subscriptions/PlusPage.tsx
@@ -20306,6 +20339,7 @@ msgstr "Название"
 msgid "To answer one, open a ticket."
 msgstr "Чтобы ответить на какое-либо из них, откройте обращение."
 
+#: components/modal/modals/CustomStatus.tsx
 #: src/interface/channels/text/SearchBox.tsx
 msgid "Today"
 msgstr "Сегодня"

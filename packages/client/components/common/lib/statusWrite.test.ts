@@ -1,6 +1,11 @@
 import { afterEach, describe, expect, test, vi } from "vitest";
 import { User } from "../../../../stoat.js/src/solid/classes/User";
-import { customStatusPatch, writeStatusWithRetry } from "./statusWrite";
+import {
+  customStatusPatch,
+  statusExpiresAt,
+  statusLine,
+  writeStatusWithRetry,
+} from "./statusWrite";
 
 afterEach(() => vi.useRealTimers());
 
@@ -81,6 +86,83 @@ describe("custom status text", () => {
   });
 });
 
+describe("status line", () => {
+  test("puts the emoji before the text", () => {
+    expect(statusLine("🍕", "At lunch")).toBe("🍕 At lunch");
+  });
+  test("writes a custom emoji as its code", () => {
+    expect(statusLine("01J00000000000000000000000", "Hi")).toBe(
+      ":01J00000000000000000000000: Hi",
+    );
+  });
+  test("an emoji or a text alone, or nothing", () => {
+    expect(statusLine("🎧", undefined)).toBe("🎧");
+    expect(statusLine(undefined, "Away")).toBe("Away");
+    expect(statusLine(undefined, "  ")).toBeUndefined();
+  });
+});
+
+describe("status emoji and expiry", () => {
+  const now = new Date(2026, 10, 10, 12, 0, 0);
+  test("the expiry choices count from now", () => {
+    expect(statusExpiresAt("never", now)).toBeUndefined();
+    expect(statusExpiresAt("30m", now)).toBe(
+      new Date(2026, 10, 10, 12, 30).toISOString(),
+    );
+    expect(statusExpiresAt("1h", now)).toBe(
+      new Date(2026, 10, 10, 13, 0).toISOString(),
+    );
+    expect(statusExpiresAt("4h", now)).toBe(
+      new Date(2026, 10, 10, 16, 0).toISOString(),
+    );
+  });
+  test("today ends at local midnight", () => {
+    expect(statusExpiresAt("today", now)).toBe(
+      new Date(2026, 10, 11, 0, 0, 0).toISOString(),
+    );
+  });
+  test("today a minute before midnight still leaves a minute", () => {
+    const late = new Date(2026, 10, 10, 23, 59, 30);
+    expect(statusExpiresAt("today", late)).toBe(
+      new Date(late.getTime() + 60_000).toISOString(),
+    );
+  });
+  test("text, emoji and expiry go together", () => {
+    expect(
+      customStatusPatch(" At lunch ", { emoji: "🍕", expiry: "30m", now }),
+    ).toEqual({
+      status: {
+        text: "At lunch",
+        emoji: "🍕",
+        expires_at: new Date(2026, 10, 10, 12, 30).toISOString(),
+      },
+    });
+  });
+  test("an expiry already set is kept while it is in the future", () => {
+    const kept = new Date(2026, 10, 10, 13, 0).toISOString();
+    expect(
+      customStatusPatch("Away", { keepExpiresAt: kept, now }).status
+        ?.expires_at,
+    ).toBe(kept);
+    const past = new Date(2026, 10, 10, 11, 0).toISOString();
+    expect(
+      customStatusPatch("Away", { keepExpiresAt: past, now }).status
+        ?.expires_at,
+    ).toBeUndefined();
+  });
+  test("an emoji alone clears the old text", () => {
+    expect(customStatusPatch("  ", { emoji: "🎧", now })).toEqual({
+      status: { emoji: "🎧" },
+      remove: ["StatusText"],
+    });
+  });
+  test("no text and no emoji removes the status, expiry or not", () => {
+    expect(customStatusPatch("", { expiry: "1h", now })).toEqual({
+      remove: ["StatusText"],
+    });
+  });
+});
+
 describe("offline status privacy", () => {
   const make = (self: boolean) => {
     const client: { user?: User } = {};
@@ -103,6 +185,28 @@ describe("offline status privacy", () => {
     expect(user.presence).toBe("Invisible");
     expect(user.status?.text).toBe("Own custom text");
     expect(user.statusMessage()).toBe("Own custom text");
+  });
+  test("hides a status past its expiry without a timer", () => {
+    const client: { user?: User } = {};
+    const collection = {
+      client,
+      getUnderlyingObject: () => ({
+        online: true,
+        status: {
+          presence: "Idle",
+          text: "Old news",
+          emoji: "📰",
+          expires_at: new Date(Date.now() - 60_000).toISOString(),
+        },
+      }),
+    };
+    const user = new User(
+      collection as unknown as ConstructorParameters<typeof User>[0],
+      "test",
+    );
+    expect(user.statusMessage()).toBeUndefined();
+    expect(user.statusEmoji).toBeUndefined();
+    expect(user.status?.presence).toBe("Idle");
   });
   test("continues hiding an offline user's text from others", () => {
     const user = make(false);

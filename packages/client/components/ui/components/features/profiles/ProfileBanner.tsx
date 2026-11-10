@@ -1,5 +1,7 @@
 import { JSX, Show } from "solid-js";
 
+import { statusLine } from "@revolt/common/lib/statusWrite";
+import { TextWithEmoji } from "@revolt/markdown/emoji/TextWithEmoji";
 import { ServerMember, User } from "@zrzur/sdk/solid";
 import { styled } from "styled-system/jsx";
 
@@ -31,7 +33,8 @@ export function ProfileBanner(props: {
     props.member?.animatedAvatarURL ?? props.user.animatedAvatarURL;
   // official accounts are the system, not people: no online dot
   const official = () => props.user.official;
-  const status = () => props.user.status?.text;
+  const status = () =>
+    statusLine(props.user.statusEmoji, props.user.status?.text);
 
   return (
     <Header data-size={props.size}>
@@ -76,7 +79,7 @@ export function ProfileBanner(props: {
         <StatusSlot>
           <Show when={status()}>
             <Bubble dir="auto" title={status() ?? undefined}>
-              {status()}
+              <TextWithEmoji content={status()} />
             </Bubble>
           </Show>
         </StatusSlot>
