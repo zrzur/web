@@ -2866,14 +2866,14 @@
     },
     {
       "path": "packages/client/components/common/lib/statusPatch.ts",
-      "sha256": "e2982282236ec821203712747f0b185c5d177310bd6f1d060da061b044ead575",
-      "bytes": 2168,
+      "sha256": "02114fdfcd582a89010f2c239bde3f9721d7f71c04b1be6c4ee966e2bb16ecff",
+      "bytes": 2389,
       "category": "product-source-or-build-manifest"
     },
     {
       "path": "packages/client/components/common/lib/statusWrite.test.ts",
-      "sha256": "35f66d565dba928bb7e6aa93b328587e06baf6f8ae96c91c27fbf8d265b31471",
-      "bytes": 7476,
+      "sha256": "6509009c90e5a4c420faf14d248f76d8235bdbef12222285d65f89f2d5d607a9",
+      "bytes": 7984,
       "category": "synthetic-test-source-or-fixture"
     },
     {
@@ -41370,7 +41370,7 @@
   "submodules": [
     {
       "path": "packages/stoat.js",
-      "commit": "13a239037277c34f9e44d726d313db734d805e6b"
+      "commit": "c0184cc1a6c7660478c7d0fcedd8b0d8f667130a"
     }
   ]
 }
