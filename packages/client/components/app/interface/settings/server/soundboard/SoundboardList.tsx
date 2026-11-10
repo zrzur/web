@@ -157,7 +157,12 @@ export function SoundboardList(props: { server: Server }) {
     }
   }
 
-  const seconds = (ms: number) => (ms / 1000).toFixed(1);
+  // a sound's length, in the digits and separator of the page language
+  const seconds = (ms: number) =>
+    new Intl.NumberFormat(i18n().locale || "en", {
+      minimumFractionDigits: 1,
+      maximumFractionDigits: 1,
+    }).format(ms / 1000);
 
   return (
     <Column gap="xl">
