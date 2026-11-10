@@ -23,6 +23,7 @@ import {
   soundboardChoices,
   soundboardOf,
   stageOf,
+  watchStage,
 } from "./voiceExtrasStore";
 
 /** The parts of the call this needs */
@@ -60,6 +61,7 @@ export function attachVoiceExtras(
         (state) => stageOf(channel.id).set(state),
         () => undefined,
       );
+      onCleanup(watchStage(channel));
       onCleanup(() => view.setStageGate(undefined));
     }
 

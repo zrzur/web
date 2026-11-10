@@ -15,6 +15,7 @@ import {
   applyStageChange,
   EMPTY_STAGE,
   fetchSoundboard,
+  fetchStage as fetchStageState,
 } from "@zrzur/sdk/solid/voiceExtras";
 
 // Everything the voice screens need comes through this file, so the bundler
@@ -123,10 +124,43 @@ export function onSoundRemoved(fn: (soundId: string) => void) {
   return () => removeListeners.delete(fn);
 }
 
+/** Stages of the calls you are in: fetched again after a reconnect */
+const watched = new Map<string, Channel>();
+let currentClient: Client | undefined;
+
+/** Forget everything (another account, or signed out) */
+function forgetAll() {
+  // screens still showing a stage see it empty, not the last account's
+  for (const entry of stages.values()) entry.set(EMPTY_STAGE);
+  stages.clear();
+  soundboards.clear();
+  watched.clear();
+}
+
+/** Keep this stage current across reconnects while you are in it */
+export function watchStage(channel: Channel) {
+  watched.set(channel.id, channel);
+  return () => void watched.delete(channel.id);
+}
+
 /** Start following the client's stage and soundboard events (once) */
 export function followVoiceEvents(client: Client) {
+  // another account's client: nothing of the last one may show
+  if (currentClient !== client) {
+    forgetAll();
+    currentClient = client;
+  }
   if (listening.has(client)) return;
   listening.add(client);
+  // events missed while the gateway was down: ask again for each stage
+  client.on("ready", () => {
+    for (const channel of watched.values())
+      void fetchStageState(client, channel).then(
+        (state) => stageOf(channel.id).set(state),
+        () => undefined,
+      );
+  });
+  client.on("logout", forgetAll);
   client.on("voiceEvent", (event) => {
     switch (event.type) {
       case "StageUpdate": {
