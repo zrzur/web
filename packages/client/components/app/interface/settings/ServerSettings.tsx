@@ -1,4 +1,4 @@
-import { lazy } from "solid-js";
+import { Suspense, lazy } from "solid-js";
 
 import { Trans, useLingui } from "@lingui/solid/macro";
 import { Server } from "@zrzur/sdk/solid";
@@ -184,7 +184,19 @@ const Config: SettingsConfiguration<Server> = {
       case "overview":
         return <OverviewPage server={server} />;
       case "insights":
-        return <InsightsPage server={server} />;
+        // its own loading line while the chunk arrives, so the rest of
+        // settings never waits on it
+        return (
+          <Suspense
+            fallback={
+              <p role="status" data-testid="insights-chunk-loading">
+                <Trans>Loading insights…</Trans>
+              </p>
+            }
+          >
+            <InsightsPage server={server} />
+          </Suspense>
+        );
       case "channels":
         return <ChannelsPage server={server} />;
       case "joining":

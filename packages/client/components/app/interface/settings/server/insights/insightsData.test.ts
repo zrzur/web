@@ -2,13 +2,13 @@ import { describe, expect, it } from "vitest";
 
 import {
   type InsightsDay,
-  average,
+  FEW,
   barHeights,
   formatDay,
   formatMinutes,
   hasActivity,
+  perDay,
   shares,
-  total,
   viewerTimeZone,
 } from "./insightsData";
 
@@ -24,11 +24,13 @@ const day = (values: Partial<InsightsDay>): InsightsDay => ({
 });
 
 describe("server insights data", () => {
-  it("adds and averages a series", () => {
-    const rows = [day({ messages: 3 }), day({ messages: 4 }), day({})];
-    expect(total(rows, "messages")).toBe(7);
-    expect(average(rows, "messages")).toBe(2);
-    expect(average([], "messages")).toBe(0);
+  it("averages a total per day", () => {
+    expect(perDay(7, 3)).toBe(2);
+    expect(perDay(7, 0)).toBe(0);
+  });
+
+  it("draws a hidden small number as a low bar, never as none", () => {
+    expect(barHeights([null, 0, 50])).toEqual([FEW, 0, 100]);
   });
 
   it("scales bars to the busiest day and keeps small days visible", () => {
@@ -46,6 +48,8 @@ describe("server insights data", () => {
   it("knows when nothing was counted", () => {
     expect(hasActivity([day({ members: 40 })])).toBe(false);
     expect(hasActivity([day({ voice_minutes: 1 })])).toBe(true);
+    // 1 to 4 people: hidden, but there was activity
+    expect(hasActivity([day({ active_members: null })])).toBe(true);
   });
 
   it("gives shares that never divide by zero", () => {

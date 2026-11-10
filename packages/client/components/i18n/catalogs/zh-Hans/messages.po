@@ -241,7 +241,7 @@ msgstr "{0} / 月"
 msgid "{0} / month each"
 msgstr "每人 {0} / 月"
 
-#. placeholder {0}: number().format(average(rows(), "messages"))
+#. placeholder {0}: number().format(perDay(totals()?.messages ?? 0, rows().length))
 #: components/app/interface/settings/server/insights/InsightsPage.tsx
 msgid "{0} a day on average"
 msgstr "平均每天 {0}"
@@ -5243,6 +5243,11 @@ msgstr "无法更新你的状态，请重试。"
 msgid "Count me in. Give me ten minutes."
 msgstr "算我一个，给我十分钟。"
 
+#. placeholder {0}: formatDay(since(), locale(), true)
+#: components/app/interface/settings/server/insights/InsightsPage.tsx
+msgid "Counted since {0}."
+msgstr "自 {0} 起统计。"
+
 #: components/app/interface/settings/server/channels/ChannelExtras.tsx
 msgid "Counters"
 msgstr "计数器"
@@ -10030,7 +10035,7 @@ msgstr "黎巴嫩"
 msgid "Left-to-right languages"
 msgstr "从左到右的语言"
 
-#. placeholder {0}: number().format(total(rows(), "leaves"))
+#. placeholder {0}: number().format(totals()?.leaves ?? 0)
 #: components/app/interface/settings/server/insights/InsightsPage.tsx
 msgid "Left: {0}"
 msgstr "离开：{0}"
@@ -10339,6 +10344,7 @@ msgid "Loading GIFs"
 msgstr "正在加载 GIF"
 
 #: components/app/interface/settings/server/insights/InsightsPage.tsx
+#: components/app/interface/settings/ServerSettings.tsx
 msgid "Loading insights…"
 msgstr "正在加载数据…"
 
@@ -13351,8 +13357,8 @@ msgid "Only the roles you let in below can see it."
 msgstr "只有你在下方允许的角色才能看到它。"
 
 #: components/app/interface/settings/server/insights/InsightsPage.tsx
-msgid "Only totals, never who. Channels with fewer than 5 messages show “fewer than 5”. Counts are kept for 90 days."
-msgstr "只显示总数，从不显示是谁。少于 5 条消息的频道显示为“少于 5”。统计数据保留 90 天。"
+msgid "Only totals, never who. Numbers from 1 to 4 show as “fewer than 5”, bots are not counted as active members, and messages count only in channels you can see. Counts are kept for 90 days."
+msgstr "只显示总数，从不显示是谁。1 到 4 显示为“少于 5”，机器人不计为活跃成员，消息只统计你能看到的频道。统计数据保留 90 天。"
 
 #: components/i18n/errors.tsx
 msgid "Only verified creators and Zrzur staff can do this."

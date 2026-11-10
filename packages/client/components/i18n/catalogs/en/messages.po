@@ -244,7 +244,7 @@ msgstr "{0} / month"
 msgid "{0} / month each"
 msgstr "{0} / month each"
 
-#. placeholder {0}: number().format(average(rows(), "messages"))
+#. placeholder {0}: number().format(perDay(totals()?.messages ?? 0, rows().length))
 #: components/app/interface/settings/server/insights/InsightsPage.tsx
 msgid "{0} a day on average"
 msgstr "{0} a day on average"
@@ -5438,6 +5438,11 @@ msgstr "Couldn't update your status. Please try again."
 msgid "Count me in. Give me ten minutes."
 msgstr "Count me in. Give me ten minutes."
 
+#. placeholder {0}: formatDay(since(), locale(), true)
+#: components/app/interface/settings/server/insights/InsightsPage.tsx
+msgid "Counted since {0}."
+msgstr "Counted since {0}."
+
 #: components/app/interface/settings/server/channels/ChannelExtras.tsx
 msgid "Counters"
 msgstr "Counters"
@@ -10481,7 +10486,7 @@ msgstr "Lebanon"
 msgid "Left-to-right languages"
 msgstr "Left-to-right languages"
 
-#. placeholder {0}: number().format(total(rows(), "leaves"))
+#. placeholder {0}: number().format(totals()?.leaves ?? 0)
 #: components/app/interface/settings/server/insights/InsightsPage.tsx
 msgid "Left: {0}"
 msgstr "Left: {0}"
@@ -10802,6 +10807,7 @@ msgid "Loading GIFs"
 msgstr "Loading GIFs"
 
 #: components/app/interface/settings/server/insights/InsightsPage.tsx
+#: components/app/interface/settings/ServerSettings.tsx
 msgid "Loading insights…"
 msgstr "Loading insights…"
 
@@ -13958,8 +13964,8 @@ msgid "Only the roles you let in below can see it."
 msgstr "Only the roles you let in below can see it."
 
 #: components/app/interface/settings/server/insights/InsightsPage.tsx
-msgid "Only totals, never who. Channels with fewer than 5 messages show “fewer than 5”. Counts are kept for 90 days."
-msgstr "Only totals, never who. Channels with fewer than 5 messages show “fewer than 5”. Counts are kept for 90 days."
+msgid "Only totals, never who. Numbers from 1 to 4 show as “fewer than 5”, bots are not counted as active members, and messages count only in channels you can see. Counts are kept for 90 days."
+msgstr "Only totals, never who. Numbers from 1 to 4 show as “fewer than 5”, bots are not counted as active members, and messages count only in channels you can see. Counts are kept for 90 days."
 
 #: components/app/interface/settings/user/Advanced.tsx
 #~ msgid "Only useful for Zrzur staff."

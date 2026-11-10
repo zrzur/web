@@ -13,8 +13,10 @@ export type InsightsDay = {
   leaves: number;
   members: number;
   messages: number;
-  active_members: number;
-  voice_minutes: number;
+  /** null: 1 to 4 ("fewer than 5") */
+  active_members?: number | null;
+  /** null: 1 to 4 ("fewer than 5") */
+  voice_minutes?: number | null;
 };
 
 export type InsightsSeries = Exclude<keyof InsightsDay, "day">;
@@ -32,16 +34,12 @@ export function viewerTimeZone(): { time_zone?: string; utc_offset: number } {
   return { time_zone: zone, utc_offset: offset === 0 ? 0 : offset };
 }
 
-/** Sum of a series over the range */
-export function total(rows: InsightsDay[], series: InsightsSeries) {
-  let sum = 0;
-  for (const row of rows) sum += row[series];
-  return sum;
-}
+/** Height of a day with 1 to 4 ("fewer than 5"): a small bar, never 0 */
+export const FEW = 6;
 
-/** Average per day, rounded */
-export function average(rows: InsightsDay[], series: InsightsSeries) {
-  return rows.length ? Math.round(total(rows, series) / rows.length) : 0;
+/** Average per day of a total, rounded */
+export function perDay(sum: number, days: number) {
+  return days ? Math.round(sum / days) : 0;
 }
 
 /**
@@ -49,18 +47,29 @@ export function average(rows: InsightsDay[], series: InsightsSeries) {
  * least a sliver so it is not mistaken for none). With `fromMin`, the
  * lowest day is the baseline, for totals that barely move (members).
  */
-export function barHeights(values: number[], fromMin = false): number[] {
+export function barHeights(
+  values: (number | null | undefined)[],
+  fromMin = false,
+): number[] {
   if (!values.length) return [];
-  const max = Math.max(...values);
-  const min = fromMin ? Math.min(...values) : 0;
+  const known = values.map((value) => value ?? 0);
+  const max = Math.max(...known);
+  const min = fromMin ? Math.min(...known) : 0;
   const span = max - min;
-  return values.map((value) => {
+  return values.map((raw) => {
+    // a hidden small number: as low as the smallest real bar
+    if (raw === null) return FEW;
+    const value = raw ?? 0;
     if (span <= 0) return value > 0 ? (fromMin ? 60 : 100) : 0;
     const height = ((value - min) / span) * 100;
     if (fromMin) return Math.round(20 + height * 0.8);
     return value > 0 ? Math.max(4, Math.round(height)) : 0;
   });
 }
+
+/** A count that is there: above 0, or hidden as 1 to 4 (null) */
+const some = (value: number | null | undefined) =>
+  value === null || (value ?? 0) > 0;
 
 /** Whether anything at all was counted in the range */
 export function hasActivity(rows: InsightsDay[]) {
@@ -69,8 +78,8 @@ export function hasActivity(rows: InsightsDay[]) {
       row.joins ||
       row.leaves ||
       row.messages ||
-      row.active_members ||
-      row.voice_minutes,
+      some(row.active_members) ||
+      some(row.voice_minutes),
   );
 }
 

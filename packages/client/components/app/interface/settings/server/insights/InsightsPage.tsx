@@ -27,13 +27,12 @@ import {
   type InsightsSeries,
   type Range,
   RANGES,
-  average,
   barHeights,
   formatDay,
   formatMinutes,
   hasActivity,
+  perDay,
   shares,
-  total,
   viewerTimeZone,
 } from "./insightsData";
 
@@ -77,6 +76,13 @@ export default function InsightsPage(props: { server: Server }) {
   const rows = createMemo(() => (value()?.rows ?? []) as InsightsDay[]);
   const membersNow = () => rows()[rows().length - 1]?.members ?? 0;
   const membersChange = () => membersNow() - (rows()[0]?.members ?? 0);
+  const totals = () => value()?.totals;
+  const few = () => t`fewer than 5`;
+  /** A count that can be hidden: null is 1 to 4 */
+  const maybe = (
+    n: number | null | undefined,
+    format: (n: number) => string = (n) => number().format(n),
+  ) => (n === null ? few() : format(n ?? 0));
 
   const sources = createMemo(() => {
     const s = value()?.join_sources;
@@ -149,6 +155,13 @@ export default function InsightsPage(props: { server: Server }) {
               ). Updated every hour.
             </Trans>
           </Note>
+          <Show when={value()?.counted_since}>
+            {(since) => (
+              <Note data-testid="insights-since">
+                {t`Counted since ${formatDay(since(), locale(), true)}.`}
+              </Note>
+            )}
+          </Show>
         </Toolbar>
 
         <Switch>
@@ -188,47 +201,49 @@ export default function InsightsPage(props: { server: Server }) {
                 series="members"
                 fromMin
                 locale={locale()}
-                format={(n) => number().format(n)}
+                format={(n) => maybe(n)}
               />
               <Stat
                 id="joins"
                 title={t({ message: "Joined", context: "server insights" })}
-                value={number().format(total(rows(), "joins"))}
-                detail={t`Left: ${number().format(total(rows(), "leaves"))}`}
+                value={number().format(totals()?.joins ?? 0)}
+                detail={t`Left: ${number().format(totals()?.leaves ?? 0)}`}
                 rows={rows()}
                 series="joins"
                 locale={locale()}
-                format={(n) => number().format(n)}
+                format={(n) => maybe(n)}
               />
               <Stat
                 id="messages"
                 title={t({ message: "Messages", context: "server insights" })}
-                value={number().format(total(rows(), "messages"))}
-                detail={t`${number().format(average(rows(), "messages"))} a day on average`}
+                value={number().format(totals()?.messages ?? 0)}
+                detail={t`${number().format(perDay(totals()?.messages ?? 0, rows().length))} a day on average`}
                 rows={rows()}
                 series="messages"
                 locale={locale()}
-                format={(n) => number().format(n)}
+                format={(n) => maybe(n)}
               />
               <Stat
                 id="active"
                 title={t`Active members`}
-                value={number().format(average(rows(), "active_members"))}
+                value={maybe(totals()?.active_members)}
                 detail={t`people who wrote, a day on average`}
                 rows={rows()}
                 series="active_members"
                 locale={locale()}
-                format={(n) => number().format(n)}
+                format={(n) => maybe(n)}
               />
               <Stat
                 id="voice"
                 title={t`Time in voice`}
-                value={formatMinutes(total(rows(), "voice_minutes"), locale())}
+                value={maybe(totals()?.voice_minutes, (n) =>
+                  formatMinutes(n, locale()),
+                )}
                 detail={t`all voice channels together`}
                 rows={rows()}
                 series="voice_minutes"
                 locale={locale()}
-                format={(n) => formatMinutes(n, locale())}
+                format={(n) => maybe(n, (m) => formatMinutes(m, locale()))}
               />
             </Grid>
 
@@ -277,12 +292,7 @@ export default function InsightsPage(props: { server: Server }) {
                               {number().format(index() + 1)}. #
                               {channelName(row.channel)}
                             </span>
-                            <strong>
-                              {row.messages === null ||
-                              row.messages === undefined
-                                ? t`fewer than 5`
-                                : number().format(row.messages)}
-                            </strong>
+                            <strong>{maybe(row.messages)}</strong>
                           </Line>
                         </li>
                       )}
@@ -294,8 +304,9 @@ export default function InsightsPage(props: { server: Server }) {
 
             <Muted>
               <Trans>
-                Only totals, never who. Channels with fewer than 5 messages show
-                “fewer than 5”. Counts are kept for 90 days.
+                Only totals, never who. Numbers from 1 to 4 show as “fewer than
+                5”, bots are not counted as active members, and messages count
+                only in channels you can see. Counts are kept for 90 days.
               </Trans>
             </Muted>
           </Match>
@@ -319,7 +330,7 @@ function Stat(props: {
   series: InsightsSeries;
   fromMin?: boolean;
   locale: string;
-  format: (n: number) => string;
+  format: (n: number | null) => string;
 }): JSX.Element {
   const heights = createMemo(() =>
     barHeights(
@@ -343,7 +354,7 @@ function Stat(props: {
         <For each={props.rows}>
           {(row, index) => (
             <Bar
-              title={`${formatDay(row.day, props.locale)}: ${props.format(row[props.series])}`}
+              title={`${formatDay(row.day, props.locale)}: ${props.format(row[props.series] ?? (row[props.series] === null ? null : 0))}`}
               style={{ "block-size": `${heights()[index()] ?? 0}%` }}
             />
           )}
@@ -473,7 +484,8 @@ const Bar = styled("span", {
     minWidth: "1px",
     borderStartStartRadius: "2px",
     borderStartEndRadius: "2px",
-    background: "var(--z-accent)",
+    // data, not an action: neutral ink (the action colour is for controls)
+    background: "var(--z-fg-secondary)",
     opacity: 0.85,
 
     "&:hover": { opacity: 1 },
@@ -535,6 +547,7 @@ const Fill = styled("div", {
   base: {
     blockSize: "100%",
     borderRadius: "inherit",
-    background: "var(--z-accent)",
+    // data, not an action: neutral ink (the action colour is for controls)
+    background: "var(--z-fg-secondary)",
   },
 });

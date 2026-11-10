@@ -67,7 +67,8 @@ const rows = (days: number) =>
     leaves: i === days - 1 ? 1 : 0,
     members: 40 + i,
     messages: i * 2,
-    active_members: 2,
+    // 1 to 4 people come as null
+    active_members: i === days - 1 ? null : 6,
     voice_minutes: 30,
   }));
 
@@ -75,6 +76,14 @@ const page = (days: number) => ({
   days,
   time_zone: "Europe/Vienna",
   rows: rows(days),
+  totals: {
+    joins: 3,
+    leaves: 1,
+    messages: days * (days - 1),
+    voice_minutes: 30 * days,
+    active_members: null,
+  },
+  counted_since: "2026-11-01",
   join_sources: { invite: 2, discover: 1, vanity: 0, other: 0 },
   top_channels: [
     { channel: "C1", messages: 12_345 },
@@ -107,8 +116,8 @@ const text = (id: string) =>
 
 describe("server insights page", () => {
   it("shows the totals, a bar per day and hides small channel counts", async () => {
-    const fetchInsights = vi.fn(async ({ days }: { days: number; utcOffset?: number }) =>
-      page(days),
+    const fetchInsights = vi.fn(
+      async ({ days }: { days: number; utcOffset?: number }) => page(days),
     );
     mount({ fetchInsights });
     await flush();
@@ -131,13 +140,20 @@ describe("server insights page", () => {
     expect(channels).toContain("fewer than 5");
     expect(channels).toContain("Unknown channel");
     expect(text("insights-zone")).toContain("Europe/Vienna");
+    // a hidden small number reads "fewer than 5", in the card and the bar
+    expect(text("insights-active")).toBe("fewer than 5");
+    const lastBar = [
+      ...document.querySelectorAll("[data-stat=active] [role=img] > *"),
+    ].at(-1) as HTMLElement;
+    expect(lastBar.title).toContain("fewer than 5");
+    expect(text("insights-since")).toContain("2026");
     // nothing names a person
     expect(document.body.textContent).not.toMatch(/\b[0-9A-Z]{26}\b/);
   });
 
   it("asks once per range and switches back without asking again", async () => {
-    const fetchInsights = vi.fn(async ({ days }: { days: number; utcOffset?: number }) =>
-      page(days),
+    const fetchInsights = vi.fn(
+      async ({ days }: { days: number; utcOffset?: number }) => page(days),
     );
     mount({ fetchInsights });
     await flush();
@@ -163,10 +179,12 @@ describe("server insights page", () => {
 
   it("shows the error in the page and tries again", async () => {
     let fail = true;
-    const fetchInsights = vi.fn(async ({ days }: { days: number; utcOffset?: number }) => {
-      if (fail) throw { type: "MissingPermission" };
-      return page(days);
-    });
+    const fetchInsights = vi.fn(
+      async ({ days }: { days: number; utcOffset?: number }) => {
+        if (fail) throw { type: "MissingPermission" };
+        return page(days);
+      },
+    );
     mount({ fetchInsights });
     await flush();
     await flush();

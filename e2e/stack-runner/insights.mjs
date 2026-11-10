@@ -239,9 +239,45 @@ test("open Insights → today's join by invite → 7 / 90 days", async (c) => {
   return `${joins} joins, cards in ${shown} ms (marks ${marks ?? "?"} ms)`;
 });
 
+// A member who may manage channels (so server settings open) but not the
+// server: the sidebar has no Insights, and its address shows nothing.
+const ROLE = "e2e-insights-channels";
+async function memberWithoutManageServer() {
+  const server = await api(owner, "GET", `/servers/${setup.server}`);
+  let role = Object.entries(server.roles ?? {}).find(([, r]) => r.name === ROLE)?.[0];
+  if (!role) role = (await api(owner, "POST", `/servers/${setup.server}/roles`, { name: ROLE })).id;
+  // Manage Channel only (bit 0)
+  await api(owner, "PUT", `/servers/${setup.server}/permissions/${role}`, {
+    permissions: { allow: 1, deny: 0 },
+  });
+  await api(owner, "PATCH", `/servers/${setup.server}/members/${memberMe._id}`, { roles: [role] });
+}
+await memberWithoutManageServer();
+
+const memberTests = [];
+memberTests.push({
+  name: "no Insights without Manage Server",
+  fn: async (c) => {
+    const page = c.page;
+    await openSettings(c, page);
+    c.step = "the sidebar";
+    const sidebar = page.locator(".settings_sidebar");
+    await sidebar.getByRole("link").first().waitFor({ timeout: 10000 });
+    const links = await sidebar.getByRole("link").allInnerTexts();
+    if (links.some((text) => text.trim() === c.t("Insights")))
+      throw new Error(`Insights is listed for a member without Manage Server: ${links.join(", ")}`);
+    if (await page.getByTestId("insights-cards").count())
+      throw new Error("the insights cards are on the page");
+    await page.screenshot({ path: `${SHOTS}insights-member-${c.lang}-${c.size}.png` });
+    return `${links.length} settings pages, none is Insights`;
+  },
+});
+
 // ------------------------------------------------------------------- run
 
-const code = await runSuite("insights", tests);
+const ownerCode = await runSuite("insights", tests);
+const memberCode = await runSuite("insights-member", memberTests, { account: accounts[1] });
+const code = ownerCode || memberCode;
 writeFileSync(
   `${SHOTS}insights-timings.json`,
   JSON.stringify(timings, null, 2),
