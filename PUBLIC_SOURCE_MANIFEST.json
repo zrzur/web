@@ -292,8 +292,8 @@
     },
     {
       "path": "CHANGELOG.md",
-      "sha256": "fb45d831b52ab4d42936f3329b84af2875db401fca9b4888e5daa4ce662b4415",
-      "bytes": 122000,
+      "sha256": "aa733bfaf46a7161c606773f7a6ec7125578b63161ca4f5f890815a638bf38af",
+      "bytes": 122124,
       "category": "public-documentation"
     },
     {
@@ -6580,14 +6580,14 @@
     },
     {
       "path": "packages/client/components/ui/components/features/voice/stage/StagePanel.dom.test.tsx",
-      "sha256": "4f615b89099c62259fa8ae894e33c8406e13d40f273fa82c88fc0e9ce55e93f7",
-      "bytes": 7575,
+      "sha256": "d8502881ced21fcd5806a7b18eb7a764aea33cdf6fdfda40b1ae2a1f9b101be1",
+      "bytes": 7926,
       "category": "synthetic-test-source-or-fixture"
     },
     {
       "path": "packages/client/components/ui/components/features/voice/stage/StagePanel.tsx",
-      "sha256": "3da84f32b0abcf5f7dd40d4b07d648058e6f4972fcc2d693bc64d74f56b656fc",
-      "bytes": 11953,
+      "sha256": "fb3d0dbfff089880c0ff9db510967626198194a874c0642628bbea056e1adf8e",
+      "bytes": 12042,
       "category": "product-source-or-build-manifest"
     },
     {
