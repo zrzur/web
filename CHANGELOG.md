@@ -4,6 +4,8 @@
 
 ### Design polish
 
+* **Select messages:** no longer a button in the desktop channel header; it is in the header's More menu (as on phones) and in a message's menu, with a check-box icon instead of the list icon.
+
 * **Stage:** someone who may manage the stage takes the floor with Speak; the "Ask to speak" button is only for listeners.
 
 * **Timestamps:** `<t:SECONDS:FORMAT>` in a message shows the moment in the reader's time zone and language with all seven letters (`t` `T` `d` `D` `f` `F` `R`, default `f`); the tooltip gives the full date in words, relative times share one 30 s clock, numbers that are not a real date stay as text, and reply previews render them too.

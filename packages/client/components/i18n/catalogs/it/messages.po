@@ -17273,8 +17273,8 @@ msgid "Select messages"
 msgstr ""
 
 #: src/interface/channels/ChannelHeader.tsx
-msgid "Select messages to delete them together"
-msgstr ""
+#~ msgid "Select messages to delete them together"
+#~ msgstr ""
 
 #: components/app/interface/settings/user/profile/StyleEditors.tsx
 msgid "Selected"

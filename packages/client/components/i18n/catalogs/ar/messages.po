@@ -18024,8 +18024,8 @@ msgid "Select messages"
 msgstr "تحديد الرسائل"
 
 #: src/interface/channels/ChannelHeader.tsx
-msgid "Select messages to delete them together"
-msgstr "حدّد رسائل لحذفها معًا"
+#~ msgid "Select messages to delete them together"
+#~ msgstr "حدّد رسائل لحذفها معًا"
 
 #: components/app/interface/settings/user/profile/StyleEditors.tsx
 msgid "Selected"

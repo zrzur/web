@@ -25,7 +25,7 @@ export function SelectMessagesMenuItem(props: { message?: Message }) {
   return (
     <Show when={canSelect()}>
       <ContextMenuButton
-        icon={<Icon name="list-checks" size={18} />}
+        icon={<Icon name="check-square" size={18} />}
         onClick={() =>
           startSelection(props.message!.channelId, props.message!.id)
         }

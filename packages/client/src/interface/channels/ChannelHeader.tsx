@@ -1,4 +1,4 @@
-import { Accessor, Match, Setter, Show, Switch } from "solid-js";
+﻿import { Accessor, Match, Setter, Show, Switch } from "solid-js";
 
 import { Trans, useLingui } from "@lingui/solid/macro";
 import { Channel } from "@zrzur/sdk/solid";
@@ -209,7 +209,7 @@ export function ChannelHeader(props: Props) {
                   >
                     <TextWithEmoji content={parent().name!} />
                   </ParentLink>
-                  <Separator aria-hidden="true">›</Separator>
+                  <Separator aria-hidden="true">â€º</Separator>
                 </>
               )}
             </Show>
@@ -428,25 +428,6 @@ export function ChannelHeader(props: Props) {
           </IconButton>
         </Show>
 
-        <Show when={!phone() && canSelectMessages()}>
-          <IconButton
-            variant="toolbar"
-            size="xs"
-            aria-pressed={isSelecting(props.channel.id)}
-            aria-label={t`Select messages`}
-            data-testid="select-messages"
-            use:floating={{
-              tooltip: {
-                placement: "bottom",
-                content: t`Select messages to delete them together`,
-              },
-            }}
-            onPress={toggleSelecting}
-          >
-            <Icon name="list-checks" size={20} />
-          </IconButton>
-        </Show>
-
         <Show when={!phone() && canListThreads()}>
           <IconButton
             variant="toolbar"
@@ -583,9 +564,14 @@ export function ChannelHeader(props: Props) {
           </Show>
         </Show>
 
-        {/* phones: the less-used actions share one "More" sheet, so the
-            channel name keeps the room it needs */}
-        <Show when={phone() && !phoneSearch() && hasMoreActions()}>
+        {/* the less-used actions share one "More" menu: on phones all of
+            them, so the channel name keeps the room it needs; on desktop
+            only selecting messages, a moderator tool that is rarely needed */}
+        <Show
+          when={
+            phone() ? !phoneSearch() && hasMoreActions() : canSelectMessages()
+          }
+        >
           <div
             style={{ display: "contents" }}
             use:floating={{
@@ -593,15 +579,16 @@ export function ChannelHeader(props: Props) {
                 <ContextMenu>
                   <Show when={canSelectMessages()}>
                     <ContextMenuButton
-                      icon={<Icon name="list-checks" size={20} />}
+                      icon={<Icon name="check-square" size={20} />}
                       onClick={toggleSelecting}
+                      data-testid="select-messages"
                     >
                       {isSelecting(props.channel.id)
                         ? t`Stop selecting messages`
                         : t`Select messages`}
                     </ContextMenuButton>
                   </Show>
-                  <Show when={canOpenSettings()}>
+                  <Show when={phone() && canOpenSettings()}>
                     <ContextMenuButton
                       icon={<Icon name="gear-six" size={20} />}
                       onClick={() =>
@@ -615,7 +602,7 @@ export function ChannelHeader(props: Props) {
                       {t`Channel settings`}
                     </ContextMenuButton>
                   </Show>
-                  <Show when={canListThreads()}>
+                  <Show when={phone() && canListThreads()}>
                     <ContextMenuButton
                       icon={<Icon name="chat-circle" size={20} />}
                       onClick={() =>
@@ -625,7 +612,7 @@ export function ChannelHeader(props: Props) {
                       {t`Threads`}
                     </ContextMenuButton>
                   </Show>
-                  <Show when={props.sidebarState}>
+                  <Show when={phone() && props.sidebarState}>
                     <ContextMenuButton
                       icon={<Icon name="push-pin" size={20} />}
                       onClick={() => props.setSidebarState!({ state: "pins" })}
@@ -633,7 +620,7 @@ export function ChannelHeader(props: Props) {
                       {t`Pinned messages`}
                     </ContextMenuButton>
                   </Show>
-                  <Show when={props.channel.type === "Group"}>
+                  <Show when={phone() && props.channel.type === "Group"}>
                     <ContextMenuButton
                       icon={<Icon name="user-plus" size={20} />}
                       onClick={() =>
@@ -647,7 +634,9 @@ export function ChannelHeader(props: Props) {
                       {t`Add friends to group`}
                     </ContextMenuButton>
                   </Show>
-                  <Show when={props.channel.thread && canManageThread()}>
+                  <Show
+                    when={phone() && props.channel.thread && canManageThread()}
+                  >
                     <ContextMenuButton
                       icon={<Icon name="archive" size={20} />}
                       onClick={() =>
@@ -665,6 +654,7 @@ export function ChannelHeader(props: Props) {
                   </Show>
                   <Show
                     when={
+                      phone() &&
                       props.channel.thread &&
                       props.channel.havePermission("ManageMessages")
                     }
