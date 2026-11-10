@@ -10591,6 +10591,7 @@ msgstr ""
 #: src/interface/channels/forum/ForumChannel.tsx
 #: src/interface/channels/text/ThreadsPanel.tsx
 #: src/interface/Designs.tsx
+#: src/interface/designs/ShowMore.tsx
 #: src/interface/Developers.tsx
 #: src/interface/developers/docs/DocsPortal.tsx
 #: src/interface/Discover.tsx
@@ -17759,6 +17760,7 @@ msgstr ""
 #: components/ui/components/features/messaging/elements/TextEmbed.tsx
 #: components/ui/components/features/profiles/ProfileBio.tsx
 #: components/ui/components/features/profiles/ProfileTiles.tsx
+#: src/interface/designs/ShowMore.tsx
 #: src/interface/events/EventCard.tsx
 msgid "Show more"
 msgstr ""
@@ -19405,6 +19407,10 @@ msgstr ""
 
 #: components/app/interface/settings/user/profile/CreatorStudio.tsx
 msgid "That WebM is too big. The limit is 8 MB."
+msgstr ""
+
+#: src/interface/designs/ShowMore.tsx
+msgid "That's everything for now."
 msgstr ""
 
 #: components/app/interface/settings/server/audit/AuditLog.tsx

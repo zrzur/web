@@ -24,7 +24,6 @@ import {
 } from "@revolt/app/interface/settings/user/profile/communityApi";
 import { useClient } from "@revolt/client";
 import { useInstance } from "@revolt/instance";
-import { FlockDots } from "@revolt/ui/components/design/FlockDots";
 import {
   EffectStill,
   ProfileEffect,
@@ -66,14 +65,13 @@ import {
   useCast,
   useWearer,
 } from "./Scenes";
+import { ShowMore, usePaged } from "./ShowMore";
 import { useTryOn } from "./TryOn";
 import {
   type TileKind,
   type WallFilter,
   type Wear,
-  PAGE_TILES,
   isGiantFrame,
-  needsMore,
   watchMotion,
   weave,
 } from "./gallery";
@@ -299,8 +297,8 @@ export function useBuiltInTiles() {
 }
 
 /**
- * The wall. It shows a page of tiles and grows as you scroll, so six designs
- * and six hundred read the same way. Shapes change with the kind and the
+ * The wall. It shows a page of tiles and "Show more" adds the next, so six
+ * designs and six hundred read the same way and scrolling stays light. Shapes change with the kind and the
  * scale jumps: a frame the size of a poster. A nameplate keeps its real shape.
  */
 export function Wall(props: {
@@ -314,45 +312,17 @@ export function Wall(props: {
   onMood?: (mood: string) => void;
   onMaker?: (id: string) => void;
 }) {
-  const [visible, setVisible] = createSignal(PAGE_TILES);
-  const shown = createMemo(() => props.tiles.slice(0, visible()));
-  createEffect(
-    on(
-      () => props.tiles.length,
-      (length, before) => {
-        if (before !== undefined && length < before) setVisible(PAGE_TILES);
-      },
-    ),
-  );
-
-  let sentinel: HTMLDivElement | undefined;
-  createEffect(() => {
-    const el = sentinel;
-    if (!el || !("IntersectionObserver" in window)) return;
-    const seen = new IntersectionObserver(
-      (entries) => {
-        if (!entries[0].isIntersecting) return;
-        setVisible((count) => count + PAGE_TILES / 2);
-        if (
-          needsMore(
-            visible(),
-            props.tiles.length,
-            !!props.more,
-            !!props.loading,
-          )
-        )
-          props.onMore?.();
-      },
-      { rootMargin: "600px" },
-    );
-    seen.observe(el);
-    onCleanup(() => seen.disconnect());
+  const paged = usePaged(() => props.tiles, {
+    key: (tile) => tile.key,
+    more: () => !!props.more,
+    loading: () => !!props.loading,
+    onMore: () => props.onMore?.(),
   });
 
   return (
     <>
       <Grid>
-        <For each={shown()}>
+        <For each={paged.shown()}>
           {(tile) => (
             <Switch>
               <Match when={tile.kind === "paint"}>
@@ -375,11 +345,7 @@ export function Wall(props: {
           )}
         </For>
       </Grid>
-      <Sentinel ref={sentinel} aria-live="polite">
-        <Show when={props.loading}>
-          <FlockDots moving />
-        </Show>
-      </Sentinel>
+      <ShowMore state={paged.state()} onMore={paged.next} />
     </>
   );
 }
@@ -543,6 +509,7 @@ function DesignTile(props: {
                       )}
                       alt=""
                       loading="lazy"
+                      decoding="async"
                       referrerpolicy="no-referrer"
                       draggable={false}
                     />
@@ -1236,15 +1203,6 @@ const Deck = styled("button", {
       lineHeight: "20px",
       color: "var(--z-fg-secondary)",
     },
-  },
-});
-
-const Sentinel = styled("div", {
-  base: {
-    display: "grid",
-    placeItems: "center",
-    minHeight: "32px",
-    color: "var(--z-fg-muted)",
   },
 });
 

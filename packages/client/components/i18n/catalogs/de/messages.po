@@ -11039,6 +11039,7 @@ msgstr "Beim Laden wird eine Verbindung zu {0} hergestellt. Dabei erhält {0} de
 #: src/interface/channels/forum/ForumChannel.tsx
 #: src/interface/channels/text/ThreadsPanel.tsx
 #: src/interface/Designs.tsx
+#: src/interface/designs/ShowMore.tsx
 #: src/interface/Developers.tsx
 #: src/interface/developers/docs/DocsPortal.tsx
 #: src/interface/Discover.tsx
@@ -18588,6 +18589,7 @@ msgstr "Mitglieder getrennt anzeigen"
 #: components/ui/components/features/messaging/elements/TextEmbed.tsx
 #: components/ui/components/features/profiles/ProfileBio.tsx
 #: components/ui/components/features/profiles/ProfileTiles.tsx
+#: src/interface/designs/ShowMore.tsx
 #: src/interface/events/EventCard.tsx
 msgid "Show more"
 msgstr "Mehr anzeigen"
@@ -20278,6 +20280,10 @@ msgstr "Diese WebM-Datei konnte nicht rechtzeitig in ein Bild umgewandelt werden
 #: components/app/interface/settings/user/profile/CreatorStudio.tsx
 msgid "That WebM is too big. The limit is 8 MB."
 msgstr "Diese WebM-Datei ist zu groß. Die Grenze liegt bei 8 MB."
+
+#: src/interface/designs/ShowMore.tsx
+msgid "That's everything for now."
+msgstr "Das ist vorerst alles."
 
 #: components/app/interface/settings/user/profile/ProfileExtras.tsx
 #~ msgid "That's the limit of {MAX_INTERESTS}."

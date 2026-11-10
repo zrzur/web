@@ -287,7 +287,16 @@ export function DecorationArt(props: {
         size={props.size}
         src={props.avatar ?? sampleAvatarFor(props.name)}
       />
-      <img class="z-deco-art" src={props.url} alt="" draggable={false} />
+      <img
+        class="z-deco-art"
+        src={props.url}
+        alt=""
+        draggable={false}
+        loading="lazy"
+        decoding="async"
+        width={Math.round(props.size * 1.5)}
+        height={Math.round(props.size * 1.5)}
+      />
     </span>
   );
 }

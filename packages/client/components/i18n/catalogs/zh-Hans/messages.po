@@ -10579,6 +10579,7 @@ msgstr "加载此内容会连接到 {0}。它们会获取你的 IP 地址，并�
 #: src/interface/channels/forum/ForumChannel.tsx
 #: src/interface/channels/text/ThreadsPanel.tsx
 #: src/interface/Designs.tsx
+#: src/interface/designs/ShowMore.tsx
 #: src/interface/Developers.tsx
 #: src/interface/developers/docs/DocsPortal.tsx
 #: src/interface/Discover.tsx
@@ -17747,6 +17748,7 @@ msgstr "单独显示成员"
 #: components/ui/components/features/messaging/elements/TextEmbed.tsx
 #: components/ui/components/features/profiles/ProfileBio.tsx
 #: components/ui/components/features/profiles/ProfileTiles.tsx
+#: src/interface/designs/ShowMore.tsx
 #: src/interface/events/EventCard.tsx
 msgid "Show more"
 msgstr "显示更多"
@@ -19394,6 +19396,10 @@ msgstr "该 WebM 未能及时转换为图片。请尝试更短的文件，或稍
 #: components/app/interface/settings/user/profile/CreatorStudio.tsx
 msgid "That WebM is too big. The limit is 8 MB."
 msgstr "该 WebM 太大。上限为 8 MB。"
+
+#: src/interface/designs/ShowMore.tsx
+msgid "That's everything for now."
+msgstr "目前就这些。"
 
 #: components/app/interface/settings/server/audit/AuditLog.tsx
 msgid "The audit log couldn't be loaded"

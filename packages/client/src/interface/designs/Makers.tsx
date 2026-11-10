@@ -29,6 +29,7 @@ import { DECORATIONS } from "@revolt/ui/components/features/profiles/userStyle";
 import { Icon } from "@revolt/ui/icons/Icon";
 
 import { MemberRow, WornAvatar, useCast } from "./Scenes";
+import { ShowMore, usePaged } from "./ShowMore";
 import { Wall, useCommunity, useCommunityTiles, wearOf } from "./Wall";
 import type { Wear } from "./gallery";
 import { Notice } from "./parts";
@@ -128,6 +129,16 @@ export function CreatorsScene(props: {
     ),
   );
 
+  // a nest holds up to six worn designs: twelve nests are about two screens
+  const paged = usePaged(() => ranked(), {
+    // ranks move as pages arrive: only a shorter list starts again
+    key: () => "creators",
+    more: community.more,
+    loading: community.loading,
+    onMore: community.next,
+    page: 12,
+  });
+
   const face = (entry: RankedCreator) => {
     const frame = entry.shelf.find((item) => item.kind === "Decoration");
     return (
@@ -167,7 +178,7 @@ export function CreatorsScene(props: {
         </p>
       </Head>
       <Nests>
-        <For each={ranked()}>
+        <For each={paged.shown()}>
           {(entry, i) => (
             <Nest
               first={i() === 0}
@@ -222,6 +233,7 @@ export function CreatorsScene(props: {
           />
         </Show>
       </Nests>
+      <ShowMore state={paged.state()} onMore={paged.next} />
       <Show when={community.failed()}>
         <Notice
           role="alert"

@@ -111,19 +111,45 @@ export function watchMotion(el: Element) {
   return () => motion?.unobserve(el);
 }
 
-/** How many tiles are in the page; more arrive near the end */
-export const PAGE_TILES = 30;
+/**
+ * How many tiles a page shows: about two screens of the wall. The next page
+ * comes only when asked for with "Show more", so a long list never grows
+ * under the reader while they scroll.
+ */
+export const PAGE_TILES = 24;
 
 /**
- * Fetch the next page of community designs when the visible part of the
- * wall gets close to its end
+ * Fetch the next page of community designs once the page after this one
+ * would not be full, so the press after next finds it already here
  */
 export const needsMore = (
   visible: number,
   total: number,
   more: boolean,
   loading: boolean,
-) => more && !loading && visible >= total - 6;
+  page = PAGE_TILES,
+) => more && !loading && visible + page > total;
+
+/**
+ * What the foot of a paged list shows: the button, the button waiting for
+ * the server, a plain end line after a list longer than a page, or nothing
+ */
+export type MoreState = "more" | "loading" | "end" | "none";
+
+export function moreState(
+  visible: number,
+  total: number,
+  more: boolean,
+  loading: boolean,
+  page = PAGE_TILES,
+): MoreState {
+  // before the first page arrives the list shows its own placeholders
+  if (total === 0) return "none";
+  if (visible < total) return "more";
+  if (loading) return "loading";
+  if (more) return "more";
+  return total > page ? "end" : "none";
+}
 
 /** What a tile puts on you */
 export type Wear = Partial<UserStyle>;

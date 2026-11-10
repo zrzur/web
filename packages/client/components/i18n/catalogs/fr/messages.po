@@ -10579,6 +10579,7 @@ msgstr "Ce chargement se connecte à {0}. Cette société obtient ton adresse IP
 #: src/interface/channels/forum/ForumChannel.tsx
 #: src/interface/channels/text/ThreadsPanel.tsx
 #: src/interface/Designs.tsx
+#: src/interface/designs/ShowMore.tsx
 #: src/interface/Developers.tsx
 #: src/interface/developers/docs/DocsPortal.tsx
 #: src/interface/Discover.tsx
@@ -17747,6 +17748,7 @@ msgstr "Afficher les membres séparément"
 #: components/ui/components/features/messaging/elements/TextEmbed.tsx
 #: components/ui/components/features/profiles/ProfileBio.tsx
 #: components/ui/components/features/profiles/ProfileTiles.tsx
+#: src/interface/designs/ShowMore.tsx
 #: src/interface/events/EventCard.tsx
 msgid "Show more"
 msgstr "Afficher plus"
@@ -19394,6 +19396,10 @@ msgstr "Ce WebM n’a pas pu être converti en image à temps. Essaie-en un plus
 #: components/app/interface/settings/user/profile/CreatorStudio.tsx
 msgid "That WebM is too big. The limit is 8 MB."
 msgstr "Ce WebM est trop volumineux. La limite est de 8 Mo."
+
+#: src/interface/designs/ShowMore.tsx
+msgid "That's everything for now."
+msgstr "C'est tout pour le moment."
 
 #: components/app/interface/settings/server/audit/AuditLog.tsx
 msgid "The audit log couldn't be loaded"

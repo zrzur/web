@@ -11039,6 +11039,7 @@ msgstr "يؤدي التحميل إلى الاتصال بـ {0}. يتلقّى {0}
 #: src/interface/channels/forum/ForumChannel.tsx
 #: src/interface/channels/text/ThreadsPanel.tsx
 #: src/interface/Designs.tsx
+#: src/interface/designs/ShowMore.tsx
 #: src/interface/Developers.tsx
 #: src/interface/developers/docs/DocsPortal.tsx
 #: src/interface/Discover.tsx
@@ -18588,6 +18589,7 @@ msgstr "إظهار الأعضاء بشكل منفصل"
 #: components/ui/components/features/messaging/elements/TextEmbed.tsx
 #: components/ui/components/features/profiles/ProfileBio.tsx
 #: components/ui/components/features/profiles/ProfileTiles.tsx
+#: src/interface/designs/ShowMore.tsx
 #: src/interface/events/EventCard.tsx
 msgid "Show more"
 msgstr "عرض المزيد"
@@ -20278,6 +20280,10 @@ msgstr "تعذّر تحويل ملف WebM هذا إلى صورة في الوقت
 #: components/app/interface/settings/user/profile/CreatorStudio.tsx
 msgid "That WebM is too big. The limit is 8 MB."
 msgstr "ملف WebM هذا كبير جدًا. الحد الأقصى 8 ميغابايت."
+
+#: src/interface/designs/ShowMore.tsx
+msgid "That's everything for now."
+msgstr "هذا كل ما لدينا الآن."
 
 #: components/app/interface/settings/user/profile/ProfileExtras.tsx
 #~ msgid "That's the limit of {MAX_INTERESTS}."
