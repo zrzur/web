@@ -380,7 +380,7 @@ export function ShortcutRow(props: {
     const read = readCombo(event, mac);
     if (read === "wait") return;
     if (read === "cancel") return stop();
-    const check = checkCombo(props.id, read, state.keybinds.table(mac), mac, {
+    const check = checkCombo(props.id, read, state.keybinds.table(), mac, {
       pttKey: state.voice.pttKey,
       typesSlash: event.key === "/",
     });
@@ -504,7 +504,7 @@ export function ShortcutRow(props: {
 
   // synced from a device where they differed: on this one two shortcuts
   // have the same keys, and only one of them works
-  const conflict = () => state.keybinds.table(mac).conflicts.get(props.id);
+  const conflict = () => state.keybinds.table().conflicts.get(props.id);
 
   return (
     <SettingsRow
@@ -535,7 +535,7 @@ export function ShortcutRow(props: {
       }
       control={() => (
         <span style={CONTROLS}>
-          <Show when={state.keybinds.table(mac).custom.has(props.id)}>
+          <Show when={state.keybinds.table().custom.has(props.id)}>
             <IconButton
               variant="toolbar"
               size="xs"
@@ -561,7 +561,7 @@ export function ShortcutRow(props: {
             aria-label={
               phase().kind === "recording"
                 ? t`Press the new keys for ${props.name()}. Esc cancels.`
-                : t`Change the keys for ${props.name()}: ${label(state.keybinds.combo(props.id))}`
+                : t`Change the keys for ${props.name()}: ${label(state.keybinds.table().byId[props.id])}`
             }
             onClick={record}
             onBlur={() => phase().kind === "recording" && stop()}
@@ -572,7 +572,7 @@ export function ShortcutRow(props: {
             >
               <Keys
                 keys={comboLabel(
-                  comboKeys(state.keybinds.combo(props.id)),
+                  comboKeys(state.keybinds.table().byId[props.id]),
                   mac,
                 )}
               />

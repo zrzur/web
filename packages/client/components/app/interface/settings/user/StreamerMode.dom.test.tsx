@@ -31,7 +31,9 @@ const state = createMutable({
     },
   },
   keybinds: {
-    combo: () => ({ code: "KeyL", mod: true, shift: true }),
+    table: () => ({
+      byId: { toggle_streamer: { code: "KeyL", mod: true, shift: true } },
+    }),
   },
 });
 vi.mock("@revolt/state", () => ({ useState: () => state }));

@@ -234,11 +234,22 @@ function withoutDefaults(custom: CustomCombos): CustomCombos {
   return out;
 }
 
+/** The person's own combinations, as compiled for this system */
+function customOf(store: Keybinds): CustomCombos {
+  const table = store.table();
+  const out: CustomCombos = {};
+  for (const id of table.custom) out[id] = table.byId[id];
+  return out;
+}
+
+/** Replace the whole set of changes (the store's own write, synced) */
+function save(store: Keybinds, custom: CustomCombos, pttKey = store.pttKey) {
+  store.setFromSync({ custom, pttKey });
+}
+
 /** Give a shortcut a new combination */
 export function setCombo(store: Keybinds, id: ShortcutId, combo: Combo) {
-  store.replaceCustom(
-    withoutDefaults({ ...cleanCustom(store.custom, deviceMac()), [id]: combo }),
-  );
+  save(store, withoutDefaults({ ...customOf(store), [id]: combo }));
 }
 
 /**
@@ -251,38 +262,29 @@ export function swapShortcuts(
   other: ShortcutId,
   combo: Combo,
 ) {
-  store.replaceCustom(
+  save(
+    store,
     withoutDefaults(
-      swapCombos(
-        cleanCustom(store.custom, deviceMac()),
-        id,
-        other,
-        combo,
-        store.table(),
-      ),
+      swapCombos(customOf(store), id, other, combo, store.table()),
     ),
   );
 }
 
 /** One shortcut back to its default */
 export function resetShortcut(store: Keybinds, id: ShortcutId) {
-  const next = { ...cleanCustom(store.custom, deviceMac()) };
+  const next = customOf(store);
   delete next[id];
-  store.replaceCustom(next);
+  save(store, next);
 }
 
 /** Every shortcut, and the push-to-talk key, back to the defaults */
 export function resetAllShortcuts(store: Keybinds) {
-  store.replaceCustom({});
-  store.pttKey = "Backquote";
+  save(store, {}, "Backquote");
 }
 
 /** Whether anything differs from the defaults */
 export function shortcutsChanged(store: Keybinds, pttKey: string): boolean {
-  return (
-    Object.keys(cleanCustom(store.custom, deviceMac())).length > 0 ||
-    pttKey !== "Backquote"
-  );
+  return store.table().custom.size > 0 || pttKey !== "Backquote";
 }
 
 /**

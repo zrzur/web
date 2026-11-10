@@ -9,13 +9,18 @@ import {
   type CustomCombos,
   type Keymap,
   type ShortcutId,
+  DEFAULTS,
   MODIFIER_CODE,
   REMAPPABLE,
   defaultCombo,
-  isShortcutId,
   keyOf,
   normalize,
 } from "./keymap";
+
+/** Whether this is a shortcut id this version knows */
+export function isShortcutId(id: string): id is ShortcutId {
+  return Object.prototype.hasOwnProperty.call(DEFAULTS, id);
+}
 
 /** Whether data from storage or sync is a usable combination */
 export function validCombo(value: unknown): value is Combo {

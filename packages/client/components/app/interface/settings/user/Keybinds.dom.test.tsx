@@ -45,7 +45,11 @@ vi.mock("../Settings", () => ({
 
 import { Keybinds } from "@revolt/state/stores/Keybinds";
 
-import { shortcutFor, unbindKeymap } from "../../../../keybinds/active";
+import {
+  bindKeymap,
+  defaultKeymap,
+  shortcutFor,
+} from "../../../../keybinds/active";
 
 function fakeState() {
   const [store, setStore] = createStore<Record<string, unknown>>({
@@ -108,7 +112,7 @@ beforeEach(() => {
 });
 afterEach(() => {
   dispose?.();
-  unbindKeymap();
+  bindKeymap(defaultKeymap);
 });
 
 describe("changing a shortcut on the Ctrl+/ screen", () => {
@@ -276,9 +280,11 @@ describe("changing a shortcut on the Ctrl+/ screen", () => {
   });
 
   it("flags synced shortcuts that share keys on this device (review S2)", () => {
-    state.keybinds.replaceCustom({
-      toggle_mute: { code: "KeyJ", ctrl: true, shift: true },
-      toggle_deafen: { code: "KeyJ", mod: true, shift: true },
+    state.keybinds.setFromSync({
+      custom: {
+        toggle_mute: { code: "KeyJ", ctrl: true, shift: true },
+        toggle_deafen: { code: "KeyJ", mod: true, shift: true },
+      },
     });
     mount();
     const flags = [

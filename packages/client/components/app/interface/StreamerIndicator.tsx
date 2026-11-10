@@ -4,7 +4,6 @@ import { Trans, useLingui } from "@lingui/solid/macro";
 import { css } from "styled-system/css";
 
 import { useState } from "@revolt/state";
-import { setStreamerMode } from "@revolt/state/streamer";
 import { Icon } from "@revolt/ui/icons/Icon";
 
 /**
@@ -25,7 +24,7 @@ export default function StreamerIndicator() {
         data-testid="streamer-indicator"
         title={t`Streamer mode is on. Press to turn it off.`}
         aria-label={t`Streamer mode is on. Press to turn it off.`}
-        onClick={() => setStreamerMode(state, false)}
+        onClick={() => (state.settings.streamerMode = false)}
       >
         <Icon name="eye-slash" size={16} />
         <span>

@@ -2,10 +2,12 @@ import {
   createEffect,
   createSignal,
   JSX,
+  lazy,
   Match,
   on,
   onCleanup,
   Show,
+  Suspense,
   Switch,
 } from "solid-js";
 
@@ -39,6 +41,10 @@ const UNREADS_WAIT = 800;
 /**
  * Application layout
  */
+const StreamerIndicator = lazy(
+  () => import("@revolt/app/interface/StreamerIndicator"),
+);
+
 const Interface = (props: { children?: JSX.Element }) => {
   const state = useState();
   const client = useClient();
@@ -203,6 +209,13 @@ const Interface = (props: { children?: JSX.Element }) => {
         </Switch>
 
         <NotificationsWorker />
+        {/* the small "Streamer mode" sign at the top, loaded the first time
+            the mode is on */}
+        <Show when={state.settings.streamerMode}>
+          <Suspense>
+            <StreamerIndicator />
+          </Suspense>
+        </Show>
         {/* plugins load lazily, for a signed-in user, if the server has them on */}
         <Show when={isLoggedIn()}>
           <ChangeRequestNotice />

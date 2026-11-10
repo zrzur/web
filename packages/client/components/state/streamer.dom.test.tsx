@@ -1,7 +1,7 @@
 import { describe, expect, it } from "vitest";
 
-import { followScreenShare, setStreamerMode } from "./stores/Settings";
-import { shareWithStreamerMode } from "./streamerShare";
+import { followScreenShare, shareWithStreamerMode } from "../rtc/streamerShare";
+import type { Settings } from "./stores/Settings";
 
 function fakeState(onShare = false) {
   const values: Record<string, unknown> = {
@@ -14,13 +14,14 @@ function fakeState(onShare = false) {
       return !!values["privacy:streamer_mode"];
     },
     set streamerMode(on: boolean) {
+      values["privacy:streamer_by_share"] = false;
       values["privacy:streamer_mode"] = on;
     },
     get streamerByShare() {
       return !!values["privacy:streamer_by_share"];
     },
   };
-  return { settings } as unknown as Parameters<typeof setStreamerMode>[0] & {
+  return { settings } as unknown as { settings: Settings } & {
     settings: typeof settings;
   };
 }
@@ -42,7 +43,7 @@ describe("streamer mode and screen sharing", () => {
 
   it("leaves a mode the person turned on alone when the share ends", () => {
     const state = fakeState(true);
-    setStreamerMode(state, true);
+    state.settings.streamerMode = true;
     followScreenShare(state, true);
     followScreenShare(state, false);
     expect(state.settings.streamerMode).toBe(true);
@@ -52,8 +53,8 @@ describe("streamer mode and screen sharing", () => {
     const state = fakeState(true);
     followScreenShare(state, true);
     // turned off and on again by hand while sharing
-    setStreamerMode(state, false);
-    setStreamerMode(state, true);
+    state.settings.streamerMode = false;
+    state.settings.streamerMode = true;
     followScreenShare(state, false);
     expect(state.settings.streamerMode).toBe(true);
   });
@@ -104,7 +105,7 @@ describe("streamer mode around the capture (review S3)", () => {
 
   it("a mode the person turned on stays on after a reload", () => {
     const state = fakeState(true);
-    setStreamerMode(state, true);
+    state.settings.streamerMode = true;
     followScreenShare(state.settings as never, false);
     expect(state.settings.streamerMode).toBe(true);
   });

@@ -24,10 +24,6 @@ const keybindContext = createContext<KeybindContext>(null! as KeybindContext);
 /** Shortcut ids that are actions of this context (the others have their own listeners) */
 const CONTEXT_ACTIONS = new Set<string>(Object.values(KeybindAction));
 
-const PRIORITY = new Map(
-  ACTION_PRIORITY.map((action, index) => [action, index]),
-);
-
 /**
  * The actions a key press can mean, before filtering. One table lookup for
  * the changeable shortcuts, plus the fixed Escape actions and "start typing".
@@ -45,7 +41,7 @@ export function candidateActions(
   if (event.key?.length === 1 && event.key !== " ")
     out.push(KeybindAction.CHAT_FOCUS_COMPOSITION);
   return out.length > 1
-    ? out.sort((a, b) => PRIORITY.get(a)! - PRIORITY.get(b)!)
+    ? ACTION_PRIORITY.filter((action) => out.includes(action))
     : out;
 }
 

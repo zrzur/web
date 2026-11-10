@@ -161,7 +161,7 @@ export class Settings extends AbstractStore<"settings", TypeSettings> {
    */
   hydrate(): void {
     // a mode the last screen share turned on does not outlive the page
-    followScreenShare(this, false);
+    if (this.getValue(BY_SHARE)) this.streamerMode = false;
   }
 
   /**
@@ -251,7 +251,9 @@ export class Settings extends AbstractStore<"settings", TypeSettings> {
     return !!this.get()["privacy:streamer_mode"];
   }
 
+  /** Turned on or off by hand (switch, shortcut, sign): a share that ends later leaves it */
   set streamerMode(on: boolean) {
+    this.setValue(BY_SHARE, false);
     this.setValue("privacy:streamer_mode", on);
   }
 
@@ -305,36 +307,4 @@ export class Settings extends AbstractStore<"settings", TypeSettings> {
 // place reads the one setting `state.settings.streamerMode`; nothing is
 // recomputed for whole lists. Kept small here (first download).
 
-const BY_SHARE = "privacy:streamer_by_share";
-
-/**
- * Turn streamer mode on or off by hand (the switch, the shortcut, the
- * sign). A share that ends later leaves this choice alone.
- */
-export function setStreamerMode(state: { settings: Settings }, on: boolean) {
-  state.settings.setValue(BY_SHARE, false);
-  state.settings.streamerMode = on;
-}
-
-/**
- * A screen share starts (before the capture), or ended or the page
- * loaded. "Turned on by a share" is stored, so it never outlives the share.
- */
-export function followScreenShare(
-  state: { settings: Settings } | Settings,
-  sharing: boolean,
-) {
-  const settings = "settings" in state ? state.settings : state;
-  if (sharing) {
-    if (
-      settings.getValue("privacy:streamer_on_share") &&
-      !settings.streamerMode
-    ) {
-      settings.setValue(BY_SHARE, true);
-      settings.streamerMode = true;
-    }
-  } else if (settings.getValue(BY_SHARE)) {
-    settings.setValue(BY_SHARE, false);
-    settings.streamerMode = false;
-  }
-}
+export const BY_SHARE = "privacy:streamer_by_share";

@@ -38,11 +38,6 @@ export function bindKeymap(next: (mac: boolean) => Keymap) {
   source = next;
 }
 
-/** Back to the defaults (tests) */
-export function unbindKeymap() {
-  source = defaultKeymap;
-}
-
 /** The table for this system */
 export function activeKeymap(mac: boolean = deviceMac()): Keymap {
   return source(mac);

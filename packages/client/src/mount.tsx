@@ -3,7 +3,7 @@
  * What the app and the Designs / Discover sites share: the contexts every
  * page runs in, the sign-in routes and the render call
  */
-import { JSX, Show, Suspense, lazy } from "solid-js";
+import { JSX, Suspense, lazy } from "solid-js";
 import { render } from "solid-js/web";
 
 import { Route, Router } from "@solidjs/router";
@@ -16,7 +16,7 @@ import { InstanceContext } from "@revolt/instance";
 import { KeybindContext } from "@revolt/keybinds";
 import { ModalContext, ModalRenderer } from "@revolt/modal";
 import { VoiceContext } from "@revolt/rtc";
-import { StateContext, SyncWorker, useState } from "@revolt/state";
+import { StateContext, SyncWorker } from "@revolt/state";
 import {
   FloatingManager,
   LoadTheme,
@@ -30,21 +30,6 @@ import { useLinkLanguage } from "./siteHost";
 const AndroidNag = lazy(() =>
   import("./AndroidNag").then((m) => ({ default: m.AndroidNag })),
 );
-
-// the streamer mode sign loads the first time the mode is on
-const StreamerIndicator = lazy(
-  () => import("@revolt/app/interface/StreamerIndicator"),
-);
-
-/** The small "Streamer mode" sign at the top, while the mode is on */
-function StreamerSign() {
-  const state = useState();
-  return (
-    <Show when={state.settings.streamerMode}>
-      <StreamerIndicator />
-    </Show>
-  );
-}
 
 // The sign-in pages load when opened; on a /login address index.tsx starts
 // them together with the rest of the first download
@@ -92,7 +77,6 @@ export function MountContext(props: { children?: JSX.Element }) {
                   <FloatingManager />
                   <Suspense>
                     <AndroidNag />
-                    <StreamerSign />
                   </Suspense>
                 </QueryClientProvider>
               </VoiceContext>

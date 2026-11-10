@@ -2,7 +2,7 @@ import { For, Show, createSignal } from "solid-js";
 import { render } from "solid-js/web";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 
-import { bindKeymap, unbindKeymap } from "./active";
+import { bindKeymap, defaultKeymap } from "./active";
 import { KeybindAction } from "./keybindActions";
 import {
   KeybindContext,
@@ -41,7 +41,7 @@ beforeEach(() => {
 });
 afterEach(() => {
   dispose?.();
-  unbindKeymap();
+  bindKeymap(defaultKeymap);
 });
 
 describe("KeybindContext", () => {

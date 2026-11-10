@@ -45,32 +45,30 @@ describe("Keybinds store", () => {
     });
     // the push-to-talk key is checked at once, combinations when compiled
     expect(raw.pttKey).toBe(undefined);
-    expect(state.keybinds.clean({ custom: [] as never }).custom).toEqual({});
+    expect(state.keybinds.clean({ custom: "broken" as never }).custom).toEqual(
+      {},
+    );
     state.keybinds.setFromSync(raw);
-    const table = state.keybinds.table(false);
+    const table = state.keybinds.table();
     expect([...table.custom]).toEqual(["toggle_mute"]);
     expect(table.byId.toggle_deafen).toEqual(ctrlShift("KeyD"));
   });
 
   it("compiles the table again when the shortcuts change, also from sync", () => {
     const state = fakeState();
-    const before = state.keybinds.table(false);
-    expect(state.keybinds.table(false)).toBe(before); // cached, not rebuilt
+    const before = state.keybinds.table();
+    expect(state.keybinds.table()).toBe(before); // cached, not rebuilt
     setCombo(state.keybinds, "toggle_mute", ctrlShift("KeyJ"));
-    expect(state.keybinds.table(false).byId.toggle_mute).toEqual(
-      ctrlShift("KeyJ"),
-    );
+    expect(state.keybinds.table().byId.toggle_mute).toEqual(ctrlShift("KeyJ"));
     state.keybinds.setFromSync({ custom: { toggle_mute: ctrlShift("KeyU") } });
-    expect(state.keybinds.table(false).byId.toggle_mute).toEqual(
-      ctrlShift("KeyU"),
-    );
+    expect(state.keybinds.table().byId.toggle_mute).toEqual(ctrlShift("KeyU"));
   });
 
   it("stores nothing for a shortcut set back to its default", () => {
     const state = fakeState();
     setCombo(state.keybinds, "toggle_mute", ctrlShift("KeyJ"));
     setCombo(state.keybinds, "toggle_mute", ctrlShift("KeyM"));
-    expect(state.keybinds.table(false).custom.has("toggle_mute")).toBe(false);
+    expect(state.keybinds.table().custom.has("toggle_mute")).toBe(false);
   });
 
   it("keeps the push-to-talk key with the synced shortcuts", () => {

@@ -4,7 +4,6 @@ import { deviceMac } from "@revolt/keybinds/active";
 import { comboLabel } from "@revolt/keybinds/keyLabels";
 import { comboKeys } from "@revolt/keybinds/keymapRules";
 import { useState } from "@revolt/state";
-import { setStreamerMode } from "@revolt/state/streamer";
 import { SettingsRow, SettingsSection, Toggle } from "@revolt/ui";
 import { Icon } from "@revolt/ui/icons/Icon";
 
@@ -20,7 +19,7 @@ export function StreamerModeSection() {
   const combo = () => {
     const mac = deviceMac();
     return comboLabel(
-      comboKeys(state.keybinds.combo("toggle_streamer")),
+      comboKeys(state.keybinds.table().byId["toggle_streamer"]),
       mac,
     ).join(mac ? "" : "+");
   };
@@ -44,11 +43,11 @@ export function StreamerModeSection() {
             shows while it is on.
           </Trans>
         }
-        onClick={() => setStreamerMode(state, !on())}
+        onClick={() => (state.settings.streamerMode = !on())}
         control={(ids) => (
           <Toggle
             checked={on()}
-            onChange={(next) => setStreamerMode(state, next)}
+            onChange={(next) => (state.settings.streamerMode = next)}
             aria-labelledby={ids.labelId}
             aria-describedby={ids.descriptionId}
           />

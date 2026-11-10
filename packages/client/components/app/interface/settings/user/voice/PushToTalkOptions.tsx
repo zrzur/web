@@ -7,11 +7,8 @@ import { globalPttCombo, keyLabel } from "@revolt/keybinds/keyLabels";
 import { readPttKey } from "@revolt/keybinds/keymapRules";
 import { isMac } from "@revolt/keybinds/shortcuts";
 import { useVoice } from "@revolt/rtc";
-import {
-  desktopPushToTalk,
-  globalTalkAllowed,
-  globalTalkBlock,
-} from "@revolt/rtc/desktopPushToTalk";
+import { desktopPushToTalk } from "@revolt/rtc/desktopPushToTalk";
+import { globalTalkAllowed, globalTalkBlock } from "@revolt/rtc/globalTalk";
 import { useState } from "@revolt/state";
 import {
   Button,

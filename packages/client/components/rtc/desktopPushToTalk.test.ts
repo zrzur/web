@@ -1,14 +1,11 @@
 import { afterEach, describe, expect, it, vi } from "vitest";
 
-import { bindKeymap, unbindKeymap } from "../keybinds/active";
+import { bindKeymap, defaultKeymap } from "../keybinds/active";
 import { globalPttCombo } from "../keybinds/keyLabels";
 import { compileKeymap } from "../keybinds/keymapCompile";
+import { globalTalkAllowed } from "./globalTalk";
 
-import {
-  desktopPushToTalk,
-  globalTalkAllowed,
-  latchPress,
-} from "./desktopPushToTalk";
+import { desktopPushToTalk, latchPress } from "./desktopPushToTalk";
 
 const win = globalThis as unknown as { window?: { native?: unknown } };
 
@@ -90,7 +87,7 @@ describe("keys that can talk from other apps", () => {
 });
 
 describe("talk from other apps and the app's own shortcuts", () => {
-  afterEach(() => unbindKeymap());
+  afterEach(() => bindKeymap(defaultKeymap));
 
   it("never takes a key whose Ctrl+Shift combination is a Zrzur shortcut", () => {
     // Ctrl+Shift+M mutes, D deafens, L is streamer mode, 8 a poll, 9 events

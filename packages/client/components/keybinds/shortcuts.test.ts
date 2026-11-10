@@ -204,7 +204,7 @@ describe("labels", () => {
 
 describe("app shortcuts and text fields (review B2)", () => {
   it("a shortcut without Ctrl or Alt leaves a text field alone", async () => {
-    const { bindKeymap, unbindKeymap, shortcutFor } = await import("./active");
+    const { bindKeymap, defaultKeymap, shortcutFor } = await import("./active");
     const { compileKeymap } = await import("./keymapCompile");
     bindKeymap((mac) =>
       compileKeymap({ toggle_streamer: { code: "F8" } }, mac),
@@ -223,19 +223,19 @@ describe("app shortcuts and text fields (review B2)", () => {
         false,
       ),
     ).toBe("toggle_mute");
-    unbindKeymap();
+    bindKeymap(defaultKeymap);
   });
 });
 
 describe("push-to-talk key and bare shortcut keys (review S6)", () => {
   it("refuses a key that is a shortcut on its own", async () => {
-    const { bindKeymap, unbindKeymap } = await import("./active");
+    const { bindKeymap, defaultKeymap } = await import("./active");
     const { compileKeymap } = await import("./keymapCompile");
     bindKeymap((mac) =>
       compileKeymap({ toggle_streamer: { code: "F8" } }, mac),
     );
     expect(readPttKey(key("F8"))).toBe("blocked");
     expect(readPttKey(key("F9"))).toEqual({ code: "F9" });
-    unbindKeymap();
+    bindKeymap(defaultKeymap);
   });
 });

@@ -42,7 +42,7 @@ export type CustomCombos = Partial<Record<ShortcutId, Combo>>;
  * the poll (it types "/" on German, Spanish and Nordic layouts); no browser
  * uses Ctrl+Shift+L, and plugins can't take it (RESERVED_KEYS).
  */
-const DEFAULTS: Record<ShortcutId, string> = {
+export const DEFAULTS: Record<ShortcutId, string> = {
   toggle_mute: "MS:KeyM",
   toggle_deafen: "MS:KeyD",
   create_poll: "MS:Digit8",
@@ -58,11 +58,6 @@ const DEFAULTS: Record<ShortcutId, string> = {
 
 /** Shortcuts that can be changed, in the order the shortcuts screen shows them */
 export const REMAPPABLE = Object.keys(DEFAULTS) as ShortcutId[];
-
-/** Whether this is a shortcut id this version knows */
-export function isShortcutId(id: string): id is ShortcutId {
-  return Object.prototype.hasOwnProperty.call(DEFAULTS, id);
-}
 
 /** A combination from its table key */
 function parse(key: string): Combo {

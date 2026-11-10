@@ -77,7 +77,7 @@ export function EventsLink(props: { server: Server }) {
           location.pathname.includes("/events") ? "page" : undefined
         }
         aria-keyshortcuts={ariaKeys(
-          state.keybinds.combo("open_events"),
+          state.keybinds.table().byId["open_events"],
           deviceMac(),
         )}
         data-testid="events-link"
