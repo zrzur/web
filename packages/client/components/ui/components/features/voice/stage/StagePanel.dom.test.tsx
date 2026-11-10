@@ -174,6 +174,16 @@ describe("stage panel, audience", () => {
 });
 
 describe("stage panel, moderator", () => {
+  it("takes the floor with Speak, not by raising a hand", async () => {
+    const { channel } = fakeChannel(true);
+    mount(channel);
+    expect(action("raise-hand")).toBeNull();
+    action("speak")!.click();
+    await flush();
+    expect(channel.inviteToSpeak).toHaveBeenCalledWith("@me");
+    expect(action("stop-speaking")).not.toBeNull();
+  });
+
   it("invites a raised hand to speak", async () => {
     const { channel, setStage } = fakeChannel(true);
     setStage({ speakers: ["host"], hands: ["asker"] });

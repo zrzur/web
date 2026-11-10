@@ -203,7 +203,8 @@ export default function StagePanel(props: { channel: Channel }) {
       </Show>
 
       <Actions>
-        <Show when={roles().mine === "audience"}>
+        {/* a moderator takes the floor with Speak: no hand to raise */}
+        <Show when={roles().mine === "audience" && !moderator()}>
           <Button
             size="sm"
             data-stage-action="raise-hand"

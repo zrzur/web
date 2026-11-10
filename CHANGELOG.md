@@ -4,6 +4,8 @@
 
 ### Design polish
 
+* **Stage:** someone who may manage the stage takes the floor with Speak; the "Ask to speak" button is only for listeners.
+
 * **Timestamps:** `<t:SECONDS:FORMAT>` in a message shows the moment in the reader's time zone and language with all seven letters (`t` `T` `d` `D` `f` `F` `R`, default `f`); the tooltip gives the full date in words, relative times share one 30 s clock, numbers that are not a real date stay as text, and reply previews render them too.
 
 * **Beta label:** with `VITE_RELEASE_CHANNEL=beta` (runtime, like `VITE_HOST`) a quiet "Beta" label sits under the logo at the top of the server list and in the settings version line; the Home tooltip says "Beta version: some things may still change." A container without the variable is a stable release; a local build without it is a beta.
