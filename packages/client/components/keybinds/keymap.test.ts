@@ -1,13 +1,8 @@
 import { describe, expect, it } from "vitest";
 
-import {
-  type Combo,
-  REMAPPABLE,
-  ariaKeys,
-  compileKeymap,
-  defaultCombo,
-  matchShortcut,
-} from "./keymap";
+import { ariaKeys } from "./keyLabels";
+import { type Combo, REMAPPABLE, defaultCombo, matchShortcut } from "./keymap";
+import { compileKeymap } from "./keymapCompile";
 import {
   checkCombo,
   comboKeys,

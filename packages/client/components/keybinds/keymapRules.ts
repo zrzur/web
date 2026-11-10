@@ -6,22 +6,23 @@
  */
 import type { Keybinds } from "../state/stores/Keybinds";
 
-import { deviceMac } from "./active";
+import { activeKeymap, deviceMac } from "./active";
+import { keyLabel } from "./keyLabels";
 import {
   type Combo,
   type CustomCombos,
   type KeyLike,
   type Keymap,
   type ShortcutId,
-  cleanCustom,
   defaultCombo,
   eventCombo,
   keyOf,
+  matchShortcut,
   MODIFIER_CODE,
   normalize,
-  unusable,
 } from "./keymap";
-import { keyLabel } from "./shortcuts";
+import { cleanCustom, unusable } from "./keymapCompile";
+import { pttKeyAllowed } from "./shortcuts";
 
 /** Whether two combinations are the same keys */
 export function sameCombo(a: Combo | undefined, b: Combo | undefined) {
@@ -235,7 +236,9 @@ function withoutDefaults(custom: CustomCombos): CustomCombos {
 
 /** Give a shortcut a new combination */
 export function setCombo(store: Keybinds, id: ShortcutId, combo: Combo) {
-  store.replaceCustom(withoutDefaults({ ...store.customCombos, [id]: combo }));
+  store.replaceCustom(
+    withoutDefaults({ ...cleanCustom(store.custom, deviceMac()), [id]: combo }),
+  );
 }
 
 /**
@@ -250,14 +253,20 @@ export function swapShortcuts(
 ) {
   store.replaceCustom(
     withoutDefaults(
-      swapCombos(store.customCombos, id, other, combo, store.table()),
+      swapCombos(
+        cleanCustom(store.custom, deviceMac()),
+        id,
+        other,
+        combo,
+        store.table(),
+      ),
     ),
   );
 }
 
 /** One shortcut back to its default */
 export function resetShortcut(store: Keybinds, id: ShortcutId) {
-  const next = { ...cleanCustom(store.customCombos, deviceMac()) };
+  const next = { ...cleanCustom(store.custom, deviceMac()) };
   delete next[id];
   store.replaceCustom(next);
 }
@@ -270,5 +279,37 @@ export function resetAllShortcuts(store: Keybinds) {
 
 /** Whether anything differs from the defaults */
 export function shortcutsChanged(store: Keybinds, pttKey: string): boolean {
-  return Object.keys(store.customCombos).length > 0 || pttKey !== "Backquote";
+  return (
+    Object.keys(cleanCustom(store.custom, deviceMac())).length > 0 ||
+    pttKey !== "Backquote"
+  );
+}
+
+/**
+ * While choosing a push-to-talk key: what this key press means
+ */
+export function readPttKey(
+  event: Pick<KeyboardEvent, "code">,
+): { code: string } | "cancel" | "blocked" | "wait" {
+  if (event.code === "Escape") return "cancel";
+  if (/^(Control|Meta|Shift|Alt|OS)(Left|Right)?$/.test(event.code))
+    return "wait";
+  if (!pttKeyAllowed(event.code)) return "blocked";
+  // a key that is a shortcut on its own (an F key) can't also be held to talk
+  const mac = deviceMac();
+  if (
+    matchShortcut(
+      activeKeymap(mac),
+      {
+        code: event.code,
+        ctrlKey: false,
+        metaKey: false,
+        shiftKey: false,
+        altKey: false,
+      },
+      mac,
+    )
+  )
+    return "blocked";
+  return { code: event.code };
 }

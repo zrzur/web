@@ -18,8 +18,18 @@ vi.mock("@revolt/i18n", () => ({
   useTime: () => () => ({ format: () => "1 January 2026" }),
 }));
 
+const values = createMutable<Record<string, unknown>>({});
 const state = createMutable({
-  settings: { streamerMode: false, streamerOnShare: false },
+  settings: {
+    getValue: (key: string) => values[key],
+    setValue: (key: string, value: unknown) => void (values[key] = value),
+    get streamerMode() {
+      return !!values["privacy:streamer_mode"];
+    },
+    set streamerMode(on: boolean) {
+      values["privacy:streamer_mode"] = on;
+    },
+  },
   keybinds: {
     combo: () => ({ code: "KeyL", mod: true, shift: true }),
   },
@@ -51,7 +61,7 @@ beforeEach(() => {
   i18n.loadAndActivate({ locale: "en", messages: {} });
   document.body.replaceChildren(document.createElement("div"));
   state.settings.streamerMode = false;
-  state.settings.streamerOnShare = false;
+  values["privacy:streamer_on_share"] = false;
 });
 afterEach(() => dispose?.());
 
@@ -75,7 +85,7 @@ describe("streamer mode switch", () => {
     const toggle = switchNamed("Turn on while sharing your screen");
     expect(toggle.getAttribute("aria-checked")).toBe("false");
     toggle.click();
-    expect(state.settings.streamerOnShare).toBe(true);
+    expect(values["privacy:streamer_on_share"]).toBe(true);
   });
 });
 

@@ -1,7 +1,7 @@
 import { Portal } from "solid-js/web";
 
 import { Trans, useLingui } from "@lingui/solid/macro";
-import { styled } from "styled-system/jsx";
+import { css } from "styled-system/css";
 
 import { useState } from "@revolt/state";
 import { setStreamerMode } from "@revolt/state/streamer";
@@ -18,8 +18,10 @@ export default function StreamerIndicator() {
   return (
     // on top of every layer of the app, whatever opened it
     <Portal>
-      <Pill
+      <button
         type="button"
+        class={PHONE_TARGET}
+        style={PILL}
         data-testid="streamer-indicator"
         title={t`Streamer mode is on. Press to turn it off.`}
         aria-label={t`Streamer mode is on. Press to turn it off.`}
@@ -29,51 +31,38 @@ export default function StreamerIndicator() {
         <span>
           <Trans>Streamer mode</Trans>
         </span>
-      </Pill>
+      </button>
     </Portal>
   );
 }
 
-const Pill = styled("button", {
-  base: {
-    position: "fixed",
-    // above dialogs and settings too: the sign must always be seen
-    zIndex: "2000",
-    top: "4px",
-    // centred without a transform, the same in both directions
-    insetInline: 0,
-    marginInline: "auto",
-    width: "fit-content",
-    height: "28px",
-    paddingInline: "12px",
-    display: "inline-flex",
-    alignItems: "center",
-    gap: "8px",
-    borderRadius: "999px",
-    border: "1px solid var(--z-accent)",
-    background: "var(--z-bg-raised)",
-    color: "var(--z-fg-primary)",
-    "--z-icon-color": "var(--z-accent)",
-    fontFamily: "inherit",
-    fontSize: "12px",
-    fontWeight: 600,
-    lineHeight: "16px",
-    whiteSpace: "nowrap",
-    cursor: "pointer",
-    boxShadow: "var(--z-shadow-md)",
-    "&:hover": { background: "var(--z-slate-1, var(--z-bg-raised))" },
-    "&:focus-visible": {
-      outline: "2px solid var(--z-focus)",
-      outlineOffset: "2px",
-    },
-    // phones: a 44 px target around the small sign
-    _phone: {
-      height: "32px",
-      "&::after": {
-        content: '""',
-        position: "absolute",
-        inset: "-8px -4px",
-      },
-    },
-  },
-});
+// inline styles: this sign loads on demand, so its look stays out of the
+// stylesheet every page downloads
+const PILL = {
+  position: "fixed",
+  // above dialogs and settings too: the sign must always be seen
+  "z-index": 2000,
+  top: "4px",
+  // centred without a transform, the same in both directions
+  "inset-inline": 0,
+  "margin-inline": "auto",
+  width: "fit-content",
+  "min-height": "32px",
+  "padding-inline": "12px",
+  display: "inline-flex",
+  "align-items": "center",
+  gap: "8px",
+  "border-radius": "999px",
+  border: "1px solid var(--z-accent)",
+  background: "var(--z-bg-raised)",
+  color: "var(--z-fg-primary)",
+  "--z-icon-color": "var(--z-accent)",
+  font: "inherit",
+  "font-size": "12px",
+  "font-weight": 600,
+  "white-space": "nowrap",
+  cursor: "pointer",
+  "box-shadow": "var(--z-shadow-md)",
+} as const;
+// phones: a 44 px target (the same rule other screens use)
+const PHONE_TARGET = css({ _phone: { minHeight: "44px" } });

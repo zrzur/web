@@ -3,11 +3,12 @@ import { Show, createSignal, onCleanup } from "solid-js";
 import { Trans, useLingui } from "@lingui/solid/macro";
 import { styled } from "styled-system/jsx";
 
-import { isMac, keyLabel, readPttKey } from "@revolt/keybinds/shortcuts";
+import { globalPttCombo, keyLabel } from "@revolt/keybinds/keyLabels";
+import { readPttKey } from "@revolt/keybinds/keymapRules";
+import { isMac } from "@revolt/keybinds/shortcuts";
 import { useVoice } from "@revolt/rtc";
 import {
   desktopPushToTalk,
-  globalPttCombo,
   globalTalkAllowed,
   globalTalkBlock,
 } from "@revolt/rtc/desktopPushToTalk";

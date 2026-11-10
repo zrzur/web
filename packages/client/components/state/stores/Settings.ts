@@ -160,7 +160,8 @@ export class Settings extends AbstractStore<"settings", TypeSettings> {
    * Hydrate external context
    */
   hydrate(): void {
-    streamerAfterLoad(this);
+    // a mode the last screen share turned on does not outlive the page
+    followScreenShare(this, false);
   }
 
   /**
@@ -247,32 +248,11 @@ export class Settings extends AbstractStore<"settings", TypeSettings> {
    * Whether streamer mode hides personal details now (one store read)
    */
   get streamerMode(): boolean {
-    return this.get()["privacy:streamer_mode"] === true;
+    return !!this.get()["privacy:streamer_mode"];
   }
 
   set streamerMode(on: boolean) {
     this.setValue("privacy:streamer_mode", on);
-  }
-
-  /**
-   * Whether sharing the screen turns streamer mode on
-   */
-  get streamerOnShare(): boolean {
-    return this.get()["privacy:streamer_on_share"] === true;
-  }
-
-  set streamerOnShare(on: boolean) {
-    this.setValue("privacy:streamer_on_share", on);
-  }
-
-  /** Whether a screen share turned streamer mode on */
-  get streamerByShare(): boolean {
-    return this.get()["privacy:streamer_by_share"] === true;
-  }
-
-  set streamerByShare(on: boolean) {
-    if (on !== this.streamerByShare)
-      this.setValue("privacy:streamer_by_share", on);
   }
 
   /**
@@ -323,77 +303,38 @@ export class Settings extends AbstractStore<"settings", TypeSettings> {
 // Streamer mode: one switch that hides personal details on screen (email,
 // the own tag, invite links and codes, DM previews in notifications). Every
 // place reads the one setting `state.settings.streamerMode`; nothing is
-// recomputed for whole lists. Kept here so it shares the state chunk.
+// recomputed for whole lists. Kept small here (first download).
 
-/** What a hidden detail shows instead */
-export const HIDDEN = "••••••••";
-
-type StreamerState = {
-  settings: Pick<
-    Settings,
-    "streamerMode" | "streamerOnShare" | "streamerByShare"
-  >;
-};
+const BY_SHARE = "privacy:streamer_by_share";
 
 /**
  * Turn streamer mode on or off by hand (the switch, the shortcut, the
- * indicator). A share that ends later leaves this choice alone.
+ * sign). A share that ends later leaves this choice alone.
  */
-export function setStreamerMode(state: StreamerState, on: boolean) {
-  state.settings.streamerByShare = false;
+export function setStreamerMode(state: { settings: Settings }, on: boolean) {
+  state.settings.setValue(BY_SHARE, false);
   state.settings.streamerMode = on;
 }
 
 /**
- * Screen sharing starts (before the capture) or stopped. "Turned on by a
- * share" is stored, so a reload during a share never leaves it on.
- * @param sharing Whether the screen is (about to be) shared
+ * A screen share starts (before the capture), or ended or the page
+ * loaded. "Turned on by a share" is stored, so it never outlives the share.
  */
-export function followScreenShare(state: StreamerState, sharing: boolean) {
-  if (sharing) {
-    if (state.settings.streamerOnShare && !state.settings.streamerMode) {
-      state.settings.streamerByShare = true;
-      state.settings.streamerMode = true;
-    }
-  } else if (state.settings.streamerByShare) {
-    state.settings.streamerByShare = false;
-    state.settings.streamerMode = false;
-  }
-}
-
-/**
- * Run a screen share toggle with streamer mode on before the capture
- * starts, and off again when it failed or was cancelled
- */
-export async function shareWithStreamerMode(
-  state: StreamerState,
-  wasSharing: boolean,
-  toggle: () => Promise<void>,
-  sharing: () => boolean,
+export function followScreenShare(
+  state: { settings: Settings } | Settings,
+  sharing: boolean,
 ) {
-  if (!wasSharing) followScreenShare(state, true);
-  try {
-    await toggle();
-  } finally {
-    if (!sharing()) followScreenShare(state, false);
-  }
-}
-
-/** At start: a mode the last share turned on does not outlive the page */
-export function streamerAfterLoad(settings: StreamerState["settings"]) {
-  if (settings.streamerByShare) {
-    settings.streamerByShare = false;
+  const settings = "settings" in state ? state.settings : state;
+  if (sharing) {
+    if (
+      settings.getValue("privacy:streamer_on_share") &&
+      !settings.streamerMode
+    ) {
+      settings.setValue(BY_SHARE, true);
+      settings.streamerMode = true;
+    }
+  } else if (settings.getValue(BY_SHARE)) {
+    settings.setValue(BY_SHARE, false);
     settings.streamerMode = false;
   }
-}
-
-/** Whether a notification for this channel may show the message (DMs and groups hide it) */
-export function notificationPreviewAllowed(
-  streamerMode: boolean,
-  channelType: string | undefined,
-) {
-  return (
-    !streamerMode ||
-    (channelType !== "DirectMessage" && channelType !== "Group")
-  );
 }

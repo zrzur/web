@@ -1,8 +1,8 @@
 import { Trans } from "@lingui/solid/macro";
 
 import { deviceMac } from "@revolt/keybinds/active";
+import { comboLabel } from "@revolt/keybinds/keyLabels";
 import { comboKeys } from "@revolt/keybinds/keymapRules";
-import { comboLabel } from "@revolt/keybinds/shortcuts";
 import { useState } from "@revolt/state";
 import { setStreamerMode } from "@revolt/state/streamer";
 import { SettingsRow, SettingsSection, Toggle } from "@revolt/ui";
@@ -14,6 +14,9 @@ import { Icon } from "@revolt/ui/icons/Icon";
 export function StreamerModeSection() {
   const state = useState();
   const on = () => state.settings.streamerMode;
+  const onShare = () => !!state.settings.getValue("privacy:streamer_on_share");
+  const setOnShare = (next: boolean) =>
+    state.settings.setValue("privacy:streamer_on_share", next);
   const combo = () => {
     const mac = deviceMac();
     return comboLabel(
@@ -60,13 +63,11 @@ export function StreamerModeSection() {
             yourself.
           </Trans>
         }
-        onClick={() =>
-          (state.settings.streamerOnShare = !state.settings.streamerOnShare)
-        }
+        onClick={() => setOnShare(!onShare())}
         control={(ids) => (
           <Toggle
-            checked={state.settings.streamerOnShare}
-            onChange={(next) => (state.settings.streamerOnShare = next)}
+            checked={onShare()}
+            onChange={setOnShare}
             aria-labelledby={ids.labelId}
             aria-describedby={ids.descriptionId}
           />

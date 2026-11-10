@@ -1,11 +1,11 @@
 import { afterEach, describe, expect, it, vi } from "vitest";
 
 import { bindKeymap, unbindKeymap } from "../keybinds/active";
-import { compileKeymap } from "../keybinds/keymap";
+import { globalPttCombo } from "../keybinds/keyLabels";
+import { compileKeymap } from "../keybinds/keymapCompile";
 
 import {
   desktopPushToTalk,
-  globalPttCombo,
   globalTalkAllowed,
   latchPress,
 } from "./desktopPushToTalk";

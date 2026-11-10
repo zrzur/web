@@ -41,9 +41,7 @@ function StreamerSign() {
   const state = useState();
   return (
     <Show when={state.settings.streamerMode}>
-      <Suspense>
-        <StreamerIndicator />
-      </Suspense>
+      <StreamerIndicator />
     </Show>
   );
 }
@@ -92,9 +90,9 @@ export function MountContext(props: { children?: JSX.Element }) {
                   </Suspense>
                   <ModalRenderer />
                   <FloatingManager />
-                  <StreamerSign />
                   <Suspense>
                     <AndroidNag />
+                    <StreamerSign />
                   </Suspense>
                 </QueryClientProvider>
               </VoiceContext>

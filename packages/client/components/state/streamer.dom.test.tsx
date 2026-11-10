@@ -1,18 +1,24 @@
 import { describe, expect, it } from "vitest";
 
-import {
-  followScreenShare,
-  notificationPreviewAllowed,
-  setStreamerMode,
-  shareWithStreamerMode,
-  streamerAfterLoad,
-} from "./streamer";
+import { followScreenShare, setStreamerMode } from "./stores/Settings";
+import { shareWithStreamerMode } from "./streamerShare";
 
 function fakeState(onShare = false) {
+  const values: Record<string, unknown> = {
+    "privacy:streamer_on_share": onShare,
+  };
   const settings = {
-    streamerMode: false,
-    streamerOnShare: onShare,
-    streamerByShare: false,
+    getValue: (key: string) => values[key],
+    setValue: (key: string, value: unknown) => void (values[key] = value),
+    get streamerMode() {
+      return !!values["privacy:streamer_mode"];
+    },
+    set streamerMode(on: boolean) {
+      values["privacy:streamer_mode"] = on;
+    },
+    get streamerByShare() {
+      return !!values["privacy:streamer_by_share"];
+    },
   };
   return { settings } as unknown as Parameters<typeof setStreamerMode>[0] & {
     settings: typeof settings;
@@ -50,15 +56,6 @@ describe("streamer mode and screen sharing", () => {
     setStreamerMode(state, true);
     followScreenShare(state, false);
     expect(state.settings.streamerMode).toBe(true);
-  });
-});
-
-describe("notification previews", () => {
-  it("hides DM and group previews in streamer mode only", () => {
-    expect(notificationPreviewAllowed(true, "DirectMessage")).toBe(false);
-    expect(notificationPreviewAllowed(true, "Group")).toBe(false);
-    expect(notificationPreviewAllowed(true, "TextChannel")).toBe(true);
-    expect(notificationPreviewAllowed(false, "DirectMessage")).toBe(true);
   });
 });
 
@@ -100,7 +97,7 @@ describe("streamer mode around the capture (review S3)", () => {
     const state = fakeState(true);
     followScreenShare(state, true);
     expect(state.settings.streamerByShare).toBe(true);
-    streamerAfterLoad(state.settings);
+    followScreenShare(state.settings as never, false);
     expect(state.settings.streamerMode).toBe(false);
     expect(state.settings.streamerByShare).toBe(false);
   });
@@ -108,7 +105,7 @@ describe("streamer mode around the capture (review S3)", () => {
   it("a mode the person turned on stays on after a reload", () => {
     const state = fakeState(true);
     setStreamerMode(state, true);
-    streamerAfterLoad(state.settings);
+    followScreenShare(state.settings as never, false);
     expect(state.settings.streamerMode).toBe(true);
   });
 });

@@ -90,17 +90,13 @@ export const ACTION_PRIORITY: KeybindAction[] = [
 ];
 
 /**
- * Actions on a plain Escape press (fixed, not changeable), in priority order
+ * Actions on a plain Escape press (fixed, not changeable), in priority
+ * order: the start of ACTION_PRIORITY without "mark the server as read"
  */
-export const ESCAPE_ACTIONS: KeybindAction[] = [
-  KeybindAction.CLOSE_FLOATING,
-  KeybindAction.CLOSE_MODAL,
-  KeybindAction.CANCEL_MESSAGE_SELECTION,
-  KeybindAction.CLOSE_SIDEBAR,
-  KeybindAction.CHAT_CANCEL_EDITING,
-  KeybindAction.CHAT_REMOVE_COMPOSITION_ELEMENT,
-  KeybindAction.CHAT_JUMP_END,
-];
+export const ESCAPE_ACTIONS: KeybindAction[] = ACTION_PRIORITY.slice(
+  0,
+  8,
+).filter((action) => action !== KeybindAction.CHAT_MARK_SERVER_AS_READ);
 
 /**
  * Filter keybinds with special logic

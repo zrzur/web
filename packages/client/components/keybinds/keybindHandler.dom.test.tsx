@@ -9,7 +9,7 @@ import {
   candidateActions,
   createKeybind,
 } from "./keybindHandler";
-import { compileKeymap } from "./keymap";
+import { compileKeymap } from "./keymapCompile";
 
 let dispose: (() => void) | undefined;
 

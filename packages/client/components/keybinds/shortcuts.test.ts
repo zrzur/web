@@ -1,13 +1,12 @@
 // @vitest-environment jsdom
 import { describe, expect, it } from "vitest";
 
+import { comboLabel, keyLabel } from "./keyLabels";
+import { readPttKey } from "./keymapRules";
 import {
-  comboLabel,
   isTypingTarget,
-  keyLabel,
   matchGlobalShortcut,
   pttKeyAllowed,
-  readPttKey,
   transmitting,
 } from "./shortcuts";
 
@@ -206,7 +205,7 @@ describe("labels", () => {
 describe("app shortcuts and text fields (review B2)", () => {
   it("a shortcut without Ctrl or Alt leaves a text field alone", async () => {
     const { bindKeymap, unbindKeymap, shortcutFor } = await import("./active");
-    const { compileKeymap } = await import("./keymap");
+    const { compileKeymap } = await import("./keymapCompile");
     bindKeymap((mac) =>
       compileKeymap({ toggle_streamer: { code: "F8" } }, mac),
     );
@@ -231,7 +230,7 @@ describe("app shortcuts and text fields (review B2)", () => {
 describe("push-to-talk key and bare shortcut keys (review S6)", () => {
   it("refuses a key that is a shortcut on its own", async () => {
     const { bindKeymap, unbindKeymap } = await import("./active");
-    const { compileKeymap } = await import("./keymap");
+    const { compileKeymap } = await import("./keymapCompile");
     bindKeymap((mac) =>
       compileKeymap({ toggle_streamer: { code: "F8" } }, mac),
     );

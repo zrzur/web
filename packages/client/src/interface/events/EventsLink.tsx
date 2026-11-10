@@ -7,7 +7,7 @@ import { styled } from "styled-system/jsx";
 
 import { useClient } from "@revolt/client";
 import { deviceMac } from "@revolt/keybinds/active";
-import { ariaKeys } from "@revolt/keybinds/keymap";
+import { ariaKeys } from "@revolt/keybinds/keyLabels";
 import { isMac, isTypingTarget } from "@revolt/keybinds/shortcuts";
 import { useModals } from "@revolt/modal";
 import { A, useLocation, useNavigate } from "@revolt/routing";

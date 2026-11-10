@@ -30,15 +30,15 @@ import { useInstance } from "@revolt/instance";
 import { ModalController, useModals } from "@revolt/modal";
 import { useState } from "@revolt/state";
 import {
+  followScreenShare,
+  setStreamerMode,
+} from "@revolt/state/stores/Settings";
+import {
   ScreenShareContent,
   ScreenShareQualityName,
   Voice as VoiceSettings,
 } from "@revolt/state/stores/Voice";
-import {
-  followScreenShare,
-  setStreamerMode,
-  shareWithStreamerMode,
-} from "@revolt/state/streamer";
+import { shareWithStreamerMode } from "@revolt/state/streamerShare";
 import { VoiceCallCardContext } from "@revolt/ui/components/features/voice/callCard/VoiceCallCard";
 
 import { Device, useDevice } from "@revolt/common";

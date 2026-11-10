@@ -3,10 +3,13 @@
  * keybinds store binds its compiled table once it has loaded. Until then
  * (and in tests) the defaults apply.
  */
+import { createSignal } from "solid-js";
+
 import {
+  type CustomCombos,
   type Keymap,
   type ShortcutId,
-  compileKeymap,
+  defaultTable,
   matchShortcut,
 } from "./keymap";
 import { isMac, isTypingTarget } from "./shortcuts";
@@ -16,7 +19,16 @@ const defaults: Partial<Record<"mac" | "other", Keymap>> = {};
 /** The default table for this system, built once */
 export function defaultKeymap(mac: boolean): Keymap {
   const slot = mac ? "mac" : "other";
-  return (defaults[slot] ??= compileKeymap({}, mac));
+  return (defaults[slot] ??= defaultTable(mac));
+}
+
+type Compile = (custom: CustomCombos, mac: boolean) => Keymap;
+const [compiler, setCompilerSignal] = createSignal<Compile>();
+/** The compiler for a person's own shortcuts, once keymapCompile.ts loaded */
+export { compiler };
+/** keymapCompile.ts registers itself here when it loads */
+export function setCompiler(compile: Compile) {
+  setCompilerSignal(() => compile);
 }
 
 let source: (mac: boolean) => Keymap = defaultKeymap;
@@ -55,16 +67,13 @@ export function pauseShortcuts(): () => void {
   recording++;
   let ended = false;
   return () => {
-    if (ended) return;
+    if (!ended) recording--;
     ended = true;
-    recording--;
   };
 }
 
 /** Whether a new combination is being recorded now */
-export function shortcutsPaused() {
-  return recording > 0;
-}
+export const shortcutsPaused = () => recording > 0;
 
 /** Which app shortcut this key press is, with the person's own keys */
 export function shortcutFor(

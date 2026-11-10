@@ -9,9 +9,11 @@ import {
 } from "solid-js";
 
 import { Trans, useLingui } from "@lingui/solid/macro";
+import { css } from "styled-system/css";
 import { styled } from "styled-system/jsx";
 
 import { deviceMac, pauseShortcuts } from "@revolt/keybinds/active";
+import { comboLabel, keyLabel } from "@revolt/keybinds/keyLabels";
 import { type Combo, type ShortcutId } from "@revolt/keybinds/keymap";
 import {
   type ComboCheck,
@@ -24,7 +26,6 @@ import {
   shortcutsChanged,
   swapShortcuts,
 } from "@revolt/keybinds/keymapRules";
-import { comboLabel, keyLabel } from "@revolt/keybinds/shortcuts";
 import { desktopPushToTalk } from "@revolt/rtc/desktopPushToTalk";
 import { useState } from "@revolt/state";
 import {
@@ -417,14 +418,14 @@ export function ShortcutRow(props: {
     switch (current.kind) {
       case "recording":
         return (
-          <Note data-testid="keybind-note">
+          <span style={NOTE} data-testid="keybind-note">
             <Trans>Press the new keys. Esc cancels.</Trans>
-          </Note>
+          </span>
         );
       case "refused": {
         const keys = label(current.combo);
         return (
-          <Note role="alert" data-tone="error" data-testid="keybind-note">
+          <span role="alert" style={NOTE_ERROR} data-testid="keybind-note">
             <Switch>
               <Match when={current.reason === "browser"}>
                 <Trans>
@@ -451,14 +452,14 @@ export function ShortcutRow(props: {
                 </Trans>
               </Match>
             </Switch>
-          </Note>
+          </span>
         );
       }
       case "confirm": {
         const keys = label(current.combo);
         const other = current.check.clash;
         return (
-          <Note role="alert" data-tone="warn" data-testid="keybind-note">
+          <span role="alert" style={NOTE} data-testid="keybind-note">
             <Show when={other}>
               {(other) => (
                 <span>
@@ -477,7 +478,7 @@ export function ShortcutRow(props: {
                 </Trans>
               </span>
             </Show>
-            <Actions>
+            <span style={ROW_WRAP}>
               <Button
                 size="sm"
                 variant="filled"
@@ -492,8 +493,8 @@ export function ShortcutRow(props: {
               >
                 <Trans>Cancel</Trans>
               </Button>
-            </Actions>
-          </Note>
+            </span>
+          </span>
         );
       }
       default:
@@ -510,31 +511,31 @@ export function ShortcutRow(props: {
       title={props.title}
       description={
         <Show when={props.description || phase().kind !== "idle" || conflict()}>
-          <Described>
+          <span style={COLUMN}>
             <Show when={props.description}>
               <span>{props.description}</span>
             </Show>
             <Show when={phase().kind === "idle" && conflict()}>
               {(other) => (
-                <Note
+                <span
                   role="alert"
-                  data-tone="error"
+                  style={NOTE_ERROR}
                   data-testid="keybind-conflict"
                 >
                   <Trans>
                     Same keys as “{props.names[other()]()}” on this device, so
                     only one of them works. Choose other keys.
                   </Trans>
-                </Note>
+                </span>
               )}
             </Show>
             {message()}
-          </Described>
+          </span>
         </Show>
       }
       control={() => (
-        <Controls>
-          <Show when={state.keybinds.isCustom(props.id)}>
+        <span style={CONTROLS}>
+          <Show when={state.keybinds.table(mac).custom.has(props.id)}>
             <IconButton
               variant="toolbar"
               size="xs"
@@ -547,9 +548,14 @@ export function ShortcutRow(props: {
               <Icon name="arrow-u-up-left" size={16} />
             </IconButton>
           </Show>
-          <KeysButton
+          <button
             ref={keysButton}
             type="button"
+            class={PHONE_TARGET}
+            style={{
+              ...KEYS_BUTTON,
+              ...(phase().kind === "recording" ? RECORDING : {}),
+            }}
             data-recording={phase().kind === "recording"}
             data-shortcut={props.id}
             aria-label={
@@ -571,12 +577,60 @@ export function ShortcutRow(props: {
                 )}
               />
             </Show>
-          </KeysButton>
-        </Controls>
+          </button>
+        </span>
       )}
     />
   );
 }
+
+// inline styles: this screen loads on demand, so its look stays out of the
+// stylesheet every page downloads
+const COLUMN = {
+  display: "flex",
+  "flex-direction": "column",
+  gap: "4px",
+} satisfies JSX.CSSProperties;
+const NOTE = {
+  display: "flex",
+  "flex-direction": "column",
+  gap: "8px",
+  color: "var(--z-fg-primary)",
+} satisfies JSX.CSSProperties;
+const NOTE_ERROR: JSX.CSSProperties = { ...NOTE, color: "var(--z-danger)" };
+const ROW_WRAP = {
+  display: "flex",
+  gap: "8px",
+  "flex-wrap": "wrap",
+} satisfies JSX.CSSProperties;
+const CONTROLS = {
+  display: "flex",
+  "align-items": "center",
+  gap: "4px",
+} satisfies JSX.CSSProperties;
+const KEYS_BUTTON = {
+  "min-height": "32px",
+  "min-width": "64px",
+  "padding-inline": "8px",
+  display: "inline-flex",
+  "align-items": "center",
+  "justify-content": "center",
+  gap: "4px",
+  "border-radius": "8px",
+  border: "1px solid var(--z-border-subtle)",
+  background: "transparent",
+  color: "var(--z-fg-primary)",
+  font: "inherit",
+  "font-size": "12px",
+  "font-weight": 600,
+  cursor: "pointer",
+} satisfies JSX.CSSProperties;
+const RECORDING = {
+  "border-color": "var(--z-accent)",
+  color: "var(--z-accent)",
+} satisfies JSX.CSSProperties;
+// phones: a 44 px target (the same rule other screens use)
+const PHONE_TARGET = css({ _phone: { minHeight: "44px" } });
 
 /** One combo as key caps, always left to right (keys are not text) */
 function Keys(props: { keys: string[] }) {
@@ -593,73 +647,6 @@ const Combos = styled("div", {
     gap: "8px",
     flexWrap: "wrap",
     justifyContent: "flex-end",
-  },
-});
-
-const Controls = styled("div", {
-  base: {
-    display: "flex",
-    alignItems: "center",
-    gap: "4px",
-  },
-});
-
-const KeysButton = styled("button", {
-  base: {
-    minHeight: "32px",
-    minWidth: "64px",
-    paddingInline: "8px",
-    display: "inline-flex",
-    alignItems: "center",
-    justifyContent: "center",
-    gap: "4px",
-    borderRadius: "8px",
-    border: "1px solid transparent",
-    background: "transparent",
-    color: "var(--z-fg-primary)",
-    fontFamily: "inherit",
-    fontSize: "12px",
-    fontWeight: 600,
-    cursor: "pointer",
-    "&:hover": {
-      borderColor: "var(--z-border-subtle)",
-    },
-    "&:focus-visible": {
-      outline: "2px solid var(--z-focus)",
-      outlineOffset: "2px",
-    },
-    '&[data-recording="true"]': {
-      borderColor: "var(--z-accent)",
-      color: "var(--z-accent)",
-    },
-    // phones: a 44 px target
-    _phone: { minHeight: "44px" },
-  },
-});
-
-const Described = styled("span", {
-  base: {
-    display: "flex",
-    flexDirection: "column",
-    gap: "4px",
-  },
-});
-
-const Note = styled("span", {
-  base: {
-    display: "flex",
-    flexDirection: "column",
-    gap: "8px",
-    color: "var(--z-fg-primary)",
-    '&[data-tone="error"]': { color: "var(--z-danger, var(--z-fg-primary))" },
-  },
-});
-
-const Actions = styled("span", {
-  base: {
-    display: "flex",
-    gap: "8px",
-    flexWrap: "wrap",
   },
 });
 

@@ -7,8 +7,7 @@
  * The default combos are also in the plugin SDK's RESERVED_KEYS, so a
  * plugin can never take them over.
  */
-import { activeKeymap, deviceMac, shortcutFor } from "./active";
-import { matchShortcut } from "./keymap";
+import { shortcutFor } from "./active";
 
 export type GlobalShortcut =
   | "toggle_mute"
@@ -94,87 +93,6 @@ const BLOCKED_PTT =
  */
 export function pttKeyAllowed(code: string) {
   return !!code && !BLOCKED_PTT.test(code);
-}
-
-/**
- * While choosing a push-to-talk key: what this key press means
- */
-export function readPttKey(
-  event: Pick<KeyboardEvent, "code">,
-): { code: string } | "cancel" | "blocked" | "wait" {
-  if (event.code === "Escape") return "cancel";
-  if (/^(Control|Meta|Shift|Alt|OS)(Left|Right)?$/.test(event.code))
-    return "wait";
-  if (!pttKeyAllowed(event.code)) return "blocked";
-  // a key that is a shortcut on its own (an F key) can't also be held to talk
-  const mac = deviceMac();
-  if (
-    matchShortcut(
-      activeKeymap(mac),
-      {
-        code: event.code,
-        ctrlKey: false,
-        metaKey: false,
-        shiftKey: false,
-        altKey: false,
-      },
-      mac,
-    )
-  )
-    return "blocked";
-  return { code: event.code };
-}
-
-const NAMED: Record<string, string> = {
-  Backquote: "`",
-  Minus: "-",
-  Equal: "=",
-  BracketLeft: "[",
-  BracketRight: "]",
-  Backslash: "\\",
-  Semicolon: ";",
-  Quote: "'",
-  Comma: ",",
-  Period: ".",
-  Slash: "/",
-  IntlBackslash: "\\",
-  CapsLock: "Caps Lock",
-  ScrollLock: "Scroll Lock",
-  NumLock: "Num Lock",
-  PageUp: "Page Up",
-  PageDown: "Page Down",
-  ArrowUp: "↑",
-  ArrowDown: "↓",
-  ArrowLeft: "←",
-  ArrowRight: "→",
-  ContextMenu: "Menu",
-  Escape: "Esc",
-};
-
-/**
- * The name printed on a key, from its physical code
- */
-export function keyLabel(code: string) {
-  const match = /^(?:Key([A-Z])|Digit([0-9]))$/.exec(code);
-  if (match) return match[1] ?? match[2];
-  const numpad = /^Numpad(.+)$/.exec(code);
-  if (numpad) return `Num ${NAMED[numpad[1]] ?? numpad[1]}`;
-  return NAMED[code] ?? code;
-}
-
-/**
- * Key caps for a combo; "Mod" is Ctrl, or Command on a Mac
- */
-export function comboLabel(keys: string[], mac: boolean) {
-  const macNames: Record<string, string> = {
-    Mod: "⌘",
-    Shift: "⇧",
-    Alt: "⌥",
-    Ctrl: "⌃",
-  };
-  return keys.map((key) =>
-    mac ? (macNames[key] ?? key) : key === "Mod" ? "Ctrl" : key,
-  );
 }
 
 /** Whether this device uses Command for shortcuts */

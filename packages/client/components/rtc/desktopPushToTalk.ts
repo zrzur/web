@@ -1,6 +1,5 @@
 import { activeKeymap, deviceMac } from "../keybinds/active";
 import { matchShortcut } from "../keybinds/keymap";
-import { comboLabel, keyLabel } from "../keybinds/shortcuts";
 
 /**
  * Push to talk from other apps, offered by the desktop app (preload
@@ -33,11 +32,6 @@ export function desktopPushToTalk(): DesktopPushToTalk | undefined {
   )
     return bridge as DesktopPushToTalk;
   return undefined;
-}
-
-/** How the global combination reads on this device, e.g. Ctrl+Shift+` */
-export function globalPttCombo(code: string, mac: boolean): string {
-  return comboLabel(["Mod", "Shift", keyLabel(code)], mac).join(mac ? "" : "+");
 }
 
 /**

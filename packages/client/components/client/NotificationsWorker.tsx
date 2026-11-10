@@ -15,7 +15,6 @@ import {
 import { notificationPolicy } from "@revolt/plugins/registry";
 import { useNavigate, useSmartParams } from "@revolt/routing";
 import { useState } from "@revolt/state";
-import { notificationPreviewAllowed } from "@revolt/state/streamer";
 
 import { useClient, useNotifications, useSound } from ".";
 import { skipDesktopNotification } from "./notificationRules";
@@ -224,10 +223,9 @@ export function NotificationsWorker() {
     // streamer mode keeps DM and group messages off the screen
     const hidePreview =
       policy.hidePreview ||
-      !notificationPreviewAllowed(
-        state.settings.streamerMode,
-        message.channel?.type,
-      );
+      (state.settings.streamerMode &&
+        (message.channel?.type === "DirectMessage" ||
+          message.channel?.type === "Group"));
 
     const notification = new Notification(title!, {
       icon,
