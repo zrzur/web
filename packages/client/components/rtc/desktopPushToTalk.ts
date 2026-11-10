@@ -1,3 +1,5 @@
+import { activeKeymap, deviceMac } from "../keybinds/active";
+import { matchShortcut } from "../keybinds/keymap";
 import { comboLabel, keyLabel } from "../keybinds/shortcuts";
 
 /**
@@ -46,9 +48,27 @@ export function globalPttCombo(code: string, mac: boolean): string {
 const NOT_GLOBAL =
   /^(Key[ACFNTVWXZ]|Arrow(Up|Down|Left|Right)|Space|Home|End|PageUp|PageDown)$/;
 
+/**
+ * Why this push-to-talk key can't also talk from other apps: other apps use
+ * Ctrl/Cmd+Shift with it for editing, or it is one of Zrzur's own shortcuts
+ * (the person's own keys included), which a global shortcut would take from
+ * the window.
+ */
+export function globalTalkBlock(code: string): "editing" | "app" | undefined {
+  if (NOT_GLOBAL.test(code)) return "editing";
+  const mac = deviceMac();
+  // the table itself, also while a new combination is being recorded
+  const taken = matchShortcut(
+    activeKeymap(mac),
+    { code, ctrlKey: !mac, metaKey: mac, shiftKey: true, altKey: false },
+    mac,
+  );
+  return taken ? "app" : undefined;
+}
+
 /** Whether this push-to-talk key can also talk from other apps */
 export function globalTalkAllowed(code: string): boolean {
-  return !NOT_GLOBAL.test(code);
+  return !globalTalkBlock(code);
 }
 
 /**

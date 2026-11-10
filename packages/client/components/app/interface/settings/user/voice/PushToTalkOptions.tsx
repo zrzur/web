@@ -9,6 +9,7 @@ import {
   desktopPushToTalk,
   globalPttCombo,
   globalTalkAllowed,
+  globalTalkBlock,
 } from "@revolt/rtc/desktopPushToTalk";
 import { useState } from "@revolt/state";
 import {
@@ -154,11 +155,13 @@ export function PushToTalkOptions() {
           icon={<Icon name="desktop" size={20} />}
           title={<Trans>Talk from other apps</Trans>}
           description={
-            !globalTalkAllowed(voice.pttKey)
-              ? t`Other apps use ${combo()} for editing. Choose another key to use this.`
-              : voice.globalTalk && call?.globalPtt() === "unavailable"
-                ? t`${combo()} is not available from other apps. Try another key.`
-                : t`${combo()} turns talking on and off while Zrzur is in the background.`
+            globalTalkBlock(voice.pttKey) === "app"
+              ? t`${combo()} is one of your Zrzur shortcuts. Choose another key to use this.`
+              : !globalTalkAllowed(voice.pttKey)
+                ? t`Other apps use ${combo()} for editing. Choose another key to use this.`
+                : voice.globalTalk && call?.globalPtt() === "unavailable"
+                  ? t`${combo()} is not available from other apps. Try another key.`
+                  : t`${combo()} turns talking on and off while Zrzur is in the background.`
           }
           disabled={!globalTalkAllowed(voice.pttKey)}
           onClick={() => (voice.globalTalk = !voice.globalTalk)}

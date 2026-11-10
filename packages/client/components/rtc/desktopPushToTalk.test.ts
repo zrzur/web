@@ -1,5 +1,8 @@
 import { afterEach, describe, expect, it, vi } from "vitest";
 
+import { bindKeymap, unbindKeymap } from "../keybinds/active";
+import { compileKeymap } from "../keybinds/keymap";
+
 import {
   desktopPushToTalk,
   globalPttCombo,
@@ -83,5 +86,31 @@ describe("keys that can talk from other apps", () => {
   it("allows the default key, other letters, digits, F keys and the numpad", () => {
     for (const code of ["Backquote", "KeyB", "Digit4", "F13", "F24", "Numpad5"])
       expect(globalTalkAllowed(code), code).toBe(true);
+  });
+});
+
+describe("talk from other apps and the app's own shortcuts", () => {
+  afterEach(() => unbindKeymap());
+
+  it("never takes a key whose Ctrl+Shift combination is a Zrzur shortcut", () => {
+    // Ctrl+Shift+M mutes, D deafens, L is streamer mode, 8 a poll, 9 events
+    for (const code of ["KeyM", "KeyD", "KeyL", "Digit8", "Digit9"])
+      expect(globalTalkAllowed(code), code).toBe(false);
+  });
+
+  it("follows the person's own shortcuts", () => {
+    bindKeymap((mac) =>
+      compileKeymap(
+        {
+          toggle_mute: { code: "KeyB", mod: true, shift: true },
+          toggle_deafen: { code: "F8" },
+        },
+        mac,
+      ),
+    );
+    expect(globalTalkAllowed("KeyB")).toBe(false);
+    // M and D are free again
+    expect(globalTalkAllowed("KeyM")).toBe(true);
+    expect(globalTalkAllowed("KeyD")).toBe(true);
   });
 });
