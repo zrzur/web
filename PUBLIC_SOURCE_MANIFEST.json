@@ -3790,8 +3790,8 @@
     },
     {
       "path": "packages/client/components/i18n/errorTypes.json",
-      "sha256": "793b1e978843f3db9dc2c5a93635e904dbd21e14fd10e2960c7253644ee17cb1",
-      "bytes": 3162,
+      "sha256": "a655faf4cd66c7a1250869f091b13dc6d4a735e30be49913e2e740c9ca58a67f",
+      "bytes": 3185,
       "category": "product-source-or-build-manifest"
     },
     {
