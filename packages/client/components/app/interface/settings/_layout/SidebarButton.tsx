@@ -38,6 +38,9 @@ export function SidebarButton(
       tabIndex={0}
       aria-current={props["aria-selected"] ? "page" : undefined}
       data-flat={local.flat || undefined}
+      // the accent bar of the open page; flat rows (the account card) mark
+      // themselves instead, so they never get one
+      data-marker={props["aria-selected"] && !local.flat ? "bar" : undefined}
       class={"button" + (local.class ? " " + local.class : "")}
       onClick={onClick}
       onKeyDown={(e) => {
@@ -88,8 +91,8 @@ const SidebarButtonBase = styled("a", {
       outline: "2px solid var(--z-focus)",
       outlineOffset: "-2px",
     },
-    // the ring already marks this row; a bar beside it reads as two outlines
-    "&[aria-current='page']:focus-visible::before": { display: "none" },
+    // the focus ring already marks this row; a bar beside it reads as two outlines
+    "&[data-marker='bar']:focus-visible::before": { display: "none" },
     // the open page stays marked under the pointer (hover used to replace
     // the selected background with its lighter wash)
     "&[aria-current='page']:hover": {
@@ -100,7 +103,7 @@ const SidebarButtonBase = styled("a", {
     "&[aria-current='page']": {
       fontWeight: 600,
     },
-    "&[aria-current='page']::before": {
+    "&[data-marker='bar']::before": {
       content: '""',
       position: "absolute",
       insetInlineStart: 0,

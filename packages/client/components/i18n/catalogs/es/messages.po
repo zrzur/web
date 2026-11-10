@@ -940,6 +940,11 @@ msgstr "<0>{0}</0> y <1>{1}</1> están escribiendo…"
 msgid "<0>{0}</0> is typing…"
 msgstr "<0>{0}</0> está escribiendo…"
 
+#. placeholder {0}: name()
+#: components/app/interface/settings/user/ConnectedApps.tsx
+msgid "<0>{0}</0> loses access to your account at once."
+msgstr "<0>{0}</0> pierde el acceso a tu cuenta de inmediato."
+
 #. placeholder {0}: props.names[other()]()
 #: components/app/interface/settings/user/Keybinds.tsx
 msgid "<0>{keys}</0> is already used for “{0}”. Swap them?"
@@ -1481,6 +1486,10 @@ msgstr "Acepta las reglas del servidor antes de escribir aquí."
 msgid "Accept the server rules to start writing here."
 msgstr "Acepta las reglas del servidor para empezar a escribir aquí."
 
+#: components/app/interface/settings/user/ConnectedApps.tsx
+msgid "Access was not revoked."
+msgstr "No se revocó el acceso."
+
 #: components/app/interface/settings/user/plugins/text.ts
 msgid "Accessibility"
 msgstr "Accesibilidad"
@@ -1733,7 +1742,7 @@ msgstr "Añadir amigos al grupo"
 msgid "Add it"
 msgstr "Añadirlo"
 
-#: src/interface/OAuth.tsx
+#: components/app/interface/settings/user/oauthScopes.ts
 msgid "Add its bot to a server you manage"
 msgstr "Añade su bot a un servidor que administres"
 
@@ -1943,8 +1952,13 @@ msgstr "Después de"
 
 #. placeholder {0}: new URL(data().redirect_uri).host
 #: src/interface/OAuth.tsx
-msgid "After you decide you will go to {0}. You can revoke this at any time under Authorized apps."
-msgstr "Después de decidir irás a {0}. Puedes revocarlo cuando quieras en Aplicaciones autorizadas."
+#~ msgid "After you decide you will go to {0}. You can revoke this at any time under Authorized apps."
+#~ msgstr "Después de decidir irás a {0}. Puedes revocarlo cuando quieras en Aplicaciones autorizadas."
+
+#. placeholder {0}: new URL(data().redirect_uri).host
+#: src/interface/OAuth.tsx
+msgid "After you decide you will go to {0}. You can revoke this at any time under Connected apps."
+msgstr "Después de decidir irás a {0}. Puedes revocarlo cuando quieras en Apps conectadas."
 
 #: components/app/interface/settings/server/audit/AuditLog.tsx
 #: components/app/interface/settings/server/channels/ChannelsSettings.tsx
@@ -2554,7 +2568,7 @@ msgstr "Aplicaciones"
 msgid "Apps and bots"
 msgstr "Apps y bots"
 
-#: src/interface/OAuth.tsx
+#: components/app/interface/settings/user/ConnectedApps.tsx
 msgid "Apps you allowed to use your account. Revoking one ends its access at once; bots it added stay in servers until their managers remove them."
 msgstr "Aplicaciones a las que permitiste usar tu cuenta. Revocar una termina su acceso de inmediato; los bots que añadió siguen en los servidores hasta que sus administradores los quiten."
 
@@ -2831,8 +2845,8 @@ msgstr "Autorizar"
 
 #: components/app/interface/settings/UserSettings.tsx
 #: src/interface/OAuth.tsx
-msgid "Authorized apps"
-msgstr "Aplicaciones autorizadas"
+#~ msgid "Authorized apps"
+#~ msgstr "Aplicaciones autorizadas"
 
 #: components/app/interface/settings/user/safety/ReportsAndStanding.tsx
 msgid "Automated tools"
@@ -3647,6 +3661,7 @@ msgstr "Canadá"
 #: components/app/interface/settings/server/webhooks/ServerWebhooks.tsx
 #: components/app/interface/settings/user/account/AgeSettings.tsx
 #: components/app/interface/settings/user/bots/CommandManager.tsx
+#: components/app/interface/settings/user/ConnectedApps.tsx
 #: components/app/interface/settings/user/Keybinds.tsx
 #: components/app/interface/settings/user/plugins/PluginDetail.tsx
 #: components/app/interface/settings/user/profile/CreatorStudio.tsx
@@ -4998,8 +5013,8 @@ msgid "Confirm purchase"
 msgstr "Confirmar compra"
 
 #: src/interface/OAuth.tsx
-msgid "Confirm revoke"
-msgstr "Confirmar revocación"
+#~ msgid "Confirm revoke"
+#~ msgstr "Confirmar revocación"
 
 #: components/app/interface/settings/user/profile/CreatorStudio.tsx
 msgid "Confirm that you may share this effect first."
@@ -5034,6 +5049,15 @@ msgstr "Conectar Zrzur Assistant"
 #: components/ui/components/features/voice/callCard/VoiceCallCardStatus.tsx
 msgid "Connected"
 msgstr "Conectado"
+
+#: components/app/interface/settings/UserSettings.tsx
+msgid "Connected apps"
+msgstr "Apps conectadas"
+
+#. placeholder {0}: since()
+#: components/app/interface/settings/user/ConnectedApps.tsx
+msgid "Connected on {0}"
+msgstr "Conectada el {0}"
 
 #: components/ui/components/features/voice/callCard/VoiceCallCardStatus.tsx
 #: src/interface/navigation/channels/AccountBar.tsx
@@ -9653,8 +9677,12 @@ msgid "It kept taking too long to respond."
 msgstr "Tardaba demasiado en responder."
 
 #: components/app/interface/settings/server/assistant/AssistantPage.tsx
-msgid "It learns your username, so it knows you may change these settings. You can remove it under Authorized apps."
-msgstr "Conoce tu nombre de usuario, así que sabe que puedes cambiar estos ajustes. Puedes quitarlo en Aplicaciones autorizadas."
+#~ msgid "It learns your username, so it knows you may change these settings. You can remove it under Authorized apps."
+#~ msgstr "Conoce tu nombre de usuario, así que sabe que puedes cambiar estos ajustes. Puedes quitarlo en Aplicaciones autorizadas."
+
+#: components/app/interface/settings/server/assistant/AssistantPage.tsx
+msgid "It learns your username, so it knows you may change these settings. You can remove it under Connected apps."
+msgstr "Conoce tu nombre de usuario, así que sabe que puedes cambiar estos ajustes. Puedes quitarlo en Apps conectadas."
 
 #: components/i18n/errors.tsx
 msgid "It looks like harassment."
@@ -10028,7 +10056,7 @@ msgstr "Cometas"
 msgid "Know which channel you open"
 msgstr "Saber qué canal abres"
 
-#: src/interface/OAuth.tsx
+#: components/app/interface/settings/user/oauthScopes.ts
 msgid "Know your username and avatar"
 msgstr "Conocer tu nombre de usuario y avatar"
 
@@ -10232,7 +10260,7 @@ msgstr "Permitir que {0} vea este canal"
 msgid "Let in"
 msgstr "Permitir"
 
-#: src/interface/OAuth.tsx
+#: components/app/interface/settings/user/oauthScopes.ts
 msgid "Let its commands be used in the server"
 msgstr "Permitir que sus comandos se usen en el servidor"
 
@@ -12464,9 +12492,13 @@ msgstr "No hay apelaciones en espera."
 msgid "No applications yet. Create one to get a bot account and its token."
 msgstr "Aún no hay aplicaciones. Crea una para obtener una cuenta de bot y su token."
 
+#: components/app/interface/settings/user/ConnectedApps.tsx
+msgid "No apps are connected to your account."
+msgstr "No hay apps conectadas a tu cuenta."
+
 #: src/interface/OAuth.tsx
-msgid "No apps yet."
-msgstr "Aún no hay aplicaciones."
+#~ msgid "No apps yet."
+#~ msgstr "Aún no hay aplicaciones."
 
 #: src/interface/channels/text/ThreadsPanel.tsx
 msgid "No archived threads."
@@ -13816,6 +13848,10 @@ msgstr "ID del caso original"
 #: components/modal/modals/permissionTitles.ts
 msgid "Other"
 msgstr "Otro"
+
+#: components/app/interface/settings/user/oauthScopes.ts
+msgid "Other access"
+msgstr "Otro acceso"
 
 #. placeholder {0}: combo()
 #: components/app/interface/settings/user/voice/PushToTalkOptions.tsx
@@ -16277,7 +16313,7 @@ msgstr "Respuesta del revisor:"
 msgid "Revoke"
 msgstr "Revocar"
 
-#: src/interface/OAuth.tsx
+#: components/app/interface/settings/user/ConnectedApps.tsx
 msgid "Revoke access"
 msgstr "Revocar acceso"
 
@@ -17132,7 +17168,7 @@ msgstr "Ve cómo los miembros se unen, salen y cambian, y carga la lista de miem
 #~ msgid "See Plus"
 #~ msgstr ""
 
-#: src/interface/OAuth.tsx
+#: components/app/interface/settings/user/oauthScopes.ts
 msgid "See the names and icons of your servers"
 msgstr "Ver los nombres e iconos de tus servidores"
 
@@ -20981,6 +21017,7 @@ msgstr "Prueba con otra palabra o explora las categorías."
 #: components/app/interface/settings/server/webhooks/ServerWebhooks.tsx
 #: components/app/interface/settings/user/badges/MyBadges.tsx
 #: components/app/interface/settings/user/bots/PrivilegedIntents.tsx
+#: components/app/interface/settings/user/ConnectedApps.tsx
 #: components/app/interface/settings/user/myData/MyData.tsx
 #: components/app/interface/settings/user/plugins/PluginDetail.tsx
 #: components/app/interface/settings/user/profile/CommunityGallery.tsx
@@ -22278,6 +22315,10 @@ msgstr "Se lo preguntamos a todo el mundo una vez, para proteger a las personas 
 msgid "We automatically include the reported content and, for messages, a few messages around it. You don't need to describe anything graphic."
 msgstr "Incluimos automáticamente el contenido denunciado y, en el caso de mensajes, algunos mensajes de alrededor. No necesitas describir nada gráfico."
 
+#: components/app/interface/settings/user/ConnectedApps.tsx
+msgid "We could not load your connected apps."
+msgstr "No pudimos cargar tus apps conectadas."
+
 #: components/app/interface/settings/user/Sessions.tsx
 msgid "We could not load your sessions."
 msgstr "No pudimos cargar tus sesiones."
@@ -23008,6 +23049,10 @@ msgstr "Sí o no"
 #: components/app/interface/settings/user/subscriptions/PlusPage.tsx
 msgid "Yes, hide it any time"
 msgstr "Sí, ocúltala cuando quieras"
+
+#: components/app/interface/settings/user/ConnectedApps.tsx
+msgid "Yes, revoke"
+msgstr "Sí, revocar"
 
 #: components/app/interface/settings/user/plugins/PluginDetail.tsx
 msgid "Yes, uninstall"

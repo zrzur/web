@@ -19,7 +19,8 @@ import {
  * [avatar + presence]  Display name
  *                      My account
  * Selected = accent ring around the avatar, not a filled box (a box around
- * a large avatar looked cramped and heavy)
+ * a large avatar looked cramped and heavy) and not the side bar the other
+ * rows have (it sat tight against the avatar); the only row without one
  */
 export function AccountCard() {
   const client = useClient();
@@ -35,7 +36,7 @@ export function AccountCard() {
       aria-selected={selected()}
     >
       <SidebarButtonTitle>
-        <AvatarRing data-selected={selected()}>
+        <AvatarRing data-avatar-ring data-selected={selected()}>
           <Avatar
             size={36}
             src={client().user!.animatedAvatarURL}

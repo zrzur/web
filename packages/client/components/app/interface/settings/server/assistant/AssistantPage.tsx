@@ -103,7 +103,7 @@ export function AssistantPage(props: { server: Server }) {
               description={
                 <Trans>
                   It learns your username, so it knows you may change these
-                  settings. You can remove it under Authorized apps.
+                  settings. You can remove it under Connected apps.
                 </Trans>
               }
               control={() => (
