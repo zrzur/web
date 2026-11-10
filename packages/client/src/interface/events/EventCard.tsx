@@ -464,7 +464,7 @@ export function EventCard(props: Props) {
                 </span>
                 <Button
                   size="sm"
-                  variant="warning"
+                  variant="_error"
                   isDisabled={busy()}
                   onPress={() =>
                     void act(async () => {
