@@ -292,8 +292,8 @@
     },
     {
       "path": "CHANGELOG.md",
-      "sha256": "558a7dc96b3b048f2f628023ec0c354929dd013081c6316bf3789f543911b1c7",
-      "bytes": 105381,
+      "sha256": "8548a417108a76f3245f1090af0b419ba478e032b2f7152765a0fd56b8118389",
+      "bytes": 106507,
       "category": "public-documentation"
     },
     {
@@ -310,8 +310,8 @@
     },
     {
       "path": "Dockerfile",
-      "sha256": "d72dd5ad839b8b3bd8b3da05f8c357ae0f150dbf9d739bd5880d32e239933473",
-      "bytes": 3118,
+      "sha256": "882f5195ace120214a9a46641090a3796594a7fa535dacbb676db303b0f13602",
+      "bytes": 3132,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -513,6 +513,18 @@
       "category": "public-documentation"
     },
     {
+      "path": "docker/csp.js",
+      "sha256": "ed7149dada71770d3d0f517c6cf0e285d26b2cc02b729866e70baa21a23359ee",
+      "bytes": 11219,
+      "category": "product-source-or-build-manifest"
+    },
+    {
+      "path": "docker/csp.test.js",
+      "sha256": "8c6ba8275dec08d325c45bf9ca345d593dd0ca48aff13d071da926206e9b9736",
+      "bytes": 10917,
+      "category": "synthetic-test-source-or-fixture"
+    },
+    {
       "path": "docker/inject.js",
       "sha256": "c7191836ab83d23c24f02a852d1d3c226d331bf54c0a815401a848b4849a23f9",
       "bytes": 4489,
@@ -532,8 +544,8 @@
     },
     {
       "path": "docker/server.js",
-      "sha256": "a57f73ec56040a315468a0acce385222803760445b6e08fd10f5b848974ed677",
-      "bytes": 5304,
+      "sha256": "60b7fe4456319920a52160e77ddfad3a5d52bb5e3cad8e99f766dba728742af2",
+      "bytes": 6565,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -570,6 +582,12 @@
       "path": "e2e/stack-runner/creator-templates.mjs",
       "sha256": "1999c8816b85398e19f00ca2795f5605b9b9d8aadefe434bb4c7843908822dba",
       "bytes": 30731,
+      "category": "synthetic-test-source-or-fixture"
+    },
+    {
+      "path": "e2e/stack-runner/csp.mjs",
+      "sha256": "33d676f4705dfee729e7a1dc34c5cbfd9eb9bf3dcb0270cd42458a22e46071ed",
+      "bytes": 17080,
       "category": "synthetic-test-source-or-fixture"
     },
     {
@@ -700,8 +718,8 @@
     },
     {
       "path": "packages/client/.gitignore",
-      "sha256": "5537f5e00dcc0f1774e453c6a6bfde8c1a6a68871bfd3a738e9d6a2f6ecf47f1",
-      "bytes": 190,
+      "sha256": "5b097abef4926a199f15998f6cb474beddc3f0ea5e6bfffd3b9e3b78f8444143",
+      "bytes": 312,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -2446,8 +2464,8 @@
     },
     {
       "path": "packages/client/components/auth/src/flows/FlowLogin.tsx",
-      "sha256": "bd9e13f857922e49e4fe158d001df02cd145e06b790b3948baa3be3f18fa0a5b",
-      "bytes": 7867,
+      "sha256": "5cbf5a630f2561efc532e778ce10bebf5bbc065689c3f55791817eae4157b81b",
+      "bytes": 8398,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -2484,6 +2502,18 @@
       "path": "packages/client/components/auth/src/flows/github.svg",
       "sha256": "0109d8571ab45f6f3fd1a767efa5ca263c5902bc868b92b34db914c6387f948a",
       "bytes": 1543,
+      "category": "product-source-or-build-manifest"
+    },
+    {
+      "path": "packages/client/components/auth/src/flows/loginStepUp.test.ts",
+      "sha256": "4f51dce1ee071aa059421c9e85ff7e823b023513ee20d6fb05d71f2123f9ccbf",
+      "bytes": 1061,
+      "category": "synthetic-test-source-or-fixture"
+    },
+    {
+      "path": "packages/client/components/auth/src/flows/loginStepUp.ts",
+      "sha256": "89262cd9fc465cae57ff90ce015a4b15944b30e21ea3c70a0b3af47963ab6f55",
+      "bytes": 883,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -2674,8 +2704,8 @@
     },
     {
       "path": "packages/client/components/common/lib/env.ts",
-      "sha256": "32a5688167e95aa7dda2a7cf03f14fb9c231758e662d896bd4d12ace13910857",
-      "bytes": 13205,
+      "sha256": "0346d9b9621e730765d841fbdde5a6846b520af92e6a192e60a68bee9d04aeb4",
+      "bytes": 13179,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -4605,6 +4635,12 @@
       "category": "product-source-or-build-manifest"
     },
     {
+      "path": "packages/client/components/plugins/sandboxCsp.test.ts",
+      "sha256": "6406e4c2d4af8c8020d4f651710796998a2e72ac900ef2ce52df06d53a8a1e00",
+      "bytes": 1480,
+      "category": "synthetic-test-source-or-fixture"
+    },
+    {
       "path": "packages/client/components/routing/index.tsx",
       "sha256": "0431c09d98931da441b0fa4da6d61669529a7fcf2881972e00b9248fc2f72065",
       "bytes": 3200,
@@ -4624,8 +4660,8 @@
     },
     {
       "path": "packages/client/components/rtc/VoiceProcessor.ts",
-      "sha256": "a8e59eafb71bdb966457300b96522ac369c5262c3f17ebe0a17798dff8c4a566",
-      "bytes": 9514,
+      "sha256": "a489167ac5d96696216be50c8be1f3d416e899535ce11447a0c706514787752f",
+      "bytes": 9768,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -4734,6 +4770,18 @@
       "path": "packages/client/components/rtc/moderation.ts",
       "sha256": "4828067ffc7f47140af562ae3fa4cc13d6e737b35b4e2d9c1e49ac771e05a55a",
       "bytes": 3441,
+      "category": "product-source-or-build-manifest"
+    },
+    {
+      "path": "packages/client/components/rtc/rnnoiseUrl.test.ts",
+      "sha256": "68c7f375357935ed568c840ef7e9a8ded59d973930b0fac61fe54c770d0e5595",
+      "bytes": 901,
+      "category": "synthetic-test-source-or-fixture"
+    },
+    {
+      "path": "packages/client/components/rtc/rnnoiseUrl.ts",
+      "sha256": "76e86d848405319857ee126474dcd6c65df6dc939303bc52e0414388bd1c7256",
+      "bytes": 686,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -37630,8 +37678,8 @@
     },
     {
       "path": "packages/client/scripts/copyAssets.mjs",
-      "sha256": "fa9ef0add1c33169e5bc51a78bb4715373c2e0d2d9da35bb4c92972b809b1508",
-      "bytes": 1271,
+      "sha256": "92d0cb36f52b678a36440a93452ca7185a145ff930ce2dffa19107f30411bf96",
+      "bytes": 1493,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -38905,6 +38953,12 @@
       "sha256": "71d5794bd1a46e2871012b9c8b17151b45b8c20065950e8fe8ee500fae2f6410",
       "bytes": 6503,
       "category": "synthetic-test-source-or-fixture"
+    },
+    {
+      "path": "packages/client/scripts/rnnoiseAssets.mjs",
+      "sha256": "36a57bd71486c2b0b06b79ea3eac9bbf1a01ddbd70c9d4ccebaef6afe2ec54e0",
+      "bytes": 729,
+      "category": "product-source-or-build-manifest"
     },
     {
       "path": "packages/client/scripts/scan-hardcoded.mjs",
@@ -40599,9 +40653,39 @@
       "category": "product-source-or-build-manifest"
     },
     {
+      "path": "packages/client/vendor/rnnoise.test.ts",
+      "sha256": "40fd50567d93638f9daf37978c939f80966d8e095f3274182e2d96e63cad732a",
+      "bytes": 1107,
+      "category": "synthetic-test-source-or-fixture"
+    },
+    {
+      "path": "packages/client/vendor/rnnoise/LICENSE",
+      "sha256": "a6cba85bc92e0cff7a450b1d873c0eaa2e9fc96bf472df0247a26bec77bf3ff9",
+      "bytes": 10173,
+      "category": "license-and-attribution"
+    },
+    {
+      "path": "packages/client/vendor/rnnoise/RNNoiseWorklet.js",
+      "sha256": "14fbc044a0f81cf7880c66e1bfb4162bf4d0a15935104d2a63ec66b268c619d7",
+      "bytes": 7692,
+      "category": "product-source-or-build-manifest"
+    },
+    {
+      "path": "packages/client/vendor/rnnoise/SOURCES.md",
+      "sha256": "aed8f3bca8c44ea36bcd5999568ca337206e9915e20b14fe516276756b645597",
+      "bytes": 1406,
+      "category": "public-documentation"
+    },
+    {
+      "path": "packages/client/vendor/rnnoise/rnnoise.wasm",
+      "sha256": "f4a9474de4b1dcf53c5a8f96ec5dfb8034f92aae87fd5dbeb10fe5570d079d9a",
+      "bytes": 848860,
+      "category": "product-source-or-build-manifest"
+    },
+    {
       "path": "packages/client/vite.config.ts",
-      "sha256": "2c8ac404abf174b93ccdd200986a8213b33a629af7f96dbc4499ff97bd56ab5d",
-      "bytes": 9791,
+      "sha256": "7448f884540c93c1617907625f0d968277ff4994cb4d510644164d7f58ba53b8",
+      "bytes": 10201,
       "category": "product-source-or-build-manifest"
     },
     {
