@@ -10,6 +10,7 @@ export type PageId =
   | "channels"
   | "joining"
   | "emoji"
+  | "soundboard"
   | "safety"
   | "log"
   | "members"
@@ -26,6 +27,7 @@ export const ALIASES: Record<string, string> = {
   lobby: "joining/lobby",
   discover: "overview#discovery",
   emojis: "emoji",
+  sounds: "soundboard",
   access: "joining#join-mode",
   privacy: "joining#join-mode",
   "access/requests": "joining/requests",
@@ -196,6 +198,15 @@ export const SECTIONS: SectionInfo[] = [
     },
   },
   {
+    id: "soundboard",
+    page: "soundboard",
+    words: {
+      en: "soundboard sounds audio upload play voice call",
+      ar: "لوحة الأصوات أصوات صوت رفع تشغيل مكالمة صوتية",
+      de: "soundboard sounds töne hochladen abspielen sprachanruf",
+    },
+  },
+  {
     id: "emergency",
     page: "safety",
     words: {
@@ -293,6 +304,7 @@ const PAGE_WORDS: Record<PageId, string> = {
   channels: "channels القنوات kanäle",
   joining: "joining onboarding الانضمام الترحيب beitritt willkommen",
   emoji: "emoji الإيموجي emojis",
+  soundboard: "soundboard لوحة الأصوات soundboard",
   safety: "safety الحماية sicherheit",
   log: "audit log سجل التدقيق protokoll",
   members: "members الأعضاء mitglieder",

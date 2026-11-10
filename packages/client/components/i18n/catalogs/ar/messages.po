@@ -24689,3 +24689,215 @@ msgstr "زرزور، مباشرةً على <0>سطح مكتبك.</0>"
 #: components/app/interface/settings/user/appearance/AppearanceMenu.tsx
 #~ msgid "Zrzur's own look: very dark neutral panels with Zrzur Pink as the one accent."
 #~ msgstr "مظهر زرزور الخاص: لوحات داكنة جدًا بألوان محايدة، وزهري زرزور هو اللون المميز الوحيد."
+
+#. placeholder {0}: Math.max(0, limit() - sounds().length)
+#. placeholder {1}: limit()
+#. placeholder {2}: SOUND_MAX_MS / 1000
+#: components/app/interface/settings/server/soundboard/SoundboardList.tsx
+msgid "{0} of {1} sounds left. Up to {2} seconds each."
+msgstr "بقي {0} من {1} أصوات. حتى {2} ثانية لكل صوت."
+
+#. placeholder {0}: seconds(sound.duration_ms)
+#: components/app/interface/settings/server/soundboard/SoundboardList.tsx
+msgid "{0} s"
+msgstr "{0} ث"
+
+#: components/app/interface/settings/server/soundboard/SoundboardList.tsx
+msgid "Add a sound"
+msgstr "إضافة صوت"
+
+#: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
+msgid "Add and remove the server's sounds"
+msgstr "إضافة أصوات السيرفر وإزالتها"
+
+#: components/app/interface/settings/server/soundboard/SoundboardList.tsx
+msgid "Add sound"
+msgstr "أضف الصوت"
+
+#. placeholder {0}: Math.round(maxBytes() / 1000)
+#: components/app/interface/settings/server/soundboard/SoundboardList.tsx
+msgid "An MP3, OGG or WAV file of up to {0} KB, then a name."
+msgstr "ملف MP3 أو OGG أو WAV حتى {0} كيلوبايت، ثم اسم."
+
+#: components/app/interface/settings/server/soundboard/SoundboardList.tsx
+msgid "Choose a sound"
+msgstr "اختر صوتًا"
+
+#: components/ui/components/features/voice/soundboard/SoundboardPicker.tsx
+msgid "Close soundboard"
+msgstr "إغلاق لوحة الأصوات"
+
+#: components/ui/components/features/voice/stage/StagePanel.tsx
+msgid "Edit topic"
+msgstr "تعديل الموضوع"
+
+#: components/app/interface/settings/server/soundboard/SoundboardList.tsx
+msgid "Emoji (optional)"
+msgstr "إيموجي (اختياري)"
+
+#: components/ui/components/features/voice/stage/StagePanel.tsx
+msgid "End stage"
+msgstr "إنهاء المنصة"
+
+#: components/ui/components/features/voice/stage/StagePanel.tsx
+msgid "Everyone leaves the stage."
+msgstr "سيغادر الجميع المنصة."
+
+#: components/ui/components/features/voice/stage/StagePanel.tsx
+msgid "Invite to speak"
+msgstr "دعوة إلى التحدث"
+
+#. placeholder {0}: sound.name
+#: components/app/interface/settings/server/soundboard/SoundboardList.tsx
+msgid "Listen to {0}"
+msgstr "استمع إلى {0}"
+
+#. placeholder {0}: roles().audience.length
+#: components/ui/components/features/voice/stage/StagePanel.tsx
+msgid "Listening: {0}"
+msgstr "المستمعون: {0}"
+
+#: components/ui/components/features/voice/stage/StagePanel.tsx
+msgid "Lower hand"
+msgstr "إنزال اليد"
+
+#: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
+#: components/app/interface/settings/server/layout.tsx
+msgid "Manage soundboard"
+msgstr "إدارة لوحة الأصوات"
+
+#: components/ui/components/features/voice/stage/StagePanel.tsx
+msgid "Move to audience"
+msgstr "النقل إلى الجمهور"
+
+#: components/app/interface/settings/user/voice/SoundboardOptions.tsx
+msgid "Mute the soundboard"
+msgstr "كتم لوحة الأصوات"
+
+#: components/ui/components/features/voice/StreamPreviewCard.tsx
+msgid "No preview yet"
+msgstr "لا توجد معاينة بعد"
+
+#: components/app/interface/settings/server/soundboard/SoundboardList.tsx
+msgid "No sounds yet."
+msgstr "لا توجد أصوات بعد."
+
+#: components/ui/components/features/voice/soundboard/SoundboardPicker.tsx
+msgid "No sounds yet. People who manage the soundboard add them in Server settings, Soundboard."
+msgstr "لا توجد أصوات بعد. يضيفها من يديرون لوحة الأصوات من إعدادات السيرفر، لوحة الأصوات."
+
+#: components/ui/components/features/voice/stage/StagePanel.tsx
+msgid "No topic yet"
+msgstr "لا يوجد موضوع بعد"
+
+#: components/app/interface/settings/server/soundboard/SoundboardList.tsx
+msgid "Pick an MP3, OGG or WAV file."
+msgstr "اختر ملف MP3 أو OGG أو WAV."
+
+#: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
+msgid "Play the server's sounds in a voice call"
+msgstr "تشغيل أصوات السيرفر في مكالمة صوتية"
+
+#: components/ui/components/features/voice/stage/StagePanel.tsx
+msgid "Raise hand"
+msgstr "رفع اليد"
+
+#: components/ui/components/features/voice/stage/StagePanel.tsx
+msgid "Raised hands"
+msgstr "الأيدي المرفوعة"
+
+#. placeholder {0}: props.name
+#: components/ui/components/features/voice/StreamPreviewCard.tsx
+msgid "Screen of {0}"
+msgstr "شاشة {0}"
+
+#: components/ui/components/features/voice/StreamPreviewCard.tsx
+msgid "Sharing their screen"
+msgstr "يشارك شاشته"
+
+#: components/app/interface/settings/server/soundboard/SoundboardList.tsx
+#: components/app/interface/settings/ServerSettings.tsx
+msgid "Short sounds members play in voice calls."
+msgstr "أصوات قصيرة يشغلها الأعضاء في المكالمات الصوتية."
+
+#: components/app/interface/settings/user/voice/SoundboardOptions.tsx
+msgid "Short sounds people play in a voice call, on your device."
+msgstr "أصوات قصيرة يشغلها الآخرون في المكالمة الصوتية، تُسمع على جهازك."
+
+#: components/app/interface/settings/ServerSettings.tsx
+#: components/app/interface/settings/user/voice/SoundboardOptions.tsx
+#: components/ui/components/features/voice/callCard/VoiceCallCardActions.tsx
+#: components/ui/components/features/voice/soundboard/SoundboardPicker.tsx
+msgid "Soundboard"
+msgstr "لوحة الأصوات"
+
+#: components/app/interface/settings/user/voice/SoundboardOptions.tsx
+msgid "Soundboard volume"
+msgstr "مستوى صوت لوحة الأصوات"
+
+#: components/app/interface/settings/server/soundboard/SoundboardList.tsx
+msgid "Sounds"
+msgstr "الأصوات"
+
+#: components/ui/components/features/voice/stage/StagePanel.tsx
+msgid "Speakers"
+msgstr "المتحدثون"
+
+#. placeholder {0}: roles().speakers.length
+#: components/ui/components/features/voice/stage/StagePanel.tsx
+msgid "Speakers: {0}"
+msgstr "المتحدثون: {0}"
+
+#: components/modal/modals/CreateChannel.tsx
+#: components/ui/components/features/voice/stage/StagePanel.tsx
+msgid "Stage"
+msgstr "المنصة"
+
+#: components/modal/modals/CreateChannel.tsx
+msgctxt "channel-type"
+msgid "Stage"
+msgstr "منصة"
+
+#: components/modal/modals/CreateChannel.tsx
+msgid "Talks: speakers on stage, everyone else listens and can raise a hand."
+msgstr "للمحاضرات: متحدثون على المنصة، والبقية يستمعون ويمكنهم رفع أيديهم."
+
+#: components/app/interface/settings/server/soundboard/SoundboardList.tsx
+msgid "The soundboard is full. Remove a sound, or add Wings to the server for more."
+msgstr "لوحة الأصوات ممتلئة. أزل صوتًا، أو أضف أجنحة إلى السيرفر لمزيد من الأصوات."
+
+#: components/app/interface/settings/server/soundboard/SoundboardList.tsx
+msgid "This file can't be played as a sound."
+msgstr "لا يمكن تشغيل هذا الملف كصوت."
+
+#. placeholder {0}: Math.round(maxBytes() / 1000)
+#: components/app/interface/settings/server/soundboard/SoundboardList.tsx
+msgid "This file is too big. Sounds can be up to {0} KB."
+msgstr "هذا الملف كبير جدًا. يمكن أن يصل حجم الصوت إلى {0} كيلوبايت."
+
+#. placeholder {0}: err.max
+#: components/i18n/errors.tsx
+msgid "This server has as many sounds as it can have ({0}). Remove one first."
+msgstr "لدى هذا السيرفر الحد الأقصى من الأصوات ({0}). أزل صوتًا أولًا."
+
+#. placeholder {0}: SOUND_MAX_MS / 1000
+#: components/app/interface/settings/server/soundboard/SoundboardList.tsx
+msgid "This sound is too long. Sounds can be up to {0} seconds."
+msgstr "هذا الصوت طويل جدًا. يمكن أن يصل طول الصوت إلى {0} ثانية."
+
+#. placeholder {0}: err.max
+#: components/i18n/errors.tsx
+msgid "This stage has as many speakers as it can have ({0}). Move someone to the audience first."
+msgstr "على هذه المنصة الحد الأقصى من المتحدثين ({0}). انقل أحدهم إلى الجمهور أولًا."
+
+#: components/ui/components/features/voice/stage/StagePanel.tsx
+msgid "Topic"
+msgstr "الموضوع"
+
+#: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
+msgid "Use soundboard"
+msgstr "استخدام لوحة الأصوات"
+
+#: components/app/interface/settings/user/voice/SoundboardOptions.tsx
+msgid "You hear no soundboard sounds in calls."
+msgstr "لن تسمع أصوات لوحة الأصوات في المكالمات."

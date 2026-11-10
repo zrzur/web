@@ -29,6 +29,7 @@ import {
   OverviewPage,
   RolesPage,
   SafetyPage,
+  SoundboardPage,
 } from "./server/pages";
 import {
   type PageId,
@@ -188,6 +189,8 @@ const Config: SettingsConfiguration<Server> = {
         return <JoinRequests server={server} />;
       case "emoji":
         return <EmojiPage server={server} />;
+      case "soundboard":
+        return <SoundboardPage server={server} />;
       case "safety":
         return <SafetyPage server={server} />;
       case "log":
@@ -283,6 +286,16 @@ const Config: SettingsConfiguration<Server> = {
               description: <Trans>The server's own emoji.</Trans>,
               keywords: pageKeywords("emoji"),
               sections: searchSections("emoji"),
+            },
+            {
+              id: "soundboard",
+              icon: <Icon name="music-note" size={20} />,
+              title: <Trans>Soundboard</Trans>,
+              description: (
+                <Trans>Short sounds members play in voice calls.</Trans>
+              ),
+              keywords: pageKeywords("soundboard"),
+              sections: searchSections("soundboard"),
             },
           ],
         },

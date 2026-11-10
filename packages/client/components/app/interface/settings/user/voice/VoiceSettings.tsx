@@ -7,6 +7,7 @@ import { Column } from "@revolt/ui";
 import { InputSensitivityOptions } from "./InputSensitivityOptions";
 import { PushToTalkOptions } from "./PushToTalkOptions";
 import { ScreenShareOptions } from "./ScreenShareOptions";
+import { SoundboardOptions } from "./SoundboardOptions";
 import { VoiceInputOptions } from "./VoiceInputOptions";
 import { VoiceProcessingOptions } from "./VoiceProcessingOptions";
 
@@ -25,6 +26,7 @@ export function VoiceSettings() {
         <InputSensitivityOptions />
       </Show>
       <VoiceProcessingOptions />
+      <SoundboardOptions />
       <Show when={limits().video}>
         <ScreenShareOptions />
       </Show>

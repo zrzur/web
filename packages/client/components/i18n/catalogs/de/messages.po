@@ -24689,3 +24689,215 @@ msgstr "Zrzur, direkt auf <0>deinem Desktop.</0>"
 #: components/app/interface/settings/user/appearance/AppearanceMenu.tsx
 #~ msgid "Zrzur's own look: very dark neutral panels with Zrzur Pink as the one accent."
 #~ msgstr "Zrzurs eigener Look: sehr dunkle, neutrale Flächen mit Zrzur-Pink als einziger Akzentfarbe."
+
+#. placeholder {0}: Math.max(0, limit() - sounds().length)
+#. placeholder {1}: limit()
+#. placeholder {2}: SOUND_MAX_MS / 1000
+#: components/app/interface/settings/server/soundboard/SoundboardList.tsx
+msgid "{0} of {1} sounds left. Up to {2} seconds each."
+msgstr "Noch {0} von {1} Sounds frei. Jeder bis zu {2} Sekunden."
+
+#. placeholder {0}: seconds(sound.duration_ms)
+#: components/app/interface/settings/server/soundboard/SoundboardList.tsx
+msgid "{0} s"
+msgstr "{0} s"
+
+#: components/app/interface/settings/server/soundboard/SoundboardList.tsx
+msgid "Add a sound"
+msgstr "Sound hinzufügen"
+
+#: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
+msgid "Add and remove the server's sounds"
+msgstr "Sounds des Servers hinzufügen und entfernen"
+
+#: components/app/interface/settings/server/soundboard/SoundboardList.tsx
+msgid "Add sound"
+msgstr "Sound hinzufügen"
+
+#. placeholder {0}: Math.round(maxBytes() / 1000)
+#: components/app/interface/settings/server/soundboard/SoundboardList.tsx
+msgid "An MP3, OGG or WAV file of up to {0} KB, then a name."
+msgstr "Eine MP3-, OGG- oder WAV-Datei bis {0} KB, dann ein Name."
+
+#: components/app/interface/settings/server/soundboard/SoundboardList.tsx
+msgid "Choose a sound"
+msgstr "Sound auswählen"
+
+#: components/ui/components/features/voice/soundboard/SoundboardPicker.tsx
+msgid "Close soundboard"
+msgstr "Soundboard schließen"
+
+#: components/ui/components/features/voice/stage/StagePanel.tsx
+msgid "Edit topic"
+msgstr "Thema bearbeiten"
+
+#: components/app/interface/settings/server/soundboard/SoundboardList.tsx
+msgid "Emoji (optional)"
+msgstr "Emoji (optional)"
+
+#: components/ui/components/features/voice/stage/StagePanel.tsx
+msgid "End stage"
+msgstr "Bühne beenden"
+
+#: components/ui/components/features/voice/stage/StagePanel.tsx
+msgid "Everyone leaves the stage."
+msgstr "Alle verlassen die Bühne."
+
+#: components/ui/components/features/voice/stage/StagePanel.tsx
+msgid "Invite to speak"
+msgstr "Zum Sprechen einladen"
+
+#. placeholder {0}: sound.name
+#: components/app/interface/settings/server/soundboard/SoundboardList.tsx
+msgid "Listen to {0}"
+msgstr "{0} anhören"
+
+#. placeholder {0}: roles().audience.length
+#: components/ui/components/features/voice/stage/StagePanel.tsx
+msgid "Listening: {0}"
+msgstr "Zuhörende: {0}"
+
+#: components/ui/components/features/voice/stage/StagePanel.tsx
+msgid "Lower hand"
+msgstr "Hand senken"
+
+#: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
+#: components/app/interface/settings/server/layout.tsx
+msgid "Manage soundboard"
+msgstr "Soundboard verwalten"
+
+#: components/ui/components/features/voice/stage/StagePanel.tsx
+msgid "Move to audience"
+msgstr "Ins Publikum verschieben"
+
+#: components/app/interface/settings/user/voice/SoundboardOptions.tsx
+msgid "Mute the soundboard"
+msgstr "Soundboard stummschalten"
+
+#: components/ui/components/features/voice/StreamPreviewCard.tsx
+msgid "No preview yet"
+msgstr "Noch keine Vorschau"
+
+#: components/app/interface/settings/server/soundboard/SoundboardList.tsx
+msgid "No sounds yet."
+msgstr "Noch keine Sounds."
+
+#: components/ui/components/features/voice/soundboard/SoundboardPicker.tsx
+msgid "No sounds yet. People who manage the soundboard add them in Server settings, Soundboard."
+msgstr "Noch keine Sounds. Wer das Soundboard verwaltet, fügt sie unter Servereinstellungen, Soundboard hinzu."
+
+#: components/ui/components/features/voice/stage/StagePanel.tsx
+msgid "No topic yet"
+msgstr "Noch kein Thema"
+
+#: components/app/interface/settings/server/soundboard/SoundboardList.tsx
+msgid "Pick an MP3, OGG or WAV file."
+msgstr "Wähle eine MP3-, OGG- oder WAV-Datei."
+
+#: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
+msgid "Play the server's sounds in a voice call"
+msgstr "Sounds des Servers in einem Sprachanruf abspielen"
+
+#: components/ui/components/features/voice/stage/StagePanel.tsx
+msgid "Raise hand"
+msgstr "Hand heben"
+
+#: components/ui/components/features/voice/stage/StagePanel.tsx
+msgid "Raised hands"
+msgstr "Gehobene Hände"
+
+#. placeholder {0}: props.name
+#: components/ui/components/features/voice/StreamPreviewCard.tsx
+msgid "Screen of {0}"
+msgstr "Bildschirm von {0}"
+
+#: components/ui/components/features/voice/StreamPreviewCard.tsx
+msgid "Sharing their screen"
+msgstr "Teilt den Bildschirm"
+
+#: components/app/interface/settings/server/soundboard/SoundboardList.tsx
+#: components/app/interface/settings/ServerSettings.tsx
+msgid "Short sounds members play in voice calls."
+msgstr "Kurze Sounds, die Mitglieder in Sprachanrufen abspielen."
+
+#: components/app/interface/settings/user/voice/SoundboardOptions.tsx
+msgid "Short sounds people play in a voice call, on your device."
+msgstr "Kurze Sounds, die andere in einem Sprachanruf abspielen, auf deinem Gerät."
+
+#: components/app/interface/settings/ServerSettings.tsx
+#: components/app/interface/settings/user/voice/SoundboardOptions.tsx
+#: components/ui/components/features/voice/callCard/VoiceCallCardActions.tsx
+#: components/ui/components/features/voice/soundboard/SoundboardPicker.tsx
+msgid "Soundboard"
+msgstr "Soundboard"
+
+#: components/app/interface/settings/user/voice/SoundboardOptions.tsx
+msgid "Soundboard volume"
+msgstr "Soundboard-Lautstärke"
+
+#: components/app/interface/settings/server/soundboard/SoundboardList.tsx
+msgid "Sounds"
+msgstr "Sounds"
+
+#: components/ui/components/features/voice/stage/StagePanel.tsx
+msgid "Speakers"
+msgstr "Sprechende"
+
+#. placeholder {0}: roles().speakers.length
+#: components/ui/components/features/voice/stage/StagePanel.tsx
+msgid "Speakers: {0}"
+msgstr "Sprechende: {0}"
+
+#: components/modal/modals/CreateChannel.tsx
+#: components/ui/components/features/voice/stage/StagePanel.tsx
+msgid "Stage"
+msgstr "Bühne"
+
+#: components/modal/modals/CreateChannel.tsx
+msgctxt "channel-type"
+msgid "Stage"
+msgstr "Bühne"
+
+#: components/modal/modals/CreateChannel.tsx
+msgid "Talks: speakers on stage, everyone else listens and can raise a hand."
+msgstr "Für Vorträge: Sprechende auf der Bühne, alle anderen hören zu und können die Hand heben."
+
+#: components/app/interface/settings/server/soundboard/SoundboardList.tsx
+msgid "The soundboard is full. Remove a sound, or add Wings to the server for more."
+msgstr "Das Soundboard ist voll. Entferne einen Sound oder gib dem Server Wings für mehr."
+
+#: components/app/interface/settings/server/soundboard/SoundboardList.tsx
+msgid "This file can't be played as a sound."
+msgstr "Diese Datei lässt sich nicht als Sound abspielen."
+
+#. placeholder {0}: Math.round(maxBytes() / 1000)
+#: components/app/interface/settings/server/soundboard/SoundboardList.tsx
+msgid "This file is too big. Sounds can be up to {0} KB."
+msgstr "Diese Datei ist zu groß. Sounds dürfen bis zu {0} KB groß sein."
+
+#. placeholder {0}: err.max
+#: components/i18n/errors.tsx
+msgid "This server has as many sounds as it can have ({0}). Remove one first."
+msgstr "Dieser Server hat schon so viele Sounds wie möglich ({0}). Entferne zuerst einen."
+
+#. placeholder {0}: SOUND_MAX_MS / 1000
+#: components/app/interface/settings/server/soundboard/SoundboardList.tsx
+msgid "This sound is too long. Sounds can be up to {0} seconds."
+msgstr "Dieser Sound ist zu lang. Sounds dürfen bis zu {0} Sekunden lang sein."
+
+#. placeholder {0}: err.max
+#: components/i18n/errors.tsx
+msgid "This stage has as many speakers as it can have ({0}). Move someone to the audience first."
+msgstr "Diese Bühne hat schon so viele Sprechende wie möglich ({0}). Verschiebe zuerst jemanden ins Publikum."
+
+#: components/ui/components/features/voice/stage/StagePanel.tsx
+msgid "Topic"
+msgstr "Thema"
+
+#: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
+msgid "Use soundboard"
+msgstr "Soundboard verwenden"
+
+#: components/app/interface/settings/user/voice/SoundboardOptions.tsx
+msgid "You hear no soundboard sounds in calls."
+msgstr "Du hörst in Anrufen keine Soundboard-Sounds."

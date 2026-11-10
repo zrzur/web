@@ -15,6 +15,7 @@ function ReadOnlyReason(props: { permission: NeededPermission }) {
     ManageChannel: t`Manage channel`,
     ManageRole: t`Manage roles`,
     ManageCustomisation: t`Manage customisation`,
+    ManageSoundboard: t`Manage soundboard`,
     BanMembers: t`Ban members`,
     ManageWebhooks: t`Manage webhooks`,
     ViewAuditLogs: t`View audit log`,

@@ -9,6 +9,11 @@ import { useVoice } from "@revolt/rtc";
 import { useState } from "@revolt/state";
 import { Icon } from "@revolt/ui/icons/Icon";
 
+import {
+  setSoundboardOpen,
+  soundboardOpen,
+} from "../soundboard/soundboardOpen";
+
 export function VoiceCallCardActions(props: { size: "xs" | "sm" }) {
   const voice = useVoice();
   const state = useState();
@@ -124,6 +129,28 @@ export function VoiceCallCardActions(props: { size: "xs" | "sm" }) {
         >
           <Icon name="monitor-arrow-up" size={iconSize()} />
         </ControlButton>
+        {/* server calls only: a server's sounds, for those who may play them */}
+        <Show when={voice.channel()?.server}>
+          <ControlButton
+            size={props.size}
+            tone={soundboardOpen() ? "on" : "neutral"}
+            data-voice-control="soundboard"
+            aria-pressed={soundboardOpen()}
+            disabled={
+              voice.state() !== "CONNECTED" ||
+              !voice.speakingPermission ||
+              !voice.channel()?.havePermission("UseSoundboard")
+            }
+            label={
+              voice.channel()?.havePermission("UseSoundboard")
+                ? t`Soundboard`
+                : t`Missing permission`
+            }
+            onClick={() => setSoundboardOpen(!soundboardOpen())}
+          >
+            <Icon name="music-note" size={iconSize()} />
+          </ControlButton>
+        </Show>
       </Show>
       <ControlButton
         size={props.size}

@@ -1,6 +1,14 @@
 import { useLingui } from "@lingui/solid/macro";
 import { createResizeObserver } from "@solid-primitives/resize-observer";
-import { createEffect, createMemo, For, onMount, Show } from "solid-js";
+import {
+  createEffect,
+  createMemo,
+  For,
+  lazy,
+  on,
+  onMount,
+  Show,
+} from "solid-js";
 import { TrackLoop } from "solid-livekit-components";
 import { styled } from "styled-system/jsx";
 
@@ -10,9 +18,18 @@ import { Symbol } from "@revolt/ui/components/utils/Symbol";
 import { scrollableStyles } from "@revolt/ui/directives";
 import { Icon } from "@revolt/ui/icons/Icon";
 
+import {
+  setSoundboardOpen,
+  soundboardOpen,
+} from "../soundboard/soundboardOpen";
+
 import { ParticipantTile, tile } from "./ParticipantTile";
 import { VoiceCallCardActions } from "./VoiceCallCardActions";
 import { VoiceCallCardStatus } from "./VoiceCallCardStatus";
+
+// only a stage call loads the stage controls, and the first open the sounds
+const StagePanel = lazy(() => import("../stage/StagePanel"));
+const SoundboardPicker = lazy(() => import("../soundboard/SoundboardPicker"));
 
 /**
  * Call card (active)
@@ -20,10 +37,30 @@ import { VoiceCallCardStatus } from "./VoiceCallCardStatus";
 export function VoiceCallCardActiveRoom() {
   const voice = useVoice();
   const collapsed = createMemo(() => voice.layout() === "collapsed");
+  // a new call starts with the soundboard closed
+  createEffect(
+    on(
+      () => voice.channel()?.id,
+      () => setSoundboardOpen(false),
+    ),
+  );
 
   return (
     <View collapsed={collapsed()}>
+      <Show when={!collapsed() && voice.channel()?.isStage && voice.channel()}>
+        {(channel) => <StagePanel channel={channel()} />}
+      </Show>
       <Participants />
+      <Show
+        when={
+          !collapsed() &&
+          soundboardOpen() &&
+          voice.channel()?.server &&
+          voice.channel()
+        }
+      >
+        {(channel) => <SoundboardPicker channel={channel()} />}
+      </Show>
       <VoiceCallControls>
         <VoiceCallControlHolder left collapsed={collapsed()}>
           <VoiceCallCardStatus />

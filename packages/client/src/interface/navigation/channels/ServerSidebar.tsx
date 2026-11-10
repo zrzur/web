@@ -987,7 +987,7 @@ function Entry(
                 </Match>
                 <Match when={props.channel.isVoice}>
                   <SidebarIcon
-                    name="voice"
+                    name={props.channel.isStage ? "stage" : "voice"}
                     size={20}
                     style={{
                       color: inCall() ? "var(--z-presence-online)" : undefined,

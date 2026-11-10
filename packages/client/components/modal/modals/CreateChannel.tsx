@@ -44,10 +44,13 @@ export function CreateChannelModal(
       const description = group.controls.description.value.trim();
       const catId = props.categoryId;
       // one request: type, name, description, category and privacy
+      const voiceRoom = kind === "Voice" || kind === "Stage";
       const channel = await props.server.createChannel({
-        type: kind === "Voice" ? "Voice" : kind === "Forum" ? "Forum" : "Text",
+        type: voiceRoom ? "Voice" : kind === "Forum" ? "Forum" : "Text",
         name: group.controls.name.value,
         ...(description ? { description } : {}),
+        // a stage is a voice room with speakers and an audience
+        ...(kind === "Stage" ? { voice: { stage: true } } : {}),
         ...(kind === "Announcement" ? { announcement: true } : {}),
         ...(catId && catId !== "default" ? { category: catId } : {}),
         ...(isPrivate() ? { private: true } : {}),
@@ -75,11 +78,13 @@ export function CreateChannelModal(
       iconName={
         group.controls.type.value === "Voice"
           ? "speaker-high"
-          : group.controls.type.value === "Announcement"
-            ? "megaphone"
-            : group.controls.type.value === "Forum"
-              ? "note-pencil"
-              : "hash"
+          : group.controls.type.value === "Stage"
+            ? "waveform"
+            : group.controls.type.value === "Announcement"
+              ? "megaphone"
+              : group.controls.type.value === "Forum"
+                ? "note-pencil"
+                : "hash"
       }
       showClose={false}
       show={props.show}
@@ -123,6 +128,12 @@ export function CreateChannelModal(
                   <Trans>Voice</Trans>
                 </strong>
               </Radio2.Option>
+              <Radio2.Option value="Stage">
+                <Icon name="waveform" size={18} />
+                <strong>
+                  <Trans context="channel-type">Stage</Trans>
+                </strong>
+              </Radio2.Option>
               <Radio2.Option value="Announcement">
                 <Icon name="megaphone" size={18} />
                 <strong>
@@ -141,6 +152,11 @@ export function CreateChannelModal(
             <TypeHint>
               {group.controls.type.value === "Voice" ? (
                 <Trans>Talk, video and screen sharing</Trans>
+              ) : group.controls.type.value === "Stage" ? (
+                <Trans>
+                  Talks: speakers on stage, everyone else listens and can raise
+                  a hand.
+                </Trans>
               ) : group.controls.type.value === "Announcement" ? (
                 <Trans>
                   News and updates. Only moderators post, everyone reads.
@@ -165,9 +181,16 @@ export function CreateChannelModal(
             placeholder={
               group.controls.type.value === "Voice"
                 ? t`Voice channel`
-                : "new-channel"
+                : group.controls.type.value === "Stage"
+                  ? t`Stage`
+                  : "new-channel"
             }
-            prefix={group.controls.type.value !== "Voice" ? "#" : undefined}
+            prefix={
+              group.controls.type.value !== "Voice" &&
+              group.controls.type.value !== "Stage"
+                ? "#"
+                : undefined
+            }
           />
           <Form2.TextField
             maxlength={1024}

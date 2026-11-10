@@ -1,4 +1,12 @@
-import { For, Show, Suspense, createEffect, lazy, splitProps } from "solid-js";
+import {
+  For,
+  Show,
+  Suspense,
+  createEffect,
+  createSignal,
+  lazy,
+  splitProps,
+} from "solid-js";
 
 import { Channel, VoiceParticipant } from "@zrzur/sdk/solid";
 import { cva } from "styled-system/css";
@@ -41,6 +49,9 @@ export function VoiceChannelPreview(props: { channel: Channel }) {
 
 /** Who is in the call per LiveKit, loaded with it (the first call) */
 const VariantLive = lazy(() => import("./LiveVoiceChannelPreview"));
+
+/** A still of a screen share, loaded the first time someone hovers one */
+const StreamPreviewCard = lazy(() => import("./StreamPreviewCard"));
 
 /**
  * Use the API as the source of truth
@@ -118,6 +129,15 @@ export function CommonUser(props: {
         .catch(() => undefined);
   });
 
+  // Before joining, hovering (or focusing) someone who shares their screen
+  // shows a still of it; nothing is fetched until then
+  const [hovered, setHovered] = createSignal(false);
+  const showPreview = () =>
+    hovered() &&
+    iconProps.screenshare &&
+    !rest.isLive &&
+    !draggedVoiceParticipant();
+
   // Moderators drag participants onto another voice channel (Discord-style).
   const canDrag = () => voiceModeration(rest.channel, member()).move;
   // Channel reordering grabs rows on mousedown/touchstart; a participant
@@ -153,6 +173,10 @@ export function CommonUser(props: {
         });
       }}
       on:dragend={() => setDraggedVoiceParticipant()}
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
+      onFocus={() => setHovered(true)}
+      onBlur={() => setHovered(false)}
       use:floating={{
         userCard: {
           user: user().user!,
@@ -171,6 +195,13 @@ export function CommonUser(props: {
       }}
     >
       <Ripple />
+      <Show when={showPreview()}>
+        <StreamPreviewCard
+          channel={rest.channel}
+          userId={rest.userId}
+          name={member()?.displayName ?? user().username}
+        />
+      </Show>
       <Avatar size={24} src={user().avatar} fallback={user().username} />{" "}
       <PreviewUsername>
         {member()?.displayName ?? user().username}
