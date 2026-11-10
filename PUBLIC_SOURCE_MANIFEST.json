@@ -5661,6 +5661,12 @@
       "category": "product-source-or-build-manifest"
     },
     {
+      "path": "packages/client/components/ui/components/design/buttonVariants.test.ts",
+      "sha256": "cd514e33541713bbf35318652ccd9a7a6c9b4ffd2a4df507f464f1af4e78bed3",
+      "bytes": 1202,
+      "category": "synthetic-test-source-or-fixture"
+    },
+    {
       "path": "packages/client/components/ui/components/design/dateTime.test.ts",
       "sha256": "301b56ce149c52eb0416cb741448838a5a7e76ab6bc6639696a4f1f8004fd581",
       "bytes": 2906,
@@ -40858,8 +40864,8 @@
     },
     {
       "path": "packages/client/src/interface/events/EventCard.tsx",
-      "sha256": "524c2276ef453f7f0b01b44db4a1ea20e5ac1aa6f6de45b0df38c974a3c325e7",
-      "bytes": 23670,
+      "sha256": "e5d6ed484a2bf5b0fce6caaf49edb1efee0215100908865f7aa3db9249f6e74f",
+      "bytes": 23669,
       "category": "product-source-or-build-manifest"
     },
     {
