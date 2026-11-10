@@ -3046,8 +3046,8 @@
     },
     {
       "path": "packages/client/components/i18n/catalogs/as/messages.po",
-      "sha256": "e0d7d2d635c66702f68fe9190bf873929508fc197901d575baa5e085dd9e48e7",
-      "bytes": 691970,
+      "sha256": "8da8332281120e44432648bd85bbff1fc13be86ba9a80e8509eb0e1760bf2ecd",
+      "bytes": 692130,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -3058,8 +3058,8 @@
     },
     {
       "path": "packages/client/components/i18n/catalogs/az/messages.po",
-      "sha256": "be8429a2a2574a395aec1ba08b87bb8b1b3964eed391e9907760cef285426b10",
-      "bytes": 691763,
+      "sha256": "8117b54aa49872c05c8fd02ecac0750cf6372a8cbd7f19887ebfc8150dad91cd",
+      "bytes": 691923,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -3070,8 +3070,8 @@
     },
     {
       "path": "packages/client/components/i18n/catalogs/be/messages.po",
-      "sha256": "139af721f7f8251fda8a0665f16c50f56f5d4ba016f511d730f95ba6f044026b",
-      "bytes": 701871,
+      "sha256": "4d094de79cf96c6346b635d9223b40324cc41bb20d0a396225f8d84b3654d5b3",
+      "bytes": 702031,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -3082,8 +3082,8 @@
     },
     {
       "path": "packages/client/components/i18n/catalogs/bg/messages.po",
-      "sha256": "bf1a7a0c9124389fc2390ffae9069205e03ae5263a5120c9bea1ec2dcef3d671",
-      "bytes": 697063,
+      "sha256": "7f0aad4486d92a6c7cb98f91ffa8ea869e40504f882a2958d5de766faa02a99c",
+      "bytes": 697223,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -3094,8 +3094,8 @@
     },
     {
       "path": "packages/client/components/i18n/catalogs/bn/messages.po",
-      "sha256": "f41d2d8344fee4576ef7d2eae31360c2bfc57f066da00758bbdc031fcf973e8d",
-      "bytes": 700358,
+      "sha256": "53845315f0d8ee3ed0487892e4a71a45765f539c207f8625afe94c3d42438699",
+      "bytes": 700518,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -3106,8 +3106,8 @@
     },
     {
       "path": "packages/client/components/i18n/catalogs/br/messages.po",
-      "sha256": "d442d0fb8b29710ecd5677534110ddf24b28ecb90b81dfd19e05191463a36c89",
-      "bytes": 692114,
+      "sha256": "3af230e0d6e9c3ed135d675ce3db7303456ce7fb9175a882ad49ae0fe067c1c4",
+      "bytes": 692274,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -3118,8 +3118,8 @@
     },
     {
       "path": "packages/client/components/i18n/catalogs/ca/messages.po",
-      "sha256": "296c370869cb215d270633d53e5c967885bf53acd760f7bc93b806d0b4ac5f8a",
-      "bytes": 704027,
+      "sha256": "885a1c2449e33403b92138d36c4e182ee62b3c027d71fed68b9524845882813f",
+      "bytes": 704187,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -3130,8 +3130,8 @@
     },
     {
       "path": "packages/client/components/i18n/catalogs/ceb/messages.po",
-      "sha256": "59b9c84442762dec08b349d0046ca9e289f95804145ce9e353e1cb1711c4dd89",
-      "bytes": 689243,
+      "sha256": "7d4277275e360d3e729d9c1a87275bd2984313af3a35e6d2818ec03fa019a9ec",
+      "bytes": 689403,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -3142,8 +3142,8 @@
     },
     {
       "path": "packages/client/components/i18n/catalogs/ckb/messages.po",
-      "sha256": "cf2f0feb6788d8a79db644cc2ebf3d75f3bd0a76254a6ffcb53fcef2f70a846f",
-      "bytes": 694903,
+      "sha256": "8d8e13bd7f99f7cb9db1d750026f8905263dc7b187b570dc8125e258aad8db5b",
+      "bytes": 695063,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -3154,8 +3154,8 @@
     },
     {
       "path": "packages/client/components/i18n/catalogs/cs/messages.po",
-      "sha256": "6fdc4f47ac45013b7e4ff83b8a5899fc93a473169ce0d3e117a902b6901953dc",
-      "bytes": 698851,
+      "sha256": "cf264e7b1c03c45371cdc58aaa21eee264aa37222709b1aad4726b566b670972",
+      "bytes": 699011,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -3166,8 +3166,8 @@
     },
     {
       "path": "packages/client/components/i18n/catalogs/da/messages.po",
-      "sha256": "9f9f7d27973d7e68603d37a5b76334c9a58f4da54996848b29a9a3f4b7816603",
-      "bytes": 692356,
+      "sha256": "365011519f08fc4c8a6603e22ea1a7626fb6b08690146c8c326021cc0bd279af",
+      "bytes": 692516,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -3190,8 +3190,8 @@
     },
     {
       "path": "packages/client/components/i18n/catalogs/el/messages.po",
-      "sha256": "37640a33ab0b024f4b95880e41b00b44c75f7aa8b218e6ee6b315ef6472abf6b",
-      "bytes": 695652,
+      "sha256": "4fb931198ed217aa173c451660de1cbec8c5a82f8728b5cdc4c89f6f6ae646b6",
+      "bytes": 695812,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -3202,8 +3202,8 @@
     },
     {
       "path": "packages/client/components/i18n/catalogs/en-US/messages.po",
-      "sha256": "73e7331f38c02c5952d5112edc510f97cc0d68d28b4af036d2c5918bd5ce00e1",
-      "bytes": 691093,
+      "sha256": "778b48eba9ac0dbf88da0e83b351bc675b37f5613c588fa886583c8cf9bb3c86",
+      "bytes": 691253,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -3226,8 +3226,8 @@
     },
     {
       "path": "packages/client/components/i18n/catalogs/es-419/messages.po",
-      "sha256": "3c6020d65d0049f7abd85ce685fe1c553818f70ff372955e2155d929d09710c1",
-      "bytes": 695448,
+      "sha256": "031bcbbe70488d4ef72a2ad90c6f78407cea6913eb2bdf9bf3a4c1a9b46de7aa",
+      "bytes": 695608,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -3250,8 +3250,8 @@
     },
     {
       "path": "packages/client/components/i18n/catalogs/et/messages.po",
-      "sha256": "b63962052e4164ed2e7fdfa776fb1978f477e7454ec7ddca2942c8b815b8a724",
-      "bytes": 693547,
+      "sha256": "d1fac5675ed429bc8372bfc5a85c81d2ad86800e097ba325e31cb5b1c6a8e2d9",
+      "bytes": 693707,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -3262,8 +3262,8 @@
     },
     {
       "path": "packages/client/components/i18n/catalogs/fa/messages.po",
-      "sha256": "c71f41aa9059f560f9f26c2b582d6149d06c98cc2e4a2920be2bf04191ad334f",
-      "bytes": 694037,
+      "sha256": "d7f960209082f759d1ad1bbc854e4b49bbf654c1c2c18af53be2eab9a03f0af8",
+      "bytes": 694197,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -3274,8 +3274,8 @@
     },
     {
       "path": "packages/client/components/i18n/catalogs/fi/messages.po",
-      "sha256": "890fda9637529d7783ba0460bcd4122e3ad0fb8709e3c69f7b52cf5ea8912e3b",
-      "bytes": 701811,
+      "sha256": "f344597b2a6d87a7b42a30caa62d759ff9bf8401fe03dedd3082e7def3ff6e85",
+      "bytes": 701971,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -3286,8 +3286,8 @@
     },
     {
       "path": "packages/client/components/i18n/catalogs/fil/messages.po",
-      "sha256": "64ba62e9353a71da908424961de24d1e2bfaefcef68d508a9e09fa0601728be0",
-      "bytes": 692601,
+      "sha256": "1ae431e8d590d642ec90ac66bed166bc478f104128d48e62085bc633df99795c",
+      "bytes": 692761,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -3310,8 +3310,8 @@
     },
     {
       "path": "packages/client/components/i18n/catalogs/ga/messages.po",
-      "sha256": "8e95461913d46612992f98e4468ec36836c082b63fc33d236fe9606d86acafa5",
-      "bytes": 691067,
+      "sha256": "a38db3fe9304a711032d3edfc16c214ed9ac0b59ff74facb1600bc4a90ec4300",
+      "bytes": 691227,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -3322,8 +3322,8 @@
     },
     {
       "path": "packages/client/components/i18n/catalogs/hi/messages.po",
-      "sha256": "0a73d1fb0d19be59762f2c6dfd9ee324f2412ec89e53a5c69e3a9ca7dc0f28b5",
-      "bytes": 696908,
+      "sha256": "557b726361dc0170c96a8c45e411bf174645cf60c3885b36ef52571c091f8e8c",
+      "bytes": 697068,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -3334,8 +3334,8 @@
     },
     {
       "path": "packages/client/components/i18n/catalogs/hr/messages.po",
-      "sha256": "512d1c44d2b46def9d627da021f64377d902aa31276986ec818b0202d1f89c21",
-      "bytes": 691298,
+      "sha256": "e163e3c6cacdbfc84685fbf3de0c4edb0aa568e3ba83e31f0f6c252f4b1377d8",
+      "bytes": 691458,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -3346,8 +3346,8 @@
     },
     {
       "path": "packages/client/components/i18n/catalogs/hu/messages.po",
-      "sha256": "33e52affd65b3512da401b64c7931fd087cb271463b1ad2dd30c0e2b25869273",
-      "bytes": 699421,
+      "sha256": "795dcd425a00135302b94b5e1387036d1275e407ca2b5656320e21ae3d9d2c7e",
+      "bytes": 699581,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -3358,8 +3358,8 @@
     },
     {
       "path": "packages/client/components/i18n/catalogs/hy/messages.po",
-      "sha256": "fb542e92c6e8e39fa4878b99ea21f5744a9eee1847a2ec5454beca6b4083256f",
-      "bytes": 697002,
+      "sha256": "5a10b7a6dec52bc4ef5707e36830e1551eb44ad7ef13d82f40f81159250c544a",
+      "bytes": 697162,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -3370,8 +3370,8 @@
     },
     {
       "path": "packages/client/components/i18n/catalogs/id/messages.po",
-      "sha256": "66623e4d52b3a3f83ae060fd0756cdc3c9f1be1b9fd7c28be3e89bf19b7203c0",
-      "bytes": 707418,
+      "sha256": "72d584a6f664936149f89e9b9c27ec1be9d008e1655cd225844d6c078bebb06c",
+      "bytes": 707578,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -3382,8 +3382,8 @@
     },
     {
       "path": "packages/client/components/i18n/catalogs/is/messages.po",
-      "sha256": "01e50b8d415289dccebf2c556f57d356e93aacaa3b932ed3e915d364b41bb2b3",
-      "bytes": 688488,
+      "sha256": "3276a6076cb215fdc658706f28d65509feda398d5dbbdbeb7771b4f38400298b",
+      "bytes": 688648,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -3394,8 +3394,8 @@
     },
     {
       "path": "packages/client/components/i18n/catalogs/it/messages.po",
-      "sha256": "f077efc6883082aa4639f6a90e1343ad85a779ff0dbe74cb977570a0e40157d6",
-      "bytes": 708781,
+      "sha256": "99125fd8af05b153208952fcbe886c3af4f8adcd513a2f6f718e51128801e475",
+      "bytes": 708941,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -3406,8 +3406,8 @@
     },
     {
       "path": "packages/client/components/i18n/catalogs/ja/messages.po",
-      "sha256": "f6aae8fe8390b1d222b84f663a3aac6ea2d9edb21bc6d296747aea9fd9589b1f",
-      "bytes": 706387,
+      "sha256": "3081e7d736865e50458020096c9c552b179d74dddddea0f4b3c6ec00dcd1d9e8",
+      "bytes": 706547,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -3418,8 +3418,8 @@
     },
     {
       "path": "packages/client/components/i18n/catalogs/ko/messages.po",
-      "sha256": "48b80968b42d41e920d03c26661616546fd78228eda945b768632d1114dc5d30",
-      "bytes": 693483,
+      "sha256": "dceae279cf27fae23e51c1d84892b581ecb656977396b166eb54027cf8a9ba80",
+      "bytes": 693643,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -3430,8 +3430,8 @@
     },
     {
       "path": "packages/client/components/i18n/catalogs/lb/messages.po",
-      "sha256": "07f1d9b56fceada0b45840015b4fd9bf9ff59d2ca5d01d735e1acade578dcfad",
-      "bytes": 692433,
+      "sha256": "bfd46e8ca5a82ebb6ed38f2c6656ebf50b33529f913108ecd0d0d633eaf98022",
+      "bytes": 692593,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -3442,8 +3442,8 @@
     },
     {
       "path": "packages/client/components/i18n/catalogs/lt/messages.po",
-      "sha256": "3ae0dd830ecf97f5f1b95856bb2831cf68e53f5743a0afd70e815d76fe30cfc6",
-      "bytes": 691875,
+      "sha256": "3456f064d5d7116606b6f13f40a301611f2edb4e15a8d8c574956f7a5d27dd6b",
+      "bytes": 692035,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -3454,8 +3454,8 @@
     },
     {
       "path": "packages/client/components/i18n/catalogs/lv/messages.po",
-      "sha256": "7b032a7e8ab346322871309f6ae01a13808d3e36d3007a2921c2444b6248e66a",
-      "bytes": 692007,
+      "sha256": "d45f6f372119cf8be50f3a5b04cfced17be5b2c34ca4f7505617d7b89053b39b",
+      "bytes": 692167,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -3466,8 +3466,8 @@
     },
     {
       "path": "packages/client/components/i18n/catalogs/mk/messages.po",
-      "sha256": "733699f93468e886a40f841da69fe98fd3f86835d649af7b1db13ad8cf545aa5",
-      "bytes": 689370,
+      "sha256": "76d7ee73b3fc0d8e32a8cea4e012e50a2c56e3775e1043e27ba261f09a1e9232",
+      "bytes": 689530,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -3478,8 +3478,8 @@
     },
     {
       "path": "packages/client/components/i18n/catalogs/ms/messages.po",
-      "sha256": "64eb725e36e37ca8f1c5cd0fb5c1c4da2cbb7cca380e3aa600d7dbcc3da3fef8",
-      "bytes": 691207,
+      "sha256": "335a7bcdccfc21a1a59459b1088eb10774693d4e72451f8f89117c51dcd6e135",
+      "bytes": 691367,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -3490,8 +3490,8 @@
     },
     {
       "path": "packages/client/components/i18n/catalogs/nb-NO/messages.po",
-      "sha256": "53d5aa537154276cf1f42cbb6b40d108b1a09752e977eccc229227744772fe4b",
-      "bytes": 701258,
+      "sha256": "f3f04897279c3e96a7c8888097a1b8638b36c682a06788872c9659b70bb86ebf",
+      "bytes": 701418,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -3502,8 +3502,8 @@
     },
     {
       "path": "packages/client/components/i18n/catalogs/nl/messages.po",
-      "sha256": "75bd25f4660ead8058deac18275348482ce506898612095e6046418520018636",
-      "bytes": 703707,
+      "sha256": "40ac78352006baa37406bbfb332e37196969f8ade7df4e83aeabc06418b0bfb5",
+      "bytes": 703867,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -3514,8 +3514,8 @@
     },
     {
       "path": "packages/client/components/i18n/catalogs/pl/messages.po",
-      "sha256": "58f2c6f408699b389971d550b541a8f5c9fc801f266b90970e0c88ac01b330f4",
-      "bytes": 703618,
+      "sha256": "1da1e908a5172bb68b3c156860dff77a00a2f2872280a1cd9e1f376d127f32ed",
+      "bytes": 703778,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -3526,8 +3526,8 @@
     },
     {
       "path": "packages/client/components/i18n/catalogs/pt-BR/messages.po",
-      "sha256": "0b80c818af33e0176d5e866176fa4517a57cad4c82dc23b5f89646bc908e6648",
-      "bytes": 708188,
+      "sha256": "676745630148438c1d8652b19c5099e5c51c1e1a93f941778a366a0fb66e556c",
+      "bytes": 708348,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -3538,8 +3538,8 @@
     },
     {
       "path": "packages/client/components/i18n/catalogs/pt-PT/messages.po",
-      "sha256": "3240f54f04d1057812e4ae45c62183592a4a156189b23f433ceed928b77abdfa",
-      "bytes": 704633,
+      "sha256": "1249923b5442d3d463b6290ec01f1438873c8af2ceff1d99495f3edf63a3e6ff",
+      "bytes": 704793,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -3550,8 +3550,8 @@
     },
     {
       "path": "packages/client/components/i18n/catalogs/ro/messages.po",
-      "sha256": "fa3f615b8e06ef9d41c108ae56526b769b19d41804b0ecae22ad28dec3ed1e39",
-      "bytes": 693338,
+      "sha256": "68195f9bb8acb6235a10b2aa1e9b2d8347a880a8d0e2c51db5de225d6bd0e8ae",
+      "bytes": 693498,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -3574,8 +3574,8 @@
     },
     {
       "path": "packages/client/components/i18n/catalogs/si/messages.po",
-      "sha256": "cfad6870103a41bc774b0e344219b430c4b089dcb5b9e5b47287772509289a58",
-      "bytes": 697912,
+      "sha256": "53d0e06166d42b84075a5b857aac73796c71f0bc57cf6f2c558eafed13c44901",
+      "bytes": 698072,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -3586,8 +3586,8 @@
     },
     {
       "path": "packages/client/components/i18n/catalogs/sk/messages.po",
-      "sha256": "508a9a06d3aaa239652d8b900a812d99a76b71f3599ba95f60a6679717b8a7e2",
-      "bytes": 697658,
+      "sha256": "b21366f1e18dc3d1316240b7cfc4508e329449b7a00fe60ecc2a31276b30b7e9",
+      "bytes": 697818,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -3598,8 +3598,8 @@
     },
     {
       "path": "packages/client/components/i18n/catalogs/sl/messages.po",
-      "sha256": "7578c6cfad3f61f74fcb622bac7d70e42a7aaeee34dfbf39beb0211a670cd583",
-      "bytes": 691858,
+      "sha256": "f10559bc7fc3437d170cd3ee4bc4d51fc3152d2d9403d3742aaad5bb9cea85dc",
+      "bytes": 692018,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -3610,8 +3610,8 @@
     },
     {
       "path": "packages/client/components/i18n/catalogs/sq/messages.po",
-      "sha256": "bbe120956a74ce17663a775e5f9a09487a3fa3fd4cdba34cb7e00698e68a3c1a",
-      "bytes": 692896,
+      "sha256": "28f01e7b49ffd77fb1b3a7e661c3ca5faba8f6cc70cb71ee25a3b586edd3d93f",
+      "bytes": 693056,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -3622,8 +3622,8 @@
     },
     {
       "path": "packages/client/components/i18n/catalogs/sr/messages.po",
-      "sha256": "14f3b72221fb4ea776f9706db95f5834342de7012012e3664158e77e844000fe",
-      "bytes": 694820,
+      "sha256": "13b122cf19a57403cc569e3fc2c1fa3504d0bf9b73d62dad1d0b9f721fe97bee",
+      "bytes": 694980,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -3634,8 +3634,8 @@
     },
     {
       "path": "packages/client/components/i18n/catalogs/sv/messages.po",
-      "sha256": "602ca58e935ebf1b76caf40cc2509203a0e4f4b3856d4ab094bc0af96890d0d0",
-      "bytes": 702548,
+      "sha256": "d73cae27ad9c226ea802fe7ee3f88729d2cea543114cb758bb4c2131378a1913",
+      "bytes": 702708,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -3646,8 +3646,8 @@
     },
     {
       "path": "packages/client/components/i18n/catalogs/ta/messages.po",
-      "sha256": "ce20b4f4a4017e3fbf227ed56a5287b782cd46ec2eca5a9d9c79011a99e2cce8",
-      "bytes": 691370,
+      "sha256": "87e46775449e436f7368f3202fb2313e0c567525aaa088123899ce5dcaaa2e60",
+      "bytes": 691530,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -3658,8 +3658,8 @@
     },
     {
       "path": "packages/client/components/i18n/catalogs/th/messages.po",
-      "sha256": "851b5cae2c710b7a81e2a4c81a14341cf76a26fec61e66480ffd1b75affb1061",
-      "bytes": 696868,
+      "sha256": "f98536bf01ba7cb731c559cfd9a957645fa0e954b1a51d7999b2f74075f11c9e",
+      "bytes": 697028,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -3670,8 +3670,8 @@
     },
     {
       "path": "packages/client/components/i18n/catalogs/tr/messages.po",
-      "sha256": "882bedb2c35de3e9f6699d402f92703c6da5e62310ed7eda24b357d6174a825c",
-      "bytes": 709193,
+      "sha256": "17e76aa80789dad12daedeed0ce05b2da839f4dbf86079f866127cac21459631",
+      "bytes": 709353,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -3682,8 +3682,8 @@
     },
     {
       "path": "packages/client/components/i18n/catalogs/uk/messages.po",
-      "sha256": "ec48078bb645ffb5869c6367520e81b2a7d306974cc870db5c265f66c2d5dee3",
-      "bytes": 717468,
+      "sha256": "f41d4c8fa2597f1128870fcd807b3ed13338a76f6f566f233e9a69375e0d4e9f",
+      "bytes": 717628,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -3694,8 +3694,8 @@
     },
     {
       "path": "packages/client/components/i18n/catalogs/ur/messages.po",
-      "sha256": "69742290798f71040aa645645562e1e32967cb6dc667d7a372eeb2afd6fc83c5",
-      "bytes": 689421,
+      "sha256": "52d76529eaef555b2ec254b57de12d66a8c53f6cdef916b554adc42478b52c13",
+      "bytes": 689581,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -3706,8 +3706,8 @@
     },
     {
       "path": "packages/client/components/i18n/catalogs/vec/messages.po",
-      "sha256": "074c3002cb68c4d3493cfde24dca06b6fd04f808bb3e858dc1ee13f85bcea02a",
-      "bytes": 689866,
+      "sha256": "e54bc5586103cd56e98f4c07dc5c65a525c267bb2c291e04e863284cdad8414b",
+      "bytes": 690026,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -3718,8 +3718,8 @@
     },
     {
       "path": "packages/client/components/i18n/catalogs/vi/messages.po",
-      "sha256": "116aea15922574af3ba3711d65b8fbbcc972ad69247585c3b3145f228880a993",
-      "bytes": 694587,
+      "sha256": "3cf7f85045ed6da60dccf64f206cd23f8af7ab61ea302fc24bfd7a8bf89d7b3c",
+      "bytes": 694747,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -3742,8 +3742,8 @@
     },
     {
       "path": "packages/client/components/i18n/catalogs/zh-Hant/messages.po",
-      "sha256": "3cb391e3d54754435a21965f012fe819d43bb0661cbd9b3e792c2f88540ca184",
-      "bytes": 692148,
+      "sha256": "0c1c6e535b4b043913b04fa2a8fa3baafc14464f683c3cab9ff4d507c19281a3",
+      "bytes": 692308,
       "category": "product-source-or-build-manifest"
     },
     {
