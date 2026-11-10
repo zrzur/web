@@ -292,8 +292,8 @@
     },
     {
       "path": "CHANGELOG.md",
-      "sha256": "2ac0d80d11c09217eb0b5ede28f87228a09f8a9abe7767deb827fbcd85336454",
-      "bytes": 120834,
+      "sha256": "a4ab7e0587f2e9ffb7fcd9e63391f4e55b7963d49dafaf03c83f455ea41b1e63",
+      "bytes": 121212,
       "category": "public-documentation"
     },
     {
@@ -4318,8 +4318,8 @@
     },
     {
       "path": "packages/client/components/modal/modals/CreatePoll.tsx",
-      "sha256": "91cd63ec0c64da3cd17b6f1a275ebfb4c0b488e5a2f3bdb5d91ec84ea955a5de",
-      "bytes": 17135,
+      "sha256": "7b20faea4df371848026a7a7f4fd48965e6aefc34f7f87e9cfbcb7d1b1d513e4",
+      "bytes": 17145,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -4444,8 +4444,8 @@
     },
     {
       "path": "packages/client/components/modal/modals/EndPoll.tsx",
-      "sha256": "7abfa9b4c1d658c927bfb8a11252f015d7298ff6b3efe2cf61dd2108424941c1",
-      "bytes": 1480,
+      "sha256": "9da0190e2035c3762ab11fc32d869bc8a0c6fed5f0010339f57c990c1004a7eb",
+      "bytes": 1432,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -4582,8 +4582,8 @@
     },
     {
       "path": "packages/client/components/modal/modals/PollVoters.tsx",
-      "sha256": "6b8be5dce37007a122f9ba68dcf751900e121e3e5a5e58c22c1714017e9df639",
-      "bytes": 6083,
+      "sha256": "f5baa95b5b11b1c7628e3a3fa07aed9c8613c3ab4c5da24341332aba379a384d",
+      "bytes": 6041,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -5679,6 +5679,12 @@
       "category": "product-source-or-build-manifest"
     },
     {
+      "path": "packages/client/components/ui/components/design/dialogError.test.ts",
+      "sha256": "a6dfe5f4dc30af440693cbea654ccbd62a0c0847d1c26c7ef9ca8052112c3230",
+      "bytes": 1287,
+      "category": "synthetic-test-source-or-fixture"
+    },
+    {
       "path": "packages/client/components/ui/components/design/floatingSelectValue.test.ts",
       "sha256": "008d4fa9be1c56f7842d3428b3881b44008547641be838814d11ec0065074dcb",
       "bytes": 1138,
@@ -5992,8 +5998,8 @@
     },
     {
       "path": "packages/client/components/ui/components/features/messaging/elements/SystemMessageIcon.tsx",
-      "sha256": "7e54d9de0d1c40937f4ff6ce11982eb951c1d4e8c0b8790d212ed23e1ea77571",
-      "bytes": 5165,
+      "sha256": "208e52f359e2424c2b2011d75292d77da282ee8ff6624ba9d30b060cedcbfc9d",
+      "bytes": 5158,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -7000,8 +7006,8 @@
     },
     {
       "path": "packages/client/components/ui/icons/drawings.ts",
-      "sha256": "362cd7ad983b58c00e433a7f8d2d1537fc0e69fde853db254a9a6ee7d69e95e0",
-      "bytes": 91897,
+      "sha256": "ceda7a229f9660bf9c533c63b094d9e63dc8a83b23d8c4ae1548843538c50872",
+      "bytes": 92087,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -7009,6 +7015,12 @@
       "sha256": "1658d8213209df7b9b86dfc05d724ede48d00dbc27abc15976ec7adec9601cde",
       "bytes": 1066,
       "category": "license-and-attribution"
+    },
+    {
+      "path": "packages/client/components/ui/icons/hugeicons/ZRZUR-OWN.md",
+      "sha256": "4aedd7f7cb389d8e3a811e651ca636fd4ffd0b0a3886cb1fc3f3b414a555548f",
+      "bytes": 205,
+      "category": "public-documentation"
     },
     {
       "path": "packages/client/components/ui/icons/hugeicons/archive.svg",
@@ -7830,6 +7842,12 @@
       "path": "packages/client/components/ui/icons/hugeicons/plus.svg",
       "sha256": "a95ae2735860e02aaa761cdf5a3686c6b7483f6fe8bfa1110cb2aaf349eb13ce",
       "bytes": 292,
+      "category": "product-source-or-build-manifest"
+    },
+    {
+      "path": "packages/client/components/ui/icons/hugeicons/poll.svg",
+      "sha256": "8f26f9bc8a9392a2299815b849c58c3f71110df688d23d984a559d3d737f39bb",
+      "bytes": 290,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -39766,8 +39784,8 @@
     },
     {
       "path": "packages/client/src/interface/channels/text/Composition.tsx",
-      "sha256": "f0b6dcf8e5ae62410fedf83d8ea6f5c158c80ec689205c1cbd230e8bec1536e9",
-      "bytes": 25167,
+      "sha256": "bcd090a5f56a392a4c5ecd456d401d472cc142bbacf376f55aa78564383ec46b",
+      "bytes": 25146,
       "category": "product-source-or-build-manifest"
     },
     {
