@@ -399,6 +399,8 @@ const Title = styled("span", {
     overflow: "hidden",
     textOverflow: "ellipsis",
     whiteSpace: "nowrap",
+    // phones: the whole name, on two lines if it needs them
+    _phone: { whiteSpace: "normal", overflowWrap: "anywhere" },
   },
 });
 
