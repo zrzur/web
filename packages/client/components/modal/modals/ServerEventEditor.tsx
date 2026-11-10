@@ -136,7 +136,20 @@ export function ServerEventEditorModal(
     }
   };
 
+  // one press, one event: further presses (and Enter) wait for the answer
+  const [saving, setSaving] = createSignal(false);
+
   async function onSubmit() {
+    if (saving()) return;
+    setSaving(true);
+    try {
+      await save();
+    } finally {
+      setSaving(false);
+    }
+  }
+
+  async function save() {
     setError(undefined);
     const startsAt = start();
     const endsAt = hasEnd() ? end() : undefined;
@@ -207,6 +220,8 @@ export function ServerEventEditorModal(
           place: where,
           repeat: repeatValue,
           cover,
+          // repeats keep this wall-clock time where the event is planned
+          time_zone: Intl.DateTimeFormat().resolvedOptions().timeZone,
         });
         props.onClose();
         navigate(`/server/${props.server.id}/events/${created._id}`);
@@ -238,10 +253,11 @@ export function ServerEventEditorModal(
             void onSubmit();
             return false;
           },
-          isDisabled: !Form2.canSubmit(group),
+          isDisabled: !Form2.canSubmit(group) || saving(),
+          isLoading: saving(),
         },
       ]}
-      isDisabled={group.isPending}
+      isDisabled={group.isPending || saving()}
     >
       <form onSubmit={submit} data-testid="server-event-form">
         <Fields>
@@ -251,7 +267,7 @@ export function ServerEventEditorModal(
             counter
             name="title"
             control={group.controls.title}
-            label={t`Title`}
+            label={t({ message: "Title", context: "scheduled events" })}
             data-testid="server-event-title"
           />
           <Form2.TextField
@@ -290,7 +306,7 @@ export function ServerEventEditorModal(
           </ToggleRow>
           <Show when={hasEnd()}>
             <DateTimeField
-              label={t`Ends`}
+              label={t({ message: "Ends", context: "scheduled events" })}
               value={end()}
               min={start()}
               hour12={hour12()}
@@ -309,10 +325,10 @@ export function ServerEventEditorModal(
 
           <fieldset>
             <legend>
-              <Trans>Where</Trans>
+              <Trans context="scheduled events">Where</Trans>
             </legend>
             <Segmented<PlaceKind>
-              aria-label={t`Where`}
+              aria-label={t({ message: "Where", context: "scheduled events" })}
               value={kind()}
               onChange={setKind}
               options={[
@@ -360,7 +376,7 @@ export function ServerEventEditorModal(
 
           <FloatingSelect
             id="server-event-repeat"
-            label={t`Repeat`}
+            label={t({ message: "Repeat", context: "scheduled events" })}
             value={repeat()}
             onChange={(event) => setRepeat(event.currentTarget.value as Repeat)}
           >

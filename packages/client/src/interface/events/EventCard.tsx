@@ -42,17 +42,19 @@ export function EventCard(props: Props) {
   const { openModal } = useModals();
   const [error, setError] = createSignal<unknown>();
   const [busy, setBusy] = createSignal(false);
-  const [copied, setCopied] = createSignal(false);
-  const [confirm, setConfirm] = createSignal<"cancel" | "delete">();
+  const [copied, setCopied] = createSignal<"yes" | "failed">();
+  const [confirm, setConfirm] = createSignal<"cancel" | "series" | "delete">();
+  // a mark on its way: further presses wait (the button keeps its focus)
+  const [marking, setMarking] = createSignal(false);
   const [people, setPeople] = createSignal<User[]>();
   const [next, setNext] = createSignal<string>();
   const [showPeople, setShowPeople] = createSignal(false);
 
   const phase = () => eventPhase(props.event, props.now);
   const interested = () => client().serverEvents.isInterested(props.event._id);
-  const manager = () =>
-    props.server.havePermission("ManageServer") ||
-    props.event.creator === client().user?.id;
+  // being the creator gives no rights: Manage Server, like the server
+  const manager = () => props.server.havePermission("ManageServer");
+  const repeating = () => !!props.event.repeat;
   const upcoming = () =>
     props.event.status === "Scheduled" || props.event.status === "Active";
   const channel = () => {
@@ -83,14 +85,22 @@ export function EventCard(props: Props) {
     }
   }
 
-  const toggleInterest = () =>
-    act(() =>
-      client().serverEvents.setInterested(
+  async function toggleInterest() {
+    if (marking()) return;
+    setMarking(true);
+    setError(undefined);
+    try {
+      await client().serverEvents.setInterested(
         props.server.id,
         props.event._id,
         !interested(),
-      ),
-    );
+      );
+    } catch (failure) {
+      setError(failure);
+    } finally {
+      setMarking(false);
+    }
+  }
 
   async function loadPeople(more = false) {
     await act(async () => {
@@ -110,11 +120,22 @@ export function EventCard(props: Props) {
   }
 
   function share() {
-    const url = eventLink(location.origin, props.server.id, props.event._id);
-    void navigator.clipboard?.writeText(url).then(() => {
-      setCopied(true);
-      setTimeout(() => setCopied(false), 2000);
-    });
+    // the app address of this Zrzur, not the page the app happens to run on
+    const origin = client().configuration?.app || location.origin;
+    const url = eventLink(
+      origin.replace(/\/$/, ""),
+      props.server.id,
+      props.event._id,
+    );
+    const done = (state: "yes" | "failed") => {
+      setCopied(state);
+      setTimeout(() => setCopied(undefined), state === "yes" ? 2000 : 6000);
+    };
+    if (!navigator.clipboard) return done("failed");
+    navigator.clipboard.writeText(url).then(
+      () => done("yes"),
+      () => done("failed"),
+    );
   }
 
   return (
@@ -148,7 +169,7 @@ export function EventCard(props: Props) {
             </Match>
             <Match when={props.event.status === "Cancelled"}>
               <Badge data-tone="over">
-                <Trans>Cancelled</Trans>
+                <Trans context="scheduled events">Cancelled</Trans>
               </Badge>
             </Match>
             <Match when={props.event.status === "Completed"}>
@@ -216,7 +237,7 @@ export function EventCard(props: Props) {
         </Facts>
 
         <Show when={props.event.description}>
-          <Description>
+          <Description tabIndex={0} role="region" aria-label={t`Description`}>
             <Markdown content={props.event.description!} />
           </Description>
         </Show>
@@ -227,7 +248,7 @@ export function EventCard(props: Props) {
               size="sm"
               variant={interested() ? "tonal" : "outlined"}
               aria-pressed={interested()}
-              isDisabled={busy()}
+              aria-disabled={marking() || undefined}
               onPress={() => void toggleInterest()}
               data-testid="event-interested"
             >
@@ -253,8 +274,19 @@ export function EventCard(props: Props) {
             data-testid="event-share"
           >
             <Icon name="share-network" size={16} />
-            {copied() ? <Trans>Link copied</Trans> : <Trans>Copy link</Trans>}
+            {copied() === "yes" ? (
+              <Trans>Link copied</Trans>
+            ) : (
+              <Trans>Copy link</Trans>
+            )}
           </Button>
+          <Show when={copied() === "failed"}>
+            <CopyFailed role="alert">
+              <Trans>
+                The link could not be copied. Copy it from the address bar.
+              </Trans>
+            </CopyFailed>
+          </Show>
           <Show when={props.event.interested_count > 0}>
             <Button
               size="sm"
@@ -316,7 +348,7 @@ export function EventCard(props: Props) {
                     data-testid="event-edit"
                   >
                     <Icon name="pencil-simple" size={16} />
-                    <Trans>Edit</Trans>
+                    <Trans context="scheduled events">Edit</Trans>
                   </Button>
                   <Show
                     when={props.event.status === "Scheduled"}
@@ -336,7 +368,7 @@ export function EventCard(props: Props) {
                         data-testid="event-end"
                       >
                         <Icon name="stop" size={16} />
-                        <Trans>End now</Trans>
+                        <Trans context="scheduled events">End now</Trans>
                       </Button>
                     }
                   >
@@ -365,8 +397,23 @@ export function EventCard(props: Props) {
                     data-testid="event-cancel"
                   >
                     <Icon name="x" size={16} />
-                    <Trans>Cancel event</Trans>
+                    {repeating() ? (
+                      <Trans>Cancel this time</Trans>
+                    ) : (
+                      <Trans>Cancel event</Trans>
+                    )}
                   </Button>
+                  <Show when={repeating()}>
+                    <Button
+                      size="sm"
+                      variant="text"
+                      onPress={() => setConfirm("series")}
+                      data-testid="event-cancel-series"
+                    >
+                      <Icon name="arrows-clockwise" size={16} />
+                      <Trans>Cancel the whole series</Trans>
+                    </Button>
+                  </Show>
                   <Show when={props.server.havePermission("ManageServer")}>
                     <Button
                       size="sm"
@@ -375,7 +422,7 @@ export function EventCard(props: Props) {
                       data-testid="event-delete"
                     >
                       <Icon name="trash" size={16} />
-                      <Trans>Delete</Trans>
+                      <Trans context="scheduled events">Delete</Trans>
                     </Button>
                   </Show>
                 </>
@@ -383,9 +430,36 @@ export function EventCard(props: Props) {
             >
               <Confirm role="group">
                 <span>
-                  {confirm() === "cancel"
-                    ? t`Cancel this event? Interested members see that it is off.`
-                    : t`Delete this event and its interested list for good?`}
+                  <Switch>
+                    <Match when={confirm() === "cancel" && repeating()}>
+                      <Trans>
+                        Cancel this time only? The next one stays scheduled.
+                      </Trans>
+                    </Match>
+                    <Match when={confirm() === "cancel"}>
+                      <Trans>
+                        Cancel this event? Interested members see that it is
+                        off.
+                      </Trans>
+                    </Match>
+                    <Match when={confirm() === "series"}>
+                      <Trans>
+                        Cancel this one and every one after it? Nothing more of
+                        this series is scheduled.
+                      </Trans>
+                    </Match>
+                    <Match when={repeating()}>
+                      <Trans>
+                        Delete this time and its interested list for good? The
+                        next one stays scheduled.
+                      </Trans>
+                    </Match>
+                    <Match when={true}>
+                      <Trans>
+                        Delete this event and its interested list for good?
+                      </Trans>
+                    </Match>
+                  </Switch>
                 </span>
                 <Button
                   size="sm"
@@ -393,10 +467,11 @@ export function EventCard(props: Props) {
                   isDisabled={busy()}
                   onPress={() =>
                     void act(async () => {
-                      if (confirm() === "cancel")
+                      if (confirm() !== "delete")
                         await client().serverEvents.cancel(
                           props.server.id,
                           props.event._id,
+                          confirm() === "series",
                         );
                       else
                         await client().serverEvents.delete(
@@ -408,10 +483,16 @@ export function EventCard(props: Props) {
                   }
                   data-testid="event-confirm"
                 >
-                  {confirm() === "cancel" ? (
-                    <Trans>Cancel event</Trans>
+                  {confirm() === "series" ? (
+                    <Trans>Cancel the whole series</Trans>
+                  ) : confirm() === "cancel" ? (
+                    repeating() ? (
+                      <Trans>Cancel this time</Trans>
+                    ) : (
+                      <Trans>Cancel event</Trans>
+                    )
                   ) : (
-                    <Trans>Delete</Trans>
+                    <Trans context="scheduled events">Delete</Trans>
                   )}
                 </Button>
                 <Button
@@ -419,7 +500,7 @@ export function EventCard(props: Props) {
                   variant="text"
                   onPress={() => setConfirm(undefined)}
                 >
-                  <Trans>Keep it</Trans>
+                  <Trans context="scheduled events">Keep it</Trans>
                 </Button>
               </Confirm>
             </Show>
@@ -477,11 +558,11 @@ export function JoinButton(props: {
         <Switch>
           <Match when={props.event.place.type === "Voice"}>
             <Icon name="speaker-high" size={16} />
-            <Trans>Join</Trans>
+            <Trans context="scheduled events">Join</Trans>
           </Match>
           <Match when={props.event.place.type === "Text"}>
             <Icon name="hash" size={16} />
-            <Trans>Open</Trans>
+            <Trans context="scheduled events">Open</Trans>
           </Match>
           <Match when={props.event.place.type === "External"}>
             <Icon name="arrow-square-out" size={16} />
@@ -618,6 +699,11 @@ const Description = styled("div", {
     color: "var(--z-fg-primary)",
     maxHeight: "120px",
     overflowY: "auto",
+    borderRadius: "var(--z-radius-sm, 6px)",
+    _focusVisible: {
+      outline: "2px solid var(--z-focus)",
+      outlineOffset: "4px",
+    },
   },
 });
 
@@ -627,6 +713,13 @@ const Actions = styled("div", {
     flexWrap: "wrap",
     alignItems: "center",
     gap: "8px",
+  },
+});
+
+const CopyFailed = styled("span", {
+  base: {
+    fontSize: "13px",
+    color: "var(--z-danger)",
   },
 });
 

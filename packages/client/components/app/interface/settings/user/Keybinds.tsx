@@ -132,7 +132,7 @@ export function KeybindsSettings() {
         {
           title: <Trans>Open the server's events</Trans>,
           description: <Trans>In a server.</Trans>,
-          keys: [["Alt", "Shift", "E"]],
+          keys: [["Mod", "Shift", "9"]],
         },
         {
           title: <Trans>Search Discover</Trans>,

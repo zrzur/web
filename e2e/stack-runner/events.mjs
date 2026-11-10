@@ -89,7 +89,7 @@ async function openEvents(c, page) {
   await link.waitFor({ timeout: 20000 });
   if (!c.phone) {
     // the shortcut listed in Ctrl+/ works too
-    await page.keyboard.press("Alt+Shift+E");
+    await page.keyboard.press("Control+Shift+Digit9");
     await page.getByTestId("events-page").waitFor({ timeout: 10000 });
     await page.goto(`${APP}/server/${setup.server}`);
     await link.waitFor({ timeout: 20000 });
@@ -129,7 +129,7 @@ test("schedule → interested → start → banner → join", async (c) => {
   const dialog = page.getByRole("dialog").filter({ hasText: c.t("Schedule an event") });
   await dialog.waitFor({ timeout: 10000 });
   c.step = "type the title";
-  await dialog.getByLabel(c.t("Title"), { exact: true }).click();
+  await dialog.getByRole("textbox").first().click();
   await page.keyboard.type(title, { delay: 10 });
   c.step = "choose the day in the calendar";
   await press(c, dialog.getByTestId("server-event-start-date"));

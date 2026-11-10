@@ -137,6 +137,24 @@ export function DateTimeField(props: Props) {
   }
 
   const time = () => (props.value ? minutesOf(props.value) : undefined);
+  // a time off the quarter hours (an older event, a clock change) stays
+  // in the list, so it is shown and kept until another is chosen
+  const slots = () => {
+    const list = timeSlots();
+    const own = time();
+    return own === undefined || list.includes(own)
+      ? list
+      : [...list, own].sort((a, b) => a - b);
+  };
+  // the person's time zone, named, so a time is never read in another one
+  const zone = () => {
+    const parts = new Intl.DateTimeFormat(i18n().locale ?? "en", {
+      timeZoneName: "short",
+    }).formatToParts(props.value ?? new Date());
+    return parts.find((part) => part.type === "timeZoneName")?.value ?? "";
+  };
+  const zoneId = () => Intl.DateTimeFormat().resolvedOptions().timeZone;
+
   const timeLabel = (minutes: number) =>
     formats().time.format(atMinutes(new Date(2000, 0, 3), minutes));
 
@@ -178,7 +196,7 @@ export function DateTimeField(props: Props) {
             props.onChange(atMinutes(day, minutes));
           }}
         >
-          <For each={timeSlots()}>
+          <For each={slots()}>
             {(minutes) => (
               <MenuItem
                 value={String(minutes)}
@@ -192,6 +210,16 @@ export function DateTimeField(props: Props) {
           </For>
         </FloatingSelect>
       </Row>
+      <Zone
+        data-testid={props.testId ? `${props.testId}-zone` : undefined}
+        title={zoneId()}
+        aria-label={`${t`Time zone`}: ${zoneId()}`}
+      >
+        <Icon name="globe" size={14} />
+        <span>
+          {zone()} · {zoneId()}
+        </span>
+      </Zone>
       <Show when={open()}>
         <Calendar id={`${id}-calendar`} role="group" aria-label={props.label}>
           <MonthBar>
@@ -456,7 +484,21 @@ const DayCell = styled("button", {
       cursor: "not-allowed",
       background: "transparent",
     },
-    _phone: { height: "40px", fontSize: "15px" },
+    // phones: a full 44 px target
+    _phone: { height: "44px", fontSize: "15px" },
+  },
+});
+
+const Zone = styled("span", {
+  base: {
+    display: "inline-flex",
+    alignItems: "center",
+    gap: "4px",
+    fontSize: "12px",
+    lineHeight: "16px",
+    color: "var(--z-fg-muted)",
+    "--z-icon-color": "currentColor",
+    "& > span": { unicodeBidi: "isolate" },
   },
 });
 

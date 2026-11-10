@@ -125,4 +125,13 @@ describe("DateTimeField", () => {
     await flush();
     expect(document.querySelector("[role=grid]")).toBeNull();
   });
+
+  it("keeps a time off the quarter-hour list and names the time zone", async () => {
+    mount(new Date(2026, 11, 10, 18, 7));
+    await flush();
+    const time = document.querySelector("[id$='-time']")!;
+    expect(time.textContent).toMatch(/18:07/);
+    const zone = document.querySelector("[data-testid=field-zone]")!;
+    expect(zone.textContent?.trim().length).toBeGreaterThan(0);
+  });
 });

@@ -168,6 +168,11 @@ msgstr "{0, plural, other {# 条结果}}"
 msgid "{0, plural, one {# rule} other {# rules}}"
 msgstr "{0, plural, other {# 条规则}}"
 
+#. placeholder {0}: count()
+#: src/interface/events/EventsLink.tsx
+msgid "{0, plural, one {# upcoming event} other {# upcoming events}}"
+msgstr "{0, plural, other {# 个即将举行的活动}}"
+
 #. placeholder {0}: items().length
 #: components/ui/components/utils/files/FileDropAnywhereCollector.tsx
 msgid "{0, plural, one {Drop a file} other {Drop # files}}"
@@ -605,8 +610,8 @@ msgstr "{0}，至 {1}"
 
 #. placeholder {0}: count()
 #: src/interface/events/EventsLink.tsx
-msgid "{0} upcoming"
-msgstr "即将举行 {0} 个"
+#~ msgid "{0} upcoming"
+#~ msgstr "即将举行 {0} 个"
 
 #. placeholder {0}: props.server.emojis.length
 #: components/app/interface/settings/server/emojis/EmojiList.tsx
@@ -3527,12 +3532,32 @@ msgid "Cancel request"
 msgstr "取消请求"
 
 #: src/interface/events/EventCard.tsx
+msgid "Cancel the whole series"
+msgstr "取消整个系列"
+
+#: src/interface/events/EventCard.tsx
 msgid "Cancel this event? Interested members see that it is off."
 msgstr "要取消这个活动吗？感兴趣的成员会看到它已取消。"
 
+#: src/interface/events/EventCard.tsx
+msgid "Cancel this one and every one after it? Nothing more of this series is scheduled."
+msgstr "要取消这一次及之后的所有活动吗？这个系列不会再安排任何活动。"
+
+#: src/interface/events/EventCard.tsx
+msgid "Cancel this time"
+msgstr "取消这一次"
+
+#: src/interface/events/EventCard.tsx
+msgid "Cancel this time only? The next one stays scheduled."
+msgstr "只取消这一次吗？下一次仍按计划进行。"
+
 #: components/app/interface/settings/user/subscriptions/BillingHistory.tsx
+msgid "Cancelled"
+msgstr "已取消"
+
 #: src/interface/events/EventCard.tsx
 #: src/interface/events/EventsPage.tsx
+msgctxt "scheduled events"
 msgid "Cancelled"
 msgstr "已取消"
 
@@ -5676,7 +5701,11 @@ msgstr "性能下降"
 #: components/modal/modals/DeleteRole.tsx
 #: components/modal/modals/DeleteServer.tsx
 #: components/ui/components/features/messaging/elements/MessageToolbar.tsx
+msgid "Delete"
+msgstr "删除"
+
 #: src/interface/events/EventCard.tsx
+msgctxt "scheduled events"
 msgid "Delete"
 msgstr "删除"
 
@@ -5792,6 +5821,10 @@ msgstr "要删除此模块的数据吗？"
 msgid "Delete this rule?"
 msgstr "要删除此规则吗？"
 
+#: src/interface/events/EventCard.tsx
+msgid "Delete this time and its interested list for good? The next one stays scheduled."
+msgstr "要永久删除这一次及其感兴趣名单吗？下一次仍按计划进行。"
+
 #: components/app/interface/settings/server/webhooks/ServerWebhooks.tsx
 msgid "Delete this webhook?"
 msgstr "要删除此 Webhook 吗？"
@@ -5899,6 +5932,7 @@ msgstr "描述"
 #: components/app/interface/settings/user/bots/CommandManager.tsx
 #: components/app/interface/settings/user/profile/CreatorStudio.tsx
 #: components/i18n/errors.tsx
+#: src/interface/events/EventCard.tsx
 msgid "Description"
 msgstr "描述"
 
@@ -6435,7 +6469,11 @@ msgstr "厄瓜多尔"
 #: components/app/interface/settings/user/bots/CommandManager.tsx
 #: components/app/interface/settings/user/profile/CreatorStudio.tsx
 #: components/ui/components/features/messaging/elements/MessageToolbar.tsx
+msgid "Edit"
+msgstr "编辑"
+
 #: src/interface/events/EventCard.tsx
+msgctxt "scheduled events"
 msgid "Edit"
 msgstr "编辑"
 
@@ -6697,7 +6735,11 @@ msgid "Enabled · not running"
 msgstr "已启用 · 未运行"
 
 #: components/app/interface/settings/server/ServerEmergency.tsx
+msgid "End now"
+msgstr "立即结束"
+
 #: src/interface/events/EventCard.tsx
+msgctxt "scheduled events"
 msgid "End now"
 msgstr "立即结束"
 
@@ -6725,9 +6767,13 @@ msgid "Endpoints"
 msgstr "端点"
 
 #: components/app/interface/settings/user/safety/ReportsAndStanding.tsx
-#: components/modal/modals/ServerEventEditor.tsx
 msgid "Ends"
 msgstr "结束于"
+
+#: components/modal/modals/ServerEventEditor.tsx
+msgctxt "scheduled events"
+msgid "Ends"
+msgstr "结束"
 
 #: components/ui/components/features/profiles/plateNames.ts
 msgid "England"
@@ -9255,7 +9301,11 @@ msgstr "日本"
 #: components/modal/modals/Invite.tsx
 #: components/ui/components/features/messaging/elements/Invite.tsx
 #: src/interface/Discover.tsx
+msgid "Join"
+msgstr "加入"
+
 #: src/interface/events/EventCard.tsx
+msgctxt "scheduled events"
 msgid "Join"
 msgstr "加入"
 
@@ -9402,7 +9452,11 @@ msgstr "保留 Feather"
 
 #: components/app/interface/settings/server/roles/ServerRoleOverview.tsx
 #: components/app/interface/settings/user/profile/ReviewQueue.tsx
+msgid "Keep it"
+msgstr "保留"
+
 #: src/interface/events/EventCard.tsx
+msgctxt "scheduled events"
 msgid "Keep it"
 msgstr "保留"
 
@@ -12974,7 +13028,11 @@ msgstr "只有 Zrzur 工作人员可以这样做。"
 #: components/app/interface/settings/user/plugins/DeveloperTab.tsx
 #: components/app/interface/settings/user/plugins/PluginDetail.tsx
 #: components/modal/modals/Invite.tsx
+msgid "Open"
+msgstr "打开"
+
 #: src/interface/events/EventCard.tsx
+msgctxt "scheduled events"
 msgid "Open"
 msgstr "打开"
 
@@ -15106,6 +15164,11 @@ msgid "reordered the roles"
 msgstr "调整了角色顺序"
 
 #: components/modal/modals/ServerEventEditor.tsx
+#~ msgid "Repeat"
+#~ msgstr "重复"
+
+#: components/modal/modals/ServerEventEditor.tsx
+msgctxt "scheduled events"
 msgid "Repeat"
 msgstr "重复"
 
@@ -18752,6 +18815,10 @@ msgstr "最近 30 天。选择一天即可跳转。"
 msgid "The last live check failed."
 msgstr "上次实时检查失败。"
 
+#: src/interface/events/EventCard.tsx
+msgid "The link could not be copied. Copy it from the address bar."
+msgstr "无法复制链接，请从地址栏复制。"
+
 #. placeholder {0}: date((state() as { releasedAt: Date }).releasedAt)
 #. placeholder {1}: required()!.level
 #: components/app/interface/settings/server/invites/VanityInvite.tsx
@@ -19781,6 +19848,7 @@ msgid "Time out members"
 msgstr "禁言成员"
 
 #: components/app/interface/settings/server/assistant/AssistantPage.tsx
+#: components/ui/components/design/DateTimeField.tsx
 msgid "Time zone"
 msgstr "时区"
 
@@ -19853,7 +19921,11 @@ msgstr "提示：右键点击（或长按）任意表情即可将其加入收藏
 
 #: components/app/interface/settings/user/badges/BugReportDialog.tsx
 #: components/modal/modals/CreateThread.tsx
+msgid "Title"
+msgstr "标题"
+
 #: components/modal/modals/ServerEventEditor.tsx
+msgctxt "scheduled events"
 msgid "Title"
 msgstr "标题"
 
@@ -21593,9 +21665,13 @@ msgid "When your friends come online, they show up here."
 msgstr "好友上线时，会显示在这里。"
 
 #: components/app/interface/settings/user/safety/SafetyDashboard.tsx
-#: components/modal/modals/ServerEventEditor.tsx
 msgid "Where"
 msgstr "位置"
+
+#: components/modal/modals/ServerEventEditor.tsx
+msgctxt "scheduled events"
+msgid "Where"
+msgstr "地点"
 
 #: components/app/interface/settings/user/safety/ReportsAndStanding.tsx
 #: components/app/interface/settings/user/safety/SafetyDashboard.tsx

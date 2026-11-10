@@ -128,7 +128,7 @@ function Events(props: { server: Server; focus?: string }) {
                 <Section>
                   <SectionTitle>
                     {event().status === "Cancelled"
-                      ? t`Cancelled`
+                      ? t({ message: "Cancelled", context: "scheduled events" })
                       : t`This event is over`}
                   </SectionTitle>
                   <EventCard

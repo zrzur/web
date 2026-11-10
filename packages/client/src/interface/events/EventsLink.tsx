@@ -1,15 +1,18 @@
 import { Show, createEffect, on, onCleanup } from "solid-js";
 
+import { plural } from "@lingui/core/macro";
 import { Trans, useLingui } from "@lingui/solid/macro";
 import { type Client, type Server, serverEventLink } from "@zrzur/sdk/solid";
 import { styled } from "styled-system/jsx";
 
 import { useClient } from "@revolt/client";
+import { isMac, isTypingTarget } from "@revolt/keybinds/shortcuts";
+import { useModals } from "@revolt/modal";
 import { A, useLocation, useNavigate } from "@revolt/routing";
 import { Icon } from "@revolt/ui/icons/Icon";
 
 import { JoinButton } from "./EventCard";
-import { isEventsShortcut } from "./eventFormat";
+import { eventsShortcutAllowed, isEventsShortcut } from "./eventFormat";
 
 /** Whether this Zrzur node has scheduled events switched on */
 export function eventsEnabled(client?: Client): boolean {
@@ -19,13 +22,15 @@ export function eventsEnabled(client?: Client): boolean {
 /**
  * "Events" row at the top of a server's channel list, with the number of
  * events coming up, and the "Happening now" banner under it while one
- * runs. Alt+Shift+E opens the events while the server is open.
+ * runs. Ctrl+Shift+9 opens the events while the server is open (not
+ * while typing or with a dialog open).
  */
 export function EventsLink(props: { server: Server }) {
   const { t } = useLingui();
   const client = useClient();
   const location = useLocation();
   const navigate = useNavigate();
+  const modals = useModals();
   const href = () => `/server/${props.server.id}/events`;
 
   // load once per server; the gateway keeps the list current afterwards
@@ -46,7 +51,12 @@ export function EventsLink(props: { server: Server }) {
   const live = () => events().find((event) => event.status === "Active");
 
   const onKey = (event: KeyboardEvent) => {
-    if (!isEventsShortcut(event) || !eventsEnabled(client())) return;
+    if (!isEventsShortcut(event, isMac()) || !eventsEnabled(client())) return;
+    const dialogOpen =
+      modals.isOpen() ||
+      !!document.querySelector("[role=dialog][aria-modal=true]");
+    if (!eventsShortcutAllowed(isTypingTarget(event.target), dialogOpen))
+      return;
     event.preventDefault();
     navigate(href());
   };
@@ -60,7 +70,7 @@ export function EventsLink(props: { server: Server }) {
         aria-current={
           location.pathname.includes("/events") ? "page" : undefined
         }
-        aria-keyshortcuts="Alt+Shift+E"
+        aria-keyshortcuts="Control+Shift+9"
         data-testid="events-link"
       >
         <Icon name="calendar" size={20} />
@@ -68,7 +78,10 @@ export function EventsLink(props: { server: Server }) {
         <Show when={count()}>
           <Count
             data-testid="events-count"
-            aria-label={t`${count()} upcoming`}
+            aria-label={t`${plural(count(), {
+              one: "# upcoming event",
+              other: "# upcoming events",
+            })}`}
             data-live={live() ? "" : undefined}
           >
             {count()}
@@ -101,11 +114,11 @@ const Row = styled(A, {
   base: {
     display: "flex",
     alignItems: "center",
-    gap: "10px",
+    gap: "12px",
     minHeight: "36px",
     marginInline: "8px",
-    marginBlock: "8px 2px",
-    paddingInline: "10px",
+    marginBlock: "8px 4px",
+    paddingInline: "12px",
     borderRadius: "8px",
     color: "var(--z-fg-secondary)",
     fontSize: "15px",
@@ -127,7 +140,7 @@ const Count = styled("span", {
   base: {
     minWidth: "20px",
     height: "20px",
-    paddingInline: "6px",
+    paddingInline: "8px",
     borderRadius: "999px",
     display: "inline-grid",
     placeItems: "center",
@@ -162,7 +175,7 @@ const BannerHead = styled("span", {
   base: {
     display: "inline-flex",
     alignItems: "center",
-    gap: "6px",
+    gap: "8px",
     fontSize: "12px",
     fontWeight: 700,
     color: "var(--z-live)",

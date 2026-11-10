@@ -168,6 +168,11 @@ msgstr "{0, plural, one {# результат} few {# результата} many
 msgid "{0, plural, one {# rule} other {# rules}}"
 msgstr "{0, plural, one {# правило} few {# правила} many {# правил} other {# правила}}"
 
+#. placeholder {0}: count()
+#: src/interface/events/EventsLink.tsx
+msgid "{0, plural, one {# upcoming event} other {# upcoming events}}"
+msgstr "{0, plural, one {# предстоящее событие} few {# предстоящих события} many {# предстоящих событий} other {# предстоящего события}}"
+
 #. placeholder {0}: items().length
 #: components/ui/components/utils/files/FileDropAnywhereCollector.tsx
 msgid "{0, plural, one {Drop a file} other {Drop # files}}"
@@ -605,8 +610,8 @@ msgstr "{0} до {1}"
 
 #. placeholder {0}: count()
 #: src/interface/events/EventsLink.tsx
-msgid "{0} upcoming"
-msgstr "Предстоит: {0}"
+#~ msgid "{0} upcoming"
+#~ msgstr "Предстоит: {0}"
 
 #. placeholder {0}: props.server.emojis.length
 #: components/app/interface/settings/server/emojis/EmojiList.tsx
@@ -3527,12 +3532,32 @@ msgid "Cancel request"
 msgstr "Отменить запрос"
 
 #: src/interface/events/EventCard.tsx
+msgid "Cancel the whole series"
+msgstr "Отменить всю серию"
+
+#: src/interface/events/EventCard.tsx
 msgid "Cancel this event? Interested members see that it is off."
 msgstr "Отменить событие? Заинтересованные участники увидят, что оно не состоится."
 
+#: src/interface/events/EventCard.tsx
+msgid "Cancel this one and every one after it? Nothing more of this series is scheduled."
+msgstr "Отменить этот раз и все следующие? Больше ничего из этой серии не будет запланировано."
+
+#: src/interface/events/EventCard.tsx
+msgid "Cancel this time"
+msgstr "Отменить этот раз"
+
+#: src/interface/events/EventCard.tsx
+msgid "Cancel this time only? The next one stays scheduled."
+msgstr "Отменить только этот раз? Следующее останется в расписании."
+
 #: components/app/interface/settings/user/subscriptions/BillingHistory.tsx
+msgid "Cancelled"
+msgstr "Отменено"
+
 #: src/interface/events/EventCard.tsx
 #: src/interface/events/EventsPage.tsx
+msgctxt "scheduled events"
 msgid "Cancelled"
 msgstr "Отменено"
 
@@ -5676,7 +5701,11 @@ msgstr "Проблемы с производительностью"
 #: components/modal/modals/DeleteRole.tsx
 #: components/modal/modals/DeleteServer.tsx
 #: components/ui/components/features/messaging/elements/MessageToolbar.tsx
+msgid "Delete"
+msgstr "Удалить"
+
 #: src/interface/events/EventCard.tsx
+msgctxt "scheduled events"
 msgid "Delete"
 msgstr "Удалить"
 
@@ -5792,6 +5821,10 @@ msgstr "Удалить данные этого модуля?"
 msgid "Delete this rule?"
 msgstr "Удалить это правило?"
 
+#: src/interface/events/EventCard.tsx
+msgid "Delete this time and its interested list for good? The next one stays scheduled."
+msgstr "Удалить этот раз и список заинтересованных навсегда? Следующее останется в расписании."
+
 #: components/app/interface/settings/server/webhooks/ServerWebhooks.tsx
 msgid "Delete this webhook?"
 msgstr "Удалить этот вебхук?"
@@ -5899,6 +5932,7 @@ msgstr "описание"
 #: components/app/interface/settings/user/bots/CommandManager.tsx
 #: components/app/interface/settings/user/profile/CreatorStudio.tsx
 #: components/i18n/errors.tsx
+#: src/interface/events/EventCard.tsx
 msgid "Description"
 msgstr "Описание"
 
@@ -6435,7 +6469,11 @@ msgstr "Эквадор"
 #: components/app/interface/settings/user/bots/CommandManager.tsx
 #: components/app/interface/settings/user/profile/CreatorStudio.tsx
 #: components/ui/components/features/messaging/elements/MessageToolbar.tsx
+msgid "Edit"
+msgstr "Изменить"
+
 #: src/interface/events/EventCard.tsx
+msgctxt "scheduled events"
 msgid "Edit"
 msgstr "Изменить"
 
@@ -6697,7 +6735,11 @@ msgid "Enabled · not running"
 msgstr "Включено · не запущено"
 
 #: components/app/interface/settings/server/ServerEmergency.tsx
+msgid "End now"
+msgstr "Завершить сейчас"
+
 #: src/interface/events/EventCard.tsx
+msgctxt "scheduled events"
 msgid "End now"
 msgstr "Завершить сейчас"
 
@@ -6725,9 +6767,13 @@ msgid "Endpoints"
 msgstr "Эндпоинты"
 
 #: components/app/interface/settings/user/safety/ReportsAndStanding.tsx
-#: components/modal/modals/ServerEventEditor.tsx
 msgid "Ends"
 msgstr "Заканчивается"
+
+#: components/modal/modals/ServerEventEditor.tsx
+msgctxt "scheduled events"
+msgid "Ends"
+msgstr "Окончание"
 
 #: components/ui/components/features/profiles/plateNames.ts
 msgid "England"
@@ -9255,7 +9301,11 @@ msgstr "Япония"
 #: components/modal/modals/Invite.tsx
 #: components/ui/components/features/messaging/elements/Invite.tsx
 #: src/interface/Discover.tsx
+msgid "Join"
+msgstr "Присоединиться"
+
 #: src/interface/events/EventCard.tsx
+msgctxt "scheduled events"
 msgid "Join"
 msgstr "Присоединиться"
 
@@ -9402,7 +9452,11 @@ msgstr "Сохранить Feather"
 
 #: components/app/interface/settings/server/roles/ServerRoleOverview.tsx
 #: components/app/interface/settings/user/profile/ReviewQueue.tsx
+msgid "Keep it"
+msgstr "Оставить"
+
 #: src/interface/events/EventCard.tsx
+msgctxt "scheduled events"
 msgid "Keep it"
 msgstr "Оставить"
 
@@ -12974,7 +13028,11 @@ msgstr "Это может сделать только команда Zrzur."
 #: components/app/interface/settings/user/plugins/DeveloperTab.tsx
 #: components/app/interface/settings/user/plugins/PluginDetail.tsx
 #: components/modal/modals/Invite.tsx
+msgid "Open"
+msgstr "Открыть"
+
 #: src/interface/events/EventCard.tsx
+msgctxt "scheduled events"
 msgid "Open"
 msgstr "Открыть"
 
@@ -15106,6 +15164,11 @@ msgid "reordered the roles"
 msgstr "изменён порядок ролей"
 
 #: components/modal/modals/ServerEventEditor.tsx
+#~ msgid "Repeat"
+#~ msgstr "Повтор"
+
+#: components/modal/modals/ServerEventEditor.tsx
+msgctxt "scheduled events"
 msgid "Repeat"
 msgstr "Повтор"
 
@@ -18752,6 +18815,10 @@ msgstr "Последние 30 дней. Выберите день, чтобы п
 msgid "The last live check failed."
 msgstr "Последняя проверка вживую не удалась."
 
+#: src/interface/events/EventCard.tsx
+msgid "The link could not be copied. Copy it from the address bar."
+msgstr "Не удалось скопировать ссылку. Скопируйте её из адресной строки."
+
 #. placeholder {0}: date((state() as { releasedAt: Date }).releasedAt)
 #. placeholder {1}: required()!.level
 #: components/app/interface/settings/server/invites/VanityInvite.tsx
@@ -19781,6 +19848,7 @@ msgid "Time out members"
 msgstr "Выдавать участникам тайм-аут"
 
 #: components/app/interface/settings/server/assistant/AssistantPage.tsx
+#: components/ui/components/design/DateTimeField.tsx
 msgid "Time zone"
 msgstr "Часовой пояс"
 
@@ -19853,7 +19921,11 @@ msgstr "Совет: нажмите правой кнопкой (или удер�
 
 #: components/app/interface/settings/user/badges/BugReportDialog.tsx
 #: components/modal/modals/CreateThread.tsx
+msgid "Title"
+msgstr "Название"
+
 #: components/modal/modals/ServerEventEditor.tsx
+msgctxt "scheduled events"
 msgid "Title"
 msgstr "Название"
 
@@ -21593,7 +21665,11 @@ msgid "When your friends come online, they show up here."
 msgstr "Когда ваши друзья появляются в сети, они показываются здесь."
 
 #: components/app/interface/settings/user/safety/SafetyDashboard.tsx
+msgid "Where"
+msgstr "Где"
+
 #: components/modal/modals/ServerEventEditor.tsx
+msgctxt "scheduled events"
 msgid "Where"
 msgstr "Где"
 

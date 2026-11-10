@@ -24184,3 +24184,88 @@ msgstr "Who's interested"
 #: components/modal/modals/ServerEventEditor.tsx
 msgid "Without an end time it ends 12 hours after it starts, or when a manager ends it."
 msgstr "Without an end time it ends 12 hours after it starts, or when a manager ends it."
+
+#. placeholder {0}: count()
+#: src/interface/events/EventsLink.tsx
+msgid "{0, plural, one {# upcoming event} other {# upcoming events}}"
+msgstr "{0, plural, one {# upcoming event} other {# upcoming events}}"
+
+#: src/interface/events/EventCard.tsx
+msgid "Cancel the whole series"
+msgstr "Cancel the whole series"
+
+#: src/interface/events/EventCard.tsx
+msgid "Cancel this one and every one after it? Nothing more of this series is scheduled."
+msgstr "Cancel this one and every one after it? Nothing more of this series is scheduled."
+
+#: src/interface/events/EventCard.tsx
+msgid "Cancel this time"
+msgstr "Cancel this time"
+
+#: src/interface/events/EventCard.tsx
+msgid "Cancel this time only? The next one stays scheduled."
+msgstr "Cancel this time only? The next one stays scheduled."
+
+#: src/interface/events/EventCard.tsx
+#: src/interface/events/EventsPage.tsx
+msgctxt "scheduled events"
+msgid "Cancelled"
+msgstr "Cancelled"
+
+#: src/interface/events/EventCard.tsx
+msgctxt "scheduled events"
+msgid "Delete"
+msgstr "Delete"
+
+#: src/interface/events/EventCard.tsx
+msgid "Delete this time and its interested list for good? The next one stays scheduled."
+msgstr "Delete this time and its interested list for good? The next one stays scheduled."
+
+#: src/interface/events/EventCard.tsx
+msgctxt "scheduled events"
+msgid "Edit"
+msgstr "Edit"
+
+#: src/interface/events/EventCard.tsx
+msgctxt "scheduled events"
+msgid "End now"
+msgstr "End now"
+
+#: components/modal/modals/ServerEventEditor.tsx
+msgctxt "scheduled events"
+msgid "Ends"
+msgstr "Ends"
+
+#: src/interface/events/EventCard.tsx
+msgctxt "scheduled events"
+msgid "Join"
+msgstr "Join"
+
+#: src/interface/events/EventCard.tsx
+msgctxt "scheduled events"
+msgid "Keep it"
+msgstr "Keep it"
+
+#: src/interface/events/EventCard.tsx
+msgctxt "scheduled events"
+msgid "Open"
+msgstr "Open"
+
+#: components/modal/modals/ServerEventEditor.tsx
+msgctxt "scheduled events"
+msgid "Repeat"
+msgstr "Repeat"
+
+#: src/interface/events/EventCard.tsx
+msgid "The link could not be copied. Copy it from the address bar."
+msgstr "The link could not be copied. Copy it from the address bar."
+
+#: components/modal/modals/ServerEventEditor.tsx
+msgctxt "scheduled events"
+msgid "Title"
+msgstr "Title"
+
+#: components/modal/modals/ServerEventEditor.tsx
+msgctxt "scheduled events"
+msgid "Where"
+msgstr "Where"

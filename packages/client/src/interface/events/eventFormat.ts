@@ -78,21 +78,37 @@ export function upcomingCount(events: Pick<ServerEvent, "status">[]): number {
   ).length;
 }
 
+/** The events shortcut as plugin manifests write it (in RESERVED_KEYS) */
+export const EVENTS_PLUGIN_KEYS = "Ctrl+Shift+9";
+
 /**
- * Alt+Shift+E opens the server's events (by key position, so it is the
- * same on Arabic and German keyboards)
+ * Ctrl+Shift+9 (Command+Shift+9 on a Mac) opens the server's events. Matched
+ * by key position (`event.code`), so it is the same on Arabic, German and
+ * French layouts; next to Create poll (Ctrl+Shift+8). Never Alt+Shift
+ * (Windows switches the layout with it) and never Ctrl+Alt (AltGr); no
+ * browser uses Ctrl+Shift+9.
+ * @param mac Whether Command takes the place of Ctrl
  */
 export function isEventsShortcut(
   event: Pick<
     KeyboardEvent,
     "code" | "altKey" | "shiftKey" | "ctrlKey" | "metaKey"
-  >,
+  > & { key?: string },
+  mac: boolean,
 ): boolean {
+  const mod = mac ? event.metaKey : event.ctrlKey;
+  const other = mac ? event.ctrlKey : event.metaKey;
   return (
-    event.code === "KeyE" &&
-    event.altKey &&
+    event.code === "Digit9" &&
+    event.key !== "/" &&
+    mod &&
+    !other &&
     event.shiftKey &&
-    !event.ctrlKey &&
-    !event.metaKey
+    !event.altKey
   );
+}
+
+/** The shortcut leaves text fields and open dialogs alone */
+export function eventsShortcutAllowed(typing: boolean, modalOpen: boolean) {
+  return !typing && !modalOpen;
 }

@@ -190,7 +190,7 @@ export function SystemMessage(props: Props) {
             The event{" "}
             <RenderAnchor
               href={instance.href(
-                `/server/${params().serverId}/events/${(sm as EventStartedSystemMessage).eventId}`,
+                `/server/${(sm as EventStartedSystemMessage).serverId ?? params().serverId}/events/${(sm as EventStartedSystemMessage).eventId}`,
               )}
             >
               {(sm as EventStartedSystemMessage).title}

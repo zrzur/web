@@ -1,9 +1,13 @@
 import { describe, expect, it } from "vitest";
 
+import { RESERVED_KEYS } from "../../../../plugin-sdk/src/manifest";
+
 import {
+  EVENTS_PLUGIN_KEYS,
   eventLink,
   eventPhase,
   eventWhen,
+  eventsShortcutAllowed,
   isEventsShortcut,
   startsIn,
   upcomingCount,
@@ -88,17 +92,41 @@ describe("event times", () => {
     ).toBe(2);
   });
 
-  it("opens with Alt+Shift+E on any keyboard layout", () => {
+  it("opens with Ctrl+Shift+9 by key position, never Alt+Shift", () => {
     const key = {
-      code: "KeyE",
-      altKey: true,
+      code: "Digit9",
+      key: "9",
+      altKey: false,
       shiftKey: true,
-      ctrlKey: false,
+      ctrlKey: true,
       metaKey: false,
     };
-    expect(isEventsShortcut(key)).toBe(true);
-    expect(isEventsShortcut({ ...key, ctrlKey: true })).toBe(false);
-    expect(isEventsShortcut({ ...key, shiftKey: false })).toBe(false);
-    expect(isEventsShortcut({ ...key, code: "KeyQ" })).toBe(false);
+    expect(isEventsShortcut(key, false)).toBe(true);
+    // German layout: Shift+9 types ")" on the same key
+    expect(isEventsShortcut({ ...key, key: ")" }, false)).toBe(true);
+    // Command on a Mac
+    expect(
+      isEventsShortcut({ ...key, ctrlKey: false, metaKey: true }, true),
+    ).toBe(true);
+    expect(isEventsShortcut(key, true)).toBe(false);
+    // AltGr is Ctrl+Alt on Windows; Alt+Shift switches layouts
+    expect(isEventsShortcut({ ...key, altKey: true }, false)).toBe(false);
+    expect(
+      isEventsShortcut(
+        { ...key, code: "KeyE", key: "E", ctrlKey: false, altKey: true },
+        false,
+      ),
+    ).toBe(false);
+    expect(isEventsShortcut({ ...key, code: "Digit8" }, false)).toBe(false);
+  });
+
+  it("is reserved for Zrzur so plugins can't take it", () => {
+    expect(RESERVED_KEYS).toContain(EVENTS_PLUGIN_KEYS);
+  });
+
+  it("stays out of text fields and open dialogs", () => {
+    expect(eventsShortcutAllowed(true, false)).toBe(false);
+    expect(eventsShortcutAllowed(false, true)).toBe(false);
+    expect(eventsShortcutAllowed(false, false)).toBe(true);
   });
 });
