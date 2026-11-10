@@ -1,4 +1,4 @@
-import { JSX, Show, splitProps } from "solid-js";
+import { JSX, Show, lazy, splitProps } from "solid-js";
 
 import { useLingui } from "@lingui/solid/macro";
 import { cva } from "styled-system/css";
@@ -8,6 +8,9 @@ import { useInstance } from "@revolt/instance";
 import { useVoice } from "@revolt/rtc";
 import { useState } from "@revolt/state";
 import { Icon } from "@revolt/ui/icons/Icon";
+
+// the soundboard button and its state are not in the app's first download
+const SoundboardButton = lazy(() => import("../soundboard/SoundboardButton"));
 
 export function VoiceCallCardActions(props: { size: "xs" | "sm" }) {
   const voice = useVoice();
@@ -124,6 +127,10 @@ export function VoiceCallCardActions(props: { size: "xs" | "sm" }) {
         >
           <Icon name="monitor-arrow-up" size={iconSize()} />
         </ControlButton>
+        {/* server calls only; the button loads with the first one */}
+        <Show when={voice.channel()?.server}>
+          <SoundboardButton size={props.size} />
+        </Show>
       </Show>
       <ControlButton
         size={props.size}
@@ -152,7 +159,7 @@ type ControlProps = {
 /**
  * Round call control (mute, deafen, camera, share, disconnect)
  */
-function ControlButton(props: ControlProps) {
+export function ControlButton(props: ControlProps) {
   const [local, rest] = splitProps(props, [
     "size",
     "tone",

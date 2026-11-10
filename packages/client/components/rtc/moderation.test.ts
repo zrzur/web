@@ -3,6 +3,7 @@ import { describe, expect, it } from "vitest";
 import {
   canDropVoiceParticipant,
   parseUserLimit,
+  userLimitChange,
   voiceDestinations,
   voiceErrorType,
   voiceModeration,
@@ -244,5 +245,14 @@ describe("room capacity settings", () => {
       maximum: 1,
       full: true,
     });
+  });
+});
+
+describe("room size change", () => {
+  it("sends 0 to take the limit away, which the API keeps otherwise", () => {
+    expect(userLimitChange(5)).toEqual({ max_users: 5 });
+    expect(userLimitChange(undefined)).toEqual({ max_users: 0 });
+    expect(userLimitChange(null)).toEqual({ max_users: 0 });
+    expect(userLimitChange(0)).toEqual({ max_users: 0 });
   });
 });

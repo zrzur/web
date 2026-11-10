@@ -189,7 +189,10 @@ export function ChannelHeader(props: Props) {
                     props.channel.isVoice
                   }
                 >
-                  <Icon name="speaker-high" size={22} />
+                  <Icon
+                    name={props.channel.isStage ? "waveform" : "speaker-high"}
+                    size={22}
+                  />
                 </Match>
               </Switch>
             </HeaderIcon>

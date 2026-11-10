@@ -21,6 +21,7 @@
     "baseUrl": ".",
     "ignoreDeprecations": "6.0",
     "paths": {
+      "@zrzur/sdk/solid/voiceExtras": ["../stoat.js/src/solid/voiceExtras.ts"],
       "@zrzur/sdk/solid": ["../stoat.js/src/solid/index.ts"],
       "@zrzur/sdk/bot": ["../stoat.js/src/bot/index.ts"],
       "@zrzur/sdk": ["../stoat.js/src/index.ts"],

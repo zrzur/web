@@ -201,6 +201,10 @@ class Voice {
   showBar: Accessor<boolean>;
   #setShowBar: Setter<boolean>;
 
+  /** On a stage: whether you may speak */
+  stageGate: Accessor<(() => boolean) | undefined>;
+  #setStageGate: Setter<(() => boolean) | undefined>;
+
   private sound: SoundController;
   private device: Device;
 
@@ -296,6 +300,8 @@ class Voice {
     const [showBar, setShowBar] = createSignal(true);
     this.showBar = showBar;
     this.#setShowBar = setShowBar;
+
+    [this.stageGate, this.#setStageGate] = createSignal<() => boolean>();
 
     const inst = useInstance();
     this.config = inst.config;
@@ -1123,8 +1129,20 @@ class Voice {
     return !!this.channel()?.havePermission("Listen") && !this.serverDeafened;
   }
 
+  /** Who may open their microphone on a stage (unset: nobody) */
+  setStageGate(gate: (() => boolean) | undefined) {
+    this.#setStageGate(() => gate);
+  }
+
   get speakingPermission() {
-    return !!this.channel()?.havePermission("Speak") && !this.serverMuted;
+    const channel = this.channel();
+    return (
+      !!channel?.havePermission("Speak") &&
+      !this.serverMuted &&
+      // on a stage only speakers talk (rtc/voiceExtras.ts sets the gate);
+      // until it loads nobody opens a microphone
+      (!channel.isStage || !!this.stageGate()?.())
+    );
   }
 
   get ownMember() {
@@ -1398,6 +1416,7 @@ export function VoiceContext(props: { children: JSX.Element }) {
       instance.off("voiceChannelLeave", onLeave);
     });
   });
+
   onCleanup(() => voice.disconnect());
 
   return (

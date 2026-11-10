@@ -1,4 +1,12 @@
-import { For, Show, Suspense, createEffect, lazy, splitProps } from "solid-js";
+import {
+  For,
+  Show,
+  Suspense,
+  createEffect,
+  lazy,
+  onCleanup,
+  splitProps,
+} from "solid-js";
 
 import { Channel, VoiceParticipant } from "@zrzur/sdk/solid";
 import { cva } from "styled-system/css";
@@ -20,6 +28,7 @@ import { Avatar, Ripple, typography } from "../../design";
 import { Row } from "../../layout";
 
 import { VoiceStatefulUserIcons } from "./VoiceStatefulUserIcons";
+import { streamPreviewHover } from "./streamPreviewHover";
 
 /**
  * Render a preview of users (or the active participants) for a given channel
@@ -118,6 +127,18 @@ export function CommonUser(props: {
         .catch(() => undefined);
   });
 
+  // Before joining, hovering (or focusing) someone who shares their screen
+  // shows a still of it; the card and the still load only then
+  const hover = streamPreviewHover({
+    sharing: () =>
+      iconProps.screenshare && !rest.isLive && !draggedVoiceParticipant(),
+    client,
+    channel: () => rest.channel,
+    userId: () => rest.userId,
+    name: () => member()?.displayName ?? user().username,
+  });
+  onCleanup(() => hover.dispose());
+
   // Moderators drag participants onto another voice channel (Discord-style).
   const canDrag = () => voiceModeration(rest.channel, member()).move;
   // Channel reordering grabs rows on mousedown/touchstart; a participant
@@ -153,6 +174,10 @@ export function CommonUser(props: {
         });
       }}
       on:dragend={() => setDraggedVoiceParticipant()}
+      onPointerEnter={(event) => void hover.enter(event)}
+      onPointerLeave={() => hover.leave()}
+      onFocus={(event) => void hover.enter(event)}
+      onBlur={() => hover.leave()}
       use:floating={{
         userCard: {
           user: user().user!,

@@ -6,6 +6,7 @@ export type NeededPermission =
   | "ManageChannel"
   | "ManageRole"
   | "ManageCustomisation"
+  | "ManageSoundboard"
   | "BanMembers"
   | "ManageWebhooks"
   | "ViewAuditLogs";

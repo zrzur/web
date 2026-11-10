@@ -6,6 +6,7 @@ import { Icon, IconName } from "@revolt/ui/icons/Icon";
 const names = {
   hash: "hash",
   voice: "speaker-high",
+  stage: "waveform",
   pencil: "pencil-simple",
   trash: "trash",
   plus: "plus",

@@ -26,6 +26,7 @@ import { AuditLog } from "./audit/AuditLog";
 import { ChannelExtras } from "./channels/ChannelExtras";
 import { ChannelsSettings } from "./channels/ChannelsSettings";
 import { EmojiList } from "./emojis/EmojiList";
+import { SoundboardList } from "./soundboard/SoundboardList";
 import { ListServerInvites } from "./invites/ListServerInvites";
 import { VanityInvite } from "./invites/VanityInvite";
 import {
@@ -235,6 +236,17 @@ export function EmojiPage(props: { server: Server }) {
           needs={missing(props.server, "ManageCustomisation")}
       >
         <EmojiList server={props.server} />
+      </Anchor>
+    </PageStack>
+  );
+}
+
+/** Soundboard */
+export function SoundboardPage(props: { server: Server }) {
+  return (
+    <PageStack>
+      <Anchor id="soundboard" needs={missing(props.server, "ManageSoundboard")}>
+        <SoundboardList server={props.server} />
       </Anchor>
     </PageStack>
   );

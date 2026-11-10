@@ -504,6 +504,10 @@ export function useError() {
           return t`This username is already taken.`;
         case "TooManyEmoji":
           return t`You can't have more than ${err.max} emojis on this server.`;
+        case "TooManySounds":
+          return t`The soundboard has ${err.max} sounds already. Remove one first.`;
+        case "TooManySpeakers":
+          return t`The stage has ${err.max} speakers already. Send one back to the listeners first.`;
         case "TooManyChannelWebhooks":
           return t`This channel has as many webhooks as it can have (${err.max}). Delete one first.`;
         case "TooManyServerEvents":

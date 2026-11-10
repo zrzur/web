@@ -56,6 +56,7 @@ const GROUPS: Record<string, Action["type"][]> = {
     // newer than the API types
     "ChannelMemberPermissionsEdit" as Action["type"],
     "ChannelDelete",
+    "StageEnd",
   ],
   roles: ["RoleCreate", "RoleEdit", "RoleDelete", "RolesReorder"],
   server: ["ServerEdit"],
@@ -67,7 +68,13 @@ const GROUPS: Record<string, Action["type"][]> = {
     "WebhookTokenReset",
     "WebhookDelete",
   ],
-  emojis: ["EmojiCreate", "EmojiUpdate", "EmojiDelete"],
+  emojis: [
+    "EmojiCreate",
+    "EmojiUpdate",
+    "EmojiDelete",
+    "SoundboardSoundCreate",
+    "SoundboardSoundDelete",
+  ],
   apps: APPS_ACTIONS as Action["type"][],
 };
 
@@ -371,6 +378,24 @@ export function AuditLog(props: { server: Server }) {
           kind: "delete",
           icon: "smiley",
           text: t`deleted emoji :${a.name}:`,
+        };
+      case "SoundboardSoundCreate":
+        return {
+          kind: "create",
+          icon: "music-note",
+          text: t`added the sound ${a.name}`,
+        };
+      case "SoundboardSoundDelete":
+        return {
+          kind: "delete",
+          icon: "music-note",
+          text: t`removed the sound ${a.name}`,
+        };
+      case "StageEnd":
+        return {
+          kind: "delete",
+          icon: "waveform",
+          text: t`closed the stage ${channelName(a.channel)}`,
         };
       default: {
         const other = a as { type: string; channel?: string; member?: string };

@@ -1,0 +1,210 @@
+{
+  "{0} of {1} sounds left. Up to {2} seconds each.": [
+    "بقي {0} من {1} أصوات. حتى {2} ثانية لكل صوت.",
+    "Noch {0} von {1} Sounds frei. Jeder bis zu {2} Sekunden."
+  ],
+  "{0} s": [
+    "{0} ث",
+    "{0} s"
+  ],
+  "Add a sound": [
+    "إضافة صوت",
+    "Neuer Sound"
+  ],
+  "Add and remove the server's sounds": [
+    "إضافة أصوات السيرفر وإزالتها",
+    "Sounds des Servers hinzufügen und entfernen"
+  ],
+  "Add sound": [
+    "أضف الصوت",
+    "Sound hinzufügen"
+  ],
+  "Choose a sound": [
+    "اختر صوتًا",
+    "Sound auswählen"
+  ],
+  "Close soundboard": [
+    "إغلاق لوحة الأصوات",
+    "Soundboard schließen"
+  ],
+  "Edit topic": [
+    "تعديل الموضوع",
+    "Thema bearbeiten"
+  ],
+  "Emoji (optional)": [
+    "إيموجي (اختياري)",
+    "Emoji (optional)"
+  ],
+  "Everyone leaves the stage.": [
+    "سيغادر الجميع المنصة.",
+    "Alle verlassen die Bühne."
+  ],
+  "Listen to {0}": [
+    "استمع إلى {0}",
+    "{0} anhören"
+  ],
+  "Listening: {0}": [
+    "المستمعون: {0}",
+    "Zuhörende: {0}"
+  ],
+  "Manage soundboard": [
+    "إدارة لوحة الأصوات",
+    "Soundboard verwalten"
+  ],
+  "Mute the soundboard": [
+    "كتم لوحة الأصوات",
+    "Soundboard stummschalten"
+  ],
+  "No preview yet": [
+    "لا توجد معاينة بعد",
+    "Noch keine Vorschau"
+  ],
+  "No sounds yet.": [
+    "لا توجد أصوات بعد.",
+    "Noch keine Sounds."
+  ],
+  "No sounds yet. People who manage the soundboard add them in Server settings, Soundboard.": [
+    "لا توجد أصوات بعد. يضيفها من يديرون لوحة الأصوات من إعدادات السيرفر، لوحة الأصوات.",
+    "Noch keine Sounds. Wer das Soundboard verwaltet, fügt sie unter Servereinstellungen, Soundboard hinzu."
+  ],
+  "No topic yet": [
+    "لا يوجد موضوع بعد",
+    "Noch kein Thema"
+  ],
+  "Pick an MP3, OGG or WAV file.": [
+    "اختر ملف MP3 أو OGG أو WAV.",
+    "Wähle eine MP3-, OGG- oder WAV-Datei."
+  ],
+  "Play the server's sounds in a voice call": [
+    "تشغيل أصوات السيرفر في مكالمة صوتية",
+    "Sounds des Servers in einem Sprachanruf abspielen"
+  ],
+  "Screen of {0}": [
+    "شاشة {0}",
+    "Bildschirm von {0}"
+  ],
+  "Sharing their screen": [
+    "يشارك شاشته",
+    "Teilt den Bildschirm"
+  ],
+  "Short sounds members play in voice calls.": [
+    "أصوات قصيرة يشغلها الأعضاء في المكالمات الصوتية.",
+    "Kurze Sounds, die Mitglieder in Sprachanrufen abspielen."
+  ],
+  "Short sounds people play in a voice call, on your device.": [
+    "أصوات قصيرة يشغلها الآخرون في المكالمة الصوتية، تُسمع على جهازك.",
+    "Kurze Sounds, die andere in einem Sprachanruf abspielen, auf deinem Gerät."
+  ],
+  "Soundboard": [
+    "لوحة الأصوات",
+    "Soundboard"
+  ],
+  "Soundboard volume": [
+    "مستوى صوت لوحة الأصوات",
+    "Soundboard-Lautstärke"
+  ],
+  "Sounds": [
+    "الأصوات",
+    "Sounds"
+  ],
+  "Speakers": [
+    "المتحدثون",
+    "Sprechende"
+  ],
+  "Speakers: {0}": [
+    "المتحدثون: {0}",
+    "Sprechende: {0}"
+  ],
+  "Stage": [
+    "المنصة",
+    "Bühne"
+  ],
+  "channel-type::Stage": [
+    "منصة",
+    "Bühne"
+  ],
+  "The soundboard is full. Remove a sound, or add Wings to the server for more.": [
+    "لوحة الأصوات ممتلئة. أزل صوتًا، أو أضف أجنحة إلى السيرفر لمزيد من الأصوات.",
+    "Das Soundboard ist voll. Entferne einen Sound oder gib dem Server Wings für mehr."
+  ],
+  "This file can't be played as a sound.": [
+    "لا يمكن تشغيل هذا الملف كصوت.",
+    "Diese Datei lässt sich nicht als Sound abspielen."
+  ],
+  "This file is too big. Sounds can be up to {0} KB.": [
+    "هذا الملف كبير جدًا. يمكن أن يصل حجم الصوت إلى {0} كيلوبايت.",
+    "Diese Datei ist zu groß. Sounds dürfen bis zu {0} KB groß sein."
+  ],
+  "This sound is too long. Sounds can be up to {0} seconds.": [
+    "هذا الصوت طويل جدًا. يمكن أن يصل طول الصوت إلى {0} ثانية.",
+    "Dieser Sound ist zu lang. Sounds dürfen bis zu {0} Sekunden lang sein."
+  ],
+  "Topic": [
+    "الموضوع",
+    "Thema"
+  ],
+  "Use soundboard": [
+    "استخدام لوحة الأصوات",
+    "Soundboard verwenden"
+  ],
+  "You hear no soundboard sounds in calls.": [
+    "لن تسمع أصوات لوحة الأصوات في المكالمات.",
+    "Du hörst in Anrufen keine Soundboard-Sounds."
+  ],
+  "added the sound {0}": [
+    "أضاف الصوت {0}",
+    "hat den Sound {0} hinzugefügt"
+  ],
+  "An MP3, OGG or WAV file of up to {0} KB, then a name. WAV files are big: longer sounds fit as MP3 or OGG.": [
+    "ملف MP3 أو OGG أو WAV حتى {0} كيلوبايت، ثم اسم. ملفات WAV كبيرة، لذا تناسب الأصوات الأطول صيغة MP3 أو OGG.",
+    "Eine MP3-, OGG- oder WAV-Datei bis {0} KB, dann ein Name. WAV-Dateien sind groß: Längere Sounds passen als MP3 oder OGG."
+  ],
+  "Ask to speak": [
+    "اطلب الكلمة",
+    "Wort erbitten"
+  ],
+  "Asking to speak": [
+    "يطلبون الكلمة",
+    "Bitten ums Wort"
+  ],
+  "Back to listeners": [
+    "العودة إلى المستمعين",
+    "Zurück zu den Zuhörenden"
+  ],
+  "Close the stage": [
+    "إغلاق المنصة",
+    "Bühne schließen"
+  ],
+  "closed the stage {0}": [
+    "أغلق المنصة {0}",
+    "hat die Bühne {0} geschlossen"
+  ],
+  "Give the floor": [
+    "امنح الكلمة",
+    "Das Wort geben"
+  ],
+  "Put hand down": [
+    "أنزل يدك",
+    "Hand runter"
+  ],
+  "removed the sound {0}": [
+    "أزال الصوت {0}",
+    "hat den Sound {0} entfernt"
+  ],
+  "Use a single emoji.": [
+    "استخدم إيموجي واحدًا.",
+    "Verwende ein einzelnes Emoji."
+  ],
+  "Speakers talk, everyone else listens and can ask to speak.": [
+    "المتحدثون يتكلمون، والبقية يستمعون ويمكنهم طلب الكلمة.",
+    "Sprechende reden, alle anderen hören zu und können um das Wort bitten."
+  ],
+  "The soundboard has {0} sounds already. Remove one first.": [
+    "بلغ عدد الأصوات في لوحة الأصوات الحد الأقصى ({0}). أزل صوتًا أولًا.",
+    "Das Soundboard hat schon {0} Sounds. Entferne zuerst einen."
+  ],
+  "The stage has {0} speakers already. Send one back to the listeners first.": [
+    "بلغ عدد المتحدثين على المنصة الحد الأقصى ({0}). أعد أحدهم إلى المستمعين أولًا.",
+    "Auf der Bühne sind schon {0} Sprechende. Schicke zuerst jemanden zu den Zuhörenden zurück."
+  ]
+}

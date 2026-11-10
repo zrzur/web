@@ -589,6 +589,23 @@ export function ChannelPermissionsEditor(props: Props) {
       },
     },
     {
+      key: "UseSoundboard",
+      value: 2n ** 47n,
+      title: t`Use soundboard`,
+      description: {
+        TextChannel: t`Play the server's sounds in a voice call`,
+        Server: t`Play the server's sounds in a voice call`,
+      },
+    },
+    {
+      key: "ManageSoundboard",
+      value: 2n ** 48n,
+      title: t`Manage soundboard`,
+      description: {
+        Server: t`Add and remove the server's sounds`,
+      },
+    },
+    {
       heading: t`Mentions`,
       key: "MentionEveryone",
       value: 2n ** 37n,

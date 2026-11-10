@@ -71,6 +71,14 @@ export function voiceOccupancy(channel: Channel) {
  */
 export const MAX_VOICE_USER_LIMIT = 50;
 
+/**
+ * The voice change that sets a room size; no size (or 0) takes the limit
+ * away, which the API reads from 0 (leaving it out keeps the old one)
+ */
+export function userLimitChange(limit: number | null | undefined) {
+  return { max_users: limit && limit > 0 ? limit : 0 };
+}
+
 export function parseUserLimit(value: string): number | undefined {
   if (!value.trim()) return undefined;
   if (
