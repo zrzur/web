@@ -1,4 +1,13 @@
 {
+  "“{text}”": ["«{text}»", "„{text}“", "« {text} »", "«{text}»", "«{text}»", "“{text}”"],
+  "Actions for answer {0}": [
+    "إجراءات الإجابة {0}",
+    "Aktionen für Antwort {0}",
+    "Actions pour la réponse {0}",
+    "Acciones de la respuesta {0}",
+    "Действия с ответом {0}",
+    "选项 {0} 的操作"
+  ],
   "{0, plural, one {# vote} other {# votes}}": [
     "{0, plural, zero {لا أصوات} one {صوت واحد} two {صوتان} few {# أصوات} many {# صوتًا} other {# صوت}}",
     "{0, plural, one {# Stimme} other {# Stimmen}}",
@@ -72,8 +81,8 @@
     "选择一个或多个选项"
   ],
   "Create a poll": ["أنشئ استطلاعًا", "Umfrage erstellen", "Créer un sondage", "Crear una encuesta", "Создать опрос", "发起投票"],
-  "Create poll": ["إنشاء استطلاع", "Umfrage erstellen", "Créer un sondage", "Crear encuesta", "Создать опрос", "发起投票"],
-  "End poll": ["إنهاء الاستطلاع", "Umfrage beenden", "Terminer le sondage", "Terminar encuesta", "Завершить опрос", "结束投票"],
+  "Create poll": ["أنشئ استطلاعًا", "Umfrage erstellen", "Créer un sondage", "Crear encuesta", "Создать опрос", "发起投票"],
+  "End poll": ["أنهِ الاستطلاع", "Umfrage beenden", "Terminer le sondage", "Terminar encuesta", "Завершить опрос", "结束投票"],
   "End poll now?": [
     "هل تريد إنهاء الاستطلاع الآن؟",
     "Umfrage jetzt beenden?",

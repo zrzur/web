@@ -28,7 +28,12 @@ export function PollVotersModal(
   const [loading, setLoading] = createSignal(false);
   const [error, setError] = createSignal<unknown>();
 
+  // Each request has a number; an answer for anything but the latest one
+  // (another answer chosen meanwhile) is dropped
+  let latest = 0;
+
   async function load(more: boolean) {
+    const request = ++latest;
     setLoading(true);
     setError(undefined);
     try {
@@ -36,16 +41,24 @@ export function PollVotersModal(
         limit: 50,
         after: more ? next() : undefined,
       });
+      if (request !== latest) return;
       setUsers((list) => (more ? [...list, ...page.users] : page.users));
       setNext(page.next);
     } catch (err) {
-      setError(err);
+      if (request === latest) setError(err);
     } finally {
-      setLoading(false);
+      if (request === latest) setLoading(false);
     }
   }
 
-  createEffect(on(answer, () => void load(false)));
+  // a new answer starts from its first page
+  createEffect(
+    on(answer, () => {
+      setUsers([]);
+      setNext(undefined);
+      void load(false);
+    }),
+  );
 
   const name = (user: User) =>
     props.message.server?.getMember(user.id)?.nickname ?? user.displayName;

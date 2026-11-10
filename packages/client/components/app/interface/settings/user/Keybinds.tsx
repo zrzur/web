@@ -89,7 +89,7 @@ export function KeybindsSettings() {
         {
           title: <Trans>Create a poll</Trans>,
           description: <Trans>In a channel where you can post polls.</Trans>,
-          keys: [["Alt", "Shift", "P"]],
+          keys: [["Mod", "Shift", "7"]],
         },
       ],
     },

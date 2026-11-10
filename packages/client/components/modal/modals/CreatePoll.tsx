@@ -16,6 +16,8 @@ import {
   toDataPoll,
 } from "@revolt/app/interface/channels/text/poll/pollModel";
 import { tagEmojiFromPicker } from "@revolt/app/interface/settings/channel/tagEmoji";
+import { ContextMenu, ContextMenuButton } from "@revolt/app/menus/ContextMenu";
+import Breakpoint from "@revolt/common/Breakpoint";
 import { TranslatedError } from "@revolt/i18n/errors";
 import { Emoji } from "@revolt/markdown/emoji";
 import {
@@ -61,6 +63,7 @@ export function CreatePollModal(
   let idempotencyKey = ulid();
 
   const problem = () => draftProblem(question(), answers);
+  const phone = window.matchMedia(Breakpoint.phone).matches;
 
   const durationLabel = (hours: number) => {
     switch (hours) {
@@ -238,34 +241,82 @@ export function CreatePollModal(
                     }}
                   />
                 </AnswerField>
-                <RowTools>
-                  <IconButton
-                    variant="toolbar"
-                    size="xs"
-                    aria-label={t`Move answer ${index() + 1} up`}
-                    isDisabled={index() === 0}
-                    onPress={() => move(index(), -1)}
-                  >
-                    <Icon name="caret-up" size={16} />
-                  </IconButton>
-                  <IconButton
-                    variant="toolbar"
-                    size="xs"
-                    aria-label={t`Move answer ${index() + 1} down`}
-                    isDisabled={index() === answers.length - 1}
-                    onPress={() => move(index(), 1)}
-                  >
-                    <Icon name="caret-down" size={16} />
-                  </IconButton>
-                  <IconButton
-                    variant="toolbar"
-                    size="xs"
-                    aria-label={t`Remove answer ${index() + 1}`}
-                    onPress={() => removeAnswer(index())}
-                  >
-                    <Icon name="x" size={16} />
-                  </IconButton>
-                </RowTools>
+                <Show
+                  when={!phone}
+                  fallback={
+                    /* phones: one 44 px button opens the row's actions */
+                    <div
+                      style={{ display: "contents" }}
+                      use:floating={{
+                        contextMenu: () => (
+                          <ContextMenu>
+                            <Show when={index() > 0}>
+                              <ContextMenuButton
+                                icon={<Icon name="caret-up" size={20} />}
+                                onClick={() => move(index(), -1)}
+                              >
+                                {t`Move up`}
+                              </ContextMenuButton>
+                            </Show>
+                            <Show when={index() < answers.length - 1}>
+                              <ContextMenuButton
+                                icon={<Icon name="caret-down" size={20} />}
+                                onClick={() => move(index(), 1)}
+                              >
+                                {t`Move down`}
+                              </ContextMenuButton>
+                            </Show>
+                            <ContextMenuButton
+                              icon={<Icon name="x" size={20} />}
+                              onClick={() => removeAnswer(index())}
+                            >
+                              {t`Remove`}
+                            </ContextMenuButton>
+                          </ContextMenu>
+                        ),
+                        contextMenuHandler: "click",
+                      }}
+                    >
+                      <IconButton
+                        variant="toolbar"
+                        size="sm"
+                        aria-haspopup="menu"
+                        aria-label={t`Actions for answer ${index() + 1}`}
+                      >
+                        <Icon name="dots-three-vertical" size={20} />
+                      </IconButton>
+                    </div>
+                  }
+                >
+                  <RowTools>
+                    <IconButton
+                      variant="toolbar"
+                      size="xs"
+                      aria-label={t`Move answer ${index() + 1} up`}
+                      isDisabled={index() === 0}
+                      onPress={() => move(index(), -1)}
+                    >
+                      <Icon name="caret-up" size={16} />
+                    </IconButton>
+                    <IconButton
+                      variant="toolbar"
+                      size="xs"
+                      aria-label={t`Move answer ${index() + 1} down`}
+                      isDisabled={index() === answers.length - 1}
+                      onPress={() => move(index(), 1)}
+                    >
+                      <Icon name="caret-down" size={16} />
+                    </IconButton>
+                    <IconButton
+                      variant="toolbar"
+                      size="xs"
+                      aria-label={t`Remove answer ${index() + 1}`}
+                      onPress={() => removeAnswer(index())}
+                    >
+                      <Icon name="x" size={16} />
+                    </IconButton>
+                  </RowTools>
+                </Show>
               </AnswerRow>
             )}
           </For>
@@ -479,7 +530,8 @@ const PreviewRow = styled("div", {
     display: "flex",
     alignItems: "center",
     gap: "8px",
-    minHeight: "40px",
+    minHeight: "44px",
+    paddingBlock: "12px",
     paddingInline: "12px",
     borderRadius: "var(--z-radius-sm)",
     border: "1px solid var(--z-border-subtle)",

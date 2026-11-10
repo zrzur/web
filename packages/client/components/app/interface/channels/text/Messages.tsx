@@ -39,6 +39,7 @@ import {
 import { useMotion } from "@revolt/ui/motion";
 
 import { CompositionInfo } from "./CompositionInfo";
+import { editableByMe } from "./editable";
 import { Message } from "./Message";
 import { useMessageCache } from "./MessageCache";
 
@@ -1018,10 +1019,8 @@ export function Messages(props: Props) {
       () => state.draft.editingMessageId,
       (shouldSetEditingMessageId) => {
         if (shouldSetEditingMessageId === true) {
-          // a forwarded copy holds someone else's words: not editable
-          const chosenMessage = messages().find(
-            (message) => message.author?.self && !message.forwarded,
-          );
+          // forwarded copies and polls are not editable
+          const chosenMessage = messages().find(editableByMe);
           state.draft.setEditingMessage(chosenMessage);
           if (chosenMessage) {
             // Wait until the next render pass to allow the edit message ui to

@@ -62,6 +62,7 @@ import {
   ContextMenuSubMenu,
 } from "./ContextMenu";
 
+import { editableByMe } from "@revolt/app/interface/channels/text/editable";
 import { canEndPoll } from "@revolt/app/interface/channels/text/poll/pollModel";
 
 import { AppsSubMenu } from "./shared/AppsSubMenu";
@@ -354,10 +355,7 @@ export function MessageContextMenu(props: {
     forwardingEnabled(client()) &&
     canForwardMessage(props.message);
   const canEdit = () =>
-    !!props.message?.author?.self &&
-    !props.message.forwarded &&
-    !props.message.poll &&
-    canReply();
+    !!props.message && editableByMe(props.message) && canReply();
   /** the author ends their own open poll, Manage Messages anyone's */
   const canEndThisPoll = () =>
     !!props.message?.poll &&

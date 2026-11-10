@@ -23681,12 +23681,12 @@ msgstr "أنشئ استطلاعًا"
 #: components/modal/modals/CreatePoll.tsx
 #: src/interface/channels/text/Composition.tsx
 msgid "Create poll"
-msgstr "إنشاء استطلاع"
+msgstr "أنشئ استطلاعًا"
 
 #: components/app/menus/MessageContextMenu.tsx
 #: components/modal/modals/EndPoll.tsx
 msgid "End poll"
-msgstr "إنهاء الاستطلاع"
+msgstr "أنهِ الاستطلاع"
 
 #: components/modal/modals/EndPoll.tsx
 msgid "End poll now?"
@@ -23777,3 +23777,12 @@ msgstr "اكتب سؤالًا."
 #: components/modal/modals/CreatePoll.tsx
 msgid "Your question"
 msgstr "سؤالك"
+
+#: components/ui/components/features/messaging/elements/PollEnded.tsx
+msgid "“{text}”"
+msgstr "«{text}»"
+
+#. placeholder {0}: index() + 1
+#: components/modal/modals/CreatePoll.tsx
+msgid "Actions for answer {0}"
+msgstr "إجراءات الإجابة {0}"

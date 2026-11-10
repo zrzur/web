@@ -58,6 +58,10 @@ msgstr "“{label}”至少需要 {0} 个字符。"
 msgid "\"{name}\" needs a number."
 msgstr "“{name}”需要填写数字。"
 
+#: components/ui/components/features/messaging/elements/PollEnded.tsx
+msgid "“{text}”"
+msgstr "“{text}”"
+
 #: src/interface/channels/text/searchLabels.ts
 msgid "\"{value}\" is not a day. Write it like 2026-11-09."
 msgstr "“{value}”不是日期。请这样写：2026-11-09。"
@@ -156,7 +160,7 @@ msgstr "{0}条新的提及消息"
 msgid "{0, plural, one {# result} other {# results}}"
 msgstr "{0, plural, other {# 条结果}}"
 
-#. placeholder {0}: answer.count ?? 0
+#. placeholder {0}: answer().count ?? 0
 #. placeholder {0}: props.message.total
 #. placeholder {0}: total()
 #: components/app/interface/channels/text/poll/PollCard.tsx
@@ -1413,6 +1417,11 @@ msgstr "操作"
 #: components/app/interface/settings/user/safety/SafetyDashboard.tsx
 msgid "Actions are never automatic. Check the evidence first. The affected user sees only the reason below, never the reporter or your notes."
 msgstr "操作绝不会自动执行。请先核实证据。受影响的用户只会看到下方的原因，看不到举报者或你的备注。"
+
+#. placeholder {0}: index() + 1
+#: components/modal/modals/CreatePoll.tsx
+msgid "Actions for answer {0}"
+msgstr "选项 {0} 的操作"
 
 #: components/app/interface/settings/server/invites/VanityInvite.tsx
 #: components/app/interface/settings/user/badges/BetaAdmin.tsx
@@ -11038,6 +11047,7 @@ msgstr "将答案 {0} 上移"
 #: components/app/interface/settings/server/LobbyRoleQuestionsEditor.tsx
 #: components/app/interface/settings/server/LobbySettings.tsx
 #: components/app/interface/settings/user/bots/CommandManager.tsx
+#: components/modal/modals/CreatePoll.tsx
 msgid "Move down"
 msgstr "下移"
 
@@ -11068,6 +11078,7 @@ msgstr "移到语音频道"
 #: components/app/interface/settings/server/LobbyRoleQuestionsEditor.tsx
 #: components/app/interface/settings/server/LobbySettings.tsx
 #: components/app/interface/settings/user/bots/CommandManager.tsx
+#: components/modal/modals/CreatePoll.tsx
 msgid "Move up"
 msgstr "上移"
 
@@ -14575,6 +14586,7 @@ msgstr "远程服务器"
 #: components/app/interface/settings/user/badges/BetaAdmin.tsx
 #: components/app/interface/settings/user/plugins/PluginDetail.tsx
 #: components/app/interface/settings/user/profile/CommunityGallery.tsx
+#: components/modal/modals/CreatePoll.tsx
 #: components/modal/modals/RemoveMember.tsx
 #: components/modal/modals/ServerIdentity.tsx
 #: components/ui/components/features/messaging/composition/FileCarousel.tsx

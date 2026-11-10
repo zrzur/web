@@ -42,11 +42,15 @@ import {
 } from "@revolt/app/interface/channels/text/interactions";
 import { pollsEnabled } from "@revolt/app/interface/channels/text/poll/pollModel";
 import {
-  claimCreatePollShortcut,
+  composerForShortcut,
+  forgetComposer,
   isCreatePollShortcut,
+  noteComposer,
+  noteComposerFocus,
 } from "@revolt/app/interface/channels/text/poll/pollShortcut";
 import { ContextMenu, ContextMenuButton } from "@revolt/app/menus/ContextMenu";
 import Breakpoint from "@revolt/common/Breakpoint";
+import { isMac } from "@revolt/keybinds/shortcuts";
 import { RulesGate } from "./RulesGate";
 
 interface Props {
@@ -69,7 +73,7 @@ export function MessageComposition(props: Props) {
   const { t } = useLingui();
   const client = useClient();
   const { limits } = useInstance();
-  const { openModal } = useModals();
+  const { openModal, isOpen } = useModals();
 
   const isTimedOut = createIsTimedOut(
     () => props.channel.server?.member?.timeout,
@@ -328,16 +332,32 @@ export function MessageComposition(props: Props) {
     openModal({ type: "create_poll", channel: props.channel });
   }
 
-  // Alt+Shift+P opens "Create poll" (listed in the shortcuts screen)
+  // Ctrl+Shift+7 (Command on a Mac) opens "Create poll" for the message box
+  // focused last (listed in the shortcuts screen); not while a window is
+  // open or something else already took the key
+  const composerKey = `${props.channel.id}:${Math.random().toString(36).slice(2)}`;
+  const mac = isMac();
+  let composerRoot: HTMLDivElement | undefined;
   onMount(() => {
+    noteComposer(composerKey);
+    const onFocusIn = (event: FocusEvent) => {
+      if (composerRoot?.contains(event.target as Node))
+        noteComposerFocus(composerKey);
+    };
     const onKeyDown = (event: KeyboardEvent) => {
-      if (!isCreatePollShortcut(event) || event.repeat) return;
-      if (!claimCreatePollShortcut()) return;
+      if (event.defaultPrevented || event.repeat) return;
+      if (!isCreatePollShortcut(event, mac)) return;
+      if (composerForShortcut() !== composerKey || isOpen()) return;
       event.preventDefault();
       createPoll();
     };
+    document.addEventListener("focusin", onFocusIn);
     window.addEventListener("keydown", onKeyDown);
-    onCleanup(() => window.removeEventListener("keydown", onKeyDown));
+    onCleanup(() => {
+      forgetComposer(composerKey);
+      document.removeEventListener("focusin", onFocusIn);
+      window.removeEventListener("keydown", onKeyDown);
+    });
   });
 
   function addFile(accept = "*", capture?: "environment") {
@@ -480,13 +500,16 @@ export function MessageComposition(props: Props) {
         setContent={setContent}
         actionsStart={
           <Show
-            when={props.channel.havePermission("UploadFiles") || canPoll()}
+            when={
+              props.channel.havePermission("UploadFiles") ||
+              (phone && canPoll())
+            }
             fallback={<MessageBox.InlineIcon size="short" />}
           >
             <MessageBox.InlineIcon>
               {/* phones: the plus opens a sheet of things to add; wider
-                  screens upload a file straight away, or offer a file or a
-                  poll where polls can be posted */}
+                  screens upload a file with one click, and a right-click
+                  offers a file or a poll where polls can be posted */}
               <div
                 style={{ display: "contents" }}
                 use:floating={
@@ -511,7 +534,6 @@ export function MessageComposition(props: Props) {
                             </ContextMenuButton>
                           </ContextMenu>
                         ),
-                        contextMenuHandler: "click",
                       }
                     : phone
                       ? {
@@ -590,11 +612,11 @@ export function MessageComposition(props: Props) {
                 }
               >
                 <IconButton
-                  aria-label={phone || canPoll() ? t`Add` : t`Upload file`}
-                  aria-haspopup={phone || canPoll() ? "menu" : undefined}
+                  aria-label={phone ? t`Add` : t`Upload file`}
+                  aria-haspopup={phone ? "menu" : undefined}
                   data-testid="composer-add"
                   onPress={() => {
-                    if (!phone && !canPoll()) addFile();
+                    if (!phone) addFile();
                   }}
                 >
                   <Symbol type="outlined" size={22}>
@@ -628,6 +650,25 @@ export function MessageComposition(props: Props) {
                     {/* phones with the "+" sheet: GIF lives there, so the
                         row keeps room for the message */}
                     {void (pickerTriggers = triggerProps)}
+                    {/* polls: their own button where they can be posted
+                        (phones have it in the "+" sheet) */}
+                    <Show when={canPoll() && !canSend() && !phone}>
+                      <MessageBox.InlineIcon>
+                        <IconButton
+                          aria-label={t`Create poll`}
+                          data-testid="composer-create-poll"
+                          use:floating={{
+                            tooltip: {
+                              placement: "top",
+                              content: t`Create poll`,
+                            },
+                          }}
+                          onPress={createPoll}
+                        >
+                          <Icon name="list-checks" size={22} />
+                        </IconButton>
+                      </MessageBox.InlineIcon>
+                    </Show>
                     <Show
                       when={
                         !canSend() &&

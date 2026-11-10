@@ -23780,3 +23780,12 @@ msgstr "Write a question."
 #: components/modal/modals/CreatePoll.tsx
 msgid "Your question"
 msgstr "Your question"
+
+#: components/ui/components/features/messaging/elements/PollEnded.tsx
+msgid "“{text}”"
+msgstr "“{text}”"
+
+#. placeholder {0}: index() + 1
+#: components/modal/modals/CreatePoll.tsx
+msgid "Actions for answer {0}"
+msgstr "Actions for answer {0}"

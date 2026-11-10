@@ -50,7 +50,23 @@ export function PollCard(props: { message: Message }) {
     !!props.message.channel?.havePermission("React") &&
     !(props.message.channel && threadIsReadOnly(props.message.channel));
 
-  const rows: HTMLButtonElement[] = [];
+  // Rows are keyed by answer id, not by the answer objects: every vote or
+  // event brings a new poll object, and rebuilding the rows would drop the
+  // keyboard focus after each press
+  const ids = createMemo(() => poll().answers.map((answer) => answer.id), [], {
+    equals: (a, b) => a.length === b.length && a.every((id, i) => id === b[i]),
+  });
+  const answerOf = (id: number) =>
+    poll().answers.find((answer) => answer.id === id)!;
+  const shareOf = (id: number) =>
+    percents()[poll().answers.findIndex((answer) => answer.id === id)] ?? 0;
+
+  // One tab stop for the whole group (your answer, or the first); arrow
+  // keys move inside it
+  const [active, setActive] = createSignal<number>();
+  const tabStop = () =>
+    active() ?? poll().me?.find((id) => ids().includes(id)) ?? ids()[0];
+  const rows = new Map<number, HTMLButtonElement>();
 
   async function press(answer: number) {
     if (!canVote() || busy()) return;
@@ -69,17 +85,23 @@ export function PollCard(props: { message: Message }) {
     }
   }
 
-  function onKeyDown(event: KeyboardEvent, index: number) {
+  function onKeyDown(event: KeyboardEvent, id: number) {
+    const rtl =
+      getComputedStyle(event.currentTarget as Element).direction === "rtl";
+    const forward = rtl ? "ArrowLeft" : "ArrowRight";
+    const back = rtl ? "ArrowRight" : "ArrowLeft";
     const step =
-      event.key === "ArrowDown" || event.key === "ArrowRight"
+      event.key === "ArrowDown" || event.key === forward
         ? 1
-        : event.key === "ArrowUp" || event.key === "ArrowLeft"
+        : event.key === "ArrowUp" || event.key === back
           ? -1
           : 0;
     if (!step) return;
     event.preventDefault();
-    const count = poll().answers.length;
-    rows[(index + step + count) % count]?.focus();
+    const list = ids();
+    const next = list[(list.indexOf(id) + step + list.length) % list.length];
+    setActive(next);
+    rows.get(next)?.focus();
   }
 
   const votes = () =>
@@ -101,26 +123,29 @@ export function PollCard(props: { message: Message }) {
         role={poll().allow_multiselect ? "group" : "radiogroup"}
         aria-labelledby={`poll-${props.message.id}`}
       >
-        <For each={poll().answers}>
-          {(answer, index) => {
-            const mine = () => !!poll().me?.includes(answer.id);
+        <For each={ids()}>
+          {(id) => {
+            const answer = () => answerOf(id);
+            const mine = () => !!poll().me?.includes(id);
             return (
               <Row
-                ref={(el) => (rows[index()] = el)}
+                ref={(el) => rows.set(id, el)}
                 type="button"
                 role={poll().allow_multiselect ? "checkbox" : "radio"}
                 aria-checked={mine()}
                 aria-disabled={!canVote()}
-                aria-busy={busy() === answer.id}
+                aria-busy={busy() === id}
+                tabIndex={tabStop() === id ? 0 : -1}
                 data-mine={mine()}
                 data-testid="poll-answer"
-                onClick={() => void press(answer.id)}
-                onKeyDown={(event) => onKeyDown(event, index())}
+                onFocus={() => setActive(id)}
+                onClick={() => void press(id)}
+                onKeyDown={(event) => onKeyDown(event, id)}
               >
                 <Bar
                   aria-hidden="true"
                   data-mine={mine()}
-                  style={{ "inline-size": `${percents()[index()] ?? 0}%` }}
+                  style={{ "inline-size": `${shareOf(id)}%` }}
                 />
                 <Mark
                   aria-hidden="true"
@@ -131,16 +156,16 @@ export function PollCard(props: { message: Message }) {
                     <Icon name="check" size={14} />
                   </Show>
                 </Mark>
-                <Show when={answer.emoji}>
+                <Show when={answer().emoji}>
                   <AnswerEmoji aria-hidden="true">
-                    <Emoji emoji={answer.emoji!} />
+                    <Emoji emoji={answer().emoji!} />
                   </AnswerEmoji>
                 </Show>
-                <AnswerText>{answer.text}</AnswerText>
+                <AnswerText>{answer().text}</AnswerText>
                 <Share>
-                  <span>{percents()[index()] ?? 0}%</span>
+                  <span>{shareOf(id)}%</span>
                   <Count>
-                    {t`${plural(answer.count ?? 0, { one: "# vote", other: "# votes" })}`}
+                    {t`${plural(answer().count ?? 0, { one: "# vote", other: "# votes" })}`}
                   </Count>
                 </Share>
               </Row>
@@ -234,7 +259,7 @@ const Row = styled("button", {
     alignItems: "center",
     gap: "8px",
     minHeight: "44px",
-    paddingBlock: "8px",
+    paddingBlock: "12px",
     paddingInline: "12px",
     borderRadius: "var(--z-radius-sm)",
     border: "1px solid var(--z-border-subtle)",

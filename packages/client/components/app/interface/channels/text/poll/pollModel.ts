@@ -134,3 +134,24 @@ type ConfiguredClient =
 export function pollsEnabled(client: ConfiguredClient): boolean {
   return client?.configuration?.features?.polls === true;
 }
+
+/**
+ * Text that stands for a poll where only text fits (reply previews), the
+ * same as the server's summary: the question, then one line per answer
+ * (custom emoji written `:id:`)
+ */
+export function pollSummary(poll: {
+  question: string;
+  answers: { id?: number; text: string; emoji?: string | null }[];
+}): string {
+  const lines = [`📊 ${poll.question}`];
+  for (const answer of poll.answers) {
+    const emoji = answer.emoji
+      ? /^[0-9A-HJKMNP-TV-Z]{26}$/.test(answer.emoji)
+        ? `:${answer.emoji}: `
+        : `${answer.emoji} `
+      : "";
+    lines.push(`• ${emoji}${answer.text}`);
+  }
+  return lines.join("\n");
+}

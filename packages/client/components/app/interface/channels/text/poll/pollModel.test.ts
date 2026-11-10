@@ -7,6 +7,7 @@ import {
   draftProblem,
   moveItem,
   pollPercents,
+  pollSummary,
   pollTotal,
   pollsEnabled,
   toDataPoll,
@@ -143,5 +144,19 @@ describe("pollsEnabled", () => {
     ).toBe(false);
     expect(pollsEnabled({ configuration: { features: {} } })).toBe(false);
     expect(pollsEnabled(undefined)).toBe(false);
+  });
+});
+
+describe("pollSummary", () => {
+  it("reads like the server's text summary: question, then the answers", () => {
+    expect(
+      pollSummary({
+        question: "Lunch?",
+        answers: [
+          { id: 1, text: "Soup", emoji: "🍲" },
+          { id: 2, text: "Salad" },
+        ],
+      }),
+    ).toBe("📊 Lunch?\n• 🍲 Soup\n• Salad");
   });
 });

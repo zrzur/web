@@ -1,3 +1,4 @@
+import { pollSummary } from "@revolt/app/interface/channels/text/poll/pollModel";
 import { Match, Show, Switch } from "solid-js";
 
 import { Trans } from "@lingui/solid/macro";
@@ -148,10 +149,15 @@ export function MessageReply(props: Props) {
                 </Switch>
               </Attachments>
             </Show>
-            <Show when={props.message!.content}>
-              <ReplyContent>
-                {renderReplyContent(props.message!.content!)}
-              </ReplyContent>
+            <Show
+              when={
+                props.message!.content ||
+                (props.message!.poll && pollSummary(props.message!.poll))
+              }
+            >
+              {(text) => (
+                <ReplyContent>{renderReplyContent(text())}</ReplyContent>
+              )}
             </Show>
           </Link>
         </Match>

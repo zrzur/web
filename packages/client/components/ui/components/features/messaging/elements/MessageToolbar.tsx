@@ -5,6 +5,7 @@ import { cva } from "styled-system/css";
 import { styled } from "styled-system/jsx";
 
 import { MessageContextMenu, useMessage } from "@revolt/app";
+import { editableByMe } from "@revolt/app/interface/channels/text/editable";
 import {
   canSend,
   threadIsReadOnly,
@@ -100,8 +101,8 @@ export function MessageToolbar() {
       </Show>
       <Show
         when={
-          message?.author?.self &&
-          !message.forwarded &&
+          !!message &&
+          editableByMe(message) &&
           message.channel &&
           canSend(message.channel)
         }

@@ -14,10 +14,12 @@ export function PollEnded(props: { message: PollEndedSystemMessage }) {
 
   const question = () => props.message.question;
   const winners = () => props.message.winners;
-  // the answers named in the reader's language ("A and B", «A و B»)
+  // the answers named in the reader's language: its own quotation marks
+  // (a translated string) and its own "and" ("A and B", «A و B»)
+  const quoted = (text: string) => t`“${text}”`;
   const tied = () =>
     new Intl.ListFormat(i18n.locale, { type: "conjunction" }).format(
-      winners().map((winner) => `“${winner}”`),
+      winners().map(quoted),
     );
   const total = () =>
     t`${plural(props.message.total, { one: "# vote", other: "# votes" })}`;
