@@ -1,4 +1,4 @@
-import { Show, createSignal } from "solid-js";
+import { Show, Suspense, createSignal, lazy, onMount } from "solid-js";
 
 import { Trans, useLingui } from "@lingui/solid/macro";
 import type { Channel } from "@zrzur/sdk/solid";
@@ -8,7 +8,11 @@ import { useClient } from "@revolt/client";
 import { Button } from "@revolt/ui";
 import { Icon } from "@revolt/ui/icons/Icon";
 
-import { NewTicket } from "../settings/user/support/ContactSupport";
+/** The ticket form lives with the support page, outside the app shell */
+const loadTicket = () => import("../settings/user/support/ContactSupport");
+const NewTicket = lazy(() =>
+  loadTicket().then((module) => ({ default: module.NewTicket })),
+);
 
 /**
  * Takes the place of the message box in the conversation with Zrzur's
@@ -19,6 +23,8 @@ export function OfficialBanner(props: { channel: Channel }) {
   const { t } = useLingui();
   const client = useClient();
   const [writing, setWriting] = createSignal(false);
+  // fetched while the banner is read, so the form opens at once
+  onMount(() => void loadTicket());
 
   /** The newest official message, to link the ticket to it */
   const latest = () => {
@@ -48,12 +54,14 @@ export function OfficialBanner(props: { channel: Channel }) {
         <Trans>Reply in a ticket</Trans>
       </Button>
       <Show when={writing()}>
-        <NewTicket
-          related={latest()?.id}
-          subject={subject()}
-          onClose={() => setWriting(false)}
-          onDone={() => setWriting(false)}
-        />
+        <Suspense>
+          <NewTicket
+            related={latest()?.id}
+            subject={subject()}
+            onClose={() => setWriting(false)}
+            onDone={() => setWriting(false)}
+          />
+        </Suspense>
       </Show>
     </Banner>
   );
