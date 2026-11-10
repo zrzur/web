@@ -3,7 +3,9 @@
  * (e.g. "First channel everyone can read"), so the attribute counts
  * whenever it is present, even when empty.
  */
-export function readItemValue(el: HTMLElement): string | undefined {
+export function readItemValue(el?: HTMLElement): string | undefined {
+  // a child that is no element (an empty <Show>, plain text) is no item
+  if (!el || typeof el.hasAttribute !== "function") return undefined;
   if (el.hasAttribute("value")) return el.getAttribute("value") ?? "";
   if (el.hasAttribute("data-value")) return el.getAttribute("data-value") ?? "";
   return (el as HTMLElement & { value?: string }).value || undefined;
