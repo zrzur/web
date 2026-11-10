@@ -18,6 +18,8 @@ import { styled } from "styled-system/jsx";
 import { UserContextMenu } from "@revolt/app";
 import { useClient } from "@revolt/client";
 import { useDevice } from "@revolt/common";
+import { statusLine } from "@revolt/common/lib/statusWrite";
+import { TextWithEmoji } from "@revolt/markdown";
 import { useModals } from "@revolt/modal";
 import { useNavigate } from "@revolt/routing";
 import {
@@ -341,7 +343,7 @@ function Person(props: {
         ? t`Outgoing friend request`
         : props.kind === "blocked"
           ? t`Blocked`
-          : props.user.status?.text ||
+          : statusLine(props.user.statusEmoji, props.user.status?.text) ||
             (props.user.online
               ? props.user.presence === "Busy"
                 ? t`Do not disturb`
@@ -393,7 +395,9 @@ function Person(props: {
           <b style={nameStyle(props.user.style)}>{props.user.displayName}</b>
           <span>{props.user.username}</span>
         </strong>
-        <small>{statusText()}</small>
+        <small data-testid="friend-status">
+          <TextWithEmoji content={statusText()} />
+        </small>
       </Names>
       <Actions onClick={(e) => e.stopPropagation()}>
         <Switch>

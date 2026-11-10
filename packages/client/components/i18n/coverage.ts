@@ -27,7 +27,7 @@ export const LANGUAGE_COVERAGE: Record<string, number> = {
   "ga": 2,
   "hi": 2,
   "hr": 2,
-  "hu": 7,
+  "hu": 6,
   "hy": 3,
   "id": 12,
   "is": 0,

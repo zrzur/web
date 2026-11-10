@@ -16,6 +16,7 @@ import { styled } from "styled-system/jsx";
 import { floatingUserMenus } from "@revolt/app/menus/UserContextMenu";
 import { useClient } from "@revolt/client";
 import { createIsTimedOut } from "@revolt/common/lib/createIsTimedOut";
+import { statusLine } from "@revolt/common/lib/statusWrite";
 import { TextWithEmoji } from "@revolt/markdown";
 import { userInformation } from "@revolt/markdown/users";
 import {
@@ -402,18 +403,24 @@ function Member(props: {
     ),
   );
 
-  const status = () =>
-    (props.user ?? props.member?.user)?.statusMessage((s) =>
-      s === "Online"
-        ? t`Online`
-        : s === "Busy"
-          ? t`Busy`
-          : s === "Focus"
-            ? t`Focus`
-            : s === "Idle"
-              ? t`Idle`
-              : t`Offline`,
+  // the emoji first, then the text; one memo per visible row
+  const status = createMemo(() => {
+    const user = props.user ?? props.member?.user;
+    return statusLine(
+      user?.statusEmoji,
+      user?.statusMessage((s) =>
+        s === "Online"
+          ? t`Online`
+          : s === "Busy"
+            ? t`Busy`
+            : s === "Focus"
+              ? t`Focus`
+              : s === "Idle"
+                ? t`Idle`
+                : t`Offline`,
+      ),
     );
+  });
 
   // the user's nameplate: its own rounded layer inside the row, fading in
   // from the left so the name stays readable

@@ -7,6 +7,7 @@ import { styled } from "styled-system/jsx";
 
 import { useClient, useUser } from "@revolt/client";
 import { billingAvailable } from "@revolt/client/billing";
+import { presencePatch } from "@revolt/common/lib/statusWrite";
 import { useModals } from "@revolt/modal";
 import { useNavigate } from "@revolt/routing";
 import { Header, UserStatus } from "@revolt/ui";
@@ -94,7 +95,7 @@ function Body(props: { user: User }) {
     if (value === presence()) return;
     setPendingPresence(value);
     props.user
-      .edit({ status: { ...props.user.status, presence: value } })
+      .edit(presencePatch(value))
       .finally(() => setPendingPresence(undefined));
   };
 

@@ -11,7 +11,9 @@ import { cva } from "styled-system/css";
 import { styled } from "styled-system/jsx";
 
 import { useClient, useUser } from "@revolt/client";
+import { statusLine } from "@revolt/common/lib/statusWrite";
 import { useInstance } from "@revolt/instance";
+import { TextWithEmoji } from "@revolt/markdown";
 import { useModals } from "@revolt/modal";
 import { useVoice } from "@revolt/rtc";
 import { Avatar, OverflowingText, UserStatus } from "@revolt/ui";
@@ -52,8 +54,9 @@ export function AccountBar(props: { compact?: boolean; overPage?: boolean }) {
   // a status still being saved shows right away
   const presence = () => pendingPresence() ?? user()?.presence;
   const statusText = () =>
-    (user()?.status?.text ? user()?.statusMessage(presenceLabel) : undefined) ??
-    presenceLabel(presence());
+    (user()?.status?.text || user()?.statusEmoji
+      ? statusLine(user()?.statusEmoji, user()?.status?.text)
+      : undefined) ?? presenceLabel(presence());
 
   // in a call the voice controls join the same card, above the account row
   const inCall = () => !props.compact && !!voice.channel();
@@ -115,8 +118,10 @@ export function AccountBar(props: { compact?: boolean; overPage?: boolean }) {
                   </span>
                 </OverflowingText>
               </Name>
-              <StatusLine>
-                <OverflowingText>{statusText()}</OverflowingText>
+              <StatusLine data-testid="account-status">
+                <OverflowingText>
+                  <TextWithEmoji content={statusText()} />
+                </OverflowingText>
               </StatusLine>
             </Meta>
           </Show>

@@ -22,6 +22,8 @@ const CommunityCreations = lazy(
 const ProfileWearing = lazy(
   () => import("@revolt/app/interface/settings/user/profile/ProfileWearing"),
 );
+// lazy: asks the server only when a profile opens, never on first load
+const ProfileMutuals = lazy(() => import("./ProfileMutuals"));
 
 /**
  * Everything below the name, the same on the card and the full profile: the
@@ -67,6 +69,9 @@ export function ProfileBody(props: {
           />
         </Show>
         <ProfileRoles member={props.member} />
+        <Show when={!props.user.self}>
+          <ProfileMutuals user={props.user} onClose={props.onClose} />
+        </Show>
         {props.children}
       </ProfileCard>
     </Show>

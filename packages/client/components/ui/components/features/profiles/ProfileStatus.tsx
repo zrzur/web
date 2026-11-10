@@ -1,6 +1,8 @@
 import { Show } from "solid-js";
 
 import { Trans, useLingui } from "@lingui/solid/macro";
+import { statusLine } from "@revolt/common/lib/statusWrite";
+import { TextWithEmoji } from "@revolt/markdown/emoji/TextWithEmoji";
 import { User } from "@zrzur/sdk/solid";
 import { styled } from "styled-system/jsx";
 
@@ -12,23 +14,28 @@ export function ProfileStatus(props: { user: User }) {
   const { t } = useLingui();
 
   return (
-    <Show when={props.user.status?.text}>
+    <Show when={props.user.status?.text || props.user.statusEmoji}>
       <ProfileCard>
         <Text class="title" size="large">
           <Trans>Status</Trans>
         </Text>
         <Status>
-          {props.user.statusMessage((s) =>
-            s === "Online"
-              ? t`Online`
-              : s === "Busy"
-                ? t`Busy`
-                : s === "Focus"
-                  ? t`Focus`
-                  : s === "Idle"
-                    ? t`Idle`
-                    : t`Offline`,
-          )}
+          <TextWithEmoji
+            content={statusLine(
+              props.user.statusEmoji,
+              props.user.statusMessage((s) =>
+                s === "Online"
+                  ? t`Online`
+                  : s === "Busy"
+                    ? t`Busy`
+                    : s === "Focus"
+                      ? t`Focus`
+                      : s === "Idle"
+                        ? t`Idle`
+                        : t`Offline`,
+              ),
+            )}
+          />
         </Status>
       </ProfileCard>
     </Show>

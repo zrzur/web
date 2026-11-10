@@ -12,6 +12,7 @@ import { ChannelContextMenu, UserContextMenu } from "@revolt/app";
 import { useCreatorAccess } from "@revolt/app/interface/settings/user/profile/creatorAccess";
 import { useClient } from "@revolt/client";
 import { useDevice } from "@revolt/common";
+import { statusLine } from "@revolt/common/lib/statusWrite";
 import Instance from "@revolt/instance/Instance";
 import { TextWithEmoji } from "@revolt/markdown";
 import { OfficialLabel } from "@revolt/ui/components/features/profiles/OfficialLabel";
@@ -360,18 +361,22 @@ function Entry(
   /**
    * Determine user status if present
    */
-  const status = () =>
-    local.channel.recipient?.statusMessage((s) =>
-      s === "Online"
-        ? t`Online`
-        : s === "Busy"
-          ? t`Busy`
-          : s === "Focus"
-            ? t`Focus`
-            : s === "Idle"
-              ? t`Idle`
-              : t`Offline`,
-    );
+  const status = createMemo(() =>
+    statusLine(
+      local.channel.recipient?.statusEmoji,
+      local.channel.recipient?.statusMessage((s) =>
+        s === "Online"
+          ? t`Online`
+          : s === "Busy"
+            ? t`Busy`
+            : s === "Focus"
+              ? t`Focus`
+              : s === "Idle"
+                ? t`Idle`
+                : t`Offline`,
+      ),
+    ),
+  );
 
   return (
     <MenuButton

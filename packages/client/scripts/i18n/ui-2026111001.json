@@ -1,0 +1,14 @@
+{
+  "Change the status emoji": ["غيّر الرمز التعبيري للحالة", "Status-Emoji ändern"],
+  "Clear after": ["تُمسح بعد", "Löschen nach"],
+  "In common": ["مشترك بينكما", "Gemeinsam"],
+  "Keep: until {0}": ["إبقاؤها: حتى {0}", "Beibehalten: bis {0}"],
+  "No servers or friends in common.": [
+    "لا سيرفرات ولا أصدقاء مشتركون بينكما.",
+    "Keine gemeinsamen Server oder Freunde."
+  ],
+  "Servers and friends in common": [
+    "السيرفرات والأصدقاء المشتركون",
+    "Gemeinsame Server und Freunde"
+  ]
+}

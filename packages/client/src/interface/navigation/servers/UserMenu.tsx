@@ -1,8 +1,13 @@
 import { autoUpdate, flip, offset, shift, size } from "@floating-ui/dom";
 import { useLingui } from "@lingui/solid/macro";
 import { useClient, useUser } from "@revolt/client";
-import { writeStatusWithRetry } from "@revolt/common/lib/statusWrite";
+import {
+  presencePatch,
+  statusLine,
+  writeStatusWithRetry,
+} from "@revolt/common/lib/statusWrite";
 import { useError } from "@revolt/i18n";
+import { TextWithEmoji } from "@revolt/markdown";
 import { useModals } from "@revolt/modal";
 import { useState } from "@revolt/state";
 import { Avatar, UserStatus } from "@revolt/ui";
@@ -72,7 +77,7 @@ export function UserMenu(props: Props) {
     save: async (presence) => {
       const account = user();
       if (!account) throw new Error("Account unavailable");
-      await account.edit({ status: { presence } });
+      await account.edit(presencePatch(presence));
     },
     pending: (presence) => {
       setPending(presence);
@@ -306,20 +311,27 @@ export function UserMenu(props: Props) {
             role="menuitem"
             disabled={!!pending() || clearing()}
             onClick={openStatus}
+            data-testid="menu-edit-status"
           >
             <ActionIcon>
               <Icon name="pencil-simple" size={16} />
             </ActionIcon>
             <ActionText>
-              {user()?.status?.text || t`Add status text`}
+              <TextWithEmoji
+                content={
+                  statusLine(user()?.statusEmoji, user()?.status?.text) ||
+                  t`Add status text`
+                }
+              />
             </ActionText>
           </Action>
-          <Show when={user()?.status?.text}>
+          <Show when={user()?.status?.text || user()?.statusEmoji}>
             <Action
               type="button"
               role="menuitem"
               disabled={!!pending() || clearing()}
               onClick={() => void clearStatus()}
+              data-testid="menu-clear-status"
             >
               <ActionIcon>
                 <Icon name="trash" size={16} />

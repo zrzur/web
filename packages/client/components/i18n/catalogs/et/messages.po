@@ -928,6 +928,7 @@ msgstr ""
 #: components/app/interface/settings/server/ServerEmergency.tsx
 #: components/modal/modals/CreateInvite.tsx
 #: components/modal/modals/CreatePoll.tsx
+#: components/modal/modals/CustomStatus.tsx
 msgid "1 hour"
 msgstr ""
 
@@ -1005,10 +1006,12 @@ msgid "3. Install the bot in a test server"
 msgstr ""
 
 #: components/modal/modals/CreateInvite.tsx
+#: components/modal/modals/CustomStatus.tsx
 msgid "30 minutes"
 msgstr ""
 
 #: components/modal/modals/CreatePoll.tsx
+#: components/modal/modals/CustomStatus.tsx
 msgid "4 hours"
 msgstr ""
 
@@ -3893,6 +3896,10 @@ msgstr ""
 msgid "Change the password you use to sign in."
 msgstr ""
 
+#: components/modal/modals/CustomStatus.tsx
+msgid "Change the status emoji"
+msgstr ""
+
 #: components/app/interface/settings/user/subscriptions/Subscriptions.tsx
 msgid "Change your card, download invoices and see past payments on our payment partner's secure page."
 msgstr ""
@@ -4238,6 +4245,7 @@ msgid "Choose a username"
 msgstr "Valige kasutajanimi"
 
 #: components/app/interface/settings/channel/ForumTags.tsx
+#: components/modal/modals/CustomStatus.tsx
 msgid "Choose an emoji"
 msgstr ""
 
@@ -4414,6 +4422,10 @@ msgstr ""
 #: components/app/interface/settings/user/profile/StyleEditors.tsx
 #: components/app/interface/settings/user/safety/SafetyDashboard.tsx
 msgid "Clear"
+msgstr ""
+
+#: components/modal/modals/CustomStatus.tsx
+msgid "Clear after"
 msgstr ""
 
 #: src/interface/Discover.tsx
@@ -7891,6 +7903,7 @@ msgstr ""
 #: components/app/interface/settings/user/Privacy.tsx
 #: components/modal/lib/serverTemplateText.ts
 #: components/modal/modals/GiftPlus.tsx
+#: components/ui/components/features/profiles/ProfileMutuals.tsx
 #: src/interface/Friends.tsx
 #: src/interface/navigation/channels/HomeSidebar.tsx
 #: src/interface/You.tsx
@@ -9085,6 +9098,10 @@ msgstr ""
 msgid "In about ten minutes you will have a bot that answers a slash command in your own test server. You need a Zrzur account, a server of your own and Node.js 22 or newer. There is nothing to install."
 msgstr ""
 
+#: components/ui/components/features/profiles/ProfileMutuals.tsx
+msgid "In common"
+msgstr ""
+
 #: components/app/interface/settings/user/Language.tsx
 msgid "In progress"
 msgstr ""
@@ -9724,6 +9741,11 @@ msgstr ""
 
 #: components/app/interface/settings/user/profile/CreatorStudio.tsx
 msgid "Keep this readable: leave it mostly transparent"
+msgstr ""
+
+#. placeholder {0}: keptTime()
+#: components/modal/modals/CustomStatus.tsx
+msgid "Keep: until {0}"
 msgstr ""
 
 #: src/interface/developers/docs/DocsPortal.tsx
@@ -11877,6 +11899,7 @@ msgstr ""
 #~ msgstr ""
 
 #: components/modal/modals/CreateInvite.tsx
+#: components/modal/modals/CustomStatus.tsx
 msgid "Never"
 msgstr ""
 
@@ -12529,6 +12552,10 @@ msgstr ""
 
 #: src/interface/Discover.tsx
 msgid "No servers are listed yet."
+msgstr ""
+
+#: components/ui/components/features/profiles/ProfileMutuals.tsx
+msgid "No servers or friends in common."
 msgstr ""
 
 #: components/modal/modals/MoveSupercharge.tsx
@@ -15358,6 +15385,7 @@ msgid "Remove tag {tag}"
 msgstr ""
 
 #: components/app/interface/settings/channel/ForumTags.tsx
+#: components/modal/modals/CustomStatus.tsx
 msgid "Remove the emoji"
 msgstr ""
 
@@ -17128,6 +17156,7 @@ msgid "Server stats"
 msgstr ""
 
 #: components/modal/modals/MoveSupercharge.tsx
+#: components/ui/components/features/profiles/ProfileMutuals.tsx
 #: src/interface/developers/docs/DocsPortal.tsx
 #: src/interface/Discover.tsx
 #: src/interface/navigation/PhoneTabs.tsx
@@ -17136,6 +17165,10 @@ msgstr ""
 
 #: components/app/interface/settings/user/subscriptions/PlusPage.tsx
 msgid "Servers and bots you send to Discover are reviewed ahead of the queue. Same rules, just faster."
+msgstr ""
+
+#: components/ui/components/features/profiles/ProfileMutuals.tsx
+msgid "Servers and friends in common"
 msgstr ""
 
 #. placeholder {0}: formatPrice(plans().supercharge_price, plans().currency, locale())
@@ -20311,6 +20344,7 @@ msgstr ""
 msgid "To answer one, open a ticket."
 msgstr ""
 
+#: components/modal/modals/CustomStatus.tsx
 #: src/interface/channels/text/SearchBox.tsx
 msgid "Today"
 msgstr ""

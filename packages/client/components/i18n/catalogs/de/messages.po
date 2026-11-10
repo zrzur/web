@@ -949,6 +949,7 @@ msgstr "1 Tag"
 #: components/app/interface/settings/server/ServerEmergency.tsx
 #: components/modal/modals/CreateInvite.tsx
 #: components/modal/modals/CreatePoll.tsx
+#: components/modal/modals/CustomStatus.tsx
 msgid "1 hour"
 msgstr "1 Stunde"
 
@@ -1030,10 +1031,12 @@ msgid "3. Install the bot in a test server"
 msgstr "3. Installiere den Bot in einem Testserver"
 
 #: components/modal/modals/CreateInvite.tsx
+#: components/modal/modals/CustomStatus.tsx
 msgid "30 minutes"
 msgstr "30 Minuten"
 
 #: components/modal/modals/CreatePoll.tsx
+#: components/modal/modals/CustomStatus.tsx
 msgid "4 hours"
 msgstr "4 Stunden"
 
@@ -3998,6 +4001,10 @@ msgstr "Emoji von {0} ändern"
 msgid "Change the password you use to sign in."
 msgstr "Ändere das Passwort, mit dem du dich anmeldest."
 
+#: components/modal/modals/CustomStatus.tsx
+msgid "Change the status emoji"
+msgstr "Status-Emoji ändern"
+
 #: components/app/interface/settings/user/subscriptions/Subscriptions.tsx
 msgid "Change your card, download invoices and see past payments on our payment partner's secure page."
 msgstr "Ändere deine Karte, lade Rechnungen herunter und sieh dir frühere Zahlungen auf der sicheren Seite unseres Zahlungspartners an."
@@ -4372,6 +4379,7 @@ msgid "Choose a username"
 msgstr "Wähle einen Benutzernamen"
 
 #: components/app/interface/settings/channel/ForumTags.tsx
+#: components/modal/modals/CustomStatus.tsx
 msgid "Choose an emoji"
 msgstr "Emoji wählen"
 
@@ -4557,6 +4565,10 @@ msgstr "Klare helle Flächen mit dunkler Schrift und Himbeer-Aktionen."
 #: components/app/interface/settings/user/safety/SafetyDashboard.tsx
 msgid "Clear"
 msgstr "Klar"
+
+#: components/modal/modals/CustomStatus.tsx
+msgid "Clear after"
+msgstr "Löschen nach"
 
 #: src/interface/Discover.tsx
 #~ msgid "Clear filter"
@@ -8231,6 +8243,7 @@ msgstr "Freundschaftsanfragen, die du sendest oder erhältst, warten hier."
 #: components/app/interface/settings/user/Privacy.tsx
 #: components/modal/lib/serverTemplateText.ts
 #: components/modal/modals/GiftPlus.tsx
+#: components/ui/components/features/profiles/ProfileMutuals.tsx
 #: src/interface/Friends.tsx
 #: src/interface/navigation/channels/HomeSidebar.tsx
 #: src/interface/You.tsx
@@ -9462,6 +9475,10 @@ msgstr "In einem Server."
 msgid "In about ten minutes you will have a bot that answers a slash command in your own test server. You need a Zrzur account, a server of your own and Node.js 22 or newer. There is nothing to install."
 msgstr "In etwa zehn Minuten hast du einen Bot, der in deinem Testserver auf einen Slash-Befehl antwortet. Du brauchst ein Zrzur-Konto, einen eigenen Server und Node.js 22 oder neuer. Installieren musst du nichts."
 
+#: components/ui/components/features/profiles/ProfileMutuals.tsx
+msgid "In common"
+msgstr "Gemeinsam"
+
 #: components/app/interface/settings/user/Language.tsx
 msgid "In progress"
 msgstr "In Arbeit"
@@ -10153,6 +10170,11 @@ msgstr "Diese Beweise über die Aufbewahrungsfrist hinaus behalten? Nur wenn es 
 #: components/app/interface/settings/user/profile/CreatorStudio.tsx
 msgid "Keep this readable: leave it mostly transparent"
 msgstr "Das muss lesbar bleiben: Lass es größtenteils transparent"
+
+#. placeholder {0}: keptTime()
+#: components/modal/modals/CustomStatus.tsx
+msgid "Keep: until {0}"
+msgstr "Beibehalten: bis {0}"
 
 #: src/interface/developers/docs/DocsPortal.tsx
 msgid "Keeping tokens safe"
@@ -12396,6 +12418,7 @@ msgstr "Niederlande"
 #~ msgstr "Neutral kühles Grau für lange Sitzungen."
 
 #: components/modal/modals/CreateInvite.tsx
+#: components/modal/modals/CustomStatus.tsx
 msgid "Never"
 msgstr "Nie"
 
@@ -13081,6 +13104,10 @@ msgstr "Noch keine Server gelistet."
 #: src/interface/Discover.tsx
 #~ msgid "No servers are listed yet. Server owners can submit theirs from Server settings → Discover."
 #~ msgstr "Noch keine Server gelistet. Server-Besitzer können ihre unter Servereinstellungen → Entdecken einreichen."
+
+#: components/ui/components/features/profiles/ProfileMutuals.tsx
+msgid "No servers or friends in common."
+msgstr "Keine gemeinsamen Server oder Freunde."
 
 #: components/modal/modals/MoveSupercharge.tsx
 msgid "No servers to show."
@@ -16086,6 +16113,7 @@ msgid "Remove tag {tag}"
 msgstr "Tag {tag} entfernen"
 
 #: components/app/interface/settings/channel/ForumTags.tsx
+#: components/modal/modals/CustomStatus.tsx
 msgid "Remove the emoji"
 msgstr "Emoji entfernen"
 
@@ -17966,6 +17994,7 @@ msgid "Server stats"
 msgstr "Serverstatistik"
 
 #: components/modal/modals/MoveSupercharge.tsx
+#: components/ui/components/features/profiles/ProfileMutuals.tsx
 #: src/interface/developers/docs/DocsPortal.tsx
 #: src/interface/Discover.tsx
 #: src/interface/navigation/PhoneTabs.tsx
@@ -17975,6 +18004,10 @@ msgstr "Server"
 #: components/app/interface/settings/user/subscriptions/PlusPage.tsx
 msgid "Servers and bots you send to Discover are reviewed ahead of the queue. Same rules, just faster."
 msgstr "Server und Bots, die du bei Discover einreichst, werden vor der Warteschlange geprüft. Gleiche Regeln, nur schneller."
+
+#: components/ui/components/features/profiles/ProfileMutuals.tsx
+msgid "Servers and friends in common"
+msgstr "Gemeinsame Server und Freunde"
 
 #. placeholder {0}: formatPrice(plans().supercharge_price, plans().currency, locale())
 #: components/app/interface/settings/user/subscriptions/PlusPage.tsx
@@ -21228,6 +21261,7 @@ msgstr "Titel"
 msgid "To answer one, open a ticket."
 msgstr "Zum Antworten öffne ein Ticket."
 
+#: components/modal/modals/CustomStatus.tsx
 #: src/interface/channels/text/SearchBox.tsx
 msgid "Today"
 msgstr "Heute"

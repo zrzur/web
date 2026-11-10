@@ -949,6 +949,7 @@ msgstr "يوم واحد"
 #: components/app/interface/settings/server/ServerEmergency.tsx
 #: components/modal/modals/CreateInvite.tsx
 #: components/modal/modals/CreatePoll.tsx
+#: components/modal/modals/CustomStatus.tsx
 msgid "1 hour"
 msgstr "ساعة واحدة"
 
@@ -1030,10 +1031,12 @@ msgid "3. Install the bot in a test server"
 msgstr "3. ثبّت البوت في سيرفر اختبار"
 
 #: components/modal/modals/CreateInvite.tsx
+#: components/modal/modals/CustomStatus.tsx
 msgid "30 minutes"
 msgstr "30 دقيقة"
 
 #: components/modal/modals/CreatePoll.tsx
+#: components/modal/modals/CustomStatus.tsx
 msgid "4 hours"
 msgstr "4 ساعات"
 
@@ -3998,6 +4001,10 @@ msgstr "تغيير رمز {0} التعبيري"
 msgid "Change the password you use to sign in."
 msgstr "غيّر كلمة المرور التي تسجّل الدخول بها."
 
+#: components/modal/modals/CustomStatus.tsx
+msgid "Change the status emoji"
+msgstr "غيّر الرمز التعبيري للحالة"
+
 #: components/app/interface/settings/user/subscriptions/Subscriptions.tsx
 msgid "Change your card, download invoices and see past payments on our payment partner's secure page."
 msgstr "غيّر بطاقتك ونزّل الفواتير واطّلع على مدفوعاتك السابقة في صفحة شريك الدفع الآمنة."
@@ -4372,6 +4379,7 @@ msgid "Choose a username"
 msgstr "اختر اسم مستخدم"
 
 #: components/app/interface/settings/channel/ForumTags.tsx
+#: components/modal/modals/CustomStatus.tsx
 msgid "Choose an emoji"
 msgstr "اختر رمزًا تعبيريًا"
 
@@ -4557,6 +4565,10 @@ msgstr "أسطح فاتحة نظيفة مع نص داكن وإجراءات با�
 #: components/app/interface/settings/user/safety/SafetyDashboard.tsx
 msgid "Clear"
 msgstr "واضح"
+
+#: components/modal/modals/CustomStatus.tsx
+msgid "Clear after"
+msgstr "تُمسح بعد"
 
 #: src/interface/Discover.tsx
 #~ msgid "Clear filter"
@@ -8231,6 +8243,7 @@ msgstr "تنتظر هنا طلبات الصداقة التي ترسلها أو �
 #: components/app/interface/settings/user/Privacy.tsx
 #: components/modal/lib/serverTemplateText.ts
 #: components/modal/modals/GiftPlus.tsx
+#: components/ui/components/features/profiles/ProfileMutuals.tsx
 #: src/interface/Friends.tsx
 #: src/interface/navigation/channels/HomeSidebar.tsx
 #: src/interface/You.tsx
@@ -9462,6 +9475,10 @@ msgstr "داخل سيرفر."
 msgid "In about ten minutes you will have a bot that answers a slash command in your own test server. You need a Zrzur account, a server of your own and Node.js 22 or newer. There is nothing to install."
 msgstr "خلال عشر دقائق تقريبًا سيكون لديك بوت يجيب عن أمر بالشرطة المائلة في سيرفر الاختبار الخاص بك. تحتاج إلى حساب في زرزور وسيرفر خاص بك وNode.js 22 أو أحدث. لا شيء آخر لتثبيته."
 
+#: components/ui/components/features/profiles/ProfileMutuals.tsx
+msgid "In common"
+msgstr "مشترك بينكما"
+
 #: components/app/interface/settings/user/Language.tsx
 msgid "In progress"
 msgstr "قيد الترجمة"
@@ -10153,6 +10170,11 @@ msgstr "هل تريد الاحتفاظ بهذه الأدلة بعد انتهاء
 #: components/app/interface/settings/user/profile/CreatorStudio.tsx
 msgid "Keep this readable: leave it mostly transparent"
 msgstr "اجعل هذا مقروءًا: اترك معظمه شفافًا"
+
+#. placeholder {0}: keptTime()
+#: components/modal/modals/CustomStatus.tsx
+msgid "Keep: until {0}"
+msgstr "إبقاؤها: حتى {0}"
 
 #: src/interface/developers/docs/DocsPortal.tsx
 msgid "Keeping tokens safe"
@@ -12396,6 +12418,7 @@ msgstr "هولندا"
 #~ msgstr "مساحة عمل رمادية هادئة ومحايدة للجلسات الطويلة."
 
 #: components/modal/modals/CreateInvite.tsx
+#: components/modal/modals/CustomStatus.tsx
 msgid "Never"
 msgstr "أبدًا"
 
@@ -13081,6 +13104,10 @@ msgstr "لا توجد سيرفرات معروضة بعد."
 #: src/interface/Discover.tsx
 #~ msgid "No servers are listed yet. Server owners can submit theirs from Server settings → Discover."
 #~ msgstr "لا توجد سيرفرات معروضة بعد. يمكن لأصحاب السيرفرات تقديمها من إعدادات السيرفر ← اكتشف."
+
+#: components/ui/components/features/profiles/ProfileMutuals.tsx
+msgid "No servers or friends in common."
+msgstr "لا سيرفرات ولا أصدقاء مشتركون بينكما."
 
 #: components/modal/modals/MoveSupercharge.tsx
 msgid "No servers to show."
@@ -16086,6 +16113,7 @@ msgid "Remove tag {tag}"
 msgstr "إزالة الوسم {tag}"
 
 #: components/app/interface/settings/channel/ForumTags.tsx
+#: components/modal/modals/CustomStatus.tsx
 msgid "Remove the emoji"
 msgstr "إزالة الرمز التعبيري"
 
@@ -17966,6 +17994,7 @@ msgid "Server stats"
 msgstr "إحصاءات السيرفر"
 
 #: components/modal/modals/MoveSupercharge.tsx
+#: components/ui/components/features/profiles/ProfileMutuals.tsx
 #: src/interface/developers/docs/DocsPortal.tsx
 #: src/interface/Discover.tsx
 #: src/interface/navigation/PhoneTabs.tsx
@@ -17975,6 +18004,10 @@ msgstr "السيرفرات"
 #: components/app/interface/settings/user/subscriptions/PlusPage.tsx
 msgid "Servers and bots you send to Discover are reviewed ahead of the queue. Same rules, just faster."
 msgstr "السيرفرات والبوتات التي ترسلها إلى الاستكشاف تُراجع قبل غيرها. القواعد نفسها، لكن أسرع."
+
+#: components/ui/components/features/profiles/ProfileMutuals.tsx
+msgid "Servers and friends in common"
+msgstr "السيرفرات والأصدقاء المشتركون"
 
 #. placeholder {0}: formatPrice(plans().supercharge_price, plans().currency, locale())
 #: components/app/interface/settings/user/subscriptions/PlusPage.tsx
@@ -21228,6 +21261,7 @@ msgstr "العنوان"
 msgid "To answer one, open a ticket."
 msgstr "للرد على إحداها افتح تذكرة."
 
+#: components/modal/modals/CustomStatus.tsx
 #: src/interface/channels/text/SearchBox.tsx
 msgid "Today"
 msgstr "اليوم"

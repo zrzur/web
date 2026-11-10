@@ -16,9 +16,31 @@ export function statusRetryDelay(error: unknown): number | undefined {
     : undefined;
 }
 
-export function customStatusPatch(text: string): API.DataEditUser {
-  const value = text.trim();
-  return value ? { status: { text: value } } : { remove: ["StatusText"] };
+/**
+ * The edit for a presence change: only the presence. Sending the text back
+ * would replace its emoji and expiry, or bring back one that ran out.
+ */
+export function presencePatch(
+  presence: NonNullable<NonNullable<API.DataEditUser["status"]>["presence"]>,
+): API.DataEditUser {
+  return { status: { presence } };
+}
+
+/**
+ * The status as one line for `TextWithEmoji`: the emoji first (a custom
+ * emoji as its `:id:` code), then the text
+ */
+export function statusLine(
+  emoji?: string | null,
+  text?: string | null,
+): string | undefined {
+  const mark = emoji
+    ? /^[0-9A-HJKMNP-TV-Z]{26}$/.test(emoji)
+      ? `:${emoji}:`
+      : emoji
+    : undefined;
+  const line = [mark, text?.trim() || undefined].filter(Boolean).join(" ");
+  return line || undefined;
 }
 
 /**
