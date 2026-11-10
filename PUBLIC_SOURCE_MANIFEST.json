@@ -616,8 +616,8 @@
     },
     {
       "path": "e2e/stack-runner/moderation-tools.mjs",
-      "sha256": "aa18f988fdfae8d06176e5dd006a7bfdf761443eec4e43b20caf9f8eefe28c2f",
-      "bytes": 15020,
+      "sha256": "a21a24448117549631f25b0864722e9818e4124af03ae1ea1e7b606cc8c6bfb9",
+      "bytes": 16488,
       "category": "synthetic-test-source-or-fixture"
     },
     {
