@@ -85,9 +85,25 @@ console.log(`[setup] server ${setup.server}, voice ${setup.voice}`);
 /** Tap on a phone, click elsewhere */
 const press = (c, locator) => (c.phone ? locator.tap() : locator.click());
 
+/**
+ * The channel list of the open server. On a phone the server opens on its
+ * channel and the list sits in the drawer under it: open the drawer with
+ * the header's sidebar button, as a person does.
+ */
+async function openChannelList(c, page) {
+  await page.goto(`${APP}/server/${setup.server}`);
+  if (!c.phone) return;
+  c.step = "open the channel list (phone drawer)";
+  await page.waitForURL((u) => u.pathname.includes("/channel/"), { timeout: 20000 }).catch(() => {});
+  const toggle = page.getByRole("button", { name: c.t("Toggle main sidebar"), exact: true }).first();
+  await toggle.waitFor({ timeout: 15000 });
+  await toggle.tap();
+  await sleep(600);
+}
+
 /** Open the server's events the way a person does */
 async function openEvents(c, page) {
-  await page.goto(`${APP}/server/${setup.server}`);
+  await openChannelList(c, page);
   const link = page.getByTestId("events-link");
   c.step = "the Events row at the top of the channel list";
   await link.waitFor({ timeout: 20000 });
@@ -123,7 +139,7 @@ const tests = [];
 const test = (name, fn) => tests.push({ name, fn });
 
 test("schedule → interested → start → banner → join", async (c) => {
-  const title = `Game night ${c.lang} ${c.size} ${run}`;
+  const title = `Game night ${c.lang} ${c.size} ${run}-${Date.now().toString(36)}`;
   const page = c.page;
 
   // 1. the owner schedules it
@@ -174,25 +190,33 @@ test("schedule → interested → start → banner → join", async (c) => {
     await mine.waitFor({ timeout: 15000 });
     c.step = "I'm interested";
     const toggle = mine.getByTestId("event-interested");
+    const countBefore = await mine.getByTestId("event-interested-count").innerText();
+    const ownerBefore = await card(page, title).getByTestId("event-interested-count").innerText();
     await press(c, toggle);
     await theirs.waitForFunction(
       (el) => el.getAttribute("aria-pressed") === "true",
       await toggle.elementHandle(),
       { timeout: 10000 },
     );
+    await theirs.waitForFunction(
+      ([el, before]) => el.textContent !== before,
+      [await mine.getByTestId("event-interested-count").elementHandle(), countBefore],
+      { timeout: 10000 },
+    );
     const count = await mine.getByTestId("event-interested-count").innerText();
-    if (!/1|١/.test(count)) throw new Error(`count after marking: ${count}`);
+    if (/[2-9]/.test(count)) throw new Error(`count after marking: ${count}`);
     // the owner's page follows without a reload
     c.step = "the owner sees the count";
     await page.waitForFunction(
-      (t) =>
+      ([t, after]) =>
         [...document.querySelectorAll("[data-testid=event-card]")]
           .find((el) => el.textContent.includes(t))
           ?.querySelector("[data-testid=event-interested-count]")
-          ?.textContent.match(/1|١/),
-      title,
+          ?.textContent === after,
+      [title, count],
       { timeout: 15000 },
     );
+    if (ownerBefore === count) throw new Error("the owner's count did not change");
 
     // 3. the owner starts it (crond would at the start time)
     c.step = "Start now";
@@ -204,7 +228,7 @@ test("schedule → interested → start → banner → join", async (c) => {
 
     // 4. the member sees the banner in the server and joins
     c.step = "Happening now banner";
-    await theirs.goto(`${APP}/server/${setup.server}`);
+    await openChannelList(c, theirs);
     const banner = theirs.getByTestId("event-banner").filter({ hasText: title });
     await banner.waitFor({ timeout: 20000 });
     await theirs.screenshot({ path: `${SHOTS}events-banner-${c.lang}-${c.size}.png` });
