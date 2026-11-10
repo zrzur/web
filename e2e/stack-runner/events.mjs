@@ -31,6 +31,10 @@ import {
 // ----------------------------------------------------------------- setup
 
 const root = await (await fetch(`${API}/`)).json();
+if (root.features?.server_events === undefined) {
+  console.error("events: this stack's API has no scheduled events (feat/server-events is not merged into it).");
+  process.exit(2);
+}
 if (root.features?.server_events !== true) {
   console.error(
     "events: features.server_events_enabled is off on this stack; turn it on (Revolt.overrides.toml) and restart delta and crond.",
