@@ -2,6 +2,10 @@
 
 ## Unreleased
 
+### Features
+
+* **Server insights:** Server settings → Insights (Manage Server) shows members, joins and leaves, messages, active members and time in voice as a bar per day for 7, 30 or 90 days, counted in your time zone, plus where joins came from and the busiest channels ("fewer than 5" for small ones). Only totals, never who. The page loads on its own when opened and asks once per range. In Arabic the time axis runs right to left, like the text. SDK pin: packages/stoat.js at sdk-js `c8428df`.
+
 ### Performance
 
 * **Smaller install:** the app shell the service worker installs is back under its 2,000,000-byte budget (1,996,898). dayjs was bundled twice (the Arabic and British English date files pulled in the ESM copy), the maths parser now loads with KaTeX on the first message with `$$`, and moderators' selection mode loads on first use. A build over budget now names its biggest files.
