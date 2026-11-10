@@ -9,7 +9,7 @@ import {
   compileKeymap,
   matchShortcut,
 } from "./keymap";
-import { isMac } from "./shortcuts";
+import { isMac, isTypingTarget } from "./shortcuts";
 
 const defaults: Partial<Record<"mac" | "other", Keymap>> = {};
 
@@ -42,7 +42,9 @@ export function deviceMac() {
   return (mac ??= isMac());
 }
 
-type KeyLike = Parameters<typeof matchShortcut>[1];
+type KeyLike = Parameters<typeof matchShortcut>[1] & {
+  target?: EventTarget | null;
+};
 
 let recording = 0;
 /**
@@ -70,5 +72,13 @@ export function shortcutFor(
   isMacDevice: boolean = deviceMac(),
 ): ShortcutId | undefined {
   if (recording) return undefined;
-  return matchShortcut(activeKeymap(isMacDevice), event, isMacDevice);
+  const map = activeKeymap(isMacDevice);
+  const id = matchShortcut(map, event, isMacDevice);
+  // in a text field only combinations with Ctrl, Cmd or Alt act; the key
+  // itself goes to the text (and nothing is prevented)
+  if (id && event.target && isTypingTarget(event.target)) {
+    const c = map.byId[id];
+    if (!c.mod && !c.ctrl && !c.alt) return undefined;
+  }
+  return id;
 }

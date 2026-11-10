@@ -1,6 +1,12 @@
 import { createStore } from "solid-js/store";
 import { describe, expect, it } from "vitest";
 
+import {
+  resetAllShortcuts,
+  setCombo,
+  shortcutsChanged,
+} from "../../keybinds/keymapRules";
+
 import { SYNCED_KEYS } from ".";
 import { Keybinds } from "./Keybinds";
 import { Voice } from "./Voice";
@@ -45,7 +51,7 @@ describe("Keybinds store", () => {
     const state = fakeState();
     const before = state.keybinds.table(false);
     expect(state.keybinds.table(false)).toBe(before); // cached, not rebuilt
-    state.keybinds.setCombo("toggle_mute", ctrlShift("KeyJ"));
+    setCombo(state.keybinds, "toggle_mute", ctrlShift("KeyJ"));
     expect(state.keybinds.table(false).byId.toggle_mute).toEqual(
       ctrlShift("KeyJ"),
     );
@@ -57,8 +63,8 @@ describe("Keybinds store", () => {
 
   it("stores nothing for a shortcut set back to its default", () => {
     const state = fakeState();
-    state.keybinds.setCombo("toggle_mute", ctrlShift("KeyJ"));
-    state.keybinds.setCombo("toggle_mute", ctrlShift("KeyM"));
+    setCombo(state.keybinds, "toggle_mute", ctrlShift("KeyJ"));
+    setCombo(state.keybinds, "toggle_mute", ctrlShift("KeyM"));
     expect(state.keybinds.isCustom("toggle_mute")).toBe(false);
   });
 
@@ -68,9 +74,9 @@ describe("Keybinds store", () => {
     state.voice.pttKey = "KeyV";
     expect(state.keybinds.pttKey).toBe("KeyV");
     expect(state.voice.pttKey).toBe("KeyV");
-    state.keybinds.resetAll();
+    resetAllShortcuts(state.keybinds);
     expect(state.voice.pttKey).toBe("Backquote");
-    expect(state.keybinds.changed).toBe(false);
+    expect(shortcutsChanged(state.keybinds, state.voice.pttKey)).toBe(false);
   });
 
   it("still reads a push-to-talk key this device saved before keys were synced", () => {

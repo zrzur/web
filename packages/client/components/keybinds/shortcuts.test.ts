@@ -202,3 +202,41 @@ describe("labels", () => {
     expect(comboLabel(["Alt", "↑"], true)).toEqual(["⌥", "↑"]);
   });
 });
+
+describe("app shortcuts and text fields (review B2)", () => {
+  it("a shortcut without Ctrl or Alt leaves a text field alone", async () => {
+    const { bindKeymap, unbindKeymap, shortcutFor } = await import("./active");
+    const { compileKeymap } = await import("./keymap");
+    bindKeymap((mac) =>
+      compileKeymap({ toggle_streamer: { code: "F8" } }, mac),
+    );
+    const field = document.createElement("input");
+    const button = document.createElement("button");
+    const f8 = { ...key("F8"), key: "F8" };
+    expect(shortcutFor({ ...f8, target: field }, false)).toBe(undefined);
+    expect(shortcutFor({ ...f8, target: button }, false)).toBe(
+      "toggle_streamer",
+    );
+    // with a modifier it still works while typing
+    expect(
+      shortcutFor(
+        { ...key("KeyM", { ctrlKey: true, shiftKey: true }), target: field },
+        false,
+      ),
+    ).toBe("toggle_mute");
+    unbindKeymap();
+  });
+});
+
+describe("push-to-talk key and bare shortcut keys (review S6)", () => {
+  it("refuses a key that is a shortcut on its own", async () => {
+    const { bindKeymap, unbindKeymap } = await import("./active");
+    const { compileKeymap } = await import("./keymap");
+    bindKeymap((mac) =>
+      compileKeymap({ toggle_streamer: { code: "F8" } }, mac),
+    );
+    expect(readPttKey(key("F8"))).toBe("blocked");
+    expect(readPttKey(key("F9"))).toEqual({ code: "F9" });
+    unbindKeymap();
+  });
+});

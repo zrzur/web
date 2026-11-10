@@ -7,7 +7,8 @@
  * The default combos are also in the plugin SDK's RESERVED_KEYS, so a
  * plugin can never take them over.
  */
-import { shortcutFor } from "./active";
+import { activeKeymap, deviceMac, shortcutFor } from "./active";
+import { matchShortcut } from "./keymap";
 
 export type GlobalShortcut =
   | "toggle_mute"
@@ -104,7 +105,24 @@ export function readPttKey(
   if (event.code === "Escape") return "cancel";
   if (/^(Control|Meta|Shift|Alt|OS)(Left|Right)?$/.test(event.code))
     return "wait";
-  return pttKeyAllowed(event.code) ? { code: event.code } : "blocked";
+  if (!pttKeyAllowed(event.code)) return "blocked";
+  // a key that is a shortcut on its own (an F key) can't also be held to talk
+  const mac = deviceMac();
+  if (
+    matchShortcut(
+      activeKeymap(mac),
+      {
+        code: event.code,
+        ctrlKey: false,
+        metaKey: false,
+        shiftKey: false,
+        altKey: false,
+      },
+      mac,
+    )
+  )
+    return "blocked";
+  return { code: event.code };
 }
 
 const NAMED: Record<string, string> = {

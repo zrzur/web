@@ -1,21 +1,65 @@
 /**
- * Rules for a new combination while the person records one (the shortcuts
- * screen only, so this stays out of the first download): what a key press
- * means, and whether the browser or the system keeps it, typing needs it,
- * or another shortcut has it.
+ * Rules for a new combination while the person records one, and the edits
+ * of the keybinds store (the shortcuts screen only, so this stays out of
+ * the first download): what a key press means, whether the browser or the
+ * system keeps it, typing needs it, or another shortcut has it.
  */
+import type { Keybinds } from "../state/stores/Keybinds";
+
+import { deviceMac } from "./active";
 import {
   type Combo,
+  type CustomCombos,
   type KeyLike,
   type Keymap,
   type ShortcutId,
+  cleanCustom,
   defaultCombo,
   eventCombo,
   keyOf,
   MODIFIER_CODE,
   normalize,
-  sameCombo,
+  unusable,
 } from "./keymap";
+import { keyLabel } from "./shortcuts";
+
+/** Whether two combinations are the same keys */
+export function sameCombo(a: Combo | undefined, b: Combo | undefined) {
+  if (!a || !b) return false;
+  // compared as written for both systems: a Mac's Control equals Ctrl only off a Mac
+  return (
+    keyOf(a, false) === keyOf(b, false) && keyOf(a, true) === keyOf(b, true)
+  );
+}
+
+/**
+ * Give `id` the combination `combo`, and the shortcut that had it this
+ * one's old combination (nothing is left without a shortcut)
+ */
+export function swapCombos(
+  custom: CustomCombos,
+  id: ShortcutId,
+  other: ShortcutId,
+  combo: Combo,
+  map: Keymap,
+): CustomCombos {
+  return {
+    ...cleanCustom(custom, deviceMac()),
+    [id]: combo,
+    [other]: map.byId[id],
+  };
+}
+
+/** Key caps for a combination, as `comboLabel` writes them */
+export function comboKeys(combo: Combo): string[] {
+  const keys: string[] = [];
+  if (combo.ctrl) keys.push("Ctrl");
+  if (combo.mod) keys.push("Mod");
+  if (combo.alt) keys.push("Alt");
+  if (combo.shift) keys.push("Shift");
+  keys.push(keyLabel(combo.code));
+  return keys;
+}
 
 /**
  * While recording a new combination: what this key press means
@@ -38,24 +82,13 @@ export function readCombo(
 
 export type ComboCheck = {
   /** Can't be used: the browser or the system keeps it, or it is needed for typing */
-  blocked?: "browser" | "system" | "typing";
+  blocked?: "browser" | "system" | "typing" | "ptt";
   /** Works, but replaces what the browser does with it */
   warn?: "browser";
   /** Another shortcut has it */
   clash?: ShortcutId;
 };
 
-/** Pages never get these: tabs and windows */
-const BROWSER_KEEPS = new Set([
-  "M:KeyT",
-  "M:KeyN",
-  "M:KeyW",
-  "MS:KeyT",
-  "MS:KeyN",
-  "MS:KeyW",
-  "M:Tab",
-  "MS:Tab",
-]);
 /** The system takes these before the browser */
 const SYSTEM_KEEPS_OTHER = new Set([
   "A:F4",
@@ -141,10 +174,8 @@ const BROWSER_USES = new Set([
   "A:ArrowRight",
   "A:Home",
 ]);
-
-const PRINTABLE =
-  /^(Key[A-Z]|Digit[0-9]|Numpad[0-9]|Backquote|Minus|Equal|BracketLeft|BracketRight|Backslash|Semicolon|Quote|Comma|Period|Slash|IntlBackslash|IntlRo|IntlYen|Space)$/;
-const FUNCTION_KEY = /^F([1-9]|1[0-9]|2[0-4])$/;
+/** Alt+letter opens the browser's menus on Windows and Linux */
+const ALT_LETTER = /^AS?:Key[A-Z]$/;
 
 /**
  * Whether this combination can be used for a shortcut, and what it clashes
@@ -155,6 +186,7 @@ export function checkCombo(
   combo: Combo,
   map: Keymap,
   mac: boolean,
+  options: { pttKey?: string; typesSlash?: boolean } = {},
 ): ComboCheck {
   const key = keyOf(combo, mac);
   const c = normalize(combo, mac);
@@ -162,22 +194,81 @@ export function checkCombo(
   const isDefault = sameCombo(c, defaultCombo(id, mac));
 
   if (!isDefault) {
-    if (BROWSER_KEEPS.has(key) || key === ":F11") result.blocked = "browser";
+    const no = unusable(c, mac);
+    if (no) result.blocked = no;
     else if ((mac ? SYSTEM_KEEPS_MAC : SYSTEM_KEEPS_OTHER).has(key))
       result.blocked = "system";
-    else if (!c.mod && !c.ctrl && !c.alt && !FUNCTION_KEY.test(c.code))
-      // plain keys and Shift+key type text or move around
-      result.blocked = "typing";
-    else if (
-      PRINTABLE.test(c.code) &&
-      ((!mac && c.mod && c.alt) || (mac && c.alt && !c.mod && !c.ctrl))
-    )
-      // AltGr (Ctrl+Alt on Windows) and Option on a Mac type characters
-      result.blocked = "typing";
-    else if (BROWSER_USES.has(key)) result.warn = "browser";
+    else if (!c.mod && !c.ctrl && !c.alt && c.code === options.pttKey)
+      // held to talk: the same key alone can't also be a shortcut
+      result.blocked = "ptt";
+    else if (BROWSER_USES.has(key) || (!mac && ALT_LETTER.test(key)))
+      result.warn = "browser";
   }
 
   const other = map.byCombo.get(key);
   if (other && other !== id) result.clash = other;
+  // a press that types "/" with Ctrl is Ctrl+/ on this keyboard
+  else if (
+    options.typesSlash &&
+    c.mod &&
+    !c.alt &&
+    map.slashDefault &&
+    id !== "open_shortcuts"
+  )
+    result.clash = "open_shortcuts";
   return result;
+}
+
+// ---------------------------------------------------------------- store edits
+
+/** The person's changes, without the ones equal to the default again */
+function withoutDefaults(custom: CustomCombos): CustomCombos {
+  const mac = deviceMac();
+  const out: CustomCombos = {};
+  for (const [id, combo] of Object.entries(cleanCustom(custom, mac)) as [
+    ShortcutId,
+    Combo,
+  ][])
+    if (!sameCombo(combo, defaultCombo(id, mac))) out[id] = combo;
+  return out;
+}
+
+/** Give a shortcut a new combination */
+export function setCombo(store: Keybinds, id: ShortcutId, combo: Combo) {
+  store.replaceCustom(withoutDefaults({ ...store.customCombos, [id]: combo }));
+}
+
+/**
+ * Give a shortcut the combination another one has; that one gets this
+ * shortcut's old combination
+ */
+export function swapShortcuts(
+  store: Keybinds,
+  id: ShortcutId,
+  other: ShortcutId,
+  combo: Combo,
+) {
+  store.replaceCustom(
+    withoutDefaults(
+      swapCombos(store.customCombos, id, other, combo, store.table()),
+    ),
+  );
+}
+
+/** One shortcut back to its default */
+export function resetShortcut(store: Keybinds, id: ShortcutId) {
+  const next = { ...cleanCustom(store.customCombos, deviceMac()) };
+  delete next[id];
+  store.replaceCustom(next);
+}
+
+/** Every shortcut, and the push-to-talk key, back to the defaults */
+export function resetAllShortcuts(store: Keybinds) {
+  store.replaceCustom({});
+  store.pttKey = "Backquote";
+}
+
+/** Whether anything differs from the defaults */
+export function shortcutsChanged(store: Keybinds, pttKey: string): boolean {
+  return Object.keys(store.customCombos).length > 0 || pttKey !== "Backquote";
 }

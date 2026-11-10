@@ -9,8 +9,6 @@
  *
  * Every key press is one `Map.get`: no scan over the list of shortcuts.
  */
-import { keyLabel } from "./shortcuts";
-
 export type Combo = {
   code: string;
   mod?: boolean;
@@ -90,15 +88,6 @@ export function keyOf(combo: Combo, mac: boolean) {
   return `${c.mod ? "M" : ""}${c.ctrl ? "C" : ""}${c.shift ? "S" : ""}${c.alt ? "A" : ""}:${c.code}`;
 }
 
-/** Whether two combinations are the same keys */
-export function sameCombo(a: Combo | undefined, b: Combo | undefined) {
-  if (!a || !b) return false;
-  // compared as written for both systems: a Mac's Control equals Ctrl only off a Mac
-  return (
-    keyOf(a, false) === keyOf(b, false) && keyOf(a, true) === keyOf(b, true)
-  );
-}
-
 /** Whether data from storage or sync is a usable combination */
 export function validCombo(value: unknown): value is Combo {
   if (!value || typeof value !== "object") return false;
@@ -112,8 +101,52 @@ export function validCombo(value: unknown): value is Combo {
   return true;
 }
 
-/** Only known ids with usable combinations, written the short way */
-export function cleanCustom(input: unknown): CustomCombos {
+/** Pages never get these: tabs and windows */
+export const BROWSER_KEEPS = new Set([
+  "M:KeyT",
+  "M:KeyN",
+  "M:KeyW",
+  "MS:KeyT",
+  "MS:KeyN",
+  "MS:KeyW",
+  "M:Tab",
+  "MS:Tab",
+  ":F11",
+]);
+/** Select all, copy, paste, cut, undo, redo: typing needs them */
+export const EDITING = /^M:Key[ACVXZY]$/;
+export const PRINTABLE =
+  /^(Key[A-Z]|Digit[0-9]|Numpad[0-9]|Backquote|Minus|Equal|BracketLeft|BracketRight|Backslash|Semicolon|Quote|Comma|Period|Slash|IntlBackslash|IntlRo|IntlYen|Space)$/;
+export const FUNCTION_KEY = /^F([1-9]|1[0-9]|2[0-4])$/;
+
+/**
+ * Why a combination can't be a shortcut on this system: the browser keeps
+ * it, or typing needs it (plain keys, editing keys, AltGr on Windows,
+ * Option+key on a Mac). Also used on synced data, so a combination written
+ * on another system never breaks typing here.
+ */
+export function unusable(
+  combo: Combo,
+  mac: boolean,
+): "browser" | "typing" | undefined {
+  const c = normalize(combo, mac);
+  const key = keyOf(c, mac);
+  if (BROWSER_KEEPS.has(key)) return "browser";
+  if (!c.mod && !c.ctrl && !c.alt && !FUNCTION_KEY.test(c.code))
+    return "typing";
+  if (EDITING.test(key)) return "typing";
+  if (
+    PRINTABLE.test(c.code) &&
+    ((!mac && c.mod && c.alt) || (mac && c.alt && !c.mod && !c.ctrl))
+  )
+    return "typing";
+}
+
+/**
+ * Only known ids with usable combinations for this system, written the
+ * short way
+ */
+export function cleanCustom(input: unknown, mac: boolean): CustomCombos {
   const out: CustomCombos = {};
   if (!input || typeof input !== "object") return out;
   for (const [id, combo] of Object.entries(input as Record<string, unknown>)) {
@@ -123,6 +156,12 @@ export function cleanCustom(input: unknown): CustomCombos {
     if (combo.ctrl) short.ctrl = true;
     if (combo.shift) short.shift = true;
     if (combo.alt) short.alt = true;
+    // a shortcut's own default is always fine
+    if (
+      keyOf(short, mac) !== keyOf(defaultCombo(id, mac), mac) &&
+      unusable(short, mac)
+    )
+      continue;
     out[id] = short;
   }
   return out;
@@ -133,35 +172,69 @@ export type Keymap = {
   byCombo: Map<string, ShortcutId>;
   /** The combination each shortcut has now */
   byId: Record<ShortcutId, Combo>;
+  /** Shortcuts the person changed */
+  custom: Set<ShortcutId>;
+  /**
+   * Shortcuts on the same keys as another one on this system (synced from
+   * a device where they differed), both ways
+   */
+  conflicts: Map<ShortcutId, ShortcutId>;
   /** Whether Ctrl+/ is still the default (then it also matches by the "/" character) */
   slashDefault: boolean;
 };
 
 /**
  * Build the lookup table once (when the settings change, not per key press).
- * A person's own combination wins over a default that has the same keys.
+ * A person's own combination wins over a default that has the same keys;
+ * the pair is kept in `conflicts` so the shortcuts screen can say so.
  */
 export function compileKeymap(custom: CustomCombos, mac: boolean): Keymap {
-  const clean = cleanCustom(custom);
+  const clean = cleanCustom(custom, mac);
   const byId = {} as Record<ShortcutId, Combo>;
   const byCombo = new Map<string, ShortcutId>();
+  const conflicts = new Map<ShortcutId, ShortcutId>();
   for (const id of REMAPPABLE) byId[id] = clean[id] ?? defaultCombo(id, mac);
   // defaults first, then the person's own on top
-  for (const id of REMAPPABLE)
-    if (!clean[id]) byCombo.set(keyOf(byId[id], mac), id);
-  for (const id of REMAPPABLE)
-    if (clean[id]) byCombo.set(keyOf(byId[id], mac), id);
+  const ids = [
+    ...REMAPPABLE.filter((id) => !clean[id]),
+    ...REMAPPABLE.filter((id) => clean[id]),
+  ];
+  for (const id of ids) {
+    const key = keyOf(byId[id], mac);
+    const other = byCombo.get(key);
+    if (other) {
+      conflicts.set(id, other);
+      conflicts.set(other, id);
+    }
+    byCombo.set(key, id);
+  }
   return {
     byCombo,
     byId,
+    custom: new Set(Object.keys(clean) as ShortcutId[]),
+    conflicts,
     slashDefault: !clean.open_shortcuts,
   };
+}
+
+/** The combination as `aria-keyshortcuts` writes it, e.g. "Control+Shift+9" */
+export function ariaKeys(combo: Combo, mac: boolean): string {
+  const c = normalize(combo, mac);
+  return [
+    c.ctrl && "Control",
+    c.mod && (mac ? "Meta" : "Control"),
+    c.alt && "Alt",
+    c.shift && "Shift",
+    c.code.replace(/^(Key|Digit)/, ""),
+  ]
+    .filter(Boolean)
+    .join("+");
 }
 
 export type KeyLike = Pick<
   KeyboardEvent,
   "code" | "ctrlKey" | "metaKey" | "shiftKey" | "altKey"
-> & { key?: string };
+> & { key?: string; isComposing?: boolean };
 
 export const MODIFIER_CODE = /^(Control|Meta|Shift|Alt|OS)(Left|Right)?$/;
 
@@ -179,7 +252,9 @@ export function eventCombo(event: KeyLike, mac: boolean): Combo | undefined {
 }
 
 /**
- * Which shortcut this key press is, if any
+ * Which shortcut this key press is, if any. The person's own combination
+ * is looked up first; on a miss or a default hit, a Ctrl press that types
+ * "/" is Ctrl+/ (German, Spanish, Italian and Nordic layouts: Shift+7).
  * @param mac Whether Command takes the place of Ctrl
  */
 export function matchShortcut(
@@ -187,36 +262,13 @@ export function matchShortcut(
   event: KeyLike,
   mac: boolean,
 ): ShortcutId | undefined {
+  // a character being composed (Chinese, Japanese input) is never a shortcut
+  if (event.isComposing) return;
+  const combo = eventCombo(event, mac);
+  const hit = combo && map.byCombo.get(keyOf(combo, mac));
+  if (hit && map.custom.has(hit)) return hit;
   const mod = mac ? event.metaKey : event.ctrlKey;
-  // Ctrl+/ by the character: on German, Spanish, Italian and Nordic layouts
-  // "/" is Shift+7; a press that types "/" is never another shortcut
   if (mod && !event.altKey && event.key === "/")
     return map.slashDefault ? "open_shortcuts" : undefined;
-  const combo = eventCombo(event, mac);
-  return combo && map.byCombo.get(keyOf(combo, mac));
-}
-
-/**
- * Give `id` the combination `combo`, and the shortcut that had it this
- * one's old combination (nothing is left without a shortcut)
- */
-export function swapCombos(
-  custom: CustomCombos,
-  id: ShortcutId,
-  other: ShortcutId,
-  combo: Combo,
-  map: Keymap,
-): CustomCombos {
-  return { ...cleanCustom(custom), [id]: combo, [other]: map.byId[id] };
-}
-
-/** Key caps for a combination, as `comboLabel` writes them */
-export function comboKeys(combo: Combo): string[] {
-  const keys: string[] = [];
-  if (combo.ctrl) keys.push("Ctrl");
-  if (combo.mod) keys.push("Mod");
-  if (combo.alt) keys.push("Alt");
-  if (combo.shift) keys.push("Shift");
-  keys.push(keyLabel(combo.code));
-  return keys;
+  return hit;
 }
