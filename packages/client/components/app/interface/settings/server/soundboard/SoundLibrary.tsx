@@ -157,6 +157,7 @@ export default function SoundLibrary(props: {
       <Filters>
         <FloatingSelect
           label={t`Category`}
+          id="sound-library-category"
           value={category()}
           onChange={(event) => {
             setCategory(event.currentTarget.value);
