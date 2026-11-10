@@ -38,7 +38,7 @@ export function ProfileBody(props: {
   failed?: boolean;
   /** Open the long text and show more of what is listed */
   full?: boolean;
-  bot?: { owner: string };
+  bot?: { owner?: string };
   onClose?: () => void;
   /** More sections after these */
   children?: JSX.Element;
@@ -61,14 +61,18 @@ export function ProfileBody(props: {
           onClose={props.onClose}
         />
         <Show when={props.bot}>
-          {/* its own boundary: loading these never suspends the channel */}
-          <Suspense>
+          {/* own boundaries: loading these never suspends the channel; the
+              placeholder keeps Roles below from jumping while they load */}
+          <Suspense fallback={<BotPlaceholder aria-hidden="true" />}>
             <ProfileBotAbout botId={props.user.id} />
             <ProfileOwner botId={props.user.id} bot={props.bot!} />
-            <ProfileCommands
-              botId={props.user.id}
-              serverId={props.member?.id.server}
-            />
+            {/* About and Created by never wait for the commands */}
+            <Suspense>
+              <ProfileCommands
+                botId={props.user.id}
+                serverId={props.member?.id.server}
+              />
+            </Suspense>
           </Suspense>
         </Show>
         <ProfileRoles member={props.member} />
@@ -126,3 +130,10 @@ export function ProfileSections(props: {
     </For>
   );
 }
+
+/** As tall as "About this bot" with two lines, while its code loads */
+const BotPlaceholder = styled("div", {
+  base: {
+    minHeight: "96px",
+  },
+});

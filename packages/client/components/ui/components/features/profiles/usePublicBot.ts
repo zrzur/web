@@ -12,21 +12,28 @@ import { useClient } from "@revolt/client";
  */
 export function usePublicBot(
   botId: Accessor<string | undefined>,
-): Accessor<PublicBot | undefined> {
+): Accessor<PublicBot | undefined> & { loading: Accessor<boolean> } {
   const client = useClient();
   const [bot, setBot] = createSignal<PublicBot>();
+  const [loading, setLoading] = createSignal(false);
   createEffect(() => {
     const id = botId();
-    if (!id) return setBot(undefined);
+    if (!id) {
+      setLoading(false);
+      return setBot(undefined);
+    }
     const kept = client().bots.getPublic(id);
     setBot(kept);
+    setLoading(!kept);
     if (kept) return;
     let current = true;
     onCleanup(() => (current = false));
     client()
       .bots.fetchPublic(id)
       .then((answer) => current && setBot(answer))
-      .catch(() => undefined);
+      .catch(() => undefined)
+      .finally(() => current && setLoading(false));
   });
-  return bot;
+  // eslint-disable-next-line solid/reactivity -- an accessor for the caller
+  return Object.assign(() => bot(), { loading });
 }

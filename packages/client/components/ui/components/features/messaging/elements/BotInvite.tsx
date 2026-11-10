@@ -2,7 +2,6 @@ import { Show } from "solid-js";
 
 import { Trans } from "@lingui/solid/macro";
 import { useQuery } from "@tanstack/solid-query";
-import { PublicBot } from "@zrzur/sdk/solid";
 import { css } from "styled-system/css";
 import { styled } from "styled-system/jsx";
 
@@ -33,10 +32,8 @@ export function BotInvite(props: Props) {
 
   const query = useQuery(() => ({
     queryKey: ["bot-invite", props.id],
-    queryFn: () =>
-      client()
-        .api.get(`/bots/${props.id as ""}/invite`)
-        .then((invite) => new PublicBot(client(), invite)),
+    // kept by the SDK: every card for this bot shares one request
+    queryFn: () => client().bots.fetchPublic(props.id),
 
     refetchInterval: false,
     refetchOnMount: false,
