@@ -580,8 +580,8 @@
     },
     {
       "path": "e2e/stack-runner/events.mjs",
-      "sha256": "51a0063bf8e63f4ef8e14143789a60b25a52139d02e6c5cd1661e689faa341ff",
-      "bytes": 9721,
+      "sha256": "9ac7ace6f5e83df0b3f2575e8236c2258a58c11d011e6aef43b8f8db2f121efb",
+      "bytes": 9905,
       "category": "synthetic-test-source-or-fixture"
     },
     {
