@@ -1,6 +1,6 @@
 {
   "<0>{keys}</0> is already used for “{0}”. Swap them?": [
-    "<0>{keys}</0> مستخدم من قبل لـ «{0}». هل تريد التبديل بينهما؟",
+    "<0>{keys}</0> مستخدم بالفعل لـ «{0}». هل تريد التبديل بينهما؟",
     "<0>{keys}</0> wird schon für „{0}“ verwendet. Tauschen?"
   ],
   "<0>{keys}</0> is needed for typing. Add {0} or use an F key.": [

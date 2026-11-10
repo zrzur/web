@@ -938,7 +938,7 @@ msgstr "<0>{0}</0> يكتب…"
 #. placeholder {0}: props.names[other()]()
 #: components/app/interface/settings/user/Keybinds.tsx
 msgid "<0>{keys}</0> is already used for “{0}”. Swap them?"
-msgstr "<0>{keys}</0> مستخدم من قبل لـ «{0}». هل تريد التبديل بينهما؟"
+msgstr "<0>{keys}</0> مستخدم بالفعل لـ «{0}». هل تريد التبديل بينهما؟"
 
 #. placeholder {0}: mac ? "⌘" : "Ctrl"
 #: components/app/interface/settings/user/Keybinds.tsx

@@ -1,3 +1,5 @@
+import { Portal } from "solid-js/web";
+
 import { Trans, useLingui } from "@lingui/solid/macro";
 import { styled } from "styled-system/jsx";
 
@@ -14,29 +16,34 @@ export default function StreamerIndicator() {
   const { t } = useLingui();
 
   return (
-    <Pill
-      type="button"
-      data-testid="streamer-indicator"
-      title={t`Streamer mode is on. Press to turn it off.`}
-      aria-label={t`Streamer mode is on. Press to turn it off.`}
-      onClick={() => setStreamerMode(state, false)}
-    >
-      <Icon name="eye-slash" size={16} />
-      <span>
-        <Trans>Streamer mode</Trans>
-      </span>
-    </Pill>
+    // on top of every layer of the app, whatever opened it
+    <Portal>
+      <Pill
+        type="button"
+        data-testid="streamer-indicator"
+        title={t`Streamer mode is on. Press to turn it off.`}
+        aria-label={t`Streamer mode is on. Press to turn it off.`}
+        onClick={() => setStreamerMode(state, false)}
+      >
+        <Icon name="eye-slash" size={16} />
+        <span>
+          <Trans>Streamer mode</Trans>
+        </span>
+      </Pill>
+    </Portal>
   );
 }
 
 const Pill = styled("button", {
   base: {
     position: "fixed",
-    zIndex: "1000",
+    // above dialogs and settings too: the sign must always be seen
+    zIndex: "2000",
     top: "4px",
-    insetInlineStart: "50%",
-    transform: "translateX(-50%)",
-    _rtl: { transform: "translateX(50%)" },
+    // centred without a transform, the same in both directions
+    insetInline: 0,
+    marginInline: "auto",
+    width: "fit-content",
     height: "28px",
     paddingInline: "12px",
     display: "inline-flex",
