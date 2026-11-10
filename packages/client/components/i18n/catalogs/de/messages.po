@@ -24704,7 +24704,7 @@ msgstr "{0} s"
 
 #: components/app/interface/settings/server/soundboard/SoundboardList.tsx
 msgid "Add a sound"
-msgstr "Sound hinzufügen"
+msgstr "Neuer Sound"
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 msgid "Add and remove the server's sounds"

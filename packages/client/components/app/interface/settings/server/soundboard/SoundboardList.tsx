@@ -40,8 +40,11 @@ import {
  * Soundboard settings: add a short sound, listen to it, remove it
  */
 export function SoundboardList(props: { server: Server }) {
-  const { t } = useLingui();
+  const { t, i18n } = useLingui();
   const client = useClient();
+  // 5.2 written the way this language writes numbers
+  const maxSeconds = () =>
+    new Intl.NumberFormat(i18n().locale || "en").format(SOUND_MAX_MS / 1000);
   const instance = useInstance();
   const describeError = useError();
 
@@ -72,7 +75,7 @@ export function SoundboardList(props: { server: Server }) {
       case "size":
         return t`This file is too big. Sounds can be up to ${Math.round(maxBytes() / 1000)} KB.`;
       case "length":
-        return t`This sound is too long. Sounds can be up to ${SOUND_MAX_MS / 1000} seconds.`;
+        return t`This sound is too long. Sounds can be up to ${maxSeconds()} seconds.`;
       default:
         return t`This file can't be played as a sound.`;
     }
@@ -167,7 +170,7 @@ export function SoundboardList(props: { server: Server }) {
           >
             <Trans>
               {Math.max(0, limit() - sounds().length)} of {limit()} sounds left.
-              Up to {SOUND_MAX_MS / 1000} seconds each.
+              Up to {maxSeconds()} seconds each.
             </Trans>
           </Show>
         }
