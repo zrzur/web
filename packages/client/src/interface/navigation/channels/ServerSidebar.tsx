@@ -58,6 +58,7 @@ import { SidebarIcon } from "./SidebarIcon";
 
 import { RulesIcon } from "@revolt/ui/icons/RulesIcon";
 import { useListToggle } from "@revolt/ui/motion";
+import { EventsLink } from "../../events/EventsLink";
 import { LobbyLink, RulesLink } from "../../lobby/LobbyLink";
 import { sidebarBase } from "./common";
 import {
@@ -365,6 +366,7 @@ export const ServerSidebar = (props: Props) => {
           style={{ height: "100%" }}
           use:floating={props.menuGenerator(props.server)}
         >
+          <EventsLink server={props.server} />
           <LobbyLink server={props.server} />
           <RulesLink server={props.server} />
           <ServerStats server={props.server} />

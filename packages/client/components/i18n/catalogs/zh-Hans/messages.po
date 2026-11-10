@@ -76,6 +76,11 @@ msgstr "（已编辑）"
 #~ msgid "{0, plural, =0 {No mutual servers} one {# mutual server} other {# mutual servers}}"
 #~ msgstr ""
 
+#. placeholder {0}: props.event.interested_count
+#: src/interface/events/EventCard.tsx
+msgid "{0, plural, =0 {Nobody is interested yet} one {# interested} other {# interested}}"
+msgstr "{0, plural, =0 {还没有人感兴趣} other {# 人感兴趣}}"
+
 #. placeholder {0}: bot().serverCount
 #. placeholder {0}: props.count
 #. placeholder {0}: props.entry.count
@@ -597,6 +602,11 @@ msgstr "{0} 条未读"
 #: components/modal/modals/PromoteServer.tsx
 msgid "{0} until {1}"
 msgstr "{0}，至 {1}"
+
+#. placeholder {0}: count()
+#: src/interface/events/EventsLink.tsx
+msgid "{0} upcoming"
+msgstr "即将举行 {0} 个"
 
 #. placeholder {0}: props.server.emojis.length
 #: components/app/interface/settings/server/emojis/EmojiList.tsx
@@ -1219,6 +1229,10 @@ msgstr "子命令不能再包含子命令。"
 msgid "A sub-command takes only a name, a description and options."
 msgstr "子命令只有名称、描述和选项。"
 
+#: src/interface/events/EventCard.tsx
+msgid "A text channel"
+msgstr "一个文字频道"
+
 #: components/app/interface/settings/user/profile/CreatorStudio.tsx
 msgid "A transparent animation that plays once over a profile. 576 × 1024 px, up to 4 seconds, up to 2 MB. Reviewers look at it before it goes live."
 msgstr "在个人资料上播放一次的透明动画。576 × 1024 像素，最长 4 秒，最大 2 MB。审核员会先查看，通过后才会上线。"
@@ -1234,6 +1248,10 @@ msgstr "已验证的电子邮件，且账号创建已超过 5 分钟。"
 #: src/interface/designs/Wall.tsx
 msgid "A verified maker"
 msgstr "已验证的创作者"
+
+#: src/interface/events/EventCard.tsx
+msgid "A voice channel"
+msgstr "一个语音频道"
 
 #: components/app/interface/settings/user/appearance/AppearanceMenu.tsx
 msgid "A warm dark theme in sand and copper tones, easy on the eyes in the evening."
@@ -1725,6 +1743,10 @@ msgstr "{0} 的地址"
 msgid "Address or documents"
 msgstr "地址或文档"
 
+#: components/modal/modals/ServerEventEditor.tsx
+msgid "Address or link"
+msgstr "地址或链接"
+
 #: components/modal/modals/InteractionsEndpoint.tsx
 msgid "Address saved. Interactions now go to your server."
 msgstr "地址已保存，交互现在会发送到你的服务器。"
@@ -2037,6 +2059,10 @@ msgstr "处理图片时出错：{0}"
 #: components/modal/modals/Error2.tsx
 msgid "An error occurred."
 msgstr "发生错误。"
+
+#: components/modal/modals/ServerEventEditor.tsx
+msgid "An event can last up to 31 days."
+msgstr "活动最长可持续 31 天。"
 
 #: components/app/interface/settings/user/support/ContactSupport.tsx
 msgid "An idea for Zrzur"
@@ -3446,6 +3472,7 @@ msgstr "加拿大"
 #: components/modal/modals/ResetBotToken.tsx
 #: components/modal/modals/ScreenSharePicker.tsx
 #: components/modal/modals/ScreenShareSettings.tsx
+#: components/modal/modals/ServerEventEditor.tsx
 #: components/modal/modals/ServerIdentity.tsx
 #: components/modal/modals/SignOutSessions.tsx
 #: components/modal/modals/TimeoutMember.tsx
@@ -3468,6 +3495,10 @@ msgstr "可随时在“设置”的“订阅”中取消。你可以继续享有
 #: components/app/interface/settings/user/Keybinds.tsx
 msgid "Cancel editing"
 msgstr "取消编辑"
+
+#: src/interface/events/EventCard.tsx
+msgid "Cancel event"
+msgstr "取消活动"
 
 #: components/app/interface/settings/user/subscriptions/Subscriptions.tsx
 msgid "Cancel Feather"
@@ -3495,7 +3526,13 @@ msgstr "取消购买"
 msgid "Cancel request"
 msgstr "取消请求"
 
+#: src/interface/events/EventCard.tsx
+msgid "Cancel this event? Interested members see that it is off."
+msgstr "要取消这个活动吗？感兴趣的成员会看到它已取消。"
+
 #: components/app/interface/settings/user/subscriptions/BillingHistory.tsx
+#: src/interface/events/EventCard.tsx
+#: src/interface/events/EventsPage.tsx
 msgid "Cancelled"
 msgstr "已取消"
 
@@ -4002,6 +4039,10 @@ msgstr "选择 `.zplugin.json` 包（或清单文件），可对其进行检查�
 msgid "Choose a command or a suggestion"
 msgstr "选择命令或建议"
 
+#: components/ui/components/design/DateTimeField.tsx
+msgid "Choose a day"
+msgstr "选择日期"
+
 #: components/app/interface/channels/text/interactions/CommandPicker.tsx
 #: components/app/interface/channels/text/interactions/InteractionModal.tsx
 msgid "Choose a file"
@@ -4147,6 +4188,14 @@ msgstr "选择个人资料中显示的内容及顺序。隐藏的部分不会发
 #: components/app/interface/settings/server/LobbySettings.tsx
 msgid "Choose what the lobby shows and in which order. Sections with nothing to show stay hidden by themselves."
 msgstr "选择大厅显示的内容及顺序。没有内容可显示的部分会自动隐藏。"
+
+#: components/modal/modals/ServerEventEditor.tsx
+msgid "Choose when it starts."
+msgstr "请选择开始时间。"
+
+#: components/modal/modals/ServerEventEditor.tsx
+msgid "Choose where it takes place."
+msgstr "请选择举办地点。"
 
 #: components/app/interface/settings/user/Keybinds.tsx
 msgid "Choose where to forward"
@@ -4847,6 +4896,7 @@ msgstr "复制 JSON"
 #: components/app/menus/MessageContextMenu.tsx
 #: src/interface/designs/DesignPage.tsx
 #: src/interface/Discover.tsx
+#: src/interface/events/EventCard.tsx
 msgid "Copy link"
 msgstr "复制链接"
 
@@ -5010,6 +5060,14 @@ msgstr "国家和地区"
 #: components/modal/lib/serverTemplateText.ts
 msgid "course-info"
 msgstr "course-info"
+
+#: components/modal/modals/ServerEventEditor.tsx
+msgid "Cover"
+msgstr "封面"
+
+#: components/modal/modals/ServerEventEditor.tsx
+msgid "Cover image (optional)"
+msgstr "封面图片（可选）"
 
 #: components/modal/lib/CreateServerFlow.tsx
 #: components/modal/modals/CreateBot.tsx
@@ -5300,6 +5358,10 @@ msgstr "裁剪频道图标"
 #: components/app/interface/settings/channel/Overview.tsx
 #~ msgid "Crop Channel Icon"
 #~ msgstr ""
+
+#: components/modal/modals/ServerEventEditor.tsx
+msgid "Crop cover image"
+msgstr "裁剪封面图片"
 
 #: components/app/interface/settings/server/emojis/EmojiList.tsx
 msgid "Crop emoji"
@@ -5614,6 +5676,7 @@ msgstr "性能下降"
 #: components/modal/modals/DeleteRole.tsx
 #: components/modal/modals/DeleteServer.tsx
 #: components/ui/components/features/messaging/elements/MessageToolbar.tsx
+#: src/interface/events/EventCard.tsx
 msgid "Delete"
 msgstr "删除"
 
@@ -5712,6 +5775,10 @@ msgstr "删除规则"
 #: components/app/interface/settings/server/ServerOwnership.tsx
 msgid "Delete server"
 msgstr "删除服务器"
+
+#: src/interface/events/EventCard.tsx
+msgid "Delete this event and its interested list for good?"
+msgstr "要永久删除这个活动及其感兴趣名单吗？"
 
 #: components/app/interface/settings/server/invites/ListServerInvites.tsx
 msgid "Delete this invite?"
@@ -5836,6 +5903,7 @@ msgid "Description"
 msgstr "描述"
 
 #: components/modal/modals/CreateChannel.tsx
+#: components/modal/modals/ServerEventEditor.tsx
 msgid "Description (optional)"
 msgstr "描述（可选）"
 
@@ -6174,6 +6242,10 @@ msgstr "文档"
 msgid "does anyone read this?"
 msgstr "有人会看这个吗？"
 
+#: components/modal/modals/ServerEventEditor.tsx
+msgid "Does not repeat"
+msgstr "不重复"
+
 #: components/ui/components/features/profiles/plateNames.ts
 msgid "Dominica"
 msgstr "多米尼克"
@@ -6363,6 +6435,7 @@ msgstr "厄瓜多尔"
 #: components/app/interface/settings/user/bots/CommandManager.tsx
 #: components/app/interface/settings/user/profile/CreatorStudio.tsx
 #: components/ui/components/features/messaging/elements/MessageToolbar.tsx
+#: src/interface/events/EventCard.tsx
 msgid "Edit"
 msgstr "编辑"
 
@@ -6390,6 +6463,10 @@ msgstr "编辑命令"
 #: components/app/interface/settings/server/emojis/EmojiList.tsx
 msgid "Edit emoji"
 msgstr "编辑表情"
+
+#: components/modal/modals/ServerEventEditor.tsx
+msgid "Edit event"
+msgstr "编辑活动"
 
 #: components/app/menus/ServerFolderContextMenu.tsx
 #: components/modal/modals/EditServerFolder.tsx
@@ -6620,6 +6697,7 @@ msgid "Enabled · not running"
 msgstr "已启用 · 未运行"
 
 #: components/app/interface/settings/server/ServerEmergency.tsx
+#: src/interface/events/EventCard.tsx
 msgid "End now"
 msgstr "立即结束"
 
@@ -6647,6 +6725,7 @@ msgid "Endpoints"
 msgstr "端点"
 
 #: components/app/interface/settings/user/safety/ReportsAndStanding.tsx
+#: components/modal/modals/ServerEventEditor.tsx
 msgid "Ends"
 msgstr "结束于"
 
@@ -6801,6 +6880,17 @@ msgstr "事件"
 msgid "Events"
 msgstr "事件"
 
+#: src/interface/events/EventsLink.tsx
+#: src/interface/events/EventsPage.tsx
+msgctxt "scheduled events"
+msgid "Events"
+msgstr "活动"
+
+#: components/modal/modals/ServerEventEditor.tsx
+#: src/interface/events/EventCard.tsx
+msgid "Every 2 weeks"
+msgstr "每 2 周"
+
 #: src/interface/designs/Home.tsx
 msgid "Every bird in this flock is a design for your Zrzur profile. Tap one and it lands on you."
 msgstr "这群鸟中的每一只，都是你 Zrzur 个人资料的一个设计。轻点一只，它就会落在你身上。"
@@ -6841,6 +6931,11 @@ msgstr "这片天空中每一只亮起的鸟，都代表一位为 Zrzur 创作�
 msgid "Every member can share an invite link."
 msgstr "每位成员都可以分享邀请链接。"
 
+#: components/modal/modals/ServerEventEditor.tsx
+#: src/interface/events/EventCard.tsx
+msgid "Every month"
+msgstr "每月"
+
 #: components/app/interface/settings/user/subscriptions/PlusPage.tsx
 msgid "Every new person adds to those bills. Talking stays free for everyone, so the paid extras are what keep the lights on, for the people who pay and the people who don't."
 msgstr "每多一个人，这些费用就会增加。聊天对所有人永远免费，所以付费的增值功能是维持运转的支柱，惠及付费和未付费的所有人。"
@@ -6860,6 +6955,11 @@ msgstr "每篇帖子都需要一个标签"
 #: components/modal/modals/billingErrors.ts
 msgid "Every spot in the top row is taken. Try again when one opens."
 msgstr "置顶行的位置已被全部占用，有空位时请再试。"
+
+#: components/modal/modals/ServerEventEditor.tsx
+#: src/interface/events/EventCard.tsx
+msgid "Every week"
+msgstr "每周"
 
 #: components/modal/modals/SuperchargeServer.tsx
 msgid "Every Wing lifts this server for everyone in it. Any member can give one."
@@ -8225,6 +8325,12 @@ msgstr "一起聊聊"
 msgid "Hangout"
 msgstr "休闲聚会"
 
+#: src/interface/events/EventCard.tsx
+#: src/interface/events/EventsLink.tsx
+#: src/interface/events/EventsPage.tsx
+msgid "Happening now"
+msgstr "正在进行"
+
 #: components/modal/modals/GiftPlus.tsx
 msgid "Happy birthday!"
 msgstr "生日快乐！"
@@ -8528,6 +8634,10 @@ msgstr "我已阅读代码和每一项权限，确认运行是安全的。"
 msgid "I understand the consequences"
 msgstr "我了解后果"
 
+#: src/interface/events/EventCard.tsx
+msgid "I'm interested"
+msgstr "我感兴趣"
+
 #: components/modal/modals/PolicyChange.tsx
 msgid "I've read and reviewed the changes."
 msgstr "我已阅读并审阅这些更改。"
@@ -8695,6 +8805,10 @@ msgstr "在服务器频道或与机器人的私信中。"
 msgid "In a server, a role colour wins over yours, but your font stays. On a profile card with a theme, your name turns white so it stays readable."
 msgstr "在服务器中，角色颜色会优先于你的颜色，但你的字体不变。在带主题的个人资料卡上，你的名字会变成白色以保证可读性。"
 
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "In a server."
+msgstr "在服务器中。"
+
 #: src/interface/developers/docs/GettingStarted.tsx
 #~ msgid "In about ten minutes you will have a bot that answers a slash command in your own test server."
 #~ msgstr ""
@@ -8850,6 +8964,14 @@ msgstr "意图："
 #: src/interface/developers/docs/DocsPortal.tsx
 msgid "Interactions over HTTP"
 msgstr "通过 HTTP 交互"
+
+#: src/interface/events/EventCard.tsx
+msgid "Interested"
+msgstr "感兴趣"
+
+#: src/interface/events/EventCard.tsx
+msgid "Interested members"
+msgstr "感兴趣的成员"
 
 #: components/app/interface/settings/user/plugins/text.ts
 msgid "Interface colours only. Warning colours can't change and text must stay readable."
@@ -9133,6 +9255,7 @@ msgstr "日本"
 #: components/modal/modals/Invite.tsx
 #: components/ui/components/features/messaging/elements/Invite.tsx
 #: src/interface/Discover.tsx
+#: src/interface/events/EventCard.tsx
 msgid "Join"
 msgstr "加入"
 
@@ -9279,6 +9402,7 @@ msgstr "保留 Feather"
 
 #: components/app/interface/settings/server/roles/ServerRoleOverview.tsx
 #: components/app/interface/settings/user/profile/ReviewQueue.tsx
+#: src/interface/events/EventCard.tsx
 msgid "Keep it"
 msgstr "保留"
 
@@ -9728,6 +9852,10 @@ msgstr "链接"
 msgid "Link {0}"
 msgstr "链接 {0}"
 
+#: src/interface/events/EventCard.tsx
+msgid "Link copied"
+msgstr "链接已复制"
+
 #: components/app/interface/settings/server/invites/VanityInvite.tsx
 msgid "Link name"
 msgstr "链接名称"
@@ -9845,6 +9973,10 @@ msgstr "加载中"
 #: components/app/interface/settings/server/bans/ListBans.tsx
 msgid "Loading bans…"
 msgstr "正在加载封禁列表…"
+
+#: src/interface/events/EventsPage.tsx
+msgid "Loading events"
+msgstr "正在加载活动"
 
 #: components/ui/components/features/messaging/composition/picker/GifPicker.tsx
 msgid "Loading GIFs"
@@ -10456,6 +10588,10 @@ msgstr "支持 Markdown 和表情。"
 #: components/app/interface/settings/server/LobbySettings.tsx
 msgid "Markdown is supported."
 msgstr "支持 Markdown。"
+
+#: components/modal/modals/ServerEventEditor.tsx
+msgid "Markdown works here."
+msgstr "这里支持 Markdown。"
 
 #: components/ui/components/features/profiles/plateNames.ts
 msgid "Marshall Islands"
@@ -11663,6 +11799,10 @@ msgstr "新闻频道"
 msgid "Next"
 msgstr "下一步"
 
+#: components/ui/components/design/DateTimeField.tsx
+msgid "Next month"
+msgstr "下个月"
+
 #: components/modal/modals/PlusCheckout.tsx
 msgid "Next renewal"
 msgstr "下次续订"
@@ -11873,6 +12013,10 @@ msgstr "没有符合搜索条件的特效。"
 #: components/ui/components/features/messaging/composition/picker/EmojiPicker.tsx
 msgid "No emoji found"
 msgstr "未找到表情"
+
+#: src/interface/events/EventsPage.tsx
+msgid "No events planned yet"
+msgstr "还没有计划中的活动"
 
 #: src/interface/Designs.tsx
 msgid "No favourites yet"
@@ -12830,6 +12974,7 @@ msgstr "只有 Zrzur 工作人员可以这样做。"
 #: components/app/interface/settings/user/plugins/DeveloperTab.tsx
 #: components/app/interface/settings/user/plugins/PluginDetail.tsx
 #: components/modal/modals/Invite.tsx
+#: src/interface/events/EventCard.tsx
 msgid "Open"
 msgstr "打开"
 
@@ -12882,6 +13027,10 @@ msgstr "打开文件"
 msgid "Open GIF picker"
 msgstr "打开 GIF 选择器"
 
+#: src/interface/events/EventCard.tsx
+msgid "Open link"
+msgstr "打开链接"
+
 #: src/interface/developers/docs/GettingStarted.tsx
 msgid "Open My applications"
 msgstr "打开“我的应用”"
@@ -12930,6 +13079,10 @@ msgstr "打开审核面板"
 #: components/app/interface/settings/server/LobbySettings.tsx
 msgid "Open the server on its lobby"
 msgstr "在大厅中打开服务器"
+
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "Open the server's events"
+msgstr "打开服务器活动"
 
 #: components/app/menus/MessageContextMenu.tsx
 msgid "Open thread"
@@ -13057,6 +13210,10 @@ msgstr "发出的好友请求"
 #: components/app/interface/settings/user/voice/VoiceInputOptions.tsx
 msgid "Output volume"
 msgstr "输出音量"
+
+#: src/interface/events/EventCard.tsx
+msgid "Over"
+msgstr "已结束"
 
 #: components/app/interface/settings/user/safety/SafetyDashboard.tsx
 msgid "Overturn and reverse"
@@ -13590,6 +13747,10 @@ msgstr "像素名称和霓虹光环。"
 msgid "Place"
 msgstr "放置"
 
+#: src/interface/events/EventsPage.tsx
+msgid "Plan a game night, a talk or a meetup. Members can mark it Interested and hear when it starts."
+msgstr "策划一场游戏之夜、讲座或聚会。成员可以标记“感兴趣”，开始时会收到通知。"
+
 #: components/modal/lib/serverTemplateText.ts
 msgid "planning"
 msgstr "计划中"
@@ -13887,6 +14048,10 @@ msgstr "即使某个声音已关闭，预览仍会播放。声音使用“语音
 #: components/app/interface/settings/user/safety/SafetyDashboard.tsx
 msgid "Previous"
 msgstr "上一个"
+
+#: components/ui/components/design/DateTimeField.tsx
+msgid "Previous month"
+msgstr "上个月"
 
 #: components/app/interface/settings/user/Keybinds.tsx
 msgid "Previous or next channel"
@@ -14723,6 +14888,10 @@ msgstr "移除频道图标"
 msgid "Remove choice"
 msgstr "移除选项值"
 
+#: components/modal/modals/ServerEventEditor.tsx
+msgid "Remove cover image"
+msgstr "移除封面图片"
+
 #: src/interface/Discover.tsx
 msgid "Remove filter"
 msgstr "移除筛选"
@@ -14935,6 +15104,10 @@ msgstr "已由管理员重新开启"
 #: components/app/interface/settings/server/audit/AuditLog.tsx
 msgid "reordered the roles"
 msgstr "调整了角色顺序"
+
+#: components/modal/modals/ServerEventEditor.tsx
+msgid "Repeat"
+msgstr "重复"
 
 #: components/app/interface/settings/server/assistant/labels.ts
 #: components/app/interface/settings/server/AutoModSettings.tsx
@@ -15733,6 +15906,7 @@ msgstr "沙特阿拉伯"
 #: components/client/AgePrompt.tsx
 #: components/modal/modals/CustomStatus.tsx
 #: components/modal/modals/EditServerFolder.tsx
+#: components/modal/modals/ServerEventEditor.tsx
 #: components/modal/modals/ServerIdentity.tsx
 #: src/interface/Designs.tsx
 #: src/interface/designs/Dock.tsx
@@ -15928,6 +16102,18 @@ msgstr "用手机扫描，或"
 #: components/app/interface/settings/user/plugins/DeveloperTab.tsx
 msgid "Scanner notes for the reviewer:"
 msgstr "给审核员的扫描备注："
+
+#: components/modal/modals/ServerEventEditor.tsx
+msgid "Schedule"
+msgstr "安排"
+
+#: components/modal/modals/ServerEventEditor.tsx
+msgid "Schedule an event"
+msgstr "安排活动"
+
+#: src/interface/events/EventsPage.tsx
+msgid "Schedule event"
+msgstr "安排活动"
 
 #: components/modal/lib/serverTemplateText.ts
 msgid "School club"
@@ -16589,6 +16775,10 @@ msgstr "服务器需要有 {0} 名成员才能上架。推广可立即上架。"
 msgid "Sessions"
 msgstr "登录会话"
 
+#: components/modal/modals/ServerEventEditor.tsx
+msgid "Set an end time"
+msgstr "设置结束时间"
+
 #: components/ui/components/design/ColourPicker.tsx
 msgid "Set colour to {colour}"
 msgstr "将颜色设为 {colour}"
@@ -16761,6 +16951,7 @@ msgstr "单独显示成员"
 #: components/ui/components/features/messaging/elements/TextEmbed.tsx
 #: components/ui/components/features/profiles/ProfileBio.tsx
 #: components/ui/components/features/profiles/ProfileTiles.tsx
+#: src/interface/events/EventCard.tsx
 msgid "Show more"
 msgstr "显示更多"
 
@@ -17196,6 +17387,10 @@ msgstr "出错了。请重试。"
 msgid "Something you entered isn't valid. Check it and try again."
 msgstr "你输入的内容无效。请检查后重试。"
 
+#: components/modal/modals/ServerEventEditor.tsx
+msgid "Somewhere else"
+msgstr "其他地点"
+
 #: src/interface/Home.tsx
 #~ msgid "Soon"
 #~ msgstr ""
@@ -17427,6 +17622,10 @@ msgstr "从这里开始"
 msgid "Start Minimised to Tray"
 msgstr "启动时最小化到托盘"
 
+#: src/interface/events/EventCard.tsx
+msgid "Start now"
+msgstr "立即开始"
+
 #: components/modal/modals/PlusCheckout.tsx
 #~ msgid "Start Plus"
 #~ msgstr ""
@@ -17497,6 +17696,10 @@ msgstr "正在启动麦克风…"
 #: components/app/interface/settings/user/plugins/common.tsx
 msgid "Starting…"
 msgstr "正在启动…"
+
+#: components/modal/modals/ServerEventEditor.tsx
+msgid "Starts"
+msgstr "开始"
 
 #: components/app/interface/settings/user/account/AgeSettings.tsx
 msgid "Stated by you, not verified."
@@ -18161,6 +18364,7 @@ msgid "Text and slides stay sharp; video and games stay smooth."
 msgstr "文字和幻灯片保持清晰，视频和游戏保持流畅。"
 
 #: components/app/interface/settings/server/channels/ChannelsSettings.tsx
+#: components/modal/modals/ServerEventEditor.tsx
 msgid "Text channel"
 msgstr "文字频道"
 
@@ -18468,9 +18672,22 @@ msgstr "发现申请已被拒绝。被拒绝的申请无法移除，但用户可
 msgid "The email couldn't be sent. Try again in a few minutes."
 msgstr "无法发送邮件。请几分钟后重试。"
 
+#: components/modal/modals/ServerEventEditor.tsx
+msgid "The end must be after the start."
+msgstr "结束时间必须晚于开始时间。"
+
 #: components/app/interface/settings/user/safety/ReportsAndStanding.tsx
 msgid "The European Commission publishes the list of certified bodies on its website."
 msgstr "欧盟委员会会在其网站上公布认证机构名单。"
+
+#. placeholder {0}: (sm as EventStartedSystemMessage).title
+#: components/ui/components/features/messaging/elements/SystemMessage.tsx
+msgid "The event <0>{0}</0> has started."
+msgstr "活动 <0>{0}</0> 已开始。"
+
+#: src/interface/events/EventsPage.tsx
+msgid "The events could not be loaded."
+msgstr "无法加载活动。"
 
 #: components/app/interface/settings/user/subscriptions/Subscriptions.tsx
 msgid "The Feather badge next to your name on your profile."
@@ -18704,6 +18921,10 @@ msgstr "服务器的等级及其特权。"
 #: components/app/interface/settings/ServerSettings.tsx
 msgid "The server's own emoji."
 msgstr "服务器自己的表情。"
+
+#: components/modal/modals/ServerEventEditor.tsx
+msgid "The start time has passed. Choose a later time."
+msgstr "开始时间已过，请选择更晚的时间。"
 
 #: components/app/interface/settings/user/badges/MyBadges.tsx
 msgid "The team will let you know when you are in."
@@ -19043,6 +19264,14 @@ msgstr "此邮箱地址无法使用。"
 msgid "This entry has a field of the wrong type."
 msgstr "此项中有字段类型错误。"
 
+#: src/interface/events/EventsPage.tsx
+msgid "This event is not there any more, or you can't see where it takes place."
+msgstr "这个活动已不存在，或者你看不到它的举办地点。"
+
+#: src/interface/events/EventsPage.tsx
+msgid "This event is over"
+msgstr "这个活动已结束"
+
 #: components/i18n/errors.tsx
 msgid "This feature is currently disabled."
 msgstr "此功能目前已停用。"
@@ -19294,6 +19523,11 @@ msgstr "此请求太大。请重试。"
 msgid "This role doesn't exist any more."
 msgstr "该角色已不存在。"
 
+#. placeholder {0}: err.max
+#: components/i18n/errors.tsx
+msgid "This server already has {0} upcoming events. Cancel or delete one first."
+msgstr "这个服务器已有 {0} 个即将举行的活动。请先取消或删除一个。"
+
 #: components/i18n/errors.tsx
 msgid "This server asks for accounts older than 5 minutes. You can talk here in {minutes} min."
 msgstr "此服务器要求账号注册满 5 分钟。你可以在 {minutes} 分钟后在这里发言。"
@@ -19318,6 +19552,14 @@ msgstr "此服务器的 Webhook 数量已达上限（{0}）。请先删除一个
 #: src/interface/ServerHome.tsx
 msgid "This server has no channels yet"
 msgstr "此服务器还没有频道"
+
+#: components/modal/modals/ServerEventEditor.tsx
+msgid "This server has no text channel you can see."
+msgstr "这个服务器没有你能看到的文字频道。"
+
+#: components/modal/modals/ServerEventEditor.tsx
+msgid "This server has no voice channel you can see."
+msgstr "这个服务器没有你能看到的语音频道。"
 
 #: components/modal/modals/billingErrors.ts
 msgid "This server has to be approved for Discover first."
@@ -19518,6 +19760,10 @@ msgstr "工单分类，每行一个"
 msgid "Tickets and direct messages in one queue."
 msgstr "工单和私信集中在一个队列中。"
 
+#: components/ui/components/design/DateTimeField.tsx
+msgid "Time"
+msgstr "时间"
+
 #: components/app/interface/settings/user/Language.tsx
 msgid "Time format"
 msgstr "时间格式"
@@ -19607,6 +19853,7 @@ msgstr "提示：右键点击（或长按）任意表情即可将其加入收藏
 
 #: components/app/interface/settings/user/badges/BugReportDialog.tsx
 #: components/modal/modals/CreateThread.tsx
+#: components/modal/modals/ServerEventEditor.tsx
 msgid "Title"
 msgstr "标题"
 
@@ -19793,6 +20040,7 @@ msgstr "换个词试试，或浏览分类。"
 #: src/interface/designs/parts.tsx
 #: src/interface/developers/docs/DocsPortal.tsx
 #: src/interface/Discover.tsx
+#: src/interface/events/EventsPage.tsx
 msgid "Try again"
 msgstr "重试"
 
@@ -20284,6 +20532,10 @@ msgstr "名称下方最多三个按钮，每个按钮打开一个频道。设置
 #: components/app/interface/settings/server/LobbySettings.tsx
 #~ msgid "Up to three buttons under the name, each opening a channel. Read the rules is added by itself when you pick a rules channel under Channels."
 #~ msgstr ""
+
+#: src/interface/events/EventsPage.tsx
+msgid "Upcoming"
+msgstr "即将举行"
 
 #: components/app/interface/settings/user/plugins/PluginDetail.tsx
 msgid "Update"
@@ -20879,6 +21131,7 @@ msgid "Voice calls"
 msgstr "语音通话"
 
 #: components/modal/modals/CreateChannel.tsx
+#: components/modal/modals/ServerEventEditor.tsx
 msgid "Voice channel"
 msgstr "语音频道"
 
@@ -21319,6 +21572,10 @@ msgstr "关闭后，任何人都无法添加内容，所有者也不例外。不
 msgid "When someone opens a join link to this server, their request shows up here."
 msgstr "有人打开此服务器的加入链接时，他们的申请会显示在这里。"
 
+#: src/interface/events/EventsPage.tsx
+msgid "When the managers plan something, it shows up here."
+msgstr "管理员策划活动后，会显示在这里。"
+
 #: components/app/interface/settings/user/Keybinds.tsx
 msgid "When the message box is empty."
 msgstr "消息框为空时。"
@@ -21336,6 +21593,7 @@ msgid "When your friends come online, they show up here."
 msgstr "好友上线时，会显示在这里。"
 
 #: components/app/interface/settings/user/safety/SafetyDashboard.tsx
+#: components/modal/modals/ServerEventEditor.tsx
 msgid "Where"
 msgstr "位置"
 
@@ -21465,6 +21723,10 @@ msgstr "谁在运营"
 #: components/modal/lib/CreateServerFlow.tsx
 msgid "Who will gather here?"
 msgstr "谁会聚集在这里？"
+
+#: src/interface/events/EventCard.tsx
+msgid "Who's interested"
+msgstr "谁感兴趣"
 
 #: components/app/interface/settings/server/webhooks/ServerWebhooks.tsx
 msgid "Whoever runs this Zrzur server can turn them on in its configuration."
@@ -21601,6 +21863,10 @@ msgstr "不使用库"
 #: components/app/interface/settings/user/safety/SafetyDashboard.tsx
 msgid "Without an account"
 msgstr "无需账号"
+
+#: components/modal/modals/ServerEventEditor.tsx
+msgid "Without an end time it ends 12 hours after it starts, or when a manager ends it."
+msgstr "没有结束时间时，活动会在开始 12 小时后结束，或由管理员手动结束。"
 
 #: components/app/interface/settings/server/channels/ChannelsSettings.tsx
 msgid "Without category"

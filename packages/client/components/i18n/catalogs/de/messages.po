@@ -23934,3 +23934,250 @@ msgstr "Zrzur, direkt auf <0>deinem Desktop.</0>"
 #: components/app/interface/settings/user/appearance/AppearanceMenu.tsx
 #~ msgid "Zrzur's own look: very dark neutral panels with Zrzur Pink as the one accent."
 #~ msgstr "Zrzurs eigener Look: sehr dunkle, neutrale Flächen mit Zrzur-Pink als einziger Akzentfarbe."
+
+#. placeholder {0}: props.event.interested_count
+#: src/interface/events/EventCard.tsx
+msgid "{0, plural, =0 {Nobody is interested yet} one {# interested} other {# interested}}"
+msgstr "{0, plural, =0 {Noch niemand interessiert} one {# interessiert} other {# interessiert}}"
+
+#. placeholder {0}: count()
+#: src/interface/events/EventsLink.tsx
+msgid "{0} upcoming"
+msgstr "{0} anstehend"
+
+#: src/interface/events/EventCard.tsx
+msgid "A text channel"
+msgstr "Ein Textkanal"
+
+#: src/interface/events/EventCard.tsx
+msgid "A voice channel"
+msgstr "Ein Sprachkanal"
+
+#: components/modal/modals/ServerEventEditor.tsx
+msgid "Address or link"
+msgstr "Adresse oder Link"
+
+#: components/modal/modals/ServerEventEditor.tsx
+msgid "An event can last up to 31 days."
+msgstr "Ein Event kann bis zu 31 Tage dauern."
+
+#: src/interface/events/EventCard.tsx
+msgid "Cancel event"
+msgstr "Event absagen"
+
+#: src/interface/events/EventCard.tsx
+msgid "Cancel this event? Interested members see that it is off."
+msgstr "Dieses Event absagen? Interessierte Mitglieder sehen, dass es ausfällt."
+
+#: components/ui/components/design/DateTimeField.tsx
+msgid "Choose a day"
+msgstr "Tag wählen"
+
+#: components/modal/modals/ServerEventEditor.tsx
+msgid "Choose when it starts."
+msgstr "Wähle, wann es beginnt."
+
+#: components/modal/modals/ServerEventEditor.tsx
+msgid "Choose where it takes place."
+msgstr "Wähle, wo es stattfindet."
+
+#: components/modal/modals/ServerEventEditor.tsx
+msgid "Cover"
+msgstr "Titelbild"
+
+#: components/modal/modals/ServerEventEditor.tsx
+msgid "Cover image (optional)"
+msgstr "Titelbild (optional)"
+
+#: components/modal/modals/ServerEventEditor.tsx
+msgid "Crop cover image"
+msgstr "Titelbild zuschneiden"
+
+#: src/interface/events/EventCard.tsx
+msgid "Delete this event and its interested list for good?"
+msgstr "Dieses Event und seine Interessiertenliste endgültig löschen?"
+
+#: components/modal/modals/ServerEventEditor.tsx
+msgid "Does not repeat"
+msgstr "Wiederholt sich nicht"
+
+#: components/modal/modals/ServerEventEditor.tsx
+msgid "Edit event"
+msgstr "Event bearbeiten"
+
+#: src/interface/events/EventsLink.tsx
+#: src/interface/events/EventsPage.tsx
+msgctxt "scheduled events"
+msgid "Events"
+msgstr "Events"
+
+#: components/modal/modals/ServerEventEditor.tsx
+#: src/interface/events/EventCard.tsx
+msgid "Every 2 weeks"
+msgstr "Alle 2 Wochen"
+
+#: components/modal/modals/ServerEventEditor.tsx
+#: src/interface/events/EventCard.tsx
+msgid "Every month"
+msgstr "Jeden Monat"
+
+#: components/modal/modals/ServerEventEditor.tsx
+#: src/interface/events/EventCard.tsx
+msgid "Every week"
+msgstr "Jede Woche"
+
+#: src/interface/events/EventCard.tsx
+#: src/interface/events/EventsLink.tsx
+#: src/interface/events/EventsPage.tsx
+msgid "Happening now"
+msgstr "Läuft gerade"
+
+#: src/interface/events/EventCard.tsx
+msgid "I'm interested"
+msgstr "Interessiert mich"
+
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "In a server."
+msgstr "In einem Server."
+
+#: src/interface/events/EventCard.tsx
+msgid "Interested"
+msgstr "Interessiert"
+
+#: src/interface/events/EventCard.tsx
+msgid "Interested members"
+msgstr "Interessierte Mitglieder"
+
+#: src/interface/events/EventCard.tsx
+msgid "Link copied"
+msgstr "Link kopiert"
+
+#: src/interface/events/EventsPage.tsx
+msgid "Loading events"
+msgstr "Events werden geladen"
+
+#: components/modal/modals/ServerEventEditor.tsx
+msgid "Markdown works here."
+msgstr "Markdown funktioniert hier."
+
+#: components/ui/components/design/DateTimeField.tsx
+msgid "Next month"
+msgstr "Nächster Monat"
+
+#: src/interface/events/EventsPage.tsx
+msgid "No events planned yet"
+msgstr "Noch keine Events geplant"
+
+#: src/interface/events/EventCard.tsx
+msgid "Open link"
+msgstr "Link öffnen"
+
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "Open the server's events"
+msgstr "Events des Servers öffnen"
+
+#: src/interface/events/EventCard.tsx
+msgid "Over"
+msgstr "Vorbei"
+
+#: src/interface/events/EventsPage.tsx
+msgid "Plan a game night, a talk or a meetup. Members can mark it Interested and hear when it starts."
+msgstr "Plane einen Spieleabend, einen Vortrag oder ein Treffen. Mitglieder können „Interessiert“ wählen und erfahren, wenn es losgeht."
+
+#: components/ui/components/design/DateTimeField.tsx
+msgid "Previous month"
+msgstr "Vorheriger Monat"
+
+#: components/modal/modals/ServerEventEditor.tsx
+msgid "Remove cover image"
+msgstr "Titelbild entfernen"
+
+#: components/modal/modals/ServerEventEditor.tsx
+msgid "Repeat"
+msgstr "Wiederholen"
+
+#: components/modal/modals/ServerEventEditor.tsx
+msgid "Schedule"
+msgstr "Planen"
+
+#: components/modal/modals/ServerEventEditor.tsx
+msgid "Schedule an event"
+msgstr "Event planen"
+
+#: src/interface/events/EventsPage.tsx
+msgid "Schedule event"
+msgstr "Event planen"
+
+#: components/modal/modals/ServerEventEditor.tsx
+msgid "Set an end time"
+msgstr "Endzeit festlegen"
+
+#: components/modal/modals/ServerEventEditor.tsx
+msgid "Somewhere else"
+msgstr "Woanders"
+
+#: src/interface/events/EventCard.tsx
+msgid "Start now"
+msgstr "Jetzt starten"
+
+#: components/modal/modals/ServerEventEditor.tsx
+msgid "Starts"
+msgstr "Beginnt"
+
+#: components/modal/modals/ServerEventEditor.tsx
+msgid "The end must be after the start."
+msgstr "Das Ende muss nach dem Beginn liegen."
+
+#. placeholder {0}: (sm as EventStartedSystemMessage).title
+#: components/ui/components/features/messaging/elements/SystemMessage.tsx
+msgid "The event <0>{0}</0> has started."
+msgstr "Das Event <0>{0}</0> hat begonnen."
+
+#: src/interface/events/EventsPage.tsx
+msgid "The events could not be loaded."
+msgstr "Die Events konnten nicht geladen werden."
+
+#: components/modal/modals/ServerEventEditor.tsx
+msgid "The start time has passed. Choose a later time."
+msgstr "Die Startzeit ist vorbei. Wähle eine spätere Zeit."
+
+#: src/interface/events/EventsPage.tsx
+msgid "This event is not there any more, or you can't see where it takes place."
+msgstr "Dieses Event gibt es nicht mehr, oder du kannst den Ort nicht sehen."
+
+#: src/interface/events/EventsPage.tsx
+msgid "This event is over"
+msgstr "Dieses Event ist vorbei"
+
+#. placeholder {0}: err.max
+#: components/i18n/errors.tsx
+msgid "This server already has {0} upcoming events. Cancel or delete one first."
+msgstr "Dieser Server hat schon {0} anstehende Events. Sage zuerst eins ab oder lösche es."
+
+#: components/modal/modals/ServerEventEditor.tsx
+msgid "This server has no text channel you can see."
+msgstr "Dieser Server hat keinen Textkanal, den du sehen kannst."
+
+#: components/modal/modals/ServerEventEditor.tsx
+msgid "This server has no voice channel you can see."
+msgstr "Dieser Server hat keinen Sprachkanal, den du sehen kannst."
+
+#: components/ui/components/design/DateTimeField.tsx
+msgid "Time"
+msgstr "Uhrzeit"
+
+#: src/interface/events/EventsPage.tsx
+msgid "Upcoming"
+msgstr "Demnächst"
+
+#: src/interface/events/EventsPage.tsx
+msgid "When the managers plan something, it shows up here."
+msgstr "Wenn die Verwaltung etwas plant, erscheint es hier."
+
+#: src/interface/events/EventCard.tsx
+msgid "Who's interested"
+msgstr "Wer interessiert ist"
+
+#: components/modal/modals/ServerEventEditor.tsx
+msgid "Without an end time it ends 12 hours after it starts, or when a manager ends it."
+msgstr "Ohne Endzeit endet es 12 Stunden nach dem Beginn oder wenn die Verwaltung es beendet."

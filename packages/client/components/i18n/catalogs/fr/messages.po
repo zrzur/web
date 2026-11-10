@@ -76,6 +76,11 @@ msgstr "(modifié)"
 #~ msgid "{0, plural, =0 {No mutual servers} one {# mutual server} other {# mutual servers}}"
 #~ msgstr ""
 
+#. placeholder {0}: props.event.interested_count
+#: src/interface/events/EventCard.tsx
+msgid "{0, plural, =0 {Nobody is interested yet} one {# interested} other {# interested}}"
+msgstr "{0, plural, =0 {Personne n’est encore intéressé} one {# intéressé} other {# intéressés}}"
+
 #. placeholder {0}: bot().serverCount
 #. placeholder {0}: props.count
 #. placeholder {0}: props.entry.count
@@ -597,6 +602,11 @@ msgstr "{0} non lus"
 #: components/modal/modals/PromoteServer.tsx
 msgid "{0} until {1}"
 msgstr "{0} jusqu’au {1}"
+
+#. placeholder {0}: count()
+#: src/interface/events/EventsLink.tsx
+msgid "{0} upcoming"
+msgstr "{0} à venir"
 
 #. placeholder {0}: props.server.emojis.length
 #: components/app/interface/settings/server/emojis/EmojiList.tsx
@@ -1219,6 +1229,10 @@ msgstr "Une sous-commande ne peut pas contenir de sous-commandes."
 msgid "A sub-command takes only a name, a description and options."
 msgstr "Une sous-commande n’a qu’un nom, une description et des options."
 
+#: src/interface/events/EventCard.tsx
+msgid "A text channel"
+msgstr "Un salon textuel"
+
 #: components/app/interface/settings/user/profile/CreatorStudio.tsx
 msgid "A transparent animation that plays once over a profile. 576 × 1024 px, up to 4 seconds, up to 2 MB. Reviewers look at it before it goes live."
 msgstr "Une animation transparente qui se joue une fois sur un profil. 576 × 1024 px, 4 secondes maximum, 2 Mo maximum. Des modérateurs la vérifient avant la mise en ligne."
@@ -1234,6 +1248,10 @@ msgstr "Une adresse e-mail vérifiée et un compte de plus de 5 minutes."
 #: src/interface/designs/Wall.tsx
 msgid "A verified maker"
 msgstr "Un créateur vérifié"
+
+#: src/interface/events/EventCard.tsx
+msgid "A voice channel"
+msgstr "Un salon vocal"
 
 #: components/app/interface/settings/user/appearance/AppearanceMenu.tsx
 msgid "A warm dark theme in sand and copper tones, easy on the eyes in the evening."
@@ -1725,6 +1743,10 @@ msgstr "Adresse de {0}"
 msgid "Address or documents"
 msgstr "Adresse ou documents"
 
+#: components/modal/modals/ServerEventEditor.tsx
+msgid "Address or link"
+msgstr "Adresse ou lien"
+
 #: components/modal/modals/InteractionsEndpoint.tsx
 msgid "Address saved. Interactions now go to your server."
 msgstr "Adresse enregistrée. Les interactions arrivent désormais sur ton serveur."
@@ -2037,6 +2059,10 @@ msgstr "Une erreur s'est produite lors du traitement de l'image : {0}"
 #: components/modal/modals/Error2.tsx
 msgid "An error occurred."
 msgstr "Une erreur s'est produite."
+
+#: components/modal/modals/ServerEventEditor.tsx
+msgid "An event can last up to 31 days."
+msgstr "Un événement peut durer jusqu’à 31 jours."
 
 #: components/app/interface/settings/user/support/ContactSupport.tsx
 msgid "An idea for Zrzur"
@@ -3446,6 +3472,7 @@ msgstr "Canada"
 #: components/modal/modals/ResetBotToken.tsx
 #: components/modal/modals/ScreenSharePicker.tsx
 #: components/modal/modals/ScreenShareSettings.tsx
+#: components/modal/modals/ServerEventEditor.tsx
 #: components/modal/modals/ServerIdentity.tsx
 #: components/modal/modals/SignOutSessions.tsx
 #: components/modal/modals/TimeoutMember.tsx
@@ -3468,6 +3495,10 @@ msgstr "Résilie à tout moment dans Paramètres, Abonnements. Tu gardes Feather
 #: components/app/interface/settings/user/Keybinds.tsx
 msgid "Cancel editing"
 msgstr "Annuler la modification"
+
+#: src/interface/events/EventCard.tsx
+msgid "Cancel event"
+msgstr "Annuler l’événement"
 
 #: components/app/interface/settings/user/subscriptions/Subscriptions.tsx
 msgid "Cancel Feather"
@@ -3495,7 +3526,13 @@ msgstr "Annuler l’achat"
 msgid "Cancel request"
 msgstr "Annuler la demande"
 
+#: src/interface/events/EventCard.tsx
+msgid "Cancel this event? Interested members see that it is off."
+msgstr "Annuler cet événement ? Les membres intéressés verront qu’il n’a plus lieu."
+
 #: components/app/interface/settings/user/subscriptions/BillingHistory.tsx
+#: src/interface/events/EventCard.tsx
+#: src/interface/events/EventsPage.tsx
 msgid "Cancelled"
 msgstr "Annulé"
 
@@ -4002,6 +4039,10 @@ msgstr "Choisis un paquet `.zplugin.json` (ou un manifeste) pour le vérifier, l
 msgid "Choose a command or a suggestion"
 msgstr "Choisir une commande ou une suggestion"
 
+#: components/ui/components/design/DateTimeField.tsx
+msgid "Choose a day"
+msgstr "Choisis un jour"
+
 #: components/app/interface/channels/text/interactions/CommandPicker.tsx
 #: components/app/interface/channels/text/interactions/InteractionModal.tsx
 msgid "Choose a file"
@@ -4147,6 +4188,14 @@ msgstr "Choisis ce qui s’affiche sur ton profil et dans quel ordre. Les sectio
 #: components/app/interface/settings/server/LobbySettings.tsx
 msgid "Choose what the lobby shows and in which order. Sections with nothing to show stay hidden by themselves."
 msgstr "Choisis ce que la salle d’attente affiche et dans quel ordre. Les sections sans contenu restent masquées d’elles-mêmes."
+
+#: components/modal/modals/ServerEventEditor.tsx
+msgid "Choose when it starts."
+msgstr "Choisis quand il commence."
+
+#: components/modal/modals/ServerEventEditor.tsx
+msgid "Choose where it takes place."
+msgstr "Choisis où il a lieu."
 
 #: components/app/interface/settings/user/Keybinds.tsx
 msgid "Choose where to forward"
@@ -4847,6 +4896,7 @@ msgstr "Copier le JSON"
 #: components/app/menus/MessageContextMenu.tsx
 #: src/interface/designs/DesignPage.tsx
 #: src/interface/Discover.tsx
+#: src/interface/events/EventCard.tsx
 msgid "Copy link"
 msgstr "Copier le lien"
 
@@ -5010,6 +5060,14 @@ msgstr "Pays"
 #: components/modal/lib/serverTemplateText.ts
 msgid "course-info"
 msgstr "infos-cours"
+
+#: components/modal/modals/ServerEventEditor.tsx
+msgid "Cover"
+msgstr "Couverture"
+
+#: components/modal/modals/ServerEventEditor.tsx
+msgid "Cover image (optional)"
+msgstr "Image de couverture (facultatif)"
 
 #: components/modal/lib/CreateServerFlow.tsx
 #: components/modal/modals/CreateBot.tsx
@@ -5300,6 +5358,10 @@ msgstr "Recadrer l’icône du salon"
 #: components/app/interface/settings/channel/Overview.tsx
 #~ msgid "Crop Channel Icon"
 #~ msgstr "Recadrer l’icône du salon"
+
+#: components/modal/modals/ServerEventEditor.tsx
+msgid "Crop cover image"
+msgstr "Recadrer l’image de couverture"
 
 #: components/app/interface/settings/server/emojis/EmojiList.tsx
 msgid "Crop emoji"
@@ -5614,6 +5676,7 @@ msgstr "Performances dégradées"
 #: components/modal/modals/DeleteRole.tsx
 #: components/modal/modals/DeleteServer.tsx
 #: components/ui/components/features/messaging/elements/MessageToolbar.tsx
+#: src/interface/events/EventCard.tsx
 msgid "Delete"
 msgstr "Supprimer"
 
@@ -5712,6 +5775,10 @@ msgstr "Supprimer la règle"
 #: components/app/interface/settings/server/ServerOwnership.tsx
 msgid "Delete server"
 msgstr "Supprimer le serveur"
+
+#: src/interface/events/EventCard.tsx
+msgid "Delete this event and its interested list for good?"
+msgstr "Supprimer définitivement cet événement et sa liste d’intéressés ?"
 
 #: components/app/interface/settings/server/invites/ListServerInvites.tsx
 msgid "Delete this invite?"
@@ -5836,6 +5903,7 @@ msgid "Description"
 msgstr "Description"
 
 #: components/modal/modals/CreateChannel.tsx
+#: components/modal/modals/ServerEventEditor.tsx
 msgid "Description (optional)"
 msgstr "Description (facultatif)"
 
@@ -6174,6 +6242,10 @@ msgstr "Documentation"
 msgid "does anyone read this?"
 msgstr "quelqu’un lit ça ?"
 
+#: components/modal/modals/ServerEventEditor.tsx
+msgid "Does not repeat"
+msgstr "Ne se répète pas"
+
 #: components/ui/components/features/profiles/plateNames.ts
 msgid "Dominica"
 msgstr "Dominique"
@@ -6363,6 +6435,7 @@ msgstr "Équateur"
 #: components/app/interface/settings/user/bots/CommandManager.tsx
 #: components/app/interface/settings/user/profile/CreatorStudio.tsx
 #: components/ui/components/features/messaging/elements/MessageToolbar.tsx
+#: src/interface/events/EventCard.tsx
 msgid "Edit"
 msgstr "Modifier"
 
@@ -6390,6 +6463,10 @@ msgstr "Modifier la commande"
 #: components/app/interface/settings/server/emojis/EmojiList.tsx
 msgid "Edit emoji"
 msgstr "Modifier l’émoji"
+
+#: components/modal/modals/ServerEventEditor.tsx
+msgid "Edit event"
+msgstr "Modifier l’événement"
 
 #: components/app/menus/ServerFolderContextMenu.tsx
 #: components/modal/modals/EditServerFolder.tsx
@@ -6620,6 +6697,7 @@ msgid "Enabled · not running"
 msgstr "Activé · à l’arrêt"
 
 #: components/app/interface/settings/server/ServerEmergency.tsx
+#: src/interface/events/EventCard.tsx
 msgid "End now"
 msgstr "Terminer maintenant"
 
@@ -6647,6 +6725,7 @@ msgid "Endpoints"
 msgstr "Endpoints"
 
 #: components/app/interface/settings/user/safety/ReportsAndStanding.tsx
+#: components/modal/modals/ServerEventEditor.tsx
 msgid "Ends"
 msgstr "Fin"
 
@@ -6801,6 +6880,17 @@ msgstr "événements"
 msgid "Events"
 msgstr "Événements"
 
+#: src/interface/events/EventsLink.tsx
+#: src/interface/events/EventsPage.tsx
+msgctxt "scheduled events"
+msgid "Events"
+msgstr "Événements"
+
+#: components/modal/modals/ServerEventEditor.tsx
+#: src/interface/events/EventCard.tsx
+msgid "Every 2 weeks"
+msgstr "Toutes les 2 semaines"
+
 #: src/interface/designs/Home.tsx
 msgid "Every bird in this flock is a design for your Zrzur profile. Tap one and it lands on you."
 msgstr "Chaque oiseau de cette volée est un design pour ton profil Zrzur. Touches-en un et il se pose sur toi."
@@ -6841,6 +6931,11 @@ msgstr "Chaque oiseau allumé dans ce ciel est quelqu’un qui dessine pour Zrzu
 msgid "Every member can share an invite link."
 msgstr "Chaque membre peut partager un lien d’invitation."
 
+#: components/modal/modals/ServerEventEditor.tsx
+#: src/interface/events/EventCard.tsx
+msgid "Every month"
+msgstr "Tous les mois"
+
 #: components/app/interface/settings/user/subscriptions/PlusPage.tsx
 msgid "Every new person adds to those bills. Talking stays free for everyone, so the paid extras are what keep the lights on, for the people who pay and the people who don't."
 msgstr "Chaque nouvelle personne alourdit ces factures. Discuter reste gratuit pour tout le monde ; ce sont donc les options payantes qui gardent les lumières allumées, pour celles et ceux qui paient comme pour les autres."
@@ -6860,6 +6955,11 @@ msgstr "Chaque post doit avoir une étiquette"
 #: components/modal/modals/billingErrors.ts
 msgid "Every spot in the top row is taken. Try again when one opens."
 msgstr "Toutes les places de la première ligne sont prises. Réessaie quand l’une se libère."
+
+#: components/modal/modals/ServerEventEditor.tsx
+#: src/interface/events/EventCard.tsx
+msgid "Every week"
+msgstr "Toutes les semaines"
 
 #: components/modal/modals/SuperchargeServer.tsx
 msgid "Every Wing lifts this server for everyone in it. Any member can give one."
@@ -8225,6 +8325,12 @@ msgstr "Traîner ensemble"
 msgid "Hangout"
 msgstr "Détente"
 
+#: src/interface/events/EventCard.tsx
+#: src/interface/events/EventsLink.tsx
+#: src/interface/events/EventsPage.tsx
+msgid "Happening now"
+msgstr "En cours"
+
 #: components/modal/modals/GiftPlus.tsx
 msgid "Happy birthday!"
 msgstr "Joyeux anniversaire !"
@@ -8528,6 +8634,10 @@ msgstr "J’ai lu le code et chaque permission, et son exécution est sans dange
 msgid "I understand the consequences"
 msgstr "Je comprends les conséquences"
 
+#: src/interface/events/EventCard.tsx
+msgid "I'm interested"
+msgstr "Ça m’intéresse"
+
 #: components/modal/modals/PolicyChange.tsx
 msgid "I've read and reviewed the changes."
 msgstr "J’ai lu et examiné les modifications."
@@ -8695,6 +8805,10 @@ msgstr "Dans un salon de serveur ou en MP avec un bot."
 msgid "In a server, a role colour wins over yours, but your font stays. On a profile card with a theme, your name turns white so it stays readable."
 msgstr "Dans un serveur, la couleur d’un rôle l’emporte sur la tienne, mais ta police reste. Sur une carte de profil avec un thème, ton nom devient blanc pour rester lisible."
 
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "In a server."
+msgstr "Dans un serveur."
+
 #: src/interface/developers/docs/GettingStarted.tsx
 #~ msgid "In about ten minutes you will have a bot that answers a slash command in your own test server."
 #~ msgstr ""
@@ -8850,6 +8964,14 @@ msgstr "Intention :"
 #: src/interface/developers/docs/DocsPortal.tsx
 msgid "Interactions over HTTP"
 msgstr "Interactions via HTTP"
+
+#: src/interface/events/EventCard.tsx
+msgid "Interested"
+msgstr "Intéressé"
+
+#: src/interface/events/EventCard.tsx
+msgid "Interested members"
+msgstr "Membres intéressés"
 
 #: components/app/interface/settings/user/plugins/text.ts
 msgid "Interface colours only. Warning colours can't change and text must stay readable."
@@ -9133,6 +9255,7 @@ msgstr "Japon"
 #: components/modal/modals/Invite.tsx
 #: components/ui/components/features/messaging/elements/Invite.tsx
 #: src/interface/Discover.tsx
+#: src/interface/events/EventCard.tsx
 msgid "Join"
 msgstr "Rejoindre"
 
@@ -9279,6 +9402,7 @@ msgstr "Garder Feather"
 
 #: components/app/interface/settings/server/roles/ServerRoleOverview.tsx
 #: components/app/interface/settings/user/profile/ReviewQueue.tsx
+#: src/interface/events/EventCard.tsx
 msgid "Keep it"
 msgstr "Le garder"
 
@@ -9728,6 +9852,10 @@ msgstr "Lien"
 msgid "Link {0}"
 msgstr "Lien {0}"
 
+#: src/interface/events/EventCard.tsx
+msgid "Link copied"
+msgstr "Lien copié"
+
 #: components/app/interface/settings/server/invites/VanityInvite.tsx
 msgid "Link name"
 msgstr "Nom du lien"
@@ -9845,6 +9973,10 @@ msgstr "Chargement"
 #: components/app/interface/settings/server/bans/ListBans.tsx
 msgid "Loading bans…"
 msgstr "Chargement des bannissements…"
+
+#: src/interface/events/EventsPage.tsx
+msgid "Loading events"
+msgstr "Chargement des événements"
 
 #: components/ui/components/features/messaging/composition/picker/GifPicker.tsx
 msgid "Loading GIFs"
@@ -10456,6 +10588,10 @@ msgstr "Markdown et émojis pris en charge."
 #: components/app/interface/settings/server/LobbySettings.tsx
 msgid "Markdown is supported."
 msgstr "Markdown pris en charge."
+
+#: components/modal/modals/ServerEventEditor.tsx
+msgid "Markdown works here."
+msgstr "Le Markdown fonctionne ici."
 
 #: components/ui/components/features/profiles/plateNames.ts
 msgid "Marshall Islands"
@@ -11663,6 +11799,10 @@ msgstr "Salon d’actualités"
 msgid "Next"
 msgstr "Suivant"
 
+#: components/ui/components/design/DateTimeField.tsx
+msgid "Next month"
+msgstr "Mois suivant"
+
 #: components/modal/modals/PlusCheckout.tsx
 msgid "Next renewal"
 msgstr "Prochain renouvellement"
@@ -11873,6 +12013,10 @@ msgstr "Aucun effet ne correspond à ta recherche."
 #: components/ui/components/features/messaging/composition/picker/EmojiPicker.tsx
 msgid "No emoji found"
 msgstr "Aucun émoji trouvé"
+
+#: src/interface/events/EventsPage.tsx
+msgid "No events planned yet"
+msgstr "Aucun événement prévu pour l’instant"
 
 #: src/interface/Designs.tsx
 msgid "No favourites yet"
@@ -12830,6 +12974,7 @@ msgstr "Seule l’équipe Zrzur peut faire cela."
 #: components/app/interface/settings/user/plugins/DeveloperTab.tsx
 #: components/app/interface/settings/user/plugins/PluginDetail.tsx
 #: components/modal/modals/Invite.tsx
+#: src/interface/events/EventCard.tsx
 msgid "Open"
 msgstr "Ouvrir"
 
@@ -12882,6 +13027,10 @@ msgstr "Ouvrir le fichier"
 msgid "Open GIF picker"
 msgstr "Ouvrir le sélecteur de GIF"
 
+#: src/interface/events/EventCard.tsx
+msgid "Open link"
+msgstr "Ouvrir le lien"
+
 #: src/interface/developers/docs/GettingStarted.tsx
 msgid "Open My applications"
 msgstr "Ouvrir Mes applications"
@@ -12930,6 +13079,10 @@ msgstr "Ouvrir le tableau de bord de relecture"
 #: components/app/interface/settings/server/LobbySettings.tsx
 msgid "Open the server on its lobby"
 msgstr "Ouvrir le serveur sur sa salle d’attente"
+
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "Open the server's events"
+msgstr "Ouvrir les événements du serveur"
 
 #: components/app/menus/MessageContextMenu.tsx
 msgid "Open thread"
@@ -13057,6 +13210,10 @@ msgstr "Demande d’ami envoyée"
 #: components/app/interface/settings/user/voice/VoiceInputOptions.tsx
 msgid "Output volume"
 msgstr "Volume de sortie"
+
+#: src/interface/events/EventCard.tsx
+msgid "Over"
+msgstr "Terminé"
 
 #: components/app/interface/settings/user/safety/SafetyDashboard.tsx
 msgid "Overturn and reverse"
@@ -13590,6 +13747,10 @@ msgstr "Nom en pixels et anneau néon."
 msgid "Place"
 msgstr "Place"
 
+#: src/interface/events/EventsPage.tsx
+msgid "Plan a game night, a talk or a meetup. Members can mark it Interested and hear when it starts."
+msgstr "Organise une soirée jeux, une conférence ou une rencontre. Les membres peuvent cliquer sur Intéressé et être prévenus au début."
+
 #: components/modal/lib/serverTemplateText.ts
 msgid "planning"
 msgstr "planification"
@@ -13887,6 +14048,10 @@ msgstr "Les aperçus sont lus même quand un son est désactivé. Les sons utili
 #: components/app/interface/settings/user/safety/SafetyDashboard.tsx
 msgid "Previous"
 msgstr "Précédent"
+
+#: components/ui/components/design/DateTimeField.tsx
+msgid "Previous month"
+msgstr "Mois précédent"
 
 #: components/app/interface/settings/user/Keybinds.tsx
 msgid "Previous or next channel"
@@ -14723,6 +14888,10 @@ msgstr "Retirer l’icône du salon"
 msgid "Remove choice"
 msgstr "Retirer le choix"
 
+#: components/modal/modals/ServerEventEditor.tsx
+msgid "Remove cover image"
+msgstr "Retirer l’image de couverture"
+
 #: src/interface/Discover.tsx
 msgid "Remove filter"
 msgstr "Retirer le filtre"
@@ -14935,6 +15104,10 @@ msgstr "Rouvert par un administrateur"
 #: components/app/interface/settings/server/audit/AuditLog.tsx
 msgid "reordered the roles"
 msgstr "a réorganisé les rôles"
+
+#: components/modal/modals/ServerEventEditor.tsx
+msgid "Repeat"
+msgstr "Répétition"
 
 #: components/app/interface/settings/server/assistant/labels.ts
 #: components/app/interface/settings/server/AutoModSettings.tsx
@@ -15733,6 +15906,7 @@ msgstr "Arabie saoudite"
 #: components/client/AgePrompt.tsx
 #: components/modal/modals/CustomStatus.tsx
 #: components/modal/modals/EditServerFolder.tsx
+#: components/modal/modals/ServerEventEditor.tsx
 #: components/modal/modals/ServerIdentity.tsx
 #: src/interface/Designs.tsx
 #: src/interface/designs/Dock.tsx
@@ -15928,6 +16102,18 @@ msgstr "Scannez avec votre téléphone, ou"
 #: components/app/interface/settings/user/plugins/DeveloperTab.tsx
 msgid "Scanner notes for the reviewer:"
 msgstr "Notes de l’analyseur pour le relecteur :"
+
+#: components/modal/modals/ServerEventEditor.tsx
+msgid "Schedule"
+msgstr "Programmer"
+
+#: components/modal/modals/ServerEventEditor.tsx
+msgid "Schedule an event"
+msgstr "Programmer un événement"
+
+#: src/interface/events/EventsPage.tsx
+msgid "Schedule event"
+msgstr "Programmer un événement"
 
 #: components/modal/lib/serverTemplateText.ts
 msgid "School club"
@@ -16589,6 +16775,10 @@ msgstr "Un serveur doit compter {0} membres pour être listé. Une promotion te 
 msgid "Sessions"
 msgstr "Sessions"
 
+#: components/modal/modals/ServerEventEditor.tsx
+msgid "Set an end time"
+msgstr "Définir une heure de fin"
+
 #: components/ui/components/design/ColourPicker.tsx
 msgid "Set colour to {colour}"
 msgstr "Définir la couleur sur {colour}"
@@ -16761,6 +16951,7 @@ msgstr "Afficher les membres séparément"
 #: components/ui/components/features/messaging/elements/TextEmbed.tsx
 #: components/ui/components/features/profiles/ProfileBio.tsx
 #: components/ui/components/features/profiles/ProfileTiles.tsx
+#: src/interface/events/EventCard.tsx
 msgid "Show more"
 msgstr "Afficher plus"
 
@@ -17196,6 +17387,10 @@ msgstr "Une erreur est survenue. Réessaie."
 msgid "Something you entered isn't valid. Check it and try again."
 msgstr "Une information saisie n’est pas valide. Vérifie-la et réessaie."
 
+#: components/modal/modals/ServerEventEditor.tsx
+msgid "Somewhere else"
+msgstr "Ailleurs"
+
 #: src/interface/Home.tsx
 #~ msgid "Soon"
 #~ msgstr ""
@@ -17427,6 +17622,10 @@ msgstr "Commence ici"
 msgid "Start Minimised to Tray"
 msgstr "Démarrer en mode minimisé dans la barre des tâches"
 
+#: src/interface/events/EventCard.tsx
+msgid "Start now"
+msgstr "Commencer maintenant"
+
 #: components/modal/modals/PlusCheckout.tsx
 #~ msgid "Start Plus"
 #~ msgstr ""
@@ -17497,6 +17696,10 @@ msgstr "Démarrage du micro…"
 #: components/app/interface/settings/user/plugins/common.tsx
 msgid "Starting…"
 msgstr "Démarrage…"
+
+#: components/modal/modals/ServerEventEditor.tsx
+msgid "Starts"
+msgstr "Début"
 
 #: components/app/interface/settings/user/account/AgeSettings.tsx
 msgid "Stated by you, not verified."
@@ -18161,6 +18364,7 @@ msgid "Text and slides stay sharp; video and games stay smooth."
 msgstr "Le texte et les diapos restent nets ; la vidéo et les jeux restent fluides."
 
 #: components/app/interface/settings/server/channels/ChannelsSettings.tsx
+#: components/modal/modals/ServerEventEditor.tsx
 msgid "Text channel"
 msgstr "Salon textuel"
 
@@ -18468,9 +18672,22 @@ msgstr "La requête pour le Discover a été refusée. Les requêtes refusées n
 msgid "The email couldn't be sent. Try again in a few minutes."
 msgstr "L’e-mail n’a pas pu être envoyé. Réessaie dans quelques minutes."
 
+#: components/modal/modals/ServerEventEditor.tsx
+msgid "The end must be after the start."
+msgstr "La fin doit être après le début."
+
 #: components/app/interface/settings/user/safety/ReportsAndStanding.tsx
 msgid "The European Commission publishes the list of certified bodies on its website."
 msgstr "La Commission européenne publie la liste des organismes certifiés sur son site web."
+
+#. placeholder {0}: (sm as EventStartedSystemMessage).title
+#: components/ui/components/features/messaging/elements/SystemMessage.tsx
+msgid "The event <0>{0}</0> has started."
+msgstr "L’événement <0>{0}</0> a commencé."
+
+#: src/interface/events/EventsPage.tsx
+msgid "The events could not be loaded."
+msgstr "Impossible de charger les événements."
 
 #: components/app/interface/settings/user/subscriptions/Subscriptions.tsx
 msgid "The Feather badge next to your name on your profile."
@@ -18704,6 +18921,10 @@ msgstr "Le niveau du serveur et ses avantages."
 #: components/app/interface/settings/ServerSettings.tsx
 msgid "The server's own emoji."
 msgstr "Les émojis propres au serveur."
+
+#: components/modal/modals/ServerEventEditor.tsx
+msgid "The start time has passed. Choose a later time."
+msgstr "L’heure de début est passée. Choisis une heure plus tardive."
 
 #: components/app/interface/settings/user/badges/MyBadges.tsx
 msgid "The team will let you know when you are in."
@@ -19043,6 +19264,14 @@ msgstr "Cette adresse e-mail ne peut pas être utilisée."
 msgid "This entry has a field of the wrong type."
 msgstr "Cette entrée a un champ du mauvais type."
 
+#: src/interface/events/EventsPage.tsx
+msgid "This event is not there any more, or you can't see where it takes place."
+msgstr "Cet événement n’existe plus, ou tu ne peux pas voir où il a lieu."
+
+#: src/interface/events/EventsPage.tsx
+msgid "This event is over"
+msgstr "Cet événement est terminé"
+
 #: components/i18n/errors.tsx
 msgid "This feature is currently disabled."
 msgstr "Cette fonctionnalité est actuellement désactivée."
@@ -19294,6 +19523,11 @@ msgstr "Cette requête est trop volumineuse. Réessaie."
 msgid "This role doesn't exist any more."
 msgstr "Ce rôle n’existe plus."
 
+#. placeholder {0}: err.max
+#: components/i18n/errors.tsx
+msgid "This server already has {0} upcoming events. Cancel or delete one first."
+msgstr "Ce serveur a déjà {0} événements à venir. Annules-en ou supprimes-en un d’abord."
+
 #: components/i18n/errors.tsx
 msgid "This server asks for accounts older than 5 minutes. You can talk here in {minutes} min."
 msgstr "Ce serveur demande des comptes de plus de 5 minutes. Tu pourras écrire ici dans {minutes} min."
@@ -19318,6 +19552,14 @@ msgstr "Ce serveur a atteint le nombre maximal de webhooks ({0}). Supprime-en un
 #: src/interface/ServerHome.tsx
 msgid "This server has no channels yet"
 msgstr "Ce serveur n’a pas encore de salons"
+
+#: components/modal/modals/ServerEventEditor.tsx
+msgid "This server has no text channel you can see."
+msgstr "Ce serveur n’a aucun salon textuel que tu peux voir."
+
+#: components/modal/modals/ServerEventEditor.tsx
+msgid "This server has no voice channel you can see."
+msgstr "Ce serveur n’a aucun salon vocal que tu peux voir."
 
 #: components/modal/modals/billingErrors.ts
 msgid "This server has to be approved for Discover first."
@@ -19518,6 +19760,10 @@ msgstr "Catégories de tickets, une par ligne"
 msgid "Tickets and direct messages in one queue."
 msgstr "Tickets et messages privés dans une seule file."
 
+#: components/ui/components/design/DateTimeField.tsx
+msgid "Time"
+msgstr "Heure"
+
 #: components/app/interface/settings/user/Language.tsx
 msgid "Time format"
 msgstr "Format de l'heure"
@@ -19607,6 +19853,7 @@ msgstr "Astuce : fais un clic droit (ou un appui long) sur un émoji pour l’a
 
 #: components/app/interface/settings/user/badges/BugReportDialog.tsx
 #: components/modal/modals/CreateThread.tsx
+#: components/modal/modals/ServerEventEditor.tsx
 msgid "Title"
 msgstr "Titre"
 
@@ -19793,6 +20040,7 @@ msgstr "Essaie un autre mot ou explore les catégories."
 #: src/interface/designs/parts.tsx
 #: src/interface/developers/docs/DocsPortal.tsx
 #: src/interface/Discover.tsx
+#: src/interface/events/EventsPage.tsx
 msgid "Try again"
 msgstr "Réessayez"
 
@@ -20284,6 +20532,10 @@ msgstr "Jusqu’à trois boutons sous le nom, chacun ouvrant un salon. Lire les 
 #: components/app/interface/settings/server/LobbySettings.tsx
 #~ msgid "Up to three buttons under the name, each opening a channel. Read the rules is added by itself when you pick a rules channel under Channels."
 #~ msgstr ""
+
+#: src/interface/events/EventsPage.tsx
+msgid "Upcoming"
+msgstr "À venir"
 
 #: components/app/interface/settings/user/plugins/PluginDetail.tsx
 msgid "Update"
@@ -20879,6 +21131,7 @@ msgid "Voice calls"
 msgstr "Appels vocaux"
 
 #: components/modal/modals/CreateChannel.tsx
+#: components/modal/modals/ServerEventEditor.tsx
 msgid "Voice channel"
 msgstr "Salon vocal"
 
@@ -21319,6 +21572,10 @@ msgstr "Quand l’un est désactivé, personne ne peut y ajouter quoi que ce soi
 msgid "When someone opens a join link to this server, their request shows up here."
 msgstr "Quand quelqu’un ouvre un lien d’invitation vers ce serveur, sa demande apparaît ici."
 
+#: src/interface/events/EventsPage.tsx
+msgid "When the managers plan something, it shows up here."
+msgstr "Quand les responsables prévoient quelque chose, ça apparaît ici."
+
 #: components/app/interface/settings/user/Keybinds.tsx
 msgid "When the message box is empty."
 msgstr "Quand la zone de message est vide."
@@ -21336,6 +21593,7 @@ msgid "When your friends come online, they show up here."
 msgstr "Quand tes amis se connectent, ils apparaissent ici."
 
 #: components/app/interface/settings/user/safety/SafetyDashboard.tsx
+#: components/modal/modals/ServerEventEditor.tsx
 msgid "Where"
 msgstr "Où"
 
@@ -21465,6 +21723,10 @@ msgstr "Qui le gère"
 #: components/modal/lib/CreateServerFlow.tsx
 msgid "Who will gather here?"
 msgstr "Qui se réunira ici ?"
+
+#: src/interface/events/EventCard.tsx
+msgid "Who's interested"
+msgstr "Qui est intéressé"
 
 #: components/app/interface/settings/server/webhooks/ServerWebhooks.tsx
 msgid "Whoever runs this Zrzur server can turn them on in its configuration."
@@ -21601,6 +21863,10 @@ msgstr "Sans bibliothèque"
 #: components/app/interface/settings/user/safety/SafetyDashboard.tsx
 msgid "Without an account"
 msgstr "Sans compte"
+
+#: components/modal/modals/ServerEventEditor.tsx
+msgid "Without an end time it ends 12 hours after it starts, or when a manager ends it."
+msgstr "Sans heure de fin, il se termine 12 heures après le début, ou quand un responsable l’arrête."
 
 #: components/app/interface/settings/server/channels/ChannelsSettings.tsx
 msgid "Without category"

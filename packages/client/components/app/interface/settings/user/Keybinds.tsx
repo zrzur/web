@@ -130,6 +130,11 @@ export function KeybindsSettings() {
           ],
         },
         {
+          title: <Trans>Open the server's events</Trans>,
+          description: <Trans>In a server.</Trans>,
+          keys: [["Alt", "Shift", "E"]],
+        },
+        {
           title: <Trans>Search Discover</Trans>,
           description: <Trans>On the Discover page.</Trans>,
           keys: [["/"]],

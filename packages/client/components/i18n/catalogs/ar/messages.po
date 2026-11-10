@@ -23934,3 +23934,250 @@ msgstr "زرزور، مباشرةً على <0>سطح مكتبك.</0>"
 #: components/app/interface/settings/user/appearance/AppearanceMenu.tsx
 #~ msgid "Zrzur's own look: very dark neutral panels with Zrzur Pink as the one accent."
 #~ msgstr "مظهر زرزور الخاص: لوحات داكنة جدًا بألوان محايدة، وزهري زرزور هو اللون المميز الوحيد."
+
+#. placeholder {0}: props.event.interested_count
+#: src/interface/events/EventCard.tsx
+msgid "{0, plural, =0 {Nobody is interested yet} one {# interested} other {# interested}}"
+msgstr "{0, plural, =0 {لا أحد مهتم بعد} zero {لا أحد مهتم بعد} one {شخص واحد مهتم} two {شخصان مهتمان} few {# أشخاص مهتمون} many {# شخصًا مهتمًا} other {# شخص مهتم}}"
+
+#. placeholder {0}: count()
+#: src/interface/events/EventsLink.tsx
+msgid "{0} upcoming"
+msgstr "{0} قادمة"
+
+#: src/interface/events/EventCard.tsx
+msgid "A text channel"
+msgstr "قناة نصية"
+
+#: src/interface/events/EventCard.tsx
+msgid "A voice channel"
+msgstr "قناة صوتية"
+
+#: components/modal/modals/ServerEventEditor.tsx
+msgid "Address or link"
+msgstr "العنوان أو الرابط"
+
+#: components/modal/modals/ServerEventEditor.tsx
+msgid "An event can last up to 31 days."
+msgstr "يمكن أن تستمر الفعالية 31 يومًا على الأكثر."
+
+#: src/interface/events/EventCard.tsx
+msgid "Cancel event"
+msgstr "إلغاء الفعالية"
+
+#: src/interface/events/EventCard.tsx
+msgid "Cancel this event? Interested members see that it is off."
+msgstr "أتريد إلغاء هذه الفعالية؟ سيرى الأعضاء المهتمون أنها أُلغيت."
+
+#: components/ui/components/design/DateTimeField.tsx
+msgid "Choose a day"
+msgstr "اختر يومًا"
+
+#: components/modal/modals/ServerEventEditor.tsx
+msgid "Choose when it starts."
+msgstr "اختر موعد البدء."
+
+#: components/modal/modals/ServerEventEditor.tsx
+msgid "Choose where it takes place."
+msgstr "اختر مكان إقامتها."
+
+#: components/modal/modals/ServerEventEditor.tsx
+msgid "Cover"
+msgstr "الغلاف"
+
+#: components/modal/modals/ServerEventEditor.tsx
+msgid "Cover image (optional)"
+msgstr "صورة الغلاف (اختيارية)"
+
+#: components/modal/modals/ServerEventEditor.tsx
+msgid "Crop cover image"
+msgstr "قص صورة الغلاف"
+
+#: src/interface/events/EventCard.tsx
+msgid "Delete this event and its interested list for good?"
+msgstr "أتريد حذف هذه الفعالية وقائمة المهتمين بها نهائيًا؟"
+
+#: components/modal/modals/ServerEventEditor.tsx
+msgid "Does not repeat"
+msgstr "لا تتكرر"
+
+#: components/modal/modals/ServerEventEditor.tsx
+msgid "Edit event"
+msgstr "تعديل الفعالية"
+
+#: src/interface/events/EventsLink.tsx
+#: src/interface/events/EventsPage.tsx
+msgctxt "scheduled events"
+msgid "Events"
+msgstr "الفعاليات"
+
+#: components/modal/modals/ServerEventEditor.tsx
+#: src/interface/events/EventCard.tsx
+msgid "Every 2 weeks"
+msgstr "كل أسبوعين"
+
+#: components/modal/modals/ServerEventEditor.tsx
+#: src/interface/events/EventCard.tsx
+msgid "Every month"
+msgstr "كل شهر"
+
+#: components/modal/modals/ServerEventEditor.tsx
+#: src/interface/events/EventCard.tsx
+msgid "Every week"
+msgstr "كل أسبوع"
+
+#: src/interface/events/EventCard.tsx
+#: src/interface/events/EventsLink.tsx
+#: src/interface/events/EventsPage.tsx
+msgid "Happening now"
+msgstr "تجري الآن"
+
+#: src/interface/events/EventCard.tsx
+msgid "I'm interested"
+msgstr "أنا مهتم"
+
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "In a server."
+msgstr "داخل سيرفر."
+
+#: src/interface/events/EventCard.tsx
+msgid "Interested"
+msgstr "مهتم"
+
+#: src/interface/events/EventCard.tsx
+msgid "Interested members"
+msgstr "الأعضاء المهتمون"
+
+#: src/interface/events/EventCard.tsx
+msgid "Link copied"
+msgstr "نُسخ الرابط"
+
+#: src/interface/events/EventsPage.tsx
+msgid "Loading events"
+msgstr "جارٍ تحميل الفعاليات"
+
+#: components/modal/modals/ServerEventEditor.tsx
+msgid "Markdown works here."
+msgstr "يمكنك استخدام Markdown هنا."
+
+#: components/ui/components/design/DateTimeField.tsx
+msgid "Next month"
+msgstr "الشهر التالي"
+
+#: src/interface/events/EventsPage.tsx
+msgid "No events planned yet"
+msgstr "لا فعاليات مخططة بعد"
+
+#: src/interface/events/EventCard.tsx
+msgid "Open link"
+msgstr "افتح الرابط"
+
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "Open the server's events"
+msgstr "افتح فعاليات السيرفر"
+
+#: src/interface/events/EventCard.tsx
+msgid "Over"
+msgstr "انتهت"
+
+#: src/interface/events/EventsPage.tsx
+msgid "Plan a game night, a talk or a meetup. Members can mark it Interested and hear when it starts."
+msgstr "خطط لأمسية ألعاب أو حديث أو لقاء. يمكن للأعضاء تمييزها بـ«مهتم» ليعلموا حين تبدأ."
+
+#: components/ui/components/design/DateTimeField.tsx
+msgid "Previous month"
+msgstr "الشهر السابق"
+
+#: components/modal/modals/ServerEventEditor.tsx
+msgid "Remove cover image"
+msgstr "إزالة صورة الغلاف"
+
+#: components/modal/modals/ServerEventEditor.tsx
+msgid "Repeat"
+msgstr "التكرار"
+
+#: components/modal/modals/ServerEventEditor.tsx
+msgid "Schedule"
+msgstr "جدولة"
+
+#: components/modal/modals/ServerEventEditor.tsx
+msgid "Schedule an event"
+msgstr "جدولة فعالية"
+
+#: src/interface/events/EventsPage.tsx
+msgid "Schedule event"
+msgstr "جدولة فعالية"
+
+#: components/modal/modals/ServerEventEditor.tsx
+msgid "Set an end time"
+msgstr "تحديد وقت الانتهاء"
+
+#: components/modal/modals/ServerEventEditor.tsx
+msgid "Somewhere else"
+msgstr "مكان آخر"
+
+#: src/interface/events/EventCard.tsx
+msgid "Start now"
+msgstr "ابدأ الآن"
+
+#: components/modal/modals/ServerEventEditor.tsx
+msgid "Starts"
+msgstr "تبدأ"
+
+#: components/modal/modals/ServerEventEditor.tsx
+msgid "The end must be after the start."
+msgstr "يجب أن يكون الانتهاء بعد البدء."
+
+#. placeholder {0}: (sm as EventStartedSystemMessage).title
+#: components/ui/components/features/messaging/elements/SystemMessage.tsx
+msgid "The event <0>{0}</0> has started."
+msgstr "بدأت الفعالية <0>{0}</0>."
+
+#: src/interface/events/EventsPage.tsx
+msgid "The events could not be loaded."
+msgstr "تعذّر تحميل الفعاليات."
+
+#: components/modal/modals/ServerEventEditor.tsx
+msgid "The start time has passed. Choose a later time."
+msgstr "مضى وقت البدء. اختر وقتًا لاحقًا."
+
+#: src/interface/events/EventsPage.tsx
+msgid "This event is not there any more, or you can't see where it takes place."
+msgstr "لم تعد هذه الفعالية موجودة، أو لا يمكنك رؤية مكان إقامتها."
+
+#: src/interface/events/EventsPage.tsx
+msgid "This event is over"
+msgstr "انتهت هذه الفعالية"
+
+#. placeholder {0}: err.max
+#: components/i18n/errors.tsx
+msgid "This server already has {0} upcoming events. Cancel or delete one first."
+msgstr "في هذا السيرفر {0} فعالية قادمة بالفعل. ألغِ إحداها أو احذفها أولًا."
+
+#: components/modal/modals/ServerEventEditor.tsx
+msgid "This server has no text channel you can see."
+msgstr "لا توجد في هذا السيرفر قناة نصية يمكنك رؤيتها."
+
+#: components/modal/modals/ServerEventEditor.tsx
+msgid "This server has no voice channel you can see."
+msgstr "لا توجد في هذا السيرفر قناة صوتية يمكنك رؤيتها."
+
+#: components/ui/components/design/DateTimeField.tsx
+msgid "Time"
+msgstr "الوقت"
+
+#: src/interface/events/EventsPage.tsx
+msgid "Upcoming"
+msgstr "القادمة"
+
+#: src/interface/events/EventsPage.tsx
+msgid "When the managers plan something, it shows up here."
+msgstr "حين يخطط المشرفون لشيء ما، سيظهر هنا."
+
+#: src/interface/events/EventCard.tsx
+msgid "Who's interested"
+msgstr "من المهتمون"
+
+#: components/modal/modals/ServerEventEditor.tsx
+msgid "Without an end time it ends 12 hours after it starts, or when a manager ends it."
+msgstr "دون وقت انتهاء، تنتهي الفعالية بعد 12 ساعة من بدئها أو حين ينهيها أحد المشرفين."

@@ -37,6 +37,11 @@ const Friends = lazy(() =>
 const You = lazy(() =>
   import("./interface/You").then((m) => ({ default: m.You })),
 );
+const EventsPage = lazy(() =>
+  import("./interface/events/EventsPage").then((m) => ({
+    default: m.EventsPage,
+  })),
+);
 const LobbyPage = lazy(() =>
   import("./interface/lobby/Lobby").then((m) => ({ default: m.LobbyPage })),
 );
@@ -157,6 +162,7 @@ const appRoutes = () => (
       <Route path="/server/:server/*">
         <Route path="/channel/:channel/*" component={ChannelPage} />
         <Route path="/lobby" component={LobbyPage} />
+        <Route path="/events/:event?" component={EventsPage} />
         <Route path="/*" component={ServerHome} />
       </Route>
       <Route path="/channel/:channel/*" component={ChannelPage} />

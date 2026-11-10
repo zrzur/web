@@ -7,6 +7,7 @@ import {
   ChannelEditSystemMessage,
   ChannelOwnershipChangeSystemMessage,
   ChannelRenamedSystemMessage,
+  EventStartedSystemMessage,
   MessagePinnedSystemMessage,
   RaidAlertSystemMessage,
   SystemMessage as SystemMessageClass,
@@ -183,6 +184,19 @@ export function SystemMessage(props: Props) {
             ({(sm as AutoModAlertSystemMessage).rule}):
           </Trans>{" "}
           <Quote>{(sm as AutoModAlertSystemMessage).content}</Quote>
+        </Match>
+        <Match when={sm.type === "event_started"}>
+          <Trans>
+            The event{" "}
+            <RenderAnchor
+              href={instance.href(
+                `/server/${params().serverId}/events/${(sm as EventStartedSystemMessage).eventId}`,
+              )}
+            >
+              {(sm as EventStartedSystemMessage).title}
+            </RenderAnchor>{" "}
+            has started.
+          </Trans>
         </Match>
         <Match when={sm.type === "raid_alert"}>
           <RaidAlert message={sm as RaidAlertSystemMessage} />
