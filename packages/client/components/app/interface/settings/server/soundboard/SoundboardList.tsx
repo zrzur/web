@@ -6,6 +6,7 @@ import {
   createSignal,
   lazy,
   onCleanup,
+  onMount,
 } from "solid-js";
 
 import { Trans, useLingui } from "@lingui/solid/macro";
@@ -20,6 +21,7 @@ import {
   SoundboardPlayer,
   createSound,
   deleteSound,
+  fetchSoundLibrary,
   followVoiceEvents,
   soundGain,
   soundUrl,
@@ -159,6 +161,15 @@ export function SoundboardList(props: { server: Server }) {
   }
   onCleanup(() => player?.stopAll());
 
+  // The Library tab opens at once: its list and its chunk are fetched while
+  // the page opens, and again on hover or focus if that failed (both are
+  // kept once fetched, so asking twice costs nothing)
+  const warmLibrary = () => {
+    fetchSoundLibrary(client()).catch(() => undefined);
+    SoundLibrary.preload().catch(() => undefined);
+  };
+  onMount(warmLibrary);
+
   // removing asks once more, in the row itself
   const [confirming, setConfirming] = createSignal<string>();
   async function remove(id: string) {
@@ -195,7 +206,7 @@ export function SoundboardList(props: { server: Server }) {
           </Show>
         }
       >
-        <Tabs>
+        <Tabs onPointerEnter={warmLibrary} onFocusIn={warmLibrary}>
           <Segmented
             aria-label={t`Where the sound comes from`}
             value={source()}

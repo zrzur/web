@@ -19848,6 +19848,10 @@ msgstr "El nivel del servidor y sus ventajas."
 msgid "The server's own emoji."
 msgstr "Los emojis propios del servidor."
 
+#: components/i18n/errors.tsx
+msgid "The sound library isn't ready yet. Try again in a minute."
+msgstr "La biblioteca de sonidos aún no está lista. Vuelve a intentarlo en un minuto."
+
 #. placeholder {0}: err.max
 #: components/i18n/errors.tsx
 msgid "The soundboard has {0} sounds already. Remove one first."

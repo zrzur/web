@@ -4,7 +4,7 @@
 
 ### Sound library
 
-- Server settings, Soundboard: a Library tab next to Upload with ready-made sounds (Kenney, CC0). Pick a category, search by name in the page language or in English, listen (one at a time, at your soundboard volume; a file is fetched only when played) and Add under the library name in your language, which you can change first. Sounds the server has show as Added; without Manage Soundboard there is no Add. The tab is its own chunk, loaded when it first opens; long lists show 24 sounds at a time. Strings in en, ar, de, fr, es, ru and zh-Hans.
+- Server settings, Soundboard: a Library tab next to Upload with ready-made sounds (Kenney, CC0). Pick a category, search by name in the page language or in English, listen (one at a time, at your soundboard volume; a file is fetched only when played) and Add under the library name in your language, which you can change first. Sounds the server has show as Added; without Manage Soundboard there is no Add. The tab is its own chunk; the Soundboard page fetches it and the library list as it opens (and again on hover or focus of the tabs if that failed), so the tab opens at once; long lists show 24 sounds at a time. A library the server has not stored yet says to try again in a minute. Strings in en, ar, de, fr, es, ru and zh-Hans.
 
 ### Design polish
 

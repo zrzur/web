@@ -508,6 +508,8 @@ export function useError() {
           return t`The soundboard has ${err.max} sounds already. Remove one first.`;
         case "SoundAlreadyAdded":
           return t`This sound is on the soundboard already.`;
+        case "SoundLibraryUnavailable":
+          return t`The sound library isn't ready yet. Try again in a minute.`;
         case "TooManySpeakers":
           return t`The stage has ${err.max} speakers already. Send one back to the listeners first.`;
         case "TooManyChannelWebhooks":

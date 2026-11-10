@@ -110,6 +110,7 @@
   "ShortPassword",
   "SignedDeliveryRejected",
   "SoundAlreadyAdded",
+  "SoundLibraryUnavailable",
   "ThreadsDisabled",
   "TooManyAttachments",
   "TooManyBotCreations",

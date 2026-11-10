@@ -20743,6 +20743,10 @@ msgstr "The server's own emoji."
 #~ msgid "The server's own emojis."
 #~ msgstr "The server's own emojis."
 
+#: components/i18n/errors.tsx
+msgid "The sound library isn't ready yet. Try again in a minute."
+msgstr "The sound library isn't ready yet. Try again in a minute."
+
 #. placeholder {0}: err.max
 #: components/i18n/errors.tsx
 msgid "The soundboard has {0} sounds already. Remove one first."

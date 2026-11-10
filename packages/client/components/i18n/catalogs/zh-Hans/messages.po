@@ -19848,6 +19848,10 @@ msgstr "服务器的等级及其特权。"
 msgid "The server's own emoji."
 msgstr "服务器自己的表情。"
 
+#: components/i18n/errors.tsx
+msgid "The sound library isn't ready yet. Try again in a minute."
+msgstr "音效库尚未就绪，请一分钟后再试。"
+
 #. placeholder {0}: err.max
 #: components/i18n/errors.tsx
 msgid "The soundboard has {0} sounds already. Remove one first."
