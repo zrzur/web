@@ -41232,7 +41232,7 @@
   "submodules": [
     {
       "path": "packages/stoat.js",
-      "commit": "25f65aa1681e0c030f1d424c6b2d39172c0d24a5"
+      "commit": "5b947fa30471aebfd2ed2405e36fa2a2c1b6ab3b"
     }
   ]
 }
