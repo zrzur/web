@@ -4,8 +4,9 @@
 
 ### Design polish
 
+* **Beta label:** with `VITE_RELEASE_CHANNEL=beta` (runtime, like `VITE_HOST`) a quiet "Beta" label sits under the logo at the top of the server list and in the settings version line; the Home tooltip says "Beta version: some things may still change." A container without the variable is a stable release; a local build without it is a beta.
 * **Login:** the three-dot bubble above the sign-in card is gone; it read as an unlabelled box or a stuck loader on phones. The button already shows waiting, done and error.
-* **Player embeds:** the click-to-load card no longer repeats the site name and the title shown by the link embed above it; "Privacy policy" is its own target next to Load, on one row (44 px on phones).
+* **Player embeds:** the click-to-load card no longer repeats the site name and the title shown by the link embed above it; "Privacy policy" is its own target next to Load (44 px on phones), and the card takes the height its words need, so nothing is cut off on a narrow screen.
 * **Profile colours:** theme and name colours use a design-system colour well instead of the browser's colour box. A unit test keeps colour, date and time inputs inside the design-system folder.
 * **Home:** the greeting is readable on the light theme (it was white on white without a profile colour); "New from creators" uses the same heading as the other Home sections.
 * **Discover and Designs:** "All", the footer links and the Designs captions are 44 px targets on phones.
