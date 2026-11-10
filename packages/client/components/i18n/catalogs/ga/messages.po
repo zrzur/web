@@ -58,6 +58,10 @@ msgstr ""
 msgid "\"{name}\" needs a number."
 msgstr ""
 
+#: components/ui/components/features/messaging/elements/PollEnded.tsx
+msgid "“{text}”"
+msgstr ""
+
 #: src/interface/channels/text/searchLabels.ts
 msgid "\"{value}\" is not a day. Write it like 2026-11-09."
 msgstr ""
@@ -161,6 +165,14 @@ msgstr ""
 #. placeholder {0}: props.rules
 #: components/app/interface/settings/server/apps/ServerAppPage.tsx
 msgid "{0, plural, one {# rule} other {# rules}}"
+msgstr ""
+
+#. placeholder {0}: answer().count ?? 0
+#. placeholder {0}: props.message.total
+#. placeholder {0}: total()
+#: components/app/interface/channels/text/poll/PollCard.tsx
+#: components/ui/components/features/messaging/elements/PollEnded.tsx
+msgid "{0, plural, one {# vote} other {# votes}}"
 msgstr ""
 
 #. placeholder {0}: items().length
@@ -881,6 +893,7 @@ msgstr ""
 #: components/app/interface/settings/server/AutoModSettings.tsx
 #: components/app/interface/settings/server/ServerEmergency.tsx
 #: components/modal/modals/CreateInvite.tsx
+#: components/modal/modals/CreatePoll.tsx
 msgid "1 hour"
 msgstr ""
 
@@ -903,6 +916,10 @@ msgstr ""
 #: components/ui/components/features/messaging/elements/Reactions.tsx
 msgid "1 person reacted"
 msgstr "D'fhreagair 1 duine"
+
+#: components/modal/modals/CreatePoll.tsx
+msgid "1 week"
+msgstr ""
 
 #: components/modal/modals/GiftPlus.tsx
 msgid "1 year"
@@ -929,12 +946,24 @@ msgstr ""
 msgid "2 to 32 characters. Your number tag may change if this name is taken."
 msgstr ""
 
+#: components/modal/modals/CreatePoll.tsx
+msgid "2 weeks"
+msgstr ""
+
 #: src/interface/developers/docs/GettingStarted.tsx
 msgid "2. Copy the token"
 msgstr ""
 
+#: components/modal/modals/CreatePoll.tsx
+msgid "24 hours"
+msgstr ""
+
 #: components/app/interface/settings/user/Language.tsx
 msgid "24-hour"
+msgstr ""
+
+#: components/modal/modals/CreatePoll.tsx
+msgid "3 days"
 msgstr ""
 
 #: src/interface/developers/docs/GettingStarted.tsx
@@ -943,6 +972,10 @@ msgstr ""
 
 #: components/modal/modals/CreateInvite.tsx
 msgid "30 minutes"
+msgstr ""
+
+#: components/modal/modals/CreatePoll.tsx
+msgid "4 hours"
 msgstr ""
 
 #: components/app/interface/settings/user/profile/CreatorStudio.tsx
@@ -977,6 +1010,10 @@ msgstr ""
 
 #: src/interface/developers/docs/GettingStarted.tsx
 msgid "7. Receive events"
+msgstr ""
+
+#: components/modal/modals/CreatePoll.tsx
+msgid "8 hours"
 msgstr ""
 
 #: src/interface/developers/docs/GettingStarted.tsx
@@ -1405,6 +1442,11 @@ msgstr ""
 msgid "Actions are never automatic. Check the evidence first. The affected user sees only the reason below, never the reporter or your notes."
 msgstr ""
 
+#. placeholder {0}: index() + 1
+#: components/modal/modals/CreatePoll.tsx
+msgid "Actions for answer {0}"
+msgstr ""
+
 #: components/app/interface/settings/server/invites/VanityInvite.tsx
 #: components/app/interface/settings/user/badges/BetaAdmin.tsx
 #: components/app/interface/settings/user/safety/ReportsAndStanding.tsx
@@ -1532,8 +1574,16 @@ msgstr ""
 msgid "Add an answer"
 msgstr ""
 
+#: components/modal/modals/CreatePoll.tsx
+msgid "Add answer"
+msgstr ""
+
 #: components/app/interface/settings/server/AutoModSettings.tsx
 msgid "Add at least one word or phrase."
+msgstr ""
+
+#: components/modal/modals/CreatePoll.tsx
+msgid "Add at least two answers."
 msgstr ""
 
 #: components/ui/components/features/messaging/elements/BotInvite.tsx
@@ -1952,6 +2002,10 @@ msgstr ""
 msgid "Allow microphone or camera access in your browser settings."
 msgstr ""
 
+#: components/modal/modals/CreatePoll.tsx
+msgid "Allow more than one answer"
+msgstr ""
+
 #: components/app/interface/settings/server/apps/RulesEditor.tsx
 msgid "Allow or deny"
 msgstr ""
@@ -2003,6 +2057,10 @@ msgstr ""
 
 #: components/app/interface/settings/user/appearance/AppearanceMenu.tsx
 msgid "AMOLED"
+msgstr ""
+
+#: components/modal/modals/CreatePoll.tsx
+msgid "An answer can be at most {ANSWER_MAX} characters."
 msgstr ""
 
 #: components/i18n/errors.tsx
@@ -2128,8 +2186,10 @@ msgstr ""
 msgid "Answer"
 msgstr ""
 
+#. placeholder {0}: index() + 1
 #. placeholder {0}: oi + 1
 #: components/app/interface/settings/server/LobbyRoleQuestionsEditor.tsx
+#: components/modal/modals/CreatePoll.tsx
 msgid "Answer {0}"
 msgstr ""
 
@@ -2155,6 +2215,8 @@ msgid "Answering interactions"
 msgstr ""
 
 #: components/app/interface/settings/server/LobbyRoleQuestionsEditor.tsx
+#: components/modal/modals/CreatePoll.tsx
+#: components/modal/modals/PollVoters.tsx
 msgid "Answers"
 msgstr ""
 
@@ -2440,6 +2502,10 @@ msgstr ""
 
 #: components/app/interface/discover/categories.tsx
 msgid "Art & Creativity"
+msgstr ""
+
+#: components/modal/modals/CreatePoll.tsx
+msgid "Ask a question and let people vote. Results update live."
 msgstr ""
 
 #: components/app/interface/settings/user/voice/ScreenShareOptions.tsx
@@ -3412,6 +3478,7 @@ msgstr ""
 #: components/modal/modals/CreateCategory.tsx
 #: components/modal/modals/CreateChannel.tsx
 #: components/modal/modals/CreateGroup.tsx
+#: components/modal/modals/CreatePoll.tsx
 #: components/modal/modals/CreateRole.tsx
 #: components/modal/modals/CreateThread.tsx
 #: components/modal/modals/CropProcess.tsx
@@ -3427,6 +3494,7 @@ msgstr ""
 #: components/modal/modals/EditPassword.tsx
 #: components/modal/modals/EditServerFolder.tsx
 #: components/modal/modals/EditUsername.tsx
+#: components/modal/modals/EndPoll.tsx
 #: components/modal/modals/ForwardMessage.tsx
 #: components/modal/modals/GiftPlus.tsx
 #: components/modal/modals/Invite.tsx
@@ -3705,6 +3773,11 @@ msgstr ""
 #. placeholder {0}: tag.name
 #: components/app/interface/settings/channel/ForumTags.tsx
 msgid "Change the emoji of {0}"
+msgstr ""
+
+#. placeholder {0}: index() + 1
+#: components/modal/modals/CreatePoll.tsx
+msgid "Change the emoji of answer {0}"
 msgstr ""
 
 #: components/app/interface/settings/user/Account.tsx
@@ -4055,6 +4128,11 @@ msgstr ""
 msgid "Choose an emoji"
 msgstr ""
 
+#. placeholder {0}: index() + 1
+#: components/modal/modals/CreatePoll.tsx
+msgid "Choose an emoji for answer {0}"
+msgstr ""
+
 #: components/app/interface/settings/user/profile/CreatorStudio.tsx
 #~ msgid "Choose an image"
 #~ msgstr ""
@@ -4112,12 +4190,22 @@ msgstr ""
 msgid "Choose new members, allowed domains, or both."
 msgstr ""
 
+#: components/app/interface/channels/text/poll/PollCard.tsx
+#: components/modal/modals/CreatePoll.tsx
+msgid "Choose one answer"
+msgstr ""
+
 #: components/app/interface/channels/text/interactions/CommandPicker.tsx
 msgid "Choose one of the listed values for \"{name}\"."
 msgstr ""
 
 #: components/app/interface/settings/user/bots/ViewBot.tsx
 msgid "Choose one of your servers to add it to."
+msgstr ""
+
+#: components/app/interface/channels/text/poll/PollCard.tsx
+#: components/modal/modals/CreatePoll.tsx
+msgid "Choose one or more answers"
 msgstr ""
 
 #: components/app/interface/settings/server/LobbySettings.tsx
@@ -4292,6 +4380,7 @@ msgstr ""
 #: components/modal/modals/JoinServer.tsx
 #: components/modal/modals/LinkWarning.tsx
 #: components/modal/modals/PolicyChange.tsx
+#: components/modal/modals/PollVoters.tsx
 #: components/modal/modals/PromoteServer.tsx
 #: components/modal/modals/ServerInfo.tsx
 #: components/modal/modals/SuperchargeServer.tsx
@@ -5048,6 +5137,10 @@ msgstr ""
 msgid "Create a plugin with this id first."
 msgstr ""
 
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "Create a poll"
+msgstr ""
+
 #: components/modal/modals/CreateWebhook.tsx
 #~ msgid "Create a webhook"
 #~ msgstr ""
@@ -5122,6 +5215,11 @@ msgstr ""
 
 #: components/app/interface/settings/user/plugins/DeveloperTab.tsx
 msgid "Create plugin"
+msgstr ""
+
+#: components/modal/modals/CreatePoll.tsx
+#: src/interface/channels/text/Composition.tsx
+msgid "Create poll"
 msgstr ""
 
 #: components/app/interface/settings/server/roles/ServerRoleOverview.tsx
@@ -6628,6 +6726,15 @@ msgstr ""
 msgid "End now: {0}"
 msgstr ""
 
+#: components/app/menus/MessageContextMenu.tsx
+#: components/modal/modals/EndPoll.tsx
+msgid "End poll"
+msgstr ""
+
+#: components/modal/modals/EndPoll.tsx
+msgid "End poll now?"
+msgstr ""
+
 #. placeholder {0}: userName(a.user)
 #: components/app/interface/settings/server/audit/AuditLog.tsx
 msgid "ended {0}'s timeout"
@@ -6648,6 +6755,11 @@ msgstr ""
 
 #: components/app/interface/settings/user/safety/ReportsAndStanding.tsx
 msgid "Ends"
+msgstr ""
+
+#. placeholder {0}: ends()
+#: components/app/interface/channels/text/poll/PollCard.tsx
+msgid "Ends {0}"
 msgstr ""
 
 #: components/ui/components/features/profiles/plateNames.ts
@@ -7238,6 +7350,10 @@ msgstr ""
 #: components/app/interface/settings/ServerSettings.tsx
 #: src/interface/channels/text/TextSearchSidebar.tsx
 msgid "Filters"
+msgstr ""
+
+#: components/app/interface/channels/text/poll/PollCard.tsx
+msgid "Final results"
 msgstr ""
 
 #: src/interface/Home.tsx
@@ -8685,6 +8801,10 @@ msgstr ""
 #. placeholder {1}: joined()
 #: components/ui/components/features/profiles/ProfileJoined.tsx
 msgid "in {0} since {1}"
+msgstr ""
+
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "In a channel where you can post polls."
 msgstr ""
 
 #: components/app/interface/settings/user/Keybinds.tsx
@@ -11086,19 +11206,24 @@ msgstr ""
 msgid "Move {0} up"
 msgstr ""
 
+#. placeholder {0}: index() + 1
 #. placeholder {0}: oi + 1
 #: components/app/interface/settings/server/LobbyRoleQuestionsEditor.tsx
+#: components/modal/modals/CreatePoll.tsx
 msgid "Move answer {0} down"
 msgstr ""
 
+#. placeholder {0}: index() + 1
 #. placeholder {0}: oi + 1
 #: components/app/interface/settings/server/LobbyRoleQuestionsEditor.tsx
+#: components/modal/modals/CreatePoll.tsx
 msgid "Move answer {0} up"
 msgstr ""
 
 #: components/app/interface/settings/server/LobbyRoleQuestionsEditor.tsx
 #: components/app/interface/settings/server/LobbySettings.tsx
 #: components/app/interface/settings/user/bots/CommandManager.tsx
+#: components/modal/modals/CreatePoll.tsx
 msgid "Move down"
 msgstr ""
 
@@ -11134,6 +11259,7 @@ msgstr ""
 #: components/app/interface/settings/server/LobbyRoleQuestionsEditor.tsx
 #: components/app/interface/settings/server/LobbySettings.tsx
 #: components/app/interface/settings/user/bots/CommandManager.tsx
+#: components/modal/modals/CreatePoll.tsx
 msgid "Move up"
 msgstr ""
 
@@ -12132,6 +12258,10 @@ msgstr ""
 msgid "Nobody can join with an invite, the custom link or Discover."
 msgstr ""
 
+#: components/modal/modals/PollVoters.tsx
+msgid "Nobody chose this answer yet."
+msgstr ""
+
 #: components/app/interface/settings/user/badges/BetaAdmin.tsx
 msgid "Nobody here yet."
 msgstr ""
@@ -12878,6 +13008,15 @@ msgstr ""
 msgid "Open file"
 msgstr ""
 
+#: components/modal/modals/CreatePoll.tsx
+msgid "Open for"
+msgstr ""
+
+#. placeholder {0}: durationLabel(duration())
+#: components/modal/modals/CreatePoll.tsx
+msgid "Open for {0}"
+msgstr ""
+
 #: src/interface/channels/text/Composition.tsx
 msgid "Open GIF picker"
 msgstr ""
@@ -13346,6 +13485,10 @@ msgstr ""
 #~ msgid "People ask to join. You or someone you allow approves them first."
 #~ msgstr ""
 
+#: components/modal/modals/CreatePoll.tsx
+msgid "People can pick several answers."
+msgstr ""
+
 #: components/app/interface/settings/user/bots/CommandManager.tsx
 msgid "People pick one of these. None: they type any value."
 msgstr ""
@@ -13781,6 +13924,10 @@ msgstr ""
 #~ msgid "Post an automatic message when members join, leave or are removed."
 #~ msgstr ""
 
+#: components/modal/modals/CreatePoll.tsx
+msgid "Post poll"
+msgstr ""
+
 #: components/modal/modals/CreateThread.tsx
 msgid "Post text"
 msgstr ""
@@ -13847,6 +13994,7 @@ msgstr ""
 #: components/app/interface/settings/user/bots/CommandManager.tsx
 #: components/app/interface/settings/user/profile/CreatorStudio.tsx
 #: components/app/interface/settings/user/profile/UserProfileEditor.tsx
+#: components/modal/modals/CreatePoll.tsx
 #: src/interface/designs/DesignPage.tsx
 msgid "Preview"
 msgstr ""
@@ -14258,6 +14406,7 @@ msgstr ""
 
 #: components/app/interface/settings/server/LobbyRoleQuestionsEditor.tsx
 #: components/app/interface/settings/server/LobbySettings.tsx
+#: components/modal/modals/CreatePoll.tsx
 msgid "Question"
 msgstr ""
 
@@ -14656,6 +14805,7 @@ msgstr ""
 #: components/app/interface/settings/user/badges/BetaAdmin.tsx
 #: components/app/interface/settings/user/plugins/PluginDetail.tsx
 #: components/app/interface/settings/user/profile/CommunityGallery.tsx
+#: components/modal/modals/CreatePoll.tsx
 #: components/modal/modals/RemoveMember.tsx
 #: components/modal/modals/ServerIdentity.tsx
 #: components/ui/components/features/messaging/composition/FileCarousel.tsx
@@ -14688,6 +14838,11 @@ msgstr ""
 
 #: components/app/interface/settings/server/LobbyRoleQuestionsEditor.tsx
 msgid "Remove answer"
+msgstr ""
+
+#. placeholder {0}: index() + 1
+#: components/modal/modals/CreatePoll.tsx
+msgid "Remove answer {0}"
 msgstr ""
 
 #: components/app/interface/settings/server/apps/ServerAppPage.tsx
@@ -16216,6 +16371,10 @@ msgstr ""
 msgid "See who is online and their status."
 msgstr ""
 
+#: components/app/interface/channels/text/poll/PollCard.tsx
+msgid "See who voted"
+msgstr ""
+
 #: components/app/interface/settings/user/profile/CreatorStudio.tsx
 msgid "Seen in both directions, never fully"
 msgstr ""
@@ -16758,6 +16917,7 @@ msgid "Show members separately"
 msgstr ""
 
 #: components/app/interface/settings/user/profile/CommunityGallery.tsx
+#: components/modal/modals/PollVoters.tsx
 #: components/ui/components/features/messaging/elements/TextEmbed.tsx
 #: components/ui/components/features/profiles/ProfileBio.tsx
 #: components/ui/components/features/profiles/ProfileTiles.tsx
@@ -18653,6 +18813,25 @@ msgstr ""
 #~ msgid "The Plus lounge in Zrzur HQ"
 #~ msgstr ""
 
+#. placeholder {0}: question()
+#. placeholder {1}: tied()
+#: components/ui/components/features/messaging/elements/PollEnded.tsx
+msgid "The poll “{0}” ended in a tie: {1}."
+msgstr ""
+
+#. placeholder {0}: question()
+#: components/ui/components/features/messaging/elements/PollEnded.tsx
+msgid "The poll “{0}” ended with no votes."
+msgstr ""
+
+#. placeholder {0}: question()
+#. placeholder {1}: winners()[0]
+#. placeholder {2}: props.message.votes
+#. placeholder {3}: total()
+#: components/ui/components/features/messaging/elements/PollEnded.tsx
+msgid "The poll “{0}” ended: “{1}” won with {2} of {3}."
+msgstr ""
+
 #: components/app/interface/settings/user/safety/SafetyDashboard.tsx
 msgid "The queue couldn't be loaded."
 msgstr ""
@@ -19276,6 +19455,10 @@ msgstr ""
 
 #: components/app/interface/settings/user/plugins/text.ts
 msgid "This plugin was removed from Zrzur. You can only uninstall it."
+msgstr ""
+
+#: components/i18n/errors.tsx
+msgid "This poll has ended. Its results are final."
 msgstr ""
 
 #: components/modal/modals/billingErrors.ts
@@ -20949,6 +21132,14 @@ msgstr ""
 msgid "Volume"
 msgstr ""
 
+#: components/modal/modals/PollVoters.tsx
+msgid "Votes"
+msgstr ""
+
+#: components/modal/modals/EndPoll.tsx
+msgid "Voting stops for everyone and the results become final. This can't be undone."
+msgstr ""
+
 #: components/app/interface/discover/ServerPage.tsx
 #: components/app/interface/settings/user/badges/MyBadges.tsx
 msgid "Waiting for approval"
@@ -21221,6 +21412,10 @@ msgstr ""
 
 #: components/app/interface/settings/user/plugins/DeveloperTab.tsx
 msgid "What changed (shown to users)"
+msgstr ""
+
+#: components/modal/modals/CreatePoll.tsx
+msgid "What do you want to ask?"
 msgstr ""
 
 #: components/app/interface/settings/user/bots/BotVerification.tsx
@@ -21638,6 +21833,10 @@ msgstr ""
 
 #: components/modal/modals/CreateGroupOrServer.tsx
 msgid "Would you like to create a new group or server?"
+msgstr ""
+
+#: components/modal/modals/CreatePoll.tsx
+msgid "Write a question."
 msgstr ""
 
 #: components/app/interface/settings/user/profile/ReviewQueue.tsx
@@ -22485,6 +22684,10 @@ msgstr ""
 
 #: components/app/interface/settings/user/plugins/DeveloperTab.tsx
 msgid "Your publishing is suspended"
+msgstr ""
+
+#: components/modal/modals/CreatePoll.tsx
+msgid "Your question"
 msgstr ""
 
 #: components/modal/modals/MFARecovery.tsx

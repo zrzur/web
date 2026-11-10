@@ -117,3 +117,9 @@ Text search is for people only; bots get `IsBot`, because it would let them read
 ## Pins and reactions
 
 `PUT /channels/{target}/messages/{msg}/reactions/{emoji}` adds the bot's reaction, and `DELETE` on the same path removes it. The emoji is written in the path, URL-encoded (`%F0%9F%91%8D` for a thumbs up), or as the id of a custom emoji. `POST /channels/{target}/messages/{msg}/pin` pins a message. `POST /channels/{target}/search` with `pinned: true` lists pinned messages. Other search is for people only: bots get `IsBot`, because it would let them read what their intents hide.
+
+## Polls {#polls}
+
+A message can carry a poll (`poll` in the message you send: a question, 2 to 10 answers, a duration of 1 to 336 hours, single or multiple choice). Posting one needs Send Messages and Send Embeds. A message's `poll` shows how many chose each answer; `poll.me` lists the answers the reader chose.
+
+Who voted is never sent to everyone: poll events (`MessagePollVoteAdd`, `MessagePollVoteRemove`, `MessagePollEnd`) carry counts only. `/channels/{target}/messages/{msg}/polls/answers/{answer}/voters` (GET) lists the people who chose an answer, a page at a time, to anyone who can read the message (View Channel and Read Message History), so a voter is visible to everyone in the channel who asks. Bots cannot vote (`IsBot`); they can read voters and end their own polls (`/channels/{target}/messages/{msg}/polls/end`, POST). A vote on a poll that has ended answers `PollEnded`.

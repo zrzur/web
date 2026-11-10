@@ -89,3 +89,9 @@ Textsuche ist nur für Menschen; Bots bekommen `IsBot`, denn sonst könnten sie 
 ## Anheften und Reaktionen {#pins-and-reactions}
 
 `PUT /channels/{target}/messages/{msg}/reactions/{emoji}` fügt die Reaktion des Bots hinzu, `DELETE` auf demselben Pfad entfernt sie. Das Emoji steht URL-kodiert im Pfad (`%F0%9F%91%8D` für Daumen hoch) oder als ID eines eigenen Emojis. `POST /channels/{target}/messages/{msg}/pin` heftet an. `POST /channels/{target}/search` mit `pinned: true` listet angeheftete Nachrichten. Andere Suche ist nur für Menschen: Bots bekommen `IsBot`, denn sonst könnten sie lesen, was ihre Intents verbergen.
+
+## Umfragen {#polls}
+
+Eine Nachricht kann eine Umfrage tragen (`poll` in der gesendeten Nachricht: eine Frage, 2 bis 10 Antworten, eine Dauer von 1 bis 336 Stunden, eine oder mehrere Antworten wählbar). Zum Posten braucht es Nachrichten senden und Embeds senden. `poll` einer Nachricht zeigt, wie viele jede Antwort gewählt haben; `poll.me` nennt die Antworten der lesenden Person.
+
+Wer abgestimmt hat, geht nie an alle: Umfrage-Events (`MessagePollVoteAdd`, `MessagePollVoteRemove`, `MessagePollEnd`) tragen nur Zahlen. `/channels/{target}/messages/{msg}/polls/answers/{answer}/voters` (GET) listet seitenweise, wer eine Antwort gewählt hat, für alle, die die Nachricht lesen können (Kanal ansehen und Nachrichtenverlauf lesen); eine Stimme ist also für alle im Kanal sichtbar, die nachsehen. Bots können nicht abstimmen (`IsBot`); sie können Abstimmende lesen und eigene Umfragen beenden (`/channels/{target}/messages/{msg}/polls/end`, POST). Eine Stimme in einer beendeten Umfrage ergibt `PollEnded`.

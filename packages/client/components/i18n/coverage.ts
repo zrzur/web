@@ -51,7 +51,7 @@ export const LANGUAGE_COVERAGE: Record<string, number> = {
   "sl": 3,
   "sq": 3,
   "sr": 3,
-  "sv": 10,
+  "sv": 9,
   "ta": 1,
   "th": 3,
   "tr": 12,

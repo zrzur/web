@@ -144,6 +144,18 @@ export type Modals =
       message: Message;
     }
   | {
+      type: "create_poll";
+      channel: Channel;
+    }
+  | {
+      type: "poll_voters";
+      message: Message;
+    }
+  | {
+      type: "end_poll";
+      message: Message;
+    }
+  | {
       type: "forward_message";
       message: Message;
     }

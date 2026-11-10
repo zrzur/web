@@ -78,6 +78,32 @@ describe("matchGlobalShortcut", () => {
   });
 });
 
+describe("Ctrl+/ on layouts where / is Shift+7", () => {
+  it("opens the shortcuts screen on a German keyboard", () => {
+    expect(
+      matchGlobalShortcut(
+        { ...key("Digit7", { ctrlKey: true, shiftKey: true }), key: "/" },
+        false,
+      ),
+    ).toBe("open_shortcuts");
+    expect(
+      matchGlobalShortcut(
+        { ...key("Digit7", { metaKey: true, shiftKey: true }), key: "/" },
+        true,
+      ),
+    ).toBe("open_shortcuts");
+  });
+
+  it("still opens it on a US keyboard", () => {
+    expect(
+      matchGlobalShortcut(
+        { ...key("Slash", { ctrlKey: true }), key: "/" },
+        false,
+      ),
+    ).toBe("open_shortcuts");
+  });
+});
+
 describe("isTypingTarget", () => {
   it("is true for text fields and editors", () => {
     expect(isTypingTarget(document.createElement("input"))).toBe(true);

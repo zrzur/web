@@ -8,6 +8,7 @@ import {
   ChannelOwnershipChangeSystemMessage,
   ChannelRenamedSystemMessage,
   MessagePinnedSystemMessage,
+  PollEndedSystemMessage,
   RaidAlertSystemMessage,
   SystemMessage as SystemMessageClass,
   TextSystemMessage,
@@ -25,6 +26,7 @@ import { UserMention } from "@revolt/markdown/plugins/mentions";
 import { useSmartParams } from "@revolt/routing";
 import { formatTime, Time } from "@revolt/ui/components/utils";
 
+import { PollEnded } from "./PollEnded";
 import { RaidAlert } from "./RaidAlert";
 
 interface Props {
@@ -183,6 +185,9 @@ export function SystemMessage(props: Props) {
             ({(sm as AutoModAlertSystemMessage).rule}):
           </Trans>{" "}
           <Quote>{(sm as AutoModAlertSystemMessage).content}</Quote>
+        </Match>
+        <Match when={sm.type === "poll_ended"}>
+          <PollEnded message={sm as PollEndedSystemMessage} />
         </Match>
         <Match when={sm.type === "raid_alert"}>
           <RaidAlert message={sm as RaidAlertSystemMessage} />

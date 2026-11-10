@@ -5,6 +5,7 @@ import {
   For,
   on,
   onCleanup,
+  onMount,
   Show,
 } from "solid-js";
 
@@ -39,8 +40,17 @@ import {
   CommandPicker,
   runActiveCommand,
 } from "@revolt/app/interface/channels/text/interactions";
+import { pollsEnabled } from "@revolt/app/interface/channels/text/poll/pollModel";
+import {
+  composerForShortcut,
+  forgetComposer,
+  isCreatePollShortcut,
+  noteComposer,
+  noteComposerFocus,
+} from "@revolt/app/interface/channels/text/poll/pollShortcut";
 import { ContextMenu, ContextMenuButton } from "@revolt/app/menus/ContextMenu";
 import Breakpoint from "@revolt/common/Breakpoint";
+import { isMac } from "@revolt/keybinds/shortcuts";
 import { RulesGate } from "./RulesGate";
 
 interface Props {
@@ -63,7 +73,7 @@ export function MessageComposition(props: Props) {
   const { t } = useLingui();
   const client = useClient();
   const { limits } = useInstance();
-  const { openModal } = useModals();
+  const { openModal, isOpen } = useModals();
 
   const isTimedOut = createIsTimedOut(
     () => props.channel.server?.member?.timeout,
@@ -307,6 +317,49 @@ export function MessageComposition(props: Props) {
     props.channel.announcement &&
     !props.channel.havePermission("ManageMessages");
 
+  // Polls: on for this server, and the person may post rich content here
+  const canPoll = createMemo(
+    () =>
+      pollsEnabled(client()) &&
+      props.channel.havePermission("SendMessage") &&
+      props.channel.havePermission("SendEmbeds") &&
+      !isTimedOut() &&
+      !announcementOnly(),
+  );
+
+  function createPoll() {
+    if (!canPoll()) return;
+    openModal({ type: "create_poll", channel: props.channel });
+  }
+
+  // Ctrl+Shift+8 (Command on a Mac) opens "Create poll" for the message box
+  // focused last (listed in the shortcuts screen); not while a window is
+  // open or something else already took the key
+  const composerKey = `${props.channel.id}:${Math.random().toString(36).slice(2)}`;
+  const mac = isMac();
+  let composerRoot: HTMLDivElement | undefined;
+  onMount(() => {
+    noteComposer(composerKey);
+    const onFocusIn = (event: FocusEvent) => {
+      if (composerRoot?.contains(event.target as Node))
+        noteComposerFocus(composerKey);
+    };
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.defaultPrevented || event.repeat) return;
+      if (!isCreatePollShortcut(event, mac)) return;
+      if (composerForShortcut() !== composerKey || isOpen()) return;
+      event.preventDefault();
+      createPoll();
+    };
+    document.addEventListener("focusin", onFocusIn);
+    window.addEventListener("keydown", onKeyDown);
+    onCleanup(() => {
+      forgetComposer(composerKey);
+      document.removeEventListener("focusin", onFocusIn);
+      window.removeEventListener("keydown", onKeyDown);
+    });
+  });
+
   function addFile(accept = "*", capture?: "environment") {
     if (!canUploadFiles()) return;
 
@@ -447,79 +500,121 @@ export function MessageComposition(props: Props) {
         setContent={setContent}
         actionsStart={
           <Show
-            when={props.channel.havePermission("UploadFiles")}
+            when={
+              props.channel.havePermission("UploadFiles") ||
+              (phone && canPoll())
+            }
             fallback={<MessageBox.InlineIcon size="short" />}
           >
             <MessageBox.InlineIcon>
               {/* phones: the plus opens a sheet of things to add; wider
-                  screens upload a file straight away */}
+                  screens upload a file with one click, and a right-click
+                  offers a file or a poll where polls can be posted */}
               <div
                 style={{ display: "contents" }}
                 use:floating={
-                  phone
+                  !phone && canPoll()
                     ? {
                         contextMenu: () => (
                           <ContextMenu>
-                            <ContextMenuButton
-                              icon={<Icon name="video-camera" size={20} />}
-                              onClick={() => addFile("image/*", "environment")}
-                            >
-                              {t`Camera`}
-                            </ContextMenuButton>
-                            <ContextMenuButton
-                              icon={<Icon name="image" size={20} />}
-                              onClick={() => addFile("image/*,video/*")}
-                            >
-                              {t`Photos and videos`}
-                            </ContextMenuButton>
-                            <ContextMenuButton
-                              icon={<Icon name="file" size={20} />}
-                              onClick={() => addFile()}
-                            >
-                              {t`Files`}
-                            </ContextMenuButton>
-                            <Show
-                              when={props.channel.havePermission("SendEmbeds")}
-                            >
+                            <Show when={canUploadFiles()}>
                               <ContextMenuButton
-                                icon={<Icon name="gif" size={20} />}
-                                onClick={() =>
-                                  pickerTriggers?.onClickGif(undefined)
-                                }
+                                icon={<Icon name="file" size={20} />}
+                                onClick={() => addFile()}
                               >
-                                {t`GIF picker`}
+                                {t`Upload file`}
                               </ContextMenuButton>
                             </Show>
                             <ContextMenuButton
-                              icon={<Icon name="microphone" size={20} />}
-                              onClick={() => setRecording(true)}
+                              icon={<Icon name="list-checks" size={20} />}
+                              onClick={createPoll}
+                              data-testid="composer-create-poll"
                             >
-                              {t`Voice message`}
-                            </ContextMenuButton>
-                            <ContextMenuButton
-                              icon={<Icon name="lightning" size={20} />}
-                              onClick={() => {
-                                const content = draft()?.content ?? "";
-                                if (!content.startsWith("/")) {
-                                  state.draft.setDraft(props.channel.id, {
-                                    content: "/" + content,
-                                  });
-                                  setInitialValue(["/" + content]);
-                                }
-                              }}
-                            >
-                              {t`Commands`}
+                              {t`Create poll`}
                             </ContextMenuButton>
                           </ContextMenu>
                         ),
-                        contextMenuHandler: "click",
                       }
-                    : {}
+                    : phone
+                      ? {
+                          contextMenu: () => (
+                            <ContextMenu>
+                              <Show when={canPoll()}>
+                                <ContextMenuButton
+                                  icon={<Icon name="list-checks" size={20} />}
+                                  onClick={createPoll}
+                                  data-testid="composer-create-poll"
+                                >
+                                  {t`Create poll`}
+                                </ContextMenuButton>
+                              </Show>
+                              <Show when={canUploadFiles()}>
+                                <ContextMenuButton
+                                  icon={<Icon name="video-camera" size={20} />}
+                                  onClick={() =>
+                                    addFile("image/*", "environment")
+                                  }
+                                >
+                                  {t`Camera`}
+                                </ContextMenuButton>
+                                <ContextMenuButton
+                                  icon={<Icon name="image" size={20} />}
+                                  onClick={() => addFile("image/*,video/*")}
+                                >
+                                  {t`Photos and videos`}
+                                </ContextMenuButton>
+                                <ContextMenuButton
+                                  icon={<Icon name="file" size={20} />}
+                                  onClick={() => addFile()}
+                                >
+                                  {t`Files`}
+                                </ContextMenuButton>
+                                <Show
+                                  when={props.channel.havePermission(
+                                    "SendEmbeds",
+                                  )}
+                                >
+                                  <ContextMenuButton
+                                    icon={<Icon name="gif" size={20} />}
+                                    onClick={() =>
+                                      pickerTriggers?.onClickGif(undefined)
+                                    }
+                                  >
+                                    {t`GIF picker`}
+                                  </ContextMenuButton>
+                                </Show>
+                                <ContextMenuButton
+                                  icon={<Icon name="microphone" size={20} />}
+                                  onClick={() => setRecording(true)}
+                                >
+                                  {t`Voice message`}
+                                </ContextMenuButton>
+                              </Show>
+                              <ContextMenuButton
+                                icon={<Icon name="lightning" size={20} />}
+                                onClick={() => {
+                                  const content = draft()?.content ?? "";
+                                  if (!content.startsWith("/")) {
+                                    state.draft.setDraft(props.channel.id, {
+                                      content: "/" + content,
+                                    });
+                                    setInitialValue(["/" + content]);
+                                  }
+                                }}
+                              >
+                                {t`Commands`}
+                              </ContextMenuButton>
+                            </ContextMenu>
+                          ),
+                          contextMenuHandler: "click",
+                        }
+                      : {}
                 }
               >
                 <IconButton
                   aria-label={phone ? t`Add` : t`Upload file`}
                   aria-haspopup={phone ? "menu" : undefined}
+                  data-testid="composer-add"
                   onPress={() => {
                     if (!phone) addFile();
                   }}
@@ -555,6 +650,25 @@ export function MessageComposition(props: Props) {
                     {/* phones with the "+" sheet: GIF lives there, so the
                         row keeps room for the message */}
                     {void (pickerTriggers = triggerProps)}
+                    {/* polls: their own button where they can be posted
+                        (phones have it in the "+" sheet) */}
+                    <Show when={canPoll() && !canSend() && !phone}>
+                      <MessageBox.InlineIcon>
+                        <IconButton
+                          aria-label={t`Create poll`}
+                          data-testid="composer-create-poll"
+                          use:floating={{
+                            tooltip: {
+                              placement: "top",
+                              content: t`Create poll`,
+                            },
+                          }}
+                          onPress={createPoll}
+                        >
+                          <Icon name="list-checks" size={22} />
+                        </IconButton>
+                      </MessageBox.InlineIcon>
+                    </Show>
                     <Show
                       when={
                         !canSend() &&

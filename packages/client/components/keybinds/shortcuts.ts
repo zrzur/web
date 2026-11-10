@@ -21,7 +21,7 @@ const GLOBAL_SHORTCUTS: Record<GlobalShortcut, Combo> = {
 type KeyLike = Pick<
   KeyboardEvent,
   "code" | "ctrlKey" | "metaKey" | "shiftKey" | "altKey"
->;
+> & { key?: string };
 
 /**
  * Which app-wide shortcut this key press is, if any
@@ -35,6 +35,9 @@ export function matchGlobalShortcut(
   const mod = mac ? event.metaKey : event.ctrlKey;
   const other = mac ? event.ctrlKey : event.metaKey;
   if (other) return;
+  // Ctrl+/ by the character: on German, Spanish, Italian and Nordic
+  // layouts "/" is Shift+7, a different key than the US slash
+  if (mod && !event.altKey && event.key === "/") return "open_shortcuts";
   return (Object.keys(GLOBAL_SHORTCUTS) as GlobalShortcut[]).find((id) => {
     const combo = GLOBAL_SHORTCUTS[id];
     return (
