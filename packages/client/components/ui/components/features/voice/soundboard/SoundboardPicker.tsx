@@ -134,7 +134,8 @@ const Panel = styled("section", {
     padding: "12px 16px",
     borderRadius: "var(--z-radius, 10px)",
     border: "1px solid var(--z-border-subtle)",
-    background: "var(--z-bg-raised)",
+    // the same surface as the call tiles below it (ParticipantTile)
+    background: "var(--z-bg-nav, var(--z-bg-sidebar))",
     color: "var(--z-fg-primary)",
     "--z-icon-color": "var(--z-icon-muted)",
   },
