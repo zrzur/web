@@ -24954,3 +24954,17 @@ msgstr "هذا ممتلئ ({0}). أزل واحدًا أولًا."
 #: components/app/interface/settings/server/soundboard/SoundboardList.tsx
 msgid "Use a single emoji."
 msgstr "استخدم إيموجي واحدًا."
+
+#: components/modal/modals/CreateChannel.tsx
+msgid "Speakers talk, everyone else listens and can ask to speak."
+msgstr "المتحدثون يتكلمون، والبقية يستمعون ويمكنهم طلب الكلمة."
+
+#. placeholder {0}: err.max
+#: components/i18n/errors.tsx
+msgid "The soundboard has {0} sounds already. Remove one first."
+msgstr "بلغ عدد الأصوات في لوحة الأصوات الحد الأقصى ({0}). أزل صوتًا أولًا."
+
+#. placeholder {0}: err.max
+#: components/i18n/errors.tsx
+msgid "The stage has {0} speakers already. Send one back to the listeners first."
+msgstr "بلغ عدد المتحدثين على المنصة الحد الأقصى ({0}). أعد أحدهم إلى المستمعين أولًا."

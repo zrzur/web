@@ -24954,3 +24954,17 @@ msgstr "Das ist voll ({0}). Entferne zuerst einen Eintrag."
 #: components/app/interface/settings/server/soundboard/SoundboardList.tsx
 msgid "Use a single emoji."
 msgstr "Verwende ein einzelnes Emoji."
+
+#: components/modal/modals/CreateChannel.tsx
+msgid "Speakers talk, everyone else listens and can ask to speak."
+msgstr "Sprechende reden, alle anderen hören zu und können um das Wort bitten."
+
+#. placeholder {0}: err.max
+#: components/i18n/errors.tsx
+msgid "The soundboard has {0} sounds already. Remove one first."
+msgstr "Das Soundboard hat schon {0} Sounds. Entferne zuerst einen."
+
+#. placeholder {0}: err.max
+#: components/i18n/errors.tsx
+msgid "The stage has {0} speakers already. Send one back to the listeners first."
+msgstr "Auf der Bühne sind schon {0} Sprechende. Schicke zuerst jemanden zu den Zuhörenden zurück."

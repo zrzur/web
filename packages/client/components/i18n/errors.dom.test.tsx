@@ -139,3 +139,25 @@ describe("useError rate limits", () => {
     expect(translate(error)).not.toMatch(/Try again in 3 seconds/);
   });
 });
+
+describe("stage and soundboard limits", () => {
+  it("a full stage says what to do", () => {
+    const error = new ApiError(400, "POST", "/channels/1/stage/speakers/2", {
+      type: "TooManySpeakers",
+      max: 50,
+    });
+    expect(translate(error)).toBe(
+      "The stage has 50 speakers already. Send one back to the listeners first.",
+    );
+  });
+
+  it("a full soundboard says what to do", () => {
+    const error = new ApiError(400, "POST", "/servers/1/soundboard", {
+      type: "TooManySounds",
+      max: 16,
+    });
+    expect(translate(error)).toBe(
+      "The soundboard has 16 sounds already. Remove one first.",
+    );
+  });
+});

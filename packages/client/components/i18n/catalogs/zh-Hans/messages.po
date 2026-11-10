@@ -547,7 +547,7 @@ msgstr "还剩 {0} / {1} 个位置，成员可以用 :名称: 的形式使用它
 
 #. placeholder {0}: Math.max(0, limit() - sounds().length)
 #. placeholder {1}: limit()
-#. placeholder {2}: SOUND_MAX_MS / 1000
+#. placeholder {2}: maxSeconds()
 #: components/app/interface/settings/server/soundboard/SoundboardList.tsx
 msgid "{0} of {1} sounds left. Up to {2} seconds each."
 msgstr "还可添加 {0}/{1} 个音效，每个最长 {2} 秒。"
@@ -18066,6 +18066,10 @@ msgstr "扬声器已拔出，正在使用默认扬声器。"
 msgid "Speakers"
 msgstr "发言人"
 
+#: components/modal/modals/CreateChannel.tsx
+msgid "Speakers talk, everyone else listens and can ask to speak."
+msgstr "发言人讲话，其他人收听，并可申请发言。"
+
 #. placeholder {0}: roles().speakers.length
 #: components/ui/components/features/voice/stage/StagePanel.tsx
 msgid "Speakers: {0}"
@@ -18782,8 +18786,8 @@ msgid "Talking (toggle on)"
 msgstr "正在说话（已开启）"
 
 #: components/modal/modals/CreateChannel.tsx
-msgid "Talks: speakers on stage, everyone else listens and can raise a hand."
-msgstr "用于讲座：发言人在台上，其他人收听并可以举手。"
+#~ msgid "Talks: speakers on stage, everyone else listens and can raise a hand."
+#~ msgstr "用于讲座：发言人在台上，其他人收听并可以举手。"
 
 #: components/ui/components/features/profiles/plateNames.ts
 msgid "Tanzania"
@@ -19548,9 +19552,19 @@ msgstr "服务器的等级及其特权。"
 msgid "The server's own emoji."
 msgstr "服务器自己的表情。"
 
+#. placeholder {0}: err.max
+#: components/i18n/errors.tsx
+msgid "The soundboard has {0} sounds already. Remove one first."
+msgstr "音效板已有 {0} 个音效。请先移除一个。"
+
 #: components/app/interface/settings/server/soundboard/SoundboardList.tsx
 msgid "The soundboard is full. Remove a sound, or add Wings to the server for more."
 msgstr "音效板已满。移除一个音效，或给服务器添加羽翼以获得更多位置。"
+
+#. placeholder {0}: err.max
+#: components/i18n/errors.tsx
+msgid "The stage has {0} speakers already. Send one back to the listeners first."
+msgstr "舞台上已有 {0} 位发言人。请先让一位回到听众。"
 
 #: components/modal/modals/ServerEventEditor.tsx
 msgid "The start time has passed. Choose a later time."
@@ -20006,8 +20020,8 @@ msgstr "这是 Zrzur 官方账号，无法添加。"
 
 #. placeholder {0}: err.max
 #: components/i18n/errors.tsx
-msgid "This is full ({0}). Remove one first."
-msgstr "已满（{0}）。请先移除一个。"
+#~ msgid "This is full ({0}). Remove one first."
+#~ msgstr "已满（{0}）。请先移除一个。"
 
 #: components/app/interface/settings/shared/Discoverable.tsx
 msgid "This is how it will look on Discover."
@@ -20290,7 +20304,7 @@ msgstr "此网站未使用安全连接（没有 HTTPS）。你所在网络中的
 msgid "This sound couldn't be played. Check your output device."
 msgstr "无法播放此声音。请检查你的输出设备。"
 
-#. placeholder {0}: SOUND_MAX_MS / 1000
+#. placeholder {0}: maxSeconds()
 #: components/app/interface/settings/server/soundboard/SoundboardList.tsx
 msgid "This sound is too long. Sounds can be up to {0} seconds."
 msgstr "音效太长。音效最长 {0} 秒。"

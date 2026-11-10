@@ -154,8 +154,7 @@ export function CreateChannelModal(
                 <Trans>Talk, video and screen sharing</Trans>
               ) : group.controls.type.value === "Stage" ? (
                 <Trans>
-                  Talks: speakers on stage, everyone else listens and can raise
-                  a hand.
+                  Speakers talk, everyone else listens and can ask to speak.
                 </Trans>
               ) : group.controls.type.value === "Announcement" ? (
                 <Trans>

@@ -123,10 +123,6 @@
     "منصة",
     "Bühne"
   ],
-  "Talks: speakers on stage, everyone else listens and can raise a hand.": [
-    "للمحاضرات: متحدثون على المنصة، والبقية يستمعون ويمكنهم رفع أيديهم.",
-    "Für Vorträge: Sprechende auf der Bühne, alle anderen hören zu und können die Hand heben."
-  ],
   "The soundboard is full. Remove a sound, or add Wings to the server for more.": [
     "لوحة الأصوات ممتلئة. أزل صوتًا، أو أضف أجنحة إلى السيرفر لمزيد من الأصوات.",
     "Das Soundboard ist voll. Entferne einen Sound oder gib dem Server Wings für mehr."
@@ -195,12 +191,20 @@
     "أزال الصوت {0}",
     "hat den Sound {0} entfernt"
   ],
-  "This is full ({0}). Remove one first.": [
-    "هذا ممتلئ ({0}). أزل واحدًا أولًا.",
-    "Das ist voll ({0}). Entferne zuerst einen Eintrag."
-  ],
   "Use a single emoji.": [
     "استخدم إيموجي واحدًا.",
     "Verwende ein einzelnes Emoji."
+  ],
+  "Speakers talk, everyone else listens and can ask to speak.": [
+    "المتحدثون يتكلمون، والبقية يستمعون ويمكنهم طلب الكلمة.",
+    "Sprechende reden, alle anderen hören zu und können um das Wort bitten."
+  ],
+  "The soundboard has {0} sounds already. Remove one first.": [
+    "بلغ عدد الأصوات في لوحة الأصوات الحد الأقصى ({0}). أزل صوتًا أولًا.",
+    "Das Soundboard hat schon {0} Sounds. Entferne zuerst einen."
+  ],
+  "The stage has {0} speakers already. Send one back to the listeners first.": [
+    "بلغ عدد المتحدثين على المنصة الحد الأقصى ({0}). أعد أحدهم إلى المستمعين أولًا.",
+    "Auf der Bühne sind schon {0} Sprechende. Schicke zuerst jemanden zu den Zuhörenden zurück."
   ]
 }

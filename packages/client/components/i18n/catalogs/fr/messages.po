@@ -547,7 +547,7 @@ msgstr "{0} emplacements restants sur {1}. Les membres les utilisent avec :nom:
 
 #. placeholder {0}: Math.max(0, limit() - sounds().length)
 #. placeholder {1}: limit()
-#. placeholder {2}: SOUND_MAX_MS / 1000
+#. placeholder {2}: maxSeconds()
 #: components/app/interface/settings/server/soundboard/SoundboardList.tsx
 msgid "{0} of {1} sounds left. Up to {2} seconds each."
 msgstr "Encore {0} sons sur {1}. Jusqu’à {2} secondes chacun."
@@ -18066,6 +18066,10 @@ msgstr "Haut-parleur débranché. Le haut-parleur par défaut est utilisé."
 msgid "Speakers"
 msgstr "Intervenants"
 
+#: components/modal/modals/CreateChannel.tsx
+msgid "Speakers talk, everyone else listens and can ask to speak."
+msgstr "Les intervenants parlent, les autres écoutent et peuvent demander la parole."
+
 #. placeholder {0}: roles().speakers.length
 #: components/ui/components/features/voice/stage/StagePanel.tsx
 msgid "Speakers: {0}"
@@ -18782,8 +18786,8 @@ msgid "Talking (toggle on)"
 msgstr "Parole active (bascule)"
 
 #: components/modal/modals/CreateChannel.tsx
-msgid "Talks: speakers on stage, everyone else listens and can raise a hand."
-msgstr "Pour les conférences : des intervenants sur scène, les autres écoutent et peuvent lever la main."
+#~ msgid "Talks: speakers on stage, everyone else listens and can raise a hand."
+#~ msgstr "Pour les conférences : des intervenants sur scène, les autres écoutent et peuvent lever la main."
 
 #: components/ui/components/features/profiles/plateNames.ts
 msgid "Tanzania"
@@ -19548,9 +19552,19 @@ msgstr "Le niveau du serveur et ses avantages."
 msgid "The server's own emoji."
 msgstr "Les émojis propres au serveur."
 
+#. placeholder {0}: err.max
+#: components/i18n/errors.tsx
+msgid "The soundboard has {0} sounds already. Remove one first."
+msgstr "La table de sons contient déjà {0} sons. Retires-en un d’abord."
+
 #: components/app/interface/settings/server/soundboard/SoundboardList.tsx
 msgid "The soundboard is full. Remove a sound, or add Wings to the server for more."
 msgstr "La table de sons est pleine. Retire un son, ou donne des Ailes au serveur pour en avoir plus."
+
+#. placeholder {0}: err.max
+#: components/i18n/errors.tsx
+msgid "The stage has {0} speakers already. Send one back to the listeners first."
+msgstr "La scène compte déjà {0} intervenants. Renvoie d’abord l’un d’eux vers les auditeurs."
 
 #: components/modal/modals/ServerEventEditor.tsx
 msgid "The start time has passed. Choose a later time."
@@ -20006,8 +20020,8 @@ msgstr "Ceci est un compte officiel de Zrzur. Il ne peut pas être ajouté."
 
 #. placeholder {0}: err.max
 #: components/i18n/errors.tsx
-msgid "This is full ({0}). Remove one first."
-msgstr "C’est complet ({0}). Retires-en un d’abord."
+#~ msgid "This is full ({0}). Remove one first."
+#~ msgstr "C’est complet ({0}). Retires-en un d’abord."
 
 #: components/app/interface/settings/shared/Discoverable.tsx
 msgid "This is how it will look on Discover."
@@ -20290,7 +20304,7 @@ msgstr "Ce site n’utilise pas de connexion sécurisée (pas de HTTPS). D’aut
 msgid "This sound couldn't be played. Check your output device."
 msgstr "Ce son n’a pas pu être lu. Vérifie ton périphérique de sortie."
 
-#. placeholder {0}: SOUND_MAX_MS / 1000
+#. placeholder {0}: maxSeconds()
 #: components/app/interface/settings/server/soundboard/SoundboardList.tsx
 msgid "This sound is too long. Sounds can be up to {0} seconds."
 msgstr "Ce son est trop long. Un son peut durer jusqu’à {0} secondes."
