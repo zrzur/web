@@ -23,10 +23,22 @@ export function eventsEnabled(client?: Client): boolean {
 }
 
 /**
+ * Events show in a server only when the node has them and a manager turned
+ * them on for this server (off in every new server)
+ */
+export function serverEventsOn(
+  client: Client | undefined,
+  server: Pick<Server, "eventsEnabled"> | undefined,
+): boolean {
+  return eventsEnabled(client) && server?.eventsEnabled === true;
+}
+
+/**
  * "Events" row at the top of a server's channel list, with the number of
  * events coming up, and the "Happening now" banner under it while one
- * runs. Ctrl+Shift+9 opens the events while the server is open (not
- * while typing or with a dialog open).
+ * runs; only in a server whose managers turned events on. Ctrl+Shift+9
+ * opens the events while the server is open (not while typing or with a
+ * dialog open).
  */
 export function EventsLink(props: { server: Server }) {
   const { t } = useLingui();
@@ -38,11 +50,12 @@ export function EventsLink(props: { server: Server }) {
   // phones: like a channel, opening the events slides the channel list away
   const showContent = () => state.appDrawer()?.setShown(true);
   const href = () => `/server/${props.server.id}/events`;
+  const shown = () => serverEventsOn(client(), props.server);
 
   // load once per server; the gateway keeps the list current afterwards
   createEffect(
     on(
-      () => [props.server.id, eventsEnabled(client())] as const,
+      () => [props.server.id, shown()] as const,
       ([id, enabled]) => {
         if (enabled && !client().serverEvents.isLoaded(id))
           void client()
@@ -57,7 +70,7 @@ export function EventsLink(props: { server: Server }) {
   const live = () => events().find((event) => event.status === "Active");
 
   const onKey = (event: KeyboardEvent) => {
-    if (!isEventsShortcut(event, isMac()) || !eventsEnabled(client())) return;
+    if (!isEventsShortcut(event, isMac()) || !shown()) return;
     const dialogOpen =
       modals.isOpen() ||
       !!document.querySelector("[role=dialog][aria-modal=true]");
@@ -70,7 +83,7 @@ export function EventsLink(props: { server: Server }) {
   onCleanup(() => document.removeEventListener("keydown", onKey));
 
   return (
-    <Show when={eventsEnabled(client())}>
+    <Show when={shown()}>
       <Row
         href={href()}
         aria-current={

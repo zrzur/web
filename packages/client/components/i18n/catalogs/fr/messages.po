@@ -1379,6 +1379,10 @@ msgstr "Un webhook publie dans un seul salon via son adresse. L’adresse n’es
 msgid "A WebM becomes an animated image when you upload it: its transparency stays, its sound is dropped, and the image must fit the limits above."
 msgstr "Un fichier WebM devient une image animée à l’envoi : sa transparence est conservée, son son est supprimé, et l’image doit respecter les limites ci-dessus."
 
+#: components/app/interface/settings/server/EventsLobbySwitches.tsx
+msgid "A welcome page; a Lobby row shows for everyone and the server opens on it."
+msgstr "Une page d'accueil ; une ligne « Salle d'attente » s'affiche pour tout le monde et le serveur s'ouvre dessus."
+
 #: components/modal/lib/CreateServerFlow.tsx
 msgid "A wider community"
 msgstr "Une communauté plus large"
@@ -3301,6 +3305,10 @@ msgstr "Jeton du bot"
 #: src/interface/developers/docs/EndpointReference.tsx
 msgid "Bot token (x-bot-token) or user session (x-session-token)."
 msgstr "Jeton de bot (x-bot-token) ou session utilisateur (x-session-token)."
+
+#: components/app/interface/settings/server/EventsLobbySwitches.tsx
+#~ msgid "Both start off. Turning one off hides its row and keeps what you made: planned events and the lobby design stay saved."
+#~ msgstr "Les deux sont désactivés au départ. En désactiver un masque sa ligne et garde ce que tu as créé : les événements prévus et le design de la salle d'attente restent enregistrés."
 
 #: components/app/interface/settings/server/pages.tsx
 #: components/app/interface/settings/ServerSettings.tsx
@@ -7285,11 +7293,22 @@ msgstr "événements"
 msgid "Events"
 msgstr "Événements"
 
+#: components/app/interface/settings/server/EventsLobbySwitches.tsx
 #: src/interface/events/EventsLink.tsx
 #: src/interface/events/EventsPage.tsx
 msgctxt "scheduled events"
 msgid "Events"
 msgstr "Événements"
+
+#: components/app/interface/settings/server/pages.tsx
+#: components/app/interface/settings/ServerSettings.tsx
+msgid "Events and lobby"
+msgstr "Événements et salle d'attente"
+
+#: components/i18n/errors.tsx
+#: src/interface/events/EventsPage.tsx
+msgid "Events are off in this server."
+msgstr "Les événements sont désactivés sur ce serveur."
 
 #: components/modal/modals/ServerEventEditor.tsx
 #: src/interface/events/EventCard.tsx
@@ -10586,6 +10605,7 @@ msgstr "Ce chargement se connecte à {0}. Cette société obtient ton adresse IP
 msgid "Loading…"
 msgstr "Chargement…"
 
+#: components/app/interface/settings/server/EventsLobbySwitches.tsx
 #: components/app/interface/settings/user/appearance/LivePreview.tsx
 #: components/modal/lib/serverTemplateText.ts
 #: src/interface/lobby/Lobby.tsx
@@ -13254,8 +13274,8 @@ msgid "Off: each site like YouTube or Spotify asks you once. On: every player lo
 msgstr "Désactivé : chaque site comme YouTube ou Spotify te le demande une fois. Activé : tous les lecteurs se chargent d’un coup et le site apprend ton adresse IP."
 
 #: components/app/interface/settings/server/LobbySettings.tsx
-msgid "Off: only managers see the lobby, as a preview."
-msgstr "Désactivé : seuls les gestionnaires voient la salle d’attente, en aperçu."
+#~ msgid "Off: only managers see the lobby, as a preview."
+#~ msgstr "Désactivé : seuls les gestionnaires voient la salle d’attente, en aperçu."
 
 #: components/app/interface/settings/user/Privacy.tsx
 #~ msgid "Off: players from YouTube, Spotify and similar sites wait for your click. On: they load at once and the site learns your IP address."
@@ -13362,6 +13382,10 @@ msgstr "Dans l’onglet Vue d’ensemble de ton application, choisis Ajouter à 
 msgid "On your profile now"
 msgstr "Sur ton profil maintenant"
 
+#: components/app/interface/settings/server/LobbySettings.tsx
+msgid "On: everyone sees a Lobby row and the server opens on it. Off: nobody sees it; you can still edit and preview it here."
+msgstr "Activé : tout le monde voit une ligne « Salle d'attente » et le serveur s'ouvre dessus. Désactivé : personne ne la voit ; tu peux quand même la modifier et la prévisualiser ici."
+
 #: components/modal/modals/DeleteBot.tsx
 #: components/modal/modals/DeleteCategory.tsx
 #: components/modal/modals/DeleteChannel.tsx
@@ -13453,8 +13477,8 @@ msgid "Only invites from people allowed to invite. No requests."
 msgstr "Uniquement les invitations de personnes autorisées à inviter. Pas de demandes."
 
 #: src/interface/lobby/LobbyLink.tsx
-msgid "Only managers see this until the lobby is turned on."
-msgstr "Seuls les gestionnaires voient ceci tant que la salle d’attente n’est pas activée."
+#~ msgid "Only managers see this until the lobby is turned on."
+#~ msgstr "Seuls les gestionnaires voient ceci tant que la salle d’attente n’est pas activée."
 
 #: components/app/interface/settings/user/bots/CommandManager.tsx
 msgid "Only members with all the permissions picked below see and use it. Your bot should still check them."
@@ -13698,6 +13722,7 @@ msgstr "Ouvrir le serveur"
 
 #: components/app/menus/ServerContextMenu.tsx
 #: components/modal/modals/PromoteServer.tsx
+#: src/interface/events/EventsPage.tsx
 msgid "Open server settings"
 msgstr "Ouvrir les paramètres du serveur"
 
@@ -13726,8 +13751,8 @@ msgid "Open the review dashboard"
 msgstr "Ouvrir le tableau de bord de relecture"
 
 #: components/app/interface/settings/server/LobbySettings.tsx
-msgid "Open the server on its lobby"
-msgstr "Ouvrir le serveur sur sa salle d’attente"
+#~ msgid "Open the server on its lobby"
+#~ msgstr "Ouvrir le serveur sur sa salle d’attente"
 
 #: components/app/interface/settings/user/Keybinds.tsx
 msgid "Open the server's events"
@@ -14420,6 +14445,10 @@ msgstr "Place"
 #: src/interface/events/EventsPage.tsx
 msgid "Plan a game night, a talk or a meetup. Members can mark it Interested and hear when it starts."
 msgstr "Organise une soirée jeux, une conférence ou une rencontre. Les membres peuvent cliquer sur Intéressé et être prévenus au début."
+
+#: components/app/interface/settings/server/EventsLobbySwitches.tsx
+msgid "Plan game nights and meetups; an Events row shows for everyone."
+msgstr "Prévois des soirées jeux et des rencontres ; une ligne « Événements » s'affiche pour tout le monde."
 
 #: components/modal/lib/serverTemplateText.ts
 msgid "planning"
@@ -16466,6 +16495,10 @@ msgstr "Rose"
 msgid "Rounded"
 msgstr "Arrondi"
 
+#: components/app/interface/settings/server/pages.tsx
+msgid "Rows at the top of the channel list. Both start off."
+msgstr "Des lignes en haut de la liste des salons. Les deux sont désactivées au départ."
+
 #: components/app/interface/settings/server/apps/RulesEditor.tsx
 msgid "Rule for"
 msgstr "Règle pour"
@@ -17807,6 +17840,10 @@ msgstr "Afficher les effets de profil"
 #: components/app/interface/settings/server/assistant/labels.ts
 msgid "Show the Hijri date"
 msgstr "Afficher la date hégirienne"
+
+#: components/app/interface/settings/server/LobbySettings.tsx
+msgid "Show the lobby"
+msgstr "Afficher la salle d'attente"
 
 #: components/app/interface/settings/server/webhooks/ServerWebhooks.tsx
 msgid "Show webhooks made by"
@@ -21116,6 +21153,10 @@ msgstr "Active-les seulement si ton bot en a besoin. Sans eux, il fonctionne tou
 #: components/app/interface/settings/user/plugins/text.ts
 msgid "Turned off."
 msgstr "Désactivé."
+
+#: components/app/interface/settings/server/EventsLobbySwitches.tsx
+msgid "Turning one off hides its row and keeps what you made: planned events and the lobby design stay saved."
+msgstr "En désactiver un masque sa ligne et garde ce que tu as créé : les événements prévus et le design de la salle d'attente restent enregistrés."
 
 #: src/interface/developers/docs/DocsPortal.tsx
 msgid "Tutorials"

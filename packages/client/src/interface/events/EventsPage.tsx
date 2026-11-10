@@ -21,7 +21,7 @@ import { Button, EmptyState, Header } from "@revolt/ui";
 import { Icon } from "@revolt/ui/icons/Icon";
 
 import { EventCard } from "./EventCard";
-import { eventsEnabled } from "./EventsLink";
+import { eventsEnabled, serverEventsOn } from "./EventsLink";
 
 /**
  * A server's events: what is happening now and what is coming up, with
@@ -39,8 +39,58 @@ export function EventsPage() {
       when={server() && eventsEnabled(client())}
       fallback={<Navigate href={server() ? `/server/${params.server}` : "/"} />}
     >
-      <Events server={server()!} focus={params.event} />
+      <Show
+        when={serverEventsOn(client(), server())}
+        fallback={<EventsOff server={server()!} />}
+      >
+        <Events server={server()!} focus={params.event} />
+      </Show>
     </Show>
+  );
+}
+
+/**
+ * The events page of a server whose managers have not turned events on:
+ * one plain line, and for managers the way to the switch
+ */
+export function EventsOff(props: { server: Server }) {
+  const { t } = useLingui();
+  const { openModal } = useModals();
+  const canManage = () => props.server.havePermission("ManageServer");
+
+  return (
+    <Page data-testid="events-off">
+      <Header placement="primary">
+        <Title>
+          <Icon name="calendar" size={20} />
+          <h1>{t({ message: "Events", context: "scheduled events" })}</h1>
+        </Title>
+      </Header>
+      <Body>
+        <Off>
+          <p>
+            <Trans>Events are off in this server.</Trans>
+          </p>
+          <Show when={canManage()}>
+            <Button
+              size="sm"
+              variant="filled"
+              data-testid="events-off-settings"
+              onPress={() =>
+                openModal({
+                  type: "settings",
+                  config: "server",
+                  initialPage: "events",
+                  context: props.server,
+                })
+              }
+            >
+              <Trans>Open server settings</Trans>
+            </Button>
+          </Show>
+        </Off>
+      </Body>
+    </Page>
   );
 }
 
@@ -266,6 +316,21 @@ const Body = styled("div", {
     marginInline: "auto",
     padding: "24px",
     _phone: { padding: "12px 16px" },
+  },
+});
+
+const Off = styled("div", {
+  base: {
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "flex-start",
+    gap: "12px",
+    padding: "16px",
+    borderRadius: "var(--z-radius-md, 14px)",
+    background: "var(--z-bg-raised)",
+    fontSize: "15px",
+    lineHeight: "24px",
+    "& p": { margin: 0 },
   },
 });
 

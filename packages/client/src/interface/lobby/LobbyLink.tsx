@@ -8,28 +8,26 @@ import { A, useLocation } from "@revolt/routing";
 import { Icon } from "@revolt/ui/icons/Icon";
 import { RulesIcon } from "@revolt/ui/icons/RulesIcon";
 
+/** The Lobby row shows only once a manager turns the lobby on */
+export function lobbyRowShown(server: Pick<Server, "lobby">): boolean {
+  return server.lobby?.enabled === true;
+}
+
 /**
- * "Lobby" row at the top of the channel list, when the server has one.
- * Managers also see it while the lobby is off, so they can find it.
+ * "Lobby" row at the top of the channel list, for everyone, once a manager
+ * turns the lobby on in Server settings (off in every new server). Managers
+ * edit and preview it from the settings while it is off.
  */
 export function LobbyLink(props: { server: Server }) {
   const { t } = useLingui();
   const location = useLocation();
   const href = () => `/server/${props.server.id}/lobby`;
-  const visible = () =>
-    props.server.lobby?.enabled || props.server.havePermission("ManageServer");
 
   return (
-    <Show when={visible()}>
+    <Show when={lobbyRowShown(props.server)}>
       <Row
         href={href()}
         aria-current={location.pathname.endsWith("/lobby") ? "page" : undefined}
-        data-off={props.server.lobby?.enabled ? undefined : ""}
-        title={
-          props.server.lobby?.enabled
-            ? undefined
-            : t`Only managers see this until the lobby is turned on.`
-        }
       >
         <Icon name="house" size={20} />
         <span>{t`Lobby`}</span>
@@ -90,11 +88,6 @@ const Row = styled(A, {
     "&[aria-current=page]": {
       background: "var(--z-nav-active)",
       color: "var(--z-fg-primary)",
-    },
-    // off: the words stay readable, the picture fades
-    "&[data-off]": {
-      color: "var(--z-fg-muted)",
-      "& > svg": { opacity: 0.6 },
     },
     // the second pinned row sits right under the first
     "&[data-tight]": { marginBlockStart: "2px" },

@@ -1379,6 +1379,10 @@ msgstr "Вебхук публикует сообщения в один кана�
 msgid "A WebM becomes an animated image when you upload it: its transparency stays, its sound is dropped, and the image must fit the limits above."
 msgstr "WebM при загрузке превращается в анимированное изображение: прозрачность сохраняется, звук удаляется, а изображение должно укладываться в указанные выше ограничения."
 
+#: components/app/interface/settings/server/EventsLobbySwitches.tsx
+msgid "A welcome page; a Lobby row shows for everyone and the server opens on it."
+msgstr "Страница приветствия: строка «Лобби» видна всем, и сервер открывается на ней."
+
 #: components/modal/lib/CreateServerFlow.tsx
 msgid "A wider community"
 msgstr "Более широкое сообщество"
@@ -3301,6 +3305,10 @@ msgstr "Токен бота"
 #: src/interface/developers/docs/EndpointReference.tsx
 msgid "Bot token (x-bot-token) or user session (x-session-token)."
 msgstr "Токен бота (x-bot-token) или сессия пользователя (x-session-token)."
+
+#: components/app/interface/settings/server/EventsLobbySwitches.tsx
+#~ msgid "Both start off. Turning one off hides its row and keeps what you made: planned events and the lobby design stay saved."
+#~ msgstr "Оба сначала выключены. Если выключить одно, его строка скроется, а созданное останется: запланированные события и оформление лобби сохраняются."
 
 #: components/app/interface/settings/server/pages.tsx
 #: components/app/interface/settings/ServerSettings.tsx
@@ -7285,11 +7293,22 @@ msgstr "события"
 msgid "Events"
 msgstr "События"
 
+#: components/app/interface/settings/server/EventsLobbySwitches.tsx
 #: src/interface/events/EventsLink.tsx
 #: src/interface/events/EventsPage.tsx
 msgctxt "scheduled events"
 msgid "Events"
 msgstr "События"
+
+#: components/app/interface/settings/server/pages.tsx
+#: components/app/interface/settings/ServerSettings.tsx
+msgid "Events and lobby"
+msgstr "События и лобби"
+
+#: components/i18n/errors.tsx
+#: src/interface/events/EventsPage.tsx
+msgid "Events are off in this server."
+msgstr "События на этом сервере выключены."
 
 #: components/modal/modals/ServerEventEditor.tsx
 #: src/interface/events/EventCard.tsx
@@ -10586,6 +10605,7 @@ msgstr "При загрузке устанавливается соединен�
 msgid "Loading…"
 msgstr "Загрузка…"
 
+#: components/app/interface/settings/server/EventsLobbySwitches.tsx
 #: components/app/interface/settings/user/appearance/LivePreview.tsx
 #: components/modal/lib/serverTemplateText.ts
 #: src/interface/lobby/Lobby.tsx
@@ -13254,8 +13274,8 @@ msgid "Off: each site like YouTube or Spotify asks you once. On: every player lo
 msgstr "Выкл.: каждый сайт, например YouTube или Spotify, спрашивает вас один раз. Вкл.: все плееры загружаются сразу, и сайт узнаёт ваш IP-адрес."
 
 #: components/app/interface/settings/server/LobbySettings.tsx
-msgid "Off: only managers see the lobby, as a preview."
-msgstr "Выкл.: лобби видят только управляющие, в режиме предпросмотра."
+#~ msgid "Off: only managers see the lobby, as a preview."
+#~ msgstr "Выкл.: лобби видят только управляющие, в режиме предпросмотра."
 
 #: components/app/interface/settings/user/Privacy.tsx
 #~ msgid "Off: players from YouTube, Spotify and similar sites wait for your click. On: they load at once and the site learns your IP address."
@@ -13362,6 +13382,10 @@ msgstr "На вкладке «Обзор» вашего приложения в�
 msgid "On your profile now"
 msgstr "Сейчас в вашем профиле"
 
+#: components/app/interface/settings/server/LobbySettings.tsx
+msgid "On: everyone sees a Lobby row and the server opens on it. Off: nobody sees it; you can still edit and preview it here."
+msgstr "Вкл.: все видят строку «Лобби», и сервер открывается на ней. Выкл.: её никто не видит, но вы можете изменять и просматривать её здесь."
+
 #: components/modal/modals/DeleteBot.tsx
 #: components/modal/modals/DeleteCategory.tsx
 #: components/modal/modals/DeleteChannel.tsx
@@ -13453,8 +13477,8 @@ msgid "Only invites from people allowed to invite. No requests."
 msgstr "Только приглашения от тех, кому разрешено приглашать. Без заявок."
 
 #: src/interface/lobby/LobbyLink.tsx
-msgid "Only managers see this until the lobby is turned on."
-msgstr "Пока лобби не включено, это видят только управляющие."
+#~ msgid "Only managers see this until the lobby is turned on."
+#~ msgstr "Пока лобби не включено, это видят только управляющие."
 
 #: components/app/interface/settings/user/bots/CommandManager.tsx
 msgid "Only members with all the permissions picked below see and use it. Your bot should still check them."
@@ -13698,6 +13722,7 @@ msgstr "Открыть сервер"
 
 #: components/app/menus/ServerContextMenu.tsx
 #: components/modal/modals/PromoteServer.tsx
+#: src/interface/events/EventsPage.tsx
 msgid "Open server settings"
 msgstr "Открыть настройки сервера"
 
@@ -13726,8 +13751,8 @@ msgid "Open the review dashboard"
 msgstr "Открыть панель проверки"
 
 #: components/app/interface/settings/server/LobbySettings.tsx
-msgid "Open the server on its lobby"
-msgstr "Открыть сервер на лобби"
+#~ msgid "Open the server on its lobby"
+#~ msgstr "Открыть сервер на лобби"
 
 #: components/app/interface/settings/user/Keybinds.tsx
 msgid "Open the server's events"
@@ -14420,6 +14445,10 @@ msgstr "Разместить"
 #: src/interface/events/EventsPage.tsx
 msgid "Plan a game night, a talk or a meetup. Members can mark it Interested and hear when it starts."
 msgstr "Запланируйте игровой вечер, лекцию или встречу. Участники могут отметить «Интересно» и узнать, когда всё начнётся."
+
+#: components/app/interface/settings/server/EventsLobbySwitches.tsx
+msgid "Plan game nights and meetups; an Events row shows for everyone."
+msgstr "Планируйте игровые вечера и встречи: строка «События» видна всем."
 
 #: components/modal/lib/serverTemplateText.ts
 msgid "planning"
@@ -16466,6 +16495,10 @@ msgstr "Розовый"
 msgid "Rounded"
 msgstr "Скруглённый"
 
+#: components/app/interface/settings/server/pages.tsx
+msgid "Rows at the top of the channel list. Both start off."
+msgstr "Строки вверху списка каналов. Обе сначала выключены."
+
 #: components/app/interface/settings/server/apps/RulesEditor.tsx
 msgid "Rule for"
 msgstr "Правило для"
@@ -17807,6 +17840,10 @@ msgstr "Показывать эффекты профиля"
 #: components/app/interface/settings/server/assistant/labels.ts
 msgid "Show the Hijri date"
 msgstr "Показывать дату по хиджре"
+
+#: components/app/interface/settings/server/LobbySettings.tsx
+msgid "Show the lobby"
+msgstr "Показывать лобби"
 
 #: components/app/interface/settings/server/webhooks/ServerWebhooks.tsx
 msgid "Show webhooks made by"
@@ -21116,6 +21153,10 @@ msgstr "Включайте их, только если они нужны бот�
 #: components/app/interface/settings/user/plugins/text.ts
 msgid "Turned off."
 msgstr "Выключено."
+
+#: components/app/interface/settings/server/EventsLobbySwitches.tsx
+msgid "Turning one off hides its row and keeps what you made: planned events and the lobby design stay saved."
+msgstr "Если выключить одно, его строка скроется, а созданное останется: запланированные события и оформление лобби сохраняются."
 
 #: src/interface/developers/docs/DocsPortal.tsx
 msgid "Tutorials"

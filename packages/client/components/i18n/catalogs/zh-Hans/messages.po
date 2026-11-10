@@ -1379,6 +1379,10 @@ msgstr "Webhook 通过其地址向某个频道发布消息。该地址只显示�
 msgid "A WebM becomes an animated image when you upload it: its transparency stays, its sound is dropped, and the image must fit the limits above."
 msgstr "上传 WebM 后会变成动画图片：保留透明度，去除声音，且图片必须符合上述限制。"
 
+#: components/app/interface/settings/server/EventsLobbySwitches.tsx
+msgid "A welcome page; a Lobby row shows for everyone and the server opens on it."
+msgstr "欢迎页面；所有人都会看到“大厅”一行，服务器会在此打开。"
+
 #: components/modal/lib/CreateServerFlow.tsx
 msgid "A wider community"
 msgstr "更广阔的社区"
@@ -3301,6 +3305,10 @@ msgstr "机器人令牌"
 #: src/interface/developers/docs/EndpointReference.tsx
 msgid "Bot token (x-bot-token) or user session (x-session-token)."
 msgstr "机器人令牌（x-bot-token）或用户会话（x-session-token）。"
+
+#: components/app/interface/settings/server/EventsLobbySwitches.tsx
+#~ msgid "Both start off. Turning one off hides its row and keeps what you made: planned events and the lobby design stay saved."
+#~ msgstr "两者一开始都是关闭的。关闭其中一个会隐藏它的那一行，但会保留你创建的内容：已计划的活动和大厅设计都会保存。"
 
 #: components/app/interface/settings/server/pages.tsx
 #: components/app/interface/settings/ServerSettings.tsx
@@ -7285,11 +7293,22 @@ msgstr "事件"
 msgid "Events"
 msgstr "事件"
 
+#: components/app/interface/settings/server/EventsLobbySwitches.tsx
 #: src/interface/events/EventsLink.tsx
 #: src/interface/events/EventsPage.tsx
 msgctxt "scheduled events"
 msgid "Events"
 msgstr "活动"
+
+#: components/app/interface/settings/server/pages.tsx
+#: components/app/interface/settings/ServerSettings.tsx
+msgid "Events and lobby"
+msgstr "活动和大厅"
+
+#: components/i18n/errors.tsx
+#: src/interface/events/EventsPage.tsx
+msgid "Events are off in this server."
+msgstr "此服务器已关闭活动。"
 
 #: components/modal/modals/ServerEventEditor.tsx
 #: src/interface/events/EventCard.tsx
@@ -10586,6 +10605,7 @@ msgstr "加载此内容会连接到 {0}。它们会获取你的 IP 地址，并�
 msgid "Loading…"
 msgstr "加载中…"
 
+#: components/app/interface/settings/server/EventsLobbySwitches.tsx
 #: components/app/interface/settings/user/appearance/LivePreview.tsx
 #: components/modal/lib/serverTemplateText.ts
 #: src/interface/lobby/Lobby.tsx
@@ -13254,8 +13274,8 @@ msgid "Off: each site like YouTube or Spotify asks you once. On: every player lo
 msgstr "关闭：YouTube、Spotify 等每个网站会各自询问你一次。开启：所有播放器一次性全部加载，这些网站会获知你的 IP 地址。"
 
 #: components/app/interface/settings/server/LobbySettings.tsx
-msgid "Off: only managers see the lobby, as a preview."
-msgstr "关闭：只有管理者能看到大厅，作为预览。"
+#~ msgid "Off: only managers see the lobby, as a preview."
+#~ msgstr "关闭：只有管理者能看到大厅，作为预览。"
 
 #: components/app/interface/settings/user/Privacy.tsx
 #~ msgid "Off: players from YouTube, Spotify and similar sites wait for your click. On: they load at once and the site learns your IP address."
@@ -13362,6 +13382,10 @@ msgstr "在你的应用的“概览”标签页中，选择“添加到服务器
 msgid "On your profile now"
 msgstr "当前在你的个人资料上"
 
+#: components/app/interface/settings/server/LobbySettings.tsx
+msgid "On: everyone sees a Lobby row and the server opens on it. Off: nobody sees it; you can still edit and preview it here."
+msgstr "开启：所有人都会看到“大厅”一行，服务器会在此打开。关闭：没有人能看到它；你仍可以在这里编辑和预览。"
+
 #: components/modal/modals/DeleteBot.tsx
 #: components/modal/modals/DeleteCategory.tsx
 #: components/modal/modals/DeleteChannel.tsx
@@ -13453,8 +13477,8 @@ msgid "Only invites from people allowed to invite. No requests."
 msgstr "仅限有邀请权限的人发出的邀请。无需申请。"
 
 #: src/interface/lobby/LobbyLink.tsx
-msgid "Only managers see this until the lobby is turned on."
-msgstr "大厅开启之前，只有管理者能看到。"
+#~ msgid "Only managers see this until the lobby is turned on."
+#~ msgstr "大厅开启之前，只有管理者能看到。"
 
 #: components/app/interface/settings/user/bots/CommandManager.tsx
 msgid "Only members with all the permissions picked below see and use it. Your bot should still check them."
@@ -13698,6 +13722,7 @@ msgstr "打开服务器"
 
 #: components/app/menus/ServerContextMenu.tsx
 #: components/modal/modals/PromoteServer.tsx
+#: src/interface/events/EventsPage.tsx
 msgid "Open server settings"
 msgstr "打开服务器设置"
 
@@ -13726,8 +13751,8 @@ msgid "Open the review dashboard"
 msgstr "打开审核面板"
 
 #: components/app/interface/settings/server/LobbySettings.tsx
-msgid "Open the server on its lobby"
-msgstr "在大厅中打开服务器"
+#~ msgid "Open the server on its lobby"
+#~ msgstr "在大厅中打开服务器"
 
 #: components/app/interface/settings/user/Keybinds.tsx
 msgid "Open the server's events"
@@ -14420,6 +14445,10 @@ msgstr "放置"
 #: src/interface/events/EventsPage.tsx
 msgid "Plan a game night, a talk or a meetup. Members can mark it Interested and hear when it starts."
 msgstr "策划一场游戏之夜、讲座或聚会。成员可以标记“感兴趣”，开始时会收到通知。"
+
+#: components/app/interface/settings/server/EventsLobbySwitches.tsx
+msgid "Plan game nights and meetups; an Events row shows for everyone."
+msgstr "计划游戏之夜和聚会；所有人都会看到“活动”一行。"
 
 #: components/modal/lib/serverTemplateText.ts
 msgid "planning"
@@ -16466,6 +16495,10 @@ msgstr "玫瑰"
 msgid "Rounded"
 msgstr "圆角"
 
+#: components/app/interface/settings/server/pages.tsx
+msgid "Rows at the top of the channel list. Both start off."
+msgstr "频道列表顶部的行。两者一开始都是关闭的。"
+
 #: components/app/interface/settings/server/apps/RulesEditor.tsx
 msgid "Rule for"
 msgstr "规则对象"
@@ -17807,6 +17840,10 @@ msgstr "显示资料特效"
 #: components/app/interface/settings/server/assistant/labels.ts
 msgid "Show the Hijri date"
 msgstr "显示伊斯兰历日期"
+
+#: components/app/interface/settings/server/LobbySettings.tsx
+msgid "Show the lobby"
+msgstr "显示大厅"
 
 #: components/app/interface/settings/server/webhooks/ServerWebhooks.tsx
 msgid "Show webhooks made by"
@@ -21116,6 +21153,10 @@ msgstr "仅在你的机器人需要时开启。即使不开启，它仍可处理
 #: components/app/interface/settings/user/plugins/text.ts
 msgid "Turned off."
 msgstr "已关闭。"
+
+#: components/app/interface/settings/server/EventsLobbySwitches.tsx
+msgid "Turning one off hides its row and keeps what you made: planned events and the lobby design stay saved."
+msgstr "关闭其中一个会隐藏它的那一行，但会保留你创建的内容：已计划的活动和大厅设计都会保存。"
 
 #: src/interface/developers/docs/DocsPortal.tsx
 msgid "Tutorials"

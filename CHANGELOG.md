@@ -2,6 +2,10 @@
 
 ## Unreleased
 
+### Events and Lobby off by default
+
+* **Events and Lobby** are off in every server. The owner (Manage Server) turns each on in Server settings > Overview > Events and lobby; the switch saves at once and the row appears at the top of everyone's channel list. The Lobby row no longer shows to managers while the lobby is off; the switch on the Lobby design page also saves at once. Events need the platform flag and the server's switch; while a server has them off its events page says "Events are off in this server." (managers get a button to the settings) and Ctrl+Shift+9 does nothing.
+
 ### Design polish
 
 * **Beta label:** with `VITE_RELEASE_CHANNEL=beta` (runtime, like `VITE_HOST`) a quiet "Beta" label sits under the logo at the top of the server list and in the settings version line; the Home tooltip says "Beta version: some things may still change." A container without the variable is a stable release; a local build without it is a beta.

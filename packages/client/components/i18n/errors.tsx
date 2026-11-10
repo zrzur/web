@@ -467,6 +467,11 @@ export function useError() {
             ) ?? t`Something you entered isn't valid. Check it and try again.`
           );
         case "FeatureDisabled":
+          if (
+            (err as unknown as { feature?: string }).feature ===
+            "server_events_server"
+          )
+            return t`Events are off in this server.`;
           return t`This feature is currently disabled.`;
         case "FileTypeNotAllowed":
           return t`This file type is not allowed.`;

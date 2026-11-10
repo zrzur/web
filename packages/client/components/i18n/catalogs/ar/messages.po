@@ -25242,3 +25242,37 @@ msgstr "زرزور، مباشرةً على <0>سطح مكتبك.</0>"
 #: components/app/interface/settings/user/appearance/AppearanceMenu.tsx
 #~ msgid "Zrzur's own look: very dark neutral panels with Zrzur Pink as the one accent."
 #~ msgstr "مظهر زرزور الخاص: لوحات داكنة جدًا بألوان محايدة، وزهري زرزور هو اللون المميز الوحيد."
+
+#: components/app/interface/settings/server/EventsLobbySwitches.tsx
+msgid "A welcome page; a Lobby row shows for everyone and the server opens on it."
+msgstr "صفحة ترحيب؛ يظهر صف «الردهة» للجميع ويُفتح السيرفر عليها."
+
+#: components/app/interface/settings/server/pages.tsx
+#: components/app/interface/settings/ServerSettings.tsx
+msgid "Events and lobby"
+msgstr "الفعاليات والردهة"
+
+#: components/i18n/errors.tsx
+#: src/interface/events/EventsPage.tsx
+msgid "Events are off in this server."
+msgstr "الفعاليات متوقفة في هذا السيرفر."
+
+#: components/app/interface/settings/server/LobbySettings.tsx
+msgid "On: everyone sees a Lobby row and the server opens on it. Off: nobody sees it; you can still edit and preview it here."
+msgstr "عند التشغيل: يرى الجميع صف «الردهة» ويُفتح السيرفر عليها. عند الإيقاف: لا يراها أحد، ويمكنك مع ذلك تعديلها ومعاينتها هنا."
+
+#: components/app/interface/settings/server/EventsLobbySwitches.tsx
+msgid "Plan game nights and meetups; an Events row shows for everyone."
+msgstr "خطّط لأمسيات الألعاب واللقاءات؛ يظهر صف «الفعاليات» للجميع."
+
+#: components/app/interface/settings/server/pages.tsx
+msgid "Rows at the top of the channel list. Both start off."
+msgstr "صفوف في أعلى قائمة القنوات. كلاهما متوقف في البداية."
+
+#: components/app/interface/settings/server/LobbySettings.tsx
+msgid "Show the lobby"
+msgstr "إظهار الردهة"
+
+#: components/app/interface/settings/server/EventsLobbySwitches.tsx
+msgid "Turning one off hides its row and keeps what you made: planned events and the lobby design stay saved."
+msgstr "إيقاف أحدهما يخفي صفه ويحتفظ بما صنعته: تبقى الفعاليات المخطط لها وتصميم الردهة محفوظة."
