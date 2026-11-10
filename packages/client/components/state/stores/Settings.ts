@@ -95,6 +95,11 @@ interface SettingsDefinition {
    * Turn streamer mode on while sharing the screen (off by default)
    */
   "privacy:streamer_on_share": boolean;
+
+  /**
+   * Streamer mode was turned on by a screen share (it goes off with it)
+   */
+  "privacy:streamer_by_share": boolean;
 }
 
 /**
@@ -126,6 +131,7 @@ const EXPECTED_TYPES: { [K in keyof SettingsDefinition]: ValueType<K> } = {
   "advanced:admin_panel": "boolean",
   "privacy:streamer_mode": "boolean",
   "privacy:streamer_on_share": "boolean",
+  "privacy:streamer_by_share": "boolean",
 };
 
 /**
@@ -154,7 +160,7 @@ export class Settings extends AbstractStore<"settings", TypeSettings> {
    * Hydrate external context
    */
   hydrate(): void {
-    /** nothing needs to be done */
+    streamerAfterLoad(this);
   }
 
   /**
@@ -259,6 +265,16 @@ export class Settings extends AbstractStore<"settings", TypeSettings> {
     this.setValue("privacy:streamer_on_share", on);
   }
 
+  /** Whether a screen share turned streamer mode on */
+  get streamerByShare(): boolean {
+    return this.get()["privacy:streamer_by_share"] === true;
+  }
+
+  set streamerByShare(on: boolean) {
+    if (on !== this.streamerByShare)
+      this.setValue("privacy:streamer_by_share", on);
+  }
+
   /**
    * Get the permission state for desktop notifications
    */
@@ -312,34 +328,62 @@ export class Settings extends AbstractStore<"settings", TypeSettings> {
 /** What a hidden detail shows instead */
 export const HIDDEN = "••••••••";
 
-/** Whether the mode was turned on by a screen share (and goes off with it) */
-let byShare = false;
+type StreamerState = {
+  settings: Pick<
+    Settings,
+    "streamerMode" | "streamerOnShare" | "streamerByShare"
+  >;
+};
 
 /**
  * Turn streamer mode on or off by hand (the switch, the shortcut, the
  * indicator). A share that ends later leaves this choice alone.
  */
-export function setStreamerMode(state: { settings: Settings }, on: boolean) {
-  byShare = false;
+export function setStreamerMode(state: StreamerState, on: boolean) {
+  state.settings.streamerByShare = false;
   state.settings.streamerMode = on;
 }
 
 /**
- * Screen sharing started or stopped
- * @param sharing Whether the screen is shared now
+ * Screen sharing starts (before the capture) or stopped. "Turned on by a
+ * share" is stored, so a reload during a share never leaves it on.
+ * @param sharing Whether the screen is (about to be) shared
  */
-export function followScreenShare(
-  state: { settings: Settings },
-  sharing: boolean,
-) {
+export function followScreenShare(state: StreamerState, sharing: boolean) {
   if (sharing) {
     if (state.settings.streamerOnShare && !state.settings.streamerMode) {
+      state.settings.streamerByShare = true;
       state.settings.streamerMode = true;
-      byShare = true;
     }
-  } else if (byShare) {
-    byShare = false;
+  } else if (state.settings.streamerByShare) {
+    state.settings.streamerByShare = false;
     state.settings.streamerMode = false;
+  }
+}
+
+/**
+ * Run a screen share toggle with streamer mode on before the capture
+ * starts, and off again when it failed or was cancelled
+ */
+export async function shareWithStreamerMode(
+  state: StreamerState,
+  wasSharing: boolean,
+  toggle: () => Promise<void>,
+  sharing: () => boolean,
+) {
+  if (!wasSharing) followScreenShare(state, true);
+  try {
+    await toggle();
+  } finally {
+    if (!sharing()) followScreenShare(state, false);
+  }
+}
+
+/** At start: a mode the last share turned on does not outlive the page */
+export function streamerAfterLoad(settings: StreamerState["settings"]) {
+  if (settings.streamerByShare) {
+    settings.streamerByShare = false;
+    settings.streamerMode = false;
   }
 }
 

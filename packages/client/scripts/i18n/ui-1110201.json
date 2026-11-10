@@ -7,6 +7,10 @@
     "<0>{keys}</0> لازم للكتابة. أضف {0} أو استخدم أحد مفاتيح F.",
     "<0>{keys}</0> wird zum Schreiben gebraucht. Nimm {0} dazu oder eine F-Taste."
   ],
+  "<0>{keys}</0> is your push-to-talk key. Add {0} or choose another key.": [
+    "<0>{keys}</0> هو مفتاح «اضغط للتحدث». أضف {0} أو اختر مفتاحًا آخر.",
+    "<0>{keys}</0> ist deine Push-to-Talk-Taste. Nimm {0} dazu oder wähle eine andere Taste."
+  ],
   "<0>{keys}</0> replaces a browser shortcut while Zrzur is open.": [
     "<0>{keys}</0> يحلّ محلّ اختصار في المتصفح ما دام زرزور مفتوحًا.",
     "<0>{keys}</0> ersetzt ein Tastenkürzel des Browsers, solange Zrzur offen ist."
@@ -74,6 +78,10 @@
   "Reset {0} to the default": [
     "أعِد «{0}» إلى الافتراضي",
     "„{0}“ auf den Standard zurücksetzen"
+  ],
+  "Same keys as “{0}” on this device, so only one of them works. Choose other keys.": [
+    "المفاتيح نفسها مستخدمة لـ «{0}» على هذا الجهاز، فيعمل أحدهما فقط. اختر مفاتيح أخرى.",
+    "Auf diesem Gerät dieselben Tasten wie „{0}“, also funktioniert nur eines davon. Wähle andere Tasten."
   ],
   "Shortcut: <0>{0}</0>. A small sign at the top shows while it is on.": [
     "الاختصار: <0>{0}</0>. تظهر علامة صغيرة في الأعلى ما دام مفعّلًا.",

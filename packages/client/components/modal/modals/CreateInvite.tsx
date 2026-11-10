@@ -229,6 +229,12 @@ export function CreateInviteModal(
             }
             data-testid="invite-link"
             onFocus={(e) => e.currentTarget.select()}
+            // streamer mode shows dots: copying the field gives the real link
+            onCopy={(e) => {
+              if (!state.settings.streamerMode || !link()) return;
+              e.preventDefault();
+              e.clipboardData?.setData("text/plain", link());
+            }}
           />
           <CopyButton
             type="button"

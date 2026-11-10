@@ -945,6 +945,11 @@ msgstr "<0>{keys}</0> is already used for “{0}”. Swap them?"
 msgid "<0>{keys}</0> is needed for typing. Add {0} or use an F key."
 msgstr "<0>{keys}</0> is needed for typing. Add {0} or use an F key."
 
+#. placeholder {0}: mac ? "⌘" : "Ctrl"
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "<0>{keys}</0> is your push-to-talk key. Add {0} or choose another key."
+msgstr "<0>{keys}</0> is your push-to-talk key. Add {0} or choose another key."
+
 #: components/app/interface/settings/user/Keybinds.tsx
 msgid "<0>{keys}</0> replaces a browser shortcut while Zrzur is open."
 msgstr "<0>{keys}</0> replaces a browser shortcut while Zrzur is open."
@@ -17110,6 +17115,11 @@ msgstr "Saint Vincent and the Grenadines"
 msgid "Salma"
 msgstr "Salma"
 
+#. placeholder {0}: props.names[other()]()
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "Same keys as “{0}” on this device, so only one of them works. Choose other keys."
+msgstr "Same keys as “{0}” on this device, so only one of them works. Choose other keys."
+
 #: components/app/interface/settings/server/AutoModSettings.tsx
 msgid "Same text in channels"
 msgstr "Same text in channels"
@@ -19887,7 +19897,7 @@ msgid "That name belongs to someone in this server."
 msgstr "That name belongs to someone in this server."
 
 #. placeholder {0}: props.client.user!.username
-#. placeholder {1}: newTag()
+#. placeholder {1}: tag(newTag())
 #: components/modal/modals/EditUsername.tsx
 msgid "That name was already taken with your previous number, so you are now <0>{0}#{1}</0>."
 msgstr "That name was already taken with your previous number, so you are now <0>{0}#{1}</0>."
@@ -22931,7 +22941,7 @@ msgstr "We only use it to verify your account and help you get back in if you're
 msgid "We prepare it in the background and e-mail you when it's ready. You can ask once every 24 hours."
 msgstr "We prepare it in the background and e-mail you when it's ready. You can ask once every 24 hours."
 
-#. placeholder {0}: sentTo()
+#. placeholder {0}: state.settings.streamerMode ? "•••@•••" : sentTo()
 #: components/modal/modals/EditEmail.tsx
 msgid "We sent a confirmation link to <0>{0}</0>. Your login email changes once you open it."
 msgstr "We sent a confirmation link to <0>{0}</0>. Your login email changes once you open it."

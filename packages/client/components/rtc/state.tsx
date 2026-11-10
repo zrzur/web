@@ -34,7 +34,11 @@ import {
   ScreenShareQualityName,
   Voice as VoiceSettings,
 } from "@revolt/state/stores/Voice";
-import { followScreenShare, setStreamerMode } from "@revolt/state/streamer";
+import {
+  followScreenShare,
+  setStreamerMode,
+  shareWithStreamerMode,
+} from "@revolt/state/streamer";
 import { VoiceCallCardContext } from "@revolt/ui/components/features/voice/callCard/VoiceCallCard";
 
 import { Device, useDevice } from "@revolt/common";
@@ -894,7 +898,23 @@ class Voice {
     return { resolution: [limit[0], limit[1]], framerate: fps };
   }
 
+  /**
+   * Set by VoiceContext: runs a share toggle with streamer mode on before
+   * the capture starts (and off again if it fails)
+   */
+  shareWrapper?: (
+    wasSharing: boolean,
+    run: () => Promise<void>,
+  ) => Promise<void>;
+
   async toggleScreenshare() {
+    const run = () => this.#toggleScreenshare();
+    return this.shareWrapper
+      ? this.shareWrapper(this.screenshare(), run)
+      : run();
+  }
+
+  async #toggleScreenshare() {
     const room = this.room();
     if (!room) throw "invalid state";
     if (room.state !== RoomState.Connected) return;
@@ -1323,6 +1343,8 @@ export function VoiceContext(props: { children: JSX.Element }) {
 
   // streamer mode on while sharing the screen, if the person asked for it;
   // off again when sharing stops, unless they turned it on themselves
+  voice.shareWrapper = (wasSharing, run) =>
+    shareWithStreamerMode(state, wasSharing, run, voice.screenshare);
   createEffect(
     on(voice.screenshare, (sharing) => followScreenShare(state, sharing)),
   );

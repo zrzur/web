@@ -1,7 +1,7 @@
 import { Trans } from "@lingui/solid/macro";
 
 import { deviceMac } from "@revolt/keybinds/active";
-import { comboKeys } from "@revolt/keybinds/keymap";
+import { comboKeys } from "@revolt/keybinds/keymapRules";
 import { comboLabel } from "@revolt/keybinds/shortcuts";
 import { useState } from "@revolt/state";
 import { setStreamerMode } from "@revolt/state/streamer";

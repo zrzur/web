@@ -12,10 +12,10 @@ import {
 import { SetStoreFunction, createStore } from "solid-js/store";
 
 import { createDateNow } from "@solid-primitives/date";
-import equal from "fast-deep-equal";
 
 import { SlideDrawer } from "@revolt/ui/components/navigation/SlideDrawer";
 
+import { applySaved } from "./applySaved";
 import { diskGet, diskSet } from "./disk";
 import { pageStorage, stashPending, takePending } from "./pendingWrites";
 import { AbstractStore, Store } from "./stores";
@@ -250,15 +250,20 @@ export class State {
       if (pending) {
         this.write(store.getKey(), store.clean(pending as Parameters<typeof store.clean>[0]));
       } else if (data) {
-        // validate the incoming data
-        const cleanData = store.clean(data);
-
-        if (!equal(data, cleanData)) {
-          // write back to disk if it has changed
-          this.write(store.getKey(), cleanData);
-        } else {
-          this.setStore(store.getKey(), data);
-        }
+        // validated; a cleaned copy is saved here only, never sent to sync
+        applySaved(
+          store.getKey(),
+          data as Store[keyof Store],
+          (input) =>
+            store.clean(
+              input as Parameters<typeof store.clean>[0],
+            ) as Store[keyof Store],
+          {
+            setStore: (key, value) =>
+              (this.setStore as (...args: unknown[]) => void)(key, value),
+            saveHere: (key) => this.persist(key),
+          },
+        );
       }
     }
 

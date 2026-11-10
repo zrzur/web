@@ -945,6 +945,11 @@ msgstr "<0>{keys}</0> مستخدم بالفعل لـ «{0}». هل تريد ال
 msgid "<0>{keys}</0> is needed for typing. Add {0} or use an F key."
 msgstr "<0>{keys}</0> لازم للكتابة. أضف {0} أو استخدم أحد مفاتيح F."
 
+#. placeholder {0}: mac ? "⌘" : "Ctrl"
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "<0>{keys}</0> is your push-to-talk key. Add {0} or choose another key."
+msgstr "<0>{keys}</0> هو مفتاح «اضغط للتحدث». أضف {0} أو اختر مفتاحًا آخر."
+
 #: components/app/interface/settings/user/Keybinds.tsx
 msgid "<0>{keys}</0> replaces a browser shortcut while Zrzur is open."
 msgstr "<0>{keys}</0> يحلّ محلّ اختصار في المتصفح ما دام زرزور مفتوحًا."
@@ -17107,6 +17112,11 @@ msgstr "سانت فنسنت وجزر غرينادين"
 msgid "Salma"
 msgstr "سلمى"
 
+#. placeholder {0}: props.names[other()]()
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "Same keys as “{0}” on this device, so only one of them works. Choose other keys."
+msgstr "المفاتيح نفسها مستخدمة لـ «{0}» على هذا الجهاز، فيعمل أحدهما فقط. اختر مفاتيح أخرى."
+
 #: components/app/interface/settings/server/AutoModSettings.tsx
 msgid "Same text in channels"
 msgstr "النص نفسه في عدد قنوات"
@@ -19884,7 +19894,7 @@ msgid "That name belongs to someone in this server."
 msgstr "هذا الاسم يخص شخصًا في هذا السيرفر."
 
 #. placeholder {0}: props.client.user!.username
-#. placeholder {1}: newTag()
+#. placeholder {1}: tag(newTag())
 #: components/modal/modals/EditUsername.tsx
 msgid "That name was already taken with your previous number, so you are now <0>{0}#{1}</0>."
 msgstr "كان هذا الاسم مستخدمًا مع رقمك السابق، لذا أصبح اسمك الآن <0>{0}#{1}</0>."
@@ -22928,7 +22938,7 @@ msgstr "نحن نستخدمه فقط للتحقق من حسابك ومساعدت
 msgid "We prepare it in the background and e-mail you when it's ready. You can ask once every 24 hours."
 msgstr "نجهّزها في الخلفية ونراسلك بالبريد الإلكتروني عندما تصبح جاهزة. يمكنك الطلب مرة واحدة كل 24 ساعة."
 
-#. placeholder {0}: sentTo()
+#. placeholder {0}: state.settings.streamerMode ? "•••@•••" : sentTo()
 #: components/modal/modals/EditEmail.tsx
 msgid "We sent a confirmation link to <0>{0}</0>. Your login email changes once you open it."
 msgstr "أرسلنا رابط تأكيد إلى <0>{0}</0>. يتغيّر بريد تسجيل الدخول بمجرد فتحه."

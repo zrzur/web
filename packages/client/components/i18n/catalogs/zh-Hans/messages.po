@@ -924,6 +924,11 @@ msgstr "<0>{keys}</0> 已用于“{0}”。要互换吗？"
 msgid "<0>{keys}</0> is needed for typing. Add {0} or use an F key."
 msgstr "<0>{keys}</0> 用于输入文字。请加上 {0}，或使用 F 键。"
 
+#. placeholder {0}: mac ? "⌘" : "Ctrl"
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "<0>{keys}</0> is your push-to-talk key. Add {0} or choose another key."
+msgstr "<0>{keys}</0> 是你的按键说话按键。请加上 {0}，或选择其他按键。"
+
 #: components/app/interface/settings/user/Keybinds.tsx
 msgid "<0>{keys}</0> replaces a browser shortcut while Zrzur is open."
 msgstr "Zrzur 打开时，<0>{keys}</0> 会替代浏览器的快捷键。"
@@ -16326,6 +16331,11 @@ msgstr "圣文森特和格林纳丁斯"
 msgid "Salma"
 msgstr "萨尔玛"
 
+#. placeholder {0}: props.names[other()]()
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "Same keys as “{0}” on this device, so only one of them works. Choose other keys."
+msgstr "在此设备上与“{0}”的按键相同，因此只有一个有效。请选择其他按键。"
+
 #: components/app/interface/settings/server/AutoModSettings.tsx
 msgid "Same text in channels"
 msgstr "跨频道重复文本"
@@ -19008,7 +19018,7 @@ msgid "That name belongs to someone in this server."
 msgstr "此服务器中已有人使用该名称。"
 
 #. placeholder {0}: props.client.user!.username
-#. placeholder {1}: newTag()
+#. placeholder {1}: tag(newTag())
 #: components/modal/modals/EditUsername.tsx
 msgid "That name was already taken with your previous number, so you are now <0>{0}#{1}</0>."
 msgstr "该名称在你之前的编号下已被占用，所以你现在是 <0>{0}#{1}</0>。"
@@ -21898,7 +21908,7 @@ msgstr "我们只用它来验证你的账号，并在你被锁定时帮你重新
 msgid "We prepare it in the background and e-mail you when it's ready. You can ask once every 24 hours."
 msgstr "我们会在后台准备，完成后通过邮件通知你。每 24 小时可申请一次。"
 
-#. placeholder {0}: sentTo()
+#. placeholder {0}: state.settings.streamerMode ? "•••@•••" : sentTo()
 #: components/modal/modals/EditEmail.tsx
 msgid "We sent a confirmation link to <0>{0}</0>. Your login email changes once you open it."
 msgstr "我们已向 <0>{0}</0> 发送了确认链接。打开链接后，你的登录邮箱才会更改。"

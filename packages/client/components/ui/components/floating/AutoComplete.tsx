@@ -81,7 +81,10 @@ export function AutoComplete(
                     <>
                       {" "}
                       @{match.user.user?.username}#
-                      {match.user.user?.discriminator}
+                      {/* the own tag stays off screen in streamer mode */}
+                      {state.settings.streamerMode && match.user.user?.self
+                        ? "••••"
+                        : match.user.user?.discriminator}
                     </>
                   )}
               </Entry>

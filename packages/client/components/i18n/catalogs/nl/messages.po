@@ -924,6 +924,11 @@ msgstr ""
 msgid "<0>{keys}</0> is needed for typing. Add {0} or use an F key."
 msgstr ""
 
+#. placeholder {0}: mac ? "⌘" : "Ctrl"
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "<0>{keys}</0> is your push-to-talk key. Add {0} or choose another key."
+msgstr ""
+
 #: components/app/interface/settings/user/Keybinds.tsx
 msgid "<0>{keys}</0> replaces a browser shortcut while Zrzur is open."
 msgstr ""
@@ -16326,6 +16331,11 @@ msgstr ""
 msgid "Salma"
 msgstr ""
 
+#. placeholder {0}: props.names[other()]()
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "Same keys as “{0}” on this device, so only one of them works. Choose other keys."
+msgstr ""
+
 #: components/app/interface/settings/server/AutoModSettings.tsx
 msgid "Same text in channels"
 msgstr ""
@@ -19008,7 +19018,7 @@ msgid "That name belongs to someone in this server."
 msgstr ""
 
 #. placeholder {0}: props.client.user!.username
-#. placeholder {1}: newTag()
+#. placeholder {1}: tag(newTag())
 #: components/modal/modals/EditUsername.tsx
 msgid "That name was already taken with your previous number, so you are now <0>{0}#{1}</0>."
 msgstr ""
@@ -21898,7 +21908,7 @@ msgstr ""
 msgid "We prepare it in the background and e-mail you when it's ready. You can ask once every 24 hours."
 msgstr ""
 
-#. placeholder {0}: sentTo()
+#. placeholder {0}: state.settings.streamerMode ? "•••@•••" : sentTo()
 #: components/modal/modals/EditEmail.tsx
 msgid "We sent a confirmation link to <0>{0}</0>. Your login email changes once you open it."
 msgstr ""

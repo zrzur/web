@@ -236,4 +236,63 @@ describe("changing a shortcut on the Ctrl+/ screen", () => {
     resetAll.click();
     expect(capsText("create_poll")).toBe("Ctrl+Shift+8");
   });
+
+  it("German Ctrl+Shift+7 types /: it clashes with Ctrl+/ and can swap (review B1)", () => {
+    mount();
+    caps("create_poll").click();
+    press("Digit7", { ctrlKey: true, shiftKey: true, key: "/" });
+    expect(note()).toContain("is already used for “Show keyboard shortcuts”");
+    buttonNamed("Swap").click();
+    expect(capsText("create_poll")).toBe("Ctrl+Shift+7");
+    expect(capsText("open_shortcuts")).toBe("Ctrl+Shift+8");
+    // the press now runs the person's own shortcut
+    expect(
+      shortcutFor(
+        {
+          code: "Digit7",
+          key: "/",
+          ctrlKey: true,
+          shiftKey: true,
+          altKey: false,
+          metaKey: false,
+        },
+        false,
+      ),
+    ).toBe("create_poll");
+  });
+
+  it("gives the focus back to the key caps after Swap and Cancel (review S7)", async () => {
+    mount();
+    caps("toggle_mute").click();
+    press("KeyD", { ctrlKey: true, shiftKey: true, key: "D" });
+    buttonNamed("Cancel").click();
+    await Promise.resolve();
+    expect(document.activeElement).toBe(caps("toggle_mute"));
+    caps("toggle_mute").click();
+    press("KeyD", { ctrlKey: true, shiftKey: true, key: "D" });
+    buttonNamed("Swap").click();
+    await Promise.resolve();
+    expect(document.activeElement).toBe(caps("toggle_mute"));
+  });
+
+  it("flags synced shortcuts that share keys on this device (review S2)", () => {
+    state.keybinds.replaceCustom({
+      toggle_mute: { code: "KeyJ", ctrl: true, shift: true },
+      toggle_deafen: { code: "KeyJ", mod: true, shift: true },
+    });
+    mount();
+    const flags = [
+      ...document.querySelectorAll('[data-testid="keybind-conflict"]'),
+    ].map((el) => el.textContent);
+    expect(flags).toHaveLength(2);
+    expect(flags[0]).toContain("Deafen or undeafen");
+  });
+
+  it("refuses the push-to-talk key alone as a shortcut (review S6)", () => {
+    (state as unknown as { voice: { pttKey: string } }).voice.pttKey = "F8";
+    mount();
+    caps("toggle_mute").click();
+    press("F8", { key: "F8" });
+    expect(note()).toContain("push-to-talk");
+  });
 });

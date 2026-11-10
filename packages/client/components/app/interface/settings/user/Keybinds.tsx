@@ -12,15 +12,17 @@ import { Trans, useLingui } from "@lingui/solid/macro";
 import { styled } from "styled-system/jsx";
 
 import { deviceMac, pauseShortcuts } from "@revolt/keybinds/active";
-import {
-  type Combo,
-  type ShortcutId,
-  comboKeys,
-} from "@revolt/keybinds/keymap";
+import { type Combo, type ShortcutId } from "@revolt/keybinds/keymap";
 import {
   type ComboCheck,
   checkCombo,
+  comboKeys,
   readCombo,
+  resetAllShortcuts,
+  resetShortcut,
+  setCombo,
+  shortcutsChanged,
+  swapShortcuts,
 } from "@revolt/keybinds/keymapRules";
 import { comboLabel, keyLabel } from "@revolt/keybinds/shortcuts";
 import { desktopPushToTalk } from "@revolt/rtc/desktopPushToTalk";
@@ -254,8 +256,8 @@ export function KeybindsSettings() {
             <Button
               size="sm"
               variant="tonal"
-              isDisabled={!state.keybinds.changed}
-              onPress={() => state.keybinds.resetAll()}
+              isDisabled={!shortcutsChanged(state.keybinds, voice.pttKey)}
+              onPress={() => resetAllShortcuts(state.keybinds)}
               data-testid="keybinds-reset-all"
             >
               <Trans>Reset all</Trans>
@@ -358,27 +360,34 @@ export function ShortcutRow(props: {
     comboLabel(comboKeys(combo), mac).join(mac ? "" : "+");
 
   let resume: (() => void) | undefined;
+  let keysButton: HTMLButtonElement | undefined;
 
-  function stop(next: Phase = { kind: "idle" }) {
+  function stop(next: Phase = { kind: "idle" }, refocus = false) {
     window.removeEventListener("keydown", onKey, true);
     resume?.();
     resume = undefined;
     setPhase(next);
+    // after Swap, Use anyway or Cancel the focus goes back to this row
+    if (refocus) keysButton?.focus();
   }
 
   function onKey(event: KeyboardEvent) {
     // the press is the new combination: nothing else may act on it
     event.preventDefault();
     event.stopPropagation();
+    if (event.isComposing) return;
     const read = readCombo(event, mac);
     if (read === "wait") return;
     if (read === "cancel") return stop();
-    const check = checkCombo(props.id, read, state.keybinds.table(mac), mac);
+    const check = checkCombo(props.id, read, state.keybinds.table(mac), mac, {
+      pttKey: state.voice.pttKey,
+      typesSlash: event.key === "/",
+    });
     if (check.blocked)
       return stop({ kind: "refused", combo: read, reason: check.blocked });
     if (check.clash || check.warn)
       return stop({ kind: "confirm", combo: read, check });
-    state.keybinds.setCombo(props.id, read);
+    setCombo(state.keybinds, props.id, read);
     stop();
   }
 
@@ -393,9 +402,14 @@ export function ShortcutRow(props: {
 
   function confirm(current: Extract<Phase, { kind: "confirm" }>) {
     if (current.check.clash)
-      state.keybinds.swap(props.id, current.check.clash, current.combo);
-    else state.keybinds.setCombo(props.id, current.combo);
-    stop();
+      swapShortcuts(
+        state.keybinds,
+        props.id,
+        current.check.clash,
+        current.combo,
+      );
+    else setCombo(state.keybinds, props.id, current.combo);
+    stop(undefined, true);
   }
 
   const message = () => {
@@ -422,6 +436,12 @@ export function ShortcutRow(props: {
                 <Trans>
                   Your system keeps <bdi dir="ltr">{keys}</bdi> for itself.
                   Choose other keys.
+                </Trans>
+              </Match>
+              <Match when={current.reason === "ptt"}>
+                <Trans>
+                  <bdi dir="ltr">{keys}</bdi> is your push-to-talk key. Add{" "}
+                  {mac ? "⌘" : "Ctrl"} or choose another key.
                 </Trans>
               </Match>
               <Match when={current.reason === "typing"}>
@@ -465,7 +485,11 @@ export function ShortcutRow(props: {
               >
                 {other ? <Trans>Swap</Trans> : <Trans>Use anyway</Trans>}
               </Button>
-              <Button size="sm" variant="text" onPress={() => stop()}>
+              <Button
+                size="sm"
+                variant="text"
+                onPress={() => stop(undefined, true)}
+              >
                 <Trans>Cancel</Trans>
               </Button>
             </Actions>
@@ -477,14 +501,32 @@ export function ShortcutRow(props: {
     }
   };
 
+  // synced from a device where they differed: on this one two shortcuts
+  // have the same keys, and only one of them works
+  const conflict = () => state.keybinds.table(mac).conflicts.get(props.id);
+
   return (
     <SettingsRow
       title={props.title}
       description={
-        <Show when={props.description || phase().kind !== "idle"}>
+        <Show when={props.description || phase().kind !== "idle" || conflict()}>
           <Described>
             <Show when={props.description}>
               <span>{props.description}</span>
+            </Show>
+            <Show when={phase().kind === "idle" && conflict()}>
+              {(other) => (
+                <Note
+                  role="alert"
+                  data-tone="error"
+                  data-testid="keybind-conflict"
+                >
+                  <Trans>
+                    Same keys as “{props.names[other()]()}” on this device, so
+                    only one of them works. Choose other keys.
+                  </Trans>
+                </Note>
+              )}
             </Show>
             {message()}
           </Described>
@@ -498,14 +540,15 @@ export function ShortcutRow(props: {
               size="xs"
               aria-label={t`Reset ${props.name()} to the default`}
               onPress={() => {
-                state.keybinds.reset(props.id);
-                stop();
+                resetShortcut(state.keybinds, props.id);
+                stop(undefined, true);
               }}
             >
               <Icon name="arrow-u-up-left" size={16} />
             </IconButton>
           </Show>
           <KeysButton
+            ref={keysButton}
             type="button"
             data-recording={phase().kind === "recording"}
             data-shortcut={props.id}
@@ -635,11 +678,11 @@ const Cap = styled("kbd", {
     display: "inline-flex",
     alignItems: "center",
     justifyContent: "center",
-    borderRadius: "6px",
+    borderRadius: "8px",
     background: "var(--z-card-bg, var(--md-sys-color-surface-container-high))",
     border:
       "1px solid var(--z-border-subtle, var(--md-sys-color-outline-variant))",
-    boxShadow: "inset 0 -1px 0 var(--z-border-subtle, rgb(0 0 0 / 0.25))",
+    boxShadow: "inset 0 -1px 0 var(--z-border-subtle)",
     color: "var(--z-fg-primary, var(--md-sys-color-on-surface))",
     fontFamily: "inherit",
     fontSize: "12px",

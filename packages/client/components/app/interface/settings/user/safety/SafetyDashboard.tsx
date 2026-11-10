@@ -14,6 +14,7 @@ import { Trans, useLingui } from "@lingui/solid/macro";
 import { styled } from "styled-system/jsx";
 
 import { useClient } from "@revolt/client";
+import { useState } from "@revolt/state";
 import { useError } from "@revolt/i18n";
 import { Dialog, FloatingSelect, MenuItem } from "@revolt/ui";
 import { Icon } from "@revolt/ui/icons/Icon";
@@ -593,6 +594,7 @@ function CaseView(props: {
 }) {
   const { t } = useLingui();
   const client = useClient();
+  const state = useState();
   const labels = useSafetyLabels();
   const [publicNote, setPublicNote] = createSignal("");
   const [note, setNote] = createSignal("");
@@ -761,7 +763,10 @@ function CaseView(props: {
                 {": "}
                 <bdi>{who().name ?? "-"}</bdi>
                 {" · "}
-                <bdi dir="ltr">{who().email ?? "-"}</bdi>
+                <bdi dir="ltr">
+                  {/* a reporter's address stays off screen in streamer mode */}
+                  {state.settings.streamerMode ? "•••@•••" : (who().email ?? "-")}
+                </bdi>
                 {" · "}
                 <bdi dir="auto">{who().location}</bdi>
                 <Show when={who().law}>

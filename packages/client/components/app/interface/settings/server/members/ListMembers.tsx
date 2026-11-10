@@ -11,6 +11,7 @@ import { decodeTime } from "ulid";
 import { UserContextMenu } from "@revolt/app/menus/UserContextMenu";
 import { useClient } from "@revolt/client";
 import { useModals } from "@revolt/modal";
+import { useState } from "@revolt/state";
 import {
   Avatar,
   FloatingSelect,
@@ -39,6 +40,7 @@ export function ListServerMembers(props: { server: Server }) {
   const { t } = useLingui();
   const { openModal, showError } = useModals();
   const client = useClient();
+  const state = useState();
 
   // a page of 1000 at a time, more as the list is scrolled through
   const query = useInfiniteQuery(() => ({
@@ -230,7 +232,12 @@ export function ListServerMembers(props: { server: Server }) {
                         </Show>
                       </strong>
                       <small dir="ltr">
-                        {user()?.username}#{user()?.discriminator}
+                        {user()?.username}#
+                        {/* the own tag stays off screen in streamer mode */}
+                        {state.settings.streamerMode &&
+                        user()?.id === client().user?.id
+                          ? "••••"
+                          : user()?.discriminator}
                         <Show when={timedOut()}>
                           <Timed
                             title={t`Timed out until ${date(member.timeout!)}`}

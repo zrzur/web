@@ -60,7 +60,7 @@ const Pill = styled("button", {
     lineHeight: "16px",
     whiteSpace: "nowrap",
     cursor: "pointer",
-    boxShadow: "0 4px 12px rgb(0 0 0 / 0.24)",
+    boxShadow: "var(--z-shadow-md)",
     "&:hover": { background: "var(--z-slate-1, var(--z-bg-raised))" },
     "&:focus-visible": {
       outline: "2px solid var(--z-focus)",
@@ -72,7 +72,7 @@ const Pill = styled("button", {
       "&::after": {
         content: '""',
         position: "absolute",
-        inset: "-6px -4px",
+        inset: "-8px -4px",
       },
     },
   },
