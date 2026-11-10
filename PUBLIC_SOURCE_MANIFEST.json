@@ -292,8 +292,8 @@
     },
     {
       "path": "CHANGELOG.md",
-      "sha256": "c322868c6737498b6bbd96a8f1e7561ed1c40a32f7fb7b415dd86590d37945b0",
-      "bytes": 121662,
+      "sha256": "fb45d831b52ab4d42936f3329b84af2875db401fca9b4888e5daa4ce662b4415",
+      "bytes": 122000,
       "category": "public-documentation"
     },
     {
@@ -3988,8 +3988,8 @@
     },
     {
       "path": "packages/client/components/markdown/index.tsx",
-      "sha256": "ea2b1732894751fee979284d33d70a485788d2b549162a38d448bfeac5ccfb01",
-      "bytes": 12024,
+      "sha256": "8e7b0aa201fce033e4a32c33b9844ca0cfe37a1666c762b9b58388443e1e03b2",
+      "bytes": 12084,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -4071,9 +4071,21 @@
       "category": "product-source-or-build-manifest"
     },
     {
+      "path": "packages/client/components/markdown/plugins/timestampFormat.test.ts",
+      "sha256": "6bf49e6158b3152176f2ba1eb5da948caf2bb5c47a8e09d4a84ae1a284c38935",
+      "bytes": 2554,
+      "category": "synthetic-test-source-or-fixture"
+    },
+    {
+      "path": "packages/client/components/markdown/plugins/timestampFormat.ts",
+      "sha256": "c41245a386cc5076d489823becf38b4129473605e03f811b496295864f055254",
+      "bytes": 2767,
+      "category": "product-source-or-build-manifest"
+    },
+    {
       "path": "packages/client/components/markdown/plugins/timestamps.tsx",
-      "sha256": "e5a4e4aa701f1774b3f4e73e6e5c6fc6b412fbf3751345ec934eb507f17dcaef",
-      "bytes": 2985,
+      "sha256": "221be371a84e2cdc23a8c308cc3650dfae0800a41a77f65553e0be0cf0d0e90f",
+      "bytes": 2824,
       "category": "product-source-or-build-manifest"
     },
     {
