@@ -2098,8 +2098,8 @@
     },
     {
       "path": "packages/client/components/app/interface/settings/user/plugins/common.dom.test.tsx",
-      "sha256": "e2edf24f2c5163c8268714867967c92599e7e2f3e6fab13a244aa7efe57bd9b8",
-      "bytes": 1125,
+      "sha256": "6b26631986b3d1d6ba36a73de9c76940e1709e3c93850bc6b6478a0f0164a52e",
+      "bytes": 1640,
       "category": "synthetic-test-source-or-fixture"
     },
     {
@@ -2116,8 +2116,8 @@
     },
     {
       "path": "packages/client/components/app/interface/settings/user/plugins/text.ts",
-      "sha256": "43fc0aeaa79d2cef67d07998b763704231c953ce4bf71104d9ae4b6dc0dfedfa",
-      "bytes": 5846,
+      "sha256": "31bbfb8ff3b33433c34c3f7ab4604b6755409b0018bbde595e4ea63234685daa",
+      "bytes": 5936,
       "category": "product-source-or-build-manifest"
     },
     {
