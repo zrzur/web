@@ -4,6 +4,7 @@ import {
   Switch,
   createEffect,
   createSignal,
+  lazy,
   on,
   onCleanup,
 } from "solid-js";
@@ -44,16 +45,22 @@ import {
 } from "@revolt/app/interface/channels/text/interactions";
 import { Channel } from "@zrzur/sdk/solid";
 
-import { MessageSelectionBar } from "@revolt/app/interface/channels/text/MessageSelectionBar";
 import { isSelecting } from "@revolt/app/interface/channels/text/messageSelection";
 
+import { writeAccess } from "@revolt/app/interface/channels/threadAccess";
 import { MessageComposition } from "./Composition";
 import { isLargeServer } from "./largeServer";
 import { MemberSidebar } from "./MemberSidebar";
 import { TextSearchSidebar } from "./TextSearchSidebar";
-import { writeAccess } from "@revolt/app/interface/channels/threadAccess";
 
 import { ThreadsPanel } from "./ThreadsPanel";
+
+// Shown only while a moderator selects messages: loads on first use.
+const MessageSelectionBar = lazy(() =>
+  import("@revolt/app/interface/channels/text/MessageSelectionBar").then(
+    (m) => ({ default: m.MessageSelectionBar }),
+  ),
+);
 
 /**
  * State of the channel sidebar
@@ -345,8 +352,7 @@ export function TextChannel(props: ChannelPageProps) {
                 >
                   <ThreadNotice>
                     <Trans>
-                      Forums are off in this server. This post can only be
-                      read.
+                      Forums are off in this server. This post can only be read.
                     </Trans>
                   </ThreadNotice>
                 </Match>

@@ -3,7 +3,6 @@ import { ComponentProps, JSX, createEffect, createSignal, on } from "solid-js";
 import { html } from "property-information";
 import remarkBreaks from "remark-breaks";
 import remarkGfm from "remark-gfm";
-import remarkMath from "remark-math";
 import remarkParse from "remark-parse";
 import remarkRehype from "remark-rehype";
 import { unified } from "unified";
@@ -223,11 +222,9 @@ const replyComponents = () => ({
 export const unifiedPipeline = unified()
   .use(remarkParse)
   .use(remarkBreaks)
-  .use(remarkGfm)
-  .use(remarkMath, {
-    // TODO: fork for \[\] support
-    singleDollarTextMath: false,
-  });
+  .use(remarkGfm);
+// Maths syntax (remark-math) is not here: it loads with KaTeX in richPlugins,
+// for the first message with `$$` (see needsRichMarkdown), out of the app shell.
 
 /**
  * for schema only, todo: clean up
@@ -256,7 +253,8 @@ const HTML_UNIFIED_PLUGINS = [
 ];
 
 const htmlPipeline = HTML_UNIFIED_PLUGINS.reduce(
-  (pipeline, plugin) => pipeline.use(plugin) as unknown as typeof unifiedPipeline,
+  (pipeline, plugin) =>
+    pipeline.use(plugin) as unknown as typeof unifiedPipeline,
   unifiedPipeline,
 )
   // @ts-expect-error non-standard elements not recognised by typing
@@ -282,9 +280,14 @@ let richLoading: Promise<void> | undefined;
  */
 function loadRichMarkdown() {
   richLoading ??= import("./richPlugins")
-    .then(({ common, rehypeHighlight, rehypeKatex }) => {
+    .then(({ common, rehypeHighlight, rehypeKatex, remarkMath }) => {
       richPipeline = htmlPipeline
         .copy()
+        // a parser extension: it takes effect at parse time whatever its place
+        .use(remarkMath, {
+          // TODO: fork for \[\] support
+          singleDollarTextMath: false,
+        })
         .use(rehypeKatex, {
           maxSize: 10,
           maxExpand: 2,

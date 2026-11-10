@@ -26,5 +26,6 @@ describe("translated errors", () => {
       }
     }
     expect(offenders).toEqual([]);
-  });
+    // reads every source file: about 1 s alone, longer on a busy machine
+  }, 30_000);
 });

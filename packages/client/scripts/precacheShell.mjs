@@ -57,10 +57,21 @@ export function precacheShell() {
     manifestTransform: (entries) => {
       const manifest = entries.filter((entry) => shell.has(entry.url));
       const bytes = manifest.reduce((sum, entry) => sum + entry.size, 0);
-      if (bytes > MAX_SHELL_BYTES)
+      // ZRZUR_SHELL_LIST=1: print every shell file, to compare two builds
+      if (process.env.ZRZUR_SHELL_LIST)
+        for (const entry of manifest)
+          console.log(`shell ${entry.size} ${entry.url}`);
+      if (bytes > MAX_SHELL_BYTES) {
+        // name the biggest files, so the fix starts in the right place
+        const biggest = [...manifest]
+          .sort((a, b) => b.size - a.size)
+          .slice(0, 12)
+          .map((entry) => `  ${entry.size.toLocaleString("en")}  ${entry.url}`)
+          .join("\n");
         throw new Error(
-          `precache shell is ${bytes.toLocaleString("en")} bytes, over ${MAX_SHELL_BYTES.toLocaleString("en")}: make a rarely used import lazy or leave a file out (scripts/precacheShell.mjs)`,
+          `precache shell is ${bytes.toLocaleString("en")} bytes, over ${MAX_SHELL_BYTES.toLocaleString("en")}: make a rarely used import lazy or leave a file out (scripts/precacheShell.mjs)\nbiggest shell files:\n${biggest}`,
         );
+      }
       return { manifest, warnings: [] };
     },
   };

@@ -55,17 +55,23 @@ import {
 import { createIsTimedOut } from "@revolt/common/lib/createIsTimedOut";
 import { EditMessage } from "./EditMessage";
 import { ForwardedFrame } from "./ForwardedFrame";
-import { MessageSelectOverlay } from "./MessageSelectOverlay";
 import { InteractionHeader } from "./interactions/InteractionHeader";
 import {
   MessageComponents,
   placedAttachments,
 } from "./interactions/MessageComponents";
+import { isSelecting } from "./messageSelection";
+import { ThreadChip } from "./ThreadChip";
 // Polls are rare in a channel: their card loads with the first poll, not with the app
+// Moderators' selection mode is rare: its overlay loads on first use, not with the app shell.
+const MessageSelectOverlay = lazy(() =>
+  import("./MessageSelectOverlay").then((m) => ({
+    default: m.MessageSelectOverlay,
+  })),
+);
 const PollCard = lazy(() =>
   import("./poll/PollCard").then((m) => ({ default: m.PollCard })),
 );
-import { ThreadChip } from "./ThreadChip";
 
 interface Props {
   /**
@@ -253,10 +259,12 @@ export function Message(props: Props) {
         tail={props.tail || state.settings.getValue("appearance:compact_mode")}
         header={
           <>
-            <MessageSelectOverlay
-              message={props.message}
-              enabled={props.isLink === undefined}
-            />
+            <Show when={isSelecting(props.message.channelId)}>
+              <MessageSelectOverlay
+                message={props.message}
+                enabled={props.isLink === undefined}
+              />
+            </Show>
             <Show when={props.message.interaction?.name}>
               <InteractionHeader
                 userId={props.message.interaction!.user}
