@@ -292,8 +292,8 @@
     },
     {
       "path": "CHANGELOG.md",
-      "sha256": "2b00e4f83793afff7480d9e54f0d00b25db3a16f313be7271950b2b088ab0faf",
-      "bytes": 114547,
+      "sha256": "81493abdcea30a9457c15c66b13d40d6a247f2d9208c4f2f79235df885009a30",
+      "bytes": 114945,
       "category": "public-documentation"
     },
     {
@@ -784,8 +784,8 @@
     },
     {
       "path": "packages/client/components/app/interface/channels/text/Message.tsx",
-      "sha256": "cdf495623654a30ac6f0bd4581a23787299bc9922c9d438ae31f63ad84b35c8e",
-      "bytes": 17410,
+      "sha256": "eb2a7eb675b75c44393fd17ec9f090c2d4da18e7ae23850f65dcff1f0e30d146",
+      "bytes": 17720,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -3646,8 +3646,8 @@
     },
     {
       "path": "packages/client/components/i18n/dayjs.tsx",
-      "sha256": "0c99f078a541be16b7c9b6b738d50c9ba9ba5e7ed3d1a1c5aaf39a1172b00f48",
-      "bytes": 5184,
+      "sha256": "3c8e4146ddba3e606f7ef5b535170b4071ccbe11965da3bc7cf36a1bccacd4c2",
+      "bytes": 5315,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -3694,8 +3694,8 @@
     },
     {
       "path": "packages/client/components/i18n/translatedErrorUse.test.ts",
-      "sha256": "99ac70594aa3bbc7d8ed61205219c7ac6963566192108190c59c52c4d1968f35",
-      "bytes": 1149,
+      "sha256": "85bb8dca84896133a3c85af02a41062ee11d95fd1698674d9093ace8404291ea",
+      "bytes": 1231,
       "category": "synthetic-test-source-or-fixture"
     },
     {
@@ -3838,8 +3838,8 @@
     },
     {
       "path": "packages/client/components/markdown/index.tsx",
-      "sha256": "d8ddd956daa27e2da441b63a9445d5721b715fa115341abc0279b7e25cc5b2b5",
-      "bytes": 11781,
+      "sha256": "ea2b1732894751fee979284d33d70a485788d2b549162a38d448bfeac5ccfb01",
+      "bytes": 12024,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -3957,9 +3957,15 @@
       "category": "product-source-or-build-manifest"
     },
     {
+      "path": "packages/client/components/markdown/richPlugins.test.ts",
+      "sha256": "d6cc39312c29913cbd60daf9cebcdb92998da1faa007c97fd88a82436f502d63",
+      "bytes": 1144,
+      "category": "synthetic-test-source-or-fixture"
+    },
+    {
       "path": "packages/client/components/markdown/richPlugins.ts",
-      "sha256": "a24baeab45f8e8e1da8a9c174f493ac281889d75ea06bb13fab0f9956fe9de36",
-      "bytes": 340,
+      "sha256": "11d98223e8456f8ef0c7abd3a85d02d1b88d4758c8481f5acf3bf8bcd21d07cd",
+      "bytes": 393,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -39016,8 +39022,8 @@
     },
     {
       "path": "packages/client/scripts/precacheShell.mjs",
-      "sha256": "d3c7904cfb295ecc5664dbdf7833cd70d70435eb78c667c25c89e69bf4d0cd14",
-      "bytes": 2265,
+      "sha256": "72e167a01a31d513819e5ea2d09dd730e0bf021c8787ece282e35d3d722b4504",
+      "bytes": 2801,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -39334,8 +39340,8 @@
     },
     {
       "path": "packages/client/src/interface/channels/text/TextChannel.tsx",
-      "sha256": "e773755a4be8eb084c0a4db740478fd4531e5245cc5b3365aabfd66fb241b426",
-      "bytes": 15643,
+      "sha256": "8469a44e977620f65912481af2ecf616e8e2af3341eb30123b1c90facbf53a1a",
+      "bytes": 15775,
       "category": "product-source-or-build-manifest"
     },
     {
