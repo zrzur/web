@@ -10,7 +10,10 @@
 // - Discover (phones): "All" and the footer words are 44 px targets;
 // - website: Menu and the footer links are 44 px on phones; the footer link
 //   "Third-party notices" opens a page in the visitor's language and
-//   direction that fits the screen.
+//   direction that fits the screen;
+// - light theme (part "light", only with E2E_LIGHT_EMAIL / _PASSWORD, a
+//   throwaway account, since the theme is synced): the Home greeting is
+//   readable (4.5:1), and the theme is set back to dark afterwards.
 // Read-only on shared data: it signs in, looks and clicks; nothing is saved.
 //
 // Uses the dev-stack helpers of the private test environment
@@ -20,7 +23,8 @@
 //   E2E_API, E2E_CHROMIUM, E2E_WEB (web checkout, for the catalogs),
 //   E2E_LANGS=en,ar,de, E2E_SIZES=desktop,phone,
 //   E2E_PARTS=login,embed,settings,home,discover,site,
-//   E2E_SERVER / E2E_CHANNEL (a channel holding a YouTube link).
+//   E2E_SERVER / E2E_CHANNEL (a channel holding a YouTube link),
+//   E2E_LIGHT_EMAIL / E2E_LIGHT_PASSWORD.
 import { existsSync } from "node:fs";
 import { fileURLToPath, pathToFileURL } from "node:url";
 
@@ -279,6 +283,65 @@ for (const lang of LANGS)
         assert(doc.over <= 0, `notices page is ${doc.over} px too wide`);
         await page.screenshot({ path: shot(`notices-${lang}-${size}`) });
       });
+      await context.close();
+    }
+
+    if (PARTS.includes("light") && process.env.E2E_LIGHT_EMAIL) {
+      const { page, context } = await login(
+        browser,
+        { email: process.env.E2E_LIGHT_EMAIL, password: process.env.E2E_LIGHT_PASSWORD },
+        { viewport: VIEWPORTS[size], locale: LOCALE[lang] },
+      );
+      await page.evaluate((l) => localStorage.setItem("lang", l), lang);
+      r.page = page;
+      const setMode = async (mode) => {
+        await page.goto(`${APP}/settings`);
+        await page
+          .locator("[role=link]")
+          .filter({ visible: true })
+          .filter({ hasText: tr(lang, "Appearance") })
+          .first()
+          .click({ timeout: 10000 });
+        await page
+          .getByRole("radio", { name: tr(lang, mode), exact: true })
+          .or(page.getByRole("button", { name: tr(lang, mode), exact: true }))
+          .first()
+          .click({ timeout: 10000 });
+        await page.waitForTimeout(800);
+        await page.keyboard.press("Escape");
+      };
+      await r.step(`light theme: the Home greeting is readable (${tag})`, async () => {
+        await setMode("Light");
+        await page.goto(`${APP}/app`);
+        // the connected Home, not the first screen shown while connecting
+        await page
+          .getByRole("heading", { level: 2, name: tr(lang, "Your servers") })
+          .waitFor({ timeout: 30000 });
+        // the greeting: the heading inside the welcome card
+        const h1 = page.locator("section h1").filter({ visible: true }).first();
+        await h1.waitFor({ timeout: 20000 });
+        const ratio = await h1.evaluate((el) => {
+          // any CSS colour (rgb, oklch, color-mix) to [r, g, b, alpha 0..255]
+          const paint = document.createElement("canvas").getContext("2d", { willReadFrequently: true });
+          const rgb = (c) => {
+            paint.clearRect(0, 0, 1, 1);
+            paint.fillStyle = c;
+            paint.fillRect(0, 0, 1, 1);
+            return [...paint.getImageData(0, 0, 1, 1).data];
+          };
+          const lum = ([r, g, b]) => {
+            const f = (v) => ((v /= 255) <= 0.03928 ? v / 12.92 : ((v + 0.055) / 1.055) ** 2.4);
+            return 0.2126 * f(r) + 0.7152 * f(g) + 0.0722 * f(b);
+          };
+          let bg = el;
+          while (bg && rgb(getComputedStyle(bg).backgroundColor)[3] === 0) bg = bg.parentElement;
+          const [a, b] = [lum(rgb(getComputedStyle(el).color)), lum(rgb(getComputedStyle(bg ?? document.body).backgroundColor))];
+          return (Math.max(a, b) + 0.05) / (Math.min(a, b) + 0.05);
+        });
+        await page.screenshot({ path: shot(`home-light-${lang}-${size}`) });
+        assert(ratio >= 4.5, `greeting contrast ${ratio.toFixed(2)}:1`);
+      });
+      await setMode("Dark").catch(() => {});
       await context.close();
     }
   }
