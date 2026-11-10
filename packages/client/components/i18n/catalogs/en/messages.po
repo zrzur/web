@@ -23604,3 +23604,179 @@ msgstr "Zrzur, right on <0>your desktop.</0>"
 #: components/app/interface/settings/user/appearance/AppearanceMenu.tsx
 #~ msgid "Zrzur's own look: very dark neutral panels with Zrzur Pink as the one accent."
 #~ msgstr "Zrzur's own look: very dark neutral panels with Zrzur Pink as the one accent."
+
+#. placeholder {0}: answer.count ?? 0
+#. placeholder {0}: props.message.total
+#. placeholder {0}: total()
+#: components/app/interface/channels/text/poll/PollCard.tsx
+#: components/ui/components/features/messaging/elements/PollEnded.tsx
+msgid "{0, plural, one {# vote} other {# votes}}"
+msgstr "{0, plural, one {# vote} other {# votes}}"
+
+#: components/modal/modals/CreatePoll.tsx
+msgid "1 week"
+msgstr "1 week"
+
+#: components/modal/modals/CreatePoll.tsx
+msgid "2 weeks"
+msgstr "2 weeks"
+
+#: components/modal/modals/CreatePoll.tsx
+msgid "24 hours"
+msgstr "24 hours"
+
+#: components/modal/modals/CreatePoll.tsx
+msgid "3 days"
+msgstr "3 days"
+
+#: components/modal/modals/CreatePoll.tsx
+msgid "4 hours"
+msgstr "4 hours"
+
+#: components/modal/modals/CreatePoll.tsx
+msgid "8 hours"
+msgstr "8 hours"
+
+#: components/modal/modals/CreatePoll.tsx
+msgid "Add answer"
+msgstr "Add answer"
+
+#: components/modal/modals/CreatePoll.tsx
+msgid "Add at least two answers."
+msgstr "Add at least two answers."
+
+#: components/modal/modals/CreatePoll.tsx
+msgid "Allow more than one answer"
+msgstr "Allow more than one answer"
+
+#: components/modal/modals/CreatePoll.tsx
+msgid "An answer can be at most {ANSWER_MAX} characters."
+msgstr "An answer can be at most {ANSWER_MAX} characters."
+
+#: components/modal/modals/CreatePoll.tsx
+msgid "Ask a question and let people vote. Results update live."
+msgstr "Ask a question and let people vote. Results update live."
+
+#. placeholder {0}: index() + 1
+#: components/modal/modals/CreatePoll.tsx
+msgid "Change the emoji of answer {0}"
+msgstr "Change the emoji of answer {0}"
+
+#. placeholder {0}: index() + 1
+#: components/modal/modals/CreatePoll.tsx
+msgid "Choose an emoji for answer {0}"
+msgstr "Choose an emoji for answer {0}"
+
+#: components/app/interface/channels/text/poll/PollCard.tsx
+#: components/modal/modals/CreatePoll.tsx
+msgid "Choose one answer"
+msgstr "Choose one answer"
+
+#: components/app/interface/channels/text/poll/PollCard.tsx
+#: components/modal/modals/CreatePoll.tsx
+msgid "Choose one or more answers"
+msgstr "Choose one or more answers"
+
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "Create a poll"
+msgstr "Create a poll"
+
+#: components/modal/modals/CreatePoll.tsx
+#: src/interface/channels/text/Composition.tsx
+msgid "Create poll"
+msgstr "Create poll"
+
+#: components/app/menus/MessageContextMenu.tsx
+#: components/modal/modals/EndPoll.tsx
+msgid "End poll"
+msgstr "End poll"
+
+#: components/modal/modals/EndPoll.tsx
+msgid "End poll now?"
+msgstr "End poll now?"
+
+#. placeholder {0}: ends()
+#: components/app/interface/channels/text/poll/PollCard.tsx
+msgid "Ends {0}"
+msgstr "Ends {0}"
+
+#: components/app/interface/channels/text/poll/PollCard.tsx
+msgid "Final results"
+msgstr "Final results"
+
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "In a channel where you can post polls."
+msgstr "In a channel where you can post polls."
+
+#: components/modal/modals/PollVoters.tsx
+msgid "Nobody chose this answer yet."
+msgstr "Nobody chose this answer yet."
+
+#: components/modal/modals/CreatePoll.tsx
+msgid "Open for"
+msgstr "Open for"
+
+#. placeholder {0}: durationLabel(duration())
+#: components/modal/modals/CreatePoll.tsx
+msgid "Open for {0}"
+msgstr "Open for {0}"
+
+#: components/modal/modals/CreatePoll.tsx
+msgid "People can pick several answers."
+msgstr "People can pick several answers."
+
+#: components/modal/modals/CreatePoll.tsx
+msgid "Post poll"
+msgstr "Post poll"
+
+#. placeholder {0}: index() + 1
+#: components/modal/modals/CreatePoll.tsx
+msgid "Remove answer {0}"
+msgstr "Remove answer {0}"
+
+#: components/app/interface/channels/text/poll/PollCard.tsx
+msgid "See who voted"
+msgstr "See who voted"
+
+#. placeholder {0}: question()
+#. placeholder {1}: tied()
+#: components/ui/components/features/messaging/elements/PollEnded.tsx
+msgid "The poll “{0}” ended in a tie: {1}."
+msgstr "The poll “{0}” ended in a tie: {1}."
+
+#. placeholder {0}: question()
+#: components/ui/components/features/messaging/elements/PollEnded.tsx
+msgid "The poll “{0}” ended with no votes."
+msgstr "The poll “{0}” ended with no votes."
+
+#. placeholder {0}: question()
+#. placeholder {1}: winners()[0]
+#. placeholder {2}: props.message.votes
+#. placeholder {3}: total()
+#: components/ui/components/features/messaging/elements/PollEnded.tsx
+msgid "The poll “{0}” ended: “{1}” won with {2} of {3}."
+msgstr "The poll “{0}” ended: “{1}” won with {2} of {3}."
+
+#: components/i18n/errors.tsx
+msgid "This poll has ended. Its results are final."
+msgstr "This poll has ended. Its results are final."
+
+#: components/modal/modals/PollVoters.tsx
+msgid "Votes"
+msgstr "Votes"
+
+#: components/modal/modals/EndPoll.tsx
+msgid "Voting stops for everyone and the results become final. This can't be undone."
+msgstr "Voting stops for everyone and the results become final. This can't be undone."
+
+#: components/modal/modals/CreatePoll.tsx
+msgid "What do you want to ask?"
+msgstr "What do you want to ask?"
+
+#: components/modal/modals/CreatePoll.tsx
+msgid "Write a question."
+msgstr "Write a question."
+
+#: components/modal/modals/CreatePoll.tsx
+msgid "Your question"
+msgstr "Your question"

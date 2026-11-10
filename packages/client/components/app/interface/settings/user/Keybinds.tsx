@@ -86,6 +86,11 @@ export function KeybindsSettings() {
           ),
           keys: [["↑"], ["↓"], ["Enter"]],
         },
+        {
+          title: <Trans>Create a poll</Trans>,
+          description: <Trans>In a channel where you can post polls.</Trans>,
+          keys: [["Alt", "Shift", "P"]],
+        },
       ],
     },
     {

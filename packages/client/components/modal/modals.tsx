@@ -196,6 +196,19 @@ const MoveSuperchargeModal = lazy(() =>
 const PinMessageModal = lazy(() =>
   import("./modals/PinMessage").then((m) => ({ default: m.PinMessageModal })),
 );
+const CreatePollModal = lazy(() =>
+  import("./modals/CreatePoll").then((m) => ({
+    default: m.CreatePollModal,
+  })),
+);
+const PollVotersModal = lazy(() =>
+  import("./modals/PollVoters").then((m) => ({
+    default: m.PollVotersModal,
+  })),
+);
+const EndPollModal = lazy(() =>
+  import("./modals/EndPoll").then((m) => ({ default: m.EndPollModal })),
+);
 const ForwardMessageModal = lazy(() =>
   import("./modals/ForwardMessage").then((m) => ({
     default: m.ForwardMessageModal,
@@ -468,6 +481,12 @@ export function RenderModal(props: ActiveModal & { onClose: () => void }) {
       return <RemoveMemberModal {...modalProps} />;
     case "pin_message":
       return <PinMessageModal {...modalProps} />;
+    case "create_poll":
+      return <CreatePollModal {...modalProps} />;
+    case "poll_voters":
+      return <PollVotersModal {...modalProps} />;
+    case "end_poll":
+      return <EndPollModal {...modalProps} />;
     case "forward_message":
       return <ForwardMessageModal {...modalProps} />;
     case "edit_bot_username":

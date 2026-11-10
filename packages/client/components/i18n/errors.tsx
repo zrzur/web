@@ -263,6 +263,9 @@ export function useError() {
       if ((err.type as string) === "AgeRestricted") {
         return t`This content is only for adults.`;
       }
+      if ((err.type as string) === "PollEnded") {
+        return t`This poll has ended. Its results are final.`;
+      }
       if ((err.type as string) === "ForwardMatureContent") {
         return t`Messages from a mature channel can only be forwarded to another mature channel.`;
       }

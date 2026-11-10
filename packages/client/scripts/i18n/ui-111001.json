@@ -1,0 +1,167 @@
+{
+  "{0, plural, one {# vote} other {# votes}}": [
+    "{0, plural, zero {لا أصوات} one {صوت واحد} two {صوتان} few {# أصوات} many {# صوتًا} other {# صوت}}",
+    "{0, plural, one {# Stimme} other {# Stimmen}}",
+    "{0, plural, one {# vote} other {# votes}}",
+    "{0, plural, one {# voto} other {# votos}}",
+    "{0, plural, one {# голос} few {# голоса} many {# голосов} other {# голоса}}",
+    "{0, plural, other {# 票}}"
+  ],
+  "1 week": ["أسبوع واحد", "1 Woche", "1 semaine", "1 semana", "1 неделя", "1 周"],
+  "2 weeks": ["أسبوعان", "2 Wochen", "2 semaines", "2 semanas", "2 недели", "2 周"],
+  "24 hours": ["24 ساعة", "24 Stunden", "24 heures", "24 horas", "24 часа", "24 小时"],
+  "3 days": ["3 أيام", "3 Tage", "3 jours", "3 días", "3 дня", "3 天"],
+  "4 hours": ["4 ساعات", "4 Stunden", "4 heures", "4 horas", "4 часа", "4 小时"],
+  "8 hours": ["8 ساعات", "8 Stunden", "8 heures", "8 horas", "8 часов", "8 小时"],
+  "Add answer": ["أضف إجابة", "Antwort hinzufügen", "Ajouter une réponse", "Añadir respuesta", "Добавить ответ", "添加选项"],
+  "Add at least two answers.": [
+    "أضف إجابتين على الأقل.",
+    "Füge mindestens zwei Antworten hinzu.",
+    "Ajoute au moins deux réponses.",
+    "Añade al menos dos respuestas.",
+    "Добавьте не меньше двух ответов.",
+    "请至少添加两个选项。"
+  ],
+  "Allow more than one answer": [
+    "السماح بأكثر من إجابة",
+    "Mehrere Antworten erlauben",
+    "Autoriser plusieurs réponses",
+    "Permitir varias respuestas",
+    "Разрешить несколько ответов",
+    "允许多选"
+  ],
+  "An answer can be at most {ANSWER_MAX} characters.": [
+    "يمكن أن تتكون الإجابة من {ANSWER_MAX} حرفًا على الأكثر.",
+    "Eine Antwort darf höchstens {ANSWER_MAX} Zeichen lang sein.",
+    "Une réponse peut contenir au plus {ANSWER_MAX} caractères.",
+    "Una respuesta puede tener como máximo {ANSWER_MAX} caracteres.",
+    "Ответ может быть не длиннее {ANSWER_MAX} символов.",
+    "选项最多 {ANSWER_MAX} 个字符。"
+  ],
+  "Ask a question and let people vote. Results update live.": [
+    "اطرح سؤالًا ودع الآخرين يصوّتون. تتحدّث النتائج مباشرةً.",
+    "Stell eine Frage und lass abstimmen. Die Ergebnisse aktualisieren sich live.",
+    "Pose une question et laisse les autres voter. Les résultats se mettent à jour en direct.",
+    "Haz una pregunta y deja que la gente vote. Los resultados se actualizan en directo.",
+    "Задайте вопрос, и пусть все проголосуют. Результаты обновляются сразу.",
+    "提出一个问题让大家投票，结果实时更新。"
+  ],
+  "Change the emoji of answer {0}": [
+    "غيّر رمز الإجابة {0} التعبيري",
+    "Emoji von Antwort {0} ändern",
+    "Changer l’émoji de la réponse {0}",
+    "Cambiar el emoji de la respuesta {0}",
+    "Изменить эмодзи ответа {0}",
+    "更改选项 {0} 的表情"
+  ],
+  "Choose an emoji for answer {0}": [
+    "اختر رمزًا تعبيريًا للإجابة {0}",
+    "Emoji für Antwort {0} wählen",
+    "Choisir un émoji pour la réponse {0}",
+    "Elegir un emoji para la respuesta {0}",
+    "Выбрать эмодзи для ответа {0}",
+    "为选项 {0} 选择表情"
+  ],
+  "Choose one answer": ["اختر إجابة واحدة", "Wähle eine Antwort", "Choisis une réponse", "Elige una respuesta", "Выберите один ответ", "选择一个选项"],
+  "Choose one or more answers": [
+    "اختر إجابة واحدة أو أكثر",
+    "Wähle eine oder mehrere Antworten",
+    "Choisis une ou plusieurs réponses",
+    "Elige una o varias respuestas",
+    "Выберите один или несколько ответов",
+    "选择一个或多个选项"
+  ],
+  "Create a poll": ["أنشئ استطلاعًا", "Umfrage erstellen", "Créer un sondage", "Crear una encuesta", "Создать опрос", "发起投票"],
+  "Create poll": ["إنشاء استطلاع", "Umfrage erstellen", "Créer un sondage", "Crear encuesta", "Создать опрос", "发起投票"],
+  "End poll": ["إنهاء الاستطلاع", "Umfrage beenden", "Terminer le sondage", "Terminar encuesta", "Завершить опрос", "结束投票"],
+  "End poll now?": [
+    "هل تريد إنهاء الاستطلاع الآن؟",
+    "Umfrage jetzt beenden?",
+    "Terminer le sondage maintenant ?",
+    "¿Terminar la encuesta ahora?",
+    "Завершить опрос сейчас?",
+    "现在结束投票吗？"
+  ],
+  "Ends {0}": ["ينتهي {0}", "Endet {0}", "Se termine {0}", "Termina {0}", "Завершится {0}", "{0}结束"],
+  "Final results": ["النتائج النهائية", "Endergebnis", "Résultats définitifs", "Resultados finales", "Итоговые результаты", "最终结果"],
+  "In a channel where you can post polls.": [
+    "في قناة يمكنك نشر الاستطلاعات فيها.",
+    "In einem Kanal, in dem du Umfragen posten kannst.",
+    "Dans un salon où tu peux publier des sondages.",
+    "En un canal donde puedes publicar encuestas.",
+    "В канале, где вы можете публиковать опросы.",
+    "在你可以发起投票的频道中。"
+  ],
+  "Nobody chose this answer yet.": [
+    "لم يختر أحد هذه الإجابة بعد.",
+    "Noch niemand hat diese Antwort gewählt.",
+    "Personne n’a encore choisi cette réponse.",
+    "Nadie ha elegido esta respuesta todavía.",
+    "Этот ответ пока никто не выбрал.",
+    "还没有人选择这个选项。"
+  ],
+  "Open for": ["مفتوح لمدة", "Offen für", "Ouvert pendant", "Abierta durante", "Открыт", "持续时间"],
+  "Open for {0}": ["مفتوح لمدة {0}", "Offen für {0}", "Ouvert pendant {0}", "Abierta durante {0}", "Открыт: {0}", "持续 {0}"],
+  "People can pick several answers.": [
+    "يمكن اختيار عدة إجابات.",
+    "Man kann mehrere Antworten wählen.",
+    "Chacun peut choisir plusieurs réponses.",
+    "Se pueden elegir varias respuestas.",
+    "Можно выбрать несколько ответов.",
+    "大家可以选择多个选项。"
+  ],
+  "Post poll": ["انشر الاستطلاع", "Umfrage posten", "Publier le sondage", "Publicar encuesta", "Опубликовать опрос", "发布投票"],
+  "Remove answer {0}": ["احذف الإجابة {0}", "Antwort {0} entfernen", "Retirer la réponse {0}", "Quitar la respuesta {0}", "Удалить ответ {0}", "移除选项 {0}"],
+  "See who voted": ["اعرض من صوّت", "Sieh, wer abgestimmt hat", "Voir qui a voté", "Ver quién votó", "Кто проголосовал", "查看投票者"],
+  "The poll “{0}” ended in a tie: {1}.": [
+    "انتهى الاستطلاع «{0}» بالتعادل: {1}.",
+    "Die Umfrage „{0}“ endete unentschieden: {1}.",
+    "Le sondage « {0} » s’est terminé à égalité : {1}.",
+    "La encuesta «{0}» terminó en empate: {1}.",
+    "Опрос «{0}» завершился вничью: {1}.",
+    "投票“{0}”已结束，结果平局：{1}。"
+  ],
+  "The poll “{0}” ended with no votes.": [
+    "انتهى الاستطلاع «{0}» دون أي صوت.",
+    "Die Umfrage „{0}“ endete ohne Stimmen.",
+    "Le sondage « {0} » s’est terminé sans aucun vote.",
+    "La encuesta «{0}» terminó sin votos.",
+    "Опрос «{0}» завершился без голосов.",
+    "投票“{0}”已结束，无人投票。"
+  ],
+  "The poll “{0}” ended: “{1}” won with {2} of {3}.": [
+    "انتهى الاستطلاع «{0}»: فازت «{1}» بـ{2} من {3}.",
+    "Die Umfrage „{0}“ ist beendet: „{1}“ gewann mit {2} von {3}.",
+    "Le sondage « {0} » est terminé : « {1} » l’emporte avec {2} sur {3}.",
+    "La encuesta «{0}» terminó: «{1}» ganó con {2} de {3}.",
+    "Опрос «{0}» завершён: победил ответ «{1}» — {2} из {3}.",
+    "投票“{0}”已结束：“{1}”以 {2} / {3} 胜出。"
+  ],
+  "This poll has ended. Its results are final.": [
+    "انتهى هذا الاستطلاع، ونتائجه نهائية.",
+    "Diese Umfrage ist beendet. Das Ergebnis steht fest.",
+    "Ce sondage est terminé. Ses résultats sont définitifs.",
+    "Esta encuesta ha terminado. Sus resultados son definitivos.",
+    "Этот опрос завершён. Результаты окончательные.",
+    "此投票已结束，结果为最终结果。"
+  ],
+  "Votes": ["الأصوات", "Stimmen", "Votes", "Votos", "Голоса", "投票详情"],
+  "Voting stops for everyone and the results become final. This can't be undone.": [
+    "يتوقف التصويت للجميع وتصبح النتائج نهائية. لا يمكن التراجع عن ذلك.",
+    "Die Abstimmung endet für alle und das Ergebnis steht fest. Das lässt sich nicht rückgängig machen.",
+    "Le vote s’arrête pour tout le monde et les résultats deviennent définitifs. C’est irréversible.",
+    "La votación se cierra para todos y los resultados pasan a ser definitivos. No se puede deshacer.",
+    "Голосование закончится для всех, а результаты станут окончательными. Отменить это нельзя.",
+    "所有人都将无法继续投票，结果成为最终结果。此操作无法撤销。"
+  ],
+  "What do you want to ask?": [
+    "ماذا تريد أن تسأل؟",
+    "Was möchtest du fragen?",
+    "Que veux-tu demander ?",
+    "¿Qué quieres preguntar?",
+    "О чём вы хотите спросить?",
+    "你想问什么？"
+  ],
+  "Write a question.": ["اكتب سؤالًا.", "Schreib eine Frage.", "Écris une question.", "Escribe una pregunta.", "Напишите вопрос.", "请输入问题。"],
+  "Your question": ["سؤالك", "Deine Frage", "Ta question", "Tu pregunta", "Ваш вопрос", "你的问题"]
+}

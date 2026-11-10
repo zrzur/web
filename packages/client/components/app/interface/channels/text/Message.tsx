@@ -54,12 +54,13 @@ import {
 import { createIsTimedOut } from "@revolt/common/lib/createIsTimedOut";
 import { EditMessage } from "./EditMessage";
 import { ForwardedFrame } from "./ForwardedFrame";
-import { ThreadChip } from "./ThreadChip";
 import { InteractionHeader } from "./interactions/InteractionHeader";
 import {
   MessageComponents,
   placedAttachments,
 } from "./interactions/MessageComponents";
+import { PollCard } from "./poll/PollCard";
+import { ThreadChip } from "./ThreadChip";
 
 interface Props {
   /**
@@ -468,6 +469,9 @@ export function Message(props: Props) {
             {(embed) => <Embed embed={embed} />}
           </For>
         </ForwardedFrame>
+        <Show when={props.message.poll}>
+          <PollCard message={props.message} />
+        </Show>
         <MessageComponents
           blocks={props.message.components}
           channelId={props.message.channelId}
@@ -477,9 +481,7 @@ export function Message(props: Props) {
           message={props.message}
         />
         <Reactions
-          reactions={
-            props.message.reactions
-          }
+          reactions={props.message.reactions}
           interactions={props.message.interactions}
           userId={client().user!.id}
           readOnly={

@@ -23601,3 +23601,179 @@ msgstr "زرزور، مباشرةً على <0>سطح مكتبك.</0>"
 #: components/app/interface/settings/user/appearance/AppearanceMenu.tsx
 #~ msgid "Zrzur's own look: very dark neutral panels with Zrzur Pink as the one accent."
 #~ msgstr "مظهر زرزور الخاص: لوحات داكنة جدًا بألوان محايدة، وزهري زرزور هو اللون المميز الوحيد."
+
+#. placeholder {0}: answer.count ?? 0
+#. placeholder {0}: props.message.total
+#. placeholder {0}: total()
+#: components/app/interface/channels/text/poll/PollCard.tsx
+#: components/ui/components/features/messaging/elements/PollEnded.tsx
+msgid "{0, plural, one {# vote} other {# votes}}"
+msgstr "{0, plural, zero {لا أصوات} one {صوت واحد} two {صوتان} few {# أصوات} many {# صوتًا} other {# صوت}}"
+
+#: components/modal/modals/CreatePoll.tsx
+msgid "1 week"
+msgstr "أسبوع واحد"
+
+#: components/modal/modals/CreatePoll.tsx
+msgid "2 weeks"
+msgstr "أسبوعان"
+
+#: components/modal/modals/CreatePoll.tsx
+msgid "24 hours"
+msgstr "24 ساعة"
+
+#: components/modal/modals/CreatePoll.tsx
+msgid "3 days"
+msgstr "3 أيام"
+
+#: components/modal/modals/CreatePoll.tsx
+msgid "4 hours"
+msgstr "4 ساعات"
+
+#: components/modal/modals/CreatePoll.tsx
+msgid "8 hours"
+msgstr "8 ساعات"
+
+#: components/modal/modals/CreatePoll.tsx
+msgid "Add answer"
+msgstr "أضف إجابة"
+
+#: components/modal/modals/CreatePoll.tsx
+msgid "Add at least two answers."
+msgstr "أضف إجابتين على الأقل."
+
+#: components/modal/modals/CreatePoll.tsx
+msgid "Allow more than one answer"
+msgstr "السماح بأكثر من إجابة"
+
+#: components/modal/modals/CreatePoll.tsx
+msgid "An answer can be at most {ANSWER_MAX} characters."
+msgstr "يمكن أن تتكون الإجابة من {ANSWER_MAX} حرفًا على الأكثر."
+
+#: components/modal/modals/CreatePoll.tsx
+msgid "Ask a question and let people vote. Results update live."
+msgstr "اطرح سؤالًا ودع الآخرين يصوّتون. تتحدّث النتائج مباشرةً."
+
+#. placeholder {0}: index() + 1
+#: components/modal/modals/CreatePoll.tsx
+msgid "Change the emoji of answer {0}"
+msgstr "غيّر رمز الإجابة {0} التعبيري"
+
+#. placeholder {0}: index() + 1
+#: components/modal/modals/CreatePoll.tsx
+msgid "Choose an emoji for answer {0}"
+msgstr "اختر رمزًا تعبيريًا للإجابة {0}"
+
+#: components/app/interface/channels/text/poll/PollCard.tsx
+#: components/modal/modals/CreatePoll.tsx
+msgid "Choose one answer"
+msgstr "اختر إجابة واحدة"
+
+#: components/app/interface/channels/text/poll/PollCard.tsx
+#: components/modal/modals/CreatePoll.tsx
+msgid "Choose one or more answers"
+msgstr "اختر إجابة واحدة أو أكثر"
+
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "Create a poll"
+msgstr "أنشئ استطلاعًا"
+
+#: components/modal/modals/CreatePoll.tsx
+#: src/interface/channels/text/Composition.tsx
+msgid "Create poll"
+msgstr "إنشاء استطلاع"
+
+#: components/app/menus/MessageContextMenu.tsx
+#: components/modal/modals/EndPoll.tsx
+msgid "End poll"
+msgstr "إنهاء الاستطلاع"
+
+#: components/modal/modals/EndPoll.tsx
+msgid "End poll now?"
+msgstr "هل تريد إنهاء الاستطلاع الآن؟"
+
+#. placeholder {0}: ends()
+#: components/app/interface/channels/text/poll/PollCard.tsx
+msgid "Ends {0}"
+msgstr "ينتهي {0}"
+
+#: components/app/interface/channels/text/poll/PollCard.tsx
+msgid "Final results"
+msgstr "النتائج النهائية"
+
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "In a channel where you can post polls."
+msgstr "في قناة يمكنك نشر الاستطلاعات فيها."
+
+#: components/modal/modals/PollVoters.tsx
+msgid "Nobody chose this answer yet."
+msgstr "لم يختر أحد هذه الإجابة بعد."
+
+#: components/modal/modals/CreatePoll.tsx
+msgid "Open for"
+msgstr "مفتوح لمدة"
+
+#. placeholder {0}: durationLabel(duration())
+#: components/modal/modals/CreatePoll.tsx
+msgid "Open for {0}"
+msgstr "مفتوح لمدة {0}"
+
+#: components/modal/modals/CreatePoll.tsx
+msgid "People can pick several answers."
+msgstr "يمكن اختيار عدة إجابات."
+
+#: components/modal/modals/CreatePoll.tsx
+msgid "Post poll"
+msgstr "انشر الاستطلاع"
+
+#. placeholder {0}: index() + 1
+#: components/modal/modals/CreatePoll.tsx
+msgid "Remove answer {0}"
+msgstr "احذف الإجابة {0}"
+
+#: components/app/interface/channels/text/poll/PollCard.tsx
+msgid "See who voted"
+msgstr "اعرض من صوّت"
+
+#. placeholder {0}: question()
+#. placeholder {1}: tied()
+#: components/ui/components/features/messaging/elements/PollEnded.tsx
+msgid "The poll “{0}” ended in a tie: {1}."
+msgstr "انتهى الاستطلاع «{0}» بالتعادل: {1}."
+
+#. placeholder {0}: question()
+#: components/ui/components/features/messaging/elements/PollEnded.tsx
+msgid "The poll “{0}” ended with no votes."
+msgstr "انتهى الاستطلاع «{0}» دون أي صوت."
+
+#. placeholder {0}: question()
+#. placeholder {1}: winners()[0]
+#. placeholder {2}: props.message.votes
+#. placeholder {3}: total()
+#: components/ui/components/features/messaging/elements/PollEnded.tsx
+msgid "The poll “{0}” ended: “{1}” won with {2} of {3}."
+msgstr "انتهى الاستطلاع «{0}»: فازت «{1}» بـ{2} من {3}."
+
+#: components/i18n/errors.tsx
+msgid "This poll has ended. Its results are final."
+msgstr "انتهى هذا الاستطلاع، ونتائجه نهائية."
+
+#: components/modal/modals/PollVoters.tsx
+msgid "Votes"
+msgstr "الأصوات"
+
+#: components/modal/modals/EndPoll.tsx
+msgid "Voting stops for everyone and the results become final. This can't be undone."
+msgstr "يتوقف التصويت للجميع وتصبح النتائج نهائية. لا يمكن التراجع عن ذلك."
+
+#: components/modal/modals/CreatePoll.tsx
+msgid "What do you want to ask?"
+msgstr "ماذا تريد أن تسأل؟"
+
+#: components/modal/modals/CreatePoll.tsx
+msgid "Write a question."
+msgstr "اكتب سؤالًا."
+
+#: components/modal/modals/CreatePoll.tsx
+msgid "Your question"
+msgstr "سؤالك"

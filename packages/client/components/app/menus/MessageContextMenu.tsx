@@ -62,6 +62,8 @@ import {
   ContextMenuSubMenu,
 } from "./ContextMenu";
 
+import { canEndPoll } from "@revolt/app/interface/channels/text/poll/pollModel";
+
 import { AppsSubMenu } from "./shared/AppsSubMenu";
 
 /**
@@ -352,7 +354,18 @@ export function MessageContextMenu(props: {
     forwardingEnabled(client()) &&
     canForwardMessage(props.message);
   const canEdit = () =>
-    !!props.message?.author?.self && !props.message.forwarded && canReply();
+    !!props.message?.author?.self &&
+    !props.message.forwarded &&
+    !props.message.poll &&
+    canReply();
+  /** the author ends their own open poll, Manage Messages anyone's */
+  const canEndThisPoll = () =>
+    !!props.message?.poll &&
+    canEndPoll({
+      author: !!props.message.author?.self,
+      manage: !!props.message.channel?.havePermission("ManageMessages"),
+      closed: props.message.isPollClosed(),
+    });
   const canPin = () =>
     !official() &&
     (props.message?.channel?.type === "DirectMessage" ||
@@ -512,7 +525,7 @@ export function MessageContextMenu(props: {
         </For>
 
         {/* 3 · manage */}
-        <Show when={canEdit() || canPin()}>
+        <Show when={canEdit() || canPin() || canEndThisPoll()}>
           <ContextMenuDivider />
         </Show>
         <Show when={canEdit()}>
@@ -530,6 +543,18 @@ export function MessageContextMenu(props: {
                 <Trans>Unpin message</Trans>
               </Match>
             </Switch>
+          </ContextMenuButton>
+        </Show>
+
+        <Show when={canEndThisPoll()}>
+          <ContextMenuButton
+            icon={<Icon name="stop" size={16} />}
+            onClick={() =>
+              openModal({ type: "end_poll", message: props.message! })
+            }
+            data-testid="menu-end-poll"
+          >
+            <Trans>End poll</Trans>
           </ContextMenuButton>
         </Show>
 

@@ -86,6 +86,9 @@ export function SystemMessageIcon(props: {
           <Match when={props.systemMessage.type === "raid_alert"}>
             <Icon name="warning-circle" size={16} />
           </Match>
+          <Match when={props.systemMessage.type === "poll_ended"}>
+            <Icon name="list-checks" size={16} />
+          </Match>
           <Match when={props.systemMessage.type === "automod_alert"}>
             <Icon name="shield-check" size={16} />
           </Match>
@@ -147,6 +150,9 @@ const Base = styled("div", {
       },
       raid_alert: {
         color: "var(--z-warning, var(--md-sys-color-primary))",
+      },
+      poll_ended: {
+        color: "var(--md-sys-color-primary)",
       },
       automod_alert: {
         color: "var(--z-warning, var(--md-sys-color-primary))",
