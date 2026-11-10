@@ -526,7 +526,7 @@ export function MessageComposition(props: Props) {
                               </ContextMenuButton>
                             </Show>
                             <ContextMenuButton
-                              icon={<Icon name="list-checks" size={20} />}
+                              icon={<Icon name="poll" size={20} />}
                               onClick={createPoll}
                               data-testid="composer-create-poll"
                             >
@@ -541,7 +541,7 @@ export function MessageComposition(props: Props) {
                             <ContextMenu>
                               <Show when={canPoll()}>
                                 <ContextMenuButton
-                                  icon={<Icon name="list-checks" size={20} />}
+                                  icon={<Icon name="poll" size={20} />}
                                   onClick={createPoll}
                                   data-testid="composer-create-poll"
                                 >
@@ -665,7 +665,7 @@ export function MessageComposition(props: Props) {
                           }}
                           onPress={createPoll}
                         >
-                          <Icon name="list-checks" size={22} />
+                          <Icon name="poll" size={22} />
                         </IconButton>
                       </MessageBox.InlineIcon>
                     </Show>

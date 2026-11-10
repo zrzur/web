@@ -72,11 +72,7 @@ export function PollVotersModal(
       title={<Trans>Votes</Trans>}
       description={poll().question}
       actions={[{ text: <Trans>Close</Trans> }]}
-      error={
-        <Show when={error()}>
-          <TranslatedError error={error()} />
-        </Show>
-      }
+      error={error() ? <TranslatedError error={error()} /> : undefined}
     >
       <Body data-testid="poll-voters-dialog">
         <Choices role="tablist" aria-label={t`Answers`}>

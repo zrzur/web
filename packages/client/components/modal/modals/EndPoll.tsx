@@ -1,4 +1,4 @@
-import { Show, createSignal } from "solid-js";
+import { createSignal } from "solid-js";
 
 import { Trans } from "@lingui/solid/macro";
 
@@ -49,11 +49,7 @@ export function EndPollModal(
         },
       ]}
       isDisabled={ending()}
-      error={
-        <Show when={error()}>
-          <TranslatedError error={error()} />
-        </Show>
-      }
+      error={error() ? <TranslatedError error={error()} /> : undefined}
     >
       <Trans>
         Voting stops for everyone and the results become final. This can't be

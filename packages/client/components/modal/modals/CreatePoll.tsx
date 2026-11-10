@@ -145,7 +145,7 @@ export function CreatePollModal(
   return (
     <Dialog
       tone="create"
-      iconName="list-checks"
+      iconName="poll"
       size="md"
       show={props.show}
       onClose={props.onClose}
@@ -166,12 +166,13 @@ export function CreatePollModal(
         },
       ]}
       isDisabled={sending()}
+      // the banner shows whenever this is set: only a real message, or nothing
       error={
-        <Show when={error() || (tried() && problemText())}>
-          <Show when={error()} fallback={problemText()}>
-            <TranslatedError error={error()} />
-          </Show>
-        </Show>
+        error() ? (
+          <TranslatedError error={error()} />
+        ) : tried() ? (
+          problemText()
+        ) : undefined
       }
     >
       <Fields data-testid="create-poll">

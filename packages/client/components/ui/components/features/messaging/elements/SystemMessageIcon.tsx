@@ -90,7 +90,7 @@ export function SystemMessageIcon(props: {
             <Icon name="warning-circle" size={16} />
           </Match>
           <Match when={props.systemMessage.type === "poll_ended"}>
-            <Icon name="list-checks" size={16} />
+            <Icon name="poll" size={16} />
           </Match>
           <Match when={props.systemMessage.type === "automod_alert"}>
             <Icon name="shield-check" size={16} />

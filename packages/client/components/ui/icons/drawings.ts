@@ -256,6 +256,7 @@ const table = {
   "plus-square":
     '<path stroke=currentColor stroke-linecap=round stroke-linejoin=round d="M2.5 12c0-4.478 0-6.717 1.391-8.109C5.282 2.5 7.521 2.5 12 2.5c4.478 0 6.718 0 8.109 1.391s1.391 3.63 1.391 8.11c0 4.477 0 6.717-1.391 8.108S16.479 21.5 12 21.5c-4.478 0-6.718 0-8.109-1.391S2.5 16.479 2.5 12" class=z-shape /><path stroke=currentColor stroke-linecap=round stroke-linejoin=round d="M12 8v8m4-4H8"/>',
   plus: '<path stroke=currentColor stroke-linecap=round stroke-linejoin=round d="M12.001 5v14.002M19.002 12.002H5"/>',
+  poll: "<rect width=13 height=4 x=3 y=4 stroke=currentColor rx=2 /><rect width=18 height=4 x=3 y=10 stroke=currentColor rx=2 /><rect width=8 height=4 x=3 y=16 stroke=currentColor rx=2 />",
   power:
     '<path stroke=currentColor stroke-linecap=round stroke-linejoin=round d="M18.708 6A9 9 0 1 1 3 12c0-2.305.867-4.408 2.292-6M12 3v9"/>',
   prohibit:

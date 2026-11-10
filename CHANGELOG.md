@@ -17,6 +17,9 @@
 
 ### Brand
 
+* **Poll icon:** polls have their own icon (result bars) in the message box, the poll window and the "poll ended" line; the checklist stays for selecting messages.
+* **Poll windows:** the create, end and voters windows no longer show an empty red error box when nothing is wrong.
+* **Event delete:** the confirm button uses the danger style instead of a red-and-blue test look.
 * **Tab icon:** the app, Discover and Designs use the red Zrzur logo with no background in the browser tab, the same as zrzur.com.
 
 ### Performance
