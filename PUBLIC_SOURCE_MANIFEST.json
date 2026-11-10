@@ -292,8 +292,8 @@
     },
     {
       "path": "CHANGELOG.md",
-      "sha256": "be0750954d6c8a074522a1a98061a968eea61fdb16510e7fed2d647117fd04e0",
-      "bytes": 104510,
+      "sha256": "be23b6c0689d254390ec7c0d4b66e518e3bf24a3cc424c425ec0096e354da193",
+      "bytes": 104919,
       "category": "public-documentation"
     },
     {
@@ -514,14 +514,14 @@
     },
     {
       "path": "docker/csp.js",
-      "sha256": "8b39d36f165857ca103b416dd5f92758525f3150176c1f60693151eccc48e9a9",
-      "bytes": 7419,
+      "sha256": "ed7149dada71770d3d0f517c6cf0e285d26b2cc02b729866e70baa21a23359ee",
+      "bytes": 11219,
       "category": "product-source-or-build-manifest"
     },
     {
       "path": "docker/csp.test.js",
-      "sha256": "6b88556748853de674d838ad98050cd61d88ff203154399cf9d51be74623c803",
-      "bytes": 6085,
+      "sha256": "8c6ba8275dec08d325c45bf9ca345d593dd0ca48aff13d071da926206e9b9736",
+      "bytes": 10917,
       "category": "synthetic-test-source-or-fixture"
     },
     {
@@ -544,8 +544,8 @@
     },
     {
       "path": "docker/server.js",
-      "sha256": "78d320272126ec1137416eb7f784e2c991c1178a54933b2613fc4638aec93a79",
-      "bytes": 6360,
+      "sha256": "60b7fe4456319920a52160e77ddfad3a5d52bb5e3cad8e99f766dba728742af2",
+      "bytes": 6565,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -586,8 +586,8 @@
     },
     {
       "path": "e2e/stack-runner/csp.mjs",
-      "sha256": "b75511c8869769fdc33db74ae9c8a3dc2f31cbb4d966bdd4932c2425a4a27b74",
-      "bytes": 12288,
+      "sha256": "33d676f4705dfee729e7a1dc34c5cbfd9eb9bf3dcb0270cd42458a22e46071ed",
+      "bytes": 17080,
       "category": "synthetic-test-source-or-fixture"
     },
     {
@@ -712,8 +712,8 @@
     },
     {
       "path": "packages/client/.gitignore",
-      "sha256": "5537f5e00dcc0f1774e453c6a6bfde8c1a6a68871bfd3a738e9d6a2f6ecf47f1",
-      "bytes": 190,
+      "sha256": "5b097abef4926a199f15998f6cb474beddc3f0ea5e6bfffd3b9e3b78f8444143",
+      "bytes": 312,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -2698,8 +2698,8 @@
     },
     {
       "path": "packages/client/components/common/lib/env.ts",
-      "sha256": "32a5688167e95aa7dda2a7cf03f14fb9c231758e662d896bd4d12ace13910857",
-      "bytes": 13205,
+      "sha256": "0346d9b9621e730765d841fbdde5a6846b520af92e6a192e60a68bee9d04aeb4",
+      "bytes": 13179,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -4617,6 +4617,12 @@
       "category": "product-source-or-build-manifest"
     },
     {
+      "path": "packages/client/components/plugins/sandboxCsp.test.ts",
+      "sha256": "6406e4c2d4af8c8020d4f651710796998a2e72ac900ef2ce52df06d53a8a1e00",
+      "bytes": 1480,
+      "category": "synthetic-test-source-or-fixture"
+    },
+    {
       "path": "packages/client/components/routing/index.tsx",
       "sha256": "0431c09d98931da441b0fa4da6d61669529a7fcf2881972e00b9248fc2f72065",
       "bytes": 3200,
@@ -4636,8 +4642,8 @@
     },
     {
       "path": "packages/client/components/rtc/VoiceProcessor.ts",
-      "sha256": "a8e59eafb71bdb966457300b96522ac369c5262c3f17ebe0a17798dff8c4a566",
-      "bytes": 9514,
+      "sha256": "a489167ac5d96696216be50c8be1f3d416e899535ce11447a0c706514787752f",
+      "bytes": 9768,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -4746,6 +4752,18 @@
       "path": "packages/client/components/rtc/moderation.ts",
       "sha256": "4828067ffc7f47140af562ae3fa4cc13d6e737b35b4e2d9c1e49ac771e05a55a",
       "bytes": 3441,
+      "category": "product-source-or-build-manifest"
+    },
+    {
+      "path": "packages/client/components/rtc/rnnoiseUrl.test.ts",
+      "sha256": "68c7f375357935ed568c840ef7e9a8ded59d973930b0fac61fe54c770d0e5595",
+      "bytes": 901,
+      "category": "synthetic-test-source-or-fixture"
+    },
+    {
+      "path": "packages/client/components/rtc/rnnoiseUrl.ts",
+      "sha256": "76e86d848405319857ee126474dcd6c65df6dc939303bc52e0414388bd1c7256",
+      "bytes": 686,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -37618,8 +37636,8 @@
     },
     {
       "path": "packages/client/scripts/copyAssets.mjs",
-      "sha256": "fa9ef0add1c33169e5bc51a78bb4715373c2e0d2d9da35bb4c92972b809b1508",
-      "bytes": 1271,
+      "sha256": "92d0cb36f52b678a36440a93452ca7185a145ff930ce2dffa19107f30411bf96",
+      "bytes": 1493,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -38881,6 +38899,12 @@
       "sha256": "71d5794bd1a46e2871012b9c8b17151b45b8c20065950e8fe8ee500fae2f6410",
       "bytes": 6503,
       "category": "synthetic-test-source-or-fixture"
+    },
+    {
+      "path": "packages/client/scripts/rnnoiseAssets.mjs",
+      "sha256": "36a57bd71486c2b0b06b79ea3eac9bbf1a01ddbd70c9d4ccebaef6afe2ec54e0",
+      "bytes": 729,
+      "category": "product-source-or-build-manifest"
     },
     {
       "path": "packages/client/scripts/scan-hardcoded.mjs",
@@ -40539,9 +40563,39 @@
       "category": "product-source-or-build-manifest"
     },
     {
+      "path": "packages/client/vendor/rnnoise.test.ts",
+      "sha256": "40fd50567d93638f9daf37978c939f80966d8e095f3274182e2d96e63cad732a",
+      "bytes": 1107,
+      "category": "synthetic-test-source-or-fixture"
+    },
+    {
+      "path": "packages/client/vendor/rnnoise/LICENSE",
+      "sha256": "a6cba85bc92e0cff7a450b1d873c0eaa2e9fc96bf472df0247a26bec77bf3ff9",
+      "bytes": 10173,
+      "category": "license-and-attribution"
+    },
+    {
+      "path": "packages/client/vendor/rnnoise/RNNoiseWorklet.js",
+      "sha256": "14fbc044a0f81cf7880c66e1bfb4162bf4d0a15935104d2a63ec66b268c619d7",
+      "bytes": 7692,
+      "category": "product-source-or-build-manifest"
+    },
+    {
+      "path": "packages/client/vendor/rnnoise/SOURCES.md",
+      "sha256": "aed8f3bca8c44ea36bcd5999568ca337206e9915e20b14fe516276756b645597",
+      "bytes": 1406,
+      "category": "public-documentation"
+    },
+    {
+      "path": "packages/client/vendor/rnnoise/rnnoise.wasm",
+      "sha256": "f4a9474de4b1dcf53c5a8f96ec5dfb8034f92aae87fd5dbeb10fe5570d079d9a",
+      "bytes": 848860,
+      "category": "product-source-or-build-manifest"
+    },
+    {
       "path": "packages/client/vite.config.ts",
-      "sha256": "2c8ac404abf174b93ccdd200986a8213b33a629af7f96dbc4499ff97bd56ab5d",
-      "bytes": 9791,
+      "sha256": "7448f884540c93c1617907625f0d968277ff4994cb4d510644164d7f58ba53b8",
+      "bytes": 10201,
       "category": "product-source-or-build-manifest"
     },
     {
