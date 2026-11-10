@@ -19,6 +19,11 @@ export function SpecialEmbedPlaceholder(props: {
   title?: string;
   /** thumbnail already proxied by us (never the provider's own URL) */
   thumbnail?: string;
+  /**
+   * Name the provider; off when the embed around the card shows the site
+   * name. The title is always shown by that embed, never here.
+   */
+  heading?: boolean;
   onLoad: () => void;
 }) {
   const { t } = useLingui();
@@ -43,23 +48,22 @@ export function SpecialEmbedPlaceholder(props: {
         <Shade />
       </Show>
       <Info>
-        <Provider>{props.provider}</Provider>
-        <Show when={props.title}>
-          <Name dir="auto">{props.title}</Name>
+        <Show when={props.heading}>
+          <Provider>{props.provider}</Provider>
         </Show>
         <Note dir="auto">
           <Trans>
             Loading this connects to {props.company}. They get your IP address
             and may store cookies.
-          </Trans>{" "}
-          <a href={policy()} target="_blank" rel="noopener noreferrer">
-            <Trans>Privacy policy</Trans>
-          </a>
+          </Trans>
         </Note>
         <Action>
           <Button onPress={props.onLoad} aria-label={label()}>
             <Trans>Load</Trans>
           </Button>
+          <a href={policy()} target="_blank" rel="noopener noreferrer">
+            <Trans>Privacy policy</Trans>
+          </a>
         </Action>
       </Info>
     </Box>
@@ -118,29 +122,29 @@ const Provider = styled("span", {
   base: { fontWeight: 600, color: "var(--z-fg-secondary)" },
 });
 
-const Name = styled("strong", {
-  base: {
-    overflowWrap: "anywhere",
-    lineClamp: 2,
-  },
+const Note = styled("span", {
+  base: { color: "var(--z-fg-primary)" },
 });
 
-const Note = styled("span", {
+/** Load, and the provider's privacy policy as its own target beside it */
+const Action = styled("div", {
   base: {
-    color: "var(--z-fg-primary)",
+    display: "flex",
+    flexWrap: "wrap",
+    alignItems: "center",
+    gap: "4px 16px",
+    flexShrink: 0,
     "& a": {
+      display: "inline-flex",
+      alignItems: "center",
+      minHeight: "32px",
       color: "var(--z-link, var(--z-fg-primary))",
       textDecoration: "underline",
     },
-  },
-});
-
-const Action = styled("div", {
-  base: {
-    flexShrink: 0,
     "@media (max-width: 600px)": {
       width: "100%",
       "& button": { width: "100%", minHeight: "44px" },
+      "& a": { minHeight: "44px" },
     },
   },
 });

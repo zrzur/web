@@ -103,6 +103,8 @@ export function SpecialEmbed(props: { embed: WebsiteEmbed }) {
             provider={provider().name}
             company={provider().company}
             title={props.embed.title ?? undefined}
+            // the embed around the card shows the site name and the title
+            heading={!props.embed.siteName}
             // proxied by our own link proxy, never the provider's address
             thumbnail={props.embed.image?.proxiedURL}
             onLoad={() => {
