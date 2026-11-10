@@ -24,6 +24,7 @@
 
 ### Performance
 
+* **Designs, one page at a time:** the Designs wall (in the app and on the Designs site) shows 24 designs and the creators list 12 creators; "Show more" adds the next page below without moving the page, waits on the button while the next page loads and ends with one plain line. Before, the wall grew by itself while you scrolled, to 308 tiles and 340 images, and scrolling stuttered. Decoration art now loads lazily and decodes off the main thread.
 * **Smaller install:** the app shell the service worker installs is back under its 2,000,000-byte budget (1,996,898). dayjs was bundled twice (the Arabic and British English date files pulled in the ESM copy), the maths parser now loads with KaTeX on the first message with `$$`, and moderators' selection mode loads on first use. A build over budget now names its biggest files.
 
 ### Security

@@ -143,6 +143,8 @@ export function moreState(
   loading: boolean,
   page = PAGE_TILES,
 ): MoreState {
+  // before the first page arrives the list shows its own placeholders
+  if (total === 0) return "none";
   if (visible < total) return "more";
   if (loading) return "loading";
   if (more) return "more";

@@ -94,6 +94,10 @@ describe("moreState", () => {
     expect(moreState(24, 10, false, false)).toBe("none");
     expect(moreState(24, 24, false, false)).toBe("none");
   });
+  it("shows no foot before anything has loaded: the list has its own placeholders", () => {
+    expect(moreState(24, 0, true, true)).toBe("none");
+    expect(moreState(24, 0, false, false)).toBe("none");
+  });
   it("the first page is about two screens of tiles", () => {
     expect(PAGE_TILES).toBe(24);
   });
