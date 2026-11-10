@@ -11,7 +11,14 @@ import {
   withDefaultAvatar,
 } from "../../../components/ui/components/features/profiles/sampleAvatars";
 
-import { isOn, needsMore, takenOff, weave } from "./gallery";
+import {
+  PAGE_TILES,
+  isOn,
+  moreState,
+  needsMore,
+  takenOff,
+  weave,
+} from "./gallery";
 
 const many = (name: string, count: number) =>
   Array.from({ length: count }, (_, i) => `${name}${i}`);
@@ -63,11 +70,32 @@ describe("try-on helpers", () => {
 });
 
 describe("needsMore", () => {
-  it("asks only near the end, once, while there is more", () => {
-    expect(needsMore(10, 60, true, false)).toBe(false);
-    expect(needsMore(56, 60, true, false)).toBe(true);
-    expect(needsMore(56, 60, true, true)).toBe(false);
-    expect(needsMore(56, 60, false, false)).toBe(false);
+  it("asks only when the next page would not be full, once, while there is more", () => {
+    expect(needsMore(24, 60, true, false)).toBe(false);
+    expect(needsMore(40, 60, true, false)).toBe(true);
+    expect(needsMore(40, 60, true, true)).toBe(false);
+    expect(needsMore(40, 60, false, false)).toBe(false);
+  });
+});
+
+describe("moreState", () => {
+  it("offers more while some are hidden, even with nothing left to fetch", () => {
+    expect(moreState(24, 60, false, false)).toBe("more");
+    expect(moreState(24, 60, true, true)).toBe("more");
+  });
+  it("offers to fetch when everything loaded is shown but the server has more", () => {
+    expect(moreState(48, 48, true, false)).toBe("more");
+  });
+  it("waits on the button while the next page is on its way", () => {
+    expect(moreState(72, 48, true, true)).toBe("loading");
+  });
+  it("says it is the end only after a list longer than one page", () => {
+    expect(moreState(48, 30, false, false)).toBe("end");
+    expect(moreState(24, 10, false, false)).toBe("none");
+    expect(moreState(24, 24, false, false)).toBe("none");
+  });
+  it("the first page is about two screens of tiles", () => {
+    expect(PAGE_TILES).toBe(24);
   });
 });
 
