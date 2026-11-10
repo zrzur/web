@@ -46,8 +46,9 @@ export function statusExpiresAt(
 }
 
 /**
- * The edit that sets a custom status. Text, emoji and expiry go together:
- * an emoji alone replaces the old text, and nothing at all clears it.
+ * The edit that sets a custom status. Text, emoji and expiry go together
+ * and always replace the old ones (remove StatusText, then set); nothing at
+ * all clears it.
  */
 export function customStatusPatch(
   text: string,
@@ -75,5 +76,8 @@ export function customStatusPatch(
     kept ?? statusExpiresAt(options.expiry ?? "never", options.now);
   if (expiresAt) status.expires_at = expiresAt;
 
-  return value ? { status } : { status, remove: ["StatusText"] };
+  // always an explicit replacement: the old text, emoji and expiry go first,
+  // so removing the emoji or choosing Never with the same text takes effect
+  // (the server keeps them for a bare repeat of the same text)
+  return { status, remove: ["StatusText"] };
 }

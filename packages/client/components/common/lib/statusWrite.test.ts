@@ -7,8 +7,18 @@ afterEach(() => vi.useRealTimers());
 
 describe("custom status text", () => {
   test("writes only text, preserving the independent presence value", () => {
+    // the whole status is replaced: never the server's "same text" rule
     expect(customStatusPatch("  hello  ")).toEqual({
       status: { text: "hello" },
+      remove: ["StatusText"],
+    });
+  });
+  test("the same text with the emoji removed, or 'never', still replaces", () => {
+    // after "Lunch" + 🍕 + 30 minutes: removing the emoji and choosing
+    // Never sends the text alone, and must clear the emoji and expiry
+    expect(customStatusPatch("Lunch", { expiry: "never" })).toEqual({
+      status: { text: "Lunch" },
+      remove: ["StatusText"],
     });
   });
   test("empty text explicitly removes the old field", () => {
@@ -138,6 +148,7 @@ describe("status emoji and expiry", () => {
         emoji: "🍕",
         expires_at: new Date(2026, 10, 10, 12, 30).toISOString(),
       },
+      remove: ["StatusText"],
     });
   });
   test("an expiry already set is kept while it is in the future", () => {
