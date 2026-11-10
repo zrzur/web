@@ -343,7 +343,8 @@ const Footer = styled("footer", {
       textDecoration: "none",
       _hover: { color: "var(--z-fg-primary)" },
       "&:focus-visible": { outline: "2px solid var(--z-focus)" },
-      _phone: { minHeight: "44px" },
+      // 44 px both ways on phones, also for a short word like "Terms"
+      _phone: { minHeight: "44px", minWidth: "44px", justifyContent: "center" },
     },
   },
 });

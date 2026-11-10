@@ -1758,7 +1758,13 @@ const Words = styled("nav", {
         outlineOffset: "-2px",
         borderRadius: "var(--z-shape-chip)",
       },
-      _phone: { fontSize: "18px", lineHeight: "26px" },
+      // a short word ("All") still gets a 44 px target
+      _phone: {
+        fontSize: "18px",
+        lineHeight: "26px",
+        minWidth: "44px",
+        justifyContent: "center",
+      },
     },
     "& > [aria-current]": { color: "var(--z-fg-primary)" },
     // a mouse has no sideways scroll: every word on the page, in as many rows
