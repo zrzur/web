@@ -109,10 +109,12 @@ const sizes = process.env.E2E_SIZES?.split(",") ?? Object.keys(VIEWPORTS);
 const browser = await pw.chromium.launch({
   executablePath: process.env.E2E_CHROMIUM,
   headless: true,
-  // a fake microphone for the voice step
+  // a fake microphone, camera and screen for the voice step
   args: [
     "--use-fake-ui-for-media-stream",
     "--use-fake-device-for-media-stream",
+    "--auto-select-desktop-capture-source=Entire screen",
+    "--auto-accept-this-tab-capture",
   ],
 });
 
@@ -174,6 +176,65 @@ const expectNone = (found, where) => {
       `${found.length} violation(s) on ${where}: ${found.slice(0, 3).join(" | ")}`,
     );
 };
+
+/** The files service and a public video the link proxy can read */
+const MEDIA = env.VITE_DEV_MEDIA_URL;
+const YOUTUBE = "https://www.youtube.com/watch?v=jNQXAC9IVRw";
+/** A 1x1 PNG */
+const PNG = Buffer.from(
+  "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8z8BQDwAEhQGAhKmMIQAAAABJRU5ErkJggg==",
+  "base64",
+);
+
+/** A signed-in page in the language, watched for violations from its start */
+async function signedIn(viewport, locale, { media = false } = {}) {
+  const { page, context } = await login(browser, accounts[0], {
+    viewport,
+    locale,
+  });
+  if (media)
+    await context.grantPermissions(["microphone", "camera"], { origin: APP });
+  await watch(context);
+  await page.evaluate((l) => localStorage.setItem("lang", l), locale);
+  const refused = consoleRefusals(page);
+  await page.reload();
+  await page.waitForLoadState("networkidle");
+  return { page, context, refused };
+}
+
+/**
+ * Open the first server, as a person clicks it, and a channel with a message
+ * box: the server may open on a voice channel (on phones the list is folded
+ * away, so by address there). Returns the message box.
+ */
+async function openTextChannel(page, shot) {
+  try {
+    const server = page.locator('a[href^="/server/"]').first();
+    await server.waitFor({ state: "attached", timeout: 30000 });
+    await openServer(page, server);
+    const composer = page.locator('[contenteditable="true"]').last();
+    const hrefs = await page.evaluate(() =>
+      [...document.querySelectorAll('a[href*="/channel/"]')].map((a) =>
+        a.getAttribute("href"),
+      ),
+    );
+    for (const href of hrefs.slice(0, 8)) {
+      if (await composer.isVisible()) break;
+      await page.goto(`${APP}${href}`);
+      await composer.waitFor({ timeout: 8000 }).catch(() => {});
+    }
+    await composer.waitFor({ timeout: 10000 });
+    await page.waitForLoadState("networkidle");
+    await page.waitForTimeout(1500);
+    return composer;
+  } catch (error) {
+    if (internal)
+      await page
+        .screenshot({ path: `${internal}screenshots/e2e/csp/${shot}-fail.png` })
+        .catch(() => {});
+    throw error;
+  }
+}
 
 console.log(`csp: app ${APP}, API ${API}`);
 
@@ -241,68 +302,95 @@ for (const size of sizes) {
     await step(
       `${label}: signing in and opening a server channel has no violation`,
       async () => {
-        const session = await login(browser, accounts[0], { viewport, locale });
-        const { page, context } = session;
-        await watch(context);
-        await page.evaluate((l) => localStorage.setItem("lang", l), locale);
-        const refused = consoleRefusals(page);
-        await page.reload();
-        await page.waitForLoadState("networkidle");
-        // the first server in the list, as a person clicks it
-        try {
-          const server = page.locator('a[href^="/server/"]').first();
-          await server.waitFor({ state: "attached", timeout: 30000 });
-          await openServer(page, server);
-          // the server may open on a voice channel: go through its channels
-          // until one has a message box (on phones the list is folded away,
-          // so by address there)
-          const composer = page.locator('[contenteditable="true"]').last();
-          const hrefs = await page.evaluate(() =>
-            [...document.querySelectorAll('a[href*="/channel/"]')].map((a) =>
-              a.getAttribute("href"),
-            ),
-          );
-          for (const href of hrefs.slice(0, 8)) {
-            if (await composer.isVisible()) break;
-            await page.goto(`${APP}${href}`);
-            await composer.waitFor({ timeout: 8000 }).catch(() => {});
-          }
-          await composer.waitFor({ timeout: 10000 });
-          await page.waitForLoadState("networkidle");
-          await page.waitForTimeout(1500);
-        } catch (error) {
-          if (internal)
-            await page
-              .screenshot({
-                path: `${internal}screenshots/e2e/csp/${locale}-${size}-fail.png`,
-              })
-              .catch(() => {});
-          throw error;
-        }
+        const { page, context, refused } = await signedIn(viewport, locale);
+        await openTextChannel(page, `${locale}-${size}`);
         const found = [...(await violations(page)), ...refused];
         await context.close();
         expectNone(found, page.url());
       },
     );
 
-    // voice: the events socket, the voice node (ws + http probe), the gate
-    // worklet and the noise filter (its worklet and WebAssembly) all start
+    // what a person does in a channel: send an image, load a media player,
+    // open the GIF picker (the files service, the link proxy, a framed
+    // player and the GIF service under the policy)
     if (size === "desktop")
       await step(
-        `${label}: joining a voice call has no violation`,
+        `${label}: an upload, a YouTube player and the GIF picker have no violation`,
         async () => {
-          const session = await login(browser, accounts[0], {
-            viewport,
-            locale,
+          const { page, context, refused } = await signedIn(viewport, locale);
+          const composer = await openTextChannel(page, `${locale}-upload`);
+
+          // upload: the picture shows from the files service
+          const chooser = page.waitForEvent("filechooser", { timeout: 15000 });
+          await page
+            .getByRole("button", { name: tr(locale, "Upload file") })
+            .first()
+            .click();
+          await (
+            await chooser
+          ).setFiles({
+            name: `csp-${locale}.png`,
+            mimeType: "image/png",
+            buffer: PNG,
           });
-          const { page, context } = session;
-          await context.grantPermissions(["microphone", "camera"], {
-            origin: APP,
+          await composer.click();
+          await page.keyboard.press("Enter");
+          await page
+            .locator(`img[src^="${MEDIA}"]`)
+            .last()
+            .waitFor({ timeout: 30000 });
+
+          // a YouTube link: the placeholder, then the player after "Load"
+          await composer.click();
+          await page.keyboard.type(`${YOUTUBE} ${locale}`);
+          await page.keyboard.press("Enter");
+          const load = page.locator('button[aria-label*="YouTube"]').last();
+          await load.waitFor({ timeout: 45000 });
+          await load.click();
+          await page
+            .locator('iframe[src^="https://www.youtube-nocookie.com/embed/"]')
+            .last()
+            .waitFor({ state: "attached", timeout: 15000 });
+          await page.waitForTimeout(4000);
+
+          // the GIF picker, with whatever the GIF service answers
+          await page
+            .getByRole("button", { name: tr(locale, "Open GIF picker") })
+            .first()
+            .click();
+          await page
+            .locator(`[aria-label="${tr(locale, "GIF picker")}"]`)
+            .first()
+            .waitFor({ timeout: 15000 });
+          await page.waitForTimeout(3000);
+          await page.keyboard.press("Escape");
+
+          const found = [...(await violations(page)), ...refused];
+          await context.close();
+          expectNone(found, "upload, player, GIF picker");
+        },
+      );
+
+    // voice: the events socket, the voice node (ws + http probe), the gate
+    // worklet and the noise filter (the app's own worklet and WebAssembly),
+    // then a screen share
+    if (size === "desktop")
+      await step(
+        `${label}: a voice call with the noise filter and a screen share has no violation`,
+        async () => {
+          const { page, context, refused } = await signedIn(viewport, locale, {
+            media: true,
           });
-          await watch(context);
-          await page.evaluate((l) => localStorage.setItem("lang", l), locale);
-          const refused = consoleRefusals(page);
-          await page.reload();
+          const rnnoise = new Map();
+          const elsewhere = [];
+          page.on("response", (response) => {
+            const url = response.url();
+            if (url.includes("/rnnoise/")) rnnoise.set(url, response.status());
+          });
+          page.on("request", (request) => {
+            if (/jsdelivr|unpkg/.test(request.url()))
+              elsewhere.push(request.url());
+          });
           const server = page.locator('a[href^="/server/"]').first();
           await server.waitFor({ timeout: 30000 });
           await server.click();
@@ -326,9 +414,46 @@ for (const size of sizes) {
           // connected: the join button is gone
           await join.waitFor({ state: "hidden", timeout: 30000 });
           await page.waitForTimeout(4000);
+
+          // the noise filter came from this server. Playwright does not see
+          // the worklet module's own request (audioWorklet.addModule), but
+          // RNNoiseNode.loadModule fetches rnnoise.wasm only after addModule
+          // of RNNoiseWorklet.js from the same folder has resolved
+          const loaded = [...rnnoise.entries()];
+          const wasm = loaded.find(([u]) => u.endsWith("/rnnoise.wasm"));
+          if (!wasm)
+            throw new Error(
+              `noise filter not loaded: ${JSON.stringify(loaded)}`,
+            );
+          if (
+            wasm[0] !== `${APP}/assets/rnnoise/rnnoise.wasm` ||
+            wasm[1] !== 200
+          )
+            throw new Error(`noise filter from ${wasm[0]} (${wasm[1]})`);
+          if (elsewhere.length)
+            throw new Error(`requests to a public CDN: ${elsewhere.join(" ")}`);
+
+          // a screen share, if the browser hands over a screen
+          const share = page
+            .locator('[data-voice-control="screenshare"]')
+            .first();
+          await share.click({ timeout: 10000 });
+          await page.waitForTimeout(1500);
+          // a choice of quality may come first: take the suggested one
+          const dialog = page.getByRole("dialog");
+          if (await dialog.count()) {
+            await page.keyboard.press("Enter");
+            await page.waitForTimeout(1500);
+          }
+          await page
+            .locator('[data-voice-control="screenshare"][aria-pressed="true"]')
+            .first()
+            .waitFor({ timeout: 15000 });
+          await page.waitForTimeout(3000);
+
           const found = [...(await violations(page)), ...refused];
           await context.close();
-          expectNone(found, "a voice call");
+          expectNone(found, "a voice call with a screen share");
         },
       );
   }

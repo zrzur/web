@@ -16,7 +16,7 @@
 //   on another site loads the app's files (Discover and Designs serve their
 //   own copy).
 const { createServer } = require("node:http");
-const { contentSecurityPolicy, readRoot } = require("./csp.js");
+const { contentSecurityPolicy, keepPolicyFresh } = require("./csp.js");
 const { createHash } = require("node:crypto");
 const { readFileSync, statSync, existsSync } = require("node:fs");
 const { join, extname, resolve, sep } = require("node:path");
@@ -97,11 +97,6 @@ function resolveFile(path) {
 
 // the policy from the addresses alone until the API root has been read
 let policy = contentSecurityPolicy(process.env);
-async function refreshPolicy() {
-  const root = await readRoot(process.env);
-  if (root) policy = contentSecurityPolicy(process.env, root);
-  return Boolean(root);
-}
 
 const server = createServer((req, res) => {
   if (req.method !== "GET" && req.method !== "HEAD") {
@@ -140,7 +135,7 @@ const server = createServer((req, res) => {
     // OAuth "Authorize" page)
     "content-security-policy": policy,
     "permissions-policy":
-      "camera=(self), microphone=(self), display-capture=(self), geolocation=(), payment=(), usb=(), interest-cohort=()",
+      "camera=(self), microphone=(self), display-capture=(self), geolocation=(), payment=(), usb=()",
     "x-frame-options": "DENY",
     "referrer-policy": "strict-origin-when-cross-origin",
     vary: "accept-encoding",
@@ -163,9 +158,19 @@ server.listen(PORT, process.env.HOST || "0.0.0.0", () => {
   console.log(`Serving ${ROOT} on port ${PORT}`);
 });
 
-// the voice nodes, files and captcha come from the API root; read it now and
-// every ten minutes (a failed read keeps the last policy)
-refreshPolicy().then((ok) =>
-  console.log(ok ? "Page policy: from the API root" : "Page policy: API root not reachable, addresses only"),
-);
-setInterval(refreshPolicy, 10 * 60 * 1000).unref();
+// the voice nodes, files and captcha come from the API root: read it now,
+// every 15-30 s until it answers, then every ten minutes (a failed read
+// keeps the last policy)
+let told = false;
+keepPolicyFresh({
+  env: process.env,
+  onPolicy: (next) => (policy = next),
+  onFirst: (ok) => {
+    if (ok) console.log("Page policy: from the API root");
+    else if (!told) console.log("Page policy: API root not reachable yet, addresses only; trying again");
+    told = true;
+  },
+});
+const sandbox = process.env.VITE_SANDBOX_DOMAIN?.trim();
+if (sandbox && !policy.includes(`*.${sandbox}`))
+  console.warn(`Page policy: VITE_SANDBOX_DOMAIN is not a plain host name on its own domain (${sandbox}); games are left out`);
