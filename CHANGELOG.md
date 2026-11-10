@@ -2,6 +2,14 @@
 
 ## Unreleased
 
+### Design polish
+
+* **Login:** the three-dot bubble above the sign-in card is gone; it read as an unlabelled box or a stuck loader on phones. The button already shows waiting, done and error.
+* **Player embeds:** the click-to-load card no longer repeats the site name and the title shown by the link embed above it; "Privacy policy" is its own target next to Load, on one row (44 px on phones).
+* **Profile colours:** theme and name colours use a design-system colour well instead of the browser's colour box. A unit test keeps colour, date and time inputs inside the design-system folder.
+* **Home:** the greeting is readable on the light theme (it was white on white without a profile colour); "New from creators" uses the same heading as the other Home sections.
+* **Discover and Designs:** "All", the footer links and the Designs captions are 44 px targets on phones.
+
 ### Features
 
 * **Server insights:** Server settings → Insights (Manage Server) shows members, joins and leaves, messages, active members and time in voice as a bar per day for 7, 30 or 90 days, counted in your time zone, plus where joins came from and the busiest channels. Only totals, never who: every count from 1 to 4 but the member total reads "fewer than 5" (joins, leaves, messages, sources, channels, active members, voice time), bots are neither active members nor voice time, and messages count only in channels you can see. Shows the day counting started. The page loads on its own when opened (with its own loading line) and asks once per range; bars use neutral ink, not the action colour. In Arabic the time axis runs right to left, like the text. SDK pin: packages/stoat.js at sdk-js `8e010b7`.
