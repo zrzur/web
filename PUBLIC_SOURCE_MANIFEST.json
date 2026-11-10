@@ -1065,6 +1065,12 @@
       "category": "product-source-or-build-manifest"
     },
     {
+      "path": "packages/client/components/app/interface/discover/LanguageSwitch.dom.test.tsx",
+      "sha256": "60478d67c04cf52142fbc349efc7410bd34bf0d2c90cb555254f07a144a14a60",
+      "bytes": 2759,
+      "category": "synthetic-test-source-or-fixture"
+    },
+    {
       "path": "packages/client/components/app/interface/discover/OpenInApp.tsx",
       "sha256": "887e26b30292f0ce788292363be7c2916318bb2a38f985b74f3f9d2768b5a85a",
       "bytes": 9647,
@@ -1084,8 +1090,8 @@
     },
     {
       "path": "packages/client/components/app/interface/discover/SiteFrame.tsx",
-      "sha256": "66bfa1d2614ff702757087d3d51ce52f8433ae639a9c868a8054f69149345f33",
-      "bytes": 9458,
+      "sha256": "842f36daff1b61b3b1ac0e6101c1113e9f768e49cd5227bee4c22f70f5cfa3b3",
+      "bytes": 9406,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -1161,15 +1167,21 @@
       "category": "product-source-or-build-manifest"
     },
     {
+      "path": "packages/client/components/app/interface/discover/siteLanguages.ts",
+      "sha256": "b220a79253bbf8af192ba0bc74254202d05e234a1d6603453c1f45e11695786b",
+      "bytes": 1600,
+      "category": "product-source-or-build-manifest"
+    },
+    {
       "path": "packages/client/components/app/interface/discover/sites.test.ts",
-      "sha256": "6c739649334cbcd32f2fa820e6026c7dfcaeac9a4e1338299ec32168e6fa1e1b",
-      "bytes": 394,
+      "sha256": "c3a3b0b978eef7bbeb7da84d9cd23971f5c1f87e03ceee4a8ca1216d4aa7cf54",
+      "bytes": 2292,
       "category": "synthetic-test-source-or-fixture"
     },
     {
       "path": "packages/client/components/app/interface/discover/sites.ts",
-      "sha256": "01f8338e52f1bdb58ba8eb0a13b0f265cc8d1348979614b3ac54b9f7c4161792",
-      "bytes": 3021,
+      "sha256": "d67cc4c0f6d51fce0d1fad0c91b61dd9bae99e6e8fc8e95c789d4e95a36b4fd2",
+      "bytes": 2584,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -41452,8 +41464,8 @@
     },
     {
       "path": "packages/public-pages/src/head.mjs",
-      "sha256": "f1c8573f5e6107f43d820f5940318dc0377d12dbbf3a08b09869aa57e42cd933",
-      "bytes": 11825,
+      "sha256": "cf336f207c2b2b20f07e7d532f74ac6f93441811f9dfc4c6311f33cb3a462d88",
+      "bytes": 20561,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -41464,8 +41476,8 @@
     },
     {
       "path": "packages/public-pages/src/server.mjs",
-      "sha256": "baa10bf86ed4579970999daf2855709b57c834cf9fc0886637cead28d74c0488",
-      "bytes": 14048,
+      "sha256": "4c513771b4c881d7e5d3d096f75e54dae29eaa521903e7e9ff4d887517b7178a",
+      "bytes": 14155,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -41476,8 +41488,8 @@
     },
     {
       "path": "packages/public-pages/test/head.test.mjs",
-      "sha256": "36a10df3a2bb73017a786d14984e9d4883275b0711a3b0267a823d8cde2089f1",
-      "bytes": 3583,
+      "sha256": "fac20b60c9b941e4df88a1165eb68ee180ebbad211e8d68de529b50cd6838b7c",
+      "bytes": 10092,
       "category": "synthetic-test-source-or-fixture"
     },
     {
@@ -41494,8 +41506,8 @@
     },
     {
       "path": "packages/public-pages/test/server.test.mjs",
-      "sha256": "46f8e5fa05f617cfd4034133104ccbd61023889b11fd2121c8b44d1373bc802a",
-      "bytes": 2384,
+      "sha256": "086c8cc169837955146ed46c89bb696d026f45e16981be781ec5a1e3eb6ce93b",
+      "bytes": 2881,
       "category": "synthetic-test-source-or-fixture"
     },
     {

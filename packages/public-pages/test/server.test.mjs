@@ -43,6 +43,24 @@ test("online count is optional", () => {
   );
 });
 
+test("sitemap entries link the page in all seven languages", async () => {
+  const { sitemapEntry } = await import("../src/server.mjs");
+  const entry = sitemapEntry("/gaming");
+  const langs = [...entry.matchAll(/hreflang="([^"]+)"/g)].map((m) => m[1]);
+  assert.deepEqual(langs, [
+    "en",
+    "de",
+    "ar",
+    "fr",
+    "es",
+    "ru",
+    "zh-Hans",
+    "x-default",
+  ]);
+  assert.match(entry, /<loc>[^<]*\/gaming<\/loc>/);
+  assert.match(entry, /href="[^"]*\/gaming\?hl=zh-Hans"/);
+});
+
 test("page policy lists the public API and media origins", async () => {
   const { contentSecurityPolicy } = await import("../src/server.mjs");
   process.env.PUBLIC_API_URL = "https://api.example.test";

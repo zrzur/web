@@ -9,7 +9,7 @@ import { Language } from "@revolt/i18n";
 import { useState } from "@revolt/state";
 import { Icon } from "@revolt/ui/icons/Icon";
 
-import { SITE_LANGUAGES, WEBSITE_URL } from "./sites";
+import { SITE_LANGUAGES, WEBSITE_URL, siteLanguage } from "./sites";
 
 type SiteId = "discover" | "designs";
 
@@ -84,9 +84,7 @@ export function LanguageSwitch() {
   const [open, setOpen] = createSignal(false);
   let root: HTMLDivElement | undefined;
 
-  const current = () =>
-    SITE_LANGUAGES.find((language) => language.id === i18n().locale) ??
-    SITE_LANGUAGES[1];
+  const current = () => siteLanguage(i18n().locale);
 
   const close = (event: Event) => {
     if (root && !root.contains(event.target as Node)) setOpen(false);
