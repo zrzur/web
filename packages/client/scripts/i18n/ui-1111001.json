@@ -16,7 +16,6 @@
   "Days in your time ({0}). Updated every hour.": ["الأيام بتوقيتك ({0}). تُحدَّث كل ساعة.", "Tage in deiner Zeit ({0}). Jede Stunde aktualisiert.", "Jours selon ton heure ({0}). Mis à jour toutes les heures.", "Días en tu hora ({0}). Se actualiza cada hora.", "Дни по вашему времени ({0}). Обновляется каждый час.", "按你的时区计日（{0}）。每小时更新。"],
   "server insights::Discover": ["اكتشف", "Entdecken", "Découvrir", "Descubrir", "Обзор", "发现"],
   "fewer than 5": ["أقل من 5", "weniger als 5", "moins de 5", "menos de 5", "меньше 5", "少于 5"],
-  "How the server is doing: who joins, who talks and where.": ["كيف حال السيرفر: من ينضم، ومن يتحدث، وأين.", "Wie es dem Server geht: wer beitritt, wer schreibt und wo.", "Comment va le serveur : qui rejoint, qui parle et où.", "Cómo va el servidor: quién se une, quién habla y dónde.", "Как дела у сервера: кто приходит, кто общается и где.", "服务器的状况：谁加入、谁在聊天、在哪里聊。"],
   "server insights::Insights": ["الإحصاءات", "Einblicke", "Statistiques", "Estadísticas", "Статистика", "数据洞察"],
   "Invite links": ["روابط الدعوة", "Einladungslinks", "Liens d’invitation", "Enlaces de invitación", "Ссылки-приглашения", "邀请链接"],
   "server insights::Joined": ["انضموا", "Beigetreten", "Arrivées", "Se unieron", "Вступили", "加入"],

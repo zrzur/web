@@ -75,8 +75,6 @@ export default function InsightsPage(props: { server: Server }) {
   const locale = () => i18n.locale || "en";
   const number = createMemo(() => new Intl.NumberFormat(locale()));
   const rows = createMemo(() => (value()?.rows ?? []) as InsightsDay[]);
-  const first = () => rows()[0]?.day;
-  const last = () => rows()[rows().length - 1]?.day;
   const membersNow = () => rows()[rows().length - 1]?.members ?? 0;
   const membersChange = () => membersNow() - (rows()[0]?.members ?? 0);
 
@@ -133,15 +131,8 @@ export default function InsightsPage(props: { server: Server }) {
 
   return (
     <PageStack>
-      <Anchor
-        id="insights"
-        title={<Trans context="server insights">Insights</Trans>}
-        description={
-          <Trans>
-            How the server is doing: who joins, who talks and where.
-          </Trans>
-        }
-      >
+      {/* the page title and its line come from the settings sidebar */}
+      <Anchor id="insights">
         <Toolbar>
           <Segmented<`${Range}`>
             aria-label={t`Time range`}
@@ -240,10 +231,6 @@ export default function InsightsPage(props: { server: Server }) {
                 format={(n) => formatMinutes(n, locale())}
               />
             </Grid>
-            <Axis aria-hidden="true">
-              <span>{first() && formatDay(first()!, locale())}</span>
-              <span>{last() && formatDay(last()!, locale())}</span>
-            </Axis>
 
             <Columns>
               <Card data-testid="insights-sources">
@@ -362,6 +349,15 @@ function Stat(props: {
           )}
         </For>
       </Bars>
+      <Axis aria-hidden="true">
+        <span>
+          {props.rows[0] && formatDay(props.rows[0].day, props.locale)}
+        </span>
+        <span>
+          {props.rows.length > 0 &&
+            formatDay(props.rows[props.rows.length - 1].day, props.locale)}
+        </span>
+      </Axis>
     </Card>
   );
 }
@@ -488,8 +484,6 @@ const Axis = styled("div", {
   base: {
     display: "flex",
     justifyContent: "space-between",
-    marginBlockStart: "-4px",
-    paddingInline: "16px",
     fontSize: "12px",
     lineHeight: "16px",
     color: "var(--z-fg-muted)",

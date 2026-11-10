@@ -8881,10 +8881,6 @@ msgstr "人们如何加入，以及谁可以邀请他们。"
 msgid "How people join"
 msgstr "人们如何加入"
 
-#: components/app/interface/settings/server/insights/InsightsPage.tsx
-msgid "How the server is doing: who joins, who talks and where."
-msgstr "服务器的状况：谁加入、谁在聊天、在哪里聊。"
-
 #: components/app/interface/settings/ServerSettings.tsx
 msgid "How the server looks, how people find and join it, and its main switches."
 msgstr "服务器的外观、人们如何找到并加入它，以及它的主要开关。"
@@ -9238,7 +9234,6 @@ msgstr "输入音量"
 msgid "Insert text in your message box"
 msgstr "在你的消息框中插入文本"
 
-#: components/app/interface/settings/server/insights/InsightsPage.tsx
 #: components/app/interface/settings/ServerSettings.tsx
 msgctxt "server insights"
 msgid "Insights"

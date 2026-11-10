@@ -9250,10 +9250,6 @@ msgstr "كيف يدخل الناس، ومن يحق له دعوتهم."
 msgid "How people join"
 msgstr "طريقة الانضمام"
 
-#: components/app/interface/settings/server/insights/InsightsPage.tsx
-msgid "How the server is doing: who joins, who talks and where."
-msgstr "كيف حال السيرفر: من ينضم، ومن يتحدث، وأين."
-
 #: components/app/interface/settings/ServerSettings.tsx
 msgid "How the server looks, how people find and join it, and its main switches."
 msgstr "شكل السيرفر، وكيف يجده الناس وينضمون إليه، ومفاتيحه الرئيسية."
@@ -9615,7 +9611,6 @@ msgstr "مستوى صوت الإدخال"
 msgid "Insert text in your message box"
 msgstr "إدراج نص في مربع الرسالة"
 
-#: components/app/interface/settings/server/insights/InsightsPage.tsx
 #: components/app/interface/settings/ServerSettings.tsx
 msgctxt "server insights"
 msgid "Insights"

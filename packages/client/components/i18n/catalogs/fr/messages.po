@@ -8881,10 +8881,6 @@ msgstr "Comment les gens entrent, et qui peut les inviter."
 msgid "How people join"
 msgstr "Comment les gens rejoignent"
 
-#: components/app/interface/settings/server/insights/InsightsPage.tsx
-msgid "How the server is doing: who joins, who talks and where."
-msgstr "Comment va le serveur : qui rejoint, qui parle et où."
-
 #: components/app/interface/settings/ServerSettings.tsx
 msgid "How the server looks, how people find and join it, and its main switches."
 msgstr "L’apparence du serveur, la façon dont on le trouve et le rejoint, et ses principaux réglages."
@@ -9238,7 +9234,6 @@ msgstr "Volume d’entrée"
 msgid "Insert text in your message box"
 msgstr "Insérer du texte dans ta zone de message"
 
-#: components/app/interface/settings/server/insights/InsightsPage.tsx
 #: components/app/interface/settings/ServerSettings.tsx
 msgctxt "server insights"
 msgid "Insights"

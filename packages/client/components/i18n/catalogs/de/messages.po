@@ -9250,10 +9250,6 @@ msgstr "Wie Leute hineinkommen und wer sie einladen darf."
 msgid "How people join"
 msgstr "Wie man beitritt"
 
-#: components/app/interface/settings/server/insights/InsightsPage.tsx
-msgid "How the server is doing: who joins, who talks and where."
-msgstr "Wie es dem Server geht: wer beitritt, wer schreibt und wo."
-
 #: components/app/interface/settings/ServerSettings.tsx
 msgid "How the server looks, how people find and join it, and its main switches."
 msgstr "Wie der Server aussieht, wie Leute ihn finden und beitreten, und seine wichtigsten Schalter."
@@ -9615,7 +9611,6 @@ msgstr "Eingangslautstärke"
 msgid "Insert text in your message box"
 msgstr "Text in dein Nachrichtenfeld einfügen"
 
-#: components/app/interface/settings/server/insights/InsightsPage.tsx
 #: components/app/interface/settings/ServerSettings.tsx
 msgctxt "server insights"
 msgid "Insights"
