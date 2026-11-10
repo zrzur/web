@@ -609,7 +609,6 @@ const CONTROLS = {
   gap: "4px",
 } satisfies JSX.CSSProperties;
 const KEYS_BUTTON = {
-  "min-height": "32px",
   "min-width": "64px",
   "padding-inline": "8px",
   display: "inline-flex",
@@ -630,7 +629,7 @@ const RECORDING = {
   color: "var(--z-accent)",
 } satisfies JSX.CSSProperties;
 // phones: a 44 px target (the same rule other screens use)
-const PHONE_TARGET = css({ _phone: { minHeight: "44px" } });
+const PHONE_TARGET = css({ minHeight: "32px", _phone: { minHeight: "44px" } });
 
 /** One combo as key caps, always left to right (keys are not text) */
 function Keys(props: { keys: string[] }) {

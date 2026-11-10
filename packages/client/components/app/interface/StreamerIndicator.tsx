@@ -47,7 +47,6 @@ const PILL = {
   "inset-inline": 0,
   "margin-inline": "auto",
   width: "fit-content",
-  "min-height": "32px",
   "padding-inline": "12px",
   display: "inline-flex",
   "align-items": "center",
@@ -65,4 +64,4 @@ const PILL = {
   "box-shadow": "var(--z-shadow-md)",
 } as const;
 // phones: a 44 px target (the same rule other screens use)
-const PHONE_TARGET = css({ _phone: { minHeight: "44px" } });
+const PHONE_TARGET = css({ minHeight: "32px", _phone: { minHeight: "44px" } });
