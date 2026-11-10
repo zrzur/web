@@ -24093,3 +24093,47 @@ msgstr "Zrzur, diseñado para <0>tu escritorio.</0>"
 #: components/app/interface/settings/user/appearance/AppearanceMenu.tsx
 #~ msgid "Zrzur's own look: calm dark panels in one slate family, pink for Plus and teal for anything live."
 #~ msgstr ""
+
+#: components/app/interface/settings/UserSettings.tsx
+msgid "Connected apps"
+msgstr "Apps conectadas"
+
+#. placeholder {0}: name()
+#: components/app/interface/settings/user/ConnectedApps.tsx
+msgid "<0>{0}</0> loses access to your account at once."
+msgstr "<0>{0}</0> pierde el acceso a tu cuenta de inmediato."
+
+#: components/app/interface/settings/user/ConnectedApps.tsx
+msgid "Access was not revoked."
+msgstr "No se revocó el acceso."
+
+#. placeholder {0}: new URL(data().redirect_uri).host
+#: src/interface/OAuth.tsx
+msgid "After you decide you will go to {0}. You can revoke this at any time under Connected apps."
+msgstr "Después de decidir irás a {0}. Puedes revocarlo cuando quieras en Apps conectadas."
+
+#. placeholder {0}: since()
+#: components/app/interface/settings/user/ConnectedApps.tsx
+msgid "Connected on {0}"
+msgstr "Conectada el {0}"
+
+#: components/app/interface/settings/server/assistant/AssistantPage.tsx
+msgid "It learns your username, so it knows you may change these settings. You can remove it under Connected apps."
+msgstr "Conoce tu nombre de usuario, así que sabe que puedes cambiar estos ajustes. Puedes quitarlo en Apps conectadas."
+
+#: components/app/interface/settings/user/ConnectedApps.tsx
+msgid "No apps are connected to your account."
+msgstr "No hay apps conectadas a tu cuenta."
+
+#: components/app/interface/settings/user/oauthScopes.ts
+msgid "Other access"
+msgstr "Otro acceso"
+
+#: components/app/interface/settings/user/ConnectedApps.tsx
+msgid "We could not load your connected apps."
+msgstr "No pudimos cargar tus apps conectadas."
+
+#: components/app/interface/settings/user/ConnectedApps.tsx
+msgid "Yes, revoke"
+msgstr "Sí, revocar"
+

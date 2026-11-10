@@ -5,6 +5,7 @@ import {
   Switch,
   createResource,
   createSignal,
+  onMount,
 } from "solid-js";
 
 import { Trans, useLingui } from "@lingui/solid/macro";
@@ -15,9 +16,12 @@ import {
   InteractionError,
   oauthApi,
 } from "@revolt/app/interface/channels/text/interactions";
+import { useScopeText } from "@revolt/app/interface/settings/user/oauthScopes";
 import { useClient } from "@revolt/client";
 import { useError } from "@revolt/i18n";
-import { useLocation } from "@revolt/routing";
+import { useModals } from "@revolt/modal";
+import { Navigate, useLocation } from "@revolt/routing";
+import { useState } from "@revolt/state";
 import { Avatar, FloatingSelect, MenuItem } from "@revolt/ui";
 import { Icon } from "@revolt/ui/icons/Icon";
 
@@ -93,20 +97,7 @@ function Consent() {
   const [busy, setBusy] = createSignal(false);
   const [error, setError] = createSignal<string>();
 
-  const scopeText = (scope: string) => {
-    switch (scope) {
-      case "identify":
-        return t`Know your username and avatar`;
-      case "servers.read":
-        return t`See the names and icons of your servers`;
-      case "applications.commands":
-        return t`Let its commands be used in the server`;
-      case "bot.install":
-        return t`Add its bot to a server you manage`;
-      default:
-        return scope;
-    }
-  };
+  const scopeText = useScopeText();
 
   const installs = () => preview()?.scopes.includes("bot.install") ?? false;
 
@@ -287,7 +278,7 @@ function Consent() {
                 <Trans>
                   After you decide you will go to{" "}
                   {new URL(data().redirect_uri).host}. You can revoke this at
-                  any time under Authorized apps.
+                  any time under Connected apps.
                 </Trans>
               </Muted>
 
@@ -320,76 +311,21 @@ function Consent() {
   );
 }
 
+/**
+ * Old links to the authorized apps page open Connected apps in settings,
+ * over the page the user was last on
+ */
 function AuthorizedApps() {
-  const { t } = useLingui();
-  const client = useClient();
-  const [apps, { refetch }] = createResource(() =>
-    oauthApi.authorized(client()),
+  const { openModal } = useModals();
+  const state = useState();
+  onMount(() =>
+    openModal({
+      type: "settings",
+      config: "user",
+      context: { page: "connected-apps" },
+    }),
   );
-  const [confirming, setConfirming] = createSignal<string>();
-
-  async function revoke(id: string) {
-    if (confirming() !== id) {
-      setConfirming(id);
-      return;
-    }
-    setConfirming(undefined);
-    await oauthApi.revoke(client(), id);
-    refetch();
-  }
-
-  return (
-    <Card data-wide="">
-      <h1>
-        <Trans>Authorized apps</Trans>
-      </h1>
-      <Muted>
-        <Trans>
-          Apps you allowed to use your account. Revoking one ends its access at
-          once; bots it added stay in servers until their managers remove them.
-        </Trans>
-      </Muted>
-      <Show
-        when={apps()?.length}
-        fallback={
-          <Muted>
-            <Trans>No apps yet.</Trans>
-          </Muted>
-        }
-      >
-        <List>
-          <For each={apps()}>
-            {(app) => (
-              <li>
-                <Avatar
-                  size={36}
-                  src={
-                    client().users.get(app.application._id)?.animatedAvatarURL
-                  }
-                  fallback={app.application.username}
-                />
-                <div>
-                  <strong>
-                    {app.application.display_name ?? app.application.username}
-                  </strong>
-                  <Muted>{app.scopes.join(" · ")}</Muted>
-                </div>
-                <Button
-                  type="button"
-                  data-danger=""
-                  onClick={() => revoke(app.application._id)}
-                >
-                  {confirming() === app.application._id
-                    ? t`Confirm revoke`
-                    : t`Revoke access`}
-                </Button>
-              </li>
-            )}
-          </For>
-        </List>
-      </Show>
-    </Card>
-  );
+  return <Navigate href={state.layout.getLastActivePath()} />;
 }
 
 const Base = styled("main", {
@@ -479,21 +415,6 @@ const Button = styled("button", {
     _focusVisible: {
       outline: "2px solid var(--z-focus)",
       outlineOffset: "2px",
-    },
-  },
-});
-
-const List = styled("ul", {
-  base: {
-    "& li": {
-      padding: "8px 0",
-      borderBlockStart: "1px solid var(--z-border-subtle)",
-    },
-    "& li > div": {
-      flex: 1,
-      display: "flex",
-      flexDirection: "column",
-      minWidth: 0,
     },
   },
 });

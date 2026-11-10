@@ -24093,3 +24093,47 @@ msgstr "Zrzur 就在<0>你的桌面上。</0>"
 #: components/app/interface/settings/user/appearance/AppearanceMenu.tsx
 #~ msgid "Zrzur's own look: calm dark panels in one slate family, pink for Plus and teal for anything live."
 #~ msgstr ""
+
+#: components/app/interface/settings/UserSettings.tsx
+msgid "Connected apps"
+msgstr "已连接的应用"
+
+#. placeholder {0}: name()
+#: components/app/interface/settings/user/ConnectedApps.tsx
+msgid "<0>{0}</0> loses access to your account at once."
+msgstr "<0>{0}</0> 将立即失去对你账号的访问权限。"
+
+#: components/app/interface/settings/user/ConnectedApps.tsx
+msgid "Access was not revoked."
+msgstr "未能撤销访问权限。"
+
+#. placeholder {0}: new URL(data().redirect_uri).host
+#: src/interface/OAuth.tsx
+msgid "After you decide you will go to {0}. You can revoke this at any time under Connected apps."
+msgstr "你做出选择后将前往 {0}。你可以随时在“已连接的应用”中撤销。"
+
+#. placeholder {0}: since()
+#: components/app/interface/settings/user/ConnectedApps.tsx
+msgid "Connected on {0}"
+msgstr "连接于 {0}"
+
+#: components/app/interface/settings/server/assistant/AssistantPage.tsx
+msgid "It learns your username, so it knows you may change these settings. You can remove it under Connected apps."
+msgstr "它会获取你的用户名，因此知道你可以更改这些设置。你可以在“已连接的应用”中移除它。"
+
+#: components/app/interface/settings/user/ConnectedApps.tsx
+msgid "No apps are connected to your account."
+msgstr "你的账号没有连接任何应用。"
+
+#: components/app/interface/settings/user/oauthScopes.ts
+msgid "Other access"
+msgstr "其他权限"
+
+#: components/app/interface/settings/user/ConnectedApps.tsx
+msgid "We could not load your connected apps."
+msgstr "无法加载你已连接的应用。"
+
+#: components/app/interface/settings/user/ConnectedApps.tsx
+msgid "Yes, revoke"
+msgstr "是的，撤销"
+

@@ -25242,3 +25242,46 @@ msgstr "Zrzur, direkt auf <0>deinem Desktop.</0>"
 #: components/app/interface/settings/user/appearance/AppearanceMenu.tsx
 #~ msgid "Zrzur's own look: very dark neutral panels with Zrzur Pink as the one accent."
 #~ msgstr "Zrzurs eigener Look: sehr dunkle, neutrale Flächen mit Zrzur-Pink als einziger Akzentfarbe."
+
+#. placeholder {0}: name()
+#: components/app/interface/settings/user/ConnectedApps.tsx
+msgid "<0>{0}</0> loses access to your account at once."
+msgstr "<0>{0}</0> verliert sofort den Zugriff auf dein Konto."
+
+#: components/app/interface/settings/user/ConnectedApps.tsx
+msgid "Access was not revoked."
+msgstr "Der Zugriff wurde nicht widerrufen."
+
+#. placeholder {0}: new URL(data().redirect_uri).host
+#: src/interface/OAuth.tsx
+msgid "After you decide you will go to {0}. You can revoke this at any time under Connected apps."
+msgstr "Nach deiner Entscheidung wirst du zu {0} weitergeleitet. Du kannst den Zugriff jederzeit unter „Verbundene Apps“ widerrufen."
+
+#: components/app/interface/settings/UserSettings.tsx
+msgid "Connected apps"
+msgstr "Verbundene Apps"
+
+#. placeholder {0}: since()
+#: components/app/interface/settings/user/ConnectedApps.tsx
+msgid "Connected on {0}"
+msgstr "Verbunden am {0}"
+
+#: components/app/interface/settings/server/assistant/AssistantPage.tsx
+msgid "It learns your username, so it knows you may change these settings. You can remove it under Connected apps."
+msgstr "Er erfährt deinen Benutzernamen, damit er weiß, dass du diese Einstellungen ändern darfst. Du kannst ihn unter „Verbundene Apps“ entfernen."
+
+#: components/app/interface/settings/user/ConnectedApps.tsx
+msgid "No apps are connected to your account."
+msgstr "Mit deinem Konto sind keine Apps verbunden."
+
+#: components/app/interface/settings/user/oauthScopes.ts
+msgid "Other access"
+msgstr "Weiterer Zugriff"
+
+#: components/app/interface/settings/user/ConnectedApps.tsx
+msgid "We could not load your connected apps."
+msgstr "Deine verbundenen Apps konnten nicht geladen werden."
+
+#: components/app/interface/settings/user/ConnectedApps.tsx
+msgid "Yes, revoke"
+msgstr "Ja, widerrufen"

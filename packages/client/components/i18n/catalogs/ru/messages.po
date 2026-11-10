@@ -20998,7 +20998,7 @@ msgstr "Попробуйте другое слово или изучите ка�
 #: src/interface/Discover.tsx
 #: src/interface/events/EventsPage.tsx
 msgid "Try again"
-msgstr "Время ожидания истекло"
+msgstr "Попробовать снова"
 
 #: components/app/interface/discover/ServerPage.tsx
 msgid "Try again later, or look at similar communities."
@@ -24093,3 +24093,47 @@ msgstr "Zrzur — прямо на <0>вашем рабочем столе.</0>"
 #: components/app/interface/settings/user/appearance/AppearanceMenu.tsx
 #~ msgid "Zrzur's own look: calm dark panels in one slate family, pink for Plus and teal for anything live."
 #~ msgstr ""
+
+#: components/app/interface/settings/UserSettings.tsx
+msgid "Connected apps"
+msgstr "Приложения"
+
+#. placeholder {0}: name()
+#: components/app/interface/settings/user/ConnectedApps.tsx
+msgid "<0>{0}</0> loses access to your account at once."
+msgstr "<0>{0}</0> сразу потеряет доступ к вашему аккаунту."
+
+#: components/app/interface/settings/user/ConnectedApps.tsx
+msgid "Access was not revoked."
+msgstr "Доступ не отозван."
+
+#. placeholder {0}: new URL(data().redirect_uri).host
+#: src/interface/OAuth.tsx
+msgid "After you decide you will go to {0}. You can revoke this at any time under Connected apps."
+msgstr "После вашего решения вы перейдёте на {0}. Отозвать доступ можно в любой момент в разделе «Приложения»."
+
+#. placeholder {0}: since()
+#: components/app/interface/settings/user/ConnectedApps.tsx
+msgid "Connected on {0}"
+msgstr "Подключено {0}"
+
+#: components/app/interface/settings/server/assistant/AssistantPage.tsx
+msgid "It learns your username, so it knows you may change these settings. You can remove it under Connected apps."
+msgstr "Он узнает ваше имя пользователя, чтобы понимать, что вы можете менять эти настройки. Удалить его можно в разделе «Приложения»."
+
+#: components/app/interface/settings/user/ConnectedApps.tsx
+msgid "No apps are connected to your account."
+msgstr "К вашему аккаунту не подключено ни одно приложение."
+
+#: components/app/interface/settings/user/oauthScopes.ts
+msgid "Other access"
+msgstr "Другой доступ"
+
+#: components/app/interface/settings/user/ConnectedApps.tsx
+msgid "We could not load your connected apps."
+msgstr "Не удалось загрузить подключённые приложения."
+
+#: components/app/interface/settings/user/ConnectedApps.tsx
+msgid "Yes, revoke"
+msgstr "Да, отозвать"
+

@@ -6,6 +6,7 @@ import { css } from "styled-system/css";
 
 import { useClient, useClientLifecycle } from "@revolt/client";
 import { billingAvailable } from "@revolt/client/billing";
+import { CONFIGURATION } from "@revolt/common";
 import {
   SOURCE_CODE_URL,
   THIRD_PARTY_NOTICES_URL,
@@ -18,7 +19,6 @@ import { useModals } from "@revolt/modal";
 import { fetchLatestChangelog } from "@revolt/modal/modals/changelogFeed";
 import { pluginsEnabled } from "@revolt/plugins/enabled";
 import { useNavigate } from "@revolt/routing";
-import { CONFIGURATION } from "@revolt/common";
 import { ColouredText, Column, Text, iconSize } from "@revolt/ui";
 import { ReleaseBadge } from "@revolt/ui/components/design/ReleaseBadge";
 import { BadgeMark } from "@revolt/ui/components/features/profiles/badges/BadgeMark";
@@ -53,6 +53,7 @@ import { MyAccount } from "./user/Account";
 import AdvancedSettings from "./user/Advanced";
 import { AppearanceMenu } from "./user/appearance";
 import { MyBadges } from "./user/badges/MyBadges";
+import { ConnectedApps } from "./user/ConnectedApps";
 import { Feedback } from "./user/Feedback";
 import { KeybindsSettings } from "./user/Keybinds";
 import { LanguageSettings } from "./user/Language";
@@ -131,6 +132,8 @@ const Config: SettingsConfiguration<{ server: Server }> = {
         );
       case "sessions":
         return <Sessions />;
+      case "connected-apps":
+        return <ConnectedApps />;
       case "my-data":
         return <MyData />;
       case "language":
@@ -352,13 +355,10 @@ const Config: SettingsConfiguration<{ server: Server }> = {
               title: <Trans>Sessions</Trans>,
             },
             {
-              // apps you let act for you through OAuth2; revoked there
+              // apps you let act for you through OAuth2, revoked here
+              id: "connected-apps",
               icon: <Icon name="key" size={20} />,
-              title: <Trans>Authorized apps</Trans>,
-              onClick() {
-                pop();
-                navigate("/oauth2/authorized");
-              },
+              title: <Trans>Connected apps</Trans>,
             },
             {
               id: "my-data",

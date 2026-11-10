@@ -25242,3 +25242,46 @@ msgstr "زرزور، مباشرةً على <0>سطح مكتبك.</0>"
 #: components/app/interface/settings/user/appearance/AppearanceMenu.tsx
 #~ msgid "Zrzur's own look: very dark neutral panels with Zrzur Pink as the one accent."
 #~ msgstr "مظهر زرزور الخاص: لوحات داكنة جدًا بألوان محايدة، وزهري زرزور هو اللون المميز الوحيد."
+
+#. placeholder {0}: name()
+#: components/app/interface/settings/user/ConnectedApps.tsx
+msgid "<0>{0}</0> loses access to your account at once."
+msgstr "سيفقد <0>{0}</0> الوصول إلى حسابك فورًا."
+
+#: components/app/interface/settings/user/ConnectedApps.tsx
+msgid "Access was not revoked."
+msgstr "لم يُلغَ الوصول."
+
+#. placeholder {0}: new URL(data().redirect_uri).host
+#: src/interface/OAuth.tsx
+msgid "After you decide you will go to {0}. You can revoke this at any time under Connected apps."
+msgstr "بعد أن تقرر ستنتقل إلى {0}. يمكنك إلغاء هذا الإذن في أي وقت من «التطبيقات المرتبطة»."
+
+#: components/app/interface/settings/UserSettings.tsx
+msgid "Connected apps"
+msgstr "التطبيقات المرتبطة"
+
+#. placeholder {0}: since()
+#: components/app/interface/settings/user/ConnectedApps.tsx
+msgid "Connected on {0}"
+msgstr "مرتبط منذ {0}"
+
+#: components/app/interface/settings/server/assistant/AssistantPage.tsx
+msgid "It learns your username, so it knows you may change these settings. You can remove it under Connected apps."
+msgstr "يعرف اسم المستخدم الخاص بك فقط ليتأكد أنك مخول بتغيير هذه الإعدادات. يمكنك إزالته من «التطبيقات المرتبطة»."
+
+#: components/app/interface/settings/user/ConnectedApps.tsx
+msgid "No apps are connected to your account."
+msgstr "لا توجد تطبيقات مرتبطة بحسابك."
+
+#: components/app/interface/settings/user/oauthScopes.ts
+msgid "Other access"
+msgstr "صلاحيات أخرى"
+
+#: components/app/interface/settings/user/ConnectedApps.tsx
+msgid "We could not load your connected apps."
+msgstr "تعذّر تحميل تطبيقاتك المرتبطة."
+
+#: components/app/interface/settings/user/ConnectedApps.tsx
+msgid "Yes, revoke"
+msgstr "نعم، ألغِ الوصول"

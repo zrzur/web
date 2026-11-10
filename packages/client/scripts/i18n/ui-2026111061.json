@@ -1,0 +1,42 @@
+{
+  "Connected apps": [
+    "التطبيقات المرتبطة",
+    "Verbundene Apps"
+  ],
+  "<0>{0}</0> loses access to your account at once.": [
+    "سيفقد <0>{0}</0> الوصول إلى حسابك فورًا.",
+    "<0>{0}</0> verliert sofort den Zugriff auf dein Konto."
+  ],
+  "Access was not revoked.": [
+    "لم يُلغَ الوصول.",
+    "Der Zugriff wurde nicht widerrufen."
+  ],
+  "After you decide you will go to {0}. You can revoke this at any time under Connected apps.": [
+    "بعد أن تقرر ستنتقل إلى {0}. يمكنك إلغاء هذا الإذن في أي وقت من «التطبيقات المرتبطة».",
+    "Nach deiner Entscheidung wirst du zu {0} weitergeleitet. Du kannst den Zugriff jederzeit unter „Verbundene Apps“ widerrufen."
+  ],
+  "Connected on {0}": [
+    "مرتبط منذ {0}",
+    "Verbunden am {0}"
+  ],
+  "It learns your username, so it knows you may change these settings. You can remove it under Connected apps.": [
+    "يعرف اسم المستخدم الخاص بك فقط ليتأكد أنك مخول بتغيير هذه الإعدادات. يمكنك إزالته من «التطبيقات المرتبطة».",
+    "Er erfährt deinen Benutzernamen, damit er weiß, dass du diese Einstellungen ändern darfst. Du kannst ihn unter „Verbundene Apps“ entfernen."
+  ],
+  "No apps are connected to your account.": [
+    "لا توجد تطبيقات مرتبطة بحسابك.",
+    "Mit deinem Konto sind keine Apps verbunden."
+  ],
+  "Other access": [
+    "صلاحيات أخرى",
+    "Weiterer Zugriff"
+  ],
+  "We could not load your connected apps.": [
+    "تعذّر تحميل تطبيقاتك المرتبطة.",
+    "Deine verbundenen Apps konnten nicht geladen werden."
+  ],
+  "Yes, revoke": [
+    "نعم، ألغِ الوصول",
+    "Ja, widerrufen"
+  ]
+}
