@@ -292,8 +292,8 @@
     },
     {
       "path": "CHANGELOG.md",
-      "sha256": "1f6b1bf32aa3bd06f4d03200f28d59d00d9d7deb5161c0b4fc4d18d960e91ea9",
-      "bytes": 103793,
+      "sha256": "be0750954d6c8a074522a1a98061a968eea61fdb16510e7fed2d647117fd04e0",
+      "bytes": 104510,
       "category": "public-documentation"
     },
     {
@@ -310,8 +310,8 @@
     },
     {
       "path": "Dockerfile",
-      "sha256": "d72dd5ad839b8b3bd8b3da05f8c357ae0f150dbf9d739bd5880d32e239933473",
-      "bytes": 3118,
+      "sha256": "882f5195ace120214a9a46641090a3796594a7fa535dacbb676db303b0f13602",
+      "bytes": 3132,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -513,6 +513,18 @@
       "category": "public-documentation"
     },
     {
+      "path": "docker/csp.js",
+      "sha256": "8b39d36f165857ca103b416dd5f92758525f3150176c1f60693151eccc48e9a9",
+      "bytes": 7419,
+      "category": "product-source-or-build-manifest"
+    },
+    {
+      "path": "docker/csp.test.js",
+      "sha256": "6b88556748853de674d838ad98050cd61d88ff203154399cf9d51be74623c803",
+      "bytes": 6085,
+      "category": "synthetic-test-source-or-fixture"
+    },
+    {
       "path": "docker/inject.js",
       "sha256": "c7191836ab83d23c24f02a852d1d3c226d331bf54c0a815401a848b4849a23f9",
       "bytes": 4489,
@@ -532,8 +544,8 @@
     },
     {
       "path": "docker/server.js",
-      "sha256": "a57f73ec56040a315468a0acce385222803760445b6e08fd10f5b848974ed677",
-      "bytes": 5304,
+      "sha256": "78d320272126ec1137416eb7f784e2c991c1178a54933b2613fc4638aec93a79",
+      "bytes": 6360,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -570,6 +582,12 @@
       "path": "e2e/stack-runner/creator-templates.mjs",
       "sha256": "1999c8816b85398e19f00ca2795f5605b9b9d8aadefe434bb4c7843908822dba",
       "bytes": 30731,
+      "category": "synthetic-test-source-or-fixture"
+    },
+    {
+      "path": "e2e/stack-runner/csp.mjs",
+      "sha256": "b75511c8869769fdc33db74ae9c8a3dc2f31cbb4d966bdd4932c2425a4a27b74",
+      "bytes": 12288,
       "category": "synthetic-test-source-or-fixture"
     },
     {
@@ -2440,8 +2458,8 @@
     },
     {
       "path": "packages/client/components/auth/src/flows/FlowLogin.tsx",
-      "sha256": "bd9e13f857922e49e4fe158d001df02cd145e06b790b3948baa3be3f18fa0a5b",
-      "bytes": 7867,
+      "sha256": "5cbf5a630f2561efc532e778ce10bebf5bbc065689c3f55791817eae4157b81b",
+      "bytes": 8398,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -2478,6 +2496,18 @@
       "path": "packages/client/components/auth/src/flows/github.svg",
       "sha256": "0109d8571ab45f6f3fd1a767efa5ca263c5902bc868b92b34db914c6387f948a",
       "bytes": 1543,
+      "category": "product-source-or-build-manifest"
+    },
+    {
+      "path": "packages/client/components/auth/src/flows/loginStepUp.test.ts",
+      "sha256": "4f51dce1ee071aa059421c9e85ff7e823b023513ee20d6fb05d71f2123f9ccbf",
+      "bytes": 1061,
+      "category": "synthetic-test-source-or-fixture"
+    },
+    {
+      "path": "packages/client/components/auth/src/flows/loginStepUp.ts",
+      "sha256": "89262cd9fc465cae57ff90ce015a4b15944b30e21ea3c70a0b3af47963ab6f55",
+      "bytes": 883,
       "category": "product-source-or-build-manifest"
     },
     {
