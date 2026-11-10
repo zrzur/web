@@ -1,4 +1,12 @@
-import { For, Show, createResource, createSignal, onCleanup } from "solid-js";
+import {
+  For,
+  Show,
+  Suspense,
+  createResource,
+  createSignal,
+  lazy,
+  onCleanup,
+} from "solid-js";
 
 import { Trans, useLingui } from "@lingui/solid/macro";
 import type { Server } from "@zrzur/sdk/solid";
@@ -21,6 +29,7 @@ import {
   Button,
   Column,
   IconButton,
+  Segmented,
   SettingsRow,
   SettingsSection,
   TextField,
@@ -36,10 +45,16 @@ import {
   nameFromFile,
 } from "./soundFile";
 
+// the library is its own chunk, fetched when its tab first opens
+const SoundLibrary = lazy(() => import("./SoundLibrary"));
+
 /**
- * Soundboard settings: add a short sound, listen to it, remove it
+ * Soundboard settings: add a short sound (an upload or one from the
+ * library), listen to it, remove it
  */
 export function SoundboardList(props: { server: Server }) {
+  const [source, setSource] = createSignal<"upload" | "library">("upload");
+  const canManage = () => props.server.havePermission("ManageSoundboard");
   const { t, i18n } = useLingui();
   const client = useClient();
   // 5.2 written the way this language writes numbers
@@ -180,8 +195,43 @@ export function SoundboardList(props: { server: Server }) {
           </Show>
         }
       >
+        <Tabs>
+          <Segmented
+            aria-label={t`Where the sound comes from`}
+            value={source()}
+            onChange={setSource}
+            options={[
+              {
+                value: "upload",
+                label: t`Upload`,
+                icon: <Icon name="upload-simple" size={16} />,
+              },
+              {
+                value: "library",
+                label: t`Library`,
+                icon: <Icon name="music-note" size={16} />,
+              },
+            ]}
+          />
+        </Tabs>
+        <Show when={source() === "library"}>
+          <Suspense
+            fallback={
+              <Empty>
+                <Trans>Loading…</Trans>
+              </Empty>
+            }
+          >
+            <SoundLibrary
+              server={props.server}
+              board={board()}
+              canAdd={canManage()}
+            />
+          </Suspense>
+        </Show>
         <form
-          style={{ display: "contents" }}
+          hidden={source() !== "upload"}
+          style={{ display: source() === "upload" ? "contents" : "none" }}
           onSubmit={(event) => {
             event.preventDefault();
             void add();
@@ -369,6 +419,14 @@ const Upload = styled("div", {
       padding: "16px",
       "& > button": { width: "100%", minHeight: "44px" },
     },
+  },
+});
+
+const Tabs = styled("div", {
+  base: {
+    display: "flex",
+    padding: "16px 20px 0",
+    _phone: { padding: "16px 16px 0" },
   },
 });
 

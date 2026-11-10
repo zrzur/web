@@ -506,6 +506,8 @@ export function useError() {
           return t`You can't have more than ${err.max} emojis on this server.`;
         case "TooManySounds":
           return t`The soundboard has ${err.max} sounds already. Remove one first.`;
+        case "SoundAlreadyAdded":
+          return t`This sound is on the soundboard already.`;
         case "TooManySpeakers":
           return t`The stage has ${err.max} speakers already. Send one back to the listeners first.`;
         case "TooManyChannelWebhooks":

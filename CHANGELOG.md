@@ -2,6 +2,10 @@
 
 ## Unreleased
 
+### Sound library
+
+- Server settings, Soundboard: a Library tab next to Upload with ready-made sounds (Kenney, CC0). Pick a category, search by name in the page language or in English, listen (one at a time, at your soundboard volume; a file is fetched only when played) and Add under the library name in your language, which you can change first. Sounds the server has show as Added; without Manage Soundboard there is no Add. The tab is its own chunk, loaded when it first opens; long lists show 24 sounds at a time. Strings in en, ar, de, fr, es, ru and zh-Hans.
+
 ### Design polish
 
 * **Beta label:** with `VITE_RELEASE_CHANNEL=beta` (runtime, like `VITE_HOST`) a quiet "Beta" label sits under the logo at the top of the server list and in the settings version line; the Home tooltip says "Beta version: some things may still change." A container without the variable is a stable release; a local build without it is a beta.

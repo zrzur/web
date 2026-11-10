@@ -627,6 +627,7 @@ msgstr "{0} запросов за {1} с"
 
 #. placeholder {0}: seconds(sound.duration_ms)
 #: components/app/interface/settings/server/soundboard/SoundboardList.tsx
+#: components/app/interface/settings/server/soundboard/SoundLibrary.tsx
 msgid "{0} s"
 msgstr "{0} с"
 
@@ -1591,6 +1592,7 @@ msgstr "Фактически"
 msgid "discover.paid.ad"
 msgstr "Реклама"
 
+#: components/app/interface/settings/server/soundboard/SoundLibrary.tsx
 #: components/modal/modals/AddBot.tsx
 #: components/modal/modals/AddMembersToGroup.tsx
 #: src/interface/channels/text/Composition.tsx
@@ -1788,6 +1790,7 @@ msgid "Add some friends first, or share the link below."
 msgstr "Сначала добавьте друзей или поделитесь ссылкой ниже."
 
 #: components/app/interface/settings/server/soundboard/SoundboardList.tsx
+#: components/app/interface/settings/server/soundboard/SoundLibrary.tsx
 msgid "Add sound"
 msgstr "Добавить звук"
 
@@ -1837,6 +1840,10 @@ msgstr "Сначала добавьте Zrzur Assistant на этот серве
 #: components/app/interface/settings/server/assistant/AssistantFields.tsx
 msgid "Add…"
 msgstr "Добавить…"
+
+#: components/app/interface/settings/server/soundboard/SoundLibrary.tsx
+msgid "Added"
+msgstr "Добавлен"
 
 #. placeholder {0}: new Date(install!.installed_at).toLocaleDateString()
 #: components/app/interface/settings/server/ServerApps.tsx
@@ -2079,6 +2086,10 @@ msgstr "У всех ролей есть индивидуальные настр�
 #: src/interface/Discover.tsx
 msgid "All servers"
 msgstr "Все серверы"
+
+#: components/app/interface/settings/server/soundboard/SoundLibrary.tsx
+msgid "All sounds"
+msgstr "Все звуки"
 
 #: components/ui/components/design/LoadingScreen.tsx
 msgid "All Systems Operational"
@@ -3644,6 +3655,7 @@ msgstr "Канада"
 #: components/app/interface/settings/server/ServerAccess.tsx
 #: components/app/interface/settings/server/ServerOwnership.tsx
 #: components/app/interface/settings/server/soundboard/SoundboardList.tsx
+#: components/app/interface/settings/server/soundboard/SoundLibrary.tsx
 #: components/app/interface/settings/server/webhooks/ServerWebhooks.tsx
 #: components/app/interface/settings/user/account/AgeSettings.tsx
 #: components/app/interface/settings/user/bots/CommandManager.tsx
@@ -3855,6 +3867,7 @@ msgstr "Категории"
 
 #: components/app/interface/discover/ServerPage.tsx
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsOverview.tsx
+#: components/app/interface/settings/server/soundboard/SoundLibrary.tsx
 #: components/app/interface/settings/shared/Discoverable.tsx
 #: components/app/interface/settings/user/plugins/BrowseTab.tsx
 #: components/app/interface/settings/user/plugins/DeveloperTab.tsx
@@ -10300,6 +10313,10 @@ msgstr "Либерия"
 msgid "Libra"
 msgstr "Весы"
 
+#: components/app/interface/settings/server/soundboard/SoundboardList.tsx
+msgid "Library"
+msgstr "Библиотека"
+
 #: components/ui/components/features/profiles/plateNames.ts
 msgid "Libya"
 msgstr "Ливия"
@@ -10435,8 +10452,10 @@ msgstr "Размещён в «Обзоре»."
 msgid "Listen"
 msgstr "Слушать"
 
+#. placeholder {0}: name(sound)
 #. placeholder {0}: sound.name
 #: components/app/interface/settings/server/soundboard/SoundboardList.tsx
+#: components/app/interface/settings/server/soundboard/SoundLibrary.tsx
 msgid "Listen to {0}"
 msgstr "Прослушать {0}"
 
@@ -10557,6 +10576,7 @@ msgstr "При загрузке устанавливается соединен�
 #: components/app/interface/settings/server/apps/ServerAppPage.tsx
 #: components/app/interface/settings/server/ServerApps.tsx
 #: components/app/interface/settings/server/soundboard/SoundboardList.tsx
+#: components/app/interface/settings/server/soundboard/SoundLibrary.tsx
 #: components/app/interface/settings/server/webhooks/ServerWebhooks.tsx
 #: components/app/interface/settings/user/badges/MyBadges.tsx
 #: components/app/interface/settings/user/bots/CommandManager.tsx
@@ -12021,6 +12041,7 @@ msgstr "имя"
 #: components/app/interface/settings/server/emojis/EmojiList.tsx
 #: components/app/interface/settings/server/members/ListMembers.tsx
 #: components/app/interface/settings/server/soundboard/SoundboardList.tsx
+#: components/app/interface/settings/server/soundboard/SoundLibrary.tsx
 #: components/app/interface/settings/user/badges/BetaAdmin.tsx
 #: components/app/interface/settings/user/bots/CommandManager.tsx
 #: components/app/interface/settings/user/plugins/DeveloperTab.tsx
@@ -12821,6 +12842,10 @@ msgstr "Нет общих серверов и друзей."
 #: components/modal/modals/MoveSupercharge.tsx
 msgid "No servers to show."
 msgstr "Серверов для показа нет."
+
+#: components/app/interface/settings/server/soundboard/SoundLibrary.tsx
+msgid "No sounds match your search."
+msgstr "Нет звуков по вашему запросу."
 
 #: components/app/interface/settings/server/soundboard/SoundboardList.tsx
 msgid "No sounds yet."
@@ -15286,6 +15311,10 @@ msgstr "Готово"
 #~ msgid "Ready-made looks"
 #~ msgstr ""
 
+#: components/app/interface/settings/server/soundboard/SoundLibrary.tsx
+msgid "Ready-made sounds, free for everyone (CC0, from Kenney). Listen, then add the ones you like."
+msgstr "Готовые звуки, бесплатные для всех (CC0, от Kenney). Послушайте и добавьте понравившиеся."
+
 #: components/app/interface/settings/user/profile/CreatorSuspension.tsx
 #: components/app/interface/settings/user/safety/SafetyDashboard.tsx
 #: components/i18n/errors.tsx
@@ -17064,6 +17093,10 @@ msgstr "Поиск серверов"
 msgid "Search settings"
 msgstr "Поиск настроек"
 
+#: components/app/interface/settings/server/soundboard/SoundLibrary.tsx
+msgid "Search sounds"
+msgstr "Поиск звуков"
+
 #: src/interface/developers/docs/DocsPortal.tsx
 msgid "Search the documentation"
 msgstr "Поиск по документации"
@@ -17742,6 +17775,7 @@ msgstr "Свернуть"
 msgid "Show members separately"
 msgstr "Показывать участников отдельно"
 
+#: components/app/interface/settings/server/soundboard/SoundLibrary.tsx
 #: components/app/interface/settings/user/profile/CommunityGallery.tsx
 #: components/modal/modals/PollVoters.tsx
 #: components/ui/components/features/messaging/elements/TextEmbed.tsx
@@ -19820,6 +19854,7 @@ msgid "The soundboard has {0} sounds already. Remove one first."
 msgstr "На звуковой панели уже есть звуки: {0}. Сначала удалите один."
 
 #: components/app/interface/settings/server/soundboard/SoundboardList.tsx
+#: components/app/interface/settings/server/soundboard/SoundLibrary.tsx
 msgid "The soundboard is full. Remove a sound, or add Wings to the server for more."
 msgstr "Звуковая панель заполнена. Удалите звук или добавьте серверу Крылья, чтобы было больше места."
 
@@ -20564,6 +20599,10 @@ msgstr "Этот сайт не использует защищённое сое�
 #: components/app/interface/settings/user/notifications/Sounds.tsx
 msgid "This sound couldn't be played. Check your output device."
 msgstr "Не удалось воспроизвести этот звук. Проверьте устройство вывода."
+
+#: components/i18n/errors.tsx
+msgid "This sound is on the soundboard already."
+msgstr "Этот звук уже есть на звуковой панели."
 
 #. placeholder {0}: maxSeconds()
 #: components/app/interface/settings/server/soundboard/SoundboardList.tsx
@@ -21533,6 +21572,7 @@ msgid "Updating…"
 msgstr "Обновление…"
 
 #: components/app/interface/settings/server/emojis/EmojiList.tsx
+#: components/app/interface/settings/server/soundboard/SoundboardList.tsx
 msgid "Upload"
 msgstr "Загрузить"
 
@@ -22619,6 +22659,10 @@ msgstr "Где его найдут те, кто просматривает «О�
 #: components/app/interface/settings/server/LobbySettings.tsx
 msgid "Where people who love games meet"
 msgstr "Где встречаются те, кто любит игры"
+
+#: components/app/interface/settings/server/soundboard/SoundboardList.tsx
+msgid "Where the sound comes from"
+msgstr "Откуда звук"
 
 #: components/app/interface/settings/server/assistant/labels.ts
 msgid "Where tickets open"

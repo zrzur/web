@@ -160,4 +160,16 @@ describe("stage and soundboard limits", () => {
       "The soundboard has 16 sounds already. Remove one first.",
     );
   });
+
+  it("a library sound added twice says so", () => {
+    const error = new ApiError(
+      409,
+      "PUT",
+      "/servers/1/soundboard/library/voice-go",
+      {
+        type: "SoundAlreadyAdded",
+      },
+    );
+    expect(translate(error)).toBe("This sound is on the soundboard already.");
+  });
 });
