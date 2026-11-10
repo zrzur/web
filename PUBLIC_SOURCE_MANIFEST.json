@@ -6556,8 +6556,8 @@
     },
     {
       "path": "packages/client/components/ui/components/features/voice/soundboard/SoundboardPicker.tsx",
-      "sha256": "d2d986467fe76cf4c17ddb81d0b005880703c8b2ca4b22ebe0c11fe70a751983",
-      "bytes": 5172,
+      "sha256": "8125f3cbf489dc5747326a7e1f4e54bad4631cf18a4859f9531aebf4ce760fb4",
+      "bytes": 5259,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -6574,8 +6574,8 @@
     },
     {
       "path": "packages/client/components/ui/components/features/voice/stage/StagePanel.tsx",
-      "sha256": "325d09801e49013b4ace8e66d3172a60e0461972abdf3e23535dcfd6d04cf11d",
-      "bytes": 11866,
+      "sha256": "3da84f32b0abcf5f7dd40d4b07d648058e6f4972fcc2d693bc64d74f56b656fc",
+      "bytes": 11953,
       "category": "product-source-or-build-manifest"
     },
     {
