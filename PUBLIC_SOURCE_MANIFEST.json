@@ -1762,8 +1762,8 @@
     },
     {
       "path": "packages/client/components/app/interface/settings/server/soundboard/SoundboardList.tsx",
-      "sha256": "3db41aabfeebfb67de532fc8ab5493c2c1bfe0336009750c95263017e51f113f",
-      "bytes": 12585,
+      "sha256": "cc42e9f6852f7bf6ca8f97b4aef53108b7f24a672d4d2c66cb8f99930760784d",
+      "bytes": 12774,
       "category": "product-source-or-build-manifest"
     },
     {
