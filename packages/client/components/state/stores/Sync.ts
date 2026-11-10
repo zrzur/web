@@ -47,6 +47,7 @@ export class Sync extends AbstractStore<"sync", TypeSynchronisation> {
     return {
       revision: {
         collectibles: 0,
+        keybinds: 0,
         ordering: 0,
         notifications: 0,
         "release-notes": 0,

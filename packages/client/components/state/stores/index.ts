@@ -28,7 +28,6 @@ export type UnsyncedStore = {
   auth: TypeAuth;
   draft: TypeDraft;
   experiments: TypeExperiments;
-  keybinds: TypeKeybinds;
   layout: TypeLayout;
   linkSafety: TypeLinkSafety;
   locale: TypeLocale;
@@ -42,6 +41,7 @@ export type UnsyncedStore = {
 
 export type SyncedStore = {
   collectibles: TypeCollectibles;
+  keybinds: TypeKeybinds;
   notifications: TypeNotificationOptions;
   ordering: TypeOrdering;
   "release-notes": TypeReleaseNotes;
@@ -54,6 +54,7 @@ export type SyncedStore = {
  */
 export const SYNCED_KEYS: (keyof SyncedStore)[] = [
   "collectibles",
+  "keybinds",
   "notifications",
   "ordering",
   "release-notes",
