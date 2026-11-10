@@ -6226,8 +6226,8 @@
     },
     {
       "path": "packages/client/components/ui/components/features/voice/StreamPreviewCard.tsx",
-      "sha256": "c3888a9e3322f2b8b7a85a801aedbbeec68202b5825e20f9a154b6b3b8ed29d4",
-      "bytes": 3522,
+      "sha256": "3277f3e5ebc63b9349c5e0d6b2a0e9c9992067844ab1b1b6bd441f1242aa4abd",
+      "bytes": 3597,
       "category": "product-source-or-build-manifest"
     },
     {
