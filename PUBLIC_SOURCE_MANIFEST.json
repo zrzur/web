@@ -2368,8 +2368,8 @@
     },
     {
       "path": "packages/client/components/app/interface/support/OfficialBanner.tsx",
-      "sha256": "fa76b92d54e7643083987e3e32931d7a68ef6519a3609a44cef8720e5d56a026",
-      "bytes": 2889,
+      "sha256": "753016659e2ab1f348b207232323e507e51f3973fec87dd2a2f7746f24cfdfde",
+      "bytes": 3245,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -4186,8 +4186,8 @@
     },
     {
       "path": "packages/client/components/modal/modals/CreateThread.tsx",
-      "sha256": "555eeffa2070b4ac20f0de34981f31642419641ec3bef9caf2d03c400d899e10",
-      "bytes": 6079,
+      "sha256": "871bf4a035e25c5d0c76f6d66145f2ca340c718808960d3f4861b9f468510ef3",
+      "bytes": 5358,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -4302,6 +4302,12 @@
       "path": "packages/client/components/modal/modals/Error2.tsx",
       "sha256": "36cc062ce9d5479cd654949bda89012b7d904402779c184ee0e339f86897a98f",
       "bytes": 779,
+      "category": "product-source-or-build-manifest"
+    },
+    {
+      "path": "packages/client/components/modal/modals/ForumTag.ts",
+      "sha256": "a69d15305232d1de71dc6414da49515a0a8f59e4682bb4ef84b957a08aea9b38",
+      "bytes": 946,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -6585,9 +6591,15 @@
       "category": "product-source-or-build-manifest"
     },
     {
+      "path": "packages/client/components/ui/icons/Icon.dom.test.tsx",
+      "sha256": "2f6a319ce3303b440bae7436ea6a13306e601dcf5974f4485b74cf28d78a1dee",
+      "bytes": 4644,
+      "category": "synthetic-test-source-or-fixture"
+    },
+    {
       "path": "packages/client/components/ui/icons/Icon.tsx",
-      "sha256": "0ec074b7cb9dc9eb99dbef2235e798edc7fde5f485053a605c0821cbd11bed8f",
-      "bytes": 3186,
+      "sha256": "54f0923a42a2e8f2b53fa4598ab0c43887e06b30ad984040d1ce9a882d51cf9d",
+      "bytes": 3506,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -6600,6 +6612,12 @@
       "path": "packages/client/components/ui/icons/RulesIcon.tsx",
       "sha256": "de4e32ef0801867bf9c07d581d1b262d2ce96e15b6722bc76f35e0bba7e1692f",
       "bytes": 1750,
+      "category": "product-source-or-build-manifest"
+    },
+    {
+      "path": "packages/client/components/ui/icons/drawings.ts",
+      "sha256": "caf7e61ae719844f8edebcb99dd2d190ea2820855a335a04db93440dab2540ee",
+      "bytes": 91726,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -7846,8 +7864,8 @@
     },
     {
       "path": "packages/client/components/ui/icons/registry.ts",
-      "sha256": "6b6393b6ccfc7483a173f2c84f6acaf80621dd1ef37cb180863da0c75e8f2d91",
-      "bytes": 42420,
+      "sha256": "7c17040f82ba6276731e0879cff052755fc2a881ab4bfce11849f7b86de76bf2",
+      "bytes": 8148,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -37858,8 +37876,8 @@
     },
     {
       "path": "packages/client/scripts/generate-hugeicons.mjs",
-      "sha256": "8901539839daa2aeab55ef4d14190001c7670d1cb753ef4d2cd4b3b9e41b09da",
-      "bytes": 3761,
+      "sha256": "a7e41c6ef9454a2a391948833a89ef983be67b61bf71044d3d1b980c1382d194",
+      "bytes": 3012,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -38985,6 +39003,12 @@
       "category": "product-source-or-build-manifest"
     },
     {
+      "path": "packages/client/scripts/icon-drawings.mjs",
+      "sha256": "12ca8e692330683b6d1cbe9e0076ff56406533b6626df5eaffaddd748b5e9c5d",
+      "bytes": 4803,
+      "category": "product-source-or-build-manifest"
+    },
+    {
       "path": "packages/client/scripts/language-coverage.mjs",
       "sha256": "7644b6c3342a8d2ff89baaa6cf004ec663fc6eefcc9fa55426147320fcd63b1b",
       "bytes": 1736,
@@ -39292,8 +39316,8 @@
     },
     {
       "path": "packages/client/src/interface/channels/forum/ForumChannel.tsx",
-      "sha256": "e25cfb816ff173d2049870b015b902fd59b3b83857b5d17213ddb9bc294bce8b",
-      "bytes": 9089,
+      "sha256": "c4c3ff65cc501c86d78cb56a0d2aecff1307bee764a992cb2d69d3d85c3a8a44",
+      "bytes": 9085,
       "category": "product-source-or-build-manifest"
     },
     {
