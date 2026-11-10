@@ -69,6 +69,14 @@ export default defineConfig(({ command }) => {
             files: ["LICENSE-flag-icons.txt", "SOURCES.md"],
           },
           {
+            // served at /assets/rnnoise/ instead of from jsDelivr
+            name: "livekit-rnnoise-processor worklet with RNNoise (WebAssembly)",
+            dir: resolve(__dirname, "vendor/rnnoise"),
+            license: "Apache-2.0 (RNNoise: BSD-3-Clause)",
+            source: "https://github.com/Dadadah/livekit-rnnoise-processor",
+            files: ["LICENSE", "SOURCES.md"],
+          },
+          {
             name: "Phosphor Icons",
             dir: resolve(__dirname, "public/third-party/phosphor"),
             license: "MIT",

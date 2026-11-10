@@ -12,3 +12,6 @@ node_modules/
 /blob-report/
 /playwright/.cache/
 /playwright/.auth/
+# the noise filter, copied from vendor/rnnoise by scripts/copyAssets.mjs
+scripts/assets_fallback/rnnoise/
+assets/rnnoise/

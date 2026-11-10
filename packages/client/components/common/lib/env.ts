@@ -386,8 +386,8 @@ export default {
   /** Gifbox server override for development — unset disables upstream gifbox.me */
   DEV_GIFBOX_URL,
   /**
-   * RNNoise worklet CDN host location. Defaults to blank, which uses the url
-   * provided by the livekit-rnnoise-processor package (jsDelivr, not Stoat/Revolt).
+   * RNNoise worklet folder (ends with "/"). Blank: the app's own copy at
+   * /assets/rnnoise/ (rtc/rnnoiseUrl.ts), never a public CDN.
    */
   RNNOISE_WORKLET_CDN_URL,
   /** Zrzur Assistant's settings service (unset: page hidden) */
