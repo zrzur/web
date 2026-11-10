@@ -32,6 +32,7 @@ export { Button } from "./Button";
 export { type CategorySelectOption, CategoryButton } from "./CategoryButton";
 export { Checkbox } from "./Checkbox";
 export { COLOUR_PALETTE, ColourPicker } from "./ColourPicker";
+export { ColourWell } from "./ColourWell";
 export { DataTable } from "./DataTable";
 export { DateTimeField } from "./DateTimeField";
 export {

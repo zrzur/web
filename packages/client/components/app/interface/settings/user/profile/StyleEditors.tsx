@@ -6,6 +6,7 @@ import { styled } from "styled-system/jsx";
 import { useState } from "@revolt/state";
 import type { CollectibleRef } from "@revolt/state/stores/Collectibles";
 import { Avatar, Dialog, UserStatus } from "@revolt/ui";
+import { ColourWell } from "@revolt/ui/components/design/ColourWell";
 import { AvatarDecoration } from "@revolt/ui/components/features/profiles/AvatarDecoration";
 import {
   NameplateMotion,
@@ -156,19 +157,13 @@ export function ThemePicker(props: {
   return (
     <ThemeWrap>
       <CustomRow>
-        <Swatch title={t`Main colour`}>
-          <input
-            type="color"
-            aria-label={t`Main colour`}
-            value={first()}
-            onInput={(e) =>
-              props.onChange([
-                e.currentTarget.value,
-                ...(second() ? [second()!] : []),
-              ])
-            }
-          />
-        </Swatch>
+        <ColourWell
+          label={t`Main colour`}
+          value={first()}
+          onInput={(colour) =>
+            props.onChange([colour, ...(second() ? [second()!] : [])])
+          }
+        />
         <Show
           when={second()}
           fallback={
@@ -181,14 +176,11 @@ export function ThemePicker(props: {
             </TextButton>
           }
         >
-          <Swatch title={t`Second colour`}>
-            <input
-              type="color"
-              aria-label={t`Second colour`}
-              value={second()}
-              onInput={(e) => props.onChange([first(), e.currentTarget.value])}
-            />
-          </Swatch>
+          <ColourWell
+            label={t`Second colour`}
+            value={second()!}
+            onInput={(colour) => props.onChange([first(), colour])}
+          />
         </Show>
         <TextButton
           type="button"
@@ -345,27 +337,19 @@ export function NameStyleDialog(props: {
 
           <Show when={mode() !== "none"}>
             <ColourRow>
-              <Swatch data-large title={t`Pick a colour`}>
-                <input
-                  type="color"
-                  aria-label={t`Pick a colour`}
-                  value={colour()[0]}
-                  onInput={(e) =>
-                    setColour([e.currentTarget.value, ...colour().slice(1)])
-                  }
-                />
-              </Swatch>
+              <ColourWell
+                size="lg"
+                label={t`Pick a colour`}
+                value={colour()[0]}
+                onInput={(picked) => setColour([picked, ...colour().slice(1)])}
+              />
               <Show when={mode() === "gradient"}>
-                <Swatch data-large title={t`Second colour`}>
-                  <input
-                    type="color"
-                    aria-label={t`Second colour`}
-                    value={colour()[1]}
-                    onInput={(e) =>
-                      setColour([colour()[0], e.currentTarget.value])
-                    }
-                  />
-                </Swatch>
+                <ColourWell
+                  size="lg"
+                  label={t`Second colour`}
+                  value={colour()[1]}
+                  onInput={(picked) => setColour([colour()[0], picked])}
+                />
               </Show>
               <SmallSwatches>
                 <For
@@ -1143,29 +1127,6 @@ const ThemeWrap = styled("div", {
 
 const CustomRow = styled("div", {
   base: { display: "flex", alignItems: "center", gap: "10px" },
-});
-
-const Swatch = styled("label", {
-  base: {
-    position: "relative",
-    width: "40px",
-    height: "40px",
-    borderRadius: "var(--z-radius, 10px)",
-    overflow: "hidden",
-    border: "1px solid var(--z-border-strong)",
-    cursor: "pointer",
-    flexShrink: 0,
-    "&[data-large]": { width: "84px", height: "56px" },
-    "& input": {
-      position: "absolute",
-      inset: "-8px",
-      width: "calc(100% + 16px)",
-      height: "calc(100% + 16px)",
-      border: "none",
-      padding: 0,
-      cursor: "pointer",
-    },
-  },
 });
 
 const TextButton = styled("button", {
