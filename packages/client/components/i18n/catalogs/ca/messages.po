@@ -1444,8 +1444,8 @@ msgstr ""
 
 #. placeholder {0}: index() + 1
 #: components/modal/modals/CreatePoll.tsx
-msgid "Actions for answer {0}"
-msgstr ""
+#~ msgid "Actions for answer {0}"
+#~ msgstr ""
 
 #: components/app/interface/settings/server/invites/VanityInvite.tsx
 #: components/app/interface/settings/user/badges/BetaAdmin.tsx
@@ -3777,8 +3777,8 @@ msgstr ""
 
 #. placeholder {0}: index() + 1
 #: components/modal/modals/CreatePoll.tsx
-msgid "Change the emoji of answer {0}"
-msgstr ""
+#~ msgid "Change the emoji of answer {0}"
+#~ msgstr ""
 
 #: components/app/interface/settings/user/Account.tsx
 msgid "Change the password you use to sign in."
@@ -4130,8 +4130,8 @@ msgstr ""
 
 #. placeholder {0}: index() + 1
 #: components/modal/modals/CreatePoll.tsx
-msgid "Choose an emoji for answer {0}"
-msgstr ""
+#~ msgid "Choose an emoji for answer {0}"
+#~ msgstr ""
 
 #: components/app/interface/settings/user/profile/CreatorStudio.tsx
 #~ msgid "Choose an image"
@@ -6666,6 +6666,11 @@ msgstr ""
 #: components/ui/components/features/messaging/composition/picker/CompositionMediaPicker.tsx
 msgid "Emoji"
 msgstr "Emoji."
+
+#. placeholder {0}: index() + 1
+#: components/modal/modals/CreatePoll.tsx
+msgid "Emoji for answer {0}"
+msgstr ""
 
 #: components/modal/modals/EditEmoji.tsx
 msgid "Emoji name"
@@ -13121,6 +13126,11 @@ msgstr ""
 
 #: components/app/interface/settings/user/bots/CommandManager.tsx
 msgid "Options"
+msgstr ""
+
+#. placeholder {0}: index() + 1
+#: components/modal/modals/CreatePoll.tsx
+msgid "Options for answer {0}"
 msgstr ""
 
 #: components/app/interface/settings/user/profile/CreatorStudio.tsx

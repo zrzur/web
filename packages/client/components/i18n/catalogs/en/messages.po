@@ -1477,8 +1477,8 @@ msgstr "Actions are never automatic. Check the evidence first. The affected user
 
 #. placeholder {0}: index() + 1
 #: components/modal/modals/CreatePoll.tsx
-msgid "Actions for answer {0}"
-msgstr "Actions for answer {0}"
+#~ msgid "Actions for answer {0}"
+#~ msgstr "Actions for answer {0}"
 
 #: components/app/interface/settings/server/invites/VanityInvite.tsx
 #: components/app/interface/settings/user/badges/BetaAdmin.tsx
@@ -3882,8 +3882,8 @@ msgstr "Change the emoji of {0}"
 
 #. placeholder {0}: index() + 1
 #: components/modal/modals/CreatePoll.tsx
-msgid "Change the emoji of answer {0}"
-msgstr "Change the emoji of answer {0}"
+#~ msgid "Change the emoji of answer {0}"
+#~ msgstr "Change the emoji of answer {0}"
 
 #: components/app/interface/settings/user/Account.tsx
 msgid "Change the password you use to sign in."
@@ -4264,8 +4264,8 @@ msgstr "Choose an emoji"
 
 #. placeholder {0}: index() + 1
 #: components/modal/modals/CreatePoll.tsx
-msgid "Choose an emoji for answer {0}"
-msgstr "Choose an emoji for answer {0}"
+#~ msgid "Choose an emoji for answer {0}"
+#~ msgstr "Choose an emoji for answer {0}"
 
 #: components/app/interface/settings/user/profile/CreatorStudio.tsx
 #~ msgid "Choose an image"
@@ -6964,6 +6964,11 @@ msgstr "Emoji"
 #: components/ui/components/features/messaging/composition/picker/EmojiPicker.tsx
 #~ msgid "Emoji categories"
 #~ msgstr "Emoji categories"
+
+#. placeholder {0}: index() + 1
+#: components/modal/modals/CreatePoll.tsx
+msgid "Emoji for answer {0}"
+msgstr "Emoji for answer {0}"
 
 #: components/modal/modals/EditEmoji.tsx
 msgid "Emoji name"
@@ -13739,6 +13744,11 @@ msgstr "Optional: one line under the question."
 #: components/app/interface/settings/user/bots/CommandManager.tsx
 msgid "Options"
 msgstr "Options"
+
+#. placeholder {0}: index() + 1
+#: components/modal/modals/CreatePoll.tsx
+msgid "Options for answer {0}"
+msgstr "Options for answer {0}"
 
 #: components/app/interface/settings/user/profile/CreatorStudio.tsx
 msgid "or choose a file"

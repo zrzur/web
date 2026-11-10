@@ -1444,8 +1444,8 @@ msgstr "Las acciones nunca son automáticas. Revisa primero las pruebas. El usua
 
 #. placeholder {0}: index() + 1
 #: components/modal/modals/CreatePoll.tsx
-msgid "Actions for answer {0}"
-msgstr "Acciones de la respuesta {0}"
+#~ msgid "Actions for answer {0}"
+#~ msgstr "Acciones de la respuesta {0}"
 
 #: components/app/interface/settings/server/invites/VanityInvite.tsx
 #: components/app/interface/settings/user/badges/BetaAdmin.tsx
@@ -3777,8 +3777,8 @@ msgstr "Cambiar el emoji de {0}"
 
 #. placeholder {0}: index() + 1
 #: components/modal/modals/CreatePoll.tsx
-msgid "Change the emoji of answer {0}"
-msgstr "Cambiar el emoji de la respuesta {0}"
+#~ msgid "Change the emoji of answer {0}"
+#~ msgstr "Cambiar el emoji de la respuesta {0}"
 
 #: components/app/interface/settings/user/Account.tsx
 msgid "Change the password you use to sign in."
@@ -4130,8 +4130,8 @@ msgstr "Elige un emoji"
 
 #. placeholder {0}: index() + 1
 #: components/modal/modals/CreatePoll.tsx
-msgid "Choose an emoji for answer {0}"
-msgstr "Elegir un emoji para la respuesta {0}"
+#~ msgid "Choose an emoji for answer {0}"
+#~ msgstr "Elegir un emoji para la respuesta {0}"
 
 #: components/app/interface/settings/user/profile/CreatorStudio.tsx
 #~ msgid "Choose an image"
@@ -6666,6 +6666,11 @@ msgstr "Herramientas de emergencia y filtros contra el spam y los enlaces no des
 #: components/ui/components/features/messaging/composition/picker/CompositionMediaPicker.tsx
 msgid "Emoji"
 msgstr "Emoji"
+
+#. placeholder {0}: index() + 1
+#: components/modal/modals/CreatePoll.tsx
+msgid "Emoji for answer {0}"
+msgstr "Emoji de la respuesta {0}"
 
 #: components/modal/modals/EditEmoji.tsx
 msgid "Emoji name"
@@ -13122,6 +13127,11 @@ msgstr "Opcional: una línea bajo la pregunta."
 #: components/app/interface/settings/user/bots/CommandManager.tsx
 msgid "Options"
 msgstr "Opciones"
+
+#. placeholder {0}: index() + 1
+#: components/modal/modals/CreatePoll.tsx
+msgid "Options for answer {0}"
+msgstr "Opciones de la respuesta {0}"
 
 #: components/app/interface/settings/user/profile/CreatorStudio.tsx
 msgid "or choose a file"

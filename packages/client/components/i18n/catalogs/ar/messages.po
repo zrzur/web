@@ -1477,8 +1477,8 @@ msgstr "الإجراءات لا تُتخذ تلقائيًا أبدًا. راجع
 
 #. placeholder {0}: index() + 1
 #: components/modal/modals/CreatePoll.tsx
-msgid "Actions for answer {0}"
-msgstr "إجراءات الإجابة {0}"
+#~ msgid "Actions for answer {0}"
+#~ msgstr "إجراءات الإجابة {0}"
 
 #: components/app/interface/settings/server/invites/VanityInvite.tsx
 #: components/app/interface/settings/user/badges/BetaAdmin.tsx
@@ -3882,8 +3882,8 @@ msgstr "تغيير رمز {0} التعبيري"
 
 #. placeholder {0}: index() + 1
 #: components/modal/modals/CreatePoll.tsx
-msgid "Change the emoji of answer {0}"
-msgstr "غيّر رمز الإجابة {0} التعبيري"
+#~ msgid "Change the emoji of answer {0}"
+#~ msgstr "غيّر رمز الإجابة {0} التعبيري"
 
 #: components/app/interface/settings/user/Account.tsx
 msgid "Change the password you use to sign in."
@@ -4264,8 +4264,8 @@ msgstr "اختر رمزًا تعبيريًا"
 
 #. placeholder {0}: index() + 1
 #: components/modal/modals/CreatePoll.tsx
-msgid "Choose an emoji for answer {0}"
-msgstr "اختر رمزًا تعبيريًا للإجابة {0}"
+#~ msgid "Choose an emoji for answer {0}"
+#~ msgstr "اختر رمزًا تعبيريًا للإجابة {0}"
 
 #: components/app/interface/settings/user/profile/CreatorStudio.tsx
 #~ msgid "Choose an image"
@@ -6963,6 +6963,11 @@ msgstr "إيموجي"
 #: components/ui/components/features/messaging/composition/picker/EmojiPicker.tsx
 #~ msgid "Emoji categories"
 #~ msgstr "فئات الإيموجي"
+
+#. placeholder {0}: index() + 1
+#: components/modal/modals/CreatePoll.tsx
+msgid "Emoji for answer {0}"
+msgstr "الرمز التعبيري للإجابة {0}"
 
 #: components/modal/modals/EditEmoji.tsx
 msgid "Emoji name"
@@ -13736,6 +13741,11 @@ msgstr "اختياري: سطر واحد تحت السؤال."
 #: components/app/interface/settings/user/bots/CommandManager.tsx
 msgid "Options"
 msgstr "الخيارات"
+
+#. placeholder {0}: index() + 1
+#: components/modal/modals/CreatePoll.tsx
+msgid "Options for answer {0}"
+msgstr "خيارات الإجابة {0}"
 
 #: components/app/interface/settings/user/profile/CreatorStudio.tsx
 msgid "or choose a file"

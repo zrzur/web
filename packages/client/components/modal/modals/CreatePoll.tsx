@@ -207,11 +207,7 @@ export function CreatePollModal(
                     <EmojiButton
                       ref={picker.ref}
                       type="button"
-                      aria-label={
-                        answer.emoji
-                          ? t`Change the emoji of answer ${index() + 1}`
-                          : t`Choose an emoji for answer ${index() + 1}`
-                      }
+                      aria-label={t`Emoji for answer ${index() + 1}`}
                       onClick={(event) => picker.onClickEmoji(event)}
                     >
                       <Show
@@ -281,7 +277,7 @@ export function CreatePollModal(
                         variant="toolbar"
                         size="sm"
                         aria-haspopup="menu"
-                        aria-label={t`Actions for answer ${index() + 1}`}
+                        aria-label={t`Options for answer ${index() + 1}`}
                       >
                         <Icon name="dots-three-vertical" size={20} />
                       </IconButton>
@@ -289,32 +285,31 @@ export function CreatePollModal(
                   }
                 >
                   <RowTools>
-                    <IconButton
-                      variant="toolbar"
-                      size="xs"
+                    {/* plain buttons: a press must land even while the
+                        answer field it follows loses focus */}
+                    <ToolButton
+                      type="button"
                       aria-label={t`Move answer ${index() + 1} up`}
-                      isDisabled={index() === 0}
-                      onPress={() => move(index(), -1)}
+                      disabled={index() === 0}
+                      onClick={() => move(index(), -1)}
                     >
                       <Icon name="caret-up" size={16} />
-                    </IconButton>
-                    <IconButton
-                      variant="toolbar"
-                      size="xs"
+                    </ToolButton>
+                    <ToolButton
+                      type="button"
                       aria-label={t`Move answer ${index() + 1} down`}
-                      isDisabled={index() === answers.length - 1}
-                      onPress={() => move(index(), 1)}
+                      disabled={index() === answers.length - 1}
+                      onClick={() => move(index(), 1)}
                     >
                       <Icon name="caret-down" size={16} />
-                    </IconButton>
-                    <IconButton
-                      variant="toolbar"
-                      size="xs"
+                    </ToolButton>
+                    <ToolButton
+                      type="button"
                       aria-label={t`Remove answer ${index() + 1}`}
-                      onPress={() => removeAnswer(index())}
+                      onClick={() => removeAnswer(index())}
                     >
                       <Icon name="x" size={16} />
-                    </IconButton>
+                    </ToolButton>
                   </RowTools>
                 </Show>
               </AnswerRow>
@@ -551,5 +546,28 @@ const PreviewMark = styled("span", {
     borderRadius: "var(--z-radius-pill)",
     border: "2px solid var(--z-border-strong)",
     "&[data-multiple='true']": { borderRadius: "var(--z-radius-xs)" },
+  },
+});
+
+const ToolButton = styled("button", {
+  base: {
+    display: "inline-flex",
+    alignItems: "center",
+    justifyContent: "center",
+    inlineSize: "32px",
+    blockSize: "32px",
+    border: "none",
+    borderRadius: "var(--z-radius-sm)",
+    background: "transparent",
+    color: "var(--z-fg-secondary)",
+    cursor: "pointer",
+    "--z-icon-color": "var(--z-icon-muted)",
+    "&:hover:not(:disabled)": { background: "var(--z-hover)" },
+    "&:active:not(:disabled)": { background: "var(--z-nav-selected)" },
+    _focusVisible: {
+      outline: "2px solid var(--z-focus)",
+      outlineOffset: "2px",
+    },
+    _disabled: { opacity: 0.4, cursor: "default" },
   },
 });

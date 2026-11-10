@@ -1477,8 +1477,8 @@ msgstr "Maßnahmen passieren nie automatisch. Prüfe zuerst die Beweise. Die bet
 
 #. placeholder {0}: index() + 1
 #: components/modal/modals/CreatePoll.tsx
-msgid "Actions for answer {0}"
-msgstr "Aktionen für Antwort {0}"
+#~ msgid "Actions for answer {0}"
+#~ msgstr "Aktionen für Antwort {0}"
 
 #: components/app/interface/settings/server/invites/VanityInvite.tsx
 #: components/app/interface/settings/user/badges/BetaAdmin.tsx
@@ -3882,8 +3882,8 @@ msgstr "Emoji von {0} ändern"
 
 #. placeholder {0}: index() + 1
 #: components/modal/modals/CreatePoll.tsx
-msgid "Change the emoji of answer {0}"
-msgstr "Emoji von Antwort {0} ändern"
+#~ msgid "Change the emoji of answer {0}"
+#~ msgstr "Emoji von Antwort {0} ändern"
 
 #: components/app/interface/settings/user/Account.tsx
 msgid "Change the password you use to sign in."
@@ -4264,8 +4264,8 @@ msgstr "Emoji wählen"
 
 #. placeholder {0}: index() + 1
 #: components/modal/modals/CreatePoll.tsx
-msgid "Choose an emoji for answer {0}"
-msgstr "Emoji für Antwort {0} wählen"
+#~ msgid "Choose an emoji for answer {0}"
+#~ msgstr "Emoji für Antwort {0} wählen"
 
 #: components/app/interface/settings/user/profile/CreatorStudio.tsx
 #~ msgid "Choose an image"
@@ -6963,6 +6963,11 @@ msgstr "Emoji"
 #: components/ui/components/features/messaging/composition/picker/EmojiPicker.tsx
 #~ msgid "Emoji categories"
 #~ msgstr "Emoji-Kategorien"
+
+#. placeholder {0}: index() + 1
+#: components/modal/modals/CreatePoll.tsx
+msgid "Emoji for answer {0}"
+msgstr "Emoji für Antwort {0}"
 
 #: components/modal/modals/EditEmoji.tsx
 msgid "Emoji name"
@@ -13736,6 +13741,11 @@ msgstr "Optional: eine Zeile unter der Frage."
 #: components/app/interface/settings/user/bots/CommandManager.tsx
 msgid "Options"
 msgstr "Optionen"
+
+#. placeholder {0}: index() + 1
+#: components/modal/modals/CreatePoll.tsx
+msgid "Options for answer {0}"
+msgstr "Optionen für Antwort {0}"
 
 #: components/app/interface/settings/user/profile/CreatorStudio.tsx
 msgid "or choose a file"
