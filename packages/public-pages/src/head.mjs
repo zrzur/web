@@ -284,23 +284,23 @@ const TEXT = {
   fr: {
     discover: "Découvrir Zrzur",
     designs: "Designs Zrzur",
-    discoverHome: "Trouvez votre communauté — Découvrir Zrzur",
+    discoverHome: "Trouve ta communauté — Découvrir Zrzur",
     discoverAbout:
-      "Des communautés publiques sur Zrzur pour les jeux, l’apprentissage et les loisirs. Parcourez-les sans compte et rejoignez-les en un clic.",
-    designsHome: "Personnalisez votre profil — Designs Zrzur",
+      "Des communautés publiques sur Zrzur pour les jeux, l’apprentissage et les loisirs. Parcours-les sans compte et rejoins-les en un clic.",
+    designsHome: "Personnalise ton profil — Designs Zrzur",
     designsAbout:
-      "Décorations d’avatar, plaques de nom et apparences de profil pour Zrzur. Essayez chaque design avant de le choisir.",
+      "Décorations d’avatar, plaques de nom et apparences de profil pour Zrzur. Essaie chaque design avant de le choisir.",
     topic: (topic) => `${topic} : communautés sur Zrzur`,
     topicAbout: (topic) =>
-      `Serveurs publics sur le thème ${guillemets(topic)} sur Zrzur. Parcourez et rejoignez.`,
+      `Serveurs publics sur le thème ${guillemets(topic)} sur Zrzur. Parcours et rejoins.`,
     language: (name) => `Communautés en ${name} sur Zrzur`,
     languageAbout: (name) => `Serveurs publics en ${name} sur Zrzur.`,
     server: (name) => `${name} — Découvrir Zrzur`,
     serverAbout: (name, members) =>
-      `${name} est une communauté sur Zrzur d’environ ${members} membres. Rejoignez-la gratuitement.`,
+      `${name} est une communauté sur Zrzur d’environ ${members} membres. Rejoins-la gratuitement.`,
     design: (name, kind) => `${name} — ${kind} sur Designs Zrzur`,
     designAbout: (name, kind) =>
-      `${kind} ${guillemets(name)} pour votre profil Zrzur. À essayer, puis à utiliser.`,
+      `${kind} ${guillemets(name)} pour ton profil Zrzur. À essayer, puis à utiliser.`,
     missing: "Page introuvable — Zrzur",
   },
   es: {
