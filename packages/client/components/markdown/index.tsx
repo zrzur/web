@@ -315,6 +315,7 @@ const replyPipeline = unified()
   .use(remarkGfm)
   .use(remarkMentions)
   .use(remarkCommandMentions)
+  .use(remarkTimestamps)
   .use(remarkUnicodeEmoji)
   .use(remarkCustomEmoji)
   .use(remarkSpoiler)
@@ -322,6 +323,7 @@ const replyPipeline = unified()
   // @ts-expect-error non-standard elements not recognized by typing
   .use(remarkRehype, {
     handlers: {
+      timestamp: timestampHandler,
       unicodeEmoji: unicodeEmojiHandler,
       customEmoji: customEmojiHandler,
       mention: mentionHandler,

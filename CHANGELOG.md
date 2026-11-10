@@ -4,6 +4,8 @@
 
 ### Design polish
 
+* **Timestamps:** `<t:SECONDS:FORMAT>` in a message shows the moment in the reader's time zone and language with all seven letters (`t` `T` `d` `D` `f` `F` `R`, default `f`); the tooltip gives the full date in words, relative times share one 30 s clock, numbers that are not a real date stay as text, and reply previews render them too.
+
 * **Beta label:** with `VITE_RELEASE_CHANNEL=beta` (runtime, like `VITE_HOST`) a quiet "Beta" label sits under the logo at the top of the server list and in the settings version line; the Home tooltip says "Beta version: some things may still change." A container without the variable is a stable release; a local build without it is a beta.
 * **Login:** the three-dot bubble above the sign-in card is gone; it read as an unlabelled box or a stuck loader on phones. The button already shows waiting, done and error.
 * **Player embeds:** the click-to-load card no longer repeats the site name and the title shown by the link embed above it; "Privacy policy" is its own target next to Load (44 px on phones), and the card takes the height its words need, so nothing is cut off on a narrow screen.

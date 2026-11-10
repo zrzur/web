@@ -1,55 +1,38 @@
-import { createEffect, createSignal, on, onMount } from "solid-js";
-
 import { type Dayjs } from "dayjs";
 import type { Handler } from "mdast-util-to-hast";
 import { Plugin } from "unified";
 import { visit } from "unist-util-visit";
 
 import { dayjs, timeLocale } from "@revolt/i18n/dayjs";
-import { useState } from "@revolt/state";
 
 import { time as Time } from "../elements";
 
+import {
+  formatTimestamp,
+  timestampFormat,
+  timestampSeconds,
+  timestampTitle,
+  useRelativeClock,
+} from "./timestampFormat";
+
 export function RenderTimestamp(props: { format: string; date: Dayjs }) {
-  const { datePerDay } = useState();
+  const format = () => timestampFormat(props.format);
 
-  /**
-   * Format a time string
-   */
-  function format() {
-    switch (props.format) {
-      case "t":
-        // localised formats follow the user's language and 12/24-hour choice
-        return props.date.format("LT");
-      case "T":
-        return props.date.format("LTS");
-      case "R":
-        return props.date.fromNow();
-      case "D":
-        return props.date.format("LL");
-      case "F":
-        return props.date.format("LLLL");
-      default:
-        return props.date.format("LLL");
-    }
-  }
-
-  // Signal for current value
-  const [value, setValue] = createSignal(format());
-
-  // Update if relative time & day changes
-  onMount(() => {
-    if (props.format === "R")
-      createEffect(on(datePerDay, () => setValue(format())));
-  });
+  // relative times follow one shared clock, only while they are on screen
+  const tick = format() === "R" ? useRelativeClock() : () => 0;
+  const value = () => {
+    tick();
+    return formatTimestamp(props.date, format());
+  };
 
   return (
     <time
       class={Time()}
+      dateTime={props.date.toISOString()}
       use:floating={{
         tooltip: {
           placement: "top",
-          content: props.date.toString(),
+          content: timestampTitle(props.date),
         },
       }}
     >
@@ -92,17 +75,21 @@ export const remarkTimestamps: Plugin = () => (tree) => {
 
       // Process all timestamps
       for (let i = 0; i < elements.length / 3; i++) {
-        // Process timestamp
-        const date = dayjs
-          .unix(parseInt(elements[i * 3]))
-          .locale(timeLocale()[1]);
-
-        // Insert components
-        newNodes.push({
-          type: "timestamp",
-          format: elements[i * 3 + 1],
-          date,
-        });
+        // a number that is no real moment stays as the text that was written
+        const seconds = timestampSeconds(elements[i * 3]);
+        if (seconds === undefined) {
+          const letter = elements[i * 3 + 1];
+          newNodes.push({
+            type: "text",
+            value: `<t:${elements[i * 3]}${letter ? `:${letter}` : ""}>`,
+          });
+        } else {
+          newNodes.push({
+            type: "timestamp",
+            format: elements[i * 3 + 1],
+            date: dayjs.unix(seconds).locale(timeLocale()[1]),
+          });
+        }
 
         newNodes.push({
           type: "text",
