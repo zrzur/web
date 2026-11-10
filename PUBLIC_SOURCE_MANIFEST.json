@@ -39466,8 +39466,8 @@
     },
     {
       "path": "packages/client/src/interface/developers/data/botApi/meta.json",
-      "sha256": "0897d011df2c8b57d11610349b105b0a5e00435319c76240cfd5f3a0a659dc8b",
-      "bytes": 9127,
+      "sha256": "6aeae639a340fad19789b2dc2c6fcac5a30eed575fc36e0070d2444981e4c50b",
+      "bytes": 9273,
       "category": "product-source-or-build-manifest"
     },
     {
