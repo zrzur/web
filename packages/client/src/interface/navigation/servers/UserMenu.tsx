@@ -311,6 +311,7 @@ export function UserMenu(props: Props) {
             role="menuitem"
             disabled={!!pending() || clearing()}
             onClick={openStatus}
+            data-testid="menu-edit-status"
           >
             <ActionIcon>
               <Icon name="pencil-simple" size={16} />
@@ -330,6 +331,7 @@ export function UserMenu(props: Props) {
               role="menuitem"
               disabled={!!pending() || clearing()}
               onClick={() => void clearStatus()}
+              data-testid="menu-clear-status"
             >
               <ActionIcon>
                 <Icon name="trash" size={16} />

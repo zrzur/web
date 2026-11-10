@@ -118,7 +118,7 @@ export function AccountBar(props: { compact?: boolean; overPage?: boolean }) {
                   </span>
                 </OverflowingText>
               </Name>
-              <StatusLine>
+              <StatusLine data-testid="account-status">
                 <OverflowingText>
                   <TextWithEmoji content={statusText()} />
                 </OverflowingText>

@@ -395,7 +395,7 @@ function Person(props: {
           <b style={nameStyle(props.user.style)}>{props.user.displayName}</b>
           <span>{props.user.username}</span>
         </strong>
-        <small>
+        <small data-testid="friend-status">
           <TextWithEmoji content={statusText()} />
         </small>
       </Names>
