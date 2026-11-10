@@ -581,14 +581,17 @@ export class Voice extends AbstractStore<"voice", TypeVoice> {
    * Set the push-to-talk key (ignored when the key is not allowed)
    */
   set pttKey(value: string) {
-    if (pttKeyAllowed(value)) this.set("pttKey", value);
+    // kept with the synced shortcuts, so every device (and the desktop
+    // app's global combination) uses the same key
+    if (pttKeyAllowed(value)) this.state.set("keybinds", "pttKey", value);
   }
 
   /**
-   * Get the push-to-talk key
+   * Get the push-to-talk key: the synced one, else the one this device
+   * stored before keys were synced, else `
    */
   get pttKey(): string {
-    return this.get().pttKey ?? "Backquote";
+    return this.state.keybinds?.pttKey ?? this.get().pttKey ?? "Backquote";
   }
 
   /**

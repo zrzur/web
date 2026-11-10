@@ -1,5 +1,3 @@
-import { ReactiveSet } from "@solid-primitives/set";
-
 export enum KeybindAction {
   /**
    * Navigate to channel above current channel
@@ -92,14 +90,24 @@ export const ACTION_PRIORITY: KeybindAction[] = [
 ];
 
 /**
+ * Actions on a plain Escape press (fixed, not changeable), in priority
+ * order: the start of ACTION_PRIORITY without "mark the server as read"
+ */
+export const ESCAPE_ACTIONS: KeybindAction[] = ACTION_PRIORITY.slice(
+  0,
+  8,
+).filter((action) => action !== KeybindAction.CHAT_MARK_SERVER_AS_READ);
+
+/**
  * Filter keybinds with special logic
  * @param keybind Keybind to filter
+ * @param event The key press
  * @param currentlyBound Other keybinds currently bound
  * @returns Whether to include this keybind
  */
 export function keybindFilter(
   keybind: KeybindAction,
-  activeKeys: ReactiveSet<string>,
+  event: Pick<KeyboardEvent, "key" | "ctrlKey" | "metaKey">,
   currentlyBound: Record<KeybindAction, number>,
   target: HTMLElement | null,
 ) {
@@ -123,8 +131,8 @@ export function keybindFilter(
 
     // don't allow focusing if modifier key is pressed... except for paste
     if (
-      (activeKeys.has("Control") || activeKeys.has("Meta")) &&
-      !(activeKeys.has("v") || activeKeys.has("a"))
+      (event.ctrlKey || event.metaKey) &&
+      !(event.key === "v" || event.key === "a")
     )
       return false;
   }

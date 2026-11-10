@@ -4,6 +4,7 @@ import { Show, createSignal } from "solid-js";
 import { Trans, useLingui } from "@lingui/solid/macro";
 
 import { useError } from "@revolt/i18n";
+import { useState } from "@revolt/state";
 import { Column, Dialog, DialogProps, Form2 } from "@revolt/ui";
 
 import { Modals } from "../types";
@@ -21,6 +22,10 @@ export function EditUsernameModal(
 ) {
   const { t } = useLingui();
   const describeError = useError();
+  const state = useState();
+  // the own tag stays off screen in streamer mode
+  const tag = (value?: string) =>
+    state.settings.streamerMode ? "••••" : value;
 
   // the dialog edits the signed-in user, which never changes underneath it
   // eslint-disable-next-line solid/reactivity
@@ -123,7 +128,7 @@ export function EditUsernameModal(
               That name was already taken with your previous number, so you are
               now{" "}
               <strong style={{ color: "var(--z-fg-primary)" }}>
-                {props.client.user!.username}#{newTag()}
+                {props.client.user!.username}#{tag(newTag())}
               </strong>
               .
             </Trans>
@@ -142,7 +147,7 @@ export function EditUsernameModal(
               spellcheck={false}
               control={group.controls.username}
               label={t`Username`}
-              suffix={`#${props.client.user!.discriminator}`}
+              suffix={`#${tag(props.client.user!.discriminator)}`}
               error={usernameError()}
               helper={t`2 to 32 characters. Your number tag may change if this name is taken.`}
             />

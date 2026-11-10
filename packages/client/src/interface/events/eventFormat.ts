@@ -1,5 +1,7 @@
 import type { API } from "@zrzur/sdk/solid";
 
+import { shortcutFor } from "../../../components/keybinds/active";
+
 type ServerEvent = API.ServerEvent;
 
 /** Starting within this many minutes counts as "soon" */
@@ -86,7 +88,7 @@ export const EVENTS_PLUGIN_KEYS = "Ctrl+Shift+9";
  * by key position (`event.code`), so it is the same on Arabic, German and
  * French layouts; next to Create poll (Ctrl+Shift+8). Never Alt+Shift
  * (Windows switches the layout with it) and never Ctrl+Alt (AltGr); no
- * browser uses Ctrl+Shift+9.
+ * browser uses Ctrl+Shift+9. The person can change it in Ctrl+/.
  * @param mac Whether Command takes the place of Ctrl
  */
 export function isEventsShortcut(
@@ -96,16 +98,7 @@ export function isEventsShortcut(
   > & { key?: string },
   mac: boolean,
 ): boolean {
-  const mod = mac ? event.metaKey : event.ctrlKey;
-  const other = mac ? event.ctrlKey : event.metaKey;
-  return (
-    event.code === "Digit9" &&
-    event.key !== "/" &&
-    mod &&
-    !other &&
-    event.shiftKey &&
-    !event.altKey
-  );
+  return shortcutFor(event, mac) === "open_events";
 }
 
 /** The shortcut leaves text fields and open dialogs alone */

@@ -1,57 +1,33 @@
-// import {
-//   KeyCombo,
-//   KeyComboSequence,
-//   KeybindAction,
-//   KeybindActions,
-//   KeybindSequence,
-// } from "@revolt/keybinds";
+import { type Accessor, createMemo, createRoot } from "solid-js";
+
+import {
+  bindKeymap,
+  compiler,
+  defaultKeymap,
+  deviceMac,
+} from "../../keybinds/active";
+import { type CustomCombos, type Keymap } from "../../keybinds/keymap";
+import { pttKeyAllowed } from "../../keybinds/shortcuts";
+
 import { State } from "..";
 
-import { AbstractStore } from ".";
-
-// /** utility to make writing the default keybinds easier, requires all `KeybindAction` values to be filled out */
-// function keybindMap(
-//   obj: Record<KeybindAction, string[]>,
-// ): Record<KeybindAction, KeyComboSequence[]> {
-//   const entries = Object.entries(obj) as [KeybindAction, string[]][];
-//   const parsed = entries.map(([act, seqs]) => [
-//     act,
-//     seqs.map((seq) => KeybindSequence.parse(seq)),
-//   ]);
-//   return Object.fromEntries(parsed);
-// }
-
-// export const DEFAULT_VALUES: KeybindActions = keybindMap({
-//   [KeybindAction.NavigateChannelUp]: ["Alt+ArrowUp"],
-//   [KeybindAction.NavigateChannelDown]: ["Alt+ArrowDown"],
-//   // temporary, Control+Alt+ArrowUp does not seem to work on chrome or firefox at the moment
-//   [KeybindAction.NavigateServerUp]: ["Control+ArrowUp"],
-//   [KeybindAction.NavigateServerDown]: ["Control+ArrowDown"],
-
-//   [KeybindAction.AutoCompleteUp]: ["ArrowUp"],
-//   [KeybindAction.AutoCompleteDown]: ["ArrowDown"],
-//   [KeybindAction.AutoCompleteSelect]: ["Enter", "Tab"],
-
-//   [KeybindAction.NavigatePreviousContext]: [], //["Escape"],
-//   [KeybindAction.NavigatePreviousContextModal]: [],
-//   [KeybindAction.NavigatePreviousContextSettings]: [],
-
-//   [KeybindAction.InputForceSubmit]: ["Control+Enter"],
-//   [KeybindAction.InputSubmit]: ["Enter"],
-//   [KeybindAction.InputCancel]: [], // ["Escape"],
-
-//   [KeybindAction.MessagingMarkChannelRead]: [], // ["Escape"],
-//   [KeybindAction.MessagingScrollToBottom]: ["Escape"],
-//   [KeybindAction.MessagingEditPreviousMessage]: ["ArrowUp"],
-
-//   [KeybindAction.DeveloperToggleAllExperiments]: [],
-// });
+import { AbstractSyncedStore } from ".";
 
 export type TypeKeybinds = {
-  _phantom?: never;
+  /** Shortcuts the person changed (the others keep their default) */
+  custom: CustomCombos;
+  /** Physical key (`KeyboardEvent.code`) held to talk; unset = the old device value or ` */
+  pttKey?: string;
 };
 
-export class Keybinds extends AbstractStore<"keybinds", TypeKeybinds> {
+/**
+ * The person's own keyboard shortcuts. A synced key, so they follow the
+ * account to every device; the desktop app's global talk combination reads
+ * the push-to-talk key from here too (through the voice store).
+ */
+export class Keybinds extends AbstractSyncedStore<"keybinds", TypeKeybinds> {
+  #table?: Accessor<Keymap>;
+
   /**
    * Construct store
    * @param state State
@@ -61,23 +37,59 @@ export class Keybinds extends AbstractStore<"keybinds", TypeKeybinds> {
   }
 
   /**
-   * Hydrate external context
+   * Every key listener reads the compiled table from now on
    */
   hydrate(): void {
-    /** nothing needs to be done */
+    // (every real caller asks for this device's table)
+    bindKeymap(() => this.table());
   }
 
   /**
    * Generate default values
    */
-  default() {
-    return {};
+  default(): TypeKeybinds {
+    return { custom: {} };
   }
 
   /**
    * Validate the given data to see if it is compliant and return a compliant object
    */
-  clean(_input: Partial<TypeKeybinds>): TypeKeybinds {
-    return {};
+  clean(input: Partial<TypeKeybinds>): TypeKeybinds {
+    // combinations are checked when compiled (keymapCompile.ts); here only
+    // the shape, so this stays small in the first download
+    const custom = input?.custom;
+    const data: TypeKeybinds = {
+      custom: custom && typeof custom === "object" ? custom : {},
+    };
+    if (typeof input?.pttKey === "string" && pttKeyAllowed(input.pttKey))
+      data.pttKey = input.pttKey;
+    return data;
+  }
+
+  /**
+   * The lookup table for this system. Compiled when the shortcuts change,
+   * never on a key press.
+   */
+  table(): Keymap {
+    const mac = deviceMac();
+    this.#table ??= createRoot(() =>
+      createMemo(() => {
+        // reading the whole object tracks every change to it
+        const custom = JSON.parse(JSON.stringify(this.get()?.custom ?? {}));
+        const compile = compiler();
+        if (compile) return compile(custom, mac);
+        // the person has their own shortcuts: load the compiler (the
+        // defaults apply for the few milliseconds until it is there)
+        if (Object.keys(custom).length)
+          void import("../../keybinds/keymapCompile");
+        return defaultKeymap(mac);
+      }),
+    );
+    return this.#table();
+  }
+
+  /** The synced push-to-talk key, if one was chosen on any device */
+  get pttKey(): string | undefined {
+    return this.get().pttKey;
   }
 }

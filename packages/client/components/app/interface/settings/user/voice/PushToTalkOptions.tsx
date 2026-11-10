@@ -3,13 +3,12 @@ import { Show, createSignal, onCleanup } from "solid-js";
 import { Trans, useLingui } from "@lingui/solid/macro";
 import { styled } from "styled-system/jsx";
 
-import { isMac, keyLabel, readPttKey } from "@revolt/keybinds/shortcuts";
+import { globalPttCombo, keyLabel } from "@revolt/keybinds/keyLabels";
+import { readPttKey } from "@revolt/keybinds/keymapRules";
+import { isMac } from "@revolt/keybinds/shortcuts";
 import { useVoice } from "@revolt/rtc";
-import {
-  desktopPushToTalk,
-  globalPttCombo,
-  globalTalkAllowed,
-} from "@revolt/rtc/desktopPushToTalk";
+import { desktopPushToTalk } from "@revolt/rtc/desktopPushToTalk";
+import { globalTalkAllowed, globalTalkBlock } from "@revolt/rtc/globalTalk";
 import { useState } from "@revolt/state";
 import {
   Button,
@@ -154,11 +153,13 @@ export function PushToTalkOptions() {
           icon={<Icon name="desktop" size={20} />}
           title={<Trans>Talk from other apps</Trans>}
           description={
-            !globalTalkAllowed(voice.pttKey)
-              ? t`Other apps use ${combo()} for editing. Choose another key to use this.`
-              : voice.globalTalk && call?.globalPtt() === "unavailable"
-                ? t`${combo()} is not available from other apps. Try another key.`
-                : t`${combo()} turns talking on and off while Zrzur is in the background.`
+            globalTalkBlock(voice.pttKey) === "app"
+              ? t`${combo()} is one of your Zrzur shortcuts. Choose another key to use this.`
+              : !globalTalkAllowed(voice.pttKey)
+                ? t`Other apps use ${combo()} for editing. Choose another key to use this.`
+                : voice.globalTalk && call?.globalPtt() === "unavailable"
+                  ? t`${combo()} is not available from other apps. Try another key.`
+                  : t`${combo()} turns talking on and off while Zrzur is in the background.`
           }
           disabled={!globalTalkAllowed(voice.pttKey)}
           onClick={() => (voice.globalTalk = !voice.globalTalk)}

@@ -85,6 +85,21 @@ interface SettingsDefinition {
    * Whether to include admin panel links in context menus
    */
   "advanced:admin_panel": boolean;
+
+  /**
+   * Streamer mode: hide personal details on screen (this device only)
+   */
+  "privacy:streamer_mode": boolean;
+
+  /**
+   * Turn streamer mode on while sharing the screen (off by default)
+   */
+  "privacy:streamer_on_share": boolean;
+
+  /**
+   * Streamer mode was turned on by a screen share (it goes off with it)
+   */
+  "privacy:streamer_by_share": boolean;
 }
 
 /**
@@ -114,6 +129,9 @@ const EXPECTED_TYPES: { [K in keyof SettingsDefinition]: ValueType<K> } = {
   "appearance:profile_effects": "boolean",
   "advanced:copy_id": "boolean",
   "advanced:admin_panel": "boolean",
+  "privacy:streamer_mode": "boolean",
+  "privacy:streamer_on_share": "boolean",
+  "privacy:streamer_by_share": "boolean",
 };
 
 /**
@@ -142,7 +160,8 @@ export class Settings extends AbstractStore<"settings", TypeSettings> {
    * Hydrate external context
    */
   hydrate(): void {
-    /** nothing needs to be done */
+    // a mode the last screen share turned on does not outlive the page
+    if (this.getValue(BY_SHARE)) this.streamerMode = false;
   }
 
   /**
@@ -226,6 +245,19 @@ export class Settings extends AbstractStore<"settings", TypeSettings> {
   }
 
   /**
+   * Whether streamer mode hides personal details now (one store read)
+   */
+  get streamerMode(): boolean {
+    return !!this.get()["privacy:streamer_mode"];
+  }
+
+  /** Turned on or off by hand (switch, shortcut, sign): a share that ends later leaves it */
+  set streamerMode(on: boolean) {
+    this.setValue(BY_SHARE, false);
+    this.setValue("privacy:streamer_mode", on);
+  }
+
+  /**
    * Get the permission state for desktop notifications
    */
   get desktopNotificationsState(): NotificationPermissionState {
@@ -269,3 +301,10 @@ export class Settings extends AbstractStore<"settings", TypeSettings> {
     });
   }
 }
+
+// Streamer mode: one switch that hides personal details on screen (email,
+// the own tag, invite links and codes, DM previews in notifications). Every
+// place reads the one setting `state.settings.streamerMode`; nothing is
+// recomputed for whole lists. Kept small here (first download).
+
+export const BY_SHARE = "privacy:streamer_by_share";

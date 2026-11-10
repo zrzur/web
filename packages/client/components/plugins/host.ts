@@ -21,6 +21,7 @@ import {
   sha256Hex,
 } from "../../../plugin-sdk/src/manifest.ts";
 
+import { shortcutFor, shortcutsPaused } from "../keybinds/active";
 import { type InstallView, pluginApi } from "./api";
 import { pluginsEnabled } from "./enabled";
 import {
@@ -940,6 +941,8 @@ export class PluginHost {
             ? `Ctrl+Alt+${key}`
             : null;
     if (!combo) return;
+    // the person's own app shortcuts (changed in Ctrl+/) always win
+    if (shortcutsPaused() || shortcutFor(event)) return;
     for (const plugin of Object.values(plugins)) {
       if (plugin.status !== "running" || !has(plugin, "keybinds")) continue;
       const bind = plugin.manifest.contributes?.keybinds?.find(

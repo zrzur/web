@@ -6,6 +6,8 @@ import { type Client, type Server, serverEventLink } from "@zrzur/sdk/solid";
 import { styled } from "styled-system/jsx";
 
 import { useClient } from "@revolt/client";
+import { deviceMac } from "@revolt/keybinds/active";
+import { ariaKeys } from "@revolt/keybinds/keyLabels";
 import { isMac, isTypingTarget } from "@revolt/keybinds/shortcuts";
 import { useModals } from "@revolt/modal";
 import { A, useLocation, useNavigate } from "@revolt/routing";
@@ -74,7 +76,10 @@ export function EventsLink(props: { server: Server }) {
         aria-current={
           location.pathname.includes("/events") ? "page" : undefined
         }
-        aria-keyshortcuts="Control+Shift+9"
+        aria-keyshortcuts={ariaKeys(
+          state.keybinds.table().byId["open_events"],
+          deviceMac(),
+        )}
         data-testid="events-link"
         onClick={showContent}
       >

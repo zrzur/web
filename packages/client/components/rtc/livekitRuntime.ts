@@ -12,3 +12,7 @@ export {
 export { useTracks } from "solid-livekit-components";
 
 export { VoiceProcessor } from "./VoiceProcessor";
+
+// the desktop talk check runs only during a call
+export { globalTalkAllowed } from "./globalTalk";
+export { shareWithStreamerMode } from "./streamerShare";

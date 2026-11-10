@@ -7,14 +7,13 @@ import {
   useContext,
 } from "solid-js";
 
-import { ReactiveSet } from "@solid-primitives/set";
-
+import { shortcutFor } from "./active";
 import {
   ACTION_PRIORITY,
+  ESCAPE_ACTIONS,
   KeybindAction,
   keybindFilter,
 } from "./keybindActions";
-import { DEFAULT_MAC_SEQUENCES, DEFAULT_SEQUENCES } from "./keybindSequences";
 
 type KeybindContext = {
   createKeybind: (keybind: KeybindAction, callback: () => void) => void;
@@ -22,140 +21,72 @@ type KeybindContext = {
 
 const keybindContext = createContext<KeybindContext>(null! as KeybindContext);
 
+/** Shortcut ids that are actions of this context (the others have their own listeners) */
+const CONTEXT_ACTIONS = new Set<string>(Object.values(KeybindAction));
+
+/**
+ * The actions a key press can mean, before filtering. One table lookup for
+ * the changeable shortcuts, plus the fixed Escape actions and "start typing".
+ */
+export function candidateActions(
+  event: Pick<
+    KeyboardEvent,
+    "key" | "code" | "ctrlKey" | "metaKey" | "shiftKey" | "altKey"
+  >,
+): KeybindAction[] {
+  const out: KeybindAction[] = [];
+  const id = shortcutFor(event);
+  if (id && CONTEXT_ACTIONS.has(id)) out.push(id as KeybindAction);
+  if (event.key === "Escape") out.push(...ESCAPE_ACTIONS);
+  if (event.key?.length === 1 && event.key !== " ")
+    out.push(KeybindAction.CHAT_FOCUS_COMPOSITION);
+  return out.length > 1
+    ? ACTION_PRIORITY.filter((action) => out.includes(action))
+    : out;
+}
+
 export function KeybindContext(props: { children: JSXElement }) {
   /**
-   * Last event target, used for filtering
+   * Callbacks of every action that is bound now
    */
-  let target: HTMLElement | null;
+  const bound = new Map<KeybindAction, Set<{ callback: () => void }>>();
 
   /**
-   * Keep track of pressed keys to match sequences
-   */
-  const activeKeys = new ReactiveSet<string>();
-
-  /**
-   * Keep track of which keybinds are currently bound
-   * to filter the firing keybindings list
+   * How many of each action are bound (for the filters)
    */
   const currentlyBound = ACTION_PRIORITY.reduce(
     (d, k) => ({ ...d, [k]: 0 }),
     {} as Record<KeybindAction, number>,
   );
 
-  /**
-   * Sequences for use
-   */
-  const sequences = navigator.platform.startsWith("Mac")
-    ? DEFAULT_MAC_SEQUENCES
-    : DEFAULT_SEQUENCES;
-
-  /**
-   * Get the currently firing keybind
-   */
-  function firing() {
-    return (
-      ACTION_PRIORITY
-        // filter to those keybinds that are bound
-        .filter((keybind) => currentlyBound[keybind])
-        // apply custom filtering logic
-        .filter((keybind) =>
-          keybindFilter(keybind, activeKeys, currentlyBound, target),
-        )
-        // check whether the keybind is being pressed
-        .filter((keybind) =>
-          sequences[keybind].every((key) =>
-            key instanceof RegExp
-              ? [...activeKeys].findIndex((item) => key.test(item)) !== -1
-              : activeKeys.has(key),
-          ),
-        )
-        // return the highest priority keybind
-        .shift()
-    );
-  }
-
-  /**
-   * Debug currently pressed sequences
-   */
-  if (import.meta.env.DEV) {
-    createEffect(() =>
-      console.debug(
-        "[keybinds] Currently pressing",
-        [...activeKeys],
-        "which selects",
-        ACTION_PRIORITY
-          // filter to those keybinds that are bound
-          .filter((keybind) => currentlyBound[keybind])
-          // apply custom filtering logic
-          .filter((keybind) =>
-            keybindFilter(keybind, activeKeys, currentlyBound, target),
-          )
-          // check whether the keybind is being pressed
-          .reduce(
-            (d, keybind) => ({
-              ...d,
-              [keybind]: sequences[keybind].every((key) =>
-                key instanceof RegExp
-                  ? [...activeKeys].findIndex((item) => key.test(item)) !== -1
-                  : activeKeys.has(key),
-              ),
-            }),
-            {},
-          ),
-      ),
-    );
-  }
-
-  /**
-   * Check whether a given keybind fired
-   * @param keybind Keybind
-   */
-  function isFired(keybind: KeybindAction) {
-    return firing() === keybind;
-  }
-
-  /**
-   * Handle key down event by adding it to active keys
-   */
   function onKeyDown(event: KeyboardEvent) {
-    target = event.target as HTMLElement;
-    activeKeys.add(event.key);
-  }
-
-  /**
-   * Handle key up event by removing it from active keys
-   */
-  function onKeyUp(event: KeyboardEvent) {
-    target = event.target as HTMLElement;
-    activeKeys.delete(event.key);
-  }
-
-  function onFocusDropped(_: FocusEvent) {
-    activeKeys.clear();
+    // a held key fires once, as before
+    if (event.repeat) return;
+    const target = event.target as HTMLElement | null;
+    const fired = candidateActions(event).find(
+      (action) =>
+        currentlyBound[action] > 0 &&
+        keybindFilter(action, event, currentlyBound, target),
+    );
+    if (!fired) return;
+    for (const entry of [...(bound.get(fired) ?? [])]) untrack(entry.callback);
   }
 
   document.body.addEventListener("keydown", onKeyDown);
-  document.body.addEventListener("keyup", onKeyUp);
-  window.addEventListener("blur", onFocusDropped);
-
-  onCleanup(() => {
-    document.body.removeEventListener("keydown", onKeyDown);
-    document.body.removeEventListener("keyup", onKeyUp);
-    window.removeEventListener("blur", onFocusDropped);
-  });
+  onCleanup(() => document.body.removeEventListener("keydown", onKeyDown));
 
   return (
     <keybindContext.Provider
       value={{
         createKeybind(keybind, callback) {
           currentlyBound[keybind]++;
-          onCleanup(() => currentlyBound[keybind]--);
-
-          createEffect(() => {
-            const _ = [...activeKeys]; // track dependency
-            if (isFired(keybind)) {
-              untrack(callback);
-            }
+          let set = bound.get(keybind);
+          if (!set) bound.set(keybind, (set = new Set()));
+          const entry = { callback };
+          set.add(entry);
+          onCleanup(() => {
+            currentlyBound[keybind]--;
+            set.delete(entry);
           });
         },
       }}

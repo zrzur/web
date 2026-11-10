@@ -272,7 +272,9 @@ export function UserMenu(props: Props) {
                 {user()?.displayName ?? user()?.username}
               </strong>
               <span>
-                {user()?.username}#{user()?.discriminator}
+                {user()?.username}#
+                {/* the own tag stays off screen in streamer mode */}
+                {state.settings.streamerMode ? "••••" : user()?.discriminator}
               </span>
             </Identity>
           </Header>

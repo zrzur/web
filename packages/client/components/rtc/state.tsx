@@ -29,6 +29,7 @@ import { assertAllowedServiceUrl } from "@revolt/common/lib/env";
 import { useInstance } from "@revolt/instance";
 import { ModalController, useModals } from "@revolt/modal";
 import { useState } from "@revolt/state";
+import { type Settings, BY_SHARE } from "@revolt/state/stores/Settings";
 import {
   ScreenShareContent,
   ScreenShareQualityName,
@@ -37,6 +38,7 @@ import {
 import { VoiceCallCardContext } from "@revolt/ui/components/features/voice/callCard/VoiceCallCard";
 
 import { Device, useDevice } from "@revolt/common";
+import { shortcutsPaused } from "../keybinds/active";
 import {
   isMac,
   isTypingTarget,
@@ -51,11 +53,7 @@ import {
 } from "./audioQuality";
 import { deviceFallback } from "./callHealth";
 import { InRoom } from "./components/InRoom";
-import {
-  desktopPushToTalk,
-  globalTalkAllowed,
-  latchPress,
-} from "./desktopPushToTalk";
+import { desktopPushToTalk, latchPress } from "./desktopPushToTalk";
 import { RoomState, TrackSource } from "./livekitConstants";
 import { type VoiceRuntime, loadVoiceRuntime } from "./loadVoiceRuntime";
 import { useVoiceError } from "./messages";
@@ -898,7 +896,24 @@ class Voice {
     return { resolution: [limit[0], limit[1]], framerate: fps };
   }
 
+  /** Set by VoiceContext: the settings streamer mode follows a share with */
+  streamer?: { settings: Settings };
+
   async toggleScreenshare() {
+    const run = () => this.#toggleScreenshare();
+    // streamer mode on before the capture starts, off again if it failed
+    // or was cancelled (the helper comes with the voice runtime)
+    return this.#lk && this.streamer
+      ? this.#lk.shareWithStreamerMode(
+          this.streamer,
+          this.screenshare(),
+          run,
+          this.screenshare,
+        )
+      : run();
+  }
+
+  async #toggleScreenshare() {
     const room = this.room();
     if (!room) throw "invalid state";
     if (room.state !== RoomState.Connected) return;
@@ -1282,6 +1297,12 @@ export function VoiceContext(props: { children: JSX.Element }) {
         });
       return;
     }
+    if (shortcut === "toggle_streamer") {
+      event.preventDefault();
+      if (!event.repeat)
+        state.settings.streamerMode = !state.settings.streamerMode;
+      return;
+    }
     if (shortcut) {
       // outside a call the browser keeps its own meaning for these keys
       if (!inCall()) return;
@@ -1293,6 +1314,7 @@ export function VoiceContext(props: { children: JSX.Element }) {
     }
     if (
       inCall() &&
+      !shortcutsPaused() &&
       state.voice.inputMode === "ptt" &&
       event.code === state.voice.pttKey &&
       !event.ctrlKey &&
@@ -1331,6 +1353,18 @@ export function VoiceContext(props: { children: JSX.Element }) {
     }
   });
 
+  // streamer mode on while sharing the screen, if the person asked for it
+  // (toggleScreenshare); off again when sharing stops, unless they turned
+  // it on themselves
+  voice.streamer = state;
+  // a share that ended later (window closed, quality dialog cancelled)
+  createEffect(
+    on(voice.screenshare, (sharing) => {
+      if (!sharing && state.settings.getValue(BY_SHARE))
+        state.settings.streamerMode = false;
+    }),
+  );
+
   // Desktop app: Ctrl+Shift (⌘⇧) with the push-to-talk key works from other
   // apps too, as a toggle. Held only during a push-to-talk call, so the
   // combination stays free for other apps the rest of the time. Browsers
@@ -1344,25 +1378,33 @@ export function VoiceContext(props: { children: JSX.Element }) {
     onCleanup(() => stopListening());
     createEffect(() => {
       const key = state.voice.pttKey;
+      // tracked: the person's shortcuts decide which keys are free
+      state.keybinds.table();
       if (
         !inCall() ||
         state.voice.inputMode !== "ptt" ||
-        // off until the person turns "Talk from other apps" on, and never
-        // for keys other apps need with Ctrl+Shift
-        !state.voice.globalTalk ||
-        !globalTalkAllowed(key)
+        // off until the person turns "Talk from other apps" on
+        !state.voice.globalTalk
       ) {
         voice.setGlobalPtt("off");
         return;
       }
       let current = true;
-      desktopPtt
-        .register(key)
-        .catch(() => false)
-        .then((ok) => current && voice.setGlobalPtt(ok ? "on" : "unavailable"));
       onCleanup(() => {
         current = false;
         desktopPtt.unregister();
+      });
+      // the key check comes with the voice runtime (loaded for the call),
+      // never for keys other apps need with Ctrl+Shift or Zrzur's own
+      void loadVoiceRuntime().then((runtime) => {
+        if (!current) return;
+        if (!runtime.globalTalkAllowed(key)) return voice.setGlobalPtt("off");
+        void desktopPtt
+          .register(key)
+          .catch(() => false)
+          .then(
+            (ok) => current && voice.setGlobalPtt(ok ? "on" : "unavailable"),
+          );
       });
     });
   }

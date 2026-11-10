@@ -4,6 +4,7 @@ import { Show, createSignal } from "solid-js";
 import { Trans, useLingui } from "@lingui/solid/macro";
 
 import { useError } from "@revolt/i18n";
+import { useState } from "@revolt/state";
 import { Column, Dialog, DialogProps, Form2 } from "@revolt/ui";
 
 import { MFATicket } from "@zrzur/sdk/solid";
@@ -21,6 +22,7 @@ export function EditEmailModal(
   const { t } = useLingui();
   const { mfaFlow } = useModals();
   const describeError = useError();
+  const state = useState();
 
   const group = createFormGroup({
     email: createFormControl("", { required: true }),
@@ -126,7 +128,8 @@ export function EditEmailModal(
               <Trans>
                 We sent a confirmation link to{" "}
                 <strong style={{ color: "var(--z-fg-primary)" }}>
-                  {sentTo()}
+                  {/* streamer mode: the address stays off screen */}
+                  {state.settings.streamerMode ? "•••@•••" : sentTo()}
                 </strong>
                 . Your login email changes once you open it.
               </Trans>

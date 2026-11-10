@@ -15,6 +15,7 @@ import {
   createOwnProfileResource,
 } from "@revolt/client/resources";
 import { useModals } from "@revolt/modal";
+import { useState } from "@revolt/state";
 import {
   Button,
   Column,
@@ -30,6 +31,7 @@ import { useSettingsNavigation } from "../Settings";
 
 import { AgeSettings, ChangeRequests, UserSummary } from "./account/index";
 import { PrivacySection } from "./Privacy";
+import { StreamerModeSection } from "./StreamerMode";
 import { type RawApi, fetchDataExport } from "./myData/api";
 
 /**
@@ -51,6 +53,7 @@ export function MyAccount() {
       <ChangeRequests />
       <EditAccount />
       <PrivacySection />
+      <StreamerModeSection />
       <Security onSessions={() => navigate("sessions")} />
       <ManageAccount />
     </Column>
@@ -62,6 +65,7 @@ export function MyAccount() {
  */
 function EditAccount() {
   const client = useClient();
+  const state = useState();
   const { t } = useLingui();
   const { openModal } = useModals();
   const [email, setEmail] = createSignal<string>();
@@ -88,12 +92,14 @@ function EditAccount() {
         icon={<Icon name="envelope" size={20} />}
         title={<Trans>Email</Trans>}
         description={
-          // masked until the user explicitly asks to reveal it
-          email() ?? "•••••••••••@•••••••••••"
+          // masked until the user explicitly asks to reveal it, and always
+          // in streamer mode
+          (!state.settings.streamerMode && email()) ||
+          "•••••••••••@•••••••••••"
         }
         control={() => (
           <Row gap="sm">
-            <Show when={!email()}>
+            <Show when={!email() && !state.settings.streamerMode}>
               <Button
                 size="sm"
                 variant="text"

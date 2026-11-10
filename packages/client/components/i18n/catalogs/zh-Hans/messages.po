@@ -433,6 +433,11 @@ msgstr "{0} 在其他应用中不可用。请换一个按键。"
 msgid "{0} is on. It may take a moment to show."
 msgstr "{0} 已开启，可能需要稍等片刻才会显示。"
 
+#. placeholder {0}: combo()
+#: components/app/interface/settings/user/voice/PushToTalkOptions.tsx
+msgid "{0} is one of your Zrzur shortcuts. Choose another key to use this."
+msgstr "{0} 是你的 Zrzur 快捷键之一。请选择其他按键来使用此功能。"
+
 #. placeholder {0}: users()[0]!.username
 #: components/app/interface/channels/text/CompositionInfo.tsx
 #~ msgid "{0} is typing…"
@@ -934,6 +939,25 @@ msgstr "<0>{0}</0> 和 <1>{1}</1> 正在输入…"
 #: components/app/interface/channels/text/CompositionInfo.tsx
 msgid "<0>{0}</0> is typing…"
 msgstr "<0>{0}</0> 正在输入…"
+
+#. placeholder {0}: props.names[other()]()
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "<0>{keys}</0> is already used for “{0}”. Swap them?"
+msgstr "<0>{keys}</0> 已用于“{0}”。要互换吗？"
+
+#. placeholder {0}: mac ? "⌘" : "Ctrl"
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "<0>{keys}</0> is needed for typing. Add {0} or use an F key."
+msgstr "<0>{keys}</0> 用于输入文字。请加上 {0}，或使用 F 键。"
+
+#. placeholder {0}: mac ? "⌘" : "Ctrl"
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "<0>{keys}</0> is your push-to-talk key. Add {0} or choose another key."
+msgstr "<0>{keys}</0> 是你的按键说话按键。请加上 {0}，或选择其他按键。"
+
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "<0>{keys}</0> replaces a browser shortcut while Zrzur is open."
+msgstr "Zrzur 打开时，<0>{keys}</0> 会替代浏览器的快捷键。"
 
 #: components/modal/modals/LinkWarning.tsx
 msgid "<0>Be careful!</0><1/>This is not the same as the link that was displayed:"
@@ -3623,6 +3647,7 @@ msgstr "加拿大"
 #: components/app/interface/settings/server/webhooks/ServerWebhooks.tsx
 #: components/app/interface/settings/user/account/AgeSettings.tsx
 #: components/app/interface/settings/user/bots/CommandManager.tsx
+#: components/app/interface/settings/user/Keybinds.tsx
 #: components/app/interface/settings/user/plugins/PluginDetail.tsx
 #: components/app/interface/settings/user/profile/CreatorStudio.tsx
 #: components/app/interface/settings/user/profile/CreatorSuspension.tsx
@@ -3974,6 +3999,12 @@ msgstr "更改 {0} 的表情"
 #: components/modal/modals/CreatePoll.tsx
 #~ msgid "Change the emoji of answer {0}"
 #~ msgstr "更改选项 {0} 的表情"
+
+#. placeholder {0}: props.name()
+#. placeholder {1}: label(state.keybinds.table().byId[props.id])
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "Change the keys for {0}: {1}"
+msgstr "更改“{0}”的按键：{1}"
 
 #: components/app/interface/settings/user/Account.tsx
 msgid "Change the password you use to sign in."
@@ -7330,6 +7361,10 @@ msgstr "每篇帖子都需要一个标签"
 msgid "Every right in every channel, private ones too, whatever their settings say. Only an administrator or the owner can give it."
 msgstr "在所有频道（包括私密频道）中拥有全部权限，无论其设置如何。只有管理员或所有者可以授予。"
 
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "Every shortcut and the push-to-talk key go back to the defaults."
+msgstr "所有快捷键和按键说话的按键都会恢复默认。"
+
 #: components/modal/modals/billingErrors.ts
 msgid "Every spot in the top row is taken. Try again when one opens."
 msgstr "置顶行的位置已被全部占用，有空位时请再试。"
@@ -8540,6 +8575,10 @@ msgstr "前往该消息"
 msgid "Go to the overview"
 msgstr "前往概览"
 
+#: components/app/interface/settings/user/StreamerMode.tsx
+msgid "Goes off again when the share ends, unless you turned it on yourself."
+msgstr "共享结束时会自动关闭，除非是你自己打开的。"
+
 #: components/app/interface/settings/user/profile/StyleEditors.tsx
 msgid "Gold"
 msgstr "金色"
@@ -8883,6 +8922,14 @@ msgstr "隐藏预览"
 #: components/app/interface/settings/channel/permissions/ChannelVisibility.tsx
 msgid "Hide this channel from {0}"
 msgstr "对 {0} 隐藏此频道"
+
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "Hides your email, tag, invite links and DM previews on screen."
+msgstr "在屏幕上隐藏你的邮箱、标签、邀请链接和私信预览。"
+
+#: components/app/interface/settings/user/StreamerMode.tsx
+msgid "Hides your email, your tag, invite links and codes, and message previews from DMs in notifications, so they never show on stream."
+msgstr "隐藏你的邮箱、标签、邀请链接和邀请码，以及通知中的私信预览，让它们不会出现在直播中。"
 
 #: components/app/interface/safety/labels.tsx
 #: components/app/interface/settings/server/ServerEmergency.tsx
@@ -12336,6 +12383,10 @@ msgstr "新闻频道"
 msgid "Next"
 msgstr "下一步"
 
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "Next channel"
+msgstr "下一个频道"
+
 #: components/ui/components/design/DateTimeField.tsx
 msgid "Next month"
 msgstr "下个月"
@@ -12343,6 +12394,10 @@ msgstr "下个月"
 #: components/modal/modals/PlusCheckout.tsx
 msgid "Next renewal"
 msgstr "下次续订"
+
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "Next server"
+msgstr "下一个服务器"
 
 #: src/interface/developers/docs/GettingStarted.tsx
 msgid "Next steps"
@@ -14597,6 +14652,10 @@ msgstr "预设"
 msgid "Press a key…"
 msgstr "请按一个键…"
 
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "Press a shortcut's keys to choose new ones. Your shortcuts follow you to every device you sign in on."
+msgstr "点按某个快捷键的按键即可选择新的按键。你的快捷键会同步到你登录的每台设备。"
+
 #: components/app/interface/settings/server/invites/VanityInvite.tsx
 msgid "Press again to remove"
 msgstr "再按一次即可移除"
@@ -14605,9 +14664,22 @@ msgstr "再按一次即可移除"
 msgid "Press Esc again to discard your changes."
 msgstr "再按一次 Esc 即放弃你的更改。"
 
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "Press keys…"
+msgstr "请按键…"
+
 #: components/app/interface/settings/user/voice/PushToTalkOptions.tsx
 msgid "Press the key you want to hold. Esc cancels."
 msgstr "请按下你想要按住的键。按 Esc 取消。"
+
+#. placeholder {0}: props.name()
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "Press the new keys for {0}. Esc cancels."
+msgstr "请按下“{0}”的新按键。按 Esc 取消。"
+
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "Press the new keys. Esc cancels."
+msgstr "请按下新按键。按 Esc 取消。"
 
 #: components/app/interface/safety/labels.tsx
 msgid "Pretending to be you, someone else or Zrzur"
@@ -14673,17 +14745,25 @@ msgstr "即使某个声音已关闭，预览仍会播放。声音使用“语音
 msgid "Previous"
 msgstr "上一个"
 
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "Previous channel"
+msgstr "上一个频道"
+
 #: components/ui/components/design/DateTimeField.tsx
 msgid "Previous month"
 msgstr "上个月"
 
 #: components/app/interface/settings/user/Keybinds.tsx
-msgid "Previous or next channel"
-msgstr "上一个或下一个频道"
+#~ msgid "Previous or next channel"
+#~ msgstr "上一个或下一个频道"
 
 #: components/app/interface/settings/user/Keybinds.tsx
-msgid "Previous or next server"
-msgstr "上一个或下一个服务器"
+#~ msgid "Previous or next server"
+#~ msgstr "上一个或下一个服务器"
+
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "Previous server"
+msgstr "上一个服务器"
 
 #: components/app/interface/settings/user/subscriptions/PlusPage.tsx
 msgid "Price"
@@ -16019,14 +16099,27 @@ msgstr "重置"
 msgid "Reset {0}"
 msgstr "重置 {0}"
 
+#. placeholder {0}: props.name()
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "Reset {0} to the default"
+msgstr "将“{0}”恢复默认"
+
 #. placeholder {0}: props.bot.user!.username
 #: components/modal/modals/ResetBotToken.tsx
 msgid "Reset {0}'s token?"
 msgstr "重置 {0} 的令牌？"
 
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "Reset all"
+msgstr "全部重置"
+
 #: components/app/interface/settings/user/appearance/AnimationSettings.tsx
 msgid "Reset all animations"
 msgstr "重置所有动画"
+
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "Reset all shortcuts"
+msgstr "重置所有快捷键"
 
 #: components/auth/src/flows/FlowConfirmReset.tsx
 #: components/auth/src/flows/FlowReset.tsx
@@ -16518,6 +16611,11 @@ msgstr "圣文森特和格林纳丁斯"
 #: src/interface/designs/Scenes.tsx
 msgid "Salma"
 msgstr "萨尔玛"
+
+#. placeholder {0}: props.names[other()]()
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "Same keys as “{0}” on this device, so only one of them works. Choose other keys."
+msgstr "在此设备上与“{0}”的按键相同，因此只有一个有效。请选择其他按键。"
 
 #: components/app/interface/settings/server/AutoModSettings.tsx
 msgid "Same text in channels"
@@ -17587,6 +17685,11 @@ msgstr "成员在语音通话中播放的简短音效。"
 msgid "Short sounds people play in a voice call, on your device."
 msgstr "别人在语音通话中播放的简短音效，在你的设备上播放。"
 
+#. placeholder {0}: combo()
+#: components/app/interface/settings/user/StreamerMode.tsx
+msgid "Shortcut: <0>{0}</0>. A small sign at the top shows while it is on."
+msgstr "快捷键：<0>{0}</0>。开启时，顶部会显示一个小标记。"
+
 #: components/app/interface/settings/user/bots/CommandManager.tsx
 msgid "Shortest text"
 msgstr "最短文本"
@@ -18534,6 +18637,19 @@ msgstr "直播已开始"
 msgid "Stream volume"
 msgstr "直播音量"
 
+#: components/app/interface/settings/user/StreamerMode.tsx
+#: components/app/interface/StreamerIndicator.tsx
+msgid "Streamer mode"
+msgstr "主播模式"
+
+#: components/app/interface/StreamerIndicator.tsx
+msgid "Streamer mode is on. Press to turn it off."
+msgstr "主播模式已开启。点按即可关闭。"
+
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "Streamer mode on or off"
+msgstr "开启或关闭主播模式"
+
 #: components/app/interface/settings/server/assistant/labels.ts
 msgid "Strikes count for this many days"
 msgstr "违规记录的有效天数"
@@ -18768,6 +18884,10 @@ msgstr "暂停发布者"
 #: components/app/interface/settings/user/profile/ReviewQueue.tsx
 msgid "Suspended"
 msgstr "已暂停"
+
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "Swap"
+msgstr "互换"
 
 #: components/app/interface/settings/user/appearance/AnimationSettings.tsx
 msgid "Swaps movement and zoom for short fades."
@@ -19242,7 +19362,7 @@ msgid "That name belongs to someone in this server."
 msgstr "此服务器中已有人使用该名称。"
 
 #. placeholder {0}: props.client.user!.username
-#. placeholder {1}: newTag()
+#. placeholder {1}: tag(newTag())
 #: components/modal/modals/EditUsername.tsx
 msgid "That name was already taken with your previous number, so you are now <0>{0}#{1}</0>."
 msgstr "该名称在你之前的编号下已被占用，所以你现在是 <0>{0}#{1}</0>。"
@@ -20977,6 +21097,10 @@ msgstr "关闭即可启动安全模式，它会一次性停止所有插件。你
 msgid "Turn off two-factor authentication?"
 msgstr "要关闭双重验证吗？"
 
+#: components/app/interface/settings/user/StreamerMode.tsx
+msgid "Turn on while sharing your screen"
+msgstr "共享屏幕时开启"
+
 #: components/app/interface/settings/server/pages.tsx
 msgid "Turn them on or off for this server."
 msgstr "为此服务器开启或关闭它们。"
@@ -21528,6 +21652,10 @@ msgstr "请使用六位颜色值，例如 #E0195F。"
 #: components/app/interface/settings/user/appearance/AnimationSettings.tsx
 msgid "Use animations"
 msgstr "使用动画"
+
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "Use anyway"
+msgstr "仍然使用"
 
 #: components/app/interface/settings/user/safety/ReportsAndStanding.tsx
 msgid "Use Appeal below. You can appeal for at least 6 months after the decision. If you cannot sign in, write to {contact} and give the reference {reference}. A person reviews it."
@@ -22181,7 +22309,7 @@ msgstr "我们只用它来验证你的账号，并在你被锁定时帮你重新
 msgid "We prepare it in the background and e-mail you when it's ready. You can ask once every 24 hours."
 msgstr "我们会在后台准备，完成后通过邮件通知你。每 24 小时可申请一次。"
 
-#. placeholder {0}: sentTo()
+#. placeholder {0}: state.settings.streamerMode ? "•••@•••" : sentTo()
 #: components/modal/modals/EditEmail.tsx
 msgid "We sent a confirmation link to <0>{0}</0>. Your login email changes once you open it."
 msgstr "我们已向 <0>{0}</0> 发送了确认链接。打开链接后，你的登录邮箱才会更改。"
@@ -23501,6 +23629,10 @@ msgstr "你的机器人未上架发现"
 msgid "Your browser blocked playback. Click the page once, then try again."
 msgstr "你的浏览器阻止了播放。请点击一下页面，然后重试。"
 
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "Your browser keeps <0>{keys}</0> for itself. Choose other keys."
+msgstr "浏览器保留了 <0>{keys}</0>。请选择其他按键。"
+
 #: components/app/interface/settings/user/badges/MyBadges.tsx
 msgid "Your collection"
 msgstr "你的收藏"
@@ -23724,6 +23856,10 @@ msgstr "你的服务器"
 msgid "Your session ended, possibly because you logged out on another device. Log in again to continue."
 msgstr "你的会话已结束，可能是因为你在另一台设备上退出了登录。请重新登录以继续。"
 
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "Your shortcuts"
+msgstr "你的快捷键"
+
 #: components/ui/components/features/voice/callCard/VoiceCallCardStatus.tsx
 msgid "Your speaker is back."
 msgstr "你的扬声器已恢复。"
@@ -23735,6 +23871,10 @@ msgstr "你的位置"
 #: components/app/interface/settings/UserSettings.tsx
 msgid "Your subscriptions"
 msgstr "你的订阅"
+
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "Your system keeps <0>{keys}</0> for itself. Choose other keys."
+msgstr "系统保留了 <0>{keys}</0>。请选择其他按键。"
 
 #: components/app/interface/settings/user/support/ContactSupport.tsx
 msgid "Your tickets couldn't be loaded. Try again later."
