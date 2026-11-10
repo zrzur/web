@@ -5,6 +5,7 @@ import { User } from "@zrzur/sdk/solid";
 import { styled } from "styled-system/jsx";
 
 import { useTime } from "@revolt/i18n";
+import { useState } from "@revolt/state";
 import { Avatar, Button, UserStatus } from "@revolt/ui";
 import { Icon } from "@revolt/ui/icons/Icon";
 
@@ -19,6 +20,7 @@ export function UserSummary(props: {
   onEdit?: () => void;
 }) {
   const dayjs = useTime();
+  const state = useState();
 
   return (
     <Card>
@@ -46,7 +48,10 @@ export function UserSummary(props: {
           </DisplayName>
           <Handle>
             {props.user.username}
-            <span>#{props.user.discriminator}</span>
+            {/* the own tag stays off screen in streamer mode */}
+            <span data-testid="own-tag">
+              #{state.settings.streamerMode ? "••••" : props.user.discriminator}
+            </span>
           </Handle>
           <Show when={props.showBadges}>
             <Meta>

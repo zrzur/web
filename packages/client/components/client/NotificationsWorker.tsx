@@ -15,6 +15,7 @@ import {
 import { notificationPolicy } from "@revolt/plugins/registry";
 import { useNavigate, useSmartParams } from "@revolt/routing";
 import { useState } from "@revolt/state";
+import { notificationPreviewAllowed } from "@revolt/state/streamer";
 
 import { useClient, useNotifications, useSound } from ".";
 import { skipDesktopNotification } from "./notificationRules";
@@ -220,11 +221,19 @@ export function NotificationsWorker() {
     if (policy.suppress) return;
     if (!policy.muteSound) sound.playSound("message");
 
+    // streamer mode keeps DM and group messages off the screen
+    const hidePreview =
+      policy.hidePreview ||
+      !notificationPreviewAllowed(
+        state.settings.streamerMode,
+        message.channel?.type,
+      );
+
     const notification = new Notification(title!, {
       icon,
       // @ts-expect-error this does exist on some platforms
-      image: policy.hidePreview ? undefined : image,
-      body: policy.hidePreview ? t`New message` : body,
+      image: hidePreview ? undefined : image,
+      body: hidePreview ? t`New message` : body,
       timestamp: message.createdAt,
       tag: message.channelId,
       badge: "/assets/web/zrzur-pwa-512.png",

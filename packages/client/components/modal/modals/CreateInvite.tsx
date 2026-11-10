@@ -7,6 +7,8 @@ import { styled } from "styled-system/jsx";
 
 import { useClient } from "@revolt/client";
 import { useInstance } from "@revolt/instance";
+import { useState } from "@revolt/state";
+import { HIDDEN } from "@revolt/state/streamer";
 import {
   Avatar,
   Dialog,
@@ -47,6 +49,7 @@ export function CreateInviteModal(
   const { showError } = useModals();
   const client = useClient();
   const instance = useInstance();
+  const state = useState();
   const [link, setLink] = createSignal("");
   const [copied, setCopied] = createSignal(false);
   const [query, setQuery] = createSignal("");
@@ -216,7 +219,15 @@ export function CreateInviteModal(
           <input
             readOnly
             aria-label={t`Invite link`}
-            value={fetchInvite.isPending ? t`Generating invite…` : link()}
+            value={
+              fetchInvite.isPending
+                ? t`Generating invite…`
+                : // streamer mode: Copy and Send still work, the link stays off screen
+                  state.settings.streamerMode && link()
+                  ? HIDDEN
+                  : link()
+            }
+            data-testid="invite-link"
             onFocus={(e) => e.currentTarget.select()}
           />
           <CopyButton

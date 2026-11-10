@@ -34,9 +34,11 @@ import {
   ScreenShareQualityName,
   Voice as VoiceSettings,
 } from "@revolt/state/stores/Voice";
+import { followScreenShare, setStreamerMode } from "@revolt/state/streamer";
 import { VoiceCallCardContext } from "@revolt/ui/components/features/voice/callCard/VoiceCallCard";
 
 import { Device, useDevice } from "@revolt/common";
+import { shortcutsPaused } from "../keybinds/active";
 import {
   isMac,
   isTypingTarget,
@@ -1264,6 +1266,11 @@ export function VoiceContext(props: { children: JSX.Element }) {
         });
       return;
     }
+    if (shortcut === "toggle_streamer") {
+      event.preventDefault();
+      if (!event.repeat) setStreamerMode(state, !state.settings.streamerMode);
+      return;
+    }
     if (shortcut) {
       // outside a call the browser keeps its own meaning for these keys
       if (!inCall()) return;
@@ -1275,6 +1282,7 @@ export function VoiceContext(props: { children: JSX.Element }) {
     }
     if (
       inCall() &&
+      !shortcutsPaused() &&
       state.voice.inputMode === "ptt" &&
       event.code === state.voice.pttKey &&
       !event.ctrlKey &&
@@ -1312,6 +1320,12 @@ export function VoiceContext(props: { children: JSX.Element }) {
       voice.clearPushToTalkLatch();
     }
   });
+
+  // streamer mode on while sharing the screen, if the person asked for it;
+  // off again when sharing stops, unless they turned it on themselves
+  createEffect(
+    on(voice.screenshare, (sharing) => followScreenShare(state, sharing)),
+  );
 
   // Desktop app: Ctrl+Shift (⌘⇧) with the push-to-talk key works from other
   // apps too, as a toggle. Held only during a push-to-talk call, so the

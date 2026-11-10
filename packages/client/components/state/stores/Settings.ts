@@ -85,6 +85,16 @@ interface SettingsDefinition {
    * Whether to include admin panel links in context menus
    */
   "advanced:admin_panel": boolean;
+
+  /**
+   * Streamer mode: hide personal details on screen (this device only)
+   */
+  "privacy:streamer_mode": boolean;
+
+  /**
+   * Turn streamer mode on while sharing the screen (off by default)
+   */
+  "privacy:streamer_on_share": boolean;
 }
 
 /**
@@ -114,6 +124,8 @@ const EXPECTED_TYPES: { [K in keyof SettingsDefinition]: ValueType<K> } = {
   "appearance:profile_effects": "boolean",
   "advanced:copy_id": "boolean",
   "advanced:admin_panel": "boolean",
+  "privacy:streamer_mode": "boolean",
+  "privacy:streamer_on_share": "boolean",
 };
 
 /**
@@ -223,6 +235,28 @@ export class Settings extends AbstractStore<"settings", TypeSettings> {
    */
   getValue<T extends keyof TypeSettings>(key: T) {
     return this.get()[key] ?? DEFAULT_VALUES[key];
+  }
+
+  /**
+   * Whether streamer mode hides personal details now (one store read)
+   */
+  get streamerMode(): boolean {
+    return this.get()["privacy:streamer_mode"] === true;
+  }
+
+  set streamerMode(on: boolean) {
+    this.setValue("privacy:streamer_mode", on);
+  }
+
+  /**
+   * Whether sharing the screen turns streamer mode on
+   */
+  get streamerOnShare(): boolean {
+    return this.get()["privacy:streamer_on_share"] === true;
+  }
+
+  set streamerOnShare(on: boolean) {
+    this.setValue("privacy:streamer_on_share", on);
   }
 
   /**

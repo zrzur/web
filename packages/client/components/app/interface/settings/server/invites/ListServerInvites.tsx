@@ -7,6 +7,8 @@ import { styled } from "styled-system/jsx";
 
 import { useInstance } from "@revolt/instance";
 import { useModals } from "@revolt/modal";
+import { useState } from "@revolt/state";
+import { HIDDEN } from "@revolt/state/streamer";
 import { getInviteLink } from "@revolt/modal/modals/CreateInvite";
 import { timeLeft } from "@revolt/modal/modals/inviteOptions";
 import {
@@ -27,6 +29,7 @@ export function ListServerInvites(props: { server: Server }) {
   const { t } = useLingui();
   const client = useQueryClient();
   const instance = useInstance();
+  const state = useState();
   const { openModal } = useModals();
   const query = useQuery(() => ({
     queryKey: ["invites", props.server.id],
@@ -153,7 +156,11 @@ export function ListServerInvites(props: { server: Server }) {
                     size={32}
                   />
                 }
-                title={<Code>{item.id}</Code>}
+                title={
+                  <Code data-testid="invite-code">
+                    {state.settings.streamerMode ? HIDDEN : item.id}
+                  </Code>
+                }
                 description={
                   <>
                     #{item.channel?.name} ·{" "}
