@@ -9,7 +9,7 @@ import { styled } from "styled-system/jsx";
 import { useClient } from "@revolt/client";
 import { useModals } from "@revolt/modal";
 
-import { Avatar } from "../../design";
+import { Avatar, typography } from "../../design";
 
 import { ProfileSection, chip } from "./ProfileCard";
 import { ProfileChipRow } from "./ProfileChipRow";
@@ -32,7 +32,7 @@ export default function ProfileMutuals(props: {
 
   const [mutual] = createResource(
     () => props.user,
-    (user) => mutualFor(user),
+    (user) => mutualFor(user, client().user?.id ?? ""),
   );
 
   const servers = createMemo(() =>
@@ -98,9 +98,10 @@ export default function ProfileMutuals(props: {
                     type="button"
                     class={cx(chip({ press: true }))}
                     data-mutual-friend={friend.id}
-                    onClick={() =>
-                      openModal({ type: "user_profile", user: friend })
-                    }
+                    onClick={() => {
+                      props.onClose?.();
+                      openModal({ type: "user_profile", user: friend });
+                    }}
                   >
                     <Avatar
                       size={16}
@@ -130,8 +131,7 @@ const Group = styled("div", {
 
 const Label = styled("span", {
   base: {
-    fontSize: "12px",
-    lineHeight: "16px",
+    ...typography.raw({ class: "label", size: "medium" }),
     color: "var(--profile-ink-2, var(--z-fg-muted))",
   },
 });
@@ -139,8 +139,7 @@ const Label = styled("span", {
 const Plain = styled("p", {
   base: {
     margin: 0,
-    fontSize: "13px",
-    lineHeight: "20px",
+    ...typography.raw({ class: "body", size: "small" }),
     color: "var(--profile-ink-2, var(--z-fg-secondary))",
   },
 });

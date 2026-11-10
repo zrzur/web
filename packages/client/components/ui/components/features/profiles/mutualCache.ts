@@ -5,32 +5,41 @@ export type Mutual = { servers: string[]; users: string[] };
 
 /** A profile opened again within this time reuses the list */
 const KEEP_MS = 60_000;
-/** People remembered at once; the oldest goes first */
+/** Pairs remembered at once; the oldest goes first */
 const MAX_PEOPLE = 50;
 
-const cache = new Map<string, { at: number; list: Promise<Mutual | null> }>();
+type Entry = { at: number; list: Promise<Mutual | null> };
+const cache = new Map<string, Entry>();
 
 /**
  * The servers and friends the viewer shares with `user`, kept for a minute
- * so opening a card again asks nothing. A refusal (someone blocked, or no
- * shared connection) is `null`: nothing is shown, and nothing is kept.
+ * so opening a card again asks nothing. Kept per viewer and person, so a
+ * second account on this device never sees the first one's list. A refusal
+ * (someone blocked, or no shared connection) is `null`: nothing is shown,
+ * and nothing is kept.
  */
-export function mutualFor(user: User): Promise<Mutual | null> {
+export function mutualFor(
+  user: User,
+  viewerId: string,
+): Promise<Mutual | null> {
+  const key = `${viewerId}:${user.id}`;
   const now = Date.now();
-  const kept = cache.get(user.id);
+  const kept = cache.get(key);
   if (kept && now - kept.at < KEEP_MS) return kept.list;
 
-  const list = user.fetchMutual().then(
+  const entry: Entry = { at: now, list: Promise.resolve(null) };
+  entry.list = user.fetchMutual().then(
     (mutual) => ({ servers: mutual.servers ?? [], users: mutual.users ?? [] }),
     () => {
-      cache.delete(user.id);
+      // only this request's own entry goes; a newer one stays
+      if (cache.get(key) === entry) cache.delete(key);
       return null;
     },
   );
-  cache.delete(user.id);
-  cache.set(user.id, { at: now, list });
+  cache.delete(key);
+  cache.set(key, entry);
   if (cache.size > MAX_PEOPLE) cache.delete(cache.keys().next().value!);
-  return list;
+  return entry.list;
 }
 
 /** Forget every list (sign-out, tests) */

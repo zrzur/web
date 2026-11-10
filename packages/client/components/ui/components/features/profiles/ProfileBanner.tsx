@@ -78,7 +78,8 @@ export function ProfileBanner(props: {
       <Edge>
         <StatusSlot>
           <Show when={status()}>
-            <Bubble dir="auto" title={status() ?? undefined}>
+            {/* the tooltip is the text: a custom emoji's code means nothing */}
+            <Bubble dir="auto" title={props.user.status?.text ?? undefined}>
               <TextWithEmoji content={status()} />
             </Bubble>
           </Show>
