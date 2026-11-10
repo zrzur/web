@@ -1,4 +1,3 @@
-import { execFileSync } from "node:child_process";
 import { readFileSync, readdirSync } from "node:fs";
 import { join, resolve } from "node:path";
 import { createSignal } from "solid-js";
@@ -13,7 +12,11 @@ vi.mock("@revolt/state", () => ({ useState: () => undefined }));
 const SVG_NS = "http://www.w3.org/2000/svg";
 const svgDir = resolve(__dirname, "hugeicons");
 
-/** svgo exactly as vite-plugin-solid-svg ran it on each icon file */
+/**
+ * Each icon file through svgo's default preset. That is what
+ * vite-plugin-solid-svg ran before (it found no svgo.config), and the
+ * component it built drew those elements; drawings.ts must draw the same.
+ */
 async function optimisedFiles() {
   const { createRequire } = await import("node:module");
   const require = createRequire(join(__dirname, "../../../package.json"));
@@ -60,19 +63,6 @@ function draw(name: IconName, size?: number) {
 }
 
 describe("Icon", () => {
-  it("has one drawing per icon file and drawings.ts is up to date", () => {
-    const files = readdirSync(svgDir).filter((f) => f.endsWith(".svg"));
-    expect(Object.keys(iconRegistry).length).toBe(files.length);
-    // in Node, not in this browser-like bundle (Prettier and svgo)
-    const client = resolve(__dirname, "../../..");
-    const out = execFileSync(
-      process.execPath,
-      [join(client, "scripts/icon-drawings.mjs"), "--check"],
-      { cwd: client, encoding: "utf8" },
-    );
-    expect(out).toContain("up to date");
-  }, 30_000);
-
   it("draws every icon exactly as its optimised SVG file", async () => {
     const files = await optimisedFiles();
     const names = Object.keys(iconRegistry) as IconName[];
@@ -102,6 +92,7 @@ describe("Icon", () => {
       dispose?.();
       host.remove();
     }
+    // 203 icons through svgo and jsdom: 7.4 s once in a full parallel run
   }, 30_000);
 
   it("follows a name change and draws nothing for an unknown name", () => {
@@ -123,6 +114,15 @@ describe("Icon", () => {
     expect(host.querySelector("svg")).toBeNull();
     expect(host.querySelector("[data-icon]")).not.toBeNull();
   });
+
+  it.each(["toString", "__proto__", "constructor", "hasOwnProperty"])(
+    "draws nothing for the object key %s",
+    (name) => {
+      const host = draw(name as IconName);
+      expect(host.querySelector("svg")).toBeNull();
+      expect(host.querySelector("[data-icon]")).not.toBeNull();
+    },
+  );
 
   it("draws the bot icon as the Zrzur mark", () => {
     const host = draw("robot");

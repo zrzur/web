@@ -20,7 +20,11 @@ import {
 import { join } from "node:path";
 
 import { hugeiconsMap } from "./hugeicons-map.mjs";
-import { buildDrawings, renderDrawings } from "./icon-drawings.mjs";
+import {
+  buildDrawings,
+  checkElement,
+  renderDrawings,
+} from "./icon-drawings.mjs";
 
 const pkg = process.argv[2];
 if (!pkg) {
@@ -55,6 +59,12 @@ function toSvg(source) {
         ([, key]) => key !== "key" && key !== "strokeWidth",
       );
       const values = Object.fromEntries(pairs.map(([, k, v]) => [k, v]));
+      // shapes only: anything that runs, links or loads stops the run
+      checkElement(
+        tag,
+        Object.fromEntries(pairs.map(([, k, v]) => [kebab(k), v])),
+        source.slice(0, 40),
+      );
       const attrs = pairs.map(([, key, value]) => `${kebab(key)}="${value}"`);
       // Solid dots already carry their own fill
       if (isClosed(tag, values) && !values.fill) attrs.push('class="z-shape"');

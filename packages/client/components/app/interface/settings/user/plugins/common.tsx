@@ -18,7 +18,7 @@ export function PluginIcon(props: {
   size?: number;
 }) {
   const name = (): IconName =>
-    props.icon && props.icon in iconRegistry
+    props.icon && Object.hasOwn(iconRegistry, props.icon)
       ? (props.icon as IconName)
       : categoryIcon(props.category);
   return (

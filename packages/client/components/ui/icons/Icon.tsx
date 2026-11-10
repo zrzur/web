@@ -47,7 +47,13 @@ export function Icon(props: Props) {
   });
 
   // one drawing serves every style (icon.css sets the line weight)
-  const drawing = () => iconRegistry[local.name] as string | undefined;
+  // own keys only: a name like "toString" or "__proto__" draws nothing
+  const drawing = () => {
+    const markup = Object.hasOwn(iconRegistry, local.name)
+      ? (iconRegistry[local.name] as unknown)
+      : undefined;
+    return typeof markup === "string" ? markup : undefined;
+  };
 
   // legacy call sites size icons with width/height (iconSize()/symbolSize())
   const size = createMemo(() => {

@@ -47,8 +47,9 @@ interface Props {
 function resolveName(raw: string): IconName | undefined {
   const key = raw.trim();
   if (!key) return undefined;
-  if (symbolNames[key]) return symbolNames[key];
-  if (key in iconRegistry) return key as IconName;
+  // own keys only: "toString" and the like are not icon names
+  if (Object.hasOwn(symbolNames, key)) return symbolNames[key];
+  if (Object.hasOwn(iconRegistry, key)) return key as IconName;
   return undefined;
 }
 
