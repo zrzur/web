@@ -292,8 +292,8 @@
     },
     {
       "path": "CHANGELOG.md",
-      "sha256": "2b00e4f83793afff7480d9e54f0d00b25db3a16f313be7271950b2b088ab0faf",
-      "bytes": 114547,
+      "sha256": "d3b31df7acdb69d29026415fd1dd925585065f2a58ae6c8bba74875f4573fa01",
+      "bytes": 115350,
       "category": "public-documentation"
     },
     {
@@ -1192,8 +1192,8 @@
     },
     {
       "path": "packages/client/components/app/interface/settings/ServerSettings.tsx",
-      "sha256": "59074309baaaee0fd436328e6ec7c66ee63e4910d7f133ff0c668c34c045cc83",
-      "bytes": 12600,
+      "sha256": "b624615efd05d13167bab01dceb378c545d03942501e81e3fb91b524c9156dae",
+      "bytes": 13086,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -1270,8 +1270,8 @@
     },
     {
       "path": "packages/client/components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx",
-      "sha256": "d84c586874688af9fe36ed885ab70bfbd86545af9ecd140c7d12e345f63a5454",
-      "bytes": 24583,
+      "sha256": "fd6c9f2aed4662e710dcb79e7e9ea8588ac604bbffa6f9085dfb097a5c4ea0b9",
+      "bytes": 25025,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -1618,8 +1618,8 @@
     },
     {
       "path": "packages/client/components/app/interface/settings/server/layout.tsx",
-      "sha256": "6da8c37858c786c8fa68ef7e7a4e1712a048d9c74fcae59eb0b2acc2837b1b60",
-      "bytes": 4449,
+      "sha256": "b48dd6d1564763583e8ec839cf8fdaac555c0ee35e0e3a67a7832110eacb2b58",
+      "bytes": 4493,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -1684,14 +1684,14 @@
     },
     {
       "path": "packages/client/components/app/interface/settings/server/pages.tsx",
-      "sha256": "8c06c122ff82b240cd5de19894d723fdbbef57636c18681567cfc2538b2f0d28",
-      "bytes": 11522,
+      "sha256": "ffcf2e8c4d4073891049837fbce4a6e1ce9129c2f5a556d511aa9f42d948a405",
+      "bytes": 11860,
       "category": "product-source-or-build-manifest"
     },
     {
       "path": "packages/client/components/app/interface/settings/server/permissionNeed.ts",
-      "sha256": "188e6d083baf46a99704a199e842c560656b883a0e25eec440ffc566c9e555d8",
-      "bytes": 594,
+      "sha256": "9701b126ae9ca0b8c3eeff8eaac265748c5bd25ef7c0d9b5481b11bedf6bf26b",
+      "bytes": 617,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -1720,8 +1720,8 @@
     },
     {
       "path": "packages/client/components/app/interface/settings/server/registry.ts",
-      "sha256": "4a186a3b2b02aed6fced299f23715c01caa7aa06895c7eed3a6007b61adfcc86",
-      "bytes": 10399,
+      "sha256": "003efde5885bb2c831d942da88af90a31e4e04560d2f4f6e9821b2bb0b9cde05",
+      "bytes": 10804,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -1759,6 +1759,24 @@
       "sha256": "606904593831c7971226b5ae0ed6ae97616cf3e5c0aaf33659824124e0fdbffe",
       "bytes": 591,
       "category": "license-and-attribution"
+    },
+    {
+      "path": "packages/client/components/app/interface/settings/server/soundboard/SoundboardList.tsx",
+      "sha256": "cddeabbcfa4114a330d72e7232d597fa2e49d30b379a0a8c837baed2357b352f",
+      "bytes": 11739,
+      "category": "product-source-or-build-manifest"
+    },
+    {
+      "path": "packages/client/components/app/interface/settings/server/soundboard/soundFile.test.ts",
+      "sha256": "99df48f7a642818a3c02f07164b69dc4d0d36afc126363a77cf6560e82b93699",
+      "bytes": 1815,
+      "category": "synthetic-test-source-or-fixture"
+    },
+    {
+      "path": "packages/client/components/app/interface/settings/server/soundboard/soundFile.ts",
+      "sha256": "70c82cc7ee320a078e158ec111dc38133c7d868d70640e5576c98ccc8676e86d",
+      "bytes": 1887,
+      "category": "product-source-or-build-manifest"
     },
     {
       "path": "packages/client/components/app/interface/settings/server/webhooks/ServerWebhooks.tsx",
@@ -2343,6 +2361,12 @@
       "category": "product-source-or-build-manifest"
     },
     {
+      "path": "packages/client/components/app/interface/settings/user/voice/SoundboardOptions.tsx",
+      "sha256": "804646935ab94fce9ac0f9f0d03601b4d348d49e9699cc3f30e42c7740986b64",
+      "bytes": 1975,
+      "category": "product-source-or-build-manifest"
+    },
+    {
       "path": "packages/client/components/app/interface/settings/user/voice/VoiceInputOptions.tsx",
       "sha256": "af7fa5311feb4b23f73d23e3a6bb958f316e83ca62e2943048079448896ea8ec",
       "bytes": 5419,
@@ -2356,8 +2380,8 @@
     },
     {
       "path": "packages/client/components/app/interface/settings/user/voice/VoiceSettings.tsx",
-      "sha256": "33d9278837518007f7e5132c61d092d0c91477b68a9ac72c1cbf6c83a3349bee",
-      "bytes": 933,
+      "sha256": "9015a094a40891c29e6b0bfe7677d50fc28ec4897c8cf846e94d8f9131b11478",
+      "bytes": 1018,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -2920,8 +2944,8 @@
     },
     {
       "path": "packages/client/components/i18n/catalogs/ar/messages.po",
-      "sha256": "2381c1c427cb14ef5a9aefff36cad4fdb9881f237503b4c7e57d231af6956434",
-      "bytes": 976167,
+      "sha256": "d1157fecc70ac4260e4d5710dd85972cd90012cc89f7d1d21cc40886063f0b6c",
+      "bytes": 984809,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -3064,8 +3088,8 @@
     },
     {
       "path": "packages/client/components/i18n/catalogs/de/messages.po",
-      "sha256": "14cc79f0537e8b3724a5357ddbdefc911f65db0af1725d7c8b503adcafcb34e7",
-      "bytes": 900911,
+      "sha256": "db6a5e6b1c6380b279f404be1ecb77e4397f826c040e94aa6e4ffa9146c993ca",
+      "bytes": 908879,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -3100,8 +3124,8 @@
     },
     {
       "path": "packages/client/components/i18n/catalogs/en/messages.po",
-      "sha256": "c1dd83caa51ec0d1367a9df417f9866705a0d451bb53d21cf8f01f50f3b73a8a",
-      "bytes": 867624,
+      "sha256": "d1b04873dc6f5a391a334e31073700bf352e261a375660d9adb73f92f68a3e89",
+      "bytes": 875304,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -3664,8 +3688,8 @@
     },
     {
       "path": "packages/client/components/i18n/errorTypes.json",
-      "sha256": "fa145baadd7d661f07c5a607ce4968b05e451b14f93f6446a9381a919fa8e048",
-      "bytes": 3122,
+      "sha256": "793b1e978843f3db9dc2c5a93635e904dbd21e14fd10e2960c7253644ee17cb1",
+      "bytes": 3162,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -3682,8 +3706,8 @@
     },
     {
       "path": "packages/client/components/i18n/errors.tsx",
-      "sha256": "71866bedbc27047d57d54914bb0f1351713126f4d1757338cb31b404b7cf50de",
-      "bytes": 29812,
+      "sha256": "999a495654d324094dacca87a8a752ec3fd3094166cb1783d1efbd6e45b10d8e",
+      "bytes": 30091,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -4132,8 +4156,8 @@
     },
     {
       "path": "packages/client/components/modal/modals/CreateChannel.tsx",
-      "sha256": "a3cbb9ccce6c1134e7c71c5db9d2baf5267872049427d4de1984a1cbd27cd7f1",
-      "bytes": 9418,
+      "sha256": "37d8415e6e2db18f93363cc03fbd1403b15a72e4906f4c59df6c996f1f9e6da1",
+      "bytes": 10344,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -4875,9 +4899,33 @@
       "category": "product-source-or-build-manifest"
     },
     {
+      "path": "packages/client/components/rtc/soundboardPlayer.test.ts",
+      "sha256": "d2439248c30fec4696acbf4e89840063b02a86c25e35e74e99836e46e480920d",
+      "bytes": 4205,
+      "category": "synthetic-test-source-or-fixture"
+    },
+    {
+      "path": "packages/client/components/rtc/soundboardPlayer.ts",
+      "sha256": "efa18ccc64e7773ea2a1f480fd9a6c56cb176f910f1de4231a19e103cc9e080b",
+      "bytes": 3990,
+      "category": "product-source-or-build-manifest"
+    },
+    {
       "path": "packages/client/components/rtc/state.tsx",
-      "sha256": "2bdc947e0b272e75d403551585f96568180f84e5d36f00d8dde9714c55ccd0be",
-      "bytes": 46925,
+      "sha256": "6e6eb0cbadb974d19ccb3421506df5f36048c1489d2350c210946a32ae80b282",
+      "bytes": 47931,
+      "category": "product-source-or-build-manifest"
+    },
+    {
+      "path": "packages/client/components/rtc/streamPreview.test.ts",
+      "sha256": "c792b4842af320105c67e1468914d2449ceb447b5c5dd68aca7e6774e8330047",
+      "bytes": 1885,
+      "category": "synthetic-test-source-or-fixture"
+    },
+    {
+      "path": "packages/client/components/rtc/streamPreview.ts",
+      "sha256": "be7bc500d723292f19dc475b990437b048ccd9073c05c18efec88942be42187a",
+      "bytes": 3582,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -4897,6 +4945,18 @@
       "sha256": "b74e7bbe0c95ec9486167ac4f463df1252fd4cc267c4546fc29173a5af3b1c86",
       "bytes": 2149,
       "category": "synthetic-test-source-or-fixture"
+    },
+    {
+      "path": "packages/client/components/rtc/voiceExtras.dom.test.tsx",
+      "sha256": "c6591bef1402cb6d934f3dae649a11cae227db0a636bfd5dadf41a7b6874ff1d",
+      "bytes": 3965,
+      "category": "synthetic-test-source-or-fixture"
+    },
+    {
+      "path": "packages/client/components/rtc/voiceExtras.ts",
+      "sha256": "efed08c4bf79ea1dd90c4d53fbe6e6e28febbc0ce61814ced89819992d5766f3",
+      "bytes": 3524,
+      "category": "product-source-or-build-manifest"
     },
     {
       "path": "packages/client/components/rtc/voiceGate.test.ts",
@@ -5086,14 +5146,14 @@
     },
     {
       "path": "packages/client/components/state/stores/Voice.test.ts",
-      "sha256": "0c542b4a8cf9315a5feb3d733e0fb2e4b860df4822ef6066d5cd60100d18e95e",
-      "bytes": 6234,
+      "sha256": "bf1572b2392168cf0761baa8fca3fe7bc4d8a0cecb105543a2b33a7c2a16ca84",
+      "bytes": 7081,
       "category": "synthetic-test-source-or-fixture"
     },
     {
       "path": "packages/client/components/state/stores/Voice.ts",
-      "sha256": "3732ff229daaa188320bdcb4acfd3cca65dc5179de86ade6094d2b7cc9f5aa23",
-      "bytes": 15729,
+      "sha256": "64001491d3a878f021758aadc6b442ab43f482d39c36f072ccba2b9f1d860289",
+      "bytes": 16696,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -6141,9 +6201,15 @@
       "category": "product-source-or-build-manifest"
     },
     {
+      "path": "packages/client/components/ui/components/features/voice/StreamPreviewCard.tsx",
+      "sha256": "99fec7759ab5a4235e398910f20e85d3086daae73827cc8567589f2058c1bc54",
+      "bytes": 2780,
+      "category": "product-source-or-build-manifest"
+    },
+    {
       "path": "packages/client/components/ui/components/features/voice/VoiceChannelPreview.tsx",
-      "sha256": "420a12415efeb64eabf95b42298ad39d72da16953c3445560c95dc1d98ada562",
-      "bytes": 6677,
+      "sha256": "b6619a4e1c25022b81fbb4b0b952bb93d14634dcdad692c2505323651cda02a4",
+      "bytes": 7542,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -6184,14 +6250,14 @@
     },
     {
       "path": "packages/client/components/ui/components/features/voice/callCard/VoiceCallCardActions.tsx",
-      "sha256": "4dcdfb4a9e6e73dbf9547e537cda6752961ae7abc10051326e3624f5fc06f647",
-      "bytes": 8141,
+      "sha256": "68630a42e24b2008fb89f7caf26c04f1e9f3f920f4784ff4dc58de7bbfb60d70",
+      "bytes": 9092,
       "category": "product-source-or-build-manifest"
     },
     {
       "path": "packages/client/components/ui/components/features/voice/callCard/VoiceCallCardActiveRoom.tsx",
-      "sha256": "3cecce7785c3bb63e1ad7446b8c738f10580bac21aa077bd011b2bba21ad0965",
-      "bytes": 7331,
+      "sha256": "3e6434b4090d1db5206b52957f37aaa7fd1b4350468cdbfe474ed2b89c747c17",
+      "bytes": 8214,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -6216,6 +6282,54 @@
       "path": "packages/client/components/ui/components/features/voice/callCard/VoiceCallCardStatus.tsx",
       "sha256": "b5fdb09bfeb30c0c60d1af818a8d315c04f262dc925b9d25c9384a64966206dc",
       "bytes": 4574,
+      "category": "product-source-or-build-manifest"
+    },
+    {
+      "path": "packages/client/components/ui/components/features/voice/soundboard/SoundboardPicker.tsx",
+      "sha256": "4f125693b1534eaa95a36b970c0b0d3e4427dc74e6273d746b49bd515fb92b45",
+      "bytes": 4764,
+      "category": "product-source-or-build-manifest"
+    },
+    {
+      "path": "packages/client/components/ui/components/features/voice/soundboard/soundboardOpen.ts",
+      "sha256": "6525fbef92fa0b90e3a8bfe382a3e84af5ddb5f5fbbfa019e576fbb5e869ed07",
+      "bytes": 292,
+      "category": "product-source-or-build-manifest"
+    },
+    {
+      "path": "packages/client/components/ui/components/features/voice/stage/StagePanel.dom.test.tsx",
+      "sha256": "7fedb0da1d909b103ce3c3e63cc982f948b53d5cf6e90157e3b63522e15801e0",
+      "bytes": 7230,
+      "category": "synthetic-test-source-or-fixture"
+    },
+    {
+      "path": "packages/client/components/ui/components/features/voice/stage/StagePanel.tsx",
+      "sha256": "d61e3defd74113bf013f23f300969934c23db7b880528afa890636f2c55407e2",
+      "bytes": 11249,
+      "category": "product-source-or-build-manifest"
+    },
+    {
+      "path": "packages/client/components/ui/components/features/voice/stage/stageRoles.test.ts",
+      "sha256": "f96aae5d151efbccb4e5aa1ddc82d0780f2b0f660db379be594a22b31ea54e60",
+      "bytes": 1399,
+      "category": "synthetic-test-source-or-fixture"
+    },
+    {
+      "path": "packages/client/components/ui/components/features/voice/stage/stageRoles.ts",
+      "sha256": "3101633f42810b4e65117277540f39f7dcaf0ad4095d7bb6e1f4da0bdd15421c",
+      "bytes": 1136,
+      "category": "product-source-or-build-manifest"
+    },
+    {
+      "path": "packages/client/components/ui/components/features/voice/streamPreviewCache.test.ts",
+      "sha256": "3e19d0e0f60a5bfaff986878e5a5706b0e9437f2df1076d9b9cc045d8c81692b",
+      "bytes": 1224,
+      "category": "synthetic-test-source-or-fixture"
+    },
+    {
+      "path": "packages/client/components/ui/components/features/voice/streamPreviewCache.ts",
+      "sha256": "900c3a10faf2df661e2699bbbbf4d27de4f0b13d68682a00ed8bf86f14706b3d",
+      "bytes": 1304,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -38217,6 +38331,12 @@
       "category": "product-source-or-build-manifest"
     },
     {
+      "path": "packages/client/scripts/i18n/ui-1110931.json",
+      "sha256": "700189ed3981466990382b76dcd44e1d1656149e1a18bb9e8536b17556786d3c",
+      "bytes": 6055,
+      "category": "product-source-or-build-manifest"
+    },
+    {
       "path": "packages/client/scripts/i18n/ui-12.json",
       "sha256": "d6462d3292ad5dc9367bd37a8bb0575e1737ea0b531801c4f97e96bee45cf87c",
       "bytes": 4639,
@@ -39274,8 +39394,8 @@
     },
     {
       "path": "packages/client/src/interface/channels/ChannelHeader.tsx",
-      "sha256": "4eb58671c93cc0c7114fce570d07ff7ef68e8a10b57e0bb68c1e61c22441d922",
-      "bytes": 24769,
+      "sha256": "7aacd9729f97722eb2d82ad71f10630b0c8915c322295ba9a4bbf40a9a609d39",
+      "bytes": 24866,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -40510,8 +40630,8 @@
     },
     {
       "path": "packages/client/src/interface/navigation/channels/ServerSidebar.tsx",
-      "sha256": "8dccb1767952ac37e051ac48467d1bc43d1117e8e73ddf648f1a3243aee9cc05",
-      "bytes": 36071,
+      "sha256": "bcad7864ddb09e636d060c753e05da4fe7eeb2fcc4dba851e1b4ff4a68a65a93",
+      "bytes": 36107,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -40522,8 +40642,8 @@
     },
     {
       "path": "packages/client/src/interface/navigation/channels/SidebarIcon.tsx",
-      "sha256": "dabf0ba144ea1e839172cd4a1eeea6cc8caccd01f3ab4936858687a7ec753184",
-      "bytes": 874,
+      "sha256": "47d81f8deb0677647b7d9804a18cdea73862dce727a1ff72468cf8d073284712",
+      "bytes": 895,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -40732,8 +40852,8 @@
     },
     {
       "path": "packages/client/tsconfig.json",
-      "sha256": "96938b3d79ee204f7939e7bf95722a849f80059f201ca23fdb96f9fe4ab154f5",
-      "bytes": 2344,
+      "sha256": "699f8829ff7816daa4e5c81f82b44de81960367d7e74791c086f2531eed11469",
+      "bytes": 2424,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -40792,8 +40912,8 @@
     },
     {
       "path": "packages/client/vite.config.ts",
-      "sha256": "7448f884540c93c1617907625f0d968277ff4994cb4d510644164d7f58ba53b8",
-      "bytes": 10201,
+      "sha256": "d584b719fa55b617ccd78ff8876bfd0e908e76bcee63b98a32711e93cd7dc0e8",
+      "bytes": 10332,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -41340,7 +41460,7 @@
   "submodules": [
     {
       "path": "packages/stoat.js",
-      "commit": "d883940fe917594f73533ded138e82915081c95f"
+      "commit": "cb5106c9678b969f908987c2b68b776faa74ba11"
     }
   ]
 }
