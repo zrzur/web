@@ -1,39 +1,87 @@
-import { type JSX, For, Show } from "solid-js";
+import {
+  type JSX,
+  For,
+  Match,
+  Show,
+  Switch,
+  createSignal,
+  onCleanup,
+} from "solid-js";
 
 import { Trans, useLingui } from "@lingui/solid/macro";
 import { styled } from "styled-system/jsx";
 
-import { comboLabel, isMac, keyLabel } from "@revolt/keybinds/shortcuts";
+import { deviceMac, pauseShortcuts } from "@revolt/keybinds/active";
+import {
+  type Combo,
+  type ComboCheck,
+  type ShortcutId,
+  checkCombo,
+  comboKeys,
+  readCombo,
+} from "@revolt/keybinds/keymap";
+import { comboLabel, keyLabel } from "@revolt/keybinds/shortcuts";
 import { desktopPushToTalk } from "@revolt/rtc/desktopPushToTalk";
 import { useState } from "@revolt/state";
-import { Column, SettingsRow, SettingsSection } from "@revolt/ui";
+import {
+  Button,
+  Column,
+  IconButton,
+  SettingsRow,
+  SettingsSection,
+} from "@revolt/ui";
+import { Icon } from "@revolt/ui/icons/Icon";
 
 import { useSettingsNavigation } from "../Settings";
 
-type Row = { title: JSX.Element; description?: JSX.Element; keys: string[][] };
+/** A row: fixed keys, or a shortcut the person can change */
+type Row = {
+  title: JSX.Element;
+  description?: JSX.Element;
+  keys?: string[][];
+  id?: ShortcutId;
+};
 
 /**
- * Keyboard shortcuts (Ctrl+/ opens this page). Lists only what works today.
+ * Keyboard shortcuts (Ctrl+/ opens this page). Lists only what works today;
+ * the app's own shortcuts can be changed here, and follow the account to
+ * every device.
  */
 export function KeybindsSettings() {
   const { t } = useLingui();
-  const { voice } = useState();
+  const state = useState();
+  const { voice } = state;
   const { navigate } = useSettingsNavigation();
-  const mac = isMac();
+  const mac = deviceMac();
+
+  /** Names for the clash message */
+  const names: Record<ShortcutId, () => string> = {
+    toggle_mute: () => t`Mute or unmute`,
+    toggle_deafen: () => t`Deafen or undeafen`,
+    create_poll: () => t`Create a poll`,
+    navigation_channel_up: () => t`Previous channel`,
+    navigation_channel_down: () => t`Next channel`,
+    navigation_server_up: () => t`Previous server`,
+    navigation_server_down: () => t`Next server`,
+    chat_mark_server_as_read: () => t`Mark the server as read`,
+    open_events: () => t`Open the server's events`,
+    toggle_streamer: () => t`Streamer mode on or off`,
+    open_shortcuts: () => t`Show keyboard shortcuts`,
+  };
 
   const groups: { title: JSX.Element; rows: Row[] }[] = [
     {
       title: <Trans>Calls</Trans>,
       rows: [
         {
+          id: "toggle_mute",
           title: <Trans>Mute or unmute</Trans>,
           description: <Trans>During a call.</Trans>,
-          keys: [["Mod", "Shift", "M"]],
         },
         {
+          id: "toggle_deafen",
           title: <Trans>Deafen or undeafen</Trans>,
           description: <Trans>During a call.</Trans>,
-          keys: [["Mod", "Shift", "D"]],
         },
         // desktop app: the global talk toggle, with the person's own key
         ...(desktopPushToTalk()
@@ -74,8 +122,8 @@ export function KeybindsSettings() {
           keys: [["Esc"]],
         },
         {
+          id: "chat_mark_server_as_read",
           title: <Trans>Mark the server as read</Trans>,
-          keys: [["Shift", "Esc"]],
         },
         {
           title: <Trans>Select a range of messages</Trans>,
@@ -96,9 +144,9 @@ export function KeybindsSettings() {
           keys: [["↑"], ["↓"], ["Enter"]],
         },
         {
+          id: "create_poll",
           title: <Trans>Create a poll</Trans>,
           description: <Trans>In a channel where you can post polls.</Trans>,
-          keys: [["Mod", "Shift", "8"]],
         },
       ],
     },
@@ -129,24 +177,14 @@ export function KeybindsSettings() {
     {
       title: <Trans>Navigation</Trans>,
       rows: [
+        { id: "navigation_channel_up", title: <Trans>Previous channel</Trans> },
+        { id: "navigation_channel_down", title: <Trans>Next channel</Trans> },
+        { id: "navigation_server_up", title: <Trans>Previous server</Trans> },
+        { id: "navigation_server_down", title: <Trans>Next server</Trans> },
         {
-          title: <Trans>Previous or next channel</Trans>,
-          keys: [
-            ["Alt", "↑"],
-            ["Alt", "↓"],
-          ],
-        },
-        {
-          title: <Trans>Previous or next server</Trans>,
-          keys: [
-            ["Ctrl", "Alt", "↑"],
-            ["Ctrl", "Alt", "↓"],
-          ],
-        },
-        {
+          id: "open_events",
           title: <Trans>Open the server's events</Trans>,
           description: <Trans>In a server.</Trans>,
-          keys: [["Mod", "Shift", "9"]],
         },
         {
           title: <Trans>Search Discover</Trans>,
@@ -173,7 +211,16 @@ export function KeybindsSettings() {
     {
       title: <Trans>General</Trans>,
       rows: [
-        { title: <Trans>Show keyboard shortcuts</Trans>, keys: [["Mod", "/"]] },
+        { id: "open_shortcuts", title: <Trans>Show keyboard shortcuts</Trans> },
+        {
+          id: "toggle_streamer",
+          title: <Trans>Streamer mode on or off</Trans>,
+          description: (
+            <Trans>
+              Hides your email, tag, invite links and DM previews on screen.
+            </Trans>
+          ),
+        },
         {
           title: <Trans>Close a window or menu</Trans>,
           keys: [["Esc"]],
@@ -184,6 +231,36 @@ export function KeybindsSettings() {
 
   return (
     <Column gap="xl">
+      <SettingsSection
+        title={<Trans>Your shortcuts</Trans>}
+        description={
+          <Trans>
+            Press a shortcut's keys to choose new ones. Your shortcuts follow
+            you to every device you sign in on.
+          </Trans>
+        }
+      >
+        <SettingsRow
+          icon={<Icon name="arrow-counter-clockwise" size={20} />}
+          title={<Trans>Reset all shortcuts</Trans>}
+          description={
+            <Trans>
+              Every shortcut and the push-to-talk key go back to the defaults.
+            </Trans>
+          }
+          control={() => (
+            <Button
+              size="sm"
+              variant="tonal"
+              isDisabled={!state.keybinds.changed}
+              onPress={() => state.keybinds.resetAll()}
+              data-testid="keybinds-reset-all"
+            >
+              <Trans>Reset all</Trans>
+            </Button>
+          )}
+        />
+      </SettingsSection>
       <SettingsSection
         title={<Trans>Push to talk</Trans>}
         description={
@@ -214,23 +291,245 @@ export function KeybindsSettings() {
           <SettingsSection title={group.title}>
             <For each={group.rows}>
               {(row) => (
-                <SettingsRow
-                  title={row.title}
-                  description={row.description}
-                  control={() => (
-                    <Combos>
-                      <For each={row.keys}>
-                        {(combo) => <Keys keys={comboLabel(combo, mac)} />}
-                      </For>
-                    </Combos>
+                <Show
+                  when={row.id}
+                  fallback={
+                    <SettingsRow
+                      title={row.title}
+                      description={row.description}
+                      control={() => (
+                        <Combos>
+                          <For each={row.keys}>
+                            {(combo) => <Keys keys={comboLabel(combo, mac)} />}
+                          </For>
+                        </Combos>
+                      )}
+                    />
+                  }
+                >
+                  {(id) => (
+                    <ShortcutRow
+                      id={id()}
+                      title={row.title}
+                      description={row.description}
+                      name={names[id()]}
+                      names={names}
+                    />
                   )}
-                />
+                </Show>
               )}
             </For>
           </SettingsSection>
         )}
       </For>
     </Column>
+  );
+}
+
+type Phase =
+  | { kind: "idle" }
+  | { kind: "recording" }
+  | {
+      kind: "refused";
+      combo: Combo;
+      reason: NonNullable<ComboCheck["blocked"]>;
+    }
+  | { kind: "confirm"; combo: Combo; check: ComboCheck };
+
+/**
+ * A shortcut the person can change: press the key caps, then the new keys.
+ * A clash offers to swap; keys the browser or the system keep are refused.
+ */
+export function ShortcutRow(props: {
+  id: ShortcutId;
+  title: JSX.Element;
+  description?: JSX.Element;
+  name: () => string;
+  names: Record<ShortcutId, () => string>;
+}) {
+  const { t } = useLingui();
+  const state = useState();
+  const mac = deviceMac();
+  const [phase, setPhase] = createSignal<Phase>({ kind: "idle" });
+
+  const label = (combo: Combo) =>
+    comboLabel(comboKeys(combo), mac).join(mac ? "" : "+");
+
+  let resume: (() => void) | undefined;
+
+  function stop(next: Phase = { kind: "idle" }) {
+    window.removeEventListener("keydown", onKey, true);
+    resume?.();
+    resume = undefined;
+    setPhase(next);
+  }
+
+  function onKey(event: KeyboardEvent) {
+    // the press is the new combination: nothing else may act on it
+    event.preventDefault();
+    event.stopPropagation();
+    const read = readCombo(event, mac);
+    if (read === "wait") return;
+    if (read === "cancel") return stop();
+    const check = checkCombo(props.id, read, state.keybinds.table(mac), mac);
+    if (check.blocked)
+      return stop({ kind: "refused", combo: read, reason: check.blocked });
+    if (check.clash || check.warn)
+      return stop({ kind: "confirm", combo: read, check });
+    state.keybinds.setCombo(props.id, read);
+    stop();
+  }
+
+  function record() {
+    if (phase().kind === "recording") return stop();
+    resume = pauseShortcuts();
+    window.addEventListener("keydown", onKey, true);
+    setPhase({ kind: "recording" });
+  }
+
+  onCleanup(() => stop());
+
+  function confirm(current: Extract<Phase, { kind: "confirm" }>) {
+    if (current.check.clash)
+      state.keybinds.swap(props.id, current.check.clash, current.combo);
+    else state.keybinds.setCombo(props.id, current.combo);
+    stop();
+  }
+
+  const message = () => {
+    const current = phase();
+    switch (current.kind) {
+      case "recording":
+        return (
+          <Note data-testid="keybind-note">
+            <Trans>Press the new keys. Esc cancels.</Trans>
+          </Note>
+        );
+      case "refused": {
+        const keys = label(current.combo);
+        return (
+          <Note role="alert" data-tone="error" data-testid="keybind-note">
+            <Switch>
+              <Match when={current.reason === "browser"}>
+                <Trans>
+                  Your browser keeps <bdi dir="ltr">{keys}</bdi> for itself.
+                  Choose other keys.
+                </Trans>
+              </Match>
+              <Match when={current.reason === "system"}>
+                <Trans>
+                  Your system keeps <bdi dir="ltr">{keys}</bdi> for itself.
+                  Choose other keys.
+                </Trans>
+              </Match>
+              <Match when={current.reason === "typing"}>
+                <Trans>
+                  <bdi dir="ltr">{keys}</bdi> is needed for typing. Add{" "}
+                  {mac ? "⌘" : "Ctrl"} or use an F key.
+                </Trans>
+              </Match>
+            </Switch>
+          </Note>
+        );
+      }
+      case "confirm": {
+        const keys = label(current.combo);
+        const other = current.check.clash;
+        return (
+          <Note role="alert" data-tone="warn" data-testid="keybind-note">
+            <Show when={other}>
+              {(other) => (
+                <span>
+                  <Trans>
+                    <bdi dir="ltr">{keys}</bdi> is already used for “
+                    {props.names[other()]()}”. Swap them?
+                  </Trans>
+                </span>
+              )}
+            </Show>
+            <Show when={current.check.warn}>
+              <span>
+                <Trans>
+                  <bdi dir="ltr">{keys}</bdi> replaces a browser shortcut while
+                  Zrzur is open.
+                </Trans>
+              </span>
+            </Show>
+            <Actions>
+              <Button
+                size="sm"
+                variant="filled"
+                onPress={() => confirm(current)}
+              >
+                {other ? <Trans>Swap</Trans> : <Trans>Use anyway</Trans>}
+              </Button>
+              <Button size="sm" variant="text" onPress={() => stop()}>
+                <Trans>Cancel</Trans>
+              </Button>
+            </Actions>
+          </Note>
+        );
+      }
+      default:
+        return null;
+    }
+  };
+
+  return (
+    <SettingsRow
+      title={props.title}
+      description={
+        <Show when={props.description || phase().kind !== "idle"}>
+          <Described>
+            <Show when={props.description}>
+              <span>{props.description}</span>
+            </Show>
+            {message()}
+          </Described>
+        </Show>
+      }
+      control={() => (
+        <Controls>
+          <Show when={state.keybinds.isCustom(props.id)}>
+            <IconButton
+              variant="toolbar"
+              size="xs"
+              aria-label={t`Reset ${props.name()} to the default`}
+              onPress={() => {
+                state.keybinds.reset(props.id);
+                stop();
+              }}
+            >
+              <Icon name="arrow-counter-clockwise" size={16} />
+            </IconButton>
+          </Show>
+          <KeysButton
+            type="button"
+            data-recording={phase().kind === "recording"}
+            data-shortcut={props.id}
+            aria-label={
+              phase().kind === "recording"
+                ? t`Press the new keys for ${props.name()}. Esc cancels.`
+                : t`Change the keys for ${props.name()}: ${label(state.keybinds.combo(props.id))}`
+            }
+            onClick={record}
+            onBlur={() => phase().kind === "recording" && stop()}
+          >
+            <Show
+              when={phase().kind !== "recording"}
+              fallback={<Trans>Press keys…</Trans>}
+            >
+              <Keys
+                keys={comboLabel(
+                  comboKeys(state.keybinds.combo(props.id)),
+                  mac,
+                )}
+              />
+            </Show>
+          </KeysButton>
+        </Controls>
+      )}
+    />
   );
 }
 
@@ -249,6 +548,73 @@ const Combos = styled("div", {
     gap: "8px",
     flexWrap: "wrap",
     justifyContent: "flex-end",
+  },
+});
+
+const Controls = styled("div", {
+  base: {
+    display: "flex",
+    alignItems: "center",
+    gap: "4px",
+  },
+});
+
+const KeysButton = styled("button", {
+  base: {
+    minHeight: "32px",
+    minWidth: "64px",
+    paddingInline: "8px",
+    display: "inline-flex",
+    alignItems: "center",
+    justifyContent: "center",
+    gap: "4px",
+    borderRadius: "8px",
+    border: "1px solid transparent",
+    background: "transparent",
+    color: "var(--z-fg-primary)",
+    fontFamily: "inherit",
+    fontSize: "12px",
+    fontWeight: 600,
+    cursor: "pointer",
+    "&:hover": {
+      borderColor: "var(--z-border-subtle)",
+    },
+    "&:focus-visible": {
+      outline: "2px solid var(--z-focus)",
+      outlineOffset: "2px",
+    },
+    '&[data-recording="true"]': {
+      borderColor: "var(--z-accent)",
+      color: "var(--z-accent)",
+    },
+    // phones: a 44 px target
+    _phone: { minHeight: "44px" },
+  },
+});
+
+const Described = styled("span", {
+  base: {
+    display: "flex",
+    flexDirection: "column",
+    gap: "4px",
+  },
+});
+
+const Note = styled("span", {
+  base: {
+    display: "flex",
+    flexDirection: "column",
+    gap: "8px",
+    color: "var(--z-fg-primary)",
+    '&[data-tone="error"]': { color: "var(--z-danger, var(--z-fg-primary))" },
+  },
+});
+
+const Actions = styled("span", {
+  base: {
+    display: "flex",
+    gap: "8px",
+    flexWrap: "wrap",
   },
 });
 
@@ -272,7 +638,7 @@ const Cap = styled("kbd", {
     border:
       "1px solid var(--z-border-subtle, var(--md-sys-color-outline-variant))",
     boxShadow: "inset 0 -1px 0 var(--z-border-subtle, rgb(0 0 0 / 0.25))",
-    color: "var(--z-fg, var(--md-sys-color-on-surface))",
+    color: "var(--z-fg-primary, var(--md-sys-color-on-surface))",
     fontFamily: "inherit",
     fontSize: "12px",
     fontWeight: 600,
