@@ -1,0 +1,58 @@
+{
+  "wants to join one of your servers": [
+    "يريد الانضمام إلى أحد سيرفراتك",
+    "möchte einem deiner Server beitreten",
+    "souhaite rejoindre l’un de tes serveurs",
+    "quiere unirse a uno de tus servidores",
+    "хочет присоединиться к одному из ваших серверов",
+    "想加入你的一个服务器"
+  ],
+  "This lets the bot:": [
+    "يسمح هذا للبوت بما يلي:",
+    "Damit kann der Bot:",
+    "Cela permet au bot de :",
+    "Esto permite al bot:",
+    "Это позволит боту:",
+    "这会允许该机器人："
+  ],
+  "Join the server you choose": [
+    "الانضمام إلى السيرفر الذي تختاره",
+    "dem Server beitreten, den du wählst",
+    "rejoindre le serveur que tu choisis",
+    "unirse al servidor que elijas",
+    "присоединиться к выбранному вами серверу",
+    "加入你选择的服务器"
+  ],
+  "Add its commands there": [
+    "إضافة أوامره هناك",
+    "dort seine Befehle hinzufügen",
+    "y ajouter ses commandes",
+    "añadir allí sus comandos",
+    "добавить там свои команды",
+    "在那里添加它的命令"
+  ],
+  "What it may do on <0>{0}</0>": [
+    "ما يمكنه فعله في <0>{0}</0>",
+    "Was er auf <0>{0}</0> darf",
+    "Ce qu’il peut faire sur <0>{0}</0>",
+    "Lo que puede hacer en <0>{0}</0>",
+    "Что он может делать на <0>{0}</0>",
+    "它在 <0>{0}</0> 上可以做什么"
+  ],
+  "You have no server to add it to: you need Manage Server there.": [
+    "لا يوجد لديك سيرفر لإضافته إليه: تحتاج إلى صلاحية إدارة السيرفر فيه.",
+    "Du hast keinen Server, zu dem du ihn hinzufügen kannst: Dafür brauchst du dort „Server verwalten“.",
+    "Tu n’as aucun serveur où l’ajouter : il te faut « Gérer le serveur » sur celui-ci.",
+    "No tienes ningún servidor al que añadirlo: necesitas «Gestionar el servidor» en él.",
+    "Нет сервера, куда его можно добавить: там нужно право «Управлять сервером».",
+    "你没有可以添加它的服务器：需要在该服务器上拥有“管理服务器”权限。"
+  ],
+  "You need Manage Server on that server.": [
+    "تحتاج إلى صلاحية إدارة السيرفر في ذلك السيرفر.",
+    "Dafür brauchst du auf diesem Server „Server verwalten“.",
+    "Il te faut « Gérer le serveur » sur ce serveur.",
+    "Necesitas «Gestionar el servidor» en ese servidor.",
+    "На этом сервере нужно право «Управлять сервером».",
+    "你需要在该服务器上拥有“管理服务器”权限。"
+  ]
+}

@@ -1,8 +1,8 @@
 import { useLingui } from "@lingui/solid/macro";
 import "@revolt/app/menus/voice-menu.css";
 import { voiceOccupancy } from "@revolt/rtc/moderation";
-import { Show } from "solid-js";
 import type { Channel } from "@zrzur/sdk/solid";
+import { Show } from "solid-js";
 
 /** Two digits, like Discord's "01 | 07" user limit pill */
 const pad = (n: number) => String(n).padStart(2, "0");

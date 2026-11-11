@@ -12,6 +12,11 @@
 
 ### Design polish
 
+* **Calls on desktop:** every call button is in the voice card under the channel list (camera, screen and soundboard as icons, mute, deafen and hang up), so the room shows no second row of them and no second "Connected"; notices (reconnected, a device unplugged, rejoin) still show in the room. Phones and full screen keep the room's own bar, which now fits a 375 px screen.
+* **Soundboard card:** opens right above the voice card, as wide as it and in its colours; its tiles act like the card's buttons. A server without sounds offers six library sounds to whoever may add them: pressing one adds it and plays it.
+* **Sound library:** the listen button is the quiet play triangle of the notification sounds, a speaker while it plays.
+* **Add a bot:** two steps. First who the bot is, what adding it allows and the server (or group); then every permission it asks for, each untickable, with whether it is verified, who made it and since when. A group is added from the first step.
+
 * **Soundboard in a call:** a small card right over the call's controls with the sounds as tiles (emoji and name), two rows first and "See all" for the rest; a playing tile is outlined, Escape closes the card.
 
 * **Show more (Discover and Designs):** in the website's way: a dark panel with a soft pink-red glow from its lower edge, a thin pink-red edge and a small patch of the flock's dots fading from one top corner (the reading end, so it flips in Arabic); brighter on hover.

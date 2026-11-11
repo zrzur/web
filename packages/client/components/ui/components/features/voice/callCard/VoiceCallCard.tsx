@@ -1,4 +1,5 @@
 import {
+  type ComponentProps,
   JSX,
   Match,
   Show,
@@ -7,7 +8,6 @@ import {
   createEffect,
   createSignal,
   lazy,
-  type ComponentProps,
   onCleanup,
   onMount,
   useContext,
@@ -365,7 +365,13 @@ function VoiceCallCard(props: {
 
   return (
     <Show when={props.showCard}>
-      <Base layout={(stage() ? "expanded" : props.layout) as ComponentProps<typeof Base>["layout"]}>
+      <Base
+        layout={
+          (stage() ? "expanded" : props.layout) as ComponentProps<
+            typeof Base
+          >["layout"]
+        }
+      >
         <Card active={props.inCall} layout={props.layout} stage={stage()}>
           <Show
             when={props.inCall}

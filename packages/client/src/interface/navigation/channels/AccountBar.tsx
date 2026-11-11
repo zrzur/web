@@ -1,6 +1,16 @@
 import { AvatarDecoration } from "@revolt/ui/components/features/profiles/AvatarDecoration";
 import { nameStyle } from "@revolt/ui/components/features/profiles/userStyle";
-import { Show, createMemo, createSignal } from "solid-js";
+import {
+  type JSX,
+  Show,
+  createEffect,
+  createMemo,
+  createSignal,
+  lazy,
+  on,
+  onCleanup,
+} from "solid-js";
+import { Portal } from "solid-js/web";
 import { openMentions } from "../MentionsPanel";
 import { UserMenu } from "../servers/UserMenu";
 import { pendingPresence } from "../servers/presenceUpdate";
@@ -11,6 +21,7 @@ import { cva } from "styled-system/css";
 import { styled } from "styled-system/jsx";
 
 import { useClient, useUser } from "@revolt/client";
+import { useDevice } from "@revolt/common";
 import { statusLine } from "@revolt/common/lib/statusWrite";
 import { useInstance } from "@revolt/instance";
 import { TextWithEmoji } from "@revolt/markdown";
@@ -18,6 +29,10 @@ import { useModals } from "@revolt/modal";
 import { useVoice } from "@revolt/rtc";
 import { Avatar, OverflowingText, UserStatus } from "@revolt/ui";
 import { SignalBars } from "@revolt/ui/components/features/voice/SignalBars";
+import {
+  setSoundboardOpen,
+  soundboardOpen,
+} from "@revolt/ui/components/features/voice/soundboard/soundboardOpen";
 import { Icon } from "@revolt/ui/icons/Icon";
 
 /**
@@ -258,6 +273,7 @@ export function AccountBar(props: { compact?: boolean; overPage?: boolean }) {
  */
 function VoiceSection() {
   const voice = useVoice();
+  const { layout } = useDevice();
   const navigate = useNavigate();
   const { t } = useLingui();
   const { limits } = useInstance();
@@ -270,6 +286,43 @@ function VoiceSection() {
     notReady() ||
     !limits().video ||
     (!voice.videoPermission && !voice.screenshare());
+  const soundboardAllowed = () =>
+    !!voice.channel()?.havePermission("UseSoundboard");
+  const soundboardDisabled = () =>
+    notReady() || !voice.speakingPermission || !soundboardAllowed();
+
+  // a new call starts with the sounds closed
+  createEffect(
+    on(
+      () => voice.channel()?.id,
+      () => setSoundboardOpen(false),
+    ),
+  );
+
+  // where the sounds open: just above this card, at its reading-start edge
+  let panel: HTMLDivElement | undefined;
+  const [place, setPlace] = createSignal<DOMRect>();
+  // the whole voice card (the panel's parent), so the sounds match its width
+  const measure = () =>
+    setPlace((panel?.parentElement ?? panel)?.getBoundingClientRect());
+  createEffect(() => {
+    if (!soundboardOpen()) return;
+    measure();
+    window.addEventListener("resize", measure);
+    onCleanup(() => window.removeEventListener("resize", measure));
+  });
+  const abovePanel = (): JSX.CSSProperties => {
+    const rect = place();
+    if (!rect) return { visibility: "hidden" };
+    const rtl = document.dir === "rtl";
+    return {
+      bottom: `${window.innerHeight - rect.top + 8}px`,
+      width: `${rect.width}px`,
+      ...(rtl
+        ? { right: `${window.innerWidth - rect.right}px` }
+        : { left: `${rect.left}px` }),
+    };
+  };
 
   const status = () => {
     switch (voice.state()) {
@@ -293,7 +346,7 @@ function VoiceSection() {
       .join(" / ");
 
   return (
-    <VoicePanel data-voice-panel data-state={voice.state()}>
+    <VoicePanel ref={panel} data-voice-panel data-state={voice.state()}>
       <VoiceHead>
         <button
           class={voiceTarget()}
@@ -327,6 +380,7 @@ function VoiceSection() {
         <button
           class={voiceAction()}
           data-voice-control="camera"
+          aria-label={voice.video() ? t`Stop camera` : t`Start camera`}
           aria-pressed={!!voice.video()}
           aria-disabled={cameraDisabled()}
           onClick={() => !cameraDisabled() && voice.toggleCamera()}
@@ -343,11 +397,11 @@ function VoiceSection() {
           >
             <Icon name="video-camera" size={20} />
           </Show>
-          <span>{t`Camera`}</span>
         </button>
         <button
           class={voiceAction()}
           data-voice-control="screenshare"
+          aria-label={voice.screenshare() ? t`Stop sharing` : t`Share screen`}
           aria-pressed={!!voice.screenshare()}
           aria-disabled={screenDisabled()}
           onClick={() => !screenDisabled() && voice.toggleScreenshare()}
@@ -359,15 +413,72 @@ function VoiceSection() {
           }}
         >
           <Icon name="monitor-arrow-up" size={20} />
-          <span>{t`Screen`}</span>
         </button>
+        <Show when={voice.channel()?.server}>
+          <button
+            class={voiceAction()}
+            data-voice-control="soundboard"
+            aria-label={t`Soundboard`}
+            aria-pressed={soundboardOpen()}
+            aria-haspopup="dialog"
+            aria-disabled={soundboardDisabled()}
+            onClick={() =>
+              !soundboardDisabled() && setSoundboardOpen(!soundboardOpen())
+            }
+            use:floating={{
+              tooltip: {
+                placement: "top",
+                content: soundboardAllowed()
+                  ? t`Soundboard`
+                  : t`Missing permission`,
+              },
+            }}
+          >
+            <Icon name="music-note" size={20} />
+          </button>
+        </Show>
       </VoiceActions>
+      {/* the sounds open over the call, right above this card; drawn in the
+          floating layer, since the channel list cuts off what reaches past it */}
+      <Show
+        when={
+          // phones and full screen open the sounds from the call's own bar
+          layout() !== "phone" &&
+          voice.layout() !== "fullscreen" &&
+          !soundboardDisabled() &&
+          soundboardOpen() &&
+          voice.channel()
+        }
+      >
+        {(channel) => (
+          <Portal mount={document.getElementById("floating") ?? undefined}>
+            <SoundboardAbove style={abovePanel()}>
+              <SoundboardPicker channel={channel()} placement="dock" />
+            </SoundboardAbove>
+          </Portal>
+        )}
+      </Show>
     </VoicePanel>
   );
 }
 
+// the sounds load with the first open
+const SoundboardPicker = lazy(
+  () =>
+    import("@revolt/ui/components/features/voice/soundboard/SoundboardPicker"),
+);
+
+const SoundboardAbove = styled("div", {
+  base: {
+    position: "fixed",
+    zIndex: 20,
+    boxSizing: "border-box",
+  },
+});
+
 const VoicePanel = styled("div", {
   base: {
+    position: "relative",
     display: "flex",
     flexDirection: "column",
     gap: "6px",
@@ -388,8 +499,16 @@ const VoiceHead = styled("div", {
 const VoiceActions = styled("div", {
   base: {
     display: "grid",
-    gridTemplateColumns: "1fr 1fr",
+    // camera, screen and (on a server) the soundboard, side by side
+    gridAutoFlow: "column",
+    gridAutoColumns: "minmax(0, 1fr)",
     gap: "6px",
+    "& span": {
+      minWidth: 0,
+      overflow: "hidden",
+      textOverflow: "ellipsis",
+      whiteSpace: "nowrap",
+    },
   },
 });
 

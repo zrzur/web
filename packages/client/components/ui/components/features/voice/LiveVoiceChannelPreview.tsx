@@ -7,8 +7,8 @@ import {
   useTracks,
 } from "solid-livekit-components";
 
-import { Track } from "livekit-client";
 import type { Channel } from "@zrzur/sdk/solid";
+import { Track } from "livekit-client";
 
 import { useVoice } from "@revolt/rtc";
 

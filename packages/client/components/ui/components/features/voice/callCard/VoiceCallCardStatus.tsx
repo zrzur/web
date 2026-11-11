@@ -7,7 +7,14 @@ import { Button } from "@revolt/ui/components/design/Button";
 
 import { SignalBars } from "../SignalBars";
 
-export function VoiceCallCardStatus(props: { pip?: boolean }) {
+/**
+ * @param props.noticesOnly Leave out the signal bars and "Connected": the
+ *   voice card at the bottom of the channel list already shows them (desktop)
+ */
+export function VoiceCallCardStatus(props: {
+  pip?: boolean;
+  noticesOnly?: boolean;
+}) {
   const voice = useVoice();
   const { t } = useLingui();
 
@@ -53,8 +60,10 @@ export function VoiceCallCardStatus(props: { pip?: boolean }) {
       <Show when={voice.error()}>
         <span role="alert">{voice.error()}</span>
       </Show>
-      <SignalBars state={voice.state()} size={18} />{" "}
-      <FadeOut fade={voice.state() === "CONNECTED"}>{text()}</FadeOut>
+      <Show when={!props.noticesOnly}>
+        <SignalBars state={voice.state()} size={18} />{" "}
+        <FadeOut fade={voice.state() === "CONNECTED"}>{text()}</FadeOut>
+      </Show>
       <Notice role="status">{notice()}</Notice>
       {/* talking was turned on with the global toggle (desktop app) */}
       <Show when={voice.pttLatched()}>

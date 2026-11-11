@@ -1606,7 +1606,6 @@ msgid "discover.paid.ad"
 msgstr ""
 
 #: components/app/interface/settings/server/soundboard/SoundLibrary.tsx
-#: components/modal/modals/AddBot.tsx
 #: components/modal/modals/AddMembersToGroup.tsx
 #: src/interface/channels/text/Composition.tsx
 #: src/interface/Discover.tsx
@@ -1708,6 +1707,7 @@ msgstr ""
 msgid "Add at least two answers."
 msgstr ""
 
+#: components/modal/modals/AddBot.tsx
 #: components/ui/components/features/messaging/elements/BotInvite.tsx
 #: components/ui/components/features/profiles/ProfileActions.tsx
 msgid "Add bot"
@@ -1750,6 +1750,10 @@ msgstr ""
 
 #: components/app/interface/settings/user/oauthScopes.ts
 msgid "Add its bot to a server you manage"
+msgstr ""
+
+#: components/modal/modals/AddBot.tsx
+msgid "Add its commands there"
 msgstr ""
 
 #: components/app/interface/settings/user/plugins/text.ts
@@ -1832,6 +1836,7 @@ msgstr ""
 msgid "Add to folder"
 msgstr ""
 
+#: components/modal/modals/AddBot.tsx
 #: src/interface/Discover.tsx
 #: src/interface/OAuth.tsx
 msgid "Add to server"
@@ -2946,6 +2951,7 @@ msgstr ""
 #: components/app/interface/settings/user/profile/CreatorStudio.tsx
 #: components/auth/src/flows/Flow.tsx
 #: components/modal/lib/CreateServerFlow.tsx
+#: components/modal/modals/AddBot.tsx
 #: components/modal/modals/MFAFlow.tsx
 #: components/modal/modals/ReportContent.tsx
 #: src/interface/channels/AgeGate.tsx
@@ -3623,7 +3629,6 @@ msgstr ""
 
 #: components/app/interface/settings/user/voice/VoiceInputOptions.tsx
 #: src/interface/channels/text/Composition.tsx
-#: src/interface/navigation/channels/AccountBar.tsx
 msgid "Camera"
 msgstr ""
 
@@ -5123,6 +5128,7 @@ msgstr ""
 
 #: components/auth/src/flows/FlowLogin.tsx
 #: components/client/AgePrompt.tsx
+#: components/modal/modals/AddBot.tsx
 #: components/modal/modals/JoinServer.tsx
 #: components/modal/modals/LinkWarning.tsx
 #: components/modal/modals/MFAEnableTOTP.tsx
@@ -6327,8 +6333,8 @@ msgstr ""
 
 #. placeholder {0}: props.invite.username
 #: components/modal/modals/AddBot.tsx
-msgid "Description provided by {0}"
-msgstr "Kuvauksen kirjoitti {0}"
+#~ msgid "Description provided by {0}"
+#~ msgstr "Kuvauksen kirjoitti {0}"
 
 #: components/app/interface/settings/user/appearance/AppearanceMenu.tsx
 msgid "Desert Dawn"
@@ -9857,6 +9863,10 @@ msgstr ""
 msgid "Join the line"
 msgstr ""
 
+#: components/modal/modals/AddBot.tsx
+msgid "Join the server you choose"
+msgstr ""
+
 #: components/ui/components/features/voice/callCard/VoiceCallCardPreview.tsx
 #: src/interface/channels/ChannelHeader.tsx
 msgid "Join the voice channel"
@@ -12910,6 +12920,10 @@ msgstr ""
 
 #: components/modal/modals/MoveSupercharge.tsx
 msgid "No servers to show."
+msgstr ""
+
+#: components/ui/components/features/voice/soundboard/SoundboardPicker.tsx
+msgid "No sounds here yet. Press one to add it to this server and play it."
 msgstr ""
 
 #: components/app/interface/settings/server/soundboard/SoundLibrary.tsx
@@ -17000,8 +17014,8 @@ msgid "Scotland"
 msgstr ""
 
 #: src/interface/navigation/channels/AccountBar.tsx
-msgid "Screen"
-msgstr ""
+#~ msgid "Screen"
+#~ msgstr ""
 
 #. placeholder {0}: props.name
 #: components/ui/components/features/voice/StreamPreviewCard.tsx
@@ -17229,6 +17243,7 @@ msgid "Security issue (private)"
 msgstr ""
 
 #: components/ui/components/features/profiles/ProfileTiles.tsx
+#: components/ui/components/features/voice/soundboard/SoundboardPicker.tsx
 #: src/interface/Discover.tsx
 #: src/interface/Home.tsx
 msgid "See all"
@@ -17858,6 +17873,7 @@ msgstr ""
 #: components/ui/components/features/messaging/elements/TextEmbed.tsx
 #: components/ui/components/features/profiles/ProfileBio.tsx
 #: components/ui/components/features/profiles/ProfileTiles.tsx
+#: components/ui/components/features/voice/soundboard/SoundboardPicker.tsx
 msgid "Show less"
 msgstr ""
 
@@ -18357,6 +18373,7 @@ msgstr ""
 #: components/app/interface/settings/user/voice/SoundboardOptions.tsx
 #: components/ui/components/features/voice/soundboard/SoundboardButton.tsx
 #: components/ui/components/features/voice/soundboard/SoundboardPicker.tsx
+#: src/interface/navigation/channels/AccountBar.tsx
 msgid "Soundboard"
 msgstr ""
 
@@ -20450,6 +20467,10 @@ msgstr "Tämä on muistiinpanojesi alku."
 msgid "This isn't a voice channel."
 msgstr ""
 
+#: components/modal/modals/AddBot.tsx
+msgid "This lets the bot:"
+msgstr ""
+
 #: components/i18n/errors.tsx
 msgid "This link couldn't be loaded."
 msgstr ""
@@ -22373,6 +22394,10 @@ msgstr ""
 msgid "wants to access your Zrzur account"
 msgstr ""
 
+#: components/modal/modals/AddBot.tsx
+msgid "wants to join one of your servers"
+msgstr ""
+
 #: src/interface/designs/Looks.tsx
 msgid "Warm"
 msgstr ""
@@ -22660,6 +22685,11 @@ msgstr ""
 
 #: components/app/interface/settings/server/apps/ServerAppPage.tsx
 msgid "What it can do"
+msgstr ""
+
+#. placeholder {0}: place().name
+#: components/modal/modals/AddBot.tsx
+msgid "What it may do on <0>{0}</0>"
 msgstr ""
 
 #: components/app/interface/settings/server/pages.tsx
@@ -23439,6 +23469,10 @@ msgstr "Sinut on lukittu ulos, koska syötit väärän salasanan liian monta ker
 #~ msgid "You have no friends in common yet."
 #~ msgstr ""
 
+#: components/modal/modals/AddBot.tsx
+msgid "You have no server to add it to: you need Manage Server there."
+msgstr ""
+
 #: components/app/interface/safety/labels.tsx
 msgid "You have several recent violations."
 msgstr ""
@@ -23521,6 +23555,10 @@ msgstr ""
 
 #: components/app/interface/settings/server/LobbyRoleQuestionsEditor.tsx
 msgid "You need Assign Roles permission to change these questions."
+msgstr ""
+
+#: components/modal/modals/AddBot.tsx
+msgid "You need Manage Server on that server."
 msgstr ""
 
 #: src/interface/developers/docs/GettingStarted.tsx

@@ -230,15 +230,28 @@ export default function SoundLibrary(props: {
                       <Meta>{t`${seconds(sound.duration_ms)} s`}</Meta>
                     </Label>
                     <Actions>
+                      {/* the same quiet play button as the notification
+                          sounds in settings: a triangle, a speaker while
+                          it plays */}
                       <IconButton
-                        size="sm"
-                        variant="tonal"
+                        size="xs"
+                        variant="toolbar"
                         aria-label={t`Listen to ${name(sound)}`}
                         aria-pressed={playing() === sound.id}
                         data-preview-sound={sound.id}
+                        data-playing={playing() === sound.id}
+                        use:floating={{
+                          tooltip: {
+                            placement: "top",
+                            content: t`Listen to ${name(sound)}`,
+                          },
+                        }}
                         onPress={() => void preview(sound)}
                       >
-                        <Icon name="speaker-high" size={18} />
+                        <Icon
+                          name={playing() === sound.id ? "speaker-high" : "play"}
+                          size={16}
+                        />
                       </IconButton>
                       <Show when={props.canAdd}>
                         <Show

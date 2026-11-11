@@ -12,6 +12,7 @@ import {
 import { TrackLoop } from "solid-livekit-components";
 import { styled } from "styled-system/jsx";
 
+import { useDevice } from "@revolt/common";
 import { InRoom, useVoice } from "@revolt/rtc";
 import { IconButton } from "@revolt/ui/components/design";
 import { Symbol } from "@revolt/ui/components/utils/Symbol";
@@ -36,7 +37,13 @@ const SoundboardPicker = lazy(() => import("../soundboard/SoundboardPicker"));
  */
 export function VoiceCallCardActiveRoom() {
   const voice = useVoice();
+  const { layout } = useDevice();
   const collapsed = createMemo(() => voice.layout() === "collapsed");
+  // desktop: every call button sits in the voice card at the bottom of the
+  // channel list (AccountBar), so the room shows no second row of them. A
+  // phone has no such card, and full screen covers it: there they stay here.
+  const ownControls = () =>
+    layout() === "phone" || voice.layout() === "fullscreen";
   // a new call starts with the soundboard closed
   createEffect(
     on(
@@ -54,6 +61,7 @@ export function VoiceCallCardActiveRoom() {
       <Show
         when={
           !collapsed() &&
+          ownControls() &&
           soundboardOpen() &&
           voice.channel()?.server &&
           voice.channel()
@@ -61,11 +69,15 @@ export function VoiceCallCardActiveRoom() {
       >
         {(channel) => <SoundboardPicker channel={channel()} />}
       </Show>
-      <VoiceCallControls>
+      <VoiceCallControls phone={layout() === "phone"}>
         <VoiceCallControlHolder left collapsed={collapsed()}>
-          <VoiceCallCardStatus />
+          {/* the voice card already says "Connected" on desktop: here only
+              the notices (reconnected, a device unplugged, rejoin) */}
+          <VoiceCallCardStatus noticesOnly={!ownControls()} />
         </VoiceCallControlHolder>
-        <VoiceCallCardActions size="sm" />
+        <Show when={ownControls()}>
+          <VoiceCallCardActions size="sm" />
+        </Show>
         <VoiceCallControlHolder right collapsed={collapsed()}>
           <LayoutButtons />
         </VoiceCallControlHolder>
@@ -239,6 +251,25 @@ const VoiceCallControls = styled("div", {
     display: "flex",
     flexShrink: 0,
     overflow: "hidden",
+  },
+  variants: {
+    // a phone is too narrow for notices, buttons and full screen in one
+    // row: the buttons get the whole width, notices sit above them, and
+    // full screen goes (the call already fills the screen)
+    phone: {
+      true: {
+        flexDirection: "column",
+        alignItems: "center",
+        gap: "4px",
+        "& > div:first-child": {
+          flex: "0 0 auto",
+          padding: 0,
+          justifyContent: "center",
+          "&:empty": { display: "none" },
+        },
+        "& > div:last-child": { display: "none" },
+      },
+    },
   },
 });
 

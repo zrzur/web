@@ -1639,7 +1639,6 @@ msgid "discover.paid.ad"
 msgstr "Ad"
 
 #: components/app/interface/settings/server/soundboard/SoundLibrary.tsx
-#: components/modal/modals/AddBot.tsx
 #: components/modal/modals/AddMembersToGroup.tsx
 #: src/interface/channels/text/Composition.tsx
 #: src/interface/Discover.tsx
@@ -1741,6 +1740,7 @@ msgstr "Add at least one word or phrase."
 msgid "Add at least two answers."
 msgstr "Add at least two answers."
 
+#: components/modal/modals/AddBot.tsx
 #: components/ui/components/features/messaging/elements/BotInvite.tsx
 #: components/ui/components/features/profiles/ProfileActions.tsx
 msgid "Add bot"
@@ -1792,6 +1792,10 @@ msgstr "Add it"
 #: components/app/interface/settings/user/oauthScopes.ts
 msgid "Add its bot to a server you manage"
 msgstr "Add its bot to a server you manage"
+
+#: components/modal/modals/AddBot.tsx
+msgid "Add its commands there"
+msgstr "Add its commands there"
 
 #: components/app/interface/settings/user/plugins/text.ts
 msgid "Add keyboard shortcuts"
@@ -1873,6 +1877,7 @@ msgstr "Add to favourites"
 msgid "Add to folder"
 msgstr "Add to folder"
 
+#: components/modal/modals/AddBot.tsx
 #: src/interface/Discover.tsx
 #: src/interface/OAuth.tsx
 msgid "Add to server"
@@ -3039,6 +3044,7 @@ msgstr "Azerbaijan"
 #: components/app/interface/settings/user/profile/CreatorStudio.tsx
 #: components/auth/src/flows/Flow.tsx
 #: components/modal/lib/CreateServerFlow.tsx
+#: components/modal/modals/AddBot.tsx
 #: components/modal/modals/MFAFlow.tsx
 #: components/modal/modals/ReportContent.tsx
 #: src/interface/channels/AgeGate.tsx
@@ -3721,7 +3727,6 @@ msgstr "Cambodia"
 
 #: components/app/interface/settings/user/voice/VoiceInputOptions.tsx
 #: src/interface/channels/text/Composition.tsx
-#: src/interface/navigation/channels/AccountBar.tsx
 msgid "Camera"
 msgstr "Camera"
 
@@ -5306,6 +5311,7 @@ msgstr "Context menus"
 
 #: components/auth/src/flows/FlowLogin.tsx
 #: components/client/AgePrompt.tsx
+#: components/modal/modals/AddBot.tsx
 #: components/modal/modals/JoinServer.tsx
 #: components/modal/modals/LinkWarning.tsx
 #: components/modal/modals/MFAEnableTOTP.tsx
@@ -6586,8 +6592,8 @@ msgstr "Description (optional)"
 
 #. placeholder {0}: props.invite.username
 #: components/modal/modals/AddBot.tsx
-msgid "Description provided by {0}"
-msgstr "Description provided by {0}"
+#~ msgid "Description provided by {0}"
+#~ msgstr "Description provided by {0}"
 
 #: components/app/interface/settings/user/appearance/AppearanceMenu.tsx
 msgid "Desert Dawn"
@@ -10284,6 +10290,10 @@ msgstr "Join the closed beta program by invitation or request. It is shown while
 msgid "Join the line"
 msgstr "Join the line"
 
+#: components/modal/modals/AddBot.tsx
+msgid "Join the server you choose"
+msgstr "Join the server you choose"
+
 #: components/ui/components/features/voice/callCard/VoiceCallCardPreview.tsx
 #: src/interface/channels/ChannelHeader.tsx
 msgid "Join the voice channel"
@@ -13469,6 +13479,10 @@ msgstr "No servers or friends in common."
 #: components/modal/modals/MoveSupercharge.tsx
 msgid "No servers to show."
 msgstr "No servers to show."
+
+#: components/ui/components/features/voice/soundboard/SoundboardPicker.tsx
+msgid "No sounds here yet. Press one to add it to this server and play it."
+msgstr "No sounds here yet. Press one to add it to this server and play it."
 
 #: components/app/interface/settings/server/soundboard/SoundLibrary.tsx
 msgid "No sounds match your search."
@@ -17800,8 +17814,8 @@ msgid "Scotland"
 msgstr "Scotland"
 
 #: src/interface/navigation/channels/AccountBar.tsx
-msgid "Screen"
-msgstr "Screen"
+#~ msgid "Screen"
+#~ msgstr "Screen"
 
 #. placeholder {0}: props.name
 #: components/ui/components/features/voice/StreamPreviewCard.tsx
@@ -18045,6 +18059,7 @@ msgid "Security issue (private)"
 msgstr "Security issue (private)"
 
 #: components/ui/components/features/profiles/ProfileTiles.tsx
+#: components/ui/components/features/voice/soundboard/SoundboardPicker.tsx
 #: src/interface/Discover.tsx
 #: src/interface/Home.tsx
 msgid "See all"
@@ -18702,6 +18717,7 @@ msgstr "Show keyboard shortcuts"
 #: components/ui/components/features/messaging/elements/TextEmbed.tsx
 #: components/ui/components/features/profiles/ProfileBio.tsx
 #: components/ui/components/features/profiles/ProfileTiles.tsx
+#: components/ui/components/features/voice/soundboard/SoundboardPicker.tsx
 msgid "Show less"
 msgstr "Show less"
 
@@ -19200,6 +19216,7 @@ msgstr "Sound"
 #: components/app/interface/settings/user/voice/SoundboardOptions.tsx
 #: components/ui/components/features/voice/soundboard/SoundboardButton.tsx
 #: components/ui/components/features/voice/soundboard/SoundboardPicker.tsx
+#: src/interface/navigation/channels/AccountBar.tsx
 msgid "Soundboard"
 msgstr "Soundboard"
 
@@ -21374,6 +21391,10 @@ msgstr "This is the start of your notes."
 msgid "This isn't a voice channel."
 msgstr "This isn't a voice channel."
 
+#: components/modal/modals/AddBot.tsx
+msgid "This lets the bot:"
+msgstr "This lets the bot:"
+
 #: components/i18n/errors.tsx
 msgid "This link couldn't be loaded."
 msgstr "This link couldn't be loaded."
@@ -23394,6 +23415,10 @@ msgstr "Waiting for your payment"
 msgid "wants to access your Zrzur account"
 msgstr "wants to access your Zrzur account"
 
+#: components/modal/modals/AddBot.tsx
+msgid "wants to join one of your servers"
+msgstr "wants to join one of your servers"
+
 #: src/interface/designs/Looks.tsx
 msgid "Warm"
 msgstr "Warm"
@@ -23706,6 +23731,11 @@ msgstr "What it adds"
 #: components/app/interface/settings/server/apps/ServerAppPage.tsx
 msgid "What it can do"
 msgstr "What it can do"
+
+#. placeholder {0}: place().name
+#: components/modal/modals/AddBot.tsx
+msgid "What it may do on <0>{0}</0>"
+msgstr "What it may do on <0>{0}</0>"
 
 #: components/app/interface/settings/server/pages.tsx
 msgid "What members are notified about until they choose for themselves."
@@ -24525,6 +24555,10 @@ msgstr "You have been locked out for entering a wrong password multiple times. P
 #~ msgid "You have no friends in common yet."
 #~ msgstr "You have no friends in common yet."
 
+#: components/modal/modals/AddBot.tsx
+msgid "You have no server to add it to: you need Manage Server there."
+msgstr "You have no server to add it to: you need Manage Server there."
+
 #: components/app/interface/safety/labels.tsx
 msgid "You have several recent violations."
 msgstr "You have several recent violations."
@@ -24608,6 +24642,10 @@ msgstr "You need an invite to sign up."
 #: components/app/interface/settings/server/LobbyRoleQuestionsEditor.tsx
 msgid "You need Assign Roles permission to change these questions."
 msgstr "You need Assign Roles permission to change these questions."
+
+#: components/modal/modals/AddBot.tsx
+msgid "You need Manage Server on that server."
+msgstr "You need Manage Server on that server."
 
 #: src/interface/developers/docs/GettingStarted.tsx
 #~ msgid "You need Node.js 22 or newer. @zrzur/sdk/bot, the bot part of the official Zrzur library, handles the gateway, commands and replies for you. You can also work without any library: the API is plain HTTP and WebSocket."
