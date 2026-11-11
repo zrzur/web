@@ -91,6 +91,8 @@ export function AddBotModal(props: DialogProps & Modals & { type: "add_bot" }) {
   const chosen = () =>
     places().find((entry) => entry.value === form.controls.id.value[0])?.item;
   const toServer = () => chosen() instanceof Server;
+  // a group has no permissions: it is added from the first step
+  const toGroup = () => !!chosen() && !toServer();
 
   async function add() {
     const place = chosen();
@@ -133,10 +135,10 @@ export function AddBotModal(props: DialogProps & Modals & { type: "add_bot" }) {
           ? [
               { text: <Trans>Cancel</Trans> },
               {
-                text: toServer() ? (
-                  <Trans>Continue</Trans>
-                ) : (
+                text: toGroup() ? (
                   <Trans>Add bot</Trans>
+                ) : (
+                  <Trans>Continue</Trans>
                 ),
                 onClick: () => {
                   if (toServer()) setStep("permissions");
@@ -261,7 +263,7 @@ export function AddBotModal(props: DialogProps & Modals & { type: "add_bot" }) {
                   selectHeight={`${Math.min(Math.max(places().length, 1), 4) * 44}px`}
                 >
                   {(item, selected) => (
-                    <Item selected={selected}>
+                    <Item selected={selected} data-add-bot-place={item.id}>
                       <Ripple />
                       <Avatar
                         src={item.animatedIconURL}
