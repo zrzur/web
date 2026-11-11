@@ -127,21 +127,47 @@ const Foot = styled("div", {
       lineHeight: "20px",
       color: "var(--z-fg-muted)",
     },
-    // our own "more" button (owner, 2026-11-11): see-through pink-red with
-    // a fine dot pattern and a dotted edge, not the plain grey tonal button.
-    // !important: the Button's atomic classes would otherwise win by order.
+    // our own "more" button (owner, 2026-11-11), in the website's way: a
+    // dark panel with a soft pink-red glow from its lower edge, and the
+    // flock's dots only as a touch in one corner, fading out. !important:
+    // the Button's atomic classes would otherwise win by order.
     "& button": {
-      minWidth: "160px",
+      position: "relative",
+      isolation: "isolate",
+      overflow: "hidden",
+      minWidth: "168px",
       color: "var(--z-fg-primary) !important",
       border:
-        "1.5px dotted color-mix(in srgb, var(--z-accent) 80%, transparent) !important",
+        "1px solid color-mix(in srgb, var(--z-accent) 38%, transparent) !important",
       background:
-        "radial-gradient(color-mix(in srgb, var(--z-accent) 38%, transparent) 1px, transparent 1.5px) 0 0 / 8px 8px, color-mix(in srgb, var(--z-accent) 10%, transparent) !important",
-      transition: "background 0.15s ease, border-color 0.15s ease",
-      _hover: {
-        borderColor: "var(--z-accent) !important",
+        "radial-gradient(ellipse 75% 90% at 50% 125%, color-mix(in srgb, var(--z-accent) 26%, transparent), transparent 72%), var(--z-bg-nav, var(--z-bg-raised)) !important",
+      transition: "background 0.2s ease, border-color 0.2s ease",
+      // the dots: a small patch at the reading end's top corner
+      "&::before": {
+        content: '""',
+        position: "absolute",
+        inset: 0,
+        zIndex: -1,
+        pointerEvents: "none",
         background:
-          "radial-gradient(color-mix(in srgb, var(--z-accent) 55%, transparent) 1px, transparent 1.5px) 0 0 / 8px 8px, color-mix(in srgb, var(--z-accent) 18%, transparent) !important",
+          "radial-gradient(circle, color-mix(in srgb, var(--z-accent) 70%, transparent) 1px, transparent 1.5px) 0 0 / 7px 7px",
+        maskImage:
+          "radial-gradient(ellipse 45% 85% at 100% 0%, black, transparent 75%)",
+        opacity: 0.55,
+        transition: "opacity 0.2s ease",
+      },
+      _rtl: {
+        "&::before": {
+          maskImage:
+            "radial-gradient(ellipse 45% 85% at 0% 0%, black, transparent 75%)",
+        },
+      },
+      _hover: {
+        borderColor:
+          "color-mix(in srgb, var(--z-accent) 65%, transparent) !important",
+        background:
+          "radial-gradient(ellipse 80% 100% at 50% 120%, color-mix(in srgb, var(--z-accent) 38%, transparent), transparent 74%), var(--z-bg-nav, var(--z-bg-raised)) !important",
+        "&::before": { opacity: 0.85 },
       },
       _focusVisible: {
         outline: "2px solid var(--z-focus, var(--z-accent))",

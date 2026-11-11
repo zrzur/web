@@ -12,7 +12,7 @@
 
 ### Design polish
 
-* **Show more (Discover and Designs):** a see-through pink-red button with a fine dot pattern and a dotted edge, brighter on hover, instead of the plain grey one.
+* **Show more (Discover and Designs):** in the website's way: a dark panel with a soft pink-red glow from its lower edge, a thin pink-red edge and a small patch of the flock's dots fading from one top corner (the reading end, so it flips in Arabic); brighter on hover.
 
 * **Select messages:** no longer a button in the desktop channel header; it starts from a message's own menu (on phones also from the header's More sheet), with a check-box icon instead of the list icon. While selecting, "Select all" picks every loaded message a bulk delete still takes (newest first, at most 100).
 * **Event date and time:** the day and the time sit on one line at one height; the pair is named by its heading ("Starts", "Ends") instead of a separate "Time" label.
