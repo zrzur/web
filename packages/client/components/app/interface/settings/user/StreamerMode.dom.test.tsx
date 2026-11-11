@@ -93,9 +93,9 @@ describe("streamer mode switch", () => {
 
 describe("what streamer mode hides", () => {
   const user = {
-    username: "maher",
+    username: "sam",
     discriminator: "4242",
-    displayName: "Maher",
+    displayName: "Sam",
     createdAt: new Date(),
   } as never;
 

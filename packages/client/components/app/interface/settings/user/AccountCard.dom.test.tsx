@@ -18,7 +18,7 @@ vi.mock("@revolt/state", () => ({
 }));
 vi.mock("@revolt/client", () => ({
   useClient: () => () => ({
-    user: { displayName: "Maher", animatedAvatarURL: "", presence: "Online" },
+    user: { displayName: "Sam", animatedAvatarURL: "", presence: "Online" },
   }),
 }));
 
