@@ -127,6 +127,27 @@ const Foot = styled("div", {
       lineHeight: "20px",
       color: "var(--z-fg-muted)",
     },
-    "& button": { minWidth: "160px" },
+    // our own "more" button (owner, 2026-11-11): see-through pink-red with
+    // a fine dot pattern and a dotted edge, not the plain grey tonal button.
+    // !important: the Button's atomic classes would otherwise win by order.
+    "& button": {
+      minWidth: "160px",
+      color: "var(--z-fg-primary) !important",
+      border:
+        "1.5px dotted color-mix(in srgb, var(--z-accent) 80%, transparent) !important",
+      background:
+        "radial-gradient(color-mix(in srgb, var(--z-accent) 38%, transparent) 1px, transparent 1.5px) 0 0 / 8px 8px, color-mix(in srgb, var(--z-accent) 10%, transparent) !important",
+      transition: "background 0.15s ease, border-color 0.15s ease",
+      _hover: {
+        borderColor: "var(--z-accent) !important",
+        background:
+          "radial-gradient(color-mix(in srgb, var(--z-accent) 55%, transparent) 1px, transparent 1.5px) 0 0 / 8px 8px, color-mix(in srgb, var(--z-accent) 18%, transparent) !important",
+      },
+      _focusVisible: {
+        outline: "2px solid var(--z-focus, var(--z-accent))",
+        outlineOffset: "2px",
+      },
+      "&:disabled": { opacity: 0.75 },
+    },
   },
 });
