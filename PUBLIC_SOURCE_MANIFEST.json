@@ -1912,8 +1912,8 @@
     },
     {
       "path": "packages/client/components/app/interface/settings/user/AccountCard.dom.test.tsx",
-      "sha256": "cadf2f2261187eb12f5aef2ed9d1e9378c12465e9e0fedb2c931e4c1d1decd9a",
-      "bytes": 2889,
+      "sha256": "91af90797223654d4c4c91876d0673815f5394531b5a4dc804de5550add18367",
+      "bytes": 2887,
       "category": "synthetic-test-source-or-fixture"
     },
     {
@@ -1978,8 +1978,8 @@
     },
     {
       "path": "packages/client/components/app/interface/settings/user/StreamerMode.dom.test.tsx",
-      "sha256": "6b99bf841771d745881bacfcca7bc0302d04d06a211c120ba4dbcf5106fe1bc2",
-      "bytes": 4070,
+      "sha256": "6ace3c21b55d8b10a04dc388e01cf8abc2a96c104545b16f926569a234e754f5",
+      "bytes": 4066,
       "category": "synthetic-test-source-or-fixture"
     },
     {
