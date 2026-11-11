@@ -12,15 +12,20 @@ import {
   playSound,
   soundboardOf,
 } from "@revolt/rtc/voiceExtrasStore";
-import { Button, IconButton } from "@revolt/ui/components/design";
+import { IconButton } from "@revolt/ui/components/design";
 import { Icon } from "@revolt/ui/icons/Icon";
 
 import { setSoundboardOpen } from "./soundboardOpen";
 
+/** Tiles shown before "See all": two rows of three */
+export const SOUNDBOARD_FIRST = 6;
+
 /**
- * The server's sounds, as buttons: press one and everyone in the call hears
- * it. Lazy: loads with the first open, and the list is fetched once per
- * server (events keep it current).
+ * The server's sounds as tiles in a small card over the call's controls:
+ * press one and everyone in the call hears it. Two rows first, "See all"
+ * for the rest. Escape or the close button shuts it. Lazy: loads with the
+ * first open, and the list is fetched once per server (events keep it
+ * current).
  */
 export default function SoundboardPicker(props: { channel: Channel }) {
   const { t } = useLingui();
@@ -39,8 +44,11 @@ export default function SoundboardPicker(props: { channel: Channel }) {
 
   const [error, setError] = createSignal<string>();
   const [playing, setPlaying] = createSignal<string>();
+  const [all, setAll] = createSignal(false);
+  const shown = () => (all() ? sounds() : sounds().slice(0, SOUNDBOARD_FIRST));
 
   async function play(id: string) {
+    if (playing()) return;
     setError(undefined);
     setPlaying(id);
     try {
@@ -53,19 +61,39 @@ export default function SoundboardPicker(props: { channel: Channel }) {
   }
 
   return (
-    <Panel data-soundboard aria-label={t`Soundboard`}>
+    <Card
+      data-soundboard
+      aria-label={t`Soundboard`}
+      onKeyDown={(event) => {
+        if (event.key !== "Escape") return;
+        event.stopPropagation();
+        setSoundboardOpen(false);
+      }}
+    >
       <Head>
-        <Icon name="music-note" size={20} />
+        <Icon name="music-note" size={18} />
         <Title>
           <Trans>Soundboard</Trans>
         </Title>
+        <Show when={sounds().length > SOUNDBOARD_FIRST}>
+          <MoreLink
+            type="button"
+            data-soundboard-all
+            aria-expanded={all()}
+            onClick={() => setAll(!all())}
+          >
+            <Show when={all()} fallback={<Trans>See all</Trans>}>
+              <Trans>Show less</Trans>
+            </Show>
+          </MoreLink>
+        </Show>
         <IconButton
           size="xs"
           variant="toolbar"
           aria-label={t`Close soundboard`}
           onPress={() => setSoundboardOpen(false)}
         >
-          <Icon name="x" size={18} />
+          <Icon name="x" size={16} />
         </IconButton>
       </Head>
 
@@ -94,23 +122,27 @@ export default function SoundboardPicker(props: { channel: Channel }) {
               </Muted>
             }
           >
-            <Grid>
-              <For each={sounds()}>
+            <Grid data-all={all() || undefined}>
+              <For each={shown()}>
                 {(sound) => (
-                  <Button
-                    size="sm"
-                    variant="tonal"
+                  <Tile
+                    type="button"
                     data-sound={sound._id}
-                    isDisabled={!!playing()}
-                    onPress={() => play(sound._id)}
+                    data-playing={playing() === sound._id || undefined}
+                    aria-disabled={!!playing() || undefined}
+                    title={sound.name}
+                    onClick={() => void play(sound._id)}
                   >
-                    <Show when={sound.emoji}>
-                      <span aria-hidden="true">
+                    <TileIcon aria-hidden="true">
+                      <Show
+                        when={sound.emoji}
+                        fallback={<Icon name="music-note" size={16} />}
+                      >
                         <TextWithEmoji content={sound.emoji!} />
-                      </span>
-                    </Show>
+                      </Show>
+                    </TileIcon>
                     <SoundName>{sound.name}</SoundName>
-                  </Button>
+                  </Tile>
                 )}
               </For>
             </Grid>
@@ -121,21 +153,23 @@ export default function SoundboardPicker(props: { channel: Channel }) {
       <Show when={error()}>
         <ErrorLine role="alert">{error()}</ErrorLine>
       </Show>
-    </Panel>
+    </Card>
   );
 }
 
-const Panel = styled("section", {
+const Card = styled("section", {
   base: {
     flexShrink: 0,
+    alignSelf: "center",
+    width: "min(440px, 100%)",
     display: "flex",
     flexDirection: "column",
     gap: "12px",
-    padding: "12px 16px",
-    borderRadius: "var(--z-radius, 10px)",
+    padding: "12px",
+    borderRadius: "var(--z-radius-md, 14px)",
     border: "1px solid var(--z-border-subtle)",
-    // the same surface as the call tiles below it (ParticipantTile)
-    background: "var(--z-bg-nav, var(--z-bg-sidebar))",
+    background: "var(--z-bg-raised, var(--z-bg-nav))",
+    boxShadow: "0 12px 32px rgb(0 0 0 / 0.32)",
     color: "var(--z-fg-primary)",
     "--z-icon-color": "var(--z-icon-muted)",
   },
@@ -146,6 +180,7 @@ const Head = styled("div", {
     display: "flex",
     alignItems: "center",
     gap: "8px",
+    paddingInline: "4px",
     // phones: the close button is a 44 px target
     _phone: { "& button": { minWidth: "44px", minHeight: "44px" } },
   },
@@ -157,23 +192,77 @@ const Title = styled("h2", {
     margin: 0,
     fontSize: "14px",
     lineHeight: "20px",
+    fontWeight: 650,
+  },
+});
+
+const MoreLink = styled("button", {
+  base: {
+    border: "none",
+    background: "none",
+    padding: "4px 6px",
+    borderRadius: "var(--z-radius-sm, 6px)",
+    font: "inherit",
+    fontSize: "13px",
     fontWeight: 600,
+    color: "var(--z-link, var(--z-accent))",
+    cursor: "pointer",
+    _hover: { textDecoration: "underline" },
+    _focusVisible: { outline: "2px solid var(--z-focus)" },
   },
 });
 
 const Grid = styled("div", {
   base: {
     display: "grid",
-    gridTemplateColumns: "repeat(auto-fill, minmax(132px, 1fr))",
+    gridTemplateColumns: "repeat(3, minmax(0, 1fr))",
     gap: "8px",
-    maxHeight: "200px",
-    overflowY: "auto",
-    "& button": {
-      justifyContent: "flex-start",
-      gap: "8px",
-      minWidth: 0,
-      _phone: { minHeight: "44px" },
+    "&[data-all]": { maxHeight: "232px", overflowY: "auto" },
+    _phone: { gridTemplateColumns: "repeat(2, minmax(0, 1fr))" },
+  },
+});
+
+const Tile = styled("button", {
+  base: {
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    gap: "8px",
+    minWidth: 0,
+    height: "44px",
+    paddingInline: "10px",
+    border: "1px solid transparent",
+    borderRadius: "var(--z-radius, 10px)",
+    background: "var(--z-bg-nav, var(--z-bg-sidebar))",
+    color: "var(--z-fg-primary)",
+    font: "inherit",
+    fontSize: "13px",
+    fontWeight: 600,
+    cursor: "pointer",
+    transition: "background 0.12s ease, border-color 0.12s ease",
+    _hover: {
+      background: "color-mix(in srgb, var(--z-accent) 14%, var(--z-bg-nav))",
+      borderColor: "color-mix(in srgb, var(--z-accent) 35%, transparent)",
     },
+    _focusVisible: {
+      outline: "2px solid var(--z-focus)",
+      outlineOffset: "1px",
+    },
+    "&[data-playing]": {
+      borderColor: "var(--z-accent)",
+      background: "color-mix(in srgb, var(--z-accent) 20%, var(--z-bg-nav))",
+    },
+    "&[aria-disabled]:not([data-playing])": { opacity: 0.6, cursor: "wait" },
+  },
+});
+
+const TileIcon = styled("span", {
+  base: {
+    display: "inline-flex",
+    flexShrink: 0,
+    fontSize: "18px",
+    lineHeight: 1,
+    "& img": { width: "20px", height: "20px" },
   },
 });
 
@@ -189,6 +278,7 @@ const SoundName = styled("span", {
 const Muted = styled("p", {
   base: {
     margin: 0,
+    paddingInline: "4px",
     fontSize: "13px",
     lineHeight: "18px",
     color: "var(--z-fg-muted)",
@@ -198,6 +288,7 @@ const Muted = styled("p", {
 const ErrorLine = styled("p", {
   base: {
     margin: 0,
+    paddingInline: "4px",
     fontSize: "13px",
     lineHeight: "18px",
     color: "var(--z-danger)",
