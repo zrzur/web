@@ -146,7 +146,7 @@ for (const locale of locales) {
     await report.step(`${at}: user settings open`, async () => {
       await page.goto(`${APP}/settings`, { waitUntil: "domcontentloaded" });
       await page
-        .getByText(t("Log Out"), { exact: false })
+        .getByText(t("Log out"), { exact: false })
         .or(page.getByText(t("Appearance"), { exact: false }))
         .first()
         .waitFor({ timeout: 20000 });
@@ -366,7 +366,7 @@ for (const locale of locales) {
           await friends(page);
           await page.goto(`${APP}/settings`, { waitUntil: "domcontentloaded" });
           await page
-            .getByText(new RegExp(`^${t("Log Out")}$`, "i"))
+            .getByText(new RegExp(`^${t("Log out")}$`, "i"))
             .last()
             .click({ timeout: 20000 });
           await page.waitForURL(/\/login/, { timeout: 20000 });
@@ -501,6 +501,8 @@ for (const locale of locales) {
           e.firstElementChild.checkVisibility({ contentVisibilityAuto: true }),
         )
           .length;
+      // a long list already starts with rows below the fold skipped, so
+      // the check is relative: pushing the rows out of view skips more
       const before = drawn();
       const spacer = document.createElement("div");
       spacer.style.cssText = "height:6000px;flex-shrink:0";
@@ -511,7 +513,7 @@ for (const locale of locales) {
       return { rows: all.length, before, pushed };
     });
     console.log(`       rail: ${JSON.stringify(rows)}`);
-    if (!(rows.before === rows.rows && rows.pushed < rows.rows))
+    if (!(rows.before > 0 && rows.pushed < rows.before))
       throw new Error(JSON.stringify(rows));
   });
   } finally {
