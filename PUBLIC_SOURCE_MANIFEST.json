@@ -292,8 +292,8 @@
     },
     {
       "path": "CHANGELOG.md",
-      "sha256": "704731a8a8219ba0f89f2c325a446bdbdc6e29f416a0188873e6eccc5fd7ea64",
-      "bytes": 126924,
+      "sha256": "0bb041cebb4ca0b940af12dd9ead21c88a079a9cb435becbe08f9b196118419d",
+      "bytes": 127380,
       "category": "public-documentation"
     },
     {
@@ -568,20 +568,20 @@
     },
     {
       "path": "e2e/stack-runner/create-server-flow.mjs",
-      "sha256": "5172427f3b9fc939ec2f4be6bf0e2c79cc52a267262525381c85efa36ffff6db",
-      "bytes": 43444,
+      "sha256": "3f94ae186133b99fe532a60ed2930fd03aa7296935f7f6aac29e81de76a6a120",
+      "bytes": 42882,
       "category": "synthetic-test-source-or-fixture"
     },
     {
       "path": "e2e/stack-runner/creator-studio.mjs",
-      "sha256": "88f716af2d7913e456abb54309a6d5dca912e89101be2c04183742cba3b963f1",
-      "bytes": 39812,
+      "sha256": "a9c14655070527acde7974e961e0480d4fc44d4a36c40f7eb9a19ca4e2f469a2",
+      "bytes": 40492,
       "category": "synthetic-test-source-or-fixture"
     },
     {
       "path": "e2e/stack-runner/creator-templates.mjs",
-      "sha256": "1999c8816b85398e19f00ca2795f5605b9b9d8aadefe434bb4c7843908822dba",
-      "bytes": 30731,
+      "sha256": "cc815c1c98e351e1cb217623b0eaa0cbe988738ea89e8be0cfa44b886147a56d",
+      "bytes": 32316,
       "category": "synthetic-test-source-or-fixture"
     },
     {
@@ -610,8 +610,8 @@
     },
     {
       "path": "e2e/stack-runner/light-app.mjs",
-      "sha256": "30e4a93b34769e9fa03b0885e908cf00e91f305a846a8edce23a02b0743bde88",
-      "bytes": 24511,
+      "sha256": "e2dfd5d3c534047cd9cecc948c6a5bc5a58fc7ac0121bc09d29be640edeb95cc",
+      "bytes": 24809,
       "category": "synthetic-test-source-or-fixture"
     },
     {
@@ -646,14 +646,14 @@
     },
     {
       "path": "e2e/stack-runner/safety-statement.mjs",
-      "sha256": "5e2ead0b2ff2bf1545d287eadd6f3deffcdafaeb45d41b3d1a4adff570b88acb",
-      "bytes": 11865,
+      "sha256": "9063636300730819a53868329eff19bfe1c3943344f8644afe7e458ea0adea67",
+      "bytes": 13629,
       "category": "synthetic-test-source-or-fixture"
     },
     {
       "path": "e2e/stack-runner/server-settings.mjs",
-      "sha256": "6359064cecfa74df5014819d4654d64aedc5bce7f1fcb88b96e307a0102796e0",
-      "bytes": 58060,
+      "sha256": "178e961387a601f4dd3d48e7216f1d73f4e1b00d1173a0b7034ae1d7decc44a9",
+      "bytes": 60252,
       "category": "synthetic-test-source-or-fixture"
     },
     {
@@ -2916,6 +2916,18 @@
       "path": "packages/client/components/common/lib/buildInfo.ts",
       "sha256": "dc309c7bf91becaa2f1e8c25006052113c5391855331afd698bcdd38102ef432",
       "bytes": 1850,
+      "category": "product-source-or-build-manifest"
+    },
+    {
+      "path": "packages/client/components/common/lib/copyText.test.ts",
+      "sha256": "637efe73e4f91288c99f2b01526c035291ed754d9a4d56d2367192cf2e5ded4d",
+      "bytes": 892,
+      "category": "synthetic-test-source-or-fixture"
+    },
+    {
+      "path": "packages/client/components/common/lib/copyText.ts",
+      "sha256": "d33c3828dd3c166c98f8aac931a784fcb454a451b68feb80a10a89b8b94144ef",
+      "bytes": 589,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -6232,8 +6244,8 @@
     },
     {
       "path": "packages/client/components/ui/components/features/profiles/ProfileIdentity.tsx",
-      "sha256": "10af744d9f1f7d18d048279e72624b1e094c711fe6d86d4ac265e5a4c6beb8b6",
-      "bytes": 7450,
+      "sha256": "4f5259ff074499fcca093ada565a54dc70f49ecf4a20b2933fef92bd23c93d00",
+      "bytes": 7627,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -6862,14 +6874,14 @@
     },
     {
       "path": "packages/client/components/ui/components/utils/Draggable.dom.test.tsx",
-      "sha256": "ba1f871c847ad3ca2a9f59d194528bebacee81f184b56ec7775cba0a11aeb5bd",
-      "bytes": 3622,
+      "sha256": "7f74c2a12a471338ea528107ec2ef7523c94eb649d00d09d00244e5a17eeb2cc",
+      "bytes": 4630,
       "category": "synthetic-test-source-or-fixture"
     },
     {
       "path": "packages/client/components/ui/components/utils/Draggable.tsx",
-      "sha256": "28719268ddd62f926cf8b9db4d296ccc647e3faa6e711c2f414a999090fcfe2a",
-      "bytes": 6888,
+      "sha256": "d03ad82da1287c3ffea3d6c94ef7ed71adcfb58b4aa3715948fc79570e284785",
+      "bytes": 7063,
       "category": "product-source-or-build-manifest"
     },
     {
