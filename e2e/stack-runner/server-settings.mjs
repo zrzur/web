@@ -971,7 +971,8 @@ const roleByName = async (name) =>
   Object.entries((await api(owner, "GET", `/servers/${SERVER}`)).roles ?? {}).find(([, r]) => r.name === name);
 
 test("roles: colour and a permission save, then the role is deleted", async (c) => {
-  const name = `role-${c.lang}-${c.size}-${run}`.slice(0, 28);
+  // its own name: "create a role" leaves one named role-<lang>-<size>-<run>
+  const name = `role-perm-${c.lang}-${c.size}-${run}`.slice(0, 32);
   await openSettings(c.page, c.t, c.phone);
   await goPage(c.page, c.t("Roles"));
   await createRoleInUi(c, name);
@@ -1095,9 +1096,14 @@ test("members: ban from the menu, find the ban, search it, unban", async (c) => 
   c.step = "unban";
   await c.page.getByRole("button", { name: c.t("Unban"), exact: true }).first().click();
   await c.page.getByRole("dialog").getByRole("button", { name: c.t("Unban"), exact: true }).click();
-  await c.page.waitForTimeout(1500);
-  const bans = await api(owner, "GET", `/servers/${SERVER}/bans`);
-  if (bans.bans?.some((b) => b._id.user === me._id)) throw new Error("still banned");
+  // the server may take a moment longer under a full run
+  let banned = true;
+  for (let i = 0; i < 20 && banned; i++) {
+    await c.page.waitForTimeout(500);
+    const bans = await api(owner, "GET", `/servers/${SERVER}/bans`);
+    banned = !!bans.bans?.some((b) => b._id.user === me._id);
+  }
+  if (banned) throw new Error("still banned");
   await ensureLimited();
 });
 
