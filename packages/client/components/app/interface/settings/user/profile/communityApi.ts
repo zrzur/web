@@ -100,7 +100,7 @@ export const COMMUNITY_MAX_DIMENSION = 1024;
 export const EFFECT_MAX_BYTES = 2_000_000;
 
 /** The Creator Terms a creator accepts with an effect (backend constant) */
-export const CREATOR_TERMS_VERSION = "2026-11-07";
+export const CREATOR_TERMS_VERSION = "2026-11-12";
 
 /** What a creator promises when they send an effect */
 export type CommunityRightsInput = {
