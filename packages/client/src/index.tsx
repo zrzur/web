@@ -24,6 +24,10 @@ import { bootFailed, bootLoaded, opensSignIn } from "./boot";
 import "./index.css";
 import "./serviceWorkerInterface";
 import { isDesignsSite, isDiscoverSite } from "./siteKind";
+import { watchForStaleBuild } from "./staleBuild";
+
+// a tab opened before an update loads the new build instead of failing
+watchForStaleBuild();
 
 /**
  * Move into top window if the client was loaded inside itself
