@@ -25440,3 +25440,12 @@ msgstr "زرزور، مباشرةً على <0>سطح مكتبك.</0>"
 #: components/app/interface/settings/user/appearance/AppearanceMenu.tsx
 #~ msgid "Zrzur's own look: very dark neutral panels with Zrzur Pink as the one accent."
 #~ msgstr "مظهر زرزور الخاص: لوحات داكنة جدًا بألوان محايدة، وزهري زرزور هو اللون المميز الوحيد."
+
+#: components/auth/src/flows/SignUpConsent.tsx
+msgid "By creating an account you accept the <0>Terms of Service</0> and the <1>Community Guidelines</1> and have read the <2>Privacy Policy</2>."
+msgstr "بإنشائك حسابًا، فإنك تقبل <0>شروط الخدمة</0> و<1>إرشادات المجتمع</1>، وتقرّ بأنك قرأت <2>سياسة الخصوصية</2>."
+
+#: components/app/interface/settings/user/Privacy.tsx
+msgid "Under 18, only friends can start a direct message with you. Anyone you write to first can reply."
+msgstr "دون سن ١٨ عامًا، لا يستطيع بدء رسالة مباشرة معك إلا أصدقاؤك. ويمكن لكل من تراسله أولًا أن يردّ عليك."
+

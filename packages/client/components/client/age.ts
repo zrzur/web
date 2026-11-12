@@ -50,6 +50,15 @@ export function canViewMature() {
 }
 
 /**
+ * Whether only friends can start a direct message with this account: people
+ * aged 16 or 17 (and anyone below the minimum age). The server enforces it
+ * whatever is saved (PR-9); the app only stops offering wider choices.
+ */
+export function directMessagesFriendsOnly(age = accountAge()) {
+  return age?.band === "teen" || age?.band === "under_minimum";
+}
+
+/**
  * Whether to show the month and year of birth prompt (only once opened)
  */
 export function shouldAskForAge() {

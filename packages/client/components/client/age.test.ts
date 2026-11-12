@@ -7,6 +7,7 @@ import {
   isUnderMinimumAge,
   accountAge,
   canViewMature,
+  directMessagesFriendsOnly,
   fromBirthMonth,
   matureAccess,
   resetAccountAge,
@@ -127,5 +128,18 @@ describe("isAgeRefusal", () => {
     expect(isAgeRefusal({ type: "AgeRequirementNotMet" })).toBe(true);
     expect(isAgeRefusal({ type: "AgeNotDeclared" })).toBe(false);
     expect(isAgeRefusal(undefined)).toBe(false);
+  });
+});
+
+describe("direct messages under 18 (PR-9)", () => {
+  it("offers friends only to people aged 16 or 17 and below the minimum", () => {
+    const teen: AccountAge = { ...adult, band: "teen", mature_access: "minor" };
+    const under: AccountAge = { ...teen, band: "under_minimum" };
+    expect(directMessagesFriendsOnly(teen)).toBe(true);
+    expect(directMessagesFriendsOnly(under)).toBe(true);
+    expect(directMessagesFriendsOnly(adult)).toBe(false);
+    expect(directMessagesFriendsOnly(unknown)).toBe(false);
+    expect(directMessagesFriendsOnly(null)).toBe(false);
+    expect(directMessagesFriendsOnly(undefined)).toBe(false);
   });
 });

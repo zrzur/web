@@ -11,6 +11,7 @@ import { Symbol } from "@revolt/ui/components/utils/Symbol";
 import { FlowActions, FlowTitle, showDevMocks } from "./Flow";
 import { setFlowCheckEmail } from "./FlowCheck";
 import { Fields, Form, SubmitButton } from "./Form";
+import { SignUpConsent } from "./SignUpConsent";
 
 /**
  * Reassurance shown while typing an email address to sign up with
@@ -114,6 +115,7 @@ export default function FlowCreate() {
         <Show when={config.features.invite_only}>
           <Fields fields={[{ field: "invite", value: code }]} />
         </Show>
+        <SignUpConsent />
       </Form>
       {showDevMocks() && (
         <div
