@@ -162,11 +162,18 @@ let currentName = "e2e-settings";
 let currentServer = SERVER;
 
 /** Click the server name in the channel list (phone: after the back arrow) */
-async function clickServerHeader(page, phone) {
+async function clickServerHeader(page, phone, t) {
   if (phone) {
-    // the back arrow is at the start of the bar: left, or right in Arabic
-    const rtl = await page.evaluate(() => document.dir === "rtl" || getComputedStyle(document.body).direction === "rtl");
-    await page.mouse.click(rtl ? page.viewportSize().width - 18 : 18, 61);
+    // the bar's first button opens the channel list (its height moved with
+    // the phone top spacing, so it is found by name, not by a point)
+    const escape = (text) => text.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+    await page
+      .getByRole("button", { name: new RegExp(`^(${escape(t("Back"))}|${escape(t("Toggle main sidebar"))})$`) })
+      .locator("visible=true")
+      .first()
+      .click({ timeout: 10000 });
+    // the pointer left on the rail shows a tooltip over the server's name
+    await page.mouse.move(page.viewportSize().width / 2, page.viewportSize().height / 2);
     await page.waitForTimeout(700);
   }
   for (let attempt = 0; attempt < 8; attempt++) {
@@ -176,8 +183,10 @@ async function clickServerHeader(page, phone) {
         return { x: box.x + box.width / 2, y: box.y + box.height / 2, w: box.width };
       }),
     );
-    // the one in the channel list: below the window title bar
-    const hit = boxes.find((b) => b.y > 40 && b.y < 90 && b.w > 20);
+    // the one in the channel list: below the window title bar on desktop;
+    // a phone has no title bar, its header starts at the top
+    const top = phone ? 8 : 40;
+    const hit = boxes.find((b) => b.y > top && b.y < 90 && b.w > 20);
     if (hit) return page.mouse.click(hit.x, hit.y);
     await page.waitForTimeout(800);
   }
@@ -186,7 +195,7 @@ async function clickServerHeader(page, phone) {
 
 /** Open the server's settings from its menu */
 async function openSettings(page, t, phone) {
-  await clickServerHeader(page, phone);
+  await clickServerHeader(page, phone, t);
   await page
     .getByRole("menuitem", { name: t("Open server settings") })
     .click({ timeout: 10000 });
@@ -261,20 +270,23 @@ const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 const tests = [];
 const test = (name, fn) => tests.push({ name, fn });
 
-test("sidebar: 5 groups, 10 pages, fits without scrolling", async (c) => {
+// the owner's pages; Wings shows only where billing is on
+test("sidebar: 5 groups, 12 pages, fits without scrolling", async (c) => {
   await openSettings(c.page, c.t, c.phone);
   const names = [
-    "Overview",
-    "Channels",
-    "Joining & onboarding",
-    "Emoji",
-    "Safety",
-    "Audit log",
-    "Members",
-    "Roles",
-    "Bans",
-    "Apps",
-  ].map(c.t);
+    ["Overview"],
+    ["Insights", "server insights"],
+    ["Channels"],
+    ["Joining"],
+    ["Emoji"],
+    ["Soundboard"],
+    ["Safety", "server-settings"],
+    ["Audit log"],
+    ["Members"],
+    ["Roles"],
+    ["Bans"],
+    ["Apps"],
+  ].map(([english, context]) => tr(c.lang, english, context));
   for (const name of names) {
     await c.page
       .locator(".settings_sidebar")
@@ -373,7 +385,13 @@ test("overview: custom invite link works with billing off", async (c) => {
   const link = c.page.getByLabel(c.t("Link name"), { exact: false }).first();
   await link.scrollIntoViewIfNeeded();
   await link.fill(code);
-  await c.page.getByRole("button", { name: c.t("Claim link") }).click();
+  // "Claim link" the first time; once the server has a link it says "Save"
+  const box = link.locator("xpath=ancestor::div[.//button][1]");
+  await box
+    .getByRole("button", { name: c.t("Claim link"), exact: true })
+    .or(box.getByRole("button", { name: c.t("Save"), exact: true }))
+    .first()
+    .click();
   const outcome = await Promise.race([
     c.page.getByText(c.t("Active"), { exact: true }).first().waitFor({ timeout: 10000 }).then(() => "claimed"),
     c.page
@@ -384,6 +402,12 @@ test("overview: custom invite link works with billing off", async (c) => {
   // the form shows with billing off; the running backend still refuses until
   // the backend branch (feat/server-settings-pages) is deployed to the stack
   if (outcome === "refused") return "PENDING: running backend lacks the billing-off change";
+  // "Active" also shows for the link of an earlier run: wait until the server has this one
+  for (let i = 0; i < 40; i++) {
+    const server = await api(owner, "GET", `/servers/${SERVER}`);
+    if (JSON.stringify(server).includes(`"${code}"`)) break;
+    await c.page.waitForTimeout(250);
+  }
   await reload(c.page);
   await openSettings(c.page, c.t, c.phone);
   await goPage(c.page, c.t("Overview"));
@@ -394,7 +418,7 @@ test("overview: custom invite link works with billing off", async (c) => {
 test("joining: access mode is instant, says Saved, survives reload", async (c) => {
   await api(owner, "PATCH", `/servers/${SERVER}`, { access: "Open" }).catch(() => {});
   await openSettings(c.page, c.t, c.phone);
-  await goPage(c.page, c.t("Joining & onboarding"));
+  await goPage(c.page, c.t("Joining"));
   await c.page.getByText(c.t("Locked"), { exact: true }).first().click();
   await seesSaved(c.page, c.t);
   await reload(c.page);
@@ -405,7 +429,7 @@ test("joining: access mode is instant, says Saved, survives reload", async (c) =
 
 test("joining: verification level is instant and survives reload", async (c) => {
   await openSettings(c.page, c.t, c.phone);
-  await goPage(c.page, c.t("Joining & onboarding"));
+  await goPage(c.page, c.t("Joining"));
   await c.page.getByText(c.t("Medium"), { exact: true }).first().click();
   await seesSaved(c.page, c.t);
   await reload(c.page);
@@ -416,14 +440,14 @@ test("joining: verification level is instant and survives reload", async (c) => 
 
 test("joining: members-can-invite switch is instant", async (c) => {
   await openSettings(c.page, c.t, c.phone);
-  await goPage(c.page, c.t("Joining & onboarding"));
+  await goPage(c.page, c.t("Joining"));
   const sw = c.page.getByRole("switch", { name: c.t("Members can invite") });
   const before = await sw.isChecked();
   await sw.click();
   await seesSaved(c.page, c.t);
   await reload(c.page);
   await openSettings(c.page, c.t, c.phone);
-  await goPage(c.page, c.t("Joining & onboarding"));
+  await goPage(c.page, c.t("Joining"));
   const after = await c.page.getByRole("switch", { name: c.t("Members can invite") }).isChecked();
   await c.page.getByRole("switch", { name: c.t("Members can invite") }).click();
   await seesSaved(c.page, c.t);
@@ -432,7 +456,7 @@ test("joining: members-can-invite switch is instant", async (c) => {
 
 test("joining: lobby design opens as a sub-view with one save bar", async (c) => {
   await openSettings(c.page, c.t, c.phone);
-  await goPage(c.page, c.t("Joining & onboarding"));
+  await goPage(c.page, c.t("Joining"));
   await c.page.getByText(c.t("Lobby design"), { exact: true }).first().click();
   await c.page.waitForTimeout(900);
   const tagline = c.page.getByLabel(c.t("Tagline"), { exact: true });
@@ -453,11 +477,18 @@ test("safety: pause invites is instant and says Saved", async (c) => {
   }
   await c.page.getByRole("button", { name: c.t("Pause invites"), exact: true }).click();
   await seesSaved(c.page, c.t);
+  const paused = (until) => !!until && new Date(until).getTime() > Date.now();
   const after = await api(owner, "GET", `/servers/${SERVER}`);
-  void after;
-  // end it again so the next run starts clean
+  if (!paused(after.invites_paused_until)) throw new Error("invites are not paused");
+  // End now, as a person ends it; a pause left behind stops every join later on
   await c.page.waitForTimeout(2500);
-  await c.page.getByRole("button", { name: /./ }).filter({ hasText: c.t("End now") }).first().click().catch(() => {});
+  await c.page.getByRole("button", { name: /./ }).filter({ hasText: c.t("End now") }).first().click();
+  for (let i = 0; i < 40; i++) {
+    const now = await api(owner, "GET", `/servers/${SERVER}`);
+    if (!paused(now.invites_paused_until)) return;
+    await c.page.waitForTimeout(250);
+  }
+  throw new Error("End now left the invites paused");
 });
 
 test("members: list loads with a page request (limit)", async (c) => {
@@ -565,21 +596,15 @@ test("overview: delete server needs the typed name", async (c) => {
   if (!still) throw new Error("server was deleted");
 });
 
-test("search: finds a section by its words and scrolls to it", async (c) => {
+// Server settings have no search box since 2026-11-04 (web d822749dd): the
+// pages are few and named in one word. The sidebar must not offer one.
+test("search: server settings offer no search box", async (c) => {
   await openSettings(c.page, c.t, c.phone);
-  const words = { en: "custom invite", ar: "رابط دعوة", de: "einladungslink" }[c.lang];
-  await c.page.locator(".settings_sidebar").getByRole("searchbox").fill(words);
-  await c.page.waitForTimeout(300);
-  await c.page
-    .locator(".settings_sidebar")
-    .getByRole("link", { name: c.t("Invites and sharing"), exact: true })
-    .click();
-  await c.page.waitForTimeout(1200);
-  await seesHeading(c.page, c.t("Invites and sharing"));
-  const top = await c.page
-    .locator("[data-section=invites]")
-    .evaluate((el) => el.getBoundingClientRect().top);
-  if (top > c.page.viewportSize().height * 0.6) throw new Error(`section not scrolled to (top ${top})`);
+  await goPage(c.page, c.t("Overview"));
+  const boxes = await c.page
+    .locator('.settings_sidebar input[type="search"], .settings_sidebar [role="searchbox"]')
+    .count();
+  if (boxes) throw new Error(`${boxes} search boxes in the sidebar`);
 });
 
 test("safety: add a filter rule, then delete it after a question", async (c) => {
@@ -648,7 +673,7 @@ test("joining: welcome question saves with the page bar", async (c) => {
   if (before.lobby?.onboarding?.length)
     await api(owner, "PATCH", `/servers/${SERVER}`, { lobby: { ...before.lobby, onboarding: [] } });
   await openSettings(c.page, c.t, c.phone);
-  await goPage(c.page, c.t("Joining & onboarding"));
+  await goPage(c.page, c.t("Joining"));
   const add = c.page.getByRole("button", { name: /./ }).filter({ hasText: c.t("Add a role question") }).first();
   await add.scrollIntoViewIfNeeded();
   await add.click();
@@ -770,7 +795,7 @@ test("read-only: a limited member sees pages with the reason and cannot change t
     await openSettings(page, c.t, c.phone);
     const side = page.locator(".settings_sidebar");
     c.step = "pages shown";
-    for (const name of ["Overview", "Channels", "Joining & onboarding", "Emoji", "Roles"])
+    for (const name of ["Overview", "Channels", "Joining", "Emoji", "Roles"])
       await side.getByRole("link", { name: c.t(name), exact: true }).first().waitFor({ timeout: 8000 });
     // pages with nothing a person without the permission may read stay away
     for (const name of ["Safety", "Audit log", "Bans", "Apps"])
@@ -780,7 +805,7 @@ test("read-only: a limited member sees pages with the reason and cannot change t
     const sentence = (permission) => reason.replace("{permission}", c.t(permission));
     for (const [title, needs] of [
       ["Overview", "Manage server"],
-      ["Joining & onboarding", "Manage server"],
+      ["Joining", "Manage server"],
       ["Emoji", "Manage customisation"],
       ["Roles", "Manage roles"],
     ]) {
@@ -975,8 +1000,13 @@ test("roles: colour and a permission save, then the role is deleted", async (c) 
   await c.page.getByText(name, { exact: true }).first().click();
   const kick2 = c.page.getByRole("radiogroup", { name: c.t("Kick members"), exact: true });
   await kick2.scrollIntoViewIfNeeded();
-  if (!(await kick2.getByRole("radio", { name: c.t("Allow"), exact: true }).isChecked()))
-    throw new Error("kick is not allowed after reload");
+  // the editor may first draw before the server's roles arrive after a reload
+  let allowed = false;
+  for (let i = 0; i < 20 && !allowed; i++) {
+    allowed = await kick2.getByRole("radio", { name: c.t("Allow"), exact: true }).isChecked();
+    if (!allowed) await c.page.waitForTimeout(250);
+  }
+  if (!allowed) throw new Error("kick is not allowed after reload");
   c.step = "delete";
   const del = c.page.getByRole("button", { name: c.t("Delete"), exact: true }).last();
   await del.scrollIntoViewIfNeeded();
@@ -987,13 +1017,19 @@ test("roles: colour and a permission save, then the role is deleted", async (c) 
 });
 
 test("roles: drag a role above another changes the order", async (c) => {
-  const a = `role-${c.lang}-${c.size}-${run}`.slice(0, 26) + "-a";
-  const b = `role-${c.lang}-${c.size}-${run}`.slice(0, 26) + "-b";
+  // a name of its own each try, so a retry never finds two rows of one name
+  const tag = `${c.lang[0]}${c.size[0]}${Date.now().toString(36)}`;
+  const a = `role-drag-${tag}-a`;
+  const b = `role-drag-${tag}-b`;
   await api(owner, "POST", `/servers/${SERVER}/roles`, { name: a });
   await api(owner, "POST", `/servers/${SERVER}/roles`, { name: b });
   await openSettings(c.page, c.t, c.phone);
   await goPage(c.page, c.t("Roles"));
-  const handle = (name) => c.page.getByRole("button", { name: c.t("Drag to reorder {0}").replace("{0}", name) });
+  // Found by its label: the row's icon slot is hidden from assistive tech
+  // and the row is itself a button, so the handle has no role to look up
+  // (reported as an app issue). The drag below is the user's mouse action.
+  const handle = (name) =>
+    c.page.locator(`[aria-label="${c.t("Drag to reorder {0}").replace("{0}", name)}"]`);
   await handle(b).scrollIntoViewIfNeeded();
   const from = await handle(b).boundingBox();
   const to = await handle(a).boundingBox();
@@ -1099,7 +1135,7 @@ test("safety: pausing direct messages, then ending the pause", async (c) => {
 test("joining: every verification level saves and survives reload", async (c) => {
   await api(owner, "PATCH", `/servers/${SERVER}`, { verification_level: "None" });
   await openSettings(c.page, c.t, c.phone);
-  await goPage(c.page, c.t("Joining & onboarding"));
+  await goPage(c.page, c.t("Joining"));
   for (const level of ["Low", "Medium", "High", "None"]) {
     c.step = level;
     const section = c.page.locator("[data-section=verification]");
@@ -1117,7 +1153,7 @@ test("joining: every verification level saves and survives reload", async (c) =>
 const PAGES = [
   ["Overview", "overview"],
   ["Channels", "channels"],
-  ["Joining & onboarding", "joining"],
+  ["Joining", "joining"],
   ["Emoji", "emoji"],
   ["Safety", "safety"],
   ["Audit log", "log"],
