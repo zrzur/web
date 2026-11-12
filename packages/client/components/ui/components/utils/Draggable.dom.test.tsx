@@ -127,7 +127,10 @@ describe("Draggable", () => {
     dispose = render(() => {
       const [disabled, setDisabled] = createSignal(true);
       return (
-        <span {...createDragHandle(disabled, setDisabled)} aria-label="Drag to reorder Mods">
+        <span
+          {...createDragHandle(disabled, setDisabled)}
+          aria-label="Drag to reorder Mods"
+        >
           ::
         </span>
       );

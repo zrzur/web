@@ -5,6 +5,7 @@ import { ServerMember, User } from "@zrzur/sdk/solid";
 import { cva } from "styled-system/css";
 import { styled } from "styled-system/jsx";
 
+import { copyText } from "@revolt/common/lib/copyText";
 import { Icon } from "@revolt/ui/icons/Icon";
 
 import { BotLabel } from "./BotLabel";
@@ -47,10 +48,12 @@ export function ProfileIdentity(props: {
         };
   };
 
-  function copy() {
-    navigator.clipboard.writeText(
+  // "Copied!" only when the browser took it; a refusal is no page error
+  async function copy() {
+    const copiedIt = await copyText(
       `${props.user.username}#${props.user.discriminator}`,
     );
+    if (!copiedIt) return;
     setCopied(true);
     setTimeout(() => setCopied(false), 1500);
   }
@@ -92,7 +95,7 @@ export function ProfileIdentity(props: {
         <button
           class={username()}
           type="button"
-          onClick={copy}
+          onClick={() => void copy()}
           use:floating={{
             tooltip: {
               placement: "top",

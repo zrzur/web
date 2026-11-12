@@ -2,6 +2,10 @@
 
 ## Unreleased
 
+### Fixes
+
+* **Copy username** on a profile says "Copied!" only when the browser took the text. When the browser refuses (no clipboard permission), nothing changes and the page no longer throws an error.
+
 ### Accessibility
 
 * **Drag handles** (role order, profile extras) are buttons to screen readers: each says what it moves ("Drag to reorder Moderators"). Before, the handle was a plain element with a label, so screen readers had nothing to announce.
