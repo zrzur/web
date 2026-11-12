@@ -224,7 +224,14 @@ async function reload(page, name = currentName) {
   for (let attempt = 0; attempt < 5; attempt++) {
     await page.goto(`${APP}/server/${currentServer}`);
     try {
-      await page.getByText(name, { exact: true }).first().waitFor({ state: "visible", timeout: 12000 });
+      // the server's name in the channel list, or (on a phone, where the
+      // server opens on its channel) the channel's composer
+      await page
+        .getByText(name, { exact: true })
+        .locator("visible=true")
+        .or(page.locator('[contenteditable="true"]').locator("visible=true"))
+        .first()
+        .waitFor({ state: "visible", timeout: 12000 });
       await page.waitForTimeout(800);
       return;
     } catch {
