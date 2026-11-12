@@ -108,7 +108,10 @@ vi.mock("@revolt/ui", () => {
     Button,
     IconButton: Button,
     MenuItem: (props: { value: string; children: JSX.Element }) => (
-      <option value={props.value}>{props.children}</option>
+      // no native option element: the CI check refuses one anywhere in components
+      <div role="option" data-value={props.value}>
+        {props.children}
+      </div>
     ),
     // a design-system select; a plain list of options here
     FloatingSelect: (props: {
@@ -123,7 +126,9 @@ vi.mock("@revolt/ui", () => {
         <span data-value>{props.value}</span>
         <div
           onClick={(event) => {
-            const value = (event.target as HTMLElement).getAttribute("value");
+            const value = (event.target as HTMLElement).getAttribute(
+              "data-value",
+            );
             if (value !== null)
               props.onChange({ currentTarget: { value, textContent: "" } });
           }}
@@ -214,7 +219,9 @@ describe("sound library", () => {
     expect(rows()).toEqual(["voice-go", "alert-success", "alert-error"]);
     expect(root.textContent).toContain("«Go»: انطلق");
 
-    (root.querySelector('option[value="alerts"]') as HTMLElement).click();
+    (
+      root.querySelector('[role="option"][data-value="alerts"]') as HTMLElement
+    ).click();
     await vi.waitFor(() =>
       expect(rows()).toEqual(["alert-success", "alert-error"]),
     );
