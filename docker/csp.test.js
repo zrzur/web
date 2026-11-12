@@ -103,7 +103,7 @@ test("frames: the media players the app embeds and the captcha, nothing else", (
   const p = parse(contentSecurityPolicy(production, root));
   assert.ok(p["frame-src"].includes("https://www.youtube-nocookie.com"));
   assert.ok(p["frame-src"].includes("https://clips.twitch.tv"));
-  assert.ok(p["frame-src"].includes("https://*.hcaptcha.com"));
+  assert.ok(p["frame-src"].includes("https://challenges.cloudflare.com"));
   assert.ok(!p["frame-src"].includes("*"));
   assert.ok(!p["frame-src"].includes("'self'"));
 });

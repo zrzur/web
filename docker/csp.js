@@ -38,8 +38,8 @@ const PLAYER_ORIGINS = [
   "https://embed.music.apple.com",
 ];
 
-/** hCaptcha's documented hosts (sign-up, password reset, sign-in step-up) */
-const CAPTCHA_ORIGINS = ["https://hcaptcha.com", "https://*.hcaptcha.com"];
+/** Cloudflare Turnstile hosts (sign-up, password reset, sign-in step-up) */
+const CAPTCHA_ORIGINS = ["https://challenges.cloudflare.com"];
 
 /**
  * SHA-256 of the inline boot script of the plugin sandbox document

@@ -1,4 +1,4 @@
-import type { HCaptchaFunctions } from "solid-hcaptcha";
+import type { TurnstileFunctions } from "./Turnstile";
 import {
   createContext,
   createSignal,
@@ -30,7 +30,7 @@ const FormStack = styled("div", {
 });
 
 /** The captcha loads only on forms that use it (sign-up, reset, resend) */
-const HCaptcha = lazy(() => import("solid-hcaptcha"));
+const Turnstile = lazy(() => import("./Turnstile"));
 
 /** Error from the server, shown above the actions and read out at once */
 const ErrorContainer = styled("div", {
@@ -372,7 +372,7 @@ export function Form(props: Props) {
   const [fieldErrors, setFieldErrors] = createSignal<Record<string, string>>(
     {},
   );
-  let hcaptcha: HCaptchaFunctions | undefined;
+  let turnstile: TurnstileFunctions | undefined;
   let successTimer: ReturnType<typeof setTimeout> | undefined;
   onCleanup(() => clearTimeout(successTimer));
 
@@ -482,8 +482,8 @@ export function Form(props: Props) {
     try {
       if (props.captcha) {
         // the captcha script didn't load: same message as a failed check
-        if (!hcaptcha) throw { type: "CaptchaFailed" };
-        const response = await hcaptcha.execute();
+        if (!turnstile) throw { type: "CaptchaFailed" };
+        const response = await turnstile.execute();
         formData.set("captcha", response!.response);
       }
 
@@ -536,10 +536,9 @@ export function Form(props: Props) {
         </FieldErrors.Provider>
       </FormStatusContext.Provider>
       <Show when={props.captcha}>
-        <HCaptcha
+        <Turnstile
           sitekey={props.captcha!}
-          onLoad={(instance) => (hcaptcha = instance)}
-          size="invisible"
+          onLoad={(instance) => (turnstile = instance)}
         />
       </Show>
     </form>
