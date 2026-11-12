@@ -1,4 +1,4 @@
-import { Show, createSignal, lazy } from "solid-js";
+import { Show, createSignal } from "solid-js";
 
 import { useLingui } from "@lingui/solid/macro";
 import { ServerMember, User } from "@zrzur/sdk/solid";
@@ -14,11 +14,6 @@ import { nameStyle, themeColours, userStyleOf } from "./userStyle";
 
 /** Badges that fit on the name row */
 const ROW_BADGES = 3;
-
-// lazy: app code is loaded after the UI layer
-const CreatorMark = lazy(
-  () => import("@revolt/app/interface/settings/user/profile/CreatorMark"),
-);
 
 /**
  * Name block under the avatar: display name (+ Bot tag), then username#tag
@@ -79,7 +74,6 @@ export function ProfileIdentity(props: {
               <Icon name="shield-check" size={18} />
             </span>
           </Show>
-          <CreatorMark user={props.user} />
           <Show when={props.user.bot}>
             <BotLabel
               official={props.user.officialBot}
