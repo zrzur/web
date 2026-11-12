@@ -25440,3 +25440,12 @@ msgstr "Zrzur, direkt auf <0>deinem Desktop.</0>"
 #: components/app/interface/settings/user/appearance/AppearanceMenu.tsx
 #~ msgid "Zrzur's own look: very dark neutral panels with Zrzur Pink as the one accent."
 #~ msgstr "Zrzurs eigener Look: sehr dunkle, neutrale Flächen mit Zrzur-Pink als einziger Akzentfarbe."
+
+#: components/auth/src/flows/SignUpConsent.tsx
+msgid "By creating an account you accept the <0>Terms of Service</0> and the <1>Community Guidelines</1> and have read the <2>Privacy Policy</2>."
+msgstr "Mit dem Erstellen eines Kontos akzeptierst du die <0>Nutzungsbedingungen</0> und die <1>Community-Richtlinien</1> und bestätigst, dass du die <2>Datenschutzerklärung</2> gelesen hast."
+
+#: components/app/interface/settings/user/Privacy.tsx
+msgid "Under 18, only friends can start a direct message with you. Anyone you write to first can reply."
+msgstr "Unter 18 können nur deine Freunde eine Direktnachricht mit dir beginnen. Wem du zuerst schreibst, kann dir antworten."
+
