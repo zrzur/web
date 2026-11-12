@@ -1,4 +1,5 @@
 import { For, Match, Show, Switch, createSignal } from "solid-js";
+import { unwrap } from "solid-js/store";
 
 import { Trans, useLingui } from "@lingui/solid/macro";
 import { useQuery, useQueryClient } from "@tanstack/solid-query";
@@ -116,7 +117,9 @@ export function AutoModSettings(props: { server: Server }) {
   function open(rule: AutoModRule, created: boolean) {
     setError(undefined);
     setIsNew(created);
-    setDraft(structuredClone(rule));
+    // a saved rule comes from the query's store (a proxy): structuredClone
+    // refuses proxies, so take the plain object underneath first
+    setDraft(structuredClone(unwrap(rule)));
   }
 
   const update = (change: (rule: AutoModRule) => void) =>
