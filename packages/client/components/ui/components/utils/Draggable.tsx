@@ -251,6 +251,9 @@ export function createDragHandle(
   }
 
   return {
+    // focusable and worked with Enter or Space: a button to assistive tech
+    // too (a plain span with only an aria-label has no name to read)
+    role: "button" as const,
     tabindex: dragDisabled() ? 0 : -1,
     onmouseenter: startDrag,
     ontouchstart: startDrag,

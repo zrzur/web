@@ -2,9 +2,15 @@ import { createSignal } from "solid-js";
 import { render } from "solid-js/web";
 import { afterEach, describe, expect, it, vi } from "vitest";
 
-import { Draggable } from "./Draggable";
+import { Draggable, createDragHandle } from "./Draggable";
 
 vi.mock("@lingui/solid/macro", () => ({ useLingui: () => ({ t: String }) }));
+// the macro is compiled to this hook; a message descriptor reads as its text
+vi.mock("@lingui/solid", () => {
+  const text = (d: unknown) =>
+    typeof d === "string" ? d : ((d as { message?: string }).message ?? "");
+  return { useLingui: () => ({ t: text, _: text, i18n: { _: text } }) };
+});
 
 let dispose: (() => void) | undefined;
 
@@ -113,5 +119,22 @@ describe("Draggable", () => {
     );
     await new Promise((r) => setTimeout(r, 50));
     expect(changes.at(-1)).toEqual(["b", "a", "c"]);
+  });
+
+  it("gives a handle drawn as a plain icon the button role, so its name is read", () => {
+    const host = document.createElement("div");
+    document.body.appendChild(host);
+    dispose = render(() => {
+      const [disabled, setDisabled] = createSignal(true);
+      return (
+        <span {...createDragHandle(disabled, setDisabled)} aria-label="Drag to reorder Mods">
+          ::
+        </span>
+      );
+    }, host);
+    const handle = host.querySelector("span")!;
+    expect(handle.getAttribute("role")).toBe("button");
+    expect(handle.getAttribute("tabindex")).toBe("0");
+    expect(handle.getAttribute("aria-label")).toBe("Drag to reorder Mods");
   });
 });

@@ -2,6 +2,10 @@
 
 ## Unreleased
 
+### Accessibility
+
+* **Drag handles** (role order, profile extras) are buttons to screen readers: each says what it moves ("Drag to reorder Moderators"). Before, the handle was a plain element with a label, so screen readers had nothing to announce.
+
 ### Events and Lobby off by default
 
 * **Deleting a repeating event:** the card offers "Delete this time" and "Delete the whole series", each with its own confirmation and button. Deleting the series ends it (before, Delete wrote the next weekly occurrence and the card looked unchanged). After "Delete this time" a short line under Upcoming says "Deleted. The next one is on <date>." for a few seconds.
