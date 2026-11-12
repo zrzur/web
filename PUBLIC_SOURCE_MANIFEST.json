@@ -610,8 +610,8 @@
     },
     {
       "path": "e2e/stack-runner/light-app.mjs",
-      "sha256": "52e3b766f89382871e0a445b949d3324204f4db9276de9bb3e6e748d566ab922",
-      "bytes": 24374,
+      "sha256": "30e4a93b34769e9fa03b0885e908cf00e91f305a846a8edce23a02b0743bde88",
+      "bytes": 24511,
       "category": "synthetic-test-source-or-fixture"
     },
     {
@@ -2277,12 +2277,6 @@
       "category": "product-source-or-build-manifest"
     },
     {
-      "path": "packages/client/components/app/interface/settings/user/profile/CreatorMark.tsx",
-      "sha256": "8b09ef403395c4299d52ceac42c3ed18224383b27cd82d03659899fd841967a0",
-      "bytes": 982,
-      "category": "product-source-or-build-manifest"
-    },
-    {
       "path": "packages/client/components/app/interface/settings/user/profile/CreatorPublicName.tsx",
       "sha256": "e4c264acf7f198069dc3c057396d0f70eb0aa0cef726ad29d45924700b9ebcf8",
       "bytes": 2453,
@@ -2356,7 +2350,7 @@
     },
     {
       "path": "packages/client/components/app/interface/settings/user/profile/communityApi.ts",
-      "sha256": "9bdef9f7ecf7083c4d82d86472b4a80d2c6b48ea58c30a1e4bbafbb92acc781e",
+      "sha256": "ff281eb3e9ac9e82b7a285b3874735db82730c49c7c4ebeaa9c6b20979821d96",
       "bytes": 14413,
       "category": "product-source-or-build-manifest"
     },
@@ -6238,8 +6232,8 @@
     },
     {
       "path": "packages/client/components/ui/components/features/profiles/ProfileIdentity.tsx",
-      "sha256": "ab9c445486b6269e88a4c006653b30df77b7bb30b7ba4921f74ac90c1c3512ac",
-      "bytes": 7652,
+      "sha256": "10af744d9f1f7d18d048279e72624b1e094c711fe6d86d4ac265e5a4c6beb8b6",
+      "bytes": 7450,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -42024,7 +42018,7 @@
   "submodules": [
     {
       "path": "packages/stoat.js",
-      "commit": "bbe58ef199c35f9f3dd42d47d8f9649941c9d5ea"
+      "commit": "e59c40805911c4f0a8b78c919368a65532546984"
     }
   ]
 }
