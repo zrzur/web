@@ -627,7 +627,8 @@ try {
         for (let x = 0; x < size; x++) {
           const r = Math.hypot(x - size / 2, y - size / 2);
           codes.push(r > size / 3 && r < size / 2 ? index : 0);
-          if (++count % 3 === 0) codes.push(4);
+          // clear before the table reaches 8 entries: the codes stay 3 bits
+          if (++count % 2 === 0) codes.push(4);
         }
       }
       codes.push(5);
@@ -781,25 +782,41 @@ try {
     };
   });
 
-  await report.step("each animation really moves when worn", async () => {
+  // A worn decoration shows its still frame and plays while it is pointed at
+  // (AvatarDecoration: the moving file covers the still one once loaded).
+  await report.step("each animation is still, and moves when pointed at", async () => {
     const now = live;
     await now.page.goto(`${APP}/designs/studio`);
     measured.moves = {};
+    const frames = async (target, count) => {
+      const seen = new Set();
+      for (let i = 0; i < count; i++) {
+        seen.add((await target.screenshot()).toString("base64").slice(0, 4000));
+        await now.page.waitForTimeout(180);
+      }
+      return seen.size;
+    };
     for (const item of made.types.slice(1)) {
       await now.session.call("PATCH", "/users/@me", {
         style: { ...original, decoration: `c:${item._id}` },
       });
       await now.page.goto(`${APP}/server/${SERVER}/channel/${CHANNEL}`);
-      const art = now.page.locator(".z-deco-art").first();
-      await art.waitFor({ state: "attached", timeout: 45000 });
+      // the member list's copy, not the one on the account button
+      const deco = now.page.locator(`[data-deco="c:${item._id}"]`).last();
+      await deco.locator(".z-deco-art").first().waitFor({ state: "visible", timeout: 45000 });
       await now.page.waitForTimeout(1500);
-      const seen = new Set();
-      for (let i = 0; i < 12; i++) {
-        seen.add((await art.screenshot()).toString("base64").slice(0, 4000));
-        await now.page.waitForTimeout(180);
-      }
-      measured.moves[item.name] = seen.size;
-      assert(seen.size > 1, `${item.name} did not move`);
+      const still = await frames(deco, 6);
+      await deco.hover();
+      await deco
+        .locator(".z-deco-art:not([data-hidden])")
+        .nth(0)
+        .waitFor({ timeout: 10000 });
+      await deco.locator(".z-deco-art[data-hidden]").waitFor({ state: "attached", timeout: 10000 });
+      const moving = await frames(deco, 12);
+      measured.moves[item.name] = { still, moving };
+      assert(still === 1, `${item.name} moves before it is pointed at`);
+      assert(moving > 1, `${item.name} did not move when pointed at`);
+      await now.page.mouse.move(0, 0);
     }
   });
 

@@ -985,12 +985,16 @@ for (const locale of locales) {
           if (!REAL) {
             state.nameDown = true;
             await press(toggle);
+            // the error in the Designs section (other alert regions on the
+            // page are empty and hidden)
             await page
               .locator("[role=alert]")
+              .locator("visible=true")
               .first()
               .waitFor({ timeout: 10000 });
             await page
               .getByText(t("Details"), { exact: true })
+              .locator("visible=true")
               .first()
               .waitFor({ timeout: 5000 });
             assert(!(await on()), "the switch stayed on after a failure");

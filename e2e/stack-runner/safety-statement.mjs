@@ -121,6 +121,31 @@ const fillStatement = async (page, locale, facts) => {
 const apply = (page, locale) =>
   page.getByRole("button", { name: tr(locale, "Apply action") }).click();
 
+// The review dashboard is one of the staff tools the app hides for now
+// (STAFF_TOOLS_ENABLED in web components/common/lib/staffTools.ts, owner
+// decision 2026-11-01): a reviewer finds no way to it in the app. While it is
+// hidden, the steps that need it wait, and say so; they run again by
+// themselves once the tools are back.
+const waiting = [];
+const wait = (step, why) => {
+  waiting.push(step);
+  console.log(`  WAIT ${step}
+       ${why}`);
+};
+const HIDDEN = "the review dashboard is hidden in the app (staff tools off, owner decision 2026-11-01)";
+let dashboard = false;
+await run.step("a reviewer finds no review dashboard while staff tools are hidden", async () => {
+  const { page, context } = await login(browser, REVIEWER, { viewport: VIEWPORTS.desktop, locale: "en" });
+  run.page = page;
+  await openSettings(page, "en", "Feedback & reports");
+  await page.getByRole("tab", { name: "Reports & standing" }).first().waitFor({ timeout: 15000 });
+  const entry = await page.getByText("Trust & Safety", { exact: true }).count();
+  const button = await page.getByText("Open the review dashboard").count();
+  dashboard = entry > 0 || button > 0;
+  await context.close();
+  if (dashboard) console.log("       the dashboard is offered: running the reviewer steps");
+});
+
 for (const locale of LOCALES) {
   for (const [size, viewport] of Object.entries(VIEWPORTS)) {
     const tag = `${locale}${size}${Date.now().toString(36)}`;
@@ -136,7 +161,8 @@ for (const locale of LOCALES) {
     });
     if (!reference) continue;
 
-    await run.step(`${name}: the reviewer applies a statement; every field is empty after`, async () => {
+    if (!dashboard) wait(`${name}: the reviewer applies a statement; every field is empty after`, HIDDEN);
+    else await run.step(`${name}: the reviewer applies a statement; every field is empty after`, async () => {
       const { page, context } = await openDashboard(REVIEWER, locale, viewport);
       const dialogs = [];
       page.on("dialog", (dialog) => {
@@ -167,13 +193,15 @@ for (const locale of LOCALES) {
       await context.close();
     });
 
-    await run.step(`${name}: the reporter gets the outcome by mail`, async () => {
+    if (!dashboard) wait(`${name}: the reporter gets the outcome by mail`, HIDDEN);
+    else await run.step(`${name}: the reporter gets the outcome by mail`, async () => {
       const mails = await waitForMails(email, 2);
       if (!mails.some((mail, i) => i > 0 && mail.subject.includes(reference)))
         throw new Error(mails.map((mail) => mail.subject).join(" | "));
     });
 
-    await run.step(`${name}: the person sees the statement of reasons`, async () => {
+    if (!dashboard) wait(`${name}: the person sees the statement of reasons`, HIDDEN);
+    else await run.step(`${name}: the person sees the statement of reasons`, async () => {
       const { page, context } = await login(browser, AUTHOR, { viewport, locale });
       run.page = page;
       await openSettings(page, locale, "Feedback & reports");
@@ -203,7 +231,8 @@ for (const locale of LOCALES) {
       await context.close();
     });
 
-    await run.step(`${name}: typed text stays with its case; a refused action can be retried`, async () => {
+    if (!dashboard) wait(`${name}: typed text stays with its case; a refused action can be retried`, HIDDEN);
+    else await run.step(`${name}: typed text stays with its case; a refused action can be retried`, async () => {
       // two reports about the reviewer's own message: the server refuses to act
       // on it after it saved the copy, which moves the case version on
       const link = await postMessage(`${tag}r`, REVIEWER);
@@ -231,4 +260,6 @@ for (const locale of LOCALES) {
   }
 }
 await browser.close();
+if (waiting.length) console.log(`
+${waiting.length} waiting: ${HIDDEN}`);
 process.exit(run.done() ? 1 : 0);
