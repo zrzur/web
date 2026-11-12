@@ -506,7 +506,12 @@ for (const locale of locales) {
       const before = drawn();
       const spacer = document.createElement("div");
       spacer.style.cssText = "height:6000px;flex-shrink:0";
-      all.at(-1).parentElement.prepend(spacer);
+      // each row has its own wrapper now: push from the top of the rail's
+      // scrolling list, not inside the last row's wrapper
+      let list = all.at(-1).parentElement;
+      while (list && !/auto|scroll/.test(getComputedStyle(list).overflowY))
+        list = list.parentElement;
+      (list ?? all.at(-1).parentElement).prepend(spacer);
       await new Promise((r) => setTimeout(r, 500));
       const pushed = drawn();
       spacer.remove();

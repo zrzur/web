@@ -133,6 +133,19 @@ async function signIn(browser, { viewport, locale }) {
       },
     });
   });
+  // the suspension notice reads why and since when (the wire fixture's rank)
+  await fixture(/\/community\/creators\/@me\/standing$/, (route) =>
+    state.standing
+      ? route.fulfill({
+          json: {
+            standing: state.standing,
+            reason: "Fixture: a design copied someone else's art",
+            since: Date.now() - 86400000,
+            can_appeal: false,
+          },
+        })
+      : route.fallback(),
+  );
   await fixture(/\/community\/mine$/, (route) =>
     state.creator || state.standing
       ? route.fulfill({ json: state.items })
@@ -604,7 +617,7 @@ for (const locale of locales) {
             await page
               .getByText(
                 t(
-                  "Your creator access is paused. Your published designs stay up, but you can't submit or change designs for now.",
+                  "Your creator access is paused. Your designs are hidden from everyone until it is lifted. You can still see them and download a copy.",
                 ),
               )
               .waitFor({ timeout: 20000 });
@@ -898,7 +911,7 @@ for (const locale of locales) {
             await page
               .getByText(
                 t(
-                  "Your creator access is paused. Your published designs stay up, but you can't submit or change designs for now.",
+                  "Your creator access is paused. Your designs are hidden from everyone until it is lifted. You can still see them and download a copy.",
                 ),
               )
               .waitFor({ timeout: 10000 });

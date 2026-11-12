@@ -24,6 +24,10 @@ const { API, APP, accounts, pw, reporter } = await import(
 
 const SERVER = process.env.E2E_SERVER;
 const CHANNEL = process.env.E2E_CHANNEL;
+if (!SERVER || !CHANNEL) {
+  console.error("Set E2E_SERVER and E2E_CHANNEL (a server of the creator's with a member list)");
+  process.exit(2);
+}
 const MEDIA = process.env.E2E_MEDIA ?? "http://127.0.0.1:14704";
 const shotsDir = (process.env.E2E_SHOTS ?? ".").replace(/\/?$/, "/");
 mkdirSync(shotsDir, { recursive: true });
@@ -73,14 +77,21 @@ async function open(locale) {
     timeout: 45000,
   });
   session.call = async (method, path, body) => {
-    const answer = await fetch(`${API}${path}`, {
-      method,
-      headers: {
-        "x-session-token": session.token,
-        ...(body ? { "content-type": "application/json" } : {}),
-      },
-      body: body ? JSON.stringify(body) : undefined,
-    });
+    let answer;
+    // the setup reads in bursts; a 429 says how long to wait, so wait it out
+    for (let attempt = 0; ; attempt++) {
+      answer = await fetch(`${API}${path}`, {
+        method,
+        headers: {
+          "x-session-token": session.token,
+          ...(body ? { "content-type": "application/json" } : {}),
+        },
+        body: body ? JSON.stringify(body) : undefined,
+      });
+      if (answer.status !== 429 || attempt >= 5) break;
+      const { retry_after: wait } = await answer.json().catch(() => ({}));
+      await new Promise((done) => setTimeout(done, (wait ?? 2000) + 200));
+    }
     const text = await answer.text();
     if (!answer.ok)
       throw new Error(`${method} ${path} ${answer.status} ${text}`);
@@ -827,7 +838,9 @@ try {
     await session.call("PATCH", "/users/@me", { style: original ?? {} });
     const mine = await session.call("GET", "/community/mine");
     await page.goto(`${APP}/designs/studio`);
-    for (const item of mine) {
+    // an archived design cannot be archived again (the server says
+    // InvalidOperation); earlier runs leave theirs archived
+    for (const item of mine.filter((one) => one.status !== "Archived")) {
       await session.call("POST", `/community/items/${item._id}/archive`);
     }
     const left = await session.call("GET", "/community/mine");

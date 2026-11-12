@@ -658,69 +658,20 @@ const picture = async (page) => ({
 });
 
 async function failures(page, L, tag) {
+  // The server is made in one request (the blueprint): it comes back complete
+  // or nothing exists, so there is no half-built server to continue any more.
+  const createRoute = /\/servers\/create$/;
   await report.step(
-    `${tag} a role and a channel step fail, Continue setup finishes it`,
+    `${tag} a failed create says why in the dialog, makes nothing, Create again makes it`,
     async () => {
-      let fails = 2;
-      const failOnce = async (route) => {
-        if (route.request().method() !== "POST" || fails <= 0)
+      let failing = true;
+      let reached = 0;
+      await page.route(createRoute, async (route) => {
+        if (route.request().method() !== "POST") return route.continue();
+        if (!failing) {
+          reached++;
           return route.continue();
-        fails--;
-        await route.fulfill({
-          status: 500,
-          body: '{"type":"InternalError"}',
-          contentType: "application/json",
-        });
-      };
-      await page.route(/\/servers\/[0-9A-Z]{26}\/roles$/, failOnce);
-      await page.route(/\/servers\/[0-9A-Z]{26}\/channels$/, failOnce);
-      try {
-        await openFlow(page, L);
-        await pickRow(page, L, "gaming");
-        await answer(page, L, "community");
-        await create(page, L, "E2E retry");
-        const go = dialog(page).getByRole("button", {
-          name: exact(tr(L, "Continue setup")),
-        });
-        for (let attempt = 0; attempt < 2; attempt++) {
-          await dialog(page).getByRole("alert").waitFor({ timeout: 60000 });
-          if (attempt === 0)
-            await page.screenshot({ path: shot(`${tag}-partial-failure`) });
-          same(
-            await dialog(page)
-              .getByRole("button", { name: tr(L, "Back") })
-              .count(),
-            0,
-            "Back offered once the server exists",
-          );
-          await go.click();
-          await page.waitForTimeout(300);
         }
-        await page.waitForURL(/\/server\/[0-9A-Z]{26}\/channel\//, {
-          timeout: 180000,
-        });
-        const { id, channel } = pageServer(page);
-        try {
-          await checkServer(id, L, { groups: GUILD, ...STAFF }, channel);
-        } finally {
-          await removeServer(id);
-        }
-      } finally {
-        await page.unroute(/\/servers\/[0-9A-Z]{26}\/roles$/);
-        await page.unroute(/\/servers\/[0-9A-Z]{26}\/channels$/);
-      }
-    },
-  );
-
-  await report.step(
-    `${tag} a stopped setup asks first and leaves no open room`,
-    async () => {
-      const permissions = /\/channels\/[0-9A-Z]{26}\/permissions\/[^/]+$/;
-      let fails = 1;
-      await page.route(permissions, async (route) => {
-        if (route.request().method() !== "PUT" || fails <= 0)
-          return route.continue();
-        fails--;
         await route.fulfill({
           status: 500,
           body: '{"type":"InternalError"}',
@@ -731,50 +682,79 @@ async function failures(page, L, tag) {
         await openFlow(page, L);
         await pickRow(page, L, "gaming");
         await answer(page, L, "community");
-        await create(page, L, "E2E stopped");
-        await dialog(page).getByRole("alert").waitFor({ timeout: 60000 });
-        const id = [...made].at(-1);
-        const asked = dialog(page).getByText(tr(L, "Leave setup?"));
-        const openServer = dialog(page).getByRole("button", {
-          name: tr(L, "Open server"),
-        });
-
-        await page.keyboard.press("Escape");
-        await asked.waitFor({ timeout: 5000 });
-        await page.screenshot({ path: shot(`${tag}-leave-setup`) });
-        await noSidewaysScroll(page);
-        // Escape again means stay
-        await page.keyboard.press("Escape");
-        await openServer.waitFor({ timeout: 5000 });
-
-        await openServer.click();
-        await asked.waitFor({ timeout: 5000 });
-        await dialog(page)
-          .getByRole("button", { name: exact(tr(L, "Keep setting up")) })
-          .click();
-        await openServer.waitFor({ timeout: 5000 });
-
-        await page.keyboard.press("Escape");
-        await dialog(page)
-          .getByRole("button", { name: exact(tr(L, "Leave setup")) })
-          .click();
-        await dialog(page).waitFor({ state: "detached", timeout: 5000 });
-
-        // read back: every room that is there must be shut to everyone
-        const { channels } = await readServer(id);
-        const open = channels.filter(
-          (c) =>
-            [tr(L, "rules"), tr(L, "announcements")].includes(c.name) &&
-            !(BigInt(c.default_permissions?.d ?? 0) & P.SendMessage),
+        await create(page, L, "E2E retry");
+        const alert = dialog(page).getByRole("alert");
+        await alert.waitFor({ timeout: 60000 });
+        await page.screenshot({ path: shot(`${tag}-create-failed`) });
+        if (!(await alert.innerText()).trim()) fail("the error says nothing");
+        await noMessageIds(page);
+        same(
+          await dialog(page)
+            .getByRole("button", { name: exact(tr(L, "Back")) })
+            .count(),
+          1,
+          "Back still offered (nothing was made)",
         );
         same(
-          open.map((c) => c.name),
-          [],
-          "read-only rooms open to everyone",
+          (await leftovers(userId)).length,
+          0,
+          "servers made by the failed create",
         );
-        await removeServer(id);
+        failing = false;
+        await createButton(page, L).click();
+        await page.waitForURL(/\/server\/[0-9A-Z]{26}\/channel\//, {
+          timeout: 60000,
+        });
+        same(reached, 1, "create requests that reached the server");
+        const { id, channel } = pageServer(page);
+        try {
+          await checkServer(id, L, { groups: GUILD, ...STAFF }, channel);
+        } finally {
+          await removeServer(id);
+        }
       } finally {
-        await page.unroute(permissions);
+        await page.unroute(createRoute);
+      }
+    },
+  );
+
+  await report.step(
+    `${tag} a create with no answer in time opens the server that landed, no second one`,
+    async () => {
+      let reached = 0;
+      await page.route(createRoute, async (route) => {
+        if (route.request().method() !== "POST") return route.continue();
+        reached++;
+        // past the 20 s the app waits; the request still lands afterwards
+        await new Promise((resolve) => setTimeout(resolve, 23000));
+        await route.continue().catch(() => {});
+      });
+      try {
+        await openFlow(page, L);
+        await pickRow(page, L, "friends");
+        await answer(page, L, "skip");
+        const before = made.size;
+        await create(page, L, "E2E stopped");
+        await dialog(page)
+          .getByRole("alert")
+          .getByText(tr(L, "Zrzur did not answer in time."))
+          .waitFor({ timeout: 40000 });
+        await page.screenshot({ path: shot(`${tag}-create-timeout`) });
+        // the late answer: the server exists now and the gateway brings it in
+        const until = Date.now() + 20000;
+        while (made.size === before && Date.now() < until)
+          await page.waitForTimeout(250);
+        const landed = [...made].at(-1);
+        if (made.size === before) fail("the held create never landed");
+        await page.waitForTimeout(1500);
+        await createButton(page, L).click();
+        await page.waitForURL(new RegExp(`/server/${landed}(/|$)`), {
+          timeout: 30000,
+        });
+        same(reached, 1, "create requests sent");
+        await removeServer(landed);
+      } finally {
+        await page.unroute(createRoute);
       }
     },
   );
