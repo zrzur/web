@@ -1,13 +1,12 @@
-import { Show, createEffect, createSignal, onCleanup } from "solid-js";
+import { Show } from "solid-js";
 
 import { Plural, Trans } from "@lingui/solid/macro";
-import { PublicBot } from "@zrzur/sdk/solid";
 import { styled } from "styled-system/jsx";
 
-import { useClient } from "@revolt/client";
 import { Icon } from "@revolt/ui/icons/Icon";
 
 import { ProfileSection } from "./ProfileCard";
+import { usePublicBot } from "./usePublicBot";
 
 /** Only ordinary web addresses become links */
 export const safeLink = (url?: string) =>
@@ -18,26 +17,22 @@ export const safeLink = (url?: string) =>
  * servers it is in, and its privacy policy and terms. Nothing is shown for a
  * private bot the reader cannot see.
  */
-export function ProfileBotAbout(props: { botId: string }) {
-  const client = useClient();
-  // a signal, not a resource: see ProfileActions
-  const [bot, setBot] = createSignal<PublicBot>();
-  createEffect(() => {
-    const id = props.botId;
-    setBot(undefined);
-    let current = true;
-    onCleanup(() => (current = false));
-    client()
-      .bots.fetchPublic(id)
-      .then((answer) => current && setBot(answer))
-      .catch(() => undefined);
-  });
+export default function ProfileBotAbout(props: { botId: string }) {
+  const bot = usePublicBot(() => props.botId);
 
   const privacy = () => safeLink(bot()?.privacyPolicyUrl);
   const terms = () => safeLink(bot()?.termsOfServiceUrl);
 
   return (
-    <Show when={bot()}>
+    <Show
+      when={bot()}
+      fallback={
+        // the space it will take, so Roles below do not jump
+        <Show when={bot.loading()}>
+          <Waiting aria-hidden="true" />
+        </Show>
+      }
+    >
       {(bot) => (
         <ProfileSection title={<Trans>About this bot</Trans>}>
           <Facts data-testid="bot-about">
@@ -123,4 +118,9 @@ const Links = styled("div", {
       borderRadius: "4px",
     },
   },
+});
+
+/** As tall as About with two lines, while the bot's page loads */
+const Waiting = styled("div", {
+  base: { minHeight: "96px" },
 });

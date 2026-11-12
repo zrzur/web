@@ -1,17 +1,18 @@
-import { Show, createEffect, createSignal, onCleanup } from "solid-js";
+import { Show, createSignal } from "solid-js";
 
 import { Trans, useLingui } from "@lingui/solid/macro";
 import { useNavigate } from "@solidjs/router";
-import { PublicBot, ServerMember, User } from "@zrzur/sdk/solid";
+import { ServerMember, User } from "@zrzur/sdk/solid";
 import { cva } from "styled-system/css";
 import { styled } from "styled-system/jsx";
 
 import { UserContextMenu } from "@revolt/app";
-import { useClient } from "@revolt/client";
 import { useModals } from "@revolt/modal";
 import { Icon } from "@revolt/ui/icons/Icon";
 
 import { Button } from "../../design";
+
+import { usePublicBot } from "./usePublicBot";
 
 interface Props {
   user: User;
@@ -36,24 +37,12 @@ function canEdit(props: Props) {
 
 function useProfileActions(props: Props) {
   const navigate = useNavigate();
-  const client = useClient();
   const { openModal, showError } = useModals();
 
-  // A signal, not a resource: a pending resource would suspend the channel's
-  // <Suspense> and detach the message list behind the profile card.
-  const [publicBot, setPublicBot] = createSignal<PublicBot>();
-  createEffect(() => {
-    const id = props.user.bot && props.user.id;
-    setPublicBot(undefined);
-    if (!id) return;
-    let current = true;
-    onCleanup(() => (current = false));
-    client()
-      .bots.fetchPublic(id)
-      .then((b) => (b instanceof PublicBot ? b : new PublicBot(client(), b)))
-      .then((bot) => current && setPublicBot(bot))
-      .catch(() => undefined);
-  });
+  // shared with the rest of the card through the SDK's cache: one request
+  const publicBot = usePublicBot(() =>
+    props.user.bot ? props.user.id : undefined,
+  );
 
   return {
     publicBot,

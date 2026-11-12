@@ -1,18 +1,20 @@
-import { For, JSX, Match, Show, Switch, lazy } from "solid-js";
+import { For, JSX, Match, Show, Suspense, Switch, lazy } from "solid-js";
 
 import { Trans } from "@lingui/solid/macro";
 import { ServerMember, User, UserProfile } from "@zrzur/sdk/solid";
 import { styled } from "styled-system/jsx";
 
 import { ProfileBio } from "./ProfileBio";
-import { ProfileBotAbout } from "./ProfileBotAbout";
 import { ProfileCard, ProfileSkeleton } from "./ProfileCard";
-import { ProfileCommands } from "./ProfileCommands";
 import { ProfileJoined } from "./ProfileJoined";
 import { ProfileLinks } from "./ProfileLinks";
-import { ProfileOwner } from "./ProfileOwner";
 import { ProfileRoles } from "./ProfileRoles";
 import { visibleSections } from "./sections";
+
+// a bot's About, maker and commands: loaded when a bot's card first opens
+const ProfileBotAbout = lazy(() => import("./ProfileBotAbout"));
+const ProfileOwner = lazy(() => import("./ProfileOwner"));
+const ProfileCommands = lazy(() => import("./ProfileCommands"));
 
 // lazy: app code is loaded after the UI layer
 const CommunityCreations = lazy(
@@ -38,7 +40,7 @@ export function ProfileBody(props: {
   failed?: boolean;
   /** Open the long text and show more of what is listed */
   full?: boolean;
-  bot?: { owner: string };
+  bot?: { owner?: string };
   onClose?: () => void;
   /** More sections after these */
   children?: JSX.Element;
@@ -61,12 +63,19 @@ export function ProfileBody(props: {
           onClose={props.onClose}
         />
         <Show when={props.bot}>
-          <ProfileBotAbout botId={props.user.id} />
-          <ProfileOwner bot={props.bot!} />
-          <ProfileCommands
-            botId={props.user.id}
-            serverId={props.member?.id.server}
-          />
+          {/* own boundaries: loading these never suspends the channel; the
+              placeholder keeps Roles below from jumping while they load */}
+          <Suspense fallback={<BotPlaceholder aria-hidden="true" />}>
+            <ProfileBotAbout botId={props.user.id} />
+            <ProfileOwner botId={props.user.id} bot={props.bot!} />
+            {/* About and Created by never wait for the commands */}
+            <Suspense>
+              <ProfileCommands
+                botId={props.user.id}
+                serverId={props.member?.id.server}
+              />
+            </Suspense>
+          </Suspense>
         </Show>
         <ProfileRoles member={props.member} />
         <Show when={!props.user.self}>
@@ -126,3 +135,10 @@ export function ProfileSections(props: {
     </For>
   );
 }
+
+/** As tall as "About this bot" with two lines, while its code loads */
+const BotPlaceholder = styled("div", {
+  base: {
+    minHeight: "96px",
+  },
+});

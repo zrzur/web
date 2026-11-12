@@ -863,7 +863,7 @@ export function UserContextMenu(props: {
 export function floatingUserMenus(
   user: User,
   member?: ServerMember,
-  bot?: { owner: string },
+  bot?: { owner?: string },
   contextMessage?: Message,
   contextGroup?: Channel,
 ): JSX.Directives["floating"] & object {

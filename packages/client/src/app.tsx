@@ -5,7 +5,7 @@
 import { lazy, onMount } from "solid-js";
 
 import { Navigate, Route, useParams } from "@solidjs/router";
-import { PublicBot, PublicChannelInvite } from "@zrzur/sdk/solid";
+import { PublicChannelInvite } from "@zrzur/sdk/solid";
 
 import { useClient } from "@revolt/client";
 import { useModals } from "@revolt/modal";
@@ -120,9 +120,8 @@ function BotRedirect() {
   onMount(() => {
     if (params.code && isInviteCode(params.code)) {
       client()
-        // TODO: add a helper to stoat.js for this
-        .api.get(`/bots/${params.code as ""}/invite`)
-        .then((invite) => new PublicBot(client(), invite))
+        // kept by the SDK: the bot's card and this dialog share one request
+        .bots.fetchPublic(params.code)
         .then((invite) => {
           // invite links from the Developer Portal carry the permissions
           const asked = Number(

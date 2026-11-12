@@ -110,7 +110,7 @@ declare module "solid-js" {
           /**
            * Bot to display
            */
-          bot?: { owner: string };
+          bot?: { owner?: string };
         };
         contextMenu?: Component;
         contextMenuHandler?: "click" | "contextmenu";
