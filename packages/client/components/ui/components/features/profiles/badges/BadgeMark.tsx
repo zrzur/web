@@ -98,6 +98,20 @@ export function BadgeMark(props: {
   );
 }
 
+/** The name and description of a badge, as its tooltip shows them */
+export function BadgeTextTip(props: { id: AnyBadgeId }) {
+  const text = useBadgeText();
+  const words = createMemo(() => text(props.id));
+  return (
+    <BadgeTip>
+      <strong dir="auto">{words().name}</strong>
+      <Show when={words().description}>
+        <span dir="auto">{words().description}</span>
+      </Show>
+    </BadgeTip>
+  );
+}
+
 /**
  * A row of badges. It follows the reading direction and wraps; with
  * `mode="press"` on a phone each badge is a 44 px target, and the row
@@ -130,12 +144,21 @@ export function BadgeList(props: {
 }
 
 /**
- * The word form of a badge (Bot, Official). Neutral on purpose: the action
- * colour is for actions, and a channel can show this on every message.
+ * The word form of a badge (Bot, Official). Neutral by default; `filled`
+ * (bots) is the Zrzur colour, the owner's call of 2026-11-12.
  */
-export function BadgeTag(props: { children: JSX.Element; icon?: JSX.Element }) {
+export function BadgeTag(props: {
+  children: JSX.Element;
+  icon?: JSX.Element;
+  /** a filled pill in the Zrzur colour (bots; owner 2026-11-12) */
+  filled?: boolean;
+}) {
   return (
-    <span class={tag} data-badge-tag>
+    <span
+      class={tag}
+      data-badge-tag
+      data-filled={props.filled ? "" : undefined}
+    >
       {props.icon}
       {props.children}
     </span>
@@ -230,6 +253,23 @@ const tag = css({
   fontSize: "12px",
   fontWeight: 600,
   lineHeight: 1,
+
+  // bots: a filled pill like a name tag, the Zrzur colour with its on-colour
+  // text (contrast held by the theme), capitals in Latin scripts
+  "&[data-filled]": {
+    height: "16px",
+    paddingInline: "5px",
+    gap: "3px",
+    borderRadius: "4px",
+    border: "none",
+    background: "var(--z-btn-primary-bg)",
+    color: "var(--z-on-accent)",
+    "--z-icon-color": "var(--z-on-accent)",
+    fontSize: "11px",
+    fontWeight: 700,
+    letterSpacing: "0.04em",
+    textTransform: "uppercase",
+  },
 });
 
 const BadgeTip = styled("span", {

@@ -9,7 +9,6 @@ import { Icon } from "@revolt/ui/icons/Icon";
 
 import { BotLabel } from "./BotLabel";
 import { ProfileBadges, profileBadgeIds } from "./ProfileBadges";
-import { BadgeList } from "./badges/BadgeMark";
 import { readableName, readableTheme } from "./profileTheme";
 import { nameStyle, themeColours, userStyleOf } from "./userStyle";
 
@@ -85,14 +84,6 @@ export function ProfileIdentity(props: {
             <BotLabel
               official={props.user.officialBot}
               verified={props.user.verifiedBot}
-            />
-          </Show>
-          {/* set by Trust & Safety; the SDK passes the field through */}
-          <Show when={(props.user.bot as { verified?: boolean })?.verified}>
-            <BadgeList
-              ids={["bot_verified"]}
-              label={t`Bot badges`}
-              mode="press"
             />
           </Show>
         </DisplayNameGroup>

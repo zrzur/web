@@ -139,11 +139,6 @@ export function useBadgeText(): (id: string) => BadgeText {
         description: t`Supported Zrzur.`,
         earn: "",
       },
-      paw: {
-        name: t`Paw`,
-        description: t`A small thank-you badge.`,
-        earn: "",
-      },
       reserved_1: {
         name: t`Special badge`,
         description: t`A one-off badge.`,

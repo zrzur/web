@@ -72,7 +72,6 @@ const BADGES = {
     "Reported a security issue responsibly.",
   ],
   supporter: ["Supporter", "Supported Zrzur."],
-  paw: ["Paw", "A small thank-you badge."],
 };
 
 // `server_owner` is a mark beside a name in a server, never in the profile list
@@ -384,12 +383,13 @@ async function botTagNear(line, word) {
     .locator("[data-badge-tag]")
     .first();
   await tag.waitFor({ timeout: 20000 });
-  assert((await tag.innerText()) === word, `tag says ${await tag.innerText()}`);
+  // the filled bot pill shows Latin words in capitals (CSS), Arabic as it is
+  assert((await tag.innerText()) === word.toUpperCase(), `tag says ${await tag.innerText()}`);
   const style = await tag.evaluate((el) => {
     const { fontSize, height } = getComputedStyle(el);
     return `${fontSize} ${height}`;
   });
-  assert(style === "12px 20px", `tag is ${style}`);
+  assert(style === "11px 16px", `tag is ${style}`);
 }
 
 const tipLocator = (page, name) =>
@@ -700,7 +700,12 @@ for (const locale of locales) {
           .getByText(seen.botName, { exact: true })
           .first();
         await row.waitFor({ timeout: 20000 });
-        const seal = page.locator('[data-badge-id="bot_verified"]').first();
+        // the check inside the Bot tag is the one verified mark (no second seal)
+        // the one inside the open profile, not the member list or a message
+        const seal = usernameOf(page)
+          .locator("xpath=ancestor::*[.//*[@data-verified-bot]][1]")
+          .locator("[data-verified-bot]")
+          .first();
         // a phone slides the list in: a tap during that goes nowhere
         for (let i = 0; i < 2 && !(await seal.isVisible()); i++) {
           if (phone) await row.tap({ force: true });
@@ -710,10 +715,11 @@ for (const locale of locales) {
         }
         await seal.waitFor({ timeout: 4000 });
         await reads(seal, "Verified bot", "The Zrzur team reviewed this bot.");
-        if (phone) {
-          await edgesPress(seal);
-          await edgesPress(usernameOf(page));
-        }
+        assert(
+          (await page.locator('[data-badge-id="bot_verified"]').count()) === 0,
+          "a second verified seal beside the Bot tag",
+        );
+        if (phone) await edgesPress(usernameOf(page));
         await shot("verified-bot");
       });
 

@@ -39,7 +39,6 @@ export type BadgeId =
   | "translator"
   | "responsible_disclosure"
   | "supporter"
-  | "paw"
   | "reserved_1"
   | "reserved_2";
 
@@ -95,7 +94,7 @@ export const BADGE_BITS = {
   founder: 16,
   platform_moderator: 32,
   supporter: 64,
-  paw: 128,
+  // 128 was the old Revolt "Paw" joke badge: removed for good (owner, 2026-11-12); the bit is never shown or reused
   early_adopter: 256,
   reserved_1: 512,
   reserved_2: 1024,
@@ -142,7 +141,7 @@ const meta = (
  * top-left, deeper bottom-right); top-tier rosettes carry a light ring.
  */
 export const BADGES: BadgeMeta[] = [
-  meta("founder", 2, 5, "circle", ["#454B6E", "#1F2338"], { ring: "#D9DCEB" }),
+  meta("founder", 2, 5, "hex", ["#454B6E", "#1F2338"], { ring: "#D9DCEB" }),
   meta("staff", 2, 10, "rosette", ["#9F88FF", "#5E46C8"], { ring: "#E4DDFF" }),
   meta("developer", 1, 20, "hex", ["#5C9BEA", "#2F63B8"]),
   meta("platform_moderator", 1, 25, "hex", ["#4F8DB8", "#2C5D80"]),
@@ -177,7 +176,6 @@ export const BADGES: BadgeMeta[] = [
     retired: true,
   }),
   meta("supporter", 0, 92, "square", ["#A6819A", "#755467"], { retired: true }),
-  meta("paw", 0, 93, "square", ["#A0826A", "#6E5643"], { retired: true }),
   meta("reserved_1", 0, 94, "square", ["#7E8396", "#555A6B"], {
     retired: true,
   }),

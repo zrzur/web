@@ -1,26 +1,73 @@
-import { JSX, Show, createUniqueId } from "solid-js";
+import { JSX, Show, createSignal, createUniqueId } from "solid-js";
 
 import { BadgeMeta, BadgeShape } from "./catalog";
 
 /**
- * Original Zrzur badge artwork, drawn inline so it never shifts the
- * layout while loading and needs no third-party files. Only `BadgeMark`
- * uses this; everything else asks `BadgeMark` for a badge.
+ * Original Zrzur badge artwork, version 2 (owner-approved 2026-11-12). Only
+ * `BadgeMark` uses this; everything else asks `BadgeMark` for a badge.
  *
- * Most badges are emblems with their own silhouette (a shield, a beetle, a
- * flask, a feather…), so each one is recognisable by shape alone at 20px.
- * Badges without an emblem (the team and the top tier) sit on their tier
- * shape with a white glyph. Every badge is lit the same way, so the set
- * reads as one family:
- *   1. the silhouette in a two-stop gradient, lit top-left
- *   2. a soft gloss over the upper half
- *   3. a light inner edge, and a thin dark outline so it holds on light
- *      themes too
- *   4. a ring inside the edge for ringed badges
- *   5. details (white glyphs, cut-outs in the deep colour) on top
- * The whole badge sits on a small shadow.
+ * Every badge is an enamel pin: the rim metal shows the tier (silver regular,
+ * gold rare, a double platinum rim on the top tier) and the enamel colour
+ * shows the family. Founder, Staff and Official Server are the Zrzur mark on
+ * its own, with no frame. Verified Server, Verified Bot and Verified Bot
+ * Developer share one verification mark.
+ *
+ * The art (`badgeArt.ts`, generated, static, no user input) loads on its own
+ * the first time a badge is drawn, so it stays out of the app shell. Until it
+ * arrives the badge keeps its size and draws nothing, so nothing shifts.
  */
+type Art = Readonly<Record<string, string>>;
+const [loadedArt, setLoadedArt] = createSignal<Art>();
+let artRequest: Promise<void> | undefined;
+
+/** Load the badge art once; resolves when it is ready (tests await it). */
+export function loadBadgeArt(): Promise<void> {
+  artRequest ??= import("./badgeArt").then((module) => {
+    setLoadedArt(module.BADGE_ART);
+  });
+  return artRequest;
+}
+
 export function BadgeGlyph(props: { badge: BadgeMeta; size: number }) {
+  const id = `zb${createUniqueId().replace(/[^A-Za-z0-9_-]/g, "")}`;
+  void loadBadgeArt();
+  const art = () => loadedArt()?.[props.badge.id];
+  return (
+    <Show
+      when={loadedArt()}
+      fallback={
+        <svg
+          width={props.size}
+          height={props.size}
+          viewBox="0 0 48 48"
+          aria-hidden="true"
+          data-badge={props.badge.id}
+          data-art="loading"
+        />
+      }
+    >
+      <Show when={art()} fallback={<LegacyGlyph {...props} />}>
+        <svg
+          width={props.size}
+          height={props.size}
+          viewBox="0 0 48 48"
+          aria-hidden="true"
+          data-badge={props.badge.id}
+          data-art="v2"
+          style={{ overflow: "visible" }}
+          // eslint-disable-next-line solid/no-innerhtml -- generated static art, no user input
+          innerHTML={art()!.replaceAll("{{ID}}", id)}
+        />
+      </Show>
+    </Show>
+  );
+}
+
+/**
+ * The earlier drawing, kept only for a badge id this build has no art for
+ * (a newer server can send one). It draws the tier shape in the badge colours.
+ */
+function LegacyGlyph(props: { badge: BadgeMeta; size: number }) {
   const id = createUniqueId();
   const top = () => props.badge.colours[0];
   const bottom = () => props.badge.colours[1] ?? props.badge.colours[0];
@@ -142,6 +189,16 @@ type Emblem = {
 };
 
 const EMBLEMS: Partial<Record<string, Emblem>> = {
+  // the founder mark: an octagon with the Zrzur logo, not a circle
+  founder: {
+    body: "", // no shape at all: the logo stands alone, drawn in white
+    details: () => logo(13),
+  },
+  staff: {
+    body: "", // the admin mark: the logo alone, no rosette
+    details: () => logo(13),
+  },
+
   // a terminal window with a prompt
   developer: {
     body: "M6 3.5h12a4 4 0 0 1 4 4v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4v-9a4 4 0 0 1 4-4Z",
@@ -422,9 +479,7 @@ const EMBLEMS: Partial<Record<string, Emblem>> = {
   // a house, the first place people gather
   community_builder: {
     body: "M12 2 22 10.6a1 1 0 0 1-.7 1.8h-1.7v8.2a1.4 1.4 0 0 1-1.4 1.4H5.8a1.4 1.4 0 0 1-1.4-1.4v-8.2H2.7A1 1 0 0 1 2 10.6Z",
-    details: () => (
-      <path d="M9.6 22v-6a2.4 2.4 0 0 1 4.8 0v6Z" fill="#fff" />
-    ),
+    details: () => <path d="M9.6 22v-6a2.4 2.4 0 0 1 4.8 0v6Z" fill="#fff" />,
   },
 
   // the house became a skyline
@@ -550,12 +605,6 @@ const EMBLEMS: Partial<Record<string, Emblem>> = {
       />
     ),
   },
-
-  // retired: a paw
-  paw: {
-    body: "M12 11.4c3.4 0 6.4 3.6 6.4 6.6 0 2.4-1.8 3.6-3.6 3.6-1.2 0-1.8-.6-2.8-.6s-1.6.6-2.8.6c-1.8 0-3.6-1.2-3.6-3.6 0-3 3-6.6 6.4-6.6Z M9 2.6a2.3 2.9 0 1 1 0 5.8 2.3 2.9 0 0 1 0-5.8Z M15 2.6a2.3 2.9 0 1 1 0 5.8 2.3 2.9 0 0 1 0-5.8Z M19.6 6.2a2.3 2.8 0 1 1 0 5.6 2.3 2.8 0 0 1 0-5.6Z M4.4 6.2a2.3 2.8 0 1 1 0 5.6 2.3 2.8 0 0 1 0-5.6Z",
-    details: () => <></>,
-  },
 };
 
 /** Twelve-point rosette for top-tier badges */
@@ -642,8 +691,6 @@ const sparkle = (x: number, y: number, r: number) => (
 );
 
 const GLYPHS: Partial<Record<string, () => JSX.Element>> = {
-  founder: () => logo(15),
-  staff: () => logo(12.5),
   developer: () =>
     line(
       "M9.2 8.2 5.6 12l3.6 3.8M14.8 8.2l3.6 3.8-3.6 3.8M13.1 6.6l-2.2 10.8",
@@ -742,15 +789,6 @@ const GLYPHS: Partial<Record<string, () => JSX.Element>> = {
     </>
   ),
   supporter: heart,
-  paw: () => (
-    <>
-      <ellipse cx="12" cy="15" rx="3.6" ry="3" />
-      <circle cx="7.4" cy="11" r="1.6" />
-      <circle cx="10.2" cy="7.9" r="1.6" />
-      <circle cx="13.8" cy="7.9" r="1.6" />
-      <circle cx="16.6" cy="11" r="1.6" />
-    </>
-  ),
   server_owner: () => (
     <>
       <path d="M5.6 9.2 9 12l3-5.4 3 5.4 3.4-2.8-1.3 7.6H6.9Z" />
