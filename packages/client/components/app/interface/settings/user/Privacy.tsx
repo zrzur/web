@@ -9,6 +9,7 @@ import type {
 import { styled } from "styled-system/jsx";
 
 import { useClient } from "@revolt/client";
+import { directMessagesFriendsOnly } from "@revolt/client/age";
 import { useModals } from "@revolt/modal";
 import {
   Button,
@@ -82,10 +83,20 @@ export function PrivacySection() {
         icon={<Icon name="chat-circle" size={20} />}
         title={<Trans>Who can message you</Trans>}
         description={
-          <Trans>
-            Friends can always message you, and blocked people never can. Anyone
-            you write to first can reply.
-          </Trans>
+          <Show
+            when={directMessagesFriendsOnly()}
+            fallback={
+              <Trans>
+                Friends can always message you, and blocked people never can.
+                Anyone you write to first can reply.
+              </Trans>
+            }
+          >
+            <Trans>
+              Under 18, only friends can start a direct message with you. Anyone
+              you write to first can reply.
+            </Trans>
+          </Show>
         }
         disabled={unavailable()}
         control={(ids) => (
@@ -102,12 +113,15 @@ export function PrivacySection() {
                 })
               }
             >
-              <MenuItem value="Everyone">
-                <Trans>Everyone</Trans>
-              </MenuItem>
-              <MenuItem value="Mutual">
-                <Trans>Friends and server members</Trans>
-              </MenuItem>
+              {/* under 18 the server keeps friends only, so nothing wider is offered */}
+              <Show when={!directMessagesFriendsOnly()}>
+                <MenuItem value="Everyone">
+                  <Trans>Everyone</Trans>
+                </MenuItem>
+                <MenuItem value="Mutual">
+                  <Trans>Friends and server members</Trans>
+                </MenuItem>
+              </Show>
               <MenuItem value="Friends">
                 <Trans>Friends only</Trans>
               </MenuItem>
@@ -159,7 +173,9 @@ export function PrivacySection() {
         control={(ids) => (
           <Toggle
             checked={alwaysLoadMediaPlayers()}
-            onChange={() => setAlwaysLoadMediaPlayers(!alwaysLoadMediaPlayers())}
+            onChange={() =>
+              setAlwaysLoadMediaPlayers(!alwaysLoadMediaPlayers())
+            }
             aria-labelledby={ids.labelId}
             aria-describedby={ids.descriptionId}
           />
