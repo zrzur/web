@@ -630,7 +630,7 @@ const Crumbs = styled("nav", {
       textOverflow: "ellipsis",
       whiteSpace: "nowrap",
     },
-    "&:dir(rtl) [data-mirror]": { transform: "scaleX(-1)" },
+    // direction icons turn by themselves in right-to-left (styles.css)
     "@media (max-width: 760px)": { display: "none" },
   },
 });

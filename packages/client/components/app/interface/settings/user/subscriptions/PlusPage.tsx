@@ -1202,7 +1202,9 @@ const LevelFan = styled("div", {
   base: {
     position: "absolute",
     zIndex: -1,
-    right: "12px",
+    // at the end of the card in either direction, leaning away from the text
+    insetInlineEnd: "12px",
+    _rtl: { scale: "-1 1" },
     top: "50%",
     translate: "0 -62%",
     display: "flex",

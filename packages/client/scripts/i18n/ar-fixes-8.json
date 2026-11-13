@@ -1,0 +1,6 @@
+{
+  "Type words to search, or a filter like from:, has: or before:.": "اكتب كلمات للبحث، أو عامل تصفية مثل from:‎ أو has:‎ أو before:‎.",
+  "Only one mentions: filter is used, so \"{value}\" was left out.": "يُستخدم عامل mentions:‎ واحد فقط، لذلك تُرك \"{value}\".",
+  "Up to 10 from: filters are used, so \"{value}\" was left out.": "يُستخدم 10 عوامل from:‎ على الأكثر، لذلك تُرك \"{value}\".",
+  "Up to 50 in: filters are used, so \"{value}\" was left out.": "يُستخدم 50 عامل in:‎ على الأكثر، لذلك تُرك \"{value}\"."
+}

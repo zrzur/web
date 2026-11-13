@@ -689,7 +689,7 @@ const DocsCard = styled("a", {
       flexShrink: 0,
       color: "var(--z-fg-muted)",
     },
-    _rtl: { "& .end": { transform: "scaleX(-1)" } },
+    // direction icons turn by themselves in right-to-left (styles.css)
   },
 });
 
@@ -785,7 +785,7 @@ const BackButton = styled("button", {
     _hover: { background: "var(--z-hover)" },
     _phone: { minHeight: "44px" },
     // the arrow points back in reading direction
-    _rtl: { "& svg": { transform: "scaleX(-1)" } },
+    // direction icons turn by themselves in right-to-left (styles.css)
     _focusVisible: { outline: "2px solid var(--z-focus)" },
   },
 });

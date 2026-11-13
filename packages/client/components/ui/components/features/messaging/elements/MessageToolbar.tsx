@@ -89,7 +89,7 @@ export function MessageToolbar() {
       >
         <button
           type="button"
-          class={tool({ mirror: true })}
+          class={tool()}
           aria-label={t`Forward`}
           use:floating={tip(t`Forward`)}
           onClick={() =>
@@ -199,12 +199,8 @@ const tool = cva({
     },
   },
   variants: {
-    /** arrows that point a way turn round in right-to-left text */
-    mirror: {
-      true: {
-        "&:dir(rtl) svg": { transform: "scaleX(-1)" },
-      },
-    },
+    // arrows that point a way turn round in right-to-left text by
+    // themselves (styles.css); a second flip here undid it for Forward
     danger: {
       true: {
         "&:hover": {

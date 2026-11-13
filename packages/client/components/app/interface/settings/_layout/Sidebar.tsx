@@ -180,7 +180,7 @@ const Base = styled("div", {
   base: {
     display: "flex",
     flex: "1 0 218px",
-    paddingLeft: "8px",
+    paddingInlineStart: "8px",
     justifyContent: "flex-end",
     height: "100%",
 

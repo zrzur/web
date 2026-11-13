@@ -287,7 +287,7 @@ const Content = styled("div", {
       // no channel list: this panel meets the rail itself, so it takes the
       // rounded top corner and the hairline the channel list would have
       false: {
-        paddingLeft: 0,
+        paddingInlineStart: 0,
         borderRadius: 0,
         borderStartStartRadius: "var(--z-radius-md, 10px)",
         borderInlineStart: "1px solid var(--z-border-subtle)",
@@ -299,7 +299,7 @@ const Content = styled("div", {
         },
 
         _tablet: {
-          paddingLeft: 0,
+          paddingInlineStart: 0,
         },
       },
     },

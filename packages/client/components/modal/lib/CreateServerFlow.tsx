@@ -450,7 +450,8 @@ const Choice = styled("button", {
     "--z-icon-color": "var(--z-icon-muted)",
     transition: "background-color 0.12s ease, border-color 0.12s ease",
     "& > span:not(.z-icon)": { flex: 1, minWidth: 0 },
-    "& > .z-icon": { flexShrink: 0, _rtl: { transform: "scaleX(-1)" } },
+    // direction icons turn by themselves in right-to-left (styles.css)
+    "& > .z-icon": { flexShrink: 0 },
     _hover: {
       background: "var(--z-nav-hover)",
       borderColor: "var(--z-accent)",

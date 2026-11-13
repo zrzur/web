@@ -601,7 +601,7 @@ const SignWords = styled("div", {
       fontWeight: 600,
       cursor: "pointer",
       "--z-icon-color": "currentColor",
-      "&:dir(rtl) svg": { transform: "scaleX(-1)" },
+      // direction icons turn by themselves in right-to-left (styles.css)
       _focusVisible: {
         outline: "2px solid var(--z-focus)",
         outlineOffset: "2px",

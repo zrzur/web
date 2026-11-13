@@ -414,12 +414,17 @@ const Option = styled("li", {
     cursor: "pointer",
     _phone: { minHeight: "44px", fontSize: "15px" },
     "&[data-active]": { background: "var(--z-float-hover)" },
-    "& .label": { fontWeight: 500, flexShrink: 0 },
+    // a filter word is Latin in every language: it keeps its own direction,
+    // so "from:" never turns into ":from" in Arabic
+    "& .label": {
+      fontWeight: 500,
+      flexShrink: 0,
+      unicodeBidi: "plaintext",
+    },
+    // the explanation is read whole: it wraps instead of ending in "…"
     "& .detail": {
       minWidth: 0,
-      overflow: "hidden",
-      textOverflow: "ellipsis",
-      whiteSpace: "nowrap",
+      lineHeight: "18px",
       color: "var(--z-fg-muted)",
     },
   },
@@ -453,7 +458,8 @@ export const SearchField = styled("label", {
     "&:focus-within, &:has(input:not(:placeholder-shown))": {
       width: "300px",
       borderColor: "var(--z-accent)",
-      color: "var(--z-accent)",
+      // the magnifier: the accent's text step reads on the field (3:1 and more)
+      color: "var(--z-accent-text, var(--z-accent))",
       boxShadow: "var(--z-field-focus-shadow)",
     },
 

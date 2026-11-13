@@ -32,8 +32,8 @@ const internalLink = cva({
     verticalAlign: "bottom",
 
     gap: "4px",
-    paddingLeft: "2px",
-    paddingRight: "6px",
+    paddingInlineStart: "2px",
+    paddingInlineEnd: "6px",
     alignItems: "center",
     display: "inline-flex",
     textDecoration: "none !important",

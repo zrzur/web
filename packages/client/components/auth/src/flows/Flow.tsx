@@ -94,7 +94,7 @@ const backStyle = {
   _hover: { color: "var(--z-fg-primary)", background: "var(--z-nav-hover)" },
   _focusVisible: { outline: "2px solid var(--z-focus)", outlineOffset: "2px" },
   // the arrow points the way back in right-to-left languages too
-  "& > .z-icon": { _rtl: { transform: "scaleX(-1)" } },
+  // direction icons turn by themselves in right-to-left (styles.css)
 } as const;
 
 const BackLink = styled(A, { base: backStyle });

@@ -101,7 +101,7 @@ const Header = styled("div", {
     fontWeight: 600,
     color: "var(--z-fg-muted)",
     "--z-icon-color": "var(--z-icon-muted)",
-    "&:dir(rtl) svg": { transform: "scaleX(-1)" },
+    // direction icons turn by themselves in right-to-left (styles.css)
   },
 });
 

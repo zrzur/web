@@ -925,7 +925,9 @@ const Fan = styled("div", {
   base: {
     position: "absolute",
     zIndex: -1,
-    right: "14px",
+    // at the end of the head in either direction, leaning away from the text
+    insetInlineEnd: "14px",
+    _rtl: { scale: "-1 1" },
     bottom: "22px",
     display: "flex",
     // drawn left to right in every language; only its side follows the page
@@ -1214,7 +1216,7 @@ const LinkButton = styled("button", {
     color: "var(--z-accent-text, var(--z-accent))",
     cursor: "pointer",
     "&:disabled": { opacity: 0.6 },
-    "&:dir(rtl) svg": { scale: "-1 1" },
+    // direction icons turn by themselves in right-to-left (styles.css)
   },
 });
 
