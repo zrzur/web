@@ -1,4 +1,4 @@
-import { Accessor, createEffect, on, onMount } from "solid-js";
+import { Accessor, createEffect, on, onCleanup, onMount } from "solid-js";
 
 import { defaultKeymap, history } from "@codemirror/commands";
 import { markdown, markdownLanguage } from "@codemirror/lang-markdown";
@@ -204,6 +204,11 @@ export function TextEditor2(props: Props) {
       ],
     }),
   });
+
+  // CodeMirror listens on the window (resize, print, scroll parents) until
+  // it is destroyed; without this every editor that ever opened stayed in
+  // memory together with the channel page around it
+  onCleanup(() => view.destroy());
 
   // Apply shared scrollbar styles from the exported scrollable style classes.
   const scroller = codeMirror.querySelector<HTMLDivElement>(".cm-scroller");
