@@ -70,6 +70,25 @@ test("a server page has its own title, description, image and languages", () => 
   assert.equal(meta.alternates.at(-1).href, `${ORIGIN}/rabea`);
 });
 
+test("a formatted description reaches the head as plain words", () => {
+  const meta = pageMeta({
+    site: "discover",
+    origin: ORIGIN,
+    path: "/zrzur",
+    route: { kind: "server", slug: "zrzur" },
+    data: {
+      ...card,
+      description:
+        "The official server.\n\n**Official links**\n- Website: https://zrzur.com\n- [Blog](https://zrzur.com/blog)",
+    },
+  });
+  assert.equal(
+    meta.description,
+    "The official server. Official links Website: https://zrzur.com Blog",
+  );
+  assert.doesNotMatch(JSON.stringify(meta.jsonLd), /\*\*|\\n- /);
+});
+
 test("no description: a short line with a rounded member count", () => {
   const meta = pageMeta({
     site: "discover",

@@ -25489,3 +25489,11 @@ msgstr "Ich akzeptiere die <0>Nutzungsbedingungen</0> und die <1>Community-Richt
 #: components/auth/src/flows/Form.tsx
 msgid "Tick the box to accept before you continue."
 msgstr "Setze das Häkchen, um zuzustimmen, bevor du fortfährst."
+
+#: components/app/interface/discover/ServerPage.tsx
+msgid "Copy page link"
+msgstr "Seitenlink kopieren"
+
+#: components/app/interface/discover/ServerPage.tsx
+msgid "Discover page"
+msgstr "Discover-Seite"

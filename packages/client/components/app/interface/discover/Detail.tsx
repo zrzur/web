@@ -23,6 +23,7 @@ import { Icon } from "@revolt/ui/icons/Icon";
 
 import { usePermissionNames } from "../../../../src/interface/OAuth";
 
+import { ListingAbout } from "./About";
 import { BotInvite, discoverApi } from "./api";
 import { ListingArt } from "./Art";
 import {
@@ -30,12 +31,14 @@ import {
   Listing,
   MarkPill,
   Tag,
+  listingBadge,
   listingMark,
   useFileUrl,
 } from "./Cards";
 import { categoryIcon, useDiscoverLabels } from "./categories";
 import { listedCommands } from "./find";
 import { paletteTokens } from "./palette";
+import { plainDescription } from "./plainText";
 
 /** Permissions that let a bot change the server or remove people */
 const SENSITIVE = [2 ** 1, 2 ** 2, 2 ** 3, 2 ** 6, 2 ** 7, 2 ** 37];
@@ -124,7 +127,7 @@ export function ListingDetail(props: {
   const moreToSay = () => (props.listing.description ?? "").includes("\n");
   /** What the bot's first message would read like: its own first line */
   const firstLine = () =>
-    props.listing.description?.split(/\n/)[0]?.trim() || undefined;
+    plainDescription(props.listing.description?.split(/\n/)[0]) || undefined;
 
   const onKey = (e: KeyboardEvent) => {
     // a dialog opened from this one (Report) owns the keys while it is open
@@ -229,14 +232,18 @@ export function ListingDetail(props: {
               <h2>
                 <bdi>{props.listing.name}</bdi>
               </h2>
-              <Show when={props.listing.verified}>
-                <Verified>
-                  <BadgeMark
-                    id={isBot() ? "bot_verified" : "server_verified"}
-                    size="xs"
-                  />
-                  <Trans>Verified</Trans>
-                </Verified>
+              <Show when={listingBadge(props.listing)}>
+                {(badge) => (
+                  <Verified>
+                    <BadgeMark id={badge()} size="xs" />
+                    <Show
+                      when={badge() === "server_official"}
+                      fallback={<Trans>Verified</Trans>}
+                    >
+                      <Trans>Official</Trans>
+                    </Show>
+                  </Verified>
+                )}
               </Show>
             </Title>
 
@@ -346,14 +353,16 @@ export function ListingDetail(props: {
                         <Trans>About this bot</Trans>
                       </Show>
                     </h3>
-                    <p
-                      dir={props.listing.description ? "auto" : undefined}
-                      data-empty={!props.listing.description}
+                    <Show
+                      when={props.listing.description?.trim()}
+                      fallback={
+                        <p data-empty="true">
+                          <Trans>No description yet.</Trans>
+                        </p>
+                      }
                     >
-                      {props.listing.description || (
-                        <Trans>No description yet.</Trans>
-                      )}
-                    </p>
+                      <ListingAbout text={props.listing.description!} />
+                    </Show>
                   </Part>
                 </Show>
 

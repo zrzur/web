@@ -14,11 +14,18 @@ import { AdLabel, useAdWord } from "./AdLabel";
 import { ListingArt } from "./Art";
 import { DiscoverBot, DiscoverKind, DiscoverServer } from "./api";
 import { categoryIcon, useDiscoverLabels } from "./categories";
-import { MarkInput, isPaidListing, isPaidMark, listingMark } from "./marks";
+import {
+  MarkInput,
+  isPaidListing,
+  isPaidMark,
+  listingBadge,
+  listingMark,
+} from "./marks";
 import { ART_SKY } from "./palette";
+import { plainDescription } from "./plainText";
 import { useTierName } from "./tiers";
 
-export { listingMark };
+export { listingBadge, listingMark };
 
 /** Card data independent of servers/bots */
 export type Listing = {
@@ -29,6 +36,8 @@ export type Listing = {
   icon?: API.File | StoatFile;
   banner?: API.File | StoatFile;
   verified: boolean;
+  /** Zrzur's own server: it carries the official mark, not the verified seal */
+  official?: boolean;
   featured: boolean;
   /** Paid boost label */
   boost?: "Boost" | "SuperBoost" | "MegaBoost";
@@ -56,6 +65,7 @@ export function fromServer(server: DiscoverServer): Listing {
       (server.flags ?? 0) &
       (ServerFlags.Verified | ServerFlags.Official)
     ),
+    official: !!((server.flags ?? 0) & ServerFlags.Official),
     featured: server.featured,
     boost: server.boost,
     promoted: server.promoted,
@@ -223,6 +233,8 @@ export function ListingCard(props: {
   const fileUrl = useFileUrl();
   const adWord = useAdWord();
   const isBot = () => props.listing.kind === "bots";
+  /** Words only: a card cannot hold links or lists (the page shows them) */
+  const about = () => plainDescription(props.listing.description);
   /** The name a screen reader hears: paid places say "Ad" too */
   const cardName = () =>
     isPaidListing(props.listing)
@@ -281,16 +293,8 @@ export function ListingCard(props: {
       <Body data-body>
         <Name>
           <span dir="auto">{props.listing.name}</span>
-          <Show when={props.listing.verified}>
-            <BadgeMark
-              id={
-                props.listing.kind === "bots"
-                  ? "bot_verified"
-                  : "server_verified"
-              }
-              size="xs"
-              mode="hover"
-            />
+          <Show when={listingBadge(props.listing)}>
+            {(badge) => <BadgeMark id={badge()} size="xs" mode="hover" />}
           </Show>
           <Show when={isBot()}>
             <BotLabel />
@@ -299,10 +303,10 @@ export function ListingCard(props: {
 
         <Description
           data-description
-          dir={props.listing.description ? "auto" : undefined}
-          data-empty={!props.listing.description}
+          dir={about() ? "auto" : undefined}
+          data-empty={!about()}
         >
-          {props.listing.description || <Trans>No description yet.</Trans>}
+          {about() || <Trans>No description yet.</Trans>}
         </Description>
 
         <Show when={props.listing.tags.length}>

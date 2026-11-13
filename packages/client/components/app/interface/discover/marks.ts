@@ -37,3 +37,20 @@ export function isPaidMark(mark: ListingMarkKind | undefined): boolean {
 
 export const isPaidListing = (listing: MarkInput) =>
   isPaidMark(listingMark(listing));
+
+/**
+ * The one mark beside a listing's name: the official mark for Zrzur's own
+ * server, the verified seal for a verified server or bot. A server that is
+ * both shows the official mark only.
+ */
+export function listingBadge(listing: {
+  kind?: "servers" | "bots";
+  verified?: boolean;
+  official?: boolean;
+}) {
+  if (!listing.verified && !listing.official) return undefined;
+  if (listing.kind === "bots") return "bot_verified" as const;
+  return listing.official
+    ? ("server_official" as const)
+    : ("server_verified" as const);
+}

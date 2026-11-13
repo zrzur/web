@@ -1,6 +1,7 @@
 import { readFileSync } from "node:fs";
 import { createRequire } from "node:module";
 
+import { plainDescription } from "./plainText.mjs";
 import { woffToSfnt } from "./woff.mjs";
 
 /**
@@ -111,7 +112,7 @@ function seeded(id) {
  */
 export function serverSvg(card, text, images = {}) {
   const name = card.name;
-  const desc = wrap(card.description ?? "", 60, 2);
+  const desc = wrap(plainDescription(card.description), 60, 2);
   const initials = [...name.trim()].slice(0, 2).join("");
   const rtl = isRtl(name);
   const iconX = rtl ? 1120 - 128 : 80;

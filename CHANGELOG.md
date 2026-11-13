@@ -2,6 +2,13 @@
 
 ## Unreleased
 
+### Discover server page (2026-11-13)
+
+* **Descriptions are formatted.** A server's or bot's description on its Discover page shows bold text, lists and links the way the server info panel does (it showed the raw `**` and `-` marks). Cards, link previews and search results show the same text as plain words.
+* **The link shown is the invite link.** A server with a custom link shows and copies that link (`zrzur.cc/<name>`), labelled "Invite link"; it showed the Discover page's own address under the bare word "Link". A server without one shows "Discover page". The address is never cut.
+* **Members** see only "Go to server"; the "You're a member" notice is gone.
+* **The official server** carries the official mark on its card, in the dialog and beside its name on the page (the card drew the verified seal).
+
 ### Design audit of the whole app (2026-11-13)
 
 * **Arabic: arrows point the right way.** Direction icons are mirrored in one place only. A second flip beside some components had turned them back: "Back" on sign-up, in settings on phones, in channel search and in category permissions, the chevrons on the lobby and in "Create your server", breadcrumbs on Designs and Discover, the calendar's month arrows, and Forward in the message toolbar (it looked the same as Reply).

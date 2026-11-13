@@ -4,6 +4,8 @@
  * preview image and structured data. Pure functions, no network.
  */
 
+import { plainDescription } from "./plainText.mjs";
+
 /**
  * The languages a page is shown in (?hl=): the website's seven, in its
  * order (packages/client/.../discover/siteLanguages.ts lists the same)
@@ -480,15 +482,14 @@ export function pageMeta({ site, origin, path, lang, route, data }) {
   } else if (route.kind === "server" && data) {
     const members = roughCount(data.member_count ?? 0);
     title = text.server(data.name);
-    description = clip(
-      data.description?.trim() || text.serverAbout(data.name, members),
-    );
+    const about = plainDescription(data.description);
+    description = clip(about || text.serverAbout(data.name, members));
     image = `${origin}/og/server/${encodeURIComponent(data.link ?? data._id)}.png`;
     jsonLd = {
       "@context": "https://schema.org",
       "@type": "Organization",
       name: data.name,
-      description: data.description || undefined,
+      description: about || undefined,
       url: base,
       ...(data.language ? { knowsLanguage: data.language } : {}),
     };
