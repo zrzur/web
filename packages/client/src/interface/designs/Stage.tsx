@@ -619,9 +619,7 @@ const ToolsBase = styled("div", {
     "& > span": {
       marginInlineEnd: "4px",
       fontSize: "12px",
-      fontWeight: 800,
-      letterSpacing: "0.06em",
-      textTransform: "uppercase",
+      fontWeight: 600,
       color: "var(--z-fg-muted)",
     },
   },

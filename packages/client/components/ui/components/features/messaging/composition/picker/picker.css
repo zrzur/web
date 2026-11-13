@@ -1,7 +1,8 @@
 /* Media picker surfaces use the active Zrzur theme, including light variants. */
 .z-media-picker {
   box-sizing: border-box;
-  --picker-bg: var(--z-bg-sidebar, #171925);
+  /* the panel's own fill, so pinned section titles never show as a darker band */
+  --picker-bg: var(--z-popover-bg, var(--z-bg-sidebar, #171925));
   --picker-raised: var(--z-bg-raised, #242638);
   --picker-input: var(--z-bg-input, #0d0e16);
   --picker-border: var(--z-border-subtle, #342c40);
@@ -125,9 +126,10 @@
   display: flex;
   align-items: center;
   gap: 8px;
-  margin: 8px 8px 0;
+  margin: 12px 12px 0;
   min-height: 40px;
-  padding: 4px 8px 4px 12px;
+  padding-block: 4px;
+  padding-inline: 12px 8px;
   border: 1px solid var(--picker-border);
   border-radius: 7px;
   background: var(--picker-input);
@@ -166,7 +168,7 @@
   align-items: center;
   justify-content: space-between;
   gap: 8px;
-  padding: 8px 10px;
+  padding: 8px 12px;
   font-size: 12px;
   font-weight: 700;
   color: var(--picker-muted);
@@ -379,15 +381,16 @@
 .z-emoji-top {
   display: flex;
   align-items: center;
-  gap: 6px;
-  padding: 8px 8px 0;
+  gap: 8px;
+  padding: 12px 12px 0;
   flex-shrink: 0;
 }
 .z-emoji-picker .z-picker-search {
   flex: 1;
   margin: 0;
   min-height: 34px;
-  padding: 0 6px 0 10px;
+  padding-block: 0;
+  padding-inline: 12px 6px;
 }
 .z-emoji-picker .z-picker-search input {
   height: 32px;
@@ -413,10 +416,10 @@
   min-width: 0;
   overflow-y: auto;
   overscroll-behavior: contain;
-  padding: 0 6px 6px;
+  padding: 0 8px 8px;
 }
 .z-emoji-tip {
-  margin: 8px 2px 4px;
+  margin: 8px 4px 4px;
   font-size: 12px;
   line-height: 16px;
   color: var(--picker-muted);
@@ -429,7 +432,7 @@
   align-items: center;
   gap: 6px;
   margin: 0;
-  padding: 8px 2px 4px;
+  padding: 8px 4px 4px;
   background: var(--picker-bg);
   font-size: 12px;
   font-weight: 700;
@@ -576,7 +579,7 @@
 }
 .z-gif-attribution {
   flex-shrink: 0;
-  padding: 6px 10px;
+  padding: 8px 12px;
   border-top: 1px solid var(--picker-border);
   font-size: 11px;
   font-weight: 600;

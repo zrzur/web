@@ -309,6 +309,7 @@ div[class*="virtual-container-"] > div {
   .z-error-details > summary {
     display: flex;
     align-items: center;
+    min-width: 44px;
     min-height: 44px;
   }
 }

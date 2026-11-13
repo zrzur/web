@@ -5,6 +5,7 @@ import { Trans, useLingui } from "@lingui/solid/macro";
 import type { Channel } from "@zrzur/sdk/solid";
 import { styled } from "styled-system/jsx";
 
+import { conversationName } from "@revolt/app/interface/channels/conversationName";
 import { canSend } from "@revolt/app/interface/channels/threadAccess";
 import { useClient } from "@revolt/client";
 import { TranslatedError } from "@revolt/i18n/errors";
@@ -36,7 +37,8 @@ function view(channel: Channel): TargetLike {
   return {
     id: channel.id,
     type: channel.type,
-    displayName: channel.displayName,
+    // the name the sidebar shows, so the list is searched by it too
+    displayName: conversationName(channel),
     server: channel.server
       ? { name: channel.server.name, mature: channel.server.mature }
       : undefined,
@@ -151,7 +153,7 @@ export function ForwardMessageModal(
   function label(target: Target) {
     return target.type === "SavedMessages"
       ? t`Saved notes`
-      : (target.displayName ?? "");
+      : (conversationName(target) ?? "");
   }
 
   /** Second line: where the destination is */

@@ -11,8 +11,8 @@ import { Avatar } from "../../design";
 import { ProfileSection } from "./ProfileCard";
 
 /**
- * Member since, as one sentence that wraps: on Zrzur, and on this server when
- * opened from one
+ * Member since: on Zrzur, and on this server when opened from one. Each fact
+ * stays whole; when the two do not fit one line the second starts a new one
  */
 export function ProfileJoined(props: { user: User; member?: ServerMember }) {
   const dayjs = useTime();
@@ -25,50 +25,64 @@ export function ProfileJoined(props: { user: User; member?: ServerMember }) {
 
   return (
     <ProfileSection label={t`Member since`}>
-      <Sentence>
-        <img
-          src={`${import.meta.env.BASE_URL}assets/web/zrzur-app-mark.svg`}
-          alt=""
-          width={14}
-          height={14}
-        />{" "}
-        <Trans>Zrzur since {since()}</Trans>
+      <Facts>
+        <Fact>
+          <img
+            src={`${import.meta.env.BASE_URL}assets/web/zrzur-app-mark.svg`}
+            alt=""
+            width={14}
+            height={14}
+          />
+          <span>
+            <Trans>Zrzur since {since()}</Trans>
+          </span>
+        </Fact>
         <Show when={props.member?.server}>
-          <Sep aria-hidden="true">·</Sep>
-          <Avatar
-            src={props.member!.server!.animatedIconURL}
-            fallback={server()}
-            size={14}
-            shape="rounded-square"
-          />{" "}
-          <Trans>
-            in {server()} since {joined()}
-          </Trans>
+          <Fact>
+            <Avatar
+              src={props.member!.server!.animatedIconURL}
+              fallback={server()}
+              size={14}
+              shape="rounded-square"
+            />
+            <span>
+              <Trans>
+                in {server()} since {joined()}
+              </Trans>
+            </span>
+          </Fact>
         </Show>
-      </Sentence>
+      </Facts>
     </ProfileSection>
   );
 }
 
-const Sentence = styled("p", {
+const Facts = styled("div", {
   base: {
-    margin: 0,
+    display: "flex",
+    flexWrap: "wrap",
+    gap: "4px 16px",
+    minWidth: 0,
     fontSize: "13px",
     lineHeight: "20px",
     color: "var(--profile-ink-2, var(--z-fg-secondary))",
-    overflowWrap: "anywhere",
-
-    "& img, & > :not(span):not(bdi)": {
-      display: "inline-block",
-      verticalAlign: "-2px",
-    },
-    "& img": { borderRadius: "4px" },
   },
 });
 
-const Sep = styled("span", {
+const Fact = styled("p", {
   base: {
-    marginInline: "8px",
-    color: "var(--profile-ink-2, var(--z-fg-muted))",
+    display: "flex",
+    alignItems: "flex-start",
+    gap: "6px",
+    minWidth: 0,
+    margin: 0,
+    overflowWrap: "anywhere",
+
+    // the mark sits on the first line of its fact
+    "& > :first-child": {
+      flexShrink: 0,
+      marginBlockStart: "3px",
+    },
+    "& > img": { borderRadius: "4px" },
   },
 });

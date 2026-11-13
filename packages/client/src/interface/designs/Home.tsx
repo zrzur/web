@@ -276,7 +276,13 @@ const Kinds = styled("nav", {
         outlineOffset: "2px",
         borderRadius: "6px",
       },
-      _phone: { fontSize: "18px", lineHeight: "26px" },
+      // a short word ("All") still gets a 44 px target, as on Discover
+      _phone: {
+        fontSize: "18px",
+        lineHeight: "26px",
+        minWidth: "44px",
+        justifyContent: "center",
+      },
     },
     "& > button[aria-current]": { color: "var(--z-fg-primary)" },
     _phone: {

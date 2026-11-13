@@ -239,10 +239,24 @@ const Handle = styled("span", {
   base: {
     display: "grid",
     placeItems: "center",
+    // the same handle as in profile settings: a 24 px target (44 px on
+    // phones) with a focus ring; the drawn grip stays 16 px
+    flexShrink: 0,
+    width: "24px",
+    height: "24px",
+    // the target grows around the grip without moving the row's content
+    margin: "-4px",
+    borderRadius: "6px",
     cursor: "grab",
     "--z-icon-color": "var(--z-icon-muted)",
     _hover: { "--z-icon-color": "var(--z-icon-hover)" },
+    _focusVisible: { outline: "2px solid var(--z-focus)" },
     "&[data-locked]": { cursor: "default" },
+    "@media (max-width: 600px)": {
+      width: "44px",
+      height: "44px",
+      margin: "-14px",
+    },
   },
 });
 

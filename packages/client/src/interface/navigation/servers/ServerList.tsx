@@ -7,6 +7,7 @@ import { Channel, Server, User } from "@zrzur/sdk/solid";
 import { css, cva } from "styled-system/css";
 import { styled } from "styled-system/jsx";
 
+import { conversationName } from "@revolt/app/interface/channels/conversationName";
 import { ServerFolderContextMenu } from "@revolt/app/menus";
 import { useClient } from "@revolt/client";
 import { CONFIGURATION, useDevice } from "@revolt/common";
@@ -311,9 +312,7 @@ export const ServerList = (props: Props) => {
                       </Show>
                     </>
                   }
-                  fallback={
-                    conversation.name ?? conversation.recipient?.username
-                  }
+                  fallback={conversationName(conversation)}
                   interactive
                 />
               </a>

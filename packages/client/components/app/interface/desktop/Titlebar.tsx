@@ -11,6 +11,7 @@ import {
 import { useLingui } from "@lingui/solid/macro";
 import { styled } from "styled-system/jsx";
 
+import { conversationName } from "@revolt/app/interface/channels/conversationName";
 import { useClient, useClientLifecycle } from "@revolt/client";
 import { State, TransitionType } from "@revolt/client/Controller";
 import { useLocation, useSmartParams } from "@revolt/routing";
@@ -95,7 +96,11 @@ export function Titlebar(props: { bare?: boolean }) {
       if (channel) {
         return channel.type === "SavedMessages"
           ? { name: t`Saved notes`, icon: "notebook" }
-          : { name: channel.displayName ?? "", image: channel.animatedIconURL };
+          : {
+              // a direct message goes by the person's name, as in the sidebar
+              name: conversationName(channel) ?? "",
+              image: channel.animatedIconURL,
+            };
       }
 
       if (location.pathname.startsWith("/friends"))
