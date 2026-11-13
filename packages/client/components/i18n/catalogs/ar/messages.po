@@ -25641,3 +25641,121 @@ msgstr "يسمع زرزور هذه المفاتيح ولعبة أو تطبيق �
 #: components/app/interface/settings/user/voice/GameKeysOptions.tsx
 msgid "Zrzur reacts only to the keys you choose here. It records nothing and sends nothing."
 msgstr "يستجيب زرزور فقط للمفاتيح التي تختارها هنا. لا يسجّل شيئًا ولا يرسل شيئًا."
+
+#: components/modal/modals/ScreenSharePicker.tsx
+msgid "A minimised window is not listed. Open it first."
+msgstr "النافذة المصغّرة لا تظهر في القائمة. افتحها أولًا."
+
+#: components/modal/modals/ScreenSharePicker.tsx
+msgid "Entire screen"
+msgstr "الشاشة كاملة"
+
+#: components/app/interface/settings/user/Native.tsx
+msgid "Keep running when the window is closed"
+msgstr "الاستمرار في العمل عند إغلاق النافذة"
+
+#: components/app/interface/settings/user/Native.tsx
+msgid "Marks misspelled words and suggests corrections as you type."
+msgstr "يعلّم الكلمات الخاطئة إملائيًا ويقترح تصحيحها أثناء الكتابة."
+
+#: components/modal/modals/ScreenSharePicker.tsx
+msgid "No open window can be shared right now. Open the app you want to show, then try again."
+msgstr "لا توجد نافذة مفتوحة يمكن مشاركتها الآن. افتح التطبيق الذي تريد عرضه ثم حاول مجددًا."
+
+#: components/modal/modals/ScreenSharePicker.tsx
+msgid "No screen can be shared right now."
+msgstr "لا توجد شاشة يمكن مشاركتها الآن."
+
+#: components/app/interface/settings/user/Native.tsx
+msgid "Open Zrzur when the computer starts"
+msgstr "فتح زرزور عند تشغيل الحاسوب"
+
+#: components/modal/modals/ScreenSharePicker.tsx
+msgid "Others hear what plays on your computer."
+msgstr "يسمع الآخرون ما يُشغَّل على حاسوبك."
+
+#: components/modal/modals/ScreenSharePicker.tsx
+#: components/modal/modals/ScreenShareSettings.tsx
+msgid "Quality"
+msgstr "الجودة"
+
+#: components/app/interface/settings/user/Native.tsx
+msgid "Restart now"
+msgstr "أعد التشغيل الآن"
+
+#: components/app/interface/settings/user/Native.tsx
+msgid "Restart Zrzur to apply your changes"
+msgstr "أعد تشغيل زرزور لتطبيق تغييراتك"
+
+#. placeholder {0}: source.screenNumber ?? 1
+#: components/modal/modals/ScreenSharePicker.tsx
+msgid "Screen {0}"
+msgstr "الشاشة {0}"
+
+#: components/modal/modals/ScreenSharePicker.tsx
+msgid "Screens"
+msgstr "الشاشات"
+
+#: components/modal/modals/ScreenSharePicker.tsx
+msgid "Share your screen"
+msgstr "شارك شاشتك"
+
+#: components/app/interface/settings/user/Native.tsx
+msgid "Spell check"
+msgstr "التدقيق الإملائي"
+
+#: components/app/interface/settings/user/Native.tsx
+msgid "Start in the tray"
+msgstr "البدء في شريط النظام"
+
+#: components/app/interface/settings/user/Native.tsx
+msgid "Startup"
+msgstr "بدء التشغيل"
+
+#: components/app/interface/settings/user/Native.tsx
+msgid "The title bar and hardware acceleration change when Zrzur starts. A call you are in ends."
+msgstr "يتغيّر شريط العنوان وتسريع العتاد عند بدء زرزور. وتنتهي المكالمة التي أنت فيها."
+
+#: components/app/interface/settings/user/Native.tsx
+msgid "Typing and performance"
+msgstr "الكتابة والأداء"
+
+#: components/modal/modals/ScreenSharePicker.tsx
+msgid "Untitled window"
+msgstr "نافذة بلا عنوان"
+
+#: components/app/interface/settings/user/Native.tsx
+msgid "Uses the graphics card for a smoother app. Turn it off if a game stutters or the window flickers. Changes after a restart."
+msgstr "يستخدم بطاقة الرسوميات ليعمل التطبيق بسلاسة أكبر. أوقفه إن تقطّعت لعبة أو ومضت النافذة. يتغيّر بعد إعادة التشغيل."
+
+#: components/modal/modals/ScreenSharePicker.tsx
+msgid "What to share"
+msgstr "ما الذي تريد مشاركته"
+
+#: components/app/interface/settings/user/Native.tsx
+msgid "Window"
+msgstr "النافذة"
+
+#: components/modal/modals/ScreenSharePicker.tsx
+msgid "Windows"
+msgstr "النوافذ"
+
+#: components/app/interface/settings/user/Native.tsx
+msgid "Zrzur draws its own title bar instead of the system's. Changes after a restart."
+msgstr "يرسم زرزور شريط عنوانه بدل شريط النظام. يتغيّر بعد إعادة التشغيل."
+
+#: components/app/interface/settings/user/Native.tsx
+msgid "Zrzur opens by itself after you sign in to your computer."
+msgstr "يفتح زرزور تلقائيًا بعد تسجيل دخولك إلى الحاسوب."
+
+#: components/app/interface/settings/user/Native.tsx
+msgid "Zrzur starts hidden. Open it from its icon next to the clock."
+msgstr "يبدأ زرزور مخفيًا. افتحه من أيقونته بجانب الساعة."
+
+#: components/app/interface/settings/user/Native.tsx
+msgid "Zrzur stays in the tray, so calls and notifications continue."
+msgstr "يبقى زرزور في شريط النظام، فتستمر المكالمات والإشعارات."
+
+#: components/app/interface/settings/user/Native.tsx
+msgid "Zrzur title bar"
+msgstr "شريط عنوان زرزور"

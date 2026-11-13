@@ -21,7 +21,12 @@ import { useLocation, useNavigate } from "@solidjs/router";
 import { Channel } from "@zrzur/sdk/solid";
 import type { LocalTrackPublication, Room } from "livekit-client";
 
-import { SoundController, useClient, useSound } from "@revolt/client";
+import {
+  SoundController,
+  useClient,
+  useClientLifecycle,
+  useSound,
+} from "@revolt/client";
 import {
   activePlusLimits,
   levelPerks,
@@ -1554,6 +1559,20 @@ export function VoiceContext(props: { children: JSX.Element }) {
   });
 
   onCleanup(() => voice.disconnect());
+
+  // Signed out (by the person, by another device, or an expired session):
+  // the call ends with it. It used to stay connected, with its card still
+  // floating over the sign-in page.
+  const lifecycle = useClientLifecycle();
+  createEffect(
+    on(
+      () => lifecycle?.isLoggedIn(),
+      (loggedIn) => {
+        if (loggedIn === false) voice.disconnect(true);
+      },
+      { defer: true },
+    ),
+  );
 
   return (
     <voiceContext.Provider value={voice}>

@@ -1,0 +1,118 @@
+{
+  "Entire screen": [
+    "الشاشة كاملة",
+    "Gesamter Bildschirm"
+  ],
+  "Keep running when the window is closed": [
+    "الاستمرار في العمل عند إغلاق النافذة",
+    "Weiterlaufen, wenn das Fenster geschlossen wird"
+  ],
+  "Marks misspelled words and suggests corrections as you type.": [
+    "يعلّم الكلمات الخاطئة إملائيًا ويقترح تصحيحها أثناء الكتابة.",
+    "Markiert falsch geschriebene Wörter und schlägt beim Tippen Korrekturen vor."
+  ],
+  "No open window can be shared right now. Open the app you want to show, then try again.": [
+    "لا توجد نافذة مفتوحة يمكن مشاركتها الآن. افتح التطبيق الذي تريد عرضه ثم حاول مجددًا.",
+    "Gerade kann kein offenes Fenster geteilt werden. Öffne die App, die du zeigen möchtest, und versuche es erneut."
+  ],
+  "No screen can be shared right now.": [
+    "لا توجد شاشة يمكن مشاركتها الآن.",
+    "Gerade kann kein Bildschirm geteilt werden."
+  ],
+  "Open Zrzur when the computer starts": [
+    "فتح زرزور عند تشغيل الحاسوب",
+    "Zrzur beim Start des Computers öffnen"
+  ],
+  "Others hear what plays on your computer.": [
+    "يسمع الآخرون ما يُشغَّل على حاسوبك.",
+    "Andere hören, was auf deinem Computer abgespielt wird."
+  ],
+  "Quality": [
+    "الجودة",
+    "Qualität"
+  ],
+  "Restart now": [
+    "أعد التشغيل الآن",
+    "Jetzt neu starten"
+  ],
+  "Restart Zrzur to apply your changes": [
+    "أعد تشغيل زرزور لتطبيق تغييراتك",
+    "Starte Zrzur neu, um deine Änderungen anzuwenden"
+  ],
+  "Screen {0}": [
+    "الشاشة {0}",
+    "Bildschirm {0}"
+  ],
+  "Screens": [
+    "الشاشات",
+    "Bildschirme"
+  ],
+  "Share your screen": [
+    "شارك شاشتك",
+    "Bildschirm teilen"
+  ],
+  "Spell check": [
+    "التدقيق الإملائي",
+    "Rechtschreibprüfung"
+  ],
+  "Start in the tray": [
+    "البدء في شريط النظام",
+    "Im Infobereich starten"
+  ],
+  "Startup": [
+    "بدء التشغيل",
+    "Start"
+  ],
+  "The title bar and hardware acceleration change when Zrzur starts. A call you are in ends.": [
+    "يتغيّر شريط العنوان وتسريع العتاد عند بدء زرزور. وتنتهي المكالمة التي أنت فيها.",
+    "Titelleiste und Hardwarebeschleunigung ändern sich beim Start von Zrzur. Ein laufender Anruf endet."
+  ],
+  "Typing and performance": [
+    "الكتابة والأداء",
+    "Tippen und Leistung"
+  ],
+  "Untitled window": [
+    "نافذة بلا عنوان",
+    "Fenster ohne Titel"
+  ],
+  "Uses the graphics card for a smoother app. Turn it off if a game stutters or the window flickers. Changes after a restart.": [
+    "يستخدم بطاقة الرسوميات ليعمل التطبيق بسلاسة أكبر. أوقفه إن تقطّعت لعبة أو ومضت النافذة. يتغيّر بعد إعادة التشغيل.",
+    "Nutzt die Grafikkarte für eine flüssigere App. Schalte es aus, wenn ein Spiel ruckelt oder das Fenster flackert. Ändert sich nach einem Neustart."
+  ],
+  "What to share": [
+    "ما الذي تريد مشاركته",
+    "Was geteilt wird"
+  ],
+  "Window": [
+    "النافذة",
+    "Fenster"
+  ],
+  "Windows": [
+    "النوافذ",
+    "Fenster"
+  ],
+  "Zrzur draws its own title bar instead of the system's. Changes after a restart.": [
+    "يرسم زرزور شريط عنوانه بدل شريط النظام. يتغيّر بعد إعادة التشغيل.",
+    "Zrzur zeichnet seine eigene Titelleiste statt der des Systems. Ändert sich nach einem Neustart."
+  ],
+  "Zrzur opens by itself after you sign in to your computer.": [
+    "يفتح زرزور تلقائيًا بعد تسجيل دخولك إلى الحاسوب.",
+    "Zrzur öffnet sich von selbst, nachdem du dich am Computer angemeldet hast."
+  ],
+  "Zrzur starts hidden. Open it from its icon next to the clock.": [
+    "يبدأ زرزور مخفيًا. افتحه من أيقونته بجانب الساعة.",
+    "Zrzur startet versteckt. Öffne es über sein Symbol neben der Uhr."
+  ],
+  "Zrzur stays in the tray, so calls and notifications continue.": [
+    "يبقى زرزور في شريط النظام، فتستمر المكالمات والإشعارات.",
+    "Zrzur bleibt im Infobereich, sodass Anrufe und Benachrichtigungen weiterlaufen."
+  ],
+  "Zrzur title bar": [
+    "شريط عنوان زرزور",
+    "Zrzur-Titelleiste"
+  ],
+  "A minimised window is not listed. Open it first.": [
+    "النافذة المصغّرة لا تظهر في القائمة. افتحها أولًا.",
+    "Ein minimiertes Fenster wird nicht aufgeführt. Öffne es zuerst."
+  ]
+}
