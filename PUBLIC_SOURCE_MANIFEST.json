@@ -292,8 +292,8 @@
     },
     {
       "path": "CHANGELOG.md",
-      "sha256": "12d69be0fcbdea1b5a203200e7f33bf409336001bf16da363a985c473a0c6e25",
-      "bytes": 132919,
+      "sha256": "57c6d74b11fe63db88ed3bfbb02efa6f19fef144828df6b57277a0408a8e5871",
+      "bytes": 133220,
       "category": "public-documentation"
     },
     {
@@ -6304,8 +6304,8 @@
     },
     {
       "path": "packages/client/components/ui/components/features/profiles/ProfileIdentity.tsx",
-      "sha256": "4f5259ff074499fcca093ada565a54dc70f49ecf4a20b2933fef92bd23c93d00",
-      "bytes": 7627,
+      "sha256": "c174f9455cff8fcecb17822ef5072b527a820646f5b182a8f81c21aa0df85a2e",
+      "bytes": 6709,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -6486,6 +6486,18 @@
       "path": "packages/client/components/ui/components/features/profiles/mutualCache.ts",
       "sha256": "ec1948b51738cc3a47688b4d1ff2a8b78a0c5b5a5ea95f1930ef652356b9253c",
       "bytes": 1593,
+      "category": "product-source-or-build-manifest"
+    },
+    {
+      "path": "packages/client/components/ui/components/features/profiles/nameRowBadges.test.ts",
+      "sha256": "9c7d0789adaba75e02105fe20661b3efb7500347dab19e5c3245c2ee4b90110e",
+      "bytes": 812,
+      "category": "synthetic-test-source-or-fixture"
+    },
+    {
+      "path": "packages/client/components/ui/components/features/profiles/nameRowBadges.ts",
+      "sha256": "8ca3c42ec1f76844da83f6365e24c17471c95a5baa52245fd6c0a412e1a16adf",
+      "bytes": 472,
       "category": "product-source-or-build-manifest"
     },
     {
