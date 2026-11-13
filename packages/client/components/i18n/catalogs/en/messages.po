@@ -25651,3 +25651,121 @@ msgstr "Zrzur hears these keys while a game or another app is in front. The game
 #: components/app/interface/settings/user/voice/GameKeysOptions.tsx
 msgid "Zrzur reacts only to the keys you choose here. It records nothing and sends nothing."
 msgstr "Zrzur reacts only to the keys you choose here. It records nothing and sends nothing."
+
+#: components/modal/modals/ScreenSharePicker.tsx
+msgid "A minimised window is not listed. Open it first."
+msgstr "A minimised window is not listed. Open it first."
+
+#: components/modal/modals/ScreenSharePicker.tsx
+msgid "Entire screen"
+msgstr "Entire screen"
+
+#: components/app/interface/settings/user/Native.tsx
+msgid "Keep running when the window is closed"
+msgstr "Keep running when the window is closed"
+
+#: components/app/interface/settings/user/Native.tsx
+msgid "Marks misspelled words and suggests corrections as you type."
+msgstr "Marks misspelled words and suggests corrections as you type."
+
+#: components/modal/modals/ScreenSharePicker.tsx
+msgid "No open window can be shared right now. Open the app you want to show, then try again."
+msgstr "No open window can be shared right now. Open the app you want to show, then try again."
+
+#: components/modal/modals/ScreenSharePicker.tsx
+msgid "No screen can be shared right now."
+msgstr "No screen can be shared right now."
+
+#: components/app/interface/settings/user/Native.tsx
+msgid "Open Zrzur when the computer starts"
+msgstr "Open Zrzur when the computer starts"
+
+#: components/modal/modals/ScreenSharePicker.tsx
+msgid "Others hear what plays on your computer."
+msgstr "Others hear what plays on your computer."
+
+#: components/modal/modals/ScreenSharePicker.tsx
+#: components/modal/modals/ScreenShareSettings.tsx
+msgid "Quality"
+msgstr "Quality"
+
+#: components/app/interface/settings/user/Native.tsx
+msgid "Restart now"
+msgstr "Restart now"
+
+#: components/app/interface/settings/user/Native.tsx
+msgid "Restart Zrzur to apply your changes"
+msgstr "Restart Zrzur to apply your changes"
+
+#. placeholder {0}: source.screenNumber ?? 1
+#: components/modal/modals/ScreenSharePicker.tsx
+msgid "Screen {0}"
+msgstr "Screen {0}"
+
+#: components/modal/modals/ScreenSharePicker.tsx
+msgid "Screens"
+msgstr "Screens"
+
+#: components/modal/modals/ScreenSharePicker.tsx
+msgid "Share your screen"
+msgstr "Share your screen"
+
+#: components/app/interface/settings/user/Native.tsx
+msgid "Spell check"
+msgstr "Spell check"
+
+#: components/app/interface/settings/user/Native.tsx
+msgid "Start in the tray"
+msgstr "Start in the tray"
+
+#: components/app/interface/settings/user/Native.tsx
+msgid "Startup"
+msgstr "Startup"
+
+#: components/app/interface/settings/user/Native.tsx
+msgid "The title bar and hardware acceleration change when Zrzur starts. A call you are in ends."
+msgstr "The title bar and hardware acceleration change when Zrzur starts. A call you are in ends."
+
+#: components/app/interface/settings/user/Native.tsx
+msgid "Typing and performance"
+msgstr "Typing and performance"
+
+#: components/modal/modals/ScreenSharePicker.tsx
+msgid "Untitled window"
+msgstr "Untitled window"
+
+#: components/app/interface/settings/user/Native.tsx
+msgid "Uses the graphics card for a smoother app. Turn it off if a game stutters or the window flickers. Changes after a restart."
+msgstr "Uses the graphics card for a smoother app. Turn it off if a game stutters or the window flickers. Changes after a restart."
+
+#: components/modal/modals/ScreenSharePicker.tsx
+msgid "What to share"
+msgstr "What to share"
+
+#: components/app/interface/settings/user/Native.tsx
+msgid "Window"
+msgstr "Window"
+
+#: components/modal/modals/ScreenSharePicker.tsx
+msgid "Windows"
+msgstr "Windows"
+
+#: components/app/interface/settings/user/Native.tsx
+msgid "Zrzur draws its own title bar instead of the system's. Changes after a restart."
+msgstr "Zrzur draws its own title bar instead of the system's. Changes after a restart."
+
+#: components/app/interface/settings/user/Native.tsx
+msgid "Zrzur opens by itself after you sign in to your computer."
+msgstr "Zrzur opens by itself after you sign in to your computer."
+
+#: components/app/interface/settings/user/Native.tsx
+msgid "Zrzur starts hidden. Open it from its icon next to the clock."
+msgstr "Zrzur starts hidden. Open it from its icon next to the clock."
+
+#: components/app/interface/settings/user/Native.tsx
+msgid "Zrzur stays in the tray, so calls and notifications continue."
+msgstr "Zrzur stays in the tray, so calls and notifications continue."
+
+#: components/app/interface/settings/user/Native.tsx
+msgid "Zrzur title bar"
+msgstr "Zrzur title bar"

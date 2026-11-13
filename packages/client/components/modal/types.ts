@@ -449,8 +449,12 @@ export type Modals =
       qualities: { name: string; fullName: string }[];
       sources: {
         idx: number;
+        kind?: "screen" | "window";
         name: string;
         isFullScreen: boolean;
+        screenNumber?: number;
+        screenCount?: number;
+        thumbnail?: string;
         image?: string;
       }[];
       onCancel: () => void;

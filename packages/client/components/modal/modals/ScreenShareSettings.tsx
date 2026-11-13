@@ -115,15 +115,25 @@ export function ScreenShareSettingsModal(
       />
       <form onSubmit={submit}>
         <Column>
-          <Form2.ButtonGroup
-            control={group.controls.qualityName}
-            buttonDefinitions={props.qualities.map((quality) => {
-              return {
-                children: quality.fullName,
-                value: quality.name,
-              };
-            })}
-          />
+          {/* one quality on offer: say it, instead of a bar with one button */}
+          <Show
+            when={props.qualities.length > 1}
+            fallback={
+              <span>
+                <Trans>Quality</Trans>: {props.qualities[0]?.fullName}
+              </span>
+            }
+          >
+            <Form2.ButtonGroup
+              control={group.controls.qualityName}
+              buttonDefinitions={props.qualities.map((quality) => {
+                return {
+                  children: quality.fullName,
+                  value: quality.name,
+                };
+              })}
+            />
+          </Show>
           <ContentChoice control={group.controls.content} />
           <Show when={props.audio}>
             <Form2.Checkbox control={group.controls.audio}>

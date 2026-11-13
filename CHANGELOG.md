@@ -2,6 +2,12 @@
 
 ## Unreleased
 
+### Desktop app: screen share picker, Desktop settings, signing out in a call (2026-11-13)
+
+* **Share your screen** (desktop app) is a new window: Screens and Windows are two tabs of preview pictures with the app's icon and name, one is always chosen, a double click or Enter starts, the arrow keys move. Screens are named in your language ("Entire screen", "Screen 2") instead of the system's own name. A window whose icon or picture the system cannot read shows a plain symbol, never a broken image. A single quality is said as text instead of a bar with one button; several are a menu.
+* **Signing out ends the call.** A call used to stay connected after signing out (or after the session ended on another device), with its card still floating over the sign-in page.
+* **Desktop settings** have titled groups and plain wording, say which settings change after a restart and offer "Restart now", and no longer show the Discord presence switch, which did nothing.
+
 ### Keys that work in games (2026-11-13)
 
 * **Push to talk works while you play.** In the desktop app your push-to-talk key is heard while a game or any other app is in front, as a real hold: the microphone opens when the key goes down and closes when it goes up. The game still gets the key. No setup is needed; the old Ctrl+Shift toggle is used only where the desktop app cannot listen.

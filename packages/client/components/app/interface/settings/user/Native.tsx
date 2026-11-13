@@ -2,7 +2,13 @@ import { Show, createSignal, onMount } from "solid-js";
 
 import { Trans, useLingui } from "@lingui/solid/macro";
 
-import { Column, SettingsRow, SettingsSection, Toggle } from "@revolt/ui";
+import {
+  Button,
+  Column,
+  SettingsRow,
+  SettingsSection,
+  Toggle,
+} from "@revolt/ui";
 import { Icon } from "@revolt/ui/icons/Icon";
 
 declare type DesktopConfig = {
@@ -30,12 +36,18 @@ declare global {
       minimise(): void;
       maximise(): void;
       close(): void;
+      /** Restart the app (missing from older desktop apps) */
+      relaunch?(): void;
       onceScreenPicker(
         onScreenPick: (
           sources: {
             idx: number;
+            kind?: "screen" | "window";
             name: string;
             isFullScreen: boolean;
+            screenNumber?: number;
+            screenCount?: number;
+            thumbnail?: string;
             image?: string;
           }[],
         ) => void,
@@ -80,6 +92,12 @@ export default function Native() {
     setAutostart(savedValue);
   }
 
+  /** What the app started with: these two only change after a restart */
+  const started = window.desktopConfig.get();
+  const needsRestart = () =>
+    config().customFrame !== started.customFrame ||
+    config().hardwareAcceleration !== started.hardwareAcceleration;
+
   const toggle = (key: Switchable) => () => set({ [key]: !config()[key] });
 
   /** One setting with a switch, as on the other settings pages */
@@ -107,11 +125,42 @@ export default function Native() {
 
   return (
     <Column gap="xl">
-      <SettingsSection>
+      <Show when={needsRestart()}>
+        <SettingsSection>
+          <SettingsRow
+            icon={<Icon name="arrow-clockwise" size={20} />}
+            title={<Trans>Restart Zrzur to apply your changes</Trans>}
+            description={
+              <Trans>
+                The title bar and hardware acceleration change when Zrzur
+                starts. A call you are in ends.
+              </Trans>
+            }
+            control={() => (
+              <Show when={window.native.relaunch}>
+                <Button
+                  size="sm"
+                  variant="filled"
+                  onPress={() => window.native.relaunch?.()}
+                  data-testid="desktop-restart"
+                >
+                  <Trans>Restart now</Trans>
+                </Button>
+              </Show>
+            )}
+          />
+        </SettingsSection>
+      </Show>
+
+      <SettingsSection title={<Trans>Startup</Trans>}>
         <SettingsRow
           icon={<Icon name="rocket-launch" size={20} />}
-          title={<Trans>Start with Computer</Trans>}
-          description={<Trans>Launch Zrzur when you log into your computer.</Trans>}
+          title={<Trans>Open Zrzur when the computer starts</Trans>}
+          description={
+            <Trans>
+              Zrzur opens by itself after you sign in to your computer.
+            </Trans>
+          }
           onClick={toggleAutostart}
           control={(ids) => (
             <Toggle
@@ -126,46 +175,43 @@ export default function Native() {
           <SwitchRow
             key="startMinimisedToTray"
             icon="minus"
-            title={t`Start Minimised to Tray`}
-            description={t`Zrzur will start in the system tray.`}
+            title={t`Start in the tray`}
+            description={t`Zrzur starts hidden. Open it from its icon next to the clock.`}
           />
         </Show>
+      </SettingsSection>
+
+      <SettingsSection title={<Trans>Window</Trans>}>
         <SwitchRow
           key="minimiseToTray"
           icon="tray"
-          title={t`Minimise to Tray`}
-          description={t`Instead of closing, Zrzur will hide in your tray.`}
+          title={t`Keep running when the window is closed`}
+          description={t`Zrzur stays in the tray, so calls and notifications continue.`}
         />
         <SwitchRow
           key="customFrame"
           icon="squares-four"
-          title={t`Custom window frame`}
-          description={t`Let Zrzur use its own custom titlebar.`}
+          title={t`Zrzur title bar`}
+          description={t`Zrzur draws its own title bar instead of the system's. Changes after a restart.`}
         />
       </SettingsSection>
 
-      <SettingsSection>
-        <SwitchRow
-          key="discordRpc"
-          icon="users-three"
-          title={t`Discord RPC`}
-          description={t`Show Zrzur using Discord rich presence.`}
-        />
+      <SettingsSection title={<Trans>Typing and performance</Trans>}>
         <SwitchRow
           key="spellchecker"
           icon="text-aa"
-          title={t`Spellchecker`}
-          description={t`Show corrections and suggestions as you type.`}
+          title={t`Spell check`}
+          description={t`Marks misspelled words and suggests corrections as you type.`}
         />
         <SwitchRow
           key="hardwareAcceleration"
           icon="lightning"
           title={t`Hardware acceleration`}
-          description={t`Use the graphics card to improve performance.`}
+          description={t`Uses the graphics card for a smoother app. Turn it off if a game stutters or the window flickers. Changes after a restart.`}
         />
       </SettingsSection>
 
-      <SettingsSection>
+      <SettingsSection title={<Trans>About</Trans>}>
         <SettingsRow
           icon={<Icon name="desktop" size={20} />}
           title={<Trans>Zrzur for Desktop</Trans>}
