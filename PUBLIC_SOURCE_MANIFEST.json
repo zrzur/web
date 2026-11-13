@@ -1720,8 +1720,8 @@
     },
     {
       "path": "packages/client/components/app/interface/settings/server/members/ListMembers.tsx",
-      "sha256": "bd14e6ecac0febfa55bb466d9637392ea95c1658b0f2d20c517c5e464679a547",
-      "bytes": 17760,
+      "sha256": "2e6004cd3adcab6d6c109ba283b0c1cf428b9837bc1f45e11a17055a49d6c354",
+      "bytes": 17860,
       "category": "product-source-or-build-manifest"
     },
     {
