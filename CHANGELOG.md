@@ -2,6 +2,20 @@
 
 ## Unreleased
 
+### Developer documentation as its own website
+
+* **developers.zrzur.com.** Where `VITE_DOCS_URL` names it, the Bot API documentation is a website of its own: one address per page (`/gateway#resume`), no account, in English, German and Arabic, with the sections of a page listed beside it and links to the page before and after. The server (`npm run docs`, the public-pages server) sends each page with its own title, description, canonical address, the same page in the three languages, structured data and its text as plain HTML, so search engines and readers without JavaScript get the page; `/sitemap.xml` lists all of them. Without `VITE_DOCS_URL`, and in the desktop app, the documentation stays at `/developers/docs` in the app.
+* **From the app.** The Developer Portal's Documentation card and help links open the site; `/developers/docs/<page>#<section>` in the web app forwards to the same page and section there.
+* **"Start your bot"** is a Markdown page like the others. Lists and numbered steps show their markers again. Search puts an exact match first.
+
+### Developer documentation: corrected against the running API
+
+* **Gateway:** resuming a session is documented as it works (`resumable`, `session_id`, `seq`, `Resume`, `Resumed`, `InvalidSession`, the limits); close code `1013` and the reason of `4014`.
+* **Reference regenerated** from the published backend and the gateway's own schema: 29 more endpoints (polls, command rules per server, soundboard, stages, server search, insights), 15 more events, two permissions, seven error types, the new rate-limit buckets. A bot reads its own settings with `GET /bots/{bot_id}`.
+* **Corrected:** a thread's first message takes `embeds` and `components`; `GET /channels/{target}` answers `404 NotFound` outside the server; global commands work in a direct message with the bot; poll durations are 1, 4, 8, 24, 72, 168 or 336 hours; bots cannot vote; the SDK needs Node 22.3 and its source is public.
+* **Said plainly:** webhooks, polls, forwarding and scheduled events are switched on per installation (`features` in `GET /`), and which of them were off on api.zrzur.com when the pages were checked.
+* **Checks:** `scripts/bot-api/check-names.mjs` (every name in `code` exists in the API), `check-languages.mjs` (the three languages carry the same code, links, anchors and numbers), and live checks for resume, threads with a card, polls and commands in a direct message.
+
 ### Fixes
 
 * **Copy username** on a profile says "Copied!" only when the browser took the text. When the browser refuses (no clipboard permission), nothing changes and the page no longer throws an error.
