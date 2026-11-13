@@ -1234,8 +1234,8 @@
     },
     {
       "path": "packages/client/components/app/interface/settings/UserSettings.tsx",
-      "sha256": "6c8d114974262fc31614ff022f8ab5931578e87a04f625c7bfcd15d0d88d31fa",
-      "bytes": 17977,
+      "sha256": "46a882d46f8b32dc0cd2a3f8fb49f1e52d65a50305c41e7dfcd097e41cdf9584",
+      "bytes": 18301,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -1960,8 +1960,8 @@
     },
     {
       "path": "packages/client/components/app/interface/settings/user/Native.tsx",
-      "sha256": "a5a5d92962a6a7dc4ef0929ca5267b03b98e193aa79ec8463fc598ad51537473",
-      "bytes": 4949,
+      "sha256": "b2f1bc4bd0a00d350ca9d2a12394b8eb977cee5b9d6c6228571566ce3b7e2d3e",
+      "bytes": 5147,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -2505,6 +2505,18 @@
       "category": "product-source-or-build-manifest"
     },
     {
+      "path": "packages/client/components/app/interface/settings/whatsNew.test.ts",
+      "sha256": "fdbcf2216ab2f24f02d5c14a3db42db92b0b81bcc384188b0936697bacd82e8d",
+      "bytes": 728,
+      "category": "synthetic-test-source-or-fixture"
+    },
+    {
+      "path": "packages/client/components/app/interface/settings/whatsNew.ts",
+      "sha256": "238b8469e476aec0e89dfc12147aa9b40ee0b7c8fb45e2c392cf7daac33fbb1c",
+      "bytes": 494,
+      "category": "product-source-or-build-manifest"
+    },
+    {
       "path": "packages/client/components/app/interface/support/NoticeCenter.tsx",
       "sha256": "4fa3cc3267f1808d3b266fe9d0e6c74ca6e50ff2d9d5fb72fb5b90766bc43237",
       "bytes": 4069,
@@ -2644,8 +2656,8 @@
     },
     {
       "path": "packages/client/components/auth/src/AuthPage.tsx",
-      "sha256": "a9cb31199d5f6b43431ae7aa47a2deb6a28c6f55743318fc7da3812d72af3838",
-      "bytes": 9926,
+      "sha256": "cede83f79fd068fd9106e5fe0f56e892c67aec379b34409376dc5f57aa213d41",
+      "bytes": 10266,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -6669,7 +6681,7 @@
       "category": "product-source-or-build-manifest"
     },
     {
-      "path": "packages/client/components/ui/components/features/voice/callCard/voiceStrip.dom.test.ts",
+      "path": "packages/client/components/ui/components/features/voice/callCard/voiceStrip.dom.test.tsx",
       "sha256": "b082080e4f772d24aa039f32a9094d69e636052f045e8f42ff310524fd9e9a59",
       "bytes": 1602,
       "category": "synthetic-test-source-or-fixture"

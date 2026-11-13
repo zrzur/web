@@ -273,15 +273,20 @@ export function AuthPage(props: { children?: JSX.Element }) {
             <Sky />
           </SkyBand>
             <Topbar>
-              <Brand>
-                <img
-                  src={brandMarkSrc(state.theme.activeTheme.darkMode)}
-                  alt=""
-                  width={32}
-                  height={32}
-                />
-                <BrandName />
-              </Brand>
+              {/* the desktop app's title bar already carries the logo: one
+                  logo, not two (owner, 2026-11-13); the spacer keeps the
+                  buttons at the end of the row */}
+              <Show when={!window.native} fallback={<span aria-hidden="true" />}>
+                <Brand data-auth-brand>
+                  <img
+                    src={brandMarkSrc(state.theme.activeTheme.darkMode)}
+                    alt=""
+                    width={32}
+                    height={32}
+                  />
+                  <BrandName />
+                </Brand>
+              </Show>
 
               <TopbarActions>
                 {/* signed in already (username or age step): no switching */}

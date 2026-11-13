@@ -47,6 +47,7 @@ import {
 import pkg from "../../../../../../package.json";
 
 import { SettingsConfiguration } from ".";
+import { whatsNewUrl } from "./whatsNew";
 import { SettingsTabs } from "./SettingsTabs";
 import { AccountCard, BackCard } from "./user/_AccountCard";
 import { MyAccount } from "./user/Account";
@@ -504,10 +505,13 @@ const Config: SettingsConfiguration<{ server: Server }> = {
         {
           entries: [
             {
+              // the changelog service is not running yet, so this did
+              // nothing at all: open the blog, where we tell what is new,
+              // in the app's language (owner, 2026-11-13)
               onClick: async () => {
                 const changelog = await fetchLatestChangelog();
-                if (!changelog) return;
-                openModal({ type: "changelog", changelog });
+                if (changelog) return openModal({ type: "changelog", changelog });
+                window.open(whatsNewUrl(document.documentElement.lang), "_blank", "noopener");
               },
               icon: <MdCampaign {...iconSize(20)} />,
               title: <Trans>What's New</Trans>,

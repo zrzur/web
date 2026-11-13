@@ -1,9 +1,9 @@
-import { createSignal, onMount } from "solid-js";
+import { Show, createSignal, onMount } from "solid-js";
 
 import { Trans, useLingui } from "@lingui/solid/macro";
 
-import { CategoryButton, Checkbox, Column } from "@revolt/ui";
-import { Symbol } from "@revolt/ui/components/utils/Symbol";
+import { Column, SettingsRow, SettingsSection, Toggle } from "@revolt/ui";
+import { Icon } from "@revolt/ui/icons/Icon";
 
 declare type DesktopConfig = {
   firstLaunch: boolean;
@@ -53,8 +53,11 @@ declare global {
   }
 }
 
+type Switchable = keyof Omit<DesktopConfig, "windowState" | "firstLaunch">;
+
 /**
- * Desktop Configuration Page
+ * Desktop Configuration Page: the same sections, rows and switches as every
+ * other settings page (it used the older button cards, in a lighter colour)
  */
 export default function Native() {
   const { t } = useLingui();
@@ -77,103 +80,103 @@ export default function Native() {
     setAutostart(savedValue);
   }
 
-  const toggles: Partial<Record<keyof DesktopConfig, () => void>> = {
-    minimiseToTray: () => set({ minimiseToTray: !config().minimiseToTray }),
-    startMinimisedToTray: () =>
-      set({ startMinimisedToTray: !config().startMinimisedToTray }),
-    customFrame: () => set({ customFrame: !config().customFrame }),
-    discordRpc: () => set({ discordRpc: !config().discordRpc }),
-    spellchecker: () => set({ spellchecker: !config().spellchecker }),
-    hardwareAcceleration: () =>
-      set({ hardwareAcceleration: !config().hardwareAcceleration }),
-  };
+  const toggle = (key: Switchable) => () => set({ [key]: !config()[key] });
 
-  function CheckboxButton<K extends keyof Omit<DesktopConfig, "windowState">>(
-    key: K,
-    icon: string,
-    label: string,
-    description: string,
-  ) {
-    return (
-      <CategoryButton
-        action={<Checkbox checked={config()[key]} />}
-        onClick={toggles[key]}
-        icon={<Symbol>{icon}</Symbol>}
-        description={description}
-      >
-        {label}
-      </CategoryButton>
-    );
-  }
+  /** One setting with a switch, as on the other settings pages */
+  const SwitchRow = (props: {
+    key: Switchable;
+    icon: Parameters<typeof Icon>[0]["name"];
+    title: string;
+    description: string;
+  }) => (
+    <SettingsRow
+      icon={<Icon name={props.icon} size={20} />}
+      title={props.title}
+      description={props.description}
+      onClick={toggle(props.key)}
+      control={(ids) => (
+        <Toggle
+          checked={!!config()[props.key]}
+          onChange={toggle(props.key)}
+          aria-labelledby={ids.labelId}
+          aria-describedby={ids.descriptionId}
+        />
+      )}
+    />
+  );
 
   return (
-    <Column gap="lg">
-      <CategoryButton.Group>
-        <CategoryButton
-          action={<Checkbox checked={autostart()} />}
+    <Column gap="xl">
+      <SettingsSection>
+        <SettingsRow
+          icon={<Icon name="rocket-launch" size={20} />}
+          title={<Trans>Start with Computer</Trans>}
+          description={<Trans>Launch Zrzur when you log into your computer.</Trans>}
           onClick={toggleAutostart}
-          icon={<Symbol>power</Symbol>}
-          description={
-            <Trans>Launch Zrzur when you log into your computer.</Trans>
-          }
-        >
-          <Trans>Start with Computer</Trans>
-        </CategoryButton>
-        {autostart() &&
-          CheckboxButton(
-            "startMinimisedToTray",
-            "minimize",
-            t`Start Minimised to Tray`,
-            t`Zrzur will start in the system tray.`,
+          control={(ids) => (
+            <Toggle
+              checked={autostart()}
+              onChange={toggleAutostart}
+              aria-labelledby={ids.labelId}
+              aria-describedby={ids.descriptionId}
+            />
           )}
-        {CheckboxButton(
-          "minimiseToTray",
-          "cancel_presentation",
-          t`Minimise to Tray`,
-          t`Instead of closing, Zrzur will hide in your tray.`,
-        )}
-        {CheckboxButton(
-          "customFrame",
-          "web_asset",
-          t`Custom window frame`,
-          t`Let Zrzur use its own custom titlebar.`,
-        )}
-      </CategoryButton.Group>
+        />
+        <Show when={autostart()}>
+          <SwitchRow
+            key="startMinimisedToTray"
+            icon="minus"
+            title={t`Start Minimised to Tray`}
+            description={t`Zrzur will start in the system tray.`}
+          />
+        </Show>
+        <SwitchRow
+          key="minimiseToTray"
+          icon="tray"
+          title={t`Minimise to Tray`}
+          description={t`Instead of closing, Zrzur will hide in your tray.`}
+        />
+        <SwitchRow
+          key="customFrame"
+          icon="squares-four"
+          title={t`Custom window frame`}
+          description={t`Let Zrzur use its own custom titlebar.`}
+        />
+      </SettingsSection>
 
-      <CategoryButton.Group>
-        {CheckboxButton(
-          "discordRpc",
-          "groups_2",
-          t`Discord RPC`,
-          t`Show Zrzur using Discord rich presence.`,
-        )}
-        {CheckboxButton(
-          "spellchecker",
-          "spellcheck",
-          t`Spellchecker`,
-          t`Show corrections and suggestions as you type.`,
-        )}
-        {CheckboxButton(
-          "hardwareAcceleration",
-          "speed",
-          t`Hardware acceleration`,
-          t`Use the graphics card to improve performance.`,
-        )}
-      </CategoryButton.Group>
+      <SettingsSection>
+        <SwitchRow
+          key="discordRpc"
+          icon="users-three"
+          title={t`Discord RPC`}
+          description={t`Show Zrzur using Discord rich presence.`}
+        />
+        <SwitchRow
+          key="spellchecker"
+          icon="text-aa"
+          title={t`Spellchecker`}
+          description={t`Show corrections and suggestions as you type.`}
+        />
+        <SwitchRow
+          key="hardwareAcceleration"
+          icon="lightning"
+          title={t`Hardware acceleration`}
+          description={t`Use the graphics card to improve performance.`}
+        />
+      </SettingsSection>
 
-      <CategoryButton.Group>
-        <CategoryButton
-          icon={<Symbol>desktop_windows</Symbol>}
+      <SettingsSection>
+        <SettingsRow
+          icon={<Icon name="desktop" size={20} />}
+          title={<Trans>Zrzur for Desktop</Trans>}
           description={
             <>
               <Trans>Version:</Trans>{" "}
               <bdi dir="ltr">{window.native.versions.desktop()}</bdi>
             </>
           }
-        >
-          <Trans>Zrzur for Desktop</Trans>
-        </CategoryButton>
-      </CategoryButton.Group>
+        />
+      </SettingsSection>
     </Column>
   );
 }
