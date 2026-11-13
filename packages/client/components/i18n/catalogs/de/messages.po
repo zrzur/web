@@ -25489,3 +25489,12 @@ msgstr "Ich akzeptiere die <0>Nutzungsbedingungen</0> und die <1>Community-Richt
 #: components/auth/src/flows/Form.tsx
 msgid "Tick the box to accept before you continue."
 msgstr "Setze das Häkchen, um zuzustimmen, bevor du fortfährst."
+
+#. placeholder {0}: props.unseen
+#: components/ui/components/features/messaging/bars/JumpToBottom.tsx
+msgid "{0, plural, one {# new message} other {# new messages}}"
+msgstr "{0, plural, one {# neue Nachricht} other {# neue Nachrichten}}"
+
+#: components/app/interface/channels/text/Messages.tsx
+msgid "Couldn't load messages."
+msgstr "Nachrichten konnten nicht geladen werden."

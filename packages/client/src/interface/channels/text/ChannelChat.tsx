@@ -23,7 +23,7 @@ export function ChannelChat(props: { channel: Channel }) {
   attachInteractions(client());
 
   const [atEnd, setEnd] = createSignal(true);
-  let jumpToBottom: ((nearby?: string) => void) | undefined;
+  let jumpToBottom: (() => void) | undefined;
 
   const ack = () => {
     if (props.channel.unread && atEnd() && document.hasFocus())
@@ -54,7 +54,7 @@ export function ChannelChat(props: { channel: Channel }) {
         lastReadId={() => undefined}
         clearHighlightedMessage={() => {}}
         jumpToBottomRef={(ref) => (jumpToBottom = ref)}
-        atEnd={[atEnd, setEnd]}
+        atPresent={[atEnd, setEnd]}
       />
       <InteractionModal />
       <Show when={props.channel.havePermission("SendMessage")}>

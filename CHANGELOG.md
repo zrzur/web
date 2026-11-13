@@ -2,6 +2,22 @@
 
 ## Unreleased
 
+### Message history: older and newer messages, and the way back to the present (2026-11-13)
+
+* **Older messages are there before you reach them.** The next page is asked for while two screens of messages are still left, in both directions, so the grey placeholder rows no longer come on screen at a normal scrolling pace (they filled up to two thirds of the list on every page before).
+* **On a phone, older messages load while you keep scrolling.** Pages used to wait until the touch scroll had fully stopped, so a reader who kept flicking ran into the placeholders. Older rows are now added under the finger and the scroll continues from where it was.
+* **The list keeps as many messages as the screen needs** (five screens and two pages, at least 150), so a tall window with short messages no longer drops rows on one side only to ask for them again.
+* **Nothing moves under your eyes.** While you read older messages, the list stays still when a message arrives, is edited or deleted, when a link preview or an image loads late, and when pages are added or dropped around you. One mechanism does this in every browser (it relied on the browser's own, which a phone did not always apply: a new message pushed the text up by its height).
+* **"Jump to present" is a button** (keyboard focus, Enter and Space; Esc still jumps from anywhere). It shows as soon as you are more than a screen away from the newest message, not only after 150 messages, says how many messages arrived meanwhile ("3 new messages"), and is hidden whenever the newest message is on screen, so it never lies over it. The jump asks the server once and lands at the bottom in one step.
+* **A channel is marked read only when you see its newest message.** It used to be marked read while you were scrolled up, as long as the newest page was loaded.
+* **A page that cannot be loaded says so**, with "Try again", in the place where it is missing. It used to ask the server again without pause (about 60 requests a second) and showed placeholders for good. A request without an answer after 20 seconds counts as failed.
+* **Links to a message** (a reply, a search result, a pin, a link, "Jump to the beginning") load the page around it once (twice before), show it in the middle of the list (a long message from its start) and mark it. Clicking the same reply again jumps again. Near the newest or the first message the list knows it has reached that end instead of showing placeholders there.
+* **After the connection comes back** while you read older messages, nothing moves and the missed messages load as you scroll down; at the bottom the list refreshes without going blank first.
+* **Coming back to a channel** where you were reading older messages returns to the same message. A channel kept in the background no longer forgets that it has older messages after 50 new ones arrived.
+* **Esc works while the pointer rests on something with a tooltip** (a message's time, an avatar). The tooltip took every Esc press and could not be closed by it, so "jump to the newest message" and the other Esc actions did nothing there.
+* "New messages since … / Jump to the beginning" is two buttons with names (jump, dismiss) the keyboard and screen readers reach.
+* Inside: the loaded part of a channel's history, the running request, failures and the unseen count have one owner (`components/app/interface/channels/text/history/`: `window.ts`, `reader.ts`, `controller.ts`, with unit tests) and `Messages.tsx` draws its state; `HistoryScroller` replaces `ListView2`.
+
 ### Design audit of the whole app (2026-11-13)
 
 * **Arabic: arrows point the right way.** Direction icons are mirrored in one place only. A second flip beside some components had turned them back: "Back" on sign-up, in settings on phones, in channel search and in category permissions, the chevrons on the lobby and in "Create your server", breadcrumbs on Designs and Discover, the calendar's month arrows, and Forward in the message toolbar (it looked the same as Reply).

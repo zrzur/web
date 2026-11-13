@@ -122,8 +122,10 @@ export function TextChannel(props: ChannelPageProps) {
     props.channel.isVoice && props.channel.havePermission("Connect");
 
   // Get a reference to the message box's load latest function
-  let jumpToBottomRef: ((nearby?: string) => void) | undefined;
+  let jumpToBottomRef: (() => void) | undefined;
 
+  // Whether the reader sees the newest message (the newest messages are
+  // loaded and the list is scrolled to its bottom)
   const [atEnd, setEnd] = createSignal(true);
 
   // Store last unread message id. Unread state arrives after the first
@@ -143,7 +145,7 @@ export function TextChannel(props: ChannelPageProps) {
   // Mark channel as read whenever it is marked as unread
   createEffect(
     on(
-      // must be at the end of the conversation
+      // the reader must be looking at the newest message
       () => props.channel.unread && atEnd(),
       (unread) => {
         if (unread) {
@@ -299,7 +301,7 @@ export function TextChannel(props: ChannelPageProps) {
             highlightedMessageId={highlightMessageId}
             clearHighlightedMessage={() => navigate(".")}
             jumpToBottomRef={(ref) => (jumpToBottomRef = ref)}
-            atEnd={[atEnd, setEnd]}
+            atPresent={[atEnd, setEnd]}
           />
 
           <InteractionModal />

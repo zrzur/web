@@ -25489,3 +25489,12 @@ msgstr "أوافق على <0>شروط الخدمة</0> و<1>إرشادات ال�
 #: components/auth/src/flows/Form.tsx
 msgid "Tick the box to accept before you continue."
 msgstr "ضع علامة في المربع للموافقة قبل المتابعة."
+
+#. placeholder {0}: props.unseen
+#: components/ui/components/features/messaging/bars/JumpToBottom.tsx
+msgid "{0, plural, one {# new message} other {# new messages}}"
+msgstr "{0, plural, zero {لا رسائل جديدة} one {رسالة جديدة واحدة} two {رسالتان جديدتان} few {# رسائل جديدة} many {# رسالة جديدة} other {# رسالة جديدة}}"
+
+#: components/app/interface/channels/text/Messages.tsx
+msgid "Couldn't load messages."
+msgstr "تعذّر تحميل الرسائل."

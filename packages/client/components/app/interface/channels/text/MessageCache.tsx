@@ -13,12 +13,14 @@ import { Channel, Client, Message } from "@zrzur/sdk/solid";
 import { useClientLifecycle } from "@revolt/client";
 import { State } from "@revolt/client/Controller";
 
-type ChannelState = {
-  messages: Message[];
-  atStart: boolean;
-  atEnd: boolean;
-  scrollTop?: number;
-};
+import type { HistorySnapshot } from "./history/controller";
+import { addLive, removeIds, trimForCache } from "./history/window";
+
+/** A channel's loaded history and the reader's place in it, while the channel is not open */
+type ChannelState = HistorySnapshot<Message>;
+
+/** Rows kept for a channel that is not open */
+const CACHED_ROWS = 50;
 
 const CacheContext = createContext<{
   manage(channel: Channel, state: ChannelState): void;
@@ -39,8 +41,13 @@ export function MessageCache(props: { client: Client; children: JSX.Element }) {
    */
   function onMessage(message: Message) {
     const entry = cache[message.channelId];
-    if (entry?.atEnd) {
-      entry.messages = [message, ...entry.messages].slice(0, 50);
+    if (entry?.window.atEnd) {
+      // cut to the newest rows; a cut window no longer claims to hold the
+      // first message of the channel
+      entry.window = trimForCache(
+        addLive(entry.window, message, { trim: false, limit: CACHED_ROWS }),
+        CACHED_ROWS,
+      );
     }
   }
 
@@ -49,8 +56,22 @@ export function MessageCache(props: { client: Client; children: JSX.Element }) {
    */
   function onMessageDelete(message: { id: string; channelId: string }) {
     const entry = cache[message.channelId];
+    if (entry) entry.window = removeIds(entry.window, [message.id]);
+  }
+
+  /**
+   * Handle bulk-deleted messages
+   */
+  function onMessageDeleteBulk(
+    messages: { id: string }[],
+    channel?: { id: string },
+  ) {
+    const entry = channel && cache[channel.id];
     if (entry) {
-      entry.messages = entry.messages.filter((msg) => msg.id !== message.id);
+      entry.window = removeIds(
+        entry.window,
+        messages.map((message) => message.id),
+      );
     }
   }
 
@@ -58,11 +79,13 @@ export function MessageCache(props: { client: Client; children: JSX.Element }) {
   onMount(() => {
     props.client.addListener("messageCreate", onMessage);
     props.client.addListener("messageDelete", onMessageDelete);
+    props.client.addListener("messageDeleteBulk", onMessageDeleteBulk);
   });
 
   onCleanup(() => {
     props.client.removeListener("messageCreate", onMessage);
     props.client.removeListener("messageDelete", onMessageDelete);
+    props.client.removeListener("messageDeleteBulk", onMessageDeleteBulk);
   });
 
   // Clear cache when we reconnect
