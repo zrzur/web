@@ -477,7 +477,8 @@ const ChipRemove = styled("button", {
     // a 24px hit area around the small ✕ (minimum target size); on phones
     // the ✕ keeps its size and the area around it grows to 44 px
     "&::before": { content: "''", position: "absolute", inset: "-4px" },
-    minHeight: "16px",
+    // the page-wide 44 px rule is outside the style layers, so it needs this
+    minHeight: "16px !important",
     "@media (max-width: 600px)": { "&::before": { inset: "-14px" } },
     marginInlineEnd: "-4px",
     border: "none",
@@ -499,7 +500,7 @@ const AddRole = styled("button", {
     position: "relative",
     width: "24px",
     height: "24px",
-    minHeight: "24px",
+    minHeight: "24px !important",
     "@media (max-width: 600px)": {
       "&::before": { content: "''", position: "absolute", inset: "-10px" },
     },
