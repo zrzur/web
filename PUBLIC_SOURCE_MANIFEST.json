@@ -574,8 +574,8 @@
     },
     {
       "path": "e2e/stack-runner/create-server-flow.mjs",
-      "sha256": "3f94ae186133b99fe532a60ed2930fd03aa7296935f7f6aac29e81de76a6a120",
-      "bytes": 42882,
+      "sha256": "89500266ed04722c8ada3cfac1a6b22a7198ae3f853b353695c2d4d3dba6d0b7",
+      "bytes": 43272,
       "category": "synthetic-test-source-or-fixture"
     },
     {
@@ -6196,8 +6196,8 @@
     },
     {
       "path": "packages/client/components/ui/components/features/navigation/UnreadCallout.tsx",
-      "sha256": "36ffb7c7cc0679be9da04479f2abc9e9ba79c92a57b23781c225440a8fed20e7",
-      "bytes": 6098,
+      "sha256": "c45cca48541b69605eb39746c970f2fb84153b327a3e8b5cf6b4bc4803fe9ecb",
+      "bytes": 6099,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -8602,7 +8602,7 @@
     },
     {
       "path": "packages/client/components/ui/themes/stoatWebTheme.ts",
-      "sha256": "1275ed6a07013ba12781523b1f5e8f7f9369c6b2d42d2a607af9a2e850a32a41",
+      "sha256": "d31022ca78bcc822be7fc3d3f523b09a80f289d60fee09ba29b48e6ec20bc64a",
       "bytes": 3098,
       "category": "product-source-or-build-manifest"
     },
