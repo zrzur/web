@@ -8932,8 +8932,8 @@
     },
     {
       "path": "packages/client/index.html",
-      "sha256": "1d4f0d6cdf460e6ea3c797e3d5c5c4b7882e82aed356bb3f190652f75a0b142b",
-      "bytes": 1681,
+      "sha256": "4bbb02192301324b7b0af7d7a1b4449ff582c044b46cfa5c4a9c9fc6d9ca368a",
+      "bytes": 2317,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -41728,8 +41728,8 @@
     },
     {
       "path": "packages/public-pages/test/head.test.mjs",
-      "sha256": "fac20b60c9b941e4df88a1165eb68ee180ebbad211e8d68de529b50cd6838b7c",
-      "bytes": 10092,
+      "sha256": "d139446e8e6ea1c52ce0e70675d6bd588c7fd1bdd35096017c7ed2a0aab4d127",
+      "bytes": 10959,
       "category": "synthetic-test-source-or-fixture"
     },
     {

@@ -125,6 +125,29 @@ test("the head goes into the page and text is escaped", () => {
   assert.doesNotMatch(out, /<b>name/);
 });
 
+test("the app's own index.html keeps one title and one description after injection", async () => {
+  // the app's sign-in page has its own description for search engines;
+  // a Discover page built from the same file must not keep it as a second one
+  const { readFile } = await import("node:fs/promises");
+  const html = await readFile(
+    new URL("../../client/index.html", import.meta.url),
+    "utf8",
+  );
+  assert.match(html, /<meta name="description"/);
+  const meta = pageMeta({
+    site: "discover",
+    origin: ORIGIN,
+    path: "/rabea",
+    lang: "en",
+    route: { kind: "server", slug: "rabea" },
+    data: card,
+  });
+  const out = injectHead(html, meta);
+  assert.equal((out.match(/name="description"/g) ?? []).length, 1);
+  assert.equal((out.match(/<title>/g) ?? []).length, 1);
+  assert.doesNotMatch(out, /sign in or create a free account/i);
+});
+
 // --- the seven display languages (?hl=) and the community routes ---
 
 const SEVEN = ["en", "de", "ar", "fr", "es", "ru", "zh-Hans"];
