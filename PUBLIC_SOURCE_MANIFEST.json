@@ -652,8 +652,8 @@
     },
     {
       "path": "e2e/stack-runner/server-settings.mjs",
-      "sha256": "178e961387a601f4dd3d48e7216f1d73f4e1b00d1173a0b7034ae1d7decc44a9",
-      "bytes": 60252,
+      "sha256": "8008fb688f3d5f6e96982df1c433aea1a965afa952df77e7422050478d1850ac",
+      "bytes": 62909,
       "category": "synthetic-test-source-or-fixture"
     },
     {
