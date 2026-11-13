@@ -5443,6 +5443,7 @@ msgstr "Copy file"
 #~ msgid "Copy ID"
 #~ msgstr "Copy ID"
 
+#: components/app/interface/discover/ServerPage.tsx
 #: components/app/interface/settings/server/invites/ListServerInvites.tsx
 msgid "Copy invite link"
 msgstr "Copy invite link"
@@ -5464,7 +5465,6 @@ msgstr "Copy it now. It won't be shown again."
 msgid "Copy JSON"
 msgstr "Copy JSON"
 
-#: components/app/interface/discover/ServerPage.tsx
 #: components/app/interface/settings/server/invites/VanityInvite.tsx
 #: components/app/menus/ChannelContextMenu.tsx
 #: components/app/menus/MessageContextMenu.tsx
@@ -5489,6 +5489,10 @@ msgstr "Copy message ID"
 #: components/app/menus/MessageContextMenu.tsx
 msgid "Copy message link"
 msgstr "Copy message link"
+
+#: components/app/interface/discover/ServerPage.tsx
+msgid "Copy page link"
+msgstr "Copy page link"
 
 #: components/app/interface/settings/server/roles/ServerRoleEditor.tsx
 #~ msgid "Copy role ID"
@@ -6891,6 +6895,10 @@ msgstr "Discover couldn't be loaded right now."
 #: src/interface/Discover.tsx
 #~ msgid "Discover on the web"
 #~ msgstr "Discover on the web"
+
+#: components/app/interface/discover/ServerPage.tsx
+msgid "Discover page"
+msgstr "Discover page"
 
 #: components/app/interface/settings/user/subscriptions/PlusPage.tsx
 msgid "Discover promotion"
@@ -10062,6 +10070,7 @@ msgstr "Invite code"
 msgid "Invite friends to {0}"
 msgstr "Invite friends to {0}"
 
+#: components/app/interface/discover/ServerPage.tsx
 #: components/app/interface/settings/user/bots/ViewBot.tsx
 #: components/modal/modals/CreateInvite.tsx
 #: src/interface/Developers.tsx
@@ -10992,7 +11001,6 @@ msgstr "Lina"
 #~ msgid "Lines with a soft fill in your icon colour."
 #~ msgstr "Lines with a soft fill in your icon colour."
 
-#: components/app/interface/discover/ServerPage.tsx
 #: src/interface/designs/DesignPage.tsx
 msgid "Link"
 msgstr "Link"
@@ -14092,6 +14100,7 @@ msgstr "Off: each site like YouTube or Spotify asks you once. On: every player l
 msgid "Off. Your keys work only while the Zrzur window is active."
 msgstr "Off. Your keys work only while the Zrzur window is active."
 
+#: components/app/interface/discover/Detail.tsx
 #: components/app/interface/settings/user/plugins/BrowseTab.tsx
 #: components/app/interface/settings/user/plugins/PluginDetail.tsx
 #: components/ui/components/features/profiles/OfficialLabel.tsx
@@ -25021,8 +25030,8 @@ msgid "You're #{0} in line"
 msgstr "You're #{0} in line"
 
 #: components/app/interface/discover/ServerPage.tsx
-msgid "You're a member"
-msgstr "You're a member"
+#~ msgid "You're a member"
+#~ msgstr "You're a member"
 
 #: components/i18n/errors.tsx
 msgid "You're already in this call."
@@ -25782,19 +25791,3 @@ msgstr "Zrzur, right on <0>your desktop.</0>"
 #: components/app/interface/settings/user/appearance/AppearanceMenu.tsx
 #~ msgid "Zrzur's own look: very dark neutral panels with Zrzur Pink as the one accent."
 #~ msgstr "Zrzur's own look: very dark neutral panels with Zrzur Pink as the one accent."
-
-#: components/auth/src/flows/SignUpConsent.tsx
-msgid "I accept the <0>Terms of Service</0> and the <1>Community Guidelines</1> and have read the <2>Privacy Policy</2>."
-msgstr "I accept the <0>Terms of Service</0> and the <1>Community Guidelines</1> and have read the <2>Privacy Policy</2>."
-
-#: components/auth/src/flows/Form.tsx
-msgid "Tick the box to accept before you continue."
-msgstr "Tick the box to accept before you continue."
-
-#: components/app/interface/discover/ServerPage.tsx
-msgid "Copy page link"
-msgstr "Copy page link"
-
-#: components/app/interface/discover/ServerPage.tsx
-msgid "Discover page"
-msgstr "Discover page"

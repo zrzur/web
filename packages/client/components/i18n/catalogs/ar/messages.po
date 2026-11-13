@@ -5443,6 +5443,7 @@ msgstr "نسخ الملف"
 #~ msgid "Copy ID"
 #~ msgstr "انسخ المعرّف"
 
+#: components/app/interface/discover/ServerPage.tsx
 #: components/app/interface/settings/server/invites/ListServerInvites.tsx
 msgid "Copy invite link"
 msgstr "نسخ رابط الدعوة"
@@ -5464,7 +5465,6 @@ msgstr "انسخه الآن، فلن يُعرض مرة أخرى."
 msgid "Copy JSON"
 msgstr "انسخ JSON"
 
-#: components/app/interface/discover/ServerPage.tsx
 #: components/app/interface/settings/server/invites/VanityInvite.tsx
 #: components/app/menus/ChannelContextMenu.tsx
 #: components/app/menus/MessageContextMenu.tsx
@@ -5489,6 +5489,10 @@ msgstr "نسخ معرّف الرسالة"
 #: components/app/menus/MessageContextMenu.tsx
 msgid "Copy message link"
 msgstr "نسخ رابط الرسالة"
+
+#: components/app/interface/discover/ServerPage.tsx
+msgid "Copy page link"
+msgstr "نسخ رابط الصفحة"
 
 #: components/app/interface/settings/server/roles/ServerRoleEditor.tsx
 #~ msgid "Copy role ID"
@@ -6891,6 +6895,10 @@ msgstr "تعذّر تحميل «اكتشف» حاليًا."
 #: src/interface/Discover.tsx
 #~ msgid "Discover on the web"
 #~ msgstr "«اكتشف» على الويب"
+
+#: components/app/interface/discover/ServerPage.tsx
+msgid "Discover page"
+msgstr "صفحة «اكتشف»"
 
 #: components/app/interface/settings/user/subscriptions/PlusPage.tsx
 msgid "Discover promotion"
@@ -10059,6 +10067,7 @@ msgstr "رمز الدعوة"
 msgid "Invite friends to {0}"
 msgstr "ادعُ أصدقاءك إلى {0}"
 
+#: components/app/interface/discover/ServerPage.tsx
 #: components/app/interface/settings/user/bots/ViewBot.tsx
 #: components/modal/modals/CreateInvite.tsx
 #: src/interface/Developers.tsx
@@ -10989,7 +10998,6 @@ msgstr "لينا"
 #~ msgid "Lines with a soft fill in your icon colour."
 #~ msgstr "خطوط مع تعبئة خفيفة بلون أيقوناتك."
 
-#: components/app/interface/discover/ServerPage.tsx
 #: src/interface/designs/DesignPage.tsx
 msgid "Link"
 msgstr "الرابط"
@@ -14089,6 +14097,7 @@ msgstr "معطّل: يسألك كل موقع مثل YouTube أو Spotify مرة 
 msgid "Off. Your keys work only while the Zrzur window is active."
 msgstr "متوقف. مفاتيحك تعمل فقط ما دامت نافذة زرزور نشطة."
 
+#: components/app/interface/discover/Detail.tsx
 #: components/app/interface/settings/user/plugins/BrowseTab.tsx
 #: components/app/interface/settings/user/plugins/PluginDetail.tsx
 #: components/ui/components/features/profiles/OfficialLabel.tsx
@@ -25018,8 +25027,8 @@ msgid "You're #{0} in line"
 msgstr "أنت رقم {0} في الدور"
 
 #: components/app/interface/discover/ServerPage.tsx
-msgid "You're a member"
-msgstr "أنت عضو"
+#~ msgid "You're a member"
+#~ msgstr "أنت عضو"
 
 #: components/i18n/errors.tsx
 msgid "You're already in this call."
@@ -25779,19 +25788,3 @@ msgstr "زرزور، مباشرةً على <0>سطح مكتبك.</0>"
 #: components/app/interface/settings/user/appearance/AppearanceMenu.tsx
 #~ msgid "Zrzur's own look: very dark neutral panels with Zrzur Pink as the one accent."
 #~ msgstr "مظهر زرزور الخاص: لوحات داكنة جدًا بألوان محايدة، وزهري زرزور هو اللون المميز الوحيد."
-
-#: components/auth/src/flows/SignUpConsent.tsx
-msgid "I accept the <0>Terms of Service</0> and the <1>Community Guidelines</1> and have read the <2>Privacy Policy</2>."
-msgstr "أوافق على <0>شروط الخدمة</0> و<1>إرشادات المجتمع</1>، وقد قرأت <2>سياسة الخصوصية</2>."
-
-#: components/auth/src/flows/Form.tsx
-msgid "Tick the box to accept before you continue."
-msgstr "ضع علامة في المربع للموافقة قبل المتابعة."
-
-#: components/app/interface/discover/ServerPage.tsx
-msgid "Copy page link"
-msgstr "نسخ رابط الصفحة"
-
-#: components/app/interface/discover/ServerPage.tsx
-msgid "Discover page"
-msgstr "صفحة «اكتشف»"
