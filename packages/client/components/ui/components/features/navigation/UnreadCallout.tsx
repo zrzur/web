@@ -93,7 +93,7 @@ export function useUnreadCallout(list: Accessor<HTMLElement | undefined>) {
     const nearest =
       current.direction === "above" ? candidates.at(-1) : candidates.at(0);
 
-    nearest?.element.scrollIntoView({ behavior: "smooth", block: "center" });
+    nearest?.element?.scrollIntoView({ behavior: "smooth", block: "center" });
   }
 
   createEffect(() => {

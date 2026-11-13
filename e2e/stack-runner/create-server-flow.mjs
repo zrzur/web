@@ -460,12 +460,20 @@ async function screens(page, L, tag, username) {
         console.log(`       box ${Math.round(size.w)} x ${Math.round(size.h)}`);
       }
       if (L === "ar") {
-        const transform = await box
+        // mirrored exactly once: by the one rule in styles.css (scale), not
+        // by a second transform beside it, which would turn the icon back
+        const flip = await box
           .locator("[data-flow-row] .z-icon")
           .first()
-          .evaluate((el) => getComputedStyle(el).transform);
-        if (!transform.startsWith("matrix(-1"))
-          fail(`chevron not mirrored: ${transform}`);
+          .evaluate((el) => {
+            const style = getComputedStyle(el);
+            const scaled =
+              style.scale !== "none" && parseFloat(style.scale) < 0;
+            const turned = style.transform.startsWith("matrix(-1");
+            return { scaled, turned };
+          });
+        if (flip.scaled === flip.turned)
+          fail(`chevron not mirrored once: ${JSON.stringify(flip)}`);
       }
     },
   );
