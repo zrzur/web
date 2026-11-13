@@ -60,7 +60,8 @@ const Target = styled("button", {
     alignItems: "center",
     justifyContent: "center",
     width: "38px",
-    height: "22px",
+    // the track is 22 px; the button around it is the 24 px minimum target
+    height: "24px",
     padding: 0,
     border: "none",
     borderRadius: "11px",
@@ -95,7 +96,7 @@ const Track = styled("span", {
     width: "38px",
     height: "22px",
     borderRadius: "11px",
-    // off: a recessed track; on: the primary button's two-shade fill
+    // off: a recessed track; on: the primary button's flat fill
     border:
       "1px solid color-mix(in srgb, var(--z-fg-primary) 12%, transparent)",
     background: "var(--z-field-bg, var(--z-bg-input, var(--z-bg-app)))",
@@ -127,7 +128,7 @@ const Knob = styled("span", {
 
     "[data-checked='true'] > &": {
       transform: "translateX(16px)",
-      background: "linear-gradient(180deg, #FFFFFF, #ECEAF5)",
+      background: "var(--z-on-accent, #fff)",
     },
     "[dir='rtl'] [data-checked='true'] > &": {
       transform: "translateX(-16px)",

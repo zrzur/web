@@ -88,7 +88,7 @@ const themeConstants = {
     sm: "4px",
     md: "8px",
     l: "12px",
-    lg: "15px",
+    lg: "16px",
     x: "28px",
     xl: "32px",
     xxl: "64px",

@@ -296,15 +296,18 @@ const ControlWrap = styled("div", {
       // the shared field focus: a crisp ring, no coloured glow
       boxShadow: "var(--z-field-focus-shadow)",
     },
-    "&:focus-within > span:first-child": { color: "var(--z-accent)" },
+    // the leading mark is text: the accent's text step keeps it readable
+    "&:focus-within > span:first-child": {
+      color: "var(--z-accent-text, var(--z-accent))",
+    },
 
     "&[data-invalid='true']": {
       borderColor: "var(--z-danger)",
     },
     "&[data-invalid='true']:focus-within": {
       borderColor: "var(--z-danger)",
-      boxShadow:
-        "inset 0 1px 2px rgb(0 0 0 / 0.22), 0 0 0 3px color-mix(in srgb, var(--z-danger) 22%, transparent)",
+      // the same crisp ring as a valid field, in the danger colour
+      boxShadow: "0 0 0 1px var(--z-danger)",
     },
     "&[data-disabled='true']": {
       opacity: 0.55,

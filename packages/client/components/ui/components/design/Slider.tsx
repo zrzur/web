@@ -94,24 +94,35 @@ const Track = styled("div", {
   },
 });
 
-const Range = styled("input", {
-  base: {
-    width: "100%",
-    height: "6px",
-    appearance: "none",
-    borderRadius: "999px",
-    // the fill grows from the start side: left in English, right in Arabic
-    "--z-slider-dir": "to right",
-    "[dir='rtl'] &": { "--z-slider-dir": "to left" },
-    background: `linear-gradient(
+// the line that is drawn: 6 px, filled from the start side up to the value
+const trackPaint = {
+  height: "6px",
+  borderRadius: "999px",
+  background: `linear-gradient(
       var(--z-slider-dir),
       var(--z-accent, #E0195F) 0%,
       var(--z-accent, #E0195F) var(--z-slider-pct, 0%),
       var(--z-slate-2, #4A3F59) var(--z-slider-pct, 0%),
       var(--z-slate-2, #4A3F59) 100%
     )`,
+};
+
+const Range = styled("input", {
+  base: {
+    width: "100%",
+    // the control is a 24 px target; only the 6 px line inside it is drawn
+    height: "24px",
+    margin: 0,
+    appearance: "none",
+    background: "transparent",
+    // the fill grows from the start side: left in English, right in Arabic
+    "--z-slider-dir": "to right",
+    "[dir='rtl'] &": { "--z-slider-dir": "to left" },
     outline: "none",
     cursor: "pointer",
+
+    "&::-webkit-slider-runnable-track": trackPaint,
+    "&::-moz-range-track": trackPaint,
 
     // the knob: a white button ringed in the accent, with a soft halo while
     // held
@@ -119,6 +130,8 @@ const Range = styled("input", {
       appearance: "none",
       width: "18px",
       height: "18px",
+      // centred on the 6 px line
+      marginTop: "-6px",
       borderRadius: "50%",
       background: "#FFFFFF",
       border: "2px solid var(--z-accent, #E0195F)",
@@ -132,17 +145,21 @@ const Range = styled("input", {
     "&::-moz-range-thumb": {
       width: "18px",
       height: "18px",
+      boxSizing: "border-box",
       borderRadius: "50%",
       background: "#FFFFFF",
       border: "2px solid var(--z-accent, #E0195F)",
       cursor: "pointer",
     },
-    "&:focus-visible": {
+    // the ring goes around the knob, where the eye already is
+    "&:focus-visible::-webkit-slider-thumb": {
+      boxShadow: "var(--z-focus-ring)",
+    },
+    "&:focus-visible::-moz-range-thumb": {
       boxShadow: "var(--z-focus-ring)",
     },
   },
 });
-
 const Value = styled("span", {
   base: {
     minWidth: "40px",
