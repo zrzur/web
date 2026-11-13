@@ -5,7 +5,8 @@
   "scripts": {
     "start": "node inject.js && node server.js dist_injected",
     "discover": "node inject.js && SITE=discover DIST=dist_injected node public-pages/src/server.mjs",
-    "designs": "node inject.js && SITE=designs DIST=dist_injected node public-pages/src/server.mjs"
+    "designs": "node inject.js && SITE=designs DIST=dist_injected node public-pages/src/server.mjs",
+    "docs": "node inject.js && SITE=docs DIST=dist_injected node public-pages/src/server.mjs"
   },
   "engines": {
     "node": ">=18"

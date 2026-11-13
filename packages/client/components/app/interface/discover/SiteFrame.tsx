@@ -141,7 +141,7 @@ export function LanguageSwitch() {
   );
 }
 
-export function SiteFooter(props: { site: SiteId }) {
+export function SiteFooter(props: { site: SiteId | "docs" }) {
   const { t } = useLingui();
   const links = () => [
     { href: `${WEBSITE_URL}/legal/terms`, label: t`Terms` },

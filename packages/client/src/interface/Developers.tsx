@@ -20,6 +20,7 @@ import { ViewBot } from "@revolt/app/interface/settings/user/bots";
 import { CommandManager } from "@revolt/app/interface/settings/user/bots/CommandManager";
 import type { RegisteredCommand } from "@revolt/app/interface/settings/user/bots/commandForm";
 import { useClient } from "@revolt/client";
+import { CONFIGURATION } from "@revolt/common";
 import { useError } from "@revolt/i18n";
 import { useModals } from "@revolt/modal";
 import { useLocation, useNavigate } from "@revolt/routing";
@@ -28,6 +29,7 @@ import { Icon } from "@revolt/ui/icons/Icon";
 
 import { usePermissionNames } from "./OAuth";
 import { HeaderIcon } from "./common/CommonHeader";
+import { docsLinkFromApp } from "./developers/docs/links";
 
 const TABS = ["overview", "commands", "oauth2"] as const;
 type Tab = (typeof TABS)[number];
@@ -41,6 +43,8 @@ type Tab = (typeof TABS)[number];
 export function Developers() {
   const client = useClient();
   const navigate = useNavigate();
+  const docs = () =>
+    docsLinkFromApp("/developers/docs", CONFIGURATION.DOCS_URL);
   const location = useLocation();
   const { openModal } = useModals();
   const { t } = useLingui();
@@ -74,7 +78,8 @@ export function Developers() {
           <Trans>Developer Portal</Trans>
         </Title>
       </Header>
-      {/* /developers/docs has its own route outside the app (index.tsx) */}
+      {/* the documentation is its own site (VITE_DOCS_URL), or the route
+          /developers/docs outside the app interface (app.tsx) */}
       {/* one column, like Designs: the home sidebar stays the only one */}
       <Main>
         <Page>
@@ -99,10 +104,14 @@ export function Developers() {
               </Intro>
 
               <DocsCard
-                href="/developers/docs"
+                href={docs().href}
+                target={docs().external ? "_blank" : undefined}
+                rel={docs().external ? "noopener" : undefined}
                 onClick={(event) => {
+                  // the documentation site opens beside the app
+                  if (docs().external) return;
                   event.preventDefault();
-                  navigate("/developers/docs");
+                  navigate(docs().href);
                 }}
               >
                 <Icon name="books" size={24} />
@@ -582,10 +591,14 @@ function UrlGenerator(props: { bot: Bot; redirects: string[] }) {
 /** Link to the docs page that explains a tab, instead of repeating it */
 function DocsLink(props: { href: string; children: JSX.Element }) {
   const navigate = useNavigate();
+  const link = () => docsLinkFromApp(props.href, CONFIGURATION.DOCS_URL);
   return (
     <DocsAnchor
-      href={props.href}
+      href={link().href}
+      target={link().external ? "_blank" : undefined}
+      rel={link().external ? "noopener" : undefined}
       onClick={(event) => {
+        if (link().external) return;
         event.preventDefault();
         navigate(props.href);
       }}

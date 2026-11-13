@@ -441,7 +441,8 @@ describe("Links from the app into the docs", { timeout: 30_000 }, () => {
         ),
       ].map(([, link]) => link),
     );
-    expect(links.length).toBeGreaterThan(5);
+    // the portal's three help links (the first steps are a Markdown page now)
+    expect(links.length).toBeGreaterThan(2);
     for (const link of links) {
       const [path, anchor] = link.split("#");
       const anchors = anchorsOfPage(path.split("/").at(-1)!);

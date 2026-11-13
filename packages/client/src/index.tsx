@@ -23,7 +23,7 @@ import siteCatalogs from "virtual:zrzur-site-catalogs";
 import { bootFailed, bootLoaded, opensSignIn } from "./boot";
 import "./index.css";
 import "./serviceWorkerInterface";
-import { isDesignsSite, isDiscoverSite } from "./siteKind";
+import { isDesignsSite, isDiscoverSite, isDocsSite } from "./siteKind";
 import { watchForStaleBuild } from "./staleBuild";
 
 // a tab opened before an update loads the new build instead of failing
@@ -47,7 +47,7 @@ function escapeSelfEmbed() {
 }
 
 if (!escapeSelfEmbed()) {
-  const site = isDesignsSite() || isDiscoverSite();
+  const site = isDesignsSite() || isDiscoverSite() || isDocsSite();
   const signIn = opensSignIn(window.location.pathname);
   // the sites' own pages need a fifth of the messages: a small file first,
   // the full one right after (sign-in pages need the full one at once)

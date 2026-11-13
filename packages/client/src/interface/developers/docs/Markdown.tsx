@@ -5,6 +5,7 @@ import { styled } from "styled-system/jsx";
 
 import { CodeBlock } from "./CodeBlock";
 import { Directive } from "./Directives";
+import { hrefHere, leavesHere } from "./here";
 import { headingId, headingText, parseMarkdown } from "./markdownTree";
 
 /**
@@ -128,17 +129,18 @@ function Node(props: {
       <Match when={props.node.type === "link" && props.node}>
         {(node) => {
           const link = node() as { url: string };
-          const external = /^https?:\/\//.test(link.url);
-          // files such as the changelog feed are not pages of the app: the
-          // browser opens them itself
-          const file = /\.xml$/.test(link.url);
+          // where the page lives here: in the app or on the docs site
+          const href = hrefHere(link.url);
+          // other sites open beside this one; files such as the changelog
+          // feed are not pages of the app: the browser opens them itself
+          const external = /^https?:\/\//.test(href);
           return (
             <a
-              href={link.url}
+              href={href}
               target={external ? "_blank" : undefined}
               rel={external ? "noreferrer noopener" : undefined}
               onClick={(event) => {
-                if (external || file || event.ctrlKey || event.metaKey) return;
+                if (leavesHere(href) || event.ctrlKey || event.metaKey) return;
                 event.preventDefault();
                 props.onNavigate(link.url);
               }}

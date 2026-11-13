@@ -25449,3 +25449,15 @@ msgstr "بإنشائك حسابًا، فإنك تقبل <0>شروط الخدمة
 msgid "Under 18, only friends can start a direct message with you. Anyone you write to first can reply."
 msgstr "دون سن ١٨ عامًا، لا يستطيع بدء رسالة مباشرة معك إلا أصدقاؤك. ويمكن لكل من تراسله أولًا أن يردّ عليك."
 
+#: src/interface/developers/docs/DocsPortal.tsx
+msgid "More pages"
+msgstr "صفحات أخرى"
+
+#: src/interface/developers/docs/DocsPortal.tsx
+msgid "On this page"
+msgstr "في هذه الصفحة"
+
+#: src/interface/developers/docs/DocsPortal.tsx
+#: src/interface/DevelopersDocs.tsx
+msgid "Zrzur Developers"
+msgstr "مطوّرو زرزور"

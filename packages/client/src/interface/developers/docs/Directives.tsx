@@ -5,6 +5,7 @@ import { Trans, useLingui } from "@lingui/solid/macro";
 import { CodeBlock } from "./CodeBlock";
 import { EndpointReference, StatusBadge } from "./EndpointReference";
 import { exampleSource } from "./examples";
+import { hrefHere } from "./here";
 import {
   endpointSlug,
   endpointsFor,
@@ -109,7 +110,9 @@ export function Directive(props: {
             .filter((endpoint) => endpoint.status === "unsupported")
             .map((endpoint) => [
               <a
-                href={`/developers/docs/${pageOfSection(endpoint.section)}#${endpointSlug(endpoint)}`}
+                href={hrefHere(
+                  `/developers/docs/${pageOfSection(endpoint.section)}#${endpointSlug(endpoint)}`,
+                )}
                 onClick={(event) => {
                   event.preventDefault();
                   props.onNavigate(

@@ -25451,3 +25451,16 @@ msgstr "By creating an account you accept the <0>Terms of Service</0> and the <1
 #: components/app/interface/settings/user/Privacy.tsx
 msgid "Under 18, only friends can start a direct message with you. Anyone you write to first can reply."
 msgstr "Under 18, only friends can start a direct message with you. Anyone you write to first can reply."
+
+#: src/interface/developers/docs/DocsPortal.tsx
+msgid "More pages"
+msgstr "More pages"
+
+#: src/interface/developers/docs/DocsPortal.tsx
+msgid "On this page"
+msgstr "On this page"
+
+#: src/interface/developers/docs/DocsPortal.tsx
+#: src/interface/DevelopersDocs.tsx
+msgid "Zrzur Developers"
+msgstr "Zrzur Developers"

@@ -65,3 +65,36 @@ export function isDiscoverSite() {
 export function discoverBase() {
   return isDiscoverSite() ? "" : "/discover";
 }
+
+/** dev only: preview the documentation site on localhost (localStorage flag) */
+const DOCS_PREVIEW_KEY = "zrzur:docs-site";
+
+/**
+ * Whether this page is the standalone developer documentation site: opened
+ * on the origin of VITE_DOCS_URL (e.g. https://developers.zrzur.com). In
+ * development the flag `zrzur:docs-site = "1"` in localStorage previews it
+ * on localhost.
+ */
+export function isDocsSite() {
+  if (env.DOCS_URL) {
+    try {
+      if (new URL(env.DOCS_URL).origin === window.location.origin) return true;
+    } catch {
+      // resolveDocsUrl already checked it; nothing to match then
+    }
+  }
+  if (!import.meta.env.DEV) return false;
+  try {
+    return window.localStorage.getItem(DOCS_PREVIEW_KEY) === "1";
+  } catch {
+    return false;
+  }
+}
+
+/**
+ * Where documentation pages live: at the root of the standalone site,
+ * under /developers/docs inside the app
+ */
+export function docsBase() {
+  return isDocsSite() ? "" : "/developers/docs";
+}
