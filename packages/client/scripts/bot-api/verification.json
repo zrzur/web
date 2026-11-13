@@ -530,7 +530,7 @@
    },
    "ws": "wss://events.zrzur.com",
    "app": "https://app.zrzur.com",
-   "vapid": "BGcvgR-i2z4IQ5Mw841vJvkLjt8wY-FjmWrw83jOLCY52qcGZS0OF7nfLzuYbjsQISwVO2HXrmf18gLWVX3Kwfw="
+   "vapid": "<the server's public push key>"
   }
  },
  "GET /applications/{application_id}/commands": {
