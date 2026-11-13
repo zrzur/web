@@ -27,6 +27,13 @@ import {
   swapShortcuts,
 } from "@revolt/keybinds/keymapRules";
 import { desktopPushToTalk } from "@revolt/rtc/desktopPushToTalk";
+import {
+  type GameKeyAction,
+  bindCaps,
+  cleanStoredBinds,
+  desktopGameKeys,
+  parseBind,
+} from "@revolt/rtc/gameKeys";
 import { useState } from "@revolt/state";
 import {
   Button,
@@ -74,6 +81,19 @@ export function KeybindsSettings() {
     open_shortcuts: () => t`Show keyboard shortcuts`,
   };
 
+  // desktop app: binds heard in games (set in voice settings)
+  const gameKeys = !!desktopGameKeys() && voice.gameKeys;
+  const gameBinds = () => cleanStoredBinds(voice.gameBinds);
+  const gameRows: { action: GameKeyAction; title: JSX.Element }[] = [
+    { action: "talk", title: <Trans>Push to talk (hold)</Trans> },
+    { action: "mute", title: <Trans>Push to mute (hold)</Trans> },
+    { action: "toggleMute", title: <Trans>Mute or unmute, in any app</Trans> },
+    {
+      action: "toggleDeafen",
+      title: <Trans>Deafen or undeafen, in any app</Trans>,
+    },
+  ];
+
   const groups: { title: JSX.Element; rows: Row[] }[] = [
     {
       title: <Trans>Calls</Trans>,
@@ -88,8 +108,32 @@ export function KeybindsSettings() {
           title: <Trans>Deafen or undeafen</Trans>,
           description: <Trans>During a call.</Trans>,
         },
+        // desktop app: the binds that work in games
+        ...(gameKeys
+          ? gameRows.flatMap((row) => {
+              const bind =
+                parseBind(gameBinds()[row.action]) ??
+                (row.action === "talk" && voice.inputMode === "ptt"
+                  ? parseBind(voice.pttKey)
+                  : undefined);
+              return bind
+                ? [
+                    {
+                      title: row.title,
+                      description: (
+                        <Trans>
+                          Desktop app, during a call: works in games and other
+                          apps. Change it in voice settings.
+                        </Trans>
+                      ),
+                      keys: [bindCaps(bind, keyLabel)],
+                    },
+                  ]
+                : [];
+            })
+          : []),
         // desktop app: the global talk toggle, with the person's own key
-        ...(desktopPushToTalk()
+        ...(desktopPushToTalk() && !gameKeys
           ? [
               {
                 title: <Trans>Talk from other apps (on or off)</Trans>,
@@ -269,10 +313,20 @@ export function KeybindsSettings() {
       <SettingsSection
         title={<Trans>Push to talk</Trans>}
         description={
-          <Trans>
-            Hold one key to talk instead of an open microphone. Works while
-            Zrzur is the active window.
-          </Trans>
+          <Show
+            when={gameKeys}
+            fallback={
+              <Trans>
+                Hold one key to talk instead of an open microphone. Works while
+                Zrzur is the active window.
+              </Trans>
+            }
+          >
+            <Trans>
+              Hold one key to talk instead of an open microphone. In the
+              desktop app it works in games and other apps too.
+            </Trans>
+          </Show>
         }
       >
         <SettingsRow

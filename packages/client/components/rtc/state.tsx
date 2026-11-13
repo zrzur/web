@@ -5,10 +5,12 @@ import {
   createEffect,
   createRoot,
   createSignal,
+  getOwner,
   JSX,
   lazy,
   on,
   onCleanup,
+  runWithOwner,
   Setter,
   untrack,
   useContext,
@@ -54,6 +56,7 @@ import {
 import { deviceFallback } from "./callHealth";
 import { InRoom } from "./components/InRoom";
 import { desktopPushToTalk, latchPress } from "./desktopPushToTalk";
+import type { GameKeyAction, GameKeysStatus } from "./gameKeys";
 import { RoomState, TrackSource } from "./livekitConstants";
 import { type VoiceRuntime, loadVoiceRuntime } from "./loadVoiceRuntime";
 import { useVoiceError } from "./messages";
@@ -71,6 +74,7 @@ import {
   setDisplayMediaCap,
   watchRetiredCodecs,
 } from "./screenShare";
+import { createTalkGate } from "./talkGate";
 import type { VoiceProcessor } from "./VoiceProcessor";
 
 /** The call's audio, with LiveKit (loaded with the first call) */
@@ -120,6 +124,13 @@ const NOTICE_MS = 6000;
 
 /** Global push to talk (desktop): not asked, holding the combination, refused */
 export type GlobalPttState = "off" | "on" | "unavailable";
+
+/** A bound key heard by the desktop app; `away`: another window was in front */
+export type GameKeyHeard = {
+  action: GameKeyAction;
+  down: boolean;
+  away: boolean;
+};
 
 class Voice {
   #client = useClient();
@@ -179,6 +190,22 @@ class Voice {
   #noticeTimer?: ReturnType<typeof setTimeout>;
   /** Ends the wait before the next rejoin attempt (the network came back) */
   #wake?: () => void;
+
+  /** Push to mute: whether its key is held right now (desktop app) */
+  muteHeld: Accessor<boolean>;
+  #setMuteHeld: Setter<boolean>;
+
+  /** Desktop app: whether keys are heard in games (undefined in a browser) */
+  gameKeys: Accessor<GameKeysStatus | undefined>;
+  #setGameKeys: Setter<GameKeysStatus | undefined>;
+
+  /** The last bound key the desktop app heard (for the test in voice settings) */
+  gameKeyHeard: Accessor<GameKeyHeard | undefined>;
+  #setGameKeyHeard: Setter<GameKeyHeard | undefined>;
+
+  /** Voice settings are testing the keys: listen outside a call too */
+  gameKeyTest: Accessor<boolean>;
+  #setGameKeyTest: Setter<boolean>;
 
   /** Whether the desktop app holds the global combination right now */
   globalPtt: Accessor<GlobalPttState>;
@@ -263,12 +290,30 @@ class Voice {
     this.globalPtt = globalPtt;
     this.#setGlobalPtt = setGlobalPtt;
 
+    const [muteHeld, setMuteHeld] = createSignal(false);
+    this.muteHeld = muteHeld;
+    this.#setMuteHeld = setMuteHeld;
+
+    const [gameKeys, setGameKeys] = createSignal<GameKeysStatus>();
+    this.gameKeys = gameKeys;
+    this.#setGameKeys = setGameKeys;
+
+    const [gameKeyHeard, setGameKeyHeard] = createSignal<GameKeyHeard>();
+    this.gameKeyHeard = gameKeyHeard;
+    this.#setGameKeyHeard = setGameKeyHeard;
+
+    const [gameKeyTest, setGameKeyTest] = createSignal(false);
+    this.gameKeyTest = gameKeyTest;
+    this.#setGameKeyTest = setGameKeyTest;
+
     this.deafen = () => voiceSettings.deafen;
     this.unmuted = () =>
       voiceSettings.micOn && !voiceSettings.deafen && this.speakingPermission;
     this.microphone = () =>
       this.unmuted() &&
-      transmitting(voiceSettings.inputMode, pttHeld() || pttLatched());
+      transmitting(voiceSettings.inputMode, pttHeld() || pttLatched()) &&
+      // push to mute closes the microphone for as long as its key is held
+      !muteHeld();
 
     // talking from other apps stops on mute, deafen and any change of room
     createEffect(
@@ -816,6 +861,26 @@ class Voice {
     this.#setPttLatched(false);
   }
 
+  /** Push to mute: its key went down or up */
+  setPushToMute(held: boolean) {
+    this.#setMuteHeld(held);
+  }
+
+  /** What the desktop app says about hearing keys in games */
+  setGameKeys(status: GameKeysStatus | undefined) {
+    this.#setGameKeys(status);
+  }
+
+  /** A bound key was heard by the desktop app */
+  noteGameKey(heard: GameKeyHeard | undefined) {
+    this.#setGameKeyHeard(heard);
+  }
+
+  /** Voice settings start or end the key test */
+  setGameKeyTest(on: boolean) {
+    this.#setGameKeyTest(on);
+  }
+
   /** What the desktop app answered when asked for the global combination */
   setGlobalPtt(state: GlobalPttState) {
     this.#setGlobalPtt(state);
@@ -1285,6 +1350,12 @@ export function VoiceContext(props: { children: JSX.Element }) {
   // so they match on every keyboard layout.
   const mac = isMac();
   const inCall = () => voice.state() === "CONNECTED";
+  // push to talk is open while the key is held in this window or heard by
+  // the desktop app, and for the release delay after it is let go
+  const talkGate = createTalkGate(
+    (open) => voice.setPushToTalk(open),
+    () => state.voice.pttReleaseDelay,
+  );
   const onKeyDown = (event: KeyboardEvent) => {
     const shortcut = matchGlobalShortcut(event, mac);
     if (shortcut === "open_shortcuts") {
@@ -1324,14 +1395,15 @@ export function VoiceContext(props: { children: JSX.Element }) {
     ) {
       // also on repeats, so a held Space never scrolls the page
       event.preventDefault();
-      voice.setPushToTalk(true);
+      talkGate.down("window");
     }
   };
   const onKeyUp = (event: KeyboardEvent) => {
-    if (event.code === state.voice.pttKey) voice.setPushToTalk(false);
+    if (event.code === state.voice.pttKey) talkGate.up("window");
   };
-  // a key released in another window never reaches us: stop talking
-  const release = () => voice.setPushToTalk(false);
+  // a key released in another window never reaches this page: let go of
+  // it (the desktop app hears the key itself and holds on its own)
+  const release = () => talkGate.up("window");
   const onVisibility = () => document.hidden && release();
   const onOnline = () => voice.networkBack();
   window.addEventListener("online", onOnline);
@@ -1348,10 +1420,30 @@ export function VoiceContext(props: { children: JSX.Element }) {
   });
   createEffect(() => {
     if (!inCall() || state.voice.inputMode !== "ptt") {
-      release();
+      talkGate.reset();
       voice.clearPushToTalkLatch();
     }
+    if (!inCall()) voice.setPushToMute(false);
   });
+
+  // Desktop app: the person's binds are heard while a game or another app
+  // is in front (rtc/gameKeysWiring.ts, loaded only inside the desktop app)
+  const gameKeysBridge = (
+    window as unknown as { native?: { globalKeys?: unknown } }
+  ).native?.globalKeys;
+  if (gameKeysBridge) {
+    const owner = getOwner();
+    void import("./gameKeysWiring").then((wiring) =>
+      runWithOwner(owner, () =>
+        wiring.wireGameKeys({ voice, state, talkGate, inCall }),
+      ),
+    );
+  }
+  /** Whether the desktop app hears the push-to-talk key itself */
+  const heardInGames = () => {
+    const status = voice.gameKeys()?.state;
+    return state.voice.gameKeys && (status === "ready" || status === "on");
+  };
 
   // streamer mode on while sharing the screen, if the person asked for it
   // (toggleScreenshare); off again when sharing stops, unless they turned
@@ -1384,7 +1476,9 @@ export function VoiceContext(props: { children: JSX.Element }) {
         !inCall() ||
         state.voice.inputMode !== "ptt" ||
         // off until the person turns "Talk from other apps" on
-        !state.voice.globalTalk
+        !state.voice.globalTalk ||
+        // the key itself is heard in other apps: no combination is taken
+        heardInGames()
       ) {
         voice.setGlobalPtt("off");
         return;

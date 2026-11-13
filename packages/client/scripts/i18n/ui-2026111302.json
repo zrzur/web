@@ -1,0 +1,162 @@
+{
+  "{other} already uses that. Press another key, or Esc to cancel.": [
+    "هذا المفتاح مستخدم في «{other}». اضغط مفتاحًا آخر، أو Esc للإلغاء.",
+    "„{other}“ nutzt das bereits. Drücke eine andere Taste oder Esc zum Abbrechen."
+  ],
+  "A game started as administrator hides its keys from other apps; start Zrzur as administrator too to use them there.": [
+    "اللعبة التي تعمل بصلاحيات المسؤول تحجب مفاتيحها عن التطبيقات الأخرى؛ شغّل زرزور بصلاحيات المسؤول أيضًا لتعمل مفاتيحك فيها.",
+    "Ein als Administrator gestartetes Spiel verbirgt seine Tasten vor anderen Apps; starte Zrzur ebenfalls als Administrator, um sie dort zu nutzen."
+  ],
+  "A key that types would switch this while you write. Hold Ctrl, Alt or Shift with it, or press another key.": [
+    "مفتاح يكتب حرفًا سيبدّل هذا الخيار أثناء كتابتك. اضغط معه Ctrl أو Alt أو Shift، أو اختر مفتاحًا آخر.",
+    "Eine Taste, die Text schreibt, würde beim Tippen umschalten. Halte Strg, Alt oder Umschalt dazu oder drücke eine andere Taste."
+  ],
+  "Allow…": [
+    "السماح…",
+    "Erlauben…"
+  ],
+  "Deafen or undeafen, in any app": [
+    "كتم صوت المكالمة أو إعادته، من أي تطبيق",
+    "Ton aus oder an, in jeder App"
+  ],
+  "Desktop app, during a call: works in games and other apps. Change it in voice settings.": [
+    "في تطبيق سطح المكتب أثناء المكالمة: يعمل داخل الألعاب والتطبيقات الأخرى. غيّره من إعدادات الصوت.",
+    "Desktop-App, während eines Anrufs: funktioniert in Spielen und anderen Apps. Ändern in den Spracheinstellungen."
+  ],
+  "Get the desktop app": [
+    "احصل على تطبيق سطح المكتب",
+    "Desktop-App holen"
+  ],
+  "Heard in another window": [
+    "سُمع في نافذة أخرى",
+    "In einem anderen Fenster erkannt"
+  ],
+  "Heard in the Zrzur window only": [
+    "سُمع في نافذة زرزور فقط",
+    "Nur im Zrzur-Fenster erkannt"
+  ],
+  "Hold the key to talk. In the desktop app it works in games and other apps too.": [
+    "اضغط المفتاح مطوّلًا لتتحدث. في تطبيق سطح المكتب يعمل داخل الألعاب والتطبيقات الأخرى أيضًا.",
+    "Halte die Taste zum Sprechen. In der Desktop-App funktioniert das auch in Spielen und anderen Apps."
+  ],
+  "In the browser, your keys work only while the Zrzur tab is active. To talk while you play, use the Zrzur desktop app.": [
+    "في المتصفح تعمل مفاتيحك فقط ما دام تبويب زرزور نشطًا. لتتحدث أثناء اللعب، استخدم تطبيق زرزور لسطح المكتب.",
+    "Im Browser funktionieren deine Tasten nur, solange der Zrzur-Tab aktiv ist. Um beim Spielen zu sprechen, nutze die Zrzur-Desktop-App."
+  ],
+  "Keys that work in games": [
+    "مفاتيح تعمل داخل الألعاب",
+    "Tasten, die in Spielen funktionieren"
+  ],
+  "Keys work in games": [
+    "المفاتيح تعمل داخل الألعاب",
+    "Tasten funktionieren in Spielen"
+  ],
+  "Listening now: your keys work in every app.": [
+    "يستمع الآن: مفاتيحك تعمل في كل التطبيقات.",
+    "Hört jetzt zu: Deine Tasten funktionieren in jeder App."
+  ],
+  "macOS asks for your permission first: allow Zrzur under Privacy & Security, Accessibility.": [
+    "يطلب macOS إذنك أولًا: اسمح لزرزور من «الخصوصية والأمن» ثم «تسهيلات الاستخدام».",
+    "macOS fragt zuerst nach deiner Erlaubnis: Erlaube Zrzur unter „Datenschutz & Sicherheit“, „Bedienungshilfen“."
+  ],
+  "Mute or unmute, in any app": [
+    "كتم الميكروفون أو إلغاء كتمه، من أي تطبيق",
+    "Stumm oder laut schalten, in jeder App"
+  ],
+  "No key": [
+    "لا يوجد مفتاح",
+    "Keine Taste"
+  ],
+  "Not heard yet": [
+    "لم يُسمع بعد",
+    "Noch nicht erkannt"
+  ],
+  "Off. Your keys work only while the Zrzur window is active.": [
+    "متوقف. مفاتيحك تعمل فقط ما دامت نافذة زرزور نشطة.",
+    "Aus. Deine Tasten funktionieren nur, solange das Zrzur-Fenster aktiv ist."
+  ],
+  "On Wayland, keys are heard only in games that run through XWayland.": [
+    "على Wayland تُسمع المفاتيح فقط في الألعاب التي تعمل عبر XWayland.",
+    "Unter Wayland werden Tasten nur in Spielen erkannt, die über XWayland laufen."
+  ],
+  "One press mutes you, the next unmutes.": [
+    "ضغطة تكتم الميكروفون، والضغطة التالية تلغي الكتم.",
+    "Ein Druck schaltet dich stumm, der nächste wieder laut."
+  ],
+  "One press turns the call's sound off, the next turns it back on.": [
+    "ضغطة توقف صوت المكالمة، والضغطة التالية تعيده.",
+    "Ein Druck schaltet den Ton des Anrufs aus, der nächste wieder ein."
+  ],
+  "Others hear you while you hold it. Without a key here, your push-to-talk key is used.": [
+    "يسمعك الآخرون ما دمت تضغطه. إن لم تختر مفتاحًا هنا يُستخدم مفتاح «اضغط للتحدث».",
+    "Andere hören dich, solange du sie hältst. Ohne Taste hier gilt deine Push-to-Talk-Taste."
+  ],
+  "Press a key, a combination or a mouse side button. Esc cancels.": [
+    "اضغط مفتاحًا أو مجموعة مفاتيح أو زرًا جانبيًا في الفأرة. Esc للإلغاء.",
+    "Drücke eine Taste, eine Kombination oder eine seitliche Maustaste. Esc bricht ab."
+  ],
+  "Push to mute": [
+    "اضغط للكتم",
+    "Push-to-Mute"
+  ],
+  "Push to mute (hold)": [
+    "اضغط للكتم (ضغط مطوّل)",
+    "Push-to-Mute (halten)"
+  ],
+  "Push to talk (hold)": [
+    "اضغط للتحدث (ضغط مطوّل)",
+    "Push-to-Talk (halten)"
+  ],
+  "Push to talk keeps the microphone open this long after you let go, so the end of a word is not cut off.": [
+    "يُبقي «اضغط للتحدث» الميكروفون مفتوحًا هذه المدة بعد رفع إصبعك، كي لا تُقطع نهاية الكلمة.",
+    "Push-to-Talk hält das Mikrofon nach dem Loslassen so lange offen, damit das Wortende nicht abgeschnitten wird."
+  ],
+  "Ready. Zrzur listens only while you are in a call.": [
+    "جاهز. زرزور يستمع للمفاتيح فقط أثناء وجودك في مكالمة.",
+    "Bereit. Zrzur hört nur zu, während du in einem Anruf bist."
+  ],
+  "Release delay": [
+    "مهلة الإفلات",
+    "Loslass-Verzögerung"
+  ],
+  "Shows whether Zrzur hears a key while another window is in front. Works outside a call.": [
+    "يبيّن هل يسمع زرزور المفتاح ونافذة أخرى في المقدمة. يعمل خارج المكالمة أيضًا.",
+    "Zeigt, ob Zrzur eine Taste erkennt, während ein anderes Fenster vorne ist. Funktioniert auch ohne Anruf."
+  ],
+  "Start test": [
+    "ابدأ الاختبار",
+    "Test starten"
+  ],
+  "Stop test": [
+    "أوقف الاختبار",
+    "Test beenden"
+  ],
+  "Switch to your game or any other window, hold each key, then come back.": [
+    "انتقل إلى لعبتك أو أي نافذة أخرى، واضغط كل مفتاح مطوّلًا، ثم عد إلى هنا.",
+    "Wechsle zu deinem Spiel oder einem anderen Fenster, halte jede Taste und komm dann zurück."
+  ],
+  "Test your keys": [
+    "اختبر مفاتيحك",
+    "Tasten testen"
+  ],
+  "Your microphone is off while you hold it.": [
+    "يتوقف ميكروفونك ما دمت تضغطه.",
+    "Dein Mikrofon ist aus, solange du sie hältst."
+  ],
+  "Zrzur could not start listening for keys on this computer. Your keys work while the Zrzur window is active.": [
+    "تعذّر على زرزور بدء الاستماع للمفاتيح على هذا الحاسوب. مفاتيحك تعمل ما دامت نافذة زرزور نشطة.",
+    "Zrzur konnte auf diesem Computer nicht auf Tasten hören. Deine Tasten funktionieren, solange das Zrzur-Fenster aktiv ist."
+  ],
+  "Zrzur hears these keys while a game or another app is in front. The game still gets every key.": [
+    "يسمع زرزور هذه المفاتيح ولعبة أو تطبيق آخر في المقدمة. وتصل كل المفاتيح إلى اللعبة كما هي.",
+    "Zrzur erkennt diese Tasten, während ein Spiel oder eine andere App vorne ist. Das Spiel erhält weiterhin jede Taste."
+  ],
+  "Zrzur reacts only to the keys you choose here. It records nothing and sends nothing.": [
+    "يستجيب زرزور فقط للمفاتيح التي تختارها هنا. لا يسجّل شيئًا ولا يرسل شيئًا.",
+    "Zrzur reagiert nur auf die Tasten, die du hier wählst. Es zeichnet nichts auf und sendet nichts."
+  ],
+  "Hold one key to talk instead of an open microphone. In the desktop app it works in games and other apps too.": [
+    "اضغط مفتاحًا واحدًا مطوّلًا لتتحدث بدل ميكروفون مفتوح دائمًا. في تطبيق سطح المكتب يعمل داخل الألعاب والتطبيقات الأخرى أيضًا.",
+    "Halte eine Taste zum Sprechen statt eines offenen Mikrofons. In der Desktop-App funktioniert das auch in Spielen und anderen Apps."
+  ]
+}

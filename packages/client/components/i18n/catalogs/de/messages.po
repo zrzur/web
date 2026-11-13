@@ -25489,3 +25489,162 @@ msgstr "Ich akzeptiere die <0>Nutzungsbedingungen</0> und die <1>Community-Richt
 #: components/auth/src/flows/Form.tsx
 msgid "Tick the box to accept before you continue."
 msgstr "Setze das Häkchen, um zuzustimmen, bevor du fortfährst."
+#: components/app/interface/settings/user/voice/GameKeysOptions.tsx
+msgid "{other} already uses that. Press another key, or Esc to cancel."
+msgstr "„{other}“ nutzt das bereits. Drücke eine andere Taste oder Esc zum Abbrechen."
+
+#: components/app/interface/settings/user/voice/GameKeysOptions.tsx
+msgid "A game started as administrator hides its keys from other apps; start Zrzur as administrator too to use them there."
+msgstr "Ein als Administrator gestartetes Spiel verbirgt seine Tasten vor anderen Apps; starte Zrzur ebenfalls als Administrator, um sie dort zu nutzen."
+
+#: components/app/interface/settings/user/voice/GameKeysOptions.tsx
+msgid "A key that types would switch this while you write. Hold Ctrl, Alt or Shift with it, or press another key."
+msgstr "Eine Taste, die Text schreibt, würde beim Tippen umschalten. Halte Strg, Alt oder Umschalt dazu oder drücke eine andere Taste."
+
+#: components/app/interface/settings/user/voice/GameKeysOptions.tsx
+msgid "Allow…"
+msgstr "Erlauben…"
+
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "Deafen or undeafen, in any app"
+msgstr "Ton aus oder an, in jeder App"
+
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "Desktop app, during a call: works in games and other apps. Change it in voice settings."
+msgstr "Desktop-App, während eines Anrufs: funktioniert in Spielen und anderen Apps. Ändern in den Spracheinstellungen."
+
+#: components/app/interface/settings/user/voice/GameKeysOptions.tsx
+msgid "Get the desktop app"
+msgstr "Desktop-App holen"
+
+#: components/app/interface/settings/user/voice/GameKeysOptions.tsx
+msgid "Heard in another window"
+msgstr "In einem anderen Fenster erkannt"
+
+#: components/app/interface/settings/user/voice/GameKeysOptions.tsx
+msgid "Heard in the Zrzur window only"
+msgstr "Nur im Zrzur-Fenster erkannt"
+
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "Hold one key to talk instead of an open microphone. In the desktop app it works in games and other apps too."
+msgstr "Halte eine Taste zum Sprechen statt eines offenen Mikrofons. In der Desktop-App funktioniert das auch in Spielen und anderen Apps."
+
+#: components/app/interface/settings/user/voice/PushToTalkOptions.tsx
+msgid "Hold the key to talk. In the desktop app it works in games and other apps too."
+msgstr "Halte die Taste zum Sprechen. In der Desktop-App funktioniert das auch in Spielen und anderen Apps."
+
+#: components/app/interface/settings/user/voice/GameKeysOptions.tsx
+msgid "In the browser, your keys work only while the Zrzur tab is active. To talk while you play, use the Zrzur desktop app."
+msgstr "Im Browser funktionieren deine Tasten nur, solange der Zrzur-Tab aktiv ist. Um beim Spielen zu sprechen, nutze die Zrzur-Desktop-App."
+
+#: components/app/interface/settings/user/voice/GameKeysOptions.tsx
+msgid "Keys that work in games"
+msgstr "Tasten, die in Spielen funktionieren"
+
+#: components/app/interface/settings/user/voice/GameKeysOptions.tsx
+msgid "Keys work in games"
+msgstr "Tasten funktionieren in Spielen"
+
+#: components/app/interface/settings/user/voice/GameKeysOptions.tsx
+msgid "Listening now: your keys work in every app."
+msgstr "Hört jetzt zu: Deine Tasten funktionieren in jeder App."
+
+#: components/app/interface/settings/user/voice/GameKeysOptions.tsx
+msgid "macOS asks for your permission first: allow Zrzur under Privacy & Security, Accessibility."
+msgstr "macOS fragt zuerst nach deiner Erlaubnis: Erlaube Zrzur unter „Datenschutz & Sicherheit“, „Bedienungshilfen“."
+
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "Mute or unmute, in any app"
+msgstr "Stumm oder laut schalten, in jeder App"
+
+#: components/app/interface/settings/user/voice/GameKeysOptions.tsx
+msgid "No key"
+msgstr "Keine Taste"
+
+#: components/app/interface/settings/user/voice/GameKeysOptions.tsx
+msgid "Not heard yet"
+msgstr "Noch nicht erkannt"
+
+#: components/app/interface/settings/user/voice/GameKeysOptions.tsx
+msgid "Off. Your keys work only while the Zrzur window is active."
+msgstr "Aus. Deine Tasten funktionieren nur, solange das Zrzur-Fenster aktiv ist."
+
+#: components/app/interface/settings/user/voice/GameKeysOptions.tsx
+msgid "On Wayland, keys are heard only in games that run through XWayland."
+msgstr "Unter Wayland werden Tasten nur in Spielen erkannt, die über XWayland laufen."
+
+#: components/app/interface/settings/user/voice/GameKeysOptions.tsx
+msgid "One press mutes you, the next unmutes."
+msgstr "Ein Druck schaltet dich stumm, der nächste wieder laut."
+
+#: components/app/interface/settings/user/voice/GameKeysOptions.tsx
+msgid "One press turns the call's sound off, the next turns it back on."
+msgstr "Ein Druck schaltet den Ton des Anrufs aus, der nächste wieder ein."
+
+#: components/app/interface/settings/user/voice/GameKeysOptions.tsx
+msgid "Others hear you while you hold it. Without a key here, your push-to-talk key is used."
+msgstr "Andere hören dich, solange du sie hältst. Ohne Taste hier gilt deine Push-to-Talk-Taste."
+
+#: components/app/interface/settings/user/voice/GameKeysOptions.tsx
+msgid "Press a key, a combination or a mouse side button. Esc cancels."
+msgstr "Drücke eine Taste, eine Kombination oder eine seitliche Maustaste. Esc bricht ab."
+
+#: components/app/interface/settings/user/voice/GameKeysOptions.tsx
+msgid "Push to mute"
+msgstr "Push-to-Mute"
+
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "Push to mute (hold)"
+msgstr "Push-to-Mute (halten)"
+
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "Push to talk (hold)"
+msgstr "Push-to-Talk (halten)"
+
+#: components/app/interface/settings/user/voice/GameKeysOptions.tsx
+msgid "Push to talk keeps the microphone open this long after you let go, so the end of a word is not cut off."
+msgstr "Push-to-Talk hält das Mikrofon nach dem Loslassen so lange offen, damit das Wortende nicht abgeschnitten wird."
+
+#: components/app/interface/settings/user/voice/GameKeysOptions.tsx
+msgid "Ready. Zrzur listens only while you are in a call."
+msgstr "Bereit. Zrzur hört nur zu, während du in einem Anruf bist."
+
+#: components/app/interface/settings/user/voice/GameKeysOptions.tsx
+msgid "Release delay"
+msgstr "Loslass-Verzögerung"
+
+#: components/app/interface/settings/user/voice/GameKeysOptions.tsx
+msgid "Shows whether Zrzur hears a key while another window is in front. Works outside a call."
+msgstr "Zeigt, ob Zrzur eine Taste erkennt, während ein anderes Fenster vorne ist. Funktioniert auch ohne Anruf."
+
+#: components/app/interface/settings/user/voice/GameKeysOptions.tsx
+msgid "Start test"
+msgstr "Test starten"
+
+#: components/app/interface/settings/user/voice/GameKeysOptions.tsx
+msgid "Stop test"
+msgstr "Test beenden"
+
+#: components/app/interface/settings/user/voice/GameKeysOptions.tsx
+msgid "Switch to your game or any other window, hold each key, then come back."
+msgstr "Wechsle zu deinem Spiel oder einem anderen Fenster, halte jede Taste und komm dann zurück."
+
+#: components/app/interface/settings/user/voice/GameKeysOptions.tsx
+msgid "Test your keys"
+msgstr "Tasten testen"
+
+#: components/app/interface/settings/user/voice/GameKeysOptions.tsx
+msgid "Your microphone is off while you hold it."
+msgstr "Dein Mikrofon ist aus, solange du sie hältst."
+
+#: components/app/interface/settings/user/voice/GameKeysOptions.tsx
+msgid "Zrzur could not start listening for keys on this computer. Your keys work while the Zrzur window is active."
+msgstr "Zrzur konnte auf diesem Computer nicht auf Tasten hören. Deine Tasten funktionieren, solange das Zrzur-Fenster aktiv ist."
+
+#: components/app/interface/settings/user/voice/GameKeysOptions.tsx
+msgid "Zrzur hears these keys while a game or another app is in front. The game still gets every key."
+msgstr "Zrzur erkennt diese Tasten, während ein Spiel oder eine andere App vorne ist. Das Spiel erhält weiterhin jede Taste."
+
+#: components/app/interface/settings/user/voice/GameKeysOptions.tsx
+msgid "Zrzur reacts only to the keys you choose here. It records nothing and sends nothing."
+msgstr "Zrzur reagiert nur auf die Tasten, die du hier wählst. Es zeichnet nichts auf und sendet nichts."

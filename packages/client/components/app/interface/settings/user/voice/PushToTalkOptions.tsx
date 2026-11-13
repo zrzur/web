@@ -30,6 +30,11 @@ export function PushToTalkOptions() {
   // the desktop app adds a toggle that works from other apps
   const desktop = !!desktopPushToTalk();
   const combo = () => globalPttCombo(voice.pttKey, isMac());
+  // the desktop app hears the key itself: no toggle combination is needed
+  const heardInGames = () => {
+    const state = call?.gameKeys?.()?.state;
+    return voice.gameKeys && (state === "ready" || state === "on");
+  };
   const [recording, setRecording] = createSignal(false);
   const [refused, setRefused] = createSignal(false);
 
@@ -76,10 +81,20 @@ export function PushToTalkOptions() {
     <SettingsSection
       title={<Trans>Push to talk</Trans>}
       description={
-        <Trans>
-          Push to talk works while Zrzur is the active window and you are not
-          typing.
-        </Trans>
+        <Show
+          when={heardInGames()}
+          fallback={
+            <Trans>
+              Push to talk works while Zrzur is the active window and you are
+              not typing.
+            </Trans>
+          }
+        >
+          <Trans>
+            Hold the key to talk. In the desktop app it works in games and other
+            apps too.
+          </Trans>
+        </Show>
       }
     >
       <SettingsRow
@@ -148,7 +163,7 @@ export function PushToTalkOptions() {
       </Show>
       {/* desktop app only: a toggle that works while Zrzur is in the
           background (Electron sees no key release outside the window) */}
-      <Show when={desktop && voice.inputMode === "ptt"}>
+      <Show when={desktop && voice.inputMode === "ptt" && !heardInGames()}>
         <SettingsRow
           icon={<Icon name="desktop" size={20} />}
           title={<Trans>Talk from other apps</Trans>}
