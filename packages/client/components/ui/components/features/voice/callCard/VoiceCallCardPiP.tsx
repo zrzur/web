@@ -57,7 +57,7 @@ export function VoiceCallCardPiP() {
   };
 
   return (
-    <MiniCard>
+    <MiniCard data-voice-pip>
       <Back
         type="button"
         aria-label={t`Return to voice channel`}

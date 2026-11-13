@@ -3262,8 +3262,8 @@
     },
     {
       "path": "packages/client/components/i18n/catalogs/de/messages.po",
-      "sha256": "ca2b678c96a2fe780f3f02f78656058fee2e3bb403879c9a7dac407a1c4e63bf",
-      "bytes": 932391,
+      "sha256": "c3086f00739b76a04de6cc9fb6bba65c8e7485351e7485b03e373a86647a340b",
+      "bytes": 932397,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -6628,8 +6628,8 @@
     },
     {
       "path": "packages/client/components/ui/components/features/voice/callCard/VoiceCallCard.tsx",
-      "sha256": "3217232412033164f032cca3e5a0cfa688b2090b71ab8a6781805620cc891d5c",
-      "bytes": 12236,
+      "sha256": "d83dde9eba1b21d0db6e19680c9336ac6a40b6edcb913c04c39b2fc952cfa146",
+      "bytes": 12663,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -6646,8 +6646,8 @@
     },
     {
       "path": "packages/client/components/ui/components/features/voice/callCard/VoiceCallCardPiP.tsx",
-      "sha256": "9e30285b997b235b1e813684fbd986dc60feca82ef843b66dde5245481040fee",
-      "bytes": 4581,
+      "sha256": "4e52fdfbc75501180e7f9f1e1ef37a0c140de06e57953c48c17d91eeefb1ea5d",
+      "bytes": 4596,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -6666,6 +6666,18 @@
       "path": "packages/client/components/ui/components/features/voice/callCard/VoiceCallCardStatus.tsx",
       "sha256": "318ce5c25e859dd1ce146603e1720a7116d4665249be48a81188e28a8b3c37f0",
       "bytes": 4821,
+      "category": "product-source-or-build-manifest"
+    },
+    {
+      "path": "packages/client/components/ui/components/features/voice/callCard/voiceStrip.dom.test.ts",
+      "sha256": "b082080e4f772d24aa039f32a9094d69e636052f045e8f42ff310524fd9e9a59",
+      "bytes": 1602,
+      "category": "synthetic-test-source-or-fixture"
+    },
+    {
+      "path": "packages/client/components/ui/components/features/voice/callCard/voiceStrip.ts",
+      "sha256": "6c23082d5ca035185fb3ee02d4318af1b7a2944f8ade552edbc9e4e212e2d3d0",
+      "bytes": 1239,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -41176,8 +41188,8 @@
     },
     {
       "path": "packages/client/src/interface/navigation/channels/AccountBar.tsx",
-      "sha256": "289002b2ed8b24f8eb614c56299b81b885844f9a386daae9615287567c468315",
-      "bytes": 23592,
+      "sha256": "d492b636051e279da47f56a6eb262ab81069dbc4bdd7a690962e8e4e2275dfad",
+      "bytes": 23848,
       "category": "product-source-or-build-manifest"
     },
     {

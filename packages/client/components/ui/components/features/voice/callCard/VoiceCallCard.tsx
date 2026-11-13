@@ -18,14 +18,13 @@ import { createResizeObserver } from "@solid-primitives/resize-observer";
 import { Channel } from "@zrzur/sdk/solid";
 import { styled } from "styled-system/jsx";
 
-import { useDevice } from "@revolt/common";
 import { useVoice } from "@revolt/rtc";
 import { VoiceLayout } from "@revolt/rtc/state";
 import { useState } from "@revolt/state";
-import { LAYOUT_SECTIONS } from "@revolt/state/stores/Layout";
 import { SlideState } from "@revolt/ui/components/navigation/SlideDrawer";
 
 import { VoiceCallCardPreview } from "./VoiceCallCardPreview";
+import { voiceStripOnScreen } from "./voiceStrip";
 
 type Mode = "floating" | "moving";
 type FloatType = "tl" | "tr" | "bl" | "br";
@@ -79,7 +78,6 @@ const callCardContext = createContext<(info?: Info) => void>();
 export function VoiceCallCardContext(props: { children: JSX.Element }) {
   const voice = useVoice();
   const state = useState();
-  const device = useDevice();
   const inCall = () => !!voice.channel();
 
   const [mode, setMode] = createSignal<Mode>();
@@ -176,11 +174,16 @@ export function VoiceCallCardContext(props: { children: JSX.Element }) {
 
   const channel = () => info()?.channel;
 
-  // audio-only calls are handled by the "voice connected" strip in the
-  // sidebar; the floating card is for video, or when that strip is hidden
+  // audio-only calls are handled by the "voice connected" strip; the floating
+  // card is for video, or when that strip is not on screen. On a phone the
+  // strip shows with the channel list, so the card no longer covers the list;
+  // in a channel the strip is off screen and the card comes back.
+  // On a phone a channel page slides over the list, and the strip stays on
+  // screen underneath it: the app drawer says which of the two is shown.
+  const stripShown = () =>
+    voiceStripOnScreen() && state.appDrawer()?.state !== SlideState.SHOWN;
   const showPiP = () =>
-    device.layout() !== "desktop" ||
-    !state.layout.getSectionState(LAYOUT_SECTIONS.PRIMARY_SIDEBAR, true) ||
+    !stripShown() ||
     voice
       .vidTracks()
       .some((track) => track.publication && !track.publication.isMuted);
@@ -241,8 +244,12 @@ export function VoiceCallCardContext(props: { children: JSX.Element }) {
           fullscreen={voice.layout() === "fullscreen"}
         >
           <Switch>
-            <Match when={mode() && inCall() && showPiP()}>
-              <VoiceCallCardPiP />
+            {/* floating: the small card, or nothing while the strip shows.
+                Never the full call card: it covered the channel list */}
+            <Match when={mode() && inCall()}>
+              <Show when={showPiP()}>
+                <VoiceCallCardPiP />
+              </Show>
             </Match>
             <Match when={channel()}>
               <VoiceCallCard

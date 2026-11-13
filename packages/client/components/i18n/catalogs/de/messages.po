@@ -20653,7 +20653,7 @@ msgstr "Der Eintrag wurde von Moderatoren entfernt, daher sind weitere Einreichu
 
 #: src/interface/navigation/MentionsPanel.tsx
 msgid "The last 30 days. Select one to jump to it."
-msgstr "Die letzten 30 Tage. Wähle eine aus, um hinzuspringen."
+msgstr "Die letzten 30 Tage. Wähle eine aus, um dorthin zu springen."
 
 #: src/interface/developers/docs/EndpointReference.tsx
 msgid "The last live check failed."

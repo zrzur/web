@@ -9,6 +9,7 @@ import {
   lazy,
   on,
   onCleanup,
+  onMount,
 } from "solid-js";
 import { Portal } from "solid-js/web";
 import { openMentions } from "../MentionsPanel";
@@ -29,6 +30,7 @@ import { useModals } from "@revolt/modal";
 import { useVoice } from "@revolt/rtc";
 import { Avatar, OverflowingText, UserStatus } from "@revolt/ui";
 import { SignalBars } from "@revolt/ui/components/features/voice/SignalBars";
+import { watchVoiceStrip } from "@revolt/ui/components/features/voice/callCard/voiceStrip";
 import {
   setSoundboardOpen,
   soundboardOpen,
@@ -301,6 +303,11 @@ function VoiceSection() {
 
   // where the sounds open: just above this card, at its reading-start edge
   let panel: HTMLDivElement | undefined;
+
+  // while this strip is on screen, an audio-only call needs no floating card
+  onMount(() => {
+    if (panel) onCleanup(watchVoiceStrip(panel));
+  });
   const [place, setPlace] = createSignal<DOMRect>();
   // the whole voice card (the panel's parent), so the sounds match its width
   const measure = () =>
