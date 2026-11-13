@@ -826,8 +826,8 @@
     },
     {
       "path": "packages/client/components/app/interface/channels/text/MessageEmbeds.tsx",
-      "sha256": "8d1ba4a942bfa4719c6a8ad83631049c064224448fa81c40d247fbe355b8b740",
-      "bytes": 1921,
+      "sha256": "38ae22ecf96c05c966ce0608cc489cf2a3e2e694e91138868d28c0c731ecb909",
+      "bytes": 2192,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -2608,8 +2608,8 @@
     },
     {
       "path": "packages/client/components/app/menus/MessageContextMenu.tsx",
-      "sha256": "562b6cfe8fee4d8e6363188d63c723e5cf0abfd953bedad8029f828db3ce676e",
-      "bytes": 19291,
+      "sha256": "b1224458720943a2f30d11b2428668898a53cb5e05c41888d622ceb1835539a2",
+      "bytes": 19588,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -3166,8 +3166,8 @@
     },
     {
       "path": "packages/client/components/i18n/catalogs/ar/messages.po",
-      "sha256": "40ace4bab91225f562fb3d0b4b45752e52edde3b4905c0ab9ab3d92406cdd145",
-      "bytes": 1010842,
+      "sha256": "8f5bc898326e2cc272a0e577ed373400f4d88d1ce19d2bd90789d6e6a7699b2f",
+      "bytes": 1011625,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -3310,8 +3310,8 @@
     },
     {
       "path": "packages/client/components/i18n/catalogs/de/messages.po",
-      "sha256": "a2cf6a41c9a7343e0845083511495fcc285ecde663cd9b82d2f7b8eee4a03939",
-      "bytes": 932885,
+      "sha256": "0ef43be2ad75e2c89ecb0406aeb7105949520e972e50a25be5321d5865817ca9",
+      "bytes": 933624,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -3346,8 +3346,8 @@
     },
     {
       "path": "packages/client/components/i18n/catalogs/en/messages.po",
-      "sha256": "e7c413f191fd4afa6f694a1b7094fed799893e9599e8b6c4f4a395c7fbc50d05",
-      "bytes": 898295,
+      "sha256": "f8c68d988d83f646d6c057d2832974d50b235fcbe7759b4f59ad03c86a1fbaeb",
+      "bytes": 898992,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -4348,8 +4348,8 @@
     },
     {
       "path": "packages/client/components/modal/modals.tsx",
-      "sha256": "03fd92a60a36497e58534a90294911d952a78abc9c1a0569518cdea257407796",
-      "bytes": 17532,
+      "sha256": "0d18c769811cc18dc7b971bd941da2a1adef1284e88b10bdcdffb9d043a2c0d8",
+      "bytes": 17771,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -4737,6 +4737,12 @@
       "category": "product-source-or-build-manifest"
     },
     {
+      "path": "packages/client/components/modal/modals/RemoveLinkPreviews.tsx",
+      "sha256": "37d1d4b450a706faeac3c0000cc92001db13116d86fa786311fa2077c32929fe",
+      "bytes": 1764,
+      "category": "product-source-or-build-manifest"
+    },
+    {
       "path": "packages/client/components/modal/modals/RemoveMember.tsx",
       "sha256": "d9248e5e5d1868cce0a12455fa901493fbf9c5ff60b0e842cb8afe0d9b3c357e",
       "bytes": 1382,
@@ -4954,8 +4960,8 @@
     },
     {
       "path": "packages/client/components/modal/types.ts",
-      "sha256": "77f85b6d4c608e5f7ef0a23a9d63dbe0639bcf2d9a8296df8a3b3dfe1bb62067",
-      "bytes": 9658,
+      "sha256": "88066d3761ca6e93a15dd0cc4806a146ac5ea636a04709aa77da5e0890c1e119",
+      "bytes": 9730,
       "category": "product-source-or-build-manifest"
     },
     {
