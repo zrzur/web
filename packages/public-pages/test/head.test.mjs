@@ -134,6 +134,8 @@ test("the app's own index.html keeps one title and one description after injecti
     "utf8",
   );
   assert.match(html, /<meta name="description"/);
+  // the app page speaks of Zrzur itself, not of another product (owner, 2026-11-13)
+  assert.doesNotMatch(html, /Discord/i);
   const meta = pageMeta({
     site: "discover",
     origin: ORIGIN,
