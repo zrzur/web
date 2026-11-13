@@ -8932,8 +8932,8 @@
     },
     {
       "path": "packages/client/index.html",
-      "sha256": "0acc80e1137b8d55c312e91b623e90d1409cb667441cba89acab5ef94803c1ac",
-      "bytes": 2354,
+      "sha256": "305e7b682a379ca0fed132d835e0c06dc21aaaae77feb7f93a6fa618424a0fa7",
+      "bytes": 2335,
       "category": "product-source-or-build-manifest"
     },
     {
