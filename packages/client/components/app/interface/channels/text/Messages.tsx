@@ -722,8 +722,12 @@ export function Messages(props: Props) {
       (channel) => {
         caseInitialLoad(props.highlightedMessageId());
 
+        // while this list shows the channel its messages stay in memory
+        cache!.opened(channel);
+
         // move state into cache when navigating away
         onCleanup(() => {
+          cache!.closed(channel);
           if (fetching() !== "initial") {
             cache!.manage(channel, {
               messages: messages(),

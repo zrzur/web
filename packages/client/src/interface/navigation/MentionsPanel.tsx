@@ -16,6 +16,7 @@ import type { Message } from "@zrzur/sdk/solid";
 import { styled } from "styled-system/jsx";
 
 import { useClient } from "@revolt/client";
+import { holdMessages } from "@revolt/client/messagePruner";
 import { Avatar, CircularProgress, Time } from "@revolt/ui";
 import { Icon } from "@revolt/ui/icons/Icon";
 
@@ -71,6 +72,15 @@ export function MentionsPanel(props: { onNavigate?: () => void }) {
   const client = useClient();
   const navigate = useNavigate();
   const [mentions] = createResource(() => client().fetchMentions(50));
+  // these come from many channels: they stay in the message cache while
+  // the box is open
+  onCleanup(
+    // read when the cache is looked through, not tracked
+    // eslint-disable-next-line solid/reactivity
+    holdMessages(() =>
+      mentions.state === "ready" ? mentions().map((message) => message.id) : [],
+    ),
+  );
 
   // server and channel apart: an Arabic name beside a Latin one must not
   // swap their order
