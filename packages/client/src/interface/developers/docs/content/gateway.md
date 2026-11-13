@@ -40,7 +40,8 @@ Anything else you send is limited to 1 MiB per message.
 | What you receive                                                     | Cause                                       | What to do                               |
 | -------------------------------------------------------------------- | ------------------------------------------- | ---------------------------------------- |
 | `{ "type": "Error", "data": { "type": "InvalidSession" } }`, closes  | Wrong or reset token, suspended bot, or no `Authenticate` in 15 seconds | Stop. Do not reconnect in a loop          |
-| `{ "type": "Error", "data": { "type": "MissingIntent", "intent": "SERVER_MEMBERS" } }`, closes with code `4014` | A privileged intent that is off | Switch it on in the Developer Portal and connect again, or [connect without it](/developers/docs/gateway#intent-off) |
+| `{ "type": "Error", "data": { "type": "MissingIntent", "intent": "SERVER_MEMBERS" } }`, closes with code `4014` | A privileged intent that is off. The close reason names it, for example `Disallowed intents: MESSAGE_CONTENT (switched on: none)` | Switch it on in the Developer Portal and connect again, or [connect without it](/developers/docs/gateway#intent-off) |
+| `{ "type": "Error", "data": { "type": "InternalError" } }`, closes with code `1013` | The server could not read the bot's settings just then | Connect again, with the wait from [Reconnect](/developers/docs/gateway#reconnect) |
 
 ## Stay connected {#stay-connected}
 
@@ -59,13 +60,44 @@ The Zrzur gateway itself never closes a quiet bot connection, but proxies and ho
 A connection can end at any time: a deployment on our side, a network problem, your laptop sleeping. Plan for it.
 
 1. When the socket closes, wait 1 second, and double the wait after each failure, up to 30 seconds. Add a little randomness so many bots do not return at once.
-2. Connect and send `Authenticate` again. You get a new `Ready`.
-3. Reset the wait after `Ready`.
-4. Do not retry on `InvalidSession` or code `4014`: the same request fails again. Stop and tell a person.
+2. Connect and send `Resume` if the session was resumable (see [Resume after a drop](/developers/docs/gateway#resume)), `Authenticate` otherwise. After `Authenticate` you get a new `Ready`.
+3. Reset the wait after `Ready` or `Resumed`.
+4. Do not retry after an `Error` event of type `InvalidSession`, or after code `4014`: the same request fails again. Stop and tell a person. After code `1013` do retry: the server could not read the bot's settings just then.
 
-## Resume is not supported {#resume}
+## Resume after a drop {#resume}
 
-There is no resume and there are no sequence numbers yet; both are planned for the next release (see the [changelog](/developers/docs/changelog)). Events sent while you were away are gone. After each `Ready`, fetch over REST what your bot cannot miss, such as recent messages of a channel (`GET /channels/{target}/messages` with `after` and `sort=Oldest`, see [Messages](/developers/docs/messages#read-messages)). A command used while your bot was away fails for the person who used it, and they can try again.
+A session can pick up where it stopped, so a short drop loses nothing. Ask for it when you authenticate:
+
+```json
+{
+  "type": "Authenticate",
+  "token": "YOUR_BOT_TOKEN",
+  "intents": 33,
+  "resumable": true
+}
+```
+
+`Ready` then carries `session_id`. Every packet after `Ready` carries `seq`, counted per session from 1: keep the last one you handled. A `Bulk` packet has one `seq` and its items have none. `Authenticated`, `Ready`, `Pong`, `Error`, `InvalidSession` and `Resumed` have no `seq`.
+
+After a drop the gateway keeps the session for 2 minutes, with at most its last 1000 events and 4 MiB of them. Open a new socket and send this as the first message, instead of `Authenticate`:
+
+```json
+{
+  "type": "Resume",
+  "token": "YOUR_BOT_TOKEN",
+  "session_id": "YOUR_SESSION_ID",
+  "seq": 41
+}
+```
+
+| What you receive                                   | Meaning                                                              | What to do                                                    |
+| -------------------------------------------------- | -------------------------------------------------------------------- | ------------------------------------------------------------- |
+| The missed events in order, then `Resumed`         | The session goes on. There is no new `Ready`                         | Carry on, and keep counting `seq`                             |
+| `{ "type": "InvalidSession", "resumable": false }` | The session is gone, or what you missed no longer fits in what is kept | Send `Authenticate` on the same socket, then catch up over REST |
+
+A replay can have gaps in `seq`: typing events are not kept, and events from places the bot can no longer see are left out. The gateway keeps at most 3 dropped sessions per bot. A second refused `Resume` on the same socket closes it.
+
+Without `"resumable": true` nothing is kept, and events sent while you were away are gone. After a new `Ready`, fetch over REST what your bot cannot miss, such as recent messages of a channel (`GET /channels/{target}/messages` with `after` and `sort=Oldest`, see [Messages](/developers/docs/messages#read-messages)). A command used while your bot was away fails for the person who used it, and they can try again.
 
 ## Sharding is not supported {#sharding}
 
@@ -102,7 +134,7 @@ Intents say what a connection receives. The gateway applies them, so a bot never
 | `SERVER_MESSAGES` | `2`    | Messages and typing in server channels                                   |
 | `DIRECT_MESSAGES` | `4`    | Messages and typing in direct messages and groups                        |
 | `REACTIONS`       | `8`    | Reactions being added and removed                                        |
-| `VOICE_STATES`    | `16`   | People joining and leaving voice channels, calls, voice states in `Ready` |
+| `VOICE_STATES`    | `16`   | People joining and leaving voice channels, calls, stage changes, soundboard plays, voice states in `Ready` |
 | `INTERACTIONS`    | `32`   | `InteractionCreate`                                                      |
 | `MESSAGE_CONTENT` | `1024` | Privileged. Text, embeds, files and components of messages               |
 | `SERVER_MEMBERS`  | `2048` | Privileged. Members joining, leaving and changing; the member list       |

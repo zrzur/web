@@ -120,6 +120,6 @@ Text search is for people only; bots get `IsBot`, because it would let them read
 
 ## Polls {#polls}
 
-A message can carry a poll (`poll` in the message you send: a question, 2 to 10 answers, a duration of 1 to 336 hours, single or multiple choice). Posting one needs Send Messages and Send Embeds. A message's `poll` shows how many chose each answer; `poll.me` lists the answers the reader chose.
+A message can carry a poll (`poll` in the message you send: a question, 2 to 10 answers, a duration of 1, 4, 8, 24, 72, 168 or 336 hours, single or multiple choice). Posting one needs Send Messages and Send Embeds. Polls are switched on per server installation (`features.polls` in `GET /`); where they are off, sending one answers `FeatureDisabled`. A message's `poll` shows how many chose each answer; `poll.me` lists the answers the reader chose.
 
 Who voted is never sent to everyone: poll events (`MessagePollVoteAdd`, `MessagePollVoteRemove`, `MessagePollEnd`) carry counts only. `/channels/{target}/messages/{msg}/polls/answers/{answer}/voters` (GET) lists the people who chose an answer, a page at a time, to anyone who can read the message (View Channel and Read Message History), so a voter is visible to everyone in the channel who asks. Bots cannot vote (`IsBot`); they can read voters and end their own polls (`/channels/{target}/messages/{msg}/polls/end`, POST). A vote on a poll that has ended answers `PollEnded`.

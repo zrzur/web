@@ -44,10 +44,25 @@
   "UserMoveVoiceChannel": "Eine Moderatorin hat den Bot verschoben: Verbinde dich mit `token` zum neuen Kanal auf `node`.",
   "VoiceCallUpdate": "Ein Anruf in einem Kanal hat begonnen oder geendet.",
   "InteractionCreate": "Jemand hat einen Befehl, Button, ein Menü, Formular oder eine Autovervollständigung dieses Bots benutzt. Siehe Befehle und Interaktionen.",
-  "ApplicationCommandsUpdate": "Eine Anwendung hat ihre Befehle auf diesem Server geändert. Apps laden damit die Liste neu; ein Bot kann es ignorieren."
+  "ApplicationCommandsUpdate": "Eine Anwendung hat ihre Befehle auf diesem Server geändert. Apps laden damit die Liste neu; ein Bot kann es ignorieren.",
+  "Resumed": "Deine Sitzung wurde fortgesetzt. Alle verpassten Ereignisse, die du noch sehen darfst, kamen vorher, der Reihe nach.",
+  "InvalidSession": "Die Sitzung lässt sich nicht fortsetzen (`resumable` ist `false`). Sende `Authenticate` auf demselben Socket und hole Verpasstes über die API nach.",
+  "MessagePollVoteAdd": "Jemand hat eine Antwort einer Umfrage gewählt. `answers` und `total` enthalten die Zahlen danach; wer abgestimmt hat, wird nie gesendet.",
+  "MessagePollVoteRemove": "Jemand hat seine Wahl einer Antwort zurückgenommen. `answers` und `total` enthalten die Zahlen danach.",
+  "MessagePollEnd": "Eine Umfrage wurde geschlossen, vorzeitig oder nach Ablauf ihrer Zeit. `answers` und `total` sind die Endzahlen.",
+  "SoundboardSoundCreate": "Dem Soundboard eines Servers wurde ein Sound hinzugefügt.",
+  "SoundboardSoundUpdate": "Ein Soundboard-Sound wurde geändert. Das Ereignis enthält den ganzen Sound.",
+  "SoundboardSoundDelete": "Ein Soundboard-Sound wurde entfernt.",
+  "ServerEventCreate": "Ein geplantes Server-Event wurde erstellt. Geht an alle, die den Kanal des Events sehen, oder an den ganzen Server, wenn es woanders stattfindet.",
+  "ServerEventUpdate": "Ein geplantes Server-Event wurde geändert, auch sein Status.",
+  "ServerEventDelete": "Ein geplantes Server-Event ist weg, oder der Bot kann es nicht mehr sehen.",
+  "ServerEventInterest": "Jemand hat ein geplantes Server-Event als interessant markiert oder die Markierung entfernt. `count` ist die Zahl danach.",
+  "StageUpdate": "Der Live-Zustand einer Bühne hat sich geändert: Thema, Sprecher oder gehobene Hände.",
+  "SoundboardPlay": "Jemand hat in einem Sprachkanal einen Soundboard-Sound abgespielt."
  },
  "clientMessages": {
-  "Authenticate": "Deine erste Nachricht. `token` ist das Bot-Token, `intents` die Summe der gewünschten Intents.",
+  "Authenticate": "Deine erste Nachricht. `token` ist das Bot-Token, `intents` die Summe der gewünschten Intents. Mit `resumable: true` lässt sich die Sitzung nach einem Abbruch fortsetzen, und `Ready` enthält `session_id`.",
+  "Resume": "Die erste Nachricht auf einem neuen Socket nach einem Abbruch, statt `Authenticate`. Die Ereignisse nach `seq`, die du noch sehen darfst, kommen der Reihe nach, dann `Resumed`. Ist die Sitzung weg, erhältst du `InvalidSession`.",
   "Ping": "Prüft die Leitung. `data` ist eine Zahl deiner Wahl und kommt in `Pong` zurück.",
   "BeginTyping": "Zeigt den Bot als tippend in `channel`. Sende es alle paar Sekunden neu, damit die Anzeige bleibt.",
   "EndTyping": "Beendet die Tipp-Anzeige in `channel`.",
@@ -93,7 +108,9 @@
   "CreateThreads": "Einen Thread in einem Textkanal starten",
   "SendMessageInThreads": "In Threads und Forenbeiträgen schreiben",
   "CreateForumPosts": "Einen Beitrag in einem Forum starten",
-  "Administrator": "Alle Rechte in allen Kanälen des Servers, egal was deren Einstellungen sagen"
+  "Administrator": "Alle Rechte in allen Kanälen des Servers, egal was deren Einstellungen sagen",
+  "UseSoundboard": "Sounds des Server-Soundboards in einem Sprachanruf abspielen",
+  "ManageSoundboard": "Sounds des Server-Soundboards hinzufügen, ändern und entfernen"
  },
  "errors": {
   "UnknownUser": ["Den Benutzer gibt es nicht, oder der Bot sieht ihn nicht.", "Prüfe die ID. Vielleicht wurde das Konto gelöscht."],
@@ -237,6 +254,13 @@
   "DisallowedMFAMethod": ["Diese Prüfung ist hier nicht erlaubt.", "Nur Menschen."],
   "AgeRequirementNotMet": ["Das Alter des Kontos reicht dafür nicht.", "Nur Menschen."],
   "AgeChangeNotAllowed": ["Das Alter lässt sich nicht ändern.", "Nur Menschen."],
-  "AgeRestricted": ["Der Inhalt ist altersbeschränkt.", "Nur Menschen."]
+  "AgeRestricted": ["Der Inhalt ist altersbeschränkt.", "Nur Menschen."],
+  "TooManySounds": ["Das Soundboard des Servers ist voll.", "Entferne zuerst einen Sound. `max` ist die Grenze."],
+  "SoundAlreadyAdded": ["Dieser Sound aus der Bibliothek ist schon auf dem Soundboard des Servers.", "Nichts zu tun."],
+  "SoundLibraryUnavailable": ["Die Sound-Bibliothek ist noch nicht bereit.", "Versuche es in einer Minute erneut."],
+  "TooManySpeakers": ["Die Bühne hat so viele Sprecher, wie sie haben darf.", "Setze zuerst einen Sprecher zurück ins Publikum. `max` ist die Grenze."],
+  "PollEnded": ["Die Umfrage ist vorbei: keine Stimmen mehr, und sie lässt sich nicht noch einmal beenden.", "Nicht wiederholen."],
+  "TooManyServerEvents": ["Der Server hat so viele geplante Events, wie er haben darf.", "Nur für Menschen."],
+  "ForwardMatureContent": ["Eine Nachricht aus einem Kanal für Erwachsene lässt sich nur in einen anderen solchen Kanal weiterleiten.", "Nur für Menschen: Bots können nicht weiterleiten."]
  }
 }

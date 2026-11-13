@@ -1,7 +1,7 @@
 {
  "AUTH 401": {
   "level": "live",
-  "checked": "2026-11-04",
+  "checked": "2026-11-13",
   "test": "auth: a missing or wrong token gets 401 with a JSON error",
   "response": {
    "type": "InvalidSession"
@@ -9,7 +9,7 @@
  },
  "DELETE /applications/{application_id}/commands/{command_id}": {
   "level": "live",
-  "checked": "2026-11-04",
+  "checked": "2026-11-13",
   "test": "commands: global and server command lifecycle",
   "status": 204,
   "expected": true,
@@ -17,7 +17,7 @@
  },
  "DELETE /applications/{application_id}/servers/{server_id}/commands/{command_id}": {
   "level": "live",
-  "checked": "2026-11-04",
+  "checked": "2026-11-13",
   "test": "commands: global and server command lifecycle",
   "status": 204,
   "expected": true,
@@ -25,7 +25,7 @@
  },
  "DELETE /bots/{bot_id}": {
   "level": "live",
-  "checked": "2026-11-04",
+  "checked": "2026-11-13",
   "test": "bots: public info of a bot",
   "status": 404,
   "expected": true,
@@ -37,7 +37,7 @@
  },
  "DELETE /channels/{group_id}/recipients/{member_id}": {
   "level": "live",
-  "checked": "2026-11-04",
+  "checked": "2026-11-13",
   "test": "groups: bots cannot add or remove group members",
   "status": 400,
   "expected": true,
@@ -49,7 +49,7 @@
  },
  "DELETE /channels/{target}": {
   "level": "live",
-  "checked": "2026-11-04",
+  "checked": "2026-11-13",
   "test": "channels: create, fetch, edit, delete",
   "status": 204,
   "expected": true,
@@ -57,7 +57,7 @@
  },
  "DELETE /channels/{target}/messages/bulk": {
   "level": "live",
-  "checked": "2026-11-04",
+  "checked": "2026-11-13",
   "test": "messages: delete and bulk delete; MessageDelete event",
   "status": 204,
   "expected": true,
@@ -72,7 +72,7 @@
  },
  "DELETE /channels/{target}/messages/{msg}": {
   "level": "live",
-  "checked": "2026-11-04",
+  "checked": "2026-11-13",
   "test": "messages: delete and bulk delete; MessageDelete event",
   "status": 204,
   "expected": true,
@@ -80,15 +80,27 @@
  },
  "DELETE /channels/{target}/messages/{msg}/pin": {
   "level": "live",
-  "checked": "2026-11-04",
+  "checked": "2026-11-13",
   "test": "messages: reactions and pins; MessageReact event",
   "status": 204,
   "expected": true,
   "schemaOk": true
  },
+ "DELETE /channels/{target}/messages/{msg}/polls/answers/{answer}/votes/@me": {
+  "level": "live",
+  "checked": "2026-11-13",
+  "test": "polls: a bot posts and ends a poll, reads voters, cannot vote",
+  "status": 400,
+  "expected": true,
+  "schemaOk": true,
+  "error": {
+   "type": "IsBot",
+   "location": "crates/delta/src/routes/channels/message_polls.rs:52:20"
+  }
+ },
  "DELETE /channels/{target}/messages/{msg}/reactions": {
   "level": "live",
-  "checked": "2026-11-04",
+  "checked": "2026-11-13",
   "test": "messages: reactions and pins; MessageReact event",
   "status": 204,
   "expected": true,
@@ -96,7 +108,7 @@
  },
  "DELETE /channels/{target}/messages/{msg}/reactions/{emoji}": {
   "level": "live",
-  "checked": "2026-11-04",
+  "checked": "2026-11-13",
   "test": "messages: reactions and pins; MessageReact event",
   "status": 204,
   "expected": true,
@@ -104,7 +116,7 @@
  },
  "DELETE /custom/emoji/{emoji_id}": {
   "level": "live",
-  "checked": "2026-11-04",
+  "checked": "2026-11-13",
   "test": "emojis: create from an upload, fetch, rename, delete",
   "status": 204,
   "expected": true,
@@ -112,7 +124,7 @@
  },
  "DELETE /interactions/{interaction_id}/{token}/messages/{message_id}": {
   "level": "live",
-  "checked": "2026-11-04",
+  "checked": "2026-11-13",
   "test": "interactions: full round trip with the interaction token",
   "status": 204,
   "expected": true,
@@ -120,7 +132,7 @@
  },
  "DELETE /interactions/{interaction_id}/{token}/original": {
   "level": "live",
-  "checked": "2026-11-04",
+  "checked": "2026-11-13",
   "test": "interactions: full round trip with the interaction token",
   "status": 204,
   "expected": true,
@@ -128,7 +140,7 @@
  },
  "DELETE /invites/{target}": {
   "level": "live",
-  "checked": "2026-11-04",
+  "checked": "2026-11-13",
   "test": "invites: fetch and delete an invite",
   "status": 204,
   "expected": true,
@@ -136,7 +148,7 @@
  },
  "DELETE /servers/{server_id}/applications/{application_id}": {
   "level": "live",
-  "checked": "2026-11-04",
+  "checked": "2026-11-13",
   "test": "servers: uninstalling an app and a bot leaving a server",
   "status": 204,
   "expected": true,
@@ -144,7 +156,7 @@
  },
  "DELETE /servers/{server_id}/members/{member_id}": {
   "level": "live",
-  "checked": "2026-11-04",
+  "checked": "2026-11-13",
   "test": "moderation: kick, ban, list bans, unban, audit log",
   "status": 204,
   "expected": true,
@@ -152,7 +164,7 @@
  },
  "DELETE /servers/{server}/bans/{target}": {
   "level": "live",
-  "checked": "2026-11-04",
+  "checked": "2026-11-13",
   "test": "moderation: kick, ban, list bans, unban, audit log",
   "status": 204,
   "expected": true,
@@ -160,7 +172,7 @@
  },
  "DELETE /servers/{target}": {
   "level": "live",
-  "checked": "2026-11-04",
+  "checked": "2026-11-13",
   "test": "servers: uninstalling an app and a bot leaving a server",
   "status": 204,
   "expected": true,
@@ -168,7 +180,7 @@
  },
  "DELETE /servers/{target}/roles/{role_id}": {
   "level": "live",
-  "checked": "2026-11-04",
+  "checked": "2026-11-13",
   "test": "roles: create, fetch, edit, permissions, ranks, delete",
   "status": 204,
   "expected": true,
@@ -176,7 +188,7 @@
  },
  "DELETE /users/{target}/block": {
   "level": "live",
-  "checked": "2026-11-04",
+  "checked": "2026-11-13",
   "test": "users: bots cannot use friends or change their username with a password",
   "status": 400,
   "expected": true,
@@ -188,7 +200,7 @@
  },
  "DELETE /users/{target}/friend": {
   "level": "live",
-  "checked": "2026-11-04",
+  "checked": "2026-11-13",
   "test": "users: bots cannot use friends or change their username with a password",
   "status": 400,
   "expected": true,
@@ -200,7 +212,7 @@
  },
  "DELETE /webhooks/{webhook_id}": {
   "level": "live",
-  "checked": "2026-11-04",
+  "checked": "2026-11-13",
   "test": "webhooks: create, list, fetch, edit, execute, delete",
   "status": 204,
   "expected": true,
@@ -208,7 +220,7 @@
  },
  "DELETE /webhooks/{webhook_id}/{token}": {
   "level": "live",
-  "checked": "2026-11-04",
+  "checked": "2026-11-13",
   "test": "webhooks: create, list, fetch, edit, execute, delete",
   "status": 204,
   "expected": true,
@@ -216,7 +228,7 @@
  },
  "DELETE /webhooks/{webhook_id}/{token}/{message_id}": {
   "level": "live",
-  "checked": "2026-11-04",
+  "checked": "2026-11-13",
   "test": "webhooks: create, list, fetch, edit, execute, delete",
   "status": 204,
   "expected": true,
@@ -224,12 +236,12 @@
  },
  "EVENT BulkMessageDelete": {
   "level": "live",
-  "checked": "2026-11-04",
+  "checked": "2026-11-13",
   "test": "messages: delete and bulk delete; MessageDelete event"
  },
  "EVENT InteractionCreate": {
   "level": "live",
-  "checked": "2026-11-04",
+  "checked": "2026-11-13",
   "test": "interactions: full round trip with the interaction token",
   "response": {
    "type": "InteractionCreate",
@@ -242,7 +254,7 @@
     "user": {
      "_id": "01JC0000000000000000000007",
      "username": "bob",
-     "discriminator": "8499",
+     "discriminator": "9599",
      "relationship": "None",
      "online": false
     },
@@ -251,7 +263,7 @@
       "server": "01JC0000000000000000000001",
       "user": "01JC0000000000000000000007"
      },
-     "joined_at": "2026-11-04T11:57:36.518Z",
+     "joined_at": "2026-11-13T15:26:32.544Z",
      "nickname": "Bobby",
      "roles": [
       "01JC0000000000000000000010"
@@ -259,10 +271,10 @@
     },
     "server_id": "01JC0000000000000000000001",
     "channel_id": "01JC0000000000000000000003",
-    "user_permissions": 2276038022144,
-    "app_permissions": 4398045478879,
-    "user_permissions_string": "2276038022144",
-    "app_permissions_string": "4398045478879",
+    "user_permissions": 204586177532928,
+    "app_permissions": 206708184989663,
+    "user_permissions_string": "204586177532928",
+    "app_permissions_string": "206708184989663",
     "command": {
      "id": "01JC0000000000000000000033",
      "name": "hello",
@@ -277,45 +289,45 @@
      ],
      "resolved": {}
     },
-    "respond_by": "2026-11-04T11:57:42.840Z",
-    "expires_at": "2026-11-04T12:12:39.840Z"
+    "respond_by": "2026-11-13T15:27:27.781Z",
+    "expires_at": "2026-11-13T15:42:24.781Z"
    }
   }
  },
  "EVENT Message": {
   "level": "live",
-  "checked": "2026-11-04",
+  "checked": "2026-11-13",
   "test": "messages: send, fetch, list, edit; Message and MessageUpdate events"
  },
  "EVENT MessageDelete": {
   "level": "live",
-  "checked": "2026-11-04",
+  "checked": "2026-11-13",
   "test": "messages: delete and bulk delete; MessageDelete event"
  },
  "EVENT MessageReact": {
   "level": "live",
-  "checked": "2026-11-04",
+  "checked": "2026-11-13",
   "test": "messages: reactions and pins; MessageReact event"
  },
  "EVENT MessageUpdate": {
   "level": "live",
-  "checked": "2026-11-04",
+  "checked": "2026-11-13",
   "test": "messages: send, fetch, list, edit; Message and MessageUpdate events"
  },
  "EVENT ServerMemberLeave": {
   "level": "live",
-  "checked": "2026-11-04",
+  "checked": "2026-11-13",
   "test": "moderation: kick, ban, list bans, unban, audit log"
  },
  "FILES GET /{tag}/{id}/{name}": {
   "level": "live",
-  "checked": "2026-11-04",
+  "checked": "2026-11-13",
   "test": "files: upload an attachment with the bot token and send it",
   "status": 200
  },
  "FILES POST /{tag}": {
   "level": "live",
-  "checked": "2026-11-04",
+  "checked": "2026-11-13",
   "test": "files: upload an attachment with the bot token and send it",
   "status": 200,
   "response": {
@@ -324,7 +336,7 @@
  },
  "FILES errors": {
   "level": "live",
-  "checked": "2026-11-04",
+  "checked": "2026-11-13",
   "test": "files: wrong tag and empty file are refused",
   "response": {
    "badTag": 400,
@@ -334,7 +346,7 @@
  },
  "GATEWAY Error": {
   "level": "live",
-  "checked": "2026-11-04",
+  "checked": "2026-11-13",
   "test": "gateway: a wrong token gets an Error event",
   "response": {
    "type": "Error",
@@ -345,12 +357,12 @@
  },
  "GATEWAY Ping": {
   "level": "live",
-  "checked": "2026-11-04",
+  "checked": "2026-11-13",
   "test": "gateway: Ping is answered with Pong"
  },
  "GATEWAY Ready": {
   "level": "live",
-  "checked": "2026-11-04",
+  "checked": "2026-11-13",
   "test": "gateway: a bot token authenticates and receives Ready",
   "response": {
    "type": "Ready",
@@ -364,7 +376,7 @@
       "01JC0000000000000000000004"
      ],
      "roles": {
-      "01M6K6QYR519M5GV1191QMBKHV": {
+      "01M7AR8ZZKFZ4M5EEAYPBAJT7V": {
        "_id": "01JC0000000000000000000005",
        "name": "Bots",
        "permissions": {
@@ -374,8 +386,8 @@
        "rank": 0
       }
      },
-     "default_permissions": 2276038022144,
-     "approximate_member_count": 1
+     "default_permissions": 204586177532928,
+     "approximate_member_count": 6
     }
    ],
    "channels": [
@@ -388,15 +400,24 @@
    ]
   }
  },
+ "GATEWAY Resume": {
+  "level": "live",
+  "checked": "2026-11-13",
+  "test": "gateway: a resumable session replays what it missed",
+  "response": {
+   "type": "InvalidSession",
+   "resumable": false
+  }
+ },
  "GET /": {
   "level": "live",
-  "checked": "2026-11-04",
+  "checked": "2026-11-13",
   "test": "messages: a bot reaches a member by DM",
   "status": 200,
   "expected": true,
   "schemaOk": true,
   "response": {
-   "zrzur": "26.0.0-dev",
+   "zrzur": "26.0.0",
    "features": {
     "captcha": {
      "enabled": false,
@@ -405,13 +426,18 @@
     "email": true,
     "invite_only": false,
     "webhooks": true,
+    "community_effects": false,
+    "plugins": false,
+    "forwarding": true,
+    "polls": true,
+    "server_events": true,
     "autumn": {
      "enabled": true,
-     "url": "https://zrzur.com"
+     "url": "https://cdn.zrzur.com"
     },
     "january": {
      "enabled": true,
-     "url": "https://zrzur.com"
+     "url": "https://api.zrzur.com/january"
     },
     "livekit": {
      "enabled": true,
@@ -420,7 +446,7 @@
        "name": "voicetest",
        "lat": 0,
        "lon": 0,
-       "public_url": "https://zrzur.com"
+       "public_url": "wss://voice.zrzur.com"
       }
      ]
     },
@@ -433,7 +459,7 @@
       "server_emoji": 100,
       "server_roles": 200,
       "server_channels": 200,
-      "body_limit_size": 105000000,
+      "body_limit_size": 96000000,
       "restrict_server_creation": [],
       "new_user_hours": 72,
       "max_invite_duration_days": 30
@@ -455,13 +481,15 @@
        2.5
       ],
       "file_upload_size_limits": {
-       "emojis": 500000,
+       "effects": 2000000,
        "banners": 6000000,
-       "avatars": 4000000,
        "decorations": 2500000,
        "attachments": 20000000,
-       "icons": 2500000,
-       "backgrounds": 6000000
+       "backgrounds": 6000000,
+       "emojis": 500000,
+       "sounds": 512000,
+       "avatars": 4000000,
+       "icons": 2500000
       }
      },
      "default": {
@@ -481,12 +509,14 @@
        2.5
       ],
       "file_upload_size_limits": {
-       "emojis": 500000,
-       "decorations": 2500000,
        "banners": 6000000,
-       "avatars": 4000000,
        "attachments": 20000000,
        "icons": 2500000,
+       "emojis": 500000,
+       "effects": 2000000,
+       "avatars": 4000000,
+       "sounds": 512000,
+       "decorations": 2500000,
        "backgrounds": 6000000
       }
      }
@@ -505,7 +535,7 @@
  },
  "GET /applications/{application_id}/commands": {
   "level": "live",
-  "checked": "2026-11-04",
+  "checked": "2026-11-13",
   "test": "commands: global and server command lifecycle",
   "status": 200,
   "expected": true,
@@ -530,7 +560,7 @@
  },
  "GET /applications/{application_id}/commands/{command_id}": {
   "level": "live",
-  "checked": "2026-11-04",
+  "checked": "2026-11-13",
   "test": "commands: global and server command lifecycle",
   "status": 200,
   "expected": true,
@@ -546,7 +576,7 @@
  },
  "GET /applications/{application_id}/servers/{server_id}/commands": {
   "level": "live",
-  "checked": "2026-11-04",
+  "checked": "2026-11-13",
   "test": "commands: global and server command lifecycle",
   "status": 200,
   "expected": true,
@@ -565,7 +595,7 @@
  },
  "GET /applications/{application_id}/servers/{server_id}/commands/{command_id}": {
   "level": "live",
-  "checked": "2026-11-04",
+  "checked": "2026-11-13",
   "test": "commands: global and server command lifecycle",
   "status": 200,
   "expected": true,
@@ -582,7 +612,7 @@
  },
  "GET /bots/@me": {
   "level": "live",
-  "checked": "2026-11-04",
+  "checked": "2026-11-13",
   "test": "bots: public info of a bot",
   "status": 200,
   "expected": true,
@@ -594,31 +624,78 @@
  },
  "GET /bots/{bot_id}": {
   "level": "live",
-  "checked": "2026-11-04",
+  "checked": "2026-11-13",
   "test": "bots: public info of a bot",
-  "status": 400,
+  "status": 200,
   "expected": true,
   "schemaOk": true,
-  "error": {
-   "type": "IsBot",
-   "location": "crates/delta/src/routes/bots/fetch.rs:17:20"
+  "response": {
+   "bot": {
+    "_id": "01JC0000000000000000000006",
+    "owner": "01JC0000000000000000000002",
+    "token": "<token>",
+    "public": true,
+    "privileged_intents": 7168,
+    "approved_intents": 0,
+    "interactions_secret_version": 0
+   },
+   "user": {
+    "_id": "01JC0000000000000000000006",
+    "username": "docbot",
+    "discriminator": "3726",
+    "status": {
+     "text": "Reading the docs",
+     "presence": "Online"
+    },
+    "bot": {
+     "owner": "01JC0000000000000000000002"
+    },
+    "relationship": "User",
+    "online": true
+   }
   }
+ },
+ "GET /bots/{target}/commands": {
+  "level": "live",
+  "checked": "2026-11-13",
+  "test": "commands: public command list and the server's command rules",
+  "status": 200,
+  "expected": true,
+  "schemaOk": true,
+  "response": [
+   {
+    "_id": "01JC0000000000000000000033",
+    "application_id": "01JC0000000000000000000006",
+    "type": "ChatInput",
+    "name": "hello",
+    "description": "Say hello",
+    "options": [
+     {
+      "type": "String",
+      "name": "name",
+      "description": "Who"
+     }
+    ],
+    "version": "01JC0000000000000000000034"
+   }
+  ]
  },
  "GET /bots/{target}/invite": {
   "level": "live",
-  "checked": "2026-11-04",
+  "checked": "2026-11-13",
   "test": "bots: public info of a bot",
   "status": 200,
   "expected": true,
   "schemaOk": true,
   "response": {
    "_id": "01JC0000000000000000000006",
-   "username": "docbot"
+   "username": "docbot",
+   "server_count": 1
   }
  },
  "GET /channels/{channel_id}/webhooks": {
   "level": "live",
-  "checked": "2026-11-04",
+  "checked": "2026-11-13",
   "test": "webhooks: create, list, fetch, edit, execute, delete",
   "status": 200,
   "expected": true,
@@ -629,14 +706,13 @@
     "name": "Docs hook",
     "creator_id": "01JC0000000000000000000006",
     "channel_id": "01JC0000000000000000000003",
-    "permissions": 876609536,
-    "token": "<token>"
+    "permissions": 52777568960512
    }
   ]
  },
  "GET /channels/{target}": {
   "level": "live",
-  "checked": "2026-11-04",
+  "checked": "2026-11-13",
   "test": "channels: create, fetch, edit, delete",
   "status": 200,
   "expected": true,
@@ -650,7 +726,7 @@
  },
  "GET /channels/{target}/members": {
   "level": "live",
-  "checked": "2026-11-04",
+  "checked": "2026-11-13",
   "test": "channels: bots create invites, group features refused",
   "status": 400,
   "expected": true,
@@ -662,7 +738,7 @@
  },
  "GET /channels/{target}/messages": {
   "level": "live",
-  "checked": "2026-11-04",
+  "checked": "2026-11-13",
   "test": "messages: send, fetch, list, edit; Message and MessageUpdate events",
   "status": 200,
   "expected": true,
@@ -671,7 +747,7 @@
    "messages": [
     {
      "_id": "01JC0000000000000000000018",
-     "nonce": "ed133519-ec41-497d-8df6-acc049d77607",
+     "nonce": "35b66c12-5d7b-430c-bc33-76d87ae94a7b",
      "channel": "01JC0000000000000000000003",
      "author": "01JC0000000000000000000006",
      "content": "Hello from the docs",
@@ -689,7 +765,7 @@
     {
      "_id": "01JC0000000000000000000006",
      "username": "docbot",
-     "discriminator": "6489",
+     "discriminator": "3726",
      "status": {
       "text": "Reading the docs",
       "presence": "Online"
@@ -707,7 +783,7 @@
       "server": "01JC0000000000000000000001",
       "user": "01JC0000000000000000000006"
      },
-     "joined_at": "2026-11-04T11:57:36.827Z",
+     "joined_at": "2026-11-13T15:26:32.842Z",
      "roles": [
       "01JC0000000000000000000005"
      ]
@@ -717,14 +793,14 @@
  },
  "GET /channels/{target}/messages/{msg}": {
   "level": "live",
-  "checked": "2026-11-04",
+  "checked": "2026-11-13",
   "test": "messages: send, fetch, list, edit; Message and MessageUpdate events",
   "status": 200,
   "expected": true,
   "schemaOk": true,
   "response": {
    "_id": "01JC0000000000000000000018",
-   "nonce": "ed133519-ec41-497d-8df6-acc049d77607",
+   "nonce": "35b66c12-5d7b-430c-bc33-76d87ae94a7b",
    "channel": "01JC0000000000000000000003",
    "author": "01JC0000000000000000000006",
    "content": "Hello from the docs",
@@ -738,9 +814,44 @@
    ]
   }
  },
+ "GET /channels/{target}/messages/{msg}/polls/answers/{answer}/voters": {
+  "level": "live",
+  "checked": "2026-11-13",
+  "test": "polls: a bot posts and ends a poll, reads voters, cannot vote",
+  "status": 200,
+  "expected": true,
+  "schemaOk": true,
+  "response": {
+   "ids": [],
+   "users": [],
+   "members": [],
+   "count": 0
+  }
+ },
+ "GET /channels/{target}/threads": {
+  "level": "live",
+  "checked": "2026-11-13",
+  "test": "threads: start with a card, list, rename, archive",
+  "status": 200,
+  "expected": true,
+  "schemaOk": true,
+  "response": [
+   {
+    "channel_type": "TextChannel",
+    "_id": "01JC0000000000000000000045",
+    "server": "01JC0000000000000000000001",
+    "name": "ticket-0001",
+    "parent": "01JC0000000000000000000003",
+    "thread": {
+     "owner": "01JC0000000000000000000006",
+     "message_count": 1
+    }
+   }
+  ]
+ },
  "GET /custom/emoji/{emoji_id}": {
   "level": "live",
-  "checked": "2026-11-04",
+  "checked": "2026-11-13",
   "test": "emojis: create from an upload, fetch, rename, delete",
   "status": 200,
   "expected": true,
@@ -757,25 +868,25 @@
  },
  "GET /invites/{target}": {
   "level": "live",
-  "checked": "2026-11-04",
+  "checked": "2026-11-13",
   "test": "invites: fetch and delete an invite",
   "status": 200,
   "expected": true,
   "schemaOk": true,
   "response": {
    "type": "Server",
-   "code": "pstA0zg2",
+   "code": "x4eEP474",
    "server_id": "01JC0000000000000000000001",
    "server_name": "Docs test",
    "channel_id": "01JC0000000000000000000003",
    "channel_name": "General",
    "user_name": "alice",
-   "member_count": 1
+   "member_count": 6
   }
  },
  "GET /servers/{server_id}/applications": {
   "level": "live",
-  "checked": "2026-11-04",
+  "checked": "2026-11-13",
   "test": "commands: global and server command lifecycle",
   "status": 200,
   "expected": true,
@@ -793,7 +904,7 @@
      "bot.install"
     ],
     "via": "invite",
-    "installed_at": "2026-11-04T11:57:36.842Z"
+    "installed_at": "2026-11-13T15:26:32.864Z"
    },
    {
     "server_id": "01JC0000000000000000000001",
@@ -807,13 +918,56 @@
      "bot.install"
     ],
     "via": "invite",
-    "installed_at": "2026-11-04T11:57:36.885Z"
+    "installed_at": "2026-11-13T15:26:32.915Z"
    }
   ]
  },
+ "GET /servers/{server_id}/applications/{application_id}/commands": {
+  "level": "live",
+  "checked": "2026-11-13",
+  "test": "commands: public command list and the server's command rules",
+  "status": 200,
+  "expected": true,
+  "schemaOk": true,
+  "response": [
+   {
+    "_id": "01JC0000000000000000000033",
+    "application_id": "01JC0000000000000000000006",
+    "type": "ChatInput",
+    "name": "hello",
+    "description": "Say hello",
+    "options": [
+     {
+      "type": "String",
+      "name": "name",
+      "description": "Who"
+     }
+    ],
+    "version": "01JC0000000000000000000034"
+   },
+   {
+    "_id": "01JC0000000000000000000038",
+    "application_id": "01JC0000000000000000000006",
+    "server_id": "01JC0000000000000000000001",
+    "type": "ChatInput",
+    "name": "local",
+    "description": "Server only",
+    "version": "01JC0000000000000000000039"
+   }
+  ]
+ },
+ "GET /servers/{server_id}/applications/{application_id}/permissions": {
+  "level": "live",
+  "checked": "2026-11-13",
+  "test": "commands: public command list and the server's command rules",
+  "status": 200,
+  "expected": true,
+  "schemaOk": true,
+  "response": []
+ },
  "GET /servers/{server_id}/commands": {
   "level": "live",
-  "checked": "2026-11-04",
+  "checked": "2026-11-13",
   "test": "commands: global and server command lifecycle",
   "status": 200,
   "expected": true,
@@ -855,7 +1009,7 @@
  },
  "GET /servers/{server_id}/members/{member_id}": {
   "level": "live",
-  "checked": "2026-11-04",
+  "checked": "2026-11-13",
   "test": "members: list, fetch, query, edit nickname and roles",
   "status": 200,
   "expected": true,
@@ -865,12 +1019,12 @@
     "server": "01JC0000000000000000000001",
     "user": "01JC0000000000000000000007"
    },
-   "joined_at": "2026-11-04T11:57:36.518Z"
+   "joined_at": "2026-11-13T15:26:32.544Z"
   }
  },
  "GET /servers/{target}": {
   "level": "live",
-  "checked": "2026-11-04",
+  "checked": "2026-11-13",
   "test": "servers: fetch and edit",
   "status": 200,
   "expected": true,
@@ -884,7 +1038,7 @@
     "01JC0000000000000000000004"
    ],
    "roles": {
-    "01M6K6QYR519M5GV1191QMBKHV": {
+    "01M7AR8ZZKFZ4M5EEAYPBAJT7V": {
      "_id": "01JC0000000000000000000005",
      "name": "Bots",
      "permissions": {
@@ -894,13 +1048,13 @@
      "rank": 0
     }
    },
-   "default_permissions": 2276038022144,
-   "approximate_member_count": 1
+   "default_permissions": 204586177532928,
+   "approximate_member_count": 6
   }
  },
  "GET /servers/{target}/audit_logs": {
   "level": "live",
-  "checked": "2026-11-04",
+  "checked": "2026-11-13",
   "test": "moderation: kick, ban, list bans, unban, audit log",
   "status": 200,
   "expected": true,
@@ -945,21 +1099,21 @@
     {
      "_id": "01JC0000000000000000000002",
      "username": "alice",
-     "discriminator": "2146",
+     "discriminator": "5064",
      "relationship": "None",
      "online": false
     },
     {
      "_id": "01JC0000000000000000000007",
      "username": "bob",
-     "discriminator": "8499",
+     "discriminator": "9599",
      "relationship": "None",
      "online": true
     },
     {
      "_id": "01JC0000000000000000000012",
      "username": "carol",
-     "discriminator": "6266",
+     "discriminator": "4827",
      "relationship": "None",
      "online": false
     }
@@ -970,14 +1124,14 @@
       "server": "01JC0000000000000000000001",
       "user": "01JC0000000000000000000002"
      },
-     "joined_at": "2026-11-04T11:57:36.429Z"
+     "joined_at": "2026-11-13T15:26:32.436Z"
     },
     {
      "_id": {
       "server": "01JC0000000000000000000001",
       "user": "01JC0000000000000000000007"
      },
-     "joined_at": "2026-11-04T11:57:36.518Z",
+     "joined_at": "2026-11-13T15:26:32.544Z",
      "nickname": "Bobby",
      "roles": [
       "01JC0000000000000000000010"
@@ -988,7 +1142,7 @@
       "server": "01JC0000000000000000000001",
       "user": "01JC0000000000000000000006"
      },
-     "joined_at": "2026-11-04T11:57:36.827Z",
+     "joined_at": "2026-11-13T15:26:32.842Z",
      "roles": [
       "01JC0000000000000000000005"
      ]
@@ -998,7 +1152,7 @@
  },
  "GET /servers/{target}/bans": {
   "level": "live",
-  "checked": "2026-11-04",
+  "checked": "2026-11-13",
   "test": "moderation: kick, ban, list bans, unban, audit log",
   "status": 200,
   "expected": true,
@@ -1008,7 +1162,7 @@
     {
      "_id": "01JC0000000000000000000014",
      "username": "dave",
-     "discriminator": "4141",
+     "discriminator": "6153",
      "avatar": null
     }
    ],
@@ -1025,7 +1179,7 @@
  },
  "GET /servers/{target}/emojis": {
   "level": "live",
-  "checked": "2026-11-04",
+  "checked": "2026-11-13",
   "test": "servers: fetch and edit",
   "status": 200,
   "expected": true,
@@ -1034,7 +1188,7 @@
  },
  "GET /servers/{target}/invites": {
   "level": "live",
-  "checked": "2026-11-04",
+  "checked": "2026-11-13",
   "test": "servers: fetch and edit",
   "status": 200,
   "expected": true,
@@ -1042,18 +1196,18 @@
   "response": [
    {
     "type": "Server",
-    "_id": "pstA0zg2",
+    "_id": "x4eEP474",
     "server": "01JC0000000000000000000001",
     "creator": "01JC0000000000000000000002",
     "channel": "01JC0000000000000000000003",
     "uses": 3,
-    "expires": "2026-11-11T11:57:36.487Z"
+    "expires": "2026-11-20T15:26:32.507Z"
    }
   ]
  },
  "GET /servers/{target}/members": {
   "level": "live",
-  "checked": "2026-11-04",
+  "checked": "2026-11-13",
   "test": "members: list, fetch, query, edit nickname and roles",
   "status": 200,
   "expected": true,
@@ -1065,42 +1219,42 @@
       "server": "01JC0000000000000000000001",
       "user": "01JC0000000000000000000002"
      },
-     "joined_at": "2026-11-04T11:57:36.429Z"
+     "joined_at": "2026-11-13T15:26:32.436Z"
     },
     {
      "_id": {
       "server": "01JC0000000000000000000001",
       "user": "01JC0000000000000000000007"
      },
-     "joined_at": "2026-11-04T11:57:36.518Z"
+     "joined_at": "2026-11-13T15:26:32.544Z"
     },
     {
      "_id": {
       "server": "01JC0000000000000000000001",
       "user": "01JC0000000000000000000012"
      },
-     "joined_at": "2026-11-04T11:57:36.583Z"
+     "joined_at": "2026-11-13T15:26:32.602Z"
     }
    ],
    "users": [
     {
      "_id": "01JC0000000000000000000002",
      "username": "alice",
-     "discriminator": "2146",
+     "discriminator": "5064",
      "relationship": "None",
      "online": false
     },
     {
      "_id": "01JC0000000000000000000007",
      "username": "bob",
-     "discriminator": "8499",
+     "discriminator": "9599",
      "relationship": "None",
      "online": true
     },
     {
      "_id": "01JC0000000000000000000012",
      "username": "carol",
-     "discriminator": "6266",
+     "discriminator": "4827",
      "relationship": "None",
      "online": false
     }
@@ -1109,7 +1263,7 @@
  },
  "GET /servers/{target}/members_experimental_query": {
   "level": "live",
-  "checked": "2026-11-04",
+  "checked": "2026-11-13",
   "test": "members: list, fetch, query, edit nickname and roles",
   "status": 200,
   "expected": true,
@@ -1121,7 +1275,7 @@
       "server": "01JC0000000000000000000001",
       "user": "01JC0000000000000000000006"
      },
-     "joined_at": "2026-11-04T11:57:36.827Z",
+     "joined_at": "2026-11-13T15:26:32.842Z",
      "roles": [
       "01JC0000000000000000000005"
      ]
@@ -1131,7 +1285,7 @@
       "server": "01JC0000000000000000000001",
       "user": "01JC0000000000000000000013"
      },
-     "joined_at": "2026-11-04T11:57:36.873Z",
+     "joined_at": "2026-11-13T15:26:32.890Z",
      "roles": [
       "01JC0000000000000000000005"
      ]
@@ -1141,14 +1295,14 @@
       "server": "01JC0000000000000000000001",
       "user": "01JC0000000000000000000014"
      },
-     "joined_at": "2026-11-04T11:57:36.625Z"
+     "joined_at": "2026-11-13T15:26:32.648Z"
     }
    ],
    "users": [
     {
      "_id": "01JC0000000000000000000006",
      "username": "docbot",
-     "discriminator": "6489",
+     "discriminator": "3726",
      "status": {
       "text": "Reading the docs",
       "presence": "Online"
@@ -1162,17 +1316,15 @@
     {
      "_id": "01JC0000000000000000000013",
      "username": "tutorialbot",
-     "discriminator": "5704",
-     "bot": {
-      "owner": "01JC0000000000000000000002"
-     },
+     "discriminator": "5594",
+     "bot": {},
      "relationship": "None",
      "online": false
     },
     {
      "_id": "01JC0000000000000000000014",
      "username": "dave",
-     "discriminator": "4141",
+     "discriminator": "6153",
      "relationship": "None",
      "online": false
     }
@@ -1181,7 +1333,7 @@
  },
  "GET /servers/{target}/roles/{role_id}": {
   "level": "live",
-  "checked": "2026-11-04",
+  "checked": "2026-11-13",
   "test": "roles: create, fetch, edit, permissions, ranks, delete",
   "status": 200,
   "expected": true,
@@ -1196,9 +1348,122 @@
    "rank": 1
   }
  },
+ "GET /servers/{target}/soundboard": {
+  "level": "live",
+  "checked": "2026-11-13",
+  "test": "soundboard: a bot reads the server's sounds and the library",
+  "status": 200,
+  "expected": true,
+  "schemaOk": true,
+  "response": {
+   "sounds": [],
+   "limit": 8
+  }
+ },
+ "GET /soundboard/library": {
+  "level": "live",
+  "checked": "2026-11-13",
+  "test": "soundboard: a bot reads the server's sounds and the library",
+  "status": 200,
+  "expected": true,
+  "schemaOk": true,
+  "response": {
+   "categories": [
+    {
+     "id": "reactions",
+     "names": {
+      "ar": "ردود فعل",
+      "de": "Reaktionen",
+      "en": "Reactions",
+      "es": "Reacciones",
+      "fr": "Réactions",
+      "ru": "Реакции",
+      "zh-Hans": "反应"
+     }
+    },
+    {
+     "id": "voice",
+     "names": {
+      "ar": "عبارات صوتية (بالإنجليزية)",
+      "de": "Sprachzeilen (Englisch)",
+      "en": "Voice lines (English)",
+      "es": "Frases (inglés)",
+      "fr": "Répliques (anglais)",
+      "ru": "Фразы (англ.)",
+      "zh-Hans": "语音（英语）"
+     }
+    },
+    {
+     "id": "games",
+     "names": {
+      "ar": "ألعاب",
+      "de": "Spiele",
+      "en": "Games",
+      "es": "Juegos",
+      "fr": "Jeux",
+      "ru": "Игры",
+      "zh-Hans": "游戏"
+     }
+    }
+   ],
+   "sounds": [
+    {
+     "id": "voice-go",
+     "category": "voice",
+     "emoji": "🏁",
+     "names": {
+      "ar": "«Go»: انطلق",
+      "de": "„Go“: Los",
+      "en": "“Go”",
+      "es": "«Go»: ¡Ya!",
+      "fr": "« Go » : Partez",
+      "ru": "«Go»: Вперёд",
+      "zh-Hans": "“Go”：出发"
+     },
+     "duration_ms": 654,
+     "size": 9740,
+     "version": "baf6a1671d27"
+    },
+    {
+     "id": "voice-ready",
+     "category": "voice",
+     "emoji": "✋",
+     "names": {
+      "ar": "«Ready»: استعد",
+      "de": "„Ready“: Bereit",
+      "en": "“Ready”",
+      "es": "«Ready»: Listos",
+      "fr": "« Ready » : Prêts",
+      "ru": "«Ready»: Готовы",
+      "zh-Hans": "“Ready”：准备"
+     },
+     "duration_ms": 691,
+     "size": 9867,
+     "version": "2029d218a4b1"
+    },
+    {
+     "id": "voice-set",
+     "category": "voice",
+     "emoji": "⏱️",
+     "names": {
+      "ar": "«Set»: تأهب",
+      "de": "„Set“: Achtung",
+      "en": "“Set”",
+      "es": "«Set»: Atentos",
+      "fr": "« Set » : Feu",
+      "ru": "«Set»: Внимание",
+      "zh-Hans": "“Set”：预备"
+     },
+     "duration_ms": 545,
+     "size": 9060,
+     "version": "cbec654f7cb1"
+    }
+   ]
+  }
+ },
  "GET /users/@me": {
   "level": "live",
-  "checked": "2026-11-04",
+  "checked": "2026-11-13",
   "test": "auth: GET /users/@me with x-bot-token returns the bot user",
   "status": 200,
   "expected": true,
@@ -1206,7 +1471,7 @@
   "response": {
    "_id": "01JC0000000000000000000006",
    "username": "docbot",
-   "discriminator": "6489",
+   "discriminator": "3726",
    "bot": {
     "owner": "01JC0000000000000000000002"
    },
@@ -1216,19 +1481,19 @@
  },
  "GET /users/@me/mentions": {
   "level": "live",
-  "checked": "2026-11-04",
+  "checked": "2026-11-13",
   "test": "users: open a DM, list DMs, mentions",
-  "status": 200,
+  "status": 400,
   "expected": true,
   "schemaOk": true,
-  "response": {
-   "messages": [],
-   "users": []
+  "error": {
+   "type": "IsBot",
+   "location": "crates/delta/src/routes/users/fetch_mentions.rs:28:20"
   }
  },
  "GET /users/@me/privacy": {
   "level": "live",
-  "checked": "2026-11-04",
+  "checked": "2026-11-13",
   "test": "users: bots cannot use friends or change their username with a password",
   "status": 400,
   "expected": true,
@@ -1240,7 +1505,7 @@
  },
  "GET /users/dms": {
   "level": "live",
-  "checked": "2026-11-04",
+  "checked": "2026-11-13",
   "test": "users: open a DM, list DMs, mentions",
   "status": 200,
   "expected": true,
@@ -1259,7 +1524,7 @@
  },
  "GET /users/{target}": {
   "level": "live",
-  "checked": "2026-11-04",
+  "checked": "2026-11-13",
   "test": "users: fetch, profile, flags, default avatar, mutual",
   "status": 200,
   "expected": true,
@@ -1267,14 +1532,14 @@
   "response": {
    "_id": "01JC0000000000000000000007",
    "username": "bob",
-   "discriminator": "8499",
+   "discriminator": "9599",
    "relationship": "None",
    "online": true
   }
  },
  "GET /users/{target}/default_avatar": {
   "level": "live",
-  "checked": "2026-11-04",
+  "checked": "2026-11-13",
   "test": "users: fetch, profile, flags, default avatar, mutual",
   "status": 200,
   "expected": true,
@@ -1282,7 +1547,7 @@
  },
  "GET /users/{target}/dm": {
   "level": "live",
-  "checked": "2026-11-04",
+  "checked": "2026-11-13",
   "test": "users: open a DM, list DMs, mentions",
   "status": 200,
   "expected": true,
@@ -1299,7 +1564,7 @@
  },
  "GET /users/{target}/flags": {
   "level": "live",
-  "checked": "2026-11-04",
+  "checked": "2026-11-13",
   "test": "users: fetch, profile, flags, default avatar, mutual",
   "status": 200,
   "expected": true,
@@ -1310,7 +1575,7 @@
  },
  "GET /users/{target}/mutual": {
   "level": "live",
-  "checked": "2026-11-04",
+  "checked": "2026-11-13",
   "test": "users: fetch, profile, flags, default avatar, mutual",
   "status": 200,
   "expected": true,
@@ -1325,16 +1590,23 @@
  },
  "GET /users/{target}/profile": {
   "level": "live",
-  "checked": "2026-11-04",
+  "checked": "2026-11-13",
   "test": "users: fetch, profile, flags, default avatar, mutual",
   "status": 200,
   "expected": true,
   "schemaOk": true,
-  "response": {}
+  "response": {
+   "creator": false,
+   "sections": [
+    "about",
+    "links",
+    "creations"
+   ]
+  }
  },
  "GET /webhooks/{webhook_id}": {
   "level": "live",
-  "checked": "2026-11-04",
+  "checked": "2026-11-13",
   "test": "webhooks: create, list, fetch, edit, execute, delete",
   "status": 200,
   "expected": true,
@@ -1342,14 +1614,14 @@
   "response": {
    "id": "01JC0000000000000000000028",
    "name": "Docs hook",
-   "avatar": null,
+   "creator_id": "01JC0000000000000000000006",
    "channel_id": "01JC0000000000000000000003",
-   "permissions": 876609536
+   "permissions": 52777568960512
   }
  },
  "GET /webhooks/{webhook_id}/{token}": {
   "level": "live",
-  "checked": "2026-11-04",
+  "checked": "2026-11-13",
   "test": "webhooks: create, list, fetch, edit, execute, delete",
   "status": 200,
   "expected": true,
@@ -1357,15 +1629,14 @@
   "response": {
    "id": "01JC0000000000000000000028",
    "name": "Docs hook 2",
-   "creator_id": "01JC0000000000000000000006",
+   "avatar": null,
    "channel_id": "01JC0000000000000000000003",
-   "permissions": 876609536,
-   "token": "<token>"
+   "permissions": 52777568960512
   }
  },
  "INTERACTIONS double-ack": {
   "level": "live",
-  "checked": "2026-11-04",
+  "checked": "2026-11-13",
   "test": "interactions: full round trip with the interaction token",
   "response": {
    "status": 409,
@@ -1374,7 +1645,7 @@
  },
  "MESSAGES idempotency": {
   "level": "live",
-  "checked": "2026-11-04",
+  "checked": "2026-11-13",
   "test": "messages: the same Idempotency-Key does not send twice",
   "response": {
    "first": 200,
@@ -1384,7 +1655,7 @@
  },
  "PATCH /applications/{application_id}/commands/{command_id}": {
   "level": "live",
-  "checked": "2026-11-04",
+  "checked": "2026-11-13",
   "test": "commands: global and server command lifecycle",
   "status": 200,
   "expected": true,
@@ -1403,7 +1674,7 @@
  },
  "PATCH /applications/{application_id}/servers/{server_id}/commands/{command_id}": {
   "level": "live",
-  "checked": "2026-11-04",
+  "checked": "2026-11-13",
   "test": "commands: global and server command lifecycle",
   "status": 200,
   "expected": true,
@@ -1423,7 +1694,7 @@
  },
  "PATCH /bots/{bot_id}": {
   "level": "live",
-  "checked": "2026-11-04",
+  "checked": "2026-11-13",
   "test": "bots: public info of a bot",
   "status": 404,
   "expected": true,
@@ -1433,12 +1704,12 @@
   },
   "error": {
    "type": "NotFound",
-   "location": "crates/delta/src/routes/bots/edit.rs:35:20"
+   "location": "crates/delta/src/routes/bots/edit.rs:31:20"
   }
  },
  "PATCH /channels/{target}": {
   "level": "live",
-  "checked": "2026-11-04",
+  "checked": "2026-11-13",
   "test": "channels: create, fetch, edit, delete",
   "status": 200,
   "expected": true,
@@ -1456,7 +1727,7 @@
  },
  "PATCH /channels/{target}/messages/{msg}": {
   "level": "live",
-  "checked": "2026-11-04",
+  "checked": "2026-11-13",
   "test": "messages: send, fetch, list, edit; Message and MessageUpdate events",
   "status": 200,
   "expected": true,
@@ -1466,11 +1737,11 @@
   },
   "response": {
    "_id": "01JC0000000000000000000018",
-   "nonce": "ed133519-ec41-497d-8df6-acc049d77607",
+   "nonce": "35b66c12-5d7b-430c-bc33-76d87ae94a7b",
    "channel": "01JC0000000000000000000003",
    "author": "01JC0000000000000000000006",
    "content": "Edited",
-   "edited": "2026-11-04T11:57:38.546Z",
+   "edited": "2026-11-13T15:27:14.055Z",
    "embeds": [
     {
      "type": "Text",
@@ -1481,9 +1752,33 @@
    ]
   }
  },
+ "PATCH /channels/{target}/thread": {
+  "level": "live",
+  "checked": "2026-11-13",
+  "test": "threads: start with a card, list, rename, archive",
+  "status": 200,
+  "expected": true,
+  "schemaOk": true,
+  "request": {
+   "name": "ticket-0001-closed",
+   "archived": true
+  },
+  "response": {
+   "channel_type": "TextChannel",
+   "_id": "01JC0000000000000000000045",
+   "server": "01JC0000000000000000000001",
+   "name": "ticket-0001-closed",
+   "parent": "01JC0000000000000000000003",
+   "thread": {
+    "owner": "01JC0000000000000000000006",
+    "archived": true,
+    "message_count": 1
+   }
+  }
+ },
  "PATCH /custom/emoji/{emoji_id}": {
   "level": "live",
-  "checked": "2026-11-04",
+  "checked": "2026-11-13",
   "test": "emojis: create from an upload, fetch, rename, delete",
   "status": 200,
   "expected": true,
@@ -1503,7 +1798,7 @@
  },
  "PATCH /interactions/{interaction_id}/{token}/messages/{message_id}": {
   "level": "live",
-  "checked": "2026-11-04",
+  "checked": "2026-11-13",
   "test": "interactions: full round trip with the interaction token",
   "status": 204,
   "expected": true,
@@ -1514,7 +1809,7 @@
  },
  "PATCH /interactions/{interaction_id}/{token}/original": {
   "level": "live",
-  "checked": "2026-11-04",
+  "checked": "2026-11-13",
   "test": "interactions: full round trip with the interaction token",
   "status": 204,
   "expected": true,
@@ -1525,7 +1820,7 @@
  },
  "PATCH /servers/{server_id}/members/{member_id}": {
   "level": "live",
-  "checked": "2026-11-04",
+  "checked": "2026-11-13",
   "test": "members: list, fetch, query, edit nickname and roles",
   "status": 200,
   "expected": true,
@@ -1541,7 +1836,7 @@
     "server": "01JC0000000000000000000001",
     "user": "01JC0000000000000000000007"
    },
-   "joined_at": "2026-11-04T11:57:36.518Z",
+   "joined_at": "2026-11-13T15:26:32.544Z",
    "nickname": "Bobby",
    "roles": [
     "01JC0000000000000000000010"
@@ -1550,7 +1845,7 @@
  },
  "PATCH /servers/{target}": {
   "level": "live",
-  "checked": "2026-11-04",
+  "checked": "2026-11-13",
   "test": "servers: fetch and edit",
   "status": 200,
   "expected": true,
@@ -1568,7 +1863,7 @@
     "01JC0000000000000000000004"
    ],
    "roles": {
-    "01M6K6QYR519M5GV1191QMBKHV": {
+    "01M7AR8ZZKFZ4M5EEAYPBAJT7V": {
      "_id": "01JC0000000000000000000005",
      "name": "Bots",
      "permissions": {
@@ -1578,13 +1873,13 @@
      "rank": 0
     }
    },
-   "default_permissions": 2276038022144,
-   "approximate_member_count": 1
+   "default_permissions": 204586177532928,
+   "approximate_member_count": 6
   }
  },
  "PATCH /servers/{target}/roles/ranks": {
   "level": "live",
-  "checked": "2026-11-04",
+  "checked": "2026-11-13",
   "test": "roles: create, fetch, edit, permissions, ranks, delete",
   "status": 200,
   "expected": true,
@@ -1605,7 +1900,7 @@
     "01JC0000000000000000000004"
    ],
    "roles": {
-    "01M6K6QYR519M5GV1191QMBKHV": {
+    "01M7AR8ZZKFZ4M5EEAYPBAJT7V": {
      "_id": "01JC0000000000000000000005",
      "name": "Bots",
      "permissions": {
@@ -1614,7 +1909,7 @@
      },
      "rank": 0
     },
-    "01M6K6QZPGAWQ4JYB2RY294WFR": {
+    "01M7AR9ARNWJBPPTXGGDPXZA30": {
      "_id": "01JC0000000000000000000010",
      "name": "Helpers",
      "permissions": {
@@ -1626,13 +1921,13 @@
      "rank": 1
     }
    },
-   "default_permissions": 2276038022144,
-   "approximate_member_count": 1
+   "default_permissions": 204586177532928,
+   "approximate_member_count": 6
   }
  },
  "PATCH /servers/{target}/roles/{role_id}": {
   "level": "live",
-  "checked": "2026-11-04",
+  "checked": "2026-11-13",
   "test": "roles: create, fetch, edit, permissions, ranks, delete",
   "status": 200,
   "expected": true,
@@ -1655,7 +1950,7 @@
  },
  "PATCH /users/@me/privacy": {
   "level": "live",
-  "checked": "2026-11-04",
+  "checked": "2026-11-13",
   "test": "users: bots cannot use friends or change their username with a password",
   "status": 400,
   "expected": true,
@@ -1670,7 +1965,7 @@
  },
  "PATCH /users/{target}": {
   "level": "live",
-  "checked": "2026-11-04",
+  "checked": "2026-11-13",
   "test": "users: edit own status",
   "status": 200,
   "expected": true,
@@ -1684,7 +1979,7 @@
   "response": {
    "_id": "01JC0000000000000000000006",
    "username": "docbot",
-   "discriminator": "6489",
+   "discriminator": "3726",
    "status": {
     "text": "Reading the docs",
     "presence": "Online"
@@ -1698,7 +1993,7 @@
  },
  "PATCH /webhooks/{webhook_id}": {
   "level": "live",
-  "checked": "2026-11-04",
+  "checked": "2026-11-13",
   "test": "webhooks: create, list, fetch, edit, execute, delete",
   "status": 200,
   "expected": true,
@@ -1711,13 +2006,12 @@
    "name": "Docs hook 2",
    "creator_id": "01JC0000000000000000000006",
    "channel_id": "01JC0000000000000000000003",
-   "permissions": 876609536,
-   "token": "<token>"
+   "permissions": 52777568960512
   }
  },
  "PATCH /webhooks/{webhook_id}/{token}": {
   "level": "live",
-  "checked": "2026-11-04",
+  "checked": "2026-11-13",
   "test": "webhooks: create, list, fetch, edit, execute, delete",
   "status": 200,
   "expected": true,
@@ -1728,15 +2022,14 @@
   "response": {
    "id": "01JC0000000000000000000028",
    "name": "Docs hook 3",
-   "creator_id": "01JC0000000000000000000006",
+   "avatar": null,
    "channel_id": "01JC0000000000000000000003",
-   "permissions": 876609536,
-   "token": "<token>"
+   "permissions": 52777568960512
   }
  },
  "PATCH /webhooks/{webhook_id}/{token}/{message_id}": {
   "level": "live",
-  "checked": "2026-11-04",
+  "checked": "2026-11-13",
   "test": "webhooks: create, list, fetch, edit, execute, delete",
   "status": 200,
   "expected": true,
@@ -1754,13 +2047,13 @@
     "avatar": null
    },
    "content": "Edited webhook message",
-   "edited": "2026-11-04T11:57:39.439Z",
+   "edited": "2026-11-13T15:27:15.104Z",
    "embeds": []
   }
  },
  "POST /applications/{application_id}/commands": {
   "level": "live",
-  "checked": "2026-11-04",
+  "checked": "2026-11-13",
   "test": "commands: global and server command lifecycle",
   "status": 200,
   "expected": true,
@@ -1780,7 +2073,7 @@
  },
  "POST /applications/{application_id}/servers/{server_id}/commands": {
   "level": "live",
-  "checked": "2026-11-04",
+  "checked": "2026-11-13",
   "test": "commands: global and server command lifecycle",
   "status": 200,
   "expected": true,
@@ -1801,7 +2094,7 @@
  },
  "POST /bots/create": {
   "level": "live",
-  "checked": "2026-11-04",
+  "checked": "2026-11-13",
   "test": "bots: public info of a bot",
   "status": 400,
   "expected": true,
@@ -1811,12 +2104,12 @@
   },
   "error": {
    "type": "IsBot",
-   "location": "crates/core/database/src/models/bots/model.rs:124:24"
+   "location": "crates/core/database/src/models/bots/model.rs:129:24"
   }
  },
  "POST /bots/{target}/invite": {
   "level": "live",
-  "checked": "2026-11-04",
+  "checked": "2026-11-13",
   "test": "bots: public info of a bot",
   "status": 400,
   "expected": true,
@@ -1831,7 +2124,7 @@
  },
  "POST /channels/create": {
   "level": "live",
-  "checked": "2026-11-04",
+  "checked": "2026-11-13",
   "test": "channels: bots create invites, group features refused",
   "status": 400,
   "expected": true,
@@ -1846,7 +2139,7 @@
  },
  "POST /channels/{channel_id}/webhooks": {
   "level": "live",
-  "checked": "2026-11-04",
+  "checked": "2026-11-13",
   "test": "webhooks: create, list, fetch, edit, execute, delete",
   "status": 200,
   "expected": true,
@@ -1859,13 +2152,14 @@
    "name": "Docs hook",
    "creator_id": "01JC0000000000000000000006",
    "channel_id": "01JC0000000000000000000003",
-   "permissions": 876609536,
-   "token": "<token>"
+   "permissions": 52777568960512,
+   "token": "<token>",
+   "url": "https://api.zrzur.com/webhooks/01JC0000000000000000000028/<token>"
   }
  },
  "POST /channels/{target}/invites": {
   "level": "live",
-  "checked": "2026-11-04",
+  "checked": "2026-11-13",
   "test": "channels: bots create invites, group features refused",
   "status": 200,
   "expected": true,
@@ -1873,17 +2167,17 @@
   "request": {},
   "response": {
    "type": "Server",
-   "_id": "7aFfPcC2",
+   "_id": "3wfQAtnC",
    "server": "01JC0000000000000000000001",
    "creator": "01JC0000000000000000000006",
    "channel": "01JC0000000000000000000003",
    "uses": 0,
-   "expires": "2026-11-11T11:57:37.776Z"
+   "expires": "2026-11-20T15:26:43.846Z"
   }
  },
  "POST /channels/{target}/join_call": {
   "level": "live",
-  "checked": "2026-11-04",
+  "checked": "2026-11-13",
   "test": "voice: a bot gets a LiveKit ticket; force_disconnect is refused",
   "status": 200,
   "expected": true,
@@ -1893,12 +2187,12 @@
   },
   "response": {
    "token": "<token>",
-   "url": "https://zrzur.com"
+   "url": "wss://voice.zrzur.com"
   }
  },
  "POST /channels/{target}/messages": {
   "level": "live",
-  "checked": "2026-11-04",
+  "checked": "2026-11-13",
   "test": "messages: send, fetch, list, edit; Message and MessageUpdate events",
   "status": 200,
   "expected": true,
@@ -1915,20 +2209,18 @@
   },
   "response": {
    "_id": "01JC0000000000000000000018",
-   "nonce": "ed133519-ec41-497d-8df6-acc049d77607",
+   "nonce": "35b66c12-5d7b-430c-bc33-76d87ae94a7b",
    "channel": "01JC0000000000000000000003",
    "author": "01JC0000000000000000000006",
    "user": {
     "_id": "01JC0000000000000000000006",
     "username": "docbot",
-    "discriminator": "6489",
+    "discriminator": "3726",
     "status": {
      "text": "Reading the docs",
      "presence": "Online"
     },
-    "bot": {
-     "owner": "01JC0000000000000000000002"
-    },
+    "bot": {},
     "relationship": "None",
     "online": true
    },
@@ -1937,7 +2229,7 @@
      "server": "01JC0000000000000000000001",
      "user": "01JC0000000000000000000006"
     },
-    "joined_at": "2026-11-04T11:57:36.827Z",
+    "joined_at": "2026-11-13T15:26:32.842Z",
     "roles": [
      "01JC0000000000000000000005"
     ]
@@ -1955,15 +2247,83 @@
  },
  "POST /channels/{target}/messages/{msg}/pin": {
   "level": "live",
-  "checked": "2026-11-04",
+  "checked": "2026-11-13",
   "test": "messages: reactions and pins; MessageReact event",
   "status": 204,
   "expected": true,
   "schemaOk": true
  },
+ "POST /channels/{target}/messages/{msg}/polls/end": {
+  "level": "live",
+  "checked": "2026-11-13",
+  "test": "polls: a bot posts and ends a poll, reads voters, cannot vote",
+  "status": 200,
+  "expected": true,
+  "schemaOk": true,
+  "response": {
+   "question": "Which day?",
+   "answers": [
+    {
+     "id": 1,
+     "text": "Saturday",
+     "count": 0
+    },
+    {
+     "id": 2,
+     "text": "Sunday",
+     "count": 0
+    }
+   ],
+   "expires_at": "2026-11-13T16:27:37.931Z",
+   "ended": true,
+   "me": [],
+   "version": 1
+  }
+ },
+ "POST /channels/{target}/threads": {
+  "level": "live",
+  "checked": "2026-11-13",
+  "test": "threads: start with a card, list, rename, archive",
+  "status": 200,
+  "expected": true,
+  "schemaOk": true,
+  "request": {
+   "name": "ticket-0001",
+   "embeds": [
+    {
+     "title": "Ticket 0001",
+     "description": "Opened by a member"
+    }
+   ],
+   "components": [
+    {
+     "type": "ActionRow",
+     "components": [
+      {
+       "type": "Button",
+       "style": "Danger",
+       "label": "Close ticket",
+       "custom_id": "ticket:close"
+      }
+     ]
+    }
+   ]
+  },
+  "response": {
+   "channel_type": "TextChannel",
+   "_id": "01JC0000000000000000000045",
+   "server": "01JC0000000000000000000001",
+   "name": "ticket-0001",
+   "parent": "01JC0000000000000000000003",
+   "thread": {
+    "owner": "01JC0000000000000000000006",
+    "message_count": 1
+   }
+  }
+ },
  "POST /interactions": {
   "level": "live",
-  "checked": "2026-11-04",
+  "checked": "2026-11-13",
   "test": "interactions: bots cannot create interactions",
   "status": 400,
   "expected": true,
@@ -1973,16 +2333,16 @@
    "application_id": "01JC0000000000000000000006",
    "channel_id": "01JC0000000000000000000003",
    "command_id": "01JC0000000000000000000033",
-   "nonce": "637cf0f4-955d-46e0-b9d5-e9224402498e"
+   "nonce": "309638c0-92c2-459f-8211-3e0af873e962"
   },
   "error": {
    "type": "IsBot",
-   "location": "crates/delta/src/routes/interactions/create.rs:764:20"
+   "location": "crates/delta/src/routes/interactions/create.rs:900:20"
   }
  },
  "POST /interactions/autocomplete": {
   "level": "live",
-  "checked": "2026-11-04",
+  "checked": "2026-11-13",
   "test": "interactions: bots cannot create interactions",
   "status": 400,
   "expected": true,
@@ -1992,16 +2352,16 @@
    "application_id": "01JC0000000000000000000006",
    "channel_id": "01JC0000000000000000000003",
    "command_id": "01JC0000000000000000000033",
-   "nonce": "fcf281aa-d4f3-4518-bb8f-2bae2ffc5434"
+   "nonce": "20e91484-4ebb-4225-8582-f9738ca01c65"
   },
   "error": {
    "type": "IsBot",
-   "location": "crates/delta/src/routes/interactions/create.rs:800:20"
+   "location": "crates/delta/src/routes/interactions/create.rs:936:20"
   }
  },
  "POST /interactions/{interaction_id}/{token}/callback": {
   "level": "live",
-  "checked": "2026-11-04",
+  "checked": "2026-11-13",
   "test": "interactions: full round trip with the interaction token",
   "status": 204,
   "expected": true,
@@ -2015,7 +2375,7 @@
  },
  "POST /interactions/{interaction_id}/{token}/followups": {
   "level": "live",
-  "checked": "2026-11-04",
+  "checked": "2026-11-13",
   "test": "interactions: full round trip with the interaction token",
   "status": 200,
   "expected": true,
@@ -2031,7 +2391,7 @@
  },
  "POST /invites/{target}": {
   "level": "live",
-  "checked": "2026-11-04",
+  "checked": "2026-11-13",
   "test": "servers: bots cannot create servers, join invites or ack",
   "status": 400,
   "expected": true,
@@ -2043,7 +2403,7 @@
  },
  "POST /servers/create": {
   "level": "live",
-  "checked": "2026-11-04",
+  "checked": "2026-11-13",
   "test": "servers: bots cannot create servers, join invites or ack",
   "status": 400,
   "expected": true,
@@ -2053,12 +2413,12 @@
   },
   "error": {
    "type": "IsBot",
-   "location": "crates/delta/src/routes/servers/server_create.rs:21:20"
+   "location": "crates/delta/src/routes/servers/server_create.rs:114:20"
   }
  },
  "POST /servers/{server}/channels": {
   "level": "live",
-  "checked": "2026-11-04",
+  "checked": "2026-11-13",
   "test": "channels: create, fetch, edit, delete",
   "status": 200,
   "expected": true,
@@ -2076,7 +2436,7 @@
  },
  "POST /servers/{target}/roles": {
   "level": "live",
-  "checked": "2026-11-04",
+  "checked": "2026-11-13",
   "test": "roles: create, fetch, edit, permissions, ranks, delete",
   "status": 200,
   "expected": true,
@@ -2099,7 +2459,7 @@
  },
  "POST /users/friend": {
   "level": "live",
-  "checked": "2026-11-04",
+  "checked": "2026-11-13",
   "test": "users: bots cannot use friends or change their username with a password",
   "status": 400,
   "expected": true,
@@ -2114,7 +2474,7 @@
  },
  "POST /webhooks/{webhook_id}/{token}": {
   "level": "live",
-  "checked": "2026-11-04",
+  "checked": "2026-11-13",
   "test": "webhooks: create, list, fetch, edit, execute, delete",
   "status": 200,
   "expected": true,
@@ -2136,9 +2496,9 @@
  },
  "POST /webhooks/{webhook_id}/{token}/github": {
   "level": "live",
-  "checked": "2026-11-04",
+  "checked": "2026-11-13",
   "test": "webhooks: create, list, fetch, edit, execute, delete",
-  "status": 400,
+  "status": 204,
   "expected": true,
   "schemaOk": true,
   "request": {
@@ -2152,15 +2512,11 @@
     "html_url": "https://github.com/octo",
     "avatar_url": ""
    }
-  },
-  "error": {
-   "type": "InvalidOperation",
-   "location": "crates/delta/src/routes/webhooks/webhook_execute_github.rs:716:17"
   }
  },
  "PUT /applications/{application_id}/commands": {
   "level": "live",
-  "checked": "2026-11-04",
+  "checked": "2026-11-13",
   "test": "commands: global and server command lifecycle",
   "status": 200,
   "expected": true,
@@ -2198,7 +2554,7 @@
  },
  "PUT /applications/{application_id}/servers/{server_id}/commands": {
   "level": "live",
-  "checked": "2026-11-04",
+  "checked": "2026-11-13",
   "test": "commands: global and server command lifecycle",
   "status": 200,
   "expected": true,
@@ -2223,7 +2579,7 @@
  },
  "PUT /channels/{group_id}/recipients/{member_id}": {
   "level": "live",
-  "checked": "2026-11-04",
+  "checked": "2026-11-13",
   "test": "groups: bots cannot add or remove group members",
   "status": 400,
   "expected": true,
@@ -2235,7 +2591,7 @@
  },
  "PUT /channels/{target}/ack/{message}": {
   "level": "live",
-  "checked": "2026-11-04",
+  "checked": "2026-11-13",
   "test": "channels: bots create invites, group features refused",
   "status": 400,
   "expected": true,
@@ -2247,7 +2603,7 @@
  },
  "PUT /channels/{target}/end_ring/{target_user}": {
   "level": "live",
-  "checked": "2026-11-04",
+  "checked": "2026-11-13",
   "test": "voice: a bot gets a LiveKit ticket; force_disconnect is refused",
   "status": 400,
   "expected": true,
@@ -2257,9 +2613,21 @@
    "location": "crates/delta/src/routes/channels/voice_stop_ring.rs:32:20"
   }
  },
+ "PUT /channels/{target}/messages/{msg}/polls/answers/{answer}/votes/@me": {
+  "level": "live",
+  "checked": "2026-11-13",
+  "test": "polls: a bot posts and ends a poll, reads voters, cannot vote",
+  "status": 400,
+  "expected": true,
+  "schemaOk": true,
+  "error": {
+   "type": "IsBot",
+   "location": "crates/delta/src/routes/channels/message_polls.rs:52:20"
+  }
+ },
  "PUT /channels/{target}/messages/{msg}/reactions/{emoji}": {
   "level": "live",
-  "checked": "2026-11-04",
+  "checked": "2026-11-13",
   "test": "messages: reactions and pins; MessageReact event",
   "status": 204,
   "expected": true,
@@ -2267,7 +2635,7 @@
  },
  "PUT /channels/{target}/permissions/default": {
   "level": "live",
-  "checked": "2026-11-04",
+  "checked": "2026-11-13",
   "test": "roles: create, fetch, edit, permissions, ranks, delete",
   "status": 200,
   "expected": true,
@@ -2288,7 +2656,7 @@
     "d": 0
    },
    "role_permissions": {
-    "01M6K6QZPGAWQ4JYB2RY294WFR": {
+    "01M7AR9ARNWJBPPTXGGDPXZA30": {
      "a": 536870912,
      "d": 0
     }
@@ -2297,7 +2665,7 @@
  },
  "PUT /channels/{target}/permissions/{role_id}": {
   "level": "live",
-  "checked": "2026-11-04",
+  "checked": "2026-11-13",
   "test": "roles: create, fetch, edit, permissions, ranks, delete",
   "status": 200,
   "expected": true,
@@ -2314,7 +2682,7 @@
    "server": "01JC0000000000000000000001",
    "name": "General",
    "role_permissions": {
-    "01M6K6QZPGAWQ4JYB2RY294WFR": {
+    "01M7AR9ARNWJBPPTXGGDPXZA30": {
      "a": 536870912,
      "d": 0
     }
@@ -2323,7 +2691,7 @@
  },
  "PUT /custom/emoji/{emoji_id}": {
   "level": "live",
-  "checked": "2026-11-04",
+  "checked": "2026-11-13",
   "test": "emojis: create from an upload, fetch, rename, delete",
   "status": 200,
   "expected": true,
@@ -2347,7 +2715,7 @@
  },
  "PUT /servers/{server}/bans/{target}": {
   "level": "live",
-  "checked": "2026-11-04",
+  "checked": "2026-11-13",
   "test": "moderation: kick, ban, list bans, unban, audit log",
   "status": 200,
   "expected": true,
@@ -2366,7 +2734,7 @@
  },
  "PUT /servers/{target}/ack": {
   "level": "live",
-  "checked": "2026-11-04",
+  "checked": "2026-11-13",
   "test": "servers: bots cannot create servers, join invites or ack",
   "status": 400,
   "expected": true,
@@ -2378,13 +2746,13 @@
  },
  "PUT /servers/{target}/permissions/default": {
   "level": "live",
-  "checked": "2026-11-04",
+  "checked": "2026-11-13",
   "test": "roles: create, fetch, edit, permissions, ranks, delete",
   "status": 200,
   "expected": true,
   "schemaOk": true,
   "request": {
-   "permissions": 2276038022144
+   "permissions": 204586177532928
   },
   "response": {
    "_id": "01JC0000000000000000000001",
@@ -2396,7 +2764,7 @@
     "01JC0000000000000000000004"
    ],
    "roles": {
-    "01M6K6QZPGAWQ4JYB2RY294WFR": {
+    "01M7AR9ARNWJBPPTXGGDPXZA30": {
      "_id": "01JC0000000000000000000010",
      "name": "Helpers",
      "permissions": {
@@ -2407,7 +2775,7 @@
      "hoist": true,
      "rank": 1
     },
-    "01M6K6QYR519M5GV1191QMBKHV": {
+    "01M7AR8ZZKFZ4M5EEAYPBAJT7V": {
      "_id": "01JC0000000000000000000005",
      "name": "Bots",
      "permissions": {
@@ -2417,13 +2785,13 @@
      "rank": 0
     }
    },
-   "default_permissions": 2276038022144,
-   "approximate_member_count": 1
+   "default_permissions": 204586177532928,
+   "approximate_member_count": 6
   }
  },
  "PUT /servers/{target}/permissions/{role_id}": {
   "level": "live",
-  "checked": "2026-11-04",
+  "checked": "2026-11-13",
   "test": "roles: create, fetch, edit, permissions, ranks, delete",
   "status": 200,
   "expected": true,
@@ -2444,7 +2812,16 @@
     "01JC0000000000000000000004"
    ],
    "roles": {
-    "01M6K6QZPGAWQ4JYB2RY294WFR": {
+    "01M7AR8ZZKFZ4M5EEAYPBAJT7V": {
+     "_id": "01JC0000000000000000000005",
+     "name": "Bots",
+     "permissions": {
+      "a": 4398045478879,
+      "d": 0
+     },
+     "rank": 0
+    },
+    "01M7AR9ARNWJBPPTXGGDPXZA30": {
      "_id": "01JC0000000000000000000010",
      "name": "Helpers",
      "permissions": {
@@ -2454,24 +2831,15 @@
      "colour": "#64A9FF",
      "hoist": true,
      "rank": 1
-    },
-    "01M6K6QYR519M5GV1191QMBKHV": {
-     "_id": "01JC0000000000000000000005",
-     "name": "Bots",
-     "permissions": {
-      "a": 4398045478879,
-      "d": 0
-     },
-     "rank": 0
     }
    },
-   "default_permissions": 2276038022144,
-   "approximate_member_count": 1
+   "default_permissions": 204586177532928,
+   "approximate_member_count": 6
   }
  },
  "PUT /users/{target}/block": {
   "level": "live",
-  "checked": "2026-11-04",
+  "checked": "2026-11-13",
   "test": "users: bots cannot use friends or change their username with a password",
   "status": 400,
   "expected": true,
@@ -2483,7 +2851,7 @@
  },
  "PUT /users/{target}/friend": {
   "level": "live",
-  "checked": "2026-11-04",
+  "checked": "2026-11-13",
   "test": "users: bots cannot use friends or change their username with a password",
   "status": 400,
   "expected": true,
@@ -2495,76 +2863,76 @@
  },
  "RATELIMIT headers": {
   "level": "live",
-  "checked": "2026-11-04",
+  "checked": "2026-11-13",
   "test": "rate limits: responses carry X-RateLimit headers",
   "response": {
-   "bucket": "3949919910120114076",
+   "bucket": "2050132909725153956",
    "limit": "20"
   }
  },
  "TUTORIAL commands.mjs": {
   "level": "live",
-  "checked": "2026-11-06",
+  "checked": "2026-11-13",
   "test": "examples-check: options, private, deferred, autocomplete"
  },
  "TUTORIAL deploy.mjs": {
   "level": "live",
-  "checked": "2026-11-06",
+  "checked": "2026-11-13",
   "test": "examples-check: health answers once ready"
  },
  "TUTORIAL events.mjs": {
   "level": "live",
-  "checked": "2026-11-06",
+  "checked": "2026-11-13",
   "test": "examples-check: !ping gets pong"
  },
  "TUTORIAL games.mjs": {
   "level": "live",
-  "checked": "2026-11-06",
+  "checked": "2026-11-13",
   "test": "examples-check: a click changes the message"
  },
  "TUTORIAL hello-raw.mjs": {
   "level": "live",
-  "checked": "2026-11-06",
+  "checked": "2026-11-13",
   "test": "examples-check: /hello answers (no library)"
  },
  "TUTORIAL hello.mjs": {
   "level": "live",
-  "checked": "2026-11-06",
+  "checked": "2026-11-13",
   "test": "examples-check: /hello answers (SDK)"
  },
  "TUTORIAL http-interactions.mjs": {
   "level": "live",
-  "checked": "2026-11-04",
+  "checked": "2026-11-13",
   "test": "tutorial http-interactions.mjs: /hello answers over HTTP"
  },
  "TUTORIAL moderation.mjs": {
   "level": "live",
-  "checked": "2026-11-06",
+  "checked": "2026-11-13",
   "test": "examples-check: timeout refused, purge deletes"
  },
  "TUTORIAL multi-server.mjs": {
   "level": "live",
-  "checked": "2026-11-06",
+  "checked": "2026-11-13",
   "test": "examples-check: the prefix is per server"
  },
  "TUTORIAL upload.mjs": {
   "level": "live",
-  "checked": "2026-11-06",
+  "checked": "2026-11-13",
   "test": "examples-check: /report posts a file"
  },
  "TUTORIAL voice.mjs": {
   "level": "live",
-  "checked": "2026-11-06",
+  "checked": "2026-11-13",
   "test": "examples-check: /join gets a voice ticket"
  },
  "TUTORIAL welcome.mjs": {
   "level": "live",
-  "checked": "2026-11-06",
+  "checked": "2026-11-13",
   "test": "examples-check: a new member is welcomed"
  },
  "USERS dm-send": {
   "level": "live",
-  "checked": "2026-11-04",
+  "checked": "2026-11-13",
   "test": "messages: a bot reaches a member by DM",
   "response": {
    "status": 200,
@@ -2573,22 +2941,7 @@
  },
  "TUTORIAL full-bot.mjs": {
   "level": "live",
-  "checked": "2026-11-06",
+  "checked": "2026-11-13",
   "test": "examples-check: notes survive a restart, a cut line reconnects"
- },
- "POST /channels/{target}/threads": {
-  "level": "live",
-  "checked": "2026-11-06",
-  "test": "examples-check: page threads"
- },
- "GET /channels/{target}/threads": {
-  "level": "live",
-  "checked": "2026-11-06",
-  "test": "examples-check: page threads"
- },
- "PATCH /channels/{target}/thread": {
-  "level": "live",
-  "checked": "2026-11-06",
-  "test": "examples-check: page threads"
  }
 }

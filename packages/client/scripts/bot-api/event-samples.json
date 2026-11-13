@@ -9,17 +9,17 @@
     "_id": "01JC0000000000000000000001",
     "username": "example_user",
     "discriminator": "1234",
-    "bot": {
-     "owner": "01JC0000000000000000000002"
+    "status": {
+     "presence": "Online"
     },
-    "relationship": "User",
+    "relationship": "None",
     "online": true
    }
   ],
   "servers": [
    {
-    "_id": "01JC0000000000000000000003",
-    "owner": "01JC0000000000000000000002",
+    "_id": "01JC0000000000000000000002",
+    "owner": "01JC0000000000000000000003",
     "name": "Docs examples",
     "channels": [
      "01JC0000000000000000000004",
@@ -28,45 +28,48 @@
     "roles": {
      "01JC0000000000000000000006": {
       "_id": "01JC0000000000000000000006",
-      "name": "Moderators",
-      "permissions": {
-       "a": 256,
-       "d": 0
-      },
-      "rank": 1
-     },
-     "01JC0000000000000000000007": {
-      "_id": "01JC0000000000000000000007",
       "name": "Bots",
       "permissions": {
        "a": 4398045478879,
        "d": 0
       },
       "rank": 0
+     },
+     "01JC0000000000000000000007": {
+      "_id": "01JC0000000000000000000007",
+      "name": "Moderators",
+      "permissions": {
+       "a": 256,
+       "d": 0
+      },
+      "rank": 1
      }
     },
-    "default_permissions": 2276038022144,
-    "approximate_member_count": 1
+    "default_permissions": 204586177532928,
+    "approximate_member_count": 3
    }
   ],
   "channels": [
    {
-    "channel_type": "TextChannel",
-    "_id": "01JC0000000000000000000004",
-    "server": "01JC0000000000000000000003",
-    "name": "General",
-    "last_message_id": "01JC0000000000000000000008"
+    "channel_type": "DirectMessage",
+    "_id": "01JC0000000000000000000008",
+    "active": true,
+    "recipients": [
+     "01JC0000000000000000000009",
+     "01JC0000000000000000000001"
+    ],
+    "last_message_id": "01JC0000000000000000000010"
    }
   ],
   "members": [
    {
     "_id": {
-     "server": "01JC0000000000000000000003",
-     "user": "01JC0000000000000000000001"
+     "server": "01JC0000000000000000000002",
+     "user": "01JC0000000000000000000009"
     },
-    "joined_at": "2026-11-06T08:26:49.699Z",
+    "joined_at": "2026-11-13T15:27:40.772Z",
     "roles": [
-     "01JC0000000000000000000007"
+     "01JC0000000000000000000006"
     ]
    }
   ],
@@ -74,12 +77,12 @@
  },
  "Message": {
   "type": "Message",
-  "_id": "01JC0000000000000000000009",
-  "nonce": "01JC0000000000000000000010",
+  "_id": "01JC0000000000000000000011",
+  "nonce": "01JC0000000000000000000012",
   "channel": "01JC0000000000000000000004",
-  "author": "01JC0000000000000000000002",
+  "author": "01JC0000000000000000000003",
   "user": {
-   "_id": "01JC0000000000000000000002",
+   "_id": "01JC0000000000000000000003",
    "username": "example_user",
    "discriminator": "1234",
    "style": {
@@ -96,84 +99,93 @@
     "nameplate": "galaxy"
    },
    "relationship": "None",
-   "online": false
+   "online": true
   },
   "member": {
    "_id": {
-    "server": "01JC0000000000000000000003",
-    "user": "01JC0000000000000000000002"
+    "server": "01JC0000000000000000000002",
+    "user": "01JC0000000000000000000003"
    },
-   "joined_at": "2026-11-06T08:26:49.199Z",
+   "joined_at": "2026-11-13T15:27:40.201Z",
    "nickname": "مشرف"
   },
-  "content": "Hello"
+  "content": "Hello",
+  "seq": 1
  },
  "MessageUpdate": {
   "type": "MessageUpdate",
-  "id": "01JC0000000000000000000009",
+  "id": "01JC0000000000000000000011",
   "channel": "01JC0000000000000000000004",
   "data": {
    "content": "Hello again",
-   "edited": "2026-11-06T08:27:41.701Z",
+   "edited": "2026-11-13T15:28:22.631Z",
    "embeds": []
   },
-  "clear": []
+  "clear": [],
+  "seq": 2
  },
  "MessageReact": {
   "type": "MessageReact",
-  "id": "01JC0000000000000000000009",
+  "id": "01JC0000000000000000000011",
   "channel_id": "01JC0000000000000000000004",
-  "user_id": "01JC0000000000000000000002",
-  "emoji_id": "👍"
+  "user_id": "01JC0000000000000000000003",
+  "emoji_id": "👍",
+  "seq": 3
  },
  "MessageUnreact": {
   "type": "MessageUnreact",
-  "id": "01JC0000000000000000000009",
+  "id": "01JC0000000000000000000011",
   "channel_id": "01JC0000000000000000000004",
-  "user_id": "01JC0000000000000000000002",
-  "emoji_id": "👍"
+  "user_id": "01JC0000000000000000000003",
+  "emoji_id": "👍",
+  "seq": 4
  },
  "MessageDelete": {
   "type": "MessageDelete",
-  "id": "01JC0000000000000000000009",
-  "channel": "01JC0000000000000000000004"
+  "id": "01JC0000000000000000000011",
+  "channel": "01JC0000000000000000000004",
+  "seq": 5
  },
  "ServerUpdate": {
   "type": "ServerUpdate",
-  "id": "01JC0000000000000000000003",
+  "id": "01JC0000000000000000000002",
   "data": {
    "channels": [
     "01JC0000000000000000000004",
     "01JC0000000000000000000005"
    ]
   },
-  "clear": []
+  "clear": [],
+  "seq": 6
  },
  "ChannelCreate": {
   "type": "ChannelCreate",
   "channel_type": "TextChannel",
-  "_id": "01JC0000000000000000000011",
-  "server": "01JC0000000000000000000003",
-  "name": "samples"
+  "_id": "01JC0000000000000000000013",
+  "server": "01JC0000000000000000000002",
+  "name": "samples",
+  "seq": 7
  },
  "ChannelUpdate": {
   "type": "ChannelUpdate",
-  "id": "01JC0000000000000000000011",
+  "id": "01JC0000000000000000000013",
   "data": {
    "description": "Sample"
   },
-  "clear": []
+  "clear": [],
+  "seq": 8
  },
  "ChannelDelete": {
   "type": "ChannelDelete",
-  "id": "01JC0000000000000000000011"
+  "id": "01JC0000000000000000000013",
+  "seq": 9
  },
  "ServerRoleUpdate": {
   "type": "ServerRoleUpdate",
-  "id": "01JC0000000000000000000003",
-  "role_id": "01JC0000000000000000000012",
+  "id": "01JC0000000000000000000002",
+  "role_id": "01JC0000000000000000000014",
   "data": {
-   "id": "01JC0000000000000000000012",
+   "id": "01JC0000000000000000000014",
    "name": "Sample",
    "permissions": {
     "a": 0,
@@ -182,100 +194,107 @@
    "hoist": false,
    "rank": 2
   },
-  "clear": []
+  "clear": [],
+  "seq": 10
  },
  "ServerRoleDelete": {
   "type": "ServerRoleDelete",
-  "id": "01JC0000000000000000000003",
-  "role_id": "01JC0000000000000000000012"
+  "id": "01JC0000000000000000000002",
+  "role_id": "01JC0000000000000000000014",
+  "seq": 11
  },
  "ServerMemberLeave": {
   "type": "ServerMemberLeave",
-  "id": "01JC0000000000000000000003",
-  "user": "01JC0000000000000000000013",
-  "reason": "Leave"
+  "id": "01JC0000000000000000000002",
+  "user": "01JC0000000000000000000001",
+  "reason": "Leave",
+  "seq": 13
  },
  "ServerMemberJoin": {
   "type": "ServerMemberJoin",
-  "id": "01JC0000000000000000000003",
-  "user": "01JC0000000000000000000013",
+  "id": "01JC0000000000000000000002",
+  "user": "01JC0000000000000000000001",
   "member": {
    "_id": {
-    "server": "01JC0000000000000000000003",
-    "user": "01JC0000000000000000000013"
+    "server": "01JC0000000000000000000002",
+    "user": "01JC0000000000000000000001"
    },
-   "joined_at": "2026-11-06T08:27:42.068Z"
-  }
+   "joined_at": "2026-11-13T15:28:22.971Z"
+  },
+  "seq": 14
  },
  "ServerMemberUpdate": {
   "type": "ServerMemberUpdate",
   "id": {
-   "server": "01JC0000000000000000000003",
-   "user": "01JC0000000000000000000013"
+   "server": "01JC0000000000000000000002",
+   "user": "01JC0000000000000000000001"
   },
   "data": {
    "nickname": "Sample"
   },
-  "clear": []
+  "clear": [],
+  "seq": 15
  },
  "ChannelStartTyping": {
   "type": "ChannelStartTyping",
   "id": "01JC0000000000000000000004",
-  "user": "01JC0000000000000000000001"
+  "user": "01JC0000000000000000000009",
+  "seq": 16
  },
  "ApplicationCommandsUpdate": {
   "type": "ApplicationCommandsUpdate",
-  "application_id": "01JC0000000000000000000001",
-  "server_id": "01JC0000000000000000000003"
+  "application_id": "01JC0000000000000000000009",
+  "server_id": "01JC0000000000000000000002",
+  "seq": 18
  },
  "InteractionCreate": {
   "type": "InteractionCreate",
   "interaction": {
-   "_id": "01JC0000000000000000000014",
+   "_id": "01JC0000000000000000000015",
    "version": 1,
-   "application_id": "01JC0000000000000000000001",
+   "application_id": "01JC0000000000000000000009",
    "type": "Command",
    "token": "YOUR_TOKEN_HERE",
    "user": {
-    "_id": "01JC0000000000000000000013",
+    "_id": "01JC0000000000000000000001",
     "username": "example_user",
     "discriminator": "1234",
-    "style": {
-     "name_font": "wide"
+    "status": {
+     "presence": "Online"
     },
     "relationship": "None",
     "online": true
    },
    "member": {
     "_id": {
-     "server": "01JC0000000000000000000003",
-     "user": "01JC0000000000000000000013"
+     "server": "01JC0000000000000000000002",
+     "user": "01JC0000000000000000000001"
     },
-    "joined_at": "2026-11-06T08:27:42.068Z",
+    "joined_at": "2026-11-13T15:28:22.971Z",
     "nickname": "Sample"
    },
-   "server_id": "01JC0000000000000000000003",
+   "server_id": "01JC0000000000000000000002",
    "channel_id": "01JC0000000000000000000004",
-   "user_permissions": 2276038022144,
-   "app_permissions": 4398045478879,
-   "user_permissions_string": "2276038022144",
-   "app_permissions_string": "4398045478879",
+   "user_permissions": 204586177532928,
+   "app_permissions": 206708184989663,
+   "user_permissions_string": "204586177532928",
+   "app_permissions_string": "206708184989663",
    "command": {
-    "id": "01JC0000000000000000000015",
+    "id": "01JC0000000000000000000016",
     "name": "sample",
     "type": "ChatInput",
-    "version": "01JC0000000000000000000016",
+    "version": "01JC0000000000000000000017",
     "options": [
      {
       "name": "who",
       "type": "User",
-      "value": "01JC0000000000000000000002"
+      "value": "01JC0000000000000000000003"
      }
     ],
     "resolved": {
      "users": {
-      "01JC0000000000000000000002": {
-       "_id": "01JC0000000000000000000002",
+      "01JC0000000000000000000003": {
+       "_id": "01JC0000000000000000000003",
        "username": "example_user",
        "discriminator": "1234",
        "style": {
@@ -292,29 +311,30 @@
         "nameplate": "galaxy"
        },
        "relationship": "None",
-       "online": false
+       "online": true
       }
      },
      "members": {
-      "01JC0000000000000000000002": {
+      "01JC0000000000000000000003": {
        "_id": {
-        "server": "01JC0000000000000000000003",
-        "user": "01JC0000000000000000000002"
+        "server": "01JC0000000000000000000002",
+        "user": "01JC0000000000000000000003"
        },
-       "joined_at": "2026-11-06T08:26:49.199Z",
+       "joined_at": "2026-11-13T15:27:40.201Z",
        "nickname": "مشرف"
       }
      }
     }
    },
-   "respond_by": "2026-11-06T08:27:46.336Z",
-   "expires_at": "2026-11-06T08:42:43.336Z"
-  }
+   "respond_by": "2026-11-13T15:28:27.160Z",
+   "expires_at": "2026-11-13T15:43:24.160Z"
+  },
+  "seq": 19
  },
  "__headers": {
   "x-ratelimit-bucket": "10916110026516615864",
   "x-ratelimit-limit": "20",
-  "x-ratelimit-remaining": "13",
-  "x-ratelimit-reset-after": "2932"
+  "x-ratelimit-remaining": "14",
+  "x-ratelimit-reset-after": "5483"
  }
 }

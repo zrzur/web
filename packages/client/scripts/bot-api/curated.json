@@ -32,7 +32,8 @@
     "InvalidOperation"
    ],
    "restrictions": [
-    "Accepts GitHub webhook deliveries (X-GitHub-Event header); unsupported event types get InvalidOperation."
+    "Accepts GitHub webhook deliveries (X-GitHub-Event header); unsupported event types get InvalidOperation.",
+    "Webhooks are switched on per instance: `GET /` shows `features.webhooks`. Where they are off, creating and listing answer FeatureDisabled and every `/webhooks/...` address answers 404 NotFound."
    ]
   },
   "POST /channels/{target}/messages": {
@@ -41,10 +42,12 @@
    ],
    "errors": [
     "EmptyMessage",
-    "PayloadTooLarge"
+    "PayloadTooLarge",
+    "FeatureDisabled"
    ],
    "restrictions": [
-    "A message with no content, embeds or attachments gets 422 EmptyMessage; one over the size limits gets 422 PayloadTooLarge (other validation errors are 400 FailedValidation)."
+    "A message with no content, embeds or attachments gets 422 EmptyMessage; one over the size limits gets 422 PayloadTooLarge (other validation errors are 400 FailedValidation).",
+    "A `poll` needs polls switched on for the instance (`features.polls` in `GET /`); where they are off the answer is FeatureDisabled."
    ]
   },
   "PATCH /channels/{target}/messages/{msg}": {
@@ -190,26 +193,44 @@
   "POST /channels/{channel_id}/webhooks": {
    "events": [
     "WebhookCreate"
+   ],
+   "restrictions": [
+    "Webhooks are switched on per instance: `GET /` shows `features.webhooks`. Where they are off, creating and listing answer FeatureDisabled and every `/webhooks/...` address answers 404 NotFound."
+   ],
+   "errors": [
+    "FeatureDisabled"
    ]
   },
   "PATCH /webhooks/{webhook_id}": {
    "events": [
     "WebhookUpdate"
+   ],
+   "restrictions": [
+    "Webhooks are switched on per instance: `GET /` shows `features.webhooks`. Where they are off, creating and listing answer FeatureDisabled and every `/webhooks/...` address answers 404 NotFound."
    ]
   },
   "PATCH /webhooks/{webhook_id}/{token}": {
    "events": [
     "WebhookUpdate"
+   ],
+   "restrictions": [
+    "Webhooks are switched on per instance: `GET /` shows `features.webhooks`. Where they are off, creating and listing answer FeatureDisabled and every `/webhooks/...` address answers 404 NotFound."
    ]
   },
   "DELETE /webhooks/{webhook_id}": {
    "events": [
     "WebhookDelete"
+   ],
+   "restrictions": [
+    "Webhooks are switched on per instance: `GET /` shows `features.webhooks`. Where they are off, creating and listing answer FeatureDisabled and every `/webhooks/...` address answers 404 NotFound."
    ]
   },
   "DELETE /webhooks/{webhook_id}/{token}": {
    "events": [
     "WebhookDelete"
+   ],
+   "restrictions": [
+    "Webhooks are switched on per instance: `GET /` shows `features.webhooks`. Where they are off, creating and listing answer FeatureDisabled and every `/webhooks/...` address answers 404 NotFound."
    ]
   },
   "POST /webhooks/{webhook_id}/{token}": {
@@ -221,17 +242,24 @@
     "PayloadTooLarge"
    ],
    "restrictions": [
-    "A message with no content, embeds or attachments gets 422 EmptyMessage; one over the size limits gets 422 PayloadTooLarge (other validation errors are 400 FailedValidation)."
+    "A message with no content, embeds or attachments gets 422 EmptyMessage; one over the size limits gets 422 PayloadTooLarge (other validation errors are 400 FailedValidation).",
+    "Webhooks are switched on per instance: `GET /` shows `features.webhooks`. Where they are off, creating and listing answer FeatureDisabled and every `/webhooks/...` address answers 404 NotFound."
    ]
   },
   "PATCH /webhooks/{webhook_id}/{token}/{message_id}": {
    "events": [
     "MessageUpdate"
+   ],
+   "restrictions": [
+    "Webhooks are switched on per instance: `GET /` shows `features.webhooks`. Where they are off, creating and listing answer FeatureDisabled and every `/webhooks/...` address answers 404 NotFound."
    ]
   },
   "DELETE /webhooks/{webhook_id}/{token}/{message_id}": {
    "events": [
     "MessageDelete"
+   ],
+   "restrictions": [
+    "Webhooks are switched on per instance: `GET /` shows `features.webhooks`. Where they are off, creating and listing answer FeatureDisabled and every `/webhooks/...` address answers 404 NotFound."
    ]
   },
   "PATCH /users/{target}": {
@@ -383,6 +411,105 @@
    "restrictions": [
     "The first message (content, up to 2000 characters) is sent like any message of the bot: Send Messages and the mention rules apply, and if it is refused no thread is made. It takes no embeds, components or attachments yet; send those in a second message."
    ]
+  },
+  "GET /bots/{bot_id}": {
+   "restrictions": [
+    "With a bot token it returns only the bot itself (its own id), to read settings such as `privileged_intents`; another bot's id answers IsBot. The token is never in the answer."
+   ],
+   "errors": [
+    "IsBot"
+   ]
+  },
+  "GET /channels/{channel_id}/webhooks": {
+   "restrictions": [
+    "Webhooks are switched on per instance: `GET /` shows `features.webhooks`. Where they are off, creating and listing answer FeatureDisabled and every `/webhooks/...` address answers 404 NotFound."
+   ],
+   "errors": [
+    "FeatureDisabled"
+   ]
+  },
+  "GET /servers/{target}/webhooks": {
+   "restrictions": [
+    "Webhooks are switched on per instance: `GET /` shows `features.webhooks`. Where they are off, creating and listing answer FeatureDisabled and every `/webhooks/...` address answers 404 NotFound."
+   ],
+   "errors": [
+    "FeatureDisabled"
+   ]
+  },
+  "GET /webhooks/{webhook_id}": {
+   "restrictions": [
+    "Webhooks are switched on per instance: `GET /` shows `features.webhooks`. Where they are off, creating and listing answer FeatureDisabled and every `/webhooks/...` address answers 404 NotFound."
+   ]
+  },
+  "GET /webhooks/{webhook_id}/{token}": {
+   "restrictions": [
+    "Webhooks are switched on per instance: `GET /` shows `features.webhooks`. Where they are off, creating and listing answer FeatureDisabled and every `/webhooks/...` address answers 404 NotFound."
+   ]
+  },
+  "DELETE /webhooks/{webhook_id}/{token}/messages/{message_id}": {
+   "restrictions": [
+    "Webhooks are switched on per instance: `GET /` shows `features.webhooks`. Where they are off, creating and listing answer FeatureDisabled and every `/webhooks/...` address answers 404 NotFound."
+   ]
+  },
+  "GET /webhooks/{webhook_id}/{token}/messages/{message_id}": {
+   "restrictions": [
+    "Webhooks are switched on per instance: `GET /` shows `features.webhooks`. Where they are off, creating and listing answer FeatureDisabled and every `/webhooks/...` address answers 404 NotFound."
+   ]
+  },
+  "PATCH /webhooks/{webhook_id}/{token}/messages/{message_id}": {
+   "restrictions": [
+    "Webhooks are switched on per instance: `GET /` shows `features.webhooks`. Where they are off, creating and listing answer FeatureDisabled and every `/webhooks/...` address answers 404 NotFound."
+   ]
+  },
+  "POST /webhooks/{webhook_id}/{token}/slack": {
+   "restrictions": [
+    "Webhooks are switched on per instance: `GET /` shows `features.webhooks`. Where they are off, creating and listing answer FeatureDisabled and every `/webhooks/...` address answers 404 NotFound."
+   ]
+  },
+  "POST /webhooks/{webhook_id}/test": {
+   "restrictions": [
+    "Webhooks are switched on per instance: `GET /` shows `features.webhooks`. Where they are off, creating and listing answer FeatureDisabled and every `/webhooks/...` address answers 404 NotFound."
+   ]
+  },
+  "POST /webhooks/{webhook_id}/token": {
+   "restrictions": [
+    "Webhooks are switched on per instance: `GET /` shows `features.webhooks`. Where they are off, creating and listing answer FeatureDisabled and every `/webhooks/...` address answers 404 NotFound."
+   ]
+  },
+  "POST /channels/{target}/messages/forward": {
+   "restrictions": [
+    "Forwarding is switched on per instance: `GET /` shows `features.forwarding`. Where it is off the answer is FeatureDisabled."
+   ],
+   "errors": [
+    "FeatureDisabled"
+   ]
+  },
+  "PUT /channels/{target}/messages/{msg}/polls/answers/{answer}/votes/@me": {
+   "status": "unsupported",
+   "restrictions": [
+    "Bots cannot vote in a poll: a bot token gets IsBot."
+   ],
+   "errors": [
+    "IsBot"
+   ]
+  },
+  "DELETE /channels/{target}/messages/{msg}/polls/answers/{answer}/votes/@me": {
+   "status": "unsupported",
+   "restrictions": [
+    "Bots cannot vote in a poll: a bot token gets IsBot."
+   ],
+   "errors": [
+    "IsBot"
+   ]
+  },
+  "POST /servers/{target}/messages/search": {
+   "status": "partial",
+   "restrictions": [
+    "Bots may only list pinned messages (`pinned: true`); text search answers IsBot."
+   ],
+   "errors": [
+    "IsBot"
+   ]
   }
  },
  "gateway": {
@@ -480,6 +607,10 @@
   },
   "Authenticated": {
    "docs": "The token was accepted; Ready follows"
+  },
+  "MessagePollChoice": {
+   "audience": "users",
+   "docs": "Your own choice on a poll changed (people only: bots cannot vote)"
   }
  }
 }

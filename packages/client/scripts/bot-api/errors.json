@@ -92,7 +92,12 @@
   "RenderFail": ["The server could not render a template.", "Retry later."],
   "LabelMe": ["An unlabelled server error.", "Retry later. Report it if it stays."],
   "ContactSupport": ["The server wants a person to contact support. `msg` says why.", "Show the message to the owner."],
-  "InvalidFlagValue": ["A flag has a value the server does not know.", "Check the flags."]
+  "InvalidFlagValue": ["A flag has a value the server does not know.", "Check the flags."],
+  "TooManySounds": ["The server's soundboard is full.", "Remove a sound first. `max` is the limit."],
+  "SoundAlreadyAdded": ["This library sound is on the server's soundboard already.", "Nothing to do."],
+  "SoundLibraryUnavailable": ["The sound library is not ready yet.", "Try again in a minute."],
+  "TooManySpeakers": ["The stage has as many speakers as it may have.", "Move a speaker back to the audience first. `max` is the limit."],
+  "PollEnded": ["The poll is over: no more votes, and it cannot be ended again.", "Do not retry."]
  },
  "accounts": {
   "AlreadyOnboarded": ["The account already has a username.", "Used by the app only."],
@@ -143,6 +148,8 @@
   "DisallowedMFAMethod": ["This check is not allowed here.", "People only."],
   "AgeRequirementNotMet": ["The account is too young for this.", "People only."],
   "AgeChangeNotAllowed": ["The age cannot be changed.", "People only."],
-  "AgeRestricted": ["The content is limited by age.", "People only."]
+  "AgeRestricted": ["The content is limited by age.", "People only."],
+  "TooManyServerEvents": ["The server has as many scheduled events as it may have.", "People only."],
+  "ForwardMatureContent": ["A message from a mature channel can only be forwarded into another mature channel.", "People only: bots cannot forward."]
  }
 }

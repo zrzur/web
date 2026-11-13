@@ -4,7 +4,7 @@ Jede Nutzung eines Slash-Befehls, Menübefehls, einer Schaltfläche, eines Auswa
 
 ## Das brauchst du {#you-will-need}
 
-Eine laufende Gateway-Verbindung mit dem Intent `INTERACTIONS` oder eine [HTTP-Adresse](/developers/docs/http-interactions). Befehle funktionieren nur in Serverkanälen. Schaltflächen, Auswahlmenüs und Formulare funktionieren auch in einer Direktnachricht mit dem Bot; `server_id` und `member` fehlen dann.
+Eine laufende Gateway-Verbindung mit dem Intent `INTERACTIONS` oder eine [HTTP-Adresse](/developers/docs/http-interactions). Befehle funktionieren in Serverkanälen und, für die globalen Befehle des Bots ohne Serverberechtigung, in einer Direktnachricht mit ihm. Schaltflächen, Auswahlmenüs und Formulare funktionieren in dieser Direktnachricht auch; `server_id` und `member` fehlen dann.
 
 ## Die Zeitlimits {#time-limits}
 

@@ -22,7 +22,10 @@ import { fileURLToPath, pathToFileURL } from "node:url";
 
 const here = dirname(fileURLToPath(import.meta.url));
 const botApiDir = resolve(here, "..");
-const sdkDist = resolve(botApiDir, "../../../stoat.js/lib/bot/index.js");
+// ZRZUR_SDK_DIST: another build of @zrzur/sdk/bot (e.g. the branch about to be published)
+const sdkDist = process.env.ZRZUR_SDK_DIST
+  ? resolve(process.env.ZRZUR_SDK_DIST)
+  : resolve(botApiDir, "../../../stoat.js/lib/bot/index.js");
 const API = process.env.ZRZUR_API_URL ?? "http://127.0.0.1:14702";
 const WS = process.env.ZRZUR_WS_URL ?? "ws://127.0.0.1:14703";
 const ONLY = process.argv[2];
@@ -1401,10 +1404,11 @@ async function pageChecks() {
     return `click ${click.status}, server_id ${interaction.server_id ?? "absent"}, member ${interaction.member ? "present" : "absent"}`;
   });
 
-  await check("a command in a direct message is refused", async () => {
-    const dm = await must("GET", `/users/${owner.id}/dm`, {
-      session: member.session,
-    }).catch(() => null);
+  await check("a global command in a direct message with the bot", async () => {
+    // a global command that needs no server permission works in the
+    // person's direct message with the bot; server_id and member are absent
+    const socket = gateway(tutorialToken);
+    await socket.opened;
     const channel = (await must("GET", `/users/${member.id}/dm`, bot_))._id;
     const used = await http("POST", "/interactions", {
       session: member.session,
@@ -1417,7 +1421,17 @@ async function pageChecks() {
         options: [],
       },
     });
-    return `${used.status} ${used.data?.type} ${dm ? "" : ""}`;
+    expect(used.status < 300, `use in a DM: ${used.status} ${used.data?.type}`);
+    const { interaction } = await socket.wait(
+      (e) =>
+        e.type === "InteractionCreate" && e.interaction.channel_id === channel,
+    );
+    socket.close();
+    expect(
+      interaction.command?.name === "both" && !interaction.server_id,
+      "the command arrives without a server",
+    );
+    return `use ${used.status}, server_id ${interaction.server_id ?? "absent"}, member ${interaction.member ? "present" : "absent"}`;
   });
 
   await check("HTTP interactions on this stack", async () => {
@@ -1434,8 +1448,16 @@ async function pageChecks() {
 
   await check("the server's public addresses", async () => {
     const root = await must("GET", "/", {});
-    const openapi = await http("GET", "/openapi.json");
-    const schema = await http("GET", "/gateway/schema");
+    // these two share a small bucket with everything else this run asked:
+    // wait out a 429 once instead of calling the documents missing
+    const patient = async (path) => {
+      const first = await http("GET", path);
+      if (first.status !== 429) return first;
+      await sleep((first.data?.retry_after ?? 10_000) + 250);
+      return http("GET", path);
+    };
+    const openapi = await patient("/openapi.json");
+    const schema = await patient("/gateway/schema");
     expect(openapi.status === 200 && schema.status === 200, "documents answer");
     return `limits present: ${!!root.features.limits}`;
   });

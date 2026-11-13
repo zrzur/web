@@ -4,7 +4,7 @@ Every use of a slash command, a menu command, a button, a select, a form or auto
 
 ## You will need {#you-will-need}
 
-A running gateway connection with the `INTERACTIONS` intent, or an [HTTP address](/developers/docs/http-interactions). Commands work in server channels only. Buttons, selects and forms also work in a direct message with the bot; `server_id` and `member` are then absent.
+A running gateway connection with the `INTERACTIONS` intent, or an [HTTP address](/developers/docs/http-interactions). Commands work in server channels, and in a direct message with the bot for its global commands that need no server permission. Buttons, selects and forms work in that direct message too; `server_id` and `member` are then absent.
 
 ## The time limits {#time-limits}
 

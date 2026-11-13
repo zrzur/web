@@ -28,12 +28,13 @@ Fehler des Webservers selbst (kein Token, unbekannte Route, kein JSON im Text) s
 
 Ein Bot sieht nur die Server, auf denen er installiert wurde. Für einen Server, auf dem er nicht ist, unterscheiden sich die Antworten je nach Route:
 
-| Aufruf                                            | Antwort heute             |
-| ------------------------------------------------- | ------------------------- |
-| `GET /servers/{target}`                           | `404 NotFound`            |
-| `GET /channels/{target}` für einen seiner Kanäle  | `403 MissingPermission`   |
+| Aufruf                                                          | Antwort                   |
+| --------------------------------------------------------------- | ------------------------- |
+| `GET /servers/{target}`                                         | `404 NotFound`            |
+| `GET /channels/{target}` für einen seiner Kanäle                | `404 NotFound`            |
+| `POST /channels/{target}/messages` für einen seiner Kanäle      | `403 MissingPermission`   |
 
-Ein `403 MissingPermission` auf eine Kanal-ID, die jemand deinem Bot gegeben hat, kann also heißen, dass der Bot dort nicht installiert ist. Frage `GET /servers/{target}`: `404 NotFound` heißt, installiere den Bot zuerst, mit dem Einladungslink aus dem Entwicklerportal. Ein `200` heißt, der Bot ist da und sieht den Kanal nicht: Ein privater Kanal braucht „Kanal sehen“ für eine der Rollen des Bots. Ab der nächsten Version antwortet auch der Kanal `404 NotFound` (siehe [Änderungsprotokoll](/developers/docs/changelog#upcoming)).
+Ein `403 MissingPermission` beim Schreiben in einen Kanal, dessen ID jemand deinem Bot gegeben hat, kann also heißen, dass der Bot dort nicht installiert ist. Frage `GET /channels/{target}`: `404 NotFound` heißt, der Bot ist nicht auf diesem Server (oder den Kanal gibt es nicht), installiere ihn also zuerst, mit dem Einladungslink aus dem Entwicklerportal. Ein `403 MissingPermission` dort heißt, der Bot ist auf dem Server und sieht den Kanal nicht: Ein privater Kanal braucht „Kanal sehen“ für eine der Rollen des Bots.
 
 ## Fehler, die ein Bot bekommen kann {#bot-errors}
 

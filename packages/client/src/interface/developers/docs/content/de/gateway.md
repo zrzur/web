@@ -36,7 +36,8 @@ Alles, was du sonst sendest, ist auf 1 MiB pro Nachricht begrenzt.
 | Was du bekommst                                                      | Ursache                                     | Was zu tun ist                           |
 | -------------------------------------------------------------------- | ------------------------------------------- | ---------------------------------------- |
 | `{ "type": "Error", "data": { "type": "InvalidSession" } }`, schließt | Falsches oder zurückgesetztes Token, gesperrter Bot, oder kein `Authenticate` in 15 Sekunden | Stoppe. Verbinde nicht in einer Schleife neu |
-| `{ "type": "Error", "data": { "type": "MissingIntent", "intent": "SERVER_MEMBERS" } }`, schließt mit Code `4014` | Ein privilegierter Intent ist aus | Schalte ihn im Entwicklerportal ein und verbinde dich neu, oder [verbinde dich ohne ihn](/developers/docs/gateway#intent-off) |
+| `{ "type": "Error", "data": { "type": "MissingIntent", "intent": "SERVER_MEMBERS" } }`, schließt mit Code `4014` | Ein privilegierter Intent ist aus. Der Schließgrund nennt ihn, zum Beispiel `Disallowed intents: MESSAGE_CONTENT (switched on: none)` | Schalte ihn im Entwicklerportal ein und verbinde dich neu, oder [verbinde dich ohne ihn](/developers/docs/gateway#intent-off) |
+| `{ "type": "Error", "data": { "type": "InternalError" } }`, schließt mit Code `1013` | Der Server konnte die Einstellungen des Bots in dem Moment nicht lesen | Verbinde dich neu, mit der Wartezeit aus [Neu verbinden](/developers/docs/gateway#reconnect) |
 
 ## Verbunden bleiben {#stay-connected}
 
@@ -53,13 +54,30 @@ Das Zrzur-Gateway selbst schließt eine stille Bot-Verbindung nie, aber Proxys u
 Eine Verbindung kann jederzeit enden: ein Update bei uns, ein Netzproblem, dein Laptop schläft ein. Plane dafür.
 
 1. Wenn der Socket schließt, warte 1 Sekunde und verdopple die Wartezeit nach jedem Fehlschlag bis 30 Sekunden. Füge etwas Zufall hinzu, damit nicht viele Bots gleichzeitig zurückkommen.
-2. Verbinde dich und sende wieder `Authenticate`. Du bekommst ein neues `Ready`.
-3. Setze die Wartezeit nach `Ready` zurück.
-4. Wiederhole nicht bei `InvalidSession` oder Code `4014`: Dieselbe Anfrage scheitert wieder. Stoppe und sage einem Menschen Bescheid.
+2. Verbinde dich und sende `Resume`, wenn die Sitzung fortsetzbar war (siehe [Fortsetzen nach einem Abbruch](/developers/docs/gateway#resume)), sonst `Authenticate`. Nach `Authenticate` bekommst du ein neues `Ready`.
+3. Setze die Wartezeit nach `Ready` oder `Resumed` zurück.
+4. Wiederhole nicht nach einem `Error`-Ereignis vom Typ `InvalidSession` und nicht nach Code `4014`: Dieselbe Anfrage scheitert wieder. Stoppe und sage einem Menschen Bescheid. Nach Code `1013` wiederhole: Der Server konnte die Einstellungen des Bots in dem Moment nicht lesen.
 
-## Fortsetzen wird nicht unterstützt {#resume}
+## Fortsetzen nach einem Abbruch {#resume}
 
-Es gibt noch kein Fortsetzen und keine Sequenznummern; beides ist für die nächste Version geplant (siehe [Änderungsprotokoll](/developers/docs/changelog)). Ereignisse während deiner Abwesenheit sind weg. Hole nach jedem `Ready` per REST, was dein Bot nicht verpassen darf, etwa die neuesten Nachrichten eines Kanals (`GET /channels/{target}/messages` mit `after` und `sort=Oldest`, siehe [Nachrichten](/developers/docs/messages#read-messages)). Ein Befehl während deiner Abwesenheit scheitert für die Person, und sie kann es erneut versuchen.
+Eine Sitzung kann dort weitermachen, wo sie aufgehört hat. Bei einem kurzen Abbruch geht so nichts verloren. Fordere das beim Authentifizieren an:
+
+@@3
+
+`Ready` enthält dann `session_id`. Jedes Paket nach `Ready` trägt `seq`, pro Sitzung ab 1 gezählt: Merke dir die letzte Nummer, die du verarbeitet hast. Ein `Bulk`-Paket hat ein `seq`, seine Einträge haben keins. `Authenticated`, `Ready`, `Pong`, `Error`, `InvalidSession` und `Resumed` haben kein `seq`.
+
+Nach einem Abbruch behält das Gateway die Sitzung 2 Minuten, mit höchstens ihren letzten 1000 Ereignissen und 4 MiB davon. Öffne einen neuen Socket und sende das als erste Nachricht, statt `Authenticate`:
+
+@@4
+
+| Was du bekommst                                    | Bedeutung                                                                    | Was zu tun ist                                                        |
+| -------------------------------------------------- | ---------------------------------------------------------------------------- | --------------------------------------------------------------------- |
+| Die verpassten Ereignisse der Reihe nach, dann `Resumed` | Die Sitzung läuft weiter. Es kommt kein neues `Ready`                  | Mach weiter und zähle `seq` weiter                                    |
+| `{ "type": "InvalidSession", "resumable": false }` | Die Sitzung ist weg, oder das Verpasste passt nicht mehr in das Aufbewahrte | Sende `Authenticate` auf demselben Socket und hole dann per REST nach |
+
+Eine Wiedergabe kann Lücken in `seq` haben: Tipp-Ereignisse werden nicht aufbewahrt, und Ereignisse aus Orten, die der Bot nicht mehr sieht, fehlen. Das Gateway behält höchstens 3 abgebrochene Sitzungen pro Bot. Ein zweites abgelehntes `Resume` auf demselben Socket schließt ihn.
+
+Ohne `"resumable": true` wird nichts aufbewahrt, und Ereignisse während deiner Abwesenheit sind weg. Hole nach einem neuen `Ready` per REST, was dein Bot nicht verpassen darf, etwa die neuesten Nachrichten eines Kanals (`GET /channels/{target}/messages` mit `after` und `sort=Oldest`, siehe [Nachrichten](/developers/docs/messages#read-messages)). Ein Befehl während deiner Abwesenheit scheitert für die Person, und sie kann es erneut versuchen.
 
 ## Sharding wird nicht unterstützt {#sharding}
 
@@ -71,13 +89,13 @@ Zwei Verbindungen mit demselben Token funktionieren, und beide empfangen alles. 
 
 Mehrere Ereignisse können in einem Paket kommen:
 
-@@3
+@@5
 
 Packe `Bulk` immer aus und behandle jedes Ereignis. Ein Bot, der es ignoriert, verpasst Ereignisse, auch Befehle.
 
 ## Was du senden kannst {#client-messages}
 
-@@4
+@@6
 
 ## Intents {#intents}
 
@@ -89,7 +107,7 @@ Intents legen fest, was eine Verbindung empfängt. Das Gateway wendet sie an, al
 | `SERVER_MESSAGES` | `2`    | Nachrichten und Tippen in Serverkanälen                                  |
 | `DIRECT_MESSAGES` | `4`    | Nachrichten und Tippen in Direktnachrichten und Gruppen                  |
 | `REACTIONS`       | `8`    | Reaktionen, die hinzukommen oder wegfallen                               |
-| `VOICE_STATES`    | `16`   | Beitritte und Austritte in Sprachkanälen, Anrufe, Sprachstatus in `Ready` |
+| `VOICE_STATES`    | `16`   | Beitritte und Austritte in Sprachkanälen, Anrufe, Änderungen einer Bühne, abgespielte Soundboard-Sounds, Sprachstatus in `Ready` |
 | `INTERACTIONS`    | `32`   | `InteractionCreate`                                                      |
 | `MESSAGE_CONTENT` | `1024` | Privilegiert. Text, Embeds, Dateien und Komponenten von Nachrichten      |
 | `SERVER_MEMBERS`  | `2048` | Privilegiert. Beitritte, Austritte und Änderungen von Mitgliedern; die Mitgliederliste |
@@ -113,7 +131,7 @@ Ein Schalter im Entwicklerportal ist gespeichert, sobald du ihn umlegst, und das
 
 `MissingIntent` nennt die Intents, die aus sind. Kommt dein Bot ohne einen aus, verbinde dich ohne ihn neu, statt anzuhalten:
 
-@@5
+@@7
 
 Ohne `MESSAGE_CONTENT` liest dein Bot weiterhin Nachrichten, die ihn erwähnen, seine eigenen Nachrichten und Direktnachrichten mit ihm. Ergänze für jedes andere Schließen die Schleife aus [Neu verbinden](/developers/docs/gateway#reconnect).
 

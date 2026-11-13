@@ -1,6 +1,6 @@
 # SDKs
 
-`@zrzur/sdk` is the official Zrzur library for apps and bots: TypeScript, ESM, Node 22 or newer (or Deno, or a browser). One package, three entry points:
+`@zrzur/sdk` is the official Zrzur library for apps and bots: TypeScript, ESM, Node 22.3 or newer (or Deno 2.2 or newer, or a browser). One package, three entry points:
 
 | Import             | What                                                                                                                          |
 | ------------------ | ----------------------------------------------------------------------------------------------------------------------------- |
@@ -10,7 +10,7 @@
 
 SolidJS is only needed for `@zrzur/sdk/solid`; a bot never downloads it.
 
-> **You cannot download it yet.** `@zrzur/sdk` is not on npm, and its repository is not public yet. This page shows what it will offer. Until then build with Node alone: [Build a complete bot](/developers/docs/tutorial-full-bot) needs no library, and [Without a library](/developers/docs/raw-http) has every call.
+> **You cannot install it from npm yet.** `@zrzur/sdk` is not on npm; its source is at [github.com/zrzur/sdk-js](https://github.com/zrzur/sdk-js). This page shows what it offers. Until then build with Node alone: [Build a complete bot](/developers/docs/tutorial-full-bot) needs no library, and [Without a library](/developers/docs/raw-http) has every call.
 
 There is also `@zrzur/bot`, an older, smaller library with the same interface for bots. It is not published either. New bots should wait for `@zrzur/sdk/bot`.
 

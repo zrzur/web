@@ -129,8 +129,19 @@ function sanitise(value, key = "") {
   if (secrets.has(value)) return "<token>";
   if (ULID.test(value)) return placeholderId(value);
   if (/@localhost$/.test(value)) return "user@example.com";
-  let out = value
+  let out = value;
+  // a secret inside a longer text, such as a webhook's address
+  for (const secret of secrets)
+    if (secret) out = out.replaceAll(secret, "<token>");
+  out = out
+    // a webhook token or a signing secret, also before the test knows it
+    .replace(/zrzur_(wh|sign)_[A-Za-z0-9_-]{8,}/g, "<token>")
     .replaceAll(new URL(API).origin, "https://api.zrzur.com")
+    // the dev stack's own addresses (internal/test-env), by service
+    .replace(/http:\/\/127\.0\.0\.1:147\d2/g, "https://api.zrzur.com")
+    .replace(/http:\/\/127\.0\.0\.1:14704/g, "https://cdn.zrzur.com")
+    .replace(/http:\/\/127\.0\.0\.1:14705/g, "https://api.zrzur.com/january")
+    .replace(/ws:\/\/127\.0\.0\.1:17880/g, "wss://voice.zrzur.com")
     .replace(/http:\/\/127\.0\.0\.1:31704/g, "https://cdn.zrzur.com")
     .replace(/http:\/\/127\.0\.0\.1:31705/g, "https://proxy.zrzur.com")
     .replace(/ws:\/\/127\.0\.0\.1:7880/g, "wss://voice.zrzur.com")
@@ -677,12 +688,9 @@ await test("users: open a DM, list DMs, mentions", async () => {
     { expectStatus: (s) => s === 200 || s === 403 },
   );
   await botCall("GET", "/users/dms", {});
-  await botCall(
-    "GET",
-    "/users/@me/mentions",
-    {},
-    { expectStatus: (s) => s < 300 || s === 403 },
-  );
+  // the mentions inbox is for people: whole messages would pass a bot's
+  // intents, so a bot token is refused with IsBot
+  await botCall("GET", "/users/@me/mentions", {});
 });
 
 await test("users: bots cannot use friends or change their username with a password", async () => {
@@ -722,11 +730,23 @@ await test("bots: public info of a bot", async () => {
     {},
     { body: { name: "child" }, expectStatus: (s) => s >= 400 },
   );
-  await botCall(
+  // a bot reads its own settings (its privileged intents); never another
+  // bot's, and never a token
+  const own = await botCall("GET", "/bots/{bot_id}", { bot_id: bot.id });
+  expect(own.bot?.token === "", "a fetched bot must not carry its token");
+  expect(
+    typeof own.bot?.privileged_intents === "number",
+    "privileged_intents missing from the bot's own settings",
+  );
+  const other = await http(
     "GET",
     "/bots/{bot_id}",
-    { bot_id: bot.id },
-    { expectStatus: (s) => s >= 400 },
+    { bot_id: tutorial.id },
+    { bot: bot.token },
+  );
+  expect(
+    other.status === 400 && other.data?.type === "IsBot",
+    `another bot's settings: ${other.status} ${other.data?.type}`,
   );
   await botCall(
     "PATCH",
@@ -1359,8 +1379,14 @@ await test("webhooks: create, list, fetch, edit, execute, delete", async () => {
   // token routes need no bot token
   const t = { webhook_id: hook.id, token: hook.token };
   await botCall("GET", "/webhooks/{webhook_id}/{token}", t, { as: "" });
+  // without ?wait=true the answer is 204 with no body
+  const quiet = await http("POST", "/webhooks/{webhook_id}/{token}", t, {
+    body: { content: "From a webhook, no answer wanted" },
+  });
+  expect(quiet.status === 204, `execute without wait: ${quiet.status}`);
   const sent = await botCall("POST", "/webhooks/{webhook_id}/{token}", t, {
     as: "",
+    query: { wait: "true" },
     body: { content: "From a webhook" },
   });
   await botCall(
@@ -2078,7 +2104,10 @@ await tutorialTest(
         }),
       },
     );
-    expect(saved.status === 200, `saving the address: ${saved.status}`);
+    expect(
+      saved.status === 200,
+      `saving the address: ${saved.status} ${await saved.text()}`,
+    );
     try {
       tutorialGateway.clear();
       await invoke(member, "hello");
@@ -2110,6 +2139,233 @@ await tutorialTest(
   },
   { HEALTH_PORT: String(healthPort) },
 );
+
+await test("threads: start with a card, list, rename, archive", async () => {
+  // the example of the Channels page: embeds and components in the first message
+  const thread = await botCall(
+    "POST",
+    "/channels/{target}/threads",
+    { target: text._id },
+    {
+      body: {
+        name: "ticket-0001",
+        embeds: [{ title: "Ticket 0001", description: "Opened by a member" }],
+        components: [
+          {
+            type: "ActionRow",
+            components: [
+              {
+                type: "Button",
+                style: "Danger",
+                label: "Close ticket",
+                custom_id: "ticket:close",
+              },
+            ],
+          },
+        ],
+      },
+    },
+  );
+  expect(thread.parent === text._id, "a thread names its parent channel");
+  const first = await must(
+    "GET",
+    "/channels/{target}/messages",
+    { target: thread._id },
+    { bot: bot.token, query: { limit: 5 } },
+  );
+  const card = (Array.isArray(first) ? first : first.messages)[0];
+  expect(
+    card?.embeds?.[0]?.title === "Ticket 0001" &&
+      card?.components?.length === 1,
+    "the first message of the thread has its embed and its button",
+  );
+  const listed = await botCall("GET", "/channels/{target}/threads", {
+    target: text._id,
+  });
+  expect(
+    listed.some((channel) => channel._id === thread._id),
+    "the new thread is in the list",
+  );
+  await botCall(
+    "PATCH",
+    "/channels/{target}/thread",
+    { target: thread._id },
+    { body: { name: "ticket-0001-closed", archived: true } },
+  );
+});
+
+await test("polls: a bot posts and ends a poll, reads voters, cannot vote", async () => {
+  const message = await must(
+    "POST",
+    "/channels/{target}/messages",
+    { target: text._id },
+    {
+      bot: bot.token,
+      body: {
+        poll: {
+          question: "Which day?",
+          answers: [{ text: "Saturday" }, { text: "Sunday" }],
+          duration: 1,
+        },
+      },
+    },
+  );
+  expect(message.poll?.answers?.length === 2, "the message carries its poll");
+  const answer = message.poll.answers[0].id ?? message.poll.answers[0]._id ?? 1;
+  const place = { target: text._id, msg: message._id, answer };
+  await botCall(
+    "PUT",
+    "/channels/{target}/messages/{msg}/polls/answers/{answer}/votes/@me",
+    place,
+  );
+  await botCall(
+    "DELETE",
+    "/channels/{target}/messages/{msg}/polls/answers/{answer}/votes/@me",
+    place,
+  );
+  await botCall(
+    "GET",
+    "/channels/{target}/messages/{msg}/polls/answers/{answer}/voters",
+    place,
+  );
+  await botCall("POST", "/channels/{target}/messages/{msg}/polls/end", {
+    target: text._id,
+    msg: message._id,
+  });
+});
+
+await test("commands: public command list and the server's command rules", async () => {
+  await botCall("GET", "/bots/{target}/commands", { target: bot.id });
+  await botCall(
+    "GET",
+    "/servers/{server_id}/applications/{application_id}/commands",
+    { server_id: serverId, application_id: bot.id },
+  );
+  await botCall(
+    "GET",
+    "/servers/{server_id}/applications/{application_id}/permissions",
+    { server_id: serverId, application_id: bot.id },
+  );
+});
+
+await test("soundboard: a bot reads the server's sounds and the library", async () => {
+  await botCall("GET", "/servers/{target}/soundboard", { target: serverId });
+  await botCall("GET", "/soundboard/library", {});
+});
+
+await test("gateway: a resumable session replays what it missed", async () => {
+  // one socket, packets as they arrive (a Bulk stays one packet: it has one seq)
+  const open = (first) => {
+    const socket = new WebSocket(`${WS}/?version=1&format=json`);
+    const packets = [];
+    const waiters = [];
+    socket.addEventListener("open", () => socket.send(JSON.stringify(first)));
+    socket.addEventListener("message", ({ data }) => {
+      const packet = JSON.parse(data);
+      packets.push(packet);
+      for (const w of [...waiters])
+        if (w.match(packet)) {
+          waiters.splice(waiters.indexOf(w), 1);
+          w.resolve(packet);
+        }
+    });
+    return {
+      socket,
+      packets,
+      wait(match, ms = 8000) {
+        const found = packets.find(match);
+        if (found) return Promise.resolve(found);
+        return new Promise((resolve, reject) => {
+          const w = { match, resolve };
+          waiters.push(w);
+          setTimeout(
+            () => reject(new Error("timed out waiting for a gateway packet")),
+            ms,
+          );
+        });
+      },
+    };
+  };
+  const holds = (packet, id) =>
+    (packet.type === "Bulk" ? packet.v : [packet]).some(
+      (event) => event.type === "Message" && event._id === id,
+    );
+  const say = (content) =>
+    must(
+      "POST",
+      "/channels/{target}/messages",
+      { target: text._id },
+      {
+        bot: bot.token,
+        body: { content },
+      },
+    );
+
+  // SERVERS + SERVER_MESSAGES, and a session that can be resumed
+  const first = open({
+    type: "Authenticate",
+    token: bot.token,
+    intents: 3,
+    resumable: true,
+  });
+  const ready = await first.wait((p) => p.type === "Ready");
+  expect(
+    typeof ready.session_id === "string" && ready.session_id.length > 0,
+    "Ready of a resumable session has no session_id",
+  );
+  expect(ready.seq === undefined, "Ready carries no seq");
+  const seen = await say("resume check: before the drop");
+  const before = await first.wait((p) => holds(p, seen._id));
+  expect(
+    Number.isInteger(before.seq) && before.seq >= 1,
+    `an event after Ready has no seq: ${JSON.stringify(before.seq)}`,
+  );
+  first.socket.close();
+  await new Promise((resolve) => setTimeout(resolve, 500));
+
+  const missed = await say("resume check: while away");
+  const second = open({
+    type: "Resume",
+    token: bot.token,
+    session_id: ready.session_id,
+    seq: before.seq,
+  });
+  const replayed = await second.wait((p) => holds(p, missed._id));
+  expect(replayed.seq > before.seq, "the replayed event must come after seq");
+  await second.wait((p) => p.type === "Resumed");
+  expect(
+    second.packets.findIndex((p) => holds(p, missed._id)) <
+      second.packets.findIndex((p) => p.type === "Resumed"),
+    "Resumed must come after the missed events",
+  );
+  expect(
+    !second.packets.some((p) => holds(p, seen._id)),
+    "an event at or before seq was sent again",
+  );
+  second.socket.close();
+
+  // a session that is not there: InvalidSession, then Authenticate on the same socket
+  const third = open({
+    type: "Resume",
+    token: bot.token,
+    session_id: "no-such-session",
+    seq: 0,
+  });
+  const refused = await third.wait((p) => p.type === "InvalidSession");
+  expect(refused.resumable === false, `got ${JSON.stringify(refused)}`);
+  third.socket.send(
+    JSON.stringify({ type: "Authenticate", token: bot.token, intents: 3 }),
+  );
+  await third.wait((p) => p.type === "Ready");
+  third.socket.close();
+
+  verification["GATEWAY Resume"] = {
+    level: "live",
+    checked: today,
+    test: current,
+    response: { ...refused },
+  };
+});
 
 await test("servers: uninstalling an app and a bot leaving a server", async () => {
   await botCall(
