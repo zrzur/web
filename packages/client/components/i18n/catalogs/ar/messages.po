@@ -25481,3 +25481,163 @@ msgstr "زرزور، مباشرةً على <0>سطح مكتبك.</0>"
 #: components/app/interface/settings/user/appearance/AppearanceMenu.tsx
 #~ msgid "Zrzur's own look: very dark neutral panels with Zrzur Pink as the one accent."
 #~ msgstr "مظهر زرزور الخاص: لوحات داكنة جدًا بألوان محايدة، وزهري زرزور هو اللون المميز الوحيد."
+
+#: components/app/interface/settings/user/voice/GameKeysOptions.tsx
+msgid "{other} already uses that. Press another key, or Esc to cancel."
+msgstr "هذا المفتاح مستخدم في «{other}». اضغط مفتاحًا آخر، أو Esc للإلغاء."
+
+#: components/app/interface/settings/user/voice/GameKeysOptions.tsx
+msgid "A game started as administrator hides its keys from other apps; start Zrzur as administrator too to use them there."
+msgstr "اللعبة التي تعمل بصلاحيات المسؤول تحجب مفاتيحها عن التطبيقات الأخرى؛ شغّل زرزور بصلاحيات المسؤول أيضًا لتعمل مفاتيحك فيها."
+
+#: components/app/interface/settings/user/voice/GameKeysOptions.tsx
+msgid "A key that types would switch this while you write. Hold Ctrl, Alt or Shift with it, or press another key."
+msgstr "مفتاح يكتب حرفًا سيبدّل هذا الخيار أثناء كتابتك. اضغط معه Ctrl أو Alt أو Shift، أو اختر مفتاحًا آخر."
+
+#: components/app/interface/settings/user/voice/GameKeysOptions.tsx
+msgid "Allow…"
+msgstr "السماح…"
+
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "Deafen or undeafen, in any app"
+msgstr "كتم صوت المكالمة أو إعادته، من أي تطبيق"
+
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "Desktop app, during a call: works in games and other apps. Change it in voice settings."
+msgstr "في تطبيق سطح المكتب أثناء المكالمة: يعمل داخل الألعاب والتطبيقات الأخرى. غيّره من إعدادات الصوت."
+
+#: components/app/interface/settings/user/voice/GameKeysOptions.tsx
+msgid "Get the desktop app"
+msgstr "احصل على تطبيق سطح المكتب"
+
+#: components/app/interface/settings/user/voice/GameKeysOptions.tsx
+msgid "Heard in another window"
+msgstr "سُمع في نافذة أخرى"
+
+#: components/app/interface/settings/user/voice/GameKeysOptions.tsx
+msgid "Heard in the Zrzur window only"
+msgstr "سُمع في نافذة زرزور فقط"
+
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "Hold one key to talk instead of an open microphone. In the desktop app it works in games and other apps too."
+msgstr "اضغط مفتاحًا واحدًا مطوّلًا لتتحدث بدل ميكروفون مفتوح دائمًا. في تطبيق سطح المكتب يعمل داخل الألعاب والتطبيقات الأخرى أيضًا."
+
+#: components/app/interface/settings/user/voice/PushToTalkOptions.tsx
+msgid "Hold the key to talk. In the desktop app it works in games and other apps too."
+msgstr "اضغط المفتاح مطوّلًا لتتحدث. في تطبيق سطح المكتب يعمل داخل الألعاب والتطبيقات الأخرى أيضًا."
+
+#: components/app/interface/settings/user/voice/GameKeysOptions.tsx
+msgid "In the browser, your keys work only while the Zrzur tab is active. To talk while you play, use the Zrzur desktop app."
+msgstr "في المتصفح تعمل مفاتيحك فقط ما دام تبويب زرزور نشطًا. لتتحدث أثناء اللعب، استخدم تطبيق زرزور لسطح المكتب."
+
+#: components/app/interface/settings/user/voice/GameKeysOptions.tsx
+msgid "Keys that work in games"
+msgstr "مفاتيح تعمل داخل الألعاب"
+
+#: components/app/interface/settings/user/voice/GameKeysOptions.tsx
+msgid "Keys work in games"
+msgstr "المفاتيح تعمل داخل الألعاب"
+
+#: components/app/interface/settings/user/voice/GameKeysOptions.tsx
+msgid "Listening now: your keys work in every app."
+msgstr "يستمع الآن: مفاتيحك تعمل في كل التطبيقات."
+
+#: components/app/interface/settings/user/voice/GameKeysOptions.tsx
+msgid "macOS asks for your permission first: allow Zrzur under Privacy & Security, Accessibility."
+msgstr "يطلب macOS إذنك أولًا: اسمح لزرزور من «الخصوصية والأمن» ثم «تسهيلات الاستخدام»."
+
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "Mute or unmute, in any app"
+msgstr "كتم الميكروفون أو إلغاء كتمه، من أي تطبيق"
+
+#: components/app/interface/settings/user/voice/GameKeysOptions.tsx
+msgid "No key"
+msgstr "لا يوجد مفتاح"
+
+#: components/app/interface/settings/user/voice/GameKeysOptions.tsx
+msgid "Not heard yet"
+msgstr "لم يُسمع بعد"
+
+#: components/app/interface/settings/user/voice/GameKeysOptions.tsx
+msgid "Off. Your keys work only while the Zrzur window is active."
+msgstr "متوقف. مفاتيحك تعمل فقط ما دامت نافذة زرزور نشطة."
+
+#: components/app/interface/settings/user/voice/GameKeysOptions.tsx
+msgid "On Wayland, keys are heard only in games that run through XWayland."
+msgstr "على Wayland تُسمع المفاتيح فقط في الألعاب التي تعمل عبر XWayland."
+
+#: components/app/interface/settings/user/voice/GameKeysOptions.tsx
+msgid "One press mutes you, the next unmutes."
+msgstr "ضغطة تكتم الميكروفون، والضغطة التالية تلغي الكتم."
+
+#: components/app/interface/settings/user/voice/GameKeysOptions.tsx
+msgid "One press turns the call's sound off, the next turns it back on."
+msgstr "ضغطة توقف صوت المكالمة، والضغطة التالية تعيده."
+
+#: components/app/interface/settings/user/voice/GameKeysOptions.tsx
+msgid "Others hear you while you hold it. Without a key here, your push-to-talk key is used."
+msgstr "يسمعك الآخرون ما دمت تضغطه. إن لم تختر مفتاحًا هنا يُستخدم مفتاح «اضغط للتحدث»."
+
+#: components/app/interface/settings/user/voice/GameKeysOptions.tsx
+msgid "Press a key, a combination or a mouse side button. Esc cancels."
+msgstr "اضغط مفتاحًا أو مجموعة مفاتيح أو زرًا جانبيًا في الفأرة. Esc للإلغاء."
+
+#: components/app/interface/settings/user/voice/GameKeysOptions.tsx
+msgid "Push to mute"
+msgstr "اضغط للكتم"
+
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "Push to mute (hold)"
+msgstr "اضغط للكتم (ضغط مطوّل)"
+
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "Push to talk (hold)"
+msgstr "اضغط للتحدث (ضغط مطوّل)"
+
+#: components/app/interface/settings/user/voice/GameKeysOptions.tsx
+msgid "Push to talk keeps the microphone open this long after you let go, so the end of a word is not cut off."
+msgstr "يُبقي «اضغط للتحدث» الميكروفون مفتوحًا هذه المدة بعد رفع إصبعك، كي لا تُقطع نهاية الكلمة."
+
+#: components/app/interface/settings/user/voice/GameKeysOptions.tsx
+msgid "Ready. Zrzur listens only while you are in a call."
+msgstr "جاهز. زرزور يستمع للمفاتيح فقط أثناء وجودك في مكالمة."
+
+#: components/app/interface/settings/user/voice/GameKeysOptions.tsx
+msgid "Release delay"
+msgstr "مهلة الإفلات"
+
+#: components/app/interface/settings/user/voice/GameKeysOptions.tsx
+msgid "Shows whether Zrzur hears a key while another window is in front. Works outside a call."
+msgstr "يبيّن هل يسمع زرزور المفتاح ونافذة أخرى في المقدمة. يعمل خارج المكالمة أيضًا."
+
+#: components/app/interface/settings/user/voice/GameKeysOptions.tsx
+msgid "Start test"
+msgstr "ابدأ الاختبار"
+
+#: components/app/interface/settings/user/voice/GameKeysOptions.tsx
+msgid "Stop test"
+msgstr "أوقف الاختبار"
+
+#: components/app/interface/settings/user/voice/GameKeysOptions.tsx
+msgid "Switch to your game or any other window, hold each key, then come back."
+msgstr "انتقل إلى لعبتك أو أي نافذة أخرى، واضغط كل مفتاح مطوّلًا، ثم عد إلى هنا."
+
+#: components/app/interface/settings/user/voice/GameKeysOptions.tsx
+msgid "Test your keys"
+msgstr "اختبر مفاتيحك"
+
+#: components/app/interface/settings/user/voice/GameKeysOptions.tsx
+msgid "Your microphone is off while you hold it."
+msgstr "يتوقف ميكروفونك ما دمت تضغطه."
+
+#: components/app/interface/settings/user/voice/GameKeysOptions.tsx
+msgid "Zrzur could not start listening for keys on this computer. Your keys work while the Zrzur window is active."
+msgstr "تعذّر على زرزور بدء الاستماع للمفاتيح على هذا الحاسوب. مفاتيحك تعمل ما دامت نافذة زرزور نشطة."
+
+#: components/app/interface/settings/user/voice/GameKeysOptions.tsx
+msgid "Zrzur hears these keys while a game or another app is in front. The game still gets every key."
+msgstr "يسمع زرزور هذه المفاتيح ولعبة أو تطبيق آخر في المقدمة. وتصل كل المفاتيح إلى اللعبة كما هي."
+
+#: components/app/interface/settings/user/voice/GameKeysOptions.tsx
+msgid "Zrzur reacts only to the keys you choose here. It records nothing and sends nothing."
+msgstr "يستجيب زرزور فقط للمفاتيح التي تختارها هنا. لا يسجّل شيئًا ولا يرسل شيئًا."

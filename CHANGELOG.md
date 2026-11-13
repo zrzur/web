@@ -2,6 +2,14 @@
 
 ## Unreleased
 
+### Keys that work in games (2026-11-13)
+
+* **Push to talk works while you play.** In the desktop app your push-to-talk key is heard while a game or any other app is in front, as a real hold: the microphone opens when the key goes down and closes when it goes up. The game still gets the key. No setup is needed; the old Ctrl+Shift toggle is used only where the desktop app cannot listen.
+* **More keys for calls, in any app:** push to mute (hold), mute or unmute, deafen or undeafen. A bind can be a key, a combination, a modifier alone or a mouse side button. All are listed in the shortcuts screen (Ctrl+/).
+* **Release delay** for push to talk (default 0.2 s), so the end of a word is not cut off; also in the browser.
+* **Voice settings** show whether keys work in games right now, say in one line what is listened for (only your keys, nothing recorded or sent, only during a call), and have a test that shows a key being heard while another window is in front.
+* **In the browser** the settings say plainly that keys work only while the Zrzur tab is active, and point to the desktop app.
+
 ### Design audit of the whole app (2026-11-13)
 
 * **Arabic: arrows point the right way.** Direction icons are mirrored in one place only. A second flip beside some components had turned them back: "Back" on sign-up, in settings on phones, in channel search and in category permissions, the chevrons on the lobby and in "Create your server", breadcrumbs on Designs and Discover, the calendar's month arrows, and Forward in the message toolbar (it looked the same as Reply).

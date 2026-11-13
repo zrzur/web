@@ -4,6 +4,7 @@ import { useInstance } from "@revolt/instance";
 import { useState } from "@revolt/state";
 import { Column } from "@revolt/ui";
 
+import { GameKeysOptions } from "./GameKeysOptions";
 import { InputSensitivityOptions } from "./InputSensitivityOptions";
 import { PushToTalkOptions } from "./PushToTalkOptions";
 import { ScreenShareOptions } from "./ScreenShareOptions";
@@ -22,6 +23,7 @@ export function VoiceSettings() {
     <Column gap="xl">
       <VoiceInputOptions />
       <PushToTalkOptions />
+      <GameKeysOptions />
       <Show when={state.voice.inputMode === "voice"}>
         <InputSensitivityOptions />
       </Show>

@@ -1,4 +1,5 @@
 import { type VoiceInputMode, pttKeyAllowed } from "../../keybinds/shortcuts";
+
 import { DEFAULT_THRESHOLD_DB, clampThreshold } from "../../rtc/voiceGate";
 
 import { State } from "..";
@@ -8,6 +9,14 @@ import { AbstractStore } from ".";
 /**
  * Possible noise suppresion states. Browser is browser noise suppresion and enhanced is machine learning suppression via RNNoise.
  */
+export type GameKeyAction = "talk" | "mute" | "toggleMute" | "toggleDeafen";
+const GAME_KEY_ACTIONS: GameKeyAction[] = [
+  "talk",
+  "mute",
+  "toggleMute",
+  "toggleDeafen",
+];
+
 export type NoiseSuppresionState = "disabled" | "browser" | "enhanced";
 
 const NoiseSuppresionStates: NoiseSuppresionState[] = [
@@ -81,6 +90,20 @@ export interface TypeVoice {
   globalTalk: boolean;
 
   /**
+   * Desktop app: hear the binds below while a game or another app is in
+   * front. On this device only (keys and mouse buttons differ per device).
+   */
+  gameKeys: boolean;
+  /**
+   * Binds that work in games, as text ("Mouse4", "Ctrl+Shift+KeyM"; see
+   * rtc/gameKeys.ts): talk and mute while held, toggleMute, toggleDeafen.
+   * Without `talk`, the push-to-talk key is used.
+   */
+  gameBinds: Partial<Record<GameKeyAction, string>>;
+  /** Push to talk: how long the microphone stays open after the key is let go (ms) */
+  pttReleaseDelay: number;
+
+  /**
    * Voice activity: let Zrzur pick the input sensitivity (true) or use
    * `inputThreshold`. Stored on this device only (the store is not synced),
    * because every microphone and room needs its own value.
@@ -140,6 +163,9 @@ export class Voice extends AbstractStore<"voice", TypeVoice> {
       inputMode: "voice",
       pttKey: "Backquote",
       globalTalk: false,
+      gameKeys: true,
+      gameBinds: {},
+      pttReleaseDelay: 200,
       inputSensitivityAuto: true,
       inputThreshold: DEFAULT_THRESHOLD_DB,
       highQualityAudio: false,
@@ -242,6 +268,29 @@ export class Voice extends AbstractStore<"voice", TypeVoice> {
 
     if (typeof input.globalTalk === "boolean") {
       data.globalTalk = input.globalTalk;
+    }
+
+    if (typeof input.gameKeys === "boolean") {
+      data.gameKeys = input.gameKeys;
+    }
+
+    // only the shape here; each bind is checked where it is used
+    // (rtc/gameKeys.ts), so the rules stay out of the first download
+    if (input.gameBinds && typeof input.gameBinds === "object") {
+      data.gameBinds = {};
+      for (const action of GAME_KEY_ACTIONS) {
+        const bind = input.gameBinds[action];
+        if (typeof bind === "string" && bind.length <= 64)
+          data.gameBinds[action] = bind;
+      }
+    }
+
+    if (
+      typeof input.pttReleaseDelay === "number" &&
+      input.pttReleaseDelay >= 0 &&
+      input.pttReleaseDelay <= 2000
+    ) {
+      data.pttReleaseDelay = Math.round(input.pttReleaseDelay);
     }
 
     if (typeof input.inputSensitivityAuto === "boolean") {
@@ -606,6 +655,37 @@ export class Voice extends AbstractStore<"voice", TypeVoice> {
    */
   get globalTalk(): boolean {
     return this.get().globalTalk ?? false;
+  }
+
+  /** Desktop app: whether binds are heard in games and other apps */
+  set gameKeys(value: boolean) {
+    this.set("gameKeys", value);
+  }
+
+  get gameKeys(): boolean {
+    return this.get().gameKeys ?? true;
+  }
+
+  /** Binds that work in games, as text */
+  get gameBinds(): Partial<Record<GameKeyAction, string>> {
+    return this.get().gameBinds ?? {};
+  }
+
+  /** Give an action a bind, or take it away (undefined) */
+  setGameBind(action: GameKeyAction, bind: string | undefined) {
+    const next = { ...this.gameBinds };
+    if (bind) next[action] = bind;
+    else delete next[action];
+    this.set("gameBinds", next);
+  }
+
+  /** Push to talk: time the microphone stays open after the key is let go (ms) */
+  set pttReleaseDelay(value: number) {
+    this.set("pttReleaseDelay", Math.min(2000, Math.max(0, Math.round(value))));
+  }
+
+  get pttReleaseDelay(): number {
+    return this.get().pttReleaseDelay ?? 200;
   }
 
   /**
