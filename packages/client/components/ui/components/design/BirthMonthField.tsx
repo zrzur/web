@@ -405,8 +405,8 @@ const Control = styled("div", {
     },
     "&:focus-within, &[data-open='true']": {
       borderColor: "var(--z-accent)",
-      boxShadow:
-        "inset 0 1px 2px rgb(0 0 0 / 0.22), 0 0 0 3px color-mix(in srgb, var(--z-accent) 22%, transparent)",
+      // the shared field focus: a crisp ring, no coloured glow
+      boxShadow: "var(--z-field-focus-shadow)",
     },
     "&[data-invalid='true']": { borderColor: "var(--z-danger)" },
     "&[data-disabled='true']": { opacity: 0.55, boxShadow: "none" },

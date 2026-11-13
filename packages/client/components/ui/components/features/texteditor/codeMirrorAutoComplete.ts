@@ -11,26 +11,33 @@ import { scrollableStyles } from "../../../directives/scrollable";
 import { AutoCompleteSearchSpace } from "../../utils/autoComplete";
 import { codeMirrorAutoCompleteSource } from "./codeMirrorAutoCompleteSource";
 
+/*
+ * The list of suggestions is one more floating surface: the same fill, border,
+ * radius and shadow as menus and popovers, rows of menu height (44 px on
+ * phones) and names that shorten with "…" instead of being cut off.
+ */
 const completionTheme = EditorView.theme({
   ".cm-scroller": {
     "font-family": "inherit",
   },
   ".cm-tooltip.cm-tooltip-autocomplete": {
-    border: "none",
+    border: "1px solid var(--z-popover-border, var(--z-border-strong))",
     display: "flex",
     "flex-direction": "column",
-    padding: "var(--gap-md) 0",
+    padding: "6px",
     overflow: "hidden",
-    "border-radius": "var(--borderRadius-xs)",
-    background: "var(--md-sys-color-surface-container)",
-    color: "var(--md-sys-color-on-surface)",
-    fill: "var(--md-sys-color-on-surface)",
-    "box-shadow": "0 0 3px var(--md-sys-color-shadow)",
+    "border-radius": "12px",
+    background: "var(--z-popover-bg, var(--z-bg-raised))",
+    color: "var(--z-fg-primary)",
+    fill: "var(--z-fg-primary)",
+    "box-shadow": "var(--z-popover-lift)",
+    "font-size": "14px",
+    "line-height": "20px",
   },
   ".cm-tooltip.cm-tooltip-autocomplete > ul": {
-    "min-width": "10em",
-    "max-width": "50vw",
-    "max-height": "min(50vh, 490px)",
+    "min-width": "min(220px, calc(100vw - 32px))",
+    "max-width": "min(360px, calc(100vw - 32px))",
+    "max-height": "min(50vh, 320px)",
     "font-family": "inherit",
   },
   ".cm-tooltip.cm-tooltip-autocomplete > ul > li": {
@@ -38,47 +45,80 @@ const completionTheme = EditorView.theme({
     "align-items": "center",
 
     cursor: "pointer",
-    gap: "var(--gap-md)",
+    gap: "8px",
+    "min-height": "36px",
+    "border-radius": "6px",
     background: "transparent",
-    padding: "var(--gap-sm) var(--gap-md)",
+    padding: "0 8px",
   },
   '.cm-tooltip.cm-tooltip-autocomplete > ul > li[aria-selected="true"]': {
-    background:
-      "color-mix(in srgb, var(--md-sys-color-on-surface) 8%, transparent)",
+    background: "var(--z-float-hover, var(--z-nav-selected))",
+    color: "var(--z-fg-primary)",
+  },
+  // the name takes the room it needs and shortens first; its direction
+  // follows its own letters, so "…" lands at the end of the word
+  ".cm-tooltip.cm-tooltip-autocomplete .cm-completionLabel": {
+    flex: "0 1 auto",
+    "min-width": "0",
+    overflow: "hidden",
+    "white-space": "nowrap",
+    "text-overflow": "ellipsis",
+    "unicode-bidi": "plaintext",
+    "font-weight": "500",
+  },
+  // emoji codes are Latin in every language
+  ".cm-tooltip.cm-tooltip-autocomplete.autocomplete-tooltip-emoji .cm-completionLabel":
+    {
+      direction: "ltr",
+      "unicode-bidi": "isolate",
+    },
+  // the second part (username, description): quiet, upright, at the far side
+  ".cm-tooltip.cm-tooltip-autocomplete .cm-completionDetail": {
+    flex: "0 10 auto",
+    "min-width": "0",
+    "margin-inline-start": "auto",
+    "padding-inline-start": "8px",
+    overflow: "hidden",
+    "white-space": "nowrap",
+    "text-overflow": "ellipsis",
+    "unicode-bidi": "plaintext",
+    "font-style": "normal",
+    "font-size": "12px",
+    color: "var(--z-fg-muted)",
   },
   ".cm-completionMatchedText": {
     "text-decoration": "inherit",
   },
   ".cm-user-preview": {
-    display: "inline-block",
+    display: "block",
+    "flex-shrink": "0",
     width: "24px",
     height: "24px",
-    "vertical-align": "baseline",
-    // "margin-bottom": "-0.2em",
     "object-fit": "cover",
-    padding: "var(--gap-xxs)",
-    "border-radius": "var(--borderRadius-circle)",
+    "border-radius": "50%",
   },
   ".cm-emoji-preview": {
-    display: "inline-block",
+    display: "block",
+    "flex-shrink": "0",
     width: "24px",
     height: "24px",
-    "vertical-align": "baseline",
-    // "margin-bottom": "-0.2em",
     "object-fit": "contain",
-    padding: "var(--gap-xxs)",
+    padding: "2px",
   },
   ".cm-role-preview": {
-    display: "inline-block",
+    display: "block",
+    "flex-shrink": "0",
     width: "12px",
     height: "12px",
-    "vertical-align": "baseline",
-    // "margin-bottom": "-0.2em",
     margin: "6px",
-    "border-radius": "var(--borderRadius-circle)",
+    "border-radius": "50%",
+  },
+  "@media (max-width: 600px)": {
+    ".cm-tooltip.cm-tooltip-autocomplete > ul > li": {
+      "min-height": "44px",
+    },
   },
 });
-
 export function codeMirrorAutoComplete(
   searchSpace?: Accessor<AutoCompleteSearchSpace>,
 ) {
@@ -149,7 +189,10 @@ export function codeMirrorAutoComplete(
             const img = document.createElement("img");
             img.classList.add("cm-user-preview");
             img.loading = "lazy";
-            img.src = (completion as Completion & { url?: string }).url || blankSvg;
+            // decoration: the name beside it is the label
+            img.alt = "";
+            img.src =
+              (completion as Completion & { url?: string }).url || blankSvg;
             return img;
           } else if (completion.type == "role") {
             const span = document.createElement("span");
@@ -176,7 +219,9 @@ export function codeMirrorAutoComplete(
     if (
       key === ":" ? completions[0]?.type === "emoji" : completions.length > 0
     ) {
-      acceptCompletion(view as unknown as Parameters<typeof acceptCompletion>[0]);
+      acceptCompletion(
+        view as unknown as Parameters<typeof acceptCompletion>[0],
+      );
       return true;
     }
     return false;

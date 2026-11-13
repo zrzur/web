@@ -445,7 +445,7 @@ const NavButton = styled("button", {
     _hover: { background: "var(--z-nav-hover)", color: "var(--z-fg-primary)" },
     _focusVisible: { outline: "2px solid var(--z-focus)" },
     // the arrows point the way the month moves in the reading direction
-    _rtl: { "& svg": { transform: "scaleX(-1)" } },
+    // direction icons turn by themselves in right-to-left (styles.css)
     _phone: { width: "44px", height: "44px" },
   },
 });

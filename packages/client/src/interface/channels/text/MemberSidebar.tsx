@@ -286,7 +286,10 @@ const CategoryTitle = styled("div", {
 
     // same caps language as channel list / home categories
     height: "100%",
-    padding: "0 8px 6px 16px",
+    // start and end, not left and right: in Arabic the title lines up with
+    // the avatars under it
+    paddingBlock: "0 6px",
+    paddingInline: "16px 8px",
     color: "var(--z-fg-muted, var(--md-sys-color-on-surface))",
     display: "flex",
     alignItems: "flex-end",
@@ -312,7 +315,7 @@ const RoleIcon = styled("img", {
 const MemberTitle = styled("div", {
   base: {
     marginTop: "12px",
-    marginLeft: "14px",
+    marginInlineStart: "16px",
     color: "var(--z-fg-muted, var(--md-sys-color-on-surface))",
     ...typography.raw({ class: "label", size: "small" }),
 
@@ -344,9 +347,13 @@ const memberRow = css({
     zIndex: 1,
   },
   "&[data-plated] > :not([data-nameplate]) *": {
-    color: "#fff !important",
-    WebkitTextFillColor: "#fff !important",
-    textShadow: "0 0 2px rgb(0 0 0 / 60%), 0 1px 4px rgb(0 0 0 / 70%)",
+    // the name starts where the plate is still faint, so it takes the
+    // theme's own ink with a halo of the opposite tone: white on dark themes,
+    // dark on light ones, readable on the page and on the art alike
+    color: "var(--z-plate-ink, #fff) !important",
+    WebkitTextFillColor: "var(--z-plate-ink, #fff) !important",
+    textShadow:
+      "var(--z-plate-ink-halo, 0 0 2px rgb(0 0 0 / 60%), 0 1px 4px rgb(0 0 0 / 70%))",
   },
 });
 

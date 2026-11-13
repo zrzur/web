@@ -145,7 +145,8 @@ const Base = styled("a", {
     width: "100%",
     minWidth: 0,
     boxSizing: "border-box",
-    padding: "8px 14px",
+    // text stays 12 px or more from the border, as in SettingsRow
+    padding: "11px 14px",
     // a standalone row is its own small panel; inside a Group it becomes a plain row
     borderRadius: "10px",
     // same surface as the settings panels (SettingsSection)

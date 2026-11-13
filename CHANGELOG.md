@@ -2,6 +2,24 @@
 
 ## Unreleased
 
+### Design audit of the whole app (2026-11-13)
+
+* **Arabic: arrows point the right way.** Direction icons are mirrored in one place only. A second flip beside some components had turned them back: "Back" on sign-up, in settings on phones, in channel search and in category permissions, the chevrons on the lobby and in "Create your server", breadcrumbs on Designs and Discover, the calendar's month arrows, and Forward in the message toolbar (it looked the same as Reply).
+* **Arabic: filter words read correctly.** `from:`, `has:` and the other search filters keep their own direction in the suggestion list and in hints (they showed as `:from`). Left and right paddings that ignored the reading direction now follow it: member list titles, mention pills, the search sidebar, the settings sidebar, toasts placed at a side, and the feather fans on Feather and Wings cards.
+* **Suggestions while typing** (mentions, emoji, channels) are a floating list like every menu: readable on light themes (it was white on white there), names shorten with "…" instead of being cut off, rows are 44 px on phones.
+* **Light themes:** names on a nameplate in the member list are readable (dark ink with a light halo; they were white on white).
+* **Sign-up:** the "Your email stays private" note no longer covers the title of the form; it sits under the field, or beside the card on wide windows.
+* **Direct messages** show the person's display name in the title bar, the forward list, Home, the server rail and the voice bar (some showed the username).
+* **Message menu:** "Select messages" is neutral and sits above the red rows; red stays for what removes something.
+* **Create channel:** even spacing, the private switch is a boxed row on the same edges as the fields, and the type tiles are flat with a neutral raised choice.
+* **Lobby:** the main button is the flat action colour like every other button (no gradient, no coloured shadow), and the action row lines up with the banner and the cards.
+* **Fields:** one focus ring everywhere (select, birth month and form fields matched the text field); the `#` before a channel name is readable while typing.
+* **Emoji and GIF picker:** section titles no longer sit on a darker band, 12 px gutters, paddings follow the reading direction.
+* **Profile card:** "Zrzur since …" and "in … since …" each stay whole instead of breaking in the middle; section titles are sentence case.
+* **Phones:** the status choices on You wrap instead of being cut off at the edge; the Home server row stops at the page gutter; small targets are 44 px (search back, error details, role chips and member actions in server settings, drag handles, Designs category words); the "edit roles" circle is a circle again.
+* **Targets on desktop:** switches and sliders are 24 px targets; the role drag handle has a focus ring.
+* **Search results:** the scope and sort controls start at the same edge as the title.
+
 ### Fixes
 
 * **Copy username** on a profile says "Copied!" only when the browser took the text. When the browser refuses (no clipboard permission), nothing changes and the page no longer throws an error.

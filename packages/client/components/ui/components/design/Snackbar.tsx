@@ -225,12 +225,14 @@ const ToastHost = styled("div", {
         bottom: "auto",
       },
     '&[data-placement="bottom-start"], &[data-placement="top-start"]': {
-      left: "16px",
+      // start and end follow the reading direction
+      left: "auto",
+      insetInlineStart: "16px",
       transform: "none",
     },
     '&[data-placement="bottom-end"], &[data-placement="top-end"]': {
       left: "auto",
-      right: "16px",
+      insetInlineEnd: "16px",
       transform: "none",
     },
   },

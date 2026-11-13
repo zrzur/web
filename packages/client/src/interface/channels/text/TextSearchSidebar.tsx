@@ -392,7 +392,8 @@ const Help = styled("ul", {
 const Row = styled("div", {
   base: {
     display: "flex",
-    justifyContent: "center",
+    // on the same start edge as the title above and the results below
+    justifyContent: "flex-start",
     paddingBlock: "4px",
     paddingInline: "12px",
   },

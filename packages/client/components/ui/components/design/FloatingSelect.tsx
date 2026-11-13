@@ -313,7 +313,8 @@ const SelectTrigger = styled("button", {
     open: {
       true: {
         borderColor: "var(--z-accent)",
-        boxShadow: "0 0 0 3px var(--z-accent-muted)",
+        // open reads like a focused field: the same crisp ring
+        boxShadow: "var(--z-field-focus-shadow)",
       },
     },
     disabled: {

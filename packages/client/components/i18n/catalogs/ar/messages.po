@@ -14181,7 +14181,7 @@ msgstr "على الأجهزة القوية فقط. هذا الجهاز قوي ب
 
 #: src/interface/channels/text/searchLabels.ts
 msgid "Only one mentions: filter is used, so \"{value}\" was left out."
-msgstr "يُستخدم عامل mentions: واحد فقط، لذلك تُرك \"{value}\"."
+msgstr "يُستخدم عامل mentions:‎ واحد فقط، لذلك تُرك \"{value}\"."
 
 #: components/app/interface/settings/server/LobbyRoleQuestionsEditor.tsx
 msgid "Only ordinary member roles can be offered: no managed roles and none with moderation or admin permissions."
@@ -22279,7 +22279,7 @@ msgstr "اكتب اسمًا جديدًا بالأعلى ثم أعد التسمي
 
 #: src/interface/channels/text/TextSearchSidebar.tsx
 msgid "Type words to search, or a filter like from:, has: or before:."
-msgstr "اكتب كلمات للبحث، أو عامل تصفية مثل from: أو has: أو before:."
+msgstr "اكتب كلمات للبحث، أو عامل تصفية مثل from:‎ أو has:‎ أو before:‎."
 
 #: src/interface/developers/docs/EndpointReference.tsx
 msgid "Type-checked only."
@@ -22594,11 +22594,11 @@ msgstr "حتى {MAX_LINKS} روابط تبدأ بـ https://. يرى الأشخ�
 
 #: src/interface/channels/text/searchLabels.ts
 msgid "Up to 10 from: filters are used, so \"{value}\" was left out."
-msgstr "يُستخدم 10 عوامل from: على الأكثر، لذلك تُرك \"{value}\"."
+msgstr "يُستخدم 10 عوامل from:‎ على الأكثر، لذلك تُرك \"{value}\"."
 
 #: src/interface/channels/text/searchLabels.ts
 msgid "Up to 50 in: filters are used, so \"{value}\" was left out."
-msgstr "يُستخدم 50 عامل in: على الأكثر، لذلك تُرك \"{value}\"."
+msgstr "يُستخدم 50 عامل in:‎ على الأكثر، لذلك تُرك \"{value}\"."
 
 #: components/app/interface/settings/user/plugins/text.ts
 msgid "Up to 8 KB of its own settings, kept with your account."

@@ -588,7 +588,7 @@ const Crumbs = styled("nav", {
       },
     },
     "& [aria-current]": { color: "var(--z-fg-primary)", fontWeight: 600 },
-    "&:dir(rtl) [data-mirror]": { transform: "scaleX(-1)" },
+    // direction icons turn by themselves in right-to-left (styles.css)
   },
 });
 

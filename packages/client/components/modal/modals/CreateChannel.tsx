@@ -12,6 +12,7 @@ import {
   Form2,
   Radio2,
   SettingsRow,
+  SettingsSection,
   Toggle,
 } from "@revolt/ui";
 import { Icon } from "@revolt/ui/icons/Icon";
@@ -110,7 +111,7 @@ export function CreateChannelModal(
       isDisabled={group.isPending}
     >
       <form onSubmit={submit}>
-        <Column>
+        <Column gap="lg">
           <TypePicker>
             <legend>
               <Trans>Type</Trans>
@@ -198,22 +199,25 @@ export function CreateChannelModal(
             label={t`Description (optional)`}
             placeholder={t`What this channel is for`}
           />
-          <SettingsRow
-            icon={<Icon name="lock-simple" size={20} />}
-            title={<Trans>Private channel</Trans>}
-            description={
-              <Trans>
-                Only you and the roles or members you add can see it.
-              </Trans>
-            }
-            control={(ids) => (
-              <Toggle
-                checked={isPrivate()}
-                aria-labelledby={ids.labelId}
-                onChange={() => setPrivate(!isPrivate())}
-              />
-            )}
-          />
+          {/* one boxed row, on the same edges as the fields above it */}
+          <SettingsSection>
+            <SettingsRow
+              icon={<Icon name="lock-simple" size={20} />}
+              title={<Trans>Private channel</Trans>}
+              description={
+                <Trans>
+                  Only you and the roles or members you add can see it.
+                </Trans>
+              }
+              control={(ids) => (
+                <Toggle
+                  checked={isPrivate()}
+                  aria-labelledby={ids.labelId}
+                  onChange={() => setPrivate(!isPrivate())}
+                />
+              )}
+            />
+          </SettingsSection>
         </Column>
       </form>
     </Dialog>
@@ -230,7 +234,7 @@ const TypePicker = styled("fieldset", {
   base: {
     border: 0,
     padding: 0,
-    margin: "0 0 6px",
+    margin: 0,
     minWidth: 0,
     display: "flex",
     flexDirection: "column",
@@ -239,7 +243,7 @@ const TypePicker = styled("fieldset", {
       padding: 0,
       marginBlockEnd: "8px",
       fontSize: "12px",
-      fontWeight: 650,
+      fontWeight: 600,
       color: "var(--z-fg-muted)",
     },
     "& [role='radiogroup']": {
@@ -255,9 +259,8 @@ const TypePicker = styled("fieldset", {
       borderRadius: "var(--z-radius, 10px)",
       border:
         "1px solid color-mix(in srgb, var(--z-fg-primary) 10%, transparent)",
-      background:
-        "linear-gradient(180deg, color-mix(in srgb, white 3%, var(--z-bg-input)), var(--z-bg-input))",
-      boxShadow: "inset 0 1px 0 rgb(255 255 255 / 0.04)",
+      // flat: the border separates the options, the chosen one is raised
+      background: "var(--z-bg-input)",
       color: "var(--z-fg-secondary)",
       "--z-icon-color": "var(--z-icon-muted)",
       transition:
@@ -295,12 +298,11 @@ const TypePicker = styled("fieldset", {
     },
     "& label[data-checked='true']": {
       color: "var(--z-fg-primary)",
+      // the choice is the raised neutral step with the accent border and a
+      // check; the fill stays neutral (pink is for actions, not for choices)
       borderColor: "var(--z-accent)",
-      background:
-        "linear-gradient(180deg, color-mix(in srgb, var(--z-accent) 14%, var(--z-bg-input)), color-mix(in srgb, var(--z-accent) 7%, var(--z-bg-input)))",
-      boxShadow:
-        "inset 0 1px 0 rgb(255 255 255 / 0.06), 0 0 0 1px var(--z-accent)",
-      "--z-icon-color": "var(--z-accent)",
+      background: "var(--z-tab-active-bg, var(--z-bg-raised))",
+      "--z-icon-color": "var(--z-fg-primary)",
     },
     "& label:has(input:disabled)": { opacity: 0.5, cursor: "not-allowed" },
   },

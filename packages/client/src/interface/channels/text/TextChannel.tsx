@@ -524,7 +524,7 @@ const sidebar = cva({
  */
 const WideSidebarContainer = styled("div", {
   base: {
-    paddingRight: "var(--gap-md)",
+    paddingInlineEnd: "var(--gap-md)",
     width: "360px",
     _phone: { width: "100%", paddingInline: "var(--gap-md)" },
   },

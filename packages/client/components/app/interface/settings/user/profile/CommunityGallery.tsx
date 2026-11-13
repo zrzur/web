@@ -602,7 +602,7 @@ const Back = styled("button", {
     cursor: "pointer",
     "--z-icon-color": "currentColor",
     // the chevron points back, which is right in Arabic
-    "&:dir(rtl) svg": { transform: "scaleX(-1)" },
+    // direction icons turn by themselves in right-to-left (styles.css)
     _hover: { background: "var(--z-bg-raised)" },
   },
 });

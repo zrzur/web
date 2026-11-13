@@ -692,18 +692,20 @@ export function ChannelHeader(props: Props) {
 const PhoneBack = styled("button", {
   base: {
     flexShrink: 0,
-    width: "40px",
-    height: "40px",
+    // a full 44 px target
+    width: "44px",
+    height: "44px",
     display: "grid",
     placeItems: "center",
-    marginInlineStart: "-6px",
+    marginInlineStart: "-8px",
     border: "none",
     borderRadius: "50%",
     background: "none",
     color: "var(--z-fg-primary)",
     cursor: "pointer",
     "--z-icon-color": "currentColor",
-    "& .z-icon": { _rtl: { transform: "scaleX(-1)" } },
+    // the arrow already turns with the reading direction (styles.css); a
+    // second flip here pointed it the wrong way in Arabic
     _active: { background: "var(--z-nav-selected)" },
     _focusVisible: { outline: "2px solid var(--z-focus)" },
   },

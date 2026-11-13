@@ -211,7 +211,7 @@ const ShelfHead = styled("div", {
         outline: "2px solid var(--z-focus)",
         outlineOffset: "2px",
       },
-      "&:dir(rtl) svg": { transform: "scaleX(-1)" },
+      // direction icons turn by themselves in right-to-left (styles.css)
       _phone: { minHeight: "44px" },
     },
     // a phone: the title on its own, the link under it

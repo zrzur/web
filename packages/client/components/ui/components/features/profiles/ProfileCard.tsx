@@ -65,7 +65,7 @@ const SectionTitle = styled("h3", {
     fontSize: "12px",
     lineHeight: "16px",
     fontWeight: 600,
-    textTransform: "uppercase",
+    // sentence case like every other section label (and Arabic has no capitals)
     color: "var(--profile-ink-2, var(--z-fg-muted))",
   },
 });

@@ -578,6 +578,8 @@ export function MessageContextMenu(props: {
         <Show when={canManageReactions() || canDelete() || canReport()}>
           <ContextMenuDivider />
         </Show>
+        {/* starts a selection, removes nothing yet: neutral, above the red rows */}
+        <SelectMessagesMenuItem message={props.message} />
         <Show when={canManageReactions()}>
           <ContextMenuSubMenu
             icon={MdDeleteSweep}
@@ -618,7 +620,6 @@ export function MessageContextMenu(props: {
             <Trans>Delete message</Trans>
           </ContextMenuButton>
         </Show>
-        <SelectMessagesMenuItem message={props.message} />
         <Show when={canReport()}>
           <ContextMenuButton icon={MdReport} onClick={report} destructive>
             <Trans>Report message</Trans>

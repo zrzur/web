@@ -21,6 +21,7 @@ import { useNavigate } from "@solidjs/router";
 import { cva } from "styled-system/css";
 import { styled } from "styled-system/jsx";
 
+import { conversationName } from "@revolt/app/interface/channels/conversationName";
 import { useClient, useUser } from "@revolt/client";
 import { useDevice } from "@revolt/common";
 import { statusLine } from "@revolt/common/lib/statusWrite";
@@ -171,12 +172,10 @@ export function AccountBar(props: { compact?: boolean; overPage?: boolean }) {
             </button>
             <button
               class={controlButton()}
-              aria-label={
-                offCall()
-                  ? t`Not connected to voice`
-                  : voice.unmuted()
-                    ? t`Mute`
-                    : t`Unmute`
+              // off a call the two controls still need different names
+              aria-label={voice.unmuted() || offCall() ? t`Mute` : t`Unmute`}
+              aria-description={
+                offCall() ? t`Not connected to voice` : undefined
               }
               aria-pressed={offCall() ? undefined : !voice.unmuted()}
               data-active={voice.unmuted() ? "true" : "false"}
@@ -207,11 +206,10 @@ export function AccountBar(props: { compact?: boolean; overPage?: boolean }) {
             <button
               class={controlButton()}
               aria-label={
-                offCall()
-                  ? t`Not connected to voice`
-                  : voice.deafen()
-                    ? t`Undeafen`
-                    : t`Deafen`
+                voice.deafen() && !offCall() ? t`Undeafen` : t`Deafen`
+              }
+              aria-description={
+                offCall() ? t`Not connected to voice` : undefined
               }
               aria-pressed={
                 offCall()
@@ -345,10 +343,7 @@ function VoiceSection() {
   };
 
   const location = () =>
-    [
-      voice.channel()?.name ?? voice.channel()?.recipient?.username,
-      voice.channel()?.server?.name,
-    ]
+    [conversationName(voice.channel()), voice.channel()?.server?.name]
       .filter(Boolean)
       .join(" / ");
 

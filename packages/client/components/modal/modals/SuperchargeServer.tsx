@@ -749,7 +749,7 @@ const Upsell = styled("button", {
       background: "color-mix(in srgb, var(--z-wings) 6%, transparent)",
       color: "var(--z-fg-primary)",
     },
-    "&:dir(rtl) svg:last-child": { scale: "-1 1" },
+    // direction icons turn by themselves in right-to-left (styles.css)
   },
 });
 
@@ -841,7 +841,9 @@ const LevelFan = styled("div", {
   base: {
     position: "absolute",
     zIndex: -1,
-    right: "12px",
+    // at the end of the card in either direction, leaning away from the text
+    insetInlineEnd: "12px",
+    _rtl: { scale: "-1 1" },
     top: "50%",
     translate: "0 -62%",
     display: "flex",

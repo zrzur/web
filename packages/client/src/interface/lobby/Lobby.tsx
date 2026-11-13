@@ -11,7 +11,12 @@ import {
 } from "solid-js";
 
 import { Plural, useLingui } from "@lingui/solid/macro";
-import type { Channel, LobbySection, Server, ServerMember } from "@zrzur/sdk/solid";
+import type {
+  Channel,
+  LobbySection,
+  Server,
+  ServerMember,
+} from "@zrzur/sdk/solid";
 import { styled } from "styled-system/jsx";
 import { decodeTime } from "ulid";
 
@@ -913,7 +918,7 @@ const Page = styled("div", {
       "--z-nav-hover":
         "color-mix(in srgb, var(--lobby-card-ink) 7%, transparent)",
     },
-    "& [data-chevron]": { _rtl: { transform: "scaleX(-1)" } },
+    // direction icons turn by themselves in right-to-left (styles.css)
     "& button:focus-visible, & summary:focus-visible": {
       outline: "2px solid var(--z-focus)",
       outlineOffset: "3px",
@@ -1022,12 +1027,14 @@ const Glass = styled("div", {
     gap: "16px 24px",
     marginInline: "0",
     marginBlockStart: "-26px",
-    padding: "0 8px 24px",
+    // the actions line up with the banner and the cards below; only the
+    // picture, with its ring, steps in from the edge
+    padding: "0 0 24px",
     borderBlockEnd: "1px solid var(--z-border-subtle)",
     _phone: {
       marginInline: "0",
       marginBlockStart: "-22px",
-      padding: "0 4px 20px",
+      padding: "0 0 20px",
     },
   },
 });
@@ -1039,6 +1046,8 @@ const Identity = styled("div", {
     gap: "16px",
     minWidth: 0,
     flex: "1 1 320px",
+    paddingInlineStart: "8px",
+    _phone: { paddingInlineStart: "6px" },
   },
 });
 
@@ -1172,7 +1181,8 @@ const ActionButton = styled("button", {
     background: "var(--z-btn-surface-bg)",
     boxShadow: "var(--z-btn-surface-lift)",
     color: "var(--z-fg-primary)",
-    fontSize: "14px",
+    // the same label size as every other button
+    fontSize: "15px",
     fontWeight: 600,
     cursor: "pointer",
     "--z-icon-color": "currentColor",
@@ -1187,20 +1197,18 @@ const ActionButton = styled("button", {
       outline: "2px solid var(--z-focus)",
       outlineOffset: "2px",
     },
-    // Primary CTA stays Midnight Pulse violet — lobby accent tints chips /
-    // banner / selection, never the filled action (link-blue must not paint buttons).
+    // The primary action is the app's own filled button: the action colour,
+    // flat, a step darker on hover and when pressed. The lobby accent tints
+    // chips, banner and selection, never the filled action.
     "&[data-main]": {
-      border:
-        "1px solid color-mix(in srgb, var(--z-accent-fill, var(--lobby-accent-fallback)) 55%, transparent)",
-      background:
-        "linear-gradient(180deg, var(--z-accent-fill, var(--lobby-accent-fallback)), color-mix(in srgb, var(--z-accent-fill, var(--lobby-accent-fallback)) 82%, black))",
-      boxShadow:
-        "var(--z-btn-lift), 0 10px 22px -12px color-mix(in srgb, var(--z-accent-fill, var(--lobby-accent-fallback)) 70%, transparent)",
+      borderColor: "transparent",
+      background: "var(--z-accent-fill, var(--lobby-accent-fallback))",
+      boxShadow: "none",
       color: "var(--z-on-accent, #fff)",
-      _hover: {
-        filter: "brightness(1.06)",
-        background:
-          "linear-gradient(180deg, color-mix(in srgb, white 8%, var(--z-accent-fill, var(--lobby-accent-fallback))), color-mix(in srgb, var(--z-accent-fill, var(--lobby-accent-fallback)) 78%, black))",
+      _hover: { background: "var(--z-accent-hover)" },
+      _active: {
+        background: "var(--z-accent-pressed)",
+        boxShadow: "none",
       },
     },
     "&[data-quiet]": {

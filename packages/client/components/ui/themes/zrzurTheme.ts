@@ -1058,6 +1058,12 @@ export function createZrzurSemanticVariables(
       : onAccent,
     "--z-mention": "var(--z-mention-badge)",
     "--z-unread": dark ? d.headerPrimary : l.fgPrimary,
+    // names on a nameplate in a list: the theme's ink and a halo of the
+    // opposite tone, so they read where the plate is faint and where it is not
+    "--z-plate-ink": dark ? "#FFFFFF" : l.fgPrimary,
+    "--z-plate-ink-halo": dark
+      ? "0 0 2px rgb(0 0 0 / 0.6), 0 1px 4px rgb(0 0 0 / 0.7)"
+      : "0 0 2px rgb(255 255 255 / 0.95), 0 0 6px rgb(255 255 255 / 0.9), 0 1px 4px rgb(255 255 255 / 0.9)",
     "--z-badge": dark ? d.danger : l.danger,
     "--z-focus": focus,
     "--z-status-success": dark ? d.success : l.success,

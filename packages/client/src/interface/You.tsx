@@ -368,9 +368,9 @@ const Presences = styled("div", {
   base: {
     display: "flex",
     gap: "8px",
-    overflowX: "auto",
-    scrollbarWidth: "none",
-    "&::-webkit-scrollbar": { display: "none" },
+    // every choice stays in view: a narrow screen gets a second row, not a
+    // row that is cut off at the edge
+    flexWrap: "wrap",
   },
 });
 
@@ -391,6 +391,14 @@ const PresenceChip = styled("button", {
     fontWeight: 600,
     whiteSpace: "nowrap",
     cursor: "pointer",
+    transition: "background-color 120ms ease, border-color 120ms ease",
+    _motionReduce: { transition: "none" },
+    _phone: { minHeight: "44px" },
+    "&:hover": {
+      color: "var(--z-fg-primary)",
+      background: "var(--z-nav-hover)",
+    },
+    "&:active": { background: "var(--z-nav-selected)" },
     "&[aria-checked='true']": {
       color: "var(--z-fg-primary)",
       // the current choice is raised, never tinted (brand.md §6)

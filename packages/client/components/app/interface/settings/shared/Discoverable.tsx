@@ -811,9 +811,7 @@ const Label = styled("label", {
     alignItems: "center",
     gap: "8px",
     fontSize: "12px",
-    fontWeight: 700,
-    letterSpacing: "0.05em",
-    textTransform: "uppercase",
+    fontWeight: 600,
     color: "var(--z-fg-secondary)",
   },
 });

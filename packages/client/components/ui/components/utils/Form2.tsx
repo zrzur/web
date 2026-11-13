@@ -116,7 +116,7 @@ const EditorBox = styled("div", {
     },
     "&:focus-within": {
       borderColor: "var(--z-accent)",
-      boxShadow: "0 0 0 3px var(--z-accent-muted)",
+      boxShadow: "var(--z-field-focus-shadow)",
     },
   },
 });

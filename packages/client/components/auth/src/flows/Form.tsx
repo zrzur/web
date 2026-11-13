@@ -1,4 +1,3 @@
-import type { TurnstileFunctions } from "./Turnstile";
 import {
   createContext,
   createSignal,
@@ -9,6 +8,7 @@ import {
   Show,
   useContext,
 } from "solid-js";
+import type { TurnstileFunctions } from "./Turnstile";
 
 import { useLingui } from "@lingui/solid/macro";
 
@@ -138,8 +138,8 @@ interface FieldPreset {
   value?: any;
   disabled?: boolean;
   /**
-   * Shown in a small pop-up above the field while it has focus (above, so it
-   * doesn't clash with password manager suggestions below the field)
+   * Shown as a note under the field while it has focus; on wide windows it
+   * sits beside the card instead, clear of password manager suggestions
    */
   hint?: JSX.Element;
 }
@@ -151,42 +151,42 @@ const HintAnchor = styled("div", {
   },
 });
 
+/*
+ * The hint never covers the form: it is a quiet note under its field, and on
+ * wide windows it moves out to the free space beside the card.
+ */
 const HintCard = styled("div", {
   base: {
-    position: "absolute",
-    zIndex: 5,
-    bottom: "calc(100% + 10px)",
-    insetInline: 0,
     display: "flex",
     alignItems: "flex-start",
     gap: "12px",
-    padding: "12px 14px",
+    marginBlockStart: "8px",
+    padding: "12px",
     color: "var(--z-fg-primary)",
-    background: "var(--z-popover-bg, var(--z-bg-raised))",
-    border: "1px solid var(--z-popover-border, var(--z-border-subtle))",
+    background: "var(--z-tile-bg, var(--z-bg-input))",
+    border: "1px solid var(--z-tile-border, var(--z-border-subtle))",
     borderRadius: "var(--z-radius, 10px)",
-    boxShadow: "var(--z-popover-lift)",
-    fontSize: "0.85rem",
-    lineHeight: 1.45,
+    fontSize: "13px",
+    lineHeight: "20px",
     animation: "authHintIn 160ms cubic-bezier(0.2, 0, 0, 1)",
 
-    // little arrow pointing down at the field
-    "&::before": {
-      content: '""',
+    "@media (min-width: 1180px)": {
       position: "absolute",
-      bottom: "-5px",
-      insetInlineStart: "24px",
-      width: "10px",
-      height: "10px",
-      background: "inherit",
-      transform: "rotate(45deg)",
-      borderRadius: "2px",
+      zIndex: 5,
+      top: 0,
+      // past the card's own padding, then a gap
+      insetInlineStart: "calc(100% + 24px + 16px)",
+      width: "300px",
+      marginBlockStart: 0,
+      background: "var(--z-popover-bg, var(--z-bg-raised))",
+      borderColor: "var(--z-popover-border, var(--z-border-subtle))",
+      boxShadow: "var(--z-popover-lift)",
     },
 
     "& strong": {
       display: "block",
       marginBottom: "2px",
-      fontWeight: 650,
+      fontWeight: 600,
     },
 
     "& p": {
@@ -195,9 +195,12 @@ const HintCard = styled("div", {
     },
 
     "& a": {
-      display: "inline-block",
-      marginTop: "6px",
-      fontWeight: 650,
+      // a 24 px target for the one link in the note
+      display: "inline-flex",
+      alignItems: "center",
+      minHeight: "24px",
+      marginTop: "4px",
+      fontWeight: 600,
       color: "var(--z-link)",
     },
 
@@ -208,8 +211,8 @@ const HintCard = styled("div", {
 });
 
 /**
- * Wraps a field so its hint pops up above it while the field (or the hint
- * itself, e.g. a link in it) has focus
+ * Wraps a field so its hint shows while the field (or the hint itself, e.g.
+ * a link in it) has focus
  */
 function FieldWithHint(props: { hint: JSX.Element; children: JSX.Element }) {
   let anchor: HTMLDivElement | undefined;

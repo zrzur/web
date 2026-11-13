@@ -144,6 +144,6 @@ export function CategoryPermissionsModal(
 /** The back arrow points the other way in right-to-left languages */
 const Back = styled("div", {
   base: {
-    "& .z-icon": { _rtl: { transform: "scaleX(-1)" } },
+    // direction icons turn by themselves in right-to-left (styles.css)
   },
 });

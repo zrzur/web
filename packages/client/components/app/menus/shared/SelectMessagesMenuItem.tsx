@@ -29,7 +29,6 @@ export function SelectMessagesMenuItem(props: { message?: Message }) {
         onClick={() =>
           startSelection(props.message!.channelId, props.message!.id)
         }
-        destructive
       >
         <Trans>Select messages</Trans>
       </ContextMenuButton>

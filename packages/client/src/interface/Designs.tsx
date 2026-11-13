@@ -1023,10 +1023,11 @@ export function DesignsStrip() {
                 onClick={() => navigate(`${designsBase()}/decorations`)}
               >
                 <Preview item={item} size={48} />
-                <span>
+                {/* dir=auto: a long name shortens at its own end, in either script */}
+                <span dir="auto">
                   <bdi>{item.name}</bdi>
                 </span>
-                <small>
+                <small dir="auto">
                   <bdi>{creatorName(data()!.creators[item.creator_id])}</bdi>
                 </small>
               </StripItem>
@@ -1077,8 +1078,8 @@ const StripHead = styled("div", {
 const Strip = styled("div", {
   base: {
     display: "grid",
-    gridTemplateColumns: "repeat(auto-fill, minmax(104px, 1fr))",
-    gap: "10px",
+    gridTemplateColumns: "repeat(auto-fill, minmax(112px, 1fr))",
+    gap: "8px",
   },
 });
 
@@ -1089,15 +1090,23 @@ const StripItem = styled("button", {
     alignItems: "center",
     gap: "4px",
     minWidth: 0,
-    padding: "14px 8px 10px",
+    // names keep 12 px from the border of the tile
+    padding: "12px",
     border: "1px solid var(--z-border-subtle)",
     borderRadius: "var(--z-shape-card, 14px)",
     background: "var(--z-bg-raised)",
     color: "var(--z-fg-primary)",
     font: "inherit",
     cursor: "pointer",
+    transition: "border-color 120ms ease, background-color 120ms ease",
+    _motionReduce: { transition: "none" },
     _hover: {
-      borderColor: "var(--z-designs-edge-hover)",
+      borderColor: "var(--z-designs-edge-hover, var(--z-border-strong))",
+    },
+    "&:active": { background: "var(--z-nav-selected)" },
+    _focusVisible: {
+      outline: "2px solid var(--z-focus)",
+      outlineOffset: "2px",
     },
     // decoration art is 1.5x the avatar: keep room for all of it
     "& > .z-deco": { margin: "12px" },
@@ -1107,7 +1116,7 @@ const StripItem = styled("button", {
       whiteSpace: "nowrap",
       textOverflow: "ellipsis",
     },
-    "& > span:not(.z-deco)": { fontSize: "13px", fontWeight: 650 },
+    "& > span:not(.z-deco)": { fontSize: "13px", fontWeight: 600 },
     "& > small": { fontSize: "12px", color: "var(--z-fg-muted)" },
   },
 });

@@ -605,6 +605,9 @@ const Container = styled("div", {
       width: "min(100%, var(--z-dialog-width, 440px))",
       padding: "20px",
       borderRadius: "14px",
+      // a creation form shows whole where the window allows it, so its last
+      // row is not cut in half at the fold
+      maxHeight: "min(calc(100dvh - 96px), 720px)",
       "& [data-dialog-header]": { marginBlockEnd: "20px" },
       "& .z-text-field": { width: "100%", minWidth: 0 },
       "& [data-dialog-actions]": {
@@ -883,7 +886,8 @@ const Spinner = styled("span", {
   base: {
     width: "14px",
     height: "14px",
-    marginInlineEnd: "8px",
+    // the button's own 8 px gap sets it apart from the label
+    flexShrink: 0,
     borderRadius: "50%",
     border: "2px solid currentColor",
     borderInlineEndColor: "transparent",

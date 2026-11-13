@@ -220,7 +220,7 @@ const PhoneBack = styled("button", {
     fontWeight: 600,
     cursor: "pointer",
     "--z-icon-color": "currentColor",
-    "& .z-icon": { _rtl: { transform: "scaleX(-1)" } },
+    // direction icons turn by themselves in right-to-left (styles.css)
     _hover: { color: "var(--z-fg-primary)" },
     _active: { background: "var(--z-bg-raised)" },
     _focusVisible: { outline: "2px solid var(--z-focus)" },

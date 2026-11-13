@@ -4,6 +4,7 @@ import { For, JSX, Show, Suspense, createMemo, lazy } from "solid-js";
 import { Trans, useLingui } from "@lingui/solid/macro";
 import { styled } from "styled-system/jsx";
 
+import { conversationName } from "@revolt/app/interface/channels/conversationName";
 import { useClient, useUser } from "@revolt/client";
 import { CONFIGURATION } from "@revolt/common";
 import { useModals } from "@revolt/modal";
@@ -191,9 +192,9 @@ export function HomePage() {
                           channel.iconURL ??
                           channel.recipient?.animatedAvatarURL
                         }
-                        fallback={channel.displayName}
+                        fallback={conversationName(channel)}
                       />
-                      <span dir="auto">{channel.displayName}</span>
+                      <span dir="auto">{conversationName(channel)}</span>
                       <Show when={channel.mentions?.size}>
                         <Count>{channel.mentions!.size}</Count>
                       </Show>
@@ -641,6 +642,8 @@ const ServerGrid = styled("div", {
       scrollbarWidth: "none",
       marginInline: "-16px",
       paddingInline: "16px",
+      // a snapped tile stops at the page gutter, not at the screen edge
+      scrollPaddingInline: "16px",
       "&::-webkit-scrollbar": { display: "none" },
       "& > *": { flex: "0 0 88px", scrollSnapAlign: "start" },
     },
