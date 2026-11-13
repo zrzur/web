@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 
-import { isPaidListing, listingMark } from "./marks";
+import { isPaidListing, listingBadge, listingMark } from "./marks";
 
 describe("paid placements are always labelled as ads", () => {
   const paid = [
@@ -35,5 +35,25 @@ describe("paid placements are always labelled as ads", () => {
 
   it("the paid boost tier is not named like the hand-picked mark", () => {
     expect(listingMark({ boost: "Boost" })).toBe("boosted");
+  });
+});
+
+describe("listingBadge", () => {
+  it("gives Zrzur's own server the official mark, not the verified seal", () => {
+    expect(
+      listingBadge({ kind: "servers", verified: true, official: true }),
+    ).toBe("server_official");
+  });
+  it("gives a verified server the seal", () => {
+    expect(listingBadge({ kind: "servers", verified: true })).toBe(
+      "server_verified",
+    );
+  });
+  it("gives a verified bot the bot seal", () => {
+    expect(listingBadge({ kind: "bots", verified: true })).toBe("bot_verified");
+  });
+  it("gives nothing to the rest", () => {
+    expect(listingBadge({ kind: "servers" })).toBeUndefined();
+    expect(listingBadge({ kind: "bots", verified: false })).toBeUndefined();
   });
 });

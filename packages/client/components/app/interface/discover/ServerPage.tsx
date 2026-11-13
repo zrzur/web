@@ -16,13 +16,23 @@ import { styled } from "styled-system/jsx";
 
 import { useClient, useClientLifecycle } from "@revolt/client";
 import { useModals } from "@revolt/modal";
+import { getInviteLink } from "@revolt/modal/modals/inviteLink";
 import { useLocation, useNavigate } from "@revolt/routing";
 import { Avatar } from "@revolt/ui";
+import { BadgeMark } from "@revolt/ui/components/features/profiles/badges/BadgeMark";
 import { Icon } from "@revolt/ui/icons/Icon";
 
+import { ListingAbout } from "./About";
 import { discoverApi } from "./api";
 import { ListingArt } from "./Art";
-import { CountLabel, Listing, MarkPill, fromServer, useFileUrl } from "./Cards";
+import {
+  CountLabel,
+  Listing,
+  MarkPill,
+  fromServer,
+  listingBadge,
+  useFileUrl,
+} from "./Cards";
 import { categoryIcon, useDiscoverLabels } from "./categories";
 import { isPaidListing } from "./marks";
 import { useOpenInApp } from "./OpenInApp";
@@ -89,12 +99,27 @@ export function ServerPage(props: {
         .slice(0, 3),
   );
 
-  /** The address people share: the custom link when there is one */
+  /** This page's own address: the custom link name when there is one */
   const pageSlug = (item: Listing) => item.link ?? item.id;
   const pageUrl = (item: Listing) =>
     props.site
       ? `${window.location.origin}/${pageSlug(item)}`
       : `${discoverUrl()}/${pageSlug(item)}`;
+  /**
+   * The link people share. A server with a custom link has an invite link
+   * of its own (zrzur.cc/<name>): that one joins the server, so it is the one
+   * shown and copied. Without it the only public address is this page.
+   */
+  const shareLink = (item: Listing) =>
+    item.link
+      ? {
+          invite: true,
+          url: getInviteLink(item.link, {
+            href: (path) => `${appUrl()}${path}`,
+          }),
+        }
+      : { invite: false, url: pageUrl(item) };
+  const bare = (url: string) => url.replace(/^https?:\/\//, "");
 
   // old or ID links move to the custom link, keeping ?join
   createEffect(() => {
@@ -170,7 +195,7 @@ export function ServerPage(props: {
 
   const copyLink = (item: Listing) =>
     navigator.clipboard
-      ?.writeText(pageUrl(item))
+      ?.writeText(shareLink(item).url)
       .then(() => {
         setCopied(true);
         setTimeout(() => setCopied(false), 2000);
@@ -264,7 +289,7 @@ export function ServerPage(props: {
               </BannerArea>
 
               <Columns>
-                <Main>
+                <Main data-main>
                   <Identity>
                     <IconFrame>
                       <Avatar
@@ -276,6 +301,11 @@ export function ServerPage(props: {
                     </IconFrame>
                     <h1 ref={heading} tabIndex={-1}>
                       <bdi>{item().name}</bdi>
+                      <Show when={listingBadge(item())}>
+                        {(badge) => (
+                          <BadgeMark id={badge()} size="sm" mode="hover" />
+                        )}
+                      </Show>
                     </h1>
                   </Identity>
 
@@ -331,14 +361,14 @@ export function ServerPage(props: {
                       <Trans>About this server</Trans>
                     </h2>
                     <Show
-                      when={item().description}
+                      when={item().description?.trim()}
                       fallback={
                         <Muted>
                           <Trans>No description yet.</Trans>
                         </Muted>
                       }
                     >
-                      <Description dir="auto">{item().description}</Description>
+                      <ListingAbout text={item().description!} />
                     </Show>
                   </section>
 
@@ -419,70 +449,63 @@ export function ServerPage(props: {
 
                 <Aside>
                   <JoinCard aria-live="polite">
-                    <Switch
-                      fallback={
-                        <State data-tone="open">
-                          <span>
-                            <Icon name="check" size={20} />
-                          </span>
-                          <div>
-                            <strong>
-                              <Trans>Open to everyone</Trans>
-                            </strong>
-                            <small>
-                              <Trans>You join right away.</Trans>
-                            </small>
-                          </div>
-                        </State>
-                      }
-                    >
-                      <Match when={isMember()}>
-                        <State data-tone="open">
-                          <span>
-                            <Icon name="check" size={20} />
-                          </span>
-                          <div>
-                            <strong>
-                              <Trans>You're a member</Trans>
-                            </strong>
-                          </div>
-                        </State>
-                      </Match>
-                      <Match when={join() === "requested"}>
-                        <State data-tone="wait">
-                          <span>
-                            <Icon name="clock" size={20} />
-                          </span>
-                          <div>
-                            <strong>
-                              <Trans>Request sent</Trans>
-                            </strong>
-                            <small>
-                              <Trans>
-                                You'll join as soon as a moderator approves it.
-                              </Trans>
-                            </small>
-                          </div>
-                        </State>
-                      </Match>
-                      <Match when={join() === "closed"}>
-                        <State data-tone="closed">
-                          <span>
-                            <Icon name="lock-simple" size={20} />
-                          </span>
-                          <div>
-                            <strong>
-                              <Trans>Joining is closed right now</Trans>
-                            </strong>
-                            <small>
-                              <Trans>
-                                Try again later, or look at similar communities.
-                              </Trans>
-                            </small>
-                          </div>
-                        </State>
-                      </Match>
-                    </Switch>
+                    {/* a member needs no notice: the button opens the server */}
+                    <Show when={!isMember()}>
+                      <Switch
+                        fallback={
+                          <State data-join-state data-tone="open">
+                            <span>
+                              <Icon name="check" size={20} />
+                            </span>
+                            <div>
+                              <strong>
+                                <Trans>Open to everyone</Trans>
+                              </strong>
+                              <small>
+                                <Trans>You join right away.</Trans>
+                              </small>
+                            </div>
+                          </State>
+                        }
+                      >
+                        <Match when={join() === "requested"}>
+                          <State data-join-state data-tone="wait">
+                            <span>
+                              <Icon name="clock" size={20} />
+                            </span>
+                            <div>
+                              <strong>
+                                <Trans>Request sent</Trans>
+                              </strong>
+                              <small>
+                                <Trans>
+                                  You'll join as soon as a moderator approves
+                                  it.
+                                </Trans>
+                              </small>
+                            </div>
+                          </State>
+                        </Match>
+                        <Match when={join() === "closed"}>
+                          <State data-join-state data-tone="closed">
+                            <span>
+                              <Icon name="lock-simple" size={20} />
+                            </span>
+                            <div>
+                              <strong>
+                                <Trans>Joining is closed right now</Trans>
+                              </strong>
+                              <small>
+                                <Trans>
+                                  Try again later, or look at similar
+                                  communities.
+                                </Trans>
+                              </small>
+                            </div>
+                          </State>
+                        </Match>
+                      </Switch>
+                    </Show>
 
                     <Show
                       when={join() !== "requested" && join() !== "closed"}
@@ -531,12 +554,20 @@ export function ServerPage(props: {
                     <Row>
                       <SecondaryButton
                         type="button"
+                        data-copy-link
                         onClick={() => copyLink(item())}
                       >
                         <Icon name={copied() ? "check" : "link"} size={18} />
                         <Show
                           when={copied()}
-                          fallback={<Trans>Copy link</Trans>}
+                          fallback={
+                            <Show
+                              when={shareLink(item()).invite}
+                              fallback={<Trans>Copy page link</Trans>}
+                            >
+                              <Trans>Copy invite link</Trans>
+                            </Show>
+                          }
                         >
                           <Trans>Copied</Trans>
                         </Show>
@@ -553,12 +584,17 @@ export function ServerPage(props: {
                     </Row>
                   </JoinCard>
 
-                  <Details>
-                    <dt>
-                      <Trans>Link</Trans>
+                  <Details data-share-link>
+                    <dt data-link-label>
+                      <Show
+                        when={shareLink(item()).invite}
+                        fallback={<Trans>Discover page</Trans>}
+                      >
+                        <Trans>Invite link</Trans>
+                      </Show>
                     </dt>
-                    <dd dir="ltr">
-                      {pageUrl(item()).replace(/^https?:\/\//, "")}
+                    <dd dir="ltr" data-link-value>
+                      {bare(shareLink(item()).url)}
                     </dd>
                   </Details>
                 </Aside>
@@ -682,6 +718,9 @@ const Identity = styled("div", {
       margin: 0,
       paddingBottom: "4px",
       minWidth: 0,
+      display: "flex",
+      alignItems: "center",
+      gap: "8px",
       fontSize: "28px",
       lineHeight: "36px",
       fontWeight: 700,
@@ -763,18 +802,6 @@ const Pulse = styled("dl", {
       // an odd number of facts: the last one takes the whole row
       "& > div:last-child:nth-child(odd)": { gridColumn: "1 / -1" },
     },
-  },
-});
-
-const Description = styled("p", {
-  base: {
-    margin: 0,
-    maxWidth: "680px",
-    fontSize: "18px",
-    lineHeight: "30px",
-    color: "var(--z-fg-primary)",
-    whiteSpace: "pre-line",
-    overflowWrap: "anywhere",
   },
 });
 
@@ -1047,16 +1074,21 @@ const Details = styled("dl", {
     borderRadius: "14px",
     border: "1px solid var(--dz-edge)",
     background: "var(--z-card-bg)",
-    display: "grid",
-    gridTemplateColumns: "auto 1fr",
-    gap: "12px 16px",
+    display: "flex",
+    flexDirection: "column",
+    gap: "4px",
     fontSize: "14px",
-    "& dt": { color: "var(--z-fg-muted)" },
+    lineHeight: "20px",
+    "& dt": { fontSize: "13px", color: "var(--z-fg-muted)" },
+    // the whole address, on as many lines as it needs: never cut
     "& dd": {
       margin: 0,
+      minWidth: 0,
       overflowWrap: "anywhere",
       textAlign: "start",
       fontFamily: "'IBM Plex Sans', sans-serif",
+      fontWeight: 600,
+      userSelect: "all",
     },
   },
 });

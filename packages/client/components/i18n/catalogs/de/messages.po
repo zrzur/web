@@ -25779,3 +25779,19 @@ msgstr "Zrzur, direkt auf <0>deinem Desktop.</0>"
 #: components/app/interface/settings/user/appearance/AppearanceMenu.tsx
 #~ msgid "Zrzur's own look: very dark neutral panels with Zrzur Pink as the one accent."
 #~ msgstr "Zrzurs eigener Look: sehr dunkle, neutrale Flächen mit Zrzur-Pink als einziger Akzentfarbe."
+
+#: components/auth/src/flows/SignUpConsent.tsx
+msgid "I accept the <0>Terms of Service</0> and the <1>Community Guidelines</1> and have read the <2>Privacy Policy</2>."
+msgstr "Ich akzeptiere die <0>Nutzungsbedingungen</0> und die <1>Community-Richtlinien</1> und habe die <2>Datenschutzerklärung</2> gelesen."
+
+#: components/auth/src/flows/Form.tsx
+msgid "Tick the box to accept before you continue."
+msgstr "Setze das Häkchen, um zuzustimmen, bevor du fortfährst."
+
+#: components/app/interface/discover/ServerPage.tsx
+msgid "Copy page link"
+msgstr "Seitenlink kopieren"
+
+#: components/app/interface/discover/ServerPage.tsx
+msgid "Discover page"
+msgstr "Discover-Seite"

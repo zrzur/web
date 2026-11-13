@@ -18,6 +18,12 @@
 ### Badges beside the name (2026-11-13)
 
 * **Profile card and full profile:** badges sit right after the name. The small card shows the three most important ones; the full profile shows all of them, on a second line where they don't fit beside the name. The box of badges under the username is gone.
+### Discover server page (2026-11-13)
+
+* **Descriptions are formatted.** A server's or bot's description on its Discover page shows bold text, lists and links the way the server info panel does (it showed the raw `**` and `-` marks). Cards, link previews and search results show the same text as plain words.
+* **The link shown is the invite link.** A server with a custom link shows and copies that link (`zrzur.cc/<name>`), labelled "Invite link"; it showed the Discover page's own address under the bare word "Link". A server without one shows "Discover page". The address is never cut.
+* **Members** see only "Go to server"; the "You're a member" notice is gone.
+* **The official server** carries the official mark on its card, in the dialog and beside its name on the page (the card drew the verified seal).
 
 ### Design audit of the whole app (2026-11-13)
 
