@@ -2,6 +2,10 @@
 
 ## Unreleased
 
+### Badges beside the name (2026-11-13)
+
+* **Profile card and full profile:** badges sit right after the name. The small card shows the three most important ones; the full profile shows all of them, on a second line where they don't fit beside the name. The box of badges under the username is gone.
+
 ### Design audit of the whole app (2026-11-13)
 
 * **Arabic: arrows point the right way.** Direction icons are mirrored in one place only. A second flip beside some components had turned them back: "Back" on sign-up, in settings on phones, in channel search and in category permissions, the chevrons on the lobby and in "Create your server", breadcrumbs on Designs and Discover, the calendar's month arrows, and Forward in the message toolbar (it looked the same as Reply).
