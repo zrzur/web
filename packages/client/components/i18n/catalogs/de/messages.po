@@ -641,9 +641,11 @@ msgstr "{0} Meldende"
 msgid "{0} requests per {1} s"
 msgstr "{0} Anfragen pro {1} s"
 
+#. placeholder {0}: (ms / 1000).toLocaleString()
 #. placeholder {0}: seconds(sound.duration_ms)
 #: components/app/interface/settings/server/soundboard/SoundboardList.tsx
 #: components/app/interface/settings/server/soundboard/SoundLibrary.tsx
+#: components/app/interface/settings/user/voice/GameKeysOptions.tsx
 msgid "{0} s"
 msgstr "{0} s"
 
@@ -843,6 +845,10 @@ msgstr "{name} denkt nach…"
 #: components/modal/lib/CreateServerFlow.tsx
 msgid "{name}'s server"
 msgstr "Server von {name}"
+
+#: components/app/interface/settings/user/voice/GameKeysOptions.tsx
+msgid "{other} already uses that. Press another key, or Esc to cancel."
+msgstr "„{other}“ nutzt das bereits. Drücke eine andere Taste oder Esc zum Abbrechen."
 
 #: components/app/interface/settings/user/subscriptions/BillingHistory.tsx
 msgid "{tier} on Discover, {name}"
@@ -1250,6 +1256,10 @@ msgstr "Hat dir jemand einen Link geschickt? Füge ihn hier ein."
 msgid "A galaxy around you."
 msgstr "Eine Galaxie um dich herum."
 
+#: components/app/interface/settings/user/voice/GameKeysOptions.tsx
+msgid "A game started as administrator hides its keys from other apps; start Zrzur as administrator too to use them there."
+msgstr "Ein als Administrator gestartetes Spiel verbirgt seine Tasten vor anderen Apps; starte Zrzur ebenfalls als Administrator, um sie dort zu nutzen."
+
 #: components/app/interface/settings/user/bots/CommandManager.tsx
 msgid "A group holds only sub-commands."
 msgstr "Eine Gruppe enthält nur Unterbefehle."
@@ -1257,6 +1267,10 @@ msgstr "Eine Gruppe enthält nur Unterbefehle."
 #: components/app/interface/settings/user/bots/CommandManager.tsx
 msgid "A group needs at least one sub-command."
 msgstr "Eine Gruppe braucht mindestens einen Unterbefehl."
+
+#: components/app/interface/settings/user/voice/GameKeysOptions.tsx
+msgid "A key that types would switch this while you write. Hold Ctrl, Alt or Shift with it, or press another key."
+msgstr "Eine Taste, die Text schreibt, würde beim Tippen umschalten. Halte Strg, Alt oder Umschalt dazu oder drücke eine andere Taste."
 
 #: components/app/interface/settings/user/bots/CommandManager.tsx
 msgid "A language tag is not valid."
@@ -1273,6 +1287,10 @@ msgstr "Mitglied des offiziellen Zrzur-Teams. Server-Moderatoren bekommen dieses
 #: components/app/interface/support/NoticeCenter.tsx
 msgid "A message from the Zrzur team"
 msgstr "Eine Nachricht vom Zrzur-Team"
+
+#: components/modal/modals/ScreenSharePicker.tsx
+msgid "A minimised window is not listed. Open it first."
+msgstr "Ein minimiertes Fenster wird nicht aufgeführt. Öffne es zuerst."
 
 #: components/app/interface/settings/user/subscriptions/PlusPage.tsx
 msgid "A note on money"
@@ -1431,6 +1449,7 @@ msgid "Able to speak in voice call"
 msgstr "Kann im Sprachkanal sprechen"
 
 #: components/app/interface/settings/server/LobbySettings.tsx
+#: components/app/interface/settings/user/Native.tsx
 #: components/app/interface/settings/user/profile/UserProfileEditor.tsx
 #: components/app/interface/settings/user/support/ContactSupport.tsx
 #: components/modal/modals/ServerInfo.tsx
@@ -2238,6 +2257,10 @@ msgstr "Kanal ansehen erlauben"
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 msgid "Allow: this role also sees private channels, unless a channel denies it. Default: only the channels everyone sees."
 msgstr "Erlauben: Diese Rolle sieht auch private Kanäle, außer ein Kanal verbietet es ihr. Standard: nur die Kanäle, die alle sehen."
+
+#: components/app/interface/settings/user/voice/GameKeysOptions.tsx
+msgid "Allow…"
+msgstr "Erlauben…"
 
 #: components/app/interface/settings/server/AutoModSettings.tsx
 msgid "Allowed domains (optional)"
@@ -3691,8 +3714,8 @@ msgid "by <0>{0}</0>"
 msgstr "Erstellt von <0>{0}</0>"
 
 #: components/auth/src/flows/SignUpConsent.tsx
-msgid "By creating an account you accept the <0>Terms of Service</0> and the <1>Community Guidelines</1> and have read the <2>Privacy Policy</2>."
-msgstr "Mit dem Erstellen eines Kontos akzeptierst du die <0>Nutzungsbedingungen</0> und die <1>Community-Richtlinien</1> und bestätigst, dass du die <2>Datenschutzerklärung</2> gelesen hast."
+#~ msgid "By creating an account you accept the <0>Terms of Service</0> and the <1>Community Guidelines</1> and have read the <2>Privacy Policy</2>."
+#~ msgstr "Mit dem Erstellen eines Kontos akzeptierst du die <0>Nutzungsbedingungen</0> und die <1>Community-Richtlinien</1> und bestätigst, dass du die <2>Datenschutzerklärung</2> gelesen hast."
 
 #: components/modal/modals/CreateBot.tsx
 #~ msgid "By creating this bot, you agree to the <0>Acceptable Use Policy</0>."
@@ -3792,6 +3815,7 @@ msgstr "Kanada"
 #: components/app/interface/settings/user/safety/ReportsAndStanding.tsx
 #: components/app/interface/settings/user/subscriptions/Subscriptions.tsx
 #: components/app/interface/settings/user/support/ContactSupport.tsx
+#: components/app/interface/settings/user/voice/GameKeysOptions.tsx
 #: components/app/interface/settings/user/voice/PushToTalkOptions.tsx
 #: components/auth/src/flows/FlowLogin.tsx
 #: components/modal/modals/AddBot.tsx
@@ -4082,6 +4106,7 @@ msgstr "Identität auf {0} ändern"
 #~ msgid "Change it"
 #~ msgstr "Ändern"
 
+#: components/app/interface/settings/user/voice/GameKeysOptions.tsx
 #: components/app/interface/settings/user/voice/PushToTalkOptions.tsx
 msgid "Change key"
 msgstr "Taste ändern"
@@ -6077,8 +6102,8 @@ msgid "Custom status"
 msgstr "Benutzerdefinierter Status"
 
 #: components/app/interface/settings/user/Native.tsx
-msgid "Custom window frame"
-msgstr "Eigener Fensterrahmen"
+#~ msgid "Custom window frame"
+#~ msgstr "Eigener Fensterrahmen"
 
 #: components/app/interface/settings/ServerSettings.tsx
 #~ msgid "Customisation"
@@ -6173,8 +6198,13 @@ msgid "Deafen myself"
 msgstr "Eigenen Ton ausschalten"
 
 #: components/app/interface/settings/user/Keybinds.tsx
+#: components/app/interface/settings/user/voice/GameKeysOptions.tsx
 msgid "Deafen or undeafen"
 msgstr "Taub schalten oder aufheben"
+
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "Deafen or undeafen, in any app"
+msgstr "Ton aus oder an, in jeder App"
 
 #: components/modal/lib/CreateServerFlow.tsx
 msgid "Decide later"
@@ -6652,6 +6682,10 @@ msgid "Desktop"
 msgstr "Desktop"
 
 #: components/app/interface/settings/user/Keybinds.tsx
+msgid "Desktop app, during a call: works in games and other apps. Change it in voice settings."
+msgstr "Desktop-App, während eines Anrufs: funktioniert in Spielen und anderen Apps. Ändern in den Spracheinstellungen."
+
+#: components/app/interface/settings/user/Keybinds.tsx
 msgid "Desktop app, during a push-to-talk call, once turned on in voice settings."
 msgstr "Desktop-App, in einem Push-to-Talk-Anruf, sobald es in den Spracheinstellungen eingeschaltet ist."
 
@@ -6667,6 +6701,7 @@ msgstr "Zielsprachkanal"
 msgid "Destinations"
 msgstr "Ziele"
 
+#: components/app/interface/settings/user/voice/GameKeysOptions.tsx
 #: components/i18n/errors.tsx
 #: components/modal/modals/InteractionsEndpoint.tsx
 #: components/modal/modals/ReportContent.tsx
@@ -6815,8 +6850,8 @@ msgid "Disconnected"
 msgstr "Verbindung getrennt"
 
 #: components/app/interface/settings/user/Native.tsx
-msgid "Discord RPC"
-msgstr "Discord RPC"
+#~ msgid "Discord RPC"
+#~ msgstr "Discord RPC"
 
 #: components/app/interface/desktop/Titlebar.tsx
 #: components/app/interface/discover/ServerPage.tsx
@@ -7605,6 +7640,10 @@ msgstr "Gib deinen gewünschten Benutzernamen ein."
 #: components/app/interface/discover/categories.tsx
 msgid "Entertainment"
 msgstr "Unterhaltung"
+
+#: components/modal/modals/ScreenSharePicker.tsx
+msgid "Entire screen"
+msgstr "Gesamter Bildschirm"
 
 #. placeholder {0}: (parsed.index ?? 0) + 1
 #: components/app/interface/settings/user/bots/CommandManager.tsx
@@ -8781,6 +8820,10 @@ msgstr "Jetzt bei"
 msgid "Get the {0} role"
 msgstr "Rolle {0} erhalten"
 
+#: components/app/interface/settings/user/voice/GameKeysOptions.tsx
+msgid "Get the desktop app"
+msgstr "Desktop-App holen"
+
 #: components/auth/src/AppUpsell.tsx
 msgid "Get the desktop app for Windows, macOS and Linux and keep your conversations one click away."
 msgstr "Hol dir die Desktop-App für Windows, macOS und Linux – deine Unterhaltungen sind nur einen Klick entfernt."
@@ -9263,6 +9306,14 @@ msgstr "Kopfhörer auf, Musik an."
 msgid "Hear other people and see their video"
 msgstr "Andere Nutzer hören und ihre Videoübertragung sehen"
 
+#: components/app/interface/settings/user/voice/GameKeysOptions.tsx
+msgid "Heard in another window"
+msgstr "In einem anderen Fenster erkannt"
+
+#: components/app/interface/settings/user/voice/GameKeysOptions.tsx
+msgid "Heard in the Zrzur window only"
+msgstr "Nur im Zrzur-Fenster erkannt"
+
 #: components/app/interface/settings/user/profile/StyleEditors.tsx
 #~ msgid "Heartbeat"
 #~ msgstr "Herzschlag"
@@ -9419,12 +9470,20 @@ msgid "Hold Bug Hunter, then have 10 verified reports or a verified serious secu
 msgstr "Habe Fehlerjäger und dann 10 bestätigte Meldungen oder eine bestätigte schwere Sicherheitsmeldung. Das Team entscheidet; es passiert nie automatisch."
 
 #: components/app/interface/settings/user/Keybinds.tsx
+msgid "Hold one key to talk instead of an open microphone. In the desktop app it works in games and other apps too."
+msgstr "Halte eine Taste zum Sprechen statt eines offenen Mikrofons. In der Desktop-App funktioniert das auch in Spielen und anderen Apps."
+
+#: components/app/interface/settings/user/Keybinds.tsx
 msgid "Hold one key to talk instead of an open microphone. Works while Zrzur is the active window."
 msgstr "Halte eine Taste gedrückt, um zu sprechen, statt das Mikrofon offen zu lassen. Funktioniert, solange Zrzur das aktive Fenster ist."
 
 #: components/modal/modals/RemoveLinkPreviews.tsx
 msgid "Hold Shift while you remove them to skip this question."
 msgstr "Halte beim Entfernen die Umschalttaste gedrückt, um diese Frage zu überspringen."
+
+#: components/app/interface/settings/user/voice/PushToTalkOptions.tsx
+msgid "Hold the key to talk. In the desktop app it works in games and other apps too."
+msgstr "Halte die Taste zum Sprechen. In der Desktop-App funktioniert das auch in Spielen und anderen Apps."
 
 #: components/app/interface/desktop/Titlebar.tsx
 #: src/interface/designs/Stage.tsx
@@ -9514,6 +9573,10 @@ msgstr "HTTP-Status"
 #: components/ui/components/features/profiles/plateNames.ts
 msgid "Hungary"
 msgstr "Ungarn"
+
+#: components/auth/src/flows/SignUpConsent.tsx
+msgid "I accept the <0>Terms of Service</0> and the <1>Community Guidelines</1> and have read the <2>Privacy Policy</2>."
+msgstr "Ich akzeptiere die <0>Nutzungsbedingungen</0> und die <1>Community-Richtlinien</1> und habe die <2>Datenschutzerklärung</2> gelesen."
 
 #: components/modal/lib/CreateServerFlow.tsx
 msgid "I agree to <0>Zrzur's rules for server owners</0>"
@@ -9758,6 +9821,10 @@ msgstr "In Arbeit"
 msgid "In review"
 msgstr "In Prüfung"
 
+#: components/app/interface/settings/user/voice/GameKeysOptions.tsx
+msgid "In the browser, your keys work only while the Zrzur tab is active. To talk while you play, use the Zrzur desktop app."
+msgstr "Im Browser funktionieren deine Tasten nur, solange der Zrzur-Tab aktiv ist. Um beim Spielen zu sprechen, nutze die Zrzur-Desktop-App."
+
 #: components/app/interface/settings/user/Keybinds.tsx
 msgid "In the command editor."
 msgstr "Im Befehlseditor."
@@ -9879,8 +9946,8 @@ msgid "Installed"
 msgstr "Installiert"
 
 #: components/app/interface/settings/user/Native.tsx
-msgid "Instead of closing, Zrzur will hide in your tray."
-msgstr "Anstatt vollständig zu schließen wird Zrzur in die Taskleiste minimiert."
+#~ msgid "Instead of closing, Zrzur will hide in your tray."
+#~ msgstr "Anstatt vollständig zu schließen wird Zrzur in die Taskleiste minimiert."
 
 #: components/app/interface/settings/server/assistant/labels.ts
 msgid "Insults"
@@ -10436,6 +10503,10 @@ msgstr "Behalten"
 msgid "Keep message text for this many days (90 at most)"
 msgstr "Nachrichtentext so viele Tage aufbewahren (höchstens 90)"
 
+#: components/app/interface/settings/user/Native.tsx
+msgid "Keep running when the window is closed"
+msgstr "Weiterlaufen, wenn das Fenster geschlossen wird"
+
 #: components/modal/lib/CreateServerFlow.tsx
 #~ msgid "Keep setting up"
 #~ msgstr "Weiter einrichten"
@@ -10496,6 +10567,14 @@ msgstr "Nur auf diesem Gerät gespeichert. Es werden keine Nachrichten oder pers
 #: components/app/interface/settings/UserSettings.tsx
 msgid "Keyboard shortcuts"
 msgstr "Tastenkürzel"
+
+#: components/app/interface/settings/user/voice/GameKeysOptions.tsx
+msgid "Keys that work in games"
+msgstr "Tasten, die in Spielen funktionieren"
+
+#: components/app/interface/settings/user/voice/GameKeysOptions.tsx
+msgid "Keys work in games"
+msgstr "Tasten funktionieren in Spielen"
 
 #: components/app/interface/settings/user/safety/SafetyDashboard.tsx
 msgid "Keys: j / k next and previous, r reload"
@@ -10640,8 +10719,8 @@ msgid "Launch prices"
 msgstr "Startpreise"
 
 #: components/app/interface/settings/user/Native.tsx
-msgid "Launch Zrzur when you log into your computer."
-msgstr "Zrzur beim Login starten."
+#~ msgid "Launch Zrzur when you log into your computer."
+#~ msgstr "Zrzur beim Login starten."
 
 #: components/app/interface/settings/user/profile/StyleEditors.tsx
 msgid "Laurel"
@@ -10794,8 +10873,8 @@ msgid "Let people find your bot and add it to their servers. A moderator reviews
 msgstr "Lass andere deinen Bot finden und zu ihren Servern hinzufügen. Jede Anfrage wird von einem Moderator geprüft, und du kannst ihn jederzeit entfernen."
 
 #: components/app/interface/settings/user/Native.tsx
-msgid "Let Zrzur use its own custom titlebar."
-msgstr "Erlaube Zrzur, seine eigene Titelleiste zu verwenden."
+#~ msgid "Let Zrzur use its own custom titlebar."
+#~ msgstr "Erlaube Zrzur, seine eigene Titelleiste zu verwenden."
 
 #: components/app/interface/settings/server/LobbyAppearanceEditor.tsx
 msgid "Lets members invite their friends."
@@ -10998,6 +11077,10 @@ msgstr "Zuhören"
 #: components/app/interface/settings/server/soundboard/SoundLibrary.tsx
 msgid "Listen to {0}"
 msgstr "{0} anhören"
+
+#: components/app/interface/settings/user/voice/GameKeysOptions.tsx
+msgid "Listening now: your keys work in every app."
+msgstr "Hört jetzt zu: Deine Tasten funktionieren in jeder App."
 
 #. placeholder {0}: roles().audience.length
 #: components/ui/components/features/voice/stage/StagePanel.tsx
@@ -11347,6 +11430,10 @@ msgstr "Kleinbuchstaben jeder Schrift, Ziffern, - und _."
 #: components/ui/components/features/profiles/plateNames.ts
 msgid "Luxembourg"
 msgstr "Luxemburg"
+
+#: components/app/interface/settings/user/voice/GameKeysOptions.tsx
+msgid "macOS asks for your permission first: allow Zrzur under Privacy & Security, Accessibility."
+msgstr "macOS fragt zuerst nach deiner Erlaubnis: Erlaube Zrzur unter „Datenschutz & Sicherheit“, „Bedienungshilfen“."
 
 #: components/ui/components/features/profiles/plateNames.ts
 msgid "Madagascar"
@@ -11726,6 +11813,10 @@ msgstr "Markdown wird unterstützt."
 #: components/modal/modals/ServerEventEditor.tsx
 msgid "Markdown works here."
 msgstr "Markdown funktioniert hier."
+
+#: components/app/interface/settings/user/Native.tsx
+msgid "Marks misspelled words and suggests corrections as you type."
+msgstr "Markiert falsch geschriebene Wörter und schlägt beim Tippen Korrekturen vor."
 
 #: components/ui/components/features/profiles/plateNames.ts
 msgid "Marshall Islands"
@@ -12230,8 +12321,8 @@ msgid "Minimise"
 msgstr "Minimieren"
 
 #: components/app/interface/settings/user/Native.tsx
-msgid "Minimise to Tray"
-msgstr "In Taskleiste minimieren"
+#~ msgid "Minimise to Tray"
+#~ msgstr "In Taskleiste minimieren"
 
 #: components/app/interface/settings/user/profile/StyleEditors.tsx
 msgid "Mint"
@@ -12518,8 +12609,13 @@ msgid "Mute microphone"
 msgstr "Mikrofon stummschalten"
 
 #: components/app/interface/settings/user/Keybinds.tsx
+#: components/app/interface/settings/user/voice/GameKeysOptions.tsx
 msgid "Mute or unmute"
 msgstr "Stummschalten oder Stummschaltung aufheben"
+
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "Mute or unmute, in any app"
+msgstr "Stumm oder laut schalten, in jeder App"
 
 #: components/app/menus/UserContextMenu.tsx
 msgid "Mute screen share"
@@ -13305,6 +13401,10 @@ msgstr "Noch keine Hilfsfunktion; rufe es mit client.rest.req (@zrzur/sdk/bot) o
 msgid "No history yet."
 msgstr "Noch kein Verlauf."
 
+#: components/app/interface/settings/user/voice/GameKeysOptions.tsx
+msgid "No key"
+msgstr "Keine Taste"
+
 #. placeholder {0}: query().trim()
 #: components/app/interface/settings/user/Language.tsx
 msgid "No language matches “{0}”."
@@ -13379,6 +13479,10 @@ msgstr "Noch niemand da. Starte den Anruf, dann können andere beitreten."
 #: src/interface/Friends.tsx
 msgid "No one matches that search"
 msgstr "Niemand passt zu dieser Suche"
+
+#: components/modal/modals/ScreenSharePicker.tsx
+msgid "No open window can be shared right now. Open the app you want to show, then try again."
+msgstr "Gerade kann kein offenes Fenster geteilt werden. Öffne die App, die du zeigen möchtest, und versuche es erneut."
 
 #: components/app/interface/settings/user/Sessions.tsx
 msgid "No other device is signed in."
@@ -13468,6 +13572,10 @@ msgstr "Noch keine Regeln"
 #: components/app/interface/settings/server/apps/RulesEditor.tsx
 msgid "No rules: everyone who has the permissions the bot asks for can use it, in every channel."
 msgstr "Keine Regeln: Alle mit den Berechtigungen, die der Bot verlangt, können ihn in jedem Kanal nutzen."
+
+#: components/modal/modals/ScreenSharePicker.tsx
+msgid "No screen can be shared right now."
+msgstr "Gerade kann kein Bildschirm geteilt werden."
 
 #: src/interface/Developers.tsx
 msgid "No secret yet: the app is a public client and must use PKCE (it always must)."
@@ -13593,6 +13701,7 @@ msgstr "Rauschunterdrückung"
 #: components/app/interface/settings/server/ServerVerification.tsx
 #: components/app/interface/settings/user/appearance/AnimationSettings.tsx
 #: components/app/interface/settings/user/profile/StyleEditors.tsx
+#: components/app/interface/settings/user/voice/GameKeysOptions.tsx
 #: components/app/menus/ServerContextMenu.tsx
 #: components/app/menus/shared/NotificationContextMenu.tsx
 msgid "None"
@@ -13690,6 +13799,10 @@ msgstr "Nicht dokumentiert."
 #: src/interface/developers/docs/EndpointReference.tsx
 msgid "Not for bots"
 msgstr "Nicht für Bots"
+
+#: components/app/interface/settings/user/voice/GameKeysOptions.tsx
+msgid "Not heard yet"
+msgstr "Noch nicht erkannt"
 
 #: components/app/interface/settings/user/badges/MyBadges.tsx
 msgid "Not in the program"
@@ -13972,6 +14085,10 @@ msgstr "Aus: Jede Seite wie YouTube oder Spotify fragt dich einmal. An: Alle Pla
 #~ msgid "Off: players from YouTube, Spotify and similar sites wait for your click. On: they load at once and the site learns your IP address."
 #~ msgstr "Aus: Player von YouTube, Spotify und ähnlichen Seiten warten auf deinen Klick. An: Sie laden sofort und die Seite erfährt deine IP-Adresse."
 
+#: components/app/interface/settings/user/voice/GameKeysOptions.tsx
+msgid "Off. Your keys work only while the Zrzur window is active."
+msgstr "Aus. Deine Tasten funktionieren nur, solange das Zrzur-Fenster aktiv ist."
+
 #: components/app/interface/settings/user/plugins/BrowseTab.tsx
 #: components/app/interface/settings/user/plugins/PluginDetail.tsx
 #: components/ui/components/features/profiles/OfficialLabel.tsx
@@ -14073,6 +14190,10 @@ msgstr "Auf der Entdecken-Seite."
 msgid "On this page"
 msgstr "Auf dieser Seite"
 
+#: components/app/interface/settings/user/voice/GameKeysOptions.tsx
+msgid "On Wayland, keys are heard only in games that run through XWayland."
+msgstr "Unter Wayland werden Tasten nur in Spielen erkannt, die über XWayland laufen."
+
 #: src/interface/designs/DesignPage.tsx
 msgid "On your profile now"
 msgstr "Jetzt auf deinem Profil"
@@ -14108,6 +14229,14 @@ msgstr "Eine pro Zeile, zum Beispiel zrzur.com"
 #: components/app/interface/settings/server/AutoModSettings.tsx
 msgid "One per line. Put * at the start or end to match part of a word."
 msgstr "Eins pro Zeile. Setze * an den Anfang oder das Ende, um einen Teil eines Wortes zu treffen."
+
+#: components/app/interface/settings/user/voice/GameKeysOptions.tsx
+msgid "One press mutes you, the next unmutes."
+msgstr "Ein Druck schaltet dich stumm, der nächste wieder laut."
+
+#: components/app/interface/settings/user/voice/GameKeysOptions.tsx
+msgid "One press turns the call's sound off, the next turns it back on."
+msgstr "Ein Druck schaltet den Ton des Anrufs aus, der nächste wieder ein."
 
 #: components/app/interface/settings/server/invites/VanityInvite.tsx
 msgid "One short, memorable link for your server, like zrzur.cc/your-name."
@@ -14497,6 +14626,10 @@ msgstr "Offen für alle"
 #~ msgid "Open Zrzur"
 #~ msgstr "Zrzur öffnen"
 
+#: components/app/interface/settings/user/Native.tsx
+msgid "Open Zrzur when the computer starts"
+msgstr "Zrzur beim Start des Computers öffnen"
+
 #: components/app/interface/settings/user/appearance/AnimationSettings.tsx
 msgid "Opening"
 msgstr "Öffnen"
@@ -14584,6 +14717,10 @@ msgstr "Weitere Meldungen dazu"
 msgid "Other ways"
 msgstr "Andere Wege"
 
+#: components/modal/modals/ScreenSharePicker.tsx
+msgid "Others hear what plays on your computer."
+msgstr "Andere hören, was auf deinem Computer abgespielt wird."
+
 #: components/app/interface/settings/user/voice/InputSensitivityOptions.tsx
 msgid "Others hear you"
 msgstr "Andere hören dich"
@@ -14591,6 +14728,10 @@ msgstr "Andere hören dich"
 #: components/app/interface/settings/user/voice/PushToTalkOptions.tsx
 msgid "Others hear you only while you hold the key."
 msgstr "Andere hören dich nur, solange du die Taste hältst."
+
+#: components/app/interface/settings/user/voice/GameKeysOptions.tsx
+msgid "Others hear you while you hold it. Without a key here, your push-to-talk key is used."
+msgstr "Andere hören dich, solange du sie hältst. Ohne Taste hier gilt deine Push-to-Talk-Taste."
 
 #: components/i18n/errors.tsx
 msgid "Our automatic filter stopped this. {reason} If you think this is a mistake, ask for a review through Support."
@@ -15140,8 +15281,8 @@ msgstr "Wähle einen Look und passe darunter Akzent, Layout und Schriften an."
 #~ msgstr "Wähle einen fertigen Look oder kombiniere Dekorationen, Namensschilder und Farben selbst. Alles hier ist kostenlos."
 
 #: components/modal/modals/ScreenSharePicker.tsx
-msgid "Pick a Screen to Share"
-msgstr "Wähle einen Bildschirm zum Teilen"
+#~ msgid "Pick a Screen to Share"
+#~ msgstr "Wähle einen Bildschirm zum Teilen"
 
 #: components/modal/modals/MoveSupercharge.tsx
 msgid "Pick a server you're in."
@@ -15458,6 +15599,11 @@ msgstr "Präsenz"
 msgid "Presets"
 msgstr "Vorlagen"
 
+#: components/app/interface/settings/user/voice/GameKeysOptions.tsx
+msgid "Press a key, a combination or a mouse side button. Esc cancels."
+msgstr "Drücke eine Taste, eine Kombination oder eine seitliche Maustaste. Esc bricht ab."
+
+#: components/app/interface/settings/user/voice/GameKeysOptions.tsx
 #: components/app/interface/settings/user/voice/PushToTalkOptions.tsx
 msgid "Press a key…"
 msgstr "Drücke eine Taste…"
@@ -15609,7 +15755,6 @@ msgstr "Privatsphäre"
 #~ msgstr "Privatsphäre und Zugang"
 
 #: components/app/interface/discover/Detail.tsx
-#: components/auth/src/flows/FlowCreate.tsx
 #: components/ui/components/features/messaging/elements/SpecialEmbedPlaceholder.tsx
 #: components/ui/components/features/profiles/ProfileBotAbout.tsx
 msgid "Privacy policy"
@@ -15921,10 +16066,27 @@ msgstr "Massenlöschung"
 msgid "Push notifications"
 msgstr "Push-Benachrichtigungen"
 
+#: components/app/interface/settings/user/voice/GameKeysOptions.tsx
+msgid "Push to mute"
+msgstr "Push-to-Mute"
+
 #: components/app/interface/settings/user/Keybinds.tsx
+msgid "Push to mute (hold)"
+msgstr "Push-to-Mute (halten)"
+
+#: components/app/interface/settings/user/Keybinds.tsx
+#: components/app/interface/settings/user/voice/GameKeysOptions.tsx
 #: components/app/interface/settings/user/voice/PushToTalkOptions.tsx
 msgid "Push to talk"
 msgstr "Push-to-Talk"
+
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "Push to talk (hold)"
+msgstr "Push-to-Talk (halten)"
+
+#: components/app/interface/settings/user/voice/GameKeysOptions.tsx
+msgid "Push to talk keeps the microphone open this long after you let go, so the end of a word is not cut off."
+msgstr "Push-to-Talk hält das Mikrofon nach dem Loslassen so lange offen, damit das Wortende nicht abgeschnitten wird."
 
 #: components/app/interface/settings/user/voice/PushToTalkOptions.tsx
 msgid "Push to talk works while Zrzur is the active window and you are not typing."
@@ -15950,6 +16112,11 @@ msgstr "Schenk ihn einem Server, den du magst: mehr Emoji-Plätze, größere Upl
 #: components/ui/components/features/profiles/plateNames.ts
 msgid "Qatar"
 msgstr "Katar"
+
+#: components/modal/modals/ScreenSharePicker.tsx
+#: components/modal/modals/ScreenShareSettings.tsx
+msgid "Quality"
+msgstr "Qualität"
 
 #: components/app/interface/settings/server/assistant/labels.ts
 msgid "Quarantine"
@@ -16145,6 +16312,10 @@ msgstr "Bereit"
 #: components/app/interface/settings/server/soundboard/SoundLibrary.tsx
 msgid "Ready-made sounds, free for everyone (CC0, from Kenney). Listen, then add the ones you like."
 msgstr "Fertige Sounds, für alle kostenlos (CC0, von Kenney). Hör rein und füge hinzu, was dir gefällt."
+
+#: components/app/interface/settings/user/voice/GameKeysOptions.tsx
+msgid "Ready. Zrzur listens only while you are in a call."
+msgstr "Bereit. Zrzur hört nur zu, während du in einem Anruf bist."
 
 #: components/app/interface/settings/user/profile/CreatorSuspension.tsx
 #: components/app/interface/settings/user/safety/SafetyDashboard.tsx
@@ -16373,6 +16544,10 @@ msgstr "Abgelehnt"
 msgid "Rejoin"
 msgstr "Erneut beitreten"
 
+#: components/app/interface/settings/user/voice/GameKeysOptions.tsx
+msgid "Release delay"
+msgstr "Loslass-Verzögerung"
+
 #: src/interface/channels/text/TextSearchSidebar.tsx
 msgid "Relevance"
 msgstr "Relevanz"
@@ -16405,6 +16580,7 @@ msgstr "Entfernter Server"
 #: components/app/interface/settings/user/badges/BetaAdmin.tsx
 #: components/app/interface/settings/user/plugins/PluginDetail.tsx
 #: components/app/interface/settings/user/profile/CommunityGallery.tsx
+#: components/app/interface/settings/user/voice/GameKeysOptions.tsx
 #: components/modal/modals/CreatePoll.tsx
 #: components/modal/modals/RemoveMember.tsx
 #: components/modal/modals/ServerIdentity.tsx
@@ -17059,6 +17235,14 @@ msgstr "Verantwortungsvolle Offenlegung"
 #: components/ui/components/features/profiles/ProfileBadges.tsx
 #~ msgid "Responsibly disclosed security issues"
 #~ msgstr "Sicherheitslücken verantwortungsvoll gemeldet"
+
+#: components/app/interface/settings/user/Native.tsx
+msgid "Restart now"
+msgstr "Jetzt neu starten"
+
+#: components/app/interface/settings/user/Native.tsx
+msgid "Restart Zrzur to apply your changes"
+msgstr "Starte Zrzur neu, um deine Änderungen anzuwenden"
 
 #: components/ui/components/features/voice/callCard/VoiceCallCardActions.tsx
 #: components/ui/components/features/voice/callCard/VoiceCallCardActiveRoom.tsx
@@ -17843,6 +18027,11 @@ msgstr "Schottland"
 #~ msgid "Screen"
 #~ msgstr "Bildschirm"
 
+#. placeholder {0}: source.screenNumber ?? 1
+#: components/modal/modals/ScreenSharePicker.tsx
+msgid "Screen {0}"
+msgstr "Bildschirm {0}"
+
 #. placeholder {0}: props.name
 #: components/ui/components/features/voice/StreamPreviewCard.tsx
 msgid "Screen of {0}"
@@ -17872,6 +18061,10 @@ msgstr "Screensharelautstärke"
 #: components/app/menus/UserContextMenu.tsx
 #~ msgid "Screen Share Volume"
 #~ msgstr "Screensharelautstärke"
+
+#: components/modal/modals/ScreenSharePicker.tsx
+msgid "Screens"
+msgstr "Bildschirme"
 
 #: components/app/interface/settings/user/badges/BugQueue.tsx
 msgid "Screenshot"
@@ -18659,6 +18852,10 @@ msgstr "Bildschirm teilen"
 msgid "Share this link: it opens Zrzur, the person picks a server and the bot joins with the permissions above."
 msgstr "Teile diesen Link: Er öffnet Zrzur, die Person wählt einen Server und der Bot tritt mit den oben gewählten Berechtigungen bei."
 
+#: components/modal/modals/ScreenSharePicker.tsx
+msgid "Share your screen"
+msgstr "Bildschirm teilen"
+
 #: components/app/interface/safety/labels.tsx
 msgid "Shared without consent"
 msgstr "Ohne Einwilligung geteilt"
@@ -18729,8 +18926,8 @@ msgid "Show code"
 msgstr "Code anzeigen"
 
 #: components/app/interface/settings/user/Native.tsx
-msgid "Show corrections and suggestions as you type."
-msgstr "Korrekturen und Vorschläge beim Tippen anzeigen."
+#~ msgid "Show corrections and suggestions as you type."
+#~ msgstr "Korrekturen und Vorschläge beim Tippen anzeigen."
 
 #: components/app/interface/settings/user/subscriptions/Subscriptions.tsx
 msgid "Show Feather badge"
@@ -18828,8 +19025,8 @@ msgid "Show your name on the bot's page"
 msgstr "Deinen Namen auf der Seite des Bots zeigen"
 
 #: components/app/interface/settings/user/Native.tsx
-msgid "Show Zrzur using Discord rich presence."
-msgstr "Zeige über Discord Rich Presence, dass du Zrzur nutzt."
+#~ msgid "Show Zrzur using Discord rich presence."
+#~ msgstr "Zeige über Discord Rich Presence, dass du Zrzur nutzt."
 
 #: components/app/interface/settings/user/bots/CommandManager.tsx
 msgid "Shown as"
@@ -18886,6 +19083,10 @@ msgstr "Separat angezeigt"
 #: components/ui/components/features/profiles/badges/useBadgeText.ts
 msgid "Shown while your Feather subscription is active. You can hide it."
 msgstr "Wird angezeigt, solange dein Feather-Abo aktiv ist. Du kannst es ausblenden."
+
+#: components/app/interface/settings/user/voice/GameKeysOptions.tsx
+msgid "Shows whether Zrzur hears a key while another window is in front. Works outside a call."
+msgstr "Zeigt, ob Zrzur eine Taste erkennt, während ein anderes Fenster vorne ist. Funktioniert auch ohne Anruf."
 
 #: components/app/interface/settings/server/ThreadFeatures.tsx
 msgid "Side conversations in the text channels of this server."
@@ -19359,8 +19560,12 @@ msgid "Speed up"
 msgstr "Beschleunigen"
 
 #: components/app/interface/settings/user/Native.tsx
-msgid "Spellchecker"
+msgid "Spell check"
 msgstr "Rechtschreibprüfung"
+
+#: components/app/interface/settings/user/Native.tsx
+#~ msgid "Spellchecker"
+#~ msgstr "Rechtschreibprüfung"
 
 #: components/app/interface/channels/text/DraftMessage.tsx
 #: components/app/interface/channels/text/interactions/MediaBlocks.tsx
@@ -19485,8 +19690,12 @@ msgid "Start here"
 msgstr "Hier starten"
 
 #: components/app/interface/settings/user/Native.tsx
-msgid "Start Minimised to Tray"
-msgstr "Minimiert im Infobereich starten"
+msgid "Start in the tray"
+msgstr "Im Infobereich starten"
+
+#: components/app/interface/settings/user/Native.tsx
+#~ msgid "Start Minimised to Tray"
+#~ msgstr "Minimiert im Infobereich starten"
 
 #: src/interface/events/EventCard.tsx
 msgid "Start now"
@@ -19512,6 +19721,10 @@ msgstr "Prüfung starten"
 #: components/modal/modals/ScreenShareSettings.tsx
 msgid "Start sharing"
 msgstr "Teilen starten"
+
+#: components/app/interface/settings/user/voice/GameKeysOptions.tsx
+msgid "Start test"
+msgstr "Test starten"
 
 #: components/ui/components/features/voice/callCard/VoiceCallCardPreview.tsx
 msgid "Start the call"
@@ -19539,8 +19752,8 @@ msgid "Start typing"
 msgstr "Mit dem Schreiben beginnen"
 
 #: components/app/interface/settings/user/Native.tsx
-msgid "Start with Computer"
-msgstr "Mit Computer starten"
+#~ msgid "Start with Computer"
+#~ msgstr "Mit Computer starten"
 
 #: src/interface/designs/FittingRoom.tsx
 #~ msgid "Start with decorations"
@@ -19561,6 +19774,10 @@ msgstr "Wird gestartet…"
 #: components/modal/modals/ServerEventEditor.tsx
 msgid "Starts"
 msgstr "Beginnt"
+
+#: components/app/interface/settings/user/Native.tsx
+msgid "Startup"
+msgstr "Start"
 
 #: components/app/interface/settings/user/account/AgeSettings.tsx
 msgid "Stated by you, not verified."
@@ -19630,6 +19847,10 @@ msgstr "Auswahl beenden"
 #: src/interface/navigation/channels/AccountBar.tsx
 msgid "Stop sharing"
 msgstr "Teilen beenden"
+
+#: components/app/interface/settings/user/voice/GameKeysOptions.tsx
+msgid "Stop test"
+msgstr "Test beenden"
 
 #: components/app/interface/settings/user/plugins/text.ts
 msgid "Stopped after repeated errors."
@@ -19929,6 +20150,10 @@ msgstr "Zu einer sicheren Version wechseln"
 #: components/ui/components/features/voice/callCard/VoiceCallCardPreview.tsx
 msgid "Switch to this voice channel"
 msgstr "Zu diesem Sprachkanal wechseln"
+
+#: components/app/interface/settings/user/voice/GameKeysOptions.tsx
+msgid "Switch to your game or any other window, hold each key, then come back."
+msgstr "Wechsle zu deinem Spiel oder einem anderen Fenster, halte jede Taste und komm dann zurück."
 
 #: components/app/interface/settings/user/appearance/AnimationSettings.tsx
 msgid "Switching channels"
@@ -20254,6 +20479,10 @@ msgstr "Testmodus: Käufe werden nur simuliert, es wird nichts berechnet. Karten
 msgid "Test mode: use a test card from the payment provider. No real money is charged."
 msgstr "Testmodus: Nutze eine Testkarte des Zahlungsanbieters. Es wird kein echtes Geld belastet."
 
+#: components/app/interface/settings/user/voice/GameKeysOptions.tsx
+msgid "Test your keys"
+msgstr "Tasten testen"
+
 #: components/app/interface/settings/user/badges/BetaAdmin.tsx
 msgid "Testers"
 msgstr "Tester"
@@ -20398,6 +20627,7 @@ msgstr "Das Bild ist zu groß. Maximal 2,5 MB."
 msgid "That image is too large. Keep it within {COMMUNITY_MAX_DIMENSION} × {COMMUNITY_MAX_DIMENSION} pixels."
 msgstr "Das Bild ist zu groß. Bleib bei höchstens {COMMUNITY_MAX_DIMENSION} × {COMMUNITY_MAX_DIMENSION} Pixeln."
 
+#: components/app/interface/settings/user/voice/GameKeysOptions.tsx
 #: components/app/interface/settings/user/voice/PushToTalkOptions.tsx
 msgid "That key is needed elsewhere. Press another key, or Esc to cancel."
 msgstr "Diese Taste wird anderswo gebraucht. Drücke eine andere Taste oder Esc zum Abbrechen."
@@ -20917,6 +21147,10 @@ msgstr "Das Team sagt dir Bescheid, sobald du dabei bist."
 #: components/app/interface/support/OfficialBanner.tsx
 msgid "The ticket form couldn't be loaded. Check your connection and try again."
 msgstr "Das Ticketformular konnte nicht geladen werden. Prüfe deine Verbindung und versuche es erneut."
+
+#: components/app/interface/settings/user/Native.tsx
+msgid "The title bar and hardware acceleration change when Zrzur starts. A call you are in ends."
+msgstr "Titelleiste und Hardwarebeschleunigung ändern sich beim Start von Zrzur. Ein laufender Anruf endet."
 
 #: src/interface/developers/docs/GettingStarted.tsx
 #~ msgid "The token appears once, right after you create the application. Copy it now. Whoever has the token controls the bot."
@@ -21804,6 +22038,10 @@ msgstr "Drei Jahre auf Zrzur"
 msgid "Threshold"
 msgstr "Schwelle"
 
+#: components/auth/src/flows/Form.tsx
+msgid "Tick the box to accept before you continue."
+msgstr "Setze das Häkchen, um zuzustimmen, bevor du fortfährst."
+
 #: components/app/interface/settings/server/assistant/labels.ts
 msgid "Ticket categories, one per line"
 msgstr "Ticket-Bereiche, einer pro Zeile"
@@ -22321,6 +22559,10 @@ msgstr "Art: {0}. Die Art eines gespeicherten Befehls lässt sich nicht ändern.
 msgid "Typewriter"
 msgstr "Schreibmaschine"
 
+#: components/app/interface/settings/user/Native.tsx
+msgid "Typing and performance"
+msgstr "Tippen und Leistung"
+
 #: components/ui/components/features/profiles/plateNames.ts
 msgid "Uganda"
 msgstr "Uganda"
@@ -22573,6 +22815,10 @@ msgstr "Bis {0}"
 #: components/app/menus/shared/NotificationContextMenu.tsx
 msgid "Until I turn it back on"
 msgstr "Bis ich es wieder anschalte"
+
+#: components/modal/modals/ScreenSharePicker.tsx
+msgid "Untitled window"
+msgstr "Fenster ohne Titel"
 
 #: components/app/interface/settings/user/Language.tsx
 msgid "Untranslated text falls back to English."
@@ -22869,8 +23115,8 @@ msgid "Use support hours"
 msgstr "Supportzeiten verwenden"
 
 #: components/app/interface/settings/user/Native.tsx
-msgid "Use the graphics card to improve performance."
-msgstr "Grafikkarte zur Leistungssteigerung nutzen."
+#~ msgid "Use the graphics card to improve performance."
+#~ msgstr "Grafikkarte zur Leistungssteigerung nutzen."
 
 #: components/app/interface/settings/server/assistant/AssistantPage.tsx
 msgid "Use the Hijri calendar"
@@ -23027,6 +23273,10 @@ msgstr "Nutzer müssen nicht länger ihr Alter bestätigen bevor sie diesem Kana
 #: components/app/interface/settings/user/voice/VoiceProcessingOptions.tsx
 msgid "Uses the browser's echo cancellation."
 msgstr "Nutzt die Echounterdrückung des Browsers."
+
+#: components/app/interface/settings/user/Native.tsx
+msgid "Uses the graphics card for a smoother app. Turn it off if a game stutters or the window flickers. Changes after a restart."
+msgstr "Nutzt die Grafikkarte für eine flüssigere App. Schalte es aus, wenn ein Spiel ruckelt oder das Fenster flackert. Ändert sich nach einem Neustart."
 
 #: components/modal/modals/ServerIdentity.tsx
 msgid "Using your main avatar"
@@ -23544,8 +23794,8 @@ msgid "We need more information"
 msgstr "Wir brauchen mehr Informationen"
 
 #: components/auth/src/flows/FlowCreate.tsx
-msgid "We only use it to verify your account and help you get back in if you're ever locked out. We'll never sell it or send you spam."
-msgstr "Wir nutzen sie nur, um dein Konto zu bestätigen und dir zu helfen, falls du dich mal aussperrst. Wir verkaufen sie nie und schicken dir keinen Spam."
+#~ msgid "We only use it to verify your account and help you get back in if you're ever locked out. We'll never sell it or send you spam."
+#~ msgstr "Wir nutzen sie nur, um dein Konto zu bestätigen und dir zu helfen, falls du dich mal aussperrst. Wir verkaufen sie nie und schicken dir keinen Spam."
 
 #: components/app/interface/settings/user/myData/MyData.tsx
 #~ msgid "We prepare it in the background and e-mail you the link. You can ask once every 24 hours."
@@ -23800,6 +24050,10 @@ msgstr "Wofür dieser Kanal da ist"
 #: components/app/interface/settings/user/safety/ReportsAndStanding.tsx
 msgid "What this followed"
 msgstr "Worauf das folgte"
+
+#: components/modal/modals/ScreenSharePicker.tsx
+msgid "What to share"
+msgstr "Was geteilt wird"
 
 #: components/app/interface/settings/user/voice/ScreenShareOptions.tsx
 msgid "What you usually share"
@@ -24090,6 +24344,14 @@ msgstr "Breit"
 #: components/ui/components/features/profiles/badges/useBadgeText.ts
 msgid "Win a tournament, or come first in the games bot."
 msgstr "Gewinne ein Turnier oder erreiche im Spiele-Bot den ersten Platz."
+
+#: components/app/interface/settings/user/Native.tsx
+msgid "Window"
+msgstr "Fenster"
+
+#: components/modal/modals/ScreenSharePicker.tsx
+msgid "Windows"
+msgstr "Fenster"
 
 #: components/app/interface/settings/user/appearance/AnimationSettings.tsx
 msgid "Windows that open on top of the app."
@@ -25049,8 +25311,8 @@ msgid "Your discriminator change has been ratelimited, please try again later."
 msgstr "Deine Änderung des Discriminators wurde durch Rate-Limiting blockiert. Bitte versuche es später erneut."
 
 #: components/auth/src/flows/FlowCreate.tsx
-msgid "Your email stays private"
-msgstr "Deine E-Mail bleibt privat"
+#~ msgid "Your email stays private"
+#~ msgstr "Deine E-Mail bleibt privat"
 
 #: components/app/interface/settings/user/subscriptions/PlusPage.tsx
 msgid "Your emoji in every server"
@@ -25096,6 +25358,10 @@ msgstr "Deine Nachricht ist zu lang, entferne einige Zeichen und versuche es ern
 #: components/ui/components/features/voice/callCard/VoiceCallCardStatus.tsx
 msgid "Your microphone is back."
 msgstr "Dein Mikrofon ist wieder da."
+
+#: components/app/interface/settings/user/voice/GameKeysOptions.tsx
+msgid "Your microphone is off while you hold it."
+msgstr "Dein Mikrofon ist aus, solange du sie hältst."
 
 #: components/app/interface/settings/user/voice/PushToTalkOptions.tsx
 msgid "Your microphone sends whenever you speak."
@@ -25322,6 +25588,10 @@ msgstr "Der Zrzur-Assistent ist gerade nicht erreichbar. Versuche es bald erneut
 #~ msgid "Zrzur Blue Light"
 #~ msgstr "Zrzur-Blau Hell"
 
+#: components/app/interface/settings/user/voice/GameKeysOptions.tsx
+msgid "Zrzur could not start listening for keys on this computer. Your keys work while the Zrzur window is active."
+msgstr "Zrzur konnte auf diesem Computer nicht auf Tasten hören. Deine Tasten funktionieren, solange das Zrzur-Fenster aktiv ist."
+
 #: components/ui/components/features/profiles/badges/useBadgeText.ts
 msgid "Zrzur Developer"
 msgstr "Zrzur-Entwickler"
@@ -25334,6 +25604,10 @@ msgstr "Zrzur Developers"
 #: components/modal/lib/CreateServerFlow.tsx
 msgid "Zrzur did not answer in time."
 msgstr "Zrzur hat nicht rechtzeitig geantwortet."
+
+#: components/app/interface/settings/user/Native.tsx
+msgid "Zrzur draws its own title bar instead of the system's. Changes after a restart."
+msgstr "Zrzur zeichnet seine eigene Titelleiste statt der des Systems. Ändert sich nach einem Neustart."
 
 #: components/app/interface/settings/user/subscriptions/PlusPage.tsx
 #: components/app/interface/settings/user/subscriptions/Subscriptions.tsx
@@ -25373,6 +25647,10 @@ msgstr "Zrzur für Web (unbekanntes Gerät)"
 msgid "Zrzur Founder"
 msgstr "Zrzur-Gründer"
 
+#: components/app/interface/settings/user/voice/GameKeysOptions.tsx
+msgid "Zrzur hears these keys while a game or another app is in front. The game still gets every key."
+msgstr "Zrzur erkennt diese Tasten, während ein Spiel oder eine andere App vorne ist. Das Spiel erhält weiterhin jede Taste."
+
 #: src/interface/navigation/servers/ServerList.tsx
 msgid "Zrzur home"
 msgstr "Zrzur-Startseite"
@@ -25405,6 +25683,10 @@ msgstr "Zrzur fragt das jetzt alle, um junge Menschen zu schützen. Wir speicher
 msgid "Zrzur on Android"
 msgstr "Zrzur für Android"
 
+#: components/app/interface/settings/user/Native.tsx
+msgid "Zrzur opens by itself after you sign in to your computer."
+msgstr "Zrzur öffnet sich von selbst, nachdem du dich am Computer angemeldet hast."
+
 #: components/ui/components/features/profiles/badges/useBadgeText.ts
 msgid "Zrzur Partner"
 msgstr "Zrzur-Partner"
@@ -25412,6 +25694,10 @@ msgstr "Zrzur-Partner"
 #: components/app/interface/settings/user/appearance/AppearanceMenu.tsx
 #~ msgid "Zrzur Pink"
 #~ msgstr "Zrzur-Pink"
+
+#: components/app/interface/settings/user/voice/GameKeysOptions.tsx
+msgid "Zrzur reacts only to the keys you choose here. It records nothing and sends nothing."
+msgstr "Zrzur reagiert nur auf die Tasten, die du hier wählst. Es zeichnet nichts auf und sendet nichts."
 
 #: components/app/interface/settings/server/roles/ServerRoleEditor.tsx
 msgid "Zrzur rocks!"
@@ -25438,6 +25724,14 @@ msgstr "Zrzur-Team"
 msgid "Zrzur started in Safe Mode because it didn't start properly with plugins last time. Turn Safe Mode off in Settings → Advanced → Plugins."
 msgstr "Zrzur wurde im abgesicherten Modus gestartet, weil es beim letzten Mal mit Plugins nicht richtig gestartet ist. Schalte den abgesicherten Modus unter Einstellungen → Erweitert → Plugins aus."
 
+#: components/app/interface/settings/user/Native.tsx
+msgid "Zrzur starts hidden. Open it from its icon next to the clock."
+msgstr "Zrzur startet versteckt. Öffne es über sein Symbol neben der Uhr."
+
+#: components/app/interface/settings/user/Native.tsx
+msgid "Zrzur stays in the tray, so calls and notifications continue."
+msgstr "Zrzur bleibt im Infobereich, sodass Anrufe und Benachrichtigungen weiterlaufen."
+
 #: components/app/interface/settings/user/support/ContactSupport.tsx
 msgid "Zrzur support"
 msgstr "Zrzur-Support"
@@ -25445,6 +25739,10 @@ msgstr "Zrzur-Support"
 #: components/app/interface/settings/user/plugins/text.ts
 msgid "Zrzur suspended this plugin while it's being reviewed."
 msgstr "Zrzur hat dieses Plugin gesperrt, während es geprüft wird."
+
+#: components/app/interface/settings/user/Native.tsx
+msgid "Zrzur title bar"
+msgstr "Zrzur-Titelleiste"
 
 #: components/modal/modals/AddBot.tsx
 msgid "Zrzur verified who runs this bot."
@@ -25455,8 +25753,8 @@ msgstr "Zrzur hat überprüft, wer diesen Bot betreibt."
 #~ msgstr "Zrzur fragt nie nach deinem Passwort oder einem Anmeldecode."
 
 #: components/app/interface/settings/user/Native.tsx
-msgid "Zrzur will start in the system tray."
-msgstr "Zrzur startet im Infobereich."
+#~ msgid "Zrzur will start in the system tray."
+#~ msgstr "Zrzur startet im Infobereich."
 
 #: src/AndroidNag.tsx
 msgid "Zrzur works best as an app"
@@ -25481,288 +25779,3 @@ msgstr "Zrzur, direkt auf <0>deinem Desktop.</0>"
 #: components/app/interface/settings/user/appearance/AppearanceMenu.tsx
 #~ msgid "Zrzur's own look: very dark neutral panels with Zrzur Pink as the one accent."
 #~ msgstr "Zrzurs eigener Look: sehr dunkle, neutrale Flächen mit Zrzur-Pink als einziger Akzentfarbe."
-
-#: components/auth/src/flows/SignUpConsent.tsx
-msgid "I accept the <0>Terms of Service</0> and the <1>Community Guidelines</1> and have read the <2>Privacy Policy</2>."
-msgstr "Ich akzeptiere die <0>Nutzungsbedingungen</0> und die <1>Community-Richtlinien</1> und habe die <2>Datenschutzerklärung</2> gelesen."
-
-#: components/auth/src/flows/Form.tsx
-msgid "Tick the box to accept before you continue."
-msgstr "Setze das Häkchen, um zuzustimmen, bevor du fortfährst."
-#: components/app/interface/settings/user/voice/GameKeysOptions.tsx
-msgid "{other} already uses that. Press another key, or Esc to cancel."
-msgstr "„{other}“ nutzt das bereits. Drücke eine andere Taste oder Esc zum Abbrechen."
-
-#: components/app/interface/settings/user/voice/GameKeysOptions.tsx
-msgid "A game started as administrator hides its keys from other apps; start Zrzur as administrator too to use them there."
-msgstr "Ein als Administrator gestartetes Spiel verbirgt seine Tasten vor anderen Apps; starte Zrzur ebenfalls als Administrator, um sie dort zu nutzen."
-
-#: components/app/interface/settings/user/voice/GameKeysOptions.tsx
-msgid "A key that types would switch this while you write. Hold Ctrl, Alt or Shift with it, or press another key."
-msgstr "Eine Taste, die Text schreibt, würde beim Tippen umschalten. Halte Strg, Alt oder Umschalt dazu oder drücke eine andere Taste."
-
-#: components/app/interface/settings/user/voice/GameKeysOptions.tsx
-msgid "Allow…"
-msgstr "Erlauben…"
-
-#: components/app/interface/settings/user/Keybinds.tsx
-msgid "Deafen or undeafen, in any app"
-msgstr "Ton aus oder an, in jeder App"
-
-#: components/app/interface/settings/user/Keybinds.tsx
-msgid "Desktop app, during a call: works in games and other apps. Change it in voice settings."
-msgstr "Desktop-App, während eines Anrufs: funktioniert in Spielen und anderen Apps. Ändern in den Spracheinstellungen."
-
-#: components/app/interface/settings/user/voice/GameKeysOptions.tsx
-msgid "Get the desktop app"
-msgstr "Desktop-App holen"
-
-#: components/app/interface/settings/user/voice/GameKeysOptions.tsx
-msgid "Heard in another window"
-msgstr "In einem anderen Fenster erkannt"
-
-#: components/app/interface/settings/user/voice/GameKeysOptions.tsx
-msgid "Heard in the Zrzur window only"
-msgstr "Nur im Zrzur-Fenster erkannt"
-
-#: components/app/interface/settings/user/Keybinds.tsx
-msgid "Hold one key to talk instead of an open microphone. In the desktop app it works in games and other apps too."
-msgstr "Halte eine Taste zum Sprechen statt eines offenen Mikrofons. In der Desktop-App funktioniert das auch in Spielen und anderen Apps."
-
-#: components/app/interface/settings/user/voice/PushToTalkOptions.tsx
-msgid "Hold the key to talk. In the desktop app it works in games and other apps too."
-msgstr "Halte die Taste zum Sprechen. In der Desktop-App funktioniert das auch in Spielen und anderen Apps."
-
-#: components/app/interface/settings/user/voice/GameKeysOptions.tsx
-msgid "In the browser, your keys work only while the Zrzur tab is active. To talk while you play, use the Zrzur desktop app."
-msgstr "Im Browser funktionieren deine Tasten nur, solange der Zrzur-Tab aktiv ist. Um beim Spielen zu sprechen, nutze die Zrzur-Desktop-App."
-
-#: components/app/interface/settings/user/voice/GameKeysOptions.tsx
-msgid "Keys that work in games"
-msgstr "Tasten, die in Spielen funktionieren"
-
-#: components/app/interface/settings/user/voice/GameKeysOptions.tsx
-msgid "Keys work in games"
-msgstr "Tasten funktionieren in Spielen"
-
-#: components/app/interface/settings/user/voice/GameKeysOptions.tsx
-msgid "Listening now: your keys work in every app."
-msgstr "Hört jetzt zu: Deine Tasten funktionieren in jeder App."
-
-#: components/app/interface/settings/user/voice/GameKeysOptions.tsx
-msgid "macOS asks for your permission first: allow Zrzur under Privacy & Security, Accessibility."
-msgstr "macOS fragt zuerst nach deiner Erlaubnis: Erlaube Zrzur unter „Datenschutz & Sicherheit“, „Bedienungshilfen“."
-
-#: components/app/interface/settings/user/Keybinds.tsx
-msgid "Mute or unmute, in any app"
-msgstr "Stumm oder laut schalten, in jeder App"
-
-#: components/app/interface/settings/user/voice/GameKeysOptions.tsx
-msgid "No key"
-msgstr "Keine Taste"
-
-#: components/app/interface/settings/user/voice/GameKeysOptions.tsx
-msgid "Not heard yet"
-msgstr "Noch nicht erkannt"
-
-#: components/app/interface/settings/user/voice/GameKeysOptions.tsx
-msgid "Off. Your keys work only while the Zrzur window is active."
-msgstr "Aus. Deine Tasten funktionieren nur, solange das Zrzur-Fenster aktiv ist."
-
-#: components/app/interface/settings/user/voice/GameKeysOptions.tsx
-msgid "On Wayland, keys are heard only in games that run through XWayland."
-msgstr "Unter Wayland werden Tasten nur in Spielen erkannt, die über XWayland laufen."
-
-#: components/app/interface/settings/user/voice/GameKeysOptions.tsx
-msgid "One press mutes you, the next unmutes."
-msgstr "Ein Druck schaltet dich stumm, der nächste wieder laut."
-
-#: components/app/interface/settings/user/voice/GameKeysOptions.tsx
-msgid "One press turns the call's sound off, the next turns it back on."
-msgstr "Ein Druck schaltet den Ton des Anrufs aus, der nächste wieder ein."
-
-#: components/app/interface/settings/user/voice/GameKeysOptions.tsx
-msgid "Others hear you while you hold it. Without a key here, your push-to-talk key is used."
-msgstr "Andere hören dich, solange du sie hältst. Ohne Taste hier gilt deine Push-to-Talk-Taste."
-
-#: components/app/interface/settings/user/voice/GameKeysOptions.tsx
-msgid "Press a key, a combination or a mouse side button. Esc cancels."
-msgstr "Drücke eine Taste, eine Kombination oder eine seitliche Maustaste. Esc bricht ab."
-
-#: components/app/interface/settings/user/voice/GameKeysOptions.tsx
-msgid "Push to mute"
-msgstr "Push-to-Mute"
-
-#: components/app/interface/settings/user/Keybinds.tsx
-msgid "Push to mute (hold)"
-msgstr "Push-to-Mute (halten)"
-
-#: components/app/interface/settings/user/Keybinds.tsx
-msgid "Push to talk (hold)"
-msgstr "Push-to-Talk (halten)"
-
-#: components/app/interface/settings/user/voice/GameKeysOptions.tsx
-msgid "Push to talk keeps the microphone open this long after you let go, so the end of a word is not cut off."
-msgstr "Push-to-Talk hält das Mikrofon nach dem Loslassen so lange offen, damit das Wortende nicht abgeschnitten wird."
-
-#: components/app/interface/settings/user/voice/GameKeysOptions.tsx
-msgid "Ready. Zrzur listens only while you are in a call."
-msgstr "Bereit. Zrzur hört nur zu, während du in einem Anruf bist."
-
-#: components/app/interface/settings/user/voice/GameKeysOptions.tsx
-msgid "Release delay"
-msgstr "Loslass-Verzögerung"
-
-#: components/app/interface/settings/user/voice/GameKeysOptions.tsx
-msgid "Shows whether Zrzur hears a key while another window is in front. Works outside a call."
-msgstr "Zeigt, ob Zrzur eine Taste erkennt, während ein anderes Fenster vorne ist. Funktioniert auch ohne Anruf."
-
-#: components/app/interface/settings/user/voice/GameKeysOptions.tsx
-msgid "Start test"
-msgstr "Test starten"
-
-#: components/app/interface/settings/user/voice/GameKeysOptions.tsx
-msgid "Stop test"
-msgstr "Test beenden"
-
-#: components/app/interface/settings/user/voice/GameKeysOptions.tsx
-msgid "Switch to your game or any other window, hold each key, then come back."
-msgstr "Wechsle zu deinem Spiel oder einem anderen Fenster, halte jede Taste und komm dann zurück."
-
-#: components/app/interface/settings/user/voice/GameKeysOptions.tsx
-msgid "Test your keys"
-msgstr "Tasten testen"
-
-#: components/app/interface/settings/user/voice/GameKeysOptions.tsx
-msgid "Your microphone is off while you hold it."
-msgstr "Dein Mikrofon ist aus, solange du sie hältst."
-
-#: components/app/interface/settings/user/voice/GameKeysOptions.tsx
-msgid "Zrzur could not start listening for keys on this computer. Your keys work while the Zrzur window is active."
-msgstr "Zrzur konnte auf diesem Computer nicht auf Tasten hören. Deine Tasten funktionieren, solange das Zrzur-Fenster aktiv ist."
-
-#: components/app/interface/settings/user/voice/GameKeysOptions.tsx
-msgid "Zrzur hears these keys while a game or another app is in front. The game still gets every key."
-msgstr "Zrzur erkennt diese Tasten, während ein Spiel oder eine andere App vorne ist. Das Spiel erhält weiterhin jede Taste."
-
-#: components/app/interface/settings/user/voice/GameKeysOptions.tsx
-msgid "Zrzur reacts only to the keys you choose here. It records nothing and sends nothing."
-msgstr "Zrzur reagiert nur auf die Tasten, die du hier wählst. Es zeichnet nichts auf und sendet nichts."
-
-#: components/modal/modals/ScreenSharePicker.tsx
-msgid "A minimised window is not listed. Open it first."
-msgstr "Ein minimiertes Fenster wird nicht aufgeführt. Öffne es zuerst."
-
-#: components/modal/modals/ScreenSharePicker.tsx
-msgid "Entire screen"
-msgstr "Gesamter Bildschirm"
-
-#: components/app/interface/settings/user/Native.tsx
-msgid "Keep running when the window is closed"
-msgstr "Weiterlaufen, wenn das Fenster geschlossen wird"
-
-#: components/app/interface/settings/user/Native.tsx
-msgid "Marks misspelled words and suggests corrections as you type."
-msgstr "Markiert falsch geschriebene Wörter und schlägt beim Tippen Korrekturen vor."
-
-#: components/modal/modals/ScreenSharePicker.tsx
-msgid "No open window can be shared right now. Open the app you want to show, then try again."
-msgstr "Gerade kann kein offenes Fenster geteilt werden. Öffne die App, die du zeigen möchtest, und versuche es erneut."
-
-#: components/modal/modals/ScreenSharePicker.tsx
-msgid "No screen can be shared right now."
-msgstr "Gerade kann kein Bildschirm geteilt werden."
-
-#: components/app/interface/settings/user/Native.tsx
-msgid "Open Zrzur when the computer starts"
-msgstr "Zrzur beim Start des Computers öffnen"
-
-#: components/modal/modals/ScreenSharePicker.tsx
-msgid "Others hear what plays on your computer."
-msgstr "Andere hören, was auf deinem Computer abgespielt wird."
-
-#: components/modal/modals/ScreenSharePicker.tsx
-#: components/modal/modals/ScreenShareSettings.tsx
-msgid "Quality"
-msgstr "Qualität"
-
-#: components/app/interface/settings/user/Native.tsx
-msgid "Restart now"
-msgstr "Jetzt neu starten"
-
-#: components/app/interface/settings/user/Native.tsx
-msgid "Restart Zrzur to apply your changes"
-msgstr "Starte Zrzur neu, um deine Änderungen anzuwenden"
-
-#. placeholder {0}: source.screenNumber ?? 1
-#: components/modal/modals/ScreenSharePicker.tsx
-msgid "Screen {0}"
-msgstr "Bildschirm {0}"
-
-#: components/modal/modals/ScreenSharePicker.tsx
-msgid "Screens"
-msgstr "Bildschirme"
-
-#: components/modal/modals/ScreenSharePicker.tsx
-msgid "Share your screen"
-msgstr "Bildschirm teilen"
-
-#: components/app/interface/settings/user/Native.tsx
-msgid "Spell check"
-msgstr "Rechtschreibprüfung"
-
-#: components/app/interface/settings/user/Native.tsx
-msgid "Start in the tray"
-msgstr "Im Infobereich starten"
-
-#: components/app/interface/settings/user/Native.tsx
-msgid "Startup"
-msgstr "Start"
-
-#: components/app/interface/settings/user/Native.tsx
-msgid "The title bar and hardware acceleration change when Zrzur starts. A call you are in ends."
-msgstr "Titelleiste und Hardwarebeschleunigung ändern sich beim Start von Zrzur. Ein laufender Anruf endet."
-
-#: components/app/interface/settings/user/Native.tsx
-msgid "Typing and performance"
-msgstr "Tippen und Leistung"
-
-#: components/modal/modals/ScreenSharePicker.tsx
-msgid "Untitled window"
-msgstr "Fenster ohne Titel"
-
-#: components/app/interface/settings/user/Native.tsx
-msgid "Uses the graphics card for a smoother app. Turn it off if a game stutters or the window flickers. Changes after a restart."
-msgstr "Nutzt die Grafikkarte für eine flüssigere App. Schalte es aus, wenn ein Spiel ruckelt oder das Fenster flackert. Ändert sich nach einem Neustart."
-
-#: components/modal/modals/ScreenSharePicker.tsx
-msgid "What to share"
-msgstr "Was geteilt wird"
-
-#: components/app/interface/settings/user/Native.tsx
-msgid "Window"
-msgstr "Fenster"
-
-#: components/modal/modals/ScreenSharePicker.tsx
-msgid "Windows"
-msgstr "Fenster"
-
-#: components/app/interface/settings/user/Native.tsx
-msgid "Zrzur draws its own title bar instead of the system's. Changes after a restart."
-msgstr "Zrzur zeichnet seine eigene Titelleiste statt der des Systems. Ändert sich nach einem Neustart."
-
-#: components/app/interface/settings/user/Native.tsx
-msgid "Zrzur opens by itself after you sign in to your computer."
-msgstr "Zrzur öffnet sich von selbst, nachdem du dich am Computer angemeldet hast."
-
-#: components/app/interface/settings/user/Native.tsx
-msgid "Zrzur starts hidden. Open it from its icon next to the clock."
-msgstr "Zrzur startet versteckt. Öffne es über sein Symbol neben der Uhr."
-
-#: components/app/interface/settings/user/Native.tsx
-msgid "Zrzur stays in the tray, so calls and notifications continue."
-msgstr "Zrzur bleibt im Infobereich, sodass Anrufe und Benachrichtigungen weiterlaufen."
-
-#: components/app/interface/settings/user/Native.tsx
-msgid "Zrzur title bar"
-msgstr "Zrzur-Titelleiste"
