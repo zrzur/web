@@ -2734,14 +2734,14 @@
     },
     {
       "path": "packages/client/components/auth/src/flows/Turnstile.dom.test.tsx",
-      "sha256": "d5605998d3cd404f4808a14845fd0303ec0a1ef6afbc35124194c96953dc3258",
-      "bytes": 2087,
+      "sha256": "9391c2e28bed5942e22147d96cb58f24096cb1b5a0affeb61c8e1994c365ea2a",
+      "bytes": 3110,
       "category": "synthetic-test-source-or-fixture"
     },
     {
       "path": "packages/client/components/auth/src/flows/Turnstile.tsx",
-      "sha256": "1c52debdd98e02ce3d7b4036675a367b49c1addc8c1256abc5acb763bdf716f6",
-      "bytes": 2790,
+      "sha256": "3e7fc013f1ef8810da87e8ebc3d21f9cadc5ef2fb599b2e490c801022938e730",
+      "bytes": 3663,
       "category": "product-source-or-build-manifest"
     },
     {

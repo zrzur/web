@@ -3,19 +3,44 @@ import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 
 import Turnstile, { type TurnstileFunctions } from "./Turnstile";
 
-// Cloudflare's script is replaced by a stand-in: the widget only needs
-// render / execute / reset / remove, and an execute answers with a token.
+// Cloudflare's script is replaced by a stand-in that behaves like the real
+// one: render keeps the callbacks, execute runs the check and answers through
+// them, and Turnstile refuses size "invisible" (it threw in production).
+type Options = {
+  sitekey: string;
+  size?: string;
+  execution?: string;
+  appearance?: string;
+  callback?: (token: string) => void;
+  "error-callback"?: () => void;
+};
+
 let dispose: (() => void) | undefined;
+let options: Options | undefined;
+let answer: "token" | "error";
+let render_: ReturnType<typeof vi.fn>;
 let execute: ReturnType<typeof vi.fn>;
 
 beforeEach(() => {
-  execute = vi.fn(
-    (_container: HTMLElement, options: { callback?: (t: string) => void }) => {
-      options.callback?.("token-from-widget");
-    },
-  );
+  options = undefined;
+  answer = "token";
+  render_ = vi.fn((_container: HTMLElement, given: Options) => {
+    if (
+      given.size !== undefined &&
+      !["compact", "flexible", "normal"].includes(given.size)
+    )
+      throw new Error(
+        `Invalid value for parameter "size", got "${given.size}"`,
+      );
+    options = given;
+    return "widget-1";
+  });
+  execute = vi.fn(() => {
+    if (answer === "token") options?.callback?.("token-from-widget");
+    else options?.["error-callback"]?.();
+  });
   (window as unknown as { turnstile: unknown }).turnstile = {
-    render: vi.fn(() => "widget-1"),
+    render: render_,
     execute,
     reset: vi.fn(),
     remove: vi.fn(),
@@ -28,38 +53,51 @@ afterEach(() => {
   delete (window as unknown as { turnstile?: unknown }).turnstile;
 });
 
-describe("sign-up captcha (Cloudflare Turnstile)", () => {
-  it("hands the form a token from the invisible widget", async () => {
-    let instance: TurnstileFunctions | undefined;
-    dispose = render(
-      () => (
-        <Turnstile
-          sitekey="site-key-public"
-          onLoad={(value) => (instance = value)}
-        />
-      ),
-      document.body.firstElementChild as HTMLElement,
-    );
-    await vi.waitFor(() => expect(instance).toBeDefined());
+async function mount() {
+  let instance: TurnstileFunctions | undefined;
+  dispose = render(
+    () => (
+      <Turnstile
+        sitekey="site-key-public"
+        onLoad={(value) => (instance = value)}
+      />
+    ),
+    document.body.firstElementChild as HTMLElement,
+  );
+  await vi.waitFor(() => expect(instance).toBeDefined());
+  return instance!;
+}
 
-    const answer = await instance!.execute();
-    expect(answer).toEqual({ response: "token-from-widget" });
-    expect(execute).toHaveBeenCalledTimes(1);
+describe("sign-up captcha (Cloudflare Turnstile)", () => {
+  it("hands the form a token from the check run on submit", async () => {
+    const instance = await mount();
+    expect(await instance.execute()).toEqual({ response: "token-from-widget" });
+    expect(execute).toHaveBeenCalledWith("widget-1");
   });
 
-  it("renders with the site key and no visible box", async () => {
-    dispose = render(
-      () => <Turnstile sitekey="site-key-public" onLoad={() => {}} />,
-      document.body.firstElementChild as HTMLElement,
+  it("renders with options Turnstile accepts: run on submit, box only when a click is needed", async () => {
+    await mount();
+    expect(render_).toHaveBeenCalledWith(
+      expect.any(HTMLElement),
+      expect.objectContaining({
+        sitekey: "site-key-public",
+        execution: "execute",
+        appearance: "interaction-only",
+      }),
     );
-    await vi.waitFor(() =>
-      expect(
-        (window as unknown as { turnstile: { render: ReturnType<typeof vi.fn> } })
-          .turnstile.render,
-      ).toHaveBeenCalledWith(
-        expect.any(HTMLElement),
-        expect.objectContaining({ sitekey: "site-key-public", size: "invisible" }),
-      ),
-    );
+    expect(options?.size).toBeUndefined();
+  });
+
+  it("a failed check reaches the form as CaptchaFailed", async () => {
+    const instance = await mount();
+    answer = "error";
+    await expect(instance.execute()).rejects.toEqual({ type: "CaptchaFailed" });
+  });
+
+  it("every submit gets a fresh token", async () => {
+    const instance = await mount();
+    await instance.execute();
+    await instance.execute();
+    expect(execute).toHaveBeenCalledTimes(2);
   });
 });

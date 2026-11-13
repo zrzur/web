@@ -1,7 +1,11 @@
 import { onCleanup, onMount } from "solid-js";
 
 /**
- * Cloudflare Turnstile, invisible: the form asks for a token when it submits.
+ * Cloudflare Turnstile, run on submit: the form asks for a token when it
+ * submits. The check runs in the background ("execute" mode) and shows a box
+ * only when Cloudflare needs the person to click ("interaction-only").
+ * Turnstile has no "invisible" size: that is a widget mode set in the
+ * Cloudflare dashboard, and the size parameter refuses it.
  * The script loads only on the forms that use it (sign-up, reset, resend).
  * Each token works once; the widget starts fresh for every submit.
  */
@@ -14,18 +18,16 @@ type TurnstileApi = {
     container: HTMLElement,
     options: {
       sitekey: string;
-      size: "invisible";
+      execution: "execute";
+      appearance: "interaction-only";
       callback?: (token: string) => void;
       "error-callback"?: () => void;
       "expired-callback"?: () => void;
     },
   ) => string;
-  execute: (
-    container: HTMLElement,
-    options?: { callback?: (token: string) => void; "error-callback"?: () => void },
-  ) => void;
-  reset: (container: HTMLElement) => void;
-  remove: (container: HTMLElement) => void;
+  execute: (widget: string) => void;
+  reset: (widget: string) => void;
+  remove: (widget: string) => void;
 };
 
 declare global {
@@ -58,15 +60,30 @@ function loadScript(): Promise<void> {
   return loading;
 }
 
+type Pending = {
+  resolve: (value: { response: string }) => void;
+  reject: (reason: { type: "CaptchaFailed" }) => void;
+};
+
 export default function Turnstile(props: {
   sitekey: string;
   onLoad: (instance: TurnstileFunctions) => void;
 }) {
   let box: HTMLDivElement | undefined;
+  let widget: string | undefined;
+  let pending: Pending | undefined;
   let alive = true;
+
+  const fail = () => {
+    pending?.reject({ type: "CaptchaFailed" });
+    pending = undefined;
+  };
+
   onCleanup(() => {
     alive = false;
-    if (box && window.turnstile) window.turnstile.remove(box);
+    fail();
+    if (widget !== undefined && window.turnstile)
+      window.turnstile.remove(widget);
   });
 
   onMount(() => {
@@ -74,16 +91,27 @@ export default function Turnstile(props: {
       .then(() => {
         if (!alive || !box || !window.turnstile) return;
         const api = window.turnstile;
-        const container = box;
-        api.render(container, { sitekey: props.sitekey, size: "invisible" });
+        // the answer of each run comes to the callbacks given here
+        const id = api.render(box, {
+          sitekey: props.sitekey,
+          execution: "execute",
+          appearance: "interaction-only",
+          callback: (token) => {
+            pending?.resolve({ response: token });
+            pending = undefined;
+          },
+          "error-callback": fail,
+          "expired-callback": fail,
+        });
+        widget = id;
         props.onLoad({
           execute: () =>
             new Promise((resolve, reject) => {
-              api.reset(container);
-              api.execute(container, {
-                callback: (token) => resolve({ response: token }),
-                "error-callback": () => reject({ type: "CaptchaFailed" }),
-              });
+              // a run still waiting is replaced by the new one
+              fail();
+              pending = { resolve, reject };
+              api.reset(id);
+              api.execute(id);
             }),
         });
       })
@@ -92,5 +120,6 @@ export default function Turnstile(props: {
       });
   });
 
-  return <div ref={box} aria-hidden="true" style={{ display: "none" }} />;
+  // empty until Cloudflare needs a click; then its box shows here
+  return <div ref={box} class="zrzur-turnstile" />;
 }
