@@ -2,6 +2,11 @@
 
 ## Unreleased
 
+### Memory over a long session (2026-11-13)
+
+* **The app no longer grows for as long as it is open.** Four things stayed in memory and are released now: every message ever fetched; the message box of every channel visited, with that channel's page; the video and its listeners after every call; and the call's room itself.
+* **Messages:** the twelve channels left most recently open again exactly as they were. A channel left longer ago loads again from its newest message. Once more than 1000 messages are in memory, those of other channels are let go after six minutes, unless they are on screen (search results, pins) or in the open mentions box.
+
 ### Design audit of the whole app (2026-11-13)
 
 * **Arabic: arrows point the right way.** Direction icons are mirrored in one place only. A second flip beside some components had turned them back: "Back" on sign-up, in settings on phones, in channel search and in category permissions, the chevrons on the lobby and in "Create your server", breadcrumbs on Designs and Discover, the calendar's month arrows, and Forward in the message toolbar (it looked the same as Reply).
