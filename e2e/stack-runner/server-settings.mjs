@@ -145,6 +145,13 @@ async function cleanup() {
   for (const emoji of emojis) {
     if (/^e2e_/.test(emoji.name)) await api(owner, "DELETE", `/custom/emoji/${emoji._id}`).catch(() => {});
   }
+  // filter rules a run left behind (a server holds 10 at most, then "Add rule" is off)
+  const automod = await api(owner, "GET", `/servers/${SERVER}/automod`).catch(() => null);
+  const rules = automod?.rules ?? [];
+  if (rules.some((rule) => /^rule-/.test(rule.name)))
+    await api(owner, "PUT", `/servers/${SERVER}/automod`, {
+      rules: rules.filter((rule) => !/^rule-/.test(rule.name)),
+    }).catch(() => {});
   const invites = await api(owner, "GET", `/servers/${SERVER}/invites`).catch(() => []);
   for (const invite of invites) await api(owner, "DELETE", `/invites/${invite._id}`).catch(() => {});
   await api(owner, "PUT", `/servers/${SERVER}/safety/pause`, { invites_hours: 0, dms_hours: 0 }).catch(() => {});
@@ -154,7 +161,14 @@ await cleanup();
 // ---------------------------------------------------------------- helpers
 
 /** The visible text of an English string in the language under test */
-const T = (lang) => (english) => tr(lang, english);
+const T = (lang) => (english, context) => tr(lang, english, context);
+
+/**
+ * Page titles whose catalog entry has its own msgctxt: the sidebar's "Safety"
+ * reads "الحماية", the plain "Safety" (assistant labels) "الأمان".
+ */
+const PAGE_CONTEXT = { Safety: "server-settings", Insights: "server insights" };
+const pageTitle = (t, english) => t(english, PAGE_CONTEXT[english]);
 
 /** The server name now (the name test changes it for a while) */
 let currentName = "e2e-settings";
@@ -203,13 +217,44 @@ async function openSettings(page, t, phone) {
   await page.waitForTimeout(600);
 }
 
-/** Open a page from the sidebar (on phones: the list) */
-async function goPage(page, title) {
-  await page
+/** The element is on screen and on top at its centre (a click would reach it) */
+const reachable = (locator) =>
+  locator
+    .evaluate((node) => {
+      const box = node.getBoundingClientRect();
+      const x = box.x + box.width / 2;
+      const y = box.y + box.height / 2;
+      if (x < 0 || y < 0 || x > innerWidth || y > innerHeight) return false;
+      const top = document.elementFromPoint(x, y);
+      return !!top && node.contains(top);
+    })
+    .catch(() => false);
+
+/**
+ * Open a page from the sidebar. On a phone the list is its own screen: an
+ * open page slides over it (the list stays in the layout, only covered), so
+ * (given `t`) the page's back button ("Settings") is pressed first when a
+ * page is showing, as a person does.
+ */
+async function goPage(page, title, t) {
+  const link = page
     .locator(".settings_sidebar")
     .getByRole("link", { name: title, exact: true })
-    .first()
-    .click({ timeout: 10000 });
+    .first();
+  // the back button sits at the top of the page (scrolled into view first)
+  // and is only reachable while the page covers the list; a desktop has none
+  const back = page
+    .locator(".settings_cont")
+    .getByRole("button", { name: t?.("Settings") ?? "", exact: true })
+    .first();
+  if (t && !(await reachable(link)) && (await back.count())) {
+    await back.scrollIntoViewIfNeeded({ timeout: 2000 }).catch(() => {});
+    if (await reachable(back)) {
+      await back.click({ timeout: 10000 });
+      for (let i = 0; i < 20 && (await reachable(back)); i++) await page.waitForTimeout(250);
+    }
+  }
+  await link.click({ timeout: 10000 });
   await page.waitForTimeout(900);
 }
 
@@ -473,7 +518,7 @@ test("joining: lobby design opens as a sub-view with one save bar", async (c) =>
 
 test("safety: pause invites is instant and says Saved", async (c) => {
   await openSettings(c.page, c.t, c.phone);
-  await goPage(c.page, c.t("Safety"));
+  await goPage(c.page, pageTitle(c.t, "Safety"));
   await seesHeading(c.page, c.t("Emergency"));
   // a pause left from an earlier run is ended first
   const endNow = c.page.getByRole("button", { name: /./ }).filter({ hasText: c.t("End now") }).first();
@@ -617,7 +662,7 @@ test("search: server settings offer no search box", async (c) => {
 test("safety: add a filter rule, then delete it after a question", async (c) => {
   const name = `rule-${c.lang}-${c.size}-${run}`;
   await openSettings(c.page, c.t, c.phone);
-  await goPage(c.page, c.t("Safety"));
+  await goPage(c.page, pageTitle(c.t, "Safety"));
   c.step = "add";
   await c.page.getByRole("button", { name: c.t("Add rule") }).click();
   const dialog = c.page.getByRole("dialog");
@@ -631,13 +676,19 @@ test("safety: add a filter rule, then delete it after a question", async (c) => 
   c.step = "survives reload";
   await reload(c.page);
   await openSettings(c.page, c.t, c.phone);
-  await goPage(c.page, c.t("Safety"));
+  await goPage(c.page, pageTitle(c.t, "Safety"));
   await c.page.getByText(name, { exact: true }).first().click();
   c.step = "delete asks first";
   await c.page.getByRole("dialog").getByRole("button", { name: c.t("Delete"), exact: true }).click();
   await c.page.getByText(c.t("Delete this rule?"), { exact: true }).waitFor({ timeout: 5000 });
   await c.page.getByRole("dialog").last().getByRole("button", { name: c.t("Delete rule"), exact: true }).click();
-  await c.page.waitForTimeout(1500);
+  // the save right after the reload can meet the stack's rate limit: the
+  // browser then waits the named time (about 4 s) and sends it again
+  await c.page
+    .getByText(name, { exact: true })
+    .first()
+    .waitFor({ state: "detached", timeout: 15000 })
+    .catch(() => {});
   if (await c.page.getByText(name, { exact: true }).count()) throw new Error("rule still listed");
 });
 
@@ -775,6 +826,11 @@ async function ensureLimited(permissions = 1 + (1 << 20)) {
   const state = await api(owner, "GET", `/servers/${SERVER}`);
   const members = await api(owner, "GET", `/servers/${SERVER}/members`);
   if (!members.members.some((m) => m._id.user === me._id)) {
+    // a ban test that stopped half way leaves the account banned: every later
+    // join then fails with 403 Banned, far from the cause
+    const bans = await api(owner, "GET", `/servers/${SERVER}/bans`).catch(() => null);
+    if (bans?.bans?.some((b) => b._id.user === me._id))
+      await api(owner, "DELETE", `/servers/${SERVER}/bans/${me._id}`);
     const invite = await api(owner, "POST", `/channels/${state.channels[0]}/invites`);
     await api(other, "POST", `/invites/${invite._id}`);
     await api(owner, "DELETE", `/invites/${invite._id}`).catch(() => {});
@@ -806,7 +862,7 @@ test("read-only: a limited member sees pages with the reason and cannot change t
       await side.getByRole("link", { name: c.t(name), exact: true }).first().waitFor({ timeout: 8000 });
     // pages with nothing a person without the permission may read stay away
     for (const name of ["Safety", "Audit log", "Bans", "Apps"])
-      if (await side.getByRole("link", { name: c.t(name), exact: true }).count())
+      if (await side.getByRole("link", { name: pageTitle(c.t, name), exact: true }).count())
         throw new Error(`${name} is shown without its permission`);
     const reason = c.t('You can see this but not change it. It needs the permission "{permission}".');
     const sentence = (permission) => reason.replace("{permission}", c.t(permission));
@@ -817,8 +873,8 @@ test("read-only: a limited member sees pages with the reason and cannot change t
       ["Roles", "Manage roles"],
     ]) {
       c.step = `${title}: reason`;
-      await side.getByRole("link", { name: c.t(title), exact: true }).first().click();
-      await page.waitForTimeout(1500);
+      await goPage(page, c.t(title), c.t);
+      await page.waitForTimeout(600);
       await page.getByText(sentence(needs), { exact: true }).first().waitFor({ timeout: 8000 });
       if (title === "Overview") {
         c.step = "Overview: the name cannot be edited";
@@ -841,8 +897,8 @@ test("read-only: a limited member sees pages with the reason and cannot change t
     }
     // the page they may change has no such note
     c.step = "Channels: editable, no note";
-    await side.getByRole("link", { name: c.t("Channels"), exact: true }).first().click();
-    await page.waitForTimeout(1500);
+    await goPage(page, c.t("Channels"), c.t);
+    await page.waitForTimeout(600);
     await page.getByRole("button", { name: c.t("New channel") }).waitFor({ timeout: 8000 });
     if (await page.locator("[data-read-only]").count()) throw new Error("Channels shows a read-only note");
     await page.screenshot({ path: `${SHOTS}readonly-${c.lang}-${c.size}.png` });
@@ -1092,7 +1148,7 @@ test("members: ban from the menu, find the ban, search it, unban", async (c) => 
   await dialog.getByRole("button", { name: c.t("Ban"), exact: true }).click();
   await c.page.waitForTimeout(2000);
   c.step = "bans page";
-  await goPage(c.page, c.t("Bans"));
+  await goPage(c.page, c.t("Bans"), c.t);
   await c.page.getByText("agetest2", { exact: false }).first().waitFor({ timeout: 10000 });
   c.step = "search";
   await c.page.getByRole("searchbox", { name: c.t("Search bans") }).fill("zzzz-nobody");
@@ -1132,7 +1188,7 @@ test("members: an invite is revoked after a question", async (c) => {
 
 test("safety: pausing direct messages, then ending the pause", async (c) => {
   await openSettings(c.page, c.t, c.phone);
-  await goPage(c.page, c.t("Safety"));
+  await goPage(c.page, pageTitle(c.t, "Safety"));
   await c.page.getByRole("button", { name: c.t("Pause direct messages"), exact: true }).click();
   await c.page.getByRole("button", { name: c.t("End now: {0}").replace("{0}", c.t("Pause direct messages")) }).waitFor({ timeout: 15000 });
   let state = await api(owner, "GET", `/servers/${SERVER}`);
@@ -1178,7 +1234,7 @@ const PAGES = [
 for (const [title, id] of PAGES) {
   test(`screenshot: ${id}`, async (c) => {
     await openSettings(c.page, c.t, c.phone);
-    await goPage(c.page, c.t(title));
+    await goPage(c.page, pageTitle(c.t, title));
     // no sideways scroll, no empty page
     const { overflow, textLength } = await c.page.evaluate(() => {
       const content = document.querySelector(".settings_sidebar")?.parentElement;
