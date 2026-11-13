@@ -15,6 +15,9 @@
 * **Release delay** for push to talk (default 0.2 s), so the end of a word is not cut off; also in the browser.
 * **Voice settings** show whether keys work in games right now, say in one line what is listened for (only your keys, nothing recorded or sent, only during a call), and have a test that shows a key being heard while another window is in front.
 * **In the browser** the settings say plainly that keys work only while the Zrzur tab is active, and point to the desktop app.
+### Badges beside the name (2026-11-13)
+
+* **Profile card and full profile:** badges sit right after the name. The small card shows the three most important ones; the full profile shows all of them, on a second line where they don't fit beside the name. The box of badges under the username is gone.
 
 ### Design audit of the whole app (2026-11-13)
 

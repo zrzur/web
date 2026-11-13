@@ -10,17 +10,16 @@ import { Icon } from "@revolt/ui/icons/Icon";
 
 import { BotLabel } from "./BotLabel";
 import { ProfileBadges, profileBadgeIds } from "./ProfileBadges";
+import { nameRowBadges } from "./nameRowBadges";
 import { readableName, readableTheme } from "./profileTheme";
 import { nameStyle, themeColours, userStyleOf } from "./userStyle";
 
-/** Badges that fit on the name row */
-const ROW_BADGES = 3;
-
 /**
  * Name block under the avatar: display name (+ Bot tag), then username#tag
- * with click-to-copy and pronouns on one line. Up to three badges sit on the
- * name row's far end; more move to a box of their own under the handle. A
- * themed profile keeps its chosen name colour where it reads on the theme.
+ * with click-to-copy and pronouns on one line. Badges sit right after the
+ * name: the first three on the small card, all of them on the full profile,
+ * where they may run on to a second line. A themed profile keeps its chosen
+ * name colour where it reads on the theme.
  */
 export function ProfileIdentity(props: {
   user: User;
@@ -32,8 +31,7 @@ export function ProfileIdentity(props: {
 
   const name = () => props.member?.displayName ?? props.user.displayName;
   const pronouns = () => props.member?.pronouns ?? props.user.pronouns;
-  const badges = () => profileBadgeIds(props.user);
-  const manyBadges = () => badges().length > ROW_BADGES;
+  const badges = () => nameRowBadges(profileBadgeIds(props.user), props.size);
 
   const style = () => {
     const chosen = userStyleOf(props.user);
@@ -60,7 +58,7 @@ export function ProfileIdentity(props: {
 
   return (
     <Identity data-size={props.size}>
-      <NameRow>
+      <NameRow data-size={props.size}>
         <DisplayNameGroup>
           <Name dir="auto" data-size={props.size} style={style()}>
             {name()}
@@ -84,11 +82,9 @@ export function ProfileIdentity(props: {
             />
           </Show>
         </DisplayNameGroup>
-        <Show when={!manyBadges()}>
-          <RowBadges>
-            <ProfileBadges ids={badges()} />
-          </RowBadges>
-        </Show>
+        <RowBadges>
+          <ProfileBadges ids={badges()} />
+        </RowBadges>
       </NameRow>
 
       <Meta>
@@ -111,14 +107,6 @@ export function ProfileIdentity(props: {
           <Pronouns dir="auto">{pronouns()}</Pronouns>
         </Show>
       </Meta>
-
-      <Show when={manyBadges()}>
-        <BadgesBlock>
-          <BadgeBox>
-            <ProfileBadges ids={badges()} />
-          </BadgeBox>
-        </BadgesBlock>
-      </Show>
     </Identity>
   );
 }
@@ -138,6 +126,8 @@ const NameRow = styled("div", {
     alignItems: "center",
     gap: "8px",
     minWidth: 0,
+    // the full profile shows every badge: they may take a second line
+    "&[data-size='full']": { flexWrap: "wrap", rowGap: "4px" },
   },
 });
 
@@ -147,7 +137,8 @@ const DisplayNameGroup = styled("div", {
     alignItems: "center",
     gap: "6px",
     minWidth: 0,
-    flex: "1 1 0",
+    // only as wide as the name, so the badges sit right after it
+    flex: "0 1 auto",
     _phone: {
       // first in a scrolling card: a target reaching above it would be cut off
       "& > [role=list]": { marginBlock: 0 },
@@ -168,34 +159,6 @@ const RowBadges = styled("div", {
       paddingBlockEnd: "8px",
       "& > [role=list]": { margin: 0 },
     },
-  },
-});
-
-/** Its line under it is the same line the sections draw above themselves */
-const BadgesBlock = styled("div", {
-  base: {
-    marginBlockStart: "4px",
-    paddingBlockEnd: "12px",
-    borderBlockEnd: "1px solid var(--profile-line, var(--z-border-subtle))",
-    // the username's 44 px target reaches 12 px down: keep clear of it, so a
-    // press on a badge never copies the name
-    _phone: { marginBlockStart: "12px" },
-  },
-});
-
-/** Same corners and tint as a link chip */
-const BadgeBox = styled("div", {
-  base: {
-    display: "flex",
-    width: "fit-content",
-    maxWidth: "100%",
-    minWidth: 0,
-    paddingBlock: "4px",
-    paddingInline: "8px",
-    borderRadius: "var(--z-radius-sm, 6px)",
-    border: "1px solid var(--profile-line, var(--z-border-subtle))",
-    background: "var(--profile-chip, var(--z-bg-input))",
-    _phone: { paddingBlock: 0, "& > [role=list]": { margin: 0 } },
   },
 });
 
