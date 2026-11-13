@@ -292,8 +292,8 @@
     },
     {
       "path": "CHANGELOG.md",
-      "sha256": "8ed3b9ed0bf716939c11b2a98339bf9cd0ccdad5eadda7041c76f9282f31b2bd",
-      "bytes": 130310,
+      "sha256": "4155db75268a07d4a1913a5be94c2aca494728349347698afd69cdc27e467303",
+      "bytes": 130483,
       "category": "public-documentation"
     },
     {
@@ -556,8 +556,8 @@
     },
     {
       "path": "e2e/stack-runner/app-design-audit.mjs",
-      "sha256": "80066e2d0d7d48f01b2fa1cf5a8c29e50148382807ab12dd37440f1960f1f3a5",
-      "bytes": 15216,
+      "sha256": "2688d1b10552cab5ad0095b4f535a77ef9b11f45ee6180f763105328aebed4e4",
+      "bytes": 16051,
       "category": "synthetic-test-source-or-fixture"
     },
     {
@@ -2704,8 +2704,8 @@
     },
     {
       "path": "packages/client/components/auth/src/flows/FlowCreate.tsx",
-      "sha256": "a3aad8d88e55181c452f3fa5def8ad7b3433709eaaaba76e1abb8b2ef48ac13d",
-      "bytes": 3755,
+      "sha256": "a457fbf83a90c7638970a1f3a2f3737b697ea75ffdd4ca7fa14f8949207baef3",
+      "bytes": 2840,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -2740,8 +2740,8 @@
     },
     {
       "path": "packages/client/components/auth/src/flows/Form.tsx",
-      "sha256": "cdfa7d53aec788d2e033f1ead10bc5a79f63c49a27bca8a92e86455ba2644070",
-      "bytes": 15043,
+      "sha256": "46434d07b221cf566788b4dc3abd37a1a0477682e44d260852f29adf82cc9a9d",
+      "bytes": 14941,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -2752,14 +2752,14 @@
     },
     {
       "path": "packages/client/components/auth/src/flows/SignUpConsent.dom.test.tsx",
-      "sha256": "0806abe3bf0fcc6c93257e96782a678c21dc6395d9de1915e35d155d28b37eb9",
-      "bytes": 1523,
+      "sha256": "dc7df0c8aa80b99aeb49d8aa1a517a424a5df7bc626272a3d3ea342961212a2a",
+      "bytes": 2326,
       "category": "synthetic-test-source-or-fixture"
     },
     {
       "path": "packages/client/components/auth/src/flows/SignUpConsent.tsx",
-      "sha256": "8c1031c170b52a069fe7c076d269d37b001f45f016b2e3b9019e6899673ab03e",
-      "bytes": 1689,
+      "sha256": "829cfd00c388aa6728a35e3041ad54b0db0861b9083f011a4d151775e5233ffc",
+      "bytes": 5105,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -2772,6 +2772,12 @@
       "path": "packages/client/components/auth/src/flows/Turnstile.tsx",
       "sha256": "3e7fc013f1ef8810da87e8ebc3d21f9cadc5ef2fb599b2e490c801022938e730",
       "bytes": 3663,
+      "category": "product-source-or-build-manifest"
+    },
+    {
+      "path": "packages/client/components/auth/src/flows/fieldErrors.ts",
+      "sha256": "c78c1cf405b3d0c0285e00f222f643e2049d83b0fad8520c805610901dd36eee",
+      "bytes": 670,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -3148,8 +3154,8 @@
     },
     {
       "path": "packages/client/components/i18n/catalogs/ar/messages.po",
-      "sha256": "01c27feb245888d9135d80d583a2131673a82ae18b0c3885c8ef11f8bf75124c",
-      "bytes": 1010312,
+      "sha256": "3ba5d99fc8b48c420c1872460de93dd0077c2a6ec83f3266013fbfa8b3f84814",
+      "bytes": 1010806,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -3292,8 +3298,8 @@
     },
     {
       "path": "packages/client/components/i18n/catalogs/de/messages.po",
-      "sha256": "c3086f00739b76a04de6cc9fb6bba65c8e7485351e7485b03e373a86647a340b",
-      "bytes": 932397,
+      "sha256": "72ada8a8a8079d7e1603fe365224fd1d5f30a5eaa2be19ab6c3634397331a5bc",
+      "bytes": 932867,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -3328,8 +3334,8 @@
     },
     {
       "path": "packages/client/components/i18n/catalogs/en/messages.po",
-      "sha256": "e10ffd3266de2d3fdf7918c3d618789a9d50f69a65ce8a2d099c48629e170fea",
-      "bytes": 897812,
+      "sha256": "f06d8b7afe118ce80dacd7a063c047bcf0c27dac4cbc86f077af18b690e2cf7e",
+      "bytes": 898249,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -38868,6 +38874,12 @@
       "path": "packages/client/scripts/i18n/ui-1111001.json",
       "sha256": "51d95c2da06e719c504bd5d60f19ea2fbbab9afcdf12d1c564cd10d8d293f6bf",
       "bytes": 8092,
+      "category": "product-source-or-build-manifest"
+    },
+    {
+      "path": "packages/client/scripts/i18n/ui-1111301.json",
+      "sha256": "bc7cfcc284132424ac560401d9b03b549d2777de46e2b59c3c08e887fcd9206c",
+      "bytes": 619,
       "category": "product-source-or-build-manifest"
     },
     {
