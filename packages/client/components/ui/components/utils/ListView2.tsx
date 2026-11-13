@@ -2,6 +2,7 @@ import {
   Accessor,
   batch,
   createEffect,
+  createSignal,
   For,
   JSX,
   on,
@@ -189,13 +190,37 @@ export function ListView2(props: Props) {
   );
 }
 
-function Skeleton(props: {
+export function Skeleton(props: {
   onVisible(): void;
   containerRef: HTMLDivElement | undefined;
   permitFetching: Accessor<boolean>;
   align: "start" | "end";
 }) {
   let ref: HTMLDivElement | undefined;
+
+  // The shimmer runs only while the skeleton is on screen. Most of the time
+  // it sits out of sight above the messages, where its animations still
+  // cost about a quarter of a processor core.
+  const [onScreen, setOnScreen] = createSignal(
+    typeof IntersectionObserver === "undefined",
+  );
+  createEffect(
+    on(
+      () => [ref, props.containerRef] as const,
+      ([ref, containerRef]) => {
+        if (ref && typeof IntersectionObserver !== "undefined") {
+          const observer = new IntersectionObserver(
+            ([entry]) => entry && setOnScreen(entry.isIntersecting),
+            { root: containerRef },
+          );
+
+          observer.observe(ref);
+
+          onCleanup(() => observer.disconnect());
+        }
+      },
+    ),
+  );
 
   function onEvent([entry]: IntersectionObserverEntry[]) {
     if (entry) {
@@ -223,7 +248,11 @@ function Skeleton(props: {
   );
 
   return (
-    <SkeletonBase ref={ref} align={props.align}>
+    <SkeletonBase
+      ref={ref}
+      align={props.align}
+      style={{ "--skeleton-shimmer": onScreen() ? "running" : "paused" }}
+    >
       <For each={new Array(30).fill(0)}>
         {() => (
           <Column gap="none">
@@ -297,6 +326,7 @@ const Frame = styled("div", {
     backgroundSize: "200% 100%",
     backgroundAttachment: "fixed",
     animation: "skeletonShimmer 1.5s infinite",
+    animationPlayState: "var(--skeleton-shimmer, running)",
   },
   variants: {
     shape: {

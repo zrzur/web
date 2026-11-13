@@ -5,6 +5,7 @@
 ### Memory over a long session (2026-11-13)
 
 * **The app no longer grows for as long as it is open.** Four things stayed in memory and are released now: every message ever fetched; the message box of every channel visited, with that channel's page; the video and its listeners after every call; and the call's room itself.
+* **Less processor use at rest.** The loading placeholder above the messages shimmers only while it is on screen. It used to animate out of sight all the time: about a quarter of a processor core while the app only showed a channel.
 * **Messages:** the twelve channels left most recently open again exactly as they were. A channel left longer ago loads again from its newest message. Once more than 1000 messages are in memory, those of other channels are let go after six minutes, unless they are on screen (search results, pins) or in the open mentions box.
 
 ### Design audit of the whole app (2026-11-13)
