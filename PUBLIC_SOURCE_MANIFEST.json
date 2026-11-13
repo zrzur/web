@@ -8518,8 +8518,8 @@
     },
     {
       "path": "packages/client/components/ui/styles.css",
-      "sha256": "3821fc12b0f0ce7606776b201b311e2f0febec65cfd8f4061906a7305884d2e3",
-      "bytes": 7668,
+      "sha256": "3cb8ac06edb829b12ea258cf5c91cef2f20a8b2da9a4dff125f9ace1c49141d7",
+      "bytes": 7704,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -39976,8 +39976,8 @@
     },
     {
       "path": "packages/client/src/interface/DevelopersDocs.tsx",
-      "sha256": "e913f768602f4cb40fdd2f7fa151d6763319920fdacc292b97ed08c14d6f550c",
-      "bytes": 5774,
+      "sha256": "eacf718ec78d8f054c20372c6320fb6440def2a2c7e0a517f5f7202f97916bba",
+      "bytes": 5641,
       "category": "product-source-or-build-manifest"
     },
     {
