@@ -556,7 +556,7 @@ export function Messages(props: Props) {
   async function caseJumpToBottom() {
     // Scroll to the bottom if we're already at the end
     if (atEnd()) {
-      listRef()!.scrollIntoView({
+      listRef()?.scrollIntoView({
         behavior: "smooth",
         block: "end",
       });
@@ -609,13 +609,13 @@ export function Messages(props: Props) {
 
         // Animate scroll to bottom
         setTimeout(() => {
-          listRef()!.scrollIntoView({
+          listRef()?.scrollIntoView({
             behavior: "instant",
             block: "start",
           });
 
           setTimeout(() => {
-            listRef()!.scrollIntoView({
+            listRef()?.scrollIntoView({
               behavior: "smooth",
               block: "end",
             });
