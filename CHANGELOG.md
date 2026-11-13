@@ -25,6 +25,7 @@
 * **Profile card and full profile:** badges sit right after the name. The small card shows the three most important ones; the full profile shows all of them, on a second line where they don't fit beside the name. The box of badges under the username is gone.
 ### Discover server page (2026-11-13)
 
+* **A side column holds the facts.** On a server's Discover page one frame beside the text holds the Join button with a line saying who may join, the invite link in a field with Copy inside it, and "Server details": online now, members, category, language and the tags. The row of fact boxes in the middle of the page and the boxed "Before you join" note are gone; the note is plain text. On phones the frame comes right after the description. A bot's dialog shows its facts and tags the same way, above what the bot may do.
 * **Descriptions are formatted.** A server's or bot's description on its Discover page shows bold text, lists and links the way the server info panel does (it showed the raw `**` and `-` marks). Cards, link previews and search results show the same text as plain words.
 * **The link shown is the invite link.** A server with a custom link shows and copies that link (`zrzur.cc/<name>`), labelled "Invite link"; it showed the Discover page's own address under the bare word "Link". A server without one shows "Discover page". The address is never cut.
 * **Members** see only "Go to server"; the "You're a member" notice is gone.
