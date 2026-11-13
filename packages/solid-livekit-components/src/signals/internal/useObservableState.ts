@@ -3,7 +3,7 @@
 
 // @ts-ignore
 import type { Observable } from 'rxjs'
-import { createEffect, createSignal } from 'solid-js'
+import { createEffect, createSignal, onCleanup } from 'solid-js'
 
 /**
  * @internal
@@ -14,7 +14,9 @@ export function useObservableState<T>(observable: Observable<T> | undefined, sta
     // observable state doesn't run in SSR
     if (typeof window === 'undefined' || !observable) return
     const subscription = observable.subscribe(setState)
-    return () => subscription.unsubscribe()
+    // Solid does not run a function returned from an effect (React does):
+    // the cleanup has to be registered
+    onCleanup(() => subscription.unsubscribe())
   }, [observable])
   return state
 }

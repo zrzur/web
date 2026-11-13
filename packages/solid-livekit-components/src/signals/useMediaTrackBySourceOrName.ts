@@ -4,7 +4,7 @@
 import type { TrackIdentifier } from '@livekit/components-core'
 import { isTrackReference } from '@livekit/components-core'
 import { setupMediaTrack, log, isLocal, getTrackByIdentifier } from '@livekit/components-core'
-import { createEffect, createMemo, createSignal } from 'solid-js'
+import { createEffect, createMemo, createSignal, onCleanup } from 'solid-js'
 import type { JSX } from 'solid-js/jsx-runtime'
 
 /** @public */
@@ -47,27 +47,31 @@ export function useMediaTrackBySourceOrName(
       setTrack(publication?.track)
     })
 
-    return () => subscription.unsubscribe()
+    // Solid does not run a function returned from an effect (React does):
+    // the cleanup has to be registered
+    onCleanup(() => subscription.unsubscribe())
   })
 
   createEffect(() => {
     const t = track()
     const el = options.element?.()
     if (t) {
-      if (previousElement) {
+      if (previousElement && previousElement !== el) {
         t.detach(previousElement)
       }
       if (el && !(isLocal(observerOptions.participant) && t.kind === 'audio')) {
-        console.info('attaching!')
         t.attach(el)
       }
     }
     previousElement = el
-    return () => {
-      if (previousElement) {
-        t?.detach(previousElement)
-      }
-    }
+    // Solid does not run a function returned from an effect (React does).
+    // Without this the track stayed attached to a <video> that had left the
+    // page, and LiveKit's page-visibility listener kept track, element and
+    // room in memory after every call.
+    onCleanup(() => {
+      if (el) t?.detach(el)
+      if (previousElement === el) previousElement = undefined
+    })
   })
 
   createEffect(() => {
