@@ -5,6 +5,13 @@ import { fileURLToPath } from "node:url";
 
 import { builtInSlugs, isBuiltIn } from "./catalogue.mjs";
 import {
+  docsBlock,
+  docsMeta,
+  docsRoute,
+  docsSitemap,
+  injectDocs,
+} from "./docs.mjs";
+import {
   COMMUNITY_LANGUAGES,
   TOPICS,
   alternateLinks,
@@ -17,15 +24,16 @@ import {
 import { designSvg, renderPng, serverSvg, siteSvg } from "./og.mjs";
 
 /**
- * The public sites discover.zrzur.com and designs.zrzur.com: the web app's
+ * The public sites discover.zrzur.com, designs.zrzur.com and
+ * developers.zrzur.com (SITE=docs, see docs.mjs): the web app's
  * build, with each page's own head (title, description, canonical, links
  * to the page in the seven site languages, preview image) filled in on the server, so search
  * engines and link previews (WhatsApp, X, Telegram) see the page without
  * running JavaScript. Also /sitemap.xml, /robots.txt and the preview
  * images under /og/.
  *
- * SITE           discover | designs
- * PUBLIC_ORIGIN  https://discover.zrzur.com
+ * SITE           discover | designs | docs
+ * PUBLIC_ORIGIN  https://discover.zrzur.com (docs: https://developers.zrzur.com)
  * API_URL        https://api.zrzur.com
  * MEDIA_URL      https://cdn.zrzur.com (icons, banners, design art)
  * DIST           the web app build (default ../client/dist)
@@ -40,8 +48,9 @@ import { designSvg, renderPng, serverSvg, siteSvg } from "./og.mjs";
  */
 
 const env = process.env;
-const SITE = env.SITE === "designs" ? "designs" : "discover";
-const ORIGIN = (env.PUBLIC_ORIGIN ?? `https://${SITE}.zrzur.com`).replace(
+const SITE = ["designs", "docs"].includes(env.SITE) ? env.SITE : "discover";
+const HOST = SITE === "docs" ? "developers" : SITE;
+const ORIGIN = (env.PUBLIC_ORIGIN ?? `https://${HOST}.zrzur.com`).replace(
   /\/+$/,
   "",
 );
@@ -213,7 +222,60 @@ const OG_TEXT = {
     title: "تصاميم زرزور · Zrzur Designs",
     line: "Style your profile — زيّن ملفك",
   },
+  docs: {
+    title: "مطوّرو زرزور · Zrzur Developers",
+    line: "Build bots for Zrzur — ابنِ بوتات لزرزور",
+  },
 };
+
+/**
+ * The documentation pages of the build (dist/docs-pages): the list with
+ * each page's words, and a page's text as plain HTML. Read once.
+ */
+let docsIndex;
+const docsPages = new Map();
+function docs() {
+  return (docsIndex ??= JSON.parse(
+    readFileSync(join(DIST, "docs-pages", "index.json"), "utf8"),
+  ));
+}
+function docsBody(language, id) {
+  const key = `${language}/${id}`;
+  if (!docsPages.has(key))
+    docsPages.set(
+      key,
+      readFileSync(join(DIST, "docs-pages", language, `${id}.html`), "utf8"),
+    );
+  return docsPages.get(key);
+}
+
+/** A documentation address: its page with head and text, a move, or 404 */
+function docsPage(res, url) {
+  const pages = docs();
+  const route = docsRoute(pages, url.pathname);
+  if (route.kind === "moved") {
+    res.writeHead(301, {
+      Location: `${route.to}${url.search}`,
+      ...SECURITY,
+      "Cache-Control": "public, max-age=3600",
+    });
+    return res.end();
+  }
+  const lang = url.searchParams.get("hl") ?? undefined;
+  const meta = docsMeta({ index: pages, origin: ORIGIN, route, lang });
+  const body =
+    route.kind === "page" ? docsBody(meta.lang, route.id) : undefined;
+  return send(
+    res,
+    meta.status,
+    TYPES[".html"],
+    injectDocs(
+      injectHead(index(), meta),
+      docsBlock({ index: pages, route, lang, body }),
+    ),
+    { "Cache-Control": "public, max-age=300", "Content-Language": meta.lang },
+  );
+}
 
 /** "≈ 120 members · ≈ 40 online", in the server's own language */
 export function countsLine(card) {
@@ -346,6 +408,18 @@ export async function handle(req, res) {
         TYPES[".txt"],
         `User-agent: *\nAllow: /\nDisallow: /login\nSitemap: ${ORIGIN}/sitemap.xml\n`,
       );
+    if (SITE === "docs" && path === "/sitemap.xml")
+      return send(res, 200, TYPES[".xml"], docsSitemap(docs(), ORIGIN), {
+        "Cache-Control": "public, max-age=3600",
+      });
+    // the changelog feed under the address the pages link, and a short one
+    if (SITE === "docs" && path === "/api-changelog.xml") {
+      const feed = staticFile("/developers/api-changelog.xml");
+      if (feed)
+        return send(res, 200, TYPES[".xml"], readFileSync(feed), {
+          "Cache-Control": "public, max-age=3600",
+        });
+    }
     if (path === "/sitemap.xml")
       return send(
         res,
@@ -383,6 +457,8 @@ export async function handle(req, res) {
           },
         );
     }
+
+    if (SITE === "docs") return docsPage(res, url);
 
     const route = routeOf(SITE, path);
     const data = await pageData(route).catch(() => undefined);

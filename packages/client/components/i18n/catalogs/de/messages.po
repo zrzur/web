@@ -20658,7 +20658,7 @@ msgstr "Der Eintrag wurde von Moderatoren entfernt, daher sind weitere Einreichu
 
 #: src/interface/navigation/MentionsPanel.tsx
 msgid "The last 30 days. Select one to jump to it."
-msgstr "Die letzten 30 Tage. Wähle eine aus, um dorthin zu springen."
+msgstr "Die letzten 30 Tage. Wähle eine aus, um hinzuspringen."
 
 #: src/interface/developers/docs/EndpointReference.tsx
 msgid "The last live check failed."
@@ -25454,3 +25454,15 @@ msgstr "Mit dem Erstellen eines Kontos akzeptierst du die <0>Nutzungsbedingungen
 msgid "Under 18, only friends can start a direct message with you. Anyone you write to first can reply."
 msgstr "Unter 18 können nur deine Freunde eine Direktnachricht mit dir beginnen. Wem du zuerst schreibst, kann dir antworten."
 
+#: src/interface/developers/docs/DocsPortal.tsx
+msgid "More pages"
+msgstr "Weitere Seiten"
+
+#: src/interface/developers/docs/DocsPortal.tsx
+msgid "On this page"
+msgstr "Auf dieser Seite"
+
+#: src/interface/developers/docs/DocsPortal.tsx
+#: src/interface/DevelopersDocs.tsx
+msgid "Zrzur Developers"
+msgstr "Zrzur Developers"

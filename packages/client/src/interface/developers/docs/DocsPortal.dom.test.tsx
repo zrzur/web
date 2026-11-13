@@ -38,8 +38,11 @@ vi.mock("./examples", () => ({
   loadExamplesFor: async () => [],
 }));
 vi.mock("./reference", () => ({ loadReference: async () => undefined }));
+vi.mock("./here", () => ({
+  hrefHere: (href: string) => href,
+  leavesHere: () => false,
+}));
 vi.mock("./markdownTree", () => ({ headingsOf: () => [] }));
-vi.mock("./GettingStarted", () => ({ GettingStarted: () => <p /> }));
 vi.mock("./Markdown", () => ({
   Markdown: (props: { source: string }) => (
     <div>

@@ -50,23 +50,18 @@ The answer is the thread: a channel with `parent` set. So `POST /channels/{targe
 
 The first message follows the rules of every message your bot sends:
 
-- It takes `content` only, up to 2000 characters. Other fields, such as `embeds`, `components` or `attachments`, are ignored without an error: the thread starts with the text alone. `embeds` and `components` come in the next release (see the [changelog](/developers/docs/changelog#upcoming)).
+- It takes `content` (up to 2000 characters), `embeds` and `components`. Other message fields, such as `attachments`, are ignored without an error. Embeds need Send Embeds. A forum post still needs `content`.
 - Send Messages and the mention rules apply. A role mention without Mention Roles, or `@everyone` without Mention Everyone, refuses the whole call with `403 MissingPermission`, and no thread is kept. The thread is made first and removed again, so your bot can get `ChannelCreate` and then `ChannelDelete` for it. Start the thread without the ping, then ping in a second message.
 - On a self-hosted server whose operator set `mass_mentions_enabled = false`, role, `@everyone` and `@online` mentions are not refused: the message is sent and nobody is notified.
 
-For a card with buttons at the top of a thread, start the thread with only a name, then send the card into it:
+A card with buttons can be the first message of a thread:
 
 ```bash
 curl -X POST "https://api.zrzur.com/channels/CHANNEL_ID/threads" \
   -H "x-bot-token: YOUR_BOT_TOKEN" \
   -H "content-type: application/json" \
-  -d '{ "name": "ticket-0001" }'
+  -d '{ "name": "ticket-0001", "embeds": [{ "title": "Ticket 0001", "description": "Opened by <@USER_ID>" }], "components": [{ "type": "ActionRow", "components": [{ "type": "Button", "style": "Danger", "label": "Close ticket", "custom_id": "ticket:close" }] }] }'
 # answer: { "_id": "THREAD_ID", "channel_type": "TextChannel", "parent": "CHANNEL_ID", ... }
-
-curl -X POST "https://api.zrzur.com/channels/THREAD_ID/messages" \
-  -H "x-bot-token: YOUR_BOT_TOKEN" \
-  -H "content-type: application/json" \
-  -d '{ "embeds": [{ "title": "Ticket 0001", "description": "Opened by <@USER_ID>" }], "components": [{ "type": "ActionRow", "components": [{ "type": "Button", "style": "Danger", "label": "Close ticket", "custom_id": "ticket:close" }] }] }'
 ```
 
 With the SDK:
@@ -125,6 +120,8 @@ await bot.invites.delete(invite._id);
 `POST /channels/{target}/typing` shows "is typing…" for a few seconds, limited to 5 per 10 seconds per channel. The SDK's `bot.typing(channelId)` uses the gateway when connected, and this route without one.
 
 ## Webhooks
+
+> **Webhooks are switched on per server installation.** `GET /` on the API shows `features.webhooks`. Where it is `false`, creating or listing webhooks answers `FeatureDisabled` and every `/webhooks/...` address answers `404 NotFound`. On `api.zrzur.com` it was `false` when this page was checked (2026-11-13).
 
 A webhook posts into one channel without a gateway connection. Create one with a bot token or in server settings (needs Manage Webhooks). The answer has `token` and `url`. They are shown once: the server keeps only a hash, so save them now. A lost token can only be replaced.
 

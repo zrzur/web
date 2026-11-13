@@ -319,6 +319,20 @@ export function resolveDiscoverUrl(value: string | undefined) {
 }
 
 /**
+ * Optional public URL of the standalone developer documentation site (its
+ * own domain, e.g. https://developers.zrzur.com): the same build, opened
+ * there, shows the Bot API documentation only. Unset: the documentation is
+ * a page inside the app.
+ */
+export function resolveDocsUrl(value: string | undefined) {
+  const url = assertAllowedServiceUrl(value?.trim(), "VITE_DOCS_URL");
+  if (url && !/^https?:\/\//i.test(url)) {
+    throw new Error(`Zrzur: VITE_DOCS_URL must be an http(s) link (${url}).`);
+  }
+  return url ? url.replace(/\/+$/, "") : undefined;
+}
+
+/**
  * Optional host name of the standalone Designs site (e.g. designs.zrzur.com):
  * the same build, opened on that host, shows Designs only, without the chat
  * around it. Unset: Designs is only a page inside the app.
@@ -384,6 +398,7 @@ const RELEASE_CHANNEL = resolveReleaseChannel(getEnv("VITE_RELEASE_CHANNEL"));
 const SUPPORT_URL = resolveSupportUrl(getEnv("VITE_SUPPORT_URL"));
 const DISCOVER_URL = resolveDiscoverUrl(getEnv("VITE_DISCOVER_URL"));
 const DESIGNS_HOST = resolveDesignsHost(getEnv("VITE_DESIGNS_HOST"));
+const DOCS_URL = resolveDocsUrl(getEnv("VITE_DOCS_URL"));
 const COMMUNITY_INVITE = resolveCommunityInvite(
   getEnv("VITE_COMMUNITY_INVITE"),
 );
@@ -416,6 +431,8 @@ export default {
   DISCOVER_URL,
   /** Host of the standalone Designs site (unset: Designs only in the app) */
   DESIGNS_HOST,
+  /** Standalone developer documentation site (unset: docs only in the app) */
+  DOCS_URL,
   /** "beta" shows the Beta label (VITE_RELEASE_CHANNEL; local builds: beta) */
   RELEASE_CHANNEL,
   /**

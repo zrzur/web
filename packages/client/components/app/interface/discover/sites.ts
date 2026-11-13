@@ -57,9 +57,16 @@ export function designsUrl() {
     : `${appUrl()}/designs`;
 }
 
-/** Bot and API docs (inside the app until developers.zrzur.com opens) */
+/** The Developer Portal ("My applications"): in the app, it needs an account */
 export function developersUrl() {
   return `${appUrl()}/developers`;
+}
+
+/** The documentation site, or the documentation inside the app */
+export function docsUrl() {
+  return CONFIGURATION.DOCS_URL
+    ? trim(CONFIGURATION.DOCS_URL)
+    : `${appUrl()}/developers/docs`;
 }
 
 /**

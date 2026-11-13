@@ -1,5 +1,6 @@
 import {
   For,
+  JSX,
   Show,
   createEffect,
   createMemo,
@@ -14,8 +15,8 @@ import { styled } from "styled-system/jsx";
 import { useLocation, useNavigate } from "@revolt/routing";
 import { Icon } from "@revolt/ui/icons/Icon";
 
-import { loadExample, loadExamplesFor } from "./examples";
-import { GettingStarted } from "./GettingStarted";
+import { loadExamplesFor } from "./examples";
+import { hrefHere, leavesHere } from "./here";
 import {
   type SearchEntry,
   endpointSlug,
@@ -36,10 +37,16 @@ import {
 import { loadReference } from "./reference";
 
 /**
- * Bot API documentation inside the Developer Portal:
- * /developers/docs/<page>#<anchor>
+ * The Bot API documentation: /developers/docs/<page>#<anchor> inside the
+ * app, /<page>#<anchor> on the standalone site (`site`), where it also
+ * shows the sections of the open page beside the text.
  */
-export function DocsPortal(props: { page?: string }) {
+export function DocsPortal(props: {
+  page?: string;
+  site?: boolean;
+  /** shown under the text: the site's legal links */
+  footer?: JSX.Element;
+}) {
   const { t, i18n } = useLingui();
   const navigate = useNavigate();
   const location = useLocation();
@@ -68,16 +75,15 @@ export function DocsPortal(props: { page?: string }) {
       let alive = true;
       onCleanup(() => (alive = false));
       setFailed(undefined);
-      const ready = current.hasSource
-        ? loadSource(current.id, locale).then(async (source) => {
-            await Promise.all([
-              loadParts(partsForMarkdown(source ?? "")),
-              loadExamplesFor(source ?? ""),
-              loadReference(locale),
-            ]);
-            return source;
-          })
-        : loadExample("hello-raw.mjs").then(() => undefined);
+      const ready = loadSource(current.id, locale).then(async (source) => {
+        if (source === undefined) throw new Error(`no page ${current.id}`);
+        await Promise.all([
+          loadParts(partsForMarkdown(source)),
+          loadExamplesFor(source),
+          loadReference(locale),
+        ]);
+        return source;
+      });
       ready.then(
         (source) => {
           if (alive) setContent({ id: current.id, locale, source });
@@ -208,19 +214,71 @@ export function DocsPortal(props: { page?: string }) {
   const results = createMemo(() => {
     const words = query().toLowerCase().split(/\s+/).filter(Boolean);
     if (!words.length) return [];
+    const asked = words.join(" ");
+    // what was typed in full comes first, then what starts with it
+    const rank = (entry: SearchEntry) => {
+      const label = entry.label.toLowerCase();
+      return label === asked ? 0 : label.startsWith(asked) ? 1 : 2;
+    };
     return index()
       .filter((entry) => {
         const text = `${entry.label} ${entry.detail}`.toLowerCase();
         return words.every((word) => text.includes(word));
       })
-      .slice(0, 20);
+      .map((entry, at) => ({ entry, at, rank: rank(entry) }))
+      .sort((a, b) => a.rank - b.rank || a.at - b.at)
+      .slice(0, 20)
+      .map(({ entry }) => entry);
   });
 
+  /** Open a documentation address (always written as in the app) */
   function go(href: string) {
     setMenuOpen(false);
     setQuery("");
-    navigate(href);
+    const address = hrefHere(href);
+    // "My applications" lives in the app: from the site, a full page load
+    if (leavesHere(address)) window.location.assign(address);
+    else navigate(address);
   }
+
+  /** A link to a documentation address: its real href, opened in place */
+  const link = (href: string) => ({
+    href: hrefHere(href),
+    onClick: (event: MouseEvent) => {
+      if (event.ctrlKey || event.metaKey || event.shiftKey) return;
+      event.preventDefault();
+      go(href);
+    },
+  });
+
+  /** Sections of the open page, and the pages before and after it */
+  const sections = createMemo(() => {
+    const source = shown()?.source;
+    return source ? headingsOf(source) : [];
+  });
+  const neighbours = createMemo(() => {
+    const at = PAGES.findIndex((p) => p.id === page()?.id);
+    return {
+      previous: PAGES[at - 1],
+      next: at < 0 ? undefined : PAGES[at + 1],
+    };
+  });
+
+  // The site's server sent the page as plain HTML, lying over the app
+  // while it loads: gone once the page (or its failure) is on screen
+  createEffect(() => {
+    if (shown() || failed() || !page())
+      document.getElementById("docs-static")?.remove();
+  });
+
+  // the browser tab names the page on the standalone site
+  createEffect(() => {
+    if (!props.site) return;
+    const title = titles()[page()?.id ?? ""];
+    document.title = title
+      ? `${title} · ${t`Zrzur Developers`}`
+      : t`Zrzur Developers`;
+  });
 
   // jump to the anchor, or to the top of a new page, once its content is
   // on screen: before that the anchor does not exist yet
@@ -262,13 +320,7 @@ export function DocsPortal(props: { page?: string }) {
         <NavGroup>
           <ul>
             <li>
-              <a
-                href="/developers"
-                onClick={(event) => {
-                  event.preventDefault();
-                  go("/developers");
-                }}
-              >
+              <a {...link("/developers")}>
                 <Trans>My applications</Trans>
               </a>
             </li>
@@ -307,14 +359,10 @@ export function DocsPortal(props: { page?: string }) {
                       {(p) => (
                         <li>
                           <a
-                            href={`/developers/docs/${p.id}`}
+                            {...link(`/developers/docs/${p.id}`)}
                             aria-current={
                               page()?.id === p.id ? "page" : undefined
                             }
-                            onClick={(event) => {
-                              event.preventDefault();
-                              go(`/developers/docs/${p.id}`);
-                            }}
                           >
                             {titles()[p.id]}
                           </a>
@@ -332,13 +380,7 @@ export function DocsPortal(props: { page?: string }) {
               <For each={results()}>
                 {(entry) => (
                   <li>
-                    <a
-                      href={entry.href}
-                      onClick={(event) => {
-                        event.preventDefault();
-                        go(entry.href);
-                      }}
-                    >
+                    <a {...link(entry.href)}>
                       <span dir="auto">{entry.label}</span>
                       <small>
                         {kindLabel(entry.kind)} · {entry.detail}
@@ -373,13 +415,7 @@ export function DocsPortal(props: { page?: string }) {
                 <Trans>Page not found</Trans>
               </h1>
               <p>
-                <a
-                  href="/developers/docs/overview"
-                  onClick={(event) => {
-                    event.preventDefault();
-                    go("/developers/docs/overview");
-                  }}
-                >
+                <a {...link("/developers/docs/overview")}>
                   <Trans>Go to the overview</Trans>
                 </a>
               </p>
@@ -412,32 +448,68 @@ export function DocsPortal(props: { page?: string }) {
                 </Show>
               }
             >
-              <Show
-                when={current().hasSource && shown()?.source}
-                fallback={
-                  <Article>
-                    <GettingStarted onNavigate={go} />
-                  </Article>
-                }
-              >
+              <Show when={shown()?.source}>
                 {(source) => (
-                  <Article>
-                    <Markdown source={source()} onNavigate={go} />
-                    <Footer>
-                      <Trans>
-                        Reference generated from backend{" "}
-                        {inventory.generated.backend} and OpenAPI{" "}
-                        {inventory.generated.openapi}. Descriptions that come
-                        from the API stay in English.
-                      </Trans>
-                    </Footer>
-                  </Article>
+                  <>
+                    <Article>
+                      <Markdown source={source()} onNavigate={go} />
+                      <Footer>
+                        <Trans>
+                          Reference generated from backend{" "}
+                          {inventory.generated.backend} and OpenAPI{" "}
+                          {inventory.generated.openapi}. Descriptions that come
+                          from the API stay in English.
+                        </Trans>
+                      </Footer>
+                    </Article>
+                    <Pager aria-label={t`More pages`}>
+                      <Show when={neighbours().previous} fallback={<span />}>
+                        {(p) => (
+                          <a {...link(`/developers/docs/${p().id}`)}>
+                            <small>{t`Previous`}</small>
+                            <span>{titles()[p().id]}</span>
+                          </a>
+                        )}
+                      </Show>
+                      <Show when={neighbours().next}>
+                        {(p) => (
+                          <a
+                            {...link(`/developers/docs/${p().id}`)}
+                            data-next=""
+                          >
+                            <small>{t`Next`}</small>
+                            <span>{titles()[p().id]}</span>
+                          </a>
+                        )}
+                      </Show>
+                    </Pager>
+                  </>
                 )}
               </Show>
             </Show>
           )}
         </Show>
+        {props.footer}
       </Content>
+      <Show when={props.site && sections().length > 1}>
+        <OnThisPage aria-label={t`On this page`}>
+          <h2>{t`On this page`}</h2>
+          <ul>
+            <For each={sections()}>
+              {(section) => (
+                <li>
+                  <a
+                    {...link(`/developers/docs/${page()?.id}#${section.id}`)}
+                    dir="auto"
+                  >
+                    {section.text}
+                  </a>
+                </li>
+              )}
+            </For>
+          </ul>
+        </OnThisPage>
+      </Show>
     </Portal>
   );
 }
@@ -635,16 +707,20 @@ const Article = styled("article", {
     },
     "& h3": { fontSize: "16px", fontWeight: 650, margin: "24px 0 8px" },
     "& p": { margin: "0 0 12px", color: "var(--z-fg-secondary)" },
+    // the app's reset takes list markers away; steps and lists need them
     "& ul": {
       margin: "0 0 12px",
       paddingInlineStart: "24px",
       color: "var(--z-fg-secondary)",
+      listStyle: "disc",
     },
     "& ol": {
       margin: "0 0 12px",
       paddingInlineStart: "24px",
       color: "var(--z-fg-secondary)",
+      listStyle: "decimal",
     },
+    "& li::marker": { color: "var(--z-fg-muted)" },
     "& li": { marginBlockEnd: "4px" },
     "& a": {
       color: "var(--z-link)",
@@ -671,6 +747,85 @@ const Article = styled("article", {
       border: "none",
       borderBlockStart: "1px solid var(--z-border-subtle)",
       margin: "24px 0",
+    },
+  },
+});
+
+/** The pages before and after this one */
+const Pager = styled("nav", {
+  base: {
+    display: "grid",
+    gridTemplateColumns: "1fr 1fr",
+    gap: "12px",
+    maxWidth: "880px",
+    marginInline: "auto",
+    marginBlockStart: "32px",
+    "& a": {
+      display: "flex",
+      flexDirection: "column",
+      gap: "2px",
+      minHeight: "64px",
+      justifyContent: "center",
+      padding: "12px 16px",
+      borderRadius: "var(--z-radius-md, 10px)",
+      border: "1px solid var(--z-border-subtle)",
+      textDecoration: "none",
+      color: "var(--z-fg-primary)",
+      fontWeight: 600,
+      minWidth: 0,
+      overflowWrap: "anywhere",
+      _hover: {
+        borderColor: "var(--z-border-strong)",
+        background: "var(--z-nav-hover)",
+      },
+    },
+    "& a[data-next]": { textAlign: "end", gridColumn: 2 },
+    "& small": {
+      fontSize: "12px",
+      fontWeight: 400,
+      color: "var(--z-fg-muted)",
+    },
+  },
+});
+
+/** Sections of the open page, on wide screens of the standalone site */
+const OnThisPage = styled("nav", {
+  base: {
+    display: "none",
+    "@media (min-width: 1280px)": {
+      display: "block",
+      width: "224px",
+      flexShrink: 0,
+      paddingBlock: "32px",
+      paddingInlineEnd: "16px",
+      overflowY: "auto",
+    },
+    "& h2": {
+      margin: "0 0 8px",
+      paddingInlineStart: "12px",
+      fontSize: "12px",
+      fontWeight: 700,
+      color: "var(--z-fg-muted)",
+    },
+    "& ul": {
+      listStyle: "none",
+      margin: 0,
+      padding: 0,
+      borderInlineStart: "1px solid var(--z-border-subtle)",
+    },
+    "& a": {
+      display: "block",
+      padding: "4px 12px",
+      fontSize: "13px",
+      lineHeight: 1.45,
+      color: "var(--z-fg-secondary)",
+      textDecoration: "none",
+      overflowWrap: "anywhere",
+      _hover: { color: "var(--z-fg-primary)" },
+      _focusVisible: {
+        outline: "2px solid var(--z-focus)",
+        outlineOffset: "-2px",
+      },
     },
   },
 });

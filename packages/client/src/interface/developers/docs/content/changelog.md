@@ -9,18 +9,19 @@ curl "https://api.zrzur.com/"
 
 Every entry says whether existing bots must change. A removal is announced here with its date before it happens. Follow it in a feed reader: [RSS feed](/developers/api-changelog.xml).
 
-## Coming in the next release {#upcoming}
+## Since 26.0.0 {#since-26-0-0}
 
-**In the next release, not yet on app.zrzur.com.** Do not build on these until they appear under a version below.
+**Live on `api.zrzur.com`, checked on 2026-11-13.** `GET /` still reports `26.0.0`. Existing bots keep working: nothing below removes a field or changes one.
 
-- **Gateway: resume.** Every event carries `seq`, counted per session from 1. Send `Authenticate` with `"resumable": true` and `Ready` carries `session_id`. After a drop the session is kept for 2 minutes, with at most its last 1000 events and 4 MiB of them; if what you missed no longer fits, `Resume` answers `InvalidSession`. On a new socket, send `{ "type": "Resume", "token": "YOUR_BOT_TOKEN", "session_id": "…", "seq": 41 }` as the first message: the events after `seq` arrive in order, then `Resumed`. If the session is gone you get `InvalidSession` with `"resumable": false`; then send `Authenticate` on the same socket and catch up over REST. Some events can be left out of a replay, so `seq` can have gaps. `GET /gateway/schema` will list the close codes and the resume limits.
-- **A bot reads its own settings.** `GET /bots/{target}` with the bot's own id and token returns its `privileged_intents`. Another bot's id still answers `IsBot`.
+- **Gateway: resume.** Every packet after `Ready` carries `seq`, counted per session from 1. Send `Authenticate` with `"resumable": true` and `Ready` carries `session_id`. After a drop the session is kept for 2 minutes, with at most its last 1000 events and 4 MiB of them. On a new socket, send `Resume` as the first message: the events after `seq` arrive in order, then `Resumed`. If the session is gone you get `InvalidSession` with `"resumable": false`; then send `Authenticate` on the same socket and catch up over REST. `GET /gateway/schema` lists the close codes and the resume limits. See [Gateway](/developers/docs/gateway#resume).
+- **A bot reads its own settings.** `GET /bots/{bot_id}` with the bot's own id and token returns its `privileged_intents`. Another bot's id answers `IsBot`.
 - **Clearer intent refusals.** The `4014` close reason names what the server read, for example `Disallowed intents: MESSAGE_CONTENT (switched on: none)`. If the server cannot read the bot's settings, it sends `InternalError` and closes with `1013`: try again later, do not stop.
-- **Threads: a richer first message.** `POST /channels/{target}/threads` takes `embeds` and `components` next to `content`, with the rules of sending a message: Send Embeds applies, and a role ping without Mention Roles is refused with `403 MissingPermission` (`permission: MentionRoles`) and no thread is made.
-- **"Not installed" answers 404.** `GET /channels/{target}` answers `404 NotFound` to anyone who is not in the channel's server, like the server itself and like a channel that does not exist. Members without access still get `403 MissingPermission`.
-- **SDK: rate limits and resume.** The SDK resumes by default for bots, waits out a `429`, and waits for the reset when a bucket is empty.
-
-Existing bots keep working. Nothing above removes a field or changes one.
+- **Threads: a richer first message.** `POST /channels/{target}/threads` takes `embeds` and `components` next to `content`, with the rules of sending a message: Send Embeds applies, and a role ping without Mention Roles is refused with `403 MissingPermission` and no thread is kept. See [Channels](/developers/docs/channels#threads).
+- **"Not installed" answers 404.** `GET /channels/{target}` answers `404 NotFound` to anyone who is not in the channel's server, like the server itself and like a channel that does not exist. Members without access still get `403 MissingPermission`. See [Errors](/developers/docs/errors#not-installed).
+- **Commands in a direct message.** A person can use a bot's global commands that need no server permission in their direct message with the bot.
+- **Command rules per server.** People with Manage Server and Manage Roles can allow or deny an app's commands for roles, members and channels: `GET` and `PUT /servers/{server_id}/applications/{application_id}/permissions`, and `PUT /servers/{server_id}/applications/{application_id}/commands/{command_id}/permissions`.
+- **Polls, scheduled events, soundboard and stages.** New routes and gateway events, listed in the reference of [Messages](/developers/docs/messages#polls), [Servers](/developers/docs/servers), [Voice calls](/developers/docs/voice) and in the [Event reference](/developers/docs/events). Two new permissions: `UseSoundboard` and `ManageSoundboard`. Polls, forwarding and scheduled events are switched on per installation (`features` in `GET /`); on `api.zrzur.com` they were off when this page was checked.
+- **SDK: rate limits and resume.** The SDK resumes by default for bots, waits out a `429`, and waits for the reset when a bucket is empty. It is not on npm yet; see [SDKs](/developers/docs/sdk).
 
 ## Documentation, 2026-11-09 {#docs-2026-11-09}
 

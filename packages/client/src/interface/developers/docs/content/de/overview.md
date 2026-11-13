@@ -41,6 +41,7 @@ Selbst gehostete Server haben eigene Adressen. `GET /` auf der API liefert sie, 
 | `features.january.url`             | Medien-Proxy für Linkvorschauen              |
 | `features.livekit.nodes[].public_url` | Sprachserver                              |
 | `features.limits.default`          | Limits eines Kontos, etwa die Nachrichtenlänge |
+| `features.webhooks`, `features.forwarding`, `features.polls`, `features.server_events` | Ob diese Installation Webhooks, das Weiterleiten von Nachrichten, Umfragen und geplante Events eingeschaltet hat. Wo eins `false` ist, antworten seine Routen `FeatureDisabled` (Webhook-Adressen: `404 NotFound`) |
 | `app`                              | Web-App, für Links, die du Menschen zeigst   |
 
 @@1
@@ -48,11 +49,11 @@ Selbst gehostete Server haben eigene Adressen. `GET /` auf der API liefert sie, 
 ## Was nicht unterstützt wird {#not-supported}
 
 - **Sharding.** Ein Bot hält eine Verbindung oder mehrere, die jeweils alles empfangen. Ereignisse lassen sich nicht auf Prozesse verteilen.
-- **Eine Verbindung fortsetzen.** Es gibt keine Sitzung zum Fortsetzen. Nach einem Abbruch kommt ein frisches `Ready`, und was inzwischen geschah, wird nicht nachgeliefert.
-- **Slash-Befehle in Direktnachrichten.** Befehle funktionieren nur in Serverkanälen. Schaltflächen, Auswahlmenüs und Formulare funktionieren auch in einer Direktnachricht mit dem Bot.
+- **Slash-Befehle in Gruppen und Serverbefehle in Direktnachrichten.** In einer Direktnachricht mit dem Bot kann eine Person die globalen Befehle des Bots nutzen, die keine Serverberechtigung brauchen. Schaltflächen, Auswahlmenüs und Formulare funktionieren dort auch.
+- **Webhooks, Umfragen, Weiterleiten und geplante Events**, wo die Installation sie ausgeschaltet hat. `GET /` sagt, was an ist; siehe [Basis-URLs](/developers/docs/overview#base-urls).
 - **Interaktionen über HTTP** auf einem Server, dessen Einstellung `signing_key` leer ist. Dort antworten die Routen `FeatureDisabled`, und Bots nutzen das Gateway.
 - **Bots, die Bots oder Server erstellen, per Einladung beitreten oder Freunde haben.** Das tun Menschen. Die [Abdeckungsseite](/developers/docs/coverage) listet jeden Endpunkt, der Bots ablehnt.
-- **Das SDK als Paket.** Es ist noch nicht auf npm, und sein Repository ist noch nicht öffentlich. Jede Seite hier funktioniert allein mit Node; siehe [SDKs](/developers/docs/sdk).
+- **Das SDK als Paket.** Es ist noch nicht auf npm. Jede Seite hier funktioniert allein mit Node; siehe [SDKs](/developers/docs/sdk).
 
 ## Was jeder Status bedeutet {#status}
 

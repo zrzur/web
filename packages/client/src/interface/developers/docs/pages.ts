@@ -9,66 +9,26 @@
  */
 
 import { loadOnce } from "./loadOnce";
+import {
+  type PageGroup,
+  DEFAULT_PAGE,
+  PAGE_ORDER,
+  withEnglishCode,
+} from "./pageOrder";
+
+export { type PageGroup, DEFAULT_PAGE, withEnglishCode };
 
 const loaders = import.meta.glob<string>("./content/**/*.md", {
   query: "?raw",
   import: "default",
 });
 
-export type PageGroup = "start" | "guides" | "tutorials" | "resources";
-
 export interface PageInfo {
   id: string;
   group: PageGroup;
-  /** Markdown page; Getting started is a component instead */
+  /** the page has a Markdown file (every page does; kept for the tests) */
   hasSource: boolean;
 }
-
-const PAGE_ORDER: [PageGroup, string[]][] = [
-  ["start", ["overview", "getting-started", "applications"]],
-  [
-    "guides",
-    [
-      "authentication",
-      "gateway",
-      "events",
-      "commands",
-      "interactions",
-      "components",
-      "http-interactions",
-      "messages",
-      "channels",
-      "servers",
-      "users",
-      "roles",
-      "moderation",
-      "files",
-      "voice",
-      "oauth2",
-      "errors",
-      "rate-limits",
-      "security",
-      "production",
-    ],
-  ],
-  [
-    "tutorials",
-    [
-      "tutorial-full-bot",
-      "tutorial-hello",
-      "tutorial-commands",
-      "tutorial-events",
-      "tutorial-moderation",
-      "tutorial-welcome",
-      "tutorial-games",
-      "tutorial-multi-server",
-      "tutorial-upload",
-      "tutorial-voice",
-      "tutorial-deploy",
-    ],
-  ],
-  ["resources", ["raw-http", "sdk", "coverage", "changelog"]],
-];
 
 const pathOf = (id: string, locale?: string) =>
   locale ? `./content/${locale}/${id}.md` : `./content/${id}.md`;
@@ -80,23 +40,6 @@ function file(path: string): Promise<string | undefined> {
   const load = loaders[path];
   if (!load) return Promise.resolve(undefined);
   return loadOnce(cache, path, load);
-}
-
-const FENCE = /^```[^\n]*\n[\s\S]*?^```$/gm;
-
-/**
- * Translations never copy code: a line `@@3` stands for the fourth fenced
- * block of the English page, so examples cannot drift between languages.
- */
-export function withEnglishCode(
-  translated: string | undefined,
-  english?: string,
-) {
-  const blocks = english?.match(FENCE) ?? [];
-  return translated?.replace(
-    /^@@(\d+)$/gm,
-    (_, index: string) => blocks[Number(index)] ?? "",
-  );
 }
 
 /** The two languages with translated pages; English for every other */
@@ -124,8 +67,6 @@ export async function loadSource(id: string, language: string) {
 export const PAGES: PageInfo[] = PAGE_ORDER.flatMap(([group, ids]) =>
   ids.map((id) => ({ id, group, hasSource: pathOf(id) in loaders })),
 );
-
-export const DEFAULT_PAGE = "overview";
 
 export const pageById = (id: string | undefined) =>
   PAGES.find((page) => page.id === id);

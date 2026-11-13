@@ -32,12 +32,13 @@ Errors raised by the web server itself (no token, unknown route, a body that is 
 
 A bot sees only the servers it was installed in. For a server it is not in, the answers differ by route:
 
-| Call                                              | Answer today              |
-| ------------------------------------------------- | ------------------------- |
-| `GET /servers/{target}`                           | `404 NotFound`            |
-| `GET /channels/{target}` for one of its channels  | `403 MissingPermission`   |
+| Call                                                         | Answer                    |
+| ------------------------------------------------------------ | ------------------------- |
+| `GET /servers/{target}`                                      | `404 NotFound`            |
+| `GET /channels/{target}` for one of its channels             | `404 NotFound`            |
+| `POST /channels/{target}/messages` for one of its channels   | `403 MissingPermission`   |
 
-So a `403 MissingPermission` on a channel id someone gave your bot can mean that the bot is not installed there. Ask `GET /servers/{target}`: `404 NotFound` means install the bot first, with the invite link from the Developer Portal. A `200` means the bot is there and cannot see the channel: a private channel needs View Channel for one of the bot's roles. From the next release, the channel answers `404 NotFound` too (see the [changelog](/developers/docs/changelog#upcoming)).
+So a `403 MissingPermission` when your bot writes to a channel id someone gave it can mean that the bot is not installed there. Ask `GET /channels/{target}`: `404 NotFound` means the bot is not in that server (or the channel does not exist), so install the bot first, with the invite link from the Developer Portal. A `403 MissingPermission` there means the bot is in the server and cannot see the channel: a private channel needs View Channel for one of the bot's roles.
 
 ## Errors a bot can get {#bot-errors}
 

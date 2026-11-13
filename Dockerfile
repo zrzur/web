@@ -46,6 +46,8 @@ ENV VITE_INVITE_ORIGIN=__VITE_INVITE_ORIGIN__
 # the public Discover and Designs sites (discover.zrzur.com, designs.zrzur.com)
 ENV VITE_DISCOVER_URL=__VITE_DISCOVER_URL__
 ENV VITE_DESIGNS_HOST=__VITE_DESIGNS_HOST__
+# the developer documentation site (developers.zrzur.com)
+ENV VITE_DOCS_URL=__VITE_DOCS_URL__
 # "beta" shows the Beta label by the logo; unset: a stable release
 ENV VITE_RELEASE_CHANNEL=__VITE_RELEASE_CHANNEL__
 
@@ -65,6 +67,10 @@ ENV PWA_SCOPE=${PWA_SCOPE}
 # plugin-legacy's polyfill detection needs more than Node's default heap
 RUN NODE_OPTIONS="${NODE_OPTIONS:+$NODE_OPTIONS }--max-old-space-size=4096" pnpm --filter client exec vite build
 
+# The documentation pages as plain HTML (dist/docs-pages), served by
+# `npm run docs` with each page's own head
+RUN pnpm --filter client exec node scripts/bot-api/prerender-docs.mjs
+
 # ============================================
 # Stage 2: Minimal runtime image
 # ============================================
@@ -79,9 +85,9 @@ RUN npm install --omit=dev
 # Copy built static assets stage 1
 COPY --from=builder /build/packages/client/dist ./dist
 
-# The server for discover.zrzur.com and designs.zrzur.com (head tags,
-# sitemaps, preview images): its own small install, run with
-# `npm run discover` or `npm run designs`
+# The server for discover.zrzur.com, designs.zrzur.com and
+# developers.zrzur.com (head tags, sitemaps, preview images): its own small
+# install, run with `npm run discover`, `npm run designs` or `npm run docs`
 COPY packages/public-pages/package.json packages/public-pages/package-lock.json ./public-pages/
 COPY packages/public-pages/src ./public-pages/src
 RUN cd public-pages && npm ci --omit=dev

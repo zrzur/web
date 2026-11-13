@@ -5,7 +5,8 @@
 //
 // Usage (from web/packages/client):
 //   node scripts/bot-api/extract.mjs [--backend ../../../backend] [--ref HEAD]
-//     [--openapi http://127.0.0.1:31702/openapi.json | file.json] [--check]
+//     [--openapi http://127.0.0.1:31702/openapi.json | file.json]
+//     [--gateway gateway-schema.json] [--check]
 //
 // Backend files are read with `git show <ref>:<path>`, so uncommitted work in
 // the backend checkout never leaks into the docs. `--check` regenerates the
@@ -607,9 +608,14 @@ const eventGuide = JSON.parse(
 const eventSamples = JSON.parse(
   readFileSync(join(here, "event-samples.json"), "utf8"),
 );
+// The gateway's own description of itself (`GET /gateway/schema`), kept as
+// a snapshot next to the OpenAPI one: the SDK the web app pins can be older
+// than the gateway bots talk to. `--gateway <file>` reads another copy.
 const gatewaySchema = JSON.parse(
   readFileSync(
-    join(webRoot, "packages/stoat.js/api/gateway.schema.json"),
+    args.gateway
+      ? resolve(args.gateway)
+      : join(here, "gateway.schema.snapshot.json"),
     "utf8",
   ),
 );
@@ -711,9 +717,12 @@ for (const route of routes) {
   const auth = classifyAuth(route);
   const section = MODERATION.some((re) => re.test(key))
     ? "moderation"
-    : op
-      ? (SECTION_BY_TAG[op.tags?.[0]] ?? null)
-      : null;
+    : // polls are part of a message, whatever tag their routes carry
+      /\/messages\/\{\w+\}\/polls\//.test(key)
+      ? "messages"
+      : op
+        ? (SECTION_BY_TAG[op.tags?.[0]] ?? null)
+        : null;
   const inScope = !!section && !auth.privileged && auth.mode !== "session-only";
   const cur = curated.endpoints[key] ?? {};
   const [bucket, bucketScope] = bucketOf(route.method, route.fullPath);

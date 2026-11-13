@@ -40,11 +40,11 @@ Die Antwort ist der Thread: ein Kanal mit `parent`. Also schreibt `POST /channel
 
 Die erste Nachricht folgt den Regeln jeder Nachricht, die dein Bot sendet:
 
-- Sie nimmt nur `content`, bis zu 2000 Zeichen. Andere Felder wie `embeds`, `components` oder `attachments` werden ohne Fehler ignoriert: Der Thread beginnt nur mit dem Text. `embeds` und `components` kommen in der nächsten Version (siehe [Änderungsprotokoll](/developers/docs/changelog#upcoming)).
+- Sie nimmt `content` (bis zu 2000 Zeichen), `embeds` und `components`. Andere Nachrichtenfelder wie `attachments` werden ohne Fehler ignoriert. Embeds brauchen „Embeds senden“. Ein Forenbeitrag braucht weiterhin `content`.
 - „Nachrichten senden“ und die Erwähnungsregeln gelten. Eine Rollenerwähnung ohne Mention Roles oder `@everyone` ohne Mention Everyone lehnt den ganzen Aufruf mit `403 MissingPermission` ab, und kein Thread bleibt. Der Thread wird erst angelegt und dann wieder entfernt, dein Bot kann also `ChannelCreate` und danach `ChannelDelete` dafür bekommen. Starte den Thread ohne die Erwähnung und erwähne in einer zweiten Nachricht.
 - Auf einem selbst gehosteten Server, dessen Betreiber `mass_mentions_enabled = false` gesetzt hat, werden Rollen-, `@everyone`- und `@online`-Erwähnungen nicht abgelehnt: Die Nachricht geht raus, und niemand wird benachrichtigt.
 
-Für eine Karte mit Schaltflächen oben im Thread starte den Thread nur mit einem Namen und sende die Karte dann hinein:
+Eine Karte mit Schaltflächen kann die erste Nachricht eines Threads sein:
 
 @@2
 
@@ -81,6 +81,8 @@ Die Antwort hat den Einladungscode in `_id`. `GET /servers/{target}/invites` lis
 `POST /channels/{target}/typing` zeigt ein paar Sekunden „tippt…“, begrenzt auf 5 pro 10 Sekunden pro Kanal. `bot.typing(channelId)` im SDK nutzt das Gateway, wenn verbunden, und ohne Verbindung diese Route.
 
 ## Webhooks {#webhooks}
+
+> **Webhooks werden pro Server-Installation eingeschaltet.** `GET /` der API zeigt `features.webhooks`. Wo es `false` ist, antworten das Erstellen und Auflisten von Webhooks mit `FeatureDisabled`, und jede Adresse `/webhooks/...` antwortet `404 NotFound`. Auf `api.zrzur.com` war es `false`, als diese Seite geprüft wurde (2026-11-13).
 
 Ein Webhook postet ohne Gateway-Verbindung in einen Kanal. Erstelle ihn mit einem Bot-Token oder in den Servereinstellungen (braucht „Webhooks verwalten“). Die Antwort hat `token` und `url`. Sie erscheinen einmal: Der Server behält nur einen Hash, also speichere sie jetzt. Ein verlorenes Token lässt sich nur ersetzen.
 

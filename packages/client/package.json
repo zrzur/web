@@ -10,6 +10,9 @@
     "test:release": "node --test scripts/release-integrity.test.mjs",
     "docs:bot-api": "node scripts/bot-api/extract.mjs",
     "docs:bot-api:check": "node scripts/bot-api/extract.mjs --check",
+    "docs:prerender": "node scripts/bot-api/prerender-docs.mjs",
+    "test:docs-names": "node scripts/bot-api/check-names.mjs",
+    "test:docs-languages": "node scripts/bot-api/check-languages.mjs",
     "test:docs-live": "node scripts/bot-api/live/doc-accuracy.mjs"
   },
   "devDependencies": {

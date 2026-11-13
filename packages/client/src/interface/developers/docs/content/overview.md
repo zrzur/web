@@ -38,11 +38,15 @@ Self-hosted servers use their own addresses. `GET /` on the API returns them, wi
   "app": "https://app.zrzur.com",
   "features": {
     "autumn": { "enabled": true, "url": "https://cdn.zrzur.com" },
-    "january": { "enabled": true, "url": "https://proxy.zrzur.com" },
+    "january": { "enabled": true, "url": "https://api.zrzur.com/january" },
     "livekit": {
       "enabled": true,
-      "nodes": [{ "name": "main", "lat": 0, "lon": 0, "public_url": "wss://voice.zrzur.com" }]
+      "nodes": [{ "name": "fra", "lat": 50.11, "lon": 8.68, "public_url": "wss://voice.zrzur.com" }]
     },
+    "webhooks": false,
+    "forwarding": false,
+    "polls": false,
+    "server_events": false,
     "limits": {
       "default": { "message_length": 2000, "message_attachments": 5, "file_upload_size_limits": { "attachments": 20000000 } }
     }
@@ -58,6 +62,7 @@ Self-hosted servers use their own addresses. `GET /` on the API returns them, wi
 | `features.january.url`             | Media proxy for link previews                |
 | `features.livekit.nodes[].public_url` | Voice server                              |
 | `features.limits.default`          | Limits of an account, such as message length |
+| `features.webhooks`, `features.forwarding`, `features.polls`, `features.server_events` | Whether this installation has webhooks, message forwarding, polls and scheduled events switched on. Where one is `false`, its routes answer `FeatureDisabled` (webhook addresses: `404 NotFound`) |
 | `app`                              | Web app, for links you show people           |
 
 ```endpoints getting-started
@@ -67,11 +72,11 @@ Self-hosted servers use their own addresses. `GET /` on the API returns them, wi
 ## What is not supported {#not-supported}
 
 - **Sharding.** One bot keeps one connection, or several connections that each receive everything. Events cannot be split between processes.
-- **Resuming a connection.** There is no session to resume. After a disconnect you get a fresh `Ready`, and what happened meanwhile is not replayed.
-- **Slash commands in direct messages.** Commands work in server channels only. Buttons, selects and forms also work in a direct message with the bot.
+- **Slash commands in groups, and server commands in direct messages.** In a direct message with the bot, a person can use the bot's global commands that need no server permission. Buttons, selects and forms work there too.
+- **Webhooks, polls, forwarding and scheduled events** where the installation has them switched off. `GET /` says which are on; see [Base URLs](/developers/docs/overview#base-urls).
 - **Interactions over HTTP** on a server where the setting `signing_key` is empty. There the routes answer `FeatureDisabled`, and bots use the gateway.
 - **Bots creating bots or servers, joining by invite, or having friends.** People do those. The [coverage page](/developers/docs/coverage) lists every endpoint bots are refused.
-- **The SDK as a package.** It is not on npm yet, and its repository is not public yet. Every page here works with Node alone; see [SDKs](/developers/docs/sdk).
+- **The SDK as a package.** It is not on npm yet. Every page here works with Node alone; see [SDKs](/developers/docs/sdk).
 
 ## What each status means {#status}
 
