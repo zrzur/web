@@ -1042,8 +1042,8 @@ msgid "1 year"
 msgstr "سنة"
 
 #: src/interface/developers/docs/GettingStarted.tsx
-msgid "1. Create an application"
-msgstr "1. أنشئ تطبيقًا"
+#~ msgid "1. Create an application"
+#~ msgstr "1. أنشئ تطبيقًا"
 
 #: components/app/interface/settings/server/AutoModSettings.tsx
 msgid "10 minutes"
@@ -1067,8 +1067,8 @@ msgid "2 weeks"
 msgstr "أسبوعان"
 
 #: src/interface/developers/docs/GettingStarted.tsx
-msgid "2. Copy the token"
-msgstr "2. انسخ الرمز"
+#~ msgid "2. Copy the token"
+#~ msgstr "2. انسخ الرمز"
 
 #: components/modal/modals/CreatePoll.tsx
 msgid "24 hours"
@@ -1083,8 +1083,8 @@ msgid "3 days"
 msgstr "3 أيام"
 
 #: src/interface/developers/docs/GettingStarted.tsx
-msgid "3. Install the bot in a test server"
-msgstr "3. ثبّت البوت في سيرفر اختبار"
+#~ msgid "3. Install the bot in a test server"
+#~ msgstr "3. ثبّت البوت في سيرفر اختبار"
 
 #: components/modal/modals/CreateInvite.tsx
 #: components/modal/modals/CustomStatus.tsx
@@ -1105,12 +1105,12 @@ msgstr "4 ثوانٍ، مرة واحدة، دون وميض"
 #~ msgstr "4. احصل على حزمة التطوير"
 
 #: src/interface/developers/docs/GettingStarted.tsx
-msgid "4. No library needed"
-msgstr "4. لا حاجة إلى مكتبة"
+#~ msgid "4. No library needed"
+#~ msgstr "4. لا حاجة إلى مكتبة"
 
 #: src/interface/developers/docs/GettingStarted.tsx
-msgid "5. Write your first bot"
-msgstr "5. اكتب بوتك الأول"
+#~ msgid "5. Write your first bot"
+#~ msgstr "5. اكتب بوتك الأول"
 
 #: components/app/interface/settings/server/ServerEmergency.tsx
 #: components/modal/modals/CreateInvite.tsx
@@ -1118,8 +1118,8 @@ msgid "6 hours"
 msgstr "6 ساعات"
 
 #: src/interface/developers/docs/GettingStarted.tsx
-msgid "6. Run it"
-msgstr "6. شغّله"
+#~ msgid "6. Run it"
+#~ msgstr "6. شغّله"
 
 #: components/app/interface/settings/server/AutoModSettings.tsx
 #: components/modal/modals/CreateInvite.tsx
@@ -1127,16 +1127,16 @@ msgid "7 days"
 msgstr "7 أيام"
 
 #: src/interface/developers/docs/GettingStarted.tsx
-msgid "7. Receive events"
-msgstr "7. استقبل الأحداث"
+#~ msgid "7. Receive events"
+#~ msgstr "7. استقبل الأحداث"
 
 #: components/modal/modals/CreatePoll.tsx
 msgid "8 hours"
 msgstr "8 ساعات"
 
 #: src/interface/developers/docs/GettingStarted.tsx
-msgid "8. Build a real bot"
-msgstr "8. ابنِ بوتًا حقيقيًا"
+#~ msgid "8. Build a real bot"
+#~ msgstr "8. ابنِ بوتًا حقيقيًا"
 
 #: src/interface/developers/docs/GettingStarted.tsx
 #~ msgid "8. Deploy"
@@ -1351,8 +1351,8 @@ msgid "A small feather next to your name so people know you help keep the lights
 msgstr "ريشة صغيرة بجانب اسمك، ليعرف الناس أنك تساعد في إبقاء زرزور يعمل. يمكنك إخفاؤها متى شئت."
 
 #: components/ui/components/features/profiles/badges/useBadgeText.ts
-msgid "A small thank-you badge."
-msgstr "شارة شكر صغيرة."
+#~ msgid "A small thank-you badge."
+#~ msgstr "شارة شكر صغيرة."
 
 #: components/app/interface/settings/server/emojis/EmojiList.tsx
 msgid "A square image, then a name with lowercase letters, numbers and underscores."
@@ -1445,8 +1445,8 @@ msgid "About me"
 msgstr "نبذة عني"
 
 #: src/interface/developers/docs/GettingStarted.tsx
-msgid "About the SDKs"
-msgstr "عن حزم التطوير"
+#~ msgid "About the SDKs"
+#~ msgstr "عن حزم التطوير"
 
 #: components/app/interface/discover/Detail.tsx
 #: components/ui/components/features/profiles/ProfileBotAbout.tsx
@@ -3388,8 +3388,8 @@ msgid "Bot abuse"
 msgstr "إساءة استخدام البوت"
 
 #: components/ui/components/features/profiles/ProfileIdentity.tsx
-msgid "Bot badges"
-msgstr "شارات البوت"
+#~ msgid "Bot badges"
+#~ msgstr "شارات البوت"
 
 #: components/app/interface/settings/user/Keybinds.tsx
 msgid "Bot commands"
@@ -3618,7 +3618,6 @@ msgid "Bugs and feedback"
 msgstr "الأخطاء والملاحظات"
 
 #: src/interface/developers/docs/DocsPortal.tsx
-#: src/interface/developers/docs/GettingStarted.tsx
 msgid "Build a complete bot"
 msgstr "ابنِ بوتًا كاملًا"
 
@@ -3677,7 +3676,6 @@ msgid "Buttons"
 msgstr "الأزرار"
 
 #: src/interface/developers/docs/DocsPortal.tsx
-#: src/interface/developers/docs/GettingStarted.tsx
 msgid "Buttons, menus and forms"
 msgstr "الأزرار والقوائم والنماذج"
 
@@ -3691,6 +3689,10 @@ msgstr "الأزرار ومفاتيح التبديل والروابط والعن
 #: src/interface/designs/Wall.tsx
 msgid "by <0>{0}</0>"
 msgstr "من تصميم <0>{0}</0>"
+
+#: components/auth/src/flows/SignUpConsent.tsx
+msgid "By creating an account you accept the <0>Terms of Service</0> and the <1>Community Guidelines</1> and have read the <2>Privacy Policy</2>."
+msgstr "بإنشائك حسابًا، فإنك تقبل <0>شروط الخدمة</0> و<1>إرشادات المجتمع</1>، وتقرّ بأنك قرأت <2>سياسة الخصوصية</2>."
 
 #: components/modal/modals/CreateBot.tsx
 #~ msgid "By creating this bot, you agree to the <0>Acceptable Use Policy</0>."
@@ -3829,6 +3831,7 @@ msgstr "كندا"
 #: components/modal/modals/PinMessage.tsx
 #: components/modal/modals/PlusCheckout.tsx
 #: components/modal/modals/PromoteServer.tsx
+#: components/modal/modals/RemoveLinkPreviews.tsx
 #: components/modal/modals/RemoveMember.tsx
 #: components/modal/modals/RemoveTimeout.tsx
 #: components/modal/modals/RenameSession.tsx
@@ -6682,6 +6685,7 @@ msgstr "توثيق المطورين"
 #: components/app/interface/settings/user/Keybinds.tsx
 #: components/app/interface/settings/UserSettings.tsx
 #: src/interface/Developers.tsx
+#: src/interface/DevelopersDocs.tsx
 #: src/interface/Discover.tsx
 #: src/interface/Home.tsx
 msgid "Developer Portal"
@@ -6693,6 +6697,7 @@ msgid "Developer tools"
 msgstr "أدوات المطوّرين"
 
 #: components/app/interface/settings/UserSettings.tsx
+#: src/interface/DevelopersDocs.tsx
 msgid "Developers"
 msgstr "المطوّرون"
 
@@ -6937,8 +6942,8 @@ msgstr "عدم الإزعاج"
 #~ msgstr "عدم الإزعاج"
 
 #: src/interface/developers/docs/GettingStarted.tsx
-msgid "Do this before the first run. A bot that is not in the server gets 403 MissingPermission for its channels, which looks like a missing permission."
-msgstr "افعل هذا قبل التشغيل الأول. البوت الذي ليس في السيرفر يحصل على 403 MissingPermission لقنواته، فيبدو الأمر كأن صلاحية تنقصه."
+#~ msgid "Do this before the first run. A bot that is not in the server gets 403 MissingPermission for its channels, which looks like a missing permission."
+#~ msgstr "افعل هذا قبل التشغيل الأول. البوت الذي ليس في السيرفر يحصل على 403 MissingPermission لقنواته، فيبدو الأمر كأن صلاحية تنقصه."
 
 #: src/interface/Developers.tsx
 #: src/interface/developers/docs/DocsPortal.tsx
@@ -7620,7 +7625,6 @@ msgstr "نوع الخطأ"
 
 #: src/interface/developers/docs/DocsPortal.tsx
 #: src/interface/developers/docs/EndpointReference.tsx
-#: src/interface/developers/docs/GettingStarted.tsx
 msgid "Errors"
 msgstr "الأخطاء"
 
@@ -8672,7 +8676,6 @@ msgid "Gaming rooms"
 msgstr "غرف الألعاب"
 
 #: src/interface/developers/docs/DocsPortal.tsx
-#: src/interface/developers/docs/GettingStarted.tsx
 msgid "Gateway"
 msgstr "البوابة"
 
@@ -9419,6 +9422,10 @@ msgstr "احمل شارة «صائد الأخطاء»، ثم احصل على 10 
 msgid "Hold one key to talk instead of an open microphone. Works while Zrzur is the active window."
 msgstr "اضغط مطولًا على مفتاح واحد لتتحدث بدل إبقاء الميكروفون مفتوحًا. يعمل عندما تكون نافذة زرزور هي النشطة."
 
+#: components/modal/modals/RemoveLinkPreviews.tsx
+msgid "Hold Shift while you remove them to skip this question."
+msgstr "اضغط Shift مع الإزالة لتتجاوز هذا السؤال."
+
 #: components/app/interface/desktop/Titlebar.tsx
 #: src/interface/designs/Stage.tsx
 #: src/interface/Home.tsx
@@ -9736,8 +9743,8 @@ msgstr "داخل سيرفر."
 #~ msgstr "خلال نحو عشر دقائق سيكون لديك بوت يجيب عن أمر بالشرطة المائلة في سيرفر الاختبار الخاص بك."
 
 #: src/interface/developers/docs/GettingStarted.tsx
-msgid "In about ten minutes you will have a bot that answers a slash command in your own test server. You need a Zrzur account, a server of your own and Node.js 22 or newer. There is nothing to install."
-msgstr "خلال عشر دقائق تقريبًا سيكون لديك بوت يجيب عن أمر بالشرطة المائلة في سيرفر الاختبار الخاص بك. تحتاج إلى حساب في زرزور وسيرفر خاص بك وNode.js 22 أو أحدث. لا شيء آخر لتثبيته."
+#~ msgid "In about ten minutes you will have a bot that answers a slash command in your own test server. You need a Zrzur account, a server of your own and Node.js 22 or newer. There is nothing to install."
+#~ msgstr "خلال عشر دقائق تقريبًا سيكون لديك بوت يجيب عن أمر بالشرطة المائلة في سيرفر الاختبار الخاص بك. تحتاج إلى حساب في زرزور وسيرفر خاص بك وNode.js 22 أو أحدث. لا شيء آخر لتثبيته."
 
 #: components/ui/components/features/profiles/ProfileMutuals.tsx
 msgid "In common"
@@ -9760,8 +9767,8 @@ msgstr "في محرر الأوامر."
 #~ msgstr "في بوابة المطورين، اختر «تطبيق جديد» وأعطه اسمًا. يأتي التطبيق مع حساب بوت."
 
 #: src/interface/developers/docs/GettingStarted.tsx
-msgid "In the Developer Portal, choose New application, give it a name and choose Create. The application comes with a bot account."
-msgstr "في بوابة المطورين، اختر «تطبيق جديد» ثم أدخل اسمًا واختر «إنشاء». يأتي التطبيق مع حساب بوت."
+#~ msgid "In the Developer Portal, choose New application, give it a name and choose Create. The application comes with a bot account."
+#~ msgstr "في بوابة المطورين، اختر «تطبيق جديد» ثم أدخل اسمًا واختر «إنشاء». يأتي التطبيق مع حساب بوت."
 
 #: components/app/interface/settings/user/Keybinds.tsx
 msgid "In the forward window: move through the list, then send."
@@ -10091,8 +10098,8 @@ msgstr "أيرلندا"
 #~ msgstr "شارة النكتة في غير موضعها 2"
 
 #: src/interface/developers/docs/GettingStarted.tsx
-msgid "Is the bot in that server?"
-msgstr "هل البوت في ذلك السيرفر؟"
+#~ msgid "Is the bot in that server?"
+#~ msgstr "هل البوت في ذلك السيرفر؟"
 
 #: components/app/interface/channels/text/interactions/EphemeralMessages.tsx
 #~ msgid "is thinking…"
@@ -10446,8 +10453,8 @@ msgid "Keep the text of messages"
 msgstr "حفظ نص الرسائل"
 
 #: src/interface/developers/docs/GettingStarted.tsx
-msgid "Keep the token in an environment variable or a secret store. Never put it in code, in a repository or in a screenshot. If it leaks, reset it at once."
-msgstr "احفظ الرمز في متغير بيئة أو في مخزن أسرار. لا تضعه أبدًا في الشيفرة أو في مستودع أو في لقطة شاشة. وإذا تسرّب، فأعد تعيينه فورًا."
+#~ msgid "Keep the token in an environment variable or a secret store. Never put it in code, in a repository or in a screenshot. If it leaks, reset it at once."
+#~ msgstr "احفظ الرمز في متغير بيئة أو في مخزن أسرار. لا تضعه أبدًا في الشيفرة أو في مستودع أو في لقطة شاشة. وإذا تسرّب، فأعد تعيينه فورًا."
 
 #: components/modal/modals/CreateBot.tsx
 msgid "Keep the token secret. You are responsible for everything your bot does."
@@ -12351,8 +12358,8 @@ msgid "More"
 msgstr "المزيد"
 
 #: src/interface/developers/docs/GettingStarted.tsx
-msgid "More about installing"
-msgstr "المزيد عن التثبيت"
+#~ msgid "More about installing"
+#~ msgstr "المزيد عن التثبيت"
 
 #: components/app/interface/safety/labels.tsx
 msgid "More information required"
@@ -12361,6 +12368,10 @@ msgstr "مطلوب مزيد من المعلومات"
 #: src/interface/designs/DesignPage.tsx
 msgid "More like this"
 msgstr "تصاميم مشابهة"
+
+#: src/interface/developers/docs/DocsPortal.tsx
+msgid "More pages"
+msgstr "صفحات أخرى"
 
 #: components/ui/components/features/profiles/plateNames.ts
 msgid "Morocco"
@@ -13003,6 +13014,7 @@ msgstr "قناة الأخبار"
 
 #: components/app/interface/settings/user/safety/SafetyDashboard.tsx
 #: components/modal/modals/ReportContent.tsx
+#: src/interface/developers/docs/DocsPortal.tsx
 msgid "Next"
 msgstr "التالي"
 
@@ -13023,8 +13035,8 @@ msgid "Next server"
 msgstr "السيرفر التالي"
 
 #: src/interface/developers/docs/GettingStarted.tsx
-msgid "Next steps"
-msgstr "الخطوات التالية"
+#~ msgid "Next steps"
+#~ msgstr "الخطوات التالية"
 
 #: components/ui/components/features/profiles/plateNames.ts
 msgid "Nicaragua"
@@ -13568,8 +13580,8 @@ msgid "Nobody in the room"
 msgstr "لا أحد في الغرفة"
 
 #: src/interface/developers/docs/GettingStarted.tsx
-msgid "Node.js 22 has everything built in: the API is plain HTTP and WebSocket. The official library, @zrzur/sdk, cannot be downloaded yet."
-msgstr "يتضمن Node.js 22 كل ما تحتاج إليه: الواجهة مجرد HTTP وWebSocket. لا يمكن تنزيل المكتبة الرسمية @zrzur/sdk بعد."
+#~ msgid "Node.js 22 has everything built in: the API is plain HTTP and WebSocket. The official library, @zrzur/sdk, cannot be downloaded yet."
+#~ msgstr "يتضمن Node.js 22 كل ما تحتاج إليه: الواجهة مجرد HTTP وWebSocket. لا يمكن تنزيل المكتبة الرسمية @zrzur/sdk بعد."
 
 #: components/app/interface/settings/user/voice/VoiceProcessingOptions.tsx
 msgid "Noise suppression"
@@ -14054,8 +14066,12 @@ msgid "On the Discover page."
 msgstr "في صفحة «اكتشف»."
 
 #: src/interface/developers/docs/GettingStarted.tsx
-msgid "On the Overview tab of your application choose Add to a server, and pick a server where you have Manage Server."
-msgstr "في تبويب «نظرة عامة» لتطبيقك اختر «إضافة إلى سيرفر»، ثم اختر سيرفرًا لديك فيه صلاحية إدارة السيرفر."
+#~ msgid "On the Overview tab of your application choose Add to a server, and pick a server where you have Manage Server."
+#~ msgstr "في تبويب «نظرة عامة» لتطبيقك اختر «إضافة إلى سيرفر»، ثم اختر سيرفرًا لديك فيه صلاحية إدارة السيرفر."
+
+#: src/interface/developers/docs/DocsPortal.tsx
+msgid "On this page"
+msgstr "في هذه الصفحة"
 
 #: src/interface/designs/DesignPage.tsx
 msgid "On your profile now"
@@ -14408,8 +14424,8 @@ msgid "Open link"
 msgstr "افتح الرابط"
 
 #: src/interface/developers/docs/GettingStarted.tsx
-msgid "Open My applications"
-msgstr "افتح تطبيقاتي"
+#~ msgid "Open My applications"
+#~ msgstr "افتح تطبيقاتي"
 
 #: components/modal/modals/BillingCheckoutStatus.tsx
 msgid "Open payment page"
@@ -14863,8 +14879,8 @@ msgid "Pauses"
 msgstr "الإيقاف المؤقت"
 
 #: components/ui/components/features/profiles/badges/useBadgeText.ts
-msgid "Paw"
-msgstr "كفّ"
+#~ msgid "Paw"
+#~ msgstr "كفّ"
 
 #: components/modal/modals/PaymentMethodPicker.tsx
 msgid "Pay with"
@@ -15170,11 +15186,6 @@ msgstr "اختر ما يشبه سيرفرك، وستُفعّل الوحدات ا
 #: components/modal/modals/PinMessage.tsx
 msgid "Pin"
 msgstr "تثبيت"
-
-#: components/app/interface/channels/text/MessageEmbeds.tsx
-#: components/app/menus/MessageContextMenu.tsx
-msgid "Remove link previews"
-msgstr "إزالة معاينات الروابط"
 
 #: components/app/menus/MessageContextMenu.tsx
 #: components/modal/modals/PinMessage.tsx
@@ -15549,6 +15560,7 @@ msgid "Previews play even when a sound is switched off. Sounds use the speaker s
 msgstr "تُشغَّل المعاينات حتى لو كان الصوت متوقفًا. تستخدم الأصوات مكبّر الصوت المحدد في «الصوت والفيديو»."
 
 #: components/app/interface/settings/user/safety/SafetyDashboard.tsx
+#: src/interface/developers/docs/DocsPortal.tsx
 msgid "Previous"
 msgstr "السابق"
 
@@ -16034,7 +16046,6 @@ msgid "Rate limit"
 msgstr "حد المعدل"
 
 #: src/interface/developers/docs/DocsPortal.tsx
-#: src/interface/developers/docs/GettingStarted.tsx
 msgid "Rate limits"
 msgstr "حدود المعدل"
 
@@ -16507,6 +16518,15 @@ msgstr "إزالة الصورة"
 msgid "Remove link {0}"
 msgstr "إزالة الرابط {0}"
 
+#: components/app/interface/channels/text/MessageEmbeds.tsx
+#: components/app/menus/MessageContextMenu.tsx
+msgid "Remove link previews"
+msgstr "إزالة معاينات الروابط"
+
+#: components/modal/modals/RemoveLinkPreviews.tsx
+msgid "Remove link previews?"
+msgstr "إزالة معاينات الروابط؟"
+
 #: components/app/menus/UserContextMenu.tsx
 #: components/modal/modals/RemoveMember.tsx
 msgid "Remove member"
@@ -16525,6 +16545,10 @@ msgstr "احذف الخيار {0}"
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 msgid "Remove other members' avatars"
 msgstr "إزالة الصور الرمزية للأعضاء الآخرين"
+
+#: components/modal/modals/RemoveLinkPreviews.tsx
+msgid "Remove previews"
+msgstr "إزالة المعاينات"
 
 #: components/app/interface/settings/server/LobbyRoleQuestionsEditor.tsx
 #: components/app/interface/settings/server/LobbySettings.tsx
@@ -17640,8 +17664,8 @@ msgid "Save these settings as a file, or load them back."
 msgstr "احفظ هذه الإعدادات في ملف، أو حمّلها منه."
 
 #: src/interface/developers/docs/GettingStarted.tsx
-msgid "Save this as hello-raw.mjs in an empty folder. It registers /hello and answers it."
-msgstr "احفظ هذا باسم hello-raw.mjs في مجلد فارغ. إنه يسجل الأمر /hello ويجيب عنه."
+#~ msgid "Save this as hello-raw.mjs in an empty folder. It registers /hello and answers it."
+#~ msgstr "احفظ هذا باسم hello-raw.mjs في مجلد فارغ. إنه يسجل الأمر /hello ويجيب عنه."
 
 #: src/interface/developers/docs/GettingStarted.tsx
 #~ msgid "Save this as hello.mjs. It registers /hello and answers it."
@@ -18557,8 +18581,8 @@ msgstr "تعيين لون الدور إلى {colour}"
 #~ msgstr "اضبط الرمز وعناوين السيرفر، ثم شغّل البوت:"
 
 #: src/interface/developers/docs/GettingStarted.tsx
-msgid "Set the token, then start the bot:"
-msgstr "اضبط الرمز، ثم شغّل البوت:"
+#~ msgid "Set the token, then start the bot:"
+#~ msgstr "اضبط الرمز، ثم شغّل البوت:"
 
 #: components/app/interface/settings/user/Account.tsx
 #: components/app/interface/settings/user/bots/ViewBot.tsx
@@ -18930,7 +18954,6 @@ msgid "Slash command"
 msgstr "أمر شرطة مائلة"
 
 #: src/interface/developers/docs/DocsPortal.tsx
-#: src/interface/developers/docs/GettingStarted.tsx
 msgid "Slash commands"
 msgstr "أوامر الشرطة المائلة"
 
@@ -19524,7 +19547,6 @@ msgstr "التشغيل مع الكمبيوتر"
 #~ msgstr "ابدأ بالإطارات"
 
 #: src/interface/developers/docs/DocsPortal.tsx
-#: src/interface/developers/docs/GettingStarted.tsx
 msgid "Start your bot"
 msgstr "ابدأ ببوتك"
 
@@ -20475,8 +20497,8 @@ msgid "The bot is offline right now."
 msgstr "البوت غير متصل حاليًا."
 
 #: src/interface/developers/docs/GettingStarted.tsx
-msgid "The bot keeps a WebSocket connection to the gateway. Commands, button clicks, new messages and member changes arrive there as events."
-msgstr "يحافظ البوت على اتصال WebSocket بالبوابة. وتصل عبره الأوامر ونقرات الأزرار والرسائل الجديدة وتغييرات الأعضاء على شكل أحداث."
+#~ msgid "The bot keeps a WebSocket connection to the gateway. Commands, button clicks, new messages and member changes arrive there as events."
+#~ msgstr "يحافظ البوت على اتصال WebSocket بالبوابة. وتصل عبره الأوامر ونقرات الأزرار والرسائل الجديدة وتغييرات الأعضاء على شكل أحداث."
 
 #: components/app/interface/settings/server/apps/ServerAppPage.tsx
 msgid "The bot leaves the server. Its role, its commands here and their rules go too. You can add it again later."
@@ -20797,6 +20819,10 @@ msgstr "انتهى الاستطلاع «{0}» دون أي صوت."
 msgid "The poll “{0}” ended: “{1}” won with {2} of {3}."
 msgstr "انتهى الاستطلاع «{0}»: فازت «{1}» بـ{2} من {3}."
 
+#: components/modal/modals/RemoveLinkPreviews.tsx
+msgid "The previews under this message will be removed for everyone. The link stays in the message."
+msgstr "ستُزال المعاينات أسفل هذه الرسالة لدى الجميع. ويبقى الرابط في الرسالة."
+
 #: components/app/interface/settings/user/safety/SafetyDashboard.tsx
 msgid "The queue couldn't be loaded."
 msgstr "تعذّر تحميل القائمة."
@@ -20893,8 +20919,8 @@ msgid "The ticket form couldn't be loaded. Check your connection and try again."
 msgstr "تعذّر تحميل نموذج التذكرة. تحقّق من اتصالك وحاول مرة أخرى."
 
 #: src/interface/developers/docs/GettingStarted.tsx
-msgid "The token appears once, right after you create the application. Copy it now. Whoever has the token controls the bot."
-msgstr "يظهر الرمز مرة واحدة بعد إنشاء التطبيق مباشرة. انسخه الآن. من يملك الرمز يتحكم في البوت."
+#~ msgid "The token appears once, right after you create the application. Copy it now. Whoever has the token controls the bot."
+#~ msgstr "يظهر الرمز مرة واحدة بعد إنشاء التطبيق مباشرة. انسخه الآن. من يملك الرمز يتحكم في البوت."
 
 #: components/app/interface/settings/user/bots/ViewBot.tsx
 msgid "The token logs in as your bot. Keep it secret, never paste it in chats or screenshots."
@@ -20935,6 +20961,7 @@ msgid "The Zrzur team confirmed who runs this server."
 msgstr "أكّد فريق زرزور هوية من يدير هذا السيرفر."
 
 #: components/ui/components/features/profiles/badges/useBadgeText.ts
+#: components/ui/components/features/profiles/BotLabel.tsx
 msgid "The Zrzur team reviewed this bot."
 msgstr "راجع فريق زرزور هذا البوت."
 
@@ -21111,8 +21138,8 @@ msgid "This bot needs to be verified before it can join more servers."
 msgstr "يجب توثيق هذا البوت قبل أن ينضم إلى سيرفرات أخرى."
 
 #: src/interface/developers/docs/GettingStarted.tsx
-msgid "This bot stops when the line drops and knows only one command. The complete bot has commands, buttons, a form, moderation, saved data, error handling and reconnects, in one file."
-msgstr "يتوقف هذا البوت عند انقطاع الاتصال ولا يعرف سوى أمر واحد. أما البوت الكامل ففيه أوامر وأزرار ونموذج وإشراف وبيانات محفوظة ومعالجة أخطاء وإعادة اتصال، في ملف واحد."
+#~ msgid "This bot stops when the line drops and knows only one command. The complete bot has commands, buttons, a form, moderation, saved data, error handling and reconnects, in one file."
+#~ msgstr "يتوقف هذا البوت عند انقطاع الاتصال ولا يعرف سوى أمر واحد. أما البوت الكامل ففيه أوامر وأزرار ونموذج وإشراف وبيانات محفوظة ومعالجة أخطاء وإعادة اتصال، في ملف واحد."
 
 #: components/ui/components/features/messaging/composition/VoiceRecorder.tsx
 msgid "This browser can't record voice messages."
@@ -22355,6 +22382,10 @@ msgstr "إلغاء كتم السماعة"
 msgid "Undeafen myself"
 msgstr "تشغيل الصوت عندي"
 
+#: components/app/interface/settings/user/Privacy.tsx
+msgid "Under 18, only friends can start a direct message with you. Anyone you write to first can reply."
+msgstr "دون سن ١٨ عامًا، لا يستطيع بدء رسالة مباشرة معك إلا أصدقاؤك. ويمكن لكل من تراسله أولًا أن يردّ عليك."
+
 #: components/app/interface/safety/labels.tsx
 msgid "Under minimum age"
 msgstr "دون السن الأدنى"
@@ -23094,7 +23125,6 @@ msgid "Verified by Zrzur"
 msgstr "موثّق من زرزور"
 
 #: components/app/interface/settings/user/profile/CommunityParts.tsx
-#: components/app/interface/settings/user/profile/CreatorMark.tsx
 #: src/interface/designs/Makers.tsx
 msgid "Verified creator"
 msgstr "مصمم معتمد"
@@ -23820,8 +23850,8 @@ msgstr "عندما يكون مربع الرسالة فارغًا."
 #~ msgstr "عندما تظهر كلمة ready في الطرفية، اكتب ‎/hello في قناة من قنوات سيرفر الاختبار."
 
 #: src/interface/developers/docs/GettingStarted.tsx
-msgid "When the terminal shows ready, type /hello in a channel of your test server. The bot answers Hello from Zrzur!"
-msgstr "حين تظهر كلمة ready في الطرفية، اكتب /hello في قناة من سيرفر الاختبار. سيجيب البوت: Hello from Zrzur!"
+#~ msgid "When the terminal shows ready, type /hello in a channel of your test server. The bot answers Hello from Zrzur!"
+#~ msgstr "حين تظهر كلمة ready في الطرفية، اكتب /hello في قناة من سيرفر الاختبار. سيجيب البوت: Hello from Zrzur!"
 
 #: src/interface/Friends.tsx
 msgid "When your friends come online, they show up here."
@@ -25255,6 +25285,7 @@ msgstr "الأبراج"
 #: components/app/interface/discover/SiteFrame.tsx
 #: components/app/interface/settings/UserSettings.tsx
 #: components/ui/components/design/BrandName.tsx
+#: src/interface/DevelopersDocs.tsx
 msgid "Zrzur"
 msgstr "زرزور"
 
@@ -25294,6 +25325,11 @@ msgstr "تعذّر الوصول إلى زرزور المساعد الآن. حا�
 #: components/ui/components/features/profiles/badges/useBadgeText.ts
 msgid "Zrzur Developer"
 msgstr "مطوّر زرزور"
+
+#: src/interface/developers/docs/DocsPortal.tsx
+#: src/interface/DevelopersDocs.tsx
+msgid "Zrzur Developers"
+msgstr "مطوّرو زرزور"
 
 #: components/modal/lib/CreateServerFlow.tsx
 msgid "Zrzur did not answer in time."
@@ -25445,24 +25481,3 @@ msgstr "زرزور، مباشرةً على <0>سطح مكتبك.</0>"
 #: components/app/interface/settings/user/appearance/AppearanceMenu.tsx
 #~ msgid "Zrzur's own look: very dark neutral panels with Zrzur Pink as the one accent."
 #~ msgstr "مظهر زرزور الخاص: لوحات داكنة جدًا بألوان محايدة، وزهري زرزور هو اللون المميز الوحيد."
-
-#: components/auth/src/flows/SignUpConsent.tsx
-msgid "By creating an account you accept the <0>Terms of Service</0> and the <1>Community Guidelines</1> and have read the <2>Privacy Policy</2>."
-msgstr "بإنشائك حسابًا، فإنك تقبل <0>شروط الخدمة</0> و<1>إرشادات المجتمع</1>، وتقرّ بأنك قرأت <2>سياسة الخصوصية</2>."
-
-#: components/app/interface/settings/user/Privacy.tsx
-msgid "Under 18, only friends can start a direct message with you. Anyone you write to first can reply."
-msgstr "دون سن ١٨ عامًا، لا يستطيع بدء رسالة مباشرة معك إلا أصدقاؤك. ويمكن لكل من تراسله أولًا أن يردّ عليك."
-
-#: src/interface/developers/docs/DocsPortal.tsx
-msgid "More pages"
-msgstr "صفحات أخرى"
-
-#: src/interface/developers/docs/DocsPortal.tsx
-msgid "On this page"
-msgstr "في هذه الصفحة"
-
-#: src/interface/developers/docs/DocsPortal.tsx
-#: src/interface/DevelopersDocs.tsx
-msgid "Zrzur Developers"
-msgstr "مطوّرو زرزور"

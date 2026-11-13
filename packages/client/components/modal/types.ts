@@ -140,6 +140,10 @@ export type Modals =
       message: Message;
     }
   | {
+      type: "remove_link_previews";
+      message: Message;
+    }
+  | {
       type: "bulk_delete_messages";
       channel: Channel;
       /** The selected messages; left out = pick recent messages */

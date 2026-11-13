@@ -187,6 +187,20 @@ export function MessageContextMenu(props: {
   }
 
   /**
+   * Remove the message's link previews for everyone (asks first; Shift skips)
+   */
+  function removePreviews(ev: MouseEvent) {
+    if (ev.shiftKey) {
+      props.message!.removeEmbeds().catch(showError);
+    } else {
+      openModal({
+        type: "remove_link_previews",
+        message: props.message!,
+      });
+    }
+  }
+
+  /**
    * Pin/unpin the message
    */
   function pinMessage(ev: MouseEvent) {
@@ -555,7 +569,7 @@ export function MessageContextMenu(props: {
         <Show when={canRemovePreviews()}>
           <ContextMenuButton
             icon={<Icon name="x" size={16} />}
-            onClick={() => props.message!.removeEmbeds().catch(showError)}
+            onClick={removePreviews}
             data-testid="menu-remove-previews"
           >
             <Trans>Remove link previews</Trans>

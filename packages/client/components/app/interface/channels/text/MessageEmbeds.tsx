@@ -12,11 +12,18 @@ import { canRemoveLinkPreviews } from "./linkPreviews";
 
 /**
  * A message's embeds. Link previews get an X in the corner for the author and
- * for moderators: it removes the message's previews for everyone.
+ * for moderators: after a question it removes the message's previews for
+ * everyone, and the link itself stays.
  */
 export function MessageEmbeds(props: { message: Message }) {
   const { t } = useLingui();
-  const { showError } = useModals();
+  const { openModal, showError } = useModals();
+
+  /** Ask first; with Shift held, remove at once */
+  function remove(event: { shiftKey?: boolean }) {
+    if (event?.shiftKey) props.message.removeEmbeds().catch(showError);
+    else openModal({ type: "remove_link_previews", message: props.message });
+  }
 
   return (
     <For each={props.message.embeds}>
@@ -33,7 +40,7 @@ export function MessageEmbeds(props: { message: Message }) {
                 size="xs"
                 aria-label={t`Remove link previews`}
                 data-remove-previews
-                onPress={() => props.message.removeEmbeds().catch(showError)}
+                onPress={remove}
               >
                 <Icon name="x" size={16} />
               </IconButton>

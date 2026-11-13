@@ -114,6 +114,11 @@ const BulkDeleteMessagesModal = lazy(() =>
     default: m.BulkDeleteMessagesModal,
   })),
 );
+const RemoveLinkPreviewsModal = lazy(() =>
+  import("./modals/RemoveLinkPreviews").then((m) => ({
+    default: m.RemoveLinkPreviewsModal,
+  })),
+);
 const DeleteMessageModal = lazy(() =>
   import("./modals/DeleteMessage").then((m) => ({
     default: m.DeleteMessageModal,
@@ -402,6 +407,8 @@ export function RenderModal(props: ActiveModal & { onClose: () => void }) {
       return <DeleteCategoryModal {...modalProps} />;
     case "delete_message":
       return <DeleteMessageModal {...modalProps} />;
+    case "remove_link_previews":
+      return <RemoveLinkPreviewsModal {...modalProps} />;
     case "bulk_delete_messages":
       return <BulkDeleteMessagesModal {...modalProps} />;
     case "delete_role":

@@ -1042,8 +1042,8 @@ msgid "1 year"
 msgstr "1 year"
 
 #: src/interface/developers/docs/GettingStarted.tsx
-msgid "1. Create an application"
-msgstr "1. Create an application"
+#~ msgid "1. Create an application"
+#~ msgstr "1. Create an application"
 
 #: components/app/interface/settings/server/AutoModSettings.tsx
 msgid "10 minutes"
@@ -1067,8 +1067,8 @@ msgid "2 weeks"
 msgstr "2 weeks"
 
 #: src/interface/developers/docs/GettingStarted.tsx
-msgid "2. Copy the token"
-msgstr "2. Copy the token"
+#~ msgid "2. Copy the token"
+#~ msgstr "2. Copy the token"
 
 #: components/modal/modals/CreatePoll.tsx
 msgid "24 hours"
@@ -1083,8 +1083,8 @@ msgid "3 days"
 msgstr "3 days"
 
 #: src/interface/developers/docs/GettingStarted.tsx
-msgid "3. Install the bot in a test server"
-msgstr "3. Install the bot in a test server"
+#~ msgid "3. Install the bot in a test server"
+#~ msgstr "3. Install the bot in a test server"
 
 #: components/modal/modals/CreateInvite.tsx
 #: components/modal/modals/CustomStatus.tsx
@@ -1105,12 +1105,12 @@ msgstr "4 seconds, one play, no flashing"
 #~ msgstr "4. Get the SDK"
 
 #: src/interface/developers/docs/GettingStarted.tsx
-msgid "4. No library needed"
-msgstr "4. No library needed"
+#~ msgid "4. No library needed"
+#~ msgstr "4. No library needed"
 
 #: src/interface/developers/docs/GettingStarted.tsx
-msgid "5. Write your first bot"
-msgstr "5. Write your first bot"
+#~ msgid "5. Write your first bot"
+#~ msgstr "5. Write your first bot"
 
 #: components/app/interface/settings/server/ServerEmergency.tsx
 #: components/modal/modals/CreateInvite.tsx
@@ -1118,8 +1118,8 @@ msgid "6 hours"
 msgstr "6 hours"
 
 #: src/interface/developers/docs/GettingStarted.tsx
-msgid "6. Run it"
-msgstr "6. Run it"
+#~ msgid "6. Run it"
+#~ msgstr "6. Run it"
 
 #: components/app/interface/settings/server/AutoModSettings.tsx
 #: components/modal/modals/CreateInvite.tsx
@@ -1127,16 +1127,16 @@ msgid "7 days"
 msgstr "7 days"
 
 #: src/interface/developers/docs/GettingStarted.tsx
-msgid "7. Receive events"
-msgstr "7. Receive events"
+#~ msgid "7. Receive events"
+#~ msgstr "7. Receive events"
 
 #: components/modal/modals/CreatePoll.tsx
 msgid "8 hours"
 msgstr "8 hours"
 
 #: src/interface/developers/docs/GettingStarted.tsx
-msgid "8. Build a real bot"
-msgstr "8. Build a real bot"
+#~ msgid "8. Build a real bot"
+#~ msgstr "8. Build a real bot"
 
 #: src/interface/developers/docs/GettingStarted.tsx
 #~ msgid "8. Deploy"
@@ -1351,8 +1351,8 @@ msgid "A small feather next to your name so people know you help keep the lights
 msgstr "A small feather next to your name so people know you help keep the lights on. Hide it any time."
 
 #: components/ui/components/features/profiles/badges/useBadgeText.ts
-msgid "A small thank-you badge."
-msgstr "A small thank-you badge."
+#~ msgid "A small thank-you badge."
+#~ msgstr "A small thank-you badge."
 
 #: components/app/interface/settings/server/emojis/EmojiList.tsx
 msgid "A square image, then a name with lowercase letters, numbers and underscores."
@@ -1445,8 +1445,8 @@ msgid "About me"
 msgstr "About me"
 
 #: src/interface/developers/docs/GettingStarted.tsx
-msgid "About the SDKs"
-msgstr "About the SDKs"
+#~ msgid "About the SDKs"
+#~ msgstr "About the SDKs"
 
 #: components/app/interface/discover/Detail.tsx
 #: components/ui/components/features/profiles/ProfileBotAbout.tsx
@@ -3388,8 +3388,8 @@ msgid "Bot abuse"
 msgstr "Bot abuse"
 
 #: components/ui/components/features/profiles/ProfileIdentity.tsx
-msgid "Bot badges"
-msgstr "Bot badges"
+#~ msgid "Bot badges"
+#~ msgstr "Bot badges"
 
 #: components/app/interface/settings/user/Keybinds.tsx
 msgid "Bot commands"
@@ -3618,7 +3618,6 @@ msgid "Bugs and feedback"
 msgstr "Bugs and feedback"
 
 #: src/interface/developers/docs/DocsPortal.tsx
-#: src/interface/developers/docs/GettingStarted.tsx
 msgid "Build a complete bot"
 msgstr "Build a complete bot"
 
@@ -3677,7 +3676,6 @@ msgid "Buttons"
 msgstr "Buttons"
 
 #: src/interface/developers/docs/DocsPortal.tsx
-#: src/interface/developers/docs/GettingStarted.tsx
 msgid "Buttons, menus and forms"
 msgstr "Buttons, menus and forms"
 
@@ -3691,6 +3689,10 @@ msgstr "Buttons, switches, links and selected items."
 #: src/interface/designs/Wall.tsx
 msgid "by <0>{0}</0>"
 msgstr "by <0>{0}</0>"
+
+#: components/auth/src/flows/SignUpConsent.tsx
+msgid "By creating an account you accept the <0>Terms of Service</0> and the <1>Community Guidelines</1> and have read the <2>Privacy Policy</2>."
+msgstr "By creating an account you accept the <0>Terms of Service</0> and the <1>Community Guidelines</1> and have read the <2>Privacy Policy</2>."
 
 #: components/modal/modals/CreateBot.tsx
 #~ msgid "By creating this bot, you agree to the <0>Acceptable Use Policy</0>."
@@ -3829,6 +3831,7 @@ msgstr "Canada"
 #: components/modal/modals/PinMessage.tsx
 #: components/modal/modals/PlusCheckout.tsx
 #: components/modal/modals/PromoteServer.tsx
+#: components/modal/modals/RemoveLinkPreviews.tsx
 #: components/modal/modals/RemoveMember.tsx
 #: components/modal/modals/RemoveTimeout.tsx
 #: components/modal/modals/RenameSession.tsx
@@ -6682,6 +6685,7 @@ msgstr "Developer documentation"
 #: components/app/interface/settings/user/Keybinds.tsx
 #: components/app/interface/settings/UserSettings.tsx
 #: src/interface/Developers.tsx
+#: src/interface/DevelopersDocs.tsx
 #: src/interface/Discover.tsx
 #: src/interface/Home.tsx
 msgid "Developer Portal"
@@ -6693,6 +6697,7 @@ msgid "Developer tools"
 msgstr "Developer tools"
 
 #: components/app/interface/settings/UserSettings.tsx
+#: src/interface/DevelopersDocs.tsx
 msgid "Developers"
 msgstr "Developers"
 
@@ -6938,8 +6943,8 @@ msgstr "Do not disturb"
 #~ msgstr "Do Not Disturb"
 
 #: src/interface/developers/docs/GettingStarted.tsx
-msgid "Do this before the first run. A bot that is not in the server gets 403 MissingPermission for its channels, which looks like a missing permission."
-msgstr "Do this before the first run. A bot that is not in the server gets 403 MissingPermission for its channels, which looks like a missing permission."
+#~ msgid "Do this before the first run. A bot that is not in the server gets 403 MissingPermission for its channels, which looks like a missing permission."
+#~ msgstr "Do this before the first run. A bot that is not in the server gets 403 MissingPermission for its channels, which looks like a missing permission."
 
 #: src/interface/Developers.tsx
 #: src/interface/developers/docs/DocsPortal.tsx
@@ -7621,7 +7626,6 @@ msgstr "Error type"
 
 #: src/interface/developers/docs/DocsPortal.tsx
 #: src/interface/developers/docs/EndpointReference.tsx
-#: src/interface/developers/docs/GettingStarted.tsx
 msgid "Errors"
 msgstr "Errors"
 
@@ -8675,7 +8679,6 @@ msgid "Gaming rooms"
 msgstr "Gaming rooms"
 
 #: src/interface/developers/docs/DocsPortal.tsx
-#: src/interface/developers/docs/GettingStarted.tsx
 msgid "Gateway"
 msgstr "Gateway"
 
@@ -9422,6 +9425,10 @@ msgstr "Hold Bug Hunter, then have 10 verified reports or a verified serious sec
 msgid "Hold one key to talk instead of an open microphone. Works while Zrzur is the active window."
 msgstr "Hold one key to talk instead of an open microphone. Works while Zrzur is the active window."
 
+#: components/modal/modals/RemoveLinkPreviews.tsx
+msgid "Hold Shift while you remove them to skip this question."
+msgstr "Hold Shift while you remove them to skip this question."
+
 #: components/app/interface/desktop/Titlebar.tsx
 #: src/interface/designs/Stage.tsx
 #: src/interface/Home.tsx
@@ -9739,8 +9746,8 @@ msgstr "In a server."
 #~ msgstr "In about ten minutes you will have a bot that answers a slash command in your own test server."
 
 #: src/interface/developers/docs/GettingStarted.tsx
-msgid "In about ten minutes you will have a bot that answers a slash command in your own test server. You need a Zrzur account, a server of your own and Node.js 22 or newer. There is nothing to install."
-msgstr "In about ten minutes you will have a bot that answers a slash command in your own test server. You need a Zrzur account, a server of your own and Node.js 22 or newer. There is nothing to install."
+#~ msgid "In about ten minutes you will have a bot that answers a slash command in your own test server. You need a Zrzur account, a server of your own and Node.js 22 or newer. There is nothing to install."
+#~ msgstr "In about ten minutes you will have a bot that answers a slash command in your own test server. You need a Zrzur account, a server of your own and Node.js 22 or newer. There is nothing to install."
 
 #: components/ui/components/features/profiles/ProfileMutuals.tsx
 msgid "In common"
@@ -9763,8 +9770,8 @@ msgstr "In the command editor."
 #~ msgstr "In the Developer Portal, choose New application and give it a name. The application comes with a bot account."
 
 #: src/interface/developers/docs/GettingStarted.tsx
-msgid "In the Developer Portal, choose New application, give it a name and choose Create. The application comes with a bot account."
-msgstr "In the Developer Portal, choose New application, give it a name and choose Create. The application comes with a bot account."
+#~ msgid "In the Developer Portal, choose New application, give it a name and choose Create. The application comes with a bot account."
+#~ msgstr "In the Developer Portal, choose New application, give it a name and choose Create. The application comes with a bot account."
 
 #: components/app/interface/settings/user/Keybinds.tsx
 msgid "In the forward window: move through the list, then send."
@@ -10094,8 +10101,8 @@ msgstr "Ireland"
 #~ msgstr "irrelevant joke badge 2"
 
 #: src/interface/developers/docs/GettingStarted.tsx
-msgid "Is the bot in that server?"
-msgstr "Is the bot in that server?"
+#~ msgid "Is the bot in that server?"
+#~ msgstr "Is the bot in that server?"
 
 #: components/app/interface/channels/text/interactions/EphemeralMessages.tsx
 #~ msgid "is thinking…"
@@ -10449,8 +10456,8 @@ msgid "Keep the text of messages"
 msgstr "Keep the text of messages"
 
 #: src/interface/developers/docs/GettingStarted.tsx
-msgid "Keep the token in an environment variable or a secret store. Never put it in code, in a repository or in a screenshot. If it leaks, reset it at once."
-msgstr "Keep the token in an environment variable or a secret store. Never put it in code, in a repository or in a screenshot. If it leaks, reset it at once."
+#~ msgid "Keep the token in an environment variable or a secret store. Never put it in code, in a repository or in a screenshot. If it leaks, reset it at once."
+#~ msgstr "Keep the token in an environment variable or a secret store. Never put it in code, in a repository or in a screenshot. If it leaks, reset it at once."
 
 #: components/modal/modals/CreateBot.tsx
 msgid "Keep the token secret. You are responsible for everything your bot does."
@@ -12354,8 +12361,8 @@ msgid "More"
 msgstr "More"
 
 #: src/interface/developers/docs/GettingStarted.tsx
-msgid "More about installing"
-msgstr "More about installing"
+#~ msgid "More about installing"
+#~ msgstr "More about installing"
 
 #: components/app/interface/safety/labels.tsx
 msgid "More information required"
@@ -12364,6 +12371,10 @@ msgstr "More information required"
 #: src/interface/designs/DesignPage.tsx
 msgid "More like this"
 msgstr "More like this"
+
+#: src/interface/developers/docs/DocsPortal.tsx
+msgid "More pages"
+msgstr "More pages"
 
 #: components/ui/components/features/profiles/plateNames.ts
 msgid "Morocco"
@@ -13006,6 +13017,7 @@ msgstr "News channel"
 
 #: components/app/interface/settings/user/safety/SafetyDashboard.tsx
 #: components/modal/modals/ReportContent.tsx
+#: src/interface/developers/docs/DocsPortal.tsx
 msgid "Next"
 msgstr "Next"
 
@@ -13026,8 +13038,8 @@ msgid "Next server"
 msgstr "Next server"
 
 #: src/interface/developers/docs/GettingStarted.tsx
-msgid "Next steps"
-msgstr "Next steps"
+#~ msgid "Next steps"
+#~ msgstr "Next steps"
 
 #: components/ui/components/features/profiles/plateNames.ts
 msgid "Nicaragua"
@@ -13571,8 +13583,8 @@ msgid "Nobody in the room"
 msgstr "Nobody in the room"
 
 #: src/interface/developers/docs/GettingStarted.tsx
-msgid "Node.js 22 has everything built in: the API is plain HTTP and WebSocket. The official library, @zrzur/sdk, cannot be downloaded yet."
-msgstr "Node.js 22 has everything built in: the API is plain HTTP and WebSocket. The official library, @zrzur/sdk, cannot be downloaded yet."
+#~ msgid "Node.js 22 has everything built in: the API is plain HTTP and WebSocket. The official library, @zrzur/sdk, cannot be downloaded yet."
+#~ msgstr "Node.js 22 has everything built in: the API is plain HTTP and WebSocket. The official library, @zrzur/sdk, cannot be downloaded yet."
 
 #: components/app/interface/settings/user/voice/VoiceProcessingOptions.tsx
 msgid "Noise suppression"
@@ -14057,8 +14069,12 @@ msgid "On the Discover page."
 msgstr "On the Discover page."
 
 #: src/interface/developers/docs/GettingStarted.tsx
-msgid "On the Overview tab of your application choose Add to a server, and pick a server where you have Manage Server."
-msgstr "On the Overview tab of your application choose Add to a server, and pick a server where you have Manage Server."
+#~ msgid "On the Overview tab of your application choose Add to a server, and pick a server where you have Manage Server."
+#~ msgstr "On the Overview tab of your application choose Add to a server, and pick a server where you have Manage Server."
+
+#: src/interface/developers/docs/DocsPortal.tsx
+msgid "On this page"
+msgstr "On this page"
 
 #: src/interface/designs/DesignPage.tsx
 msgid "On your profile now"
@@ -14411,8 +14427,8 @@ msgid "Open link"
 msgstr "Open link"
 
 #: src/interface/developers/docs/GettingStarted.tsx
-msgid "Open My applications"
-msgstr "Open My applications"
+#~ msgid "Open My applications"
+#~ msgstr "Open My applications"
 
 #: components/modal/modals/BillingCheckoutStatus.tsx
 msgid "Open payment page"
@@ -14866,8 +14882,8 @@ msgid "Pauses"
 msgstr "Pauses"
 
 #: components/ui/components/features/profiles/badges/useBadgeText.ts
-msgid "Paw"
-msgstr "Paw"
+#~ msgid "Paw"
+#~ msgstr "Paw"
 
 #: components/modal/modals/PaymentMethodPicker.tsx
 msgid "Pay with"
@@ -15173,11 +15189,6 @@ msgstr "Pick what your server is like; modules turn on to match."
 #: components/modal/modals/PinMessage.tsx
 msgid "Pin"
 msgstr "Pin"
-
-#: components/app/interface/channels/text/MessageEmbeds.tsx
-#: components/app/menus/MessageContextMenu.tsx
-msgid "Remove link previews"
-msgstr "Remove link previews"
 
 #: components/app/menus/MessageContextMenu.tsx
 #: components/modal/modals/PinMessage.tsx
@@ -15552,6 +15563,7 @@ msgid "Previews play even when a sound is switched off. Sounds use the speaker s
 msgstr "Previews play even when a sound is switched off. Sounds use the speaker selected in Voice & Video."
 
 #: components/app/interface/settings/user/safety/SafetyDashboard.tsx
+#: src/interface/developers/docs/DocsPortal.tsx
 msgid "Previous"
 msgstr "Previous"
 
@@ -16037,7 +16049,6 @@ msgid "Rate limit"
 msgstr "Rate limit"
 
 #: src/interface/developers/docs/DocsPortal.tsx
-#: src/interface/developers/docs/GettingStarted.tsx
 msgid "Rate limits"
 msgstr "Rate limits"
 
@@ -16510,6 +16521,15 @@ msgstr "Remove image"
 msgid "Remove link {0}"
 msgstr "Remove link {0}"
 
+#: components/app/interface/channels/text/MessageEmbeds.tsx
+#: components/app/menus/MessageContextMenu.tsx
+msgid "Remove link previews"
+msgstr "Remove link previews"
+
+#: components/modal/modals/RemoveLinkPreviews.tsx
+msgid "Remove link previews?"
+msgstr "Remove link previews?"
+
 #: components/app/menus/UserContextMenu.tsx
 #: components/modal/modals/RemoveMember.tsx
 msgid "Remove member"
@@ -16528,6 +16548,10 @@ msgstr "Remove option {0}"
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 msgid "Remove other members' avatars"
 msgstr "Remove other members' avatars"
+
+#: components/modal/modals/RemoveLinkPreviews.tsx
+msgid "Remove previews"
+msgstr "Remove previews"
 
 #: components/app/interface/settings/server/LobbyRoleQuestionsEditor.tsx
 #: components/app/interface/settings/server/LobbySettings.tsx
@@ -17643,8 +17667,8 @@ msgid "Save these settings as a file, or load them back."
 msgstr "Save these settings as a file, or load them back."
 
 #: src/interface/developers/docs/GettingStarted.tsx
-msgid "Save this as hello-raw.mjs in an empty folder. It registers /hello and answers it."
-msgstr "Save this as hello-raw.mjs in an empty folder. It registers /hello and answers it."
+#~ msgid "Save this as hello-raw.mjs in an empty folder. It registers /hello and answers it."
+#~ msgstr "Save this as hello-raw.mjs in an empty folder. It registers /hello and answers it."
 
 #: src/interface/developers/docs/GettingStarted.tsx
 #~ msgid "Save this as hello.mjs. It registers /hello and answers it."
@@ -18560,8 +18584,8 @@ msgstr "Set role colour to {colour}"
 #~ msgstr "Set the token and the server addresses, then start the bot:"
 
 #: src/interface/developers/docs/GettingStarted.tsx
-msgid "Set the token, then start the bot:"
-msgstr "Set the token, then start the bot:"
+#~ msgid "Set the token, then start the bot:"
+#~ msgstr "Set the token, then start the bot:"
 
 #: components/app/interface/settings/user/Account.tsx
 #: components/app/interface/settings/user/bots/ViewBot.tsx
@@ -18933,7 +18957,6 @@ msgid "Slash command"
 msgstr "Slash command"
 
 #: src/interface/developers/docs/DocsPortal.tsx
-#: src/interface/developers/docs/GettingStarted.tsx
 msgid "Slash commands"
 msgstr "Slash commands"
 
@@ -19527,7 +19550,6 @@ msgstr "Start with Computer"
 #~ msgstr "Start with decorations"
 
 #: src/interface/developers/docs/DocsPortal.tsx
-#: src/interface/developers/docs/GettingStarted.tsx
 msgid "Start your bot"
 msgstr "Start your bot"
 
@@ -20478,8 +20500,8 @@ msgid "The bot is offline right now."
 msgstr "The bot is offline right now."
 
 #: src/interface/developers/docs/GettingStarted.tsx
-msgid "The bot keeps a WebSocket connection to the gateway. Commands, button clicks, new messages and member changes arrive there as events."
-msgstr "The bot keeps a WebSocket connection to the gateway. Commands, button clicks, new messages and member changes arrive there as events."
+#~ msgid "The bot keeps a WebSocket connection to the gateway. Commands, button clicks, new messages and member changes arrive there as events."
+#~ msgstr "The bot keeps a WebSocket connection to the gateway. Commands, button clicks, new messages and member changes arrive there as events."
 
 #: components/app/interface/settings/server/apps/ServerAppPage.tsx
 msgid "The bot leaves the server. Its role, its commands here and their rules go too. You can add it again later."
@@ -20800,6 +20822,10 @@ msgstr "The poll “{0}” ended with no votes."
 msgid "The poll “{0}” ended: “{1}” won with {2} of {3}."
 msgstr "The poll “{0}” ended: “{1}” won with {2} of {3}."
 
+#: components/modal/modals/RemoveLinkPreviews.tsx
+msgid "The previews under this message will be removed for everyone. The link stays in the message."
+msgstr "The previews under this message will be removed for everyone. The link stays in the message."
+
 #: components/app/interface/settings/user/safety/SafetyDashboard.tsx
 msgid "The queue couldn't be loaded."
 msgstr "The queue couldn't be loaded."
@@ -20896,8 +20922,8 @@ msgid "The ticket form couldn't be loaded. Check your connection and try again."
 msgstr "The ticket form couldn't be loaded. Check your connection and try again."
 
 #: src/interface/developers/docs/GettingStarted.tsx
-msgid "The token appears once, right after you create the application. Copy it now. Whoever has the token controls the bot."
-msgstr "The token appears once, right after you create the application. Copy it now. Whoever has the token controls the bot."
+#~ msgid "The token appears once, right after you create the application. Copy it now. Whoever has the token controls the bot."
+#~ msgstr "The token appears once, right after you create the application. Copy it now. Whoever has the token controls the bot."
 
 #: components/app/interface/settings/user/bots/ViewBot.tsx
 msgid "The token logs in as your bot. Keep it secret, never paste it in chats or screenshots."
@@ -20938,6 +20964,7 @@ msgid "The Zrzur team confirmed who runs this server."
 msgstr "The Zrzur team confirmed who runs this server."
 
 #: components/ui/components/features/profiles/badges/useBadgeText.ts
+#: components/ui/components/features/profiles/BotLabel.tsx
 msgid "The Zrzur team reviewed this bot."
 msgstr "The Zrzur team reviewed this bot."
 
@@ -21114,8 +21141,8 @@ msgid "This bot needs to be verified before it can join more servers."
 msgstr "This bot needs to be verified before it can join more servers."
 
 #: src/interface/developers/docs/GettingStarted.tsx
-msgid "This bot stops when the line drops and knows only one command. The complete bot has commands, buttons, a form, moderation, saved data, error handling and reconnects, in one file."
-msgstr "This bot stops when the line drops and knows only one command. The complete bot has commands, buttons, a form, moderation, saved data, error handling and reconnects, in one file."
+#~ msgid "This bot stops when the line drops and knows only one command. The complete bot has commands, buttons, a form, moderation, saved data, error handling and reconnects, in one file."
+#~ msgstr "This bot stops when the line drops and knows only one command. The complete bot has commands, buttons, a form, moderation, saved data, error handling and reconnects, in one file."
 
 #: components/ui/components/features/messaging/composition/VoiceRecorder.tsx
 msgid "This browser can't record voice messages."
@@ -22358,6 +22385,10 @@ msgstr "Undeafen"
 msgid "Undeafen myself"
 msgstr "Undeafen myself"
 
+#: components/app/interface/settings/user/Privacy.tsx
+msgid "Under 18, only friends can start a direct message with you. Anyone you write to first can reply."
+msgstr "Under 18, only friends can start a direct message with you. Anyone you write to first can reply."
+
 #: components/app/interface/safety/labels.tsx
 msgid "Under minimum age"
 msgstr "Under minimum age"
@@ -23097,7 +23128,6 @@ msgid "Verified by Zrzur"
 msgstr "Verified by Zrzur"
 
 #: components/app/interface/settings/user/profile/CommunityParts.tsx
-#: components/app/interface/settings/user/profile/CreatorMark.tsx
 #: src/interface/designs/Makers.tsx
 msgid "Verified creator"
 msgstr "Verified creator"
@@ -23823,8 +23853,8 @@ msgstr "When the message box is empty."
 #~ msgstr "When the terminal shows ready, type /hello in a channel of your test server."
 
 #: src/interface/developers/docs/GettingStarted.tsx
-msgid "When the terminal shows ready, type /hello in a channel of your test server. The bot answers Hello from Zrzur!"
-msgstr "When the terminal shows ready, type /hello in a channel of your test server. The bot answers Hello from Zrzur!"
+#~ msgid "When the terminal shows ready, type /hello in a channel of your test server. The bot answers Hello from Zrzur!"
+#~ msgstr "When the terminal shows ready, type /hello in a channel of your test server. The bot answers Hello from Zrzur!"
 
 #: src/interface/Friends.tsx
 msgid "When your friends come online, they show up here."
@@ -25258,6 +25288,7 @@ msgstr "Zodiac"
 #: components/app/interface/discover/SiteFrame.tsx
 #: components/app/interface/settings/UserSettings.tsx
 #: components/ui/components/design/BrandName.tsx
+#: src/interface/DevelopersDocs.tsx
 msgid "Zrzur"
 msgstr "Zrzur"
 
@@ -25297,6 +25328,11 @@ msgstr "Zrzur Assistant can't be reached right now. Try again soon."
 #: components/ui/components/features/profiles/badges/useBadgeText.ts
 msgid "Zrzur Developer"
 msgstr "Zrzur Developer"
+
+#: src/interface/developers/docs/DocsPortal.tsx
+#: src/interface/DevelopersDocs.tsx
+msgid "Zrzur Developers"
+msgstr "Zrzur Developers"
 
 #: components/modal/lib/CreateServerFlow.tsx
 msgid "Zrzur did not answer in time."
@@ -25448,24 +25484,3 @@ msgstr "Zrzur, right on <0>your desktop.</0>"
 #: components/app/interface/settings/user/appearance/AppearanceMenu.tsx
 #~ msgid "Zrzur's own look: very dark neutral panels with Zrzur Pink as the one accent."
 #~ msgstr "Zrzur's own look: very dark neutral panels with Zrzur Pink as the one accent."
-
-#: components/auth/src/flows/SignUpConsent.tsx
-msgid "By creating an account you accept the <0>Terms of Service</0> and the <1>Community Guidelines</1> and have read the <2>Privacy Policy</2>."
-msgstr "By creating an account you accept the <0>Terms of Service</0> and the <1>Community Guidelines</1> and have read the <2>Privacy Policy</2>."
-
-#: components/app/interface/settings/user/Privacy.tsx
-msgid "Under 18, only friends can start a direct message with you. Anyone you write to first can reply."
-msgstr "Under 18, only friends can start a direct message with you. Anyone you write to first can reply."
-
-#: src/interface/developers/docs/DocsPortal.tsx
-msgid "More pages"
-msgstr "More pages"
-
-#: src/interface/developers/docs/DocsPortal.tsx
-msgid "On this page"
-msgstr "On this page"
-
-#: src/interface/developers/docs/DocsPortal.tsx
-#: src/interface/DevelopersDocs.tsx
-msgid "Zrzur Developers"
-msgstr "Zrzur Developers"
