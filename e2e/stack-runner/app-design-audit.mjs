@@ -115,7 +115,7 @@ try {
         const page = await context.newPage();
         report.page = page;
         await report.step(
-          `${at}: the sign-up note leaves the title readable`,
+          `${at}: sign-up asks for the consent box, and no note covers the form`,
           async () => {
             await page.goto(`${APP}/login/create`, {
               waitUntil: "domcontentloaded",
@@ -123,23 +123,38 @@ try {
             const email = page.locator('input[type="email"]').first();
             await email.waitFor({ timeout: 30000 });
             await email.click();
-            const note = page.getByRole("note").first();
-            await note.waitFor({ timeout: 5000 });
             await page.waitForTimeout(300);
-            const noteBox = await note.boundingBox();
-            const title = await page.locator("h1, h2").first().boundingBox();
-            const field = await email.boundingBox();
-            const overlaps = (a, b) =>
-              a.x < b.x + b.width &&
-              b.x < a.x + a.width &&
-              a.y < b.y + b.height &&
-              b.y < a.y + a.height;
-            if (overlaps(noteBox, title))
-              throw new Error("the note covers the title");
-            if (overlaps(noteBox, field))
-              throw new Error("the note covers the field");
-            if (!inside(noteBox, screen))
-              throw new Error("the note leaves the screen");
+            // the old "your email stays private" note is gone
+            if (await page.getByRole("note").count())
+              throw new Error("a note shows over the form");
+            const box = page.locator('input[name="accept-terms"]');
+            if (await box.isChecked()) throw new Error("the box starts ticked");
+            await email.fill("consent-check@zrzur.test");
+            await page
+              .locator('input[name="new-password"]')
+              .fill("a-Long-enough-pass-9431");
+            // nothing may be sent while the box is empty
+            let sent = false;
+            page.on("request", (r) => {
+              if (r.url().includes("/auth/account/create")) sent = true;
+            });
+            await page.locator('button[type="submit"]').click();
+            const problem = page.getByText(
+              t("Tick the box to accept before you continue."),
+            );
+            await problem.waitFor({ timeout: 5000 });
+            await page.waitForTimeout(500);
+            if (sent)
+              throw new Error("the account request went out without consent");
+            // a tap on the box ticks it and the problem goes away
+            await box.check({ force: true });
+            if (!(await box.isChecked()))
+              throw new Error("the box did not tick");
+            await problem.waitFor({ state: "detached", timeout: 3000 });
+            const target = await box.boundingBox();
+            const min = phone ? 43.5 : 19.5;
+            if (target.width < min || target.height < min)
+              throw new Error(`box target ${target.width} x ${target.height}`);
           },
         );
         await report.step(
@@ -312,9 +327,7 @@ try {
           `${at}: every status choice is on screen`,
           async () => {
             await page.goto(`${APP}/you`, { waitUntil: "domcontentloaded" });
-            const chips = page.locator(
-              "[role=radiogroup] [role=radio]",
-            );
+            const chips = page.locator("[role=radiogroup] [role=radio]");
             await chips.first().waitFor({ timeout: 20000 });
             await page.waitForTimeout(400);
             const count = await chips.count();

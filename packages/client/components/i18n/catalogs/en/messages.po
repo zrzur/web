@@ -25484,3 +25484,11 @@ msgstr "Zrzur, right on <0>your desktop.</0>"
 #: components/app/interface/settings/user/appearance/AppearanceMenu.tsx
 #~ msgid "Zrzur's own look: very dark neutral panels with Zrzur Pink as the one accent."
 #~ msgstr "Zrzur's own look: very dark neutral panels with Zrzur Pink as the one accent."
+
+#: components/auth/src/flows/SignUpConsent.tsx
+msgid "I accept the <0>Terms of Service</0> and the <1>Community Guidelines</1> and have read the <2>Privacy Policy</2>."
+msgstr "I accept the <0>Terms of Service</0> and the <1>Community Guidelines</1> and have read the <2>Privacy Policy</2>."
+
+#: components/auth/src/flows/Form.tsx
+msgid "Tick the box to accept before you continue."
+msgstr "Tick the box to accept before you continue."
