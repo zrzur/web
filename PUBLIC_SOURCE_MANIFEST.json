@@ -38440,8 +38440,8 @@
     },
     {
       "path": "packages/client/scripts/bot-api/verification.json",
-      "sha256": "e7fbba71b761db9afa444e6919c57ee5e752c698182186c8034ed3b75becd859",
-      "bytes": 71200,
+      "sha256": "6556adad8ff06d752e6c9fc2e7e34a56635c7a54ae9a6c1a631e69131f6c44f6",
+      "bytes": 71142,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -40312,8 +40312,8 @@
     },
     {
       "path": "packages/client/src/interface/developers/data/botApi.json",
-      "sha256": "9a8c8c3ae2c328a8f2f4ef45f31d01c78ade70fa56e1730782512e9c1cc56c80",
-      "bytes": 878754,
+      "sha256": "25cbca5427dfe1c95fba62bb9624c9d8ed5caa06c5c4b5321aab18a98d2d8ebc",
+      "bytes": 878696,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -40360,8 +40360,8 @@
     },
     {
       "path": "packages/client/src/interface/developers/data/botApi/section-getting-started.json",
-      "sha256": "08021c3cf94a201c2fe90593fbc51fcb65bc3320afdf3f52a15e1acee80341ef",
-      "bytes": 9926,
+      "sha256": "6f8a7612c02ec0aa0b4417c582b342216867e4ee0dee531c64602de5570d7251",
+      "bytes": 9868,
       "category": "product-source-or-build-manifest"
     },
     {
