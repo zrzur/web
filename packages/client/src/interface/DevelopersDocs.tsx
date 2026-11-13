@@ -205,8 +205,6 @@ const PortalLink = styled("a", {
       outline: "2px solid var(--z-focus)",
       outlineOffset: "2px",
     },
-    // the arrow points out of the page, also when the page reads right to left
-    "& .out": { _rtl: { transform: "scaleX(-1)" } },
     // on a phone the same link is the first line of the contents
     _phone: { display: "none" },
   },

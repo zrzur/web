@@ -286,7 +286,8 @@ div[class*="virtual-container-"] > div {
     [data-icon="send"],
     [data-icon="paper-plane-tilt"],
     [data-icon="sign-in"],
-    [data-icon="sign-out"]
+    [data-icon="sign-out"],
+    [data-icon="arrow-square-out"]
   ) {
   scale: -1 1;
 }
