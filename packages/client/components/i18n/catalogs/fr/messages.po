@@ -14485,6 +14485,11 @@ msgstr "Choisis le genre de ton serveur ; les modules s’activent en conséque
 msgid "Pin"
 msgstr "Épingler"
 
+#: components/app/interface/channels/text/MessageEmbeds.tsx
+#: components/app/menus/MessageContextMenu.tsx
+msgid "Remove link previews"
+msgstr ""
+
 #: components/app/menus/MessageContextMenu.tsx
 #: components/modal/modals/PinMessage.tsx
 msgid "Pin message"

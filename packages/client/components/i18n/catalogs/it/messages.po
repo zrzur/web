@@ -14534,6 +14534,11 @@ msgstr ""
 msgid "Pin"
 msgstr "Fissa"
 
+#: components/app/interface/channels/text/MessageEmbeds.tsx
+#: components/app/menus/MessageContextMenu.tsx
+msgid "Remove link previews"
+msgstr ""
+
 #: components/app/menus/MessageContextMenu.tsx
 #: components/modal/modals/PinMessage.tsx
 msgid "Pin message"

@@ -33,7 +33,6 @@ import {
   Attachment,
   Avatar,
   CompositionMediaPicker,
-  Embed,
   MessageContainer,
   MessageReply,
   Reactions,
@@ -60,6 +59,7 @@ import {
   MessageComponents,
   placedAttachments,
 } from "./interactions/MessageComponents";
+import { MessageEmbeds } from "./MessageEmbeds";
 import { isSelecting } from "./messageSelection";
 import { ThreadChip } from "./ThreadChip";
 // Polls are rare in a channel: their card loads with the first poll, not with the app
@@ -488,9 +488,7 @@ export function Message(props: Props) {
               <Attachment message={props.message} file={attachment} />
             )}
           </For>
-          <For each={props.message.embeds}>
-            {(embed) => <Embed embed={embed} />}
-          </For>
+          <MessageEmbeds message={props.message} />
         </ForwardedFrame>
         <Show when={props.message.poll}>
           <PollCard message={props.message} />

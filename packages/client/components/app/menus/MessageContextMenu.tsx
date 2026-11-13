@@ -63,6 +63,7 @@ import {
 } from "./ContextMenu";
 
 import { editableByMe } from "@revolt/app/interface/channels/text/editable";
+import { canRemoveLinkPreviews } from "@revolt/app/interface/channels/text/linkPreviews";
 import { canEndPoll } from "@revolt/app/interface/channels/text/poll/pollModel";
 
 import { AppsSubMenu } from "./shared/AppsSubMenu";
@@ -369,6 +370,8 @@ export function MessageContextMenu(props: {
     !official() &&
     (props.message?.channel?.type === "DirectMessage" ||
       !!props.message?.channel?.havePermission("ManageMessages"));
+  const canRemovePreviews = () =>
+    !!props.message && canRemoveLinkPreviews(props.message);
   const canManageReactions = () =>
     !!props.message?.reactions.size &&
     !!props.message?.channel?.havePermission("ManageMessages");
@@ -524,7 +527,11 @@ export function MessageContextMenu(props: {
         </For>
 
         {/* 3 · manage */}
-        <Show when={canEdit() || canPin() || canEndThisPoll()}>
+        <Show
+          when={
+            canEdit() || canPin() || canEndThisPoll() || canRemovePreviews()
+          }
+        >
           <ContextMenuDivider />
         </Show>
         <Show when={canEdit()}>
@@ -542,6 +549,16 @@ export function MessageContextMenu(props: {
                 <Trans>Unpin message</Trans>
               </Match>
             </Switch>
+          </ContextMenuButton>
+        </Show>
+
+        <Show when={canRemovePreviews()}>
+          <ContextMenuButton
+            icon={<Icon name="x" size={16} />}
+            onClick={() => props.message!.removeEmbeds().catch(showError)}
+            data-testid="menu-remove-previews"
+          >
+            <Trans>Remove link previews</Trans>
           </ContextMenuButton>
         </Show>
 

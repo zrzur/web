@@ -14485,6 +14485,11 @@ msgstr "选择你的服务器是什么样的；对应的模块会随之开启。
 msgid "Pin"
 msgstr "置顶"
 
+#: components/app/interface/channels/text/MessageEmbeds.tsx
+#: components/app/menus/MessageContextMenu.tsx
+msgid "Remove link previews"
+msgstr ""
+
 #: components/app/menus/MessageContextMenu.tsx
 #: components/modal/modals/PinMessage.tsx
 msgid "Pin message"

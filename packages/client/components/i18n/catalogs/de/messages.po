@@ -15171,6 +15171,11 @@ msgstr "Wähle, was zu deinem Server passt; die Module schalten sich passend ein
 msgid "Pin"
 msgstr "Anpinnen"
 
+#: components/app/interface/channels/text/MessageEmbeds.tsx
+#: components/app/menus/MessageContextMenu.tsx
+msgid "Remove link previews"
+msgstr "Linkvorschauen entfernen"
+
 #: components/app/menus/MessageContextMenu.tsx
 #: components/modal/modals/PinMessage.tsx
 msgid "Pin message"
