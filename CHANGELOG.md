@@ -8,7 +8,7 @@
 * **Arabic: filter words read correctly.** `from:`, `has:` and the other search filters keep their own direction in the suggestion list and in hints (they showed as `:from`). Left and right paddings that ignored the reading direction now follow it: member list titles, mention pills, the search sidebar, the settings sidebar, toasts placed at a side, and the feather fans on Feather and Wings cards.
 * **Suggestions while typing** (mentions, emoji, channels) are a floating list like every menu: readable on light themes (it was white on white there), names shorten with "…" instead of being cut off, rows are 44 px on phones.
 * **Light themes:** names on a nameplate in the member list are readable (dark ink with a light halo; they were white on white).
-* **Sign-up:** the "Your email stays private" note no longer covers the title of the form; it sits under the field, or beside the card on wide windows.
+* **Sign-up:** a box to tick, "I accept the Terms of Service and the Community Guidelines and have read the Privacy Policy", replaces the sentence that said creating the account accepts them. The form is not sent while the box is empty and says so under it. The "Your email stays private" note that covered the form is gone.
 * **Direct messages** show the person's display name in the title bar, the forward list, Home, the server rail and the voice bar (some showed the username).
 * **Message menu:** "Select messages" is neutral and sits above the red rows; red stays for what removes something.
 * **Create channel:** even spacing, the private switch is a boxed row on the same edges as the fields, and the type tiles are flat with a neutral raised choice.

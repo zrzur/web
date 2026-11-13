@@ -25449,3 +25449,10 @@ msgstr "بإنشائك حسابًا، فإنك تقبل <0>شروط الخدمة
 msgid "Under 18, only friends can start a direct message with you. Anyone you write to first can reply."
 msgstr "دون سن ١٨ عامًا، لا يستطيع بدء رسالة مباشرة معك إلا أصدقاؤك. ويمكن لكل من تراسله أولًا أن يردّ عليك."
 
+#: components/auth/src/flows/SignUpConsent.tsx
+msgid "I accept the <0>Terms of Service</0> and the <1>Community Guidelines</1> and have read the <2>Privacy Policy</2>."
+msgstr "أوافق على <0>شروط الخدمة</0> و<1>إرشادات المجتمع</1>، وقد قرأت <2>سياسة الخصوصية</2>."
+
+#: components/auth/src/flows/Form.tsx
+msgid "Tick the box to accept before you continue."
+msgstr "ضع علامة في المربع للموافقة قبل المتابعة."

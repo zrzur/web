@@ -8,6 +8,7 @@ import {
   Show,
   useContext,
 } from "solid-js";
+import { FieldErrors } from "./fieldErrors";
 import type { TurnstileFunctions } from "./Turnstile";
 
 import { useLingui } from "@lingui/solid/macro";
@@ -240,15 +241,6 @@ function FieldWithHint(props: { hint: JSX.Element; children: JSX.Element }) {
 }
 
 /**
- * Field errors of the surrounding <Form>, shown under each field in the
- * app's own style and language (instead of the browser's pop-up)
- */
-const FieldErrors = createContext<{
-  get: (name: string) => string | undefined;
-  clear: (name: string) => void;
-}>();
-
-/**
  * Where the surrounding <Form> is: ready, waiting on the server, or done
  */
 type FormStatus = "ready" | "submitting" | "success";
@@ -396,6 +388,8 @@ export function Form(props: Props) {
   ) {
     const validity = field.validity;
     if (validity.customError) return field.validationMessage;
+    if (validity.valueMissing && field.type === "checkbox")
+      return t`Tick the box to accept before you continue.`;
     if (validity.valueMissing)
       return field.name === "birth-year"
         ? t`Enter the year with 4 digits, for example 1994.`

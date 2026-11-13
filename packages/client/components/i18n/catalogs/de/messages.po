@@ -25449,3 +25449,10 @@ msgstr "Mit dem Erstellen eines Kontos akzeptierst du die <0>Nutzungsbedingungen
 msgid "Under 18, only friends can start a direct message with you. Anyone you write to first can reply."
 msgstr "Unter 18 können nur deine Freunde eine Direktnachricht mit dir beginnen. Wem du zuerst schreibst, kann dir antworten."
 
+#: components/auth/src/flows/SignUpConsent.tsx
+msgid "I accept the <0>Terms of Service</0> and the <1>Community Guidelines</1> and have read the <2>Privacy Policy</2>."
+msgstr "Ich akzeptiere die <0>Nutzungsbedingungen</0> und die <1>Community-Richtlinien</1> und habe die <2>Datenschutzerklärung</2> gelesen."
+
+#: components/auth/src/flows/Form.tsx
+msgid "Tick the box to accept before you continue."
+msgstr "Setze das Häkchen, um zuzustimmen, bevor du fortfährst."
