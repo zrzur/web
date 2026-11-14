@@ -392,7 +392,6 @@ msgstr "أجنحة مجانية: {0}"
 #~ msgid "{0} friends online"
 #~ msgstr ""
 
-#. placeholder {0}: number(games().game_count ?? 0)
 #. placeholder {0}: number(props.account.game_count ?? 0)
 #. placeholder {0}: number(props.games.game_count ?? 0)
 #: components/app/interface/settings/user/connections/Connections.tsx
@@ -402,8 +401,8 @@ msgid "{0} games"
 msgstr "{0} لعبة"
 
 #. placeholder {0}: number(game.hours)
-#. placeholder {0}: number(games().total_hours ?? 0)
 #. placeholder {0}: number(item.hours)
+#. placeholder {0}: number(props.games.total_hours ?? 0)
 #: components/app/interface/settings/user/connections/Connections.tsx
 #: components/modal/modals/SteamGames.tsx
 #: components/ui/components/features/profiles/ProfileGames.tsx
@@ -3282,6 +3281,10 @@ msgstr "بربادوس"
 msgid "Battle.net lets us keep it for 30 days. Confirm on Battle.net before then to keep it; otherwise we delete it. We keep no Battle.net sign-in."
 msgstr "تسمح Battle.net بالاحتفاظ به ٣٠ يومًا. أكّد عبر Battle.net قبل انقضائها لتحتفظ به، وإلا حذفناه. لا نحتفظ بتسجيل دخولك في Battle.net."
 
+#: components/ui/components/features/profiles/ProfileConnections.tsx
+msgid "BattleTag from Battle.net"
+msgstr "BattleTag من Battle.net"
+
 #: components/app/interface/settings/user/connections/ServiceCards.tsx
 msgid "BattleTag from Battle.net. Disconnecting deletes it at once."
 msgstr "BattleTag من Battle.net. إلغاء الربط يحذفه فورًا."
@@ -4955,11 +4958,13 @@ msgstr "مقاطع"
 #: components/modal/modals/UserProfileRoles.tsx
 #: components/plugins/PluginHostRoot.tsx
 #: components/ui/components/design/Dialog.tsx
+#: components/ui/components/features/profiles/ProfileActions.tsx
 msgid "Close"
 msgstr "إغلاق"
 
 #: components/modal/modals/UserProfile.tsx
 #: components/ui/components/design/Dialog.tsx
+#: components/ui/components/features/profiles/ProfileActions.tsx
 msgid "Close (Esc)"
 msgstr "إغلاق (Esc)"
 
@@ -5407,7 +5412,6 @@ msgstr "انقطع الاتصال. تجري إعادة الاتصال…"
 
 #: components/app/interface/settings/UserSettings.tsx
 #: components/ui/components/features/profiles/labels.ts
-#: components/ui/components/features/profiles/ProfileConnections.tsx
 msgid "Connections"
 msgstr "الحسابات المرتبطة"
 
@@ -5535,6 +5539,7 @@ msgstr "تم النسخ"
 msgid "Copied file to clipboard"
 msgstr "تم نسخ الملف إلى الحافظة"
 
+#: components/ui/components/features/profiles/ProfileId.tsx
 #: components/ui/components/features/profiles/ProfileIdentity.tsx
 msgid "Copied!"
 msgstr "تم النسخ!"
@@ -5574,7 +5579,7 @@ msgstr "انسخ الشيفرة"
 msgid "Copy file"
 msgstr "نسخ الملف"
 
-#: components/ui/components/features/profiles/ProfileNote.tsx
+#: components/ui/components/features/profiles/ProfileId.tsx
 #~ msgid "Copy ID"
 #~ msgstr "انسخ المعرّف"
 
@@ -5660,6 +5665,7 @@ msgid "Copy token"
 msgstr "نسخ الرمز"
 
 #: components/app/menus/UserContextMenu.tsx
+#: components/ui/components/features/profiles/ProfileId.tsx
 #: src/interface/navigation/servers/UserMenu.tsx
 msgid "Copy user ID"
 msgstr "نسخ معرّف المستخدم"
@@ -8729,6 +8735,11 @@ msgstr "سيرفر أصدقاء"
 msgid "Friends use your username and number tag to find you. Enter your current password to confirm."
 msgstr "يجدك أصدقاؤك باسم المستخدم ورقمك المميّز. أدخل كلمة مرورك الحالية للتأكيد."
 
+#. placeholder {0}: friends().length
+#: components/ui/components/features/profiles/ProfileMutuals.tsx
+msgid "Friends: {0}"
+msgstr "الأصدقاء: {0}"
+
 #: components/modal/modals/BulkDeleteMessages.tsx
 msgid "From"
 msgstr "من"
@@ -8859,7 +8870,7 @@ msgstr "اللعبة"
 
 #: components/app/interface/discover/categories.tsx
 #: components/ui/components/features/profiles/labels.ts
-#: components/ui/components/features/profiles/ProfileGames.tsx
+#: components/ui/components/features/profiles/ProfileSections.tsx
 msgid "Games"
 msgstr "ألعاب"
 
@@ -10171,11 +10182,9 @@ msgstr "مهتم"
 msgid "Interested members"
 msgstr "الأعضاء المهتمون"
 
-#: components/app/interface/settings/user/profile/ProfileExtras.tsx
-#: components/ui/components/features/profiles/labels.ts
-#: components/ui/components/features/profiles/ProfileLinks.tsx
-#~ msgid "Interests"
-#~ msgstr "الاهتمامات"
+#: components/ui/components/features/profiles/ProfileInterests.tsx
+msgid "Interests"
+msgstr "الاهتمامات"
 
 #: components/app/interface/settings/user/plugins/text.ts
 msgid "Interface colours only. Warning colours can't change and text must stay readable."
@@ -12339,6 +12348,7 @@ msgstr "القوائم التي تُفتح بالنقر بزر الفأرة ال
 #: components/app/interface/safety/labels.tsx
 #: components/app/menus/UserContextMenu.tsx
 #: components/i18n/errors.tsx
+#: components/ui/components/features/profiles/ProfileActions.tsx
 #: src/interface/developers/docs/Directives.tsx
 #: src/interface/Friends.tsx
 msgid "Message"
@@ -13601,6 +13611,10 @@ msgstr "لا يوجد أصدقاء متصلون الآن"
 #: components/modal/modals/GiftPlus.tsx
 msgid "No friends to show. Add someone as a friend first."
 msgstr "لا يوجد أصدقاء لعرضهم. أضف صديقاً أولاً."
+
+#: components/ui/components/features/profiles/ProfileGames.tsx
+msgid "No games to show."
+msgstr "لا توجد ألعاب للعرض."
 
 #: components/ui/components/features/messaging/composition/picker/GifPicker.tsx
 msgid "No GIFs found"
@@ -17778,6 +17792,11 @@ msgstr "الأدوار الممنوحة عند الانضمام"
 msgid "Roles group members and give them permissions and a colour."
 msgstr "تجمع الأدوار الأعضاء وتمنحهم صلاحيات ولونًا."
 
+#. placeholder {0}: props.member!.server!.name
+#: components/ui/components/features/profiles/ProfileRoles.tsx
+msgid "Roles in {0}"
+msgstr "الأدوار في {0}"
+
 #: components/app/interface/settings/ServerSettings.tsx
 #~ msgid "Roles permissions everyone colour"
 #~ msgstr "الأدوار الصلاحيات الجميع اللون roles"
@@ -19015,10 +19034,10 @@ msgstr "ترتفع مستويات السيرفرات عندما يهديها ا�
 msgid "Servers need {0} members to be listed. A promotion lists you right away."
 msgstr "يحتاج السيرفر إلى {0} أعضاء ليظهر في القائمة. الترويج يُدرجه فوراً."
 
-#. placeholder {0}: props.entry.server_count
-#: components/app/interface/settings/user/safety/SafetyDashboard.tsx
-#~ msgid "Servers: {0}"
-#~ msgstr "السيرفرات: {0}"
+#. placeholder {0}: servers().length
+#: components/ui/components/features/profiles/ProfileMutuals.tsx
+msgid "Servers: {0}"
+msgstr "السيرفرات: {0}"
 
 #: components/app/interface/settings/user/Account.tsx
 #: components/app/interface/settings/UserSettings.tsx
@@ -19239,6 +19258,7 @@ msgstr "إظهار الأعضاء بشكل منفصل"
 #: components/modal/modals/PollVoters.tsx
 #: components/ui/components/features/messaging/elements/TextEmbed.tsx
 #: components/ui/components/features/profiles/ProfileBio.tsx
+#: components/ui/components/features/profiles/ProfileGames.tsx
 #: components/ui/components/features/profiles/ProfileTiles.tsx
 #: src/interface/designs/ShowMore.tsx
 #: src/interface/events/EventCard.tsx
@@ -20142,8 +20162,8 @@ msgid "Steam did not answer. Try again in a few minutes."
 msgstr "لم يستجب Steam. حاول مرة أخرى بعد بضع دقائق."
 
 #: components/ui/components/features/profiles/ProfileGames.tsx
-msgid "Steam is a trademark of Valve Corporation; Zrzur is not affiliated with Valve. Game pictures, achievement names and icons belong to their owners."
-msgstr "‏Steam علامة تجارية لشركة Valve Corporation، وزرزور غير تابع لـ Valve. صور الألعاب وأسماء الإنجازات وأيقوناتها ملك لأصحابها."
+#~ msgid "Steam is a trademark of Valve Corporation; Zrzur is not affiliated with Valve. Game pictures, achievement names and icons belong to their owners."
+#~ msgstr "‏Steam علامة تجارية لشركة Valve Corporation، وزرزور غير تابع لـ Valve. صور الألعاب وأسماء الإنجازات وأيقوناتها ملك لأصحابها."
 
 #: components/app/interface/settings/user/connections/Connections.tsx
 #~ msgid "Steam is a trademark of Valve Corporation. Zrzur is not affiliated with Valve."
@@ -23588,6 +23608,10 @@ msgstr "مستخدم"
 msgid "User broke a certain rule…"
 msgstr "خالف المستخدم قاعدة معيّنة…"
 
+#: components/ui/components/features/profiles/ProfileId.tsx
+msgid "User ID"
+msgstr "معرّف المستخدم"
+
 #: components/app/interface/settings/server/Overview.tsx
 #~ msgid "User Joined"
 #~ msgstr "إنضم المستخدم"
@@ -23904,6 +23928,7 @@ msgid "View currently active bug reports here."
 msgstr "اطّلع هنا على بلاغات الأخطاء المفتوحة حاليًا."
 
 #: components/app/menus/UserContextMenu.tsx
+#: components/ui/components/features/profiles/ProfileActions.tsx
 msgid "View full profile"
 msgstr "عرض الملف الشخصي كاملًا"
 
@@ -26261,34 +26286,3 @@ msgstr "زرزور، مباشرةً على <0>سطح مكتبك.</0>"
 #: components/app/interface/settings/user/appearance/AppearanceMenu.tsx
 #~ msgid "Zrzur's own look: very dark neutral panels with Zrzur Pink as the one accent."
 #~ msgstr "مظهر زرزور الخاص: لوحات داكنة جدًا بألوان محايدة، وزهري زرزور هو اللون المميز الوحيد."
-
-#: components/ui/components/features/profiles/ProfileId.tsx
-msgid "Copy ID"
-msgstr "انسخ المعرّف"
-
-#. placeholder {0}: friends().length
-#: components/ui/components/features/profiles/ProfileMutuals.tsx
-msgid "Friends: {0}"
-msgstr "الأصدقاء: {0}"
-
-#: components/ui/components/features/profiles/ProfileInterests.tsx
-msgid "Interests"
-msgstr "الاهتمامات"
-
-#: components/ui/components/features/profiles/ProfileGames.tsx
-msgid "No games to show."
-msgstr "لا توجد ألعاب للعرض."
-
-#. placeholder {0}: props.member!.server!.name
-#: components/ui/components/features/profiles/ProfileRoles.tsx
-msgid "Roles in {0}"
-msgstr "الأدوار في {0}"
-
-#. placeholder {0}: servers().length
-#: components/ui/components/features/profiles/ProfileMutuals.tsx
-msgid "Servers: {0}"
-msgstr "السيرفرات: {0}"
-
-#: components/ui/components/features/profiles/ProfileId.tsx
-msgid "User ID"
-msgstr "معرّف المستخدم"

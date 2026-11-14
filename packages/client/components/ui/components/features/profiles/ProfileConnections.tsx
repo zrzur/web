@@ -5,12 +5,14 @@ import { styled } from "styled-system/jsx";
 
 import { useModals } from "@revolt/modal";
 
-import { ProfileSection, chip } from "./ProfileCard";
+import { chip, panel } from "./ProfileCard";
+import type { ProfileInterest } from "./ProfileInterests";
 import {
-  type ProfileConnection,
   type LinkedRepo,
+  type ProfileConnection,
   serviceUrl,
 } from "./linkedServices";
+import { useProfileSize } from "./profileSize";
 
 /** Repositories on the card; the full profile shows all the person picked */
 const CARD_REPOS = 3;
@@ -23,32 +25,28 @@ const NAMES: Record<string, string> = {
 };
 
 /**
- * Linked Twitch, GitHub and Battle.net accounts. Everything comes from
- * Zrzur's own copy; the viewer's browser never contacts the services. Links
- * open only that service's own pages, through the link warning.
+ * Linked Twitch, GitHub and Battle.net accounts as Interests tabs, one per
+ * service, after Games. The tab names the service; the panel never repeats it.
  */
-export function ProfileConnectionsSection(props: {
-  connections: ProfileConnection[];
-  full?: boolean;
-}) {
-  return (
-    <Show when={props.connections.length}>
-      <ProfileSection title={<Trans>Connections</Trans>}>
-        <Rows>
-          <For each={props.connections}>
-            {(connection) => (
-              <ConnectionRow connection={connection} full={props.full} />
-            )}
-          </For>
-        </Rows>
-      </ProfileSection>
-    </Show>
-  );
+export function connectionInterests(
+  connections: ProfileConnection[],
+): ProfileInterest[] {
+  return connections.map((connection) => ({
+    id: connection.service,
+    label: NAMES[connection.service] ?? connection.service,
+    panel: () => <ProfileConnectionPanel connection={connection} />,
+  }));
 }
 
-function ConnectionRow(props: { connection: ProfileConnection; full?: boolean }) {
+/**
+ * One linked account. Everything comes from Zrzur's own copy; the viewer's
+ * browser never contacts the service. Links open only that service's own
+ * pages, through the link warning.
+ */
+export function ProfileConnectionPanel(props: { connection: ProfileConnection }) {
   const { t, i18n } = useLingui();
   const { openModal } = useModals();
+  const size = useProfileSize();
   const [copied, setCopied] = createSignal(false);
   const number = (value: number) =>
     new Intl.NumberFormat(i18n().locale).format(value);
@@ -59,7 +57,7 @@ function ConnectionRow(props: { connection: ProfileConnection; full?: boolean })
   const repos = createMemo(() =>
     (props.connection.repos ?? []).slice(
       0,
-      props.full ? undefined : CARD_REPOS,
+      size() === "full" ? undefined : CARD_REPOS,
     ),
   );
 
@@ -77,65 +75,67 @@ function ConnectionRow(props: { connection: ProfileConnection; full?: boolean })
   }
 
   return (
-    <li>
-      <Service>{NAMES[props.connection.service] ?? props.connection.service}</Service>
-      <Main>
-        <Head>
-          <Show
-            when={link()}
-            fallback={
-              <Name dir="ltr">
-                <bdi>{props.connection.display_name}</bdi>
-              </Name>
-            }
-          >
-            {(url) => (
-              <button
-                class={chip({ press: true })}
-                type="button"
-                title={url().toString()}
-                onClick={() => open(url())}
-              >
-                <Name>
-                  <bdi>{props.connection.display_name}</bdi>
-                </Name>
-              </button>
-            )}
-          </Show>
-          <Show when={props.connection.service === "battlenet"}>
+    <div class={panel()} data-testid={`profile-${props.connection.service}`}>
+      <Head>
+        <Show
+          when={link()}
+          fallback={
+            <Name dir="ltr">
+              <bdi>{props.connection.display_name}</bdi>
+            </Name>
+          }
+        >
+          {(url) => (
             <button
               class={chip({ press: true })}
               type="button"
-              aria-label={t`Copy BattleTag`}
-              onClick={copy}
+              title={url().toString()}
+              onClick={() => open(url())}
             >
-              <span aria-live="polite">
-                <Show when={copied()} fallback={<Trans>Copy</Trans>}>
-                  <Trans>Copied</Trans>
-                </Show>
-              </span>
+              <Name>
+                <bdi>{props.connection.display_name}</bdi>
+              </Name>
             </button>
-          </Show>
-          <Show when={props.connection.live}>
-            <Live>
-              <Trans>Live now</Trans>
-            </Live>
-          </Show>
-        </Head>
-        <Show when={props.connection.live && props.connection.live_title}>
-          <Facts>
-            <bdi>{props.connection.live_title}</bdi>
-          </Facts>
+          )}
         </Show>
-        <Show when={repos().length}>
-          <Repos>
-            <For each={repos()}>
-              {(repo) => <RepoRow repo={repo} number={number} open={open} />}
-            </For>
-          </Repos>
+        <Show when={props.connection.service === "battlenet"}>
+          <button
+            class={chip({ press: true })}
+            type="button"
+            aria-label={t`Copy BattleTag`}
+            onClick={copy}
+          >
+            <span aria-live="polite">
+              <Show when={copied()} fallback={<Trans>Copy</Trans>}>
+                <Trans>Copied</Trans>
+              </Show>
+            </span>
+          </button>
         </Show>
-      </Main>
-    </li>
+        <Show when={props.connection.live}>
+          <Live>
+            <Trans>Live now</Trans>
+          </Live>
+        </Show>
+      </Head>
+      <Show when={props.connection.live && props.connection.live_title}>
+        <Facts>
+          <bdi>{props.connection.live_title}</bdi>
+        </Facts>
+      </Show>
+      <Show when={props.connection.service === "battlenet"}>
+        <Facts>
+          <Trans>BattleTag from Battle.net</Trans>
+        </Facts>
+      </Show>
+      <Show when={repos().length}>
+        <Repos>
+          <For each={repos()}>
+            {(repo) => <RepoRow repo={repo} number={number} open={open} />}
+          </For>
+        </Repos>
+      </Show>
+    </div>
   );
 }
 
@@ -179,48 +179,6 @@ function RepoRow(props: {
   );
 }
 
-const Rows = styled("ul", {
-  base: {
-    listStyle: "none",
-    margin: 0,
-    padding: 0,
-    display: "flex",
-    flexDirection: "column",
-    gap: "8px",
-
-    "& > li": {
-      display: "flex",
-      gap: "12px",
-      padding: "12px",
-      borderRadius: "var(--z-radius-sm, 6px)",
-      background: "var(--profile-chip, var(--z-bg-input))",
-      minWidth: 0,
-    },
-    "@container (max-width: 420px)": {
-      "& > li": { flexDirection: "column", gap: "4px" },
-    },
-  },
-});
-
-const Service = styled("span", {
-  base: {
-    flex: "0 0 76px",
-    fontSize: "12px",
-    lineHeight: "20px",
-    color: "var(--profile-ink-2, var(--z-fg-secondary))",
-  },
-});
-
-const Main = styled("div", {
-  base: {
-    display: "flex",
-    flexDirection: "column",
-    gap: "4px",
-    minWidth: 0,
-    flex: 1,
-  },
-});
-
 const Head = styled("div", {
   base: {
     display: "flex",
@@ -242,6 +200,7 @@ const Name = styled("strong", {
   },
 });
 
+/** "Happening now": the live colour, outlined, never a filled action */
 const Live = styled("span", {
   base: {
     display: "inline-flex",

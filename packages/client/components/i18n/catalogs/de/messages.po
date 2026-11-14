@@ -392,7 +392,6 @@ msgstr "{0} kostenloser Flügel"
 #~ msgid "{0} friends online"
 #~ msgstr ""
 
-#. placeholder {0}: number(games().game_count ?? 0)
 #. placeholder {0}: number(props.account.game_count ?? 0)
 #. placeholder {0}: number(props.games.game_count ?? 0)
 #: components/app/interface/settings/user/connections/Connections.tsx
@@ -402,8 +401,8 @@ msgid "{0} games"
 msgstr "{0} Spiele"
 
 #. placeholder {0}: number(game.hours)
-#. placeholder {0}: number(games().total_hours ?? 0)
 #. placeholder {0}: number(item.hours)
+#. placeholder {0}: number(props.games.total_hours ?? 0)
 #: components/app/interface/settings/user/connections/Connections.tsx
 #: components/modal/modals/SteamGames.tsx
 #: components/ui/components/features/profiles/ProfileGames.tsx
@@ -3282,6 +3281,10 @@ msgstr "Barbados"
 msgid "Battle.net lets us keep it for 30 days. Confirm on Battle.net before then to keep it; otherwise we delete it. We keep no Battle.net sign-in."
 msgstr "Battle.net erlaubt uns, ihn 30 Tage zu behalten. Bestätige vorher bei Battle.net, um ihn zu behalten; sonst löschen wir ihn. Wir speichern keine Battle.net-Anmeldung."
 
+#: components/ui/components/features/profiles/ProfileConnections.tsx
+msgid "BattleTag from Battle.net"
+msgstr "BattleTag von Battle.net"
+
 #: components/app/interface/settings/user/connections/ServiceCards.tsx
 msgid "BattleTag from Battle.net. Disconnecting deletes it at once."
 msgstr "BattleTag von Battle.net. Trennen löscht ihn sofort."
@@ -4955,11 +4958,13 @@ msgstr "clips"
 #: components/modal/modals/UserProfileRoles.tsx
 #: components/plugins/PluginHostRoot.tsx
 #: components/ui/components/design/Dialog.tsx
+#: components/ui/components/features/profiles/ProfileActions.tsx
 msgid "Close"
 msgstr "Schließen"
 
 #: components/modal/modals/UserProfile.tsx
 #: components/ui/components/design/Dialog.tsx
+#: components/ui/components/features/profiles/ProfileActions.tsx
 msgid "Close (Esc)"
 msgstr "Schließen (Esc)"
 
@@ -5407,7 +5412,6 @@ msgstr "Verbindung verloren. Verbindung wird wiederhergestellt…"
 
 #: components/app/interface/settings/UserSettings.tsx
 #: components/ui/components/features/profiles/labels.ts
-#: components/ui/components/features/profiles/ProfileConnections.tsx
 msgid "Connections"
 msgstr "Verknüpfungen"
 
@@ -5535,6 +5539,7 @@ msgstr "Kopiert"
 msgid "Copied file to clipboard"
 msgstr "Datei in die Zwischenablage kopiert"
 
+#: components/ui/components/features/profiles/ProfileId.tsx
 #: components/ui/components/features/profiles/ProfileIdentity.tsx
 msgid "Copied!"
 msgstr "Kopiert!"
@@ -5574,7 +5579,7 @@ msgstr "Code kopieren"
 msgid "Copy file"
 msgstr "Datei kopieren"
 
-#: components/ui/components/features/profiles/ProfileNote.tsx
+#: components/ui/components/features/profiles/ProfileId.tsx
 #~ msgid "Copy ID"
 #~ msgstr "ID kopieren"
 
@@ -5660,6 +5665,7 @@ msgid "Copy token"
 msgstr "Token kopieren"
 
 #: components/app/menus/UserContextMenu.tsx
+#: components/ui/components/features/profiles/ProfileId.tsx
 #: src/interface/navigation/servers/UserMenu.tsx
 msgid "Copy user ID"
 msgstr "Nutzer-ID kopieren"
@@ -8729,6 +8735,11 @@ msgstr "Freunde-Server"
 msgid "Friends use your username and number tag to find you. Enter your current password to confirm."
 msgstr "Freunde finden dich über Benutzernamen und Nummer. Gib zur Bestätigung dein aktuelles Passwort ein."
 
+#. placeholder {0}: friends().length
+#: components/ui/components/features/profiles/ProfileMutuals.tsx
+msgid "Friends: {0}"
+msgstr "Freunde: {0}"
+
 #: components/modal/modals/BulkDeleteMessages.tsx
 msgid "From"
 msgstr "Von"
@@ -8859,7 +8870,7 @@ msgstr "Spiel"
 
 #: components/app/interface/discover/categories.tsx
 #: components/ui/components/features/profiles/labels.ts
-#: components/ui/components/features/profiles/ProfileGames.tsx
+#: components/ui/components/features/profiles/ProfileSections.tsx
 msgid "Games"
 msgstr "Spiele"
 
@@ -10171,11 +10182,9 @@ msgstr "Interessiert"
 msgid "Interested members"
 msgstr "Interessierte Mitglieder"
 
-#: components/app/interface/settings/user/profile/ProfileExtras.tsx
-#: components/ui/components/features/profiles/labels.ts
-#: components/ui/components/features/profiles/ProfileLinks.tsx
-#~ msgid "Interests"
-#~ msgstr "Interessen"
+#: components/ui/components/features/profiles/ProfileInterests.tsx
+msgid "Interests"
+msgstr "Interessen"
 
 #: components/app/interface/settings/user/plugins/text.ts
 msgid "Interface colours only. Warning colours can't change and text must stay readable."
@@ -12339,6 +12348,7 @@ msgstr "Menüs, die sich per Rechtsklick öffnen."
 #: components/app/interface/safety/labels.tsx
 #: components/app/menus/UserContextMenu.tsx
 #: components/i18n/errors.tsx
+#: components/ui/components/features/profiles/ProfileActions.tsx
 #: src/interface/developers/docs/Directives.tsx
 #: src/interface/Friends.tsx
 msgid "Message"
@@ -13601,6 +13611,10 @@ msgstr "Gerade sind keine Freunde online"
 #: components/modal/modals/GiftPlus.tsx
 msgid "No friends to show. Add someone as a friend first."
 msgstr "Keine Freunde zum Anzeigen. Füge zuerst jemanden als Freund hinzu."
+
+#: components/ui/components/features/profiles/ProfileGames.tsx
+msgid "No games to show."
+msgstr "Keine Spiele zum Anzeigen."
 
 #: components/ui/components/features/messaging/composition/picker/GifPicker.tsx
 msgid "No GIFs found"
@@ -17778,6 +17792,11 @@ msgstr "Rollen beim Beitritt"
 msgid "Roles group members and give them permissions and a colour."
 msgstr "Rollen gruppieren Mitglieder und geben ihnen Berechtigungen und eine Farbe."
 
+#. placeholder {0}: props.member!.server!.name
+#: components/ui/components/features/profiles/ProfileRoles.tsx
+msgid "Roles in {0}"
+msgstr "Rollen in {0}"
+
 #: components/app/interface/settings/ServerSettings.tsx
 #~ msgid "Roles permissions everyone colour"
 #~ msgstr "Rollen Berechtigungen alle Farbe"
@@ -19015,10 +19034,10 @@ msgstr "Server steigen auf, wenn Mitglieder ihnen Flügel schenken, für {0} im 
 msgid "Servers need {0} members to be listed. A promotion lists you right away."
 msgstr "Server brauchen {0} Mitglieder, um gelistet zu werden. Eine Hervorhebung listet dich sofort."
 
-#. placeholder {0}: props.entry.server_count
-#: components/app/interface/settings/user/safety/SafetyDashboard.tsx
-#~ msgid "Servers: {0}"
-#~ msgstr "Server: {0}"
+#. placeholder {0}: servers().length
+#: components/ui/components/features/profiles/ProfileMutuals.tsx
+msgid "Servers: {0}"
+msgstr "Server: {0}"
 
 #: components/app/interface/settings/user/Account.tsx
 #: components/app/interface/settings/UserSettings.tsx
@@ -19239,6 +19258,7 @@ msgstr "Mitglieder getrennt anzeigen"
 #: components/modal/modals/PollVoters.tsx
 #: components/ui/components/features/messaging/elements/TextEmbed.tsx
 #: components/ui/components/features/profiles/ProfileBio.tsx
+#: components/ui/components/features/profiles/ProfileGames.tsx
 #: components/ui/components/features/profiles/ProfileTiles.tsx
 #: src/interface/designs/ShowMore.tsx
 #: src/interface/events/EventCard.tsx
@@ -20142,8 +20162,8 @@ msgid "Steam did not answer. Try again in a few minutes."
 msgstr "Steam hat nicht geantwortet. Versuch es in ein paar Minuten noch einmal."
 
 #: components/ui/components/features/profiles/ProfileGames.tsx
-msgid "Steam is a trademark of Valve Corporation; Zrzur is not affiliated with Valve. Game pictures, achievement names and icons belong to their owners."
-msgstr "Steam ist eine Marke der Valve Corporation; Zrzur ist nicht mit Valve verbunden. Spielbilder sowie Namen und Symbole von Erfolgen gehören ihren Inhabern."
+#~ msgid "Steam is a trademark of Valve Corporation; Zrzur is not affiliated with Valve. Game pictures, achievement names and icons belong to their owners."
+#~ msgstr "Steam ist eine Marke der Valve Corporation; Zrzur ist nicht mit Valve verbunden. Spielbilder sowie Namen und Symbole von Erfolgen gehören ihren Inhabern."
 
 #: components/app/interface/settings/user/connections/Connections.tsx
 #~ msgid "Steam is a trademark of Valve Corporation. Zrzur is not affiliated with Valve."
@@ -23588,6 +23608,10 @@ msgstr "Nutzer"
 msgid "User broke a certain rule…"
 msgstr "Nutzer hat eine Regel gebrochen…"
 
+#: components/ui/components/features/profiles/ProfileId.tsx
+msgid "User ID"
+msgstr "Nutzer-ID"
+
 #: components/app/interface/settings/server/Overview.tsx
 #~ msgid "User Joined"
 #~ msgstr "Nutzer ist beigetreten"
@@ -23904,6 +23928,7 @@ msgid "View currently active bug reports here."
 msgstr "Aktuelle Fehlerberichte werden hier aufgelistet."
 
 #: components/app/menus/UserContextMenu.tsx
+#: components/ui/components/features/profiles/ProfileActions.tsx
 msgid "View full profile"
 msgstr "Vollständiges Profil anzeigen"
 
@@ -26261,34 +26286,3 @@ msgstr "Zrzur, direkt auf <0>deinem Desktop.</0>"
 #: components/app/interface/settings/user/appearance/AppearanceMenu.tsx
 #~ msgid "Zrzur's own look: very dark neutral panels with Zrzur Pink as the one accent."
 #~ msgstr "Zrzurs eigener Look: sehr dunkle, neutrale Flächen mit Zrzur-Pink als einziger Akzentfarbe."
-
-#: components/ui/components/features/profiles/ProfileId.tsx
-msgid "Copy ID"
-msgstr "ID kopieren"
-
-#. placeholder {0}: friends().length
-#: components/ui/components/features/profiles/ProfileMutuals.tsx
-msgid "Friends: {0}"
-msgstr "Freunde: {0}"
-
-#: components/ui/components/features/profiles/ProfileInterests.tsx
-msgid "Interests"
-msgstr "Interessen"
-
-#: components/ui/components/features/profiles/ProfileGames.tsx
-msgid "No games to show."
-msgstr "Keine Spiele zum Anzeigen."
-
-#. placeholder {0}: props.member!.server!.name
-#: components/ui/components/features/profiles/ProfileRoles.tsx
-msgid "Roles in {0}"
-msgstr "Rollen in {0}"
-
-#. placeholder {0}: servers().length
-#: components/ui/components/features/profiles/ProfileMutuals.tsx
-msgid "Servers: {0}"
-msgstr "Server: {0}"
-
-#: components/ui/components/features/profiles/ProfileId.tsx
-msgid "User ID"
-msgstr "Nutzer-ID"

@@ -15,12 +15,14 @@ import { styled } from "styled-system/jsx";
 
 import { ProfileBio } from "./ProfileBio";
 import { ProfileCard, ProfileSkeleton } from "./ProfileCard";
+import { connectionInterests } from "./ProfileConnections";
 import { ProfileGamesPanel } from "./ProfileGames";
 import { ProfileInterests } from "./ProfileInterests";
 import { ProfileJoined } from "./ProfileJoined";
 import { ProfileLinks } from "./ProfileLinks";
 import { ProfileRoles } from "./ProfileRoles";
 import { profileGames } from "./linkedGames";
+import { profileConnections } from "./linkedServices";
 import { type ProfileSize, ProfileSizeContext } from "./profileSize";
 import { visibleSections } from "./sections";
 
@@ -138,16 +140,27 @@ export function ProfileSections(props: {
   // a new service adds its entry here
   const interests = createMemo(() => {
     const games = profileGames(props.profile);
-    return games
-      ? [
-          {
-            id: "games",
-            label: t`Games`,
-            panel: () => <ProfileGamesPanel games={games} />,
-          },
-        ]
-      : [];
+    return [
+      ...(games
+        ? [
+            {
+              id: "games",
+              label: t`Games`,
+              panel: () => <ProfileGamesPanel games={games} />,
+            },
+          ]
+        : []),
+      // Twitch, GitHub, Battle.net (section "connections"); the server
+      // leaves out whatever section the person hid
+      ...connectionInterests(profileConnections(props.profile)),
+    ];
   });
+  // Interests draw once, where the first of its two sections sits
+  const interestsAt = createMemo(() =>
+    visibleSections(props.profile?.sections).find(
+      (id) => id === "games" || id === "connections",
+    ),
+  );
 
   return (
     <For each={visibleSections(props.profile?.sections)}>
@@ -171,7 +184,7 @@ export function ProfileSections(props: {
           <Match when={section === "wearing" && props.profile?.creator}>
             <ProfileWearing user={props.user} onLeave={props.onClose} />
           </Match>
-          <Match when={section === "games" && interests().length}>
+          <Match when={section === interestsAt() && interests().length}>
             <ProfileInterests interests={interests()} />
           </Match>
         </Switch>
