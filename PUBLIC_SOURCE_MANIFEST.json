@@ -292,8 +292,8 @@
     },
     {
       "path": "CHANGELOG.md",
-      "sha256": "a0b35069da97a9a740f53b495821909fd4019eaa5b6188df3f8e9b2198110683",
-      "bytes": 147721,
+      "sha256": "a7105ab5dc7670690d9155717420dd61f2a7a334b22e93c3abb72e89f8b233c4",
+      "bytes": 147695,
       "category": "public-documentation"
     },
     {
@@ -6466,8 +6466,8 @@
     },
     {
       "path": "packages/client/components/ui/components/features/profiles/ProfileActions.tsx",
-      "sha256": "2313840ddc1d64deaae89ae2ec2da749ce3eb804a579a587d265755ac1528d57",
-      "bytes": 12988,
+      "sha256": "66e2071635f06628a6bcf53bc635316b3fee0dcd095d9898a9b50dce14231f89",
+      "bytes": 12978,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -7114,8 +7114,8 @@
     },
     {
       "path": "packages/client/components/ui/components/floating/UserCard.tsx",
-      "sha256": "156c3c37bac0f7746496ac3eb2d16aeceed32430ea0761b1c6356c3a8cf4bad7",
-      "bytes": 5509,
+      "sha256": "c6051f5eb6a09eb2f02b7ac9a392c98ecab35c6ae31d12443dff6d1d01d2e59c",
+      "bytes": 5595,
       "category": "product-source-or-build-manifest"
     },
     {
