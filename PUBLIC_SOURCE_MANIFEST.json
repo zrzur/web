@@ -2308,8 +2308,8 @@
     },
     {
       "path": "packages/client/components/app/interface/settings/user/connections/Connections.tsx",
-      "sha256": "98107fecb31310c273f4ee9785eed3596b3fcd06c157c867ff78f387bcf41a01",
-      "bytes": 14244,
+      "sha256": "46452f7bf9fe266ad604c88f11e3436db93b2e75d396636944bca8b741b04efc",
+      "bytes": 15577,
       "category": "product-source-or-build-manifest"
     },
     {
