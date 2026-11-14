@@ -108,7 +108,7 @@ const Header = styled("div", {
     "--header-inset": "16px",
 
     "&[data-size='full']": {
-      "--banner-height": "168px",
+      "--banner-height": "160px",
       "--avatar-ring": "112px",
       "--header-inset": "24px",
       // a phone has 16 px gutters and a banner 3:1 of its width

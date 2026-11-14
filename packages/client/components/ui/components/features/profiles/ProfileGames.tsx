@@ -338,7 +338,7 @@ const Strip = styled("ul", {
     margin: 0,
     padding: 0,
     display: "grid",
-    // tiles of about 40 px: seven in a row on the card, eleven on the full
+    // tiles of about 40 px: seven in a row on the card, nine on the full
     // profile, whatever the border and padding leave
     gridTemplateColumns: "repeat(auto-fill, minmax(36px, 1fr))",
     gap: "var(--profile-tile-gap, 4px)",

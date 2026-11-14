@@ -133,7 +133,7 @@ describe("ProfileGamesPanel", () => {
     dispose?.();
     document.body.replaceChildren(document.createElement("div"));
     show(games, "full");
-    expect(document.querySelectorAll("li[title]").length).toBe(22);
+    expect(document.querySelectorAll("li[title]").length).toBe(18);
   });
 
   it("every achievement has a name a screen reader can read", () => {

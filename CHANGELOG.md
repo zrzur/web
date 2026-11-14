@@ -6,7 +6,7 @@
 
 * **Profile card:** 360 px wide with a close button; the message box and **View full profile** stay in view while the sections scroll. Add friend sits on the banner's edge. About me ends at four whole lines.
 * **Interests:** what a linked account shows is one panel: Steam name, games and hours, **View**, the most played games with pictures and hours, and two rows of the latest achievements. More linked services join as tabs above the panel.
-* **Full profile:** 600 px wide, with **Message** as its main button, every role under "Roles in <server>", servers and friends in common, a private note and the user ID with a copy button.
+* **Full profile:** 480 px wide, with **Message** as its main button, every role under "Roles in <server>", servers and friends in common, a private note and the user ID with a copy button.
 * **Games dialog:** bordered game cards with an achievements bar, achievement rows with even padding, and English names cut at their end in Arabic.
 * Spacing follows the 4 px grid; text keeps 12 px from the edge of its chip, tile or panel; chosen profile colours tint the Interests panel too.
 

@@ -50,7 +50,7 @@ export function UserProfileModal(
   );
 
   return (
-    <Dialog show={props.show} onClose={props.onClose} bare width={600}>
+    <Dialog show={props.show} onClose={props.onClose} bare width={480}>
       <Layout data-sheet-edge style={theme()}>
         <ProfileEffect
           effect={userStyleOf(props.user)?.effect}
