@@ -9,6 +9,7 @@ import { Language } from "@revolt/i18n";
 import { useState } from "@revolt/state";
 import { Icon } from "@revolt/ui/icons/Icon";
 
+import { reportPrefix } from "./siteLanguages";
 import { SITE_LANGUAGES, WEBSITE_URL, siteLanguage } from "./sites";
 
 type SiteId = "discover" | "designs";
@@ -142,15 +143,17 @@ export function LanguageSwitch() {
 }
 
 export function SiteFooter(props: { site: SiteId | "docs" }) {
-  const { t } = useLingui();
+  const { t, i18n } = useLingui();
+  // the website has every legal page in the site languages, under /<language>
+  const legal = () => `${WEBSITE_URL}${reportPrefix(i18n().locale)}/legal`;
   const links = () => [
-    { href: `${WEBSITE_URL}/legal/terms`, label: t`Terms` },
-    { href: `${WEBSITE_URL}/legal/privacy`, label: t`Privacy` },
-    { href: `${WEBSITE_URL}/legal/impressum`, label: t`Impressum` },
+    { href: `${legal()}/terms`, label: t`Terms` },
+    { href: `${legal()}/privacy`, label: t`Privacy` },
+    { href: `${legal()}/imprint`, label: t`Impressum` },
     ...(props.site === "discover"
       ? [
           {
-            href: `${WEBSITE_URL}/legal/discover-guidelines`,
+            href: `${legal()}/discover-guidelines`,
             label: t`Discover rules`,
           },
         ]
@@ -160,9 +163,7 @@ export function SiteFooter(props: { site: SiteId | "docs" }) {
 
   return (
     <Footer>
-      <For each={links()}>
-        {(link) => <a href={link.href}>{link.label}</a>}
-      </For>
+      <For each={links()}>{(link) => <a href={link.href}>{link.label}</a>}</For>
     </Footer>
   );
 }
@@ -346,4 +347,3 @@ const Footer = styled("footer", {
     },
   },
 });
-

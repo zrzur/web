@@ -30,6 +30,26 @@ describe("documentation links", () => {
     expect(resolveDocsHref("/developers/docs#top", site)).toBe("/#top");
   });
 
+  it("name the front page of the site for the overview, never /overview", () => {
+    expect(resolveDocsHref("/developers/docs/overview", site)).toBe("/");
+    expect(resolveDocsHref("/developers/docs/overview#base-urls", site)).toBe(
+      "/#base-urls",
+    );
+    // a page whose name only starts the same way keeps its name
+    expect(resolveDocsHref("/developers/docs/overview-of-x", site)).toBe(
+      "/overview-of-x",
+    );
+    expect(resolveDocsHref("/developers/docs/overview", app)).toBe(
+      "/developers/docs/overview",
+    );
+    expect(
+      docsLinkFromApp(
+        "/developers/docs/overview#status",
+        "https://developers.zrzur.com",
+      ).href,
+    ).toBe("https://developers.zrzur.com/#status");
+  });
+
   it("send the Developer Portal to the app from the site", () => {
     expect(resolveDocsHref("/developers", site)).toBe(
       "https://app.zrzur.com/developers",

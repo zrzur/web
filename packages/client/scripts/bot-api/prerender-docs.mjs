@@ -110,11 +110,16 @@ export const esc = (text) =>
 
 /** Addresses are written as in the app; the site has them at its root */
 export function siteHref(href) {
-  if (href === "/developers/docs" || href.startsWith("/developers/docs/"))
-    return href.slice("/developers/docs".length) || "/";
-  if (href.startsWith("/developers/docs#"))
-    return `/${href.slice("/developers/docs".length)}`;
-  return href;
+  const page =
+    href === "/developers/docs" || /^\/developers\/docs[/#?]/.test(href)
+      ? href.slice("/developers/docs".length)
+      : undefined;
+  if (page === undefined) return href;
+  const rest = page.startsWith("/") ? page : `/${page}`;
+  // the overview is the front page itself
+  return /^\/overview($|[#?])/.test(rest)
+    ? `/${rest.slice("/overview".length)}`
+    : rest;
 }
 
 const endpointSlug = (endpoint) =>
@@ -369,8 +374,14 @@ function html(node, language) {
 
 /** The first paragraph in plain words, cut at a word for the description */
 export function describe(tree) {
-  const first = tree.children.find((node) => node.type === "paragraph");
-  const text = first ? textOf(first).replace(/\s+/g, " ").trim() : "";
+  // the opening paragraphs, until there is enough to say what the page is
+  let text = "";
+  for (const node of tree.children) {
+    if (node.type !== "paragraph") continue;
+    const part = textOf(node).replace(/\s+/g, " ").trim();
+    text = text ? `${text.replace(/[:：]$/, ".")} ${part}` : part;
+    if (text.length >= 70) break;
+  }
   if (text.length <= 160) return text;
   const cut = text.slice(0, 157);
   return `${cut.slice(0, Math.max(cut.lastIndexOf(" "), 100))}…`;
