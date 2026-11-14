@@ -6514,8 +6514,8 @@
     },
     {
       "path": "packages/client/components/ui/components/features/profiles/ProfileGames.tsx",
-      "sha256": "28fc116cad54960bc4c556d0ceac8a80fc76d1ce683cc964bb9b3acf0f136846",
-      "bytes": 8564,
+      "sha256": "108cd389f8cd8d5df95fabb888e9e84041bfe4313fb05e848716c356a41fb516",
+      "bytes": 8114,
       "category": "product-source-or-build-manifest"
     },
     {
