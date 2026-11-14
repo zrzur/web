@@ -225,7 +225,10 @@ export function ListServerMembers(props: { server: Server }) {
                           user()?.displayName ??
                           user()?.username}
                         <Show when={user()?.bot}>
-                          <BotLabel verified={user()?.verifiedBot} />
+                          <BotLabel
+                            official={user()?.officialBot}
+                            verified={user()?.verifiedBot}
+                          />
                         </Show>
                         <Show when={props.server.ownerId === member.id.user}>
                           <BadgeMark id="server_owner" size="xs" mode="hover" />

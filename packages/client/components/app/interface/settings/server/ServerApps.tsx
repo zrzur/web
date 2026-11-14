@@ -78,7 +78,10 @@ export function ServerBots(props: { server: Server }) {
                 title={
                   <span data-bot-row={member.id.user}>
                     <bdi>{member.displayName}</bdi>{" "}
-                    <BotLabel verified={member.user?.verifiedBot} />
+                    <BotLabel
+                      official={member.user?.officialBot}
+                      verified={member.user?.verifiedBot}
+                    />
                   </span>
                 }
                 description={

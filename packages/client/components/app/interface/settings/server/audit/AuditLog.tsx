@@ -614,6 +614,12 @@ export function AuditLog(props: { server: Server }) {
                             >
                               {" "}
                               <BotLabel
+                                official={
+                                  (
+                                    users().get(entry.user) ??
+                                    client().users.get(entry.user)
+                                  )?.officialBot
+                                }
                                 verified={
                                   (
                                     users().get(entry.user) ??

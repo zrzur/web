@@ -2,6 +2,11 @@
 
 ## Unreleased
 
+### Official bots are called official everywhere (2026-11-14)
+
+* **The "Official bot" label** shows in the member list, the server's member, app and webhook settings, the audit log and on replies only you can see. It used to show only on messages and the profile card; the other places said "Bot".
+* **An official bot's profile** says "Run by the Zrzur team." in About this bot, instead of "Not verified by Zrzur".
+
 ### Delete buttons are red; the X on a link preview (2026-11-14)
 
 * **Buttons that delete or remove are a plain red** everywhere, instead of a muted rose that did not read as a warning.
