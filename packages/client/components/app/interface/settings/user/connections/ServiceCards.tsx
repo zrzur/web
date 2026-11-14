@@ -34,6 +34,9 @@ import {
   toggleRepo,
 } from "./serviceConnectionsApi";
 
+/** The linked-accounts part of the privacy policy */
+const PRIVACY_URL = "https://zrzur.com/legal/privacy#linked-accounts";
+
 const ICONS: Record<ServiceId, IconName> = {
   twitch: "video-camera",
   github: "code",
@@ -92,9 +95,9 @@ function WhatWeCopy(props: { service: ServiceId }) {
       </Match>
       <Match when={props.service === "github"}>
         <Trans>
-          your GitHub username and link, and your most starred public
-          repositories with their description, language and stars, and keep
-          them in the EU.
+          your GitHub username and link, and up to 12 of your most starred own
+          public repositories with their description, language and stars, and
+          keep them in the EU.
         </Trans>
       </Match>
       <Match when={props.service === "battlenet"}>
@@ -110,8 +113,10 @@ function HowItUpdates(props: { service: ServiceId }) {
     <Switch>
       <Match when={props.service === "twitch"}>
         <Trans>
-          Twitch tells us when you go live or offline, and we read your name
-          again once a day. We keep no Twitch sign-in.
+          We give Twitch your channel id so it tells us when you go live or
+          offline; people who can see your profile then see that you are live.
+          We read your name again once a day and keep nothing from Twitch older
+          than 24 hours. We keep no Twitch sign-in.
         </Trans>
       </Match>
       <Match when={props.service === "github"}>
@@ -122,8 +127,9 @@ function HowItUpdates(props: { service: ServiceId }) {
       </Match>
       <Match when={props.service === "battlenet"}>
         <Trans>
-          Battle.net allows us to keep it for 30 days. After that it hides
-          until you confirm again on Battle.net. We keep no Battle.net sign-in.
+          Battle.net lets us keep it for 30 days. Confirm on Battle.net before
+          then to keep it; otherwise we delete it. We keep no Battle.net
+          sign-in.
         </Trans>
       </Match>
     </Switch>
@@ -237,6 +243,17 @@ function ServiceConnect(props: { service: ServiceId; available: boolean }) {
               </strong>{" "}
               <HowItUpdates service={props.service} />{" "}
               <Trans>Disconnecting deletes everything we copied.</Trans>
+            </p>
+            <p>
+              <strong>
+                <Trans>Keep in mind:</Trans>
+              </strong>{" "}
+              <Trans>
+                This ties your {name()} account to your Zrzur account.
+              </Trans>{" "}
+              <a href={PRIVACY_URL} target="_blank" rel="noopener">
+                <Trans>Privacy Policy: linked accounts</Trans>
+              </a>
             </p>
             <Checkbox
               checked={agreed()}
@@ -352,9 +369,12 @@ function ServiceLinked(props: {
     >
       <SettingsRow
         icon={<Icon name={ICONS[service()]} size={24} />}
-        title={<bdi>{props.account.display_name}</bdi>}
+        title={<bdi>{props.account.display_name || name()}</bdi>}
         description={
           <Switch>
+            <Match when={service() === "twitch" && !props.account.display_name}>
+              <Trans>Waiting for Twitch: the name shows again once Twitch answers.</Trans>
+            </Match>
             <Match when={service() === "twitch" && props.account.live}>
               <LiveLine>
                 <Live>
@@ -370,13 +390,6 @@ function ServiceLinked(props: {
             </Match>
             <Match when={service() === "github"}>
               {t`${number(props.account.repos?.length ?? 0)} public repositories`}
-            </Match>
-            <Match when={service() === "battlenet" && expired()}>
-              <Warn>
-                <Trans>
-                  Hidden: confirm on Battle.net to show it again.
-                </Trans>
-              </Warn>
             </Match>
             <Match when={service() === "battlenet"}>
               <Warn data-calm={days() > 7}>

@@ -179,6 +179,14 @@ describe("ServiceCards", () => {
     await flush();
     expect(text()).toContain("whether you are live now with the stream title");
     expect(text()).toContain("Zrzur never sees that password.");
+    expect(text()).toContain("We give Twitch your channel id");
+    expect(text()).toContain("This ties your Twitch account to your Zrzur account.");
+    const policy = [...document.querySelectorAll("a")].find((a) =>
+      a.textContent?.includes("Privacy Policy"),
+    );
+    expect(policy?.getAttribute("href")).toBe(
+      "https://zrzur.com/legal/privacy#linked-accounts",
+    );
     const go = button("Continue to Twitch")!;
     expect(go.disabled).toBe(true);
 
@@ -279,7 +287,7 @@ describe("ServiceCards", () => {
     expect(assign).toHaveBeenCalledWith("https://oauth.battle.net/authorize?x");
   });
 
-  it("an expired BattleTag says it is hidden", async () => {
+  it("an expired BattleTag is not on the profile", async () => {
     mount({
       twitch: { available: true },
       github: { available: true },
@@ -289,8 +297,18 @@ describe("ServiceCards", () => {
       },
     });
     await flush();
-    expect(text()).toContain("Hidden: confirm on Battle.net to show it again.");
     expect(text()).toContain("Not on your profile");
+    expect(text()).toContain("Confirm within 0 days");
+  });
+
+  it("a Twitch copy blanked after a day waits for Twitch", async () => {
+    mount({
+      twitch: { available: true, account: account("twitch", { display_name: "", profile_url: "" }) },
+      github: { available: true },
+      battlenet: { available: true },
+    });
+    await flush();
+    expect(text()).toContain("Waiting for Twitch");
   });
 
   it("disconnects in one press and offers to connect again", async () => {
