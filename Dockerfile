@@ -1,7 +1,7 @@
 # ============================================
 # Stage 1: Build the web client
 # ============================================
-FROM node:24-alpine AS builder
+FROM node:25-alpine AS builder
 
 RUN apk add --no-cache git python3 make g++
 
@@ -74,7 +74,7 @@ RUN pnpm --filter client exec node scripts/bot-api/prerender-docs.mjs
 # ============================================
 # Stage 2: Minimal runtime image
 # ============================================
-FROM node:24-alpine
+FROM node:25-alpine
 
 WORKDIR /app
 
