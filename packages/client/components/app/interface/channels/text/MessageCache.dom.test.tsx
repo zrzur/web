@@ -70,9 +70,7 @@ function mount(client: ReturnType<typeof fakeClient>) {
 
 const channel = (id: string) => ({ id }) as never;
 const state = (messages: Fake[]) => ({
-  messages: messages as never,
-  atStart: false,
-  atEnd: true,
+  window: { items: messages as never, atStart: false, atEnd: true },
 });
 /** Enough passes for the grace time to run out */
 const passTime = () => vi.advanceTimersByTime(PRUNE_GRACE + 2 * PRUNE_EVERY);
@@ -116,7 +114,7 @@ describe("MessageCache", () => {
     expect(client.count("c1")).toBe(0);
     expect(cache.unmanage(channel("c0"))).toBeUndefined();
     for (const name of names.slice(2)) expect(client.count(name)).toBe(20);
-    expect(cache.unmanage(channel("c2"))?.messages).toHaveLength(20);
+    expect(cache.unmanage(channel("c2"))?.window.items).toHaveLength(20);
   });
 
   it("keeps a message that is on screen somewhere else (search results)", () => {

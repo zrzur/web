@@ -6,7 +6,7 @@ import { render } from "solid-js/web";
 
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 
-import { Placeholders } from "./HistoryScroller";
+import { Placeholders } from "./Placeholders";
 
 type Callback = (entries: { isIntersecting: boolean }[]) => void;
 let observers: { callback: Callback; disconnected: boolean }[] = [];
