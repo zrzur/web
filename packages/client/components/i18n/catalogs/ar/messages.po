@@ -170,6 +170,11 @@ msgstr "{0, plural, zero {لا أعضاء جدد} one {عضو جديد واحد}
 msgid "{0, plural, one {# new mention} other {# new mentions}}"
 msgstr "{0, plural, zero {لا إشارات جديدة} one {إشارة جديدة واحدة} two {إشارتان جديدتان} few {# إشارات جديدة} many {# إشارة جديدة} other {# إشارة جديدة}}"
 
+#. placeholder {0}: props.unseen
+#: components/ui/components/features/messaging/bars/JumpToBottom.tsx
+msgid "{0, plural, one {# new message} other {# new messages}}"
+msgstr "{0, plural, zero {لا رسائل جديدة} one {رسالة جديدة واحدة} two {رسالتان جديدتان} few {# رسائل جديدة} many {# رسالة جديدة} other {# رسالة جديدة}}"
+
 #. placeholder {0}: props.online
 #: components/app/interface/discover/Cards.tsx
 #~ msgid "{0, plural, one {# online} other {# online}}"
@@ -5589,6 +5594,10 @@ msgstr "تعذّر جلب الاقتراحات. اكتب قيمة بنفسك."
 msgid "Couldn't load GIFs"
 msgstr "تعذّر تحميل صور GIF"
 
+#: components/app/interface/channels/text/Messages.tsx
+msgid "Couldn't load messages."
+msgstr "تعذّر تحميل الرسائل."
+
 #: components/app/interface/settings/server/ServerApps.tsx
 msgid "Couldn't load the bots."
 msgstr "تعذّر تحميل البوتات."
@@ -6940,6 +6949,7 @@ msgid "Discovery"
 msgstr "الاكتشاف"
 
 #: components/ui/components/design/Snackbar.tsx
+#: components/ui/components/features/messaging/bars/NewMessages.tsx
 msgid "Dismiss"
 msgstr "إغلاق"
 
@@ -22352,6 +22362,7 @@ msgstr "الثقة والأمان"
 msgid "Try a different word or explore the categories."
 msgstr "جرّب كلمة أخرى أو تصفّح الفئات."
 
+#: components/app/interface/channels/text/Messages.tsx
 #: components/app/interface/discover/ServerPage.tsx
 #: components/app/interface/settings/server/apps/ServerAppPage.tsx
 #: components/app/interface/settings/server/insights/InsightsPage.tsx
@@ -25788,20 +25799,3 @@ msgstr "زرزور، مباشرةً على <0>سطح مكتبك.</0>"
 #: components/app/interface/settings/user/appearance/AppearanceMenu.tsx
 #~ msgid "Zrzur's own look: very dark neutral panels with Zrzur Pink as the one accent."
 #~ msgstr "مظهر زرزور الخاص: لوحات داكنة جدًا بألوان محايدة، وزهري زرزور هو اللون المميز الوحيد."
-
-#: components/auth/src/flows/SignUpConsent.tsx
-msgid "I accept the <0>Terms of Service</0> and the <1>Community Guidelines</1> and have read the <2>Privacy Policy</2>."
-msgstr "أوافق على <0>شروط الخدمة</0> و<1>إرشادات المجتمع</1>، وقد قرأت <2>سياسة الخصوصية</2>."
-
-#: components/auth/src/flows/Form.tsx
-msgid "Tick the box to accept before you continue."
-msgstr "ضع علامة في المربع للموافقة قبل المتابعة."
-
-#. placeholder {0}: props.unseen
-#: components/ui/components/features/messaging/bars/JumpToBottom.tsx
-msgid "{0, plural, one {# new message} other {# new messages}}"
-msgstr "{0, plural, zero {لا رسائل جديدة} one {رسالة جديدة واحدة} two {رسالتان جديدتان} few {# رسائل جديدة} many {# رسالة جديدة} other {# رسالة جديدة}}"
-
-#: components/app/interface/channels/text/Messages.tsx
-msgid "Couldn't load messages."
-msgstr "تعذّر تحميل الرسائل."

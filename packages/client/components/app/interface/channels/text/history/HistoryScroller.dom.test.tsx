@@ -1,5 +1,5 @@
-// The loading skeleton above and below a message list shimmers only while
-// it is on screen. It used to animate all the time, out of sight above the
+// The placeholder rows above and below a message list shimmer only while
+// they are on screen. They used to animate all the time, out of sight above the
 // messages: about a quarter of a processor core while the app only showed
 // a channel.
 import { render } from "solid-js/web";

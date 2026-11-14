@@ -170,6 +170,11 @@ msgstr "{0, plural, one {# new member} other {# new members}}"
 msgid "{0, plural, one {# new mention} other {# new mentions}}"
 msgstr "{0, plural, one {# new mention} other {# new mentions}}"
 
+#. placeholder {0}: props.unseen
+#: components/ui/components/features/messaging/bars/JumpToBottom.tsx
+msgid "{0, plural, one {# new message} other {# new messages}}"
+msgstr "{0, plural, one {# new message} other {# new messages}}"
+
 #. placeholder {0}: props.online
 #: components/app/interface/discover/Cards.tsx
 #~ msgid "{0, plural, one {# online} other {# online}}"
@@ -5589,6 +5594,10 @@ msgstr "Couldn't get suggestions. Type a value yourself."
 msgid "Couldn't load GIFs"
 msgstr "Couldn't load GIFs"
 
+#: components/app/interface/channels/text/Messages.tsx
+msgid "Couldn't load messages."
+msgstr "Couldn't load messages."
+
 #: components/app/interface/settings/server/ServerApps.tsx
 msgid "Couldn't load the bots."
 msgstr "Couldn't load the bots."
@@ -6940,6 +6949,7 @@ msgid "Discovery"
 msgstr "Discovery"
 
 #: components/ui/components/design/Snackbar.tsx
+#: components/ui/components/features/messaging/bars/NewMessages.tsx
 msgid "Dismiss"
 msgstr "Dismiss"
 
@@ -22355,6 +22365,7 @@ msgstr "Trust & Safety"
 msgid "Try a different word or explore the categories."
 msgstr "Try a different word or explore the categories."
 
+#: components/app/interface/channels/text/Messages.tsx
 #: components/app/interface/discover/ServerPage.tsx
 #: components/app/interface/settings/server/apps/ServerAppPage.tsx
 #: components/app/interface/settings/server/insights/InsightsPage.tsx
@@ -25791,20 +25802,3 @@ msgstr "Zrzur, right on <0>your desktop.</0>"
 #: components/app/interface/settings/user/appearance/AppearanceMenu.tsx
 #~ msgid "Zrzur's own look: very dark neutral panels with Zrzur Pink as the one accent."
 #~ msgstr "Zrzur's own look: very dark neutral panels with Zrzur Pink as the one accent."
-
-#: components/auth/src/flows/SignUpConsent.tsx
-msgid "I accept the <0>Terms of Service</0> and the <1>Community Guidelines</1> and have read the <2>Privacy Policy</2>."
-msgstr "I accept the <0>Terms of Service</0> and the <1>Community Guidelines</1> and have read the <2>Privacy Policy</2>."
-
-#: components/auth/src/flows/Form.tsx
-msgid "Tick the box to accept before you continue."
-msgstr "Tick the box to accept before you continue."
-
-#. placeholder {0}: props.unseen
-#: components/ui/components/features/messaging/bars/JumpToBottom.tsx
-msgid "{0, plural, one {# new message} other {# new messages}}"
-msgstr "{0, plural, one {# new message} other {# new messages}}"
-
-#: components/app/interface/channels/text/Messages.tsx
-msgid "Couldn't load messages."
-msgstr "Couldn't load messages."

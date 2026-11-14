@@ -170,6 +170,11 @@ msgstr "{0, plural, one {# neues Mitglied} other {# neue Mitglieder}}"
 msgid "{0, plural, one {# new mention} other {# new mentions}}"
 msgstr "{0, plural, one {# neue Erwähnung} other {# neue Erwähnungen}}"
 
+#. placeholder {0}: props.unseen
+#: components/ui/components/features/messaging/bars/JumpToBottom.tsx
+msgid "{0, plural, one {# new message} other {# new messages}}"
+msgstr "{0, plural, one {# neue Nachricht} other {# neue Nachrichten}}"
+
 #. placeholder {0}: props.online
 #: components/app/interface/discover/Cards.tsx
 #~ msgid "{0, plural, one {# online} other {# online}}"
@@ -5589,6 +5594,10 @@ msgstr "Vorschläge konnten nicht geladen werden. Gib selbst einen Wert ein."
 msgid "Couldn't load GIFs"
 msgstr "GIFs konnten nicht geladen werden"
 
+#: components/app/interface/channels/text/Messages.tsx
+msgid "Couldn't load messages."
+msgstr "Nachrichten konnten nicht geladen werden."
+
 #: components/app/interface/settings/server/ServerApps.tsx
 msgid "Couldn't load the bots."
 msgstr "Die Bots konnten nicht geladen werden."
@@ -6940,6 +6949,7 @@ msgid "Discovery"
 msgstr "Entdecken"
 
 #: components/ui/components/design/Snackbar.tsx
+#: components/ui/components/features/messaging/bars/NewMessages.tsx
 msgid "Dismiss"
 msgstr "Schließen"
 
@@ -22352,6 +22362,7 @@ msgstr "Trust & Safety"
 msgid "Try a different word or explore the categories."
 msgstr "Versuch ein anderes Wort oder stöbere in den Kategorien."
 
+#: components/app/interface/channels/text/Messages.tsx
 #: components/app/interface/discover/ServerPage.tsx
 #: components/app/interface/settings/server/apps/ServerAppPage.tsx
 #: components/app/interface/settings/server/insights/InsightsPage.tsx
@@ -25788,20 +25799,3 @@ msgstr "Zrzur, direkt auf <0>deinem Desktop.</0>"
 #: components/app/interface/settings/user/appearance/AppearanceMenu.tsx
 #~ msgid "Zrzur's own look: very dark neutral panels with Zrzur Pink as the one accent."
 #~ msgstr "Zrzurs eigener Look: sehr dunkle, neutrale Flächen mit Zrzur-Pink als einziger Akzentfarbe."
-
-#: components/auth/src/flows/SignUpConsent.tsx
-msgid "I accept the <0>Terms of Service</0> and the <1>Community Guidelines</1> and have read the <2>Privacy Policy</2>."
-msgstr "Ich akzeptiere die <0>Nutzungsbedingungen</0> und die <1>Community-Richtlinien</1> und habe die <2>Datenschutzerklärung</2> gelesen."
-
-#: components/auth/src/flows/Form.tsx
-msgid "Tick the box to accept before you continue."
-msgstr "Setze das Häkchen, um zuzustimmen, bevor du fortfährst."
-
-#. placeholder {0}: props.unseen
-#: components/ui/components/features/messaging/bars/JumpToBottom.tsx
-msgid "{0, plural, one {# new message} other {# new messages}}"
-msgstr "{0, plural, one {# neue Nachricht} other {# neue Nachrichten}}"
-
-#: components/app/interface/channels/text/Messages.tsx
-msgid "Couldn't load messages."
-msgstr "Nachrichten konnten nicht geladen werden."
