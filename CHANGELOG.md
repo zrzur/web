@@ -5,10 +5,12 @@
 ### Short links for bots (2026-11-14)
 
 * **A bot's add link is short:** `zrzur.cc/b/<bot id>` in the bot's settings and in the Developer Portal, the way server invites use `zrzur.cc/<code>`. The permissions chosen in the Developer Portal ride along. Old `app.zrzur.com/bot/<id>` links keep working.
+
 ### Official bots are called official everywhere (2026-11-14)
 
 * **The "Official bot" label** shows in the member list, the server's member, app and webhook settings, the audit log and on replies only you can see. It used to show only on messages and the profile card; the other places said "Bot".
 * **An official bot's profile** says "Run by the Zrzur team." in About this bot, instead of "Not verified by Zrzur".
+
 ### Developer documentation: second correctness pass, on the live site
 
 * **Footer of the public sites (Discover, Designs, Developers):** the Impressum link pointed to an address that does not exist (404); it opens the imprint now, and the legal links open the website in the reader's language.
@@ -37,15 +39,18 @@
 * **Release delay** for push to talk (default 0.2 s), so the end of a word is not cut off; also in the browser.
 * **Voice settings** show whether keys work in games right now, say in one line what is listened for (only your keys, nothing recorded or sent, only during a call), and have a test that shows a key being heard while another window is in front.
 * **In the browser** the settings say plainly that keys work only while the Zrzur tab is active, and point to the desktop app.
+
 ### Badges beside the name (2026-11-13)
 
 * **Profile card and full profile:** badges sit right after the name. The small card shows the three most important ones; the full profile shows all of them, on a second line where they don't fit beside the name. The box of badges under the username is gone.
+
 ### Discover server page (2026-11-13)
 
 * **Descriptions are formatted.** A server's or bot's description on its Discover page shows bold text, lists and links the way the server info panel does (it showed the raw `**` and `-` marks). Cards, link previews and search results show the same text as plain words.
 * **The link shown is the invite link.** A server with a custom link shows and copies that link (`zrzur.cc/<name>`), labelled "Invite link"; it showed the Discover page's own address under the bare word "Link". A server without one shows "Discover page". The address is never cut.
 * **Members** see only "Go to server"; the "You're a member" notice is gone.
 * **The official server** carries the official mark on its card, in the dialog and beside its name on the page (the card drew the verified seal).
+
 ### Message history: older and newer messages, and the way back to the present (2026-11-13)
 
 * **Older messages are there before you reach them.** The next page is asked for while two screens of messages are still left, in both directions, so the grey placeholder rows no longer come on screen at a normal scrolling pace (they filled up to two thirds of the list on every page before).
@@ -61,6 +66,7 @@
 * **Esc works while the pointer rests on something with a tooltip** (a message's time, an avatar). The tooltip took every Esc press and could not be closed by it, so "jump to the newest message" and the other Esc actions did nothing there.
 * "New messages since … / Jump to the beginning" is two buttons with names (jump, dismiss) the keyboard and screen readers reach.
 * Inside: the loaded part of a channel's history, the running request, failures and the unseen count have one owner (`components/app/interface/channels/text/history/`: `window.ts`, `reader.ts`, `controller.ts`, with unit tests) and `Messages.tsx` draws its state; `HistoryScroller` replaces `ListView2`.
+
 ### Memory over a long session (2026-11-13)
 
 * **The app no longer grows for as long as it is open.** Four things stayed in memory and are released now: every message ever fetched; the message box of every channel visited, with that channel's page; the video and its listeners after every call; and the call's room itself.
@@ -111,6 +117,7 @@
 
 * **Deleting a repeating event:** the card offers "Delete this time" and "Delete the whole series", each with its own confirmation and button. Deleting the series ends it (before, Delete wrote the next weekly occurrence and the card looked unchanged). After "Delete this time" a short line under Upcoming says "Deleted. The next one is on <date>." for a few seconds.
 * **Events and Lobby** are off in every server. The owner (Manage Server) turns each on in Server settings > Overview > Events and lobby; the switch saves at once and the row appears at the top of everyone's channel list. The Lobby row no longer shows to managers while the lobby is off; the switch on the Lobby design page also saves at once. Events need the platform flag and the server's switch; while a server has them off its events page says "Events are off in this server." (managers get a button to the settings) and Ctrl+Shift+9 does nothing.
+
 ### Sound library
 
 - Server settings, Soundboard: a Library tab next to Upload with ready-made sounds (Kenney, CC0). Pick a category, search by name in the page language or in English, listen (one at a time, at your soundboard volume; a file is fetched only when played) and Add under the library name in your language, which you can change first. Sounds the server has show as Added; without Manage Soundboard there is no Add. The tab is its own chunk; the Soundboard page fetches it and the library list as it opens (and again on hover or focus of the tabs if that failed), so the tab opens at once; long lists show 24 sounds at a time. A library the server has not stored yet says to try again in a minute. Strings in en, ar, de, fr, es, ru and zh-Hans.
@@ -272,11 +279,13 @@
 * Discover by keyboard: Esc leaves a server's page and returns to the same card; focus stays on the page when a view changes (categories, "All", Load more, the bar's search while typing); the search shows its focus ring again; focused cards stop clear of the sticky bar; Space switches Servers and Bots; Esc in a dialog opened from a listing closes only that dialog.
 * Server header: the arrow is the "Server menu" button (the row still opens the menu).
 * Readable contrast for the Lobby row while the lobby is off and for the active phone tab.
+
 ### Trust & Safety (DSA)
 
 * Review dashboard: a statement of reasons with facts, ground (rules or law), countries and the two automation answers; what was typed for one case never goes out with the next, every field resets after an action, and the case reloads after every failed action so a retry is not refused.
 * Review dashboard: the confirmation comes after the checks; a legal hold shows when no copy of the content exists.
 * Settings > Feedback & reports: each decision shows the whole statement of reasons. A decision that does not say what it followed hides that line; decisions older than statements show "Terms of Service" translated.
+
 ## Zrzur Web (unreleased)
 
 * Every "Source code" link (Settings, sign-in page, Discover) points to the tag or commit of the running build; Settings also shows the server's version and commit. The build writes `THIRD-PARTY-NOTICES.txt` (licence texts of everything bundled) and Settings links it. Build args `ZRZUR_GIT_COMMIT` / `ZRZUR_GIT_TAG`.
