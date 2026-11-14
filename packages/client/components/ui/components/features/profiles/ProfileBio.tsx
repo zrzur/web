@@ -62,12 +62,8 @@ const Bio = styled("div", {
     "& a": { textDecoration: "underline" },
 
     "&[data-clamped]": {
-      // four lines
-      maxHeight: "80px",
-      overflow: "hidden",
-      "&[data-long]": {
-        maskImage: "linear-gradient(to bottom, black 75%, transparent)",
-      },
+      // four whole lines, the last one ending in an ellipsis
+      lineClamp: 4,
     },
   },
 });
@@ -90,6 +86,7 @@ const More = styled("button", {
       outlineOffset: "2px",
       borderRadius: "4px",
     },
-    _phone: { minHeight: "44px" },
+    // phones: a 44 px target that leaves no hole above it
+    _phone: { minHeight: "44px", marginBlock: "-10px" },
   },
 });

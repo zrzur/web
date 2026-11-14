@@ -5,9 +5,7 @@ import { cva } from "styled-system/css";
 import { styled } from "styled-system/jsx";
 
 import { itemBox } from "./ProfileCard";
-
-/** Tiles in the row before Show more */
-export const TILES_SHOWN = 4;
+import { tilesShown, useProfileSize } from "./profileSize";
 
 export type ProfileTile = {
   key: string;
@@ -24,9 +22,14 @@ export type ProfileTile = {
  * full profile, so the two can never differ.
  */
 export function ProfileTiles(props: { tiles: ProfileTile[]; all?: boolean }) {
+  const size = useProfileSize();
   return (
-    <Grid>
-      <For each={props.all ? props.tiles : props.tiles.slice(0, TILES_SHOWN)}>
+    <Grid style={{ "--tiles": tilesShown(size()) }}>
+      <For
+        each={
+          props.all ? props.tiles : props.tiles.slice(0, tilesShown(size()))
+        }
+      >
         {(tile) => (
           <button
             class={itemBox({ tile: true, press: true })}
@@ -54,8 +57,9 @@ export function ProfileTilesMore(props: {
   leaves?: boolean;
   onPress: () => void;
 }) {
+  const size = useProfileSize();
   return (
-    <Show when={props.count > TILES_SHOWN}>
+    <Show when={props.count > tilesShown(size())}>
       <More
         type="button"
         aria-expanded={props.leaves ? undefined : props.open}
@@ -107,7 +111,7 @@ const More = styled("button", {
 const Grid = styled("div", {
   base: {
     display: "grid",
-    gridTemplateColumns: "repeat(4, minmax(0, 1fr))",
+    gridTemplateColumns: "repeat(var(--tiles, 3), minmax(0, 1fr))",
     gap: "8px",
   },
 });
@@ -117,7 +121,7 @@ const Picture = styled("span", {
     display: "grid",
     placeItems: "center",
     width: "100%",
-    height: "44px",
+    height: "48px",
     "& img": {
       width: "100%",
       height: "100%",
@@ -142,15 +146,16 @@ const caption = cva({
     "& bdi": {
       display: "block",
       maxWidth: "100%",
-      lineClamp: 2,
-      overflowWrap: "anywhere",
+      // one line, cut at its end: a name never breaks inside a word
+      overflow: "hidden",
+      textOverflow: "ellipsis",
+      whiteSpace: "nowrap",
       fontWeight: 600,
       color: "var(--profile-ink, var(--z-fg-primary))",
     },
-    // the muted line may use the tile's padding: it stays on one line
+    // the muted line stays on one line, inside the tile's padding
     "& > span": {
-      marginInline: "-4px",
-      maxWidth: "calc(100% + 8px)",
+      maxWidth: "100%",
       overflow: "hidden",
       textOverflow: "ellipsis",
       whiteSpace: "nowrap",

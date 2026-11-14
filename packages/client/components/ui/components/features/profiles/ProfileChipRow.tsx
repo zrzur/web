@@ -5,9 +5,9 @@ import { styled } from "styled-system/jsx";
 
 import { chip } from "./ProfileCard";
 
-const GAP = 6;
+const GAP = 8;
 /** Room the +N more chip takes in any language */
-const MORE_WIDTH = 64;
+const MORE_WIDTH = 80;
 
 /**
  * Chips on one row, never a second one. What does not fit folds behind
@@ -16,13 +16,15 @@ const MORE_WIDTH = 64;
  */
 export function ProfileChipRow<T>(props: {
   items: T[];
+  /** Every chip, on as many rows as they take (the full profile) */
+  all?: boolean;
   children: (item: T) => JSX.Element;
 }) {
   const [fit, setFit] = createSignal<number>();
   const [open, setOpen] = createSignal(false);
   const shown = () => {
     const limit = fit();
-    return open() || limit === undefined
+    return props.all || open() || limit === undefined
       ? props.items
       : props.items.slice(0, limit);
   };
@@ -30,7 +32,7 @@ export function ProfileChipRow<T>(props: {
   let list: HTMLUListElement | undefined;
 
   function measure() {
-    if (!list) return;
+    if (!list || props.all) return;
     const room = list.clientWidth;
     const widths = ([...list.children] as HTMLElement[]).map(
       (item) => item.offsetWidth,
@@ -59,7 +61,7 @@ export function ProfileChipRow<T>(props: {
   );
 
   return (
-    <Row ref={list} data-open={open() || undefined}>
+    <Row ref={list} data-open={props.all || open() || undefined}>
       <For each={shown()}>{(item) => <li>{props.children(item)}</li>}</For>
       <Show when={hidden() > 0}>
         <li>
@@ -85,7 +87,7 @@ const Row = styled("ul", {
     paddingInline: 0,
     display: "flex",
     flexWrap: "nowrap",
-    gap: "6px",
+    gap: "8px",
     minWidth: 0,
     overflow: "hidden",
     // room inside the clip for the focus ring of a chip

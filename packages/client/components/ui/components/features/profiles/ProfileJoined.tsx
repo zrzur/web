@@ -30,8 +30,8 @@ export function ProfileJoined(props: { user: User; member?: ServerMember }) {
           <img
             src={`${import.meta.env.BASE_URL}assets/web/zrzur-app-mark.svg`}
             alt=""
-            width={14}
-            height={14}
+            width={16}
+            height={16}
           />
           <span>
             <Trans>Zrzur since {since()}</Trans>
@@ -42,7 +42,7 @@ export function ProfileJoined(props: { user: User; member?: ServerMember }) {
             <Avatar
               src={props.member!.server!.animatedIconURL}
               fallback={server()}
-              size={14}
+              size={16}
               shape="rounded-square"
             />
             <span>
@@ -61,7 +61,8 @@ const Facts = styled("div", {
   base: {
     display: "flex",
     flexWrap: "wrap",
-    gap: "4px 16px",
+    flexDirection: "column",
+    gap: "4px",
     minWidth: 0,
     fontSize: "13px",
     lineHeight: "20px",
@@ -73,7 +74,7 @@ const Fact = styled("p", {
   base: {
     display: "flex",
     alignItems: "flex-start",
-    gap: "6px",
+    gap: "8px",
     minWidth: 0,
     margin: 0,
     overflowWrap: "anywhere",
@@ -81,7 +82,7 @@ const Fact = styled("p", {
     // the mark sits on the first line of its fact
     "& > :first-child": {
       flexShrink: 0,
-      marginBlockStart: "3px",
+      marginBlockStart: "2px",
     },
     "& > img": { borderRadius: "4px" },
   },

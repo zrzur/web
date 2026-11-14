@@ -1,5 +1,7 @@
 import {
+  ProfileAddFriend,
   ProfileCornerActions,
+  ProfileFooter,
   ProfileMessage,
   ProfilePrimaryActions,
 } from "./ProfileActions";
@@ -17,6 +19,8 @@ import { ProfileStatus } from "./ProfileStatus";
 export const Profile = {
   Actions: ProfilePrimaryActions,
   CornerActions: ProfileCornerActions,
+  AddFriend: ProfileAddFriend,
+  Footer: ProfileFooter,
   Message: ProfileMessage,
   Badges: ProfileBadges,
   Banner: ProfileBanner,

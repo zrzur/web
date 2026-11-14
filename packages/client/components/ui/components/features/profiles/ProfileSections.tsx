@@ -1,16 +1,27 @@
-import { For, JSX, Match, Show, Suspense, Switch, lazy } from "solid-js";
+import {
+  For,
+  JSX,
+  Match,
+  Show,
+  Suspense,
+  Switch,
+  createMemo,
+  lazy,
+} from "solid-js";
 
-import { Trans } from "@lingui/solid/macro";
+import { Trans, useLingui } from "@lingui/solid/macro";
 import { ServerMember, User, UserProfile } from "@zrzur/sdk/solid";
 import { styled } from "styled-system/jsx";
 
 import { ProfileBio } from "./ProfileBio";
 import { ProfileCard, ProfileSkeleton } from "./ProfileCard";
-import { ProfileGamesSection } from "./ProfileGames";
+import { ProfileGamesPanel } from "./ProfileGames";
+import { ProfileInterests } from "./ProfileInterests";
 import { ProfileJoined } from "./ProfileJoined";
 import { ProfileLinks } from "./ProfileLinks";
 import { ProfileRoles } from "./ProfileRoles";
 import { profileGames } from "./linkedGames";
+import { type ProfileSize, ProfileSizeContext } from "./profileSize";
 import { visibleSections } from "./sections";
 
 // a bot's About, maker and commands: loaded when a bot's card first opens
@@ -47,48 +58,57 @@ export function ProfileBody(props: {
   /** More sections after these */
   children?: JSX.Element;
 }) {
+  // read by the sections below, each time they draw
+  const size = (): ProfileSize => (props.full ? "full" : "card");
+
   return (
-    <Show when={!props.loading} fallback={<ProfileSkeleton />}>
-      <ProfileCard>
-        <Show when={props.failed}>
-          <section>
-            <LoadError>
-              <Trans>Couldn't load this profile.</Trans>
-            </LoadError>
-          </section>
-        </Show>
-        <ProfileSections
-          user={props.user}
-          member={props.member}
-          profile={props.profile}
-          full={props.full}
-          onClose={props.onClose}
-        />
-        <Show when={props.bot}>
-          {/* own boundaries: loading these never suspends the channel; the
+    <ProfileSizeContext.Provider value={size}>
+      <Show when={!props.loading} fallback={<ProfileSkeleton />}>
+        <ProfileCard>
+          <Show when={props.failed}>
+            <section>
+              <LoadError>
+                <Trans>Couldn't load this profile.</Trans>
+              </LoadError>
+            </section>
+          </Show>
+          <ProfileSections
+            user={props.user}
+            member={props.member}
+            profile={props.profile}
+            full={props.full}
+            onClose={props.onClose}
+          />
+          <Show when={props.bot}>
+            {/* own boundaries: loading these never suspends the channel; the
               placeholder keeps Roles below from jumping while they load */}
-          <Suspense fallback={<BotPlaceholder aria-hidden="true" />}>
-            <ProfileBotAbout
-              botId={props.user.id}
-              official={props.user.officialBot}
-            />
-            <ProfileOwner botId={props.user.id} bot={props.bot!} />
-            {/* About and Created by never wait for the commands */}
-            <Suspense>
-              <ProfileCommands
+            <Suspense fallback={<BotPlaceholder aria-hidden="true" />}>
+              <ProfileBotAbout
                 botId={props.user.id}
-                serverId={props.member?.id.server}
+                official={props.user.officialBot}
               />
+              <ProfileOwner botId={props.user.id} bot={props.bot!} />
+              {/* About and Created by never wait for the commands */}
+              <Suspense>
+                <ProfileCommands
+                  botId={props.user.id}
+                  serverId={props.member?.id.server}
+                />
+              </Suspense>
             </Suspense>
-          </Suspense>
-        </Show>
-        <ProfileRoles member={props.member} />
-        <Show when={!props.user.self}>
-          <ProfileMutuals user={props.user} onClose={props.onClose} />
-        </Show>
-        {props.children}
-      </ProfileCard>
-    </Show>
+          </Show>
+          <ProfileRoles member={props.member} full={props.full} />
+          <Show when={!props.user.self}>
+            <ProfileMutuals
+              user={props.user}
+              full={props.full}
+              onClose={props.onClose}
+            />
+          </Show>
+          {props.children}
+        </ProfileCard>
+      </Show>
+    </ProfileSizeContext.Provider>
   );
 }
 
@@ -113,6 +133,22 @@ export function ProfileSections(props: {
   /** Closes the card or dialog when a section leads somewhere else */
   onClose?: () => void;
 }) {
+  const { t } = useLingui();
+  // every linked service that has something to show, in a fixed order;
+  // a new service adds its entry here
+  const interests = createMemo(() => {
+    const games = profileGames(props.profile);
+    return games
+      ? [
+          {
+            id: "games",
+            label: t`Games`,
+            panel: () => <ProfileGamesPanel games={games} />,
+          },
+        ]
+      : [];
+  });
+
   return (
     <For each={visibleSections(props.profile?.sections)}>
       {(section) => (
@@ -135,11 +171,8 @@ export function ProfileSections(props: {
           <Match when={section === "wearing" && props.profile?.creator}>
             <ProfileWearing user={props.user} onLeave={props.onClose} />
           </Match>
-          <Match when={section === "games" && profileGames(props.profile)}>
-            <ProfileGamesSection
-              games={profileGames(props.profile)}
-              full={props.full}
-            />
+          <Match when={section === "games" && interests().length}>
+            <ProfileInterests interests={interests()} />
           </Match>
         </Switch>
       )}

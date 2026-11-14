@@ -2,6 +2,7 @@ import { describe, expect, it } from "vitest";
 
 import {
   contrast,
+  createProfileTheme,
   mixColours,
   readableName,
   readableTheme,
@@ -101,5 +102,21 @@ describe("profile colours", () => {
     expect(seededTheme("01ABC")).toEqual(seededTheme("01ABC"));
     expect(seededTheme("01ABC")).not.toEqual(seededTheme("01XYZ"));
     expect(seededTheme(undefined)).toBeUndefined();
+  });
+});
+
+describe("the Interests panel on a chosen theme", () => {
+  it("is tinted darker than the card, so light text only gains contrast", () => {
+    const style = createProfileTheme(
+      () => undefined,
+      () => undefined,
+      () => ({ top: "#1c8577", bottom: "#3f6ba4" }),
+    )() as Record<string, string>;
+    expect(style["--profile-panel"]).toBe(style["--profile-chip"]);
+    expect(style["--profile-panel"]).toMatch(/^rgb\(0 0 0 \/ \d+%\)$/);
+  });
+
+  it("keeps the app's own panel when no theme is chosen", () => {
+    expect(createProfileTheme(() => undefined)()).toEqual({});
   });
 });

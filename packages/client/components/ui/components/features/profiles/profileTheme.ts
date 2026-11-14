@@ -136,6 +136,8 @@ export function createProfileTheme(
       "--profile-chip": away(theme.chipAmount),
       "--profile-chip-hover": away(theme.chipAmount * 1.5),
       "--profile-bubble": chipSolid,
+      // the panel of a linked service: the same tint, so its text reads as chips do
+      "--profile-panel": away(theme.chipAmount),
       "--profile-banner-bg": ink(0.04),
       "--profile-banner-fallback": "none",
       // shared controls inside the card read the same colours

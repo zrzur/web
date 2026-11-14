@@ -26091,3 +26091,34 @@ msgstr "زرزور، مباشرةً على <0>سطح مكتبك.</0>"
 #: components/app/interface/settings/user/appearance/AppearanceMenu.tsx
 #~ msgid "Zrzur's own look: very dark neutral panels with Zrzur Pink as the one accent."
 #~ msgstr "مظهر زرزور الخاص: لوحات داكنة جدًا بألوان محايدة، وزهري زرزور هو اللون المميز الوحيد."
+
+#: components/ui/components/features/profiles/ProfileId.tsx
+msgid "Copy ID"
+msgstr "انسخ المعرّف"
+
+#. placeholder {0}: friends().length
+#: components/ui/components/features/profiles/ProfileMutuals.tsx
+msgid "Friends: {0}"
+msgstr "الأصدقاء: {0}"
+
+#: components/ui/components/features/profiles/ProfileInterests.tsx
+msgid "Interests"
+msgstr "الاهتمامات"
+
+#: components/ui/components/features/profiles/ProfileGames.tsx
+msgid "No games to show."
+msgstr "لا توجد ألعاب للعرض."
+
+#. placeholder {0}: props.member!.server!.name
+#: components/ui/components/features/profiles/ProfileRoles.tsx
+msgid "Roles in {0}"
+msgstr "الأدوار في {0}"
+
+#. placeholder {0}: servers().length
+#: components/ui/components/features/profiles/ProfileMutuals.tsx
+msgid "Servers: {0}"
+msgstr "السيرفرات: {0}"
+
+#: components/ui/components/features/profiles/ProfileId.tsx
+msgid "User ID"
+msgstr "معرّف المستخدم"

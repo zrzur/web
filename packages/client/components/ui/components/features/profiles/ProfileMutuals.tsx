@@ -1,4 +1,4 @@
-import { Show, createMemo, createResource } from "solid-js";
+import { For, Show, createMemo, createResource, createSignal } from "solid-js";
 
 import { Trans, useLingui } from "@lingui/solid/macro";
 import { useNavigate } from "@solidjs/router";
@@ -22,6 +22,8 @@ import { mutualFor } from "./mutualCache";
  */
 export default function ProfileMutuals(props: {
   user: User;
+  /** The full profile lists them at once; the card first shows how many */
+  full?: boolean;
   /** Closes the card or dialog when a chip leads somewhere else */
   onClose?: () => void;
 }) {
@@ -29,6 +31,8 @@ export default function ProfileMutuals(props: {
   const client = useClient();
   const navigate = useNavigate();
   const { openModal } = useModals();
+  const [opened, setOpened] = createSignal(false);
+  const listed = () => props.full || opened();
 
   const [mutual] = createResource(
     () => props.user,
@@ -60,12 +64,49 @@ export default function ProfileMutuals(props: {
             </Plain>
           }
         >
-          <Show when={servers().length}>
+          <Show when={!listed()}>
+            <Summary data-testid="mutual-summary">
+              <Show when={servers().length}>
+                <Stack aria-hidden="true">
+                  <For each={servers().slice(0, 3)}>
+                    {(server) => (
+                      <Avatar
+                        size={20}
+                        src={server.iconURL}
+                        fallback={server.name}
+                        shape="rounded-square"
+                      />
+                    )}
+                  </For>
+                </Stack>
+                <CountButton
+                  type="button"
+                  aria-expanded="false"
+                  onClick={() => setOpened(true)}
+                >
+                  <Trans>Servers: {servers().length}</Trans>
+                </CountButton>
+              </Show>
+              <Show when={servers().length && friends().length}>
+                <span aria-hidden="true">·</span>
+              </Show>
+              <Show when={friends().length}>
+                <CountButton
+                  type="button"
+                  aria-expanded="false"
+                  onClick={() => setOpened(true)}
+                >
+                  <Trans>Friends: {friends().length}</Trans>
+                </CountButton>
+              </Show>
+            </Summary>
+          </Show>
+          <Show when={listed() && servers().length}>
             <Group data-testid="mutual-servers">
               <Label>
                 <Trans>Servers</Trans>
               </Label>
-              <ProfileChipRow items={servers()}>
+              <ProfileChipRow items={servers()} all={props.full}>
                 {(server) => (
                   <button
                     type="button"
@@ -87,12 +128,12 @@ export default function ProfileMutuals(props: {
               </ProfileChipRow>
             </Group>
           </Show>
-          <Show when={friends().length}>
+          <Show when={listed() && friends().length}>
             <Group data-testid="mutual-friends">
               <Label>
                 <Trans>Friends</Trans>
               </Label>
-              <ProfileChipRow items={friends()}>
+              <ProfileChipRow items={friends()} all={props.full}>
                 {(friend) => (
                   <button
                     type="button"
@@ -119,6 +160,55 @@ export default function ProfileMutuals(props: {
     </Show>
   );
 }
+
+/** The card's one line: whose icons, and how many of each */
+const Summary = styled("div", {
+  base: {
+    display: "flex",
+    flexWrap: "wrap",
+    alignItems: "center",
+    gap: "8px",
+    minWidth: 0,
+    fontSize: "13px",
+    lineHeight: "20px",
+    color: "var(--profile-ink-2, var(--z-fg-secondary))",
+  },
+});
+
+/** Icons overlapping by a third, each cut out of the card by a ring */
+const Stack = styled("span", {
+  base: {
+    display: "inline-flex",
+    flexShrink: 0,
+    paddingInlineStart: "6px",
+    "& > *": {
+      marginInlineStart: "-6px",
+      borderRadius: "var(--z-radius-sm, 6px)",
+      boxShadow: "0 0 0 2px var(--profile-ring, var(--z-bg-floating))",
+    },
+  },
+});
+
+const CountButton = styled("button", {
+  base: {
+    minHeight: "24px",
+    padding: 0,
+    border: "none",
+    background: "none",
+    font: "inherit",
+    fontWeight: 500,
+    color: "var(--profile-ink, var(--z-fg-primary))",
+    textDecoration: "underline",
+    textUnderlineOffset: "3px",
+    cursor: "pointer",
+    borderRadius: "var(--z-radius-xs, 4px)",
+    _focusVisible: {
+      outline: "2px solid var(--z-focus)",
+      outlineOffset: "2px",
+    },
+    _phone: { minHeight: "44px", marginBlock: "-10px" },
+  },
+});
 
 const Group = styled("div", {
   base: {

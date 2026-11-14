@@ -1,153 +1,175 @@
 import { For, Show, createMemo, createSignal } from "solid-js";
 
 import { Trans, useLingui } from "@lingui/solid/macro";
+import { css, cx } from "styled-system/css";
 import { styled } from "styled-system/jsx";
 
 import { useModals } from "@revolt/modal";
 
-import { ProfileSection, chip } from "./ProfileCard";
+import { chip, panel } from "./ProfileCard";
 import { SteamTile } from "./SteamTile";
+import { cutLine } from "./cutLine";
 import { type ProfileGames, steamProfileUrl } from "./linkedGames";
+import { achievementsShown, useProfileSize } from "./profileSize";
 
 /** Games shown before "Show all" */
 const FIRST_GAMES = 3;
-/** Achievement icons in the strip */
-const STRIP = 12;
 
 /**
- * Games from the person's linked Steam account: name, how many games and
- * hours, the most played games and the latest achievements. Everything
- * comes from Zrzur's own copy, and pictures load through Zrzur's media
- * proxy; the viewer's browser never contacts Steam. A private account
- * shows one plain line, without its name or link.
+ * Games from the person's linked Steam account, as one panel: who, how many
+ * games and hours, View, the most played games with their pictures and
+ * hours, and two rows of the latest achievements. Everything comes from
+ * Zrzur's own copy, and pictures load through Zrzur's media proxy; the
+ * viewer's browser never contacts Steam. A private account shows one plain
+ * line, without its name or link.
  */
-export function ProfileGamesSection(props: {
-  games?: ProfileGames;
-  full?: boolean;
-}) {
+export function ProfileGamesPanel(props: { games: ProfileGames }) {
   const { t, i18n } = useLingui();
   const { openModal } = useModals();
+  const size = useProfileSize();
   const [open, setOpen] = createSignal(false);
   const number = (value: number) =>
     new Intl.NumberFormat(i18n().locale).format(value);
 
-  const list = createMemo(() => props.games?.games ?? []);
+  const list = createMemo(() => props.games.games ?? []);
   const shown = createMemo(() =>
     open() ? list() : list().slice(0, FIRST_GAMES),
   );
   const strip = createMemo(() =>
-    (props.games?.achievements ?? []).slice(0, STRIP),
+    (props.games.achievements ?? []).slice(0, achievementsShown(size())),
   );
-  const link = createMemo(() =>
-    props.games ? steamProfileUrl(props.games.profile_url) : undefined,
-  );
+  const link = createMemo(() => steamProfileUrl(props.games.profile_url));
 
   const openLink = (url: URL) =>
     openModal({ type: "link_warning", url, display: url.toString() });
 
   return (
-    <Show when={props.games}>
-      {(games) => (
-        <ProfileSection title={<Trans>Games</Trans>}>
-          <Show
-            when={!games().private}
-            fallback={
-              <Plain>
-                <Trans>This Steam account is private.</Trans>
-              </Plain>
+    <div class={panel()} data-testid="profile-games">
+      <Show
+        when={!props.games.private}
+        fallback={
+          <Plain>
+            <Trans>This Steam account is private.</Trans>
+          </Plain>
+        }
+      >
+        <Head>
+          <SteamTile name={props.games.display_name} size={40} round />
+          <HeadText>
+            <Show
+              when={link()}
+              fallback={
+                <Name class={cutLine()} dir="auto">
+                  {props.games.display_name}
+                </Name>
+              }
+            >
+              {(url) => (
+                <NameLink
+                  class={cutLine()}
+                  type="button"
+                  dir="auto"
+                  title={t`Open Steam profile`}
+                  onClick={() => openLink(url())}
+                >
+                  {props.games.display_name}
+                </NameLink>
+              )}
+            </Show>
+            <Facts>
+              <Show when={props.games.game_count !== undefined}>
+                {t`${number(props.games.game_count ?? 0)} games`}
+                {" · "}
+                {t`${number(props.games.total_hours ?? 0)} h`}
+                {" · "}
+              </Show>
+              <Trans>From Steam</Trans>
+            </Facts>
+          </HeadText>
+          <button
+            class={cx(chip({ press: true }), keep)}
+            type="button"
+            onClick={() =>
+              openModal({ type: "steam_games", games: props.games })
             }
           >
-            <Head>
-              <SteamTile name={games().display_name} size={36} round />
-              <HeadText>
-                <Show
-                  when={link()}
-                  fallback={
-                    <Name>
-                      <bdi>{games().display_name}</bdi>
-                    </Name>
-                  }
-                >
-                  {(url) => (
-                    <NameLink
-                      type="button"
-                      title={t`Open Steam profile`}
-                      onClick={() => openLink(url())}
-                    >
-                      <bdi>{games().display_name}</bdi>
-                    </NameLink>
-                  )}
-                </Show>
-                <Facts>
-                  <Show when={games().game_count !== undefined}>
-                    {t`${number(games().game_count ?? 0)} games`}
-                    {" · "}
-                    {t`${number(games().total_hours ?? 0)} h`}
-                    {" · "}
-                  </Show>
-                  <Trans>From Steam</Trans>
-                </Facts>
-              </HeadText>
-              <button
-                class={chip({ press: true })}
-                type="button"
-                onClick={() => openModal({ type: "steam_games", games: games() })}
-              >
-                <Trans>View</Trans>
-              </button>
-            </Head>
+            <span>
+              <Trans>View</Trans>
+            </span>
+          </button>
+        </Head>
 
-            <Show when={shown().length}>
-              <List>
-                <For each={shown()}>
-                  {(game) => (
-                    <li>
-                      <SteamTile url={game.icon_url} name={game.name} size={28} />
-                      <GameName>
-                        <bdi lang="en">{game.name}</bdi>
-                      </GameName>
-                      <Hours>{t`${number(game.hours)} h`}</Hours>
-                    </li>
-                  )}
-                </For>
-              </List>
+        <Show
+          when={shown().length}
+          fallback={
+            <Show when={!strip().length}>
+              <Plain>
+                <Trans>No games to show.</Trans>
+              </Plain>
             </Show>
-            <Show when={list().length > FIRST_GAMES}>
-              <More type="button" onClick={() => setOpen(!open())}>
-                <Show
-                  when={open()}
-                  fallback={<Trans>Show all {list().length}</Trans>}
-                >
-                  <Trans>Show less</Trans>
-                </Show>
-              </More>
+          }
+        >
+          <List>
+            <For each={shown()}>
+              {(game) => (
+                <li>
+                  <SteamTile url={game.icon_url} name={game.name} size={32} />
+                  <span class={cx(cutLine(), gameName)} dir="auto" lang="en">
+                    {game.name}
+                  </span>
+                  <Hours>{t`${number(game.hours)} h`}</Hours>
+                </li>
+              )}
+            </For>
+          </List>
+        </Show>
+        <Show when={list().length > FIRST_GAMES}>
+          <More
+            type="button"
+            aria-expanded={open()}
+            onClick={() => setOpen(!open())}
+          >
+            <Show
+              when={open()}
+              fallback={<Trans>Show all {list().length}</Trans>}
+            >
+              <Trans>Show less</Trans>
             </Show>
+          </More>
+        </Show>
 
-            <Show when={strip().length}>
-              <StripTitle>
-                <Trans>Latest achievements</Trans>
-              </StripTitle>
-              <Strip>
-                <For each={strip()}>
-                  {(achievement) => (
-                    <li title={`${achievement.name} · ${achievement.game}`}>
-                      <SteamTile
-                        url={achievement.icon_url}
-                        name={achievement.name}
-                        size={28}
-                      />
-                      <span class="sr" lang="en">
-                        {achievement.name} · {achievement.game}
-                      </span>
-                    </li>
-                  )}
-                </For>
-              </Strip>
-            </Show>
-          </Show>
-        </ProfileSection>
-      )}
-    </Show>
+        <Show when={strip().length}>
+          <Sub>
+            <SubTitle>
+              <Trans>Latest achievements</Trans>
+            </SubTitle>
+            <Strip>
+              <For each={strip()}>
+                {(achievement) => (
+                  <li title={`${achievement.name} · ${achievement.game}`}>
+                    <SteamTile
+                      url={achievement.icon_url}
+                      name={achievement.name}
+                      fill
+                    />
+                    <span class="sr" lang="en">
+                      {achievement.name} · {achievement.game}
+                    </span>
+                  </li>
+                )}
+              </For>
+            </Strip>
+          </Sub>
+        </Show>
+        <Credit>
+          <Trans>
+            Steam is a trademark of Valve Corporation; Zrzur is not affiliated
+            with Valve. Game pictures, achievement names and icons belong to
+            their owners.
+          </Trans>
+        </Credit>
+      </Show>
+    </div>
   );
 }
 
@@ -173,6 +195,7 @@ const HeadText = styled("div", {
   base: {
     display: "flex",
     flexDirection: "column",
+    alignItems: "flex-start",
     flex: 1,
     minWidth: 0,
   },
@@ -180,42 +203,49 @@ const HeadText = styled("div", {
 
 const Name = styled("strong", {
   base: {
+    maxWidth: "100%",
     fontWeight: 600,
-    fontSize: "14px",
+    fontSize: "15px",
     lineHeight: "20px",
     color: "var(--profile-ink, var(--z-fg-primary))",
-    overflow: "hidden",
-    textOverflow: "ellipsis",
-    whiteSpace: "nowrap",
   },
 });
 
 const NameLink = styled("button", {
   base: {
-    all: "unset",
+    maxWidth: "100%",
+    padding: 0,
+    border: "none",
+    background: "none",
+    font: "inherit",
     cursor: "pointer",
     fontWeight: 600,
-    fontSize: "14px",
+    fontSize: "15px",
     lineHeight: "20px",
-    color: "var(--z-link)",
-    overflow: "hidden",
-    textOverflow: "ellipsis",
-    whiteSpace: "nowrap",
-    borderRadius: "var(--z-radius-xs)",
+    color: "var(--profile-ink, var(--z-fg-primary))",
+    borderRadius: "var(--z-radius-xs, 4px)",
+    // a 24 px target on the 20 px line (WCAG 2.5.8)
+    minHeight: "24px",
+    marginBlock: "-2px",
 
-    "&:hover": { textDecoration: "underline" },
-    "&:focus-visible": { outline: "2px solid var(--z-focus)" },
+    _hover: { textDecoration: "underline" },
+    _focusVisible: {
+      outline: "2px solid var(--z-focus)",
+      outlineOffset: "2px",
+    },
+    // phones: a 44 px target that keeps the line where it was
+    _phone: { minHeight: "44px", marginBlock: "-12px" },
   },
 });
 
 const Facts = styled("span", {
   base: {
+    maxWidth: "100%",
     fontSize: "12px",
     lineHeight: "16px",
     color: "var(--profile-ink-2, var(--z-fg-secondary))",
-    overflow: "hidden",
-    textOverflow: "ellipsis",
-    whiteSpace: "nowrap",
+    // a longer language takes a second line; nothing is cut
+    overflowWrap: "anywhere",
   },
 });
 
@@ -233,21 +263,19 @@ const List = styled("ul", {
       alignItems: "center",
       gap: "8px",
       minWidth: 0,
+      minHeight: "32px",
     },
   },
 });
 
-const GameName = styled("span", {
-  base: {
-    flex: 1,
-    minWidth: 0,
-    fontSize: "13px",
-    lineHeight: "20px",
-    color: "var(--profile-ink, var(--z-fg-primary))",
-    overflow: "hidden",
-    textOverflow: "ellipsis",
-    whiteSpace: "nowrap",
-  },
+/** View keeps its width; the name beside it gives way */
+const keep = css({ flexShrink: 0 });
+
+const gameName = css({
+  flex: 1,
+  fontSize: "13px",
+  lineHeight: "20px",
+  color: "var(--profile-ink, var(--z-fg-primary))",
 });
 
 const Hours = styled("span", {
@@ -262,26 +290,45 @@ const Hours = styled("span", {
 
 const More = styled("button", {
   base: {
-    all: "unset",
-    cursor: "pointer",
     alignSelf: "flex-start",
     minHeight: "24px",
+    padding: 0,
+    border: "none",
+    background: "none",
+    font: "inherit",
     fontSize: "13px",
     lineHeight: "20px",
-    color: "var(--z-link)",
-    borderRadius: "var(--z-radius-xs)",
+    fontWeight: 600,
+    color: "var(--profile-ink, var(--z-fg-primary))",
+    cursor: "pointer",
+    borderRadius: "var(--z-radius-xs, 4px)",
 
-    "&:hover": { textDecoration: "underline" },
-    "&:focus-visible": { outline: "2px solid var(--z-focus)" },
-    "@media (pointer: coarse)": { minHeight: "44px" },
+    _hover: { textDecoration: "underline" },
+    _focusVisible: {
+      outline: "2px solid var(--z-focus)",
+      outlineOffset: "2px",
+    },
+    _phone: { minHeight: "44px", marginBlock: "-10px" },
   },
 });
 
-const StripTitle = styled("span", {
+/** Achievements, under a line of their own inside the panel */
+const Sub = styled("div", {
+  base: {
+    display: "flex",
+    flexDirection: "column",
+    gap: "8px",
+    paddingBlockStart: "var(--profile-gap, 12px)",
+    borderBlockStart: "1px solid var(--profile-line, var(--z-border-subtle))",
+  },
+});
+
+const SubTitle = styled("span", {
   base: {
     fontSize: "12px",
     lineHeight: "16px",
-    color: "var(--profile-ink-2, var(--z-fg-secondary))",
+    fontWeight: 600,
+    color: "var(--profile-ink-2, var(--z-fg-muted))",
   },
 });
 
@@ -290,11 +337,13 @@ const Strip = styled("ul", {
     listStyle: "none",
     margin: 0,
     padding: 0,
-    display: "flex",
-    flexWrap: "wrap",
-    gap: "6px",
+    display: "grid",
+    // tiles of about 40 px: seven in a row on the card, eleven on the full
+    // profile, whatever the border and padding leave
+    gridTemplateColumns: "repeat(auto-fill, minmax(36px, 1fr))",
+    gap: "var(--profile-tile-gap, 4px)",
 
-    "& li": { display: "flex" },
+    "& li": { position: "relative", display: "flex", aspectRatio: "1" },
     "& .sr": {
       position: "absolute",
       width: "1px",
@@ -303,5 +352,14 @@ const Strip = styled("ul", {
       clip: "rect(0 0 0 0)",
       whiteSpace: "nowrap",
     },
+  },
+});
+
+const Credit = styled("p", {
+  base: {
+    margin: 0,
+    fontSize: "12px",
+    lineHeight: "16px",
+    color: "var(--profile-ink-2, var(--z-fg-secondary))",
   },
 });

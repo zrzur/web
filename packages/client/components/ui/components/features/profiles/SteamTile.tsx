@@ -18,19 +18,21 @@ export function SteamTile(props: {
   size?: number;
   wide?: boolean;
   round?: boolean;
+  /** Takes the size of its grid cell instead of a fixed one */
+  fill?: boolean;
 }) {
   const client = useClient();
   const [failed, setFailed] = createSignal(false);
-  const src = () =>
-    failed() ? undefined : steamImage(client(), props.url);
+  const src = () => (failed() ? undefined : steamImage(client(), props.url));
   const letter = () => Array.from(props.name.trim())[0]?.toUpperCase() ?? "?";
 
   return (
     <Box
       data-wide={props.wide ? "" : undefined}
       data-round={props.round ? "" : undefined}
+      data-fill={props.fill ? "" : undefined}
       style={
-        props.wide
+        props.wide || props.fill
           ? undefined
           : { width: `${props.size ?? 32}px`, height: `${props.size ?? 32}px` }
       }
@@ -73,8 +75,11 @@ const Box = styled("span", {
     justifyContent: "center",
     overflow: "hidden",
     borderRadius: "var(--z-radius-sm)",
-    background: "var(--z-bg-raised)",
-    color: "var(--z-fg-primary)",
+    // on a themed profile: the same darker tint as its chips
+    background: "var(--profile-chip, var(--z-float-tile, var(--z-bg-raised)))",
+    color: "var(--profile-ink, var(--z-fg-primary))",
+
+    "&[data-fill]": { width: "100%", height: "100%" },
 
     "&[data-round]": { borderRadius: "var(--z-radius-pill)" },
     "&[data-wide]": {

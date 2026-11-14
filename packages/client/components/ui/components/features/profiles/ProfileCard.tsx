@@ -39,7 +39,7 @@ const Section = styled("section", {
     // the one rule for the lines between sections: a section that has nothing
     // to show draws nothing, so a line is never skipped or doubled
     "&:not(:first-child)": {
-      paddingBlockStart: "12px",
+      paddingBlockStart: "var(--profile-gap, 12px)",
       borderBlockStart: "1px solid var(--profile-line, var(--z-border-subtle))",
     },
   },
@@ -77,7 +77,7 @@ export const ProfileCard = styled("div", {
     minWidth: 0,
     display: "flex",
     flexDirection: "column",
-    gap: "12px",
+    gap: "var(--profile-gap, 12px)",
   },
 });
 
@@ -91,7 +91,8 @@ export const chip = cva({
     maxWidth: "100%",
     minHeight: "28px",
     paddingBlock: 0,
-    paddingInline: "8px",
+    // text never comes closer than 12 px to the edge of its chip
+    paddingInline: "12px",
     borderRadius: "var(--z-radius-sm, 6px)",
     border: "1px solid var(--profile-line, var(--z-border-subtle))",
     background: "var(--profile-chip, var(--z-bg-input))",
@@ -149,7 +150,7 @@ export const itemBox = cva({
   },
   variants: {
     tile: {
-      true: { flexDirection: "column", gap: "4px", padding: "8px" },
+      true: { flexDirection: "column", gap: "8px", padding: "12px" },
     },
     press: {
       true: {
@@ -174,12 +175,31 @@ export const itemBox = cva({
   },
 });
 
+/**
+ * The one filled panel of a profile: what a linked service shows (games
+ * today). It wears the darker tint of a chosen theme, like chips do.
+ */
+export const panel = cva({
+  base: {
+    display: "flex",
+    flexDirection: "column",
+    gap: "var(--profile-gap, 12px)",
+    minWidth: 0,
+    padding: "var(--profile-gap, 12px)",
+    borderRadius: "var(--z-radius, 10px)",
+    background:
+      "var(--profile-panel, var(--z-dialog-card, var(--z-bg-raised)))",
+  },
+});
+
 /** Stands in for the sections while they load */
 export function ProfileSkeleton() {
   return (
     <Bars aria-hidden="true">
       <i />
       <i />
+      <i />
+      <i data-box />
       <i />
     </Bars>
   );
@@ -189,13 +209,18 @@ const Bars = styled("div", {
   base: {
     display: "flex",
     flexDirection: "column",
-    gap: "8px",
+    gap: "12px",
     "& i": {
+      display: "block",
       height: "16px",
       borderRadius: "var(--z-radius-sm, 6px)",
       background: "var(--profile-chip, var(--z-bg-input))",
     },
     "& i:first-child": { width: "40%" },
-    "& i:last-child": { width: "72%" },
+    "& i:nth-child(3)": { width: "72%" },
+    "& i[data-box]": {
+      height: "120px",
+      borderRadius: "var(--z-radius, 10px)",
+    },
   },
 });

@@ -71,7 +71,7 @@ function useProfileActions(props: Props) {
 }
 
 /**
- * Small controls over the banner corner: add friend, edit, more
+ * Small controls over the banner corner: edit, more, close
  */
 export function ProfileCornerActions(props: Props) {
   const { t } = useLingui();
@@ -79,19 +79,6 @@ export function ProfileCornerActions(props: Props) {
 
   return (
     <>
-      <Show when={props.user.relationship === "None" && !props.user.bot}>
-        <button
-          class={cornerButton()}
-          type="button"
-          aria-label={t`Add friend`}
-          use:floating={{
-            tooltip: { placement: "top", content: t`Add friend` },
-          }}
-          onClick={() => actions.run(() => props.user.addFriend())}
-        >
-          <Icon name="user-plus" size={18} />
-        </button>
-      </Show>
       {/* your own card has Edit profile where others have the message box */}
       <Show when={canEdit(props) && !props.user.self}>
         <button
@@ -107,13 +94,58 @@ export function ProfileCornerActions(props: Props) {
         </button>
       </Show>
       <MoreMenu {...props} corner />
+      <button
+        class={cornerButton()}
+        type="button"
+        data-profile-close
+        aria-label={t`Close`}
+        use:floating={{
+          tooltip: { placement: "top", content: t`Close (Esc)` },
+        }}
+        onClick={() => props.onClose()}
+      >
+        <Icon name="x" size={18} />
+      </button>
     </>
   );
 }
 
 /**
- * Buttons on the banner edge: edit your own profile, add a bot, answer a
- * friend request. Message, Add friend and Copy ID are in the "..." menu.
+ * Add friend, as one small button on the banner's edge. Only for a person
+ * you have no tie with yet; requests are answered in the full profile.
+ */
+export function ProfileAddFriend(props: Props) {
+  const { t } = useLingui();
+  const actions = useProfileActions(props);
+
+  return (
+    <Show
+      when={
+        props.user.relationship === "None" &&
+        !props.user.bot &&
+        !props.user.self
+      }
+    >
+      <button
+        class={edgeButton()}
+        type="button"
+        data-profile-add-friend
+        aria-label={t`Add friend`}
+        use:floating={{
+          tooltip: { placement: "top", content: t`Add friend` },
+        }}
+        onClick={() => actions.run(() => props.user.addFriend())}
+      >
+        <Icon name="user-plus" size={18} />
+      </button>
+    </Show>
+  );
+}
+
+/**
+ * Buttons on the banner edge. For someone else: Message (the one filled
+ * action), add friend or the answer to a request, then "..." with the rest.
+ * For yourself: Edit profile. A public bot adds Add bot.
  */
 export function ProfilePrimaryActions(props: Props & { compact?: boolean }) {
   const actions = useProfileActions(props);
@@ -133,10 +165,23 @@ export function ProfilePrimaryActions(props: Props & { compact?: boolean }) {
         </Button>
       </Show>
       <Show when={!props.user.self && !props.compact}>
+        <Show when={props.user.relationship !== "Blocked"}>
+          <Button
+            size="sm"
+            shape="square"
+            // beside Add bot the bot's own action leads
+            variant={actions.publicBot() ? "tonal" : "filled"}
+            onPress={actions.openDm}
+          >
+            <Icon name="chat-circle" size={16} />
+            <Trans>Message</Trans>
+          </Button>
+        </Show>
         <Show when={props.user.relationship === "Incoming"}>
           <Button
             size="sm"
             shape="square"
+            variant="tonal"
             onPress={() => actions.run(() => props.user.addFriend())}
           >
             <Icon name="check" size={16} />
@@ -161,6 +206,7 @@ export function ProfilePrimaryActions(props: Props & { compact?: boolean }) {
             <Trans>Cancel request</Trans>
           </Button>
         </Show>
+        <ProfileAddFriend {...props} />
         <MoreMenu {...props} />
       </Show>
     </Row>
@@ -176,7 +222,7 @@ function MoreMenu(props: Props & { corner?: boolean }) {
   // a native <button>: use:floating is ignored on components
   return (
     <button
-      class={props.corner ? cornerButton() : plainButton()}
+      class={props.corner ? cornerButton() : edgeButton()}
       // in the button row it sits at the far end
       data-more
       type="button"
@@ -287,7 +333,7 @@ const cornerButton = cva({
     ...iconButton,
     width: "32px",
     height: "32px",
-    borderRadius: "8px",
+    borderRadius: "var(--z-radius, 10px)",
     color: "white",
     background: "rgba(10, 12, 16, 0.72)",
     _hover: { background: "rgba(10, 12, 16, 0.88)" },
@@ -296,16 +342,76 @@ const cornerButton = cva({
   },
 });
 
-const plainButton = cva({
+/** An icon button on the profile's own surface: the chip's colours, 32 px */
+const edgeButton = cva({
   base: {
     ...iconButton,
+    flexShrink: 0,
     width: "32px",
     height: "32px",
-    borderRadius: "8px",
-    color: "var(--z-icon-muted)",
-    background: "transparent",
-    _hover: { color: "var(--z-icon-hover)" },
+    borderRadius: "var(--z-radius, 10px)",
+    border: "1px solid var(--profile-line, var(--z-border-subtle))",
+    color: "var(--profile-ink, var(--z-fg-primary))",
+    background: "var(--profile-chip, var(--z-bg-input))",
+    _hover: { background: "var(--profile-chip-hover, var(--z-nav-hover))" },
+    _active: { background: "var(--profile-chip-hover, var(--z-nav-selected))" },
     _phone: { width: "44px", height: "44px" },
+  },
+});
+
+/**
+ * The card's foot, always in view under the scrolling sections: a message
+ * box for someone else, Edit profile for yourself, then View full profile.
+ */
+export function ProfileFooter(props: Props & { onOpenFull: () => void }) {
+  const actions = useProfileActions(props);
+
+  return (
+    <Foot data-testid="profile-footer">
+      <Show
+        when={props.user.self}
+        fallback={
+          <Show when={props.user.relationship !== "Blocked"}>
+            <ProfileMessage {...props} />
+          </Show>
+        }
+      >
+        <Button
+          variant="tonal"
+          size="sm"
+          shape="square"
+          onPress={actions.openEdit}
+        >
+          <Icon name="pencil-simple" size={16} />
+          <Trans>Edit profile</Trans>
+        </Button>
+      </Show>
+      <Button
+        variant="tonal"
+        size="sm"
+        shape="square"
+        onPress={props.onOpenFull}
+      >
+        <Trans>View full profile</Trans>
+      </Button>
+    </Foot>
+  );
+}
+
+const Foot = styled("div", {
+  base: {
+    flexShrink: 0,
+    display: "flex",
+    flexDirection: "column",
+    gap: "8px",
+    padding: "12px 16px 16px",
+    borderBlockStart: "1px solid var(--profile-line, var(--z-border-subtle))",
+    "& > button": {
+      width: "100%",
+      justifyContent: "center",
+      minHeight: "36px",
+    },
+    _phone: { "& > button": { minHeight: "44px" } },
   },
 });
 
@@ -317,7 +423,7 @@ const MessageBox = styled("div", {
     height: "40px",
     paddingInlineStart: "12px",
     paddingInlineEnd: "4px",
-    borderRadius: "8px",
+    borderRadius: "var(--z-radius, 10px)",
     background: "var(--profile-chip, var(--z-bg-input))",
     border: "1px solid var(--profile-line, var(--z-border-subtle))",
     transition: "border-color 0.12s ease",

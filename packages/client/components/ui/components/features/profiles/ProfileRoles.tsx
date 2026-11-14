@@ -10,7 +10,11 @@ import { ProfileChipRow } from "./ProfileChipRow";
 /**
  * Server roles as small chips with their colour
  */
-export function ProfileRoles(props: { member?: ServerMember }) {
+export function ProfileRoles(props: {
+  member?: ServerMember;
+  /** The full profile names the server and shows every role */
+  full?: boolean;
+}) {
   const roles = createMemo(() =>
     props.member
       ? props.member.orderedRoles
@@ -23,8 +27,17 @@ export function ProfileRoles(props: { member?: ServerMember }) {
 
   return (
     <Show when={roles().length}>
-      <ProfileSection title={<Trans>Roles</Trans>}>
-        <ProfileChipRow items={roles()}>
+      <ProfileSection
+        title={
+          <Show
+            when={props.full && props.member?.server}
+            fallback={<Trans>Roles</Trans>}
+          >
+            <Trans>Roles in {props.member!.server!.name}</Trans>
+          </Show>
+        }
+      >
+        <ProfileChipRow items={roles()} all={props.full}>
           {(role) => (
             <span class={chip()}>
               <Dot

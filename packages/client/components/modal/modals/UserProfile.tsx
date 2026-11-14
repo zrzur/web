@@ -7,8 +7,9 @@ import { styled } from "styled-system/jsx";
 
 import { useClient } from "@revolt/client";
 import { Dialog, DialogProps, Profile } from "@revolt/ui";
-import { fetchFullProfile } from "@revolt/ui/components/features/profiles/linkedGames";
+import { ProfileId } from "@revolt/ui/components/features/profiles/ProfileId";
 import { ProfileEffect } from "@revolt/ui/components/features/profiles/effects/ProfileEffect";
+import { fetchFullProfile } from "@revolt/ui/components/features/profiles/linkedGames";
 import { createProfileTheme } from "@revolt/ui/components/features/profiles/profileTheme";
 import {
   themeColours,
@@ -20,13 +21,13 @@ import { useModals } from "..";
 import { Modals } from "../types";
 
 /**
- * Full profile: one narrow column, the sections of the card, then Note.
+ * Full profile: the card's sections with room to breathe, then Note and ID.
  *
- * [ banner                 x ]
- * [ (avatar) (status)   ...  ]
- * [ Name / username          ]
- * [ sections, roles          ]
- * [ Note                     ]
+ * [ banner                              x ]
+ * [ (avatar) (status)  [Message] [+] [⋯] ]
+ * [ Name                          badges ]
+ * [ sections, roles in the server        ]
+ * [ in common, Note, User ID             ]
  */
 export function UserProfileModal(
   props: DialogProps & Modals & { type: "user_profile" },
@@ -49,7 +50,7 @@ export function UserProfileModal(
   );
 
   return (
-    <Dialog show={props.show} onClose={props.onClose} bare width={460}>
+    <Dialog show={props.show} onClose={props.onClose} bare width={600}>
       <Layout data-sheet-edge style={theme()}>
         <ProfileEffect
           effect={userStyleOf(props.user)?.effect}
@@ -104,6 +105,7 @@ export function UserProfileModal(
               <Show when={!props.user.self}>
                 <Profile.Note user={props.user} />
               </Show>
+              <ProfileId user={props.user} />
             </Profile.Body>
           </Details>
         </div>
@@ -128,11 +130,15 @@ const Layout = styled("div", {
     "--profile-surface":
       "var(--z-dialog-bg, var(--z-bg-modal, var(--z-bg-raised)))",
 
+    // more room than the card: 16 px between sections and inside the panel
+    "--profile-gap": "16px",
+    "--profile-tile-gap": "8px",
+
     position: "relative",
     display: "flex",
     flexDirection: "column",
     background: "var(--profile-surface)",
-    maxHeight: "min(638px, calc(100dvh - 98px))",
+    maxHeight: "min(760px, calc(100dvh - 98px))",
     minHeight: 0,
 
     // edge to edge on a phone: `data-sheet-edge` takes the sheet's padding off
@@ -162,8 +168,9 @@ const Details = styled("div", {
   base: {
     display: "flex",
     flexDirection: "column",
-    gap: "12px",
-    padding: "4px 20px 20px",
+    gap: "16px",
+    padding: "8px 24px 24px",
+    _phone: { padding: "8px 16px 24px" },
   },
 });
 
@@ -179,7 +186,7 @@ const Close = styled("button", {
     placeItems: "center",
     padding: 0,
     border: "none",
-    borderRadius: "8px",
+    borderRadius: "var(--z-radius, 10px)",
     cursor: "pointer",
     // sits over the banner: white on dark on any banner or theme
     color: "white",

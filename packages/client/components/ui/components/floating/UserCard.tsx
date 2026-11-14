@@ -20,18 +20,18 @@ import { createProfileTheme } from "../features/profiles/profileTheme";
 /**
  * Profile popout shown next to a name or avatar
  *
- * [banner .......... + ⋯]
- *  (avatar) (status)
- *  Name  BOT
+ * [banner .......... ⋯ ✕]
+ *  (avatar) (status)   [+]
+ *  Name            badges
  *  username#0000 • pronouns
- *  [badges]
  *  their sections, in their order
- *  roles
- *  [ Message @name                            ➤ ]
- *  View full profile
+ *  roles, in common
+ *  ------------------------------- (always in view)
+ *  [ Message @name            ➤ ]
+ *  [ View full profile          ]
  *
- * Everything sits flat on one sheet, and the sheet scrolls inside the card.
- * Your own card has Edit profile where the message box is for others.
+ * The sections scroll inside the card; the foot never scrolls away. Your own
+ * card has Edit profile where the message box is for others.
  */
 export function UserCard(
   props: JSX.Directives["floating"]["userCard"] &
@@ -91,6 +91,13 @@ export function UserCard(
                 onClose={props.onClose}
               />
             }
+            edge={
+              <Profile.AddFriend
+                user={props.user}
+                member={props.member}
+                onClose={props.onClose}
+              />
+            }
           />
 
           <Body>
@@ -119,18 +126,14 @@ export function UserCard(
               onClose={props.onClose}
             />
           </Body>
-
-          {/* your own card has no footer: Edit profile is in the "..." menu */}
-          <Show when={!props.user.self}>
-            <Footer>
-              <Profile.Message
-                user={props.user}
-                member={props.member}
-                onClose={props.onClose}
-              />
-            </Footer>
-          </Show>
         </div>
+
+        <Profile.Footer
+          user={props.user}
+          member={props.member}
+          onClose={props.onClose}
+          onOpenFull={() => openFull(true)}
+        />
       </Card>
     </Show>
   );
@@ -143,7 +146,7 @@ const Card = styled("div", {
     position: "relative",
     display: "flex",
     flexDirection: "column",
-    width: "340px",
+    width: "360px",
     maxWidth: "calc(100vw - 24px)",
     maxHeight: "min(640px, calc(100dvh - 32px))",
     overflow: "hidden",
@@ -183,17 +186,6 @@ const Body = styled("div", {
     display: "flex",
     flexDirection: "column",
     gap: "12px",
-    padding: "4px 16px 12px",
-  },
-});
-
-const Footer = styled("div", {
-  base: {
-    flexShrink: 0,
-    display: "flex",
-    flexDirection: "column",
-    gap: "8px",
-    padding: "12px 16px",
-    borderBlockStart: "1px solid var(--profile-line, var(--z-border-subtle))",
+    padding: "4px 16px 16px",
   },
 });

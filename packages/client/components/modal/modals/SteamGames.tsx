@@ -1,10 +1,18 @@
 import { For, Show, createMemo, createSignal } from "solid-js";
 
 import { Trans, useLingui } from "@lingui/solid/macro";
+import { cx } from "styled-system/css";
 import { styled } from "styled-system/jsx";
 
-import { Button, Dialog, DialogProps, FloatingSelect, MenuItem } from "@revolt/ui";
+import {
+  Button,
+  Dialog,
+  DialogProps,
+  FloatingSelect,
+  MenuItem,
+} from "@revolt/ui";
 import { SteamTile } from "@revolt/ui/components/features/profiles/SteamTile";
+import { cutLine } from "@revolt/ui/components/features/profiles/cutLine";
 import {
   formatDay,
   steamProfileUrl,
@@ -49,7 +57,7 @@ export function SteamGamesModal(
 
   return (
     <Dialog
-      size="lg"
+      size="xl"
       show={props.show}
       onClose={props.onClose}
       title={<Trans>Games from Steam</Trans>}
@@ -58,8 +66,8 @@ export function SteamGamesModal(
         <Head>
           <SteamTile name={props.games.display_name} size={48} round />
           <HeadText>
-            <Name>
-              <bdi>{props.games.display_name}</bdi>
+            <Name class={cutLine()} dir="auto">
+              {props.games.display_name}
             </Name>
             <Facts>
               {t`${number(props.games.game_count ?? 0)} games`}
@@ -73,7 +81,11 @@ export function SteamGamesModal(
           </HeadText>
           <Show when={profile()}>
             {(url) => (
-              <Button variant="outlined" size="sm" onPress={() => openLink(url())}>
+              <Button
+                variant="outlined"
+                size="sm"
+                onPress={() => openLink(url())}
+              >
                 <Trans>View on Steam</Trans>
               </Button>
             )}
@@ -81,91 +93,107 @@ export function SteamGamesModal(
         </Head>
 
         <Show when={props.games.games.length}>
-          <Heading>
-            <Trans>Most played</Trans>
-          </Heading>
-          <Grid>
-            <For each={props.games.games}>
-              {(item) => (
-                <li>
-                  <Card
-                    type="button"
-                    title={t`Open in the Steam store`}
-                    onClick={() => {
-                      const url = steamStoreUrl(item.store_url);
-                      if (url) openLink(url);
-                    }}
-                  >
-                    <SteamTile url={item.header_url} name={item.name} wide />
-                    <CardText>
-                      <CardName>
-                        <bdi lang="en">{item.name}</bdi>
-                      </CardName>
-                      <Small>
-                        {t`${number(item.hours)} h`}
+          <Group>
+            <Heading>
+              <Trans>Most played</Trans>
+            </Heading>
+            <Grid>
+              <For each={props.games.games}>
+                {(item) => (
+                  <li>
+                    <Card
+                      type="button"
+                      title={t`Open in the Steam store`}
+                      onClick={() => {
+                        const url = steamStoreUrl(item.store_url);
+                        if (url) openLink(url);
+                      }}
+                    >
+                      <SteamTile url={item.header_url} name={item.name} wide />
+                      <CardText>
+                        <CardName class={cutLine()} dir="auto" lang="en">
+                          {item.name}
+                        </CardName>
                         <Show when={item.achievements_total}>
-                          {" · "}
-                          {t`${number(item.achievements_unlocked ?? 0)} of ${number(item.achievements_total ?? 0)} achievements`}
+                          <Bar aria-hidden="true">
+                            <i
+                              style={{
+                                width: `${Math.min(100, Math.round(((item.achievements_unlocked ?? 0) / (item.achievements_total ?? 1)) * 100))}%`,
+                              }}
+                            />
+                          </Bar>
                         </Show>
-                      </Small>
-                    </CardText>
-                  </Card>
-                </li>
-              )}
-            </For>
-          </Grid>
+                        <Facts2>
+                          <span>
+                            <Show when={item.achievements_total}>
+                              {t`${number(item.achievements_unlocked ?? 0)} of ${number(item.achievements_total ?? 0)} achievements`}
+                            </Show>
+                          </span>
+                          <span>{t`${number(item.hours)} h`}</span>
+                        </Facts2>
+                      </CardText>
+                    </Card>
+                  </li>
+                )}
+              </For>
+            </Grid>
+          </Group>
         </Show>
 
         <Show when={props.games.achievements.length}>
-          <HeadingRow>
-            <Heading>
-              <Trans>Latest achievements</Trans>
-            </Heading>
-            <Show when={withAchievements().length > 1}>
-              <Filter>
-                <FloatingSelect
-                  label={t`Game`}
-                  value={game()}
-                  onChange={(event) => setGame(event.currentTarget.value)}
-                >
-                  <MenuItem value={ALL}>{t`All games`}</MenuItem>
-                  <For each={withAchievements()}>
-                    {(item) => (
-                      <MenuItem value={String(item.appid)}>{item.name}</MenuItem>
-                    )}
-                  </For>
-                </FloatingSelect>
-              </Filter>
-            </Show>
-          </HeadingRow>
-          <Achievements>
-            <For each={achievements()}>
-              {(achievement) => (
-                <li>
-                  <SteamTile
-                    url={achievement.icon_url}
-                    name={achievement.name}
-                    size={40}
-                  />
-                  <CardText>
-                    <CardName>
-                      <bdi lang="en">{achievement.name}</bdi>
-                    </CardName>
-                    <Show when={achievement.description}>
-                      <Line>
-                        <bdi lang="en">{achievement.description}</bdi>
-                      </Line>
-                    </Show>
-                    <Small>
-                      <bdi lang="en">{achievement.game}</bdi>
-                      {" · "}
-                      {formatDay(achievement.unlocked_on, i18n().locale)}
-                    </Small>
-                  </CardText>
-                </li>
-              )}
-            </For>
-          </Achievements>
+          <Group>
+            <HeadingRow>
+              <Heading>
+                <Trans>Latest achievements</Trans>
+              </Heading>
+              <Show when={withAchievements().length > 1}>
+                <Filter>
+                  <FloatingSelect
+                    label={t`Game`}
+                    value={game()}
+                    onChange={(event) => setGame(event.currentTarget.value)}
+                  >
+                    <MenuItem value={ALL}>{t`All games`}</MenuItem>
+                    <For each={withAchievements()}>
+                      {(item) => (
+                        <MenuItem value={String(item.appid)}>
+                          {item.name}
+                        </MenuItem>
+                      )}
+                    </For>
+                  </FloatingSelect>
+                </Filter>
+              </Show>
+            </HeadingRow>
+            <Achievements>
+              <For each={achievements()}>
+                {(achievement) => (
+                  <li>
+                    <SteamTile
+                      url={achievement.icon_url}
+                      name={achievement.name}
+                      size={40}
+                    />
+                    <RowText>
+                      <CardName class={cutLine()} dir="auto" lang="en">
+                        {achievement.name}
+                      </CardName>
+                      <Show when={achievement.description}>
+                        <Line class={cx(cutLine())} dir="auto" lang="en">
+                          {achievement.description}
+                        </Line>
+                      </Show>
+                      <Small>
+                        <bdi lang="en">{achievement.game}</bdi>
+                        {" · "}
+                        {formatDay(achievement.unlocked_on, i18n().locale)}
+                      </Small>
+                    </RowText>
+                  </li>
+                )}
+              </For>
+            </Achievements>
+          </Group>
         </Show>
 
         <Footer>
@@ -184,7 +212,7 @@ const Body = styled("div", {
   base: {
     display: "flex",
     flexDirection: "column",
-    gap: "16px",
+    gap: "24px",
     minWidth: 0,
   },
 });
@@ -209,13 +237,11 @@ const HeadText = styled("div", {
 
 const Name = styled("strong", {
   base: {
+    maxWidth: "100%",
     fontSize: "18px",
     lineHeight: "26px",
     fontWeight: 600,
     color: "var(--z-fg-primary)",
-    overflow: "hidden",
-    textOverflow: "ellipsis",
-    whiteSpace: "nowrap",
   },
 });
 
@@ -227,10 +253,21 @@ const Facts = styled("span", {
   },
 });
 
+/** A heading 12 px above what it names; groups sit 24 px apart */
+const Group = styled("section", {
+  base: {
+    display: "flex",
+    flexDirection: "column",
+    gap: "12px",
+    minWidth: 0,
+  },
+});
+
 const HeadingRow = styled("div", {
   base: {
     display: "flex",
-    alignItems: "center",
+    // the filter has a label above it: the heading sits on the field's line
+    alignItems: "flex-end",
     justifyContent: "space-between",
     flexWrap: "wrap",
     gap: "12px",
@@ -259,7 +296,7 @@ const Grid = styled("ul", {
     margin: 0,
     padding: 0,
     display: "grid",
-    gridTemplateColumns: "repeat(auto-fill, minmax(min(100%, 180px), 1fr))",
+    gridTemplateColumns: "repeat(auto-fill, minmax(min(100%, 192px), 1fr))",
     gap: "12px",
   },
 });
@@ -274,10 +311,59 @@ const Card = styled("button", {
     flexDirection: "column",
     overflow: "hidden",
     borderRadius: "var(--z-radius-md)",
-    background: "var(--z-bg-raised)",
+    border: "1px solid var(--z-float-divider, var(--z-border-subtle))",
+    background: "var(--z-dialog-card, var(--z-bg-raised))",
+    transition: "background-color 0.12s ease",
 
-    "&:hover": { background: "var(--z-hover)" },
-    "&:focus-visible": { outline: "2px solid var(--z-focus)" },
+    "&:hover": { background: "var(--z-float-hover, var(--z-nav-hover))" },
+    "&:active": { background: "var(--z-float-hover, var(--z-nav-selected))" },
+    "&:focus-visible": {
+      outline: "2px solid var(--z-focus)",
+      outlineOffset: "2px",
+    },
+  },
+});
+
+/** How far through a game's achievements the person is */
+const Bar = styled("span", {
+  base: {
+    display: "block",
+    height: "4px",
+    marginBlock: "4px",
+    borderRadius: "var(--z-radius-pill)",
+    background: "var(--z-float-divider, var(--z-border-subtle))",
+    overflow: "hidden",
+    "& i": {
+      display: "block",
+      height: "100%",
+      borderRadius: "inherit",
+      background: "var(--z-live)",
+    },
+  },
+});
+
+/** Achievements at the start, hours at the end, on one line */
+const Facts2 = styled("span", {
+  base: {
+    display: "flex",
+    justifyContent: "space-between",
+    gap: "8px",
+    fontSize: "12px",
+    lineHeight: "16px",
+    color: "var(--z-fg-secondary)",
+    fontVariantNumeric: "tabular-nums",
+    "& > :last-child": { flexShrink: 0 },
+  },
+});
+
+const RowText = styled("div", {
+  base: {
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "flex-start",
+    flex: 1,
+    minWidth: 0,
+    "& > *": { maxWidth: "100%" },
   },
 });
 
@@ -286,31 +372,27 @@ const CardText = styled("div", {
     display: "flex",
     flexDirection: "column",
     minWidth: 0,
-    padding: "8px 12px 12px",
-    gap: "2px",
+    padding: "12px",
+    gap: "4px",
   },
 });
 
 const CardName = styled("span", {
   base: {
-    fontSize: "14px",
+    display: "block",
+    fontSize: "15px",
     lineHeight: "20px",
     fontWeight: 600,
     color: "var(--z-fg-primary)",
-    overflow: "hidden",
-    textOverflow: "ellipsis",
-    whiteSpace: "nowrap",
   },
 });
 
 const Line = styled("span", {
   base: {
+    display: "block",
     fontSize: "13px",
-    lineHeight: "18px",
+    lineHeight: "20px",
     color: "var(--z-fg-secondary)",
-    overflow: "hidden",
-    textOverflow: "ellipsis",
-    whiteSpace: "nowrap",
   },
 });
 
@@ -328,17 +410,18 @@ const Achievements = styled("ul", {
     margin: 0,
     padding: 0,
     display: "grid",
-    gridTemplateColumns: "repeat(auto-fill, minmax(min(100%, 260px), 1fr))",
+    gridTemplateColumns: "repeat(auto-fill, minmax(min(100%, 280px), 1fr))",
     gap: "8px",
 
     "& li": {
       display: "flex",
       alignItems: "center",
-      gap: "4px",
+      gap: "12px",
       minWidth: 0,
-      paddingInlineStart: "12px",
+      padding: "12px",
       borderRadius: "var(--z-radius-md)",
-      background: "var(--z-bg-raised)",
+      border: "1px solid var(--z-float-divider, var(--z-border-subtle))",
+      background: "var(--z-dialog-card, var(--z-bg-raised))",
     },
   },
 });
@@ -346,8 +429,9 @@ const Achievements = styled("ul", {
 const Footer = styled("p", {
   base: {
     margin: 0,
-    paddingBlockStart: "12px",
-    borderBlockStart: "1px solid var(--z-border-subtle)",
+    paddingBlockStart: "16px",
+    borderBlockStart:
+      "1px solid var(--z-float-divider, var(--z-border-subtle))",
     fontSize: "12px",
     lineHeight: "16px",
     color: "var(--z-fg-secondary)",

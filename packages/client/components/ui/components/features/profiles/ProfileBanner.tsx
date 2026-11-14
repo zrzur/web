@@ -54,13 +54,13 @@ export function ProfileBanner(props: {
         <AvatarDecoration
           decoration={userStyleOf(props.user)?.decoration}
           file={userStyleOf(props.user)?.decoration_file}
-          size={props.size === "full" ? 96 : 72}
+          size={props.size === "full" ? 104 : 80}
           live
         >
           <Avatar
             src={avatar()}
             fallback={props.user.displayName}
-            size={props.size === "full" ? 96 : 72}
+            size={props.size === "full" ? 104 : 80}
             holepunch={official() ? undefined : "bottom-right"}
             onClick={props.onClickAvatar}
             interactive={
@@ -101,16 +101,21 @@ const Header = styled("div", {
     position: "relative",
     flexShrink: 0,
     userSelect: "none",
-    // the card's banner is 3:1 of its 340 px, or of the phone's width
-    "--banner-height": "113px",
-    "--avatar-ring": "80px",
+    // the card's banner is 3:1 of its 360 px, or of the phone's width
+    "--banner-height": "120px",
+    "--avatar-ring": "88px",
     _phone: { "--banner-height": "calc(100vw / 3)" },
     "--header-inset": "16px",
 
     "&[data-size='full']": {
-      "--banner-height": "140px",
-      "--avatar-ring": "104px",
-      "--header-inset": "20px",
+      "--banner-height": "168px",
+      "--avatar-ring": "112px",
+      "--header-inset": "24px",
+      // a phone has 16 px gutters and a banner 3:1 of its width
+      _phone: {
+        "--banner-height": "calc(100vw / 3)",
+        "--header-inset": "16px",
+      },
     },
   },
 });
@@ -147,6 +152,8 @@ const Corner = styled("div", {
 const AvatarRing = styled("div", {
   base: {
     position: "absolute",
+    // the ring starts on the text's edge: a decoration around the avatar
+    // then keeps clear of the card's own edge
     insetInlineStart: "var(--header-inset)",
     top: "calc(var(--banner-height) - var(--avatar-ring) / 2)",
     width: "var(--avatar-ring)",
