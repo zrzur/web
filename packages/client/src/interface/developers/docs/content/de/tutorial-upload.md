@@ -2,7 +2,7 @@
 
 `/report` erstellt eine CSV-Datei und postet sie.
 
-> Dieses Tutorial nutzt `@zrzur/sdk/bot`, das du noch nicht herunterladen kannst. Siehe [SDKs](/developers/docs/sdk). Alles, was es tut, geht auch ohne Bibliothek: [Baue einen vollständigen Bot](/developers/docs/tutorial-full-bot).
+> Dieses Tutorial nutzt `@zrzur/sdk/bot`, führe also zuerst `npm install @zrzur/sdk` im Ordner deines Bots aus. Siehe [SDKs](/developers/docs/sdk). Alles, was es tut, geht auch ohne Bibliothek: [Baue einen vollständigen Bot](/developers/docs/tutorial-full-bot).
 
 ## Bevor du beginnst {#before-you-start}
 
@@ -18,7 +18,7 @@ Starte es mit `node upload.mjs`.
 
 ## Probiere es aus {#try-it}
 
-Führe `/report` aus. Der Bot braucht Upload Files in diesem Kanal.
+Führe `/report` aus. Der Bot braucht „Dateien hochladen“ in diesem Kanal.
 
 ## Was es zeigt {#what-it-shows}
 

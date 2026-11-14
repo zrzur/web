@@ -53,7 +53,6 @@ Selbst gehostete Server haben eigene Adressen. `GET /` auf der API liefert sie, 
 - **Webhooks, Umfragen, Weiterleiten und geplante Events**, wo die Installation sie ausgeschaltet hat. `GET /` sagt, was an ist; siehe [Basis-URLs](/developers/docs/overview#base-urls).
 - **Interaktionen über HTTP** auf einem Server, dessen Einstellung `signing_key` leer ist. Dort antworten die Routen `FeatureDisabled`, und Bots nutzen das Gateway.
 - **Bots, die Bots oder Server erstellen, per Einladung beitreten oder Freunde haben.** Das tun Menschen. Die [Abdeckungsseite](/developers/docs/coverage) listet jeden Endpunkt, der Bots ablehnt.
-- **Das SDK als Paket.** Es ist noch nicht auf npm. Jede Seite hier funktioniert allein mit Node; siehe [SDKs](/developers/docs/sdk).
 
 ## Was jeder Status bedeutet {#status}
 

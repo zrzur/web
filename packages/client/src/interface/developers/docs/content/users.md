@@ -21,7 +21,9 @@ People decide who may message them. A bot is never a friend, so:
 | Mutual (default: shares a server or group) | Yes, while the bot shares a server with them |
 | Friends                                    | No                                           |
 
-Blocked users never receive a bot's messages, and a person who wrote to the bot first can always get an answer. Opening the DM channel (`GET /users/{target}/dm`) can succeed while sending is refused with `403 DirectMessagesRestricted` or `Blocked`. Do not retry these errors: post in a server channel instead, without private details.
+People under 18 always have "Friends", whatever they chose, so a bot cannot start a direct message with them. A server can also pause direct messages between its members who are not friends.
+
+Blocked users never receive a bot's messages, and a person who wrote to the bot first can always get an answer. Where the bot may not start a conversation, opening the DM channel (`GET /users/{target}/dm`) answers `403 DirectMessagesRestricted`; sending into a DM that is already open can be refused the same way, or with `409 Blocked`. Do not retry these errors: post in a server channel instead, without private details.
 
 Group invites have their own setting; bots cannot create groups or add people to them at all.
 

@@ -2,7 +2,7 @@
 
 ينشئ `/report` ملف CSV وينشره.
 
-> يستخدم هذا الدرس `@zrzur/sdk/bot` التي لا يمكنك تنزيلها بعد. انظر [المكتبات](/developers/docs/sdk). كل ما يفعله يعمل دون مكتبة: [ابنِ بوتًا كاملًا](/developers/docs/tutorial-full-bot).
+> يستخدم هذا الدرس `@zrzur/sdk/bot` فنفّذ أولًا `npm install @zrzur/sdk` في مجلد بوتك. انظر [المكتبات](/developers/docs/sdk). كل ما يفعله يعمل دون مكتبة أيضًا: [ابنِ بوتًا كاملًا](/developers/docs/tutorial-full-bot).
 
 ## قبل أن تبدأ {#before-you-start}
 
@@ -18,7 +18,7 @@
 
 ## جرّبه {#try-it}
 
-شغّل `/report`. يحتاج البوت إلى Upload Files في تلك القناة.
+شغّل `/report`. يحتاج البوت إلى «رفع الملفات» في تلك القناة.
 
 ## ما يوضحه {#what-it-shows}
 

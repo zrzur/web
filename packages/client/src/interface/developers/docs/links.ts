@@ -16,9 +16,20 @@ export interface DocsPlace {
 }
 
 const afterPrefix = (href: string, prefix: string) =>
-  href === prefix || /^[/?#]/.test(href.slice(prefix.length))
+  href === prefix ||
+  (href.startsWith(prefix) && /^[/?#]/.test(href.slice(prefix.length)))
     ? href.slice(prefix.length)
     : undefined;
+
+/**
+ * What follows the site's root for a page of the app's address: the
+ * overview is the front page itself, so it has no name there
+ */
+function siteRest(page: string) {
+  const rest = page.startsWith("/") ? page : `/${page}`;
+  const front = afterPrefix(rest, "/overview");
+  return front === undefined ? rest : `/${front.replace(/^\//, "")}`;
+}
 
 /** The address to put in a link, for where the documentation is shown */
 export function resolveDocsHref(href: string, place: DocsPlace) {
@@ -26,8 +37,7 @@ export function resolveDocsHref(href: string, place: DocsPlace) {
   const page = afterPrefix(href, APP_DOCS);
   if (page !== undefined) {
     if (place.base === APP_DOCS) return href;
-    const rest = page.startsWith("/") ? page : `/${page}`;
-    return `${place.base}${rest}`;
+    return `${place.base}${siteRest(page)}`;
   }
   // "My applications" and an application's page: only in the app
   if (place.base !== APP_DOCS && !/\.[a-z0-9]+$/i.test(href.split(/[?#]/)[0]))
@@ -42,8 +52,10 @@ export function resolveDocsHref(href: string, place: DocsPlace) {
 export function docsLinkFromApp(href: string, docsUrl: string | undefined) {
   const page = afterPrefix(href, APP_DOCS);
   if (!docsUrl || page === undefined) return { href, external: false };
-  const rest = page.startsWith("/") ? page : `/${page}`;
-  return { href: `${docsUrl.replace(/\/+$/, "")}${rest}`, external: true };
+  return {
+    href: `${docsUrl.replace(/\/+$/, "")}${siteRest(page)}`,
+    external: true,
+  };
 }
 
 /** The page a path shows; undefined for the front page */

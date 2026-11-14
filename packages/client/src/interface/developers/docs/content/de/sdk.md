@@ -10,27 +10,36 @@
 
 SolidJS braucht nur `@zrzur/sdk/solid`; ein Bot lädt es nie herunter.
 
-> **Du kannst es noch nicht von npm installieren.** `@zrzur/sdk` ist nicht auf npm; der Quelltext liegt auf [github.com/zrzur/sdk-js](https://github.com/zrzur/sdk-js). Diese Seite zeigt, was es bietet. Baue bis dahin allein mit Node: [Baue einen vollständigen Bot](/developers/docs/tutorial-full-bot) braucht keine Bibliothek, und [Ohne Bibliothek](/developers/docs/raw-http) hat jeden Aufruf.
-
-Es gibt auch `@zrzur/bot`, eine ältere, kleinere Bibliothek mit derselben Schnittstelle für Bots. Auch sie ist nicht veröffentlicht. Neue Bots sollten auf `@zrzur/sdk/bot` warten.
-
-## @zrzur/sdk/bot (für Bots) {#zrzur-sdk-bot-for-bots}
+Installiere es von npm, mit Node 22.3 oder neuer:
 
 @@0
 
+Das Paket ist [@zrzur/sdk auf npm](https://www.npmjs.com/package/@zrzur/sdk), der Quelltext liegt auf [github.com/zrzur/sdk-js](https://github.com/zrzur/sdk-js). Ein Bot läuft auch ganz ohne Bibliothek: [Baue einen vollständigen Bot](/developers/docs/tutorial-full-bot) braucht keine, und [Ohne Bibliothek](/developers/docs/raw-http) hat jeden Aufruf.
+
+Es gibt auch `@zrzur/bot`, eine ältere, kleinere Bibliothek mit derselben Schnittstelle für Bots. Sie ist nicht veröffentlicht und lässt sich nicht installieren; nutze `@zrzur/sdk/bot`.
+
+## @zrzur/sdk/bot (für Bots) {#zrzur-sdk-bot-for-bots}
+
+@@1
+
 | Bereich         | Methoden                                                                                                  |
 | --------------- | --------------------------------------------------------------------------------------------------------- |
-| Befehle         | `client.command`, `client.component`, `client.modal`, `client.autocomplete`, `client.syncCommands`, `client.fetchCommands` |
+| Befehle | `client.command`, `client.component`, `client.modal`, `client.autocomplete`, `client.syncCommands`, `client.fetchCommands`, `client.createCommand`, `client.fetchCommand`, `client.editCommand`, `client.deleteCommand` |
 | Antworten       | `i.reply`, `i.defer`, `i.update`, `i.deferUpdate`, `i.showModal`, `i.respond`, `i.editReply`, `i.followUp`, `i.deleteReply` |
 | Ereignisse      | `client.on(type)`, `client.onMessage`, `client.onMemberJoin`, `client.onMemberLeave`, `client.onReaction` |
-| Nachrichten     | `client.messages.send`, `reply`, `fetch`, `fetchMany`, `edit`, `delete`, `bulkDelete`, `react`, `unreact`, `clearReactions`, `pin`, `unpin` |
+| Nachrichten | `client.messages.send`, `reply`, `fetch`, `fetchMany`, `edit`, `delete`, `bulkDelete`, `react`, `unreact`, `clearReactions`, `pin`, `unpin`, `pins` |
 | Mitglieder      | `client.members.fetch`, `fetchAll`, `edit`, `addRole`, `removeRole`, `timeout`, `kick`, `ban`, `unban`    |
-| Rollen, Kanäle  | `client.roles.*`, `client.channels.*`                                                                     |
+| Rollen | `client.roles.create`, `edit`, `setPermissions`, `delete` |
+| Kanäle | `client.channels.fetch`, `create`, `edit`, `delete`, `setPermissions`, `setMemberPermissions`, `createInvite`, `typing` |
+| Server | `client.servers.fetch`, `ensureCategory` |
+| Threads, Foren | `client.threads.create`, `list`, `edit`, `archive`, `reopen`; `client.forums.create`, `post`, `posts`, `setTags` |
+| Einladungen | `client.invites.create`, `fetch`, `list`, `delete` |
 | Benutzer        | `client.users.fetch`, `openDM`, `sendDM`                                                                  |
 | Webhooks        | `client.webhooks.create`, `list`, `listForServer`, `fetch`, `fetchWithToken`, `edit`, `regenerateToken`, `delete`, `send`, `sendSlack`, `fetchMessage`, `editMessage`, `deleteMessage` |
 | Collector       | `message.createMessageComponentCollector`, `message.awaitMessageComponent`, `interaction.awaitModalSubmit` |
 | Emojis          | `client.emojis.list`, `fetch`, `find`, `create`, `delete`                                                 |
 | Sprache         | `client.voice.nodes`, `client.voice.join`                                                                 |
+| Verbindung | `client.login`, `client.loginHttp`, `client.listen`, `client.destroy`, `client.setStatus`, `client.typing` |
 | Alles andere    | `client.rest.get(path)`, `post`, `put`, `patch`, `delete` (für jede Route typisiert), `client.rest.uploadFile(tag, data, name, type)` |
 
 Fehler der API kommen als `ApiError` mit `status`, `type`, `detail` und nach einem 429 `retryAfter`. Kurze Ratenlimits werden abgewartet; nach einem globalen Limit wartet jede Anfrage, bis es zurückgesetzt ist. Das Gateway packt `Bulk`-Pakete aus und verbindet mit wachsender Wartezeit neu.
@@ -39,7 +48,7 @@ Jeder Endpunkt in dieser Referenz nennt die SDK-Methode, die ihn aufruft, wenn e
 
 ## @zrzur/sdk (der Kern) {#zrzur-sdk-the-core}
 
-@@1
+@@2
 
 Nutze es für Werkzeuge, die nur die HTTP-API oder das Gateway brauchen, in jedem Framework.
 

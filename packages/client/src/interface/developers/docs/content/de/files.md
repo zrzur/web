@@ -16,8 +16,9 @@ Die Antwort ist `{ "id": "<file id>" }`. Sende sie in `attachments` einer Nachri
 | `banners`     | Server- und Profilbanner     | 6 MB          |
 | `backgrounds` | Profilhintergründe           | 6 MB          |
 | `emojis`      | Eigene Emojis                | 500 KB        |
+| `sounds`      | Soundboard-Sounds            | 512 KB        |
 
-Jeder Server setzt eigene Limits; `GET /` auf der API listet sie unter `features.limits`. Außer bei `attachments` gehen nur Bilder. Leere Dateien werden abgelehnt (`FileTooSmall`), zu große bekommen `FileTooLarge` mit dem Maximum. Uploads brauchen das Bot-Token; der Tag `decorations` ist nur für das Zrzur-Team.
+Jeder Server setzt eigene Limits; `GET /` auf der API listet sie unter `features.limits`. `attachments` nimmt jede Datei und `sounds` MP3-, OGG- oder WAV-Audio bis 5.2 Sekunden; jeder andere Tag nimmt nur Bilder. Leere Dateien werden abgelehnt (`FileTooSmall`), zu große bekommen `FileTooLarge` mit dem Maximum. Uploads brauchen das Bot-Token; der Tag `decorations` ist nur für das Zrzur-Team.
 
 ## Herunterladen {#download}
 

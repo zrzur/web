@@ -2,7 +2,7 @@
 
 ## How permissions are calculated
 
-1. The server owner can do everything.
+1. The server owner can do everything. So can a member whose roles, or the server's default permissions, give **Administrator**: no channel setting and no timeout takes anything away from them, and a channel cannot make someone an administrator.
 2. Otherwise start from the server's **default permissions** (`@everyone`).
 3. Add the permissions of every role the member has (`allow`), then remove what roles deny, from the lowest to the highest ranked role.
 4. In a channel, apply the channel's default override, then the role overrides, the same way.

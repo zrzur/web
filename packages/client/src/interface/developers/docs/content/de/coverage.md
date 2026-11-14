@@ -1,5 +1,7 @@
 # Status und Abdeckung
 
+Wie diese Seiten entstehen und geprüft werden, wie viele Endpunkte ein Bot nutzen kann und welche Bots ablehnen.
+
 ## So entstehen diese Dokumente {#how-these-docs-are-made}
 
 1. Ein Skript liest den Routencode des Servers, seine Berechtigungsprüfungen, Fehler- und Ratenlimit-Tabellen, Gateway-Ereignisse, beide SDKs und das OpenAPI-Dokument und schreibt das Inventar, aus dem diese Seiten entstehen. Nichts wird von Hand getippt, was der Code sagen kann.

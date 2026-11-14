@@ -731,6 +731,12 @@ const Article = styled("article", {
         borderRadius: "2px",
       },
     },
+    // code is always written left to right, in an Arabic page too: the
+    // generated reference has it in many places, so it is said once here
+    "& code, & pre, & kbd, & samp": {
+      direction: "ltr",
+      unicodeBidi: "isolate",
+    },
     "& :not(pre) > code": {
       fontFamily: "var(--fonts-monospace, monospace)",
       fontSize: "0.9em",

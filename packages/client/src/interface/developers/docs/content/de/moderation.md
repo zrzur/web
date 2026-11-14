@@ -4,9 +4,9 @@ Bots können kicken, bannen, Timeouts geben, Nachrichten in Masse löschen und d
 
 ## Regeln, die der Server durchsetzt {#rules-the-server-enforces}
 
-- Der Bot braucht die passende Berechtigung: Kick Members, Ban Members, Timeout Members, Manage Messages, View Audit Logs.
+- Der Bot braucht die passende Berechtigung: „Mitglieder kicken“, „Mitglieder sperren“, „Mitglieder Timeouten“, „Nachrichten verwalten“, „Audit-Protokoll ansehen“.
 - Das Ziel muss unter dem Bot stehen. Der Servereigentümer lässt sich weder kicken noch bannen noch mit Timeout belegen.
-- Ein Timeout ist eine Endzeit (`timeout`, ISO 8601). Mitglieder mit Timeout Members bekommen kein Timeout (`IsElevated`), und niemand gibt sich selbst eins. Beende ein Timeout früher mit `remove: ["Timeout"]`.
+- Ein Timeout ist eine Endzeit (`timeout`, ISO 8601). Mitglieder mit „Mitglieder Timeouten“ bekommen kein Timeout (`IsElevated`), und niemand gibt sich selbst eins. Beende ein Timeout früher mit `remove: ["Timeout"]`.
 - Ein Bann kann die Nachrichten des Benutzers der letzten 7 Tage löschen (`delete_message_seconds`, höchstens 604800).
 - Massenlöschung nimmt bis zu 100 Nachrichten, die jünger als eine Woche sind.
 

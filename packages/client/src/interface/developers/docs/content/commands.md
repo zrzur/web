@@ -191,6 +191,8 @@ Options and choices take the same fields. Localised names follow the same rules 
 
 `default_member_permissions` is a number: add the values of the permissions a member needs, from the [permission table](/developers/docs/roles#permission-bits). A member without all of them does not see the command, and a request gets `MissingPermission`. `256` is Timeout Members; Manage Messages (`8388608`) plus Kick Members (`64`) is `8388672`. In the Developer Portal you pick the permissions from a list instead. Your bot should still check `user_permissions`: an admin can change roles, and a command is not a security wall for what your bot itself does.
 
+The people who run a server can add their own rules for your commands, in the server's settings: allow or deny the whole app or one command for a role, a member or a channel. Those rules are read before `default_member_permissions`; a rule for one command comes before a rule for the app, a rule for a member before one for a role, and a deny on any role beats an allow. The server owner passes member and role rules. In a direct message with the bot there is no server, so only commands without `default_member_permissions` work there.
+
 ## Menu commands {#menu-commands}
 
 `"type": "User"` and `"type": "Message"` show a command in the menu of a user or a message. They have no description and no options, and their name can have capitals and spaces. The target arrives in `command.target_id`.

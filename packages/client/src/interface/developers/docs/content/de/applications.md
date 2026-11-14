@@ -22,6 +22,7 @@ Eine Anwendung und ihr Bot sind dasselbe: Anwendungs-ID, Bot-ID und Benutzer-ID 
 | Einstellung            | Was sie tut                                                                                             |
 | ---------------------- | ------------------------------------------------------------------------------------------------------- |
 | Öffentlicher Bot       | An: Jeder mit „Server verwalten“ kann ihn installieren. Aus: nur du; andere bekommen `BotIsPrivate`     |
+| Deinen Namen auf der Seite des Bots zeigen | An: Wer die Einladungsseite des Bots öffnet, sieht, dass du ihn gemacht hast. Standardmäßig aus |
 | Privilegierte Intents  | Schalter für Nachrichteninhalt, Servermitglieder und Präsenz. Jeder Schalter wird sofort gespeichert und gilt ab der nächsten Gateway-Verbindung des Bots. Siehe [Intents](/developers/docs/gateway#intents) und [wenn ein Intent aus ist](/developers/docs/gateway#intent-off) |
 | Benutzername           | Der Name des Bots                                                                                       |
 | Bot-ID                 | Die ID für Routen unter `/applications/{id}/...`                                                        |
@@ -33,7 +34,7 @@ Eine Anwendung und ihr Bot sind dasselbe: Anwendungs-ID, Bot-ID und Benutzer-ID 
 
 ## Der Tab Befehle {#commands-tab}
 
-Listet die globalen Befehle des Bots. Du kannst dort eine JSON-Liste einfügen, statt aus dem Code zu registrieren. Siehe [Slash-Befehle](/developers/docs/commands).
+Listet die globalen Befehle des Bots. Ein Formular fügt sie hinzu, ändert und löscht sie, mit Optionen, Namen in anderen Sprachen und wer sie nutzen darf, und zeigt eine Vorschau; **JSON importieren** und **JSON exportieren** nehmen und geben die ganze Liste. Sendet dein Bot seine Liste beim Start, ersetzt diese Liste, was du hier speicherst. Siehe [Slash-Befehle](/developers/docs/commands).
 
 ## Den Bot auf einem Server installieren {#install}
 

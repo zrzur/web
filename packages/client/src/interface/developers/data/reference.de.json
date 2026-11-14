@@ -149,7 +149,7 @@
   "TooManyRoles": ["Der Server hat sein Rollen-Limit `max` erreicht.", "Lösche zuerst eine Rolle."],
   "UnknownApplication": ["Die Anwendung gibt es nicht.", "Prüfe die ID: Eine Anwendungs-ID ist die Benutzer-ID des Bots."],
   "ApplicationNotInstalled": ["Jemand hat einen Bot benutzt, der nicht auf diesem Server ist.", "Installiere den Bot auf dem Server."],
-  "ApplicationOffline": ["Der Bot wurde gesperrt oder abgeschaltet und bekommt nichts mehr.", "Seine Eigentümerin wendet sich an den Zrzur-Support."],
+  "ApplicationOffline": ["Der Bot ist nicht mit dem Gateway verbunden, oder er wurde gesperrt oder abgeschaltet, und bekommt nichts.", "Starte den Bot. Wurde er gesperrt, wendet sich seine Eigentümerin an den Zrzur-Support."],
   "SignedDeliveryRejected": ["Deine Adresse für HTTP-Interaktionen hat den Test nicht bestanden. `reason` sagt, warum.", "Siehe Interaktionen über HTTP."],
   "UnknownCommand": ["Die Befehls-ID ist unbekannt, oder der Befehl wurde gelöscht.", "Hole die Befehlsliste."],
   "CommandAlreadyExists": ["In diesem Bereich gibt es schon einen Befehl mit diesem Namen und Typ.", "Ersetze die Liste mit `PUT`, oder bearbeite den Befehl."],

@@ -18,7 +18,7 @@ POST /channels/{target}/messages
 - **Idempotency**: send an `Idempotency-Key` header with a unique value. If the request is retried with the same key, the message is not sent twice.
 - **Silent messages**: `flags: 1` sends without push or desktop notifications.
 - **Masquerade**: `masquerade: { name, avatar }` shows another name and avatar on the message (needs Masquerade; a `colour` also needs Manage Roles).
-- **Components**: buttons, selects and layout blocks; only bots can send them. See [Commands and interactions](/developers/docs/components).
+- **Components**: buttons, selects and layout blocks; only bots can send them. See [Buttons, menus and forms](/developers/docs/components).
 - **Mentions**: `<@user id>` pings a user, `<%role id>` a role (needs Mention Roles), `@everyone` and `@online` need Mention Everyone. Without the permission the whole message is refused with `MissingPermission`, it is not sent without the ping. On a self-hosted server with `mass_mentions_enabled = false`, role, `@everyone` and `@online` mentions are sent without notifying anyone instead.
 - **Channel links**: `<#channel id>` shows a link to a channel or thread. It notifies nobody.
 
@@ -35,7 +35,7 @@ curl -X POST "https://api.zrzur.com/channels/CHANNEL_ID/messages" \
 
 ## Edit and delete {#edit}
 
-`PATCH /channels/{target}/messages/{msg}` takes `content`, `embeds` and `components`. A bot edits only its own messages. `DELETE /channels/{target}/messages/{msg}` deletes the bot's own, or any message with Manage Messages. An edit never pings anyone again.
+`PATCH /channels/{target}/messages/{msg}` takes `content`, `embeds` and `components`. A bot edits only its own messages. `DELETE /channels/{target}/messages/{msg}` deletes the bot's own, or any message with Manage Messages. An edit never pings anyone again. `DELETE /channels/{target}/messages/{msg}/embeds` removes the link previews from a message for everyone and keeps them from coming back; the author can do it, and so can anyone with Manage Messages. Embeds a bot sent on purpose stay.
 
 ## Embeds {#embeds}
 

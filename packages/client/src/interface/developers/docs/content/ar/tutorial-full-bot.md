@@ -99,7 +99,7 @@
 | `the token was refused, stopping`   | رمز خاطئ أو أُعيد تعيينه                  | انسخ الرمز مجددًا أو أعد تعيينه            |
 | `could not start` مع `ApplicationNotInstalled` | معرّف السيرفر في `ZRZUR_TEST_SERVER` خاطئ، أو البوت ليس هناك | الخطوتان 3 و5 |
 | لا تظهر الأوامر                     | البوت ليس في هذا السيرفر                  | الخطوة 3                                   |
-| "I need the Timeout Members permission." | الرابط بلا صلاحية                    | أعد الخطوة 3، أو امنح دور البوت الصلاحية   |
+| "I need the «إيقاف الأعضاء مؤقتًا» permission." | الرابط بلا صلاحية                    | أعد الخطوة 3، أو امنح دور البوت الصلاحية   |
 | "That member ranks at or above me." | دور البوت منخفض                           | الخطوة 4                                   |
 | "That member ranks at or above you." | مرتبتك مساوية لذلك العضو أو أدنى          | اطلب ذلك من شخص أعلى                       |
 | "That member cannot be timed out."  | الهدف هو مالك السيرفر (`InvalidOperation`) | اختر عضوًا آخر                            |

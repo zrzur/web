@@ -1,6 +1,6 @@
 # Hello World
 
-Ein Bot, der auf `/hello` antwortet. Zwei Fassungen: eine ohne Bibliothek, um das Protokoll zu zeigen, und eine mit dem SDK.
+Ein Bot, der auf `/hello` antwortet. Zwei Fassungen: eine mit dem SDK und eine ohne Bibliothek, um das Protokoll zu zeigen.
 
 ## Bevor du beginnst {#before-you-start}
 
@@ -8,21 +8,21 @@ Erstelle eine Anwendung, installiere sie auf einem Testserver und setze drei Umg
 
 @@0
 
-## Ohne Bibliothek {#without-a-library}
+## Mit dem SDK {#with-the-sdk}
 
-Node 22 oder neuer, nichts zu installieren.
+Führe `npm install @zrzur/sdk` im Ordner deines Bots aus (Node 22.3 oder neuer) und speichere dann diese Datei dort:
 
 @@1
 
-Starte es mit `node hello-raw.mjs`.
+Starte es mit `node hello.mjs`.
 
-## Mit dem SDK {#with-the-sdk}
+## Ohne Bibliothek {#without-a-library}
 
-Du kannst `@zrzur/sdk` noch nicht herunterladen, siehe [SDKs](/developers/docs/sdk). Wenn du es hast, ist das derselbe Bot:
+Node 22 oder neuer, nichts zu installieren. Das ist derselbe Bot:
 
 @@2
 
-Starte es mit `node hello.mjs`.
+Starte es mit `node hello-raw.mjs`.
 
 ## Probiere es aus {#try-it}
 

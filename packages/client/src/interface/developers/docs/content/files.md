@@ -20,8 +20,9 @@ The answer is `{ "id": "<file id>" }`. Send it in `attachments` of a message, or
 | `banners`     | server and profile banners | 6 MB               |
 | `backgrounds` | profile backgrounds        | 6 MB               |
 | `emojis`      | custom emojis              | 500 KB             |
+| `sounds`      | soundboard sounds          | 512 KB             |
 
-Each server sets its own limits; `GET /` on the API lists them under `features.limits`. Except for `attachments`, only images are accepted. Empty files are refused (`FileTooSmall`), too big ones get `FileTooLarge` with the maximum. Uploads need the bot token; the `decorations` tag is for Zrzur staff only.
+Each server sets its own limits; `GET /` on the API lists them under `features.limits`. `attachments` takes any file and `sounds` takes MP3, OGG or WAV audio of up to 5.2 seconds; every other tag accepts only images. Empty files are refused (`FileTooSmall`), too big ones get `FileTooLarge` with the maximum. Uploads need the bot token; the `decorations` tag is for Zrzur staff only.
 
 ## Download
 

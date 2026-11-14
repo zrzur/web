@@ -17,7 +17,7 @@ The event carries both as `respond_by` and `expires_at`. Follow the event's time
 
 If the work takes longer than a moment, answer `DeferredMessage` first. It shows "thinking" and gives you the 15 minutes.
 
-If your bot is not connected when someone uses a command, the event is lost, and the person sees the failure after 3 seconds.
+If your bot is not connected when someone uses a command, nothing is kept for later: the person is told at once that the bot is offline (`503 ApplicationOffline` to the app).
 
 ## The event {#the-event}
 

@@ -2,7 +2,7 @@
 
 Greets new members in a channel the server picks with `/welcome-here`.
 
-> This tutorial uses `@zrzur/sdk/bot`, which you cannot download yet. See [SDKs](/developers/docs/sdk). Everything it does works without a library: [Build a complete bot](/developers/docs/tutorial-full-bot).
+> This tutorial uses `@zrzur/sdk/bot`, so run `npm install @zrzur/sdk` in your bot's folder first. See [SDKs](/developers/docs/sdk). Everything it does also works without a library: [Build a complete bot](/developers/docs/tutorial-full-bot).
 
 ## Before you start
 

@@ -24,7 +24,7 @@
 
 ضع ما تحتاج إليه في `custom_id`، مثل `flip:heads` أو `note:3`، فيعود إليك في `interaction.component.custom_id`. رد بـ`UpdateMessage` لتغيير الرسالة، أو `Message` لرسالة جديدة.
 
-لا تحمل الرسالة الأولى في الموضوع مكوّنات بعد. ابدأ الموضوع، ثم أرسل الرسالة ذات الأزرار فيه؛ انظر [القنوات والويب هوك](/developers/docs/channels#threads).
+تستطيع الرسالة الأولى في الموضوع أن تحمل مكوّنات أيضًا؛ انظر [القنوات والويب هوك](/developers/docs/channels#threads).
 
 ## من يستطيع النقر {#restrict}
 

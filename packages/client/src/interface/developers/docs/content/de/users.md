@@ -21,7 +21,9 @@ Menschen entscheiden, wer ihnen schreiben darf. Ein Bot ist nie ein Freund, also
 | Gemeinsame (Standard: geteilter Server oder Gruppe) | Ja, solange der Bot einen Server mit ihnen teilt |
 | Freunde                                     | Nein                                        |
 
-Blockierte Benutzer bekommen nie Nachrichten eines Bots, und wer dem Bot zuerst geschrieben hat, kann immer eine Antwort bekommen. `GET /users/{target}/dm` kann gelingen, während das Senden mit `403 DirectMessagesRestricted` oder `Blocked` abgelehnt wird. Wiederhole diese Fehler nicht: Poste stattdessen in einem Serverkanal, ohne private Details.
+Wer unter 18 ist, hat immer „Freunde“, egal was gewählt wurde; ein Bot kann mit ihnen also keine Direktnachricht beginnen. Ein Server kann außerdem Direktnachrichten zwischen seinen Mitgliedern, die keine Freunde sind, pausieren.
+
+Blockierte Benutzer bekommen nie Nachrichten eines Bots, und wer dem Bot zuerst geschrieben hat, kann immer eine Antwort bekommen. Wo der Bot kein Gespräch beginnen darf, antwortet `GET /users/{target}/dm` mit `403 DirectMessagesRestricted`; das Senden in eine schon offene Direktnachricht kann genauso abgelehnt werden, oder mit `409 Blocked`. Wiederhole diese Fehler nicht: Poste stattdessen in einem Serverkanal, ohne private Details.
 
 Gruppeneinladungen haben eine eigene Einstellung; Bots können gar keine Gruppen erstellen oder Leute hinzufügen.
 

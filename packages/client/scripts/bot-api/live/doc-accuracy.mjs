@@ -34,7 +34,10 @@ const here = dirname(fileURLToPath(import.meta.url));
 const botApiDir = resolve(here, "..");
 const clientRoot = resolve(botApiDir, "../..");
 // @zrzur/sdk/bot, built from the SDK submodule (pnpm --filter @zrzur/sdk build)
-const sdkDist = resolve(clientRoot, "../stoat.js/lib/bot/index.js");
+// ZRZUR_SDK_DIST: another build of @zrzur/sdk/bot (e.g. the branch about to be published)
+const sdkDist = process.env.ZRZUR_SDK_DIST
+  ? resolve(process.env.ZRZUR_SDK_DIST)
+  : resolve(clientRoot, "../stoat.js/lib/bot/index.js");
 
 const API = process.env.ZRZUR_API_URL ?? "http://127.0.0.1:31702";
 const WS = process.env.ZRZUR_WS_URL ?? "ws://127.0.0.1:31703";
@@ -2192,6 +2195,26 @@ await test("threads: start with a card, list, rename, archive", async () => {
     { target: thread._id },
     { body: { name: "ticket-0001-closed", archived: true } },
   );
+});
+
+await test("messages: link previews are removed from a message", async () => {
+  const message = await must(
+    "POST",
+    "/channels/{target}/messages",
+    { target: text._id },
+    { bot: bot.token, body: { content: "See https://example.com/" } },
+  );
+  await botCall("DELETE", "/channels/{target}/messages/{msg}/embeds", {
+    target: text._id,
+    msg: message._id,
+  });
+  const after = await must(
+    "GET",
+    "/channels/{target}/messages/{msg}",
+    { target: text._id, msg: message._id },
+    { bot: bot.token },
+  );
+  expect(!after.embeds?.length, "the message still has embeds");
 });
 
 await test("polls: a bot posts and ends a poll, reads voters, cannot vote", async () => {

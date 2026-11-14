@@ -2,7 +2,7 @@
 
 Every server channel has `channel_type: "TextChannel"`: text, voice (with `voice`), announcement, forum (with `forum`) and thread (with `parent` and `thread`). A bot also sees the direct messages it is part of (`DirectMessage`). Groups are for people only. The [Event reference](/developers/docs/events#channels) lists the fields and shows how to tell a direct message from a server channel.
 
-The examples use plain HTTP. The SDK lines after them need the SDK, which is not published yet; see [SDKs](/developers/docs/sdk).
+The examples use plain HTTP. The SDK lines after them need `@zrzur/sdk` (`npm install @zrzur/sdk`); see [SDKs](/developers/docs/sdk).
 
 ## Create and change channels
 
@@ -121,7 +121,7 @@ await bot.invites.delete(invite._id);
 
 ## Webhooks
 
-> **Webhooks are switched on per server installation.** `GET /` on the API shows `features.webhooks`. Where it is `false`, creating or listing webhooks answers `FeatureDisabled` and every `/webhooks/...` address answers `404 NotFound`. On `api.zrzur.com` it was `false` when this page was checked (2026-11-13).
+> **Webhooks are switched on per server installation.** `GET /` on the API shows `features.webhooks`. Where it is `false`, creating or listing webhooks answers `FeatureDisabled` and every `/webhooks/...` address answers `404 NotFound`. On `api.zrzur.com` it was `false` when this page was checked (2026-11-14).
 
 A webhook posts into one channel without a gateway connection. Create one with a bot token or in server settings (needs Manage Webhooks). The answer has `token` and `url`. They are shown once: the server keeps only a hash, so save them now. A lost token can only be replaced.
 

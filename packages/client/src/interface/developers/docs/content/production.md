@@ -45,9 +45,9 @@ On `SIGTERM`, close the gateway and let running work finish. Save your data with
 
 Reconnecting is your bot's job. Follow [Gateway: Reconnect](/developers/docs/gateway#reconnect), and watch for silence, with a `Ping` every 20 seconds and a limit of 60 seconds without `Pong`.
 
-Stop for good only on `InvalidSession` and on close code `4014`. Anything else is temporary. A bot that exits on those two needs a person, so make sure your process manager does not hammer the gateway: `RestartSec=5` waits between tries.
+Stop for good only on an `Error` event of type `InvalidSession` and on close code `4014`. Anything else is temporary. A bot that exits on those two needs a person, so make sure your process manager does not hammer the gateway: `RestartSec=5` waits between tries.
 
-There is no resume. After each `Ready`, fetch what you cannot miss.
+Ask for a resumable session, and after a drop send `Resume` first: a short drop then loses nothing (see [Resume after a drop](/developers/docs/gateway#resume)). After a new `Ready`, fetch what you cannot miss.
 
 ## Log what helps {#logging}
 

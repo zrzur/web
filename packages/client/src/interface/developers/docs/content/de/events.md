@@ -30,3 +30,5 @@ Eine Nachricht ist eine Direktnachricht, wenn der `channel_type` ihres Kanals `D
 @@2
 
 Öffnet eine Person zum ersten Mal eine Direktnachricht mit deinem Bot, kommt `ChannelCreate` mit dem `DirectMessage`, vor jeder Nachricht darin. Direktnachrichten und Gruppen erreichen deinen Bot mit und ohne den Intent `SERVERS`, in `Ready` und als `ChannelCreate`. Ihre Nachrichten brauchen `DIRECT_MESSAGES`.
+
+Eine Nachricht trägt keine Sprache. `locale` kommt nur mit einer Interaktion; nutze für eine Person, die deinem Bot nur geschrieben hat, die Sprache einer früheren Interaktion von ihr, wenn du eine hast, oder frage sie.

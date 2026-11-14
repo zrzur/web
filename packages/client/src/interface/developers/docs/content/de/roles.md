@@ -2,7 +2,7 @@
 
 ## So werden Berechtigungen berechnet {#how-permissions-are-calculated}
 
-1. Der Servereigentümer darf alles.
+1. Der Servereigentümer darf alles. Ebenso ein Mitglied, dem seine Rollen oder die Standardberechtigungen des Servers **Administrator** geben: Keine Kanaleinstellung und kein Timeout nimmt ihm etwas, und ein Kanal kann niemanden zum Administrator machen.
 2. Sonst beginne bei den **Standardberechtigungen** des Servers (`@everyone`).
 3. Addiere die Berechtigungen jeder Rolle des Mitglieds (`allow`), dann entferne, was Rollen verweigern, von der niedrigsten zur höchsten Rolle.
 4. Wende in einem Kanal die Standard-Überschreibung des Kanals an, dann die der Rollen, auf dieselbe Art.
@@ -16,7 +16,7 @@ Jede Interaktion nennt dir die Berechtigungen der Person (`user_permissions_stri
 
 ## Berechtigungsnamen {#permission-strings}
 
-Endpunkte in dieser Referenz nennen Berechtigungen wie Timeout Members. In einem Fehler steht dieselbe Berechtigung als `TimeoutMembers`, die erste Spalte der Tabelle unten. Addiere Werte, um mehrere zu senden: Kick Members (`64`) und Ban Members (`128`) ergeben `192`.
+Endpunkte in dieser Referenz nennen Berechtigungen wie „Mitglieder Timeouten“. In einem Fehler steht dieselbe Berechtigung als `TimeoutMembers`, die erste Spalte der Tabelle unten. Addiere Werte, um mehrere zu senden: „Mitglieder kicken“ (`64`) und „Mitglieder sperren“ (`128`) ergeben `192`.
 
 ## Threads und Foren {#threads-and-forums}
 
