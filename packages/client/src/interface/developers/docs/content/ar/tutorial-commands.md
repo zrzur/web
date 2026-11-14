@@ -2,7 +2,7 @@
 
 خيارات بحدود، وردود خاصة، وردود تتجاوز 3 ثوانٍ، واقتراحات في أثناء الكتابة.
 
-> يستخدم هذا الدرس `@zrzur/sdk/bot` وهي ليست على npm بعد. انظر [المكتبات](/developers/docs/sdk). كل ما يفعله يعمل دون مكتبة: [ابنِ بوتًا كاملًا](/developers/docs/tutorial-full-bot).
+> يستخدم هذا الدرس `@zrzur/sdk/bot` فنفّذ أولًا `npm install @zrzur/sdk` في مجلد بوتك. انظر [المكتبات](/developers/docs/sdk). كل ما يفعله يعمل دون مكتبة أيضًا: [ابنِ بوتًا كاملًا](/developers/docs/tutorial-full-bot).
 
 ## قبل أن تبدأ {#before-you-start}
 

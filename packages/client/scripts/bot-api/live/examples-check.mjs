@@ -28,10 +28,18 @@ import { fileURLToPath, pathToFileURL } from "node:url";
 
 const here = dirname(fileURLToPath(import.meta.url));
 const botApiDir = resolve(here, "..");
-// ZRZUR_SDK_DIST: another build of @zrzur/sdk/bot (e.g. the branch about to be published)
-const sdkDist = process.env.ZRZUR_SDK_DIST
-  ? resolve(process.env.ZRZUR_SDK_DIST)
-  : resolve(botApiDir, "../../../stoat.js/lib/bot/index.js");
+// ZRZUR_SDK_FOLDER: a folder where `npm install @zrzur/sdk` was run. The
+// examples are then saved there unchanged and import the installed package
+// by its name, as a reader's copy does.
+// ZRZUR_SDK_DIST: another build of @zrzur/sdk/bot (e.g. a branch).
+const sdkFolder = process.env.ZRZUR_SDK_FOLDER
+  ? resolve(process.env.ZRZUR_SDK_FOLDER)
+  : undefined;
+const sdkDist = sdkFolder
+  ? join(sdkFolder, "node_modules/@zrzur/sdk/lib/bot/index.js")
+  : process.env.ZRZUR_SDK_DIST
+    ? resolve(process.env.ZRZUR_SDK_DIST)
+    : resolve(botApiDir, "../../../stoat.js/lib/bot/index.js");
 const API = process.env.ZRZUR_API_URL ?? "http://127.0.0.1:14702";
 const WS = process.env.ZRZUR_WS_URL ?? "ws://127.0.0.1:14703";
 const ONLY = process.argv[2];
@@ -230,16 +238,18 @@ function runExample(file, env = {}) {
   const source = readFileSync(join(botApiDir, "examples", file), "utf8");
   if (source.includes("@zrzur/sdk/bot"))
     expect(existsSync(sdkDist), "@zrzur/sdk is not built");
-  const path = join(work, file);
+  const path = join(sdkFolder ?? work, file);
   writeFileSync(
     path,
-    source.replaceAll(
-      'from "@zrzur/sdk/bot"',
-      `from ${JSON.stringify(pathToFileURL(sdkDist).href)}`,
-    ),
+    sdkFolder
+      ? source
+      : source.replaceAll(
+          'from "@zrzur/sdk/bot"',
+          `from ${JSON.stringify(pathToFileURL(sdkDist).href)}`,
+        ),
   );
   const child = spawn(process.execPath, [path], {
-    cwd: work,
+    cwd: sdkFolder ?? work,
     env: {
       ...process.env,
       ZRZUR_BOT_TOKEN: tutorialToken,
@@ -1525,16 +1535,21 @@ async function snippets() {
   const files = root.features.autumn.url;
   const core = pathToFileURL(resolve(dirname(sdkDist), "../index.js")).href;
   // the pages name Zrzur's own hosts; here they are this stack's
-  const here_ = (code) =>
+  const hosts = (code) =>
     code
       .replaceAll("https://api.zrzur.com", API)
       .replaceAll("wss://events.zrzur.com", WS)
-      .replaceAll("https://cdn.zrzur.com", files)
-      .replaceAll(
-        'from "@zrzur/sdk/bot"',
-        `from ${JSON.stringify(pathToFileURL(sdkDist).href)}`,
-      )
-      .replaceAll('from "@zrzur/sdk"', `from ${JSON.stringify(core)}`);
+      .replaceAll("https://cdn.zrzur.com", files);
+  // with an installed package the imports stay as the page writes them
+  const here_ = (code) =>
+    sdkFolder
+      ? hosts(code)
+      : hosts(code)
+          .replaceAll(
+            'from "@zrzur/sdk/bot"',
+            `from ${JSON.stringify(pathToFileURL(sdkDist).href)}`,
+          )
+          .replaceAll('from "@zrzur/sdk"', `from ${JSON.stringify(core)}`);
 
   /* ---------------- JavaScript: each block of a page, between a few lines that give it what the page assumes */
   const withBot = `import { Client } from "@zrzur/sdk/bot";
@@ -1622,7 +1637,7 @@ const channelId = process.env.CHANNEL, serverId = process.env.SERVER;
         /^import .*\n/gm,
         (line) => (imports.push(line.trim()), ""),
       );
-      const path = join(work, `snippet-${page}-${index}.mjs`);
+      const path = join(sdkFolder ?? work, `snippet-${page}-${index}.mjs`);
       writeFileSync(
         path,
         `${[...new Set(imports)].map(here_).join("\n")}\n${here_(bodyBefore)}${body}\n${after}\n`,

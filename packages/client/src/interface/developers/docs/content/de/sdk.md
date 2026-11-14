@@ -10,13 +10,13 @@
 
 SolidJS braucht nur `@zrzur/sdk/solid`; ein Bot lädt es nie herunter.
 
-> **Du kannst es noch nicht von npm installieren.** `@zrzur/sdk` ist nicht auf npm; der Quelltext liegt auf [github.com/zrzur/sdk-js](https://github.com/zrzur/sdk-js). Diese Seite zeigt, was es bietet. Um es heute auszuprobieren, baue es mit Node 22.3 oder neuer und pnpm aus diesem Quelltext:
+Installiere es von npm, mit Node 22.3 oder neuer:
 
 @@0
 
-Installiere dann die erzeugte Datei `zrzur-sdk-2.0.0.tgz` mit `npm install` aus dem Ordner deines Bots. Direkt von der GitHub-Adresse zu installieren geht nicht: Das Repository enthält den Quelltext, nicht die gebauten Dateien. Baue bis dahin allein mit Node: [Baue einen vollständigen Bot](/developers/docs/tutorial-full-bot) braucht keine Bibliothek, und [Ohne Bibliothek](/developers/docs/raw-http) hat jeden Aufruf.
+Das Paket ist [@zrzur/sdk auf npm](https://www.npmjs.com/package/@zrzur/sdk), der Quelltext liegt auf [github.com/zrzur/sdk-js](https://github.com/zrzur/sdk-js). Ein Bot läuft auch ganz ohne Bibliothek: [Baue einen vollständigen Bot](/developers/docs/tutorial-full-bot) braucht keine, und [Ohne Bibliothek](/developers/docs/raw-http) hat jeden Aufruf.
 
-Es gibt auch `@zrzur/bot`, eine ältere, kleinere Bibliothek mit derselben Schnittstelle für Bots. Auch sie ist nicht veröffentlicht. Neue Bots sollten auf `@zrzur/sdk/bot` warten.
+Es gibt auch `@zrzur/bot`, eine ältere, kleinere Bibliothek mit derselben Schnittstelle für Bots. Sie ist nicht veröffentlicht und lässt sich nicht installieren; nutze `@zrzur/sdk/bot`.
 
 ## @zrzur/sdk/bot (für Bots) {#zrzur-sdk-bot-for-bots}
 

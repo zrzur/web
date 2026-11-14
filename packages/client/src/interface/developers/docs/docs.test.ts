@@ -391,13 +391,15 @@ describe("Documentation pages", { timeout: 30_000 }, () => {
       }
   });
 
-  it("links only to Zrzur or GitHub, never to Stoat or Revolt", () => {
+  it("links only to Zrzur, its GitHub and its npm package, never to Stoat or Revolt", () => {
     for (const page of markdownPages)
       for (const link of linksOf(page.source!).filter((l) =>
         /^https?:/.test(l),
       ))
         expect(
-          /^https:\/\/(github\.com\/zrzur|[a-z.]*zrzur\.cc)/.test(link),
+          /^https:\/\/(github\.com\/zrzur|[a-z.]*zrzur\.cc|www\.npmjs\.com\/package\/@zrzur\/sdk$)/.test(
+            link,
+          ),
           `${page.id}: ${link}`,
         ).toBe(true);
     const all =

@@ -2,7 +2,7 @@
 
 Every server channel has `channel_type: "TextChannel"`: text, voice (with `voice`), announcement, forum (with `forum`) and thread (with `parent` and `thread`). A bot also sees the direct messages it is part of (`DirectMessage`). Groups are for people only. The [Event reference](/developers/docs/events#channels) lists the fields and shows how to tell a direct message from a server channel.
 
-The examples use plain HTTP. The SDK lines after them need the SDK, which is not published yet; see [SDKs](/developers/docs/sdk).
+The examples use plain HTTP. The SDK lines after them need `@zrzur/sdk` (`npm install @zrzur/sdk`); see [SDKs](/developers/docs/sdk).
 
 ## Create and change channels
 

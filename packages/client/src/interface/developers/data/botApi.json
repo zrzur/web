@@ -604,21 +604,21 @@
        "roles": {
         "01JC0000000000000000000006": {
          "_id": "01JC0000000000000000000006",
-         "name": "Bots",
-         "permissions": {
-          "a": 4398045478879,
-          "d": 0
-         },
-         "rank": 0
-        },
-        "01JC0000000000000000000007": {
-         "_id": "01JC0000000000000000000007",
          "name": "Moderators",
          "permissions": {
           "a": 256,
           "d": 0
          },
          "rank": 1
+        },
+        "01JC0000000000000000000007": {
+         "_id": "01JC0000000000000000000007",
+         "name": "Bots",
+         "permissions": {
+          "a": 4398045478879,
+          "d": 0
+         },
+         "rank": 0
         }
        },
        "default_permissions": 204586177532928,
@@ -643,9 +643,9 @@
         "server": "01JC0000000000000000000002",
         "user": "01JC0000000000000000000009"
        },
-       "joined_at": "2026-11-14T10:33:50.544Z",
+       "joined_at": "2026-11-14T10:50:04.526Z",
        "roles": [
-        "01JC0000000000000000000006"
+        "01JC0000000000000000000007"
        ]
       }
      ],
@@ -875,7 +875,7 @@
        "server": "01JC0000000000000000000002",
        "user": "01JC0000000000000000000003"
       },
-      "joined_at": "2026-11-14T10:33:49.870Z",
+      "joined_at": "2026-11-14T10:50:04.047Z",
       "nickname": "مشرف"
      },
      "content": "Hello",
@@ -918,7 +918,7 @@
      "channel": "01JC0000000000000000000004",
      "data": {
       "content": "Hello again",
-      "edited": "2026-11-14T10:34:33.353Z",
+      "edited": "2026-11-14T10:50:47.483Z",
       "embeds": []
      },
      "clear": [],
@@ -1417,7 +1417,7 @@
        "server": "01JC0000000000000000000002",
        "user": "01JC0000000000000000000001"
       },
-      "joined_at": "2026-11-14T10:34:33.638Z"
+      "joined_at": "2026-11-14T10:50:47.840Z"
      },
      "seq": 14
     }
@@ -2648,7 +2648,7 @@
         "server": "01JC0000000000000000000002",
         "user": "01JC0000000000000000000001"
        },
-       "joined_at": "2026-11-14T10:34:33.638Z",
+       "joined_at": "2026-11-14T10:50:47.840Z",
        "nickname": "Sample"
       },
       "server_id": "01JC0000000000000000000002",
@@ -2698,14 +2698,14 @@
            "server": "01JC0000000000000000000002",
            "user": "01JC0000000000000000000003"
           },
-          "joined_at": "2026-11-14T10:33:49.870Z",
+          "joined_at": "2026-11-14T10:50:04.047Z",
           "nickname": "مشرف"
          }
         }
        }
       },
-      "respond_by": "2026-11-14T10:34:40.211Z",
-      "expires_at": "2026-11-14T10:49:37.211Z"
+      "respond_by": "2026-11-14T10:50:53.523Z",
+      "expires_at": "2026-11-14T11:05:50.523Z"
      },
      "seq": 19
     }
@@ -7743,7 +7743,7 @@
   "x-ratelimit-bucket": "10916110026516615864",
   "x-ratelimit-limit": "20",
   "x-ratelimit-remaining": "14",
-  "x-ratelimit-reset-after": "2970"
+  "x-ratelimit-reset-after": "3448"
  },
  "endpoints": [
   {
@@ -7916,7 +7916,7 @@
      "user": {
       "_id": "01JC0000000000000000000006",
       "username": "docbot",
-      "discriminator": "2507",
+      "discriminator": "6402",
       "status": {
        "text": "Reading the docs",
        "presence": "Online"
@@ -9754,12 +9754,12 @@
     "request": {},
     "response": {
      "type": "Server",
-     "_id": "hJz5WE7A",
+     "_id": "WkPXseTY",
      "server": "01JC0000000000000000000001",
      "creator": "01JC0000000000000000000006",
      "channel": "01JC0000000000000000000003",
      "uses": 0,
-     "expires": "2026-11-21T10:32:52.862Z"
+     "expires": "2026-11-21T10:49:07.298Z"
     }
    },
    "source": "backend/crates/delta/src/routes/channels/invite_create.rs:20"
@@ -11302,7 +11302,7 @@
       "avatar": null
      },
      "content": "Edited webhook message",
-     "edited": "2026-11-14T10:33:24.043Z",
+     "edited": "2026-11-14T10:49:38.777Z",
      "embeds": []
     }
    },
@@ -12046,15 +12046,15 @@
          2.5
         ],
         "file_upload_size_limits": {
-         "icons": 2500000,
-         "effects": 2000000,
-         "avatars": 4000000,
-         "sounds": 512000,
          "backgrounds": 6000000,
-         "banners": 6000000,
-         "attachments": 20000000,
          "emojis": 500000,
-         "decorations": 2500000
+         "icons": 2500000,
+         "decorations": 2500000,
+         "sounds": 512000,
+         "attachments": 20000000,
+         "avatars": 4000000,
+         "banners": 6000000,
+         "effects": 2000000
         }
        },
        "default": {
@@ -12075,14 +12075,14 @@
         ],
         "file_upload_size_limits": {
          "attachments": 20000000,
+         "backgrounds": 6000000,
+         "effects": 2000000,
+         "sounds": 512000,
+         "avatars": 4000000,
+         "banners": 6000000,
          "icons": 2500000,
          "emojis": 500000,
-         "sounds": 512000,
-         "effects": 2000000,
-         "decorations": 2500000,
-         "backgrounds": 6000000,
-         "avatars": 4000000,
-         "banners": 6000000
+         "decorations": 2500000
         }
        }
       },
@@ -13619,7 +13619,7 @@
      "application_id": "01JC0000000000000000000006",
      "channel_id": "01JC0000000000000000000003",
      "command_id": "01JC0000000000000000000033",
-     "nonce": "59a7a0d1-56ee-4cbb-b65b-fb13981710b7"
+     "nonce": "0435fbbc-f39e-49ac-97a6-c5ad088a5009"
     },
     "error": {
      "type": "IsBot",
@@ -14247,7 +14247,7 @@
      "application_id": "01JC0000000000000000000006",
      "channel_id": "01JC0000000000000000000003",
      "command_id": "01JC0000000000000000000033",
-     "nonce": "fce3d184-5234-4545-b67a-6ed87d1cea6f"
+     "nonce": "c752d70e-14f9-45fd-b782-dc47e8d2e612"
     },
     "error": {
      "type": "IsBot",
@@ -14332,7 +14332,7 @@
        "bot.install"
       ],
       "via": "invite",
-      "installed_at": "2026-11-14T10:32:41.914Z"
+      "installed_at": "2026-11-14T10:48:56.287Z"
      },
      {
       "server_id": "01JC0000000000000000000001",
@@ -14346,7 +14346,7 @@
        "bot.install"
       ],
       "via": "invite",
-      "installed_at": "2026-11-14T10:32:41.971Z"
+      "installed_at": "2026-11-14T10:48:56.346Z"
      }
     ]
    },
@@ -15177,7 +15177,7 @@
       "server": "01JC0000000000000000000001",
       "user": "01JC0000000000000000000007"
      },
-     "joined_at": "2026-11-14T10:32:41.541Z"
+     "joined_at": "2026-11-14T10:48:55.913Z"
     }
    },
    "source": "backend/crates/delta/src/routes/servers/member_fetch.rs:13"
@@ -15367,7 +15367,7 @@
       "server": "01JC0000000000000000000001",
       "user": "01JC0000000000000000000007"
      },
-     "joined_at": "2026-11-14T10:32:41.541Z",
+     "joined_at": "2026-11-14T10:48:55.913Z",
      "nickname": "Bobby",
      "roles": [
       "01JC0000000000000000000010"
@@ -15463,12 +15463,12 @@
     "response": [
      {
       "type": "Server",
-      "_id": "9neYfqg6",
+      "_id": "fgaPJgCH",
       "server": "01JC0000000000000000000001",
       "creator": "01JC0000000000000000000002",
       "channel": "01JC0000000000000000000003",
       "uses": 3,
-      "expires": "2026-11-21T10:32:41.508Z"
+      "expires": "2026-11-21T10:48:55.864Z"
      }
     ]
    },
@@ -15942,42 +15942,42 @@
         "server": "01JC0000000000000000000001",
         "user": "01JC0000000000000000000002"
        },
-       "joined_at": "2026-11-14T10:32:41.440Z"
+       "joined_at": "2026-11-14T10:48:55.781Z"
       },
       {
        "_id": {
         "server": "01JC0000000000000000000001",
         "user": "01JC0000000000000000000007"
        },
-       "joined_at": "2026-11-14T10:32:41.541Z"
+       "joined_at": "2026-11-14T10:48:55.913Z"
       },
       {
        "_id": {
         "server": "01JC0000000000000000000001",
         "user": "01JC0000000000000000000012"
        },
-       "joined_at": "2026-11-14T10:32:41.605Z"
+       "joined_at": "2026-11-14T10:48:55.981Z"
       }
      ],
      "users": [
       {
        "_id": "01JC0000000000000000000002",
        "username": "alice",
-       "discriminator": "9966",
+       "discriminator": "8911",
        "relationship": "None",
        "online": false
       },
       {
        "_id": "01JC0000000000000000000007",
        "username": "bob",
-       "discriminator": "4197",
+       "discriminator": "2447",
        "relationship": "None",
        "online": true
       },
       {
        "_id": "01JC0000000000000000000012",
        "username": "carol",
-       "discriminator": "8422",
+       "discriminator": "0868",
        "relationship": "None",
        "online": false
       }
@@ -16095,7 +16095,7 @@
         "server": "01JC0000000000000000000001",
         "user": "01JC0000000000000000000006"
        },
-       "joined_at": "2026-11-14T10:32:41.880Z",
+       "joined_at": "2026-11-14T10:48:56.263Z",
        "roles": [
         "01JC0000000000000000000005"
        ]
@@ -16105,7 +16105,7 @@
         "server": "01JC0000000000000000000001",
         "user": "01JC0000000000000000000013"
        },
-       "joined_at": "2026-11-14T10:32:41.942Z",
+       "joined_at": "2026-11-14T10:48:56.324Z",
        "roles": [
         "01JC0000000000000000000005"
        ]
@@ -16115,14 +16115,14 @@
         "server": "01JC0000000000000000000001",
         "user": "01JC0000000000000000000014"
        },
-       "joined_at": "2026-11-14T10:32:41.657Z"
+       "joined_at": "2026-11-14T10:48:56.040Z"
       }
      ],
      "users": [
       {
        "_id": "01JC0000000000000000000006",
        "username": "docbot",
-       "discriminator": "2507",
+       "discriminator": "6402",
        "status": {
         "text": "Reading the docs",
         "presence": "Online"
@@ -16136,7 +16136,7 @@
       {
        "_id": "01JC0000000000000000000013",
        "username": "tutorialbot",
-       "discriminator": "4135",
+       "discriminator": "4074",
        "bot": {},
        "relationship": "None",
        "online": false
@@ -16144,7 +16144,7 @@
       {
        "_id": "01JC0000000000000000000014",
        "username": "dave",
-       "discriminator": "9230",
+       "discriminator": "5740",
        "relationship": "None",
        "online": false
       }
@@ -16492,7 +16492,7 @@
      "messages": [
       {
        "_id": "01JC0000000000000000000018",
-       "nonce": "7fdbbe26-63d4-4221-a0b9-af1c11f388a3",
+       "nonce": "9f2525fc-f83d-42b6-a758-bf19394b4e7a",
        "channel": "01JC0000000000000000000003",
        "author": "01JC0000000000000000000006",
        "content": "Hello from the docs",
@@ -16510,7 +16510,7 @@
       {
        "_id": "01JC0000000000000000000006",
        "username": "docbot",
-       "discriminator": "2507",
+       "discriminator": "6402",
        "status": {
         "text": "Reading the docs",
         "presence": "Online"
@@ -16528,7 +16528,7 @@
         "server": "01JC0000000000000000000001",
         "user": "01JC0000000000000000000006"
        },
-       "joined_at": "2026-11-14T10:32:41.880Z",
+       "joined_at": "2026-11-14T10:48:56.263Z",
        "roles": [
         "01JC0000000000000000000005"
        ]
@@ -16659,13 +16659,13 @@
     },
     "response": {
      "_id": "01JC0000000000000000000018",
-     "nonce": "7fdbbe26-63d4-4221-a0b9-af1c11f388a3",
+     "nonce": "9f2525fc-f83d-42b6-a758-bf19394b4e7a",
      "channel": "01JC0000000000000000000003",
      "author": "01JC0000000000000000000006",
      "user": {
       "_id": "01JC0000000000000000000006",
       "username": "docbot",
-      "discriminator": "2507",
+      "discriminator": "6402",
       "status": {
        "text": "Reading the docs",
        "presence": "Online"
@@ -16679,7 +16679,7 @@
        "server": "01JC0000000000000000000001",
        "user": "01JC0000000000000000000006"
       },
-      "joined_at": "2026-11-14T10:32:41.880Z",
+      "joined_at": "2026-11-14T10:48:56.263Z",
       "roles": [
        "01JC0000000000000000000005"
       ]
@@ -16909,7 +16909,7 @@
     "schemaOk": true,
     "response": {
      "_id": "01JC0000000000000000000018",
-     "nonce": "7fdbbe26-63d4-4221-a0b9-af1c11f388a3",
+     "nonce": "9f2525fc-f83d-42b6-a758-bf19394b4e7a",
      "channel": "01JC0000000000000000000003",
      "author": "01JC0000000000000000000006",
      "content": "Hello from the docs",
@@ -17062,11 +17062,11 @@
     },
     "response": {
      "_id": "01JC0000000000000000000018",
-     "nonce": "7fdbbe26-63d4-4221-a0b9-af1c11f388a3",
+     "nonce": "9f2525fc-f83d-42b6-a758-bf19394b4e7a",
      "channel": "01JC0000000000000000000003",
      "author": "01JC0000000000000000000006",
      "content": "Edited",
-     "edited": "2026-11-14T10:33:23.056Z",
+     "edited": "2026-11-14T10:49:37.522Z",
      "embeds": [
       {
        "type": "Text",
@@ -17832,7 +17832,7 @@
        "count": 0
       }
      ],
-     "expires_at": "2026-11-14T11:33:47.622Z",
+     "expires_at": "2026-11-14T11:50:01.949Z",
      "ended": true,
      "me": [],
      "version": 1
@@ -18867,21 +18867,21 @@
       {
        "_id": "01JC0000000000000000000002",
        "username": "alice",
-       "discriminator": "9966",
+       "discriminator": "8911",
        "relationship": "None",
        "online": false
       },
       {
        "_id": "01JC0000000000000000000007",
        "username": "bob",
-       "discriminator": "4197",
+       "discriminator": "2447",
        "relationship": "None",
        "online": true
       },
       {
        "_id": "01JC0000000000000000000012",
        "username": "carol",
-       "discriminator": "8422",
+       "discriminator": "0868",
        "relationship": "None",
        "online": false
       }
@@ -18892,14 +18892,14 @@
         "server": "01JC0000000000000000000001",
         "user": "01JC0000000000000000000002"
        },
-       "joined_at": "2026-11-14T10:32:41.440Z"
+       "joined_at": "2026-11-14T10:48:55.781Z"
       },
       {
        "_id": {
         "server": "01JC0000000000000000000001",
         "user": "01JC0000000000000000000007"
        },
-       "joined_at": "2026-11-14T10:32:41.541Z",
+       "joined_at": "2026-11-14T10:48:55.913Z",
        "nickname": "Bobby",
        "roles": [
         "01JC0000000000000000000010"
@@ -18910,7 +18910,7 @@
         "server": "01JC0000000000000000000001",
         "user": "01JC0000000000000000000006"
        },
-       "joined_at": "2026-11-14T10:32:41.880Z",
+       "joined_at": "2026-11-14T10:48:56.263Z",
        "roles": [
         "01JC0000000000000000000005"
        ]
@@ -19003,7 +19003,7 @@
       {
        "_id": "01JC0000000000000000000014",
        "username": "dave",
-       "discriminator": "9230",
+       "discriminator": "5740",
        "avatar": null
       }
      ],
@@ -19736,7 +19736,7 @@
      "server": "01JC0000000000000000000001",
      "name": "General",
      "role_permissions": {
-      "01M7CSVZZTE5XCV6G2WMAPWB1B": {
+      "01M7CTSQK60JPJ769AE52VGWVC": {
        "a": 536870912,
        "d": 0
       }
@@ -19854,7 +19854,7 @@
       "d": 0
      },
      "role_permissions": {
-      "01M7CSVZZTE5XCV6G2WMAPWB1B": {
+      "01M7CTSQK60JPJ769AE52VGWVC": {
        "a": 536870912,
        "d": 0
       }
@@ -20372,16 +20372,7 @@
       "01JC0000000000000000000004"
      ],
      "roles": {
-      "01M7CSVN8610GFJG5E3ZKCEFN5": {
-       "_id": "01JC0000000000000000000005",
-       "name": "Bots",
-       "permissions": {
-        "a": 4398045478879,
-        "d": 0
-       },
-       "rank": 0
-      },
-      "01M7CSVZZTE5XCV6G2WMAPWB1B": {
+      "01M7CTSQK60JPJ769AE52VGWVC": {
        "_id": "01JC0000000000000000000010",
        "name": "Helpers",
        "permissions": {
@@ -20391,6 +20382,15 @@
        "colour": "#64A9FF",
        "hoist": true,
        "rank": 1
+      },
+      "01M7CTSCSTCDWBZ41F6PMYVXM8": {
+       "_id": "01JC0000000000000000000005",
+       "name": "Bots",
+       "permissions": {
+        "a": 4398045478879,
+        "d": 0
+       },
+       "rank": 0
       }
      },
      "default_permissions": 204586177532928,
@@ -20499,7 +20499,16 @@
       "01JC0000000000000000000004"
      ],
      "roles": {
-      "01M7CSVZZTE5XCV6G2WMAPWB1B": {
+      "01M7CTSCSTCDWBZ41F6PMYVXM8": {
+       "_id": "01JC0000000000000000000005",
+       "name": "Bots",
+       "permissions": {
+        "a": 4398045478879,
+        "d": 0
+       },
+       "rank": 0
+      },
+      "01M7CTSQK60JPJ769AE52VGWVC": {
        "_id": "01JC0000000000000000000010",
        "name": "Helpers",
        "permissions": {
@@ -20509,15 +20518,6 @@
        "colour": "#64A9FF",
        "hoist": true,
        "rank": 1
-      },
-      "01M7CSVN8610GFJG5E3ZKCEFN5": {
-       "_id": "01JC0000000000000000000005",
-       "name": "Bots",
-       "permissions": {
-        "a": 4398045478879,
-        "d": 0
-       },
-       "rank": 0
       }
      },
      "default_permissions": 204586177532928,
@@ -21107,7 +21107,7 @@
       "01JC0000000000000000000004"
      ],
      "roles": {
-      "01M7CSVN8610GFJG5E3ZKCEFN5": {
+      "01M7CTSCSTCDWBZ41F6PMYVXM8": {
        "_id": "01JC0000000000000000000005",
        "name": "Bots",
        "permissions": {
@@ -21116,7 +21116,7 @@
        },
        "rank": 0
       },
-      "01M7CSVZZTE5XCV6G2WMAPWB1B": {
+      "01M7CTSQK60JPJ769AE52VGWVC": {
        "_id": "01JC0000000000000000000010",
        "name": "Helpers",
        "permissions": {
@@ -21690,7 +21690,7 @@
     "schemaOk": true,
     "response": {
      "type": "Server",
-     "code": "9neYfqg6",
+     "code": "fgaPJgCH",
      "server_id": "01JC0000000000000000000001",
      "server_name": "Docs test",
      "channel_id": "01JC0000000000000000000003",
@@ -22252,7 +22252,7 @@
       "01JC0000000000000000000004"
      ],
      "roles": {
-      "01M7CSVN8610GFJG5E3ZKCEFN5": {
+      "01M7CTSCSTCDWBZ41F6PMYVXM8": {
        "_id": "01JC0000000000000000000005",
        "name": "Bots",
        "permissions": {
@@ -22420,7 +22420,7 @@
       "01JC0000000000000000000004"
      ],
      "roles": {
-      "01M7CSVN8610GFJG5E3ZKCEFN5": {
+      "01M7CTSCSTCDWBZ41F6PMYVXM8": {
        "_id": "01JC0000000000000000000005",
        "name": "Bots",
        "permissions": {
@@ -23817,7 +23817,7 @@
     "response": {
      "_id": "01JC0000000000000000000007",
      "username": "bob",
-     "discriminator": "4197",
+     "discriminator": "2447",
      "relationship": "None",
      "online": true
     }
@@ -23919,7 +23919,7 @@
     "response": {
      "_id": "01JC0000000000000000000006",
      "username": "docbot",
-     "discriminator": "2507",
+     "discriminator": "6402",
      "status": {
       "text": "Reading the docs",
       "presence": "Online"
@@ -24722,7 +24722,7 @@
     "response": {
      "_id": "01JC0000000000000000000006",
      "username": "docbot",
-     "discriminator": "2507",
+     "discriminator": "6402",
      "bot": {
       "owner": "01JC0000000000000000000002"
      },

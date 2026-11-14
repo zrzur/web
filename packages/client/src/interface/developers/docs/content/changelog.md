@@ -21,7 +21,7 @@ Every entry says whether existing bots must change. A removal is announced here 
 - **Commands in a direct message.** A person can use a bot's global commands that need no server permission in their direct message with the bot.
 - **Command rules per server.** People with Manage Server and Manage Roles can allow or deny an app's commands for roles, members and channels: `GET` and `PUT /servers/{server_id}/applications/{application_id}/permissions`, and `PUT /servers/{server_id}/applications/{application_id}/commands/{command_id}/permissions`.
 - **Polls, scheduled events, soundboard and stages.** New routes and gateway events, listed in the reference of [Messages](/developers/docs/messages#polls), [Servers](/developers/docs/servers), [Voice calls](/developers/docs/voice) and in the [Event reference](/developers/docs/events). Two new permissions: `UseSoundboard` and `ManageSoundboard`. Polls, forwarding and scheduled events are switched on per installation (`features` in `GET /`); on `api.zrzur.com` they were off when this page was checked.
-- **SDK: rate limits and resume.** The SDK resumes by default for bots, waits out a `429`, and waits for the reset when a bucket is empty. It is not on npm yet; see [SDKs](/developers/docs/sdk).
+- **SDK 2.0.0 on npm (2026-11-14).** `npm install @zrzur/sdk` installs the official library ([@zrzur/sdk on npm](https://www.npmjs.com/package/@zrzur/sdk)). It resumes by default for bots, waits out a `429`, and waits for the reset when a bucket is empty. See [SDKs](/developers/docs/sdk).
 
 ## Documentation, 2026-11-09 {#docs-2026-11-09}
 

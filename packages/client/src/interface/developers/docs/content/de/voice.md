@@ -19,7 +19,7 @@ Hole ein Ticket mit einfachem HTTP:
 
 @@0
 
-Verbinde dich dann mit einem LiveKit-Client. Mit dem SDK (noch nicht veröffentlicht) und `@livekit/rtc-node`:
+Verbinde dich dann mit einem LiveKit-Client. Mit dem SDK und `@livekit/rtc-node`:
 
 @@1
 

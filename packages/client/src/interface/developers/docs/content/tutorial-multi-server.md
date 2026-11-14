@@ -2,7 +2,7 @@
 
 Per-server settings: `/prefix` sets a text-command prefix for one server only.
 
-> This tutorial uses `@zrzur/sdk/bot`, which is not on npm yet. See [SDKs](/developers/docs/sdk). Everything it does works without a library: [Build a complete bot](/developers/docs/tutorial-full-bot).
+> This tutorial uses `@zrzur/sdk/bot`, so run `npm install @zrzur/sdk` in your bot's folder first. See [SDKs](/developers/docs/sdk). Everything it does also works without a library: [Build a complete bot](/developers/docs/tutorial-full-bot).
 
 ## Before you start
 

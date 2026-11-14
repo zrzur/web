@@ -19,7 +19,7 @@
 
 @@0
 
-ثم اتصل بعميل LiveKit. بالحزمة (غير منشورة بعد) و`@livekit/rtc-node`:
+ثم اتصل بعميل LiveKit. بالمكتبة و`@livekit/rtc-node`:
 
 @@1
 

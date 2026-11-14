@@ -2,7 +2,7 @@
 
 Jeder Serverkanal hat `channel_type: "TextChannel"`: Text, Sprache (mit `voice`), Ankündigung, Forum (mit `forum`) und Thread (mit `parent` und `thread`). Ein Bot sieht auch die Direktnachrichten, an denen er teilnimmt (`DirectMessage`). Gruppen sind nur für Menschen. Die [Ereignisreferenz](/developers/docs/events#channels) listet die Felder und zeigt, wie man eine Direktnachricht von einem Serverkanal unterscheidet.
 
-Die Beispiele nutzen einfaches HTTP. Die SDK-Zeilen danach brauchen das SDK, das noch nicht veröffentlicht ist; siehe [SDKs](/developers/docs/sdk).
+Die Beispiele nutzen einfaches HTTP. Die SDK-Zeilen danach brauchen `@zrzur/sdk` (`npm install @zrzur/sdk`); siehe [SDKs](/developers/docs/sdk).
 
 ## Kanäle erstellen und ändern {#create-and-change-channels}
 

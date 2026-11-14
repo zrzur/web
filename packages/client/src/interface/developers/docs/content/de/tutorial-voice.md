@@ -2,7 +2,7 @@
 
 `/join` holt ein Sprach-Ticket und verbindet sich, wenn `@livekit/rtc-node` installiert ist, mit dem Sprachkanal.
 
-> Dieses Tutorial nutzt `@zrzur/sdk/bot`, das noch nicht auf npm ist. Siehe [SDKs](/developers/docs/sdk). Alles, was es tut, geht auch ohne Bibliothek: [Baue einen vollständigen Bot](/developers/docs/tutorial-full-bot).
+> Dieses Tutorial nutzt `@zrzur/sdk/bot`, führe also zuerst `npm install @zrzur/sdk` im Ordner deines Bots aus. Siehe [SDKs](/developers/docs/sdk). Alles, was es tut, geht auch ohne Bibliothek: [Baue einen vollständigen Bot](/developers/docs/tutorial-full-bot).
 
 ## Bevor du beginnst {#before-you-start}
 

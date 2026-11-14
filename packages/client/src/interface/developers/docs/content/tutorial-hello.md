@@ -1,6 +1,6 @@
 # Hello World
 
-A bot that answers `/hello`. Two versions: one without any library, to show the protocol, and one with the SDK.
+A bot that answers `/hello`. Two versions: one with the SDK, and one without any library, to show the protocol.
 
 ## Before you start
 
@@ -12,25 +12,25 @@ export ZRZUR_API_URL=https://api.zrzur.com
 export ZRZUR_WS_URL=wss://events.zrzur.com
 ```
 
-## Without a library
-
-Node 22 or newer, nothing to install.
-
-```example hello-raw.mjs
-
-```
-
-Run it with `node hello-raw.mjs`.
-
 ## With the SDK
 
-`@zrzur/sdk` is not on npm yet, see [SDKs](/developers/docs/sdk). When you have it, this is the same bot:
+Run `npm install @zrzur/sdk` in your bot's folder (Node 22.3 or newer), then save this file there:
 
 ```example hello.mjs
 
 ```
 
 Run it with `node hello.mjs`.
+
+## Without a library
+
+Node 22 or newer, nothing to install. This is the same bot:
+
+```example hello-raw.mjs
+
+```
+
+Run it with `node hello-raw.mjs`.
 
 ## Try it
 

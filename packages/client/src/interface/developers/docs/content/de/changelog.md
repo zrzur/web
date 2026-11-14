@@ -18,7 +18,7 @@ Jeder Eintrag sagt, ob bestehende Bots sich ändern müssen. Ein Wegfall wird hi
 - **Befehle in einer Direktnachricht.** Eine Person kann die globalen Befehle eines Bots, die keine Serverberechtigung brauchen, in ihrer Direktnachricht mit dem Bot nutzen.
 - **Befehlsregeln pro Server.** Wer „Server verwalten“ und „Rollen verwalten“ hat, kann die Befehle einer App für Rollen, Mitglieder und Kanäle erlauben oder verbieten: `GET` und `PUT /servers/{server_id}/applications/{application_id}/permissions` sowie `PUT /servers/{server_id}/applications/{application_id}/commands/{command_id}/permissions`.
 - **Umfragen, geplante Events, Soundboard und Bühnen.** Neue Routen und Gateway-Ereignisse, aufgelistet in der Referenz von [Nachrichten](/developers/docs/messages#polls), [Server](/developers/docs/servers), [Sprachanrufe](/developers/docs/voice) und in der [Ereignisreferenz](/developers/docs/events). Zwei neue Berechtigungen: `UseSoundboard` und `ManageSoundboard`. Umfragen, Weiterleiten und geplante Events werden pro Installation eingeschaltet (`features` in `GET /`); auf `api.zrzur.com` waren sie aus, als diese Seite geprüft wurde.
-- **SDK: Ratenlimits und Fortsetzen.** Das SDK setzt für Bots standardmäßig fort, wartet ein `429` ab und wartet auf das Zurücksetzen, wenn ein Bucket leer ist. Es ist noch nicht auf npm; siehe [SDKs](/developers/docs/sdk).
+- **SDK 2.0.0 auf npm (2026-11-14).** `npm install @zrzur/sdk` installiert die offizielle Bibliothek ([@zrzur/sdk auf npm](https://www.npmjs.com/package/@zrzur/sdk)). Das SDK setzt für Bots standardmäßig fort, wartet ein `429` ab und wartet auf das Zurücksetzen, wenn ein Bucket leer ist. Siehe [SDKs](/developers/docs/sdk).
 
 ## Dokumentation, 2026-11-09 {#docs-2026-11-09}
 

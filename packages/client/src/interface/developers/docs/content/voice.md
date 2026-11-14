@@ -25,7 +25,7 @@ curl -X POST "https://api.zrzur.com/channels/CHANNEL_ID/join_call" \
 # answer: { "token": "LIVEKIT_TOKEN", "url": "wss://voice.zrzur.com" }
 ```
 
-Then connect with a LiveKit client. With the SDK (not published yet) and `@livekit/rtc-node`:
+Then connect with a LiveKit client. With the SDK and `@livekit/rtc-node`:
 
 ```js
 const ticket = await bot.voice.join(channelId); // { url, token, node }

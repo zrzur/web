@@ -1,6 +1,6 @@
 # Start your bot
 
-In about ten minutes you will have a bot that answers a slash command in your own test server. You need a Zrzur account, a server of your own and Node.js 22 or newer. There is nothing to install.
+In about ten minutes you will have a bot that answers a slash command in your own test server. You need a Zrzur account, a server of your own and Node.js 22.3 or newer.
 
 ## 1. Create an application {#create-an-application}
 
@@ -18,15 +18,23 @@ On the Overview tab of your application choose Add to a server, and pick a serve
 
 Do this before the first run. A bot that is not in the server gets 403 MissingPermission when it writes to one of its channels, which looks like a missing permission. [Is the bot in that server?](/developers/docs/errors#not-installed)
 
-## 4. No library needed {#get-the-sdk}
+## 4. Install the library {#get-the-sdk}
 
-Node.js 22 has everything built in: the API is plain HTTP and WebSocket. The official library, @zrzur/sdk, is not on npm yet. [About the SDKs](/developers/docs/sdk)
+Make a folder for your bot and install `@zrzur/sdk`, the official library:
+
+```bash Terminal
+mkdir my-bot
+cd my-bot
+npm install @zrzur/sdk
+```
+
+It keeps the gateway connection for you and answers commands. The API is plain HTTP and WebSocket, so a bot also works with no library at all: [Without a library](/developers/docs/raw-http). [About the SDKs](/developers/docs/sdk)
 
 ## 5. Write your first bot {#first-bot}
 
-Save this as hello-raw.mjs in an empty folder. It registers /hello and answers it.
+Save this as hello.mjs in that folder. It registers /hello and answers it.
 
-```example hello-raw.mjs
+```example hello.mjs
 ```
 
 ## 6. Run it {#run-it}
@@ -34,14 +42,11 @@ Save this as hello-raw.mjs in an empty folder. It registers /hello and answers i
 Set the token, then start the bot:
 
 ```bash Terminal
-mkdir my-bot
-cd my-bot
-# save hello-raw.mjs here, then:
 export ZRZUR_BOT_TOKEN=YOUR_BOT_TOKEN
-node hello-raw.mjs
+node hello.mjs
 ```
 
-When the terminal shows ready, type /hello in a channel of your test server. The bot answers Hello from Zrzur!
+When the terminal shows ready, type /hello in a channel of your test server. The bot answers Hello and your name.
 
 ## 7. Receive events {#gateway}
 
@@ -49,7 +54,7 @@ The bot keeps a WebSocket connection to the gateway. Commands, button clicks, ne
 
 ## 8. Build a real bot {#deploy}
 
-This bot stops when the line drops and knows only one command. The complete bot has commands, buttons, a form, moderation, saved data, error handling and reconnects, in one file. [Build a complete bot](/developers/docs/tutorial-full-bot)
+This bot knows only one command. The complete bot has commands, buttons, a form, moderation, saved data, error handling and reconnects, in one file and without a library. [Build a complete bot](/developers/docs/tutorial-full-bot)
 
 ## Next steps {#next-steps}
 

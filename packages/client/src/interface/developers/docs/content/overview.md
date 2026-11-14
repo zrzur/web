@@ -76,7 +76,6 @@ Self-hosted servers use their own addresses. `GET /` on the API returns them, wi
 - **Webhooks, polls, forwarding and scheduled events** where the installation has them switched off. `GET /` says which are on; see [Base URLs](/developers/docs/overview#base-urls).
 - **Interactions over HTTP** on a server where the setting `signing_key` is empty. There the routes answer `FeatureDisabled`, and bots use the gateway.
 - **Bots creating bots or servers, joining by invite, or having friends.** People do those. The [coverage page](/developers/docs/coverage) lists every endpoint bots are refused.
-- **The SDK as a package.** It is not on npm yet. Every page here works with Node alone; see [SDKs](/developers/docs/sdk).
 
 ## What each status means {#status}
 

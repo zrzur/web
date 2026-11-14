@@ -10,13 +10,13 @@
 
 لا تحتاج إلى SolidJS إلا مع `@zrzur/sdk/solid`، ولا ينزله البوت أبدًا.
 
-> **لا يمكنك تثبيتها من npm بعد.** ليست `@zrzur/sdk` على npm، ومصدرها في [github.com/zrzur/sdk-js](https://github.com/zrzur/sdk-js). تعرض هذه الصفحة ما تقدمه. ولتجربتها اليوم ابنِها من ذلك المصدر باستخدام Node 22.3 أو أحدث وpnpm:
+ثبّتها من npm، باستخدام Node 22.3 أو أحدث:
 
 @@0
 
-ثم نفّذ `npm install` على الملف `zrzur-sdk-2.0.0.tgz` الناتج، من مجلد بوتك. لا يعمل التثبيت مباشرة من عنوان GitHub: المستودع يحوي المصدر لا الملفات المبنية. وإلى ذلك الحين ابنِ بـNode وحده: [ابنِ بوتًا كاملًا](/developers/docs/tutorial-full-bot) لا يحتاج إلى مكتبة، وفي [بلا مكتبة](/developers/docs/raw-http) كل الطلبات.
+الحزمة هي [‎@zrzur/sdk على npm](https://www.npmjs.com/package/@zrzur/sdk)، ومصدرها في [github.com/zrzur/sdk-js](https://github.com/zrzur/sdk-js). ويعمل البوت أيضًا دون أي مكتبة: [ابنِ بوتًا كاملًا](/developers/docs/tutorial-full-bot) لا يحتاج إلى مكتبة، وفي [بلا مكتبة](/developers/docs/raw-http) كل الطلبات.
 
-توجد أيضًا `@zrzur/bot`، مكتبة أقدم وأصغر بالواجهة نفسها للبوتات، وهي غير منشورة أيضًا. ينبغي للبوتات الجديدة انتظار `@zrzur/sdk/bot`.
+توجد أيضًا `@zrzur/bot`، مكتبة أقدم وأصغر بالواجهة نفسها للبوتات. هي غير منشورة ولا يمكن تثبيتها؛ استخدم `@zrzur/sdk/bot`.
 
 ## @zrzur/sdk/bot (للبوتات) {#zrzur-sdk-bot-for-bots}
 
