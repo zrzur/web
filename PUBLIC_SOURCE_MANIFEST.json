@@ -292,8 +292,8 @@
     },
     {
       "path": "CHANGELOG.md",
-      "sha256": "6882c51b394f9898430c15763f5fe0e64c539491b0858c9b11cb24f9615e708b",
-      "bytes": 144644,
+      "sha256": "088a7cea54d69ff048411bff7dfcb1f45b941dea79cc547b86aa35b21a1c0d03",
+      "bytes": 144842,
       "category": "public-documentation"
     },
     {
@@ -1132,8 +1132,8 @@
     },
     {
       "path": "packages/client/components/app/interface/desktop/Titlebar.tsx",
-      "sha256": "1226d95863f4f5262904be1da68ff0ad223574a21ab5b03bc37b33e066d11e95",
-      "bytes": 11441,
+      "sha256": "c099b9d8e31939015a64e0a660c07f3788bd260cd18aa99e3f0ac289b3f40fd3",
+      "bytes": 11695,
       "category": "product-source-or-build-manifest"
     },
     {
