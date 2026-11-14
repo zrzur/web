@@ -12,6 +12,7 @@ import { useModals } from "@revolt/modal";
 import { useNavigate } from "@revolt/routing";
 import { Header, UserStatus } from "@revolt/ui";
 import { Profile } from "@revolt/ui/components/features";
+import { fetchFullProfile } from "@revolt/ui/components/features/profiles/linkedGames";
 import { createProfileTheme } from "@revolt/ui/components/features/profiles/profileTheme";
 import {
   themeColours,
@@ -68,7 +69,7 @@ function Body(props: { user: User }) {
 
   const query = useQuery(() => ({
     queryKey: ["profile", props.user.id],
-    queryFn: () => props.user.fetchProfile(),
+    queryFn: () => fetchFullProfile(client(), props.user),
   }));
 
   const theme = createProfileTheme(

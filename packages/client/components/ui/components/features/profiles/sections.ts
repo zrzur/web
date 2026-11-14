@@ -5,6 +5,7 @@ export const PROFILE_SECTIONS = [
   "creations",
   "wearing",
   "member_since",
+  "games",
 ] as const;
 
 export type ProfileSectionId = (typeof PROFILE_SECTIONS)[number];

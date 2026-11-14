@@ -388,6 +388,20 @@ export function useError() {
         AlreadyConnected: () => t`You're already in this call.`,
         NotConnected: () => t`You're not in this call.`,
         UnknownNode: () => t`Voice isn't available right now. Try again later.`,
+        LinkedAccountTaken: () =>
+          t`This Steam account is already linked to another Zrzur account.`,
+        LinkedSignInFailed: () =>
+          t`Steam could not confirm the sign-in. Start again from Settings.`,
+        LinkedServiceFailed: () =>
+          t`Steam did not answer. Try again in a few minutes.`,
+        LinkedRefreshTooSoon: () =>
+          t`You refreshed a moment ago. ${plural(
+            Math.max(1, Math.ceil((fields.retry_after ?? 60) / 60)),
+            {
+              one: "Try again in # minute.",
+              other: "Try again in # minutes.",
+            },
+          )}`,
         ProxyError: () => t`This link couldn't be loaded.`,
         FileTooSmall: () => t`This file is empty.`,
         FileTooLarge: () => t`This file is too large.`,
@@ -472,6 +486,8 @@ export function useError() {
             "server_events_server"
           )
             return t`Events are off in this server.`;
+          if ((err as unknown as { feature?: string }).feature === "steam")
+            return t`Steam can't be linked on this server yet.`;
           return t`This feature is currently disabled.`;
         case "FileTypeNotAllowed":
           return t`This file type is not allowed.`;

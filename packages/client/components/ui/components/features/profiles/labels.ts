@@ -52,6 +52,7 @@ export function useSectionLabels() {
     links: t`Links`,
     creations: t`Their creations`,
     wearing: t`Wearing`,
+    games: t`Games`,
   };
   return (id: string) => labels[id] ?? id;
 }

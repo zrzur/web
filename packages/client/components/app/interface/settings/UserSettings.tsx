@@ -55,6 +55,7 @@ import AdvancedSettings from "./user/Advanced";
 import { AppearanceMenu } from "./user/appearance";
 import { MyBadges } from "./user/badges/MyBadges";
 import { ConnectedApps } from "./user/ConnectedApps";
+import { Connections } from "./user/connections/Connections";
 import { Feedback } from "./user/Feedback";
 import { KeybindsSettings } from "./user/Keybinds";
 import { LanguageSettings } from "./user/Language";
@@ -135,6 +136,8 @@ const Config: SettingsConfiguration<{ server: Server }> = {
         return <Sessions />;
       case "connected-apps":
         return <ConnectedApps />;
+      case "connections":
+        return <Connections />;
       case "my-data":
         return <MyData />;
       case "language":
@@ -354,6 +357,12 @@ const Config: SettingsConfiguration<{ server: Server }> = {
               id: "sessions",
               icon: <MdVerifiedUser {...iconSize(20)} />,
               title: <Trans>Sessions</Trans>,
+            },
+            {
+              // accounts on other services shown on the profile (Steam)
+              id: "connections",
+              icon: <Icon name="game-controller" size={20} />,
+              title: <Trans>Connections</Trans>,
             },
             {
               // apps you let act for you through OAuth2, revoked here

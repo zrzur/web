@@ -382,6 +382,19 @@ msgstr "{0} kostenloser Flügel"
 #~ msgid "{0} friends online"
 #~ msgstr ""
 
+#. placeholder {0}: number(games().game_count ?? 0)
+#. placeholder {0}: number(props.account.game_count ?? 0)
+#: components/app/interface/settings/user/connections/Connections.tsx
+#: components/ui/components/features/profiles/ProfileGames.tsx
+msgid "{0} games"
+msgstr "{0} Spiele"
+
+#. placeholder {0}: number(game.hours)
+#: components/app/interface/settings/user/connections/Connections.tsx
+#: components/ui/components/features/profiles/ProfileGames.tsx
+msgid "{0} h"
+msgstr "{0} Std."
+
 #. placeholder {0}: left.value
 #: components/app/interface/settings/server/invites/ListServerInvites.tsx
 msgid "{0} h left"
@@ -391,6 +404,13 @@ msgstr "noch {0} Std."
 #: components/app/interface/settings/server/LobbyAppearanceEditor.tsx
 msgid "{0} hex"
 msgstr "{0} als Hex"
+
+#. placeholder {0}: number(games().total_hours ?? 0)
+#. placeholder {0}: number(props.account.total_hours ?? 0)
+#: components/app/interface/settings/user/connections/Connections.tsx
+#: components/ui/components/features/profiles/ProfileGames.tsx
+msgid "{0} hours played"
+msgstr "{0} Stunden gespielt"
 
 #. placeholder {0}: signed(membersChange(), number())
 #: components/app/interface/settings/server/insights/InsightsPage.tsx
@@ -521,6 +541,13 @@ msgstr "{0} hat jetzt Zrzur Feather. Deine Nachricht steht in den Abos."
 #: components/app/interface/settings/user/bots/CommandManager.tsx
 msgid "{0} of {1}"
 msgstr "{0} von {1}"
+
+#. placeholder {0}: number(game.achievements_unlocked ?? 0)
+#. placeholder {1}: number(game.achievements_total ?? 0)
+#: components/app/interface/settings/user/connections/Connections.tsx
+#: components/ui/components/features/profiles/ProfileGames.tsx
+msgid "{0} of {1} achievements"
+msgstr "{0} von {1} Erfolgen"
 
 #. placeholder {0}: held().length
 #. placeholder {1}: collectable()
@@ -2522,6 +2549,10 @@ msgstr "Alle"
 msgid "Anyone up for ranked tonight?"
 msgstr "Wer ist heute Abend bei Ranked dabei?"
 
+#: components/app/interface/settings/user/connections/Connections.tsx
+msgid "anyone who can open your Zrzur profile. If you are under 18, or we do not know your age, only your friends. You see a preview first and can hide any game."
+msgstr "alle, die dein Zrzur-Profil öffnen können. Wenn du unter 18 bist oder wir dein Alter nicht kennen, nur deine Freunde. Du siehst zuerst eine Vorschau und kannst jedes Spiel ausblenden."
+
 #: components/app/interface/settings/server/ServerPrivacy.tsx
 #~ msgid "Anyone with a join link joins right away. Not listed on Discover unless you choose to."
 #~ msgstr "Alle mit einem Beitrittslink treten sofort bei. Nicht auf Entdecken gelistet, außer du entscheidest dich dafür."
@@ -3083,6 +3114,10 @@ msgstr "Zurück"
 #: components/ui/components/features/messaging/composition/picker/GifPicker.tsx
 msgid "Back to categories"
 msgstr "Zurück zu den Kategorien"
+
+#: src/interface/SteamReturn.tsx
+msgid "Back to Connections"
+msgstr "Zurück zu Verknüpfungen"
 
 #: components/ui/components/features/voice/stage/StagePanel.tsx
 msgid "Back to listeners"
@@ -5259,6 +5294,10 @@ msgstr "Kongo"
 msgid "Connect"
 msgstr "Verbinden"
 
+#: components/app/interface/settings/user/connections/Connections.tsx
+msgid "Connect Steam"
+msgstr "Steam verknüpfen"
+
 #: src/interface/OAuth.tsx
 msgid "Connect to voice"
 msgstr "Mit Sprachkanälen verbinden"
@@ -5300,6 +5339,10 @@ msgstr "Verbindung verloren"
 #: components/ui/components/features/voice/callCard/VoiceCallCardStatus.tsx
 msgid "Connection lost. Reconnecting…"
 msgstr "Verbindung verloren. Verbindung wird wiederhergestellt…"
+
+#: components/app/interface/settings/UserSettings.tsx
+msgid "Connections"
+msgstr "Verknüpfungen"
 
 #: components/app/interface/settings/UserSettings.tsx
 msgid "Contact support"
@@ -5378,6 +5421,10 @@ msgstr "Weiter zur App"
 #: components/modal/modals/PlusCheckout.tsx
 msgid "Continue to payment"
 msgstr "Weiter zur Zahlung"
+
+#: components/app/interface/settings/user/connections/Connections.tsx
+msgid "Continue to Steam"
+msgstr "Weiter zu Steam"
 
 #: components/app/interface/settings/user/Language.tsx
 msgid "Contribute a language"
@@ -6852,6 +6899,7 @@ msgstr "Deaktiviert"
 msgid "Discard recording"
 msgstr "Aufnahme verwerfen"
 
+#: components/app/interface/settings/user/connections/Connections.tsx
 #: components/ui/components/features/voice/callCard/VoiceCallCardActions.tsx
 #: src/interface/navigation/channels/AccountBar.tsx
 msgid "Disconnect"
@@ -6866,6 +6914,10 @@ msgstr "Aus dem Sprachkanal trennen"
 #: src/interface/navigation/channels/AccountBar.tsx
 msgid "Disconnected"
 msgstr "Verbindung getrennt"
+
+#: components/app/interface/settings/user/connections/Connections.tsx
+msgid "Disconnecting deletes everything Zrzur copied from Steam at once."
+msgstr "Beim Trennen löscht Zrzur sofort alles, was es von Steam kopiert hat."
 
 #: components/app/interface/settings/user/Native.tsx
 #~ msgid "Discord RPC"
@@ -8630,6 +8682,10 @@ msgstr "Von unten"
 #~ msgid "From gaming to study groups, there's a place for everyone."
 #~ msgstr "Von Gaming bis Lerngruppen: Hier ist Platz für alle."
 
+#: components/ui/components/features/profiles/ProfileGames.tsx
+msgid "From Steam"
+msgstr "Von Steam"
+
 #: components/app/interface/settings/user/appearance/AnimationSettings.tsx
 msgid "From the end"
 msgstr "Vom Ende"
@@ -8710,6 +8766,8 @@ msgstr "Gambia"
 #~ msgstr "spieleabend"
 
 #: components/app/interface/discover/categories.tsx
+#: components/ui/components/features/profiles/labels.ts
+#: components/ui/components/features/profiles/ProfileGames.tsx
 msgid "Games"
 msgstr "Spiele"
 
@@ -9631,6 +9689,10 @@ msgstr "Ich habe den Code und jede Berechtigung gelesen, und die Ausführung ist
 msgid "I understand the consequences"
 msgstr "Ich verstehe die Konsequenzen"
 
+#: components/app/interface/settings/user/connections/Connections.tsx
+msgid "I want Zrzur to copy this and show it on my profile, including anything it may reveal about me."
+msgstr "Ich möchte, dass Zrzur dies kopiert und in meinem Profil zeigt, auch alles, was es über mich verraten kann."
+
 #: src/interface/events/EventCard.tsx
 msgid "I'm interested"
 msgstr "Interessiert mich"
@@ -10511,6 +10573,10 @@ msgstr "Verschlüsselte Protokolle aufbewahren"
 msgid "Keep Feather"
 msgstr "Feather behalten"
 
+#: components/app/interface/settings/user/connections/Connections.tsx
+msgid "Keep in mind:"
+msgstr "Bedenke:"
+
 #: components/app/interface/settings/server/roles/ServerRoleOverview.tsx
 #: components/app/interface/settings/user/profile/ReviewQueue.tsx
 msgid "Keep it"
@@ -11045,6 +11111,10 @@ msgstr "Gib den Link zur Datenschutzerklärung des Bots an, beginnend mit https:
 #: components/app/interface/settings/user/bots/BotVerification.tsx
 msgid "Link to the bot's terms of service, starting with https://."
 msgstr "Gib den Link zu den Nutzungsbedingungen des Bots an, beginnend mit https://."
+
+#: src/interface/SteamReturn.tsx
+msgid "Linking your Steam account…"
+msgstr "Dein Steam-Konto wird verknüpft …"
 
 #: components/app/interface/settings/user/profile/ProfileExtras.tsx
 #: components/ui/components/features/profiles/labels.ts
@@ -12494,6 +12564,10 @@ msgstr "Marokko"
 msgid "Most mentions in one message"
 msgstr "Höchstens Erwähnungen pro Nachricht"
 
+#: components/app/interface/settings/user/connections/Connections.tsx
+msgid "Most played games"
+msgstr "Meistgespielte Spiele"
+
 #: src/interface/designs/Home.tsx
 msgid "Most worn"
 msgstr "Meistgetragen"
@@ -13846,6 +13920,7 @@ msgstr "Nicht gelistet."
 #~ msgid "Not listed. Listing is a separate choice, reviewed before it goes live."
 #~ msgstr "Nicht gelistet. Das Listen ist eine eigene Entscheidung und wird vor der Veröffentlichung geprüft."
 
+#: components/app/interface/settings/user/connections/Connections.tsx
 #: components/client/AgePrompt.tsx
 msgid "Not now"
 msgstr "Nicht jetzt"
@@ -13857,6 +13932,10 @@ msgstr "Nicht jetzt"
 #: components/app/interface/settings/user/subscriptions/Subscriptions.tsx
 msgid "Not on a server yet"
 msgstr "Noch auf keinem Server"
+
+#: components/app/interface/settings/user/connections/Connections.tsx
+msgid "Not on your profile"
+msgstr "Nicht in deinem Profil"
 
 #: components/modal/modals/PlusCheckout.tsx
 msgid "Not open yet"
@@ -14216,6 +14295,10 @@ msgstr "Auf dieser Seite"
 #: components/app/interface/settings/user/voice/GameKeysOptions.tsx
 msgid "On Wayland, keys are heard only in games that run through XWayland."
 msgstr "Unter Wayland werden Tasten nur in Spielen erkannt, die über XWayland laufen."
+
+#: components/app/interface/settings/user/connections/Connections.tsx
+msgid "On your profile"
+msgstr "In deinem Profil"
 
 #: src/interface/designs/DesignPage.tsx
 msgid "On your profile now"
@@ -16519,6 +16602,7 @@ msgid "Reference, user or target id"
 msgstr "Referenz, Nutzer- oder Ziel-ID"
 
 #: components/app/interface/settings/server/audit/AuditLog.tsx
+#: components/app/interface/settings/user/connections/Connections.tsx
 #: components/app/interface/settings/user/subscriptions/Subscriptions.tsx
 msgid "Refresh"
 msgstr "Aktualisieren"
@@ -18939,6 +19023,10 @@ msgstr "„ID kopieren“ in Kontextmenüs anzeigen"
 msgid "Show {0} more languages in progress"
 msgstr "{0} weitere Sprachen in Arbeit anzeigen"
 
+#: components/app/interface/settings/user/connections/Connections.tsx
+msgid "Show accounts you have on other services on your profile. You choose what shows, and you can hide or disconnect them at any time."
+msgstr "Zeig in deinem Profil Konten, die du bei anderen Diensten hast. Du entscheidest, was zu sehen ist, und kannst sie jederzeit ausblenden oder trennen."
+
 #: components/app/interface/settings/user/Advanced.tsx
 #~ msgid "Show admin panel shortcuts in context menus"
 #~ msgstr "Admin-Verknüpfungen in Kontextmenüs anzeigen"
@@ -19006,6 +19094,10 @@ msgstr "Benachrichtigungen anzeigen, während die App geöffnet oder im Hintergr
 msgid "Show notifications while this tab is open."
 msgstr "Benachrichtigungen anzeigen, solange dieser Tab geöffnet ist."
 
+#: components/app/interface/settings/user/connections/Connections.tsx
+msgid "Show on my profile"
+msgstr "In meinem Profil zeigen"
+
 #: components/app/interface/settings/user/badges/MyBadges.tsx
 #~ msgid "Show on profile"
 #~ msgstr "Im Profil zeigen"
@@ -19049,6 +19141,10 @@ msgstr "Webhooks anzeigen, erstellt von"
 #: components/app/interface/settings/user/bots/ViewBot.tsx
 msgid "Show your name on the bot's page"
 msgstr "Deinen Namen auf der Seite des Bots zeigen"
+
+#: components/app/interface/settings/user/connections/Connections.tsx
+msgid "Show your Steam name, games and achievements on your profile. You sign in on Steam's own page. We never see your Steam password."
+msgstr "Zeig deinen Steam-Namen, deine Spiele und Erfolge in deinem Profil. Du meldest dich auf der Seite von Steam selbst an. Dein Steam-Passwort sehen wir nie."
 
 #: components/app/interface/settings/user/Native.tsx
 #~ msgid "Show Zrzur using Discord rich presence."
@@ -19830,6 +19926,39 @@ msgstr "Statustext"
 #: components/app/interface/settings/user/appearance/AnimationSettings.tsx
 msgid "Steady"
 msgstr "Konstant"
+
+#: components/app/interface/settings/user/connections/Connections.tsx
+msgid "Steam"
+msgstr "Steam"
+
+#: components/app/interface/settings/user/connections/Connections.tsx
+msgid "Steam account"
+msgstr "Steam-Konto"
+
+#: components/app/interface/settings/user/connections/Connections.tsx
+#: components/i18n/errors.tsx
+msgid "Steam can't be linked on this server yet."
+msgstr "Steam kann auf diesem Server noch nicht verknüpft werden."
+
+#: components/app/interface/settings/user/connections/Connections.tsx
+msgid "Steam could not be opened."
+msgstr "Steam konnte nicht geöffnet werden."
+
+#: components/i18n/errors.tsx
+msgid "Steam could not confirm the sign-in. Start again from Settings."
+msgstr "Steam konnte die Anmeldung nicht bestätigen. Fang in den Einstellungen neu an."
+
+#: components/i18n/errors.tsx
+msgid "Steam did not answer. Try again in a few minutes."
+msgstr "Steam hat nicht geantwortet. Versuch es in ein paar Minuten noch einmal."
+
+#: components/app/interface/settings/user/connections/Connections.tsx
+msgid "Steam is a trademark of Valve Corporation. Zrzur is not affiliated with Valve."
+msgstr "Steam ist eine Marke der Valve Corporation. Zrzur ist nicht mit Valve verbunden."
+
+#: src/interface/SteamReturn.tsx
+msgid "Steam was not linked"
+msgstr "Steam wurde nicht verknüpft"
 
 #: components/app/interface/settings/server/LobbySettings.tsx
 msgid "Steps for new members that tick themselves off."
@@ -20618,6 +20747,10 @@ msgstr "Das wurde nicht gefunden. Vielleicht hat es sich geändert, versuch es n
 #: components/modal/modals/SignOutSessions.tsx
 msgid "That device will need to sign in again."
 msgstr "Das Gerät muss sich erneut anmelden."
+
+#: components/app/interface/settings/user/connections/Connections.tsx
+msgid "That did not work."
+msgstr "Das hat nicht geklappt."
 
 #: components/auth/src/flows/FlowConfirmChange.tsx
 #: components/i18n/errors.tsx
@@ -21628,6 +21761,10 @@ msgstr "Diese Einladung gilt nicht für einen Server."
 msgid "This invite link is paused right now."
 msgstr "Dieser Einladungslink ist gerade pausiert."
 
+#: components/app/interface/settings/user/connections/Connections.tsx
+msgid "This is a preview. Nothing shows on your profile until you switch it on. Untick any game you want to keep to yourself."
+msgstr "Das ist eine Vorschau. In deinem Profil erscheint nichts, bis du es einschaltest. Entferne den Haken bei jedem Spiel, das du für dich behalten willst."
+
 #: components/app/interface/settings/server/webhooks/ServerWebhooks.tsx
 msgid "This is a test message."
 msgstr "Dies ist eine Testnachricht."
@@ -21946,6 +22083,18 @@ msgstr "Dieser Sound ist schon auf dem Soundboard."
 msgid "This sound is too long. Sounds can be up to {0} seconds."
 msgstr "Dieser Sound ist zu lang. Sounds dürfen bis zu {0} Sekunden lang sein."
 
+#: components/i18n/errors.tsx
+msgid "This Steam account is already linked to another Zrzur account."
+msgstr "Dieses Steam-Konto ist schon mit einem anderen Zrzur-Konto verknüpft."
+
+#: components/ui/components/features/profiles/ProfileGames.tsx
+msgid "This Steam account is private."
+msgstr "Dieses Steam-Konto ist privat."
+
+#: components/app/interface/settings/user/connections/Connections.tsx
+msgid "This Steam account or its game details are private. Make them public on Steam, then press Refresh."
+msgstr "Dieses Steam-Konto oder seine Spieldetails sind privat. Mach sie auf Steam öffentlich und tippe dann auf „Aktualisieren“."
+
 #: components/app/interface/settings/channel/ForumTags.tsx
 msgid "this tag"
 msgstr "diesen Tag"
@@ -21965,6 +22114,10 @@ msgstr "Dieses Ticket konnte nicht geladen werden."
 #: components/app/interface/settings/user/support/ContactSupport.tsx
 msgid "This ticket is closed. Write a new one if you still need help."
 msgstr "Dieses Ticket ist geschlossen. Schreib ein neues, wenn du noch Hilfe brauchst."
+
+#: components/app/interface/settings/user/connections/Connections.tsx
+msgid "this ties your Steam account to your Zrzur account. What you play can say something about your beliefs, health or sexuality."
+msgstr "das verbindet dein Steam-Konto mit deinem Zrzur-Konto. Was du spielst, kann etwas über deinen Glauben, deine Gesundheit oder deine Sexualität verraten."
 
 #: components/i18n/errors.tsx
 msgid "This user has blocked you."
@@ -22377,6 +22530,7 @@ msgstr "Versuch ein anderes Wort oder stöbere in den Kategorien."
 #: components/app/interface/settings/user/badges/MyBadges.tsx
 #: components/app/interface/settings/user/bots/PrivilegedIntents.tsx
 #: components/app/interface/settings/user/ConnectedApps.tsx
+#: components/app/interface/settings/user/connections/Connections.tsx
 #: components/app/interface/settings/user/myData/MyData.tsx
 #: components/app/interface/settings/user/plugins/PluginDetail.tsx
 #: components/app/interface/settings/user/profile/CommunityGallery.tsx
@@ -22957,6 +23111,10 @@ msgstr "updates"
 #: src/interface/navigation/channels/ServerStats.tsx
 msgid "Updates by itself. Nobody can open it."
 msgstr "Aktualisiert sich selbst. Niemand kann ihn öffnen."
+
+#: components/app/interface/settings/user/connections/Connections.tsx
+msgid "Updates:"
+msgstr "Aktualisierung:"
 
 #: components/app/interface/settings/user/plugins/common.tsx
 msgid "Updating…"
@@ -23783,9 +23941,17 @@ msgstr "Wir fragen alle einmal, um jüngere Menschen zu schützen."
 msgid "We automatically include the reported content and, for messages, a few messages around it. You don't need to describe anything graphic."
 msgstr "Wir fügen den gemeldeten Inhalt automatisch bei, bei Nachrichten auch ein paar Nachrichten davor und danach. Du musst nichts Drastisches beschreiben."
 
+#: components/app/interface/settings/user/connections/Connections.tsx
+msgid "we copy it again only when you press Refresh. Private on Steam means nothing shows here. You can hide or disconnect at any time in Settings; disconnecting deletes this copy."
+msgstr "wir kopieren es nur erneut, wenn du auf „Aktualisieren“ tippst. Privat auf Steam heißt, dass hier nichts erscheint. Du kannst jederzeit in den Einstellungen ausblenden oder trennen; Trennen löscht diese Kopie."
+
 #: components/app/interface/settings/user/ConnectedApps.tsx
 msgid "We could not load your connected apps."
 msgstr "Deine verbundenen Apps konnten nicht geladen werden."
+
+#: components/app/interface/settings/user/connections/Connections.tsx
+msgid "We could not load your connections."
+msgstr "Deine Verknüpfungen konnten nicht geladen werden."
 
 #: components/app/interface/settings/user/Sessions.tsx
 msgid "We could not load your sessions."
@@ -23836,6 +24002,10 @@ msgstr "Wir bereiten sie im Hintergrund vor und schicken dir eine E-Mail, sobald
 #: components/modal/modals/EditEmail.tsx
 msgid "We sent a confirmation link to <0>{0}</0>. Your login email changes once you open it."
 msgstr "Wir haben einen Bestätigungslink an <0>{0}</0> gesendet. Deine Login-E-Mail ändert sich, sobald du ihn öffnest."
+
+#: components/app/interface/settings/user/connections/Connections.tsx
+msgid "We will copy:"
+msgstr "Wir kopieren:"
 
 #: components/auth/src/flows/FlowReset.tsx
 msgid "We'll email you a secure link to choose a new password."
@@ -24305,6 +24475,10 @@ msgstr "Wer sie gemacht hat und unter welcher Lizenz, falls zutreffend"
 #: src/interface/lobby/Lobby.tsx
 msgid "Who runs it"
 msgstr "Wer ihn leitet"
+
+#: components/app/interface/settings/user/connections/Connections.tsx
+msgid "Who sees it:"
+msgstr "Wer es sieht:"
 
 #: src/interface/designs/Home.tsx
 #~ msgid "Who took the last spot?"
@@ -24992,6 +25166,11 @@ msgstr "Du bezahlst auf der sicheren Seite unseres Zahlungspartners. Zrzur sieht
 #~ msgid "You read the server's rules and accept them when you join. Discover lists only servers whose owners asked to be here, and the Zrzur team checks each one first."
 #~ msgstr "Beim Beitritt liest du die Regeln des Servers und akzeptierst sie. Entdecken zeigt nur Server, deren Inhaber das beantragt haben, und das Zrzur-Team prüft jeden vorher."
 
+#. placeholder {0}: Math.max(1, Math.ceil((fields.retry_after ?? 60) / 60))
+#: components/i18n/errors.tsx
+msgid "You refreshed a moment ago. {0, plural, one {Try again in # minute.} other {Try again in # minutes.}}"
+msgstr "Du hast gerade erst aktualisiert. {0, plural, one {Versuch es in # Minute noch einmal.} other {Versuch es in # Minuten noch einmal.}}"
+
 #: components/modal/modals/EditEmail.tsx
 msgid "You sign in with this address and we use it for account security notices. Enter your current password to confirm."
 msgstr "Mit dieser Adresse meldest du dich an, und wir nutzen sie für Sicherheitshinweise. Gib zur Bestätigung dein aktuelles Passwort ein."
@@ -25011,6 +25190,10 @@ msgstr "Du musst dich erneut anmelden."
 #: src/interface/navigation/servers/UserMenu.tsx
 #~ msgid "You will not receive any notifications"
 #~ msgstr "Du erhälst keine Benachrichtigungen"
+
+#: components/app/interface/settings/user/connections/Connections.tsx
+msgid "You will sign in on Steam's own page. Zrzur never sees that password."
+msgstr "Du meldest dich auf der Seite von Steam selbst an. Zrzur sieht dieses Passwort nie."
 
 #: components/app/interface/settings/user/Account.tsx
 msgid "You won't be able to access your account unless you contact support - however, your data will not be deleted."
@@ -25526,6 +25709,10 @@ msgstr "Dein Lautsprecher ist wieder da."
 #: src/interface/designs/Makers.tsx
 msgid "Your spot"
 msgstr "Dein Platz"
+
+#: components/app/interface/settings/user/connections/Connections.tsx
+msgid "your Steam name and link, your game count, hours played and your most played games with their achievements, from what Steam shows publicly, and keep them in the EU."
+msgstr "deinen Steam-Namen und Link, die Zahl deiner Spiele, deine Spielstunden und deine meistgespielten Spiele mit ihren Erfolgen, aus dem, was Steam öffentlich zeigt, und speichern es in der EU."
 
 #: components/app/interface/settings/UserSettings.tsx
 msgid "Your subscriptions"

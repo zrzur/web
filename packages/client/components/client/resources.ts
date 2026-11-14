@@ -1,6 +1,8 @@
 import { useQuery } from "@tanstack/solid-query";
 import { User } from "@zrzur/sdk/solid";
 
+import { fetchFullProfile } from "@revolt/ui/components/features/profiles/linkedGames";
+
 import { useClient } from ".";
 
 /**
@@ -23,9 +25,10 @@ export function createMfaResource() {
  * @returns User profile resource
  */
 export function createProfileResource(user: User) {
+  const client = useClient();
   return useQuery(() => ({
     queryKey: ["profile", user.id],
-    queryFn: () => user!.fetchProfile(),
+    queryFn: () => fetchFullProfile(client(), user!),
     throwOnError: true,
   }));
 }

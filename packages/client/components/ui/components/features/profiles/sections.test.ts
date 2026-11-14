@@ -83,6 +83,7 @@ describe("profile sections", () => {
       "creations",
       "wearing",
       "member_since",
+      "games",
     ]);
   });
 

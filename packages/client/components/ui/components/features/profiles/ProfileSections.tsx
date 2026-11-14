@@ -6,9 +6,11 @@ import { styled } from "styled-system/jsx";
 
 import { ProfileBio } from "./ProfileBio";
 import { ProfileCard, ProfileSkeleton } from "./ProfileCard";
+import { ProfileGamesSection } from "./ProfileGames";
 import { ProfileJoined } from "./ProfileJoined";
 import { ProfileLinks } from "./ProfileLinks";
 import { ProfileRoles } from "./ProfileRoles";
+import { profileGames } from "./linkedGames";
 import { visibleSections } from "./sections";
 
 // a bot's About, maker and commands: loaded when a bot's card first opens
@@ -132,6 +134,12 @@ export function ProfileSections(props: {
           </Match>
           <Match when={section === "wearing" && props.profile?.creator}>
             <ProfileWearing user={props.user} onLeave={props.onClose} />
+          </Match>
+          <Match when={section === "games" && profileGames(props.profile)}>
+            <ProfileGamesSection
+              games={profileGames(props.profile)}
+              full={props.full}
+            />
           </Match>
         </Switch>
       )}

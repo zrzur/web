@@ -3,6 +3,7 @@ import { JSX, onMount, Show } from "solid-js";
 import { cva } from "styled-system/css";
 import { styled } from "styled-system/jsx";
 
+import { useClient } from "@revolt/client";
 import { useDevice } from "@revolt/common";
 import { useModals } from "@revolt/modal";
 
@@ -13,6 +14,7 @@ import {
 
 import { Profile } from "../features";
 import { ProfileEffect } from "../features/profiles/effects/ProfileEffect";
+import { fetchFullProfile } from "../features/profiles/linkedGames";
 import { createProfileTheme } from "../features/profiles/profileTheme";
 
 /**
@@ -37,9 +39,10 @@ export function UserCard(
 ) {
   const { isMobile } = useDevice();
   const { openModal } = useModals();
+  const client = useClient();
   const query = useQuery(() => ({
     queryKey: ["profile", props.user.id],
-    queryFn: () => props.user.fetchProfile(),
+    queryFn: () => fetchFullProfile(client(), props.user),
   }));
 
   // the second click of a double-click on a name lands on the card that the

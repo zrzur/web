@@ -292,8 +292,8 @@
     },
     {
       "path": "CHANGELOG.md",
-      "sha256": "e8e4aad10892dcbff6dcd74977b954c07ba88083f54559b638acd3fea492fe44",
-      "bytes": 145454,
+      "sha256": "ef2cd1c6c16993642f1efc4e424e68d8f7a90b4d353b0fde8248ded2bbb6a543",
+      "bytes": 146024,
       "category": "public-documentation"
     },
     {
@@ -1360,8 +1360,8 @@
     },
     {
       "path": "packages/client/components/app/interface/settings/UserSettings.tsx",
-      "sha256": "46a882d46f8b32dc0cd2a3f8fb49f1e52d65a50305c41e7dfcd097e41cdf9584",
-      "bytes": 18301,
+      "sha256": "00e6a241c5532a5c3f88a05d96fbeb7d5ae4ace01db5e59a710c5a4f976753e1",
+      "bytes": 18668,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -2301,6 +2301,30 @@
       "category": "product-source-or-build-manifest"
     },
     {
+      "path": "packages/client/components/app/interface/settings/user/connections/Connections.dom.test.tsx",
+      "sha256": "c17971cceb49805d6c3c406b48bb04af6d2b4603a9752428d63f7e0bd645595c",
+      "bytes": 7898,
+      "category": "synthetic-test-source-or-fixture"
+    },
+    {
+      "path": "packages/client/components/app/interface/settings/user/connections/Connections.tsx",
+      "sha256": "98107fecb31310c273f4ee9785eed3596b3fcd06c157c867ff78f387bcf41a01",
+      "bytes": 14244,
+      "category": "product-source-or-build-manifest"
+    },
+    {
+      "path": "packages/client/components/app/interface/settings/user/connections/connectionsApi.test.ts",
+      "sha256": "d746102c9a0b3c208a6227f2a556443d13d6df68c8b448997fb1e7f55d6d5251",
+      "bytes": 1295,
+      "category": "synthetic-test-source-or-fixture"
+    },
+    {
+      "path": "packages/client/components/app/interface/settings/user/connections/connectionsApi.ts",
+      "sha256": "a2b7d427c3382c343db5cb0c06789ce240fd4e1f1e313b087ed084becaba1a40",
+      "bytes": 2434,
+      "category": "product-source-or-build-manifest"
+    },
+    {
       "path": "packages/client/components/app/interface/settings/user/myData/MyData.tsx",
       "sha256": "07f0e30f4f829f6f2c15dd2286b0850b6dd5184cd6ea7bd98acc8096e77d7b74",
       "bytes": 7512,
@@ -3022,8 +3046,8 @@
     },
     {
       "path": "packages/client/components/client/resources.ts",
-      "sha256": "905ada1e7c32e1555714b32a2fc9cd58d98f1861e7374004d6c2effa7633fce5",
-      "bytes": 1249,
+      "sha256": "06c8f7ff092b16e025e95977405583ce3283b0edc65718651e7a2a6a8cad59d0",
+      "bytes": 1381,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -3286,8 +3310,8 @@
     },
     {
       "path": "packages/client/components/i18n/catalogs/ar/messages.po",
-      "sha256": "bb6c6876334d39f563a8186bac93deeb33828e3d137dcf96cd2e6179b5ed6dc0",
-      "bytes": 1028500,
+      "sha256": "824d55e3dd0da54d44a2ab02f91bbeb52556cc2e5078edab85e34f362cb6c38c",
+      "bytes": 1038614,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -3430,8 +3454,8 @@
     },
     {
       "path": "packages/client/components/i18n/catalogs/de/messages.po",
-      "sha256": "1ab476eb6b8a0efb32b632cbf0f57d27b5bf833eeb96493656487ed67aacb8d3",
-      "bytes": 948597,
+      "sha256": "979c3194e3ff9e9f6cd6a61898c36eee73f5808a3fb3dabfbdc9b919bd1c8f3d",
+      "bytes": 957899,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -3466,8 +3490,8 @@
     },
     {
       "path": "packages/client/components/i18n/catalogs/en/messages.po",
-      "sha256": "8fc32c33b9c8744307db5fe05337605c1ff28ddcce9b28f43d1742bb88a58f97",
-      "bytes": 913203,
+      "sha256": "28d40385e28c72ba27f43c6962cc4535cd5f6f81b349f5d2e9bcd4eb45344a63",
+      "bytes": 922067,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -4030,8 +4054,8 @@
     },
     {
       "path": "packages/client/components/i18n/errorTypes.json",
-      "sha256": "08d25de25980ed726880f25219306d0dd2095e4c0bbd268d2a8c26ae6972f3fa",
-      "bytes": 3214,
+      "sha256": "cd529ccf14da59b770ac3f62c888c68c8cd568e4437807b583429b0fa8bcb821",
+      "bytes": 3313,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -4048,8 +4072,8 @@
     },
     {
       "path": "packages/client/components/i18n/errors.tsx",
-      "sha256": "843455ce890b142688cd581fa36cbf2e56bfb226ac224b9631286549296a1d79",
-      "bytes": 30457,
+      "sha256": "08a753204a1a85457c8627b4635630ebfdbe4baedec1b38f21543eed3dfa17c1",
+      "bytes": 31212,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -4966,8 +4990,8 @@
     },
     {
       "path": "packages/client/components/modal/modals/UserProfile.tsx",
-      "sha256": "d66de6b9ebf0337c592f17ab8a8a48c638c51586e409fb06099563a536615eb8",
-      "bytes": 5403,
+      "sha256": "4051a40c529473f87a609e2a4452627befa10a3c2a654197b1ec3cc6ede2ffdc",
+      "bytes": 5578,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -6477,6 +6501,12 @@
       "category": "product-source-or-build-manifest"
     },
     {
+      "path": "packages/client/components/ui/components/features/profiles/ProfileGames.tsx",
+      "sha256": "82aa406bc6b4692e660fb4a4e4038772eb7b984dd5ef6b0b5ab7933915226c47",
+      "bytes": 5267,
+      "category": "product-source-or-build-manifest"
+    },
+    {
       "path": "packages/client/components/ui/components/features/profiles/ProfileIdentity.tsx",
       "sha256": "9d934b0377afe8c6aaa32d4afb9d8c368632f688027255670a17ecc702aba161",
       "bytes": 6829,
@@ -6520,8 +6550,8 @@
     },
     {
       "path": "packages/client/components/ui/components/features/profiles/ProfileSections.tsx",
-      "sha256": "619012c072a0a0163ecd1dd8c8dbdd593c8b09f85a50bd8c3ee65b6353686aeb",
-      "bytes": 4825,
+      "sha256": "8446b57dd61732b5de1d1cbc32eafc989cb04231f683de7143894c40ca20a7a1",
+      "bytes": 5150,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -6646,8 +6676,14 @@
     },
     {
       "path": "packages/client/components/ui/components/features/profiles/labels.ts",
-      "sha256": "28c77e6973fdb974de31ba5af82d4f222436b4059655e26a3ddf78122c4633db",
-      "bytes": 1531,
+      "sha256": "3301da0b23858e0738b5d76cdd2d2a7b8b364aab10e69968593c24150b0febfa",
+      "bytes": 1552,
+      "category": "product-source-or-build-manifest"
+    },
+    {
+      "path": "packages/client/components/ui/components/features/profiles/linkedGames.ts",
+      "sha256": "ed8ac63fc62aee8f4fffeb76c884f1395ddfc8ae137620fea2be99605eb7580d",
+      "bytes": 1893,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -6706,14 +6742,14 @@
     },
     {
       "path": "packages/client/components/ui/components/features/profiles/sections.test.ts",
-      "sha256": "f9eb2b8f7744f799f0e11284907ac6205df8a5b1132c0b605ae7c40b17b9dc74",
-      "bytes": 5640,
+      "sha256": "4c27939e8570ba111f586b171d2e6ca002c877f39db4c692cbacc1719a6def37",
+      "bytes": 5655,
       "category": "synthetic-test-source-or-fixture"
     },
     {
       "path": "packages/client/components/ui/components/features/profiles/sections.ts",
-      "sha256": "e47a720d5da13cc02d62c9ab6cb1ae047d1c6126d2dd6fd7fd7b17a6447a303c",
-      "bytes": 5531,
+      "sha256": "39c8c3b987e5a67ba178de800c1e232a75bbcf228de259add6d2347b05ea1b15",
+      "bytes": 5542,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -7024,8 +7060,8 @@
     },
     {
       "path": "packages/client/components/ui/components/floating/UserCard.tsx",
-      "sha256": "641473d5c865b878c08e5be5600635bb169cc9a3425aa14cb6ff7511f468df76",
-      "bytes": 5508,
+      "sha256": "99f5865d1d6d6217a731896c808de3ec1d5a6e114a96db36912566438e8ec107",
+      "bytes": 5664,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -40156,8 +40192,8 @@
     },
     {
       "path": "packages/client/src/app.tsx",
-      "sha256": "543ab308d9ec60d27f4b682102054a061eb33f1a9ccdeb7e7785c34a9df5c931",
-      "bytes": 5678,
+      "sha256": "676747ab4bcedde2a5e786ba3ff8ee2c459b4ce25947093fdf5d56a43b01e323",
+      "bytes": 5864,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -40263,9 +40299,15 @@
       "category": "product-source-or-build-manifest"
     },
     {
+      "path": "packages/client/src/interface/SteamReturn.tsx",
+      "sha256": "c0a553b32feb359c41abf27484cddcb0bb9abf0cf59d8f60ba60209b2d0048b2",
+      "bytes": 3077,
+      "category": "product-source-or-build-manifest"
+    },
+    {
       "path": "packages/client/src/interface/You.tsx",
-      "sha256": "85a8086f5415166fbb91594678a9738d11b44846970bccf0ffbfd2f7e6a453db",
-      "bytes": 13096,
+      "sha256": "d5b21dc9cef6d7248b2cf57027f31b88fbbe3522cf395ca2f1c56a1144e8e6e3",
+      "bytes": 13197,
       "category": "product-source-or-build-manifest"
     },
     {

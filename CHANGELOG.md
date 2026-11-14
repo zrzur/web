@@ -2,6 +2,11 @@
 
 ## Unreleased
 
+### Steam on your profile (2026-11-14)
+
+* **Settings → Connections:** Connect Steam signs you in on Steam's own page, after a consent step that says what is copied and who sees it. You get a preview first; nothing shows until you switch it on, and any game can be unticked. Refresh and Disconnect are one press each.
+* **Profiles:** a Games section with the Steam name, game count, hours played and the most played games with their achievements. A private Steam account shows one plain line. Everything comes from Zrzur's copy; viewers' browsers never contact Steam.
+
 ### Players from other sites stand on their own (2026-11-14)
 
 * **More sites play in place:** Vimeo, TikTok, Instagram, Deezer, Dailymotion, Apple Podcasts, Kick, Mixcloud and Tidal links show their own player, after the same "Load" question as the others (one answer per site). The app loads them only from those sites' player addresses.

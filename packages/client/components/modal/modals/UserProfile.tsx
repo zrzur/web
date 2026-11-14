@@ -5,7 +5,9 @@ import { useQuery } from "@tanstack/solid-query";
 import { cva } from "styled-system/css";
 import { styled } from "styled-system/jsx";
 
+import { useClient } from "@revolt/client";
 import { Dialog, DialogProps, Profile } from "@revolt/ui";
+import { fetchFullProfile } from "@revolt/ui/components/features/profiles/linkedGames";
 import { ProfileEffect } from "@revolt/ui/components/features/profiles/effects/ProfileEffect";
 import { createProfileTheme } from "@revolt/ui/components/features/profiles/profileTheme";
 import {
@@ -31,10 +33,11 @@ export function UserProfileModal(
 ) {
   const { t } = useLingui();
   const { openModal } = useModals();
+  const client = useClient();
 
   const query = useQuery(() => ({
     queryKey: ["profile", props.user.id],
-    queryFn: () => props.user.fetchProfile(),
+    queryFn: () => fetchFullProfile(client(), props.user),
   }));
 
   // the person's chosen colours colour the whole dialog
