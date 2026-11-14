@@ -1,5 +1,11 @@
 <!-- zrzur-publication -->
-# Quick start
+# Zrzur Web
+
+The browser app of [Zrzur](https://zrzur.com), also installable as a PWA. Built with Solid.js; it talks to the [backend](https://github.com/zrzur/backend) over HTTP and WebSocket.
+
+Part of Zrzur 26. Versions and the other components: [ZRZUR_RELEASE.md](./ZRZUR_RELEASE.md).
+
+## Quick start
 
 ```bash
 git clone --recurse-submodules https://github.com/zrzur/web.git
@@ -16,116 +22,69 @@ pnpm run test:unit
 VITE_HOST=localhost VITE_API_URL=http://127.0.0.1:14702 VITE_INVITE_ORIGIN=https://zrzur.cc pnpm exec vite build
 ```
 
-Needs Git and Node.js 24. `packages/stoat.js` is a submodule of [zrzur/sdk-js](https://github.com/zrzur/sdk-js). The build fails closed without the `VITE_*` values.
+Needs Git and Node.js 24. The build stops if the `VITE_*` values are missing. Output: `packages/client/dist`.
 
-Zrzur is an independent, Arabic-first chat platform based on the open-source Stoat software (formerly Revolt), licensed under AGPL-3.0 or later. Zrzur is not affiliated with Stoat, stoat.chat or Revolt Platforms Ltd. Please do not report Zrzur issues to the Stoat team.
-
-Licence and origin: [LICENSE](./LICENSE), [NOTICE](./NOTICE), [MODIFICATIONS.md](./MODIFICATIONS.md). Security: [SECURITY.md](./SECURITY.md). Contributing: [CONTRIBUTING.md](./CONTRIBUTING.md).
-
-> **Zrzur 26.0.0 · main · first release.** See [shared release information](ZRZUR_RELEASE.md).
-
-<div align="center">
-
-# Zrzur Web
-
-Solid.js progressive web client for **Zrzur 26**.
-
-</div>
-
-<br/>
-
-## Purpose
-
-Browser and PWA client for Zrzur. Talks to the backend over HTTP and WebSocket.
-
-Package names such as `stoat.js` and `@revolt/*` are kept for protocol and tooling compatibility.
-
-## Architecture
-
-- Solid.js app: `packages/client`
-- API client: `stoat.js` (`packages/stoat.js`)
-- Voice helpers: `solid-livekit-components`
-- Tooling: mise, pnpm, Vite, Lingui
-
-## Requirements
-
-- [Git](https://git-scm.com/install/)
-- [mise](https://mise.jdx.dev/getting-started.html)
+`packages/stoat.js` is a Git submodule of [zrzur/sdk-js](https://github.com/zrzur/sdk-js). After a pull that moves it: `git submodule update --init`.
 
 ## Development
 
+The repository's tasks run with [mise](https://mise.jdx.dev/), which also installs the pinned tools.
+
 ```bash
-git clone --recursive https://github.com/zrzur/web.git
-cd web
-
-# git submodule init && git submodule update   # after pulls if needed
-
 mise install:frozen
 mise build:deps
-
-# optional:
-# pnpm --filter @zrzur/sdk run build
-
 cp packages/client/.env.example packages/client/.env
 mise dev
 ```
 
-Open http://127.0.0.1:5173 (or the Vite port shown).
+Open http://127.0.0.1:5173, or the port Vite prints. In development the app uses the API at `http://127.0.0.1:14702` unless `.env` says otherwise.
 
-```bash
-mise check
-```
+| Task | What it does |
+| --- | --- |
+| `mise dev` | Development server |
+| `mise check` | Everything CI runs: install, build, lint, format, tests |
+| `mise build` | Development build |
+| `mise build:prod` | Production build |
 
-Style guide: [GUIDELINES.md](./GUIDELINES.md).
+Code style: [GUIDELINES.md](./GUIDELINES.md).
 
-## Environment
+## Configuration
 
-Copy `packages/client/.env.example` to `.env`:
+Copy `packages/client/.env.example` to `packages/client/.env`.
 
 | Variable | Notes |
 | --- | --- |
-| `VITE_HOST` | App host (required for production builds) |
-| `VITE_API_URL` | API base URL (required for production builds) |
-| `VITE_DEV_WS_URL` | WebSocket override in development |
-| `VITE_DEV_MEDIA_URL` | Media override in development |
-| `VITE_DEV_PROXY_URL` | Proxy override in development |
-| `VITE_DEV_GIFBOX_URL` | Gifbox override in development |
-| `VITE_EMOJI_CDN` | Optional emoji CDN |
-| `VITE_SENTRY_DSN` | Optional Sentry |
+| `VITE_HOST` | Host of the app. Required for production builds. |
+| `VITE_API_URL` | Address of the API. Required for production builds. |
+| `VITE_DEV_WS_URL` | WebSocket address, development only |
+| `VITE_DEV_MEDIA_URL` | Media address, development only |
+| `VITE_DEV_PROXY_URL` | Proxy address, development only |
+| `VITE_DEV_GIFBOX_URL` | Gifbox address, development only |
+| `VITE_EMOJI_CDN` | Emoji CDN, optional |
+| `VITE_SENTRY_DSN` | Sentry, optional |
 
-Development defaults to `http://127.0.0.1:14702` when `import.meta.env.DEV`.
+## What is inside
 
-## Build
+| Path | Role |
+| --- | --- |
+| [`packages/client`](packages/client) | The Solid.js app. Routes are in `src/index.tsx`. |
+| [`packages/stoat.js`](https://github.com/zrzur/sdk-js) | API client (`@zrzur/sdk`), a submodule |
+| `packages/solid-livekit-components` | Voice and video helpers |
 
-```bash
-mise install:frozen
-mise build:deps
-mise build
-mise build:prod
-```
+Translations use Lingui; the catalogs are in `packages/client/components/i18n/catalogs`.
 
-Output: `packages/client/dist`.
+Package names such as `stoat.js` and `@revolt/*` are kept so the existing protocol and tools keep working.
 
-### Routes
+## Contributing and security
 
-`/login`, `/pwa`, `/dev`, `/discover`, `/settings`, `/invite`, `/bot`, `/friends`, `/server`, `/channel` — see `packages/client/src/index.tsx`.
+- Contributing: [CONTRIBUTING.md](./CONTRIBUTING.md). Keep changes focused and keep the attribution.
+- Security reports: [SECURITY.md](./SECURITY.md).
+- Changes: [CHANGELOG.md](./CHANGELOG.md).
 
-## Localization
+## Licence and origin
 
-Lingui in the client package.
+Zrzur is an independent, Arabic-first chat platform based on the open-source Stoat software (formerly Revolt), licensed under AGPL-3.0 or later. Zrzur is not affiliated with Stoat, stoat.chat or Revolt Platforms Ltd. Please do not report Zrzur issues to the Stoat team.
 
-## Contributing
-
-See [CONTRIBUTING.md](./CONTRIBUTING.md). Keep changes focused and preserve the attribution.
-
-## License
-
-[AGPL](./LICENSE).
-
-## Upstream Project & Attribution
-
-Zrzur Web is independently developed from the open-source Stoat web client. Stoat does not sponsor or endorse Zrzur.
-
-- Upstream: https://github.com/stoatchat/for-web
-- Basis tag: `stoat-for-web-v0.16.3`
-- License: AGPL (see [LICENSE](./LICENSE))
+- Licence: AGPL-3.0-or-later, see [LICENSE](./LICENSE).
+- Upstream: [stoatchat/for-web](https://github.com/stoatchat/for-web), basis tag `stoat-for-web-v0.16.3`.
+- Notices and changes: [NOTICE](./NOTICE), [MODIFICATIONS.md](./MODIFICATIONS.md), [THIRD-PARTY-LICENSES.md](./THIRD-PARTY-LICENSES.md).
