@@ -292,7 +292,7 @@
     },
     {
       "path": "CHANGELOG.md",
-      "sha256": "bafb7d8ea4c6d9f79afea1b45a506bee9d5ca28a324e86500f851c5fe414b52f",
+      "sha256": "f8ef6dcdc674c2e83912789e6ba931626bc0ff19504755cc6ca30ba0befe25f2",
       "bytes": 147682,
       "category": "public-documentation"
     },
@@ -5002,7 +5002,7 @@
     },
     {
       "path": "packages/client/components/modal/modals/UserProfile.tsx",
-      "sha256": "48458fb466cd86b2f4210a5c045d576c9b27e4e3d6988813100c398327de9c3d",
+      "sha256": "37596fdf0080803c3a25a140ca9255ff91bb31bac5b99b004749ac773d1cff01",
       "bytes": 5969,
       "category": "product-source-or-build-manifest"
     },
@@ -6478,7 +6478,7 @@
     },
     {
       "path": "packages/client/components/ui/components/features/profiles/ProfileBanner.tsx",
-      "sha256": "49114c87db7d774d75028a33acf0be1e4a83f5d55aea54e9ead0a5dd08deb8e2",
+      "sha256": "670cc4305bc06f5a99142e706a592de95387e38a6b47c6571fb83ee5c51d13bc",
       "bytes": 6573,
       "category": "product-source-or-build-manifest"
     },
@@ -6514,14 +6514,14 @@
     },
     {
       "path": "packages/client/components/ui/components/features/profiles/ProfileGames.dom.test.tsx",
-      "sha256": "ca17979bcca5ef28b5f5854ede20fa84b3d757b3a286c33b4fad5f01d0a56758",
+      "sha256": "ddf064ef04f2138529e471fdc7932aa8c12bb6b5635a805a99feb25829512656",
       "bytes": 6944,
       "category": "synthetic-test-source-or-fixture"
     },
     {
       "path": "packages/client/components/ui/components/features/profiles/ProfileGames.tsx",
-      "sha256": "3bc7549821031ce43b05d4727513ec58cfb4b5a3adcc68772c440ad2eafbe60c",
-      "bytes": 9756,
+      "sha256": "4b1374f4d7f748b2f234b39a1a834b27e7c622c8325043223310fd2f17372929",
+      "bytes": 9754,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -6766,13 +6766,13 @@
     },
     {
       "path": "packages/client/components/ui/components/features/profiles/profileSize.test.ts",
-      "sha256": "d91225bfbe278b7f0628df7fe0d372dd26a8ed7d945a0eb7545b14717505ec35",
-      "bytes": 519,
+      "sha256": "cfcccbc3c7b53d4e83fd9fded04f5ae968a983288092a6eff5f9d4daafe4514c",
+      "bytes": 516,
       "category": "synthetic-test-source-or-fixture"
     },
     {
       "path": "packages/client/components/ui/components/features/profiles/profileSize.ts",
-      "sha256": "554909af5fab338f297444492e9f38872434af17d847cedfeb751474da19bc5b",
+      "sha256": "2b05c55b5c069038a381d6abc34e3f85a369431483086c1b3cda541e37113477",
       "bytes": 722,
       "category": "product-source-or-build-manifest"
     },
