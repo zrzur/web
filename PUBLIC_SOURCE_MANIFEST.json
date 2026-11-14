@@ -292,8 +292,8 @@
     },
     {
       "path": "CHANGELOG.md",
-      "sha256": "ab982a4673aff2c49caaffa5942f0ef8a5ec6e535e6a3f048f3f252865414896",
-      "bytes": 140509,
+      "sha256": "51be6f383c2d5676b2b2cdf7fc3f96a971085bef30f5d9671dd51045537ad84b",
+      "bytes": 140842,
       "category": "public-documentation"
     },
     {
@@ -832,8 +832,8 @@
     },
     {
       "path": "packages/client/components/app/interface/channels/text/MessageEmbeds.tsx",
-      "sha256": "38ae22ecf96c05c966ce0608cc489cf2a3e2e694e91138868d28c0c731ecb909",
-      "bytes": 2192,
+      "sha256": "8bf5941e1e2c57691a9181a697d43383b6bc52aff52de89bc2218e341746f0f9",
+      "bytes": 3329,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -1330,7 +1330,7 @@
     },
     {
       "path": "packages/client/components/app/interface/safety/styles.ts",
-      "sha256": "130eb35f166ddce6960a43bee3bd813683437ece6e524ec4acfb0140befd5048",
+      "sha256": "2c56023d65e8e454b45499185378867baff31e2d1810b347a6cf41ac50bc02d0",
       "bytes": 7418,
       "category": "product-source-or-build-manifest"
     },
@@ -6130,7 +6130,7 @@
     },
     {
       "path": "packages/client/components/ui/components/features/messaging/composition/FileCarousel.tsx",
-      "sha256": "dade2ddaed3461c957288172aaf3b1b91e539ee869b4a2682969c5ccb14127e2",
+      "sha256": "bd31a10632e9eb04bcd4b071ef44dce948d5e38b1769e1814fad08726c31fc14",
       "bytes": 11226,
       "category": "product-source-or-build-manifest"
     },
@@ -6376,7 +6376,7 @@
     },
     {
       "path": "packages/client/components/ui/components/features/messaging/elements/voice.css",
-      "sha256": "f31c41dc1fed7db973233d412c871669b0685ce9bc1a5d143f5dc14171c6313a",
+      "sha256": "3a52184c2c075366ee1e3ee02d11ef0491fcf943f07ac18e62f8b1e7bed1cfc0",
       "bytes": 4789,
       "category": "product-source-or-build-manifest"
     },
@@ -6880,7 +6880,7 @@
     },
     {
       "path": "packages/client/components/ui/components/features/voice/callCard/VoiceCallCardActions.tsx",
-      "sha256": "66ae91f415630866af89e23722cd2df8e7e3822e84cc778b9501280687936568",
+      "sha256": "f6c6f831744d20d7134a5b6b102e22d0774cdaa6d40806571887d72de1fe5a7d",
       "bytes": 8491,
       "category": "product-source-or-build-manifest"
     },
@@ -7114,7 +7114,7 @@
     },
     {
       "path": "packages/client/components/ui/components/navigation/SectionNav.tsx",
-      "sha256": "da52e9037ab150a319b1b14ac78bc5126f7a0e106bfd28bcbb3573c01946a39d",
+      "sha256": "5f81d6a92acd69911055a5daec1b4c2975441f4ae85657cc82faab7a091d50f3",
       "bytes": 3582,
       "category": "product-source-or-build-manifest"
     },
@@ -8848,14 +8848,14 @@
     },
     {
       "path": "packages/client/components/ui/themes/zrzurTheme.test.ts",
-      "sha256": "0f8e394fa6e4d21deca1bbeb94815cca2ed5d709569d55883af22dc0d8cb6b6e",
+      "sha256": "6dceb2a6db9bd17e6282457670b04c0b60a3ec6b5f7c31754bcdd6b124e8d782",
       "bytes": 14487,
       "category": "synthetic-test-source-or-fixture"
     },
     {
       "path": "packages/client/components/ui/themes/zrzurTheme.ts",
-      "sha256": "bdbd42c8999191236a836cd5a746a75b792de33e03cdb7330074f6aef39dbf5a",
-      "bytes": 40592,
+      "sha256": "d01baae62995a76516bb7c2f1e9e8b3fb02febc65bcecba00dc589729a1ac750",
+      "bytes": 40605,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -41614,7 +41614,7 @@
     },
     {
       "path": "packages/client/src/interface/navigation/servers/ServerList.tsx",
-      "sha256": "2a5d3198225bdfe2f3ead5af01f2a64147bc862f4a5f115489ab0d7ec1abf868",
+      "sha256": "fd749f659bd8f6990fcde41332ad000cb5127708d56a447c6175680f0e4ca5c0",
       "bytes": 31632,
       "category": "product-source-or-build-manifest"
     },
