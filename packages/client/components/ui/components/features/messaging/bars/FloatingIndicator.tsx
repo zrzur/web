@@ -1,3 +1,4 @@
+import { cva } from "styled-system/css";
 import { styled } from "styled-system/jsx";
 
 import { typography } from "@revolt/ui/components/design";
@@ -5,7 +6,7 @@ import { typography } from "@revolt/ui/components/design";
 /**
  * Common styles for the floating indicators
  */
-export const FloatingIndicator = styled("div", {
+export const floatingIndicator = cva({
   base: {
     // for <Ripple />:
     position: "relative",
@@ -53,3 +54,8 @@ export const FloatingIndicator = styled("div", {
     },
   },
 });
+
+/**
+ * A floating indicator that is not itself a control
+ */
+export const FloatingIndicator = styled("div", floatingIndicator);

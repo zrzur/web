@@ -26,6 +26,7 @@ import Breakpoint from "../../../common/Breakpoint";
 import { FloatingElement, floatingElements } from "../../directives";
 
 import { dismissFloatingElements } from ".";
+import { takesEscape } from "./takesEscape";
 import { TooltipBase } from "./Tooltip";
 
 // profile cards and the autocomplete load the first time they open
@@ -61,10 +62,12 @@ export function FloatingManager() {
   });
 
   /**
-   * Whether a floating element is visible
+   * Whether something is open that Esc closes (a hover tooltip is not)
    */
-  function anyVisible() {
-    return floatingElements().find((el) => el.show());
+  function anyTakesEscape() {
+    return floatingElements().some((el) =>
+      takesEscape(el.show() as Record<string, unknown> | undefined),
+    );
   }
 
   return (
@@ -87,7 +90,7 @@ export function FloatingManager() {
         )}
       </For>
 
-      <Show when={anyVisible()}>
+      <Show when={anyTakesEscape()}>
         <Keybind
           keybind={KeybindAction.CLOSE_FLOATING}
           onPressed={dismissFloatingElements}

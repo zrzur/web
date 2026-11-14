@@ -1,0 +1,10 @@
+{
+  "Couldn't load messages.": [
+    "تعذّر تحميل الرسائل.",
+    "Nachrichten konnten nicht geladen werden."
+  ],
+  "{0, plural, one {# new message} other {# new messages}}": [
+    "{0, plural, zero {لا رسائل جديدة} one {رسالة جديدة واحدة} two {رسالتان جديدتان} few {# رسائل جديدة} many {# رسالة جديدة} other {# رسالة جديدة}}",
+    "{0, plural, one {# neue Nachricht} other {# neue Nachrichten}}"
+  ]
+}
