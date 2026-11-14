@@ -113,7 +113,10 @@ export function ServerAppPage(props: { server: Server; appId: string }) {
             <strong dir="auto">
               {user()?.displayName ?? user()?.username}
             </strong>
-            <BotLabel verified={user()?.verifiedBot} />
+            <BotLabel
+              official={user()?.officialBot}
+              verified={user()?.verifiedBot}
+            />
           </TitleLine>
           <Switch>
             <Match when={data()?.install}>

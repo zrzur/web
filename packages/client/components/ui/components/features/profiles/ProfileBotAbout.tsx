@@ -1,4 +1,4 @@
-import { Show } from "solid-js";
+import { Match, Show, Switch } from "solid-js";
 
 import { Plural, Trans } from "@lingui/solid/macro";
 import { styled } from "styled-system/jsx";
@@ -6,6 +6,7 @@ import { styled } from "styled-system/jsx";
 import { Icon } from "@revolt/ui/icons/Icon";
 
 import { ProfileSection } from "./ProfileCard";
+import { botStanding } from "./botAbout";
 import { usePublicBot } from "./usePublicBot";
 
 /** Only ordinary web addresses become links */
@@ -17,7 +18,10 @@ export const safeLink = (url?: string) =>
  * servers it is in, and its privacy policy and terms. Nothing is shown for a
  * private bot the reader cannot see.
  */
-export default function ProfileBotAbout(props: { botId: string }) {
+export default function ProfileBotAbout(props: {
+  botId: string;
+  official?: boolean;
+}) {
   const bot = usePublicBot(() => props.botId);
 
   const privacy = () => safeLink(bot()?.privacyPolicyUrl);
@@ -36,14 +40,38 @@ export default function ProfileBotAbout(props: { botId: string }) {
       {(bot) => (
         <ProfileSection title={<Trans>About this bot</Trans>}>
           <Facts data-testid="bot-about">
-            <li data-verified={bot().verified}>
-              <Icon name={bot().verified ? "seal-check" : "info"} size={16} />
-              <Show
-                when={bot().verified}
-                fallback={<Trans>Not verified by Zrzur</Trans>}
-              >
-                <Trans>Verified by Zrzur</Trans>
-              </Show>
+            <li
+              data-verified={bot().verified}
+              data-standing={botStanding(props.official, bot().verified)}
+            >
+              <Icon
+                name={
+                  (
+                    {
+                      official: "shield-check",
+                      verified: "seal-check",
+                      unverified: "info",
+                    } as const
+                  )[botStanding(props.official, bot().verified)]
+                }
+                size={16}
+              />
+              <Switch fallback={<Trans>Not verified by Zrzur</Trans>}>
+                <Match
+                  when={
+                    botStanding(props.official, bot().verified) === "official"
+                  }
+                >
+                  <Trans>Run by the Zrzur team.</Trans>
+                </Match>
+                <Match
+                  when={
+                    botStanding(props.official, bot().verified) === "verified"
+                  }
+                >
+                  <Trans>Verified by Zrzur</Trans>
+                </Match>
+              </Switch>
             </li>
             <Show when={bot().serverCount !== undefined}>
               <li>

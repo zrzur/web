@@ -5,6 +5,10 @@
 ### Short links for bots (2026-11-14)
 
 * **A bot's add link is short:** `zrzur.cc/b/<bot id>` in the bot's settings and in the Developer Portal, the way server invites use `zrzur.cc/<code>`. The permissions chosen in the Developer Portal ride along. Old `app.zrzur.com/bot/<id>` links keep working.
+### Official bots are called official everywhere (2026-11-14)
+
+* **The "Official bot" label** shows in the member list, the server's member, app and webhook settings, the audit log and on replies only you can see. It used to show only on messages and the profile card; the other places said "Bot".
+* **An official bot's profile** says "Run by the Zrzur team." in About this bot, instead of "Not verified by Zrzur".
 
 ### Delete buttons are red; the X on a link preview (2026-11-14)
 

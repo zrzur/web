@@ -22,3 +22,15 @@ export function creatorShown(
     return { kind: "name", name: creator.displayName ?? creator.username };
   return undefined;
 }
+
+/**
+ * The first fact about a bot. A bot Zrzur runs itself is never called "not
+ * verified": the official mark stands above the review of other people's bots.
+ */
+export function botStanding(
+  official: boolean | undefined,
+  verified: boolean | undefined,
+): "official" | "verified" | "unverified" {
+  if (official) return "official";
+  return verified ? "verified" : "unverified";
+}

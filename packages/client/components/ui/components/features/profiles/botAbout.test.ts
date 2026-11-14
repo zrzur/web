@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 
-import { creatorShown } from "./botAbout";
+import { botStanding, creatorShown } from "./botAbout";
 
 describe("who made a bot", () => {
   const owner = "01OWNER";
@@ -40,5 +40,21 @@ describe("who made a bot", () => {
   it("never treats a missing owner id as a match", () => {
     expect(creatorShown(undefined, undefined, undefined)).toBeUndefined();
     expect(creatorShown(undefined, "", "")).toBeUndefined();
+  });
+});
+
+describe("the first fact about a bot", () => {
+  it("is official for a bot Zrzur runs, verified or not", () => {
+    expect(botStanding(true, false)).toBe("official");
+    expect(botStanding(true, true)).toBe("official");
+  });
+
+  it("is verified for a reviewed bot", () => {
+    expect(botStanding(false, true)).toBe("verified");
+  });
+
+  it("is unverified for any other bot", () => {
+    expect(botStanding(undefined, undefined)).toBe("unverified");
+    expect(botStanding(false, false)).toBe("unverified");
   });
 });

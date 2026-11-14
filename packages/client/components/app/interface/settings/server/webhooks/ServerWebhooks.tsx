@@ -434,6 +434,10 @@ export function WebhooksPanel(props: { server?: Server; channel?: Channel }) {
                             <Show when={madeByBot(webhook.creatorId)}>
                               {" "}
                               <BotLabel
+                                official={
+                                  client().users.get(webhook.creatorId)
+                                    ?.officialBot
+                                }
                                 verified={
                                   client().users.get(webhook.creatorId)
                                     ?.verifiedBot

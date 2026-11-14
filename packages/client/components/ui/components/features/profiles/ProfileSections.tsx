@@ -66,7 +66,10 @@ export function ProfileBody(props: {
           {/* own boundaries: loading these never suspends the channel; the
               placeholder keeps Roles below from jumping while they load */}
           <Suspense fallback={<BotPlaceholder aria-hidden="true" />}>
-            <ProfileBotAbout botId={props.user.id} />
+            <ProfileBotAbout
+              botId={props.user.id}
+              official={props.user.officialBot}
+            />
             <ProfileOwner botId={props.user.id} bot={props.bot!} />
             {/* About and Created by never wait for the commands */}
             <Suspense>
