@@ -5,6 +5,7 @@ export const PROFILE_SECTIONS = [
   "creations",
   "wearing",
   "member_since",
+  "connections",
   "games",
 ] as const;
 

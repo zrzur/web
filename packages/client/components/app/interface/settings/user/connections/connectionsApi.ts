@@ -5,6 +5,8 @@ import type {
   LinkedGame,
 } from "@revolt/ui/components/features/profiles/linkedGames";
 
+import type { ServiceConnection } from "./serviceConnectionsApi";
+
 /**
  * Linked accounts (Steam). Not in the SDK's API document yet (contract
  * request: stream steam-connection): called through `raw()`, with types that
@@ -37,6 +39,10 @@ export const STEAM_CONSENT_VERSION = 2;
 
 export type LinkedAccounts = {
   steam: { available: boolean; account?: LinkedAccount };
+  /** Twitch, GitHub, Battle.net (stream more-connections) */
+  twitch?: ServiceConnection;
+  github?: ServiceConnection;
+  battlenet?: ServiceConnection;
 };
 
 /** Where Steam sends people back to, in this app */

@@ -27,6 +27,7 @@ import {
 import { SteamTile } from "@revolt/ui/components/features/profiles/SteamTile";
 import { Icon } from "@revolt/ui/icons/Icon";
 
+import { ServiceCards } from "./ServiceCards";
 import {
   type LinkedAccount,
   type LinkedAccounts,
@@ -58,7 +59,7 @@ export function Connections() {
   const setAccount = (account?: LinkedAccount) =>
     setData((current) =>
       current
-        ? { steam: { available: current.steam.available, account } }
+        ? { ...current, steam: { available: current.steam.available, account } }
         : current,
     );
 
@@ -97,11 +98,41 @@ export function Connections() {
           )}
         </Match>
       </Switch>
+      <Show when={data()}>
+        {(list) => (
+          <ServiceCards
+            connections={{
+              twitch: list().twitch,
+              github: list().github,
+              battlenet: list().battlenet,
+            }}
+            onChange={(service, account) =>
+              setData((current) =>
+                current
+                  ? {
+                      ...current,
+                      [service]: {
+                        available: current[service]?.available ?? true,
+                        account,
+                      },
+                    }
+                  : current,
+              )
+            }
+          />
+        )}
+      </Show>
       <Small>
         <Trans>
           From Steam. Steam is a trademark of Valve Corporation; Zrzur is not
           affiliated with Valve. Game pictures, achievement names and icons
           belong to their owners.
+        </Trans>
+      </Small>
+      <Small>
+        <Trans>
+          Twitch, GitHub and Battle.net are trademarks of their owners. Zrzur
+          is not affiliated with them or endorsed by them.
         </Trans>
       </Small>
     </Column>
