@@ -27,7 +27,6 @@ import { ListingAbout } from "./About";
 import { BotInvite, discoverApi } from "./api";
 import { ListingArt } from "./Art";
 import {
-  CountLabel,
   Listing,
   MarkPill,
   Tag,
@@ -35,7 +34,7 @@ import {
   listingMark,
   useFileUrl,
 } from "./Cards";
-import { categoryIcon, useDiscoverLabels } from "./categories";
+import { useDiscoverLabels } from "./categories";
 import { listedCommands } from "./find";
 import { paletteTokens } from "./palette";
 import { plainDescription } from "./plainText";
@@ -67,6 +66,11 @@ export function ListingDetail(props: {
   const client = useClient();
   const fileUrl = useFileUrl();
   const labels = useDiscoverLabels();
+  /** Big numbers, in the digits the rest of the app uses */
+  const number = (value: number) =>
+    new Intl.NumberFormat(i18n().locale || "en", {
+      numberingSystem: "latn",
+    }).format(value);
   const permissionNames = usePermissionNames();
   let panel: HTMLDivElement | undefined;
   let previousFocus: HTMLElement | null = null;
@@ -247,34 +251,6 @@ export function ListingDetail(props: {
               </Show>
             </Title>
 
-            <Facts>
-              <span>
-                <Icon name={isBot() ? "robot" : "users"} size={16} />
-                <CountLabel
-                  kind={props.listing.kind}
-                  count={props.listing.count}
-                />
-              </span>
-              <Show when={props.listing.category}>
-                <span>
-                  <Icon
-                    name={categoryIcon(
-                      props.listing.kind,
-                      props.listing.category,
-                    )}
-                    size={16}
-                  />
-                  {labels.category(props.listing.category)}
-                </span>
-              </Show>
-              <Show when={props.listing.language}>
-                <span>
-                  <Icon name="globe" size={16} />
-                  {labels.language(props.listing.language)}
-                </span>
-              </Show>
-            </Facts>
-
             <Columns>
               <MainColumn>
                 <Show when={isBot() && firstLine()}>
@@ -365,13 +341,46 @@ export function ListingDetail(props: {
                     </Show>
                   </Part>
                 </Show>
+              </MainColumn>
 
-                <Show when={props.listing.tags.length}>
-                  <Part>
-                    <h3>
-                      <Trans>Tags</Trans>
-                    </h3>
-                    <TagRow>
+              <SideColumn>
+                <Part data-facts>
+                  <h3>
+                    <Show
+                      when={isBot()}
+                      fallback={<Trans>Server details</Trans>}
+                    >
+                      <Trans>Bot details</Trans>
+                    </Show>
+                  </h3>
+                  <FactList>
+                    <div>
+                      <dt>
+                        <Show when={isBot()} fallback={<Trans>Members</Trans>}>
+                          <Trans>Servers</Trans>
+                        </Show>
+                      </dt>
+                      <dd>{number(props.listing.count)}</dd>
+                    </div>
+                    <Show when={props.listing.category}>
+                      <div>
+                        <dt>
+                          <Trans>Category</Trans>
+                        </dt>
+                        <dd>{labels.category(props.listing.category)}</dd>
+                      </div>
+                    </Show>
+                    <Show when={props.listing.language}>
+                      <div>
+                        <dt>
+                          <Trans>Language</Trans>
+                        </dt>
+                        <dd>{labels.language(props.listing.language)}</dd>
+                      </div>
+                    </Show>
+                  </FactList>
+                  <Show when={props.listing.tags.length}>
+                    <TagRow aria-label={t`Tags`}>
                       <For each={props.listing.tags}>
                         {(tag) => (
                           <Tag
@@ -387,13 +396,11 @@ export function ListingDetail(props: {
                         )}
                       </For>
                     </TagRow>
-                  </Part>
-                </Show>
-              </MainColumn>
+                  </Show>
+                </Part>
 
-              <Show when={invite()}>
-                <SideColumn>
-                  <Part>
+                <Show when={invite()}>
+                  <Part data-gets>
                     <h3>
                       <Trans>On a server the bot gets:</Trans>
                     </h3>
@@ -470,8 +477,8 @@ export function ListingDetail(props: {
                       </Show>
                     </Links>
                   </Show>
-                </SideColumn>
-              </Show>
+                </Show>
+              </SideColumn>
             </Columns>
           </Scroll>
 
@@ -635,23 +642,32 @@ const Verified = styled("span", {
   },
 });
 
-const Facts = styled("div", {
+/** The listing's facts: a label and its value per row */
+const FactList = styled("dl", {
   base: {
-    display: "flex",
-    flexWrap: "wrap",
-    gap: "4px 16px",
-    padding: "8px 32px 0",
-    fontSize: "13px",
-    lineHeight: "20px",
-    fontWeight: 600,
-    color: "var(--z-fg-secondary)",
-    "--z-icon-color": "var(--dz-mark)",
-    _phone: { paddingInline: "16px" },
-
-    "& span": {
-      display: "inline-flex",
-      alignItems: "center",
-      gap: "4px",
+    margin: 0,
+    "& > div": {
+      display: "flex",
+      alignItems: "baseline",
+      justifyContent: "space-between",
+      gap: "16px",
+      paddingBlock: "8px",
+      "&:first-child": { paddingTop: 0 },
+      "& + div": { borderTop: "1px solid var(--z-border-subtle)" },
+    },
+    "& dt": {
+      fontSize: "14px",
+      lineHeight: "20px",
+      color: "var(--z-fg-secondary)",
+    },
+    "& dd": {
+      margin: 0,
+      minWidth: 0,
+      fontSize: "14px",
+      lineHeight: "20px",
+      fontWeight: 600,
+      textAlign: "end",
+      overflowWrap: "anywhere",
     },
   },
 });
@@ -694,6 +710,11 @@ const SideColumn = styled("aside", {
     border: "1px solid var(--dz-edge)",
     background: "var(--z-card-bg)",
     "@media (max-width: 760px)": { width: "auto", alignSelf: "stretch" },
+    // one frame: what the bot gets sits under the facts, past a hairline
+    "& > [data-gets]": {
+      paddingTop: "16px",
+      borderTop: "1px solid var(--z-border-subtle)",
+    },
   },
 });
 

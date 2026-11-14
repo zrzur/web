@@ -33,10 +33,10 @@ import {
   listingBadge,
   useFileUrl,
 } from "./Cards";
-import { categoryIcon, useDiscoverLabels } from "./categories";
+import { useDiscoverLabels } from "./categories";
 import { isPaidListing } from "./marks";
 import { useOpenInApp } from "./OpenInApp";
-import { WEBSITE_URL, appUrl, discoverUrl, publicReportUrl } from "./sites";
+import { appUrl, discoverUrl, publicReportUrl } from "./sites";
 
 type JoinState = "idle" | "busy" | "requested" | "closed";
 
@@ -271,21 +271,6 @@ export function ServerPage(props: {
                   banner={fileUrl(item().banner)}
                   eager
                 />
-                <Crumbs aria-label={t`Breadcrumb`}>
-                  <a href={props.base || "/"}>
-                    <Trans>Discover</Trans>
-                  </a>
-                  <Show when={item().category}>
-                    <Icon name="caret-right" size={14} data-mirror />
-                    <a href={`${props.base}/${item().category}`}>
-                      {labels.category(item().category)}
-                    </a>
-                  </Show>
-                  <Icon name="caret-right" size={14} data-mirror />
-                  <span aria-current="page" dir="auto">
-                    {item().name}
-                  </span>
-                </Crumbs>
               </BannerArea>
 
               <Columns>
@@ -313,49 +298,6 @@ export function ServerPage(props: {
                     <MarkPill listing={item()} />
                   </Show>
 
-                  {/* the numbers that say whether anyone is home */}
-                  <Pulse>
-                    <Show when={item().online != null}>
-                      <div data-live>
-                        <dt>
-                          <span aria-hidden="true" />
-                          <Trans>Online now</Trans>
-                        </dt>
-                        <dd>{number(item().online!)}</dd>
-                      </div>
-                    </Show>
-                    <div>
-                      <dt>
-                        <Trans>Members</Trans>
-                      </dt>
-                      <dd>{number(item().count)}</dd>
-                    </div>
-                    <Show when={item().language}>
-                      <div>
-                        <dt>
-                          <Trans>Language</Trans>
-                        </dt>
-                        <dd>{labels.language(item().language)}</dd>
-                      </div>
-                    </Show>
-                    <Show when={item().category}>
-                      <div>
-                        <dt>
-                          <Trans>Category</Trans>
-                        </dt>
-                        <dd>
-                          <a href={`${props.base}/${item().category}`}>
-                            <Icon
-                              name={categoryIcon("servers", item().category)}
-                              size={16}
-                            />
-                            {labels.category(item().category)}
-                          </a>
-                        </dd>
-                      </div>
-                    </Show>
-                  </Pulse>
-
                   <section>
                     <h2>
                       <Trans>About this server</Trans>
@@ -372,41 +314,8 @@ export function ServerPage(props: {
                     </Show>
                   </section>
 
-                  <Show when={item().tags.length}>
-                    <Tags aria-label={t`Tags`}>
-                      <For each={item().tags}>
-                        {(tag) => (
-                          <a
-                            dir="auto"
-                            href={`${props.base}/servers?tag=${encodeURIComponent(tag)}`}
-                          >
-                            <b aria-hidden="true">#</b>
-                            {tag}
-                          </a>
-                        )}
-                      </For>
-                    </Tags>
-                  </Show>
-
-                  <Panel>
-                    <h2>
-                      <Trans>Before you join</Trans>
-                    </h2>
-                    <p>
-                      <Trans>
-                        If the server asks you to accept its rules, you do so
-                        before you can write. Discover lists only servers whose
-                        owners asked to be here, and the Zrzur team checks each
-                        one first.
-                      </Trans>
-                    </p>
-                    <a href={`${WEBSITE_URL}/legal/discover-guidelines`}>
-                      <Trans>Discover rules</Trans>
-                    </a>
-                  </Panel>
-
                   <Show when={similar()?.length}>
-                    <section>
+                    <section data-similar>
                       <h2>
                         <Trans>Similar communities</Trans>
                       </h2>
@@ -447,66 +356,13 @@ export function ServerPage(props: {
                   </Show>
                 </Main>
 
+                {/* one frame: the way in, the link, the facts */}
                 <Aside>
-                  <JoinCard aria-live="polite">
-                    {/* a member needs no notice: the button opens the server */}
-                    <Show when={!isMember()}>
-                      <Switch
-                        fallback={
-                          <State data-join-state data-tone="open">
-                            <span>
-                              <Icon name="check" size={20} />
-                            </span>
-                            <div>
-                              <strong>
-                                <Trans>Open to everyone</Trans>
-                              </strong>
-                              <small>
-                                <Trans>You join right away.</Trans>
-                              </small>
-                            </div>
-                          </State>
-                        }
-                      >
-                        <Match when={join() === "requested"}>
-                          <State data-join-state data-tone="wait">
-                            <span>
-                              <Icon name="clock" size={20} />
-                            </span>
-                            <div>
-                              <strong>
-                                <Trans>Request sent</Trans>
-                              </strong>
-                              <small>
-                                <Trans>
-                                  You'll join as soon as a moderator approves
-                                  it.
-                                </Trans>
-                              </small>
-                            </div>
-                          </State>
-                        </Match>
-                        <Match when={join() === "closed"}>
-                          <State data-join-state data-tone="closed">
-                            <span>
-                              <Icon name="lock-simple" size={20} />
-                            </span>
-                            <div>
-                              <strong>
-                                <Trans>Joining is closed right now</Trans>
-                              </strong>
-                              <small>
-                                <Trans>
-                                  Try again later, or look at similar
-                                  communities.
-                                </Trans>
-                              </small>
-                            </div>
-                          </State>
-                        </Match>
-                      </Switch>
-                    </Show>
-
+                  <SidePart
+                    data-action
+                    data-bare={isMember() && !(props.site && !isLoggedIn())}
+                    aria-live="polite"
+                  >
                     <Show
                       when={join() !== "requested" && join() !== "closed"}
                       fallback={
@@ -541,6 +397,47 @@ export function ServerPage(props: {
                       </PrimaryButton>
                     </Show>
 
+                    {/* a member needs no notice: the button opens the server */}
+                    <Show when={!isMember()}>
+                      <Switch
+                        fallback={
+                          <State data-join-state data-tone="open">
+                            <strong>
+                              <Trans>Open to everyone</Trans>
+                            </strong>
+                            <span>
+                              <Trans>You join right away.</Trans>
+                            </span>
+                          </State>
+                        }
+                      >
+                        <Match when={join() === "requested"}>
+                          <State data-join-state data-tone="wait">
+                            <strong>
+                              <Trans>Request sent</Trans>
+                            </strong>
+                            <span>
+                              <Trans>
+                                You'll join as soon as a moderator approves it.
+                              </Trans>
+                            </span>
+                          </State>
+                        </Match>
+                        <Match when={join() === "closed"}>
+                          <State data-join-state data-tone="closed">
+                            <strong>
+                              <Trans>Joining is closed right now</Trans>
+                            </strong>
+                            <span>
+                              <Trans>
+                                Try again later, or look at similar communities.
+                              </Trans>
+                            </span>
+                          </State>
+                        </Match>
+                      </Switch>
+                    </Show>
+
                     <Show when={props.site && !isLoggedIn()}>
                       <small data-visitor-note>
                         <Trans>
@@ -549,54 +446,109 @@ export function ServerPage(props: {
                         </Trans>
                       </small>
                     </Show>
+                  </SidePart>
 
-                    <Divider />
-                    <Row>
-                      <SecondaryButton
-                        type="button"
-                        data-copy-link
-                        onClick={() => copyLink(item())}
-                      >
-                        <Icon name={copied() ? "check" : "link"} size={18} />
-                        <Show
-                          when={copied()}
-                          fallback={
-                            <Show
-                              when={shareLink(item()).invite}
-                              fallback={<Trans>Copy page link</Trans>}
-                            >
-                              <Trans>Copy invite link</Trans>
-                            </Show>
-                          }
-                        >
-                          <Trans>Copied</Trans>
-                        </Show>
-                      </SecondaryButton>
-                      <IconOnly
-                        type="button"
-                        data-report
-                        aria-label={t`Report server`}
-                        title={t`Report server`}
-                        onClick={() => report(item())}
-                      >
-                        <Icon name="flag" size={18} />
-                      </IconOnly>
-                    </Row>
-                  </JoinCard>
-
-                  <Details data-share-link>
-                    <dt data-link-label>
+                  <SidePart data-share-link>
+                    <h2 data-link-label>
                       <Show
                         when={shareLink(item()).invite}
                         fallback={<Trans>Discover page</Trans>}
                       >
                         <Trans>Invite link</Trans>
                       </Show>
-                    </dt>
-                    <dd dir="ltr" data-link-value>
-                      {bare(shareLink(item()).url)}
-                    </dd>
-                  </Details>
+                    </h2>
+                    <LinkField>
+                      <span dir="ltr" data-link-value>
+                        {bare(shareLink(item()).url)}
+                      </span>
+                      <CopyButton
+                        type="button"
+                        data-copy-link
+                        aria-label={
+                          shareLink(item()).invite
+                            ? t`Copy invite link`
+                            : t`Copy page link`
+                        }
+                        onClick={() => copyLink(item())}
+                      >
+                        <Icon name={copied() ? "check" : "copy"} size={16} />
+                        <Show when={copied()} fallback={<Trans>Copy</Trans>}>
+                          <Trans>Copied</Trans>
+                        </Show>
+                      </CopyButton>
+                    </LinkField>
+                  </SidePart>
+
+                  <SidePart data-facts>
+                    <h2>
+                      <Trans>Server details</Trans>
+                    </h2>
+                    <Facts>
+                      <Show when={item().online != null}>
+                        <div data-live>
+                          <dt>
+                            <Trans>Online now</Trans>
+                          </dt>
+                          <dd>
+                            <i aria-hidden="true" />
+                            {number(item().online!)}
+                          </dd>
+                        </div>
+                      </Show>
+                      <div>
+                        <dt>
+                          <Trans>Members</Trans>
+                        </dt>
+                        <dd>{number(item().count)}</dd>
+                      </div>
+                      <Show when={item().category}>
+                        <div>
+                          <dt>
+                            <Trans>Category</Trans>
+                          </dt>
+                          <dd>
+                            <a href={`${props.base}/${item().category}`}>
+                              {labels.category(item().category)}
+                            </a>
+                          </dd>
+                        </div>
+                      </Show>
+                      <Show when={item().language}>
+                        <div>
+                          <dt>
+                            <Trans>Language</Trans>
+                          </dt>
+                          <dd>{labels.language(item().language)}</dd>
+                        </div>
+                      </Show>
+                    </Facts>
+                    <Show when={item().tags.length}>
+                      <Tags data-tags aria-label={t`Tags`}>
+                        <For each={item().tags}>
+                          {(tag) => (
+                            <a
+                              dir="auto"
+                              href={`${props.base}/servers?tag=${encodeURIComponent(tag)}`}
+                            >
+                              <b aria-hidden="true">#</b>
+                              {tag}
+                            </a>
+                          )}
+                        </For>
+                      </Tags>
+                    </Show>
+                  </SidePart>
+
+                  <SidePart>
+                    <QuietButton
+                      type="button"
+                      data-report
+                      onClick={() => report(item())}
+                    >
+                      <Icon name="flag" size={16} />
+                      <Trans>Report server</Trans>
+                    </QuietButton>
+                  </SidePart>
                 </Aside>
               </Columns>
             </>
@@ -636,41 +588,6 @@ const BannerArea = styled("div", {
   },
 });
 
-const Crumbs = styled("nav", {
-  base: {
-    position: "absolute",
-    top: "16px",
-    insetInlineStart: "16px",
-    maxWidth: "calc(100% - 32px)",
-    height: "32px",
-    paddingInline: "12px",
-    borderRadius: "10px",
-    background: "var(--z-bg-floating)",
-    display: "flex",
-    alignItems: "center",
-    gap: "6px",
-    fontSize: "13px",
-    color: "var(--z-fg-muted)",
-    overflow: "hidden",
-    "& a": {
-      color: "var(--z-fg-secondary)",
-      textDecoration: "none",
-      whiteSpace: "nowrap",
-      "&:hover": { color: "var(--z-fg-primary)" },
-      "&:focus-visible": { outline: "2px solid var(--z-focus)" },
-    },
-    "& [aria-current]": {
-      color: "var(--z-fg-primary)",
-      fontWeight: 600,
-      overflow: "hidden",
-      textOverflow: "ellipsis",
-      whiteSpace: "nowrap",
-    },
-    // direction icons turn by themselves in right-to-left (styles.css)
-    "@media (max-width: 760px)": { display: "none" },
-  },
-});
-
 const Columns = styled("div", {
   base: {
     width: "100%",
@@ -682,9 +599,12 @@ const Columns = styled("div", {
     gridTemplateColumns: "minmax(0, 1fr) 344px",
     gap: "40px",
     "@media (max-width: 900px)": {
-      gridTemplateColumns: "minmax(0, 1fr)",
+      display: "flex",
+      flexDirection: "column",
       padding: "0 0 96px",
       gap: "24px",
+      // the frame sits after "About"; the similar servers follow
+      "& [data-similar]": { order: 2 },
     },
   },
 });
@@ -694,7 +614,9 @@ const Main = styled("div", {
     minWidth: 0,
     display: "flex",
     flexDirection: "column",
-    gap: "24px",
+    gap: "32px",
+    // phones: its parts line up with the frame in one column
+    "@media (max-width: 900px)": { display: "contents" },
     "& h2": {
       margin: "0 0 12px",
       fontSize: "18px",
@@ -747,122 +669,8 @@ const IconFrame = styled("div", {
   },
 });
 
-/** One strip, split by hairlines: the page's sign of life */
-const Pulse = styled("dl", {
-  base: {
-    margin: 0,
-    display: "grid",
-    gridTemplateColumns: "repeat(auto-fit, minmax(120px, 1fr))",
-    gap: "1px",
-    overflow: "hidden",
-    borderRadius: "var(--z-shape-card)",
-    border: "1px solid var(--dz-edge)",
-    background: "var(--dz-edge)",
-
-    "& > div": {
-      minWidth: 0,
-      padding: "12px 16px",
-      background: "var(--z-card-bg)",
-    },
-    "& dt": {
-      display: "flex",
-      alignItems: "center",
-      gap: "8px",
-      fontSize: "13px",
-      lineHeight: "20px",
-      color: "var(--z-fg-muted)",
-    },
-    "& dt span": {
-      width: "8px",
-      height: "8px",
-      borderRadius: "50%",
-      background: "var(--z-live)",
-    },
-    "& dd": {
-      margin: 0,
-      fontSize: "18px",
-      lineHeight: "26px",
-      fontWeight: 700,
-      overflowWrap: "anywhere",
-    },
-    "& [data-live] dd": { fontSize: "22px", lineHeight: "26px" },
-    "& a": {
-      display: "inline-flex",
-      alignItems: "center",
-      gap: "4px",
-      color: "var(--dz-mark)",
-      textDecoration: "none",
-      "--z-icon-color": "currentColor",
-      _hover: { textDecoration: "underline" },
-      _focusVisible: { outline: "2px solid var(--z-focus)" },
-      _phone: { minHeight: "44px" },
-    },
-    _phone: {
-      gridTemplateColumns: "repeat(2, minmax(0, 1fr))",
-      // an odd number of facts: the last one takes the whole row
-      "& > div:last-child:nth-child(odd)": { gridColumn: "1 / -1" },
-    },
-  },
-});
-
 const Muted = styled("p", {
   base: { margin: 0, fontSize: "15px", color: "var(--z-fg-muted)" },
-});
-
-const Tags = styled("div", {
-  base: {
-    display: "flex",
-    flexWrap: "wrap",
-    gap: "8px",
-    "& a": {
-      minHeight: "32px",
-      "@media (max-width: 760px)": { minHeight: "44px" },
-      paddingInline: "12px",
-      borderRadius: "6px",
-      border: "1px solid var(--dz-edge)",
-      background: "var(--z-card-bg)",
-      color: "var(--z-fg-primary)",
-      fontSize: "13px",
-      fontWeight: 500,
-      display: "inline-flex",
-      alignItems: "center",
-      gap: "4px",
-      textDecoration: "none",
-      "& > b": { color: "var(--dz-mark)" },
-      "&:hover": { background: "var(--z-nav-selected)" },
-      "&:focus-visible": { outline: "2px solid var(--z-focus)" },
-    },
-  },
-});
-
-const Panel = styled("section", {
-  base: {
-    padding: "24px",
-    borderRadius: "14px",
-    border: "1px solid var(--dz-edge)",
-    background: "var(--z-card-bg)",
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "flex-start",
-    gap: "8px",
-    "& h2": { margin: 0 },
-    "& p": {
-      margin: 0,
-      fontSize: "15px",
-      lineHeight: "24px",
-      color: "var(--z-fg-secondary)",
-    },
-    "& a": {
-      fontSize: "14px",
-      fontWeight: 600,
-      color: "var(--dz-mark)",
-      "@media (max-width: 760px)": {
-        minHeight: "44px",
-        display: "inline-flex",
-        alignItems: "center",
-      },
-    },
-  },
 });
 
 const Similar = styled("div", {
@@ -909,12 +717,14 @@ const Similar = styled("div", {
   },
 });
 
+/** The side column: one frame, its parts split by hairlines */
 const Aside = styled("aside", {
   base: {
     marginTop: "24px",
-    display: "flex",
-    flexDirection: "column",
-    gap: "16px",
+    minWidth: 0,
+    borderRadius: "14px",
+    border: "1px solid var(--dz-edge)",
+    background: "var(--z-card-bg)",
     position: "sticky",
     top: "80px",
     alignSelf: "start",
@@ -927,55 +737,204 @@ const Aside = styled("aside", {
   },
 });
 
-const JoinCard = styled("div", {
+const SidePart = styled("section", {
   base: {
-    padding: "24px",
-    borderRadius: "14px",
-    border: "1px solid var(--dz-edge)",
-    background: "var(--z-card-bg)",
+    padding: "20px 24px",
     display: "flex",
     flexDirection: "column",
-    gap: "16px",
+    gap: "12px",
+    "& + section": { borderTop: "1px solid var(--z-border-subtle)" },
+    "& > h2": {
+      margin: 0,
+      fontSize: "13px",
+      lineHeight: "20px",
+      fontWeight: 600,
+      color: "var(--z-fg-muted)",
+    },
     "& > small": {
       fontSize: "13px",
       lineHeight: "20px",
       color: "var(--z-fg-muted)",
     },
+    "@media (max-width: 900px)": {
+      paddingInline: "16px",
+      // phones: the button floats over the page; a member's part holds
+      // nothing else, so it takes no room
+      "&[data-bare='true']": { padding: 0 },
+      "&[data-bare='true'] + section": { borderTop: "none" },
+    },
   },
 });
 
-const State = styled("div", {
+/** Who may join, in two quiet lines under the button */
+const State = styled("p", {
   base: {
+    margin: 0,
     display: "flex",
-    alignItems: "flex-start",
-    gap: "12px",
+    flexDirection: "column",
+    fontSize: "13px",
+    lineHeight: "20px",
+    color: "var(--z-fg-secondary)",
+    "& strong": { fontWeight: 600, color: "var(--z-fg-primary)" },
+    "&[data-tone='wait'] strong": { color: "var(--z-warning)" },
+    "&[data-tone='closed'] strong": { color: "var(--z-danger)" },
+  },
+});
+
+/** A value people copy: the whole address, the button inside the field */
+const LinkField = styled("div", {
+  base: {
+    minHeight: "44px",
+    paddingBlock: "4px",
+    paddingInline: "12px 4px",
+    borderRadius: "10px",
+    border: "1px solid var(--dz-edge)",
+    background: "var(--dz-page)",
+    display: "flex",
+    alignItems: "center",
+    gap: "8px",
     "& > span": {
-      width: "36px",
-      height: "36px",
-      flexShrink: 0,
-      borderRadius: "10px",
-      display: "grid",
-      placeItems: "center",
+      flex: 1,
+      minWidth: 0,
+      // as many lines as it needs: never cut
+      overflowWrap: "anywhere",
+      textAlign: "start",
+      fontFamily: "'IBM Plex Sans', sans-serif",
+      fontSize: "14px",
+      lineHeight: "20px",
+      fontWeight: 600,
+      userSelect: "all",
     },
-    "&[data-tone='open'] > span": {
-      color: "var(--z-live)",
-      background: "color-mix(in srgb, var(--z-live) 14%, transparent)",
+  },
+});
+
+const CopyButton = styled("button", {
+  base: {
+    flexShrink: 0,
+    minHeight: "36px",
+    paddingInline: "12px",
+    borderRadius: "8px",
+    border: 0,
+    background: "var(--z-nav-selected)",
+    color: "var(--z-fg-primary)",
+    font: "inherit",
+    fontSize: "13px",
+    fontWeight: 600,
+    whiteSpace: "nowrap",
+    display: "inline-flex",
+    alignItems: "center",
+    gap: "6px",
+    cursor: "pointer",
+    "--z-icon-color": "currentColor",
+    transition: "background-color 120ms cubic-bezier(0.2, 0, 0, 1)",
+    _hover: { background: "var(--z-border-strong)" },
+    _focusVisible: {
+      outline: "2px solid var(--z-focus)",
+      outlineOffset: "2px",
     },
-    "&[data-tone='wait'] > span": {
-      color: "var(--z-warning)",
-      background: "color-mix(in srgb, var(--z-warning) 14%, transparent)",
+    "@media (max-width: 900px)": { minHeight: "44px" },
+  },
+});
+
+/** The server's facts: a label and its value per row */
+const Facts = styled("dl", {
+  base: {
+    margin: 0,
+    "& > div": {
+      display: "flex",
+      alignItems: "baseline",
+      justifyContent: "space-between",
+      gap: "16px",
+      paddingBlock: "8px",
+      "&:first-child": { paddingTop: 0 },
+      "& + div": { borderTop: "1px solid var(--z-border-subtle)" },
     },
-    "&[data-tone='closed'] > span": {
-      color: "var(--z-danger)",
-      background: "color-mix(in srgb, var(--z-danger) 14%, transparent)",
-    },
-    "& > div": { display: "flex", flexDirection: "column", gap: "4px" },
-    "& strong": { fontSize: "15px", fontWeight: 600 },
-    "& small": {
-      fontSize: "13px",
+    "& dt": {
+      fontSize: "14px",
       lineHeight: "20px",
       color: "var(--z-fg-secondary)",
     },
+    "& dd": {
+      margin: 0,
+      minWidth: 0,
+      fontSize: "14px",
+      lineHeight: "20px",
+      fontWeight: 600,
+      textAlign: "end",
+      overflowWrap: "anywhere",
+    },
+    "& [data-live] dd i": {
+      display: "inline-block",
+      width: "8px",
+      height: "8px",
+      marginInlineEnd: "6px",
+      borderRadius: "50%",
+      background: "var(--z-live)",
+    },
+    "& a": {
+      color: "var(--z-fg-primary)",
+      textDecoration: "underline",
+      textDecorationColor: "var(--z-fg-muted)",
+      textUnderlineOffset: "3px",
+      _hover: { textDecorationColor: "currentColor" },
+      _focusVisible: { outline: "2px solid var(--z-focus)" },
+      "@media (max-width: 900px)": {
+        minHeight: "44px",
+        display: "inline-flex",
+        alignItems: "center",
+      },
+    },
+  },
+});
+
+const Tags = styled("div", {
+  base: {
+    display: "flex",
+    flexWrap: "wrap",
+    gap: "8px",
+    "& a": {
+      minHeight: "28px",
+      "@media (max-width: 900px)": { minHeight: "44px" },
+      paddingInline: "10px",
+      borderRadius: "6px",
+      background: "var(--z-nav-selected)",
+      color: "var(--z-fg-primary)",
+      fontSize: "13px",
+      fontWeight: 500,
+      display: "inline-flex",
+      alignItems: "center",
+      gap: "4px",
+      textDecoration: "none",
+      "& > b": { color: "var(--z-fg-muted)" },
+      _hover: { background: "var(--z-border-strong)" },
+      _focusVisible: { outline: "2px solid var(--z-focus)" },
+    },
+  },
+});
+
+/** Report: a quiet line at the foot of the frame */
+const QuietButton = styled("button", {
+  base: {
+    alignSelf: "flex-start",
+    minHeight: "24px",
+    padding: 0,
+    border: 0,
+    background: "transparent",
+    color: "var(--z-fg-secondary)",
+    font: "inherit",
+    fontSize: "13px",
+    lineHeight: "20px",
+    display: "inline-flex",
+    alignItems: "center",
+    gap: "6px",
+    cursor: "pointer",
+    "--z-icon-color": "currentColor",
+    _hover: { color: "var(--z-fg-primary)" },
+    _focusVisible: {
+      outline: "2px solid var(--z-focus)",
+      outlineOffset: "2px",
+    },
+    "@media (max-width: 900px)": { minHeight: "44px" },
   },
 });
 
@@ -1046,50 +1005,6 @@ const SecondaryLink = styled("a", {
     border: "1px solid var(--z-border-strong)",
     color: "var(--z-fg-primary)",
     "&:hover": { background: "var(--z-nav-hover)" },
-  },
-});
-
-const IconOnly = styled("button", {
-  base: {
-    ...buttonBase,
-    width: "44px",
-    paddingInline: 0,
-    border: "1px solid var(--dz-edge)",
-    background: "transparent",
-    color: "var(--z-fg-secondary)",
-    "&:hover": { background: "var(--z-nav-hover)" },
-  },
-});
-
-const Row = styled("div", { base: { display: "flex", gap: "8px" } });
-
-const Divider = styled("div", {
-  base: { height: "1px", background: "var(--z-border-subtle)" },
-});
-
-const Details = styled("dl", {
-  base: {
-    margin: 0,
-    padding: "16px 24px",
-    borderRadius: "14px",
-    border: "1px solid var(--dz-edge)",
-    background: "var(--z-card-bg)",
-    display: "flex",
-    flexDirection: "column",
-    gap: "4px",
-    fontSize: "14px",
-    lineHeight: "20px",
-    "& dt": { fontSize: "13px", color: "var(--z-fg-muted)" },
-    // the whole address, on as many lines as it needs: never cut
-    "& dd": {
-      margin: 0,
-      minWidth: 0,
-      overflowWrap: "anywhere",
-      textAlign: "start",
-      fontFamily: "'IBM Plex Sans', sans-serif",
-      fontWeight: 600,
-      userSelect: "all",
-    },
   },
 });
 

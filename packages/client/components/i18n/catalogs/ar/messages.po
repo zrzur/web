@@ -3214,8 +3214,8 @@ msgid "Before"
 msgstr "قبل"
 
 #: components/app/interface/discover/ServerPage.tsx
-msgid "Before you join"
-msgstr "قبل أن تنضم"
+#~ msgid "Before you join"
+#~ msgstr "قبل أن تنضم"
 
 #: components/app/interface/settings/user/profile/CreatorStudio.tsx
 msgid "Before you publish"
@@ -3423,6 +3423,10 @@ msgstr "إساءة استخدام البوت"
 msgid "Bot commands"
 msgstr "أوامر البوتات"
 
+#: components/app/interface/discover/Detail.tsx
+msgid "Bot details"
+msgstr "تفاصيل البوت"
+
 #: components/app/interface/safety/labels.tsx
 msgid "Bot disabled"
 msgstr "تم تعطيل البوت"
@@ -3530,7 +3534,6 @@ msgstr "مرن"
 msgid "Brazil"
 msgstr "البرازيل"
 
-#: components/app/interface/discover/ServerPage.tsx
 #: src/interface/designs/DesignPage.tsx
 msgid "Breadcrumb"
 msgstr "مسار الصفحة"
@@ -4026,6 +4029,7 @@ msgstr "البطاقات في عمودين أو واحدة تحت الأخرى."
 msgid "Categories"
 msgstr "الفئات"
 
+#: components/app/interface/discover/Detail.tsx
 #: components/app/interface/discover/ServerPage.tsx
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsOverview.tsx
 #: components/app/interface/settings/server/soundboard/SoundLibrary.tsx
@@ -5415,6 +5419,7 @@ msgstr "تم نسخ الملف إلى الحافظة"
 msgid "Copied!"
 msgstr "تم النسخ!"
 
+#: components/app/interface/discover/ServerPage.tsx
 #: components/app/interface/settings/server/roles/ServerRoleEditor.tsx
 #: components/app/interface/settings/server/webhooks/ServerWebhooks.tsx
 #: components/app/interface/settings/user/bots/ViewBot.tsx
@@ -6867,7 +6872,6 @@ msgstr "غير متصل"
 #~ msgstr "حالة Discord ‏(RPC)"
 
 #: components/app/interface/desktop/Titlebar.tsx
-#: components/app/interface/discover/ServerPage.tsx
 #: components/app/interface/discover/SiteFrame.tsx
 #: components/app/interface/settings/shared/Discoverable.tsx
 #: src/interface/Discover.tsx
@@ -6921,7 +6925,6 @@ msgstr "الترتيب في الاستكشاف"
 msgid "Discover review"
 msgstr "مراجعة الاستكشاف"
 
-#: components/app/interface/discover/ServerPage.tsx
 #: components/app/interface/discover/SiteFrame.tsx
 #: src/interface/Discover.tsx
 msgid "Discover rules"
@@ -9711,8 +9714,8 @@ msgid "If someone is in immediate danger, contact your local emergency services 
 msgstr "إذا كان أحد في خطر داهم، فاتصل بخدمات الطوارئ المحلية فورًا."
 
 #: components/app/interface/discover/ServerPage.tsx
-msgid "If the server asks you to accept its rules, you do so before you can write. Discover lists only servers whose owners asked to be here, and the Zrzur team checks each one first."
-msgstr "إذا طلب السيرفر قبول قواعده فستقبلها قبل أن تكتب. لا يعرض «اكتشف» إلا السيرفرات التي طلب أصحابها الظهور هنا، ويراجع فريق زرزور كلًّا منها أولًا."
+#~ msgid "If the server asks you to accept its rules, you do so before you can write. Discover lists only servers whose owners asked to be here, and the Zrzur team checks each one first."
+#~ msgstr "إذا طلب السيرفر قبول قواعده فستقبلها قبل أن تكتب. لا يعرض «اكتشف» إلا السيرفرات التي طلب أصحابها الظهور هنا، ويراجع فريق زرزور كلًّا منها أولًا."
 
 #: components/app/interface/settings/user/Accessibility.tsx
 #~ msgid "If this is enabled, animations and motion effects won't play or will be less intense."
@@ -10671,6 +10674,7 @@ msgstr "قيرغيزستان"
 msgid "Label"
 msgstr "النص"
 
+#: components/app/interface/discover/Detail.tsx
 #: components/app/interface/discover/ServerPage.tsx
 #: components/app/interface/discover/SiteFrame.tsx
 #: components/app/interface/settings/user/Language.tsx
@@ -16958,7 +16962,6 @@ msgstr "الرد عبر تذكرة"
 msgid "Replying to"
 msgstr "الرد على"
 
-#: components/app/interface/discover/Cards.tsx
 #: components/app/interface/settings/user/plugins/PluginDetail.tsx
 #: components/app/interface/settings/user/profile/CommunityGallery.tsx
 #: components/modal/modals/ServerInfo.tsx
@@ -18643,6 +18646,8 @@ msgstr "الإعداد الافتراضي للسيرفر"
 #~ msgid "Server Description"
 #~ msgstr "وصف السيرفر"
 
+#: components/app/interface/discover/Detail.tsx
+#: components/app/interface/discover/ServerPage.tsx
 #: components/modal/modals/ServerInfo.tsx
 msgid "Server details"
 msgstr "تفاصيل السيرفر"
@@ -18733,6 +18738,7 @@ msgstr "إعدادات السيرفر"
 msgid "Server stats"
 msgstr "إحصاءات السيرفر"
 
+#: components/app/interface/discover/Detail.tsx
 #: components/modal/modals/MoveSupercharge.tsx
 #: components/ui/components/features/profiles/ProfileMutuals.tsx
 #: src/interface/developers/docs/DocsPortal.tsx

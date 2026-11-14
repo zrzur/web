@@ -17,9 +17,8 @@ export function ListingAbout(props: { text: string }) {
 const AboutText = styled("div", {
   base: {
     maxWidth: "680px",
-    display: "flex",
-    flexDirection: "column",
-    gap: "12px",
+    // no gap of its own: the renderer keeps the writer's empty lines, as in
+    // a chat message and the server info panel
     fontSize: "15px",
     lineHeight: "24px",
     color: "var(--z-fg-primary)",
@@ -28,11 +27,8 @@ const AboutText = styled("div", {
     "&:lang(ar)": { lineHeight: "26px" },
 
     "& p, & ul, & ol, & blockquote": { margin: 0 },
-    "& ul, & ol": {
-      display: "flex",
-      flexDirection: "column",
-      gap: "4px",
-    },
+    "& ul, & ol": { marginBlock: "4px" },
+    "& li + li": { marginTop: "4px" },
     // a writer's headings stay below the page's own "About" heading
     "& h1, & h2, & h3, & h4, & h5, & h6": {
       margin: 0,
