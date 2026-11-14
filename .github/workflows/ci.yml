@@ -49,7 +49,7 @@ jobs:
         run: |
           git -c url."https://x-access-token:${SUBMODULE_TOKEN}@github.com/zrzur/sdk-js".insteadOf="https://github.com/zrzur/sdk-js" submodule update --init --recursive
       - uses: pnpm/action-setup@v4
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@v7
         with:
           node-version: 24
           cache: pnpm
