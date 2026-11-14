@@ -3214,8 +3214,8 @@ msgid "Before"
 msgstr "Before"
 
 #: components/app/interface/discover/ServerPage.tsx
-msgid "Before you join"
-msgstr "Before you join"
+#~ msgid "Before you join"
+#~ msgstr "Before you join"
 
 #: components/app/interface/settings/user/profile/CreatorStudio.tsx
 msgid "Before you publish"
@@ -3423,6 +3423,10 @@ msgstr "Bot abuse"
 msgid "Bot commands"
 msgstr "Bot commands"
 
+#: components/app/interface/discover/Detail.tsx
+msgid "Bot details"
+msgstr "Bot details"
+
 #: components/app/interface/safety/labels.tsx
 msgid "Bot disabled"
 msgstr "Bot disabled"
@@ -3530,7 +3534,6 @@ msgstr "Bouncy"
 msgid "Brazil"
 msgstr "Brazil"
 
-#: components/app/interface/discover/ServerPage.tsx
 #: src/interface/designs/DesignPage.tsx
 msgid "Breadcrumb"
 msgstr "Breadcrumb"
@@ -4026,6 +4029,7 @@ msgstr "Cards in two columns or one below the other."
 msgid "Categories"
 msgstr "Categories"
 
+#: components/app/interface/discover/Detail.tsx
 #: components/app/interface/discover/ServerPage.tsx
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsOverview.tsx
 #: components/app/interface/settings/server/soundboard/SoundLibrary.tsx
@@ -5415,6 +5419,7 @@ msgstr "Copied file to clipboard"
 msgid "Copied!"
 msgstr "Copied!"
 
+#: components/app/interface/discover/ServerPage.tsx
 #: components/app/interface/settings/server/roles/ServerRoleEditor.tsx
 #: components/app/interface/settings/server/webhooks/ServerWebhooks.tsx
 #: components/app/interface/settings/user/bots/ViewBot.tsx
@@ -6867,7 +6872,6 @@ msgstr "Disconnected"
 #~ msgstr "Discord RPC"
 
 #: components/app/interface/desktop/Titlebar.tsx
-#: components/app/interface/discover/ServerPage.tsx
 #: components/app/interface/discover/SiteFrame.tsx
 #: components/app/interface/settings/shared/Discoverable.tsx
 #: src/interface/Discover.tsx
@@ -6921,7 +6925,6 @@ msgstr "Discover rank"
 msgid "Discover review"
 msgstr "Discover review"
 
-#: components/app/interface/discover/ServerPage.tsx
 #: components/app/interface/discover/SiteFrame.tsx
 #: src/interface/Discover.tsx
 msgid "Discover rules"
@@ -9714,8 +9717,8 @@ msgid "If someone is in immediate danger, contact your local emergency services 
 msgstr "If someone is in immediate danger, contact your local emergency services now."
 
 #: components/app/interface/discover/ServerPage.tsx
-msgid "If the server asks you to accept its rules, you do so before you can write. Discover lists only servers whose owners asked to be here, and the Zrzur team checks each one first."
-msgstr "If the server asks you to accept its rules, you do so before you can write. Discover lists only servers whose owners asked to be here, and the Zrzur team checks each one first."
+#~ msgid "If the server asks you to accept its rules, you do so before you can write. Discover lists only servers whose owners asked to be here, and the Zrzur team checks each one first."
+#~ msgstr "If the server asks you to accept its rules, you do so before you can write. Discover lists only servers whose owners asked to be here, and the Zrzur team checks each one first."
 
 #: components/app/interface/settings/user/Accessibility.tsx
 #~ msgid "If this is enabled, animations and motion effects won't play or will be less intense."
@@ -10674,6 +10677,7 @@ msgstr "Kyrgyzstan"
 msgid "Label"
 msgstr "Label"
 
+#: components/app/interface/discover/Detail.tsx
 #: components/app/interface/discover/ServerPage.tsx
 #: components/app/interface/discover/SiteFrame.tsx
 #: components/app/interface/settings/user/Language.tsx
@@ -16961,7 +16965,6 @@ msgstr "Reply in a ticket"
 msgid "Replying to"
 msgstr "Replying to"
 
-#: components/app/interface/discover/Cards.tsx
 #: components/app/interface/settings/user/plugins/PluginDetail.tsx
 #: components/app/interface/settings/user/profile/CommunityGallery.tsx
 #: components/modal/modals/ServerInfo.tsx
@@ -18645,6 +18648,8 @@ msgstr "Server default"
 #~ msgid "Server Description"
 #~ msgstr "Server Description"
 
+#: components/app/interface/discover/Detail.tsx
+#: components/app/interface/discover/ServerPage.tsx
 #: components/modal/modals/ServerInfo.tsx
 msgid "Server details"
 msgstr "Server details"
@@ -18735,6 +18740,7 @@ msgstr "Server settings"
 msgid "Server stats"
 msgstr "Server stats"
 
+#: components/app/interface/discover/Detail.tsx
 #: components/modal/modals/MoveSupercharge.tsx
 #: components/ui/components/features/profiles/ProfileMutuals.tsx
 #: src/interface/developers/docs/DocsPortal.tsx
@@ -25802,7 +25808,3 @@ msgstr "Zrzur, right on <0>your desktop.</0>"
 #: components/app/interface/settings/user/appearance/AppearanceMenu.tsx
 #~ msgid "Zrzur's own look: very dark neutral panels with Zrzur Pink as the one accent."
 #~ msgstr "Zrzur's own look: very dark neutral panels with Zrzur Pink as the one accent."
-
-#: components/app/interface/discover/Detail.tsx
-msgid "Bot details"
-msgstr "Bot details"

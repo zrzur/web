@@ -1,6 +1,6 @@
 import { For, JSX, Match, Show, Switch } from "solid-js";
 
-import { Plural, Trans, useLingui } from "@lingui/solid/macro";
+import { Plural, Trans } from "@lingui/solid/macro";
 import { API, ServerFlags, File as StoatFile } from "@zrzur/sdk/solid";
 import { styled } from "styled-system/jsx";
 
@@ -215,7 +215,7 @@ export function ListingMeta(props: { listing: Listing }) {
 /**
  * Discover listing card, one size for all: the banner on top with the icon
  * over its edge, the name, what it is about, the tags, and a last row with who
- * is there, the flag and Join. With no banner, its portrait in birds. The whole
+ * is there and Join (reporting is on its page). With no banner, its portrait in birds. The whole
  * card opens the details for a pointer; for keyboards and screen readers
  * OpenButton does (a card that is a button could not hold the Join button).
  */
@@ -225,11 +225,8 @@ export function ListingCard(props: {
   onOpen?: () => void;
   /** Join / add, bottom end */
   action?: JSX.Element;
-  /** Report it, from the card */
-  onReport?: () => void;
   testId?: string;
 }) {
-  const { t } = useLingui();
   const fileUrl = useFileUrl();
   const adWord = useAdWord();
   const isBot = () => props.listing.kind === "bots";
@@ -341,19 +338,6 @@ export function ListingCard(props: {
             <div data-action onClick={(e) => e.stopPropagation()}>
               {props.action}
             </div>
-          </Show>
-          <Show when={props.onReport}>
-            <Flag
-              type="button"
-              aria-label={t`Report`}
-              title={t`Report`}
-              onClick={(e) => {
-                e.stopPropagation();
-                props.onReport?.();
-              }}
-            >
-              <Icon name="flag" size={16} />
-            </Flag>
           </Show>
         </Footer>
       </Body>
@@ -627,12 +611,10 @@ const Footer = styled("div", {
     display: "flex",
     alignItems: "center",
     justifyContent: "space-between",
-    gap: "4px",
+    gap: "8px",
     marginTop: "auto",
     paddingTop: "8px",
-    // reading order: Join, then the flag; on screen the flag comes first
     "& > [data-action]": {
-      order: 2,
       flexShrink: 0,
       "& > button": {
         paddingInline: "8px",
@@ -640,34 +622,6 @@ const Footer = styled("div", {
         _phone: { minWidth: "44px" },
       },
     },
-  },
-});
-
-/** Report, quiet until you point at it */
-const Flag = styled("button", {
-  base: {
-    order: 1,
-    flexShrink: 0,
-    width: "32px",
-    height: "32px",
-    display: "grid",
-    placeItems: "center",
-    border: "none",
-    borderRadius: "var(--z-shape-button)",
-    background: "transparent",
-    color: "var(--z-fg-muted)",
-    cursor: "pointer",
-    "--z-icon-color": "currentColor",
-    transition: "color 120ms ease, background-color 120ms ease",
-    _hover: {
-      color: "var(--z-fg-primary)",
-      background: "var(--dz-glass-hover)",
-    },
-    _focusVisible: {
-      outline: "2px solid var(--z-focus)",
-      outlineOffset: "1px",
-    },
-    _phone: { width: "44px", height: "44px" },
   },
 });
 

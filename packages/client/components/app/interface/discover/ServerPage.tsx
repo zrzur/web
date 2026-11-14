@@ -36,7 +36,7 @@ import {
 import { useDiscoverLabels } from "./categories";
 import { isPaidListing } from "./marks";
 import { useOpenInApp } from "./OpenInApp";
-import { WEBSITE_URL, appUrl, discoverUrl, publicReportUrl } from "./sites";
+import { appUrl, discoverUrl, publicReportUrl } from "./sites";
 
 type JoinState = "idle" | "busy" | "requested" | "closed";
 
@@ -271,21 +271,6 @@ export function ServerPage(props: {
                   banner={fileUrl(item().banner)}
                   eager
                 />
-                <Crumbs aria-label={t`Breadcrumb`}>
-                  <a href={props.base || "/"}>
-                    <Trans>Discover</Trans>
-                  </a>
-                  <Show when={item().category}>
-                    <Icon name="caret-right" size={14} data-mirror />
-                    <a href={`${props.base}/${item().category}`}>
-                      {labels.category(item().category)}
-                    </a>
-                  </Show>
-                  <Icon name="caret-right" size={14} data-mirror />
-                  <span aria-current="page" dir="auto">
-                    {item().name}
-                  </span>
-                </Crumbs>
               </BannerArea>
 
               <Columns>
@@ -328,23 +313,6 @@ export function ServerPage(props: {
                       <ListingAbout text={item().description!} />
                     </Show>
                   </section>
-
-                  <Note data-note>
-                    <h2>
-                      <Trans>Before you join</Trans>
-                    </h2>
-                    <p>
-                      <Trans>
-                        If the server asks you to accept its rules, you do so
-                        before you can write. Discover lists only servers whose
-                        owners asked to be here, and the Zrzur team checks each
-                        one first.
-                      </Trans>
-                    </p>
-                    <a href={`${WEBSITE_URL}/legal/discover-guidelines`}>
-                      <Trans>Discover rules</Trans>
-                    </a>
-                  </Note>
 
                   <Show when={similar()?.length}>
                     <section data-similar>
@@ -620,41 +588,6 @@ const BannerArea = styled("div", {
   },
 });
 
-const Crumbs = styled("nav", {
-  base: {
-    position: "absolute",
-    top: "16px",
-    insetInlineStart: "16px",
-    maxWidth: "calc(100% - 32px)",
-    height: "32px",
-    paddingInline: "12px",
-    borderRadius: "10px",
-    background: "var(--z-bg-floating)",
-    display: "flex",
-    alignItems: "center",
-    gap: "6px",
-    fontSize: "13px",
-    color: "var(--z-fg-muted)",
-    overflow: "hidden",
-    "& a": {
-      color: "var(--z-fg-secondary)",
-      textDecoration: "none",
-      whiteSpace: "nowrap",
-      "&:hover": { color: "var(--z-fg-primary)" },
-      "&:focus-visible": { outline: "2px solid var(--z-focus)" },
-    },
-    "& [aria-current]": {
-      color: "var(--z-fg-primary)",
-      fontWeight: 600,
-      overflow: "hidden",
-      textOverflow: "ellipsis",
-      whiteSpace: "nowrap",
-    },
-    // direction icons turn by themselves in right-to-left (styles.css)
-    "@media (max-width: 760px)": { display: "none" },
-  },
-});
-
 const Columns = styled("div", {
   base: {
     width: "100%",
@@ -670,9 +603,8 @@ const Columns = styled("div", {
       flexDirection: "column",
       padding: "0 0 96px",
       gap: "24px",
-      // the frame sits after "About"; the note and the similar servers follow
-      "& [data-note]": { order: 2 },
-      "& [data-similar]": { order: 3 },
+      // the frame sits after "About"; the similar servers follow
+      "& [data-similar]": { order: 2 },
     },
   },
 });
@@ -782,39 +714,6 @@ const Similar = styled("div", {
       whiteSpace: "nowrap",
     },
     "& small": { fontSize: "12px", color: "var(--z-fg-secondary)" },
-  },
-});
-
-/** "Before you join": plain words under a hairline, not a box */
-const Note = styled("section", {
-  base: {
-    maxWidth: "680px",
-    paddingTop: "24px",
-    borderTop: "1px solid var(--z-border-subtle)",
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "flex-start",
-    gap: "8px",
-    "& h2": { margin: 0 },
-    "& p": {
-      margin: 0,
-      fontSize: "15px",
-      lineHeight: "24px",
-      color: "var(--z-fg-secondary)",
-    },
-    "& a": {
-      fontSize: "14px",
-      fontWeight: 600,
-      color: "var(--z-link)",
-      textDecoration: "none",
-      _hover: { textDecoration: "underline" },
-      _focusVisible: { outline: "2px solid var(--z-focus)" },
-      "@media (max-width: 900px)": {
-        minHeight: "44px",
-        display: "inline-flex",
-        alignItems: "center",
-      },
-    },
   },
 });
 

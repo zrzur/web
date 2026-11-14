@@ -766,7 +766,6 @@ export function Discover() {
       listing={item}
       testId={item.boost === "MegaBoost" ? "discover-headline" : undefined}
       onOpen={() => openDetail(item)}
-      onReport={() => report(item)}
       action={cardAction(item)}
     />
   );
