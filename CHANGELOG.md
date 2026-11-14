@@ -2,6 +2,15 @@
 
 ## Unreleased
 
+### Developer documentation: second correctness pass, on the live site
+
+* **Footer of the public sites (Discover, Designs, Developers):** the Impressum link pointed to an address that does not exist (404); it opens the imprint now, and the legal links open the website in the reader's language.
+* **developers.zrzur.com:** links to the overview name the front page itself instead of an address that redirects; code reads left to right everywhere in the Arabic pages, also in the generated reference; every page has a description of its own, and no two pages share a title.
+* **Corrected pages (en, ar, de):** Running in production said there is no resume; a command used while the bot is offline is refused at once (`ApplicationOffline`), not after 3 seconds; a thread's first message can carry components (Components page); members with Administrator; the `sounds` upload tag; people under 18 cannot be messaged first by a bot, and opening a restricted DM answers `403`; the Commands tab of the Developer Portal; the owner-name switch; a server's own command rules; removing link previews; a message carries no language. Permission names inside Arabic and German text use the app's own names.
+* **SDK page:** how to build the library from its source today, and the full list of its methods (servers, threads, forums, invites, connection).
+* **Reference** regenerated from the released backend (`553e6029`) and the OpenAPI document api.zrzur.com serves: one more endpoint, `DELETE /channels/{target}/messages/{msg}/embeds`.
+* **Checks:** `examples-check.mjs snippets` runs the code written inside the pages as written (12 JavaScript blocks, the Python bot, command and component JSON, 21 curl commands).
+
 ### Delete buttons are red; the X on a link preview (2026-11-14)
 
 * **Buttons that delete or remove are a plain red** everywhere, instead of a muted rose that did not read as a warning.
