@@ -38,7 +38,7 @@ A message has `components`, a list of blocks. An `ActionRow` holds up to five bu
 
 Put what you need in `custom_id`, such as `flip:heads` or `note:3`, and it comes back in `interaction.component.custom_id`. Answer with `UpdateMessage` to change the message, or `Message` for a new one.
 
-A thread's first message cannot carry components yet. Start the thread, then send the message with buttons into it; see [Channels and webhooks](/developers/docs/channels#threads).
+A thread's first message can carry components too; see [Channels and webhooks](/developers/docs/channels#threads).
 
 ## Who may click {#restrict}
 

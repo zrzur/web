@@ -42,3 +42,5 @@ A message is a direct message when its channel's `channel_type` is `DirectMessag
 ```
 
 When a person opens a direct message with your bot for the first time, `ChannelCreate` with the `DirectMessage` arrives, before any message in it. Direct messages and groups reach your bot with or without the `SERVERS` intent, in `Ready` and as `ChannelCreate`. Their messages need `DIRECT_MESSAGES`.
+
+A message carries no language. `locale` comes only with an interaction, so for a person who has only written to your bot, use the language of an earlier interaction of theirs if you have one, or ask them.

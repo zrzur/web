@@ -26,9 +26,9 @@ Schließe bei `SIGTERM` das Gateway und lass laufende Arbeit enden. Speichere de
 
 Neu verbinden ist Aufgabe deines Bots. Folge [Gateway: Neu verbinden](/developers/docs/gateway#reconnect) und achte auf Stille, mit einem `Ping` alle 20 Sekunden und einem Limit von 60 Sekunden ohne `Pong`.
 
-Stoppe endgültig nur bei `InvalidSession` und Close-Code `4014`. Alles andere ist vorübergehend. Ein Bot, der in diesen zwei Fällen endet, braucht einen Menschen, also sorge dafür, dass dein Prozessmanager das Gateway nicht bombardiert: `RestartSec=5` wartet zwischen den Versuchen.
+Stoppe endgültig nur bei einem `Error`-Ereignis vom Typ `InvalidSession` und bei Close-Code `4014`. Alles andere ist vorübergehend. Ein Bot, der in diesen zwei Fällen endet, braucht einen Menschen, also sorge dafür, dass dein Prozessmanager das Gateway nicht bombardiert: `RestartSec=5` wartet zwischen den Versuchen.
 
-Es gibt kein Fortsetzen. Hole nach jedem `Ready`, was du nicht verpassen darfst.
+Fordere eine fortsetzbare Sitzung an und sende nach einem Abbruch zuerst `Resume`: Ein kurzer Abbruch verliert dann nichts (siehe [Fortsetzen nach einem Abbruch](/developers/docs/gateway#resume)). Hole nach einem neuen `Ready`, was du nicht verpassen darfst.
 
 ## Logge, was hilft {#logging}
 

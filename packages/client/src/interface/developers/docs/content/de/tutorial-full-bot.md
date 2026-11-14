@@ -99,7 +99,7 @@ Tippe auf deinem Server `/` in einem Kanal. Die vier Befehle erscheinen mit dem 
 | `the token was refused, stopping`   | Falsches oder zurückgesetztes Token           | Kopiere das Token neu oder setze es zurück |
 | `could not start`, `ApplicationNotInstalled` | Die Server-ID in `ZRZUR_TEST_SERVER` ist falsch, oder der Bot ist nicht dort | Schritt 3 und 5 |
 | Befehle erscheinen nicht            | Der Bot ist nicht auf diesem Server           | Schritt 3                                  |
-| "I need the Timeout Members permission." | Der Link hatte keine Berechtigung        | Schritt 3 noch einmal, oder gib der Rolle des Bots die Berechtigung |
+| "I need the „Mitglieder Timeouten“ permission." | Der Link hatte keine Berechtigung        | Schritt 3 noch einmal, oder gib der Rolle des Bots die Berechtigung |
 | "That member ranks at or above me." | Die Rolle des Bots ist zu niedrig             | Schritt 4                                  |
 | "That member ranks at or above you." | Du stehst gleich hoch oder niedriger         | Frage jemanden, der höher steht            |
 | "That member cannot be timed out."  | Es ist der Eigentümer des Servers (`InvalidOperation`) | Wähle ein anderes Mitglied       |

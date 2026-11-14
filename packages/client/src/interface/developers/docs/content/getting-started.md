@@ -20,7 +20,7 @@ Do this before the first run. A bot that is not in the server gets 403 MissingPe
 
 ## 4. No library needed {#get-the-sdk}
 
-Node.js 22 has everything built in: the API is plain HTTP and WebSocket. The official library, @zrzur/sdk, cannot be downloaded yet. [About the SDKs](/developers/docs/sdk)
+Node.js 22 has everything built in: the API is plain HTTP and WebSocket. The official library, @zrzur/sdk, is not on npm yet. [About the SDKs](/developers/docs/sdk)
 
 ## 5. Write your first bot {#first-bot}
 

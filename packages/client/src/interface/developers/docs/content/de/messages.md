@@ -11,7 +11,7 @@ Ein Bot sendet, bearbeitet und löscht eigene Nachrichten, reagiert, heftet an u
 - **Stille Nachrichten**: `flags: 1` sendet ohne Benachrichtigungen.
 - **Maskerade**: `masquerade: { name, avatar }` zeigt einen anderen Namen und Avatar auf der Nachricht (braucht Masquerade; `colour` braucht auch „Rollen verwalten“).
 - **Komponenten**: Schaltflächen, Menüs und Layoutblöcke; nur Bots können sie senden. Siehe [Schaltflächen, Menüs und Formulare](/developers/docs/components).
-- **Erwähnungen**: `<@user id>` erwähnt einen Benutzer, `<%role id>` eine Rolle (braucht Mention Roles), `@everyone` und `@online` brauchen Mention Everyone. Ohne die Berechtigung wird die ganze Nachricht mit `MissingPermission` abgelehnt; sie geht nicht ohne die Erwähnung raus. Auf einem selbst gehosteten Server mit `mass_mentions_enabled = false` gehen Rollen-, `@everyone`- und `@online`-Erwähnungen stattdessen ohne Benachrichtigung raus.
+- **Erwähnungen**: `<@user id>` erwähnt einen Benutzer, `<%role id>` eine Rolle (braucht „Rollen erwähnen“), `@everyone` und `@online` brauchen „Alle erwähnen“. Ohne die Berechtigung wird die ganze Nachricht mit `MissingPermission` abgelehnt; sie geht nicht ohne die Erwähnung raus. Auf einem selbst gehosteten Server mit `mass_mentions_enabled = false` gehen Rollen-, `@everyone`- und `@online`-Erwähnungen stattdessen ohne Benachrichtigung raus.
 - **Kanal-Links**: `<#channel id>` zeigt einen Link auf einen Kanal oder Thread. Er benachrichtigt niemanden.
 
 ## Antworten {#reply}
@@ -22,11 +22,11 @@ Ein Bot sendet, bearbeitet und löscht eigene Nachrichten, reagiert, heftet an u
 
 ## Bearbeiten und löschen {#edit}
 
-`PATCH /channels/{target}/messages/{msg}` nimmt `content`, `embeds` und `components`. Ein Bot bearbeitet nur eigene Nachrichten. `DELETE /channels/{target}/messages/{msg}` löscht eigene, oder jede mit „Nachrichten verwalten“. Eine Bearbeitung benachrichtigt nie erneut.
+`PATCH /channels/{target}/messages/{msg}` nimmt `content`, `embeds` und `components`. Ein Bot bearbeitet nur eigene Nachrichten. `DELETE /channels/{target}/messages/{msg}` löscht eigene, oder jede mit „Nachrichten verwalten“. Eine Bearbeitung benachrichtigt nie erneut. `DELETE /channels/{target}/messages/{msg}/embeds` entfernt die Linkvorschauen einer Nachricht für alle und verhindert, dass sie zurückkommen; das darf, wer die Nachricht geschrieben hat, und jeder mit „Nachrichten verwalten“. Embeds, die ein Bot absichtlich gesendet hat, bleiben.
 
 ## Embeds {#embeds}
 
-Ein Embed ist eine Karte unter der Nachricht. Senden braucht Send Embeds.
+Ein Embed ist eine Karte unter der Nachricht. Senden braucht „Einbettungen senden“.
 
 | Feld            | Bedeutung                                     |
 | --------------- | --------------------------------------------- |
@@ -47,7 +47,7 @@ Die genauen Felder und Limits stehen in der [Referenz unten](/developers/docs/me
 
 ## Anhänge {#attachments}
 
-Eine Nachricht verweist per ID auf Dateien. Erst hochladen, dann senden. Jede ID geht einmal: Eine zweite Nutzung antwortet `404 NotFound`. Senden braucht Upload Files. Eine Datei, die eine Person deinem Bot über die Option `Attachment` eines Befehls gegeben hat, ist von diesem Befehl schon verwendet; siehe [Slash-Befehle](/developers/docs/commands#attachments).
+Eine Nachricht verweist per ID auf Dateien. Erst hochladen, dann senden. Jede ID geht einmal: Eine zweite Nutzung antwortet `404 NotFound`. Senden braucht „Dateien hochladen“. Eine Datei, die eine Person deinem Bot über die Option `Attachment` eines Befehls gegeben hat, ist von diesem Befehl schon verwendet; siehe [Slash-Befehle](/developers/docs/commands#attachments).
 
 @@2
 

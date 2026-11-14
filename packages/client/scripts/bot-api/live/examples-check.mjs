@@ -13,7 +13,13 @@
 
 import { spawn } from "node:child_process";
 import { createHash, randomBytes, randomUUID } from "node:crypto";
-import { existsSync, mkdtempSync, readFileSync, writeFileSync } from "node:fs";
+import {
+  existsSync,
+  mkdtempSync,
+  readFileSync,
+  readdirSync,
+  writeFileSync,
+} from "node:fs";
 import { createServer as createHttpServer } from "node:http";
 import { createConnection, createServer } from "node:net";
 import { tmpdir } from "node:os";
@@ -1463,6 +1469,443 @@ async function pageChecks() {
   });
 }
 
+/* ------------------------------------------------------------------ */
+/* The code written inside the pages, run as written                   */
+/* ------------------------------------------------------------------ */
+
+const contentDir = resolve(
+  botApiDir,
+  "../../src/interface/developers/docs/content",
+);
+
+/** Fenced blocks of a page in a language, in page order */
+function blocksOf(page, language) {
+  const source = readFileSync(join(contentDir, `${page}.md`), "utf8");
+  return [...source.matchAll(/^```(\w+)[^\n]*\n([\s\S]*?)^```$/gm)]
+    .filter((m) => m[1] === language)
+    .map((m) => m[2]);
+}
+
+/** Run a child process to its end; its output, or an error with the tail of it */
+function runToEnd(command, args, env, ms = 30_000) {
+  return new Promise((res, rej) => {
+    const child = spawn(command, args, {
+      cwd: work,
+      env: { ...process.env, ...env },
+      stdio: ["ignore", "pipe", "pipe"],
+    });
+    let out = "";
+    child.stdout.on("data", (d) => (out += d));
+    child.stderr.on("data", (d) => (out += d));
+    const timer = setTimeout(() => {
+      child.kill();
+      rej(new Error(`still running after ${ms / 1000} s: ${out.slice(-300)}`));
+    }, ms);
+    child.on("exit", (code) => {
+      clearTimeout(timer);
+      if (code === 0) res(out);
+      else rej(new Error(`exit ${code}: ${out.slice(-400)}`));
+    });
+  });
+}
+
+async function snippets() {
+  const check = async (name, fn) => {
+    try {
+      const detail = await fn();
+      results.push({ file: "snippets", name, ok: true });
+      console.log(`  ok   snippet: ${name}${detail ? ` (${detail})` : ""}`);
+    } catch (error) {
+      results.push({ file: "snippets", name, ok: false, error: error.message });
+      console.log(`  FAIL snippet: ${name}: ${error.message}`);
+    }
+  };
+  const bot_ = { bot: tutorialToken };
+  const root = await must("GET", "/", {});
+  const files = root.features.autumn.url;
+  const core = pathToFileURL(resolve(dirname(sdkDist), "../index.js")).href;
+  // the pages name Zrzur's own hosts; here they are this stack's
+  const here_ = (code) =>
+    code
+      .replaceAll("https://api.zrzur.com", API)
+      .replaceAll("wss://events.zrzur.com", WS)
+      .replaceAll("https://cdn.zrzur.com", files)
+      .replaceAll(
+        'from "@zrzur/sdk/bot"',
+        `from ${JSON.stringify(pathToFileURL(sdkDist).href)}`,
+      )
+      .replaceAll('from "@zrzur/sdk"', `from ${JSON.stringify(core)}`);
+
+  /* ---------------- JavaScript: each block of a page, between a few lines that give it what the page assumes */
+  const withBot = `import { Client } from "@zrzur/sdk/bot";
+const bot = new Client({ apiUrl: process.env.ZRZUR_API_URL, wsUrl: process.env.ZRZUR_WS_URL });
+await bot.loginHttp(process.env.ZRZUR_BOT_TOKEN);
+const channelId = process.env.CHANNEL, serverId = process.env.SERVER;
+`;
+  const env = {
+    ZRZUR_BOT_TOKEN: tutorialToken,
+    ZRZUR_TOKEN: tutorialToken,
+    ZRZUR_API_URL: API,
+    ZRZUR_WS_URL: WS,
+    CHANNEL: text._id,
+    SERVER: serverId,
+  };
+  const js = [
+    ["channels", 0, withBot, "process.exit(0);"],
+    ["channels", 1, withBot, "process.exit(0);"],
+    ["channels", 2, withBot, "process.exit(0);"],
+    [
+      "files",
+      0,
+      `${withBot}const bytes = new TextEncoder().encode("a,b\\n1,2\\n");\n`,
+      'if (typeof id !== "string") throw new Error("no file id");\nprocess.exit(0);',
+    ],
+    ["gateway", 0, "", "setTimeout(() => process.exit(0), 4000);"],
+    [
+      "interactions",
+      0,
+      'const interaction = { user_permissions_string: "256" };\n',
+      'if (canTimeout !== 1n) throw new Error("bit 8 not read");',
+    ],
+    [
+      "oauth2",
+      0,
+      "",
+      'if (verifier.length !== 43 || challenge.length !== 43 || /[+/=]/.test(challenge)) throw new Error("not base64url of 32 bytes");',
+    ],
+    [
+      "rate-limits",
+      0,
+      "",
+      'const answer = await call("/users/@me", { headers: { "x-bot-token": process.env.ZRZUR_BOT_TOKEN } });\nif (!answer.ok) throw new Error(`status ${answer.status}`);',
+    ],
+    [
+      "roles",
+      0,
+      'const interaction = { user_permissions_string: "4194304" };\n',
+      'if (canSend !== true) throw new Error("bit 22 not read");',
+    ],
+    [
+      "sdk",
+      0,
+      "",
+      'if (!client.user?._id) throw new Error("not logged in");\nawait client.destroy();\nprocess.exit(0);',
+    ],
+    [
+      "sdk",
+      1,
+      "",
+      'if (!me._id) throw new Error("no answer");\nprocess.exit(0);',
+    ],
+    [
+      "voice",
+      0,
+      `${withBot}class Room { async connect(url, token) { if (!/^wss?:/.test(url) || !token) throw new Error("no ticket"); } }\n`,
+      "process.exit(0);",
+    ],
+  ];
+  for (const [page, index, before, after] of js)
+    await check(`${page}.md, JavaScript block ${index + 1}`, async () => {
+      const block = blocksOf(page, "js")[index];
+      expect(block, "no such block");
+      let code = here_(block);
+      // the page's client talks to Zrzur's own servers; this one to the stack under test
+      if (page === "sdk" && index === 0)
+        code = code.replace(
+          "new Client()",
+          "new Client({ apiUrl: process.env.ZRZUR_API_URL, wsUrl: process.env.ZRZUR_WS_URL })",
+        );
+      // imports of the block go first, then what the page assumes, the block, and the check
+      const imports = [...code.matchAll(/^import .*$/gm)].map((m) => m[0]);
+      const body = code.replace(/^import .*$/gm, "");
+      const bodyBefore = before.replace(
+        /^import .*\n/gm,
+        (line) => (imports.push(line.trim()), ""),
+      );
+      const path = join(work, `snippet-${page}-${index}.mjs`);
+      writeFileSync(
+        path,
+        `${[...new Set(imports)].map(here_).join("\n")}\n${here_(bodyBefore)}${body}\n${after}\n`,
+      );
+      await runToEnd(process.execPath, [path], {
+        ...env,
+        CHANNEL: page === "voice" ? voice._id : text._id,
+      });
+    });
+
+  /* ---------------- Python: the whole program of "Without a library" */
+  await check("raw-http.md, the Python bot", async () => {
+    const [program] = blocksOf("raw-http", "python");
+    const venv = join(work, "venv");
+    // PYTHON: the interpreter to use (on Windows the bare name can be the Store's stub)
+    await runToEnd(
+      process.env.PYTHON ?? "python",
+      ["-m", "venv", venv],
+      {},
+      120_000,
+    );
+    const python = join(
+      venv,
+      process.platform === "win32" ? "Scripts/python.exe" : "bin/python",
+    );
+    await runToEnd(
+      python,
+      ["-m", "pip", "install", "--quiet", "websockets"],
+      {},
+      180_000,
+    );
+    const path = join(work, "raw.py");
+    writeFileSync(path, here_(program));
+    const child = spawn(python, ["-u", path], {
+      cwd: work,
+      env: { ...process.env, ZRZUR_BOT_TOKEN: tutorialToken },
+      stdio: ["ignore", "pipe", "pipe"],
+    });
+    let out = "";
+    child.stdout.on("data", (d) => (out += d));
+    child.stderr.on("data", (d) => (out += d));
+    try {
+      for (
+        let i = 0;
+        i < 200 && !/ready/.test(out) && child.exitCode === null;
+        i++
+      )
+        await sleep(100);
+      expect(/ready/.test(out), `not ready: ${out.slice(-300)}`);
+      await invoke(member, "hello");
+      let answered = false;
+      for (let i = 0; i < 40 && !answered; i++) {
+        await sleep(250);
+        const recent = await must(
+          "GET",
+          `/channels/${text._id}/messages?limit=5`,
+          { session: member.session },
+        );
+        answered = recent.some((m) => m.content === "Hello from Python!");
+      }
+      expect(answered, `no answer in the channel: ${out.slice(-300)}`);
+    } finally {
+      child.kill();
+    }
+    return "ready, /hello answered";
+  });
+  await clearCommands();
+
+  /* ---------------- JSON: the command definitions and the messages with components */
+  for (const [index, block] of blocksOf("commands", "json").entries()) {
+    let body;
+    try {
+      body = JSON.parse(block);
+    } catch {
+      continue;
+    }
+    if (!body.name || !body.description) continue; // an event sample, not a definition
+    await check(`commands.md, JSON block ${index + 1} registers`, async () => {
+      const saved = await must(
+        "PUT",
+        `/applications/${bot._id}/servers/${serverId}/commands`,
+        { ...bot_, body: [body] },
+      );
+      expect(
+        saved.length === 1 && saved[0].name === body.name,
+        "not saved as sent",
+      );
+    });
+  }
+  await clearCommands();
+  for (const [index, block] of blocksOf("components", "json").entries()) {
+    let body;
+    try {
+      body = JSON.parse(block);
+    } catch {
+      continue;
+    }
+    // a whole message, or one row to put into a message; forms and event samples are covered by the tutorials
+    const message =
+      body.components && body.content
+        ? body
+        : body.type === "ActionRow"
+          ? { content: "Pick", components: [body] }
+          : null;
+    if (!message) continue;
+    await check(
+      `components.md, JSON block ${index + 1} is accepted as a message`,
+      async () => {
+        const sent = await must("POST", `/channels/${text._id}/messages`, {
+          ...bot_,
+          body: message,
+        });
+        expect(
+          sent.components?.length === message.components.length,
+          "components not kept",
+        );
+      },
+    );
+  }
+
+  /* ---------------- curl: every command that needs nothing but a bot, with the page's placeholders filled in */
+  const category = "docscat1";
+  await must("PATCH", `/servers/${serverId}`, {
+    session: owner.session,
+    body: { categories: [{ id: category, title: "Docs", channels: [] }] },
+  });
+  const forum = await must("POST", `/servers/${serverId}/channels`, {
+    session: owner.session,
+    body: { type: "Forum", name: "questions-curl" },
+  });
+  await must("PATCH", `/channels/${forum._id}`, {
+    session: owner.session,
+    body: { forum_tags: [{ id: "help", name: "Help" }] },
+  });
+  const first = await must("POST", `/channels/${text._id}/messages`, {
+    ...bot_,
+    body: { content: "curl: first" },
+  });
+  const hook = await http("POST", `/channels/${text._id}/webhooks`, {
+    ...bot_,
+    body: { name: "curl hook" },
+  });
+  const fill = {
+    YOUR_BOT_TOKEN: tutorialToken,
+    $ZRZUR_BOT_TOKEN: tutorialToken,
+    YOUR_BOT_ID: bot._id,
+    CHANNEL_ID: text._id,
+    SERVER_ID: serverId,
+    CATEGORY_ID: category,
+    FORUM_ID: forum._id,
+    MESSAGE_ID: first._id,
+    LAST_SEEN_ID: first._id,
+    USER_ID: member.id,
+    $WEBHOOK_ID: hook.data?.id,
+    $WEBHOOK_TOKEN: hook.data?.token,
+  };
+  // what a bot alone cannot supply; each is run by the check named beside it
+  const elsewhere = [
+    [
+      /INTERACTION_ID|YOUR_INTERACTION_TOKEN/,
+      "needs a live interaction: tutorials and 'an interaction nobody answers; a late answer'",
+    ],
+    [
+      /oauth2\/(token|revoke|@me)|THE_CODE|YOUR_ACCESS_TOKEN/,
+      "needs a person's approval: 'OAuth2: the page's PKCE, code, token, refresh, revoke'",
+    ],
+    [
+      /YOUR_SESSION_TOKEN/,
+      "the owner's own call: 'verification: the page's body'",
+    ],
+  ];
+  const tokens = (line) =>
+    [...line.matchAll(/"((?:[^"\\]|\\.)*)"|'([^']*)'|(\S+)/g)].map(
+      (m) => m[1] ?? m[2] ?? m[3],
+    );
+  let ran = 0;
+  const skipped = [];
+  const pages = readdirSync(contentDir)
+    .filter((name) => name.endsWith(".md"))
+    .map((name) => name.replace(/\.md$/, ""));
+  for (const page of pages)
+    for (const [index, block] of blocksOf(page, "bash").entries()) {
+      const commands = block
+        .replace(/\\\n\s*/g, " ")
+        .split("\n")
+        .filter((line) => line.startsWith("curl "));
+      let fileId;
+      for (const [n, raw] of commands.entries()) {
+        const name = `${page}.md, bash block ${index + 1}, curl ${n + 1}`;
+        const reason = elsewhere.find(([pattern]) => pattern.test(raw));
+        if (reason) {
+          skipped.push(`${name}: ${reason[1]}`);
+          continue;
+        }
+        if (/\$WEBHOOK/.test(raw) && !fill.$WEBHOOK_ID) {
+          skipped.push(`${name}: webhooks are off on this stack`);
+          continue;
+        }
+        await check(name, async () => {
+          // the moderation page kicks, bans and times out one member in turn:
+          // each command needs them back in the server first
+          if (page === "moderation") {
+            await http("DELETE", `/servers/${serverId}/bans/${member.id}`, {
+              session: owner.session,
+            });
+            await http("POST", `/invites/${invite._id}`, {
+              session: member.session,
+            });
+          }
+          let line = here_(raw);
+          // the voice page's channel is a voice channel
+          const here = {
+            ...fill,
+            FILE_ID: fileId,
+            ...(page === "voice" ? { CHANNEL_ID: voice._id } : {}),
+          };
+          for (const [from, to] of Object.entries(here))
+            if (to) line = line.replaceAll(from, to);
+          const args = tokens(line).slice(1);
+          let method;
+          let url;
+          const headers = {};
+          const data = [];
+          let form;
+          for (let i = 0; i < args.length; i++) {
+            const arg = args[i];
+            if (arg === "-X") method = args[++i];
+            else if (arg === "-H") {
+              const [key, ...value] = args[++i].split(":");
+              headers[key.trim().toLowerCase()] = value.join(":").trim();
+            } else if (arg === "-d") data.push(args[++i]);
+            else if (arg === "-F") {
+              const [field, value] = args[++i].split("=");
+              const [, fileName, type] =
+                /^@([^;]+)(?:;type=(.+))?$/.exec(value) ?? [];
+              form ??= new FormData();
+              if (fileName)
+                form.set(
+                  field,
+                  new Blob(["a,b\n1,2\n"], { type: type ?? "text/plain" }),
+                  fileName,
+                );
+              else form.set(field, value);
+            } else if (!arg.startsWith("-")) url = arg;
+          }
+          expect(
+            url && !/[A-Z]{3,}_[A-Z]{2,}/.test(url),
+            `a placeholder is left in ${url}`,
+          );
+          const send = () =>
+            fetch(url, {
+              method: method ?? (data.length || form ? "POST" : "GET"),
+              headers,
+              body: form ?? (data.length ? data.join("&") : undefined),
+            });
+          let response = await send();
+          let answer = await response.text();
+          // this run asks more in ten seconds than a bot would: wait out a plain rate limit once
+          if (response.status === 429 && !/"type"/.test(answer)) {
+            await sleep((JSON.parse(answer).retry_after ?? 10_000) + 250);
+            response = await send();
+            answer = await response.text();
+          }
+          expect(
+            response.status < 300,
+            `${response.status} ${answer.slice(0, 200)}`,
+          );
+          try {
+            fileId = JSON.parse(answer).id ?? fileId;
+          } catch {
+            // an empty answer
+          }
+          ran++;
+          return String(response.status);
+        });
+      }
+    }
+  console.log(
+    `  curl commands run: ${ran}; run by another check instead: ${skipped.length}`,
+  );
+  for (const line of skipped) console.log(`    - ${line}`);
+}
+
 /* What the rate limiter really answers */
 async function rateLimits() {
   for (let i = 0; i < 60; i++) {
@@ -1504,13 +1947,21 @@ async function rateLimits() {
 let failed = false;
 try {
   await setup();
-  await fullBot();
-  await clearCommands();
-  await others();
+  if (ONLY === "snippets") {
+    await clearCommands();
+    await snippets();
+    await clearCommands();
+  } else {
+    await fullBot();
+    await clearCommands();
+    await others();
+  }
   if (!ONLY) {
     await clearCommands();
     await collectSamples();
     await pageChecks();
+    await clearCommands();
+    await snippets();
     await clearCommands();
     await rateLimits();
   }

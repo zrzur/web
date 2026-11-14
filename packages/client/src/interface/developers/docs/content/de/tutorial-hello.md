@@ -18,7 +18,7 @@ Starte es mit `node hello-raw.mjs`.
 
 ## Mit dem SDK {#with-the-sdk}
 
-Du kannst `@zrzur/sdk` noch nicht herunterladen, siehe [SDKs](/developers/docs/sdk). Wenn du es hast, ist das derselbe Bot:
+`@zrzur/sdk` ist noch nicht auf npm, siehe [SDKs](/developers/docs/sdk). Wenn du es hast, ist das derselbe Bot:
 
 @@2
 

@@ -9,7 +9,7 @@ Zrzur-Sprache läuft auf LiveKit. Die API gibt Tickets aus; der Ton selbst läuf
 | Ein Ticket für einen Sprachkanal holen (`POST /channels/{target}/join_call`) | Unterstützt, live mit einem Bot-Token geprüft                                                 |
 | Mit dem Ticket zu LiveKit verbinden und **Ton senden**                       | Unterstützt. Durchgängig mit `@livekit/rtc-node` geprüft: Ein zweiter Teilnehmer empfing und maß den Ton des Bots |
 | Ton anderer Teilnehmer empfangen                                             | Möglich mit einem LiveKit-Client; braucht Listen. Nicht von unseren Tests abgedeckt           |
-| Mitglieder verschieben, stummschalten, taub stellen (`PATCH /servers/{server_id}/members/{member_id}`) | Unterstützt mit Move Members, Mute Members, Deafen Members          |
+| Mitglieder verschieben, stummschalten, taub stellen (`PATCH /servers/{server_id}/members/{member_id}`) | Unterstützt mit „Mitglieder verschieben“, „Mitglieder stummschalten“, „Mitglieder taub schalten“          |
 | Video und Bildschirm von einem Bot                                           | Nicht getestet; Tickets folgen der Berechtigung Video                                         |
 | `force_disconnect` beim Beitreten                                            | Nicht für Bots (`IsBot`)                                                                      |
 

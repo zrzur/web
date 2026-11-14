@@ -22,6 +22,7 @@ An application and its bot are one thing: the application id, the bot id and the
 | Setting            | What it does                                                                                                     |
 | ------------------ | ---------------------------------------------------------------------------------------------------------------- |
 | Public bot         | On: anyone with Manage Server can install it. Off: only you can, and others get `BotIsPrivate`                   |
+| Show your name on the bot's page | On: people who open the bot's invite page see that you made it. Off by default                     |
 | Privileged intents | Switches for Message content, Server members and Presence. Each switch is saved at once and counts from the bot's next gateway connection. See [Intents](/developers/docs/gateway#intents) and [when an intent is off](/developers/docs/gateway#intent-off)       |
 | Username           | The bot's name                                                                                                   |
 | Bot ID             | The id you use in `/applications/{id}/...` routes                                                                |
@@ -33,7 +34,7 @@ An application and its bot are one thing: the application id, the bot id and the
 
 ## The Commands tab {#commands-tab}
 
-Lists the bot's global commands. You can paste a JSON list there instead of registering from code. See [Slash commands](/developers/docs/commands).
+Lists the bot's global commands. A form adds, changes and deletes them, with options, names in other languages and who may use them, and shows a preview; **Import JSON** and **Export JSON** take and give the whole list. If your bot sends its list when it starts, that list replaces what you save here. See [Slash commands](/developers/docs/commands).
 
 ## Install the bot in a server {#install}
 

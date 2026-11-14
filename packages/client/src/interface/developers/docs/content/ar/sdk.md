@@ -10,27 +10,36 @@
 
 لا تحتاج إلى SolidJS إلا مع `@zrzur/sdk/solid`، ولا ينزله البوت أبدًا.
 
-> **لا يمكنك تثبيتها من npm بعد.** ليست `@zrzur/sdk` على npm، ومصدرها في [github.com/zrzur/sdk-js](https://github.com/zrzur/sdk-js). تعرض هذه الصفحة ما تقدمه. وإلى ذلك الحين ابنِ بـNode وحده: [ابنِ بوتًا كاملًا](/developers/docs/tutorial-full-bot) لا يحتاج إلى مكتبة، وفي [بلا مكتبة](/developers/docs/raw-http) كل الطلبات.
+> **لا يمكنك تثبيتها من npm بعد.** ليست `@zrzur/sdk` على npm، ومصدرها في [github.com/zrzur/sdk-js](https://github.com/zrzur/sdk-js). تعرض هذه الصفحة ما تقدمه. ولتجربتها اليوم ابنِها من ذلك المصدر باستخدام Node 22.3 أو أحدث وpnpm:
+
+@@0
+
+ثم نفّذ `npm install` على الملف `zrzur-sdk-2.0.0.tgz` الناتج، من مجلد بوتك. لا يعمل التثبيت مباشرة من عنوان GitHub: المستودع يحوي المصدر لا الملفات المبنية. وإلى ذلك الحين ابنِ بـNode وحده: [ابنِ بوتًا كاملًا](/developers/docs/tutorial-full-bot) لا يحتاج إلى مكتبة، وفي [بلا مكتبة](/developers/docs/raw-http) كل الطلبات.
 
 توجد أيضًا `@zrzur/bot`، مكتبة أقدم وأصغر بالواجهة نفسها للبوتات، وهي غير منشورة أيضًا. ينبغي للبوتات الجديدة انتظار `@zrzur/sdk/bot`.
 
 ## @zrzur/sdk/bot (للبوتات) {#zrzur-sdk-bot-for-bots}
 
-@@0
+@@1
 
 | المجال          | الدوال                                                                                                     |
 | --------------- | ---------------------------------------------------------------------------------------------------------- |
-| الأوامر         | `client.command` و`client.component` و`client.modal` و`client.autocomplete` و`client.syncCommands` و`client.fetchCommands` |
+| الأوامر | `client.command` و`client.component` و`client.modal` و`client.autocomplete` و`client.syncCommands` و`client.fetchCommands` و`client.createCommand` و`client.fetchCommand` و`client.editCommand` و`client.deleteCommand` |
 | الردود          | `i.reply` و`i.defer` و`i.update` و`i.deferUpdate` و`i.showModal` و`i.respond` و`i.editReply` و`i.followUp` و`i.deleteReply` |
 | الأحداث         | `client.on(type)` و`client.onMessage` و`client.onMemberJoin` و`client.onMemberLeave` و`client.onReaction`  |
-| الرسائل         | `client.messages.send` و`reply` و`fetch` و`fetchMany` و`edit` و`delete` و`bulkDelete` و`react` و`unreact` و`clearReactions` و`pin` و`unpin` |
+| الرسائل | `client.messages.send` و`reply` و`fetch` و`fetchMany` و`edit` و`delete` و`bulkDelete` و`react` و`unreact` و`clearReactions` و`pin` و`unpin` و`pins` |
 | الأعضاء         | `client.members.fetch` و`fetchAll` و`edit` و`addRole` و`removeRole` و`timeout` و`kick` و`ban` و`unban`     |
-| الأدوار والقنوات | `client.roles.*` و`client.channels.*`                                                                     |
+| الأدوار | `client.roles.create` و`edit` و`setPermissions` و`delete` |
+| القنوات | `client.channels.fetch` و`create` و`edit` و`delete` و`setPermissions` و`setMemberPermissions` و`createInvite` و`typing` |
+| السيرفرات | `client.servers.fetch` و`ensureCategory` |
+| المواضيع والمنتديات | `client.threads.create` و`list` و`edit` و`archive` و`reopen`؛ `client.forums.create` و`post` و`posts` و`setTags` |
+| الدعوات | `client.invites.create` و`fetch` و`list` و`delete` |
 | المستخدمون      | `client.users.fetch` و`openDM` و`sendDM`                                                                   |
 | الويب هوك       | `client.webhooks.create` و`list` و`listForServer` و`fetch` و`fetchWithToken` و`edit` و`regenerateToken` و`delete` و`send` و`sendSlack` و`fetchMessage` و`editMessage` و`deleteMessage` |
 | الجامعات        | `message.createMessageComponentCollector` و`message.awaitMessageComponent` و`interaction.awaitModalSubmit` |
 | الرموز التعبيرية | `client.emojis.list` و`fetch` و`find` و`create` و`delete`                                                 |
 | الصوت           | `client.voice.nodes` و`client.voice.join`                                                                  |
+| الاتصال | `client.login` و`client.loginHttp` و`client.listen` و`client.destroy` و`client.setStatus` و`client.typing` |
 | أي شيء آخر      | `client.rest.get(path)` و`post` و`put` و`patch` و`delete` (مكتوبة لكل مسار)، و`client.rest.uploadFile(tag, data, name, type)` |
 
 تُرمى أخطاء الواجهة بصيغة `ApiError` مع `status` و`type` و`detail`، و`retryAfter` بعد 429. تُنتظر الحدود القصيرة، وبعد الحد العام ينتظر كل طلب حتى يعود. تفتح البوابة حزم `Bulk` وتعيد الاتصال بانتظار متزايد.
@@ -39,7 +48,7 @@
 
 ## @zrzur/sdk (الأساس) {#zrzur-sdk-the-core}
 
-@@1
+@@2
 
 استخدمها لأدوات لا تحتاج إلا إلى واجهة HTTP أو البوابة، في أي إطار عمل.
 

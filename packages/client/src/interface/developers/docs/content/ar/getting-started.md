@@ -20,7 +20,7 @@
 
 ## 4. لا حاجة إلى مكتبة {#get-the-sdk}
 
-يتضمن Node.js 22 كل ما تحتاج إليه: الواجهة مجرد HTTP وWebSocket. لا يمكن تنزيل المكتبة الرسمية @zrzur/sdk بعد. [عن حزم التطوير](/developers/docs/sdk)
+يتضمن Node.js 22 كل ما تحتاج إليه: الواجهة مجرد HTTP وWebSocket. المكتبة الرسمية @zrzur/sdk ليست على npm بعد. [عن حزم التطوير](/developers/docs/sdk)
 
 ## 5. اكتب بوتك الأول {#first-bot}
 

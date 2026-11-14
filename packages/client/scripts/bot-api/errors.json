@@ -36,7 +36,7 @@
   "TooManyRoles": ["The server reached its role limit, `max`.", "Delete a role first."],
   "UnknownApplication": ["The application does not exist.", "Check the id: an application id is the bot's user id."],
   "ApplicationNotInstalled": ["Someone used a bot that is not in this server.", "Install the bot in the server."],
-  "ApplicationOffline": ["The bot was suspended or switched off, so it receives nothing.", "Its owner contacts Zrzur support."],
+  "ApplicationOffline": ["The bot is not connected to the gateway, or it was suspended or switched off, so it receives nothing.", "Start the bot. If it was suspended, its owner contacts Zrzur support."],
   "SignedDeliveryRejected": ["Your HTTP interaction address failed its test. `reason` says why.", "See Interactions over HTTP."],
   "UnknownCommand": ["The command id is unknown, or it was deleted.", "Fetch the command list."],
   "CommandAlreadyExists": ["A command with this name and type already exists in this scope.", "Use `PUT` to replace the list, or edit the command."],

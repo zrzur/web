@@ -114,6 +114,8 @@ Optionen und Auswahlwerte nehmen dieselben Felder. Übersetzte Namen folgen dens
 
 `default_member_permissions` ist eine Zahl: Addiere die Werte der Berechtigungen, die ein Mitglied braucht, aus der [Berechtigungstabelle](/developers/docs/roles#permission-bits). Ein Mitglied, dem eine davon fehlt, sieht den Befehl nicht, und eine Anfrage bekommt `MissingPermission`. `256` ist „Mitglieder in Timeout versetzen“; Nachrichten verwalten (`8388608`) plus Mitglieder kicken (`64`) ist `8388672`. Im Entwicklerportal wählst du die Berechtigungen stattdessen aus einer Liste. Dein Bot sollte trotzdem `user_permissions` prüfen: Admins können Rollen ändern, und ein Befehl ist keine Sicherheitsmauer für das, was dein Bot selbst tut.
 
+Wer einen Server führt, kann in den Servereinstellungen eigene Regeln für deine Befehle setzen: die ganze App oder einen Befehl für eine Rolle, ein Mitglied oder einen Kanal erlauben oder verbieten. Diese Regeln werden vor `default_member_permissions` gelesen; eine Regel für einen Befehl geht vor einer für die App, eine für ein Mitglied vor einer für eine Rolle, und ein Verbot auf irgendeiner Rolle schlägt eine Erlaubnis. Der Servereigentümer ist von Mitglieds- und Rollenregeln ausgenommen. In einer Direktnachricht mit dem Bot gibt es keinen Server, dort funktionieren also nur Befehle ohne `default_member_permissions`.
+
 ## Menübefehle {#menu-commands}
 
 `"type": "User"` und `"type": "Message"` zeigen einen Befehl im Menü eines Benutzers oder einer Nachricht. Sie haben weder Beschreibung noch Optionen, und ihr Name darf Großbuchstaben und Leerzeichen enthalten. Das Ziel kommt in `command.target_id`.

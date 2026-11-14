@@ -11,7 +11,7 @@ Every entry says whether existing bots must change. A removal is announced here 
 
 ## Since 26.0.0 {#since-26-0-0}
 
-**Live on `api.zrzur.com`, checked on 2026-11-13.** `GET /` still reports `26.0.0`. Existing bots keep working: nothing below removes a field or changes one.
+**Live on `api.zrzur.com`, checked on 2026-11-14.** `GET /` still reports `26.0.0`. Existing bots keep working: nothing below removes a field or changes one.
 
 - **Gateway: resume.** Every packet after `Ready` carries `seq`, counted per session from 1. Send `Authenticate` with `"resumable": true` and `Ready` carries `session_id`. After a drop the session is kept for 2 minutes, with at most its last 1000 events and 4 MiB of them. On a new socket, send `Resume` as the first message: the events after `seq` arrive in order, then `Resumed`. If the session is gone you get `InvalidSession` with `"resumable": false`; then send `Authenticate` on the same socket and catch up over REST. `GET /gateway/schema` lists the close codes and the resume limits. See [Gateway](/developers/docs/gateway#resume).
 - **A bot reads its own settings.** `GET /bots/{bot_id}` with the bot's own id and token returns its `privileged_intents`. Another bot's id answers `IsBot`.

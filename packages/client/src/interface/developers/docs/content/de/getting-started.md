@@ -20,7 +20,7 @@ Mach das vor dem ersten Start. Ein Bot, der nicht auf dem Server ist, bekommt be
 
 ## 4. Keine Bibliothek nötig {#get-the-sdk}
 
-Node.js 22 bringt alles mit: Die API ist einfaches HTTP und WebSocket. Die offizielle Bibliothek @zrzur/sdk lässt sich noch nicht herunterladen. [Über die SDKs](/developers/docs/sdk)
+Node.js 22 bringt alles mit: Die API ist einfaches HTTP und WebSocket. Die offizielle Bibliothek @zrzur/sdk ist noch nicht auf npm. [Über die SDKs](/developers/docs/sdk)
 
 ## 5. Schreib deinen ersten Bot {#first-bot}
 

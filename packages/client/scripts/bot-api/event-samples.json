@@ -67,7 +67,7 @@
      "server": "01JC0000000000000000000002",
      "user": "01JC0000000000000000000009"
     },
-    "joined_at": "2026-11-13T15:27:40.772Z",
+    "joined_at": "2026-11-14T10:33:50.544Z",
     "roles": [
      "01JC0000000000000000000006"
     ]
@@ -99,14 +99,14 @@
     "nameplate": "galaxy"
    },
    "relationship": "None",
-   "online": true
+   "online": false
   },
   "member": {
    "_id": {
     "server": "01JC0000000000000000000002",
     "user": "01JC0000000000000000000003"
    },
-   "joined_at": "2026-11-13T15:27:40.201Z",
+   "joined_at": "2026-11-14T10:33:49.870Z",
    "nickname": "مشرف"
   },
   "content": "Hello",
@@ -118,7 +118,7 @@
   "channel": "01JC0000000000000000000004",
   "data": {
    "content": "Hello again",
-   "edited": "2026-11-13T15:28:22.631Z",
+   "edited": "2026-11-14T10:34:33.353Z",
    "embeds": []
   },
   "clear": [],
@@ -219,7 +219,7 @@
     "server": "01JC0000000000000000000002",
     "user": "01JC0000000000000000000001"
    },
-   "joined_at": "2026-11-13T15:28:22.971Z"
+   "joined_at": "2026-11-14T10:34:33.638Z"
   },
   "seq": 14
  },
@@ -270,7 +270,7 @@
      "server": "01JC0000000000000000000002",
      "user": "01JC0000000000000000000001"
     },
-    "joined_at": "2026-11-13T15:28:22.971Z",
+    "joined_at": "2026-11-14T10:34:33.638Z",
     "nickname": "Sample"
    },
    "server_id": "01JC0000000000000000000002",
@@ -311,7 +311,7 @@
         "nameplate": "galaxy"
        },
        "relationship": "None",
-       "online": true
+       "online": false
       }
      },
      "members": {
@@ -320,14 +320,14 @@
         "server": "01JC0000000000000000000002",
         "user": "01JC0000000000000000000003"
        },
-       "joined_at": "2026-11-13T15:27:40.201Z",
+       "joined_at": "2026-11-14T10:33:49.870Z",
        "nickname": "مشرف"
       }
      }
     }
    },
-   "respond_by": "2026-11-13T15:28:27.160Z",
-   "expires_at": "2026-11-13T15:43:24.160Z"
+   "respond_by": "2026-11-14T10:34:40.211Z",
+   "expires_at": "2026-11-14T10:49:37.211Z"
   },
   "seq": 19
  },
@@ -335,6 +335,6 @@
   "x-ratelimit-bucket": "10916110026516615864",
   "x-ratelimit-limit": "20",
   "x-ratelimit-remaining": "14",
-  "x-ratelimit-reset-after": "5483"
+  "x-ratelimit-reset-after": "2970"
  }
 }

@@ -10,7 +10,17 @@
 
 SolidJS is only needed for `@zrzur/sdk/solid`; a bot never downloads it.
 
-> **You cannot install it from npm yet.** `@zrzur/sdk` is not on npm; its source is at [github.com/zrzur/sdk-js](https://github.com/zrzur/sdk-js). This page shows what it offers. Until then build with Node alone: [Build a complete bot](/developers/docs/tutorial-full-bot) needs no library, and [Without a library](/developers/docs/raw-http) has every call.
+> **You cannot install it from npm yet.** `@zrzur/sdk` is not on npm; its source is at [github.com/zrzur/sdk-js](https://github.com/zrzur/sdk-js). This page shows what it offers. To try it today, build it from that source with Node 22.3 or newer and pnpm:
+
+```bash
+git clone https://github.com/zrzur/sdk-js
+cd sdk-js
+pnpm install
+pnpm build
+npm pack
+```
+
+Then `npm install` the `zrzur-sdk-2.0.0.tgz` file it writes, from your bot's folder. Installing straight from the GitHub address does not work: the repository holds the source, not the built files. Until then build with Node alone: [Build a complete bot](/developers/docs/tutorial-full-bot) needs no library, and [Without a library](/developers/docs/raw-http) has every call.
 
 There is also `@zrzur/bot`, an older, smaller library with the same interface for bots. It is not published either. New bots should wait for `@zrzur/sdk/bot`.
 
@@ -26,17 +36,22 @@ await client.login(process.env.ZRZUR_TOKEN);
 
 | Area            | Methods                                                                                                                                      |
 | --------------- | -------------------------------------------------------------------------------------------------------------------------------------------- |
-| Commands        | `client.command`, `client.component`, `client.modal`, `client.autocomplete`, `client.syncCommands`, `client.fetchCommands`                    |
+| Commands | `client.command`, `client.component`, `client.modal`, `client.autocomplete`, `client.syncCommands`, `client.fetchCommands`, `client.createCommand`, `client.fetchCommand`, `client.editCommand`, `client.deleteCommand` |
 | Answers         | `i.reply`, `i.defer`, `i.update`, `i.deferUpdate`, `i.showModal`, `i.respond`, `i.editReply`, `i.followUp`, `i.deleteReply`                   |
 | Events          | `client.on(type)`, `client.onMessage`, `client.onMemberJoin`, `client.onMemberLeave`, `client.onReaction`                                     |
-| Messages        | `client.messages.send`, `reply`, `fetch`, `fetchMany`, `edit`, `delete`, `bulkDelete`, `react`, `unreact`, `clearReactions`, `pin`, `unpin`   |
+| Messages | `client.messages.send`, `reply`, `fetch`, `fetchMany`, `edit`, `delete`, `bulkDelete`, `react`, `unreact`, `clearReactions`, `pin`, `unpin`, `pins` |
 | Members         | `client.members.fetch`, `fetchAll`, `edit`, `addRole`, `removeRole`, `timeout`, `kick`, `ban`, `unban`                                         |
-| Roles, channels | `client.roles.*`, `client.channels.*`                                                                                                        |
+| Roles | `client.roles.create`, `edit`, `setPermissions`, `delete` |
+| Channels | `client.channels.fetch`, `create`, `edit`, `delete`, `setPermissions`, `setMemberPermissions`, `createInvite`, `typing` |
+| Servers | `client.servers.fetch`, `ensureCategory` |
+| Threads, forums | `client.threads.create`, `list`, `edit`, `archive`, `reopen`; `client.forums.create`, `post`, `posts`, `setTags` |
+| Invites | `client.invites.create`, `fetch`, `list`, `delete` |
 | Users           | `client.users.fetch`, `openDM`, `sendDM`                                                                                                     |
 | Webhooks        | `client.webhooks.create`, `list`, `listForServer`, `fetch`, `fetchWithToken`, `edit`, `regenerateToken`, `delete`, `send`, `sendSlack`, `fetchMessage`, `editMessage`, `deleteMessage` |
 | Collectors      | `message.createMessageComponentCollector`, `message.awaitMessageComponent`, `interaction.awaitModalSubmit`                                   |
 | Emojis          | `client.emojis.list`, `fetch`, `find`, `create`, `delete`                                                                                     |
 | Voice           | `client.voice.nodes`, `client.voice.join`                                                                                                    |
+| Connection | `client.login`, `client.loginHttp`, `client.listen`, `client.destroy`, `client.setStatus`, `client.typing` |
 | Anything else   | `client.rest.get(path)`, `post`, `put`, `patch`, `delete` (typed for every route), `client.rest.uploadFile(tag, data, name, type)`          |
 
 Errors from the API are thrown as `ApiError` with `status`, `type`, `detail` and, after a 429, `retryAfter`. Short rate limits are waited out; after a global limit every request waits until it resets. The gateway unpacks `Bulk` packets and reconnects with backoff.

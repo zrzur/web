@@ -2,7 +2,7 @@
 
 Options with limits, private answers, answers that take longer than 3 seconds, and suggestions while typing.
 
-> This tutorial uses `@zrzur/sdk/bot`, which you cannot download yet. See [SDKs](/developers/docs/sdk). Everything it does works without a library: [Build a complete bot](/developers/docs/tutorial-full-bot).
+> This tutorial uses `@zrzur/sdk/bot`, which is not on npm yet. See [SDKs](/developers/docs/sdk). Everything it does works without a library: [Build a complete bot](/developers/docs/tutorial-full-bot).
 
 ## Before you start
 

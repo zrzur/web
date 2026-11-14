@@ -1,5 +1,7 @@
 # Status and coverage
 
+How these pages are made and checked, how many endpoints a bot can use, and which ones refuse bots.
+
 ## How these docs are made
 
 1. A script reads the server's route code, its permission checks, its error and rate-limit tables, its gateway events, both SDKs and the API's OpenAPI document, and writes the inventory these pages are built from. Nothing here is typed in by hand that the code can say.

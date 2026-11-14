@@ -24,7 +24,7 @@ Eine Nachricht hat `components`, eine Liste von Blöcken. Eine `ActionRow` hält
 
 Lege in `custom_id`, was du brauchst, etwa `flip:heads` oder `note:3`, und es kommt in `interaction.component.custom_id` zurück. Antworte mit `UpdateMessage`, um die Nachricht zu ändern, oder `Message` für eine neue.
 
-Die erste Nachricht eines Threads kann noch keine Komponenten tragen. Starte den Thread und sende die Nachricht mit Schaltflächen dann hinein; siehe [Kanäle und Webhooks](/developers/docs/channels#threads).
+Auch die erste Nachricht eines Threads kann Komponenten tragen; siehe [Kanäle und Webhooks](/developers/docs/channels#threads).
 
 ## Wer klicken darf {#restrict}
 

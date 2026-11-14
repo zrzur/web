@@ -121,7 +121,7 @@ await bot.invites.delete(invite._id);
 
 ## Webhooks
 
-> **Webhooks are switched on per server installation.** `GET /` on the API shows `features.webhooks`. Where it is `false`, creating or listing webhooks answers `FeatureDisabled` and every `/webhooks/...` address answers `404 NotFound`. On `api.zrzur.com` it was `false` when this page was checked (2026-11-13).
+> **Webhooks are switched on per server installation.** `GET /` on the API shows `features.webhooks`. Where it is `false`, creating or listing webhooks answers `FeatureDisabled` and every `/webhooks/...` address answers `404 NotFound`. On `api.zrzur.com` it was `false` when this page was checked (2026-11-14).
 
 A webhook posts into one channel without a gateway connection. Create one with a bot token or in server settings (needs Manage Webhooks). The answer has `token` and `url`. They are shown once: the server keeps only a hash, so save them now. A lost token can only be replaced.
 

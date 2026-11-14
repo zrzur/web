@@ -2,7 +2,7 @@
 
 Die Form eines Bots, der monatelang läuft: Konfiguration aus der Umgebung, eine Gesundheitsprüfung und ein sauberes Ende.
 
-> Dieses Tutorial nutzt `@zrzur/sdk/bot`, das du noch nicht herunterladen kannst. Siehe [SDKs](/developers/docs/sdk). Alles, was es tut, geht auch ohne Bibliothek: [Baue einen vollständigen Bot](/developers/docs/tutorial-full-bot).
+> Dieses Tutorial nutzt `@zrzur/sdk/bot`, das noch nicht auf npm ist. Siehe [SDKs](/developers/docs/sdk). Alles, was es tut, geht auch ohne Bibliothek: [Baue einen vollständigen Bot](/developers/docs/tutorial-full-bot).
 
 ## Bevor du beginnst {#before-you-start}
 

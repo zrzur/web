@@ -2,7 +2,7 @@
 
 `/timeout` und `/purge`, mit den Prüfungen, die ein Moderations-Bot braucht.
 
-> Dieses Tutorial nutzt `@zrzur/sdk/bot`, das du noch nicht herunterladen kannst. Siehe [SDKs](/developers/docs/sdk). Alles, was es tut, geht auch ohne Bibliothek: [Baue einen vollständigen Bot](/developers/docs/tutorial-full-bot).
+> Dieses Tutorial nutzt `@zrzur/sdk/bot`, das noch nicht auf npm ist. Siehe [SDKs](/developers/docs/sdk). Alles, was es tut, geht auch ohne Bibliothek: [Baue einen vollständigen Bot](/developers/docs/tutorial-full-bot).
 
 ## Bevor du beginnst {#before-you-start}
 
@@ -18,7 +18,7 @@ Starte es mit `node moderation.mjs`.
 
 ## Probiere es aus {#try-it}
 
-Gib dem Bot Timeout Members und Manage Messages, und setze seine Rolle über die Mitglieder, die er moderiert.
+Gib dem Bot „Mitglieder Timeouten“ und „Nachrichten verwalten“, und setze seine Rolle über die Mitglieder, die er moderiert.
 
 ## Was es zeigt {#what-it-shows}
 

@@ -17,7 +17,7 @@ Das Ereignis trägt beide als `respond_by` und `expires_at`. Richte dich nach de
 
 Dauert die Arbeit mehr als einen Moment, antworte zuerst `DeferredMessage`. Das zeigt „denkt nach“ und gibt dir die 15 Minuten.
 
-Ist dein Bot nicht verbunden, wenn jemand einen Befehl nutzt, geht das Ereignis verloren, und die Person sieht den Fehler nach 3 Sekunden.
+Ist dein Bot nicht verbunden, wenn jemand einen Befehl nutzt, wird nichts für später aufbewahrt: Die Person erfährt sofort, dass der Bot offline ist (die App bekommt `503 ApplicationOffline`).
 
 ## Das Ereignis {#the-event}
 
