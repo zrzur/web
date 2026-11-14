@@ -251,9 +251,9 @@ function ServiceConnect(props: { service: ServiceId; available: boolean }) {
               <Trans>
                 This ties your {name()} account to your Zrzur account.
               </Trans>{" "}
-              <a href={PRIVACY_URL} target="_blank" rel="noopener">
+              <PolicyLink href={PRIVACY_URL} target="_blank" rel="noopener">
                 <Trans>Privacy Policy: linked accounts</Trans>
-              </a>
+              </PolicyLink>
             </p>
             <Checkbox
               checked={agreed()}
@@ -571,6 +571,19 @@ const Consent = styled("div", {
     lineHeight: "20px",
 
     "& p": { margin: 0 },
+  },
+});
+
+const PolicyLink = styled("a", {
+  base: {
+    color: "var(--z-link)",
+    textDecoration: "underline",
+    textUnderlineOffset: "2px",
+    "&:focus-visible": {
+      outline: "2px solid var(--z-accent)",
+      outlineOffset: "2px",
+      borderRadius: "var(--z-radius-xs)",
+    },
   },
 });
 
