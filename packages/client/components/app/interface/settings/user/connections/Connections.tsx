@@ -152,87 +152,89 @@ function SteamConnect(props: { available: boolean }) {
         )}
       />
       <Show when={asking()}>
-        <Consent role="group" aria-labelledby="steam-consent-title">
-          <ConsentTitle id="steam-consent-title">
-            <Trans>Connect Steam</Trans>
-          </ConsentTitle>
-          <p>
-            <Trans>
-              You will sign in on Steam's own page. Zrzur never sees that
-              password.
-            </Trans>
-          </p>
-          <p>
-            <strong>
-              <Trans>We will copy:</Trans>
-            </strong>{" "}
-            <Trans>
-              your Steam name and link, your game count, hours played and your
-              most played games with their achievements, from what Steam shows
-              publicly, and keep them in the EU.
-            </Trans>
-          </p>
-          <p>
-            <strong>
-              <Trans>Who sees it:</Trans>
-            </strong>{" "}
-            <Trans>
-              anyone who can open your Zrzur profile. If you are under 18, or
-              we do not know your age, only your friends. You see a preview
-              first and can hide any game.
-            </Trans>
-          </p>
-          <p>
-            <strong>
-              <Trans>Keep in mind:</Trans>
-            </strong>{" "}
-            <Trans>
-              this ties your Steam account to your Zrzur account. What you play
-              can say something about your beliefs, health or sexuality.
-            </Trans>
-          </p>
-          <p>
-            <strong>
-              <Trans>Updates:</Trans>
-            </strong>{" "}
-            <Trans>
-              we copy it again only when you press Refresh. Private on Steam
-              means nothing shows here. You can hide or disconnect at any time
-              in Settings; disconnecting deletes this copy.
-            </Trans>
-          </p>
-          <Checkbox
-            checked={agreed()}
-            onChange={(event) => setAgreed(event.currentTarget.checked)}
-          >
-            <Trans>
-              I want Zrzur to copy this and show it on my profile, including
-              anything it may reveal about me.
-            </Trans>
-          </Checkbox>
-          <Show when={error()}>
-            <ErrorLine role="alert">
-              <Trans>Steam could not be opened.</Trans>{" "}
-              <TranslatedError error={error()} />
-            </ErrorLine>
-          </Show>
-          <Actions>
-            <Button
-              variant="outlined"
-              isDisabled={busy()}
-              onPress={() => {
-                setAsking(false);
-                setAgreed(false);
-                setError(undefined);
-              }}
+        <Body>
+          <Consent role="group" aria-labelledby="steam-consent-title">
+            <ConsentTitle id="steam-consent-title">
+              <Trans>Connect Steam</Trans>
+            </ConsentTitle>
+            <p>
+              <Trans>
+                You will sign in on Steam's own page. Zrzur never sees that
+                password.
+              </Trans>
+            </p>
+            <p>
+              <strong>
+                <Trans>We will copy:</Trans>
+              </strong>{" "}
+              <Trans>
+                your Steam name and link, your game count, hours played and your
+                most played games with their achievements, from what Steam shows
+                publicly, and keep them in the EU.
+              </Trans>
+            </p>
+            <p>
+              <strong>
+                <Trans>Who sees it:</Trans>
+              </strong>{" "}
+              <Trans>
+                anyone who can open your Zrzur profile. If you are under 18, or
+                we do not know your age, only your friends. You see a preview
+                first and can hide any game.
+              </Trans>
+            </p>
+            <p>
+              <strong>
+                <Trans>Keep in mind:</Trans>
+              </strong>{" "}
+              <Trans>
+                this ties your Steam account to your Zrzur account. What you
+                play can say something about your beliefs, health or sexuality.
+              </Trans>
+            </p>
+            <p>
+              <strong>
+                <Trans>Updates:</Trans>
+              </strong>{" "}
+              <Trans>
+                we copy it again only when you press Refresh. Private on Steam
+                means nothing shows here. You can hide or disconnect at any time
+                in Settings; disconnecting deletes this copy.
+              </Trans>
+            </p>
+            <Checkbox
+              checked={agreed()}
+              onChange={(event) => setAgreed(event.currentTarget.checked)}
             >
-              <Trans>Not now</Trans>
-            </Button>
-            <Button isDisabled={!agreed() || busy()} onPress={go}>
-              <Trans>Continue to Steam</Trans>
-            </Button>
-          </Actions>
-        </Consent>
+              <Trans>
+                I want Zrzur to copy this and show it on my profile, including
+                anything it may reveal about me.
+              </Trans>
+            </Checkbox>
+            <Show when={error()}>
+              <ErrorLine role="alert">
+                <Trans>Steam could not be opened.</Trans>{" "}
+                <TranslatedError error={error()} />
+              </ErrorLine>
+            </Show>
+            <Actions>
+              <Button
+                variant="outlined"
+                isDisabled={busy()}
+                onPress={() => {
+                  setAsking(false);
+                  setAgreed(false);
+                  setError(undefined);
+                }}
+              >
+                <Trans>Not now</Trans>
+              </Button>
+              <Button isDisabled={!agreed() || busy()} onPress={go}>
+                <Trans>Continue to Steam</Trans>
+              </Button>
+            </Actions>
+          </Consent>
+        </Body>
       </Show>
     </SettingsSection>
   );
@@ -334,75 +336,80 @@ function SteamLinked(props: {
           />
         )}
       />
-      <Show when={!props.account.shown}>
-        <Note>
-          <Trans>
-            This is a preview. Nothing shows on your profile until you switch it
-            on. Untick any game you want to keep to yourself.
-          </Trans>
-        </Note>
-      </Show>
-      <Show when={props.account.games.length}>
-        <Games aria-label={t`Most played games`}>
-          <For each={props.account.games}>
-            {(game) => (
-              <li>
-                <Checkbox
-                  checked={!hidden(game.appid)}
-                  disabled={busy()}
-                  onChange={(event) =>
-                    toggleGame(game.appid, event.currentTarget.checked)
-                  }
-                >
-                  <GameLine>
-                    <bdi>{game.name}</bdi>
-                    <GameFacts>
-                      {t`${number(game.hours)} h`}
-                      <Show when={game.achievements_total}>
-                        {" · "}
-                        {t`${number(game.achievements_unlocked ?? 0)} of ${number(game.achievements_total ?? 0)} achievements`}
-                      </Show>
-                    </GameFacts>
-                  </GameLine>
-                </Checkbox>
-              </li>
-            )}
-          </For>
-        </Games>
-      </Show>
-      <Show when={error()}>
-        <ErrorLine role="alert">
-          <Trans>That did not work.</Trans> <TranslatedError error={error()} />
-        </ErrorLine>
-      </Show>
-      <Actions>
-        <Button
-          variant="outlined"
-          size="sm"
-          isDisabled={busy() || !canRefresh()}
-          onPress={() => run(() => connectionsApi.refresh(client()))}
-        >
-          <Trans>Refresh</Trans>
-        </Button>
-        <Button
-          variant="outlined"
-          size="sm"
-          isDisabled={busy()}
-          onPress={() =>
-            run(async () => {
-              await connectionsApi.disconnect(client());
-              return undefined;
-            })
-          }
-        >
-          <Trans>Disconnect</Trans>
-        </Button>
-      </Actions>
-      <Small>
-        <Trans>
-          Disconnecting deletes everything Zrzur copied from Steam at once.
-        </Trans>
-      </Small>
+      <Body>
+        <Show when={!props.account.shown}>
+          <Note>
+            <Trans>
+              This is a preview. Nothing shows on your profile until you switch
+              it on. Untick any game you want to keep to yourself.
+            </Trans>
+          </Note>
+        </Show>
+        <Show when={props.account.games.length}>
+          <Games aria-label={t`Most played games`}>
+            <For each={props.account.games}>
+              {(game) => (
+                <li>
+                  <Checkbox
+                    checked={!hidden(game.appid)}
+                    disabled={busy()}
+                    onChange={(event) =>
+                      toggleGame(game.appid, event.currentTarget.checked)
+                    }
+                  >
+                    <GameLine>
+                      <bdi>{game.name}</bdi>
+                      <GameFacts>
+                        {t`${number(game.hours)} h`}
+                        <Show when={game.achievements_total}>
+                          {" · "}
+                          {t`${number(game.achievements_unlocked ?? 0)} of ${number(game.achievements_total ?? 0)} achievements`}
+                        </Show>
+                      </GameFacts>
+                    </GameLine>
+                  </Checkbox>
+                </li>
+              )}
+            </For>
+          </Games>
+        </Show>
+        <Show when={error()}>
+          <ErrorLine role="alert">
+            <Trans>That did not work.</Trans>{" "}
+            <TranslatedError error={error()} />
+          </ErrorLine>
+        </Show>
+        <Footer>
+          <Small>
+            <Trans>
+              Disconnecting deletes everything Zrzur copied from Steam at once.
+            </Trans>
+          </Small>
+          <Actions>
+            <Button
+              variant="outlined"
+              size="sm"
+              isDisabled={busy() || !canRefresh()}
+              onPress={() => run(() => connectionsApi.refresh(client()))}
+            >
+              <Trans>Refresh</Trans>
+            </Button>
+            <Button
+              variant="outlined"
+              size="sm"
+              isDisabled={busy()}
+              onPress={() =>
+                run(async () => {
+                  await connectionsApi.disconnect(client());
+                  return undefined;
+                })
+              }
+            >
+              <Trans>Disconnect</Trans>
+            </Button>
+          </Actions>
+        </Footer>
+      </Body>
     </SettingsSection>
   );
 }
@@ -492,14 +499,50 @@ const Status = styled("span", {
   },
 });
 
+/**
+ * Everything under the account row, in the card's own frame: 16 px from
+ * the sides and bottom, an inset hairline above like the rows have
+ */
+const Body = styled("div", {
+  base: {
+    position: "relative",
+    display: "flex",
+    flexDirection: "column",
+    gap: "16px",
+    padding: "16px",
+    "&::before": {
+      content: "''",
+      position: "absolute",
+      top: 0,
+      insetInline: "16px",
+      height: "1px",
+      background: "var(--z-border-subtle)",
+    },
+  },
+});
+
 const Games = styled("ul", {
   base: {
     listStyle: "none",
     margin: 0,
-    padding: "0 16px",
+    padding: 0,
     display: "flex",
     flexDirection: "column",
-    gap: "8px",
+    gap: "12px",
+  },
+});
+
+/** The note about disconnecting and the two buttons, on one line when it fits */
+const Footer = styled("div", {
+  base: {
+    display: "flex",
+    flexWrap: "wrap",
+    alignItems: "center",
+    justifyContent: "space-between",
+    gap: "12px",
+    paddingTop: "16px",
+    borderTop: "1px solid var(--z-border-subtle)",
+    "& > p": { flex: "1 1 220px", minWidth: 0 },
   },
 });
 
