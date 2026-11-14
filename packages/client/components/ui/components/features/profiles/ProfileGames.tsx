@@ -18,7 +18,8 @@ const FIRST_GAMES = 3;
 /**
  * Games from the person's linked Steam account, as one panel: who, how many
  * games and hours, View, the most played games with their pictures and
- * hours, and two rows of the latest achievements. Everything comes from
+ * hours, and the latest achievements behind Show more. The trademark notice is
+ * not here: it stays in the games dialog and in Settings. Everything comes from
  * Zrzur's own copy, and pictures load through Zrzur's media proxy; the
  * viewer's browser never contacts Steam. A private account shows one plain
  * line, without its name or link.
@@ -180,13 +181,6 @@ export function ProfileGamesPanel(props: { games: ProfileGames }) {
             </Strip>
           </Sub>
         </Show>
-        <Credit>
-          <Trans>
-            Steam is a trademark of Valve Corporation; Zrzur is not affiliated
-            with Valve. Game pictures, achievement names and icons belong to
-            their owners.
-          </Trans>
-        </Credit>
       </Show>
     </div>
   );
@@ -382,14 +376,5 @@ const Strip = styled("ul", {
       clip: "rect(0 0 0 0)",
       whiteSpace: "nowrap",
     },
-  },
-});
-
-const Credit = styled("p", {
-  base: {
-    margin: 0,
-    fontSize: "12px",
-    lineHeight: "16px",
-    color: "var(--profile-ink-2, var(--z-fg-secondary))",
   },
 });
