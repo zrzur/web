@@ -292,8 +292,8 @@
     },
     {
       "path": "CHANGELOG.md",
-      "sha256": "088a7cea54d69ff048411bff7dfcb1f45b941dea79cc547b86aa35b21a1c0d03",
-      "bytes": 144842,
+      "sha256": "664d96306319011d4773a44ca8dbb2e275fd52f6bfc9ea9367fa1f17ce85ba93",
+      "bytes": 145177,
       "category": "public-documentation"
     },
     {
@@ -6244,8 +6244,8 @@
     },
     {
       "path": "packages/client/components/ui/components/features/messaging/elements/Embed.tsx",
-      "sha256": "75af7445b03730166a3515429e47ddce9db47e8b284ed05e830ca817e6bb9d4a",
-      "bytes": 3387,
+      "sha256": "394704d892ccc5453c1ac4c916838b6fa3e7e65f55a39d5fcf7a076de36da63e",
+      "bytes": 3872,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -6310,8 +6310,8 @@
     },
     {
       "path": "packages/client/components/ui/components/features/messaging/elements/SpecialEmbed.tsx",
-      "sha256": "865fb7440214d394ef70ad0ca4d9a5eca4bcb9dbc1496d382b8abc7e9339ed2b",
-      "bytes": 4171,
+      "sha256": "813d50c513219b8f212456d3ccc4b55811d4785b242bbeea58e0dc7cba271712",
+      "bytes": 4299,
       "category": "product-source-or-build-manifest"
     },
     {
