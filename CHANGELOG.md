@@ -2,6 +2,10 @@
 
 ## Unreleased
 
+### macOS: the logo clear of the window buttons (2026-11-14)
+
+* **Desktop app on macOS:** the Zrzur logo in the top bar starts after the red, yellow and green window buttons instead of under them.
+
 ### Short links for bots (2026-11-14)
 
 * **A bot's add link is short:** `zrzur.cc/b/<bot id>` in the bot's settings and in the Developer Portal, the way server invites use `zrzur.cc/<code>`. The permissions chosen in the Developer Portal ride along. Old `app.zrzur.com/bot/<id>` links keep working.

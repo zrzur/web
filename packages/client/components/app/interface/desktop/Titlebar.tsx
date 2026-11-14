@@ -296,8 +296,12 @@ const Side = styled("div", {
     height: "100%",
     minWidth: 0,
 
+    // the macOS window buttons sit at the left edge (8 px in, three 12 px
+    // buttons 8 px apart): the logo starts after them, not under them. The
+    // bar is always left to right, so this is the left side in Arabic too.
     "&[data-macos='true']": {
       minWidth: "76px",
+      paddingLeft: "72px",
     },
     "&[data-end]": {
       justifyContent: "flex-end",
