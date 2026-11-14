@@ -144,13 +144,6 @@ export function ProfileGamesSection(props: {
                 </For>
               </Strip>
             </Show>
-            <Credit>
-              <Trans>
-                Steam is a trademark of Valve Corporation; Zrzur is not
-                affiliated with Valve. Game pictures, achievement names and icons
-                belong to their owners.
-              </Trans>
-            </Credit>
           </Show>
         </ProfileSection>
       )}
@@ -281,15 +274,6 @@ const More = styled("button", {
     "&:hover": { textDecoration: "underline" },
     "&:focus-visible": { outline: "2px solid var(--z-focus)" },
     "@media (pointer: coarse)": { minHeight: "44px" },
-  },
-});
-
-const Credit = styled("p", {
-  base: {
-    margin: 0,
-    fontSize: "11px",
-    lineHeight: "16px",
-    color: "var(--profile-ink-2, var(--z-fg-secondary))",
   },
 });
 
