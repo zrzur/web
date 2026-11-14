@@ -22,7 +22,11 @@ import {
  * person turned on "Always load media players from other sites". Before that
  * no request goes to the provider.
  */
-export function SpecialEmbed(props: { embed: WebsiteEmbed }) {
+export function SpecialEmbed(props: {
+  embed: WebsiteEmbed;
+  /** Shown on its own, without the link card: the placeholder names the site */
+  standalone?: boolean;
+}) {
   const [clicked, setClicked] = createSignal(false);
 
   /**
@@ -114,7 +118,7 @@ export function SpecialEmbed(props: { embed: WebsiteEmbed }) {
             company={provider().company}
             title={props.embed.title ?? undefined}
             // the embed around the card shows the site name and the title
-            heading={!props.embed.siteName}
+            heading={props.standalone || !props.embed.siteName}
             // proxied by our own link proxy, never the provider's address
             thumbnail={props.embed.image?.proxiedURL}
             onLoad={() => {

@@ -17,7 +17,9 @@ import { SizedContent } from "@revolt/ui/components/utils";
 
 import { MessageContextMenu } from "@revolt/app";
 import { MediaPlayer } from "./MediaPlayer";
+import { SpecialEmbed } from "./SpecialEmbed";
 import { TextEmbed } from "./TextEmbed";
+import { isPlayerEmbed } from "./embedSettings";
 
 /**
  * Render a given embed
@@ -104,6 +106,16 @@ export function Embed(props: { embed: MessageEmbed }) {
             />
           </Show>
         </SizedContent>
+      </Match>
+      {/* a site with its own player (Spotify, Apple Music, YouTube, ...)
+          shows that player alone, not our card around it */}
+      <Match
+        when={
+          props.embed.type === "Website" &&
+          isPlayerEmbed((props.embed as WebsiteEmbed).specialContent?.type)
+        }
+      >
+        <SpecialEmbed embed={props.embed as WebsiteEmbed} standalone />
       </Match>
       <Match
         when={props.embed.type === "Website" || props.embed.type === "Text"}

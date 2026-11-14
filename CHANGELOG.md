@@ -2,6 +2,10 @@
 
 ## Unreleased
 
+### Players from other sites stand on their own (2026-11-14)
+
+* **Spotify, Apple Music, YouTube, SoundCloud, Bandcamp, Twitch and Streamable links** show the site's own player alone, without our link card (site name, title, description, picture) around it. Before it loads, the card that asks to load it names the site and the title.
+
 ### macOS: the logo clear of the window buttons (2026-11-14)
 
 * **Desktop app on macOS:** the Zrzur logo in the top bar starts after the red, yellow and green window buttons instead of under them.
