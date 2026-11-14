@@ -39,6 +39,11 @@
 * **Esc works while the pointer rests on something with a tooltip** (a message's time, an avatar). The tooltip took every Esc press and could not be closed by it, so "jump to the newest message" and the other Esc actions did nothing there.
 * "New messages since … / Jump to the beginning" is two buttons with names (jump, dismiss) the keyboard and screen readers reach.
 * Inside: the loaded part of a channel's history, the running request, failures and the unseen count have one owner (`components/app/interface/channels/text/history/`: `window.ts`, `reader.ts`, `controller.ts`, with unit tests) and `Messages.tsx` draws its state; `HistoryScroller` replaces `ListView2`.
+### Memory over a long session (2026-11-13)
+
+* **The app no longer grows for as long as it is open.** Four things stayed in memory and are released now: every message ever fetched; the message box of every channel visited, with that channel's page; the video and its listeners after every call; and the call's room itself.
+* **Less processor use at rest.** The loading placeholder above the messages shimmers only while it is on screen. It used to animate out of sight all the time: about a quarter of a processor core while the app only showed a channel.
+* **Messages:** the twelve channels left most recently open again exactly as they were. A channel left longer ago loads again from its newest message. Once more than 1000 messages are in memory, those of other channels are let go after six minutes, unless they are on screen (search results, pins) or in the open mentions box.
 
 ### Design audit of the whole app (2026-11-13)
 

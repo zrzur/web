@@ -101,3 +101,17 @@ describe("TextEditor2 accessible name", () => {
     expect(content.getAttribute("aria-label")).toBe("Edit message");
   });
 });
+
+describe("TextEditor2 when it leaves the page", () => {
+  it("destroys the editor, so its window listeners let the page go", () => {
+    const destroy = vi.spyOn(EditorView.prototype, "destroy");
+    mount(() => <TextEditor2 onChange={() => undefined} />);
+    expect(destroy).not.toHaveBeenCalled();
+
+    dispose?.();
+    dispose = undefined;
+
+    expect(destroy).toHaveBeenCalledTimes(1);
+    destroy.mockRestore();
+  });
+});

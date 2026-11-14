@@ -5,6 +5,7 @@ import {
   Show,
   batch,
   createEffect,
+  createSignal,
   on,
   onCleanup,
   onMount,
@@ -535,12 +536,34 @@ export function HistoryScroller(props: Props) {
 }
 
 /** Rows that are on their way */
-function Placeholders(props: { align: "start" | "end"; side: PageSide }) {
+export function Placeholders(props: {
+  align: "start" | "end";
+  side: PageSide;
+}) {
+  let ref: HTMLDivElement | undefined;
+
+  // The shimmer runs only while the placeholders are on screen. Most of the
+  // time they sit out of sight above the messages, where their animations
+  // still cost about a quarter of a processor core.
+  const [onScreen, setOnScreen] = createSignal(
+    typeof IntersectionObserver === "undefined",
+  );
+  onMount(() => {
+    if (!ref || typeof IntersectionObserver === "undefined") return;
+    const observer = new IntersectionObserver(
+      ([entry]) => entry && setOnScreen(entry.isIntersecting),
+    );
+    observer.observe(ref);
+    onCleanup(() => observer.disconnect());
+  });
+
   return (
     <PlaceholderColumn
+      ref={ref}
       align={props.align}
       data-history-skeleton={props.side}
       aria-hidden="true"
+      style={{ "--skeleton-shimmer": onScreen() ? "running" : "paused" }}
     >
       <For each={new Array(30).fill(0)}>
         {() => (
@@ -615,6 +638,7 @@ const Frame = styled("div", {
     backgroundSize: "200% 100%",
     backgroundAttachment: "fixed",
     animation: "skeletonShimmer 1.5s infinite",
+    animationPlayState: "var(--skeleton-shimmer, running)",
   },
   variants: {
     shape: {

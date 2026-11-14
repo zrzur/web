@@ -221,8 +221,12 @@ export function Messages(props: Props) {
         const restore = cache!.unmanage(channel);
         current.open(around ? { around } : restore ? { restore } : {});
 
+        // while this list shows the channel its messages stay in memory
+        cache!.opened(channel);
+
         // put the window aside when navigating away
         onCleanup(() => {
+          cache!.closed(channel);
           const { window, pending } = current.state();
           if (window.items.length && pending !== "initial") {
             cache!.manage(channel, { window, mark: scroller?.capture() });

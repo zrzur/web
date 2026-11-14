@@ -8,7 +8,7 @@ import {
 } from '@livekit/components-core'
 import type { Participant, Track } from 'livekit-client'
 import { useEnsureParticipant } from '../context'
-import { Accessor, createEffect, createSignal } from 'solid-js'
+import { Accessor, createEffect, createSignal, onCleanup } from 'solid-js'
 
 /** @public */
 export interface UseIsMutedOptions {
@@ -43,7 +43,9 @@ export function useIsMuted(
 
   createEffect(() => {
     const listener = mutedObserver(ref).subscribe(setIsMuted)
-    return () => listener.unsubscribe()
+    // Solid does not run a function returned from an effect (React does):
+    // the cleanup has to be registered
+    onCleanup(() => listener.unsubscribe())
   }, [getTrackReferenceId(ref)])
 
   return isMuted
