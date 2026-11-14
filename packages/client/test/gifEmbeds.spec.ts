@@ -20,6 +20,11 @@ vi.mock(
   "../components/ui/components/features/messaging/elements/MediaPlayer",
   () => ({ MediaPlayer: () => null }),
 );
+// site players (YouTube, Kick, ...) are not what this file checks
+vi.mock(
+  "../components/ui/components/features/messaging/elements/SpecialEmbed",
+  () => ({ SpecialEmbed: () => null }),
+);
 
 const PROXY = "https://proxy.zrzur.test/proxy?url=";
 const file = (url: string) => ({
