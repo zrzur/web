@@ -17657,6 +17657,7 @@ msgid "Run"
 msgstr "تشغيل"
 
 #: components/ui/components/features/profiles/badges/useBadgeText.ts
+#: components/ui/components/features/profiles/ProfileBotAbout.tsx
 msgid "Run by the Zrzur team."
 msgstr "يديره فريق زرزور."
 
