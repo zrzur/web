@@ -18,13 +18,16 @@ import {
 } from "./embedSettings";
 
 /**
- * Special Embed: a player from another site (YouTube, Twitch, Kick, ...).
+ * Special Embed: a player from another site (YouTube, Twitch, Spotify, ...).
  *
- * The iframe is created only after a click, every time: a refresh or a new
- * visit never loads or starts a player, live streams included. A site the
- * person allowed before (or all sites, with "Skip the notice") shows a plain
- * Play button instead of the notice. Before the click no request goes to the
- * provider; the click itself starts playback.
+ * The iframe is created only after a click on "Load", or at once when the
+ * person allowed this site before (or turned on "Always load media players
+ * from other sites"). Before that no request goes to the provider.
+ *
+ * A player that loads by itself shows stopped: its address turns autoplay
+ * off and the frame gets no autoplay permission, so nothing plays (live
+ * streams included) until the person presses play inside it. Only a player
+ * created by a press on "Load" starts at once.
  */
 export function SpecialEmbed(props: {
   embed: WebsiteEmbed;
@@ -106,9 +109,8 @@ export function SpecialEmbed(props: {
       company: props.embed.siteName ?? "",
     };
 
-  // only a click loads a player; an allowed site just skips the notice
-  const loaded = () => clicked();
-  const known = () =>
+  const loaded = () =>
+    clicked() ||
     alwaysLoadMediaPlayers() ||
     isMediaPlayerAllowed(playerKey(props.embed.specialContent));
 
@@ -129,7 +131,6 @@ export function SpecialEmbed(props: {
             title={props.embed.title ?? undefined}
             // the embed around the card shows the site name and the title
             heading={props.standalone || !props.embed.siteName}
-            known={known()}
             // proxied by our own link proxy, never the provider's address
             thumbnail={props.embed.image?.proxiedURL}
             onLoad={() => {
@@ -149,12 +150,12 @@ export function SpecialEmbed(props: {
           frameborder={0}
           // every player from another site is fenced in: no forms (no fake
           // sign-in), no way to move this tab elsewhere, no downloads, no
-          // camera, microphone, location or payments. It exists only after
-          // the person pressed Play, so it may start at once.
+          // camera, microphone, location or payments. Autoplay only for the
+          // player the person just asked for with "Load".
           sandbox="allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox allow-presentation"
-          allow="autoplay; fullscreen; encrypted-media; picture-in-picture; clipboard-write"
+          allow={`${clicked() ? "autoplay; " : ""}fullscreen; encrypted-media; picture-in-picture; clipboard-write`}
           referrerpolicy="strict-origin-when-cross-origin"
-          src={startOnClick(playerUrl())}
+          src={clicked() ? startOnClick(playerUrl()) : playerUrl()}
         />
       </SizedContent>
     </Show>

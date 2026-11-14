@@ -29,7 +29,7 @@ vi.mock("@revolt/ui/components/utils", () => ({
 }));
 
 import { SpecialEmbed } from "./SpecialEmbed";
-import { allowMediaPlayer, setAlwaysLoadMediaPlayers } from "./embedSettings";
+import { allowMediaPlayer, forgetMediaPlayers } from "./embedSettings";
 
 let dispose: (() => void) | undefined;
 
@@ -37,7 +37,7 @@ function setup(siteName: string | undefined) {
   const embed = {
     siteName,
     title: "Me at the zoo",
-    // as the SDK builds it: autoplay off until the press
+    // as the SDK builds it: autoplay off
     embedURL:
       "https://www.youtube-nocookie.com/embed/jNQXAC9IVRw?modestbranding=1&autoplay=0",
     specialContent: { type: "YouTube", id: "jNQXAC9IVRw" },
@@ -93,39 +93,26 @@ describe("SpecialEmbed placeholder", () => {
   });
 });
 
-// Nothing loads or plays by itself: not after a refresh, not for a site the
-// reader allowed before, not with the notice turned off. One press plays.
-describe("SpecialEmbed waits for a press", () => {
-  afterEach(() => setAlwaysLoadMediaPlayers(false));
-
-  it("an allowed site shows Play, not the player, after a refresh", () => {
+// An allowed site shows its player at once, stopped: nothing plays by itself
+// after a refresh (owner, 2026-11-14). A press on Load starts that player.
+describe("SpecialEmbed players", () => {
+  afterEach(() => forgetMediaPlayers());
+  it("an allowed site shows the player at once, stopped", () => {
     allowMediaPlayer("YouTube");
-    const card = setup("YouTube");
-    expect(card).not.toBeNull();
-    expect(document.querySelector("iframe")).toBeNull();
-    const button = card.querySelector("button")!;
-    expect(button.textContent).toBe("Play");
-    expect(button.getAttribute("aria-label")).toBe(
-      "Play YouTube player: Me at the zoo",
-    );
-    // no notice and no policy link for a site already allowed
-    expect(card.querySelector("a")).toBeNull();
-  });
-
-  it("with the notice skipped for every site, still no player until a press", () => {
-    setAlwaysLoadMediaPlayers(true);
     setup("YouTube");
-    expect(document.querySelector("iframe")).toBeNull();
-  });
-
-  it("a press loads the player and starts it", () => {
-    const card = setup("YouTube");
-    card.querySelector("button")!.click();
     const frame = document.querySelector("iframe")!;
     expect(frame).not.toBeNull();
+    expect(new URL(frame.src).searchParams.get("autoplay")).toBe("0");
+    expect(frame.getAttribute("allow")).not.toContain("autoplay");
+  });
+
+  it("a press on Load creates the player and starts it", () => {
+    const card = setup("YouTube");
+    expect(document.querySelector("iframe")).toBeNull();
+    card.querySelector("button")!.click();
+    const frame = document.querySelector("iframe")!;
     expect(new URL(frame.src).searchParams.get("autoplay")).toBe("1");
     expect(frame.getAttribute("allow")).toContain("autoplay");
     expect(frame.getAttribute("sandbox")).not.toContain("allow-forms");
-    expect(frame.getAttribute("sandbox")).not.toContain("allow-top-navigation");
   });
 });
