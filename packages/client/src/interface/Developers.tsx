@@ -23,6 +23,7 @@ import { useClient } from "@revolt/client";
 import { CONFIGURATION } from "@revolt/common";
 import { useError } from "@revolt/i18n";
 import { useModals } from "@revolt/modal";
+import { getBotLink } from "@revolt/modal/modals/inviteLink";
 import { useLocation, useNavigate } from "@revolt/routing";
 import { Avatar, FloatingSelect, Header, MenuItem } from "@revolt/ui";
 import { Icon } from "@revolt/ui/icons/Icon";
@@ -468,9 +469,11 @@ function UrlGenerator(props: { bot: Bot; redirects: string[] }) {
     scopes().includes("bot.install") &&
     scopes().every((s) => s === "bot.install" || s === "applications.commands");
   const inviteUrl = () =>
-    `${window.location.origin}/bot/${props.bot.id}${
-      permissions() ? `?permissions=${permissions()}` : ""
-    }`;
+    getBotLink(
+      props.bot.id,
+      { href: (path) => `${window.location.origin}${path}` },
+      permissions(),
+    );
 
   const url = () => {
     const query = [

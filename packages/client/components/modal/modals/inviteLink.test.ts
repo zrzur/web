@@ -1,6 +1,11 @@
 import { describe, expect, it } from "vitest";
 
-import { getInviteLink, isInviteCode, parseInviteCode } from "./inviteLink";
+import {
+  getBotLink,
+  getInviteLink,
+  isInviteCode,
+  parseInviteCode,
+} from "./inviteLink";
 
 describe("getInviteLink", () => {
   const inst = {
@@ -101,5 +106,42 @@ describe("custom invite links (zrzur.cc/<name>)", () => {
   it("refuses hyphens at the edges, double hyphens and long names", () => {
     for (const bad of ["-a", "a-", "a--b", "../x", "a".repeat(33)])
       expect(isInviteCode(bad)).toBe(false);
+  });
+});
+
+describe("getBotLink", () => {
+  const inst = { href: (path: string) => `https://app.zrzur.com${path}` };
+  const id = "01M7CXZ4VSXCT95SEFEFGS07HD";
+
+  it("uses the short origin: zrzur.cc/b/{id}", () => {
+    expect(getBotLink(id, inst, undefined, "https://zrzur.cc")).toBe(
+      `https://zrzur.cc/b/${id}`,
+    );
+  });
+
+  it("keeps the permissions the Developer Portal chose", () => {
+    expect(getBotLink(id, inst, 8192, "https://zrzur.cc/")).toBe(
+      `https://zrzur.cc/b/${id}?permissions=8192`,
+    );
+  });
+
+  it("leaves out zero, negative and unsafe permissions", () => {
+    for (const bad of [0, -1, Number.MAX_SAFE_INTEGER + 2, Number.NaN]) {
+      expect(getBotLink(id, inst, bad, "https://zrzur.cc")).toBe(
+        `https://zrzur.cc/b/${id}`,
+      );
+    }
+  });
+
+  it("falls back to the app's /bot/{id} without a short origin", () => {
+    expect(getBotLink(id, inst, 8, "")).toBe(
+      `https://app.zrzur.com/bot/${id}?permissions=8`,
+    );
+  });
+
+  it("never builds a link on a non-web origin", () => {
+    expect(getBotLink(id, inst, undefined, "javascript:alert(1)")).toBe(
+      `https://app.zrzur.com/bot/${id}`,
+    );
   });
 });

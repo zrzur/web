@@ -31,6 +31,37 @@ export function getInviteLink(
 }
 
 /**
+ * Absolute link that adds a bot to a server.
+ * Short form on the invite origin: https://zrzur.cc/b/{id}; without one, the
+ * app's own /bot/{id}. Permissions from the Developer Portal ride along.
+ */
+export function getBotLink(
+  id: string,
+  inst: InviteLinkHost,
+  permissions?: number,
+  inviteOrigin: string | undefined = import.meta.env.VITE_INVITE_ORIGIN as
+    | string
+    | undefined,
+): string {
+  const query =
+    permissions && Number.isSafeInteger(permissions) && permissions > 0
+      ? `?permissions=${permissions}`
+      : "";
+  const raw = inviteOrigin?.trim();
+  if (raw) {
+    try {
+      const base = new URL(raw.endsWith("/") ? raw : `${raw}/`);
+      if (base.protocol === "https:" || base.protocol === "http:") {
+        return `${new URL(`b/${encodeURIComponent(id)}`, base).href}${query}`;
+      }
+    } catch {
+      /* fall through to app host */
+    }
+  }
+  return `${inst.href(`/bot/${encodeURIComponent(id)}`)}${query}`;
+}
+
+/**
  * Invite codes are short alphanumeric ids; custom links (zrzur.cc/<name>)
  * may also join words with single hyphens.
  */

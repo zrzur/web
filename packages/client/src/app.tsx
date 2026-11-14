@@ -156,6 +156,8 @@ const appRoutes = () => (
       <Route path="/settings" component={SettingsRedirect} />
       <Route path="/invite/:code" component={InviteRedirect} />
       <Route path="/bot/:code" component={BotRedirect} />
+      {/* the short form, for a server whose short-link origin is the app itself */}
+      <Route path="/b/:code" component={BotRedirect} />
       <Route path="/friends" component={Friends} />
       <Route path="/you" component={You} />
       <Route path="/server/:server/*">

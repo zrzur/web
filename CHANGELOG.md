@@ -2,6 +2,10 @@
 
 ## Unreleased
 
+### Short links for bots (2026-11-14)
+
+* **A bot's add link is short:** `zrzur.cc/b/<bot id>` in the bot's settings and in the Developer Portal, the way server invites use `zrzur.cc/<code>`. The permissions chosen in the Developer Portal ride along. Old `app.zrzur.com/bot/<id>` links keep working.
+
 ### Delete buttons are red; the X on a link preview (2026-11-14)
 
 * **Buttons that delete or remove are a plain red** everywhere, instead of a muted rose that did not read as a warning.

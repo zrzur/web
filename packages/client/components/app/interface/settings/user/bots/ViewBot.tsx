@@ -9,6 +9,7 @@ import { useClient } from "@revolt/client";
 import { createProfileResource } from "@revolt/client/resources";
 import { useInstance } from "@revolt/instance";
 import { useModals } from "@revolt/modal";
+import { getBotLink } from "@revolt/modal/modals/inviteLink";
 import {
   Button,
   Column,
@@ -215,11 +216,11 @@ export function ViewBot(props: { bot: Bot; onDelete?: () => void }) {
         <SettingsRow
           icon={<Icon name="link" size={20} />}
           title={<Trans>Invite link</Trans>}
-          description={instance.href(`/bot/${props.bot.id}`)}
+          description={getBotLink(props.bot.id, instance)}
           control={() =>
             copyButton(t`Copy`, () =>
               copy(
-                instance.href(`/bot/${props.bot.id}`),
+                getBotLink(props.bot.id, instance),
                 t`Invite URL copied to clipboard`,
               ),
             )
