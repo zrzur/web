@@ -360,41 +360,17 @@ const edgeButton = cva({
 });
 
 /**
- * The card's foot, its last part after every section: a message box for
- * someone else, Edit profile for yourself, then View full profile.
+ * The card's foot, its last part after every section: only the message box,
+ * for someone else. Edit profile and View full profile are in the "⋯" menu
+ * (owner, 2026-11-14), so your own card has no foot.
  */
 export function ProfileFooter(props: Props & { onOpenFull: () => void }) {
-  const actions = useProfileActions(props);
-
   return (
-    <Foot data-testid="profile-footer">
-      <Show
-        when={props.user.self}
-        fallback={
-          <Show when={props.user.relationship !== "Blocked"}>
-            <ProfileMessage {...props} />
-          </Show>
-        }
-      >
-        <Button
-          variant="tonal"
-          size="sm"
-          shape="square"
-          onPress={actions.openEdit}
-        >
-          <Icon name="pencil-simple" size={16} />
-          <Trans>Edit profile</Trans>
-        </Button>
-      </Show>
-      <Button
-        variant="tonal"
-        size="sm"
-        shape="square"
-        onPress={props.onOpenFull}
-      >
-        <Trans>View full profile</Trans>
-      </Button>
-    </Foot>
+    <Show when={!props.user.self && props.user.relationship !== "Blocked"}>
+      <Foot data-testid="profile-footer">
+        <ProfileMessage {...props} />
+      </Foot>
+    </Show>
   );
 }
 
