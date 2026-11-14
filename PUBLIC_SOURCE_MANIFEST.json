@@ -292,8 +292,8 @@
     },
     {
       "path": "CHANGELOG.md",
-      "sha256": "664d96306319011d4773a44ca8dbb2e275fd52f6bfc9ea9367fa1f17ce85ba93",
-      "bytes": 145177,
+      "sha256": "e8e4aad10892dcbff6dcd74977b954c07ba88083f54559b638acd3fea492fe44",
+      "bytes": 145454,
       "category": "public-documentation"
     },
     {
@@ -514,8 +514,8 @@
     },
     {
       "path": "docker/csp.js",
-      "sha256": "7aa76e304e2c3d0bcad57b83be993d508a5431b18af29ee6288896dde85dcc66",
-      "bytes": 11205,
+      "sha256": "2e15610e8723e574046b7940ba58f620959f7aaf32edaa5f958ffc024c45339f",
+      "bytes": 11550,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -2092,8 +2092,8 @@
     },
     {
       "path": "packages/client/components/app/interface/settings/user/Privacy.tsx",
-      "sha256": "a69733049b005e49d224942d508c1c9c3c918534340b0c1b7652681bc174f7eb",
-      "bytes": 6519,
+      "sha256": "4f4412824ffcbe7017b4e06e5e2b2bf19593771ec313fd23d93f4ab001989aae",
+      "bytes": 6515,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -6244,8 +6244,8 @@
     },
     {
       "path": "packages/client/components/ui/components/features/messaging/elements/Embed.tsx",
-      "sha256": "394704d892ccc5453c1ac4c916838b6fa3e7e65f55a39d5fcf7a076de36da63e",
-      "bytes": 3872,
+      "sha256": "4cf82fba13b6f46224e42e5c175ce73dd44a1ad4eac6a1fe686f5dd8b72c2f6f",
+      "bytes": 3999,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -6310,8 +6310,8 @@
     },
     {
       "path": "packages/client/components/ui/components/features/messaging/elements/SpecialEmbed.tsx",
-      "sha256": "813d50c513219b8f212456d3ccc4b55811d4785b242bbeea58e0dc7cba271712",
-      "bytes": 4299,
+      "sha256": "b9ac024d624b36292a519459a59e291780dc82d8587f7849bea9f2d6adb40273",
+      "bytes": 4433,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -6352,14 +6352,14 @@
     },
     {
       "path": "packages/client/components/ui/components/features/messaging/elements/embedSettings.test.ts",
-      "sha256": "9a9bb80117c941c28dea795f96fcfeb3defb6be67a21549f94142abe661bea77",
-      "bytes": 1131,
+      "sha256": "c88819eeb1fb104653b4c846dfebb60d08a0ee47797be253c8bbce0096cdd134",
+      "bytes": 1707,
       "category": "synthetic-test-source-or-fixture"
     },
     {
       "path": "packages/client/components/ui/components/features/messaging/elements/embedSettings.ts",
-      "sha256": "91735bcd0cb17078866f8a1f7461c3fa8895d70e55e40bc0cd9f63f585cb5f82",
-      "bytes": 2984,
+      "sha256": "ee655ca2b07a345c2957ecf417188b940748f89afea000f358371d22b9aa49b4",
+      "bytes": 4080,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -42432,7 +42432,7 @@
   "submodules": [
     {
       "path": "packages/stoat.js",
-      "commit": "3d4c161a90c57c8d5de1e5251c85fd85405cc04f"
+      "commit": "fdc054579b78f1e2560917ccc38669de9e117395"
     }
   ]
 }
