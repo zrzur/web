@@ -9,8 +9,14 @@ import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 
 vi.mock("@revolt/client", () => ({ useClient: () => () => undefined }));
 vi.mock("@revolt/ui/components/design", () => ({
-  Button: (props: { children: unknown; "aria-label"?: string }) => (
-    <button aria-label={props["aria-label"]}>{props.children as never}</button>
+  Button: (props: {
+    children: unknown;
+    "aria-label"?: string;
+    onPress?: () => void;
+  }) => (
+    <button aria-label={props["aria-label"]} onClick={() => props.onPress?.()}>
+      {props.children as never}
+    </button>
   ),
 }));
 vi.mock("@revolt/ui/components/utils/mediaSize", () => ({
@@ -23,6 +29,7 @@ vi.mock("@revolt/ui/components/utils", () => ({
 }));
 
 import { SpecialEmbed } from "./SpecialEmbed";
+import { allowMediaPlayer, setAlwaysLoadMediaPlayers } from "./embedSettings";
 
 let dispose: (() => void) | undefined;
 
@@ -30,7 +37,9 @@ function setup(siteName: string | undefined) {
   const embed = {
     siteName,
     title: "Me at the zoo",
-    embedURL: "https://www.youtube-nocookie.com/embed/jNQXAC9IVRw",
+    // as the SDK builds it: autoplay off until the press
+    embedURL:
+      "https://www.youtube-nocookie.com/embed/jNQXAC9IVRw?modestbranding=1&autoplay=0",
     specialContent: { type: "YouTube", id: "jNQXAC9IVRw" },
     video: { width: 1280, height: 720 },
   };
@@ -81,5 +90,42 @@ describe("SpecialEmbed placeholder", () => {
     const button = card.querySelector("button")!;
     expect(link.textContent).toBe("Privacy policy");
     expect(link.parentElement).toBe(button.parentElement);
+  });
+});
+
+// Nothing loads or plays by itself: not after a refresh, not for a site the
+// reader allowed before, not with the notice turned off. One press plays.
+describe("SpecialEmbed waits for a press", () => {
+  afterEach(() => setAlwaysLoadMediaPlayers(false));
+
+  it("an allowed site shows Play, not the player, after a refresh", () => {
+    allowMediaPlayer("YouTube");
+    const card = setup("YouTube");
+    expect(card).not.toBeNull();
+    expect(document.querySelector("iframe")).toBeNull();
+    const button = card.querySelector("button")!;
+    expect(button.textContent).toBe("Play");
+    expect(button.getAttribute("aria-label")).toBe(
+      "Play YouTube player: Me at the zoo",
+    );
+    // no notice and no policy link for a site already allowed
+    expect(card.querySelector("a")).toBeNull();
+  });
+
+  it("with the notice skipped for every site, still no player until a press", () => {
+    setAlwaysLoadMediaPlayers(true);
+    setup("YouTube");
+    expect(document.querySelector("iframe")).toBeNull();
+  });
+
+  it("a press loads the player and starts it", () => {
+    const card = setup("YouTube");
+    card.querySelector("button")!.click();
+    const frame = document.querySelector("iframe")!;
+    expect(frame).not.toBeNull();
+    expect(new URL(frame.src).searchParams.get("autoplay")).toBe("1");
+    expect(frame.getAttribute("allow")).toContain("autoplay");
+    expect(frame.getAttribute("sandbox")).not.toContain("allow-forms");
+    expect(frame.getAttribute("sandbox")).not.toContain("allow-top-navigation");
   });
 });

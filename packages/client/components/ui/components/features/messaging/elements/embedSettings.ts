@@ -76,7 +76,9 @@ export const isPlayerEmbed = (type?: string) =>
  */
 export function playerKey(special?: { type: string; provider?: string }) {
   if (!special) return undefined;
-  return special.type === "Player" ? `Player:${special.provider}` : special.type;
+  return special.type === "Player"
+    ? `Player:${special.provider}`
+    : special.type;
 }
 
 /** Who runs a "Player" site, for the line under the placeholder */
@@ -130,4 +132,24 @@ export const FALLBACK_POLICY = "https://zrzur.com/legal/privacy#players";
 export function playersPolicyUrl(serverUrl?: string) {
   if (!serverUrl) return FALLBACK_POLICY;
   return serverUrl.includes("#") ? serverUrl : `${serverUrl}#players`;
+}
+
+/**
+ * The player address once the person pressed Play: its "don't start"
+ * settings turned to "start", so one press plays. Only ever used for a
+ * player created by that press.
+ */
+export function startOnClick(address?: string) {
+  if (!address) return address;
+  try {
+    const url = new URL(address);
+    for (const key of ["autoplay", "auto_play", "autostart"]) {
+      const value = url.searchParams.get(key);
+      if (value === "0") url.searchParams.set(key, "1");
+      else if (value === "false") url.searchParams.set(key, "true");
+    }
+    return url.toString();
+  } catch {
+    return address;
+  }
 }

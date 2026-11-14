@@ -14,14 +14,17 @@ import {
   isMediaPlayerAllowed,
   playerKey,
   playerProvider,
+  startOnClick,
 } from "./embedSettings";
 
 /**
- * Special Embed: a player from another site (YouTube, Twitch, Spotify, ...).
+ * Special Embed: a player from another site (YouTube, Twitch, Kick, ...).
  *
- * The iframe is created only after a click on "Load", or at once when the
- * person turned on "Always load media players from other sites". Before that
- * no request goes to the provider.
+ * The iframe is created only after a click, every time: a refresh or a new
+ * visit never loads or starts a player, live streams included. A site the
+ * person allowed before (or all sites, with "Skip the notice") shows a plain
+ * Play button instead of the notice. Before the click no request goes to the
+ * provider; the click itself starts playback.
  */
 export function SpecialEmbed(props: {
   embed: WebsiteEmbed;
@@ -103,8 +106,9 @@ export function SpecialEmbed(props: {
       company: props.embed.siteName ?? "",
     };
 
-  const loaded = () =>
-    clicked() ||
+  // only a click loads a player; an allowed site just skips the notice
+  const loaded = () => clicked();
+  const known = () =>
     alwaysLoadMediaPlayers() ||
     isMediaPlayerAllowed(playerKey(props.embed.specialContent));
 
@@ -125,6 +129,7 @@ export function SpecialEmbed(props: {
             title={props.embed.title ?? undefined}
             // the embed around the card shows the site name and the title
             heading={props.standalone || !props.embed.siteName}
+            known={known()}
             // proxied by our own link proxy, never the provider's address
             thumbnail={props.embed.image?.proxiedURL}
             onLoad={() => {
@@ -144,12 +149,12 @@ export function SpecialEmbed(props: {
           frameborder={0}
           // every player from another site is fenced in: no forms (no fake
           // sign-in), no way to move this tab elsewhere, no downloads, no
-          // camera, microphone, location or payments; it plays only after
-          // the person presses play (no "autoplay" below)
+          // camera, microphone, location or payments. It exists only after
+          // the person pressed Play, so it may start at once.
           sandbox="allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox allow-presentation"
-          allow="fullscreen; encrypted-media; picture-in-picture; clipboard-write"
+          allow="autoplay; fullscreen; encrypted-media; picture-in-picture; clipboard-write"
           referrerpolicy="strict-origin-when-cross-origin"
-          src={playerUrl()}
+          src={startOnClick(playerUrl())}
         />
       </SizedContent>
     </Show>

@@ -25993,3 +25993,19 @@ msgstr "زرزور، مباشرةً على <0>سطح مكتبك.</0>"
 #: components/app/interface/settings/user/appearance/AppearanceMenu.tsx
 #~ msgid "Zrzur's own look: very dark neutral panels with Zrzur Pink as the one accent."
 #~ msgstr "مظهر زرزور الخاص: لوحات داكنة جدًا بألوان محايدة، وزهري زرزور هو اللون المميز الوحيد."
+
+#: components/app/interface/settings/user/Privacy.tsx
+msgid "Off: each site like YouTube or Spotify asks you once. On: no notice. Either way a player loads only when you press Play, and then the site learns your IP address."
+msgstr "عند الإيقاف: يسألك كل موقع مثل YouTube أو Spotify مرة واحدة. عند التشغيل: لا يظهر تنبيه. وفي الحالتين لا يُحمَّل المشغّل إلا حين تضغط «تشغيل»، وعندها يعرف الموقع عنوان IP الخاص بك."
+
+#: components/ui/components/features/messaging/elements/SpecialEmbedPlaceholder.tsx
+msgid "Play {provider} player"
+msgstr "تشغيل مشغّل {provider}"
+
+#: components/ui/components/features/messaging/elements/SpecialEmbedPlaceholder.tsx
+msgid "Play {provider} player: {title}"
+msgstr "تشغيل مشغّل {provider}: {title}"
+
+#: components/app/interface/settings/user/Privacy.tsx
+msgid "Skip the notice before media players"
+msgstr "تخطّي التنبيه قبل مشغّلات الوسائط"

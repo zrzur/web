@@ -25993,3 +25993,19 @@ msgstr "Zrzur, direkt auf <0>deinem Desktop.</0>"
 #: components/app/interface/settings/user/appearance/AppearanceMenu.tsx
 #~ msgid "Zrzur's own look: very dark neutral panels with Zrzur Pink as the one accent."
 #~ msgstr "Zrzurs eigener Look: sehr dunkle, neutrale Flächen mit Zrzur-Pink als einziger Akzentfarbe."
+
+#: components/app/interface/settings/user/Privacy.tsx
+msgid "Off: each site like YouTube or Spotify asks you once. On: no notice. Either way a player loads only when you press Play, and then the site learns your IP address."
+msgstr "Aus: Jede Seite wie YouTube oder Spotify fragt dich einmal. An: kein Hinweis. In beiden Fällen lädt ein Player erst, wenn du auf Abspielen drückst, und dann erfährt die Seite deine IP-Adresse."
+
+#: components/ui/components/features/messaging/elements/SpecialEmbedPlaceholder.tsx
+msgid "Play {provider} player"
+msgstr "{provider}-Player abspielen"
+
+#: components/ui/components/features/messaging/elements/SpecialEmbedPlaceholder.tsx
+msgid "Play {provider} player: {title}"
+msgstr "{provider}-Player abspielen: {title}"
+
+#: components/app/interface/settings/user/Privacy.tsx
+msgid "Skip the notice before media players"
+msgstr "Hinweis vor Medienplayern überspringen"

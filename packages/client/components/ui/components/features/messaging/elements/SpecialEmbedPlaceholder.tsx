@@ -9,9 +9,10 @@ import { Button } from "@revolt/ui/components/design";
 import { playersPolicyUrl } from "./embedSettings";
 
 /**
- * Shown instead of a third-party player until the reader chooses to load it.
- * Nothing here contacts the provider: the picture, if any, comes through our
- * own proxy.
+ * Shown instead of a third-party player until the reader presses its button,
+ * every time: after a refresh too, nothing loads or plays by itself. Nothing
+ * here contacts the provider: the picture, if any, comes through our own
+ * proxy. A site the reader already allowed shows only a Play button.
  */
 export function SpecialEmbedPlaceholder(props: {
   provider: string;
@@ -24,6 +25,8 @@ export function SpecialEmbedPlaceholder(props: {
    * name. The title is always shown by that embed, never here.
    */
   heading?: boolean;
+  /** the reader allowed this site before: no notice, just Play */
+  known?: boolean;
   onLoad: () => void;
 }) {
   const { t } = useLingui();
@@ -36,6 +39,10 @@ export function SpecialEmbedPlaceholder(props: {
   const label = () => {
     const provider = props.provider;
     const title = props.title;
+    if (props.known)
+      return title
+        ? t`Play ${provider} player: ${title}`
+        : t`Play ${provider} player`;
     return title
       ? t`Load ${provider} player: ${title}`
       : t`Load ${provider} player`;
@@ -51,19 +58,25 @@ export function SpecialEmbedPlaceholder(props: {
         <Show when={props.heading}>
           <Provider>{props.provider}</Provider>
         </Show>
-        <Note dir="auto">
-          <Trans>
-            Loading this connects to {props.company}. They get your IP address
-            and may store cookies.
-          </Trans>
-        </Note>
+        <Show when={!props.known}>
+          <Note dir="auto">
+            <Trans>
+              Loading this connects to {props.company}. They get your IP address
+              and may store cookies.
+            </Trans>
+          </Note>
+        </Show>
         <Action>
           <Button onPress={props.onLoad} aria-label={label()}>
-            <Trans>Load</Trans>
+            <Show when={props.known} fallback={<Trans>Load</Trans>}>
+              <Trans>Play</Trans>
+            </Show>
           </Button>
-          <a href={policy()} target="_blank" rel="noopener noreferrer">
-            <Trans>Privacy policy</Trans>
-          </a>
+          <Show when={!props.known}>
+            <a href={policy()} target="_blank" rel="noopener noreferrer">
+              <Trans>Privacy policy</Trans>
+            </a>
+          </Show>
         </Action>
       </Info>
     </Box>

@@ -20,10 +20,10 @@ import {
   Toggle,
 } from "@revolt/ui";
 import {
-  playerProvider,
   allowedMediaPlayers,
   alwaysLoadMediaPlayers,
   forgetMediaPlayers,
+  playerProvider,
   setAlwaysLoadMediaPlayers,
 } from "@revolt/ui/components/features/messaging/elements/embedSettings";
 import { Icon } from "@revolt/ui/icons/Icon";
@@ -167,8 +167,8 @@ export function PrivacySection() {
       />
       <SettingsRow
         icon={<Icon name="play" size={20} />}
-        title={t`Always load media players from other sites`}
-        description={t`Off: each site like YouTube or Spotify asks you once. On: every player loads at once and the site learns your IP address.`}
+        title={t`Skip the notice before media players`}
+        description={t`Off: each site like YouTube or Spotify asks you once. On: no notice. Either way a player loads only when you press Play, and then the site learns your IP address.`}
         onClick={() => setAlwaysLoadMediaPlayers(!alwaysLoadMediaPlayers())}
         control={(ids) => (
           <Toggle
