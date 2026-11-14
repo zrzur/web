@@ -16,8 +16,8 @@ import { nameStyle, themeColours, userStyleOf } from "./userStyle";
 
 /**
  * Name block under the avatar: display name (+ Bot tag), then username#tag
- * with click-to-copy and pronouns on one line. Badges sit right after the
- * name: the first three on the small card, all of them on the full profile,
+ * with click-to-copy and pronouns on one line. Badges sit at the far end of
+ * the name row: the first three on the small card, all of them on the full profile,
  * where they may run on to a second line. A themed profile keeps its chosen
  * name colour where it reads on the theme.
  */
@@ -137,7 +137,7 @@ const DisplayNameGroup = styled("div", {
     alignItems: "center",
     gap: "6px",
     minWidth: 0,
-    // only as wide as the name, so the badges sit right after it
+    // only as wide as the name; the badges keep to the far end
     flex: "0 1 auto",
     _phone: {
       // first in a scrolling card: a target reaching above it would be cut off
@@ -152,6 +152,8 @@ const RowBadges = styled("div", {
   base: {
     flexShrink: 0,
     display: "flex",
+    // at the far end of the row (right in LTR, left in RTL), not after the name
+    marginInlineStart: "auto",
     // an empty slot must not take space from the name
     _empty: { display: "none" },
     _phone: {
