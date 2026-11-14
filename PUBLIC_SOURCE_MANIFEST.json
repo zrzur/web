@@ -41908,8 +41908,8 @@
     },
     {
       "path": "packages/client/test/gifEmbeds.spec.ts",
-      "sha256": "64c4ead586345c0dfc75695b31d9f3ebf092cb43029de18debd456302b7feab1",
-      "bytes": 2664,
+      "sha256": "2c868c3f03afa86c2cd329c9f02e722855a91f9084cbba753ba7fa4514ccd67e",
+      "bytes": 2857,
       "category": "synthetic-test-source-or-fixture"
     },
     {
@@ -42034,8 +42034,8 @@
     },
     {
       "path": "packages/client/vitest.media.config.ts",
-      "sha256": "43681c504aa2894643a2b620492cea17a99dd09b4d76a6c479313b87d125fca3",
-      "bytes": 1160,
+      "sha256": "51a6fe1a5a0b42a24459425f4006a81e92acc44d4a0e4afac4e986b51a7a9a7f",
+      "bytes": 1218,
       "category": "product-source-or-build-manifest"
     },
     {
