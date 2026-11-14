@@ -820,8 +820,8 @@
     },
     {
       "path": "packages/client/components/app/interface/channels/text/MessageCache.dom.test.tsx",
-      "sha256": "9568d047646d4cc5eba15a5dc14ef91c642180dfc07adb6392ff10820dc8fe86",
-      "bytes": 4267,
+      "sha256": "49417a79e6e249fe5cf7e7c4dfc910df763f56912ccc3f487d373c31cfb671de",
+      "bytes": 4276,
       "category": "synthetic-test-source-or-fixture"
     },
     {
@@ -897,15 +897,21 @@
       "category": "product-source-or-build-manifest"
     },
     {
-      "path": "packages/client/components/app/interface/channels/text/history/HistoryScroller.dom.test.tsx",
-      "sha256": "ea543dcefcec28c785ea802b370a601db40ddd926ba6d49fd8977d53721fefce",
-      "bytes": 2243,
+      "path": "packages/client/components/app/interface/channels/text/history/HistoryScroller.tsx",
+      "sha256": "2eb2b08c4f6265f27982c9147498ad65f6d8dd5a0f79fedbef47852b77722262",
+      "bytes": 17170,
+      "category": "product-source-or-build-manifest"
+    },
+    {
+      "path": "packages/client/components/app/interface/channels/text/history/Placeholders.dom.test.tsx",
+      "sha256": "e06ba22390542e9c1cecb7e73bb62cb4cc1df2d0cd86ed3ecffb23f6ed21c982",
+      "bytes": 2240,
       "category": "synthetic-test-source-or-fixture"
     },
     {
-      "path": "packages/client/components/app/interface/channels/text/history/HistoryScroller.tsx",
-      "sha256": "458b683b2fc709893636066ee2ba4337091b5155223967a76cd9db4433d829c8",
-      "bytes": 20472,
+      "path": "packages/client/components/app/interface/channels/text/history/Placeholders.tsx",
+      "sha256": "7e1cb8b6e47418b5edfb7246687cbf3385411462bab45c93d66fce3c0e84c015",
+      "bytes": 3498,
       "category": "product-source-or-build-manifest"
     },
     {
