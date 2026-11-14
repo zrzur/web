@@ -6478,8 +6478,8 @@
     },
     {
       "path": "packages/client/components/ui/components/features/profiles/ProfileIdentity.tsx",
-      "sha256": "c174f9455cff8fcecb17822ef5072b527a820646f5b182a8f81c21aa0df85a2e",
-      "bytes": 6709,
+      "sha256": "9d934b0377afe8c6aaa32d4afb9d8c368632f688027255670a17ecc702aba161",
+      "bytes": 6829,
       "category": "product-source-or-build-manifest"
     },
     {
