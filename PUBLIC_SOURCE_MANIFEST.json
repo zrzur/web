@@ -514,8 +514,8 @@
     },
     {
       "path": "docker/csp.js",
-      "sha256": "2e15610e8723e574046b7940ba58f620959f7aaf32edaa5f958ffc024c45339f",
-      "bytes": 11550,
+      "sha256": "7218d02b771965379e0ec36f1886d43f18f6b790e56540676434abaaa5f2b9be",
+      "bytes": 11724,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -6334,8 +6334,8 @@
     },
     {
       "path": "packages/client/components/ui/components/features/messaging/elements/SpecialEmbed.tsx",
-      "sha256": "b9ac024d624b36292a519459a59e291780dc82d8587f7849bea9f2d6adb40273",
-      "bytes": 4433,
+      "sha256": "dcf79df1f78494d3116a8deb4f89b8587ca1412e03b249712eedb0cef8d2a7dd",
+      "bytes": 4975,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -6382,8 +6382,8 @@
     },
     {
       "path": "packages/client/components/ui/components/features/messaging/elements/embedSettings.ts",
-      "sha256": "ee655ca2b07a345c2957ecf417188b940748f89afea000f358371d22b9aa49b4",
-      "bytes": 4080,
+      "sha256": "ad8d6169662ee927d702885cc1d346b9b7d11a8b435b272ab0ecef2b1c0c74b1",
+      "bytes": 4219,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -42474,7 +42474,7 @@
   "submodules": [
     {
       "path": "packages/stoat.js",
-      "commit": "fdc054579b78f1e2560917ccc38669de9e117395"
+      "commit": "0c67f758c2ff4bc59d905a20921d440b94d7c594"
     }
   ]
 }
