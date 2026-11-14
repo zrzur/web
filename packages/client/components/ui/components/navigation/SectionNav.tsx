@@ -120,6 +120,6 @@ export const SectionNavCount = styled("span", {
     fontSize: "11px",
     fontWeight: 800,
     color: "#fff",
-    background: "var(--z-danger-strong, #B85867)",
+    background: "var(--z-danger-strong, #D92D2D)",
   },
 });

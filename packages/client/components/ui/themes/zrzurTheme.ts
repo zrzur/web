@@ -106,9 +106,9 @@ export const ZRZUR_UNIFIED_DARK = {
   onError: "#1A0A0E",
   errorContainer: "#3A1D2A",
   onErrorContainer: "#FFD9DF",
-  // destructive filled buttons, white text (4.5:1)
-  danger: "#B85867",
-  dangerHover: "#A04D5A",
+  // destructive filled buttons: a plain red, white text (4.8:1)
+  danger: "#D92D2D",
+  dangerHover: "#BF2424",
   success: "#55DCC8",
   warning: "#F3B96B",
   idle: "#F3B96B",

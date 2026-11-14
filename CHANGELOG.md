@@ -2,6 +2,11 @@
 
 ## Unreleased
 
+### Delete buttons are red; the X on a link preview (2026-11-14)
+
+* **Buttons that delete or remove are a plain red** everywhere, instead of a muted rose that did not read as a warning.
+* **The X on a link preview** sits in the preview's own corner and is a quiet grey control. It used to float beside the preview in a pink circle.
+
 ### Desktop app: screen share picker, Desktop settings, signing out in a call (2026-11-13)
 
 * **Share your screen** (desktop app) is a new window: Screens and Windows are two tabs of preview pictures with the app's icon and name, one is always chosen, a double click or Enter starts, the arrow keys move. Screens are named in your language ("Entire screen", "Screen 2") instead of the system's own name. A window whose icon or picture the system cannot read shows a plain symbol, never a broken image. A single quality is said as text instead of a bar with one button; several are a menu.

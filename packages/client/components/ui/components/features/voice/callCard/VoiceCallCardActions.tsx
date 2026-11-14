@@ -248,7 +248,7 @@ const control = cva({
         color: "var(--z-on-accent, #fff)",
         background: "var(--z-danger-strong, var(--z-danger))",
         "&:hover:not([aria-disabled='true'])": {
-          background: "var(--z-danger-hover, #A04D5A)",
+          background: "var(--z-danger-hover, #BF2424)",
         },
       },
     },

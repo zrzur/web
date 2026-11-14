@@ -119,7 +119,7 @@
   width: 10px;
   height: 10px;
   border-radius: 50%;
-  background: var(--z-danger-strong, #b85867);
+  background: var(--z-danger-strong, #d92d2d);
   animation: z-recorder-pulse 1.2s ease-in-out infinite;
 }
 .z-recorder-dot[data-paused="true"] {

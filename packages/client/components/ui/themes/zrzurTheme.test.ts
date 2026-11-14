@@ -271,7 +271,7 @@ describe("Midnight Pulse palette (brand.md section 4)", () => {
     expect(z["--z-presence-idle"]).toBe("#F3B96B");
     expect(z["--z-presence-dnd"]).toBe("#F27488");
     expect(z["--z-danger"]).toBe("#F27488");
-    expect(z["--z-danger-strong"]).toBe("#B85867");
+    expect(z["--z-danger-strong"]).toBe("#D92D2D");
     expect(z["--z-presence-offline"]).toBe("#7E8299");
   });
 

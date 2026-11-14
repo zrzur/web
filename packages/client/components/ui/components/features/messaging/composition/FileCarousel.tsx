@@ -339,7 +339,7 @@ const CornerButton = styled("button", {
     "&[data-side='end']": { insetInlineEnd: "6px" },
     _hover: { background: "rgb(0 0 0 / 75%)" },
     "&[data-danger='true']:hover": {
-      background: "var(--z-danger-strong, #B85867)",
+      background: "var(--z-danger-strong, #D92D2D)",
     },
     _focusVisible: {
       outline: "2px solid var(--z-focus)",

@@ -172,7 +172,7 @@ export const Pill = styled("span", {
     background: "var(--z-bg-input)",
     "&[data-tone='danger']": {
       color: "#fff",
-      background: "var(--z-danger-strong, #B85867)",
+      background: "var(--z-danger-strong, #D92D2D)",
     },
     "&[data-tone='warn']": {
       color: "#1b1300",
