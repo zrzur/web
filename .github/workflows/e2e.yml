@@ -50,7 +50,7 @@ jobs:
           MAILDEV_INCOMING_PASS: smtp
         ports: ["14025:25", "14080:8080"]
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
         with:
           persist-credentials: false
       - name: Private submodules (sdk-js)
@@ -58,7 +58,7 @@ jobs:
           SUBMODULE_TOKEN: ${{ secrets.SUBMODULE_TOKEN }}
         run: |
           git -c url."https://x-access-token:${SUBMODULE_TOKEN}@github.com/zrzur/sdk-js".insteadOf="https://github.com/zrzur/sdk-js" submodule update --init --recursive
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
         with:
           repository: zrzur/backend
           ref: ${{ inputs.backend_ref || 'main' }}
