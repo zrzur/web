@@ -26,12 +26,13 @@ import { createProfileTheme } from "../features/profiles/profileTheme";
  *  username#0000 • pronouns
  *  their sections, in their order
  *  roles, in common
- *  ------------------------------- (always in view)
+ *  -------------------------------
  *  [ Message @name            ➤ ]
  *  [ View full profile          ]
  *
- * The sections scroll inside the card; the foot never scrolls away. Your own
- * card has Edit profile where the message box is for others.
+ * Everything scrolls inside the card, the foot included: it is the card's
+ * last part. Your own card has Edit profile where the message box is for
+ * others.
  */
 export function UserCard(
   props: JSX.Directives["floating"]["userCard"] &
@@ -126,14 +127,15 @@ export function UserCard(
               onClose={props.onClose}
             />
           </Body>
-        </div>
 
-        <Profile.Footer
-          user={props.user}
-          member={props.member}
-          onClose={props.onClose}
-          onOpenFull={() => openFull(true)}
-        />
+          {/* the last thing in the card: it scrolls with the rest */}
+          <Profile.Footer
+            user={props.user}
+            member={props.member}
+            onClose={props.onClose}
+            onOpenFull={() => openFull(true)}
+          />
+        </div>
       </Card>
     </Show>
   );

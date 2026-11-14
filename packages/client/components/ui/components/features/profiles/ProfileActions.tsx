@@ -360,8 +360,8 @@ const edgeButton = cva({
 });
 
 /**
- * The card's foot, always in view under the scrolling sections: a message
- * box for someone else, Edit profile for yourself, then View full profile.
+ * The card's foot, its last part after every section: a message box for
+ * someone else, Edit profile for yourself, then View full profile.
  */
 export function ProfileFooter(props: Props & { onOpenFull: () => void }) {
   const actions = useProfileActions(props);
