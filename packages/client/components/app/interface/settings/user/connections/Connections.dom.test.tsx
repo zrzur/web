@@ -59,6 +59,11 @@ vi.mock("@revolt/ui", async () => {
   };
 });
 vi.mock("@revolt/ui/icons/Icon", () => ({ Icon: () => <span /> }));
+vi.mock("@revolt/ui/components/features/profiles/SteamTile", () => ({
+  SteamTile: () => <span data-tile />,
+}));
+const openModal = vi.fn();
+vi.mock("@revolt/modal", () => ({ useModals: () => ({ openModal }) }));
 vi.mock("@revolt/i18n/errors", () => ({
   TranslatedError: (props: { error: unknown }) => (
     <span data-error>{String((props.error as Error)?.message)}</span>
@@ -79,7 +84,10 @@ const api = vi.hoisted(() => ({
   refresh: vi.fn(),
   disconnect: vi.fn(),
 }));
-vi.mock("./connectionsApi", () => ({ connectionsApi: api }));
+vi.mock("./connectionsApi", () => ({
+  connectionsApi: api,
+  STEAM_CONSENT_VERSION: 2,
+}));
 
 import { Connections } from "./Connections";
 
@@ -118,10 +126,34 @@ const linked = (change: Record<string, unknown> = {}) => ({
       hours: 100,
       achievements_unlocked: 12,
       achievements_total: 30,
+      header_url: "https://cdn.cloudflare.steamstatic.com/steam/apps/570/header.jpg",
+      store_url: "https://store.steampowered.com/app/570/",
     },
-    { appid: 620, name: "Portal 2", hours: 10 },
+    {
+      appid: 620,
+      name: "Portal 2",
+      hours: 10,
+      store_url: "https://store.steampowered.com/app/620/",
+    },
+  ],
+  achievements: [
+    {
+      appid: 570,
+      game: "Dota 2",
+      name: "First blood",
+      description: "Win a match",
+      unlocked_on: "2026-11-12",
+    },
+    {
+      appid: 620,
+      game: "Portal 2",
+      name: "Wake up call",
+      description: "",
+      unlocked_on: "2026-11-09",
+    },
   ],
   hidden_titles: [],
+  consent_current: true,
   linked_at: 1,
   refreshed_at: 1,
   refresh_after: 0,
@@ -135,6 +167,7 @@ beforeEach(() => {
   document.body.replaceChildren(document.createElement("div"));
   Object.values(api).forEach((fn) => fn.mockReset());
   invalidate.mockReset();
+  openModal.mockReset();
   assign.mockReset();
   vi.stubGlobal("location", {
     ...window.location,
@@ -270,5 +303,68 @@ describe("Connections", () => {
     mount();
     await flush();
     expect(text()).toContain("Make them public on Steam, then press Refresh.");
+  });
+
+  it("asks people linked under the old text before showing anything new", async () => {
+    api.list.mockResolvedValue({
+      steam: { available: true, account: linked({ consent_current: false }) },
+    });
+    api.edit.mockImplementation(async (_c, change) =>
+      linked({ consent_current: change.consent === 2 }),
+    );
+    mount();
+    await flush();
+
+    expect(text()).toContain("New on your Steam card");
+    const save = button("Save")!;
+    expect(save.disabled).toBe(true);
+    [...document.querySelectorAll<HTMLInputElement>("input[type=checkbox]")]
+      .find((box) => box.closest("label")?.textContent?.includes("Show these"))!
+      .click();
+    await flush();
+    expect(save.disabled).toBe(false);
+    save.click();
+    await flush();
+    expect(api.edit).toHaveBeenCalledWith(expect.anything(), { consent: 2 });
+    expect(text()).not.toContain("New on your Steam card");
+  });
+
+  it("Keep it as it is changes nothing", async () => {
+    api.list.mockResolvedValue({
+      steam: { available: true, account: linked({ consent_current: false }) },
+    });
+    mount();
+    await flush();
+    button("Keep it as it is")!.click();
+    await flush();
+    expect(text()).not.toContain("New on your Steam card");
+    expect(api.edit).not.toHaveBeenCalled();
+  });
+
+  it("the preview leaves hidden games and their achievements out", async () => {
+    api.list.mockResolvedValue({
+      steam: { available: true, account: linked({ hidden_titles: [620] }) },
+    });
+    mount();
+    await flush();
+    button("Open preview")!.click();
+    const shown = openModal.mock.calls[0][0];
+    expect(shown.type).toBe("steam_games");
+    expect(shown.games.games.map((g: { appid: number }) => g.appid)).toEqual([570]);
+    expect(
+      shown.games.achievements.map((a: { name: string }) => a.name),
+    ).toEqual(["First blood"]);
+  });
+
+  it("the consent names pictures, achievements and days", async () => {
+    api.list.mockResolvedValue({ steam: { available: true } });
+    mount();
+    await flush();
+    button("Connect Steam")!.click();
+    await flush();
+    expect(text()).toContain("up to 60 of your latest achievements");
+    expect(text()).toContain("no time of day");
+    expect(text()).toContain("so Steam does not see who views your profile");
+    expect(text()).toContain("The unlock days show when you played.");
   });
 });

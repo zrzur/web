@@ -290,6 +290,11 @@ const UserProfileMutualGroupsModal = lazy(() =>
     default: m.UserProfileMutualGroupsModal,
   })),
 );
+const SteamGamesModal = lazy(() =>
+  import("./modals/SteamGames").then((m) => ({
+    default: m.SteamGamesModal,
+  })),
+);
 const UserProfileRolesModal = lazy(() =>
   import("./modals/UserProfileRoles").then((m) => ({
     default: m.UserProfileRolesModal,
@@ -482,6 +487,8 @@ export function RenderModal(props: ActiveModal & { onClose: () => void }) {
       return <UserProfileModal {...modalProps} />;
     case "user_profile_roles":
       return <UserProfileRolesModal {...modalProps} />;
+    case "steam_games":
+      return <SteamGamesModal {...modalProps} />;
     case "user_profile_mutual_friends":
       return <UserProfileMutualFriendsModal {...modalProps} />;
     case "user_profile_mutual_groups":

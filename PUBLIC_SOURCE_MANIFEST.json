@@ -292,8 +292,8 @@
     },
     {
       "path": "CHANGELOG.md",
-      "sha256": "ef2cd1c6c16993642f1efc4e424e68d8f7a90b4d353b0fde8248ded2bbb6a543",
-      "bytes": 146024,
+      "sha256": "52bd4cfbf947ee2e6d42bdda5745bab8373d2c29dae31da9a0a2ea9eada5e9b3",
+      "bytes": 146715,
       "category": "public-documentation"
     },
     {
@@ -2302,26 +2302,26 @@
     },
     {
       "path": "packages/client/components/app/interface/settings/user/connections/Connections.dom.test.tsx",
-      "sha256": "c17971cceb49805d6c3c406b48bb04af6d2b4603a9752428d63f7e0bd645595c",
-      "bytes": 7898,
+      "sha256": "4f13a2cd24cb032b38f0dd94ae899a5d5586e72aa37ed0ee3a7ae2d22972d310",
+      "bytes": 11072,
       "category": "synthetic-test-source-or-fixture"
     },
     {
       "path": "packages/client/components/app/interface/settings/user/connections/Connections.tsx",
-      "sha256": "46452f7bf9fe266ad604c88f11e3436db93b2e75d396636944bca8b741b04efc",
-      "bytes": 15577,
+      "sha256": "a5f8f17429542b714c0a283a46becf8facdef9d5fa0b97c49e5a4ead2591ceba",
+      "bytes": 19320,
       "category": "product-source-or-build-manifest"
     },
     {
       "path": "packages/client/components/app/interface/settings/user/connections/connectionsApi.test.ts",
-      "sha256": "d746102c9a0b3c208a6227f2a556443d13d6df68c8b448997fb1e7f55d6d5251",
-      "bytes": 1295,
+      "sha256": "e324cedcb9fab26c80f582a01dfb8ef1e6b882d81e48258b4b01d0e45a8dde17",
+      "bytes": 2881,
       "category": "synthetic-test-source-or-fixture"
     },
     {
       "path": "packages/client/components/app/interface/settings/user/connections/connectionsApi.ts",
-      "sha256": "a2b7d427c3382c343db5cb0c06789ce240fd4e1f1e313b087ed084becaba1a40",
-      "bytes": 2434,
+      "sha256": "467e35f991459d9dae3765d67debdb229f6af70c738a546669dcc1c55f345520",
+      "bytes": 2763,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -3310,8 +3310,8 @@
     },
     {
       "path": "packages/client/components/i18n/catalogs/ar/messages.po",
-      "sha256": "824d55e3dd0da54d44a2ab02f91bbeb52556cc2e5078edab85e34f362cb6c38c",
-      "bytes": 1038614,
+      "sha256": "786495cf3b0b7ca3ec5efacfa6355af9d11655c01fd3ed5a926bf22035825dbe",
+      "bytes": 1045296,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -3454,8 +3454,8 @@
     },
     {
       "path": "packages/client/components/i18n/catalogs/de/messages.po",
-      "sha256": "979c3194e3ff9e9f6cd6a61898c36eee73f5808a3fb3dabfbdc9b919bd1c8f3d",
-      "bytes": 957899,
+      "sha256": "bb260cb86f42cb72d9104ac2463d41bc90221cb6fed37543803495b2e7d7c7d2",
+      "bytes": 963918,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -3490,8 +3490,8 @@
     },
     {
       "path": "packages/client/components/i18n/catalogs/en/messages.po",
-      "sha256": "28d40385e28c72ba27f43c6962cc4535cd5f6f81b349f5d2e9bcd4eb45344a63",
-      "bytes": 922067,
+      "sha256": "4e025cdea543de0ca87d1f7de5e8188cf2e61b7d3175355fe30b597370d6a49e",
+      "bytes": 927862,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -4492,8 +4492,8 @@
     },
     {
       "path": "packages/client/components/modal/modals.tsx",
-      "sha256": "0d18c769811cc18dc7b971bd941da2a1adef1284e88b10bdcdffb9d043a2c0d8",
-      "bytes": 17771,
+      "sha256": "c02a539d9c4667f44f71b7987bf3ef3f80315079796abc3c1deeadaa25be13d0",
+      "bytes": 17969,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -4977,6 +4977,18 @@
       "category": "product-source-or-build-manifest"
     },
     {
+      "path": "packages/client/components/modal/modals/SteamGames.dom.test.tsx",
+      "sha256": "f667201a4cc759f2d83e013ed3117aa5638660e86ae4267df50cdd3443d1951b",
+      "bytes": 4527,
+      "category": "synthetic-test-source-or-fixture"
+    },
+    {
+      "path": "packages/client/components/modal/modals/SteamGames.tsx",
+      "sha256": "6da0107e226455bb63bb16627504a5fa86ba4859a86376f544bde63401ef94a8",
+      "bytes": 9364,
+      "category": "product-source-or-build-manifest"
+    },
+    {
       "path": "packages/client/components/modal/modals/SuperchargeServer.tsx",
       "sha256": "bc9df395016245a3c9e118368261e444402ef4906af3224b516309482475bc7c",
       "bytes": 26170,
@@ -5122,8 +5134,8 @@
     },
     {
       "path": "packages/client/components/modal/types.ts",
-      "sha256": "301b8c2cf6352f4ed71157e6191e2766712be82acb23bea35ffb18ebe3f44ca7",
-      "bytes": 9855,
+      "sha256": "3eed83b98ce383cab5ee16f763d5ee99e4668de992416eeba41ba9c384005056",
+      "bytes": 10069,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -6502,8 +6514,8 @@
     },
     {
       "path": "packages/client/components/ui/components/features/profiles/ProfileGames.tsx",
-      "sha256": "82aa406bc6b4692e660fb4a4e4038772eb7b984dd5ef6b0b5ab7933915226c47",
-      "bytes": 5267,
+      "sha256": "28fc116cad54960bc4c556d0ceac8a80fc76d1ce683cc964bb9b3acf0f136846",
+      "bytes": 8564,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -6570,6 +6582,12 @@
       "path": "packages/client/components/ui/components/features/profiles/ServerStatusBadges.tsx",
       "sha256": "eac8a9aa5fd4eefda0eb012053c67facf3f41c3c4e981db457d1119fe674a72e",
       "bytes": 791,
+      "category": "product-source-or-build-manifest"
+    },
+    {
+      "path": "packages/client/components/ui/components/features/profiles/SteamTile.tsx",
+      "sha256": "59b00f773425c07f0e77cb7a45758f608ab6685c3d7557ebc05fe7ded64e2eed",
+      "bytes": 2354,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -6682,8 +6700,8 @@
     },
     {
       "path": "packages/client/components/ui/components/features/profiles/linkedGames.ts",
-      "sha256": "ed8ac63fc62aee8f4fffeb76c884f1395ddfc8ae137620fea2be99605eb7580d",
-      "bytes": 1893,
+      "sha256": "561943e78da87270ca39b2038ccc42863c70cfaf9e2d8c75bfb77d1e1dec3d5e",
+      "bytes": 4067,
       "category": "product-source-or-build-manifest"
     },
     {
