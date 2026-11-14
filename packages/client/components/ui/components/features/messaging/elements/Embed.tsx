@@ -112,7 +112,9 @@ export function Embed(props: { embed: MessageEmbed }) {
       <Match
         when={
           props.embed.type === "Website" &&
-          isPlayerEmbed((props.embed as WebsiteEmbed).specialContent?.type)
+          isPlayerEmbed((props.embed as WebsiteEmbed).specialContent?.type) &&
+          // a "Player" only when its address passed the SDK's host list
+          !!(props.embed as WebsiteEmbed).embedURL
         }
       >
         <SpecialEmbed embed={props.embed as WebsiteEmbed} standalone />

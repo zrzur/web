@@ -20,7 +20,7 @@ import {
   Toggle,
 } from "@revolt/ui";
 import {
-  PLAYER_PROVIDERS,
+  playerProvider,
   allowedMediaPlayers,
   alwaysLoadMediaPlayers,
   forgetMediaPlayers,
@@ -186,7 +186,7 @@ export function PrivacySection() {
           icon={<Icon name="shield" size={20} />}
           title={t`Sites you allowed`}
           description={allowedMediaPlayers()
-            .map((type) => PLAYER_PROVIDERS[type]?.name ?? type)
+            .map((type) => playerProvider(type)?.name ?? type)
             .join(" · ")}
           control={() => (
             <Button variant="secondary" onPress={forgetMediaPlayers}>

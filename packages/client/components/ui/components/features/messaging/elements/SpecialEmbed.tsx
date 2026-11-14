@@ -9,10 +9,11 @@ import { fitMessageMedia } from "@revolt/ui/components/utils/mediaSize";
 
 import { SpecialEmbedPlaceholder } from "./SpecialEmbedPlaceholder";
 import {
-  PLAYER_PROVIDERS,
   allowMediaPlayer,
   alwaysLoadMediaPlayers,
   isMediaPlayerAllowed,
+  playerKey,
+  playerProvider,
 } from "./embedSettings";
 
 /**
@@ -73,6 +74,11 @@ export function SpecialEmbed(props: {
         height = special.track_id ? 175 : 450;
         break;
       }
+      case "Player": {
+        width = special.width;
+        height = special.height;
+        break;
+      }
     }
 
     return { width, height };
@@ -92,7 +98,7 @@ export function SpecialEmbed(props: {
   }
 
   const provider = () =>
-    PLAYER_PROVIDERS[props.embed.specialContent?.type ?? ""] ?? {
+    playerProvider(playerKey(props.embed.specialContent) ?? "") ?? {
       name: props.embed.siteName ?? "",
       company: props.embed.siteName ?? "",
     };
@@ -100,7 +106,7 @@ export function SpecialEmbed(props: {
   const loaded = () =>
     clicked() ||
     alwaysLoadMediaPlayers() ||
-    isMediaPlayerAllowed(props.embed.specialContent?.type);
+    isMediaPlayerAllowed(playerKey(props.embed.specialContent));
 
   return (
     <Show
@@ -123,7 +129,7 @@ export function SpecialEmbed(props: {
             thumbnail={props.embed.image?.proxiedURL}
             onLoad={() => {
               setClicked(true);
-              allowMediaPlayer(props.embed.specialContent?.type);
+              allowMediaPlayer(playerKey(props.embed.specialContent));
             }}
           />
         </PlaceholderFrame>

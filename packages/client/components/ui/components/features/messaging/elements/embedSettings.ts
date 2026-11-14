@@ -70,6 +70,37 @@ export function setAlwaysLoadMediaPlayers(value: boolean) {
 export const isPlayerEmbed = (type?: string) =>
   !!type && PLAYER_PROVIDERS[type] !== undefined;
 
+/**
+ * The consent key of an embed's player: its type, or for the sites of the
+ * "Player" kind, "Player:<site>" (yes to Vimeo is not yes to TikTok)
+ */
+export function playerKey(special?: { type: string; provider?: string }) {
+  if (!special) return undefined;
+  return special.type === "Player" ? `Player:${special.provider}` : special.type;
+}
+
+/** Who runs a "Player" site, for the line under the placeholder */
+const PLAYER_SITE_COMPANIES: Record<string, string> = {
+  Vimeo: "Vimeo",
+  Dailymotion: "Dailymotion",
+  TikTok: "TikTok (ByteDance)",
+  Instagram: "Instagram (Meta)",
+  Deezer: "Deezer",
+  "Apple Podcasts": "Apple",
+  Kick: "Kick",
+  Mixcloud: "Mixcloud",
+  Tidal: "Tidal",
+};
+
+/** Name and company of the player behind a consent key */
+export function playerProvider(key: string) {
+  if (key.startsWith("Player:")) {
+    const name = key.slice("Player:".length);
+    return { name, company: PLAYER_SITE_COMPANIES[name] ?? name };
+  }
+  return PLAYER_PROVIDERS[key];
+}
+
 /** Who a player talks to, for the line under the placeholder */
 export const PLAYER_PROVIDERS: Record<
   string,
@@ -82,6 +113,8 @@ export const PLAYER_PROVIDERS: Record<
   Bandcamp: { name: "Bandcamp", company: "Bandcamp" },
   AppleMusic: { name: "Apple Music", company: "Apple" },
   Streamable: { name: "Streamable", company: "Streamable" },
+  // the sites of the "Player" kind: see playerProvider for their names
+  Player: { name: "", company: "" },
 };
 
 /** Where the players section of the privacy policy lives when the server names no page */

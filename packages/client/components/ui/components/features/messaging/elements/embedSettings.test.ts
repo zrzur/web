@@ -33,3 +33,17 @@ describe("media player consent", () => {
     expect((await load()).isMediaPlayerAllowed("Streamable")).toBe(false);
   });
 });
+
+describe("players of the Player kind", () => {
+  it("have one consent per site, named for people", async () => {
+    const { playerKey, playerProvider } = await import("./embedSettings");
+    expect(playerKey({ type: "Player", provider: "Vimeo" })).toBe("Player:Vimeo");
+    expect(playerKey({ type: "Spotify" })).toBe("Spotify");
+    expect(playerKey(undefined)).toBeUndefined();
+    expect(playerProvider("Player:TikTok")).toEqual({
+      name: "TikTok",
+      company: "TikTok (ByteDance)",
+    });
+    expect(playerProvider("YouTube")?.company).toBe("Google");
+  });
+});

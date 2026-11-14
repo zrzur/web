@@ -36,6 +36,16 @@ const PLAYER_ORIGINS = [
   "https://bandcamp.com",
   "https://streamable.com",
   "https://embed.music.apple.com",
+  // the "Player" kind: the same hosts as PLAYER_HOSTS in the SDK
+  "https://player.vimeo.com",
+  "https://www.dailymotion.com",
+  "https://www.tiktok.com",
+  "https://www.instagram.com",
+  "https://widget.deezer.com",
+  "https://embed.podcasts.apple.com",
+  "https://player.kick.com",
+  "https://www.mixcloud.com",
+  "https://embed.tidal.com",
 ];
 
 /** Cloudflare Turnstile hosts (sign-up, password reset, sign-in step-up) */

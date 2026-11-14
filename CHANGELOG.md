@@ -4,6 +4,7 @@
 
 ### Players from other sites stand on their own (2026-11-14)
 
+* **More sites play in place:** Vimeo, TikTok, Instagram, Deezer, Dailymotion, Apple Podcasts, Kick, Mixcloud and Tidal links show their own player, after the same "Load" question as the others (one answer per site). The app loads them only from those sites' player addresses.
 * **Spotify, Apple Music, YouTube, SoundCloud, Bandcamp, Twitch and Streamable links** show the site's own player alone, without our link card (site name, title, description, picture) around it. Before it loads, the card that asks to load it names the site and the title.
 
 ### macOS: the logo clear of the window buttons (2026-11-14)
