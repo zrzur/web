@@ -1,5 +1,7 @@
 import { type Client, type User, UserProfile } from "@zrzur/sdk/solid";
 
+import type { ProfileConnection } from "./linkedServices";
+
 /**
  * Linked-account types and calls. The routes are not in the SDK's API
  * document yet (contract request: stream steam-connection), so they go
@@ -102,8 +104,12 @@ export function formatDay(day: string, locale: string): string {
   }).format(date);
 }
 
-/** A profile together with its games, which the SDK class leaves out */
-export type FullProfile = UserProfile & { games?: ProfileGames };
+/** A profile together with its games and linked accounts, which the SDK
+ * class leaves out */
+export type FullProfile = UserProfile & {
+  games?: ProfileGames;
+  connections?: ProfileConnection[];
+};
 
 /** The profile with its linked games, in one request */
 export async function fetchFullProfile(
@@ -111,9 +117,15 @@ export async function fetchFullProfile(
   user: User,
 ): Promise<FullProfile> {
   const data = await client.api.raw<
-    ConstructorParameters<typeof UserProfile>[1] & { games?: ProfileGames }
+    ConstructorParameters<typeof UserProfile>[1] & {
+      games?: ProfileGames;
+      connections?: ProfileConnection[];
+    }
   >("get", `/users/${user.id}/profile`);
-  return Object.assign(new UserProfile(client, data), { games: data.games });
+  return Object.assign(new UserProfile(client, data), {
+    games: data.games,
+    connections: data.connections,
+  });
 }
 
 /** The games of a profile, if it has any to show */

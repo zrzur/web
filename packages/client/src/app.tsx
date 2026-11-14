@@ -68,6 +68,11 @@ const Discover = lazy(() =>
 const SteamReturn = lazy(() =>
   import("./interface/SteamReturn").then((m) => ({ default: m.SteamReturn })),
 );
+const ServiceReturn = lazy(() =>
+  import("./interface/ServiceReturn").then((m) => ({
+    default: m.ServiceReturn,
+  })),
+);
 const OAuthPages = lazy(() =>
   import("./interface/OAuth").then((m) => ({ default: m.OAuthPages })),
 );
@@ -156,6 +161,10 @@ const appRoutes = () => (
       <Route path="/developers/*" component={Developers} />
       <Route path="/oauth2/*" component={OAuthPages} />
       <Route path="/connections/steam/return" component={SteamReturn} />
+      <Route
+        path="/connections/:service/return"
+        component={ServiceReturn}
+      />
       <Route path="/designs/*" component={Designs} />
       <Route path="/settings" component={SettingsRedirect} />
       <Route path="/invite/:code" component={InviteRedirect} />
