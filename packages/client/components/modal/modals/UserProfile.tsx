@@ -50,7 +50,7 @@ export function UserProfileModal(
   );
 
   return (
-    <Dialog show={props.show} onClose={props.onClose} bare width={480}>
+    <Dialog show={props.show} onClose={props.onClose} bare width={460}>
       <Layout data-sheet-edge style={theme()}>
         <ProfileEffect
           effect={userStyleOf(props.user)?.effect}
@@ -105,9 +105,22 @@ export function UserProfileModal(
               <Show when={!props.user.self}>
                 <Profile.Note user={props.user} />
               </Show>
-              <ProfileId user={props.user} />
             </Profile.Body>
           </Details>
+
+          {/* the last thing in the profile: it scrolls with the rest */}
+          <Foot data-testid="profile-full-foot">
+            <Show
+              when={!props.user.self && props.user.relationship !== "Blocked"}
+            >
+              <Profile.Message
+                user={props.user}
+                member={props.member}
+                onClose={props.onClose}
+              />
+            </Show>
+            <ProfileId user={props.user} />
+          </Foot>
         </div>
 
         <Close
@@ -129,10 +142,6 @@ const Layout = styled("div", {
     // (solid: the avatar ring uses it to cut the avatar out of the banner)
     "--profile-surface":
       "var(--z-dialog-bg, var(--z-bg-modal, var(--z-bg-raised)))",
-
-    // more room than the card: 16 px between sections and inside the panel
-    "--profile-gap": "16px",
-    "--profile-tile-gap": "8px",
 
     position: "relative",
     display: "flex",
@@ -168,9 +177,20 @@ const Details = styled("div", {
   base: {
     display: "flex",
     flexDirection: "column",
-    gap: "16px",
-    padding: "8px 24px 24px",
-    _phone: { padding: "8px 16px 24px" },
+    gap: "12px",
+    padding: "4px 16px 12px",
+  },
+});
+
+/** The end of the profile, after every section: a message box, then the ID */
+const Foot = styled("div", {
+  base: {
+    flexShrink: 0,
+    display: "flex",
+    flexDirection: "column",
+    gap: "8px",
+    padding: "12px 16px 16px",
+    borderBlockStart: "1px solid var(--profile-line, var(--z-border-subtle))",
   },
 });
 

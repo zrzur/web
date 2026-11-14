@@ -22,7 +22,7 @@ import { mutualFor } from "./mutualCache";
  */
 export default function ProfileMutuals(props: {
   user: User;
-  /** The full profile lists them at once; the card first shows how many */
+  /** Once opened, the full profile lets the chips take as many rows as they need */
   full?: boolean;
   /** Closes the card or dialog when a chip leads somewhere else */
   onClose?: () => void;
@@ -32,7 +32,7 @@ export default function ProfileMutuals(props: {
   const navigate = useNavigate();
   const { openModal } = useModals();
   const [opened, setOpened] = createSignal(false);
-  const listed = () => props.full || opened();
+  const listed = () => opened();
 
   const [mutual] = createResource(
     () => props.user,

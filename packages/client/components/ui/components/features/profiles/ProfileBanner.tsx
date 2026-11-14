@@ -54,13 +54,13 @@ export function ProfileBanner(props: {
         <AvatarDecoration
           decoration={userStyleOf(props.user)?.decoration}
           file={userStyleOf(props.user)?.decoration_file}
-          size={props.size === "full" ? 104 : 80}
+          size={props.size === "full" ? 84 : 80}
           live
         >
           <Avatar
             src={avatar()}
             fallback={props.user.displayName}
-            size={props.size === "full" ? 104 : 80}
+            size={props.size === "full" ? 84 : 80}
             holepunch={official() ? undefined : "bottom-right"}
             onClick={props.onClickAvatar}
             interactive={
@@ -108,9 +108,10 @@ const Header = styled("div", {
     "--header-inset": "16px",
 
     "&[data-size='full']": {
-      "--banner-height": "160px",
-      "--avatar-ring": "112px",
-      "--header-inset": "24px",
+      // 3:1 of the dialog's 460 px
+      "--banner-height": "152px",
+      "--avatar-ring": "92px",
+      "--header-inset": "16px",
       // a phone has 16 px gutters and a banner 3:1 of its width
       _phone: {
         "--banner-height": "calc(100vw / 3)",

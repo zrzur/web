@@ -127,17 +127,34 @@ describe("ProfileGamesPanel", () => {
     expect(text()).toContain("MAHER");
   });
 
-  it("the card shows two rows of achievements, the full profile more", () => {
+  it("achievements stay folded until Show more, and fold again", () => {
     show(games);
+    expect(text()).not.toContain("Latest achievements");
+    expect(document.querySelectorAll("li[title]").length).toBe(0);
+    const more = button("Show more")!;
+    expect(more.getAttribute("aria-expanded")).toBe("false");
+    more.click();
+    expect(text()).toContain("Latest achievements");
     expect(document.querySelectorAll("li[title]").length).toBe(14);
-    dispose?.();
-    document.body.replaceChildren(document.createElement("div"));
+    document.querySelector<HTMLElement>("[data-games-more]")!.click();
+    expect(document.querySelectorAll("li[title]").length).toBe(0);
+  });
+
+  it("the full profile opens two wider rows of achievements", () => {
     show(games, "full");
-    expect(document.querySelectorAll("li[title]").length).toBe(18);
+    button("Show more")!.click();
+    expect(document.querySelectorAll("li[title]").length).toBe(20);
+  });
+
+  it("no Show more without achievements", () => {
+    show({ ...games, achievements: [] });
+    expect(button("Show more")).toBeUndefined();
+    expect(button("Show all 5")).toBeDefined();
   });
 
   it("every achievement has a name a screen reader can read", () => {
     show(games);
+    button("Show more")!.click();
     const first = document.querySelector("li[title]")!;
     expect(first.textContent).toContain("Achievement 1 · Rust");
   });

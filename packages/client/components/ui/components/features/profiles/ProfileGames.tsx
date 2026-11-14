@@ -28,6 +28,8 @@ export function ProfileGamesPanel(props: { games: ProfileGames }) {
   const { openModal } = useModals();
   const size = useProfileSize();
   const [open, setOpen] = createSignal(false);
+  // the latest achievements stay folded until asked for
+  const [more, setMore] = createSignal(false);
   const number = (value: number) =>
     new Intl.NumberFormat(i18n().locale).format(value);
 
@@ -54,7 +56,7 @@ export function ProfileGamesPanel(props: { games: ProfileGames }) {
         }
       >
         <Head>
-          <SteamTile name={props.games.display_name} size={40} round />
+          <SteamTile name={props.games.display_name} size={36} round />
           <HeadText>
             <Show
               when={link()}
@@ -113,7 +115,7 @@ export function ProfileGamesPanel(props: { games: ProfileGames }) {
             <For each={shown()}>
               {(game) => (
                 <li>
-                  <SteamTile url={game.icon_url} name={game.name} size={32} />
+                  <SteamTile url={game.icon_url} name={game.name} size={24} />
                   <span class={cx(cutLine(), gameName)} dir="auto" lang="en">
                     {game.name}
                   </span>
@@ -123,22 +125,39 @@ export function ProfileGamesPanel(props: { games: ProfileGames }) {
             </For>
           </List>
         </Show>
-        <Show when={list().length > FIRST_GAMES}>
-          <More
-            type="button"
-            aria-expanded={open()}
-            onClick={() => setOpen(!open())}
-          >
-            <Show
-              when={open()}
-              fallback={<Trans>Show all {list().length}</Trans>}
-            >
-              <Trans>Show less</Trans>
+        <Show when={list().length > FIRST_GAMES || strip().length}>
+          <Toggles>
+            <Show when={list().length > FIRST_GAMES}>
+              <More
+                type="button"
+                data-games-all
+                aria-expanded={open()}
+                onClick={() => setOpen(!open())}
+              >
+                <Show
+                  when={open()}
+                  fallback={<Trans>Show all {list().length}</Trans>}
+                >
+                  <Trans>Show less</Trans>
+                </Show>
+              </More>
             </Show>
-          </More>
+            <Show when={strip().length}>
+              <More
+                type="button"
+                data-games-more
+                aria-expanded={more()}
+                onClick={() => setMore(!more())}
+              >
+                <Show when={more()} fallback={<Trans>Show more</Trans>}>
+                  <Trans>Show less</Trans>
+                </Show>
+              </More>
+            </Show>
+          </Toggles>
         </Show>
 
-        <Show when={strip().length}>
+        <Show when={more() && strip().length}>
           <Sub>
             <SubTitle>
               <Trans>Latest achievements</Trans>
@@ -256,14 +275,14 @@ const List = styled("ul", {
     padding: 0,
     display: "flex",
     flexDirection: "column",
-    gap: "8px",
+    gap: "4px",
 
     "& li": {
       display: "flex",
       alignItems: "center",
       gap: "8px",
       minWidth: 0,
-      minHeight: "32px",
+      minHeight: "24px",
     },
   },
 });
@@ -285,6 +304,17 @@ const Hours = styled("span", {
     lineHeight: "16px",
     color: "var(--profile-ink-2, var(--z-fg-secondary))",
     fontVariantNumeric: "tabular-nums",
+  },
+});
+
+/** Show all N and Show more, side by side under the games */
+const Toggles = styled("div", {
+  base: {
+    display: "flex",
+    flexWrap: "wrap",
+    alignItems: "center",
+    gap: "4px 16px",
+    minWidth: 0,
   },
 });
 
@@ -338,7 +368,7 @@ const Strip = styled("ul", {
     margin: 0,
     padding: 0,
     display: "grid",
-    // tiles of about 40 px: seven in a row on the card, nine on the full
+    // tiles of about 40 px: seven in a row on the card, eight on the full
     // profile, whatever the border and padding leave
     gridTemplateColumns: "repeat(auto-fill, minmax(36px, 1fr))",
     gap: "var(--profile-tile-gap, 4px)",

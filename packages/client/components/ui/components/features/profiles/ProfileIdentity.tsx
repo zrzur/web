@@ -82,9 +82,11 @@ export function ProfileIdentity(props: {
             />
           </Show>
         </DisplayNameGroup>
-        <RowBadges>
-          <ProfileBadges ids={badges()} />
-        </RowBadges>
+        <Show when={props.size === "card"}>
+          <RowBadges>
+            <ProfileBadges ids={badges()} />
+          </RowBadges>
+        </Show>
       </NameRow>
 
       <Meta>
@@ -107,6 +109,11 @@ export function ProfileIdentity(props: {
           <Pronouns dir="auto">{pronouns()}</Pronouns>
         </Show>
       </Meta>
+      <Show when={props.size === "full" && badges().length}>
+        <BadgeRow data-testid="profile-badge-row">
+          <ProfileBadges ids={badges()} />
+        </BadgeRow>
+      </Show>
     </Identity>
   );
 }
@@ -161,6 +168,16 @@ const RowBadges = styled("div", {
       paddingBlockEnd: "8px",
       "& > [role=list]": { margin: 0 },
     },
+  },
+});
+
+/** Every badge on a line of its own under the handle (the full profile) */
+const BadgeRow = styled("div", {
+  base: {
+    display: "flex",
+    flexWrap: "wrap",
+    minWidth: 0,
+    paddingBlockStart: "4px",
   },
 });
 

@@ -15,4 +15,4 @@ export const tilesShown = (size: ProfileSize) => (size === "full" ? 4 : 3);
 
 /** Achievement icons under the games: two rows of the panel's width */
 export const achievementsShown = (size: ProfileSize) =>
-  size === "full" ? 18 : 14;
+  size === "full" ? 20 : 14;

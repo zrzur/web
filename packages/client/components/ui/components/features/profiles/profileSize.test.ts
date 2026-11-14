@@ -8,8 +8,8 @@ describe("profile sizes", () => {
     expect(tilesShown("full")).toBe(4);
   });
 
-  it("achievements fill two rows: seven across the card, nine across the full profile", () => {
+  it("achievements fill two rows: seven across the card, ten across the full profile", () => {
     expect(achievementsShown("card")).toBe(2 * 7);
-    expect(achievementsShown("full")).toBe(2 * 9);
+    expect(achievementsShown("full")).toBe(2 * 10);
   });
 });
