@@ -2,6 +2,12 @@
 
 ## Unreleased
 
+### Steam details on profiles (2026-11-14)
+
+* **Profile card:** the Games section shows game icons, the three most played games with "Show all", the latest achievements as small icons, and a credit line. **View** opens a dialog with game pictures, hours and achievement counts, and the latest achievements with their description, game and day, filtered by game.
+* **Settings → Connections:** game icons in the preview list, **Open preview** shows exactly what others will see, and people who linked before see a short "New on your Steam card" question before any new detail shows.
+* Steam's pictures load only through Zrzur's media proxy; every Steam link opens through the link warning.
+
 ### Steam on your profile (2026-11-14)
 
 * **Settings → Connections:** Connect Steam signs you in on Steam's own page, after a consent step that says what is copied and who sees it. You get a preview first; nothing shows until you switch it on, and any game can be unticked. Refresh and Disconnect are one press each.

@@ -30,6 +30,7 @@ import {
 } from "@revolt/state/stores/Voice";
 
 import type { ReportTargetSpec } from "@revolt/app/interface/safety/safetyApi";
+import type { ProfileGames } from "@revolt/ui/components/features/profiles/linkedGames";
 import type { OrderCheckout, Supercharge } from "@revolt/client/billing";
 
 import type { PromoteTarget } from "./modals/PromoteServer";
@@ -366,6 +367,11 @@ export type Modals =
       isPlaceholder?: boolean;
       placeholderProfile?: API.UserProfile;
       member?: ServerMember;
+    }
+  | {
+      /** Everything copied from a linked Steam account */
+      type: "steam_games";
+      games: ProfileGames;
     }
   | {
       type: "user_profile_roles";

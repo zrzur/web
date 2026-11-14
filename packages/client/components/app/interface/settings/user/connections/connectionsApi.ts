@@ -1,6 +1,9 @@
 import type { Client } from "@zrzur/sdk/solid";
 
-import type { LinkedGame } from "@revolt/ui/components/features/profiles/linkedGames";
+import type {
+  LinkedAchievement,
+  LinkedGame,
+} from "@revolt/ui/components/features/profiles/linkedGames";
 
 /**
  * Linked accounts (Steam). Not in the SDK's API document yet (contract
@@ -18,12 +21,19 @@ export type LinkedAccount = {
   game_count?: number;
   total_hours?: number;
   games: LinkedGame[];
+  /** Newest first, hidden games included */
+  achievements: LinkedAchievement[];
   hidden_titles: number[];
   linked_at: number;
   refreshed_at: number;
   /** Refresh works again from here, milliseconds since the epoch */
   refresh_after: number;
+  /** Agreed to the consent text in use; if not, pictures and achievements stay off */
+  consent_current: boolean;
 };
+
+/** Version of the consent text the app shows */
+export const STEAM_CONSENT_VERSION = 2;
 
 export type LinkedAccounts = {
   steam: { available: boolean; account?: LinkedAccount };
@@ -53,7 +63,7 @@ export const connectionsApi = {
 
   edit: (
     client: Client,
-    change: { shown?: boolean; hidden_titles?: number[] },
+    change: { shown?: boolean; hidden_titles?: number[]; consent?: number },
   ) =>
     client.api.raw<LinkedAccount>(
       "patch",

@@ -13,6 +13,24 @@ export type LinkedGame = {
   hours: number;
   achievements_unlocked?: number;
   achievements_total?: number;
+  /** On Steam's image server: load only through `proxyFile` */
+  icon_url?: string;
+  /** On Steam's image server: load only through `proxyFile`. Absent when
+   * pictures are off for this game or this link */
+  header_url?: string;
+  store_url: string;
+};
+
+/** One unlocked achievement */
+export type LinkedAchievement = {
+  appid: number;
+  game: string;
+  name: string;
+  description: string;
+  /** On Steam's image server: load only through `proxyFile` */
+  icon_url?: string;
+  /** `YYYY-MM-DD`, a day without a time */
+  unlocked_on: string;
 };
 
 /** Games on a profile, as another person sees them */
@@ -26,7 +44,63 @@ export type ProfileGames = {
   game_count?: number;
   total_hours?: number;
   games: LinkedGame[];
+  /** Newest first */
+  achievements: LinkedAchievement[];
 };
+
+/** Hosts of Steam's pictures the server hands out; anything else is ignored */
+const STEAM_IMAGE_HOSTS = new Set([
+  "media.steampowered.com",
+  "cdn.cloudflare.steamstatic.com",
+]);
+
+/**
+ * A Steam picture through Zrzur's media proxy, so viewers never contact
+ * Steam. Nothing when the address is not one of Steam's or there is no
+ * proxy: the caller then draws a letter tile.
+ */
+export function steamImage(
+  client: Pick<Client, "proxyFile">,
+  url?: string,
+): string | undefined {
+  if (!url) return undefined;
+  try {
+    const parsed = new URL(url);
+    if (parsed.protocol !== "https:" || !STEAM_IMAGE_HOSTS.has(parsed.hostname))
+      return undefined;
+  } catch {
+    return undefined;
+  }
+  return client.proxyFile(url);
+}
+
+/** Only the Steam store's own pages open from a game */
+export function steamStoreUrl(url: string): URL | undefined {
+  try {
+    const parsed = new URL(url);
+    return parsed.protocol === "https:" &&
+      parsed.hostname === "store.steampowered.com" &&
+      !parsed.username &&
+      !parsed.password
+      ? parsed
+      : undefined;
+  } catch {
+    return undefined;
+  }
+}
+
+/** A `YYYY-MM-DD` day in the reader's language, read as a day (no time zone shift) */
+export function formatDay(day: string, locale: string): string {
+  const match = /^(\d{4})-(\d{2})-(\d{2})$/.exec(day);
+  if (!match) return day;
+  const date = new Date(
+    Date.UTC(Number(match[1]), Number(match[2]) - 1, Number(match[3])),
+  );
+  return new Intl.DateTimeFormat(locale, {
+    dateStyle: "medium",
+    timeZone: "UTC",
+  }).format(date);
+}
 
 /** A profile together with its games, which the SDK class leaves out */
 export type FullProfile = UserProfile & { games?: ProfileGames };

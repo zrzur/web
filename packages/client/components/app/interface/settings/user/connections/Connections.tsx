@@ -14,6 +14,7 @@ import { styled } from "styled-system/jsx";
 
 import { useClient } from "@revolt/client";
 import { TranslatedError } from "@revolt/i18n/errors";
+import { useModals } from "@revolt/modal";
 import {
   Button,
   Checkbox,
@@ -23,11 +24,13 @@ import {
   SettingsSection,
   Toggle,
 } from "@revolt/ui";
+import { SteamTile } from "@revolt/ui/components/features/profiles/SteamTile";
 import { Icon } from "@revolt/ui/icons/Icon";
 
 import {
   type LinkedAccount,
   type LinkedAccounts,
+  STEAM_CONSENT_VERSION,
   connectionsApi,
 } from "./connectionsApi";
 
@@ -96,8 +99,9 @@ export function Connections() {
       </Switch>
       <Small>
         <Trans>
-          Steam is a trademark of Valve Corporation. Zrzur is not affiliated
-          with Valve.
+          From Steam. Steam is a trademark of Valve Corporation; Zrzur is not
+          affiliated with Valve. Game pictures, achievement names and icons
+          belong to their owners.
         </Trans>
       </Small>
     </Column>
@@ -168,9 +172,14 @@ function SteamConnect(props: { available: boolean }) {
                 <Trans>We will copy:</Trans>
               </strong>{" "}
               <Trans>
-                your Steam name and link, your game count, hours played and your
-                most played games with their achievements, from what Steam shows
-                publicly, and keep them in the EU.
+                your Steam name and link, your game count, hours played, your 10
+                most played games with their achievement counts, and up to 60 of
+                your latest achievements in those games with their name,
+                description and the day you unlocked them (no time of day). We
+                take this from what Steam shows publicly and keep it in the EU.
+                Game pictures and achievement icons come from Steam and load
+                through Zrzur's servers, so Steam does not see who views your
+                profile.
               </Trans>
             </p>
             <p>
@@ -180,7 +189,8 @@ function SteamConnect(props: { available: boolean }) {
               <Trans>
                 anyone who can open your Zrzur profile. If you are under 18, or
                 we do not know your age, only your friends. You see a preview
-                first and can hide any game.
+                first and can hide any game; a hidden game and its achievements
+                show nowhere.
               </Trans>
             </p>
             <p>
@@ -188,8 +198,9 @@ function SteamConnect(props: { available: boolean }) {
                 <Trans>Keep in mind:</Trans>
               </strong>{" "}
               <Trans>
-                this ties your Steam account to your Zrzur account. What you
-                play can say something about your beliefs, health or sexuality.
+                this ties your Steam account to your Zrzur account. The unlock
+                days show when you played. What you play can say something about
+                your beliefs, health or sexuality.
               </Trans>
             </p>
             <p>
@@ -248,7 +259,10 @@ function SteamLinked(props: {
   const { t, i18n } = useLingui();
   const client = useClient();
   const queries = useQueryClient();
+  const { openModal } = useModals();
   const [busy, setBusy] = createSignal(false);
+  const [agreeNew, setAgreeNew] = createSignal(false);
+  const [keptOld, setKeptOld] = createSignal(false);
   const [error, setError] = createSignal<unknown>();
   const [now, setNow] = createSignal(Date.now());
 
@@ -284,6 +298,24 @@ function SteamLinked(props: {
     );
 
   const canRefresh = () => now() >= props.account.refresh_after;
+
+  /** What others would see, with the pictures, before switching it on */
+  const preview = () =>
+    openModal({
+      type: "steam_games",
+      games: {
+        service: props.account.service,
+        display_name: props.account.display_name,
+        profile_url: props.account.profile_url,
+        private: props.account.private,
+        game_count: props.account.game_count,
+        total_hours: props.account.total_hours,
+        games: props.account.games.filter((g) => !hidden(g.appid)),
+        achievements: props.account.achievements.filter(
+          (a) => !hidden(a.appid),
+        ),
+      },
+    });
 
   return (
     <SettingsSection
@@ -337,11 +369,57 @@ function SteamLinked(props: {
         )}
       />
       <Body>
+        <Show when={!props.account.consent_current && !keptOld()}>
+          <Consent role="group" aria-labelledby="steam-reconsent-title">
+            <ConsentTitle id="steam-reconsent-title">
+              <Trans>New on your Steam card</Trans>
+            </ConsentTitle>
+            <p>
+              <Trans>
+                Zrzur can now also show game pictures and up to 60 of your
+                latest achievements with the day you unlocked them (no time of
+                day). The unlock days show when you played. Nothing new shows
+                until you agree.
+              </Trans>
+            </p>
+            <Checkbox
+              checked={agreeNew()}
+              onChange={(event) => setAgreeNew(event.currentTarget.checked)}
+            >
+              <Trans>Show these on my profile too.</Trans>
+            </Checkbox>
+            <Actions>
+              <Button
+                variant="outlined"
+                size="sm"
+                isDisabled={busy()}
+                onPress={() => setKeptOld(true)}
+              >
+                <Trans>Keep it as it is</Trans>
+              </Button>
+              <Button
+                variant="outlined"
+                size="sm"
+                isDisabled={busy() || !agreeNew()}
+                onPress={() =>
+                  run(() =>
+                    connectionsApi.edit(client(), {
+                      consent: STEAM_CONSENT_VERSION,
+                    }),
+                  )
+                }
+              >
+                <Trans>Save</Trans>
+              </Button>
+            </Actions>
+          </Consent>
+        </Show>
         <Show when={!props.account.shown}>
           <Note>
             <Trans>
               This is a preview. Nothing shows on your profile until you switch
-              it on. Untick any game you want to keep to yourself.
+              it on. Untick any game you want to keep to yourself; its pictures
+              and achievements are hidden with it.
             </Trans>
           </Note>
         </Show>
@@ -357,8 +435,14 @@ function SteamLinked(props: {
                       toggleGame(game.appid, event.currentTarget.checked)
                     }
                   >
+                    <GameRow>
+                    <SteamTile
+                      url={game.icon_url}
+                      name={game.name}
+                      size={28}
+                    />
                     <GameLine>
-                      <bdi>{game.name}</bdi>
+                      <bdi lang="en">{game.name}</bdi>
                       <GameFacts>
                         {t`${number(game.hours)} h`}
                         <Show when={game.achievements_total}>
@@ -367,6 +451,7 @@ function SteamLinked(props: {
                         </Show>
                       </GameFacts>
                     </GameLine>
+                    </GameRow>
                   </Checkbox>
                 </li>
               )}
@@ -386,6 +471,11 @@ function SteamLinked(props: {
             </Trans>
           </Small>
           <Actions>
+            <Show when={!props.account.private}>
+              <Button variant="outlined" size="sm" onPress={preview}>
+                <Trans>Open preview</Trans>
+              </Button>
+            </Show>
             <Button
               variant="outlined"
               size="sm"
@@ -543,6 +633,15 @@ const Footer = styled("div", {
     paddingTop: "16px",
     borderTop: "1px solid var(--z-border-subtle)",
     "& > p": { flex: "1 1 220px", minWidth: 0 },
+  },
+});
+
+const GameRow = styled("span", {
+  base: {
+    display: "flex",
+    alignItems: "center",
+    gap: "8px",
+    minWidth: 0,
   },
 });
 

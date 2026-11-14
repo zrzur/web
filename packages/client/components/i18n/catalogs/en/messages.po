@@ -384,13 +384,18 @@ msgstr "{0} free Wing"
 
 #. placeholder {0}: number(games().game_count ?? 0)
 #. placeholder {0}: number(props.account.game_count ?? 0)
+#. placeholder {0}: number(props.games.game_count ?? 0)
 #: components/app/interface/settings/user/connections/Connections.tsx
+#: components/modal/modals/SteamGames.tsx
 #: components/ui/components/features/profiles/ProfileGames.tsx
 msgid "{0} games"
 msgstr "{0} games"
 
 #. placeholder {0}: number(game.hours)
+#. placeholder {0}: number(games().total_hours ?? 0)
+#. placeholder {0}: number(item.hours)
 #: components/app/interface/settings/user/connections/Connections.tsx
+#: components/modal/modals/SteamGames.tsx
 #: components/ui/components/features/profiles/ProfileGames.tsx
 msgid "{0} h"
 msgstr "{0} h"
@@ -405,10 +410,10 @@ msgstr "{0} h left"
 msgid "{0} hex"
 msgstr "{0} hex"
 
-#. placeholder {0}: number(games().total_hours ?? 0)
 #. placeholder {0}: number(props.account.total_hours ?? 0)
+#. placeholder {0}: number(props.games.total_hours ?? 0)
 #: components/app/interface/settings/user/connections/Connections.tsx
-#: components/ui/components/features/profiles/ProfileGames.tsx
+#: components/modal/modals/SteamGames.tsx
 msgid "{0} hours played"
 msgstr "{0} hours played"
 
@@ -543,9 +548,11 @@ msgid "{0} of {1}"
 msgstr "{0} of {1}"
 
 #. placeholder {0}: number(game.achievements_unlocked ?? 0)
+#. placeholder {0}: number(item.achievements_unlocked ?? 0)
 #. placeholder {1}: number(game.achievements_total ?? 0)
+#. placeholder {1}: number(item.achievements_total ?? 0)
 #: components/app/interface/settings/user/connections/Connections.tsx
-#: components/ui/components/features/profiles/ProfileGames.tsx
+#: components/modal/modals/SteamGames.tsx
 msgid "{0} of {1} achievements"
 msgstr "{0} of {1} achievements"
 
@@ -656,6 +663,11 @@ msgstr "{0} pinned a message"
 #: components/plugins/PluginHostRoot.tsx
 msgid "{0} plugin panel"
 msgstr "{0} plugin panel"
+
+#. placeholder {0}: number(props.games.achievements.length)
+#: components/modal/modals/SteamGames.tsx
+msgid "{0} recent achievements"
+msgstr "{0} recent achievements"
 
 #. placeholder {0}: (message.systemMessage as ChannelRenamedSystemMessage).by?.username
 #: components/client/NotificationsWorker.tsx
@@ -2155,6 +2167,10 @@ msgstr "All Discover places are taken right now. Try again later."
 msgid "All friends"
 msgstr "All friends"
 
+#: components/modal/modals/SteamGames.tsx
+msgid "All games"
+msgstr "All games"
+
 #: components/app/interface/safety/labels.tsx
 msgid "All good"
 msgstr "All good"
@@ -2550,8 +2566,12 @@ msgid "Anyone up for ranked tonight?"
 msgstr "Anyone up for ranked tonight?"
 
 #: components/app/interface/settings/user/connections/Connections.tsx
-msgid "anyone who can open your Zrzur profile. If you are under 18, or we do not know your age, only your friends. You see a preview first and can hide any game."
-msgstr "anyone who can open your Zrzur profile. If you are under 18, or we do not know your age, only your friends. You see a preview first and can hide any game."
+msgid "anyone who can open your Zrzur profile. If you are under 18, or we do not know your age, only your friends. You see a preview first and can hide any game; a hidden game and its achievements show nowhere."
+msgstr "anyone who can open your Zrzur profile. If you are under 18, or we do not know your age, only your friends. You see a preview first and can hide any game; a hidden game and its achievements show nowhere."
+
+#: components/app/interface/settings/user/connections/Connections.tsx
+#~ msgid "anyone who can open your Zrzur profile. If you are under 18, or we do not know your age, only your friends. You see a preview first and can hide any game."
+#~ msgstr "anyone who can open your Zrzur profile. If you are under 18, or we do not know your age, only your friends. You see a preview first and can hide any game."
 
 #: components/app/interface/settings/server/ServerPrivacy.tsx
 #~ msgid "Anyone with a join link joins right away. Not listed on Discover unless you choose to."
@@ -8689,6 +8709,11 @@ msgstr "From below"
 msgid "From Steam"
 msgstr "From Steam"
 
+#: components/app/interface/settings/user/connections/Connections.tsx
+#: components/modal/modals/SteamGames.tsx
+msgid "From Steam. Steam is a trademark of Valve Corporation; Zrzur is not affiliated with Valve. Game pictures, achievement names and icons belong to their owners."
+msgstr "From Steam. Steam is a trademark of Valve Corporation; Zrzur is not affiliated with Valve. Game pictures, achievement names and icons belong to their owners."
+
 #: components/app/interface/settings/user/appearance/AnimationSettings.tsx
 msgid "From the end"
 msgstr "From the end"
@@ -8764,6 +8789,10 @@ msgstr "Gallery"
 msgid "Gambia"
 msgstr "Gambia"
 
+#: components/modal/modals/SteamGames.tsx
+msgid "Game"
+msgstr "Game"
+
 #: src/interface/designs/Home.tsx
 #~ msgid "game-night"
 #~ msgstr "game-night"
@@ -8773,6 +8802,10 @@ msgstr "Gambia"
 #: components/ui/components/features/profiles/ProfileGames.tsx
 msgid "Games"
 msgstr "Games"
+
+#: components/modal/modals/SteamGames.tsx
+msgid "Games from Steam"
+msgstr "Games from Steam"
 
 #: src/interface/developers/docs/DocsPortal.tsx
 msgid "Games with buttons"
@@ -10590,6 +10623,10 @@ msgctxt "scheduled events"
 msgid "Keep it"
 msgstr "Keep it"
 
+#: components/app/interface/settings/user/connections/Connections.tsx
+msgid "Keep it as it is"
+msgstr "Keep it as it is"
+
 #: components/app/interface/settings/server/assistant/labels.ts
 msgid "Keep message text for this many days (90 at most)"
 msgstr "Keep message text for this many days (90 at most)"
@@ -10796,6 +10833,11 @@ msgstr "Lasting protection"
 #: src/interface/channels/text/TextSearchSidebar.tsx
 msgid "Latest"
 msgstr "Latest"
+
+#: components/modal/modals/SteamGames.tsx
+#: components/ui/components/features/profiles/ProfileGames.tsx
+msgid "Latest achievements"
+msgstr "Latest achievements"
 
 #: components/app/interface/settings/server/LobbySettings.tsx
 #: src/interface/lobby/Lobby.tsx
@@ -12567,6 +12609,10 @@ msgstr "Morocco"
 msgid "Most mentions in one message"
 msgstr "Most mentions in one message"
 
+#: components/modal/modals/SteamGames.tsx
+msgid "Most played"
+msgstr "Most played"
+
 #: components/app/interface/settings/user/connections/Connections.tsx
 msgid "Most played games"
 msgstr "Most played games"
@@ -13096,6 +13142,10 @@ msgstr "New messages since {0}"
 #: components/modal/modals/EditCategory.tsx
 msgid "New name"
 msgstr "New name"
+
+#: components/app/interface/settings/user/connections/Connections.tsx
+msgid "New on your Steam card"
+msgstr "New on your Steam card"
 
 #: src/interface/Discover.tsx
 #~ msgid "New on Zrzur"
@@ -14657,6 +14707,10 @@ msgstr "Open for {0}"
 msgid "Open GIF picker"
 msgstr "Open GIF picker"
 
+#: components/modal/modals/SteamGames.tsx
+msgid "Open in the Steam store"
+msgstr "Open in the Steam store"
+
 #: src/interface/events/EventCard.tsx
 msgid "Open link"
 msgstr "Open link"
@@ -14668,6 +14722,10 @@ msgstr "Open link"
 #: components/modal/modals/BillingCheckoutStatus.tsx
 msgid "Open payment page"
 msgstr "Open payment page"
+
+#: components/app/interface/settings/user/connections/Connections.tsx
+msgid "Open preview"
+msgstr "Open preview"
 
 #: components/app/interface/settings/user/safety/SafetyDashboard.tsx
 msgid "Open reports"
@@ -14686,6 +14744,10 @@ msgstr "Open server settings"
 #: src/interface/Home.tsx
 msgid "Open settings"
 msgstr "Open settings"
+
+#: components/ui/components/features/profiles/ProfileGames.tsx
+msgid "Open Steam profile"
+msgstr "Open Steam profile"
 
 #: src/interface/developers/docs/GettingStarted.tsx
 #~ msgid "Open the bot's settings and copy its token. Whoever has the token controls the bot."
@@ -17883,6 +17945,7 @@ msgstr "Saudi Arabia"
 #: components/app/interface/settings/server/invites/VanityInvite.tsx
 #: components/app/interface/settings/server/webhooks/ServerWebhooks.tsx
 #: components/app/interface/settings/user/account/AgeSettings.tsx
+#: components/app/interface/settings/user/connections/Connections.tsx
 #: components/client/AgePrompt.tsx
 #: components/modal/modals/CustomStatus.tsx
 #: components/modal/modals/EditServerFolder.tsx
@@ -19034,6 +19097,11 @@ msgstr "Show accounts you have on other services on your profile. You choose wha
 #~ msgid "Show admin panel shortcuts in context menus"
 #~ msgstr "Show admin panel shortcuts in context menus"
 
+#. placeholder {0}: list().length
+#: components/ui/components/features/profiles/ProfileGames.tsx
+msgid "Show all {0}"
+msgstr "Show all {0}"
+
 #: components/app/interface/settings/server/assistant/labels.ts
 msgid "Show as a card"
 msgstr "Show as a card"
@@ -19056,6 +19124,7 @@ msgstr "Show keyboard shortcuts"
 
 #: components/ui/components/features/messaging/elements/TextEmbed.tsx
 #: components/ui/components/features/profiles/ProfileBio.tsx
+#: components/ui/components/features/profiles/ProfileGames.tsx
 #: components/ui/components/features/profiles/ProfileTiles.tsx
 #: components/ui/components/features/voice/soundboard/SoundboardPicker.tsx
 msgid "Show less"
@@ -19136,6 +19205,10 @@ msgstr "Show the Hijri date"
 #: components/app/interface/settings/server/LobbySettings.tsx
 msgid "Show the lobby"
 msgstr "Show the lobby"
+
+#: components/app/interface/settings/user/connections/Connections.tsx
+msgid "Show these on my profile too."
+msgstr "Show these on my profile too."
 
 #: components/app/interface/settings/server/webhooks/ServerWebhooks.tsx
 msgid "Show webhooks made by"
@@ -19955,9 +20028,13 @@ msgstr "Steam could not confirm the sign-in. Start again from Settings."
 msgid "Steam did not answer. Try again in a few minutes."
 msgstr "Steam did not answer. Try again in a few minutes."
 
+#: components/ui/components/features/profiles/ProfileGames.tsx
+msgid "Steam is a trademark of Valve Corporation; Zrzur is not affiliated with Valve. Game pictures, achievement names and icons belong to their owners."
+msgstr "Steam is a trademark of Valve Corporation; Zrzur is not affiliated with Valve. Game pictures, achievement names and icons belong to their owners."
+
 #: components/app/interface/settings/user/connections/Connections.tsx
-msgid "Steam is a trademark of Valve Corporation. Zrzur is not affiliated with Valve."
-msgstr "Steam is a trademark of Valve Corporation. Zrzur is not affiliated with Valve."
+#~ msgid "Steam is a trademark of Valve Corporation. Zrzur is not affiliated with Valve."
+#~ msgstr "Steam is a trademark of Valve Corporation. Zrzur is not affiliated with Valve."
 
 #: src/interface/SteamReturn.tsx
 msgid "Steam was not linked"
@@ -21765,8 +21842,12 @@ msgid "This invite link is paused right now."
 msgstr "This invite link is paused right now."
 
 #: components/app/interface/settings/user/connections/Connections.tsx
-msgid "This is a preview. Nothing shows on your profile until you switch it on. Untick any game you want to keep to yourself."
-msgstr "This is a preview. Nothing shows on your profile until you switch it on. Untick any game you want to keep to yourself."
+msgid "This is a preview. Nothing shows on your profile until you switch it on. Untick any game you want to keep to yourself; its pictures and achievements are hidden with it."
+msgstr "This is a preview. Nothing shows on your profile until you switch it on. Untick any game you want to keep to yourself; its pictures and achievements are hidden with it."
+
+#: components/app/interface/settings/user/connections/Connections.tsx
+#~ msgid "This is a preview. Nothing shows on your profile until you switch it on. Untick any game you want to keep to yourself."
+#~ msgstr "This is a preview. Nothing shows on your profile until you switch it on. Untick any game you want to keep to yourself."
 
 #: components/app/interface/settings/server/webhooks/ServerWebhooks.tsx
 msgid "This is a test message."
@@ -22119,8 +22200,12 @@ msgid "This ticket is closed. Write a new one if you still need help."
 msgstr "This ticket is closed. Write a new one if you still need help."
 
 #: components/app/interface/settings/user/connections/Connections.tsx
-msgid "this ties your Steam account to your Zrzur account. What you play can say something about your beliefs, health or sexuality."
-msgstr "this ties your Steam account to your Zrzur account. What you play can say something about your beliefs, health or sexuality."
+msgid "this ties your Steam account to your Zrzur account. The unlock days show when you played. What you play can say something about your beliefs, health or sexuality."
+msgstr "this ties your Steam account to your Zrzur account. The unlock days show when you played. What you play can say something about your beliefs, health or sexuality."
+
+#: components/app/interface/settings/user/connections/Connections.tsx
+#~ msgid "this ties your Steam account to your Zrzur account. What you play can say something about your beliefs, health or sexuality."
+#~ msgstr "this ties your Steam account to your Zrzur account. What you play can say something about your beliefs, health or sexuality."
 
 #: components/i18n/errors.tsx
 msgid "This user has blocked you."
@@ -23651,6 +23736,7 @@ msgid "Vietnam"
 msgstr "Vietnam"
 
 #: components/app/interface/settings/user/Account.tsx
+#: components/ui/components/features/profiles/ProfileGames.tsx
 msgid "View"
 msgstr "View"
 
@@ -23688,6 +23774,10 @@ msgstr "View full profile"
 #: components/app/interface/settings/shared/Discoverable.tsx
 msgid "View on Discover"
 msgstr "View on Discover"
+
+#: components/modal/modals/SteamGames.tsx
+msgid "View on Steam"
+msgstr "View on Steam"
 
 #: components/app/interface/settings/user/profile/CommunityParts.tsx
 #: components/app/menus/VoiceParticipantContextMenu.tsx
@@ -25714,8 +25804,12 @@ msgid "Your spot"
 msgstr "Your spot"
 
 #: components/app/interface/settings/user/connections/Connections.tsx
-msgid "your Steam name and link, your game count, hours played and your most played games with their achievements, from what Steam shows publicly, and keep them in the EU."
-msgstr "your Steam name and link, your game count, hours played and your most played games with their achievements, from what Steam shows publicly, and keep them in the EU."
+#~ msgid "your Steam name and link, your game count, hours played and your most played games with their achievements, from what Steam shows publicly, and keep them in the EU."
+#~ msgstr "your Steam name and link, your game count, hours played and your most played games with their achievements, from what Steam shows publicly, and keep them in the EU."
+
+#: components/app/interface/settings/user/connections/Connections.tsx
+msgid "your Steam name and link, your game count, hours played, your 10 most played games with their achievement counts, and up to 60 of your latest achievements in those games with their name, description and the day you unlocked them (no time of day). We take this from what Steam shows publicly and keep it in the EU. Game pictures and achievement icons come from Steam and load through Zrzur's servers, so Steam does not see who views your profile."
+msgstr "your Steam name and link, your game count, hours played, your 10 most played games with their achievement counts, and up to 60 of your latest achievements in those games with their name, description and the day you unlocked them (no time of day). We take this from what Steam shows publicly and keep it in the EU. Game pictures and achievement icons come from Steam and load through Zrzur's servers, so Steam does not see who views your profile."
 
 #: components/app/interface/settings/UserSettings.tsx
 msgid "Your subscriptions"
@@ -25804,6 +25898,10 @@ msgstr "Zrzur Assistant can't be reached right now. Try again soon."
 #: components/app/interface/settings/user/appearance/AppearanceMenu.tsx
 #~ msgid "Zrzur Blue Light"
 #~ msgstr "Zrzur Blue Light"
+
+#: components/app/interface/settings/user/connections/Connections.tsx
+msgid "Zrzur can now also show game pictures and up to 60 of your latest achievements with the day you unlocked them (no time of day). The unlock days show when you played. Nothing new shows until you agree."
+msgstr "Zrzur can now also show game pictures and up to 60 of your latest achievements with the day you unlocked them (no time of day). The unlock days show when you played. Nothing new shows until you agree."
 
 #: components/app/interface/settings/user/voice/GameKeysOptions.tsx
 msgid "Zrzur could not start listening for keys on this computer. Your keys work while the Zrzur window is active."
