@@ -142,6 +142,13 @@ export function SpecialEmbed(props: {
           allowfullscreen
           allowtransparency
           frameborder={0}
+          // every player from another site is fenced in: no forms (no fake
+          // sign-in), no way to move this tab elsewhere, no downloads, no
+          // camera, microphone, location or payments; it plays only after
+          // the person presses play (no "autoplay" below)
+          sandbox="allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox allow-presentation"
+          allow="fullscreen; encrypted-media; picture-in-picture; clipboard-write"
+          referrerpolicy="strict-origin-when-cross-origin"
           src={playerUrl()}
         />
       </SizedContent>

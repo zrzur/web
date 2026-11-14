@@ -46,6 +46,12 @@ const PLAYER_ORIGINS = [
   "https://player.kick.com",
   "https://www.mixcloud.com",
   "https://embed.tidal.com",
+  "https://www.loom.com",
+  "https://player.bilibili.com",
+  "https://embed.ted.com",
+  "https://coub.com",
+  "https://store.steampowered.com",
+  "https://www.facebook.com",
 ];
 
 /** Cloudflare Turnstile hosts (sign-up, password reset, sign-in step-up) */

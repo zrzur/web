@@ -90,6 +90,12 @@ const PLAYER_SITE_COMPANIES: Record<string, string> = {
   Kick: "Kick",
   Mixcloud: "Mixcloud",
   Tidal: "Tidal",
+  Loom: "Loom (Atlassian)",
+  Bilibili: "Bilibili",
+  TED: "TED",
+  Coub: "Coub",
+  Steam: "Steam (Valve)",
+  Facebook: "Facebook (Meta)",
 };
 
 /** Name and company of the player behind a consent key */
