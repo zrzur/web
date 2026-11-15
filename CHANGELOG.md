@@ -2,6 +2,12 @@
 
 ## Unreleased
 
+### Invite and bot links show their card (2026-11-15)
+
+* **Chat:** a message that is just a Zrzur invite link shows the server card with **Join**, and a bot link shows the bot card with **Add bot**, in every form the app hands out: `zrzur.cc/{code}`, custom server links, `zrzur.cc/b/{bot}`, and `/invite/{code}` or `/bot/{bot}` on the app. Inside a sentence the link opens the invite or the bot in the app, without the external-link warning. Lookalike hosts stay normal links.
+* The website preview of these links (the app's page with the generic site description) is no longer shown, also on older messages.
+* **Invite card:** an expired or unknown code says so in plain words; a server you are already in says "You're a member" and opens with **Open server**.
+
 ### Profile, redesigned (2026-11-14)
 
 * **Profile card:** 360 px wide with a close button; it ends with the message box and **View full profile**. Add friend sits on the banner's edge. About me ends at four whole lines.
