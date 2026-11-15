@@ -41,7 +41,17 @@ export class SlideDrawer {
   private tTmr: NodeJS.Timeout | null = null;
   private vTmr: NodeJS.Timeout | null = null;
   private lShow = true;
-  private ofs = 0;
+  /** the content is slid aside (the menu shows) */
+  private open = false;
+  /**
+   * How far the content is slid: read from the window only when a swipe or
+   * an animation needs it. Read while the app was being built (enabling the
+   * drawer on phones), it made the browser lay out the whole page at once
+   * and again later, a third of a second on a slow phone.
+   */
+  private get ofs() {
+    return this.open ? -innerWidth : 0;
+  }
 
   private dispose!: () => void;
   private eGet!: Accessor<boolean>;
@@ -197,7 +207,7 @@ export class SlideDrawer {
     const ds = this.drawer.style;
     this.setElState(false);
     if (set) {
-      this.ofs = show ? -innerWidth : 0;
+      this.open = show;
       ds.transition = `transform ${ANIM_MS}ms ease-out`;
       ds.transform = `translateX(${this.dir * this.ofs}px)`;
       this.sSet(show ? SlideState.SHOWING : SlideState.HIDING);
@@ -244,7 +254,7 @@ export class SlideDrawer {
       //Restore show/hide state
       const show = en ? this.lShow : false;
       this.setElState(!en || show);
-      this.ofs = show ? -innerWidth : 0;
+      this.open = show;
       this.eSet(en);
       this.sSet(show ? SlideState.SHOWN : SlideState.HIDDEN);
     }
@@ -264,7 +274,7 @@ export class SlideDrawer {
 
   setShown(show: boolean) {
     if (!this.eGet() || this.touch?.trig || this.tTmr) return false;
-    if ((this.ofs !== 0) !== show) {
+    if (this.open !== show) {
       this.setElState(false);
       this.drawer.style.transform = `translateX(${this.dir * this.ofs}px)`;
       setTimeout(() => this.tfTimer(true, show), 1);
