@@ -20,6 +20,7 @@ import {
   pageMeta,
   roughCount,
   routeOf,
+  sitePreloads,
 } from "./head.mjs";
 import { designSvg, renderPng, serverSvg, siteSvg } from "./og.mjs";
 
@@ -89,8 +90,16 @@ const TYPES = {
  */
 export function contentSecurityPolicy() {
   // what the visitor's browser reaches; API_URL / MEDIA_URL may be internal
-  const publicApi = (env.PUBLIC_API_URL ?? env.API_URL ?? "https://api.zrzur.com").replace(/\/+$/, "");
-  const publicMedia = (env.PUBLIC_MEDIA_URL ?? env.MEDIA_URL ?? "https://cdn.zrzur.com").replace(/\/+$/, "");
+  const publicApi = (
+    env.PUBLIC_API_URL ??
+    env.API_URL ??
+    "https://api.zrzur.com"
+  ).replace(/\/+$/, "");
+  const publicMedia = (
+    env.PUBLIC_MEDIA_URL ??
+    env.MEDIA_URL ??
+    "https://cdn.zrzur.com"
+  ).replace(/\/+$/, "");
   const api = new URL(publicApi);
   const events = `${api.protocol === "https:" ? "wss" : "ws"}://${api.host.replace(/^api\./, "ws.")}`;
   const extra = (env.CONNECT_EXTRA ?? "").split(/\s+/).filter(Boolean);
@@ -148,7 +157,8 @@ async function api(path) {
     headers: {
       accept: "application/json",
       ...(env.ZRZUR_INTERNAL_TOKEN
-        ? { "x-zrzur-internal": env.ZRZUR_INTERNAL_TOKEN } : {}),
+        ? { "x-zrzur-internal": env.ZRZUR_INTERNAL_TOKEN }
+        : {}),
     },
     signal: AbortSignal.timeout(4000),
   });
@@ -204,9 +214,24 @@ async function pageData(route) {
   return undefined;
 }
 
+/** The files this site downloads with the first one (from the same build) */
+function preloadList() {
+  try {
+    return JSON.parse(readFileSync(join(DIST, "site-preloads.json"), "utf8"))[
+      SITE
+    ];
+  } catch {
+    // an older build without the list: the page keeps the app's
+    return undefined;
+  }
+}
+
 let indexHtml;
 const index = () =>
-  (indexHtml ??= readFileSync(join(DIST, "index.html"), "utf8"));
+  (indexHtml ??= sitePreloads(
+    readFileSync(join(DIST, "index.html"), "utf8"),
+    preloadList(),
+  ));
 
 function send(res, status, type, body, headers = {}) {
   res.writeHead(status, { "Content-Type": type, ...SECURITY, ...headers });

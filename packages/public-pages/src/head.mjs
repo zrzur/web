@@ -571,3 +571,39 @@ export function injectHead(html, meta) {
     .replace(/<meta name="description"[^>]*>\s*/i, "")
     .replace(/<\/head>/i, `    ${headTags(meta)}\n  </head>`);
 }
+
+const ENTRY_SCRIPT =
+  /^([ \t]*)<script type="module"[^>]*\ssrc="[^"]*\/assets\/(?:[0-9a-f]{12}\/)?index-[^"]+\.js"[^>]*><\/script>/m;
+const MODULE_PRELOAD = /^[ \t]*<link rel="modulepreload"[^>]*>\n/gm;
+
+/**
+ * The page lists the chat app's files to download with the first one
+ * (client/scripts/preloadApp.mjs). A site needs its own instead: its shell
+ * and page (site-preloads.json from the same build), so the page starts
+ * downloading at once rather than after the first file has run.
+ */
+export function sitePreloads(html, files) {
+  const entry = ENTRY_SCRIPT.exec(html);
+  if (!entry || !files?.length) return html;
+  const indent = entry[1];
+  const links = files
+    .map(
+      (file) =>
+        `${indent}<link rel="modulepreload" crossorigin href="/${file}">\n`,
+    )
+    .join("");
+  const without = html.replace(MODULE_PRELOAD, "");
+  // after the entry script and its stylesheet: the browser asks in this
+  // order, and the entry asks for the language file once it runs
+  const match = ENTRY_SCRIPT.exec(without);
+  let at = match.index + match[0].length;
+  const next = /^\n[ \t]*<link rel="stylesheet"[^>]*>/;
+  for (
+    let more = next.exec(without.slice(at));
+    more;
+    more = next.exec(without.slice(at))
+  )
+    at += more[0].length;
+  if (without[at] === "\n") at += 1;
+  return without.slice(0, at) + links + without.slice(at);
+}
