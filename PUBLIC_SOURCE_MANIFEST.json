@@ -16,8 +16,8 @@
     },
     {
       "path": ".github/dependabot.yml",
-      "sha256": "571e2b4584e9bf7013888205d67fab363c9a228c09473f11e840593896e798f8",
-      "bytes": 445,
+      "sha256": "6acf4c4c761682bbd32786b56133c3ff477aeb81c45406a5b0bd975f4a40c441",
+      "bytes": 833,
       "category": "reviewed-build-and-ci"
     },
     {
@@ -28,26 +28,26 @@
     },
     {
       "path": ".github/workflows/ci.yml",
-      "sha256": "fc59ec0c663edf134a65e180ff51b90d954278db2f53333f60c0091f45d0d059",
-      "bytes": 3628,
+      "sha256": "c351fc5c82bf0b515bc787ebf211be884761a1ffbe229dfc77dedfe68a883454",
+      "bytes": 3951,
       "category": "reviewed-build-and-ci"
     },
     {
       "path": ".github/workflows/e2e.yml",
-      "sha256": "a99d8ef90cee70264c22b4aa61806965dcaf6bd3775849d8cde8630860e71d81",
-      "bytes": 7964,
+      "sha256": "399d6ade68b7d258e4ea3339978cfa00fd3d020a8017c5ef094214ef74e6927a",
+      "bytes": 8265,
       "category": "reviewed-build-and-ci"
     },
     {
       "path": ".github/workflows/images.yml",
-      "sha256": "e864751e56c226741c79952cfa284225b9e7cd3100eedf981815b10c57c1419b",
-      "bytes": 4784,
+      "sha256": "b10d7fac7ae9e8e1dc777d61f4cc6befedc062ac438f72c5e8a5c5c29dea4530",
+      "bytes": 5351,
       "category": "reviewed-build-and-ci"
     },
     {
       "path": ".github/workflows/source-check.yml",
-      "sha256": "ec90d100b61b8828aad99f974005ddb0242ff6851b8afbca10596aae7c1d02e0",
-      "bytes": 912,
+      "sha256": "c588bb72f12bd4d47872ec301d9c8457a6b3d5a0aee08e1031454389a20ebb5c",
+      "bytes": 955,
       "category": "reviewed-build-and-ci"
     },
     {
@@ -340,8 +340,8 @@
     },
     {
       "path": "README.md",
-      "sha256": "4bbf3c85671f1e822914893ea9fb1a435a0a3a3e64e396c069eb6e4c0b440e26",
-      "bytes": 3623,
+      "sha256": "e62ff1c00816eb7c0fb7adfe7322656c442f64e13e01163d967e1a628faf2204",
+      "bytes": 3671,
       "category": "public-documentation"
     },
     {
@@ -718,8 +718,8 @@
     },
     {
       "path": "package.json",
-      "sha256": "179ffe3f186e44efd8f68f302814664ae544bc22503513be189239ef3fd880c8",
-      "bytes": 705,
+      "sha256": "c6e82dc17477355d352adfbfdfce56e0f954279ca17577d902a024797673c3a0",
+      "bytes": 735,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -2536,7 +2536,7 @@
     },
     {
       "path": "packages/client/components/app/interface/settings/user/profile/communityApi.ts",
-      "sha256": "ff281eb3e9ac9e82b7a285b3874735db82730c49c7c4ebeaa9c6b20979821d96",
+      "sha256": "a8161ef784f2da525d5f074363a2c114d3f40708f3b10defbe4a4f4481f4aa4c",
       "bytes": 14413,
       "category": "product-source-or-build-manifest"
     },
@@ -2572,8 +2572,8 @@
     },
     {
       "path": "packages/client/components/app/interface/settings/user/safety/ReportsAndStanding.tsx",
-      "sha256": "51cc4401b57a8dbe136ecaf49ce26a80bdbd03ab55481b2f2bc9eead304d46b3",
-      "bytes": 19085,
+      "sha256": "1d4da512e91f7312da712d9817e5c1510c74f7340a930427f885e50b3782501b",
+      "bytes": 19172,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -3346,8 +3346,8 @@
     },
     {
       "path": "packages/client/components/i18n/catalogs/ar/messages.po",
-      "sha256": "b475aad1f1f9afc19c644e50dcc604839ddd400477ae7318106af2f5de402102",
-      "bytes": 1064323,
+      "sha256": "285fcc2100bb0e3b746c776d3f5e72080623504eaae836d818eca3b9669d27eb",
+      "bytes": 1064477,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -3490,8 +3490,8 @@
     },
     {
       "path": "packages/client/components/i18n/catalogs/de/messages.po",
-      "sha256": "5a3d902e1a7c69127d11e7333ecc32890dac893408444f434e3593c4fbdff0aa",
-      "bytes": 981784,
+      "sha256": "31fc283676860ccfa8c0f4266d87da18a573d3f5d31f5292a3bc8294ef684199",
+      "bytes": 981930,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -3526,8 +3526,8 @@
     },
     {
       "path": "packages/client/components/i18n/catalogs/en/messages.po",
-      "sha256": "49cc5dbbabb0d2d59e96854e77f1d0289981054555bc3f5a35b574c6c9292eac",
-      "bytes": 944737,
+      "sha256": "633870a729db9b0512c2109bb67a92bf3d2901da28c36efad65ea6e31f42721f",
+      "bytes": 944879,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -9400,8 +9400,8 @@
     },
     {
       "path": "packages/client/package.json",
-      "sha256": "66db3db2127a8eba30fe23abfcbda9097961b7f036591827b83e8fef57050e4f",
-      "bytes": 6538,
+      "sha256": "73ddbc16887d60385fadc014df7e4fb3568dabbe784ade47930868a0fb3dfdd5",
+      "bytes": 6568,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -40264,8 +40264,8 @@
     },
     {
       "path": "packages/client/scripts/release-integrity.test.mjs",
-      "sha256": "71d5794bd1a46e2871012b9c8b17151b45b8c20065950e8fe8ee500fae2f6410",
-      "bytes": 6503,
+      "sha256": "e7ee7bd144bc21f484f3cf25f4e8a48223479f2143999138a6caed730c5028e7",
+      "bytes": 7164,
       "category": "synthetic-test-source-or-fixture"
     },
     {

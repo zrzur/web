@@ -2684,8 +2684,8 @@ msgid "Appealed"
 msgstr "Appealed"
 
 #: components/app/interface/settings/user/safety/ReportsAndStanding.tsx
-msgid "Appealing doesn't lift anything by itself. A different reviewer decides."
-msgstr "Appealing doesn't lift anything by itself. A different reviewer decides."
+msgid "Appealing doesn't lift anything by itself. A person looks at the decision again; where we can, it is someone other than the person who made it."
+msgstr "Appealing doesn't lift anything by itself. A person looks at the decision again; where we can, it is someone other than the person who made it."
 
 #: components/app/interface/settings/user/safety/SafetyDashboard.tsx
 msgid "Appeals"

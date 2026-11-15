@@ -15,7 +15,7 @@ jobs:
     name: Publication guard and secret scan
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
         with:
           fetch-depth: 0
           persist-credentials: false
@@ -40,7 +40,7 @@ jobs:
     name: Types, lint, unit tests and build
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
         with:
           persist-credentials: false
       - name: Private submodules (sdk-js)
@@ -48,8 +48,8 @@ jobs:
           SUBMODULE_TOKEN: ${{ secrets.SUBMODULE_TOKEN }}
         run: |
           git -c url."https://x-access-token:${SUBMODULE_TOKEN}@github.com/zrzur/sdk-js".insteadOf="https://github.com/zrzur/sdk-js" submodule update --init --recursive
-      - uses: pnpm/action-setup@v4
-      - uses: actions/setup-node@v4
+      - uses: pnpm/action-setup@b906affcce14559ad1aafd4ab0e942779e9f58b1 # v4
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
         with:
           node-version: 24
           cache: pnpm
@@ -86,6 +86,9 @@ jobs:
       - name: Media tests
         working-directory: packages/client
         run: pnpm run test:media
+      - name: Release info and one version (RELEASE.json = package.json)
+        working-directory: packages/client
+        run: pnpm run test:release
       - name: Production build
         working-directory: packages/client
         env:

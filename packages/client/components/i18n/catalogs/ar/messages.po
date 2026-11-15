@@ -2684,8 +2684,8 @@ msgid "Appealed"
 msgstr "مطعون فيه"
 
 #: components/app/interface/settings/user/safety/ReportsAndStanding.tsx
-msgid "Appealing doesn't lift anything by itself. A different reviewer decides."
-msgstr "تقديم الطعن لا يرفع أي إجراء بحد ذاته. يقرر فيه مراجع آخر."
+msgid "Appealing doesn't lift anything by itself. A person looks at the decision again; where we can, it is someone other than the person who made it."
+msgstr "تقديم الطعن لا يرفع أي إجراء بحد ذاته. ينظر شخصٌ في القرار من جديد، ويكون حيث أمكن شخصًا غير الذي اتخذه."
 
 #: components/app/interface/settings/user/safety/SafetyDashboard.tsx
 msgid "Appeals"
