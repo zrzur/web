@@ -1,3 +1,37 @@
+// relative: the unit tests run without the @revolt aliases
+import {
+  type OwnLinkOptions,
+  parseOwnLink,
+} from "../../../../modal/modals/ownLink";
+
+/** The part of an embed the own-link rule looks at */
+type PreviewEmbed = { type: string; url?: string; originalUrl?: string };
+
+/**
+ * A website preview of one of our own invite or bot links. The link shows
+ * the server card or the bot card; the preview (the app's page, read by the
+ * link check after zrzur.cc sent it there) only repeats generic text.
+ * Read on the client, so old messages are fixed too.
+ */
+export function isOwnLinkPreview(
+  embed: PreviewEmbed,
+  options?: OwnLinkOptions,
+): boolean {
+  if (embed.type !== "Website") return false;
+  const posted = embed.originalUrl || embed.url;
+  return !!posted && !!parseOwnLink(posted, options);
+}
+
+/** The embeds a message shows: all but previews of our own links */
+export function shownEmbeds<T extends { type: string }>(
+  embeds: readonly T[] | null | undefined,
+  options?: OwnLinkOptions,
+): T[] {
+  return (embeds ?? []).filter(
+    (embed) => !isOwnLinkPreview(embed as PreviewEmbed, options),
+  );
+}
+
 /** The part of a message the link-preview rules look at */
 export type PreviewMessage = {
   embeds?: readonly { type: string }[] | null;

@@ -13,8 +13,12 @@ export const remarkLinkify: Plugin = () => (tree) => {
     (
       node: { type: "text"; value: string },
       idx,
-      parent: { children: unknown[] },
+      parent: { type?: string; children: unknown[] },
     ) => {
+      // text that is already a link (GFM autolinks, [text](url)): linking it
+      // again nested an anchor around the invite and bot cards
+      if (parent.type === "link" || parent.type === "linkReference") return;
+
       const links = linkify.match(node.value);
       if (links === null) return; // no matches
 

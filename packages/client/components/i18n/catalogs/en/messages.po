@@ -26383,3 +26383,20 @@ msgstr "We have updated what you agree to when you link Twitch: it now names whe
 #: components/app/interface/settings/user/connections/ServiceCards.tsx
 msgid "{name}'s sign-in page did not open. If you use the Zrzur desktop app, install the latest version from <0>zrzur.com/download</0>, then try again."
 msgstr "{name}'s sign-in page did not open. If you use the Zrzur desktop app, install the latest version from <0>zrzur.com/download</0>, then try again."
+
+#: components/ui/components/features/messaging/elements/Invite.tsx
+msgid "Invalid invite"
+msgstr "Invalid invite"
+
+#: components/ui/components/features/messaging/elements/Invite.tsx
+msgid "Open invite"
+msgstr "Open invite"
+
+#: components/ui/components/features/messaging/elements/Invite.tsx
+msgid "Open this invite to see where it leads."
+msgstr "Open this invite to see where it leads."
+
+#: components/ui/components/features/messaging/elements/Invite.tsx
+msgid "You're a member"
+msgstr "You're a member"
+

@@ -34,6 +34,8 @@ export function BotInvite(props: Props) {
     queryKey: ["bot-invite", props.id],
     // kept by the SDK: every card for this bot shares one request
     queryFn: () => client().bots.fetchPublic(props.id),
+    // a private or deleted bot says so at once
+    retry: false,
 
     refetchInterval: false,
     refetchOnMount: false,
@@ -42,7 +44,10 @@ export function BotInvite(props: Props) {
   }));
 
   return (
-    <Base>
+    <Base
+      data-bot-card
+      data-state={query.isError ? "private" : query.data ? "ready" : "loading"}
+    >
       <Avatar
         size={48}
         src={

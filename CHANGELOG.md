@@ -8,6 +8,13 @@
 * **Asked once:** a link made before shows an "Updated consent" card in Settings. Twitch stays off your profile until you agree; GitHub and Steam Refresh show the card instead of reading the service; Battle.net shows it at the next **Confirm on Battle.net**. Steam links keep what they showed before.
 * **Sign-in page that never opens:** if the page is still here 4 seconds after "Continue to …" or "Confirm on Battle.net" (desktop 26.1.0-beta1 blocks outside sites), the button comes back and the card says the sign-in page did not open, with a link to zrzur.com/download. Before, the button stayed off with no message.
 
+### Invite and bot links show their card (2026-11-15)
+
+* **Chat:** a message that is just a Zrzur invite link shows the server card with **Join**, and a bot link shows the bot card with **Add bot**, in every form the app hands out: `zrzur.cc/{code}`, custom server links, `zrzur.cc/b/{bot}`, and `/invite/{code}` or `/bot/{bot}` on the app. Inside a sentence the link opens the invite or the bot in the app, without the external-link warning. Lookalike hosts stay normal links.
+* The website preview of these links (the app's page with the generic site description) is no longer shown, also on older messages.
+* **Invite card:** an expired or unknown code says so in plain words; a server you are already in says "You're a member" and opens with **Open server**.
+* A pasted link is no longer a link inside a link, so **Join** and **Add bot** on a card no longer also leave the chat.
+
 ### Profile, redesigned (2026-11-14)
 
 * **Profile card:** 360 px wide with a close button; it ends with the message box and **View full profile**. Add friend sits on the banner's edge. About me ends at four whole lines.

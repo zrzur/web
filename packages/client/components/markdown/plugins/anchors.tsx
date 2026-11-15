@@ -7,6 +7,7 @@ import { MessageContextMenu, useMessage } from "@revolt/app";
 import { useClient } from "@revolt/client";
 import { DefaultHost, useInstance } from "@revolt/instance";
 import { useModals } from "@revolt/modal";
+import { parseOwnLink } from "@revolt/modal/modals/ownLink";
 import { paramsFromPathname } from "@revolt/routing";
 import { useState } from "@revolt/state";
 import { Avatar, iconSize } from "@revolt/ui";
@@ -92,6 +93,32 @@ export function RenderAnchor(
       url.protocol !== "tel:"
     ) {
       return <span>{remoteProps.children}</span>;
+    }
+
+    // Our own invite and bot links, in every form (zrzur.cc/{code},
+    // zrzur.cc/b/{id}, …/invite/{code}, …/bot/{id}): the server or bot card
+    // when the message is just the link, else a link that opens it in the app
+    const own = parseOwnLink(url, {
+      appOrigins: [instance.origin, window.location.origin],
+    });
+    if (own) {
+      const plain =
+        Array.isArray(remoteProps.children) &&
+        remoteProps.children[0] === localProps.href &&
+        !localProps.disabled;
+      if (plain && own.kind === "invite") return <Invite code={own.code} />;
+      if (plain && own.kind === "bot") {
+        return <BotInvite id={own.id} permissions={own.permissions} />;
+      }
+      return (
+        <LinkComponent
+          {...remoteProps}
+          class={link()}
+          disabled={localProps.disabled}
+          dest={localProps.href}
+          href={new URL(own.path, location.origin).toString()}
+        />
+      );
     }
 
     // Determine whether it's in our scope
@@ -202,31 +229,8 @@ export function RenderAnchor(
             </LinkComponent>
           </Show>
         );
-      } else if (
-        params.inviteId &&
-        // only display invites if it is just the plain link:
-        Array.isArray(remoteProps.children) &&
-        remoteProps.children[0] === localProps.href &&
-        !localProps.disabled
-      ) {
-        return <Invite code={params.inviteId} />;
-      } else if (
-        params.exactBot &&
-        Array.isArray(remoteProps.children) &&
-        remoteProps.children[0] === localProps.href &&
-        !localProps.disabled
-      ) {
-        const asked = Number(url.searchParams.get("permissions"));
-        return (
-          <BotInvite
-            id={params.botId!}
-            permissions={
-              Number.isSafeInteger(asked) && asked > 0 ? asked : undefined
-            }
-          />
-        );
       } else {
-        // keep the query (a bot link's permissions)
+        // invite and bot links were handled above (parseOwnLink)
         const internalUrl = () =>
           new URL(url.pathname + url.search, location.origin).toString();
 

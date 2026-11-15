@@ -120,9 +120,9 @@ msgstr "{0, plural, zero {لا تثبيتات بعد.} one {تثبيت واحد.
 #~ msgid "{0, plural, one {# member online in these servers right now} other {# members online in these servers right now}}"
 #~ msgstr "{0, plural, zero {لا أحد متصل الآن في هذه السيرفرات} one {عضو واحد متصل الآن في هذه السيرفرات} two {عضوان متصلان الآن في هذه السيرفرات} few {# أعضاء متصلون الآن في هذه السيرفرات} many {# عضواً متصلاً الآن في هذه السيرفرات} other {# عضو متصل الآن في هذه السيرفرات}}"
 
+#. placeholder {0}: invite().memberCount
 #. placeholder {0}: local.channel.recipientIds.size
 #. placeholder {0}: memberCount()
-#. placeholder {0}: props.count
 #: components/app/interface/discover/Cards.tsx
 #: components/app/interface/discover/ReviewQueue.tsx
 #: components/ui/components/features/messaging/elements/Invite.tsx
@@ -10228,6 +10228,10 @@ msgstr "ملاحظة داخلية"
 msgid "Internal note (reviewers only)"
 msgstr "ملاحظة داخلية (للمراجعين فقط)"
 
+#: components/ui/components/features/messaging/elements/Invite.tsx
+msgid "Invalid invite"
+msgstr "دعوة غير صالحة"
+
 #: components/markdown/plugins/mentions.tsx
 msgid "Invalid mention"
 msgstr "إشارة غير صالحة"
@@ -10272,6 +10276,7 @@ msgstr "ادعُ أصدقاءك إلى {0}"
 
 #: components/app/interface/settings/user/bots/ViewBot.tsx
 #: components/modal/modals/CreateInvite.tsx
+#: components/ui/components/features/messaging/elements/Invite.tsx
 #: src/interface/Developers.tsx
 msgid "Invite link"
 msgstr "رابط الدعوة"
@@ -10603,8 +10608,8 @@ msgstr "انضم والميكروفون مفعّل"
 #~ msgstr "انضم إلى زرزور"
 
 #: components/ui/components/features/messaging/elements/Invite.tsx
-msgid "Joined"
-msgstr "انضم"
+#~ msgid "Joined"
+#~ msgstr "انضم"
 
 #: components/app/interface/settings/server/insights/InsightsPage.tsx
 msgctxt "server insights"
@@ -11460,6 +11465,7 @@ msgstr "يؤدي التحميل إلى الاتصال بـ {0}. يتلقّى {0}
 #: components/app/interface/support/OfficialBanner.tsx
 #: components/modal/modals/PromoteServer.tsx
 #: components/modal/modals/ReportContent.tsx
+#: components/ui/components/features/messaging/elements/Invite.tsx
 #: components/ui/components/features/voice/soundboard/SoundboardPicker.tsx
 #: components/ui/components/features/voice/StreamPreviewCard.tsx
 #: src/interface/channels/forum/ForumChannel.tsx
@@ -14841,6 +14847,10 @@ msgstr "افتح منتقي الصور المتحركة"
 msgid "Open in the Steam store"
 msgstr "فتح في متجر Steam"
 
+#: components/ui/components/features/messaging/elements/Invite.tsx
+msgid "Open invite"
+msgstr "افتح الدعوة"
+
 #: src/interface/events/EventCard.tsx
 msgid "Open link"
 msgstr "افتح الرابط"
@@ -14866,6 +14876,7 @@ msgstr "فتح المعاينة"
 msgid "Open reports"
 msgstr "البلاغات المفتوحة"
 
+#: components/ui/components/features/messaging/elements/Invite.tsx
 #: src/interface/Discover.tsx
 msgid "Open server"
 msgstr "افتح السيرفر"
@@ -14915,6 +14926,10 @@ msgstr "افتح لوحة المراجعة"
 #: components/app/interface/settings/user/Keybinds.tsx
 msgid "Open the server's events"
 msgstr "افتح فعاليات السيرفر"
+
+#: components/ui/components/features/messaging/elements/Invite.tsx
+msgid "Open this invite to see where it leads."
+msgstr "افتح هذه الدعوة لترى إلى أين تقود."
 
 #: components/app/menus/MessageContextMenu.tsx
 msgid "Open thread"
@@ -22010,6 +22025,7 @@ msgid "This image is not wide enough for a nameplate; it will be cropped. 1024 �
 msgstr "عرض هذه الصورة لا يناسب لوحة الاسم، وسيُقص جزء منها. الحجم الأنسب 1024 × 192 بكسل."
 
 #: components/i18n/errors.tsx
+#: components/ui/components/features/messaging/elements/Invite.tsx
 msgid "This invite has expired or doesn't exist."
 msgstr "انتهت صلاحية هذه الدعوة أو أنها غير موجودة."
 
@@ -25543,9 +25559,9 @@ msgstr "ستنضم فور موافقة أحد المشرفين."
 msgid "You're #{0} in line"
 msgstr "أنت رقم {0} في الدور"
 
-#: components/app/interface/discover/ServerPage.tsx
-#~ msgid "You're a member"
-#~ msgstr "أنت عضو"
+#: components/ui/components/features/messaging/elements/Invite.tsx
+msgid "You're a member"
+msgstr "أنت عضو"
 
 #: components/i18n/errors.tsx
 msgid "You're already in this call."

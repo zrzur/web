@@ -1,0 +1,9 @@
+{
+  "Invalid invite": ["دعوة غير صالحة", "Ungültige Einladung"],
+  "Invite link": ["رابط دعوة", "Einladungslink"],
+  "Open invite": ["افتح الدعوة", "Einladung öffnen"],
+  "Open this invite to see where it leads.": [
+    "افتح هذه الدعوة لترى إلى أين تقود.",
+    "Öffne diese Einladung, um zu sehen, wohin sie führt."
+  ]
+}

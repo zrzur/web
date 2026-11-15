@@ -4,11 +4,12 @@ import { useLingui } from "@lingui/solid/macro";
 import type { Message } from "@zrzur/sdk/solid";
 import { styled } from "styled-system/jsx";
 
+import { useInstance } from "@revolt/instance";
 import { useModals } from "@revolt/modal";
 import { Embed, IconButton } from "@revolt/ui";
 import { Icon } from "@revolt/ui/icons/Icon";
 
-import { canRemoveLinkPreviews } from "./linkPreviews";
+import { canRemoveLinkPreviews, shownEmbeds } from "./linkPreviews";
 
 /**
  * A message's embeds. Link previews get an X in the corner for the author and
@@ -18,6 +19,7 @@ import { canRemoveLinkPreviews } from "./linkPreviews";
 export function MessageEmbeds(props: { message: Message }) {
   const { t } = useLingui();
   const { openModal, showError } = useModals();
+  const instance = useInstance();
 
   /** Ask first; with Shift held, remove at once */
   function remove(event: { shiftKey?: boolean }) {
@@ -25,8 +27,14 @@ export function MessageEmbeds(props: { message: Message }) {
     else openModal({ type: "remove_link_previews", message: props.message });
   }
 
+  // our own invite and bot links show their card in the text instead
+  const embeds = () =>
+    shownEmbeds(props.message.embeds, {
+      appOrigins: [instance.origin, window.location.origin],
+    });
+
   return (
-    <For each={props.message.embeds}>
+    <For each={embeds()}>
       {(embed) => (
         <Show
           when={embed.type !== "Text" && canRemoveLinkPreviews(props.message)}
