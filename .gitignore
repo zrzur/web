@@ -66,3 +66,6 @@ test-results/
 playwright-report/
 coverage/
 *.har
+
+# browser e2e tests are internal (owner, 2026-11-15); kept in internal/test-env/repo-e2e
+/e2e/
