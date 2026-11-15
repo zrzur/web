@@ -22,7 +22,8 @@ import {
 import { useError } from "@revolt/i18n";
 import { LoadingScreen, useSnackbar } from "@revolt/ui";
 
-import Instance, { _newClient } from "./Instance";
+import { takeEarlyConfig } from "./earlyConfig";
+import Instance, { type RevoltConfig, _newClient } from "./Instance";
 
 /** Comparison origin only — never used as a connection default. */
 export const StoatOrigin = new URL(`https://${STOAT_HOST}`).origin;
@@ -100,7 +101,12 @@ export function InstanceContext(props: { children?: JSXElement }) {
       // Protocol path `.well-known/stoat` is compatibility-critical; still validate api URL.
       assertAllowedServiceUrl(appCfg.api, "instance discovery api");
 
-      const cli = _newClient(appCfg.api);
+      // the configuration the first code asked for (earlyConfig.ts); if
+      // that failed, the client asks again below
+      const early = await takeEarlyConfig<RevoltConfig>(appCfg.api)?.catch(
+        () => undefined,
+      );
+      const cli = _newClient(appCfg.api, early);
       // too many requests: wait as long as the server asks, then try again,
       // instead of leaving the loading screen up for good
       for (let attempt = 0; ; attempt++) {
