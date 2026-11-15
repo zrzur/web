@@ -4324,14 +4324,14 @@
     },
     {
       "path": "packages/client/components/markdown/plugins/anchors.dom.test.tsx",
-      "sha256": "6a1ba27f4acc44c32c5006007fe470f0fd5ef019d96e9edf682dfc11bcde3a76",
-      "bytes": 5212,
+      "sha256": "2f7975fc75ca52ef7610be69230ff2fe36e0e4301da84404d9097c3dff1b752f",
+      "bytes": 6938,
       "category": "synthetic-test-source-or-fixture"
     },
     {
       "path": "packages/client/components/markdown/plugins/anchors.tsx",
-      "sha256": "c2e13d41403bc062a2443f0e55ef07111946fc2ef5507b760724d4b75b98d473",
-      "bytes": 9833,
+      "sha256": "b1a2e9c6499caf801f659b1f33f1d1f4853d57c0fa524b1dff5d1ea2ce26de49",
+      "bytes": 10034,
       "category": "product-source-or-build-manifest"
     },
     {
