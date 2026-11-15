@@ -262,8 +262,8 @@
     },
     {
       "path": "CHANGELOG.md",
-      "sha256": "c865f74948e881b67010ec5e79143b1a26023368e1b7a8d9b40a5776f7677600",
-      "bytes": 153367,
+      "sha256": "d1d558e7f0a1e3a05aef4a1053ab19916ed5a5e6b68d672d9030b1069d5d9128",
+      "bytes": 153519,
       "category": "public-documentation"
     },
     {
@@ -5362,8 +5362,8 @@
     },
     {
       "path": "packages/client/components/rtc/state.tsx",
-      "sha256": "c0cbabcdabf56335ea4bd7c8a8278aa973c494fd65f480a4f96e1b9dc5bba358",
-      "bytes": 60210,
+      "sha256": "11064e0a276278ecd1e1434b325feb085fe0cbe78dd495e43ccde1110e43f2b3",
+      "bytes": 61529,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -6982,8 +6982,8 @@
     },
     {
       "path": "packages/client/components/ui/components/features/voice/ringing/CallRinging.tsx",
-      "sha256": "aa5b708d728623a9ffe0e77ff4027b216740f05f9137a6224cb9ac2458915277",
-      "bytes": 10868,
+      "sha256": "66554c5cb066cd7303b0c39b1ebfef9f0f87af00b8c2d51b919b1a822de5df79",
+      "bytes": 10900,
       "category": "product-source-or-build-manifest"
     },
     {
