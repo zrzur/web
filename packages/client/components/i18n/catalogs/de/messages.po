@@ -2684,8 +2684,8 @@ msgid "Appealed"
 msgstr "Einspruch eingelegt"
 
 #: components/app/interface/settings/user/safety/ReportsAndStanding.tsx
-msgid "Appealing doesn't lift anything by itself. A different reviewer decides."
-msgstr "Ein Einspruch hebt nichts von selbst auf. Eine andere prüfende Person entscheidet."
+msgid "Appealing doesn't lift anything by itself. A person looks at the decision again; where we can, it is someone other than the person who made it."
+msgstr "Ein Einspruch hebt nichts von selbst auf. Ein Mensch prüft die Entscheidung erneut; wo möglich, ist es jemand anderes als die Person, die sie getroffen hat."
 
 #: components/app/interface/settings/user/safety/SafetyDashboard.tsx
 msgid "Appeals"
