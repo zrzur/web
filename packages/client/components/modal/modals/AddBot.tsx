@@ -32,6 +32,21 @@ import {
   inviteQuery,
   toggleBit,
 } from "./addBotPermissions";
+import {
+  Allow,
+  Body,
+  BotName,
+  Divider,
+  Dots,
+  Facts,
+  Hint,
+  Lead,
+  NameLine,
+  Pair,
+  Panel,
+  PanelTitle,
+  Who,
+} from "./consentParts";
 import { usePermissionTitles } from "./permissionTitles";
 
 /** Permissions that let a bot change the server or remove people */
@@ -382,136 +397,6 @@ export function AddBotModal(props: DialogProps & Modals & { type: "add_bot" }) {
   );
 }
 
-const Body = styled("div", {
-  base: { display: "flex", flexDirection: "column", gap: "16px", minWidth: 0 },
-});
-
-const Pair = styled("div", {
-  base: {
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-    gap: "16px",
-    paddingBlockStart: "8px",
-  },
-});
-
-const Dots = styled("div", {
-  base: {
-    display: "flex",
-    gap: "5px",
-    "& span": {
-      width: "5px",
-      height: "5px",
-      borderRadius: "50%",
-      background: "color-mix(in srgb, var(--z-accent) 70%, transparent)",
-    },
-    "& span:nth-child(2)": { opacity: 0.7 },
-    "& span:nth-child(3)": { opacity: 0.45 },
-  },
-});
-
-const Who = styled("div", {
-  base: {
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center",
-    gap: "4px",
-    textAlign: "center",
-    minWidth: 0,
-  },
-});
-
-const NameLine = styled("div", {
-  base: {
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-    flexWrap: "wrap",
-    gap: "8px",
-    minWidth: 0,
-  },
-});
-
-const BotName = styled("h2", {
-  base: {
-    margin: 0,
-    fontSize: "20px",
-    lineHeight: "28px",
-    fontWeight: 700,
-    color: "var(--z-fg-primary)",
-    overflowWrap: "anywhere",
-  },
-});
-
-const Lead = styled("p", {
-  base: {
-    margin: 0,
-    fontSize: "14px",
-    lineHeight: "20px",
-    color: "var(--z-fg-secondary)",
-    overflowWrap: "anywhere",
-  },
-});
-
-const Panel = styled("div", {
-  base: {
-    display: "flex",
-    flexDirection: "column",
-    gap: "12px",
-    padding: "16px",
-    borderRadius: "var(--z-radius-md, 14px)",
-    background: "var(--z-bg-nav, var(--z-bg-sidebar))",
-    border: "1px solid var(--z-border-subtle)",
-    minWidth: 0,
-  },
-});
-
-const PanelTitle = styled("div", {
-  base: {
-    fontSize: "14px",
-    fontWeight: 650,
-    color: "var(--z-fg-primary)",
-  },
-});
-
-const Allow = styled("ul", {
-  base: {
-    display: "flex",
-    flexDirection: "column",
-    gap: "8px",
-    margin: 0,
-    padding: 0,
-    listStyle: "none",
-    "& li": {
-      display: "flex",
-      alignItems: "center",
-      gap: "10px",
-      fontSize: "14px",
-      color: "var(--z-fg-primary)",
-      "--z-icon-color": "var(--z-success, var(--z-accent))",
-    },
-  },
-});
-
-const Divider = styled("hr", {
-  base: {
-    width: "100%",
-    margin: "4px 0",
-    border: "none",
-    borderTop: "1px solid var(--z-border-subtle)",
-  },
-});
-
-const Hint = styled("p", {
-  base: {
-    margin: 0,
-    fontSize: "12px",
-    lineHeight: "16px",
-    color: "var(--z-fg-muted)",
-  },
-});
-
 const description = cva({
   base: {
     maxHeight: "96px",
@@ -600,25 +485,5 @@ const Legend = styled("div", {
     fontSize: "12px",
     color: "var(--z-fg-muted)",
     "--z-icon-color": "var(--z-status-warning)",
-  },
-});
-
-const Facts = styled("ul", {
-  base: {
-    display: "flex",
-    flexDirection: "column",
-    gap: "8px",
-    margin: 0,
-    padding: 0,
-    listStyle: "none",
-    "& li": {
-      display: "flex",
-      alignItems: "center",
-      gap: "8px",
-      fontSize: "12px",
-      lineHeight: "16px",
-      color: "var(--z-fg-muted)",
-      "--z-icon-color": "var(--z-fg-muted)",
-    },
   },
 });

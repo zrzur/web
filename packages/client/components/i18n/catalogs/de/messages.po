@@ -4959,6 +4959,7 @@ msgstr "clips"
 #: components/plugins/PluginHostRoot.tsx
 #: components/ui/components/design/Dialog.tsx
 #: components/ui/components/features/profiles/ProfileActions.tsx
+#: src/interface/OAuth.tsx
 msgid "Close"
 msgstr "Schließen"
 
@@ -16791,6 +16792,7 @@ msgid "Register a command from your bot to see it here."
 msgstr "Melde einen Befehl von deinem Bot an, damit er hier erscheint."
 
 #: components/modal/modals/AddBot.tsx
+#: src/interface/OAuth.tsx
 msgid "Registered since <0/>"
 msgstr "Seit <0/> registriert"
 
@@ -21725,6 +21727,7 @@ msgid "This bot is not available in this channel."
 msgstr "Dieser Bot ist in diesem Kanal nicht verfügbar."
 
 #: components/modal/modals/AddBot.tsx
+#: src/interface/OAuth.tsx
 msgid "This bot is not verified by Zrzur."
 msgstr "Dieser Bot ist nicht von Zrzur verifiziert."
 
@@ -23928,7 +23931,6 @@ msgid "View currently active bug reports here."
 msgstr "Aktuelle Fehlerberichte werden hier aufgelistet."
 
 #: components/app/menus/UserContextMenu.tsx
-#: components/ui/components/features/profiles/ProfileActions.tsx
 msgid "View full profile"
 msgstr "Vollständiges Profil anzeigen"
 
@@ -26252,6 +26254,7 @@ msgid "Zrzur title bar"
 msgstr "Zrzur-Titelleiste"
 
 #: components/modal/modals/AddBot.tsx
+#: src/interface/OAuth.tsx
 msgid "Zrzur verified who runs this bot."
 msgstr "Zrzur hat überprüft, wer diesen Bot betreibt."
 

@@ -4959,6 +4959,7 @@ msgstr "مقاطع"
 #: components/plugins/PluginHostRoot.tsx
 #: components/ui/components/design/Dialog.tsx
 #: components/ui/components/features/profiles/ProfileActions.tsx
+#: src/interface/OAuth.tsx
 msgid "Close"
 msgstr "إغلاق"
 
@@ -16791,6 +16792,7 @@ msgid "Register a command from your bot to see it here."
 msgstr "سجّل أمرًا من بوتك ليظهر هنا."
 
 #: components/modal/modals/AddBot.tsx
+#: src/interface/OAuth.tsx
 msgid "Registered since <0/>"
 msgstr "مسجّل منذ <0/>"
 
@@ -21725,6 +21727,7 @@ msgid "This bot is not available in this channel."
 msgstr "هذا البوت غير متاح في هذه القناة."
 
 #: components/modal/modals/AddBot.tsx
+#: src/interface/OAuth.tsx
 msgid "This bot is not verified by Zrzur."
 msgstr "هذا البوت غير موثّق من زرزور."
 
@@ -23928,7 +23931,6 @@ msgid "View currently active bug reports here."
 msgstr "اطّلع هنا على بلاغات الأخطاء المفتوحة حاليًا."
 
 #: components/app/menus/UserContextMenu.tsx
-#: components/ui/components/features/profiles/ProfileActions.tsx
 msgid "View full profile"
 msgstr "عرض الملف الشخصي كاملًا"
 
@@ -26252,6 +26254,7 @@ msgid "Zrzur title bar"
 msgstr "شريط عنوان زرزور"
 
 #: components/modal/modals/AddBot.tsx
+#: src/interface/OAuth.tsx
 msgid "Zrzur verified who runs this bot."
 msgstr "تحقّق زرزور ممّن يدير هذا البوت."
 

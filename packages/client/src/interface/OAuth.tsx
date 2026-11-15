@@ -11,6 +11,7 @@ import {
 import { Trans, useLingui } from "@lingui/solid/macro";
 import type { API } from "@zrzur/sdk/solid";
 import { styled } from "styled-system/jsx";
+import { decodeTime } from "ulid";
 
 import {
   InteractionError,
@@ -20,9 +21,25 @@ import { useScopeText } from "@revolt/app/interface/settings/user/oauthScopes";
 import { useClient } from "@revolt/client";
 import { useError } from "@revolt/i18n";
 import { useModals } from "@revolt/modal";
-import { Navigate, useLocation } from "@revolt/routing";
+import {
+  Allow,
+  Body,
+  BotName,
+  Divider,
+  Dots,
+  Facts,
+  Hint,
+  Lead,
+  NameLine,
+  Pair,
+  Panel,
+  PanelTitle,
+  Who,
+} from "@revolt/modal/modals/consentParts";
+import { Navigate, useLocation, useNavigate } from "@revolt/routing";
 import { useState } from "@revolt/state";
-import { Avatar, FloatingSelect, MenuItem } from "@revolt/ui";
+import { Avatar, Dialog, FloatingSelect, MenuItem, Time } from "@revolt/ui";
+import { BotLabel } from "@revolt/ui/components/features/profiles/BotLabel";
 import { Icon } from "@revolt/ui/icons/Icon";
 
 /** Readable names of the permission bits an app may ask for */
@@ -87,6 +104,7 @@ function Consent() {
   const client = useClient();
   const location = useLocation();
   const permissionNames = usePermissionNames();
+  const navigate = useNavigate();
   const params = () => new URLSearchParams(location.search);
 
   const [preview] = createResource(
@@ -146,81 +164,135 @@ function Consent() {
     }
   }
 
+  const cancel = () => {
+    if (!busy() && preview()) void decide(false);
+  };
+
+  // the same dialog, parts and order as adding a bot (AddBot.tsx)
   return (
-    <Card>
-      <Switch>
-        <Match when={preview.loading}>
-          <Muted>
+    <Switch>
+      <Match when={preview.loading}>
+        <Dialog size="sm" show onClose={() => navigate("/app")}>
+          <Lead>
             <Trans>Loading…</Trans>
-          </Muted>
-        </Match>
-        <Match when={failure()}>
-          <Icon name="warning" size={28} />
-          <h1>
-            <Trans>Can't continue</Trans>
-          </h1>
-          <ErrorText role="alert">{failure()}</ErrorText>
-        </Match>
-        <Match when={preview()}>
-          {(data) => (
-            <>
-              <Header>
+          </Lead>
+        </Dialog>
+      </Match>
+      <Match when={failure()}>
+        <Dialog
+          size="sm"
+          show
+          onClose={() => navigate("/app")}
+          actions={[{ text: <Trans>Close</Trans> }]}
+        >
+          <Body>
+            <Who>
+              <Icon name="warning" size={28} />
+              <BotName>
+                <Trans>Can't continue</Trans>
+              </BotName>
+              <Lead role="alert">{failure()}</Lead>
+            </Who>
+          </Body>
+        </Dialog>
+      </Match>
+      <Match when={preview()}>
+        {(data) => (
+          <Dialog
+            size="sm"
+            show
+            onClose={cancel}
+            isDisabled={busy()}
+            actions={[
+              {
+                text: <Trans>Cancel</Trans>,
+                onClick: () => {
+                  cancel();
+                  return false;
+                },
+              },
+              {
+                text: <Trans>Authorize</Trans>,
+                onClick: () => {
+                  void decide(true);
+                  return false;
+                },
+                isDisabled: busy() || (installs() && !server()),
+                isLoading: busy(),
+              },
+            ]}
+          >
+            <Body data-oauth-consent>
+              <Pair aria-hidden="true">
                 <Avatar
                   size={64}
                   src={
                     client().users.get(data().application._id)
-                      ?.animatedAvatarURL
+                      ?.animatedAvatarURL ??
+                    `${client().options.baseURL}/users/${data().application._id}/default_avatar`
                   }
                   fallback={data().application.username}
                 />
-                <h1>
-                  {data().application.display_name ??
-                    data().application.username}
-                  <Show when={data().verified}>
-                    {" "}
-                    <Icon name="seal-check" size={18} />
-                  </Show>
-                </h1>
-                <Muted>
+                <Dots>
+                  <span />
+                  <span />
+                  <span />
+                </Dots>
+                <Avatar
+                  size={64}
+                  src={client().user?.animatedAvatarURL}
+                  fallback={
+                    client().user?.displayName ?? client().user?.username
+                  }
+                />
+              </Pair>
+              <Who>
+                <NameLine>
+                  <BotName>
+                    {data().application.display_name ??
+                      data().application.username}
+                  </BotName>
+                  <BotLabel verified={data().verified} />
+                </NameLine>
+                <Lead>
                   <Trans>wants to access your Zrzur account</Trans>
-                </Muted>
-              </Header>
+                </Lead>
+              </Who>
 
-              <Show when={data().description}>
-                <Description>{data().description}</Description>
-              </Show>
-
-              <Section>
-                <h2>
+              <Panel>
+                <PanelTitle>
                   <Trans>This will allow it to:</Trans>
-                </h2>
-                <ul>
+                </PanelTitle>
+                <Allow>
                   <For each={data().scopes}>
                     {(scope) => (
                       <li>
-                        <Icon name="check" size={16} />
+                        <Icon name="check-circle" size={18} />
                         {scopeText(scope)}
                       </li>
                     )}
                   </For>
-                </ul>
-              </Section>
+                </Allow>
 
-              <Show when={installs()}>
-                <Section>
+                <Show when={data().description}>
+                  <Hint>{data().description}</Hint>
+                </Show>
+
+                <Show when={installs()}>
+                  <Divider />
                   <label for="oauth-server">
-                    <h2>
+                    <PanelTitle>
                       <Trans>Add to server</Trans>
-                    </h2>
+                    </PanelTitle>
                   </label>
                   <Show
                     when={data().servers?.length}
                     fallback={
-                      <Muted>
+                      <Hint>
                         <Trans>
                           You don't manage any server it can be added to.
                         </Trans>
-                      </Muted>
+                      </Hint>
                     }
                   >
                     <FloatingSelect
@@ -248,66 +320,75 @@ function Consent() {
                       );
                       return (
                         <>
-                          <h2>
+                          <PanelTitle>
                             <Trans>The bot's permissions there:</Trans>
-                          </h2>
-                          <ul>
+                          </PanelTitle>
+                          <Allow>
                             <For each={listed}>
                               {(name) => (
                                 <li>
-                                  <Icon name="shield" size={16} />
+                                  <Icon name="shield" size={18} />
                                   {name}
                                 </li>
                               )}
                             </For>
                             <Show when={other}>
                               <li>
-                                <Icon name="shield" size={16} />
+                                <Icon name="shield" size={18} />
                                 {t`Other permissions`}
                               </li>
                             </Show>
-                          </ul>
+                          </Allow>
                         </>
                       );
                     }}
                   </Show>
-                </Section>
-              </Show>
+                </Show>
 
-              <Muted>
-                <Trans>
-                  After you decide you will go to{" "}
-                  {new URL(data().redirect_uri).host}. You can revoke this at
-                  any time under Connected apps.
-                </Trans>
-              </Muted>
+                <Divider />
+                <Facts>
+                  <li>
+                    <Icon name="shield-check" size={16} />
+                    <Show
+                      when={data().verified}
+                      fallback={
+                        <Trans>This bot is not verified by Zrzur.</Trans>
+                      }
+                    >
+                      <Trans>Zrzur verified who runs this bot.</Trans>
+                    </Show>
+                  </li>
+                  <li>
+                    <Icon name="arrow-square-out" size={16} />
+                    <Trans>
+                      After you decide you will go to{" "}
+                      {new URL(data().redirect_uri).host}. You can revoke this
+                      at any time under Connected apps.
+                    </Trans>
+                  </li>
+                  <li>
+                    <Icon name="clock" size={16} />
+                    <Trans>
+                      Registered since{" "}
+                      <Time
+                        format="calendar"
+                        value={decodeTime(data().application._id)}
+                      />
+                    </Trans>
+                  </li>
+                </Facts>
+              </Panel>
 
               <Show when={error()}>
-                <ErrorText role="alert">{error()}</ErrorText>
+                <Lead role="alert" style={{ color: "var(--z-danger)" }}>
+                  {error()}
+                </Lead>
               </Show>
-
-              <Actions>
-                <Button
-                  type="button"
-                  disabled={busy()}
-                  onClick={() => decide(false)}
-                >
-                  {t`Cancel`}
-                </Button>
-                <Button
-                  type="button"
-                  data-primary=""
-                  disabled={busy() || (installs() && !server())}
-                  onClick={() => decide(true)}
-                >
-                  {t`Authorize`}
-                </Button>
-              </Actions>
-            </>
-          )}
-        </Match>
-      </Switch>
-    </Card>
+            </Body>
+          </Dialog>
+        )}
+      </Match>
+    </Switch>
   );
 }
 
@@ -339,88 +420,3 @@ const Base = styled("main", {
     color: "var(--z-fg-primary)",
   },
 });
-
-const Card = styled("section", {
-  base: {
-    width: "min(100%, 460px)",
-    height: "fit-content",
-    padding: "24px",
-    borderRadius: "var(--z-radius, 12px)",
-    background: "var(--z-card-bg)",
-    boxShadow: "var(--z-card-lift)",
-    border: "1px solid var(--z-btn-surface-border)",
-    display: "flex",
-    flexDirection: "column",
-    gap: "16px",
-    "&[data-wide]": { width: "min(100%, 640px)" },
-    "& h1": { fontSize: "20px", fontWeight: 700, margin: 0 },
-    "& h2": {
-      fontSize: "13px",
-      fontWeight: 700,
-      color: "var(--z-fg-secondary)",
-      margin: 0,
-    },
-    "& ul": {
-      listStyle: "none",
-      padding: 0,
-      margin: 0,
-      display: "flex",
-      flexDirection: "column",
-      gap: "8px",
-    },
-    "& li": { display: "flex", alignItems: "center", gap: "8px" },
-  },
-});
-
-const Header = styled("div", {
-  base: {
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center",
-    gap: "8px",
-    textAlign: "center",
-  },
-});
-
-const Description = styled("p", {
-  base: { color: "var(--z-fg-secondary)", margin: 0, overflowWrap: "anywhere" },
-});
-
-const Section = styled("div", {
-  base: { display: "flex", flexDirection: "column", gap: "10px" },
-});
-
-const Actions = styled("div", {
-  base: { display: "flex", justifyContent: "flex-end", gap: "8px" },
-});
-
-const Button = styled("button", {
-  base: {
-    minHeight: "36px",
-    paddingInline: "16px",
-    borderRadius: "var(--z-radius, 8px)",
-    background: "var(--z-bg-input)",
-    color: "var(--z-fg-primary)",
-    border: "1px solid var(--z-btn-surface-border)",
-    fontWeight: 600,
-    cursor: "pointer",
-    "&[data-primary]": {
-      background: "var(--z-accent-fill, var(--z-accent))",
-      color: "var(--z-on-accent)",
-      borderColor: "transparent",
-    },
-    "&[data-danger]": { color: "var(--z-danger)" },
-    _disabled: { opacity: 0.5, cursor: "not-allowed" },
-    "&:active": { boxShadow: "var(--z-btn-pressed)" },
-    _focusVisible: {
-      outline: "2px solid var(--z-focus)",
-      outlineOffset: "2px",
-    },
-  },
-});
-
-const Muted = styled("span", {
-  base: { color: "var(--z-fg-muted)", fontSize: "13px" },
-});
-
-const ErrorText = styled("div", { base: { color: "var(--z-danger)" } });
