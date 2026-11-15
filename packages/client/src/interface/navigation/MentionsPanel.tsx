@@ -176,6 +176,7 @@ const Scrim = styled("div", {
   base: {
     position: "fixed",
     inset: 0,
+    bottom: "var(--z-screen-bottom, 0px)",
     zIndex: 998,
     background: "rgb(6 8 12 / 0.35)",
     _phone: { background: "var(--z-scrim, rgb(6 8 12 / 0.6))" },
@@ -193,7 +194,7 @@ const Frame = styled("div", {
     translate: "-50% -50%",
     _phone: {
       top: "auto",
-      bottom: 0,
+      bottom: "var(--z-screen-bottom, 0px)",
       left: 0,
       right: 0,
       translate: "none",

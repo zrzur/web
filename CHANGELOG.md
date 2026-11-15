@@ -2,6 +2,10 @@
 
 ## Unreleased
 
+### Installed app on iPhone: the screen is used to its bottom edge (2026-11-16)
+
+* iOS 26 lays an app installed from the Home Screen out in a box that stops short of the bottom by the height of the status bar. The tab bar, sheets, dialogs and notices ended that much too high with a dead band below, and the message box sat above the keyboard with a gap. The app now measures the missing height and reaches the real bottom edge; the correction is 0 wherever the layout is already right.
+
 ### Creator Studio, rebuilt (2026-11-15)
 
 * **Studio home** (`/designs/studio`): a small head instead of the big title, one **New design** button, a strip of numbers (published, in review, drafts, people wearing your designs, your design limit), what waits for you on top with the reviewer's note, a tab for every state (drafts, in review, needs you, published, withdrawn), search and a type filter, and one list.

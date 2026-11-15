@@ -487,10 +487,10 @@ const Scrim = styled("div", {
     top: 0,
     left: 0,
     right: 0,
-    bottom: 0,
+    bottom: "var(--z-screen-bottom, 0px)",
     position: "fixed",
     zIndex: "998",
-    maxHeight: "100%",
+    maxHeight: "calc(100% + var(--viewport-deficit, 0px))",
     paddingBottom: "env(keyboard-inset-height)",
 
     animationName: "scrimFadeIn",

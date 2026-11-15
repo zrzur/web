@@ -76,6 +76,11 @@ body {
   --z-safe-right: env(safe-area-inset-right, 0px);
   --z-safe-bottom: env(safe-area-inset-bottom, 0px);
   --z-safe-left: env(safe-area-inset-left, 0px);
+  /* Where the screen really ends. iOS 26 lays an installed app out in a box
+     that stops short of the bottom by the status bar's height
+     (--viewport-deficit, measured in shortViewport.ts; 0 everywhere else).
+     Anything anchored to the bottom of the screen uses this, not 0. */
+  --z-screen-bottom: calc(0px - var(--viewport-deficit, 0px));
 }
 
 /* Phones: room above the first row of every screen (screen headers, the
@@ -94,7 +99,10 @@ body {
   top: calc(var(--z-safe-top) + var(--viewport-offset-top, 0px));
   left: var(--z-safe-left);
   right: var(--z-safe-right);
-  bottom: max(var(--z-safe-bottom), var(--keyboard-inset, 0px));
+  bottom: calc(
+    max(var(--z-safe-bottom), var(--keyboard-inset, 0px)) +
+      var(--z-screen-bottom)
+  );
   background: var(--z-bg-frame, #0d0e16);
 }
 
