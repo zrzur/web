@@ -467,7 +467,11 @@ class Voice {
         //@ts-expect-error voiceIsolation is not yet standard, but it supported by livekit and most chromium based browsers, including electron.
         track.constraints.voiceIsolation = capture.voiceIsolation;
         track.constraints.channelCount = capture.channelCount;
-        void track.restartTrack();
+        void track
+          .restartTrack()
+          .catch((error: unknown) =>
+            console.warn("[rtc] microphone not restarted", error),
+          );
       },
       // high quality audio changes the encoder (stereo, DTX)
       republish: () => {
@@ -678,9 +682,16 @@ class Voice {
     room.addListener("localTrackPublished", (pub) => {
       if (pub.audioTrack && pub.audioTrack.source === TrackSource.Microphone) {
         if (!pub.audioTrack.getProcessor()) {
-          pub.audioTrack?.setProcessor(
-            (this.voiceProcessor = new lk.VoiceProcessor(this.#settings)),
-          );
+          void pub.audioTrack
+            .setProcessor(
+              (this.voiceProcessor = new lk.VoiceProcessor(this.#settings)),
+            )
+            .catch((error: unknown) => {
+              // the call ended while the filters were starting (the
+              // connection is closed): nothing is lost
+              if (this.room() === room && room.state === RoomState.Connected)
+                console.warn("[rtc] voice filters not applied", error);
+            });
         }
       }
     });

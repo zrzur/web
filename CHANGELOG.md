@@ -17,6 +17,7 @@
 * One connection to the voice server instead of two (`singlePeerConnection`, the voice server runs LiveKit 1.13).
 * Video and screen shares are received at the size they are shown, and not at all while hidden; senders stop encoding sizes nobody watches (`adaptiveStream`, `dynacast`). Less bandwidth, CPU and battery in camera and screen share calls.
 * Closing the screen share picker without choosing is no longer reported as an error.
+* Fixed: hanging up while the voice filters or a microphone restart were starting left an unhandled "replaceTrack … peer connection is closed" error.
 * Fixed: hanging up right after joining could throw "Failed to construct 'AudioWorkletNode'" (the noise filter was made on an audio context that had closed). Nothing is built on a closed context, and a noise filter that cannot be made leaves the microphone working without it.
 
 ### Soundboard: no page reload during a call (2026-11-15)
