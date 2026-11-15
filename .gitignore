@@ -69,3 +69,6 @@ coverage/
 
 # browser e2e tests are internal (owner, 2026-11-15); kept in internal/test-env/repo-e2e
 /e2e/
+/packages/client/e2e/
+/packages/client/playwright.config.ts
+/.mise/tasks/test/e2e/
