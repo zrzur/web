@@ -27413,10 +27413,6 @@ msgid "Crescent Seat"
 msgstr "Mondsichel"
 
 #: components/ui/components/features/profiles/pack/labels.generated.ts
-msgid "Crossed Axes"
-msgstr "Gekreuzte Äxte"
-
-#: components/ui/components/features/profiles/pack/labels.generated.ts
 msgid "Crossed Blades"
 msgstr "Gekreuzte Klingen"
 
@@ -28089,10 +28085,6 @@ msgid "Rose Fall"
 msgstr "Rosenregen"
 
 #: components/ui/components/features/profiles/pack/labels.generated.ts
-msgid "Round Shield"
-msgstr "Rundschild"
-
-#: components/ui/components/features/profiles/pack/labels.generated.ts
 msgid "Rune Circle"
 msgstr "Runenkreis"
 
@@ -28127,10 +28119,6 @@ msgstr "Fischschwarm"
 #: components/ui/components/features/profiles/pack/labels.generated.ts
 msgid "Scoops"
 msgstr "Eiskugeln"
-
-#: components/ui/components/features/profiles/pack/labels.generated.ts
-msgid "Shield Wall"
-msgstr "Schildwall"
 
 #: components/ui/components/features/profiles/pack/labels.generated.ts
 msgid "Ship's Wheel"

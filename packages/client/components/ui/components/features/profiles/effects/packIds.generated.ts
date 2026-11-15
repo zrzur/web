@@ -29,7 +29,6 @@ export const PACK_EFFECT_IDS = [
   "button-mash",
   "tyre-smoke",
   "goal-bounce",
-  "shield-wall",
   "blade-flight",
   "jasmine-fall",
   "rose-fall",

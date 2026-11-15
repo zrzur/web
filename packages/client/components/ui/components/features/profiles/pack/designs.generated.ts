@@ -79,8 +79,6 @@ export const PACK_DECORATIONS = [
   "speedometer",
   "pitch-ring",
   "scarf-ring",
-  "round-shield",
-  "crossed-axes",
   "blade-ring",
   "smoke-ring",
   "jasmine-ring",

@@ -885,31 +885,6 @@ export const MAKERS: [string, (K: PackKit) => PackMade][] = [
       },
     };
   }],
-  ["north", (K) => ({
-    shapes: {
-      minishield: {
-        reach: [1, 1],
-        body: 0.85,
-        draw(c, t) {
-          c.beginPath(); c.arc(0, 0, 0.94, 0, K.TAU); K.solid(c, "#B8834E", "#1A120C", 0.09);
-          for (let i = 0; i < 4; i++) { c.beginPath(); c.moveTo(0, 0); c.arc(0, 0, 0.8, (i * K.TAU) / 4, ((i + 1) * K.TAU) / 4); c.closePath(); c.fillStyle = i % 2 ? t[2] : t[0]; c.fill(); }
-          c.beginPath(); c.arc(0, 0, 0.86, 0, K.TAU); c.lineWidth = 0.12; c.strokeStyle = "#7C8799"; c.stroke();
-          c.beginPath(); c.arc(0, 0, 0.24, 0, K.TAU); K.solid(c, "#C9D1E3", "#1A120C", 0.07);
-        },
-      },
-      snowspeck: { reach: [1, 1], body: 0.5, draw(c, t) { c.beginPath(); c.arc(0, 0, 0.8, 0, K.TAU); K.solid(c, "#FFFFFF", t[1], 0.1); } },
-    },
-    effects: {
-      "shield-wall": {
-        tones: [K.TONES.red, ["#2A5A7A", "#12303E", "#F1E6C8"], ["#D9A441", "#7A5206", "#F1E6C8"], K.TONES.white],
-        still: 1900,
-        layers: [
-          ...K.depth({ count: 26, shape: "snowspeck", size: [0.005, 0.01], path: (t, seed) => ({ x: seed * 1.3 - 0.3 + t * 0.4, y: -0.08 + t * 1.16 }), life: 0.55, fade: K.soft, colours: [3] }),
-          { count: 10, shape: "minishield", size: [0.03, 0.042], path: K.fall(0.05, 0.03, 9, 1.6), life: 0.8, fade: K.soft, colours: [0, 1, 2] },
-        ],
-      },
-    },
-  })],
   ["ninja", (K) => ({
     shapes: {
       throwblade: {

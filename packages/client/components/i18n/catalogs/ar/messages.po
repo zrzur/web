@@ -27413,10 +27413,6 @@ msgid "Crescent Seat"
 msgstr "حضن الهلال"
 
 #: components/ui/components/features/profiles/pack/labels.generated.ts
-msgid "Crossed Axes"
-msgstr "الفأسان"
-
-#: components/ui/components/features/profiles/pack/labels.generated.ts
 msgid "Crossed Blades"
 msgstr "السيفان"
 
@@ -28089,10 +28085,6 @@ msgid "Rose Fall"
 msgstr "مطر الورد"
 
 #: components/ui/components/features/profiles/pack/labels.generated.ts
-msgid "Round Shield"
-msgstr "الترس المدوّر"
-
-#: components/ui/components/features/profiles/pack/labels.generated.ts
 msgid "Rune Circle"
 msgstr "دائرة الرموز"
 
@@ -28127,10 +28119,6 @@ msgstr "سرب السمك"
 #: components/ui/components/features/profiles/pack/labels.generated.ts
 msgid "Scoops"
 msgstr "كرات البوظة"
-
-#: components/ui/components/features/profiles/pack/labels.generated.ts
-msgid "Shield Wall"
-msgstr "جدار التروس"
 
 #: components/ui/components/features/profiles/pack/labels.generated.ts
 msgid "Ship's Wheel"
