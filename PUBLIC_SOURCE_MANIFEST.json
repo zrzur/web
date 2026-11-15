@@ -28,26 +28,26 @@
     },
     {
       "path": ".github/workflows/ci.yml",
-      "sha256": "fc59ec0c663edf134a65e180ff51b90d954278db2f53333f60c0091f45d0d059",
-      "bytes": 3628,
+      "sha256": "c351fc5c82bf0b515bc787ebf211be884761a1ffbe229dfc77dedfe68a883454",
+      "bytes": 3951,
       "category": "reviewed-build-and-ci"
     },
     {
       "path": ".github/workflows/e2e.yml",
-      "sha256": "a99d8ef90cee70264c22b4aa61806965dcaf6bd3775849d8cde8630860e71d81",
-      "bytes": 7964,
+      "sha256": "399d6ade68b7d258e4ea3339978cfa00fd3d020a8017c5ef094214ef74e6927a",
+      "bytes": 8265,
       "category": "reviewed-build-and-ci"
     },
     {
       "path": ".github/workflows/images.yml",
-      "sha256": "e864751e56c226741c79952cfa284225b9e7cd3100eedf981815b10c57c1419b",
-      "bytes": 4784,
+      "sha256": "b10d7fac7ae9e8e1dc777d61f4cc6befedc062ac438f72c5e8a5c5c29dea4530",
+      "bytes": 5351,
       "category": "reviewed-build-and-ci"
     },
     {
       "path": ".github/workflows/source-check.yml",
-      "sha256": "ec90d100b61b8828aad99f974005ddb0242ff6851b8afbca10596aae7c1d02e0",
-      "bytes": 912,
+      "sha256": "c588bb72f12bd4d47872ec301d9c8457a6b3d5a0aee08e1031454389a20ebb5c",
+      "bytes": 955,
       "category": "reviewed-build-and-ci"
     },
     {
@@ -40264,8 +40264,8 @@
     },
     {
       "path": "packages/client/scripts/release-integrity.test.mjs",
-      "sha256": "71d5794bd1a46e2871012b9c8b17151b45b8c20065950e8fe8ee500fae2f6410",
-      "bytes": 6503,
+      "sha256": "e7ee7bd144bc21f484f3cf25f4e8a48223479f2143999138a6caed730c5028e7",
+      "bytes": 7164,
       "category": "synthetic-test-source-or-fixture"
     },
     {
