@@ -7,6 +7,7 @@
 * **Chat:** a message that is just a Zrzur invite link shows the server card with **Join**, and a bot link shows the bot card with **Add bot**, in every form the app hands out: `zrzur.cc/{code}`, custom server links, `zrzur.cc/b/{bot}`, and `/invite/{code}` or `/bot/{bot}` on the app. Inside a sentence the link opens the invite or the bot in the app, without the external-link warning. Lookalike hosts stay normal links.
 * The website preview of these links (the app's page with the generic site description) is no longer shown, also on older messages.
 * **Invite card:** an expired or unknown code says so in plain words; a server you are already in says "You're a member" and opens with **Open server**.
+* A pasted link is no longer a link inside a link, so **Join** and **Add bot** on a card no longer also leave the chat.
 
 ### Profile, redesigned (2026-11-14)
 
