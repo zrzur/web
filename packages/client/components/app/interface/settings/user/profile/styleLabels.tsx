@@ -1,5 +1,6 @@
 import { useLingui } from "@lingui/solid/macro";
 
+import { usePackLabels } from "@revolt/ui/components/features/profiles/pack/labels.generated";
 import { useCountryNames } from "@revolt/ui/components/features/profiles/plateNames";
 
 /*
@@ -11,7 +12,9 @@ import { useCountryNames } from "@revolt/ui/components/features/profiles/plateNa
 /** Translated names for decorations and theme presets */
 export function useStyleLabels() {
   const { t } = useLingui();
+  const pack = usePackLabels();
   const decorations: Record<string, string> = {
+    ...pack.decorations,
     laurel: t`Laurel`,
     "light-crown": t`Crown of light`,
     rings: t`Rings`,
@@ -73,6 +76,7 @@ export function useStyleLabels() {
     "zodiac-aquarius": t`Aquarius`,
     "zodiac-pisces": t`Pisces`,
     ...useCountryNames(),
+    ...pack.nameplates,
   };
   return {
     decoration: (id?: string) => (id ? (decorations[id] ?? id) : t`None`),

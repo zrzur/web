@@ -1,9 +1,13 @@
 import { useLingui } from "@lingui/solid/macro";
 
+import { usePackLabels } from "./pack/labels.generated";
+
 /** Names of Zrzur's own effects. Plain words, no film or game names. */
 export function useEffectLabels() {
   const { t } = useLingui();
+  const pack = usePackLabels();
   const labels: Record<string, string> = {
+    ...pack.effects,
     snow: t`Snow`,
     rain: t`Rain`,
     confetti: t`Confetti`,

@@ -4,6 +4,7 @@ import { join } from "node:path";
 import { describe, expect, it } from "vitest";
 
 import { NAME_GRADIENTS, NAME_SOLIDS } from "./nameStyles";
+import { PACK_DECORATIONS, PACK_NAMEPLATES } from "./pack/designs.generated";
 import {
   DECORATIONS,
   NAMEPLATES,
@@ -112,9 +113,12 @@ describe("user style", () => {
     // keep in sync with USER_STYLE_FONTS / USER_STYLE_DECORATIONS (Rust)
     expect(NAME_FONTS).toHaveLength(20);
     expect(new Set(NAME_FONTS.map((f) => f.id)).size).toBe(20);
-    expect(DECORATIONS).toHaveLength(24);
-    expect(NAMEPLATES).toHaveLength(217);
-    expect(new Set(NAMEPLATES.map((p) => p.id)).size).toBe(217);
+    // Zrzur's first designs, then the design pack's
+    expect(DECORATIONS).toHaveLength(24 + PACK_DECORATIONS.length);
+    expect(NAMEPLATES).toHaveLength(217 + PACK_NAMEPLATES.length);
+    expect(new Set(NAMEPLATES.map((p) => p.id)).size).toBe(
+      217 + PACK_NAMEPLATES.length,
+    );
     for (const removed of ["crown", "halo", "horns", "cat-ears", "rainbow"])
       expect(DECORATIONS).not.toContain(removed);
   });
@@ -131,8 +135,12 @@ describe("user style", () => {
   it("moves only when a frame is asked to", () => {
     for (const id of DECORATIONS) {
       const art = readFileSync(join(PUBLIC, `decorations/${id}.svg`), "utf8");
-      for (const rule of art.matchAll(/([^{}]*)\{animation:/g)) {
-        expect(rule[1]).toContain(":target");
+      // a plain scan: a pattern here backtracked for seconds on long paths
+      for (const rule of art.split("}")) {
+        const at = rule.indexOf("{animation:");
+        if (at < 0) continue;
+        const selector = rule.slice(rule.lastIndexOf("{", at - 1) + 1, at);
+        expect(selector).toContain(":target");
       }
     }
   });
