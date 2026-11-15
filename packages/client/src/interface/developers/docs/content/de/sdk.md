@@ -16,8 +16,6 @@ Installiere es von npm, mit Node 22.3 oder neuer:
 
 Das Paket ist [@zrzur/sdk auf npm](https://www.npmjs.com/package/@zrzur/sdk), der Quelltext liegt auf [github.com/zrzur/sdk-js](https://github.com/zrzur/sdk-js). Ein Bot läuft auch ganz ohne Bibliothek: [Baue einen vollständigen Bot](/developers/docs/tutorial-full-bot) braucht keine, und [Ohne Bibliothek](/developers/docs/raw-http) hat jeden Aufruf.
 
-Es gibt auch `@zrzur/bot`, eine ältere, kleinere Bibliothek mit derselben Schnittstelle für Bots. Sie ist nicht veröffentlicht und lässt sich nicht installieren; nutze `@zrzur/sdk/bot`.
-
 ## @zrzur/sdk/bot (für Bots) {#zrzur-sdk-bot-for-bots}
 
 @@1

@@ -16,8 +16,6 @@
 
 الحزمة هي [‎@zrzur/sdk على npm](https://www.npmjs.com/package/@zrzur/sdk)، ومصدرها في [github.com/zrzur/sdk-js](https://github.com/zrzur/sdk-js). ويعمل البوت أيضًا دون أي مكتبة: [ابنِ بوتًا كاملًا](/developers/docs/tutorial-full-bot) لا يحتاج إلى مكتبة، وفي [بلا مكتبة](/developers/docs/raw-http) كل الطلبات.
 
-توجد أيضًا `@zrzur/bot`، مكتبة أقدم وأصغر بالواجهة نفسها للبوتات. هي غير منشورة ولا يمكن تثبيتها؛ استخدم `@zrzur/sdk/bot`.
-
 ## @zrzur/sdk/bot (للبوتات) {#zrzur-sdk-bot-for-bots}
 
 @@1

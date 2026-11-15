@@ -18,8 +18,6 @@ npm install @zrzur/sdk
 
 The package is [@zrzur/sdk on npm](https://www.npmjs.com/package/@zrzur/sdk), and its source is at [github.com/zrzur/sdk-js](https://github.com/zrzur/sdk-js). A bot also works with no library at all: [Build a complete bot](/developers/docs/tutorial-full-bot) needs none, and [Without a library](/developers/docs/raw-http) has every call.
 
-There is also `@zrzur/bot`, an older, smaller library with the same interface for bots. It is not published and cannot be installed; use `@zrzur/sdk/bot`.
-
 ## @zrzur/sdk/bot (for bots)
 
 ```js
