@@ -26383,3 +26383,7 @@ msgstr "We have updated what you agree to when you link GitHub: it now names whe
 #: components/app/interface/settings/user/connections/ServiceCards.tsx
 msgid "We have updated what you agree to when you link Twitch: it now names where your data goes. Until you agree, your channel does not show on your profile and we exchange no data with Twitch about it."
 msgstr "We have updated what you agree to when you link Twitch: it now names where your data goes. Until you agree, your channel does not show on your profile and we exchange no data with Twitch about it."
+
+#: components/app/interface/settings/user/connections/ServiceCards.tsx
+msgid "{name}'s sign-in page did not open. If you use the Zrzur desktop app, install the latest version from <0>zrzur.com/download</0>, then try again."
+msgstr "{name}'s sign-in page did not open. If you use the Zrzur desktop app, install the latest version from <0>zrzur.com/download</0>, then try again."

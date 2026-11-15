@@ -31,8 +31,10 @@ import {
   ConsentLabel,
   MayReveal,
   ServiceCards,
+  SignInStuck,
   UsTransfer,
 } from "./ServiceCards";
+import { leaveForSignIn } from "./leaveForSignIn";
 import {
   type LinkedAccount,
   type LinkedAccounts,
@@ -203,16 +205,21 @@ function SteamConnect(props: { available: boolean }) {
   const [agreed, setAgreed] = createSignal(false);
   const [busy, setBusy] = createSignal(false);
   const [error, setError] = createSignal<unknown>();
+  const [stuck, setStuck] = createSignal(false);
 
   async function go() {
     setBusy(true);
     setError(undefined);
+    setStuck(false);
     try {
       const { url } = await connectionsApi.start(
         client(),
         window.location.origin,
       );
-      window.location.assign(url);
+      leaveForSignIn(url, () => {
+        setStuck(true);
+        setBusy(false);
+      });
     } catch (err) {
       setError(err);
       setBusy(false);
@@ -281,6 +288,9 @@ function SteamConnect(props: { available: boolean }) {
                 <TranslatedError error={error()} />
               </ErrorLine>
             </Show>
+            <Show when={stuck()}>
+              <SignInStuck name="Steam" />
+            </Show>
             <Actions>
               <Button
                 variant="outlined"
@@ -289,6 +299,7 @@ function SteamConnect(props: { available: boolean }) {
                   setAsking(false);
                   setAgreed(false);
                   setError(undefined);
+                  setStuck(false);
                 }}
               >
                 <Trans>Not now</Trans>

@@ -15,6 +15,10 @@
     "هذا يربط حسابك على Steam بحسابك في زرزور. أيام تحقيق الإنجازات تُظهر متى كنت تلعب.",
     "damit wird dein Steam-Konto mit deinem Zrzur-Konto verbunden. Die Tage deiner Erfolge zeigen, wann du gespielt hast."
   ],
+  "{name}'s sign-in page did not open. If you use the Zrzur desktop app, install the latest version from <0>zrzur.com/download</0>, then try again.": [
+    "لم تُفتح صفحة تسجيل الدخول في {name}. إن كنت تستخدم تطبيق زرزور لسطح المكتب، فثبّت أحدث إصدار من <0>zrzur.com/download</0>، ثم حاول مرة أخرى.",
+    "Die Anmeldeseite von {name} hat sich nicht geöffnet. Wenn du die Zrzur-Desktop-App nutzt, installiere die neueste Version von <0>zrzur.com/download</0> und versuche es dann noch einmal."
+  ],
   "Updated consent for {0}": [
     "موافقة محدَّثة على ربط {0}",
     "Aktualisierte Einwilligung für {0}"

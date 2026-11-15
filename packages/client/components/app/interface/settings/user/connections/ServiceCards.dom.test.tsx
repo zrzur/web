@@ -441,6 +441,68 @@ describe("ServiceCards", () => {
     expect(api.start).toHaveBeenCalledWith(expect.anything(), "battlenet", "https://app.zrzur.com");
   });
 
+  it("a sign-in page that never opens gives the button back with what to do", async () => {
+    api.start.mockResolvedValue({ url: "https://id.twitch.tv/oauth2/authorize?x" });
+    mount({
+      twitch: { available: true },
+      github: { available: true },
+      battlenet: { available: true },
+    });
+    await flush();
+    button("Connect Twitch")!.click();
+    await flush();
+    document.querySelector<HTMLInputElement>("input[type=checkbox]")!.click();
+    await flush();
+
+    // the desktop app blocks the navigation: the page stays
+    vi.useFakeTimers();
+    try {
+      button("Continue to Twitch")!.click();
+      await vi.advanceTimersByTimeAsync(0);
+      expect(assign).toHaveBeenCalledWith("https://id.twitch.tv/oauth2/authorize?x");
+      expect(button("Continue to Twitch")!.disabled).toBe(true);
+      expect(text()).not.toContain("sign-in page did not open");
+
+      await vi.advanceTimersByTimeAsync(4000);
+      expect(button("Continue to Twitch")!.disabled).toBe(false);
+      const alert = [...document.querySelectorAll("[role=alert]")].find((el) =>
+        el.textContent?.includes("Twitch's sign-in page did not open."),
+      );
+      expect(alert?.textContent).toContain(
+        "If you use the Zrzur desktop app, install the latest version from zrzur.com/download, then try again.",
+      );
+      expect(alert?.querySelector("a")?.getAttribute("href")).toBe(
+        "https://zrzur.com/download",
+      );
+    } finally {
+      vi.useRealTimers();
+    }
+  });
+
+  it("Confirm on Battle.net that never opens gives the button back too", async () => {
+    api.start.mockResolvedValue({ url: "https://oauth.battle.net/authorize?x" });
+    mount({
+      twitch: { available: true },
+      github: { available: true },
+      battlenet: {
+        available: true,
+        account: account("battlenet", { shown: true, expires_at: Date.now() + 5 * DAY }),
+      },
+    });
+    await flush();
+    vi.useFakeTimers();
+    try {
+      button("Confirm on Battle.net")!.click();
+      await vi.advanceTimersByTimeAsync(0);
+      expect(button("Confirm on Battle.net")!.disabled).toBe(true);
+      await vi.advanceTimersByTimeAsync(4000);
+      expect(button("Confirm on Battle.net")!.disabled).toBe(false);
+      expect(text()).toContain("Battle.net's sign-in page did not open.");
+    } finally {
+      vi.useRealTimers();
+    }
+  });
+
   it("shows the error in plain words when something fails", async () => {
     api.edit.mockRejectedValue(new Error("LinkedServiceFailed"));
     mount({

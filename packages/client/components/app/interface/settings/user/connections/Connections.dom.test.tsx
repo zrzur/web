@@ -224,6 +224,32 @@ describe("Connections", () => {
     );
   });
 
+  it("Steam's sign-in page that never opens gives the button back with what to do", async () => {
+    api.list.mockResolvedValue({ steam: { available: true } });
+    api.start.mockResolvedValue({ url: "https://steamcommunity.com/openid/login?x" });
+    mount();
+    await flush();
+    button("Connect Steam")!.click();
+    await flush();
+    document.querySelector<HTMLInputElement>("input[type=checkbox]")!.click();
+    await flush();
+    vi.useFakeTimers();
+    try {
+      button("Continue to Steam")!.click();
+      await vi.advanceTimersByTimeAsync(0);
+      expect(assign).toHaveBeenCalled();
+      expect(button("Continue to Steam")!.disabled).toBe(true);
+      await vi.advanceTimersByTimeAsync(4000);
+      expect(button("Continue to Steam")!.disabled).toBe(false);
+      expect(text()).toContain("Steam's sign-in page did not open.");
+      expect(
+        document.querySelector('a[href="https://zrzur.com/download"]'),
+      ).not.toBeNull();
+    } finally {
+      vi.useRealTimers();
+    }
+  });
+
   it("Not now closes the consent without contacting Steam", async () => {
     api.list.mockResolvedValue({ steam: { available: true } });
     mount();

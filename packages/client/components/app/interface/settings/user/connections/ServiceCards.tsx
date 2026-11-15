@@ -24,6 +24,7 @@ import {
 import { Icon } from "@revolt/ui/icons/Icon";
 import type { IconName } from "@revolt/ui/icons/Icon";
 
+import { leaveForSignIn } from "./leaveForSignIn";
 import {
   LINKED_CONSENT_VERSION,
   MAX_SHOWN_REPOS,
@@ -121,6 +122,29 @@ export function ConsentLabel(props: { name: string }) {
       anything it may reveal about me, and exchanges this data with {name} in
       the United States.
     </Trans>
+  );
+}
+
+/** Where the desktop app can be downloaded */
+const DOWNLOAD_URL = "https://zrzur.com/download";
+
+/**
+ * The service's sign-in page did not open (desktop 26.1.0-beta1 blocks
+ * outside sites): what to do, in the card
+ */
+export function SignInStuck(props: { name: string }) {
+  const name = props.name;
+  return (
+    <ErrorLine role="alert">
+      <Trans>
+        {name}'s sign-in page did not open. If you use the Zrzur desktop app,
+        install the latest version from{" "}
+        <PolicyLink href={DOWNLOAD_URL} target="_blank" rel="noopener">
+          zrzur.com/download
+        </PolicyLink>
+        , then try again.
+      </Trans>
+    </ErrorLine>
   );
 }
 
@@ -261,19 +285,24 @@ function ServiceConnect(props: { service: ServiceId; available: boolean }) {
   const [agreed, setAgreed] = createSignal(false);
   const [busy, setBusy] = createSignal(false);
   const [error, setError] = createSignal<unknown>();
+  const [stuck, setStuck] = createSignal(false);
   const name = () => NAMES[props.service];
   const titleId = () => `${props.service}-consent-title`;
 
   async function go() {
     setBusy(true);
     setError(undefined);
+    setStuck(false);
     try {
       const { url } = await serviceConnectionsApi.start(
         client(),
         props.service,
         window.location.origin,
       );
-      window.location.assign(url);
+      leaveForSignIn(url, () => {
+        setStuck(true);
+        setBusy(false);
+      });
     } catch (err) {
       setError(err);
       setBusy(false);
@@ -349,6 +378,9 @@ function ServiceConnect(props: { service: ServiceId; available: boolean }) {
                 <TranslatedError error={error()} />
               </ErrorLine>
             </Show>
+            <Show when={stuck()}>
+              <SignInStuck name={name()} />
+            </Show>
             <Actions>
               <Button
                 variant="outlined"
@@ -357,6 +389,7 @@ function ServiceConnect(props: { service: ServiceId; available: boolean }) {
                   setAsking(false);
                   setAgreed(false);
                   setError(undefined);
+                  setStuck(false);
                 }}
               >
                 <Trans>Not now</Trans>
@@ -385,6 +418,7 @@ function ServiceLinked(props: {
   const [now, setNow] = createSignal(Date.now());
   const [agreeNew, setAgreeNew] = createSignal(false);
   const [notNow, setNotNow] = createSignal(false);
+  const [stuck, setStuck] = createSignal(false);
   const service = () => props.account.service;
   const name = () => NAMES[service()];
   const asking = () => needsConsent(props.account) && !notNow();
@@ -419,13 +453,17 @@ function ServiceLinked(props: {
   async function confirmAgain() {
     setBusy(true);
     setError(undefined);
+    setStuck(false);
     try {
       const { url } = await serviceConnectionsApi.start(
         client(),
         service(),
         window.location.origin,
       );
-      window.location.assign(url);
+      leaveForSignIn(url, () => {
+        setStuck(true);
+        setBusy(false);
+      });
     } catch (err) {
       setError(err);
       setBusy(false);
@@ -634,6 +672,9 @@ function ServiceLinked(props: {
             <Trans>That did not work.</Trans>{" "}
             <TranslatedError error={error()} />
           </ErrorLine>
+        </Show>
+        <Show when={stuck()}>
+          <SignInStuck name={name()} />
         </Show>
         <Footer>
           <Small>

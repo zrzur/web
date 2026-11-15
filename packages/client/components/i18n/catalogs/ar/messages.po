@@ -26380,3 +26380,7 @@ msgstr "حدّثنا ما توافق عليه عند ربط GitHub: فهو يذ�
 #: components/app/interface/settings/user/connections/ServiceCards.tsx
 msgid "We have updated what you agree to when you link Twitch: it now names where your data goes. Until you agree, your channel does not show on your profile and we exchange no data with Twitch about it."
 msgstr "حدّثنا ما توافق عليه عند ربط Twitch: فهو يذكر الآن أين تذهب بياناتك. وإلى أن توافق، لا تظهر قناتك في ملفك الشخصي ولا نتبادل أي بيانات عنها مع Twitch."
+
+#: components/app/interface/settings/user/connections/ServiceCards.tsx
+msgid "{name}'s sign-in page did not open. If you use the Zrzur desktop app, install the latest version from <0>zrzur.com/download</0>, then try again."
+msgstr "لم تُفتح صفحة تسجيل الدخول في {name}. إن كنت تستخدم تطبيق زرزور لسطح المكتب، فثبّت أحدث إصدار من <0>zrzur.com/download</0>، ثم حاول مرة أخرى."

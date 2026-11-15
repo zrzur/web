@@ -6,6 +6,7 @@
 
 * **Consent cards** for Steam, Twitch, GitHub and Battle.net say, under "Keep in mind", that the company is in the United States and what that means for your data (GitHub leaves that sentence out; it is under the EU–US Data Privacy Framework), and that what you play or post can say something about your beliefs, health or sexuality. The box now reads "I agree that Zrzur copies this … and exchanges this data with {name} in the United States."
 * **Asked once:** a link made before shows an "Updated consent" card in Settings. Twitch stays off your profile until you agree; GitHub and Steam Refresh show the card instead of reading the service; Battle.net shows it at the next **Confirm on Battle.net**. Steam links keep what they showed before.
+* **Sign-in page that never opens:** if the page is still here 4 seconds after "Continue to …" or "Confirm on Battle.net" (desktop 26.1.0-beta1 blocks outside sites), the button comes back and the card says the sign-in page did not open, with a link to zrzur.com/download. Before, the button stayed off with no message.
 
 ### Profile, redesigned (2026-11-14)
 
