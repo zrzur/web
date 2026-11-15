@@ -172,14 +172,26 @@ export class VoiceProcessor implements TrackProcessor<
     this.noiseSuppressionNode?.disconnect();
     this.highpassNode?.disconnect();
 
-    if (this.enhanced()) {
+    // the noise filter is an audio worklet: it cannot be made once the
+    // call's audio has gone (a quick hang-up); the microphone then goes
+    // straight to the volume instead of failing
+    let noiseNode: RNNoiseNode | undefined;
+    if (this.enhanced() && context.state !== "closed") {
+      try {
+        noiseNode = new RNNoiseNode(context);
+      } catch (error) {
+        console.warn("[rtc] noise filter unavailable", error);
+      }
+    }
+
+    if (noiseNode) {
       // Create a new highpass filter
       this.highpassNode = context.createBiquadFilter();
       this.highpassNode.type = "highpass";
       this.highpassNode.frequency.value = 50;
       this.highpassNode.Q.value = Math.SQRT1_2;
 
-      this.noiseSuppressionNode = new RNNoiseNode(this.audioContext!);
+      this.noiseSuppressionNode = noiseNode;
       this.highpassNode.connect(this.noiseSuppressionNode);
 
       // Create a new dynamics compressor
@@ -214,7 +226,8 @@ export class VoiceProcessor implements TrackProcessor<
     } else {
       this.audioContext = context;
     }
-    if (!context) {
+    // the call ended while the filters were loading: nothing to build
+    if (!context || context.state === "closed") {
       return;
     }
     this.sourceNode = context.createMediaStreamSource(

@@ -206,6 +206,25 @@ export function SystemMessage(props: Props) {
         <Match when={sm.type === "raid_alert"}>
           <RaidAlert message={sm as RaidAlertSystemMessage} />
         </Match>
+        {/* nobody but the caller joined: a missed call */}
+        <Match
+          when={
+            sm.type === "call_started" &&
+            (sm as CallStartedSystemMessage).missed
+          }
+        >
+          <span data-missed-call>
+            <Show
+              when={!(sm as CallStartedSystemMessage).byMe}
+              fallback={<Trans>Nobody answered your call</Trans>}
+            >
+              <Trans>
+                Missed call from{" "}
+                <UserMention userId={(sm as CallStartedSystemMessage).byId} />
+              </Trans>
+            </Show>
+          </span>
+        </Match>
         <Match when={sm.type === "call_started"}>
           <Show
             when={(sm as CallStartedSystemMessage).finishedAt != null}

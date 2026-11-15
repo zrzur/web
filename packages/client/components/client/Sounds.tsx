@@ -184,6 +184,32 @@ export class SoundController {
   }
 
   /**
+   * Play a sound over and over (ringtones) until the returned function is
+   * called. Follows the person's sound settings; does nothing when off.
+   *
+   * @param sound The sound to repeat
+   * @returns Stops it (safe to call more than once)
+   */
+  loop(sound: SoundKey): () => void {
+    if (!this.soundState.enabled(sound)) return () => undefined;
+    let stopped = false;
+    let node: HTMLAudioElement | undefined;
+    void this.createNode(sound).then((created) => {
+      if (stopped) return;
+      node = created;
+      node.loop = true;
+      return this.start(node, sound);
+    });
+    return () => {
+      stopped = true;
+      if (node) {
+        node.pause();
+        node.src = "";
+      }
+    };
+  }
+
+  /**
    * Preview a sound from settings: plays even if the event is switched off
    * and replaces any preview still playing, so repeated clicks don't stack
    *

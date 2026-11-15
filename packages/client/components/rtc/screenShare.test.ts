@@ -5,6 +5,7 @@ import {
   applyQuality,
   captureOptions,
   clampDisplayMediaOptions,
+  isShareCancelled,
   publishOptions,
   publishSafeQuality,
   republishCodec,
@@ -315,5 +316,26 @@ describe("republishCodec", () => {
     handlers.localTrackUnpublished({ kind: "video" });
     expect(republishCodec(room as unknown as Room)).toBeUndefined();
     vi.unstubAllGlobals();
+  });
+});
+
+describe("isShareCancelled", () => {
+  const err = (name: string, message = "") =>
+    Object.assign(new Error(message), { name });
+  it("closing the picker is not an error", () => {
+    expect(isShareCancelled(err("NotAllowedError", "Permission denied"))).toBe(
+      true,
+    );
+    expect(isShareCancelled(err("AbortError"))).toBe(true);
+    expect(isShareCancelled(new Error("anything"), true)).toBe(true);
+  });
+  it("a refusal by the system is shown", () => {
+    expect(
+      isShareCancelled(err("NotAllowedError", "Permission denied by system")),
+    ).toBe(false);
+    expect(isShareCancelled(err("NotReadableError", "Could not start"))).toBe(
+      false,
+    );
+    expect(isShareCancelled("invalid state")).toBe(false);
   });
 });

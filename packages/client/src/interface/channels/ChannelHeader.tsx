@@ -138,6 +138,16 @@ export function ChannelHeader(props: Props) {
     </>
   );
 
+  // what the call button does here: a DM or group call is started or
+  // joined; a server voice channel is joined
+  const callLabel = () => {
+    if (props.channel.serverId) return t`Join the voice channel`;
+    const self = client().user?.id;
+    return [...props.channel.voiceParticipants.keys()].some((id) => id !== self)
+      ? t`Join the call`
+      : t`Start a call`;
+  };
+
   return (
     <Show when={!phoneSearch()} fallback={phoneSearchBar()}>
       <>
@@ -288,10 +298,13 @@ export function ChannelHeader(props: Props) {
             variant="toolbar"
             size="xs"
             onPress={() => voice.connect(props.channel)}
+            aria-label={callLabel()}
+            data-start-call
             use:floating={{
               tooltip: {
                 placement: "bottom",
-                content: t`Join the voice channel`,
+                content: () => callLabel(),
+                aria: callLabel(),
               },
             }}
           >
@@ -299,6 +312,30 @@ export function ChannelHeader(props: Props) {
               call
             </Symbol>
           </IconButton>
+          {/* DMs and groups: a call with the camera on from the start */}
+          <Show when={!props.channel.serverId}>
+            <IconButton
+              variant="toolbar"
+              size="xs"
+              onPress={() =>
+                voice.connect(props.channel, undefined, undefined, 0, {
+                  video: true,
+                })
+              }
+              aria-label={t`Start a video call`}
+              data-start-video-call
+              use:floating={{
+                tooltip: {
+                  placement: "bottom",
+                  content: t`Start a video call`,
+                },
+              }}
+            >
+              <Symbol type="outlined" size={20}>
+                videocam
+              </Symbol>
+            </IconButton>
+          </Show>
         </Show>
 
         <Show

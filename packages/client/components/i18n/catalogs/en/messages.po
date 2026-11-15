@@ -26400,3 +26400,79 @@ msgstr "Open this invite to see where it leads."
 msgid "You're a member"
 msgstr "You're a member"
 
+#. placeholder {0}: caller()?.displayName ?? caller()?.username
+#: components/ui/components/features/voice/ringing/CallRinging.tsx
+msgid "{0} is calling the group"
+msgstr "{0} is calling the group"
+
+#: components/ui/components/features/voice/ringing/CallRinging.tsx
+msgid "{other} declined the call."
+msgstr "{other} declined the call."
+
+#: components/ui/components/features/voice/ringing/CallRinging.tsx
+msgid "{other} didn't answer."
+msgstr "{other} didn't answer."
+
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "Accept a call"
+msgstr "Accept a call"
+
+#: components/ui/components/features/voice/ringing/CallRinging.tsx
+msgid "Accept with video"
+msgstr "Accept with video"
+
+#: components/ui/components/features/voice/VoiceStatefulUserIcons.tsx
+msgid "Deafened"
+msgstr "Deafened"
+
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "Decline a call"
+msgstr "Decline a call"
+
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "During a server call."
+msgstr "During a server call."
+
+#: components/ui/components/features/voice/ringing/CallRinging.tsx
+msgid "Everyone declined the call."
+msgstr "Everyone declined the call."
+
+#: components/ui/components/features/voice/ringing/CallRinging.tsx
+msgid "is calling you"
+msgstr "is calling you"
+
+#: src/interface/channels/ChannelHeader.tsx
+msgid "Join the call"
+msgstr "Join the call"
+
+#: components/ui/components/features/messaging/elements/SystemMessage.tsx
+msgid "Missed call from <0/>"
+msgstr "Missed call from <0/>"
+
+#: components/ui/components/features/messaging/elements/SystemMessage.tsx
+msgid "Nobody answered your call"
+msgstr "Nobody answered your call"
+
+#: components/ui/components/features/voice/ringing/CallRinging.tsx
+msgid "Nobody answered."
+msgstr "Nobody answered."
+
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "Open or close the soundboard"
+msgstr "Open or close the soundboard"
+
+#: src/interface/channels/ChannelHeader.tsx
+msgid "Start a call"
+msgstr "Start a call"
+
+#: src/interface/channels/ChannelHeader.tsx
+msgid "Start a video call"
+msgstr "Start a video call"
+
+#: components/ui/components/features/voice/soundboard/SoundsUnavailable.tsx
+msgid "The sounds could not load. Close them and open them again."
+msgstr "The sounds could not load. Close them and open them again."
+
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "While a call rings."
+msgstr "While a call rings."

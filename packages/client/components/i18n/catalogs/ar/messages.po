@@ -26396,3 +26396,80 @@ msgstr "حدّثنا ما توافق عليه عند ربط Twitch: فهو يذ�
 #: components/app/interface/settings/user/connections/ServiceCards.tsx
 msgid "{name}'s sign-in page did not open. If you use the Zrzur desktop app, install the latest version from <0>zrzur.com/download</0>, then try again."
 msgstr "لم تُفتح صفحة تسجيل الدخول في {name}. إن كنت تستخدم تطبيق زرزور لسطح المكتب، فثبّت أحدث إصدار من <0>zrzur.com/download</0>، ثم حاول مرة أخرى."
+
+#. placeholder {0}: caller()?.displayName ?? caller()?.username
+#: components/ui/components/features/voice/ringing/CallRinging.tsx
+msgid "{0} is calling the group"
+msgstr "{0} يتصل بالمجموعة"
+
+#: components/ui/components/features/voice/ringing/CallRinging.tsx
+msgid "{other} declined the call."
+msgstr "رفض {other} المكالمة."
+
+#: components/ui/components/features/voice/ringing/CallRinging.tsx
+msgid "{other} didn't answer."
+msgstr "لم يُجب {other}."
+
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "Accept a call"
+msgstr "قبول مكالمة"
+
+#: components/ui/components/features/voice/ringing/CallRinging.tsx
+msgid "Accept with video"
+msgstr "قبول مع الفيديو"
+
+#: components/ui/components/features/voice/VoiceStatefulUserIcons.tsx
+msgid "Deafened"
+msgstr "السماعة مكتومة"
+
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "Decline a call"
+msgstr "رفض مكالمة"
+
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "During a server call."
+msgstr "أثناء مكالمة في سيرفر."
+
+#: components/ui/components/features/voice/ringing/CallRinging.tsx
+msgid "Everyone declined the call."
+msgstr "رفض الجميع المكالمة."
+
+#: components/ui/components/features/voice/ringing/CallRinging.tsx
+msgid "is calling you"
+msgstr "يتصل بك"
+
+#: src/interface/channels/ChannelHeader.tsx
+msgid "Join the call"
+msgstr "الانضمام إلى المكالمة"
+
+#: components/ui/components/features/messaging/elements/SystemMessage.tsx
+msgid "Missed call from <0/>"
+msgstr "مكالمة فائتة من <0/>"
+
+#: components/ui/components/features/messaging/elements/SystemMessage.tsx
+msgid "Nobody answered your call"
+msgstr "لم يُجب أحد على مكالمتك"
+
+#: components/ui/components/features/voice/ringing/CallRinging.tsx
+msgid "Nobody answered."
+msgstr "لم يُجب أحد."
+
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "Open or close the soundboard"
+msgstr "فتح لوحة الأصوات أو إغلاقها"
+
+#: src/interface/channels/ChannelHeader.tsx
+msgid "Start a call"
+msgstr "بدء مكالمة"
+
+#: src/interface/channels/ChannelHeader.tsx
+msgid "Start a video call"
+msgstr "بدء مكالمة فيديو"
+
+#: components/ui/components/features/voice/soundboard/SoundsUnavailable.tsx
+msgid "The sounds could not load. Close them and open them again."
+msgstr "تعذّر تحميل الأصوات. أغلقها ثم افتحها مرة أخرى."
+
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "While a call rings."
+msgstr "أثناء رنين مكالمة."

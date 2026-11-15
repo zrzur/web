@@ -1,0 +1,78 @@
+{
+  "{0} is calling the group": [
+    "{0} يتصل بالمجموعة",
+    "{0} ruft die Gruppe an"
+  ],
+  "{other} declined the call.": [
+    "رفض {other} المكالمة.",
+    "{other} hat den Anruf abgelehnt."
+  ],
+  "{other} didn't answer.": [
+    "لم يُجب {other}.",
+    "{other} hat nicht geantwortet."
+  ],
+  "Accept a call": [
+    "قبول مكالمة",
+    "Anruf annehmen"
+  ],
+  "Accept with video": [
+    "قبول مع الفيديو",
+    "Mit Video annehmen"
+  ],
+  "Decline a call": [
+    "رفض مكالمة",
+    "Anruf ablehnen"
+  ],
+  "Everyone declined the call.": [
+    "رفض الجميع المكالمة.",
+    "Alle haben den Anruf abgelehnt."
+  ],
+  "is calling you": [
+    "يتصل بك",
+    "ruft dich an"
+  ],
+  "Join the call": [
+    "الانضمام إلى المكالمة",
+    "Dem Anruf beitreten"
+  ],
+  "Missed call from <0/>": [
+    "مكالمة فائتة من <0/>",
+    "Verpasster Anruf von <0/>"
+  ],
+  "Nobody answered your call": [
+    "لم يُجب أحد على مكالمتك",
+    "Niemand hat deinen Anruf angenommen"
+  ],
+  "Nobody answered.": [
+    "لم يُجب أحد.",
+    "Niemand hat geantwortet."
+  ],
+  "Start a call": [
+    "بدء مكالمة",
+    "Anruf starten"
+  ],
+  "Start a video call": [
+    "بدء مكالمة فيديو",
+    "Videoanruf starten"
+  ],
+  "While a call rings.": [
+    "أثناء رنين مكالمة.",
+    "Während ein Anruf klingelt."
+  ],
+  "Deafened": [
+    "السماعة مكتومة",
+    "Taub gestellt"
+  ],
+  "Open or close the soundboard": [
+    "فتح لوحة الأصوات أو إغلاقها",
+    "Soundboard öffnen oder schließen"
+  ],
+  "During a server call.": [
+    "أثناء مكالمة في سيرفر.",
+    "Während eines Anrufs auf einem Server."
+  ],
+  "The sounds could not load. Close them and open them again.": [
+    "تعذّر تحميل الأصوات. أغلقها ثم افتحها مرة أخرى.",
+    "Die Sounds konnten nicht geladen werden. Schließe sie und öffne sie noch einmal."
+  ]
+}
