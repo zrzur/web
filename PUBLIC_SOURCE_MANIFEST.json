@@ -4365,9 +4365,15 @@
       "category": "product-source-or-build-manifest"
     },
     {
+      "path": "packages/client/components/markdown/plugins/remarkLinkify.test.ts",
+      "sha256": "3edfd94f4107ae7cbc6c8ec15408218e594a4bf7b22c79d35b63398c75e24fc3",
+      "bytes": 1502,
+      "category": "synthetic-test-source-or-fixture"
+    },
+    {
       "path": "packages/client/components/markdown/plugins/remarkLinkify.ts",
-      "sha256": "d4a13220e0374354fa7314ca330fe187febc06567e52efad878f8e77bdb1a181",
-      "bytes": 1378,
+      "sha256": "9547de223efd97337b73430583848266ea6c9401878ad729ef70dc6d2a156f25",
+      "bytes": 1613,
       "category": "product-source-or-build-manifest"
     },
     {
