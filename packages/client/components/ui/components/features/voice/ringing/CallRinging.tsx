@@ -28,15 +28,16 @@ export default function CallRinging() {
   const client = useClient();
   const sound = useSound();
 
-  // ringing for a call this device is already in (joined here or the
-  // account joined it elsewhere) is not shown
+  // ringing for a call this device is already in is not shown; joining on
+  // another device ends the ring through the server (Answered). The
+  // channel's member list is not used here: it can still show this account
+  // in the previous call for a moment, which hid a real ring.
   const incoming = createMemo(() =>
-    ringState().incoming.filter((ring) => {
-      if (voice.channel()?.id === ring.channelId) return false;
-      const self = client().user?.id;
-      const channel = client().channels.get(ring.channelId);
-      return !!channel && !(self && channel.voiceParticipants.has(self));
-    }),
+    ringState().incoming.filter(
+      (ring) =>
+        voice.channel()?.id !== ring.channelId &&
+        !!client().channels.get(ring.channelId),
+    ),
   );
 
   // one ringtone however many calls ring

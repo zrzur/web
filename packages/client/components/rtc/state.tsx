@@ -411,21 +411,12 @@ class Voice {
       muted: false,
       deafened: false,
     };
-    createEffect(() => {
-      const channel =
-        this.state() === "CONNECTED" ? this.channel()?.id : undefined;
-      const muted = !this.#settings.micOn;
-      const deafened = this.#settings.deafen;
-      if (!channel) return;
-      const before =
-        shown.channel === channel
-          ? shown
-          : { channel, muted: false, deafened: false };
-      if (before.muted === muted && before.deafened === deafened) {
-        shown = before;
-        return;
-      }
-      shown = { channel, muted, deafened };
+    const report = (
+      channel: string,
+      muted: boolean,
+      deafened: boolean,
+      attempt = 0,
+    ) => {
       // the route is newer than the SDK's generated route table (it comes
       // with the next API snapshot)
       const api = this.#client().api as unknown as {
@@ -433,9 +424,37 @@ class Voice {
       };
       void api
         .patch(`/channels/${channel}/voice_state`, { muted, deafened })
-        .catch((error: unknown) =>
-          console.warn("[rtc] mute state not shown to others", error),
-        );
+        .catch((error: unknown) => {
+          // pressed before the server registered the join: try again
+          const still =
+            shown.channel === channel &&
+            shown.muted === muted &&
+            shown.deafened === deafened;
+          if (still && attempt < 3)
+            setTimeout(
+              () => report(channel, muted, deafened, attempt + 1),
+              1000,
+            );
+          else console.warn("[rtc] mute state not shown to others", error);
+        });
+    };
+    createEffect(() => {
+      const channel = this.state() === "CONNECTED" ? this.channel() : undefined;
+      const muted = !this.#settings.micOn;
+      const deafened = this.#settings.deafen;
+      if (!channel) return;
+      // this account's own entry in the channel (the server's voice state):
+      // when it appears, a mute chosen before it is sent again
+      const self = this.#client().user?.id;
+      const listed = !!self && channel.voiceParticipants.has(self);
+      const before =
+        shown.channel === channel.id
+          ? shown
+          : { channel: channel.id, muted: false, deafened: false };
+      const changed = before.muted !== muted || before.deafened !== deafened;
+      shown = { channel: channel.id, muted, deafened };
+      if (changed || (listed && (muted || deafened)))
+        report(channel.id, muted, deafened);
     });
 
     createEffect(() => {
