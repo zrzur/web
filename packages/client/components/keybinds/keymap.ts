@@ -33,6 +33,7 @@ export type ShortcutId =
   | "chat_mark_server_as_read"
   | "open_events"
   | "toggle_streamer"
+  | "toggle_soundboard"
   | "open_shortcuts";
 
 export type CustomCombos = Partial<Record<ShortcutId, Combo>>;
@@ -53,6 +54,7 @@ export const DEFAULTS: Record<ShortcutId, string> = {
   chat_mark_server_as_read: "S:Escape",
   open_events: "MS:Digit9",
   toggle_streamer: "MS:KeyL",
+  toggle_soundboard: "MS:Digit6|MC:KeyS",
   open_shortcuts: "M:Slash",
 };
 

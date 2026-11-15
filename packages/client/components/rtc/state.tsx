@@ -43,8 +43,13 @@ import {
   Voice as VoiceSettings,
 } from "@revolt/state/stores/Voice";
 import { VoiceCallCardContext } from "@revolt/ui/components/features/voice/callCard/VoiceCallCard";
+import {
+  setSoundboardOpen,
+  soundboardOpen,
+} from "@revolt/ui/components/features/voice/soundboard/soundboardOpen";
 
 import { Device, useDevice } from "@revolt/common";
+import { holdStaleReload } from "../../src/staleBuild";
 import { shortcutsPaused } from "../keybinds/active";
 import {
   isMac,
@@ -195,6 +200,8 @@ class Voice {
   #noticeTimer?: ReturnType<typeof setTimeout>;
   /** Ends the wait before the next rejoin attempt (the network came back) */
   #wake?: () => void;
+  /** Keeps the page from reloading by itself while a call is on */
+  #releaseReloadHold?: () => void;
 
   /** Push to mute: whether its key is held right now (desktop app) */
   muteHeld: Accessor<boolean>;
@@ -517,6 +524,11 @@ class Voice {
       );
     });
 
+    // a part of the app that fails to load during the call must not reload
+    // the page (that would drop the call)
+    this.#releaseReloadHold?.();
+    this.#releaseReloadHold = holdStaleReload();
+
     batch(() => {
       this.#setRoom(room);
       this.#setChannel(channel);
@@ -725,6 +737,8 @@ class Voice {
 
   disconnect(quiet = false) {
     this.#recentRemoval = undefined;
+    this.#releaseReloadHold?.();
+    this.#releaseReloadHold = undefined;
     // notices belong to the call that ends here
     clearTimeout(this.#noticeTimer);
     this.#setNotice();
@@ -1377,6 +1391,19 @@ export function VoiceContext(props: { children: JSX.Element }) {
       event.preventDefault();
       if (!event.repeat)
         state.settings.streamerMode = !state.settings.streamerMode;
+      return;
+    }
+    if (shortcut === "toggle_soundboard") {
+      // in a server call, for those who may play sounds
+      const channel = voice.channel();
+      if (
+        !inCall() ||
+        !channel?.server ||
+        !channel.havePermission("UseSoundboard")
+      )
+        return;
+      event.preventDefault();
+      if (!event.repeat) setSoundboardOpen(!soundboardOpen());
       return;
     }
     if (shortcut) {

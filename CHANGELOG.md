@@ -2,6 +2,11 @@
 
 ## Unreleased
 
+### Soundboard: no page reload during a call (2026-11-15)
+
+* A part of the app that fails to load during a call no longer reloads the page (the stale-build reload dropped the call; the owner saw it on Soundboard). It is tried once more, and if it still fails the sounds say so in place ("The sounds could not load…") and the call goes on. Outside calls the stale-build reload works as before.
+* **Ctrl/Cmd+Shift+6** (Cmd+Ctrl+S on a Mac) opens and closes the soundboard during a server call; listed under Calls in the shortcuts screen, changeable there, reserved from plugins.
+
 ### Lobby: the server's description has its own box (2026-11-15)
 
 * **"About this server" in the side column.** A server's description no longer sits under its name in the lobby's header as one raw block. It has a box of its own beside the page, above "Live now" and "New this week", formatted like on the server's Discover page: bold text, lists and links. A long description shows its first lines with "Show more".

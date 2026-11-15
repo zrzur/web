@@ -27,10 +27,15 @@ import {
 import { ParticipantTile, tile } from "./ParticipantTile";
 import { VoiceCallCardActions } from "./VoiceCallCardActions";
 import { VoiceCallCardStatus } from "./VoiceCallCardStatus";
+import { lazyRetry } from "../../../utils/lazyRetry";
+import SoundsUnavailable from "../soundboard/SoundsUnavailable";
 
 // only a stage call loads the stage controls, and the first open the sounds
 const StagePanel = lazy(() => import("../stage/StagePanel"));
-const SoundboardPicker = lazy(() => import("../soundboard/SoundboardPicker"));
+const SoundboardPicker = lazyRetry(
+  () => import("../soundboard/SoundboardPicker"),
+  SoundsUnavailable,
+);
 
 /**
  * Call card (active)

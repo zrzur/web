@@ -26396,3 +26396,15 @@ msgstr "Wir haben aktualisiert, wozu du beim Verknüpfen von Twitch einwilligst:
 #: components/app/interface/settings/user/connections/ServiceCards.tsx
 msgid "{name}'s sign-in page did not open. If you use the Zrzur desktop app, install the latest version from <0>zrzur.com/download</0>, then try again."
 msgstr "Die Anmeldeseite von {name} hat sich nicht geöffnet. Wenn du die Zrzur-Desktop-App nutzt, installiere die neueste Version von <0>zrzur.com/download</0> und versuche es dann noch einmal."
+
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "During a server call."
+msgstr "Während eines Anrufs auf einem Server."
+
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "Open or close the soundboard"
+msgstr "Soundboard öffnen oder schließen"
+
+#: components/ui/components/features/voice/soundboard/SoundsUnavailable.tsx
+msgid "The sounds could not load. Close them and open them again."
+msgstr "Die Sounds konnten nicht geladen werden. Schließe sie und öffne sie noch einmal."
