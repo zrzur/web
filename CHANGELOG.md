@@ -2,6 +2,12 @@
 
 ## Unreleased
 
+### Designs open faster (2026-11-15)
+
+* **Designs site:** the page asks for its own files with the first one, no longer the chat app's; its first designs and the server's settings are asked for at once, not after the language file. The loading screen no longer shows before the page.
+* **Designs in the app:** Creator Studio, the review queue and the creators list download when opened; the wall waits for the first page from the server and is drawn once, a screenful at a time, instead of twice.
+* **Phones:** the app no longer lays out the whole page while it starts (the side menu read the window width too early); fonts ask for all their weights at once.
+
 ### Profile, redesigned (2026-11-14)
 
 * **Profile card:** 360 px wide with a close button; it ends with the message box and **View full profile**. Add friend sits on the banner's edge. About me ends at four whole lines.
