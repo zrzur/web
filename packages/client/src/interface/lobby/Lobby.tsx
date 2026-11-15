@@ -8,6 +8,7 @@ import {
   createResource,
   createSignal,
   onCleanup,
+  onMount,
 } from "solid-js";
 
 import { Plural, useLingui } from "@lingui/solid/macro";
@@ -20,6 +21,7 @@ import type {
 import { styled } from "styled-system/jsx";
 import { decodeTime } from "ulid";
 
+import { ListingAbout } from "@revolt/app/interface/discover/About";
 import { lobbyStyle } from "@revolt/app/interface/settings/server/lobbyAppearance";
 
 import { DEFAULT_SECTIONS } from "@revolt/app/interface/settings/server/lobbySections";
@@ -664,7 +666,9 @@ function Lobby(props: { server: Server }) {
             </IconFrame>
             <IdentityText>
               <h1>{props.server.name}</h1>
-              <Show when={lobby().tagline ?? props.server.description}>
+              {/* the managers' one line only: the server's description is
+                  a text of its own, in the side column */}
+              <Show when={lobby().tagline}>
                 {(line) => <Tagline>{line()}</Tagline>}
               </Show>
               <Facts>
@@ -821,6 +825,9 @@ function Lobby(props: { server: Server }) {
             </For>
           </Column>
           <Column data-side>
+            <Show when={props.server.description?.trim()}>
+              {(text) => <ServerAbout text={text()} />}
+            </Show>
             <For each={sections().filter((section) => SIDE.includes(section))}>
               {(section) => SECTIONS[section]?.()}
             </For>
@@ -842,6 +849,56 @@ function Lobby(props: { server: Server }) {
         </Show>
       </Content>
     </Page>
+  );
+}
+
+/** Lines of a description shown before "Show more" (at 24 px a line) */
+const ABOUT_FOLD = 240;
+
+/**
+ * The server's own description, in a box beside the page: formatted like on
+ * its Discover page (bold, lists, links), folded when it is long.
+ */
+function ServerAbout(props: { text: string }) {
+  const { t } = useLingui();
+  const [long, setLong] = createSignal(false);
+  const [open, setOpen] = createSignal(false);
+  let body: HTMLDivElement | undefined;
+
+  onMount(() => {
+    if (!body || typeof ResizeObserver === "undefined") return;
+    // a little slack: a fold that hides one line is worse than none
+    const measure = () => setLong(body!.scrollHeight > ABOUT_FOLD + 48);
+    const watch = new ResizeObserver(measure);
+    watch.observe(body.firstElementChild ?? body);
+    measure();
+    onCleanup(() => watch.disconnect());
+  });
+
+  return (
+    <Card data-server-about>
+      <CardTitle>{t`About this server`}</CardTitle>
+      <AboutFold
+        ref={body}
+        id="lobby-server-about"
+        data-folded={long() && !open() ? "" : undefined}
+      >
+        <ListingAbout text={props.text} />
+      </AboutFold>
+      <Show when={long()}>
+        <TextLink
+          type="button"
+          data-about-toggle
+          aria-expanded={open()}
+          aria-controls="lobby-server-about"
+          onClick={() => setOpen(!open())}
+        >
+          <Show when={open()} fallback={t`Show more`}>
+            {t`Show less`}
+          </Show>
+        </TextLink>
+      </Show>
+    </Card>
   );
 }
 
@@ -1308,6 +1365,18 @@ const Prose = styled("div", {
     lineHeight: "22px",
     color: "var(--z-fg-secondary)",
     overflowWrap: "anywhere",
+  },
+});
+
+/** The description's first lines until "Show more" */
+const AboutFold = styled("div", {
+  base: {
+    minWidth: 0,
+    "&[data-folded]": {
+      maxHeight: "240px",
+      overflow: "hidden",
+      maskImage: "linear-gradient(to bottom, black 75%, transparent)",
+    },
   },
 });
 
