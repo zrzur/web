@@ -40984,8 +40984,8 @@
     },
     {
       "path": "packages/client/src/interface/developers/docs/content/ar/sdk.md",
-      "sha256": "4807533a8caa2b2654db90ddf83ddb56e11bc5dc3f49a5d1d2ef35f0f9863d64",
-      "bytes": 5969,
+      "sha256": "fdc17b838ff66dc6d4fcbb5bb9ca0277867d8d0b0338b8b5ed5dc7791185170e",
+      "bytes": 5769,
       "category": "public-documentation"
     },
     {
@@ -41248,8 +41248,8 @@
     },
     {
       "path": "packages/client/src/interface/developers/docs/content/de/sdk.md",
-      "sha256": "d5415c213efd9afc3c86ccedcd8122a81405ad13cf007fc9f8d53828fe5f3261",
-      "bytes": 5140,
+      "sha256": "bacce78e8e078b4a038e0b9ca5966325416d658e8975a638a91d644fd7d9d787",
+      "bytes": 4949,
       "category": "public-documentation"
     },
     {
@@ -41434,8 +41434,8 @@
     },
     {
       "path": "packages/client/src/interface/developers/docs/content/sdk.md",
-      "sha256": "1d5a236b372cd7e6b7ceead00700e75fa325eeecd164af01e63b228b0563c6f0",
-      "bytes": 5733,
+      "sha256": "6b3607a7c2cca74ca90e67291cd121b5888bcd5104beb4dca6bb168ac917a524",
+      "bytes": 5577,
       "category": "public-documentation"
     },
     {
