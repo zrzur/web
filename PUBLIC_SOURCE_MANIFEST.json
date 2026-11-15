@@ -286,8 +286,8 @@
     },
     {
       "path": "CHANGELOG.md",
-      "sha256": "28a721b1266ff185ac2af62af1c904c7a651991382cbd4d2e5df3b7aa87f897e",
-      "bytes": 149993,
+      "sha256": "0fdfab0303df3653704661a61e4d8a8f917ffa4a42e39037c5c464fcb8116990",
+      "bytes": 150540,
       "category": "public-documentation"
     },
     {
@@ -41746,8 +41746,8 @@
     },
     {
       "path": "packages/client/src/interface/lobby/Lobby.tsx",
-      "sha256": "e63a84b2b4f9f58572daec4d861b1752a4b1f346b42bce8b01f9ed7edcad273e",
-      "bytes": 50910,
+      "sha256": "dabfe83c4c139b05941a5ccfe293e873105ed27172c694b6bf5e77bb5f9759f9",
+      "bytes": 53028,
       "category": "product-source-or-build-manifest"
     },
     {
