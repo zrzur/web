@@ -97,12 +97,17 @@ export function RenderAnchor(
 
     // Our own invite and bot links, in every form (zrzur.cc/{code},
     // zrzur.cc/b/{id}, …/invite/{code}, …/bot/{id}): the server or bot card
-    // when the message is just the link, else a link that opens it in the app
+    // only for a chat message that is nothing but the link; anywhere else
+    // (a sentence, a list, a description or bio) a link that opens it in
+    // the app
     const own = parseOwnLink(url, {
       appOrigins: [instance.origin, window.location.origin],
     });
     if (own) {
+      const { message } = useMessage();
       const plain =
+        !!message &&
+        message.content?.trim() === localProps.href &&
         Array.isArray(remoteProps.children) &&
         remoteProps.children[0] === localProps.href &&
         !localProps.disabled;
