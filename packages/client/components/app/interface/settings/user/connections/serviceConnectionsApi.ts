@@ -36,7 +36,24 @@ export type ServiceAccount = {
   refreshed_at: number;
   /** GitHub: Refresh works again from here (ms) */
   refresh_after: number;
+  /**
+   * Agreed to the consent text in use (it names the US transfer). When
+   * false: Twitch is hidden and not read, GitHub Refresh waits. Missing from
+   * servers before that text: treated as agreed.
+   */
+  consent_current?: boolean;
 };
+
+/**
+ * Version of the consent text the app shows before linking any service,
+ * Steam included. 3 added the US transfer and the beliefs, health and
+ * sexuality line.
+ */
+export const LINKED_CONSENT_VERSION = 3;
+
+/** The person still has to agree to the consent text in use */
+export const needsConsent = (account: { consent_current?: boolean }) =>
+  account.consent_current === false;
 
 export type ServiceConnection = { available: boolean; account?: ServiceAccount };
 
@@ -61,7 +78,7 @@ export const serviceConnectionsApi = {
   edit: (
     client: Client,
     service: ServiceId,
-    change: { shown?: boolean; shown_repos?: number[] },
+    change: { shown?: boolean; shown_repos?: number[]; consent?: number },
   ) => client.api.raw<ServiceAccount>("patch", base(service), change),
 
   refresh: (client: Client, service: ServiceId) =>

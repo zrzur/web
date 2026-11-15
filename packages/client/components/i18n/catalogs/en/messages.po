@@ -26341,3 +26341,45 @@ msgstr "Zrzur, right on <0>your desktop.</0>"
 #: components/app/interface/settings/user/appearance/AppearanceMenu.tsx
 #~ msgid "Zrzur's own look: very dark neutral panels with Zrzur Pink as the one accent."
 #~ msgstr "Zrzur's own look: very dark neutral panels with Zrzur Pink as the one accent."
+
+#: components/app/interface/settings/user/connections/ServiceCards.tsx
+msgid "{name} is a US company: what we send it and read from it goes to the United States, where your data may be less protected than in the EU (for example, US authorities may be able to access it)."
+msgstr "{name} is a US company: what we send it and read from it goes to the United States, where your data may be less protected than in the EU (for example, US authorities may be able to access it)."
+
+#: components/app/interface/settings/user/connections/ServiceCards.tsx
+msgid "I agree that Zrzur copies this and shows it on my profile, including anything it may reveal about me, and exchanges this data with {name} in the United States."
+msgstr "I agree that Zrzur copies this and shows it on my profile, including anything it may reveal about me, and exchanges this data with {name} in the United States."
+
+#: components/app/interface/settings/user/connections/Connections.tsx
+msgid "this ties your Steam account to your Zrzur account. The unlock days show when you played."
+msgstr "this ties your Steam account to your Zrzur account. The unlock days show when you played."
+
+#. placeholder {0}: name()
+#: components/app/interface/settings/user/connections/Connections.tsx
+#: components/app/interface/settings/user/connections/ServiceCards.tsx
+msgid "Updated consent for {0}"
+msgstr "Updated consent for {0}"
+
+#: components/app/interface/settings/user/connections/ServiceCards.tsx
+msgid "We have updated what you agree to when you link Battle.net: it now names where your data goes. You agree to it the next time you confirm on Battle.net."
+msgstr "We have updated what you agree to when you link Battle.net: it now names where your data goes. You agree to it the next time you confirm on Battle.net."
+
+#: components/app/interface/settings/user/connections/Connections.tsx
+msgid "We have updated what you agree to when you link Steam: it now covers game pictures and up to 60 of your latest achievements with the day you unlocked them (no time of day), and it names where your data goes. Until you agree, Refresh stays off and nothing new shows."
+msgstr "We have updated what you agree to when you link Steam: it now covers game pictures and up to 60 of your latest achievements with the day you unlocked them (no time of day), and it names where your data goes. Until you agree, Refresh stays off and nothing new shows."
+
+#: components/app/interface/settings/user/connections/ServiceCards.tsx
+msgid "What you play or post there can say something about your beliefs, health or sexuality."
+msgstr "What you play or post there can say something about your beliefs, health or sexuality."
+
+#: components/app/interface/settings/user/connections/ServiceCards.tsx
+msgid "We have updated what you agree to when you link GitHub: it now names where your data goes. Until you agree, your GitHub account does not show on your profile and Refresh stays off."
+msgstr "We have updated what you agree to when you link GitHub: it now names where your data goes. Until you agree, your GitHub account does not show on your profile and Refresh stays off."
+
+#: components/app/interface/settings/user/connections/ServiceCards.tsx
+msgid "We have updated what you agree to when you link Twitch: it now names where your data goes. Until you agree, your channel does not show on your profile and we exchange no data with Twitch about it."
+msgstr "We have updated what you agree to when you link Twitch: it now names where your data goes. Until you agree, your channel does not show on your profile and we exchange no data with Twitch about it."
+
+#: components/app/interface/settings/user/connections/ServiceCards.tsx
+msgid "{name}'s sign-in page did not open. If you use the Zrzur desktop app, install the latest version from <0>zrzur.com/download</0>, then try again."
+msgstr "{name}'s sign-in page did not open. If you use the Zrzur desktop app, install the latest version from <0>zrzur.com/download</0>, then try again."

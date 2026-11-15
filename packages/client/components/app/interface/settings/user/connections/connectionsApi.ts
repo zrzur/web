@@ -5,7 +5,10 @@ import type {
   LinkedGame,
 } from "@revolt/ui/components/features/profiles/linkedGames";
 
-import type { ServiceConnection } from "./serviceConnectionsApi";
+import {
+  type ServiceConnection,
+  LINKED_CONSENT_VERSION,
+} from "./serviceConnectionsApi";
 
 /**
  * Linked accounts (Steam). Not in the SDK's API document yet (contract
@@ -30,12 +33,15 @@ export type LinkedAccount = {
   refreshed_at: number;
   /** Refresh works again from here, milliseconds since the epoch */
   refresh_after: number;
-  /** Agreed to the consent text in use; if not, pictures and achievements stay off */
+  /**
+   * Agreed to the consent text in use; if not, Refresh waits, and a link
+   * from the first text shows no pictures or achievements to others
+   */
   consent_current: boolean;
 };
 
-/** Version of the consent text the app shows */
-export const STEAM_CONSENT_VERSION = 2;
+/** Version of the consent text the app shows (the same for every service) */
+export const STEAM_CONSENT_VERSION = LINKED_CONSENT_VERSION;
 
 export type LinkedAccounts = {
   steam: { available: boolean; account?: LinkedAccount };

@@ -326,6 +326,183 @@ describe("ServiceCards", () => {
     expect(text()).not.toContain("MaherLive");
   });
 
+  it("each consent card names the US transfer and what the copy may reveal", async () => {
+    mount({
+      twitch: { available: true },
+      github: { available: true },
+      battlenet: { available: true },
+    });
+    await flush();
+    for (const name of ["Twitch", "GitHub", "Battle.net"]) {
+      button(`Connect ${name}`)!.click();
+      await flush();
+      const card = document.querySelector<HTMLElement>("[role=group]")!;
+      const transfer = `${name} is a US company: what we send it and read from it goes to the United States, where your data may be less protected than in the EU (for example, US authorities may be able to access it).`;
+      // GitHub is under the Data Privacy Framework: no US-company sentence
+      if (name === "GitHub") expect(card.textContent).not.toContain("is a US company");
+      else expect(card.textContent).toContain(transfer);
+      expect(card.textContent).toContain(
+        "What you play or post there can say something about your beliefs, health or sexuality.",
+      );
+      expect(card.querySelector("label")!.textContent).toBe(
+        `I agree that Zrzur copies this and shows it on my profile, including anything it may reveal about me, and exchanges this data with ${name} in the United States.`,
+      );
+      button("Not now")!.click();
+      await flush();
+    }
+  });
+
+  it("a Twitch link from before asks once, and is off the profile until then", async () => {
+    api.edit.mockImplementation(async (_c, service, change) =>
+      account(service, { shown: true, consent_current: change.consent === 3 }),
+    );
+    mount({
+      twitch: {
+        available: true,
+        account: account("twitch", { shown: true, consent_current: false }),
+      },
+      github: { available: true },
+      battlenet: { available: true },
+    });
+    await flush();
+    expect(text()).toContain("Updated consent for Twitch");
+    expect(text()).toContain("Until you agree, your channel does not show");
+    expect(text()).toContain("Twitch is a US company");
+    expect(text()).toContain("Not on your profile");
+
+    const save = button("Save")!;
+    expect(save.disabled).toBe(true);
+    [...document.querySelectorAll<HTMLInputElement>("input[type=checkbox]")]
+      .find((box) => box.closest("label")?.textContent?.includes("Twitch in the United States"))!
+      .click();
+    await flush();
+    expect(save.disabled).toBe(false);
+    save.click();
+    await flush();
+    expect(api.edit).toHaveBeenCalledWith(expect.anything(), "twitch", { consent: 3 });
+    expect(text()).not.toContain("Updated consent for Twitch");
+    expect(text()).toContain("On your profile");
+  });
+
+  it("GitHub Refresh before agreeing shows the new text instead", async () => {
+    mount({
+      twitch: { available: true },
+      github: {
+        available: true,
+        account: account("github", { repos, shown_repos: [2], consent_current: false }),
+      },
+      battlenet: { available: true },
+    });
+    await flush();
+    expect(text()).toContain(
+      "Until you agree, your GitHub account does not show on your profile and Refresh stays off.",
+    );
+    button("Not now")!.click();
+    await flush();
+    expect(text()).not.toContain("Updated consent for GitHub");
+    button("Refresh")!.click();
+    await flush();
+    expect(api.refresh).not.toHaveBeenCalled();
+    expect(text()).toContain("Updated consent for GitHub");
+  });
+
+  it("Battle.net shows the new text at the next Confirm", async () => {
+    api.start.mockResolvedValue({ url: "https://oauth.battle.net/authorize?x" });
+    mount({
+      twitch: { available: true },
+      github: { available: true },
+      battlenet: {
+        available: true,
+        account: account("battlenet", {
+          shown: true,
+          consent_current: false,
+          expires_at: Date.now() + 5 * DAY,
+        }),
+      },
+    });
+    await flush();
+    button("Not now")!.click();
+    await flush();
+    button("Confirm on Battle.net")!.click();
+    await flush();
+    expect(api.start).not.toHaveBeenCalled();
+    expect(text()).toContain("You agree to it the next time you confirm on Battle.net.");
+    expect(text()).toContain("Battle.net is a US company");
+
+    const go = button("Continue to Battle.net")!;
+    expect(go.disabled).toBe(true);
+    [...document.querySelectorAll<HTMLInputElement>("input[type=checkbox]")]
+      .find((box) => box.closest("label")?.textContent?.includes("Battle.net in the United States"))!
+      .click();
+    await flush();
+    go.click();
+    await flush();
+    expect(api.edit).not.toHaveBeenCalled();
+    expect(api.start).toHaveBeenCalledWith(expect.anything(), "battlenet", "https://app.zrzur.com");
+  });
+
+  it("a sign-in page that never opens gives the button back with what to do", async () => {
+    api.start.mockResolvedValue({ url: "https://id.twitch.tv/oauth2/authorize?x" });
+    mount({
+      twitch: { available: true },
+      github: { available: true },
+      battlenet: { available: true },
+    });
+    await flush();
+    button("Connect Twitch")!.click();
+    await flush();
+    document.querySelector<HTMLInputElement>("input[type=checkbox]")!.click();
+    await flush();
+
+    // the desktop app blocks the navigation: the page stays
+    vi.useFakeTimers();
+    try {
+      button("Continue to Twitch")!.click();
+      await vi.advanceTimersByTimeAsync(0);
+      expect(assign).toHaveBeenCalledWith("https://id.twitch.tv/oauth2/authorize?x");
+      expect(button("Continue to Twitch")!.disabled).toBe(true);
+      expect(text()).not.toContain("sign-in page did not open");
+
+      await vi.advanceTimersByTimeAsync(4000);
+      expect(button("Continue to Twitch")!.disabled).toBe(false);
+      const alert = [...document.querySelectorAll("[role=alert]")].find((el) =>
+        el.textContent?.includes("Twitch's sign-in page did not open."),
+      );
+      expect(alert?.textContent).toContain(
+        "If you use the Zrzur desktop app, install the latest version from zrzur.com/download, then try again.",
+      );
+      expect(alert?.querySelector("a")?.getAttribute("href")).toBe(
+        "https://zrzur.com/download",
+      );
+    } finally {
+      vi.useRealTimers();
+    }
+  });
+
+  it("Confirm on Battle.net that never opens gives the button back too", async () => {
+    api.start.mockResolvedValue({ url: "https://oauth.battle.net/authorize?x" });
+    mount({
+      twitch: { available: true },
+      github: { available: true },
+      battlenet: {
+        available: true,
+        account: account("battlenet", { shown: true, expires_at: Date.now() + 5 * DAY }),
+      },
+    });
+    await flush();
+    vi.useFakeTimers();
+    try {
+      button("Confirm on Battle.net")!.click();
+      await vi.advanceTimersByTimeAsync(0);
+      expect(button("Confirm on Battle.net")!.disabled).toBe(true);
+      await vi.advanceTimersByTimeAsync(4000);
+      expect(button("Confirm on Battle.net")!.disabled).toBe(false);
+      expect(text()).toContain("Battle.net's sign-in page did not open.");
+    } finally {
+      vi.useRealTimers();
+    }
+  });
+
   it("shows the error in plain words when something fails", async () => {
     api.edit.mockRejectedValue(new Error("LinkedServiceFailed"));
     mount({

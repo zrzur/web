@@ -27,7 +27,14 @@ import {
 import { SteamTile } from "@revolt/ui/components/features/profiles/SteamTile";
 import { Icon } from "@revolt/ui/icons/Icon";
 
-import { ServiceCards } from "./ServiceCards";
+import {
+  ConsentLabel,
+  MayReveal,
+  ServiceCards,
+  SignInStuck,
+  UsTransfer,
+} from "./ServiceCards";
+import { leaveForSignIn } from "./leaveForSignIn";
 import {
   type LinkedAccount,
   type LinkedAccounts,
@@ -139,6 +146,58 @@ export function Connections() {
   );
 }
 
+/** What linking Steam copies */
+function SteamWhatWeCopy() {
+  return (
+    <p>
+      <strong>
+        <Trans>We will copy:</Trans>
+      </strong>{" "}
+      <Trans>
+        your Steam name and link, your game count, hours played, your 10 most
+        played games with their achievement counts, and up to 60 of your latest
+        achievements in those games with their name, description and the day
+        you unlocked them (no time of day). We take this from what Steam shows
+        publicly and keep it in the EU. Game pictures and achievement icons come
+        from Steam and load through Zrzur's servers, so Steam does not see who
+        views your profile.
+      </Trans>
+    </p>
+  );
+}
+
+/** Steam's "Keep in mind": the tie, the days, the US transfer, Art. 9 */
+function SteamKeepInMind() {
+  return (
+    <p>
+      <strong>
+        <Trans>Keep in mind:</Trans>
+      </strong>{" "}
+      <Trans>
+        this ties your Steam account to your Zrzur account. The unlock days show
+        when you played.
+      </Trans>{" "}
+      <UsTransfer name="Steam" /> <MayReveal />
+    </p>
+  );
+}
+
+/** How Steam's copy stays current */
+function SteamUpdates() {
+  return (
+    <p>
+      <strong>
+        <Trans>Updates:</Trans>
+      </strong>{" "}
+      <Trans>
+        we copy it again only when you press Refresh. Private on Steam means
+        nothing shows here. You can hide or disconnect at any time in Settings;
+        disconnecting deletes this copy.
+      </Trans>
+    </p>
+  );
+}
+
 /** The Steam row before linking, and the consent step before leaving */
 function SteamConnect(props: { available: boolean }) {
   const client = useClient();
@@ -146,16 +205,21 @@ function SteamConnect(props: { available: boolean }) {
   const [agreed, setAgreed] = createSignal(false);
   const [busy, setBusy] = createSignal(false);
   const [error, setError] = createSignal<unknown>();
+  const [stuck, setStuck] = createSignal(false);
 
   async function go() {
     setBusy(true);
     setError(undefined);
+    setStuck(false);
     try {
       const { url } = await connectionsApi.start(
         client(),
         window.location.origin,
       );
-      window.location.assign(url);
+      leaveForSignIn(url, () => {
+        setStuck(true);
+        setBusy(false);
+      });
     } catch (err) {
       setError(err);
       setBusy(false);
@@ -198,21 +262,7 @@ function SteamConnect(props: { available: boolean }) {
                 password.
               </Trans>
             </p>
-            <p>
-              <strong>
-                <Trans>We will copy:</Trans>
-              </strong>{" "}
-              <Trans>
-                your Steam name and link, your game count, hours played, your 10
-                most played games with their achievement counts, and up to 60 of
-                your latest achievements in those games with their name,
-                description and the day you unlocked them (no time of day). We
-                take this from what Steam shows publicly and keep it in the EU.
-                Game pictures and achievement icons come from Steam and load
-                through Zrzur's servers, so Steam does not see who views your
-                profile.
-              </Trans>
-            </p>
+            <SteamWhatWeCopy />
             <p>
               <strong>
                 <Trans>Who sees it:</Trans>
@@ -224,40 +274,22 @@ function SteamConnect(props: { available: boolean }) {
                 show nowhere.
               </Trans>
             </p>
-            <p>
-              <strong>
-                <Trans>Keep in mind:</Trans>
-              </strong>{" "}
-              <Trans>
-                this ties your Steam account to your Zrzur account. The unlock
-                days show when you played. What you play can say something about
-                your beliefs, health or sexuality.
-              </Trans>
-            </p>
-            <p>
-              <strong>
-                <Trans>Updates:</Trans>
-              </strong>{" "}
-              <Trans>
-                we copy it again only when you press Refresh. Private on Steam
-                means nothing shows here. You can hide or disconnect at any time
-                in Settings; disconnecting deletes this copy.
-              </Trans>
-            </p>
+            <SteamKeepInMind />
+            <SteamUpdates />
             <Checkbox
               checked={agreed()}
               onChange={(event) => setAgreed(event.currentTarget.checked)}
             >
-              <Trans>
-                I want Zrzur to copy this and show it on my profile, including
-                anything it may reveal about me.
-              </Trans>
+              <ConsentLabel name="Steam" />
             </Checkbox>
             <Show when={error()}>
               <ErrorLine role="alert">
                 <Trans>Steam could not be opened.</Trans>{" "}
                 <TranslatedError error={error()} />
               </ErrorLine>
+            </Show>
+            <Show when={stuck()}>
+              <SignInStuck name="Steam" />
             </Show>
             <Actions>
               <Button
@@ -267,6 +299,7 @@ function SteamConnect(props: { available: boolean }) {
                   setAsking(false);
                   setAgreed(false);
                   setError(undefined);
+                  setStuck(false);
                 }}
               >
                 <Trans>Not now</Trans>
@@ -329,6 +362,19 @@ function SteamLinked(props: {
     );
 
   const canRefresh = () => now() >= props.account.refresh_after;
+  /** The service name, the same in every language */
+  const name = () => "Steam";
+
+  /** Refresh before agreeing to the text in use: show that text instead */
+  const refresh = () => {
+    if (props.account.consent_current) {
+      return run(() => connectionsApi.refresh(client()));
+    }
+    setKeptOld(false);
+    queueMicrotask(() =>
+      document.getElementById("steam-reconsent-title")?.focus(),
+    );
+  };
 
   /** What others would see, with the pictures, before switching it on */
   const preview = () =>
@@ -402,22 +448,26 @@ function SteamLinked(props: {
       <Body>
         <Show when={!props.account.consent_current && !keptOld()}>
           <Consent role="group" aria-labelledby="steam-reconsent-title">
-            <ConsentTitle id="steam-reconsent-title">
-              <Trans>New on your Steam card</Trans>
+            <ConsentTitle id="steam-reconsent-title" tabIndex={-1}>
+              {t`Updated consent for ${name()}`}
             </ConsentTitle>
             <p>
               <Trans>
-                Zrzur can now also show game pictures and up to 60 of your
-                latest achievements with the day you unlocked them (no time of
-                day). The unlock days show when you played. Nothing new shows
-                until you agree.
+                We have updated what you agree to when you link Steam: it now
+                covers game pictures and up to 60 of your latest achievements
+                with the day you unlocked them (no time of day), and it names
+                where your data goes. Until you agree, Refresh stays off and
+                nothing new shows.
               </Trans>
             </p>
+            <SteamWhatWeCopy />
+            <SteamKeepInMind />
+            <SteamUpdates />
             <Checkbox
               checked={agreeNew()}
               onChange={(event) => setAgreeNew(event.currentTarget.checked)}
             >
-              <Trans>Show these on my profile too.</Trans>
+              <ConsentLabel name="Steam" />
             </Checkbox>
             <Actions>
               <Button
@@ -511,7 +561,7 @@ function SteamLinked(props: {
               variant="outlined"
               size="sm"
               isDisabled={busy() || !canRefresh()}
-              onPress={() => run(() => connectionsApi.refresh(client()))}
+              onPress={refresh}
             >
               <Trans>Refresh</Trans>
             </Button>

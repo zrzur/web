@@ -1,0 +1,42 @@
+{
+  "{name} is a US company: what we send it and read from it goes to the United States, where your data may be less protected than in the EU (for example, US authorities may be able to access it).": [
+    "{name} شركة أمريكية: ما نرسله إليها ونقرؤه منها يمرّ عبر الولايات المتحدة، وقد تكون حماية بياناتك هناك أضعف منها في الاتحاد الأوروبي (فقد تتمكن السلطات الأمريكية من الوصول إليها مثلًا).",
+    "{name} ist ein US-Unternehmen: Was wir dorthin senden und von dort lesen, geht in die USA, wo deine Daten weniger geschützt sein können als in der EU (zum Beispiel können US-Behörden unter Umständen darauf zugreifen)."
+  ],
+  "What you play or post there can say something about your beliefs, health or sexuality.": [
+    "وقد يكشف ما تلعبه أو تنشره هناك شيئًا عن معتقداتك أو صحتك أو ميولك الجنسية.",
+    "Was du dort spielst oder postest, kann etwas über deinen Glauben, deine Gesundheit oder deine Sexualität verraten."
+  ],
+  "I agree that Zrzur copies this and shows it on my profile, including anything it may reveal about me, and exchanges this data with {name} in the United States.": [
+    "أوافق على أن ينسخ زرزور هذه البيانات ويعرضها في ملفي الشخصي، بما في ذلك ما قد تكشفه عني، وأن يتبادلها مع {name} في الولايات المتحدة.",
+    "Ich bin einverstanden, dass Zrzur das kopiert und in meinem Profil zeigt, auch was es über mich verraten kann, und diese Daten mit {name} in den USA austauscht."
+  ],
+  "this ties your Steam account to your Zrzur account. The unlock days show when you played.": [
+    "هذا يربط حسابك على Steam بحسابك في زرزور. أيام تحقيق الإنجازات تُظهر متى كنت تلعب.",
+    "damit wird dein Steam-Konto mit deinem Zrzur-Konto verbunden. Die Tage deiner Erfolge zeigen, wann du gespielt hast."
+  ],
+  "{name}'s sign-in page did not open. If you use the Zrzur desktop app, install the latest version from <0>zrzur.com/download</0>, then try again.": [
+    "لم تُفتح صفحة تسجيل الدخول في {name}. إن كنت تستخدم تطبيق زرزور لسطح المكتب، فثبّت أحدث إصدار من <0>zrzur.com/download</0>، ثم حاول مرة أخرى.",
+    "Die Anmeldeseite von {name} hat sich nicht geöffnet. Wenn du die Zrzur-Desktop-App nutzt, installiere die neueste Version von <0>zrzur.com/download</0> und versuche es dann noch einmal."
+  ],
+  "Updated consent for {0}": [
+    "موافقة محدَّثة على ربط {0}",
+    "Aktualisierte Einwilligung für {0}"
+  ],
+  "We have updated what you agree to when you link Twitch: it now names where your data goes. Until you agree, your channel does not show on your profile and we exchange no data with Twitch about it.": [
+    "حدّثنا ما توافق عليه عند ربط Twitch: فهو يذكر الآن أين تذهب بياناتك. وإلى أن توافق، لا تظهر قناتك في ملفك الشخصي ولا نتبادل أي بيانات عنها مع Twitch.",
+    "Wir haben aktualisiert, wozu du beim Verknüpfen von Twitch einwilligst: Jetzt steht darin auch, wohin deine Daten gehen. Bis du zustimmst, erscheint dein Kanal nicht in deinem Profil, und wir tauschen keine Daten darüber mit Twitch aus."
+  ],
+  "We have updated what you agree to when you link GitHub: it now names where your data goes. Until you agree, your GitHub account does not show on your profile and Refresh stays off.": [
+    "حدّثنا ما توافق عليه عند ربط GitHub: فهو يذكر الآن أين تذهب بياناتك. وإلى أن توافق، لا يظهر حسابك في GitHub في ملفك الشخصي ولا يعمل «تحديث».",
+    "Wir haben aktualisiert, wozu du beim Verknüpfen von GitHub einwilligst: Jetzt steht darin auch, wohin deine Daten gehen. Bis du zustimmst, erscheint dein GitHub-Konto nicht in deinem Profil, und „Aktualisieren“ bleibt aus."
+  ],
+  "We have updated what you agree to when you link Battle.net: it now names where your data goes. You agree to it the next time you confirm on Battle.net.": [
+    "حدّثنا ما توافق عليه عند ربط Battle.net: فهو يذكر الآن أين تذهب بياناتك. وتوافق عليه في المرة القادمة التي تؤكّد فيها عبر Battle.net.",
+    "Wir haben aktualisiert, wozu du beim Verknüpfen von Battle.net einwilligst: Jetzt steht darin auch, wohin deine Daten gehen. Du stimmst zu, wenn du das nächste Mal bei Battle.net bestätigst."
+  ],
+  "We have updated what you agree to when you link Steam: it now covers game pictures and up to 60 of your latest achievements with the day you unlocked them (no time of day), and it names where your data goes. Until you agree, Refresh stays off and nothing new shows.": [
+    "حدّثنا ما توافق عليه عند ربط Steam: فهو يشمل الآن صور الألعاب وما يصل إلى 60 من أحدث إنجازاتك مع اليوم الذي حققتها فيه (من دون الساعة)، ويذكر أين تذهب بياناتك. وإلى أن توافق، لا يعمل «تحديث» ولا يظهر شيء جديد.",
+    "Wir haben aktualisiert, wozu du beim Verknüpfen von Steam einwilligst: Es umfasst jetzt Spielbilder und bis zu 60 deiner neuesten Erfolge mit dem Tag, an dem du sie freigeschaltet hast (ohne Uhrzeit), und nennt, wohin deine Daten gehen. Bis du zustimmst, bleibt „Aktualisieren“ aus und nichts Neues erscheint."
+  ]
+}

@@ -26338,3 +26338,45 @@ msgstr "Zrzur, direkt auf <0>deinem Desktop.</0>"
 #: components/app/interface/settings/user/appearance/AppearanceMenu.tsx
 #~ msgid "Zrzur's own look: very dark neutral panels with Zrzur Pink as the one accent."
 #~ msgstr "Zrzurs eigener Look: sehr dunkle, neutrale Flächen mit Zrzur-Pink als einziger Akzentfarbe."
+
+#: components/app/interface/settings/user/connections/ServiceCards.tsx
+msgid "{name} is a US company: what we send it and read from it goes to the United States, where your data may be less protected than in the EU (for example, US authorities may be able to access it)."
+msgstr "{name} ist ein US-Unternehmen: Was wir dorthin senden und von dort lesen, geht in die USA, wo deine Daten weniger geschützt sein können als in der EU (zum Beispiel können US-Behörden unter Umständen darauf zugreifen)."
+
+#: components/app/interface/settings/user/connections/ServiceCards.tsx
+msgid "I agree that Zrzur copies this and shows it on my profile, including anything it may reveal about me, and exchanges this data with {name} in the United States."
+msgstr "Ich bin einverstanden, dass Zrzur das kopiert und in meinem Profil zeigt, auch was es über mich verraten kann, und diese Daten mit {name} in den USA austauscht."
+
+#: components/app/interface/settings/user/connections/Connections.tsx
+msgid "this ties your Steam account to your Zrzur account. The unlock days show when you played."
+msgstr "damit wird dein Steam-Konto mit deinem Zrzur-Konto verbunden. Die Tage deiner Erfolge zeigen, wann du gespielt hast."
+
+#. placeholder {0}: name()
+#: components/app/interface/settings/user/connections/Connections.tsx
+#: components/app/interface/settings/user/connections/ServiceCards.tsx
+msgid "Updated consent for {0}"
+msgstr "Aktualisierte Einwilligung für {0}"
+
+#: components/app/interface/settings/user/connections/ServiceCards.tsx
+msgid "We have updated what you agree to when you link Battle.net: it now names where your data goes. You agree to it the next time you confirm on Battle.net."
+msgstr "Wir haben aktualisiert, wozu du beim Verknüpfen von Battle.net einwilligst: Jetzt steht darin auch, wohin deine Daten gehen. Du stimmst zu, wenn du das nächste Mal bei Battle.net bestätigst."
+
+#: components/app/interface/settings/user/connections/Connections.tsx
+msgid "We have updated what you agree to when you link Steam: it now covers game pictures and up to 60 of your latest achievements with the day you unlocked them (no time of day), and it names where your data goes. Until you agree, Refresh stays off and nothing new shows."
+msgstr "Wir haben aktualisiert, wozu du beim Verknüpfen von Steam einwilligst: Es umfasst jetzt Spielbilder und bis zu 60 deiner neuesten Erfolge mit dem Tag, an dem du sie freigeschaltet hast (ohne Uhrzeit), und nennt, wohin deine Daten gehen. Bis du zustimmst, bleibt „Aktualisieren“ aus und nichts Neues erscheint."
+
+#: components/app/interface/settings/user/connections/ServiceCards.tsx
+msgid "What you play or post there can say something about your beliefs, health or sexuality."
+msgstr "Was du dort spielst oder postest, kann etwas über deinen Glauben, deine Gesundheit oder deine Sexualität verraten."
+
+#: components/app/interface/settings/user/connections/ServiceCards.tsx
+msgid "We have updated what you agree to when you link GitHub: it now names where your data goes. Until you agree, your GitHub account does not show on your profile and Refresh stays off."
+msgstr "Wir haben aktualisiert, wozu du beim Verknüpfen von GitHub einwilligst: Jetzt steht darin auch, wohin deine Daten gehen. Bis du zustimmst, erscheint dein GitHub-Konto nicht in deinem Profil, und „Aktualisieren“ bleibt aus."
+
+#: components/app/interface/settings/user/connections/ServiceCards.tsx
+msgid "We have updated what you agree to when you link Twitch: it now names where your data goes. Until you agree, your channel does not show on your profile and we exchange no data with Twitch about it."
+msgstr "Wir haben aktualisiert, wozu du beim Verknüpfen von Twitch einwilligst: Jetzt steht darin auch, wohin deine Daten gehen. Bis du zustimmst, erscheint dein Kanal nicht in deinem Profil, und wir tauschen keine Daten darüber mit Twitch aus."
+
+#: components/app/interface/settings/user/connections/ServiceCards.tsx
+msgid "{name}'s sign-in page did not open. If you use the Zrzur desktop app, install the latest version from <0>zrzur.com/download</0>, then try again."
+msgstr "Die Anmeldeseite von {name} hat sich nicht geöffnet. Wenn du die Zrzur-Desktop-App nutzt, installiere die neueste Version von <0>zrzur.com/download</0> und versuche es dann noch einmal."
