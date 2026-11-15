@@ -33,12 +33,6 @@
       "category": "reviewed-build-and-ci"
     },
     {
-      "path": ".github/workflows/e2e.yml",
-      "sha256": "399d6ade68b7d258e4ea3339978cfa00fd3d020a8017c5ef094214ef74e6927a",
-      "bytes": 8265,
-      "category": "reviewed-build-and-ci"
-    },
-    {
       "path": ".github/workflows/images.yml",
       "sha256": "b10d7fac7ae9e8e1dc777d61f4cc6befedc062ac438f72c5e8a5c5c29dea4530",
       "bytes": 5351,
@@ -52,8 +46,8 @@
     },
     {
       "path": ".gitignore",
-      "sha256": "5e096d84c3a809a6ce23475a0e6c7746a5db92b1570d13dc48e592ac0a04c16d",
-      "bytes": 902,
+      "sha256": "e782a29a3ec0878db1c87f7847c7fa4441f67fc1c6b65bc5dec96c5f45d9ee7c",
+      "bytes": 998,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -541,126 +535,6 @@
       "sha256": "60b7fe4456319920a52160e77ddfad3a5d52bb5e3cad8e99f766dba728742af2",
       "bytes": 6565,
       "category": "product-source-or-build-manifest"
-    },
-    {
-      "path": "e2e/developer-docs.mjs",
-      "sha256": "6903d476b6f16e720eb08d6f7d9e1246c60186de4480a20e98412e3036166f0d",
-      "bytes": 8276,
-      "category": "synthetic-test-source-or-fixture"
-    },
-    {
-      "path": "e2e/stack-runner/app-design-audit.mjs",
-      "sha256": "2688d1b10552cab5ad0095b4f535a77ef9b11f45ee6180f763105328aebed4e4",
-      "bytes": 16051,
-      "category": "synthetic-test-source-or-fixture"
-    },
-    {
-      "path": "e2e/stack-runner/badges-one-design.mjs",
-      "sha256": "e958ff11ff6409cbb374d4221f9e3925013843100f10d46d4b2f73414501b290",
-      "bytes": 34167,
-      "category": "synthetic-test-source-or-fixture"
-    },
-    {
-      "path": "e2e/stack-runner/build.sh",
-      "sha256": "68d3dafb6da69d499d26b5549d747a7037bf64bbe6c79ab4defe8a9d17abd66a",
-      "bytes": 625,
-      "category": "synthetic-test-source-or-fixture"
-    },
-    {
-      "path": "e2e/stack-runner/create-server-flow.mjs",
-      "sha256": "89500266ed04722c8ada3cfac1a6b22a7198ae3f853b353695c2d4d3dba6d0b7",
-      "bytes": 43272,
-      "category": "synthetic-test-source-or-fixture"
-    },
-    {
-      "path": "e2e/stack-runner/creator-studio.mjs",
-      "sha256": "a9c14655070527acde7974e961e0480d4fc44d4a36c40f7eb9a19ca4e2f469a2",
-      "bytes": 40492,
-      "category": "synthetic-test-source-or-fixture"
-    },
-    {
-      "path": "e2e/stack-runner/creator-templates.mjs",
-      "sha256": "cc815c1c98e351e1cb217623b0eaa0cbe988738ea89e8be0cfa44b886147a56d",
-      "bytes": 32316,
-      "category": "synthetic-test-source-or-fixture"
-    },
-    {
-      "path": "e2e/stack-runner/csp.mjs",
-      "sha256": "33d676f4705dfee729e7a1dc34c5cbfd9eb9bf3dcb0270cd42458a22e46071ed",
-      "bytes": 17080,
-      "category": "synthetic-test-source-or-fixture"
-    },
-    {
-      "path": "e2e/stack-runner/discover-journeys.mjs",
-      "sha256": "d9c68bbe22d5676714001b932a87f6a81c166cf7442c181f72a8ab01f3c5cb46",
-      "bytes": 14881,
-      "category": "synthetic-test-source-or-fixture"
-    },
-    {
-      "path": "e2e/stack-runner/events.mjs",
-      "sha256": "725d37e25ca2f44bb9761cbbf85441716ca51d975f9c3964d28cf5981348a3f9",
-      "bytes": 11279,
-      "category": "synthetic-test-source-or-fixture"
-    },
-    {
-      "path": "e2e/stack-runner/insights.mjs",
-      "sha256": "3b0c933307fa3848b54ae25bde7d4b068897d92fcfdd9239c3c6f6d8dc335b1c",
-      "bytes": 10512,
-      "category": "synthetic-test-source-or-fixture"
-    },
-    {
-      "path": "e2e/stack-runner/light-app.mjs",
-      "sha256": "e2dfd5d3c534047cd9cecc948c6a5bc5a58fc7ac0121bc09d29be640edeb95cc",
-      "bytes": 24809,
-      "category": "synthetic-test-source-or-fixture"
-    },
-    {
-      "path": "e2e/stack-runner/moderation-tools.mjs",
-      "sha256": "a21a24448117549631f25b0864722e9818e4124af03ae1ea1e7b606cc8c6bfb9",
-      "bytes": 16488,
-      "category": "synthetic-test-source-or-fixture"
-    },
-    {
-      "path": "e2e/stack-runner/native-selects.mjs",
-      "sha256": "7736840bdd0713f994fe34ae78ebe00d5e0ada89edf1b5cdb7cf13483b29bf06",
-      "bytes": 13999,
-      "category": "synthetic-test-source-or-fixture"
-    },
-    {
-      "path": "e2e/stack-runner/overnight-forward.mjs",
-      "sha256": "b04a8f56a0f7c8a48cc0e0bf6c0bf30d09d510797f3b4c554d55c35b327aefe3",
-      "bytes": 8970,
-      "category": "synthetic-test-source-or-fixture"
-    },
-    {
-      "path": "e2e/stack-runner/overnight-lib.mjs",
-      "sha256": "19893fed1407c13f0f335f881ffa1ce1f92be0b3d4856ed231fb07f2a8e6b8f0",
-      "bytes": 11538,
-      "category": "synthetic-test-source-or-fixture"
-    },
-    {
-      "path": "e2e/stack-runner/overnight-search.mjs",
-      "sha256": "76a3b79ddbeba4c0d2c5ca676e3d5d8ec5b5868470cd008f9bbf3a1cd68010c9",
-      "bytes": 13714,
-      "category": "synthetic-test-source-or-fixture"
-    },
-    {
-      "path": "e2e/stack-runner/safety-statement.mjs",
-      "sha256": "9063636300730819a53868329eff19bfe1c3943344f8644afe7e458ea0adea67",
-      "bytes": 13629,
-      "category": "synthetic-test-source-or-fixture"
-    },
-    {
-      "path": "e2e/stack-runner/server-settings.mjs",
-      "sha256": "8008fb688f3d5f6e96982df1c433aea1a965afa952df77e7422050478d1850ac",
-      "bytes": 62909,
-      "category": "synthetic-test-source-or-fixture"
-    },
-    {
-      "path": "e2e/stack-runner/sessions-page.mjs",
-      "sha256": "07603195b13b683eb2b7db76824fcc02eace4e9d9ecf1b72eace80383c372284",
-      "bytes": 21696,
-      "category": "synthetic-test-source-or-fixture"
     },
     {
       "path": "eslint.config.mjs",
