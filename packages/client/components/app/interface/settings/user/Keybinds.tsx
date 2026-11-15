@@ -274,6 +274,36 @@ export function KeybindsSettings() {
       ],
     },
     {
+      title: <Trans>Creator Studio</Trans>,
+      rows: [
+        {
+          title: <Trans>New design</Trans>,
+          description: <Trans>On the studio's first page.</Trans>,
+          keys: [["N"]],
+        },
+        {
+          title: <Trans>Search your designs</Trans>,
+          description: <Trans>On the studio's first page.</Trans>,
+          keys: [["F"]],
+        },
+        {
+          title: <Trans>Guide marks on or off</Trans>,
+          description: <Trans>In the preview step of a design.</Trans>,
+          keys: [["G"]],
+        },
+        {
+          title: <Trans>Dark or light background</Trans>,
+          description: <Trans>In the preview step of a design.</Trans>,
+          keys: [["D"]],
+        },
+        {
+          title: <Trans>Next step, or send the design</Trans>,
+          description: <Trans>While making a design.</Trans>,
+          keys: [["Mod", "Enter"]],
+        },
+      ],
+    },
+    {
       title: <Trans>General</Trans>,
       rows: [
         { id: "open_shortcuts", title: <Trans>Show keyboard shortcuts</Trans> },

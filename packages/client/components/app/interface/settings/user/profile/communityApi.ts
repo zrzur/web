@@ -423,6 +423,18 @@ export const communityApi = {
   archive: (client: Client, itemId: string) =>
     client.api.post(`/community/items/${id(itemId)}/archive`).then(withoutNull),
 
+  /** Take a withdrawn design back as a draft */
+  restore: (client: Client, itemId: string) =>
+    discoverRequest<CommunityItem>(
+      client,
+      "POST",
+      `/community/items/${id(itemId)}/restore`,
+    ),
+
+  /** Delete a design nobody can see, with its image, for good */
+  remove: (client: Client, itemId: string) =>
+    discoverRequest<void>(client, "DELETE", `/community/items/${id(itemId)}`),
+
   // reviewers
   queue: (client: Client) =>
     client.api.get("/community/review").then(withoutNull),
