@@ -140,6 +140,10 @@ const server = createServer((req, res) => {
     "referrer-policy": "strict-origin-when-cross-origin",
     vary: "accept-encoding",
   };
+  // what runs here (version, commit): zrzur.com/source reads it from the
+  // visitor's browser, so any site may read this one public file
+  if (servedPath === "/build.json")
+    headers["access-control-allow-origin"] = "*";
 
   if (req.headers["if-none-match"] === etag) {
     res.writeHead(304, headers);

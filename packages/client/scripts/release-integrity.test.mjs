@@ -181,3 +181,24 @@ test("one version: RELEASE.json (what the app shows) equals package.json (the im
   assert.equal(release.version, pkg.version, "RELEASE.json and package.json disagree");
   assert.equal(release.targetVersion, release.version, "RELEASE.json targetVersion");
 });
+
+test("build.json names the version and the exact commit of the running build", async () => {
+  const { buildJson } = await import("./build-json.mjs");
+  const commit = "b".repeat(40);
+  const json = JSON.parse(buildJson({ version: "26.1.0-beta.2", commit, tag: "" }, "web"));
+  assert.deepEqual(json, {
+    product: "Zrzur",
+    component: "web",
+    version: "26.1.0-beta.2",
+    commit,
+    tag: "",
+    sourceUrl: `https://github.com/zrzur/web/tree/${commit}`,
+  });
+});
+
+test("the Source integrity workflow expects the version in RELEASE.json", () => {
+  const root = new URL("../../../", import.meta.url);
+  const release = JSON.parse(readFileSync(new URL("RELEASE.json", root), "utf8"));
+  const workflow = readFileSync(new URL(".github/workflows/source-check.yml", root), "utf8");
+  assert.ok(workflow.includes(`assert release['version'] == '${release.version}'`), "source-check.yml names another version");
+});

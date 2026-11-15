@@ -12,6 +12,7 @@ import solidSvg from "vite-plugin-solid-svg";
 
 import { assertBuildEnvSafe } from "./buildEnv";
 import codegenPlugin from "./codegen.plugin";
+import { buildJsonPlugin } from "./scripts/build-json.mjs";
 import { dndFlip } from "./scripts/dndFlip.mjs";
 import { emitterInspect } from "./scripts/emitterInspect.mjs";
 import { polyfillGate } from "./scripts/polyfillGate.mjs";
@@ -43,6 +44,7 @@ export default defineConfig(({ command }) => {
       __ZRZUR_BUILD__: buildDefine(releaseInfo, "web"),
     },
     plugins: [
+      buildJsonPlugin(releaseInfo, "web"),
       thirdPartyNotices({
         productName: "Zrzur web",
         root: resolve(__dirname, "../.."),
