@@ -20,10 +20,13 @@ export function SteamTile(props: {
   round?: boolean;
   /** Takes the size of its grid cell instead of a fixed one */
   fill?: boolean;
+  /** An address already through the media proxy (another service's picture) */
+  src?: string;
 }) {
   const client = useClient();
   const [failed, setFailed] = createSignal(false);
-  const src = () => (failed() ? undefined : steamImage(client(), props.url));
+  const src = () =>
+    failed() ? undefined : (props.src ?? steamImage(client(), props.url));
   const letter = () => Array.from(props.name.trim())[0]?.toUpperCase() ?? "?";
 
   return (

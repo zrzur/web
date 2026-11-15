@@ -375,6 +375,11 @@ msgstr "{0} خانة إيموجي"
 msgid "{0} files exceed the maximum size limit of {maxSizeFormatted} and were not uploaded."
 msgstr "{0} ملفات تتجاوز الحد الأقصى للحجم ({maxSizeFormatted}) ولم تُرفع."
 
+#. placeholder {0}: number(props.connection.followers)
+#: components/ui/components/features/profiles/ProfileConnections.tsx
+msgid "{0} followers"
+msgstr "المتابعون: {0}"
+
 #. placeholder {0}: tierName(pending()!.kind)
 #. placeholder {1}: s().days
 #. placeholder {2}: price(pending()!.price)
@@ -693,6 +698,11 @@ msgstr "أعاد {0} تسمية القناة"
 msgid "{0} reporters"
 msgstr "{0} مُبلِّغين"
 
+#. placeholder {0}: number(props.connection.public_repos)
+#: components/ui/components/features/profiles/ProfileConnections.tsx
+msgid "{0} repositories"
+msgstr "المستودعات: {0}"
+
 #. placeholder {0}: e().rateLimit.limit
 #. placeholder {1}: e().rateLimit.windowSeconds
 #: src/interface/developers/docs/EndpointReference.tsx
@@ -718,7 +728,6 @@ msgid "{0} selected"
 msgstr "{0} محدد"
 
 #. placeholder {0}: number(repo.stars)
-#. placeholder {0}: props.number(props.repo.stars)
 #: components/app/interface/settings/user/connections/ServiceCards.tsx
 #: components/ui/components/features/profiles/ProfileConnections.tsx
 msgid "{0} stars"
@@ -2082,6 +2091,10 @@ msgstr "متقدم"
 msgid "Advanced: JSON import and export"
 msgstr "متقدم: استيراد JSON وتصديره"
 
+#: components/ui/components/features/profiles/ProfileConnections.tsx
+msgid "Affiliate"
+msgstr "تابع"
+
 #: components/ui/components/features/profiles/plateNames.ts
 msgid "Afghanistan"
 msgstr "أفغانستان"
@@ -3282,8 +3295,8 @@ msgid "Battle.net lets us keep it for 30 days. Confirm on Battle.net before then
 msgstr "تسمح Battle.net بالاحتفاظ به ٣٠ يومًا. أكّد عبر Battle.net قبل انقضائها لتحتفظ به، وإلا حذفناه. لا نحتفظ بتسجيل دخولك في Battle.net."
 
 #: components/ui/components/features/profiles/ProfileConnections.tsx
-msgid "BattleTag from Battle.net"
-msgstr "BattleTag من Battle.net"
+#~ msgid "BattleTag from Battle.net"
+#~ msgstr "BattleTag من Battle.net"
 
 #: components/app/interface/settings/user/connections/ServiceCards.tsx
 msgid "BattleTag from Battle.net. Disconnecting deletes it at once."
@@ -5549,7 +5562,6 @@ msgstr "تم النسخ!"
 #: components/app/interface/settings/server/webhooks/ServerWebhooks.tsx
 #: components/app/interface/settings/user/bots/ViewBot.tsx
 #: components/modal/modals/CreateInvite.tsx
-#: components/ui/components/features/profiles/ProfileConnections.tsx
 #: src/interface/Developers.tsx
 #: src/interface/developers/docs/CodeBlock.tsx
 msgid "Copy"
@@ -8764,6 +8776,10 @@ msgstr "ابتداءً من {0} من الأجنحة"
 msgid "From above"
 msgstr "من الأعلى"
 
+#: components/ui/components/features/profiles/ProfileConnections.tsx
+msgid "From Battle.net"
+msgstr "من Battle.net"
+
 #: components/app/interface/settings/user/appearance/AnimationSettings.tsx
 msgid "From below"
 msgstr "من الأسفل"
@@ -8775,6 +8791,10 @@ msgstr "من الأسفل"
 #: src/interface/Discover.tsx
 #~ msgid "From gaming to study groups, there's a place for everyone."
 #~ msgstr "من الألعاب إلى مجموعات الدراسة، هناك مكان للجميع."
+
+#: components/ui/components/features/profiles/ProfileConnections.tsx
+msgid "From GitHub"
+msgstr "من GitHub"
 
 #: components/ui/components/features/profiles/ProfileGames.tsx
 msgid "From Steam"
@@ -8792,6 +8812,10 @@ msgstr "من جهة النهاية"
 #: components/app/interface/settings/user/appearance/AnimationSettings.tsx
 msgid "From the start"
 msgstr "من جهة البداية"
+
+#: components/ui/components/features/profiles/ProfileConnections.tsx
+msgid "From Twitch"
+msgstr "من Twitch"
 
 #: components/app/interface/settings/user/appearance/AppearanceMenu.tsx
 msgid "Frosted menus and overlays. Turn off on older computers."
@@ -10888,6 +10912,10 @@ msgstr "لاوس"
 #: components/app/interface/settings/user/bots/CommandManager.tsx
 msgid "Largest value"
 msgstr "أكبر قيمة"
+
+#: components/ui/components/features/profiles/ProfileConnections.tsx
+msgid "Last stream"
+msgstr "آخر بث"
 
 #: components/app/interface/settings/user/Sync.tsx
 msgid "Last sync <0/>"
@@ -14824,6 +14852,11 @@ msgstr "افتح الرابط"
 #~ msgid "Open My applications"
 #~ msgstr "افتح تطبيقاتي"
 
+#. placeholder {0}: service()
+#: components/ui/components/features/profiles/ProfileConnections.tsx
+msgid "Open on {0}"
+msgstr "فتح في {0}"
+
 #: components/modal/modals/BillingCheckoutStatus.tsx
 msgid "Open payment page"
 msgstr "افتح صفحة الدفع"
@@ -15205,6 +15238,10 @@ msgstr "مسترَدّ جزئيًا"
 #: components/app/interface/settings/user/Language.tsx
 msgid "Partly translated"
 msgstr "مترجمة جزئيًا"
+
+#: components/ui/components/features/profiles/ProfileConnections.tsx
+msgid "Partner"
+msgstr "شريك"
 
 #: components/app/interface/settings/user/profile/CreatorStudio.tsx
 #: components/app/interface/settings/user/profile/ReviewQueue.tsx
@@ -19217,6 +19254,7 @@ msgstr "اعرض في ملفك الشخصي حساباتك في خدمات أخ�
 #~ msgstr "إظهار اختصارات لوحة الإدارة في القوائم المنبثقة"
 
 #. placeholder {0}: list().length
+#: components/ui/components/features/profiles/ProfileConnections.tsx
 #: components/ui/components/features/profiles/ProfileGames.tsx
 msgid "Show all {0}"
 msgstr "عرض الكل ({0})"
@@ -19243,6 +19281,7 @@ msgstr "عرض اختصارات لوحة المفاتيح"
 
 #: components/ui/components/features/messaging/elements/TextEmbed.tsx
 #: components/ui/components/features/profiles/ProfileBio.tsx
+#: components/ui/components/features/profiles/ProfileConnections.tsx
 #: components/ui/components/features/profiles/ProfileGames.tsx
 #: components/ui/components/features/profiles/ProfileTiles.tsx
 #: components/ui/components/features/voice/soundboard/SoundboardPicker.tsx
@@ -23896,6 +23935,7 @@ msgid "Vietnam"
 msgstr "فيتنام"
 
 #: components/app/interface/settings/user/Account.tsx
+#: components/ui/components/features/profiles/ProfileConnections.tsx
 #: components/ui/components/features/profiles/ProfileGames.tsx
 msgid "View"
 msgstr "عرض"
@@ -23928,9 +23968,13 @@ msgid "View currently active bug reports here."
 msgstr "اطّلع هنا على بلاغات الأخطاء المفتوحة حاليًا."
 
 #: components/app/menus/UserContextMenu.tsx
-#: components/ui/components/features/profiles/ProfileActions.tsx
 msgid "View full profile"
 msgstr "عرض الملف الشخصي كاملًا"
+
+#. placeholder {0}: service()
+#: components/ui/components/features/profiles/ProfileConnections.tsx
+msgid "View on {0}"
+msgstr "عرض في {0}"
 
 #: components/app/interface/settings/shared/Discoverable.tsx
 msgid "View on Discover"
@@ -25810,8 +25854,12 @@ msgid "Your friends list is empty"
 msgstr "قائمة أصدقائك فارغة"
 
 #: components/app/interface/settings/user/connections/ServiceCards.tsx
-msgid "your GitHub username and link, and up to 12 of your most starred own public repositories with their description, language and stars, and keep them in the EU."
-msgstr "اسم المستخدم ورابطك في GitHub، وحتى ١٢ من مستودعاتك العامة الأكثر نجومًا مع وصفها ولغتها وعدد نجومها، ونحفظها في الاتحاد الأوروبي."
+#~ msgid "your GitHub username and link, and up to 12 of your most starred own public repositories with their description, language and stars, and keep them in the EU."
+#~ msgstr "اسم المستخدم ورابطك في GitHub، وحتى ١٢ من مستودعاتك العامة الأكثر نجومًا مع وصفها ولغتها وعدد نجومها، ونحفظها في الاتحاد الأوروبي."
+
+#: components/app/interface/settings/user/connections/ServiceCards.tsx
+msgid "your GitHub username, name, picture, bio and link, your follower and repository counts, and up to 12 of your most starred own public repositories with their description, language and stars, and keep them in the EU."
+msgstr "اسم المستخدم والاسم والصورة والنبذة والرابط في GitHub، وعدد المتابعين والمستودعات، وحتى ١٢ من مستودعاتك العامة الأكثر نجومًا مع وصفها ولغتها وعدد نجومها، ونحفظها في الاتحاد الأوروبي."
 
 #: components/app/menus/ServerContextMenu.tsx
 msgid "Your interests"
@@ -26012,8 +26060,12 @@ msgid "Your tickets couldn't be loaded. Try again later."
 msgstr "تعذّر تحميل تذاكرك. حاول لاحقاً."
 
 #: components/app/interface/settings/user/connections/ServiceCards.tsx
-msgid "your Twitch name and channel link, and whether you are live now with the stream title, and keep them in the EU."
-msgstr "اسمك في Twitch ورابط قناتك، وهل تبث الآن مع عنوان البث، ونحفظها في الاتحاد الأوروبي."
+#~ msgid "your Twitch name and channel link, and whether you are live now with the stream title, and keep them in the EU."
+#~ msgstr "اسمك في Twitch ورابط قناتك، وهل تبث الآن مع عنوان البث، ونحفظها في الاتحاد الأوروبي."
+
+#: components/app/interface/settings/user/connections/ServiceCards.tsx
+msgid "your Twitch name, picture, bio and channel link, whether you are a partner or affiliate, the category of your last stream, and whether you are live now with the stream title, and keep them in the EU."
+msgstr "اسمك وصورتك ونبذتك ورابط قناتك في Twitch، وهل أنت شريك أو تابع، وفئة آخر بث لك، وهل تبث الآن مع عنوان البث، ونحفظها في الاتحاد الأوروبي."
 
 #: components/i18n/errors.tsx
 msgid "Your user has already been created? Try logging in again or refreshing the app."
