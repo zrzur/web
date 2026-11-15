@@ -2,6 +2,21 @@
 
 ## Unreleased
 
+### Creator Studio, rebuilt (2026-11-15)
+
+* **Studio home** (`/designs/studio`): a small head instead of the big title, one **New design** button, a strip of numbers (published, in review, drafts, people wearing your designs, your design limit), what waits for you on top with the reviewer's note, a tab for every state (drafts, in review, needs you, published, withdrawn), search and a type filter, and one list.
+* **New design in six steps:** type, file, preview and fit, details, rights, send. Each type shows what its file needs (size, format, weight, animation, safe area). A wrong file is refused in plain words before anything is uploaded.
+* **Live preview:** the design on a profile card, in the member list, on a chat message and at every avatar size, on dark and light, with guide marks. A **file check** list says what is fine and what to fix (shape, transparent background, art over the face, an effect that does not move).
+* **Fit:** scale and move a still image in its frame; it is uploaded at the frame's size.
+* **Rights for every design**, not only effects: own work or licensed, parts by others (source and licence), parts made with AI tools, and the Creator Terms in force. Nothing is ticked for you.
+* **A page per design** (`/designs/studio/{id}`): its state, the reviewer's note, its whole history, numbers, what you declared, and what you can do: make a new version, publish, withdraw, take a withdrawn design back as a draft, download your copy, delete for good.
+* Shortcuts, listed under Creator Studio in the shortcuts screen: **N** new design, **F** search your designs, **G** guide marks, **D** dark or light, **Ctrl/Cmd+Enter** next step or send.
+* The "Profile effect" type is offered only when the server takes effects.
+* Fixed: replacing the image kept showing the first one in the preview. Fixed: a withdrawn design disappeared from the studio and could be neither published again nor deleted. Fixed: the name stayed that of the first file picked.
+* A design that Zrzur staff withdrew says so, with the reason and where to appeal (Settings, Reports & standing), and offers no "take back": that button is only for a design you withdrew yourself.
+* The confirmation follows the Creator Terms by type: an effect shows no real person; a decoration or nameplate shows none without their consent. Asked again, "I made it myself" is never answered for you.
+* The live preview (`studio/LivePreview.tsx`) takes any image address, so other pages can show a design the same way.
+
 ### Calls ring (2026-11-15)
 
 * **Incoming call:** a DM or group call now rings the other people wherever they are in the app: a card at the top with who is calling, **Decline**, **Accept with video** and **Accept** (Ctrl/Cmd+Shift+Enter and Ctrl/Cmd+Shift+Backspace, listed under Calls in the shortcuts screen), and the incoming ringtone. When the app is in the background, a system notification as well (the same one the web push replaces), and the desktop app flashes its taskbar button.

@@ -47,7 +47,6 @@ import {
   userStyleOf,
 } from "@revolt/ui/components/features/profiles/userStyle";
 
-import { Sky } from "@revolt/ui/components/design/Sky";
 import { Icon } from "@revolt/ui/icons/Icon";
 import {
   appUrl,
@@ -58,13 +57,7 @@ import {
 import { DesignPage } from "./designs/DesignPage";
 import { Dock } from "./designs/Dock";
 import { DesignsHome, Samples, WornCard } from "./designs/Home";
-import {
-  CreatorPage,
-  CreatorsScene,
-  Head,
-  Scene,
-  SkyBand,
-} from "./designs/Makers";
+import { CreatorPage, CreatorsScene } from "./designs/Makers";
 import { Mirror } from "./designs/Mirror";
 import { Preview } from "./designs/Preview";
 import { useWearer } from "./designs/Scenes";
@@ -122,7 +115,7 @@ const CreatorsAdmin = lazy(() =>
 type View =
   | { page: "home" }
   | { page: "wall"; filter: WallFilter }
-  | { page: "studio" }
+  | { page: "studio"; path: string[] }
   | { page: "favourites" }
   | { page: "creators" }
   | { page: "creator"; id: string }
@@ -152,7 +145,7 @@ function Gallery() {
   const view = createMemo((): View => {
     const path = location.pathname;
     const rest = base && path.startsWith(base) ? path.slice(base.length) : path;
-    const [first, second] = rest.split("/").filter(Boolean);
+    const [first, second, ...more] = rest.split("/").filter(Boolean);
     if (first && isDesignSlug(first)) return { page: "design", slug: first };
     if (
       first === "looks" ||
@@ -165,7 +158,8 @@ function Gallery() {
     )
       return { page: "wall", filter: first };
     if (first === "favourites") return { page: "favourites" };
-    if (first === "studio") return { page: "studio" };
+    if (first === "studio")
+      return { page: "studio", path: second ? [second, ...more] : [] };
     if (first === "creators") return { page: "creators" };
     if (first === "creator" && second) return { page: "creator", id: second };
     return { page: "home" };
@@ -426,39 +420,19 @@ function Gallery() {
                 view().page === "studio" && creating() && maySeeStudio(perms())
               }
             >
-              <Scene>
-                <SkyBand>
-                  <Sky lit={1} />
-                </SkyBand>
-                <Head>
-                  <h1>
-                    <Trans>Creator Studio</Trans>
-                  </h1>
-                  <p>
-                    <Show
-                      when={!readOnly()}
-                      fallback={<Trans>The designs you made, kept here.</Trans>}
-                    >
-                      <Trans>
-                        Make decorations, nameplates and effects for everyone.
-                        Designs go live with your name on them; effects go to a
-                        reviewer first, and reviewers can take down anything
-                        that breaks the rules.
-                      </Trans>
-                    </Show>
-                  </p>
-                </Head>
-                <Suspense>
-                  <CreatorStudio
-                    page
-                    show
-                    onClose={() => go("")}
-                    perms={perms()!}
-                    avatar={wearer.avatar()}
-                    name={wearer.name()}
-                  />
-                </Suspense>
-              </Scene>
+              {/* a workplace: no sky and no big title, the studio has its own */}
+              <Suspense>
+                <CreatorStudio
+                  page
+                  show
+                  onClose={() => go("")}
+                  perms={perms()!}
+                  avatar={wearer.avatar()}
+                  name={wearer.name()}
+                  path={(view() as { path: string[] }).path}
+                  onNavigate={(path) => go(`/studio${path}`)}
+                />
+              </Suspense>
             </Match>
 
             <Match when={view().page === "favourites"}>

@@ -467,6 +467,11 @@ msgstr "{0} ist bereits unten"
 msgid "{0} is already at the top"
 msgstr "{0} ist bereits oben"
 
+#. placeholder {0}: caller()?.displayName ?? caller()?.username
+#: components/ui/components/features/voice/ringing/CallRinging.tsx
+msgid "{0} is calling the group"
+msgstr "{0} ruft die Gruppe an"
+
 #. placeholder {0}: tierName(pending()!.kind)
 #. placeholder {1}: price(pending()!.price)
 #: components/modal/modals/PromoteServer.tsx
@@ -498,6 +503,11 @@ msgstr "{0} ist eines deiner Zrzur-Tastenkürzel. Wähle eine andere Taste, um d
 msgid "{0} joined"
 msgstr "{0} ist beigetreten"
 
+#. placeholder {0}: number(Math.max(1, Math.round(bytes / 1000)))
+#: components/app/interface/settings/user/profile/studio/StudioEditor.tsx
+msgid "{0} KB"
+msgstr "{0} KB"
+
 #. placeholder {0}: entry.voice_bitrate / 1000
 #. placeholder {0}: level.voice_bitrate / 1000
 #: components/app/interface/settings/server/WingsSettings.tsx
@@ -521,6 +531,11 @@ msgstr "{0} ist gegangen"
 #: components/client/NotificationsWorker.tsx
 msgid "{0} made {1} the new group owner"
 msgstr "{0} hat {1} zum neuen Gruppeninhaber gemacht"
+
+#. placeholder {0}: new Intl.NumberFormat(i18n().locale, { maximumFractionDigits: 1 }).format(bytes / 1_000_000)
+#: components/app/interface/settings/user/profile/studio/StudioEditor.tsx
+msgid "{0} MB"
+msgstr "{0} MB"
 
 #. placeholder {0}: number(props.server.approximateMemberCount)
 #: src/interface/lobby/Lobby.tsx
@@ -912,6 +927,10 @@ msgstr "{inside} gerade im Raum"
 msgid "{n, plural, one {# person} other {# people}}"
 msgstr "{n, plural, one {# Person} other {# Personen}}"
 
+#: components/app/interface/settings/user/connections/ServiceCards.tsx
+msgid "{name} is a US company: what we send it and read from it goes to the United States, where your data may be less protected than in the EU (for example, US authorities may be able to access it)."
+msgstr "{name} ist ein US-Unternehmen: Was wir dorthin senden und von dort lesen, geht in die USA, wo deine Daten weniger geschützt sein können als in der EU (zum Beispiel können US-Behörden unter Umständen darauf zugreifen)."
+
 #: components/app/interface/channels/text/interactions/EphemeralMessages.tsx
 msgid "{name} is thinking…"
 msgstr "{name} denkt nach…"
@@ -920,9 +939,21 @@ msgstr "{name} denkt nach…"
 msgid "{name}'s server"
 msgstr "Server von {name}"
 
+#: components/app/interface/settings/user/connections/ServiceCards.tsx
+msgid "{name}'s sign-in page did not open. If you use the Zrzur desktop app, install the latest version from <0>zrzur.com/download</0>, then try again."
+msgstr "Die Anmeldeseite von {name} hat sich nicht geöffnet. Wenn du die Zrzur-Desktop-App nutzt, installiere die neueste Version von <0>zrzur.com/download</0> und versuche es dann noch einmal."
+
 #: components/app/interface/settings/user/voice/GameKeysOptions.tsx
 msgid "{other} already uses that. Press another key, or Esc to cancel."
 msgstr "„{other}“ nutzt das bereits. Drücke eine andere Taste oder Esc zum Abbrechen."
+
+#: components/ui/components/features/voice/ringing/CallRinging.tsx
+msgid "{other} declined the call."
+msgstr "{other} hat den Anruf abgelehnt."
+
+#: components/ui/components/features/voice/ringing/CallRinging.tsx
+msgid "{other} didn't answer."
+msgstr "{other} hat nicht geantwortet."
 
 #: components/app/interface/settings/user/subscriptions/BillingHistory.tsx
 msgid "{tier} on Discover, {name}"
@@ -1125,6 +1156,10 @@ msgstr "1 Jahr"
 #~ msgid "1. Create an application"
 #~ msgstr "1. Erstelle eine Anwendung"
 
+#: components/app/interface/settings/user/profile/studio/StudioEditor.tsx
+msgid "1. Did you make this work?"
+msgstr "1. Hast du dieses Werk selbst gemacht?"
+
 #: components/app/interface/settings/server/AutoModSettings.tsx
 msgid "10 minutes"
 msgstr "10 Minuten"
@@ -1138,6 +1173,10 @@ msgstr "12 Stunden"
 msgid "12-hour"
 msgstr "12-Stunden"
 
+#: components/app/interface/settings/user/profile/studio/StudioHome.tsx
+msgid "16 px are cropped at the top and bottom"
+msgstr "Oben und unten werden 16 px abgeschnitten"
+
 #: components/modal/modals/EditUsername.tsx
 msgid "2 to 32 characters. Your number tag may change if this name is taken."
 msgstr "2 bis 32 Zeichen. Deine Nummer kann sich ändern, wenn der Name schon vergeben ist."
@@ -1150,6 +1189,10 @@ msgstr "2 Wochen"
 #~ msgid "2. Copy the token"
 #~ msgstr "2. Kopiere das Token"
 
+#: components/app/interface/settings/user/profile/studio/StudioEditor.tsx
+msgid "2. Does it include parts made by others?"
+msgstr "2. Enthält es Teile von anderen?"
+
 #: components/modal/modals/CreatePoll.tsx
 msgid "24 hours"
 msgstr "24 Stunden"
@@ -1161,6 +1204,10 @@ msgstr "24-Stunden"
 #: components/modal/modals/CreatePoll.tsx
 msgid "3 days"
 msgstr "3 Tage"
+
+#: components/app/interface/settings/user/profile/studio/StudioEditor.tsx
+msgid "3. Does it include parts made with AI tools?"
+msgstr "3. Enthält es Teile, die mit KI-Werkzeugen gemacht wurden?"
 
 #: src/interface/developers/docs/GettingStarted.tsx
 #~ msgid "3. Install the bot in a test server"
@@ -1176,7 +1223,7 @@ msgstr "30 Minuten"
 msgid "4 hours"
 msgstr "4 Stunden"
 
-#: components/app/interface/settings/user/profile/CreatorStudio.tsx
+#: components/app/interface/settings/user/profile/studio/StudioHome.tsx
 msgid "4 seconds, one play, no flashing"
 msgstr "4 Sekunden, einmal abspielen, kein Blinken"
 
@@ -1314,9 +1361,13 @@ msgstr "Ein Rahmen um deinen Avatar. Alle sind kostenlos."
 #~ msgid "A frame around your avatar. Pick an included one or a community design made by verified creators. All of them are free."
 #~ msgstr "Ein Rahmen um deinen Avatar. Wähle einen enthaltenen oder ein Community-Design von verifizierten Designern. Alle sind kostenlos."
 
+#: components/app/interface/settings/user/profile/studio/StudioEditor.tsx
+msgid "A frame drawn over the avatar, everywhere it shows."
+msgstr "Ein Rahmen über dem Avatar, überall, wo er erscheint."
+
 #: components/app/interface/settings/user/profile/CreatorStudio.tsx
-msgid "A frame drawn over the avatar. Square image, 1024 × 1024 px. The avatar fills the middle two thirds, so leave that circle transparent."
-msgstr "Ein Rahmen, der über den Avatar gezeichnet wird. Quadratisches Bild, 1024 × 1024 px. Der Avatar füllt die mittleren zwei Drittel, lass diesen Kreis also durchsichtig."
+#~ msgid "A frame drawn over the avatar. Square image, 1024 × 1024 px. The avatar fills the middle two thirds, so leave that circle transparent."
+#~ msgstr "Ein Rahmen, der über den Avatar gezeichnet wird. Quadratisches Bild, 1024 × 1024 px. Der Avatar füllt die mittleren zwei Drittel, lass diesen Kreis also durchsichtig."
 
 #: components/app/interface/settings/user/subscriptions/Subscriptions.tsx
 msgid "a friend"
@@ -1366,6 +1417,10 @@ msgstr "Eine Nachricht vom Zrzur-Team"
 msgid "A minimised window is not listed. Open it first."
 msgstr "Ein minimiertes Fenster wird nicht aufgeführt. Öffne es zuerst."
 
+#: components/app/interface/settings/user/profile/studio/StudioDesign.tsx
+msgid "A new version is saved as a draft"
+msgstr "Eine neue Version ist als Entwurf gespeichert"
+
 #: components/app/interface/settings/user/subscriptions/PlusPage.tsx
 msgid "A note on money"
 msgstr "Ein Wort zum Geld"
@@ -1402,13 +1457,42 @@ msgstr "Ein privater Kanal"
 msgid "A report from another person."
 msgstr "Eine Meldung einer anderen Person."
 
+#: components/app/interface/settings/user/profile/studio/parts.tsx
+msgid "A reviewer approved it"
+msgstr "Von der Prüfung freigegeben"
+
+#: components/app/interface/settings/user/profile/studio/parts.tsx
+#: components/app/interface/settings/user/profile/studio/StudioDesign.tsx
+msgid "A reviewer asked for changes"
+msgstr "Die Prüfung hat um Änderungen gebeten"
+
 #: components/app/interface/settings/user/safety/ReportsAndStanding.tsx
 msgid "A reviewer asked:"
 msgstr "Eine prüfende Person fragt:"
 
+#: components/app/interface/settings/user/profile/studio/StudioEditor.tsx
+msgid "A reviewer looks at it first. It goes live when they approve it."
+msgstr "Erst sieht es sich jemand aus der Prüfung an. Mit der Freigabe geht es live."
+
 #: components/app/interface/settings/user/profile/CreatorStudio.tsx
-msgid "A reviewer looks at your effect first. It goes live when they approve it. Effects are free."
-msgstr "Zuerst sieht sich jemand aus dem Review-Team deinen Effekt an. Er geht online, sobald er freigegeben ist. Effekte sind kostenlos."
+#~ msgid "A reviewer looks at your effect first. It goes live when they approve it. Effects are free."
+#~ msgstr "Zuerst sieht sich jemand aus dem Review-Team deinen Effekt an. Er geht online, sobald er freigegeben ist. Effekte sind kostenlos."
+
+#: components/app/interface/settings/user/profile/studio/parts.tsx
+msgid "A reviewer rejected it"
+msgstr "Von der Prüfung abgelehnt"
+
+#: components/app/interface/settings/user/profile/studio/StudioDesign.tsx
+msgid "A reviewer rejected this design"
+msgstr "Die Prüfung hat dieses Design abgelehnt"
+
+#: components/app/interface/settings/user/profile/studio/parts.tsx
+msgid "A reviewer took it down"
+msgstr "Von der Prüfung entfernt"
+
+#: components/app/interface/settings/user/profile/studio/StudioDesign.tsx
+msgid "A reviewer took this design down"
+msgstr "Die Prüfung hat dieses Design entfernt"
 
 #: components/app/interface/settings/server/apps/RulesEditor.tsx
 msgid "A role"
@@ -1467,8 +1551,12 @@ msgid "A text channel"
 msgstr "Ein Textkanal"
 
 #: components/app/interface/settings/user/profile/CreatorStudio.tsx
-msgid "A transparent animation that plays once over a profile. 576 × 1024 px, up to 4 seconds, up to 2 MB. Reviewers look at it before it goes live."
-msgstr "Eine transparente Animation, die einmal über einem Profil abläuft. 576 × 1024 px, bis zu 4 Sekunden, bis zu 2 MB. Das Review-Team prüft sie vor der Veröffentlichung."
+#~ msgid "A transparent animation that plays once over a profile. 576 × 1024 px, up to 4 seconds, up to 2 MB. Reviewers look at it before it goes live."
+#~ msgstr "Eine transparente Animation, die einmal über einem Profil abläuft. 576 × 1024 px, bis zu 4 Sekunden, bis zu 2 MB. Das Review-Team prüft sie vor der Veröffentlichung."
+
+#: components/app/interface/settings/user/profile/studio/StudioEditor.tsx
+msgid "A transparent animation that plays once over a profile. A reviewer looks at it first."
+msgstr "Eine transparente Animation, die einmal über einem Profil läuft. Sie wird zuerst geprüft."
 
 #: components/app/interface/settings/server/ServerVerification.tsx
 msgid "A verified email address."
@@ -1499,8 +1587,8 @@ msgid "A webhook posts into one channel through its address. The address is show
 msgstr "Ein Webhook postet über seine Adresse in einen Kanal. Die Adresse wird nur einmal angezeigt, bewahre sie also sicher auf."
 
 #: components/app/interface/settings/user/profile/CreatorStudio.tsx
-msgid "A WebM becomes an animated image when you upload it: its transparency stays, its sound is dropped, and the image must fit the limits above."
-msgstr "Ein WebM wird beim Hochladen zu einem animierten Bild: Die Transparenz bleibt, der Ton fällt weg, und das Bild muss in die Grenzen oben passen."
+#~ msgid "A WebM becomes an animated image when you upload it: its transparency stays, its sound is dropped, and the image must fit the limits above."
+#~ msgstr "Ein WebM wird beim Hochladen zu einem animierten Bild: Die Transparenz bleibt, der Ton fällt weg, und das Bild muss in die Grenzen oben passen."
 
 #: components/app/interface/settings/server/EventsLobbySwitches.tsx
 msgid "A welcome page; a Lobby row shows for everyone and the server opens on it."
@@ -1548,6 +1636,7 @@ msgstr "Über diesen Bot"
 
 #: components/app/interface/discover/Detail.tsx
 #: components/app/interface/discover/ServerPage.tsx
+#: src/interface/lobby/Lobby.tsx
 msgid "About this server"
 msgstr "Über diesen Server"
 
@@ -1572,9 +1661,14 @@ msgstr "Akzentfarbe"
 msgid "Accent colours actions and selection. Outline icons stay muted."
 msgstr "Die Akzentfarbe färbt Aktionen und Auswahl. Umriss-Symbole bleiben gedämpft."
 
+#: components/ui/components/features/voice/ringing/CallRinging.tsx
 #: src/interface/Friends.tsx
 msgid "Accept"
 msgstr "Akzeptieren"
+
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "Accept a call"
+msgstr "Anruf annehmen"
 
 #: components/app/interface/settings/user/account/ChangeRequests.tsx
 msgid "Accept change"
@@ -1604,6 +1698,10 @@ msgstr "Akzeptiere die Serverregeln, bevor du hier schreibst."
 #: src/interface/channels/text/RulesGate.tsx
 msgid "Accept the server rules to start writing here."
 msgstr "Akzeptiere die Serverregeln, um hier zu schreiben."
+
+#: components/ui/components/features/voice/ringing/CallRinging.tsx
+msgid "Accept with video"
+msgstr "Mit Video annehmen"
 
 #: components/app/interface/settings/ServerSettings.tsx
 #~ msgid "Access"
@@ -2104,6 +2202,10 @@ msgctxt "search filter"
 msgid "After"
 msgstr "Nach"
 
+#: components/app/interface/settings/user/profile/studio/StudioEditor.tsx
+msgid "After sending"
+msgstr "Nach dem Senden"
+
 #. placeholder {0}: new URL(data().redirect_uri).host
 #: src/interface/OAuth.tsx
 #~ msgid "After you decide you will go to {0}. You can revoke this at any time under Authorized apps."
@@ -2142,6 +2244,7 @@ msgstr "Algerien"
 #: components/app/interface/settings/server/webhooks/ServerWebhooks.tsx
 #: components/app/interface/settings/user/plugins/BrowseTab.tsx
 #: components/app/interface/settings/user/profile/CommunityGallery.tsx
+#: components/app/interface/settings/user/profile/studio/StudioHome.tsx
 #: components/app/interface/settings/user/profile/StyleEditors.tsx
 #: src/interface/channels/forum/ForumChannel.tsx
 #: src/interface/designs/Looks.tsx
@@ -2252,6 +2355,14 @@ msgstr "Alle Rollen haben Überschreibungen."
 msgid "All servers"
 msgstr "Alle Server"
 
+#: components/app/interface/settings/user/profile/studio/StudioHome.tsx
+msgid "All shortcuts"
+msgstr "Alle Tastenkürzel"
+
+#: components/app/interface/settings/user/profile/studio/StudioEditor.tsx
+msgid "All sizes"
+msgstr "Alle Größen"
+
 #: components/app/interface/settings/server/soundboard/SoundLibrary.tsx
 msgid "All sounds"
 msgstr "Alle Sounds"
@@ -2264,6 +2375,7 @@ msgstr "Alle Systeme einsatzbereit"
 msgid "All testers"
 msgstr "Alle Tester"
 
+#: components/app/interface/settings/user/profile/studio/StudioHome.tsx
 #: components/app/interface/settings/user/safety/SafetyDashboard.tsx
 msgid "All types"
 msgstr "Alle Arten"
@@ -2348,6 +2460,10 @@ msgstr "Erlauben…"
 msgid "Allowed domains (optional)"
 msgstr "Erlaubte Domains (optional)"
 
+#: components/app/interface/settings/user/profile/studio/StudioEditor.tsx
+msgid "Allowed if you have the right to use them and say so here."
+msgstr "Erlaubt, wenn du sie nutzen darfst und es hier angibst."
+
 #: src/interface/developers/docs/Directives.tsx
 msgid "Allows"
 msgstr "Erlaubt"
@@ -2355,6 +2471,10 @@ msgstr "Erlaubt"
 #: components/auth/src/flows/FlowConfirmChange.tsx
 msgid "Almost done: open the link we sent to your new email to finish the change."
 msgstr "Fast geschafft: Öffne den Link, den wir an deine neue E-Mail geschickt haben, um die Änderung abzuschließen."
+
+#: components/app/interface/settings/user/profile/studio/StudioEditor.tsx
+msgid "Already confirmed"
+msgstr "Bereits bestätigt"
 
 #: components/i18n/errors.tsx
 msgid "Already friends with this user."
@@ -2412,11 +2532,11 @@ msgstr "Eine Anwendung ist ein Bot-Konto. Erstelle eins, registriere Slash-Befeh
 msgid "An approved Zrzur partner or partner community."
 msgstr "Ein bestätigter Zrzur-Partner oder eine Partner-Community."
 
-#: components/app/interface/settings/user/profile/CreatorStudio.tsx
+#: components/app/interface/settings/user/profile/studio/StudioEditor.tsx
 msgid "An effect has the shape of a profile: 9 by 16, such as 576 × 1024 px."
 msgstr "Ein Effekt hat die Form eines Profils: 9 zu 16, zum Beispiel 576 × 1024 px."
 
-#: components/app/interface/settings/user/profile/CreatorStudio.tsx
+#: components/app/interface/settings/user/profile/studio/StudioEditor.tsx
 msgid "An effect has to move. This file has only one frame."
 msgstr "Ein Effekt muss sich bewegen. Diese Datei hat nur ein Einzelbild."
 
@@ -2438,8 +2558,8 @@ msgid "An idea for Zrzur"
 msgstr "Eine Idee für Zrzur"
 
 #: components/app/interface/settings/user/profile/CreatorStudio.tsx
-msgid "An image is on the canvas"
-msgstr "Ein Bild liegt auf der Leinwand"
+#~ msgid "An image is on the canvas"
+#~ msgstr "Ein Bild liegt auf der Leinwand"
 
 #. placeholder {0}: err.location
 #: components/i18n/errors.tsx
@@ -2480,9 +2600,22 @@ msgstr "Tiere & Natur"
 msgid "Animate this part"
 msgstr "Diesen Teil animieren"
 
+#: components/app/interface/settings/user/profile/studio/StudioEditor.tsx
+msgid "Animated"
+msgstr "Animiert"
+
 #: components/app/interface/settings/user/subscriptions/PlusPage.tsx
 msgid "Animated avatars and emoji"
 msgstr "Animierte Avatare und Emojis"
+
+#: components/app/interface/settings/user/profile/studio/StudioHome.tsx
+msgid "Animated PNG, GIF, WebP or WebM"
+msgstr "Animiertes PNG, GIF, WebP oder WebM"
+
+#: components/app/interface/settings/user/profile/studio/StudioEditor.tsx
+#: components/app/interface/settings/user/profile/studio/StudioHome.tsx
+msgid "Animation"
+msgstr "Animation"
 
 #: components/app/interface/settings/user/appearance/AnimationSettings.tsx
 msgid "Animations"
@@ -2543,6 +2676,14 @@ msgstr "Antwort {0}"
 #: components/app/interface/settings/user/account/ChangeRequests.tsx
 msgid "Answer by {0}. Without an answer, nothing changes."
 msgstr "Antworte bis {0}. Ohne Antwort ändert sich nichts."
+
+#: components/app/interface/settings/user/profile/studio/StudioEditor.tsx
+msgid "Answer every question to go on."
+msgstr "Beantworte alle Fragen, um fortzufahren."
+
+#: components/app/interface/settings/user/profile/studio/StudioEditor.tsx
+msgid "Answer the questions about your rights first."
+msgstr "Beantworte zuerst die Fragen zu deinen Rechten."
 
 #: components/app/interface/settings/user/safety/SafetyDashboard.tsx
 msgid "Answer to the user"
@@ -2684,8 +2825,12 @@ msgid "Appealed"
 msgstr "Einspruch eingelegt"
 
 #: components/app/interface/settings/user/safety/ReportsAndStanding.tsx
-msgid "Appealing doesn't lift anything by itself. A different reviewer decides."
-msgstr "Ein Einspruch hebt nichts von selbst auf. Eine andere prüfende Person entscheidet."
+#~ msgid "Appealing doesn't lift anything by itself. A different reviewer decides."
+#~ msgstr "Ein Einspruch hebt nichts von selbst auf. Eine andere prüfende Person entscheidet."
+
+#: components/app/interface/settings/user/safety/ReportsAndStanding.tsx
+msgid "Appealing doesn't lift anything by itself. A person looks at the decision again; where we can, it is someone other than the person who made it."
+msgstr "Ein Einspruch hebt allein nichts auf. Ein Mensch sieht sich die Entscheidung noch einmal an; wenn möglich jemand anderes als die Person, die sie getroffen hat."
 
 #: components/app/interface/settings/user/safety/SafetyDashboard.tsx
 msgid "Appeals"
@@ -2782,7 +2927,7 @@ msgstr "Apps und Bots"
 msgid "Apps you allowed to use your account. Revoking one ends its access at once; bots it added stay in servers until their managers remove them."
 msgstr "Apps, denen du die Nutzung deines Kontos erlaubt hast. Wenn du eine widerrufst, endet ihr Zugriff sofort; Bots, die sie hinzugefügt hat, bleiben auf Servern, bis deren Verwalter sie entfernen."
 
-#: components/app/interface/settings/user/profile/StyleEditors.tsx
+#: components/app/interface/settings/user/profile/styleLabels.tsx
 msgid "Aquarius"
 msgstr "Wassermann"
 
@@ -2806,7 +2951,7 @@ msgstr "Arabisch wird mit und ohne Hamza, Taschkil und Tatwil erkannt; ة / ه u
 msgid "Arabic presets and a ladder of steps on Zrzur's own filters."
 msgstr "Arabische Vorlagen und eine Stufenleiter auf Zrzurs eigenen Filtern."
 
-#: components/app/interface/settings/user/profile/StyleEditors.tsx
+#: components/app/interface/settings/user/profile/styleLabels.tsx
 msgid "Arabic sans"
 msgstr "Arabisch serifenlos"
 
@@ -2815,16 +2960,16 @@ msgid "Arcade"
 msgstr "Arcade"
 
 #: components/app/interface/settings/user/profile/CreatorStudio.tsx
-msgid "Archive"
-msgstr "Archivieren"
+#~ msgid "Archive"
+#~ msgstr "Archivieren"
 
 #: src/interface/channels/ChannelHeader.tsx
 msgid "Archive thread"
 msgstr "Thread archivieren"
 
 #: components/app/interface/settings/user/profile/CreatorStudio.tsx
-msgid "Archive?"
-msgstr "Archivieren?"
+#~ msgid "Archive?"
+#~ msgstr "Archivieren?"
 
 #: components/app/interface/channels/text/ThreadChip.tsx
 msgid "archived"
@@ -2871,7 +3016,7 @@ msgstr "Diese Nachricht wirklich lösen?"
 msgid "Argentina"
 msgstr "Argentinien"
 
-#: components/app/interface/settings/user/profile/StyleEditors.tsx
+#: components/app/interface/settings/user/profile/styleLabels.tsx
 msgid "Aries"
 msgstr "Widder"
 
@@ -2890,6 +3035,10 @@ msgstr "Anordnung"
 #: components/app/interface/discover/categories.tsx
 msgid "Art & Creativity"
 msgstr "Kunst & Kreativität"
+
+#: components/app/interface/settings/user/profile/studio/StudioEditor.tsx
+msgid "Art behind the name in the member list."
+msgstr "Ein Bild hinter dem Namen in der Mitgliederliste."
 
 #: components/modal/modals/CreatePoll.tsx
 msgid "Ask a question and let people vote. Results update live."
@@ -3034,7 +3183,7 @@ msgstr "Audioplayer"
 msgid "Audit log"
 msgstr "Protokoll"
 
-#: components/app/interface/settings/user/profile/StyleEditors.tsx
+#: components/app/interface/settings/user/profile/styleLabels.tsx
 #: components/ui/components/features/profiles/labels.ts
 msgid "Aurora"
 msgstr "Polarlicht"
@@ -3114,11 +3263,11 @@ msgstr "AutoMod hat <0/> in <1/> markiert ({0}):"
 msgid "AutoMod Rules"
 msgstr "AutoMod-Regeln"
 
-#: components/app/interface/settings/user/profile/StyleEditors.tsx
+#: components/app/interface/settings/user/profile/styleLabels.tsx
 msgid "Autumn"
 msgstr "Herbst"
 
-#: components/app/interface/settings/user/profile/StyleEditors.tsx
+#: components/app/interface/settings/user/profile/styleLabels.tsx
 msgid "Autumn wreath"
 msgstr "Herbstkranz"
 
@@ -3127,17 +3276,17 @@ msgid "Available until"
 msgstr "Verfügbar bis"
 
 #: components/app/interface/settings/user/account/ChangeRequests.tsx
-#: components/app/interface/settings/user/profile/CreatorStudio.tsx
+#: components/app/interface/settings/user/profile/studio/StudioHome.tsx
 #: components/app/interface/settings/user/profile/UserProfileEditor.tsx
 msgid "Avatar"
 msgstr "Avatar"
 
-#: components/app/interface/settings/user/profile/CreatorStudio.tsx
+#: components/app/interface/settings/user/profile/studio/StudioHome.tsx
 msgid "Avatar (keep clear)"
 msgstr "Avatar (frei lassen)"
 
-#: components/app/interface/settings/user/profile/CreatorStudio.tsx
 #: components/app/interface/settings/user/profile/ReviewQueue.tsx
+#: components/app/interface/settings/user/profile/studio/parts.tsx
 #: components/app/interface/settings/user/profile/UserProfileEditor.tsx
 #: src/interface/Designs.tsx
 #: src/interface/designs/DesignPage.tsx
@@ -3154,7 +3303,7 @@ msgstr "Aserbaidschan"
 
 #: components/app/interface/settings/server/assistant/AssistantPage.tsx
 #: components/app/interface/settings/user/_AccountCard.tsx
-#: components/app/interface/settings/user/profile/CreatorStudio.tsx
+#: components/app/interface/settings/user/profile/studio/StudioEditor.tsx
 #: components/auth/src/flows/Flow.tsx
 #: components/modal/lib/CreateServerFlow.tsx
 #: components/modal/modals/AddBot.tsx
@@ -3178,7 +3327,7 @@ msgstr "Zurück zu Verknüpfungen"
 msgid "Back to listeners"
 msgstr "Zurück zu den Zuhörenden"
 
-#: components/app/interface/settings/user/profile/CreatorStudio.tsx
+#: components/app/interface/settings/user/profile/studio/StudioEditor.tsx
 msgid "Background"
 msgstr "Hintergrund"
 
@@ -3320,8 +3469,8 @@ msgstr "Vor"
 #~ msgstr "Bevor du beitrittst"
 
 #: components/app/interface/settings/user/profile/CreatorStudio.tsx
-msgid "Before you publish"
-msgstr "Vor dem Veröffentlichen"
+#~ msgid "Before you publish"
+#~ msgstr "Vor dem Veröffentlichen"
 
 #: components/app/interface/settings/user/subscriptions/BillingHistory.tsx
 msgid "Being confirmed"
@@ -3485,7 +3634,7 @@ msgstr "Unschärfe"
 #~ msgid "Board games"
 #~ msgstr "Brettspiele"
 
-#: components/app/interface/settings/user/profile/StyleEditors.tsx
+#: components/app/interface/settings/user/profile/styleLabels.tsx
 #: src/interface/designs/Looks.tsx
 msgid "Bold"
 msgstr "Kräftig"
@@ -3918,9 +4067,10 @@ msgstr "Kanada"
 #: components/app/interface/settings/user/ConnectedApps.tsx
 #: components/app/interface/settings/user/Keybinds.tsx
 #: components/app/interface/settings/user/plugins/PluginDetail.tsx
-#: components/app/interface/settings/user/profile/CreatorStudio.tsx
 #: components/app/interface/settings/user/profile/CreatorSuspension.tsx
 #: components/app/interface/settings/user/profile/EffectDialog.tsx
+#: components/app/interface/settings/user/profile/studio/StudioDesign.tsx
+#: components/app/interface/settings/user/profile/studio/StudioEditor.tsx
 #: components/app/interface/settings/user/profile/StyleEditors.tsx
 #: components/app/interface/settings/user/safety/ReportsAndStanding.tsx
 #: components/app/interface/settings/user/subscriptions/Subscriptions.tsx
@@ -4072,11 +4222,11 @@ msgstr "Gekündigt, endet am {date}"
 msgid "Cancelled. You keep Feather until {0}."
 msgstr "Gekündigt. Feather bleibt dir bis {0}."
 
-#: components/app/interface/settings/user/profile/StyleEditors.tsx
+#: components/app/interface/settings/user/profile/styleLabels.tsx
 msgid "Cancer"
 msgstr "Krebs"
 
-#: components/app/interface/settings/user/profile/StyleEditors.tsx
+#: components/app/interface/settings/user/profile/styleLabels.tsx
 msgid "Candy"
 msgstr "Bonbon"
 
@@ -4096,7 +4246,7 @@ msgstr "Kap Verde"
 msgid "Capitals and spaces are allowed."
 msgstr "Großbuchstaben und Leerzeichen sind erlaubt."
 
-#: components/app/interface/settings/user/profile/StyleEditors.tsx
+#: components/app/interface/settings/user/profile/styleLabels.tsx
 msgid "Capricorn"
 msgstr "Steinbock"
 
@@ -4355,6 +4505,14 @@ msgstr "hat geändert, wer die Befehle von {0} nutzen darf"
 msgid "Changes how notifications are shown"
 msgstr "Ändert, wie Benachrichtigungen angezeigt werden"
 
+#: components/app/interface/settings/user/profile/studio/parts.tsx
+msgid "Changes needed"
+msgstr "Änderungen nötig"
+
+#: components/app/interface/settings/user/profile/studio/StudioEditor.tsx
+msgid "Changes not saved yet"
+msgstr "Änderungen noch nicht gespeichert"
+
 #: components/app/interface/settings/user/profile/CommunityParts.tsx
 #: components/app/interface/settings/user/profile/ReviewQueue.tsx
 msgid "Changes requested"
@@ -4506,6 +4664,10 @@ msgstr "Kanäle: {0}"
 msgid "Chat"
 msgstr "Chat"
 
+#: components/app/interface/settings/user/profile/studio/StudioEditor.tsx
+msgid "Chat message"
+msgstr "Chat-Nachricht"
+
 #: components/app/interface/settings/server/assistant/AssistantPage.tsx
 msgid "Check again"
 msgstr "Erneut prüfen"
@@ -4548,6 +4710,7 @@ msgid "Check your connection and try again in a moment."
 msgstr "Prüf deine Verbindung und versuch es gleich nochmal."
 
 #: components/app/interface/settings/user/myData/MyData.tsx
+#: components/app/interface/settings/user/profile/studio/StudioHome.tsx
 msgid "Check your connection and try again."
 msgstr "Prüfe deine Verbindung und versuche es erneut."
 
@@ -4559,7 +4722,7 @@ msgstr "Sieh in deine E-Mails"
 msgid "Check your inbox"
 msgstr "Sieh in deinen Posteingang"
 
-#: components/app/interface/settings/user/profile/CreatorStudio.tsx
+#: components/app/interface/settings/user/profile/studio/StudioEditor.tsx
 msgid "Checking and sending…"
 msgstr "Wird geprüft und gesendet …"
 
@@ -4567,15 +4730,15 @@ msgstr "Wird geprüft und gesendet …"
 msgid "Checking…"
 msgstr "Wird geprüft…"
 
-#: components/app/interface/settings/user/profile/StyleEditors.tsx
+#: components/app/interface/settings/user/profile/styleLabels.tsx
 msgid "Cherry"
 msgstr "Kirsche"
 
-#: components/app/interface/settings/user/profile/StyleEditors.tsx
+#: components/app/interface/settings/user/profile/styleLabels.tsx
 msgid "Cherry blossoms"
 msgstr "Kirschblüten"
 
-#: components/app/interface/settings/user/profile/StyleEditors.tsx
+#: components/app/interface/settings/user/profile/styleLabels.tsx
 msgid "Cherry branch"
 msgstr "Kirschzweig"
 
@@ -4815,7 +4978,7 @@ msgstr "Ausgewählte Tester"
 msgid "Chosen: {0}"
 msgstr "Ausgewählt: {0}"
 
-#: components/app/interface/settings/user/profile/StyleEditors.tsx
+#: components/app/interface/settings/user/profile/styleLabels.tsx
 msgid "Circuit"
 msgstr "Schaltkreis"
 
@@ -4831,7 +4994,7 @@ msgstr "Klasse"
 msgid "Class or course"
 msgstr "Klasse oder Kurs"
 
-#: components/app/interface/settings/user/profile/StyleEditors.tsx
+#: components/app/interface/settings/user/profile/styleLabels.tsx
 msgid "Classic"
 msgstr "Klassisch"
 
@@ -4855,7 +5018,7 @@ msgstr "Klare helle Flächen mit dunkler Schrift und Himbeer-Aktionen."
 #~ msgid "Clean light surfaces with deep ink text and Zrzur Pink."
 #~ msgstr "Klare helle Flächen mit dunkler Schrift und Zrzur-Pink."
 
-#: components/app/interface/settings/user/profile/StyleEditors.tsx
+#: components/app/interface/settings/user/profile/styleLabels.tsx
 #: components/app/interface/settings/user/safety/SafetyDashboard.tsx
 msgid "Clear"
 msgstr "Klar"
@@ -4871,6 +5034,10 @@ msgstr "Löschen nach"
 #: src/interface/Discover.tsx
 msgid "Clear filters"
 msgstr "Filter zurücksetzen"
+
+#: components/app/interface/settings/user/profile/studio/StudioEditor.tsx
+msgid "Clear of the face"
+msgstr "Gesicht bleibt frei"
 
 #: components/ui/components/features/messaging/composition/picker/EmojiPicker.tsx
 #: components/ui/components/features/messaging/composition/picker/GifPicker.tsx
@@ -4972,6 +5139,7 @@ msgstr "clips"
 #: components/plugins/PluginHostRoot.tsx
 #: components/ui/components/design/Dialog.tsx
 #: components/ui/components/features/profiles/ProfileActions.tsx
+#: components/ui/components/features/voice/soundboard/SoundsUnavailable.tsx
 #: src/interface/OAuth.tsx
 msgid "Close"
 msgstr "Schließen"
@@ -5050,7 +5218,7 @@ msgstr "Schließen"
 #~ msgid "Cloud Slate"
 #~ msgstr "Cloud Slate"
 
-#: components/app/interface/settings/user/profile/StyleEditors.tsx
+#: components/app/interface/settings/user/profile/styleLabels.tsx
 msgid "Clouds"
 msgstr "Wolken"
 
@@ -5062,7 +5230,7 @@ msgstr "Club"
 msgid "Club Room"
 msgstr "Clubraum"
 
-#: components/app/interface/settings/user/profile/StyleEditors.tsx
+#: components/app/interface/settings/user/profile/styleLabels.tsx
 #: components/modal/modals/JoinServer.tsx
 msgid "Code"
 msgstr "Code"
@@ -5146,7 +5314,7 @@ msgstr "Komet"
 msgid "Comfortable"
 msgstr "Komfortabel"
 
-#: components/app/interface/settings/user/profile/StyleEditors.tsx
+#: components/app/interface/settings/user/profile/styleLabels.tsx
 msgid "Comic"
 msgstr "Comic"
 
@@ -5254,7 +5422,7 @@ msgstr "Community-Effekt"
 msgid "Community Helper"
 msgstr "Community-Helfer"
 
-#: components/app/interface/settings/user/profile/StyleEditors.tsx
+#: components/app/interface/settings/user/profile/styleLabels.tsx
 msgid "Community nameplate"
 msgstr "Community-Namensschild"
 
@@ -5351,8 +5519,8 @@ msgstr "Kauf bestätigen"
 #~ msgstr "Widerruf bestätigen"
 
 #: components/app/interface/settings/user/profile/CreatorStudio.tsx
-msgid "Confirm that you may share this effect first."
-msgstr "Bestätige zuerst, dass du diesen Effekt teilen darfst."
+#~ msgid "Confirm that you may share this effect first."
+#~ msgstr "Bestätige zuerst, dass du diesen Effekt teilen darfst."
 
 #. placeholder {0}: number(days())
 #: components/app/interface/settings/user/connections/ServiceCards.tsx
@@ -5362,6 +5530,10 @@ msgstr "Tage bis zur Bestätigung: {0}"
 #: components/app/interface/settings/user/badges/BugReportDialog.tsx
 msgid "Confirmed"
 msgstr "Bestätigt"
+
+#: components/app/interface/settings/user/profile/studio/StudioDesign.tsx
+msgid "Confirmed on"
+msgstr "Bestätigt am"
 
 #: components/ui/components/features/profiles/plateNames.ts
 msgid "Congo"
@@ -5815,6 +5987,10 @@ msgstr "Titelbild"
 msgid "Cover image (optional)"
 msgstr "Titelbild (optional)"
 
+#: components/app/interface/settings/user/profile/studio/StudioEditor.tsx
+msgid "Covers too much"
+msgstr "Deckt zu viel ab"
+
 #: components/modal/lib/CreateServerFlow.tsx
 #: components/modal/modals/CreateBot.tsx
 #: components/modal/modals/CreateCategory.tsx
@@ -6055,8 +6231,12 @@ msgstr "Designer nicht gefunden"
 msgid "Creator program"
 msgstr "Designer-Programm"
 
+#: components/app/interface/settings/user/Keybinds.tsx
 #: components/app/interface/settings/user/profile/CreatorStudio.tsx
 #: components/app/interface/settings/user/profile/EditProfile.tsx
+#: components/app/interface/settings/user/profile/studio/StudioDesign.tsx
+#: components/app/interface/settings/user/profile/studio/StudioEditor.tsx
+#: components/app/interface/settings/user/profile/studio/StudioHome.tsx
 #: src/interface/Designs.tsx
 #: src/interface/navigation/channels/HomeSidebar.tsx
 msgid "Creator Studio"
@@ -6065,6 +6245,10 @@ msgstr "Creator-Studio"
 #: src/interface/Designs.tsx
 msgid "Creator Studio couldn't be opened"
 msgstr "Das Creator-Studio konnte nicht geöffnet werden"
+
+#: components/app/interface/settings/user/profile/studio/StudioDesign.tsx
+msgid "Creator Terms"
+msgstr "Bedingungen für Creator"
 
 #: components/app/interface/settings/user/profile/CreatorsAdmin.tsx
 #: components/app/interface/settings/user/profile/EditProfile.tsx
@@ -6179,7 +6363,7 @@ msgstr "Server-Symbol zuschneiden"
 #~ msgid "Crop Server Icon"
 #~ msgstr "Server-Symbol zuschneiden"
 
-#: components/app/interface/settings/user/profile/CreatorStudio.tsx
+#: components/app/interface/settings/user/profile/studio/StudioHome.tsx
 msgid "Cropped"
 msgstr "Wird abgeschnitten"
 
@@ -6192,7 +6376,7 @@ msgstr "Das zugeschnittene Bild ist zu groß – wähle einen kleineren Ausschni
 #~ msgid "Crown"
 #~ msgstr "Krone"
 
-#: components/app/interface/settings/user/profile/StyleEditors.tsx
+#: components/app/interface/settings/user/profile/styleLabels.tsx
 msgid "Crown of light"
 msgstr "Lichtkrone"
 
@@ -6288,12 +6472,21 @@ msgstr "Gefahrenbereich"
 
 #: components/app/interface/settings/server/roles/ServerRoleEditor.tsx
 #: components/app/interface/settings/user/appearance/AppearanceMenu.tsx
+#: components/app/interface/settings/user/profile/studio/StudioEditor.tsx
 msgid "Dark"
 msgstr "Dunkel"
 
 #: components/app/interface/settings/user/appearance/AppearanceMenu.tsx
 #~ msgid "Dark Luxury"
 #~ msgstr "Dunkler Luxus"
+
+#: components/app/interface/settings/user/profile/studio/StudioEditor.tsx
+msgid "Dark or light"
+msgstr "Dunkel oder hell"
+
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "Dark or light background"
+msgstr "Dunkler oder heller Hintergrund"
 
 #: components/app/interface/settings/server/assistant/labels.ts
 msgid "Data and retention"
@@ -6365,6 +6558,10 @@ msgstr "Taub schalten oder aufheben"
 msgid "Deafen or undeafen, in any app"
 msgstr "Ton aus oder an, in jeder App"
 
+#: components/ui/components/features/voice/VoiceStatefulUserIcons.tsx
+msgid "Deafened"
+msgstr "Taub gestellt"
+
 #: components/modal/lib/CreateServerFlow.tsx
 msgid "Decide later"
 msgstr "Später entscheiden"
@@ -6375,8 +6572,13 @@ msgstr "Entschieden"
 
 #: components/app/interface/settings/user/account/ChangeRequests.tsx
 #: components/auth/src/flows/FlowConfirmChange.tsx
+#: components/ui/components/features/voice/ringing/CallRinging.tsx
 msgid "Decline"
 msgstr "Ablehnen"
+
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "Decline a call"
+msgstr "Anruf ablehnen"
 
 #: components/auth/src/flows/FlowConfirmChange.tsx
 msgid "Declined. Nothing was changed."
@@ -6438,7 +6640,7 @@ msgstr "Tiefsee"
 #~ msgid "Deeper navy base with cool blue accent."
 #~ msgstr "Tieferes Marineblau mit kühlem blauem Akzent."
 
-#: components/app/interface/settings/user/profile/StyleEditors.tsx
+#: components/app/interface/settings/user/profile/styleLabels.tsx
 #: components/app/interface/settings/user/voice/VoiceInputOptions.tsx
 #: components/app/menus/shared/NotificationContextMenu.tsx
 #: components/ui/components/design/ColourPicker.tsx
@@ -6482,6 +6684,7 @@ msgstr "Verminderte Leistung"
 #: components/app/interface/settings/user/appearance/MyThemes.tsx
 #: components/app/interface/settings/user/bots/CommandManager.tsx
 #: components/app/interface/settings/user/bots/ViewBot.tsx
+#: components/app/interface/settings/user/profile/studio/StudioDesign.tsx
 #: components/modal/modals/DeleteBot.tsx
 #: components/modal/modals/DeleteCategory.tsx
 #: components/modal/modals/DeleteChannel.tsx
@@ -6630,6 +6833,10 @@ msgstr "Server löschen"
 msgid "Delete the whole series"
 msgstr "Ganze Reihe löschen"
 
+#: components/app/interface/settings/user/profile/studio/StudioDesign.tsx
+msgid "Delete this design for good?"
+msgstr "Dieses Design endgültig löschen?"
+
 #: src/interface/events/EventCard.tsx
 msgid "Delete this event and its interested list for good?"
 msgstr "Dieses Event und seine Interessiertenliste endgültig löschen?"
@@ -6771,7 +6978,7 @@ msgstr "Beschreibung"
 #: components/app/interface/settings/server/LobbyRoleQuestionsEditor.tsx
 #: components/app/interface/settings/server/Overview.tsx
 #: components/app/interface/settings/user/bots/CommandManager.tsx
-#: components/app/interface/settings/user/profile/CreatorStudio.tsx
+#: components/app/interface/settings/user/profile/studio/StudioEditor.tsx
 #: components/i18n/errors.tsx
 #: src/interface/events/EventCard.tsx
 msgid "Description"
@@ -6792,8 +6999,13 @@ msgid "Desert Dawn"
 msgstr "Wüstenmorgen"
 
 #: components/app/interface/settings/server/LobbyAppearanceEditor.tsx
+#: components/app/interface/settings/user/profile/studio/StudioHome.tsx
 msgid "Design"
 msgstr "Design"
+
+#: components/app/interface/settings/user/profile/studio/StudioEditor.tsx
+msgid "Design summary"
+msgstr "Zusammenfassung"
 
 #: components/app/interface/safety/labels.tsx
 msgid "Design suspended"
@@ -6803,6 +7015,9 @@ msgstr "Design gesperrt"
 #: components/app/interface/discover/SiteFrame.tsx
 #: components/app/interface/settings/user/profile/CreatorPublicName.tsx
 #: components/app/interface/settings/user/profile/EditProfile.tsx
+#: components/app/interface/settings/user/profile/studio/StudioDesign.tsx
+#: components/app/interface/settings/user/profile/studio/StudioEditor.tsx
+#: components/app/interface/settings/user/profile/studio/StudioHome.tsx
 #: src/interface/designs/DesignPage.tsx
 #: src/interface/designs/Home.tsx
 #: src/interface/designs/Stage.tsx
@@ -6860,6 +7075,8 @@ msgstr "Zielsprachkanal"
 msgid "Destinations"
 msgstr "Ziele"
 
+#: components/app/interface/settings/user/profile/studio/StudioDesign.tsx
+#: components/app/interface/settings/user/profile/studio/StudioEditor.tsx
 #: components/app/interface/settings/user/voice/GameKeysOptions.tsx
 #: components/i18n/errors.tsx
 #: components/modal/modals/InteractionsEndpoint.tsx
@@ -6922,6 +7139,10 @@ msgstr "Dialoghintergrund"
 #: components/app/interface/settings/user/appearance/AnimationSettings.tsx
 msgid "Dialogs"
 msgstr "Dialoge"
+
+#: components/app/interface/settings/user/profile/studio/StudioEditor.tsx
+msgid "Did you make this work?"
+msgstr "Hast du dieses Werk selbst gemacht?"
 
 #: components/app/interface/discover/OpenInApp.tsx
 msgid "Didn't open? Continue in the browser."
@@ -7161,6 +7382,18 @@ msgstr "Dokumentation"
 msgid "does anyone read this?"
 msgstr "liest das überhaupt jemand?"
 
+#: components/app/interface/settings/user/profile/studio/StudioEditor.tsx
+msgid "Does it include parts made by others?"
+msgstr "Enthält es Teile von anderen?"
+
+#: components/app/interface/settings/user/profile/studio/StudioEditor.tsx
+msgid "Does it include parts made with AI tools?"
+msgstr "Enthält es Teile, die mit KI-Werkzeugen gemacht wurden?"
+
+#: components/app/interface/settings/user/profile/studio/StudioEditor.tsx
+msgid "Does not move"
+msgstr "Bewegt sich nicht"
+
 #: components/modal/modals/ServerEventEditor.tsx
 msgid "Does not repeat"
 msgstr "Wiederholt sich nicht"
@@ -7227,8 +7460,8 @@ msgid "Download {0}"
 msgstr "{0} herunterladen"
 
 #: components/app/interface/settings/user/profile/CreatorStudio.tsx
-msgid "Download a copy"
-msgstr "Kopie herunterladen"
+#~ msgid "Download a copy"
+#~ msgstr "Kopie herunterladen"
 
 #: components/auth/src/AppUpsell.tsx
 msgid "Download for desktop"
@@ -7238,15 +7471,24 @@ msgstr "Für den Desktop herunterladen"
 msgid "Download the desktop app"
 msgstr "Desktop-App herunterladen"
 
+#: components/app/interface/settings/user/profile/studio/StudioDesign.tsx
+msgid "Download your copy"
+msgstr "Deine Kopie herunterladen"
+
 #: components/ui/components/features/profiles/plateNames.ts
 msgid "DR Congo"
 msgstr "Demokratische Republik Kongo"
 
 #: components/app/interface/settings/user/profile/CommunityParts.tsx
+#: components/app/interface/settings/user/profile/studio/parts.tsx
 msgid "Draft"
 msgstr "Entwurf"
 
-#: components/app/interface/settings/user/profile/CreatorStudio.tsx
+#: components/app/interface/settings/user/profile/studio/StudioEditor.tsx
+msgid "Draft saved"
+msgstr "Entwurf gespeichert"
+
+#: components/app/interface/settings/user/profile/studio/StudioHome.tsx
 msgid "Drafts"
 msgstr "Entwürfe"
 
@@ -7265,7 +7507,7 @@ msgstr "Ziehen, um {0} neu anzuordnen"
 msgid "Drag to reorder. Roles higher in the list rank above lower ones."
 msgstr "Zum Sortieren ziehen. Weiter oben stehende Rollen haben Vorrang vor tieferen."
 
-#: components/app/interface/settings/user/profile/CreatorStudio.tsx
+#: components/app/interface/settings/user/profile/studio/StudioHome.tsx
 msgid "Draw around the circle"
 msgstr "Rund um den Kreis zeichnen"
 
@@ -7277,9 +7519,13 @@ msgstr "Rund um den Kreis zeichnen"
 msgid "Drop into a voice room"
 msgstr "Schau in einen Sprachraum"
 
+#: components/app/interface/settings/user/profile/studio/StudioEditor.tsx
+msgid "Drop your file here"
+msgstr "Datei hier ablegen"
+
 #: components/app/interface/settings/user/profile/CreatorStudio.tsx
-msgid "Drop your image here"
-msgstr "Bild hier ablegen"
+#~ msgid "Drop your image here"
+#~ msgstr "Bild hier ablegen"
 
 #: components/app/interface/safety/labels.tsx
 msgid "Drugs or illegal goods"
@@ -7305,6 +7551,10 @@ msgstr "Dauer: {0}"
 #: components/app/interface/settings/user/Keybinds.tsx
 msgid "During a call."
 msgstr "Während eines Anrufs."
+
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "During a server call."
+msgstr "Während eines Anrufs auf einem Server."
 
 #: components/app/interface/settings/user/profile/UserProfileEditor.tsx
 msgid "e.g. she/her, they/them"
@@ -7355,7 +7605,8 @@ msgstr "Ecuador"
 #: components/app/interface/settings/server/webhooks/ServerWebhooks.tsx
 #: components/app/interface/settings/user/Account.tsx
 #: components/app/interface/settings/user/bots/CommandManager.tsx
-#: components/app/interface/settings/user/profile/CreatorStudio.tsx
+#: components/app/interface/settings/user/profile/studio/StudioDesign.tsx
+#: components/app/interface/settings/user/profile/studio/StudioHome.tsx
 #: components/ui/components/features/messaging/elements/MessageToolbar.tsx
 msgid "Edit"
 msgstr "Bearbeiten"
@@ -7526,8 +7777,8 @@ msgstr "Effekte sind auf diesem Gerät aus, deshalb bleibt die Vorschau still. A
 #~ msgstr "Effekte laufen einmal ab, ohne Ton und mit transparentem Hintergrund. Nur animiertes PNG, GIF oder WebP. Dateien mit Wiederholung, blinkende Dateien und Dateien, die mehr als die Hälfte des Profils verdecken, werden automatisch abgelehnt."
 
 #: components/app/interface/settings/user/profile/CreatorStudio.tsx
-msgid "Effects play once, with no sound and a transparent background. Animated PNG, GIF, WebP or WebM only. Files set to repeat, files that flash, and files that cover more than half of the profile are refused automatically."
-msgstr "Effekte laufen einmal ab, ohne Ton und mit transparentem Hintergrund. Nur animiertes PNG, GIF, WebP oder WebM. Dateien mit Wiederholung, blinkende Dateien und Dateien, die mehr als die Hälfte des Profils verdecken, werden automatisch abgelehnt."
+#~ msgid "Effects play once, with no sound and a transparent background. Animated PNG, GIF, WebP or WebM only. Files set to repeat, files that flash, and files that cover more than half of the profile are refused automatically."
+#~ msgstr "Effekte laufen einmal ab, ohne Ton und mit transparentem Hintergrund. Nur animiertes PNG, GIF, WebP oder WebM. Dateien mit Wiederholung, blinkende Dateien und Dateien, die mehr als die Hälfte des Profils verdecken, werden automatisch abgelehnt."
 
 #: components/ui/components/features/profiles/plateNames.ts
 msgid "Egypt"
@@ -7537,7 +7788,7 @@ msgstr "Ägypten"
 msgid "El Salvador"
 msgstr "El Salvador"
 
-#: components/app/interface/settings/user/profile/StyleEditors.tsx
+#: components/app/interface/settings/user/profile/styleLabels.tsx
 msgid "Elegant"
 msgstr "Elegant"
 
@@ -7997,6 +8248,10 @@ msgstr "Alle"
 msgid "Everyone can post under another name"
 msgstr "Alle können unter einem anderen Namen schreiben"
 
+#: components/ui/components/features/voice/ringing/CallRinging.tsx
+msgid "Everyone declined the call."
+msgstr "Alle haben den Anruf abgelehnt."
+
 #: components/app/interface/settings/server/pages.tsx
 #: components/app/interface/settings/ServerSettings.tsx
 msgid "Everyone in the server"
@@ -8217,7 +8472,7 @@ msgstr "Feather enthält einen kostenlosen Flügel"
 msgid "Feather gift for {name}, {0} months"
 msgstr "Feather-Geschenk für {name}, {0} Monate"
 
-#: components/app/interface/settings/user/profile/StyleEditors.tsx
+#: components/app/interface/settings/user/profile/styleLabels.tsx
 #: components/ui/components/features/profiles/labels.ts
 msgid "Feathers"
 msgstr "Federn"
@@ -8272,6 +8527,7 @@ msgid "Fiji"
 msgstr "Fidschi"
 
 #: components/app/interface/settings/user/bots/CommandManager.tsx
+#: components/app/interface/settings/user/profile/studio/StudioEditor.tsx
 msgid "File"
 msgstr "Datei"
 
@@ -8279,6 +8535,10 @@ msgstr "Datei"
 msgctxt "search filter"
 msgid "File"
 msgstr "Datei"
+
+#: components/app/interface/settings/user/profile/studio/StudioEditor.tsx
+msgid "File check"
+msgstr "Dateiprüfung"
 
 #. placeholder {0}: humanFileSize(local.maxSize)
 #: components/ui/components/utils/Form2.tsx
@@ -8288,6 +8548,11 @@ msgstr "Datei muss kleiner als {0} sein"
 #: components/app/interface/channels/text/interactions/CommandPicker.tsx
 #~ msgid "File options are not supported yet."
 #~ msgstr "Datei-Optionen werden noch nicht unterstützt."
+
+#: components/app/interface/settings/user/profile/studio/StudioEditor.tsx
+#: components/app/interface/settings/user/profile/studio/StudioHome.tsx
+msgid "File size"
+msgstr "Dateigröße"
 
 #: src/interface/channels/text/Composition.tsx
 msgid "File too large"
@@ -8466,9 +8731,21 @@ msgstr "Ganz vorne"
 msgid "First message (optional)"
 msgstr "Erste Nachricht (optional)"
 
+#: components/app/interface/settings/user/profile/studio/StudioDesign.tsx
+msgid "First published"
+msgstr "Erstmals veröffentlicht"
+
+#: components/app/interface/settings/user/profile/studio/StudioEditor.tsx
+msgid "Fit"
+msgstr "Anpassen"
+
 #: components/app/interface/settings/user/Advanced.tsx
 msgid "Fit more messages on screen with tighter spacing."
 msgstr "Mehr Nachrichten auf dem Bildschirm mit engeren Abständen."
+
+#: components/app/interface/settings/user/profile/studio/StudioEditor.tsx
+msgid "Fit works on still images. Animated files are shown as they are."
+msgstr "Anpassen geht bei Standbildern. Animierte Dateien werden gezeigt, wie sie sind."
 
 #: components/ui/components/features/profiles/labels.ts
 #~ msgid "Fitness"
@@ -8499,7 +8776,7 @@ msgstr "Festes Seitenverhältnis"
 msgid "Flags"
 msgstr "Flaggen"
 
-#: components/app/interface/settings/user/profile/StyleEditors.tsx
+#: components/app/interface/settings/user/profile/styleLabels.tsx
 msgid "Flame ring"
 msgstr "Flammenring"
 
@@ -8601,7 +8878,7 @@ msgstr "Für alle, die Zrzur in der Luft halten."
 msgid "For your app's sign-in: the app puts a new state and code challenge into it for every sign-in. Opened as it is, the link does not work."
 msgstr "Für die Anmeldung über deine App: Die App setzt bei jeder Anmeldung einen neuen state und code challenge ein. So wie er ist, funktioniert der Link nicht."
 
-#: components/app/interface/settings/user/profile/StyleEditors.tsx
+#: components/app/interface/settings/user/profile/styleLabels.tsx
 msgid "Forest"
 msgstr "Wald"
 
@@ -8624,6 +8901,11 @@ msgstr "Meine Auswahl auf diesem Gerät vergessen"
 #: components/auth/src/flows/FlowLogin.tsx
 msgid "Forgot password?"
 msgstr "Passwort vergessen?"
+
+#: components/app/interface/settings/user/profile/studio/StudioEditor.tsx
+#: components/app/interface/settings/user/profile/studio/StudioHome.tsx
+msgid "Format"
+msgstr "Format"
 
 #: components/modal/modals/CreateChannel.tsx
 msgid "Forum"
@@ -8845,11 +9127,11 @@ msgstr "Vollbild"
 msgid "Fullscreen"
 msgstr "Vollbild"
 
-#: components/app/interface/settings/user/profile/CreatorStudio.tsx
+#: components/app/interface/settings/user/profile/studio/StudioHome.tsx
 msgid "Fully seen from here"
 msgstr "Ab hier ganz sichtbar"
 
-#: components/app/interface/settings/user/profile/CreatorStudio.tsx
+#: components/app/interface/settings/user/profile/studio/StudioHome.tsx
 msgid "Fully seen up to here"
 msgstr "Bis hier ganz sichtbar"
 
@@ -8943,11 +9225,11 @@ msgstr "Gateway-Ereignisse"
 msgid "Gave Wings"
 msgstr "Haben Flügel geschenkt"
 
-#: components/app/interface/settings/user/profile/StyleEditors.tsx
+#: components/app/interface/settings/user/profile/styleLabels.tsx
 msgid "Gears"
 msgstr "Zahnräder"
 
-#: components/app/interface/settings/user/profile/StyleEditors.tsx
+#: components/app/interface/settings/user/profile/styleLabels.tsx
 msgid "Gemini"
 msgstr "Zwillinge"
 
@@ -8981,7 +9263,7 @@ msgstr "Erzeugte URL"
 msgid "Generating invite…"
 msgstr "Einladung wird erstellt…"
 
-#: components/app/interface/settings/user/profile/StyleEditors.tsx
+#: components/app/interface/settings/user/profile/styleLabels.tsx
 msgid "Geometric"
 msgstr "Geometrisch"
 
@@ -9231,11 +9513,15 @@ msgstr "Zur Nachricht"
 msgid "Go to the overview"
 msgstr "Zur Übersicht"
 
+#: components/app/interface/settings/user/profile/studio/StudioEditor.tsx
+msgid "Goes live at once"
+msgstr "Geht sofort live"
+
 #: components/app/interface/settings/user/StreamerMode.tsx
 msgid "Goes off again when the share ends, unless you turned it on yourself."
 msgstr "Geht wieder aus, wenn das Teilen endet, außer du hast ihn selbst eingeschaltet."
 
-#: components/app/interface/settings/user/profile/StyleEditors.tsx
+#: components/app/interface/settings/user/profile/styleLabels.tsx
 msgid "Gold"
 msgstr "Gold"
 
@@ -9262,6 +9548,10 @@ msgstr "Guten Tag, {name}"
 #: src/interface/home/greeting.ts
 msgid "Good evening, {name}"
 msgstr "Guten Abend, {name}"
+
+#: components/app/interface/settings/user/profile/studio/LivePreview.tsx
+msgid "Good evening, everyone."
+msgstr "Guten Abend zusammen."
 
 #: src/interface/home/greeting.ts
 msgid "Good morning, {name}"
@@ -9320,7 +9610,7 @@ msgstr "Vergeben"
 msgid "Grants {0} permissions and denies {1} permissions"
 msgstr "Erlaubt {0} Berechtigungen und verbietet {1} Berechtigungen"
 
-#: components/app/interface/settings/user/profile/StyleEditors.tsx
+#: components/app/interface/settings/user/profile/styleLabels.tsx
 msgid "Grape"
 msgstr "Traube"
 
@@ -9386,9 +9676,13 @@ msgstr "Guatemala"
 #~ msgid "Guide"
 #~ msgstr "Anleitung"
 
-#: components/app/interface/settings/user/profile/CreatorStudio.tsx
+#: components/app/interface/settings/user/profile/studio/StudioEditor.tsx
 msgid "Guide marks"
 msgstr "Hilfslinien"
+
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "Guide marks on or off"
+msgstr "Hilfslinien ein oder aus"
 
 #: components/app/interface/settings/UserSettings.tsx
 msgid "Guidelines"
@@ -9526,7 +9820,7 @@ msgstr "Nur im Zrzur-Fenster erkannt"
 #~ msgid "Heartbeat"
 #~ msgstr "Herzschlag"
 
-#: components/app/interface/settings/user/profile/StyleEditors.tsx
+#: components/app/interface/settings/user/profile/styleLabels.tsx
 msgid "Hearts"
 msgstr "Herzen"
 
@@ -9575,7 +9869,7 @@ msgstr "Hat bei der Übersetzung von Zrzur geholfen."
 #~ msgid "Here is your new invite code: <0>{0}</0>"
 #~ msgstr "Hier ist dein neuer Einladungscode: <0>{0}</0>"
 
-#: components/app/interface/settings/user/profile/StyleEditors.tsx
+#: components/app/interface/settings/user/profile/styleLabels.tsx
 msgid "Hexagon"
 msgstr "Sechseck"
 
@@ -9665,6 +9959,7 @@ msgstr "Historisch"
 
 #: components/app/interface/settings/user/profile/CreatorsAdmin.tsx
 #: components/app/interface/settings/user/profile/ReviewQueue.tsx
+#: components/app/interface/settings/user/profile/studio/StudioDesign.tsx
 #: components/app/interface/settings/user/safety/SafetyDashboard.tsx
 msgid "History"
 msgstr "Verlauf"
@@ -9786,6 +10081,10 @@ msgstr "Ungarn"
 msgid "I accept the <0>Terms of Service</0> and the <1>Community Guidelines</1> and have read the <2>Privacy Policy</2>."
 msgstr "Ich akzeptiere die <0>Nutzungsbedingungen</0> und die <1>Community-Richtlinien</1> und habe die <2>Datenschutzerklärung</2> gelesen."
 
+#: components/app/interface/settings/user/connections/ServiceCards.tsx
+msgid "I agree that Zrzur copies this and shows it on my profile, including anything it may reveal about me, and exchanges this data with {name} in the United States."
+msgstr "Ich bin einverstanden, dass Zrzur das kopiert und in meinem Profil zeigt, auch was es über mich verraten kann, und diese Daten mit {name} in den USA austauscht."
+
 #: components/modal/lib/CreateServerFlow.tsx
 msgid "I agree to <0>Zrzur's rules for server owners</0>"
 msgstr "Ich stimme den <0>Zrzur-Regeln für Serverinhaber</0> zu"
@@ -9802,13 +10101,25 @@ msgstr "Ich habe geprüft, wer der Herausgeber ist: als verifiziert markieren"
 #~ msgid "I confirm that I am at least 18 years old."
 #~ msgstr "Ich bestätige, dass ich mindestens 18 Jahre alt bin."
 
+#: components/app/interface/settings/user/profile/studio/StudioEditor.tsx
+msgid "I confirm this is true, the work shows no real person without their consent, and I accept the <0>Creator Terms</0> (version {CREATOR_TERMS_VERSION})."
+msgstr "Ich bestätige, dass das stimmt, dass das Werk keine reale Person ohne deren Einwilligung zeigt, und ich nehme die <0>Bedingungen für Creator</0> an (Version {CREATOR_TERMS_VERSION})."
+
+#: components/app/interface/settings/user/profile/studio/StudioEditor.tsx
+msgid "I confirm this is true, the work shows no real person, and I accept the <0>Creator Terms</0> (version {CREATOR_TERMS_VERSION})."
+msgstr "Ich bestätige, dass das stimmt, dass das Werk keine reale Person zeigt, und ich nehme die <0>Bedingungen für Creator</0> an (Version {CREATOR_TERMS_VERSION})."
+
 #: components/modal/modals/CreateBot.tsx
 msgid "I have read the bot rules and the <0>Developer Terms</0> and I accept them."
 msgstr "Ich habe die Bot-Regeln und die <0>Entwicklerbedingungen</0> gelesen und akzeptiere sie."
 
+#: components/app/interface/settings/user/profile/studio/StudioEditor.tsx
+msgid "I hold a licence to share it"
+msgstr "Ich habe eine Lizenz, es zu teilen"
+
 #: components/app/interface/settings/user/profile/CreatorStudio.tsx
-msgid "I made this or hold the rights to it, it shows no real person, and I accept the <0>Creator Terms</0>."
-msgstr "Ich habe das selbst gemacht oder halte die Rechte daran, es zeigt keine echte Person, und ich akzeptiere die <0>Bedingungen für Designer</0>."
+#~ msgid "I made this or hold the rights to it, it shows no real person, and I accept the <0>Creator Terms</0>."
+#~ msgstr "Ich habe das selbst gemacht oder halte die Rechte daran, es zeigt keine echte Person, und ich akzeptiere die <0>Bedingungen für Designer</0>."
 
 #: components/app/interface/settings/user/plugins/ReviewTab.tsx
 msgid "I read the code and every permission, and it's safe to run."
@@ -9820,8 +10131,8 @@ msgstr "Ich verstehe die Konsequenzen"
 
 #: components/app/interface/settings/user/connections/Connections.tsx
 #: components/app/interface/settings/user/connections/ServiceCards.tsx
-msgid "I want Zrzur to copy this and show it on my profile, including anything it may reveal about me."
-msgstr "Ich möchte, dass Zrzur dies kopiert und in meinem Profil zeigt, auch alles, was es über mich verraten kann."
+#~ msgid "I want Zrzur to copy this and show it on my profile, including anything it may reveal about me."
+#~ msgstr "Ich möchte, dass Zrzur dies kopiert und in meinem Profil zeigt, auch alles, was es über mich verraten kann."
 
 #: src/interface/events/EventCard.tsx
 msgid "I'm interested"
@@ -9835,7 +10146,7 @@ msgstr "Ich habe die Änderungen gelesen und geprüft."
 #~ msgid "Ice"
 #~ msgstr "Eis"
 
-#: components/app/interface/settings/user/profile/StyleEditors.tsx
+#: components/app/interface/settings/user/profile/styleLabels.tsx
 msgid "Ice crystal"
 msgstr "Eiskristall"
 
@@ -10031,6 +10342,8 @@ msgid "In progress"
 msgstr "In Arbeit"
 
 #: components/app/interface/safety/labels.tsx
+#: components/app/interface/settings/user/profile/studio/parts.tsx
+#: components/app/interface/settings/user/profile/studio/StudioHome.tsx
 msgid "In review"
 msgstr "In Prüfung"
 
@@ -10057,6 +10370,10 @@ msgstr "Im Fenster zum Weiterleiten: durch die Liste gehen, dann senden."
 #: src/AndroidNag.tsx
 msgid "In the meantime, install Zrzur from Google Play for a faster, smoother experience designed for Android."
 msgstr "Installiere in der Zwischenzeit Zrzur auf Google Play für eine schneller und Flüssigere Erfahrung auf Android."
+
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "In the preview step of a design."
+msgstr "Im Vorschau-Schritt eines Designs."
 
 #. placeholder {0}: date(s().promoted!.ends_at)
 #: components/modal/modals/PromoteServer.tsx
@@ -10380,6 +10697,10 @@ msgstr "Irland"
 #~ msgid "irrelevant joke badge 2"
 #~ msgstr "Irrelevanter Witz-Abzeichen 2"
 
+#: components/ui/components/features/voice/ringing/CallRinging.tsx
+msgid "is calling you"
+msgstr "ruft dich an"
+
 #: src/interface/developers/docs/GettingStarted.tsx
 #~ msgid "Is the bot in that server?"
 #~ msgstr "Ist der Bot auf diesem Server?"
@@ -10424,9 +10745,17 @@ msgstr "Das hat nicht geklappt"
 msgid "It doesn't see private channels yet"
 msgstr "Sieht noch keine privaten Kanäle"
 
+#: components/app/interface/settings/user/profile/studio/StudioEditor.tsx
+msgid "It goes live at once, with your name on it."
+msgstr "Es geht sofort live, mit deinem Namen."
+
+#: components/app/interface/settings/user/profile/studio/StudioDesign.tsx
+msgid "It goes live when a reviewer approves it. Editing it takes it out of the queue until you send it again."
+msgstr "Es geht live, sobald es freigegeben wird. Wenn du es bearbeitest, verlässt es die Warteschlange, bis du es erneut sendest."
+
 #: components/app/interface/settings/user/profile/CreatorStudio.tsx
-msgid "It has a name of at least 2 letters"
-msgstr "Der Name hat mindestens 2 Zeichen"
+#~ msgid "It has a name of at least 2 letters"
+#~ msgstr "Der Name hat mindestens 2 Zeichen"
 
 #: components/app/interface/settings/server/roles/ServerRoleEditor.tsx
 msgid "It is at or above your highest role. Only someone higher can change it."
@@ -10452,6 +10781,10 @@ msgstr "Es hat wiederholt zu lange zum Antworten gebraucht."
 msgid "It learns your username, so it knows you may change these settings. You can remove it under Connected apps."
 msgstr "Er erfährt deinen Benutzernamen, damit er weiß, dass du diese Einstellungen ändern darfst. Du kannst ihn unter „Verbundene Apps“ entfernen."
 
+#: components/app/interface/settings/user/profile/studio/StudioDesign.tsx
+msgid "It leaves Designs and everyone wearing it at once. We keep the file with your account, so you can take it back as a draft later."
+msgstr "Es verschwindet sofort aus Designs und bei allen, die es tragen. Die Datei bleibt bei deinem Konto, damit du es später als Entwurf zurückholen kannst."
+
 #: components/i18n/errors.tsx
 msgid "It looks like harassment."
 msgstr "Er sieht nach Belästigung aus."
@@ -10475,6 +10808,10 @@ msgstr "Es wurde vielleicht entfernt, oder der Link ist falsch geschrieben."
 #: components/app/interface/settings/user/plugins/text.ts
 msgid "It needs your permission again."
 msgstr "Es braucht erneut deine Erlaubnis."
+
+#: components/app/interface/settings/user/profile/studio/StudioEditor.tsx
+msgid "It replaces the live version at once, also for people wearing it."
+msgstr "Es ersetzt sofort die Live-Version, auch bei allen, die sie tragen."
 
 #: components/app/interface/settings/user/plugins/text.ts
 msgid "It sent too many requests and was stopped."
@@ -10520,7 +10857,7 @@ msgstr "Der Inhaber hat ihn vielleicht entfernt, oder der Link ist falsch geschr
 msgid "Ivory Coast"
 msgstr "Elfenbeinküste"
 
-#: components/app/interface/settings/user/profile/StyleEditors.tsx
+#: components/app/interface/settings/user/profile/styleLabels.tsx
 msgid "Ivy"
 msgstr "Efeu"
 
@@ -10568,6 +10905,10 @@ msgstr "Beitrittsanfragen"
 #: src/interface/Discover.tsx
 msgid "Join server"
 msgstr "Server beitreten"
+
+#: src/interface/channels/ChannelHeader.tsx
+msgid "Join the call"
+msgstr "Dem Anruf beitreten"
 
 #: components/ui/components/features/profiles/badges/useBadgeText.ts
 msgid "Join the closed beta program by invitation or request. It is shown while you are in the program."
@@ -10697,6 +11038,10 @@ msgstr "Behalten"
 msgid "Keep as is"
 msgstr "Unverändert lassen"
 
+#: components/app/interface/settings/user/profile/studio/StudioHome.tsx
+msgid "Keep at least half of each frame transparent"
+msgstr "Mindestens die Hälfte jedes Bildes transparent lassen"
+
 #: components/app/interface/settings/server/assistant/labels.ts
 msgid "Keep encrypted transcripts"
 msgstr "Verschlüsselte Protokolle aufbewahren"
@@ -10760,9 +11105,13 @@ msgstr "Halte das Token geheim. Du bist für alles verantwortlich, was dein Bot 
 msgid "Keep this evidence past its retention period? Only do this when legally required."
 msgstr "Diese Beweise über die Aufbewahrungsfrist hinaus behalten? Nur wenn es rechtlich nötig ist."
 
-#: components/app/interface/settings/user/profile/CreatorStudio.tsx
+#: components/app/interface/settings/user/profile/studio/StudioHome.tsx
 msgid "Keep this readable: leave it mostly transparent"
 msgstr "Das muss lesbar bleiben: Lass es größtenteils transparent"
+
+#: components/app/interface/settings/user/profile/studio/StudioEditor.tsx
+msgid "Keep working"
+msgstr "Weiterarbeiten"
 
 #. placeholder {0}: keptTime()
 #: components/modal/modals/CustomStatus.tsx
@@ -10789,6 +11138,7 @@ msgstr "Kenia"
 msgid "Kept on this device only. No messages or personal data are recorded."
 msgstr "Nur auf diesem Gerät gespeichert. Es werden keine Nachrichten oder persönlichen Daten aufgezeichnet."
 
+#: components/app/interface/settings/user/profile/studio/StudioHome.tsx
 #: components/app/interface/settings/UserSettings.tsx
 msgid "Keyboard shortcuts"
 msgstr "Tastenkürzel"
@@ -10957,7 +11307,7 @@ msgstr "Startpreise"
 #~ msgid "Launch Zrzur when you log into your computer."
 #~ msgstr "Zrzur beim Login starten."
 
-#: components/app/interface/settings/user/profile/StyleEditors.tsx
+#: components/app/interface/settings/user/profile/styleLabels.tsx
 msgid "Laurel"
 msgstr "Lorbeer"
 
@@ -10981,6 +11331,7 @@ msgstr "Layout und Text"
 msgid "Learn more"
 msgstr "Mehr erfahren"
 
+#: components/app/interface/settings/user/profile/studio/StudioEditor.tsx
 #: components/modal/modals/DeleteChannel.tsx
 #: components/modal/modals/LeaveServer.tsx
 msgid "Leave"
@@ -11033,9 +11384,17 @@ msgstr "Beta verlassen"
 msgid "Leave the command editor"
 msgstr "Befehlseditor verlassen"
 
+#: components/app/interface/settings/user/profile/studio/StudioHome.tsx
+msgid "Leave the middle two thirds clear for the avatar"
+msgstr "Die mittleren zwei Drittel für den Avatar frei lassen"
+
 #: components/app/menus/VoiceParticipantContextMenu.tsx
 msgid "Leave voice"
 msgstr "Sprachkanal verlassen"
+
+#: components/app/interface/settings/user/profile/studio/StudioEditor.tsx
+msgid "Leave without saving?"
+msgstr "Ohne Speichern verlassen?"
 
 #: components/ui/components/features/profiles/labels.ts
 msgid "Leaves"
@@ -11045,7 +11404,11 @@ msgstr "Blätter"
 msgid "Lebanon"
 msgstr "Libanon"
 
-#: components/app/interface/settings/user/profile/CreatorStudio.tsx
+#: components/app/interface/settings/user/profile/studio/StudioEditor.tsx
+msgid "Left and right"
+msgstr "Links und rechts"
+
+#: components/app/interface/settings/user/profile/studio/StudioHome.tsx
 msgid "Left-to-right languages"
 msgstr "Sprachen von links nach rechts"
 
@@ -11070,7 +11433,7 @@ msgstr "Die rechtliche Sperre ist aktiv, aber es gibt keine Kopie dieses Inhalts
 msgid "Lengths go from 0 to {max}, and the minimum is not above the maximum."
 msgstr "Längen gehen von 0 bis {max}, und das Minimum liegt nicht über dem Maximum."
 
-#: components/app/interface/settings/user/profile/StyleEditors.tsx
+#: components/app/interface/settings/user/profile/styleLabels.tsx
 msgid "Leo"
 msgstr "Löwe"
 
@@ -11151,7 +11514,7 @@ msgstr "Stufe {0} für alle hier freigeschaltet"
 msgid "Liberia"
 msgstr "Liberia"
 
-#: components/app/interface/settings/user/profile/StyleEditors.tsx
+#: components/app/interface/settings/user/profile/styleLabels.tsx
 msgid "Libra"
 msgstr "Waage"
 
@@ -11177,6 +11540,7 @@ msgstr "Diesen Bann aufheben?"
 
 #: components/app/interface/settings/server/roles/ServerRoleEditor.tsx
 #: components/app/interface/settings/user/appearance/AppearanceMenu.tsx
+#: components/app/interface/settings/user/profile/studio/StudioEditor.tsx
 msgid "Light"
 msgstr "Hell"
 
@@ -11192,7 +11556,7 @@ msgstr "Hell"
 msgid "Light, green and full of sparkle."
 msgstr "Leicht, grün und voller Funkeln."
 
-#: components/app/interface/settings/user/profile/StyleEditors.tsx
+#: components/app/interface/settings/user/profile/styleLabels.tsx
 msgid "Lightning"
 msgstr "Blitz"
 
@@ -11459,6 +11823,7 @@ msgstr "Beim Laden wird eine Verbindung zu {0} hergestellt. Dabei erhält {0} de
 #: components/app/interface/settings/user/profile/CreatorsAdmin.tsx
 #: components/app/interface/settings/user/profile/CreatorStudio.tsx
 #: components/app/interface/settings/user/profile/ReviewQueue.tsx
+#: components/app/interface/settings/user/profile/studio/StudioDesign.tsx
 #: components/app/interface/settings/user/safety/ReportsAndStanding.tsx
 #: components/app/interface/settings/user/safety/SafetyDashboard.tsx
 #: components/app/interface/settings/user/subscriptions/BillingHistory.tsx
@@ -11734,6 +12099,10 @@ msgstr "Für eine andere Plugin-API entwickelt."
 msgid "Made for the late shift."
 msgstr "Gemacht für die späten Stunden."
 
+#: components/app/interface/settings/user/profile/studio/StudioEditor.tsx
+msgid "Made on upload"
+msgstr "Entsteht beim Hochladen"
+
 #: components/app/interface/settings/server/LobbySettings.tsx
 #: src/interface/lobby/Lobby.tsx
 msgid "Main channels"
@@ -11763,6 +12132,10 @@ msgstr "Größere Störung"
 msgid "Make a new address?"
 msgstr "Neue Adresse erstellen?"
 
+#: components/app/interface/settings/user/profile/studio/StudioDesign.tsx
+msgid "Make a new version"
+msgstr "Neue Version erstellen"
+
 #: components/app/interface/channels/text/interactions/MessageComponents.tsx
 msgid "Make a selection"
 msgstr "Triff eine Auswahl"
@@ -11777,8 +12150,8 @@ msgstr "Zum Designer machen"
 
 #: components/app/interface/settings/user/profile/CreatorStudio.tsx
 #: src/interface/Designs.tsx
-msgid "Make decorations, nameplates and effects for everyone. Designs go live with your name on them; effects go to a reviewer first, and reviewers can take down anything that breaks the rules."
-msgstr "Erstelle Rahmen, Namensschilder und Effekte für alle. Designs gehen mit deinem Namen online, Effekte prüft zuerst das Review-Team. Es kann alles entfernen, was gegen die Regeln verstößt."
+#~ msgid "Make decorations, nameplates and effects for everyone. Designs go live with your name on them; effects go to a reviewer first, and reviewers can take down anything that breaks the rules."
+#~ msgstr "Erstelle Rahmen, Namensschilder und Effekte für alle. Designs gehen mit deinem Namen online, Effekte prüft zuerst das Review-Team. Es kann alles entfernen, was gegen die Regeln verstößt."
 
 #: src/interface/Discover.tsx
 #~ msgid "Make it public, then submit it from the bot's settings. You can take it off Discover at any time."
@@ -11815,6 +12188,10 @@ msgstr "Gestalte diese Seite unter Servereinstellungen, Lobby: Begrüßungstext,
 #: components/app/interface/settings/shared/Discoverable.tsx
 msgid "Make your bot public first"
 msgstr "Mach deinen Bot zuerst öffentlich"
+
+#: components/app/interface/settings/user/profile/studio/StudioHome.tsx
+msgid "Make your designs, upload them and follow their status in one place."
+msgstr "Erstelle deine Designs, lade sie hoch und verfolge ihren Stand an einem Ort."
 
 #: src/interface/designs/Showcase.tsx
 #~ msgid "Make your profile <0>yours</0>"
@@ -12171,6 +12548,7 @@ msgstr "Mitglied entfernt"
 msgid "Member left"
 msgstr "Mitglied gegangen"
 
+#: components/app/interface/settings/user/profile/studio/StudioEditor.tsx
 #: src/interface/channels/ChannelHeader.tsx
 msgid "Member list"
 msgstr "Mitgliederliste"
@@ -12546,7 +12924,7 @@ msgstr "Der Zugriff aufs Mikrofon ist blockiert. Erlaube ihn im Browser, um aufz
 msgid "Microphone unplugged. Using the default microphone."
 msgstr "Mikrofon getrennt. Das Standardmikrofon wird verwendet."
 
-#: components/app/interface/settings/user/profile/StyleEditors.tsx
+#: components/app/interface/settings/user/profile/styleLabels.tsx
 msgid "Midnight"
 msgstr "Mitternacht"
 
@@ -12574,7 +12952,7 @@ msgstr "Minimieren"
 #~ msgid "Minimise to Tray"
 #~ msgstr "In Taskleiste minimieren"
 
-#: components/app/interface/settings/user/profile/StyleEditors.tsx
+#: components/app/interface/settings/user/profile/styleLabels.tsx
 msgid "Mint"
 msgstr "Minze"
 
@@ -12585,6 +12963,10 @@ msgstr "Irreführende Anwendung"
 #: components/app/interface/safety/labels.tsx
 msgid "Misleading sign-in or permissions"
 msgstr "Irreführende Anmeldung oder Berechtigungen"
+
+#: components/ui/components/features/messaging/elements/SystemMessage.tsx
+msgid "Missed call from <0/>"
+msgstr "Verpasster Anruf von <0/>"
 
 #: components/ui/components/features/voice/callCard/VoiceCallCardActions.tsx
 #: components/ui/components/features/voice/soundboard/SoundboardButton.tsx
@@ -12629,7 +13011,7 @@ msgstr "Moderator"
 msgid "Moderators"
 msgstr "Moderatoren"
 
-#: components/app/interface/settings/user/profile/StyleEditors.tsx
+#: components/app/interface/settings/user/profile/styleLabels.tsx
 msgid "Modern"
 msgstr "Modern"
 
@@ -12653,7 +13035,7 @@ msgstr "Geldbetrug"
 msgid "Mongolia"
 msgstr "Mongolei"
 
-#: components/app/interface/settings/user/profile/StyleEditors.tsx
+#: components/app/interface/settings/user/profile/styleLabels.tsx
 msgid "Mono"
 msgstr "Mono"
 
@@ -12683,7 +13065,7 @@ msgstr "Geburtsmonat"
 #~ msgid "Mood"
 #~ msgstr "Stimmung"
 
-#: components/app/interface/settings/user/profile/StyleEditors.tsx
+#: components/app/interface/settings/user/profile/styleLabels.tsx
 msgid "Moon halo"
 msgstr "Mondhof"
 
@@ -12825,7 +13207,7 @@ msgstr "Die Multi-Faktor-Authentifizierung ist für dieses Konto bereits aktivie
 msgid "Music"
 msgstr "Musik"
 
-#: components/app/interface/settings/user/profile/StyleEditors.tsx
+#: components/app/interface/settings/user/profile/styleLabels.tsx
 msgid "Music notes"
 msgstr "Musiknoten"
 
@@ -12900,6 +13282,7 @@ msgstr "Stream-Ton stummschalten"
 msgid "Mute the soundboard"
 msgstr "Soundboard stummschalten"
 
+#: components/ui/components/features/voice/VoiceStatefulUserIcons.tsx
 #: src/interface/navigation/servers/ServerList.tsx
 msgid "Muted"
 msgstr "Stumm"
@@ -12992,7 +13375,8 @@ msgstr "Name"
 #: components/app/interface/settings/user/badges/BetaAdmin.tsx
 #: components/app/interface/settings/user/bots/CommandManager.tsx
 #: components/app/interface/settings/user/plugins/DeveloperTab.tsx
-#: components/app/interface/settings/user/profile/CreatorStudio.tsx
+#: components/app/interface/settings/user/profile/studio/StudioEditor.tsx
+#: components/app/interface/settings/user/profile/studio/StudioHome.tsx
 #: components/i18n/errors.tsx
 #: components/modal/modals/CreateCategory.tsx
 #: components/modal/modals/EditServerFolder.tsx
@@ -13004,6 +13388,10 @@ msgstr "Name"
 #: components/app/interface/settings/server/members/ListMembers.tsx
 msgid "Name A–Z"
 msgstr "Name A–Z"
+
+#: components/app/interface/settings/user/profile/studio/StudioEditor.tsx
+msgid "Name and words"
+msgstr "Name und Text"
 
 #: components/app/interface/settings/user/profile/UserProfileEditor.tsx
 msgid "Name style"
@@ -13033,9 +13421,9 @@ msgstr "name@beispiel.de"
 msgid "Named in the bot's description."
 msgstr "Aus der Beschreibung des Bots."
 
-#: components/app/interface/settings/user/profile/CreatorStudio.tsx
 #: components/app/interface/settings/user/profile/ProfileWearing.tsx
 #: components/app/interface/settings/user/profile/ReviewQueue.tsx
+#: components/app/interface/settings/user/profile/studio/parts.tsx
 #: components/app/interface/settings/user/profile/UserProfileEditor.tsx
 #: src/interface/Designs.tsx
 #: src/interface/designs/DesignPage.tsx
@@ -13106,11 +13494,15 @@ msgstr "Braucht mehr Infos"
 msgid "Needs no permissions."
 msgstr "Benötigt keine Berechtigungen."
 
+#: components/app/interface/settings/user/profile/studio/StudioHome.tsx
+msgid "Needs you"
+msgstr "Wartet auf dich"
+
 #: components/app/interface/settings/user/subscriptions/BillingHistory.tsx
 msgid "Needs your confirmation"
 msgstr "Braucht deine Bestätigung"
 
-#: components/app/interface/settings/user/profile/StyleEditors.tsx
+#: components/app/interface/settings/user/profile/styleLabels.tsx
 msgid "Neon"
 msgstr "Neon"
 
@@ -13182,9 +13574,16 @@ msgstr "Neuer Kanal"
 msgid "New command"
 msgstr "Neuer Befehl"
 
-#: components/app/interface/settings/user/profile/CreatorStudio.tsx
-#~ msgid "New design"
-#~ msgstr "Neues Design"
+#: components/app/interface/settings/user/Keybinds.tsx
+#: components/app/interface/settings/user/profile/studio/StudioEditor.tsx
+#: components/app/interface/settings/user/profile/studio/StudioHome.tsx
+msgid "New design"
+msgstr "Neues Design"
+
+#. placeholder {0}: words.kind(type())
+#: components/app/interface/settings/user/profile/studio/StudioEditor.tsx
+msgid "New design: {0}"
+msgstr "Neues Design: {0}"
 
 #: components/modal/modals/EditEmail.tsx
 msgid "New email address"
@@ -13257,8 +13656,8 @@ msgid "New name"
 msgstr "Neuer Name"
 
 #: components/app/interface/settings/user/connections/Connections.tsx
-msgid "New on your Steam card"
-msgstr "Neu auf deiner Steam-Karte"
+#~ msgid "New on your Steam card"
+#~ msgstr "Neu auf deiner Steam-Karte"
 
 #: src/interface/Discover.tsx
 #~ msgid "New on Zrzur"
@@ -13333,8 +13732,8 @@ msgstr "Neue Version"
 
 #. placeholder {0}: revision()!.revision
 #: components/app/interface/settings/user/profile/CreatorStudio.tsx
-msgid "New version {0}"
-msgstr "Neue Version {0}"
+#~ msgid "New version {0}"
+#~ msgstr "Neue Version {0}"
 
 #: components/app/interface/settings/user/profile/ReviewQueue.tsx
 msgid "New versions"
@@ -13392,13 +13791,26 @@ msgstr "Nächste Verlängerung"
 msgid "Next server"
 msgstr "Nächster Server"
 
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "Next step, or send the design"
+msgstr "Nächster Schritt oder Design senden"
+
 #: src/interface/developers/docs/GettingStarted.tsx
 #~ msgid "Next steps"
 #~ msgstr "Nächste Schritte"
 
+#. placeholder {0}: stepLabel(STUDIO_STEPS[index() + 1])
+#: components/app/interface/settings/user/profile/studio/StudioEditor.tsx
+msgid "Next: {0}"
+msgstr "Weiter: {0}"
+
 #: components/ui/components/features/profiles/plateNames.ts
 msgid "Nicaragua"
 msgstr "Nicaragua"
+
+#: components/app/interface/settings/user/profile/studio/LivePreview.tsx
+msgid "Nice frame. Is it new?"
+msgstr "Schöner Rahmen. Ist der neu?"
 
 #: src/interface/designs/Scenes.tsx
 msgid "Nice new look, by the way."
@@ -13435,6 +13847,7 @@ msgstr "nein"
 
 #: components/app/interface/channels/text/interactions/CommandPicker.tsx
 #: components/app/interface/settings/server/audit/AuditLog.tsx
+#: components/app/interface/settings/user/profile/studio/StudioEditor.tsx
 #: src/interface/channels/text/searchLabels.ts
 #: src/interface/developers/docs/Directives.tsx
 msgid "No"
@@ -13528,6 +13941,10 @@ msgstr "Kein Kanal heißt \"{value}\"."
 msgid "No channels yet"
 msgstr "Noch keine Kanäle"
 
+#: components/app/interface/settings/user/profile/studio/StudioEditor.tsx
+msgid "No clear area"
+msgstr "Keine freie Fläche"
+
 #: components/app/interface/settings/user/profile/UserProfileEditor.tsx
 msgid "No colour"
 msgstr "Keine Farbe"
@@ -13594,13 +14011,21 @@ msgstr "Keine Beschreibung angegeben."
 msgid "No description yet."
 msgstr "Noch keine Beschreibung."
 
-#: components/app/interface/settings/user/profile/CreatorStudio.tsx
-msgid "No drafts."
-msgstr "Keine Entwürfe."
+#: components/app/interface/settings/user/profile/studio/StudioHome.tsx
+msgid "No design matches this tab, type and search."
+msgstr "Kein Design passt zu diesem Tab, Typ und dieser Suche."
+
+#: components/app/interface/settings/user/profile/studio/StudioHome.tsx
+msgid "No designs yet"
+msgstr "Noch keine Designs"
 
 #: components/app/interface/settings/user/profile/CreatorStudio.tsx
-msgid "No drafts. Start a design above and save it as a draft to finish later."
-msgstr "Keine Entwürfe. Beginne oben ein Design und speichere es als Entwurf, um es später fertigzustellen."
+#~ msgid "No drafts."
+#~ msgstr "Keine Entwürfe."
+
+#: components/app/interface/settings/user/profile/CreatorStudio.tsx
+#~ msgid "No drafts. Start a design above and save it as a draft to finish later."
+#~ msgstr "Keine Entwürfe. Beginne oben ein Design und speichere es als Entwurf, um es später fertigzustellen."
 
 #: components/app/interface/settings/user/profile/CreatorStudio.tsx
 #~ msgid "No drafts. Start a new submission to make one."
@@ -13729,6 +14154,10 @@ msgstr "Keine Nachricht in diesem Server passt zu deiner Suche."
 #: src/interface/lobby/Lobby.tsx
 msgid "No messages yet"
 msgstr "Noch keine Nachrichten"
+
+#: components/app/interface/settings/user/profile/studio/StudioDesign.tsx
+msgid "No note was left."
+msgstr "Es wurde keine Notiz hinterlassen."
 
 #: components/app/interface/settings/server/bans/ListBans.tsx
 msgid "No one is banned"
@@ -13937,6 +14366,14 @@ msgstr "Noch keine Flügel"
 msgid "Nobody"
 msgstr "Niemand"
 
+#: components/ui/components/features/messaging/elements/SystemMessage.tsx
+msgid "Nobody answered your call"
+msgstr "Niemand hat deinen Anruf angenommen"
+
+#: components/ui/components/features/voice/ringing/CallRinging.tsx
+msgid "Nobody answered."
+msgstr "Niemand hat geantwortet."
+
 #: components/app/interface/settings/server/ServerEmergency.tsx
 msgid "Nobody can join with an invite, the custom link or Discover."
 msgstr "Niemand kann über eine Einladung, den eigenen Link oder Entdecken beitreten."
@@ -13952,6 +14389,14 @@ msgstr "Noch niemand hier."
 #: components/app/interface/settings/server/channels/ChannelsSettings.tsx
 msgid "Nobody in the room"
 msgstr "Niemand im Raum"
+
+#: components/app/interface/settings/user/profile/studio/StudioDesign.tsx
+msgid "Nobody sees or wears it, and you can't take it back yourself. The reason and how to appeal are in your settings, under Reports & standing."
+msgstr "Niemand sieht oder trägt es, und du kannst es nicht selbst zurückholen. Den Grund und den Weg zum Einspruch findest du in deinen Einstellungen unter „Meldungen & Kontostatus“."
+
+#: components/app/interface/settings/user/profile/studio/StudioDesign.tsx
+msgid "Nobody sees or wears it. We keep the file with your account so you can take it back as a draft and publish it again, until you delete it."
+msgstr "Niemand sieht oder trägt es. Die Datei bleibt bei deinem Konto, damit du es als Entwurf zurückholen und wieder veröffentlichen kannst, bis du es löschst."
 
 #: components/app/interface/settings/user/connections/ServiceCards.tsx
 msgid "nobody until you switch it on. Then anyone who can open your Zrzur profile. If you are under 18, or we do not know your age, only your friends."
@@ -13970,7 +14415,10 @@ msgstr "Rauschunterdrückung"
 #: components/app/interface/settings/server/ServerEmergency.tsx
 #: components/app/interface/settings/server/ServerVerification.tsx
 #: components/app/interface/settings/user/appearance/AnimationSettings.tsx
+#: components/app/interface/settings/user/profile/studio/StudioDesign.tsx
+#: components/app/interface/settings/user/profile/studio/StudioEditor.tsx
 #: components/app/interface/settings/user/profile/StyleEditors.tsx
+#: components/app/interface/settings/user/profile/styleLabels.tsx
 #: components/app/interface/settings/user/voice/GameKeysOptions.tsx
 #: components/app/menus/ServerContextMenu.tsx
 #: components/app/menus/shared/NotificationContextMenu.tsx
@@ -14210,6 +14658,10 @@ msgstr "Nichts gefunden."
 msgid "Nothing found. Try another name."
 msgstr "Nichts gefunden. Versuch einen anderen Namen."
 
+#: components/app/interface/settings/user/profile/studio/StudioHome.tsx
+msgid "Nothing here"
+msgstr "Nichts hier"
+
 #: components/app/interface/settings/server/audit/AuditLog.tsx
 msgid "Nothing here yet"
 msgstr "Hier ist noch nichts"
@@ -14264,8 +14716,8 @@ msgid "Nothing on yet. Pick something to try on."
 msgstr "Noch nichts an. Wähle etwas zum Anprobieren."
 
 #: components/app/interface/settings/user/profile/CreatorStudio.tsx
-msgid "Nothing published yet."
-msgstr "Noch nichts veröffentlicht."
+#~ msgid "Nothing published yet."
+#~ msgstr "Noch nichts veröffentlicht."
 
 #: src/interface/designs/Home.tsx
 #~ msgid "Nothing quite right? Mix your own."
@@ -14274,6 +14726,14 @@ msgstr "Noch nichts veröffentlicht."
 #: src/interface/ServiceReturn.tsx
 msgid "Nothing was linked"
 msgstr "Nichts wurde verknüpft"
+
+#: components/app/interface/settings/user/profile/studio/StudioDesign.tsx
+msgid "Nothing yet. Saving a draft is not recorded; sending, publishing and reviewers' decisions are."
+msgstr "Noch nichts. Das Speichern eines Entwurfs wird nicht festgehalten; Senden, Veröffentlichen und Entscheidungen der Prüfung schon."
+
+#: components/app/interface/settings/user/profile/studio/StudioDesign.tsx
+msgid "Nothing yet. You are asked before this version is published."
+msgstr "Noch nichts. Du wirst gefragt, bevor diese Version veröffentlicht wird."
 
 #: components/app/interface/settings/ServerSettings.tsx
 #~ msgid "Notices"
@@ -14311,6 +14771,10 @@ msgstr "Jetzt: {0}. Bei einem Raid erhöhen."
 msgid "Number"
 msgstr "Zahl"
 
+#: components/app/interface/settings/user/profile/studio/StudioDesign.tsx
+msgid "Numbers"
+msgstr "Zahlen"
+
 #: src/interface/Developers.tsx
 #: src/interface/developers/docs/DocsPortal.tsx
 msgid "OAuth2"
@@ -14325,13 +14789,17 @@ msgstr "Objekte"
 #~ msgstr "Obsidian Rose"
 
 #: components/app/interface/settings/server/LobbyAppearanceEditor.tsx
-#: components/app/interface/settings/user/profile/StyleEditors.tsx
+#: components/app/interface/settings/user/profile/styleLabels.tsx
 msgid "Ocean"
 msgstr "Ozean"
 
 #: components/app/interface/settings/user/appearance/AppearanceMenu.tsx
 #~ msgid "Ocean blue with turquoise."
 #~ msgstr "Ozeanblau mit Türkis."
+
+#: components/app/interface/settings/user/profile/studio/StudioHome.tsx
+msgid "Of your design limit"
+msgstr "Von deinem Design-Limit"
 
 #: components/app/interface/settings/server/AutoModSettings.tsx
 #: components/app/interface/settings/server/channels/ChannelExtras.tsx
@@ -14452,8 +14920,8 @@ msgid "On a server the bot gets:"
 msgstr "Auf einem Server erhält der Bot:"
 
 #: components/app/interface/settings/user/profile/CreatorStudio.tsx
-msgid "On dark"
-msgstr "Auf dunkel"
+#~ msgid "On dark"
+#~ msgstr "Auf dunkel"
 
 #: src/interface/channels/text/searchLabels.ts
 msgctxt "search filter"
@@ -14461,8 +14929,8 @@ msgid "On day"
 msgstr "Am Tag"
 
 #: components/app/interface/settings/user/profile/CreatorStudio.tsx
-msgid "On light"
-msgstr "Auf hell"
+#~ msgid "On light"
+#~ msgstr "Auf hell"
 
 #: components/app/interface/settings/user/Keybinds.tsx
 msgid "On the Discover page."
@@ -14471,6 +14939,10 @@ msgstr "Auf der Entdecken-Seite."
 #: src/interface/developers/docs/GettingStarted.tsx
 #~ msgid "On the Overview tab of your application choose Add to a server, and pick a server where you have Manage Server."
 #~ msgstr "Wähle im Tab „Übersicht“ deiner Anwendung „Zu einem Server hinzufügen“ und dann einen Server, auf dem du „Server verwalten“ hast."
+
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "On the studio's first page."
+msgstr "Auf der ersten Seite des Studios."
 
 #: src/interface/developers/docs/DocsPortal.tsx
 msgid "On this page"
@@ -14665,8 +15137,8 @@ msgid "Only public servers can be listed."
 msgstr "Nur öffentliche Server können gelistet werden."
 
 #: components/app/interface/settings/user/profile/CreatorStudio.tsx
-msgid "Only publish work you made or have the right to share. It is public as soon as you publish it."
-msgstr "Veröffentliche nur, was du selbst gemacht hast oder teilen darfst. Es ist sofort öffentlich."
+#~ msgid "Only publish work you made or have the right to share. It is public as soon as you publish it."
+#~ msgstr "Veröffentliche nur, was du selbst gemacht hast oder teilen darfst. Es ist sofort öffentlich."
 
 #: components/app/interface/settings/server/ServerAccess.tsx
 msgid "Only roles with Invite others can share invites."
@@ -14782,7 +15254,9 @@ msgctxt "scheduled events"
 msgid "Open"
 msgstr "Öffnen"
 
+#. placeholder {0}: item.pending?.name ?? item.name
 #. placeholder {0}: provider()![0]
+#: components/app/interface/settings/user/profile/studio/StudioHome.tsx
 #: components/auth/src/flows/MailProvider.tsx
 msgid "Open {0}"
 msgstr "{0} öffnen"
@@ -14818,6 +15292,10 @@ msgstr "Schaltfläche „Chat öffnen“"
 #~ msgid "Open Creator Studio"
 #~ msgstr "Creator-Studio öffnen"
 
+#: components/app/interface/settings/user/profile/studio/StudioHome.tsx
+msgid "Open design"
+msgstr "Design öffnen"
+
 #: src/interface/Home.tsx
 #~ msgid "Open Development Page"
 #~ msgstr ""
@@ -14851,6 +15329,10 @@ msgstr "Im Steam-Shop öffnen"
 msgid "Open invite"
 msgstr "Einladung öffnen"
 
+#: components/app/interface/settings/user/profile/studio/StudioHome.tsx
+msgid "Open it to see what happened and what you can do."
+msgstr "Öffne es, um zu sehen, was passiert ist und was du tun kannst."
+
 #: src/interface/events/EventCard.tsx
 msgid "Open link"
 msgstr "Link öffnen"
@@ -14863,6 +15345,10 @@ msgstr "Link öffnen"
 #: components/ui/components/features/profiles/ProfileConnections.tsx
 msgid "Open on {0}"
 msgstr "Auf {0} öffnen"
+
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "Open or close the soundboard"
+msgstr "Soundboard öffnen oder schließen"
 
 #: components/modal/modals/BillingCheckoutStatus.tsx
 msgid "Open payment page"
@@ -14979,6 +15465,11 @@ msgstr "optional"
 msgid "Optional user session. Bots are refused."
 msgstr "Optionale Benutzersitzung. Bots werden abgelehnt."
 
+#. placeholder {0}: spec().maxSeconds
+#: components/app/interface/settings/user/profile/studio/StudioHome.tsx
+msgid "Optional, up to {0} seconds"
+msgstr "Optional, bis zu {0} Sekunden"
+
 #: components/app/interface/settings/server/LobbyRoleQuestionsEditor.tsx
 msgid "Optional: one line under the question."
 msgstr "Optional: eine Zeile unter der Frage."
@@ -14992,7 +15483,7 @@ msgstr "Optionen"
 msgid "Options for answer {0}"
 msgstr "Optionen für Antwort {0}"
 
-#: components/app/interface/settings/user/profile/CreatorStudio.tsx
+#: components/app/interface/settings/user/profile/studio/StudioEditor.tsx
 msgid "or choose a file"
 msgstr "oder wähle eine Datei"
 
@@ -15227,6 +15718,10 @@ msgstr "Paraguay"
 #~ msgid "Pardon User"
 #~ msgstr "Ban aufheben"
 
+#: components/app/interface/settings/user/profile/studio/StudioEditor.tsx
+msgid "Part covers the face"
+msgstr "Ein Teil verdeckt das Gesicht"
+
 #: components/app/interface/settings/user/appearance/AnimationSettings.tsx
 msgid "Part of the app"
 msgstr "Teil der App"
@@ -15255,13 +15750,15 @@ msgstr "Teilweise übersetzt"
 msgid "Partner"
 msgstr "Partner"
 
-#: components/app/interface/settings/user/profile/CreatorStudio.tsx
 #: components/app/interface/settings/user/profile/ReviewQueue.tsx
+#: components/app/interface/settings/user/profile/studio/StudioDesign.tsx
+#: components/app/interface/settings/user/profile/studio/StudioEditor.tsx
 msgid "Parts made by others"
 msgstr "Teile von anderen"
 
-#: components/app/interface/settings/user/profile/CreatorStudio.tsx
 #: components/app/interface/settings/user/profile/ReviewQueue.tsx
+#: components/app/interface/settings/user/profile/studio/StudioDesign.tsx
+#: components/app/interface/settings/user/profile/studio/StudioEditor.tsx
 msgid "Parts made with AI tools"
 msgstr "Mit KI-Werkzeugen erstellte Teile"
 
@@ -15430,9 +15927,18 @@ msgstr "Man wählt einen davon. Keine: Man tippt einen beliebigen Wert."
 msgid "People see the name in their language. Your bot always gets the main name."
 msgstr "Man sieht den Namen in der eigenen Sprache. Dein Bot bekommt immer den Hauptnamen."
 
+#. placeholder {0}: number(props.item.revision)
+#: components/app/interface/settings/user/profile/studio/StudioDesign.tsx
+msgid "People still see version {0}. Publish the new one when it is ready."
+msgstr "Alle sehen weiter Version {0}. Veröffentliche die neue, wenn sie fertig ist."
+
 #: components/app/interface/settings/user/bots/CommandManager.tsx
 msgid "People type it after / in a server channel."
 msgstr "Man tippt ihn nach / in einem Serverkanal."
+
+#: components/app/interface/settings/user/profile/studio/StudioHome.tsx
+msgid "People wearing your designs"
+msgstr "Personen tragen deine Designs"
 
 #: components/app/interface/settings/server/JoinRequests.tsx
 msgid "People who asked to join this private server. They can't see anything inside until you approve them."
@@ -15686,11 +16192,11 @@ msgstr "Angeheftete Nachrichten"
 msgid "pinned: takes true or false."
 msgstr "pinned: nimmt true oder false."
 
-#: components/app/interface/settings/user/profile/StyleEditors.tsx
+#: components/app/interface/settings/user/profile/styleLabels.tsx
 msgid "Pisces"
 msgstr "Fische"
 
-#: components/app/interface/settings/user/profile/StyleEditors.tsx
+#: components/app/interface/settings/user/profile/styleLabels.tsx
 msgid "Pixel"
 msgstr "Pixel"
 
@@ -15755,6 +16261,11 @@ msgstr "Wiedergabeposition"
 #: components/app/interface/settings/user/profile/EffectDialog.tsx
 msgid "Plays once when someone opens your profile, for up to 4 seconds."
 msgstr "Läuft einmal, wenn jemand dein Profil öffnet, höchstens 4 Sekunden lang."
+
+#. placeholder {0}: spec().maxSeconds
+#: components/app/interface/settings/user/profile/studio/StudioHome.tsx
+msgid "Plays once, up to {0} seconds, no flashing"
+msgstr "Läuft einmal, bis zu {0} Sekunden, kein Blitzen"
 
 #: components/modal/modals/MFAFlow.tsx
 msgid "Please confirm this action using the selected method."
@@ -15834,9 +16345,13 @@ msgstr "Plugins können keine versteckten Kanäle lesen, keine Serverberechtigun
 #~ msgid "PNG, animated PNG, GIF or WebP · up to 2.5 MB · {COMMUNITY_MAX_DIMENSION} px"
 #~ msgstr "PNG, animiertes PNG, GIF oder WebP · bis 2,5 MB · {COMMUNITY_MAX_DIMENSION} px"
 
+#: components/app/interface/settings/user/profile/studio/StudioHome.tsx
+msgid "PNG, animated PNG, GIF, WebP or WebM"
+msgstr "PNG, animiertes PNG, GIF, WebP oder WebM"
+
 #: components/app/interface/settings/user/profile/CreatorStudio.tsx
-msgid "PNG, animated PNG, GIF, WebP or WebM · up to 2.5 MB, WebM 8 MB · {COMMUNITY_MAX_DIMENSION} px"
-msgstr "PNG, animiertes PNG, GIF, WebP oder WebM · bis 2,5 MB, WebM 8 MB · {COMMUNITY_MAX_DIMENSION} px"
+#~ msgid "PNG, animated PNG, GIF, WebP or WebM · up to 2.5 MB, WebM 8 MB · {COMMUNITY_MAX_DIMENSION} px"
+#~ msgstr "PNG, animiertes PNG, GIF, WebP oder WebM · bis 2,5 MB, WebM 8 MB · {COMMUNITY_MAX_DIMENSION} px"
 
 #: components/ui/components/features/profiles/plateNames.ts
 msgid "Poland"
@@ -15982,7 +16497,6 @@ msgstr "Gibt sich als Zrzur-Team aus"
 #: components/app/interface/settings/server/ServerPreview.tsx
 #: components/app/interface/settings/shared/Discoverable.tsx
 #: components/app/interface/settings/user/bots/CommandManager.tsx
-#: components/app/interface/settings/user/profile/CreatorStudio.tsx
 #: components/app/interface/settings/user/profile/UserProfileEditor.tsx
 #: components/modal/modals/CreatePoll.tsx
 #: src/interface/designs/DesignPage.tsx
@@ -15996,6 +16510,10 @@ msgstr "Vorschau · nicht installiert · nach dem Neuladen weg"
 #: components/app/interface/settings/user/appearance/LivePreview.tsx
 msgid "Preview · sample data"
 msgstr "Vorschau · Beispieldaten"
+
+#: components/app/interface/settings/user/profile/studio/StudioEditor.tsx
+msgid "Preview and fit"
+msgstr "Vorschau und Anpassen"
 
 #: components/app/interface/settings/user/plugins/DeveloperTab.tsx
 msgid "Preview here"
@@ -16164,6 +16682,10 @@ msgstr "Profilabzeichen"
 msgid "Profile banner"
 msgstr "Profilbanner"
 
+#: components/app/interface/settings/user/profile/studio/StudioEditor.tsx
+msgid "Profile card"
+msgstr "Profilkarte"
+
 #: components/app/interface/settings/user/appearance/AnimationSettings.tsx
 msgid "Profile cards and suggestions while you type."
 msgstr "Profilkarten und Vorschläge beim Tippen."
@@ -16172,9 +16694,9 @@ msgstr "Profilkarten und Vorschläge beim Tippen."
 msgid "Profile colours"
 msgstr "Profilfarben"
 
-#: components/app/interface/settings/user/profile/CreatorStudio.tsx
 #: components/app/interface/settings/user/profile/EffectDialog.tsx
 #: components/app/interface/settings/user/profile/ReviewQueue.tsx
+#: components/app/interface/settings/user/profile/studio/parts.tsx
 #: components/app/interface/settings/user/profile/UserProfileEditor.tsx
 #: src/interface/designs/DesignPage.tsx
 msgid "Profile effect"
@@ -16289,7 +16811,8 @@ msgstr "Öffentliche Community"
 #~ msgid "Public server"
 #~ msgstr "Öffentlicher Server"
 
-#: components/app/interface/settings/user/profile/CreatorStudio.tsx
+#: components/app/interface/settings/user/profile/studio/StudioDesign.tsx
+#: components/app/interface/settings/user/profile/studio/StudioEditor.tsx
 msgid "Publish"
 msgstr "Veröffentlichen"
 
@@ -16309,6 +16832,10 @@ msgstr "Veröffentliche ein Design, um das Designer-Abzeichen zu bekommen."
 msgid "Publish designs as a Creator; the Zrzur team picks Super Creators by hand."
 msgstr "Veröffentliche Designs als Designer; das Zrzur-Team wählt Top-Designer von Hand aus."
 
+#: components/app/interface/settings/user/profile/studio/StudioEditor.tsx
+msgid "Publish only what you made yourself or hold a clear licence to share."
+msgstr "Veröffentliche nur, was du selbst gemacht hast oder mit klarer Lizenz teilen darfst."
+
 #: src/interface/Designs.tsx
 #~ msgid "Publish the first design"
 #~ msgstr "Veröffentliche das erste Design"
@@ -16318,7 +16845,8 @@ msgid "Publish your designs and manage the ones you made."
 msgstr "Veröffentliche deine Designs und verwalte, was du gemacht hast."
 
 #: components/app/interface/settings/user/profile/CommunityParts.tsx
-#: components/app/interface/settings/user/profile/CreatorStudio.tsx
+#: components/app/interface/settings/user/profile/studio/parts.tsx
+#: components/app/interface/settings/user/profile/studio/StudioHome.tsx
 msgid "Published"
 msgstr "Veröffentlicht"
 
@@ -16341,19 +16869,23 @@ msgstr "Veröffentlichte Designs: {0}"
 msgid "Published now"
 msgstr "Aktuell veröffentlicht"
 
+#: components/app/interface/settings/user/profile/studio/StudioHome.tsx
+msgid "Published on"
+msgstr "Veröffentlicht am"
+
 #: components/app/interface/settings/user/plugins/ReviewTab.tsx
 msgid "Publisher:"
 msgstr "Herausgeber:"
 
 #: components/app/interface/settings/user/profile/CreatorStudio.tsx
-msgid "Publishing is open to verified creators. Anyone can download a template and test an image here; nothing is uploaded."
-msgstr "Veröffentlichen können verifizierte Creator. Alle können eine Vorlage laden und hier ein Bild testen; es wird nichts hochgeladen."
+#~ msgid "Publishing is open to verified creators. Anyone can download a template and test an image here; nothing is uploaded."
+#~ msgstr "Veröffentlichen können verifizierte Creator. Alle können eine Vorlage laden und hier ein Bild testen; es wird nichts hochgeladen."
 
 #: components/app/interface/settings/user/profile/CreatorStudio.tsx
-msgid "Publishing replaces the live version straight away, also for people wearing it. Save a draft to keep working on it first."
-msgstr "Veröffentlichen ersetzt die Live-Version sofort, auch bei allen, die sie tragen. Speichere einen Entwurf, wenn du erst weiterarbeiten willst."
+#~ msgid "Publishing replaces the live version straight away, also for people wearing it. Save a draft to keep working on it first."
+#~ msgstr "Veröffentlichen ersetzt die Live-Version sofort, auch bei allen, die sie tragen. Speichere einen Entwurf, wenn du erst weiterarbeiten willst."
 
-#: components/app/interface/settings/user/profile/CreatorStudio.tsx
+#: components/app/interface/settings/user/profile/studio/StudioEditor.tsx
 msgid "Publishing…"
 msgstr "Wird veröffentlicht…"
 
@@ -16869,6 +17401,7 @@ msgstr "Freundschaftsanfrage ablehnen"
 
 #: components/app/interface/settings/user/profile/CommunityParts.tsx
 #: components/app/interface/settings/user/profile/ReviewQueue.tsx
+#: components/app/interface/settings/user/profile/studio/parts.tsx
 msgid "Rejected"
 msgstr "Abgelehnt"
 
@@ -17219,6 +17752,10 @@ msgstr "Thread wieder öffnen"
 msgid "Reopened by an admin"
 msgstr "Von einem Admin neu geöffnet"
 
+#: components/app/interface/settings/user/profile/studio/parts.tsx
+msgid "Reopened for review"
+msgstr "Erneut zur Prüfung geöffnet"
+
 #: components/app/interface/settings/server/audit/AuditLog.tsx
 msgid "reordered the roles"
 msgstr "hat die Rollen neu geordnet"
@@ -17245,13 +17782,17 @@ msgstr "Alle Befehle ersetzen"
 msgid "Replace secret"
 msgstr "Geheimnis ersetzen"
 
-#: components/app/interface/settings/user/profile/CreatorStudio.tsx
+#: components/app/interface/settings/user/profile/studio/StudioEditor.tsx
 msgid "Replace the image"
 msgstr "Bild ersetzen"
 
 #: components/app/interface/settings/user/profile/CreatorStudio.tsx
 #~ msgid "Replace the image (optional)"
 #~ msgstr "Bild ersetzen (optional)"
+
+#: components/app/interface/settings/user/profile/studio/StudioEditor.tsx
+msgid "Replace the image to move or scale it in its frame."
+msgstr "Ersetze das Bild, um es im Rahmen zu verschieben oder zu skalieren."
 
 #: components/app/interface/settings/user/Account.tsx
 msgid "Replaces your current codes"
@@ -17375,6 +17916,7 @@ msgid "Reporting doesn't remove anything by itself. A reviewer checks the report
 msgstr "Eine Meldung entfernt nichts von selbst. Jemand prüft sie anhand der Zrzur-Richtlinien."
 
 #: components/app/interface/settings/user/profile/ReviewQueue.tsx
+#: components/app/interface/settings/user/profile/studio/StudioDesign.tsx
 #: components/app/interface/settings/user/safety/SafetyDashboard.tsx
 msgid "Reports"
 msgstr "Meldungen"
@@ -17483,6 +18025,7 @@ msgstr "Bestätigung erneut abschicken"
 #: components/app/interface/settings/server/LobbyAppearanceEditor.tsx
 #: components/app/interface/settings/user/Account.tsx
 #: components/app/interface/settings/user/bots/ViewBot.tsx
+#: components/app/interface/settings/user/profile/studio/StudioEditor.tsx
 #: components/app/interface/settings/user/profile/StyleEditors.tsx
 #: components/app/interface/settings/user/profile/UserProfileEditor.tsx
 #: components/auth/src/flows/FlowConfirmReset.tsx
@@ -17693,6 +18236,10 @@ msgstr "Aktionen für Prüfer"
 msgid "Reviewer's answer:"
 msgstr "Antwort der prüfenden Person:"
 
+#: components/app/interface/settings/user/profile/studio/StudioHome.tsx
+msgid "Reviewer's note:"
+msgstr "Notiz der Prüfung:"
+
 #: src/interface/Developers.tsx
 #~ msgid "Revision"
 #~ msgstr "Revision"
@@ -17719,9 +18266,13 @@ msgstr "v{0} widerrufen"
 msgid "Revoked"
 msgstr "Entzogen"
 
-#: components/app/interface/settings/user/profile/CreatorStudio.tsx
+#: components/app/interface/settings/user/profile/studio/StudioHome.tsx
 msgid "Right-to-left languages"
 msgstr "Sprachen von rechts nach links"
+
+#: components/app/interface/settings/user/profile/studio/StudioEditor.tsx
+msgid "Rights"
+msgstr "Rechte"
 
 #. placeholder {0}: date(rights().confirmed_at)
 #: components/app/interface/settings/user/profile/ReviewQueue.tsx
@@ -17729,6 +18280,7 @@ msgid "Rights confirmed on {0}"
 msgstr "Rechte bestätigt am {0}"
 
 #: components/app/interface/settings/user/profile/StyleEditors.tsx
+#: components/app/interface/settings/user/profile/styleLabels.tsx
 msgid "Rings"
 msgstr "Ringe"
 
@@ -17897,11 +18449,11 @@ msgstr "Raum voll. Der Server prüft den Zutritt."
 msgid "Room size of {0}"
 msgstr "Raumgröße von {0}"
 
-#: components/app/interface/settings/user/profile/StyleEditors.tsx
+#: components/app/interface/settings/user/profile/styleLabels.tsx
 msgid "Rose"
 msgstr "Rosé"
 
-#: components/app/interface/settings/user/profile/StyleEditors.tsx
+#: components/app/interface/settings/user/profile/styleLabels.tsx
 msgid "Rounded"
 msgstr "Rund"
 
@@ -18027,6 +18579,11 @@ msgstr "Russland"
 msgid "Rwanda"
 msgstr "Ruanda"
 
+#: components/app/interface/settings/user/profile/studio/StudioEditor.tsx
+#: components/app/interface/settings/user/profile/studio/StudioHome.tsx
+msgid "Safe area"
+msgstr "Sicherer Bereich"
+
 #: components/app/interface/settings/user/plugins/PluginDetail.tsx
 msgid "Safe Mode is on"
 msgstr "Der abgesicherte Modus ist aktiv"
@@ -18052,7 +18609,7 @@ msgstr "Schutz"
 msgid "Safety and reports"
 msgstr "Sicherheit und Meldungen"
 
-#: components/app/interface/settings/user/profile/StyleEditors.tsx
+#: components/app/interface/settings/user/profile/styleLabels.tsx
 msgid "Sagittarius"
 msgstr "Schütze"
 
@@ -18101,6 +18658,7 @@ msgstr "San Marino"
 msgid "Sao Tome and Principe"
 msgstr "São Tomé und Príncipe"
 
+#: components/app/interface/settings/user/profile/studio/LivePreview.tsx
 #: src/interface/designs/Scenes.tsx
 msgid "Sara"
 msgstr "Sara"
@@ -18115,6 +18673,7 @@ msgstr "Saudi-Arabien"
 #: components/app/interface/settings/server/webhooks/ServerWebhooks.tsx
 #: components/app/interface/settings/user/account/AgeSettings.tsx
 #: components/app/interface/settings/user/connections/Connections.tsx
+#: components/app/interface/settings/user/connections/ServiceCards.tsx
 #: components/client/AgePrompt.tsx
 #: components/modal/modals/CustomStatus.tsx
 #: components/modal/modals/EditServerFolder.tsx
@@ -18153,7 +18712,7 @@ msgstr "Befehl speichern"
 msgid "Save current"
 msgstr "Aktuellen speichern"
 
-#: components/app/interface/settings/user/profile/CreatorStudio.tsx
+#: components/app/interface/settings/user/profile/studio/StudioEditor.tsx
 msgid "Save draft"
 msgstr "Entwurf speichern"
 
@@ -18270,6 +18829,10 @@ msgstr "Gespeichert. Alle sehen die Änderung sofort."
 msgid "Saving message…"
 msgstr "Nachricht wird gespeichert…"
 
+#: components/app/interface/settings/user/profile/studio/StudioEditor.tsx
+msgid "Saving the draft…"
+msgstr "Entwurf wird gespeichert…"
+
 #: components/app/interface/settings/server/roles/ServerRoleOverview.tsx
 msgid "Saving the new order…"
 msgstr "Neue Reihenfolge wird gespeichert…"
@@ -18305,6 +18868,7 @@ msgid "Say in a sentence why."
 msgstr "Sag in einem Satz, warum."
 
 #: components/app/interface/settings/user/appearance/AnimationSettings.tsx
+#: components/app/interface/settings/user/profile/studio/StudioEditor.tsx
 msgid "Scale"
 msgstr "Skalieren"
 
@@ -18357,7 +18921,7 @@ msgstr "Wissenschaft"
 msgid "Scopes"
 msgstr "Bereiche"
 
-#: components/app/interface/settings/user/profile/StyleEditors.tsx
+#: components/app/interface/settings/user/profile/styleLabels.tsx
 msgid "Scorpio"
 msgstr "Skorpion"
 
@@ -18416,7 +18980,7 @@ msgstr "Screenshot"
 msgid "Screenshots (up to {MAX_SHOTS})"
 msgstr "Screenshots (bis zu {MAX_SHOTS})"
 
-#: components/app/interface/settings/user/profile/StyleEditors.tsx
+#: components/app/interface/settings/user/profile/styleLabels.tsx
 msgid "Script"
 msgstr "Schreibschrift"
 
@@ -18579,6 +19143,11 @@ msgstr "Dokumentation durchsuchen"
 msgid "Search users by name or id"
 msgstr "Nutzer nach Name oder ID suchen"
 
+#: components/app/interface/settings/user/Keybinds.tsx
+#: components/app/interface/settings/user/profile/studio/StudioHome.tsx
+msgid "Search your designs"
+msgstr "Deine Designs durchsuchen"
+
 #: components/app/interface/settings/server/pages.tsx
 msgid "Search, change roles, time out, kick or ban."
 msgstr "Suchen, Rollen ändern, Timeout, kicken oder bannen."
@@ -18662,7 +19231,7 @@ msgstr "Sehen, wer online ist und welchen Status jemand hat."
 msgid "See who voted"
 msgstr "Sieh, wer abgestimmt hat"
 
-#: components/app/interface/settings/user/profile/CreatorStudio.tsx
+#: components/app/interface/settings/user/profile/studio/StudioHome.tsx
 msgid "Seen in both directions, never fully"
 msgstr "In beiden Richtungen sichtbar, nie ganz"
 
@@ -18709,6 +19278,7 @@ msgid "Selling or trading accounts"
 msgstr "Verkauf oder Handel mit Konten"
 
 #: components/app/interface/settings/user/Keybinds.tsx
+#: components/app/interface/settings/user/profile/studio/StudioEditor.tsx
 #: components/app/interface/settings/user/safety/ReportsAndStanding.tsx
 #: components/app/interface/settings/user/support/ContactSupport.tsx
 #: components/ui/components/features/profiles/ProfileActions.tsx
@@ -18758,7 +19328,8 @@ msgstr "Einbettungen senden"
 msgid "Send feedback"
 msgstr "Feedback senden"
 
-#: components/app/interface/settings/user/profile/CreatorStudio.tsx
+#: components/app/interface/settings/user/profile/studio/StudioDesign.tsx
+#: components/app/interface/settings/user/profile/studio/StudioEditor.tsx
 msgid "Send for review"
 msgstr "Zur Prüfung senden"
 
@@ -18886,6 +19457,10 @@ msgstr "Gesendet von {0}"
 msgid "Sent by the bot {0}"
 msgstr "Gesendet vom Bot {0}"
 
+#: components/app/interface/settings/user/profile/studio/parts.tsx
+msgid "Sent for review"
+msgstr "Zur Prüfung gesendet"
+
 #: components/ui/components/features/messaging/composition/FileCarousel.tsx
 msgid "Sent in the next message"
 msgstr "Wird mit der nächsten Nachricht gesendet"
@@ -18902,7 +19477,7 @@ msgstr "Öffnen und Schließen getrennt"
 msgid "Serbia"
 msgstr "Serbien"
 
-#: components/app/interface/settings/user/profile/StyleEditors.tsx
+#: components/app/interface/settings/user/profile/styleLabels.tsx
 msgid "Serif"
 msgstr "Serif"
 
@@ -19214,7 +19789,7 @@ msgid "Sharing their screen"
 msgstr "Teilt den Bildschirm"
 
 #: components/app/interface/settings/server/assistant/labels.ts
-#: components/app/interface/settings/user/profile/StyleEditors.tsx
+#: components/app/interface/settings/user/profile/styleLabels.tsx
 msgid "Shield"
 msgstr "Schild"
 
@@ -19298,6 +19873,7 @@ msgstr "Tastenkürzel anzeigen"
 #: components/ui/components/features/profiles/ProfileGames.tsx
 #: components/ui/components/features/profiles/ProfileTiles.tsx
 #: components/ui/components/features/voice/soundboard/SoundboardPicker.tsx
+#: src/interface/lobby/Lobby.tsx
 msgid "Show less"
 msgstr "Weniger anzeigen"
 
@@ -19314,6 +19890,7 @@ msgstr "Mitglieder getrennt anzeigen"
 #: components/ui/components/features/profiles/ProfileTiles.tsx
 #: src/interface/designs/ShowMore.tsx
 #: src/interface/events/EventCard.tsx
+#: src/interface/lobby/Lobby.tsx
 msgid "Show more"
 msgstr "Mehr anzeigen"
 
@@ -19380,8 +19957,8 @@ msgid "Show the lobby"
 msgstr "Lobby anzeigen"
 
 #: components/app/interface/settings/user/connections/Connections.tsx
-msgid "Show these on my profile too."
-msgstr "Das auch auf meinem Profil zeigen."
+#~ msgid "Show these on my profile too."
+#~ msgstr "Das auch auf meinem Profil zeigen."
 
 #: components/app/interface/settings/server/webhooks/ServerWebhooks.tsx
 msgid "Show webhooks made by"
@@ -19416,8 +19993,8 @@ msgid "Shown as"
 msgstr "Angezeigt als"
 
 #: components/app/interface/settings/user/profile/CreatorStudio.tsx
-msgid "Shown behind the name in the member list. 1024 × 192 px; 16 px are cropped at the top and bottom. It fades toward the avatar, on the left or the right by language; the image itself never flips."
-msgstr "Erscheint hinter dem Namen in der Mitgliederliste. 1024 × 192 px; oben und unten werden 16 px abgeschnitten. Es blendet zum Avatar hin aus, je nach Sprache links oder rechts; das Bild selbst wird nie gespiegelt."
+#~ msgid "Shown behind the name in the member list. 1024 × 192 px; 16 px are cropped at the top and bottom. It fades toward the avatar, on the left or the right by language; the image itself never flips."
+#~ msgstr "Erscheint hinter dem Namen in der Mitgliederliste. 1024 × 192 px; oben und unten werden 16 px abgeschnitten. Es blendet zum Avatar hin aus, je nach Sprache links oder rechts; das Bild selbst wird nie gespiegelt."
 
 #: components/app/interface/settings/user/badges/BadgeAdmin.tsx
 msgid "Shown by owner"
@@ -19519,6 +20096,11 @@ msgstr "Eine Spalte"
 msgid "Sites you allowed"
 msgstr "Erlaubte Seiten"
 
+#: components/app/interface/settings/user/profile/studio/StudioEditor.tsx
+#: components/app/interface/settings/user/profile/studio/StudioHome.tsx
+msgid "Size"
+msgstr "Größe"
+
 #: components/app/interface/settings/server/LobbyAppearanceEditor.tsx
 msgid "Sizes"
 msgstr "Größen"
@@ -19528,7 +20110,7 @@ msgstr "Größen"
 msgid "Skip"
 msgstr "Überspringen"
 
-#: components/app/interface/settings/user/profile/StyleEditors.tsx
+#: components/app/interface/settings/user/profile/styleLabels.tsx
 msgid "Slab"
 msgstr "Slab"
 
@@ -19628,7 +20210,7 @@ msgstr "Sanft"
 msgid "Snapshot taken when the report was filed. It stays even if the content is deleted, until its retention ends. Opening this case is recorded."
 msgstr "Momentaufnahme vom Zeitpunkt der Meldung. Sie bleibt auch nach dem Löschen des Inhalts, bis die Aufbewahrungsfrist endet. Das Öffnen dieses Falls wird protokolliert."
 
-#: components/app/interface/settings/user/profile/StyleEditors.tsx
+#: components/app/interface/settings/user/profile/styleLabels.tsx
 #: components/ui/components/features/profiles/labels.ts
 msgid "Snow"
 msgstr "Schnee"
@@ -19649,7 +20231,7 @@ msgstr "Soziales"
 msgid "Social links"
 msgstr "Soziale Links"
 
-#: components/app/interface/settings/user/profile/StyleEditors.tsx
+#: components/app/interface/settings/user/profile/styleLabels.tsx
 msgid "Soft"
 msgstr "Weich"
 
@@ -19685,7 +20267,7 @@ msgstr "Salomonen"
 msgid "Somalia"
 msgstr "Somalia"
 
-#: components/app/interface/settings/user/profile/CreatorStudio.tsx
+#: components/app/interface/settings/user/profile/studio/StudioEditor.tsx
 msgid "Some frames are too short. Each frame must show for at least 33 ms."
 msgstr "Einige Einzelbilder sind zu kurz. Jedes muss mindestens 33 ms zu sehen sein."
 
@@ -19841,6 +20423,10 @@ msgstr "Sounds"
 msgid "Source"
 msgstr "Quelle"
 
+#: components/app/interface/settings/user/profile/studio/StudioEditor.tsx
+msgid "Source and licence"
+msgstr "Quelle und Lizenz"
+
 #: components/app/interface/discover/SiteFrame.tsx
 #: components/app/interface/settings/UserSettings.tsx
 msgid "Source code"
@@ -19933,6 +20519,10 @@ msgstr "Besonderes Abzeichen"
 #: components/app/interface/settings/server/channels/ChannelExtras.tsx
 msgid "Special channels"
 msgstr "Besondere Kanäle"
+
+#: components/app/interface/settings/user/profile/studio/StudioHome.tsx
+msgid "Specs and templates"
+msgstr "Vorgaben und Vorlagen"
 
 #: components/app/interface/settings/user/appearance/AnimationSettings.tsx
 msgid "Speed curve"
@@ -20032,13 +20622,17 @@ msgstr "Status"
 #~ msgid "Stars"
 #~ msgstr "Sterne"
 
-#: components/app/interface/settings/user/profile/StyleEditors.tsx
+#: components/app/interface/settings/user/profile/styleLabels.tsx
 msgid "Stars in orbit"
 msgstr "Kreisende Sterne"
 
+#: src/interface/channels/ChannelHeader.tsx
+msgid "Start a call"
+msgstr "Anruf starten"
+
 #: components/app/interface/settings/user/profile/CreatorStudio.tsx
-msgid "Start a design"
-msgstr "Design beginnen"
+#~ msgid "Start a design"
+#~ msgstr "Design beginnen"
 
 #: components/modal/modals/CreateOrJoinServer.tsx
 #~ msgid "Start a new community with channels and roles."
@@ -20047,6 +20641,10 @@ msgstr "Design beginnen"
 #: components/modal/modals/CreateThread.tsx
 msgid "Start a thread"
 msgstr "Thread starten"
+
+#: src/interface/channels/ChannelHeader.tsx
+msgid "Start a video call"
+msgstr "Videoanruf starten"
 
 #: components/ui/components/features/voice/callCard/VoiceCallCardActions.tsx
 #: src/interface/navigation/channels/AccountBar.tsx
@@ -20134,6 +20732,10 @@ msgstr "Threads in diesem Kanal starten"
 msgid "Start typing"
 msgstr "Mit dem Schreiben beginnen"
 
+#: components/app/interface/settings/user/profile/studio/StudioHome.tsx
+msgid "Start with a template, draw your design, then upload it here."
+msgstr "Beginne mit einer Vorlage, zeichne dein Design und lade es hier hoch."
+
 #: components/app/interface/settings/user/Native.tsx
 #~ msgid "Start with Computer"
 #~ msgstr "Mit Computer starten"
@@ -20167,6 +20769,7 @@ msgid "Stated by you, not verified."
 msgstr "Von dir angegeben, nicht geprüft."
 
 #: components/app/interface/settings/user/plugins/PluginDetail.tsx
+#: components/app/interface/settings/user/profile/studio/StudioHome.tsx
 #: components/app/interface/settings/user/safety/SafetyDashboard.tsx
 #: components/modal/modals/ReportContent.tsx
 #: components/ui/components/features/profiles/ProfileStatus.tsx
@@ -20224,6 +20827,10 @@ msgstr "Steam hat nicht geantwortet. Versuch es in ein paar Minuten noch einmal.
 #: src/interface/SteamReturn.tsx
 msgid "Steam was not linked"
 msgstr "Steam wurde nicht verknüpft"
+
+#: components/app/interface/settings/user/profile/studio/StudioEditor.tsx
+msgid "Steps"
+msgstr "Schritte"
 
 #: components/app/interface/settings/server/LobbySettings.tsx
 msgid "Steps for new members that tick themselves off."
@@ -20321,7 +20928,7 @@ msgstr "Streamer-Modus an oder aus"
 msgid "Strikes count for this many days"
 msgstr "Verstöße zählen so viele Tage"
 
-#: components/app/interface/settings/user/profile/StyleEditors.tsx
+#: components/app/interface/settings/user/profile/styleLabels.tsx
 msgid "Strong"
 msgstr "Kräftig"
 
@@ -20419,6 +21026,10 @@ msgstr "Eingereicht. Ein Prüfer von Zrzur sieht es sich an; das Ergebnis siehst
 msgid "Subscriptions"
 msgstr "Abonnements"
 
+#: components/app/interface/settings/user/profile/studio/StudioEditor.tsx
+msgid "Such as a font or a drawing under an open licence. Name the source and the licence."
+msgstr "Etwa eine Schrift oder Zeichnung unter offener Lizenz. Nenne Quelle und Lizenz."
+
 #: components/ui/components/features/profiles/plateNames.ts
 msgid "Sudan"
 msgstr "Sudan"
@@ -20435,13 +21046,13 @@ msgstr "Werte beim Tippen vorschlagen (dein Bot antwortet)"
 msgid "Suicide"
 msgstr "Suizid"
 
-#: components/app/interface/settings/user/profile/StyleEditors.tsx
+#: components/app/interface/settings/user/profile/styleLabels.tsx
 #: components/ui/components/features/profiles/labels.ts
 msgid "Sun rays"
 msgstr "Sonnenstrahlen"
 
 #: components/app/interface/settings/server/LobbyAppearanceEditor.tsx
-#: components/app/interface/settings/user/profile/StyleEditors.tsx
+#: components/app/interface/settings/user/profile/styleLabels.tsx
 msgid "Sunset"
 msgstr "Sonnenuntergang"
 
@@ -20659,7 +21270,7 @@ msgstr "Slogan"
 #: components/app/interface/settings/channel/ForumTags.tsx
 #: components/app/interface/settings/ChannelSettings.tsx
 #: components/app/interface/settings/shared/Discoverable.tsx
-#: components/app/interface/settings/user/profile/CreatorStudio.tsx
+#: components/app/interface/settings/user/profile/studio/StudioEditor.tsx
 #: components/modal/modals/CreateThread.tsx
 msgid "Tags"
 msgstr "Tags"
@@ -20679,6 +21290,10 @@ msgstr "Tadschikistan"
 #: components/app/interface/settings/user/safety/SafetyDashboard.tsx
 msgid "Take action"
 msgstr "Maßnahme ergreifen"
+
+#: components/app/interface/settings/user/profile/studio/StudioDesign.tsx
+msgid "Take back as a draft"
+msgstr "Als Entwurf zurückholen"
 
 #: components/app/interface/settings/user/subscriptions/Subscriptions.tsx
 msgid "Take off"
@@ -20700,6 +21315,14 @@ msgstr "Diese Maßnahme ergreifen? Sie gilt sofort und wird am Fall vermerkt."
 #: components/auth/src/AppUpsell.tsx
 msgid "Take your communities <0>with you.</0>"
 msgstr "Nimm deine Communitys <0>überallhin mit.</0>"
+
+#: components/app/interface/settings/user/profile/studio/parts.tsx
+msgid "Taken back as a draft"
+msgstr "Als Entwurf zurückgeholt"
+
+#: components/app/interface/settings/user/profile/studio/parts.tsx
+msgid "Taken down"
+msgstr "Entfernt"
 
 #: components/app/interface/settings/server/LobbyAppearanceEditor.tsx
 msgid "Takes people straight to the conversation."
@@ -20758,7 +21381,7 @@ msgstr "Ziel"
 msgid "Targeted at me or someone else"
 msgstr "Gegen mich oder jemand anderen gerichtet"
 
-#: components/app/interface/settings/user/profile/StyleEditors.tsx
+#: components/app/interface/settings/user/profile/styleLabels.tsx
 msgid "Taurus"
 msgstr "Stier"
 
@@ -20810,13 +21433,17 @@ msgstr "Beschreib das Problem in deinen Worten"
 msgid "Tell Zrzur if it misbehaves, misleads or looks unsafe."
 msgstr "Sag Zrzur Bescheid, wenn es sich falsch verhält, irreführend ist oder unsicher wirkt."
 
-#: components/app/interface/settings/user/profile/CreatorStudio.tsx
+#: components/app/interface/settings/user/profile/studio/StudioHome.tsx
 msgid "Template"
 msgstr "Vorlage"
 
+#: components/app/interface/settings/user/profile/studio/StudioHome.tsx
+msgid "Templates are guides: draw on a copy, then export without the guide marks. A WebM becomes an animated image when you upload it: its transparency stays and its sound is dropped."
+msgstr "Vorlagen sind Hilfen: Zeichne auf einer Kopie und exportiere ohne die Hilfslinien. Ein WebM wird beim Hochladen zu einem animierten Bild: Die Transparenz bleibt, der Ton entfällt."
+
 #: components/app/interface/settings/user/profile/CreatorStudio.tsx
-msgid "Templates are guides: draw on a copy, then export without the guide marks. PNG, animated PNG, GIF or WebP, up to 2.5 MB and 1024 px on each side, or a WebM of up to 8 MB. Animations play up to 12 seconds."
-msgstr "Vorlagen sind Hilfen: Zeichne auf einer Kopie und exportiere ohne die Hilfslinien. PNG, animiertes PNG, GIF oder WebP, bis 2,5 MB und 1024 px pro Seite, oder ein WebM bis 8 MB. Animationen laufen bis zu 12 Sekunden."
+#~ msgid "Templates are guides: draw on a copy, then export without the guide marks. PNG, animated PNG, GIF or WebP, up to 2.5 MB and 1024 px on each side, or a WebM of up to 8 MB. Animations play up to 12 seconds."
+#~ msgstr "Vorlagen sind Hilfen: Zeichne auf einer Kopie und exportiere ohne die Hilfslinien. PNG, animiertes PNG, GIF oder WebP, bis 2,5 MB und 1024 px pro Seite, oder ein WebM bis 8 MB. Animationen laufen bis zu 12 Sekunden."
 
 #: components/app/interface/settings/user/profile/CreatorStudio.tsx
 #~ msgid "Templates are guides: draw on a copy, then export without the guide marks. PNG, animated PNG, GIF or WebP, up to 2.5 MB and 1024 px on each side. Animations play up to 12 seconds."
@@ -20862,8 +21489,8 @@ msgid "Test"
 msgstr "Test"
 
 #: components/app/interface/settings/user/profile/CreatorStudio.tsx
-msgid "Test an image"
-msgstr "Bild testen"
+#~ msgid "Test an image"
+#~ msgstr "Bild testen"
 
 #: components/modal/modals/InteractionsEndpoint.tsx
 msgid "Test and save"
@@ -21009,6 +21636,10 @@ msgstr "Diese Änderung wurde nicht gespeichert. Prüfe sie und versuche es erne
 msgid "That couldn't be found. It may have changed, try again."
 msgstr "Das wurde nicht gefunden. Vielleicht hat es sich geändert, versuch es noch einmal."
 
+#: components/app/interface/settings/user/profile/CreatorStudio.tsx
+msgid "That design isn't in your studio. It may have been deleted."
+msgstr "Dieses Design ist nicht in deinem Studio. Vielleicht wurde es gelöscht."
+
 #: components/modal/modals/SignOutSessions.tsx
 msgid "That device will need to sign in again."
 msgstr "Das Gerät muss sich erneut anmelden."
@@ -21024,7 +21655,7 @@ msgstr "Das hat nicht geklappt."
 msgid "That didn't work. Try again in a moment."
 msgstr "Das hat nicht geklappt. Versuch es gleich noch einmal."
 
-#: components/app/interface/settings/user/profile/CreatorStudio.tsx
+#: components/app/interface/settings/user/profile/studio/StudioEditor.tsx
 msgid "That effect is too big. The limit is 2 MB."
 msgstr "Dieser Effekt ist zu groß. Die Grenze liegt bei 2 MB."
 
@@ -21036,7 +21667,7 @@ msgstr "Diese Datei lässt sich nicht lesen."
 msgid "That file is too large for a plugin package."
 msgstr "Diese Datei ist zu groß für ein Plugin-Paket."
 
-#: components/app/interface/settings/user/profile/CreatorStudio.tsx
+#: components/app/interface/settings/user/profile/studio/StudioEditor.tsx
 msgid "That file isn't an image we can read."
 msgstr "Diese Datei ist kein Bild, das wir lesen können."
 
@@ -21044,11 +21675,11 @@ msgstr "Diese Datei ist kein Bild, das wir lesen können."
 msgid "That file isn't valid JSON."
 msgstr "Diese Datei ist kein gültiges JSON."
 
-#: components/app/interface/settings/user/profile/CreatorStudio.tsx
+#: components/app/interface/settings/user/profile/studio/StudioEditor.tsx
 msgid "That image is too big. The limit is 2.5 MB."
 msgstr "Das Bild ist zu groß. Maximal 2,5 MB."
 
-#: components/app/interface/settings/user/profile/CreatorStudio.tsx
+#: components/app/interface/settings/user/profile/studio/StudioEditor.tsx
 msgid "That image is too large. Keep it within {COMMUNITY_MAX_DIMENSION} × {COMMUNITY_MAX_DIMENSION} pixels."
 msgstr "Das Bild ist zu groß. Bleib bei höchstens {COMMUNITY_MAX_DIMENSION} × {COMMUNITY_MAX_DIMENSION} Pixeln."
 
@@ -21091,19 +21722,19 @@ msgstr "Das war viel auf einmal. {seconds, plural, one {Versuch es in # Sekunde 
 #~ msgid "That was a lot at once. Try again in {seconds} seconds."
 #~ msgstr "Das war viel auf einmal. Versuch es in {seconds} Sekunden noch einmal."
 
-#: components/app/interface/settings/user/profile/CreatorStudio.tsx
+#: components/app/interface/settings/user/profile/studio/StudioEditor.tsx
 msgid "That WebM can't be read. Export it again and try once more."
 msgstr "Diese WebM-Datei kann nicht gelesen werden. Exportiere sie neu und versuche es noch einmal."
 
-#: components/app/interface/settings/user/profile/CreatorStudio.tsx
+#: components/app/interface/settings/user/profile/studio/StudioEditor.tsx
 msgid "That WebM can't be read. Use VP8 or VP9, at most {COMMUNITY_MAX_DIMENSION} px on each side, and export it again."
 msgstr "Diese WebM-Datei kann nicht gelesen werden. Verwende VP8 oder VP9, höchstens {COMMUNITY_MAX_DIMENSION} px pro Seite, und exportiere sie neu."
 
-#: components/app/interface/settings/user/profile/CreatorStudio.tsx
+#: components/app/interface/settings/user/profile/studio/StudioEditor.tsx
 msgid "That WebM couldn't be turned into an image in time. Try a shorter one, or try again in a moment."
 msgstr "Diese WebM-Datei konnte nicht rechtzeitig in ein Bild umgewandelt werden. Versuche eine kürzere oder probiere es gleich noch einmal."
 
-#: components/app/interface/settings/user/profile/CreatorStudio.tsx
+#: components/app/interface/settings/user/profile/studio/StudioEditor.tsx
 msgid "That WebM is too big. The limit is 8 MB."
 msgstr "Diese WebM-Datei ist zu groß. Die Grenze liegt bei 8 MB."
 
@@ -21122,6 +21753,14 @@ msgstr "Das Konto wurde nicht verknüpft"
 #: components/app/interface/settings/server/audit/AuditLog.tsx
 msgid "The audit log couldn't be loaded"
 msgstr "Das Audit-Log konnte nicht geladen werden"
+
+#: components/app/interface/settings/user/profile/studio/StudioEditor.tsx
+msgid "The avatar fills the middle two thirds. Scale the art, or show the guide marks to see the circle."
+msgstr "Der Avatar füllt die mittleren zwei Drittel. Skaliere das Bild oder blende die Hilfslinien ein, um den Kreis zu sehen."
+
+#: components/app/interface/settings/user/profile/studio/StudioEditor.tsx
+msgid "The background is filled, so it will hide the avatar. Export with a transparent background."
+msgstr "Der Hintergrund ist gefüllt und verdeckt den Avatar. Exportiere mit transparentem Hintergrund."
 
 #: components/app/interface/settings/user/badges/MyBadges.tsx
 msgid "The beta is closed: ask to join and the team may invite you."
@@ -21220,7 +21859,7 @@ msgstr "Der Befehl konnte nicht verwendet werden."
 msgid "The community gallery couldn't be loaded."
 msgstr "Die Community-Galerie konnte nicht geladen werden."
 
-#: components/app/interface/settings/user/profile/CreatorStudio.tsx
+#: components/app/interface/settings/user/profile/studio/StudioDesign.tsx
 msgid "The copy could not be downloaded."
 msgstr "Die Kopie konnte nicht heruntergeladen werden."
 
@@ -21241,11 +21880,15 @@ msgstr "Das eingegebene Datum bedeutet, dass du unter 16 bist"
 msgid "The decision was made by automated means"
 msgstr "Die Entscheidung wurde automatisiert getroffen"
 
+#: components/app/interface/settings/user/profile/studio/StudioDesign.tsx
+msgid "The design and its image are deleted. This can't be undone; download your copy first if you want to keep it."
+msgstr "Das Design und sein Bild werden gelöscht. Das lässt sich nicht rückgängig machen; lade vorher deine Kopie herunter, wenn du sie behalten willst."
+
 #: src/interface/Designs.tsx
 msgid "The designs you made"
 msgstr "Deine Designs"
 
-#: src/interface/Designs.tsx
+#: components/app/interface/settings/user/profile/studio/StudioHome.tsx
 msgid "The designs you made, kept here."
 msgstr "Deine Designs, hier aufbewahrt."
 
@@ -21260,6 +21903,10 @@ msgstr "Die Anfrage für „Entdecken“ wurde genehmigt oder der Eintrag wurde 
 #: components/i18n/errors.tsx
 msgid "The Discover request was declined. Declined requests cannot be removed, but the user may submit again."
 msgstr "Die Anfrage für „Entdecken“ wurde abgelehnt. Abgelehnte Anfragen können nicht entfernt werden, aber eine neue Einreichung ist möglich."
+
+#: components/app/interface/settings/user/profile/studio/LivePreview.tsx
+msgid "The effect plays once when this profile opens."
+msgstr "Der Effekt läuft einmal, wenn dieses Profil geöffnet wird."
 
 #: components/i18n/errors.tsx
 msgid "The email couldn't be sent. Try again in a few minutes."
@@ -21363,7 +22010,7 @@ msgstr "Der Link funktioniert sofort für niemanden mehr."
 msgid "The list changed since you opened it. It was reloaded: check it and save again."
 msgstr "Die Liste hat sich geändert, seit du sie geöffnet hast. Sie wurde neu geladen: Prüfe sie und speichere noch einmal."
 
-#: components/app/interface/settings/user/profile/CreatorStudio.tsx
+#: components/app/interface/settings/user/profile/studio/StudioDesign.tsx
 msgid "The live version stays up until a reviewer approves the new one."
 msgstr "Die veröffentlichte Version bleibt online, bis die neue freigegeben ist."
 
@@ -21564,6 +22211,10 @@ msgstr "Das Soundboard hat schon {0} Sounds. Entferne zuerst einen."
 msgid "The soundboard is full. Remove a sound, or add Wings to the server for more."
 msgstr "Das Soundboard ist voll. Entferne einen Sound oder gib dem Server Wings für mehr."
 
+#: components/ui/components/features/voice/soundboard/SoundsUnavailable.tsx
+msgid "The sounds could not load. Close them and open them again."
+msgstr "Die Sounds konnten nicht geladen werden. Schließe sie und öffne sie noch einmal."
+
 #. placeholder {0}: err.max
 #: components/i18n/errors.tsx
 msgid "The stage has {0} speakers already. Send one back to the listeners first."
@@ -21675,7 +22326,7 @@ msgstr "Es gibt keinen Kanal, in dem du Webhooks verwalten darfst."
 msgid "There is nothing to delete: only messages from the last 7 days can be deleted together."
 msgstr "Es gibt nichts zu löschen: Nur Nachrichten der letzten 7 Tage lassen sich gemeinsam löschen."
 
-#: components/app/interface/settings/user/profile/CreatorStudio.tsx
+#: components/app/interface/settings/user/profile/studio/StudioEditor.tsx
 msgid "There's nothing to see in this file. Every frame is transparent."
 msgstr "In dieser Datei ist nichts zu sehen. Alle Einzelbilder sind transparent."
 
@@ -21922,19 +22573,19 @@ msgstr "Dieses Gerät bleibt angemeldet."
 msgid "This doesn't have the right format."
 msgstr "Das Format stimmt nicht."
 
-#: components/app/interface/settings/user/profile/CreatorStudio.tsx
+#: components/app/interface/settings/user/profile/studio/StudioEditor.tsx
 msgid "This effect covers too much of the profile. Keep at least half of each frame transparent so text stays readable."
 msgstr "Dieser Effekt verdeckt zu viel vom Profil. Lass mindestens die Hälfte jedes Einzelbilds transparent, damit Text lesbar bleibt."
 
-#: components/app/interface/settings/user/profile/CreatorStudio.tsx
+#: components/app/interface/settings/user/profile/studio/StudioEditor.tsx
 msgid "This effect flashes too much to be safe for people with photosensitive epilepsy. Keep to 3 flashes a second or fewer, or make the flashing part smaller."
 msgstr "Dieser Effekt blinkt zu stark und ist für Menschen mit fotosensitiver Epilepsie nicht sicher. Bleibe bei höchstens 3 Blitzen pro Sekunde oder verkleinere den blinkenden Teil."
 
-#: components/app/interface/settings/user/profile/CreatorStudio.tsx
+#: components/app/interface/settings/user/profile/studio/StudioEditor.tsx
 msgid "This effect has too many frames. The limit is 120."
 msgstr "Dieser Effekt hat zu viele Einzelbilder. Die Grenze liegt bei 120."
 
-#: components/app/interface/settings/user/profile/CreatorStudio.tsx
+#: components/app/interface/settings/user/profile/studio/StudioEditor.tsx
 msgid "This effect is too long. The limit is 4 seconds."
 msgstr "Dieser Effekt ist zu lang. Die Grenze liegt bei 4 Sekunden."
 
@@ -21966,7 +22617,7 @@ msgstr "Dieses Feld nimmt höchstens {max} Dateien an."
 msgid "This file can't be played as a sound."
 msgstr "Diese Datei lässt sich nicht als Sound abspielen."
 
-#: components/app/interface/settings/user/profile/CreatorStudio.tsx
+#: components/app/interface/settings/user/profile/studio/StudioEditor.tsx
 msgid "This file couldn't be checked, so it can't be used. Export it again and try once more."
 msgstr "Diese Datei konnte nicht geprüft werden und kann daher nicht verwendet werden. Exportiere sie neu und versuche es noch einmal."
 
@@ -21974,7 +22625,7 @@ msgstr "Diese Datei konnte nicht geprüft werden und kann daher nicht verwendet 
 msgid "This file is empty."
 msgstr "Diese Datei ist leer."
 
-#: components/app/interface/settings/user/profile/CreatorStudio.tsx
+#: components/app/interface/settings/user/profile/studio/StudioEditor.tsx
 msgid "This file is set to repeat. Export it to play once."
 msgstr "Diese Datei ist auf Wiederholung eingestellt. Exportiere sie so, dass sie einmal abläuft."
 
@@ -22017,12 +22668,24 @@ msgid "This image couldn't be cropped. Try again."
 msgstr "Dieses Bild konnte nicht zugeschnitten werden. Versuche es noch einmal."
 
 #: components/app/interface/settings/user/profile/CreatorStudio.tsx
-msgid "This image is not square, so it will look stretched around the avatar. 1024 × 1024 px fits best."
-msgstr "Dieses Bild ist nicht quadratisch und wirkt um den Avatar gestreckt. Am besten passen 1024 × 1024 px."
+#~ msgid "This image is not square, so it will look stretched around the avatar. 1024 × 1024 px fits best."
+#~ msgstr "Dieses Bild ist nicht quadratisch und wirkt um den Avatar gestreckt. Am besten passen 1024 × 1024 px."
+
+#: components/app/interface/settings/user/profile/studio/StudioEditor.tsx
+msgid "This image is not square. It is cropped to the frame; move it with the fit controls, or use 1024 × 1024 px."
+msgstr "Dieses Bild ist nicht quadratisch. Es wird auf den Rahmen zugeschnitten; verschiebe es mit den Reglern oder nimm 1024 × 1024 px."
 
 #: components/app/interface/settings/user/profile/CreatorStudio.tsx
-msgid "This image is not wide enough for a nameplate; it will be cropped. 1024 × 192 px fits best."
-msgstr "Dieses Bild passt nicht zum Format eines Namensschilds und wird beschnitten. Am besten passen 1024 × 192 px."
+#~ msgid "This image is not wide enough for a nameplate; it will be cropped. 1024 × 192 px fits best."
+#~ msgstr "Dieses Bild passt nicht zum Format eines Namensschilds und wird beschnitten. Am besten passen 1024 × 192 px."
+
+#: components/app/interface/settings/user/profile/studio/StudioEditor.tsx
+msgid "This image is not wide enough for a nameplate. It is cropped to the frame; 1024 × 192 px fits best."
+msgstr "Dieses Bild ist für ein Namensschild nicht breit genug. Es wird auf den Rahmen zugeschnitten; 1024 × 192 px passt am besten."
+
+#: components/app/interface/settings/user/profile/studio/StudioEditor.tsx
+msgid "This image is small and may look soft. The full size is best."
+msgstr "Dieses Bild ist klein und kann unscharf wirken. Die volle Größe ist am besten."
 
 #: components/i18n/errors.tsx
 #: components/ui/components/features/messaging/elements/Invite.tsx
@@ -22068,6 +22731,10 @@ msgstr "Das ist ein offizielles Zrzur-Konto. Es kann nicht hinzugefügt werden."
 #: components/app/interface/settings/shared/Discoverable.tsx
 msgid "This is how it will look on Discover."
 msgstr "So wird er in Entdecken aussehen."
+
+#: components/app/interface/settings/user/profile/studio/LivePreview.tsx
+msgid "This is how your decoration looks on a profile."
+msgstr "So sieht dein Rahmen auf einem Profil aus."
 
 #: components/modal/modals/JoinServer.tsx
 msgid "This is not a valid invite link or code."
@@ -22405,8 +23072,12 @@ msgid "This ties your {0} account to your Zrzur account."
 msgstr "Damit wird dein {0}-Konto mit deinem Zrzur-Konto verbunden."
 
 #: components/app/interface/settings/user/connections/Connections.tsx
-msgid "this ties your Steam account to your Zrzur account. The unlock days show when you played. What you play can say something about your beliefs, health or sexuality."
-msgstr "damit wird dein Steam-Konto mit deinem Zrzur-Konto verbunden. Die Tage deiner Erfolge zeigen, wann du gespielt hast. Was du spielst, kann etwas über deinen Glauben, deine Gesundheit oder deine Sexualität verraten."
+msgid "this ties your Steam account to your Zrzur account. The unlock days show when you played."
+msgstr "damit wird dein Steam-Konto mit deinem Zrzur-Konto verbunden. Die Tage deiner Erfolge zeigen, wann du gespielt hast."
+
+#: components/app/interface/settings/user/connections/Connections.tsx
+#~ msgid "this ties your Steam account to your Zrzur account. The unlock days show when you played. What you play can say something about your beliefs, health or sexuality."
+#~ msgstr "damit wird dein Steam-Konto mit deinem Zrzur-Konto verbunden. Die Tage deiner Erfolge zeigen, wann du gespielt hast. Was du spielst, kann etwas über deinen Glauben, deine Gesundheit oder deine Sexualität verraten."
 
 #: components/app/interface/settings/user/connections/Connections.tsx
 #~ msgid "this ties your Steam account to your Zrzur account. What you play can say something about your beliefs, health or sexuality."
@@ -22462,7 +23133,7 @@ msgstr "Dadurch darf es:"
 msgid "This will invalidate the current token and stop any existing instances of the bot from running."
 msgstr "Dadurch wird der aktuelle Token ungültig und alle bestehenden Instanzen des Bots werden angehalten."
 
-#: components/app/interface/settings/user/profile/StyleEditors.tsx
+#: components/app/interface/settings/user/profile/styleLabels.tsx
 msgid "Thorn roses"
 msgstr "Dornenrosen"
 
@@ -22761,6 +23432,10 @@ msgstr "Übersetzer"
 msgid "Transparency and blur"
 msgstr "Transparenz und Unschärfe"
 
+#: components/app/interface/settings/user/profile/studio/StudioEditor.tsx
+msgid "Transparent background"
+msgstr "Transparenter Hintergrund"
+
 #: components/ui/components/features/profiles/labels.ts
 #~ msgid "Travel"
 #~ msgstr "Reisen"
@@ -22827,8 +23502,8 @@ msgstr "Versuch ein anderes Wort oder stöbere in den Kategorien."
 #: components/app/interface/settings/user/myData/MyData.tsx
 #: components/app/interface/settings/user/plugins/PluginDetail.tsx
 #: components/app/interface/settings/user/profile/CommunityGallery.tsx
-#: components/app/interface/settings/user/profile/CreatorStudio.tsx
 #: components/app/interface/settings/user/profile/ReviewQueue.tsx
+#: components/app/interface/settings/user/profile/studio/StudioHome.tsx
 #: components/app/interface/settings/user/safety/ReportsAndStanding.tsx
 #: components/app/interface/settings/user/safety/SafetyDashboard.tsx
 #: components/app/interface/settings/user/Sessions.tsx
@@ -23000,7 +23675,8 @@ msgstr "Die Zwei-Faktor-Authentifizierung schützt dein Konto, selbst wenn dein 
 
 #: components/app/interface/settings/user/badges/BugReportDialog.tsx
 #: components/app/interface/settings/user/bots/CommandManager.tsx
-#: components/app/interface/settings/user/profile/CreatorStudio.tsx
+#: components/app/interface/settings/user/profile/studio/StudioEditor.tsx
+#: components/app/interface/settings/user/profile/studio/StudioHome.tsx
 #: components/app/interface/settings/user/safety/SafetyDashboard.tsx
 #: components/modal/modals/CreateChannel.tsx
 #: src/interface/developers/docs/Directives.tsx
@@ -23033,7 +23709,7 @@ msgstr "Nur Typprüfung."
 msgid "Type: {0}. The type of a saved command cannot change."
 msgstr "Art: {0}. Die Art eines gespeicherten Befehls lässt sich nicht ändern."
 
-#: components/app/interface/settings/user/profile/StyleEditors.tsx
+#: components/app/interface/settings/user/profile/styleLabels.tsx
 msgid "Typewriter"
 msgstr "Schreibmaschine"
 
@@ -23330,6 +24006,10 @@ msgstr "Unerwünschte sexuelle Inhalte"
 msgid "Unwanted sexual content, or anything involving a minor"
 msgstr "Unerwünschte sexuelle Inhalte oder alles, was Minderjährige betrifft"
 
+#: components/app/interface/settings/user/profile/studio/StudioEditor.tsx
+msgid "Up and down"
+msgstr "Hoch und runter"
+
 #: src/interface/home/greeting.ts
 msgid "Up late, {name}?"
 msgstr "Noch wach, {name}?"
@@ -23338,6 +24018,11 @@ msgstr "Noch wach, {name}?"
 #: components/modal/modals/ServerIdentity.tsx
 msgid "Up to {0}"
 msgstr "Bis {0}"
+
+#. placeholder {0}: megabytes()
+#: components/app/interface/settings/user/profile/studio/StudioHome.tsx
+msgid "Up to {0} MB (WebM up to 8 MB)"
+msgstr "Bis zu {0} MB (WebM bis zu 8 MB)"
 
 #: components/app/interface/channels/text/MessageSelectionBar.tsx
 msgid "Up to {BULK_DELETE_MAX} messages at a time."
@@ -23359,7 +24044,7 @@ msgstr "Höchstens 50 in:-Filter zählen, daher wurde \"{value}\" weggelassen."
 msgid "Up to 8 KB of its own settings, kept with your account."
 msgstr "Bis zu 8 KB eigener Einstellungen, gespeichert mit deinem Konto."
 
-#: components/app/interface/settings/user/profile/CreatorStudio.tsx
+#: components/app/interface/settings/user/profile/studio/StudioEditor.tsx
 msgid "Up to 8, separated by commas"
 msgstr "Bis zu 8, durch Kommas getrennt"
 
@@ -23397,6 +24082,12 @@ msgstr "Update verfügbar"
 msgid "updated {0}"
 msgstr "hat {0} aktualisiert"
 
+#. placeholder {0}: name()
+#: components/app/interface/settings/user/connections/Connections.tsx
+#: components/app/interface/settings/user/connections/ServiceCards.tsx
+msgid "Updated consent for {0}"
+msgstr "Aktualisierte Einwilligung für {0}"
+
 #: components/app/interface/settings/server/audit/AuditLog.tsx
 msgid "updated the server settings"
 msgstr "hat die Servereinstellungen aktualisiert"
@@ -23428,8 +24119,8 @@ msgid "Upload a file for \"{name}\"."
 msgstr "Lade eine Datei für „{name}“ hoch."
 
 #: components/app/interface/settings/user/profile/CreatorStudio.tsx
-msgid "Upload design"
-msgstr "Design hochladen"
+#~ msgid "Upload design"
+#~ msgstr "Design hochladen"
 
 #: components/app/interface/settings/server/emojis/EmojiList.tsx
 msgid "Upload emoji"
@@ -23516,7 +24207,7 @@ msgstr "Verwende einen Link, der mit https:// beginnt"
 #~ msgid "Use a PNG, animated PNG, GIF or WebP image."
 #~ msgstr "Verwende ein PNG, animiertes PNG, GIF oder WebP."
 
-#: components/app/interface/settings/user/profile/CreatorStudio.tsx
+#: components/app/interface/settings/user/profile/studio/StudioEditor.tsx
 msgid "Use a PNG, animated PNG, GIF, WebP or WebM file."
 msgstr "Verwende eine PNG-, animierte PNG-, GIF-, WebP- oder WebM-Datei."
 
@@ -23904,6 +24595,14 @@ msgstr "Meldungen bestätigen und Bug Hunter vergeben."
 msgid "Verifying your account…"
 msgstr "Überprüfung deines Kontos…"
 
+#. placeholder {0}: number(entry.revision)
+#. placeholder {0}: number(item.pending?.revision ?? item.revision)
+#. placeholder {0}: number(props.item.pending?.revision ?? props.item.revision)
+#: components/app/interface/settings/user/profile/studio/StudioDesign.tsx
+#: components/app/interface/settings/user/profile/studio/StudioHome.tsx
+msgid "Version {0}"
+msgstr "Version {0}"
+
 #: components/app/interface/settings/user/Native.tsx
 #: components/app/interface/settings/UserSettings.tsx
 msgid "Version:"
@@ -24033,7 +24732,7 @@ msgstr "Violettes Licht für lange Abende."
 #~ msgid "Violet navy with orchid."
 #~ msgstr "Violettes Marineblau mit Orchidee."
 
-#: components/app/interface/settings/user/profile/StyleEditors.tsx
+#: components/app/interface/settings/user/profile/styleLabels.tsx
 msgid "Virgo"
 msgstr "Jungfrau"
 
@@ -24162,6 +24861,10 @@ msgstr "Stimmen"
 msgid "Voting stops for everyone and the results become final. This can't be undone."
 msgstr "Die Abstimmung endet für alle und das Ergebnis steht fest. Das lässt sich nicht rückgängig machen."
 
+#: components/app/interface/settings/user/profile/studio/StudioDesign.tsx
+msgid "Waiting for a reviewer"
+msgstr "Wartet auf die Prüfung"
+
 #: components/app/interface/discover/ServerPage.tsx
 #: components/app/interface/settings/user/badges/MyBadges.tsx
 msgid "Waiting for approval"
@@ -24194,6 +24897,10 @@ msgstr "Wartet auf dich"
 #: components/modal/modals/BillingCheckoutStatus.tsx
 msgid "Waiting for your payment"
 msgstr "Warte auf deine Zahlung"
+
+#: components/app/interface/settings/user/profile/studio/StudioEditor.tsx
+msgid "Waits for a reviewer"
+msgstr "Wartet auf die Prüfung"
 
 #: src/interface/OAuth.tsx
 msgid "wants to access your Zrzur account"
@@ -24238,7 +24945,7 @@ msgstr "wurde von der AutoMod-Regel {0} in {1} gestoppt"
 msgid "Wave lines"
 msgstr "Wellenlinien"
 
-#: components/app/interface/settings/user/profile/StyleEditors.tsx
+#: components/app/interface/settings/user/profile/styleLabels.tsx
 msgid "Waves"
 msgstr "Wellen"
 
@@ -24298,6 +25005,22 @@ msgstr "Wir konnten deine Kopie nicht vorbereiten. Fordere sie erneut an oder sc
 #: components/app/interface/settings/user/connections/ServiceCards.tsx
 msgid "We give Twitch your channel id so it tells us when you go live or offline; people who can see your profile then see that you are live. We read your name again once a day and keep nothing from Twitch older than 24 hours. We keep no Twitch sign-in."
 msgstr "Wir geben Twitch deine Kanal-ID, damit es uns meldet, wenn du live gehst oder aufhörst; wer dein Profil sehen kann, sieht dann, dass du live bist. Wir lesen deinen Namen einmal am Tag neu und behalten nichts von Twitch, das älter als 24 Stunden ist. Wir speichern keine Twitch-Anmeldung."
+
+#: components/app/interface/settings/user/connections/ServiceCards.tsx
+msgid "We have updated what you agree to when you link Battle.net: it now names where your data goes. You agree to it the next time you confirm on Battle.net."
+msgstr "Wir haben aktualisiert, wozu du beim Verknüpfen von Battle.net einwilligst: Jetzt steht darin auch, wohin deine Daten gehen. Du stimmst zu, wenn du das nächste Mal bei Battle.net bestätigst."
+
+#: components/app/interface/settings/user/connections/ServiceCards.tsx
+msgid "We have updated what you agree to when you link GitHub: it now names where your data goes. Until you agree, your GitHub account does not show on your profile and Refresh stays off."
+msgstr "Wir haben aktualisiert, wozu du beim Verknüpfen von GitHub einwilligst: Jetzt steht darin auch, wohin deine Daten gehen. Bis du zustimmst, erscheint dein GitHub-Konto nicht in deinem Profil, und „Aktualisieren“ bleibt aus."
+
+#: components/app/interface/settings/user/connections/Connections.tsx
+msgid "We have updated what you agree to when you link Steam: it now covers game pictures and up to 60 of your latest achievements with the day you unlocked them (no time of day), and it names where your data goes. Until you agree, Refresh stays off and nothing new shows."
+msgstr "Wir haben aktualisiert, wozu du beim Verknüpfen von Steam einwilligst: Es umfasst jetzt Spielbilder und bis zu 60 deiner neuesten Erfolge mit dem Tag, an dem du sie freigeschaltet hast (ohne Uhrzeit), und nennt, wohin deine Daten gehen. Bis du zustimmst, bleibt „Aktualisieren“ aus und nichts Neues erscheint."
+
+#: components/app/interface/settings/user/connections/ServiceCards.tsx
+msgid "We have updated what you agree to when you link Twitch: it now names where your data goes. Until you agree, your channel does not show on your profile and we exchange no data with Twitch about it."
+msgstr "Wir haben aktualisiert, wozu du beim Verknüpfen von Twitch einwilligst: Jetzt steht darin auch, wohin deine Daten gehen. Bis du zustimmst, erscheint dein Kanal nicht in deinem Profil, und wir tauschen keine Daten darüber mit Twitch aus."
 
 #: components/auth/src/flows/Form.tsx
 msgid "We keep only the month and year. They decide which content you can see."
@@ -24529,6 +25252,10 @@ msgstr "Was hier passiert und wie man mitmacht."
 msgid "What happens in the server, in one staff channel."
 msgstr "Was auf dem Server passiert, in einem Team-Kanal."
 
+#: components/app/interface/settings/user/profile/studio/StudioEditor.tsx
+msgid "What happens next"
+msgstr "Wie es weitergeht"
+
 #: components/app/interface/settings/user/plugins/PluginDetail.tsx
 msgid "What it adds"
 msgstr "Was es hinzufügt"
@@ -24574,9 +25301,25 @@ msgstr "Wofür dieser Kanal da ist"
 msgid "What this followed"
 msgstr "Worauf das folgte"
 
+#: components/app/interface/settings/user/profile/studio/StudioEditor.tsx
+msgid "What this type needs"
+msgstr "Was dieser Typ braucht"
+
 #: components/modal/modals/ScreenSharePicker.tsx
 msgid "What to share"
 msgstr "Was geteilt wird"
+
+#: components/app/interface/settings/user/profile/studio/StudioEditor.tsx
+msgid "What you changed since the last saved draft will be lost."
+msgstr "Was du seit dem letzten gespeicherten Entwurf geändert hast, geht verloren."
+
+#: components/app/interface/settings/user/profile/studio/StudioDesign.tsx
+msgid "What you declared"
+msgstr "Was du angegeben hast"
+
+#: components/app/interface/settings/user/connections/ServiceCards.tsx
+msgid "What you play or post there can say something about your beliefs, health or sexuality."
+msgstr "Was du dort spielst oder postest, kann etwas über deinen Glauben, deine Gesundheit oder deine Sexualität verraten."
 
 #: components/app/interface/settings/user/voice/ScreenShareOptions.tsx
 msgid "What you usually share"
@@ -24647,6 +25390,10 @@ msgstr "Wo"
 #: components/app/interface/settings/user/safety/SafetyDashboard.tsx
 msgid "Where it applies"
 msgstr "Geltungsbereich"
+
+#: components/app/interface/settings/user/profile/studio/StudioEditor.tsx
+msgid "Where it shows"
+msgstr "Wo es erscheint"
 
 #: components/app/interface/settings/ServerSettings.tsx
 #~ msgid "Where join and leave messages go, and the rules."
@@ -24724,9 +25471,21 @@ msgstr "Was trifft am besten zu?"
 msgid "Which one"
 msgstr "Welche"
 
+#: components/app/interface/settings/user/profile/studio/StudioEditor.tsx
+msgid "Which parts and which tool"
+msgstr "Welche Teile und welches Werkzeug"
+
 #: components/app/interface/settings/user/profile/CreatorStudio.tsx
-msgid "Which parts and which tool, if any"
-msgstr "Welche Teile und welches Werkzeug, falls zutreffend"
+#~ msgid "Which parts and which tool, if any"
+#~ msgstr "Welche Teile und welches Werkzeug, falls zutreffend"
+
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "While a call rings."
+msgstr "Während ein Anruf klingelt."
+
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "While making a design."
+msgstr "Beim Erstellen eines Designs."
 
 #: components/app/interface/settings/user/Keybinds.tsx
 msgid "While selecting messages to delete."
@@ -24786,8 +25545,8 @@ msgid "Who joined in the last seven days."
 msgstr "Wer in den letzten sieben Tagen beigetreten ist."
 
 #: components/app/interface/settings/user/profile/CreatorStudio.tsx
-msgid "Who made them and under which licence, if any"
-msgstr "Wer sie gemacht hat und unter welcher Lizenz, falls zutreffend"
+#~ msgid "Who made them and under which licence, if any"
+#~ msgstr "Wer sie gemacht hat und unter welcher Lizenz, falls zutreffend"
 
 #: components/app/interface/settings/server/pages.tsx
 #~ msgid "Who made them, how often used, when they end."
@@ -24855,7 +25614,7 @@ msgstr "Warum sollte diese Entscheidung geändert werden?"
 msgid "Why should we look at this again?"
 msgstr "Warum sollten wir uns das noch einmal ansehen?"
 
-#: components/app/interface/settings/user/profile/StyleEditors.tsx
+#: components/app/interface/settings/user/profile/styleLabels.tsx
 msgid "Wide"
 msgstr "Breit"
 
@@ -24885,7 +25644,7 @@ msgstr "Fenster"
 msgid "Windows that open on top of the app."
 msgstr "Fenster, die sich über der App öffnen."
 
-#: components/app/interface/settings/user/profile/StyleEditors.tsx
+#: components/app/interface/settings/user/profile/styleLabels.tsx
 msgid "Wing frame"
 msgstr "Flügelrahmen"
 
@@ -24954,8 +25713,18 @@ msgid "With Nobody, no one can put you in a group chat, not even friends. You ca
 msgstr "Bei „Niemand“ kann dich niemand zu einem Gruppenchat hinzufügen, auch keine Freunde. Eigene Gruppen kannst du weiterhin erstellen."
 
 #: components/app/interface/settings/user/plugins/DeveloperTab.tsx
+#: components/app/interface/settings/user/profile/studio/StudioDesign.tsx
 msgid "Withdraw"
 msgstr "Zurückziehen"
+
+#: components/app/interface/settings/user/profile/studio/StudioDesign.tsx
+msgid "Withdraw this design?"
+msgstr "Dieses Design zurückziehen?"
+
+#: components/app/interface/settings/user/profile/studio/parts.tsx
+#: components/app/interface/settings/user/profile/studio/StudioHome.tsx
+msgid "Withdrawn"
+msgstr "Zurückgezogen"
 
 #: components/app/interface/settings/server/AutoModSettings.tsx
 msgid "Within seconds"
@@ -24998,14 +25767,14 @@ msgstr "Wörter, die in Ordnung sind, eins pro Zeile"
 msgid "Worldwide"
 msgstr "Weltweit"
 
-#: components/app/interface/settings/user/profile/CreatorStudio.tsx
+#: components/app/interface/settings/user/profile/studio/StudioDesign.tsx
+#: components/app/interface/settings/user/profile/studio/StudioHome.tsx
 msgid "Worn by"
 msgstr "Getragen von"
 
 #. placeholder {0}: entry.uses
 #. placeholder {0}: item().popularity
-#. placeholder {0}: item.popularity
-#: components/app/interface/settings/user/profile/CreatorStudio.tsx
+#. placeholder {0}: ranked()?.uses ?? 0
 #: src/interface/Designs.tsx
 #: src/interface/designs/Makers.tsx
 msgid "Worn by {0}"
@@ -25059,6 +25828,10 @@ msgstr "Schreib die Frage."
 msgid "Write the reason the user will see."
 msgstr "Schreib den Grund, den die Person sieht."
 
+#: components/app/interface/settings/user/profile/studio/StudioEditor.tsx
+msgid "Write them in your own language. They show on the design's public page."
+msgstr "Schreibe sie in deiner Sprache. Sie erscheinen auf der öffentlichen Seite des Designs."
+
 #: components/app/interface/settings/user/support/ContactSupport.tsx
 msgid "Write to support"
 msgstr "An den Support schreiben"
@@ -25093,6 +25866,7 @@ msgstr "ja"
 
 #: components/app/interface/channels/text/interactions/CommandPicker.tsx
 #: components/app/interface/settings/server/audit/AuditLog.tsx
+#: components/app/interface/settings/user/profile/studio/StudioEditor.tsx
 #: src/interface/channels/text/searchLabels.ts
 #: src/interface/developers/docs/Directives.tsx
 msgid "Yes"
@@ -25105,6 +25879,10 @@ msgstr "Ja oder nein"
 #: components/app/interface/settings/user/subscriptions/PlusPage.tsx
 msgid "Yes, hide it any time"
 msgstr "Ja, jederzeit ausblendbar"
+
+#: components/app/interface/settings/user/profile/studio/StudioEditor.tsx
+msgid "Yes, I made it myself"
+msgstr "Ja, ich habe es selbst gemacht"
 
 #: components/app/interface/settings/user/ConnectedApps.tsx
 msgid "Yes, revoke"
@@ -25145,6 +25923,12 @@ msgstr "Du bist dabei, {0} zu kicken"
 #: components/i18n/errors.tsx
 msgid "You are banned from this server."
 msgstr "Du wurdest von diesem Server gesperrt."
+
+#: components/app/interface/settings/user/profile/studio/StudioDesign.tsx
+#: components/app/interface/settings/user/profile/studio/StudioEditor.tsx
+#: components/app/interface/settings/user/profile/studio/StudioHome.tsx
+msgid "You are here"
+msgstr "Du bist hier"
 
 #: components/app/interface/channels/text/interactions/errorText.ts
 msgid "You are not allowed to do this."
@@ -25323,6 +26107,10 @@ msgstr "Du kannst dich nicht selbst timeouten."
 msgid "You clicked on \"{0}\""
 msgstr "Du hast auf \"{0}\" geklickt"
 
+#: components/app/interface/settings/user/profile/studio/StudioEditor.tsx
+msgid "You confirmed your rights to this image. Replacing the image asks again."
+msgstr "Du hast deine Rechte an diesem Bild bestätigt. Wenn du das Bild ersetzt, wirst du erneut gefragt."
+
 #: components/i18n/errors.tsx
 msgid "You do not have permission to do this."
 msgstr "Du hast nicht die notwendigen Berechtigungen dafür."
@@ -25489,6 +26277,10 @@ msgstr "Ihr müsst zuerst befreundet sein."
 msgid "You pay on our payment partner's secure page. Zrzur never sees your card details."
 msgstr "Du bezahlst auf der sicheren Seite unseres Zahlungspartners. Zrzur sieht deine Kartendaten nie."
 
+#: components/app/interface/settings/user/profile/studio/parts.tsx
+msgid "You published it"
+msgstr "Du hast es veröffentlicht"
+
 #: components/app/interface/discover/ServerPage.tsx
 #~ msgid "You read the server's rules and accept them when you join. Discover lists only servers whose owners asked to be here, and the Zrzur team checks each one first."
 #~ msgstr "Beim Beitritt liest du die Regeln des Servers und akzeptierst sie. Entdecken zeigt nur Server, deren Inhaber das beantragt haben, und das Zrzur-Team prüft jeden vorher."
@@ -25526,6 +26318,10 @@ msgstr "Du meldest dich auf der Seite von {0} selbst an. Zrzur sieht dieses Pass
 #: components/app/interface/settings/user/connections/Connections.tsx
 msgid "You will sign in on Steam's own page. Zrzur never sees that password."
 msgstr "Du meldest dich auf der Seite von Steam selbst an. Zrzur sieht dieses Passwort nie."
+
+#: components/app/interface/settings/user/profile/studio/StudioDesign.tsx
+msgid "You withdrew this design"
+msgstr "Du hast dieses Design zurückgezogen"
 
 #: components/app/interface/settings/user/Account.tsx
 msgid "You won't be able to access your account unless you contact support - however, your data will not be deleted."
@@ -25828,13 +26624,17 @@ msgstr "Dein Creator-Zugang ist pausiert. Deine Designs sind für alle verborgen
 msgid "Your design could be here"
 msgstr "Hier könnte dein Design stehen"
 
-#: components/app/interface/settings/user/profile/CreatorStudio.tsx
+#: components/app/interface/settings/user/profile/studio/StudioHome.tsx
 msgid "Your designs"
 msgstr "Deine Designs"
 
+#: components/app/interface/settings/user/profile/studio/StudioHome.tsx
+msgid "Your designs couldn't be loaded"
+msgstr "Deine Designs konnten nicht geladen werden"
+
 #: components/app/interface/settings/user/profile/CreatorStudio.tsx
-msgid "Your designs couldn't be loaded."
-msgstr "Deine Designs konnten nicht geladen werden."
+#~ msgid "Your designs couldn't be loaded."
+#~ msgstr "Deine Designs konnten nicht geladen werden."
 
 #: components/app/interface/settings/user/appearance/AnimationSettings.tsx
 msgid "Your device allows full motion."
@@ -26098,6 +26898,7 @@ msgstr "Dein Begrüßungstext."
 msgid "Your work or brand used without permission"
 msgstr "Dein Werk oder deine Marke ohne Erlaubnis verwendet"
 
+#: components/app/interface/settings/user/profile/studio/LivePreview.tsx
 #: src/interface/designs/Scenes.tsx
 msgid "Yusuf"
 msgstr "Yusuf"
@@ -26159,8 +26960,8 @@ msgstr "Der Zrzur-Assistent ist gerade nicht erreichbar. Versuche es bald erneut
 #~ msgstr "Zrzur-Blau Hell"
 
 #: components/app/interface/settings/user/connections/Connections.tsx
-msgid "Zrzur can now also show game pictures and up to 60 of your latest achievements with the day you unlocked them (no time of day). The unlock days show when you played. Nothing new shows until you agree."
-msgstr "Zrzur kann jetzt auch Spielbilder und bis zu 60 deiner neuesten Erfolge mit dem Tag zeigen, an dem du sie freigeschaltet hast (ohne Uhrzeit). Die Tage zeigen, wann du gespielt hast. Neues erscheint erst, wenn du zustimmst."
+#~ msgid "Zrzur can now also show game pictures and up to 60 of your latest achievements with the day you unlocked them (no time of day). The unlock days show when you played. Nothing new shows until you agree."
+#~ msgstr "Zrzur kann jetzt auch Spielbilder und bis zu 60 deiner neuesten Erfolge mit dem Tag zeigen, an dem du sie freigeschaltet hast (ohne Uhrzeit). Die Tage zeigen, wann du gespielt hast. Neues erscheint erst, wenn du zustimmst."
 
 #: components/app/interface/settings/user/voice/GameKeysOptions.tsx
 msgid "Zrzur could not start listening for keys on this computer. Your keys work while the Zrzur window is active."
@@ -26294,6 +27095,10 @@ msgstr "Bei Zrzur seit {0}"
 msgid "Zrzur Staff"
 msgstr "Zrzur-Team"
 
+#: components/app/interface/settings/user/profile/studio/StudioDesign.tsx
+msgid "Zrzur staff withdrew this design"
+msgstr "Das Zrzur-Team hat dieses Design zurückgezogen"
+
 #: components/plugins/PluginHostRoot.tsx
 msgid "Zrzur started in Safe Mode because it didn't start properly with plugins last time. Turn Safe Mode off in Settings → Advanced → Plugins."
 msgstr "Zrzur wurde im abgesicherten Modus gestartet, weil es beim letzten Mal mit Plugins nicht richtig gestartet ist. Schalte den abgesicherten Modus unter Einstellungen → Erweitert → Plugins aus."
@@ -26354,124 +27159,3 @@ msgstr "Zrzur, direkt auf <0>deinem Desktop.</0>"
 #: components/app/interface/settings/user/appearance/AppearanceMenu.tsx
 #~ msgid "Zrzur's own look: very dark neutral panels with Zrzur Pink as the one accent."
 #~ msgstr "Zrzurs eigener Look: sehr dunkle, neutrale Flächen mit Zrzur-Pink als einziger Akzentfarbe."
-
-#: components/app/interface/settings/user/connections/ServiceCards.tsx
-msgid "{name} is a US company: what we send it and read from it goes to the United States, where your data may be less protected than in the EU (for example, US authorities may be able to access it)."
-msgstr "{name} ist ein US-Unternehmen: Was wir dorthin senden und von dort lesen, geht in die USA, wo deine Daten weniger geschützt sein können als in der EU (zum Beispiel können US-Behörden unter Umständen darauf zugreifen)."
-
-#: components/app/interface/settings/user/connections/ServiceCards.tsx
-msgid "I agree that Zrzur copies this and shows it on my profile, including anything it may reveal about me, and exchanges this data with {name} in the United States."
-msgstr "Ich bin einverstanden, dass Zrzur das kopiert und in meinem Profil zeigt, auch was es über mich verraten kann, und diese Daten mit {name} in den USA austauscht."
-
-#: components/app/interface/settings/user/connections/Connections.tsx
-msgid "this ties your Steam account to your Zrzur account. The unlock days show when you played."
-msgstr "damit wird dein Steam-Konto mit deinem Zrzur-Konto verbunden. Die Tage deiner Erfolge zeigen, wann du gespielt hast."
-
-#. placeholder {0}: name()
-#: components/app/interface/settings/user/connections/Connections.tsx
-#: components/app/interface/settings/user/connections/ServiceCards.tsx
-msgid "Updated consent for {0}"
-msgstr "Aktualisierte Einwilligung für {0}"
-
-#: components/app/interface/settings/user/connections/ServiceCards.tsx
-msgid "We have updated what you agree to when you link Battle.net: it now names where your data goes. You agree to it the next time you confirm on Battle.net."
-msgstr "Wir haben aktualisiert, wozu du beim Verknüpfen von Battle.net einwilligst: Jetzt steht darin auch, wohin deine Daten gehen. Du stimmst zu, wenn du das nächste Mal bei Battle.net bestätigst."
-
-#: components/app/interface/settings/user/connections/Connections.tsx
-msgid "We have updated what you agree to when you link Steam: it now covers game pictures and up to 60 of your latest achievements with the day you unlocked them (no time of day), and it names where your data goes. Until you agree, Refresh stays off and nothing new shows."
-msgstr "Wir haben aktualisiert, wozu du beim Verknüpfen von Steam einwilligst: Es umfasst jetzt Spielbilder und bis zu 60 deiner neuesten Erfolge mit dem Tag, an dem du sie freigeschaltet hast (ohne Uhrzeit), und nennt, wohin deine Daten gehen. Bis du zustimmst, bleibt „Aktualisieren“ aus und nichts Neues erscheint."
-
-#: components/app/interface/settings/user/connections/ServiceCards.tsx
-msgid "What you play or post there can say something about your beliefs, health or sexuality."
-msgstr "Was du dort spielst oder postest, kann etwas über deinen Glauben, deine Gesundheit oder deine Sexualität verraten."
-
-#: components/app/interface/settings/user/connections/ServiceCards.tsx
-msgid "We have updated what you agree to when you link GitHub: it now names where your data goes. Until you agree, your GitHub account does not show on your profile and Refresh stays off."
-msgstr "Wir haben aktualisiert, wozu du beim Verknüpfen von GitHub einwilligst: Jetzt steht darin auch, wohin deine Daten gehen. Bis du zustimmst, erscheint dein GitHub-Konto nicht in deinem Profil, und „Aktualisieren“ bleibt aus."
-
-#: components/app/interface/settings/user/connections/ServiceCards.tsx
-msgid "We have updated what you agree to when you link Twitch: it now names where your data goes. Until you agree, your channel does not show on your profile and we exchange no data with Twitch about it."
-msgstr "Wir haben aktualisiert, wozu du beim Verknüpfen von Twitch einwilligst: Jetzt steht darin auch, wohin deine Daten gehen. Bis du zustimmst, erscheint dein Kanal nicht in deinem Profil, und wir tauschen keine Daten darüber mit Twitch aus."
-
-#: components/app/interface/settings/user/connections/ServiceCards.tsx
-msgid "{name}'s sign-in page did not open. If you use the Zrzur desktop app, install the latest version from <0>zrzur.com/download</0>, then try again."
-msgstr "Die Anmeldeseite von {name} hat sich nicht geöffnet. Wenn du die Zrzur-Desktop-App nutzt, installiere die neueste Version von <0>zrzur.com/download</0> und versuche es dann noch einmal."
-
-#. placeholder {0}: caller()?.displayName ?? caller()?.username
-#: components/ui/components/features/voice/ringing/CallRinging.tsx
-msgid "{0} is calling the group"
-msgstr "{0} ruft die Gruppe an"
-
-#: components/ui/components/features/voice/ringing/CallRinging.tsx
-msgid "{other} declined the call."
-msgstr "{other} hat den Anruf abgelehnt."
-
-#: components/ui/components/features/voice/ringing/CallRinging.tsx
-msgid "{other} didn't answer."
-msgstr "{other} hat nicht geantwortet."
-
-#: components/app/interface/settings/user/Keybinds.tsx
-msgid "Accept a call"
-msgstr "Anruf annehmen"
-
-#: components/ui/components/features/voice/ringing/CallRinging.tsx
-msgid "Accept with video"
-msgstr "Mit Video annehmen"
-
-#: components/ui/components/features/voice/VoiceStatefulUserIcons.tsx
-msgid "Deafened"
-msgstr "Taub gestellt"
-
-#: components/app/interface/settings/user/Keybinds.tsx
-msgid "Decline a call"
-msgstr "Anruf ablehnen"
-
-#: components/app/interface/settings/user/Keybinds.tsx
-msgid "During a server call."
-msgstr "Während eines Anrufs auf einem Server."
-
-#: components/ui/components/features/voice/ringing/CallRinging.tsx
-msgid "Everyone declined the call."
-msgstr "Alle haben den Anruf abgelehnt."
-
-#: components/ui/components/features/voice/ringing/CallRinging.tsx
-msgid "is calling you"
-msgstr "ruft dich an"
-
-#: src/interface/channels/ChannelHeader.tsx
-msgid "Join the call"
-msgstr "Dem Anruf beitreten"
-
-#: components/ui/components/features/messaging/elements/SystemMessage.tsx
-msgid "Missed call from <0/>"
-msgstr "Verpasster Anruf von <0/>"
-
-#: components/ui/components/features/messaging/elements/SystemMessage.tsx
-msgid "Nobody answered your call"
-msgstr "Niemand hat deinen Anruf angenommen"
-
-#: components/ui/components/features/voice/ringing/CallRinging.tsx
-msgid "Nobody answered."
-msgstr "Niemand hat geantwortet."
-
-#: components/app/interface/settings/user/Keybinds.tsx
-msgid "Open or close the soundboard"
-msgstr "Soundboard öffnen oder schließen"
-
-#: src/interface/channels/ChannelHeader.tsx
-msgid "Start a call"
-msgstr "Anruf starten"
-
-#: src/interface/channels/ChannelHeader.tsx
-msgid "Start a video call"
-msgstr "Videoanruf starten"
-
-#: components/ui/components/features/voice/soundboard/SoundsUnavailable.tsx
-msgid "The sounds could not load. Close them and open them again."
-msgstr "Die Sounds konnten nicht geladen werden. Schließe sie und öffne sie noch einmal."
-
-#: components/app/interface/settings/user/Keybinds.tsx
-msgid "While a call rings."
-msgstr "Während ein Anruf klingelt."
-
-
