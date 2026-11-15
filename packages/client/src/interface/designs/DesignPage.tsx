@@ -21,12 +21,12 @@ import {
   CreatorChip,
   useWearDesign,
 } from "@revolt/app/interface/settings/user/profile/CommunityParts";
-import { useStyleLabels } from "@revolt/app/interface/settings/user/profile/StyleEditors";
 import {
   type CommunityItemDetails,
   communityApi,
   hasOpenPage,
 } from "@revolt/app/interface/settings/user/profile/communityApi";
+import { useStyleLabels } from "@revolt/app/interface/settings/user/profile/styleLabels";
 import { useClient, useClientLifecycle } from "@revolt/client";
 import { useError } from "@revolt/i18n";
 import { useInstance } from "@revolt/instance";

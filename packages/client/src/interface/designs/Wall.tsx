@@ -15,14 +15,15 @@ import { Plural, Trans, useLingui } from "@lingui/solid/macro";
 import { styled } from "styled-system/jsx";
 
 import { useCreatorAvatar } from "@revolt/app/interface/settings/user/profile/CommunityParts";
-import { useStyleLabels } from "@revolt/app/interface/settings/user/profile/StyleEditors";
 import {
   type CommunityCreator,
   type CommunityItem,
+  type CommunityPage,
   communityApi,
   creatorName,
 } from "@revolt/app/interface/settings/user/profile/communityApi";
-import { useClient } from "@revolt/client";
+import { useStyleLabels } from "@revolt/app/interface/settings/user/profile/styleLabels";
+import { useClient, useClientLifecycle } from "@revolt/client";
 import { useInstance } from "@revolt/instance";
 import {
   EffectStill,
@@ -45,6 +46,7 @@ import {
   effectStillUrl,
   nameStyle,
 } from "@revolt/ui/components/features/profiles/userStyle";
+import { withoutNull } from "@zrzur/sdk/solid";
 
 import { isDesignsSite } from "../../DesignsSite";
 import { flyToDock } from "./FlockStage";
@@ -67,6 +69,7 @@ import {
 } from "./Scenes";
 import { ShowMore, usePaged } from "./ShowMore";
 import { useTryOn } from "./TryOn";
+import { EARLY_LIMIT, takeEarly } from "./early";
 import {
   type TileKind,
   type WallFilter,
@@ -113,6 +116,7 @@ export function useCommunity(
   },
 ) {
   const client = useClient();
+  const { isLoggedIn } = useClientLifecycle();
   const [items, setItems] = createSignal<CommunityItem[]>([]);
   const [creators, setCreators] = createSignal<
     Record<string, CommunityCreator>
@@ -137,13 +141,26 @@ export function useCommunity(
     try {
       const pages = await Promise.all(
         (["decorations", "nameplates", "effects"] as const).map((kind) => {
-          const asked = communityApi.list(client(), kind, {
-            query: now.query || undefined,
-            sort: now.sort === "new" ? undefined : "popular",
-            favourites: now.favourites || undefined,
-            limit: PAGE,
-            offset: offset || undefined,
-          });
+          const ask = () =>
+            communityApi.list(client(), kind, {
+              query: now.query || undefined,
+              sort: now.sort === "new" ? undefined : "popular",
+              favourites: now.favourites || undefined,
+              limit: PAGE,
+              offset: offset || undefined,
+            });
+          // the first page the site asked for while this code downloaded,
+          // for visitors only (signed in, favourites are marked)
+          const first =
+            !offset &&
+            !now.query &&
+            now.sort !== "new" &&
+            !now.favourites &&
+            PAGE === EARLY_LIMIT
+              ? takeEarly<CommunityPage>(kind)
+              : undefined;
+          const asked =
+            first && !isLoggedIn() ? first.then(withoutNull).catch(ask) : ask();
           // a server without effects still shows everything else
           return kind === "effects"
             ? asked.catch(() => ({ items: [], creators: [] }))
@@ -317,6 +334,13 @@ export function Wall(props: {
     more: () => !!props.more,
     loading: () => !!props.loading,
     onMore: () => props.onMore?.(),
+    // about a screenful (a phone shows three or four tiles, a desktop about
+    // twelve); the rest follows a frame at a time
+    batch:
+      typeof matchMedia === "function" &&
+      matchMedia("(max-width: 600px)").matches
+        ? 6
+        : 12,
   });
 
   return (

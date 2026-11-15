@@ -2,11 +2,13 @@ import {
   For,
   Match,
   Show,
+  Suspense,
   Switch,
   createEffect,
   createMemo,
   createResource,
   createSignal,
+  lazy,
   on,
   onCleanup,
   onMount,
@@ -25,9 +27,6 @@ import {
   useDate,
   useWearDesign,
 } from "@revolt/app/interface/settings/user/profile/CommunityParts";
-import { CreatorStudio } from "@revolt/app/interface/settings/user/profile/CreatorStudio";
-import { CreatorsAdmin } from "@revolt/app/interface/settings/user/profile/CreatorsAdmin";
-import { ReviewQueue } from "@revolt/app/interface/settings/user/profile/ReviewQueue";
 import {
   CommunityItem,
   can,
@@ -87,6 +86,24 @@ import type { WallFilter } from "./designs/gallery";
 import { designsTokens } from "./designs/palette";
 import { LoadError, Notice } from "./designs/parts";
 import { mergePages as merge } from "./designs/rank";
+
+// Creator and staff tools: most visitors never open them, so they download
+// when first shown instead of with the gallery
+const CreatorStudio = lazy(() =>
+  import("@revolt/app/interface/settings/user/profile/CreatorStudio").then(
+    (m) => ({ default: m.CreatorStudio }),
+  ),
+);
+const ReviewQueue = lazy(() =>
+  import("@revolt/app/interface/settings/user/profile/ReviewQueue").then(
+    (m) => ({ default: m.ReviewQueue }),
+  ),
+);
+const CreatorsAdmin = lazy(() =>
+  import("@revolt/app/interface/settings/user/profile/CreatorsAdmin").then(
+    (m) => ({ default: m.CreatorsAdmin }),
+  ),
+);
 
 /**
  * Designs: a gallery of avatar decorations, nameplates and looks. Everyone
@@ -431,14 +448,16 @@ function Gallery() {
                     </Show>
                   </p>
                 </Head>
-                <CreatorStudio
-                  page
-                  show
-                  onClose={() => go("")}
-                  perms={perms()!}
-                  avatar={wearer.avatar()}
-                  name={wearer.name()}
-                />
+                <Suspense>
+                  <CreatorStudio
+                    page
+                    show
+                    onClose={() => go("")}
+                    perms={perms()!}
+                    avatar={wearer.avatar()}
+                    name={wearer.name()}
+                  />
+                </Suspense>
               </Scene>
             </Match>
 
@@ -511,23 +530,27 @@ function Gallery() {
       </Show>
 
       <Show when={dialog() === "review" && perms()}>
-        <ReviewQueue
-          show
-          onClose={() => {
-            setDialog(undefined);
-            setVersion((v) => v + 1);
-          }}
-          perms={perms()!}
-          avatar={client().user?.animatedAvatarURL}
-          name={client().user?.displayName ?? ""}
-        />
+        <Suspense>
+          <ReviewQueue
+            show
+            onClose={() => {
+              setDialog(undefined);
+              setVersion((v) => v + 1);
+            }}
+            perms={perms()!}
+            avatar={client().user?.animatedAvatarURL}
+            name={client().user?.displayName ?? ""}
+          />
+        </Suspense>
       </Show>
       <Show when={dialog() === "creators" && perms()}>
-        <CreatorsAdmin
-          show
-          onClose={() => setDialog(undefined)}
-          perms={perms()!}
-        />
+        <Suspense>
+          <CreatorsAdmin
+            show
+            onClose={() => setDialog(undefined)}
+            perms={perms()!}
+          />
+        </Suspense>
       </Show>
     </Base>
   );

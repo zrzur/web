@@ -1,10 +1,12 @@
 import {
   Match,
   Switch,
+  createComputed,
   createEffect,
   createMemo,
   createSignal,
   on,
+  onCleanup,
 } from "solid-js";
 
 import { Trans } from "@lingui/solid/macro";
@@ -32,21 +34,52 @@ export function usePaged<T>(
     /** fetch the next page from the server */
     onMore?: () => void;
     page?: number;
+    /**
+     * Draw this many at once and the rest of the page one batch per frame:
+     * a page of heavy tiles drawn in one go held a slow phone for a third
+     * of a second, and nothing showed until all of it was done
+     */
+    batch?: number;
   },
 ) {
   const page = options.page ?? PAGE_TILES;
+  const batch = options.batch ?? Infinity;
   const [visible, setVisible] = createSignal(page);
+  const [drawn, setDrawn] = createSignal(batch);
   const first = () => {
     const head = list()[0];
     return head === undefined ? undefined : options.key(head);
   };
-  createEffect(
+  // before the list is drawn (an effect ran after it: a replaced list was
+  // drawn a whole page at a time first, then cut back to one batch)
+  createComputed(
     on([first, () => list().length], ([key, length], before) => {
       if (!before) return;
-      if (key !== before[0] || length < before[1]) setVisible(page);
+      if (key !== before[0] || length < before[1]) {
+        setVisible(page);
+        setDrawn(batch);
+      }
     }),
   );
-  const shown = createMemo(() => list().slice(0, visible()));
+  // the next batch after the browser has painted the last one
+  createEffect(() => {
+    const target = Math.min(visible(), list().length);
+    const now = drawn();
+    if (now >= target) return;
+    let timer: ReturnType<typeof setTimeout> | undefined;
+    const frame =
+      typeof requestAnimationFrame === "function"
+        ? requestAnimationFrame(() => {
+            timer = setTimeout(() => setDrawn(now + batch));
+          })
+        : undefined;
+    if (frame === undefined) timer = setTimeout(() => setDrawn(now + batch));
+    onCleanup(() => {
+      if (frame !== undefined) cancelAnimationFrame(frame);
+      clearTimeout(timer);
+    });
+  });
+  const shown = createMemo(() => list().slice(0, Math.min(visible(), drawn())));
   const state = (): MoreState =>
     moreState(
       visible(),
