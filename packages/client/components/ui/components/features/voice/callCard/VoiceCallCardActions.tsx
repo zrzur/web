@@ -1,4 +1,4 @@
-import { JSX, Show, lazy, splitProps } from "solid-js";
+import { JSX, Show, splitProps } from "solid-js";
 
 import { useLingui } from "@lingui/solid/macro";
 import { cva } from "styled-system/css";
@@ -8,9 +8,13 @@ import { useInstance } from "@revolt/instance";
 import { useVoice } from "@revolt/rtc";
 import { useState } from "@revolt/state";
 import { Icon } from "@revolt/ui/icons/Icon";
+import { lazyRetry } from "../../../utils/lazyRetry";
 
 // the soundboard button and its state are not in the app's first download
-const SoundboardButton = lazy(() => import("../soundboard/SoundboardButton"));
+const SoundboardButton = lazyRetry(
+  () => import("../soundboard/SoundboardButton"),
+  () => null,
+);
 
 export function VoiceCallCardActions(props: { size: "xs" | "sm" }) {
   const voice = useVoice();

@@ -20,9 +20,28 @@ export function shouldReloadForStaleBuild(
   return !Number.isFinite(before) || now - before > STALE_RELOAD_GAP_MS;
 }
 
+/** Who asks the page not to reload by itself right now (a call is on) */
+const holds = new Set<symbol>();
+
+/**
+ * Keep the page from reloading by itself until the returned function runs.
+ * A call holds it: a reload would drop the call (owner report 2026-11-15:
+ * the soundboard reloaded the app). The part that failed to load reports
+ * its own error instead.
+ */
+export function holdStaleReload(): () => void {
+  const key = Symbol();
+  holds.add(key);
+  return () => void holds.delete(key);
+}
+
 /** Listen for Vite's failed dynamic imports and reload once */
 export function watchForStaleBuild(target: Window = window) {
   target.addEventListener("vite:preloadError", (event) => {
+    if (holds.size) {
+      console.warn("[app] a part did not load; not reloading during a call", event);
+      return;
+    }
     let last: string | null = null;
     try {
       last = target.sessionStorage.getItem(STALE_RELOAD_KEY);
