@@ -55,6 +55,7 @@ import {
 } from "@revolt/ui/components/features/voice/soundboard/soundboardOpen";
 
 import { Device, useDevice } from "@revolt/common";
+import { holdStaleReload } from "../../src/staleBuild";
 import { shortcutsPaused } from "../keybinds/active";
 import {
   isMac,
@@ -96,7 +97,6 @@ import {
   setDisplayMediaCap,
   watchRetiredCodecs,
 } from "./screenShare";
-import { holdStaleReload } from "../../src/staleBuild";
 import { createTalkGate } from "./talkGate";
 import type { VoiceProcessor } from "./VoiceProcessor";
 

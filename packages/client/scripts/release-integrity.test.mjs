@@ -1,6 +1,6 @@
 // Run with: node --test scripts/release-integrity.test.mjs
 import assert from "node:assert/strict";
-import { mkdirSync, mkdtempSync, writeFileSync } from "node:fs";
+import { mkdirSync, mkdtempSync, readFileSync, writeFileSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import test from "node:test";
@@ -170,4 +170,14 @@ test("the copied shared scripts match their recorded hashes", () => {
     const text = read(new URL(`./${file}`, import.meta.url), "utf8").replace(/\r\n/g, "\n");
     assert.equal(createHash("sha256").update(text).digest("hex"), hash, `${file} changed: update every copy and shared-scripts.sha256`);
   }
+});
+
+test("one version: RELEASE.json (what the app shows) equals package.json (the image label)", () => {
+  // audit ZR-002: the parts of a release must not name different versions
+  const root = new URL("../../../", import.meta.url);
+  const release = JSON.parse(readFileSync(new URL("RELEASE.json", root), "utf8"));
+  const pkg = JSON.parse(readFileSync(new URL("package.json", root), "utf8"));
+  assert.match(release.version, /^\d+\.\d+\.\d+(-(alpha|beta|rc)\.\d+)?$/);
+  assert.equal(release.version, pkg.version, "RELEASE.json and package.json disagree");
+  assert.equal(release.targetVersion, release.version, "RELEASE.json targetVersion");
 });

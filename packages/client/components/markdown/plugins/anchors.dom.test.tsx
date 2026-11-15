@@ -8,10 +8,12 @@ import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 // never fall through to the external-link warning.
 
 const openModal = vi.fn();
+/** The chat message around the link; undefined outside chat (bios, descriptions) */
+let message: { content?: string } | undefined;
 
 vi.mock("@revolt/app", () => ({
   MessageContextMenu: () => null,
-  useMessage: () => ({}),
+  useMessage: () => ({ message }),
 }));
 vi.mock("@revolt/client", () => ({ useClient: () => () => ({}) }));
 vi.mock("@revolt/instance", () => ({
@@ -52,8 +54,17 @@ import { RenderAnchor } from "./anchors";
 const BOT = "01M70R4TN68KPSV0TYV7GV6K6E";
 let dispose: (() => void) | undefined;
 
-/** Render a link the way the markdown renderer does: text as children */
-function setup(href: string, text: string = href, disabled?: boolean) {
+/**
+ * Render a link the way the markdown renderer does: text as children. By
+ * default it is a chat message that holds only this link.
+ */
+function setup(
+  href: string,
+  text: string = href,
+  disabled?: boolean,
+  content: string | null = `  ${text}\n`,
+) {
+  message = content === null ? undefined : { content };
   document.body.innerHTML = '<div id="root"></div>';
   dispose = render(
     () => (
@@ -117,6 +128,46 @@ describe("RenderAnchor with our own links", () => {
     const url = new URL(a.href);
     expect(url.pathname).toBe(`/bot/${BOT}`);
     expect(url.search).toBe("?permissions=8");
+  });
+
+  it("outside a chat message (a description, a bio) the link stays a link", () => {
+    for (const href of [
+      "https://zrzur.cc/zrzur",
+      `https://zrzur.cc/b/${BOT}`,
+    ]) {
+      const root = setup(href, href, undefined, null);
+      expect(root.querySelector("[data-card]")).toBeNull();
+      const a = root.querySelector("a")!;
+      expect(a.textContent).toBe(href);
+      expect(new URL(a.href).origin).toBe(location.origin);
+      root.addEventListener("click", (event) => event.preventDefault());
+      a.click();
+      expect(openModal).not.toHaveBeenCalled();
+      dispose?.();
+    }
+  });
+
+  it("in a message with more than the link (a sentence, a list) it stays a link", () => {
+    for (const content of [
+      "join us: https://zrzur.cc/zrzur",
+      "- This server: https://zrzur.cc/zrzur",
+    ]) {
+      const href = "https://zrzur.cc/zrzur";
+      const root = setup(href, href, undefined, content);
+      expect(root.querySelector("[data-card]")).toBeNull();
+      expect(new URL(root.querySelector("a")!.href).pathname).toBe(
+        "/invite/zrzur",
+      );
+      dispose?.();
+    }
+  });
+
+  it("a message that is only the link shows the card", () => {
+    const href = "https://zrzur.cc/zrzur";
+    const root = setup(href, href, undefined, `\n ${href} \n`);
+    expect(
+      root.querySelector('[data-card="invite"]')?.getAttribute("data-code"),
+    ).toBe("zrzur");
   });
 
   it("a disabled link (an edit preview) shows no card", () => {

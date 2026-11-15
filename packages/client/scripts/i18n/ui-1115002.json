@@ -1,0 +1,14 @@
+{
+  "Open or close the soundboard": [
+    "فتح لوحة الأصوات أو إغلاقها",
+    "Soundboard öffnen oder schließen"
+  ],
+  "During a server call.": [
+    "أثناء مكالمة في سيرفر.",
+    "Während eines Anrufs auf einem Server."
+  ],
+  "The sounds could not load. Close them and open them again.": [
+    "تعذّر تحميل الأصوات. أغلقها ثم افتحها مرة أخرى.",
+    "Die Sounds konnten nicht geladen werden. Schließe sie und öffne sie noch einmal."
+  ]
+}

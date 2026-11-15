@@ -430,8 +430,9 @@ function StandingRow(props: {
             />
             <small>
               <Trans>
-                Appealing doesn't lift anything by itself. A different reviewer
-                decides.
+                Appealing doesn't lift anything by itself. A person looks at the
+                decision again; where we can, it is someone other than the
+                person who made it.
               </Trans>
             </small>
           </Field>
