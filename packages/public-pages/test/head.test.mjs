@@ -11,6 +11,7 @@ import {
   pageMeta,
   roughCount,
   routeOf,
+  sitePreloads,
 } from "../src/head.mjs";
 
 const ORIGIN = "https://discover.zrzur.com";
@@ -372,4 +373,42 @@ test("lang and dir in the page: rtl only for Arabic, zh-Hans as the tag", () => 
     assert.ok(out.includes(`<html lang="${lang}" dir="${dir}">`), lang);
     assert.ok(out.includes(`hreflang="zh-Hans"`));
   }
+});
+
+test("a site page preloads its own files instead of the chat app's", () => {
+  const html = [
+    "<head>",
+    '  <link rel="modulepreload" crossorigin href="/assets/0123456789ab/app-b.js">',
+    '  <link rel="modulepreload" crossorigin href="/assets/0123456789ab/chat.js">',
+    '  <script type="module" crossorigin src="/assets/0123456789ab/index-a.js"></script>',
+    '  <link rel="stylesheet" crossorigin href="/assets/0123456789ab/index-c.css">',
+    "</head>",
+  ].join("\n");
+  assert.equal(
+    sitePreloads(html, [
+      "assets/0123456789ab/sites-d.js",
+      "assets/0123456789ab/Designs-e.js",
+    ]),
+    [
+      "<head>",
+      '  <script type="module" crossorigin src="/assets/0123456789ab/index-a.js"></script>',
+      '  <link rel="stylesheet" crossorigin href="/assets/0123456789ab/index-c.css">',
+      '  <link rel="modulepreload" crossorigin href="/assets/0123456789ab/sites-d.js">',
+      '  <link rel="modulepreload" crossorigin href="/assets/0123456789ab/Designs-e.js">',
+      "</head>",
+    ].join("\n"),
+  );
+});
+
+test("a page without a list or an entry script keeps its preloads", () => {
+  const html =
+    '<link rel="modulepreload" crossorigin href="/assets/app-b.js">\n<script type="module" crossorigin src="/assets/index-a.js"></script>';
+  assert.equal(sitePreloads(html, undefined), html);
+  assert.equal(sitePreloads(html, []), html);
+  assert.equal(
+    sitePreloads('<link rel="modulepreload" href="/assets/x.js">', [
+      "assets/y.js",
+    ]),
+    '<link rel="modulepreload" href="/assets/x.js">',
+  );
 });

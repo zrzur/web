@@ -3,7 +3,7 @@ import { For, Show, createMemo, createSignal } from "solid-js";
 import { Trans, useLingui } from "@lingui/solid/macro";
 import { styled } from "styled-system/jsx";
 
-import { useStyleLabels } from "@revolt/app/interface/settings/user/profile/StyleEditors";
+import { useStyleLabels } from "@revolt/app/interface/settings/user/profile/styleLabels";
 import { useClient } from "@revolt/client";
 import { useError } from "@revolt/i18n";
 import { useInstance } from "@revolt/instance";

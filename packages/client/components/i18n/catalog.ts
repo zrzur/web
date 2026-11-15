@@ -55,17 +55,32 @@ if (typeof window !== "undefined")
     for (const [code, key] of [...fullMissing]) completeCatalog(key, code);
   });
 
+/** How long after the page has loaded the full file may start */
+const SETTLE_MS = 1500;
+
 /** The small file of a site, then the full file added in the background */
 async function siteCatalog(key: Language, code: string, url: string) {
   const response = await fetch(url);
   if (!response.ok) throw new Error(`site catalog ${response.status}`);
   const messages = (await response.json()) as Messages;
-  // after the page's own files and pictures have had their turn, at most
-  // a second later
-  const later = (fn: () => void) =>
-    typeof requestIdleCallback === "function"
-      ? requestIdleCallback(fn, { timeout: 1000 })
-      : setTimeout(fn, 200);
+  // after the page's own files, data, fonts and pictures have had their
+  // turn: a moment after the page has loaded, when the browser is idle. On a
+  // slow phone the full file (about 110 KB) used to arrive in the middle of
+  // them and held the first picture back by a second. "load" alone is too
+  // early: the wall's pictures and fonts start only after it.
+  const idle = (fn: () => void) =>
+    setTimeout(
+      () =>
+        typeof requestIdleCallback === "function"
+          ? requestIdleCallback(fn, { timeout: 3000 })
+          : fn(),
+      SETTLE_MS,
+    );
+  const later = (fn: () => void) => {
+    if (typeof document === "undefined" || document.readyState === "complete")
+      idle(fn);
+    else window.addEventListener("load", () => idle(fn), { once: true });
+  };
   later(() => completeCatalog(key, code));
   return messages;
 }

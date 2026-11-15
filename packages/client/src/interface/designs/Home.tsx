@@ -1,10 +1,10 @@
-import { For, Show, createSignal } from "solid-js";
+import { For, Show, createMemo, createSignal } from "solid-js";
 
 import { Trans, useLingui } from "@lingui/solid/macro";
 import { styled } from "styled-system/jsx";
 
-import { useNameFontLabel } from "@revolt/app/interface/settings/user/profile/StyleEditors";
 import { type CommunityItem } from "@revolt/app/interface/settings/user/profile/communityApi";
+import { useNameFontLabel } from "@revolt/app/interface/settings/user/profile/styleLabels";
 import { useClient } from "@revolt/client";
 import { Segmented } from "@revolt/ui";
 import {
@@ -59,6 +59,13 @@ export function DesignsHome(props: {
     query: () => props.query,
     community,
   });
+  // the wall waits for the first page from the server (its shapes show
+  // meanwhile): drawn from the built-in designs first, it was drawn a second
+  // time, reshuffled, when the community's arrived
+  const firstPage = createMemo<boolean>(
+    (seen) => seen || !community.loading(),
+    false,
+  );
   const quiet = () => props.filter === "all" && !props.query.trim() && !mood();
 
   const kinds = (): { id: WallFilter; label: string }[] => [
@@ -142,7 +149,7 @@ export function DesignsHome(props: {
           </Kinds>
 
           <Show
-            when={tiles().length}
+            when={firstPage() && tiles().length}
             fallback={
               <Show when={!community.loading()} fallback={<WallHolders />}>
                 <WallEmpty

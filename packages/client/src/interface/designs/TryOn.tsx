@@ -8,7 +8,7 @@ import {
 
 import { useLingui } from "@lingui/solid/macro";
 
-import { useStyleLabels } from "@revolt/app/interface/settings/user/profile/StyleEditors";
+import { useStyleLabels } from "@revolt/app/interface/settings/user/profile/styleLabels";
 import { useClient } from "@revolt/client";
 import { useError } from "@revolt/i18n";
 import { useEffectLabels } from "@revolt/ui/components/features/profiles/labels";

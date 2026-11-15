@@ -14,6 +14,9 @@ import { activePlusLimits } from "@revolt/client/billing";
 
 import { DefaultHost } from ".";
 
+/** The server's configuration, as `GET /` answers it */
+export type RevoltConfig = NonNullable<Client["configuration"]>;
+
 const R_RelPath = /^\/i\/[^/]+/;
 
 export default class Instance {
@@ -158,19 +161,23 @@ export default class Instance {
   }
 }
 
-export function _newClient(apiUrl: string) {
+/**
+ * A client for this server. `configuration`: the server's answer to `GET /`
+ * when it was already asked for (earlyConfig.ts); without it the client asks.
+ */
+export function _newClient(apiUrl: string, configuration?: RevoltConfig) {
   assertAllowedServiceUrl(apiUrl, "client baseURL");
 
-  const cli = new Client({
+  const options = {
     baseURL: apiUrl,
     autoReconnect: false,
     syncUnreads: true,
     debug: import.meta.env.DEV,
-  });
+  };
 
-  //Init client with env overrides (already validated at CONFIGURATION load)
-  cli.initConfig((config) => {
-    if (cli.options.baseURL === CONFIGURATION.DEFAULT_API_URL) {
+  //Env overrides (already validated at CONFIGURATION load)
+  const overrides = (config: RevoltConfig) => {
+    if (apiUrl === CONFIGURATION.DEFAULT_API_URL) {
       if (CONFIGURATION.DEV_WS_URL) {
         assertAllowedServiceUrl(CONFIGURATION.DEV_WS_URL, "VITE_DEV_WS_URL");
         config.ws = CONFIGURATION.DEV_WS_URL;
@@ -190,7 +197,13 @@ export function _newClient(apiUrl: string) {
         config.features.january.url = CONFIGURATION.DEV_PROXY_URL;
       }
     }
-  });
+  };
 
+  if (configuration) {
+    overrides(configuration);
+    return new Client(options, configuration);
+  }
+  const cli = new Client(options);
+  cli.initConfig(overrides);
   return cli;
 }

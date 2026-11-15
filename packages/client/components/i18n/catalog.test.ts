@@ -89,15 +89,49 @@ describe("message catalogs", () => {
     preferSiteCatalogs({ fr: "/assets/site-messages-fr.json" });
     // a language no other test has loaded
     await importCatalog(Language.FRENCH);
-    await vi.waitFor(() => expect(calls).toBe(1));
+    await vi.waitFor(() => expect(calls).toBe(1), { timeout: 5000 });
     await new Promise((r) => setTimeout(r, 10));
     expect(load).not.toHaveBeenCalled();
 
     await importCatalog(Language.FRENCH);
-    await vi.waitFor(() =>
-      expect(load).toHaveBeenCalledWith("fr", { full: ["Voll"] }),
+    await vi.waitFor(
+      () => expect(load).toHaveBeenCalledWith("fr", { full: ["Voll"] }),
+      { timeout: 5000 },
     );
     expect(calls).toBe(2);
+    load.mockRestore();
+    setFullCatalogLoader();
+  });
+
+  it("on the sites, asks for the full file only once the page has loaded", async () => {
+    const load = vi.spyOn(i18n, "load").mockImplementation(() => undefined);
+    const page = new EventTarget();
+    vi.stubGlobal("window", page);
+    vi.stubGlobal("document", { readyState: "interactive" });
+    vi.stubGlobal(
+      "fetch",
+      vi.fn(async () => ({ ok: true, json: async () => ({ s: ["S"] }) })),
+    );
+    let calls = 0;
+    setFullCatalogLoader(async () => {
+      calls++;
+      return { full: ["Alles"] };
+    });
+    preferSiteCatalogs({ es: "/assets/site-messages-es.json" });
+    // a language no other test has loaded
+    await importCatalog(Language.SPANISH);
+    await new Promise((r) => setTimeout(r, 300));
+    expect(calls).toBe(0);
+
+    page.dispatchEvent(new Event("load"));
+    // and a moment after it, not at once
+    await new Promise((r) => setTimeout(r, 300));
+    expect(calls).toBe(0);
+    await vi.waitFor(
+      () => expect(load).toHaveBeenCalledWith("es", { full: ["Alles"] }),
+      { timeout: 5000 },
+    );
+    expect(calls).toBe(1);
     load.mockRestore();
     setFullCatalogLoader();
   });

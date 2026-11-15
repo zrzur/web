@@ -13,6 +13,10 @@ vi.mock("@revolt/client/billing", () => ({
 vi.mock(".", () => ({ DefaultHost: "app.example" }));
 vi.mock("@zrzur/sdk/solid", () => ({
   Client: class {
+    made: unknown[];
+    constructor(...made: unknown[]) {
+      this.made = made;
+    }
     options = { baseURL: "http://api.example" };
     initConfig = vi.fn();
     events = { removeAllListeners: vi.fn(), disconnect: vi.fn() };
@@ -21,7 +25,7 @@ vi.mock("@zrzur/sdk/solid", () => ({
   },
 }));
 
-import Instance from "./Instance";
+import Instance, { _newClient } from "./Instance";
 
 function client() {
   return {
@@ -58,5 +62,20 @@ describe("Instance.newClient", () => {
     // a retry timer on the old client would otherwise fire for a client
     // nobody uses and keep hitting /sync/unreads
     expect(first.channelUnreads.cancelBackgroundSync).toHaveBeenCalledTimes(1);
+  });
+});
+
+describe("_newClient", () => {
+  it("asks the server for its configuration when none came early", () => {
+    const made = _newClient("http://api.example") as any;
+    expect(made.made[1]).toBeUndefined();
+    expect(made.initConfig).toHaveBeenCalledTimes(1);
+  });
+
+  it("starts with a configuration that came early and asks for nothing", () => {
+    const early = { ws: "wss://w", features: {} };
+    const made = _newClient("http://api.example", early as never) as any;
+    expect(made.made[1]).toBe(early);
+    expect(made.initConfig).not.toHaveBeenCalled();
   });
 });
