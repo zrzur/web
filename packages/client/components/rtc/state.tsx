@@ -12,14 +12,20 @@ import {
   onCleanup,
   runWithOwner,
   Setter,
+  Show,
   untrack,
   useContext,
 } from "solid-js";
+import { Portal } from "solid-js/web";
 import type { TrackReferenceOrPlaceholder } from "solid-livekit-components";
 
 import { useLocation, useNavigate } from "@solidjs/router";
 import { Channel } from "@zrzur/sdk/solid";
-import type { LocalTrackPublication, Room } from "livekit-client";
+import type {
+  LocalAudioTrack,
+  LocalTrackPublication,
+  Room,
+} from "livekit-client";
 
 import {
   SoundController,
@@ -72,8 +78,15 @@ import { type VoiceRuntime, loadVoiceRuntime } from "./loadVoiceRuntime";
 import { useVoiceError } from "./messages";
 import { voiceErrorType } from "./moderation";
 import {
+  clearOutgoingRing,
+  followRinging,
+  ringState,
+  startOutgoingRing,
+} from "./ringing";
+import {
   applyQuality,
   captureOptions,
+  isShareCancelled,
   publishOptions,
   publishSafeQuality,
   republishCodec,
@@ -89,6 +102,11 @@ import type { VoiceProcessor } from "./VoiceProcessor";
 
 /** The call's audio, with LiveKit (loaded with the first call) */
 const RoomAudio = lazy(() => import("./components/RoomAudio"));
+
+/** Incoming call card and the caller's tone, loaded when a call rings */
+const CallRinging = lazy(
+  () => import("@revolt/ui/components/features/voice/ringing/CallRinging"),
+);
 
 type State =
   | "READY"
@@ -200,6 +218,8 @@ class Voice {
   #noticeTimer?: ReturnType<typeof setTimeout>;
   /** Ends the wait before the next rejoin attempt (the network came back) */
   #wake?: () => void;
+  /** The microphone opened while the room connects (see #captureEarly) */
+  #earlyMic?: Promise<LocalAudioTrack | undefined>;
   /** Keeps the page from reloading by itself while a call is on */
   #releaseReloadHold?: () => void;
 
@@ -382,11 +402,70 @@ class Voice {
       void this.applyVoiceBitrate(room, bitrate);
     });
 
+    // The voice server does not report a mute or a deafen: tell the server,
+    // so people who look at the channel from outside the call see it. This
+    // is the person's own choice (micOn, deafen), never the push-to-talk key
+    // opening and closing the microphone.
+    let shown: { channel: string; muted: boolean; deafened: boolean } = {
+      channel: "",
+      muted: false,
+      deafened: false,
+    };
+    const report = (
+      channel: string,
+      muted: boolean,
+      deafened: boolean,
+      attempt = 0,
+    ) => {
+      // the route is newer than the SDK's generated route table (it comes
+      // with the next API snapshot)
+      const api = this.#client().api as unknown as {
+        patch(path: string, body: unknown): Promise<unknown>;
+      };
+      void api
+        .patch(`/channels/${channel}/voice_state`, { muted, deafened })
+        .catch((error: unknown) => {
+          // pressed before the server registered the join: try again
+          const still =
+            shown.channel === channel &&
+            shown.muted === muted &&
+            shown.deafened === deafened;
+          if (still && attempt < 3)
+            setTimeout(
+              () => report(channel, muted, deafened, attempt + 1),
+              1000,
+            );
+          else console.warn("[rtc] mute state not shown to others", error);
+        });
+    };
+    createEffect(() => {
+      const channel = this.state() === "CONNECTED" ? this.channel() : undefined;
+      const muted = !this.#settings.micOn;
+      const deafened = this.#settings.deafen;
+      if (!channel) return;
+      // this account's own entry in the channel (the server's voice state):
+      // when it appears, a mute chosen before it is sent again
+      const self = this.#client().user?.id;
+      const listed = !!self && channel.voiceParticipants.has(self);
+      const before =
+        shown.channel === channel.id
+          ? shown
+          : { channel: channel.id, muted: false, deafened: false };
+      const changed = before.muted !== muted || before.deafened !== deafened;
+      shown = { channel: channel.id, muted, deafened };
+      if (changed || (listed && (muted || deafened)))
+        report(channel.id, muted, deafened);
+    });
+
     createEffect(() => {
       const room = this.room();
       if (this.state() !== "CONNECTED" || !room) return;
       // Moderation affects effective media only; user preferences remain untouched.
       const enabled = this.microphone();
+      // the microphone opened while connecting is being published: a second
+      // enable now would publish a second microphone track (enableMicrophone
+      // settles the state when it is done)
+      if (enabled && this.#earlyMic) return;
       void room.localParticipant
         .setMicrophoneEnabled(enabled)
         .catch((error) => this.onErr(error));
@@ -407,7 +486,11 @@ class Voice {
         //@ts-expect-error voiceIsolation is not yet standard, but it supported by livekit and most chromium based browsers, including electron.
         track.constraints.voiceIsolation = capture.voiceIsolation;
         track.constraints.channelCount = capture.channelCount;
-        void track.restartTrack();
+        void track
+          .restartTrack()
+          .catch((error: unknown) =>
+            console.warn("[rtc] microphone not restarted", error),
+          );
       },
       // high quality audio changes the encoder (stereo, DTX)
       republish: () => {
@@ -450,12 +533,14 @@ class Voice {
    * @param previousSession LiveKit session of this device before its
    *   connection dropped; the server refuses the rejoin when another tab or
    *   device took the seat meanwhile
+   * @param options.video Turn the camera on once connected (accept with video)
    */
   async connect(
     channel: Channel,
     auth?: { url: string; token: string },
     previousSession?: string,
     retry = 0,
+    options?: { video?: boolean },
   ): Promise<void> {
     // a rejoin after a network drop is not a leave: no leave sound
     this.disconnect(!!previousSession);
@@ -472,7 +557,14 @@ class Voice {
       callBitrate(voiceBitrate, this.#settings.highQualityAudio),
     );
 
-    // LiveKit loads with the first call, not with the app
+    // the join token is asked for while LiveKit loads (it loads with the
+    // first call, not with the app): one wait instead of two in a row
+    const authRequest = auth
+      ? Promise.resolve(auth)
+      : this.#requestAuth(channel, previousSession);
+    // handled where it is awaited; never an unhandled rejection
+    authRequest.catch(() => undefined);
+
     let lk: VoiceRuntime;
     try {
       lk = this.#lk ??= await loadVoiceRuntime();
@@ -483,11 +575,15 @@ class Voice {
     if (attempt !== this.#connectionAttempt) return;
 
     const room = new lk.Room({
-      // livekit-client 2.x defaults to the single-peer-connection protocol
-      // (/rtc/v1), which our LiveKit server (1.9.x) does not serve: every
-      // join failed once with a 404 and retried. Use the supported path
-      // directly until the server is upgraded.
-      singlePeerConnection: false,
+      // one peer connection for sending and receiving (/rtc/v1): fewer round
+      // trips to join. The voice server (LiveKit 1.13) serves it; an older
+      // server answers 404 and the client falls back to two connections.
+      singlePeerConnection: true,
+      // receive each video at the size it is shown, and none while hidden
+      // or off screen; senders stop encoding layers nobody watches. Saves
+      // bandwidth, CPU and battery in camera and screen share calls.
+      adaptiveStream: true,
+      dynacast: true,
       audioCaptureDefaults: audioCaptureFor(
         this.#settings,
         this.#settings.highQualityAudio,
@@ -541,6 +637,19 @@ class Voice {
       this.#setState("CONNECTED");
       if (previousSession) this.showNotice("reconnected");
       void this.enableMicrophone(room);
+      if (options?.video) void this.toggleCamera();
+      // a DM or group call nobody else is in yet rings the others (the
+      // server rings them; this side plays the tone and ends the call when
+      // nobody answers)
+      if (!previousSession) {
+        // ringing is extra: it must never break the join (an error thrown in
+        // this listener would make room.connect fail)
+        try {
+          this.#ringOthers(room, channel);
+        } catch (error) {
+          console.warn("[rtc] could not start ringing", error);
+        }
+      }
       for (const p of room.remoteParticipants.values()) {
         const screenShareTrack = p.getTrackPublication(TrackSource.ScreenShare);
         if (screenShareTrack) {
@@ -592,9 +701,16 @@ class Voice {
     room.addListener("localTrackPublished", (pub) => {
       if (pub.audioTrack && pub.audioTrack.source === TrackSource.Microphone) {
         if (!pub.audioTrack.getProcessor()) {
-          pub.audioTrack?.setProcessor(
-            (this.voiceProcessor = new lk.VoiceProcessor(this.#settings)),
-          );
+          void pub.audioTrack
+            .setProcessor(
+              (this.voiceProcessor = new lk.VoiceProcessor(this.#settings)),
+            )
+            .catch((error: unknown) => {
+              // the call ended while the filters were starting (the
+              // connection is closed): nothing is lost
+              if (this.room() === room && room.state === RoomState.Connected)
+                console.warn("[rtc] voice filters not applied", error);
+            });
         }
       }
     });
@@ -632,43 +748,20 @@ class Voice {
     try {
       await this.#disconnecting;
       if (attempt !== this.#connectionAttempt) return;
-      if (!auth) {
-        // Move events already supply a new token and a known node: never probe
-        // or obtain a second token in that path. With a single node there is
-        // nothing to choose, so skip the health probe (one round trip less on
-        // every join); room.connect reports an unreachable node anyway.
-        const nodes = this.config.features.livekit.nodes;
-        for (const node of nodes) {
-          assertAllowedServiceUrl(node.public_url, `livekit node ${node.name}`);
-        }
-        const selected =
-          nodes.length === 1
-            ? nodes[0].name
-            : await Promise.any(
-                nodes.map(async (node) => {
-                  const response = await fetch(
-                    livekitHealthUrl(node.public_url),
-                    {
-                      signal: AbortSignal.timeout(5000),
-                    },
-                  );
-                  if (!response.ok) throw new Error("Voice node unavailable");
-                  return node.name;
-                }),
-              );
-        if (attempt !== this.#connectionAttempt) return;
-        auth = previousSession
-          ? await this.rejoinCall(channel, selected, previousSession)
-          : await channel.joinCall(selected);
-      }
+      auth = await authRequest;
       if (attempt !== this.#connectionAttempt) return;
       if (!auth.token || !auth.url)
         throw new Error("Missing voice connection token");
       assertAllowedServiceUrl(auth.url, "livekit joinCall url");
+      // the microphone opens while the connection is made, so it can be
+      // published the moment the room is joined
+      this.#earlyMic = this.#captureEarly(lk, room);
       await room.connect(auth.url, auth.token, {
         autoSubscribe: false,
       });
     } catch (e) {
+      console.warn("[rtc] join failed", e);
+      this.#dropEarlyMic();
       if (attempt !== this.#connectionAttempt) return;
       room.removeAllListeners();
       await room.disconnect();
@@ -704,6 +797,54 @@ class Voice {
   }
 
   /**
+   * The node to join and a token for it. Move events already supply both,
+   * so this never runs for them. With a single node there is nothing to
+   * choose, so the health probe is skipped (one round trip less on every
+   * join); room.connect reports an unreachable node anyway.
+   */
+  async #requestAuth(channel: Channel, previousSession?: string) {
+    const nodes = this.config.features.livekit.nodes;
+    for (const node of nodes) {
+      assertAllowedServiceUrl(node.public_url, `livekit node ${node.name}`);
+    }
+    const selected =
+      nodes.length === 1
+        ? nodes[0].name
+        : await Promise.any(
+            nodes.map(async (node) => {
+              const response = await fetch(livekitHealthUrl(node.public_url), {
+                signal: AbortSignal.timeout(5000),
+              });
+              if (!response.ok) throw new Error("Voice node unavailable");
+              return node.name;
+            }),
+          );
+    return (
+      previousSession
+        ? await this.rejoinCall(channel, selected, previousSession)
+        : await channel.joinCall(selected)
+    ) as { url: string; token: string };
+  }
+
+  /**
+   * Open the microphone while the room connects (voice activity only: push
+   * to talk publishes a muted track on purpose, see enableMicrophone). A
+   * failure here is not shown: enableMicrophone tries again the usual way.
+   */
+  #captureEarly(lk: VoiceRuntime, room: Room) {
+    if (!this.microphone() || this.#settings.inputMode === "ptt") return;
+    return lk
+      .createLocalAudioTrack(room.options.audioCaptureDefaults)
+      .catch(() => undefined);
+  }
+
+  #dropEarlyMic() {
+    const early = this.#earlyMic;
+    this.#earlyMic = undefined;
+    void early?.then((track) => track?.stop());
+  }
+
+  /**
    * join_call for a device coming back from a network drop. A refusal from
    * the server (seat taken by another tab or device, moderator disconnect)
    * is final; network failures are retried by connect().
@@ -735,10 +876,27 @@ class Voice {
     }
   }
 
+  /** Start the caller's side of ringing when nobody else is in the call */
+  #ringOthers(room: Room, channel: Channel) {
+    if (channel.type !== "DirectMessage" && channel.type !== "Group") return;
+    const self = this.#client().user?.id;
+    const someoneThere =
+      room.remoteParticipants.size > 0 ||
+      [...channel.voiceParticipants.keys()].some((id) => id !== self);
+    if (someoneThere) return;
+    startOutgoingRing(
+      channel.id,
+      [...channel.recipientIds].filter((id) => id !== self),
+    );
+  }
+
   disconnect(quiet = false) {
     this.#recentRemoval = undefined;
     this.#releaseReloadHold?.();
     this.#releaseReloadHold = undefined;
+    clearOutgoingRing();
+    // a microphone opened for a join that did not happen closes again
+    this.#dropEarlyMic();
     // notices belong to the call that ends here
     clearTimeout(this.#noticeTimer);
     this.#setNotice();
@@ -1016,6 +1174,7 @@ class Voice {
       let screenPickerQualityName: ScreenShareQualityName | undefined;
       let screenPickerAudio: boolean | undefined;
       let screenPickerContent: ScreenShareContent | undefined;
+      let screenPickerClosed = false;
 
       // Register the modal on screen picker handler if it exists
       if (window.native && window.native.onceScreenPicker) {
@@ -1023,6 +1182,7 @@ class Voice {
           this.openModal({
             type: "screen_share_picker",
             onCancel: () => {
+              screenPickerClosed = true;
               window.native.screenPickerCallback(-1, false);
             },
             callback: (
@@ -1165,7 +1325,9 @@ class Voice {
           }
         }
       } catch (e) {
-        this.onErr(e);
+        // closing the picker without choosing is not an error
+        this.#setScreenshare(room.localParticipant.isScreenShareEnabled);
+        if (!isShareCancelled(e, screenPickerClosed)) this.onErr(e);
       }
     }
   }
@@ -1319,7 +1481,31 @@ class Voice {
       return;
     }
 
-    if (!this.microphone()) return;
+    if (!this.microphone()) {
+      this.#dropEarlyMic();
+      return;
+    }
+
+    // opened while connecting: publish it as it is
+    const early = await this.#earlyMic;
+    if (early && this.room() === room && this.microphone()) {
+      try {
+        await room.localParticipant.publishTrack(early, {
+          source: TrackSource.Microphone,
+        });
+        this.#earlyMic = undefined;
+        this.#settings.micOn = true;
+        // muted or moderated while it was published: follow that now
+        if (!this.microphone())
+          await room.localParticipant.setMicrophoneEnabled(false);
+        await this.applyVoiceBitrate(room, this.bitrate());
+        return;
+      } catch (error) {
+        console.warn("[rtc] early microphone not published", error);
+        early.stop();
+      }
+    } else early?.stop();
+    this.#earlyMic = undefined;
 
     try {
       const track = await room.localParticipant.setMicrophoneEnabled(true);
@@ -1601,9 +1787,20 @@ export function VoiceContext(props: { children: JSX.Element }) {
     ),
   );
 
+  // DM and group calls ring here: a small listener from the start, the
+  // card and its sounds only when a call rings
+  createEffect(() => followRinging(client()));
+
   return (
     <voiceContext.Provider value={voice}>
       <VoiceCallCardContext>{props.children}</VoiceCallCardContext>
+      {/* its own mount node: an overlay, and it appears in the same tick as
+          the call card (sharing this list of children broke Solid's insert) */}
+      <Portal>
+        <Show when={ringState().incoming.length || ringState().outgoing}>
+          <CallRinging />
+        </Show>
+      </Portal>
       <InRoom>
         <RoomAudio />
       </InRoom>

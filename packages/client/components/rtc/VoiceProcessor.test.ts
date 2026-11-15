@@ -5,6 +5,11 @@ vi.mock("livekit-rnnoise-processor", () => ({
     static loadModule = async () => undefined;
     kind = "rnnoise";
     links = new Set<unknown>();
+    constructor() {
+      // a test can make the worklet fail, as on an audio context that closed
+      if ((globalThis as { rnnoiseFails?: boolean }).rnnoiseFails)
+        throw new DOMException("No execution context available");
+    }
     connect(node: unknown) {
       this.links.add(node);
     }
@@ -113,6 +118,31 @@ describe("VoiceProcessor wiring", () => {
     settings.noiseSupression = "disabled";
     (processor as unknown as { rebuild(): void }).rebuild();
     expect(targets(source())).toEqual(["gain"]);
+  });
+
+  it("a call that ended while the filters loaded builds nothing", async () => {
+    const { processor, context, made } = setup("enhanced", { state: "closed" });
+    await expect(
+      processor.restart({
+        track: {},
+        audioContext: context,
+      } as unknown as Parameters<typeof processor.restart>[0]),
+    ).resolves.toBeUndefined();
+    expect(made).toEqual([]);
+  });
+
+  it("a noise filter that cannot be made leaves the microphone going to the volume", async () => {
+    const { processor, context, source } = setup("enhanced");
+    (globalThis as { rnnoiseFails?: boolean }).rnnoiseFails = true;
+    try {
+      await processor.restart({
+        track: {},
+        audioContext: context,
+      } as unknown as Parameters<typeof processor.restart>[0]);
+      expect(targets(source())).toEqual(["gain"]);
+    } finally {
+      (globalThis as { rnnoiseFails?: boolean }).rnnoiseFails = false;
+    }
   });
 
   it("a settings change after the call ended does nothing", async () => {

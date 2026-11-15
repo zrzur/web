@@ -114,6 +114,16 @@ export function KeybindsSettings() {
           title: <Trans>Open or close the soundboard</Trans>,
           description: <Trans>During a server call.</Trans>,
         },
+        {
+          title: <Trans>Accept a call</Trans>,
+          description: <Trans>While a call rings.</Trans>,
+          keys: [["Mod", "Shift", "Enter"]],
+        },
+        {
+          title: <Trans>Decline a call</Trans>,
+          description: <Trans>While a call rings.</Trans>,
+          keys: [["Mod", "Shift", "Backspace"]],
+        },
         // desktop app: the binds that work in games
         ...(gameKeys
           ? gameRows.flatMap((row) => {

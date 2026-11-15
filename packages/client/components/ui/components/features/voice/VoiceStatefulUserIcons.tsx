@@ -49,6 +49,11 @@ export function VoiceStatefulUserIcons(props: {
       <Show when={isMuted() && !props.serverMuted}>
         <Symbol
           size={16}
+          role="img"
+          aria-hidden={false}
+          aria-label={
+            isMuted() === "by-user" ? t`You muted this user.` : t`Muted`
+          }
           color={
             isMuted() === "by-user" ? "var(--md-sys-color-error)" : undefined
           }
@@ -66,7 +71,14 @@ export function VoiceStatefulUserIcons(props: {
         </Symbol>
       </Show>
       <Show when={props.deafened && !props.serverDeafened}>
-        <Symbol size={16}>headset_off</Symbol>
+        <Symbol
+          size={16}
+          role="img"
+          aria-hidden={false}
+          aria-label={t`Deafened`}
+        >
+          headset_off
+        </Symbol>
       </Show>
       <Show when={props.camera}>
         <Symbol size={16}>camera_video</Symbol>

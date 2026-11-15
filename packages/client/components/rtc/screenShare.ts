@@ -386,3 +386,22 @@ export async function senderLiveStats(
 export function liveStatsLabel(stats: ScreenShareLiveStats) {
   return `${stats.width}×${stats.height} · ${stats.fps} FPS`;
 }
+
+/**
+ * Did the capture fail only because the person closed the picker without
+ * choosing? That is not an error to show. A refusal by the system (screen
+ * recording not allowed for the app) still is.
+ * @param pickerClosed the app's own picker (desktop) was closed
+ */
+export function isShareCancelled(error: unknown, pickerClosed = false) {
+  if (pickerClosed) return true;
+  const name = (error as { name?: unknown } | null)?.name;
+  const message = String(
+    (error as { message?: unknown } | null)?.message ?? "",
+  );
+  if (name === "AbortError") return true;
+  // Chrome: "Permission denied" (picker closed), "Permission denied by
+  // system" (the operating system refused); Firefox: "The request is not
+  // allowed by the user agent or the platform in the current context."
+  return name === "NotAllowedError" && !/by system|platform/i.test(message);
+}

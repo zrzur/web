@@ -1,6 +1,6 @@
 import { Match, Switch } from "solid-js";
 
-import { SystemMessage } from "@zrzur/sdk/solid";
+import { CallStartedSystemMessage, SystemMessage } from "@zrzur/sdk/solid";
 import { styled } from "styled-system/jsx";
 
 import { useTime } from "@revolt/i18n";
@@ -79,6 +79,14 @@ export function SystemMessageIcon(props: {
             }
           >
             <Icon name="push-pin" size={16} />
+          </Match>
+          <Match
+            when={
+              props.systemMessage.type === "call_started" &&
+              (props.systemMessage as CallStartedSystemMessage).missed
+            }
+          >
+            <Icon name="phone-disconnect" size={16} />
           </Match>
           <Match when={props.systemMessage.type === "call_started"}>
             <Icon name="phone" size={16} />

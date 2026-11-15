@@ -2,6 +2,24 @@
 
 ## Unreleased
 
+### Calls ring (2026-11-15)
+
+* **Incoming call:** a DM or group call now rings the other people wherever they are in the app: a card at the top with who is calling, **Decline**, **Accept with video** and **Accept** (Ctrl/Cmd+Shift+Enter and Ctrl/Cmd+Shift+Backspace, listed under Calls in the shortcuts screen), and the incoming ringtone. When the app is in the background, a system notification as well (the same one the web push replaces), and the desktop app flashes its taskbar button.
+* **Caller:** the outgoing tone plays while people are rung. When everyone declines, or nobody answers within 45 seconds, the call ends and says so ("Lina declined the call.", "Lina didn't answer.").
+* **Missed call:** a call nobody else joined shows "Missed call from Lina" in the conversation (the caller reads "Nobody answered your call").
+* **DM header:** the call button says **Start a call** or **Join the call** (it said "Join the voice channel" in DMs), and DMs and groups get **Start a video call**.
+* Screen readers name the muted and deafened icons in voice lists.
+* Fixed: muting or deafening yourself was never shown to people looking at the voice channel from outside the call (the voice server does not report it). The app now tells the server (`PATCH /channels/{id}/voice_state`); the push-to-talk key is not a mute.
+
+### Calls: faster and lighter (2026-11-15)
+
+* Joining asks for the call token while the voice part of the app loads, and opens the microphone while the connection is made: one wait instead of three in a row.
+* One connection to the voice server instead of two (`singlePeerConnection`, the voice server runs LiveKit 1.13).
+* Video and screen shares are received at the size they are shown, and not at all while hidden; senders stop encoding sizes nobody watches (`adaptiveStream`, `dynacast`). Less bandwidth, CPU and battery in camera and screen share calls.
+* Closing the screen share picker without choosing is no longer reported as an error.
+* Fixed: hanging up while the voice filters or a microphone restart were starting left an unhandled "replaceTrack … peer connection is closed" error.
+* Fixed: hanging up right after joining could throw "Failed to construct 'AudioWorkletNode'" (the noise filter was made on an audio context that had closed). Nothing is built on a closed context, and a noise filter that cannot be made leaves the microphone working without it.
+
 ### Soundboard: no page reload during a call (2026-11-15)
 
 * A part of the app that fails to load during a call no longer reloads the page (the stale-build reload dropped the call; the owner saw it on Soundboard). It is tried once more, and if it still fails the sounds say so in place ("The sounds could not load…") and the call goes on. Outside calls the stale-build reload works as before.

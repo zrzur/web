@@ -54,6 +54,8 @@ declare global {
       ): void;
       screenPickerCallback(idx: number, audio: boolean): void;
       isWayland?(): boolean;
+      /** A call rings: flash the taskbar (missing from older desktop apps) */
+      callAttention?(on: boolean): void;
     };
 
     desktopConfig: {
