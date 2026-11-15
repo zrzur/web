@@ -26341,3 +26341,20 @@ msgstr "Zrzur, right on <0>your desktop.</0>"
 #: components/app/interface/settings/user/appearance/AppearanceMenu.tsx
 #~ msgid "Zrzur's own look: very dark neutral panels with Zrzur Pink as the one accent."
 #~ msgstr "Zrzur's own look: very dark neutral panels with Zrzur Pink as the one accent."
+
+#: components/ui/components/features/messaging/elements/Invite.tsx
+msgid "Invalid invite"
+msgstr "Invalid invite"
+
+#: components/ui/components/features/messaging/elements/Invite.tsx
+msgid "Open invite"
+msgstr "Open invite"
+
+#: components/ui/components/features/messaging/elements/Invite.tsx
+msgid "Open this invite to see where it leads."
+msgstr "Open this invite to see where it leads."
+
+#: components/ui/components/features/messaging/elements/Invite.tsx
+msgid "You're a member"
+msgstr "You're a member"
+
