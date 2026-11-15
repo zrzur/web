@@ -3328,8 +3328,8 @@
     },
     {
       "path": "packages/client/components/i18n/catalogs/ar/messages.po",
-      "sha256": "b126950d1e9ec112677f251071b4e974153f08500270b3afc923f23329c61277",
-      "bytes": 1056475,
+      "sha256": "bf878c13abe58df9d44d4e59ffec17340ba38fc4e51076ae361f2628bf31fcb5",
+      "bytes": 1056518,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -3472,8 +3472,8 @@
     },
     {
       "path": "packages/client/components/i18n/catalogs/de/messages.po",
-      "sha256": "48f5eb4087d40f61eaede66301248100cdf2893904e902ad60cf7b58157b6c5a",
-      "bytes": 974452,
+      "sha256": "a7ea5a9e0f74421934bcdfa50babf8376d3ecdbe1e20c4b04f6fab0df82d1c9c",
+      "bytes": 974495,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -3508,8 +3508,8 @@
     },
     {
       "path": "packages/client/components/i18n/catalogs/en/messages.po",
-      "sha256": "d6eeb13ecfcebb9a097f30937ad7042636fe03d4229a61f443d1e097d07b35b4",
-      "bytes": 938002,
+      "sha256": "51d4915229f5b9f9ff22a36a2ba30123b97149aab86eff65dfadc7a17117030c",
+      "bytes": 938045,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -4516,8 +4516,8 @@
     },
     {
       "path": "packages/client/components/modal/modals/AddBot.tsx",
-      "sha256": "21e5a2a08839ffcfdc72175060eb8c6dc925235d62e23a4bf2209978ebe41974",
-      "bytes": 17825,
+      "sha256": "4f8bc8a716bb42f098b9bffc915dbfeae9c85e77412b3d26199d50fb6557ffa4",
+      "bytes": 15106,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -5070,6 +5070,12 @@
       "path": "packages/client/components/modal/modals/changelogFeed.ts",
       "sha256": "528e679e4e5b6a60d064d1669d1806ea4a1a9c1dfad9767d5d507311ae456220",
       "bytes": 1135,
+      "category": "product-source-or-build-manifest"
+    },
+    {
+      "path": "packages/client/components/modal/modals/consentParts.ts",
+      "sha256": "25ca6feb3cb288d2885236727a52f669d83642f2a966197871bcde6c58b5a65b",
+      "bytes": 3268,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -40384,8 +40390,8 @@
     },
     {
       "path": "packages/client/src/interface/OAuth.tsx",
-      "sha256": "6ba55cde7c4bfb3e1bc5f1e5c5d94a6523e7f293da4b908c3ed1c1c8f355c175",
-      "bytes": 12853,
+      "sha256": "768594898592127d287cac2cef1a469bc16b88a27d5d0f3710d25b72c15fbf12",
+      "bytes": 13149,
       "category": "product-source-or-build-manifest"
     },
     {
