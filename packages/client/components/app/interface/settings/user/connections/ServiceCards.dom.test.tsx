@@ -394,7 +394,9 @@ describe("ServiceCards", () => {
       battlenet: { available: true },
     });
     await flush();
-    expect(text()).toContain("Until you agree, Refresh stays off.");
+    expect(text()).toContain(
+      "Until you agree, your GitHub account does not show on your profile and Refresh stays off.",
+    );
     button("Not now")!.click();
     await flush();
     expect(text()).not.toContain("Updated consent for GitHub");

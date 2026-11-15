@@ -26365,18 +26365,18 @@ msgstr "موافقة محدَّثة على ربط {0}"
 msgid "We have updated what you agree to when you link Battle.net: it now names where your data goes. You agree to it the next time you confirm on Battle.net."
 msgstr "حدّثنا ما توافق عليه عند ربط Battle.net: فهو يذكر الآن أين تذهب بياناتك. وتوافق عليه في المرة القادمة التي تؤكّد فيها عبر Battle.net."
 
-#: components/app/interface/settings/user/connections/ServiceCards.tsx
-msgid "We have updated what you agree to when you link GitHub: it now names where your data goes. Until you agree, Refresh stays off."
-msgstr "حدّثنا ما توافق عليه عند ربط GitHub: فهو يذكر الآن أين تذهب بياناتك. وإلى أن توافق، لا يعمل «تحديث»."
-
 #: components/app/interface/settings/user/connections/Connections.tsx
 msgid "We have updated what you agree to when you link Steam: it now covers game pictures and up to 60 of your latest achievements with the day you unlocked them (no time of day), and it names where your data goes. Until you agree, Refresh stays off and nothing new shows."
 msgstr "حدّثنا ما توافق عليه عند ربط Steam: فهو يشمل الآن صور الألعاب وما يصل إلى 60 من أحدث إنجازاتك مع اليوم الذي حققتها فيه (من دون الساعة)، ويذكر أين تذهب بياناتك. وإلى أن توافق، لا يعمل «تحديث» ولا يظهر شيء جديد."
 
 #: components/app/interface/settings/user/connections/ServiceCards.tsx
-msgid "We have updated what you agree to when you link Twitch: it now names where your data goes. Until you agree, your channel does not show on your profile and we do not ask Twitch about it."
-msgstr "حدّثنا ما توافق عليه عند ربط Twitch: فهو يذكر الآن أين تذهب بياناتك. وإلى أن توافق، لا تظهر قناتك في ملفك الشخصي ولا نسأل Twitch عنها."
-
-#: components/app/interface/settings/user/connections/ServiceCards.tsx
 msgid "What you play or post there can say something about your beliefs, health or sexuality."
 msgstr "وقد يكشف ما تلعبه أو تنشره هناك شيئًا عن معتقداتك أو صحتك أو ميولك الجنسية."
+
+#: components/app/interface/settings/user/connections/ServiceCards.tsx
+msgid "We have updated what you agree to when you link GitHub: it now names where your data goes. Until you agree, your GitHub account does not show on your profile and Refresh stays off."
+msgstr "حدّثنا ما توافق عليه عند ربط GitHub: فهو يذكر الآن أين تذهب بياناتك. وإلى أن توافق، لا يظهر حسابك في GitHub في ملفك الشخصي ولا يعمل «تحديث»."
+
+#: components/app/interface/settings/user/connections/ServiceCards.tsx
+msgid "We have updated what you agree to when you link Twitch: it now names where your data goes. Until you agree, your channel does not show on your profile and we exchange no data with Twitch about it."
+msgstr "حدّثنا ما توافق عليه عند ربط Twitch: فهو يذكر الآن أين تذهب بياناتك. وإلى أن توافق، لا تظهر قناتك في ملفك الشخصي ولا نتبادل أي بيانات عنها مع Twitch."

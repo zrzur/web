@@ -152,13 +152,14 @@ function ConsentAgainLine(props: { service: ServiceId }) {
         <Trans>
           We have updated what you agree to when you link Twitch: it now names
           where your data goes. Until you agree, your channel does not show on
-          your profile and we do not ask Twitch about it.
+          your profile and we exchange no data with Twitch about it.
         </Trans>
       </Match>
       <Match when={props.service === "github"}>
         <Trans>
           We have updated what you agree to when you link GitHub: it now names
-          where your data goes. Until you agree, Refresh stays off.
+          where your data goes. Until you agree, your GitHub account does not
+          show on your profile and Refresh stays off.
         </Trans>
       </Match>
       <Match when={props.service === "battlenet"}>
@@ -438,11 +439,11 @@ function ServiceLinked(props: {
     props.account.expires_at !== undefined
       ? daysLeft(props.account.expires_at, now())
       : 0;
-  /** Others see it: Twitch also waits for the consent in use */
+  /** Others see it: Twitch and GitHub also wait for the consent in use */
   const onProfile = () =>
     props.account.shown &&
     !expired() &&
-    !(service() === "twitch" && needsConsent(props.account));
+    !(service() !== "battlenet" && needsConsent(props.account));
   const shownRepos = () => props.account.shown_repos ?? [];
   const canRefresh = () => now() >= props.account.refresh_after;
 

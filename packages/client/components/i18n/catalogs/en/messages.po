@@ -26368,18 +26368,18 @@ msgstr "Updated consent for {0}"
 msgid "We have updated what you agree to when you link Battle.net: it now names where your data goes. You agree to it the next time you confirm on Battle.net."
 msgstr "We have updated what you agree to when you link Battle.net: it now names where your data goes. You agree to it the next time you confirm on Battle.net."
 
-#: components/app/interface/settings/user/connections/ServiceCards.tsx
-msgid "We have updated what you agree to when you link GitHub: it now names where your data goes. Until you agree, Refresh stays off."
-msgstr "We have updated what you agree to when you link GitHub: it now names where your data goes. Until you agree, Refresh stays off."
-
 #: components/app/interface/settings/user/connections/Connections.tsx
 msgid "We have updated what you agree to when you link Steam: it now covers game pictures and up to 60 of your latest achievements with the day you unlocked them (no time of day), and it names where your data goes. Until you agree, Refresh stays off and nothing new shows."
 msgstr "We have updated what you agree to when you link Steam: it now covers game pictures and up to 60 of your latest achievements with the day you unlocked them (no time of day), and it names where your data goes. Until you agree, Refresh stays off and nothing new shows."
 
 #: components/app/interface/settings/user/connections/ServiceCards.tsx
-msgid "We have updated what you agree to when you link Twitch: it now names where your data goes. Until you agree, your channel does not show on your profile and we do not ask Twitch about it."
-msgstr "We have updated what you agree to when you link Twitch: it now names where your data goes. Until you agree, your channel does not show on your profile and we do not ask Twitch about it."
-
-#: components/app/interface/settings/user/connections/ServiceCards.tsx
 msgid "What you play or post there can say something about your beliefs, health or sexuality."
 msgstr "What you play or post there can say something about your beliefs, health or sexuality."
+
+#: components/app/interface/settings/user/connections/ServiceCards.tsx
+msgid "We have updated what you agree to when you link GitHub: it now names where your data goes. Until you agree, your GitHub account does not show on your profile and Refresh stays off."
+msgstr "We have updated what you agree to when you link GitHub: it now names where your data goes. Until you agree, your GitHub account does not show on your profile and Refresh stays off."
+
+#: components/app/interface/settings/user/connections/ServiceCards.tsx
+msgid "We have updated what you agree to when you link Twitch: it now names where your data goes. Until you agree, your channel does not show on your profile and we exchange no data with Twitch about it."
+msgstr "We have updated what you agree to when you link Twitch: it now names where your data goes. Until you agree, your channel does not show on your profile and we exchange no data with Twitch about it."

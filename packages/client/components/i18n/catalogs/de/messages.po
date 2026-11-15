@@ -26365,18 +26365,18 @@ msgstr "Aktualisierte Einwilligung für {0}"
 msgid "We have updated what you agree to when you link Battle.net: it now names where your data goes. You agree to it the next time you confirm on Battle.net."
 msgstr "Wir haben aktualisiert, wozu du beim Verknüpfen von Battle.net einwilligst: Jetzt steht darin auch, wohin deine Daten gehen. Du stimmst zu, wenn du das nächste Mal bei Battle.net bestätigst."
 
-#: components/app/interface/settings/user/connections/ServiceCards.tsx
-msgid "We have updated what you agree to when you link GitHub: it now names where your data goes. Until you agree, Refresh stays off."
-msgstr "Wir haben aktualisiert, wozu du beim Verknüpfen von GitHub einwilligst: Jetzt steht darin auch, wohin deine Daten gehen. Bis du zustimmst, bleibt „Aktualisieren“ aus."
-
 #: components/app/interface/settings/user/connections/Connections.tsx
 msgid "We have updated what you agree to when you link Steam: it now covers game pictures and up to 60 of your latest achievements with the day you unlocked them (no time of day), and it names where your data goes. Until you agree, Refresh stays off and nothing new shows."
 msgstr "Wir haben aktualisiert, wozu du beim Verknüpfen von Steam einwilligst: Es umfasst jetzt Spielbilder und bis zu 60 deiner neuesten Erfolge mit dem Tag, an dem du sie freigeschaltet hast (ohne Uhrzeit), und nennt, wohin deine Daten gehen. Bis du zustimmst, bleibt „Aktualisieren“ aus und nichts Neues erscheint."
 
 #: components/app/interface/settings/user/connections/ServiceCards.tsx
-msgid "We have updated what you agree to when you link Twitch: it now names where your data goes. Until you agree, your channel does not show on your profile and we do not ask Twitch about it."
-msgstr "Wir haben aktualisiert, wozu du beim Verknüpfen von Twitch einwilligst: Jetzt steht darin auch, wohin deine Daten gehen. Bis du zustimmst, erscheint dein Kanal nicht in deinem Profil, und wir fragen Twitch nicht danach."
-
-#: components/app/interface/settings/user/connections/ServiceCards.tsx
 msgid "What you play or post there can say something about your beliefs, health or sexuality."
 msgstr "Was du dort spielst oder postest, kann etwas über deinen Glauben, deine Gesundheit oder deine Sexualität verraten."
+
+#: components/app/interface/settings/user/connections/ServiceCards.tsx
+msgid "We have updated what you agree to when you link GitHub: it now names where your data goes. Until you agree, your GitHub account does not show on your profile and Refresh stays off."
+msgstr "Wir haben aktualisiert, wozu du beim Verknüpfen von GitHub einwilligst: Jetzt steht darin auch, wohin deine Daten gehen. Bis du zustimmst, erscheint dein GitHub-Konto nicht in deinem Profil, und „Aktualisieren“ bleibt aus."
+
+#: components/app/interface/settings/user/connections/ServiceCards.tsx
+msgid "We have updated what you agree to when you link Twitch: it now names where your data goes. Until you agree, your channel does not show on your profile and we exchange no data with Twitch about it."
+msgstr "Wir haben aktualisiert, wozu du beim Verknüpfen von Twitch einwilligst: Jetzt steht darin auch, wohin deine Daten gehen. Bis du zustimmst, erscheint dein Kanal nicht in deinem Profil, und wir tauschen keine Daten darüber mit Twitch aus."
