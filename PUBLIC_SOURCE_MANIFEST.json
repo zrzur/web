@@ -28,8 +28,8 @@
     },
     {
       "path": ".github/workflows/ci.yml",
-      "sha256": "c351fc5c82bf0b515bc787ebf211be884761a1ffbe229dfc77dedfe68a883454",
-      "bytes": 3951,
+      "sha256": "017f1579f22b6da7cccb274e0bf4d6c334d4422fbe75d339d11f761d2119bb26",
+      "bytes": 3973,
       "category": "reviewed-build-and-ci"
     },
     {
@@ -40,7 +40,7 @@
     },
     {
       "path": ".github/workflows/source-check.yml",
-      "sha256": "c588bb72f12bd4d47872ec301d9c8457a6b3d5a0aee08e1031454389a20ebb5c",
+      "sha256": "591f03a39bdf66369a2e31c11fea11a3de7e6e18fa56e6daedad30661f293120",
       "bytes": 955,
       "category": "reviewed-build-and-ci"
     },
@@ -322,7 +322,7 @@
     },
     {
       "path": "RELEASE.json",
-      "sha256": "dce200b3d16ecac395cb464a5e330237292f8ef0bfea3c9dc2d63f95d4ce98fb",
+      "sha256": "7be251eb253c528ec4ce093e44c2c9936fd2db9bc6981e28a7c3d6394cc85b44",
       "bytes": 295,
       "category": "product-source-or-build-manifest"
     },
@@ -340,8 +340,8 @@
     },
     {
       "path": "ZRZUR_RELEASE.md",
-      "sha256": "89f9fc053b3c356e2a0d2ba8ba7e7ed42ace2945ba1132a2562573cd530179a1",
-      "bytes": 1368,
+      "sha256": "540bf177f8c680d9f6dc275bb5d8becd166b51199ea25fcec149b8047473e87d",
+      "bytes": 1370,
       "category": "public-documentation"
     },
     {
@@ -514,9 +514,15 @@
     },
     {
       "path": "docker/server.js",
-      "sha256": "60b7fe4456319920a52160e77ddfad3a5d52bb5e3cad8e99f766dba728742af2",
-      "bytes": 6565,
+      "sha256": "63840d9c31e6bd254e999bb0e068f81ba8fcba754a5b484419df612c001eb479",
+      "bytes": 6791,
       "category": "product-source-or-build-manifest"
+    },
+    {
+      "path": "docker/server.test.js",
+      "sha256": "d504a681d2e5bee54f1665b4222b8739b6feac68ff50cbe0ab8c650d97bddb96",
+      "bytes": 2344,
+      "category": "synthetic-test-source-or-fixture"
     },
     {
       "path": "eslint.config.mjs",
@@ -574,7 +580,7 @@
     },
     {
       "path": "package.json",
-      "sha256": "c6e82dc17477355d352adfbfdfce56e0f954279ca17577d902a024797673c3a0",
+      "sha256": "e806a349c39552f12750826c84bdaeb2b2fdd8d5c777c14aeb0a9e1d897db5bf",
       "bytes": 735,
       "category": "product-source-or-build-manifest"
     },
@@ -38361,6 +38367,12 @@
       "category": "product-source-or-build-manifest"
     },
     {
+      "path": "packages/client/scripts/build-json.mjs",
+      "sha256": "8cfca5e57c3cd1951b6e6ab535e9b00884934e3b1a5cc82cb3b9f796caad3895",
+      "bytes": 968,
+      "category": "product-source-or-build-manifest"
+    },
+    {
       "path": "packages/client/scripts/check-translations.mjs",
       "sha256": "40f090552b12f6abf985da0a94d79c84a265fffba2933bd5a8cd152d4c8814e5",
       "bytes": 1701,
@@ -39808,8 +39820,8 @@
     },
     {
       "path": "packages/client/scripts/release-integrity.test.mjs",
-      "sha256": "e7ee7bd144bc21f484f3cf25f4e8a48223479f2143999138a6caed730c5028e7",
-      "bytes": 7164,
+      "sha256": "0c16000f7e2f60732bdc98f83b98b15f4cfd987664ac65adafffcf3589dd5f49",
+      "bytes": 8084,
       "category": "synthetic-test-source-or-fixture"
     },
     {
@@ -41626,8 +41638,8 @@
     },
     {
       "path": "packages/client/vite.config.ts",
-      "sha256": "d584b719fa55b617ccd78ff8876bfd0e908e76bcee63b98a32711e93cd7dc0e8",
-      "bytes": 10332,
+      "sha256": "42685c8ee3425991ce0babaec050c9d7ceb950c5800ec7ae9192f285628557b2",
+      "bytes": 10435,
       "category": "product-source-or-build-manifest"
     },
     {
