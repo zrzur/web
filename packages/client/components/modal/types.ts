@@ -22,7 +22,6 @@ import {
 import type { TrackReference } from "solid-livekit-components";
 
 import type { SettingsConfigurations } from "@revolt/app/interface/settings";
-import { CategoryData } from "@revolt/app/menus/CategoryContextMenu";
 import { ServerFolder } from "@revolt/state/stores/ServerFolders";
 import {
   ScreenShareContent,
@@ -135,6 +134,8 @@ export type Modals =
       type: "delete_category";
       server: Server;
       categoryId: string;
+      /** Called once the category is gone (its settings close themselves) */
+      onDeleted?: () => void;
     }
   | {
       type: "delete_message";
@@ -406,22 +407,12 @@ export type Modals =
       type: "import_theme";
     }
   | {
-      type: "edit_category";
-      server: Server;
-      category: CategoryData;
-    }
-  | {
       type: "create_thread";
       channel: Channel;
       /** start the thread from this message */
       message?: Message;
       /** suggested name */
       name?: string;
-    }
-  | {
-      type: "category_permissions";
-      server: Server;
-      category: CategoryData;
     }
   | {
       type: "edit_server_folder";

@@ -14609,7 +14609,7 @@ msgstr "Notiz"
 
 #: components/modal/modals/GiftPlus.tsx
 msgid "Note (optional)"
-msgstr "Nachricht (optional)"
+msgstr "Notiz (optional)"
 
 #. placeholder {0}: giver()?.displayName ?? t`a friend`
 #: components/app/interface/settings/user/subscriptions/Subscriptions.tsx
@@ -27159,3 +27159,171 @@ msgstr "Zrzur, direkt auf <0>deinem Desktop.</0>"
 #: components/app/interface/settings/user/appearance/AppearanceMenu.tsx
 #~ msgid "Zrzur's own look: very dark neutral panels with Zrzur Pink as the one accent."
 #~ msgstr "Zrzurs eigener Look: sehr dunkle, neutrale Flächen mit Zrzur-Pink als einziger Akzentfarbe."
+
+#: components/app/interface/settings/category/Overview.tsx
+msgid "A channel follows the category's permissions until you change permissions on the channel itself."
+msgstr "Ein Kanal folgt den Berechtigungen der Kategorie, bis du Berechtigungen am Kanal selbst änderst."
+
+#: components/app/interface/settings/CategorySettings.tsx
+msgid "Access"
+msgstr "Zugang"
+
+#: components/app/interface/settings/category/CategoryPermissionsOverview.tsx
+msgid "Administrator: sees every category"
+msgstr "Administrator: sieht alle Kategorien"
+
+#: components/app/interface/settings/category/CategoryPermissionsOverview.tsx
+msgid "Can see this category"
+msgstr "Sieht diese Kategorie"
+
+#: components/app/interface/settings/category/CategoryPermissionsOverview.tsx
+msgid "Can't see this category"
+msgstr "Sieht diese Kategorie nicht"
+
+#: components/app/interface/settings/category/Overview.tsx
+msgid "Category info"
+msgstr "Angaben zur Kategorie"
+
+#: components/app/interface/settings/category/Overview.tsx
+msgid "Category name"
+msgstr "Name der Kategorie"
+
+#: components/app/interface/settings/category/CategoryCard.tsx
+#: components/app/interface/settings/server/channels/ChannelsSettings.tsx
+#: components/app/menus/CategoryContextMenu.tsx
+#: src/interface/navigation/channels/ServerSidebar.tsx
+msgid "Category settings"
+msgstr "Kategorie-Einstellungen"
+
+#. placeholder {0}: hiddenCount()
+#: components/app/interface/settings/category/Overview.tsx
+msgid "Channels here that are hidden from you: {0}"
+msgstr "Vor dir verborgene Kanäle hier: {0}"
+
+#: components/app/interface/settings/category/Overview.tsx
+msgid "Channels in this category"
+msgstr "Kanäle in dieser Kategorie"
+
+#: components/app/interface/settings/category/CategoryPermissionsOverview.tsx
+msgid "Channels that follow this category use these permissions."
+msgstr "Kanäle, die dieser Kategorie folgen, nutzen diese Berechtigungen."
+
+#. placeholder {0}: current().title
+#: components/app/interface/settings/channel/permissions/ChannelPermissionsOverview.tsx
+msgid "Does not follow {0}"
+msgstr "Folgt {0} nicht"
+
+#. placeholder {0}: current().title
+#: components/app/interface/settings/channel/permissions/ChannelPermissionsOverview.tsx
+msgid "Follow {0}?"
+msgstr "{0} folgen?"
+
+#: components/app/interface/settings/category/Overview.tsx
+#: components/app/interface/settings/channel/permissions/ChannelPermissionsOverview.tsx
+msgid "Follow category"
+msgstr "Kategorie folgen"
+
+#: components/app/interface/settings/category/Overview.tsx
+msgid "Follow the category?"
+msgstr "Der Kategorie folgen?"
+
+#. placeholder {0}: current().title
+#: components/app/interface/settings/channel/permissions/ChannelPermissionsOverview.tsx
+msgid "Follows {0}"
+msgstr "Folgt {0}"
+
+#: components/app/interface/settings/category/Overview.tsx
+msgid "Follows the category"
+msgstr "Folgt der Kategorie"
+
+#: components/app/interface/settings/category/CategoryPermissionsOverview.tsx
+msgid "Hidden from everyone except the roles you let in below. Its name stays visible to people who can see a channel inside it, and to those who manage channels or permissions or read the audit log."
+msgstr "Für alle verborgen, außer für die Rollen, die du unten zulässt. Der Name bleibt sichtbar für alle, die einen Kanal darin sehen, und für alle, die Kanäle oder Berechtigungen verwalten oder das Protokoll lesen."
+
+#: components/app/interface/settings/category/CategoryPermissionsOverview.tsx
+msgid "Hide this category from {role}"
+msgstr "Diese Kategorie vor {role} verbergen"
+
+#: components/app/interface/settings/channel/permissions/ChannelVisibility.tsx
+msgid "Hide this channel from {role}"
+msgstr "Diesen Kanal vor {role} verbergen"
+
+#: components/app/interface/settings/CategorySettings.tsx
+msgid "It was deleted, or you can no longer see it."
+msgstr "Sie wurde gelöscht, oder du kannst sie nicht mehr sehen."
+
+#: components/modal/modals/DeleteCategory.tsx
+msgid "Its channels stay, and the same people keep seeing them. Once the category is deleted, there's no going back."
+msgstr "Ihre Kanäle bleiben, und dieselben Personen sehen sie weiterhin. Ist die Kategorie gelöscht, gibt es kein Zurück."
+
+#: components/app/interface/settings/category/CategoryPermissionsOverview.tsx
+msgid "Let {role} see this category"
+msgstr "{role} diese Kategorie sehen lassen"
+
+#: components/app/interface/settings/channel/permissions/ChannelVisibility.tsx
+msgid "Let {role} see this channel"
+msgstr "{role} diesen Kanal sehen lassen"
+
+#. placeholder {0}: channel.name
+#: components/app/interface/settings/category/Overview.tsx
+msgid "Make {0} follow the category"
+msgstr "{0} der Kategorie folgen lassen"
+
+#: components/app/interface/settings/category/Overview.tsx
+msgid "Make all follow"
+msgstr "Alle folgen lassen"
+
+#: components/app/interface/settings/category/Overview.tsx
+msgid "No channels in this category yet."
+msgstr "Noch keine Kanäle in dieser Kategorie."
+
+#: components/app/interface/settings/category/Overview.tsx
+msgid "One short line about this category"
+msgstr "Eine kurze Zeile über diese Kategorie"
+
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "Open a category's settings"
+msgstr "Einstellungen einer Kategorie öffnen"
+
+#: components/app/interface/settings/category/Overview.tsx
+msgid "Own permissions"
+msgstr "Eigene Berechtigungen"
+
+#: components/app/interface/settings/category/CategoryPermissionsOverview.tsx
+#: src/interface/navigation/channels/ServerSidebar.tsx
+msgid "Private category"
+msgstr "Private Kategorie"
+
+#: components/app/interface/settings/category/CategoryPermissionsOverview.tsx
+msgid "Some channels here can be seen by people outside this category"
+msgstr "Einige Kanäle hier sind für Personen außerhalb dieser Kategorie sichtbar"
+
+#: components/app/interface/settings/CategorySettings.tsx
+msgid "The name, the note and the channels inside."
+msgstr "Der Name, die Notiz und die Kanäle darin."
+
+#: components/app/interface/settings/category/CategoryPermissionsOverview.tsx
+msgid "The server owner and whoever manages channels or permissions see every category."
+msgstr "Der Serverbesitzer und alle, die Kanäle oder Berechtigungen verwalten, sehen jede Kategorie."
+
+#. placeholder {0}: stillOpen() .map((channel) => channel.name) .join(", ")
+#: components/app/interface/settings/category/CategoryPermissionsOverview.tsx
+msgid "They have their own permissions: {0}. Make them follow the category in Overview."
+msgstr "Sie haben eigene Berechtigungen: {0}. Lass sie in der Übersicht der Kategorie folgen."
+
+#: components/app/interface/settings/CategorySettings.tsx
+msgid "This category is no longer here."
+msgstr "Diese Kategorie gibt es hier nicht mehr."
+
+#: components/app/interface/settings/category/CategoryPermissionsOverview.tsx
+msgid "Who can see this category"
+msgstr "Wer diese Kategorie sieht"
+
+#: components/app/interface/settings/CategorySettings.tsx
+msgid "Who can see this category and what they can do in it."
+msgstr "Wer diese Kategorie sieht und was darin erlaubt ist."
+
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "With the category selected in the channel list, if you manage the server."
+msgstr "Wenn die Kategorie in der Kanalliste ausgewählt ist und du den Server verwaltest."
+

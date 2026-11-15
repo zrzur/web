@@ -1,0 +1,113 @@
+{
+  "Channels here that are hidden from you: {0}": [
+    "قنوات هنا مخفية عنك: {0}",
+    "Vor dir verborgene Kanäle hier: {0}"
+  ],
+  "A channel follows the category's permissions until you change permissions on the channel itself.": [
+    "تتبع القناة صلاحيات الفئة إلى أن تغيّر الصلاحيات على القناة نفسها.",
+    "Ein Kanal folgt den Berechtigungen der Kategorie, bis du Berechtigungen am Kanal selbst änderst."
+  ],
+  "Administrator: sees every category": [
+    "مسؤول: يرى كل الفئات",
+    "Administrator: sieht alle Kategorien"
+  ],
+  "Can see this category": ["يرى هذه الفئة", "Sieht diese Kategorie"],
+  "Can't see this category": [
+    "لا يرى هذه الفئة",
+    "Sieht diese Kategorie nicht"
+  ],
+  "Category info": ["معلومات الفئة", "Angaben zur Kategorie"],
+  "Category name": ["اسم الفئة", "Name der Kategorie"],
+  "Category settings": ["إعدادات الفئة", "Kategorie-Einstellungen"],
+  "Channels in this category": ["قنوات هذه الفئة", "Kanäle in dieser Kategorie"],
+  "Channels that follow this category use these permissions.": [
+    "القنوات التي تتبع هذه الفئة تستخدم هذه الصلاحيات.",
+    "Kanäle, die dieser Kategorie folgen, nutzen diese Berechtigungen."
+  ],
+  "Follow category": ["اتباع الفئة", "Kategorie folgen"],
+  "Follow the category?": ["اتباع الفئة؟", "Der Kategorie folgen?"],
+  "Follows the category": ["تتبع الفئة", "Folgt der Kategorie"],
+  "Follows {0}": ["تتبع {0}", "Folgt {0}"],
+  "Does not follow {0}": ["لا تتبع {0}", "Folgt {0} nicht"],
+  "Follow {0}?": ["اتباع {0}؟", "{0} folgen?"],
+  "Hidden from everyone except the roles you let in below. Its name stays visible to people who can see a channel inside it, and to those who manage channels or permissions or read the audit log.": [
+    "مخفية عن الجميع ما عدا الأدوار التي تسمح لها أدناه. يبقى اسمها ظاهرًا لمن يرى قناة بداخلها، ولمن يدير القنوات أو الصلاحيات أو يقرأ سجل التدقيق.",
+    "Für alle verborgen, außer für die Rollen, die du unten zulässt. Der Name bleibt sichtbar für alle, die einen Kanal darin sehen, und für alle, die Kanäle oder Berechtigungen verwalten oder das Protokoll lesen."
+  ],
+  "Hide this category from {role}": [
+    "إخفاء هذه الفئة عن {role}",
+    "Diese Kategorie vor {role} verbergen"
+  ],
+  "Hide this channel from {role}": [
+    "إخفاء هذه القناة عن {role}",
+    "Diesen Kanal vor {role} verbergen"
+  ],
+  "It was deleted, or you can no longer see it.": [
+    "حُذفت، أو لم يعد بإمكانك رؤيتها.",
+    "Sie wurde gelöscht, oder du kannst sie nicht mehr sehen."
+  ],
+  "Its channels stay, and the same people keep seeing them. Once the category is deleted, there's no going back.": [
+    "تبقى قنواتها، ويستمر الأشخاص أنفسهم في رؤيتها. بعد حذف الفئة لا يمكن التراجع.",
+    "Ihre Kanäle bleiben, und dieselben Personen sehen sie weiterhin. Ist die Kategorie gelöscht, gibt es kein Zurück."
+  ],
+  "Let {role} see this category": [
+    "السماح لـ {role} برؤية هذه الفئة",
+    "{role} diese Kategorie sehen lassen"
+  ],
+  "Let {role} see this channel": [
+    "السماح لـ {role} برؤية هذه القناة",
+    "{role} diesen Kanal sehen lassen"
+  ],
+  "Make {0} follow the category": [
+    "اجعل {0} تتبع الفئة",
+    "{0} der Kategorie folgen lassen"
+  ],
+  "Make all follow": ["اجعل الكل يتبع", "Alle folgen lassen"],
+  "No channels in this category yet.": [
+    "لا توجد قنوات في هذه الفئة بعد.",
+    "Noch keine Kanäle in dieser Kategorie."
+  ],
+  "Note (optional)": ["ملاحظة (اختيارية)", "Notiz (optional)"],
+  "One short line about this category": [
+    "سطر قصير واحد عن هذه الفئة",
+    "Eine kurze Zeile über diese Kategorie"
+  ],
+  "Open a category's settings": [
+    "فتح إعدادات فئة",
+    "Einstellungen einer Kategorie öffnen"
+  ],
+  "Own permissions": ["صلاحيات خاصة", "Eigene Berechtigungen"],
+  "Private category": ["فئة خاصة", "Private Kategorie"],
+  "Some channels here can be seen by people outside this category": [
+    "بعض القنوات هنا يراها أشخاص من خارج هذه الفئة",
+    "Einige Kanäle hier sind für Personen außerhalb dieser Kategorie sichtbar"
+  ],
+  "The name, the note and the channels inside.": [
+    "الاسم والملاحظة والقنوات التي بداخلها.",
+    "Der Name, die Notiz und die Kanäle darin."
+  ],
+  "The server owner and whoever manages channels or permissions see every category.": [
+    "مالك السيرفر ومن يدير القنوات أو الصلاحيات يرون كل الفئات.",
+    "Der Serverbesitzer und alle, die Kanäle oder Berechtigungen verwalten, sehen jede Kategorie."
+  ],
+  "They have their own permissions: {0}. Make them follow the category in Overview.": [
+    "لها صلاحيات خاصة: {0}. اجعلها تتبع الفئة من «نظرة عامة».",
+    "Sie haben eigene Berechtigungen: {0}. Lass sie in der Übersicht der Kategorie folgen."
+  ],
+  "This category is no longer here.": [
+    "هذه الفئة لم تعد موجودة.",
+    "Diese Kategorie gibt es hier nicht mehr."
+  ],
+  "Who can see this category": [
+    "من يرى هذه الفئة",
+    "Wer diese Kategorie sieht"
+  ],
+  "Who can see this category and what they can do in it.": [
+    "من يرى هذه الفئة وما الذي يستطيع فعله فيها.",
+    "Wer diese Kategorie sieht und was darin erlaubt ist."
+  ],
+  "With the category selected in the channel list, if you manage the server.": [
+    "عند تحديد الفئة في قائمة القنوات، إن كنت تدير السيرفر.",
+    "Wenn die Kategorie in der Kanalliste ausgewählt ist und du den Server verwaltest."
+  ]
+}

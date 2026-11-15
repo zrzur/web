@@ -127,7 +127,7 @@ export function ChannelPermissionsOverview(props: { context: Channel }) {
               fallback={
                 <SettingsRow
                   icon={<Icon name="lock-simple-open" size={20} />}
-                  title={<Trans>Not synced with {current().title}</Trans>}
+                  title={<Trans>Does not follow {current().title}</Trans>}
                   description={
                     syncError() ?? (
                       <Trans>This channel uses its own permissions.</Trans>
@@ -138,7 +138,7 @@ export function ChannelPermissionsOverview(props: { context: Channel }) {
                       variant="tonal"
                       onPress={() => setConfirmSync(true)}
                     >
-                      <Trans>Sync now</Trans>
+                      <Trans>Follow category</Trans>
                     </Button>
                   )}
                 />
@@ -146,7 +146,7 @@ export function ChannelPermissionsOverview(props: { context: Channel }) {
             >
               <SettingsRow
                 icon={<Icon name="link" size={20} />}
-                title={<Trans>Synced with {current().title}</Trans>}
+                title={<Trans>Follows {current().title}</Trans>}
                 description={
                   <Trans>
                     Permissions come from the category. Changing one here stops
@@ -159,11 +159,11 @@ export function ChannelPermissionsOverview(props: { context: Channel }) {
               tone="danger"
               show={confirmSync()}
               onClose={() => setConfirmSync(false)}
-              title={<Trans>Sync with {current().title}?</Trans>}
+              title={<Trans>Follow {current().title}?</Trans>}
               actions={[
                 { text: <Trans>Cancel</Trans> },
                 {
-                  text: <Trans>Sync</Trans>,
+                  text: <Trans>Follow category</Trans>,
                   onClick: () => {
                     void sync();
                     return false;

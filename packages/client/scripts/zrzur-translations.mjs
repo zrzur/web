@@ -1470,7 +1470,8 @@ for (const locale of ["en", "ar", "de"]) {
   const baseline = execFileSync(
     "git",
     ["show", `HEAD:packages/client/${path}`],
-    { encoding: "utf8" },
+    // the catalogs are over 1 MB, the default limit of a child's output
+    { encoding: "utf8", maxBuffer: 64 * 1024 * 1024 },
   ).replace(/\r\n/g, "\n");
 
   const existing = new Set(baseline.split("\n\n").map(keyOf));

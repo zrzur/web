@@ -1,5 +1,6 @@
 import { Accessor, JSX } from "solid-js";
 
+import category from "./CategorySettings";
 import channel from "./ChannelSettings";
 import server from "./ServerSettings";
 import user from "./UserSettings";
@@ -95,4 +96,5 @@ export const SettingsConfigurations: Record<string, any> = {
   user,
   server,
   channel,
+  category,
 };

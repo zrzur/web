@@ -14609,7 +14609,7 @@ msgstr "ملاحظة"
 
 #: components/modal/modals/GiftPlus.tsx
 msgid "Note (optional)"
-msgstr "رسالة (اختياري)"
+msgstr "ملاحظة (اختيارية)"
 
 #. placeholder {0}: giver()?.displayName ?? t`a friend`
 #: components/app/interface/settings/user/subscriptions/Subscriptions.tsx
@@ -27159,3 +27159,171 @@ msgstr "زرزور، مباشرةً على <0>سطح مكتبك.</0>"
 #: components/app/interface/settings/user/appearance/AppearanceMenu.tsx
 #~ msgid "Zrzur's own look: very dark neutral panels with Zrzur Pink as the one accent."
 #~ msgstr "مظهر زرزور الخاص: لوحات داكنة جدًا بألوان محايدة، وزهري زرزور هو اللون المميز الوحيد."
+
+#: components/app/interface/settings/category/Overview.tsx
+msgid "A channel follows the category's permissions until you change permissions on the channel itself."
+msgstr "تتبع القناة صلاحيات الفئة إلى أن تغيّر الصلاحيات على القناة نفسها."
+
+#: components/app/interface/settings/CategorySettings.tsx
+msgid "Access"
+msgstr "الدخول"
+
+#: components/app/interface/settings/category/CategoryPermissionsOverview.tsx
+msgid "Administrator: sees every category"
+msgstr "مسؤول: يرى كل الفئات"
+
+#: components/app/interface/settings/category/CategoryPermissionsOverview.tsx
+msgid "Can see this category"
+msgstr "يرى هذه الفئة"
+
+#: components/app/interface/settings/category/CategoryPermissionsOverview.tsx
+msgid "Can't see this category"
+msgstr "لا يرى هذه الفئة"
+
+#: components/app/interface/settings/category/Overview.tsx
+msgid "Category info"
+msgstr "معلومات الفئة"
+
+#: components/app/interface/settings/category/Overview.tsx
+msgid "Category name"
+msgstr "اسم الفئة"
+
+#: components/app/interface/settings/category/CategoryCard.tsx
+#: components/app/interface/settings/server/channels/ChannelsSettings.tsx
+#: components/app/menus/CategoryContextMenu.tsx
+#: src/interface/navigation/channels/ServerSidebar.tsx
+msgid "Category settings"
+msgstr "إعدادات الفئة"
+
+#. placeholder {0}: hiddenCount()
+#: components/app/interface/settings/category/Overview.tsx
+msgid "Channels here that are hidden from you: {0}"
+msgstr "قنوات هنا مخفية عنك: {0}"
+
+#: components/app/interface/settings/category/Overview.tsx
+msgid "Channels in this category"
+msgstr "قنوات هذه الفئة"
+
+#: components/app/interface/settings/category/CategoryPermissionsOverview.tsx
+msgid "Channels that follow this category use these permissions."
+msgstr "القنوات التي تتبع هذه الفئة تستخدم هذه الصلاحيات."
+
+#. placeholder {0}: current().title
+#: components/app/interface/settings/channel/permissions/ChannelPermissionsOverview.tsx
+msgid "Does not follow {0}"
+msgstr "لا تتبع {0}"
+
+#. placeholder {0}: current().title
+#: components/app/interface/settings/channel/permissions/ChannelPermissionsOverview.tsx
+msgid "Follow {0}?"
+msgstr "اتباع {0}؟"
+
+#: components/app/interface/settings/category/Overview.tsx
+#: components/app/interface/settings/channel/permissions/ChannelPermissionsOverview.tsx
+msgid "Follow category"
+msgstr "اتباع الفئة"
+
+#: components/app/interface/settings/category/Overview.tsx
+msgid "Follow the category?"
+msgstr "اتباع الفئة؟"
+
+#. placeholder {0}: current().title
+#: components/app/interface/settings/channel/permissions/ChannelPermissionsOverview.tsx
+msgid "Follows {0}"
+msgstr "تتبع {0}"
+
+#: components/app/interface/settings/category/Overview.tsx
+msgid "Follows the category"
+msgstr "تتبع الفئة"
+
+#: components/app/interface/settings/category/CategoryPermissionsOverview.tsx
+msgid "Hidden from everyone except the roles you let in below. Its name stays visible to people who can see a channel inside it, and to those who manage channels or permissions or read the audit log."
+msgstr "مخفية عن الجميع ما عدا الأدوار التي تسمح لها أدناه. يبقى اسمها ظاهرًا لمن يرى قناة بداخلها، ولمن يدير القنوات أو الصلاحيات أو يقرأ سجل التدقيق."
+
+#: components/app/interface/settings/category/CategoryPermissionsOverview.tsx
+msgid "Hide this category from {role}"
+msgstr "إخفاء هذه الفئة عن {role}"
+
+#: components/app/interface/settings/channel/permissions/ChannelVisibility.tsx
+msgid "Hide this channel from {role}"
+msgstr "إخفاء هذه القناة عن {role}"
+
+#: components/app/interface/settings/CategorySettings.tsx
+msgid "It was deleted, or you can no longer see it."
+msgstr "حُذفت، أو لم يعد بإمكانك رؤيتها."
+
+#: components/modal/modals/DeleteCategory.tsx
+msgid "Its channels stay, and the same people keep seeing them. Once the category is deleted, there's no going back."
+msgstr "تبقى قنواتها، ويستمر الأشخاص أنفسهم في رؤيتها. بعد حذف الفئة لا يمكن التراجع."
+
+#: components/app/interface/settings/category/CategoryPermissionsOverview.tsx
+msgid "Let {role} see this category"
+msgstr "السماح لـ {role} برؤية هذه الفئة"
+
+#: components/app/interface/settings/channel/permissions/ChannelVisibility.tsx
+msgid "Let {role} see this channel"
+msgstr "السماح لـ {role} برؤية هذه القناة"
+
+#. placeholder {0}: channel.name
+#: components/app/interface/settings/category/Overview.tsx
+msgid "Make {0} follow the category"
+msgstr "اجعل {0} تتبع الفئة"
+
+#: components/app/interface/settings/category/Overview.tsx
+msgid "Make all follow"
+msgstr "اجعل الكل يتبع"
+
+#: components/app/interface/settings/category/Overview.tsx
+msgid "No channels in this category yet."
+msgstr "لا توجد قنوات في هذه الفئة بعد."
+
+#: components/app/interface/settings/category/Overview.tsx
+msgid "One short line about this category"
+msgstr "سطر قصير واحد عن هذه الفئة"
+
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "Open a category's settings"
+msgstr "فتح إعدادات فئة"
+
+#: components/app/interface/settings/category/Overview.tsx
+msgid "Own permissions"
+msgstr "صلاحيات خاصة"
+
+#: components/app/interface/settings/category/CategoryPermissionsOverview.tsx
+#: src/interface/navigation/channels/ServerSidebar.tsx
+msgid "Private category"
+msgstr "فئة خاصة"
+
+#: components/app/interface/settings/category/CategoryPermissionsOverview.tsx
+msgid "Some channels here can be seen by people outside this category"
+msgstr "بعض القنوات هنا يراها أشخاص من خارج هذه الفئة"
+
+#: components/app/interface/settings/CategorySettings.tsx
+msgid "The name, the note and the channels inside."
+msgstr "الاسم والملاحظة والقنوات التي بداخلها."
+
+#: components/app/interface/settings/category/CategoryPermissionsOverview.tsx
+msgid "The server owner and whoever manages channels or permissions see every category."
+msgstr "مالك السيرفر ومن يدير القنوات أو الصلاحيات يرون كل الفئات."
+
+#. placeholder {0}: stillOpen() .map((channel) => channel.name) .join(", ")
+#: components/app/interface/settings/category/CategoryPermissionsOverview.tsx
+msgid "They have their own permissions: {0}. Make them follow the category in Overview."
+msgstr "لها صلاحيات خاصة: {0}. اجعلها تتبع الفئة من «نظرة عامة»."
+
+#: components/app/interface/settings/CategorySettings.tsx
+msgid "This category is no longer here."
+msgstr "هذه الفئة لم تعد موجودة."
+
+#: components/app/interface/settings/category/CategoryPermissionsOverview.tsx
+msgid "Who can see this category"
+msgstr "من يرى هذه الفئة"
+
+#: components/app/interface/settings/CategorySettings.tsx
+msgid "Who can see this category and what they can do in it."
+msgstr "من يرى هذه الفئة وما الذي يستطيع فعله فيها."
+
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "With the category selected in the channel list, if you manage the server."
+msgstr "عند تحديد الفئة في قائمة القنوات، إن كنت تدير السيرفر."
+

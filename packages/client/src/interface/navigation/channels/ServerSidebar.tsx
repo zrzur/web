@@ -53,7 +53,9 @@ import { VoiceChannelPreview } from "@revolt/ui/components/features/voice/VoiceC
 import { createDragHandle } from "@revolt/ui/components/utils/Draggable";
 import { Symbol } from "@revolt/ui/components/utils/Symbol";
 
+import { isPrivateCategory } from "@revolt/app/interface/settings/category/category";
 import { chevron_right as MdChevronRight } from "@revolt/ui/icons/legacy";
+
 import { SidebarIcon } from "./SidebarIcon";
 
 import { RulesIcon } from "@revolt/ui/icons/RulesIcon";
@@ -640,6 +642,33 @@ function Category(
       props.channelType === "Voice" ? channel.isVoice : !channel.isVoice,
     );
 
+  /** The stored category behind this group (the built-in groups have none) */
+  const stored = createMemo(() =>
+    props.channelType || props.category.id === "default"
+      ? undefined
+      : (props.server.categories?.find((c) => c.id === props.category.id) as
+          | {
+              description?: string | null;
+              default_permissions?: { a: number; d: number } | null;
+            }
+          | undefined),
+  );
+  const isPrivate = () => {
+    const category = stored();
+    return (
+      !!category && isPrivateCategory(props.server.defaultPermissions, category)
+    );
+  };
+  const canOpenSettings = () =>
+    !!stored() &&
+    props.server.orPermission("ManageChannel", "ManagePermissions");
+  const openSettings = () =>
+    openModal({
+      type: "settings",
+      config: "category",
+      context: { server: props.server, categoryId: props.category.id },
+    });
+
   const channels = createMemo(() =>
     props.category.channels.filter(
       (channel) =>
@@ -662,15 +691,44 @@ function Category(
         }
       >
         <SectionHeader>
-          <div use:floating={props.menuGenerator(props.category)}>
+          <div
+            use:floating={props.menuGenerator(props.category)}
+            // on the wrapper: the drag handle owns the button's own key handler
+            onKeyDown={(event) => {
+              // Ctrl+Shift+E on a category: its settings (listed in Ctrl+/)
+              if (
+                canOpenSettings() &&
+                (event.ctrlKey || event.metaKey) &&
+                event.shiftKey &&
+                !event.altKey &&
+                event.code === "KeyE"
+              ) {
+                event.preventDefault();
+                openSettings();
+              }
+            }}
+          >
             <CategoryBase
               type="button"
               aria-expanded={isOpen()}
               open={isOpen()}
               onClick={toggleCategory}
+              title={stored()?.description ?? undefined}
+              aria-keyshortcuts={
+                canOpenSettings() ? "Control+Shift+E" : undefined
+              }
               {...createDragHandle(props.dragDisabled, props.setDragDisabled)}
             >
               <MdChevronRight {...iconSize(12)} />
+              <Show when={isPrivate()}>
+                <span
+                  role="img"
+                  aria-label={t`Private category`}
+                  style={{ display: "inline-flex" }}
+                >
+                  <SidebarIcon name="lock" size={12} />
+                </span>
+              </Show>
               <span>
                 {props.channelType === "Text" ? (
                   <Trans>Text channels</Trans>
@@ -682,6 +740,17 @@ function Category(
               </span>
             </CategoryBase>
           </div>
+          <Show when={canOpenSettings()}>
+            <ToolButton
+              type="button"
+              data-testid={`category-gear-${props.category.id}`}
+              aria-label={t`Category settings`}
+              title={t`Category settings`}
+              onClick={openSettings}
+            >
+              <SidebarIcon name="settings" size={16} />
+            </ToolButton>
+          </Show>
           <Show when={!props.noOrdering()}>
             <ToolButton
               type="button"

@@ -2,6 +2,17 @@
 
 ## Unreleased
 
+### Category settings (2026-11-15)
+
+* **A category has its own settings**, like a channel: **Overview** (name, a one-line note shown when you point at the category, and the channels inside with whether each follows the category) and **Permissions** (who can see it, then every permission for everyone and per role, in the editor channels use).
+* **Private category:** one switch hides the category from everyone except the roles you let in. People outside it no longer see its name in the channel list; a lock marks it for people who can.
+* **Where it opens:** the gear on the category in the channel list, the category's menu, **Server settings › Channels**, and **Ctrl+Shift+E** with the category selected (listed in Ctrl+/).
+* Channels with their own permissions can be made to follow the category again, one by one or all at once. A private category says which of its channels are still open to everyone.
+* Deleting a category says what happens: its channels stay and the same people keep seeing them.
+* One wording: a channel "follows" its category (was "synced with").
+* The separate "Rename category" and "Edit permissions" dialogs are gone; both live in the category's settings.
+* Fixed: `scripts/zrzur-translations.mjs` stopped with `ENOBUFS` once a catalog passed 1 MB.
+
 ### Creator Studio, rebuilt (2026-11-15)
 
 * **Studio home** (`/designs/studio`): a small head instead of the big title, one **New design** button, a strip of numbers (published, in review, drafts, people wearing your designs, your design limit), what waits for you on top with the reviewer's note, a tab for every state (drafts, in review, needs you, published, withdrawn), search and a type filter, and one list.
