@@ -16,7 +16,6 @@ import { styled } from "styled-system/jsx";
 
 import { useClient, useClientLifecycle } from "@revolt/client";
 import { useModals } from "@revolt/modal";
-import { getInviteLink } from "@revolt/modal/modals/inviteLink";
 import { useLocation, useNavigate } from "@revolt/routing";
 import { Avatar } from "@revolt/ui";
 import { BadgeMark } from "@revolt/ui/components/features/profiles/badges/BadgeMark";
@@ -105,21 +104,6 @@ export function ServerPage(props: {
     props.site
       ? `${window.location.origin}/${pageSlug(item)}`
       : `${discoverUrl()}/${pageSlug(item)}`;
-  /**
-   * The link people share. A server with a custom link has an invite link
-   * of its own (zrzur.cc/<name>): that one joins the server, so it is the one
-   * shown and copied. Without it the only public address is this page.
-   */
-  const shareLink = (item: Listing) =>
-    item.link
-      ? {
-          invite: true,
-          url: getInviteLink(item.link, {
-            href: (path) => `${appUrl()}${path}`,
-          }),
-        }
-      : { invite: false, url: pageUrl(item) };
-  const bare = (url: string) => url.replace(/^https?:\/\//, "");
 
   // old or ID links move to the custom link, keeping ?join
   createEffect(() => {
@@ -140,7 +124,6 @@ export function ServerPage(props: {
   });
 
   const [join, setJoin] = createSignal<JoinState>("idle");
-  const [copied, setCopied] = createSignal(false);
   const isMember = () => !!server() && client().servers.has(server()!.id);
 
   const openServer = (id: string) =>
@@ -192,15 +175,6 @@ export function ServerPage(props: {
       },
     ),
   );
-
-  const copyLink = (item: Listing) =>
-    navigator.clipboard
-      ?.writeText(shareLink(item).url)
-      .then(() => {
-        setCopied(true);
-        setTimeout(() => setCopied(false), 2000);
-      })
-      .catch(() => undefined);
 
   const report = (item: Listing) =>
     isLoggedIn()
@@ -356,7 +330,7 @@ export function ServerPage(props: {
                   </Show>
                 </Main>
 
-                {/* one frame: the way in, the link, the facts */}
+                {/* one frame: the way in, the facts, report */}
                 <Aside>
                   <SidePart
                     data-action
@@ -446,37 +420,6 @@ export function ServerPage(props: {
                         </Trans>
                       </small>
                     </Show>
-                  </SidePart>
-
-                  <SidePart data-share-link>
-                    <h2 data-link-label>
-                      <Show
-                        when={shareLink(item()).invite}
-                        fallback={<Trans>Discover page</Trans>}
-                      >
-                        <Trans>Invite link</Trans>
-                      </Show>
-                    </h2>
-                    <LinkField>
-                      <span dir="ltr" data-link-value>
-                        {bare(shareLink(item()).url)}
-                      </span>
-                      <CopyButton
-                        type="button"
-                        data-copy-link
-                        aria-label={
-                          shareLink(item()).invite
-                            ? t`Copy invite link`
-                            : t`Copy page link`
-                        }
-                        onClick={() => copyLink(item())}
-                      >
-                        <Icon name={copied() ? "check" : "copy"} size={16} />
-                        <Show when={copied()} fallback={<Trans>Copy</Trans>}>
-                          <Trans>Copied</Trans>
-                        </Show>
-                      </CopyButton>
-                    </LinkField>
                   </SidePart>
 
                   <SidePart data-facts>
@@ -778,61 +721,6 @@ const State = styled("p", {
     "& strong": { fontWeight: 600, color: "var(--z-fg-primary)" },
     "&[data-tone='wait'] strong": { color: "var(--z-warning)" },
     "&[data-tone='closed'] strong": { color: "var(--z-danger)" },
-  },
-});
-
-/** A value people copy: the whole address, the button inside the field */
-const LinkField = styled("div", {
-  base: {
-    minHeight: "44px",
-    paddingBlock: "4px",
-    paddingInline: "12px 4px",
-    borderRadius: "10px",
-    border: "1px solid var(--dz-edge)",
-    background: "var(--dz-page)",
-    display: "flex",
-    alignItems: "center",
-    gap: "8px",
-    "& > span": {
-      flex: 1,
-      minWidth: 0,
-      // as many lines as it needs: never cut
-      overflowWrap: "anywhere",
-      textAlign: "start",
-      fontFamily: "'IBM Plex Sans', sans-serif",
-      fontSize: "14px",
-      lineHeight: "20px",
-      fontWeight: 600,
-      userSelect: "all",
-    },
-  },
-});
-
-const CopyButton = styled("button", {
-  base: {
-    flexShrink: 0,
-    minHeight: "36px",
-    paddingInline: "12px",
-    borderRadius: "8px",
-    border: 0,
-    background: "var(--z-nav-selected)",
-    color: "var(--z-fg-primary)",
-    font: "inherit",
-    fontSize: "13px",
-    fontWeight: 600,
-    whiteSpace: "nowrap",
-    display: "inline-flex",
-    alignItems: "center",
-    gap: "6px",
-    cursor: "pointer",
-    "--z-icon-color": "currentColor",
-    transition: "background-color 120ms cubic-bezier(0.2, 0, 0, 1)",
-    _hover: { background: "var(--z-border-strong)" },
-    _focusVisible: {
-      outline: "2px solid var(--z-focus)",
-      outlineOffset: "2px",
-    },
-    "@media (max-width: 900px)": { minHeight: "44px" },
   },
 });
 

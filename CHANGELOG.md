@@ -75,10 +75,11 @@
 ### Discover server page (2026-11-13)
 
 * **A side column holds the facts.** On a server's Discover page one frame beside the text holds the Join button with a line saying who may join, the invite link in a field with Copy inside it, and "Server details": online now, members, category, language and the tags. The row of fact boxes in the middle of the page is gone. On phones the frame comes right after the description. A bot's dialog shows its facts and tags the same way, above what the bot may do.
+* **No link box (2026-11-15).** The field with the server's link and its Copy button is gone from the side column of a server's Discover page. The column holds the Join button, "Server details" with the tags, and "Report server".
 * **Less on the page (2026-11-14).** The breadcrumb bar over the banner and the "Before you join" note with its "Discover rules" link are gone from a server's page. The main column holds the name, the description and similar communities; everything else is in the side column.
 * **No report flag on cards (2026-11-14).** Discover cards end with the member count and one button. Reporting stays where the listing is read: "Report server" at the foot of the side column on a server's page, "Report" in a bot's dialog. Signed in, it opens the report dialog; without an account it leads to the public report form.
 * **Descriptions are formatted.** A server's or bot's description on its Discover page shows bold text, lists and links the way the server info panel does (it showed the raw `**` and `-` marks). Cards, link previews and search results show the same text as plain words.
-* **The link shown is the invite link.** A server with a custom link shows and copies that link (`zrzur.cc/<name>`), labelled "Invite link"; it showed the Discover page's own address under the bare word "Link". A server without one shows "Discover page". The address is never cut.
+* **The link shown is the invite link.** A server with a custom link shows and copies that link (`zrzur.cc/<name>`), labelled "Invite link"; it showed the Discover page's own address under the bare word "Link". A server without one shows "Discover page". The address is never cut. (Removed again on 2026-11-15, see above.)
 * **Members** see only "Go to server"; the "You're a member" notice is gone.
 * **The official server** carries the official mark on its card, in the dialog and beside its name on the page (the card drew the verified seal).
 
