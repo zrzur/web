@@ -375,6 +375,11 @@ msgstr "{0} emoji slots"
 msgid "{0} files exceed the maximum size limit of {maxSizeFormatted} and were not uploaded."
 msgstr "{0} files exceed the maximum size limit of {maxSizeFormatted} and were not uploaded."
 
+#. placeholder {0}: number(props.connection.followers)
+#: components/ui/components/features/profiles/ProfileConnections.tsx
+msgid "{0} followers"
+msgstr "{0} followers"
+
 #. placeholder {0}: tierName(pending()!.kind)
 #. placeholder {1}: s().days
 #. placeholder {2}: price(pending()!.price)
@@ -693,6 +698,11 @@ msgstr "{0} renamed the channel"
 msgid "{0} reporters"
 msgstr "{0} reporters"
 
+#. placeholder {0}: number(props.connection.public_repos)
+#: components/ui/components/features/profiles/ProfileConnections.tsx
+msgid "{0} repositories"
+msgstr "{0} repositories"
+
 #. placeholder {0}: e().rateLimit.limit
 #. placeholder {1}: e().rateLimit.windowSeconds
 #: src/interface/developers/docs/EndpointReference.tsx
@@ -718,7 +728,6 @@ msgid "{0} selected"
 msgstr "{0} selected"
 
 #. placeholder {0}: number(repo.stars)
-#. placeholder {0}: props.number(props.repo.stars)
 #: components/app/interface/settings/user/connections/ServiceCards.tsx
 #: components/ui/components/features/profiles/ProfileConnections.tsx
 msgid "{0} stars"
@@ -2082,6 +2091,10 @@ msgstr "Advanced"
 msgid "Advanced: JSON import and export"
 msgstr "Advanced: JSON import and export"
 
+#: components/ui/components/features/profiles/ProfileConnections.tsx
+msgid "Affiliate"
+msgstr "Affiliate"
+
 #: components/ui/components/features/profiles/plateNames.ts
 msgid "Afghanistan"
 msgstr "Afghanistan"
@@ -3282,8 +3295,8 @@ msgid "Battle.net lets us keep it for 30 days. Confirm on Battle.net before then
 msgstr "Battle.net lets us keep it for 30 days. Confirm on Battle.net before then to keep it; otherwise we delete it. We keep no Battle.net sign-in."
 
 #: components/ui/components/features/profiles/ProfileConnections.tsx
-msgid "BattleTag from Battle.net"
-msgstr "BattleTag from Battle.net"
+#~ msgid "BattleTag from Battle.net"
+#~ msgstr "BattleTag from Battle.net"
 
 #: components/app/interface/settings/user/connections/ServiceCards.tsx
 msgid "BattleTag from Battle.net. Disconnecting deletes it at once."
@@ -5550,7 +5563,6 @@ msgstr "Copied!"
 #: components/app/interface/settings/server/webhooks/ServerWebhooks.tsx
 #: components/app/interface/settings/user/bots/ViewBot.tsx
 #: components/modal/modals/CreateInvite.tsx
-#: components/ui/components/features/profiles/ProfileConnections.tsx
 #: src/interface/Developers.tsx
 #: src/interface/developers/docs/CodeBlock.tsx
 msgid "Copy"
@@ -8768,6 +8780,10 @@ msgstr "From {0} Wings"
 msgid "From above"
 msgstr "From above"
 
+#: components/ui/components/features/profiles/ProfileConnections.tsx
+msgid "From Battle.net"
+msgstr "From Battle.net"
+
 #: components/app/interface/settings/user/appearance/AnimationSettings.tsx
 msgid "From below"
 msgstr "From below"
@@ -8779,6 +8795,10 @@ msgstr "From below"
 #: src/interface/Discover.tsx
 #~ msgid "From gaming to study groups, there's a place for everyone."
 #~ msgstr "From gaming to study groups, there's a place for everyone."
+
+#: components/ui/components/features/profiles/ProfileConnections.tsx
+msgid "From GitHub"
+msgstr "From GitHub"
 
 #: components/ui/components/features/profiles/ProfileGames.tsx
 msgid "From Steam"
@@ -8796,6 +8816,10 @@ msgstr "From the end"
 #: components/app/interface/settings/user/appearance/AnimationSettings.tsx
 msgid "From the start"
 msgstr "From the start"
+
+#: components/ui/components/features/profiles/ProfileConnections.tsx
+msgid "From Twitch"
+msgstr "From Twitch"
 
 #: components/app/interface/settings/user/appearance/AppearanceMenu.tsx
 msgid "Frosted menus and overlays. Turn off on older computers."
@@ -10892,6 +10916,10 @@ msgstr "Laos"
 #: components/app/interface/settings/user/bots/CommandManager.tsx
 msgid "Largest value"
 msgstr "Largest value"
+
+#: components/ui/components/features/profiles/ProfileConnections.tsx
+msgid "Last stream"
+msgstr "Last stream"
 
 #: components/app/interface/settings/user/Sync.tsx
 msgid "Last sync <0/>"
@@ -14828,6 +14856,11 @@ msgstr "Open link"
 #~ msgid "Open My applications"
 #~ msgstr "Open My applications"
 
+#. placeholder {0}: service()
+#: components/ui/components/features/profiles/ProfileConnections.tsx
+msgid "Open on {0}"
+msgstr "Open on {0}"
+
 #: components/modal/modals/BillingCheckoutStatus.tsx
 msgid "Open payment page"
 msgstr "Open payment page"
@@ -15209,6 +15242,10 @@ msgstr "Partly refunded"
 #: components/app/interface/settings/user/Language.tsx
 msgid "Partly translated"
 msgstr "Partly translated"
+
+#: components/ui/components/features/profiles/ProfileConnections.tsx
+msgid "Partner"
+msgstr "Partner"
 
 #: components/app/interface/settings/user/profile/CreatorStudio.tsx
 #: components/app/interface/settings/user/profile/ReviewQueue.tsx
@@ -19222,6 +19259,7 @@ msgstr "Show accounts you have on other services on your profile. You choose wha
 #~ msgstr "Show admin panel shortcuts in context menus"
 
 #. placeholder {0}: list().length
+#: components/ui/components/features/profiles/ProfileConnections.tsx
 #: components/ui/components/features/profiles/ProfileGames.tsx
 msgid "Show all {0}"
 msgstr "Show all {0}"
@@ -19248,6 +19286,7 @@ msgstr "Show keyboard shortcuts"
 
 #: components/ui/components/features/messaging/elements/TextEmbed.tsx
 #: components/ui/components/features/profiles/ProfileBio.tsx
+#: components/ui/components/features/profiles/ProfileConnections.tsx
 #: components/ui/components/features/profiles/ProfileGames.tsx
 #: components/ui/components/features/profiles/ProfileTiles.tsx
 #: components/ui/components/features/voice/soundboard/SoundboardPicker.tsx
@@ -23902,6 +23941,7 @@ msgid "Vietnam"
 msgstr "Vietnam"
 
 #: components/app/interface/settings/user/Account.tsx
+#: components/ui/components/features/profiles/ProfileConnections.tsx
 #: components/ui/components/features/profiles/ProfileGames.tsx
 msgid "View"
 msgstr "View"
@@ -23936,6 +23976,11 @@ msgstr "View currently active bug reports here."
 #: components/app/menus/UserContextMenu.tsx
 msgid "View full profile"
 msgstr "View full profile"
+
+#. placeholder {0}: service()
+#: components/ui/components/features/profiles/ProfileConnections.tsx
+msgid "View on {0}"
+msgstr "View on {0}"
 
 #: components/app/interface/settings/shared/Discoverable.tsx
 msgid "View on Discover"
@@ -25815,8 +25860,12 @@ msgid "Your friends list is empty"
 msgstr "Your friends list is empty"
 
 #: components/app/interface/settings/user/connections/ServiceCards.tsx
-msgid "your GitHub username and link, and up to 12 of your most starred own public repositories with their description, language and stars, and keep them in the EU."
-msgstr "your GitHub username and link, and up to 12 of your most starred own public repositories with their description, language and stars, and keep them in the EU."
+#~ msgid "your GitHub username and link, and up to 12 of your most starred own public repositories with their description, language and stars, and keep them in the EU."
+#~ msgstr "your GitHub username and link, and up to 12 of your most starred own public repositories with their description, language and stars, and keep them in the EU."
+
+#: components/app/interface/settings/user/connections/ServiceCards.tsx
+msgid "your GitHub username, name, picture, bio and link, your follower and repository counts, and up to 12 of your most starred own public repositories with their description, language and stars, and keep them in the EU."
+msgstr "your GitHub username, name, picture, bio and link, your follower and repository counts, and up to 12 of your most starred own public repositories with their description, language and stars, and keep them in the EU."
 
 #: components/app/menus/ServerContextMenu.tsx
 msgid "Your interests"
@@ -26017,8 +26066,12 @@ msgid "Your tickets couldn't be loaded. Try again later."
 msgstr "Your tickets couldn't be loaded. Try again later."
 
 #: components/app/interface/settings/user/connections/ServiceCards.tsx
-msgid "your Twitch name and channel link, and whether you are live now with the stream title, and keep them in the EU."
-msgstr "your Twitch name and channel link, and whether you are live now with the stream title, and keep them in the EU."
+#~ msgid "your Twitch name and channel link, and whether you are live now with the stream title, and keep them in the EU."
+#~ msgstr "your Twitch name and channel link, and whether you are live now with the stream title, and keep them in the EU."
+
+#: components/app/interface/settings/user/connections/ServiceCards.tsx
+msgid "your Twitch name, picture, bio and channel link, whether you are a partner or affiliate, the category of your last stream, and whether you are live now with the stream title, and keep them in the EU."
+msgstr "your Twitch name, picture, bio and channel link, whether you are a partner or affiliate, the category of your last stream, and whether you are live now with the stream title, and keep them in the EU."
 
 #: components/i18n/errors.tsx
 msgid "Your user has already been created? Try logging in again or refreshing the app."

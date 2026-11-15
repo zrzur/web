@@ -84,11 +84,15 @@ const Tabs = styled("div", {
     gap: "8px",
     minWidth: 0,
 
-    // the open tab: ink on the surface, turned round
-    "& [aria-selected=true]": {
-      borderColor: "transparent",
-      background: "var(--profile-ink, var(--z-fg-primary))",
-      color: "var(--profile-ring, var(--z-bg-floating))",
-    },
+    // the open tab: ink on the surface, turned round. Hover and press must
+    // not take it back: a tapped tab keeps :hover on phones, and the chip's
+    // hover tint under the turned-round text read as disabled
+    "& [role=tab][aria-selected=true], & [role=tab][aria-selected=true]:hover, & [role=tab][aria-selected=true]:active":
+      {
+        borderColor: "transparent",
+        background: "var(--profile-ink, var(--z-fg-primary))",
+        color: "var(--profile-ring, var(--z-bg-floating))",
+        opacity: 1,
+      },
   },
 });

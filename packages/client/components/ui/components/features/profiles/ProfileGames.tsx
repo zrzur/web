@@ -378,3 +378,22 @@ const Strip = styled("ul", {
     },
   },
 });
+
+/**
+ * The Games panel's pieces, shared by the other Interests tabs (Twitch,
+ * GitHub, Battle.net) so every tab has the same header, rows and toggles.
+ */
+export const panelParts = {
+  Plain,
+  Head,
+  HeadText,
+  Name,
+  NameLink,
+  Facts,
+  List,
+  Hours,
+  Toggles,
+  More,
+  keep,
+  rowName: gameName,
+};

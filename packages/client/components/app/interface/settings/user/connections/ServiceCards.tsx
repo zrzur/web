@@ -89,15 +89,17 @@ function WhatWeCopy(props: { service: ServiceId }) {
     <Switch>
       <Match when={props.service === "twitch"}>
         <Trans>
-          your Twitch name and channel link, and whether you are live now with
-          the stream title, and keep them in the EU.
+          your Twitch name, picture, bio and channel link, whether you are a
+          partner or affiliate, the category of your last stream, and whether
+          you are live now with the stream title, and keep them in the EU.
         </Trans>
       </Match>
       <Match when={props.service === "github"}>
         <Trans>
-          your GitHub username and link, and up to 12 of your most starred own
-          public repositories with their description, language and stars, and
-          keep them in the EU.
+          your GitHub username, name, picture, bio and link, your follower and
+          repository counts, and up to 12 of your most starred own public
+          repositories with their description, language and stars, and keep
+          them in the EU.
         </Trans>
       </Match>
       <Match when={props.service === "battlenet"}>
