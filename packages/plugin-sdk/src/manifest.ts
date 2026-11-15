@@ -440,6 +440,8 @@ export const RESERVED_KEYS = [
   "Ctrl+Shift+9",
   // Zrzur: streamer mode
   "Ctrl+Shift+L",
+  // Zrzur: the soundboard in a call
+  "Ctrl+Shift+6",
 ];
 
 /** Reserved for Zrzur's own plugins */

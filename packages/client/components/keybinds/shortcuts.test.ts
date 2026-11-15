@@ -20,6 +20,25 @@ const key = (code: string, mods: Partial<KeyboardEvent> = {}) => ({
 });
 
 describe("matchGlobalShortcut", () => {
+  it("opens the soundboard with Ctrl+Shift+6, Cmd+Ctrl+S on a Mac", () => {
+    expect(
+      matchGlobalShortcut(
+        key("Digit6", { ctrlKey: true, shiftKey: true }),
+        false,
+      ),
+    ).toBe("toggle_soundboard");
+    expect(
+      matchGlobalShortcut(key("KeyS", { metaKey: true, ctrlKey: true }), true),
+    ).toBe("toggle_soundboard");
+    // Cmd+Shift+6 is the Mac's own screenshot key
+    expect(
+      matchGlobalShortcut(
+        key("Digit6", { metaKey: true, shiftKey: true }),
+        true,
+      ),
+    ).toBeUndefined();
+  });
+
   it("finds mute, deafen and the shortcuts list with Ctrl", () => {
     expect(
       matchGlobalShortcut(

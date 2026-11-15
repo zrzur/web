@@ -78,6 +78,7 @@ export function KeybindsSettings() {
     chat_mark_server_as_read: () => t`Mark the server as read`,
     open_events: () => t`Open the server's events`,
     toggle_streamer: () => t`Streamer mode on or off`,
+    toggle_soundboard: () => t`Open or close the soundboard`,
     open_shortcuts: () => t`Show keyboard shortcuts`,
   };
 
@@ -107,6 +108,11 @@ export function KeybindsSettings() {
           id: "toggle_deafen",
           title: <Trans>Deafen or undeafen</Trans>,
           description: <Trans>During a call.</Trans>,
+        },
+        {
+          id: "toggle_soundboard",
+          title: <Trans>Open or close the soundboard</Trans>,
+          description: <Trans>During a server call.</Trans>,
         },
         // desktop app: the binds that work in games
         ...(gameKeys
@@ -323,8 +329,8 @@ export function KeybindsSettings() {
             }
           >
             <Trans>
-              Hold one key to talk instead of an open microphone. In the
-              desktop app it works in games and other apps too.
+              Hold one key to talk instead of an open microphone. In the desktop
+              app it works in games and other apps too.
             </Trans>
           </Show>
         }

@@ -6,7 +6,6 @@ import {
   createEffect,
   createMemo,
   createSignal,
-  lazy,
   on,
   onCleanup,
   onMount,
@@ -37,6 +36,8 @@ import {
   soundboardOpen,
 } from "@revolt/ui/components/features/voice/soundboard/soundboardOpen";
 import { Icon } from "@revolt/ui/icons/Icon";
+import SoundsUnavailable from "@revolt/ui/components/features/voice/soundboard/SoundsUnavailable";
+import { lazyRetry } from "@revolt/ui/components/utils/lazyRetry";
 
 /**
  * Account / voice control panel: a card floating at the bottom of the left
@@ -464,10 +465,12 @@ function VoiceSection() {
   );
 }
 
-// the sounds load with the first open
-const SoundboardPicker = lazy(
+// the sounds load with the first open; a failed load is tried again and
+// never reloads the page during the call
+const SoundboardPicker = lazyRetry(
   () =>
     import("@revolt/ui/components/features/voice/soundboard/SoundboardPicker"),
+  SoundsUnavailable,
 );
 
 const SoundboardAbove = styled("div", {

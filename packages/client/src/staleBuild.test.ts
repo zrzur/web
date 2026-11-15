@@ -3,6 +3,7 @@ import { describe, expect, it, vi } from "vitest";
 import {
   STALE_RELOAD_GAP_MS,
   STALE_RELOAD_KEY,
+  holdStaleReload,
   shouldReloadForStaleBuild,
   watchForStaleBuild,
 } from "./staleBuild";
@@ -42,6 +43,28 @@ describe("stale build after an update", () => {
 
     // a second failure soon after is a real problem: no reload loop
     listeners["vite:preloadError"]({ preventDefault: vi.fn() } as never);
+    expect(reload).toHaveBeenCalledOnce();
+  });
+
+  it("never reloads while a call holds it, and again after", () => {
+    const listeners: Record<string, (event: Event) => void> = {};
+    const reload = vi.fn();
+    const fake = {
+      addEventListener: (name: string, fn: (event: Event) => void) => {
+        listeners[name] = fn;
+      },
+      sessionStorage: { getItem: () => null, setItem: () => undefined },
+      location: { reload },
+    } as unknown as Window;
+    watchForStaleBuild(fake);
+    const release = holdStaleReload();
+    const event = { preventDefault: vi.fn() } as unknown as Event;
+    listeners["vite:preloadError"](event);
+    expect(reload).not.toHaveBeenCalled();
+    // the failure reaches the part that asked for the file
+    expect(event.preventDefault).not.toHaveBeenCalled();
+    release();
+    listeners["vite:preloadError"](event);
     expect(reload).toHaveBeenCalledOnce();
   });
 });
