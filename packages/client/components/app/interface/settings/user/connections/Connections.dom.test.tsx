@@ -86,7 +86,7 @@ const api = vi.hoisted(() => ({
 }));
 vi.mock("./connectionsApi", () => ({
   connectionsApi: api,
-  STEAM_CONSENT_VERSION: 2,
+  STEAM_CONSENT_VERSION: 3,
 }));
 
 import { Connections } from "./Connections";
@@ -193,7 +193,16 @@ describe("Connections", () => {
 
     const go = button("Continue to Steam")!;
     expect(go.disabled).toBe(true);
-    expect(text()).toContain("What you play can say something");
+    // the US transfer and what the copy may reveal, before the box
+    expect(text()).toContain(
+      "Steam is a US company: what we send it and read from it goes to the United States, where your data may be less protected than in the EU (for example, US authorities may be able to access it).",
+    );
+    expect(text()).toContain(
+      "What you play or post there can say something about your beliefs, health or sexuality.",
+    );
+    expect(document.querySelector("label")!.textContent).toBe(
+      "I agree that Zrzur copies this and shows it on my profile, including anything it may reveal about me, and exchanges this data with Steam in the United States.",
+    );
     expect(api.start).not.toHaveBeenCalled();
 
     const box = document.querySelector<HTMLInputElement>(
@@ -310,23 +319,61 @@ describe("Connections", () => {
       steam: { available: true, account: linked({ consent_current: false }) },
     });
     api.edit.mockImplementation(async (_c, change) =>
-      linked({ consent_current: change.consent === 2 }),
+      linked({ consent_current: change.consent === 3 }),
     );
     mount();
     await flush();
 
-    expect(text()).toContain("New on your Steam card");
+    expect(text()).toContain("Updated consent for Steam");
     const save = button("Save")!;
     expect(save.disabled).toBe(true);
     [...document.querySelectorAll<HTMLInputElement>("input[type=checkbox]")]
-      .find((box) => box.closest("label")?.textContent?.includes("Show these"))!
+      .find((box) => box.closest("label")?.textContent?.includes("in the United States"))!
       .click();
     await flush();
     expect(save.disabled).toBe(false);
     save.click();
     await flush();
-    expect(api.edit).toHaveBeenCalledWith(expect.anything(), { consent: 2 });
-    expect(text()).not.toContain("New on your Steam card");
+    expect(api.edit).toHaveBeenCalledWith(expect.anything(), { consent: 3 });
+    expect(text()).not.toContain("Updated consent for Steam");
+  });
+
+  it("the re-consent card names the US transfer", async () => {
+    api.list.mockResolvedValue({
+      steam: { available: true, account: linked({ consent_current: false }) },
+    });
+    mount();
+    await flush();
+    expect(text()).toContain("Steam is a US company");
+    expect(text()).toContain("beliefs, health or sexuality");
+    expect(text()).toContain("Until you agree, Refresh stays off");
+  });
+
+  it("Refresh before agreeing shows the new text instead of reading Steam", async () => {
+    api.list.mockResolvedValue({
+      steam: { available: true, account: linked({ consent_current: false }) },
+    });
+    mount();
+    await flush();
+    button("Keep it as it is")!.click();
+    await flush();
+    expect(text()).not.toContain("Updated consent for Steam");
+
+    button("Refresh")!.click();
+    await flush();
+    expect(api.refresh).not.toHaveBeenCalled();
+    expect(text()).toContain("Updated consent for Steam");
+  });
+
+  it("Refresh reads Steam once agreed", async () => {
+    api.list.mockResolvedValue({ steam: { available: true, account: linked() } });
+    api.refresh.mockResolvedValue(linked());
+    mount();
+    await flush();
+    expect(text()).not.toContain("Updated consent for Steam");
+    button("Refresh")!.click();
+    await flush();
+    expect(api.refresh).toHaveBeenCalledTimes(1);
   });
 
   it("Keep it as it is changes nothing", async () => {
@@ -337,7 +384,7 @@ describe("Connections", () => {
     await flush();
     button("Keep it as it is")!.click();
     await flush();
-    expect(text()).not.toContain("New on your Steam card");
+    expect(text()).not.toContain("Updated consent for Steam");
     expect(api.edit).not.toHaveBeenCalled();
   });
 

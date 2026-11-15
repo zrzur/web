@@ -25,11 +25,13 @@ import { Icon } from "@revolt/ui/icons/Icon";
 import type { IconName } from "@revolt/ui/icons/Icon";
 
 import {
+  LINKED_CONSENT_VERSION,
   MAX_SHOWN_REPOS,
   type ServiceAccount,
   type ServiceConnection,
   type ServiceId,
   daysLeft,
+  needsConsent,
   serviceConnectionsApi,
   toggleRepo,
 } from "./serviceConnectionsApi";
@@ -80,6 +82,93 @@ export function ServiceCards(props: {
         </Show>
       )}
     </For>
+  );
+}
+
+/**
+ * The US transfer, said before the box is ticked (GDPR Art. 49(1)(a)): the
+ * company, the country and the risk. GitHub is under the EU–US Data
+ * Privacy Framework and leaves it out.
+ */
+export function UsTransfer(props: { name: string }) {
+  // a plain name keeps the `{name}` placeholder in the catalogs
+  const name = props.name;
+  return (
+    <Trans>
+      {name} is a US company: what we send it and read from it goes to the
+      United States, where your data may be less protected than in the EU (for
+      example, US authorities may be able to access it).
+    </Trans>
+  );
+}
+
+/** What the copy may reveal (GDPR Art. 9(2)(a)), for every service */
+export function MayReveal() {
+  return (
+    <Trans>
+      What you play or post there can say something about your beliefs, health
+      or sexuality.
+    </Trans>
+  );
+}
+
+/** The box the person ticks: the copy, what it may reveal, the transfer */
+export function ConsentLabel(props: { name: string }) {
+  const name = props.name;
+  return (
+    <Trans>
+      I agree that Zrzur copies this and shows it on my profile, including
+      anything it may reveal about me, and exchanges this data with {name} in
+      the United States.
+    </Trans>
+  );
+}
+
+/** "Keep in mind" for Twitch, GitHub and Battle.net */
+function KeepInMind(props: { service: ServiceId }) {
+  const name = () => NAMES[props.service];
+  return (
+    <p>
+      <strong>
+        <Trans>Keep in mind:</Trans>
+      </strong>{" "}
+      <Trans>This ties your {name()} account to your Zrzur account.</Trans>{" "}
+      <Show when={props.service !== "github"}>
+        <UsTransfer name={name()} />{" "}
+      </Show>
+      <MayReveal />{" "}
+      <PolicyLink href={PRIVACY_URL} target="_blank" rel="noopener">
+        <Trans>Privacy Policy: linked accounts</Trans>
+      </PolicyLink>
+    </p>
+  );
+}
+
+/** Why an existing link is asked again, and what waits until then */
+function ConsentAgainLine(props: { service: ServiceId }) {
+  return (
+    <Switch>
+      <Match when={props.service === "twitch"}>
+        <Trans>
+          We have updated what you agree to when you link Twitch: it now names
+          where your data goes. Until you agree, your channel does not show on
+          your profile and we do not ask Twitch about it.
+        </Trans>
+      </Match>
+      <Match when={props.service === "github"}>
+        <Trans>
+          We have updated what you agree to when you link GitHub: it now names
+          where your data goes. Until you agree, Refresh stays off.
+        </Trans>
+      </Match>
+      <Match when={props.service === "battlenet"}>
+        <Trans>
+          We have updated what you agree to when you link Battle.net: it now
+          names where your data goes. You agree to it the next time you confirm
+          on Battle.net.
+        </Trans>
+      </Match>
+    </Switch>
   );
 }
 
@@ -246,25 +335,12 @@ function ServiceConnect(props: { service: ServiceId; available: boolean }) {
               <HowItUpdates service={props.service} />{" "}
               <Trans>Disconnecting deletes everything we copied.</Trans>
             </p>
-            <p>
-              <strong>
-                <Trans>Keep in mind:</Trans>
-              </strong>{" "}
-              <Trans>
-                This ties your {name()} account to your Zrzur account.
-              </Trans>{" "}
-              <PolicyLink href={PRIVACY_URL} target="_blank" rel="noopener">
-                <Trans>Privacy Policy: linked accounts</Trans>
-              </PolicyLink>
-            </p>
+            <KeepInMind service={props.service} />
             <Checkbox
               checked={agreed()}
               onChange={(event) => setAgreed(event.currentTarget.checked)}
             >
-              <Trans>
-                I want Zrzur to copy this and show it on my profile, including
-                anything it may reveal about me.
-              </Trans>
+              <ConsentLabel name={name()} />
             </Checkbox>
             <Show when={error()}>
               <ErrorLine role="alert">
@@ -306,8 +382,18 @@ function ServiceLinked(props: {
   const [busy, setBusy] = createSignal(false);
   const [error, setError] = createSignal<unknown>();
   const [now, setNow] = createSignal(Date.now());
+  const [agreeNew, setAgreeNew] = createSignal(false);
+  const [notNow, setNotNow] = createSignal(false);
   const service = () => props.account.service;
   const name = () => NAMES[service()];
+  const asking = () => needsConsent(props.account) && !notNow();
+  const titleId = () => `${service()}-reconsent-title`;
+
+  /** Refresh or Confirm before agreeing: show the new text instead */
+  const askFirst = () => {
+    setNotNow(false);
+    queueMicrotask(() => document.getElementById(titleId())?.focus());
+  };
 
   const timer = setInterval(() => setNow(Date.now()), 15_000);
   onCleanup(() => clearInterval(timer));
@@ -352,6 +438,11 @@ function ServiceLinked(props: {
     props.account.expires_at !== undefined
       ? daysLeft(props.account.expires_at, now())
       : 0;
+  /** Others see it: Twitch also waits for the consent in use */
+  const onProfile = () =>
+    props.account.shown &&
+    !expired() &&
+    !(service() === "twitch" && needsConsent(props.account));
   const shownRepos = () => props.account.shown_repos ?? [];
   const canRefresh = () => now() >= props.account.refresh_after;
 
@@ -359,9 +450,9 @@ function ServiceLinked(props: {
     <SettingsSection
       title={name()}
       aside={
-        <Status data-shown={props.account.shown && !expired()}>
+        <Status data-shown={onProfile()}>
           <Show
-            when={props.account.shown && !expired()}
+            when={onProfile()}
             fallback={<Trans>Not on your profile</Trans>}
           >
             <Trans>On your profile</Trans>
@@ -415,6 +506,72 @@ function ServiceLinked(props: {
         )}
       />
       <Body>
+        <Show when={asking()}>
+          <Consent role="group" aria-labelledby={titleId()}>
+            <ConsentTitle id={titleId()} tabIndex={-1}>
+              {t`Updated consent for ${name()}`}
+            </ConsentTitle>
+            <p>
+              <ConsentAgainLine service={service()} />
+            </p>
+            <p>
+              <strong>
+                <Trans>We will copy:</Trans>
+              </strong>{" "}
+              <WhatWeCopy service={service()} />
+            </p>
+            <p>
+              <strong>
+                <Trans>Updates:</Trans>
+              </strong>{" "}
+              <HowItUpdates service={service()} />{" "}
+              <Trans>Disconnecting deletes everything we copied.</Trans>
+            </p>
+            <KeepInMind service={service()} />
+            <Checkbox
+              checked={agreeNew()}
+              onChange={(event) => setAgreeNew(event.currentTarget.checked)}
+            >
+              <ConsentLabel name={name()} />
+            </Checkbox>
+            <Actions>
+              <Button
+                variant="outlined"
+                size="sm"
+                isDisabled={busy()}
+                onPress={() => setNotNow(true)}
+              >
+                <Trans>Not now</Trans>
+              </Button>
+              <Show
+                when={service() === "battlenet"}
+                fallback={
+                  <Button
+                    size="sm"
+                    isDisabled={busy() || !agreeNew()}
+                    onPress={() =>
+                      run(() =>
+                        serviceConnectionsApi.edit(client(), service(), {
+                          consent: LINKED_CONSENT_VERSION,
+                        }),
+                      )
+                    }
+                  >
+                    <Trans>Save</Trans>
+                  </Button>
+                }
+              >
+                <Button
+                  size="sm"
+                  isDisabled={busy() || !agreeNew()}
+                  onPress={confirmAgain}
+                >
+                  {t`Continue to ${name()}`}
+                </Button>
+              </Show>
+            </Actions>
+          </Consent>
+        </Show>
         <Show when={!props.account.shown}>
           <Note>
             <Trans>
@@ -506,7 +663,9 @@ function ServiceLinked(props: {
                 size="sm"
                 isDisabled={busy() || !canRefresh()}
                 onPress={() =>
-                  run(() => serviceConnectionsApi.refresh(client(), "github"))
+                  needsConsent(props.account)
+                    ? askFirst()
+                    : run(() => serviceConnectionsApi.refresh(client(), "github"))
                 }
               >
                 <Trans>Refresh</Trans>
@@ -517,7 +676,9 @@ function ServiceLinked(props: {
                 variant="outlined"
                 size="sm"
                 isDisabled={busy()}
-                onPress={confirmAgain}
+                onPress={() =>
+                  needsConsent(props.account) ? askFirst() : confirmAgain()
+                }
               >
                 <Trans>Confirm on Battle.net</Trans>
               </Button>

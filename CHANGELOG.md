@@ -2,6 +2,11 @@
 
 ## Unreleased
 
+### Linked accounts: the consent names the US transfer (2026-11-15)
+
+* **Consent cards** for Steam, Twitch, GitHub and Battle.net say, under "Keep in mind", that the company is in the United States and what that means for your data (GitHub leaves that sentence out; it is under the EU–US Data Privacy Framework), and that what you play or post can say something about your beliefs, health or sexuality. The box now reads "I agree that Zrzur copies this … and exchanges this data with {name} in the United States."
+* **Asked once:** a link made before shows an "Updated consent" card in Settings. Twitch stays off your profile until you agree; GitHub and Steam Refresh show the card instead of reading the service; Battle.net shows it at the next **Confirm on Battle.net**. Steam links keep what they showed before.
+
 ### Profile, redesigned (2026-11-14)
 
 * **Profile card:** 360 px wide with a close button; it ends with the message box and **View full profile**. Add friend sits on the banner's edge. About me ends at four whole lines.

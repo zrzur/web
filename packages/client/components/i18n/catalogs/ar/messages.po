@@ -26342,3 +26342,41 @@ msgstr "زرزور، مباشرةً على <0>سطح مكتبك.</0>"
 #: components/app/interface/settings/user/appearance/AppearanceMenu.tsx
 #~ msgid "Zrzur's own look: very dark neutral panels with Zrzur Pink as the one accent."
 #~ msgstr "مظهر زرزور الخاص: لوحات داكنة جدًا بألوان محايدة، وزهري زرزور هو اللون المميز الوحيد."
+
+#: components/app/interface/settings/user/connections/ServiceCards.tsx
+msgid "{name} is a US company: what we send it and read from it goes to the United States, where your data may be less protected than in the EU (for example, US authorities may be able to access it)."
+msgstr "{name} شركة أمريكية: ما نرسله إليها ونقرؤه منها يمرّ عبر الولايات المتحدة، وقد تكون حماية بياناتك هناك أضعف منها في الاتحاد الأوروبي (فقد تتمكن السلطات الأمريكية من الوصول إليها مثلًا)."
+
+#: components/app/interface/settings/user/connections/ServiceCards.tsx
+msgid "I agree that Zrzur copies this and shows it on my profile, including anything it may reveal about me, and exchanges this data with {name} in the United States."
+msgstr "أوافق على أن ينسخ زرزور هذه البيانات ويعرضها في ملفي الشخصي، بما في ذلك ما قد تكشفه عني، وأن يتبادلها مع {name} في الولايات المتحدة."
+
+#: components/app/interface/settings/user/connections/Connections.tsx
+msgid "this ties your Steam account to your Zrzur account. The unlock days show when you played."
+msgstr "هذا يربط حسابك على Steam بحسابك في زرزور. أيام تحقيق الإنجازات تُظهر متى كنت تلعب."
+
+#. placeholder {0}: name()
+#: components/app/interface/settings/user/connections/Connections.tsx
+#: components/app/interface/settings/user/connections/ServiceCards.tsx
+msgid "Updated consent for {0}"
+msgstr "موافقة محدَّثة على ربط {0}"
+
+#: components/app/interface/settings/user/connections/ServiceCards.tsx
+msgid "We have updated what you agree to when you link Battle.net: it now names where your data goes. You agree to it the next time you confirm on Battle.net."
+msgstr "حدّثنا ما توافق عليه عند ربط Battle.net: فهو يذكر الآن أين تذهب بياناتك. وتوافق عليه في المرة القادمة التي تؤكّد فيها عبر Battle.net."
+
+#: components/app/interface/settings/user/connections/ServiceCards.tsx
+msgid "We have updated what you agree to when you link GitHub: it now names where your data goes. Until you agree, Refresh stays off."
+msgstr "حدّثنا ما توافق عليه عند ربط GitHub: فهو يذكر الآن أين تذهب بياناتك. وإلى أن توافق، لا يعمل «تحديث»."
+
+#: components/app/interface/settings/user/connections/Connections.tsx
+msgid "We have updated what you agree to when you link Steam: it now covers game pictures and up to 60 of your latest achievements with the day you unlocked them (no time of day), and it names where your data goes. Until you agree, Refresh stays off and nothing new shows."
+msgstr "حدّثنا ما توافق عليه عند ربط Steam: فهو يشمل الآن صور الألعاب وما يصل إلى 60 من أحدث إنجازاتك مع اليوم الذي حققتها فيه (من دون الساعة)، ويذكر أين تذهب بياناتك. وإلى أن توافق، لا يعمل «تحديث» ولا يظهر شيء جديد."
+
+#: components/app/interface/settings/user/connections/ServiceCards.tsx
+msgid "We have updated what you agree to when you link Twitch: it now names where your data goes. Until you agree, your channel does not show on your profile and we do not ask Twitch about it."
+msgstr "حدّثنا ما توافق عليه عند ربط Twitch: فهو يذكر الآن أين تذهب بياناتك. وإلى أن توافق، لا تظهر قناتك في ملفك الشخصي ولا نسأل Twitch عنها."
+
+#: components/app/interface/settings/user/connections/ServiceCards.tsx
+msgid "What you play or post there can say something about your beliefs, health or sexuality."
+msgstr "وقد يكشف ما تلعبه أو تنشره هناك شيئًا عن معتقداتك أو صحتك أو ميولك الجنسية."
