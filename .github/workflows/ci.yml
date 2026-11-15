@@ -15,7 +15,7 @@ jobs:
     name: Publication guard and secret scan
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           fetch-depth: 0
           persist-credentials: false
@@ -40,7 +40,7 @@ jobs:
     name: Types, lint, unit tests and build
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           persist-credentials: false
       - name: Private submodules (sdk-js)
@@ -48,8 +48,8 @@ jobs:
           SUBMODULE_TOKEN: ${{ secrets.SUBMODULE_TOKEN }}
         run: |
           git -c url."https://x-access-token:${SUBMODULE_TOKEN}@github.com/zrzur/sdk-js".insteadOf="https://github.com/zrzur/sdk-js" submodule update --init --recursive
-      - uses: pnpm/action-setup@b906affcce14559ad1aafd4ab0e942779e9f58b1 # v4
-      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+      - uses: pnpm/action-setup@73e46992e05b19abd31f2f3c20e0e7370d762115 # v6.1.1
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
         with:
           node-version: 24
           cache: pnpm
