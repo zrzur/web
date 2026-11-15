@@ -5536,7 +5536,6 @@ msgstr "Cool blues with a touch of ice."
 msgid "Cool graphite panels for long sessions. Same raspberry actions and pink highlights."
 msgstr "Cool graphite panels for long sessions. Same raspberry actions and pink highlights."
 
-#: components/app/interface/discover/ServerPage.tsx
 #: components/app/interface/settings/server/invites/VanityInvite.tsx
 #: components/app/interface/settings/server/webhooks/ServerWebhooks.tsx
 #: components/app/interface/settings/user/bots/CommandManager.tsx
@@ -5558,7 +5557,6 @@ msgstr "Copied file to clipboard"
 msgid "Copied!"
 msgstr "Copied!"
 
-#: components/app/interface/discover/ServerPage.tsx
 #: components/app/interface/settings/server/roles/ServerRoleEditor.tsx
 #: components/app/interface/settings/server/webhooks/ServerWebhooks.tsx
 #: components/app/interface/settings/user/bots/ViewBot.tsx
@@ -5596,7 +5594,6 @@ msgstr "Copy file"
 #~ msgid "Copy ID"
 #~ msgstr "Copy ID"
 
-#: components/app/interface/discover/ServerPage.tsx
 #: components/app/interface/settings/server/invites/ListServerInvites.tsx
 msgid "Copy invite link"
 msgstr "Copy invite link"
@@ -5644,8 +5641,8 @@ msgid "Copy message link"
 msgstr "Copy message link"
 
 #: components/app/interface/discover/ServerPage.tsx
-msgid "Copy page link"
-msgstr "Copy page link"
+#~ msgid "Copy page link"
+#~ msgstr "Copy page link"
 
 #: components/app/interface/settings/server/roles/ServerRoleEditor.tsx
 #~ msgid "Copy role ID"
@@ -7064,8 +7061,8 @@ msgstr "Discover couldn't be loaded right now."
 #~ msgstr "Discover on the web"
 
 #: components/app/interface/discover/ServerPage.tsx
-msgid "Discover page"
-msgstr "Discover page"
+#~ msgid "Discover page"
+#~ msgstr "Discover page"
 
 #: components/app/interface/settings/user/subscriptions/PlusPage.tsx
 msgid "Discover promotion"
@@ -10276,7 +10273,6 @@ msgstr "Invite code"
 msgid "Invite friends to {0}"
 msgstr "Invite friends to {0}"
 
-#: components/app/interface/discover/ServerPage.tsx
 #: components/app/interface/settings/user/bots/ViewBot.tsx
 #: components/modal/modals/CreateInvite.tsx
 #: src/interface/Developers.tsx
