@@ -219,12 +219,17 @@ export function EffectStill(props: { effect: EffectId }) {
     <Still
       aria-hidden="true"
       ref={(canvas: HTMLCanvasElement) => {
-        // drawn once the canvas has a size: a tile may be built before it is
-        // in the page, and a canvas without a size stays blank
-        const observer = new ResizeObserver(() => {
+        // drawn once the canvas has a size (a tile may be built before it is
+        // in the page, and a canvas without a size stays blank) and is near
+        // the screen: a picker holds about a hundred, and drawing them all at
+        // once held up slow phones
+        let sized = false;
+        let seen = typeof IntersectionObserver === "undefined";
+        const draw = () => {
           const context = canvas.getContext("2d");
-          if (!context || !canvas.getBoundingClientRect().width) return;
-          observer.disconnect();
+          if (!sized || !seen || !context) return;
+          resize.disconnect();
+          view?.disconnect();
           void import("./effects").then(({ drawEffectStill }) => {
             const size = fit(canvas);
             drawEffectStill(
@@ -235,9 +240,26 @@ export function EffectStill(props: { effect: EffectId }) {
               Math.min(window.devicePixelRatio || 1, 2),
             );
           });
+        };
+        const resize = new ResizeObserver(() => {
+          sized = !!canvas.getBoundingClientRect().width;
+          draw();
         });
-        observer.observe(canvas);
-        onCleanup(() => observer.disconnect());
+        const view = seen
+          ? undefined
+          : new IntersectionObserver(
+              (entries) => {
+                seen = entries.some((entry) => entry.isIntersecting);
+                draw();
+              },
+              { rootMargin: "200px" },
+            );
+        resize.observe(canvas);
+        view?.observe(canvas);
+        onCleanup(() => {
+          resize.disconnect();
+          view?.disconnect();
+        });
       }}
     />
   );
