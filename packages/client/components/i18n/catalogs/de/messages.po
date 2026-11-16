@@ -128,6 +128,7 @@ msgstr "{0, plural, one {# Installation.} other {# Installationen.}}"
 #: components/ui/components/features/messaging/elements/Invite.tsx
 #: src/interface/lobby/Lobby.tsx
 #: src/interface/navigation/channels/HomeSidebar.tsx
+#: src/interface/navigation/channels/HomeSidebarPhone.tsx
 msgid "{0, plural, one {# member} other {# members}}"
 msgstr "{0, plural, one {# Mitglied} other {# Mitglieder}}"
 
@@ -1964,7 +1965,7 @@ msgstr "Datei hinzufügen"
 #: components/app/menus/UserContextMenu.tsx
 #: components/ui/components/features/profiles/ProfileActions.tsx
 #: src/interface/Friends.tsx
-#: src/interface/navigation/channels/HomeSidebar.tsx
+#: src/interface/navigation/channels/HomeSidebarPhone.tsx
 msgid "Add friend"
 msgstr "Freund hinzufügen"
 
@@ -3947,6 +3948,7 @@ msgstr "Aktivste Kanäle"
 #: components/ui/components/features/profiles/ProfileStatus.tsx
 #: src/interface/channels/text/MemberSidebar.tsx
 #: src/interface/navigation/channels/HomeSidebar.tsx
+#: src/interface/navigation/channels/HomeSidebarPhone.tsx
 msgid "Busy"
 msgstr "Beschäftigt"
 
@@ -5694,6 +5696,7 @@ msgid "Contribute a language"
 msgstr "Zur Übersetzung beitragen"
 
 #: src/interface/navigation/channels/HomeSidebar.tsx
+#: src/interface/navigation/channels/HomeSidebarPhone.tsx
 msgid "Conversations"
 msgstr "Unterhaltungen"
 
@@ -6026,6 +6029,7 @@ msgstr "Erstelle eine neue Kategorie"
 
 #: components/modal/modals/CreateGroup.tsx
 #: src/interface/navigation/channels/HomeSidebar.tsx
+#: src/interface/navigation/channels/HomeSidebarPhone.tsx
 msgid "Create a new group"
 msgstr "Erstelle eine neue Gruppe"
 
@@ -8794,6 +8798,7 @@ msgstr "Blinkend oder schädlich: Es könnte Anfälle auslösen"
 #: src/interface/Friends.tsx
 #: src/interface/navigation/channels/AccountBar.tsx
 #: src/interface/navigation/channels/HomeSidebar.tsx
+#: src/interface/navigation/channels/HomeSidebarPhone.tsx
 #: src/interface/navigation/servers/UserMenu.tsx
 msgid "Focus"
 msgstr "Konzentriert"
@@ -10204,6 +10209,7 @@ msgstr "Identität"
 #: src/interface/Friends.tsx
 #: src/interface/navigation/channels/AccountBar.tsx
 #: src/interface/navigation/channels/HomeSidebar.tsx
+#: src/interface/navigation/channels/HomeSidebarPhone.tsx
 #: src/interface/navigation/servers/UserMenu.tsx
 #: src/interface/You.tsx
 msgid "Idle"
@@ -12840,6 +12846,7 @@ msgstr "Nachricht wurde auf einer anderen Plattform gesendet"
 #: components/app/interface/settings/user/Keybinds.tsx
 #: components/modal/modals/permissionTitles.ts
 #: src/interface/developers/docs/DocsPortal.tsx
+#: src/interface/navigation/channels/HomeSidebarPhone.tsx
 #: src/interface/navigation/PhoneTabs.tsx
 msgid "Messages"
 msgstr "Nachrichten"
@@ -13982,6 +13989,10 @@ msgstr "Noch keine Community-Designs. Angenommene Designs von Designern erschein
 msgid "No content."
 msgstr "Kein Inhalt."
 
+#: src/interface/navigation/channels/HomeSidebarPhone.tsx
+msgid "No conversation matches your search."
+msgstr "Keine Unterhaltung passt zu deiner Suche."
+
 #: src/interface/Home.tsx
 #~ msgid "No conversations yet"
 #~ msgstr ""
@@ -14876,6 +14887,7 @@ msgstr "Offizieller Zrzur-Server"
 #: src/interface/Friends.tsx
 #: src/interface/navigation/channels/AccountBar.tsx
 #: src/interface/navigation/channels/HomeSidebar.tsx
+#: src/interface/navigation/channels/HomeSidebarPhone.tsx
 msgid "Offline"
 msgstr "Offline"
 
@@ -15030,6 +15042,7 @@ msgstr "Laufende Wartung"
 #: src/interface/Friends.tsx
 #: src/interface/navigation/channels/AccountBar.tsx
 #: src/interface/navigation/channels/HomeSidebar.tsx
+#: src/interface/navigation/channels/HomeSidebarPhone.tsx
 #: src/interface/navigation/servers/UserMenu.tsx
 #: src/interface/You.tsx
 msgid "Online"
@@ -15040,7 +15053,7 @@ msgid "ONLINE — 3"
 msgstr "ONLINE – 3"
 
 #: components/app/interface/discover/ServerPage.tsx
-#: src/interface/navigation/channels/HomeSidebar.tsx
+#: src/interface/navigation/channels/HomeSidebarPhone.tsx
 msgid "Online now"
 msgstr "Jetzt online"
 
@@ -19016,7 +19029,7 @@ msgstr "Nach Name oder ID suchen"
 msgid "Search by name or reason"
 msgstr "Nach Name oder Grund suchen"
 
-#: src/interface/navigation/channels/HomeSidebar.tsx
+#: src/interface/navigation/channels/HomeSidebarPhone.tsx
 msgid "Search conversations"
 msgstr "Unterhaltungen durchsuchen"
 
@@ -19450,7 +19463,7 @@ msgid "Sent {0} attachments"
 msgstr "{0} Anhänge gesendet"
 
 #: components/ui/components/features/messaging/elements/MessageReply.tsx
-#: src/interface/navigation/channels/HomeSidebar.tsx
+#: src/interface/navigation/channels/HomeSidebarPhone.tsx
 msgid "Sent an attachment"
 msgstr "Hat einen Anhang gesendet"
 
@@ -23938,9 +23951,9 @@ msgstr "Nachricht lösen"
 msgid "unpinned a message by {0} in {1}"
 msgstr "hat eine Nachricht von {0} in {1} gelöst"
 
-#: src/interface/Home.tsx
-#~ msgid "Unread"
-#~ msgstr ""
+#: src/interface/navigation/channels/HomeSidebarPhone.tsx
+msgid "Unread"
+msgstr "Ungelesen"
 
 #: components/app/interface/settings/user/profile/UserProfileEditor.tsx
 #: components/ui/components/design/SettingsForm.tsx
@@ -25900,7 +25913,7 @@ msgid "Yes, uninstall"
 msgstr "Ja, deinstallieren"
 
 #: src/interface/channels/text/SearchBox.tsx
-#: src/interface/navigation/channels/HomeSidebar.tsx
+#: src/interface/navigation/channels/HomeSidebarPhone.tsx
 msgid "Yesterday"
 msgstr "Gestern"
 
@@ -26344,7 +26357,7 @@ msgstr "Du kannst nicht wieder beitreten, außer du erhältst eine neue Einladun
 #~ msgid "You, right now"
 #~ msgstr "Du, gerade jetzt"
 
-#: src/interface/navigation/channels/HomeSidebar.tsx
+#: src/interface/navigation/channels/HomeSidebarPhone.tsx
 msgid "You: {text}"
 msgstr "Du: {text}"
 
@@ -26613,6 +26626,7 @@ msgstr "Deine Sammlung"
 #~ msgstr "Deine Community-Designs"
 
 #: src/interface/navigation/channels/HomeSidebar.tsx
+#: src/interface/navigation/channels/HomeSidebarPhone.tsx
 msgid "Your conversations will appear here. Start a group or find a friend to begin."
 msgstr "Deine Unterhaltungen erscheinen hier. Starte eine Gruppe oder finde einen Freund."
 

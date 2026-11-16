@@ -20,9 +20,9 @@ const [lastServer, setLastServer] = createSignal<string>();
 /**
  * Phone navigation: a bar fixed to the bottom of the menu side with five
  * tabs, each with its name under the icon: Servers (rail + channels),
- * Messages, Discover, Mentions and You. The open tab's icon sits on a soft
- * pink tile and its name is full strength (the design the owner picked,
- * 2026-11-16).
+ * Messages, Discover, Mentions and You. The open tab's icon takes the action
+ * colour and its name is full strength; no shape is drawn behind the icon
+ * (the design the owner picked, 2026-11-16).
  * Hidden on wider screens, where the rail and account card do this job.
  */
 export function PhoneTabs() {
@@ -192,12 +192,12 @@ const Tab = styled("button", {
       outline: "none",
       boxShadow: "inset 0 0 0 2px var(--z-focus)",
     },
-    // the open tab: full-strength name, the icon on a soft pink tile
+    // the open tab: full-strength name and the icon in the action colour;
+    // no shape is drawn behind the icon (owner, 2026-11-16)
     "&[data-current='true']": {
       color: "var(--z-fg-primary)",
       fontWeight: 600,
       "& > span:first-of-type": {
-        background: "color-mix(in srgb, var(--z-accent) 18%, transparent)",
         "--z-icon-color": "var(--z-accent)",
         color: "var(--z-accent)",
       },
