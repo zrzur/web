@@ -688,3 +688,21 @@
   top: 0;
   background: var(--picker-bg, var(--z-bg-popover));
 }
+
+/* Phones: one set of corners in the docked panel, so nothing looks square
+   beside something round: 12px for fields and pictures, 10px for small
+   controls (the switch keeps 12px with a 9px inner button) */
+.z-media-picker--phone .z-picker-search,
+.z-media-picker--phone .z-emoji-add,
+.z-media-picker--phone .z-gif-category,
+.z-media-picker--phone .z-gif-tile,
+.z-media-picker--phone .z-gif-skeleton,
+.z-media-picker--phone .z-picker-state-icon {
+  border-radius: 12px;
+}
+.z-media-picker--phone .z-picker-tabs button,
+.z-media-picker--phone .z-picker-icon-button,
+.z-media-picker--phone .z-picker-action,
+.z-media-picker--phone .z-emoji-cell {
+  border-radius: 10px;
+}

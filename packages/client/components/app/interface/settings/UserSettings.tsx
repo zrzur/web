@@ -47,7 +47,6 @@ import {
 import pkg from "../../../../../../package.json";
 
 import { SettingsConfiguration } from ".";
-import { whatsNewUrl } from "./whatsNew";
 import { SettingsTabs } from "./SettingsTabs";
 import { AccountCard, BackCard } from "./user/_AccountCard";
 import { MyAccount } from "./user/Account";
@@ -73,6 +72,7 @@ import { Sessions } from "./user/Sessions";
 import { PlusPage, Subscriptions } from "./user/subscriptions";
 import { ContactSupport } from "./user/support/ContactSupport";
 import { VoiceSettings } from "./user/voice/VoiceSettings";
+import { whatsNewUrl } from "./whatsNew";
 
 const Config: SettingsConfiguration<{ server: Server }> = {
   /**
@@ -485,6 +485,11 @@ const Config: SettingsConfiguration<{ server: Server }> = {
             },
             {
               id: "keybinds",
+              // a phone has no keyboard to press them on: the page would
+              // list things that cannot be done there
+              hidden: window.matchMedia?.(
+                "(max-width: 600px) and (pointer: coarse)",
+              ).matches,
               icon: <MdKeybinds {...iconSize(20)} />,
               title: <Trans>Keyboard shortcuts</Trans>,
             },
@@ -519,8 +524,13 @@ const Config: SettingsConfiguration<{ server: Server }> = {
               // in the app's language (owner, 2026-11-13)
               onClick: async () => {
                 const changelog = await fetchLatestChangelog();
-                if (changelog) return openModal({ type: "changelog", changelog });
-                window.open(whatsNewUrl(document.documentElement.lang), "_blank", "noopener");
+                if (changelog)
+                  return openModal({ type: "changelog", changelog });
+                window.open(
+                  whatsNewUrl(document.documentElement.lang),
+                  "_blank",
+                  "noopener",
+                );
               },
               icon: <MdCampaign {...iconSize(20)} />,
               title: <Trans>What's New</Trans>,

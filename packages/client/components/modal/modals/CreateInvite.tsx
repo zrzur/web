@@ -219,6 +219,9 @@ export function CreateInviteModal(
           <input
             readOnly
             aria-label={t`Invite link`}
+            // a link reads left to right: in Arabic its start (https://) must
+            // stay in view, not its end
+            dir={fetchInvite.isPending ? undefined : "ltr"}
             value={
               fetchInvite.isPending
                 ? t`Generating invite…`
