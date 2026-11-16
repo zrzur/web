@@ -7090,8 +7090,8 @@
     },
     {
       "path": "packages/client/components/ui/components/features/voice/callCard/ParticipantTile.tsx",
-      "sha256": "00dc08d9d3c7901d44f76a638a077cf0534881ff09341380a9c38125c3934049",
-      "bytes": 14355,
+      "sha256": "e8bd3279010ed17dc6e9f6ba2f6ebb1dcbf8bf9700cb1ce3d84a86490120bff4",
+      "bytes": 14851,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -42574,8 +42574,14 @@
     },
     {
       "path": "packages/client/src/interface/channels/voice/VoiceChannel.tsx",
-      "sha256": "31dc628c9a390b0d59dbba4bf34019e75d71ba4d0bd452fad22de44b1fec5d0c",
-      "bytes": 9156,
+      "sha256": "9502a075d33a417ab84124beba2066cde52e832c6605a0968e0f2aab8284beb9",
+      "bytes": 13333,
+      "category": "product-source-or-build-manifest"
+    },
+    {
+      "path": "packages/client/src/interface/channels/voice/phoneCall.css",
+      "sha256": "fa0d83b59f2cc1dcaa7e7f120e5ea6eebce349e904960eec441f6665f3392633",
+      "bytes": 1939,
       "category": "product-source-or-build-manifest"
     },
     {
