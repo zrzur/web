@@ -20,8 +20,9 @@ const [lastServer, setLastServer] = createSignal<string>();
 /**
  * Phone navigation: a bar fixed to the bottom of the menu side with five
  * tabs, each with its name under the icon: Servers (rail + channels),
- * Messages, Designs, Notifications and You. The open tab's icon sits on a
- * soft pink tile. Discover stays on the server rail.
+ * Messages, Designs, Notifications and You. The open tab's icon and name
+ * take the action colour; no shape is drawn around them. Discover stays on
+ * the server rail.
  * Hidden on wider screens, where the rail and account card do this job.
  */
 export function PhoneTabs() {
@@ -193,15 +194,12 @@ const Tab = styled("button", {
       outline: "none",
       boxShadow: "inset 0 0 0 2px var(--z-focus)",
     },
-    // the open tab: full-strength name, the icon on a soft pink tile
+    // the open tab: its icon and name take the action colour, nothing is
+    // drawn around them (owner, 2026-11-16)
     "&[data-current='true']": {
-      color: "var(--z-fg-primary)",
+      color: "var(--z-accent)",
       fontWeight: 600,
-      "& > span:first-of-type": {
-        background: "color-mix(in srgb, var(--z-accent) 18%, transparent)",
-        "--z-icon-color": "var(--z-accent)",
-        color: "var(--z-accent)",
-      },
+      "--z-icon-color": "var(--z-accent)",
     },
   },
 });
@@ -224,9 +222,6 @@ const TabIcon = styled("span", {
     placeItems: "center",
     width: "52px",
     height: "30px",
-    borderRadius: "15px",
-    transition: "background-color 120ms ease",
-    _motionReduce: { transition: "none" },
   },
 });
 
