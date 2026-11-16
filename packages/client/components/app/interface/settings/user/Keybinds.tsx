@@ -252,6 +252,16 @@ export function KeybindsSettings() {
           description: <Trans>In a server.</Trans>,
         },
         {
+          title: <Trans>Open a category's settings</Trans>,
+          description: (
+            <Trans>
+              With the category selected in the channel list, if you manage
+              the server.
+            </Trans>
+          ),
+          keys: [["Mod", "Shift", "E"]],
+        },
+        {
           title: <Trans>Search Discover</Trans>,
           description: <Trans>On the Discover page.</Trans>,
           keys: [["/"]],

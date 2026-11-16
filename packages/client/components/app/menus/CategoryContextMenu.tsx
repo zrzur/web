@@ -76,19 +76,14 @@ export function CategoryContextMenu(props: {
     });
   }
 
-  function editPermissions() {
+  /**
+   * Open the category's settings: its info, permissions and who sees it
+   */
+  function openSettings() {
     openModal({
-      type: "category_permissions",
-      server: props.server,
-      category: props.category,
-    });
-  }
-
-  function editCategoryName() {
-    openModal({
-      type: "edit_category",
-      server: props.server,
-      category: props.category,
+      type: "settings",
+      config: "category",
+      context: { server: props.server, categoryId: props.category.id },
     });
   }
 
@@ -129,31 +124,27 @@ export function CategoryContextMenu(props: {
         <ContextMenuButton icon={MdLibraryAdd} onClick={createCategory}>
           <Trans>Create category</Trans>
         </ContextMenuButton>
-        {/* the built-in "Text channels" / "Voice channels" groups are not
-            stored categories: nothing to rename or delete */}
-        <Show when={stored()}>
-          <ContextMenuButton
-            icon={<Symbol size={16}>edit</Symbol>}
-            onClick={editCategoryName}
-          >
-            <Trans>Rename category</Trans>
-          </ContextMenuButton>
-          <ContextMenuButton
-            icon={MdDelete}
-            onClick={deleteCategory}
-            destructive
-          >
-            <Trans>Delete category</Trans>
-          </ContextMenuButton>
-        </Show>
       </Show>
 
-      <Show when={stored() && props.server.havePermission("ManagePermissions")}>
+      {/* the built-in "Text channels" / "Voice channels" groups are not
+          stored categories: nothing to set up or delete */}
+      <Show
+        when={
+          stored() &&
+          props.server.orPermission("ManageChannel", "ManagePermissions")
+        }
+      >
         <ContextMenuButton
-          icon={<Symbol size={16}>lock</Symbol>}
-          onClick={editPermissions}
+          icon={<Symbol size={16}>settings</Symbol>}
+          onClick={openSettings}
         >
-          <Trans>Edit permissions</Trans>
+          <Trans>Category settings</Trans>
+        </ContextMenuButton>
+      </Show>
+      <Show when={stored() && props.server.havePermission("ManageChannel")}>
+        <ContextMenuDivider />
+        <ContextMenuButton icon={MdDelete} onClick={deleteCategory} destructive>
+          <Trans>Delete category</Trans>
         </ContextMenuButton>
       </Show>
 

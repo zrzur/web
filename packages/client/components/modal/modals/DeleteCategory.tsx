@@ -20,6 +20,7 @@ export function DeleteCategoryModal(
           (c) => c.id !== props.categoryId,
         ),
       }),
+    onSuccess: () => props.onDeleted?.(),
     onError: showError,
   }));
 
@@ -40,7 +41,10 @@ export function DeleteCategoryModal(
       ]}
       isDisabled={deleteCategory.isPending}
     >
-      <Trans>Once it's deleted, there's no going back.</Trans>
+      <Trans>
+        Its channels stay, and the same people keep seeing them. Once the
+        category is deleted, there's no going back.
+      </Trans>
     </Dialog>
   );
 }

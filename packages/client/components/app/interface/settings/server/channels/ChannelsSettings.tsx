@@ -234,17 +234,21 @@ export function ChannelsSettings(props: { server: Server; voice?: boolean }) {
                     <Show when={real() && data()}>
                       <button
                         type="button"
-                        title={t`Rename category`}
-                        aria-label={t`Rename category`}
+                        title={t`Category settings`}
+                        aria-label={t`Category settings`}
+                        data-testid={`category-settings-${category.id}`}
                         onClick={() =>
                           openModal({
-                            type: "edit_category",
-                            server: props.server,
-                            category,
+                            type: "settings",
+                            config: "category",
+                            context: {
+                              server: props.server,
+                              categoryId: category.id,
+                            },
                           })
                         }
                       >
-                        <Icon name="pencil-simple" size={18} />
+                        <Icon name="gear-six" size={18} />
                       </button>
                       <button
                         type="button"

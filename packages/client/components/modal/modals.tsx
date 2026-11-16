@@ -137,19 +137,9 @@ const EditBotUsernameModal = lazy(() =>
     default: m.EditBotUsernameModal,
   })),
 );
-const CategoryPermissionsModal = lazy(() =>
-  import("./modals/CategoryPermissions").then((m) => ({
-    default: m.CategoryPermissionsModal,
-  })),
-);
 const CreateThreadModal = lazy(() =>
   import("./modals/CreateThread").then((m) => ({
     default: m.CreateThreadModal,
-  })),
-);
-const EditCategoryModal = lazy(() =>
-  import("./modals/EditCategory").then((m) => ({
-    default: m.EditCategoryModal,
   })),
 );
 const EditEmailModal = lazy(() =>
@@ -497,10 +487,6 @@ export function RenderModal(props: ActiveModal & { onClose: () => void }) {
       return <ResetBotTokenModal {...modalProps} />;
     case "interactions_endpoint":
       return <InteractionsEndpointModal {...modalProps} />;
-    case "edit_category":
-      return <EditCategoryModal {...modalProps} />;
-    case "category_permissions":
-      return <CategoryPermissionsModal {...modalProps} />;
     case "create_thread":
       return <CreateThreadModal {...modalProps} />;
     case "edit_server_folder":
