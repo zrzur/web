@@ -48,15 +48,14 @@ const MainBar = styled("div", {
       width: "100vw",
       height: "100%",
 
-      // the floating tab bar (60px, 8px above the edge) takes the bottom;
-      // the account card only stays
+      // the tab bar (64px) takes the bottom edge; the account card only stays
       // for its call controls, just above the tabs (#root already stops
       // above the home bar, so no safe-area inset here)
       "& > *:not([data-account-panel]):not([data-phone-tabs])": {
-        paddingBottom: "calc(76px + var(--z-voice-panel-space, 0px))",
+        paddingBottom: "calc(64px + var(--z-voice-panel-space, 0px))",
       },
       "& > [data-account-panel]": {
-        bottom: "84px",
+        bottom: "72px",
       },
       "& > [data-account-panel]:not([data-in-call='true'])": {
         display: "none",

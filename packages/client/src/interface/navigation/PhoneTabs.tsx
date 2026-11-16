@@ -18,10 +18,10 @@ import { openMentions } from "./MentionsPanel";
 const [lastServer, setLastServer] = createSignal<string>();
 
 /**
- * Phone navigation: a floating bar at the bottom of the menu side with five
- * tabs: Servers (rail + channels), Messages, Designs, Notifications and You.
- * The open tab is a filled capsule with its name; the others are icons with
- * the name for screen readers. Discover stays on the server rail.
+ * Phone navigation: a bar fixed to the bottom of the menu side with five
+ * tabs, each with its name under the icon: Servers (rail + channels),
+ * Messages, Designs, Notifications and You. The open tab's icon sits on a
+ * soft pink tile. Discover stays on the server rail.
  * Hidden on wider screens, where the rail and account card do this job.
  */
 export function PhoneTabs() {
@@ -87,7 +87,6 @@ export function PhoneTabs() {
   ) => (
     <Tab
       type="button"
-      aria-label={label}
       aria-current={active() === id ? "page" : undefined}
       data-current={active() === id}
       onClick={onPress}
@@ -100,9 +99,7 @@ export function PhoneTabs() {
           </Badge>
         </Show>
       </TabIcon>
-      <Show when={active() === id}>
-        <TabName aria-hidden="true">{label}</TabName>
-      </Show>
+      <TabName>{label}</TabName>
     </Tab>
   );
 
@@ -114,12 +111,7 @@ export function PhoneTabs() {
       )}
       {tab("designs", "palette", t`Designs`, openDesigns)}
       {/* notifications open as a sheet over whatever is on screen */}
-      <Tab
-        type="button"
-        aria-label={t`Notifications`}
-        aria-haspopup="dialog"
-        onClick={openMentions}
-      >
+      <Tab type="button" aria-haspopup="dialog" onClick={openMentions}>
         <TabIcon>
           <Icon name="bell" size={24} />
           <Show when={unreadMentions()}>
@@ -128,10 +120,10 @@ export function PhoneTabs() {
             </Badge>
           </Show>
         </TabIcon>
+        <TabName>{t`Notifications`}</TabName>
       </Tab>
       <Tab
         type="button"
-        aria-label={t`You`}
         aria-current={active() === "you" ? "page" : undefined}
         data-current={active() === "you"}
         onClick={() => {
@@ -146,9 +138,7 @@ export function PhoneTabs() {
             fallback={user()?.username}
           />
         </TabIcon>
-        <Show when={active() === "you"}>
-          <TabName aria-hidden="true">{t`You`}</TabName>
-        </Show>
+        <TabName>{t`You`}</TabName>
       </Tab>
     </Bar>
   );
@@ -160,20 +150,17 @@ const Bar = styled("nav", {
     _phone: {
       position: "absolute",
       zIndex: 3,
-      // a floating bar: clear of both sides and of the bottom edge
-      // (#root already stops above the home bar, styles.css)
-      insetInline: "12px",
-      bottom: "8px",
-      display: "flex",
-      alignItems: "center",
-      justifyContent: "space-between",
-      gap: "2px",
-      height: "60px",
-      paddingInline: "8px",
-      borderRadius: "22px",
-      background: "var(--z-bg-raised)",
-      border: "1px solid var(--z-border-subtle)",
-      boxShadow: "0 10px 28px rgb(0 0 0 / 0.38)",
+      insetInline: 0,
+      bottom: 0,
+      display: "grid",
+      // five equal columns: a long name (German "Benachrichtigungen")
+      // shortens inside its own column and never pushes its neighbours
+      gridTemplateColumns: "repeat(5, minmax(0, 1fr))",
+      // #root already stops above the home bar (styles.css), so no inset here
+      height: "64px",
+      paddingInline: "4px",
+      background: "var(--z-bg-frame)",
+      borderTop: "1px solid var(--z-border-subtle)",
     },
   },
 });
@@ -182,74 +169,72 @@ const Tab = styled("button", {
   base: {
     position: "relative",
     display: "flex",
+    flexDirection: "column",
     alignItems: "center",
     justifyContent: "center",
-    gap: "8px",
-    flex: "none",
-    minWidth: "48px",
-    height: "44px",
-    paddingInline: "10px",
+    gap: "3px",
+    minWidth: 0,
+    paddingInline: "2px",
     border: "none",
-    borderRadius: "16px",
     background: "none",
     color: "var(--z-fg-muted)",
     font: "inherit",
-    fontSize: "14px",
-    fontWeight: 600,
+    fontSize: "11px",
+    fontWeight: 500,
     cursor: "pointer",
     "--z-icon-color": "currentColor",
     WebkitTapHighlightColor: "transparent",
-    transition: "color 120ms ease, background-color 120ms ease",
+    transition: "color 120ms ease",
     _motionReduce: { transition: "none" },
 
-    "&:active > span:first-of-type": { scale: "0.92" },
+    "&:active > span:first-of-type": { scale: "0.94" },
     _active: { color: "var(--z-fg-primary)" },
     _focusVisible: {
       outline: "none",
-      boxShadow: "0 0 0 2px var(--z-focus)",
+      boxShadow: "inset 0 0 0 2px var(--z-focus)",
     },
-    // the open tab: a filled capsule with its name
+    // the open tab: full-strength name, the icon on a soft pink tile
     "&[data-current='true']": {
-      flex: "0 1 auto",
-      minWidth: 0,
-      paddingInline: "14px",
-      color: "var(--z-on-accent, #FFFFFF)",
-      background: "var(--z-accent)",
-      "--z-icon-color": "var(--z-on-accent, #FFFFFF)",
-      // on the filled capsule the count turns white so it stays readable
-      "& [data-tab-badge]": {
+      color: "var(--z-fg-primary)",
+      fontWeight: 600,
+      "& > span:first-of-type": {
+        background: "color-mix(in srgb, var(--z-accent) 18%, transparent)",
+        "--z-icon-color": "var(--z-accent)",
         color: "var(--z-accent)",
-        background: "var(--z-on-accent, #FFFFFF)",
-        boxShadow: "0 0 0 2px var(--z-accent)",
       },
     },
   },
 });
 
-/** The open tab's name; shortens before the bar grows past the screen */
+/** The tab's name; shortens inside its column */
 const TabName = styled("span", {
   base: {
-    minWidth: 0,
+    maxWidth: "100%",
     overflow: "hidden",
     textOverflow: "ellipsis",
     whiteSpace: "nowrap",
   },
 });
 
+/** The icon's tile: the unread count reaches past it, so it is never cut */
 const TabIcon = styled("span", {
   base: {
     position: "relative",
     display: "grid",
     placeItems: "center",
-    height: "28px",
+    width: "52px",
+    height: "30px",
+    borderRadius: "15px",
+    transition: "background-color 120ms ease",
+    _motionReduce: { transition: "none" },
   },
 });
 
 const Badge = styled("span", {
   base: {
     position: "absolute",
-    top: "-3px",
-    insetInlineStart: "60%",
+    top: "-4px",
+    insetInlineStart: "58%",
     minWidth: "18px",
     height: "18px",
     paddingInline: "5px",
@@ -261,6 +246,6 @@ const Badge = styled("span", {
     lineHeight: 1,
     color: "var(--z-on-mention-badge, #FFFFFF)",
     background: "var(--z-mention-badge, #C2337A)",
-    boxShadow: "0 0 0 2px var(--z-bg-raised)",
+    boxShadow: "0 0 0 2px var(--z-bg-frame)",
   },
 });
