@@ -2,6 +2,15 @@
 
 ## Unreleased
 
+### Install Zrzur on your phone (2026-11-17)
+
+* **Install sheet.** On an Android phone, from the second visit, a sheet offers to install Zrzur; **Install** opens the browser's own install window. On iPhone and iPad it shows the three steps (Share, Add to Home Screen, Add). It shows once; closed, it stays away for 30 days. **Install the app** stays on the You page. Nothing shows inside the installed app or on a computer.
+* **A new version never reloads the page by itself.** It used to, also in the middle of a message or a call. A page opened before the release now shows **Update** (a row above the tab bar on phones, the button in the top bar elsewhere; never during a call); a page opened after it takes the new version quietly.
+* **Opened with no connection:** the installed app shows its own page, in the app's language, and opens by itself when the connection is back, instead of the browser's error page. No page, message or account data is kept on the device for this: the app is always loaded from the network.
+* **Home screen:** the iPhone icon has a solid background (iOS painted black behind the transparent one), launch images for iPhone and iPad, a maskable icon at both sizes, and shortcuts to Messages, Discover and You on the icon's long-press menu.
+* **Name:** the app is installed as زرزور when the app's language is Arabic and as Zrzur otherwise; Zrzur Beta installs under its own name. Both manifests describe the same app (`id`), so changing language never makes a second one.
+* The service worker keeps scripts, styles and fonts only (it used to keep the app icons and the manifest too).
+
 ### Design pack (2026-11-16)
 
 * **250 new designs by Zrzur**, free for everyone: 125 avatar decorations, 67 nameplates and 58 profile effects, in 76 sets. Pixel art for games (arcade, quest, racing, a sunset coast, an arcade hall, a handheld console and more), nature and seasons, the Levant, rank emblems and a game HUD, ears, headphones and crowns, and pixel sets about Syria: the flag, Damascus and its sword, the Ghouta, Aleppo, Hama, Palmyra and the Syrian table. Every name is in English, Arabic and German.
