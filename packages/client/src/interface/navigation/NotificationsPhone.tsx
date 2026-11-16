@@ -1,0 +1,487 @@
+import {
+  For,
+  Match,
+  Show,
+  Switch,
+  createMemo,
+  createResource,
+  createSignal,
+  onCleanup,
+} from "solid-js";
+
+import { Trans, useLingui } from "@lingui/solid/macro";
+import { useNavigate } from "@solidjs/router";
+import type { Message, User } from "@zrzur/sdk/solid";
+import { styled } from "styled-system/jsx";
+
+import { useClient } from "@revolt/client";
+import { holdMessages } from "@revolt/client/messagePruner";
+import { useTime } from "@revolt/i18n/dayjs";
+import { useModals } from "@revolt/modal";
+import { Avatar, CircularProgress } from "@revolt/ui";
+import { Icon } from "@revolt/ui/icons/Icon";
+
+type Filter = "all" | "mentions" | "friends";
+
+/**
+ * The Notifications page on phones (design approved by the owner,
+ * 2026-11-16): what waits for you in one list. Friend requests come first,
+ * each with its answer buttons; then the messages of the last 30 days that
+ * mention you, by day, with where it was said and the words themselves.
+ * A dot marks a mention you have not opened yet.
+ */
+export function NotificationsPhone(props: { onClose: () => void }) {
+  const { t } = useLingui();
+  const client = useClient();
+  const navigate = useNavigate();
+  const dayjs = useTime();
+  const { showError } = useModals();
+
+  const [filter, setFilter] = createSignal<Filter>("all");
+  const [mentions] = createResource(() => client().fetchMentions(50));
+  // these come from many channels: they stay in the message cache while the
+  // page is open
+  onCleanup(
+    // read when the cache is looked through, not tracked
+    // eslint-disable-next-line solid/reactivity
+    holdMessages(() =>
+      mentions.state === "ready" ? mentions().map((message) => message.id) : [],
+    ),
+  );
+
+  const requests = createMemo(() =>
+    client().users.filter((user) => user.relationship === "Incoming"),
+  );
+
+  /** the messages by day: today, yesterday, then everything earlier */
+  const days = createMemo(() => {
+    const list = mentions.state === "ready" ? mentions() : [];
+    const now = dayjs();
+    const groups: { label: string; items: Message[] }[] = [
+      { label: t`Today`, items: [] },
+      { label: t`Yesterday`, items: [] },
+      { label: t`Earlier`, items: [] },
+    ];
+    for (const message of list) {
+      const at = dayjs(message.createdAt);
+      if (at.isSame(now, "day")) groups[0].items.push(message);
+      else if (at.isSame(now.subtract(1, "day"), "day"))
+        groups[1].items.push(message);
+      else groups[2].items.push(message);
+    }
+    return groups.filter((group) => group.items.length);
+  });
+
+  // server and channel apart: an Arabic name beside a Latin one must not
+  // swap their order
+  const place = (message: Message): string[] => {
+    const channel = message.channel;
+    if (!channel) return [];
+    if (channel.type === "DirectMessage") return [t`Direct message`];
+    const name =
+      channel.type === "SavedMessages" ? t`Saved notes` : `#${channel.name}`;
+    return channel.server ? [channel.server.name, name] : [name];
+  };
+
+  const when = (message: Message) => {
+    const at = dayjs(message.createdAt);
+    return at.isSame(dayjs(), "day") ? at.format("LT") : at.format("L");
+  };
+
+  const isNew = (message: Message) =>
+    !!message.channel?.mentions?.has(message.id);
+
+  const open = (message: Message) => {
+    navigate(message.path);
+    props.onClose();
+  };
+
+  const message = (user: User) =>
+    user
+      .openDM()
+      .then((channel) => {
+        navigate(`/channel/${channel.id}`);
+        props.onClose();
+      })
+      .catch(showError);
+
+  const showRequests = () => filter() !== "mentions" && requests().length > 0;
+  const showMentions = () => filter() !== "friends";
+  const nothing = () =>
+    !showRequests() &&
+    (!showMentions() || (mentions.state === "ready" && !mentions().length));
+
+  const filters: { value: Filter; label: () => string }[] = [
+    { value: "all", label: () => t`All` },
+    { value: "mentions", label: () => t`Mentions` },
+    { value: "friends", label: () => t`Friends` },
+  ];
+
+  return (
+    <Page role="dialog" aria-modal="true" aria-label={t`Notifications`}>
+      <Head>
+        <h1>
+          <Trans>Notifications</Trans>
+        </h1>
+        <Close type="button" aria-label={t`Close`} onClick={props.onClose}>
+          <Icon name="x" size={22} />
+        </Close>
+      </Head>
+
+      <Filters role="radiogroup" aria-label={t`Notifications`}>
+        <For each={filters}>
+          {(item) => (
+            <Chip
+              type="button"
+              role="radio"
+              aria-checked={filter() === item.value}
+              onClick={() => setFilter(item.value)}
+            >
+              {item.label()}
+            </Chip>
+          )}
+        </For>
+      </Filters>
+
+      <List>
+        <Show when={showRequests()}>
+          <Group>
+            <Trans>Friend requests</Trans>
+          </Group>
+          <For each={requests()}>
+            {(user) => (
+              <Row data-new>
+                <Avatar
+                  size={44}
+                  src={user.animatedAvatarURL}
+                  fallback={user.displayName}
+                />
+                <Text>
+                  <p>
+                    <Trans>
+                      <strong dir="auto">{user.displayName}</strong> sent you a
+                      friend request.
+                    </Trans>
+                  </p>
+                  <Answers>
+                    <Answer
+                      type="button"
+                      data-primary
+                      onClick={() => user.addFriend().catch(showError)}
+                    >
+                      <Trans>Accept</Trans>
+                    </Answer>
+                    <Answer
+                      type="button"
+                      onClick={() => user.removeFriend().catch(showError)}
+                    >
+                      <Trans>Decline</Trans>
+                    </Answer>
+                    <Answer type="button" onClick={() => message(user)}>
+                      <Trans>Send message</Trans>
+                    </Answer>
+                  </Answers>
+                </Text>
+              </Row>
+            )}
+          </For>
+        </Show>
+
+        <Show when={showMentions()}>
+          <Switch>
+            <Match when={mentions.loading}>
+              <Center>
+                <CircularProgress />
+              </Center>
+            </Match>
+            <Match when={mentions.error}>
+              <Center role="status">
+                <Icon name="warning-circle" size={22} />
+                <Trans>Mentions couldn't load. Try again soon.</Trans>
+              </Center>
+            </Match>
+            <Match when={days().length}>
+              <For each={days()}>
+                {(day) => (
+                  <>
+                    <Group>{day.label}</Group>
+                    <For each={day.items}>
+                      {(item) => (
+                        <RowButton
+                          type="button"
+                          data-new={isNew(item) ? "" : undefined}
+                          onClick={() => open(item)}
+                        >
+                          <Avatar
+                            size={44}
+                            src={item.animatedAvatarURL}
+                            fallback={item.username}
+                          />
+                          <Text>
+                            <p>
+                              <Trans>
+                                <strong dir="auto">{item.username}</strong>{" "}
+                                mentioned you in{" "}
+                                <strong dir="auto">
+                                  {place(item).join(" · ")}
+                                </strong>
+                              </Trans>
+                            </p>
+                            <Quote>
+                              <bdi>{client().markdownToText(item.content)}</bdi>
+                            </Quote>
+                          </Text>
+                          <When>
+                            {when(item)}
+                            <Show when={isNew(item)}>
+                              <Dot aria-label={t`Unread`} />
+                            </Show>
+                          </When>
+                        </RowButton>
+                      )}
+                    </For>
+                  </>
+                )}
+              </For>
+            </Match>
+          </Switch>
+        </Show>
+
+        <Show when={nothing()}>
+          <Center role="status">
+            <Icon name="bell" size={22} />
+            <Trans>
+              Nothing waits for you. New mentions and friend requests show here.
+            </Trans>
+          </Center>
+        </Show>
+      </List>
+    </Page>
+  );
+}
+
+/** The whole screen under the status bar, above the home bar */
+const Page = styled("div", {
+  base: {
+    position: "fixed",
+    zIndex: 999,
+    top: "var(--z-safe-top, 0px)",
+    insetInline: 0,
+    bottom: "calc(var(--z-safe-bottom, 0px) + var(--z-screen-bottom, 0px))",
+    display: "flex",
+    flexDirection: "column",
+    color: "var(--z-fg-primary)",
+    background: "var(--z-bg-nav, var(--z-bg-shell))",
+  },
+});
+
+const Head = styled("div", {
+  base: {
+    flex: "none",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "space-between",
+    padding: "calc(12px + var(--z-phone-top-gap, 0px)) 8px 0 16px",
+    paddingInline: "16px 8px",
+    "& h1": { margin: 0, fontSize: "22px", fontWeight: 700, lineHeight: 1.3 },
+  },
+});
+
+const Close = styled("button", {
+  base: {
+    width: "44px",
+    height: "44px",
+    display: "grid",
+    placeItems: "center",
+    border: "none",
+    borderRadius: "12px",
+    background: "none",
+    color: "var(--z-fg-secondary, var(--z-fg-primary))",
+    cursor: "pointer",
+    "--z-icon-color": "currentColor",
+    _focusVisible: { outline: "2px solid var(--z-focus)" },
+  },
+});
+
+const Filters = styled("div", {
+  base: {
+    flex: "none",
+    display: "flex",
+    gap: "8px",
+    padding: "10px 16px",
+    overflowX: "auto",
+    scrollbarWidth: "none",
+  },
+});
+
+const Chip = styled("button", {
+  base: {
+    flex: "none",
+    minHeight: "44px",
+    paddingInline: "16px",
+    borderRadius: "999px",
+    border: "1px solid var(--z-border-subtle)",
+    background: "var(--z-bg-raised)",
+    color: "var(--z-fg-secondary, var(--z-fg-primary))",
+    font: "inherit",
+    fontSize: "14px",
+    cursor: "pointer",
+    // the chosen filter: the page's ink on its background, turned round
+    "&[aria-checked='true']": {
+      color: "var(--z-bg-frame)",
+      background: "var(--z-fg-primary)",
+      borderColor: "transparent",
+      fontWeight: 600,
+    },
+    _focusVisible: {
+      outline: "2px solid var(--z-focus)",
+      outlineOffset: "2px",
+    },
+  },
+});
+
+const List = styled("div", {
+  base: {
+    flex: "1 1 auto",
+    minHeight: 0,
+    overflowY: "auto",
+    paddingBottom: "16px",
+  },
+});
+
+const Group = styled("h2", {
+  base: {
+    margin: 0,
+    padding: "10px 16px 4px",
+    fontSize: "13px",
+    fontWeight: 600,
+    color: "var(--z-fg-muted)",
+  },
+});
+
+const rowStyle = {
+  base: {
+    display: "flex",
+    alignItems: "flex-start",
+    gap: "12px",
+    width: "100%",
+    padding: "12px 16px",
+    border: "none",
+    background: "none",
+    color: "inherit",
+    font: "inherit",
+    textAlign: "start",
+    "&[type='button']": { cursor: "pointer" },
+    // not opened yet: a light wash of the action colour
+    "&[data-new]": {
+      background: "color-mix(in srgb, var(--z-accent) 7%, transparent)",
+    },
+    _focusVisible: {
+      outline: "2px solid var(--z-focus)",
+      outlineOffset: "-2px",
+    },
+  },
+} as const;
+
+const Row = styled("div", rowStyle);
+
+/** A row that opens what it shows */
+const RowButton = styled("button", rowStyle);
+
+const Text = styled("div", {
+  base: {
+    flex: 1,
+    minWidth: 0,
+    "& p": {
+      margin: 0,
+      fontSize: "15px",
+      lineHeight: 1.5,
+      color: "var(--z-fg-secondary, var(--z-fg-primary))",
+      overflowWrap: "anywhere",
+    },
+    "& strong": { fontWeight: 600, color: "var(--z-fg-primary)" },
+  },
+});
+
+/** The message's own words, marked as a quote by the line beside them */
+const Quote = styled("div", {
+  base: {
+    marginTop: "6px",
+    paddingInlineStart: "10px",
+    borderInlineStart:
+      "3px solid var(--z-border-strong, var(--z-border-subtle))",
+    fontSize: "14px",
+    lineHeight: "20px",
+    color: "var(--z-fg-muted)",
+    lineClamp: 2,
+    overflowWrap: "anywhere",
+  },
+});
+
+const When = styled("span", {
+  base: {
+    flex: "none",
+    display: "inline-flex",
+    alignItems: "center",
+    gap: "6px",
+    paddingTop: "3px",
+    fontSize: "12px",
+    color: "var(--z-fg-muted)",
+  },
+});
+
+const Dot = styled("span", {
+  base: {
+    width: "8px",
+    height: "8px",
+    borderRadius: "50%",
+    background: "var(--z-accent)",
+  },
+});
+
+const Answers = styled("div", {
+  base: {
+    display: "flex",
+    flexWrap: "wrap",
+    gap: "8px",
+    marginTop: "8px",
+  },
+});
+
+const Answer = styled("button", {
+  base: {
+    minHeight: "44px",
+    paddingInline: "14px",
+    border: "none",
+    borderRadius: "10px",
+    background: "var(--z-bg-input, var(--z-bg-raised))",
+    color: "var(--z-fg-primary)",
+    font: "inherit",
+    fontSize: "14px",
+    fontWeight: 600,
+    cursor: "pointer",
+    "&[data-primary]": {
+      color: "var(--z-on-accent, #FFFFFF)",
+      background: "var(--z-accent)",
+    },
+    _focusVisible: {
+      outline: "2px solid var(--z-focus)",
+      outlineOffset: "2px",
+    },
+  },
+});
+
+const Center = styled("div", {
+  base: {
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+    gap: "10px",
+    padding: "48px 24px",
+    textAlign: "center",
+    fontSize: "14px",
+    lineHeight: 1.6,
+    color: "var(--z-fg-muted)",
+    "--z-icon-color": "var(--z-icon-neutral)",
+  },
+});

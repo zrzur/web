@@ -1080,6 +1080,23 @@ msgstr "<0>{0}</0> schreibt…"
 msgid "<0>{0}</0> loses access to your account at once."
 msgstr "<0>{0}</0> verliert sofort den Zugriff auf dein Konto."
 
+#. placeholder {0}: item.username
+#. placeholder {1}: place(item).join(" · ")
+#: src/interface/navigation/NotificationsPhone.tsx
+msgid "<0>{0}</0> mentioned you in <1>{1}</1>"
+msgstr "<0>{0}</0> hat dich in <1>{1}</1> erwähnt"
+
+#. placeholder {0}: item.username
+#. placeholder {1}: (part, index) => ( <> {index() > 0 ? " · " : ""} <bdi>{part}</bdi> </> )
+#: src/interface/navigation/NotificationsPhone.tsx
+#~ msgid "<0>{0}</0> mentioned you in <1><2>{1}</2></1>"
+#~ msgstr ""
+
+#. placeholder {0}: user.displayName
+#: src/interface/navigation/NotificationsPhone.tsx
+msgid "<0>{0}</0> sent you a friend request."
+msgstr "<0>{0}</0> hat dir eine Freundschaftsanfrage geschickt."
+
 #. placeholder {0}: props.names[other()]()
 #: components/app/interface/settings/user/Keybinds.tsx
 msgid "<0>{keys}</0> is already used for “{0}”. Swap them?"
@@ -1665,6 +1682,7 @@ msgstr "Die Akzentfarbe färbt Aktionen und Auswahl. Umriss-Symbole bleiben ged�
 
 #: components/ui/components/features/voice/ringing/CallRinging.tsx
 #: src/interface/Friends.tsx
+#: src/interface/navigation/NotificationsPhone.tsx
 msgid "Accept"
 msgstr "Akzeptieren"
 
@@ -2253,6 +2271,7 @@ msgstr "Algerien"
 #: src/interface/designs/Looks.tsx
 #: src/interface/Discover.tsx
 #: src/interface/Friends.tsx
+#: src/interface/navigation/NotificationsPhone.tsx
 msgid "All"
 msgstr "Alle"
 
@@ -5144,6 +5163,7 @@ msgstr "clips"
 #: components/ui/components/design/Dialog.tsx
 #: components/ui/components/features/profiles/ProfileActions.tsx
 #: components/ui/components/features/voice/soundboard/SoundsUnavailable.tsx
+#: src/interface/navigation/NotificationsPhone.tsx
 #: src/interface/OAuth.tsx
 msgid "Close"
 msgstr "Schließen"
@@ -6580,6 +6600,7 @@ msgstr "Entschieden"
 #: components/app/interface/settings/user/account/ChangeRequests.tsx
 #: components/auth/src/flows/FlowConfirmChange.tsx
 #: components/ui/components/features/voice/ringing/CallRinging.tsx
+#: src/interface/navigation/NotificationsPhone.tsx
 msgid "Decline"
 msgstr "Ablehnen"
 
@@ -7157,6 +7178,7 @@ msgstr "Hat es sich nicht geöffnet? Im Browser fortfahren."
 
 #: components/modal/modals/ForwardMessage.tsx
 #: src/interface/navigation/MentionsPanel.tsx
+#: src/interface/navigation/NotificationsPhone.tsx
 msgid "Direct message"
 msgstr "Direktnachricht"
 
@@ -7587,6 +7609,10 @@ msgstr "Jede Stufe hat eine feste Anzahl Plätze, damit jede Garantie gehalten w
 #: components/app/interface/settings/user/subscriptions/Subscriptions.tsx
 msgid "Each Wing counts towards a server's level. Move them any time; they leave a server with you."
 msgstr "Jeder Flügel zählt zur Stufe eines Servers. Du kannst ihn jederzeit verschieben; verlässt du einen Server, geht er mit."
+
+#: src/interface/navigation/NotificationsPhone.tsx
+msgid "Earlier"
+msgstr "Früher"
 
 #: components/ui/components/features/profiles/badges/useBadgeText.ts
 msgid "Early Adopter"
@@ -8985,6 +9011,7 @@ msgid "Fresh mint"
 msgstr "Frische Minze"
 
 #: src/interface/navigation/channels/HomeSidebar.tsx
+#: src/interface/navigation/NotificationsPhone.tsx
 msgid "Friend requests"
 msgstr "Freundschaftsanfragen"
 
@@ -8999,6 +9026,7 @@ msgstr "Freundschaftsanfragen, die du sendest oder erhältst, warten hier."
 #: components/ui/components/features/profiles/ProfileMutuals.tsx
 #: src/interface/Friends.tsx
 #: src/interface/navigation/channels/HomeSidebar.tsx
+#: src/interface/navigation/NotificationsPhone.tsx
 #: src/interface/You.tsx
 msgid "Friends"
 msgstr "Freunde"
@@ -12726,6 +12754,7 @@ msgstr "Spezifische Rollen erwähnen"
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 #: src/interface/navigation/channels/AccountBar.tsx
 #: src/interface/navigation/MentionsPanel.tsx
+#: src/interface/navigation/NotificationsPhone.tsx
 #: src/interface/navigation/PhoneTabs.tsx
 msgid "Mentions"
 msgstr "Erwähnungen"
@@ -12736,6 +12765,7 @@ msgid "Mentions"
 msgstr "Erwähnt"
 
 #: src/interface/navigation/MentionsPanel.tsx
+#: src/interface/navigation/NotificationsPhone.tsx
 msgid "Mentions couldn't load. Try again soon."
 msgstr "Erwähnungen konnten nicht geladen werden. Versuch es gleich noch einmal."
 
@@ -14741,6 +14771,10 @@ msgstr "Noch nichts an. Wähle etwas zum Anprobieren."
 #~ msgid "Nothing quite right? Mix your own."
 #~ msgstr "Nichts Passendes dabei? Stell dir deinen eigenen Look zusammen."
 
+#: src/interface/navigation/NotificationsPhone.tsx
+msgid "Nothing waits for you. New mentions and friend requests show here."
+msgstr "Nichts wartet auf dich. Neue Erwähnungen und Freundschaftsanfragen erscheinen hier."
+
 #: src/interface/ServiceReturn.tsx
 msgid "Nothing was linked"
 msgstr "Nichts wurde verknüpft"
@@ -14765,6 +14799,7 @@ msgstr "Noch nichts. Du wirst gefragt, bevor diese Version veröffentlicht wird.
 #: components/app/interface/settings/UserSettings.tsx
 #: components/app/menus/ServerContextMenu.tsx
 #: components/app/menus/shared/NotificationContextMenu.tsx
+#: src/interface/navigation/NotificationsPhone.tsx
 msgid "Notifications"
 msgstr "Benachrichtigungen"
 
@@ -18806,6 +18841,7 @@ msgstr "Gespeichert"
 #: src/interface/channels/ChannelHeader.tsx
 #: src/interface/navigation/channels/HomeSidebar.tsx
 #: src/interface/navigation/MentionsPanel.tsx
+#: src/interface/navigation/NotificationsPhone.tsx
 #: src/interface/You.tsx
 msgid "Saved notes"
 msgstr "Gespeicherte Notizen"
@@ -19377,6 +19413,7 @@ msgstr "Schick sie direkt an Freunde oder teile den Link."
 
 #: components/app/menus/VoiceParticipantContextMenu.tsx
 #: src/interface/channels/text/Composition.tsx
+#: src/interface/navigation/NotificationsPhone.tsx
 msgid "Send message"
 msgstr "Nachricht senden"
 
@@ -23339,6 +23376,7 @@ msgstr "Zum Antworten öffne ein Ticket."
 
 #: components/modal/modals/CustomStatus.tsx
 #: src/interface/channels/text/SearchBox.tsx
+#: src/interface/navigation/NotificationsPhone.tsx
 msgid "Today"
 msgstr "Heute"
 
@@ -23962,6 +24000,7 @@ msgid "unpinned a message by {0} in {1}"
 msgstr "hat eine Nachricht von {0} in {1} gelöst"
 
 #: src/interface/navigation/channels/HomeSidebarPhone.tsx
+#: src/interface/navigation/NotificationsPhone.tsx
 msgid "Unread"
 msgstr "Ungelesen"
 
@@ -25924,6 +25963,7 @@ msgstr "Ja, deinstallieren"
 
 #: src/interface/channels/text/SearchBox.tsx
 #: src/interface/navigation/channels/HomeSidebarPhone.tsx
+#: src/interface/navigation/NotificationsPhone.tsx
 msgid "Yesterday"
 msgstr "Gestern"
 
@@ -26857,6 +26897,10 @@ msgstr "Dein Server hier"
 #: components/app/interface/settings/shared/Discoverable.tsx
 msgid "Your server is under review"
 msgstr "Dein Server wird geprüft"
+
+#: components/modal/lib/CreateServerFlow.tsx
+msgid "Your server is where you and your friends hang out. Start from scratch or pick a ready-made one."
+msgstr "Dein Server ist der Ort für dich und deine Freunde. Fang bei null an oder nimm eine fertige Vorlage."
 
 #: components/app/interface/settings/shared/Discoverable.tsx
 msgid "Your server isn't on Discover"

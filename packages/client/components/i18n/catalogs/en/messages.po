@@ -1080,6 +1080,23 @@ msgstr "<0>{0}</0> is typing…"
 msgid "<0>{0}</0> loses access to your account at once."
 msgstr "<0>{0}</0> loses access to your account at once."
 
+#. placeholder {0}: item.username
+#. placeholder {1}: place(item).join(" · ")
+#: src/interface/navigation/NotificationsPhone.tsx
+msgid "<0>{0}</0> mentioned you in <1>{1}</1>"
+msgstr "<0>{0}</0> mentioned you in <1>{1}</1>"
+
+#. placeholder {0}: item.username
+#. placeholder {1}: (part, index) => ( <> {index() > 0 ? " · " : ""} <bdi>{part}</bdi> </> )
+#: src/interface/navigation/NotificationsPhone.tsx
+#~ msgid "<0>{0}</0> mentioned you in <1><2>{1}</2></1>"
+#~ msgstr "<0>{0}</0> mentioned you in <1><2>{1}</2></1>"
+
+#. placeholder {0}: user.displayName
+#: src/interface/navigation/NotificationsPhone.tsx
+msgid "<0>{0}</0> sent you a friend request."
+msgstr "<0>{0}</0> sent you a friend request."
+
 #. placeholder {0}: props.names[other()]()
 #: components/app/interface/settings/user/Keybinds.tsx
 msgid "<0>{keys}</0> is already used for “{0}”. Swap them?"
@@ -1665,6 +1682,7 @@ msgstr "Accent colours actions and selection. Outline icons stay muted."
 
 #: components/ui/components/features/voice/ringing/CallRinging.tsx
 #: src/interface/Friends.tsx
+#: src/interface/navigation/NotificationsPhone.tsx
 msgid "Accept"
 msgstr "Accept"
 
@@ -2253,6 +2271,7 @@ msgstr "Algeria"
 #: src/interface/designs/Looks.tsx
 #: src/interface/Discover.tsx
 #: src/interface/Friends.tsx
+#: src/interface/navigation/NotificationsPhone.tsx
 msgid "All"
 msgstr "All"
 
@@ -5144,6 +5163,7 @@ msgstr "clips"
 #: components/ui/components/design/Dialog.tsx
 #: components/ui/components/features/profiles/ProfileActions.tsx
 #: components/ui/components/features/voice/soundboard/SoundsUnavailable.tsx
+#: src/interface/navigation/NotificationsPhone.tsx
 #: src/interface/OAuth.tsx
 msgid "Close"
 msgstr "Close"
@@ -6580,6 +6600,7 @@ msgstr "Decided"
 #: components/app/interface/settings/user/account/ChangeRequests.tsx
 #: components/auth/src/flows/FlowConfirmChange.tsx
 #: components/ui/components/features/voice/ringing/CallRinging.tsx
+#: src/interface/navigation/NotificationsPhone.tsx
 msgid "Decline"
 msgstr "Decline"
 
@@ -7157,6 +7178,7 @@ msgstr "Didn't open? Continue in the browser."
 
 #: components/modal/modals/ForwardMessage.tsx
 #: src/interface/navigation/MentionsPanel.tsx
+#: src/interface/navigation/NotificationsPhone.tsx
 msgid "Direct message"
 msgstr "Direct message"
 
@@ -7588,6 +7610,10 @@ msgstr "Each tier has a fixed number of places so every guarantee can be kept. B
 #: components/app/interface/settings/user/subscriptions/Subscriptions.tsx
 msgid "Each Wing counts towards a server's level. Move them any time; they leave a server with you."
 msgstr "Each Wing counts towards a server's level. Move them any time; they leave a server with you."
+
+#: src/interface/navigation/NotificationsPhone.tsx
+msgid "Earlier"
+msgstr "Earlier"
 
 #: components/ui/components/features/profiles/badges/useBadgeText.ts
 msgid "Early Adopter"
@@ -8988,6 +9014,7 @@ msgid "Fresh mint"
 msgstr "Fresh mint"
 
 #: src/interface/navigation/channels/HomeSidebar.tsx
+#: src/interface/navigation/NotificationsPhone.tsx
 msgid "Friend requests"
 msgstr "Friend requests"
 
@@ -9002,6 +9029,7 @@ msgstr "Friend requests you send or receive wait here."
 #: components/ui/components/features/profiles/ProfileMutuals.tsx
 #: src/interface/Friends.tsx
 #: src/interface/navigation/channels/HomeSidebar.tsx
+#: src/interface/navigation/NotificationsPhone.tsx
 #: src/interface/You.tsx
 msgid "Friends"
 msgstr "Friends"
@@ -12729,6 +12757,7 @@ msgstr "Mention specific roles"
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 #: src/interface/navigation/channels/AccountBar.tsx
 #: src/interface/navigation/MentionsPanel.tsx
+#: src/interface/navigation/NotificationsPhone.tsx
 #: src/interface/navigation/PhoneTabs.tsx
 msgid "Mentions"
 msgstr "Mentions"
@@ -12739,6 +12768,7 @@ msgid "Mentions"
 msgstr "Mentions"
 
 #: src/interface/navigation/MentionsPanel.tsx
+#: src/interface/navigation/NotificationsPhone.tsx
 msgid "Mentions couldn't load. Try again soon."
 msgstr "Mentions couldn't load. Try again soon."
 
@@ -14744,6 +14774,10 @@ msgstr "Nothing on yet. Pick something to try on."
 #~ msgid "Nothing quite right? Mix your own."
 #~ msgstr "Nothing quite right? Mix your own."
 
+#: src/interface/navigation/NotificationsPhone.tsx
+msgid "Nothing waits for you. New mentions and friend requests show here."
+msgstr "Nothing waits for you. New mentions and friend requests show here."
+
 #: src/interface/ServiceReturn.tsx
 msgid "Nothing was linked"
 msgstr "Nothing was linked"
@@ -14768,6 +14802,7 @@ msgstr "Nothing yet. You are asked before this version is published."
 #: components/app/interface/settings/UserSettings.tsx
 #: components/app/menus/ServerContextMenu.tsx
 #: components/app/menus/shared/NotificationContextMenu.tsx
+#: src/interface/navigation/NotificationsPhone.tsx
 msgid "Notifications"
 msgstr "Notifications"
 
@@ -18809,6 +18844,7 @@ msgstr "Saved"
 #: src/interface/channels/ChannelHeader.tsx
 #: src/interface/navigation/channels/HomeSidebar.tsx
 #: src/interface/navigation/MentionsPanel.tsx
+#: src/interface/navigation/NotificationsPhone.tsx
 #: src/interface/You.tsx
 msgid "Saved notes"
 msgstr "Saved notes"
@@ -19380,6 +19416,7 @@ msgstr "Send it straight to a friend, or share the link."
 
 #: components/app/menus/VoiceParticipantContextMenu.tsx
 #: src/interface/channels/text/Composition.tsx
+#: src/interface/navigation/NotificationsPhone.tsx
 msgid "Send message"
 msgstr "Send message"
 
@@ -23342,6 +23379,7 @@ msgstr "To answer one, open a ticket."
 
 #: components/modal/modals/CustomStatus.tsx
 #: src/interface/channels/text/SearchBox.tsx
+#: src/interface/navigation/NotificationsPhone.tsx
 msgid "Today"
 msgstr "Today"
 
@@ -23965,6 +24003,7 @@ msgid "unpinned a message by {0} in {1}"
 msgstr "unpinned a message by {0} in {1}"
 
 #: src/interface/navigation/channels/HomeSidebarPhone.tsx
+#: src/interface/navigation/NotificationsPhone.tsx
 msgid "Unread"
 msgstr "Unread"
 
@@ -25927,6 +25966,7 @@ msgstr "Yes, uninstall"
 
 #: src/interface/channels/text/SearchBox.tsx
 #: src/interface/navigation/channels/HomeSidebarPhone.tsx
+#: src/interface/navigation/NotificationsPhone.tsx
 msgid "Yesterday"
 msgstr "Yesterday"
 
@@ -26860,6 +26900,10 @@ msgstr "Your server here"
 #: components/app/interface/settings/shared/Discoverable.tsx
 msgid "Your server is under review"
 msgstr "Your server is under review"
+
+#: components/modal/lib/CreateServerFlow.tsx
+msgid "Your server is where you and your friends hang out. Start from scratch or pick a ready-made one."
+msgstr "Your server is where you and your friends hang out. Start from scratch or pick a ready-made one."
 
 #: components/app/interface/settings/shared/Discoverable.tsx
 msgid "Your server isn't on Discover"
