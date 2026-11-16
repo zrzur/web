@@ -20,9 +20,9 @@ const [lastServer, setLastServer] = createSignal<string>();
 /**
  * Phone navigation: a bar fixed to the bottom of the menu side with five
  * tabs, each with its name under the icon: Servers (rail + channels),
- * Messages, Designs, Notifications and You. The open tab's icon and name
- * take the action colour; no shape is drawn around them. Discover stays on
- * the server rail.
+ * Messages, Discover, Mentions and You. The open tab's icon sits on a soft
+ * pink tile and its name is full strength (the design the owner picked,
+ * 2026-11-16).
  * Hidden on wider screens, where the rail and account card do this job.
  */
 export function PhoneTabs() {
@@ -42,9 +42,7 @@ export function PhoneTabs() {
   const active = () => {
     const path = location.pathname;
     if (path.startsWith("/server")) return "servers";
-    if (path.startsWith("/designs")) return "designs";
-    // Discover is opened from the rail; no tab is its own
-    if (path.startsWith("/discover")) return "none";
+    if (path.startsWith("/discover")) return "discover";
     if (path.startsWith("/you")) return "you";
     return "messages";
   };
@@ -73,8 +71,8 @@ export function PhoneTabs() {
     if (active() !== "messages") navigate("/app");
   };
 
-  const openDesigns = () => {
-    navigate("/designs");
+  const openDiscover = () => {
+    navigate(state.layout.getLastActiveDiscoverPath());
     // full pages live on the content side
     state.appDrawer()?.setShown(true);
   };
@@ -110,18 +108,18 @@ export function PhoneTabs() {
       {tab("messages", "chat-circle-dots", t`Messages`, openMessages, () =>
         unreadMessages(),
       )}
-      {tab("designs", "palette", t`Designs`, openDesigns)}
-      {/* notifications open as a sheet over whatever is on screen */}
+      {tab("discover", "compass", t`Discover`, openDiscover)}
+      {/* mentions open as a sheet over whatever is on screen */}
       <Tab type="button" aria-haspopup="dialog" onClick={openMentions}>
         <TabIcon>
-          <Icon name="bell" size={24} />
+          <Icon name="at" size={24} />
           <Show when={unreadMentions()}>
             <Badge data-tab-badge>
               {unreadMentions() > 99 ? "99+" : unreadMentions()}
             </Badge>
           </Show>
         </TabIcon>
-        <TabName>{t`Notifications`}</TabName>
+        <TabName>{t`Mentions`}</TabName>
       </Tab>
       <Tab
         type="button"
@@ -194,12 +192,15 @@ const Tab = styled("button", {
       outline: "none",
       boxShadow: "inset 0 0 0 2px var(--z-focus)",
     },
-    // the open tab: its icon and name take the action colour, nothing is
-    // drawn around them (owner, 2026-11-16)
+    // the open tab: full-strength name, the icon on a soft pink tile
     "&[data-current='true']": {
-      color: "var(--z-accent)",
+      color: "var(--z-fg-primary)",
       fontWeight: 600,
-      "--z-icon-color": "var(--z-accent)",
+      "& > span:first-of-type": {
+        background: "color-mix(in srgb, var(--z-accent) 18%, transparent)",
+        "--z-icon-color": "var(--z-accent)",
+        color: "var(--z-accent)",
+      },
     },
   },
 });
@@ -222,6 +223,7 @@ const TabIcon = styled("span", {
     placeItems: "center",
     width: "52px",
     height: "30px",
+    borderRadius: "15px",
   },
 });
 
