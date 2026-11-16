@@ -42,6 +42,7 @@
       "@revolt/keybinds/*": ["components/keybinds/*"],
       "@revolt/markdown": ["components/markdown"],
       "@revolt/markdown/*": ["components/markdown/*"],
+      "@revolt/pwa/*": ["components/pwa/*"],
       "@revolt/modal": ["components/modal"],
       "@revolt/modal/*": ["components/modal/*"],
       "@revolt/plugins": ["components/plugins"],

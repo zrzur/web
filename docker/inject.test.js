@@ -109,3 +109,27 @@ test("the release channel: as set, and \"stable\" when the container sets nothin
   assert.match(stable.read(`assets/${stable.release}/chunk-BBBB2222.js`), /channel="stable"/);
   assert.notEqual(beta.release, stable.release);
 });
+
+test("Zrzur Beta installs under its own name, the stable release keeps its name", () => {
+  const { root, dist } = fakeBuild();
+  const manifest = (lang, name) =>
+    JSON.stringify({ id: "/", name, short_name: name, lang, icons: [{ src: "/assets/web/icon.png" }] });
+  writeFileSync(join(dist, "manifest.webmanifest"), manifest("en", "Zrzur"));
+  writeFileSync(join(dist, "manifest.ar.webmanifest"), manifest("ar", "زرزور"));
+
+  const beta = run(dist, root, { ...ENV, VITE_RELEASE_CHANNEL: "beta" }, "beta");
+  const en = JSON.parse(beta.read("manifest.webmanifest"));
+  const ar = JSON.parse(beta.read("manifest.ar.webmanifest"));
+  assert.equal(en.name, "Zrzur Beta");
+  assert.equal(en.short_name, "Zrzur Beta");
+  assert.equal(ar.name, "زرزور التجريبي");
+  // nothing else changes: same app id, same icons
+  assert.equal(en.id, "/");
+  assert.deepEqual(en.icons, [{ src: "/assets/web/icon.png" }]);
+
+  for (const env of [ENV, { ...ENV, VITE_RELEASE_CHANNEL: "stable" }]) {
+    const stable = run(dist, root, env, "stable");
+    assert.equal(JSON.parse(stable.read("manifest.webmanifest")).name, "Zrzur");
+    assert.equal(JSON.parse(stable.read("manifest.ar.webmanifest")).name, "زرزور");
+  }
+});
