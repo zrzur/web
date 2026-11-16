@@ -3082,8 +3082,8 @@
     },
     {
       "path": "packages/client/components/common/Device.tsx",
-      "sha256": "1b5b689efb13e8fa66bfd3b9ad582267de5af348a42bc254392656e5ac37146b",
-      "bytes": 5574,
+      "sha256": "97fc57352827725e1af991f3454e4e7547c7b44db3bd876425a33cb9437abc57",
+      "bytes": 5705,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -3286,8 +3286,8 @@
     },
     {
       "path": "packages/client/components/common/shortViewport.ts",
-      "sha256": "a92c44678d26fe13637975361a63ef82a335a9661170e89a7cdd79e6d8fcc08f",
-      "bytes": 3510,
+      "sha256": "c76d489fc407142d3359be1ec34d042a411c33adf86f5734b1a08ca04fd7dbb9",
+      "bytes": 3709,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -8962,14 +8962,14 @@
     },
     {
       "path": "packages/client/components/ui/safeArea.test.ts",
-      "sha256": "8727eaa9505a9ce540237cf0bc239bbd8418f4c419ef1cd3ead23105ce940b46",
-      "bytes": 4433,
+      "sha256": "e9c6a78b62f51cdd9febf35c6dd7e515880dfd6f19ad6aa8ed8e2bd6637aac00",
+      "bytes": 5172,
       "category": "synthetic-test-source-or-fixture"
     },
     {
       "path": "packages/client/components/ui/styles.css",
-      "sha256": "64b012096d36502f6045c281934d71f295d8006763de5f087bef5e4e98e9f3db",
-      "bytes": 8466,
+      "sha256": "78b39e06f782d9e7bbb79f6243c8f83717af3cedc547612b7834341374a7727d",
+      "bytes": 9237,
       "category": "product-source-or-build-manifest"
     },
     {
