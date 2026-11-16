@@ -92,6 +92,8 @@ export class Device {
     }
 
     if (this.isIOSTouch && this.isPWA) {
+      // the page must be as tall as the screen (styles.css, WebKit 301108)
+      document.documentElement.dataset.installed = "";
       this.untrackShortViewport = trackShortViewport();
     }
   }

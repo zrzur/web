@@ -59,6 +59,23 @@ describe("safe-area insets", () => {
     );
   });
 
+  it("makes the page as tall as the screen in an installed app (WebKit 301108)", () => {
+    // while the page is shorter than the screen, iOS 26 gives an installed
+    // app a short viewport and draws nothing fixed below it
+    const rule = "min-height: min(100lvh, calc(100% + var(--z-safe-top)));";
+    const inMedia =
+      styles.match(
+        /@media \(display-mode: standalone\)\s*\{\s*html\s*\{[^}]*\}/,
+      )?.[0] ?? "";
+    expect(inMedia).toContain(rule);
+    const marked =
+      styles.match(/html\[data-installed\]\s*\{[^}]*\}/)?.[0] ?? "";
+    expect(marked).toContain(rule);
+    expect(read(join("components", "common", "Device.tsx"))).toContain(
+      'document.documentElement.dataset.installed = "";',
+    );
+  });
+
   it("reads env(safe-area-inset-*) nowhere else", () => {
     const offenders = [...sources("components"), ...sources("src")]
       .filter((path) => !path.endsWith(join("ui", "styles.css")))

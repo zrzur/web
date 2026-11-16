@@ -84,12 +84,16 @@ export function trackShortViewport(): () => void {
   update();
   // the first layout of a cold start can still be settling
   later();
+  // and iOS may give the tall page (styles.css) its full viewport a moment
+  // later without any resize event: look once more
+  const settled = setTimeout(update, 1500);
   window.addEventListener("resize", later);
   window.addEventListener("orientationchange", later);
   window.addEventListener("pageshow", later);
 
   return () => {
     clearTimeout(timer);
+    clearTimeout(settled);
     window.removeEventListener("resize", later);
     window.removeEventListener("orientationchange", later);
     window.removeEventListener("pageshow", later);
