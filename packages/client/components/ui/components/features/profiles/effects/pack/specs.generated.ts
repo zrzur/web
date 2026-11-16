@@ -979,6 +979,122 @@ export const MAKERS: [string, (K: PackKit) => PackMade][] = [
       },
     };
   }],
+  ["pixellove", (K) => {
+    const heart = [".ooo.ooo.", "ohhhohhho", "ohlhhhhho", "ohhhhhhho", ".ohhhhho.", "..ohhho..", "...oho...", "....o...."];
+    const letter = ["ooooooooooo", "oowwwwwwwoo", "owowwwwwowo", "owwowwwowwo", "owwwohowwwo", "owwwwhwwwwo", "owwwwwwwwwo", "ooooooooooo"];
+    const plus = [".w.", "www", ".w."];
+    return {
+      shapes: {
+        lvheart: { reach: [1, 0.9], body: 0.6, draw: (c, t) => K.px(c, heart, { o: t[1], h: t[0], l: t[2] }) },
+        lvletter: { reach: [1, 0.74], body: 0.8, draw: (c, t) => K.px(c, letter, { o: "#3A0A24", w: "#FFF6EC", h: t[0] }) },
+        lvspark: { reach: [1, 1], body: 0.5, draw: (c, t) => K.px(c, plus, { w: t[2] }) },
+      },
+      effects: {
+        "pixel-hearts": {
+          tones: [K.TONES.pink, K.TONES.rose, K.TONES.red],
+          still: 1600,
+          layers: [
+            { count: 16, shape: "lvspark", size: [0.01, 0.018], path: (t, seed, index) => ({ x: seed, y: K.random(index, 5), grow: t < 0.5 ? 1 : 1.6 }), life: 0.22, fade: K.glow, colours: [1] },
+            { count: 16, shape: "lvheart", size: [0.022, 0.04], path: (t, seed, index) => ({ x: seed + Math.round(Math.sin(t * 6 + index) * 3) * 0.008, y: 1.08 - Math.round(t * 30) / 30 * 1.16 }), life: 0.75, fade: K.soft, colours: [0, 1, 2] },
+            { count: 4, shape: "lvletter", size: [0.045, 0.055], path: (t, seed, index) => ({ x: 0.15 + index * 0.24, y: -0.08 + Math.round(t * 28) / 28 * 0.7 }), life: 0.8, fade: K.soft, colours: [0] },
+          ],
+        },
+      },
+    };
+  }],
+  ["pixelcat", (K) => {
+    const cat = ["oo.....oo", "oko...oko", "okkoookko", "okkkkkkko", "okgkkkgko", "okkkpkkko", ".okkkkko.", "okkkkkkko", "okkwwwkko", "okkwwwkko", "ooooooooo"];
+    const paw = [".p.p.p.", ".p.p.p.", ".......", "..ppp..", ".ppppp.", ".pp.pp."];
+    const yarn = [".ooooo.", "oppqppo", "opqpqpo", "oqpppqo", "oppqppo", ".ooooo."];
+    return {
+      shapes: {
+        ctcat: { reach: [0.82, 1], body: 0.7, draw: (c, t) => K.px(c, cat, { o: "#1A1030", k: t[0], g: "#2A2A3A", p: "#FF7A9C", w: t[2] }) },
+        ctpaw: { reach: [1, 0.9], body: 0.4, draw: (c, t) => K.px(c, paw, { p: t[0] }) },
+        ctyarn: { reach: [1, 0.86], body: 0.7, draw: (c, t) => K.px(c, yarn, { o: "#1A1030", p: t[0], q: t[2] }) },
+      },
+      effects: {
+        "cat-parade": {
+          tones: [K.TONES.amber, K.TONES.bone, K.TONES.pink, K.TONES.violet],
+          still: 1500,
+          layers: [
+            { count: 16, shape: "ctpaw", size: [0.016, 0.024], path: (t, seed, index) => ({ x: seed, y: K.random(index, 5) * 0.7, angle: (K.random(index, 7) - 0.5) * 0.8 }), life: 0.3, fade: K.glow, colours: [2, 3] },
+            { count: 5, shape: "ctyarn", size: [0.024, 0.034], path: (t, seed, index) => ({ x: seed, y: Math.min(0.9, -0.06 + t * t * 1.5) - (t > 0.82 ? Math.sin(((t - 0.82) / 0.18) * Math.PI) * 0.07 : 0), angle: Math.round(t * 8) * (Math.PI / 4) }), life: 0.6, fade: K.soft, colours: [2] },
+            { count: 6, shape: "ctcat", size: [0.05, 0.065], path: (t, seed, index) => ({ x: -0.12 + ((seed + t * 0.5) % 1) * 1.24, y: 0.88 - K.random(index, 6) * 0.08 - Math.abs(Math.sin(t * 16 + seed * 9)) * 0.05 }), life: 0.95, fade: K.soft, colours: [0, 1] },
+          ],
+        },
+      },
+    };
+  }],
+  ["pixelbloom", (K) => {
+    const flower = ["..ppp..", ".ppppp.", "pppyppp", "ppyyypp", "pppyppp", ".ppppp.", "..ppp.."];
+    const fly = ["pp.o.pp", "pppoppp", ".ppopp.", "pp.o.pp"];
+    const dot = ["ww", "ww"];
+    return {
+      shapes: {
+        blflower: { reach: [1, 1], body: 0.7, draw: (c, t) => K.px(c, flower, { p: t[0], y: "#FFE36B" }) },
+        blfly: { reach: [1, 0.58], body: 0.6, draw: (c, t) => K.px(c, fly, { p: t[0], o: "#2A1E3A" }) },
+        blpetal: { reach: [1, 1], body: 1, draw: (c, t) => K.px(c, dot, { w: t[0] }) },
+      },
+      effects: {
+        "pixel-petals": {
+          tones: [K.TONES.pink, K.TONES.violet, K.TONES.amber, K.TONES.sky],
+          still: 1600,
+          layers: [
+            ...K.depth({ count: 36, shape: "blpetal", size: [0.006, 0.01], path: (t, seed, index) => ({ x: seed + Math.round(Math.sin(t * 6 + index) * 4) * 0.008, y: -0.05 + Math.round(t * 30) / 30 * 1.1 }), life: 0.7, fade: K.soft, colours: [0, 1, 2] }),
+            { count: 8, shape: "blflower", size: [0.022, 0.034], path: (t, seed, index) => ({ x: seed, y: -0.06 + Math.round(t * 26) / 26 * 1.14, angle: Math.round(t * 6 + index) * (Math.PI / 4) }), life: 0.85, fade: K.soft, colours: [0, 1, 2, 3] },
+            { count: 6, shape: "blfly", size: [0.03, 0.04], path: (t, seed, index) => ({ x: -0.1 + t * 1.2, y: 0.12 + K.random(index, 4) * 0.6 + Math.round(Math.sin(t * 12 + index) * 3) * 0.012, squash: Math.round(t * 24) % 2 ? 1 : 0.6 }), life: 0.7, fade: K.soft, colours: [3, 2, 0] },
+          ],
+        },
+      },
+    };
+  }],
+  ["pixelrainbow", (K) => {
+    const drop = [".b.", "bbb", "bbb", ".b."];
+    const cloud = ["...wwww....", ".wwwwwwww..", "wwwwwwwwwww", "wwwwwwwwwww", ".ggggggggg."];
+    const dot = ["ww", "ww"];
+    return {
+      shapes: {
+        rbdrop: { reach: [0.75, 1], body: 0.7, draw: (c, t) => K.px(c, drop, { b: t[0] }) },
+        rbcloud: { reach: [1, 0.46], body: 0.8, draw: (c, t) => K.px(c, cloud, { w: t[2], g: t[0] }) },
+        rbdot: { reach: [1, 1], body: 1, draw: (c, t) => K.px(c, dot, { w: t[0] }) },
+      },
+      effects: {
+        "pixel-rain": {
+          tones: [K.TONES.sky, K.TONES.white, K.TONES.red, K.TONES.gold, K.TONES.green, K.TONES.violet],
+          still: 1600,
+          layers: [
+            { count: 4, shape: "rbcloud", size: [0.09, 0.12], path: (t, seed, index) => ({ x: 0.1 + index * 0.27 + Math.round(t * 20) / 20 * 0.06, y: 0.08 + (index % 2) * 0.05 }), life: 0.96, start: () => 0.01, alpha: 0.7, fade: K.soft, colours: [1] },
+            ...K.depth({ count: 34, shape: "rbdrop", size: [0.008, 0.014], path: (t, seed) => ({ x: seed, y: 0.14 + Math.round(t * 30) / 30 * 0.92 }), life: 0.5, fade: K.soft, colours: [0] }),
+            // a rainbow of squares that arrives late and arches over the card
+            { count: 42, shape: "rbdot", size: [0.012, 0.012], path: (t, seed, index) => { const band = index % 6; const step = Math.floor(index / 6); const a = Math.PI * (0.12 + (step / 6) * 0.76); const r = 0.36 + band * 0.028; return { x: 0.5 - Math.cos(a) * r, y: 0.78 - Math.sin(a) * r * 0.62 }; }, life: 0.5, start: (index) => 0.42 + Math.floor(index / 6) * 0.03, alpha: 0.8, fade: K.soft, colours: [2, 3, 3, 4, 0, 5] },
+          ],
+        },
+      },
+    };
+  }],
+  ["pixelsweet", (K) => {
+    const cupcake = ["....r....", "...ppp...", "..ppwpp..", ".ppppppp.", "ppwpppppp", "ooooooooo", ".bybybyb.", ".bybybyb.", "..bbbbb.."];
+    const candy = ["p...ooo...p", "pp.orwro.pp", "pppowrwoppp", "pp.orwro.pp", "p...ooo...p"];
+    const bit = ["www", "www"];
+    return {
+      shapes: {
+        swcake: { reach: [1, 1], body: 0.7, draw: (c, t) => K.px(c, cupcake, { r: "#FF4D5A", p: t[0], w: "#FFFFFF", o: "#4A1E3A", b: "#C88A4A", y: "#E8B070" }) },
+        swcandy: { reach: [1, 0.46], body: 0.7, draw: (c, t) => K.px(c, candy, { p: t[0], o: "#4A1E3A", r: t[1], w: "#FFFFFF" }) },
+        swbit: { reach: [1, 0.67], body: 1, draw: (c, t) => K.px(c, bit, { w: t[0] }) },
+      },
+      effects: {
+        "pixel-sprinkles": {
+          tones: [K.TONES.pink, K.TONES.gold, K.TONES.sky, K.TONES.mint, K.TONES.violet],
+          still: 1600,
+          layers: [
+            ...K.depth({ count: 46, shape: "swbit", size: [0.006, 0.01], path: (t, seed, index) => ({ x: seed, y: -0.05 + Math.round(t * 30) / 30 * 1.1, angle: (index % 2) * (Math.PI / 2) }), life: 0.65, fade: K.soft, colours: [0, 1, 2, 3, 4] }),
+            { count: 7, shape: "swcandy", size: [0.036, 0.05], path: (t, seed, index) => ({ x: seed, y: -0.06 + Math.round(t * 26) / 26 * 1.14, angle: Math.round(t * 6 + index) * (Math.PI / 4) }), life: 0.8, fade: K.soft, colours: [1, 3, 0] },
+            { count: 5, shape: "swcake", size: [0.036, 0.046], path: (t, seed, index) => ({ x: seed, y: Math.min(0.94, -0.06 + t * t * 1.5) - (t > 0.82 ? Math.sin(((t - 0.82) / 0.18) * Math.PI) * 0.06 : 0) }), life: 0.6, fade: K.soft, colours: [0, 3] },
+          ],
+        },
+      },
+    };
+  }],
   ["ninja", (K) => ({
     shapes: {
       throwblade: {
@@ -2278,6 +2394,27 @@ export const MAKERS: [string, (K: PackKit) => PackMade][] = [
               fade: K.soft,
               colours: [0, 1, 0, 2],
             },
+          ],
+        },
+      },
+    };
+  }],
+  ["pixelzrzur", (K) => {
+    const mark = [".....mmmmmmmmmmmmmm.....", "....mmmmmmmmmmmmmmmm....", "...mmmmmmmmmmmmmmmmmm...", "...mmm...mmmmmm...mmm...", "..mmmm....mmmm....mmmm..", ".mmmm..mm.mmmm.mm..mmmm.", "mmmmmmmmmmmmmmmmmmmmmmmm", "mmmmmmmmmmmmmmmmmmmmmmmm", "mmmmmmmmmmmmmmmmmmmmmmmm", ".mmmmmmmmmmmmmmmmmmmmmm.", "..mmmmm..........mmmmm..", "...mmm............mmm..."];
+    const plus = [".w.", "www", ".w."];
+    return {
+      shapes: {
+        // drawn in a box twice as wide as tall, so the cells stay square; never turned
+        pxmark: { reach: [1, 0.5], body: 0.7, draw: (c, t) => { const s = 2 / 24; mark.forEach((row, j) => { for (let i = 0; i < row.length; i++) if (row[i] === "m") { c.fillStyle = t[0]; c.fillRect(-1 + i * s - 0.003, -0.5 + j * s - 0.003, s + 0.006, s + 0.006); } }); } },
+        pxspark: { reach: [1, 1], body: 0.5, draw: (c, t) => K.px(c, plus, { w: t[2] }) },
+      },
+      effects: {
+        "pixel-zrzur-rise": {
+          tones: [K.TONES.action, K.TONES.aqua, K.TONES.white],
+          still: 1600,
+          layers: [
+            { count: 20, shape: "pxspark", size: [0.012, 0.02], path: (t, seed, index) => ({ x: seed, y: K.random(index, 5), grow: t < 0.5 ? 1 : 1.6 }), life: 0.22, fade: K.glow, colours: [0, 1, 2] },
+            { count: 9, shape: "pxmark", size: [0.05, 0.075], path: (t, seed) => ({ x: seed, y: 1.08 - Math.round(t * 30) / 30 * 1.16 }), life: 0.8, fade: K.soft, colours: [0, 2, 1] },
           ],
         },
       },

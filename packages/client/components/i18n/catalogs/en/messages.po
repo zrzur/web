@@ -28398,3 +28398,99 @@ msgstr "Snowy Village"
 #: components/ui/components/features/profiles/pack/labels.generated.ts
 msgid "Woods Frame"
 msgstr "Woods Frame"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "After the Rain"
+msgstr "After the Rain"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Bloom Frame"
+msgstr "Bloom Frame"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Candy Shop"
+msgstr "Candy Shop"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Cat Frame"
+msgstr "Cat Frame"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Cat Parade"
+msgstr "Cat Parade"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Ears and Whiskers"
+msgstr "Ears and Whiskers"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Heart Chain"
+msgstr "Heart Chain"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Love Frame"
+msgstr "Love Frame"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Love Letter"
+msgstr "Love Letter"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Pixel Garden"
+msgstr "Pixel Garden"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Pixel Hearts"
+msgstr "Pixel Hearts"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Pixel Petals"
+msgstr "Pixel Petals"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Pixel Rain"
+msgstr "Pixel Rain"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Pixel Sprinkles"
+msgstr "Pixel Sprinkles"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Rain and Sun"
+msgstr "Rain and Sun"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Rainbow Ring"
+msgstr "Rainbow Ring"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Rooftop Cats"
+msgstr "Rooftop Cats"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Sprinkle Ring"
+msgstr "Sprinkle Ring"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Sweet Frame"
+msgstr "Sweet Frame"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Tulip Ring"
+msgstr "Tulip Ring"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Zrzur Pixel Badge"
+msgstr "Zrzur Pixel Badge"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Zrzur Pixel Crew"
+msgstr "Zrzur Pixel Crew"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Zrzur Pixel Home"
+msgstr "Zrzur Pixel Home"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Zrzur Pixel Rise"
+msgstr "Zrzur Pixel Rise"

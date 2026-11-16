@@ -33,6 +33,11 @@ export const PACK_EFFECT_IDS = [
   "pixel-snowfall",
   "pixel-notes",
   "power-up",
+  "pixel-hearts",
+  "cat-parade",
+  "pixel-petals",
+  "pixel-rain",
+  "pixel-sprinkles",
   "blade-flight",
   "jasmine-fall",
   "rose-fall",
@@ -73,4 +78,5 @@ export const PACK_EFFECT_IDS = [
   "crane-flight",
   "pulse-beat",
   "flock-sweep",
+  "pixel-zrzur-rise",
 ] as const;

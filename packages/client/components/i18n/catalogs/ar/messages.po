@@ -28395,3 +28395,99 @@ msgstr "قرية الثلج"
 #: components/ui/components/features/profiles/pack/labels.generated.ts
 msgid "Woods Frame"
 msgstr "إطار الغابة"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "After the Rain"
+msgstr "بعد المطر"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Bloom Frame"
+msgstr "إطار الأزهار"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Candy Shop"
+msgstr "دكّان الحلوى"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Cat Frame"
+msgstr "إطار القطّة"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Cat Parade"
+msgstr "موكب القطط"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Ears and Whiskers"
+msgstr "آذان وشوارب"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Heart Chain"
+msgstr "سلسلة القلوب"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Love Frame"
+msgstr "إطار الحبّ"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Love Letter"
+msgstr "رسالة حبّ"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Pixel Garden"
+msgstr "حديقة البكسل"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Pixel Hearts"
+msgstr "قلوب البكسل"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Pixel Petals"
+msgstr "بتلات البكسل"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Pixel Rain"
+msgstr "مطر البكسل"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Pixel Sprinkles"
+msgstr "رشّات البكسل"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Rain and Sun"
+msgstr "مطر وشمس"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Rainbow Ring"
+msgstr "حلقة قوس قزح"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Rooftop Cats"
+msgstr "قطط الأسطح"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Sprinkle Ring"
+msgstr "حلقة الرشّات"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Sweet Frame"
+msgstr "إطار الحلويات"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Tulip Ring"
+msgstr "حلقة الزنابق"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Zrzur Pixel Badge"
+msgstr "شارة زرزور"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Zrzur Pixel Crew"
+msgstr "رفاق زرزور"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Zrzur Pixel Home"
+msgstr "بيت زرزور"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Zrzur Pixel Rise"
+msgstr "صعود زرزور"

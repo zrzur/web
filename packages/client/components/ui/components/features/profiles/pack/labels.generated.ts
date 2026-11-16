@@ -91,6 +91,16 @@ export function usePackLabels() {
     "mixtape-frame": t`Mixtape Frame`,
     "pocket-frame": t`Handheld Frame`,
     "press-start": t`Press Start`,
+    "love-frame": t`Love Frame`,
+    "heart-chain": t`Heart Chain`,
+    "cat-frame": t`Cat Frame`,
+    "pixel-cat-ears": t`Ears and Whiskers`,
+    "bloom-frame": t`Bloom Frame`,
+    "tulip-ring": t`Tulip Ring`,
+    "rainbow-ring": t`Rainbow Ring`,
+    "rain-and-sun": t`Rain and Sun`,
+    "sweet-frame": t`Sweet Frame`,
+    "sprinkle-ring": t`Sprinkle Ring`,
     "blade-ring": t`Blade Ring`,
     "smoke-ring": t`Smoke Ring`,
     "jasmine-ring": t`Jasmine Ring`,
@@ -167,6 +177,8 @@ export function usePackLabels() {
     "zrzur-crest": t`Zrzur Crest`,
     "murmuration": t`Murmuration`,
     "perch": t`On the Branch`,
+    "pixel-zrzur-badge": t`Zrzur Pixel Badge`,
+    "pixel-zrzur-crew": t`Zrzur Pixel Crew`,
   };
   const nameplates: Record<string, string> = {
     "rank-gold-plate": t`Gold Plate`,
@@ -203,6 +215,11 @@ export function usePackLabels() {
     "snowy-village": t`Snowy Village`,
     "boombox-night": t`Boombox Night`,
     "game-shelf": t`Game Shelf`,
+    "love-letter": t`Love Letter`,
+    "cat-rooftops": t`Rooftop Cats`,
+    "pixel-garden": t`Pixel Garden`,
+    "after-rain": t`After the Rain`,
+    "candy-shop": t`Candy Shop`,
     "moon-roofs": t`Moonlit Roofs`,
     "damascus-night": t`Damascus Night`,
     "ablaq-stone": t`Ablaq Stone`,
@@ -251,6 +268,7 @@ export function usePackLabels() {
     "midnight-pulse": t`Midnight Pulse`,
     "pulse-wave": t`Pulse Wave`,
     "dusk-flock": t`Dusk Flock`,
+    "pixel-zrzur-home": t`Zrzur Pixel Home`,
   };
   const effects: Record<string, string> = {
     "rank-up": t`Rank Up`,
@@ -284,6 +302,11 @@ export function usePackLabels() {
     "pixel-snowfall": t`Pixel Snowfall`,
     "pixel-notes": t`Pixel Notes`,
     "power-up": t`Power Up`,
+    "pixel-hearts": t`Pixel Hearts`,
+    "cat-parade": t`Cat Parade`,
+    "pixel-petals": t`Pixel Petals`,
+    "pixel-rain": t`Pixel Rain`,
+    "pixel-sprinkles": t`Pixel Sprinkles`,
     "blade-flight": t`Flying Blades`,
     "jasmine-fall": t`Jasmine Fall`,
     "rose-fall": t`Rose Fall`,
@@ -324,6 +347,7 @@ export function usePackLabels() {
     "crane-flight": t`Crane Flight`,
     "pulse-beat": t`Heartbeat`,
     "flock-sweep": t`Flock Sweep`,
+    "pixel-zrzur-rise": t`Zrzur Pixel Rise`,
   };
   return { decorations, nameplates, effects };
 }

@@ -87,6 +87,16 @@ export const PACK_DECORATIONS = [
   "mixtape-frame",
   "pocket-frame",
   "press-start",
+  "love-frame",
+  "heart-chain",
+  "cat-frame",
+  "pixel-cat-ears",
+  "bloom-frame",
+  "tulip-ring",
+  "rainbow-ring",
+  "rain-and-sun",
+  "sweet-frame",
+  "sprinkle-ring",
   "blade-ring",
   "smoke-ring",
   "jasmine-ring",
@@ -163,6 +173,8 @@ export const PACK_DECORATIONS = [
   "zrzur-crest",
   "murmuration",
   "perch",
+  "pixel-zrzur-badge",
+  "pixel-zrzur-crew",
 ] as const;
 
 /** The design pack's nameplates */
@@ -201,6 +213,11 @@ export const PACK_NAMEPLATES = [
   "snowy-village",
   "boombox-night",
   "game-shelf",
+  "love-letter",
+  "cat-rooftops",
+  "pixel-garden",
+  "after-rain",
+  "candy-shop",
   "moon-roofs",
   "damascus-night",
   "ablaq-stone",
@@ -249,6 +266,7 @@ export const PACK_NAMEPLATES = [
   "midnight-pulse",
   "pulse-wave",
   "dusk-flock",
+  "pixel-zrzur-home",
 ] as const;
 
 /** Pack nameplates that have a slow drifting layer */
@@ -282,6 +300,11 @@ export const PACK_PLATE_DRIFT = [
   "snowy-village",
   "boombox-night",
   "game-shelf",
+  "love-letter",
+  "cat-rooftops",
+  "pixel-garden",
+  "after-rain",
+  "candy-shop",
   "moon-roofs",
   "damascus-night",
   "columns-dusk",
@@ -322,4 +345,5 @@ export const PACK_PLATE_DRIFT = [
   "paper-water",
   "midnight-pulse",
   "dusk-flock",
+  "pixel-zrzur-home",
 ] as const;

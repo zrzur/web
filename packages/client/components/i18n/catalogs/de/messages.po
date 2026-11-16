@@ -28395,3 +28395,99 @@ msgstr "Schneedorf"
 #: components/ui/components/features/profiles/pack/labels.generated.ts
 msgid "Woods Frame"
 msgstr "Waldrahmen"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "After the Rain"
+msgstr "Nach dem Regen"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Bloom Frame"
+msgstr "Blütenrahmen"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Candy Shop"
+msgstr "Süßwarenladen"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Cat Frame"
+msgstr "Katzenrahmen"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Cat Parade"
+msgstr "Katzenparade"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Ears and Whiskers"
+msgstr "Ohren und Schnurrhaare"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Heart Chain"
+msgstr "Herzkette"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Love Frame"
+msgstr "Liebesrahmen"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Love Letter"
+msgstr "Liebesbrief"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Pixel Garden"
+msgstr "Pixel-Garten"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Pixel Hearts"
+msgstr "Pixel-Herzen"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Pixel Petals"
+msgstr "Pixel-Blütenblätter"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Pixel Rain"
+msgstr "Pixel-Regen"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Pixel Sprinkles"
+msgstr "Pixel-Streusel"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Rain and Sun"
+msgstr "Regen und Sonne"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Rainbow Ring"
+msgstr "Regenbogenring"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Rooftop Cats"
+msgstr "Dachkatzen"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Sprinkle Ring"
+msgstr "Streuselring"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Sweet Frame"
+msgstr "Süßer Rahmen"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Tulip Ring"
+msgstr "Tulpenring"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Zrzur Pixel Badge"
+msgstr "Zrzur-Pixelabzeichen"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Zrzur Pixel Crew"
+msgstr "Zrzur-Pixelcrew"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Zrzur Pixel Home"
+msgstr "Zrzur-Pixelheim"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Zrzur Pixel Rise"
+msgstr "Zrzur-Pixelaufstieg"

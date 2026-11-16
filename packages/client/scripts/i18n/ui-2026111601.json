@@ -335,6 +335,46 @@
     "اضغط للبدء",
     "Start drücken"
   ],
+  "Love Frame": [
+    "إطار الحبّ",
+    "Liebesrahmen"
+  ],
+  "Heart Chain": [
+    "سلسلة القلوب",
+    "Herzkette"
+  ],
+  "Cat Frame": [
+    "إطار القطّة",
+    "Katzenrahmen"
+  ],
+  "Ears and Whiskers": [
+    "آذان وشوارب",
+    "Ohren und Schnurrhaare"
+  ],
+  "Bloom Frame": [
+    "إطار الأزهار",
+    "Blütenrahmen"
+  ],
+  "Tulip Ring": [
+    "حلقة الزنابق",
+    "Tulpenring"
+  ],
+  "Rainbow Ring": [
+    "حلقة قوس قزح",
+    "Regenbogenring"
+  ],
+  "Rain and Sun": [
+    "مطر وشمس",
+    "Regen und Sonne"
+  ],
+  "Sweet Frame": [
+    "إطار الحلويات",
+    "Süßer Rahmen"
+  ],
+  "Sprinkle Ring": [
+    "حلقة الرشّات",
+    "Streuselring"
+  ],
   "Blade Ring": [
     "حلقة الشفرات",
     "Klingenring"
@@ -631,6 +671,14 @@
     "على الغصن",
     "Auf dem Ast"
   ],
+  "Zrzur Pixel Badge": [
+    "شارة زرزور",
+    "Zrzur-Pixelabzeichen"
+  ],
+  "Zrzur Pixel Crew": [
+    "رفاق زرزور",
+    "Zrzur-Pixelcrew"
+  ],
   "Gold Plate": [
     "لوحة ذهبي",
     "Gold-Schild"
@@ -766,6 +814,26 @@
   "Game Shelf": [
     "رفّ الألعاب",
     "Spieleregal"
+  ],
+  "Love Letter": [
+    "رسالة حبّ",
+    "Liebesbrief"
+  ],
+  "Rooftop Cats": [
+    "قطط الأسطح",
+    "Dachkatzen"
+  ],
+  "Pixel Garden": [
+    "حديقة البكسل",
+    "Pixel-Garten"
+  ],
+  "After the Rain": [
+    "بعد المطر",
+    "Nach dem Regen"
+  ],
+  "Candy Shop": [
+    "دكّان الحلوى",
+    "Süßwarenladen"
   ],
   "Moonlit Roofs": [
     "أسطح القمر",
@@ -955,6 +1023,10 @@
     "سرب الغروب",
     "Abendschwarm"
   ],
+  "Zrzur Pixel Home": [
+    "بيت زرزور",
+    "Zrzur-Pixelheim"
+  ],
   "Rank Up": [
     "ترقية الرتبة",
     "Aufstieg"
@@ -1074,6 +1146,26 @@
   "Power Up": [
     "ترقية القوّة",
     "Power-up"
+  ],
+  "Pixel Hearts": [
+    "قلوب البكسل",
+    "Pixel-Herzen"
+  ],
+  "Cat Parade": [
+    "موكب القطط",
+    "Katzenparade"
+  ],
+  "Pixel Petals": [
+    "بتلات البكسل",
+    "Pixel-Blütenblätter"
+  ],
+  "Pixel Rain": [
+    "مطر البكسل",
+    "Pixel-Regen"
+  ],
+  "Pixel Sprinkles": [
+    "رشّات البكسل",
+    "Pixel-Streusel"
   ],
   "Flying Blades": [
     "شفرات طائرة",
@@ -1234,5 +1326,9 @@
   "Flock Sweep": [
     "عبور السرب",
     "Schwarmzug"
+  ],
+  "Zrzur Pixel Rise": [
+    "صعود زرزور",
+    "Zrzur-Pixelaufstieg"
   ]
 }
