@@ -5878,8 +5878,8 @@
     },
     {
       "path": "packages/client/components/ui/components/design/Dialog.tsx",
-      "sha256": "6d22f87baa830ce19e74d132ced2badecfe482f81bcf17a4a64f37a2f3f36498",
-      "bytes": 27880,
+      "sha256": "318afd2d1c7e0f7c7cd48fe47910ae7cf46a5cd9b339a6621bba62db356972c9",
+      "bytes": 27843,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -8962,14 +8962,14 @@
     },
     {
       "path": "packages/client/components/ui/safeArea.test.ts",
-      "sha256": "d98b998c050365691a0b51d64cb62b3dfa3425bc08a95e6be10938bbbb752e24",
-      "bytes": 4068,
+      "sha256": "8727eaa9505a9ce540237cf0bc239bbd8418f4c419ef1cd3ead23105ce940b46",
+      "bytes": 4433,
       "category": "synthetic-test-source-or-fixture"
     },
     {
       "path": "packages/client/components/ui/styles.css",
-      "sha256": "874378870afc567c87d376fc4774637e22962165def9c9fbfef10ab00c6dc8c4",
-      "bytes": 8263,
+      "sha256": "64b012096d36502f6045c281934d71f295d8006763de5f087bef5e4e98e9f3db",
+      "bytes": 8466,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -43762,8 +43762,8 @@
     },
     {
       "path": "packages/client/src/interface/navigation/NotificationsPhone.tsx",
-      "sha256": "cddd47c6e7d5863f709fc2d6388146b800fc1a19120980bd84e21723ada5aea8",
-      "bytes": 13801,
+      "sha256": "8a9db7fb16a71725738c82ac137cb3a6db60fddb15e6c11f4da795c0d62aebfa",
+      "bytes": 13953,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -43786,8 +43786,8 @@
     },
     {
       "path": "packages/client/src/interface/navigation/channels/HomeSidebarPhone.tsx",
-      "sha256": "37a39d74dfb49e8e8fbe02e6305d0c12cb629657625da24c0e86709178819eab",
-      "bytes": 15151,
+      "sha256": "8747987994d2c8c9224bd75b3f1435e55613ba2c0b8b08cec07706f9905346fe",
+      "bytes": 15694,
       "category": "product-source-or-build-manifest"
     },
     {
