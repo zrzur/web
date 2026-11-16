@@ -198,7 +198,9 @@ const Tab = styled("button", {
     },
     "&:active > span:first-of-type": { scale: "0.92" },
 
-    "& > span": {
+    // the label only: the icon holds the unread badge, which reaches past
+    // the icon's box and must not be cut
+    "& > span:last-child": {
       maxWidth: "100%",
       overflow: "hidden",
       textOverflow: "ellipsis",
