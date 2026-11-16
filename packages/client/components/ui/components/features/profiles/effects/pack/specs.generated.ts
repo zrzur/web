@@ -24,22 +24,6 @@ export const MAKERS: [string, (K: PackKit) => PackMade][] = [
       },
     },
   })],
-  ["hud", (K) => ({
-    shapes: {
-      hit: { reach: [1, 1], body: 0.2, draw(c, t) { c.lineCap = "round"; for (const [w, col] of [[0.34, "#0C0A16"], [0.18, t[2]]]) { c.lineWidth = w; c.strokeStyle = col; c.beginPath(); c.moveTo(-0.9, -0.9); c.lineTo(-0.35, -0.35); c.moveTo(0.9, -0.9); c.lineTo(0.35, -0.35); c.moveTo(-0.9, 0.9); c.lineTo(-0.35, 0.35); c.moveTo(0.9, 0.9); c.lineTo(0.35, 0.35); c.stroke(); } } },
-      orb: { reach: [1, 1], body: 0.3, draw(c, t) { K.halo(c, 1, t[0], 0.7); c.beginPath(); c.arc(0, 0, 0.36, 0, K.TAU); c.fillStyle = t[2]; c.fill(); } },
-    },
-    effects: {
-      "hit-markers": {
-        tones: [K.TONES.aqua, K.TONES.red, K.TONES.lime],
-        still: 1500,
-        layers: [
-          { count: 10, shape: "hit", size: [0.03, 0.045], path: (t, seed, index) => ({ x: 0.15 + seed * 0.7, y: 0.12 + K.random(index, 4) * 0.6, grow: t < 0.2 ? 1.3 - t * 1.5 : 1 }), life: 0.22, fade: K.pop, colours: [0, 1] },
-          ...K.depth({ count: 22, shape: "orb", size: [0.008, 0.016], path: K.rise(0.05, 0.04), life: 0.7, fade: K.soft, colours: [2, 0] }),
-        ],
-      },
-    },
-  })],
   ["arcade", (K) => {
     const heart = [".ooo.ooo.", "ohhhohhho", "ohlhhhhho", "ohhhhhhho", ".ohhhhho.", "..ohhho..", "...oho...", "....o...."];
     const coin = ["..oooo..", ".oyyyyo.", "oyylyyyo", "oylyydyo", "oyyyydyo", "oyyyddyo", ".oyyyyo.", "..oooo.."];
@@ -275,53 +259,6 @@ export const MAKERS: [string, (K: PackKit) => PackMade][] = [
       },
     };
   }],
-  ["raceway", (K) => ({
-    shapes: {
-      dash: {
-        reach: [1.6, 0.14],
-        body: 0.5,
-        draw(c, t) {
-          c.fillStyle = K.along(c, [-1.6, 0], [1.6, 0], [[0, K.fade(t[2], 0.95)], [0.25, K.fade(t[0], 0.8)], [1, K.fade(t[0], 0)]]);
-          c.beginPath(); c.moveTo(-1.6, 0); c.lineTo(-1.3, -0.1); c.lineTo(1.6, 0); c.lineTo(-1.3, 0.1); c.closePath(); c.fill();
-        },
-      },
-      check: {
-        reach: [1, 1],
-        body: 0.8,
-        draw(c, t) {
-          c.fillStyle = t[1]; c.fillRect(-0.95, -0.95, 1.9, 1.9);
-          c.fillStyle = t[2]; c.fillRect(-0.85, -0.85, 0.85, 0.85); c.fillRect(0, 0, 0.85, 0.85);
-          c.fillStyle = "#15161C"; c.fillRect(0, -0.85, 0.85, 0.85); c.fillRect(-0.85, 0, 0.85, 0.85);
-        },
-      },
-    },
-    effects: {
-      slipstream: {
-        tones: [K.TONES.white, K.TONES.red, K.TONES.gold],
-        still: 1700,
-        layers: [
-          ...K.depth({
-            count: 30,
-            shape: "dash",
-            size: [0.08, 0.14],
-            path: (t, seed) => ({ x: 1.25 - t * 1.6, y: seed }),
-            life: 0.26,
-            fade: K.soft,
-            colours: [0, 0, 1, 2],
-          }, 1, 0.4),
-          {
-            count: 9,
-            shape: "check",
-            size: [0.016, 0.024],
-            path: (t, seed) => ({ x: 1.1 - t * 1.3, y: seed + Math.sin(t * 5 + seed * 9) * 0.05, angle: t * 6 + seed * 6, squash: 0.3 + 0.7 * Math.abs(Math.cos(t * 9 + seed * 5)) }),
-            life: 0.55,
-            fade: K.soft,
-            colours: [0],
-          },
-        ],
-      },
-    },
-  })],
   ["orbit", (K) => ({
     shapes: {
       rocket: {
@@ -504,26 +441,6 @@ export const MAKERS: [string, (K: PackKit) => PackMade][] = [
       },
     },
   })],
-  ["nightdrive", (K) => ({
-    shapes: {
-      trail: {
-        reach: [2.2, 0.16],
-        body: 0.5,
-        draw(c, t) { c.fillStyle = K.along(c, [-2.2, 0], [2.2, 0], [[0, K.fade(t[0], 0)], [0.8, K.fade(t[0], 0.85)], [1, t[2]]]); c.beginPath(); c.ellipse(0, 0, 2.2, 0.13, 0, 0, K.TAU); c.fill(); },
-      },
-      bokehdot: { reach: [1, 1], body: 0.25, unit: 80, draw(c, t) { c.beginPath(); c.arc(0, 0, 0.9, 0, K.TAU); c.fillStyle = K.radial(c, 0.9, [[0, K.fade(t[0], 0.3)], [0.85, K.fade(t[0], 0.45)], [1, K.fade(t[0], 0)]]); c.fill(); } },
-    },
-    effects: {
-      "light-trails": {
-        tones: [["#FF2A3A", "#8A0A14", "#FFD0D4"], K.TONES.white, K.TONES.gold],
-        still: 1700,
-        layers: [
-          ...K.depth({ count: 10, shape: "bokehdot", size: [0.03, 0.06], path: (t, seed, index) => ({ x: seed, y: 0.1 + K.random(index, 5) * 0.8, grow: 0.8 + t * 0.3 }), life: 0.6, fade: K.glow, colours: [0, 2, 1] }, 0.9, 0.4),
-          ...K.depth({ count: 20, shape: "trail", size: [0.06, 0.12], path: (t, seed, index) => ({ x: index % 2 ? -0.3 + t * 1.6 : 1.3 - t * 1.6, y: 0.1 + seed * 0.85, angle: index % 2 ? 0 : Math.PI }), life: 0.3, fade: K.soft, colours: [0, 1, 0] }, 1, 0.4),
-        ],
-      },
-    },
-  })],
   ["gamerroom", (K) => ({
     shapes: {
       keycap: {
@@ -544,63 +461,6 @@ export const MAKERS: [string, (K: PackKit) => PackMade][] = [
         layers: [
           ...K.depth({ count: 20, shape: "pixelglow", size: [0.008, 0.014], path: K.rise(0.03), life: 0.7, fade: K.twinkle, colours: [0, 1, 2, 3, 4] }),
           { count: 11, shape: "keycap", size: [0.028, 0.04], path: (t, seed, index) => ({ x: 0.06 + seed * 0.88, y: -0.1 + t * 1.2, angle: Math.sin(t * 5 + seed * 9) * 0.5, frame: index }), life: 0.8, fade: K.soft, colours: [0, 1, 2, 3, 4] },
-        ],
-      },
-    },
-  })],
-  ["robot", (K) => ({
-    shapes: {
-      hexnut: {
-        reach: [1, 1],
-        body: 0.6,
-        draw(c, t) {
-          c.beginPath(); for (let i = 0; i < 6; i++) { const a = (i * K.TAU) / 6; i ? c.lineTo(Math.cos(a) * 0.92, Math.sin(a) * 0.92) : c.moveTo(Math.cos(a) * 0.92, Math.sin(a) * 0.92); } c.closePath();
-          K.solid(c, K.along(c, [-0.9, -0.9], [0.9, 0.9], [[0, t[2]], [0.5, t[0]], [1, t[1]]]), "#10141E", 0.09);
-          c.beginPath(); c.arc(0, 0, 0.4, 0, K.TAU); K.solid(c, "#10141E", t[1], 0.06);
-        },
-      },
-      bolt: {
-        reach: [0.5, 1.1],
-        body: 0.6,
-        draw(c, t) {
-          c.beginPath(); c.roundRect(-0.2, -0.5, 0.4, 1.5, 0.08); K.solid(c, t[0], "#10141E", 0.07);
-          c.strokeStyle = t[1]; c.lineWidth = 0.05; c.beginPath(); for (let i = 0; i < 5; i++) { c.moveTo(-0.2, -0.2 + i * 0.24); c.lineTo(0.2, -0.3 + i * 0.24); } c.stroke();
-          c.beginPath(); c.roundRect(-0.46, -1, 0.92, 0.52, 0.1); K.solid(c, t[2], "#10141E", 0.07);
-        },
-      },
-    },
-    effects: {
-      "nuts-bolts": {
-        tones: [["#B9C2D0", "#5A6478", "#F1F5FB"], ["#D9A441", "#7A5206", "#FFE9A8"]],
-        still: 1900,
-        layers: [
-          ...K.depth({ count: 16, shape: "bolt", size: [0.016, 0.026], path: K.fall(0.04, 0.02, 0, 4), life: 0.62, fade: K.soft, colours: [0, 1] }, 0.8, 0.4),
-          { count: 12, shape: "hexnut", size: [0.018, 0.028], path: K.fall(0.05, 0.03, 9, 2), life: 0.72, fade: K.soft, colours: [0, 1] },
-        ],
-      },
-    },
-  })],
-  ["ufo", (K) => ({
-    shapes: {
-      minisaucer: {
-        reach: [1.1, 0.8],
-        body: 0.5,
-        draw(c, t) {
-          c.beginPath(); c.moveTo(-0.5, -0.12); c.bezierCurveTo(-0.5, -0.75, 0.5, -0.75, 0.5, -0.12); c.closePath(); K.solid(c, K.along(c, [0, -0.7], [0, -0.1], [[0, "#E6FDFF"], [1, "#5BE0E6"]]), "#0E1A2E", 0.06);
-          c.beginPath(); c.ellipse(0, 0.05, 1, 0.3, 0, 0, K.TAU); K.solid(c, K.along(c, [0, -0.25], [0, 0.35], [[0, "#F1F5FB"], [1, "#6A7690"]]), "#0E1A2E", 0.07);
-          for (const x of [-0.6, -0.2, 0.2, 0.6]) { c.beginPath(); c.arc(x, 0.12, 0.08, 0, K.TAU); c.fillStyle = t[2]; c.fill(); }
-          K.shape(c, [[-0.4, 0.3], [0.4, 0.3], [0.7, 0.75], [-0.7, 0.75]]); c.fillStyle = K.along(c, [0, 0.3], [0, 0.75], [[0, K.fade(t[0], 0.5)], [1, K.fade(t[0], 0)]]); c.fill();
-        },
-      },
-      greendot: { reach: [1, 1], body: 0.25, draw(c, t) { K.halo(c, 1, t[0], 0.8); c.beginPath(); c.arc(0, 0, 0.28, 0, K.TAU); c.fillStyle = t[2]; c.fill(); } },
-    },
-    effects: {
-      saucers: {
-        tones: [["#3FD68A", "#1E8A5A", "#B6FFD0"], K.TONES.gold],
-        still: 1900,
-        layers: [
-          ...K.depth({ count: 24, shape: "greendot", size: [0.006, 0.012], path: (t, seed, index) => ({ x: seed, y: K.random(index, 5) }), life: 0.3, fade: K.glow, colours: [0] }),
-          { count: 6, shape: "minisaucer", size: [0.04, 0.056], path: (t, seed, index) => ({ x: index % 2 ? -0.1 + t * 1.2 : 1.1 - t * 1.2, y: 0.12 + seed * 0.66 + Math.sin(t * 12 + seed * 9) * 0.05, angle: Math.sin(t * 12 + seed * 9) * 0.18 }), life: 0.6, fade: K.soft, colours: [0, 1] },
         ],
       },
     },
@@ -759,29 +619,6 @@ export const MAKERS: [string, (K: PackKit) => PackMade][] = [
       },
     };
   }],
-  ["pixelcity", (K) => {
-    const carRows = ["...ooooo..", "..obbobbo.", "orrrrrrrro", "yrrrrrrrrd", "orrrrrrrro", ".kk....kk."];
-    const win = ["ww", "ww", "ww"];
-    const lanes = [0.2, 0.34, 0.48, 0.62, 0.76, 0.9];
-    return {
-      shapes: {
-        pxcar: { reach: [1, 0.6], body: 0.7, draw: (c, t) => K.px(c, carRows, { o: "#0E0A24", b: "#8AD8FF", w: "#DFF4FF", r: t[0], y: "#FFE36B", d: "#FF4D5A", k: "#2A2A3A" }) },
-        pxlight: { reach: [0.7, 1], body: 1, draw: (c, t) => K.px(c, win, { w: t[0] }) },
-        pxlane: { reach: [1, 0.12], body: 1, draw: (c, t) => { c.fillStyle = t[0]; c.fillRect(-1, -0.1, 2, 0.2); } },
-      },
-      effects: {
-        "night-traffic": {
-          tones: [K.TONES.gold, K.TONES.aqua, K.TONES.pink, K.TONES.green, K.TONES.amber],
-          still: 1500,
-          layers: [
-            { count: 30, shape: "pxlight", size: [0.006, 0.01], path: (t, seed, index) => ({ x: Math.round(seed * 30) / 30, y: Math.round(K.random(index, 5) * 40) / 40 }), life: 0.35, fade: K.glow, colours: [0, 0, 1] },
-            { count: 18, shape: "pxlane", size: [0.018, 0.018], path: (t, seed, index) => ({ x: ((index % 6) / 6 + t * 0.4) % 1, y: lanes[index % 6] + 0.07 }), life: 0.9, alpha: 0.5, fade: K.soft, colours: [0] },
-            { count: 10, shape: "pxcar", size: [0.045, 0.06], path: (t, seed, index) => { const lane = index % 6; const right = true; const p = Math.round(t * 40) / 40; return { x: right ? -0.15 + p * 1.3 : 1.15 - p * 1.3, y: lanes[lane] }; }, life: 0.7, fade: K.soft, colours: [2, 3, 4, 1] },
-          ],
-        },
-      },
-    };
-  }],
   ["pixelcoast", (K) => {
     const car = ["......oooooo......", ".....obbbbobo.....", "..oorrrrrrrrrrrro.", ".orrrrrrrrrrrrrryo", "drrsssssssssssssro", ".ooKKKoooooooKKKo.", "...kgk.......kgk.."];
     const dot = ["ww", "ww"];
@@ -820,26 +657,6 @@ export const MAKERS: [string, (K: PackKit) => PackMade][] = [
             ...K.depth({ count: 8, shape: "checker", size: [0.026, 0.04], path: K.fall(0.06, 0.04, 3), life: 0.8, fade: K.soft, colours: [0] }),
             { count: 30, shape: "confetti", size: [0.006, 0.01], path: (t, seed) => ({ x: seed, y: -0.05 + Math.round(t * 30) / 30 * 1.1 }), life: 0.6, fade: K.soft, colours: [0, 1, 2, 3] },
             { count: 4, shape: "racecar", size: [0.08, 0.09], path: (t, seed, index) => ({ x: -0.25 + Math.round(t * 40) / 40 * (1.5 + index * 0.06), y: 0.58 + index * 0.1 }), life: 0.55, start: (index) => 0.04 + index * 0.02, fade: K.soft, colours: [0, 1, 2, 3] },
-          ],
-        },
-      },
-    };
-  }],
-  ["pixelhall", (K) => {
-    const button = [".ooo.", "ollco", "occco", "occco", ".ooo."];
-    const plus = [".w.", "www", ".w."];
-    return {
-      shapes: {
-        pxbutton: { reach: [1, 1], body: 0.8, draw: (c, t) => K.px(c, button, { o: "#120A1E", l: "#FFFFFF", c: t[0] }) },
-        pxspark: { reach: [1, 1], body: 0.5, draw: (c, t) => K.px(c, plus, { w: t[2] }) },
-      },
-      effects: {
-        "button-mash": {
-          tones: [K.TONES.red, K.TONES.gold, K.TONES.green, K.TONES.sky, K.TONES.violet],
-          still: 1400,
-          layers: [
-            { count: 30, shape: "pxbutton", size: [0.022, 0.036], path: (t, seed, index) => ({ x: Math.round(seed * 8) / 8 + 0.06, y: 0.12 + Math.round(K.random(index, 5) * 6) / 6 * 0.76, grow: t < 0.15 ? 1.25 : 1 }), life: 0.45, fade: K.pop, colours: [0, 1, 2, 3, 4] },
-            { count: 20, shape: "pxspark", size: [0.01, 0.02], path: (t, seed, index) => ({ x: seed, y: K.random(index, 6), grow: t < 0.5 ? 1 : 1.6 }), life: 0.22, fade: K.glow, colours: [1, 3] },
           ],
         },
       },
@@ -1095,30 +912,6 @@ export const MAKERS: [string, (K: PackKit) => PackMade][] = [
       },
     };
   }],
-  ["ninja", (K) => ({
-    shapes: {
-      throwblade: {
-        reach: [1, 1],
-        body: 0.35,
-        draw(c, t) {
-          K.shape(c, [[0, -1], [0.26, -0.26], [1, 0], [0.26, 0.26], [0, 1], [-0.26, 0.26], [-1, 0], [-0.26, -0.26]]);
-          K.solid(c, K.along(c, [-1, -1], [1, 1], [[0, "#F1F5FB"], [0.5, "#B9C2D0"], [1, "#5A6478"]]), "#0A0B12", 0.08);
-          c.beginPath(); c.arc(0, 0, 0.2, 0, K.TAU); c.fillStyle = "#0A0B12"; c.fill();
-        },
-      },
-      smokepuff: { reach: [1, 1], body: 0.15, draw(c, t) { K.halo(c, 1, t[2], 0.5); } },
-    },
-    effects: {
-      "blade-flight": {
-        tones: [K.TONES.white, ["#5A5E78", "#2A2D42", "#8A8FA8"]],
-        still: 1700,
-        layers: [
-          { count: 12, shape: "smokepuff", size: [0.04, 0.08], path: (t, seed) => ({ x: seed, y: 1 - t * 0.3, grow: 0.6 + t }), life: 0.5, alpha: 0.4, fade: K.glow, colours: [1] },
-          { count: 9, shape: "throwblade", size: [0.022, 0.034], path: (t, seed, index) => ({ x: index % 2 ? -0.1 + t * 1.2 : 1.1 - t * 1.2, y: seed * 0.8 + 0.05 + t * 0.14, angle: t * 26 + seed * 6 }), life: 0.36, fade: K.soft, colours: [0] },
-        ],
-      },
-    },
-  })],
   ["pixelsyria", (K) => {
     const jasmine = ["..w.w..", ".wwwww.", "wwwywww", ".wwwww.", "..w.w.."];
     const heart = [".ooo.ooo.", "ogggogggo", "ogggggggo", "owwwrwwwo", ".owrrrwo.", "..okkko..", "...oko...", "....o...."];
@@ -1218,51 +1011,6 @@ export const MAKERS: [string, (K: PackKit) => PackMade][] = [
       },
     };
   }],
-  ["pixelhama", (K) => {
-    const drop = [".b.", "bbb", "bbb", ".b."];
-    const ring = [".www.", "w...w", "w...w", "w...w", ".www."];
-    return {
-      shapes: {
-        hmdrop: { reach: [0.75, 1], body: 0.7, draw: (c, t) => K.px(c, drop, { b: t[0] }) },
-        hmring: { reach: [1, 1], body: 0.2, draw: (c, t) => K.px(c, ring, { w: t[2] }) },
-      },
-      effects: {
-        "wheel-drops": {
-          tones: [K.TONES.sky, K.TONES.aqua],
-          still: 1600,
-          layers: [
-            { count: 6, shape: "hmring", size: [0.03, 0.05], path: (t, seed, index) => ({ x: 0.12 + seed * 0.76, y: 0.9 + (index % 2) * 0.04, grow: 0.5 + Math.round(t * 4) / 4 }), life: 0.4, alpha: 0.6, fade: (t) => Math.sin(Math.PI * t), colours: [0] },
-            // drops thrown from a turning rim: they leave along an arc and fall in steps
-            ...K.depth({ count: 34, shape: "hmdrop", size: [0.008, 0.015], path: (t, seed, index) => { const a = -0.4 + K.random(index, 3) * 1.6; return { x: 0.5 + Math.sin(a) * 0.4, y: 0.46 - Math.cos(a) * 0.36 + Math.round(t * t * 24) / 24 * (0.5 + seed * 0.4) }; }, life: 0.5, fade: K.soft, colours: [0, 1] }),
-          ],
-        },
-      },
-    };
-  }],
-  ["pixeltadmur", (K) => {
-    const column = ["sss", "sss", ".s.", ".s.", ".s.", ".s.", ".s.", ".s.", "sss"];
-    const plus = [".w.", "www", ".w."];
-    const dot = ["ww", "ww"];
-    return {
-      shapes: {
-        tdcolumn: { reach: [0.34, 1], body: 0.5, draw: (c, t) => K.px(c, column, { s: t[0] }) },
-        tdstar: { reach: [1, 1], body: 0.5, draw: (c, t) => K.px(c, plus, { w: t[2] }) },
-        tdsand: { reach: [1, 1], body: 1, draw: (c, t) => K.px(c, dot, { w: t[0] }) },
-      },
-      effects: {
-        "desert-wind": {
-          tones: [K.TONES.sand, K.TONES.amber, K.TONES.white],
-          still: 1700,
-          layers: [
-            { count: 7, shape: "tdcolumn", size: [0.09, 0.13], path: (t, seed, index) => ({ x: 0.08 + index * 0.14, y: 0.88 - (index % 3) * 0.02 }), life: 0.96, start: () => 0.01, alpha: 0.5, fade: K.soft, colours: [0] },
-            { count: 18, shape: "tdstar", size: [0.01, 0.018], path: (t, seed, index) => ({ x: seed, y: K.random(index, 5) * 0.5 }), life: 0.3, fade: K.glow, colours: [2] },
-            // sand blown across in steps, low over the ground
-            ...K.depth({ count: 46, shape: "tdsand", size: [0.005, 0.009], path: (t, seed, index) => ({ x: -0.05 + Math.round(t * 34) / 34 * 1.1, y: 0.5 + K.random(index, 4) * 0.48 + Math.round(Math.sin(t * 8 + index) * 3) * 0.006 }), life: 0.6, fade: K.soft, colours: [0, 1] }),
-          ],
-        },
-      },
-    };
-  }],
   ["pixelsufra", (K) => {
     const baklava = ["....o....", "...olo...", "..olyyo..", ".olygyyo.", "oyygggyyo", ".oyygyyo.", "..oyyyo..", "...oyo...", "....o...."];
     const tea = ["ooooo", "orrro", "orrro", "orrro", ".ooo.", "..o..", "ooooo"];
@@ -1343,73 +1091,6 @@ export const MAKERS: [string, (K: PackKit) => PackMade][] = [
       },
     },
   })],
-  ["quds", (K) => ({
-    shapes: {
-      oleaf: {
-        reach: [0.5, 1.1],
-        body: 0.6,
-        draw(c, t) { c.beginPath(); c.moveTo(0, -1.05); c.bezierCurveTo(0.5, -0.4, 0.5, 0.4, 0, 1.05); c.bezierCurveTo(-0.5, 0.4, -0.5, -0.4, 0, -1.05); K.solid(c, K.along(c, [-0.4, 0], [0.4, 0], [[0, t[2]], [0.5, t[0]], [1, t[1]]]), t[1], 0.07); },
-      },
-      olive: { reach: [0.8, 1], body: 0.7, draw(c, t) { c.beginPath(); c.ellipse(0, 0, 0.66, 0.9, 0, 0, K.TAU); K.solid(c, K.radial(c, 1.1, [[0, t[2]], [0.5, t[0]], [1, t[1]]], -0.25, -0.3), t[1], 0.08); } },
-    },
-    effects: {
-      "olive-rain": {
-        tones: [K.TONES.green, ["#9DB77C", "#3E6A2C", "#E6F0D4"], ["#4A3F7A", "#1A1430", "#A99AD8"]],
-        still: 1900,
-        layers: [
-          ...K.depth({ count: 22, shape: "oleaf", size: [0.018, 0.03], path: K.fall(0.08, 0.08, 8), life: 0.78, fade: K.soft, colours: [0, 1] }, 0.8, 0.4),
-          { count: 7, shape: "olive", size: [0.012, 0.017], path: K.fall(0.03, 0.02, 0, 1), life: 0.6, fade: K.soft, colours: [2] },
-        ],
-      },
-    },
-  })],
-  ["desert", (K) => ({
-    shapes: {
-      grain: {
-        reach: [1.6, 0.6],
-        body: 0.5,
-        draw(c, t) {
-          c.fillStyle = K.along(c, [-1.6, 0], [1.6, 0], [[0, K.fade(t[0], 0)], [0.7, t[0]], [1, t[2]]]);
-          c.beginPath(); c.ellipse(0, 0, 1.6, 0.42, 0, 0, K.TAU); c.fill();
-        },
-      },
-      crescentlet: {
-        reach: [1.1, 1.1],
-        body: 0.3,
-        draw(c, t) {
-          K.halo(c, 1.1, t[2], 0.3);
-          c.beginPath(); c.arc(0, 0, 0.8, 0.5, K.TAU - 0.9); c.arc(0.32, -0.12, 0.62, K.TAU - 1.25, 0.86, true); c.closePath();
-          K.solid(c, t[2], t[1], 0.06);
-        },
-      },
-    },
-    effects: {
-      "sand-wind": {
-        tones: [K.TONES.sand, K.TONES.amber, K.TONES.moon],
-        still: 1900,
-        layers: [
-          ...K.depth({
-            count: 46,
-            shape: "grain",
-            size: [0.008, 0.016],
-            path: (t, seed) => ({ x: -0.12 + t * 1.24, y: seed + Math.sin(t * 7 + seed * 30) * 0.05 + t * 0.08, angle: Math.cos(t * 7 + seed * 30) * 0.3 }),
-            life: 0.5,
-            fade: K.soft,
-            colours: [0, 0, 1],
-          }, 1, 0.4),
-          {
-            count: 5,
-            shape: "crescentlet",
-            size: [0.028, 0.04],
-            path: (t, seed, index) => ({ x: 0.12 + index * 0.19, y: 0.16 + K.random(index, 5) * 0.5 - t * 0.06, angle: -0.3 + Math.sin(t * 3 + seed * 9) * 0.1 }),
-            life: 0.7,
-            fade: K.twinkle,
-            colours: [2],
-          },
-        ],
-      },
-    },
-  })],
   ["fanous", (K) => ({
     shapes: {
       fanous: {
@@ -1455,73 +1136,6 @@ export const MAKERS: [string, (K: PackKit) => PackMade][] = [
             fade: K.twinkle,
             colours: [2],
           }),
-        ],
-      },
-    },
-  })],
-  ["majlis", (K) => ({
-    shapes: {
-      steam: {
-        reach: [0.7, 1.3],
-        body: 0.2,
-        draw(c, t) {
-          c.lineCap = "round"; c.lineWidth = 0.3;
-          c.strokeStyle = K.along(c, [0, 1.2], [0, -1.2], [[0, K.fade(t[2], 0)], [0.4, K.fade(t[2], 0.7)], [1, K.fade(t[2], 0)]]);
-          c.beginPath(); c.moveTo(0, 1.2); c.bezierCurveTo(-0.7, 0.5, 0.7, -0.1, 0, -0.5); c.bezierCurveTo(-0.4, -0.8, 0.2, -1, 0, -1.2); c.stroke();
-        },
-      },
-      bean: {
-        reach: [0.8, 1.05],
-        body: 0.7,
-        draw(c, t) {
-          c.beginPath(); c.ellipse(0, 0, 0.7, 1, 0, 0, K.TAU);
-          K.solid(c, K.radial(c, 1.2, [[0, t[2]], [0.5, t[0]], [1, t[1]]], -0.25, -0.35), t[1], 0.08);
-          c.strokeStyle = t[1]; c.lineWidth = 0.1; c.lineCap = "round"; c.beginPath(); c.moveTo(0.05, -0.8); c.bezierCurveTo(-0.3, -0.3, 0.3, 0.3, -0.05, 0.8); c.stroke();
-        },
-      },
-      pod: {
-        reach: [0.6, 1.1],
-        body: 0.6,
-        draw(c, t) {
-          c.beginPath(); c.moveTo(0, -1.05); c.bezierCurveTo(0.7, -0.4, 0.6, 0.6, 0, 1.05); c.bezierCurveTo(-0.6, 0.6, -0.7, -0.4, 0, -1.05); c.closePath();
-          K.solid(c, t[0], t[1], 0.08);
-          c.strokeStyle = t[2]; c.lineWidth = 0.06; c.beginPath(); c.moveTo(0, -0.8); c.lineTo(0, 0.8); c.stroke();
-        },
-      },
-    },
-    effects: {
-      qahwa: {
-        tones: [["#8A5A32", "#3A2010", "#C89B6A"], K.TONES.green, ["#F4EAD5", "#8A7B6E", "#FFFFFF"]],
-        still: 1900,
-        layers: [
-          {
-            count: 9,
-            shape: "steam",
-            size: [0.05, 0.08],
-            path: (t, seed) => ({ x: seed + Math.sin(t * 4 + seed * 20) * 0.03, y: 1.02 - t * 0.9, grow: 0.6 + t * 0.8 }),
-            life: 0.8,
-            alpha: 0.7,
-            fade: K.glow,
-            colours: [2],
-          },
-          ...K.depth({
-            count: 14,
-            shape: "bean",
-            size: [0.014, 0.022],
-            path: K.fall(0.04, 0, 6),
-            life: 0.7,
-            fade: K.soft,
-            colours: [0],
-          }, 0.7, 0.4),
-          {
-            count: 6,
-            shape: "pod",
-            size: [0.014, 0.02],
-            path: K.fall(0.05, 0.04, 5),
-            life: 0.75,
-            fade: K.soft,
-            colours: [1],
-          },
         ],
       },
     },
@@ -1792,42 +1406,6 @@ export const MAKERS: [string, (K: PackKit) => PackMade][] = [
       },
     },
   })],
-  ["bamboo", (K) => ({
-    shapes: {
-      slimleaf: {
-        reach: [1.1, 0.4],
-        body: 0.6,
-        draw(c, t) { c.beginPath(); c.moveTo(-1, 0); c.bezierCurveTo(-0.6, -0.4, 0.2, -0.45, 1, -0.05); c.bezierCurveTo(0.2, 0.3, -0.5, 0.3, -1, 0); K.solid(c, K.along(c, [0, -0.4], [0, 0.3], [[0, t[2]], [1, t[0]]]), t[1], 0.06); },
-      },
-      mist: { reach: [1.6, 0.6], wide: true, body: 0.1, unit: 80, draw(c, t) { c.scale(1.6, 0.6); K.halo(c, 1, t[2], 0.5); } },
-    },
-    effects: {
-      "bamboo-fall": {
-        tones: [K.TONES.green, ["#6FB04A", "#2E5E22", "#D6F5B0"], K.TONES.white],
-        still: 1900,
-        layers: [
-          { count: 4, shape: "mist", size: [0.22, 0.3], path: (t, seed, index) => ({ x: -0.1 + t * 0.5 + index * 0.25, y: 0.2 + index * 0.2 }), life: 0.95, start: (index) => 0.01 + index * 0.02, alpha: 0.14, fade: K.glow, colours: [2] },
-          ...K.depth({ count: 24, shape: "slimleaf", size: [0.022, 0.036], path: (t, seed) => ({ x: seed + t * 0.1 + Math.sin(t * 6 + seed * 20) * 0.07, y: -0.08 + t * 1.16, angle: 0.6 + Math.sin(t * 6 + seed * 20) * 0.9 }), life: 0.8, fade: K.soft, colours: [0, 1] }, 0.8, 0.4),
-        ],
-      },
-    },
-  })],
-  ["camping", (K) => ({
-    shapes: {
-      fleck: { reach: [1, 1], body: 0.3, draw(c, t) { K.halo(c, 1, t[0], 0.8); c.beginPath(); c.arc(0, 0, 0.3, 0, K.TAU); c.fillStyle = t[2]; c.fill(); } },
-      smoke: { reach: [1, 1], wide: true, body: 0.1, unit: 80, draw(c, t) { K.halo(c, 1, t[2], 0.45); } },
-    },
-    effects: {
-      "camp-embers": {
-        tones: [K.TONES.ember, K.TONES.gold, ["#8A93A8", "#3A4058", "#C9D1E3"]],
-        still: 1900,
-        layers: [
-          { count: 5, shape: "smoke", size: [0.1, 0.16], path: (t, seed, index) => ({ x: 0.5 + Math.sin(t * 3 + index) * 0.08 + (seed - 0.5) * 0.1, y: 0.9 - t * 0.7, grow: 0.6 + t }), life: 0.8, alpha: 0.3, fade: K.glow, colours: [2] },
-          ...K.depth({ count: 34, shape: "fleck", size: [0.007, 0.013], path: (t, seed, index) => ({ x: 0.5 + (seed - 0.5) * (0.12 + t * 0.9) + Math.sin(t * 8 + seed * 30) * 0.03, y: 1.02 - t * (0.6 + K.random(index, 4) * 0.5) }), life: 0.62, fade: K.twinkle, colours: [0, 1] }),
-        ],
-      },
-    },
-  })],
   ["summer", (K) => ({
     shapes: {
       slice: {
@@ -1848,29 +1426,6 @@ export const MAKERS: [string, (K: PackKit) => PackMade][] = [
         layers: [
           ...K.depth({ count: 16, shape: "juice", size: [0.008, 0.014], path: K.fall(0.02, 0, 0, 0), life: 0.45, fade: K.soft, colours: [0, 1] }),
           { count: 10, shape: "slice", size: [0.03, 0.044], path: K.fall(0.06, 0.03, 0, 2.6), life: 0.8, fade: K.soft, colours: [0, 1, 2] },
-        ],
-      },
-    },
-  })],
-  ["lavender", (K) => ({
-    shapes: {
-      lsprig: {
-        reach: [0.6, 1.2],
-        body: 0.35,
-        draw(c, t) {
-          c.strokeStyle = "#3F7A5A"; c.lineWidth = 0.09; c.lineCap = "round"; c.beginPath(); c.moveTo(0, 1.1); c.quadraticCurveTo(0.1, 0.3, 0, -0.3); c.stroke();
-          for (let i = 0; i < 7; i++) { c.beginPath(); c.ellipse(i === 6 ? 0 : i % 2 ? 0.16 : -0.16, 0.2 - i * 0.2, 0.15, 0.19, 0, 0, K.TAU); K.solid(c, i % 2 ? t[2] : t[0], t[1], 0.05); }
-        },
-      },
-      bud: { reach: [0.8, 1], body: 0.7, draw(c, t) { c.beginPath(); c.ellipse(0, 0, 0.62, 0.86, 0, 0, K.TAU); K.solid(c, K.radial(c, 1, [[0, t[2]], [1, t[0]]], -0.2, -0.3), t[1], 0.1); } },
-    },
-    effects: {
-      "lavender-drift": {
-        tones: [K.TONES.violet, ["#8E6BE0", "#3A2A7A", "#C9B6FF"]],
-        still: 1900,
-        layers: [
-          ...K.depth({ count: 26, shape: "bud", size: [0.006, 0.011], path: (t, seed) => ({ x: -0.1 + t * 1.2, y: seed + Math.sin(t * 6 + seed * 30) * 0.05, angle: t * 4 }), life: 0.6, fade: K.soft, colours: [0, 1] }),
-          { count: 10, shape: "lsprig", size: [0.03, 0.044], path: (t, seed) => ({ x: seed + t * 0.14 + Math.sin(t * 5 + seed * 20) * 0.05, y: -0.1 + t * 1.2, angle: 0.5 + Math.sin(t * 5 + seed * 20) * 0.8 }), life: 0.85, fade: K.soft, colours: [0, 1] },
         ],
       },
     },
@@ -1980,33 +1535,6 @@ export const MAKERS: [string, (K: PackKit) => PackMade][] = [
       },
     },
   })],
-  ["football", (K) => ({
-    shapes: {
-      fball: {
-        reach: [1, 1],
-        body: 0.8,
-        draw(c, t) {
-          c.beginPath(); c.arc(0, 0, 0.94, 0, K.TAU); K.solid(c, K.radial(c, 1.2, [[0, "#FFFFFF"], [0.6, "#EEF2FA"], [1, "#B7C0D4"]], -0.3, -0.3), "#12141F", 0.1);
-          const five = (x, y, r, turn) => { c.beginPath(); for (let i = 0; i < 5; i++) { const a = turn + (i * K.TAU) / 5 - K.TAU / 4; i ? c.lineTo(x + Math.cos(a) * r, y + Math.sin(a) * r) : c.moveTo(x + Math.cos(a) * r, y + Math.sin(a) * r); } c.closePath(); c.fillStyle = "#12141F"; c.fill(); };
-          five(0, 0, 0.38, 0);
-          c.save(); c.beginPath(); c.arc(0, 0, 0.9, 0, K.TAU); c.clip();
-          for (let i = 0; i < 5; i++) { const a = (i * K.TAU) / 5 - K.TAU / 4 + K.TAU / 10; five(Math.cos(a) * 0.9, Math.sin(a) * 0.9, 0.3, a + K.TAU / 4); const b = (i * K.TAU) / 5 - K.TAU / 4; c.strokeStyle = "#12141F"; c.lineWidth = 0.07; c.beginPath(); c.moveTo(Math.cos(b) * 0.38, Math.sin(b) * 0.38); c.lineTo(Math.cos(b) * 0.9, Math.sin(b) * 0.9); c.stroke(); }
-          c.restore();
-        },
-      },
-      turf: { reach: [0.4, 1], body: 0.5, draw(c, t) { K.shape(c, [[-0.35, 1], [0.1, -1], [0.35, 1]]); K.solid(c, t[0], t[1], 0.08); } },
-    },
-    effects: {
-      kickoff: {
-        tones: [K.TONES.white, K.TONES.green, K.TONES.mint],
-        still: 1500,
-        layers: [
-          ...K.depth({ count: 20, shape: "turf", size: [0.01, 0.017], path: (t, seed, index) => ({ x: seed + (K.random(index, 4) - 0.5) * 0.1 * t, y: 1.04 - Math.sin(Math.PI * t) * (0.15 + K.random(index, 5) * 0.3), angle: t * 6 + seed * 6 }), life: 0.4, fade: K.soft, colours: [1, 2] }),
-          { count: 7, shape: "fball", size: [0.03, 0.044], path: (t, seed, index) => ({ x: seed + (K.random(index, 4) - 0.5) * 0.3 * t, y: 1.08 - Math.abs(Math.sin(Math.PI * t * 1.5)) * (0.5 + K.random(index, 5) * 0.4) * (1 - t * 0.4), angle: t * 9 + seed * 6 }), life: 0.8, fade: K.soft, colours: [0] },
-        ],
-      },
-    },
-  })],
   ["music", (K) => ({
     shapes: {
       note8: {
@@ -2055,27 +1583,6 @@ export const MAKERS: [string, (K: PackKit) => PackMade][] = [
       },
     },
   })],
-  ["chess", (K) => {
-    const draw = (d) => (c, t) => { c.scale(0.085, 0.085); c.translate(0, 10); const p = new Path2D(d); c.fillStyle = K.along(c, [-5, 0], [5, 0], [[0, t[2]], [0.5, t[0]], [1, t[1]]]); c.fill(p); c.lineWidth = 0.9; c.lineJoin = "round"; c.strokeStyle = t[1] === "#120E0C" ? "#C9B58A" : "#5A4A2A"; c.stroke(p); };
-    return {
-      shapes: {
-        cpawn: { reach: [0.6, 1.1], body: 0.5, draw: draw("M-5 0H5V-2H3.6C3 -5 2 -7.5 1.6 -9.5H2.8V-11H1.4A3.4 3.4 0 1 0 -1.4 -11H-2.8V-9.5H-1.6C-2 -7.5 -3 -5 -3.6 -2H-5Z") },
-        crook: { reach: [0.6, 1.1], body: 0.6, draw: draw("M-5.5 0H5.5V-2.2H4.2L3.4 -12H4.8V-17H2.8V-15H1.2V-17H-1.2V-15H-2.8V-17H-4.8V-12H-3.4L-4.2 -2.2H-5.5Z") },
-        csquare: { reach: [1, 1], body: 0.9, draw(c, t) { c.fillStyle = t[0]; c.fillRect(-0.9, -0.9, 1.8, 1.8); c.lineWidth = 0.1; c.strokeStyle = t[1]; c.strokeRect(-0.9, -0.9, 1.8, 1.8); } },
-      },
-      effects: {
-        gambit: {
-          tones: [["#F1E6C8", "#C9B58A", "#FFFDF2"], ["#2A2420", "#120E0C", "#5A5048"], K.TONES.gold],
-          still: 1900,
-          layers: [
-            ...K.depth({ count: 14, shape: "csquare", size: [0.01, 0.016], path: K.fall(0.04, 0, 8), life: 0.6, fade: K.soft, colours: [0, 1, 2] }),
-            { count: 9, shape: "cpawn", size: [0.03, 0.042], path: (t, seed) => ({ x: 0.06 + seed * 0.88, y: -0.1 + t * 1.2, angle: Math.sin(t * 5 + seed * 9) * 0.5 }), life: 0.8, fade: K.soft, colours: [0, 1] },
-            { count: 5, shape: "crook", size: [0.03, 0.042], path: (t, seed) => ({ x: 0.1 + seed * 0.8, y: -0.1 + t * 1.2, angle: Math.cos(t * 5 + seed * 9) * 0.5 }), life: 0.85, fade: K.soft, colours: [1, 0] },
-          ],
-        },
-      },
-    };
-  }],
   ["tabletop", (K) => {
     const pips = [[[0, 0]], [[-1, -1], [1, 1]], [[-1, -1], [0, 0], [1, 1]], [[-1, -1], [1, -1], [-1, 1], [1, 1]], [[-1, -1], [1, -1], [0, 0], [-1, 1], [1, 1]], [[-1, -1], [1, -1], [-1, 0], [1, 0], [-1, 1], [1, 1]]];
     return {
@@ -2110,30 +1617,6 @@ export const MAKERS: [string, (K: PackKit) => PackMade][] = [
       },
     };
   }],
-  ["hoops", (K) => ({
-    shapes: {
-      bball: {
-        reach: [1, 1],
-        body: 0.8,
-        draw(c, t) {
-          c.beginPath(); c.arc(0, 0, 0.94, 0, K.TAU); K.solid(c, K.radial(c, 1.3, [[0, t[2]], [0.5, t[0]], [1, t[1]]], -0.3, -0.3), "#1A0E08", 0.1);
-          c.save(); c.beginPath(); c.arc(0, 0, 0.9, 0, K.TAU); c.clip(); c.strokeStyle = "#1A0E08"; c.lineWidth = 0.09;
-          c.beginPath(); c.moveTo(-1, 0); c.lineTo(1, 0); c.moveTo(0, -1); c.lineTo(0, 1); c.moveTo(-0.7, -0.7); c.bezierCurveTo(-0.3, -0.3, -0.3, 0.3, -0.7, 0.7); c.moveTo(0.7, -0.7); c.bezierCurveTo(0.3, -0.3, 0.3, 0.3, 0.7, 0.7); c.stroke(); c.restore();
-        },
-      },
-      dustpuff: { reach: [1, 1], body: 0.15, draw(c, t) { K.halo(c, 1, t[2], 0.5); } },
-    },
-    effects: {
-      swish: {
-        tones: [["#F27A1E", "#B84A0C", "#FFB066"], ["#F4E3C8", "#A8906A", "#FFF6E6"]],
-        still: 1500,
-        layers: [
-          { count: 12, shape: "dustpuff", size: [0.02, 0.04], path: (t, seed) => ({ x: seed, y: 1.02 - t * 0.12, grow: 0.5 + t }), life: 0.3, alpha: 0.4, fade: K.glow, colours: [1] },
-          { count: 8, shape: "bball", size: [0.032, 0.046], path: (t, seed, index) => ({ x: seed + (K.random(index, 4) - 0.5) * 0.3 * t, y: 1.08 - Math.abs(Math.sin(Math.PI * t * 1.5)) * (0.55 + K.random(index, 5) * 0.4) * (1 - t * 0.4), angle: t * 8 + seed * 6 }), life: 0.8, fade: K.soft, colours: [0] },
-        ],
-      },
-    },
-  })],
   ["retro", (K) => ({
     shapes: {
       tapelet: {
@@ -2181,54 +1664,6 @@ export const MAKERS: [string, (K: PackKit) => PackMade][] = [
         layers: [
           ...K.depth({ count: 22, shape: "bulb", size: [0.008, 0.014], path: (t, seed, index) => ({ x: seed, y: K.random(index, 5) }), life: 0.3, fade: K.glow, colours: [0, 4, 1, 3, 2] }),
           { count: 9, shape: "giftbox", size: [0.028, 0.04], path: (t, seed) => ({ x: 0.06 + seed * 0.88 + Math.sin(t * 5 + seed * 20) * 0.04, y: -0.12 + t * 1.22, angle: Math.sin(t * 5 + seed * 20) * 0.35 }), life: 0.8, fade: K.soft, colours: [0, 1, 2, 3] },
-        ],
-      },
-    },
-  })],
-  ["science", (K) => ({
-    shapes: {
-      molecule: {
-        reach: [1.1, 1.1],
-        body: 0.25,
-        draw(c, t) {
-          const pts = []; for (let i = 0; i < 6; i++) { const a = (i * K.TAU) / 6; pts.push([Math.cos(a) * 0.75, Math.sin(a) * 0.75]); }
-          c.strokeStyle = t[2]; c.lineWidth = 0.09; K.shape(c, pts); c.stroke();
-          pts.forEach(([x, y], i) => { c.beginPath(); c.arc(x, y, i % 2 ? 0.17 : 0.24, 0, K.TAU); K.solid(c, i % 2 ? t[2] : t[0], t[1], 0.06); });
-        },
-      },
-      fizz: { reach: [1, 1], body: 0.15, draw(c, t) { c.beginPath(); c.arc(0, 0, 0.85, 0, K.TAU); c.lineWidth = 0.14; c.strokeStyle = K.fade(t[2], 0.9); c.stroke(); c.beginPath(); c.arc(-0.3, -0.3, 0.18, 0, K.TAU); c.fillStyle = t[2]; c.fill(); } },
-    },
-    effects: {
-      molecules: {
-        tones: [K.TONES.aqua, K.TONES.violet, K.TONES.lime],
-        still: 1900,
-        layers: [
-          ...K.depth({ count: 18, shape: "fizz", size: [0.008, 0.018], path: K.rise(0.03), life: 0.7, fade: K.soft, colours: [0] }, 1, 0.4),
-          { count: 10, shape: "molecule", size: [0.03, 0.046], path: (t, seed) => ({ x: seed + Math.sin(t * 4 + seed * 20) * 0.04, y: 1.1 - t * 1.2, angle: t * 1.6 + seed * 6 }), life: 0.85, fade: K.soft, colours: [0, 1, 2] },
-        ],
-      },
-    },
-  })],
-  ["books", (K) => ({
-    shapes: {
-      sheet: {
-        reach: [0.8, 1.05],
-        body: 0.8,
-        draw(c, t) {
-          c.beginPath(); c.moveTo(-0.7, -1); c.lineTo(0.42, -1); c.lineTo(0.7, -0.72); c.lineTo(0.7, 1); c.lineTo(-0.7, 1); c.closePath(); K.solid(c, K.along(c, [-0.7, -1], [0.7, 1], [[0, "#FFFFFF"], [1, t[0]]]), t[1], 0.06);
-          K.shape(c, [[0.42, -1], [0.7, -0.72], [0.42, -0.72]]); c.fillStyle = t[1]; c.globalAlpha = 0.5; c.fill(); c.globalAlpha = 1;
-          c.strokeStyle = t[1]; c.lineWidth = 0.05; c.beginPath(); for (let i = 0; i < 5; i++) { c.moveTo(-0.46, -0.5 + i * 0.3); c.lineTo(i === 4 ? 0.1 : 0.46, -0.5 + i * 0.3); } c.stroke();
-        },
-      },
-      marker: { reach: [0.4, 1], body: 0.7, draw(c, t) { K.shape(c, [[-0.32, -1], [0.32, -1], [0.32, 1], [0, 0.66], [-0.32, 1]]); K.solid(c, t[0], t[1], 0.08); } },
-    },
-    effects: {
-      "loose-pages": {
-        tones: [["#F1E6C8", "#8A7A5A", "#FFFDF6"], K.TONES.red, K.TONES.gold],
-        still: 1900,
-        layers: [
-          ...K.depth({ count: 16, shape: "sheet", size: [0.022, 0.034], path: K.fall(0.1, 0.08, 6, 2), life: 0.8, fade: K.soft, colours: [0] }, 0.8, 0.4),
-          { count: 6, shape: "marker", size: [0.016, 0.024], path: K.fall(0.05, 0.03, 0, 1.2), life: 0.75, fade: K.soft, colours: [1, 2] },
         ],
       },
     },
@@ -2317,130 +1752,6 @@ export const MAKERS: [string, (K: PackKit) => PackMade][] = [
       },
     },
   })],
-  ["critters", (K) => ({
-    shapes: {
-      carrot: {
-        reach: [0.6, 1.3],
-        body: 0.5,
-        draw(c, t) {
-          K.shape(c, [[-0.2, -0.75], [-0.42, -1.25], [-0.02, -0.9]]); K.solid(c, "#4CAF6D", "#12382B", 0.06); K.shape(c, [[0.2, -0.75], [0.42, -1.25], [0.02, -0.9]]); K.solid(c, "#4CAF6D", "#12382B", 0.06);
-          K.shape(c, [[-0.46, -0.8], [0.46, -0.8], [0, 1.2]]); K.solid(c, K.along(c, [0, -0.8], [0, 1.2], [[0, "#FFB03A"], [1, "#E0621A"]]), "#8A3A08", 0.08);
-        },
-      },
-      berry: { reach: [1, 1], body: 0.7, draw(c, t) { c.beginPath(); c.arc(0, 0.1, 0.8, 0, K.TAU); K.solid(c, K.radial(c, 1.1, [[0, t[2]], [0.5, t[0]], [1, t[1]]], -0.25, -0.2), t[1], 0.09); K.shape(c, [[-0.3, -0.7], [0, -1], [0.3, -0.7], [0, -0.5]]); c.fillStyle = "#4CAF6D"; c.fill(); } },
-      honeydrop: { reach: [0.7, 1], body: 0.6, draw(c, t) { c.beginPath(); c.moveTo(0, -1); c.bezierCurveTo(0.2, -0.3, 0.65, 0.1, 0.65, 0.45); c.arc(0, 0.45, 0.65, 0, Math.PI); c.bezierCurveTo(-0.65, 0.1, -0.2, -0.3, 0, -1); K.solid(c, K.along(c, [0, -1], [0, 1], [[0, "#FFE08A"], [1, "#F29A0E"]]), "#8A5206", 0.08); } },
-    },
-    effects: {
-      "snack-fall": {
-        tones: [["#E5484D", "#8C1D22", "#FFB0B4"], ["#7A5CFF", "#3A2A9A", "#C9B6FF"]],
-        still: 1900,
-        layers: [
-          ...K.depth({ count: 12, shape: "honeydrop", size: [0.01, 0.017], path: K.fall(0.02, 0, 0, 0), life: 0.5, fade: K.soft, colours: [0] }),
-          { count: 9, shape: "berry", size: [0.016, 0.024], path: K.fall(0.05, 0.02, 0, 2), life: 0.7, fade: K.soft, colours: [0, 1] },
-          { count: 7, shape: "carrot", size: [0.026, 0.036], path: K.fall(0.06, 0.03, 0, 2.4), life: 0.8, fade: K.soft, colours: [0] },
-        ],
-      },
-    },
-  })],
-  ["fireworks", (K) => {
-    const centres = [[0.3, 0.3, 0.06], [0.7, 0.24, 0.28], [0.5, 0.5, 0.5], [0.22, 0.6, 0.62]];
-    return {
-      shapes: {
-        ember: { reach: [1, 1], body: 0.25, draw(c, t) { K.halo(c, 1, t[0], 0.8); c.beginPath(); c.arc(0, 0, 0.3, 0, K.TAU); c.fillStyle = t[2]; c.fill(); } },
-        streak: { reach: [0.2, 1], body: 0.5, draw(c, t) { c.fillStyle = K.along(c, [0, -1], [0, 1], [[0, K.fade(t[2], 0.95)], [1, K.fade(t[0], 0)]]); c.beginPath(); c.ellipse(0, 0, 0.16, 1, 0, 0, K.TAU); c.fill(); } },
-      },
-      effects: {
-        "sky-bursts": {
-          tones: [K.TONES.pink, K.TONES.sky, K.TONES.gold, K.TONES.mint],
-          still: 1500,
-          // each burst opens slowly from its centre, then drifts down as it fades
-          layers: centres.flatMap(([cx, cy, start], which) => [
-            {
-              count: 22,
-              shape: "ember",
-              size: [0.012, 0.02],
-              path: (t, seed, index) => { const a = (index / 22) * K.TAU; const out = 1 - (1 - t) ** 2.4; const r = 0.19 * out * (0.7 + K.random(index, 4) * 0.5); return { x: cx + Math.cos(a) * r, y: cy + Math.sin(a) * r * 0.82 + t * t * 0.07 }; },
-              life: 0.34,
-              start: () => start,
-              fade: (t) => Math.min(1, t / 0.25, (1 - t) / 0.5),
-              colours: [which % 4],
-            },
-            {
-              count: 12,
-              shape: "streak",
-              size: [0.022, 0.034],
-              path: (t, seed, index) => { const a = (index / 12) * K.TAU + 0.26; const out = 1 - (1 - t) ** 2.4; const r = 0.13 * out; return { x: cx + Math.cos(a) * r, y: cy + Math.sin(a) * r * 0.82 + t * t * 0.05, angle: a - Math.PI / 2 }; },
-              life: 0.28,
-              start: () => start + 0.01,
-              fade: (t) => Math.min(1, t / 0.25, (1 - t) / 0.5) * 0.8,
-              colours: [which % 4],
-            },
-          ]),
-        },
-      },
-    };
-  }],
-  ["pastel", (K) => ({
-    shapes: {
-      bokeh: {
-        reach: [1, 1],
-        body: 0.3,
-        unit: 96,
-        draw(c, t) {
-          c.beginPath(); c.arc(0, 0, 0.9, 0, K.TAU);
-          c.fillStyle = K.radial(c, 0.9, [[0, K.fade(t[0], 0.35)], [0.8, K.fade(t[0], 0.5)], [1, K.fade(t[0], 0)]]); c.fill();
-          c.beginPath(); c.arc(0, 0, 0.74, 0, K.TAU); c.lineWidth = 0.05; c.strokeStyle = K.fade(t[2], 0.7); c.stroke();
-        },
-      },
-      speck: { reach: [1, 1], body: 0.4, draw(c, t) { c.beginPath(); c.arc(0, 0, 0.6, 0, K.TAU); c.fillStyle = t[2]; c.fill(); } },
-    },
-    effects: {
-      "soft-orbs": {
-        tones: [["#FFB8A3", "#C97A66", "#FFE3DA"], ["#C9B6FF", "#7A66C9", "#EDE6FF"], ["#A8F0D8", "#4FA88A", "#E2FBF2"], ["#A9D6FF", "#5A8FC9", "#E3F2FF"]],
-        still: 2000,
-        layers: [
-          ...K.depth({
-            count: 12,
-            shape: "bokeh",
-            size: [0.04, 0.075],
-            path: (t, seed) => ({ x: seed + Math.sin(t * 3 + seed * 20) * 0.05, y: 1.1 - t * 1.2, grow: 0.8 + t * 0.4 }),
-            life: 0.95,
-            fade: K.glow,
-            colours: [0, 1, 2, 3],
-          }, 0.9, 0.4),
-          {
-            count: 20,
-            shape: "speck",
-            size: [0.004, 0.008],
-            path: K.rise(0.03),
-            life: 0.8,
-            fade: K.twinkle,
-            colours: [0, 1, 2, 3],
-          },
-        ],
-      },
-    },
-  })],
-  ["glass", (K) => ({
-    shapes: {
-      lightpane: {
-        reach: [0.7, 1.1],
-        body: 0.5,
-        draw(c, t) { K.shape(c, [[0, -1.05], [0.62, 0], [0, 1.05], [-0.62, 0]]); c.fillStyle = K.along(c, [-0.6, -1], [0.6, 1], [[0, K.fade(t[2], 0.85)], [1, K.fade(t[0], 0.6)]]); c.fill(); c.lineWidth = 0.07; c.strokeStyle = K.fade(t[1], 0.8); c.stroke(); },
-      },
-      dustmote: { reach: [1, 1], body: 0.25, draw(c, t) { K.halo(c, 1, t[2], 0.7); c.beginPath(); c.arc(0, 0, 0.26, 0, K.TAU); c.fillStyle = "#FFFFFF"; c.fill(); } },
-    },
-    effects: {
-      "glass-light": {
-        tones: [["#C8102E", "#6A0A1C", "#FF7A8A"], ["#1E5AD9", "#0E2A7A", "#7FB8FF"], ["#E8A20E", "#8A5E06", "#FFE08A"], ["#12964A", "#0A4A26", "#7FE6A8"], ["#6A3AD0", "#3A1A8A", "#C99BFF"]],
-        still: 1900,
-        layers: [
-          ...K.depth({ count: 20, shape: "dustmote", size: [0.005, 0.01], path: K.rise(0.04), life: 0.75, fade: K.twinkle, colours: [2, 1] }),
-          ...K.depth({ count: 16, shape: "lightpane", size: [0.02, 0.034], path: (t, seed) => ({ x: seed + t * 0.16, y: -0.1 + t * 1.2, angle: 0.4 + Math.sin(t * 3 + seed * 9) * 0.3 }), life: 0.85, alpha: 0.75, fade: K.soft, colours: [0, 1, 2, 3, 4] }, 0.8, 0.4),
-        ],
-      },
-    },
-  })],
   ["origami", (K) => ({
     shapes: {
       pcrane: {
@@ -2521,51 +1832,6 @@ export const MAKERS: [string, (K: PackKit) => PackMade][] = [
       },
     },
   })],
-  ["starling", (K) => {
-    const centre = (u) => [0.5 + 0.36 * Math.sin(u * 5.2 + 0.4), 0.42 + 0.22 * Math.sin(u * 9.5)];
-    return {
-      shapes: {
-        wingbird: {
-          reach: [1.05, 0.5],
-          body: 0.4,
-          draw(c, t) {
-            c.beginPath(); c.moveTo(0, 0); c.bezierCurveTo(-0.29, -0.37, -0.71, -0.43, -1, -0.23); c.bezierCurveTo(-0.71, -0.2, -0.51, -0.06, -0.34, 0.17); c.lineTo(0, 0.37); c.lineTo(0.34, 0.17);
-            c.bezierCurveTo(0.51, -0.06, 0.71, -0.2, 1, -0.23); c.bezierCurveTo(0.71, -0.43, 0.29, -0.37, 0, 0); c.closePath();
-            K.solid(c, t[0], t[1], 0.07);
-          },
-        },
-      },
-      effects: {
-        "flock-sweep": {
-          tones: [K.TONES.violet, K.TONES.teal, K.TONES.rose],
-          still: 2000,
-          layers: [
-            {
-              count: 80,
-              shape: "wingbird",
-              size: [0.016, 0.027],
-              path: (t, seed, index) => {
-                const u = t + K.random(index, 4) * 0.1;
-                const [x, y] = centre(u);
-                const [x2, y2] = centre(u + 0.01);
-                const wide = 0.15 + 0.09 * Math.sin(u * 7);
-                return {
-                  x: x + (K.random(index, 5) - 0.5) * wide * 2,
-                  y: y + (K.random(index, 6) - 0.5) * wide * 2.2,
-                  angle: Math.atan2((y2 - y) * 1.3, x2 - x) + Math.PI / 2,
-                  squash: 0.5 + 0.5 * Math.abs(Math.cos(t * 50 + index)),
-                };
-              },
-              life: 0.96,
-              start: () => 0.02,
-              fade: K.soft,
-              colours: [0, 1, 0, 2],
-            },
-          ],
-        },
-      },
-    };
-  }],
   ["pixelzrzur", (K) => {
     const mark = [".....mmmmmmmmmmmmmm.....", "....mmmmmmmmmmmmmmmm....", "...mmmmmmmmmmmmmmmmmm...", "...mmm...mmmmmm...mmm...", "..mmmm....mmmm....mmmm..", ".mmmm..mm.mmmm.mm..mmmm.", "mmmmmmmmmmmmmmmmmmmmmmmm", "mmmmmmmmmmmmmmmmmmmmmmmm", "mmmmmmmmmmmmmmmmmmmmmmmm", ".mmmmmmmmmmmmmmmmmmmmmm.", "..mmmmm..........mmmmm..", "...mmm............mmm..."];
     const plus = [".w.", "www", ".w."];

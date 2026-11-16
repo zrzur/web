@@ -27248,20 +27248,12 @@ msgid "Ablaq Arch"
 msgstr "Ablaq Arch"
 
 #: components/ui/components/features/profiles/pack/labels.generated.ts
-msgid "Ablaq Stone"
-msgstr "Ablaq Stone"
-
-#: components/ui/components/features/profiles/pack/labels.generated.ts
 msgid "Alpine Lake"
 msgstr "Alpine Lake"
 
 #: components/ui/components/features/profiles/pack/labels.generated.ts
 msgid "Anchor"
 msgstr "Anchor"
-
-#: components/ui/components/features/profiles/pack/labels.generated.ts
-msgid "Antennae"
-msgstr "Antennae"
 
 #: components/ui/components/features/profiles/pack/labels.generated.ts
 msgid "Arcade Night"
@@ -27284,28 +27276,12 @@ msgid "Arena Marks"
 msgstr "Arena Marks"
 
 #: components/ui/components/features/profiles/pack/labels.generated.ts
-msgid "Atom Orbits"
-msgstr "Atom Orbits"
-
-#: components/ui/components/features/profiles/pack/labels.generated.ts
 msgid "Back of the Net"
 msgstr "Back of the Net"
 
 #: components/ui/components/features/profiles/pack/labels.generated.ts
-msgid "Ball Band"
-msgstr "Ball Band"
-
-#: components/ui/components/features/profiles/pack/labels.generated.ts
-msgid "Ball Ring"
-msgstr "Ball Ring"
-
-#: components/ui/components/features/profiles/pack/labels.generated.ts
 msgid "Balloon Sky"
 msgstr "Balloon Sky"
-
-#: components/ui/components/features/profiles/pack/labels.generated.ts
-msgid "Bamboo Leaves"
-msgstr "Bamboo Leaves"
 
 #: components/ui/components/features/profiles/pack/labels.generated.ts
 msgid "Bamboo Mist"
@@ -27314,10 +27290,6 @@ msgstr "Bamboo Mist"
 #: components/ui/components/features/profiles/pack/labels.generated.ts
 msgid "Bamboo Ring"
 msgstr "Bamboo Ring"
-
-#: components/ui/components/features/profiles/pack/labels.generated.ts
-msgid "Bat Night"
-msgstr "Bat Night"
 
 #: components/ui/components/features/profiles/pack/labels.generated.ts
 msgid "Beach Day"
@@ -27332,10 +27304,6 @@ msgid "Black Cat Ears"
 msgstr "Black Cat Ears"
 
 #: components/ui/components/features/profiles/pack/labels.generated.ts
-msgid "Blade Ring"
-msgstr "Blade Ring"
-
-#: components/ui/components/features/profiles/pack/labels.generated.ts
 msgid "Blizzard"
 msgstr "Blizzard"
 
@@ -27344,32 +27312,12 @@ msgid "Boo"
 msgstr "Boo"
 
 #: components/ui/components/features/profiles/pack/labels.generated.ts
-msgid "Bookshelf"
-msgstr "Bookshelf"
-
-#: components/ui/components/features/profiles/pack/labels.generated.ts
 msgid "Bronze Rank"
 msgstr "Bronze Rank"
 
 #: components/ui/components/features/profiles/pack/labels.generated.ts
-msgid "Bubble Ring"
-msgstr "Bubble Ring"
-
-#: components/ui/components/features/profiles/pack/labels.generated.ts
 msgid "Bunny Ears"
 msgstr "Bunny Ears"
-
-#: components/ui/components/features/profiles/pack/labels.generated.ts
-msgid "Burst Ring"
-msgstr "Burst Ring"
-
-#: components/ui/components/features/profiles/pack/labels.generated.ts
-msgid "Button Mash"
-msgstr "Button Mash"
-
-#: components/ui/components/features/profiles/pack/labels.generated.ts
-msgid "Camera Shelf"
-msgstr "Camera Shelf"
 
 #: components/ui/components/features/profiles/pack/labels.generated.ts
 msgid "Camp Night"
@@ -27384,40 +27332,16 @@ msgid "Caravan"
 msgstr "Caravan"
 
 #: components/ui/components/features/profiles/pack/labels.generated.ts
-msgid "Card Hand"
-msgstr "Card Hand"
-
-#: components/ui/components/features/profiles/pack/labels.generated.ts
 msgid "Cash Rain"
 msgstr "Cash Rain"
-
-#: components/ui/components/features/profiles/pack/labels.generated.ts
-msgid "Cassette"
-msgstr "Cassette"
 
 #: components/ui/components/features/profiles/pack/labels.generated.ts
 msgid "Castle Moon"
 msgstr "Castle Moon"
 
 #: components/ui/components/features/profiles/pack/labels.generated.ts
-msgid "Cat Ears"
-msgstr "Cat Ears"
-
-#: components/ui/components/features/profiles/pack/labels.generated.ts
-msgid "Chase Lights"
-msgstr "Chase Lights"
-
-#: components/ui/components/features/profiles/pack/labels.generated.ts
 msgid "Checkered Ring"
 msgstr "Checkered Ring"
-
-#: components/ui/components/features/profiles/pack/labels.generated.ts
-msgid "Chequered Crown"
-msgstr "Chequered Crown"
-
-#: components/ui/components/features/profiles/pack/labels.generated.ts
-msgid "Chess Board"
-msgstr "Chess Board"
 
 #: components/ui/components/features/profiles/pack/labels.generated.ts
 msgid "Citadel Night"
@@ -27432,16 +27356,8 @@ msgid "City Frame"
 msgstr "City Frame"
 
 #: components/ui/components/features/profiles/pack/labels.generated.ts
-msgid "Clockwork"
-msgstr "Clockwork"
-
-#: components/ui/components/features/profiles/pack/labels.generated.ts
 msgid "Cloud Headphones"
 msgstr "Cloud Headphones"
-
-#: components/ui/components/features/profiles/pack/labels.generated.ts
-msgid "Cloud Ring"
-msgstr "Cloud Ring"
 
 #: components/ui/components/features/profiles/pack/labels.generated.ts
 msgid "Coast Cruise"
@@ -27456,24 +27372,8 @@ msgid "Coast Frame"
 msgstr "Coast Frame"
 
 #: components/ui/components/features/profiles/pack/labels.generated.ts
-msgid "Coffee Steam"
-msgstr "Coffee Steam"
-
-#: components/ui/components/features/profiles/pack/labels.generated.ts
-msgid "Cog Ring"
-msgstr "Cog Ring"
-
-#: components/ui/components/features/profiles/pack/labels.generated.ts
 msgid "Coin Rush"
 msgstr "Coin Rush"
-
-#: components/ui/components/features/profiles/pack/labels.generated.ts
-msgid "Colour Bars"
-msgstr "Colour Bars"
-
-#: components/ui/components/features/profiles/pack/labels.generated.ts
-msgid "Colour Ring"
-msgstr "Colour Ring"
 
 #: components/ui/components/features/profiles/pack/labels.generated.ts
 msgid "Columns at Dusk"
@@ -27482,10 +27382,6 @@ msgstr "Columns at Dusk"
 #: components/ui/components/features/profiles/pack/labels.generated.ts
 msgid "Compass"
 msgstr "Compass"
-
-#: components/ui/components/features/profiles/pack/labels.generated.ts
-msgid "Court Floor"
-msgstr "Court Floor"
 
 #: components/ui/components/features/profiles/pack/labels.generated.ts
 msgid "Crane Flight"
@@ -27528,20 +27424,12 @@ msgid "Desert Night"
 msgstr "Desert Night"
 
 #: components/ui/components/features/profiles/pack/labels.generated.ts
-msgid "Desk Setup"
-msgstr "Desk Setup"
-
-#: components/ui/components/features/profiles/pack/labels.generated.ts
 msgid "Diamond Plate"
 msgstr "Diamond Plate"
 
 #: components/ui/components/features/profiles/pack/labels.generated.ts
 msgid "Diamond Rank"
 msgstr "Diamond Rank"
-
-#: components/ui/components/features/profiles/pack/labels.generated.ts
-msgid "Dice Ring"
-msgstr "Dice Ring"
 
 #: components/ui/components/features/profiles/pack/labels.generated.ts
 msgid "Dino Dash"
@@ -27556,10 +27444,6 @@ msgid "Doubloons"
 msgstr "Doubloons"
 
 #: components/ui/components/features/profiles/pack/labels.generated.ts
-msgid "Doughnut"
-msgstr "Doughnut"
-
-#: components/ui/components/features/profiles/pack/labels.generated.ts
 msgid "Drift Night"
 msgstr "Drift Night"
 
@@ -27572,10 +27456,6 @@ msgid "Dungeon Hall"
 msgstr "Dungeon Hall"
 
 #: components/ui/components/features/profiles/pack/labels.generated.ts
-msgid "Dusk Flock"
-msgstr "Dusk Flock"
-
-#: components/ui/components/features/profiles/pack/labels.generated.ts
 msgid "Edelweiss and Snow"
 msgstr "Edelweiss and Snow"
 
@@ -27584,48 +27464,16 @@ msgid "Edelweiss Ring"
 msgstr "Edelweiss Ring"
 
 #: components/ui/components/features/profiles/pack/labels.generated.ts
-msgid "Egg Ring"
-msgstr "Egg Ring"
-
-#: components/ui/components/features/profiles/pack/labels.generated.ts
 msgid "Far Orbit"
 msgstr "Far Orbit"
-
-#: components/ui/components/features/profiles/pack/labels.generated.ts
-msgid "Festive Night"
-msgstr "Festive Night"
-
-#: components/ui/components/features/profiles/pack/labels.generated.ts
-msgid "Film Strip"
-msgstr "Film Strip"
-
-#: components/ui/components/features/profiles/pack/labels.generated.ts
-msgid "Fire Sparks"
-msgstr "Fire Sparks"
 
 #: components/ui/components/features/profiles/pack/labels.generated.ts
 msgid "Flame Tongues"
 msgstr "Flame Tongues"
 
 #: components/ui/components/features/profiles/pack/labels.generated.ts
-msgid "Flask"
-msgstr "Flask"
-
-#: components/ui/components/features/profiles/pack/labels.generated.ts
-msgid "Flock Sweep"
-msgstr "Flock Sweep"
-
-#: components/ui/components/features/profiles/pack/labels.generated.ts
 msgid "Flower Crown"
 msgstr "Flower Crown"
-
-#: components/ui/components/features/profiles/pack/labels.generated.ts
-msgid "Flying Blades"
-msgstr "Flying Blades"
-
-#: components/ui/components/features/profiles/pack/labels.generated.ts
-msgid "Forest Friends"
-msgstr "Forest Friends"
 
 #: components/ui/components/features/profiles/pack/labels.generated.ts
 msgid "Fox Ears"
@@ -27636,14 +27484,6 @@ msgid "Full HUD"
 msgstr "Full HUD"
 
 #: components/ui/components/features/profiles/pack/labels.generated.ts
-msgid "Gambit"
-msgstr "Gambit"
-
-#: components/ui/components/features/profiles/pack/labels.generated.ts
-msgid "Game Table"
-msgstr "Game Table"
-
-#: components/ui/components/features/profiles/pack/labels.generated.ts
 msgid "Gaming Headset"
 msgstr "Gaming Headset"
 
@@ -27652,28 +27492,12 @@ msgid "Ghost Pals"
 msgstr "Ghost Pals"
 
 #: components/ui/components/features/profiles/pack/labels.generated.ts
-msgid "Gift Wrap"
-msgstr "Gift Wrap"
-
-#: components/ui/components/features/profiles/pack/labels.generated.ts
 msgid "Gifts"
 msgstr "Gifts"
 
 #: components/ui/components/features/profiles/pack/labels.generated.ts
 msgid "Ginger Cat Ears"
 msgstr "Ginger Cat Ears"
-
-#: components/ui/components/features/profiles/pack/labels.generated.ts
-msgid "Glass Light"
-msgstr "Glass Light"
-
-#: components/ui/components/features/profiles/pack/labels.generated.ts
-msgid "Glass Rose"
-msgstr "Glass Rose"
-
-#: components/ui/components/features/profiles/pack/labels.generated.ts
-msgid "Goal"
-msgstr "Goal"
 
 #: components/ui/components/features/profiles/pack/labels.generated.ts
 msgid "Goal Bounce"
@@ -27688,20 +27512,12 @@ msgid "Gold Rank"
 msgstr "Gold Rank"
 
 #: components/ui/components/features/profiles/pack/labels.generated.ts
-msgid "Grand Prix"
-msgstr "Grand Prix"
-
-#: components/ui/components/features/profiles/pack/labels.generated.ts
 msgid "Halo"
 msgstr "Halo"
 
 #: components/ui/components/features/profiles/pack/labels.generated.ts
 msgid "Haunted Hill"
 msgstr "Haunted Hill"
-
-#: components/ui/components/features/profiles/pack/labels.generated.ts
-msgid "Headset"
-msgstr "Headset"
 
 #: components/ui/components/features/profiles/pack/labels.generated.ts
 msgid "Health and Shield"
@@ -27724,28 +27540,12 @@ msgid "Hibiscus Ring"
 msgstr "Hibiscus Ring"
 
 #: components/ui/components/features/profiles/pack/labels.generated.ts
-msgid "Hit Markers"
-msgstr "Hit Markers"
-
-#: components/ui/components/features/profiles/pack/labels.generated.ts
-msgid "Ice Cream Parlour"
-msgstr "Ice Cream Parlour"
-
-#: components/ui/components/features/profiles/pack/labels.generated.ts
 msgid "Jasmine Fall"
 msgstr "Jasmine Fall"
 
 #: components/ui/components/features/profiles/pack/labels.generated.ts
 msgid "Jasmine Ring"
 msgstr "Jasmine Ring"
-
-#: components/ui/components/features/profiles/pack/labels.generated.ts
-msgid "Jellyfish"
-msgstr "Jellyfish"
-
-#: components/ui/components/features/profiles/pack/labels.generated.ts
-msgid "Joystick Ring"
-msgstr "Joystick Ring"
 
 #: components/ui/components/features/profiles/pack/labels.generated.ts
 msgid "Jungle Dusk"
@@ -27760,20 +27560,8 @@ msgid "Key Rain"
 msgstr "Key Rain"
 
 #: components/ui/components/features/profiles/pack/labels.generated.ts
-msgid "Kick-off"
-msgstr "Kick-off"
-
-#: components/ui/components/features/profiles/pack/labels.generated.ts
 msgid "Koi Pond"
 msgstr "Koi Pond"
-
-#: components/ui/components/features/profiles/pack/labels.generated.ts
-msgid "Lab Bench"
-msgstr "Lab Bench"
-
-#: components/ui/components/features/profiles/pack/labels.generated.ts
-msgid "Lagoon Haze"
-msgstr "Lagoon Haze"
 
 #: components/ui/components/features/profiles/pack/labels.generated.ts
 msgid "Lantern Glow"
@@ -27792,20 +27580,12 @@ msgid "Laser Run"
 msgstr "Laser Run"
 
 #: components/ui/components/features/profiles/pack/labels.generated.ts
-msgid "Lavender Breeze"
-msgstr "Lavender Breeze"
-
-#: components/ui/components/features/profiles/pack/labels.generated.ts
 msgid "Lavender Field"
 msgstr "Lavender Field"
 
 #: components/ui/components/features/profiles/pack/labels.generated.ts
 msgid "Lavender Wreath"
 msgstr "Lavender Wreath"
-
-#: components/ui/components/features/profiles/pack/labels.generated.ts
-msgid "Lens"
-msgstr "Lens"
 
 #: components/ui/components/features/profiles/pack/labels.generated.ts
 msgid "Level Rise"
@@ -27816,24 +27596,8 @@ msgid "Level Up"
 msgstr "Level Up"
 
 #: components/ui/components/features/profiles/pack/labels.generated.ts
-msgid "Lifebuoy"
-msgstr "Lifebuoy"
-
-#: components/ui/components/features/profiles/pack/labels.generated.ts
 msgid "Liftoff"
 msgstr "Liftoff"
-
-#: components/ui/components/features/profiles/pack/labels.generated.ts
-msgid "Light Trails"
-msgstr "Light Trails"
-
-#: components/ui/components/features/profiles/pack/labels.generated.ts
-msgid "Living Light"
-msgstr "Living Light"
-
-#: components/ui/components/features/profiles/pack/labels.generated.ts
-msgid "Loose Pages"
-msgstr "Loose Pages"
 
 #: components/ui/components/features/profiles/pack/labels.generated.ts
 msgid "Loot Drop"
@@ -27850,10 +27614,6 @@ msgstr "Lucky Roll"
 #: components/ui/components/features/profiles/pack/labels.generated.ts
 msgid "Magma Flow"
 msgstr "Magma Flow"
-
-#: components/ui/components/features/profiles/pack/labels.generated.ts
-msgid "Magma Ring"
-msgstr "Magma Ring"
 
 #: components/ui/components/features/profiles/pack/labels.generated.ts
 msgid "Majlis Evening"
@@ -27876,28 +27636,12 @@ msgid "Melody"
 msgstr "Melody"
 
 #: components/ui/components/features/profiles/pack/labels.generated.ts
-msgid "Melting Ring"
-msgstr "Melting Ring"
-
-#: components/ui/components/features/profiles/pack/labels.generated.ts
 msgid "Midnight Headphones"
 msgstr "Midnight Headphones"
 
 #: components/ui/components/features/profiles/pack/labels.generated.ts
-msgid "Molecules"
-msgstr "Molecules"
-
-#: components/ui/components/features/profiles/pack/labels.generated.ts
-msgid "Moon Phases"
-msgstr "Moon Phases"
-
-#: components/ui/components/features/profiles/pack/labels.generated.ts
 msgid "Moonlit Roofs"
 msgstr "Moonlit Roofs"
-
-#: components/ui/components/features/profiles/pack/labels.generated.ts
-msgid "Murmuration"
-msgstr "Murmuration"
 
 #: components/ui/components/features/profiles/pack/labels.generated.ts
 msgid "Music Notes"
@@ -27908,48 +27652,16 @@ msgid "Neon Flicker"
 msgstr "Neon Flicker"
 
 #: components/ui/components/features/profiles/pack/labels.generated.ts
-msgid "Neon Sign"
-msgstr "Neon Sign"
-
-#: components/ui/components/features/profiles/pack/labels.generated.ts
-msgid "Night Road"
-msgstr "Night Road"
-
-#: components/ui/components/features/profiles/pack/labels.generated.ts
-msgid "Night Traffic"
-msgstr "Night Traffic"
-
-#: components/ui/components/features/profiles/pack/labels.generated.ts
 msgid "Night Visit"
 msgstr "Night Visit"
-
-#: components/ui/components/features/profiles/pack/labels.generated.ts
-msgid "Nuts and Bolts"
-msgstr "Nuts and Bolts"
 
 #: components/ui/components/features/profiles/pack/labels.generated.ts
 msgid "Old City Walls"
 msgstr "Old City Walls"
 
 #: components/ui/components/features/profiles/pack/labels.generated.ts
-msgid "Old Television"
-msgstr "Old Television"
-
-#: components/ui/components/features/profiles/pack/labels.generated.ts
-msgid "Olive Leaves"
-msgstr "Olive Leaves"
-
-#: components/ui/components/features/profiles/pack/labels.generated.ts
 msgid "Olive Wreath"
 msgstr "Olive Wreath"
-
-#: components/ui/components/features/profiles/pack/labels.generated.ts
-msgid "On the Branch"
-msgstr "On the Branch"
-
-#: components/ui/components/features/profiles/pack/labels.generated.ts
-msgid "Open Book"
-msgstr "Open Book"
 
 #: components/ui/components/features/profiles/pack/labels.generated.ts
 msgid "Orange Slice"
@@ -27964,40 +27676,12 @@ msgid "Pad Ring"
 msgstr "Pad Ring"
 
 #: components/ui/components/features/profiles/pack/labels.generated.ts
-msgid "Palm Sunset"
-msgstr "Palm Sunset"
-
-#: components/ui/components/features/profiles/pack/labels.generated.ts
-msgid "Pane Ring"
-msgstr "Pane Ring"
-
-#: components/ui/components/features/profiles/pack/labels.generated.ts
-msgid "Paper Cranes"
-msgstr "Paper Cranes"
-
-#: components/ui/components/features/profiles/pack/labels.generated.ts
-msgid "Paper Water"
-msgstr "Paper Water"
-
-#: components/ui/components/features/profiles/pack/labels.generated.ts
 msgid "Paw Hop"
 msgstr "Paw Hop"
 
 #: components/ui/components/features/profiles/pack/labels.generated.ts
 msgid "Paw Ring"
 msgstr "Paw Ring"
-
-#: components/ui/components/features/profiles/pack/labels.generated.ts
-msgid "Paw Trail"
-msgstr "Paw Trail"
-
-#: components/ui/components/features/profiles/pack/labels.generated.ts
-msgid "Pawn Circle"
-msgstr "Pawn Circle"
-
-#: components/ui/components/features/profiles/pack/labels.generated.ts
-msgid "Peach Haze"
-msgstr "Peach Haze"
 
 #: components/ui/components/features/profiles/pack/labels.generated.ts
 msgid "Pet Parade"
@@ -28014,14 +27698,6 @@ msgstr "Picnic Ring"
 #: components/ui/components/features/profiles/pack/labels.generated.ts
 msgid "Pink Headphones"
 msgstr "Pink Headphones"
-
-#: components/ui/components/features/profiles/pack/labels.generated.ts
-msgid "Pinwheel"
-msgstr "Pinwheel"
-
-#: components/ui/components/features/profiles/pack/labels.generated.ts
-msgid "Pitch at Night"
-msgstr "Pitch at Night"
 
 #: components/ui/components/features/profiles/pack/labels.generated.ts
 msgid "Pitch Ring"
@@ -28064,10 +27740,6 @@ msgid "Platinum Rank"
 msgstr "Platinum Rank"
 
 #: components/ui/components/features/profiles/pack/labels.generated.ts
-msgid "Pocket Watch"
-msgstr "Pocket Watch"
-
-#: components/ui/components/features/profiles/pack/labels.generated.ts
 msgid "Pulse Ring"
 msgstr "Pulse Ring"
 
@@ -28080,24 +27752,12 @@ msgid "Quest Frame"
 msgstr "Quest Frame"
 
 #: components/ui/components/features/profiles/pack/labels.generated.ts
-msgid "Rabbit Ears"
-msgstr "Rabbit Ears"
-
-#: components/ui/components/features/profiles/pack/labels.generated.ts
 msgid "Race Track"
 msgstr "Race Track"
 
 #: components/ui/components/features/profiles/pack/labels.generated.ts
-msgid "Racing Wheel"
-msgstr "Racing Wheel"
-
-#: components/ui/components/features/profiles/pack/labels.generated.ts
 msgid "Radar"
 msgstr "Radar"
-
-#: components/ui/components/features/profiles/pack/labels.generated.ts
-msgid "Rain Cloud"
-msgstr "Rain Cloud"
 
 #: components/ui/components/features/profiles/pack/labels.generated.ts
 msgid "Rain Street"
@@ -28136,14 +27796,6 @@ msgid "Ribbon and Bow"
 msgstr "Ribbon and Bow"
 
 #: components/ui/components/features/profiles/pack/labels.generated.ts
-msgid "Rim and Net"
-msgstr "Rim and Net"
-
-#: components/ui/components/features/profiles/pack/labels.generated.ts
-msgid "Ring of Books"
-msgstr "Ring of Books"
-
-#: components/ui/components/features/profiles/pack/labels.generated.ts
 msgid "Ring Road"
 msgstr "Ring Road"
 
@@ -28154,14 +27806,6 @@ msgstr "Rising Balloons"
 #: components/ui/components/features/profiles/pack/labels.generated.ts
 msgid "Rising Jellies"
 msgstr "Rising Jellies"
-
-#: components/ui/components/features/profiles/pack/labels.generated.ts
-msgid "Robot Head"
-msgstr "Robot Head"
-
-#: components/ui/components/features/profiles/pack/labels.generated.ts
-msgid "Robot Works"
-msgstr "Robot Works"
 
 #: components/ui/components/features/profiles/pack/labels.generated.ts
 msgid "Rose Fall"
@@ -28178,22 +27822,6 @@ msgstr "Sadu Ring"
 #: components/ui/components/features/profiles/pack/labels.generated.ts
 msgid "Sadu Weave"
 msgstr "Sadu Weave"
-
-#: components/ui/components/features/profiles/pack/labels.generated.ts
-msgid "Sand Wind"
-msgstr "Sand Wind"
-
-#: components/ui/components/features/profiles/pack/labels.generated.ts
-msgid "Saucer Beam"
-msgstr "Saucer Beam"
-
-#: components/ui/components/features/profiles/pack/labels.generated.ts
-msgid "Saucers"
-msgstr "Saucers"
-
-#: components/ui/components/features/profiles/pack/labels.generated.ts
-msgid "Scarf Weave"
-msgstr "Scarf Weave"
 
 #: components/ui/components/features/profiles/pack/labels.generated.ts
 msgid "School of Fish"
@@ -28216,20 +27844,8 @@ msgid "Silver Tiara"
 msgstr "Silver Tiara"
 
 #: components/ui/components/features/profiles/pack/labels.generated.ts
-msgid "Sky Bursts"
-msgstr "Sky Bursts"
-
-#: components/ui/components/features/profiles/pack/labels.generated.ts
 msgid "Sleepy Moon"
 msgstr "Sleepy Moon"
-
-#: components/ui/components/features/profiles/pack/labels.generated.ts
-msgid "Slipstream"
-msgstr "Slipstream"
-
-#: components/ui/components/features/profiles/pack/labels.generated.ts
-msgid "Smoke Ring"
-msgstr "Smoke Ring"
 
 #: components/ui/components/features/profiles/pack/labels.generated.ts
 msgid "Snack Frame"
@@ -28238,10 +27854,6 @@ msgstr "Snack Frame"
 #: components/ui/components/features/profiles/pack/labels.generated.ts
 msgid "Snack Rain"
 msgstr "Snack Rain"
-
-#: components/ui/components/features/profiles/pack/labels.generated.ts
-msgid "Snacks"
-msgstr "Snacks"
 
 #: components/ui/components/features/profiles/pack/labels.generated.ts
 msgid "Snapshots"
@@ -28260,28 +27872,8 @@ msgid "Snowy Peaks"
 msgstr "Snowy Peaks"
 
 #: components/ui/components/features/profiles/pack/labels.generated.ts
-msgid "Soft Halo"
-msgstr "Soft Halo"
-
-#: components/ui/components/features/profiles/pack/labels.generated.ts
-msgid "Soft Orbs"
-msgstr "Soft Orbs"
-
-#: components/ui/components/features/profiles/pack/labels.generated.ts
-msgid "Sound Bars"
-msgstr "Sound Bars"
-
-#: components/ui/components/features/profiles/pack/labels.generated.ts
-msgid "Sound Ring"
-msgstr "Sound Ring"
-
-#: components/ui/components/features/profiles/pack/labels.generated.ts
 msgid "Space Helmet"
 msgstr "Space Helmet"
-
-#: components/ui/components/features/profiles/pack/labels.generated.ts
-msgid "Sparkler Ring"
-msgstr "Sparkler Ring"
 
 #: components/ui/components/features/profiles/pack/labels.generated.ts
 msgid "Speedometer"
@@ -28308,10 +27900,6 @@ msgid "Stitch Ring"
 msgstr "Stitch Ring"
 
 #: components/ui/components/features/profiles/pack/labels.generated.ts
-msgid "String Lights"
-msgstr "String Lights"
-
-#: components/ui/components/features/profiles/pack/labels.generated.ts
 msgid "Sugar Rush"
 msgstr "Sugar Rush"
 
@@ -28328,32 +27916,8 @@ msgid "Supporters' Scarf"
 msgstr "Supporters' Scarf"
 
 #: components/ui/components/features/profiles/pack/labels.generated.ts
-msgid "Swish"
-msgstr "Swish"
-
-#: components/ui/components/features/profiles/pack/labels.generated.ts
-msgid "Tail Lights"
-msgstr "Tail Lights"
-
-#: components/ui/components/features/profiles/pack/labels.generated.ts
-msgid "Tall Windows"
-msgstr "Tall Windows"
-
-#: components/ui/components/features/profiles/pack/labels.generated.ts
-msgid "Tape Reel"
-msgstr "Tape Reel"
-
-#: components/ui/components/features/profiles/pack/labels.generated.ts
-msgid "Three Scoops"
-msgstr "Three Scoops"
-
-#: components/ui/components/features/profiles/pack/labels.generated.ts
 msgid "Tilted Crown"
 msgstr "Tilted Crown"
-
-#: components/ui/components/features/profiles/pack/labels.generated.ts
-msgid "Treasure Map"
-msgstr "Treasure Map"
 
 #: components/ui/components/features/profiles/pack/labels.generated.ts
 msgid "Tropical Leaves"
@@ -28362,14 +27926,6 @@ msgstr "Tropical Leaves"
 #: components/ui/components/features/profiles/pack/labels.generated.ts
 msgid "Tulip Crown"
 msgstr "Tulip Crown"
-
-#: components/ui/components/features/profiles/pack/labels.generated.ts
-msgid "Two Arcs"
-msgstr "Two Arcs"
-
-#: components/ui/components/features/profiles/pack/labels.generated.ts
-msgid "Typing"
-msgstr "Typing"
 
 #: components/ui/components/features/profiles/pack/labels.generated.ts
 msgid "Tyre Ring"
@@ -28382,10 +27938,6 @@ msgstr "Tyre Smoke"
 #: components/ui/components/features/profiles/pack/labels.generated.ts
 msgid "Umbrellas"
 msgstr "Umbrellas"
-
-#: components/ui/components/features/profiles/pack/labels.generated.ts
-msgid "Vinyl Record"
-msgstr "Vinyl Record"
 
 #: components/ui/components/features/profiles/pack/labels.generated.ts
 msgid "Warp Ring"
@@ -28444,10 +27996,6 @@ msgid "Handheld Frame"
 msgstr "Handheld Frame"
 
 #: components/ui/components/features/profiles/pack/labels.generated.ts
-msgid "Icicle Ring"
-msgstr "Icicle Ring"
-
-#: components/ui/components/features/profiles/pack/labels.generated.ts
 msgid "Mixtape Frame"
 msgstr "Mixtape Frame"
 
@@ -28462,10 +28010,6 @@ msgstr "Pixel Snowfall"
 #: components/ui/components/features/profiles/pack/labels.generated.ts
 msgid "Power Up"
 msgstr "Power Up"
-
-#: components/ui/components/features/profiles/pack/labels.generated.ts
-msgid "Press Start"
-msgstr "Press Start"
 
 #: components/ui/components/features/profiles/pack/labels.generated.ts
 msgid "Snow Frame"
@@ -28488,20 +28032,12 @@ msgid "Bloom Frame"
 msgstr "Bloom Frame"
 
 #: components/ui/components/features/profiles/pack/labels.generated.ts
-msgid "Candy Shop"
-msgstr "Candy Shop"
-
-#: components/ui/components/features/profiles/pack/labels.generated.ts
 msgid "Cat Frame"
 msgstr "Cat Frame"
 
 #: components/ui/components/features/profiles/pack/labels.generated.ts
 msgid "Cat Parade"
 msgstr "Cat Parade"
-
-#: components/ui/components/features/profiles/pack/labels.generated.ts
-msgid "Ears and Whiskers"
-msgstr "Ears and Whiskers"
 
 #: components/ui/components/features/profiles/pack/labels.generated.ts
 msgid "Heart Chain"
@@ -28620,10 +28156,6 @@ msgid "Damask Roses"
 msgstr "Damask Roses"
 
 #: components/ui/components/features/profiles/pack/labels.generated.ts
-msgid "Desert Wind"
-msgstr "Desert Wind"
-
-#: components/ui/components/features/profiles/pack/labels.generated.ts
 msgid "Flag of Syria"
 msgstr "Flag of Syria"
 
@@ -28646,10 +28178,6 @@ msgstr "Hearts for Syria"
 #: components/ui/components/features/profiles/pack/labels.generated.ts
 msgid "Jasmine Rain"
 msgstr "Jasmine Rain"
-
-#: components/ui/components/features/profiles/pack/labels.generated.ts
-msgid "Old City Gate"
-msgstr "Old City Gate"
 
 #: components/ui/components/features/profiles/pack/labels.generated.ts
 msgid "Old City Lanterns"
@@ -28698,10 +28226,6 @@ msgstr "Water Wheel"
 #: components/ui/components/features/profiles/pack/labels.generated.ts
 msgid "Welcome Tray"
 msgstr "Welcome Tray"
-
-#: components/ui/components/features/profiles/pack/labels.generated.ts
-msgid "Wheel Drops"
-msgstr "Wheel Drops"
 
 #: components/ui/components/features/profiles/pack/labels.generated.ts
 msgid "Wheels of Hama"
