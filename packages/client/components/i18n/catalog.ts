@@ -117,11 +117,17 @@ export function browserPreferredLanguage() {
 
   // Get the user's system language. Check for exact
   // matches first, otherwise check for partial matches
+  // A Chinese device reports a region ("zh-CN") or the bare language, never
+  // the script our catalog is named after, so it got English. Traditional
+  // Chinese ("zh-TW", "zh-HK") is left alone: that catalog is not translated.
+  const reported = navigator.languages.map((lang) =>
+    /^zh(-(CN|SG|Hans(-.*)?))?$/i.test(lang) ? "zh-Hans" : lang,
+  );
   return (
-    navigator.languages
+    reported
       .map((lang) => languages.find((l) => l[0].replace(/_/g, "-") == lang))
       .filter((lang) => lang)[0]?.[0] ??
-    navigator.languages
+    reported
       .map((x) => x.split("-")[0])
       .map((lang) => languages.find((l) => l[0] == lang))
       .filter((lang) => lang)[0]?.[0] ??
