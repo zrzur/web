@@ -1228,8 +1228,8 @@
     },
     {
       "path": "packages/client/components/app/interface/settings/UserSettings.tsx",
-      "sha256": "00e6a241c5532a5c3f88a05d96fbeb7d5ae4ace01db5e59a710c5a4f976753e1",
-      "bytes": 18668,
+      "sha256": "e80efd9a9f0809c8528f7d405c29918a39a8ebfe4264c25862110f90e1a8ea11",
+      "bytes": 19016,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -4546,8 +4546,8 @@
     },
     {
       "path": "packages/client/components/modal/modals/AddFriend.tsx",
-      "sha256": "22c07dba10ab9f86e0de1becf9f961c2f7cb336844aa66d85abcac34b1a350aa",
-      "bytes": 1885,
+      "sha256": "ed463ca561dc2ee9f71c08a3adfb95c345578f44e7a0ae63f11529f487a0742d",
+      "bytes": 1977,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -4630,8 +4630,8 @@
     },
     {
       "path": "packages/client/components/modal/modals/CreateInvite.tsx",
-      "sha256": "fa804152dbda2c96a01e6d63a1a1f74ad2c9c988f3dd9ed620815430b1769759",
-      "bytes": 14688,
+      "sha256": "ce3ecfff0ab950913604cdea4d84c066c92a8221bb924d1b5b4a029be93e3fae",
+      "bytes": 14868,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -4816,8 +4816,8 @@
     },
     {
       "path": "packages/client/components/modal/modals/JoinServer.tsx",
-      "sha256": "a57917773238fece02e6f46d71ed40ec90af5dcb030a0f1b534e8f46a49b6782",
-      "bytes": 2702,
+      "sha256": "345cd16ec9c4b2e85e3f4731d64dd1c8b65e28085576294ff95f5eb111f62c5d",
+      "bytes": 2795,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -6304,8 +6304,8 @@
     },
     {
       "path": "packages/client/components/ui/components/features/messaging/composition/picker/picker.css",
-      "sha256": "603ea3b28f082661c99a3ef1db29c37a72cbf5165d984a554c495562f249e94a",
-      "bytes": 14786,
+      "sha256": "d626b67a3cbdb11c5203068ee4405b57f7499ef2ef156fb44283a0dd341bbd45",
+      "bytes": 15459,
       "category": "product-source-or-build-manifest"
     },
     {
