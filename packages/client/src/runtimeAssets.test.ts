@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 
-import { isRuntimeAsset, overLimit } from "./runtimeAssets";
+import { isAppNavigation, isRuntimeAsset, overLimit } from "./runtimeAssets";
 
 const origin = "https://app.zrzur.com";
 const url = (path: string) => new URL(path, origin);
@@ -29,6 +29,31 @@ describe("runtime asset cache", () => {
   it("follows the scope of the service worker", () => {
     expect(isRuntimeAsset(url("/app/assets/a.js"), origin, "/app/")).toBe(true);
     expect(isRuntimeAsset(url("/assets/a.js"), origin, "/app/")).toBe(false);
+  });
+
+  it("answers for pages of the app being opened, nothing else", () => {
+    const nav = { mode: "navigate" };
+    expect(isAppNavigation(nav, url("/"), origin, "/")).toBe(true);
+    expect(
+      isAppNavigation(nav, url("/server/01/channel/02"), origin, "/"),
+    ).toBe(true);
+    // a request made by the page (API, images, files) is never touched
+    expect(isAppNavigation({ mode: "cors" }, url("/app"), origin, "/")).toBe(
+      false,
+    );
+    expect(isAppNavigation({ mode: "no-cors" }, url("/"), origin, "/")).toBe(
+      false,
+    );
+    // a file opened directly keeps its real answer (a missing one is a 404)
+    expect(isAppNavigation(nav, url("/build.json"), origin, "/")).toBe(false);
+    expect(isAppNavigation(nav, url("/assets/web/logo.png"), origin, "/")).toBe(
+      false,
+    );
+    // another site, or a page outside the scope
+    expect(
+      isAppNavigation(nav, new URL("https://api.zrzur.com/"), origin, "/"),
+    ).toBe(false);
+    expect(isAppNavigation(nav, url("/other"), origin, "/app/")).toBe(false);
   });
 
   it("drops only the oldest entries over the limit", () => {

@@ -24,9 +24,10 @@ import { useVoice } from "@revolt/rtc";
 import { useState } from "@revolt/state";
 import { LAYOUT_SECTIONS } from "@revolt/state/stores/Layout";
 
+import { pendingUpdate } from "../serviceWorkerInterface";
 import { HomeSidebar, ServerList, ServerSidebar } from "./navigation";
 import { MentionsHost } from "./navigation/MentionsPanel";
-import { PhoneTabs } from "./navigation/PhoneTabs";
+import { PhoneTabs, PhoneUpdateRow } from "./navigation/PhoneTabs";
 import { AccountBar } from "./navigation/channels/AccountBar";
 
 const MainBar = styled("div", {
@@ -37,10 +38,11 @@ const MainBar = styled("div", {
     flexShrink: 0,
 
     // keep the last servers / channels clear of the account panel
-    "& > *:not([data-account-panel]):not([data-phone-tabs])": {
-      paddingBottom:
-        "calc(var(--z-dock-height, 56px) + 2 * var(--z-dock-gap, 8px) + var(--z-voice-panel-space, 0px))",
-    },
+    "& > *:not([data-account-panel]):not([data-phone-tabs]):not([data-phone-update])":
+      {
+        paddingBottom:
+          "calc(var(--z-dock-height, 56px) + 2 * var(--z-dock-gap, 8px) + var(--z-voice-panel-space, 0px))",
+      },
 
     _phone: {
       "--layout-width-channel-sidebar": "auto",
@@ -51,9 +53,12 @@ const MainBar = styled("div", {
       // the tab bar (64px) takes the bottom edge; the account card only stays
       // for its call controls, just above the tabs (#root already stops
       // above the home bar, so no safe-area inset here)
-      "& > *:not([data-account-panel]):not([data-phone-tabs])": {
-        paddingBottom: "calc(64px + var(--z-voice-panel-space, 0px))",
-      },
+      // (--z-update-row-space: the "new version" row, when it shows)
+      "& > *:not([data-account-panel]):not([data-phone-tabs]):not([data-phone-update])":
+        {
+          paddingBottom:
+            "calc(64px + var(--z-voice-panel-space, 0px) + var(--z-update-row-space, 0px))",
+        },
       "& > [data-account-panel]": {
         bottom: "72px",
       },
@@ -62,7 +67,7 @@ const MainBar = styled("div", {
       },
       // typing (search, a text field): the keyboard needs the room, as in
       // native apps the tabs step aside until it closes
-      "&:has(input:focus, textarea:focus, [contenteditable='true']:focus) > [data-phone-tabs]":
+      "&:has(input:focus, textarea:focus, [contenteditable='true']:focus) > :is([data-phone-tabs], [data-phone-update])":
         { display: "none" },
     },
   },
@@ -110,12 +115,17 @@ export const Sidebar = (props: {
     location.pathname.startsWith("/designs") ||
     location.pathname.startsWith("/discover");
 
+  // phones: "a new version is ready", never while a call is on (moving to
+  // it reloads the page)
+  const updateRow = () => !!pendingUpdate() && !voice.channel();
+
   return (
     <MainBar
       class="main_bar"
       style={{
         // room for the voice section the account card grows by in a call
         "--z-voice-panel-space": voice.channel() && !compact() ? "96px" : "0px",
+        "--z-update-row-space": updateRow() ? "48px" : "0px",
       }}
     >
       <ServerList
@@ -152,6 +162,9 @@ export const Sidebar = (props: {
       </Show>
       {/* floats across the rail and the channel list (see AccountBar) */}
       <AccountBar compact={compact()} overPage={fullPage() && !narrow()} />
+      <Show when={updateRow()}>
+        <PhoneUpdateRow />
+      </Show>
       <PhoneTabs />
       <MentionsHost />
     </MainBar>

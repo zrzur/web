@@ -79,6 +79,9 @@ describe("safe-area insets", () => {
   it("reads env(safe-area-inset-*) nowhere else", () => {
     const offenders = [...sources("components"), ...sources("src")]
       .filter((path) => !path.endsWith(join("ui", "styles.css")))
+      // the "no connection" page is a page of its own, written by the
+      // service worker: the app's stylesheet and variables are not on it
+      .filter((path) => path !== join("src", "offlinePage.ts"))
       .filter((path) => /env\(\s*safe-area-inset/.test(read(path)))
       .map((path) => relative(CLIENT, join(CLIENT, path)));
     expect(offenders).toEqual([]);

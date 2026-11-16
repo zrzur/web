@@ -1413,6 +1413,11 @@ msgstr "Una ventana minimizada no aparece en la lista. Ábrela primero."
 msgid "A new version is saved as a draft"
 msgstr "Hay una versión nueva guardada como borrador"
 
+#: components/app/interface/desktop/Titlebar.tsx
+#: src/interface/navigation/PhoneTabs.tsx
+msgid "A new version of Zrzur is ready"
+msgstr "Hay una nueva versión de Zrzur lista"
+
 #: components/app/interface/settings/user/subscriptions/PlusPage.tsx
 msgid "A note on money"
 msgstr "Una nota sobre el dinero"
@@ -2072,6 +2077,10 @@ msgstr "Añade tu mes y año de nacimiento para continuar."
 #: components/app/interface/settings/server/assistant/AssistantPage.tsx
 msgid "Add Zrzur Assistant to this server first."
 msgstr "Primero añade Zrzur Assistant a este servidor."
+
+#: components/modal/modals/InstallApp.tsx
+msgid "Add Zrzur to your home screen"
+msgstr "Añade Zrzur a la pantalla de inicio"
 
 #: components/app/interface/settings/server/assistant/AssistantFields.tsx
 msgid "Add…"
@@ -4829,6 +4838,10 @@ msgstr "Opciones de lista"
 #: components/app/interface/channels/text/interactions/CommandPicker.tsx
 msgid "Choose \"{name}\" from the list."
 msgstr "Elige «{name}» de la lista."
+
+#: components/modal/modals/InstallApp.tsx
+msgid "Choose “Add to Home Screen”"
+msgstr "Elige «Añadir a pantalla de inicio»"
 
 #: components/app/interface/settings/user/plugins/DeveloperTab.tsx
 msgid "Choose a `.zplugin.json` package (or a manifest) to check it, preview it on this device, or submit it for review."
@@ -9706,6 +9719,7 @@ msgid "Got an invite?"
 msgstr "¿Tienes una invitación?"
 
 #: components/app/interface/support/NoticeCenter.tsx
+#: components/modal/modals/InstallApp.tsx
 msgid "Got it"
 msgstr "Entendido"
 
@@ -10592,8 +10606,17 @@ msgid "Insights"
 msgstr "Estadísticas"
 
 #: components/app/interface/settings/user/plugins/PluginDetail.tsx
+#: components/modal/modals/InstallApp.tsx
 msgid "Install"
 msgstr "Instalar"
+
+#: src/interface/You.tsx
+msgid "Install the app"
+msgstr "Instalar la aplicación"
+
+#: components/modal/modals/InstallApp.tsx
+msgid "Install Zrzur on your phone"
+msgstr "Instala Zrzur en tu teléfono"
 
 #: components/app/interface/settings/user/Advanced.tsx
 msgid "Install, turn on and manage reviewed plugins."
@@ -14060,6 +14083,10 @@ msgstr "Aún no hay bots publicados."
 msgid "No bots in this server."
 msgstr "No hay bots en este servidor."
 
+#: components/modal/modals/InstallApp.tsx
+msgid "No browser bar, like any app"
+msgstr "Sin barra del navegador, como cualquier aplicación"
+
 #: components/app/interface/settings/user/plugins/PluginDetail.tsx
 msgid "No changelog."
 msgstr "Sin registro de cambios."
@@ -14669,6 +14696,7 @@ msgstr "No está en directo ahora."
 #: components/app/interface/settings/user/connections/Connections.tsx
 #: components/app/interface/settings/user/connections/ServiceCards.tsx
 #: components/client/AgePrompt.tsx
+#: components/modal/modals/InstallApp.tsx
 msgid "Not now"
 msgstr "Ahora no"
 
@@ -14859,6 +14887,10 @@ msgstr "Nada todavía. Se te preguntará antes de publicar esta versión."
 #: src/interface/navigation/NotificationsPhone.tsx
 msgid "Notifications"
 msgstr "Notificaciones"
+
+#: components/modal/modals/InstallApp.tsx
+msgid "Notifications for messages and mentions"
+msgstr "Notificaciones de mensajes y menciones"
 
 #: components/app/interface/settings/server/ServerDefaultNotifications.tsx
 msgid "Notify members about"
@@ -15537,6 +15569,14 @@ msgstr "Apertura"
 #: components/app/interface/settings/server/LobbySettings.tsx
 msgid "Opens"
 msgstr "Abre"
+
+#: components/modal/modals/InstallApp.tsx
+msgid "Opens faster every time"
+msgstr "Se abre más rápido cada vez"
+
+#: components/modal/modals/InstallApp.tsx
+msgid "Opens from your home screen, in full screen."
+msgstr "Se abre desde la pantalla de inicio, a pantalla completa."
 
 #: components/app/interface/settings/user/bots/CommandManager.tsx
 msgid "Option description"
@@ -21572,6 +21612,10 @@ msgstr "Hablando (interruptor activado)"
 msgid "Tanzania"
 msgstr "Tanzania"
 
+#: components/modal/modals/InstallApp.tsx
+msgid "Tap “Add”, then open Zrzur from its icon"
+msgstr "Toca «Añadir» y abre Zrzur desde su icono"
+
 #: src/interface/designs/Dock.tsx
 msgid "Tap any design to try it on"
 msgstr "Toca cualquier diseño para probártelo"
@@ -21592,6 +21636,10 @@ msgstr "Toca el corazón de un diseño para guardarlo aquí."
 #: src/interface/Designs.tsx
 msgid "Tap the heart on any design to keep it here. Only you see this list."
 msgstr "Toca el corazón de cualquier diseño para guardarlo aquí. Solo tú ves esta lista."
+
+#: components/modal/modals/InstallApp.tsx
+msgid "Tap the Share button in the browser's bar"
+msgstr "Toca el botón Compartir en la barra del navegador"
 
 #: src/interface/designs/Scenes.tsx
 msgid "Tarek"
@@ -23335,6 +23383,10 @@ msgstr "No se pudieron cargar los hilos."
 msgid "Threat of violence"
 msgstr "Amenaza de violencia"
 
+#: components/modal/modals/InstallApp.tsx
+msgid "Three steps in your browser."
+msgstr "Tres pasos en tu navegador."
+
 #: components/ui/components/features/profiles/badges/useBadgeText.ts
 msgid "Three Years on Zrzur"
 msgstr "Tres años en Zrzur"
@@ -24237,7 +24289,9 @@ msgstr "Hasta tres botones bajo el nombre, cada uno abre un canal. «Leer las re
 msgid "Upcoming"
 msgstr "Próximos"
 
+#: components/app/interface/desktop/Titlebar.tsx
 #: components/app/interface/settings/user/plugins/PluginDetail.tsx
+#: src/interface/navigation/PhoneTabs.tsx
 msgid "Update"
 msgstr "Actualizar"
 
@@ -27086,6 +27140,10 @@ msgstr "Zrzur ahora se lo pide a todo el mundo para proteger a las personas más
 #: src/AndroidNag.tsx
 msgid "Zrzur on Android"
 msgstr "Zrzur en Android"
+
+#: src/interface/You.tsx
+msgid "Zrzur on your home screen, in full screen"
+msgstr "Zrzur en tu pantalla de inicio, a pantalla completa"
 
 #: components/app/interface/settings/user/Native.tsx
 msgid "Zrzur opens by itself after you sign in to your computer."

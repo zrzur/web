@@ -28394,3 +28394,59 @@ msgstr "Wer diese Kategorie sieht und was darin erlaubt ist."
 msgid "With the category selected in the channel list, if you manage the server."
 msgstr "Wenn die Kategorie in der Kanalliste ausgewählt ist und du den Server verwaltest."
 
+#: components/app/interface/settings/category/Overview.tsx
+msgid "A channel follows the category's permissions until you change permissions on the channel itself."
+msgstr "Ein Kanal folgt den Berechtigungen der Kategorie, bis du Berechtigungen am Kanal selbst änderst."
+
+#: components/app/interface/desktop/Titlebar.tsx
+#: src/interface/navigation/PhoneTabs.tsx
+msgid "A new version of Zrzur is ready"
+msgstr "Eine neue Version von Zrzur ist bereit"
+
+#: components/modal/modals/InstallApp.tsx
+msgid "Add Zrzur to your home screen"
+msgstr "Zrzur zum Home-Bildschirm hinzufügen"
+
+#: components/modal/modals/InstallApp.tsx
+msgid "Choose “Add to Home Screen”"
+msgstr "Wähle „Zum Home-Bildschirm“"
+
+#: src/interface/You.tsx
+msgid "Install the app"
+msgstr "App installieren"
+
+#: components/modal/modals/InstallApp.tsx
+msgid "Install Zrzur on your phone"
+msgstr "Zrzur auf dem Handy installieren"
+
+#: components/modal/modals/InstallApp.tsx
+msgid "No browser bar, like any app"
+msgstr "Ohne Browserleiste, wie jede App"
+
+#: components/modal/modals/InstallApp.tsx
+msgid "Notifications for messages and mentions"
+msgstr "Benachrichtigungen für Nachrichten und Erwähnungen"
+
+#: components/modal/modals/InstallApp.tsx
+msgid "Opens faster every time"
+msgstr "Öffnet sich jedes Mal schneller"
+
+#: components/modal/modals/InstallApp.tsx
+msgid "Opens from your home screen, in full screen."
+msgstr "Öffnet sich vom Startbildschirm, im Vollbild."
+
+#: components/modal/modals/InstallApp.tsx
+msgid "Tap “Add”, then open Zrzur from its icon"
+msgstr "Tippe auf „Hinzufügen“ und öffne Zrzur dann über sein Symbol"
+
+#: components/modal/modals/InstallApp.tsx
+msgid "Tap the Share button in the browser's bar"
+msgstr "Tippe in der Browserleiste auf „Teilen“"
+
+#: components/modal/modals/InstallApp.tsx
+msgid "Three steps in your browser."
+msgstr "Drei Schritte in deinem Browser."
+
+#: src/interface/You.tsx
+msgid "Zrzur on your home screen, in full screen"
+msgstr "Zrzur auf deinem Startbildschirm, im Vollbild"

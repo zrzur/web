@@ -12,6 +12,7 @@ import { useState } from "@revolt/state";
 import { Avatar } from "@revolt/ui";
 
 import { type IconName, Icon } from "@revolt/ui/icons/Icon";
+import { pendingUpdate } from "../../serviceWorkerInterface";
 import { openMentions } from "./MentionsPanel";
 
 /** the last server visited, so the Servers tab returns to it */
@@ -142,6 +143,75 @@ export function PhoneTabs() {
     </Bar>
   );
 }
+
+/**
+ * Phones: a new release is ready. One quiet row on top of the tab bar; the
+ * page reloads only when "Update" is tapped (src/swUpdate.ts). The Sidebar
+ * leaves it out during a call and gives the lists the extra room.
+ */
+export function PhoneUpdateRow() {
+  const { t } = useLingui();
+
+  return (
+    <UpdateRow data-phone-update role="status">
+      <Icon name="arrow-clockwise" size={20} />
+      <UpdateText>{t`A new version of Zrzur is ready`}</UpdateText>
+      <UpdateAction type="button" onClick={() => pendingUpdate()?.()}>
+        {t`Update`}
+      </UpdateAction>
+    </UpdateRow>
+  );
+}
+
+const UpdateRow = styled("div", {
+  base: {
+    display: "none",
+    _phone: {
+      position: "absolute",
+      zIndex: 3,
+      insetInline: 0,
+      // on top of the tab bar (64px)
+      bottom: "64px",
+      display: "flex",
+      alignItems: "center",
+      gap: "10px",
+      minHeight: "48px",
+      paddingInlineStart: "16px",
+      paddingInlineEnd: "4px",
+      fontSize: "14px",
+      lineHeight: "20px",
+      color: "var(--z-fg-primary)",
+      background: "var(--z-bg-raised)",
+      borderTop: "1px solid var(--z-border-subtle)",
+      "--z-icon-color": "var(--z-icon-neutral)",
+    },
+  },
+});
+
+const UpdateText = styled("span", {
+  base: { flex: 1, minWidth: 0 },
+});
+
+const UpdateAction = styled("button", {
+  base: {
+    flexShrink: 0,
+    minWidth: "44px",
+    minHeight: "44px",
+    paddingInline: "12px",
+    border: "none",
+    borderRadius: "var(--z-radius-sm, 6px)",
+    background: "none",
+    color: "var(--z-accent-text, var(--z-accent))",
+    font: "inherit",
+    fontWeight: 600,
+    cursor: "pointer",
+    _active: { background: "var(--z-nav-selected)" },
+    _focusVisible: {
+      outline: "none",
+      boxShadow: "inset 0 0 0 2px var(--z-focus)",
+    },
+  },
+});
 
 const Bar = styled("nav", {
   base: {

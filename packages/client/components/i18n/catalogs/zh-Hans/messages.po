@@ -1413,6 +1413,11 @@ msgstr "最小化的窗口不会列出。请先打开它。"
 msgid "A new version is saved as a draft"
 msgstr "新版本已保存为草稿"
 
+#: components/app/interface/desktop/Titlebar.tsx
+#: src/interface/navigation/PhoneTabs.tsx
+msgid "A new version of Zrzur is ready"
+msgstr "Zrzur 新版本已就绪"
+
 #: components/app/interface/settings/user/subscriptions/PlusPage.tsx
 msgid "A note on money"
 msgstr "关于费用的说明"
@@ -2072,6 +2077,10 @@ msgstr "请添加你的出生年月以继续。"
 #: components/app/interface/settings/server/assistant/AssistantPage.tsx
 msgid "Add Zrzur Assistant to this server first."
 msgstr "请先将 Zrzur 助手添加到此服务器。"
+
+#: components/modal/modals/InstallApp.tsx
+msgid "Add Zrzur to your home screen"
+msgstr "将 Zrzur 添加到主屏幕"
 
 #: components/app/interface/settings/server/assistant/AssistantFields.tsx
 msgid "Add…"
@@ -4829,6 +4838,10 @@ msgstr "选项值"
 #: components/app/interface/channels/text/interactions/CommandPicker.tsx
 msgid "Choose \"{name}\" from the list."
 msgstr "请从列表中选择“{name}”。"
+
+#: components/modal/modals/InstallApp.tsx
+msgid "Choose “Add to Home Screen”"
+msgstr "选择“添加到主屏幕”"
 
 #: components/app/interface/settings/user/plugins/DeveloperTab.tsx
 msgid "Choose a `.zplugin.json` package (or a manifest) to check it, preview it on this device, or submit it for review."
@@ -9706,6 +9719,7 @@ msgid "Got an invite?"
 msgstr "有邀请吗？"
 
 #: components/app/interface/support/NoticeCenter.tsx
+#: components/modal/modals/InstallApp.tsx
 msgid "Got it"
 msgstr "知道了"
 
@@ -10592,8 +10606,17 @@ msgid "Insights"
 msgstr "数据洞察"
 
 #: components/app/interface/settings/user/plugins/PluginDetail.tsx
+#: components/modal/modals/InstallApp.tsx
 msgid "Install"
 msgstr "安装"
+
+#: src/interface/You.tsx
+msgid "Install the app"
+msgstr "安装应用"
+
+#: components/modal/modals/InstallApp.tsx
+msgid "Install Zrzur on your phone"
+msgstr "在手机上安装 Zrzur"
 
 #: components/app/interface/settings/user/Advanced.tsx
 msgid "Install, turn on and manage reviewed plugins."
@@ -14060,6 +14083,10 @@ msgstr "还没有上架机器人。"
 msgid "No bots in this server."
 msgstr "此服务器中没有机器人。"
 
+#: components/modal/modals/InstallApp.tsx
+msgid "No browser bar, like any app"
+msgstr "没有浏览器栏，和普通应用一样"
+
 #: components/app/interface/settings/user/plugins/PluginDetail.tsx
 msgid "No changelog."
 msgstr "无更新日志。"
@@ -14669,6 +14696,7 @@ msgstr "目前未在直播。"
 #: components/app/interface/settings/user/connections/Connections.tsx
 #: components/app/interface/settings/user/connections/ServiceCards.tsx
 #: components/client/AgePrompt.tsx
+#: components/modal/modals/InstallApp.tsx
 msgid "Not now"
 msgstr "暂不"
 
@@ -14859,6 +14887,10 @@ msgstr "暂无。发布此版本前会先询问你。"
 #: src/interface/navigation/NotificationsPhone.tsx
 msgid "Notifications"
 msgstr "通知"
+
+#: components/modal/modals/InstallApp.tsx
+msgid "Notifications for messages and mentions"
+msgstr "消息和提及的通知"
 
 #: components/app/interface/settings/server/ServerDefaultNotifications.tsx
 msgid "Notify members about"
@@ -15537,6 +15569,14 @@ msgstr "正在打开"
 #: components/app/interface/settings/server/LobbySettings.tsx
 msgid "Opens"
 msgstr "开放"
+
+#: components/modal/modals/InstallApp.tsx
+msgid "Opens faster every time"
+msgstr "每次打开都更快"
+
+#: components/modal/modals/InstallApp.tsx
+msgid "Opens from your home screen, in full screen."
+msgstr "从主屏幕打开，全屏显示。"
 
 #: components/app/interface/settings/user/bots/CommandManager.tsx
 msgid "Option description"
@@ -21572,6 +21612,10 @@ msgstr "正在说话（已开启）"
 msgid "Tanzania"
 msgstr "坦桑尼亚"
 
+#: components/modal/modals/InstallApp.tsx
+msgid "Tap “Add”, then open Zrzur from its icon"
+msgstr "轻点“添加”，然后从图标打开 Zrzur"
+
 #: src/interface/designs/Dock.tsx
 msgid "Tap any design to try it on"
 msgstr "点按任意设计即可试穿"
@@ -21592,6 +21636,10 @@ msgstr "点按设计上的心形，即可保存到这里。"
 #: src/interface/Designs.tsx
 msgid "Tap the heart on any design to keep it here. Only you see this list."
 msgstr "点按任意设计上的心形，即可保留在这里。只有你能看到此列表。"
+
+#: components/modal/modals/InstallApp.tsx
+msgid "Tap the Share button in the browser's bar"
+msgstr "轻点浏览器栏中的“分享”按钮"
 
 #: src/interface/designs/Scenes.tsx
 msgid "Tarek"
@@ -23335,6 +23383,10 @@ msgstr "无法加载子区。"
 msgid "Threat of violence"
 msgstr "暴力威胁"
 
+#: components/modal/modals/InstallApp.tsx
+msgid "Three steps in your browser."
+msgstr "在浏览器中只需三步。"
+
 #: components/ui/components/features/profiles/badges/useBadgeText.ts
 msgid "Three Years on Zrzur"
 msgstr "陪伴 Zrzur 三年"
@@ -24237,7 +24289,9 @@ msgstr "名称下方最多三个按钮，每个按钮打开一个频道。设置
 msgid "Upcoming"
 msgstr "即将举行"
 
+#: components/app/interface/desktop/Titlebar.tsx
 #: components/app/interface/settings/user/plugins/PluginDetail.tsx
+#: src/interface/navigation/PhoneTabs.tsx
 msgid "Update"
 msgstr "更新"
 
@@ -27086,6 +27140,10 @@ msgstr "为了保护未成年人，Zrzur 现在会向所有人询问这一信息
 #: src/AndroidNag.tsx
 msgid "Zrzur on Android"
 msgstr "Android 版 Zrzur"
+
+#: src/interface/You.tsx
+msgid "Zrzur on your home screen, in full screen"
+msgstr "Zrzur 在主屏幕上，全屏显示"
 
 #: components/app/interface/settings/user/Native.tsx
 msgid "Zrzur opens by itself after you sign in to your computer."

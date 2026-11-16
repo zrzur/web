@@ -9611,7 +9611,7 @@ msgstr "هل لديك دعوة؟"
 
 #: components/app/interface/support/NoticeCenter.tsx
 msgid "Got it"
-msgstr "حسناً"
+msgstr "فهمت"
 
 #: components/app/interface/settings/user/profile/StyleEditors.tsx
 #: components/app/interface/settings/user/profile/UserProfileEditor.tsx
@@ -28394,3 +28394,59 @@ msgstr "من يرى هذه الفئة وما الذي يستطيع فعله في
 msgid "With the category selected in the channel list, if you manage the server."
 msgstr "عند تحديد الفئة في قائمة القنوات، إن كنت تدير السيرفر."
 
+#: components/app/interface/settings/category/Overview.tsx
+msgid "A channel follows the category's permissions until you change permissions on the channel itself."
+msgstr "تتبع القناة صلاحيات الفئة إلى أن تغيّر الصلاحيات على القناة نفسها."
+
+#: components/app/interface/desktop/Titlebar.tsx
+#: src/interface/navigation/PhoneTabs.tsx
+msgid "A new version of Zrzur is ready"
+msgstr "نسخة جديدة من زرزور جاهزة"
+
+#: components/modal/modals/InstallApp.tsx
+msgid "Add Zrzur to your home screen"
+msgstr "أضف زرزور إلى الشاشة الرئيسية"
+
+#: components/modal/modals/InstallApp.tsx
+msgid "Choose “Add to Home Screen”"
+msgstr "اختر «إضافة إلى الشاشة الرئيسية»"
+
+#: src/interface/You.tsx
+msgid "Install the app"
+msgstr "ثبّت التطبيق"
+
+#: components/modal/modals/InstallApp.tsx
+msgid "Install Zrzur on your phone"
+msgstr "ثبّت زرزور على هاتفك"
+
+#: components/modal/modals/InstallApp.tsx
+msgid "No browser bar, like any app"
+msgstr "بلا شريط المتصفح، كأي تطبيق"
+
+#: components/modal/modals/InstallApp.tsx
+msgid "Notifications for messages and mentions"
+msgstr "إشعارات الرسائل والإشارات"
+
+#: components/modal/modals/InstallApp.tsx
+msgid "Opens faster every time"
+msgstr "يفتح أسرع في كل مرة"
+
+#: components/modal/modals/InstallApp.tsx
+msgid "Opens from your home screen, in full screen."
+msgstr "يفتح من الشاشة الرئيسية بملء الشاشة."
+
+#: components/modal/modals/InstallApp.tsx
+msgid "Tap “Add”, then open Zrzur from its icon"
+msgstr "اضغط «إضافة»، ثم افتح زرزور من أيقونته"
+
+#: components/modal/modals/InstallApp.tsx
+msgid "Tap the Share button in the browser's bar"
+msgstr "اضغط زر «مشاركة» في شريط المتصفح"
+
+#: components/modal/modals/InstallApp.tsx
+msgid "Three steps in your browser."
+msgstr "ثلاث خطوات في متصفحك."
+
+#: src/interface/You.tsx
+msgid "Zrzur on your home screen, in full screen"
+msgstr "زرزور على شاشتك الرئيسية بملء الشاشة"
