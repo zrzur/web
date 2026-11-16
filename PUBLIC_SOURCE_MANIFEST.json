@@ -1990,8 +1990,8 @@
     },
     {
       "path": "packages/client/components/app/interface/settings/user/Native.tsx",
-      "sha256": "c86c8bb1d1f37dc704a12e281c2cd72b2392f8d5ae4bce32f7887104862bc74b",
-      "bytes": 6926,
+      "sha256": "ab92327238e1fdbc85f61801d848c2558648aaac8c41757403c138731b07f442",
+      "bytes": 7023,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -5691,9 +5691,15 @@
       "category": "product-source-or-build-manifest"
     },
     {
+      "path": "packages/client/components/state/stores/Locale.test.ts",
+      "sha256": "a025830a59f45fc133f4869d6a603725276882485a108f1e9633c66ad2645077",
+      "bytes": 1988,
+      "category": "synthetic-test-source-or-fixture"
+    },
+    {
       "path": "packages/client/components/state/stores/Locale.ts",
-      "sha256": "b9f11a16abab304b4948905f3de97b92a171d47ef9b91031d8a45b59bca8c65b",
-      "bytes": 2632,
+      "sha256": "52b6e9a469c763c56cf06ea965d24f40e34f0d3dd1d99c43336b23d6f252106c",
+      "bytes": 3229,
       "category": "product-source-or-build-manifest"
     },
     {
