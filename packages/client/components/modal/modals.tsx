@@ -93,6 +93,9 @@ const CustomStatusModal = lazy(() =>
     default: m.CustomStatusModal,
   })),
 );
+const InstallAppModal = lazy(() =>
+  import("./modals/InstallApp").then((m) => ({ default: m.InstallAppModal })),
+);
 const DeleteBotModal = lazy(() =>
   import("./modals/DeleteBot").then((m) => ({ default: m.DeleteBotModal })),
 );
@@ -394,6 +397,8 @@ export function RenderModal(props: ActiveModal & { onClose: () => void }) {
       return <CreateServerModal {...modalProps} />;
     case "custom_status":
       return <CustomStatusModal {...modalProps} />;
+    case "install_app":
+      return <InstallAppModal {...modalProps} />;
     case "delete_bot":
       return <DeleteBotModal {...modalProps} />;
     case "delete_channel":

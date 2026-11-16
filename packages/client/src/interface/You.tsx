@@ -9,6 +9,7 @@ import { useClient, useUser } from "@revolt/client";
 import { billingAvailable } from "@revolt/client/billing";
 import { presencePatch } from "@revolt/common/lib/statusWrite";
 import { useModals } from "@revolt/modal";
+import { installWay } from "@revolt/pwa/installPrompt";
 import { useNavigate } from "@revolt/routing";
 import { Header, UserStatus } from "@revolt/ui";
 import { Profile } from "@revolt/ui/components/features";
@@ -213,6 +214,30 @@ function Body(props: { user: User }) {
           </For>
         </Presences>
       </Section>
+
+      {/* phones and tablets that can install the app and have not yet */}
+      <Show when={installWay()}>
+        <InstallRow
+          type="button"
+          data-install-row
+          onClick={() => openModal({ type: "install_app" })}
+        >
+          <InstallIcon>
+            <Icon name="download-simple" size={20} />
+          </InstallIcon>
+          <InstallText>
+            <strong>
+              <Trans>Install the app</Trans>
+            </strong>
+            <small>
+              <Trans>Zrzur on your home screen, in full screen</Trans>
+            </small>
+          </InstallText>
+          <InstallChevron>
+            <Icon name="caret-right" size={16} />
+          </InstallChevron>
+        </InstallRow>
+      </Show>
 
       <Panel data-about>
         <Show when={query.data?.content}>
@@ -468,6 +493,70 @@ const Panel = styled("div", {
         padding: "10px 6px",
       },
     },
+  },
+});
+
+/** One row of its own: [icon] Install the app / one line why  > */
+const InstallRow = styled("button", {
+  base: {
+    display: "flex",
+    alignItems: "center",
+    gap: "12px",
+    minHeight: "64px",
+    padding: "10px 16px",
+    borderRadius: "var(--z-shape-card, calc(var(--z-radius, 10px) + 4px))",
+    border: "1px solid var(--z-btn-surface-border, var(--z-border-subtle))",
+    background: "var(--z-card-bg, var(--z-bg-raised))",
+    boxShadow: "var(--z-card-lift)",
+    color: "var(--z-fg-primary)",
+    font: "inherit",
+    textAlign: "start",
+    cursor: "pointer",
+    transition: "background-color 120ms ease",
+    _motionReduce: { transition: "none" },
+    _hover: { background: "var(--z-nav-hover)" },
+    _active: { background: "var(--z-nav-selected)" },
+    _focusVisible: {
+      outline: "2px solid var(--z-focus)",
+      outlineOffset: "2px",
+    },
+  },
+});
+
+const InstallIcon = styled("span", {
+  base: {
+    flexShrink: 0,
+    width: "40px",
+    height: "40px",
+    display: "grid",
+    placeItems: "center",
+    borderRadius: "50%",
+    background: "color-mix(in srgb, var(--z-accent) 16%, transparent)",
+    "--z-icon-color": "var(--z-accent-text, var(--z-accent))",
+  },
+});
+
+const InstallText = styled("span", {
+  base: {
+    flex: 1,
+    minWidth: 0,
+    display: "flex",
+    flexDirection: "column",
+    gap: "2px",
+    "& strong": { fontSize: "15px", fontWeight: 600 },
+    "& small": {
+      fontSize: "13px",
+      lineHeight: "18px",
+      color: "var(--z-fg-muted)",
+    },
+  },
+});
+
+const InstallChevron = styled("span", {
+  base: {
+    flexShrink: 0,
+    // RTL: the chevron icon mirrors itself (see styles.css)
+    "--z-icon-color": "var(--z-icon-muted)",
   },
 });
 

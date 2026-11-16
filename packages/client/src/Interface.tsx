@@ -45,6 +45,10 @@ const StreamerIndicator = lazy(
   () => import("@revolt/app/interface/StreamerIndicator"),
 );
 
+const InstallOffer = lazy(() =>
+  import("@revolt/pwa/InstallOffer").then((m) => ({ default: m.InstallOffer })),
+);
+
 const Interface = (props: { children?: JSX.Element }) => {
   const state = useState();
   const client = useClient();
@@ -223,6 +227,12 @@ const Interface = (props: { children?: JSX.Element }) => {
         </Show>
         <Show when={isLoggedIn()}>
           <PluginHostGate />
+        </Show>
+        {/* "install the app", once, on a phone (loaded after the app is up) */}
+        <Show when={lifecycle.loadedOnce() && settled()}>
+          <Suspense>
+            <InstallOffer />
+          </Suspense>
         </Show>
       </AppRoot>
     </MessageCache>

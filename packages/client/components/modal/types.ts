@@ -122,6 +122,10 @@ export type Modals =
       client: Client;
     }
   | {
+      /** Put the app on the phone's home screen (components/pwa) */
+      type: "install_app";
+    }
+  | {
       type: "delete_bot";
       bot: Bot;
       onDelete?: () => void;
