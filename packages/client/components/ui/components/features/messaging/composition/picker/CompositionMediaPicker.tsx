@@ -8,6 +8,7 @@ import {
 } from "@floating-ui/dom";
 import { useLingui } from "@lingui/solid/macro";
 import { useDevice } from "@revolt/common";
+import type { Channel } from "@zrzur/sdk/solid";
 import { useFloating } from "solid-floating-ui";
 import {
   type Accessor,
@@ -23,7 +24,6 @@ import {
   onMount,
 } from "solid-js";
 import { Portal } from "solid-js/web";
-import type { Channel } from "@zrzur/sdk/solid";
 import { cva } from "styled-system/css";
 import { EmojiPicker } from "./EmojiPicker";
 import { GifPicker } from "./GifPicker";
@@ -184,6 +184,14 @@ function Picker(
     )?.focus();
   }
   const onResize = () => setPhone(device.layout() === "phone");
+
+  // phones: the panel is docked at the bottom; the app above it gives it room
+  createEffect(() => {
+    if (!phone()) return;
+    const style = document.documentElement.style;
+    style.setProperty("--z-picker-dock", "min(360px, 48dvh)");
+    onCleanup(() => style.removeProperty("--z-picker-dock"));
+  });
   onMount(() => {
     document.addEventListener("pointerdown", onPointerDown);
     // capture: Escape is also "jump to latest" (a keybind on document.body,
@@ -217,6 +225,32 @@ function Picker(
             }
       }
     >
+      <Show when={phone()}>
+        <div class="z-picker-dock-head">
+          <span class="z-picker-grab" aria-hidden="true" />
+          {/* a message can take either; a field for one emoji has no GIFs */}
+          <Show when={props.channel && allowGifs()}>
+            <div class="z-picker-switch" role="tablist">
+              <button
+                type="button"
+                role="tab"
+                aria-selected={props.show() === "emoji"}
+                onClick={() => props.setShow("emoji")}
+              >
+                {t`Emoji`}
+              </button>
+              <button
+                type="button"
+                role="tab"
+                aria-selected={props.show() === "gif"}
+                onClick={() => props.setShow("gif")}
+              >
+                {t`GIF`}
+              </button>
+            </div>
+          </Show>
+        </div>
+      </Show>
       <div class="z-picker-panel">
         <Switch>
           <Match when={props.show() === "gif" && allowGifs()}>

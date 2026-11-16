@@ -99,9 +99,11 @@ body {
   top: calc(var(--z-safe-top) + var(--viewport-offset-top, 0px));
   left: var(--z-safe-left);
   right: var(--z-safe-right);
+  /* --z-picker-dock: the height of the emoji / GIF panel docked at the
+     bottom of a phone screen while it is open (picker.css) */
   bottom: calc(
     max(var(--z-safe-bottom), var(--keyboard-inset, 0px)) +
-      var(--z-screen-bottom)
+      var(--z-screen-bottom) + var(--z-picker-dock, 0px)
   );
   background: var(--z-bg-frame, #0d0e16);
 }

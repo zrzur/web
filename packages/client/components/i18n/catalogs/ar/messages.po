@@ -9346,6 +9346,10 @@ msgstr "احصل على زرزور لنظام أندرويد وابقَ على �
 msgid "Ghana"
 msgstr "غانا"
 
+#: components/ui/components/features/messaging/composition/picker/CompositionMediaPicker.tsx
+msgid "GIF"
+msgstr "GIF"
+
 #: components/app/interface/settings/user/Advanced.tsx
 #: components/ui/components/features/messaging/composition/picker/CompositionMediaPicker.tsx
 #: components/ui/components/features/messaging/composition/picker/GifPicker.tsx

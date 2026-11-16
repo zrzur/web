@@ -9346,6 +9346,10 @@ msgstr "Hol dir Zrzur für Android und bleib mit deinen Freunden in Kontakt, wo 
 msgid "Ghana"
 msgstr "Ghana"
 
+#: components/ui/components/features/messaging/composition/picker/CompositionMediaPicker.tsx
+msgid "GIF"
+msgstr "GIF"
+
 #: components/app/interface/settings/user/Advanced.tsx
 #: components/ui/components/features/messaging/composition/picker/CompositionMediaPicker.tsx
 #: components/ui/components/features/messaging/composition/picker/GifPicker.tsx
