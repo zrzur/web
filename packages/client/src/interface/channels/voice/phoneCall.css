@@ -1,0 +1,64 @@
+/* The call screen on phones (the drawing the owner approved, 2026-11-16).
+   The call card is drawn over the stage from outside it, so these rules hang
+   on <html data-phone-call>, which VoiceChannel sets while a phone shows the
+   call it is in. */
+
+/* a tile for each person: two side by side, the first one across */
+html[data-phone-call] .vc_tile {
+  width: calc(50% - 5px) !important;
+  max-width: none !important;
+  aspect-ratio: 1 / 1.05;
+  border-radius: 20px;
+  border: none;
+  /* each person's own steady tint (ParticipantTile sets the hue) */
+  background: oklch(0.3 0.07 var(--vc-tile-hue, 265)) !important;
+}
+html[data-phone-call] .vc_tile:first-child {
+  width: 100% !important;
+  aspect-ratio: 1 / 0.62;
+}
+html[data-phone-call] .vc_tile:only-child {
+  aspect-ratio: 1 / 0.9;
+}
+html[data-phone-call] :has(> .vc_tile) {
+  gap: 10px !important;
+  padding-inline: 14px;
+  align-content: center;
+  justify-content: center;
+}
+
+/* one bar across the screen: camera, microphone, share, sounds, hang up.
+   Hearing is the speaker button in the top row */
+html[data-phone-call] [data-voice-controls] {
+  width: calc(100% - 28px);
+  justify-content: space-between;
+  flex-wrap: nowrap;
+  gap: 8px;
+  padding: 12px;
+  border-radius: 26px;
+  margin-bottom: 14px;
+}
+html[data-phone-call] [data-voice-controls] > * {
+  order: 4;
+}
+html[data-phone-call] [data-voice-controls] [data-voice-control] {
+  width: 52px;
+  height: 52px;
+  border-radius: 18px;
+}
+html[data-phone-call] [data-voice-controls] [data-voice-control="deafen"] {
+  display: none;
+}
+html[data-phone-call] [data-voice-controls] [data-voice-control="camera"] {
+  order: 1;
+}
+html[data-phone-call] [data-voice-controls] [data-voice-control="microphone"] {
+  order: 2;
+}
+html[data-phone-call] [data-voice-controls] [data-voice-control="screenshare"] {
+  order: 3;
+}
+html[data-phone-call] [data-voice-controls] [data-voice-control="disconnect"] {
+  order: 5;
+  width: 64px;
+}
