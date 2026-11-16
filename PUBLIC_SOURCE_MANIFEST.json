@@ -40,7 +40,7 @@
     },
     {
       "path": ".github/workflows/source-check.yml",
-      "sha256": "591f03a39bdf66369a2e31c11fea11a3de7e6e18fa56e6daedad30661f293120",
+      "sha256": "27aff33057c9cadbd960ce9dd5222991683038fe932a900c60519b26b7c5ad40",
       "bytes": 955,
       "category": "reviewed-build-and-ci"
     },
@@ -322,7 +322,7 @@
     },
     {
       "path": "RELEASE.json",
-      "sha256": "7be251eb253c528ec4ce093e44c2c9936fd2db9bc6981e28a7c3d6394cc85b44",
+      "sha256": "18b047272b52d6ca032fdfe3dbc259b0a2021d4895d3ec2f4ef4f44eb76db5b1",
       "bytes": 295,
       "category": "product-source-or-build-manifest"
     },
@@ -340,7 +340,7 @@
     },
     {
       "path": "ZRZUR_RELEASE.md",
-      "sha256": "540bf177f8c680d9f6dc275bb5d8becd166b51199ea25fcec149b8047473e87d",
+      "sha256": "a147f2e6893a9d060bd91de4f23ccf509ef53b844d7bf0d99cc5d15a71afbd7e",
       "bytes": 1370,
       "category": "public-documentation"
     },
@@ -520,7 +520,7 @@
     },
     {
       "path": "docker/server.test.js",
-      "sha256": "d504a681d2e5bee54f1665b4222b8739b6feac68ff50cbe0ab8c650d97bddb96",
+      "sha256": "94cf64921343cb7b560c6558a12d20b55954706ad26d19dfe29a50631c45cd69",
       "bytes": 2344,
       "category": "synthetic-test-source-or-fixture"
     },
@@ -580,7 +580,7 @@
     },
     {
       "path": "package.json",
-      "sha256": "e806a349c39552f12750826c84bdaeb2b2fdd8d5c777c14aeb0a9e1d897db5bf",
+      "sha256": "6b1719ab49b3a73f3f4a88f9cd888f014b6f462536fbaad758ba820804ae7e77",
       "bytes": 735,
       "category": "product-source-or-build-manifest"
     },
@@ -41542,7 +41542,7 @@
     },
     {
       "path": "packages/client/scripts/release-integrity.test.mjs",
-      "sha256": "0c16000f7e2f60732bdc98f83b98b15f4cfd987664ac65adafffcf3589dd5f49",
+      "sha256": "db7adc10c000b91b927a21447e5bc4d4e2ffaf5ce926b9fc089c2dfd2782d3ab",
       "bytes": 8084,
       "category": "synthetic-test-source-or-fixture"
     },
