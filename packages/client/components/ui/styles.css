@@ -76,11 +76,17 @@ body {
   --z-safe-right: env(safe-area-inset-right, 0px);
   --z-safe-bottom: env(safe-area-inset-bottom, 0px);
   --z-safe-left: env(safe-area-inset-left, 0px);
-  /* Where the screen really ends. iOS 26 lays an installed app out in a box
-     that stops short of the bottom by the status bar's height
-     (--viewport-deficit, measured in shortViewport.ts; 0 everywhere else).
-     Anything anchored to the bottom of the screen uses this, not 0. */
-  --z-screen-bottom: calc(0px - var(--viewport-deficit, 0px));
+  /* iOS 26 lays an installed app out in a box that stops short of the bottom
+     of the screen by the status bar's height (--viewport-deficit, measured in
+     shortViewport.ts; 0 everywhere else). Nothing can be drawn below that box:
+     on a real iPhone, content moved down into the gap was cut off. So nothing
+     is moved: this stays 0, and the box only gives up the bottom safe-area
+     inset it no longer needs (--z-root-safe-bottom). */
+  --z-screen-bottom: 0px;
+  --z-root-safe-bottom: max(
+    0px,
+    var(--z-safe-bottom) - var(--viewport-deficit, 0px)
+  );
 }
 
 /* Phones: room above the first row of every screen (screen headers, the
@@ -102,8 +108,8 @@ body {
   /* --z-picker-dock: the height of the emoji / GIF panel docked at the
      bottom of a phone screen while it is open (picker.css) */
   bottom: calc(
-    max(var(--z-safe-bottom), var(--keyboard-inset, 0px)) +
-      var(--z-screen-bottom) + var(--z-picker-dock, 0px)
+    max(var(--z-root-safe-bottom), var(--keyboard-inset, 0px)) +
+      var(--z-picker-dock, 0px)
   );
   background: var(--z-bg-frame, #0d0e16);
 }

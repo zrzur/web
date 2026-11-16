@@ -13,6 +13,7 @@ import { useTime } from "@revolt/i18n/dayjs";
 import { TextWithEmoji } from "@revolt/markdown";
 import { useModals } from "@revolt/modal";
 import { useNavigate } from "@revolt/routing";
+import { useState } from "@revolt/state";
 import { Avatar, UserStatus } from "@revolt/ui";
 import { AvatarDecoration } from "@revolt/ui/components/features/profiles/AvatarDecoration";
 import { OfficialLabel } from "@revolt/ui/components/features/profiles/OfficialLabel";
@@ -39,6 +40,7 @@ export function HomeSidebarPhone(props: Props) {
   const { t } = useLingui();
   const client = useClient();
   const navigate = useNavigate();
+  const state = useState();
   const { openModal } = useModals();
 
   /** type to narrow the list */
@@ -111,7 +113,11 @@ export function HomeSidebarPhone(props: Props) {
                   onClick={() =>
                     user
                       .openDM()
-                      .then((channel) => navigate(`/channel/${channel.id}`))
+                      .then((channel) => {
+                        navigate(`/channel/${channel.id}`);
+                        // the list and the conversation share the phone screen
+                        state.appDrawer()?.setShown(true);
+                      })
                   }
                 >
                   <Avatar
@@ -168,6 +174,7 @@ function Entry(props: { channel: Channel; active: boolean }) {
   const { t } = useLingui();
   const dayjs = useTime();
   const client = useClient();
+  const state = useState();
 
   /** when the last message came, short: the time today, else the day */
   const when = createMemo(() => {
@@ -225,6 +232,10 @@ function Entry(props: { channel: Channel; active: boolean }) {
       data-active={props.active}
       data-unread={unread() ? "true" : undefined}
       aria-current={props.active ? "page" : undefined}
+      // the list and the conversation share the phone screen: the link moves
+      // the route, this brings the conversation on screen (also when the row
+      // is the conversation already open)
+      onClick={() => state.appDrawer()?.setShown(true)}
       use:floating={{
         contextMenu: () =>
           group() ? (
