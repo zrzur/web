@@ -1,9 +1,12 @@
 import { describe, expect, it, vi } from "vitest";
 
+import { i18n } from "@lingui/core";
+
 import {
   AutocompleteTimeout,
   attachInteractions,
   commandsKey,
+  interactionLocale,
   interactionState,
   loadServerCommands,
   requestAutocomplete,
@@ -183,5 +186,24 @@ describe("command lists that change while loading", () => {
     answer({ applications: [], commands: [] });
     await loading.catch(() => undefined);
     expect(interactionState.commands.STALE).toBeUndefined();
+  });
+});
+
+describe("the language a bot is told", () => {
+  it("is the app's language, not the browser's", () => {
+    vi.stubGlobal("navigator", { language: "de-AT" });
+    i18n.load({ ar: {} });
+    i18n.activate("ar");
+    // an Arabic app on a German system: the bot must answer in Arabic
+    expect(interactionLocale()).toBe("ar");
+    vi.unstubAllGlobals();
+  });
+
+  it("falls back to the browser's before a language is active", () => {
+    vi.stubGlobal("navigator", { language: "de-AT" });
+    const spy = vi.spyOn(i18n, "locale", "get").mockReturnValue("");
+    expect(interactionLocale()).toBe("de-AT");
+    spy.mockRestore();
+    vi.unstubAllGlobals();
   });
 });

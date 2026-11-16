@@ -1,5 +1,7 @@
 import { createStore, produce } from "solid-js/store";
 
+import { i18n } from "@lingui/core";
+
 import { type Client, withoutNull } from "@zrzur/sdk/solid";
 
 import { InteractionError, interactionApi, nonce } from "./api";
@@ -23,6 +25,15 @@ import type {
   ServerCommands,
 } from "./types";
 import { isInteractionEvent } from "./types";
+
+/**
+ * The language a bot is told to answer in: the one the app is shown in. The
+ * browser's own language is only the fallback: someone with an Arabic app on
+ * a German system got every bot's replies in German.
+ */
+export function interactionLocale(): string {
+  return i18n.locale || navigator.language;
+}
 
 /** An interaction this user started and is waiting on */
 export type PendingInteraction = {
@@ -479,7 +490,7 @@ export function runCommand(
       options,
       target_id: targetId,
       nonce: nonce(),
-      locale: navigator.language,
+      locale: interactionLocale(),
     },
     { label: command.type === "ChatInput" ? `/${command.name}` : command.name },
   );
@@ -504,7 +515,7 @@ export function useComponent(
       custom_id: customId,
       values,
       nonce: nonce(),
-      locale: navigator.language,
+      locale: interactionLocale(),
     },
     { componentKey },
   );
@@ -526,7 +537,7 @@ export function submitModal(
       custom_id: customId,
       fields,
       nonce: nonce(),
-      locale: navigator.language,
+      locale: interactionLocale(),
     },
     {},
   );
@@ -568,7 +579,7 @@ export async function requestAutocomplete(
       options,
       focused,
       nonce: nonce(),
-      locale: navigator.language,
+      locale: interactionLocale(),
     },
     signal,
   );
