@@ -303,6 +303,38 @@
     "وشاح المشجّعين",
     "Fanschal"
   ],
+  "Woods Frame": [
+    "إطار الغابة",
+    "Waldrahmen"
+  ],
+  "Firefly Ring": [
+    "حلقة اليراعات",
+    "Glühwürmchenring"
+  ],
+  "Snow Frame": [
+    "إطار الثلج",
+    "Schneerahmen"
+  ],
+  "Icicle Ring": [
+    "حلقة الجليد",
+    "Eiszapfenring"
+  ],
+  "Equaliser Ring": [
+    "حلقة الإيقاع",
+    "Equalizer-Ring"
+  ],
+  "Mixtape Frame": [
+    "إطار الكاسيت",
+    "Mixtape-Rahmen"
+  ],
+  "Handheld Frame": [
+    "إطار الجهاز",
+    "Handheld-Rahmen"
+  ],
+  "Press Start": [
+    "اضغط للبدء",
+    "Start drücken"
+  ],
   "Blade Ring": [
     "حلقة الشفرات",
     "Klingenring"
@@ -719,6 +751,22 @@
     "الشبكة",
     "Im Netz"
   ],
+  "Campfire Night": [
+    "ليلة المخيّم",
+    "Lagerfeuernacht"
+  ],
+  "Snowy Village": [
+    "قرية الثلج",
+    "Schneedorf"
+  ],
+  "Boombox Night": [
+    "ليلة الموسيقى",
+    "Boombox-Nacht"
+  ],
+  "Game Shelf": [
+    "رفّ الألعاب",
+    "Spieleregal"
+  ],
   "Moonlit Roofs": [
     "أسطح القمر",
     "Dächer im Mondlicht"
@@ -1010,6 +1058,22 @@
   "Goal Bounce": [
     "هدف!",
     "Torjubel"
+  ],
+  "Firefly Dance": [
+    "رقصة اليراعات",
+    "Glühwürmchentanz"
+  ],
+  "Pixel Snowfall": [
+    "ثلج البكسل",
+    "Pixel-Schneefall"
+  ],
+  "Pixel Notes": [
+    "نوتات البكسل",
+    "Pixel-Noten"
+  ],
+  "Power Up": [
+    "ترقية القوّة",
+    "Power-up"
   ],
   "Flying Blades": [
     "شفرات طائرة",

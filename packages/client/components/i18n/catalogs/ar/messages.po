@@ -28331,3 +28331,67 @@ msgstr "حلقة الخبرة"
 #: components/ui/components/features/profiles/pack/labels.generated.ts
 msgid "Zrzur Crest"
 msgstr "شارة زرزور"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Boombox Night"
+msgstr "ليلة الموسيقى"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Campfire Night"
+msgstr "ليلة المخيّم"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Equaliser Ring"
+msgstr "حلقة الإيقاع"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Firefly Dance"
+msgstr "رقصة اليراعات"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Firefly Ring"
+msgstr "حلقة اليراعات"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Game Shelf"
+msgstr "رفّ الألعاب"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Handheld Frame"
+msgstr "إطار الجهاز"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Icicle Ring"
+msgstr "حلقة الجليد"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Mixtape Frame"
+msgstr "إطار الكاسيت"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Pixel Notes"
+msgstr "نوتات البكسل"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Pixel Snowfall"
+msgstr "ثلج البكسل"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Power Up"
+msgstr "ترقية القوّة"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Press Start"
+msgstr "اضغط للبدء"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Snow Frame"
+msgstr "إطار الثلج"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Snowy Village"
+msgstr "قرية الثلج"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Woods Frame"
+msgstr "إطار الغابة"

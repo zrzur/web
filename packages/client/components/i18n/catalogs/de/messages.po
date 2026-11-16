@@ -28331,3 +28331,67 @@ msgstr "XP-Ring"
 #: components/ui/components/features/profiles/pack/labels.generated.ts
 msgid "Zrzur Crest"
 msgstr "Zrzur-Wappen"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Boombox Night"
+msgstr "Boombox-Nacht"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Campfire Night"
+msgstr "Lagerfeuernacht"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Equaliser Ring"
+msgstr "Equalizer-Ring"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Firefly Dance"
+msgstr "Glühwürmchentanz"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Firefly Ring"
+msgstr "Glühwürmchenring"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Game Shelf"
+msgstr "Spieleregal"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Handheld Frame"
+msgstr "Handheld-Rahmen"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Icicle Ring"
+msgstr "Eiszapfenring"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Mixtape Frame"
+msgstr "Mixtape-Rahmen"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Pixel Notes"
+msgstr "Pixel-Noten"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Pixel Snowfall"
+msgstr "Pixel-Schneefall"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Power Up"
+msgstr "Power-up"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Press Start"
+msgstr "Start drücken"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Snow Frame"
+msgstr "Schneerahmen"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Snowy Village"
+msgstr "Schneedorf"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Woods Frame"
+msgstr "Waldrahmen"
