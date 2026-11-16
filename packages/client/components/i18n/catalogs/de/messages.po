@@ -1964,6 +1964,7 @@ msgstr "Datei hinzufügen"
 #: components/app/menus/UserContextMenu.tsx
 #: components/ui/components/features/profiles/ProfileActions.tsx
 #: src/interface/Friends.tsx
+#: src/interface/navigation/channels/HomeSidebar.tsx
 msgid "Add friend"
 msgstr "Freund hinzufügen"
 
@@ -15039,6 +15040,7 @@ msgid "ONLINE — 3"
 msgstr "ONLINE – 3"
 
 #: components/app/interface/discover/ServerPage.tsx
+#: src/interface/navigation/channels/HomeSidebar.tsx
 msgid "Online now"
 msgstr "Jetzt online"
 
@@ -19014,6 +19016,10 @@ msgstr "Nach Name oder ID suchen"
 msgid "Search by name or reason"
 msgstr "Nach Name oder Grund suchen"
 
+#: src/interface/navigation/channels/HomeSidebar.tsx
+msgid "Search conversations"
+msgstr "Unterhaltungen durchsuchen"
+
 #: components/modal/modals/ForwardMessage.tsx
 msgid "Search conversations and channels"
 msgstr "Unterhaltungen und Kanäle durchsuchen"
@@ -19444,6 +19450,7 @@ msgid "Sent {0} attachments"
 msgstr "{0} Anhänge gesendet"
 
 #: components/ui/components/features/messaging/elements/MessageReply.tsx
+#: src/interface/navigation/channels/HomeSidebar.tsx
 msgid "Sent an attachment"
 msgstr "Hat einen Anhang gesendet"
 
@@ -25893,6 +25900,7 @@ msgid "Yes, uninstall"
 msgstr "Ja, deinstallieren"
 
 #: src/interface/channels/text/SearchBox.tsx
+#: src/interface/navigation/channels/HomeSidebar.tsx
 msgid "Yesterday"
 msgstr "Gestern"
 
@@ -26335,6 +26343,10 @@ msgstr "Du kannst nicht wieder beitreten, außer du erhältst eine neue Einladun
 #: src/interface/designs/Home.tsx
 #~ msgid "You, right now"
 #~ msgstr "Du, gerade jetzt"
+
+#: src/interface/navigation/channels/HomeSidebar.tsx
+msgid "You: {text}"
+msgstr "Du: {text}"
 
 #. placeholder {0}: number(tier.projected_rank)
 #: components/modal/modals/PromoteServer.tsx

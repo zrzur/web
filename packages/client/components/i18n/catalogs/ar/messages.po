@@ -1964,6 +1964,7 @@ msgstr "إضافة ملف"
 #: components/app/menus/UserContextMenu.tsx
 #: components/ui/components/features/profiles/ProfileActions.tsx
 #: src/interface/Friends.tsx
+#: src/interface/navigation/channels/HomeSidebar.tsx
 msgid "Add friend"
 msgstr "إضافة صديق"
 
@@ -15039,6 +15040,7 @@ msgid "ONLINE — 3"
 msgstr "متصل — 3"
 
 #: components/app/interface/discover/ServerPage.tsx
+#: src/interface/navigation/channels/HomeSidebar.tsx
 msgid "Online now"
 msgstr "متصلون الآن"
 
@@ -19014,6 +19016,10 @@ msgstr "البحث بالاسم أو المعرّف"
 msgid "Search by name or reason"
 msgstr "ابحث بالاسم أو السبب"
 
+#: src/interface/navigation/channels/HomeSidebar.tsx
+msgid "Search conversations"
+msgstr "ابحث في المحادثات"
+
 #: components/modal/modals/ForwardMessage.tsx
 msgid "Search conversations and channels"
 msgstr "ابحث في المحادثات والقنوات"
@@ -19444,6 +19450,7 @@ msgid "Sent {0} attachments"
 msgstr "أرسل {0} مرفقات"
 
 #: components/ui/components/features/messaging/elements/MessageReply.tsx
+#: src/interface/navigation/channels/HomeSidebar.tsx
 msgid "Sent an attachment"
 msgstr "أرسل مرفقًا"
 
@@ -25893,6 +25900,7 @@ msgid "Yes, uninstall"
 msgstr "نعم، ألغِ التثبيت"
 
 #: src/interface/channels/text/SearchBox.tsx
+#: src/interface/navigation/channels/HomeSidebar.tsx
 msgid "Yesterday"
 msgstr "أمس"
 
@@ -26335,6 +26343,10 @@ msgstr "لن تتمكن من الانضمام مجدداً ما لم تتم دع
 #: src/interface/designs/Home.tsx
 #~ msgid "You, right now"
 #~ msgstr "أنت الآن"
+
+#: src/interface/navigation/channels/HomeSidebar.tsx
+msgid "You: {text}"
+msgstr "أنت: {text}"
 
 #. placeholder {0}: number(tier.projected_rank)
 #: components/modal/modals/PromoteServer.tsx

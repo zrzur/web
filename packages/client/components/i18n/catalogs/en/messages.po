@@ -1964,6 +1964,7 @@ msgstr "Add file"
 #: components/app/menus/UserContextMenu.tsx
 #: components/ui/components/features/profiles/ProfileActions.tsx
 #: src/interface/Friends.tsx
+#: src/interface/navigation/channels/HomeSidebar.tsx
 msgid "Add friend"
 msgstr "Add friend"
 
@@ -15042,6 +15043,7 @@ msgid "ONLINE — 3"
 msgstr "ONLINE — 3"
 
 #: components/app/interface/discover/ServerPage.tsx
+#: src/interface/navigation/channels/HomeSidebar.tsx
 msgid "Online now"
 msgstr "Online now"
 
@@ -19017,6 +19019,10 @@ msgstr "Search by name or ID"
 msgid "Search by name or reason"
 msgstr "Search by name or reason"
 
+#: src/interface/navigation/channels/HomeSidebar.tsx
+msgid "Search conversations"
+msgstr "Search conversations"
+
 #: components/modal/modals/ForwardMessage.tsx
 msgid "Search conversations and channels"
 msgstr "Search conversations and channels"
@@ -19447,6 +19453,7 @@ msgid "Sent {0} attachments"
 msgstr "Sent {0} attachments"
 
 #: components/ui/components/features/messaging/elements/MessageReply.tsx
+#: src/interface/navigation/channels/HomeSidebar.tsx
 msgid "Sent an attachment"
 msgstr "Sent an attachment"
 
@@ -25896,6 +25903,7 @@ msgid "Yes, uninstall"
 msgstr "Yes, uninstall"
 
 #: src/interface/channels/text/SearchBox.tsx
+#: src/interface/navigation/channels/HomeSidebar.tsx
 msgid "Yesterday"
 msgstr "Yesterday"
 
@@ -26338,6 +26346,10 @@ msgstr "You won't be able to rejoin unless you are re-invited."
 #: src/interface/designs/Home.tsx
 #~ msgid "You, right now"
 #~ msgstr "You, right now"
+
+#: src/interface/navigation/channels/HomeSidebar.tsx
+msgid "You: {text}"
+msgstr "You: {text}"
 
 #. placeholder {0}: number(tier.projected_rank)
 #: components/modal/modals/PromoteServer.tsx
