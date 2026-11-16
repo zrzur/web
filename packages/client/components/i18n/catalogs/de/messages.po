@@ -129,6 +129,7 @@ msgstr "{0, plural, one {# Installation.} other {# Installationen.}}"
 #: src/interface/lobby/Lobby.tsx
 #: src/interface/navigation/channels/HomeSidebar.tsx
 #: src/interface/navigation/channels/HomeSidebarPhone.tsx
+#: src/interface/navigation/channels/ServerPhoneTools.tsx
 msgid "{0, plural, one {# member} other {# members}}"
 msgstr "{0, plural, one {# Mitglied} other {# Mitglieder}}"
 
@@ -6085,6 +6086,7 @@ msgstr "Forenbeiträge erstellen"
 #: components/app/interface/settings/server/invites/ListServerInvites.tsx
 #: components/app/menus/ChannelContextMenu.tsx
 #: components/app/menus/ServerContextMenu.tsx
+#: src/interface/navigation/channels/ServerPhoneTools.tsx
 #: src/interface/navigation/channels/ServerSidebar.tsx
 msgid "Create invite"
 msgstr "Einladung erstellen"
@@ -19028,6 +19030,10 @@ msgstr "Nach Name oder ID suchen"
 #: components/app/interface/settings/server/bans/ListBans.tsx
 msgid "Search by name or reason"
 msgstr "Nach Name oder Grund suchen"
+
+#: src/interface/navigation/channels/ServerPhoneTools.tsx
+msgid "Search channels"
+msgstr "Kanäle durchsuchen"
 
 #: src/interface/navigation/channels/HomeSidebarPhone.tsx
 msgid "Search conversations"

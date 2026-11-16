@@ -67,6 +67,7 @@ import {
   categoriesToSave,
   orderedCategories,
 } from "./ordering";
+import { ServerPhoneTools } from "./ServerPhoneTools";
 import { ServerStats } from "./ServerStats";
 
 interface Props {
@@ -125,9 +126,13 @@ const askedInterests = new Set<string>();
 export const ServerSidebar = (props: Props) => {
   const navigate = useNavigate();
   const state = useState();
-  const { isMobile } = useDevice();
+  const { isMobile, layout } = useDevice();
   const client = useClient();
   const { openModal, showError } = useModals();
+
+  /** phones: type under the server name to narrow the channel list */
+  const [query, setQuery] = createSignal("");
+  const phone = () => layout() === "phone";
 
   // first visit: ask the role questions once, before anything else
   createEffect(
@@ -166,15 +171,36 @@ export const ServerSidebar = (props: Props) => {
       props.server.channels.map((channel) => [channel.id, channel]),
     );
 
-    return orderedCategories(
-      props.server.categories,
-      props.server.channels.map((channel) => channel.id),
-    ).map((category) => ({
-      ...category,
-      channels: category.channelIds
-        .map((id) => channels.get(id)!)
-        .filter((channel) => channel),
-    }));
+    return (
+      orderedCategories(
+        props.server.categories,
+        props.server.channels.map((channel) => channel.id),
+      )
+        .map((category) => ({
+          ...category,
+          channels: category.channelIds
+            .map((id) => channels.get(id)!)
+            .filter((channel) => channel),
+        }))
+        .map((category) => {
+          const q = phone() ? query().trim().toLocaleLowerCase() : "";
+          if (!q) return category;
+          return {
+            ...category,
+            channels: category.channels.filter((channel) =>
+              (channel.name ?? "").toLocaleLowerCase().includes(q),
+            ),
+          };
+        })
+        // while searching, a category with no match is left out
+        .filter(
+          (category) =>
+            !phone() ||
+            !query().trim() ||
+            category.id === "default" ||
+            category.channels.length,
+        )
+    );
   });
 
   /** Gets a list of channels that are currently not hidden inside a closed category */
@@ -358,6 +384,13 @@ export const ServerSidebar = (props: Props) => {
           </Header>
         </Match>
       </Switch>
+      <Show when={phone()}>
+        <ServerPhoneTools
+          server={props.server}
+          query={query()}
+          setQuery={setQuery}
+        />
+      </Show>
       <ChannelList>
         <UnreadCallout list={list} />
         <div

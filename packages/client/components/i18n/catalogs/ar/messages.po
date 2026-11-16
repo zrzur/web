@@ -129,6 +129,7 @@ msgstr "{0, plural, zero {لا تثبيتات بعد.} one {تثبيت واحد.
 #: src/interface/lobby/Lobby.tsx
 #: src/interface/navigation/channels/HomeSidebar.tsx
 #: src/interface/navigation/channels/HomeSidebarPhone.tsx
+#: src/interface/navigation/channels/ServerPhoneTools.tsx
 msgid "{0, plural, one {# member} other {# members}}"
 msgstr "{0, plural, zero {لا يوجد أعضاء} one {عضو واحد} two {عضوان} few {# أعضاء} many {# عضوًا} other {# عضو}}"
 
@@ -6085,6 +6086,7 @@ msgstr "إنشاء منشورات في المنتديات"
 #: components/app/interface/settings/server/invites/ListServerInvites.tsx
 #: components/app/menus/ChannelContextMenu.tsx
 #: components/app/menus/ServerContextMenu.tsx
+#: src/interface/navigation/channels/ServerPhoneTools.tsx
 #: src/interface/navigation/channels/ServerSidebar.tsx
 msgid "Create invite"
 msgstr "إنشاء دعوة"
@@ -19028,6 +19030,10 @@ msgstr "البحث بالاسم أو المعرّف"
 #: components/app/interface/settings/server/bans/ListBans.tsx
 msgid "Search by name or reason"
 msgstr "ابحث بالاسم أو السبب"
+
+#: src/interface/navigation/channels/ServerPhoneTools.tsx
+msgid "Search channels"
+msgstr "ابحث في القنوات"
 
 #: src/interface/navigation/channels/HomeSidebarPhone.tsx
 msgid "Search conversations"
