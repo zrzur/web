@@ -1119,6 +1119,173 @@ export const MAKERS: [string, (K: PackKit) => PackMade][] = [
       },
     },
   })],
+  ["pixelsyria", (K) => {
+    const jasmine = ["..w.w..", ".wwwww.", "wwwywww", ".wwwww.", "..w.w.."];
+    const heart = [".ooo.ooo.", "ogggogggo", "ogggggggo", "owwwrwwwo", ".owrrrwo.", "..okkko..", "...oko...", "....o...."];
+    const dot = ["ww", "ww"];
+    return {
+      shapes: {
+        syjasmine: { reach: [1, 0.72], body: 0.7, draw: (c) => K.px(c, jasmine, { w: "#FFFFFF", y: "#FFD23F" }) },
+        syheart: { reach: [1, 0.9], body: 0.7, draw: (c) => K.px(c, heart, { g: "#007A3D", w: "#FFFFFF", k: "#16161C", r: "#CE1126", o: "#C9CED8" }) },
+        sypetal: { reach: [1, 1], body: 1, draw: (c, t) => K.px(c, dot, { w: t[2] }) },
+      },
+      effects: {
+        "jasmine-rain": {
+          tones: [K.TONES.white, K.TONES.green],
+          still: 1700,
+          layers: [
+            ...K.depth({ count: 30, shape: "sypetal", size: [0.005, 0.009], path: (t, seed, index) => ({ x: seed + Math.round(Math.sin(t * 6 + index) * 4) * 0.008, y: -0.05 + Math.round(t * 30) / 30 * 1.1 }), life: 0.7, fade: K.soft, colours: [0] }),
+            { count: 12, shape: "syjasmine", size: [0.022, 0.034], path: (t, seed, index) => ({ x: seed + Math.round(Math.sin(t * 5 + index) * 3) * 0.01, y: -0.06 + Math.round(t * 28) / 28 * 1.14 }), life: 0.85, fade: K.soft, colours: [0] },
+            { count: 5, shape: "syheart", size: [0.034, 0.046], path: (t, seed) => ({ x: seed, y: 1.08 - Math.round(t * 30) / 30 * 1.16 }), life: 0.8, fade: K.soft, colours: [1] },
+          ],
+        },
+      },
+    };
+  }],
+  ["pixeldimashq", (K) => {
+    const rose = ["..rrr..", ".rrdrr.", "rrdrdrr", ".rrdrr.", "..rrr.."];
+    const jasmine = ["..w.w..", ".wwwww.", "wwwywww", ".wwwww.", "..w.w.."];
+    const sword = ["...s...", "..sls..", "..sds..", "..sls..", "..sds..", "..sls..", "..sds..", "..sls..", "..sds..", "..sls..", "ggggggg", "..gbg..", "...b...", "..ggg.."];
+    const dot = ["ww", "ww"];
+    return {
+      shapes: {
+        dmrose: { reach: [1, 0.72], body: 0.7, draw: (c) => K.px(c, rose, { r: "#E0306A", d: "#9A1244" }) },
+        dmjasmine: { reach: [1, 0.72], body: 0.7, draw: (c) => K.px(c, jasmine, { w: "#FFFFFF", y: "#FFD23F" }) },
+        dmsword: { reach: [0.5, 1], body: 0.4, draw: (c) => K.px(c, sword, { s: "#DCE6F5", l: "#FFFFFF", d: "#9AA8C0", g: "#F0B040", b: "#6A3A1E" }) },
+        dmpetal: { reach: [1, 1], body: 1, draw: (c, t) => K.px(c, dot, { w: t[0] }) },
+      },
+      effects: {
+        "damascus-petals": {
+          tones: [K.TONES.rose, K.TONES.white],
+          still: 1700,
+          layers: [
+            ...K.depth({ count: 30, shape: "dmpetal", size: [0.005, 0.009], path: (t, seed, index) => ({ x: seed + Math.round(Math.sin(t * 6 + index) * 4) * 0.008, y: -0.05 + Math.round(t * 30) / 30 * 1.1 }), life: 0.7, fade: K.soft, colours: [0, 1] }),
+            { count: 8, shape: "dmrose", size: [0.024, 0.036], path: (t, seed, index) => ({ x: seed, y: -0.06 + Math.round(t * 28) / 28 * 1.14 }), life: 0.85, fade: K.soft, colours: [0] },
+            { count: 8, shape: "dmjasmine", size: [0.02, 0.03], path: (t, seed, index) => ({ x: seed + Math.round(Math.sin(t * 5 + index) * 3) * 0.01, y: -0.06 + Math.round(t * 26) / 26 * 1.14 }), life: 0.8, fade: K.soft, colours: [1] },
+            // two swords rise upright at the sides and hold, like a guard of honour
+            { count: 2, shape: "dmsword", size: [0.13, 0.13], path: (t, seed, index) => ({ x: index ? 0.86 : 0.14, y: 1.2 - Math.min(1, Math.round(t * 5 * 12) / 12) * 0.62 }), life: 0.9, start: () => 0.04, alpha: 0.9, fade: K.soft, colours: [1] },
+          ],
+        },
+      },
+    };
+  }],
+  ["pixelghouta", (K) => {
+    const blossom = ["..p..", ".ppp.", "ppypp", ".ppp.", "..p.."];
+    const apricot = ["...g...", "..gg...", ".ooooo.", "oaalaao", "oaaaaao", "oaaaaao", ".ooooo."];
+    const grapes = ["...g...", "..gg...", ".plppp.", "ppppplp", ".plppp.", "..ppp..", "..plp..", "...p..."];
+    const dot = ["ww", "ww"];
+    return {
+      shapes: {
+        ghblossom: { reach: [1, 1], body: 0.6, draw: (c, t) => K.px(c, blossom, { p: t[2], y: "#FFE36B" }) },
+        ghapricot: { reach: [1, 1], body: 0.7, draw: (c) => K.px(c, apricot, { g: "#3FA05A", o: "#C8601A", a: "#FF9A3A", l: "#FFD08A" }) },
+        ghgrapes: { reach: [0.88, 1], body: 0.6, draw: (c) => K.px(c, grapes, { g: "#3FA05A", p: "#7A3AB0", l: "#C89AF0" }) },
+        ghpetal: { reach: [1, 1], body: 1, draw: (c, t) => K.px(c, dot, { w: t[2] }) },
+      },
+      effects: {
+        "ghouta-blossom": {
+          tones: [K.TONES.rose, K.TONES.white],
+          still: 1700,
+          layers: [
+            ...K.depth({ count: 34, shape: "ghpetal", size: [0.005, 0.009], path: (t, seed, index) => ({ x: seed + Math.round(Math.sin(t * 6 + index) * 4) * 0.008, y: -0.05 + Math.round(t * 30) / 30 * 1.1 }), life: 0.7, fade: K.soft, colours: [0, 1] }),
+            { count: 14, shape: "ghblossom", size: [0.016, 0.026], path: (t, seed, index) => ({ x: seed + Math.round(Math.sin(t * 5 + index) * 3) * 0.01, y: -0.06 + Math.round(t * 28) / 28 * 1.14 }), life: 0.85, fade: K.soft, colours: [0, 1] },
+            { count: 6, shape: "ghapricot", size: [0.026, 0.036], path: (t, seed) => ({ x: seed, y: Math.min(0.95, -0.06 + t * t * 1.5) - (t > 0.82 ? Math.sin(((t - 0.82) / 0.18) * Math.PI) * 0.07 : 0) }), life: 0.6, fade: K.soft, colours: [0] },
+            { count: 3, shape: "ghgrapes", size: [0.04, 0.05], path: (t, seed, index) => ({ x: 0.2 + index * 0.3, y: -0.1 + Math.min(1, Math.round(t * 3 * 12) / 12) * 0.2, angle: Math.round(Math.sin(t * 6 + index) * 2) * 0.06 }), life: 0.9, start: () => 0.03, fade: K.soft, colours: [0] },
+          ],
+        },
+      },
+    };
+  }],
+  ["pixelhalab", (K) => {
+    const nut = [".sss.", "sgggs", "sgggs", "sgggs", ".sss."];
+    const soap = ["ooooooo", "oglgggo", "ogggggo", "ogggggo", "ooooooo"];
+    const dot = ["ww", "ww"];
+    return {
+      shapes: {
+        hlnut: { reach: [1, 1], body: 0.8, draw: (c) => K.px(c, nut, { s: "#F0E2BC", g: "#8AC05A" }) },
+        hlsoap: { reach: [1, 0.72], body: 0.9, draw: (c) => K.px(c, soap, { o: "#2A1E0E", g: "#8A9A3A", l: "#C8D078" }) },
+        hldust: { reach: [1, 1], body: 1, draw: (c, t) => K.px(c, dot, { w: t[0] }) },
+      },
+      effects: {
+        "pistachio-rain": {
+          tones: [K.TONES.green, K.TONES.sand],
+          still: 1600,
+          layers: [
+            { count: 24, shape: "hldust", size: [0.005, 0.008], path: (t, seed) => ({ x: seed, y: -0.05 + Math.round(t * 30) / 30 * 1.1 }), life: 0.6, fade: K.soft, colours: [0, 1] },
+            { count: 14, shape: "hlnut", size: [0.018, 0.028], path: (t, seed, index) => ({ x: seed, y: Math.min(0.96, -0.06 + t * t * 1.6) - (t > 0.82 ? Math.sin(((t - 0.82) / 0.18) * Math.PI) * 0.07 : 0) }), life: 0.6, fade: K.soft, colours: [0] },
+            { count: 5, shape: "hlsoap", size: [0.03, 0.04], path: (t, seed, index) => ({ x: seed, y: -0.06 + Math.round(t * 26) / 26 * 1.14, angle: Math.round(t * 5 + index) * (Math.PI / 4) }), life: 0.8, fade: K.soft, colours: [0] },
+          ],
+        },
+      },
+    };
+  }],
+  ["pixelhama", (K) => {
+    const drop = [".b.", "bbb", "bbb", ".b."];
+    const ring = [".www.", "w...w", "w...w", "w...w", ".www."];
+    return {
+      shapes: {
+        hmdrop: { reach: [0.75, 1], body: 0.7, draw: (c, t) => K.px(c, drop, { b: t[0] }) },
+        hmring: { reach: [1, 1], body: 0.2, draw: (c, t) => K.px(c, ring, { w: t[2] }) },
+      },
+      effects: {
+        "wheel-drops": {
+          tones: [K.TONES.sky, K.TONES.aqua],
+          still: 1600,
+          layers: [
+            { count: 6, shape: "hmring", size: [0.03, 0.05], path: (t, seed, index) => ({ x: 0.12 + seed * 0.76, y: 0.9 + (index % 2) * 0.04, grow: 0.5 + Math.round(t * 4) / 4 }), life: 0.4, alpha: 0.6, fade: (t) => Math.sin(Math.PI * t), colours: [0] },
+            // drops thrown from a turning rim: they leave along an arc and fall in steps
+            ...K.depth({ count: 34, shape: "hmdrop", size: [0.008, 0.015], path: (t, seed, index) => { const a = -0.4 + K.random(index, 3) * 1.6; return { x: 0.5 + Math.sin(a) * 0.4, y: 0.46 - Math.cos(a) * 0.36 + Math.round(t * t * 24) / 24 * (0.5 + seed * 0.4) }; }, life: 0.5, fade: K.soft, colours: [0, 1] }),
+          ],
+        },
+      },
+    };
+  }],
+  ["pixeltadmur", (K) => {
+    const column = ["sss", "sss", ".s.", ".s.", ".s.", ".s.", ".s.", ".s.", "sss"];
+    const plus = [".w.", "www", ".w."];
+    const dot = ["ww", "ww"];
+    return {
+      shapes: {
+        tdcolumn: { reach: [0.34, 1], body: 0.5, draw: (c, t) => K.px(c, column, { s: t[0] }) },
+        tdstar: { reach: [1, 1], body: 0.5, draw: (c, t) => K.px(c, plus, { w: t[2] }) },
+        tdsand: { reach: [1, 1], body: 1, draw: (c, t) => K.px(c, dot, { w: t[0] }) },
+      },
+      effects: {
+        "desert-wind": {
+          tones: [K.TONES.sand, K.TONES.amber, K.TONES.white],
+          still: 1700,
+          layers: [
+            { count: 7, shape: "tdcolumn", size: [0.09, 0.13], path: (t, seed, index) => ({ x: 0.08 + index * 0.14, y: 0.88 - (index % 3) * 0.02 }), life: 0.96, start: () => 0.01, alpha: 0.5, fade: K.soft, colours: [0] },
+            { count: 18, shape: "tdstar", size: [0.01, 0.018], path: (t, seed, index) => ({ x: seed, y: K.random(index, 5) * 0.5 }), life: 0.3, fade: K.glow, colours: [2] },
+            // sand blown across in steps, low over the ground
+            ...K.depth({ count: 46, shape: "tdsand", size: [0.005, 0.009], path: (t, seed, index) => ({ x: -0.05 + Math.round(t * 34) / 34 * 1.1, y: 0.5 + K.random(index, 4) * 0.48 + Math.round(Math.sin(t * 8 + index) * 3) * 0.006 }), life: 0.6, fade: K.soft, colours: [0, 1] }),
+          ],
+        },
+      },
+    };
+  }],
+  ["pixelsufra", (K) => {
+    const baklava = ["....o....", "...olo...", "..olyyo..", ".olygyyo.", "oyygggyyo", ".oyygyyo.", "..oyyyo..", "...oyo...", "....o...."];
+    const tea = ["ooooo", "orrro", "orrro", "orrro", ".ooo.", "..o..", "ooooo"];
+    const dot = ["ww", "ww"];
+    return {
+      shapes: {
+        sfbaklava: { reach: [1, 1], body: 0.5, draw: (c) => K.px(c, baklava, { o: "#3A1E0E", y: "#F0B040", l: "#FFE0A0", g: "#8AC05A" }) },
+        sftea: { reach: [0.72, 1], body: 0.7, draw: (c) => K.px(c, tea, { o: "#DADDE8", r: "#C8502A" }) },
+        sfcrumb: { reach: [1, 1], body: 1, draw: (c, t) => K.px(c, dot, { w: t[0] }) },
+      },
+      effects: {
+        "baklava-shower": {
+          tones: [K.TONES.gold, K.TONES.green],
+          still: 1600,
+          layers: [
+            { count: 30, shape: "sfcrumb", size: [0.005, 0.008], path: (t, seed) => ({ x: seed, y: -0.05 + Math.round(t * 30) / 30 * 1.1 }), life: 0.6, fade: K.soft, colours: [0, 0, 1] },
+            { count: 14, shape: "sfbaklava", size: [0.024, 0.036], path: (t, seed, index) => ({ x: seed, y: -0.06 + Math.round(t * 28) / 28 * 1.14 }), life: 0.8, fade: K.soft, colours: [0] },
+            { count: 4, shape: "sftea", size: [0.036, 0.046], path: (t, seed, index) => ({ x: 0.14 + index * 0.24, y: Math.min(0.94, -0.06 + t * t * 1.5) - (t > 0.82 ? Math.sin(((t - 0.82) / 0.18) * Math.PI) * 0.06 : 0) }), life: 0.6, fade: K.soft, colours: [0] },
+          ],
+        },
+      },
+    };
+  }],
   ["sham", (K) => ({
     shapes: {
       jasmine: {

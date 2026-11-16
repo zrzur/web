@@ -28491,3 +28491,135 @@ msgstr "Zrzur-Pixelheim"
 #: components/ui/components/features/profiles/pack/labels.generated.ts
 msgid "Zrzur Pixel Rise"
 msgstr "Zrzur-Pixelaufstieg"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Apricot Ring"
+msgstr "Aprikosenring"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Apricot Season"
+msgstr "Aprikosenzeit"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Arch of Palmyra"
+msgstr "Bogen von Palmyra"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Baklava Ring"
+msgstr "Baklava-Ring"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Baklava Shower"
+msgstr "Baklava-Regen"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Citadel Frame"
+msgstr "Zitadellenrahmen"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Citadel of Aleppo"
+msgstr "Zitadelle von Aleppo"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Colonnade Ring"
+msgstr "Säulenring"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Damascene Sword"
+msgstr "Damaszener Schwert"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Damascus Jasmine"
+msgstr "Damaszener Jasmin"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Damask Roses"
+msgstr "Damaszener Rosen"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Desert Wind"
+msgstr "Wüstenwind"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Flag of Syria"
+msgstr "Flagge Syriens"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Ghouta Blossom"
+msgstr "Ghuta-Blüte"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Ghouta Orchard"
+msgstr "Ghuta-Obstgarten"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Grapevine"
+msgstr "Weinrebe"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Hearts for Syria"
+msgstr "Herzen für Syrien"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Jasmine Rain"
+msgstr "Jasminregen"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Old City Gate"
+msgstr "Altstadttor"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Old City Lanterns"
+msgstr "Laternen der Altstadt"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Orontes Ring"
+msgstr "Orontes-Ring"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Palmyra Sunset"
+msgstr "Sonnenuntergang in Palmyra"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Petals of Damascus"
+msgstr "Blüten von Damaskus"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Pistachio Rain"
+msgstr "Pistazienregen"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Pistachio Ring"
+msgstr "Pistazienring"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Spring in the Ghouta"
+msgstr "Frühling in der Ghuta"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Syrian Flag Ring"
+msgstr "Syrischer Flaggenring"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Table of Damascus"
+msgstr "Tisch von Damaskus"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Umayyad Square"
+msgstr "Umayyaden-Platz"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Water Wheel"
+msgstr "Wasserrad"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Welcome Tray"
+msgstr "Gästetablett"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Wheel Drops"
+msgstr "Radtropfen"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Wheels of Hama"
+msgstr "Räder von Hama"

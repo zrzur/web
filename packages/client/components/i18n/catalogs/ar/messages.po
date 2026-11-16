@@ -28491,3 +28491,135 @@ msgstr "بيت زرزور"
 #: components/ui/components/features/profiles/pack/labels.generated.ts
 msgid "Zrzur Pixel Rise"
 msgstr "صعود زرزور"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Apricot Ring"
+msgstr "حلقة المشمش"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Apricot Season"
+msgstr "موسم المشمش"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Arch of Palmyra"
+msgstr "قوس تدمر"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Baklava Ring"
+msgstr "حلقة البقلاوة"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Baklava Shower"
+msgstr "مطر البقلاوة"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Citadel Frame"
+msgstr "إطار القلعة"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Citadel of Aleppo"
+msgstr "قلعة حلب"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Colonnade Ring"
+msgstr "حلقة الأعمدة"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Damascene Sword"
+msgstr "السيف الدمشقي"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Damascus Jasmine"
+msgstr "ياسمين الشام"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Damask Roses"
+msgstr "الوردة الدمشقية"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Desert Wind"
+msgstr "ريح الصحراء"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Flag of Syria"
+msgstr "علم سوريا"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Ghouta Blossom"
+msgstr "زهر الغوطة"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Ghouta Orchard"
+msgstr "بستان الغوطة"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Grapevine"
+msgstr "دالية العنب"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Hearts for Syria"
+msgstr "قلوب سوريا"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Jasmine Rain"
+msgstr "مطر الياسمين"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Old City Gate"
+msgstr "باب الشام القديمة"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Old City Lanterns"
+msgstr "فوانيس الشام"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Orontes Ring"
+msgstr "حلقة العاصي"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Palmyra Sunset"
+msgstr "غروب تدمر"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Petals of Damascus"
+msgstr "ورد دمشق"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Pistachio Rain"
+msgstr "مطر الفستق"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Pistachio Ring"
+msgstr "حلقة الفستق"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Spring in the Ghouta"
+msgstr "ربيع الغوطة"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Syrian Flag Ring"
+msgstr "حلقة العلم السوري"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Table of Damascus"
+msgstr "سفرة الشام"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Umayyad Square"
+msgstr "ساحة الأمويين"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Water Wheel"
+msgstr "الناعورة"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Welcome Tray"
+msgstr "صينيّة الضيافة"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Wheel Drops"
+msgstr "رذاذ النواعير"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Wheels of Hama"
+msgstr "نواعير حماة"

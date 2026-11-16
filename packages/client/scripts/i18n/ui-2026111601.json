@@ -383,6 +383,74 @@
     "حلقة الدخان",
     "Rauchring"
   ],
+  "Syrian Flag Ring": [
+    "حلقة العلم السوري",
+    "Syrischer Flaggenring"
+  ],
+  "Damascus Jasmine": [
+    "ياسمين الشام",
+    "Damaszener Jasmin"
+  ],
+  "Hearts for Syria": [
+    "قلوب سوريا",
+    "Herzen für Syrien"
+  ],
+  "Damascene Sword": [
+    "السيف الدمشقي",
+    "Damaszener Schwert"
+  ],
+  "Damask Roses": [
+    "الوردة الدمشقية",
+    "Damaszener Rosen"
+  ],
+  "Old City Lanterns": [
+    "فوانيس الشام",
+    "Laternen der Altstadt"
+  ],
+  "Ghouta Orchard": [
+    "بستان الغوطة",
+    "Ghuta-Obstgarten"
+  ],
+  "Apricot Ring": [
+    "حلقة المشمش",
+    "Aprikosenring"
+  ],
+  "Grapevine": [
+    "دالية العنب",
+    "Weinrebe"
+  ],
+  "Citadel Frame": [
+    "إطار القلعة",
+    "Zitadellenrahmen"
+  ],
+  "Pistachio Ring": [
+    "حلقة الفستق",
+    "Pistazienring"
+  ],
+  "Water Wheel": [
+    "الناعورة",
+    "Wasserrad"
+  ],
+  "Orontes Ring": [
+    "حلقة العاصي",
+    "Orontes-Ring"
+  ],
+  "Arch of Palmyra": [
+    "قوس تدمر",
+    "Bogen von Palmyra"
+  ],
+  "Colonnade Ring": [
+    "حلقة الأعمدة",
+    "Säulenring"
+  ],
+  "Welcome Tray": [
+    "صينيّة الضيافة",
+    "Gästetablett"
+  ],
+  "Baklava Ring": [
+    "حلقة البقلاوة",
+    "Baklava-Ring"
+  ],
   "Jasmine Ring": [
     "طوق الياسمين",
     "Jasminring"
@@ -843,6 +911,42 @@
     "ليل دمشق",
     "Damaskus bei Nacht"
   ],
+  "Flag of Syria": [
+    "علم سوريا",
+    "Flagge Syriens"
+  ],
+  "Umayyad Square": [
+    "ساحة الأمويين",
+    "Umayyaden-Platz"
+  ],
+  "Old City Gate": [
+    "باب الشام القديمة",
+    "Altstadttor"
+  ],
+  "Spring in the Ghouta": [
+    "ربيع الغوطة",
+    "Frühling in der Ghuta"
+  ],
+  "Apricot Season": [
+    "موسم المشمش",
+    "Aprikosenzeit"
+  ],
+  "Citadel of Aleppo": [
+    "قلعة حلب",
+    "Zitadelle von Aleppo"
+  ],
+  "Wheels of Hama": [
+    "نواعير حماة",
+    "Räder von Hama"
+  ],
+  "Palmyra Sunset": [
+    "غروب تدمر",
+    "Sonnenuntergang in Palmyra"
+  ],
+  "Table of Damascus": [
+    "سفرة الشام",
+    "Tisch von Damaskus"
+  ],
   "Ablaq Stone": [
     "الحجر الأبلق",
     "Ablaq-Stein"
@@ -1170,6 +1274,34 @@
   "Flying Blades": [
     "شفرات طائرة",
     "Fliegende Klingen"
+  ],
+  "Jasmine Rain": [
+    "مطر الياسمين",
+    "Jasminregen"
+  ],
+  "Petals of Damascus": [
+    "ورد دمشق",
+    "Blüten von Damaskus"
+  ],
+  "Ghouta Blossom": [
+    "زهر الغوطة",
+    "Ghuta-Blüte"
+  ],
+  "Pistachio Rain": [
+    "مطر الفستق",
+    "Pistazienregen"
+  ],
+  "Wheel Drops": [
+    "رذاذ النواعير",
+    "Radtropfen"
+  ],
+  "Desert Wind": [
+    "ريح الصحراء",
+    "Wüstenwind"
+  ],
+  "Baklava Shower": [
+    "مطر البقلاوة",
+    "Baklava-Regen"
   ],
   "Jasmine Fall": [
     "مطر الياسمين",
