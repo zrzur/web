@@ -179,7 +179,11 @@ export function ParticipantTile(props: TileProps) {
             </Show>
           ),
         }}
-        style={{ ...getHeight() }}
+        style={{
+          ...getHeight(),
+          // a steady colour of their own for each person (phone call screen)
+          "--vc-tile-hue": tileHue(participant.identity),
+        }}
       >
         <Show
           when={isVideo() || isScreenShare()}
@@ -304,6 +308,17 @@ export function ParticipantTile(props: TileProps) {
       </div>
     </Show>
   );
+}
+
+/**
+ * A hue from an id: the same person always gets the same tint. Kept between
+ * teal and magenta (180 to 359): dark yellows and greens look muddy.
+ */
+function tileHue(id: string) {
+  let sum = 0;
+  for (let index = 0; index < id.length; index++)
+    sum = (sum * 31 + id.charCodeAt(index)) % 360;
+  return String(180 + (sum % 180));
 }
 
 export const tile = cva({

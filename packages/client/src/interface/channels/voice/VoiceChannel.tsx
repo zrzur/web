@@ -1,18 +1,30 @@
-import { For, Match, Show, Switch, createEffect, on } from "solid-js";
+import {
+  For,
+  Match,
+  Show,
+  Switch,
+  createEffect,
+  on,
+  onCleanup,
+} from "solid-js";
 
 import { Trans, useLingui } from "@lingui/solid/macro";
 import { styled } from "styled-system/jsx";
 
+import { useDevice } from "@revolt/common";
 import { useUsers } from "@revolt/markdown/users";
+import { useModals } from "@revolt/modal";
 import { useNavigate } from "@revolt/routing";
 import { useVoice } from "@revolt/rtc";
 import { voiceOccupancy } from "@revolt/rtc/moderation";
+import { useState } from "@revolt/state";
 import { Avatar, Header } from "@revolt/ui";
 import { VoiceChannelCallCardMount } from "@revolt/ui/components/features/voice/callCard/VoiceCallCard";
 import { Icon } from "@revolt/ui/icons/Icon";
 
 import { ChannelHeader } from "../ChannelHeader";
 import { ChannelPageProps } from "../ChannelPage";
+import "./phoneCall.css";
 
 /**
  * Server voice channel: the call alone, no chat panel on this page (owner,
@@ -36,11 +48,30 @@ export function VoiceChannel(props: ChannelPageProps) {
     ),
   );
 
+  const device = useDevice();
+  const phoneCall = () => device.layout() === "phone" && inThisCall();
+  // the call card is drawn over the stage from outside it: the phone look of
+  // its tiles and controls hangs on <html> (phoneCall.css)
+  createEffect(() => {
+    if (!phoneCall()) return;
+    document.documentElement.setAttribute("data-phone-call", "");
+    onCleanup(() =>
+      document.documentElement.removeAttribute("data-phone-call"),
+    );
+  });
+
   return (
     <>
-      <Header placement="primary">
-        <ChannelHeader channel={props.channel} />
-      </Header>
+      <Show
+        when={phoneCall()}
+        fallback={
+          <Header placement="primary">
+            <ChannelHeader channel={props.channel} />
+          </Header>
+        }
+      >
+        <CallTop {...props} />
+      </Show>
       <Row>
         <Stage data-voice-stage={props.channel.id}>
           <Show when={inThisCall()} fallback={<Unavailable {...props} />}>
@@ -51,6 +82,135 @@ export function VoiceChannel(props: ChannelPageProps) {
     </>
   );
 }
+
+/**
+ * Phones, in the call: back to the channel list, the room's name, then the
+ * speaker (hear or not), an invite and the way to the server's chat.
+ *
+ * [v] [speaker Lounge]            [speaker] [invite] [chat]
+ */
+function CallTop(props: ChannelPageProps) {
+  const { t } = useLingui();
+  const voice = useVoice();
+  const state = useState();
+  const navigate = useNavigate();
+  const { openModal } = useModals();
+
+  const chat = () =>
+    props.channel.server?.channels.find((channel) => !channel.isVoice);
+
+  return (
+    <Top data-call-top>
+      <TopButton
+        type="button"
+        aria-label={t`Back`}
+        onClick={() => state.appDrawer()?.setShown(false)}
+      >
+        <Icon name="caret-down" size={22} />
+      </TopButton>
+      <RoomPill>
+        <Icon name="speaker-high" size={18} />
+        <span dir="auto">{props.channel.name}</span>
+      </RoomPill>
+      <span style={{ flex: 1 }} />
+      <TopButton
+        type="button"
+        data-on={voice.deafen() ? undefined : ""}
+        aria-pressed={voice.deafen()}
+        aria-label={voice.deafen() ? t`Undeafen` : t`Deafen`}
+        aria-disabled={!voice.listenPermission}
+        onClick={() => voice.listenPermission && voice.toggleDeafen()}
+      >
+        <Icon
+          name={voice.deafen() ? "speaker-slash" : "speaker-high"}
+          size={22}
+        />
+      </TopButton>
+      <Show when={props.channel.havePermission("InviteOthers")}>
+        <TopButton
+          type="button"
+          aria-label={t`Create invite`}
+          onClick={() =>
+            openModal({ type: "create_invite", channel: props.channel })
+          }
+        >
+          <Icon name="user-plus" size={22} />
+        </TopButton>
+      </Show>
+      <Show when={chat()}>
+        <TopButton
+          type="button"
+          aria-label={t`Text channels`}
+          onClick={() =>
+            navigate(`/server/${props.channel.serverId}/channel/${chat()!.id}`)
+          }
+        >
+          <Icon name="chat-circle" size={22} />
+        </TopButton>
+      </Show>
+    </Top>
+  );
+}
+
+const Top = styled("div", {
+  base: {
+    flex: "none",
+    display: "flex",
+    alignItems: "center",
+    gap: "10px",
+    padding: "calc(8px + var(--z-phone-top-gap, 0px)) 14px 8px",
+    background: "var(--z-bg-app)",
+  },
+});
+
+const TopButton = styled("button", {
+  base: {
+    flex: "none",
+    width: "44px",
+    height: "44px",
+    display: "grid",
+    placeItems: "center",
+    border: "none",
+    borderRadius: "14px",
+    cursor: "pointer",
+    color: "var(--z-fg-primary)",
+    background: "var(--z-bg-raised)",
+    "--z-icon-color": "currentColor",
+    // sound is on: the button is lit
+    "&[data-on]": {
+      color: "var(--z-bg-frame)",
+      background: "var(--z-fg-primary)",
+    },
+    "&[aria-disabled='true']": { opacity: 0.4 },
+    _focusVisible: {
+      outline: "2px solid var(--z-focus)",
+      outlineOffset: "2px",
+    },
+  },
+});
+
+const RoomPill = styled("div", {
+  base: {
+    minWidth: 0,
+    height: "44px",
+    display: "flex",
+    alignItems: "center",
+    gap: "6px",
+    paddingInline: "12px",
+    borderRadius: "14px",
+    fontSize: "16px",
+    fontWeight: 600,
+    color: "var(--z-fg-primary)",
+    background: "var(--z-bg-raised)",
+    "--z-icon-color": "var(--z-fg-muted)",
+    "& > span": {
+      minWidth: 0,
+      overflow: "hidden",
+      textOverflow: "ellipsis",
+      whiteSpace: "nowrap",
+    },
+  },
+});
 
 const Row = styled("div", {
   base: {
