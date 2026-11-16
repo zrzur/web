@@ -1,5 +1,6 @@
 import type { JSX } from "solid-js";
 
+import { isEffectId } from "./effects/effectIds";
 import {
   PACK_DECORATIONS,
   PACK_NAMEPLATES,
@@ -34,7 +35,7 @@ export function userStyleOf(user: unknown): UserStyle | undefined {
   const style = (user as { style?: UserStyle } | undefined)?.style;
   if (!style || typeof style !== "object") return undefined;
   // a design we no longer ship counts as none, so saving still works
-  const { decoration, nameplate } = style;
+  const { decoration, nameplate, effect } = style;
   const staleDecoration =
     decoration &&
     !isCommunityRef(decoration) &&
@@ -43,7 +44,8 @@ export function userStyleOf(user: unknown): UserStyle | undefined {
     nameplate &&
     !isCommunityRef(nameplate) &&
     !NAMEPLATES.some((plate) => plate.id === nameplate);
-  if (!staleDecoration && !stalePlate) return style;
+  const staleEffect = effect && !isCommunityRef(effect) && !isEffectId(effect);
+  if (!staleDecoration && !stalePlate && !staleEffect) return style;
   const rest = { ...style };
   if (staleDecoration) {
     delete rest.decoration;
@@ -52,6 +54,10 @@ export function userStyleOf(user: unknown): UserStyle | undefined {
   if (stalePlate) {
     delete rest.nameplate;
     delete rest.nameplate_file;
+  }
+  if (staleEffect) {
+    delete rest.effect;
+    delete rest.effect_file;
   }
   return rest;
 }

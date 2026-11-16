@@ -98,6 +98,17 @@ describe("user style", () => {
     expect(style?.nameplate).toBeUndefined();
     expect(style?.nameplate_file).toBeUndefined();
     expect(style?.name_font).toBe("serif");
+    // an effect that was cut from the pack: saving must not send it back
+    const cut = userStyleOf({
+      style: { effect: "no-such-effect", effect_file: "z", name_font: "serif" },
+    });
+    expect(cut?.effect).toBeUndefined();
+    expect(cut?.effect_file).toBeUndefined();
+    expect(cut?.name_font).toBe("serif");
+    expect(userStyleOf({ style: { effect: "snow" } })?.effect).toBe("snow");
+    expect(userStyleOf({ style: { effect: "c:01ABC" } })?.effect).toBe(
+      "c:01ABC",
+    );
     expect(userStyleOf({ style: { nameplate: "aurora" } })?.nameplate).toBe(
       "aurora",
     );
