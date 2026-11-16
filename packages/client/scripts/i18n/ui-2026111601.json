@@ -48,7 +48,7 @@
     "Weiße Katzenohren"
   ],
   "Fox Ears": [
-    "أذنا الثعلب",
+    "آذان ثعلب",
     "Fuchsohren"
   ],
   "Bunny Ears": [
@@ -56,7 +56,7 @@
     "Hasenohren"
   ],
   "Bear Ears": [
-    "أذنا الدبّ",
+    "آذان دبّ",
     "Bärenohren"
   ],
   "Midnight Headphones": [
@@ -94,10 +94,6 @@
   "Heart Orbit": [
     "قلوب تدور",
     "Herzumlauf"
-  ],
-  "Typing": [
-    "يكتب الآن",
-    "Tippt gerade"
   ],
   "Sleepy Moon": [
     "قمر نعسان",
@@ -140,7 +136,7 @@
     "Runenkreis"
   ],
   "Tyre Ring": [
-    "حلقة الإطار",
+    "الإطار",
     "Reifenring"
   ],
   "Rev Gauge": [
@@ -159,18 +155,6 @@
     "أصدقاء أشباح",
     "Geisterfreunde"
   ],
-  "Bat Night": [
-    "ليلة الخفافيش",
-    "Fledermausnacht"
-  ],
-  "Palm Sunset": [
-    "غروب النخيل",
-    "Palmen-Sonnenuntergang"
-  ],
-  "Chase Lights": [
-    "أضواء المطاردة",
-    "Blaulicht-Ring"
-  ],
   "Ship's Wheel": [
     "دفّة السفينة",
     "Steuerrad"
@@ -178,38 +162,6 @@
   "Anchor": [
     "المرساة",
     "Anker"
-  ],
-  "Racing Wheel": [
-    "مقود السباق",
-    "Rennlenkrad"
-  ],
-  "Tail Lights": [
-    "الأضواء الخلفية",
-    "Rücklichter"
-  ],
-  "Headset": [
-    "السمّاعة",
-    "Headset"
-  ],
-  "Colour Ring": [
-    "حلقة الألوان",
-    "Farbring"
-  ],
-  "Robot Head": [
-    "رأس الروبوت",
-    "Roboterkopf"
-  ],
-  "Cog Ring": [
-    "المسنّن",
-    "Zahnradring"
-  ],
-  "Saucer Beam": [
-    "الصحن الطائر",
-    "Untertasse"
-  ],
-  "Antennae": [
-    "قرنا الاستشعار",
-    "Fühler"
   ],
   "Quest Frame": [
     "إطار المغامرة",
@@ -247,17 +199,9 @@
     "إطار الشِعاب",
     "Riffrahmen"
   ],
-  "Bubble Ring": [
-    "حلقة الفقاعات",
-    "Blasenring"
-  ],
   "Dino Frame": [
     "إطار الديناصور",
     "Dinorahmen"
-  ],
-  "Egg Ring": [
-    "حلقة البيض",
-    "Eierring"
   ],
   "City Frame": [
     "إطار المدينة",
@@ -282,10 +226,6 @@
   "Race Track": [
     "الحلبة",
     "Rennstrecke"
-  ],
-  "Joystick Ring": [
-    "حلقة التحكّم",
-    "Joystick-Ring"
   ],
   "Marquee Bulbs": [
     "لمبات اللافتة",
@@ -315,10 +255,6 @@
     "إطار الثلج",
     "Schneerahmen"
   ],
-  "Icicle Ring": [
-    "حلقة الجليد",
-    "Eiszapfenring"
-  ],
   "Equaliser Ring": [
     "حلقة الإيقاع",
     "Equalizer-Ring"
@@ -331,10 +267,6 @@
     "إطار الجهاز",
     "Handheld-Rahmen"
   ],
-  "Press Start": [
-    "اضغط للبدء",
-    "Start drücken"
-  ],
   "Love Frame": [
     "إطار الحبّ",
     "Liebesrahmen"
@@ -346,10 +278,6 @@
   "Cat Frame": [
     "إطار القطّة",
     "Katzenrahmen"
-  ],
-  "Ears and Whiskers": [
-    "آذان وشوارب",
-    "Ohren und Schnurrhaare"
   ],
   "Bloom Frame": [
     "إطار الأزهار",
@@ -374,14 +302,6 @@
   "Sprinkle Ring": [
     "حلقة الرشّات",
     "Streuselring"
-  ],
-  "Blade Ring": [
-    "حلقة الشفرات",
-    "Klingenring"
-  ],
-  "Smoke Ring": [
-    "حلقة الدخان",
-    "Rauchring"
   ],
   "Syrian Flag Ring": [
     "حلقة العلم السوري",
@@ -503,14 +423,6 @@
     "حلقة المرجان",
     "Riffring"
   ],
-  "Lifebuoy": [
-    "طوق النجاة",
-    "Rettungsring"
-  ],
-  "Magma Ring": [
-    "حلقة الحمم",
-    "Magmaring"
-  ],
   "Tulip Crown": [
     "تاج التوليب",
     "Tulpenkrone"
@@ -518,10 +430,6 @@
   "Daisy Chain": [
     "سلسلة الأقحوان",
     "Gänseblümchenkette"
-  ],
-  "Rain Cloud": [
-    "غيمة المطر",
-    "Regenwolke"
   ],
   "Bamboo Ring": [
     "حلقة الخيزران",
@@ -551,14 +459,6 @@
     "إكليل الخزامى",
     "Lavendelkranz"
   ],
-  "Jellyfish": [
-    "قنديل البحر",
-    "Qualle"
-  ],
-  "Living Light": [
-    "حلقة الضوء الحيّ",
-    "Lebendiges Licht"
-  ],
   "Jungle Leaves": [
     "أوراق الأدغال",
     "Dschungelblätter"
@@ -579,149 +479,9 @@
     "قوس قزح",
     "Regenbogen"
   ],
-  "Cloud Ring": [
-    "حلقة الغيوم",
-    "Wolkenring"
-  ],
-  "Ball Ring": [
-    "حلقة الكرة",
-    "Ballring"
-  ],
-  "Goal": [
-    "المرمى",
-    "Tor"
-  ],
-  "Vinyl Record": [
-    "الأسطوانة",
-    "Schallplatte"
-  ],
-  "Sound Ring": [
-    "حلقة الصوت",
-    "Klangring"
-  ],
-  "Cat Ears": [
-    "أذنا القطة",
-    "Katzenohren"
-  ],
-  "Doughnut": [
-    "الدونات",
-    "Donut"
-  ],
-  "Chequered Crown": [
-    "تاج الرقعة",
-    "Schachkrone"
-  ],
-  "Pawn Circle": [
-    "دائرة البيادق",
-    "Bauernkreis"
-  ],
-  "Dice Ring": [
-    "أحجار النرد",
-    "Würfelring"
-  ],
-  "Card Hand": [
-    "يد الورق",
-    "Kartenhand"
-  ],
-  "Ball Band": [
-    "حلقة السلّة",
-    "Ballband"
-  ],
-  "Rim and Net": [
-    "الطوق والشبكة",
-    "Ring und Netz"
-  ],
-  "Old Television": [
-    "التلفاز القديم",
-    "Alter Fernseher"
-  ],
-  "Tape Reel": [
-    "بكرة الشريط",
-    "Bandspule"
-  ],
   "Ribbon and Bow": [
     "الشريط والعقدة",
     "Schleife"
-  ],
-  "String Lights": [
-    "حبل الأضواء",
-    "Lichterkette"
-  ],
-  "Atom Orbits": [
-    "مدارات الذرّة",
-    "Atombahnen"
-  ],
-  "Flask": [
-    "الدورق",
-    "Kolben"
-  ],
-  "Open Book": [
-    "الكتاب المفتوح",
-    "Offenes Buch"
-  ],
-  "Ring of Books": [
-    "حلقة الكتب",
-    "Bücherring"
-  ],
-  "Melting Ring": [
-    "البوظة الذائبة",
-    "Schmelzender Ring"
-  ],
-  "Three Scoops": [
-    "ثلاث كرات",
-    "Drei Kugeln"
-  ],
-  "Lens": [
-    "العدسة",
-    "Objektiv"
-  ],
-  "Film Strip": [
-    "شريط الفيلم",
-    "Filmstreifen"
-  ],
-  "Pocket Watch": [
-    "ساعة الجيب",
-    "Taschenuhr"
-  ],
-  "Moon Phases": [
-    "أطوار القمر",
-    "Mondphasen"
-  ],
-  "Rabbit Ears": [
-    "أذنا الأرنب",
-    "Hasenohren"
-  ],
-  "Burst Ring": [
-    "حلقة الانفجارات",
-    "Feuerwerksring"
-  ],
-  "Sparkler Ring": [
-    "حلقة الشرر",
-    "Wunderkerzenring"
-  ],
-  "Soft Halo": [
-    "هالة ناعمة",
-    "Weicher Schein"
-  ],
-  "Two Arcs": [
-    "قوسان",
-    "Zwei Bögen"
-  ],
-  "Pane Ring": [
-    "حلقة الزجاج",
-    "Glasring"
-  ],
-  "Glass Rose": [
-    "وردة الزجاج",
-    "Glasrose"
-  ],
-  "Paper Cranes": [
-    "طيور الورق",
-    "Papierkraniche"
-  ],
-  "Pinwheel": [
-    "دوّامة الورق",
-    "Windrad"
   ],
   "Pulse Ring": [
     "حلقة النبض",
@@ -730,14 +490,6 @@
   "Zrzur Crest": [
     "شارة زرزور",
     "Zrzur-Wappen"
-  ],
-  "Murmuration": [
-    "السرب",
-    "Schwarmflug"
-  ],
-  "On the Branch": [
-    "على الغصن",
-    "Auf dem Ast"
   ],
   "Zrzur Pixel Badge": [
     "شارة زرزور",
@@ -795,26 +547,6 @@
     "طريق الساحل",
     "Küstenstraße"
   ],
-  "Neon Sign": [
-    "لافتة النيون",
-    "Neonschild"
-  ],
-  "Treasure Map": [
-    "خريطة الكنز",
-    "Schatzkarte"
-  ],
-  "Night Road": [
-    "طريق الليل",
-    "Nachtstraße"
-  ],
-  "Desk Setup": [
-    "مكتب اللعب",
-    "Schreibtisch"
-  ],
-  "Robot Works": [
-    "ورشة الروبوت",
-    "Roboterwerk"
-  ],
   "Night Visit": [
     "ليلة الزوّار",
     "Nächtlicher Besuch"
@@ -850,10 +582,6 @@
   "Sunset Boulevard": [
     "شارع الغروب",
     "Sonnenuntergangsallee"
-  ],
-  "Grand Prix": [
-    "الجائزة الكبرى",
-    "Großer Preis"
   ],
   "Arcade Row": [
     "صفّ الأركيد",
@@ -899,10 +627,6 @@
     "بعد المطر",
     "Nach dem Regen"
   ],
-  "Candy Shop": [
-    "دكّان الحلوى",
-    "Süßwarenladen"
-  ],
   "Moonlit Roofs": [
     "أسطح القمر",
     "Dächer im Mondlicht"
@@ -918,10 +642,6 @@
   "Umayyad Square": [
     "ساحة الأمويين",
     "Umayyaden-Platz"
-  ],
-  "Old City Gate": [
-    "باب الشام القديمة",
-    "Altstadttor"
   ],
   "Spring in the Ghouta": [
     "ربيع الغوطة",
@@ -947,10 +667,6 @@
     "سفرة الشام",
     "Tisch von Damaskus"
   ],
-  "Ablaq Stone": [
-    "الحجر الأبلق",
-    "Ablaq-Stein"
-  ],
   "Citadel Night": [
     "ليل القلعة",
     "Zitadelle bei Nacht"
@@ -962,10 +678,6 @@
   "Old City Walls": [
     "أسوار المدينة",
     "Alte Stadtmauern"
-  ],
-  "Scarf Weave": [
-    "نقشة الكوفية",
-    "Tuchmuster"
   ],
   "Desert Night": [
     "ليل الصحراء",
@@ -1035,97 +747,13 @@
     "سماء المناطيد",
     "Ballonhimmel"
   ],
-  "Pitch at Night": [
-    "ملعب الليل",
-    "Platz bei Nacht"
-  ],
   "Oud Night": [
     "ليلة العود",
     "Oud-Nacht"
   ],
-  "Sound Bars": [
-    "موجات الصوت",
-    "Klangbalken"
-  ],
-  "Paw Trail": [
-    "أثر الكفوف",
-    "Pfotenspur"
-  ],
-  "Chess Board": [
-    "رقعة الشطرنج",
-    "Schachbrett"
-  ],
-  "Game Table": [
-    "طاولة اللعب",
-    "Spieltisch"
-  ],
-  "Court Floor": [
-    "أرض الملعب",
-    "Hallenboden"
-  ],
-  "Cassette": [
-    "الكاسيت",
-    "Kassette"
-  ],
-  "Colour Bars": [
-    "أشرطة الألوان",
-    "Farbbalken"
-  ],
-  "Gift Wrap": [
-    "ورق الهدايا",
-    "Geschenkpapier"
-  ],
-  "Lab Bench": [
-    "طاولة المختبر",
-    "Labortisch"
-  ],
-  "Bookshelf": [
-    "رفّ المكتبة",
-    "Bücherregal"
-  ],
-  "Ice Cream Parlour": [
-    "محلّ البوظة",
-    "Eisdiele"
-  ],
-  "Camera Shelf": [
-    "رفّ الكاميرا",
-    "Kameraregal"
-  ],
-  "Clockwork": [
-    "آلية الساعة",
-    "Uhrwerk"
-  ],
-  "Forest Friends": [
-    "أصدقاء الغابة",
-    "Waldfreunde"
-  ],
-  "Festive Night": [
-    "ليلة الاحتفال",
-    "Festnacht"
-  ],
-  "Peach Haze": [
-    "ضباب خوخي",
-    "Pfirsichdunst"
-  ],
-  "Lagoon Haze": [
-    "ضباب البحيرة",
-    "Lagunendunst"
-  ],
-  "Tall Windows": [
-    "النوافذ العالية",
-    "Hohe Fenster"
-  ],
-  "Paper Water": [
-    "ماء من ورق",
-    "Papierwasser"
-  ],
   "Pulse Wave": [
     "موجة النبض",
     "Pulswelle"
-  ],
-  "Dusk Flock": [
-    "سرب الغروب",
-    "Abendschwarm"
   ],
   "Zrzur Pixel Home": [
     "بيت زرزور",
@@ -1134,10 +762,6 @@
   "Rank Up": [
     "ترقية الرتبة",
     "Aufstieg"
-  ],
-  "Hit Markers": [
-    "إصابة!",
-    "Treffer"
   ],
   "Coin Rush": [
     "سيل العملات",
@@ -1150,10 +774,6 @@
   "Arcane Runes": [
     "رموز سحرية",
     "Arkane Runen"
-  ],
-  "Slipstream": [
-    "تيار السرعة",
-    "Windschatten"
   ],
   "Liftoff": [
     "إقلاع",
@@ -1171,21 +791,9 @@
     "دنانير الكنز",
     "Dublonen"
   ],
-  "Light Trails": [
-    "خطوط الضوء",
-    "Lichtspuren"
-  ],
   "Key Rain": [
     "مطر الأزرار",
     "Tastenregen"
-  ],
-  "Nuts and Bolts": [
-    "صواميل وبراغٍ",
-    "Muttern und Schrauben"
-  ],
-  "Saucers": [
-    "صحون طائرة",
-    "Untertassen"
   ],
   "Loot Drop": [
     "سقوط الغنائم",
@@ -1211,10 +819,6 @@
     "ركضة الديناصور",
     "Dino-Sprint"
   ],
-  "Night Traffic": [
-    "سير الليل",
-    "Nachtverkehr"
-  ],
   "Coast Cruise": [
     "جولة الساحل",
     "Küstenfahrt"
@@ -1222,10 +826,6 @@
   "Photo Finish": [
     "خطّ النهاية",
     "Zielfoto"
-  ],
-  "Button Mash": [
-    "ضغط الأزرار",
-    "Tastenhämmern"
   ],
   "Tyre Smoke": [
     "دخان الإطارات",
@@ -1271,10 +871,6 @@
     "رشّات البكسل",
     "Pixel-Streusel"
   ],
-  "Flying Blades": [
-    "شفرات طائرة",
-    "Fliegende Klingen"
-  ],
   "Jasmine Rain": [
     "مطر الياسمين",
     "Jasminregen"
@@ -1291,14 +887,6 @@
     "مطر الفستق",
     "Pistazienregen"
   ],
-  "Wheel Drops": [
-    "رذاذ النواعير",
-    "Radtropfen"
-  ],
-  "Desert Wind": [
-    "ريح الصحراء",
-    "Wüstenwind"
-  ],
   "Baklava Shower": [
     "مطر البقلاوة",
     "Baklava-Regen"
@@ -1311,21 +899,9 @@
     "مطر الورد",
     "Rosenregen"
   ],
-  "Olive Leaves": [
-    "أوراق الزيتون",
-    "Olivenblätter"
-  ],
-  "Sand Wind": [
-    "ريح الرمل",
-    "Sandwind"
-  ],
   "Lantern Glow": [
     "ضوء الفوانيس",
     "Laternenschein"
-  ],
-  "Coffee Steam": [
-    "بخار القهوة",
-    "Kaffeedampf"
   ],
   "Blizzard": [
     "عاصفة ثلج",
@@ -1347,21 +923,9 @@
     "مظلّات",
     "Regenschirme"
   ],
-  "Bamboo Leaves": [
-    "أوراق الخيزران",
-    "Bambusblätter"
-  ],
-  "Fire Sparks": [
-    "شرر النار",
-    "Feuerfunken"
-  ],
   "Citrus Splash": [
     "رشّة حمضيات",
     "Zitrusspritzer"
-  ],
-  "Lavender Breeze": [
-    "نسمة الخزامى",
-    "Lavendelbrise"
   ],
   "Rising Jellies": [
     "صعود القناديل",
@@ -1379,10 +943,6 @@
     "صعود المناطيد",
     "Aufsteigende Ballons"
   ],
-  "Kick-off": [
-    "ضربة البداية",
-    "Anstoß"
-  ],
   "Melody": [
     "لحن",
     "Melodie"
@@ -1391,17 +951,9 @@
     "رشّة سكّر",
     "Zuckerregen"
   ],
-  "Gambit": [
-    "نقلة جريئة",
-    "Gambit"
-  ],
   "Lucky Roll": [
     "رمية حظ",
     "Glückswurf"
-  ],
-  "Swish": [
-    "رمية نظيفة",
-    "Swish"
   ],
   "Rewind": [
     "إرجاع",
@@ -1410,14 +962,6 @@
   "Gifts": [
     "هدايا",
     "Geschenke"
-  ],
-  "Molecules": [
-    "جزيئات",
-    "Moleküle"
-  ],
-  "Loose Pages": [
-    "أوراق طائرة",
-    "Lose Seiten"
   ],
   "Scoops": [
     "كرات البوظة",
@@ -1431,22 +975,6 @@
     "عجلات الوقت",
     "Räder der Zeit"
   ],
-  "Snacks": [
-    "وجبات خفيفة",
-    "Leckerbissen"
-  ],
-  "Sky Bursts": [
-    "انفجارات السماء",
-    "Himmelsblüten"
-  ],
-  "Soft Orbs": [
-    "كرات ضوء",
-    "Lichtkugeln"
-  ],
-  "Glass Light": [
-    "ضوء الزجاج",
-    "Glaslicht"
-  ],
   "Crane Flight": [
     "طيران الطيور الورقية",
     "Kranichflug"
@@ -1454,10 +982,6 @@
   "Heartbeat": [
     "نبضة",
     "Herzschlag"
-  ],
-  "Flock Sweep": [
-    "عبور السرب",
-    "Schwarmzug"
   ],
   "Zrzur Pixel Rise": [
     "صعود زرزور",
