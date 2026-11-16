@@ -41,6 +41,17 @@ describe("message catalogs", () => {
     expect(browserPreferredLanguage()).toBe(Language.ENGLISH);
   });
 
+  it("gives a Chinese device the Simplified Chinese text", () => {
+    // browsers report a region (zh-CN) or the bare language, never "zh-Hans"
+    for (const reported of ["zh-CN", "zh", "zh-SG", "zh-Hans-CN"]) {
+      vi.stubGlobal("navigator", { languages: [reported, "en"] });
+      expect(browserPreferredLanguage()).toBe(Language.CHINESE_SIMPLIFIED);
+    }
+    // Traditional Chinese is not translated yet: the next language in the list is used
+    vi.stubGlobal("navigator", { languages: ["zh-TW", "de"] });
+    expect(browserPreferredLanguage()).toBe(Language.GERMAN);
+  });
+
   it("on the Discover and Designs sites, shows the small file first and adds the full one after", async () => {
     const load = vi.spyOn(i18n, "load").mockImplementation(() => undefined);
     const fetch = vi.fn(async () => ({
