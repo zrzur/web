@@ -10,7 +10,6 @@ import { useNavigate } from "@solidjs/router";
 import { useLocation, useParams } from "@revolt/routing";
 import { useState } from "@revolt/state";
 import { Avatar } from "@revolt/ui";
-import { FlockDots } from "@revolt/ui/components/design/FlockDots";
 
 import { type IconName, Icon } from "@revolt/ui/icons/Icon";
 import { openMentions } from "./MentionsPanel";
@@ -19,8 +18,10 @@ import { openMentions } from "./MentionsPanel";
 const [lastServer, setLastServer] = createSignal<string>();
 
 /**
- * Phone navigation: four tabs along the bottom of the menu side.
- * Servers (rail + channels), Messages (direct messages), Discover and You.
+ * Phone navigation: a floating bar at the bottom of the menu side with five
+ * tabs: Servers (rail + channels), Messages, Designs, Notifications and You.
+ * The open tab is a filled capsule with its name; the others are icons with
+ * the name for screen readers. Discover stays on the server rail.
  * Hidden on wider screens, where the rail and account card do this job.
  */
 export function PhoneTabs() {
@@ -40,7 +41,9 @@ export function PhoneTabs() {
   const active = () => {
     const path = location.pathname;
     if (path.startsWith("/server")) return "servers";
-    if (path.startsWith("/discover")) return "discover";
+    if (path.startsWith("/designs")) return "designs";
+    // Discover is opened from the rail; no tab is its own
+    if (path.startsWith("/discover")) return "none";
     if (path.startsWith("/you")) return "you";
     return "messages";
   };
@@ -69,8 +72,8 @@ export function PhoneTabs() {
     if (active() !== "messages") navigate("/app");
   };
 
-  const openDiscover = () => {
-    navigate(state.layout.getLastActiveDiscoverPath());
+  const openDesigns = () => {
+    navigate("/designs");
     // full pages live on the content side
     state.appDrawer()?.setShown(true);
   };
@@ -84,22 +87,22 @@ export function PhoneTabs() {
   ) => (
     <Tab
       type="button"
+      aria-label={label}
       aria-current={active() === id ? "page" : undefined}
       data-current={active() === id}
       onClick={onPress}
     >
-      <Show when={active() === id}>
-        <FlockDots />
-      </Show>
       <TabIcon>
         <Icon name={icon} size={24} />
         <Show when={badge?.()}>
-          <Badge aria-label={t`${badge!()} unread`}>
+          <Badge data-tab-badge aria-label={t`${badge!()} unread`}>
             {badge!() > 99 ? "99+" : badge!()}
           </Badge>
         </Show>
       </TabIcon>
-      <span>{label}</span>
+      <Show when={active() === id}>
+        <TabName aria-hidden="true">{label}</TabName>
+      </Show>
     </Tab>
   );
 
@@ -109,19 +112,26 @@ export function PhoneTabs() {
       {tab("messages", "chat-circle-dots", t`Messages`, openMessages, () =>
         unreadMessages(),
       )}
-      {tab("discover", "compass", t`Discover`, openDiscover)}
-      {/* mentions open as a sheet over whatever is on screen */}
-      <Tab type="button" aria-haspopup="dialog" onClick={openMentions}>
+      {tab("designs", "palette", t`Designs`, openDesigns)}
+      {/* notifications open as a sheet over whatever is on screen */}
+      <Tab
+        type="button"
+        aria-label={t`Notifications`}
+        aria-haspopup="dialog"
+        onClick={openMentions}
+      >
         <TabIcon>
-          <Icon name="at" size={24} />
+          <Icon name="bell" size={24} />
           <Show when={unreadMentions()}>
-            <Badge>{unreadMentions() > 99 ? "99+" : unreadMentions()}</Badge>
+            <Badge data-tab-badge>
+              {unreadMentions() > 99 ? "99+" : unreadMentions()}
+            </Badge>
           </Show>
         </TabIcon>
-        <span>{t`Mentions`}</span>
       </Tab>
       <Tab
         type="button"
+        aria-label={t`You`}
         aria-current={active() === "you" ? "page" : undefined}
         data-current={active() === "you"}
         onClick={() => {
@@ -129,9 +139,6 @@ export function PhoneTabs() {
           state.appDrawer()?.setShown(true);
         }}
       >
-        <Show when={active() === "you"}>
-          <FlockDots />
-        </Show>
         <TabIcon>
           <Avatar
             size={26}
@@ -139,7 +146,9 @@ export function PhoneTabs() {
             fallback={user()?.username}
           />
         </TabIcon>
-        <span>{t`You`}</span>
+        <Show when={active() === "you"}>
+          <TabName aria-hidden="true">{t`You`}</TabName>
+        </Show>
       </Tab>
     </Bar>
   );
@@ -151,16 +160,20 @@ const Bar = styled("nav", {
     _phone: {
       position: "absolute",
       zIndex: 3,
-      insetInline: 0,
-      bottom: 0,
-      display: "grid",
-      // equal columns, but never narrower than the label (German "Erwähnungen")
-      gridTemplateColumns: "repeat(5, auto)",
-      justifyContent: "space-around",
-      // #root already stops above the home bar (styles.css), so no inset here
-      height: "62px",
-      background: "var(--z-bg-frame)",
-      borderTop: "1px solid var(--z-border-subtle)",
+      // a floating bar: clear of both sides and of the bottom edge
+      // (#root already stops above the home bar, styles.css)
+      insetInline: "12px",
+      bottom: "8px",
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "space-between",
+      gap: "2px",
+      height: "60px",
+      paddingInline: "8px",
+      borderRadius: "22px",
+      background: "var(--z-bg-raised)",
+      border: "1px solid var(--z-border-subtle)",
+      boxShadow: "0 10px 28px rgb(0 0 0 / 0.38)",
     },
   },
 });
@@ -169,54 +182,57 @@ const Tab = styled("button", {
   base: {
     position: "relative",
     display: "flex",
-    flexDirection: "column",
     alignItems: "center",
     justifyContent: "center",
-    gap: "2px",
-    minWidth: "56px",
-    paddingTop: "6px",
-    paddingInline: "4px",
+    gap: "8px",
+    flex: "none",
+    minWidth: "48px",
+    height: "44px",
+    paddingInline: "10px",
     border: "none",
+    borderRadius: "16px",
     background: "none",
     color: "var(--z-fg-muted)",
     font: "inherit",
-    fontSize: "12px",
-    fontWeight: 500,
+    fontSize: "14px",
+    fontWeight: 600,
     cursor: "pointer",
     "--z-icon-color": "currentColor",
     WebkitTapHighlightColor: "transparent",
-    transition: "color 120ms ease",
+    transition: "color 120ms ease, background-color 120ms ease",
     _motionReduce: { transition: "none" },
 
-    // the flock lands on the open tab
-    "& > [data-flock-dots]": {
-      position: "absolute",
-      top: "2px",
-      insetInline: 0,
-      marginInline: "auto",
-      color: "var(--z-accent)",
-    },
     "&:active > span:first-of-type": { scale: "0.92" },
-
-    // the label only: the icon holds the unread badge, which reaches past
-    // the icon's box and must not be cut
-    "& > span:last-child": {
-      maxWidth: "100%",
-      overflow: "hidden",
-      textOverflow: "ellipsis",
-      whiteSpace: "nowrap",
-    },
     _active: { color: "var(--z-fg-primary)" },
     _focusVisible: {
       outline: "none",
-      boxShadow: "inset 0 0 0 2px var(--z-focus)",
+      boxShadow: "0 0 0 2px var(--z-focus)",
     },
-    // the open tab: full-strength words and icon, the dots say which
+    // the open tab: a filled capsule with its name
     "&[data-current='true']": {
-      color: "var(--z-fg-primary)",
-      fontWeight: 600,
-      "--z-icon-color": "var(--z-fg-primary)",
+      flex: "0 1 auto",
+      minWidth: 0,
+      paddingInline: "14px",
+      color: "var(--z-on-accent, #FFFFFF)",
+      background: "var(--z-accent)",
+      "--z-icon-color": "var(--z-on-accent, #FFFFFF)",
+      // on the filled capsule the count turns white so it stays readable
+      "& [data-tab-badge]": {
+        color: "var(--z-accent)",
+        background: "var(--z-on-accent, #FFFFFF)",
+        boxShadow: "0 0 0 2px var(--z-accent)",
+      },
     },
+  },
+});
+
+/** The open tab's name; shortens before the bar grows past the screen */
+const TabName = styled("span", {
+  base: {
+    minWidth: 0,
+    overflow: "hidden",
+    textOverflow: "ellipsis",
+    whiteSpace: "nowrap",
   },
 });
 
@@ -245,6 +261,6 @@ const Badge = styled("span", {
     lineHeight: 1,
     color: "var(--z-on-mention-badge, #FFFFFF)",
     background: "var(--z-mention-badge, #C2337A)",
-    boxShadow: "0 0 0 2px var(--z-bg-frame)",
+    boxShadow: "0 0 0 2px var(--z-bg-raised)",
   },
 });
