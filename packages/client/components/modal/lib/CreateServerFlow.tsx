@@ -1,4 +1,5 @@
 import { Trans, useLingui } from "@lingui/solid/macro";
+import { useDevice } from "@revolt/common";
 import { TranslatedError } from "@revolt/i18n/errors";
 import { useInstance } from "@revolt/instance";
 import { cropProcess } from "@revolt/modal/modals/CropProcess";
@@ -67,6 +68,7 @@ type DialogAction = NonNullable<
  */
 export function CreateServerFlow(props: DialogProps & { client: Client }) {
   const { t } = useLingui();
+  const device = useDevice();
   const navigate = useNavigate();
   const instance = useInstance();
   const modals = useModals();
@@ -231,11 +233,20 @@ export function CreateServerFlow(props: DialogProps & { client: Client }) {
       showClose={!busy()}
       persistent={step() === "yours"}
       size="sm"
+      phonePage
       isDisabled={busy()}
       title={title()}
+      description={
+        step() === "start" ? (
+          <Trans>
+            Your server is where you and your friends hang out. Start from
+            scratch or pick a ready-made one.
+          </Trans>
+        ) : undefined
+      }
       actions={actions()}
     >
-      <div ref={body}>
+      <FlowBody ref={body}>
         <Switch>
           <Match when={step() === "start"}>
             <Row
@@ -264,7 +275,8 @@ export function CreateServerFlow(props: DialogProps & { client: Client }) {
                 <Trans>Got an invite?</Trans>
               </span>
               <Button
-                variant="tonal"
+                // phones: the page ends with it, so it is the full-strength button
+                variant={device.layout() === "phone" ? "filled" : "tonal"}
                 size="md"
                 shape="square"
                 onPress={() => {
@@ -393,7 +405,7 @@ export function CreateServerFlow(props: DialogProps & { client: Client }) {
             </form>
           </Match>
         </Switch>
-      </div>
+      </FlowBody>
     </Dialog>
   );
 }
@@ -418,6 +430,12 @@ function Row(props: {
   );
 }
 
+/** Phones: a column as tall as the page, so the invite block ends it */
+const FlowBody = styled("div", {
+  base: {
+    _phone: { display: "flex", flexDirection: "column", minHeight: "100%" },
+  },
+});
 const SectionTitle = styled("h3", {
   base: {
     margin: "16px 0 8px",
@@ -467,6 +485,8 @@ const Choice = styled("button", {
 });
 const Join = styled("div", {
   base: {
+    // phones: on the bottom edge of the page
+    _phone: { marginBlockStart: "auto", fontSize: "15px", fontWeight: 600 },
     marginBlockStart: "16px",
     paddingBlockStart: "16px",
     borderBlockStart: "1px solid var(--z-border-subtle)",

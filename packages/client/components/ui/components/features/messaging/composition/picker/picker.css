@@ -491,11 +491,65 @@
     var(--z-picker-available-height, 400px)
   );
 }
-.z-media-picker--phone {
-  inset-inline: auto;
-  left: 50%;
-  transform: translateX(-50%);
-  width: min(360px, calc(100vw - 16px));
+/* Phones: the head of the docked panel, a grab mark and the Emoji / GIF switch */
+.z-picker-dock-head {
+  flex: none;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 8px 12px 4px;
+}
+.z-picker-grab {
+  align-self: center;
+  width: 40px;
+  height: 4px;
+  border-radius: 2px;
+  background: var(--picker-border);
+}
+.z-picker-switch {
+  display: flex;
+  padding: 4px;
+  border-radius: 12px;
+  background: var(--z-bg-raised, var(--picker-raised));
+}
+.z-picker-switch button {
+  flex: 1;
+  min-height: 36px;
+  border: 0;
+  border-radius: 9px;
+  background: transparent;
+  color: var(--picker-muted);
+  font-size: 14px;
+  font-weight: 600;
+}
+.z-picker-switch button[aria-selected="true"] {
+  background: var(--z-bg-input, var(--picker-input));
+  color: var(--picker-text);
+}
+/* Phones: the picker is docked at the bottom of the screen, where the
+   keyboard would be, and the app above it gets shorter by its height
+   (--z-picker-dock on <html>, set while it is open; see styles.css #root),
+   so the message box stays right above the panel. When its own search field
+   brings the keyboard up, the panel sits on top of the keyboard. */
+.z-media-picker.z-media-picker--phone {
+  position: fixed;
+  inset-inline: 0;
+  left: 0;
+  right: 0;
+  transform: none;
+  bottom: calc(
+    max(var(--z-safe-bottom, 0px), var(--keyboard-inset, 0px)) +
+      var(--z-screen-bottom, 0px)
+  );
+  width: 100%;
+  height: var(--z-picker-dock, min(360px, 48dvh));
+  border-inline: 0;
+  border-bottom: 0;
+  border-radius: 20px 20px 0 0;
+  /* the home-bar strip under the panel takes the panel's own fill */
+  box-shadow: 0 60px 0 0 var(--z-popover-bg, var(--picker-bg));
+  background: var(--z-bg-frame, var(--picker-bg));
+  --z-popover-bg: var(--z-bg-frame, #0d0e16);
 }
 .z-gif-category > span {
   text-align: center;

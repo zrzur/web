@@ -32,6 +32,7 @@ import {
 import { Symbol } from "@revolt/ui/components/utils/Symbol";
 import { Icon } from "@revolt/ui/icons/Icon";
 
+import { HomeSidebarPhone } from "./HomeSidebarPhone";
 import { SidebarBase } from "./common";
 
 interface Props {
@@ -54,9 +55,27 @@ interface Props {
 }
 
 /**
- * Display home navigation and conversations
+ * Display home navigation and conversations; phones have their own screen
  */
 export const HomeSidebar = (props: Props) => {
+  const device = useDevice();
+  return (
+    <Show
+      when={device.layout() === "phone"}
+      fallback={<HomeSidebarWide {...props} />}
+    >
+      <HomeSidebarPhone
+        conversations={props.conversations}
+        channelId={props.channelId}
+      />
+    </Show>
+  );
+};
+
+/**
+ * Tablets and wider: the navigation rows, then the conversations
+ */
+const HomeSidebarWide = (props: Props) => {
   const { t } = useLingui();
   const client = useClient();
   const navigate = useNavigate();

@@ -217,7 +217,9 @@ const ToastHost = styled("div", {
     pointerEvents: "none",
     width: "min(420px, calc(100vw - 32px))",
     // phones: above the message box and the tabs, clear of the thumb
-    _phone: { bottom: "calc(88px + var(--z-safe-bottom))" },
+    _phone: {
+      bottom: "calc(88px + var(--z-safe-bottom) + var(--z-screen-bottom, 0px))",
+    },
 
     '&[data-placement="top"], &[data-placement="top-start"], &[data-placement="top-end"]':
       {

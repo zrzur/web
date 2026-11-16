@@ -17,8 +17,11 @@ import { styled } from "styled-system/jsx";
 
 import { useClient } from "@revolt/client";
 import { holdMessages } from "@revolt/client/messagePruner";
+import { useDevice } from "@revolt/common";
 import { Avatar, CircularProgress, Time } from "@revolt/ui";
 import { Icon } from "@revolt/ui/icons/Icon";
+
+import { NotificationsPhone } from "./NotificationsPhone";
 
 const [open, setOpen] = createSignal(false);
 
@@ -31,6 +34,7 @@ export const openMentions = () => setOpen(true);
  */
 export function MentionsHost() {
   const { t } = useLingui();
+  const device = useDevice();
 
   createEffect(() => {
     if (!open()) return;
@@ -47,10 +51,20 @@ export function MentionsHost() {
   return (
     <Show when={open()}>
       <Portal mount={document.getElementById("floating")!}>
-        <Scrim onClick={() => setOpen(false)} />
-        <Frame role="dialog" aria-modal="true" aria-label={t`Mentions`}>
-          <MentionsPanel onNavigate={() => setOpen(false)} />
-        </Frame>
+        {/* phones: a whole page, with friend requests as well */}
+        <Show
+          when={device.layout() === "phone"}
+          fallback={
+            <>
+              <Scrim onClick={() => setOpen(false)} />
+              <Frame role="dialog" aria-modal="true" aria-label={t`Mentions`}>
+                <MentionsPanel onNavigate={() => setOpen(false)} />
+              </Frame>
+            </>
+          }
+        >
+          <NotificationsPhone onClose={() => setOpen(false)} />
+        </Show>
       </Portal>
     </Show>
   );
@@ -176,6 +190,7 @@ const Scrim = styled("div", {
   base: {
     position: "fixed",
     inset: 0,
+    bottom: "var(--z-screen-bottom, 0px)",
     zIndex: 998,
     background: "rgb(6 8 12 / 0.35)",
     _phone: { background: "var(--z-scrim, rgb(6 8 12 / 0.6))" },
@@ -193,7 +208,7 @@ const Frame = styled("div", {
     translate: "-50% -50%",
     _phone: {
       top: "auto",
-      bottom: 0,
+      bottom: "var(--z-screen-bottom, 0px)",
       left: 0,
       right: 0,
       translate: "none",

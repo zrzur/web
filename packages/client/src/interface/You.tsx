@@ -184,7 +184,9 @@ function Body(props: { user: User }) {
               }
             >
               <Icon name="chat-circle" size={18} />
-              <Trans>Edit status</Trans>
+              <ActionLabel>
+                <Trans>Edit status</Trans>
+              </ActionLabel>
             </Action>
             <Action type="button" onClick={() => settings("profile")}>
               <Icon name="pencil-simple" size={18} />
@@ -212,14 +214,14 @@ function Body(props: { user: User }) {
         </Presences>
       </Section>
 
-      <Show when={query.data?.content}>
-        <Panel>
+      <Panel data-about>
+        <Show when={query.data?.content}>
           <Profile.Bio content={query.data?.content} />
-          <Profile.Joined user={props.user} />
-        </Panel>
-      </Show>
+        </Show>
+        <Profile.Joined user={props.user} />
+      </Panel>
 
-      <Panel>
+      <Panel data-links>
         <For each={links}>
           {(link) => (
             <Row type="button" onClick={link.onPress}>
@@ -316,6 +318,25 @@ const Actions = styled("div", {
     display: "grid",
     gridTemplateColumns: "1fr 1fr",
     gap: "8px",
+    // phones: the main action takes the row, status is a square beside it
+    _phone: {
+      gridTemplateColumns: "1fr 48px",
+      "& > [data-secondary]": { order: 2, paddingInline: 0 },
+    },
+  },
+});
+
+/** Read out, not shown, where the button is a square icon (phones) */
+const ActionLabel = styled("span", {
+  base: {
+    _phone: {
+      position: "absolute",
+      width: "1px",
+      height: "1px",
+      overflow: "hidden",
+      clipPath: "inset(50%)",
+      whiteSpace: "nowrap",
+    },
   },
 });
 
@@ -372,6 +393,14 @@ const Presences = styled("div", {
     // every choice stays in view: a narrow screen gets a second row, not a
     // row that is cut off at the edge
     flexWrap: "wrap",
+    // phones: one row; the four fill it, and in a language with long names
+    // (German) the row swipes sideways and no name is cut
+    _phone: {
+      flexWrap: "nowrap",
+      gap: "6px",
+      overflowX: "auto",
+      scrollbarWidth: "none",
+    },
   },
 });
 
@@ -394,7 +423,14 @@ const PresenceChip = styled("button", {
     cursor: "pointer",
     transition: "background-color 120ms ease, border-color 120ms ease",
     _motionReduce: { transition: "none" },
-    _phone: { minHeight: "44px" },
+    _phone: {
+      minHeight: "44px",
+      flex: "1 0 auto",
+      justifyContent: "center",
+      gap: "6px",
+      paddingInline: "10px",
+      fontSize: "13px",
+    },
     "&:hover": {
       color: "var(--z-fg-primary)",
       background: "var(--z-nav-hover)",
@@ -424,6 +460,14 @@ const Panel = styled("div", {
     background: "var(--z-card-bg, var(--z-bg-raised))",
     boxShadow: "var(--z-card-lift)",
     "&:has(> button)": { gap: "2px" },
+    // phones: the links are a row of tiles, icon over name
+    _phone: {
+      "&[data-links]": {
+        flexDirection: "row",
+        justifyContent: "space-around",
+        padding: "10px 6px",
+      },
+    },
   },
 });
 
@@ -446,6 +490,15 @@ const Row = styled("button", {
     _hover: { background: "var(--z-nav-hover)" },
     _active: { background: "var(--z-nav-selected)" },
     _focusVisible: { outline: "2px solid var(--z-focus)" },
+    _phone: {
+      flex: "1 1 0",
+      minWidth: 0,
+      flexDirection: "column",
+      gap: "2px",
+      minHeight: "56px",
+      padding: "4px 2px",
+      textAlign: "center",
+    },
   },
 });
 
@@ -457,6 +510,7 @@ const RowIcon = styled("span", {
     display: "grid",
     placeItems: "center",
     "--z-icon-color": "var(--z-icon-neutral)",
+    _phone: { width: "28px", height: "28px" },
   },
 });
 
@@ -469,6 +523,20 @@ const RowText = styled("span", {
     gap: "2px",
     "& strong": { fontSize: "15px", fontWeight: 600 },
     "& small": { fontSize: "13px", color: "var(--z-fg-muted)" },
+    // phones: the name under the icon; the hint line is for wider screens
+    _phone: {
+      flex: "none",
+      maxWidth: "100%",
+      "& strong": {
+        fontSize: "12px",
+        fontWeight: 500,
+        overflow: "hidden",
+        textOverflow: "ellipsis",
+        whiteSpace: "nowrap",
+        color: "var(--z-fg-secondary, var(--z-fg-primary))",
+      },
+      "& small": { display: "none" },
+    },
   },
 });
 
@@ -477,5 +545,6 @@ const Chevron = styled("span", {
     flexShrink: 0,
     "--z-icon-color": "var(--z-icon-muted)",
     // RTL: the chevron icon mirrors itself (see styles.css)
+    _phone: { display: "none" },
   },
 });

@@ -93,6 +93,11 @@ type Props = DialogProps & {
   description?: JSX.Element;
   /** Compact creation form layout, using the current Zrzur theme. */
   appearance?: "creation";
+  /**
+   * Phones: a page that fills the screen (centred title, no grab mark)
+   * instead of a sheet. For a flow with several steps or a long list.
+   */
+  phonePage?: boolean;
   children: JSX.Element;
   actions?: DialogAction[];
   isDisabled?: boolean;
@@ -355,6 +360,7 @@ export function Dialog(props: Props) {
               onTouchMove={onDragMove}
               onTouchEnd={onDragEnd}
               data-creation={props.appearance === "creation"}
+              data-phone-page={props.phonePage ? "true" : undefined}
               size={props.size ?? "md"}
               data-size={props.size ?? "md"}
               bare={props.bare}
@@ -487,10 +493,10 @@ const Scrim = styled("div", {
     top: 0,
     left: 0,
     right: 0,
-    bottom: 0,
+    bottom: "var(--z-screen-bottom, 0px)",
     position: "fixed",
     zIndex: "998",
-    maxHeight: "100%",
+    maxHeight: "calc(100% + var(--viewport-deficit, 0px))",
     paddingBottom: "env(keyboard-inset-height)",
 
     animationName: "scrimFadeIn",
@@ -644,6 +650,31 @@ const Container = styled("div", {
       borderBottom: "none",
       // a body that lays itself out to the sheet's edges
       "&:has([data-sheet-edge])": { padding: "0 !important" },
+      // a page: the whole screen under the status bar, square corners, the
+      // title in the middle; the body grows so its last block can sit on
+      // the bottom edge
+      "&[data-phone-page='true']": {
+        height:
+          "calc(100dvh - var(--z-safe-top) - max(var(--keyboard-inset, 0px), env(keyboard-inset-height, 0px))) !important",
+        maxHeight:
+          "calc(100dvh - var(--z-safe-top) - max(var(--keyboard-inset, 0px), env(keyboard-inset-height, 0px))) !important",
+        paddingTop: "12px !important",
+        borderRadius: "0 !important",
+        "& > [data-sheet-drag][aria-hidden='true']": { display: "none" },
+        "& [data-dialog-header]": {
+          flexDirection: "column",
+          alignItems: "center",
+          textAlign: "center",
+          paddingBlock: "36px 8px",
+        },
+        "& [data-dialog-header] h2": { fontSize: "22px", lineHeight: 1.3 },
+        "& > [data-dialog-body]": {
+          flex: "1 1 auto",
+          display: "flex",
+          flexDirection: "column",
+        },
+        "& > [data-dialog-body] > *": { flex: "1 1 auto" },
+      },
     },
   },
   variants: {

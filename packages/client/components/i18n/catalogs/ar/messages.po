@@ -128,6 +128,8 @@ msgstr "{0, plural, zero {لا تثبيتات بعد.} one {تثبيت واحد.
 #: components/ui/components/features/messaging/elements/Invite.tsx
 #: src/interface/lobby/Lobby.tsx
 #: src/interface/navigation/channels/HomeSidebar.tsx
+#: src/interface/navigation/channels/HomeSidebarPhone.tsx
+#: src/interface/navigation/channels/ServerPhoneTools.tsx
 msgid "{0, plural, one {# member} other {# members}}"
 msgstr "{0, plural, zero {لا يوجد أعضاء} one {عضو واحد} two {عضوان} few {# أعضاء} many {# عضوًا} other {# عضو}}"
 
@@ -1078,6 +1080,23 @@ msgstr "<0>{0}</0> يكتب…"
 msgid "<0>{0}</0> loses access to your account at once."
 msgstr "سيفقد <0>{0}</0> الوصول إلى حسابك فورًا."
 
+#. placeholder {0}: item.username
+#. placeholder {1}: place(item).join(" · ")
+#: src/interface/navigation/NotificationsPhone.tsx
+msgid "<0>{0}</0> mentioned you in <1>{1}</1>"
+msgstr "<0>{0}</0> أشار إليك في <1>{1}</1>"
+
+#. placeholder {0}: item.username
+#. placeholder {1}: (part, index) => ( <> {index() > 0 ? " · " : ""} <bdi>{part}</bdi> </> )
+#: src/interface/navigation/NotificationsPhone.tsx
+#~ msgid "<0>{0}</0> mentioned you in <1><2>{1}</2></1>"
+#~ msgstr ""
+
+#. placeholder {0}: user.displayName
+#: src/interface/navigation/NotificationsPhone.tsx
+msgid "<0>{0}</0> sent you a friend request."
+msgstr "<0>{0}</0> أرسل إليك طلب صداقة."
+
 #. placeholder {0}: props.names[other()]()
 #: components/app/interface/settings/user/Keybinds.tsx
 msgid "<0>{keys}</0> is already used for “{0}”. Swap them?"
@@ -1663,6 +1682,7 @@ msgstr "يلوّن لون التمييز الإجراءات والتحديد. و
 
 #: components/ui/components/features/voice/ringing/CallRinging.tsx
 #: src/interface/Friends.tsx
+#: src/interface/navigation/NotificationsPhone.tsx
 msgid "Accept"
 msgstr "قبول"
 
@@ -1964,6 +1984,7 @@ msgstr "إضافة ملف"
 #: components/app/menus/UserContextMenu.tsx
 #: components/ui/components/features/profiles/ProfileActions.tsx
 #: src/interface/Friends.tsx
+#: src/interface/navigation/channels/HomeSidebarPhone.tsx
 msgid "Add friend"
 msgstr "إضافة صديق"
 
@@ -2250,6 +2271,7 @@ msgstr "الجزائر"
 #: src/interface/designs/Looks.tsx
 #: src/interface/Discover.tsx
 #: src/interface/Friends.tsx
+#: src/interface/navigation/NotificationsPhone.tsx
 msgid "All"
 msgstr "الكل"
 
@@ -3946,6 +3968,7 @@ msgstr "أنشط القنوات"
 #: components/ui/components/features/profiles/ProfileStatus.tsx
 #: src/interface/channels/text/MemberSidebar.tsx
 #: src/interface/navigation/channels/HomeSidebar.tsx
+#: src/interface/navigation/channels/HomeSidebarPhone.tsx
 msgid "Busy"
 msgstr "مشغول"
 
@@ -5140,6 +5163,7 @@ msgstr "مقاطع"
 #: components/ui/components/design/Dialog.tsx
 #: components/ui/components/features/profiles/ProfileActions.tsx
 #: components/ui/components/features/voice/soundboard/SoundsUnavailable.tsx
+#: src/interface/navigation/NotificationsPhone.tsx
 #: src/interface/OAuth.tsx
 msgid "Close"
 msgstr "إغلاق"
@@ -5693,6 +5717,7 @@ msgid "Contribute a language"
 msgstr "ساهم بلغة"
 
 #: src/interface/navigation/channels/HomeSidebar.tsx
+#: src/interface/navigation/channels/HomeSidebarPhone.tsx
 msgid "Conversations"
 msgstr "المحادثات"
 
@@ -6025,6 +6050,7 @@ msgstr "إنشاء فئة جديدة"
 
 #: components/modal/modals/CreateGroup.tsx
 #: src/interface/navigation/channels/HomeSidebar.tsx
+#: src/interface/navigation/channels/HomeSidebarPhone.tsx
 msgid "Create a new group"
 msgstr "إنشاء مجموعة جديدة"
 
@@ -6080,6 +6106,7 @@ msgstr "إنشاء منشورات في المنتديات"
 #: components/app/interface/settings/server/invites/ListServerInvites.tsx
 #: components/app/menus/ChannelContextMenu.tsx
 #: components/app/menus/ServerContextMenu.tsx
+#: src/interface/navigation/channels/ServerPhoneTools.tsx
 #: src/interface/navigation/channels/ServerSidebar.tsx
 msgid "Create invite"
 msgstr "إنشاء دعوة"
@@ -6573,6 +6600,7 @@ msgstr "تم البتّ فيها"
 #: components/app/interface/settings/user/account/ChangeRequests.tsx
 #: components/auth/src/flows/FlowConfirmChange.tsx
 #: components/ui/components/features/voice/ringing/CallRinging.tsx
+#: src/interface/navigation/NotificationsPhone.tsx
 msgid "Decline"
 msgstr "رفض"
 
@@ -7150,6 +7178,7 @@ msgstr "لم يُفتح؟ تابع في المتصفح."
 
 #: components/modal/modals/ForwardMessage.tsx
 #: src/interface/navigation/MentionsPanel.tsx
+#: src/interface/navigation/NotificationsPhone.tsx
 msgid "Direct message"
 msgstr "رسالة خاصة"
 
@@ -7580,6 +7609,10 @@ msgstr "لكل مستوى عدد ثابت من الأماكن حتى يُحتر�
 #: components/app/interface/settings/user/subscriptions/Subscriptions.tsx
 msgid "Each Wing counts towards a server's level. Move them any time; they leave a server with you."
 msgstr "كل جناح يُحسب في مستوى السيرفر. انقله متى شئت، وهو يخرج معك إذا غادرت السيرفر."
+
+#: src/interface/navigation/NotificationsPhone.tsx
+msgid "Earlier"
+msgstr "قبل ذلك"
 
 #: components/ui/components/features/profiles/badges/useBadgeText.ts
 msgid "Early Adopter"
@@ -8793,6 +8826,7 @@ msgstr "وميض أو ضرر: قد يسبب نوبات صرع"
 #: src/interface/Friends.tsx
 #: src/interface/navigation/channels/AccountBar.tsx
 #: src/interface/navigation/channels/HomeSidebar.tsx
+#: src/interface/navigation/channels/HomeSidebarPhone.tsx
 #: src/interface/navigation/servers/UserMenu.tsx
 msgid "Focus"
 msgstr "تركيز"
@@ -8977,6 +9011,7 @@ msgid "Fresh mint"
 msgstr "نعناع منعش"
 
 #: src/interface/navigation/channels/HomeSidebar.tsx
+#: src/interface/navigation/NotificationsPhone.tsx
 msgid "Friend requests"
 msgstr "طلبات الصداقة"
 
@@ -8991,6 +9026,7 @@ msgstr "تنتظر هنا طلبات الصداقة التي ترسلها أو �
 #: components/ui/components/features/profiles/ProfileMutuals.tsx
 #: src/interface/Friends.tsx
 #: src/interface/navigation/channels/HomeSidebar.tsx
+#: src/interface/navigation/NotificationsPhone.tsx
 #: src/interface/You.tsx
 msgid "Friends"
 msgstr "الأصدقاء"
@@ -9337,6 +9373,10 @@ msgstr "احصل على زرزور لنظام أندرويد وابقَ على �
 #: components/ui/components/features/profiles/plateNames.ts
 msgid "Ghana"
 msgstr "غانا"
+
+#: components/ui/components/features/messaging/composition/picker/CompositionMediaPicker.tsx
+msgid "GIF"
+msgstr "GIF"
 
 #: components/app/interface/settings/user/Advanced.tsx
 #: components/ui/components/features/messaging/composition/picker/CompositionMediaPicker.tsx
@@ -10203,6 +10243,7 @@ msgstr "الهوية"
 #: src/interface/Friends.tsx
 #: src/interface/navigation/channels/AccountBar.tsx
 #: src/interface/navigation/channels/HomeSidebar.tsx
+#: src/interface/navigation/channels/HomeSidebarPhone.tsx
 #: src/interface/navigation/servers/UserMenu.tsx
 #: src/interface/You.tsx
 msgid "Idle"
@@ -12713,6 +12754,7 @@ msgstr "الإشارة إلى أدوار محددة"
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 #: src/interface/navigation/channels/AccountBar.tsx
 #: src/interface/navigation/MentionsPanel.tsx
+#: src/interface/navigation/NotificationsPhone.tsx
 #: src/interface/navigation/PhoneTabs.tsx
 msgid "Mentions"
 msgstr "الإشارات"
@@ -12723,6 +12765,7 @@ msgid "Mentions"
 msgstr "يذكر"
 
 #: src/interface/navigation/MentionsPanel.tsx
+#: src/interface/navigation/NotificationsPhone.tsx
 msgid "Mentions couldn't load. Try again soon."
 msgstr "تعذّر تحميل الإشارات. حاول مرة أخرى بعد قليل."
 
@@ -12839,6 +12882,7 @@ msgstr "أُرسلت هذه الرسالة من منصة أخرى"
 #: components/app/interface/settings/user/Keybinds.tsx
 #: components/modal/modals/permissionTitles.ts
 #: src/interface/developers/docs/DocsPortal.tsx
+#: src/interface/navigation/channels/HomeSidebarPhone.tsx
 #: src/interface/navigation/PhoneTabs.tsx
 msgid "Messages"
 msgstr "الرسائل"
@@ -13981,6 +14025,10 @@ msgstr "لا توجد زينة مجتمع بعد. ستظهر هنا تصاميم
 msgid "No content."
 msgstr "لا محتوى."
 
+#: src/interface/navigation/channels/HomeSidebarPhone.tsx
+msgid "No conversation matches your search."
+msgstr "لا توجد محادثة تطابق بحثك."
+
 #: src/interface/Home.tsx
 #~ msgid "No conversations yet"
 #~ msgstr ""
@@ -14723,6 +14771,10 @@ msgstr "لم تختر شيئًا بعد. اختر ما تريد تجربته."
 #~ msgid "Nothing quite right? Mix your own."
 #~ msgstr "لم تجد ما يناسبك؟ اصنع إطلالتك."
 
+#: src/interface/navigation/NotificationsPhone.tsx
+msgid "Nothing waits for you. New mentions and friend requests show here."
+msgstr "لا شيء بانتظارك. تظهر هنا الإشارات الجديدة وطلبات الصداقة."
+
 #: src/interface/ServiceReturn.tsx
 msgid "Nothing was linked"
 msgstr "لم يُربط أي حساب"
@@ -14747,6 +14799,7 @@ msgstr "لا شيء بعد. ستُسأل قبل نشر هذه النسخة."
 #: components/app/interface/settings/UserSettings.tsx
 #: components/app/menus/ServerContextMenu.tsx
 #: components/app/menus/shared/NotificationContextMenu.tsx
+#: src/interface/navigation/NotificationsPhone.tsx
 msgid "Notifications"
 msgstr "الإشعارات"
 
@@ -14875,6 +14928,7 @@ msgstr "سيرفر زرزور الرسمي"
 #: src/interface/Friends.tsx
 #: src/interface/navigation/channels/AccountBar.tsx
 #: src/interface/navigation/channels/HomeSidebar.tsx
+#: src/interface/navigation/channels/HomeSidebarPhone.tsx
 msgid "Offline"
 msgstr "غير متصل"
 
@@ -15029,6 +15083,7 @@ msgstr "صيانة جارية"
 #: src/interface/Friends.tsx
 #: src/interface/navigation/channels/AccountBar.tsx
 #: src/interface/navigation/channels/HomeSidebar.tsx
+#: src/interface/navigation/channels/HomeSidebarPhone.tsx
 #: src/interface/navigation/servers/UserMenu.tsx
 #: src/interface/You.tsx
 msgid "Online"
@@ -15039,6 +15094,7 @@ msgid "ONLINE — 3"
 msgstr "متصل — 3"
 
 #: components/app/interface/discover/ServerPage.tsx
+#: src/interface/navigation/channels/HomeSidebarPhone.tsx
 msgid "Online now"
 msgstr "متصلون الآن"
 
@@ -18785,6 +18841,7 @@ msgstr "تم الحفظ"
 #: src/interface/channels/ChannelHeader.tsx
 #: src/interface/navigation/channels/HomeSidebar.tsx
 #: src/interface/navigation/MentionsPanel.tsx
+#: src/interface/navigation/NotificationsPhone.tsx
 #: src/interface/You.tsx
 msgid "Saved notes"
 msgstr "الملاحظات المحفوظة"
@@ -19013,6 +19070,14 @@ msgstr "البحث بالاسم أو المعرّف"
 #: components/app/interface/settings/server/bans/ListBans.tsx
 msgid "Search by name or reason"
 msgstr "ابحث بالاسم أو السبب"
+
+#: src/interface/navigation/channels/ServerPhoneTools.tsx
+msgid "Search channels"
+msgstr "ابحث في القنوات"
+
+#: src/interface/navigation/channels/HomeSidebarPhone.tsx
+msgid "Search conversations"
+msgstr "ابحث في المحادثات"
 
 #: components/modal/modals/ForwardMessage.tsx
 msgid "Search conversations and channels"
@@ -19348,6 +19413,7 @@ msgstr "أرسلها مباشرة إلى صديق، أو شارك الرابط."
 
 #: components/app/menus/VoiceParticipantContextMenu.tsx
 #: src/interface/channels/text/Composition.tsx
+#: src/interface/navigation/NotificationsPhone.tsx
 msgid "Send message"
 msgstr "إرسال رسالة"
 
@@ -19444,6 +19510,7 @@ msgid "Sent {0} attachments"
 msgstr "أرسل {0} مرفقات"
 
 #: components/ui/components/features/messaging/elements/MessageReply.tsx
+#: src/interface/navigation/channels/HomeSidebarPhone.tsx
 msgid "Sent an attachment"
 msgstr "أرسل مرفقًا"
 
@@ -23309,6 +23376,7 @@ msgstr "للرد على إحداها افتح تذكرة."
 
 #: components/modal/modals/CustomStatus.tsx
 #: src/interface/channels/text/SearchBox.tsx
+#: src/interface/navigation/NotificationsPhone.tsx
 msgid "Today"
 msgstr "اليوم"
 
@@ -23931,9 +23999,10 @@ msgstr "إلغاء تثبيت الرسالة"
 msgid "unpinned a message by {0} in {1}"
 msgstr "ألغى تثبيت رسالة لـ {0} في {1}"
 
-#: src/interface/Home.tsx
-#~ msgid "Unread"
-#~ msgstr ""
+#: src/interface/navigation/channels/HomeSidebarPhone.tsx
+#: src/interface/navigation/NotificationsPhone.tsx
+msgid "Unread"
+msgstr "غير مقروء"
 
 #: components/app/interface/settings/user/profile/UserProfileEditor.tsx
 #: components/ui/components/design/SettingsForm.tsx
@@ -25893,6 +25962,8 @@ msgid "Yes, uninstall"
 msgstr "نعم، ألغِ التثبيت"
 
 #: src/interface/channels/text/SearchBox.tsx
+#: src/interface/navigation/channels/HomeSidebarPhone.tsx
+#: src/interface/navigation/NotificationsPhone.tsx
 msgid "Yesterday"
 msgstr "أمس"
 
@@ -26336,6 +26407,10 @@ msgstr "لن تتمكن من الانضمام مجدداً ما لم تتم دع
 #~ msgid "You, right now"
 #~ msgstr "أنت الآن"
 
+#: src/interface/navigation/channels/HomeSidebarPhone.tsx
+msgid "You: {text}"
+msgstr "أنت: {text}"
+
 #. placeholder {0}: number(tier.projected_rank)
 #: components/modal/modals/PromoteServer.tsx
 msgid "You'd be #{0} on Discover"
@@ -26601,6 +26676,7 @@ msgstr "مجموعتك"
 #~ msgstr "تصاميمك في زينة المجتمع"
 
 #: src/interface/navigation/channels/HomeSidebar.tsx
+#: src/interface/navigation/channels/HomeSidebarPhone.tsx
 msgid "Your conversations will appear here. Start a group or find a friend to begin."
 msgstr "ستظهر محادثاتك هنا. ابدأ مجموعة أو ابحث عن صديق للبدء."
 
@@ -26821,6 +26897,10 @@ msgstr "سيرفرك هنا"
 #: components/app/interface/settings/shared/Discoverable.tsx
 msgid "Your server is under review"
 msgstr "سيرفرك قيد المراجعة"
+
+#: components/modal/lib/CreateServerFlow.tsx
+msgid "Your server is where you and your friends hang out. Start from scratch or pick a ready-made one."
+msgstr "سيرفرك هو مكانك أنت وأصدقائك. ابدأ من الصفر أو اختر قالبًا جاهزًا."
 
 #: components/app/interface/settings/shared/Discoverable.tsx
 msgid "Your server isn't on Discover"

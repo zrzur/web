@@ -291,7 +291,12 @@ function Floating(props: FloatingElement & { mouseX: number; mouseY: number }) {
 
   const sheetView = () => (
     <Motion
-      style={{ position: "fixed", inset: 0, "z-index": "999" }}
+      style={{
+        position: "fixed",
+        inset: 0,
+        bottom: "var(--z-screen-bottom, 0px)",
+        "z-index": "999",
+      }}
       initial={sheetSeconds() ? { opacity: 0 } : false}
       animate={{ opacity: 1 }}
       transition={{
@@ -302,7 +307,11 @@ function Floating(props: FloatingElement & { mouseX: number; mouseY: number }) {
       <SheetScrim />
       {/* the moving box is the fixed one, so the panel can sit on the edge */}
       <Motion
-        style={{ position: "fixed", "inset-inline": 0, bottom: 0 }}
+        style={{
+          position: "fixed",
+          "inset-inline": 0,
+          bottom: "var(--z-screen-bottom, 0px)",
+        }}
         initial={sheetSeconds() ? { y: 60 } : false}
         animate={{ y: 0 }}
         transition={{ duration: sheetSeconds(), easing: [0.2, 0.8, 0.2, 1] }}
@@ -347,6 +356,7 @@ const SheetScrim = styled("div", {
   base: {
     position: "fixed",
     inset: 0,
+    bottom: "var(--z-screen-bottom, 0px)",
     background: "var(--z-scrim, rgba(6, 8, 12, 0.6))",
   },
 });

@@ -8,6 +8,7 @@ import {
 } from "solid-js";
 
 import Breakpoint from "./Breakpoint";
+import { trackShortViewport } from "./shortViewport";
 
 export type Layout = "desktop" | "tablet" | "phone";
 
@@ -89,7 +90,13 @@ export class Device {
     if (this.isIOSTouch && window.visualViewport) {
       this.trackKeyboard(window.visualViewport);
     }
+
+    if (this.isIOSTouch && this.isPWA) {
+      this.untrackShortViewport = trackShortViewport();
+    }
   }
+
+  private untrackShortViewport?: () => void;
 
   /**
    * Track visible viewport on iOS to adjust layout when on-screen keyboard opens
@@ -146,6 +153,7 @@ export class Device {
   destroy = () => {
     this.pMedia.onchange = this.tMedia.onchange = null;
     this.untrackKeyboard?.();
+    this.untrackShortViewport?.();
   };
 
   get isWakeLocked(): boolean {

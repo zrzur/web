@@ -20,6 +20,9 @@
 * One wording: a channel "follows" its category (was "synced with").
 * The separate "Rename category" and "Edit permissions" dialogs are gone; both live in the category's settings.
 * Fixed: `scripts/zrzur-translations.mjs` stopped with `ENOBUFS` once a catalog passed 1 MB.
+### Installed app on iPhone: the screen is used to its bottom edge (2026-11-16)
+
+* iOS 26 lays an app installed from the Home Screen out in a box that stops short of the bottom by the height of the status bar. The tab bar, sheets, dialogs and notices ended that much too high with a dead band below, and the message box sat above the keyboard with a gap. The app now measures the missing height and reaches the real bottom edge; the correction is 0 wherever the layout is already right.
 
 ### Creator Studio, rebuilt (2026-11-15)
 

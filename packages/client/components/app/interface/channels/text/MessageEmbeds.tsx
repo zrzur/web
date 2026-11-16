@@ -67,6 +67,12 @@ const cornerAtStart = {
   marginInlineEnd: "-38px",
 } as const;
 
+const cornerAtStartPhone = {
+  order: -1,
+  marginInlineStart: 0,
+  marginInlineEnd: "-50px",
+} as const;
+
 const Frame = styled("div", {
   base: {
     // a row, so the X follows the card's own edge whatever the card's
@@ -94,11 +100,23 @@ const Frame = styled("div", {
     _rtl: { "&:has(> [dir=ltr]) [data-preview-corner]": cornerAtStart },
     _ltr: { "&:has(> [dir=rtl]) [data-preview-corner]": cornerAtStart },
     // phones have no hover: the X is always there
-    _phone: { "& [data-remove-previews]": { opacity: 1 } },
+    _phone: {
+      "& [data-remove-previews]": { opacity: 1 },
+      // the button is 44px there (tap target), so the pull-back grows too
+      _rtl: {
+        "&:has(> [dir=ltr]) [data-preview-corner]": cornerAtStartPhone,
+      },
+      _ltr: {
+        "&:has(> [dir=rtl]) [data-preview-corner]": cornerAtStartPhone,
+      },
+    },
   },
 });
 
-/** Pulled back over the card: 32px of button and 6px from the card's edge */
+/**
+ * Pulled back over the card: the button's width and 6px from the card's edge
+ * (32px button; 44px on phones, where every tap target is that size)
+ */
 const Corner = styled("div", {
   base: {
     position: "relative",
@@ -106,5 +124,6 @@ const Corner = styled("div", {
     flex: "none",
     marginBlockStart: "6px",
     marginInlineStart: "-38px",
+    _phone: { marginInlineStart: "-50px" },
   },
 });

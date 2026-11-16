@@ -35,6 +35,19 @@ const bar = css({
   cursor: "default !important",
   gap: "0 !important",
   overflow: "hidden",
+  // phones: a strip across the screen, right under the header, in the
+  // action colour (it is the one thing to act on when a channel opens)
+  _phone: {
+    marginTop: "calc(-1 * var(--gap-md))",
+    borderRadius: "0 !important",
+    border: "none !important",
+    boxShadow: "none !important",
+    fontWeight: 600,
+    color: "var(--z-on-accent, #FFFFFF) !important",
+    fill: "var(--z-on-accent, #FFFFFF) !important",
+    "--z-icon-color": "var(--z-on-accent, #FFFFFF)",
+    background: "var(--z-accent) !important",
+  },
 });
 
 const control = {
@@ -74,7 +87,10 @@ const close = css({
   minWidth: "36px",
   paddingInline: "10px",
   _hover: { background: "var(--z-float-hover)" },
-  _phone: { minWidth: "44px" },
+  _phone: {
+    minWidth: "44px",
+    _hover: { background: "transparent" },
+  },
 });
 
 /**

@@ -10,7 +10,6 @@ import { useNavigate } from "@solidjs/router";
 import { useLocation, useParams } from "@revolt/routing";
 import { useState } from "@revolt/state";
 import { Avatar } from "@revolt/ui";
-import { FlockDots } from "@revolt/ui/components/design/FlockDots";
 
 import { type IconName, Icon } from "@revolt/ui/icons/Icon";
 import { openMentions } from "./MentionsPanel";
@@ -19,8 +18,11 @@ import { openMentions } from "./MentionsPanel";
 const [lastServer, setLastServer] = createSignal<string>();
 
 /**
- * Phone navigation: four tabs along the bottom of the menu side.
- * Servers (rail + channels), Messages (direct messages), Discover and You.
+ * Phone navigation: a bar fixed to the bottom of the menu side with five
+ * tabs, each with its name under the icon: Servers (rail + channels),
+ * Messages, Discover, Mentions and You. The open tab's icon takes the action
+ * colour and its name is full strength; no shape is drawn behind the icon
+ * (the design the owner picked, 2026-11-16).
  * Hidden on wider screens, where the rail and account card do this job.
  */
 export function PhoneTabs() {
@@ -88,18 +90,15 @@ export function PhoneTabs() {
       data-current={active() === id}
       onClick={onPress}
     >
-      <Show when={active() === id}>
-        <FlockDots />
-      </Show>
       <TabIcon>
         <Icon name={icon} size={24} />
         <Show when={badge?.()}>
-          <Badge aria-label={t`${badge!()} unread`}>
+          <Badge data-tab-badge aria-label={t`${badge!()} unread`}>
             {badge!() > 99 ? "99+" : badge!()}
           </Badge>
         </Show>
       </TabIcon>
-      <span>{label}</span>
+      <TabName>{label}</TabName>
     </Tab>
   );
 
@@ -115,10 +114,12 @@ export function PhoneTabs() {
         <TabIcon>
           <Icon name="at" size={24} />
           <Show when={unreadMentions()}>
-            <Badge>{unreadMentions() > 99 ? "99+" : unreadMentions()}</Badge>
+            <Badge data-tab-badge>
+              {unreadMentions() > 99 ? "99+" : unreadMentions()}
+            </Badge>
           </Show>
         </TabIcon>
-        <span>{t`Mentions`}</span>
+        <TabName>{t`Mentions`}</TabName>
       </Tab>
       <Tab
         type="button"
@@ -129,9 +130,6 @@ export function PhoneTabs() {
           state.appDrawer()?.setShown(true);
         }}
       >
-        <Show when={active() === "you"}>
-          <FlockDots />
-        </Show>
         <TabIcon>
           <Avatar
             size={26}
@@ -139,7 +137,7 @@ export function PhoneTabs() {
             fallback={user()?.username}
           />
         </TabIcon>
-        <span>{t`You`}</span>
+        <TabName>{t`You`}</TabName>
       </Tab>
     </Bar>
   );
@@ -154,11 +152,12 @@ const Bar = styled("nav", {
       insetInline: 0,
       bottom: 0,
       display: "grid",
-      // equal columns, but never narrower than the label (German "Erwähnungen")
-      gridTemplateColumns: "repeat(5, auto)",
-      justifyContent: "space-around",
+      // five equal columns: a long name (German "Benachrichtigungen")
+      // shortens inside its own column and never pushes its neighbours
+      gridTemplateColumns: "repeat(5, minmax(0, 1fr))",
       // #root already stops above the home bar (styles.css), so no inset here
-      height: "62px",
+      height: "64px",
+      paddingInline: "4px",
       background: "var(--z-bg-frame)",
       borderTop: "1px solid var(--z-border-subtle)",
     },
@@ -172,15 +171,14 @@ const Tab = styled("button", {
     flexDirection: "column",
     alignItems: "center",
     justifyContent: "center",
-    gap: "2px",
-    minWidth: "56px",
-    paddingTop: "6px",
-    paddingInline: "4px",
+    gap: "3px",
+    minWidth: 0,
+    paddingInline: "2px",
     border: "none",
     background: "none",
     color: "var(--z-fg-muted)",
     font: "inherit",
-    fontSize: "12px",
+    fontSize: "11px",
     fontWeight: 500,
     cursor: "pointer",
     "--z-icon-color": "currentColor",
@@ -188,50 +186,52 @@ const Tab = styled("button", {
     transition: "color 120ms ease",
     _motionReduce: { transition: "none" },
 
-    // the flock lands on the open tab
-    "& > [data-flock-dots]": {
-      position: "absolute",
-      top: "2px",
-      insetInline: 0,
-      marginInline: "auto",
-      color: "var(--z-accent)",
-    },
-    "&:active > span:first-of-type": { scale: "0.92" },
-
-    "& > span": {
-      maxWidth: "100%",
-      overflow: "hidden",
-      textOverflow: "ellipsis",
-      whiteSpace: "nowrap",
-    },
+    "&:active > span:first-of-type": { scale: "0.94" },
     _active: { color: "var(--z-fg-primary)" },
     _focusVisible: {
       outline: "none",
       boxShadow: "inset 0 0 0 2px var(--z-focus)",
     },
-    // the open tab: full-strength words and icon, the dots say which
+    // the open tab: full-strength name and the icon in the action colour;
+    // no shape is drawn behind the icon (owner, 2026-11-16)
     "&[data-current='true']": {
       color: "var(--z-fg-primary)",
       fontWeight: 600,
-      "--z-icon-color": "var(--z-fg-primary)",
+      "& > span:first-of-type": {
+        "--z-icon-color": "var(--z-accent)",
+        color: "var(--z-accent)",
+      },
     },
   },
 });
 
+/** The tab's name; shortens inside its column */
+const TabName = styled("span", {
+  base: {
+    maxWidth: "100%",
+    overflow: "hidden",
+    textOverflow: "ellipsis",
+    whiteSpace: "nowrap",
+  },
+});
+
+/** The icon's tile: the unread count reaches past it, so it is never cut */
 const TabIcon = styled("span", {
   base: {
     position: "relative",
     display: "grid",
     placeItems: "center",
-    height: "28px",
+    width: "52px",
+    height: "30px",
+    borderRadius: "15px",
   },
 });
 
 const Badge = styled("span", {
   base: {
     position: "absolute",
-    top: "-3px",
-    insetInlineStart: "60%",
+    top: "-4px",
+    insetInlineStart: "58%",
     minWidth: "18px",
     height: "18px",
     paddingInline: "5px",
