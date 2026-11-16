@@ -904,14 +904,14 @@
     },
     {
       "path": "packages/client/components/app/interface/channels/text/interactions/store.test.ts",
-      "sha256": "7930e2897719f7ba3d58ca515b16b7715bb60560a9c0bc515efdc2a93848b121",
-      "bytes": 5503,
+      "sha256": "6c8331b8e228696657a0ec7b58f506fd8d63787b4381ecb6e4fd559739c06628",
+      "bytes": 6226,
       "category": "synthetic-test-source-or-fixture"
     },
     {
       "path": "packages/client/components/app/interface/channels/text/interactions/store.ts",
-      "sha256": "658707f51ac18041932f5c0a20cba5da3e34055891e4f7371980e9af36333776",
-      "bytes": 17333,
+      "sha256": "3db0d25bb1d7ce4b7ca5966cea7b2494adf1d86531d37a0b5a1dfc081d4f9383",
+      "bytes": 17685,
       "category": "product-source-or-build-manifest"
     },
     {
