@@ -27159,3 +27159,1467 @@ msgstr "Zrzur, direkt auf <0>deinem Desktop.</0>"
 #: components/app/interface/settings/user/appearance/AppearanceMenu.tsx
 #~ msgid "Zrzur's own look: very dark neutral panels with Zrzur Pink as the one accent."
 #~ msgstr "Zrzurs eigener Look: sehr dunkle, neutrale Flächen mit Zrzur-Pink als einziger Akzentfarbe."
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Ablaq Arch"
+msgstr "Ablaq-Bogen"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Ablaq Stone"
+msgstr "Ablaq-Stein"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Alpine Lake"
+msgstr "Bergsee"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Anchor"
+msgstr "Anker"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Antennae"
+msgstr "Fühler"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Arcade Night"
+msgstr "Arcade-Nacht"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Arcade Row"
+msgstr "Automatenreihe"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Arcane Runes"
+msgstr "Arkane Runen"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Arena Lights"
+msgstr "Flutlicht"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Arena Marks"
+msgstr "Arena-Marken"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Atom Orbits"
+msgstr "Atombahnen"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Back of the Net"
+msgstr "Im Netz"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Ball Band"
+msgstr "Ballband"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Ball Ring"
+msgstr "Ballring"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Balloon Sky"
+msgstr "Ballonhimmel"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Bamboo Leaves"
+msgstr "Bambusblätter"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Bamboo Mist"
+msgstr "Bambusnebel"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Bamboo Ring"
+msgstr "Bambusring"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Bat Night"
+msgstr "Fledermausnacht"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Beach Day"
+msgstr "Strandtag"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Bear Ears"
+msgstr "Bärenohren"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Black Cat Ears"
+msgstr "Schwarze Katzenohren"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Blade Ring"
+msgstr "Klingenring"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Blizzard"
+msgstr "Schneesturm"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Boo"
+msgstr "Buh"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Bookshelf"
+msgstr "Bücherregal"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Bronze Rank"
+msgstr "Rang Bronze"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Bubble Ring"
+msgstr "Blasenring"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Bunny Ears"
+msgstr "Hasenohren"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Burst Ring"
+msgstr "Feuerwerksring"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Button Mash"
+msgstr "Tastenhämmern"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Camera Shelf"
+msgstr "Kameraregal"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Camp Night"
+msgstr "Nacht im Camp"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Campfire"
+msgstr "Lagerfeuer"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Caravan"
+msgstr "Karawane"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Card Hand"
+msgstr "Kartenhand"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Cash Rain"
+msgstr "Geldregen"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Cassette"
+msgstr "Kassette"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Castle Moon"
+msgstr "Mondburg"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Cat Ears"
+msgstr "Katzenohren"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Chase Lights"
+msgstr "Blaulicht-Ring"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Checkered Ring"
+msgstr "Schachbrettring"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Chequered Crown"
+msgstr "Schachkrone"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Chess Board"
+msgstr "Schachbrett"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Citadel Night"
+msgstr "Zitadelle bei Nacht"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Citrus Splash"
+msgstr "Zitrusspritzer"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "City Frame"
+msgstr "Stadtrahmen"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Clockwork"
+msgstr "Uhrwerk"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Cloud Headphones"
+msgstr "Weiße Kopfhörer"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Cloud Ring"
+msgstr "Wolkenring"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Coast Cruise"
+msgstr "Küstenfahrt"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Coast Drive"
+msgstr "Küstenstraße"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Coast Frame"
+msgstr "Küstenrahmen"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Coffee Steam"
+msgstr "Kaffeedampf"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Cog Ring"
+msgstr "Zahnradring"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Coin Rush"
+msgstr "Münzregen"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Colour Bars"
+msgstr "Farbbalken"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Colour Ring"
+msgstr "Farbring"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Columns at Dusk"
+msgstr "Säulen im Abendlicht"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Compass"
+msgstr "Kompass"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Court Floor"
+msgstr "Hallenboden"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Crane Flight"
+msgstr "Kranichflug"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Crescent Seat"
+msgstr "Mondsichel"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Crossed Blades"
+msgstr "Gekreuzte Klingen"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Crosshair"
+msgstr "Fadenkreuz"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Daisy Chain"
+msgstr "Gänseblümchenkette"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Damascus Night"
+msgstr "Damaskus bei Nacht"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Damask Rose"
+msgstr "Damaszener Rose"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Deep Blue"
+msgstr "Tiefblau"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Deep Glow"
+msgstr "Tiefenleuchten"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Desert Night"
+msgstr "Wüstennacht"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Desk Setup"
+msgstr "Schreibtisch"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Diamond Plate"
+msgstr "Diamant-Schild"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Diamond Rank"
+msgstr "Rang Diamant"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Dice Ring"
+msgstr "Würfelring"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Dino Dash"
+msgstr "Dino-Sprint"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Dino Frame"
+msgstr "Dinorahmen"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Doubloons"
+msgstr "Dublonen"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Doughnut"
+msgstr "Donut"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Drift Night"
+msgstr "Drift-Nacht"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Dune Crescent"
+msgstr "Dünenmond"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Dungeon Hall"
+msgstr "Verlieshalle"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Dusk Flock"
+msgstr "Abendschwarm"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Edelweiss and Snow"
+msgstr "Edelweiß und Schnee"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Edelweiss Ring"
+msgstr "Edelweißkranz"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Egg Ring"
+msgstr "Eierring"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Far Orbit"
+msgstr "Ferner Orbit"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Festive Night"
+msgstr "Festnacht"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Film Strip"
+msgstr "Filmstreifen"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Fire Sparks"
+msgstr "Feuerfunken"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Flame Tongues"
+msgstr "Flammenzungen"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Flask"
+msgstr "Kolben"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Flock Sweep"
+msgstr "Schwarmzug"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Flower Crown"
+msgstr "Blumenkranz"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Flying Blades"
+msgstr "Fliegende Klingen"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Forest Friends"
+msgstr "Waldfreunde"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Fox Ears"
+msgstr "Fuchsohren"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Full HUD"
+msgstr "Volles HUD"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Gambit"
+msgstr "Gambit"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Game Table"
+msgstr "Spieltisch"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Gaming Headset"
+msgstr "Gaming-Headset"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Ghost Pals"
+msgstr "Geisterfreunde"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Gift Wrap"
+msgstr "Geschenkpapier"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Gifts"
+msgstr "Geschenke"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Ginger Cat Ears"
+msgstr "Rote Katzenohren"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Glass Light"
+msgstr "Glaslicht"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Glass Rose"
+msgstr "Glasrose"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Goal"
+msgstr "Tor"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Goal Bounce"
+msgstr "Torjubel"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Gold Plate"
+msgstr "Gold-Schild"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Gold Rank"
+msgstr "Rang Gold"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Grand Prix"
+msgstr "Großer Preis"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Halo"
+msgstr "Heiligenschein"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Haunted Hill"
+msgstr "Spukhügel"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Headset"
+msgstr "Headset"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Health and Shield"
+msgstr "Leben und Schild"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Health Bar"
+msgstr "Lebensbalken"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Heart Orbit"
+msgstr "Herzumlauf"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Heartbeat"
+msgstr "Herzschlag"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Hibiscus Ring"
+msgstr "Hibiskusring"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Hit Markers"
+msgstr "Treffer"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Ice Cream Parlour"
+msgstr "Eisdiele"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Jasmine Fall"
+msgstr "Jasminregen"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Jasmine Ring"
+msgstr "Jasminring"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Jellyfish"
+msgstr "Qualle"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Joystick Ring"
+msgstr "Joystick-Ring"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Jungle Dusk"
+msgstr "Dschungeldämmerung"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Jungle Leaves"
+msgstr "Dschungelblätter"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Key Rain"
+msgstr "Tastenregen"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Kick-off"
+msgstr "Anstoß"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Koi Pond"
+msgstr "Koi-Teich"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Lab Bench"
+msgstr "Labortisch"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Lagoon Haze"
+msgstr "Lagunendunst"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Lantern Glow"
+msgstr "Laternenschein"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Lantern Night"
+msgstr "Laternennacht"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Lantern Pair"
+msgstr "Laternenpaar"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Laser Run"
+msgstr "Laserflug"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Lavender Breeze"
+msgstr "Lavendelbrise"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Lavender Field"
+msgstr "Lavendelfeld"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Lavender Wreath"
+msgstr "Lavendelkranz"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Lens"
+msgstr "Objektiv"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Level Rise"
+msgstr "Aufstieg"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Level Up"
+msgstr "Level-up"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Lifebuoy"
+msgstr "Rettungsring"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Liftoff"
+msgstr "Start"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Light Trails"
+msgstr "Lichtspuren"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Living Light"
+msgstr "Lebendiges Licht"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Loose Pages"
+msgstr "Lose Seiten"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Loot Drop"
+msgstr "Beuteregen"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Loot Ring"
+msgstr "Beutering"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Lucky Roll"
+msgstr "Glückswurf"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Magma Flow"
+msgstr "Magmastrom"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Magma Ring"
+msgstr "Magmaring"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Majlis Evening"
+msgstr "Madschlis-Abend"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Marquee Bulbs"
+msgstr "Lauflichter"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Master Plate"
+msgstr "Meister-Schild"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Master Rank"
+msgstr "Rang Meister"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Melody"
+msgstr "Melodie"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Melting Ring"
+msgstr "Schmelzender Ring"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Midnight Headphones"
+msgstr "Mitternachts-Kopfhörer"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Molecules"
+msgstr "Moleküle"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Moon Phases"
+msgstr "Mondphasen"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Moonlit Roofs"
+msgstr "Dächer im Mondlicht"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Murmuration"
+msgstr "Schwarmflug"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Music Notes"
+msgstr "Noten"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Neon Flicker"
+msgstr "Flackerndes Neon"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Neon Sign"
+msgstr "Neonschild"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Night Road"
+msgstr "Nachtstraße"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Night Traffic"
+msgstr "Nachtverkehr"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Night Visit"
+msgstr "Nächtlicher Besuch"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Nuts and Bolts"
+msgstr "Muttern und Schrauben"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Old City Walls"
+msgstr "Alte Stadtmauern"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Old Television"
+msgstr "Alter Fernseher"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Olive Leaves"
+msgstr "Olivenblätter"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Olive Wreath"
+msgstr "Olivenkranz"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "On the Branch"
+msgstr "Auf dem Ast"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Open Book"
+msgstr "Offenes Buch"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Orange Slice"
+msgstr "Orangenscheibe"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Oud Night"
+msgstr "Oud-Nacht"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Pad Ring"
+msgstr "Gamepad-Ring"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Palm Sunset"
+msgstr "Palmen-Sonnenuntergang"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Pane Ring"
+msgstr "Glasring"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Paper Cranes"
+msgstr "Papierkraniche"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Paper Water"
+msgstr "Papierwasser"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Paw Hop"
+msgstr "Pfotenhüpfer"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Paw Ring"
+msgstr "Pfotenring"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Paw Trail"
+msgstr "Pfotenspur"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Pawn Circle"
+msgstr "Bauernkreis"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Peach Haze"
+msgstr "Pfirsichdunst"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Pet Parade"
+msgstr "Tierparade"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Photo Finish"
+msgstr "Zielfoto"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Picnic Ring"
+msgstr "Picknickring"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Pink Headphones"
+msgstr "Rosa Kopfhörer"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Pinwheel"
+msgstr "Windrad"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Pitch at Night"
+msgstr "Platz bei Nacht"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Pitch Ring"
+msgstr "Spielfeldring"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Pixel Diner"
+msgstr "Pixel-Diner"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Pixel Frame"
+msgstr "Pixelrahmen"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Pixel Meadow"
+msgstr "Pixelwiese"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Pixel Orbit"
+msgstr "Pixel-Orbit"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Pixel Reef"
+msgstr "Pixel-Riff"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Pixel Skyline"
+msgstr "Pixel-Skyline"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Pixel Valley"
+msgstr "Pixel-Tal"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Planet Rings"
+msgstr "Planetenringe"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Platinum Rank"
+msgstr "Rang Platin"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Pocket Watch"
+msgstr "Taschenuhr"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Pulse Ring"
+msgstr "Pulsring"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Pulse Wave"
+msgstr "Pulswelle"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Quest Frame"
+msgstr "Abenteuerrahmen"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Rabbit Ears"
+msgstr "Hasenohren"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Race Track"
+msgstr "Rennstrecke"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Racing Wheel"
+msgstr "Rennlenkrad"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Radar"
+msgstr "Radar"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Rain Cloud"
+msgstr "Regenwolke"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Rain Street"
+msgstr "Regenstraße"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Rainbow"
+msgstr "Regenbogen"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Rank Up"
+msgstr "Aufstieg"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Reef Frame"
+msgstr "Riffrahmen"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Reef Ring"
+msgstr "Riffring"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Reef Swim"
+msgstr "Riffschwimmen"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Rev Gauge"
+msgstr "Drehzahlmesser"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Rewind"
+msgstr "Rücklauf"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Ribbon and Bow"
+msgstr "Schleife"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Rim and Net"
+msgstr "Ring und Netz"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Ring of Books"
+msgstr "Bücherring"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Ring Road"
+msgstr "Ringstraße"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Rising Balloons"
+msgstr "Aufsteigende Ballons"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Rising Jellies"
+msgstr "Aufsteigende Quallen"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Robot Head"
+msgstr "Roboterkopf"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Robot Works"
+msgstr "Roboterwerk"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Rose Fall"
+msgstr "Rosenregen"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Rune Circle"
+msgstr "Runenkreis"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Sadu Ring"
+msgstr "Sadu-Ring"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Sadu Weave"
+msgstr "Sadu-Gewebe"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Sand Wind"
+msgstr "Sandwind"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Saucer Beam"
+msgstr "Untertasse"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Saucers"
+msgstr "Untertassen"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Scarf Weave"
+msgstr "Tuchmuster"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "School of Fish"
+msgstr "Fischschwarm"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Scoops"
+msgstr "Eiskugeln"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Ship's Wheel"
+msgstr "Steuerrad"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Silver Rank"
+msgstr "Rang Silber"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Silver Tiara"
+msgstr "Silberdiadem"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Sky Bursts"
+msgstr "Himmelsblüten"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Sleepy Moon"
+msgstr "Schläfriger Mond"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Slipstream"
+msgstr "Windschatten"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Smoke Ring"
+msgstr "Rauchring"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Snack Frame"
+msgstr "Snackrahmen"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Snack Rain"
+msgstr "Snackregen"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Snacks"
+msgstr "Leckerbissen"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Snapshots"
+msgstr "Sofortbilder"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Snow Cap"
+msgstr "Schneehaube"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Snow Cat Ears"
+msgstr "Weiße Katzenohren"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Snowy Peaks"
+msgstr "Schneegipfel"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Soft Halo"
+msgstr "Weicher Schein"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Soft Orbs"
+msgstr "Lichtkugeln"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Sound Bars"
+msgstr "Klangbalken"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Sound Ring"
+msgstr "Klangring"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Space Helmet"
+msgstr "Raumhelm"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Sparkler Ring"
+msgstr "Wunderkerzenring"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Speedometer"
+msgstr "Tacho"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Spring Day"
+msgstr "Frühlingstag"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Spring Meadow"
+msgstr "Frühlingswiese"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Star Fighter"
+msgstr "Sternjäger"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Start Grid"
+msgstr "Startaufstellung"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Stitch Ring"
+msgstr "Stickring"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "String Lights"
+msgstr "Lichterkette"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Sugar Rush"
+msgstr "Zuckerregen"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Sunflower"
+msgstr "Sonnenblume"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Sunset Boulevard"
+msgstr "Sonnenuntergangsallee"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Supporters' Scarf"
+msgstr "Fanschal"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Swish"
+msgstr "Swish"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Tail Lights"
+msgstr "Rücklichter"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Tall Windows"
+msgstr "Hohe Fenster"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Tape Reel"
+msgstr "Bandspule"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Three Scoops"
+msgstr "Drei Kugeln"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Tilted Crown"
+msgstr "Schiefe Krone"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Treasure Map"
+msgstr "Schatzkarte"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Tropical Leaves"
+msgstr "Tropenblätter"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Tulip Crown"
+msgstr "Tulpenkrone"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Two Arcs"
+msgstr "Zwei Bögen"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Typing"
+msgstr "Tippt gerade"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Tyre Ring"
+msgstr "Reifenring"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Tyre Smoke"
+msgstr "Reifenrauch"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Umbrellas"
+msgstr "Regenschirme"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Vinyl Record"
+msgstr "Schallplatte"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Warp Ring"
+msgstr "Warpring"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Waterwheel"
+msgstr "Wasserrad"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Wheels of Time"
+msgstr "Räder der Zeit"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Winner's Cup"
+msgstr "Siegerpokal"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Winter Pines"
+msgstr "Wintertannen"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "XP Ring"
+msgstr "XP-Ring"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Zrzur Crest"
+msgstr "Zrzur-Wappen"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Boombox Night"
+msgstr "Boombox-Nacht"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Campfire Night"
+msgstr "Lagerfeuernacht"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Equaliser Ring"
+msgstr "Equalizer-Ring"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Firefly Dance"
+msgstr "Glühwürmchentanz"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Firefly Ring"
+msgstr "Glühwürmchenring"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Game Shelf"
+msgstr "Spieleregal"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Handheld Frame"
+msgstr "Handheld-Rahmen"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Icicle Ring"
+msgstr "Eiszapfenring"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Mixtape Frame"
+msgstr "Mixtape-Rahmen"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Pixel Notes"
+msgstr "Pixel-Noten"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Pixel Snowfall"
+msgstr "Pixel-Schneefall"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Power Up"
+msgstr "Power-up"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Press Start"
+msgstr "Start drücken"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Snow Frame"
+msgstr "Schneerahmen"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Snowy Village"
+msgstr "Schneedorf"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Woods Frame"
+msgstr "Waldrahmen"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "After the Rain"
+msgstr "Nach dem Regen"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Bloom Frame"
+msgstr "Blütenrahmen"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Candy Shop"
+msgstr "Süßwarenladen"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Cat Frame"
+msgstr "Katzenrahmen"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Cat Parade"
+msgstr "Katzenparade"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Ears and Whiskers"
+msgstr "Ohren und Schnurrhaare"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Heart Chain"
+msgstr "Herzkette"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Love Frame"
+msgstr "Liebesrahmen"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Love Letter"
+msgstr "Liebesbrief"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Pixel Garden"
+msgstr "Pixel-Garten"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Pixel Hearts"
+msgstr "Pixel-Herzen"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Pixel Petals"
+msgstr "Pixel-Blütenblätter"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Pixel Rain"
+msgstr "Pixel-Regen"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Pixel Sprinkles"
+msgstr "Pixel-Streusel"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Rain and Sun"
+msgstr "Regen und Sonne"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Rainbow Ring"
+msgstr "Regenbogenring"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Rooftop Cats"
+msgstr "Dachkatzen"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Sprinkle Ring"
+msgstr "Streuselring"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Sweet Frame"
+msgstr "Süßer Rahmen"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Tulip Ring"
+msgstr "Tulpenring"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Zrzur Pixel Badge"
+msgstr "Zrzur-Pixelabzeichen"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Zrzur Pixel Crew"
+msgstr "Zrzur-Pixelcrew"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Zrzur Pixel Home"
+msgstr "Zrzur-Pixelheim"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Zrzur Pixel Rise"
+msgstr "Zrzur-Pixelaufstieg"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Apricot Ring"
+msgstr "Aprikosenring"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Apricot Season"
+msgstr "Aprikosenzeit"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Arch of Palmyra"
+msgstr "Bogen von Palmyra"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Baklava Ring"
+msgstr "Baklava-Ring"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Baklava Shower"
+msgstr "Baklava-Regen"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Citadel Frame"
+msgstr "Zitadellenrahmen"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Citadel of Aleppo"
+msgstr "Zitadelle von Aleppo"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Colonnade Ring"
+msgstr "Säulenring"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Damascene Sword"
+msgstr "Damaszener Schwert"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Damascus Jasmine"
+msgstr "Damaszener Jasmin"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Damask Roses"
+msgstr "Damaszener Rosen"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Desert Wind"
+msgstr "Wüstenwind"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Flag of Syria"
+msgstr "Flagge Syriens"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Ghouta Blossom"
+msgstr "Ghuta-Blüte"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Ghouta Orchard"
+msgstr "Ghuta-Obstgarten"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Grapevine"
+msgstr "Weinrebe"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Hearts for Syria"
+msgstr "Herzen für Syrien"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Jasmine Rain"
+msgstr "Jasminregen"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Old City Gate"
+msgstr "Altstadttor"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Old City Lanterns"
+msgstr "Laternen der Altstadt"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Orontes Ring"
+msgstr "Orontes-Ring"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Palmyra Sunset"
+msgstr "Sonnenuntergang in Palmyra"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Petals of Damascus"
+msgstr "Blüten von Damaskus"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Pistachio Rain"
+msgstr "Pistazienregen"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Pistachio Ring"
+msgstr "Pistazienring"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Spring in the Ghouta"
+msgstr "Frühling in der Ghuta"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Syrian Flag Ring"
+msgstr "Syrischer Flaggenring"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Table of Damascus"
+msgstr "Tisch von Damaskus"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Umayyad Square"
+msgstr "Umayyaden-Platz"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Water Wheel"
+msgstr "Wasserrad"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Welcome Tray"
+msgstr "Gästetablett"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Wheel Drops"
+msgstr "Radtropfen"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Wheels of Hama"
+msgstr "Räder von Hama"

@@ -277,7 +277,15 @@ export function useBuiltInTiles() {
         slug: `decoration-${id}`,
       })),
     plates: (): Tile[] =>
-      NAMEPLATES.map((plate, i) => ({
+      // drawn plates first, then the signs, then the flags: two hundred flags
+      // ahead of them left the drawn ones nine pages down
+      [
+        ...NAMEPLATES.filter((plate) => plate.group === "theme"),
+        ...NAMEPLATES.filter((plate) => plate.group === "zodiac"),
+        ...NAMEPLATES.filter(
+          (plate) => plate.group !== "theme" && plate.group !== "zodiac",
+        ),
+      ].map((plate, i) => ({
         key: `nameplate-${plate.id}`,
         kind: "plate",
         name: labels.nameplate(plate.id),

@@ -2,6 +2,15 @@
 
 ## Unreleased
 
+### Design pack (2026-11-16)
+
+* **372 new designs by Zrzur**, free for everyone: 190 avatar decorations, 98 nameplates and 84 profile effects, in 88 sets. Pixel art for games (arcade, quest, racing, a sunset coast, an arcade hall, a handheld console and more), nature and seasons, hobbies, the Levant, rank emblems and a game HUD, ears, headphones and crowns, and pixel sets about Syria: the flag, Damascus and its sword, the Ghouta, Aleppo, Hama, Palmyra and the Syrian table. Every name is in English, Arabic and German.
+* All drawn for Zrzur in code; nothing is taken from another app, game or brand. The Zrzur mark in "Zrzur in Pixels" is sampled from the mark itself, not redrawn.
+* Decorations and nameplates are small files fetched only when they are on screen; they move only on hover or in a preview, and never with reduced motion. The effects' code loads only when an effect plays. Every effect passes the same flash, cover and solidness tests as the first thirty.
+* **Designs wall:** drawn nameplates now come before the flags, which used to push them nine pages down.
+* **Effect picker:** a still picture is drawn only when it comes near the screen; the picker holds over a hundred now.
+* Fixed: the translation script stopped once the Arabic catalog passed 1 MB.
+
 ### Creator Studio, rebuilt (2026-11-15)
 
 * **Studio home** (`/designs/studio`): a small head instead of the big title, one **New design** button, a strip of numbers (published, in review, drafts, people wearing your designs, your design limit), what waits for you on top with the reviewer's note, a tab for every state (drafts, in review, needs you, published, withdrawn), search and a type filter, and one list.

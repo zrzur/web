@@ -27159,3 +27159,1467 @@ msgstr "زرزور، مباشرةً على <0>سطح مكتبك.</0>"
 #: components/app/interface/settings/user/appearance/AppearanceMenu.tsx
 #~ msgid "Zrzur's own look: very dark neutral panels with Zrzur Pink as the one accent."
 #~ msgstr "مظهر زرزور الخاص: لوحات داكنة جدًا بألوان محايدة، وزهري زرزور هو اللون المميز الوحيد."
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Ablaq Arch"
+msgstr "القوس الأبلق"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Ablaq Stone"
+msgstr "الحجر الأبلق"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Alpine Lake"
+msgstr "بحيرة الألب"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Anchor"
+msgstr "المرساة"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Antennae"
+msgstr "قرنا الاستشعار"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Arcade Night"
+msgstr "ليل الأركيد"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Arcade Row"
+msgstr "صفّ الأركيد"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Arcane Runes"
+msgstr "رموز سحرية"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Arena Lights"
+msgstr "أضواء الساحة"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Arena Marks"
+msgstr "علامات الساحة"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Atom Orbits"
+msgstr "مدارات الذرّة"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Back of the Net"
+msgstr "الشبكة"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Ball Band"
+msgstr "حلقة السلّة"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Ball Ring"
+msgstr "حلقة الكرة"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Balloon Sky"
+msgstr "سماء المناطيد"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Bamboo Leaves"
+msgstr "أوراق الخيزران"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Bamboo Mist"
+msgstr "ضباب الخيزران"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Bamboo Ring"
+msgstr "حلقة الخيزران"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Bat Night"
+msgstr "ليلة الخفافيش"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Beach Day"
+msgstr "يوم الشاطئ"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Bear Ears"
+msgstr "أذنا الدبّ"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Black Cat Ears"
+msgstr "آذان قطّة سوداء"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Blade Ring"
+msgstr "حلقة الشفرات"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Blizzard"
+msgstr "عاصفة ثلج"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Boo"
+msgstr "بووو"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Bookshelf"
+msgstr "رفّ المكتبة"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Bronze Rank"
+msgstr "رتبة برونزي"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Bubble Ring"
+msgstr "حلقة الفقاعات"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Bunny Ears"
+msgstr "آذان أرنب"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Burst Ring"
+msgstr "حلقة الانفجارات"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Button Mash"
+msgstr "ضغط الأزرار"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Camera Shelf"
+msgstr "رفّ الكاميرا"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Camp Night"
+msgstr "ليلة المخيّم"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Campfire"
+msgstr "نار المخيّم"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Caravan"
+msgstr "القافلة"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Card Hand"
+msgstr "يد الورق"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Cash Rain"
+msgstr "مطر النقود"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Cassette"
+msgstr "الكاسيت"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Castle Moon"
+msgstr "قلعة القمر"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Cat Ears"
+msgstr "أذنا القطة"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Chase Lights"
+msgstr "أضواء المطاردة"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Checkered Ring"
+msgstr "حلقة المربّعات"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Chequered Crown"
+msgstr "تاج الرقعة"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Chess Board"
+msgstr "رقعة الشطرنج"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Citadel Night"
+msgstr "ليل القلعة"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Citrus Splash"
+msgstr "رشّة حمضيات"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "City Frame"
+msgstr "إطار المدينة"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Clockwork"
+msgstr "آلية الساعة"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Cloud Headphones"
+msgstr "سمّاعات بيضاء"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Cloud Ring"
+msgstr "حلقة الغيوم"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Coast Cruise"
+msgstr "جولة الساحل"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Coast Drive"
+msgstr "طريق الساحل"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Coast Frame"
+msgstr "إطار الساحل"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Coffee Steam"
+msgstr "بخار القهوة"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Cog Ring"
+msgstr "المسنّن"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Coin Rush"
+msgstr "سيل العملات"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Colour Bars"
+msgstr "أشرطة الألوان"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Colour Ring"
+msgstr "حلقة الألوان"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Columns at Dusk"
+msgstr "أعمدة الغروب"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Compass"
+msgstr "البوصلة"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Court Floor"
+msgstr "أرض الملعب"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Crane Flight"
+msgstr "طيران الطيور الورقية"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Crescent Seat"
+msgstr "حضن الهلال"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Crossed Blades"
+msgstr "السيفان"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Crosshair"
+msgstr "مؤشّر التصويب"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Daisy Chain"
+msgstr "سلسلة الأقحوان"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Damascus Night"
+msgstr "ليل دمشق"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Damask Rose"
+msgstr "الوردة الشامية"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Deep Blue"
+msgstr "الأزرق العميق"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Deep Glow"
+msgstr "ضوء الأعماق"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Desert Night"
+msgstr "ليل الصحراء"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Desk Setup"
+msgstr "مكتب اللعب"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Diamond Plate"
+msgstr "لوحة ماسي"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Diamond Rank"
+msgstr "رتبة ماسي"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Dice Ring"
+msgstr "أحجار النرد"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Dino Dash"
+msgstr "ركضة الديناصور"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Dino Frame"
+msgstr "إطار الديناصور"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Doubloons"
+msgstr "دنانير الكنز"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Doughnut"
+msgstr "الدونات"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Drift Night"
+msgstr "ليلة الانزلاق"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Dune Crescent"
+msgstr "هلال الكثبان"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Dungeon Hall"
+msgstr "قاعة القلعة"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Dusk Flock"
+msgstr "سرب الغروب"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Edelweiss and Snow"
+msgstr "إديلفايس وثلج"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Edelweiss Ring"
+msgstr "حلقة الإديلفايس"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Egg Ring"
+msgstr "حلقة البيض"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Far Orbit"
+msgstr "مدار بعيد"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Festive Night"
+msgstr "ليلة الاحتفال"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Film Strip"
+msgstr "شريط الفيلم"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Fire Sparks"
+msgstr "شرر النار"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Flame Tongues"
+msgstr "ألسنة اللهب"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Flask"
+msgstr "الدورق"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Flock Sweep"
+msgstr "عبور السرب"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Flower Crown"
+msgstr "إكليل زهر"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Flying Blades"
+msgstr "شفرات طائرة"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Forest Friends"
+msgstr "أصدقاء الغابة"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Fox Ears"
+msgstr "أذنا الثعلب"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Full HUD"
+msgstr "واجهة كاملة"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Gambit"
+msgstr "نقلة جريئة"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Game Table"
+msgstr "طاولة اللعب"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Gaming Headset"
+msgstr "سمّاعة الألعاب"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Ghost Pals"
+msgstr "أصدقاء أشباح"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Gift Wrap"
+msgstr "ورق الهدايا"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Gifts"
+msgstr "هدايا"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Ginger Cat Ears"
+msgstr "آذان قطّة برتقالية"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Glass Light"
+msgstr "ضوء الزجاج"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Glass Rose"
+msgstr "وردة الزجاج"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Goal"
+msgstr "المرمى"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Goal Bounce"
+msgstr "هدف!"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Gold Plate"
+msgstr "لوحة ذهبي"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Gold Rank"
+msgstr "رتبة ذهبي"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Grand Prix"
+msgstr "الجائزة الكبرى"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Halo"
+msgstr "هالة"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Haunted Hill"
+msgstr "بيت التلّ"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Headset"
+msgstr "السمّاعة"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Health and Shield"
+msgstr "الصحّة والدرع"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Health Bar"
+msgstr "شريط الطاقة"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Heart Orbit"
+msgstr "قلوب تدور"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Heartbeat"
+msgstr "نبض"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Hibiscus Ring"
+msgstr "حلقة الكركديه"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Hit Markers"
+msgstr "إصابة!"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Ice Cream Parlour"
+msgstr "محلّ البوظة"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Jasmine Fall"
+msgstr "مطر الياسمين"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Jasmine Ring"
+msgstr "طوق الياسمين"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Jellyfish"
+msgstr "قنديل البحر"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Joystick Ring"
+msgstr "حلقة التحكّم"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Jungle Dusk"
+msgstr "غروب الأدغال"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Jungle Leaves"
+msgstr "أوراق الأدغال"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Key Rain"
+msgstr "مطر الأزرار"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Kick-off"
+msgstr "ضربة البداية"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Koi Pond"
+msgstr "بركة الكوي"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Lab Bench"
+msgstr "طاولة المختبر"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Lagoon Haze"
+msgstr "ضباب البحيرة"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Lantern Glow"
+msgstr "ضوء الفوانيس"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Lantern Night"
+msgstr "ليلة الفوانيس"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Lantern Pair"
+msgstr "فانوسان"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Laser Run"
+msgstr "سباق الليزر"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Lavender Breeze"
+msgstr "نسمة الخزامى"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Lavender Field"
+msgstr "حقل الخزامى"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Lavender Wreath"
+msgstr "إكليل الخزامى"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Lens"
+msgstr "العدسة"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Level Rise"
+msgstr "صعود المستوى"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Level Up"
+msgstr "ترقية المستوى"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Lifebuoy"
+msgstr "طوق النجاة"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Liftoff"
+msgstr "إقلاع"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Light Trails"
+msgstr "خطوط الضوء"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Living Light"
+msgstr "حلقة الضوء الحيّ"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Loose Pages"
+msgstr "أوراق طائرة"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Loot Drop"
+msgstr "سقوط الغنائم"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Loot Ring"
+msgstr "حلقة الغنائم"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Lucky Roll"
+msgstr "رمية حظ"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Magma Flow"
+msgstr "نهر الحمم"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Magma Ring"
+msgstr "حلقة الحمم"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Majlis Evening"
+msgstr "سهرة المجلس"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Marquee Bulbs"
+msgstr "لمبات اللافتة"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Master Plate"
+msgstr "لوحة أسطوري"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Master Rank"
+msgstr "رتبة أسطوري"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Melody"
+msgstr "لحن"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Melting Ring"
+msgstr "البوظة الذائبة"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Midnight Headphones"
+msgstr "سمّاعات ليلية"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Molecules"
+msgstr "جزيئات"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Moon Phases"
+msgstr "أطوار القمر"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Moonlit Roofs"
+msgstr "أسطح القمر"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Murmuration"
+msgstr "السرب"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Music Notes"
+msgstr "نوتات"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Neon Flicker"
+msgstr "نيون يرمش"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Neon Sign"
+msgstr "لافتة النيون"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Night Road"
+msgstr "طريق الليل"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Night Traffic"
+msgstr "سير الليل"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Night Visit"
+msgstr "ليلة الزوّار"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Nuts and Bolts"
+msgstr "صواميل وبراغٍ"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Old City Walls"
+msgstr "أسوار المدينة"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Old Television"
+msgstr "التلفاز القديم"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Olive Leaves"
+msgstr "أوراق الزيتون"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Olive Wreath"
+msgstr "إكليل الزيتون"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "On the Branch"
+msgstr "على الغصن"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Open Book"
+msgstr "الكتاب المفتوح"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Orange Slice"
+msgstr "شريحة برتقال"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Oud Night"
+msgstr "ليلة العود"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Pad Ring"
+msgstr "يد التحكّم"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Palm Sunset"
+msgstr "غروب النخيل"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Pane Ring"
+msgstr "حلقة الزجاج"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Paper Cranes"
+msgstr "طيور الورق"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Paper Water"
+msgstr "ماء من ورق"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Paw Hop"
+msgstr "قفزات الأقدام"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Paw Ring"
+msgstr "حلقة الأقدام"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Paw Trail"
+msgstr "أثر الكفوف"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Pawn Circle"
+msgstr "دائرة البيادق"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Peach Haze"
+msgstr "ضباب خوخي"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Pet Parade"
+msgstr "موكب الحيوانات"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Photo Finish"
+msgstr "خطّ النهاية"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Picnic Ring"
+msgstr "حلقة النزهة"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Pink Headphones"
+msgstr "سمّاعات وردية"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Pinwheel"
+msgstr "دوّامة الورق"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Pitch at Night"
+msgstr "ملعب الليل"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Pitch Ring"
+msgstr "حلقة الملعب"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Pixel Diner"
+msgstr "مطعم البكسل"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Pixel Frame"
+msgstr "إطار البكسل"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Pixel Meadow"
+msgstr "مرج البكسل"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Pixel Orbit"
+msgstr "مدار البكسل"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Pixel Reef"
+msgstr "شِعاب البكسل"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Pixel Skyline"
+msgstr "أفق البكسل"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Pixel Valley"
+msgstr "وادي البكسل"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Planet Rings"
+msgstr "حلقات الكوكب"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Platinum Rank"
+msgstr "رتبة بلاتيني"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Pocket Watch"
+msgstr "ساعة الجيب"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Pulse Ring"
+msgstr "حلقة النبض"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Pulse Wave"
+msgstr "موجة النبض"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Quest Frame"
+msgstr "إطار المغامرة"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Rabbit Ears"
+msgstr "أذنا الأرنب"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Race Track"
+msgstr "الحلبة"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Racing Wheel"
+msgstr "مقود السباق"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Radar"
+msgstr "الرادار"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Rain Cloud"
+msgstr "غيمة المطر"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Rain Street"
+msgstr "شارع المطر"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Rainbow"
+msgstr "قوس قزح"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Rank Up"
+msgstr "ترقية الرتبة"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Reef Frame"
+msgstr "إطار الشِعاب"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Reef Ring"
+msgstr "حلقة المرجان"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Reef Swim"
+msgstr "سباحة الشِعاب"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Rev Gauge"
+msgstr "عدّاد الدورات"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Rewind"
+msgstr "إرجاع"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Ribbon and Bow"
+msgstr "الشريط والعقدة"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Rim and Net"
+msgstr "الطوق والشبكة"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Ring of Books"
+msgstr "حلقة الكتب"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Ring Road"
+msgstr "الطريق الدائري"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Rising Balloons"
+msgstr "صعود المناطيد"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Rising Jellies"
+msgstr "صعود القناديل"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Robot Head"
+msgstr "رأس الروبوت"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Robot Works"
+msgstr "ورشة الروبوت"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Rose Fall"
+msgstr "مطر الورد"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Rune Circle"
+msgstr "دائرة الرموز"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Sadu Ring"
+msgstr "حلقة السدو"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Sadu Weave"
+msgstr "نسيج السدو"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Sand Wind"
+msgstr "ريح الرمل"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Saucer Beam"
+msgstr "الصحن الطائر"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Saucers"
+msgstr "صحون طائرة"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Scarf Weave"
+msgstr "نقشة الكوفية"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "School of Fish"
+msgstr "سرب السمك"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Scoops"
+msgstr "كرات البوظة"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Ship's Wheel"
+msgstr "دفّة السفينة"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Silver Rank"
+msgstr "رتبة فضّي"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Silver Tiara"
+msgstr "تاج فضّي"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Sky Bursts"
+msgstr "انفجارات السماء"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Sleepy Moon"
+msgstr "قمر نعسان"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Slipstream"
+msgstr "تيار السرعة"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Smoke Ring"
+msgstr "حلقة الدخان"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Snack Frame"
+msgstr "إطار الوجبات"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Snack Rain"
+msgstr "مطر الوجبات"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Snacks"
+msgstr "وجبات خفيفة"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Snapshots"
+msgstr "صور فورية"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Snow Cap"
+msgstr "قبّعة الثلج"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Snow Cat Ears"
+msgstr "آذان قطّة بيضاء"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Snowy Peaks"
+msgstr "القمم الثلجية"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Soft Halo"
+msgstr "هالة ناعمة"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Soft Orbs"
+msgstr "كرات ضوء"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Sound Bars"
+msgstr "موجات الصوت"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Sound Ring"
+msgstr "حلقة الصوت"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Space Helmet"
+msgstr "خوذة الفضاء"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Sparkler Ring"
+msgstr "حلقة الشرر"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Speedometer"
+msgstr "عدّاد السرعة"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Spring Day"
+msgstr "يوم ربيعي"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Spring Meadow"
+msgstr "مرج الربيع"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Star Fighter"
+msgstr "مقاتلة النجوم"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Start Grid"
+msgstr "خط الانطلاق"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Stitch Ring"
+msgstr "حلقة التطريز"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "String Lights"
+msgstr "حبل الأضواء"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Sugar Rush"
+msgstr "رشّة سكّر"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Sunflower"
+msgstr "دوّار الشمس"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Sunset Boulevard"
+msgstr "شارع الغروب"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Supporters' Scarf"
+msgstr "وشاح المشجّعين"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Swish"
+msgstr "رمية نظيفة"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Tail Lights"
+msgstr "الأضواء الخلفية"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Tall Windows"
+msgstr "النوافذ العالية"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Tape Reel"
+msgstr "بكرة الشريط"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Three Scoops"
+msgstr "ثلاث كرات"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Tilted Crown"
+msgstr "تاج مائل"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Treasure Map"
+msgstr "خريطة الكنز"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Tropical Leaves"
+msgstr "أوراق استوائية"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Tulip Crown"
+msgstr "تاج التوليب"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Two Arcs"
+msgstr "قوسان"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Typing"
+msgstr "يكتب الآن"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Tyre Ring"
+msgstr "حلقة الإطار"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Tyre Smoke"
+msgstr "دخان الإطارات"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Umbrellas"
+msgstr "مظلّات"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Vinyl Record"
+msgstr "الأسطوانة"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Warp Ring"
+msgstr "حلقة القفزة"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Waterwheel"
+msgstr "الناعورة"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Wheels of Time"
+msgstr "عجلات الوقت"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Winner's Cup"
+msgstr "كأس الفائز"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Winter Pines"
+msgstr "صنوبر الشتاء"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "XP Ring"
+msgstr "حلقة الخبرة"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Zrzur Crest"
+msgstr "شارة زرزور"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Boombox Night"
+msgstr "ليلة الموسيقى"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Campfire Night"
+msgstr "ليلة المخيّم"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Equaliser Ring"
+msgstr "حلقة الإيقاع"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Firefly Dance"
+msgstr "رقصة اليراعات"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Firefly Ring"
+msgstr "حلقة اليراعات"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Game Shelf"
+msgstr "رفّ الألعاب"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Handheld Frame"
+msgstr "إطار الجهاز"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Icicle Ring"
+msgstr "حلقة الجليد"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Mixtape Frame"
+msgstr "إطار الكاسيت"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Pixel Notes"
+msgstr "نوتات البكسل"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Pixel Snowfall"
+msgstr "ثلج البكسل"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Power Up"
+msgstr "ترقية القوّة"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Press Start"
+msgstr "اضغط للبدء"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Snow Frame"
+msgstr "إطار الثلج"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Snowy Village"
+msgstr "قرية الثلج"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Woods Frame"
+msgstr "إطار الغابة"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "After the Rain"
+msgstr "بعد المطر"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Bloom Frame"
+msgstr "إطار الأزهار"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Candy Shop"
+msgstr "دكّان الحلوى"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Cat Frame"
+msgstr "إطار القطّة"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Cat Parade"
+msgstr "موكب القطط"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Ears and Whiskers"
+msgstr "آذان وشوارب"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Heart Chain"
+msgstr "سلسلة القلوب"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Love Frame"
+msgstr "إطار الحبّ"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Love Letter"
+msgstr "رسالة حبّ"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Pixel Garden"
+msgstr "حديقة البكسل"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Pixel Hearts"
+msgstr "قلوب البكسل"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Pixel Petals"
+msgstr "بتلات البكسل"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Pixel Rain"
+msgstr "مطر البكسل"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Pixel Sprinkles"
+msgstr "رشّات البكسل"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Rain and Sun"
+msgstr "مطر وشمس"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Rainbow Ring"
+msgstr "حلقة قوس قزح"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Rooftop Cats"
+msgstr "قطط الأسطح"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Sprinkle Ring"
+msgstr "حلقة الرشّات"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Sweet Frame"
+msgstr "إطار الحلويات"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Tulip Ring"
+msgstr "حلقة الزنابق"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Zrzur Pixel Badge"
+msgstr "شارة زرزور"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Zrzur Pixel Crew"
+msgstr "رفاق زرزور"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Zrzur Pixel Home"
+msgstr "بيت زرزور"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Zrzur Pixel Rise"
+msgstr "صعود زرزور"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Apricot Ring"
+msgstr "حلقة المشمش"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Apricot Season"
+msgstr "موسم المشمش"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Arch of Palmyra"
+msgstr "قوس تدمر"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Baklava Ring"
+msgstr "حلقة البقلاوة"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Baklava Shower"
+msgstr "مطر البقلاوة"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Citadel Frame"
+msgstr "إطار القلعة"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Citadel of Aleppo"
+msgstr "قلعة حلب"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Colonnade Ring"
+msgstr "حلقة الأعمدة"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Damascene Sword"
+msgstr "السيف الدمشقي"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Damascus Jasmine"
+msgstr "ياسمين الشام"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Damask Roses"
+msgstr "الوردة الدمشقية"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Desert Wind"
+msgstr "ريح الصحراء"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Flag of Syria"
+msgstr "علم سوريا"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Ghouta Blossom"
+msgstr "زهر الغوطة"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Ghouta Orchard"
+msgstr "بستان الغوطة"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Grapevine"
+msgstr "دالية العنب"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Hearts for Syria"
+msgstr "قلوب سوريا"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Jasmine Rain"
+msgstr "مطر الياسمين"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Old City Gate"
+msgstr "باب الشام القديمة"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Old City Lanterns"
+msgstr "فوانيس الشام"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Orontes Ring"
+msgstr "حلقة العاصي"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Palmyra Sunset"
+msgstr "غروب تدمر"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Petals of Damascus"
+msgstr "ورد دمشق"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Pistachio Rain"
+msgstr "مطر الفستق"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Pistachio Ring"
+msgstr "حلقة الفستق"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Spring in the Ghouta"
+msgstr "ربيع الغوطة"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Syrian Flag Ring"
+msgstr "حلقة العلم السوري"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Table of Damascus"
+msgstr "سفرة الشام"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Umayyad Square"
+msgstr "ساحة الأمويين"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Water Wheel"
+msgstr "الناعورة"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Welcome Tray"
+msgstr "صينيّة الضيافة"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Wheel Drops"
+msgstr "رذاذ النواعير"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Wheels of Hama"
+msgstr "نواعير حماة"

@@ -1,5 +1,11 @@
 import type { JSX } from "solid-js";
 
+import {
+  PACK_DECORATIONS,
+  PACK_NAMEPLATES,
+  PACK_PLATE_DRIFT,
+} from "./pack/designs.generated";
+
 /**
  * A user's chosen look, as stored by the API on the user object
  * (`style`). The server only accepts the ids and `#rrggbb` colours below,
@@ -188,8 +194,8 @@ function loadNameFont(font: (typeof NAME_FONTS)[number]) {
   void font.load().catch(() => loadedFonts.delete(font.id));
 }
 
-/** Built-in avatar decorations (same ids as the API's allow-list) */
-export const DECORATIONS = [
+/** Zrzur's first decorations */
+const BASE_DECORATIONS = [
   "laurel",
   "light-crown",
   "rings",
@@ -215,6 +221,9 @@ export const DECORATIONS = [
   "music-notes",
   "shield-frame",
 ] as const;
+
+/** Built-in avatar decorations (same ids as the API's allow-list) */
+export const DECORATIONS = [...BASE_DECORATIONS, ...PACK_DECORATIONS] as const;
 
 /** Ready-made two-colour profile themes */
 export const THEME_PRESETS: { id: string; colours: [string, string] }[] = [
@@ -527,11 +536,14 @@ export const NAMEPLATES: {
   ...PLATE_WORLD.map((id) => plateEntry(`flag-${id}`, "flag")),
   ...PLATE_THEMES.map((id) => plateEntry(id, "theme")),
   ...PLATE_SIGNS.map((id) => plateEntry(`zodiac-${id}`, "zodiac")),
+  ...PACK_NAMEPLATES.map((id) => plateEntry(id, "theme")),
 ];
+
+const DRIFTING = new Set<string>([...PLATE_THEMES, ...PACK_PLATE_DRIFT]);
 
 /** A plain theme's slow layer, loaded when it starts to move */
 export const nameplateDrift = (id: string | undefined) =>
-  id && PLATE_THEMES.includes(id)
+  id && DRIFTING.has(id)
     ? `${import.meta.env.BASE_URL}nameplates/motion/${id}.svg`
     : undefined;
 

@@ -10,8 +10,19 @@
  * remote file is used; `flash.ts` is the check, `effects.test.ts` runs it.
  */
 
-import { type EffectId, EFFECT_DURATION_MS } from "./effectIds";
-import { type EffectShape, drawShape, shapeReach, shapeUnit } from "./shapes";
+import {
+  type BuiltInEffectId,
+  type EffectId,
+  EFFECT_DURATION_MS,
+} from "./effectIds";
+import { packShapeWide, packSpec } from "./pack/engine";
+import {
+  type EffectShape,
+  type PackShape,
+  drawShape,
+  shapeReach,
+  shapeUnit,
+} from "./shapes";
 
 export type { EffectShape } from "./shapes";
 
@@ -41,7 +52,7 @@ export type Particle = {
   /** Radians */
   angle: number;
   alpha: number;
-  shape: EffectShape;
+  shape: EffectShape | PackShape;
   /** Index into the effect's tones */
   colour: number;
   /** Narrowing across its width: tumbling and flapping */
@@ -65,7 +76,7 @@ type Place = {
 
 type Layer = {
   count: number;
-  shape: EffectShape;
+  shape: EffectShape | PackShape;
   /** Sizes, as a part of the card's width */
   size: [number, number];
   /** Where each particle is, `t` is its own life from 0 to 1 */
@@ -164,7 +175,7 @@ const TONES = {
   moon: ["#F4EFD2", "#8A7B3E", "#FFFFFF"],
 } satisfies Record<string, Tone>;
 
-const SPECS: Record<EffectId, Spec> = {
+const SPECS: Record<BuiltInEffectId, Spec> = {
   snow: {
     tones: [TONES.white],
     still: 1900,
@@ -988,6 +999,11 @@ const SPECS: Record<EffectId, Spec> = {
   },
 };
 
+/** The spec of one of Zrzur's first effects or of the design pack */
+const specOf = (id: EffectId): Spec | undefined =>
+  (SPECS as Record<string, Spec | undefined>)[id] ??
+  (packSpec(id) as Spec | undefined);
+
 /** Fades a whole play in and out, so it never cuts */
 const envelope = (now: number) => Math.min(1, now / 0.06, (1 - now) / 0.1);
 
@@ -996,7 +1012,7 @@ const envelope = (now: number) => Math.min(1, now / 0.06, (1 - now) / 0.1);
  * and after the end, so an effect can't run on by mistake.
  */
 export function effectFrame(id: EffectId, ms: number): Particle[] {
-  const spec = SPECS[id];
+  const spec = specOf(id);
   if (!spec || ms < 0 || ms >= EFFECT_DURATION_MS) return [];
   const now = ms / EFFECT_DURATION_MS;
   const whole = envelope(now);
@@ -1038,7 +1054,7 @@ export function effectFrame(id: EffectId, ms: number): Particle[] {
 }
 
 /** The tones an effect is drawn with */
-export const effectTones = (id: EffectId) => SPECS[id].tones;
+export const effectTones = (id: EffectId) => specOf(id)?.tones ?? [];
 
 /** Small canvases, one per drawing and colour: blitted, never redrawn */
 const SPRITES_KEPT = 96;
@@ -1056,7 +1072,10 @@ const WIDE = new Set<EffectShape>([
 ]);
 const sprites = new Map<string, HTMLCanvasElement>();
 
-function sprite(shape: EffectShape, tone: Tone, frame: number) {
+const isWide = (shape: EffectShape | PackShape) =>
+  WIDE.has(shape as EffectShape) || packShapeWide(shape as PackShape);
+
+function sprite(shape: EffectShape | PackShape, tone: Tone, frame: number) {
   const key = `${shape}|${tone[0]}|${frame}`;
   let found = sprites.get(key);
   if (!found) {
@@ -1088,13 +1107,14 @@ function paint(
   scale: number,
   solid: number,
 ) {
-  const tones = SPECS[id].tones;
   context.clearRect(0, 0, width, height);
+  const tones = specOf(id)?.tones;
+  if (!tones) return;
   for (const particle of effectFrame(id, ms)) {
     const tone = tones[particle.colour] ?? tones[0];
     const image = sprite(particle.shape, tone, particle.frame);
     const [w, h] = shapeReach(particle.shape);
-    const size = particle.size * width * (WIDE.has(particle.shape) ? 1 : scale);
+    const size = particle.size * width * (isWide(particle.shape) ? 1 : scale);
     context.save();
     context.globalAlpha = Math.min(1, particle.alpha * solid);
     context.translate(particle.x * width, particle.y * height);
@@ -1129,5 +1149,5 @@ export function drawEffectStill(
   pixels = 2,
 ) {
   const scale = Math.min(2.6, Math.max(1, 300 / (width / pixels)));
-  paint(context, id, SPECS[id].still, width, height, scale, 1.3);
+  paint(context, id, specOf(id)?.still ?? 1900, width, height, scale, 1.3);
 }

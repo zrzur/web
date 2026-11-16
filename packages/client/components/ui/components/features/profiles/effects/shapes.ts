@@ -5,6 +5,16 @@
  * it holds on dark and on pale surfaces.
  */
 import type { Tone } from "./effects";
+import {
+  type PackShape,
+  drawPackShape,
+  isPackShape,
+  packShapeBody,
+  packShapeReach,
+  packShapeUnit,
+} from "./pack/engine";
+
+export type { PackShape } from "./pack/engine";
 
 export type EffectShape =
   | "snowball"
@@ -1080,20 +1090,29 @@ const SHAPES: Record<EffectShape, Drawing> = {
 };
 
 /** How far a drawing reaches from its centre, at size 1 */
-export const shapeReach = (shape: EffectShape) => SHAPES[shape].reach;
+export const shapeReach = (shape: EffectShape | PackShape) =>
+  isPackShape(shape)
+    ? packShapeReach(shape)
+    : SHAPES[shape as EffectShape].reach;
 
 /** Canvas pixels per unit of a drawing's own canvas */
-export const shapeUnit = (shape: EffectShape) => SHAPES[shape].unit ?? 40;
+export const shapeUnit = (shape: EffectShape | PackShape) =>
+  isPackShape(shape)
+    ? packShapeUnit(shape)
+    : (SHAPES[shape as EffectShape].unit ?? 40);
 
 /** Half width and height of the solid part, at size 1: what covers the card */
-export const shapeBody = (shape: EffectShape) =>
-  SHAPES[shape].body ?? SHAPES[shape].reach;
+export const shapeBody = (shape: EffectShape | PackShape) =>
+  isPackShape(shape)
+    ? packShapeBody(shape)
+    : (SHAPES[shape as EffectShape].body ?? SHAPES[shape as EffectShape].reach);
 
 export function drawShape(
   context: CanvasRenderingContext2D,
-  shape: EffectShape,
+  shape: EffectShape | PackShape,
   tone: Tone,
   frame: number,
 ) {
-  SHAPES[shape].draw(context, tone, frame);
+  if (isPackShape(shape)) drawPackShape(context, shape, tone, frame);
+  else SHAPES[shape as EffectShape].draw(context, tone, frame);
 }
