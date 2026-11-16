@@ -18,6 +18,7 @@ import { useClient } from "@revolt/client";
 import { holdMessages } from "@revolt/client/messagePruner";
 import { useTime } from "@revolt/i18n/dayjs";
 import { useModals } from "@revolt/modal";
+import { useState } from "@revolt/state";
 import { Avatar, CircularProgress } from "@revolt/ui";
 import { Icon } from "@revolt/ui/icons/Icon";
 
@@ -34,6 +35,7 @@ export function NotificationsPhone(props: { onClose: () => void }) {
   const { t } = useLingui();
   const client = useClient();
   const navigate = useNavigate();
+  const state = useState();
   const dayjs = useTime();
   const { showError } = useModals();
 
@@ -93,6 +95,7 @@ export function NotificationsPhone(props: { onClose: () => void }) {
 
   const open = (message: Message) => {
     navigate(message.path);
+    state.appDrawer()?.setShown(true);
     props.onClose();
   };
 
@@ -101,6 +104,7 @@ export function NotificationsPhone(props: { onClose: () => void }) {
       .openDM()
       .then((channel) => {
         navigate(`/channel/${channel.id}`);
+        state.appDrawer()?.setShown(true);
         props.onClose();
       })
       .catch(showError);

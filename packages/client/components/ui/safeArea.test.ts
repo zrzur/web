@@ -46,9 +46,17 @@ describe("safe-area insets", () => {
     expect(root).toMatch(/top:\s*calc\(var\(--z-safe-top\)/);
     expect(root).toMatch(/left:\s*var\(--z-safe-left\)/);
     expect(root).toMatch(/right:\s*var\(--z-safe-right\)/);
-    expect(root).toMatch(/bottom:\s*calc\(\s*max\(var\(--z-safe-bottom\)/);
-    // iOS 26 installed app: the layout box stops short of the screen bottom
-    expect(root).toMatch(/\+\s*var\(--z-screen-bottom\)/);
+    expect(root).toMatch(
+      /bottom:\s*calc\(\s*max\(var\(--z-root-safe-bottom\)/,
+    );
+    // iOS 26 installed app: the layout box stops short of the screen bottom.
+    // iOS draws nothing below that box, so nothing may be placed there: the
+    // root only gives up the bottom inset, it never gets a negative offset.
+    expect(root).not.toMatch(/--z-screen-bottom/);
+    expect(styles).toMatch(/--z-screen-bottom:\s*0px/);
+    expect(styles).toMatch(
+      /--z-root-safe-bottom:\s*max\(\s*0px,\s*var\(--z-safe-bottom\) - var\(--viewport-deficit, 0px\)\s*\)/,
+    );
   });
 
   it("reads env(safe-area-inset-*) nowhere else", () => {
