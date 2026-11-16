@@ -24,6 +24,21 @@ export type TypeLocale = {
 };
 
 /**
+ * The desktop app has words of its own outside the page (its start-up
+ * window, the tray menu, the page shown while Zrzur cannot be reached). It
+ * shows them in the language saved here, so they match the app; without
+ * this it only knows the device's language. A language shown for one visit
+ * (`switchForSession`) is not told: the shell keeps what it is told.
+ */
+function tellDesktopShell(language: Language) {
+  try {
+    window.desktopConfig?.set({ language });
+  } catch {
+    // an older desktop app, or no shell at all: the page works without it
+  }
+}
+
+/**
  * Manage localisation of the application
  */
 export class Locale extends AbstractStore<"locale", TypeLocale> {
@@ -41,6 +56,7 @@ export class Locale extends AbstractStore<"locale", TypeLocale> {
   hydrate(): void {
     const { lang, options } = this.get();
     loadAndSwitchLocale(lang, options);
+    tellDesktopShell(lang);
   }
 
   /**
