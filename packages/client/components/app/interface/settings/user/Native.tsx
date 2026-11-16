@@ -22,6 +22,8 @@ declare type DesktopConfig = {
   windowState: {
     isMaximised: boolean;
   };
+  /** the app's language, for the shell's own words (newer desktop apps) */
+  language?: string;
 };
 
 declare global {
