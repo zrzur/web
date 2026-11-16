@@ -38,10 +38,52 @@ const bar = css({
     outlineOffset: "2px",
   },
   "&[aria-busy='true']": { cursor: "progress" },
+  // phones: a square arrow button at the end of the row, above the message
+  // box; the words stay for screen readers and the count sits on its corner
+  _phone: {
+    width: "44px !important",
+    minHeight: "44px",
+    marginInlineStart: "auto",
+    padding: "0 !important",
+    justifyContent: "center",
+    borderRadius: "14px !important",
+    overflow: "visible",
+  },
 });
 
-const grow = css({ flexGrow: 1, minWidth: 0 });
-const action = css({ flexShrink: 0 });
+/** Read out, not shown, on phones */
+const spoken = {
+  position: "absolute",
+  width: "1px",
+  height: "1px",
+  overflow: "hidden",
+  clipPath: "inset(50%)",
+  whiteSpace: "nowrap",
+} as const;
+
+const grow = css({ flexGrow: 1, minWidth: 0, _phone: spoken });
+const action = css({ flexShrink: 0, _phone: spoken });
+
+/** phones: how many messages arrived, on the button's corner */
+const count = css({
+  display: "none",
+  _phone: {
+    position: "absolute",
+    top: "-6px",
+    insetInlineEnd: "-6px",
+    minWidth: "20px",
+    height: "20px",
+    paddingInline: "6px",
+    borderRadius: "999px",
+    display: "grid",
+    placeItems: "center",
+    fontSize: "11px",
+    fontWeight: 700,
+    lineHeight: 1,
+    color: "var(--z-on-mention-badge, #FFFFFF)",
+    background: "var(--z-mention-badge, #C2337A)",
+  },
+});
 
 /**
  * The bar above the message box that leads back to the newest message. It
@@ -74,6 +116,11 @@ export function JumpToBottom(props: Props) {
         <Trans>Jump to present</Trans>
       </span>
       <MdExpandMore {...iconSize(16)} />
+      <Show when={props.unseen}>
+        <span class={count} aria-hidden="true">
+          {props.unseen! > 99 ? "99+" : props.unseen}
+        </span>
+      </Show>
     </button>
   );
 }
