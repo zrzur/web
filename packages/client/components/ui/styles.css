@@ -98,6 +98,24 @@ body {
   }
 }
 
+/* The cause of the short box (WebKit bug 301108): in an installed app with a
+   translucent status bar, iOS 26 gives the page a viewport shorter than the
+   screen by the top inset, but only while the page itself is shorter than
+   the screen, and it draws nothing fixed below that edge. A page as tall as
+   the screen gets the whole screen, and #root then reaches the bottom by
+   itself. The cap (min) keeps the page from growing where there is no top
+   inset. display-mode is not reliable on iOS, so Device.tsx also marks the
+   installed app with data-installed. */
+@media (display-mode: standalone) {
+  html {
+    min-height: min(100lvh, calc(100% + var(--z-safe-top)));
+  }
+}
+
+html[data-installed] {
+  min-height: min(100lvh, calc(100% + var(--z-safe-top)));
+}
+
 #root {
   position: fixed;
   /* --viewport-offset-top and --keyboard-inset are set on iOS, where the
