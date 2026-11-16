@@ -4,7 +4,6 @@ import { createSignal } from "solid-js";
 
 import { Trans, useLingui } from "@lingui/solid/macro";
 
-
 import { Dialog, DialogProps, Form2 } from "@revolt/ui";
 
 import { useModals } from "..";
@@ -48,6 +47,8 @@ export function AddFriendModal(
     <Dialog
       tone="invite"
       iconName="user-plus"
+      // one field: a short sheet on phones, not a page with an empty middle
+      size="sm"
       show={props.show}
       onClose={props.onClose}
       title={<Trans>Add a new friend</Trans>}

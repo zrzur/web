@@ -61,6 +61,8 @@ export function JoinServerModal(
     <Dialog
       tone="invite"
       iconName="sign-in"
+      // one field: a short sheet on phones, not a page with an empty middle
+      size="sm"
       show={props.show}
       onClose={props.onClose}
       title={<Trans>Join a server</Trans>}
