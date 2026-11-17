@@ -65,7 +65,11 @@ export default function SoundboardPicker(props: {
     (current) => fetchSoundLibrary(current),
   );
   const suggestions = () => {
-    const list = library()?.sounds ?? [];
+    // read only once it has arrived: reading a list that is still on its way
+    // hands the wait to the loading boundary above, which hid the picker
+    // (and, before it had its own boundary, the whole app)
+    const list =
+      library.loading || library.error ? [] : (library()?.sounds ?? []);
     const reactions = list.filter((sound) => sound.category === "reactions");
     return (reactions.length >= SOUNDBOARD_FIRST ? reactions : list).slice(
       0,

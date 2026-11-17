@@ -1,14 +1,6 @@
 import { useLingui } from "@lingui/solid/macro";
 import { createResizeObserver } from "@solid-primitives/resize-observer";
-import {
-  createEffect,
-  createMemo,
-  For,
-  lazy,
-  on,
-  onMount,
-  Show,
-} from "solid-js";
+import { createEffect, createMemo, For, on, onMount, Show } from "solid-js";
 import { TrackLoop } from "solid-livekit-components";
 import { styled } from "styled-system/jsx";
 
@@ -24,14 +16,18 @@ import {
   soundboardOpen,
 } from "../soundboard/soundboardOpen";
 
+import { lazyRetry } from "../../../utils/lazyRetry";
+import SoundsUnavailable from "../soundboard/SoundsUnavailable";
 import { ParticipantTile, tile } from "./ParticipantTile";
 import { VoiceCallCardActions } from "./VoiceCallCardActions";
 import { VoiceCallCardStatus } from "./VoiceCallCardStatus";
-import { lazyRetry } from "../../../utils/lazyRetry";
-import SoundsUnavailable from "../soundboard/SoundsUnavailable";
 
 // only a stage call loads the stage controls, and the first open the sounds
-const StagePanel = lazy(() => import("../stage/StagePanel"));
+// (lazyRetry keeps the wait inside the part: see there)
+const StagePanel = lazyRetry(
+  () => import("../stage/StagePanel"),
+  () => null,
+);
 const SoundboardPicker = lazyRetry(
   () => import("../soundboard/SoundboardPicker"),
   SoundsUnavailable,
