@@ -41986,8 +41986,8 @@
     },
     {
       "path": "packages/client/src/interface/Friends.tsx",
-      "sha256": "86d7662e85f850cecfb4170e72bac377b11c7a4d9ed3d07e92e347103793cf00",
-      "bytes": 24328,
+      "sha256": "f3584265b31da8902bc348ab815371eb85d9e88ef525eef769d0210d70fd5764",
+      "bytes": 24589,
       "category": "product-source-or-build-manifest"
     },
     {
