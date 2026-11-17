@@ -13,6 +13,7 @@
 * **Phones: the tab bar stays under Discover and You.** Discover had no way back but a swipe, and an installed app has no browser Back button.
 * **320 px phones:** the channel and conversation list no longer runs 12 px past the screen edge (its dates and buttons were cut), and a direct message keeps its name in the header (the video call moves into More there).
 * **Sign-in on a 320 px phone in German:** the page was as wide as its longest row (the footer links) and the form ran 36 px past the right edge, hiding the theme button and "show password". The page is now exactly as wide as the screen and the footer links wrap.
+* **Friends on a tablet (601 to 840 px):** the filters had shrunk to nothing and "Add friend" ran past the screen edge; the filters and the search take their own rows there, as on phones.
 * **Tap targets:** accent colour swatches are 24 px (44 px on phones, were 22), the Emoji / GIF switch and emoji cells are 44 px on touch screens. The Beta badge text is 11 px (was 10).
 * The message list can be reached with Tab and scrolled with the keyboard. A select in a settings row is named by the row's title and the value it shows (it was the title alone).
 * Fixed: a thread's header showed garbled characters instead of the "›" between the channel and the thread.

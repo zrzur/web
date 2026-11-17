@@ -94,7 +94,11 @@ export function Friends() {
     { value: "blocked", label: () => <Trans>Blocked</Trans> },
   ];
 
-  const phone = () => layout() === "phone";
+  // Phones, and tablets too (up to 840 px): beside the conversation list the
+  // header has no room for the title, four filters, the search and the
+  // button; the filters shrank to nothing and "Add friend" ran past the
+  // screen edge. There the filters and the search take their own rows.
+  const phone = () => layout() !== "desktop";
 
   const tabsEl = () => (
     <Tabs role="tablist" aria-label={t`Friends filter`}>
