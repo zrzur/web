@@ -1,6 +1,7 @@
 import { Accessor, For, Setter, Show, createSignal, onMount } from "solid-js";
 
 import { useLingui } from "@lingui/solid/macro";
+import { css } from "styled-system/css";
 import { styled } from "styled-system/jsx";
 
 import { Column, OverflowingText } from "@revolt/ui";
@@ -101,7 +102,7 @@ export function SettingsSidebar(props: {
                     <Show when={category.title}>
                       <CategoryTitle>{category.title}</CategoryTitle>
                     </Show>
-                    <Column gap="s">
+                    <Column gap="s" class={group}>
                       <For each={category.entries}>
                         {(entry) => (
                           <Show when={!entry.hidden && matches(entry)}>
@@ -120,6 +121,10 @@ export function SettingsSidebar(props: {
                                   </OverflowingText>
                                 </SidebarButtonContent>
                               </SidebarButtonTitle>
+                              {/* phones: the row opens a page */}
+                              <span class={opens} aria-hidden="true">
+                                <Icon name="caret-right" size={16} />
+                              </span>
                               {/*<SidebarButtonIcon>
                                 <MdOpenInNew
                                   {...iconSize(20)}
@@ -277,6 +282,48 @@ const NoResults = styled("span", {
     margin: "0 12px",
     fontSize: "13px",
     color: "var(--z-fg-muted)",
+  },
+});
+
+/**
+ * Phones: the rows of a category are one card with a hairline between them,
+ * the same look as the sheets that open from the bottom (owner, 2026-11-17)
+ */
+const group = css({
+  _phone: {
+    gap: "0 !important",
+    borderRadius: "14px",
+    overflow: "hidden",
+    background:
+      "var(--z-sheet-group, color-mix(in srgb, var(--z-fg-primary) 5%, transparent))",
+    "& > .button": {
+      minHeight: "50px",
+      paddingInline: "14px",
+      borderRadius: 0,
+    },
+    "& > .button + .button": {
+      borderTop: "1px solid var(--z-float-divider, var(--z-border-subtle))",
+    },
+    "& > .button:active": {
+      background: "color-mix(in srgb, var(--z-fg-primary) 10%, transparent)",
+    },
+    // The list is a screen of its own on phones: no row is "the open one"
+    // there, so none is lit or marked differently from its neighbours.
+    "& > .button[aria-current='page']:not(:active)": {
+      background: "transparent",
+    },
+    "& > .button[data-marker='bar']::before": { display: "none" },
+  },
+});
+
+/** Phones: the arrow at the end of a row that opens a page */
+const opens = css({
+  display: "none",
+  _phone: {
+    display: "flex",
+    flex: "none",
+    marginInlineStart: "auto",
+    "--z-icon-color": "var(--z-icon-muted)",
   },
 });
 
