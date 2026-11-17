@@ -1746,8 +1746,8 @@ msgid "Account suspended"
 msgstr "Cuenta suspendida"
 
 #: src/interface/You.tsx
-msgid "Account, privacy, appearance and more"
-msgstr "Cuenta, privacidad, apariencia y más"
+#~ msgid "Account, privacy, appearance and more"
+#~ msgstr "Cuenta, privacidad, apariencia y más"
 
 #: components/ui/components/features/profiles/badges/useBadgeText.ts
 msgid "Accounts created before the early adopter cut-off."
@@ -2359,6 +2359,10 @@ msgstr "Todos los roles tienen permisos personalizados."
 msgid "All servers"
 msgstr "Todos los servidores"
 
+#: src/interface/You.tsx
+msgid "All settings"
+msgstr "Todos los ajustes"
+
 #: components/app/interface/settings/user/profile/studio/StudioHome.tsx
 msgid "All shortcuts"
 msgstr "Todos los atajos"
@@ -2819,6 +2823,7 @@ msgstr "No se pudieron cargar las apelaciones."
 #: components/app/interface/settings/user/plugins/text.ts
 #: components/app/interface/settings/user/Sync.tsx
 #: components/app/interface/settings/UserSettings.tsx
+#: src/interface/You.tsx
 msgid "Appearance"
 msgstr "Apariencia"
 
@@ -5696,6 +5701,7 @@ msgstr "Se perdió la conexión. Reconectando…"
 
 #: components/app/interface/settings/UserSettings.tsx
 #: components/ui/components/features/profiles/labels.ts
+#: src/interface/You.tsx
 msgid "Connections"
 msgstr "Conexiones"
 
@@ -5814,6 +5820,7 @@ msgstr "¡Copiado!"
 #: components/app/interface/settings/server/roles/ServerRoleEditor.tsx
 #: components/app/interface/settings/server/webhooks/ServerWebhooks.tsx
 #: components/app/interface/settings/user/bots/ViewBot.tsx
+#: components/app/menus/MessageContextMenu.tsx
 #: components/modal/modals/CreateInvite.tsx
 #: src/interface/Developers.tsx
 #: src/interface/developers/docs/CodeBlock.tsx
@@ -6760,6 +6767,7 @@ msgstr "Rendimiento degradado"
 #: components/app/interface/settings/user/bots/CommandManager.tsx
 #: components/app/interface/settings/user/bots/ViewBot.tsx
 #: components/app/interface/settings/user/profile/studio/StudioDesign.tsx
+#: components/app/menus/MessageContextMenu.tsx
 #: components/modal/modals/DeleteBot.tsx
 #: components/modal/modals/DeleteCategory.tsx
 #: components/modal/modals/DeleteChannel.tsx
@@ -11377,6 +11385,7 @@ msgstr "Etiqueta"
 #: components/app/interface/settings/user/Language.tsx
 #: components/app/interface/settings/user/Sync.tsx
 #: components/app/interface/settings/UserSettings.tsx
+#: src/interface/You.tsx
 msgid "Language"
 msgstr "Idioma"
 
@@ -13506,6 +13515,7 @@ msgstr "Grupos en común"
 #: components/app/interface/settings/user/_AccountCard.tsx
 #: components/app/interface/settings/user/support/ContactSupport.tsx
 #: components/app/interface/settings/UserSettings.tsx
+#: src/interface/You.tsx
 msgid "My account"
 msgstr "Mi cuenta"
 
@@ -14885,6 +14895,7 @@ msgstr "Nada todavía. Se te preguntará antes de publicar esta versión."
 #: components/app/menus/ServerContextMenu.tsx
 #: components/app/menus/shared/NotificationContextMenu.tsx
 #: src/interface/navigation/NotificationsPhone.tsx
+#: src/interface/You.tsx
 msgid "Notifications"
 msgstr "Notificaciones"
 
@@ -19841,6 +19852,7 @@ msgstr "Servidores: {0}"
 
 #: components/app/interface/settings/user/Account.tsx
 #: components/app/interface/settings/UserSettings.tsx
+#: src/interface/You.tsx
 msgid "Sessions"
 msgstr "Sesiones"
 
@@ -24909,6 +24921,7 @@ msgstr "Visitar"
 #: components/app/interface/settings/UserSettings.tsx
 #: components/modal/modals/CreateChannel.tsx
 #: components/modal/modals/permissionTitles.ts
+#: src/interface/You.tsx
 msgid "Voice"
 msgstr "Voz"
 
@@ -24917,6 +24930,7 @@ msgid "VOICE"
 msgstr "VOZ"
 
 #: components/app/interface/settings/UserSettings.tsx
+#: src/interface/You.tsx
 msgid "Voice & Video"
 msgstr "Voz y vídeo"
 

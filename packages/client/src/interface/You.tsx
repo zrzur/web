@@ -8,6 +8,7 @@ import { styled } from "styled-system/jsx";
 import { useClient, useUser } from "@revolt/client";
 import { billingAvailable } from "@revolt/client/billing";
 import { presencePatch } from "@revolt/common/lib/statusWrite";
+import { useInstance } from "@revolt/instance";
 import { useModals } from "@revolt/modal";
 import { installWay } from "@revolt/pwa/installPrompt";
 import { useNavigate } from "@revolt/routing";
@@ -38,7 +39,13 @@ type Presence = "Online" | "Idle" | "Busy" | "Invisible";
  * [Edit status] [Edit profile]
  * presence: Online · Idle · Do not disturb · Invisible
  * About me / Member since
- * Friends · Designs · Saved notes · Feather · Settings
+ * Friends · Designs · Saved notes · Feather
+ * Settings: My account · Appearance · Notifications · Voice · Language ·
+ *           Sessions · Connections · All settings
+ *
+ * Each settings row opens the settings on that page, so the whole account is
+ * one screen away from here (owner, 2026-11-17: the page is the place for the
+ * profile and the settings, complete).
  */
 export function You() {
   const user = useUser();
@@ -67,6 +74,7 @@ function Body(props: { user: User }) {
   const client = useClient();
   const navigate = useNavigate();
   const { openModal } = useModals();
+  const { limits } = useInstance();
 
   const query = useQuery(() => ({
     queryKey: ["profile", props.user.id],
@@ -148,13 +156,32 @@ function Body(props: { user: User }) {
           },
         ]
       : []),
-    {
-      icon: "gear-six",
-      label: () => t`Settings`,
-      hint: () => t`Account, privacy, appearance and more`,
-      onPress: () => settings(),
-    },
   ];
+
+  /** the settings people reach for, each one tap away; the rest behind the last row */
+  const settingRows: { icon: IconName; label: () => string; page?: string }[] =
+    [
+      {
+        icon: "identification-card",
+        label: () => t`My account`,
+        page: "account",
+      },
+      { icon: "paint-brush", label: () => t`Appearance`, page: "appearance" },
+      { icon: "bell", label: () => t`Notifications`, page: "notifications" },
+      {
+        icon: "microphone",
+        label: () => (limits().video ? t`Voice & Video` : t`Voice`),
+        page: "voice",
+      },
+      { icon: "translate", label: () => t`Language`, page: "language" },
+      { icon: "shield-check", label: () => t`Sessions`, page: "sessions" },
+      {
+        icon: "game-controller",
+        label: () => t`Connections`,
+        page: "connections",
+      },
+      { icon: "gear-six", label: () => t`All settings` },
+    ];
 
   return (
     <Content>
@@ -264,6 +291,34 @@ function Body(props: { user: User }) {
           )}
         </For>
       </Panel>
+
+      <Group aria-labelledby="you-settings">
+        <GroupTitle id="you-settings">
+          <Trans>Settings</Trans>
+        </GroupTitle>
+        <Panel data-settings>
+          <For each={settingRows}>
+            {(row) => (
+              <Row
+                type="button"
+                data-compact
+                data-settings-page={row.page ?? "all"}
+                onClick={() => settings(row.page)}
+              >
+                <RowIcon>
+                  <Icon name={row.icon} size={20} />
+                </RowIcon>
+                <RowText>
+                  <strong>{row.label()}</strong>
+                </RowText>
+                <Chevron>
+                  <Icon name="caret-right" size={16} />
+                </Chevron>
+              </Row>
+            )}
+          </For>
+        </Panel>
+      </Group>
     </Content>
   );
 }
@@ -418,13 +473,12 @@ const Presences = styled("div", {
     // every choice stays in view: a narrow screen gets a second row, not a
     // row that is cut off at the edge
     flexWrap: "wrap",
-    // phones: one row; the four fill it, and in a language with long names
-    // (German) the row swipes sideways and no name is cut
+    // phones: two by two, all four in view in every language (one row cut
+    // "Online" off at the screen edge in German and had to be swiped)
     _phone: {
-      flexWrap: "nowrap",
-      gap: "6px",
-      overflowX: "auto",
-      scrollbarWidth: "none",
+      display: "grid",
+      gridTemplateColumns: "repeat(2, minmax(0, 1fr))",
+      gap: "8px",
     },
   },
 });
@@ -450,11 +504,10 @@ const PresenceChip = styled("button", {
     _motionReduce: { transition: "none" },
     _phone: {
       minHeight: "44px",
-      flex: "1 0 auto",
-      justifyContent: "center",
-      gap: "6px",
-      paddingInline: "10px",
-      fontSize: "13px",
+      minWidth: 0,
+      justifyContent: "flex-start",
+      borderRadius: "12px",
+      paddingInline: "14px",
     },
     "&:hover": {
       color: "var(--z-fg-primary)",
@@ -485,14 +538,22 @@ const Panel = styled("div", {
     background: "var(--z-card-bg, var(--z-bg-raised))",
     boxShadow: "var(--z-card-lift)",
     "&:has(> button)": { gap: "2px" },
-    // phones: the links are a row of tiles, icon over name
-    _phone: {
-      "&[data-links]": {
-        flexDirection: "row",
-        justifyContent: "space-around",
-        padding: "10px 6px",
-      },
-    },
+  },
+});
+
+/** A titled group of rows */
+const Group = styled("section", {
+  base: { display: "flex", flexDirection: "column", gap: "8px" },
+});
+
+const GroupTitle = styled("h2", {
+  base: {
+    margin: 0,
+    paddingInline: "8px",
+    fontSize: "13px",
+    fontWeight: 600,
+    lineHeight: "18px",
+    color: "var(--z-fg-muted)",
   },
 });
 
@@ -579,15 +640,8 @@ const Row = styled("button", {
     _hover: { background: "var(--z-nav-hover)" },
     _active: { background: "var(--z-nav-selected)" },
     _focusVisible: { outline: "2px solid var(--z-focus)" },
-    _phone: {
-      flex: "1 1 0",
-      minWidth: 0,
-      flexDirection: "column",
-      gap: "2px",
-      minHeight: "56px",
-      padding: "4px 2px",
-      textAlign: "center",
-    },
+    // a name alone, no second line
+    "&[data-compact]": { minHeight: "52px" },
   },
 });
 
@@ -598,8 +652,14 @@ const RowIcon = styled("span", {
     height: "40px",
     display: "grid",
     placeItems: "center",
+    borderRadius: "12px",
+    background: "color-mix(in srgb, var(--z-fg-primary) 6%, transparent)",
     "--z-icon-color": "var(--z-icon-neutral)",
-    _phone: { width: "28px", height: "28px" },
+    "[data-compact] > &": {
+      width: "36px",
+      height: "36px",
+      borderRadius: "10px",
+    },
   },
 });
 
@@ -611,20 +671,10 @@ const RowText = styled("span", {
     flexDirection: "column",
     gap: "2px",
     "& strong": { fontSize: "15px", fontWeight: 600 },
-    "& small": { fontSize: "13px", color: "var(--z-fg-muted)" },
-    // phones: the name under the icon; the hint line is for wider screens
-    _phone: {
-      flex: "none",
-      maxWidth: "100%",
-      "& strong": {
-        fontSize: "12px",
-        fontWeight: 500,
-        overflow: "hidden",
-        textOverflow: "ellipsis",
-        whiteSpace: "nowrap",
-        color: "var(--z-fg-secondary, var(--z-fg-primary))",
-      },
-      "& small": { display: "none" },
+    "& small": {
+      fontSize: "13px",
+      lineHeight: "18px",
+      color: "var(--z-fg-muted)",
     },
   },
 });
@@ -634,6 +684,5 @@ const Chevron = styled("span", {
     flexShrink: 0,
     "--z-icon-color": "var(--z-icon-muted)",
     // RTL: the chevron icon mirrors itself (see styles.css)
-    _phone: { display: "none" },
   },
 });

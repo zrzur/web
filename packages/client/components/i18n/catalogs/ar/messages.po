@@ -28450,3 +28450,7 @@ msgstr "ثلاث خطوات في متصفحك."
 #: src/interface/You.tsx
 msgid "Zrzur on your home screen, in full screen"
 msgstr "زرزور على شاشتك الرئيسية بملء الشاشة"
+
+#: src/interface/You.tsx
+msgid "All settings"
+msgstr "كل الإعدادات"

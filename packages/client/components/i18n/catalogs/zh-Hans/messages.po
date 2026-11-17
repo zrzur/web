@@ -1746,8 +1746,8 @@ msgid "Account suspended"
 msgstr "账号已被停用"
 
 #: src/interface/You.tsx
-msgid "Account, privacy, appearance and more"
-msgstr "账号、隐私、外观等"
+#~ msgid "Account, privacy, appearance and more"
+#~ msgstr "账号、隐私、外观等"
 
 #: components/ui/components/features/profiles/badges/useBadgeText.ts
 msgid "Accounts created before the early adopter cut-off."
@@ -2359,6 +2359,10 @@ msgstr "所有角色都设有覆盖设置。"
 msgid "All servers"
 msgstr "所有服务器"
 
+#: src/interface/You.tsx
+msgid "All settings"
+msgstr "全部设置"
+
 #: components/app/interface/settings/user/profile/studio/StudioHome.tsx
 msgid "All shortcuts"
 msgstr "全部快捷键"
@@ -2819,6 +2823,7 @@ msgstr "无法加载申诉。"
 #: components/app/interface/settings/user/plugins/text.ts
 #: components/app/interface/settings/user/Sync.tsx
 #: components/app/interface/settings/UserSettings.tsx
+#: src/interface/You.tsx
 msgid "Appearance"
 msgstr "外观"
 
@@ -5696,6 +5701,7 @@ msgstr "连接已断开，正在重新连接…"
 
 #: components/app/interface/settings/UserSettings.tsx
 #: components/ui/components/features/profiles/labels.ts
+#: src/interface/You.tsx
 msgid "Connections"
 msgstr "关联账号"
 
@@ -5814,6 +5820,7 @@ msgstr "已复制！"
 #: components/app/interface/settings/server/roles/ServerRoleEditor.tsx
 #: components/app/interface/settings/server/webhooks/ServerWebhooks.tsx
 #: components/app/interface/settings/user/bots/ViewBot.tsx
+#: components/app/menus/MessageContextMenu.tsx
 #: components/modal/modals/CreateInvite.tsx
 #: src/interface/Developers.tsx
 #: src/interface/developers/docs/CodeBlock.tsx
@@ -6760,6 +6767,7 @@ msgstr "性能下降"
 #: components/app/interface/settings/user/bots/CommandManager.tsx
 #: components/app/interface/settings/user/bots/ViewBot.tsx
 #: components/app/interface/settings/user/profile/studio/StudioDesign.tsx
+#: components/app/menus/MessageContextMenu.tsx
 #: components/modal/modals/DeleteBot.tsx
 #: components/modal/modals/DeleteCategory.tsx
 #: components/modal/modals/DeleteChannel.tsx
@@ -11377,6 +11385,7 @@ msgstr "标签"
 #: components/app/interface/settings/user/Language.tsx
 #: components/app/interface/settings/user/Sync.tsx
 #: components/app/interface/settings/UserSettings.tsx
+#: src/interface/You.tsx
 msgid "Language"
 msgstr "语言"
 
@@ -13506,6 +13515,7 @@ msgstr "共同群组"
 #: components/app/interface/settings/user/_AccountCard.tsx
 #: components/app/interface/settings/user/support/ContactSupport.tsx
 #: components/app/interface/settings/UserSettings.tsx
+#: src/interface/You.tsx
 msgid "My account"
 msgstr "我的账号"
 
@@ -14885,6 +14895,7 @@ msgstr "暂无。发布此版本前会先询问你。"
 #: components/app/menus/ServerContextMenu.tsx
 #: components/app/menus/shared/NotificationContextMenu.tsx
 #: src/interface/navigation/NotificationsPhone.tsx
+#: src/interface/You.tsx
 msgid "Notifications"
 msgstr "通知"
 
@@ -19841,6 +19852,7 @@ msgstr "服务器：{0}"
 
 #: components/app/interface/settings/user/Account.tsx
 #: components/app/interface/settings/UserSettings.tsx
+#: src/interface/You.tsx
 msgid "Sessions"
 msgstr "登录会话"
 
@@ -24909,6 +24921,7 @@ msgstr "访问"
 #: components/app/interface/settings/UserSettings.tsx
 #: components/modal/modals/CreateChannel.tsx
 #: components/modal/modals/permissionTitles.ts
+#: src/interface/You.tsx
 msgid "Voice"
 msgstr "语音"
 
@@ -24917,6 +24930,7 @@ msgid "VOICE"
 msgstr "语音"
 
 #: components/app/interface/settings/UserSettings.tsx
+#: src/interface/You.tsx
 msgid "Voice & Video"
 msgstr "语音与视频"
 
