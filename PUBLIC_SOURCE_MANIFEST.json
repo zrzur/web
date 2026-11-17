@@ -2776,8 +2776,8 @@
     },
     {
       "path": "packages/client/components/app/menus/MessageContextMenu.tsx",
-      "sha256": "8b3bf1670ae309a9507f6df1de9bc896cf8eb3dca425d877234832fb4ff3b636",
-      "bytes": 24469,
+      "sha256": "d90ddb266d107e74995ccf547e225204f0576a7edd8fabe71cc6ca1c8d6c81f9",
+      "bytes": 24797,
       "category": "product-source-or-build-manifest"
     },
     {
