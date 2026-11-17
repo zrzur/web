@@ -1,6 +1,6 @@
 import { Show, createMemo } from "solid-js";
 
-import { Plural, useLingui } from "@lingui/solid/macro";
+import { useLingui } from "@lingui/solid/macro";
 import { Server } from "@zrzur/sdk/solid";
 import { styled } from "styled-system/jsx";
 
@@ -29,15 +29,9 @@ export function ServerPhoneTools(props: {
 
   return (
     <Base data-server-phone-tools>
-      <Show when={props.server.approximateMemberCount}>
-        <Count>
-          <Plural
-            value={props.server.approximateMemberCount}
-            one="# member"
-            other="# members"
-          />
-        </Count>
-      </Show>
+      {/* the member count left this block (owner, 2026-11-17: the block was
+          94 px tall and far too big); it is on the channel details screen
+          and in Server info */}
       <Tools>
         <SearchField>
           <Icon name="magnifying-glass" size={20} />
@@ -70,24 +64,16 @@ const Base = styled("div", {
     flex: "none",
     display: "flex",
     flexDirection: "column",
-    gap: "10px",
-    // room under the header line: the count used to sit right against it
-    padding: "12px 16px 12px",
+    // one compact line: 8 + 36 + 8
+    padding: "8px 12px",
     borderBottom: "1px solid var(--z-border-subtle)",
-  },
-});
-
-const Count = styled("div", {
-  base: {
-    fontSize: "13px",
-    color: "var(--z-fg-muted)",
   },
 });
 
 const Tools = styled("div", {
   base: {
     display: "flex",
-    gap: "10px",
+    gap: "8px",
   },
 });
 
@@ -95,10 +81,10 @@ const SearchField = styled("label", {
   base: {
     flex: 1,
     minWidth: 0,
-    // drawn 40 px; the area that takes the touch is 44 (the ::after)
-    height: "40px",
+    // drawn 36 px; the area that takes the touch is 44 (the ::after)
+    height: "36px",
     position: "relative",
-    "&::after": { content: '""', position: "absolute", inset: "-2px 0" },
+    "&::after": { content: '""', position: "absolute", inset: "-4px 0" },
     display: "flex",
     alignItems: "center",
     gap: "8px",
@@ -124,11 +110,11 @@ const SearchField = styled("label", {
 const ToolButton = styled("button", {
   base: {
     flex: "none",
-    // drawn 40 px; the area that takes the touch is 44 (the ::after)
-    width: "40px",
-    height: "40px",
+    // drawn 36 px; the area that takes the touch is 44 (the ::after)
+    width: "36px",
+    height: "36px",
     position: "relative",
-    "&::after": { content: '""', position: "absolute", inset: "-2px" },
+    "&::after": { content: '""', position: "absolute", inset: "-4px" },
     display: "grid",
     placeItems: "center",
     border: "none",

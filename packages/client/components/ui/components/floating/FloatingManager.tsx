@@ -282,11 +282,14 @@ function Floating(props: FloatingElement & { mouseX: number; mouseY: number }) {
   // with large touch rows; tapping the dimmed page closes them
   const phone = phoneQuery();
   const motion = useMotion();
+  // a sheet rises whatever the Animations setting says; only the system's
+  // "reduce motion" keeps it still (as dialogs do, motion/engine.ts)
+  const still = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   const sheetSeconds = () =>
-    motion.duration(
+    (motion.duration(
       props.show()?.userCard ? "popouts" : "contextMenus",
       "enter",
-    ) / 1000;
+    ) || (still ? 0 : 220)) / 1000;
   const sheet = () =>
     phone && !!(props.show()?.contextMenu || props.show()?.userCard);
 
@@ -319,7 +322,8 @@ function Floating(props: FloatingElement & { mouseX: number; mouseY: number }) {
           "inset-inline": 0,
           bottom: "var(--z-screen-bottom, 0px)",
         }}
-        initial={sheetSeconds() ? { y: 60 } : false}
+        // from under the bottom edge, its whole height, as every sheet
+        initial={sheetSeconds() ? { y: "100%" } : false}
         animate={{ y: 0 }}
         transition={{ duration: sheetSeconds(), easing: [0.2, 0.8, 0.2, 1] }}
       >

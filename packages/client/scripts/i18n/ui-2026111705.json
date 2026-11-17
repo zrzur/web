@@ -1,0 +1,8 @@
+{
+  "No pinned messages yet": ["لا رسائل مثبتة بعد", "Noch keine angepinnten Nachrichten"],
+  "Pin an important message from its menu to keep it here.": ["ثبّت رسالة مهمة من قائمتها لتبقى هنا.", "Pinne eine wichtige Nachricht über ihr Menü an, damit sie hier bleibt."],
+  "No threads yet": ["لا خيوط بعد", "Noch keine Threads"],
+  "Start one from a message, or with New thread.": ["ابدأ خيطًا من رسالة، أو من «خيط جديد».", "Starte einen aus einer Nachricht oder mit „Neuer Thread“."],
+  "No archived threads": ["لا خيوط مؤرشفة", "Keine archivierten Threads"],
+  "Threads that were archived show here.": ["تظهر هنا الخيوط التي أُرشفت.", "Archivierte Threads erscheinen hier."]
+}

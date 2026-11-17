@@ -366,10 +366,10 @@ const SearchField = styled("label", {
   base: {
     flex: 1,
     minWidth: 0,
-    // drawn 40 px; the area that takes the touch is 44 (the ::after)
-    height: "40px",
+    // drawn 36 px; the area that takes the touch is 44 (the ::after)
+    height: "36px",
     position: "relative",
-    "&::after": { content: '""', position: "absolute", inset: "-2px 0" },
+    "&::after": { content: '""', position: "absolute", inset: "-4px 0" },
     display: "flex",
     alignItems: "center",
     gap: "8px",
@@ -395,11 +395,11 @@ const SearchField = styled("label", {
 const ToolButton = styled("button", {
   base: {
     flex: "none",
-    // drawn 40 px; the area that takes the touch is 44 (the ::after)
-    width: "40px",
-    height: "40px",
+    // drawn 36 px; the area that takes the touch is 44 (the ::after)
+    width: "36px",
+    height: "36px",
     position: "relative",
-    "&::after": { content: '""', position: "absolute", inset: "-2px" },
+    "&::after": { content: '""', position: "absolute", inset: "-4px" },
     display: "grid",
     placeItems: "center",
     border: "none",

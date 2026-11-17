@@ -295,6 +295,9 @@ const Page = styled("div", {
     flexDirection: "column",
     color: "var(--z-fg-primary)",
     background: "var(--z-bg-nav, var(--z-bg-shell))",
+    // rises from the bottom edge, as everything that opens on a phone
+    animation: "z-sheet-rise 220ms cubic-bezier(0.2, 0.8, 0.2, 1)",
+    _motionReduce: { animation: "none" },
   },
 });
 

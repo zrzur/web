@@ -1,0 +1,8 @@
+{
+  "No pinned messages yet": ["Pas encore de messages épinglés", "Aún no hay mensajes fijados", "Пока нет закреплённых сообщений", "还没有置顶消息"],
+  "Pin an important message from its menu to keep it here.": ["Épinglez un message important depuis son menu pour le garder ici.", "Fija un mensaje importante desde su menú para tenerlo aquí.", "Закрепите важное сообщение через его меню, чтобы оно осталось здесь.", "从消息菜单置顶重要消息，它就会留在这里。"],
+  "No threads yet": ["Pas encore de fils", "Aún no hay hilos", "Пока нет веток", "还没有话题"],
+  "Start one from a message, or with New thread.": ["Lancez-en un depuis un message, ou avec « Nouveau fil ».", "Empieza uno desde un mensaje o con «Nuevo hilo».", "Начните ветку из сообщения или кнопкой «Новая ветка».", "从一条消息开始，或点“新建话题”。"],
+  "No archived threads": ["Aucun fil archivé", "No hay hilos archivados", "Нет архивных веток", "没有已归档的话题"],
+  "Threads that were archived show here.": ["Les fils archivés apparaissent ici.", "Los hilos archivados aparecen aquí.", "Здесь появляются архивные ветки.", "已归档的话题会显示在这里。"]
+}

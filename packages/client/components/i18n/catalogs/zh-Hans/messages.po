@@ -127,7 +127,6 @@ msgstr "{0, plural, other {# 次安装。}}"
 #: src/interface/lobby/Lobby.tsx
 #: src/interface/navigation/channels/HomeSidebar.tsx
 #: src/interface/navigation/channels/HomeSidebarPhone.tsx
-#: src/interface/navigation/channels/ServerPhoneTools.tsx
 msgid "{0, plural, one {# member} other {# members}}"
 msgstr "{0, plural, other {# 位成员}}"
 
@@ -14094,6 +14093,10 @@ msgstr "你的账号没有连接任何应用。"
 #~ msgstr "还没有应用。"
 
 #: src/interface/channels/text/ThreadsPanel.tsx
+msgid "No archived threads"
+msgstr "没有已归档的话题"
+
+#: src/interface/channels/text/ThreadsPanel.tsx
 msgid "No archived threads."
 msgstr "没有已归档的子区。"
 
@@ -14425,6 +14428,10 @@ msgstr "还没有图片或视频"
 msgid "No pinned messages in this channel yet."
 msgstr "此频道还没有置顶消息。"
 
+#: src/interface/channels/text/ChannelDetailsPhone.tsx
+msgid "No pinned messages yet"
+msgstr "还没有置顶消息"
+
 #: components/app/interface/settings/user/plugins/BrowseTab.tsx
 msgid "No plugin matches that"
 msgstr "没有匹配的插件"
@@ -14537,6 +14544,10 @@ msgstr "没有匹配的建议。你仍然可以输入一个值。"
 #: components/app/interface/settings/channel/ForumTags.tsx
 msgid "No tags yet."
 msgstr "还没有标签。"
+
+#: src/interface/channels/text/ThreadsPanel.tsx
+msgid "No threads yet"
+msgstr "还没有话题"
 
 #: src/interface/channels/text/ThreadsPanel.tsx
 msgid "No threads yet. Start one from a message or here."
@@ -16338,6 +16349,10 @@ msgstr "此频道中发送的图片和视频会显示在这里。"
 #: components/modal/modals/PinMessage.tsx
 msgid "Pin"
 msgstr "置顶"
+
+#: src/interface/channels/text/ChannelDetailsPhone.tsx
+msgid "Pin an important message from its menu to keep it here."
+msgstr "从消息菜单置顶重要消息，它就会留在这里。"
 
 #: components/app/menus/MessageContextMenu.tsx
 #: components/modal/modals/PinMessage.tsx
@@ -20988,6 +21003,10 @@ msgstr "启动时最小化到托盘"
 msgid "Start now"
 msgstr "立即开始"
 
+#: src/interface/channels/text/ThreadsPanel.tsx
+msgid "Start one from a message, or with New thread."
+msgstr "从一条消息开始，或点“新建话题”。"
+
 #: components/modal/modals/PlusCheckout.tsx
 #~ msgid "Start Plus"
 #~ msgstr ""
@@ -23460,6 +23479,10 @@ msgstr "此服务器已关闭子区。你仍可阅读已有的子区。"
 #: src/interface/channels/text/ThreadsPanel.tsx
 msgid "Threads couldn't be loaded."
 msgstr "无法加载子区。"
+
+#: src/interface/channels/text/ThreadsPanel.tsx
+msgid "Threads that were archived show here."
+msgstr "已归档的话题会显示在这里。"
 
 #: components/app/interface/safety/labels.tsx
 msgid "Threat of violence"

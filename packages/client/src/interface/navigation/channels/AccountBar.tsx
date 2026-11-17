@@ -80,6 +80,12 @@ export function AccountBar(props: { compact?: boolean; overPage?: boolean }) {
 
   // in a call the voice controls join the same card, above the account row
   const inCall = () => !props.compact && !!voice.channel();
+  // phones: the call's controls live on the call screen only. Over the lists
+  // there is one slim line: the room's name (a tap goes back to the call)
+  // and the way to leave it (owner, 2026-11-17: the computer's call card
+  // must not show over the channel list)
+  const device = useDevice();
+  const phoneCall = () => inCall() && device.layout() === "phone";
   // outside a call there is nothing to mute yet: show the controls neutral
   // instead of red "muted" icons that claim a missing permission
   const offCall = () => !voice.channel();
@@ -99,8 +105,12 @@ export function AccountBar(props: { compact?: boolean; overPage?: boolean }) {
       data-compact={!!props.compact}
       data-over-page={props.overPage && !props.compact ? "" : undefined}
       data-in-call={inCall()}
+      data-phone-call={phoneCall() ? "" : undefined}
     >
-      <Show when={inCall()}>
+      <Show when={phoneCall()}>
+        <PhoneCallStrip />
+      </Show>
+      <Show when={inCall() && !phoneCall()}>
         <VoiceSection />
       </Show>
       <AccountRow>
@@ -626,10 +636,106 @@ const VoiceLocation = styled("div", {
   },
 });
 
+/**
+ * Phones, while in a call and looking at the lists: the room's name, which
+ * leads back to the call, and Disconnect
+ */
+function PhoneCallStrip() {
+  const { t } = useLingui();
+  const voice = useVoice();
+  const navigate = useNavigate();
+  let strip: HTMLDivElement | undefined;
+  // while this line is on screen, an audio-only call needs no floating card
+  onMount(() => {
+    if (strip) onCleanup(watchVoiceStrip(strip));
+  });
+
+  return (
+    <CallStrip ref={strip} data-call-strip data-state={voice.state()}>
+      <button
+        type="button"
+        data-call-return
+        aria-label={t`Return to voice channel`}
+        onClick={() => navigate(voice.channel()?.path ?? "")}
+      >
+        <SignalBars state={voice.state()} size={16} />
+        <bdi>{conversationName(voice.channel())}</bdi>
+      </button>
+      <button
+        type="button"
+        data-voice-control="disconnect"
+        aria-label={t`Disconnect`}
+        onClick={() => voice.disconnect()}
+      >
+        <Icon name="phone-disconnect" size={20} filled />
+      </button>
+    </CallStrip>
+  );
+}
+
+const CallStrip = styled("div", {
+  base: {
+    display: "flex",
+    alignItems: "center",
+    gap: "4px",
+    height: "44px",
+    paddingInline: "4px",
+    "& button": {
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "center",
+      gap: "10px",
+      height: "44px",
+      minWidth: "44px",
+      border: "none",
+      borderRadius: "12px",
+      background: "none",
+      color: "var(--z-fg-primary)",
+      font: "inherit",
+      fontSize: "15px",
+      fontWeight: 600,
+      cursor: "pointer",
+      "--z-icon-color": "currentColor",
+    },
+    "& button[data-call-return]": {
+      flex: 1,
+      minWidth: 0,
+      justifyContent: "flex-start",
+      paddingInline: "10px",
+    },
+    "& button[data-call-return] bdi": {
+      minWidth: 0,
+      overflow: "hidden",
+      textOverflow: "ellipsis",
+      whiteSpace: "nowrap",
+    },
+    "& button[data-voice-control='disconnect']": {
+      color: "var(--z-danger)",
+    },
+    "& button:active": {
+      background: "color-mix(in srgb, var(--z-fg-primary) 10%, transparent)",
+    },
+    "& button:focus-visible": {
+      outline: "none",
+      boxShadow: "inset 0 0 0 2px var(--z-focus)",
+    },
+  },
+});
+
 const Bar = styled("div", {
   base: {
     position: "absolute",
     zIndex: 3,
+    // phones in a call: only the slim line, on the fill of every box
+    "&[data-phone-call]": {
+      minHeight: "44px",
+      border: "none",
+      borderRadius: "14px",
+      boxShadow: "none",
+      background:
+        "color-mix(in srgb, var(--z-fg-primary) 8%, var(--z-bg-frame))",
+      "& > :not([data-call-strip])": { display: "none" },
+    },
     insetInline: "var(--z-dock-gap, 8px)",
     bottom: "var(--z-dock-gap, 8px)",
     // grows upwards when the voice section is shown

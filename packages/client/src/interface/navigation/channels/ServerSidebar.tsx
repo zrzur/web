@@ -1235,8 +1235,10 @@ const SectionHeader = styled("div", {
 });
 const ToolButton = styled("button", {
   base: {
-    // phones: a 44 px tap target that does not push the row (phone rules)
-    _phone: { minWidth: "44px", minHeight: "44px", marginBlock: "-9px" },
+    // phones: not shown. These are the actions a pointer finds on a row; a
+    // finger has them in the row's long-press menu (owner, 2026-11-17: they
+    // showed all the time and crowded the list)
+    _phone: { display: "none" },
     display: "inline-grid",
     placeItems: "center",
     flexShrink: 0,

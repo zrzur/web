@@ -6,7 +6,6 @@ import {
   type ResolvedMotion,
   backdropKeyframes,
   buildKeyframes,
-  poseToKeyframe,
 } from "./presets";
 
 /**
@@ -87,7 +86,14 @@ export function playMotion(
   }
 
   const style = (element as HTMLElement).style;
-  const motion = source.resolve(area, phase);
+  // Phones: a sheet rises from the bottom edge whatever the Animations
+  // setting says (it is off by default, and a sheet that just appears in
+  // its place was read as broken; owner, 2026-11-17). Only the system's
+  // "reduce motion" keeps it still.
+  const motion =
+    options.sheet && !prefersStill()
+      ? (source.resolve(area, phase) ?? sheetMotion(phase))
+      : source.resolve(area, phase);
   const current = running.get(element);
 
   if (!motion) {
@@ -114,8 +120,8 @@ export function playMotion(
 
   let keyframes = options.backdrop
     ? backdropKeyframes(motion, phase)
-    : options.sheet && motion.style !== "fade"
-      ? sheetKeyframes(motion.origin, phase)
+    : options.sheet && !prefersStill()
+      ? sheetKeyframes(phase)
       : buildKeyframes(motion, phase, isRtl());
 
   if (options.collapse && phase === "exit") {
@@ -144,10 +150,32 @@ export function playMotion(
   return settle(animation);
 }
 
-function sheetKeyframes(origin: string, phase: MotionPhase) {
+/**
+ * Phones: whatever opens rises from the bottom edge of the screen, its whole
+ * height, and leaves the same way (owner, 2026-11-17: every dialog and sheet,
+ * without exception; it used to fade in 120 px under its place, which read
+ * as appearing in place). The chosen motion style does not change this; with
+ * motion switched off nothing is animated at all (see above).
+ */
+/** The system asks for less motion */
+const prefersStill = () =>
+  typeof window !== "undefined" &&
+  !!window.matchMedia?.("(prefers-reduced-motion: reduce)").matches;
+
+/** How a phone sheet moves when the Animations setting gives nothing */
+export const SHEET_MS = { enter: 220, exit: 160 } as const;
+const sheetMotion = (phase: MotionPhase) => ({
+  style: "rise" as const,
+  duration: SHEET_MS[phase],
+  easing: "cubic-bezier(0.2, 0.8, 0.2, 1)",
+  direction: "up" as const,
+  origin: "50% 100%",
+});
+
+function sheetKeyframes(phase: MotionPhase) {
   const frames = [
-    poseToKeyframe({ opacity: 0, y: 120 }, origin),
-    poseToKeyframe({}, origin),
+    { transform: "translateY(100%)", opacity: 1 },
+    { transform: "translateY(0)", opacity: 1 },
   ];
   return phase === "enter" ? frames : frames.reverse();
 }
