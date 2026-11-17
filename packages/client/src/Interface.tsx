@@ -17,8 +17,8 @@ import { styled } from "styled-system/jsx";
 import { ChannelContextMenu, ServerContextMenu } from "@revolt/app";
 import { MessageCache } from "@revolt/app/interface/channels/text/MessageCache";
 import { Titlebar } from "@revolt/app/interface/desktop/Titlebar";
+import { lazyRetry } from "@revolt/ui/components/utils/lazyRetry";
 import { ChangeRequestNotice } from "@revolt/app/interface/settings/user/account/ChangeRequestNotice";
-import { UsernameNotice } from "@revolt/app/interface/settings/user/account/UsernameNotice";
 import { NoticeCenter } from "@revolt/app/interface/support/NoticeCenter";
 import { useClient, useClientLifecycle } from "@revolt/client";
 import { State } from "@revolt/client/Controller";
@@ -44,6 +44,15 @@ const UNREADS_WAIT = 800;
 /**
  * Application layout
  */
+// the once-a-day note for accounts that still carry a number tag: only they
+// need it, and nobody needs it for the first paint
+const UsernameNotice = lazyRetry(
+  () =>
+    import("@revolt/app/interface/settings/user/account/UsernameNotice").then(
+      (m) => ({ default: m.UsernameNotice }),
+    ),
+  () => null,
+);
 const StreamerIndicator = lazy(
   () => import("@revolt/app/interface/StreamerIndicator"),
 );

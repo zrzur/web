@@ -71,7 +71,14 @@ import { editableByMe } from "@revolt/app/interface/channels/text/editable";
 import { canRemoveLinkPreviews } from "@revolt/app/interface/channels/text/linkPreviews";
 import { canEndPoll } from "@revolt/app/interface/channels/text/poll/pollModel";
 
-import { AppsSubMenu } from "./shared/AppsSubMenu";
+import { lazyRetry } from "@revolt/ui/components/utils/lazyRetry";
+
+// bot commands in the menu: loaded when a menu first opens, not with the app
+const AppsSubMenu = lazyRetry(
+  () =>
+    import("./shared/AppsSubMenu").then((m) => ({ default: m.AppsSubMenu })),
+  () => null,
+);
 import { SelectMessagesMenuItem } from "./shared/SelectMessagesMenuItem";
 
 /**

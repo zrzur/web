@@ -63,8 +63,17 @@ import { RulesIcon } from "@revolt/ui/icons/RulesIcon";
 import { useListToggle } from "@revolt/ui/motion";
 import { EventsLink } from "../../events/EventsLink";
 import { LobbyLink, RulesLink } from "../../lobby/LobbyLink";
-import { TicketLink } from "../../tickets/TicketLink";
+import { lazyRetry } from "@revolt/ui/components/utils/lazyRetry";
 import { sidebarBase } from "./common";
+
+// the "Open a ticket" row: loaded by the first server that has tickets on
+const TicketLink = lazyRetry(
+  () =>
+    import("../../tickets/TicketLink").then((m) => ({
+      default: m.TicketLink,
+    })),
+  () => null,
+);
 import {
   OrderedCategory,
   applyChannelOrdering,
@@ -408,7 +417,10 @@ export const ServerSidebar = (props: Props) => {
           <EventsLink server={props.server} />
           <LobbyLink server={props.server} />
           <RulesLink server={props.server} />
-          <TicketLink server={props.server} />
+          {/* only servers with tickets switched on load the row */}
+          <Show when={props.server.tickets?.enabled}>
+            <TicketLink server={props.server} />
+          </Show>
           <ServerStats server={props.server} />
           <Show
             when={categories().find((category) => category.id === "default")}
@@ -952,22 +964,6 @@ function Entry(
 
   const inCall = () => props.channel.id === voice.channel()?.id;
 
-  const navigate = useNavigate();
-  const [makingRoom, setMakingRoom] = createSignal(false);
-  /** Ask a room maker for a room of your own, then join and open it */
-  async function makeRoom() {
-    if (makingRoom()) return;
-    setMakingRoom(true);
-    try {
-      const room = await props.channel.makeRoom();
-      navigate(`/server/${room.serverId}/channel/${room.id}`);
-      void voice.connect(room);
-    } catch (error) {
-      openModal({ type: "error2", error });
-    } finally {
-      setMakingRoom(false);
-    }
-  }
 
   // a voice room you can't join: the row shows it, a tap does nothing
   const closedVoice = () => props.channel.isVoice && locked();
@@ -1091,14 +1087,11 @@ function Entry(
               props.channel.havePermission("Connect") &&
               !voiceOccupancy(props.channel).full
             ) {
-              if (props.channel.isRoomMaker) {
-                // a room maker hands out a room of your own: that one is
-                // joined and opened, not the maker
-                event.preventDefault();
-                void makeRoom();
-              } else {
-                void voice.connect(props.channel);
-              }
+              // a room maker hands out a room of your own: voice.connect
+              // makes it, joins it and opens it, so the maker's own page
+              // is not opened
+              if (props.channel.isRoomMaker) event.preventDefault();
+              void voice.connect(props.channel);
             }
           }}
           use:floating={props.menuGenerator(props.channel)}

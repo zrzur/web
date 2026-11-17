@@ -266,6 +266,8 @@ class Voice {
   private device: Device;
 
   private openModal;
+  /** Called with the room a room maker made for this user */
+  onRoomMade?: (room: Channel) => void;
   private config;
   private limits;
   private screenShareTracks: Set<string>;
@@ -382,6 +384,8 @@ class Voice {
     this.config = inst.config;
     this.limits = inst.limits;
     this.openModal = modals.openModal;
+    // set by the app (it has the router): open the room a room maker made
+    this.onRoomMade = undefined;
 
     this.screenShareTracks = new Set();
 
@@ -542,6 +546,21 @@ class Voice {
     retry = 0,
     options?: { video?: boolean },
   ): Promise<void> {
+    // a room maker is never joined itself: it hands the member a room of
+    // their own, and that room is joined and opened. Here, so every way of
+    // joining (the channel list, a phone's join sheet, the channel page, the
+    // header button) does the same.
+    if (!auth && !previousSession && channel.isRoomMaker) {
+      try {
+        const room = await channel.makeRoom();
+        this.onRoomMade?.(room);
+        channel = room;
+      } catch (error) {
+        this.openModal({ type: "error2", error });
+        return;
+      }
+    }
+
     // a rejoin after a network drop is not a leave: no leave sound
     this.disconnect(!!previousSession);
     const attempt = ++this.#connectionAttempt;
@@ -1550,6 +1569,9 @@ export function VoiceContext(props: { children: JSX.Element }) {
   const client = useClient();
   const navigate = useNavigate();
   const location = useLocation();
+  // a room maker made a room for this user: show it
+  voice.onRoomMade = (room) =>
+    navigate(`/server/${room.serverId}/channel/${room.id}`);
 
   // App-wide shortcuts (listed in Ctrl+/) and push to talk. Physical keys,
   // so they match on every keyboard layout.

@@ -16,7 +16,14 @@ import {
   ContextMenuDivider,
 } from "./ContextMenu";
 
-import { AppsSubMenu } from "./shared/AppsSubMenu";
+import { lazyRetry } from "@revolt/ui/components/utils/lazyRetry";
+
+// bot commands in the menu: loaded when a menu first opens, not with the app
+const AppsSubMenu = lazyRetry(
+  () =>
+    import("./shared/AppsSubMenu").then((m) => ({ default: m.AppsSubMenu })),
+  () => null,
+);
 import { NotificationContextMenu } from "./shared/NotificationContextMenu";
 
 /**

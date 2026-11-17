@@ -31,6 +31,7 @@ import {
 } from "@revolt/ui";
 import { OfficialLabel } from "@revolt/ui/components/features/profiles/OfficialLabel";
 import { Symbol } from "@revolt/ui/components/utils/Symbol";
+import { lazyRetry } from "@revolt/ui/components/utils/lazyRetry";
 import { Icon } from "@revolt/ui/icons/Icon";
 import { RulesIcon } from "@revolt/ui/icons/RulesIcon";
 
@@ -44,7 +45,15 @@ import { isOfficialChannel } from "@revolt/app/interface/support/official";
 import { ContextMenu, ContextMenuButton } from "@revolt/app/menus/ContextMenu";
 
 import { HeaderIcon } from "../common/CommonHeader";
-import { TicketAction } from "../tickets/TicketAction";
+
+// only a ticket's channel shows them: not part of the app's first download
+const TicketAction = lazyRetry(
+  () =>
+    import("../tickets/TicketAction").then((m) => ({
+      default: m.TicketAction,
+    })),
+  () => null,
+);
 
 import { SearchBox } from "./text/SearchBox";
 import { canIHasSidebar, SidebarState } from "./text/TextChannel";
