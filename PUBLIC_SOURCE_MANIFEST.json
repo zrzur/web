@@ -262,8 +262,8 @@
     },
     {
       "path": "CHANGELOG.md",
-      "sha256": "bb33cc0609f8147547f2070766661ef19809e589b4ad6eb2c21ae2bf57b0f464",
-      "bytes": 169982,
+      "sha256": "c53fb5b6b5e606faa05ec3290833883611cc9aea83607f3fddea8d2348e072ae",
+      "bytes": 169625,
       "category": "public-documentation"
     },
     {
@@ -1036,8 +1036,8 @@
     },
     {
       "path": "packages/client/components/app/interface/discover/Cards.tsx",
-      "sha256": "b5f857afb086193a3aaca04d10e2d52671f4c44f98b3a195f7ec352bd02315ed",
-      "bytes": 19720,
+      "sha256": "94dbc7d1e6d69c98cbcfa85d131fc1b7cf276e5b7155d9e350946c1b78bf32f6",
+      "bytes": 19492,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -41980,8 +41980,8 @@
     },
     {
       "path": "packages/client/src/interface/Discover.tsx",
-      "sha256": "f1d781ab81fcae35bab8a82d6ce064dd7a27b5e434f35041fe144e669ea3b7a6",
-      "bytes": 65464,
+      "sha256": "1b04f9416c35a2d22df826ae104d7db5eaaa8e167f8816a8bbf863abbd7aec6e",
+      "bytes": 63307,
       "category": "product-source-or-build-manifest"
     },
     {
