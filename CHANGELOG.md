@@ -2,6 +2,13 @@
 
 ## Unreleased
 
+### Phones: page by page (2026-11-17)
+
+* **Discover inside the app on a phone is a tab, not a website:** the sky and the big headline no longer take the first third of the screen; a short title, the topics as chips (the chosen one raised, as everywhere), a shorter picture on each card and no empty band inside it, so two cards fit a screen where one did. The public Discover site keeps its top.
+* **A profile fills its sheet:** the banner runs to the sheet's edges and takes its corners, with the handle over it (it sat as a box inside the sheet).
+* **Notifications:** a channel's name keeps its own direction in an Arabic line ("#Announcements" came out as "Announcements#").
+* **Emoji picker on a touch screen:** the tip says "hold", not "right-click (or hold)".
+
 ### Phones: sheets in groups, and no Home page (2026-11-17)
 
 * **Every sheet that opens from the bottom shows its rows in groups:** the rows of a group share one card with a hairline between them, and there is room between two groups. One rule for the message, server, channel and person sheets (it was one long flat list).

@@ -122,6 +122,7 @@ msgstr "{0, plural, one {# instalación.} other {# instalaciones.}}"
 #. placeholder {0}: memberCount()
 #: components/app/interface/discover/Cards.tsx
 #: components/app/interface/discover/ReviewQueue.tsx
+#: components/app/menus/ServerContextMenu.tsx
 #: components/ui/components/features/messaging/elements/Invite.tsx
 #: src/interface/lobby/Lobby.tsx
 #: src/interface/navigation/channels/HomeSidebar.tsx
@@ -654,6 +655,7 @@ msgid "{0} options"
 msgstr "Opciones: {0}"
 
 #. placeholder {0}: count()
+#: components/modal/modals/VoiceRoom.tsx
 #: src/interface/channels/voice/VoiceChannel.tsx
 msgid "{0} people are here"
 msgstr "{0} personas están aquí"
@@ -1060,7 +1062,7 @@ msgid "<0>{0}</0> loses access to your account at once."
 msgstr "<0>{0}</0> pierde el acceso a tu cuenta de inmediato."
 
 #. placeholder {0}: item.username
-#. placeholder {1}: place(item).join(" · ")
+#. placeholder {1}: placed(item)
 #: src/interface/navigation/NotificationsPhone.tsx
 msgid "<0>{0}</0> mentioned you in <1>{1}</1>"
 msgstr "<0>{0}</0> te mencionó en <1>{1}</1>"
@@ -1124,6 +1126,7 @@ msgstr "1 mes"
 msgid "1 month, 3 months or a year, paid once."
 msgstr "1 mes, 3 meses o un año, pago único."
 
+#: components/modal/modals/VoiceRoom.tsx
 #: src/interface/channels/voice/VoiceChannel.tsx
 msgid "1 person is here"
 msgstr "Hay 1 persona aquí"
@@ -5226,6 +5229,7 @@ msgstr "clips"
 #: components/modal/modals/UserProfileMutualFriends.tsx
 #: components/modal/modals/UserProfileMutualGroups.tsx
 #: components/modal/modals/UserProfileRoles.tsx
+#: components/modal/modals/VoiceRoom.tsx
 #: components/plugins/PluginHostRoot.tsx
 #: components/ui/components/design/Dialog.tsx
 #: components/ui/components/features/profiles/ProfileActions.tsx
@@ -10714,6 +10718,7 @@ msgstr "Invisible"
 #: components/app/interface/safety/labels.tsx
 #: components/app/interface/settings/user/badges/BetaAdmin.tsx
 #: components/app/interface/settings/user/bots/ViewBot.tsx
+#: components/app/menus/ServerContextMenu.tsx
 #: components/modal/modals/CreateInvite.tsx
 msgid "Invite"
 msgstr "Invitación"
@@ -11033,10 +11038,12 @@ msgstr "Unirse a {0}"
 msgid "Join a server"
 msgstr "Unirse a un servidor"
 
+#: components/modal/modals/VoiceRoom.tsx
 #: src/interface/channels/voice/VoiceChannel.tsx
 msgid "Join call"
 msgstr "Unirse a la llamada"
 
+#: components/modal/modals/VoiceRoom.tsx
 #: src/interface/channels/voice/VoiceChannel.tsx
 msgid "Join muted"
 msgstr "Unirse en silencio"
@@ -11080,6 +11087,7 @@ msgstr "Únete a la comunidad de Zrzur"
 msgid "Join with an invite"
 msgstr "Unirse con una invitación"
 
+#: components/modal/modals/VoiceRoom.tsx
 #: src/interface/channels/voice/VoiceChannel.tsx
 msgid "Join with microphone on"
 msgstr "Unirse con el micrófono activado"
@@ -14339,6 +14347,7 @@ msgstr "No se dejó ninguna nota."
 msgid "No one is banned"
 msgstr "No hay nadie baneado"
 
+#: components/modal/modals/VoiceRoom.tsx
 #: src/interface/channels/voice/VoiceChannel.tsx
 msgid "No one is here yet. Start the call and others can join."
 msgstr "Todavía no hay nadie. Inicia la llamada y otros podrán unirse."
@@ -19907,6 +19916,7 @@ msgstr "Configurando…"
 
 #: components/app/interface/settings/_layout/Content.tsx
 #: components/app/interface/settings/server/assistant/labels.ts
+#: components/app/menus/ServerContextMenu.tsx
 #: components/modal/modals/ServerInfo.tsx
 #: src/interface/You.tsx
 msgid "Settings"
@@ -23337,6 +23347,7 @@ msgstr "Esta versión no está aprobada."
 msgid "This version was revoked for safety and won't run again."
 msgstr "Esta versión se revocó por seguridad y no volverá a ejecutarse."
 
+#: components/modal/modals/VoiceRoom.tsx
 #: components/rtc/messages.ts
 #: components/ui/components/features/voice/VoiceOccupancy.tsx
 #: src/interface/channels/voice/VoiceChannel.tsx
@@ -23518,6 +23529,10 @@ msgstr "aísla temporalmente"
 #: components/ui/components/features/profiles/plateNames.ts
 msgid "Timor-Leste"
 msgstr "Timor Oriental"
+
+#: components/ui/components/features/messaging/composition/picker/EmojiPicker.tsx
+msgid "Tip: hold any emoji to add it to your favorites."
+msgstr "Consejo: mantén pulsado un emoji para añadirlo a tus favoritos."
 
 #: components/ui/components/features/messaging/composition/picker/EmojiPicker.tsx
 msgid "Tip: right-click (or hold) any emoji to add it to your favorites."
@@ -26272,6 +26287,7 @@ msgstr "No tienes Feather"
 msgid "You don't have permission for this."
 msgstr "No tienes permiso para esto."
 
+#: components/modal/modals/VoiceRoom.tsx
 #: components/ui/components/features/voice/callCard/VoiceCallCardPreview.tsx
 #: src/interface/channels/voice/VoiceChannel.tsx
 msgid "You don't have permission to join."

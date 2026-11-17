@@ -28457,3 +28457,7 @@ msgstr "Zrzur on your home screen, in full screen"
 #: src/interface/You.tsx
 msgid "All settings"
 msgstr "All settings"
+
+#: components/ui/components/features/messaging/composition/picker/EmojiPicker.tsx
+msgid "Tip: hold any emoji to add it to your favorites."
+msgstr "Tip: hold any emoji to add it to your favorites."

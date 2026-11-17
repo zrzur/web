@@ -365,10 +365,20 @@ export function EmojiPicker() {
                       <Switch>
                         <Match when={item.row.kind === "tip"}>
                           <p class="z-emoji-tip">
-                            <Trans>
-                              Tip: right-click (or hold) any emoji to add it to
-                              your favorites.
-                            </Trans>
+                            {/* a finger has no right button */}
+                            <Show
+                              when={COARSE}
+                              fallback={
+                                <Trans>
+                                  Tip: right-click (or hold) any emoji to add it
+                                  to your favorites.
+                                </Trans>
+                              }
+                            >
+                              <Trans>
+                                Tip: hold any emoji to add it to your favorites.
+                              </Trans>
+                            </Show>
                           </p>
                         </Match>
                         <Match when={item.row.kind === "heading"}>

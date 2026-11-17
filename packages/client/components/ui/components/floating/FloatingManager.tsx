@@ -316,7 +316,10 @@ function Floating(props: FloatingElement & { mouseX: number; mouseY: number }) {
         animate={{ y: 0 }}
         transition={{ duration: sheetSeconds(), easing: [0.2, 0.8, 0.2, 1] }}
       >
-        <SheetPanel ref={setFloating}>
+        <SheetPanel
+          ref={setFloating}
+          data-card={props.show()?.userCard ? "" : undefined}
+        >
           <SheetGrabber aria-hidden="true" />
           {content()}
         </SheetPanel>
@@ -436,6 +439,22 @@ const SheetPanel = styled("div", {
     },
     // profile cards use the sheet's width
     "& > :not([aria-hidden])": { width: "100% !important", maxWidth: "none" },
+    // A profile is the sheet itself, not a card inside it: its banner runs
+    // to the sheet's edges and takes the sheet's corners, with the handle
+    // drawn over it (it sat as a box in a box, 8 px in from every side).
+    "&[data-card]": {
+      padding: "0 0 var(--z-safe-bottom)",
+      overflowX: "hidden",
+      "& > :not([aria-hidden])": {
+        border: "none !important",
+        borderRadius: "0 !important",
+        boxShadow: "none !important",
+      },
+      "& > [aria-hidden]": {
+        zIndex: 2,
+        background: "rgb(255 255 255 / 0.55)",
+      },
+    },
   },
 });
 

@@ -85,6 +85,21 @@ export function NotificationsPhone(props: { onClose: () => void }) {
     return channel.server ? [channel.server.name, name] : [name];
   };
 
+  /**
+   * The place as it is shown: each name keeps its own direction (in an
+   * Arabic line "#Announcements" came out as "Announcements#")
+   */
+  const placed = (message: Message) => (
+    <For each={place(message)}>
+      {(part, index) => (
+        <>
+          {index() ? " · " : ""}
+          <bdi>{part}</bdi>
+        </>
+      )}
+    </For>
+  );
+
   const when = (message: Message) => {
     const at = dayjs(message.createdAt);
     return at.isSame(dayjs(), "day") ? at.format("LT") : at.format("L");
@@ -225,10 +240,7 @@ export function NotificationsPhone(props: { onClose: () => void }) {
                             <p>
                               <Trans>
                                 <strong dir="auto">{item.username}</strong>{" "}
-                                mentioned you in{" "}
-                                <strong dir="auto">
-                                  {place(item).join(" · ")}
-                                </strong>
+                                mentioned you in <strong>{placed(item)}</strong>
                               </Trans>
                             </p>
                             <Quote>
