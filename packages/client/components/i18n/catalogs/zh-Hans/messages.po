@@ -1749,8 +1749,8 @@ msgid "Account suspended"
 msgstr "账号已被停用"
 
 #: src/interface/You.tsx
-#~ msgid "Account, privacy, appearance and more"
-#~ msgstr "账号、隐私、外观等"
+msgid "Account, privacy, appearance and more"
+msgstr "账号、隐私、外观等"
 
 #: components/ui/components/features/profiles/badges/useBadgeText.ts
 msgid "Accounts created before the early adopter cut-off."
@@ -2363,8 +2363,8 @@ msgid "All servers"
 msgstr "所有服务器"
 
 #: src/interface/You.tsx
-msgid "All settings"
-msgstr "全部设置"
+#~ msgid "All settings"
+#~ msgstr "全部设置"
 
 #: components/app/interface/settings/user/profile/studio/StudioHome.tsx
 msgid "All shortcuts"
@@ -2826,7 +2826,6 @@ msgstr "无法加载申诉。"
 #: components/app/interface/settings/user/plugins/text.ts
 #: components/app/interface/settings/user/Sync.tsx
 #: components/app/interface/settings/UserSettings.tsx
-#: src/interface/You.tsx
 msgid "Appearance"
 msgstr "外观"
 
@@ -3306,6 +3305,7 @@ msgstr "阿塞拜疆"
 #: components/modal/modals/MFAFlow.tsx
 #: components/modal/modals/ReportContent.tsx
 #: src/interface/channels/AgeGate.tsx
+#: src/interface/channels/text/ChannelDetailsPhone.tsx
 #: src/interface/channels/voice/VoiceChannel.tsx
 #: src/interface/common/CommonHeader.tsx
 msgid "Back"
@@ -4637,6 +4637,11 @@ msgstr "频道描述"
 #~ msgid "Channel Description"
 #~ msgstr "频道简介"
 
+#: src/interface/channels/ChannelHeader.tsx
+#: src/interface/channels/text/ChannelDetailsPhone.tsx
+msgid "Channel details"
+msgstr "频道详情"
+
 #: components/app/interface/settings/server/assistant/labels.ts
 msgid "Channel for appeals"
 msgstr "申诉频道"
@@ -4670,6 +4675,7 @@ msgstr "打开或关闭分类时的频道行。"
 #: components/app/interface/settings/channel/ChannelCard.tsx
 #: components/app/interface/settings/server/channels/ChannelsSettings.tsx
 #: src/interface/channels/ChannelHeader.tsx
+#: src/interface/channels/text/ChannelDetailsPhone.tsx
 msgid "Channel settings"
 msgstr "频道设置"
 
@@ -4792,6 +4798,7 @@ msgstr "请检查网络连接，稍后再试。"
 
 #: components/app/interface/settings/user/myData/MyData.tsx
 #: components/app/interface/settings/user/profile/studio/StudioHome.tsx
+#: src/interface/channels/text/ChannelDetailsPhone.tsx
 msgid "Check your connection and try again."
 msgstr "请检查网络连接后重试。"
 
@@ -5705,7 +5712,6 @@ msgstr "连接已断开，正在重新连接…"
 
 #: components/app/interface/settings/UserSettings.tsx
 #: components/ui/components/features/profiles/labels.ts
-#: src/interface/You.tsx
 msgid "Connections"
 msgstr "关联账号"
 
@@ -7237,6 +7243,7 @@ msgid "Dino Frame"
 msgstr "恐龙边框"
 
 #: components/modal/modals/ForwardMessage.tsx
+#: src/interface/channels/text/ChannelDetailsPhone.tsx
 #: src/interface/navigation/MentionsPanel.tsx
 #: src/interface/navigation/NotificationsPhone.tsx
 msgid "Direct message"
@@ -8610,6 +8617,7 @@ msgstr "斐济"
 
 #: components/app/interface/settings/user/bots/CommandManager.tsx
 #: components/app/interface/settings/user/profile/studio/StudioEditor.tsx
+#: src/interface/channels/text/ChannelDetailsPhone.tsx
 msgid "File"
 msgstr "文件"
 
@@ -8648,6 +8656,7 @@ msgstr "文件上传"
 msgid "Filed"
 msgstr "已提交"
 
+#: src/interface/channels/text/ChannelDetailsPhone.tsx
 #: src/interface/channels/text/Composition.tsx
 #: src/interface/developers/docs/DocsPortal.tsx
 msgid "Files"
@@ -8660,6 +8669,10 @@ msgstr "仅文件"
 #: components/app/interface/safety/labels.tsx
 msgid "Files or links that try to harm devices"
 msgstr "企图损害设备的文件或链接"
+
+#: src/interface/channels/text/ChannelDetailsPhone.tsx
+msgid "Files sent in this channel show here."
+msgstr "此频道中发送的文件会显示在这里。"
 
 #: src/interface/channels/text/Composition.tsx
 msgid "Files too large"
@@ -9802,6 +9815,7 @@ msgstr "依据"
 
 #: components/modal/modals/CreateGroupOrServer.tsx
 #: components/modal/modals/ForwardMessage.tsx
+#: src/interface/channels/text/ChannelDetailsPhone.tsx
 msgid "Group"
 msgstr "群组"
 
@@ -10755,6 +10769,10 @@ msgstr "邀请链接"
 msgid "Invite links"
 msgstr "邀请链接"
 
+#: src/interface/channels/text/ChannelDetailsPhone.tsx
+msgid "Invite members"
+msgstr "邀请成员"
+
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 #: components/modal/modals/permissionTitles.ts
 msgid "Invite others"
@@ -11145,6 +11163,7 @@ msgstr "约旦"
 msgid "Jump back in"
 msgstr "重新加入"
 
+#: src/interface/channels/text/ChannelDetailsPhone.tsx
 #: src/interface/channels/text/TextSearchSidebar.tsx
 msgid "Jump to message"
 msgstr "跳转到消息"
@@ -11393,7 +11412,6 @@ msgstr "标签"
 #: components/app/interface/settings/user/Language.tsx
 #: components/app/interface/settings/user/Sync.tsx
 #: components/app/interface/settings/UserSettings.tsx
-#: src/interface/You.tsx
 msgid "Language"
 msgstr "语言"
 
@@ -11814,6 +11832,7 @@ msgstr "正在关联你的 Steam 账号…"
 #: components/app/interface/settings/user/profile/ProfileExtras.tsx
 #: components/ui/components/features/profiles/labels.ts
 #: components/ui/components/features/profiles/ProfileLinks.tsx
+#: src/interface/channels/text/ChannelDetailsPhone.tsx
 msgid "Links"
 msgstr "链接"
 
@@ -11828,6 +11847,10 @@ msgstr "新成员发送的链接"
 #: components/app/interface/settings/user/profile/ProfileExtras.tsx
 msgid "Links must start with https://"
 msgstr "链接必须以 https:// 开头"
+
+#: src/interface/channels/text/ChannelDetailsPhone.tsx
+msgid "Links sent in this channel show here."
+msgstr "此频道中发送的链接会显示在这里。"
 
 #: components/app/interface/safety/labels.tsx
 msgid "Links that lead to phishing or harmful sites"
@@ -12011,6 +12034,7 @@ msgstr "加载此内容会连接到 {0}。它们会获取你的 IP 地址，并�
 #: components/ui/components/features/voice/soundboard/SoundboardPicker.tsx
 #: components/ui/components/features/voice/StreamPreviewCard.tsx
 #: src/interface/channels/forum/ForumChannel.tsx
+#: src/interface/channels/text/ChannelDetailsPhone.tsx
 #: src/interface/channels/text/ThreadsPanel.tsx
 #: src/interface/Designs.tsx
 #: src/interface/designs/ShowMore.tsx
@@ -12692,6 +12716,10 @@ msgstr "玛雅"
 msgid "Meaning"
 msgstr "含义"
 
+#: src/interface/channels/text/ChannelDetailsPhone.tsx
+msgid "Media"
+msgstr "媒体"
+
 #: components/app/interface/settings/server/ServerEmergency.tsx
 #: components/app/interface/settings/server/ServerVerification.tsx
 #: components/app/interface/settings/user/badges/BugQueue.tsx
@@ -12790,6 +12818,7 @@ msgstr "{0} 起成为成员"
 #: components/app/interface/settings/ServerSettings.tsx
 #: components/modal/lib/serverTemplateText.ts
 #: components/modal/modals/permissionTitles.ts
+#: src/interface/channels/text/ChannelDetailsPhone.tsx
 #: src/interface/designs/Mirror.tsx
 msgid "Members"
 msgstr "成员"
@@ -13523,7 +13552,6 @@ msgstr "共同群组"
 #: components/app/interface/settings/user/_AccountCard.tsx
 #: components/app/interface/settings/user/support/ContactSupport.tsx
 #: components/app/interface/settings/UserSettings.tsx
-#: src/interface/You.tsx
 msgid "My account"
 msgstr "我的账号"
 
@@ -14240,6 +14268,10 @@ msgstr "还没有收藏"
 #~ msgid "No feathers yet"
 #~ msgstr ""
 
+#: src/interface/channels/text/ChannelDetailsPhone.tsx
+msgid "No files yet"
+msgstr "还没有文件"
+
 #: components/modal/modals/CreateInvite.tsx
 msgid "No friends match your search."
 msgstr "没有符合搜索条件的好友。"
@@ -14294,6 +14326,10 @@ msgstr "暂无等级"
 #: components/modal/modals/CreateInvite.tsx
 msgid "No limit"
 msgstr "无限制"
+
+#: src/interface/channels/text/ChannelDetailsPhone.tsx
+msgid "No links yet"
+msgstr "还没有链接"
 
 #: components/app/interface/settings/user/profile/ProfileExtras.tsx
 msgid "No links yet."
@@ -14380,6 +14416,10 @@ msgstr "尚未设置权限"
 #: components/app/interface/settings/server/apps/ServerAppPage.tsx
 msgid "No permissions were given when it was added."
 msgstr "添加时未授予任何权限。"
+
+#: src/interface/channels/text/ChannelDetailsPhone.tsx
+msgid "No pictures or videos yet"
+msgstr "还没有图片或视频"
 
 #: src/interface/channels/text/TextSearchSidebar.tsx
 msgid "No pinned messages in this channel yet."
@@ -14903,8 +14943,8 @@ msgstr "暂无。发布此版本前会先询问你。"
 #: components/app/interface/settings/UserSettings.tsx
 #: components/app/menus/ServerContextMenu.tsx
 #: components/app/menus/shared/NotificationContextMenu.tsx
+#: src/interface/channels/text/ChannelDetailsPhone.tsx
 #: src/interface/navigation/NotificationsPhone.tsx
-#: src/interface/You.tsx
 msgid "Notifications"
 msgstr "通知"
 
@@ -16291,6 +16331,10 @@ msgstr "选择你的服务器是什么样的；对应的模块会随之开启。
 msgid "Picnic Ring"
 msgstr "野餐环"
 
+#: src/interface/channels/text/ChannelDetailsPhone.tsx
+msgid "Pictures and videos sent in this channel show here."
+msgstr "此频道中发送的图片和视频会显示在这里。"
+
 #: components/modal/modals/PinMessage.tsx
 msgid "Pin"
 msgstr "置顶"
@@ -16331,6 +16375,10 @@ msgstr "置顶消息"
 #: src/interface/channels/text/searchLabels.ts
 msgid "pinned: takes true or false."
 msgstr "pinned: 可用 true 或 false。"
+
+#: src/interface/channels/text/ChannelDetailsPhone.tsx
+msgid "Pins"
+msgstr "置顶"
 
 #: components/app/interface/settings/user/profile/styleLabels.tsx
 msgid "Pisces"
@@ -19002,6 +19050,7 @@ msgstr "已保存"
 #: components/app/interface/desktop/Titlebar.tsx
 #: components/modal/modals/ForwardMessage.tsx
 #: src/interface/channels/ChannelHeader.tsx
+#: src/interface/channels/text/ChannelDetailsPhone.tsx
 #: src/interface/navigation/channels/HomeSidebar.tsx
 #: src/interface/navigation/MentionsPanel.tsx
 #: src/interface/navigation/NotificationsPhone.tsx
@@ -19309,6 +19358,7 @@ msgid "Search members"
 msgstr "搜索成员"
 
 #: src/interface/channels/ChannelHeader.tsx
+#: src/interface/channels/text/ChannelDetailsPhone.tsx
 #: src/interface/channels/text/SearchBox.tsx
 msgid "Search messages"
 msgstr "搜索消息"
@@ -19861,7 +19911,6 @@ msgstr "服务器：{0}"
 
 #: components/app/interface/settings/user/Account.tsx
 #: components/app/interface/settings/UserSettings.tsx
-#: src/interface/You.tsx
 msgid "Sessions"
 msgstr "登录会话"
 
@@ -21101,6 +21150,10 @@ msgstr "仍然对所有人免费"
 msgid "Still loading. Try again in a moment."
 msgstr "仍在加载。请稍后重试。"
 
+#: src/interface/channels/text/ChannelDetailsPhone.tsx
+msgid "Still not loading."
+msgstr "仍然无法加载。"
+
 #: components/modal/modals/BillingCheckoutStatus.tsx
 msgid "Still waiting. If you paid, it will show up in Subscriptions as soon as the payment is confirmed."
 msgstr "仍在等待。如果你已付款，付款确认后会立即显示在订阅中。"
@@ -21825,6 +21878,7 @@ msgstr "文字和幻灯片保持清晰，视频和游戏保持流畅。"
 
 #: components/app/interface/settings/server/channels/ChannelsSettings.tsx
 #: components/modal/modals/ServerEventEditor.tsx
+#: src/interface/channels/text/ChannelDetailsPhone.tsx
 msgid "Text channel"
 msgstr "文字频道"
 
@@ -23045,6 +23099,10 @@ msgstr "此链接永不过期。"
 msgid "This link no longer works"
 msgstr "此链接已失效"
 
+#: src/interface/channels/text/ChannelDetailsPhone.tsx
+msgid "This list couldn't be loaded"
+msgstr "无法加载此列表"
+
 #: components/i18n/errors.tsx
 msgid "This message doesn't exist any more."
 msgstr "该消息已不存在。"
@@ -23376,6 +23434,7 @@ msgstr "子区名称"
 
 #: components/app/interface/settings/server/ThreadFeatures.tsx
 #: src/interface/channels/ChannelHeader.tsx
+#: src/interface/channels/text/ChannelDetailsPhone.tsx
 #: src/interface/channels/text/TextChannel.tsx
 #: src/interface/channels/text/ThreadsPanel.tsx
 msgid "Threads"
@@ -23743,6 +23802,7 @@ msgstr "换个词试试，或浏览分类。"
 #: components/modal/modals/ReportContent.tsx
 #: components/ui/components/features/messaging/composition/picker/GifPicker.tsx
 #: src/interface/channels/forum/ForumChannel.tsx
+#: src/interface/channels/text/ChannelDetailsPhone.tsx
 #: src/interface/channels/text/ThreadsPanel.tsx
 #: src/interface/channels/voice/VoiceChannel.tsx
 #: src/interface/Designs.tsx
@@ -24936,7 +24996,6 @@ msgstr "访问"
 #: components/app/interface/settings/UserSettings.tsx
 #: components/modal/modals/CreateChannel.tsx
 #: components/modal/modals/permissionTitles.ts
-#: src/interface/You.tsx
 msgid "Voice"
 msgstr "语音"
 
@@ -24945,7 +25004,6 @@ msgid "VOICE"
 msgstr "语音"
 
 #: components/app/interface/settings/UserSettings.tsx
-#: src/interface/You.tsx
 msgid "Voice & Video"
 msgstr "语音与视频"
 
@@ -24971,6 +25029,7 @@ msgstr "语音通话"
 
 #: components/modal/modals/CreateChannel.tsx
 #: components/modal/modals/ServerEventEditor.tsx
+#: src/interface/channels/text/ChannelDetailsPhone.tsx
 msgid "Voice channel"
 msgstr "语音频道"
 

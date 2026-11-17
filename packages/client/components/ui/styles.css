@@ -224,7 +224,7 @@ html[data-installed] {
     :where(button:not([role="switch"]))::after {
     content: "";
     position: absolute;
-    inset-inline: 0;
+    inset-inline: min(0px, calc((100% - 44px) / 2));
     inset-block: min(0px, calc((100% - 44px) / 2));
   }
   [data-dialog-close] {

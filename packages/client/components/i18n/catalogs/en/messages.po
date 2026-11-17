@@ -28462,4 +28462,51 @@ msgstr "All settings"
 msgid "Tip: hold any emoji to add it to your favorites."
 msgstr "Tip: hold any emoji to add it to your favorites."
 
+#: src/interface/channels/ChannelHeader.tsx
+#: src/interface/channels/text/ChannelDetailsPhone.tsx
+msgid "Channel details"
+msgstr "Channel details"
 
+#: src/interface/channels/text/ChannelDetailsPhone.tsx
+msgid "Files sent in this channel show here."
+msgstr "Files sent in this channel show here."
+
+#: src/interface/channels/text/ChannelDetailsPhone.tsx
+msgid "Invite members"
+msgstr "Invite members"
+
+#: src/interface/channels/text/ChannelDetailsPhone.tsx
+msgid "Links sent in this channel show here."
+msgstr "Links sent in this channel show here."
+
+#: src/interface/channels/text/ChannelDetailsPhone.tsx
+msgid "Media"
+msgstr "Media"
+
+#: src/interface/channels/text/ChannelDetailsPhone.tsx
+msgid "No files yet"
+msgstr "No files yet"
+
+#: src/interface/channels/text/ChannelDetailsPhone.tsx
+msgid "No links yet"
+msgstr "No links yet"
+
+#: src/interface/channels/text/ChannelDetailsPhone.tsx
+msgid "No pictures or videos yet"
+msgstr "No pictures or videos yet"
+
+#: src/interface/channels/text/ChannelDetailsPhone.tsx
+msgid "Pictures and videos sent in this channel show here."
+msgstr "Pictures and videos sent in this channel show here."
+
+#: src/interface/channels/text/ChannelDetailsPhone.tsx
+msgid "Pins"
+msgstr "Pins"
+
+#: src/interface/channels/text/ChannelDetailsPhone.tsx
+msgid "Still not loading."
+msgstr "Still not loading."
+
+#: src/interface/channels/text/ChannelDetailsPhone.tsx
+msgid "This list couldn't be loaded"
+msgstr "This list couldn't be loaded"

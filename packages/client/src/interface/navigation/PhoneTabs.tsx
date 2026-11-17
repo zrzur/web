@@ -126,26 +126,6 @@ export function PhoneTabs(props: { page?: boolean }) {
       data-phone-tabs-page={props.page ? "" : undefined}
       aria-label={t`Main navigation`}
     >
-      {/* You: first, so it stands on the servers' side, under the rail,
-          where the account sits on wide screens (owner, 2026-11-17). It
-          opens as a sheet over whatever is on screen, as Mentions does */}
-      <Tab
-        type="button"
-        data-me
-        aria-haspopup="dialog"
-        aria-current={active() === "you" ? "page" : undefined}
-        data-current={active() === "you"}
-        onClick={openYouSheet}
-      >
-        <TabIcon>
-          <Avatar
-            size={36}
-            src={user()?.animatedAvatarURL}
-            fallback={user()?.username}
-          />
-        </TabIcon>
-        <TabName>{t`You`}</TabName>
-      </Tab>
       <Capsule>
         {tab("servers", "squares-four", t`Servers`, openServers)}
         {/* the speech bubble with three dots ("chat-circle-dots" draws an
@@ -167,6 +147,27 @@ export function PhoneTabs(props: { page?: boolean }) {
           <TabName>{t`Mentions`}</TabName>
         </Tab>
       </Capsule>
+      {/* You: last in the bar's order (as in every list of the five), drawn
+          first, so it stands on the servers' side, under the rail,
+          where the account sits on wide screens (owner, 2026-11-17). It
+          opens as a sheet over whatever is on screen, as Mentions does */}
+      <Tab
+        type="button"
+        data-me
+        aria-haspopup="dialog"
+        aria-current={active() === "you" ? "page" : undefined}
+        data-current={active() === "you"}
+        onClick={openYouSheet}
+      >
+        <TabIcon>
+          <Avatar
+            size={44}
+            src={user()?.animatedAvatarURL}
+            fallback={user()?.username}
+          />
+        </TabIcon>
+        <TabName>{t`You`}</TabName>
+      </Tab>
     </Bar>
   );
 }
@@ -252,12 +253,15 @@ const Bar = styled("nav", {
       zIndex: 3,
       // floating: in from both sides and up from the bottom edge (#root
       // already stops above the home bar, styles.css, so no inset here)
-      insetInline: "12px",
-      bottom: "10px",
+      // your picture stands in the middle of the rail's column (72px wide): the
+      // same 8px on its two sides and under it (owner, 2026-11-17)
+      insetInlineStart: "8px",
+      insetInlineEnd: "12px",
+      bottom: "8px",
       display: "flex",
       alignItems: "center",
-      gap: "10px",
-      height: "58px",
+      gap: "16px",
+      height: "56px",
       // the room between the capsule and the round button lets a touch
       // through to the list under it
       pointerEvents: "none",
@@ -271,12 +275,12 @@ const Capsule = styled("div", {
   base: {
     flex: 1,
     minWidth: 0,
-    height: "58px",
+    height: "56px",
     display: "flex",
     alignItems: "center",
     justifyContent: "space-between",
     paddingInline: "7px",
-    borderRadius: "29px",
+    borderRadius: "28px",
     background: BAR_FILL,
     boxShadow: "var(--z-popover-lift, 0 12px 32px rgb(0 0 0 / 0.45))",
   },
@@ -335,15 +339,16 @@ const Tab = styled("button", {
     },
     // You: your picture, a round button of its own beside the capsule
     "&[data-me]": {
-      width: "58px",
-      height: "58px",
+      order: -1,
+      width: "56px",
+      height: "56px",
       padding: 0,
       borderRadius: "50%",
       // the picture sits in the exact middle of the circle: its box is the
       // picture's own size, with no line of text under it to push it off
       "& > span:first-of-type": {
-        width: "36px",
-        height: "36px",
+        width: "44px",
+        height: "44px",
         minWidth: 0,
         lineHeight: 0,
         "& > *": { display: "block", margin: 0 },

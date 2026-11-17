@@ -28459,4 +28459,51 @@ msgstr "كل الإعدادات"
 msgid "Tip: hold any emoji to add it to your favorites."
 msgstr "نصيحة: اضغط مطوّلًا على أي إيموجي لإضافته إلى المفضلة."
 
+#: src/interface/channels/ChannelHeader.tsx
+#: src/interface/channels/text/ChannelDetailsPhone.tsx
+msgid "Channel details"
+msgstr "تفاصيل القناة"
 
+#: src/interface/channels/text/ChannelDetailsPhone.tsx
+msgid "Files sent in this channel show here."
+msgstr "تظهر هنا الملفات المرسلة في هذه القناة."
+
+#: src/interface/channels/text/ChannelDetailsPhone.tsx
+msgid "Invite members"
+msgstr "دعوة أعضاء"
+
+#: src/interface/channels/text/ChannelDetailsPhone.tsx
+msgid "Links sent in this channel show here."
+msgstr "تظهر هنا الروابط المرسلة في هذه القناة."
+
+#: src/interface/channels/text/ChannelDetailsPhone.tsx
+msgid "Media"
+msgstr "الوسائط"
+
+#: src/interface/channels/text/ChannelDetailsPhone.tsx
+msgid "No files yet"
+msgstr "لا ملفات بعد"
+
+#: src/interface/channels/text/ChannelDetailsPhone.tsx
+msgid "No links yet"
+msgstr "لا روابط بعد"
+
+#: src/interface/channels/text/ChannelDetailsPhone.tsx
+msgid "No pictures or videos yet"
+msgstr "لا صور ولا فيديوهات بعد"
+
+#: src/interface/channels/text/ChannelDetailsPhone.tsx
+msgid "Pictures and videos sent in this channel show here."
+msgstr "تظهر هنا الصور والفيديوهات المرسلة في هذه القناة."
+
+#: src/interface/channels/text/ChannelDetailsPhone.tsx
+msgid "Pins"
+msgstr "المثبتة"
+
+#: src/interface/channels/text/ChannelDetailsPhone.tsx
+msgid "Still not loading."
+msgstr "ما زال التحميل متعذرًا."
+
+#: src/interface/channels/text/ChannelDetailsPhone.tsx
+msgid "This list couldn't be loaded"
+msgstr "تعذّر تحميل هذه القائمة"
