@@ -125,7 +125,17 @@ export class SlideDrawer {
     let dx = this.dir * (tNew.screenX - t.x),
       trig = t.trig;
 
-    if (!trig && Math.abs(dy) > CANCEL_Y) {
+    // A swipe the wrong way for where the drawer is (further into the page it
+    // already shows, or further into the menu) can move nothing: it is not
+    // ours. It used to start a drag all the same, which closed the keyboard
+    // and swallowed the gesture; a message row now uses that direction
+    // (pull to reply, swipeToReply.ts).
+    const nowhere =
+      !trig &&
+      Math.abs(dx) > TRIG_X &&
+      Math.max(Math.min(this.ofs + dx, 0), max) === this.ofs;
+
+    if (!trig && (Math.abs(dy) > CANCEL_Y || nowhere)) {
       this.endTouch();
     } else if (trig || Math.abs(dx) > TRIG_X) {
       //Store new/prev X for vel calc

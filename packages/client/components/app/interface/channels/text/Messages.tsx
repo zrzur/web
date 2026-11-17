@@ -20,10 +20,13 @@ import { Channel, Message as MessageInterface } from "@zrzur/sdk/solid";
 import isEqual from "fast-deep-equal/es6";
 import { styled } from "styled-system/jsx";
 
+import { canSend } from "@revolt/app/interface/channels/threadAccess";
 import { useClient, useClientLifecycle } from "@revolt/client";
 import { State } from "@revolt/client/Controller";
+import { useDevice } from "@revolt/common";
 import { useTime } from "@revolt/i18n";
 import { useState } from "@revolt/state";
+import { iconRegistry } from "@revolt/ui/icons/registry";
 
 import {
   BlockedMessage,
@@ -52,6 +55,8 @@ import { type PageSide, jumpBar } from "./history/reader";
 import { emptyWindow } from "./history/window";
 import { Message } from "./Message";
 import { useMessageCache } from "./MessageCache";
+import { isSelecting } from "./messageSelection";
+import { attachSwipeToReply } from "./swipeToReply";
 
 interface Props {
   /**
@@ -123,6 +128,7 @@ export function Messages(props: Props) {
   const state = useState();
   const dayjs = useTime();
   const motion = useMotion();
+  const device = useDevice();
 
   /**
    * The history of the open channel, as its controller reports it
@@ -174,6 +180,40 @@ export function Messages(props: Props) {
 
   const messageElement = (id: string) =>
     listRef()?.querySelector(`#${CSS.escape(id)}`);
+
+  // Touch screens: pull a message sideways to reply to it (swipeToReply.ts).
+  // Same rule as Reply in the message's menu; off while selecting messages.
+  createEffect(() => {
+    const list = listRef();
+    if (!list || !device.hasTouch) return;
+    const channel = props.channel;
+    onCleanup(
+      attachSwipeToReply(list, {
+        icon: iconRegistry["arrow-bend-up-left"],
+        enabled: () => !isSelecting(channel.id),
+        canReply: (id) => {
+          const message = client().messages.get(id);
+          return (
+            !!message &&
+            !message.author?.official &&
+            !!message.channel &&
+            canSend(message.channel)
+          );
+        },
+        onReply: (id) => {
+          const message = client().messages.get(id);
+          const me = client().user?.id;
+          if (!message || !me) return;
+          state.draft.addReply(message, me);
+          // straight to typing: the reply is one pull and the words
+          list
+            .closest("main")
+            ?.querySelector<HTMLElement>("[contenteditable='true'], textarea")
+            ?.focus();
+        },
+      }),
+    );
+  });
 
   /**
    * Fewer animations: the system setting, or motion switched off in the app
