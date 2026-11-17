@@ -670,8 +670,8 @@
     },
     {
       "path": "packages/client/components/app/interface/channels/text/Message.tsx",
-      "sha256": "468f11a240ba98d051b5c3d811e23b697d5971b91940265a616c1ae1bcaddd8a",
-      "bytes": 17702,
+      "sha256": "f34d8d4aef61c69be2ab1c58c33da1f80a0f09806e1d165236d7ed6914254f6e",
+      "bytes": 17683,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -2776,14 +2776,14 @@
     },
     {
       "path": "packages/client/components/app/menus/MessageContextMenu.tsx",
-      "sha256": "1fb45a4f7c1d140fb2287738d4f602931c745913c2d9f7867cbd672e89cbc536",
-      "bytes": 26103,
+      "sha256": "8b3bf1670ae309a9507f6df1de9bc896cf8eb3dca425d877234832fb4ff3b636",
+      "bytes": 24469,
       "category": "product-source-or-build-manifest"
     },
     {
       "path": "packages/client/components/app/menus/ServerContextMenu.tsx",
-      "sha256": "104c99b917ca759cea4aa8d5f3715a0755164c991a107ac8a259e65cc436517f",
-      "bytes": 16368,
+      "sha256": "b3ead9d23c2663cf8c72cc5f20bff38a16cedffadb624f9aeac61224969be91a",
+      "bytes": 16365,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -2812,8 +2812,8 @@
     },
     {
       "path": "packages/client/components/app/menus/index.tsx",
-      "sha256": "9a9c6242c3b053fc577f91c7dbecd0b01b0262e0d67cd50fa3d4e17b457ff383",
-      "bytes": 429,
+      "sha256": "0da9703aeabe4bf04b5005bafc6be9c74e5cf7fb9e01a69ea879ffd29e36a5e1",
+      "bytes": 748,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -2826,6 +2826,12 @@
       "path": "packages/client/components/app/menus/shared/NotificationContextMenu.tsx",
       "sha256": "cf2bd5c706ccfdf1596ed9377766a361e343063930141659e0ecc20686b82a1e",
       "bytes": 6136,
+      "category": "product-source-or-build-manifest"
+    },
+    {
+      "path": "packages/client/components/app/menus/shared/QuickRow.tsx",
+      "sha256": "b8db781bfca31f25400cb187d2843d479735e11dd8156c3f054f4e3001945910",
+      "bytes": 1739,
       "category": "product-source-or-build-manifest"
     },
     {
