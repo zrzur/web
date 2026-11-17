@@ -262,8 +262,8 @@
     },
     {
       "path": "CHANGELOG.md",
-      "sha256": "a310989deb6be171a808fcc74e436f9dad3e959da8523633d6ea8d7465a917e5",
-      "bytes": 171175,
+      "sha256": "31a70c624c3262789c37b9d673c9a09fd680b39a293be54526e1c0ea50a2c584",
+      "bytes": 171330,
       "category": "public-documentation"
     },
     {
@@ -42262,8 +42262,8 @@
     },
     {
       "path": "packages/client/src/interface/designs/Wall.tsx",
-      "sha256": "784a3f959b504ce05048cb0275d829d88464031b27a0d9ca6c5e6d7789b86daa",
-      "bytes": 35438,
+      "sha256": "a2898f89273521db9259ea8b7f997e2a206efc43f03e3e082fe50a1e95ea21b2",
+      "bytes": 35811,
       "category": "product-source-or-build-manifest"
     },
     {
