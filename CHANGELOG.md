@@ -2,6 +2,20 @@
 
 ## Unreleased
 
+### Phones: the details (owner review, 2026-11-17)
+
+* **A press on a conversation always opens it.** When the system took a swipe over (its own Back gesture from the screen edge, a call coming in), no end of the touch reached the app and the slide between the lists and the page stayed held: the next press moved the address and the conversation stayed off screen until another swipe. The slide now lets go of such a touch, and a press made while it is still settling is carried out, not dropped.
+* **Back from a conversation returns to the list of conversations** (it showed the Home page, which shares the list's address). In an installed app this is the only Back there is.
+* **The logo opens the Home page** on phones; the Messages tab keeps the list of conversations. The tab bar stays under the Home page too.
+* **Nothing stays lit after a touch.** Every `:hover` style now applies only where hovering exists (a build step, `scripts/postcssHoverOnly.cjs`, for hand-written `:hover`; `_hover` already did). On touch screens the row under the finger looked selected when a sheet opened (the message sheet showed "Start thread" in another colour), and buttons kept their hover colour after a press.
+* **Lifting the finger of a long press no longer presses the row that appeared under it** (the message sheet could open "Start thread" by itself).
+* **One look for "this one is on".** The chosen filter of Notifications was a white pill and the speaker button of a call a white tile, two more ways of saying what the chosen status and the chosen Friends tab say by being raised. Both are now the raised look; "you hear nothing" in a call uses the tint the call's own controls use for "off".
+* **Leaving a call from the list side is a tile like the buttons next to it** (camera, screen, sounds), in the danger tint; it was a bare icon beside three tiles.
+* **You page on phones:** the four statuses are two by two, all in view (one row cut "Online" off in German); Friends, Designs, Saved notes and Feather are rows with their one-line hint (the small tiles cut "Saved notes" short); and a new **Settings** group lists My account, Appearance, Notifications, Voice, Language, Sessions, Connections and All settings, each opening the settings on that page.
+* **Server on a phone:** the member count has room above it (it sat 4 px under the header line).
+* **"New unreads" in the channel list** is 44 px tall on phones (was 24) and uses the brand's own colours (mentions in the mention colour).
+* **Server information:** Close is no longer the filled button; an information sheet has no main action.
+
 ### Phones: faster replies, and calls that fit the hand (2026-11-17)
 
 * **Pull a message sideways to reply.** Away from the menu side (left in English, right in Arabic): the row follows the finger, an arrow fills, and letting go starts the reply with the message box ready. A short pull or a scroll does nothing; the other direction still slides the menu in.
