@@ -43756,8 +43756,8 @@
     },
     {
       "path": "packages/client/test/mediaPicker.spec.ts",
-      "sha256": "9102842964b6608da81ea5b2539f12ff862c5daede8f2d7ed25c133a8e74c4d3",
-      "bytes": 10521,
+      "sha256": "757b87f37598b00e63ee723aba0d17461c3e449aa35e644100c9c4c539579ff7",
+      "bytes": 10904,
       "category": "synthetic-test-source-or-fixture"
     },
     {
