@@ -1,10 +1,13 @@
-import { For, Show, createSignal } from "solid-js";
+import { For, Show, createMemo, createSignal } from "solid-js";
 
 import { Trans, useLingui } from "@lingui/solid/macro";
-import type { Server } from "@zrzur/sdk/solid";
+import type { Channel, Server, TicketType } from "@zrzur/sdk/solid";
 import { styled } from "styled-system/jsx";
 
+import { useClient } from "@revolt/client";
 import { TranslatedError } from "@revolt/i18n/errors";
+import { useModals } from "@revolt/modal";
+import { useNavigate } from "@revolt/routing";
 import {
   Button,
   Column,
@@ -16,21 +19,37 @@ import {
   TextField,
   Toggle,
 } from "@revolt/ui";
+import { Icon } from "@revolt/ui/icons/Icon";
 
 import { useSaved } from "./savedNotice";
 
-type Draft = { category: string; staff_roles: string[]; message: string };
+type Draft = {
+  category: string;
+  staff_roles: string[];
+  message: string;
+  types: Required<TicketType>[];
+};
 
 const draftOf = (server: Server): Draft => ({
   category: server.tickets?.category ?? "",
   staff_roles: [...(server.tickets?.staff_roles ?? [])],
   message: server.tickets?.message ?? "",
+  types: (server.tickets?.types ?? []).map((type) => ({
+    id: type.id,
+    name: type.name,
+    staff_roles: [...(type.staff_roles ?? [])],
+  })),
 });
+
+const MAX_TYPES = 5;
+const newId = () =>
+  Date.now().toString(36) + Math.random().toString(36).slice(2, 8);
 
 /**
  * Tickets: members open a private channel with the server's staff. The
- * switch saves at once; where tickets go, who answers and the first message
- * are saved together. The server checks all of it (tickets.rs).
+ * switch saves at once; where tickets go, who answers, the kinds of ticket
+ * and the first message are saved together. Under them, the tickets the
+ * viewer can see. The server checks all of it (tickets.rs).
  */
 export function TicketsSettings(props: { server: Server }) {
   const { t } = useLingui();
@@ -44,6 +63,7 @@ export function TicketsSettings(props: { server: Server }) {
   const on = () => props.server.tickets?.enabled === true;
   const stored = () => draftOf(props.server);
   const dirty = () => JSON.stringify(draft()) !== JSON.stringify(stored());
+  const typesReady = () => draft().types.every((type) => type.name.trim());
 
   async function send(enabled: boolean, values: Draft) {
     if (!canManage() || pending()) return;
@@ -56,6 +76,10 @@ export function TicketsSettings(props: { server: Server }) {
           category: values.category || undefined,
           staff_roles: values.staff_roles,
           message: values.message.trim() || undefined,
+          types: values.types.map((type) => ({
+            ...type,
+            name: type.name.trim(),
+          })),
         },
       });
       setDraft(draftOf(props.server));
@@ -67,20 +91,44 @@ export function TicketsSettings(props: { server: Server }) {
     }
   }
 
-  const toggleRole = (id: string) =>
+  const toggled = (list: string[], id: string) =>
+    list.includes(id)
+      ? list.filter((role) => role !== id)
+      : list.length < 10
+        ? [...list, id]
+        : list;
+
+  const setType = (id: string, change: Partial<Required<TicketType>>) =>
     setDraft((now) => ({
       ...now,
-      staff_roles: now.staff_roles.includes(id)
-        ? now.staff_roles.filter((role) => role !== id)
-        : now.staff_roles.length < 10
-          ? [...now.staff_roles, id]
-          : now.staff_roles,
+      types: now.types.map((type) =>
+        type.id === id ? { ...type, ...change } : type,
+      ),
     }));
+
+  const roleChips = (chosen: () => string[], toggle: (id: string) => void) => (
+    <Chips>
+      <For each={props.server.orderedRoles}>
+        {(role) => (
+          <Chip
+            type="button"
+            disabled={!canManage()}
+            aria-pressed={chosen().includes(role.id)}
+            onClick={() => toggle(role.id)}
+          >
+            <RoleDot style={{ background: role.colour ?? undefined }} />
+            {role.name}
+          </Chip>
+        )}
+      </For>
+    </Chips>
+  );
 
   return (
     <Column gap="lg">
       <SettingsSection>
         <SettingsRow
+          icon={<Icon name="ticket" size={20} />}
           title={t`Tickets`}
           description={t`Members get an "Open a ticket" row at the top of the channel list.`}
           disabled={!canManage() || pending()}
@@ -96,108 +144,197 @@ export function TicketsSettings(props: { server: Server }) {
             />
           )}
         />
+        <Show when={on()}>
+          <SettingsRow
+            icon={<Icon name="folder" size={20} />}
+            title={t`Category for new tickets`}
+            description={t`Where a new ticket appears in the channel list.`}
+            control={(ids) => (
+              <SelectWidth>
+                <FloatingSelect
+                  aria-labelledby={ids.labelId}
+                  value={draft().category || "none"}
+                  disabled={!canManage()}
+                  onChange={(e) => {
+                    const value = e.currentTarget.value;
+                    setDraft((now) => ({
+                      ...now,
+                      category: value === "none" ? "" : value,
+                    }));
+                  }}
+                >
+                  <MenuItem value="none">
+                    <Trans>No category</Trans>
+                  </MenuItem>
+                  <For each={props.server.categories ?? []}>
+                    {(category) => (
+                      <MenuItem value={category.id}>{category.title}</MenuItem>
+                    )}
+                  </For>
+                </FloatingSelect>
+              </SelectWidth>
+            )}
+          />
+        </Show>
       </SettingsSection>
 
       <Show when={on()}>
-        <Panel>
-          <Field>
-            <FieldLabel id="tickets-category">
-              <Trans>Category for new tickets</Trans>
-            </FieldLabel>
-            <SelectWidth>
-              <FloatingSelect
-                aria-labelledby="tickets-category"
-                value={draft().category || "none"}
-                disabled={!canManage()}
-                onChange={(e) => {
-                  const value = e.currentTarget.value;
-                  setDraft((now) => ({
-                    ...now,
-                    category: value === "none" ? "" : value,
-                  }));
-                }}
+        <SettingsSection
+          title={<Trans>Who answers</Trans>}
+          description={<Trans>The roles that see and answer tickets.</Trans>}
+        >
+          <Inside>
+            <Field>
+              <Show
+                when={props.server.orderedRoles.length}
+                fallback={
+                  <Text class="label" size="small">
+                    <Trans>
+                      This server has no roles yet. Until it does, only people
+                      who can see every channel answer tickets.
+                    </Trans>
+                  </Text>
+                }
               >
-                <MenuItem value="none">
-                  <Trans>No category</Trans>
-                </MenuItem>
-                <For each={props.server.categories ?? []}>
-                  {(category) => (
-                    <MenuItem value={category.id}>{category.title}</MenuItem>
-                  )}
-                </For>
-              </FloatingSelect>
-            </SelectWidth>
-          </Field>
+                {roleChips(
+                  () => draft().staff_roles,
+                  (id) =>
+                    setDraft((now) => ({
+                      ...now,
+                      staff_roles: toggled(now.staff_roles, id),
+                    })),
+                )}
+              </Show>
+            </Field>
+          </Inside>
+        </SettingsSection>
 
-          <Field>
-            <FieldLabel>
-              <Trans>Roles that answer tickets</Trans>
-            </FieldLabel>
-            <Show
-              when={props.server.orderedRoles.length}
-              fallback={
-                <Text class="label" size="small">
-                  <Trans>
-                    This server has no roles yet. Until it does, only people
-                    who can see every channel answer tickets.
-                  </Trans>
-                </Text>
-              }
-            >
-              <Chips>
-                <For each={props.server.orderedRoles}>
-                  {(role) => (
-                    <Chip
-                      type="button"
-                      disabled={!canManage()}
-                      aria-pressed={draft().staff_roles.includes(role.id)}
-                      onClick={() => toggleRole(role.id)}
-                    >
-                      <RoleDot
-                        style={{ background: role.colour ?? undefined }}
+        <SettingsSection
+          title={<Trans>Kinds of ticket</Trans>}
+          description={
+            <Trans>
+              With kinds, a member chooses one when opening a ticket, and each
+              kind can go to roles of its own. Without any, there is one kind of
+              ticket.
+            </Trans>
+          }
+        >
+          <Inside>
+            <Field>
+              <For each={draft().types}>
+                {(type, index) => (
+                  <TypeCard data-testid={`tickets-type-${index()}`}>
+                    <TypeHead>
+                      <TextField
+                        label={t`Name`}
+                        maxlength={32}
+                        disabled={!canManage()}
+                        value={type.name}
+                        placeholder={t`Support`}
+                        onInput={(e) =>
+                          setType(type.id, { name: e.currentTarget.value })
+                        }
                       />
-                      {role.name}
-                    </Chip>
-                  )}
-                </For>
-              </Chips>
+                      <RemoveType
+                        type="button"
+                        disabled={!canManage()}
+                        aria-label={t`Remove this kind`}
+                        title={t`Remove this kind`}
+                        onClick={() =>
+                          setDraft((now) => ({
+                            ...now,
+                            types: now.types.filter(
+                              (one) => one.id !== type.id,
+                            ),
+                          }))
+                        }
+                      >
+                        <Icon name="trash" size={18} />
+                      </RemoveType>
+                    </TypeHead>
+                    <Show when={props.server.orderedRoles.length}>
+                      <FieldLabel>
+                        <Trans>Answered by (none: the roles above)</Trans>
+                      </FieldLabel>
+                      {roleChips(
+                        () =>
+                          draft().types.find((one) => one.id === type.id)
+                            ?.staff_roles ?? [],
+                        (id) =>
+                          setType(type.id, {
+                            staff_roles: toggled(
+                              draft().types.find((one) => one.id === type.id)
+                                ?.staff_roles ?? [],
+                              id,
+                            ),
+                          }),
+                      )}
+                    </Show>
+                  </TypeCard>
+                )}
+              </For>
+              <Show when={draft().types.length < MAX_TYPES}>
+                <AddRow>
+                  <Button
+                    size="sm"
+                    variant="tonal"
+                    isDisabled={!canManage()}
+                    data-testid="tickets-add-type"
+                    onPress={() =>
+                      setDraft((now) => ({
+                        ...now,
+                        types: [
+                          ...now.types,
+                          { id: newId(), name: "", staff_roles: [] },
+                        ],
+                      }))
+                    }
+                  >
+                    <Trans>Add a kind</Trans>
+                  </Button>
+                </AddRow>
+              </Show>
+            </Field>
+          </Inside>
+        </SettingsSection>
+
+        <SettingsSection title={<Trans>First message in a ticket</Trans>}>
+          <Inside>
+            <TextField
+              aria-label={t`First message in a ticket`}
+              autosize
+              min-rows={2}
+              maxlength={500}
+              counter
+              disabled={!canManage()}
+              value={draft().message}
+              placeholder={t`Tell us what you need and we will answer here.`}
+              onInput={(e) => {
+                const value = e.currentTarget.value;
+                setDraft((now) => ({ ...now, message: value }));
+              }}
+            />
+
+            <Show when={dirty()}>
+              <Actions>
+                <Button
+                  variant="text"
+                  isDisabled={pending()}
+                  onPress={() => setDraft(stored())}
+                >
+                  <Trans>Reset</Trans>
+                </Button>
+                <Button
+                  isDisabled={pending() || !typesReady()}
+                  data-testid="tickets-save"
+                  onPress={() => void send(true, draft())}
+                >
+                  <Trans>Save</Trans>
+                </Button>
+              </Actions>
             </Show>
-          </Field>
-
-          <TextField
-            label={t`First message in a ticket`}
-            autosize
-            min-rows={2}
-            maxlength={500}
-            counter
-            disabled={!canManage()}
-            value={draft().message}
-            placeholder={t`Tell us what you need and we will answer here.`}
-            onInput={(e) => {
-              const value = e.currentTarget.value;
-              setDraft((now) => ({ ...now, message: value }));
-            }}
-          />
-
-          <Show when={dirty()}>
-            <Actions>
-              <Button
-                variant="text"
-                isDisabled={pending()}
-                onPress={() => setDraft(stored())}
-              >
-                <Trans>Reset</Trans>
-              </Button>
-              <Button
-                isDisabled={pending()}
-                data-testid="tickets-save"
-                onPress={() => void send(true, draft())}
-              >
-                <Trans>Save</Trans>
-              </Button>
-            </Actions>
-          </Show>
-        </Panel>
+          </Inside>
+        </SettingsSection>
       </Show>
 
       <Text class="label" size="small">
@@ -211,18 +348,120 @@ export function TicketsSettings(props: { server: Server }) {
           <TranslatedError error={error()} />
         </div>
       </Show>
+
+      <TicketBoard server={props.server} />
     </Column>
   );
 }
 
-const Panel = styled("div", {
+/**
+ * The tickets of a server that the viewer can see: how many are open, how
+ * many are taken, what the help was rated, and each ticket with its state.
+ */
+function TicketBoard(props: { server: Server }) {
+  const { t } = useLingui();
+  const client = useClient();
+  const navigate = useNavigate();
+  const { pop } = useModals();
+
+  const tickets = createMemo(() =>
+    props.server.channels
+      .filter((channel) => channel.ticket)
+      .sort((a, b) => b.ticket!.number - a.ticket!.number),
+  );
+  const open = () => tickets().filter((channel) => !channel.ticket!.closed);
+  const taken = () => open().filter((channel) => channel.ticket!.claimedById);
+  const ratings = () =>
+    tickets()
+      .map((channel) => channel.ticket!.rating)
+      .filter((rating): rating is number => !!rating);
+  const average = () => {
+    const all = ratings();
+    return all.length
+      ? (all.reduce((sum, one) => sum + one, 0) / all.length).toFixed(1)
+      : undefined;
+  };
+  const nameOf = (id: string | undefined) =>
+    id
+      ? (client().serverMembers.getByKey({ server: props.server.id, user: id })
+          ?.displayName ??
+        client().users.get(id)?.displayName ??
+        "")
+      : "";
+
+  const go = (channel: Channel) => {
+    pop();
+    navigate(`/server/${props.server.id}/channel/${channel.id}`);
+  };
+
+  return (
+    <Show when={tickets().length}>
+      <SettingsSection
+        title={<Trans>Tickets you can see</Trans>}
+        description={
+          <Trans>Open, taken and closed tickets, newest first.</Trans>
+        }
+      >
+        <Inside data-testid="ticket-board">
+          <Counts>
+            <Count>
+              <strong data-testid="board-open">{open().length}</strong>
+              <Trans>Open</Trans>
+            </Count>
+            <Count>
+              <strong data-testid="board-taken">{taken().length}</strong>
+              <Trans>Taken</Trans>
+            </Count>
+            <Count>
+              <strong>{tickets().length - open().length}</strong>
+              <Trans>Closed</Trans>
+            </Count>
+            <Count>
+              <strong data-testid="board-rating">{average() ?? "–"}</strong>
+              <Trans>Average rating</Trans>
+            </Count>
+          </Counts>
+        </Inside>
+        <For each={tickets().slice(0, 50)}>
+          {(channel) => (
+            <SettingsRow
+              navigational
+              icon={<Icon name="ticket" size={20} />}
+              title={channel.name}
+              onClick={() => go(channel)}
+              description={
+                <>
+                  {[
+                    channel.ticket!.kind,
+                    nameOf(channel.ticket!.openerId),
+                    channel.ticket!.closed
+                      ? t`Closed`
+                      : channel.ticket!.claimedById
+                        ? t`Taken by ${nameOf(channel.ticket!.claimedById)}`
+                        : t`Waiting`,
+                    channel.ticket!.rating
+                      ? `${channel.ticket!.rating}/5`
+                      : undefined,
+                  ]
+                    .filter(Boolean)
+                    .join(" · ")}
+                </>
+              }
+            />
+          )}
+        </For>
+      </SettingsSection>
+    </Show>
+  );
+}
+
+/** The padded inside of a settings card, for what is not a row */
+const Inside = styled("div", {
   base: {
     display: "flex",
     flexDirection: "column",
     gap: "16px",
     padding: "16px",
-    borderRadius: "var(--z-radius, 10px)",
-    background: "var(--z-bg-raised)",
     _phone: { padding: "12px" },
   },
 });
@@ -281,6 +520,74 @@ const RoleDot = styled("span", {
   },
 });
 
+const TypeCard = styled("div", {
+  base: {
+    display: "flex",
+    flexDirection: "column",
+    gap: "8px",
+    padding: "12px",
+    borderRadius: "8px",
+    border: "1px solid var(--z-border-subtle)",
+  },
+});
+
+const TypeHead = styled("div", {
+  base: {
+    display: "flex",
+    alignItems: "flex-end",
+    gap: "8px",
+    "& > :first-child": { flex: 1, minWidth: 0 },
+  },
+});
+
+const RemoveType = styled("button", {
+  base: {
+    display: "grid",
+    placeItems: "center",
+    width: "40px",
+    height: "40px",
+    border: "none",
+    borderRadius: "8px",
+    background: "none",
+    color: "var(--z-fg-secondary)",
+    cursor: "pointer",
+    "--z-icon-color": "currentColor",
+    _hover: { background: "var(--z-nav-hover)", color: "var(--z-danger)" },
+    _focusVisible: { outline: "2px solid var(--z-focus)" },
+    _phone: { width: "44px", height: "44px" },
+  },
+});
+
+const AddRow = styled("div", { base: { display: "flex" } });
+
 const Actions = styled("div", {
   base: { display: "flex", justifyContent: "flex-end", gap: "8px" },
+});
+
+const Counts = styled("div", {
+  base: {
+    display: "grid",
+    gridTemplateColumns: "repeat(4, minmax(0, 1fr))",
+    gap: "8px",
+    _phone: { gridTemplateColumns: "repeat(2, minmax(0, 1fr))" },
+  },
+});
+
+const Count = styled("div", {
+  base: {
+    display: "flex",
+    flexDirection: "column",
+    gap: "4px",
+    padding: "12px",
+    borderRadius: "8px",
+    background: "var(--z-bg-raised)",
+    fontSize: "12px",
+    color: "var(--z-fg-secondary)",
+    "& strong": {
+      fontSize: "20px",
+      fontWeight: 700,
+      color: "var(--z-fg-primary)",
+      fontVariantNumeric: "tabular-nums",
+    },
+  },
 });

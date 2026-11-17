@@ -135,6 +135,14 @@ export type Modals =
       channel: Channel;
     }
   | {
+      type: "open_ticket";
+      server: Server;
+    }
+  | {
+      type: "room_controls";
+      channel: Channel;
+    }
+  | {
       type: "delete_category";
       server: Server;
       categoryId: string;

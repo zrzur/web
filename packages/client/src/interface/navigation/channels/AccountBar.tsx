@@ -35,6 +35,11 @@ import {
   setSoundboardOpen,
   soundboardOpen,
 } from "@revolt/ui/components/features/voice/soundboard/soundboardOpen";
+import {
+  controlsRoom,
+  roomControlsOpen,
+  setRoomControlsOpen,
+} from "@revolt/ui/components/features/voice/rooms/roomControlsOpen";
 import { Icon } from "@revolt/ui/icons/Icon";
 import SoundsUnavailable from "@revolt/ui/components/features/voice/soundboard/SoundsUnavailable";
 import { lazyRetry } from "@revolt/ui/components/utils/lazyRetry";
@@ -287,6 +292,7 @@ function VoiceSection() {
     notReady() ||
     !limits().video ||
     (!voice.videoPermission && !voice.screenshare());
+  const roomClient = useClient();
   const soundboardAllowed = () =>
     !!voice.channel()?.havePermission("UseSoundboard");
   const soundboardDisabled = () =>
@@ -296,9 +302,18 @@ function VoiceSection() {
   createEffect(
     on(
       () => voice.channel()?.id,
-      () => setSoundboardOpen(false),
+      () => {
+        setSoundboardOpen(false);
+        setRoomControlsOpen(false);
+      },
     ),
   );
+
+  // the call is in a temporary room this user controls
+  const myRoom = () => controlsRoom(voice.channel(), roomClient().user?.id);
+  // one thing above the card at a time
+  createEffect(() => soundboardOpen() && setRoomControlsOpen(false));
+  createEffect(() => !myRoom() && setRoomControlsOpen(false));
 
   // where the sounds open: just above this card, at its reading-start edge
   let panel: HTMLDivElement | undefined;
@@ -312,7 +327,7 @@ function VoiceSection() {
   const measure = () =>
     setPlace((panel?.parentElement ?? panel)?.getBoundingClientRect());
   createEffect(() => {
-    if (!soundboardOpen()) return;
+    if (!soundboardOpen() && !roomControlsOpen()) return;
     measure();
     window.addEventListener("resize", measure);
     onCleanup(() => window.removeEventListener("resize", measure));
@@ -440,7 +455,53 @@ function VoiceSection() {
             <Icon name="music-note" size={20} />
           </button>
         </Show>
+        {/* your own temporary room: its controls open right above this card */}
+        <Show when={myRoom()}>
+          <button
+            class={voiceAction()}
+            data-voice-control="room"
+            aria-label={t`Room controls`}
+            aria-pressed={roomControlsOpen()}
+            aria-haspopup="dialog"
+            onClick={() => {
+              setSoundboardOpen(false);
+              setRoomControlsOpen(!roomControlsOpen());
+            }}
+            use:floating={{
+              tooltip: { placement: "top", content: t`Room controls` },
+            }}
+          >
+            <Icon
+              name={
+                voice.channel()?.voice?.locked
+                  ? "lock-simple"
+                  : "lock-simple-open"
+              }
+              size={20}
+            />
+          </button>
+        </Show>
       </VoiceActions>
+      <Show
+        when={
+          layout() !== "phone" &&
+          voice.layout() !== "fullscreen" &&
+          roomControlsOpen() &&
+          myRoom() &&
+          voice.channel()
+        }
+      >
+        {(channel) => (
+          <Portal mount={document.getElementById("floating") ?? undefined}>
+            <SoundboardAbove style={abovePanel()}>
+              <RoomControlsPanel
+                channel={channel()}
+                onClose={() => setRoomControlsOpen(false)}
+              />
+            </SoundboardAbove>
+          </Portal>
+        )}
+      </Show>
       {/* the sounds open over the call, right above this card; drawn in the
           floating layer, since the channel list cuts off what reaches past it */}
       <Show
@@ -471,6 +532,13 @@ const SoundboardPicker = lazyRetry(
   () =>
     import("@revolt/ui/components/features/voice/soundboard/SoundboardPicker"),
   SoundsUnavailable,
+);
+
+// the room's controls load with their first open
+const RoomControlsPanel = lazyRetry(
+  () =>
+    import("@revolt/ui/components/features/voice/rooms/RoomControlsPanel"),
+  () => null,
 );
 
 const SoundboardAbove = styled("div", {

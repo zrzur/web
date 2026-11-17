@@ -26,9 +26,9 @@ export const hugeiconsMap = {
   headphones: "HeadphonesIcon",
   "speaker-slash": "VolumeOffIcon",
   headset: "HeadsetIcon",
-  // a member's ticket; a voice channel that hands out rooms (both drawn
-  // from @hugeicons/core-free-icons 4.4.0)
-  ticket: "Ticket01Icon",
+  // a voice channel that hands out rooms (drawn from
+  // @hugeicons/core-free-icons 4.4.0). The ticket icon is Zrzur's own
+  // drawing: see components/ui/icons/hugeicons/ZRZUR-OWN.md
   "speaker-plus": "VolumeUpIcon",
   "speaker-high": "VolumeHighIcon",
   phone: "Call02Icon",

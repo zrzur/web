@@ -1119,6 +1119,15 @@ function Entry(
                 <Match when={props.channel.isRoomMaker}>
                   <SidebarIcon name="roomMaker" size={20} />
                 </Match>
+                <Match when={props.channel.voice?.locked}>
+                  <SidebarIcon
+                    name="lock"
+                    size={20}
+                    style={{
+                      color: inCall() ? "var(--z-presence-online)" : undefined,
+                    }}
+                  />
+                </Match>
                 <Match when={props.channel.isVoice}>
                   <SidebarIcon
                     name={props.channel.isStage ? "stage" : "voice"}

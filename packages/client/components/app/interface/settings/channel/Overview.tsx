@@ -33,6 +33,9 @@ import { UserLimitSlider } from "./UserLimitSlider";
 /**
  * Channel overview
  */
+/** What a room maker's name template puts the member's name in place of */
+const NAME_TOKEN = "{name}";
+
 export default function ChannelOverview(props: ChannelSettingsProps) {
   const { t } = useLingui();
   const client = useClient();
@@ -55,6 +58,7 @@ export default function ChannelOverview(props: ChannelSettingsProps) {
       props.channel.voice?.maxUsers?.toString() ?? "",
     ),
     announcement: createFormControl(props.channel.announcement),
+    roomName: createFormControl(props.channel.voice?.roomName ?? ""),
   });
   /* eslint-enable solid/reactivity */
 
@@ -69,6 +73,7 @@ export default function ChannelOverview(props: ChannelSettingsProps) {
       props.channel.voice?.maxUsers?.toString() ?? "",
     );
     editGroup.controls.announcement.setValue(props.channel.announcement);
+    editGroup.controls.roomName.setValue(props.channel.voice?.roomName ?? "");
   }
 
   async function onSubmit() {
@@ -112,6 +117,13 @@ export default function ChannelOverview(props: ChannelSettingsProps) {
       changes.voice = userLimitChange(
         parseUserLimit(editGroup.controls.userLimit.value),
       );
+    }
+
+    if (props.channel.isRoomMaker && editGroup.controls.roomName.isDirty) {
+      changes.voice = {
+        ...changes.voice,
+        room_name: editGroup.controls.roomName.value.trim(),
+      };
     }
 
     await props.channel.edit(changes);
@@ -234,6 +246,24 @@ export default function ChannelOverview(props: ChannelSettingsProps) {
                       />
                     )}
                   />
+                  <Show when={props.channel.isRoomMaker}>
+                    <SettingsFormPanel>
+                      <Form2.TextField
+                        maxlength={32}
+                        counter
+                        name="roomName"
+                        control={editGroup.controls.roomName}
+                        label={t`Name of the rooms`}
+                        placeholder={NAME_TOKEN}
+                      />
+                      <Hint>
+                        <Trans>
+                          {NAME_TOKEN} stands for the member. Empty: the room
+                          carries the member's name alone.
+                        </Trans>
+                      </Hint>
+                    </SettingsFormPanel>
+                  </Show>
                 </Show>
               </SettingsSection>
             </Show>

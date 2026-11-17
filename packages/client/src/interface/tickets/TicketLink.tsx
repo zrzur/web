@@ -29,7 +29,7 @@ export function TicketLink(props: { server: Server }) {
   const client = useClient();
   const navigate = useNavigate();
   const state = useState();
-  const { showError } = useModals();
+  const { openModal, showError } = useModals();
   const [pending, setPending] = createSignal(false);
 
   const shown = () => props.server.tickets?.enabled === true;
@@ -44,6 +44,11 @@ export function TicketLink(props: { server: Server }) {
   async function open() {
     const ticket = mine();
     if (ticket) return go(ticket.id);
+    // a server with kinds of ticket asks which one first
+    if (props.server.tickets?.types.length) {
+      state.appDrawer()?.setShown(true);
+      return openModal({ type: "open_ticket", server: props.server });
+    }
     if (pending()) return;
     setPending(true);
     try {
