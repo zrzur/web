@@ -18,6 +18,7 @@ import { ChannelContextMenu, ServerContextMenu } from "@revolt/app";
 import { MessageCache } from "@revolt/app/interface/channels/text/MessageCache";
 import { Titlebar } from "@revolt/app/interface/desktop/Titlebar";
 import { ChangeRequestNotice } from "@revolt/app/interface/settings/user/account/ChangeRequestNotice";
+import { UsernameNotice } from "@revolt/app/interface/settings/user/account/UsernameNotice";
 import { NoticeCenter } from "@revolt/app/interface/support/NoticeCenter";
 import { useClient, useClientLifecycle } from "@revolt/client";
 import { State } from "@revolt/client/Controller";
@@ -219,6 +220,7 @@ const Interface = (props: { children?: JSX.Element }) => {
         {/* plugins load lazily, for a signed-in user, if the server has them on */}
         <Show when={isLoggedIn()}>
           <ChangeRequestNotice />
+          <UsernameNotice />
           <NoticeCenter />
         </Show>
         <Show when={isLoggedIn()}>

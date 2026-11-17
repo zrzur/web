@@ -1,3 +1,4 @@
+import { userHandle } from "@revolt/common/lib/userTag";
 import { Accessor, createMemo } from "solid-js";
 
 import type {
@@ -82,10 +83,7 @@ export function codeMirrorAutoCompleteSource(
         type: "user",
         label: ("@" + displayName).normalize("NFKC"),
         displayLabel: displayName,
-        detail:
-          displayName !== userName
-            ? `${userName}#${user.discriminator}`
-            : undefined,
+        detail: displayName !== userName ? userHandle(user) : undefined,
         apply: `<@${typeof id === "string" ? id : id.user}> `,
         url: entry.animatedAvatarURL,
       };

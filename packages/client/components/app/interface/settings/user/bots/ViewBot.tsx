@@ -1,3 +1,4 @@
+import { userHandle } from "@revolt/common/lib/userTag";
 import { Show, createSignal } from "solid-js";
 
 import { Trans, useLingui } from "@lingui/solid/macro";
@@ -145,8 +146,8 @@ export function ViewBot(props: { bot: Bot; onDelete?: () => void }) {
                 title={<Trans>Show your name on the bot's page</Trans>}
                 description={
                   <Trans>
-                    When on, people who open this bot's invite page see that
-                    you made it. Off by default.
+                    When on, people who open this bot's invite page see that you
+                    made it. Off by default.
                   </Trans>
                 }
                 onClick={toggleCreator}
@@ -178,11 +179,7 @@ export function ViewBot(props: { bot: Bot; onDelete?: () => void }) {
         <SettingsRow
           icon={<Icon name="at" size={20} />}
           title={<Trans>Username</Trans>}
-          description={
-            <>
-              {props.bot.user!.username}#{props.bot.user!.discriminator}
-            </>
-          }
+          description={<>{userHandle(props.bot.user)}</>}
           onClick={() =>
             openModal({ type: "edit_bot_username", bot: props.bot })
           }

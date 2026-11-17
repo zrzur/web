@@ -1,3 +1,4 @@
+import { userHandle } from "@revolt/common/lib/userTag";
 import { For, JSX, Match, Switch } from "solid-js";
 
 import { ServerMember } from "@zrzur/sdk/solid";
@@ -80,11 +81,11 @@ export function AutoComplete(
                   match.user.displayName !== match.user.user?.username && (
                     <>
                       {" "}
-                      @{match.user.user?.username}#
-                      {/* the own tag stays off screen in streamer mode */}
-                      {state.settings.streamerMode && match.user.user?.self
-                        ? "••••"
-                        : match.user.user?.discriminator}
+                      {/* the own tag stays off screen in streamer mode */}@
+                      {userHandle(
+                        match.user.user,
+                        state.settings.streamerMode && match.user.user?.self,
+                      )}
                     </>
                   )}
               </Entry>

@@ -1,3 +1,4 @@
+import { userHandle, userTag } from "@revolt/common/lib/userTag";
 import { Show, createSignal } from "solid-js";
 
 import { useLingui } from "@lingui/solid/macro";
@@ -48,9 +49,7 @@ export function ProfileIdentity(props: {
 
   // "Copied!" only when the browser took it; a refusal is no page error
   async function copy() {
-    const copiedIt = await copyText(
-      `${props.user.username}#${props.user.discriminator}`,
-    );
+    const copiedIt = await copyText(userHandle(props.user));
     if (!copiedIt) return;
     setCopied(true);
     setTimeout(() => setCopied(false), 1500);
@@ -102,7 +101,7 @@ export function ProfileIdentity(props: {
           }}
         >
           {props.user.username}
-          <Tag>#{props.user.discriminator}</Tag>
+          <Tag>{userTag(props.user)}</Tag>
         </button>
         <Show when={pronouns()}>
           <Dot aria-hidden="true">•</Dot>

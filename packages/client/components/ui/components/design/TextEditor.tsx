@@ -1,3 +1,4 @@
+import { userHandle } from "@revolt/common/lib/userTag";
 import { useFloating } from "solid-floating-ui";
 import {
   Accessor,
@@ -16,6 +17,7 @@ import { Portal } from "solid-js/web";
 
 import { AutoSizer } from "@dschz/solid-auto-sizer";
 import { autoUpdate, flip, shift } from "@floating-ui/dom";
+import { Channel, ServerMember, ServerRole, User } from "@zrzur/sdk/solid";
 import autocomplete, {
   ActionKind,
   closeAutocomplete,
@@ -34,7 +36,6 @@ import { keymap } from "prosemirror-keymap";
 import { Node } from "prosemirror-model";
 import { EditorState, EditorStateConfig, Selection } from "prosemirror-state";
 import { EditorView } from "prosemirror-view";
-import { Channel, ServerMember, ServerRole, User } from "@zrzur/sdk/solid";
 import { css, cva } from "styled-system/css";
 import { styled } from "styled-system/jsx";
 
@@ -958,10 +959,7 @@ function Suggestions(props: {
                 <Name>{match.displayName}</Name>
                 {match instanceof ServerMember &&
                   match.displayName !== match.user?.username && (
-                    <>
-                      {" "}
-                      @{match.user?.username}#{match.user?.discriminator}
-                    </>
+                    <> @{userHandle(match.user)}</>
                   )}
               </Entry>
             )}

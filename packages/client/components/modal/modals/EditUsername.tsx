@@ -3,6 +3,7 @@ import { Show, createSignal } from "solid-js";
 
 import { Trans, useLingui } from "@lingui/solid/macro";
 
+import { hasOldTag, userHandle } from "@revolt/common/lib/userTag";
 import { useError } from "@revolt/i18n";
 import { useState } from "@revolt/state";
 import { Column, Dialog, DialogProps, Form2 } from "@revolt/ui";
@@ -15,7 +16,10 @@ import { Modals } from "../types";
 const RE_USERNAME = /^(\p{L}|[\d_.-])+$/u;
 
 /**
- * Change account username
+ * Change account username. Usernames are unique: the name picked here belongs
+ * to this account alone. An account that still has a number tag from before
+ * may also keep its name as it is, which makes the name its own and drops
+ * the tag.
  */
 export function EditUsernameModal(
   props: DialogProps & Modals & { type: "edit_username" },
@@ -23,13 +27,12 @@ export function EditUsernameModal(
   const { t } = useLingui();
   const describeError = useError();
   const state = useState();
-  // the own tag stays off screen in streamer mode
-  const tag = (value?: string) =>
-    state.settings.streamerMode ? "••••" : value;
 
   // the dialog edits the signed-in user, which never changes underneath it
   // eslint-disable-next-line solid/reactivity
   const currentUsername = props.client.user!.username;
+  // eslint-disable-next-line solid/reactivity
+  const hadOldTag = hasOldTag(props.client.user);
   const group = createFormGroup({
     username: createFormControl(currentUsername, {
       required: true,
@@ -39,8 +42,6 @@ export function EditUsernameModal(
 
   const [loading, setLoading] = createSignal(false);
   const [error, setError] = createSignal<string>();
-  // set when the server had to assign a new number tag
-  const [newTag, setNewTag] = createSignal<string>();
 
   const username = () => group.controls.username.value.trim();
 
@@ -57,7 +58,8 @@ export function EditUsernameModal(
     !loading() &&
     !usernameError() &&
     username().length >= 2 &&
-    username() !== currentUsername &&
+    // an account with an old tag may keep its name: that makes it its own
+    (hadOldTag || username() !== currentUsername) &&
     !!group.controls.currentPassword.value;
 
   async function onSubmit() {
@@ -65,17 +67,11 @@ export function EditUsernameModal(
     setError(undefined);
     setLoading(true);
     try {
-      const previousDiscriminator = props.client.user!.discriminator;
       await props.client.user!.changeUsername(
         username(),
         group.controls.currentPassword.value,
       );
-
-      if (props.client.user!.discriminator !== previousDiscriminator) {
-        setNewTag(props.client.user!.discriminator);
-      } else {
-        props.onClose();
-      }
+      props.onClose();
     } catch (err) {
       setError(describeError(err));
     } finally {
@@ -89,79 +85,75 @@ export function EditUsernameModal(
       iconName="at"
       show={props.show}
       onClose={props.onClose}
-      persistent={group.isDirty && !newTag()}
-      title={<Trans>Change your username</Trans>}
+      persistent={group.isDirty}
+      title={
+        <Show when={hadOldTag} fallback={<Trans>Change your username</Trans>}>
+          <Trans>Choose your username</Trans>
+        </Show>
+      }
       description={
         <Show
-          when={!newTag()}
-          fallback={<Trans>Your username has been updated.</Trans>}
+          when={hadOldTag}
+          fallback={
+            <Trans>
+              Your username is yours alone, and friends use it to find you.
+              Enter your current password to confirm.
+            </Trans>
+          }
         >
           <Trans>
-            Friends use your username and number tag to find you. Enter your
-            current password to confirm.
+            Usernames no longer have a number tag. Choose a username that will
+            be yours alone; you can keep{" "}
+            <strong dir="ltr" style={{ color: "var(--z-fg-primary)" }}>
+              {currentUsername}
+            </strong>{" "}
+            if nobody has taken it. Until then you stay{" "}
+            <span dir="ltr">
+              {userHandle(props.client.user, state.settings.streamerMode)}
+            </span>
+            .
           </Trans>
         </Show>
       }
       error={error()}
-      actions={
-        newTag()
-          ? [{ text: <Trans>Done</Trans> }]
-          : [
-              { text: <Trans>Cancel</Trans> },
-              {
-                text: <Trans>Save username</Trans>,
-                onClick: () => {
-                  onSubmit();
-                  return false;
-                },
-                isDisabled: !canSubmit(),
-                isLoading: loading(),
-              },
-            ]
-      }
+      actions={[
+        { text: <Trans>Cancel</Trans> },
+        {
+          text: <Trans>Save username</Trans>,
+          onClick: () => {
+            onSubmit();
+            return false;
+          },
+          isDisabled: !canSubmit(),
+          isLoading: loading(),
+        },
+      ]}
     >
-      <Show
-        when={!newTag()}
-        fallback={
-          <p style={{ margin: 0 }}>
-            <Trans>
-              That name was already taken with your previous number, so you are
-              now{" "}
-              <strong style={{ color: "var(--z-fg-primary)" }}>
-                {props.client.user!.username}#{tag(newTag())}
-              </strong>
-              .
-            </Trans>
-          </p>
-        }
-      >
-        <form {...Form2.enterSubmits(onSubmit)}>
-          <Column gap="lg">
-            <Form2.TextField
-              minlength={2}
-              maxlength={32}
-              counter
-              name="username"
-              autocomplete="username"
-              autocapitalize="none"
-              spellcheck={false}
-              control={group.controls.username}
-              label={t`Username`}
-              suffix={`#${tag(props.client.user!.discriminator)}`}
-              error={usernameError()}
-              helper={t`2 to 32 characters. Your number tag may change if this name is taken.`}
-            />
-            <Form2.TextField
-              name="currentPassword"
-              control={group.controls.currentPassword}
-              label={t`Current password`}
-              type="password"
-              toggle-password
-              autocomplete="current-password"
-            />
-          </Column>
-        </form>
-      </Show>
+      <form {...Form2.enterSubmits(onSubmit)}>
+        <Column gap="lg">
+          <Form2.TextField
+            minlength={2}
+            maxlength={32}
+            counter
+            name="username"
+            autocomplete="username"
+            autocapitalize="none"
+            spellcheck={false}
+            control={group.controls.username}
+            label={t`Username`}
+            error={usernameError()}
+            helper={t`2 to 32 characters. Capital and small letters count as the same name. You can change it twice a day.`}
+          />
+          <Form2.TextField
+            name="currentPassword"
+            control={group.controls.currentPassword}
+            label={t`Current password`}
+            type="password"
+            toggle-password
+            autocomplete="current-password"
+          />
+        </Column>
+      </form>
     </Dialog>
   );
 }

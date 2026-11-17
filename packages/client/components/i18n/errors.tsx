@@ -469,7 +469,7 @@ export function useError() {
         case "DatabaseError":
           return t`Something went wrong on our side. Try again in a moment.`;
         case "DiscriminatorChangeRatelimited":
-          return t`Your discriminator change has been ratelimited, please try again later.`;
+          return t`You changed your username twice today. Try again tomorrow.`;
         case "DuplicateNonce":
           return t`This has already been sent.`;
         case "EmptyMessage":

@@ -1,3 +1,4 @@
+import { userTag } from "@revolt/common/lib/userTag";
 import { For, Match, Show, Switch, createMemo, createSignal } from "solid-js";
 
 import { Trans, useLingui } from "@lingui/solid/macro";
@@ -113,7 +114,7 @@ export function ListServerBans(props: { server: Server }) {
                 title={
                   <>
                     {item.user?.username}
-                    <Tag>#{item.user?.discriminator}</Tag>
+                    <Tag>{userTag(item.user)}</Tag>
                   </>
                 }
                 description={item.reason || t`No reason given`}

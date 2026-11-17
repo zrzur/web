@@ -1,3 +1,4 @@
+import { userTag } from "@revolt/common/lib/userTag";
 import { createFormControl, createFormGroup } from "solid-forms";
 
 import { Trans, useLingui } from "@lingui/solid/macro";
@@ -70,7 +71,7 @@ export function EditBotUsernameModal(
               label={t`Username`}
             />
             <div class={css({ flexShrink: 0 })}>
-              <Text class="label">#{props.bot.user!.discriminator}</Text>
+              <Text class="label">{userTag(props.bot.user)}</Text>
             </div>
           </Row>
         </Column>

@@ -1,3 +1,4 @@
+import { userTag } from "@revolt/common/lib/userTag";
 import { Show } from "solid-js";
 
 import { Trans } from "@lingui/solid/macro";
@@ -50,7 +51,7 @@ export function UserSummary(props: {
             {props.user.username}
             {/* the own tag stays off screen in streamer mode */}
             <span data-testid="own-tag">
-              #{state.settings.streamerMode ? "••••" : props.user.discriminator}
+              {userTag(props.user, state.settings.streamerMode)}
             </span>
           </Handle>
           <Show when={props.showBadges}>
