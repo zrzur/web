@@ -312,6 +312,11 @@ const group = css({
     "& > .button[aria-current='page']:not(:active)": {
       background: "transparent",
     },
+    "& > .button[aria-current='page']": {
+      fontWeight: 500,
+      color: "var(--z-fg-secondary, var(--md-sys-color-on-surface))",
+      "--z-icon-color": "var(--z-icon-muted)",
+    },
     "& > .button[data-marker='bar']::before": { display: "none" },
   },
 });

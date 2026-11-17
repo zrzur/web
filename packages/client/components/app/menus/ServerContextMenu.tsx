@@ -187,12 +187,14 @@ export function ServerContextMenu(props: {
     <ContextMenu>
       <Show when={sheet}>
         <SheetHead data-server-sheet-head>
-          <Avatar
-            size={56}
-            shape="rounded-square"
-            src={props.server.animatedIconURL ?? props.server.iconURL}
-            fallback={props.server.name}
-          />
+          <SheetHeadIcon>
+            <Avatar
+              size={56}
+              shape="rounded-square"
+              src={props.server.animatedIconURL ?? props.server.iconURL}
+              fallback={props.server.name}
+            />
+          </SheetHeadIcon>
           <SheetHeadText>
             <strong dir="auto">{props.server.name}</strong>
             <Show when={props.server.approximateMemberCount}>
@@ -518,13 +520,21 @@ const SheetHead = styled("div", {
     alignItems: "center",
     gap: "14px",
     padding: "0 2px 14px",
-    // a server without a picture shows its initials: on a tile, as on the rail
-    "& > :first-child": {
-      flex: "none",
-      borderRadius: "16px",
-      background: "var(--z-bg-frame)",
-      boxShadow: "inset 0 0 0 1px var(--z-border-subtle)",
-    },
+  },
+});
+
+/** A server without a picture shows its initials: on a tile, as on the rail */
+const SheetHeadIcon = styled("span", {
+  base: {
+    flex: "none",
+    width: "56px",
+    height: "56px",
+    display: "grid",
+    placeItems: "center",
+    overflow: "hidden",
+    borderRadius: "16px",
+    background: "var(--z-bg-frame)",
+    boxShadow: "inset 0 0 0 1px var(--z-border-subtle)",
   },
 });
 
