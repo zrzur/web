@@ -274,6 +274,9 @@ const Container = styled("div", {
     background: "var(--z-bg-members, var(--z-bg-shell, var(--z-bg-chat)))",
     borderInlineStart: "1px solid var(--z-border-subtle)",
     borderRadius: 0,
+    // phones: the panel is the whole screen, a line down its side is a
+    // stray stroke (owner, 2026-11-17)
+    _phone: { borderInlineStart: "none" },
   },
 });
 

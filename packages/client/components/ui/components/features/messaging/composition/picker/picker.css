@@ -500,6 +500,8 @@
   padding: 8px 12px 4px;
 }
 .z-picker-grab {
+  /* no bar on the sheets (owner, 2026-11-17) */
+  display: none;
   align-self: center;
   width: 40px;
   height: 4px;
@@ -543,13 +545,15 @@
   );
   width: 100%;
   height: var(--z-picker-dock, min(360px, 48dvh));
-  border-inline: 0;
-  border-bottom: 0;
+  /* no outline along the top edge and round the corners, and the colour of
+     every other sheet (the invite sheet is the measure; owner, 2026-11-17) */
+  border: 0;
   border-radius: 20px 20px 0 0;
   /* the home-bar strip under the panel takes the panel's own fill */
   box-shadow: 0 60px 0 0 var(--z-popover-bg, var(--picker-bg));
-  background: var(--z-bg-frame, var(--picker-bg));
-  --z-popover-bg: var(--z-bg-frame, #0d0e16);
+  background: var(--z-dialog-bg, var(--z-bg-floating, var(--picker-bg)));
+  --z-popover-bg: var(--z-dialog-bg, var(--z-bg-floating, #12131b));
+  --picker-bg: var(--z-dialog-bg, var(--z-bg-floating, #12131b));
 }
 .z-gif-category > span {
   text-align: center;
@@ -706,6 +710,35 @@
 .z-media-picker--phone .z-gif-skeleton,
 .z-media-picker--phone .z-picker-state-icon {
   border-radius: 12px;
+}
+/* Phones: drawn sizes. The switch is 40 px with 32 px buttons, the search
+   field and the button beside it 40 px; what takes the touch is still 44
+   (the ::after of each button) */
+.z-media-picker--phone .z-picker-switch button {
+  position: relative;
+  min-height: 32px;
+}
+.z-media-picker--phone .z-picker-switch button::after {
+  content: "";
+  position: absolute;
+  inset: -6px 0;
+}
+.z-media-picker--phone .z-picker-search {
+  min-height: 40px;
+  height: 40px;
+}
+.z-media-picker--phone .z-picker-search input {
+  height: 38px;
+}
+.z-media-picker--phone .z-emoji-add {
+  position: relative;
+  flex-basis: 40px;
+  height: 40px;
+}
+.z-media-picker--phone .z-emoji-add::after {
+  content: "";
+  position: absolute;
+  inset: -2px;
 }
 .z-media-picker--phone .z-picker-tabs button,
 .z-media-picker--phone .z-picker-icon-button,

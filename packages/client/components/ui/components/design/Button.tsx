@@ -222,8 +222,17 @@ const successButton = {
 const button = cva({
   base: {
     ...typography.raw(),
-    // phones: a 44 px tap target (phone rules)
-    _phone: { minHeight: "44px", minWidth: "44px" },
+    // phones: drawn at its own size (28 to 40 px), 44 px to the finger: the
+    // unseen ::after reaches past a button shorter or narrower than 44 px
+    // (owner, 2026-11-17: buttons looked oversized at a drawn 44 px)
+    _phone: {
+      "&::after": {
+        content: '""',
+        position: "absolute",
+        insetInline: "min(0px, calc((100% - 44px) / 2))",
+        insetBlock: "min(0px, calc((100% - 44px) / 2))",
+      },
+    },
 
     position: "relative",
     paddingInline: "var(--padding-inline)",

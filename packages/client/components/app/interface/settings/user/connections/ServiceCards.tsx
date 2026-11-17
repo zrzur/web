@@ -770,6 +770,15 @@ const Consent = styled("div", {
     gap: "12px",
     padding: "16px",
     borderRadius: "var(--z-radius-md)",
+    // phones: the fill and corner of every settings group, no frame
+    // (owner, 2026-11-17: one box look everywhere)
+    _phone: {
+      border: "none",
+      borderRadius: "14px",
+      boxShadow: "none",
+      background:
+        "color-mix(in srgb, var(--z-fg-primary) 4%, transparent)",
+    },
     border: "1px solid var(--z-border-subtle)",
     color: "var(--z-fg-primary)",
     fontSize: "14px",

@@ -1,4 +1,4 @@
-import { For, Show, createSignal } from "solid-js";
+import { For, Show, createEffect, createSignal, on } from "solid-js";
 
 import { Trans, useLingui } from "@lingui/solid/macro";
 import { useQuery } from "@tanstack/solid-query";
@@ -11,8 +11,8 @@ import { useDevice } from "@revolt/common";
 import { presencePatch } from "@revolt/common/lib/statusWrite";
 import { useModals } from "@revolt/modal";
 import { installWay } from "@revolt/pwa/installPrompt";
-import { useNavigate } from "@revolt/routing";
-import { Header, UserStatus } from "@revolt/ui";
+import { useLocation, useNavigate } from "@revolt/routing";
+import { Dialog, Header, UserStatus } from "@revolt/ui";
 import { Profile } from "@revolt/ui/components/features";
 import { fetchFullProfile } from "@revolt/ui/components/features/profiles/linkedGames";
 import { createProfileTheme } from "@revolt/ui/components/features/profiles/profileTheme";
@@ -66,6 +66,54 @@ export function You() {
         </Show>
       </Scroll>
     </Base>
+  );
+}
+
+/**
+ * Phones: "You" rises from the bottom as a sheet over what is behind it, the
+ * way the invite sheet does (owner, 2026-11-17: not a whole page). It closes
+ * by a pull down, a tap outside it, Escape or Back, and when one of its rows
+ * leads somewhere (a page, the settings). Opened by navigation/YouSheet.tsx,
+ * which loads this file the first time. The page at /you stays for wider
+ * screens and for links to it.
+ */
+export function YouSheet(props: { show: boolean; onClose: () => void }) {
+  const user = useUser();
+  const location = useLocation();
+
+  createEffect(
+    on(
+      () => location.pathname,
+      () => props.onClose(),
+      { defer: true },
+    ),
+  );
+
+  return (
+    <Dialog
+      show={props.show}
+      onClose={() => props.onClose()}
+      appearance="creation"
+    >
+      <SheetBody
+        data-sheet-edge
+        data-you-sheet
+        onClick={(event) => {
+          // a row that leads away takes the sheet with it; the status rows
+          // work inside it
+          if (
+            (event.target as Element).closest(
+              "[data-links] button, [data-settings] button, [data-edit-profile]",
+            )
+          )
+            props.onClose();
+        }}
+      >
+        <Show when={user()}>
+          <Body user={user()!} />
+        </Show>
+      </SheetBody>
+    </Dialog>
   );
 }
 
@@ -178,7 +226,11 @@ function Body(props: { user: User }) {
           />
           <CardBody>
             <Profile.Identity user={props.user} size="card" />
-            <Action type="button" onClick={() => settings("profile")}>
+            <Action
+              type="button"
+              data-edit-profile
+              onClick={() => settings("profile")}
+            >
               <Icon name="pencil-simple" size={18} />
               <Trans>Edit profile</Trans>
             </Action>
@@ -524,6 +576,17 @@ const Scroll = styled("div", {
     flexGrow: 1,
     minHeight: 0,
     overflowY: "auto",
+  },
+});
+
+/** The sheet's own scroller; the profile's banner takes the sheet's corners */
+const SheetBody = styled("div", {
+  base: {
+    minHeight: 0,
+    overflowY: "auto",
+    overscrollBehavior: "contain",
+    borderRadius: "20px 20px 0 0",
+    scrollbarWidth: "none",
   },
 });
 

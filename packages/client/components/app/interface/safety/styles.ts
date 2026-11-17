@@ -138,6 +138,15 @@ export const Notice = styled("p", {
     margin: 0,
     padding: "10px 12px",
     borderRadius: "10px",
+    // phones: the fill and corner of every settings group, no frame
+    // (owner, 2026-11-17: one box look everywhere)
+    _phone: {
+      border: "none",
+      borderRadius: "14px",
+      boxShadow: "none",
+      background:
+        "var(--z-sheet-group, color-mix(in srgb, var(--z-fg-primary) 5%, transparent))",
+    },
     fontSize: "13px",
     lineHeight: 1.45,
     color: "var(--z-fg-secondary)",
@@ -241,6 +250,15 @@ export const Empty = styled("div", {
     "--z-icon-color": "var(--z-status-success, #55DCC8)",
     // the empty / error state sits on the settings panel surface
     borderRadius: "calc(var(--z-radius, 10px) + 4px)",
+    // phones: the fill and corner of every settings group, no frame
+    // (owner, 2026-11-17: one box look everywhere)
+    _phone: {
+      border: "none",
+      borderRadius: "14px",
+      boxShadow: "none",
+      background:
+        "var(--z-sheet-group, color-mix(in srgb, var(--z-fg-primary) 5%, transparent))",
+    },
     border: "1px solid color-mix(in srgb, var(--z-fg-primary) 8%, transparent)",
     background:
       "linear-gradient(180deg, color-mix(in srgb, white 3%, color-mix(in srgb, var(--z-bg-sidebar) 70%, var(--z-bg-chat))), color-mix(in srgb, var(--z-bg-sidebar) 70%, var(--z-bg-chat)))",

@@ -508,6 +508,9 @@ const sidebar = cva({
     borderRadius: 0,
     background: "var(--z-bg-shell)",
     borderInlineStart: "1px solid var(--z-border-subtle)",
+    // phones: the panel is the whole screen, a line down its side is a
+    // stray stroke (owner, 2026-11-17)
+    _phone: { borderInlineStart: "none" },
   },
   variants: {
     overlay: {

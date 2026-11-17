@@ -43,6 +43,15 @@ export const Tile = styled("li", {
     minWidth: 0,
     padding: "12px",
     borderRadius: "calc(var(--z-radius, 10px) + 2px)",
+    // phones: the fill and corner of every settings group, no frame
+    // (owner, 2026-11-17: one box look everywhere)
+    _phone: {
+      border: "none",
+      borderRadius: "14px",
+      boxShadow: "none",
+      background:
+        "var(--z-sheet-group, color-mix(in srgb, var(--z-fg-primary) 5%, transparent))",
+    },
     border: "1px solid var(--z-btn-surface-border)",
     background: "var(--z-card-bg)",
     boxShadow: "var(--z-card-lift)",
@@ -116,6 +125,15 @@ export const Card = styled("div", {
     gap: "8px",
     padding: "14px",
     borderRadius: "calc(var(--z-radius, 10px) + 2px)",
+    // phones: the fill and corner of every settings group, no frame
+    // (owner, 2026-11-17: one box look everywhere)
+    _phone: {
+      border: "none",
+      borderRadius: "14px",
+      boxShadow: "none",
+      background:
+        "var(--z-sheet-group, color-mix(in srgb, var(--z-fg-primary) 5%, transparent))",
+    },
     border: "1px solid var(--z-btn-surface-border)",
     background: "var(--z-card-bg)",
     boxShadow: "var(--z-card-lift)",
@@ -304,6 +322,15 @@ export const Showcase = styled("section", {
     gap: "18px",
     padding: "20px",
     borderRadius: "calc(var(--z-radius, 10px) + 6px)",
+    // phones: the fill and corner of every settings group, no frame
+    // (owner, 2026-11-17: one box look everywhere)
+    _phone: {
+      border: "none",
+      borderRadius: "14px",
+      boxShadow: "none",
+      background:
+        "var(--z-sheet-group, color-mix(in srgb, var(--z-fg-primary) 5%, transparent))",
+    },
     border: "1px solid color-mix(in srgb, var(--z-fg-primary) 8%, transparent)",
     background:
       "radial-gradient(420px 180px at 100% 0%, color-mix(in srgb, var(--z-accent) 16%, transparent), transparent 70%), linear-gradient(180deg, color-mix(in srgb, white 3%, color-mix(in srgb, var(--z-bg-sidebar) 70%, var(--z-bg-chat))), color-mix(in srgb, var(--z-bg-sidebar) 70%, var(--z-bg-chat)))",

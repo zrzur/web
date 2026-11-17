@@ -36,6 +36,10 @@ export const sidebarBase = cva({
       flexShrink: 1,
       width: "auto",
       minWidth: 0,
+      // the panel's top edge sits a little under the top of the screen, not
+      // on it (owner, 2026-11-17). Its colour stays the rail's: a lighter
+      // panel was tried the same day and he preferred it as it was.
+      marginBlockStart: "8px",
     },
   },
 });

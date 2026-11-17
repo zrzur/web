@@ -149,6 +149,15 @@ const Base = styled("a", {
     padding: "11px 14px",
     // a standalone row is its own small panel; inside a Group it becomes a plain row
     borderRadius: "10px",
+    // phones: the fill and corner of every settings group, no frame
+    // (owner, 2026-11-17: one box look everywhere)
+    _phone: {
+      border: "none",
+      borderRadius: "14px",
+      boxShadow: "none",
+      background:
+        "var(--z-sheet-group, color-mix(in srgb, var(--z-fg-primary) 5%, transparent))",
+    },
     // same surface as the settings panels (SettingsSection)
     border: "1px solid var(--z-border-soft)",
     background: "var(--z-bg-raised)",
@@ -328,6 +337,15 @@ CategoryButton.Group = styled("div", {
     gap: 0,
 
     borderRadius: "10px",
+    // phones: the fill and corner of every settings group, no frame
+    // (owner, 2026-11-17: one box look everywhere)
+    _phone: {
+      border: "none",
+      borderRadius: "14px",
+      boxShadow: "none",
+      background:
+        "var(--z-sheet-group, color-mix(in srgb, var(--z-fg-primary) 5%, transparent))",
+    },
     overflow: "hidden",
     // same surface as the settings panels (SettingsSection)
     border: "1px solid var(--z-border-soft)",
@@ -600,6 +618,15 @@ const Details = styled("div", {
     minWidth: 0,
     border: "1px solid var(--z-border-subtle)",
     borderRadius: "10px",
+    // phones: the fill and corner of every settings group, no frame
+    // (owner, 2026-11-17: one box look everywhere)
+    _phone: {
+      border: "none",
+      borderRadius: "14px",
+      boxShadow: "none",
+      background:
+        "var(--z-sheet-group, color-mix(in srgb, var(--z-fg-primary) 5%, transparent))",
+    },
     overflow: "hidden",
     background: "color-mix(in srgb, var(--z-bg-sidebar) 70%, var(--z-bg-chat))",
     "& > summary": { listStyle: "none" },

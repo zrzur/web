@@ -143,8 +143,15 @@ export function MenuButton(
  */
 const base = cva({
   base: {
-    // phones: a full touch row (phone rules)
-    _phone: { minHeight: "44px" },
+    // phones: a full touch row (phone rules), and the box drawn in it
+    // (hover, pressed, chosen) is 36 px: the 4 px above and under take the
+    // touch but are not painted
+    _phone: {
+      minHeight: "44px",
+      borderBlock: "4px solid transparent",
+      backgroundClip: "padding-box",
+      borderRadius: "12px",
+    },
     flexShrink: 0,
 
     fontWeight: 500,

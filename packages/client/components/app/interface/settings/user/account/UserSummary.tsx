@@ -78,6 +78,15 @@ const Card = styled("section", {
   base: {
     overflow: "hidden",
     borderRadius: "12px",
+    // phones: the fill and corner of every settings group, no frame
+    // (owner, 2026-11-17: one box look everywhere)
+    _phone: {
+      border: "none",
+      borderRadius: "14px",
+      boxShadow: "none",
+      background:
+        "var(--z-sheet-group, color-mix(in srgb, var(--z-fg-primary) 5%, transparent))",
+    },
     border: "1px solid var(--z-border-subtle)",
     background: "color-mix(in srgb, var(--z-bg-sidebar) 70%, var(--z-bg-chat))",
   },

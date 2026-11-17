@@ -26,6 +26,7 @@ import Breakpoint from "../../../common/Breakpoint";
 import { FloatingElement, floatingElements } from "../../directives";
 
 import { dismissFloatingElements } from ".";
+import { sheetSwipe } from "../design/sheetSwipe";
 import { takesEscape } from "./takesEscape";
 import { TooltipBase } from "./Tooltip";
 
@@ -289,6 +290,12 @@ function Floating(props: FloatingElement & { mouseX: number; mouseY: number }) {
   const sheet = () =>
     phone && !!(props.show()?.contextMenu || props.show()?.userCard);
 
+  // the sheet closes by a pull down (sheetSwipe.ts), as every sheet does
+  const swipe = sheetSwipe(
+    () => floating(),
+    () => props.hide(),
+  );
+
   const sheetView = () => (
     <Motion
       style={{
@@ -319,8 +326,11 @@ function Floating(props: FloatingElement & { mouseX: number; mouseY: number }) {
         <SheetPanel
           ref={setFloating}
           data-card={props.show()?.userCard ? "" : undefined}
+          onTouchStart={swipe.onTouchStart}
+          onTouchMove={swipe.onTouchMove}
+          onTouchEnd={swipe.onTouchEnd}
+          onTouchCancel={swipe.onTouchCancel}
         >
-          <SheetGrabber aria-hidden="true" />
           {content()}
         </SheetPanel>
       </Motion>
@@ -450,23 +460,6 @@ const SheetPanel = styled("div", {
         borderRadius: "0 !important",
         boxShadow: "none !important",
       },
-      "& > [aria-hidden]": {
-        zIndex: 2,
-        background: "rgb(255 255 255 / 0.55)",
-      },
     },
-  },
-});
-
-const SheetGrabber = styled("div", {
-  base: {
-    position: "absolute",
-    top: "9px",
-    left: "50%",
-    translate: "-50% 0",
-    width: "40px",
-    height: "5px",
-    borderRadius: "999px",
-    background: "color-mix(in srgb, var(--z-fg-primary) 22%, transparent)",
   },
 });

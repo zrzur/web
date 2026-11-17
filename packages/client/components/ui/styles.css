@@ -209,12 +209,23 @@ html[data-installed] {
   [role="tab"] {
     min-width: 44px;
   }
-  /* other buttons on pages, in settings and in sheets: 44 px tall unless the
-     component sets its own minimum (zero specificity, so it never wins over
-     a component); a switch sets its own 44 px target (Toggle.tsx) */
+  /* other buttons on pages, in settings and in sheets: drawn at their own
+     size, as on a computer, and 44 px tall to the finger. The rule used to
+     be min-height: 44px, which drew every button 44 px tall and made the
+     phone look oversized (owner, 2026-11-17). Now an unseen ::after reaches
+     past a button shorter than 44 px, and does nothing on a taller one.
+     Zero specificity, so a component that uses ::after itself keeps its own;
+     a switch sets its own 44 px target (Toggle.tsx). */
   :where(.app_body, .settings_cont, .z-dialog)
     :where(button:not([role="switch"])) {
-    min-height: 44px;
+    position: relative;
+  }
+  :where(.app_body, .settings_cont, .z-dialog)
+    :where(button:not([role="switch"]))::after {
+    content: "";
+    position: absolute;
+    inset-inline: 0;
+    inset-block: min(0px, calc((100% - 44px) / 2));
   }
   [data-dialog-close] {
     width: 44px !important;
