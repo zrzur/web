@@ -1780,8 +1780,8 @@ msgid "Account suspended"
 msgstr "Аккаунт приостановлен"
 
 #: src/interface/You.tsx
-#~ msgid "Account, privacy, appearance and more"
-#~ msgstr "Аккаунт, конфиденциальность, внешний вид и другое"
+msgid "Account, privacy, appearance and more"
+msgstr "Аккаунт, конфиденциальность, внешний вид и другое"
 
 #: components/ui/components/features/profiles/badges/useBadgeText.ts
 msgid "Accounts created before the early adopter cut-off."
@@ -2398,8 +2398,8 @@ msgid "All servers"
 msgstr "Все серверы"
 
 #: src/interface/You.tsx
-msgid "All settings"
-msgstr "Все настройки"
+#~ msgid "All settings"
+#~ msgstr "Все настройки"
 
 #: components/app/interface/settings/user/profile/studio/StudioHome.tsx
 msgid "All shortcuts"
@@ -2865,7 +2865,6 @@ msgstr "Не удалось загрузить обжалования."
 #: components/app/interface/settings/user/plugins/text.ts
 #: components/app/interface/settings/user/Sync.tsx
 #: components/app/interface/settings/UserSettings.tsx
-#: src/interface/You.tsx
 msgid "Appearance"
 msgstr "Внешний вид"
 
@@ -5770,7 +5769,6 @@ msgstr "Соединение потеряно. Переподключение…
 
 #: components/app/interface/settings/UserSettings.tsx
 #: components/ui/components/features/profiles/labels.ts
-#: src/interface/You.tsx
 msgid "Connections"
 msgstr "Подключения"
 
@@ -11495,7 +11493,6 @@ msgstr "Подпись"
 #: components/app/interface/settings/user/Language.tsx
 #: components/app/interface/settings/user/Sync.tsx
 #: components/app/interface/settings/UserSettings.tsx
-#: src/interface/You.tsx
 msgid "Language"
 msgstr "Язык"
 
@@ -13639,7 +13636,6 @@ msgstr "Общие группы"
 #: components/app/interface/settings/user/_AccountCard.tsx
 #: components/app/interface/settings/user/support/ContactSupport.tsx
 #: components/app/interface/settings/UserSettings.tsx
-#: src/interface/You.tsx
 msgid "My account"
 msgstr "Моя учётная запись"
 
@@ -15038,7 +15034,6 @@ msgstr "Пока ничего. Перед публикацией этой вер
 #: components/app/menus/ServerContextMenu.tsx
 #: components/app/menus/shared/NotificationContextMenu.tsx
 #: src/interface/navigation/NotificationsPhone.tsx
-#: src/interface/You.tsx
 msgid "Notifications"
 msgstr "Уведомления"
 
@@ -20061,7 +20056,6 @@ msgstr "Серверы: {0}"
 
 #: components/app/interface/settings/user/Account.tsx
 #: components/app/interface/settings/UserSettings.tsx
-#: src/interface/You.tsx
 msgid "Sessions"
 msgstr "Сессии"
 
@@ -25192,7 +25186,6 @@ msgstr "Перейти"
 #: components/app/interface/settings/UserSettings.tsx
 #: components/modal/modals/CreateChannel.tsx
 #: components/modal/modals/permissionTitles.ts
-#: src/interface/You.tsx
 msgid "Voice"
 msgstr "Голос"
 
@@ -25201,7 +25194,6 @@ msgid "VOICE"
 msgstr "ГОЛОС"
 
 #: components/app/interface/settings/UserSettings.tsx
-#: src/interface/You.tsx
 msgid "Voice & Video"
 msgstr "Голос и видео"
 

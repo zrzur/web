@@ -1815,8 +1815,8 @@ msgstr "Konto vorübergehend gesperrt"
 #~ msgstr "Konto, Darstellung, Benachrichtigungen, Sprache und mehr."
 
 #: src/interface/You.tsx
-#~ msgid "Account, privacy, appearance and more"
-#~ msgstr "Konto, Privatsphäre, Darstellung und mehr"
+msgid "Account, privacy, appearance and more"
+msgstr "Konto, Privatsphäre, Darstellung und mehr"
 
 #: components/ui/components/features/profiles/badges/useBadgeText.ts
 msgid "Accounts created before the early adopter cut-off."
@@ -2441,8 +2441,8 @@ msgid "All servers"
 msgstr "Alle Server"
 
 #: src/interface/You.tsx
-msgid "All settings"
-msgstr "Alle Einstellungen"
+#~ msgid "All settings"
+#~ msgstr "Alle Einstellungen"
 
 #: components/app/interface/settings/user/profile/studio/StudioHome.tsx
 msgid "All shortcuts"
@@ -2944,7 +2944,6 @@ msgstr "Die Einsprüche konnten nicht geladen werden."
 #: components/app/interface/settings/user/plugins/text.ts
 #: components/app/interface/settings/user/Sync.tsx
 #: components/app/interface/settings/UserSettings.tsx
-#: src/interface/You.tsx
 msgid "Appearance"
 msgstr "Erscheinungsbild"
 
@@ -5950,7 +5949,6 @@ msgstr "Verbindung verloren. Verbindung wird wiederhergestellt…"
 
 #: components/app/interface/settings/UserSettings.tsx
 #: components/ui/components/features/profiles/labels.ts
-#: src/interface/You.tsx
 msgid "Connections"
 msgstr "Verknüpfungen"
 
@@ -11944,7 +11942,6 @@ msgstr "Beschriftung"
 #: components/app/interface/settings/user/Language.tsx
 #: components/app/interface/settings/user/Sync.tsx
 #: components/app/interface/settings/UserSettings.tsx
-#: src/interface/You.tsx
 msgid "Language"
 msgstr "Sprache"
 
@@ -14159,7 +14156,6 @@ msgstr "Gemeinsame Gruppen"
 #: components/app/interface/settings/user/_AccountCard.tsx
 #: components/app/interface/settings/user/support/ContactSupport.tsx
 #: components/app/interface/settings/UserSettings.tsx
-#: src/interface/You.tsx
 msgid "My account"
 msgstr "Mein Konto"
 
@@ -15638,7 +15634,6 @@ msgstr "Noch nichts. Du wirst gefragt, bevor diese Version veröffentlicht wird.
 #: components/app/menus/ServerContextMenu.tsx
 #: components/app/menus/shared/NotificationContextMenu.tsx
 #: src/interface/navigation/NotificationsPhone.tsx
-#: src/interface/You.tsx
 msgid "Notifications"
 msgstr "Benachrichtigungen"
 
@@ -20910,7 +20905,6 @@ msgstr "Server: {0}"
 
 #: components/app/interface/settings/user/Account.tsx
 #: components/app/interface/settings/UserSettings.tsx
-#: src/interface/You.tsx
 msgid "Sessions"
 msgstr "Sitzungen"
 
@@ -26242,7 +26236,6 @@ msgstr "Öffnen"
 #: components/app/interface/settings/UserSettings.tsx
 #: components/modal/modals/CreateChannel.tsx
 #: components/modal/modals/permissionTitles.ts
-#: src/interface/You.tsx
 msgid "Voice"
 msgstr "Sprache"
 
@@ -26251,7 +26244,6 @@ msgid "VOICE"
 msgstr "SPRACHE"
 
 #: components/app/interface/settings/UserSettings.tsx
-#: src/interface/You.tsx
 msgid "Voice & Video"
 msgstr "Sprache & Video"
 
