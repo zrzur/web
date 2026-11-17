@@ -367,7 +367,7 @@ const SheetPanel = styled("div", {
     maxHeight: "78dvh",
     overflowY: "auto",
     overscrollBehavior: "contain",
-    padding: "22px 8px calc(12px + var(--z-safe-bottom))",
+    padding: "24px 16px calc(16px + var(--z-safe-bottom))",
     borderRadius: "22px 22px 0 0",
     background: "var(--z-bg-modal, var(--z-bg-raised))",
     borderTop: "1px solid var(--z-border-strong)",
@@ -385,10 +385,44 @@ const SheetPanel = styled("div", {
       outline: "none !important",
     },
     "& [role='menuitem']": {
-      minHeight: "48px",
-      paddingInline: "12px",
+      minHeight: "50px",
+      paddingInline: "16px",
       fontSize: "16px",
       gap: "14px",
+    },
+    // Groups of rows are cards (owner, 2026-11-17): the rows of a group share
+    // one surface with a hairline between them, and the divider between two
+    // groups is the room between two cards. Written once here, so the
+    // message, server, channel and person sheets all look the same.
+    "& [role='menu'][tabindex]": {
+      gap: 0,
+      "& > :is(a, [role='menuitem'])": {
+        borderRadius: 0,
+        background:
+          "var(--z-sheet-group, color-mix(in srgb, var(--z-fg-primary) 5%, transparent))",
+      },
+      "& > :is(a, [role='menuitem']):active": {
+        background: "color-mix(in srgb, var(--z-fg-primary) 10%, transparent)",
+      },
+      "& > :is(a, [role='menuitem']) + :is(a, [role='menuitem'])": {
+        borderTop: "1px solid var(--z-float-divider, var(--z-border-subtle))",
+      },
+      // the first row of a group, and the last
+      "& > :is(a, [role='menuitem']):not(:is(a, [role='menuitem']) + *)": {
+        borderStartStartRadius: "14px",
+        borderStartEndRadius: "14px",
+      },
+      "& > :is(a, [role='menuitem']):not(:has(+ :is(a, [role='menuitem'])))": {
+        borderEndStartRadius: "14px",
+        borderEndEndRadius: "14px",
+      },
+      "& > [data-menu-divider]": {
+        height: "12px",
+        margin: 0,
+        background: "none",
+      },
+      "& > [data-menu-divider] + [data-menu-divider], & > [data-menu-divider]:last-child, & > [data-menu-divider]:first-child":
+        { display: "none" },
     },
     // profile cards use the sheet's width
     "& > :not([aria-hidden])": { width: "100% !important", maxWidth: "none" },

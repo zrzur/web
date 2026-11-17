@@ -46,6 +46,7 @@ import { i18n } from "@lingui/core";
 import { Trans, useLingui } from "@lingui/solid/macro";
 import { styled } from "styled-system/jsx";
 
+import { Emoji } from "@revolt/markdown";
 import { pluginsEnabled } from "@revolt/plugins/enabled";
 import {
   hostHooks as pluginHooks,
@@ -57,6 +58,7 @@ import {
   apps as MdApps,
   sentiment_content as MdSentimentContent,
 } from "@revolt/ui/icons/legacy";
+
 import Breakpoint from "../../common/Breakpoint";
 import {
   ContextMenu,
@@ -453,6 +455,31 @@ export function MessageContextMenu(props: {
       <Show when={props.message}>
         {/* phones: what people do most, one tap away, before the list */}
         <Show when={quick()}>
+          {/* a reaction in one tap: six to start from, the last opens them all */}
+          <Show when={canReact()}>
+            <ReactRow role="group" data-quick-reactions>
+              <For each={QUICK_REACTIONS}>
+                {(emoji) => (
+                  <ReactTile
+                    role="menuitem"
+                    tabIndex={0}
+                    aria-label={emoji}
+                    onClick={() => void props.message!.react(emoji)}
+                  >
+                    <Emoji emoji={emoji} />
+                  </ReactTile>
+                )}
+              </For>
+              <ReactTile
+                role="menuitem"
+                tabIndex={0}
+                aria-label={t`React`}
+                onClick={(e) => props.reactPicker!()?.onClickEmoji(e)}
+              >
+                <Icon name="smiley" size={22} />
+              </ReactTile>
+            </ReactRow>
+          </Show>
           <QuickRow role="group" data-quick-actions>
             <Show when={canReply()}>
               <QuickAction
@@ -467,16 +494,16 @@ export function MessageContextMenu(props: {
                 </span>
               </QuickAction>
             </Show>
-            <Show when={canReact()}>
+            <Show when={canForward()}>
               <QuickAction
                 role="menuitem"
                 tabIndex={0}
-                aria-label={t`React`}
-                onClick={(e) => props.reactPicker!()?.onClickEmoji(e)}
+                aria-label={t`Forward`}
+                onClick={forward}
               >
-                <Icon name="smiley" size={22} />
+                <Icon name="arrow-bend-up-right" size={22} />
                 <span>
-                  <Trans>React</Trans>
+                  <Trans>Forward</Trans>
                 </span>
               </QuickAction>
             </Show>
@@ -522,7 +549,7 @@ export function MessageContextMenu(props: {
             <Trans>Reply</Trans>
           </ContextMenuButton>
         </Show>
-        <Show when={canForward()}>
+        <Show when={canForward() && !quick()}>
           <ContextMenuButton icon={MdForward} onClick={forward}>
             <Trans>Forward</Trans>
           </ContextMenuButton>
@@ -736,15 +763,60 @@ export function MessageContextMenu(props: {
  *
  *   [reply]  [react]  [copy]  [delete]
  */
-const QuickRow = styled("div", {
+export const QuickRow = styled("div", {
   base: {
     display: "flex",
-    gap: "2px",
-    paddingInline: "2px",
+    gap: "8px",
   },
 });
 
-const QuickAction = styled("a", {
+/** Six reactions to start from; the seventh tile opens the whole picker */
+const QUICK_REACTIONS = [
+  "\u2764\uFE0F",
+  "\u{1F602}",
+  "\u{1F44D}",
+  "\u{1F525}",
+  "\u{1F389}",
+  "\u{1F440}",
+];
+
+const ReactRow = styled("div", {
+  base: {
+    display: "grid",
+    gridTemplateColumns: "repeat(7, minmax(0, 1fr))",
+    gap: "8px",
+    marginBottom: "8px",
+  },
+});
+
+const ReactTile = styled("a", {
+  base: {
+    // (!important: the phone sheet sizes every menu row, FloatingManager)
+    minHeight: "46px !important",
+    padding: "0 !important",
+    display: "grid",
+    placeItems: "center",
+    borderRadius: "12px",
+    cursor: "pointer",
+    background:
+      "var(--z-sheet-group, color-mix(in srgb, var(--z-fg-primary) 5%, transparent))",
+    "--z-icon-color": "var(--z-fg-secondary)",
+    "--emoji-size": "24px",
+    WebkitTapHighlightColor: "transparent",
+    transition: "scale 100ms ease",
+    _motionReduce: { transition: "none" },
+    _active: {
+      scale: "0.92",
+      background: "color-mix(in srgb, var(--z-fg-primary) 10%, transparent)",
+    },
+    "&:focus-visible": {
+      outline: "none",
+      boxShadow: "inset 0 0 0 2px var(--z-focus)",
+    },
+  },
+});
+
+export const QuickAction = styled("a", {
   base: {
     flex: "1 1 0",
     minWidth: 0,
@@ -757,7 +829,9 @@ const QuickAction = styled("a", {
     gap: "6px !important",
     paddingBlock: "8px",
     paddingInline: "2px !important",
-    borderRadius: "var(--z-radius-md, 10px)",
+    borderRadius: "14px",
+    background:
+      "var(--z-sheet-group, color-mix(in srgb, var(--z-fg-primary) 5%, transparent))",
     cursor: "pointer",
     // 12 px, medium: "Antworten" fits a quarter of a 320 px screen
     fontSize: "12px !important",
@@ -776,7 +850,9 @@ const QuickAction = styled("a", {
       textOverflow: "ellipsis",
       whiteSpace: "nowrap",
     },
-    _active: { background: "var(--z-float-button-hover)" },
+    _active: {
+      background: "color-mix(in srgb, var(--z-fg-primary) 10%, transparent)",
+    },
     "&:focus-visible": {
       outline: "none",
       boxShadow: "inset 0 0 0 2px var(--z-focus)",

@@ -123,13 +123,22 @@ export function ContextMenu(props: ComponentProps<typeof Base>) {
   );
 }
 
-export const ContextMenuDivider = styled("div", {
+const Divider = styled("div", {
   base: {
     height: "1px",
     margin: "4px 8px",
     background: "var(--z-float-divider, var(--z-border-subtle))",
   },
 });
+
+/**
+ * The line between two groups of a menu. On a phone's sheet the groups are
+ * cards and this is the room between them (FloatingManager finds it by its
+ * attribute).
+ */
+export function ContextMenuDivider() {
+  return <Divider role="separator" data-menu-divider />;
+}
 
 export const ContextMenuItem = styled("a", {
   base: {
