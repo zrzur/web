@@ -262,8 +262,8 @@
     },
     {
       "path": "CHANGELOG.md",
-      "sha256": "c1401f61867aedfef5bb4b27baf1779c753b91038677e0d0a8131084df85cce1",
-      "bytes": 170879,
+      "sha256": "a310989deb6be171a808fcc74e436f9dad3e959da8523633d6ea8d7465a917e5",
+      "bytes": 171175,
       "category": "public-documentation"
     },
     {
@@ -9052,8 +9052,8 @@
     },
     {
       "path": "packages/client/components/ui/styles.css",
-      "sha256": "78b39e06f782d9e7bbb79f6243c8f83717af3cedc547612b7834341374a7727d",
-      "bytes": 9237,
+      "sha256": "f056b726bc2930df2a1f98c59319d36b0f07e0ad4507ef67c1c8dafe226fdffd",
+      "bytes": 10346,
       "category": "product-source-or-build-manifest"
     },
     {
