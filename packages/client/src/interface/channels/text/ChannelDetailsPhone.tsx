@@ -738,7 +738,8 @@ const Row = styled("button", {
     textAlign: "start",
     cursor: "pointer",
     "--z-icon-color": "var(--z-icon-neutral)",
-    "& > span": { flex: 1, minWidth: 0, textAlign: "start" },
+    // the words take the room between the two icons (an icon is a span too)
+    "& > span:not(.z-icon)": { flex: 1, minWidth: 0, textAlign: "start" },
     "& > :last-child": { "--z-icon-color": "var(--z-icon-muted)" },
     _active: {
       background: "color-mix(in srgb, var(--z-fg-primary) 10%, transparent)",
@@ -746,19 +747,43 @@ const Row = styled("button", {
   },
 });
 
-/** the member list brings its own rows; here it sits in a filled box */
+/**
+ * The member list brings its own rows (one list for every screen size, drawn
+ * a screen at a time, each row 44 px). Here it sits in a filled box and takes
+ * the finish of the settings groups: the titles and the people start on the
+ * same line as the invite row's icon, a person's name in the size of a
+ * settings row, the title quiet above its people.
+ */
 const Members = styled("div", {
   base: {
     borderRadius: "14px",
     overflow: "hidden",
     background: FILL,
-    // room above the first title and under the last person
-    paddingBlock: "6px 8px",
+    // room under the last person; the first title brings its own room above
+    paddingBlock: "0 8px",
     "& > *": {
       width: "100% !important",
       minHeight: "0 !important",
       background: "transparent !important",
       border: "none !important",
+    },
+    // a group's title: "Online – 3"
+    "& div:has(> span + span):not(:has(.z-control-feedback))": {
+      paddingInline: "14px !important",
+      fontSize: "13px !important",
+      fontWeight: 600,
+      letterSpacing: "0 !important",
+      textTransform: "none !important",
+      color: "var(--z-fg-muted) !important",
+    },
+    // a person: picture, then the name, on the invite row's line
+    "& :has(> .z-control-feedback)": {
+      marginInline: "6px !important",
+      paddingInline: "8px !important",
+      gap: "12px !important",
+      fontSize: "16px !important",
+      fontWeight: 500,
+      borderRadius: "12px !important",
     },
   },
 });
