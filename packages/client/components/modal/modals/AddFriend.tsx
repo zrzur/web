@@ -71,7 +71,7 @@ export function AddFriendModal(
           name="username"
           control={group.controls.username}
           label={t`Username`}
-          placeholder={t`username#1234`}
+          placeholder={t`username`}
         />
       </form>
     </Dialog>

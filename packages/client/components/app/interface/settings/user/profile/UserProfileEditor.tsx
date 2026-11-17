@@ -1,3 +1,4 @@
+import { userHandle, userTag } from "@revolt/common/lib/userTag";
 import { createFormControl, createFormGroup, IFormGroup } from "solid-forms";
 import {
   createEffect,
@@ -585,8 +586,7 @@ export function UserProfileEditor(props: Props) {
                 title={<Trans>Username</Trans>}
                 description={
                   <Trans>
-                    {props.user.username}#{props.user.discriminator}. Change it
-                    in My Account.
+                    {userHandle(props.user)}. Change it in My Account.
                   </Trans>
                 }
                 onClick={() => settingsNavigation?.navigate("account")}
@@ -674,7 +674,7 @@ export function UserProfileEditor(props: Props) {
               </PreviewName>
               <PreviewHandle>
                 {props.user.username}
-                <span>#{props.user.discriminator}</span>
+                <span>{userTag(props.user)}</span>
                 <Show when={editGroup.controls.pronouns.value?.trim()}>
                   <i aria-hidden="true">·</i>
                   {editGroup.controls.pronouns.value.trim()}

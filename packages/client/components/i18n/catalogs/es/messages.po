@@ -850,6 +850,11 @@ msgstr "{0}‐{1} de {2}"
 msgid "{0}: position {1}"
 msgstr "{0}: posición {1}"
 
+#. placeholder {0}: userHandle(props.user)
+#: components/app/interface/settings/user/profile/UserProfileEditor.tsx
+msgid "{0}. Change it in My Account."
+msgstr "{0}. Cámbialo en Mi cuenta."
+
 #. placeholder {0}: props.member.displayName
 #: components/modal/modals/UserProfileRoles.tsx
 msgid "{0}'s roles"
@@ -870,8 +875,8 @@ msgstr "{0}/mes"
 #. placeholder {0}: props.user.username
 #. placeholder {1}: props.user.discriminator
 #: components/app/interface/settings/user/profile/UserProfileEditor.tsx
-msgid "{0}#{1}. Change it in My Account."
-msgstr "{0}#{1}. Cámbialo en Mi cuenta."
+#~ msgid "{0}#{1}. Change it in My Account."
+#~ msgstr "{0}#{1}. Cámbialo en Mi cuenta."
 
 #. placeholder {0}: item.coverage
 #: components/app/interface/settings/user/Language.tsx
@@ -1166,8 +1171,12 @@ msgid "16 px are cropped at the top and bottom"
 msgstr "Se recortan 16 px arriba y abajo"
 
 #: components/modal/modals/EditUsername.tsx
-msgid "2 to 32 characters. Your number tag may change if this name is taken."
-msgstr "De 2 a 32 caracteres. Tu etiqueta numérica puede cambiar si este nombre ya está en uso."
+msgid "2 to 32 characters. Capital and small letters count as the same name. You can change it twice a day."
+msgstr "De 2 a 32 caracteres. Mayúsculas y minúsculas cuentan como el mismo nombre. Puedes cambiarlo dos veces al día."
+
+#: components/modal/modals/EditUsername.tsx
+#~ msgid "2 to 32 characters. Your number tag may change if this name is taken."
+#~ msgstr "De 2 a 32 caracteres. Tu etiqueta numérica puede cambiar si este nombre ya está en uso."
 
 #: components/modal/modals/CreatePoll.tsx
 msgid "2 weeks"
@@ -4996,6 +5005,7 @@ msgstr "Elige la calidad cada vez que inicies una transmisión."
 msgid "Choose the role this answer gives."
 msgstr "Elige el rol que da esta respuesta."
 
+#: components/app/interface/settings/user/account/UsernameNotice.tsx
 #: components/modal/modals/Onboarding.tsx
 msgid "Choose username"
 msgstr "Elegir nombre de usuario"
@@ -5023,6 +5033,10 @@ msgstr "Elige dónde se celebra."
 #: components/app/interface/settings/user/Keybinds.tsx
 msgid "Choose where to forward"
 msgstr "Elegir dónde reenviar"
+
+#: components/modal/modals/EditUsername.tsx
+msgid "Choose your username"
+msgstr "Elige tu nombre de usuario"
 
 #: components/app/interface/channels/text/interactions/CommandPicker.tsx
 #: components/app/interface/channels/text/interactions/InteractionModal.tsx
@@ -7480,7 +7494,6 @@ msgstr "Donar a Zrzur"
 #: components/app/interface/settings/server/LobbyAppearanceEditor.tsx
 #: components/app/interface/settings/server/webhooks/ServerWebhooks.tsx
 #: components/modal/modals/EditEmail.tsx
-#: components/modal/modals/EditUsername.tsx
 #: components/modal/modals/GiftPlus.tsx
 #: components/modal/modals/InterestsModal.tsx
 #: components/modal/modals/MFARecovery.tsx
@@ -9087,8 +9100,8 @@ msgid "Friends server"
 msgstr "Servidor de amigos"
 
 #: components/modal/modals/EditUsername.tsx
-msgid "Friends use your username and number tag to find you. Enter your current password to confirm."
-msgstr "Tus amigos usan tu nombre de usuario y tu etiqueta numérica para encontrarte. Introduce tu contraseña actual para confirmar."
+#~ msgid "Friends use your username and number tag to find you. Enter your current password to confirm."
+#~ msgstr "Tus amigos usan tu nombre de usuario y tu etiqueta numérica para encontrarte. Introduce tu contraseña actual para confirmar."
 
 #. placeholder {0}: friends().length
 #: components/ui/components/features/profiles/ProfileMutuals.tsx
@@ -13893,6 +13906,10 @@ msgstr "Webhook nuevo"
 #: components/ui/components/features/profiles/plateNames.ts
 msgid "New Zealand"
 msgstr "Nueva Zelanda"
+
+#: components/app/interface/settings/user/account/UsernameNotice.tsx
+msgid "New: usernames no longer have a number tag. Choose the username that will be yours alone."
+msgstr "Nuevo: los nombres de usuario ya no llevan número. Elige el que será solo tuyo."
 
 #: components/app/interface/settings/user/profile/CommunityGallery.tsx
 #: src/interface/designs/Home.tsx
@@ -21900,8 +21917,8 @@ msgstr "Ese nombre pertenece a alguien de este servidor."
 #. placeholder {0}: props.client.user!.username
 #. placeholder {1}: tag(newTag())
 #: components/modal/modals/EditUsername.tsx
-msgid "That name was already taken with your previous number, so you are now <0>{0}#{1}</0>."
-msgstr "Ese nombre ya estaba en uso con tu número anterior, así que ahora eres <0>{0}#{1}</0>."
+#~ msgid "That name was already taken with your previous number, so you are now <0>{0}#{1}</0>."
+#~ msgstr "Ese nombre ya estaba en uso con tu número anterior, así que ahora eres <0>{0}#{1}</0>."
 
 #: components/modal/modals/billingErrors.ts
 msgid "That user couldn't be found."
@@ -24548,6 +24565,10 @@ msgstr "Ajustes de usuario"
 #~ msgid "User Settings"
 #~ msgstr "Ajustes de usuario"
 
+#: components/modal/modals/AddFriend.tsx
+msgid "username"
+msgstr "nombre_de_usuario"
+
 #: components/app/interface/settings/user/Account.tsx
 #: components/app/interface/settings/user/bots/ViewBot.tsx
 #: components/app/interface/settings/user/profile/UserProfileEditor.tsx
@@ -24561,8 +24582,13 @@ msgid "Username"
 msgstr "Nombre de usuario"
 
 #: components/modal/modals/AddFriend.tsx
-msgid "username#1234"
-msgstr "usuario#1234"
+#~ msgid "username#1234"
+#~ msgstr "usuario#1234"
+
+#. placeholder {0}: userHandle(props.client.user, state.settings.streamerMode)
+#: components/modal/modals/EditUsername.tsx
+msgid "Usernames no longer have a number tag. Choose a username that will be yours alone; you can keep <0>{currentUsername}</0> if nobody has taken it. Until then you stay <1>{0}</1>."
+msgstr "Los nombres de usuario ya no llevan número. Elige un nombre que será solo tuyo; puedes conservar <0>{currentUsername}</0> si nadie lo ha tomado. Hasta entonces sigues siendo <1>{0}</1>."
 
 #: src/interface/developers/docs/DocsPortal.tsx
 msgid "Users and members"
@@ -26183,6 +26209,10 @@ msgstr "No te puedes aislar a ti mismo."
 #~ msgid "You cannot undo this action."
 #~ msgstr "No puedes deshacer esta acción."
 
+#: components/i18n/errors.tsx
+msgid "You changed your username twice today. Try again tomorrow."
+msgstr "Has cambiado tu nombre de usuario dos veces hoy. Inténtalo de nuevo mañana."
+
 #. placeholder {0}: props.display
 #: components/modal/modals/LinkWarning.tsx
 msgid "You clicked on \"{0}\""
@@ -26713,8 +26743,8 @@ msgid "Your discover request has been removed"
 msgstr "Tu solicitud de Discover ha sido eliminada"
 
 #: components/i18n/errors.tsx
-msgid "Your discriminator change has been ratelimited, please try again later."
-msgstr "Tu cambio de discriminador ha sido limitado, por favor, inténtalo de nuevo más tarde."
+#~ msgid "Your discriminator change has been ratelimited, please try again later."
+#~ msgstr "Tu cambio de discriminador ha sido limitado, por favor, inténtalo de nuevo más tarde."
 
 #: components/auth/src/flows/FlowCreate.tsx
 #~ msgid "Your email stays private"
@@ -26928,8 +26958,12 @@ msgid "Your user has already been created? Try logging in again or refreshing th
 msgstr "¿Ya has creado un usuario? Intenta iniciar sesión o recargar la aplicación."
 
 #: components/modal/modals/EditUsername.tsx
-msgid "Your username has been updated."
-msgstr "Se ha actualizado tu nombre de usuario."
+#~ msgid "Your username has been updated."
+#~ msgstr "Se ha actualizado tu nombre de usuario."
+
+#: components/modal/modals/EditUsername.tsx
+msgid "Your username is yours alone, and friends use it to find you. Enter your current password to confirm."
+msgstr "Tu nombre de usuario es solo tuyo, y tus amigos lo usan para encontrarte. Escribe tu contraseña actual para confirmar."
 
 #: components/app/interface/settings/server/LobbySettings.tsx
 msgid "Your welcome text."

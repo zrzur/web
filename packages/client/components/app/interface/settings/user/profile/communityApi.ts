@@ -1,3 +1,4 @@
+import { userHandle } from "../../../../../common/lib/userTag";
 import type {
   API as APITypes__,
   Client,
@@ -180,7 +181,7 @@ export function creatorHandle(creator?: {
   username: string;
   discriminator: string;
 }) {
-  return creator ? `@${creator.username}#${creator.discriminator}` : "";
+  return creator ? `@${userHandle(creator)}` : "";
 }
 
 /** Link to a creator's page only if they opened it */

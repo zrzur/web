@@ -1,3 +1,4 @@
+import { userHandle } from "@revolt/common/lib/userTag";
 import { For, Match, Show, Switch, createMemo, createSignal } from "solid-js";
 
 import { i18n } from "@lingui/core";
@@ -235,12 +236,12 @@ export function ListServerMembers(props: { server: Server }) {
                         </Show>
                       </strong>
                       <small dir="ltr">
-                        {user()?.username}#
                         {/* the own tag stays off screen in streamer mode */}
-                        {state.settings.streamerMode &&
-                        user()?.id === client().user?.id
-                          ? "••••"
-                          : user()?.discriminator}
+                        {userHandle(
+                          user(),
+                          state.settings.streamerMode &&
+                            user()?.id === client().user?.id,
+                        )}
                         <Show when={timedOut()}>
                           <Timed
                             title={t`Timed out until ${date(member.timeout!)}`}

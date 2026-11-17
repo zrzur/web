@@ -6,6 +6,7 @@ import {
   statusLine,
   writeStatusWithRetry,
 } from "@revolt/common/lib/statusWrite";
+import { userHandle } from "@revolt/common/lib/userTag";
 import { useError } from "@revolt/i18n";
 import { TextWithEmoji } from "@revolt/markdown";
 import { useModals } from "@revolt/modal";
@@ -272,9 +273,8 @@ export function UserMenu(props: Props) {
                 {user()?.displayName ?? user()?.username}
               </strong>
               <span>
-                {user()?.username}#
                 {/* the own tag stays off screen in streamer mode */}
-                {state.settings.streamerMode ? "••••" : user()?.discriminator}
+                {userHandle(user(), state.settings.streamerMode)}
               </span>
             </Identity>
           </Header>

@@ -1,3 +1,4 @@
+import { userHandle } from "@revolt/common/lib/userTag";
 import { For, Show, createResource, createSignal } from "solid-js";
 
 import { Trans, useLingui } from "@lingui/solid/macro";
@@ -95,8 +96,7 @@ function ReviewCard(props: { item: ReviewItem; onDone: () => void }) {
         </SettingsStatus>
       </Row>
       <Muted>
-        <Trans>Publisher:</Trans> {props.item.publisher?.username}#
-        {props.item.publisher?.discriminator}
+        <Trans>Publisher:</Trans> {userHandle(props.item.publisher)}
         <Show when={props.item.publisher?.verified}> ✓</Show>
         {" · "}
         {release().entrypoint} · {release().platforms.join(", ")} ·{" "}
