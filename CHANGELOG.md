@@ -6,6 +6,7 @@
 
 * **You page on phones** follows the settings list: the profile on top without a frame, then filled groups of rows with bare icons and the value at the end of the row. Status is one row that opens its four choices under it; Friends shows the count; Settings is one row that opens the settings list. The statuses as four buttons, the About panel and the eight settings rows are gone from the phone page (wider screens keep theirs).
 * **Every phone screen wears the colours of the settings list:** the page is the frame colour, every box (card, field, message box, group of rows) is one fill a step above it, a sheet is a hair above the page. One block in `styles.css` for screens up to 600 px; wider screens keep their colours.
+* **Designs on phones:** every card is the width of the page, one under the other (two sizes side by side left a single small card with a hole beside it).
 * **Notifications on phones:** the rows under each day are one filled group with a hairline between them.
 * **Friends on phones:** the tabs are chips, people are one filled group with no frame, and the two actions of a row are bare icons with a 44 px target (they were ringed circles).
 * **Settings pages on phones** sit on the same surface as the list they open from, and their groups are filled cards with no frame.
