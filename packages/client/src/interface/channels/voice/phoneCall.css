@@ -7,7 +7,10 @@
 html[data-phone-call] .vc_tile {
   width: calc(50% - 5px) !important;
   max-width: none !important;
-  aspect-ratio: 1 / 1.05;
+  /* (!important: a tile that has shown a camera keeps that picture's shape
+     in its own style, and the people ended up in different sizes) */
+  aspect-ratio: 1 / 1.05 !important;
+  flex: none !important;
   border-radius: 20px;
   border: none;
   /* each person's own steady tint (ParticipantTile sets the hue) */
@@ -15,16 +18,33 @@ html[data-phone-call] .vc_tile {
 }
 html[data-phone-call] .vc_tile:first-child {
   width: 100% !important;
-  aspect-ratio: 1 / 0.62;
+  aspect-ratio: 1 / 0.62 !important;
 }
 html[data-phone-call] .vc_tile:only-child {
-  aspect-ratio: 1 / 0.9;
+  aspect-ratio: 1 / 0.9 !important;
+}
+/* two people: one above the other, the same size (a wide tile over a small
+   one in the middle read as "one speaker and a guest") */
+html[data-phone-call] .vc_tile:first-child:nth-last-child(2),
+html[data-phone-call] .vc_tile:nth-child(2):last-child {
+  width: 100% !important;
+  height: auto !important;
+  min-height: 0 !important;
+  aspect-ratio: 1 / 0.7 !important;
+}
+/* a camera fills its tile, as a phone's own camera app does; a shared
+   screen (class "group") keeps every pixel and its bars */
+html[data-phone-call] .vc_tile:not(.group) video {
+  object-fit: cover !important;
 }
 html[data-phone-call] :has(> .vc_tile) {
   gap: 10px !important;
   padding-inline: 14px;
-  align-content: center;
-  justify-content: center;
+  /* "safe": with more people than fit, the rows start at the top and the
+     call scrolls; plain centring pushed the first rows above the top edge,
+     where no scroll reaches */
+  align-content: safe center;
+  justify-content: safe center;
 }
 
 /* one bar across the screen: camera, microphone, share, sounds, hang up.

@@ -24,6 +24,7 @@ import { Icon } from "@revolt/ui/icons/Icon";
 
 import { ChannelHeader } from "../ChannelHeader";
 import { ChannelPageProps } from "../ChannelPage";
+import { pullCallDown } from "./callPull";
 import "./phoneCall.css";
 
 /**
@@ -49,6 +50,7 @@ export function VoiceChannel(props: ChannelPageProps) {
   );
 
   const device = useDevice();
+  const state = useState();
   const phoneCall = () => device.layout() === "phone" && inThisCall();
   // the call card is drawn over the stage from outside it: the phone look of
   // its tiles and controls hangs on <html> (phoneCall.css)
@@ -57,6 +59,13 @@ export function VoiceChannel(props: ChannelPageProps) {
     document.documentElement.setAttribute("data-phone-call", "");
     onCleanup(() =>
       document.documentElement.removeAttribute("data-phone-call"),
+    );
+    // drag the call down to put it aside: the call goes on, the lists come
+    // back (the same as the arrow in the top row)
+    onCleanup(
+      pullCallDown(() => {
+        state.appDrawer()?.setShown(false);
+      }),
     );
   });
 
