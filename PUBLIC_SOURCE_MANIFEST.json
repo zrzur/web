@@ -262,8 +262,8 @@
     },
     {
       "path": "CHANGELOG.md",
-      "sha256": "bc0b40d7302d4fdfaf8c822606d61cb21809ad7a83a1f6225da9782a92dd6b59",
-      "bytes": 173075,
+      "sha256": "e819eb1ad44139344fd11def3d5182bbd73be54bd1516c50a526a79b202eae84",
+      "bytes": 174340,
       "category": "public-documentation"
     },
     {
@@ -2074,8 +2074,8 @@
     },
     {
       "path": "packages/client/components/app/interface/settings/user/account/UsernameNotice.tsx",
-      "sha256": "955d142729da979a2cb5ff103e3ea98dd703c4052159697b26cfcddb94694017",
-      "bytes": 1616,
+      "sha256": "a82201f38f21e5278b0a02eb1a7f3db4dc43574297ba3745ec5e4556f5359efe",
+      "bytes": 1800,
       "category": "license-and-attribution"
     },
     {
