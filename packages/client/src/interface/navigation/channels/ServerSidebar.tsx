@@ -20,6 +20,7 @@ import { styled } from "styled-system/jsx";
 import { ServerContextMenu } from "@revolt/app/menus";
 import { useClient } from "@revolt/client";
 import { useDevice } from "@revolt/common";
+import Breakpoint from "@revolt/common/Breakpoint";
 import { KeybindAction, createKeybind } from "@revolt/keybinds";
 import { TextWithEmoji } from "@revolt/markdown";
 import { useModals } from "@revolt/modal";
@@ -1022,6 +1023,13 @@ function Entry(
               : "normal",
   );
 
+  /** a voice room you are not in, on a phone */
+  const roomSheet = () =>
+    props.channel.isVoice &&
+    !closedVoice() &&
+    !inCall() &&
+    !!window.matchMedia?.(Breakpoint.phone).matches;
+
   return (
     <Column
       gap="sm"
@@ -1039,10 +1047,17 @@ function Entry(
               ? undefined
               : `/server/${props.channel.serverId}/channel/${props.channel.id}`
           }
-          noDrawer={closedVoice()}
+          noDrawer={closedVoice() || roomSheet()}
           aria-disabled={closedVoice() || undefined}
           title={closedVoice() ? lockedLabel() : undefined}
           onClick={(event: MouseEvent) => {
+            // phones: a room opens as a sheet over this list (who is in,
+            // microphone, Join); the list stays where it is
+            if (roomSheet() && !event.defaultPrevented) {
+              event.preventDefault();
+              openModal({ type: "voice_room", channel: props.channel });
+              return;
+            }
             // Restoring a server's last page must not join its voice channel.
             // Only an explicit, unmodified channel activation changes the call.
             if (

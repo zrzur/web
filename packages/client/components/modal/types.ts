@@ -29,8 +29,8 @@ import {
 } from "@revolt/state/stores/Voice";
 
 import type { ReportTargetSpec } from "@revolt/app/interface/safety/safetyApi";
-import type { ProfileGames } from "@revolt/ui/components/features/profiles/linkedGames";
 import type { OrderCheckout, Supercharge } from "@revolt/client/billing";
+import type { ProfileGames } from "@revolt/ui/components/features/profiles/linkedGames";
 
 import type { PromoteTarget } from "./modals/PromoteServer";
 
@@ -124,6 +124,11 @@ export type Modals =
   | {
       /** Put the app on the phone's home screen (components/pwa) */
       type: "install_app";
+    }
+  | {
+      /** Phones: a voice room before joining (who is in, microphone, Join) */
+      type: "voice_room";
+      channel: Channel;
     }
   | {
       type: "delete_bot";

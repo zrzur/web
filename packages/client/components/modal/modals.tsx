@@ -93,6 +93,9 @@ const CustomStatusModal = lazy(() =>
     default: m.CustomStatusModal,
   })),
 );
+const VoiceRoomModal = lazy(() =>
+  import("./modals/VoiceRoom").then((m) => ({ default: m.VoiceRoomModal })),
+);
 const InstallAppModal = lazy(() =>
   import("./modals/InstallApp").then((m) => ({ default: m.InstallAppModal })),
 );
@@ -399,6 +402,8 @@ export function RenderModal(props: ActiveModal & { onClose: () => void }) {
       return <CustomStatusModal {...modalProps} />;
     case "install_app":
       return <InstallAppModal {...modalProps} />;
+    case "voice_room":
+      return <VoiceRoomModal {...modalProps} />;
     case "delete_bot":
       return <DeleteBotModal {...modalProps} />;
     case "delete_channel":
