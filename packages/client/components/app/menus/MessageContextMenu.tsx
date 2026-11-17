@@ -780,9 +780,12 @@ const QUICK_REACTIONS = [
 
 const ReactRow = styled("div", {
   base: {
-    display: "grid",
-    gridTemplateColumns: "repeat(7, minmax(0, 1fr))",
-    gap: "8px",
+    // seven square tiles spread over the row: the row shares out the free
+    // space between them, the tiles keep their shape (owner, 2026-11-17:
+    // they were wider than tall)
+    display: "flex",
+    justifyContent: "space-between",
+    gap: "4px",
     marginBottom: "8px",
   },
 });
@@ -790,11 +793,16 @@ const ReactRow = styled("div", {
 const ReactTile = styled("a", {
   base: {
     // (!important: the phone sheet sizes every menu row, FloatingManager)
-    minHeight: "46px !important",
+    // a square of 44 px; on the narrowest phones the seven shrink together
+    // and stay square
+    minHeight: "0 !important",
+    flex: "0 1 44px",
+    maxWidth: "44px",
+    aspectRatio: "1",
     padding: "0 !important",
     display: "grid",
     placeItems: "center",
-    borderRadius: "12px",
+    borderRadius: "10px",
     cursor: "pointer",
     background:
       "var(--z-sheet-group, color-mix(in srgb, var(--z-fg-primary) 5%, transparent))",
