@@ -262,8 +262,8 @@
     },
     {
       "path": "CHANGELOG.md",
-      "sha256": "fabd9ca9490d891f99f796e3a26a34a3f25df90cd02b23f2665ff8d6f0da0720",
-      "bytes": 159718,
+      "sha256": "bf980721e73c04925811fa232686a21ec8ee075ec1f5ed39a106473281616af1",
+      "bytes": 160013,
       "category": "public-documentation"
     },
     {
@@ -7114,8 +7114,8 @@
     },
     {
       "path": "packages/client/components/ui/components/features/voice/callCard/VoiceCallCardActiveRoom.tsx",
-      "sha256": "697981e38b2354c71f059b737f14c4f40eaae227fc8ddc1bc36b97f456ec47cb",
-      "bytes": 9621,
+      "sha256": "04b9660b3658cf939be717faaa2768c30069a1a0b80fa641651151cff06f5cd2",
+      "bytes": 9681,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -7174,8 +7174,8 @@
     },
     {
       "path": "packages/client/components/ui/components/features/voice/soundboard/SoundboardPicker.tsx",
-      "sha256": "53337fbbdcd37663f5a29d07ef8b98c6bb352d88efd49da3ed88cbb4398dd803",
-      "bytes": 12236,
+      "sha256": "7ffd9e9d4f152db91b7d2110d2a643644354c5d9a3fe1153f2694d1f3b582bb4",
+      "bytes": 12496,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -7533,6 +7533,12 @@
       "category": "product-source-or-build-manifest"
     },
     {
+      "path": "packages/client/components/ui/components/utils/lazyRetry.dom.test.tsx",
+      "sha256": "d4adfb424802f21ba066ca42e831d466988c63be59a20897e47add96b0adf169",
+      "bytes": 3041,
+      "category": "synthetic-test-source-or-fixture"
+    },
+    {
       "path": "packages/client/components/ui/components/utils/lazyRetry.test.ts",
       "sha256": "e2a9065c543306c9d20686b49f7774cefa16bd463f66b9e01733ebad9bfbef6b",
       "bytes": 1022,
@@ -7540,8 +7546,8 @@
     },
     {
       "path": "packages/client/components/ui/components/utils/lazyRetry.ts",
-      "sha256": "54282fcbf221a0d565a007708ae87f3dd8fe5183f0eaeee715df39104bfd66b6",
-      "bytes": 1176,
+      "sha256": "5fa9eef25109f96b181c1714b1ad71ce967f3245937dc4ad2a0d816971c11d06",
+      "bytes": 1940,
       "category": "product-source-or-build-manifest"
     },
     {
