@@ -253,6 +253,9 @@ export const ServerList = (props: Props) => {
           class={entryContainer()}
           data-home
           href="/app"
+          // phones: the logo is the way to the Home page, which is on the
+          // page side of the slide (the Messages tab keeps the list)
+          onClick={() => state.appDrawer()?.setShown(true)}
           use:floating={{
             tooltip: {
               content:

@@ -99,11 +99,13 @@ const Interface = (props: { children?: JSX.Element }) => {
   });
 
   // Discover and You are tabs of the phone's bar, and each is a whole page
-  // on the page side of the slide: the bar stays under them
+  // on the page side of the slide: the bar stays under them. So does it under
+  // Home, the logo's page: every list is one press away from there too.
   const tabPage = () =>
     device.layout() === "phone" &&
     (location.pathname.startsWith("/discover") ||
-      location.pathname.startsWith("/you"));
+      location.pathname.startsWith("/you") ||
+      goingHome(location.pathname));
 
   function isDisconnected() {
     return [
@@ -138,6 +140,37 @@ const Interface = (props: { children?: JSX.Element }) => {
     sDrawer?.delete();
     state.setAppDrawer((sDrawer = undefined));
   });
+
+  // Phones: Back (the system's, in an installed app the only one) from a
+  // conversation returns to the list it was opened from, not to the Home
+  // page that shares the list's address.
+  // The router may move the address before or after this listener hears of
+  // the Back, so each side notes its time and either one settles it.
+  let popped = -Infinity;
+  let moved: { from?: string; to: string; at: number } | undefined;
+  const settleBack = () => {
+    if (!moved || Math.abs(moved.at - popped) > 600) return;
+    const { from, to } = moved;
+    moved = undefined;
+    popped = -Infinity;
+    if (from?.startsWith("/channel/") && goingHome(to))
+      sDrawer?.setShown(false);
+  };
+  const onPop = () => {
+    popped = performance.now();
+    settleBack();
+  };
+  window.addEventListener("popstate", onPop);
+  onCleanup(() => window.removeEventListener("popstate", onPop));
+  createEffect(
+    on(
+      () => location.pathname,
+      (to, from) => {
+        moved = { from, to, at: performance.now() };
+        settleBack();
+      },
+    ),
+  );
 
   // switching servers animates the channel list and the page, switching
   // channels only the page

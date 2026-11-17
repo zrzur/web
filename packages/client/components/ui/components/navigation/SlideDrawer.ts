@@ -41,6 +41,8 @@ export class SlideDrawer {
   private tTmr: NodeJS.Timeout | null = null;
   private vTmr: NodeJS.Timeout | null = null;
   private lShow = true;
+  /** asked for while a slide was still settling: done when it has */
+  private wanted: boolean | undefined;
   /** the content is slid aside (the menu shows) */
   private open = false;
   /**
@@ -68,9 +70,11 @@ export class SlideDrawer {
     this.lShow = startShown;
     this.start = this.start.bind(this);
     this.move = this.move.bind(this);
+    this.cancel = this.cancel.bind(this);
     root.addEventListener("touchstart", this.start);
     root.addEventListener("touchmove", this.move);
     root.addEventListener("touchend", this.move);
+    root.addEventListener("touchcancel", this.cancel);
 
     createRoot((dispose) => {
       this.dispose = dispose;
@@ -94,7 +98,11 @@ export class SlideDrawer {
   private start(e: TouchEvent) {
     //Cancel if more than one finger
     if (e.touches.length > 1) return this.endTouch();
-    if (this.touch || !this.eGet()) return;
+    // One finger is down and it is new, so a touch still tracked here lost
+    // its end. Kept, it held the drawer: a press on a conversation moved the
+    // route and the page stayed off screen until the next swipe.
+    if (this.touch) this.cancel();
+    if (!this.eGet()) return;
     // pinched in: a drag pans the page, it must not slide the menu
     if ((window.visualViewport?.scale ?? 1) > 1.01) return;
 
@@ -145,6 +153,7 @@ export class SlideDrawer {
 
       if (!trig) {
         t.trig = trig = true;
+        this.wanted = undefined;
         this.tfTimer();
         this.velTimer();
         if (!isEnd) this.sSet(SlideState.MOVING);
@@ -207,6 +216,17 @@ export class SlideDrawer {
     }
   }
 
+  /**
+   * The system took the gesture (its own back swipe from the screen edge, a
+   * call coming in, the link menu): no end follows. Put the drawer back
+   * where it was and let go.
+   */
+  private cancel() {
+    if (!this.touch) return;
+    if (this.touch.trig) this.tfTimer(true, this.open);
+    this.endTouch();
+  }
+
   private endTouch() {
     clearInterval(this.vTmr!);
     this.touch = this.vTmr = null;
@@ -233,6 +253,9 @@ export class SlideDrawer {
           this.setElState(show);
           this.tTmr = null;
           this.sSet(show ? SlideState.SHOWN : SlideState.HIDDEN);
+          const next = this.wanted;
+          this.wanted = undefined;
+          if (next !== undefined) this.setShown(next);
         }, ANIM_MS + 50)
       : null;
   }
@@ -248,6 +271,7 @@ export class SlideDrawer {
     this.root.removeEventListener("touchstart", this.start);
     this.root.removeEventListener("touchmove", this.move);
     this.root.removeEventListener("touchend", this.move);
+    this.root.removeEventListener("touchcancel", this.cancel);
     this.dispose();
   }
 
@@ -283,7 +307,13 @@ export class SlideDrawer {
   }
 
   setShown(show: boolean) {
-    if (!this.eGet() || this.touch?.trig || this.tTmr) return false;
+    if (!this.eGet() || this.touch?.trig) return false;
+    // still settling from the last slide (a fifth of a second): a press in
+    // that moment used to be dropped, now it follows on
+    if (this.tTmr) {
+      this.wanted = show;
+      return true;
+    }
     if (this.open !== show) {
       this.setElState(false);
       this.drawer.style.transform = `translateX(${this.dir * this.ofs}px)`;
