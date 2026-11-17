@@ -262,8 +262,8 @@
     },
     {
       "path": "CHANGELOG.md",
-      "sha256": "3622872cc2c5990c7eb3b614d05be6bef287c9bdae29c409323ce6e6324e4ea6",
-      "bytes": 168341,
+      "sha256": "a36e3d5b212081eeb21179dc4c36ffa65f1134cbdc6a68163c93ed7b78856460",
+      "bytes": 168630,
       "category": "public-documentation"
     },
     {
@@ -5956,8 +5956,8 @@
     },
     {
       "path": "packages/client/components/ui/components/design/Dialog.tsx",
-      "sha256": "318afd2d1c7e0f7c7cd48fe47910ae7cf46a5cd9b339a6621bba62db356972c9",
-      "bytes": 27843,
+      "sha256": "4482eb16996db39c263e77d5457da4c5fa2f1bddf3ddf9c1d2737b6e9703b563",
+      "bytes": 27967,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -7324,8 +7324,8 @@
     },
     {
       "path": "packages/client/components/ui/components/floating/FloatingManager.tsx",
-      "sha256": "08ccd6a275a0e659da41a8bd88117d8df087993fc13c7278bf516381dbf03fe8",
-      "bytes": 12680,
+      "sha256": "c04a65613164731dcb14c7fd8ff96e1e38371da477a1d9ff00fb35623bda8d32",
+      "bytes": 13025,
       "category": "product-source-or-build-manifest"
     },
     {
