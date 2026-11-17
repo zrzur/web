@@ -627,6 +627,10 @@ const Content = styled("div", {
     padding: "16px 24px 32px",
     display: "flex",
     flexDirection: "column",
+    // phones: the list starts and ends on the same edges as the search
+    // field above it (it sat 20 px further in on each side). The page's
+    // own frame already gives 12 px, so 4 more make the 16 of the field.
+    _phone: { padding: "12px 4px 24px" },
   },
 });
 
