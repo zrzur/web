@@ -9,7 +9,6 @@ import { useClient, useUser } from "@revolt/client";
 import { billingAvailable } from "@revolt/client/billing";
 import { useDevice } from "@revolt/common";
 import { presencePatch } from "@revolt/common/lib/statusWrite";
-import { useInstance } from "@revolt/instance";
 import { useModals } from "@revolt/modal";
 import { installWay } from "@revolt/pwa/installPrompt";
 import { useNavigate } from "@revolt/routing";
@@ -75,7 +74,6 @@ function Body(props: { user: User }) {
   const client = useClient();
   const navigate = useNavigate();
   const { openModal } = useModals();
-  const { limits } = useInstance();
   const device = useDevice();
   const phone = () => device.layout() === "phone";
   /** phones: the four statuses open under the Status row */
@@ -164,31 +162,6 @@ function Body(props: { user: User }) {
         ]
       : []),
   ];
-
-  /** the settings people reach for, each one tap away; the rest behind the last row */
-  const settingRows: { icon: IconName; label: () => string; page?: string }[] =
-    [
-      {
-        icon: "identification-card",
-        label: () => t`My account`,
-        page: "account",
-      },
-      { icon: "paint-brush", label: () => t`Appearance`, page: "appearance" },
-      { icon: "bell", label: () => t`Notifications`, page: "notifications" },
-      {
-        icon: "microphone",
-        label: () => (limits().video ? t`Voice & Video` : t`Voice`),
-        page: "voice",
-      },
-      { icon: "translate", label: () => t`Language`, page: "language" },
-      { icon: "shield-check", label: () => t`Sessions`, page: "sessions" },
-      {
-        icon: "game-controller",
-        label: () => t`Connections`,
-        page: "connections",
-      },
-      { icon: "gear-six", label: () => t`All settings` },
-    ];
 
   // Phones (design pack approved by the owner, 2026-11-17): the look of the
   // settings list. The profile on top without a frame, then groups of rows
@@ -414,7 +387,17 @@ function Body(props: { user: User }) {
       </Panel>
 
       <Panel data-links>
-        <For each={links}>
+        <For
+          each={[
+            ...links,
+            {
+              icon: "gear-six" as const,
+              label: () => t`Settings`,
+              hint: () => t`Account, privacy, appearance and more`,
+              onPress: () => settings(),
+            },
+          ]}
+        >
           {(link) => (
             <Row type="button" onClick={link.onPress}>
               <RowIcon>
@@ -431,34 +414,6 @@ function Body(props: { user: User }) {
           )}
         </For>
       </Panel>
-
-      <Group aria-labelledby="you-settings">
-        <GroupTitle id="you-settings">
-          <Trans>Settings</Trans>
-        </GroupTitle>
-        <Panel data-settings>
-          <For each={settingRows}>
-            {(row) => (
-              <Row
-                type="button"
-                data-compact
-                data-settings-page={row.page ?? "all"}
-                onClick={() => settings(row.page)}
-              >
-                <RowIcon>
-                  <Icon name={row.icon} size={20} />
-                </RowIcon>
-                <RowText>
-                  <strong>{row.label()}</strong>
-                </RowText>
-                <Chevron>
-                  <Icon name="caret-right" size={16} />
-                </Chevron>
-              </Row>
-            )}
-          </For>
-        </Panel>
-      </Group>
     </Content>
   );
 }
@@ -776,22 +731,6 @@ const Panel = styled("div", {
   },
 });
 
-/** A titled group of rows */
-const Group = styled("section", {
-  base: { display: "flex", flexDirection: "column", gap: "8px" },
-});
-
-const GroupTitle = styled("h2", {
-  base: {
-    margin: 0,
-    paddingInline: "8px",
-    fontSize: "13px",
-    fontWeight: 600,
-    lineHeight: "18px",
-    color: "var(--z-fg-muted)",
-  },
-});
-
 /** One row of its own: [icon] Install the app / one line why  > */
 const InstallRow = styled("button", {
   base: {
@@ -875,8 +814,6 @@ const Row = styled("button", {
     _hover: { background: "var(--z-nav-hover)" },
     _active: { background: "var(--z-nav-selected)" },
     _focusVisible: { outline: "2px solid var(--z-focus)" },
-    // a name alone, no second line
-    "&[data-compact]": { minHeight: "52px" },
   },
 });
 
@@ -887,14 +824,7 @@ const RowIcon = styled("span", {
     height: "40px",
     display: "grid",
     placeItems: "center",
-    borderRadius: "12px",
-    background: "color-mix(in srgb, var(--z-fg-primary) 6%, transparent)",
     "--z-icon-color": "var(--z-icon-neutral)",
-    "[data-compact] > &": {
-      width: "36px",
-      height: "36px",
-      borderRadius: "10px",
-    },
   },
 });
 
@@ -906,11 +836,7 @@ const RowText = styled("span", {
     flexDirection: "column",
     gap: "2px",
     "& strong": { fontSize: "15px", fontWeight: 600 },
-    "& small": {
-      fontSize: "13px",
-      lineHeight: "18px",
-      color: "var(--z-fg-muted)",
-    },
+    "& small": { fontSize: "13px", color: "var(--z-fg-muted)" },
   },
 });
 

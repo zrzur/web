@@ -85,9 +85,15 @@ export function ServerInfoModal(
             });
           },
         },
-        // an information sheet has no main action: closing it is not one,
-        // so it is not the filled button (owner review, 2026-11-17)
-        { text: <Trans>Close</Trans>, variant: "secondary" },
+        // on a phone's sheet closing is not the main action, so it is not
+        // the filled button (owner review, 2026-11-17); the computer's
+        // dialog keeps it as it was
+        {
+          text: <Trans>Close</Trans>,
+          variant: window.matchMedia?.("(max-width: 600px)").matches
+            ? "secondary"
+            : undefined,
+        },
       ]}
     >
       <Column gap="lg">

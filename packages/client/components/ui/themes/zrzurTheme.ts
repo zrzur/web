@@ -54,11 +54,11 @@ export const ZRZUR_UNIFIED_DARK = {
   selected: "#303348",
   headerPrimary: "#F7F8FC",
   fgPrimary: "#F0F1F8",
-  // Three levels the eye can tell apart (2026-11-17): secondary was
-  // #A1A5B8, 3 points of lightness above muted, one level to the eye. Now
-  // 79 against 69. Muted cannot go darker: it is the lowest that stays
-  // ≥4.5:1 on selected rows (lifted 2026-11-01, guarded by the theme test).
-  fgSecondary: "#B6BACD",
+  // Secondary is 3 points of lightness above muted, one level to the eye;
+  // phones lift it (styles.css, the block for 600 px and under), the
+  // computer keeps this value. Muted cannot go darker: it is the lowest
+  // that stays ≥4.5:1 on selected rows (lifted 2026-11-01, theme test).
+  fgSecondary: "#A1A5B8",
   fgMuted: "#979BB1",
   channelsDefault: "#979BB1",
   // Raspberry: actions, focus, selection (not every chrome icon)

@@ -805,11 +805,14 @@ const controlButton = cva({
     // Leaving the call sits with the call's other buttons (camera, screen,
     // sounds): the same tile, in the danger tint, not a bare icon beside
     // three tiles (owner, 2026-11-17).
+    // (phones only: the computer's account card keeps its bare icon)
     "&[data-voice-control='disconnect']": {
-      width: "40px",
-      borderRadius: "8px",
-      background: "var(--z-danger-muted)",
-      _phone: { width: "48px", height: "36px" },
+      _phone: {
+        width: "48px",
+        height: "36px",
+        borderRadius: "8px",
+        background: "var(--z-danger-muted)",
+      },
     },
     "&[data-danger='true']:hover": {
       color: "var(--z-danger)",

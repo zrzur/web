@@ -216,18 +216,14 @@ const calloutStyles = cva({
 
     ...typography.raw({ class: "label", size: "small" }),
 
-    border: "none",
-    "--z-icon-color": "currentColor",
     // phones: a finger-sized target (it was 24 px tall)
     _phone: {
       minHeight: "44px",
       paddingInline: "16px",
+      border: "none",
       fontSize: "13px",
       fontWeight: 600,
-    },
-    _focusVisible: {
-      outline: "2px solid var(--z-focus)",
-      outlineOffset: "2px",
+      "--z-icon-color": "currentColor",
     },
   },
   variants: {
@@ -241,15 +237,26 @@ const calloutStyles = cva({
     },
     mentions: {
       true: {
-        // the colour mentions have everywhere (badges on the rail and tabs)
-        fill: "var(--z-on-mention-badge, #FFFFFF)",
-        color: "var(--z-on-mention-badge, #FFFFFF)",
-        background: "var(--z-mention-badge, #C2337A)",
+        fill: "var(--md-sys-color-on-error)",
+        color: "var(--md-sys-color-on-error)",
+        background: "var(--md-sys-color-error)",
+        // phones: the colour mentions have everywhere (badges on the rail
+        // and tabs); the computer keeps its colours
+        _phone: {
+          fill: "var(--z-on-mention-badge, #FFFFFF)",
+          color: "var(--z-on-mention-badge, #FFFFFF)",
+          background: "var(--z-mention-badge, #C2337A)",
+        },
       },
       false: {
-        fill: "var(--z-on-accent, var(--md-sys-color-on-primary))",
-        color: "var(--z-on-accent, var(--md-sys-color-on-primary))",
-        background: "var(--z-accent-fill, var(--md-sys-color-primary))",
+        fill: "var(--md-sys-color-on-primary)",
+        color: "var(--md-sys-color-on-primary)",
+        background: "var(--md-sys-color-primary)",
+        _phone: {
+          fill: "var(--z-on-accent, var(--md-sys-color-on-primary))",
+          color: "var(--z-on-accent, var(--md-sys-color-on-primary))",
+          background: "var(--z-accent-fill, var(--md-sys-color-primary))",
+        },
       },
     },
   },
