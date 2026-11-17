@@ -664,6 +664,13 @@
   aspect-ratio: auto;
 }
 @media (pointer: coarse) {
+  /* Emoji / GIF switch, and the buttons beside the search: 44 px targets */
+  .z-picker-tabs button,
+  .z-picker-switch button,
+  .z-picker-icon-button {
+    min-height: 44px;
+    min-width: 44px;
+  }
   .z-emoji-row {
     height: 44px;
   }
