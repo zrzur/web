@@ -54,6 +54,13 @@ const TicketAction = lazyRetry(
     })),
   () => null,
 );
+const TicketMenuItems = lazyRetry(
+  () =>
+    import("../tickets/TicketAction").then((m) => ({
+      default: m.TicketMenuItems,
+    })),
+  () => null,
+);
 
 import { SearchBox } from "./text/SearchBox";
 import { canIHasSidebar, SidebarState } from "./text/TextChannel";
@@ -134,7 +141,8 @@ export function ChannelHeader(props: Props) {
     videoCallInMore() ||
     canSelectMessages() ||
     props.channel.type === "Group" ||
-    !!props.channel.thread;
+    !!props.channel.thread ||
+    !!props.channel.ticket;
 
   const searchValue = () => {
     if (!props.sidebarState) return null;
@@ -326,10 +334,6 @@ export function ChannelHeader(props: Props) {
         </Switch>
 
         <Spacer />
-
-        <Show when={props.channel.ticket}>
-          <TicketAction channel={props.channel} />
-        </Show>
 
         <Show when={props.channel.isVoice && !voice.showCard(props.channel)}>
           <IconButton
@@ -655,12 +659,21 @@ export function ChannelHeader(props: Props) {
         {/* phones: the less-used actions share one "More" sheet, so the
             channel name keeps the room it needs. Desktop has no More menu:
             selecting messages starts from a message's own menu. */}
+        {/* a ticket's actions: one button after Search (owner, 2026-11-17);
+            on phones they are rows of the More sheet below */}
+        <Show when={props.channel.ticket && !phone()}>
+          <TicketAction channel={props.channel} />
+        </Show>
+
         <Show when={phone() && !phoneSearch() && hasMoreActions()}>
           <div
             style={{ display: "contents" }}
             use:floating={{
               contextMenu: () => (
                 <ContextMenu>
+                  <Show when={props.channel.ticket}>
+                    <TicketMenuItems channel={props.channel} />
+                  </Show>
                   <Show when={videoCallInMore()}>
                     <ContextMenuButton
                       icon={<Icon name="video-camera" size={20} />}

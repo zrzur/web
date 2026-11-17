@@ -1252,6 +1252,14 @@ const SectionHeader = styled("div", {
     gap: "4px",
     paddingInlineEnd: "8px",
     "& > div": { flex: 1, minWidth: 0 },
+    // the category's tools sit side by side and show when the pointer is on
+    // the row or the keyboard is in it, like a channel's own (owner,
+    // 2026-11-17); touch screens have no hover and keep their own rule
+    "& > button + button": { marginInlineStart: "-4px" },
+    "@media (hover: hover) and (pointer: fine)": {
+      "& > button": { opacity: 0, transition: "opacity 120ms ease" },
+      "&:hover > button, &:focus-within > button": { opacity: 1 },
+    },
   },
 });
 const ToolButton = styled("button", {

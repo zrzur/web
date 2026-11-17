@@ -482,8 +482,8 @@ msgstr "{0} no está disponible desde otras apps. Prueba otra tecla."
 
 #. placeholder {0}: nameOf(claimedBy()!)
 #: src/interface/tickets/TicketAction.tsx
-msgid "{0} is on it"
-msgstr "{0} se encarga"
+#~ msgid "{0} is on it"
+#~ msgstr "{0} se encarga"
 
 #. placeholder {0}: done()!.name
 #: components/modal/modals/PromoteServer.tsx
@@ -981,8 +981,8 @@ msgid "{value} dB"
 msgstr "{value} dB"
 
 #: components/modal/modals/CloseTicket.tsx
-msgid "{value} out of 5"
-msgstr "{value} de 5"
+#~ msgid "{value} out of 5"
+#~ msgstr "{value} de 5"
 
 #. placeholder {0}: s().days
 #: components/modal/modals/PromoteServer.tsx
@@ -3331,8 +3331,8 @@ msgstr "Decoración de avatar"
 #~ msgstr ""
 
 #: components/app/interface/settings/server/TicketsSettings.tsx
-msgid "Average rating"
-msgstr "Valoración media"
+#~ msgid "Average rating"
+#~ msgstr "Valoración media"
 
 #: components/ui/components/features/profiles/plateNames.ts
 msgid "Azerbaijan"
@@ -10336,8 +10336,8 @@ msgid "How to appeal"
 msgstr "Cómo apelar"
 
 #: components/modal/modals/CloseTicket.tsx
-msgid "How was the help? (optional)"
-msgstr "¿Qué tal la ayuda? (opcional)"
+#~ msgid "How was the help? (optional)"
+#~ msgstr "¿Qué tal la ayuda? (opcional)"
 
 #: components/app/interface/settings/user/bots/ViewBot.tsx
 #: components/modal/modals/InteractionsEndpoint.tsx
@@ -17543,8 +17543,8 @@ msgstr "Límites de frecuencia"
 
 #. placeholder {0}: rating()
 #: src/interface/tickets/TicketAction.tsx
-msgid "Rated {0} out of 5"
-msgstr "Valorado con {0} de 5"
+#~ msgid "Rated {0} out of 5"
+#~ msgstr "Valorado con {0} de 5"
 
 #: components/app/interface/support/OfficialBanner.tsx
 msgid "Re: {first}"
@@ -23726,6 +23726,10 @@ msgstr "Umbral"
 #: components/auth/src/flows/Form.tsx
 msgid "Tick the box to accept before you continue."
 msgstr "Marca la casilla para aceptar antes de continuar."
+
+#: src/interface/tickets/TicketAction.tsx
+msgid "Ticket actions"
+msgstr "Acciones del ticket"
 
 #: components/app/interface/settings/server/assistant/labels.ts
 msgid "Ticket categories, one per line"

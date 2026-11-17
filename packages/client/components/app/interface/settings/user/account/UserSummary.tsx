@@ -77,7 +77,7 @@ export function UserSummary(props: {
 const Card = styled("section", {
   base: {
     overflow: "hidden",
-    borderRadius: "12px",
+    borderRadius: "var(--z-shape-card, calc(var(--z-radius, 10px) + 4px))",
     // phones: the fill and corner of every settings group, no frame
     // (owner, 2026-11-17: one box look everywhere)
     _phone: {
@@ -87,8 +87,9 @@ const Card = styled("section", {
       background:
         "var(--z-sheet-group, color-mix(in srgb, var(--z-fg-primary) 5%, transparent))",
     },
-    border: "1px solid var(--z-border-subtle)",
-    background: "color-mix(in srgb, var(--z-bg-sidebar) 70%, var(--z-bg-chat))",
+    border:
+      "1px solid var(--z-card-border, var(--z-btn-surface-border, color-mix(in srgb, var(--z-fg-primary) 8%, transparent)))",
+    background: "var(--z-card-bg)",
   },
 });
 

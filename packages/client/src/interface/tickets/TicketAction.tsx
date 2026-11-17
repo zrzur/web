@@ -1,29 +1,33 @@
-import { Match, Show, Switch, createSignal } from "solid-js";
+import { Show, createSignal } from "solid-js";
 
 import { Trans, useLingui } from "@lingui/solid/macro";
 import type { Channel } from "@zrzur/sdk/solid";
-import type { JSX } from "solid-js";
-import { styled } from "styled-system/jsx";
 
+import {
+  ContextMenu,
+  ContextMenuButton,
+  ContextMenuDivider,
+} from "@revolt/app/menus/ContextMenu";
 import { useClient } from "@revolt/client";
-import { useDevice } from "@revolt/common";
 import { useModals } from "@revolt/modal";
-import { Button, IconButton } from "@revolt/ui";
-import { type IconName, Icon } from "@revolt/ui/icons/Icon";
+import { IconButton } from "@revolt/ui";
+import { Icon } from "@revolt/ui/icons/Icon";
 
 import { saveText, ticketTranscript } from "./transcript";
 
 /**
- * A ticket's actions, in its channel header.
- * Open: who is on it, "Take ticket" / "Give back" for the staff, "Save the
- * conversation", "Close ticket" for its opener and the staff.
- * Closed (only the staff still see it): what the opener gave the help,
- * "Save the conversation", "Reopen ticket".
+ * A ticket's actions, as rows of a menu:
+ * open: "Take ticket" / "Give back" for the staff, "Save the conversation",
+ * "Close ticket" for its opener and the staff;
+ * closed (only the staff still see it): "Save the conversation", "Reopen
+ * ticket", and "Delete ticket" for those who manage channels.
+ *
+ * The header keeps one button for all of them (owner, 2026-11-17: only
+ * Search stays in the header, the rest goes behind the three dots); on
+ * phones the rows join the header's own More sheet.
  */
-export function TicketAction(props: { channel: Channel }) {
-  const { t } = useLingui();
+export function TicketMenuItems(props: { channel: Channel }) {
   const client = useClient();
-  const { layout } = useDevice();
   const { openModal, showError } = useModals();
   const [pending, setPending] = createSignal(false);
 
@@ -31,13 +35,6 @@ export function TicketAction(props: { channel: Channel }) {
   const me = () => client().user?.id;
   const mine = () => ticket()?.openerId === me();
   const claimedBy = () => ticket()?.claimedById;
-  const nameOf = (id: string) =>
-    client().serverMembers.getByKey({
-      server: props.channel.serverId!,
-      user: id,
-    })?.displayName ??
-    client().users.get(id)?.displayName ??
-    "";
 
   async function run(action: () => Promise<unknown>) {
     if (pending()) return;
@@ -59,162 +56,107 @@ export function TicketAction(props: { channel: Channel }) {
       ),
     );
 
-  const phone = () => layout() === "phone";
-
-  /** A named button; on a phone its icon alone, so the header keeps its width */
-  const act = (
-    testId: string,
-    icon: IconName,
-    label: string,
-    text: JSX.Element,
-    onPress: () => void,
-    disabled = false,
-  ) => (
-    <Show
-      when={phone()}
-      fallback={
-        <Button
-          size="sm"
-          variant="tonal"
-          data-testid={testId}
-          isDisabled={disabled}
-          onPress={onPress}
+  return (
+    <>
+      <Show when={!ticket()?.closed && !mine()}>
+        <Show
+          when={claimedBy() === me()}
+          fallback={
+            <ContextMenuButton
+              icon={<Icon name="clipboard-check" size={20} />}
+              data-testid="ticket-claim"
+              onClick={() => void run(() => props.channel.claimTicket())}
+            >
+              <Trans>Take ticket</Trans>
+            </ContextMenuButton>
+          }
         >
-          {text}
-        </Button>
-      }
+          <ContextMenuButton
+            icon={<Icon name="arrow-u-up-left" size={20} />}
+            data-testid="ticket-unclaim"
+            onClick={() => void run(() => props.channel.unclaimTicket())}
+          >
+            <Trans>Give back</Trans>
+          </ContextMenuButton>
+        </Show>
+      </Show>
+      <ContextMenuButton
+        icon={<Icon name="file-text" size={20} />}
+        data-testid="ticket-save"
+        onClick={() => void save()}
+      >
+        <Trans>Save the conversation</Trans>
+      </ContextMenuButton>
+      <ContextMenuDivider />
+      <Show
+        when={ticket()?.closed}
+        fallback={
+          <ContextMenuButton
+            icon={<Icon name="x-circle" size={20} />}
+            data-testid="ticket-close"
+            onClick={() =>
+              openModal({ type: "close_ticket", channel: props.channel })
+            }
+          >
+            <Trans>Close ticket</Trans>
+          </ContextMenuButton>
+        }
+      >
+        <ContextMenuButton
+          icon={<Icon name="lock-simple-open" size={20} />}
+          data-testid="ticket-reopen"
+          onClick={() => void run(() => props.channel.reopenTicket())}
+        >
+          <Trans>Reopen ticket</Trans>
+        </ContextMenuButton>
+        {/* a closed ticket goes for good: for those who manage channels */}
+        <Show when={props.channel.havePermission("ManageChannel")}>
+          <ContextMenuButton
+            destructive
+            icon={<Icon name="trash" size={20} />}
+            data-testid="ticket-delete"
+            onClick={() =>
+              openModal({ type: "delete_channel", channel: props.channel })
+            }
+          >
+            <Trans>Delete ticket</Trans>
+          </ContextMenuButton>
+        </Show>
+      </Show>
+    </>
+  );
+}
+
+/**
+ * The one header button that opens a ticket's actions (desktop)
+ */
+export function TicketAction(props: { channel: Channel }) {
+  const { t } = useLingui();
+
+  return (
+    <div
+      style={{ display: "contents" }}
+      use:floating={{
+        contextMenu: () => (
+          <ContextMenu>
+            <TicketMenuItems channel={props.channel} />
+          </ContextMenu>
+        ),
+        contextMenuHandler: "click",
+      }}
     >
       <IconButton
         variant="toolbar"
         size="xs"
-        isDisabled={disabled}
-        aria-label={label}
-        data-testid={testId}
-        onPress={onPress}
-      >
-        <Icon name={icon} size={20} />
-      </IconButton>
-    </Show>
-  );
-
-  return (
-    <Bar>
-      <Show when={ticket()?.rating}>
-        {(rating) => (
-          <Note
-            data-testid="ticket-rating"
-            aria-label={t`Rated ${rating()} out of 5`}
-          >
-            <Icon name="star" size={16} />
-            {rating()}/5
-          </Note>
-        )}
-      </Show>
-      <Show when={!ticket()?.closed && claimedBy() && claimedBy() !== me()}>
-        <Show when={layout() !== "phone"}>
-          <Note data-testid="ticket-claimed">
-            <Trans>{nameOf(claimedBy()!)} is on it</Trans>
-          </Note>
-        </Show>
-      </Show>
-      <IconButton
-        variant="toolbar"
-        size="xs"
-        isDisabled={pending()}
-        aria-label={t`Save the conversation`}
-        data-testid="ticket-save"
-        onPress={() => void save()}
+        aria-label={t`Ticket actions`}
+        aria-haspopup="menu"
+        data-testid="ticket-menu"
         use:floating={{
-          tooltip: {
-            placement: "bottom",
-            content: t`Save the conversation`,
-          },
+          tooltip: { placement: "bottom", content: t`Ticket actions` },
         }}
       >
-        <Icon name="download-simple" size={20} />
+        <Icon name="dots-three" size={20} />
       </IconButton>
-      <Switch>
-        <Match when={ticket()?.closed}>
-          {act(
-            "ticket-reopen",
-            "arrow-counter-clockwise",
-            t`Reopen ticket`,
-            <Trans>Reopen ticket</Trans>,
-            () => void run(() => props.channel.reopenTicket()),
-            pending(),
-          )}
-          {/* a closed ticket goes for good: for those who manage channels */}
-          <Show when={props.channel.havePermission("ManageChannel")}>
-            {act(
-              "ticket-delete",
-              "trash",
-              t`Delete ticket`,
-              <Trans>Delete ticket</Trans>,
-              () =>
-                openModal({ type: "delete_channel", channel: props.channel }),
-            )}
-          </Show>
-        </Match>
-        <Match when={true}>
-          <Show when={!mine()}>
-            <Show
-              when={claimedBy() === me()}
-              fallback={act(
-                "ticket-claim",
-                "clipboard-check",
-                t`Take ticket`,
-                <Trans>Take ticket</Trans>,
-                () => void run(() => props.channel.claimTicket()),
-                pending(),
-              )}
-            >
-              {act(
-                "ticket-unclaim",
-                "arrow-u-up-left",
-                t`Give back`,
-                <Trans>Give back</Trans>,
-                () => void run(() => props.channel.unclaimTicket()),
-                pending(),
-              )}
-            </Show>
-          </Show>
-          {act(
-            "ticket-close",
-            "x",
-            t`Close ticket`,
-            <Trans>Close ticket</Trans>,
-            () => openModal({ type: "close_ticket", channel: props.channel }),
-          )}
-        </Match>
-      </Switch>
-    </Bar>
+    </div>
   );
 }
-
-const Bar = styled("div", {
-  base: {
-    // never squeezed: squeezed buttons end up on top of each other
-    flexShrink: 0,
-    display: "flex",
-    alignItems: "center",
-    gap: "8px",
-    _phone: { gap: "4px" },
-  },
-});
-
-const Note = styled("span", {
-  base: {
-    display: "inline-flex",
-    alignItems: "center",
-    gap: "4px",
-    paddingInline: "8px",
-    height: "28px",
-    borderRadius: "999px",
-    background: "var(--z-bg-raised)",
-    color: "var(--z-fg-secondary)",
-    fontSize: "13px",
-    fontWeight: 600,
-    whiteSpace: "nowrap",
-    "--z-icon-color": "var(--z-warning)",
-  },
-});

@@ -399,7 +399,7 @@ export function TicketsSettings(props: { server: Server }) {
 
 /**
  * The tickets of a server that the viewer can see: how many are open, how
- * many are taken, what the help was rated, and each ticket with its state.
+ * many are taken, and each ticket with its state.
  */
 function TicketBoard(props: { server: Server }) {
   const { t } = useLingui();
@@ -414,16 +414,6 @@ function TicketBoard(props: { server: Server }) {
   );
   const open = () => tickets().filter((channel) => !channel.ticket!.closed);
   const taken = () => open().filter((channel) => channel.ticket!.claimedById);
-  const ratings = () =>
-    tickets()
-      .map((channel) => channel.ticket!.rating)
-      .filter((rating): rating is number => !!rating);
-  const average = () => {
-    const all = ratings();
-    return all.length
-      ? (all.reduce((sum, one) => sum + one, 0) / all.length).toFixed(1)
-      : undefined;
-  };
   const nameOf = (id: string | undefined) =>
     id
       ? (client().serverMembers.getByKey({ server: props.server.id, user: id })
@@ -459,10 +449,6 @@ function TicketBoard(props: { server: Server }) {
               <strong>{tickets().length - open().length}</strong>
               <Trans>Closed</Trans>
             </Count>
-            <Count>
-              <strong data-testid="board-rating">{average() ?? "–"}</strong>
-              <Trans>Average rating</Trans>
-            </Count>
           </Counts>
         </Inside>
         <For each={tickets().slice(0, 50)}>
@@ -482,9 +468,6 @@ function TicketBoard(props: { server: Server }) {
                       : channel.ticket!.claimedById
                         ? t`Taken by ${nameOf(channel.ticket!.claimedById)}`
                         : t`Waiting`,
-                    channel.ticket!.rating
-                      ? `${channel.ticket!.rating}/5`
-                      : undefined,
                   ]
                     .filter(Boolean)
                     .join(" · ")}

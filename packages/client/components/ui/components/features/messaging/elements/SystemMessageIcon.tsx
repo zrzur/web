@@ -30,7 +30,7 @@ export function SystemMessageIcon(props: {
         }
         placement="top"
       >
-        <Switch fallback={<Icon name="info" size={16} filled />}>
+        <Switch fallback={<Icon name="chat-circle" size={16} />}>
           <Match when={props.systemMessage.type === "user_added"}>
             <Icon name="plus" size={16} />
           </Match>
@@ -111,9 +111,14 @@ export function SystemMessageIcon(props: {
 
 const Base = styled("div", {
   base: {
+    // the column of the avatars, so the text lines up with the messages';
+    // the mark sits at its end, next to the text it belongs to
     width: "62px",
+    boxSizing: "border-box",
+    paddingInlineEnd: "12px",
     display: "grid",
-    placeItems: "center",
+    alignItems: "center",
+    justifyItems: "end",
   },
   variants: {
     type: {
@@ -135,8 +140,9 @@ const Base = styled("div", {
       user_banned: {
         color: "var(--md-sys-color-error)",
       },
+      // a plain note (a ticket's first line): quiet, not the action colour
       text: {
-        color: "var(--md-sys-color-primary)",
+        color: "var(--z-fg-muted)",
       },
       user_remove: {
         color: "var(--md-sys-color-primary)",

@@ -148,7 +148,7 @@ const Base = styled("a", {
     // text stays 12 px or more from the border, as in SettingsRow
     padding: "11px 14px",
     // a standalone row is its own small panel; inside a Group it becomes a plain row
-    borderRadius: "10px",
+    borderRadius: "var(--z-shape-card, calc(var(--z-radius, 10px) + 4px))",
     // phones: the fill and corner of every settings group, no frame
     // (owner, 2026-11-17: one box look everywhere)
     _phone: {
@@ -158,9 +158,12 @@ const Base = styled("a", {
       background:
         "var(--z-sheet-group, color-mix(in srgb, var(--z-fg-primary) 5%, transparent))",
     },
-    // same surface as the settings panels (SettingsSection)
-    border: "1px solid var(--z-border-soft)",
-    background: "var(--z-bg-raised)",
+    // exactly the settings card (SettingsSection's Panel): one box look on
+    // desktop too (owner, 2026-11-17)
+    border:
+      "1px solid var(--z-card-border, var(--z-btn-surface-border, color-mix(in srgb, var(--z-fg-primary) 8%, transparent)))",
+    background: "var(--z-card-bg)",
+    boxShadow: "var(--z-card-lift)",
 
     userSelect: "none",
     cursor: "pointer",
@@ -336,7 +339,7 @@ CategoryButton.Group = styled("div", {
     flexDirection: "column",
     gap: 0,
 
-    borderRadius: "10px",
+    borderRadius: "var(--z-shape-card, calc(var(--z-radius, 10px) + 4px))",
     // phones: the fill and corner of every settings group, no frame
     // (owner, 2026-11-17: one box look everywhere)
     _phone: {
@@ -347,9 +350,12 @@ CategoryButton.Group = styled("div", {
         "var(--z-sheet-group, color-mix(in srgb, var(--z-fg-primary) 5%, transparent))",
     },
     overflow: "hidden",
-    // same surface as the settings panels (SettingsSection)
-    border: "1px solid var(--z-border-soft)",
-    background: "var(--z-bg-raised)",
+    // exactly the settings card (SettingsSection's Panel): one box look on
+    // desktop too (owner, 2026-11-17)
+    border:
+      "1px solid var(--z-card-border, var(--z-btn-surface-border, color-mix(in srgb, var(--z-fg-primary) 8%, transparent)))",
+    background: "var(--z-card-bg)",
+    boxShadow: "var(--z-card-lift)",
 
     "& > div": { border: "none", borderRadius: 0 },
     "& .z-cat-row": {
@@ -617,7 +623,7 @@ const Details = styled("div", {
   base: {
     minWidth: 0,
     border: "1px solid var(--z-border-subtle)",
-    borderRadius: "10px",
+    borderRadius: "var(--z-shape-card, calc(var(--z-radius, 10px) + 4px))",
     // phones: the fill and corner of every settings group, no frame
     // (owner, 2026-11-17: one box look everywhere)
     _phone: {

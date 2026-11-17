@@ -488,8 +488,8 @@ msgstr "{0} ist aus anderen Apps nicht verfügbar. Versuche eine andere Taste."
 
 #. placeholder {0}: nameOf(claimedBy()!)
 #: src/interface/tickets/TicketAction.tsx
-msgid "{0} is on it"
-msgstr "{0} kümmert sich darum"
+#~ msgid "{0} is on it"
+#~ msgstr "{0} kümmert sich darum"
 
 #. placeholder {0}: done()!.name
 #: components/modal/modals/PromoteServer.tsx
@@ -1002,8 +1002,8 @@ msgid "{value} dB"
 msgstr "{value} dB"
 
 #: components/modal/modals/CloseTicket.tsx
-msgid "{value} out of 5"
-msgstr "{value} von 5"
+#~ msgid "{value} out of 5"
+#~ msgstr "{value} von 5"
 
 #. placeholder {0}: s().days
 #: components/modal/modals/PromoteServer.tsx
@@ -3430,8 +3430,8 @@ msgstr "Avatar-Deko"
 #~ msgstr "Avatar-Rahmen"
 
 #: components/app/interface/settings/server/TicketsSettings.tsx
-msgid "Average rating"
-msgstr "Durchschnittliche Bewertung"
+#~ msgid "Average rating"
+#~ msgstr "Durchschnittliche Bewertung"
 
 #: components/ui/components/features/profiles/plateNames.ts
 msgid "Azerbaijan"
@@ -10723,8 +10723,8 @@ msgid "How to appeal"
 msgstr "So legst du Einspruch ein"
 
 #: components/modal/modals/CloseTicket.tsx
-msgid "How was the help? (optional)"
-msgstr "Wie war die Hilfe? (optional)"
+#~ msgid "How was the help? (optional)"
+#~ msgstr "Wie war die Hilfe? (optional)"
 
 #: src/interface/Developers.tsx
 #~ msgid "HTTP endpoint"
@@ -18267,8 +18267,8 @@ msgstr "Ratenlimits"
 
 #. placeholder {0}: rating()
 #: src/interface/tickets/TicketAction.tsx
-msgid "Rated {0} out of 5"
-msgstr "Mit {0} von 5 bewertet"
+#~ msgid "Rated {0} out of 5"
+#~ msgstr "Mit {0} von 5 bewertet"
 
 #: components/app/interface/support/OfficialBanner.tsx
 msgid "Re: {first}"
@@ -24679,6 +24679,10 @@ msgstr "Schwelle"
 #: components/auth/src/flows/Form.tsx
 msgid "Tick the box to accept before you continue."
 msgstr "Setze das Häkchen, um zuzustimmen, bevor du fortfährst."
+
+#: src/interface/tickets/TicketAction.tsx
+msgid "Ticket actions"
+msgstr "Ticket-Aktionen"
 
 #: components/app/interface/settings/server/assistant/labels.ts
 msgid "Ticket categories, one per line"

@@ -482,8 +482,8 @@ msgstr "{0} n'est pas disponible depuis d'autres applis. Essaie une autre touche
 
 #. placeholder {0}: nameOf(claimedBy()!)
 #: src/interface/tickets/TicketAction.tsx
-msgid "{0} is on it"
-msgstr "{0} s’en occupe"
+#~ msgid "{0} is on it"
+#~ msgstr "{0} s’en occupe"
 
 #. placeholder {0}: done()!.name
 #: components/modal/modals/PromoteServer.tsx
@@ -981,8 +981,8 @@ msgid "{value} dB"
 msgstr "{value} dB"
 
 #: components/modal/modals/CloseTicket.tsx
-msgid "{value} out of 5"
-msgstr "{value} sur 5"
+#~ msgid "{value} out of 5"
+#~ msgstr "{value} sur 5"
 
 #. placeholder {0}: s().days
 #: components/modal/modals/PromoteServer.tsx
@@ -3331,8 +3331,8 @@ msgstr "Décoration d’avatar"
 #~ msgstr ""
 
 #: components/app/interface/settings/server/TicketsSettings.tsx
-msgid "Average rating"
-msgstr "Note moyenne"
+#~ msgid "Average rating"
+#~ msgstr "Note moyenne"
 
 #: components/ui/components/features/profiles/plateNames.ts
 msgid "Azerbaijan"
@@ -10336,8 +10336,8 @@ msgid "How to appeal"
 msgstr "Comment faire appel"
 
 #: components/modal/modals/CloseTicket.tsx
-msgid "How was the help? (optional)"
-msgstr "Comment était l’aide ? (facultatif)"
+#~ msgid "How was the help? (optional)"
+#~ msgstr "Comment était l’aide ? (facultatif)"
 
 #: components/app/interface/settings/user/bots/ViewBot.tsx
 #: components/modal/modals/InteractionsEndpoint.tsx
@@ -17543,8 +17543,8 @@ msgstr "Limites de débit"
 
 #. placeholder {0}: rating()
 #: src/interface/tickets/TicketAction.tsx
-msgid "Rated {0} out of 5"
-msgstr "Noté {0} sur 5"
+#~ msgid "Rated {0} out of 5"
+#~ msgstr "Noté {0} sur 5"
 
 #: components/app/interface/support/OfficialBanner.tsx
 msgid "Re: {first}"
@@ -23726,6 +23726,10 @@ msgstr "Seuil"
 #: components/auth/src/flows/Form.tsx
 msgid "Tick the box to accept before you continue."
 msgstr "Cochez la case pour accepter avant de continuer."
+
+#: src/interface/tickets/TicketAction.tsx
+msgid "Ticket actions"
+msgstr "Actions du ticket"
 
 #: components/app/interface/settings/server/assistant/labels.ts
 msgid "Ticket categories, one per line"

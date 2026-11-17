@@ -482,8 +482,8 @@ msgstr "{0} 在其他应用中不可用。请换一个按键。"
 
 #. placeholder {0}: nameOf(claimedBy()!)
 #: src/interface/tickets/TicketAction.tsx
-msgid "{0} is on it"
-msgstr "{0} 正在处理"
+#~ msgid "{0} is on it"
+#~ msgstr "{0} 正在处理"
 
 #. placeholder {0}: done()!.name
 #: components/modal/modals/PromoteServer.tsx
@@ -981,8 +981,8 @@ msgid "{value} dB"
 msgstr "{value} dB"
 
 #: components/modal/modals/CloseTicket.tsx
-msgid "{value} out of 5"
-msgstr "{value} 分（满分 5）"
+#~ msgid "{value} out of 5"
+#~ msgstr "{value} 分（满分 5）"
 
 #. placeholder {0}: s().days
 #: components/modal/modals/PromoteServer.tsx
@@ -3331,8 +3331,8 @@ msgstr "头像装饰"
 #~ msgstr ""
 
 #: components/app/interface/settings/server/TicketsSettings.tsx
-msgid "Average rating"
-msgstr "平均评分"
+#~ msgid "Average rating"
+#~ msgstr "平均评分"
 
 #: components/ui/components/features/profiles/plateNames.ts
 msgid "Azerbaijan"
@@ -10336,8 +10336,8 @@ msgid "How to appeal"
 msgstr "如何申诉"
 
 #: components/modal/modals/CloseTicket.tsx
-msgid "How was the help? (optional)"
-msgstr "这次帮助如何？（可选）"
+#~ msgid "How was the help? (optional)"
+#~ msgstr "这次帮助如何？（可选）"
 
 #: components/app/interface/settings/user/bots/ViewBot.tsx
 #: components/modal/modals/InteractionsEndpoint.tsx
@@ -17543,8 +17543,8 @@ msgstr "速率限制"
 
 #. placeholder {0}: rating()
 #: src/interface/tickets/TicketAction.tsx
-msgid "Rated {0} out of 5"
-msgstr "评分 {0}（满分 5）"
+#~ msgid "Rated {0} out of 5"
+#~ msgstr "评分 {0}（满分 5）"
 
 #: components/app/interface/support/OfficialBanner.tsx
 msgid "Re: {first}"
@@ -23726,6 +23726,10 @@ msgstr "阈值"
 #: components/auth/src/flows/Form.tsx
 msgid "Tick the box to accept before you continue."
 msgstr "请先勾选复选框表示接受，然后继续。"
+
+#: src/interface/tickets/TicketAction.tsx
+msgid "Ticket actions"
+msgstr "工单操作"
 
 #: components/app/interface/settings/server/assistant/labels.ts
 msgid "Ticket categories, one per line"

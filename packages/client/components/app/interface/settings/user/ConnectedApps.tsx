@@ -230,8 +230,10 @@ const Empty = styled("div", {
     alignItems: "center",
     gap: "12px",
     padding: "16px",
-    borderRadius: "var(--z-radius-md, 10px)",
-    border: "1px solid var(--z-border-subtle)",
+    borderRadius: "var(--z-shape-card, calc(var(--z-radius, 10px) + 4px))",
+    border:
+      "1px solid var(--z-card-border, var(--z-btn-surface-border, color-mix(in srgb, var(--z-fg-primary) 8%, transparent)))",
+    background: "var(--z-card-bg)",
     color: "var(--z-fg-secondary)",
     fontSize: "13px",
     "--z-icon-color": "var(--z-icon-muted)",

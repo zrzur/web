@@ -13,8 +13,10 @@ import { Modals } from "../types";
  * Modal to open a ticket in a server that has kinds of ticket
  *
  * [ticket] Open a ticket
- *          What is it about?
- * ( Support ) ( Report ) ( Something else )
+ * What is it about?
+ * ( ) Support
+ * ( ) Report
+ * ( ) Something else
  * [ In a few words (optional)              ]
  * [                    Cancel  [ Open ticket ] ]
  */
@@ -24,7 +26,13 @@ export function OpenTicketModal(
   const { t } = useLingui();
   const navigate = useNavigate();
   const { showError } = useModals();
-  const [kind, setKind] = createSignal<string>();
+  // one kind: nothing to choose
+  const [kind, setKind] = createSignal<string | undefined>(
+    // eslint-disable-next-line solid/reactivity
+    props.server.tickets?.types.length === 1
+      ? props.server.tickets.types[0].id
+      : undefined,
+  );
   const [subject, setSubject] = createSignal("");
   const [pending, setPending] = createSignal(false);
 
@@ -70,21 +78,27 @@ export function OpenTicketModal(
       isDisabled={pending()}
     >
       <Stack>
-        <Kinds role="radiogroup" aria-label={t`What is it about?`}>
-          <For each={types()}>
-            {(type) => (
-              <Kind
-                type="button"
-                role="radio"
-                aria-checked={kind() === type.id}
-                data-testid={`ticket-type-${type.id}`}
-                onClick={() => setKind(type.id)}
-              >
-                {type.name}
-              </Kind>
-            )}
-          </For>
-        </Kinds>
+        <Group>
+          <GroupLabel id="ticket-kinds">
+            <Trans>What is it about?</Trans>
+          </GroupLabel>
+          <Kinds role="radiogroup" aria-labelledby="ticket-kinds">
+            <For each={types()}>
+              {(type) => (
+                <Kind
+                  type="button"
+                  role="radio"
+                  aria-checked={kind() === type.id}
+                  data-testid={`ticket-type-${type.id}`}
+                  onClick={() => setKind(type.id)}
+                >
+                  <Dot aria-hidden="true" />
+                  <KindName dir="auto">{type.name}</KindName>
+                </Kind>
+              )}
+            </For>
+          </Kinds>
+        </Group>
         <TextField
           label={t`In a few words (optional)`}
           maxlength={100}
@@ -98,32 +112,101 @@ export function OpenTicketModal(
 }
 
 const Stack = styled("div", {
-  base: { display: "flex", flexDirection: "column", gap: "16px" },
+  base: { display: "flex", flexDirection: "column", gap: "20px" },
 });
 
+const Group = styled("div", {
+  base: { display: "flex", flexDirection: "column", gap: "8px" },
+});
+
+const GroupLabel = styled("span", {
+  base: {
+    paddingInline: "2px",
+    fontSize: "13px",
+    lineHeight: "20px",
+    fontWeight: 600,
+    color: "var(--z-section-label, var(--z-fg-secondary))",
+  },
+});
+
+/** One box for all the kinds, a hairline between them: the settings card */
 const Kinds = styled("div", {
-  base: { display: "flex", flexWrap: "wrap", gap: "8px" },
+  base: {
+    display: "flex",
+    flexDirection: "column",
+    overflow: "hidden",
+    borderRadius: "var(--z-shape-card, calc(var(--z-radius, 10px) + 4px))",
+    border:
+      "1px solid var(--z-card-border, var(--z-btn-surface-border, color-mix(in srgb, var(--z-fg-primary) 8%, transparent)))",
+    background: "var(--z-card-bg)",
+    _phone: {
+      border: "none",
+      background:
+        "var(--z-sheet-group, color-mix(in srgb, var(--z-fg-primary) 5%, transparent))",
+    },
+  },
 });
 
 const Kind = styled("button", {
   base: {
-    minHeight: "36px",
+    position: "relative",
+    display: "flex",
+    alignItems: "center",
+    gap: "12px",
+    minHeight: "48px",
+    paddingBlock: "12px",
     paddingInline: "16px",
-    borderRadius: "999px",
-    border: "1px solid var(--z-border-subtle)",
+    border: "none",
     background: "none",
-    color: "var(--z-fg-secondary)",
+    color: "var(--z-fg-primary)",
     fontFamily: "inherit",
     fontSize: "14px",
-    fontWeight: 600,
+    lineHeight: "20px",
+    fontWeight: 500,
+    textAlign: "start",
     cursor: "pointer",
-    _hover: { background: "var(--z-nav-hover)" },
-    _focusVisible: { outline: "2px solid var(--z-focus)" },
-    "&[aria-checked=true]": {
-      borderColor: "var(--z-accent)",
-      background: "color-mix(in srgb, var(--z-accent) 16%, transparent)",
-      color: "var(--z-fg-primary)",
+    transition: "background-color 120ms ease",
+    _motionReduce: { transition: "none" },
+    "& + &::before": {
+      content: "''",
+      position: "absolute",
+      top: 0,
+      insetInline: "16px",
+      height: "1px",
+      background: "var(--z-border-subtle)",
     },
-    _phone: { minHeight: "44px" },
+    _hover: { background: "var(--z-nav-hover)" },
+    _focusVisible: {
+      outline: "none",
+      boxShadow: "inset 0 0 0 2px var(--z-focus)",
+    },
+    // the chosen kind is raised, never tinted; its dot says which
+    "&[aria-checked=true]": { background: "var(--z-nav-selected)" },
+  },
+});
+
+/** The radio mark: a ring, filled with the action colour when chosen */
+const Dot = styled("span", {
+  base: {
+    flexShrink: 0,
+    width: "18px",
+    height: "18px",
+    borderRadius: "50%",
+    border: "2px solid var(--z-fg-muted)",
+    boxSizing: "border-box",
+    transition: "border-color 120ms ease, border-width 120ms ease",
+    _motionReduce: { transition: "none" },
+    "[aria-checked=true] > &": {
+      borderColor: "var(--z-accent)",
+      borderWidth: "5px",
+    },
+  },
+});
+
+const KindName = styled("span", {
+  base: {
+    flex: 1,
+    minWidth: 0,
+    overflowWrap: "anywhere",
   },
 });
