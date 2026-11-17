@@ -578,6 +578,19 @@ const Tab = styled("button", {
       outline: "2px solid var(--z-focus)",
       outlineOffset: "-2px",
     },
+    // phones: the tabs are chips; the open one is raised and never framed
+    _phone: {
+      height: "44px",
+      paddingInline: "16px",
+      borderRadius: "999px",
+      background:
+        "var(--z-sheet-group, color-mix(in srgb, var(--z-fg-primary) 5%, transparent))",
+      "&[aria-selected='true']": {
+        fontWeight: 600,
+        background: "var(--z-nav-selected)",
+        boxShadow: "none",
+      },
+    },
   },
 });
 
@@ -708,6 +721,14 @@ const Rows = styled("div", {
     border: "1px solid var(--z-btn-surface-border)",
     background: "var(--z-card-bg)",
     boxShadow: "var(--z-card-lift)",
+    // phones: a filled group with no frame, the look of the settings list
+    // (design pack, 2026-11-17)
+    _phone: {
+      border: "none",
+      boxShadow: "none",
+      background:
+        "var(--z-sheet-group, color-mix(in srgb, var(--z-fg-primary) 5%, transparent))",
+    },
   },
 });
 
@@ -800,5 +821,21 @@ const Actions = styled("div", {
       "--z-icon-color": "var(--z-accent)",
     },
     "& button:active": { boxShadow: "var(--z-btn-pressed)" },
+    // phones: bare icons, no ring round them (design pack, 2026-11-17);
+    // the button keeps its 44 px target
+    _phone: {
+      gap: 0,
+      "& button": {
+        width: "44px !important",
+        height: "44px !important",
+        background: "none !important",
+        border: "none !important",
+        boxShadow: "none !important",
+      },
+      "& button:active": {
+        background:
+          "color-mix(in srgb, var(--z-fg-primary) 10%, transparent) !important",
+      },
+    },
   },
 });

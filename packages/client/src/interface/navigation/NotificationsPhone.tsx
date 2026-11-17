@@ -167,43 +167,45 @@ export function NotificationsPhone(props: { onClose: () => void }) {
           <Group>
             <Trans>Friend requests</Trans>
           </Group>
-          <For each={requests()}>
-            {(user) => (
-              <Row data-new>
-                <Avatar
-                  size={44}
-                  src={user.animatedAvatarURL}
-                  fallback={user.displayName}
-                />
-                <Text>
-                  <p>
-                    <Trans>
-                      <strong dir="auto">{user.displayName}</strong> sent you a
-                      friend request.
-                    </Trans>
-                  </p>
-                  <Answers>
-                    <Answer
-                      type="button"
-                      data-primary
-                      onClick={() => user.addFriend().catch(showError)}
-                    >
-                      <Trans>Accept</Trans>
-                    </Answer>
-                    <Answer
-                      type="button"
-                      onClick={() => user.removeFriend().catch(showError)}
-                    >
-                      <Trans>Decline</Trans>
-                    </Answer>
-                    <Answer type="button" onClick={() => message(user)}>
-                      <Trans>Send message</Trans>
-                    </Answer>
-                  </Answers>
-                </Text>
-              </Row>
-            )}
-          </For>
+          <Rows>
+            <For each={requests()}>
+              {(user) => (
+                <Row data-new>
+                  <Avatar
+                    size={44}
+                    src={user.animatedAvatarURL}
+                    fallback={user.displayName}
+                  />
+                  <Text>
+                    <p>
+                      <Trans>
+                        <strong dir="auto">{user.displayName}</strong> sent you
+                        a friend request.
+                      </Trans>
+                    </p>
+                    <Answers>
+                      <Answer
+                        type="button"
+                        data-primary
+                        onClick={() => user.addFriend().catch(showError)}
+                      >
+                        <Trans>Accept</Trans>
+                      </Answer>
+                      <Answer
+                        type="button"
+                        onClick={() => user.removeFriend().catch(showError)}
+                      >
+                        <Trans>Decline</Trans>
+                      </Answer>
+                      <Answer type="button" onClick={() => message(user)}>
+                        <Trans>Send message</Trans>
+                      </Answer>
+                    </Answers>
+                  </Text>
+                </Row>
+              )}
+            </For>
+          </Rows>
         </Show>
 
         <Show when={showMentions()}>
@@ -224,38 +226,43 @@ export function NotificationsPhone(props: { onClose: () => void }) {
                 {(day) => (
                   <>
                     <Group>{day.label}</Group>
-                    <For each={day.items}>
-                      {(item) => (
-                        <RowButton
-                          type="button"
-                          data-new={isNew(item) ? "" : undefined}
-                          onClick={() => open(item)}
-                        >
-                          <Avatar
-                            size={44}
-                            src={item.animatedAvatarURL}
-                            fallback={item.username}
-                          />
-                          <Text>
-                            <p>
-                              <Trans>
-                                <strong dir="auto">{item.username}</strong>{" "}
-                                mentioned you in <strong>{placed(item)}</strong>
-                              </Trans>
-                            </p>
-                            <Quote>
-                              <bdi>{client().markdownToText(item.content)}</bdi>
-                            </Quote>
-                          </Text>
-                          <When>
-                            {when(item)}
-                            <Show when={isNew(item)}>
-                              <Dot aria-label={t`Unread`} />
-                            </Show>
-                          </When>
-                        </RowButton>
-                      )}
-                    </For>
+                    <Rows>
+                      <For each={day.items}>
+                        {(item) => (
+                          <RowButton
+                            type="button"
+                            data-new={isNew(item) ? "" : undefined}
+                            onClick={() => open(item)}
+                          >
+                            <Avatar
+                              size={44}
+                              src={item.animatedAvatarURL}
+                              fallback={item.username}
+                            />
+                            <Text>
+                              <p>
+                                <Trans>
+                                  <strong dir="auto">{item.username}</strong>{" "}
+                                  mentioned you in{" "}
+                                  <strong>{placed(item)}</strong>
+                                </Trans>
+                              </p>
+                              <Quote>
+                                <bdi>
+                                  {client().markdownToText(item.content)}
+                                </bdi>
+                              </Quote>
+                            </Text>
+                            <When>
+                              {when(item)}
+                              <Show when={isNew(item)}>
+                                <Dot aria-label={t`Unread`} />
+                              </Show>
+                            </When>
+                          </RowButton>
+                        )}
+                      </For>
+                    </Rows>
                   </>
                 )}
               </For>
@@ -377,13 +384,30 @@ const Group = styled("h2", {
   },
 });
 
+/**
+ * The rows under one title: one filled group with a hairline between its
+ * rows, the look of the settings list (design pack, 2026-11-17)
+ */
+const Rows = styled("div", {
+  base: {
+    marginInline: "12px",
+    borderRadius: "14px",
+    overflow: "hidden",
+    background:
+      "var(--z-sheet-group, color-mix(in srgb, var(--z-fg-primary) 5%, transparent))",
+    "& > * + *": {
+      borderTop: "1px solid var(--z-float-divider, var(--z-border-subtle))",
+    },
+  },
+});
+
 const rowStyle = {
   base: {
     display: "flex",
     alignItems: "flex-start",
     gap: "12px",
     width: "100%",
-    padding: "12px 16px",
+    padding: "12px 14px",
     border: "none",
     background: "none",
     color: "inherit",
