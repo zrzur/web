@@ -6538,8 +6538,8 @@
     },
     {
       "path": "packages/client/components/ui/components/features/messaging/elements/Reactions.tsx",
-      "sha256": "ebb131033a24f95ed15827ba32400a4feef41072c5e47ad76b30edb72077bf29",
-      "bytes": 9985,
+      "sha256": "2849f3273681c5065a410da44b34c8ca10323f5dc4104995d4904d7a99c02237",
+      "bytes": 10342,
       "category": "product-source-or-build-manifest"
     },
     {
