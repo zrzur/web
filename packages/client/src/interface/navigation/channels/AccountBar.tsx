@@ -802,6 +802,15 @@ const controlButton = cva({
       color: "var(--z-danger, var(--md-sys-color-error, #F87171))",
       "--z-icon-color": "var(--z-icon-danger)",
     },
+    // Leaving the call sits with the call's other buttons (camera, screen,
+    // sounds): the same tile, in the danger tint, not a bare icon beside
+    // three tiles (owner, 2026-11-17).
+    "&[data-voice-control='disconnect']": {
+      width: "40px",
+      borderRadius: "8px",
+      background: "var(--z-danger-muted)",
+      _phone: { width: "48px", height: "36px" },
+    },
     "&[data-danger='true']:hover": {
       color: "var(--z-danger)",
       "--z-icon-color": "var(--z-icon-danger)",

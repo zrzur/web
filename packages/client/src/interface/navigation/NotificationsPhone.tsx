@@ -330,11 +330,13 @@ const Chip = styled("button", {
     font: "inherit",
     fontSize: "14px",
     cursor: "pointer",
-    // the chosen filter: the page's ink on its background, turned round
+    // The chosen filter is raised, as the chosen status on the You page and
+    // the chosen tab of Friends are: one look for "this one is on" (a white
+    // pill here was a fourth way of saying it; owner, 2026-11-17).
     "&[aria-checked='true']": {
-      color: "var(--z-bg-frame)",
-      background: "var(--z-fg-primary)",
-      borderColor: "transparent",
+      color: "var(--z-fg-primary)",
+      background: "var(--z-nav-selected)",
+      borderColor: "var(--z-border-strong)",
       fontWeight: 600,
     },
     _focusVisible: {
