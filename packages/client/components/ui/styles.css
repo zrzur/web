@@ -124,6 +124,14 @@ body {
       var(--z-fg-primary) 2%,
       var(--z-bg-frame)
     ) !important;
+    /* secondary text one clear step above muted text (they are one level
+       to the eye in the theme); mixed from the theme's own two colours so
+       it holds in every theme */
+    --z-fg-secondary: color-mix(
+      in srgb,
+      var(--z-fg-primary) 74%,
+      var(--z-bg-frame)
+    ) !important;
     /* "chosen" from the same family: the theme's own selected colour is a
        bluer, much lighter navy (ten points above the boxes), which stood
        out of the row it sat in */

@@ -69,7 +69,7 @@ export function LivePreview(props: {
       "--p-accent": p.accent,
       "--p-icon-accent": p.iconAccent,
       "--p-fg": p.light ? "#171925" : "#F0F1F8",
-      "--p-fg2": p.light ? "#4E4560" : "#B6BACD",
+      "--p-fg2": p.light ? "#4E4560" : "#A1A5B8",
       "--p-muted": p.light ? "#6B6279" : "#979BB1",
       "--p-line": p.light ? "rgb(28 23 36 / 0.09)" : "rgb(255 255 255 / 0.06)",
       "--p-row": row,
