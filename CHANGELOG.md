@@ -2,6 +2,17 @@
 
 ## Unreleased
 
+### Phones: faster replies, and calls that fit the hand (2026-11-17)
+
+* **Pull a message sideways to reply.** Away from the menu side (left in English, right in Arabic): the row follows the finger, an arrow fills, and letting go starts the reply with the message box ready. A short pull or a scroll does nothing; the other direction still slides the menu in.
+* **The message sheet starts with what you do most:** Reply, React, Copy and Delete as four large buttons at the top of the long-press sheet. Delete used to be the eleventh row. It still asks before deleting.
+* **Drag a call down to put it aside.** Anywhere on the call screen (the top row, a person's tile): the call goes on and the lists come back, as with the arrow.
+* **Many people in a call:** the first rows could end up above the top edge where no scroll reached; the tiles now start at the top and scroll. Two people get two tiles of the same size. A camera fills its tile; a shared screen keeps its bars.
+* **A call in a direct message or group:** people sit side by side in the strip over the conversation (the second person was cut off behind the buttons).
+* **An incoming call on a phone:** the card sits under the status bar, the caller's name on its own row, and Decline, Video and Accept are three wide 48 px buttons.
+* **No screen-share button where the browser cannot share** (phone browsers): it only showed an error. You still watch what others share.
+* **Tablets:** channels and servers are no longer picked up and dragged by the finger that scrolls the list (it was already so on phones).
+
 ### Install Zrzur on your phone (2026-11-17)
 
 * **Install sheet.** On an Android phone, from the second visit, a sheet offers to install Zrzur; **Install** opens the browser's own install window. On iPhone and iPad it shows the three steps (Share, Add to Home Screen, Add). It shows once; closed, it stays away for 30 days. **Install the app** stays on the You page. Nothing shows inside the installed app or on a computer.
