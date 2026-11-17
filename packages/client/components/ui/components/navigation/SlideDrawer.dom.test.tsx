@@ -93,4 +93,28 @@ describe("the phone's slide between the lists and the page", () => {
     vi.advanceTimersByTime(600);
     expect(drawer.state).toBe(SlideState.HIDDEN);
   });
+
+  it("locked to the lists: no press or swipe shows the page, a kept press follows the unlock", () => {
+    drawer.locked = true;
+    // a press on a row asks for the page just before the address changes
+    expect(drawer.setShown(true)).toBe(true);
+    vi.advanceTimersByTime(400);
+    expect(drawer.state).toBe(SlideState.HIDDEN);
+    // a swipe toward the page goes nowhere
+    touch(root, "touchstart", 300);
+    touch(root, "touchmove", 200);
+    touch(root, "touchmove", 100);
+    touch(root, "touchend", 100);
+    vi.advanceTimersByTime(400);
+    expect(drawer.state).toBe(SlideState.HIDDEN);
+    // the address changed: the page has something to show
+    drawer.setShown(true);
+    drawer.locked = false;
+    vi.advanceTimersByTime(400);
+    expect(drawer.state).toBe(SlideState.SHOWN);
+    // back at the lists' address: the lists come back by themselves
+    drawer.locked = true;
+    vi.advanceTimersByTime(400);
+    expect(drawer.state).toBe(SlideState.HIDDEN);
+  });
 });

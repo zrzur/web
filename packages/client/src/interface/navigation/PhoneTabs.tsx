@@ -13,7 +13,6 @@ import { Avatar } from "@revolt/ui";
 
 import { type IconName, Icon } from "@revolt/ui/icons/Icon";
 import { pendingUpdate } from "../../serviceWorkerInterface";
-import { goingHome } from "../home/goingHome";
 import { openMentions } from "./MentionsPanel";
 
 /** the last server visited, so the Servers tab returns to it */
@@ -49,9 +48,6 @@ export function PhoneTabs(props: { page?: boolean }) {
 
   const active = () => {
     const path = location.pathname;
-    // under the Home page no tab is the open one: Home is the logo's place
-    // and shares its address with the Messages list
-    if (props.page && goingHome(path)) return "home";
     if (path.startsWith("/server")) return "servers";
     if (path.startsWith("/discover")) return "discover";
     if (path.startsWith("/you")) return "you";

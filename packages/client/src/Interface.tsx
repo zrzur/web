@@ -99,13 +99,11 @@ const Interface = (props: { children?: JSX.Element }) => {
   });
 
   // Discover and You are tabs of the phone's bar, and each is a whole page
-  // on the page side of the slide: the bar stays under them. So does it under
-  // Home, the logo's page: every list is one press away from there too.
+  // on the page side of the slide: the bar stays under them.
   const tabPage = () =>
     device.layout() === "phone" &&
     (location.pathname.startsWith("/discover") ||
-      location.pathname.startsWith("/you") ||
-      goingHome(location.pathname));
+      location.pathname.startsWith("/you"));
 
   function isDisconnected() {
     return [
@@ -127,6 +125,12 @@ const Interface = (props: { children?: JSX.Element }) => {
     //Create drawer
     const cont = contRef();
     if (cont && !sDrawer) sDrawer = new SlideDrawer(cont, rootRef!);
+    // Phones have no Home page (owner, 2026-11-17): at the lists' own
+    // address the lists stay on screen. What Home holds is one press away
+    // there: servers on the rail, settings and designs under You.
+    if (sDrawer)
+      sDrawer.locked =
+        device.layout() === "phone" && goingHome(location.pathname);
     //Update on layout change
     if (sDrawer) {
       const en = sDrawer.enabled;

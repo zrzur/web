@@ -43,6 +43,7 @@ export class SlideDrawer {
   private lShow = true;
   /** asked for while a slide was still settling: done when it has */
   private wanted: boolean | undefined;
+  private isLocked = false;
   /** the content is slid aside (the menu shows) */
   private open = false;
   /**
@@ -102,7 +103,7 @@ export class SlideDrawer {
     // its end. Kept, it held the drawer: a press on a conversation moved the
     // route and the page stayed off screen until the next swipe.
     if (this.touch) this.cancel();
-    if (!this.eGet()) return;
+    if (!this.eGet() || this.isLocked) return;
     // pinched in: a drag pans the page, it must not slide the menu
     if ((window.visualViewport?.scale ?? 1) > 1.01) return;
 
@@ -286,7 +287,7 @@ export class SlideDrawer {
       this.endTouch();
       if (!en) this.lShow = this.sGet() === SlideState.SHOWN;
       //Restore show/hide state
-      const show = en ? this.lShow : false;
+      const show = en ? this.lShow && !this.isLocked : false;
       this.setElState(!en || show);
       this.open = show;
       this.eSet(en);
@@ -306,8 +307,34 @@ export class SlideDrawer {
     return this.sGet();
   }
 
+  /**
+   * The page side has nothing of its own to show (phones, at the address of
+   * the lists): the lists stay on screen and no swipe leaves them. A request
+   * to show the page made just before the address changes is kept and
+   * carried out when the lock lifts.
+   */
+  get locked() {
+    return this.isLocked;
+  }
+  set locked(lock: boolean) {
+    if (this.isLocked === lock) return;
+    this.isLocked = lock;
+    if (lock) {
+      this.wanted = undefined;
+      this.setShown(false);
+    } else if (this.wanted !== undefined) {
+      const next = this.wanted;
+      this.wanted = undefined;
+      this.setShown(next);
+    }
+  }
+
   setShown(show: boolean) {
     if (!this.eGet() || this.touch?.trig) return false;
+    if (this.isLocked && show) {
+      this.wanted = true;
+      return true;
+    }
     // still settling from the last slide (a fifth of a second): a press in
     // that moment used to be dropped, now it follows on
     if (this.tTmr) {
