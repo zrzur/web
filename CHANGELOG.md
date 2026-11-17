@@ -2,6 +2,16 @@
 
 ## Unreleased
 
+### Owner's review before Beta 4 (2026-11-17)
+
+* **One box look on desktop:** every box in user settings, server settings and the lobby has the settings card's border, corner and fill (sessions, support, feedback, connected apps, the account card, insights, the Discover box, the lobby's cards).
+* **Nothing shown twice:** the channel list no longer has a second "Rules" row above the rules channel.
+* **Category tools** (settings, add a channel) sit side by side and show when the pointer is on the category's row.
+* **Typing a ticket kind's name** no longer throws the cursor out of the field after each letter.
+* **System notes** (a ticket's first line) have a quieter mark that sits next to the text.
+* **"Open a ticket" dialog:** the kinds are one list of choices in a card, with a title above it.
+* **Phones:** one compact line on top of the channel list, no Discover button in the rail, rounded chosen channel row, every sheet and dialog rises from the bottom, a slim call line instead of the computer's call card, the channel details screen with tabs that scroll to their end and one empty state in the middle.
+
 ### Soundboard no longer blanks the app (2026-11-17)
 
 * Opening the soundboard in a call put the whole app back on its loading screen until the sounds had loaded, which looked like a refresh. The sounds (and the stage controls) now wait inside their own space; everything else stays on screen.
@@ -9,9 +19,9 @@
 ### Temporary voice rooms and tickets (2026-11-17)
 
 * **Room maker:** a voice channel can be switched to "Room maker" in its settings. Whoever joins it gets a voice room of their own next to it, named after them; they can rename it, set its user limit and remove it. The room goes when everyone has left.
-* **Tickets:** switched on under Server settings, Overview, Tickets (category, the roles that answer, a first message). Members then see "Open a ticket" at the top of the channel list; it opens a private channel with the staff. "Close ticket" is in the channel header for the member and the staff; the staff can reopen a closed ticket.
-* **Room controls:** the member a room was made for locks it, hides it, lets people in by name and hands it over, from a button in the room's header. A room maker can name its rooms ("Room of {name}"). When the room's member leaves, the room goes to whoever has been in it longest.
-* **Ticket kinds, taking, rating and a board:** a server can offer up to five kinds of ticket, each answered by roles of its own; the member picks one and writes a few words. The staff take a ticket ("Take ticket"), anyone in it can save the conversation as a text file, and the member can rate the help when closing. Server settings list the tickets you can see with their state, who took them and the average rating.
+* **Tickets:** switched on under Server settings, Overview, Tickets (category, the roles that answer, a first message). Members then find "Open a ticket" in the server's menu, under a name the server can set itself; it opens a private channel with the staff. A ticket's actions (take, save the conversation, close, reopen, delete) are behind one button in the channel header, and in the More sheet on phones. Whoever manages channels can delete a closed ticket for good.
+* **Room controls:** the member a room was made for locks it, hides it, lets people in by name and hands it over, from a button on the call card (a line above the call bar on phones); the panel opens above the card and wears its look. A room maker can name its rooms ("Room of {name}"). When the room's member leaves, the room goes to whoever has been in it longest.
+* **Ticket kinds, taking and a board:** a server can offer up to five kinds of ticket, each answered by roles of its own; the member picks one and writes a few words. The staff take a ticket ("Take ticket"), anyone in it can save the conversation as a text file. Server settings list the tickets you can see with their state and who took them.
 * The ticket icon is Zrzur's own drawing.
 * English, Arabic, German, French, Spanish, Russian and Chinese.
 
