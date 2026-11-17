@@ -2,7 +2,6 @@ import { useLingui } from "@lingui/solid/macro";
 import { createEffect } from "solid-js";
 
 import { useClient } from "@revolt/client";
-import { useDevice } from "@revolt/common";
 import { hasOldTag } from "@revolt/common/lib/userTag";
 import { useModals } from "@revolt/modal";
 import { useSnackbar } from "@revolt/ui";
@@ -19,7 +18,6 @@ export function UsernameNotice() {
   const snackbar = useSnackbar();
   const { openModal } = useModals();
   const { t } = useLingui();
-  const { layout } = useDevice();
   let told = false;
 
   createEffect(() => {
@@ -46,8 +44,7 @@ export function UsernameNotice() {
       action: t`Choose username`,
       closeable: true,
       messageLine: 2,
-      // phones: at the top, where it covers no sheet, menu or message box
-      placement: layout() === "phone" ? "top" : "bottom",
+      placement: "bottom",
       closeOnAction: true,
       onAction: () => openModal({ type: "edit_username", client: client() }),
     });
