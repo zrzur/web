@@ -98,6 +98,35 @@ body {
   }
 }
 
+/* Phones: every screen wears the colours of the settings list (owner,
+   2026-11-17: "the boxes and colours of server settings, everywhere"). The
+   page is the frame colour, every box (card, field, message box, group of
+   rows) is one fill a step above it, and a sheet is a hair above the page.
+   The theme writes its colours on <body> from script; these win over that
+   on phones only, so wider screens keep theirs. */
+@media (max-width: 600px) {
+  body {
+    --z-bg-sidebar: var(--z-bg-frame) !important;
+    --z-bg-chat: var(--z-bg-frame) !important;
+    --z-bg-modal: var(--z-bg-frame) !important;
+    --z-sheet-group: color-mix(
+      in srgb,
+      var(--z-fg-primary) 5%,
+      var(--z-bg-frame)
+    ) !important;
+    --z-bg-raised: var(--z-sheet-group) !important;
+    --z-bg-input: var(--z-sheet-group) !important;
+    --z-bg-dock: var(--z-sheet-group) !important;
+    --z-dialog-card: var(--z-sheet-group) !important;
+    --z-card-bg: var(--z-sheet-group) !important;
+    --z-bg-floating: color-mix(
+      in srgb,
+      var(--z-fg-primary) 2%,
+      var(--z-bg-frame)
+    ) !important;
+  }
+}
+
 /* The cause of the short box (WebKit bug 301108): in an installed app with a
    translucent status bar, iOS 26 gives the page a viewport shorter than the
    screen by the top inset, but only while the page itself is shorter than
