@@ -12,6 +12,7 @@ import {
 } from "solid-js";
 
 import { Plural, Trans, useLingui } from "@lingui/solid/macro";
+import { useDevice } from "@revolt/common";
 import { isolate } from "@revolt/common/lib/isolate";
 import { styled } from "styled-system/jsx";
 
@@ -100,6 +101,11 @@ export function Discover() {
 
   const site = isDiscoverSite();
   const base = discoverBase();
+  // Inside the app on a phone Discover is a tab, not a website: no sky and
+  // big headline taking the first third of the screen, a short title, and
+  // the topics as chips (owner, 2026-11-17). The public site keeps its top.
+  const device = useDevice();
+  const compact = () => !site && device.layout() === "phone";
 
   // Where we are, below the base path:
   //   /                     servers: browse
@@ -1062,7 +1068,25 @@ export function Discover() {
             }
           >
             {/* with a search or a filter the sky steps aside */}
-            <Show when={!showResults()}>
+            <Show when={!showResults() && compact()}>
+              <PhoneTitle>
+                <h1 tabIndex={-1} data-view-heading>
+                  <Show
+                    when={kind() === "servers"}
+                    fallback={
+                      <Trans>
+                        Find the right <em>bot</em>
+                      </Trans>
+                    }
+                  >
+                    <Trans>
+                      Find your <em>community</em>
+                    </Trans>
+                  </Show>
+                </h1>
+              </PhoneTitle>
+            </Show>
+            <Show when={!showResults() && !compact()}>
               <Hero lit={listed()}>
                 <h1 tabIndex={-1} data-view-heading>
                   <Show
@@ -1101,6 +1125,7 @@ export function Discover() {
               {/* the topics as big words: the current one lit */}
               <Words
                 data-words
+                data-chips={compact() ? "" : undefined}
                 aria-label={t`Categories`}
                 // a word half out of the row comes in with the keyboard
                 onFocusIn={(event) =>
@@ -1766,6 +1791,29 @@ const Words = styled("nav", {
       },
     },
     "& > [aria-current]": { color: "var(--z-fg-primary)" },
+    // In the app on a phone the topics are chips: whole in view or clearly
+    // cut by the scroll, with the look "chosen" has everywhere (raised).
+    "&[data-chips]": {
+      gap: "8px",
+      paddingBlock: "8px",
+      "& > a, & > button": {
+        minHeight: "44px",
+        paddingInline: "16px",
+        borderRadius: "999px",
+        border: "1px solid var(--z-border-subtle)",
+        background: "var(--z-bg-raised)",
+        color: "var(--z-fg-secondary)",
+        fontSize: "15px",
+        lineHeight: "20px",
+        fontWeight: 500,
+      },
+      "& > [aria-current]": {
+        color: "var(--z-fg-primary)",
+        fontWeight: 600,
+        background: "var(--z-nav-selected)",
+        borderColor: "var(--z-border-strong)",
+      },
+    },
     // a mouse has no sideways scroll: every word on the page, in as many rows
     // as it takes, which scroll away with it
     "@media (min-width: 601px)": {
@@ -1779,6 +1827,22 @@ const Words = styled("nav", {
       paddingInline: "16px",
       gap: "16px",
     },
+  },
+});
+
+/** In the app on a phone: the page's name, where the sky and headline were */
+const PhoneTitle = styled("div", {
+  base: {
+    padding: "8px 16px 0",
+    "& h1": {
+      margin: 0,
+      fontSize: "22px",
+      lineHeight: 1.3,
+      fontWeight: 700,
+      color: "var(--z-fg-primary)",
+      outline: "none",
+    },
+    "& h1 em": { fontStyle: "normal" },
   },
 });
 

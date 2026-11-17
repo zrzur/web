@@ -368,6 +368,10 @@ const Card = styled("article", {
     color: "var(--z-fg-primary)",
     "--banner-h": "100px",
     "--avatar-ring": "60px",
+    // phones: a shorter picture, and one card under the other needs no
+    // common height (the empty band above the footer), so more than one
+    // card fits a screen
+    _phone: { "--banner-h": "80px", "--card-h": "0px" },
     "--ring": "var(--z-card-solid, var(--z-bg-sidebar))",
 
     // the same size whether or not it has tags; the wall sets it
