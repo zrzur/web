@@ -2,6 +2,10 @@
 
 ## Unreleased
 
+### Soundboard no longer blanks the app (2026-11-17)
+
+* Opening the soundboard in a call put the whole app back on its loading screen until the sounds had loaded, which looked like a refresh. The sounds (and the stage controls) now wait inside their own space; everything else stays on screen.
+
 ### Design pack (2026-11-16)
 
 * **250 new designs by Zrzur**, free for everyone: 125 avatar decorations, 67 nameplates and 58 profile effects, in 76 sets. Pixel art for games (arcade, quest, racing, a sunset coast, an arcade hall, a handheld console and more), nature and seasons, the Levant, rank emblems and a game HUD, ears, headphones and crowns, and pixel sets about Syria: the flag, Damascus and its sword, the Ghouta, Aleppo, Hama, Palmyra and the Syrian table. Every name is in English, Arabic and German.
