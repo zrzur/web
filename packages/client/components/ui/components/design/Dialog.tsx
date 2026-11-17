@@ -209,7 +209,10 @@ export function Dialog(props: Props) {
       ) {
         // a click that opened the dialog must not leave text selected in it
         window.getSelection()?.removeAllRanges();
-        initialFocus()?.focus();
+        // no scrolling: a phone sheet is still rising from under the edge
+        // when it takes the focus, and the browser scrolled the page behind
+        // it to follow (the sheet then rested 3 px above the bottom edge)
+        initialFocus()?.focus({ preventScroll: true });
       }
     });
     const onKey = (e: KeyboardEvent) => {
@@ -249,7 +252,7 @@ export function Dialog(props: Props) {
         const last = elements[elements.length - 1];
         if (!first) {
           e.preventDefault();
-          dialogElement?.focus();
+          dialogElement?.focus({ preventScroll: true });
         } else if (
           e.shiftKey &&
           (document.activeElement === first ||

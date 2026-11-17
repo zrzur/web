@@ -6016,8 +6016,8 @@
     },
     {
       "path": "packages/client/components/ui/components/design/Dialog.tsx",
-      "sha256": "92827dbd1007d40536fa78fe5b0f6f0cb546f25d06858def030fa5a952fde7a2",
-      "bytes": 27856,
+      "sha256": "a33fa0aba5ad020c33202dd53c7232fadd100a03fce1156cec2e802054d67ed3",
+      "bytes": 28129,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -42202,8 +42202,8 @@
     },
     {
       "path": "packages/client/src/interface/channels/text/ChannelDetailsPhone.tsx",
-      "sha256": "cd080ec0b1d989fa24dc41c86ca79061cd8784b298e6a66abde2971d871b25a0",
-      "bytes": 25934,
+      "sha256": "7056434afc238b2061f7f0b709f4bf88abb16cb4a31f502dc9d60bde74f3aa88",
+      "bytes": 26978,
       "category": "product-source-or-build-manifest"
     },
     {
