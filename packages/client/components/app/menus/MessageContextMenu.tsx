@@ -44,6 +44,8 @@ import {
 
 import { i18n } from "@lingui/core";
 import { Trans, useLingui } from "@lingui/solid/macro";
+import { styled } from "styled-system/jsx";
+
 import { pluginsEnabled } from "@revolt/plugins/enabled";
 import {
   hostHooks as pluginHooks,
@@ -55,6 +57,7 @@ import {
   apps as MdApps,
   sentiment_content as MdSentimentContent,
 } from "@revolt/ui/icons/legacy";
+import Breakpoint from "../../common/Breakpoint";
 import {
   ContextMenu,
   ContextMenuButton,
@@ -340,6 +343,17 @@ export function MessageContextMenu(props: {
     navigator.clipboard.writeText(props.link ?? "");
   }
 
+  /**
+   * Phones show this menu as a bottom sheet (FloatingManager, same query).
+   * There the four things done most (reply, react, copy, delete) are a row
+   * of large buttons at the top instead of four rows spread over the list:
+   * Delete was the eleventh row, at the far end of the sheet.
+   */
+  const quick = () =>
+    !!props.message &&
+    typeof window !== "undefined" &&
+    !!window.matchMedia?.(Breakpoint.phone).matches;
+
   /** official messages are read, copied and marked as unread, nothing else */
   const official = () => !!props.message?.author?.official;
 
@@ -437,8 +451,65 @@ export function MessageContextMenu(props: {
         <ContextMenuDivider />
       </Show>
       <Show when={props.message}>
+        {/* phones: what people do most, one tap away, before the list */}
+        <Show when={quick()}>
+          <QuickRow role="group" data-quick-actions>
+            <Show when={canReply()}>
+              <QuickAction
+                role="menuitem"
+                tabIndex={0}
+                aria-label={t`Reply`}
+                onClick={reply}
+              >
+                <Icon name="arrow-bend-up-left" size={22} />
+                <span>
+                  <Trans>Reply</Trans>
+                </span>
+              </QuickAction>
+            </Show>
+            <Show when={canReact()}>
+              <QuickAction
+                role="menuitem"
+                tabIndex={0}
+                aria-label={t`React`}
+                onClick={(e) => props.reactPicker!()?.onClickEmoji(e)}
+              >
+                <Icon name="smiley" size={22} />
+                <span>
+                  <Trans>React</Trans>
+                </span>
+              </QuickAction>
+            </Show>
+            <QuickAction
+              role="menuitem"
+              tabIndex={0}
+              aria-label={t`Copy text`}
+              onClick={copyText}
+            >
+              <Icon name="copy" size={22} />
+              <span>
+                <Trans>Copy</Trans>
+              </span>
+            </QuickAction>
+            <Show when={canDelete()}>
+              <QuickAction
+                role="menuitem"
+                tabIndex={0}
+                data-danger
+                aria-label={t`Delete message`}
+                onClick={deleteMessage}
+              >
+                <Icon name="trash" size={22} />
+                <span>
+                  <Trans>Delete</Trans>
+                </span>
+              </QuickAction>
+            </Show>
+          </QuickRow>
+          <ContextMenuDivider />
+        </Show>
         {/* 1 · interact */}
-        <Show when={canReact()}>
+        <Show when={canReact() && !quick()}>
           <ContextMenuButton
             icon={MdEmojiEmotions}
             onClick={(e) => props.reactPicker!()?.onClickEmoji(e)}
@@ -446,7 +517,7 @@ export function MessageContextMenu(props: {
             <Trans>React</Trans>
           </ContextMenuButton>
         </Show>
-        <Show when={canReply()}>
+        <Show when={canReply() && !quick()}>
           <ContextMenuButton icon={MdReply} onClick={reply}>
             <Trans>Reply</Trans>
           </ContextMenuButton>
@@ -498,9 +569,11 @@ export function MessageContextMenu(props: {
         <ContextMenuButton icon={MdMarkChatUnread} onClick={markAsUnread}>
           <Trans>Mark as unread</Trans>
         </ContextMenuButton>
-        <ContextMenuButton icon={MdContentCopy} onClick={copyText}>
-          <Trans>Copy text</Trans>
-        </ContextMenuButton>
+        <Show when={!quick()}>
+          <ContextMenuButton icon={MdContentCopy} onClick={copyText}>
+            <Trans>Copy text</Trans>
+          </ContextMenuButton>
+        </Show>
         <Show when={!official()}>
           <ContextMenuButton icon={MdLink} onClick={copyMessageLink}>
             <Trans>Copy message link</Trans>
@@ -625,7 +698,7 @@ export function MessageContextMenu(props: {
             <Trans>Remove all reactions</Trans>
           </ContextMenuButton>
         </Show>
-        <Show when={canDelete()}>
+        <Show when={canDelete() && !quick()}>
           <ContextMenuButton
             icon={MdDelete}
             onClick={deleteMessage}
@@ -657,3 +730,60 @@ export function MessageContextMenu(props: {
     </ContextMenu>
   );
 }
+
+/**
+ * Phone sheet: the most used actions, side by side, at the top
+ *
+ *   [reply]  [react]  [copy]  [delete]
+ */
+const QuickRow = styled("div", {
+  base: {
+    display: "flex",
+    gap: "2px",
+    paddingInline: "2px",
+  },
+});
+
+const QuickAction = styled("a", {
+  base: {
+    flex: "1 1 0",
+    minWidth: 0,
+    minHeight: "64px !important",
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+    justifyContent: "center",
+    // (!important: the phone sheet sizes every menu row, FloatingManager)
+    gap: "6px !important",
+    paddingBlock: "8px",
+    paddingInline: "2px !important",
+    borderRadius: "var(--z-radius-md, 10px)",
+    cursor: "pointer",
+    // 12 px, medium: "Antworten" fits a quarter of a 320 px screen
+    fontSize: "12px !important",
+    fontWeight: 500,
+    lineHeight: "16px",
+    color: "var(--z-fg-primary)",
+    "--z-icon-color": "var(--z-fg-primary)",
+    WebkitTapHighlightColor: "transparent",
+    "& > span:last-child": {
+      // the sheet gives its rows a larger text; these four are captions
+      fontSize: "12px !important",
+      fontWeight: "500 !important",
+      lineHeight: "16px !important",
+      maxWidth: "100%",
+      overflow: "hidden",
+      textOverflow: "ellipsis",
+      whiteSpace: "nowrap",
+    },
+    _active: { background: "var(--z-float-button-hover)" },
+    "&:focus-visible": {
+      outline: "none",
+      boxShadow: "inset 0 0 0 2px var(--z-focus)",
+    },
+    "&[data-danger]": {
+      color: "var(--z-danger)",
+      "--z-icon-color": "var(--z-icon-danger, var(--z-danger))",
+    },
+  },
+});
