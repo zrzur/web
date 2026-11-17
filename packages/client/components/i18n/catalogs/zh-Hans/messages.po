@@ -1445,6 +1445,10 @@ msgstr "在“发现”中占有一席之地"
 msgid "A private channel"
 msgstr "私密频道"
 
+#: src/interface/tickets/TicketLink.tsx
+msgid "A private channel between you and the staff of this server."
+msgstr "你与此服务器管理团队之间的私密频道。"
+
 #: components/app/interface/settings/user/safety/ReportsAndStanding.tsx
 msgid "A report from another person."
 msgstr "来自另一个人的举报。"
@@ -1545,6 +1549,10 @@ msgstr "子命令只有名称、描述和选项。"
 #: src/interface/events/EventCard.tsx
 msgid "A text channel"
 msgstr "一个文字频道"
+
+#: components/app/interface/settings/server/TicketsSettings.tsx
+msgid "A ticket is a private channel: only the member who opened it, the roles you pick and the people who see every channel can read it."
+msgstr "工单是一个私密频道：只有创建它的成员、你选择的身份组以及能看到所有频道的人可以阅读。"
 
 #: components/app/interface/settings/user/profile/CreatorStudio.tsx
 #~ msgid "A transparent animation that plays once over a profile. 576 × 1024 px, up to 4 seconds, up to 2 MB. Reviewers look at it before it goes live."
@@ -4131,6 +4139,7 @@ msgstr "加拿大"
 #: components/modal/modals/BanMember.tsx
 #: components/modal/modals/BanNonMember.tsx
 #: components/modal/modals/BulkDeleteMessages.tsx
+#: components/modal/modals/CloseTicket.tsx
 #: components/modal/modals/CreateBot.tsx
 #: components/modal/modals/CreateCategory.tsx
 #: components/modal/modals/CreateChannel.tsx
@@ -4351,6 +4360,10 @@ msgstr "分类"
 #: components/app/interface/settings/user/plugins/DeveloperTab.tsx
 msgid "Category"
 msgstr "分类"
+
+#: components/app/interface/settings/server/TicketsSettings.tsx
+msgid "Category for new tickets"
+msgstr "新工单所在的分类"
 
 #: components/app/interface/settings/category/Overview.tsx
 msgid "Category info"
@@ -5267,6 +5280,15 @@ msgstr "关闭命令列表"
 #: components/ui/components/features/voice/stage/StagePanel.tsx
 msgid "Close the stage"
 msgstr "关闭舞台"
+
+#: components/modal/modals/CloseTicket.tsx
+msgid "Close this ticket?"
+msgstr "关闭此工单？"
+
+#: components/modal/modals/CloseTicket.tsx
+#: src/interface/tickets/TicketAction.tsx
+msgid "Close ticket"
+msgstr "关闭工单"
 
 #: components/app/interface/safety/labels.tsx
 #: components/app/interface/settings/user/badges/BugQueue.tsx
@@ -8771,6 +8793,10 @@ msgstr "排在最前"
 #: components/modal/modals/CreateThread.tsx
 msgid "First message (optional)"
 msgstr "第一条消息（可选）"
+
+#: components/app/interface/settings/server/TicketsSettings.tsx
+msgid "First message in a ticket"
+msgstr "工单中的第一条消息"
 
 #: components/app/interface/settings/user/profile/studio/StudioDesign.tsx
 msgid "First published"
@@ -12797,6 +12823,10 @@ msgstr "成员每 {0} 可以发送一条消息。"
 msgid "Members couldn't be loaded"
 msgstr "无法加载成员"
 
+#: components/app/interface/settings/server/TicketsSettings.tsx
+msgid "Members get an \"Open a ticket\" row at the top of the channel list."
+msgstr "成员会在频道列表顶部看到“创建工单”一行。"
+
 #: components/app/interface/settings/server/WingsSettings.tsx
 msgid "Members give the server Wings. More Wings unlock higher levels and their perks for everyone."
 msgstr "成员为服务器赠送羽翼。羽翼越多，就能解锁越高的等级及其权益，惠及所有人。"
@@ -12808,6 +12838,10 @@ msgstr "成员加入、离开以及角色变更"
 #: components/app/interface/settings/server/roles/ServerRoleEditor.tsx
 msgid "Members lose this role and its permissions."
 msgstr "成员将失去此角色及其权限。"
+
+#: components/app/interface/settings/server/pages.tsx
+msgid "Members open a private channel with your staff."
+msgstr "成员可与你的管理团队开启私密频道。"
 
 #: components/app/interface/settings/channel/ForumTags.tsx
 msgid "Members pick up to five tags for each post, and everyone can filter posts by tag."
@@ -14059,6 +14093,10 @@ msgstr "还没有上架机器人。"
 #: components/app/interface/settings/server/ServerApps.tsx
 msgid "No bots in this server."
 msgstr "此服务器中没有机器人。"
+
+#: components/app/interface/settings/server/TicketsSettings.tsx
+msgid "No category"
+msgstr "无分类"
 
 #: components/app/interface/settings/user/plugins/PluginDetail.tsx
 msgid "No changelog."
@@ -15374,6 +15412,10 @@ msgstr "打开分类设置"
 #: components/app/interface/settings/user/subscriptions/Subscriptions.tsx
 msgid "Open a server's menu and choose Give Wings. Each one is {0} a month."
 msgstr "打开服务器菜单，选择“赠送羽翼”。每枚每月 {0}。"
+
+#: src/interface/tickets/TicketLink.tsx
+msgid "Open a ticket"
+msgstr "创建工单"
 
 #: components/app/menus/ChannelContextMenu.tsx
 #: src/interface/navigation/channels/ServerSidebar.tsx
@@ -17918,6 +17960,10 @@ msgstr "重新开启"
 msgid "Reopen thread"
 msgstr "重新开启子区"
 
+#: src/interface/tickets/TicketAction.tsx
+msgid "Reopen ticket"
+msgstr "重新打开工单"
+
 #: components/app/interface/settings/user/profile/ReviewQueue.tsx
 msgid "Reopened by an admin"
 msgstr "已由管理员重新开启"
@@ -18189,6 +18235,7 @@ msgid "Resend verification"
 msgstr "重新发送验证码"
 
 #: components/app/interface/settings/server/LobbyAppearanceEditor.tsx
+#: components/app/interface/settings/server/TicketsSettings.tsx
 #: components/app/interface/settings/user/Account.tsx
 #: components/app/interface/settings/user/bots/ViewBot.tsx
 #: components/app/interface/settings/user/profile/studio/StudioEditor.tsx
@@ -18572,6 +18619,10 @@ msgstr "{0} 中的身份组"
 msgid "Roles Shield trusts"
 msgstr "Shield 信任的角色"
 
+#: components/app/interface/settings/server/TicketsSettings.tsx
+msgid "Roles that answer tickets"
+msgstr "负责回复工单的身份组"
+
 #: components/app/interface/settings/server/assistant/AssistantPage.tsx
 msgid "Roles that may use this module"
 msgstr "可使用此模块的角色"
@@ -18613,6 +18664,10 @@ msgstr "一条消息就能容纳长篇故事、更新日志或整份食谱，编
 #: components/ui/components/features/voice/callCard/VoiceCallCardPreview.tsx
 msgid "Room full. Admission is checked by the server."
 msgstr "房间已满。入场由服务器检查。"
+
+#: components/app/interface/settings/channel/Overview.tsx
+msgid "Room maker"
+msgstr "房间创建器"
 
 #. placeholder {0}: channel.name
 #: components/app/interface/settings/server/channels/ChannelsSettings.tsx
@@ -18833,6 +18888,7 @@ msgstr "沙特阿拉伯"
 #: components/app/interface/settings/channel/Overview.tsx
 #: components/app/interface/settings/server/AutoModSettings.tsx
 #: components/app/interface/settings/server/invites/VanityInvite.tsx
+#: components/app/interface/settings/server/TicketsSettings.tsx
 #: components/app/interface/settings/server/webhooks/ServerWebhooks.tsx
 #: components/app/interface/settings/user/account/AgeSettings.tsx
 #: components/app/interface/settings/user/connections/Connections.tsx
@@ -21629,6 +21685,10 @@ msgstr "科技"
 msgid "Tell members by direct message"
 msgstr "通过私信通知成员"
 
+#: components/app/interface/settings/server/TicketsSettings.tsx
+msgid "Tell us what you need and we will answer here."
+msgstr "告诉我们你需要什么，我们会在这里回复。"
+
 #: components/app/interface/safety/labels.tsx
 msgid "Tell us what's wrong in your own words"
 msgstr "用你自己的话告诉我们哪里出了问题"
@@ -22203,6 +22263,10 @@ msgstr "在审核员批准新版本之前，线上版本会继续保留。"
 #: components/app/interface/settings/server/AutoModSettings.tsx
 msgid "The member sees the rule's name as the reason."
 msgstr "成员会看到规则名称作为原因。"
+
+#: components/modal/modals/CloseTicket.tsx
+msgid "The member who opened it will no longer see it. You can reopen it or delete it later."
+msgstr "创建它的成员将不再看到它。你之后可以重新打开或删除它。"
 
 #: components/app/interface/settings/user/bots/CommandManager.tsx
 msgid "The minimum is larger than the maximum."
@@ -23114,6 +23178,10 @@ msgstr "此服务器的 Webhook 数量已达上限（{0}）。请先删除一个
 msgid "This server has no channels yet"
 msgstr "此服务器还没有频道"
 
+#: components/app/interface/settings/server/TicketsSettings.tsx
+msgid "This server has no roles yet. Until it does, only people who can see every channel answer tickets."
+msgstr "此服务器还没有身份组。在此之前，只有能看到所有频道的人回复工单。"
+
 #: components/modal/modals/ServerEventEditor.tsx
 msgid "This server has no text channel you can see."
 msgstr "这个服务器没有你能看到的文字频道。"
@@ -23350,6 +23418,15 @@ msgstr "请先勾选复选框表示接受，然后继续。"
 #: components/app/interface/settings/server/assistant/labels.ts
 msgid "Ticket categories, one per line"
 msgstr "工单分类，每行一个"
+
+#: components/app/interface/settings/server/TicketsSettings.tsx
+msgid "Tickets"
+msgstr "工单"
+
+#: components/app/interface/settings/server/pages.tsx
+msgctxt "server-settings"
+msgid "Tickets"
+msgstr "工单"
 
 #: components/app/interface/settings/server/assistant/labels.ts
 msgid "Tickets and direct messages in one queue."
@@ -25659,6 +25736,10 @@ msgstr "谁会聚集在这里？"
 msgid "Who's interested"
 msgstr "谁感兴趣"
 
+#: components/app/interface/settings/channel/Overview.tsx
+msgid "Whoever joins this channel gets a voice room of their own next to it. The room is removed when everyone has left it."
+msgstr "加入此频道的人会在旁边获得一个自己的语音房间。所有人离开后，房间会被移除。"
+
 #: components/app/interface/settings/server/webhooks/ServerWebhooks.tsx
 msgid "Whoever runs this Zrzur server can turn them on in its configuration."
 msgstr "运行此 Zrzur 服务器的人可以在其配置中开启它们。"
@@ -26396,6 +26477,10 @@ msgstr "你已断开语音连接。"
 msgid "You will need to sign in again."
 msgstr "你需要重新登录。"
 
+#: components/modal/modals/CloseTicket.tsx
+msgid "You will no longer see this ticket. The staff keep it and can open it again for you."
+msgstr "你将不再看到此工单。管理团队会保留它，并可为你重新打开。"
+
 #. placeholder {0}: name()
 #: components/app/interface/settings/user/connections/ServiceCards.tsx
 msgid "You will sign in on {0}'s own page. Zrzur never sees that password."
@@ -26914,6 +26999,10 @@ msgstr "你的订阅"
 #: components/app/interface/settings/user/Keybinds.tsx
 msgid "Your system keeps <0>{keys}</0> for itself. Choose other keys."
 msgstr "系统保留了 <0>{keys}</0>。请选择其他按键。"
+
+#: src/interface/tickets/TicketLink.tsx
+msgid "Your ticket"
+msgstr "你的工单"
 
 #: components/app/interface/settings/user/support/ContactSupport.tsx
 msgid "Your tickets couldn't be loaded. Try again later."

@@ -124,6 +124,14 @@ export default function ChannelOverview(props: ChannelSettingsProps) {
     editGroup.controls.announcement.markDirty(true);
   };
 
+  /** The room maker switch saves at once, apart from the form */
+  const toggleRoomMaker = () => {
+    if (!props.channel.havePermission("ManageChannel")) return;
+    void props.channel
+      .edit({ voice: { maker: !props.channel.isRoomMaker } })
+      .catch((error) => openModal({ type: "error2", error }));
+  };
+
   const submit = Form2.useSubmitHandler(editGroup, onSubmit, onReset);
 
   return (
@@ -195,6 +203,38 @@ export default function ChannelOverview(props: ChannelSettingsProps) {
                     </Trans>
                   </Hint>
                 </SettingsFormPanel>
+                {/* not for a stage, nor for a room a room maker made */}
+                <Show
+                  when={
+                    !props.channel.isStage && !props.channel.temporaryForId
+                  }
+                >
+                  <SettingsRow
+                    icon={<Icon name="speaker-plus" size={20} />}
+                    title={<Trans>Room maker</Trans>}
+                    description={
+                      <Trans>
+                        Whoever joins this channel gets a voice room of their
+                        own next to it. The room is removed when everyone has
+                        left it.
+                      </Trans>
+                    }
+                    disabled={!props.channel.havePermission("ManageChannel")}
+                    onClick={toggleRoomMaker}
+                    control={(ids) => (
+                      <Toggle
+                        checked={props.channel.isRoomMaker}
+                        disabled={
+                          !props.channel.havePermission("ManageChannel")
+                        }
+                        onChange={toggleRoomMaker}
+                        aria-labelledby={ids.labelId}
+                        aria-describedby={ids.descriptionId}
+                        data-testid="room-maker-switch"
+                      />
+                    )}
+                  />
+                </Show>
               </SettingsSection>
             </Show>
             {/* voice rooms have no chat: slowmode and announcement don't apply

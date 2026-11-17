@@ -1328,6 +1328,10 @@ msgstr "بطاقة بالتاريخ الهجري عند انضمام أحد أو
 msgid "A channel"
 msgstr "قناة"
 
+#: components/app/interface/settings/category/Overview.tsx
+msgid "A channel follows the category's permissions until you change permissions on the channel itself."
+msgstr "تتبع القناة صلاحيات الفئة إلى أن تغيّر الصلاحيات على القناة نفسها."
+
 #: components/app/interface/settings/user/bots/CommandManager.tsx
 msgid "A command of this type already has this name."
 msgstr "يوجد أمر من هذا النوع بهذا الاسم."
@@ -1472,6 +1476,10 @@ msgstr "مكان في الاستكشاف"
 msgid "A private channel"
 msgstr "قناة خاصة"
 
+#: src/interface/tickets/TicketLink.tsx
+msgid "A private channel between you and the staff of this server."
+msgstr "قناة خاصة بينك وبين طاقم هذا السيرفر."
+
 #: components/app/interface/settings/user/safety/ReportsAndStanding.tsx
 msgid "A report from another person."
 msgstr "بلاغ من شخص آخر."
@@ -1569,6 +1577,10 @@ msgstr "لا يأخذ الأمر الفرعي إلا اسمًا ووصفًا و�
 msgid "A text channel"
 msgstr "قناة نصية"
 
+#: components/app/interface/settings/server/TicketsSettings.tsx
+msgid "A ticket is a private channel: only the member who opened it, the roles you pick and the people who see every channel can read it."
+msgstr "التذكرة قناة خاصة: لا يقرؤها إلا العضو الذي فتحها والأدوار التي تختارها ومن يرى كل القنوات."
+
 #: components/app/interface/settings/user/profile/CreatorStudio.tsx
 #~ msgid "A transparent animation that plays once over a profile. 576 × 1024 px, up to 4 seconds, up to 2 MB. Reviewers look at it before it goes live."
 #~ msgstr "حركة شفافة تُعرض مرة واحدة فوق الملف الشخصي. 576 × 1024 بكسل، حتى 4 ثوانٍ، وحتى 2 ميغابايت. ويطّلع عليها المراجعون قبل نشرها."
@@ -1616,6 +1628,10 @@ msgstr "صفحة ترحيب؛ يظهر صف «الردهة» للجميع ويُ
 #: components/modal/lib/CreateServerFlow.tsx
 msgid "A wider community"
 msgstr "مجتمع أوسع"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Ablaq Arch"
+msgstr "القوس الأبلق"
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 msgid "Able to access channels on this server"
@@ -1723,9 +1739,9 @@ msgstr "اقبل قواعد السيرفر لتبدأ الكتابة هنا."
 msgid "Accept with video"
 msgstr "قبول مع الفيديو"
 
-#: components/app/interface/settings/ServerSettings.tsx
-#~ msgid "Access"
-#~ msgstr "الدخول"
+#: components/app/interface/settings/CategorySettings.tsx
+msgid "Access"
+msgstr "الدخول"
 
 #: components/app/interface/settings/ServerSettings.tsx
 #~ msgid "Access join public private locked requests invite"
@@ -1908,8 +1924,8 @@ msgid "Add a redirect URI above to generate the URL."
 msgstr "أضف عنوان إعادة توجيه أعلاه لتوليد الرابط."
 
 #: components/modal/modals/CategoryPermissions.tsx
-msgid "Add a role"
-msgstr "إضافة دور"
+#~ msgid "Add a role"
+#~ msgstr "إضافة دور"
 
 #: components/app/interface/settings/server/LobbyRoleQuestionsEditor.tsx
 msgid "Add a role question"
@@ -2198,6 +2214,10 @@ msgstr "مسؤول"
 msgid "Administrator"
 msgstr "مسؤول"
 
+#: components/app/interface/settings/category/CategoryPermissionsOverview.tsx
+msgid "Administrator: sees every category"
+msgstr "مسؤول: يرى كل الفئات"
+
 #: components/app/interface/settings/channel/permissions/ChannelVisibility.tsx
 msgid "Administrator: sees every channel"
 msgstr "مسؤول: يرى كل القنوات"
@@ -2226,6 +2246,10 @@ msgstr "بعد"
 #: components/app/interface/settings/user/profile/studio/StudioEditor.tsx
 msgid "After sending"
 msgstr "بعد الإرسال"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "After the Rain"
+msgstr "بعد المطر"
 
 #. placeholder {0}: new URL(data().redirect_uri).host
 #: src/interface/OAuth.tsx
@@ -2354,8 +2378,8 @@ msgid "All of the above, and 10 minutes in this server."
 msgstr "كل ما سبق، و10 دقائق في هذا السيرفر."
 
 #: components/modal/modals/CategoryPermissions.tsx
-msgid "All permissions"
-msgstr "كل الصلاحيات"
+#~ msgid "All permissions"
+#~ msgstr "كل الصلاحيات"
 
 #: components/app/interface/settings/server/assistant/AssistantPage.tsx
 msgid "All permissions are in place"
@@ -2494,6 +2518,10 @@ msgstr "يتيح"
 msgid "Almost done: open the link we sent to your new email to finish the change."
 msgstr "بقيت خطوة: افتح الرابط الذي أرسلناه إلى بريدك الجديد لإكمال التغيير."
 
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Alpine Lake"
+msgstr "بحيرة الألب"
+
 #: components/app/interface/settings/user/profile/studio/StudioEditor.tsx
 msgid "Already confirmed"
 msgstr "سبق التأكيد"
@@ -2600,6 +2628,10 @@ msgstr "قائمة اختيارية تحجب الشتائم العربية ال�
 #: components/ui/components/features/profiles/badges/useBadgeText.ts
 msgid "An outstanding designer of Zrzur profile designs and decorations, chosen by the team."
 msgstr "مصمم متميز لتصاميم الملفات الشخصية والزينة في زرزور، يختاره الفريق."
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Anchor"
+msgstr "المرساة"
 
 #. placeholder {0}: more()
 #: components/ui/components/features/profiles/ProfileCommands.tsx
@@ -2949,6 +2981,14 @@ msgstr "التطبيقات والبوتات"
 msgid "Apps you allowed to use your account. Revoking one ends its access at once; bots it added stay in servers until their managers remove them."
 msgstr "التطبيقات التي سمحت لها باستخدام حسابك. إلغاء أحدها ينهي وصوله فورًا، أما البوتات التي أضافها فتبقى في السيرفرات حتى يزيلها مديروها."
 
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Apricot Ring"
+msgstr "حلقة المشمش"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Apricot Season"
+msgstr "موسم المشمش"
+
 #: components/app/interface/settings/user/profile/styleLabels.tsx
 msgid "Aquarius"
 msgstr "الدلو"
@@ -2980,6 +3020,22 @@ msgstr "عربي بسيط"
 #: src/interface/designs/Looks.tsx
 msgid "Arcade"
 msgstr "أركيد"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Arcade Night"
+msgstr "ليل الأركيد"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Arcade Row"
+msgstr "صفّ الأركيد"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Arcane Runes"
+msgstr "رموز سحرية"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Arch of Palmyra"
+msgstr "قوس تدمر"
 
 #: components/app/interface/settings/user/profile/CreatorStudio.tsx
 #~ msgid "Archive"
@@ -3033,6 +3089,14 @@ msgstr "هل أنت متأكد أنك تريد إزالة {0} من {1}؟"
 #: components/modal/modals/PinMessage.tsx
 msgid "Are you sure you want to unpin this message?"
 msgstr "هل أنت متأكد أنك تريد إلغاء تثبيت هذه الرسالة؟"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Arena Lights"
+msgstr "أضواء الساحة"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Arena Marks"
+msgstr "علامات الساحة"
 
 #: components/ui/components/features/profiles/plateNames.ts
 msgid "Argentina"
@@ -3332,9 +3396,14 @@ msgstr "أذربيجان"
 #: components/modal/modals/MFAFlow.tsx
 #: components/modal/modals/ReportContent.tsx
 #: src/interface/channels/AgeGate.tsx
+#: src/interface/channels/voice/VoiceChannel.tsx
 #: src/interface/common/CommonHeader.tsx
 msgid "Back"
 msgstr "رجوع"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Back of the Net"
+msgstr "الشبكة"
 
 #: components/ui/components/features/messaging/composition/picker/GifPicker.tsx
 msgid "Back to categories"
@@ -3373,6 +3442,26 @@ msgstr "جزر البهاما"
 #: components/ui/components/features/profiles/plateNames.ts
 msgid "Bahrain"
 msgstr "البحرين"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Baklava Ring"
+msgstr "حلقة البقلاوة"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Baklava Shower"
+msgstr "مطر البقلاوة"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Balloon Sky"
+msgstr "سماء المناطيد"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Bamboo Mist"
+msgstr "ضباب الخيزران"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Bamboo Ring"
+msgstr "حلقة الخيزران"
 
 #: components/app/interface/settings/server/assistant/labels.ts
 #: components/modal/modals/BanMember.tsx
@@ -3472,6 +3561,14 @@ msgstr "تسمح Battle.net بالاحتفاظ به ٣٠ يومًا. أكّد ع
 #: components/app/interface/settings/user/connections/ServiceCards.tsx
 msgid "BattleTag from Battle.net. Disconnecting deletes it at once."
 msgstr "BattleTag من Battle.net. إلغاء الربط يحذفه فورًا."
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Beach Day"
+msgstr "يوم الشاطئ"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Bear Ears"
+msgstr "آذان دبّ"
 
 #: components/ui/components/features/profiles/badges/useBadgeText.ts
 #~ msgid "Become a Zrzur creator and publish your first decoration or nameplate. Making bots doesn't count."
@@ -3603,6 +3700,14 @@ msgstr "النبذة"
 msgid "Bit"
 msgstr "البت"
 
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Black Cat Ears"
+msgstr "آذان قطّة سوداء"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Blizzard"
+msgstr "عاصفة ثلج"
+
 #: components/app/interface/settings/server/ServerEmergency.tsx
 msgid "Block spam, links and words before they post."
 msgstr "امنع الرسائل المزعجة والروابط والكلمات قبل نشرها."
@@ -3644,6 +3749,10 @@ msgstr "كلمات محظورة"
 msgid "blocks"
 msgstr "تحجب"
 
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Bloom Frame"
+msgstr "إطار الأزهار"
+
 #: src/interface/designs/Looks.tsx
 msgid "Blossom"
 msgstr "زهر"
@@ -3668,6 +3777,14 @@ msgstr "أحمر جريء ولهب."
 #: components/ui/components/features/profiles/plateNames.ts
 msgid "Bolivia"
 msgstr "بوليفيا"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Boo"
+msgstr "بووو"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Boombox Night"
+msgstr "ليلة الموسيقى"
 
 #: components/ui/components/features/profiles/plateNames.ts
 msgid "Bosnia and Herzegovina"
@@ -3831,6 +3948,10 @@ msgstr "أزرق ساطع مع برق."
 msgid "bring the new strat."
 msgstr "جيب الخطة الجديدة."
 
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Bronze Rank"
+msgstr "رتبة برونزي"
+
 #: components/app/interface/settings/user/plugins/index.tsx
 msgid "Browse"
 msgstr "تصفّح"
@@ -3953,6 +4074,10 @@ msgstr "بلغاريا"
 msgid "Bullying"
 msgstr "تنمّر"
 
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Bunny Ears"
+msgstr "آذان أرنب"
+
 #: components/ui/components/features/profiles/plateNames.ts
 msgid "Burkina Faso"
 msgstr "بوركينا فاسو"
@@ -4045,6 +4170,22 @@ msgstr "الكاميرا غير متاحة"
 msgid "Cameroon"
 msgstr "الكاميرون"
 
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Camp Night"
+msgstr "ليلة المخيّم"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Campfire"
+msgstr "نار المخيّم"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Campfire Night"
+msgstr "ليلة المخيّم"
+
+#: components/app/interface/settings/category/CategoryPermissionsOverview.tsx
+msgid "Can see this category"
+msgstr "يرى هذه الفئة"
+
 #: components/app/interface/settings/channel/permissions/ChannelVisibility.tsx
 msgid "Can see this channel"
 msgstr "يرى هذه القناة"
@@ -4065,6 +4206,10 @@ msgstr "لا يمكن الوصول إلى زرزور. تحقّق من اتصال
 msgid "Can't run"
 msgstr "لا يمكن تشغيلها"
 
+#: components/app/interface/settings/category/CategoryPermissionsOverview.tsx
+msgid "Can't see this category"
+msgstr "لا يرى هذه الفئة"
+
 #: components/app/interface/settings/channel/permissions/ChannelVisibility.tsx
 msgid "Can't see this channel"
 msgstr "لا يرى هذه القناة"
@@ -4077,6 +4222,7 @@ msgstr "كندا"
 #: components/app/interface/channels/text/interactions/InteractionModal.tsx
 #: components/app/interface/channels/text/MessageSelectionBar.tsx
 #: components/app/interface/discover/OpenInApp.tsx
+#: components/app/interface/settings/category/Overview.tsx
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsOverview.tsx
 #: components/app/interface/settings/server/AutoModSettings.tsx
 #: components/app/interface/settings/server/ConfirmDialog.tsx
@@ -4105,6 +4251,7 @@ msgstr "كندا"
 #: components/modal/modals/BanMember.tsx
 #: components/modal/modals/BanNonMember.tsx
 #: components/modal/modals/BulkDeleteMessages.tsx
+#: components/modal/modals/CloseTicket.tsx
 #: components/modal/modals/CreateBot.tsx
 #: components/modal/modals/CreateCategory.tsx
 #: components/modal/modals/CreateChannel.tsx
@@ -4120,7 +4267,6 @@ msgstr "كندا"
 #: components/modal/modals/DeleteMessage.tsx
 #: components/modal/modals/DeleteRole.tsx
 #: components/modal/modals/DeleteServer.tsx
-#: components/modal/modals/EditCategory.tsx
 #: components/modal/modals/EditEmail.tsx
 #: components/modal/modals/EditPassword.tsx
 #: components/modal/modals/EditServerFolder.tsx
@@ -4273,6 +4419,10 @@ msgstr "يُسمح بالأحرف الكبيرة والمسافات."
 msgid "Capricorn"
 msgstr "الجدي"
 
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Caravan"
+msgstr "القافلة"
+
 #: components/app/interface/settings/user/appearance/AppearanceMenu.tsx
 #~ msgid "Carbon Black"
 #~ msgstr "أسود الكربون"
@@ -4293,9 +4443,25 @@ msgstr "البطاقات في عمودين أو واحدة تحت الأخرى."
 #~ msgid "Cars"
 #~ msgstr "السيارات"
 
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Cash Rain"
+msgstr "مطر النقود"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Castle Moon"
+msgstr "قلعة القمر"
+
 #: components/app/interface/settings/user/profile/StyleEditors.tsx
 #~ msgid "Cat ears"
 #~ msgstr "أذنا قطة"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Cat Frame"
+msgstr "إطار القطّة"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Cat Parade"
+msgstr "موكب القطط"
 
 #: components/app/interface/settings/server/audit/AuditLog.tsx
 #: components/app/interface/settings/server/channels/ChannelsSettings.tsx
@@ -4313,6 +4479,25 @@ msgstr "الفئات"
 #: components/app/interface/settings/user/plugins/DeveloperTab.tsx
 msgid "Category"
 msgstr "الفئة"
+
+#: components/app/interface/settings/server/TicketsSettings.tsx
+msgid "Category for new tickets"
+msgstr "فئة التذاكر الجديدة"
+
+#: components/app/interface/settings/category/Overview.tsx
+msgid "Category info"
+msgstr "معلومات الفئة"
+
+#: components/app/interface/settings/category/Overview.tsx
+msgid "Category name"
+msgstr "اسم الفئة"
+
+#: components/app/interface/settings/category/CategoryCard.tsx
+#: components/app/interface/settings/server/channels/ChannelsSettings.tsx
+#: components/app/menus/CategoryContextMenu.tsx
+#: src/interface/navigation/channels/ServerSidebar.tsx
+msgid "Category settings"
+msgstr "إعدادات الفئة"
 
 #: src/interface/developers/docs/Directives.tsx
 msgid "Cause"
@@ -4643,6 +4828,15 @@ msgstr "القنوات هي المكان الذي يتحدث فيه مجتمعك
 #~ msgid "Channels categories order"
 #~ msgstr "القنوات الفئات الترتيب channels"
 
+#. placeholder {0}: hiddenCount()
+#: components/app/interface/settings/category/Overview.tsx
+msgid "Channels here that are hidden from you: {0}"
+msgstr "قنوات هنا مخفية عنك: {0}"
+
+#: components/app/interface/settings/category/Overview.tsx
+msgid "Channels in this category"
+msgstr "قنوات هذه الفئة"
+
 #: components/app/interface/settings/server/ThreadFeatures.tsx
 msgid "Channels of posts with a title and tags in this server."
 msgstr "قنوات لمنشورات ذات عنوان ووسوم في هذا السيرفر."
@@ -4654,8 +4848,12 @@ msgstr "القنوات المعروضة"
 #. placeholder {0}: syncedCount()
 #. placeholder {1}: props.category.channels.length
 #: components/modal/modals/CategoryPermissions.tsx
-msgid "Channels synced with this category use these permissions: {0} of {1}."
-msgstr "القنوات المتزامنة مع هذه الفئة تستعمل هذه الصلاحيات: {0} من {1}."
+#~ msgid "Channels synced with this category use these permissions: {0} of {1}."
+#~ msgstr "القنوات المتزامنة مع هذه الفئة تستعمل هذه الصلاحيات: {0} من {1}."
+
+#: components/app/interface/settings/category/CategoryPermissionsOverview.tsx
+msgid "Channels that follow this category use these permissions."
+msgstr "القنوات التي تتبع هذه الفئة تستخدم هذه الصلاحيات."
 
 #: components/app/interface/settings/server/assistant/labels.ts
 msgid "Channels the rules skip"
@@ -4744,6 +4942,10 @@ msgstr "تفقّد بريدك الإلكتروني"
 #: components/modal/modals/EditEmail.tsx
 msgid "Check your inbox"
 msgstr "تفقّد بريدك الوارد"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Checkered Ring"
+msgstr "حلقة المربّعات"
 
 #: components/app/interface/settings/user/profile/studio/StudioEditor.tsx
 msgid "Checking and sending…"
@@ -5005,6 +5207,26 @@ msgstr "المختارة: {0}"
 msgid "Circuit"
 msgstr "دارة"
 
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Citadel Frame"
+msgstr "إطار القلعة"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Citadel Night"
+msgstr "ليل القلعة"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Citadel of Aleppo"
+msgstr "قلعة حلب"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Citrus Splash"
+msgstr "رشّة حمضيات"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "City Frame"
+msgstr "إطار المدينة"
+
 #: components/app/interface/settings/server/invites/VanityInvite.tsx
 msgid "Claim link"
 msgstr "احجز الرابط"
@@ -5223,6 +5445,15 @@ msgstr "إغلاق قائمة الأوامر"
 msgid "Close the stage"
 msgstr "إغلاق المنصة"
 
+#: components/modal/modals/CloseTicket.tsx
+msgid "Close this ticket?"
+msgstr "إغلاق هذه التذكرة؟"
+
+#: components/modal/modals/CloseTicket.tsx
+#: src/interface/tickets/TicketAction.tsx
+msgid "Close ticket"
+msgstr "إغلاق التذكرة"
+
 #: components/app/interface/safety/labels.tsx
 #: components/app/interface/settings/user/badges/BugQueue.tsx
 #: components/app/interface/settings/user/support/ContactSupport.tsx
@@ -5237,6 +5468,10 @@ msgstr "أغلق المنصة {0}"
 #: components/app/interface/settings/user/appearance/AnimationSettings.tsx
 msgid "Closing"
 msgstr "الإغلاق"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Cloud Headphones"
+msgstr "سمّاعات بيضاء"
 
 #: components/app/interface/settings/user/appearance/AppearanceMenu.tsx
 #~ msgid "Cloud Slate"
@@ -5254,6 +5489,18 @@ msgstr "النادي"
 msgid "Club Room"
 msgstr "غرفة النادي"
 
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Coast Cruise"
+msgstr "جولة الساحل"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Coast Drive"
+msgstr "طريق الساحل"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Coast Frame"
+msgstr "إطار الساحل"
+
 #: components/app/interface/settings/user/profile/styleLabels.tsx
 #: components/modal/modals/JoinServer.tsx
 msgid "Code"
@@ -5266,6 +5513,10 @@ msgstr "خط الشيفرة"
 #: components/app/interface/settings/user/plugins/text.ts
 msgid "Code from third-party publishers can't run on Zrzur yet."
 msgstr "لا يمكن تشغيل كود الناشرين الخارجيين على زرزور بعد."
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Coin Rush"
+msgstr "سيل العملات"
 
 #: components/ui/components/features/voice/callCard/VoiceCallCardActiveRoom.tsx
 #~ msgid "Collapse call window"
@@ -5286,6 +5537,10 @@ msgstr "جمع بيانات الناس أو إساءة استخدامها"
 #: components/ui/components/features/profiles/plateNames.ts
 msgid "Colombia"
 msgstr "كولومبيا"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Colonnade Ring"
+msgstr "حلقة الأعمدة"
 
 #: components/app/interface/settings/server/audit/AuditLog.tsx
 msgid "Colour"
@@ -5328,6 +5583,10 @@ msgstr "ألوان الردهة وتخطيطها ونص الترحيب والأ�
 #: src/interface/Designs.tsx
 #~ msgid "Colours, name style, decoration and nameplate that go together. Wear one in a tap and change any part later in your profile settings."
 #~ msgstr "ألوان ونمط اسم وزينة ولوحة اسم متناسقة معًا. ارتدِ أيًّا منها بلمسة واحدة، وغيّر أي جزء لاحقًا من إعدادات ملفك الشخصي."
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Columns at Dusk"
+msgstr "أعمدة الغروب"
 
 #: components/ui/components/features/profiles/labels.ts
 msgid "Comet"
@@ -5462,6 +5721,10 @@ msgstr "مضغوط"
 #: components/app/interface/settings/user/Advanced.tsx
 msgid "Compact mode"
 msgstr "الوضع المضغوط"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Compass"
+msgstr "البوصلة"
 
 #: components/app/interface/settings/user/badges/BetaAdmin.tsx
 msgid "Complete (Beta Veteran)"
@@ -6016,6 +6279,10 @@ msgstr "صورة الغلاف (اختيارية)"
 msgid "Covers too much"
 msgstr "يغطي مساحة كبيرة"
 
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Crane Flight"
+msgstr "طيران الطيور الورقية"
+
 #: components/modal/lib/CreateServerFlow.tsx
 #: components/modal/modals/CreateBot.tsx
 #: components/modal/modals/CreateCategory.tsx
@@ -6106,6 +6373,7 @@ msgstr "إنشاء منشورات في المنتديات"
 #: components/app/interface/settings/server/invites/ListServerInvites.tsx
 #: components/app/menus/ChannelContextMenu.tsx
 #: components/app/menus/ServerContextMenu.tsx
+#: src/interface/channels/voice/VoiceChannel.tsx
 #: src/interface/navigation/channels/ServerPhoneTools.tsx
 #: src/interface/navigation/channels/ServerSidebar.tsx
 msgid "Create invite"
@@ -6303,6 +6571,10 @@ msgstr "المصممون يصنعون تصاميم وزينة الملفات ا�
 msgid "Credit or debit card, on Stripe's secure page."
 msgstr "بطاقة ائتمان أو بطاقة خصم، على صفحة Stripe الآمنة."
 
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Crescent Seat"
+msgstr "حضن الهلال"
+
 #: components/app/interface/settings/user/appearance/AppearanceMenu.tsx
 #~ msgid "Crimson Eclipse"
 #~ msgstr "الكسوف القرمزي"
@@ -6399,6 +6671,14 @@ msgstr "يُقصّ"
 msgid "Cropped image is too large — try a smaller crop area (max. {0})"
 msgstr "الصورة بعد القص كبيرة جدًا — جرّب مساحة قص أصغر (الحد الأقصى {0})"
 
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Crossed Blades"
+msgstr "السيفان"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Crosshair"
+msgstr "مؤشّر التصويب"
+
 #: components/app/interface/settings/user/profile/StyleEditors.tsx
 #~ msgid "Crown"
 #~ msgstr "تاج"
@@ -6487,6 +6767,30 @@ msgstr "قبرص"
 msgid "Czechia"
 msgstr "التشيك"
 
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Daisy Chain"
+msgstr "سلسلة الأقحوان"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Damascene Sword"
+msgstr "السيف الدمشقي"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Damascus Jasmine"
+msgstr "ياسمين الشام"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Damascus Night"
+msgstr "ليل دمشق"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Damask Rose"
+msgstr "الوردة الشامية"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Damask Roses"
+msgstr "الوردة الدمشقية"
+
 #: components/ui/components/features/profiles/labels.ts
 msgid "Dandelion seeds"
 msgstr "بذور الهندباء"
@@ -6555,6 +6859,7 @@ msgstr "الأيام بتوقيتك ({0}). تُحدَّث كل ساعة."
 
 #: components/app/interface/settings/user/notifications/Sounds.tsx
 #: components/ui/components/features/voice/callCard/VoiceCallCardActions.tsx
+#: src/interface/channels/voice/VoiceChannel.tsx
 #: src/interface/navigation/channels/AccountBar.tsx
 msgid "Deafen"
 msgstr "كتم السماعة"
@@ -6652,6 +6957,14 @@ msgstr "إطارات ولوحات أسماء ومؤثرات من صنع مصمم
 #~ msgid "Decorations, nameplates, colours and name styles for your Zrzur profile. Try any of them on first, then keep what suits you."
 #~ msgstr "إطارات ولوحات أسماء وألوان وأنماط أسماء لملفك الشخصي في زرزور. جرّب ما تشاء أولًا، ثم احتفظ بما يناسبك."
 
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Deep Blue"
+msgstr "الأزرق العميق"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Deep Glow"
+msgstr "ضوء الأعماق"
+
 #: components/app/interface/settings/user/appearance/AppearanceMenu.tsx
 #~ msgid "Deep Ocean"
 #~ msgstr "أعماق المحيط"
@@ -6692,10 +7005,10 @@ msgstr "صلاحيات الأعضاء الافتراضية"
 msgid "Default notifications"
 msgstr "الإشعارات الافتراضية"
 
+#: components/app/interface/settings/category/CategoryPermissionsOverview.tsx
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsOverview.tsx
 #: components/app/interface/settings/server/audit/AuditLog.tsx
 #: components/app/interface/settings/server/roles/ServerRoleOverview.tsx
-#: components/modal/modals/CategoryPermissions.tsx
 msgid "Default permissions"
 msgstr "الصلاحيات الافتراضية"
 
@@ -6767,6 +7080,7 @@ msgstr "حذف وتثبيت الرسائل التي يرسلها الأعضاء 
 msgid "Delete bot"
 msgstr "حذف البوت"
 
+#: components/app/interface/settings/CategorySettings.tsx
 #: components/app/interface/settings/server/channels/ChannelsSettings.tsx
 #: components/app/menus/CategoryContextMenu.tsx
 #: components/modal/modals/DeleteCategory.tsx
@@ -7026,6 +7340,10 @@ msgstr "الوصف (اختياري)"
 msgid "Desert Dawn"
 msgstr "فجر الصحراء"
 
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Desert Night"
+msgstr "ليل الصحراء"
+
 #: components/app/interface/settings/server/LobbyAppearanceEditor.tsx
 #: components/app/interface/settings/user/profile/studio/StudioHome.tsx
 msgid "Design"
@@ -7168,6 +7486,14 @@ msgstr "خلفية النافذة الحوارية"
 msgid "Dialogs"
 msgstr "النوافذ الحوارية"
 
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Diamond Plate"
+msgstr "لوحة ماسي"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Diamond Rank"
+msgstr "رتبة ماسي"
+
 #: components/app/interface/settings/user/profile/studio/StudioEditor.tsx
 msgid "Did you make this work?"
 msgstr "هل هذا العمل من صنعك؟"
@@ -7175,6 +7501,14 @@ msgstr "هل هذا العمل من صنعك؟"
 #: components/app/interface/discover/OpenInApp.tsx
 msgid "Didn't open? Continue in the browser."
 msgstr "لم يُفتح؟ تابع في المتصفح."
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Dino Dash"
+msgstr "ركضة الديناصور"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Dino Frame"
+msgstr "إطار الديناصور"
 
 #: components/modal/modals/ForwardMessage.tsx
 #: src/interface/navigation/MentionsPanel.tsx
@@ -7419,6 +7753,11 @@ msgstr "هل فيه أجزاء من صنع غيرك؟"
 msgid "Does it include parts made with AI tools?"
 msgstr "هل فيه أجزاء مصنوعة بأدوات الذكاء الاصطناعي؟"
 
+#. placeholder {0}: current().title
+#: components/app/interface/settings/channel/permissions/ChannelPermissionsOverview.tsx
+msgid "Does not follow {0}"
+msgstr "لا تتبع {0}"
+
 #: components/app/interface/settings/user/profile/studio/StudioEditor.tsx
 msgid "Does not move"
 msgstr "لا يتحرك"
@@ -7466,7 +7805,6 @@ msgstr "ادعم زرزور"
 #: components/app/interface/channels/text/interactions/MessageComponents.tsx
 #: components/app/interface/settings/server/LobbyAppearanceEditor.tsx
 #: components/app/interface/settings/server/webhooks/ServerWebhooks.tsx
-#: components/modal/modals/CategoryPermissions.tsx
 #: components/modal/modals/EditEmail.tsx
 #: components/modal/modals/EditUsername.tsx
 #: components/modal/modals/GiftPlus.tsx
@@ -7476,6 +7814,10 @@ msgstr "ادعم زرزور"
 #: components/modal/modals/ResetBotToken.tsx
 msgid "Done"
 msgstr "تم"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Doubloons"
+msgstr "دنانير الكنز"
 
 #: components/app/interface/settings/user/myData/MyData.tsx
 #: components/ui/components/features/messaging/elements/FileInfo.tsx
@@ -7544,6 +7886,10 @@ msgstr "ارسم حول الدائرة"
 #~ msgid "Dress up your profile with decorations, nameplates, colours and name styles. Try anything on before you save it. Everything here is free."
 #~ msgstr "زيّن ملفك الشخصي بالزينات ولوحات الأسماء والألوان وأنماط الاسم. جرّب أي شيء قبل أن تحفظه. كل ما هنا مجاني."
 
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Drift Night"
+msgstr "ليلة الانزلاق"
+
 #: src/interface/lobby/Lobby.tsx
 msgid "Drop into a voice room"
 msgstr "ادخل غرفة صوتية"
@@ -7559,6 +7905,14 @@ msgstr "أفلت ملفك هنا"
 #: components/app/interface/safety/labels.tsx
 msgid "Drugs or illegal goods"
 msgstr "المخدرات أو البضائع غير المشروعة"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Dune Crescent"
+msgstr "هلال الكثبان"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Dungeon Hall"
+msgstr "قاعة القلعة"
 
 #: components/app/interface/safety/labels.tsx
 #: components/app/interface/settings/user/appearance/MyThemes.tsx
@@ -7635,6 +7989,14 @@ msgstr "إلغاء الصدى"
 msgid "Ecuador"
 msgstr "الإكوادور"
 
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Edelweiss and Snow"
+msgstr "إديلفايس وثلج"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Edelweiss Ring"
+msgstr "حلقة الإديلفايس"
+
 #: components/app/interface/settings/server/webhooks/ServerWebhooks.tsx
 #: components/app/interface/settings/user/Account.tsx
 #: components/app/interface/settings/user/bots/CommandManager.tsx
@@ -7710,8 +8072,8 @@ msgid "Edit message"
 msgstr "تعديل الرسالة"
 
 #: components/app/menus/CategoryContextMenu.tsx
-msgid "Edit permissions"
-msgstr "تعديل الصلاحيات"
+#~ msgid "Edit permissions"
+#~ msgstr "تعديل الصلاحيات"
 
 #: components/app/interface/settings/user/account/UserSummary.tsx
 #: components/app/menus/UserContextMenu.tsx
@@ -8106,6 +8468,10 @@ msgstr "الشاشة كاملة"
 msgid "Entry {0} has a field of the wrong type. The Slash commands page shows each field."
 msgstr "في العنصر {0} حقل من نوع خاطئ. تعرض صفحة أوامر الشرطة المائلة كل حقل."
 
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Equaliser Ring"
+msgstr "حلقة الإيقاع"
+
 #: components/ui/components/features/profiles/plateNames.ts
 msgid "Equatorial Guinea"
 msgstr "غينيا الاستوائية"
@@ -8264,6 +8630,8 @@ msgstr "كل أسبوع"
 msgid "Every Wing lifts this server for everyone in it. Any member can give one."
 msgstr "كل جناح يرفع هذا السيرفر لكل من فيه. أي عضو يستطيع أن يهدي جناحاً."
 
+#: components/app/interface/settings/category/CategoryPermissionsOverview.tsx
+#: components/app/interface/settings/CategorySettings.tsx
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsOverview.tsx
 #: components/app/interface/settings/ChannelSettings.tsx
 #: components/app/interface/settings/server/apps/RulesEditor.tsx
@@ -8273,7 +8641,6 @@ msgstr "كل جناح يرفع هذا السيرفر لكل من فيه. أي ع
 #: components/app/interface/settings/user/badges/BetaAdmin.tsx
 #: components/app/interface/settings/user/Privacy.tsx
 #: components/app/interface/settings/user/subscriptions/PlusPage.tsx
-#: components/modal/modals/CategoryPermissions.tsx
 msgid "Everyone"
 msgstr "الجميع"
 
@@ -8290,6 +8657,7 @@ msgstr "رفض الجميع المكالمة."
 msgid "Everyone in the server"
 msgstr "كل من في السيرفر"
 
+#: components/app/interface/settings/category/CategoryPermissionsOverview.tsx
 #: components/app/interface/settings/channel/permissions/ChannelVisibility.tsx
 msgid "Everyone in the server can see it."
 msgstr "يراها كل من في السيرفر."
@@ -8472,6 +8840,10 @@ msgstr "مسابقة أو هدايا وهمية"
 #: components/ui/components/features/profiles/labels.ts
 msgid "Falling stars"
 msgstr "نجوم متساقطة"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Far Orbit"
+msgstr "مدار بعيد"
 
 #: components/ui/components/features/profiles/labels.ts
 #~ msgid "Fashion"
@@ -8736,6 +9108,14 @@ msgstr "فنلندا"
 msgid "Fireflies"
 msgstr "يراعات"
 
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Firefly Dance"
+msgstr "رقصة اليراعات"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Firefly Ring"
+msgstr "حلقة اليراعات"
+
 #: components/ui/components/features/profiles/MilestoneBadges.tsx
 #~ msgid "First 1,000 members (preview)"
 #~ msgstr "أول 1,000 عضو (معاينة)"
@@ -8763,6 +9143,10 @@ msgstr "في أول الدور"
 #: components/modal/modals/CreateThread.tsx
 msgid "First message (optional)"
 msgstr "الرسالة الأولى (اختيارية)"
+
+#: components/app/interface/settings/server/TicketsSettings.tsx
+msgid "First message in a ticket"
+msgstr "أول رسالة في التذكرة"
 
 #: components/app/interface/settings/user/profile/studio/StudioDesign.tsx
 msgid "First published"
@@ -8805,6 +9189,10 @@ msgstr "تم الإصلاح"
 msgid "Fixed ratio"
 msgstr "نسبة ثابتة"
 
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Flag of Syria"
+msgstr "علم سوريا"
+
 #: components/ui/components/features/messaging/composition/picker/EmojiPicker.tsx
 msgid "Flags"
 msgstr "الأعلام"
@@ -8813,6 +9201,10 @@ msgstr "الأعلام"
 msgid "Flame ring"
 msgstr "حلقة لهب"
 
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Flame Tongues"
+msgstr "ألسنة اللهب"
+
 #: components/app/interface/settings/user/profile/StyleEditors.tsx
 #~ msgid "Flames"
 #~ msgstr "لهب"
@@ -8820,6 +9212,10 @@ msgstr "حلقة لهب"
 #: components/app/interface/safety/labels.tsx
 msgid "Flashing or harmful: it could cause seizures"
 msgstr "وميض أو ضرر: قد يسبب نوبات صرع"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Flower Crown"
+msgstr "إكليل زهر"
 
 #: components/ui/components/features/profiles/ProfileStatus.tsx
 #: src/interface/channels/text/MemberSidebar.tsx
@@ -8839,6 +9235,16 @@ msgstr "مجلد"
 msgid "Folder colour"
 msgstr "لون المجلد"
 
+#. placeholder {0}: current().title
+#: components/app/interface/settings/channel/permissions/ChannelPermissionsOverview.tsx
+msgid "Follow {0}?"
+msgstr "اتباع {0}؟"
+
+#: components/app/interface/settings/category/Overview.tsx
+#: components/app/interface/settings/channel/permissions/ChannelPermissionsOverview.tsx
+msgid "Follow category"
+msgstr "اتباع الفئة"
+
 #: components/app/interface/settings/user/appearance/AnimationSettings.tsx
 msgid "Follow device"
 msgstr "حسب الجهاز"
@@ -8846,6 +9252,19 @@ msgstr "حسب الجهاز"
 #: components/modal/modals/CreateBot.tsx
 msgid "Follow each server's own rules and never get around permissions."
 msgstr "التزم بقواعد كل سيرفر، ولا تتحايل على الصلاحيات أبدًا."
+
+#: components/app/interface/settings/category/Overview.tsx
+msgid "Follow the category?"
+msgstr "اتباع الفئة؟"
+
+#. placeholder {0}: current().title
+#: components/app/interface/settings/channel/permissions/ChannelPermissionsOverview.tsx
+msgid "Follows {0}"
+msgstr "تتبع {0}"
+
+#: components/app/interface/settings/category/Overview.tsx
+msgid "Follows the category"
+msgstr "تتبع الفئة"
 
 #: src/interface/designs/FittingRoom.tsx
 #~ msgid "Font"
@@ -8991,6 +9410,10 @@ msgstr "أسّس زرزور."
 #: components/app/interface/settings/user/appearance/AppearanceMenu.tsx
 #~ msgid "Four looks. Pick one, then fine-tune accent, layout and fonts below."
 #~ msgstr "أربعة مظاهر. اختر واحدًا، ثم اضبط لون التمييز والتخطيط والخطوط في الأسفل."
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Fox Ears"
+msgstr "آذان ثعلب"
 
 #: components/ui/components/features/profiles/plateNames.ts
 msgid "France"
@@ -9151,6 +9574,10 @@ msgstr "ممتلئ · {0} بالانتظار"
 msgid "Full clips, big GIFs, whole albums. Every file stays on our storage for good, so this is the perk that costs us the most."
 msgstr "مقاطع كاملة، صور GIF كبيرة، ألبومات كاملة. كل ملف يبقى محفوظاً عندنا للأبد، لذلك هذه الميزة هي الأعلى كلفة علينا."
 
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Full HUD"
+msgstr "واجهة كاملة"
+
 #: components/ui/components/floating/UserCard.tsx
 #~ msgid "Full profile"
 #~ msgstr "الملف الشخصي الكامل"
@@ -9204,6 +9631,10 @@ msgstr "غامبيا"
 msgid "Game"
 msgstr "اللعبة"
 
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Game Shelf"
+msgstr "رفّ الألعاب"
+
 #: src/interface/designs/Home.tsx
 #~ msgid "game-night"
 #~ msgstr "ليلة-الألعاب"
@@ -9235,6 +9666,10 @@ msgstr "مجتمع ألعاب"
 #: components/app/interface/settings/user/appearance/AppearanceMenu.tsx
 msgid "Gaming dark: deep midnight panels, Raspberry for actions and Neon Pink for highlights."
 msgstr "داكن للألعاب: لوحات منتصف الليل العميقة، واللون التوتي للإجراءات، والوردي النيون للإبراز."
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Gaming Headset"
+msgstr "سمّاعة الألعاب"
 
 #: components/modal/lib/serverTemplateText.ts
 msgid "Gaming rooms"
@@ -9274,6 +9709,7 @@ msgstr "الجوزاء"
 msgid "general"
 msgstr "عام"
 
+#: components/app/interface/settings/CategorySettings.tsx
 #: components/app/interface/settings/ChannelSettings.tsx
 #: components/app/interface/settings/server/assistant/AssistantPage.tsx
 #: components/app/interface/settings/ServerSettings.tsx
@@ -9374,6 +9810,18 @@ msgstr "احصل على زرزور لنظام أندرويد وابقَ على �
 msgid "Ghana"
 msgstr "غانا"
 
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Ghost Pals"
+msgstr "أصدقاء أشباح"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Ghouta Blossom"
+msgstr "زهر الغوطة"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Ghouta Orchard"
+msgstr "بستان الغوطة"
+
 #: components/ui/components/features/messaging/composition/picker/CompositionMediaPicker.tsx
 msgid "GIF"
 msgstr "GIF"
@@ -9421,9 +9869,17 @@ msgstr "أُرسلت الهدية"
 msgid "Gifted Feather, ends on {date}"
 msgstr "ريشة مُهداة، تنتهي في {date}"
 
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Gifts"
+msgstr "هدايا"
+
 #: components/modal/modals/GiftPlus.tsx
 msgid "Gifts don't renew. Nothing more is charged later."
 msgstr "الهدايا لا تتجدد، ولن يُدفع أي مبلغ لاحقاً."
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Ginger Cat Ears"
+msgstr "آذان قطّة برتقالية"
 
 #: components/modal/modals/MoveSupercharge.tsx
 msgid "Give"
@@ -9553,6 +10009,10 @@ msgstr "الانتقال إلى الرسالة"
 msgid "Go to the overview"
 msgstr "انتقل إلى النظرة العامة"
 
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Goal Bounce"
+msgstr "هدف!"
+
 #: components/app/interface/settings/user/profile/studio/StudioEditor.tsx
 msgid "Goes live at once"
 msgstr "يُنشر فوراً"
@@ -9568,6 +10028,14 @@ msgstr "ذهبي"
 #: src/interface/designs/Looks.tsx
 msgid "Gold laurel for winners."
 msgstr "إكليل ذهبي للفائزين."
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Gold Plate"
+msgstr "لوحة ذهبي"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Gold Rank"
+msgstr "رتبة ذهبي"
 
 #: src/interface/designs/Looks.tsx
 msgid "Golden hour"
@@ -9643,9 +10111,12 @@ msgid "Granted"
 msgstr "مُنحت"
 
 #. placeholder {0}: countBits(member.value.a)
+#. placeholder {0}: countBits(overrides().roles[role.id].a)
 #. placeholder {0}: countBits(rolePermissions()![role.id].a)
 #. placeholder {1}: countBits(member.value.d)
+#. placeholder {1}: countBits(overrides().roles[role.id].d)
 #. placeholder {1}: countBits(rolePermissions()![role.id].d)
+#: components/app/interface/settings/category/CategoryPermissionsOverview.tsx
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsOverview.tsx
 msgid "Grants {0} permissions and denies {1} permissions"
 msgstr "يمنح {0} صلاحيات ويمنع {1} صلاحيات"
@@ -9653,6 +10124,10 @@ msgstr "يمنح {0} صلاحيات ويمنع {1} صلاحيات"
 #: components/app/interface/settings/user/profile/styleLabels.tsx
 msgid "Grape"
 msgstr "عنب"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Grapevine"
+msgstr "دالية العنب"
 
 #: components/app/interface/settings/user/appearance/AppearanceMenu.tsx
 msgid "Graphite"
@@ -9760,14 +10235,18 @@ msgstr "هادي"
 msgid "Haiti"
 msgstr "هايتي"
 
-#: components/app/interface/settings/user/profile/StyleEditors.tsx
-#~ msgid "Halo"
-#~ msgstr "هالة"
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Halo"
+msgstr "هالة"
 
 #: components/app/interface/discover/Cards.tsx
 #: src/interface/Discover.tsx
 msgid "Hand-picked"
 msgstr "مختار بعناية"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Handheld Frame"
+msgstr "إطار الجهاز"
 
 #: components/modal/lib/serverTemplateText.ts
 msgid "Hang out"
@@ -9828,6 +10307,10 @@ msgstr "كراهية أو تهديد"
 msgid "Hate speech"
 msgstr "خطاب كراهية"
 
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Haunted Hill"
+msgstr "بيت التلّ"
+
 #: src/interface/developers/docs/EndpointReference.tsx
 msgid "Headers"
 msgstr "الترويسات"
@@ -9844,6 +10327,14 @@ msgstr "في الصدارة"
 msgid "Headphones on, music up."
 msgstr "السماعات على أذنيك والموسيقى عالية."
 
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Health and Shield"
+msgstr "الصحّة والدرع"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Health Bar"
+msgstr "شريط الطاقة"
+
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 msgid "Hear other people and see their video"
 msgstr "سماع الآخرين ومشاهدة الفيديو الخاص بهم"
@@ -9856,13 +10347,25 @@ msgstr "سُمع في نافذة أخرى"
 msgid "Heard in the Zrzur window only"
 msgstr "سُمع في نافذة زرزور فقط"
 
-#: components/app/interface/settings/user/profile/StyleEditors.tsx
-#~ msgid "Heartbeat"
-#~ msgstr "نبض"
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Heart Chain"
+msgstr "سلسلة القلوب"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Heart Orbit"
+msgstr "قلوب تدور"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Heartbeat"
+msgstr "نبض"
 
 #: components/app/interface/settings/user/profile/styleLabels.tsx
 msgid "Hearts"
 msgstr "قلوب"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Hearts for Syria"
+msgstr "قلوب سوريا"
 
 #: components/app/interface/settings/user/badges/BadgeAdmin.tsx
 msgid "Held"
@@ -9913,6 +10416,10 @@ msgstr "ساعد في ترجمة زرزور."
 msgid "Hexagon"
 msgstr "سداسي"
 
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Hibiscus Ring"
+msgstr "حلقة الكركديه"
+
 #: components/app/interface/settings/server/LobbyAppearanceEditor.tsx
 msgid "Hidden"
 msgstr "مخفي"
@@ -9920,6 +10427,10 @@ msgstr "مخفي"
 #: components/app/interface/settings/user/badges/BadgeAdmin.tsx
 msgid "Hidden by owner"
 msgstr "أخفاها صاحبها"
+
+#: components/app/interface/settings/category/CategoryPermissionsOverview.tsx
+msgid "Hidden from everyone except the roles you let in below. Its name stays visible to people who can see a channel inside it, and to those who manage channels or permissions or read the audit log."
+msgstr "مخفية عن الجميع ما عدا الأدوار التي تسمح لها أدناه. يبقى اسمها ظاهرًا لمن يرى قناة بداخلها، ولمن يدير القنوات أو الصلاحيات أو يقرأ سجل التدقيق."
 
 #: components/app/interface/settings/user/badges/MyBadges.tsx
 #~ msgid "Hidden from your profile"
@@ -9929,7 +10440,7 @@ msgstr "أخفاها صاحبها"
 #~ msgid "Hidden. Copy it straight into your bot."
 #~ msgstr "مخفي. انسخه مباشرة إلى بوتك."
 
-#: components/app/interface/settings/channel/permissions/ChannelVisibility.tsx
+#: components/app/interface/settings/channel/permissions/VisibilitySection.tsx
 msgid "Hide"
 msgstr "إخفاء"
 
@@ -9953,10 +10464,18 @@ msgstr "إخفاء كلمة المرور"
 msgid "Hide preview"
 msgstr "إخفاء المعاينة"
 
+#: components/app/interface/settings/category/CategoryPermissionsOverview.tsx
+msgid "Hide this category from {role}"
+msgstr "إخفاء هذه الفئة عن {role}"
+
 #. placeholder {0}: role.name
 #: components/app/interface/settings/channel/permissions/ChannelVisibility.tsx
-msgid "Hide this channel from {0}"
-msgstr "إخفاء هذه القناة عن {0}"
+#~ msgid "Hide this channel from {0}"
+#~ msgstr "إخفاء هذه القناة عن {0}"
+
+#: components/app/interface/settings/channel/permissions/ChannelVisibility.tsx
+msgid "Hide this channel from {role}"
+msgstr "إخفاء هذه القناة عن {role}"
 
 #: components/app/interface/settings/user/Keybinds.tsx
 msgid "Hides your email, tag, invite links and DM previews on screen."
@@ -10870,9 +11389,17 @@ msgstr "توقفت عن الاستجابة فأُوقفت."
 msgid "It took too long to start."
 msgstr "استغرقت وقتًا طويلًا في البدء."
 
+#: components/app/interface/settings/CategorySettings.tsx
+msgid "It was deleted, or you can no longer see it."
+msgstr "حُذفت، أو لم يعد بإمكانك رؤيتها."
+
 #: components/ui/components/features/profiles/plateNames.ts
 msgid "Italy"
 msgstr "إيطاليا"
+
+#: components/modal/modals/DeleteCategory.tsx
+msgid "Its channels stay, and the same people keep seeing them. Once the category is deleted, there's no going back."
+msgstr "تبقى قنواتها، ويستمر الأشخاص أنفسهم في رؤيتها. بعد حذف الفئة لا يمكن التراجع."
 
 #: components/app/interface/settings/user/plugins/text.ts
 msgid "Its code didn't match the reviewed version, so it was blocked."
@@ -10909,6 +11436,18 @@ msgstr "جامايكا"
 #: components/ui/components/features/profiles/plateNames.ts
 msgid "Japan"
 msgstr "اليابان"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Jasmine Fall"
+msgstr "مطر الياسمين"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Jasmine Rain"
+msgstr "مطر الياسمين"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Jasmine Ring"
+msgstr "طوق الياسمين"
 
 #: components/modal/modals/Invite.tsx
 #: components/ui/components/features/messaging/elements/Invite.tsx
@@ -11058,6 +11597,14 @@ msgstr "انتقل إلى البداية"
 msgid "Jump to the newest message"
 msgstr "الانتقال إلى أحدث رسالة"
 
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Jungle Dusk"
+msgstr "غروب الأدغال"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Jungle Leaves"
+msgstr "أوراق الأدغال"
+
 #: components/modal/lib/CreateServerFlow.tsx
 msgid "Just friends"
 msgstr "الأصدقاء فقط"
@@ -11179,6 +11726,10 @@ msgstr "كينيا"
 msgid "Kept on this device only. No messages or personal data are recorded."
 msgstr "تُحفظ على هذا الجهاز فقط. لا تُسجَّل أي رسائل أو بيانات شخصية."
 
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Key Rain"
+msgstr "مطر الأزرار"
+
 #: components/app/interface/settings/user/profile/studio/StudioHome.tsx
 #: components/app/interface/settings/UserSettings.tsx
 msgid "Keyboard shortcuts"
@@ -11252,6 +11803,10 @@ msgstr "معرفة القناة التي تفتحها"
 msgid "Know your username and avatar"
 msgstr "معرفة اسم المستخدم والصورة الرمزية"
 
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Koi Pond"
+msgstr "بركة الكوي"
+
 #: components/ui/components/features/profiles/plateNames.ts
 msgid "Kurdistan"
 msgstr "كردستان"
@@ -11294,6 +11849,18 @@ msgstr "اللغة: {0}"
 msgid "Languages"
 msgstr "لغات"
 
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Lantern Glow"
+msgstr "ضوء الفوانيس"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Lantern Night"
+msgstr "ليلة الفوانيس"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Lantern Pair"
+msgstr "فانوسان"
+
 #: components/ui/components/features/profiles/labels.ts
 msgid "Lanterns"
 msgstr "فوانيس"
@@ -11305,6 +11872,10 @@ msgstr "لاوس"
 #: components/app/interface/settings/user/bots/CommandManager.tsx
 msgid "Largest value"
 msgstr "أكبر قيمة"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Laser Run"
+msgstr "سباق الليزر"
 
 #: components/ui/components/features/profiles/ProfileConnections.tsx
 msgid "Last stream"
@@ -11351,6 +11922,14 @@ msgstr "أسعار الإطلاق"
 #: components/app/interface/settings/user/profile/styleLabels.tsx
 msgid "Laurel"
 msgstr "غار"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Lavender Field"
+msgstr "حقل الخزامى"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Lavender Wreath"
+msgstr "إكليل الخزامى"
 
 #: components/app/interface/settings/user/safety/SafetyDashboard.tsx
 msgid "Law"
@@ -11484,10 +12063,18 @@ msgstr "ليسوتو"
 
 #. placeholder {0}: role.name
 #: components/app/interface/settings/channel/permissions/ChannelVisibility.tsx
-msgid "Let {0} see this channel"
-msgstr "السماح لـ {0} برؤية هذه القناة"
+#~ msgid "Let {0} see this channel"
+#~ msgstr "السماح لـ {0} برؤية هذه القناة"
+
+#: components/app/interface/settings/category/CategoryPermissionsOverview.tsx
+msgid "Let {role} see this category"
+msgstr "السماح لـ {role} برؤية هذه الفئة"
 
 #: components/app/interface/settings/channel/permissions/ChannelVisibility.tsx
+msgid "Let {role} see this channel"
+msgstr "السماح لـ {role} برؤية هذه القناة"
+
+#: components/app/interface/settings/channel/permissions/VisibilitySection.tsx
 msgid "Let in"
 msgstr "سماح"
 
@@ -11551,6 +12138,14 @@ msgstr "سيرفر بالمستوى {0}"
 msgid "Level {0} unlocked for everyone here"
 msgstr "المستوى {0} مفتوح لكل من هنا"
 
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Level Rise"
+msgstr "صعود المستوى"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Level Up"
+msgstr "ترقية المستوى"
+
 #: components/ui/components/features/profiles/plateNames.ts
 msgid "Liberia"
 msgstr "ليبيريا"
@@ -11578,6 +12173,10 @@ msgstr "ارفع الحفظ القانوني"
 #: components/app/interface/settings/server/bans/ListBans.tsx
 msgid "Lift this ban?"
 msgstr "رفع هذا الحظر؟"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Liftoff"
+msgstr "إقلاع"
 
 #: components/app/interface/settings/server/roles/ServerRoleEditor.tsx
 #: components/app/interface/settings/user/appearance/AppearanceMenu.tsx
@@ -12055,9 +12654,25 @@ msgstr "تبحث عن"
 #~ msgid "Looks, decorations and nameplates, free to wear."
 #~ msgstr "إطلالات وزينات ولوحات أسماء، ارتدِها مجانًا."
 
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Loot Drop"
+msgstr "سقوط الغنائم"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Loot Ring"
+msgstr "حلقة الغنائم"
+
 #: src/interface/designs/Looks.tsx
 msgid "Loud, bright and hard to miss."
 msgstr "جريئة ومشرقة ولا يمكن تجاهلها."
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Love Frame"
+msgstr "إطار الحبّ"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Love Letter"
+msgstr "رسالة حبّ"
 
 #: components/app/interface/safety/labels.tsx
 #: components/app/interface/settings/server/ServerEmergency.tsx
@@ -12081,6 +12696,10 @@ msgstr "أحرف صغيرة من أي أبجدية، وأرقام، و- و_."
 #: components/app/interface/settings/server/emojis/EmojiList.tsx
 #~ msgid "Lowercase letters, numbers and underscores."
 #~ msgstr "أحرف لاتينية صغيرة وأرقام وشرطات سفلية."
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Lucky Roll"
+msgstr "رمية حظ"
 
 #: components/ui/components/features/profiles/plateNames.ts
 msgid "Luxembourg"
@@ -12144,6 +12763,10 @@ msgstr "صُنعت للسهرات الطويلة."
 msgid "Made on upload"
 msgstr "تُصنع عند الرفع"
 
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Magma Flow"
+msgstr "نهر الحمم"
+
 #: components/app/interface/settings/server/LobbySettings.tsx
 #: src/interface/lobby/Lobby.tsx
 msgid "Main channels"
@@ -12165,9 +12788,18 @@ msgstr "اللغة الأساسية"
 msgid "Main navigation"
 msgstr "التنقل الرئيسي"
 
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Majlis Evening"
+msgstr "سهرة المجلس"
+
 #: components/ui/components/design/LoadingScreen.tsx
 msgid "Major Outage"
 msgstr "انقطاع كبير"
+
+#. placeholder {0}: channel.name
+#: components/app/interface/settings/category/Overview.tsx
+msgid "Make {0} follow the category"
+msgstr "اجعل {0} تتبع الفئة"
 
 #: components/app/interface/settings/server/webhooks/ServerWebhooks.tsx
 msgid "Make a new address?"
@@ -12180,6 +12812,10 @@ msgstr "إنشاء نسخة جديدة"
 #: components/app/interface/channels/text/interactions/MessageComponents.tsx
 msgid "Make a selection"
 msgstr "اختر من القائمة"
+
+#: components/app/interface/settings/category/Overview.tsx
+msgid "Make all follow"
+msgstr "اجعل الكل يتبع"
 
 #: components/app/interface/settings/user/profile/CreatorsAdmin.tsx
 msgid "Make creator"
@@ -12485,6 +13121,10 @@ msgstr "يمكنك استخدام Markdown هنا."
 msgid "Marks misspelled words and suggests corrections as you type."
 msgstr "يعلّم الكلمات الخاطئة إملائيًا ويقترح تصحيحها أثناء الكتابة."
 
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Marquee Bulbs"
+msgstr "لمبات اللافتة"
+
 #: components/ui/components/features/profiles/plateNames.ts
 msgid "Marshall Islands"
 msgstr "جزر مارشال"
@@ -12498,6 +13138,14 @@ msgstr "التنكّر"
 #: components/app/interface/settings/server/assistant/labels.ts
 msgid "Mass mentions"
 msgstr "إشارات جماعية"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Master Plate"
+msgstr "لوحة أسطوري"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Master Rank"
+msgstr "رتبة أسطوري"
 
 #: components/app/interface/settings/channel/Overview.tsx
 msgid "Mature channels are paused: nobody can open mature content until Zrzur offers an age check."
@@ -12560,6 +13208,10 @@ msgstr "غرفة الاجتماعات"
 #: components/modal/lib/serverTemplateText.ts
 msgid "Meetings"
 msgstr "الاجتماعات"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Melody"
+msgstr "لحن"
 
 #: components/app/interface/settings/server/ServerOwnership.tsx
 msgid "Member"
@@ -12675,6 +13327,10 @@ msgstr "يمكن للأعضاء إرسال رسالة واحدة كل {0}."
 msgid "Members couldn't be loaded"
 msgstr "تعذّر تحميل الأعضاء"
 
+#: components/app/interface/settings/server/TicketsSettings.tsx
+msgid "Members get an \"Open a ticket\" row at the top of the channel list."
+msgstr "يظهر للأعضاء صف «افتح تذكرة» أعلى قائمة القنوات."
+
 #: components/app/interface/settings/server/WingsSettings.tsx
 msgid "Members give the server Wings. More Wings unlock higher levels and their perks for everyone."
 msgstr "يمنح الأعضاء السيرفر أجنحة. المزيد من الأجنحة يفتح مستويات أعلى ومزاياها للجميع."
@@ -12690,6 +13346,10 @@ msgstr "انضمام الأعضاء ومغادرتهم وتغيّر أدواره
 #: components/app/interface/settings/server/roles/ServerRoleEditor.tsx
 msgid "Members lose this role and its permissions."
 msgstr "يفقد الأعضاء هذا الدور وصلاحياته."
+
+#: components/app/interface/settings/server/pages.tsx
+msgid "Members open a private channel with your staff."
+msgstr "يفتح الأعضاء قناة خاصة مع طاقمك."
 
 #: components/app/interface/settings/channel/ForumTags.tsx
 msgid "Members pick up to five tags for each post, and everyone can filter posts by tag."
@@ -12976,7 +13636,12 @@ msgstr "منتصف الليل"
 #~ msgid "Midnight Collection"
 #~ msgstr "مجموعة منتصف الليل"
 
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Midnight Headphones"
+msgstr "سمّاعات ليلية"
+
 #: components/app/interface/settings/user/appearance/AppearanceMenu.tsx
+#: components/ui/components/features/profiles/pack/labels.generated.ts
 msgid "Midnight Pulse"
 msgstr "نبض منتصف الليل"
 
@@ -13021,6 +13686,10 @@ msgstr "لا تملك الصلاحية"
 #: src/interface/designs/Home.tsx
 #~ msgid "Mix your own"
 #~ msgstr "نسّق مظهرك بنفسك"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Mixtape Frame"
+msgstr "إطار الكاسيت"
 
 #: src/interface/developers/docs/EndpointReference.tsx
 msgid "Mocked test only."
@@ -13116,6 +13785,10 @@ msgstr "هالة القمر"
 #: components/ui/components/features/profiles/labels.ts
 msgid "Moon phases"
 msgstr "أطوار القمر"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Moonlit Roofs"
+msgstr "أسطح القمر"
 
 #: components/ui/components/features/messaging/elements/MessageToolbar.tsx
 #: components/ui/components/features/profiles/ProfileActions.tsx
@@ -13254,6 +13927,10 @@ msgstr "موسيقى"
 #: components/app/interface/settings/user/profile/styleLabels.tsx
 msgid "Music notes"
 msgstr "نوتات موسيقية"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Music Notes"
+msgstr "نوتات"
 
 #: components/app/interface/settings/user/notifications/Sounds.tsx
 #: components/app/menus/UserContextMenu.tsx
@@ -13550,6 +14227,10 @@ msgstr "بحاجة إلى تأكيدك"
 msgid "Neon"
 msgstr "نيون"
 
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Neon Flicker"
+msgstr "نيون يرمش"
+
 #: components/ui/components/features/profiles/plateNames.ts
 msgid "Nepal"
 msgstr "نيبال"
@@ -13696,8 +14377,8 @@ msgid "New messages since {0}"
 msgstr "رسائل جديدة {0}"
 
 #: components/modal/modals/EditCategory.tsx
-msgid "New name"
-msgstr "اسم جديد"
+#~ msgid "New name"
+#~ msgstr "اسم جديد"
 
 #: components/app/interface/settings/user/connections/Connections.tsx
 #~ msgid "New on your Steam card"
@@ -13885,6 +14566,10 @@ msgstr "وهج الليل"
 #~ msgid "Night purple with lavender."
 #~ msgstr "بنفسجي ليلي مع لافندر."
 
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Night Visit"
+msgstr "ليلة الزوّار"
+
 #: components/app/interface/settings/user/safety/ReportsAndStanding.tsx
 msgid "no"
 msgstr "لا"
@@ -13969,6 +14654,10 @@ msgstr "لا توجد بوتات معروضة بعد."
 msgid "No bots in this server."
 msgstr "لا توجد بوتات في هذا السيرفر."
 
+#: components/app/interface/settings/server/TicketsSettings.tsx
+msgid "No category"
+msgstr "بلا فئة"
+
 #: components/app/interface/settings/user/plugins/PluginDetail.tsx
 msgid "No changelog."
 msgstr "لا يوجد سجل تغييرات."
@@ -13980,6 +14669,10 @@ msgstr "لا توجد تغييرات بعد."
 #: src/interface/channels/text/searchLabels.ts
 msgid "No channel called \"{value}\"."
 msgstr "لا توجد قناة باسم \"{value}\"."
+
+#: components/app/interface/settings/category/Overview.tsx
+msgid "No channels in this category yet."
+msgstr "لا توجد قنوات في هذه الفئة بعد."
 
 #: components/app/interface/settings/server/channels/ChannelsSettings.tsx
 msgid "No channels yet"
@@ -14239,6 +14932,7 @@ msgstr "لا توجد مدفوعات بعد."
 msgid "No pending requests"
 msgstr "لا توجد طلبات معلّقة"
 
+#: components/app/interface/settings/category/CategoryPermissionsOverview.tsx
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsOverview.tsx
 msgid "No permissions set yet"
 msgstr "لم تُحدَّد صلاحيات بعد"
@@ -14299,8 +14993,8 @@ msgstr "لم يُذكر سبب"
 msgid "No requests waiting"
 msgstr "لا طلبات منتظرة"
 
+#: components/app/interface/settings/category/CategoryPermissionsOverview.tsx
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsOverview.tsx
-#: components/modal/modals/CategoryPermissions.tsx
 msgid "No role overrides have been configured."
 msgstr "لم تُضبط صلاحيات مخصصة لأي دور."
 
@@ -14643,8 +15337,8 @@ msgstr "غير مدعومة هنا"
 
 #. placeholder {0}: current().title
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsOverview.tsx
-msgid "Not synced with {0}"
-msgstr "غير متزامنة مع {0}"
+#~ msgid "Not synced with {0}"
+#~ msgstr "غير متزامنة مع {0}"
 
 #: components/ui/components/features/profiles/ProfileBotAbout.tsx
 msgid "Not verified by Zrzur"
@@ -14655,6 +15349,7 @@ msgstr "غير موثّق من زرزور"
 msgid "Note"
 msgstr "ملاحظة"
 
+#: components/app/interface/settings/category/Overview.tsx
 #: components/modal/modals/GiftPlus.tsx
 msgid "Note (optional)"
 msgstr "ملاحظة (اختيارية)"
@@ -14939,6 +15634,14 @@ msgstr "غير متصل"
 msgid "OK"
 msgstr "حسنًا"
 
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Old City Lanterns"
+msgstr "فوانيس الشام"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Old City Walls"
+msgstr "أسوار المدينة"
+
 #: src/interface/channels/text/TextSearchSidebar.tsx
 msgid "Oldest"
 msgstr "الأقدم"
@@ -14947,6 +15650,10 @@ msgstr "الأقدم"
 #: components/app/interface/settings/user/safety/SafetyDashboard.tsx
 msgid "Oldest first"
 msgstr "الأقدم أولًا"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Olive Wreath"
+msgstr "إكليل الزيتون"
 
 #: components/ui/components/features/profiles/plateNames.ts
 msgid "Oman"
@@ -15020,7 +15727,6 @@ msgid "On: everyone sees a Lobby row and the server opens on it. Off: nobody see
 msgstr "عند التشغيل: يرى الجميع صف «الردهة» ويُفتح السيرفر عليها. عند الإيقاف: لا يراها أحد، ويمكنك مع ذلك تعديلها ومعاينتها هنا."
 
 #: components/modal/modals/DeleteBot.tsx
-#: components/modal/modals/DeleteCategory.tsx
 #: components/modal/modals/DeleteChannel.tsx
 #: components/modal/modals/DeleteRole.tsx
 #: components/modal/modals/DeleteServer.tsx
@@ -15054,6 +15760,10 @@ msgstr "ضغطة تكتم الميكروفون، والضغطة التالية �
 #: components/app/interface/settings/user/voice/GameKeysOptions.tsx
 msgid "One press turns the call's sound off, the next turns it back on."
 msgstr "ضغطة توقف صوت المكالمة، والضغطة التالية تعيده."
+
+#: components/app/interface/settings/category/Overview.tsx
+msgid "One short line about this category"
+msgstr "سطر قصير واحد عن هذه الفئة"
 
 #: components/app/interface/settings/server/invites/VanityInvite.tsx
 msgid "One short, memorable link for your server, like zrzur.cc/your-name."
@@ -15322,10 +16032,18 @@ msgstr "فتح {0}"
 msgid "Open {0} in Zrzur"
 msgstr "افتح {0} في زرزور"
 
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "Open a category's settings"
+msgstr "فتح إعدادات فئة"
+
 #. placeholder {0}: price(plans().supercharge_price)
 #: components/app/interface/settings/user/subscriptions/Subscriptions.tsx
 msgid "Open a server's menu and choose Give Wings. Each one is {0} a month."
 msgstr "افتح قائمة السيرفر واختر «أهدِ أجنحة». كل جناح بـ {0} شهرياً."
+
+#: src/interface/tickets/TicketLink.tsx
+msgid "Open a ticket"
+msgstr "افتح تذكرة"
 
 #: src/interface/Developers.tsx
 #~ msgid "Open bot settings"
@@ -15551,6 +16269,10 @@ msgstr "أو أرسل رابط دعوة إلى صديق"
 msgid "Or start ready-made"
 msgstr "أو ابدأ بقالب جاهز"
 
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Orange Slice"
+msgstr "شريحة برتقال"
+
 #: components/app/interface/settings/server/roles/ServerRoleOverview.tsx
 msgid "Order"
 msgstr "الترتيب"
@@ -15558,6 +16280,10 @@ msgstr "الترتيب"
 #: components/app/interface/settings/user/safety/SafetyDashboard.tsx
 msgid "Original case id"
 msgstr "معرّف الحالة الأصلية"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Orontes Ring"
+msgstr "حلقة العاصي"
 
 #: components/app/interface/discover/categories.tsx
 #: components/modal/modals/permissionTitles.ts
@@ -15601,6 +16327,10 @@ msgstr "يسمعك الآخرون فقط أثناء ضغطك على المفتا
 msgid "Others hear you while you hold it. Without a key here, your push-to-talk key is used."
 msgstr "يسمعك الآخرون ما دمت تضغطه. إن لم تختر مفتاحًا هنا يُستخدم مفتاح «اضغط للتحدث»."
 
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Oud Night"
+msgstr "ليلة العود"
+
 #: components/i18n/errors.tsx
 msgid "Our automatic filter stopped this. {reason} If you think this is a mistake, ask for a review through Support."
 msgstr "أوقف مرشحنا الآلي هذا النص. {reason} إذا كنت تعتقد أن هذا خطأ، فاطلب مراجعته عبر الدعم."
@@ -15641,6 +16371,7 @@ msgstr "انتهت"
 msgid "Overturn and reverse"
 msgstr "اقبل الطعن وألغِ الإجراء"
 
+#: components/app/interface/settings/CategorySettings.tsx
 #: components/app/interface/settings/ChannelSettings.tsx
 #: components/app/interface/settings/server/assistant/AssistantPage.tsx
 #: components/app/interface/settings/ServerSettings.tsx
@@ -15673,6 +16404,10 @@ msgstr "امتلك سيرفرًا موثّقًا. وتظهر الشارة ما �
 msgid "Own colours"
 msgstr "ألوان خاصة"
 
+#: components/app/interface/settings/category/Overview.tsx
+msgid "Own permissions"
+msgstr "صلاحيات خاصة"
+
 #: components/app/interface/discover/ReviewQueue.tsx
 #: components/app/interface/settings/server/ServerOwnership.tsx
 #: src/interface/lobby/Lobby.tsx
@@ -15698,6 +16433,10 @@ msgstr "يملك هذا السيرفر."
 #: components/app/interface/settings/user/plugins/DeveloperTab.tsx
 msgid "Package"
 msgstr "الحزمة"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Pad Ring"
+msgstr "يد التحكّم"
 
 #: src/interface/developers/docs/DocsPortal.tsx
 msgid "Page"
@@ -15749,6 +16488,10 @@ msgstr "بالاو"
 #: components/ui/components/features/profiles/plateNames.ts
 msgid "Palestine"
 msgstr "فلسطين"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Palmyra Sunset"
+msgstr "غروب تدمر"
 
 #: components/ui/components/features/profiles/plateNames.ts
 msgid "Panama"
@@ -15900,6 +16643,14 @@ msgstr "الإيقاف المؤقت"
 #: components/ui/components/features/profiles/badges/useBadgeText.ts
 #~ msgid "Paw"
 #~ msgstr "كفّ"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Paw Hop"
+msgstr "قفزات الأقدام"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Paw Ring"
+msgstr "حلقة الأقدام"
 
 #: components/modal/modals/PaymentMethodPicker.tsx
 msgid "Pay with"
@@ -16060,6 +16811,7 @@ msgstr "الصلاحية"
 msgid "Permission number {n}"
 msgstr "الصلاحية رقم {n}"
 
+#: components/app/interface/settings/CategorySettings.tsx
 #: components/app/interface/settings/ChannelSettings.tsx
 #: components/app/interface/settings/server/apps/ServerAppPage.tsx
 #: components/app/interface/settings/server/assistant/labels.ts
@@ -16068,6 +16820,7 @@ msgstr "الصلاحية رقم {n}"
 msgid "Permissions"
 msgstr "الصلاحيات"
 
+#: components/app/interface/settings/category/CategoryPermissionsOverview.tsx
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsOverview.tsx
 msgid "Permissions available when no role overrides apply"
 msgstr "الصلاحيات المتاحة عندما لا تنطبق أي صلاحيات مخصصة للأدوار"
@@ -16090,8 +16843,8 @@ msgstr "الصلاحيات التي تطلبها"
 
 #. placeholder {0}: props.category.title
 #: components/modal/modals/CategoryPermissions.tsx
-msgid "Permissions of {0}"
-msgstr "صلاحيات {0}"
+#~ msgid "Permissions of {0}"
+#~ msgstr "صلاحيات {0}"
 
 #: components/app/interface/settings/user/plugins/PluginDetail.tsx
 msgid "Permissions you granted"
@@ -16105,9 +16858,17 @@ msgstr "تحية شخصية"
 msgid "Peru"
 msgstr "بيرو"
 
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Pet Parade"
+msgstr "موكب الحيوانات"
+
 #: components/ui/components/features/profiles/labels.ts
 msgid "Petals"
 msgstr "بتلات"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Petals of Damascus"
+msgstr "ورد دمشق"
 
 #: components/ui/components/features/profiles/labels.ts
 #~ msgid "Pets"
@@ -16124,6 +16885,10 @@ msgstr "تصيّد احتيالي"
 #: components/app/interface/safety/labels.tsx
 msgid "Phishing, fake giveaways or money scams"
 msgstr "تصيّد احتيالي، أو هدايا وهمية، أو احتيال مالي"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Photo Finish"
+msgstr "خطّ النهاية"
 
 #: components/ui/components/features/profiles/labels.ts
 #~ msgid "Photography"
@@ -16211,6 +16976,10 @@ msgstr "اختر ما يهمك. تحصل على كل دور فورًا، ويم�
 msgid "Pick what your server is like; modules turn on to match."
 msgstr "اختر ما يشبه سيرفرك، وستُفعّل الوحدات المناسبة."
 
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Picnic Ring"
+msgstr "حلقة النزهة"
+
 #: components/modal/modals/PinMessage.tsx
 msgid "Pin"
 msgstr "تثبيت"
@@ -16219,6 +16988,10 @@ msgstr "تثبيت"
 #: components/modal/modals/PinMessage.tsx
 msgid "Pin message"
 msgstr "تثبيت الرسالة"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Pink Headphones"
+msgstr "سمّاعات وردية"
 
 #: src/interface/channels/text/searchLabels.ts
 msgctxt "search filter"
@@ -16252,13 +17025,81 @@ msgstr "pinned: يقبل true أو false."
 msgid "Pisces"
 msgstr "الحوت"
 
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Pistachio Rain"
+msgstr "مطر الفستق"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Pistachio Ring"
+msgstr "حلقة الفستق"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Pitch Ring"
+msgstr "حلقة الملعب"
+
 #: components/app/interface/settings/user/profile/styleLabels.tsx
 msgid "Pixel"
 msgstr "بكسل"
 
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Pixel Diner"
+msgstr "مطعم البكسل"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Pixel Frame"
+msgstr "إطار البكسل"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Pixel Garden"
+msgstr "حديقة البكسل"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Pixel Hearts"
+msgstr "قلوب البكسل"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Pixel Meadow"
+msgstr "مرج البكسل"
+
 #: src/interface/designs/Looks.tsx
 msgid "Pixel name and a neon ring."
 msgstr "اسم بخط البكسل وحلقة نيون."
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Pixel Notes"
+msgstr "نوتات البكسل"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Pixel Orbit"
+msgstr "مدار البكسل"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Pixel Petals"
+msgstr "بتلات البكسل"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Pixel Rain"
+msgstr "مطر البكسل"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Pixel Reef"
+msgstr "شِعاب البكسل"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Pixel Skyline"
+msgstr "أفق البكسل"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Pixel Snowfall"
+msgstr "ثلج البكسل"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Pixel Sprinkles"
+msgstr "رشّات البكسل"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Pixel Valley"
+msgstr "وادي البكسل"
 
 #: components/app/interface/settings/user/subscriptions/Subscriptions.tsx
 msgid "Place"
@@ -16272,6 +17113,10 @@ msgstr "خطط لأمسية ألعاب أو حديث أو لقاء. يمكن ل�
 msgid "Plan game nights and meetups; an Events row shows for everyone."
 msgstr "خطّط لأمسيات الألعاب واللقاءات؛ يظهر صف «الفعاليات» للجميع."
 
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Planet Rings"
+msgstr "حلقات الكوكب"
+
 #: components/modal/lib/serverTemplateText.ts
 msgid "planning"
 msgstr "التخطيط"
@@ -16283,6 +17128,10 @@ msgstr "التخطيط"
 #: components/ui/components/features/profiles/badges/useBadgeText.ts
 msgid "Platform Moderator"
 msgstr "مشرف المنصة"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Platinum Rank"
+msgstr "رتبة بلاتيني"
 
 #: components/ui/components/features/messaging/elements/MediaPlayer.tsx
 #: components/ui/components/features/messaging/elements/VoiceMessage.tsx
@@ -16482,6 +17331,10 @@ msgstr "تعذّر تحميل المنشورات."
 #: components/modal/modals/CreateChannel.tsx
 msgid "Posts with a title and tags; each post has its own conversation."
 msgstr "منشورات بعنوان ووسوم، ولكل منشور محادثته الخاصة."
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Power Up"
+msgstr "ترقية القوّة"
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 msgid "Powerful: give it only to people you trust."
@@ -16683,6 +17536,11 @@ msgstr "خاص"
 #: src/interface/Developers.tsx
 msgid "Private application"
 msgstr "تطبيق خاص"
+
+#: components/app/interface/settings/category/CategoryPermissionsOverview.tsx
+#: src/interface/navigation/channels/ServerSidebar.tsx
+msgid "Private category"
+msgstr "فئة خاصة"
 
 #: components/app/interface/settings/channel/permissions/ChannelVisibility.tsx
 #: components/markdown/plugins/anchors.tsx
@@ -16945,6 +17803,14 @@ msgstr "الناشر:"
 msgid "Publishing…"
 msgstr "جارٍ النشر…"
 
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Pulse Ring"
+msgstr "حلقة النبض"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Pulse Wave"
+msgstr "موجة النبض"
+
 #: components/modal/modals/BillingCheckoutStatus.tsx
 msgid "Purchase cancelled"
 msgstr "أُلغي الشراء"
@@ -17051,6 +17917,10 @@ msgstr "معزولة"
 msgid "Query parameters"
 msgstr "معاملات الاستعلام"
 
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Quest Frame"
+msgstr "إطار المغامرة"
+
 #: components/app/interface/settings/server/LobbyRoleQuestionsEditor.tsx
 #: components/app/interface/settings/server/LobbySettings.tsx
 #: components/modal/modals/CreatePoll.tsx
@@ -17093,6 +17963,14 @@ msgstr "الإعداد السريع"
 msgid "Quiet hours, hidden previews and muted sounds. It never reads your notifications."
 msgstr "ساعات الهدوء، وإخفاء المعاينات، وكتم الأصوات. لا تقرأ إشعاراتك أبدًا."
 
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Race Track"
+msgstr "الحلبة"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Radar"
+msgstr "الرادار"
+
 #: components/app/interface/safety/labels.tsx
 msgid "Raid"
 msgstr "غارة"
@@ -17105,17 +17983,33 @@ msgstr "غارة"
 msgid "Rain"
 msgstr "مطر"
 
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Rain and Sun"
+msgstr "مطر وشمس"
+
 #: components/ui/components/features/profiles/labels.ts
 msgid "Rain on glass"
 msgstr "مطر على الزجاج"
 
-#: components/app/interface/settings/user/profile/StyleEditors.tsx
-#~ msgid "Rainbow"
-#~ msgstr "قوس قزح"
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Rain Street"
+msgstr "شارع المطر"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Rainbow"
+msgstr "قوس قزح"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Rainbow Ring"
+msgstr "حلقة قوس قزح"
 
 #: src/interface/designs/Scenes.tsx
 msgid "Rana"
 msgstr "رنا"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Rank Up"
+msgstr "ترقية الرتبة"
 
 #: components/app/interface/settings/user/badges/MyBadges.tsx
 msgid "Rare"
@@ -17397,6 +18291,18 @@ msgstr "تقليل الحركة"
 #: components/app/interface/settings/user/Accessibility.tsx
 #~ msgid "Reduced Motion"
 #~ msgstr "تقليل الحركة"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Reef Frame"
+msgstr "إطار الشِعاب"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Reef Ring"
+msgstr "حلقة المرجان"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Reef Swim"
+msgstr "سباحة الشِعاب"
 
 #: components/modal/modals/ReportContent.tsx
 msgid "Reference"
@@ -17761,7 +18667,6 @@ msgstr "يزيلها ويزيل صلاحياتها وإعداداتها."
 
 #: components/app/interface/settings/user/appearance/MyThemes.tsx
 #: components/app/interface/settings/user/Sessions.tsx
-#: components/modal/modals/EditCategory.tsx
 #: components/modal/modals/RenameSession.tsx
 msgid "Rename"
 msgstr "إعادة تسمية"
@@ -17769,8 +18674,8 @@ msgstr "إعادة تسمية"
 #: components/app/interface/settings/server/channels/ChannelsSettings.tsx
 #: components/app/menus/CategoryContextMenu.tsx
 #: components/modal/modals/EditCategory.tsx
-msgid "Rename category"
-msgstr "إعادة تسمية الفئة"
+#~ msgid "Rename category"
+#~ msgstr "إعادة تسمية الفئة"
 
 #: components/modal/modals/EditEmoji.tsx
 msgid "Rename emoji"
@@ -17803,6 +18708,10 @@ msgstr "إعادة فتح"
 #: src/interface/channels/ChannelHeader.tsx
 msgid "Reopen thread"
 msgstr "إعادة فتح الخيط"
+
+#: src/interface/tickets/TicketAction.tsx
+msgid "Reopen ticket"
+msgstr "إعادة فتح التذكرة"
 
 #: components/app/interface/settings/user/profile/ReviewQueue.tsx
 msgid "Reopened by an admin"
@@ -18079,6 +18988,7 @@ msgid "Resend verification"
 msgstr "إعادة إرسال رسالة التحقق"
 
 #: components/app/interface/settings/server/LobbyAppearanceEditor.tsx
+#: components/app/interface/settings/server/TicketsSettings.tsx
 #: components/app/interface/settings/user/Account.tsx
 #: components/app/interface/settings/user/bots/ViewBot.tsx
 #: components/app/interface/settings/user/profile/studio/StudioEditor.tsx
@@ -18213,6 +19123,10 @@ msgstr "جارٍ إعادة المحاولة…"
 msgid "Return to voice channel"
 msgstr "العودة إلى القناة الصوتية"
 
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Rev Gauge"
+msgstr "عدّاد الدورات"
+
 #: components/app/interface/settings/user/Account.tsx
 msgid "Reveal"
 msgstr "إظهار"
@@ -18322,6 +19236,14 @@ msgstr "إلغاء الإصدار v{0}"
 msgid "Revoked"
 msgstr "مسحوبة"
 
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Rewind"
+msgstr "إرجاع"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Ribbon and Bow"
+msgstr "الشريط والعقدة"
+
 #: components/app/interface/settings/user/profile/studio/StudioHome.tsx
 msgid "Right-to-left languages"
 msgstr "اللغات من اليمين إلى اليسار"
@@ -18334,6 +19256,10 @@ msgstr "الحقوق"
 #: components/app/interface/settings/user/profile/ReviewQueue.tsx
 msgid "Rights confirmed on {0}"
 msgstr "أُكّدت الحقوق في {0}"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Ring Road"
+msgstr "الطريق الدائري"
 
 #: components/app/interface/settings/user/profile/StyleEditors.tsx
 #: components/app/interface/settings/user/profile/styleLabels.tsx
@@ -18348,9 +19274,17 @@ msgstr "تموجات"
 msgid "Rise"
 msgstr "صعود"
 
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Rising Balloons"
+msgstr "صعود المناطيد"
+
 #: components/ui/components/features/profiles/labels.ts
 msgid "Rising hearts"
 msgstr "قلوب صاعدة"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Rising Jellies"
+msgstr "صعود القناديل"
 
 #: components/app/interface/settings/server/roles/ServerRoleEditor.tsx
 #: components/app/interface/settings/user/bots/CommandManager.tsx
@@ -18400,8 +19334,8 @@ msgstr "اسم الدور"
 #~ msgid "Role Name"
 #~ msgstr "اسم الدور"
 
+#: components/app/interface/settings/category/CategoryPermissionsOverview.tsx
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsOverview.tsx
-#: components/modal/modals/CategoryPermissions.tsx
 msgid "Role overrides"
 msgstr "صلاحيات الأدوار المخصصة"
 
@@ -18463,6 +19397,10 @@ msgstr "الأدوار في {0}"
 msgid "Roles Shield trusts"
 msgstr "الأدوار الموثوقة لدى الدرع"
 
+#: components/app/interface/settings/server/TicketsSettings.tsx
+msgid "Roles that answer tickets"
+msgstr "الأدوار التي تردّ على التذاكر"
+
 #: components/app/interface/settings/server/assistant/AssistantPage.tsx
 msgid "Roles that may use this module"
 msgstr "الأدوار التي يمكنها استخدام هذه الوحدة"
@@ -18471,6 +19409,7 @@ msgstr "الأدوار التي يمكنها استخدام هذه الوحدة"
 msgid "Roles the rules skip"
 msgstr "أدوار تتجاوزها القواعد"
 
+#: components/app/interface/settings/category/CategoryPermissionsOverview.tsx
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsOverview.tsx
 msgid "Roles with No Overrides"
 msgstr "أدوار بلا صلاحيات مخصصة"
@@ -18488,6 +19427,10 @@ msgstr "الأدوار: {0}"
 msgid "Romania"
 msgstr "رومانيا"
 
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Rooftop Cats"
+msgstr "قطط الأسطح"
+
 #: components/app/interface/settings/server/LobbyAppearanceEditor.tsx
 msgid "Room between cards and inside them."
 msgstr "المسافة بين البطاقات وداخلها."
@@ -18500,6 +19443,10 @@ msgstr "مساحة لقصة طويلة أو ملاحظات تحديث أو وص�
 msgid "Room full. Admission is checked by the server."
 msgstr "الغرفة ممتلئة. يتحقق السيرفر من إمكانية الانضمام."
 
+#: components/app/interface/settings/channel/Overview.tsx
+msgid "Room maker"
+msgstr "صانع الغرف"
+
 #. placeholder {0}: channel.name
 #: components/app/interface/settings/server/channels/ChannelsSettings.tsx
 msgid "Room size of {0}"
@@ -18508,6 +19455,10 @@ msgstr "سعة الغرفة {0}"
 #: components/app/interface/settings/user/profile/styleLabels.tsx
 msgid "Rose"
 msgstr "ورد"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Rose Fall"
+msgstr "مطر الورد"
 
 #: components/app/interface/settings/user/profile/styleLabels.tsx
 msgid "Rounded"
@@ -18606,6 +19557,10 @@ msgstr "تشغيل الإضافات"
 msgid "Run the chosen command"
 msgstr "تشغيل الأمر المختار"
 
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Rune Circle"
+msgstr "دائرة الرموز"
+
 #: components/app/interface/settings/user/plugins/common.tsx
 msgid "Running"
 msgstr "تعمل"
@@ -18634,6 +19589,14 @@ msgstr "روسيا"
 #: components/ui/components/features/profiles/plateNames.ts
 msgid "Rwanda"
 msgstr "رواندا"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Sadu Ring"
+msgstr "حلقة السدو"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Sadu Weave"
+msgstr "نسيج السدو"
 
 #: components/app/interface/settings/user/profile/studio/StudioEditor.tsx
 #: components/app/interface/settings/user/profile/studio/StudioHome.tsx
@@ -18723,9 +19686,11 @@ msgstr "سارة"
 msgid "Saudi Arabia"
 msgstr "السعودية"
 
+#: components/app/interface/settings/category/Overview.tsx
 #: components/app/interface/settings/channel/Overview.tsx
 #: components/app/interface/settings/server/AutoModSettings.tsx
 #: components/app/interface/settings/server/invites/VanityInvite.tsx
+#: components/app/interface/settings/server/TicketsSettings.tsx
 #: components/app/interface/settings/server/webhooks/ServerWebhooks.tsx
 #: components/app/interface/settings/user/account/AgeSettings.tsx
 #: components/app/interface/settings/user/connections/Connections.tsx
@@ -18965,6 +19930,10 @@ msgstr "جدولة فعالية"
 msgid "School club"
 msgstr "نادٍ مدرسي"
 
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "School of Fish"
+msgstr "سرب السمك"
+
 #: components/app/interface/discover/categories.tsx
 msgid "Science"
 msgstr "علوم"
@@ -18972,6 +19941,10 @@ msgstr "علوم"
 #: components/app/interface/discover/categories.tsx
 #~ msgid "Science & Tech"
 #~ msgstr "علوم وتقنية"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Scoops"
+msgstr "كرات البوظة"
 
 #: components/app/interface/settings/server/apps/ServerAppPage.tsx
 #: src/interface/Developers.tsx
@@ -19860,6 +20833,10 @@ msgstr "يشارك شاشته"
 msgid "Shield"
 msgstr "الدرع"
 
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Ship's Wheel"
+msgstr "دفّة السفينة"
+
 #: components/app/interface/settings/user/plugins/text.ts
 msgid "Short in-app notices that start with its name."
 msgstr "إشعارات قصيرة داخل التطبيق تبدأ باسمها."
@@ -20139,6 +21116,14 @@ msgstr "يُرسَل صمت"
 msgid "Silent"
 msgstr "صامت"
 
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Silver Rank"
+msgstr "رتبة فضّي"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Silver Tiara"
+msgstr "تاج فضّي"
+
 #: components/app/interface/discover/ServerPage.tsx
 msgid "Similar communities"
 msgstr "مجتمعات مشابهة"
@@ -20193,6 +21178,10 @@ msgstr "أوامر الشرطة المائلة"
 #: src/interface/developers/docs/GettingStarted.tsx
 #~ msgid "Slash commands with options"
 #~ msgstr "أوامر الشرطة المائلة مع خيارات"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Sleepy Moon"
+msgstr "قمر نعسان"
 
 #: components/app/interface/settings/user/appearance/AnimationSettings.tsx
 msgid "Slide"
@@ -20273,9 +21262,21 @@ msgstr "الوجوه والأشخاص"
 msgid "Smooth"
 msgstr "سلس"
 
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Snack Frame"
+msgstr "إطار الوجبات"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Snack Rain"
+msgstr "مطر الوجبات"
+
 #: components/app/interface/settings/user/safety/SafetyDashboard.tsx
 msgid "Snapshot taken when the report was filed. It stays even if the content is deleted, until its retention ends. Opening this case is recorded."
 msgstr "لقطة أُخذت عند تقديم البلاغ. تبقى حتى لو حُذف المحتوى، إلى أن تنتهي مدة حفظها. فتحُ هذه الحالة يُسجَّل."
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Snapshots"
+msgstr "صور فورية"
 
 #: components/app/interface/settings/user/profile/styleLabels.tsx
 #: components/ui/components/features/profiles/labels.ts
@@ -20286,9 +21287,29 @@ msgstr "ثلج"
 msgid "Snow and calm blue."
 msgstr "ثلج وأزرق هادئ."
 
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Snow Cap"
+msgstr "قبّعة الثلج"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Snow Cat Ears"
+msgstr "آذان قطّة بيضاء"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Snow Frame"
+msgstr "إطار الثلج"
+
 #: components/app/interface/settings/user/appearance/AppearanceMenu.tsx
 #~ msgid "Snow white with blue."
 #~ msgstr "أبيض ثلجي مع أزرق."
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Snowy Peaks"
+msgstr "القمم الثلجية"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Snowy Village"
+msgstr "قرية الثلج"
 
 #: components/app/interface/discover/categories.tsx
 msgid "Social"
@@ -20333,6 +21354,10 @@ msgstr "جزر سليمان"
 #: components/ui/components/features/profiles/plateNames.ts
 msgid "Somalia"
 msgstr "الصومال"
+
+#: components/app/interface/settings/category/CategoryPermissionsOverview.tsx
+msgid "Some channels here can be seen by people outside this category"
+msgstr "بعض القنوات هنا يراها أشخاص من خارج هذه الفئة"
 
 #: components/app/interface/settings/user/profile/studio/StudioEditor.tsx
 msgid "Some frames are too short. Each frame must show for at least 33 ms."
@@ -20515,6 +21540,10 @@ msgstr "كوريا الجنوبية"
 msgid "South Sudan"
 msgstr "جنوب السودان"
 
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Space Helmet"
+msgstr "خوذة الفضاء"
+
 #: components/app/interface/settings/server/LobbyAppearanceEditor.tsx
 msgid "Spacing"
 msgstr "التباعد"
@@ -20599,6 +21628,10 @@ msgstr "منحنى السرعة"
 msgid "Speed up"
 msgstr "تسارع"
 
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Speedometer"
+msgstr "عدّاد السرعة"
+
 #: components/app/interface/settings/user/Native.tsx
 msgid "Spell check"
 msgstr "التدقيق الإملائي"
@@ -20620,6 +21653,22 @@ msgstr "رياضة"
 #: components/app/interface/discover/tiers.tsx
 msgid "Spotlight"
 msgstr "تحت الأضواء"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Spring Day"
+msgstr "يوم ربيعي"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Spring in the Ghouta"
+msgstr "ربيع الغوطة"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Spring Meadow"
+msgstr "مرج الربيع"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Sprinkle Ring"
+msgstr "حلقة الرشّات"
 
 #: components/modal/lib/serverTemplateText.ts
 msgid "Squad"
@@ -20685,6 +21734,10 @@ msgstr "منصة"
 msgid "Standing"
 msgstr "وضع الحساب"
 
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Star Fighter"
+msgstr "مقاتلة النجوم"
+
 #: components/app/interface/settings/user/profile/StyleEditors.tsx
 #~ msgid "Stars"
 #~ msgstr "نجوم"
@@ -20729,6 +21782,10 @@ msgstr "ابدأ من الصفر"
 #: src/interface/designs/Home.tsx
 #~ msgid "Start from what you wear and swap one piece at a time."
 #~ msgstr "ابدأ بما ترتديه الآن وبدّل قطعة واحدة في كل مرة."
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Start Grid"
+msgstr "خط الانطلاق"
 
 #: components/app/interface/settings/server/LobbySettings.tsx
 #: components/modal/lib/serverTemplateText.ts
@@ -20919,6 +21976,10 @@ msgstr "ما زال التحميل جارياً. حاول مجدداً بعد ل
 msgid "Still waiting. If you paid, it will show up in Subscriptions as soon as the payment is confirmed."
 msgstr "ما زلنا ننتظر. إذا كنت قد دفعت، فسيظهر ذلك في الاشتراكات فور تأكيد الدفع."
 
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Stitch Ring"
+msgstr "حلقة التطريز"
+
 #: components/app/interface/settings/user/plugins/index.tsx
 msgid "Stop"
 msgstr "إيقاف"
@@ -21101,6 +22162,10 @@ msgstr "مثل خط أو رسم بترخيص مفتوح. اذكر المصدر �
 msgid "Sudan"
 msgstr "السودان"
 
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Sugar Rush"
+msgstr "رشّة سكّر"
+
 #: components/app/interface/settings/user/Feedback.tsx
 msgid "Suggest new Zrzur features once the public repository is available."
 msgstr "اقترح ميزات جديدة لزرزور عندما يصبح المستودع العام متاحًا."
@@ -21118,10 +22183,18 @@ msgstr "انتحار"
 msgid "Sun rays"
 msgstr "أشعة الشمس"
 
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Sunflower"
+msgstr "دوّار الشمس"
+
 #: components/app/interface/settings/server/LobbyAppearanceEditor.tsx
 #: components/app/interface/settings/user/profile/styleLabels.tsx
 msgid "Sunset"
 msgstr "غروب"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Sunset Boulevard"
+msgstr "شارع الغروب"
 
 #: src/interface/designs/Looks.tsx
 msgid "Sunset tones and a little gold."
@@ -21180,6 +22253,10 @@ msgstr "دعم زرزور."
 msgid "Supporter"
 msgstr "داعم"
 
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Supporters' Scarf"
+msgstr "وشاح المشجّعين"
+
 #: components/ui/components/features/profiles/badges/useBadgeText.ts
 msgid "Supports Zrzur with an active Feather subscription."
 msgstr "يدعم زرزور باشتراك ريشة فعّال."
@@ -21233,6 +22310,10 @@ msgstr "يستبدل الحركة والتكبير بتلاشٍ قصير."
 msgid "Sweden"
 msgstr "السويد"
 
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Sweet Frame"
+msgstr "إطار الحلويات"
+
 #: components/app/interface/settings/user/plugins/text.ts
 msgid "Switch compact mode on or off when you run its command."
 msgstr "تشغيل الوضع المضغوط أو إيقافه عند تنفيذ أمرها."
@@ -21270,21 +22351,21 @@ msgid "Symbols"
 msgstr "الرموز"
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsOverview.tsx
-msgid "Sync"
-msgstr "مزامنة"
+#~ msgid "Sync"
+#~ msgstr "مزامنة"
 
 #: components/app/interface/settings/user/Sync.tsx
 msgid "Sync appearance options, such as chosen emoji pack and message density."
 msgstr "مزامنة خيارات المظهر، مثل حزمة الإيموجي المختارة وكثافة الرسائل."
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsOverview.tsx
-msgid "Sync now"
-msgstr "زامِن الآن"
+#~ msgid "Sync now"
+#~ msgstr "زامِن الآن"
 
 #. placeholder {0}: current().title
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsOverview.tsx
-msgid "Sync with {0}?"
-msgstr "مزامنة مع {0}؟"
+#~ msgid "Sync with {0}?"
+#~ msgstr "مزامنة مع {0}؟"
 
 #: components/app/interface/settings/user/Sync.tsx
 msgid "Sync your chosen theme, colours, and any custom CSS."
@@ -21296,12 +22377,16 @@ msgstr "مزامنة اللغة المختارة حاليًا."
 
 #. placeholder {0}: current().title
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsOverview.tsx
-msgid "Synced with {0}"
-msgstr "متزامنة مع {0}"
+#~ msgid "Synced with {0}"
+#~ msgstr "متزامنة مع {0}"
 
 #: components/ui/components/features/profiles/plateNames.ts
 msgid "Syria"
 msgstr "سوريا"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Syrian Flag Ring"
+msgstr "حلقة العلم السوري"
 
 #: components/app/interface/settings/user/appearance/AppearanceMenu.tsx
 #: components/app/interface/settings/user/safety/SafetyDashboard.tsx
@@ -21323,6 +22408,10 @@ msgstr "«النظام» يتبع إعداد الوضع الفاتح أو الد
 #: components/app/interface/settings/server/audit/AuditLog.tsx
 msgid "System messages"
 msgstr "رسائل النظام"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Table of Damascus"
+msgstr "سفرة الشام"
 
 #: components/app/interface/settings/channel/ForumTags.tsx
 msgid "Tag name"
@@ -21480,6 +22569,10 @@ msgstr "إبلاغ الأعضاء برسالة خاصة"
 #~ msgid "Tell us what to improve, report a problem or suggest an idea."
 #~ msgstr "أخبرنا بما يمكن تحسينه، أو أبلغ عن مشكلة، أو اقترح فكرة."
 
+#: components/app/interface/settings/server/TicketsSettings.tsx
+msgid "Tell us what you need and we will answer here."
+msgstr "أخبرنا بما تحتاج إليه وسنردّ عليك هنا."
+
 #: components/app/interface/safety/labels.tsx
 msgid "Tell us what's wrong in your own words"
 msgstr "أخبرنا بالمشكلة بكلماتك"
@@ -21631,6 +22724,7 @@ msgstr "قناة نصية"
 
 #: components/app/interface/settings/server/channels/ChannelsSettings.tsx
 #: components/app/interface/settings/user/bots/CommandManager.tsx
+#: src/interface/channels/voice/VoiceChannel.tsx
 #: src/interface/navigation/channels/ServerSidebar.tsx
 msgid "Text channels"
 msgstr "القنوات النصية"
@@ -21894,6 +22988,7 @@ msgstr "قائمة القنوات والصفحة عند فتح سيرفر آخر
 #~ msgid "The channel with your server rules gets its own icon at the top of the list."
 #~ msgstr "قناة قواعد سيرفرك تأخذ أيقونة خاصة بها في القائمة."
 
+#: components/app/interface/settings/category/Overview.tsx
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsOverview.tsx
 msgid "The channel's own permissions for everyone and for roles are removed and it uses the category's. Member overrides stay."
 msgstr "تُحذف صلاحيات القناة الخاصة بالجميع وبالأدوار، وتستعمل صلاحيات الفئة. وتبقى صلاحيات الأعضاء المخصصة."
@@ -22085,6 +23180,10 @@ msgstr "تبقى النسخة المنشورة ظاهرة إلى أن يوافق
 msgid "The member sees the rule's name as the reason."
 msgstr "يرى العضو اسم القاعدة سببًا للحجب."
 
+#: components/modal/modals/CloseTicket.tsx
+msgid "The member who opened it will no longer see it. You can reopen it or delete it later."
+msgstr "لن يراها بعد الآن العضو الذي فتحها. يمكنك إعادة فتحها أو حذفها لاحقًا."
+
 #: components/app/interface/settings/user/bots/CommandManager.tsx
 msgid "The minimum is larger than the maximum."
 msgstr "الحد الأدنى أكبر من الحد الأعلى."
@@ -22108,6 +23207,10 @@ msgstr "يُؤخذ الاسم والأيقونة والغلاف والوصف م�
 #: components/app/interface/settings/server/pages.tsx
 msgid "The name, picture and description people see."
 msgstr "الاسم والصورة والوصف كما يراها الناس."
+
+#: components/app/interface/settings/CategorySettings.tsx
+msgid "The name, the note and the channels inside."
+msgstr "الاسم والملاحظة والقنوات التي بداخلها."
 
 #: components/app/interface/settings/server/LobbySettings.tsx
 msgid "The newest message of your announcements."
@@ -22239,6 +23342,10 @@ msgstr "لم يؤكد السيرفر التغيير الصوتي. تحقق من 
 #: components/i18n/errors.tsx
 msgid "The server is already on discover, the user must contact support to have it removed."
 msgstr "السيرفر موجود في «اكتشف» بالفعل، ويجب على صاحبه التواصل مع الدعم لإزالته."
+
+#: components/app/interface/settings/category/CategoryPermissionsOverview.tsx
+msgid "The server owner and whoever manages channels or permissions see every category."
+msgstr "مالك السيرفر ومن يدير القنوات أو الصلاحيات يرون كل الفئات."
 
 #: components/app/interface/settings/channel/permissions/ChannelVisibility.tsx
 msgid "The server owner sees every channel."
@@ -22409,6 +23516,11 @@ msgstr "هذه الأدوار أعلى من دور المساعد"
 msgid "These settings aren't available yet."
 msgstr "هذه الإعدادات غير متاحة بعد."
 
+#. placeholder {0}: stillOpen() .map((channel) => channel.name) .join(", ")
+#: components/app/interface/settings/category/CategoryPermissionsOverview.tsx
+msgid "They have their own permissions: {0}. Make them follow the category in Overview."
+msgstr "لها صلاحيات خاصة: {0}. اجعلها تتبع الفئة من «نظرة عامة»."
+
 #: components/app/interface/settings/user/appearance/AppearanceMenu.tsx
 #~ msgid "Thin lines. The calmest look."
 #~ msgstr "خطوط رفيعة، المظهر الأهدأ."
@@ -22562,6 +23674,10 @@ msgstr "لا يمكن التراجع عن هذا."
 #: components/app/interface/settings/user/safety/SafetyDashboard.tsx
 msgid "This case couldn't be loaded."
 msgstr "تعذّر تحميل هذه الحالة."
+
+#: components/app/interface/settings/CategorySettings.tsx
+msgid "This category is no longer here."
+msgstr "هذه الفئة لم تعد موجودة."
 
 #: src/interface/channels/text/TextSearchSidebar.tsx
 msgid "This channel"
@@ -23011,6 +24127,10 @@ msgstr "بلغ هذا السيرفر الحد الأقصى من الويب هو�
 msgid "This server has no channels yet"
 msgstr "لا توجد قنوات في هذا السيرفر بعد"
 
+#: components/app/interface/settings/server/TicketsSettings.tsx
+msgid "This server has no roles yet. Until it does, only people who can see every channel answer tickets."
+msgstr "لا توجد أدوار في هذا السيرفر بعد. إلى أن توجد، يردّ على التذاكر فقط من يستطيع رؤية كل القنوات."
+
 #: components/modal/modals/ServerEventEditor.tsx
 msgid "This server has no text channel you can see."
 msgstr "لا توجد في هذا السيرفر قناة نصية يمكنك رؤيتها."
@@ -23256,9 +24376,22 @@ msgstr "ضع علامة في المربع للموافقة قبل المتابع
 msgid "Ticket categories, one per line"
 msgstr "أقسام التذاكر، كل قسم في سطر"
 
+#: components/app/interface/settings/server/TicketsSettings.tsx
+msgid "Tickets"
+msgstr "التذاكر"
+
+#: components/app/interface/settings/server/pages.tsx
+msgctxt "server-settings"
+msgid "Tickets"
+msgstr "التذاكر"
+
 #: components/app/interface/settings/server/assistant/labels.ts
 msgid "Tickets and direct messages in one queue."
 msgstr "التذاكر والرسائل الخاصة في صندوق واحد."
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Tilted Crown"
+msgstr "تاج مائل"
 
 #: components/ui/components/design/DateTimeField.tsx
 msgid "Time"
@@ -23533,6 +24666,10 @@ msgstr "يجرّب ميزات زرزور قبل الجميع."
 msgid "Trinidad and Tobago"
 msgstr "ترينيداد وتوباغو"
 
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Tropical Leaves"
+msgstr "أوراق استوائية"
+
 #: components/ui/components/design/LoadingScreen.tsx
 msgid "Troubleshooting"
 msgstr "استكشاف الأخطاء وإصلاحها"
@@ -23652,6 +24789,14 @@ msgstr "جرّب {0}"
 #: src/interface/designs/FittingRoom.tsx
 #~ msgid "Trying this on"
 #~ msgstr "تجربة هذا التصميم"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Tulip Crown"
+msgstr "تاج التوليب"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Tulip Ring"
+msgstr "حلقة الزنابق"
 
 #: components/ui/components/features/profiles/plateNames.ts
 msgid "Tunisia"
@@ -23785,6 +24930,14 @@ msgstr "آلة كاتبة"
 msgid "Typing and performance"
 msgstr "الكتابة والأداء"
 
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Tyre Ring"
+msgstr "الإطار"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Tyre Smoke"
+msgstr "دخان الإطارات"
+
 #: components/ui/components/features/profiles/plateNames.ts
 msgid "Uganda"
 msgstr "أوغندا"
@@ -23792,6 +24945,14 @@ msgstr "أوغندا"
 #: components/ui/components/features/profiles/plateNames.ts
 msgid "Ukraine"
 msgstr "أوكرانيا"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Umayyad Square"
+msgstr "ساحة الأمويين"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Umbrellas"
+msgstr "مظلّات"
 
 #: components/app/interface/settings/user/safety/SafetyDashboard.tsx
 msgid "Unassign"
@@ -23838,6 +24999,7 @@ msgstr "بدون تغيير"
 
 #: components/app/interface/settings/user/notifications/Sounds.tsx
 #: components/ui/components/features/voice/callCard/VoiceCallCardActions.tsx
+#: src/interface/channels/voice/VoiceChannel.tsx
 #: src/interface/navigation/channels/AccountBar.tsx
 msgid "Undeafen"
 msgstr "إلغاء كتم السماعة"
@@ -24690,6 +25852,7 @@ msgstr "محدود جدًا"
 msgid "via {0}"
 msgstr "عبر {0}"
 
+#: components/ui/components/features/profiles/pack/labels.generated.ts
 #: src/interface/designs/Looks.tsx
 msgid "Victory"
 msgstr "انتصار"
@@ -25004,11 +26167,23 @@ msgstr "تحذير وإسكات وطرد وحظر، بمخالفات مرقّم�
 msgid "Warning"
 msgstr "تحذير"
 
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Warp Ring"
+msgstr "حلقة القفزة"
+
 #. placeholder {0}: automod.rule
 #. placeholder {1}: channelName(automod.channel)
 #: components/app/interface/settings/server/audit/AuditLog.tsx
 msgid "was stopped by the AutoMod rule {0} in {1}"
 msgstr "أوقفته قاعدة الإشراف التلقائي {0} في {1}"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Water Wheel"
+msgstr "الناعورة"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Waterwheel"
+msgstr "الناعورة"
 
 #: components/ui/components/features/profiles/labels.ts
 msgid "Wave lines"
@@ -25268,6 +26443,10 @@ msgstr "رحّب بهم في #{0}"
 msgid "Welcome to {0}"
 msgstr "أهلًا بك في {0}"
 
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Welcome Tray"
+msgstr "صينيّة الضيافة"
+
 #. placeholder {0}: client().user?.displayName
 #: src/interface/lobby/Lobby.tsx
 msgid "Welcome, {0}! Glad you are here."
@@ -25409,6 +26588,14 @@ msgstr "ما المشكلة؟ يصل بلاغك إلى فريق الثقة وا�
 #: components/app/interface/settings/user/plugins/PluginDetail.tsx
 msgid "What's wrong?"
 msgstr "ما المشكلة؟"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Wheels of Hama"
+msgstr "نواعير حماة"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Wheels of Time"
+msgstr "عجلات الوقت"
 
 #: components/app/interface/settings/server/AutoModSettings.tsx
 msgid "When it matches"
@@ -25589,6 +26776,14 @@ msgstr "من يمكنه مراسلتك"
 msgid "Who can publish community designs"
 msgstr "من يمكنه نشر زينة المجتمع"
 
+#: components/app/interface/settings/category/CategoryPermissionsOverview.tsx
+msgid "Who can see this category"
+msgstr "من يرى هذه الفئة"
+
+#: components/app/interface/settings/CategorySettings.tsx
+msgid "Who can see this category and what they can do in it."
+msgstr "من يرى هذه الفئة وما الذي يستطيع فعله فيها."
+
 #: components/app/interface/settings/channel/permissions/ChannelVisibility.tsx
 msgid "Who can see this channel"
 msgstr "من يرى هذه القناة"
@@ -25646,6 +26841,10 @@ msgstr "من سيجتمع هنا؟"
 #: src/interface/events/EventCard.tsx
 msgid "Who's interested"
 msgstr "من المهتمون"
+
+#: components/app/interface/settings/channel/Overview.tsx
+msgid "Whoever joins this channel gets a voice room of their own next to it. The room is removed when everyone has left it."
+msgstr "من ينضم إلى هذه القناة يحصل على غرفة صوتية خاصة به بجانبها. تُحذف الغرفة عندما يغادرها الجميع."
 
 #: components/app/interface/settings/server/webhooks/ServerWebhooks.tsx
 msgid "Whoever runs this Zrzur server can turn them on in its configuration."
@@ -25759,9 +26958,17 @@ msgstr "تجديد الأجنحة، {name}"
 msgid "Wings: {0}"
 msgstr "الأجنحة: {0}"
 
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Winner's Cup"
+msgstr "كأس الفائز"
+
 #: src/interface/designs/Looks.tsx
 msgid "Winter"
 msgstr "شتاء"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Winter Pines"
+msgstr "صنوبر الشتاء"
 
 #. placeholder {0}: names.join(", ")
 #: components/ui/components/features/voice/callCard/VoiceCallCardPreview.tsx
@@ -25780,6 +26987,10 @@ msgstr "مع ريشة"
 #: components/app/interface/settings/user/Privacy.tsx
 msgid "With Nobody, no one can put you in a group chat, not even friends. You can still make your own."
 msgstr "عند اختيار «لا أحد» لا يستطيع أحد إضافتك إلى مجموعة، ولا حتى أصدقاؤك. ويبقى بإمكانك إنشاء مجموعاتك الخاصة."
+
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "With the category selected in the channel list, if you manage the server."
+msgstr "عند تحديد الفئة في قائمة القنوات، إن كنت تدير السيرفر."
 
 #: components/app/interface/settings/user/plugins/DeveloperTab.tsx
 #: components/app/interface/settings/user/profile/studio/StudioDesign.tsx
@@ -25822,6 +27033,10 @@ msgstr "بلا فئة"
 #: components/ui/components/features/profiles/badges/useBadgeText.ts
 msgid "Won a tournament or came first in the games bot."
 msgstr "فاز ببطولة أو حلّ أولًا في بوت الألعاب."
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Woods Frame"
+msgstr "إطار الغابة"
 
 #: components/app/interface/settings/server/AutoModSettings.tsx
 msgid "Words and phrases"
@@ -25916,6 +27131,10 @@ msgstr "اكتب رسائل وجدولها وعدّلها لينشرها الب�
 #: components/ui/components/features/profiles/labels.ts
 #~ msgid "Writing"
 #~ msgstr "الكتابة"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "XP Ring"
+msgstr "حلقة الخبرة"
 
 #: components/ui/components/design/BirthMonthField.tsx
 msgid "Year"
@@ -26376,6 +27595,10 @@ msgstr "انقطع اتصالك بالصوت."
 #: components/modal/modals/SignOutSessions.tsx
 msgid "You will need to sign in again."
 msgstr "ستحتاج إلى تسجيل الدخول مرة أخرى."
+
+#: components/modal/modals/CloseTicket.tsx
+msgid "You will no longer see this ticket. The staff keep it and can open it again for you."
+msgstr "لن ترى هذه التذكرة بعد الآن. يحتفظ بها الطاقم ويمكنه إعادة فتحها لك."
 
 #: src/interface/navigation/servers/UserMenu.tsx
 #~ msgid "You will not receive any notifications"
@@ -26950,6 +28173,10 @@ msgstr "اشتراكاتك"
 msgid "Your system keeps <0>{keys}</0> for itself. Choose other keys."
 msgstr "يحتفظ نظامك بـ <0>{keys}</0> لنفسه. اختر مفاتيح أخرى."
 
+#: src/interface/tickets/TicketLink.tsx
+msgid "Your ticket"
+msgstr "تذكرتك"
+
 #: components/app/interface/settings/user/support/ContactSupport.tsx
 msgid "Your tickets couldn't be loaded. Try again later."
 msgstr "تعذّر تحميل تذاكرك. حاول لاحقاً."
@@ -27046,6 +28273,10 @@ msgstr "تعذّر الوصول إلى زرزور المساعد الآن. حا�
 #: components/app/interface/settings/user/voice/GameKeysOptions.tsx
 msgid "Zrzur could not start listening for keys on this computer. Your keys work while the Zrzur window is active."
 msgstr "تعذّر على زرزور بدء الاستماع للمفاتيح على هذا الحاسوب. مفاتيحك تعمل ما دامت نافذة زرزور نشطة."
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Zrzur Crest"
+msgstr "شارة زرزور"
 
 #: components/ui/components/features/profiles/badges/useBadgeText.ts
 msgid "Zrzur Developer"
@@ -27150,6 +28381,22 @@ msgstr "شريك زرزور"
 #~ msgid "Zrzur Pink"
 #~ msgstr "زهري زرزور"
 
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Zrzur Pixel Badge"
+msgstr "شارة زرزور"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Zrzur Pixel Crew"
+msgstr "رفاق زرزور"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Zrzur Pixel Home"
+msgstr "بيت زرزور"
+
+#: components/ui/components/features/profiles/pack/labels.generated.ts
+msgid "Zrzur Pixel Rise"
+msgstr "صعود زرزور"
+
 #: components/app/interface/settings/user/voice/GameKeysOptions.tsx
 msgid "Zrzur reacts only to the keys you choose here. It records nothing and sends nothing."
 msgstr "يستجيب زرزور فقط للمفاتيح التي تختارها هنا. لا يسجّل شيئًا ولا يرسل شيئًا."
@@ -27239,1158 +28486,3 @@ msgstr "زرزور، مباشرةً على <0>سطح مكتبك.</0>"
 #: components/app/interface/settings/user/appearance/AppearanceMenu.tsx
 #~ msgid "Zrzur's own look: very dark neutral panels with Zrzur Pink as the one accent."
 #~ msgstr "مظهر زرزور الخاص: لوحات داكنة جدًا بألوان محايدة، وزهري زرزور هو اللون المميز الوحيد."
-
-#: components/ui/components/features/profiles/pack/labels.generated.ts
-msgid "Ablaq Arch"
-msgstr "القوس الأبلق"
-
-#: components/ui/components/features/profiles/pack/labels.generated.ts
-msgid "Alpine Lake"
-msgstr "بحيرة الألب"
-
-#: components/ui/components/features/profiles/pack/labels.generated.ts
-msgid "Anchor"
-msgstr "المرساة"
-
-#: components/ui/components/features/profiles/pack/labels.generated.ts
-msgid "Arcade Night"
-msgstr "ليل الأركيد"
-
-#: components/ui/components/features/profiles/pack/labels.generated.ts
-msgid "Arcade Row"
-msgstr "صفّ الأركيد"
-
-#: components/ui/components/features/profiles/pack/labels.generated.ts
-msgid "Arcane Runes"
-msgstr "رموز سحرية"
-
-#: components/ui/components/features/profiles/pack/labels.generated.ts
-msgid "Arena Lights"
-msgstr "أضواء الساحة"
-
-#: components/ui/components/features/profiles/pack/labels.generated.ts
-msgid "Arena Marks"
-msgstr "علامات الساحة"
-
-#: components/ui/components/features/profiles/pack/labels.generated.ts
-msgid "Back of the Net"
-msgstr "الشبكة"
-
-#: components/ui/components/features/profiles/pack/labels.generated.ts
-msgid "Balloon Sky"
-msgstr "سماء المناطيد"
-
-#: components/ui/components/features/profiles/pack/labels.generated.ts
-msgid "Bamboo Mist"
-msgstr "ضباب الخيزران"
-
-#: components/ui/components/features/profiles/pack/labels.generated.ts
-msgid "Bamboo Ring"
-msgstr "حلقة الخيزران"
-
-#: components/ui/components/features/profiles/pack/labels.generated.ts
-msgid "Beach Day"
-msgstr "يوم الشاطئ"
-
-#: components/ui/components/features/profiles/pack/labels.generated.ts
-msgid "Bear Ears"
-msgstr "آذان دبّ"
-
-#: components/ui/components/features/profiles/pack/labels.generated.ts
-msgid "Black Cat Ears"
-msgstr "آذان قطّة سوداء"
-
-#: components/ui/components/features/profiles/pack/labels.generated.ts
-msgid "Blizzard"
-msgstr "عاصفة ثلج"
-
-#: components/ui/components/features/profiles/pack/labels.generated.ts
-msgid "Boo"
-msgstr "بووو"
-
-#: components/ui/components/features/profiles/pack/labels.generated.ts
-msgid "Bronze Rank"
-msgstr "رتبة برونزي"
-
-#: components/ui/components/features/profiles/pack/labels.generated.ts
-msgid "Bunny Ears"
-msgstr "آذان أرنب"
-
-#: components/ui/components/features/profiles/pack/labels.generated.ts
-msgid "Camp Night"
-msgstr "ليلة المخيّم"
-
-#: components/ui/components/features/profiles/pack/labels.generated.ts
-msgid "Campfire"
-msgstr "نار المخيّم"
-
-#: components/ui/components/features/profiles/pack/labels.generated.ts
-msgid "Caravan"
-msgstr "القافلة"
-
-#: components/ui/components/features/profiles/pack/labels.generated.ts
-msgid "Cash Rain"
-msgstr "مطر النقود"
-
-#: components/ui/components/features/profiles/pack/labels.generated.ts
-msgid "Castle Moon"
-msgstr "قلعة القمر"
-
-#: components/ui/components/features/profiles/pack/labels.generated.ts
-msgid "Checkered Ring"
-msgstr "حلقة المربّعات"
-
-#: components/ui/components/features/profiles/pack/labels.generated.ts
-msgid "Citadel Night"
-msgstr "ليل القلعة"
-
-#: components/ui/components/features/profiles/pack/labels.generated.ts
-msgid "Citrus Splash"
-msgstr "رشّة حمضيات"
-
-#: components/ui/components/features/profiles/pack/labels.generated.ts
-msgid "City Frame"
-msgstr "إطار المدينة"
-
-#: components/ui/components/features/profiles/pack/labels.generated.ts
-msgid "Cloud Headphones"
-msgstr "سمّاعات بيضاء"
-
-#: components/ui/components/features/profiles/pack/labels.generated.ts
-msgid "Coast Cruise"
-msgstr "جولة الساحل"
-
-#: components/ui/components/features/profiles/pack/labels.generated.ts
-msgid "Coast Drive"
-msgstr "طريق الساحل"
-
-#: components/ui/components/features/profiles/pack/labels.generated.ts
-msgid "Coast Frame"
-msgstr "إطار الساحل"
-
-#: components/ui/components/features/profiles/pack/labels.generated.ts
-msgid "Coin Rush"
-msgstr "سيل العملات"
-
-#: components/ui/components/features/profiles/pack/labels.generated.ts
-msgid "Columns at Dusk"
-msgstr "أعمدة الغروب"
-
-#: components/ui/components/features/profiles/pack/labels.generated.ts
-msgid "Compass"
-msgstr "البوصلة"
-
-#: components/ui/components/features/profiles/pack/labels.generated.ts
-msgid "Crane Flight"
-msgstr "طيران الطيور الورقية"
-
-#: components/ui/components/features/profiles/pack/labels.generated.ts
-msgid "Crescent Seat"
-msgstr "حضن الهلال"
-
-#: components/ui/components/features/profiles/pack/labels.generated.ts
-msgid "Crossed Blades"
-msgstr "السيفان"
-
-#: components/ui/components/features/profiles/pack/labels.generated.ts
-msgid "Crosshair"
-msgstr "مؤشّر التصويب"
-
-#: components/ui/components/features/profiles/pack/labels.generated.ts
-msgid "Daisy Chain"
-msgstr "سلسلة الأقحوان"
-
-#: components/ui/components/features/profiles/pack/labels.generated.ts
-msgid "Damascus Night"
-msgstr "ليل دمشق"
-
-#: components/ui/components/features/profiles/pack/labels.generated.ts
-msgid "Damask Rose"
-msgstr "الوردة الشامية"
-
-#: components/ui/components/features/profiles/pack/labels.generated.ts
-msgid "Deep Blue"
-msgstr "الأزرق العميق"
-
-#: components/ui/components/features/profiles/pack/labels.generated.ts
-msgid "Deep Glow"
-msgstr "ضوء الأعماق"
-
-#: components/ui/components/features/profiles/pack/labels.generated.ts
-msgid "Desert Night"
-msgstr "ليل الصحراء"
-
-#: components/ui/components/features/profiles/pack/labels.generated.ts
-msgid "Diamond Plate"
-msgstr "لوحة ماسي"
-
-#: components/ui/components/features/profiles/pack/labels.generated.ts
-msgid "Diamond Rank"
-msgstr "رتبة ماسي"
-
-#: components/ui/components/features/profiles/pack/labels.generated.ts
-msgid "Dino Dash"
-msgstr "ركضة الديناصور"
-
-#: components/ui/components/features/profiles/pack/labels.generated.ts
-msgid "Dino Frame"
-msgstr "إطار الديناصور"
-
-#: components/ui/components/features/profiles/pack/labels.generated.ts
-msgid "Doubloons"
-msgstr "دنانير الكنز"
-
-#: components/ui/components/features/profiles/pack/labels.generated.ts
-msgid "Drift Night"
-msgstr "ليلة الانزلاق"
-
-#: components/ui/components/features/profiles/pack/labels.generated.ts
-msgid "Dune Crescent"
-msgstr "هلال الكثبان"
-
-#: components/ui/components/features/profiles/pack/labels.generated.ts
-msgid "Dungeon Hall"
-msgstr "قاعة القلعة"
-
-#: components/ui/components/features/profiles/pack/labels.generated.ts
-msgid "Edelweiss and Snow"
-msgstr "إديلفايس وثلج"
-
-#: components/ui/components/features/profiles/pack/labels.generated.ts
-msgid "Edelweiss Ring"
-msgstr "حلقة الإديلفايس"
-
-#: components/ui/components/features/profiles/pack/labels.generated.ts
-msgid "Far Orbit"
-msgstr "مدار بعيد"
-
-#: components/ui/components/features/profiles/pack/labels.generated.ts
-msgid "Flame Tongues"
-msgstr "ألسنة اللهب"
-
-#: components/ui/components/features/profiles/pack/labels.generated.ts
-msgid "Flower Crown"
-msgstr "إكليل زهر"
-
-#: components/ui/components/features/profiles/pack/labels.generated.ts
-msgid "Fox Ears"
-msgstr "آذان ثعلب"
-
-#: components/ui/components/features/profiles/pack/labels.generated.ts
-msgid "Full HUD"
-msgstr "واجهة كاملة"
-
-#: components/ui/components/features/profiles/pack/labels.generated.ts
-msgid "Gaming Headset"
-msgstr "سمّاعة الألعاب"
-
-#: components/ui/components/features/profiles/pack/labels.generated.ts
-msgid "Ghost Pals"
-msgstr "أصدقاء أشباح"
-
-#: components/ui/components/features/profiles/pack/labels.generated.ts
-msgid "Gifts"
-msgstr "هدايا"
-
-#: components/ui/components/features/profiles/pack/labels.generated.ts
-msgid "Ginger Cat Ears"
-msgstr "آذان قطّة برتقالية"
-
-#: components/ui/components/features/profiles/pack/labels.generated.ts
-msgid "Goal Bounce"
-msgstr "هدف!"
-
-#: components/ui/components/features/profiles/pack/labels.generated.ts
-msgid "Gold Plate"
-msgstr "لوحة ذهبي"
-
-#: components/ui/components/features/profiles/pack/labels.generated.ts
-msgid "Gold Rank"
-msgstr "رتبة ذهبي"
-
-#: components/ui/components/features/profiles/pack/labels.generated.ts
-msgid "Halo"
-msgstr "هالة"
-
-#: components/ui/components/features/profiles/pack/labels.generated.ts
-msgid "Haunted Hill"
-msgstr "بيت التلّ"
-
-#: components/ui/components/features/profiles/pack/labels.generated.ts
-msgid "Health and Shield"
-msgstr "الصحّة والدرع"
-
-#: components/ui/components/features/profiles/pack/labels.generated.ts
-msgid "Health Bar"
-msgstr "شريط الطاقة"
-
-#: components/ui/components/features/profiles/pack/labels.generated.ts
-msgid "Heart Orbit"
-msgstr "قلوب تدور"
-
-#: components/ui/components/features/profiles/pack/labels.generated.ts
-msgid "Heartbeat"
-msgstr "نبض"
-
-#: components/ui/components/features/profiles/pack/labels.generated.ts
-msgid "Hibiscus Ring"
-msgstr "حلقة الكركديه"
-
-#: components/ui/components/features/profiles/pack/labels.generated.ts
-msgid "Jasmine Fall"
-msgstr "مطر الياسمين"
-
-#: components/ui/components/features/profiles/pack/labels.generated.ts
-msgid "Jasmine Ring"
-msgstr "طوق الياسمين"
-
-#: components/ui/components/features/profiles/pack/labels.generated.ts
-msgid "Jungle Dusk"
-msgstr "غروب الأدغال"
-
-#: components/ui/components/features/profiles/pack/labels.generated.ts
-msgid "Jungle Leaves"
-msgstr "أوراق الأدغال"
-
-#: components/ui/components/features/profiles/pack/labels.generated.ts
-msgid "Key Rain"
-msgstr "مطر الأزرار"
-
-#: components/ui/components/features/profiles/pack/labels.generated.ts
-msgid "Koi Pond"
-msgstr "بركة الكوي"
-
-#: components/ui/components/features/profiles/pack/labels.generated.ts
-msgid "Lantern Glow"
-msgstr "ضوء الفوانيس"
-
-#: components/ui/components/features/profiles/pack/labels.generated.ts
-msgid "Lantern Night"
-msgstr "ليلة الفوانيس"
-
-#: components/ui/components/features/profiles/pack/labels.generated.ts
-msgid "Lantern Pair"
-msgstr "فانوسان"
-
-#: components/ui/components/features/profiles/pack/labels.generated.ts
-msgid "Laser Run"
-msgstr "سباق الليزر"
-
-#: components/ui/components/features/profiles/pack/labels.generated.ts
-msgid "Lavender Field"
-msgstr "حقل الخزامى"
-
-#: components/ui/components/features/profiles/pack/labels.generated.ts
-msgid "Lavender Wreath"
-msgstr "إكليل الخزامى"
-
-#: components/ui/components/features/profiles/pack/labels.generated.ts
-msgid "Level Rise"
-msgstr "صعود المستوى"
-
-#: components/ui/components/features/profiles/pack/labels.generated.ts
-msgid "Level Up"
-msgstr "ترقية المستوى"
-
-#: components/ui/components/features/profiles/pack/labels.generated.ts
-msgid "Liftoff"
-msgstr "إقلاع"
-
-#: components/ui/components/features/profiles/pack/labels.generated.ts
-msgid "Loot Drop"
-msgstr "سقوط الغنائم"
-
-#: components/ui/components/features/profiles/pack/labels.generated.ts
-msgid "Loot Ring"
-msgstr "حلقة الغنائم"
-
-#: components/ui/components/features/profiles/pack/labels.generated.ts
-msgid "Lucky Roll"
-msgstr "رمية حظ"
-
-#: components/ui/components/features/profiles/pack/labels.generated.ts
-msgid "Magma Flow"
-msgstr "نهر الحمم"
-
-#: components/ui/components/features/profiles/pack/labels.generated.ts
-msgid "Majlis Evening"
-msgstr "سهرة المجلس"
-
-#: components/ui/components/features/profiles/pack/labels.generated.ts
-msgid "Marquee Bulbs"
-msgstr "لمبات اللافتة"
-
-#: components/ui/components/features/profiles/pack/labels.generated.ts
-msgid "Master Plate"
-msgstr "لوحة أسطوري"
-
-#: components/ui/components/features/profiles/pack/labels.generated.ts
-msgid "Master Rank"
-msgstr "رتبة أسطوري"
-
-#: components/ui/components/features/profiles/pack/labels.generated.ts
-msgid "Melody"
-msgstr "لحن"
-
-#: components/ui/components/features/profiles/pack/labels.generated.ts
-msgid "Midnight Headphones"
-msgstr "سمّاعات ليلية"
-
-#: components/ui/components/features/profiles/pack/labels.generated.ts
-msgid "Moonlit Roofs"
-msgstr "أسطح القمر"
-
-#: components/ui/components/features/profiles/pack/labels.generated.ts
-msgid "Music Notes"
-msgstr "نوتات"
-
-#: components/ui/components/features/profiles/pack/labels.generated.ts
-msgid "Neon Flicker"
-msgstr "نيون يرمش"
-
-#: components/ui/components/features/profiles/pack/labels.generated.ts
-msgid "Night Visit"
-msgstr "ليلة الزوّار"
-
-#: components/ui/components/features/profiles/pack/labels.generated.ts
-msgid "Old City Walls"
-msgstr "أسوار المدينة"
-
-#: components/ui/components/features/profiles/pack/labels.generated.ts
-msgid "Olive Wreath"
-msgstr "إكليل الزيتون"
-
-#: components/ui/components/features/profiles/pack/labels.generated.ts
-msgid "Orange Slice"
-msgstr "شريحة برتقال"
-
-#: components/ui/components/features/profiles/pack/labels.generated.ts
-msgid "Oud Night"
-msgstr "ليلة العود"
-
-#: components/ui/components/features/profiles/pack/labels.generated.ts
-msgid "Pad Ring"
-msgstr "يد التحكّم"
-
-#: components/ui/components/features/profiles/pack/labels.generated.ts
-msgid "Paw Hop"
-msgstr "قفزات الأقدام"
-
-#: components/ui/components/features/profiles/pack/labels.generated.ts
-msgid "Paw Ring"
-msgstr "حلقة الأقدام"
-
-#: components/ui/components/features/profiles/pack/labels.generated.ts
-msgid "Pet Parade"
-msgstr "موكب الحيوانات"
-
-#: components/ui/components/features/profiles/pack/labels.generated.ts
-msgid "Photo Finish"
-msgstr "خطّ النهاية"
-
-#: components/ui/components/features/profiles/pack/labels.generated.ts
-msgid "Picnic Ring"
-msgstr "حلقة النزهة"
-
-#: components/ui/components/features/profiles/pack/labels.generated.ts
-msgid "Pink Headphones"
-msgstr "سمّاعات وردية"
-
-#: components/ui/components/features/profiles/pack/labels.generated.ts
-msgid "Pitch Ring"
-msgstr "حلقة الملعب"
-
-#: components/ui/components/features/profiles/pack/labels.generated.ts
-msgid "Pixel Diner"
-msgstr "مطعم البكسل"
-
-#: components/ui/components/features/profiles/pack/labels.generated.ts
-msgid "Pixel Frame"
-msgstr "إطار البكسل"
-
-#: components/ui/components/features/profiles/pack/labels.generated.ts
-msgid "Pixel Meadow"
-msgstr "مرج البكسل"
-
-#: components/ui/components/features/profiles/pack/labels.generated.ts
-msgid "Pixel Orbit"
-msgstr "مدار البكسل"
-
-#: components/ui/components/features/profiles/pack/labels.generated.ts
-msgid "Pixel Reef"
-msgstr "شِعاب البكسل"
-
-#: components/ui/components/features/profiles/pack/labels.generated.ts
-msgid "Pixel Skyline"
-msgstr "أفق البكسل"
-
-#: components/ui/components/features/profiles/pack/labels.generated.ts
-msgid "Pixel Valley"
-msgstr "وادي البكسل"
-
-#: components/ui/components/features/profiles/pack/labels.generated.ts
-msgid "Planet Rings"
-msgstr "حلقات الكوكب"
-
-#: components/ui/components/features/profiles/pack/labels.generated.ts
-msgid "Platinum Rank"
-msgstr "رتبة بلاتيني"
-
-#: components/ui/components/features/profiles/pack/labels.generated.ts
-msgid "Pulse Ring"
-msgstr "حلقة النبض"
-
-#: components/ui/components/features/profiles/pack/labels.generated.ts
-msgid "Pulse Wave"
-msgstr "موجة النبض"
-
-#: components/ui/components/features/profiles/pack/labels.generated.ts
-msgid "Quest Frame"
-msgstr "إطار المغامرة"
-
-#: components/ui/components/features/profiles/pack/labels.generated.ts
-msgid "Race Track"
-msgstr "الحلبة"
-
-#: components/ui/components/features/profiles/pack/labels.generated.ts
-msgid "Radar"
-msgstr "الرادار"
-
-#: components/ui/components/features/profiles/pack/labels.generated.ts
-msgid "Rain Street"
-msgstr "شارع المطر"
-
-#: components/ui/components/features/profiles/pack/labels.generated.ts
-msgid "Rainbow"
-msgstr "قوس قزح"
-
-#: components/ui/components/features/profiles/pack/labels.generated.ts
-msgid "Rank Up"
-msgstr "ترقية الرتبة"
-
-#: components/ui/components/features/profiles/pack/labels.generated.ts
-msgid "Reef Frame"
-msgstr "إطار الشِعاب"
-
-#: components/ui/components/features/profiles/pack/labels.generated.ts
-msgid "Reef Ring"
-msgstr "حلقة المرجان"
-
-#: components/ui/components/features/profiles/pack/labels.generated.ts
-msgid "Reef Swim"
-msgstr "سباحة الشِعاب"
-
-#: components/ui/components/features/profiles/pack/labels.generated.ts
-msgid "Rev Gauge"
-msgstr "عدّاد الدورات"
-
-#: components/ui/components/features/profiles/pack/labels.generated.ts
-msgid "Rewind"
-msgstr "إرجاع"
-
-#: components/ui/components/features/profiles/pack/labels.generated.ts
-msgid "Ribbon and Bow"
-msgstr "الشريط والعقدة"
-
-#: components/ui/components/features/profiles/pack/labels.generated.ts
-msgid "Ring Road"
-msgstr "الطريق الدائري"
-
-#: components/ui/components/features/profiles/pack/labels.generated.ts
-msgid "Rising Balloons"
-msgstr "صعود المناطيد"
-
-#: components/ui/components/features/profiles/pack/labels.generated.ts
-msgid "Rising Jellies"
-msgstr "صعود القناديل"
-
-#: components/ui/components/features/profiles/pack/labels.generated.ts
-msgid "Rose Fall"
-msgstr "مطر الورد"
-
-#: components/ui/components/features/profiles/pack/labels.generated.ts
-msgid "Rune Circle"
-msgstr "دائرة الرموز"
-
-#: components/ui/components/features/profiles/pack/labels.generated.ts
-msgid "Sadu Ring"
-msgstr "حلقة السدو"
-
-#: components/ui/components/features/profiles/pack/labels.generated.ts
-msgid "Sadu Weave"
-msgstr "نسيج السدو"
-
-#: components/ui/components/features/profiles/pack/labels.generated.ts
-msgid "School of Fish"
-msgstr "سرب السمك"
-
-#: components/ui/components/features/profiles/pack/labels.generated.ts
-msgid "Scoops"
-msgstr "كرات البوظة"
-
-#: components/ui/components/features/profiles/pack/labels.generated.ts
-msgid "Ship's Wheel"
-msgstr "دفّة السفينة"
-
-#: components/ui/components/features/profiles/pack/labels.generated.ts
-msgid "Silver Rank"
-msgstr "رتبة فضّي"
-
-#: components/ui/components/features/profiles/pack/labels.generated.ts
-msgid "Silver Tiara"
-msgstr "تاج فضّي"
-
-#: components/ui/components/features/profiles/pack/labels.generated.ts
-msgid "Sleepy Moon"
-msgstr "قمر نعسان"
-
-#: components/ui/components/features/profiles/pack/labels.generated.ts
-msgid "Snack Frame"
-msgstr "إطار الوجبات"
-
-#: components/ui/components/features/profiles/pack/labels.generated.ts
-msgid "Snack Rain"
-msgstr "مطر الوجبات"
-
-#: components/ui/components/features/profiles/pack/labels.generated.ts
-msgid "Snapshots"
-msgstr "صور فورية"
-
-#: components/ui/components/features/profiles/pack/labels.generated.ts
-msgid "Snow Cap"
-msgstr "قبّعة الثلج"
-
-#: components/ui/components/features/profiles/pack/labels.generated.ts
-msgid "Snow Cat Ears"
-msgstr "آذان قطّة بيضاء"
-
-#: components/ui/components/features/profiles/pack/labels.generated.ts
-msgid "Snowy Peaks"
-msgstr "القمم الثلجية"
-
-#: components/ui/components/features/profiles/pack/labels.generated.ts
-msgid "Space Helmet"
-msgstr "خوذة الفضاء"
-
-#: components/ui/components/features/profiles/pack/labels.generated.ts
-msgid "Speedometer"
-msgstr "عدّاد السرعة"
-
-#: components/ui/components/features/profiles/pack/labels.generated.ts
-msgid "Spring Day"
-msgstr "يوم ربيعي"
-
-#: components/ui/components/features/profiles/pack/labels.generated.ts
-msgid "Spring Meadow"
-msgstr "مرج الربيع"
-
-#: components/ui/components/features/profiles/pack/labels.generated.ts
-msgid "Star Fighter"
-msgstr "مقاتلة النجوم"
-
-#: components/ui/components/features/profiles/pack/labels.generated.ts
-msgid "Start Grid"
-msgstr "خط الانطلاق"
-
-#: components/ui/components/features/profiles/pack/labels.generated.ts
-msgid "Stitch Ring"
-msgstr "حلقة التطريز"
-
-#: components/ui/components/features/profiles/pack/labels.generated.ts
-msgid "Sugar Rush"
-msgstr "رشّة سكّر"
-
-#: components/ui/components/features/profiles/pack/labels.generated.ts
-msgid "Sunflower"
-msgstr "دوّار الشمس"
-
-#: components/ui/components/features/profiles/pack/labels.generated.ts
-msgid "Sunset Boulevard"
-msgstr "شارع الغروب"
-
-#: components/ui/components/features/profiles/pack/labels.generated.ts
-msgid "Supporters' Scarf"
-msgstr "وشاح المشجّعين"
-
-#: components/ui/components/features/profiles/pack/labels.generated.ts
-msgid "Tilted Crown"
-msgstr "تاج مائل"
-
-#: components/ui/components/features/profiles/pack/labels.generated.ts
-msgid "Tropical Leaves"
-msgstr "أوراق استوائية"
-
-#: components/ui/components/features/profiles/pack/labels.generated.ts
-msgid "Tulip Crown"
-msgstr "تاج التوليب"
-
-#: components/ui/components/features/profiles/pack/labels.generated.ts
-msgid "Tyre Ring"
-msgstr "الإطار"
-
-#: components/ui/components/features/profiles/pack/labels.generated.ts
-msgid "Tyre Smoke"
-msgstr "دخان الإطارات"
-
-#: components/ui/components/features/profiles/pack/labels.generated.ts
-msgid "Umbrellas"
-msgstr "مظلّات"
-
-#: components/ui/components/features/profiles/pack/labels.generated.ts
-msgid "Warp Ring"
-msgstr "حلقة القفزة"
-
-#: components/ui/components/features/profiles/pack/labels.generated.ts
-msgid "Waterwheel"
-msgstr "الناعورة"
-
-#: components/ui/components/features/profiles/pack/labels.generated.ts
-msgid "Wheels of Time"
-msgstr "عجلات الوقت"
-
-#: components/ui/components/features/profiles/pack/labels.generated.ts
-msgid "Winner's Cup"
-msgstr "كأس الفائز"
-
-#: components/ui/components/features/profiles/pack/labels.generated.ts
-msgid "Winter Pines"
-msgstr "صنوبر الشتاء"
-
-#: components/ui/components/features/profiles/pack/labels.generated.ts
-msgid "XP Ring"
-msgstr "حلقة الخبرة"
-
-#: components/ui/components/features/profiles/pack/labels.generated.ts
-msgid "Zrzur Crest"
-msgstr "شارة زرزور"
-
-#: components/ui/components/features/profiles/pack/labels.generated.ts
-msgid "Boombox Night"
-msgstr "ليلة الموسيقى"
-
-#: components/ui/components/features/profiles/pack/labels.generated.ts
-msgid "Campfire Night"
-msgstr "ليلة المخيّم"
-
-#: components/ui/components/features/profiles/pack/labels.generated.ts
-msgid "Equaliser Ring"
-msgstr "حلقة الإيقاع"
-
-#: components/ui/components/features/profiles/pack/labels.generated.ts
-msgid "Firefly Dance"
-msgstr "رقصة اليراعات"
-
-#: components/ui/components/features/profiles/pack/labels.generated.ts
-msgid "Firefly Ring"
-msgstr "حلقة اليراعات"
-
-#: components/ui/components/features/profiles/pack/labels.generated.ts
-msgid "Game Shelf"
-msgstr "رفّ الألعاب"
-
-#: components/ui/components/features/profiles/pack/labels.generated.ts
-msgid "Handheld Frame"
-msgstr "إطار الجهاز"
-
-#: components/ui/components/features/profiles/pack/labels.generated.ts
-msgid "Mixtape Frame"
-msgstr "إطار الكاسيت"
-
-#: components/ui/components/features/profiles/pack/labels.generated.ts
-msgid "Pixel Notes"
-msgstr "نوتات البكسل"
-
-#: components/ui/components/features/profiles/pack/labels.generated.ts
-msgid "Pixel Snowfall"
-msgstr "ثلج البكسل"
-
-#: components/ui/components/features/profiles/pack/labels.generated.ts
-msgid "Power Up"
-msgstr "ترقية القوّة"
-
-#: components/ui/components/features/profiles/pack/labels.generated.ts
-msgid "Snow Frame"
-msgstr "إطار الثلج"
-
-#: components/ui/components/features/profiles/pack/labels.generated.ts
-msgid "Snowy Village"
-msgstr "قرية الثلج"
-
-#: components/ui/components/features/profiles/pack/labels.generated.ts
-msgid "Woods Frame"
-msgstr "إطار الغابة"
-
-#: components/ui/components/features/profiles/pack/labels.generated.ts
-msgid "After the Rain"
-msgstr "بعد المطر"
-
-#: components/ui/components/features/profiles/pack/labels.generated.ts
-msgid "Bloom Frame"
-msgstr "إطار الأزهار"
-
-#: components/ui/components/features/profiles/pack/labels.generated.ts
-msgid "Cat Frame"
-msgstr "إطار القطّة"
-
-#: components/ui/components/features/profiles/pack/labels.generated.ts
-msgid "Cat Parade"
-msgstr "موكب القطط"
-
-#: components/ui/components/features/profiles/pack/labels.generated.ts
-msgid "Heart Chain"
-msgstr "سلسلة القلوب"
-
-#: components/ui/components/features/profiles/pack/labels.generated.ts
-msgid "Love Frame"
-msgstr "إطار الحبّ"
-
-#: components/ui/components/features/profiles/pack/labels.generated.ts
-msgid "Love Letter"
-msgstr "رسالة حبّ"
-
-#: components/ui/components/features/profiles/pack/labels.generated.ts
-msgid "Pixel Garden"
-msgstr "حديقة البكسل"
-
-#: components/ui/components/features/profiles/pack/labels.generated.ts
-msgid "Pixel Hearts"
-msgstr "قلوب البكسل"
-
-#: components/ui/components/features/profiles/pack/labels.generated.ts
-msgid "Pixel Petals"
-msgstr "بتلات البكسل"
-
-#: components/ui/components/features/profiles/pack/labels.generated.ts
-msgid "Pixel Rain"
-msgstr "مطر البكسل"
-
-#: components/ui/components/features/profiles/pack/labels.generated.ts
-msgid "Pixel Sprinkles"
-msgstr "رشّات البكسل"
-
-#: components/ui/components/features/profiles/pack/labels.generated.ts
-msgid "Rain and Sun"
-msgstr "مطر وشمس"
-
-#: components/ui/components/features/profiles/pack/labels.generated.ts
-msgid "Rainbow Ring"
-msgstr "حلقة قوس قزح"
-
-#: components/ui/components/features/profiles/pack/labels.generated.ts
-msgid "Rooftop Cats"
-msgstr "قطط الأسطح"
-
-#: components/ui/components/features/profiles/pack/labels.generated.ts
-msgid "Sprinkle Ring"
-msgstr "حلقة الرشّات"
-
-#: components/ui/components/features/profiles/pack/labels.generated.ts
-msgid "Sweet Frame"
-msgstr "إطار الحلويات"
-
-#: components/ui/components/features/profiles/pack/labels.generated.ts
-msgid "Tulip Ring"
-msgstr "حلقة الزنابق"
-
-#: components/ui/components/features/profiles/pack/labels.generated.ts
-msgid "Zrzur Pixel Badge"
-msgstr "شارة زرزور"
-
-#: components/ui/components/features/profiles/pack/labels.generated.ts
-msgid "Zrzur Pixel Crew"
-msgstr "رفاق زرزور"
-
-#: components/ui/components/features/profiles/pack/labels.generated.ts
-msgid "Zrzur Pixel Home"
-msgstr "بيت زرزور"
-
-#: components/ui/components/features/profiles/pack/labels.generated.ts
-msgid "Zrzur Pixel Rise"
-msgstr "صعود زرزور"
-
-#: components/ui/components/features/profiles/pack/labels.generated.ts
-msgid "Apricot Ring"
-msgstr "حلقة المشمش"
-
-#: components/ui/components/features/profiles/pack/labels.generated.ts
-msgid "Apricot Season"
-msgstr "موسم المشمش"
-
-#: components/ui/components/features/profiles/pack/labels.generated.ts
-msgid "Arch of Palmyra"
-msgstr "قوس تدمر"
-
-#: components/ui/components/features/profiles/pack/labels.generated.ts
-msgid "Baklava Ring"
-msgstr "حلقة البقلاوة"
-
-#: components/ui/components/features/profiles/pack/labels.generated.ts
-msgid "Baklava Shower"
-msgstr "مطر البقلاوة"
-
-#: components/ui/components/features/profiles/pack/labels.generated.ts
-msgid "Citadel Frame"
-msgstr "إطار القلعة"
-
-#: components/ui/components/features/profiles/pack/labels.generated.ts
-msgid "Citadel of Aleppo"
-msgstr "قلعة حلب"
-
-#: components/ui/components/features/profiles/pack/labels.generated.ts
-msgid "Colonnade Ring"
-msgstr "حلقة الأعمدة"
-
-#: components/ui/components/features/profiles/pack/labels.generated.ts
-msgid "Damascene Sword"
-msgstr "السيف الدمشقي"
-
-#: components/ui/components/features/profiles/pack/labels.generated.ts
-msgid "Damascus Jasmine"
-msgstr "ياسمين الشام"
-
-#: components/ui/components/features/profiles/pack/labels.generated.ts
-msgid "Damask Roses"
-msgstr "الوردة الدمشقية"
-
-#: components/ui/components/features/profiles/pack/labels.generated.ts
-msgid "Flag of Syria"
-msgstr "علم سوريا"
-
-#: components/ui/components/features/profiles/pack/labels.generated.ts
-msgid "Ghouta Blossom"
-msgstr "زهر الغوطة"
-
-#: components/ui/components/features/profiles/pack/labels.generated.ts
-msgid "Ghouta Orchard"
-msgstr "بستان الغوطة"
-
-#: components/ui/components/features/profiles/pack/labels.generated.ts
-msgid "Grapevine"
-msgstr "دالية العنب"
-
-#: components/ui/components/features/profiles/pack/labels.generated.ts
-msgid "Hearts for Syria"
-msgstr "قلوب سوريا"
-
-#: components/ui/components/features/profiles/pack/labels.generated.ts
-msgid "Jasmine Rain"
-msgstr "مطر الياسمين"
-
-#: components/ui/components/features/profiles/pack/labels.generated.ts
-msgid "Old City Lanterns"
-msgstr "فوانيس الشام"
-
-#: components/ui/components/features/profiles/pack/labels.generated.ts
-msgid "Orontes Ring"
-msgstr "حلقة العاصي"
-
-#: components/ui/components/features/profiles/pack/labels.generated.ts
-msgid "Palmyra Sunset"
-msgstr "غروب تدمر"
-
-#: components/ui/components/features/profiles/pack/labels.generated.ts
-msgid "Petals of Damascus"
-msgstr "ورد دمشق"
-
-#: components/ui/components/features/profiles/pack/labels.generated.ts
-msgid "Pistachio Rain"
-msgstr "مطر الفستق"
-
-#: components/ui/components/features/profiles/pack/labels.generated.ts
-msgid "Pistachio Ring"
-msgstr "حلقة الفستق"
-
-#: components/ui/components/features/profiles/pack/labels.generated.ts
-msgid "Spring in the Ghouta"
-msgstr "ربيع الغوطة"
-
-#: components/ui/components/features/profiles/pack/labels.generated.ts
-msgid "Syrian Flag Ring"
-msgstr "حلقة العلم السوري"
-
-#: components/ui/components/features/profiles/pack/labels.generated.ts
-msgid "Table of Damascus"
-msgstr "سفرة الشام"
-
-#: components/ui/components/features/profiles/pack/labels.generated.ts
-msgid "Umayyad Square"
-msgstr "ساحة الأمويين"
-
-#: components/ui/components/features/profiles/pack/labels.generated.ts
-msgid "Water Wheel"
-msgstr "الناعورة"
-
-#: components/ui/components/features/profiles/pack/labels.generated.ts
-msgid "Welcome Tray"
-msgstr "صينيّة الضيافة"
-
-#: components/ui/components/features/profiles/pack/labels.generated.ts
-msgid "Wheels of Hama"
-msgstr "نواعير حماة"
-#: components/app/interface/settings/category/Overview.tsx
-msgid "A channel follows the category's permissions until you change permissions on the channel itself."
-msgstr "تتبع القناة صلاحيات الفئة إلى أن تغيّر الصلاحيات على القناة نفسها."
-
-#: components/app/interface/settings/CategorySettings.tsx
-msgid "Access"
-msgstr "الدخول"
-
-#: components/app/interface/settings/category/CategoryPermissionsOverview.tsx
-msgid "Administrator: sees every category"
-msgstr "مسؤول: يرى كل الفئات"
-
-#: components/app/interface/settings/category/CategoryPermissionsOverview.tsx
-msgid "Can see this category"
-msgstr "يرى هذه الفئة"
-
-#: components/app/interface/settings/category/CategoryPermissionsOverview.tsx
-msgid "Can't see this category"
-msgstr "لا يرى هذه الفئة"
-
-#: components/app/interface/settings/category/Overview.tsx
-msgid "Category info"
-msgstr "معلومات الفئة"
-
-#: components/app/interface/settings/category/Overview.tsx
-msgid "Category name"
-msgstr "اسم الفئة"
-
-#: components/app/interface/settings/category/CategoryCard.tsx
-#: components/app/interface/settings/server/channels/ChannelsSettings.tsx
-#: components/app/menus/CategoryContextMenu.tsx
-#: src/interface/navigation/channels/ServerSidebar.tsx
-msgid "Category settings"
-msgstr "إعدادات الفئة"
-
-#. placeholder {0}: hiddenCount()
-#: components/app/interface/settings/category/Overview.tsx
-msgid "Channels here that are hidden from you: {0}"
-msgstr "قنوات هنا مخفية عنك: {0}"
-
-#: components/app/interface/settings/category/Overview.tsx
-msgid "Channels in this category"
-msgstr "قنوات هذه الفئة"
-
-#: components/app/interface/settings/category/CategoryPermissionsOverview.tsx
-msgid "Channels that follow this category use these permissions."
-msgstr "القنوات التي تتبع هذه الفئة تستخدم هذه الصلاحيات."
-
-#. placeholder {0}: current().title
-#: components/app/interface/settings/channel/permissions/ChannelPermissionsOverview.tsx
-msgid "Does not follow {0}"
-msgstr "لا تتبع {0}"
-
-#. placeholder {0}: current().title
-#: components/app/interface/settings/channel/permissions/ChannelPermissionsOverview.tsx
-msgid "Follow {0}?"
-msgstr "اتباع {0}؟"
-
-#: components/app/interface/settings/category/Overview.tsx
-#: components/app/interface/settings/channel/permissions/ChannelPermissionsOverview.tsx
-msgid "Follow category"
-msgstr "اتباع الفئة"
-
-#: components/app/interface/settings/category/Overview.tsx
-msgid "Follow the category?"
-msgstr "اتباع الفئة؟"
-
-#. placeholder {0}: current().title
-#: components/app/interface/settings/channel/permissions/ChannelPermissionsOverview.tsx
-msgid "Follows {0}"
-msgstr "تتبع {0}"
-
-#: components/app/interface/settings/category/Overview.tsx
-msgid "Follows the category"
-msgstr "تتبع الفئة"
-
-#: components/app/interface/settings/category/CategoryPermissionsOverview.tsx
-msgid "Hidden from everyone except the roles you let in below. Its name stays visible to people who can see a channel inside it, and to those who manage channels or permissions or read the audit log."
-msgstr "مخفية عن الجميع ما عدا الأدوار التي تسمح لها أدناه. يبقى اسمها ظاهرًا لمن يرى قناة بداخلها، ولمن يدير القنوات أو الصلاحيات أو يقرأ سجل التدقيق."
-
-#: components/app/interface/settings/category/CategoryPermissionsOverview.tsx
-msgid "Hide this category from {role}"
-msgstr "إخفاء هذه الفئة عن {role}"
-
-#: components/app/interface/settings/channel/permissions/ChannelVisibility.tsx
-msgid "Hide this channel from {role}"
-msgstr "إخفاء هذه القناة عن {role}"
-
-#: components/app/interface/settings/CategorySettings.tsx
-msgid "It was deleted, or you can no longer see it."
-msgstr "حُذفت، أو لم يعد بإمكانك رؤيتها."
-
-#: components/modal/modals/DeleteCategory.tsx
-msgid "Its channels stay, and the same people keep seeing them. Once the category is deleted, there's no going back."
-msgstr "تبقى قنواتها، ويستمر الأشخاص أنفسهم في رؤيتها. بعد حذف الفئة لا يمكن التراجع."
-
-#: components/app/interface/settings/category/CategoryPermissionsOverview.tsx
-msgid "Let {role} see this category"
-msgstr "السماح لـ {role} برؤية هذه الفئة"
-
-#: components/app/interface/settings/channel/permissions/ChannelVisibility.tsx
-msgid "Let {role} see this channel"
-msgstr "السماح لـ {role} برؤية هذه القناة"
-
-#. placeholder {0}: channel.name
-#: components/app/interface/settings/category/Overview.tsx
-msgid "Make {0} follow the category"
-msgstr "اجعل {0} تتبع الفئة"
-
-#: components/app/interface/settings/category/Overview.tsx
-msgid "Make all follow"
-msgstr "اجعل الكل يتبع"
-
-#: components/app/interface/settings/category/Overview.tsx
-msgid "No channels in this category yet."
-msgstr "لا توجد قنوات في هذه الفئة بعد."
-
-#: components/app/interface/settings/category/Overview.tsx
-msgid "One short line about this category"
-msgstr "سطر قصير واحد عن هذه الفئة"
-
-#: components/app/interface/settings/user/Keybinds.tsx
-msgid "Open a category's settings"
-msgstr "فتح إعدادات فئة"
-
-#: components/app/interface/settings/category/Overview.tsx
-msgid "Own permissions"
-msgstr "صلاحيات خاصة"
-
-#: components/app/interface/settings/category/CategoryPermissionsOverview.tsx
-#: src/interface/navigation/channels/ServerSidebar.tsx
-msgid "Private category"
-msgstr "فئة خاصة"
-
-#: components/app/interface/settings/category/CategoryPermissionsOverview.tsx
-msgid "Some channels here can be seen by people outside this category"
-msgstr "بعض القنوات هنا يراها أشخاص من خارج هذه الفئة"
-
-#: components/app/interface/settings/CategorySettings.tsx
-msgid "The name, the note and the channels inside."
-msgstr "الاسم والملاحظة والقنوات التي بداخلها."
-
-#: components/app/interface/settings/category/CategoryPermissionsOverview.tsx
-msgid "The server owner and whoever manages channels or permissions see every category."
-msgstr "مالك السيرفر ومن يدير القنوات أو الصلاحيات يرون كل الفئات."
-
-#. placeholder {0}: stillOpen() .map((channel) => channel.name) .join(", ")
-#: components/app/interface/settings/category/CategoryPermissionsOverview.tsx
-msgid "They have their own permissions: {0}. Make them follow the category in Overview."
-msgstr "لها صلاحيات خاصة: {0}. اجعلها تتبع الفئة من «نظرة عامة»."
-
-#: components/app/interface/settings/CategorySettings.tsx
-msgid "This category is no longer here."
-msgstr "هذه الفئة لم تعد موجودة."
-
-#: components/app/interface/settings/category/CategoryPermissionsOverview.tsx
-msgid "Who can see this category"
-msgstr "من يرى هذه الفئة"
-
-#: components/app/interface/settings/CategorySettings.tsx
-msgid "Who can see this category and what they can do in it."
-msgstr "من يرى هذه الفئة وما الذي يستطيع فعله فيها."
-
-#: components/app/interface/settings/user/Keybinds.tsx
-msgid "With the category selected in the channel list, if you manage the server."
-msgstr "عند تحديد الفئة في قائمة القنوات، إن كنت تدير السيرفر."
-

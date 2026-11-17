@@ -101,6 +101,11 @@ const DeleteCategoryModal = lazy(() =>
     default: m.DeleteCategoryModal,
   })),
 );
+const CloseTicketModal = lazy(() =>
+  import("./modals/CloseTicket").then((m) => ({
+    default: m.CloseTicketModal,
+  })),
+);
 const DeleteChannelModal = lazy(() =>
   import("./modals/DeleteChannel").then((m) => ({
     default: m.DeleteChannelModal,
@@ -396,6 +401,8 @@ export function RenderModal(props: ActiveModal & { onClose: () => void }) {
       return <CustomStatusModal {...modalProps} />;
     case "delete_bot":
       return <DeleteBotModal {...modalProps} />;
+    case "close_ticket":
+      return <CloseTicketModal {...modalProps} />;
     case "delete_channel":
       return <DeleteChannelModal {...modalProps} />;
     case "delete_category":

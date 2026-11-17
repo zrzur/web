@@ -2,6 +2,12 @@
 
 ## Unreleased
 
+### Temporary voice rooms and tickets (2026-11-17)
+
+* **Room maker:** a voice channel can be switched to "Room maker" in its settings. Whoever joins it gets a voice room of their own next to it, named after them; they can rename it, set its user limit and remove it. The room goes when everyone has left.
+* **Tickets:** switched on under Server settings, Overview, Tickets (category, the roles that answer, a first message). Members then see "Open a ticket" at the top of the channel list; it opens a private channel with the staff. "Close ticket" is in the channel header for the member and the staff; the staff can reopen a closed ticket.
+* English, Arabic, German, French, Spanish, Russian and Chinese.
+
 ### Design pack (2026-11-16)
 
 * **250 new designs by Zrzur**, free for everyone: 125 avatar decorations, 67 nameplates and 58 profile effects, in 76 sets. Pixel art for games (arcade, quest, racing, a sunset coast, an arcade hall, a handheld console and more), nature and seasons, the Levant, rank emblems and a game HUD, ears, headphones and crowns, and pixel sets about Syria: the flag, Damascus and its sword, the Ghouta, Aleppo, Hama, Palmyra and the Syrian table. Every name is in English, Arabic and German.

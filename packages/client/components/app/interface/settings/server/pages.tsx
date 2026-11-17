@@ -22,6 +22,7 @@ import { ServerOwnership } from "./ServerOwnership";
 import { ServerPreview } from "./ServerPreview";
 import { ServerVerification } from "./ServerVerification";
 import { ThreadFeatures } from "./ThreadFeatures";
+import { TicketsSettings } from "./TicketsSettings";
 import { ListServerBans } from "./bans/ListBans";
 import { AuditLog } from "./audit/AuditLog";
 import { ChannelExtras } from "./channels/ChannelExtras";
@@ -122,6 +123,17 @@ export function OverviewPage(props: { server: Server }) {
           }
         >
           <EventsLobbySwitches server={props.server} />
+        </Anchor>
+
+        <Anchor
+          id="tickets"
+          needs={missing(props.server, "ManageServer")}
+          title={<Trans context="server-settings">Tickets</Trans>}
+          description={
+            <Trans>Members open a private channel with your staff.</Trans>
+          }
+        >
+          <TicketsSettings server={props.server} />
         </Anchor>
 
         <Anchor

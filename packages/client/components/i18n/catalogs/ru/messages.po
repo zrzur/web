@@ -1445,6 +1445,10 @@ msgstr "Место в Обзоре"
 msgid "A private channel"
 msgstr "Приватный канал"
 
+#: src/interface/tickets/TicketLink.tsx
+msgid "A private channel between you and the staff of this server."
+msgstr "Личный канал между вами и командой этого сервера."
+
 #: components/app/interface/settings/user/safety/ReportsAndStanding.tsx
 msgid "A report from another person."
 msgstr "Жалоба от другого человека."
@@ -1545,6 +1549,10 @@ msgstr "У подкоманды есть только имя, описание �
 #: src/interface/events/EventCard.tsx
 msgid "A text channel"
 msgstr "Текстовый канал"
+
+#: components/app/interface/settings/server/TicketsSettings.tsx
+msgid "A ticket is a private channel: only the member who opened it, the roles you pick and the people who see every channel can read it."
+msgstr "Тикет — это личный канал: его могут читать только открывший его участник, выбранные вами роли и те, кто видит все каналы."
 
 #: components/app/interface/settings/user/profile/CreatorStudio.tsx
 #~ msgid "A transparent animation that plays once over a profile. 576 × 1024 px, up to 4 seconds, up to 2 MB. Reviewers look at it before it goes live."
@@ -4131,6 +4139,7 @@ msgstr "Канада"
 #: components/modal/modals/BanMember.tsx
 #: components/modal/modals/BanNonMember.tsx
 #: components/modal/modals/BulkDeleteMessages.tsx
+#: components/modal/modals/CloseTicket.tsx
 #: components/modal/modals/CreateBot.tsx
 #: components/modal/modals/CreateCategory.tsx
 #: components/modal/modals/CreateChannel.tsx
@@ -4351,6 +4360,10 @@ msgstr "Категории"
 #: components/app/interface/settings/user/plugins/DeveloperTab.tsx
 msgid "Category"
 msgstr "Категория"
+
+#: components/app/interface/settings/server/TicketsSettings.tsx
+msgid "Category for new tickets"
+msgstr "Категория для новых тикетов"
 
 #: components/app/interface/settings/category/Overview.tsx
 msgid "Category info"
@@ -5267,6 +5280,15 @@ msgstr "Закрыть список команд"
 #: components/ui/components/features/voice/stage/StagePanel.tsx
 msgid "Close the stage"
 msgstr "Закрыть сцену"
+
+#: components/modal/modals/CloseTicket.tsx
+msgid "Close this ticket?"
+msgstr "Закрыть этот тикет?"
+
+#: components/modal/modals/CloseTicket.tsx
+#: src/interface/tickets/TicketAction.tsx
+msgid "Close ticket"
+msgstr "Закрыть тикет"
 
 #: components/app/interface/safety/labels.tsx
 #: components/app/interface/settings/user/badges/BugQueue.tsx
@@ -8771,6 +8793,10 @@ msgstr "Первые в очереди"
 #: components/modal/modals/CreateThread.tsx
 msgid "First message (optional)"
 msgstr "Первое сообщение (необязательно)"
+
+#: components/app/interface/settings/server/TicketsSettings.tsx
+msgid "First message in a ticket"
+msgstr "Первое сообщение в тикете"
 
 #: components/app/interface/settings/user/profile/studio/StudioDesign.tsx
 msgid "First published"
@@ -12797,6 +12823,10 @@ msgstr "Участники могут отправлять сообщения к
 msgid "Members couldn't be loaded"
 msgstr "Не удалось загрузить участников"
 
+#: components/app/interface/settings/server/TicketsSettings.tsx
+msgid "Members get an \"Open a ticket\" row at the top of the channel list."
+msgstr "У участников вверху списка каналов появляется строка «Открыть тикет»."
+
 #: components/app/interface/settings/server/WingsSettings.tsx
 msgid "Members give the server Wings. More Wings unlock higher levels and their perks for everyone."
 msgstr "Участники дарят серверу Крылья. Чем больше Крыльев, тем выше уровни и их преимущества для всех."
@@ -12808,6 +12838,10 @@ msgstr "Участники, которые присоединяются, вых�
 #: components/app/interface/settings/server/roles/ServerRoleEditor.tsx
 msgid "Members lose this role and its permissions."
 msgstr "Участники потеряют эту роль и её разрешения."
+
+#: components/app/interface/settings/server/pages.tsx
+msgid "Members open a private channel with your staff."
+msgstr "Участники открывают личный канал с вашей командой."
 
 #: components/app/interface/settings/channel/ForumTags.tsx
 msgid "Members pick up to five tags for each post, and everyone can filter posts by tag."
@@ -14059,6 +14093,10 @@ msgstr "Ботов в списке пока нет."
 #: components/app/interface/settings/server/ServerApps.tsx
 msgid "No bots in this server."
 msgstr "На этом сервере нет ботов."
+
+#: components/app/interface/settings/server/TicketsSettings.tsx
+msgid "No category"
+msgstr "Без категории"
 
 #: components/app/interface/settings/user/plugins/PluginDetail.tsx
 msgid "No changelog."
@@ -15374,6 +15412,10 @@ msgstr "Открыть настройки категории"
 #: components/app/interface/settings/user/subscriptions/Subscriptions.tsx
 msgid "Open a server's menu and choose Give Wings. Each one is {0} a month."
 msgstr "Откройте меню сервера и выберите «Подарить Крылья». Каждое стоит {0} в месяц."
+
+#: src/interface/tickets/TicketLink.tsx
+msgid "Open a ticket"
+msgstr "Открыть тикет"
 
 #: components/app/menus/ChannelContextMenu.tsx
 #: src/interface/navigation/channels/ServerSidebar.tsx
@@ -17918,6 +17960,10 @@ msgstr "Открыть снова"
 msgid "Reopen thread"
 msgstr "Открыть ветку снова"
 
+#: src/interface/tickets/TicketAction.tsx
+msgid "Reopen ticket"
+msgstr "Открыть тикет снова"
+
 #: components/app/interface/settings/user/profile/ReviewQueue.tsx
 msgid "Reopened by an admin"
 msgstr "Снова открыто администратором"
@@ -18189,6 +18235,7 @@ msgid "Resend verification"
 msgstr "Отправить подтверждение повторно"
 
 #: components/app/interface/settings/server/LobbyAppearanceEditor.tsx
+#: components/app/interface/settings/server/TicketsSettings.tsx
 #: components/app/interface/settings/user/Account.tsx
 #: components/app/interface/settings/user/bots/ViewBot.tsx
 #: components/app/interface/settings/user/profile/studio/StudioEditor.tsx
@@ -18572,6 +18619,10 @@ msgstr "Роли в {0}"
 msgid "Roles Shield trusts"
 msgstr "Роли, которым доверяет Щит"
 
+#: components/app/interface/settings/server/TicketsSettings.tsx
+msgid "Roles that answer tickets"
+msgstr "Роли, которые отвечают на тикеты"
+
 #: components/app/interface/settings/server/assistant/AssistantPage.tsx
 msgid "Roles that may use this module"
 msgstr "Роли, которые могут использовать этот модуль"
@@ -18613,6 +18664,10 @@ msgstr "Место для длинной истории, примечаний к
 #: components/ui/components/features/voice/callCard/VoiceCallCardPreview.tsx
 msgid "Room full. Admission is checked by the server."
 msgstr "Комната заполнена. Вход проверяет сервер."
+
+#: components/app/interface/settings/channel/Overview.tsx
+msgid "Room maker"
+msgstr "Создатель комнат"
 
 #. placeholder {0}: channel.name
 #: components/app/interface/settings/server/channels/ChannelsSettings.tsx
@@ -18833,6 +18888,7 @@ msgstr "Саудовская Аравия"
 #: components/app/interface/settings/channel/Overview.tsx
 #: components/app/interface/settings/server/AutoModSettings.tsx
 #: components/app/interface/settings/server/invites/VanityInvite.tsx
+#: components/app/interface/settings/server/TicketsSettings.tsx
 #: components/app/interface/settings/server/webhooks/ServerWebhooks.tsx
 #: components/app/interface/settings/user/account/AgeSettings.tsx
 #: components/app/interface/settings/user/connections/Connections.tsx
@@ -21629,6 +21685,10 @@ msgstr "Технологии"
 msgid "Tell members by direct message"
 msgstr "Сообщать участникам в личных сообщениях"
 
+#: components/app/interface/settings/server/TicketsSettings.tsx
+msgid "Tell us what you need and we will answer here."
+msgstr "Напишите, что вам нужно, и мы ответим здесь."
+
 #: components/app/interface/safety/labels.tsx
 msgid "Tell us what's wrong in your own words"
 msgstr "Расскажите своими словами, что не так"
@@ -22203,6 +22263,10 @@ msgstr "Действующая версия остаётся в работе, п
 #: components/app/interface/settings/server/AutoModSettings.tsx
 msgid "The member sees the rule's name as the reason."
 msgstr "Участник видит название правила как причину."
+
+#: components/modal/modals/CloseTicket.tsx
+msgid "The member who opened it will no longer see it. You can reopen it or delete it later."
+msgstr "Участник, открывший его, больше не будет его видеть. Позже вы сможете открыть его снова или удалить."
 
 #: components/app/interface/settings/user/bots/CommandManager.tsx
 msgid "The minimum is larger than the maximum."
@@ -23114,6 +23178,10 @@ msgstr "На этом сервере уже максимальное число 
 msgid "This server has no channels yet"
 msgstr "На этом сервере пока нет каналов"
 
+#: components/app/interface/settings/server/TicketsSettings.tsx
+msgid "This server has no roles yet. Until it does, only people who can see every channel answer tickets."
+msgstr "На этом сервере пока нет ролей. До тех пор на тикеты отвечают только те, кто видит все каналы."
+
 #: components/modal/modals/ServerEventEditor.tsx
 msgid "This server has no text channel you can see."
 msgstr "На этом сервере нет текстовых каналов, которые вы видите."
@@ -23350,6 +23418,15 @@ msgstr "Отметьте флажок, чтобы принять условия,
 #: components/app/interface/settings/server/assistant/labels.ts
 msgid "Ticket categories, one per line"
 msgstr "Категории обращений, по одной на строку"
+
+#: components/app/interface/settings/server/TicketsSettings.tsx
+msgid "Tickets"
+msgstr "Тикеты"
+
+#: components/app/interface/settings/server/pages.tsx
+msgctxt "server-settings"
+msgid "Tickets"
+msgstr "Тикеты"
 
 #: components/app/interface/settings/server/assistant/labels.ts
 msgid "Tickets and direct messages in one queue."
@@ -25659,6 +25736,10 @@ msgstr "Кто здесь соберётся?"
 msgid "Who's interested"
 msgstr "Кому интересно"
 
+#: components/app/interface/settings/channel/Overview.tsx
+msgid "Whoever joins this channel gets a voice room of their own next to it. The room is removed when everyone has left it."
+msgstr "Каждый, кто заходит в этот канал, получает рядом собственную голосовую комнату. Комната удаляется, когда все из неё выйдут."
+
 #: components/app/interface/settings/server/webhooks/ServerWebhooks.tsx
 msgid "Whoever runs this Zrzur server can turn them on in its configuration."
 msgstr "Тот, кто управляет этим сервером Zrzur, может включить их в его конфигурации."
@@ -26396,6 +26477,10 @@ msgstr "Вас отключили от голоса."
 msgid "You will need to sign in again."
 msgstr "Вам потребуется войти снова."
 
+#: components/modal/modals/CloseTicket.tsx
+msgid "You will no longer see this ticket. The staff keep it and can open it again for you."
+msgstr "Вы больше не будете видеть этот тикет. Команда сохранит его и сможет открыть снова для вас."
+
 #. placeholder {0}: name()
 #: components/app/interface/settings/user/connections/ServiceCards.tsx
 msgid "You will sign in on {0}'s own page. Zrzur never sees that password."
@@ -26914,6 +26999,10 @@ msgstr "Ваши подписки"
 #: components/app/interface/settings/user/Keybinds.tsx
 msgid "Your system keeps <0>{keys}</0> for itself. Choose other keys."
 msgstr "Система оставляет <0>{keys}</0> за собой. Выберите другие клавиши."
+
+#: src/interface/tickets/TicketLink.tsx
+msgid "Your ticket"
+msgstr "Ваш тикет"
 
 #: components/app/interface/settings/user/support/ContactSupport.tsx
 msgid "Your tickets couldn't be loaded. Try again later."

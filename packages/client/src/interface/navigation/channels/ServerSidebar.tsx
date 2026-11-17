@@ -62,6 +62,7 @@ import { RulesIcon } from "@revolt/ui/icons/RulesIcon";
 import { useListToggle } from "@revolt/ui/motion";
 import { EventsLink } from "../../events/EventsLink";
 import { LobbyLink, RulesLink } from "../../lobby/LobbyLink";
+import { TicketLink } from "../../tickets/TicketLink";
 import { sidebarBase } from "./common";
 import {
   OrderedCategory,
@@ -404,6 +405,7 @@ export const ServerSidebar = (props: Props) => {
           <EventsLink server={props.server} />
           <LobbyLink server={props.server} />
           <RulesLink server={props.server} />
+          <TicketLink server={props.server} />
           <ServerStats server={props.server} />
           <Show
             when={categories().find((category) => category.id === "default")}
@@ -946,6 +948,23 @@ function Entry(
 
   const inCall = () => props.channel.id === voice.channel()?.id;
 
+  const navigate = useNavigate();
+  const [makingRoom, setMakingRoom] = createSignal(false);
+  /** Ask a room maker for a room of your own, then join and open it */
+  async function makeRoom() {
+    if (makingRoom()) return;
+    setMakingRoom(true);
+    try {
+      const room = await props.channel.makeRoom();
+      navigate(`/server/${room.serverId}/channel/${room.id}`);
+      void voice.connect(room);
+    } catch (error) {
+      openModal({ type: "error2", error });
+    } finally {
+      setMakingRoom(false);
+    }
+  }
+
   // a voice room you can't join: the row shows it, a tap does nothing
   const closedVoice = () => props.channel.isVoice && locked();
   const lockedLabel = () =>
@@ -1054,7 +1073,14 @@ function Entry(
               props.channel.havePermission("Connect") &&
               !voiceOccupancy(props.channel).full
             ) {
-              void voice.connect(props.channel);
+              if (props.channel.isRoomMaker) {
+                // a room maker hands out a room of your own: that one is
+                // joined and opened, not the maker
+                event.preventDefault();
+                void makeRoom();
+              } else {
+                void voice.connect(props.channel);
+              }
             }
           }}
           use:floating={props.menuGenerator(props.channel)}
@@ -1086,6 +1112,12 @@ function Entry(
                 </Match>
                 <Match when={props.channel.isForum}>
                   <SidebarIcon name="forum" size={20} />
+                </Match>
+                <Match when={props.channel.ticket}>
+                  <SidebarIcon name="ticket" size={20} />
+                </Match>
+                <Match when={props.channel.isRoomMaker}>
+                  <SidebarIcon name="roomMaker" size={20} />
                 </Match>
                 <Match when={props.channel.isVoice}>
                   <SidebarIcon
