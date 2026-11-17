@@ -130,7 +130,6 @@ msgstr "{0, plural, one {# install.} other {# installs.}}"
 #: src/interface/lobby/Lobby.tsx
 #: src/interface/navigation/channels/HomeSidebar.tsx
 #: src/interface/navigation/channels/HomeSidebarPhone.tsx
-#: src/interface/navigation/channels/ServerPhoneTools.tsx
 msgid "{0, plural, one {# member} other {# members}}"
 msgstr "{0, plural, one {# member} other {# members}}"
 
@@ -485,11 +484,6 @@ msgstr "{0} is full. Pay {1} now and start automatically when a place frees up."
 #: components/app/interface/settings/user/voice/PushToTalkOptions.tsx
 msgid "{0} is not available from other apps. Try another key."
 msgstr "{0} is not available from other apps. Try another key."
-
-#. placeholder {0}: nameOf(claimedBy()!)
-#: src/interface/tickets/TicketAction.tsx
-#~ msgid "{0} is on it"
-#~ msgstr "{0} is on it"
 
 #. placeholder {0}: done()!.name
 #: components/modal/modals/PromoteServer.tsx
@@ -1000,10 +994,6 @@ msgstr "{value, plural, one {Last # message} other {Last # messages}}"
 #: components/app/interface/settings/user/voice/InputSensitivityOptions.tsx
 msgid "{value} dB"
 msgstr "{value} dB"
-
-#: components/modal/modals/CloseTicket.tsx
-#~ msgid "{value} out of 5"
-#~ msgstr "{value} out of 5"
 
 #. placeholder {0}: s().days
 #: components/modal/modals/PromoteServer.tsx
@@ -3428,10 +3418,6 @@ msgstr "Avatar decoration"
 #: src/interface/Designs.tsx
 #~ msgid "Avatar decorations"
 #~ msgstr "Avatar decorations"
-
-#: components/app/interface/settings/server/TicketsSettings.tsx
-#~ msgid "Average rating"
-#~ msgstr "Average rating"
 
 #: components/ui/components/features/profiles/plateNames.ts
 msgid "Azerbaijan"
@@ -10725,10 +10711,6 @@ msgstr "How the server looks, how people find and join it, and its main switches
 msgid "How to appeal"
 msgstr "How to appeal"
 
-#: components/modal/modals/CloseTicket.tsx
-#~ msgid "How was the help? (optional)"
-#~ msgstr "How was the help? (optional)"
-
 #: src/interface/Developers.tsx
 #~ msgid "HTTP endpoint"
 #~ msgstr "HTTP endpoint"
@@ -14781,6 +14763,10 @@ msgstr "No apps are connected to your account."
 #~ msgstr "No apps yet."
 
 #: src/interface/channels/text/ThreadsPanel.tsx
+msgid "No archived threads"
+msgstr "No archived threads"
+
+#: src/interface/channels/text/ThreadsPanel.tsx
 msgid "No archived threads."
 msgstr "No archived threads."
 
@@ -15133,6 +15119,10 @@ msgstr "No pictures or videos yet"
 msgid "No pinned messages in this channel yet."
 msgstr "No pinned messages in this channel yet."
 
+#: src/interface/channels/text/ChannelDetailsPhone.tsx
+msgid "No pinned messages yet"
+msgstr "No pinned messages yet"
+
 #: components/app/interface/settings/user/plugins/BrowseTab.tsx
 msgid "No plugin matches that"
 msgstr "No plugin matches that"
@@ -15253,6 +15243,10 @@ msgstr "No suggestions match. You can still type a value."
 #: components/app/interface/settings/channel/ForumTags.tsx
 msgid "No tags yet."
 msgstr "No tags yet."
+
+#: src/interface/channels/text/ThreadsPanel.tsx
+msgid "No threads yet"
+msgstr "No threads yet"
 
 #: src/interface/channels/text/ThreadsPanel.tsx
 msgid "No threads yet. Start one from a message or here."
@@ -17221,6 +17215,10 @@ msgstr "Pictures and videos sent in this channel show here."
 msgid "Pin"
 msgstr "Pin"
 
+#: src/interface/channels/text/ChannelDetailsPhone.tsx
+msgid "Pin an important message from its menu to keep it here."
+msgstr "Pin an important message from its menu to keep it here."
+
 #: components/app/menus/MessageContextMenu.tsx
 #: components/modal/modals/PinMessage.tsx
 msgid "Pin message"
@@ -18267,11 +18265,6 @@ msgstr "Rate limit"
 #: src/interface/developers/docs/DocsPortal.tsx
 msgid "Rate limits"
 msgstr "Rate limits"
-
-#. placeholder {0}: rating()
-#: src/interface/tickets/TicketAction.tsx
-#~ msgid "Rated {0} out of 5"
-#~ msgstr "Rated {0} out of 5"
 
 #: components/app/interface/support/OfficialBanner.tsx
 msgid "Re: {first}"
@@ -22072,6 +22065,10 @@ msgstr "Start in the tray"
 msgid "Start now"
 msgstr "Start now"
 
+#: src/interface/channels/text/ThreadsPanel.tsx
+msgid "Start one from a message, or with New thread."
+msgstr "Start one from a message, or with New thread."
+
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 msgid "Start posts in the forums of this category"
 msgstr "Start posts in the forums of this category"
@@ -24662,6 +24659,10 @@ msgstr "Threads are off in this server. You can still read the ones it has."
 #: src/interface/channels/text/ThreadsPanel.tsx
 msgid "Threads couldn't be loaded."
 msgstr "Threads couldn't be loaded."
+
+#: src/interface/channels/text/ThreadsPanel.tsx
+msgid "Threads that were archived show here."
+msgstr "Threads that were archived show here."
 
 #: components/app/interface/safety/labels.tsx
 msgid "Threat of violence"

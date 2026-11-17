@@ -150,7 +150,8 @@ const base = cva({
       minHeight: "44px",
       borderBlock: "4px solid transparent",
       backgroundClip: "padding-box",
-      borderRadius: "12px",
+      // 16 on the outside is 12 on the painted box, the field's corner
+      borderRadius: "16px !important",
     },
     flexShrink: 0,
 
@@ -249,6 +250,10 @@ const base = cva({
           translate: "0 -50%",
           borderRadius: "999px",
           background: "var(--z-accent)",
+          // phones: a marker seen at a glance, in the middle of the row's
+          // side as before (a marker running the whole height was tried on
+          // 2026-11-17 and the owner asked for it back where it was)
+          _phone: { width: "4px", height: "20px" },
         },
       },
     },

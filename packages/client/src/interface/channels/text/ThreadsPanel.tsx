@@ -14,6 +14,7 @@ import { styled } from "styled-system/jsx";
 
 import { startAccess } from "@revolt/app/interface/channels/threadAccess";
 import { useClient } from "@revolt/client";
+import { useDevice } from "@revolt/common";
 import { useModals } from "@revolt/modal";
 import { useNavigate } from "@revolt/routing";
 import { Button, Segmented } from "@revolt/ui";
@@ -29,6 +30,8 @@ export function ThreadsPanel(props: { channel: Channel }) {
   const { openModal } = useModals();
   const client = useClient();
   const [archived, setArchived] = createSignal(false);
+  const device = useDevice();
+  const phone = () => device.layout() === "phone";
   // inside a thread, the panel shows the threads of the channel it is in
   const channel = () => props.channel.parent ?? props.channel;
   const [threads, { refetch }] = createResource(
@@ -99,13 +102,37 @@ export function ThreadsPanel(props: { channel: Channel }) {
           </Empty>
         </Match>
         <Match when={!list().length}>
-          <Empty>
+          <Empty data-empty="threads">
             <Icon name="chat-circle" size={28} />
-            {archived() ? (
-              <Trans>No archived threads.</Trans>
-            ) : (
-              <Trans>No threads yet. Start one from a message or here.</Trans>
-            )}
+            <Show
+              when={phone()}
+              fallback={
+                <span>
+                  {archived() ? (
+                    <Trans>No archived threads.</Trans>
+                  ) : (
+                    <Trans>
+                      No threads yet. Start one from a message or here.
+                    </Trans>
+                  )}
+                </span>
+              }
+            >
+              <b>
+                {archived() ? (
+                  <Trans>No archived threads</Trans>
+                ) : (
+                  <Trans>No threads yet</Trans>
+                )}
+              </b>
+              <span>
+                {archived() ? (
+                  <Trans>Threads that were archived show here.</Trans>
+                ) : (
+                  <Trans>Start one from a message, or with New thread.</Trans>
+                )}
+              </span>
+            </Show>
           </Empty>
         </Match>
         <Match when={list().length}>
@@ -158,6 +185,9 @@ const Panel = styled("div", {
     flexDirection: "column",
     gap: "12px",
     padding: "16px",
+    // phones: the panel fills the tab, so its empty state can sit in the
+    // middle of the free room
+    _phone: { flex: 1, minHeight: 0, padding: "4px" },
   },
 });
 
@@ -169,6 +199,21 @@ const Header = styled("div", {
     alignItems: "center",
     justifyContent: "space-between",
     gap: "8px",
+    // phones: the switch and the button are one height, on the fill of
+    // every other box (owner, 2026-11-17)
+    _phone: {
+      flexWrap: "nowrap",
+      "& > *": {
+        height: "40px !important",
+        minHeight: "40px !important",
+        borderRadius: "12px !important",
+        border: "none !important",
+        boxShadow: "none !important",
+        background:
+          "var(--z-sheet-group, color-mix(in srgb, var(--z-fg-primary) 5%, transparent))",
+      },
+      "& > [role='radiogroup'] > *": { height: "32px", minHeight: "32px" },
+    },
   },
 });
 
@@ -182,6 +227,22 @@ const Empty = styled("div", {
     textAlign: "center",
     color: "var(--z-fg-secondary)",
     fontSize: "14px",
+    // phones: the one empty state of the details screen: a large quiet
+    // icon and the words, in the middle of the free room
+    _phone: {
+      flex: 1,
+      justifyContent: "center",
+      padding: "48px 32px",
+      lineHeight: "22px",
+      color: "var(--z-fg-muted)",
+      "--z-icon-color": "var(--z-icon-muted)",
+      "& svg": { width: "44px", height: "44px", marginBlockEnd: "8px" },
+      "& b": {
+        fontSize: "18px",
+        fontWeight: 600,
+        color: "var(--z-fg-primary)",
+      },
+    },
   },
 });
 

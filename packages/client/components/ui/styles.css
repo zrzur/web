@@ -177,6 +177,15 @@ html[data-installed] {
   background: var(--z-bg-frame, #0d0e16);
 }
 
+/* Phones: a page or panel that opens rises from the bottom edge (the
+   notifications page, the emoji and GIF panel); dialogs and menus do the
+   same through the motion engine */
+@keyframes z-sheet-rise {
+  from {
+    transform: translateY(100%);
+  }
+}
+
 /* Phone rules: text fields use
    16 px so iOS does not zoom on focus, and tap targets reach 44 px */
 @media (max-width: 600px) {
@@ -226,6 +235,17 @@ html[data-installed] {
     position: absolute;
     inset-inline: min(0px, calc((100% - 44px) / 2));
     inset-block: min(0px, calc((100% - 44px) / 2));
+  }
+  /* a button beside a select or a text field is as tall as that field
+     (owner, 2026-11-17: "Pause" was drawn shorter than the select next to
+     it); siblings in one row share one height */
+  :where(.app_body, .settings_cont, .z-dialog)
+    :is(span, div, form):has(
+      > div > button[aria-haspopup="menu"],
+      > .z-text-field
+    )
+    > button:not([aria-haspopup]) {
+    height: 44px;
   }
   [data-dialog-close] {
     width: 44px !important;

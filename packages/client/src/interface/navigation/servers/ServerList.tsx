@@ -433,9 +433,11 @@ export const ServerList = (props: Props) => {
             href={state.layout.getLastActiveDiscoverPath()}
             aria-label={t`Find new servers to join`}
             aria-current={onDiscover() ? "page" : undefined}
-            class={entryContainer({
+            // phones: Discover is in the bottom bar; a second way in on the
+            // rail is one too many (owner, 2026-11-17)
+            class={`${entryContainer({
               indicator: onDiscover() ? "selected" : undefined,
-            })}
+            })} ${css({ _phone: { display: "none" } })}`}
           >
             <span class={discoverTile} data-active={onDiscover()}>
               <Icon name="compass" size={24} />

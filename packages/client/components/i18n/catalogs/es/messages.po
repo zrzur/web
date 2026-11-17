@@ -127,7 +127,6 @@ msgstr "{0, plural, one {# instalación.} other {# instalaciones.}}"
 #: src/interface/lobby/Lobby.tsx
 #: src/interface/navigation/channels/HomeSidebar.tsx
 #: src/interface/navigation/channels/HomeSidebarPhone.tsx
-#: src/interface/navigation/channels/ServerPhoneTools.tsx
 msgid "{0, plural, one {# member} other {# members}}"
 msgstr "{0, plural, one {# miembro} other {# miembros}}"
 
@@ -14230,6 +14229,10 @@ msgstr "No hay apps conectadas a tu cuenta."
 #~ msgstr "Aún no hay aplicaciones."
 
 #: src/interface/channels/text/ThreadsPanel.tsx
+msgid "No archived threads"
+msgstr "No hay hilos archivados"
+
+#: src/interface/channels/text/ThreadsPanel.tsx
 msgid "No archived threads."
 msgstr "No hay hilos archivados."
 
@@ -14566,6 +14569,10 @@ msgstr "Aún no hay imágenes ni vídeos"
 msgid "No pinned messages in this channel yet."
 msgstr "Aún no hay mensajes fijados en este canal."
 
+#: src/interface/channels/text/ChannelDetailsPhone.tsx
+msgid "No pinned messages yet"
+msgstr "Aún no hay mensajes fijados"
+
 #: components/app/interface/settings/user/plugins/BrowseTab.tsx
 msgid "No plugin matches that"
 msgstr "Ningún plugin coincide"
@@ -14678,6 +14685,10 @@ msgstr "Ninguna sugerencia coincide. Aun así puedes escribir un valor."
 #: components/app/interface/settings/channel/ForumTags.tsx
 msgid "No tags yet."
 msgstr "Aún no hay etiquetas."
+
+#: src/interface/channels/text/ThreadsPanel.tsx
+msgid "No threads yet"
+msgstr "Aún no hay hilos"
 
 #: src/interface/channels/text/ThreadsPanel.tsx
 msgid "No threads yet. Start one from a message or here."
@@ -16514,6 +16525,10 @@ msgstr "Las imágenes y los vídeos enviados en este canal aparecen aquí."
 #: components/modal/modals/PinMessage.tsx
 msgid "Pin"
 msgstr "Fijar"
+
+#: src/interface/channels/text/ChannelDetailsPhone.tsx
+msgid "Pin an important message from its menu to keep it here."
+msgstr "Fija un mensaje importante desde su menú para tenerlo aquí."
 
 #: components/app/menus/MessageContextMenu.tsx
 #: components/modal/modals/PinMessage.tsx
@@ -21200,6 +21215,10 @@ msgstr "Iniciar en la bandeja"
 msgid "Start now"
 msgstr "Empezar ahora"
 
+#: src/interface/channels/text/ThreadsPanel.tsx
+msgid "Start one from a message, or with New thread."
+msgstr "Empieza uno desde un mensaje o con «Nuevo hilo»."
+
 #: components/modal/modals/PlusCheckout.tsx
 #~ msgid "Start Plus"
 #~ msgstr ""
@@ -23706,6 +23725,10 @@ msgstr "Los hilos están desactivados en este servidor. Aún puedes leer los que
 #: src/interface/channels/text/ThreadsPanel.tsx
 msgid "Threads couldn't be loaded."
 msgstr "No se pudieron cargar los hilos."
+
+#: src/interface/channels/text/ThreadsPanel.tsx
+msgid "Threads that were archived show here."
+msgstr "Los hilos archivados aparecen aquí."
 
 #: components/app/interface/safety/labels.tsx
 msgid "Threat of violence"

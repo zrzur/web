@@ -65,6 +65,22 @@ export function ChannelDetailsPhone(props: {
   const canInvite = () =>
     !!props.channel.server && props.channel.havePermission("InviteOthers");
 
+  // only to know whether Pins is empty: an empty tab shows the screen's
+  // one empty state, not the list's own smaller line
+  const pins = useQuery(() => ({
+    enabled: props.tab === "pins",
+    queryKey: ["channel-details", props.channel.id, "pins"],
+    queryFn: async () =>
+      (
+        await props.channel.searchWithUsers({
+          pinned: true,
+          sort: "Latest",
+        } as never)
+      ).messages,
+    staleTime: 30_000,
+    retry: false,
+  }));
+
   const tabs = createMemo(() => {
     const list: { id: DetailsTab; label: string }[] = [];
     if (hasMembers()) list.push({ id: "members", label: t`Members` });
@@ -188,14 +204,27 @@ export function ChannelDetailsPhone(props: {
         </Show>
       </Head>
 
-      <Tabs role="tablist" aria-label={t`Channel details`}>
+      <Tabs
+        role="tablist"
+        aria-label={t`Channel details`}
+        // a sideways drag on the tabs scrolls the tabs; it is not the swipe
+        // that slides the page away (the last tabs could not be reached)
+        onTouchStart={(event) => event.stopPropagation()}
+        onTouchMove={(event) => event.stopPropagation()}
+      >
         <For each={tabs()}>
           {(item) => (
             <button
               type="button"
               role="tab"
               aria-selected={tab() === item.id}
-              onClick={() => open(item.id)}
+              onClick={(event) => {
+                open(item.id);
+                event.currentTarget.scrollIntoView({
+                  inline: "center",
+                  block: "nearest",
+                });
+              }}
             >
               {item.label}
             </button>
@@ -244,12 +273,29 @@ export function ChannelDetailsPhone(props: {
             <Finds channel={props.channel} what="files" />
           </Match>
           <Match when={tab() === "pins"}>
-            <Listed>
-              <TextSearchSidebar
-                channel={props.channel}
-                query={{ pinned: true, sort: "Latest" }}
-              />
-            </Listed>
+            <Show
+              when={pins.data?.length !== 0}
+              fallback={
+                <Empty data-empty="pins">
+                  <Icon name="push-pin" size={44} />
+                  <b>
+                    <Trans>No pinned messages yet</Trans>
+                  </b>
+                  <span>
+                    <Trans>
+                      Pin an important message from its menu to keep it here.
+                    </Trans>
+                  </span>
+                </Empty>
+              }
+            >
+              <Listed>
+                <TextSearchSidebar
+                  channel={props.channel}
+                  query={{ pinned: true, sort: "Latest" }}
+                />
+              </Listed>
+            </Show>
           </Match>
           <Match when={tab() === "threads"}>
             <Listed>
@@ -517,6 +563,8 @@ const Page = styled("div", {
   base: {
     display: "flex",
     flexDirection: "column",
+    width: "100%",
+    minWidth: 0,
     minHeight: "100%",
     color: "var(--z-fg-primary)",
     background: "var(--z-bg-frame)",
@@ -612,8 +660,10 @@ const Tabs = styled("div", {
     flex: "none",
     display: "flex",
     gap: "4px",
+    maxWidth: "100%",
     paddingInline: "10px",
     overflowX: "auto",
+    overscrollBehaviorX: "contain",
     scrollbarWidth: "none",
     "&::-webkit-scrollbar": { display: "none" },
     borderBottom: "1px solid var(--z-border-subtle)",
@@ -688,7 +738,7 @@ const Row = styled("button", {
     textAlign: "start",
     cursor: "pointer",
     "--z-icon-color": "var(--z-icon-neutral)",
-    "& > span": { flex: 1, minWidth: 0 },
+    "& > span": { flex: 1, minWidth: 0, textAlign: "start" },
     "& > :last-child": { "--z-icon-color": "var(--z-icon-muted)" },
     _active: {
       background: "color-mix(in srgb, var(--z-fg-primary) 10%, transparent)",
@@ -702,6 +752,8 @@ const Members = styled("div", {
     borderRadius: "14px",
     overflow: "hidden",
     background: FILL,
+    // room above the first title and under the last person
+    paddingBlock: "6px 8px",
     "& > *": {
       width: "100% !important",
       minHeight: "0 !important",
@@ -713,7 +765,13 @@ const Members = styled("div", {
 
 /** pins and threads: their own lists, edge to edge inside the page's room */
 const Listed = styled("div", {
-  base: { marginInline: "-4px", minHeight: 0 },
+  base: {
+    flex: 1,
+    display: "flex",
+    flexDirection: "column",
+    marginInline: "-4px",
+    minHeight: 0,
+  },
 });
 
 const Grid3 = styled("div", {
