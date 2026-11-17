@@ -11,6 +11,7 @@ import { useClient } from "@revolt/client";
 import { billingAvailable } from "@revolt/client/billing";
 import { useDevice } from "@revolt/common";
 import { useModals } from "@revolt/modal";
+import { useNavigate } from "@revolt/routing";
 import { useState } from "@revolt/state";
 import { Avatar, Column, Text, Time } from "@revolt/ui";
 import { Icon } from "@revolt/ui/icons/Icon";
@@ -66,7 +67,40 @@ export function ServerContextMenu(props: {
   const state = useState();
   const client = useClient();
   const device = useDevice();
-  const { openModal } = useModals();
+  const { openModal, showError } = useModals();
+  const navigate = useNavigate();
+
+  /** The ticket this user has open in the server, if any */
+  const myTicket = () => {
+    const me = client().user?.id;
+    return props.server.channels.find(
+      (channel) =>
+        channel.ticket?.openerId === me && channel.ticket?.closed === false,
+    );
+  };
+
+  /**
+   * Open a ticket with the server's staff, or go to the one already open
+   */
+  async function openTicket() {
+    const go = (channelId: string) => {
+      navigate(`/server/${props.server.id}/channel/${channelId}`);
+      // phones: like a channel, opening it slides the channel list away
+      state.appDrawer()?.setShown(true);
+    };
+    const ticket = myTicket();
+    if (ticket) return go(ticket.id);
+    // a server with kinds of ticket asks which one first
+    if (props.server.tickets?.types.length) {
+      state.appDrawer()?.setShown(true);
+      return openModal({ type: "open_ticket", server: props.server });
+    }
+    try {
+      go((await props.server.openTicket()).id);
+    } catch (error) {
+      showError(error);
+    }
+  }
 
   /**
    * Mark server as read
@@ -470,6 +504,21 @@ export function ServerContextMenu(props: {
       </ContextMenuSubMenu>
       <ContextMenuDivider />
 
+      <Show when={props.server.tickets?.enabled === true}>
+        <ContextMenuButton
+          icon={<Icon name="ticket" size={20} />}
+          data-testid="ticket-entry"
+          onClick={() => void openTicket()}
+        >
+          <Show
+            when={myTicket()}
+            fallback={props.server.tickets?.label || t`Open a ticket`}
+          >
+            <Trans>Your ticket</Trans>
+          </Show>
+        </ContextMenuButton>
+        <ContextMenuDivider />
+      </Show>
       <Show when={permissionInviteOthers() && !sheet}>
         <ContextMenuButton icon={MdPersonAdd} onClick={createInvite}>
           <Trans>Create invite</Trans>

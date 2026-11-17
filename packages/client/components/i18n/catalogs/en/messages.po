@@ -1507,7 +1507,6 @@ msgid "A private channel"
 msgstr "A private channel"
 
 #: components/modal/modals/OpenTicket.tsx
-#: src/interface/tickets/TicketLink.tsx
 msgid "A private channel between you and the staff of this server."
 msgstr "A private channel between you and the staff of this server."
 
@@ -7276,6 +7275,10 @@ msgstr "Delete this time and its interested list for good? The next one stays sc
 #: components/app/interface/settings/server/webhooks/ServerWebhooks.tsx
 msgid "Delete this webhook?"
 msgstr "Delete this webhook?"
+
+#: src/interface/tickets/TicketAction.tsx
+msgid "Delete ticket"
+msgstr "Delete ticket"
 
 #: components/app/interface/settings/channel/webhooks/ViewWebhook.tsx
 #~ msgid "Delete webhook"
@@ -13446,8 +13449,12 @@ msgid "Members couldn't be loaded"
 msgstr "Members couldn't be loaded"
 
 #: components/app/interface/settings/server/TicketsSettings.tsx
-msgid "Members get an \"Open a ticket\" row at the top of the channel list."
-msgstr "Members get an \"Open a ticket\" row at the top of the channel list."
+msgid "Members get an \"Open a ticket\" entry in the server's menu."
+msgstr "Members get an \"Open a ticket\" entry in the server's menu."
+
+#: components/app/interface/settings/server/TicketsSettings.tsx
+#~ msgid "Members get an \"Open a ticket\" row at the top of the channel list."
+#~ msgstr "Members get an \"Open a ticket\" row at the top of the channel list."
 
 #: components/app/interface/settings/server/WingsSettings.tsx
 msgid "Members give the server Wings. More Wings unlock higher levels and their perks for everyone."
@@ -14236,6 +14243,10 @@ msgstr "Name A–Z"
 #: components/app/interface/settings/user/profile/studio/StudioEditor.tsx
 msgid "Name and words"
 msgstr "Name and words"
+
+#: components/app/interface/settings/server/TicketsSettings.tsx
+msgid "Name of the entry"
+msgstr "Name of the entry"
 
 #: components/app/interface/settings/channel/Overview.tsx
 msgid "Name of the rooms"
@@ -15172,8 +15183,8 @@ msgid "No servers to show."
 msgstr "No servers to show."
 
 #: components/ui/components/features/voice/soundboard/SoundboardPicker.tsx
-msgid "No sounds here yet. Press one to add it to this server and play it."
-msgstr "No sounds here yet. Press one to add it to this server and play it."
+#~ msgid "No sounds here yet. Press one to add it to this server and play it."
+#~ msgstr "No sounds here yet. Press one to add it to this server and play it."
 
 #: components/app/interface/settings/server/soundboard/SoundLibrary.tsx
 msgid "No sounds match your search."
@@ -16196,8 +16207,9 @@ msgstr "Open a category's settings"
 msgid "Open a server's menu and choose Give Wings. Each one is {0} a month."
 msgstr "Open a server's menu and choose Give Wings. Each one is {0} a month."
 
+#: components/app/interface/settings/server/TicketsSettings.tsx
+#: components/app/menus/ServerContextMenu.tsx
 #: components/modal/modals/OpenTicket.tsx
-#: src/interface/tickets/TicketLink.tsx
 msgid "Open a ticket"
 msgstr "Open a ticket"
 
@@ -26786,6 +26798,10 @@ msgstr "What it may do on <0>{0}</0>"
 msgid "What members are notified about until they choose for themselves."
 msgstr "What members are notified about until they choose for themselves."
 
+#: components/app/interface/settings/server/TicketsSettings.tsx
+msgid "What members see in the server's menu. Empty: \"Open a ticket\"."
+msgstr "What members see in the server's menu. Empty: \"Open a ticket\"."
+
 #: components/app/interface/settings/server/ServerSafety.tsx
 #~ msgid "What new members need before they can send messages, react or join voice. Members with any role are exempt."
 #~ msgstr "What new members need before they can send messages, react or join voice. Members with any role are exempt."
@@ -28460,7 +28476,7 @@ msgstr "Your subscriptions"
 msgid "Your system keeps <0>{keys}</0> for itself. Choose other keys."
 msgstr "Your system keeps <0>{keys}</0> for itself. Choose other keys."
 
-#: src/interface/tickets/TicketLink.tsx
+#: components/app/menus/ServerContextMenu.tsx
 msgid "Your ticket"
 msgstr "Your ticket"
 

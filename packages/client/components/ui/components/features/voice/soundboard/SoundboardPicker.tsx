@@ -173,12 +173,6 @@ export default function SoundboardPicker(props: {
                   </Muted>
                 }
               >
-                <Muted>
-                  <Trans>
-                    No sounds here yet. Press one to add it to this server and
-                    play it.
-                  </Trans>
-                </Muted>
                 <Grid data-placement={props.placement ?? "call"}>
                   <For each={suggestions()}>
                     {(sound) => (
@@ -271,6 +265,8 @@ const Card = styled("section", {
       // a lighter grey on hover, the accent fill while a sound plays
       "& [data-sound], & [data-suggested-sound]": {
         borderColor: "transparent",
+        // the corner of the card's own buttons
+        borderRadius: "8px",
         _hover: {
           background:
             "color-mix(in srgb, var(--z-fg-primary) 12%, transparent)",

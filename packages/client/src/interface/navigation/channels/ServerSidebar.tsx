@@ -62,18 +62,9 @@ import { SidebarIcon } from "./SidebarIcon";
 import { RulesIcon } from "@revolt/ui/icons/RulesIcon";
 import { useListToggle } from "@revolt/ui/motion";
 import { EventsLink } from "../../events/EventsLink";
-import { LobbyLink, RulesLink } from "../../lobby/LobbyLink";
-import { lazyRetry } from "@revolt/ui/components/utils/lazyRetry";
+import { LobbyLink } from "../../lobby/LobbyLink";
 import { sidebarBase } from "./common";
 
-// the "Open a ticket" row: loaded by the first server that has tickets on
-const TicketLink = lazyRetry(
-  () =>
-    import("../../tickets/TicketLink").then((m) => ({
-      default: m.TicketLink,
-    })),
-  () => null,
-);
 import {
   OrderedCategory,
   applyChannelOrdering,
@@ -416,11 +407,8 @@ export const ServerSidebar = (props: Props) => {
         >
           <EventsLink server={props.server} />
           <LobbyLink server={props.server} />
-          <RulesLink server={props.server} />
-          {/* only servers with tickets switched on load the row */}
-          <Show when={props.server.tickets?.enabled}>
-            <TicketLink server={props.server} />
-          </Show>
+          {/* no Rules row here: the rules channel is already in the list below
+              (owner, 2026-11-17: nothing shown twice) */}
           <ServerStats server={props.server} />
           <Show
             when={categories().find((category) => category.id === "default")}
@@ -963,7 +951,6 @@ function Entry(
   );
 
   const inCall = () => props.channel.id === voice.channel()?.id;
-
 
   // a voice room you can't join: the row shows it, a tap does nothing
   const closedVoice = () => props.channel.isVoice && locked();

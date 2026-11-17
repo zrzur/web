@@ -27,6 +27,7 @@ type Draft = {
   category: string;
   staff_roles: string[];
   message: string;
+  label: string;
   types: Required<TicketType>[];
 };
 
@@ -34,6 +35,7 @@ const draftOf = (server: Server): Draft => ({
   category: server.tickets?.category ?? "",
   staff_roles: [...(server.tickets?.staff_roles ?? [])],
   message: server.tickets?.message ?? "",
+  label: server.tickets?.label ?? "",
   types: (server.tickets?.types ?? []).map((type) => ({
     id: type.id,
     name: type.name,
@@ -63,6 +65,9 @@ export function TicketsSettings(props: { server: Server }) {
   const on = () => props.server.tickets?.enabled === true;
   const stored = () => draftOf(props.server);
   const dirty = () => JSON.stringify(draft()) !== JSON.stringify(stored());
+  const typeIds = createMemo(() => draft().types.map((type) => type.id), [], {
+    equals: (a, b) => a.length === b.length && a.every((id, i) => id === b[i]),
+  });
   const typesReady = () => draft().types.every((type) => type.name.trim());
 
   async function send(enabled: boolean, values: Draft) {
@@ -76,6 +81,7 @@ export function TicketsSettings(props: { server: Server }) {
           category: values.category || undefined,
           staff_roles: values.staff_roles,
           message: values.message.trim() || undefined,
+          label: values.label.trim() || undefined,
           types: values.types.map((type) => ({
             ...type,
             name: type.name.trim(),
@@ -130,7 +136,7 @@ export function TicketsSettings(props: { server: Server }) {
         <SettingsRow
           icon={<Icon name="ticket" size={20} />}
           title={t`Tickets`}
-          description={t`Members get an "Open a ticket" row at the top of the channel list.`}
+          description={t`Members get an "Open a ticket" entry in the server's menu.`}
           disabled={!canManage() || pending()}
           onClick={() => void send(!on(), stored())}
           control={(ids) => (
@@ -221,57 +227,70 @@ export function TicketsSettings(props: { server: Server }) {
         >
           <Inside>
             <Field>
-              <For each={draft().types}>
-                {(type, index) => (
-                  <TypeCard data-testid={`tickets-type-${index()}`}>
-                    <TypeHead>
-                      <TextField
-                        label={t`Name`}
-                        maxlength={32}
-                        disabled={!canManage()}
-                        value={type.name}
-                        placeholder={t`Support`}
-                        onInput={(e) =>
-                          setType(type.id, { name: e.currentTarget.value })
-                        }
-                      />
-                      <RemoveType
-                        type="button"
-                        disabled={!canManage()}
-                        aria-label={t`Remove this kind`}
-                        title={t`Remove this kind`}
-                        onClick={() =>
-                          setDraft((now) => ({
-                            ...now,
-                            types: now.types.filter(
-                              (one) => one.id !== type.id,
-                            ),
-                          }))
-                        }
-                      >
-                        <Icon name="trash" size={18} />
-                      </RemoveType>
-                    </TypeHead>
-                    <Show when={props.server.orderedRoles.length}>
-                      <FieldLabel>
-                        <Trans>Answered by (none: the roles above)</Trans>
-                      </FieldLabel>
-                      {roleChips(
-                        () =>
-                          draft().types.find((one) => one.id === type.id)
-                            ?.staff_roles ?? [],
-                        (id) =>
-                          setType(type.id, {
-                            staff_roles: toggled(
-                              draft().types.find((one) => one.id === type.id)
-                                ?.staff_roles ?? [],
-                              id,
-                            ),
-                          }),
-                      )}
-                    </Show>
-                  </TypeCard>
-                )}
+              {/* by id: a row keyed by its object is rebuilt on every letter,
+                  and the field being typed in loses the cursor */}
+              <For each={typeIds()}>
+                {(typeId, index) => {
+                  const type = {
+                    id: typeId,
+                    get name() {
+                      return (
+                        draft().types.find((one) => one.id === typeId)?.name ??
+                        ""
+                      );
+                    },
+                  };
+                  return (
+                    <TypeCard data-testid={`tickets-type-${index()}`}>
+                      <TypeHead>
+                        <TextField
+                          label={t`Name`}
+                          maxlength={32}
+                          disabled={!canManage()}
+                          value={type.name}
+                          placeholder={t`Support`}
+                          onInput={(e) =>
+                            setType(type.id, { name: e.currentTarget.value })
+                          }
+                        />
+                        <RemoveType
+                          type="button"
+                          disabled={!canManage()}
+                          aria-label={t`Remove this kind`}
+                          title={t`Remove this kind`}
+                          onClick={() =>
+                            setDraft((now) => ({
+                              ...now,
+                              types: now.types.filter(
+                                (one) => one.id !== type.id,
+                              ),
+                            }))
+                          }
+                        >
+                          <Icon name="trash" size={18} />
+                        </RemoveType>
+                      </TypeHead>
+                      <Show when={props.server.orderedRoles.length}>
+                        <FieldLabel>
+                          <Trans>Answered by (none: the roles above)</Trans>
+                        </FieldLabel>
+                        {roleChips(
+                          () =>
+                            draft().types.find((one) => one.id === type.id)
+                              ?.staff_roles ?? [],
+                          (id) =>
+                            setType(type.id, {
+                              staff_roles: toggled(
+                                draft().types.find((one) => one.id === type.id)
+                                  ?.staff_roles ?? [],
+                                id,
+                              ),
+                            }),
+                        )}
+                      </Show>
+                    </TypeCard>
+                  );
+                }}
               </For>
               <Show when={draft().types.length < MAX_TYPES}>
                 <AddRow>
@@ -295,6 +314,30 @@ export function TicketsSettings(props: { server: Server }) {
                 </AddRow>
               </Show>
             </Field>
+          </Inside>
+        </SettingsSection>
+
+        <SettingsSection
+          title={<Trans>Name of the entry</Trans>}
+          description={
+            <Trans>
+              What members see in the server's menu. Empty: "Open a ticket".
+            </Trans>
+          }
+        >
+          <Inside>
+            <TextField
+              aria-label={t`Name of the entry`}
+              maxlength={32}
+              disabled={!canManage()}
+              value={draft().label}
+              placeholder={t`Open a ticket`}
+              data-testid="tickets-label"
+              onInput={(e) => {
+                const value = e.currentTarget.value;
+                setDraft((now) => ({ ...now, label: value }));
+              }}
+            />
           </Inside>
         </SettingsSection>
 

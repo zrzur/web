@@ -143,6 +143,17 @@ export function TicketAction(props: { channel: Channel }) {
             () => void run(() => props.channel.reopenTicket()),
             pending(),
           )}
+          {/* a closed ticket goes for good: for those who manage channels */}
+          <Show when={props.channel.havePermission("ManageChannel")}>
+            {act(
+              "ticket-delete",
+              "trash",
+              t`Delete ticket`,
+              <Trans>Delete ticket</Trans>,
+              () =>
+                openModal({ type: "delete_channel", channel: props.channel }),
+            )}
+          </Show>
         </Match>
         <Match when={true}>
           <Show when={!mine()}>

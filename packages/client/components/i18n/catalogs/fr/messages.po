@@ -1476,7 +1476,6 @@ msgid "A private channel"
 msgstr "Un salon privé"
 
 #: components/modal/modals/OpenTicket.tsx
-#: src/interface/tickets/TicketLink.tsx
 msgid "A private channel between you and the staff of this server."
 msgstr "Un salon privé entre vous et l’équipe de ce serveur."
 
@@ -6999,6 +6998,10 @@ msgstr "Supprimer définitivement cette fois et sa liste d’intéressés ? Le s
 #: components/app/interface/settings/server/webhooks/ServerWebhooks.tsx
 msgid "Delete this webhook?"
 msgstr "Supprimer ce webhook ?"
+
+#: src/interface/tickets/TicketAction.tsx
+msgid "Delete ticket"
+msgstr "Supprimer le ticket"
 
 #: components/app/interface/settings/channel/webhooks/ViewWebhook.tsx
 #~ msgid "Delete webhook"
@@ -12939,8 +12942,12 @@ msgid "Members couldn't be loaded"
 msgstr "Impossible de charger les membres"
 
 #: components/app/interface/settings/server/TicketsSettings.tsx
-msgid "Members get an \"Open a ticket\" row at the top of the channel list."
-msgstr "Les membres voient une ligne « Ouvrir un ticket » en haut de la liste des salons."
+msgid "Members get an \"Open a ticket\" entry in the server's menu."
+msgstr "Les membres voient une entrée « Ouvrir un ticket » dans le menu du serveur."
+
+#: components/app/interface/settings/server/TicketsSettings.tsx
+#~ msgid "Members get an \"Open a ticket\" row at the top of the channel list."
+#~ msgstr "Les membres voient une ligne « Ouvrir un ticket » en haut de la liste des salons."
 
 #: components/app/interface/settings/server/WingsSettings.tsx
 msgid "Members give the server Wings. More Wings unlock higher levels and their perks for everyone."
@@ -13709,6 +13716,10 @@ msgstr "Nom A–Z"
 #: components/app/interface/settings/user/profile/studio/StudioEditor.tsx
 msgid "Name and words"
 msgstr "Nom et mots-clés"
+
+#: components/app/interface/settings/server/TicketsSettings.tsx
+msgid "Name of the entry"
+msgstr "Nom de l'entrée"
 
 #: components/app/interface/settings/channel/Overview.tsx
 msgid "Name of the rooms"
@@ -14593,8 +14604,8 @@ msgid "No servers to show."
 msgstr "Aucun serveur à afficher."
 
 #: components/ui/components/features/voice/soundboard/SoundboardPicker.tsx
-msgid "No sounds here yet. Press one to add it to this server and play it."
-msgstr "Aucun son ici pour l’instant. Appuie sur l’un d’eux pour l’ajouter à ce serveur et le jouer."
+#~ msgid "No sounds here yet. Press one to add it to this server and play it."
+#~ msgstr "Aucun son ici pour l’instant. Appuie sur l’un d’eux pour l’ajouter à ce serveur et le jouer."
 
 #: components/app/interface/settings/server/soundboard/SoundLibrary.tsx
 msgid "No sounds match your search."
@@ -15565,8 +15576,9 @@ msgstr "Ouvrir les paramètres d'une catégorie"
 msgid "Open a server's menu and choose Give Wings. Each one is {0} a month."
 msgstr "Ouvre le menu d’un serveur et choisis Offrir des Ailes. Chacune coûte {0} par mois."
 
+#: components/app/interface/settings/server/TicketsSettings.tsx
+#: components/app/menus/ServerContextMenu.tsx
 #: components/modal/modals/OpenTicket.tsx
-#: src/interface/tickets/TicketLink.tsx
 msgid "Open a ticket"
 msgstr "Ouvrir un ticket"
 
@@ -25709,6 +25721,10 @@ msgstr "Ce qu’il peut faire sur <0>{0}</0>"
 msgid "What members are notified about until they choose for themselves."
 msgstr "Ce qui notifie les membres tant qu’ils n’ont pas choisi eux-mêmes."
 
+#: components/app/interface/settings/server/TicketsSettings.tsx
+msgid "What members see in the server's menu. Empty: \"Open a ticket\"."
+msgstr "Ce que les membres voient dans le menu du serveur. Vide : « Ouvrir un ticket »."
+
 #: components/app/interface/settings/server/pages.tsx
 msgid "What new members need before they can talk."
 msgstr "Ce dont les nouveaux membres ont besoin avant de pouvoir écrire."
@@ -27284,7 +27300,7 @@ msgstr "Tes abonnements"
 msgid "Your system keeps <0>{keys}</0> for itself. Choose other keys."
 msgstr "Ton système garde <0>{keys}</0> pour lui. Choisis d’autres touches."
 
-#: src/interface/tickets/TicketLink.tsx
+#: components/app/menus/ServerContextMenu.tsx
 msgid "Your ticket"
 msgstr "Votre ticket"
 

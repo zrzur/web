@@ -1507,7 +1507,6 @@ msgid "A private channel"
 msgstr "Ein privater Kanal"
 
 #: components/modal/modals/OpenTicket.tsx
-#: src/interface/tickets/TicketLink.tsx
 msgid "A private channel between you and the staff of this server."
 msgstr "Ein privater Kanal zwischen dir und dem Team dieses Servers."
 
@@ -7276,6 +7275,10 @@ msgstr "Dieses Mal und seine Interessiertenliste endgültig löschen? Das nächs
 #: components/app/interface/settings/server/webhooks/ServerWebhooks.tsx
 msgid "Delete this webhook?"
 msgstr "Diesen Webhook löschen?"
+
+#: src/interface/tickets/TicketAction.tsx
+msgid "Delete ticket"
+msgstr "Ticket löschen"
 
 #: components/app/interface/settings/channel/webhooks/ViewWebhook.tsx
 #~ msgid "Delete webhook"
@@ -13443,8 +13446,12 @@ msgid "Members couldn't be loaded"
 msgstr "Mitglieder konnten nicht geladen werden"
 
 #: components/app/interface/settings/server/TicketsSettings.tsx
-msgid "Members get an \"Open a ticket\" row at the top of the channel list."
-msgstr "Mitglieder sehen oben in der Kanalliste die Zeile „Ticket öffnen“."
+msgid "Members get an \"Open a ticket\" entry in the server's menu."
+msgstr "Mitglieder bekommen im Servermenü den Eintrag „Ticket öffnen“."
+
+#: components/app/interface/settings/server/TicketsSettings.tsx
+#~ msgid "Members get an \"Open a ticket\" row at the top of the channel list."
+#~ msgstr "Mitglieder sehen oben in der Kanalliste die Zeile „Ticket öffnen“."
 
 #: components/app/interface/settings/server/WingsSettings.tsx
 msgid "Members give the server Wings. More Wings unlock higher levels and their perks for everyone."
@@ -14233,6 +14240,10 @@ msgstr "Name A–Z"
 #: components/app/interface/settings/user/profile/studio/StudioEditor.tsx
 msgid "Name and words"
 msgstr "Name und Text"
+
+#: components/app/interface/settings/server/TicketsSettings.tsx
+msgid "Name of the entry"
+msgstr "Name des Eintrags"
 
 #: components/app/interface/settings/channel/Overview.tsx
 msgid "Name of the rooms"
@@ -15169,8 +15180,8 @@ msgid "No servers to show."
 msgstr "Keine Server zum Anzeigen."
 
 #: components/ui/components/features/voice/soundboard/SoundboardPicker.tsx
-msgid "No sounds here yet. Press one to add it to this server and play it."
-msgstr "Hier gibt es noch keine Sounds. Tippe auf einen, um ihn zu diesem Server hinzuzufügen und abzuspielen."
+#~ msgid "No sounds here yet. Press one to add it to this server and play it."
+#~ msgstr "Hier gibt es noch keine Sounds. Tippe auf einen, um ihn zu diesem Server hinzuzufügen und abzuspielen."
 
 #: components/app/interface/settings/server/soundboard/SoundLibrary.tsx
 msgid "No sounds match your search."
@@ -16193,8 +16204,9 @@ msgstr "Einstellungen einer Kategorie öffnen"
 msgid "Open a server's menu and choose Give Wings. Each one is {0} a month."
 msgstr "Öffne das Menü eines Servers und wähle „Flügel schenken“. Jeder kostet {0} im Monat."
 
+#: components/app/interface/settings/server/TicketsSettings.tsx
+#: components/app/menus/ServerContextMenu.tsx
 #: components/modal/modals/OpenTicket.tsx
-#: src/interface/tickets/TicketLink.tsx
 msgid "Open a ticket"
 msgstr "Ticket öffnen"
 
@@ -26783,6 +26795,10 @@ msgstr "Was er auf <0>{0}</0> darf"
 msgid "What members are notified about until they choose for themselves."
 msgstr "Worüber Mitglieder benachrichtigt werden, bis sie selbst wählen."
 
+#: components/app/interface/settings/server/TicketsSettings.tsx
+msgid "What members see in the server's menu. Empty: \"Open a ticket\"."
+msgstr "Was Mitglieder im Servermenü sehen. Leer: „Ticket öffnen“."
+
 #: components/app/interface/settings/server/ServerSafety.tsx
 #~ msgid "What new members need before they can send messages, react or join voice. Members with any role are exempt."
 #~ msgstr "Was neue Mitglieder brauchen, bevor sie Nachrichten senden, reagieren oder dem Sprachkanal beitreten können. Mitglieder mit einer Rolle sind ausgenommen."
@@ -28457,7 +28473,7 @@ msgstr "Deine Abos"
 msgid "Your system keeps <0>{keys}</0> for itself. Choose other keys."
 msgstr "Dein System behält <0>{keys}</0> für sich. Wähle andere Tasten."
 
-#: src/interface/tickets/TicketLink.tsx
+#: components/app/menus/ServerContextMenu.tsx
 msgid "Your ticket"
 msgstr "Dein Ticket"
 

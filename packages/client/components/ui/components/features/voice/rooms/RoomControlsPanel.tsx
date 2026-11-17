@@ -260,7 +260,9 @@ export default function RoomControlsPanel(props: {
               <Small
                 type="button"
                 aria-disabled={pending()}
-                onClick={() => void run(() => props.channel.removeRoomGuest(id))}
+                onClick={() =>
+                  void run(() => props.channel.removeRoomGuest(id))
+                }
               >
                 <Trans>Remove</Trans>
               </Small>
@@ -327,10 +329,12 @@ const Box = styled("div", {
     padding: "12px",
     maxHeight: "min(70vh, 560px)",
     overflowY: "auto",
-    borderRadius: "var(--z-radius, 10px)",
-    border: "1px solid var(--z-border-subtle)",
-    background: "var(--z-bg-raised)",
-    boxShadow: "var(--z-shadow-md)",
+    // the same chrome as the call card it opens above, so the two read as
+    // one piece
+    borderRadius: "var(--z-dock-radius, 12px)",
+    border: "1px solid var(--z-dock-border)",
+    background: "var(--z-dock-bg)",
+    boxShadow: "var(--z-dock-lift)",
     color: "var(--z-fg-primary)",
     fontSize: "14px",
     "&[data-bare]": {
@@ -379,8 +383,8 @@ const NameInput = styled("input", {
     height: "36px",
     paddingInline: "12px",
     borderRadius: "8px",
-    border: "1px solid var(--z-border-subtle)",
-    background: "var(--z-bg-input)",
+    border: "1px solid transparent",
+    background: "color-mix(in srgb, var(--z-fg-primary) 7%, transparent)",
     color: "var(--z-fg-primary)",
     fontFamily: "inherit",
     fontSize: "14px",
@@ -396,14 +400,14 @@ const Small = styled("button", {
     paddingInline: "12px",
     border: "none",
     borderRadius: "8px",
-    background: "color-mix(in srgb, var(--z-fg-primary) 10%, transparent)",
+    background: "color-mix(in srgb, var(--z-fg-primary) 7%, transparent)",
     color: "var(--z-fg-primary)",
     fontFamily: "inherit",
     fontSize: "13px",
     fontWeight: 600,
     cursor: "pointer",
     _hover: {
-      background: "color-mix(in srgb, var(--z-fg-primary) 16%, transparent)",
+      background: "color-mix(in srgb, var(--z-fg-primary) 12%, transparent)",
     },
     _focusVisible: { outline: "2px solid var(--z-focus)" },
     "&[aria-disabled='true']": { opacity: 0.4, cursor: "not-allowed" },
@@ -433,12 +437,12 @@ const Step = styled("button", {
     height: "32px",
     border: "none",
     borderRadius: "8px",
-    background: "color-mix(in srgb, var(--z-fg-primary) 10%, transparent)",
+    background: "color-mix(in srgb, var(--z-fg-primary) 7%, transparent)",
     color: "var(--z-fg-primary)",
     cursor: "pointer",
     "--z-icon-color": "currentColor",
     _hover: {
-      background: "color-mix(in srgb, var(--z-fg-primary) 16%, transparent)",
+      background: "color-mix(in srgb, var(--z-fg-primary) 12%, transparent)",
     },
     _focusVisible: { outline: "2px solid var(--z-focus)" },
     "&[aria-disabled='true']": { opacity: 0.4, cursor: "not-allowed" },

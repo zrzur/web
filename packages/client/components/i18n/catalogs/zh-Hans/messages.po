@@ -1476,7 +1476,6 @@ msgid "A private channel"
 msgstr "私密频道"
 
 #: components/modal/modals/OpenTicket.tsx
-#: src/interface/tickets/TicketLink.tsx
 msgid "A private channel between you and the staff of this server."
 msgstr "你与此服务器管理团队之间的私密频道。"
 
@@ -6999,6 +6998,10 @@ msgstr "要永久删除这一次及其感兴趣名单吗？下一次仍按计划
 #: components/app/interface/settings/server/webhooks/ServerWebhooks.tsx
 msgid "Delete this webhook?"
 msgstr "要删除此 Webhook 吗？"
+
+#: src/interface/tickets/TicketAction.tsx
+msgid "Delete ticket"
+msgstr "删除工单"
 
 #: components/app/interface/settings/channel/webhooks/ViewWebhook.tsx
 #~ msgid "Delete webhook"
@@ -12939,8 +12942,12 @@ msgid "Members couldn't be loaded"
 msgstr "无法加载成员"
 
 #: components/app/interface/settings/server/TicketsSettings.tsx
-msgid "Members get an \"Open a ticket\" row at the top of the channel list."
-msgstr "成员会在频道列表顶部看到“创建工单”一行。"
+msgid "Members get an \"Open a ticket\" entry in the server's menu."
+msgstr "成员会在服务器菜单中看到“创建工单”一项。"
+
+#: components/app/interface/settings/server/TicketsSettings.tsx
+#~ msgid "Members get an \"Open a ticket\" row at the top of the channel list."
+#~ msgstr "成员会在频道列表顶部看到“创建工单”一行。"
 
 #: components/app/interface/settings/server/WingsSettings.tsx
 msgid "Members give the server Wings. More Wings unlock higher levels and their perks for everyone."
@@ -13709,6 +13716,10 @@ msgstr "名称 A–Z"
 #: components/app/interface/settings/user/profile/studio/StudioEditor.tsx
 msgid "Name and words"
 msgstr "名称与关键词"
+
+#: components/app/interface/settings/server/TicketsSettings.tsx
+msgid "Name of the entry"
+msgstr "菜单项名称"
 
 #: components/app/interface/settings/channel/Overview.tsx
 msgid "Name of the rooms"
@@ -14593,8 +14604,8 @@ msgid "No servers to show."
 msgstr "没有可显示的服务器。"
 
 #: components/ui/components/features/voice/soundboard/SoundboardPicker.tsx
-msgid "No sounds here yet. Press one to add it to this server and play it."
-msgstr "这里还没有声音。点按一个即可将其添加到此服务器并播放。"
+#~ msgid "No sounds here yet. Press one to add it to this server and play it."
+#~ msgstr "这里还没有声音。点按一个即可将其添加到此服务器并播放。"
 
 #: components/app/interface/settings/server/soundboard/SoundLibrary.tsx
 msgid "No sounds match your search."
@@ -15565,8 +15576,9 @@ msgstr "打开分类设置"
 msgid "Open a server's menu and choose Give Wings. Each one is {0} a month."
 msgstr "打开服务器菜单，选择“赠送羽翼”。每枚每月 {0}。"
 
+#: components/app/interface/settings/server/TicketsSettings.tsx
+#: components/app/menus/ServerContextMenu.tsx
 #: components/modal/modals/OpenTicket.tsx
-#: src/interface/tickets/TicketLink.tsx
 msgid "Open a ticket"
 msgstr "创建工单"
 
@@ -25709,6 +25721,10 @@ msgstr "它在 <0>{0}</0> 上可以做什么"
 msgid "What members are notified about until they choose for themselves."
 msgstr "成员自行选择之前会收到哪些通知。"
 
+#: components/app/interface/settings/server/TicketsSettings.tsx
+msgid "What members see in the server's menu. Empty: \"Open a ticket\"."
+msgstr "成员在服务器菜单中看到的名称。留空则为“创建工单”。"
+
 #: components/app/interface/settings/server/pages.tsx
 msgid "What new members need before they can talk."
 msgstr "新成员在发言之前需要做的事。"
@@ -27284,7 +27300,7 @@ msgstr "你的订阅"
 msgid "Your system keeps <0>{keys}</0> for itself. Choose other keys."
 msgstr "系统保留了 <0>{keys}</0>。请选择其他按键。"
 
-#: src/interface/tickets/TicketLink.tsx
+#: components/app/menus/ServerContextMenu.tsx
 msgid "Your ticket"
 msgstr "你的工单"
 

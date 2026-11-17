@@ -1476,7 +1476,6 @@ msgid "A private channel"
 msgstr "Приватный канал"
 
 #: components/modal/modals/OpenTicket.tsx
-#: src/interface/tickets/TicketLink.tsx
 msgid "A private channel between you and the staff of this server."
 msgstr "Личный канал между вами и командой этого сервера."
 
@@ -6999,6 +6998,10 @@ msgstr "Удалить этот раз и список заинтересова�
 #: components/app/interface/settings/server/webhooks/ServerWebhooks.tsx
 msgid "Delete this webhook?"
 msgstr "Удалить этот вебхук?"
+
+#: src/interface/tickets/TicketAction.tsx
+msgid "Delete ticket"
+msgstr "Удалить тикет"
 
 #: components/app/interface/settings/channel/webhooks/ViewWebhook.tsx
 #~ msgid "Delete webhook"
@@ -12939,8 +12942,12 @@ msgid "Members couldn't be loaded"
 msgstr "Не удалось загрузить участников"
 
 #: components/app/interface/settings/server/TicketsSettings.tsx
-msgid "Members get an \"Open a ticket\" row at the top of the channel list."
-msgstr "У участников вверху списка каналов появляется строка «Открыть тикет»."
+msgid "Members get an \"Open a ticket\" entry in the server's menu."
+msgstr "У участников в меню сервера появляется пункт «Открыть тикет»."
+
+#: components/app/interface/settings/server/TicketsSettings.tsx
+#~ msgid "Members get an \"Open a ticket\" row at the top of the channel list."
+#~ msgstr "У участников вверху списка каналов появляется строка «Открыть тикет»."
 
 #: components/app/interface/settings/server/WingsSettings.tsx
 msgid "Members give the server Wings. More Wings unlock higher levels and their perks for everyone."
@@ -13709,6 +13716,10 @@ msgstr "Название от А до Я"
 #: components/app/interface/settings/user/profile/studio/StudioEditor.tsx
 msgid "Name and words"
 msgstr "Название и слова"
+
+#: components/app/interface/settings/server/TicketsSettings.tsx
+msgid "Name of the entry"
+msgstr "Название пункта"
 
 #: components/app/interface/settings/channel/Overview.tsx
 msgid "Name of the rooms"
@@ -14593,8 +14604,8 @@ msgid "No servers to show."
 msgstr "Серверов для показа нет."
 
 #: components/ui/components/features/voice/soundboard/SoundboardPicker.tsx
-msgid "No sounds here yet. Press one to add it to this server and play it."
-msgstr "Здесь пока нет звуков. Нажмите на любой, чтобы добавить его на этот сервер и воспроизвести."
+#~ msgid "No sounds here yet. Press one to add it to this server and play it."
+#~ msgstr "Здесь пока нет звуков. Нажмите на любой, чтобы добавить его на этот сервер и воспроизвести."
 
 #: components/app/interface/settings/server/soundboard/SoundLibrary.tsx
 msgid "No sounds match your search."
@@ -15565,8 +15576,9 @@ msgstr "Открыть настройки категории"
 msgid "Open a server's menu and choose Give Wings. Each one is {0} a month."
 msgstr "Откройте меню сервера и выберите «Подарить Крылья». Каждое стоит {0} в месяц."
 
+#: components/app/interface/settings/server/TicketsSettings.tsx
+#: components/app/menus/ServerContextMenu.tsx
 #: components/modal/modals/OpenTicket.tsx
-#: src/interface/tickets/TicketLink.tsx
 msgid "Open a ticket"
 msgstr "Открыть тикет"
 
@@ -25709,6 +25721,10 @@ msgstr "Что он может делать на <0>{0}</0>"
 msgid "What members are notified about until they choose for themselves."
 msgstr "О чём получают уведомления участники, пока не выберут сами."
 
+#: components/app/interface/settings/server/TicketsSettings.tsx
+msgid "What members see in the server's menu. Empty: \"Open a ticket\"."
+msgstr "Что участники видят в меню сервера. Пусто: «Открыть тикет»."
+
 #: components/app/interface/settings/server/pages.tsx
 msgid "What new members need before they can talk."
 msgstr "Что нужно новым участникам, прежде чем они смогут писать."
@@ -27284,7 +27300,7 @@ msgstr "Ваши подписки"
 msgid "Your system keeps <0>{keys}</0> for itself. Choose other keys."
 msgstr "Система оставляет <0>{keys}</0> за собой. Выберите другие клавиши."
 
-#: src/interface/tickets/TicketLink.tsx
+#: components/app/menus/ServerContextMenu.tsx
 msgid "Your ticket"
 msgstr "Ваш тикет"
 
