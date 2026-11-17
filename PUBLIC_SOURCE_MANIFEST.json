@@ -1510,8 +1510,8 @@
     },
     {
       "path": "packages/client/components/app/interface/settings/server/TicketsSettings.tsx",
-      "sha256": "b7af93ea3ef21f40a5256b40d3cdea189bdfc7c95d1f8fb7f5b3e3c3dca90a16",
-      "bytes": 18231,
+      "sha256": "890ad9c91dfb9a57335b5ff7660140cf17e63446b29db7f524a8eb73ed6a71eb",
+      "bytes": 19836,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -2782,8 +2782,8 @@
     },
     {
       "path": "packages/client/components/app/menus/ServerContextMenu.tsx",
-      "sha256": "b3ead9d23c2663cf8c72cc5f20bff38a16cedffadb624f9aeac61224969be91a",
-      "bytes": 16365,
+      "sha256": "20a83ff76501c1706d73f567a080e85fe3f2ccc794087cf6265f4c2b069a90fb",
+      "bytes": 17966,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -3382,8 +3382,8 @@
     },
     {
       "path": "packages/client/components/i18n/catalogs/ar/messages.po",
-      "sha256": "1017b741d8ecd5c872048f5450a10d806baffaf9b1a3a993301388bb2d9f98ff",
-      "bytes": 1159063,
+      "sha256": "405dfe36881b6e899ab47c5e571a06a14969ec1b4d757feace6d0bf0e7494544",
+      "bytes": 1159820,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -3526,8 +3526,8 @@
     },
     {
       "path": "packages/client/components/i18n/catalogs/de/messages.po",
-      "sha256": "65e8043eb4a6f94663ca50e1a0402e193a7b1fd8d46308e09a83ece8c05b22e9",
-      "bytes": 1071458,
+      "sha256": "64ba41201b4447077acabc6ead73d29acb8911bf2471a66bbe58be3c8665f711",
+      "bytes": 1072138,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -3562,8 +3562,8 @@
     },
     {
       "path": "packages/client/components/i18n/catalogs/en/messages.po",
-      "sha256": "ea8573bc602787d4229dfabd431a915b3a42b41aff904546076038fbb50191b1",
-      "bytes": 1032471,
+      "sha256": "23aa1235eab75353938db99f9c24c739b658afe9a9b5c1f3938f9e43df776def",
+      "bytes": 1033141,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -3586,8 +3586,8 @@
     },
     {
       "path": "packages/client/components/i18n/catalogs/es/messages.po",
-      "sha256": "6b5faee64563ae8d74277aa386b86fba868f2be9e673bf7d9f36648a5d506976",
-      "bytes": 1001816,
+      "sha256": "39fc0f9a36fd31a4699d314f2671c52b09aee69639f138749fbdd6a7ce036416",
+      "bytes": 1002518,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -3646,8 +3646,8 @@
     },
     {
       "path": "packages/client/components/i18n/catalogs/fr/messages.po",
-      "sha256": "3dc23f792cfd445b86e3dc87bd8d24097391de1cc6d1dfa0bb14bd803fe0d0b7",
-      "bytes": 1018624,
+      "sha256": "44ac09f39b340aacf1543798d3aa4e308ac95257fc2f4db2b23a1c280f7932f2",
+      "bytes": 1019334,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -3910,8 +3910,8 @@
     },
     {
       "path": "packages/client/components/i18n/catalogs/ru/messages.po",
-      "sha256": "d9e40038c375bc8e19fafb8e96f1d0ef70c6de199fe4c242725c0189637851f2",
-      "bytes": 1151452,
+      "sha256": "a11579fdd1b4a39d030756b613cbf61e7c716374f66854c4eb3260ae0d5cfa48",
+      "bytes": 1152242,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -4078,8 +4078,8 @@
     },
     {
       "path": "packages/client/components/i18n/catalogs/zh-Hans/messages.po",
-      "sha256": "232698df3a436cd7a327444c91aed389709d28375512896af84b191beacfc9de",
-      "bytes": 972137,
+      "sha256": "19367d43e04fb32a7218489110cce03b846c74ac0dba9491b71a89dfa4617b13",
+      "bytes": 972821,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -7306,8 +7306,8 @@
     },
     {
       "path": "packages/client/components/ui/components/features/voice/rooms/RoomControlsPanel.tsx",
-      "sha256": "d4136563c8d190651ea17f3b5ca9edb14d52e1c3623bb145fbe98757f432300a",
-      "bytes": 15281,
+      "sha256": "bee15d2010cc0e5f93f03e1667bccc68627d2d31fe4260d97831c3109ed3c472",
+      "bytes": 15434,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -7330,8 +7330,8 @@
     },
     {
       "path": "packages/client/components/ui/components/features/voice/soundboard/SoundboardPicker.tsx",
-      "sha256": "7ffd9e9d4f152db91b7d2110d2a643644354c5d9a3fe1153f2694d1f3b582bb4",
-      "bytes": 12496,
+      "sha256": "595d73decefb6194e6507a0aabfd1fc145be3b5a30fc86c7ee815867c819fe1b",
+      "bytes": 12363,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -43492,8 +43492,8 @@
     },
     {
       "path": "packages/client/src/interface/navigation/channels/ServerSidebar.tsx",
-      "sha256": "b6d453abb4c4cf48358722c6edc3c3b485f71ad0b6d0e015cbdc82814f2cde6b",
-      "bytes": 41681,
+      "sha256": "b38b67f9644168ce670d1b330e7d5f7bf1fe50ccd3a645d476ec9bc52371e5b8",
+      "bytes": 41283,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -43582,14 +43582,8 @@
     },
     {
       "path": "packages/client/src/interface/tickets/TicketAction.tsx",
-      "sha256": "5cd20ea21271dbc2c81f0d9812cb200d7e0871b61f5f1886ac558e538677d500",
-      "bytes": 5651,
-      "category": "product-source-or-build-manifest"
-    },
-    {
-      "path": "packages/client/src/interface/tickets/TicketLink.tsx",
-      "sha256": "ed1ce5f48d240a58016a619092b59afdc9fc352006b5a174ff52c5f71b16fc46",
-      "bytes": 3514,
+      "sha256": "69c4ecf1a9ba44fb9785ad5bc02d8dbce7ff64d3108d4b01c146676223972ee2",
+      "bytes": 6080,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -44394,7 +44388,7 @@
   "submodules": [
     {
       "path": "packages/stoat.js",
-      "commit": "7740f063f22f5c9829e3abf7261fef7dab91d430"
+      "commit": "1e023a802f2f4c1fc6014413f0b28076e541299a"
     }
   ]
 }
