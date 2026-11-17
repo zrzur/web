@@ -28,16 +28,17 @@ import { useInstance } from "@revolt/instance";
 import { TextWithEmoji } from "@revolt/markdown";
 import { useModals } from "@revolt/modal";
 import { useVoice } from "@revolt/rtc";
+import { canShareScreen } from "@revolt/rtc/screenShare";
 import { Avatar, OverflowingText, UserStatus } from "@revolt/ui";
 import { SignalBars } from "@revolt/ui/components/features/voice/SignalBars";
 import { watchVoiceStrip } from "@revolt/ui/components/features/voice/callCard/voiceStrip";
+import SoundsUnavailable from "@revolt/ui/components/features/voice/soundboard/SoundsUnavailable";
 import {
   setSoundboardOpen,
   soundboardOpen,
 } from "@revolt/ui/components/features/voice/soundboard/soundboardOpen";
-import { Icon } from "@revolt/ui/icons/Icon";
-import SoundsUnavailable from "@revolt/ui/components/features/voice/soundboard/SoundsUnavailable";
 import { lazyRetry } from "@revolt/ui/components/utils/lazyRetry";
+import { Icon } from "@revolt/ui/icons/Icon";
 
 /**
  * Account / voice control panel: a card floating at the bottom of the left
@@ -401,22 +402,26 @@ function VoiceSection() {
             <Icon name="video-camera" size={20} />
           </Show>
         </button>
-        <button
-          class={voiceAction()}
-          data-voice-control="screenshare"
-          aria-label={voice.screenshare() ? t`Stop sharing` : t`Share screen`}
-          aria-pressed={!!voice.screenshare()}
-          aria-disabled={screenDisabled()}
-          onClick={() => !screenDisabled() && voice.toggleScreenshare()}
-          use:floating={{
-            tooltip: {
-              placement: "top",
-              content: voice.screenshare() ? t`Stop sharing` : t`Share screen`,
-            },
-          }}
-        >
-          <Icon name="monitor-arrow-up" size={20} />
-        </button>
+        <Show when={canShareScreen}>
+          <button
+            class={voiceAction()}
+            data-voice-control="screenshare"
+            aria-label={voice.screenshare() ? t`Stop sharing` : t`Share screen`}
+            aria-pressed={!!voice.screenshare()}
+            aria-disabled={screenDisabled()}
+            onClick={() => !screenDisabled() && voice.toggleScreenshare()}
+            use:floating={{
+              tooltip: {
+                placement: "top",
+                content: voice.screenshare()
+                  ? t`Stop sharing`
+                  : t`Share screen`,
+              },
+            }}
+          >
+            <Icon name="monitor-arrow-up" size={20} />
+          </button>
+        </Show>
         <Show when={voice.channel()?.server}>
           <button
             class={voiceAction()}

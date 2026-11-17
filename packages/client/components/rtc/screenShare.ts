@@ -405,3 +405,12 @@ export function isShareCancelled(error: unknown, pickerClosed = false) {
   // allowed by the user agent or the platform in the current context."
   return name === "NotAllowedError" && !/by system|platform/i.test(message);
 }
+
+/**
+ * Whether this browser can share a screen at all. Phone browsers (Chrome on
+ * Android, Safari on iPhone) cannot: the button was there and did nothing
+ * but show an error. People on a phone still watch what others share.
+ */
+export const canShareScreen =
+  typeof navigator !== "undefined" &&
+  typeof navigator.mediaDevices?.getDisplayMedia === "function";

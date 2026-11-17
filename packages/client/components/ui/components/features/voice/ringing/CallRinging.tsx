@@ -323,6 +323,12 @@ const Stack = styled("div", {
     "&:empty": { display: "none" },
     // RTL: the same centre, translated the other way
     "[dir=rtl] &": { transform: "translateX(50%)" },
+    // phones: under the status bar or notch of the installed app, and
+    // nearly as wide as the screen
+    _phone: {
+      insetBlockStart: "calc(var(--z-safe-top) + 12px)",
+      width: "calc(100vw - 24px)",
+    },
   },
 });
 
@@ -340,6 +346,13 @@ const Card = styled("div", {
     color: "var(--z-fg-primary)",
     animation: "scrimFadeIn .2s ease-out",
     _motionReduce: { animation: "none" },
+    // phones: who is calling on one row, the three answers on the next, so
+    // a long name keeps its room and each answer is a wide target
+    _phone: {
+      flexWrap: "wrap",
+      rowGap: "12px",
+      padding: "14px 16px 16px",
+    },
   },
 });
 
@@ -380,5 +393,17 @@ const Actions = styled("div", {
     display: "flex",
     gap: "var(--gap-sm)",
     flexShrink: 0,
+    // phones: decline, video, accept across the card, 48 px high
+    _phone: {
+      flexBasis: "100%",
+      gap: "8px",
+      "& > button": {
+        flex: "1 1 0",
+        width: "auto !important",
+        minWidth: "0 !important",
+        height: "48px !important",
+        borderRadius: "14px !important",
+      },
+    },
   },
 });
