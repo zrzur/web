@@ -262,8 +262,8 @@
     },
     {
       "path": "CHANGELOG.md",
-      "sha256": "719b93a6398213d5644b3858e891ce766873b2b86f8d6e8c2127531fc4dfc90c",
-      "bytes": 170593,
+      "sha256": "c1401f61867aedfef5bb4b27baf1779c753b91038677e0d0a8131084df85cce1",
+      "bytes": 170879,
       "category": "public-documentation"
     },
     {
@@ -41986,8 +41986,8 @@
     },
     {
       "path": "packages/client/src/interface/Friends.tsx",
-      "sha256": "895cd8e4337c86cefedbb5826c36ca109a93ccdf33858f2f3a139b6790305bd9",
-      "bytes": 23125,
+      "sha256": "86d7662e85f850cecfb4170e72bac377b11c7a4d9ed3d07e92e347103793cf00",
+      "bytes": 24328,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -43348,8 +43348,8 @@
     },
     {
       "path": "packages/client/src/interface/navigation/NotificationsPhone.tsx",
-      "sha256": "a189a5da7b36645e87ef8f0d5986452135f7674a5bce9783dbb06f7e3e6f9a5d",
-      "bytes": 14347,
+      "sha256": "e5d44558212393921f422add1d1cbfdc01230b78c471f72c4761b487cc852826",
+      "bytes": 15160,
       "category": "product-source-or-build-manifest"
     },
     {
