@@ -3347,6 +3347,7 @@ msgstr "Азербайджан"
 #: components/modal/modals/MFAFlow.tsx
 #: components/modal/modals/ReportContent.tsx
 #: src/interface/channels/AgeGate.tsx
+#: src/interface/channels/text/ChannelDetailsPhone.tsx
 #: src/interface/channels/voice/VoiceChannel.tsx
 #: src/interface/common/CommonHeader.tsx
 msgid "Back"
@@ -4684,6 +4685,11 @@ msgstr "Описание канала"
 #~ msgid "Channel Description"
 #~ msgstr "Описание канала"
 
+#: src/interface/channels/ChannelHeader.tsx
+#: src/interface/channels/text/ChannelDetailsPhone.tsx
+msgid "Channel details"
+msgstr "О канале"
+
 #: components/app/interface/settings/server/assistant/labels.ts
 msgid "Channel for appeals"
 msgstr "Канал для обжалований"
@@ -4717,6 +4723,7 @@ msgstr "Строки каналов при открытии или закрыт�
 #: components/app/interface/settings/channel/ChannelCard.tsx
 #: components/app/interface/settings/server/channels/ChannelsSettings.tsx
 #: src/interface/channels/ChannelHeader.tsx
+#: src/interface/channels/text/ChannelDetailsPhone.tsx
 msgid "Channel settings"
 msgstr "Настройки канала"
 
@@ -4839,6 +4846,7 @@ msgstr "Проверьте подключение и повторите попы
 
 #: components/app/interface/settings/user/myData/MyData.tsx
 #: components/app/interface/settings/user/profile/studio/StudioHome.tsx
+#: src/interface/channels/text/ChannelDetailsPhone.tsx
 msgid "Check your connection and try again."
 msgstr "Проверьте подключение и повторите попытку."
 
@@ -7303,6 +7311,7 @@ msgid "Dino Frame"
 msgstr "Рамка с динозавром"
 
 #: components/modal/modals/ForwardMessage.tsx
+#: src/interface/channels/text/ChannelDetailsPhone.tsx
 #: src/interface/navigation/MentionsPanel.tsx
 #: src/interface/navigation/NotificationsPhone.tsx
 msgid "Direct message"
@@ -8680,6 +8689,7 @@ msgstr "Фиджи"
 
 #: components/app/interface/settings/user/bots/CommandManager.tsx
 #: components/app/interface/settings/user/profile/studio/StudioEditor.tsx
+#: src/interface/channels/text/ChannelDetailsPhone.tsx
 msgid "File"
 msgstr "Файл"
 
@@ -8718,6 +8728,7 @@ msgstr "Загрузка файлов"
 msgid "Filed"
 msgstr "Подана"
 
+#: src/interface/channels/text/ChannelDetailsPhone.tsx
 #: src/interface/channels/text/Composition.tsx
 #: src/interface/developers/docs/DocsPortal.tsx
 msgid "Files"
@@ -8730,6 +8741,10 @@ msgstr "Только файлы"
 #: components/app/interface/safety/labels.tsx
 msgid "Files or links that try to harm devices"
 msgstr "Файлы или ссылки, которые пытаются навредить устройствам"
+
+#: src/interface/channels/text/ChannelDetailsPhone.tsx
+msgid "Files sent in this channel show here."
+msgstr "Здесь появляются файлы, отправленные в этом канале."
 
 #: src/interface/channels/text/Composition.tsx
 msgid "Files too large"
@@ -9884,6 +9899,7 @@ msgstr "Основание"
 
 #: components/modal/modals/CreateGroupOrServer.tsx
 #: components/modal/modals/ForwardMessage.tsx
+#: src/interface/channels/text/ChannelDetailsPhone.tsx
 msgid "Group"
 msgstr "Группа"
 
@@ -10854,6 +10870,10 @@ msgstr "Ссылка-приглашение"
 msgid "Invite links"
 msgstr "Ссылки-приглашения"
 
+#: src/interface/channels/text/ChannelDetailsPhone.tsx
+msgid "Invite members"
+msgstr "Пригласить участников"
+
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 #: components/modal/modals/permissionTitles.ts
 msgid "Invite others"
@@ -11244,6 +11264,7 @@ msgstr "Иордания"
 msgid "Jump back in"
 msgstr "Вернуться к делам"
 
+#: src/interface/channels/text/ChannelDetailsPhone.tsx
 #: src/interface/channels/text/TextSearchSidebar.tsx
 msgid "Jump to message"
 msgstr "Перейти к сообщению"
@@ -11917,6 +11938,7 @@ msgstr "Привязываем вашу учётную запись Steam…"
 #: components/app/interface/settings/user/profile/ProfileExtras.tsx
 #: components/ui/components/features/profiles/labels.ts
 #: components/ui/components/features/profiles/ProfileLinks.tsx
+#: src/interface/channels/text/ChannelDetailsPhone.tsx
 msgid "Links"
 msgstr "Ссылки"
 
@@ -11931,6 +11953,10 @@ msgstr "Ссылки от новых участников"
 #: components/app/interface/settings/user/profile/ProfileExtras.tsx
 msgid "Links must start with https://"
 msgstr "Ссылки должны начинаться с https://"
+
+#: src/interface/channels/text/ChannelDetailsPhone.tsx
+msgid "Links sent in this channel show here."
+msgstr "Здесь появляются ссылки, отправленные в этом канале."
 
 #: components/app/interface/safety/labels.tsx
 msgid "Links that lead to phishing or harmful sites"
@@ -12114,6 +12140,7 @@ msgstr "При загрузке устанавливается соединен�
 #: components/ui/components/features/voice/soundboard/SoundboardPicker.tsx
 #: components/ui/components/features/voice/StreamPreviewCard.tsx
 #: src/interface/channels/forum/ForumChannel.tsx
+#: src/interface/channels/text/ChannelDetailsPhone.tsx
 #: src/interface/channels/text/ThreadsPanel.tsx
 #: src/interface/Designs.tsx
 #: src/interface/designs/ShowMore.tsx
@@ -12796,6 +12823,10 @@ msgstr "Майя"
 msgid "Meaning"
 msgstr "Значение"
 
+#: src/interface/channels/text/ChannelDetailsPhone.tsx
+msgid "Media"
+msgstr "Медиа"
+
 #: components/app/interface/settings/server/ServerEmergency.tsx
 #: components/app/interface/settings/server/ServerVerification.tsx
 #: components/app/interface/settings/user/badges/BugQueue.tsx
@@ -12894,6 +12925,7 @@ msgstr "Участник с {0}"
 #: components/app/interface/settings/ServerSettings.tsx
 #: components/modal/lib/serverTemplateText.ts
 #: components/modal/modals/permissionTitles.ts
+#: src/interface/channels/text/ChannelDetailsPhone.tsx
 #: src/interface/designs/Mirror.tsx
 msgid "Members"
 msgstr "Участники"
@@ -14376,6 +14408,10 @@ msgstr "Избранного пока нет"
 #~ msgid "No feathers yet"
 #~ msgstr ""
 
+#: src/interface/channels/text/ChannelDetailsPhone.tsx
+msgid "No files yet"
+msgstr "Пока нет файлов"
+
 #: components/modal/modals/CreateInvite.tsx
 msgid "No friends match your search."
 msgstr "Подходящих друзей нет."
@@ -14431,6 +14467,10 @@ msgstr "Уровня пока нет"
 #: components/ui/components/features/voice/rooms/RoomControlsPanel.tsx
 msgid "No limit"
 msgstr "Без ограничений"
+
+#: src/interface/channels/text/ChannelDetailsPhone.tsx
+msgid "No links yet"
+msgstr "Пока нет ссылок"
 
 #: components/app/interface/settings/user/profile/ProfileExtras.tsx
 msgid "No links yet."
@@ -14517,6 +14557,10 @@ msgstr "Разрешений пока нет"
 #: components/app/interface/settings/server/apps/ServerAppPage.tsx
 msgid "No permissions were given when it was added."
 msgstr "При добавлении разрешения не выдавались."
+
+#: src/interface/channels/text/ChannelDetailsPhone.tsx
+msgid "No pictures or videos yet"
+msgstr "Пока нет изображений и видео"
 
 #: src/interface/channels/text/TextSearchSidebar.tsx
 msgid "No pinned messages in this channel yet."
@@ -15044,6 +15088,7 @@ msgstr "Пока ничего. Перед публикацией этой вер
 #: components/app/interface/settings/UserSettings.tsx
 #: components/app/menus/ServerContextMenu.tsx
 #: components/app/menus/shared/NotificationContextMenu.tsx
+#: src/interface/channels/text/ChannelDetailsPhone.tsx
 #: src/interface/navigation/NotificationsPhone.tsx
 msgid "Notifications"
 msgstr "Уведомления"
@@ -16462,6 +16507,10 @@ msgstr "Выберите, какой у вас сервер; модули вкл
 msgid "Picnic Ring"
 msgstr "Кольцо для пикника"
 
+#: src/interface/channels/text/ChannelDetailsPhone.tsx
+msgid "Pictures and videos sent in this channel show here."
+msgstr "Здесь появляются изображения и видео, отправленные в этом канале."
+
 #: components/modal/modals/PinMessage.tsx
 msgid "Pin"
 msgstr "Закрепить"
@@ -16502,6 +16551,10 @@ msgstr "Закреплённые сообщения"
 #: src/interface/channels/text/searchLabels.ts
 msgid "pinned: takes true or false."
 msgstr "pinned: принимает true или false."
+
+#: src/interface/channels/text/ChannelDetailsPhone.tsx
+msgid "Pins"
+msgstr "Закреплённые"
 
 #: components/app/interface/settings/user/profile/styleLabels.tsx
 msgid "Pisces"
@@ -19208,6 +19261,7 @@ msgstr "Сохранено"
 #: components/app/interface/desktop/Titlebar.tsx
 #: components/modal/modals/ForwardMessage.tsx
 #: src/interface/channels/ChannelHeader.tsx
+#: src/interface/channels/text/ChannelDetailsPhone.tsx
 #: src/interface/navigation/channels/HomeSidebar.tsx
 #: src/interface/navigation/MentionsPanel.tsx
 #: src/interface/navigation/NotificationsPhone.tsx
@@ -19516,6 +19570,7 @@ msgid "Search members"
 msgstr "Поиск участников"
 
 #: src/interface/channels/ChannelHeader.tsx
+#: src/interface/channels/text/ChannelDetailsPhone.tsx
 #: src/interface/channels/text/SearchBox.tsx
 msgid "Search messages"
 msgstr "Поиск сообщений"
@@ -21307,6 +21362,10 @@ msgstr "По-прежнему бесплатно для всех"
 msgid "Still loading. Try again in a moment."
 msgstr "Всё ещё загружается. Попробуйте ещё раз чуть позже."
 
+#: src/interface/channels/text/ChannelDetailsPhone.tsx
+msgid "Still not loading."
+msgstr "Всё ещё не загружается."
+
 #: components/modal/modals/BillingCheckoutStatus.tsx
 msgid "Still waiting. If you paid, it will show up in Subscriptions as soon as the payment is confirmed."
 msgstr "Всё ещё ждём. Если вы оплатили, платёж появится в разделе «Подписки», как только будет подтверждён."
@@ -22049,6 +22108,7 @@ msgstr "Текст и слайды остаются чёткими, видео �
 
 #: components/app/interface/settings/server/channels/ChannelsSettings.tsx
 #: components/modal/modals/ServerEventEditor.tsx
+#: src/interface/channels/text/ChannelDetailsPhone.tsx
 msgid "Text channel"
 msgstr "Текстовый канал"
 
@@ -23277,6 +23337,10 @@ msgstr "Эта ссылка не имеет срока действия."
 msgid "This link no longer works"
 msgstr "Эта ссылка больше не работает"
 
+#: src/interface/channels/text/ChannelDetailsPhone.tsx
+msgid "This list couldn't be loaded"
+msgstr "Не удалось загрузить этот список"
+
 #: components/i18n/errors.tsx
 msgid "This message doesn't exist any more."
 msgstr "Этого сообщения больше не существует."
@@ -23616,6 +23680,7 @@ msgstr "Название ветки"
 
 #: components/app/interface/settings/server/ThreadFeatures.tsx
 #: src/interface/channels/ChannelHeader.tsx
+#: src/interface/channels/text/ChannelDetailsPhone.tsx
 #: src/interface/channels/text/TextChannel.tsx
 #: src/interface/channels/text/ThreadsPanel.tsx
 msgid "Threads"
@@ -23996,6 +24061,7 @@ msgstr "Попробуйте другое слово или изучите ка�
 #: components/modal/modals/ReportContent.tsx
 #: components/ui/components/features/messaging/composition/picker/GifPicker.tsx
 #: src/interface/channels/forum/ForumChannel.tsx
+#: src/interface/channels/text/ChannelDetailsPhone.tsx
 #: src/interface/channels/text/ThreadsPanel.tsx
 #: src/interface/channels/voice/VoiceChannel.tsx
 #: src/interface/Designs.tsx
@@ -25231,6 +25297,7 @@ msgstr "Голосовые звонки"
 
 #: components/modal/modals/CreateChannel.tsx
 #: components/modal/modals/ServerEventEditor.tsx
+#: src/interface/channels/text/ChannelDetailsPhone.tsx
 msgid "Voice channel"
 msgstr "Голосовой канал"
 

@@ -1,6 +1,7 @@
 import {
   Match,
   Show,
+  Suspense,
   Switch,
   createEffect,
   createSignal,
@@ -53,7 +54,16 @@ import { isLargeServer } from "./largeServer";
 import { MemberSidebar } from "./MemberSidebar";
 import { TextSearchSidebar } from "./TextSearchSidebar";
 
+import type { DetailsTab } from "./ChannelDetailsPhone";
 import { ThreadsPanel } from "./ThreadsPanel";
+
+// Phones, and only once it is opened: kept out of the files the app installs
+// up front (scripts/precacheShell.mjs)
+const ChannelDetailsPhone = lazy(() =>
+  import("./ChannelDetailsPhone").then((m) => ({
+    default: m.ChannelDetailsPhone,
+  })),
+);
 
 // Shown only while a moderator selects messages: loads on first use.
 const MessageSelectionBar = lazy(() =>
@@ -82,6 +92,14 @@ export type SidebarState =
        * Member list opened on demand (narrow layouts, where it overlays the chat)
        */
       state: "members";
+    }
+  | {
+      /**
+       * Phones: everything about the channel on one screen (members, media,
+       * pins, threads, links, files), see ChannelDetailsPhone
+       */
+      state: "details";
+      tab: DetailsTab;
     }
   | {
       state: "default";
@@ -256,13 +274,19 @@ export function TextChannel(props: ChannelPageProps) {
 
   return (
     <>
-      <Header placement="primary">
-        <ChannelHeader
-          channel={props.channel}
-          sidebarState={sidebarState}
-          setSidebarState={setSidebarState}
-        />
-      </Header>
+      {/* phones: the details screen has its own top line (back, search,
+          notifications, settings); the channel's line would be a second one */}
+      <Show
+        when={!(layout() === "phone" && sidebarState().state === "details")}
+      >
+        <Header placement="primary">
+          <ChannelHeader
+            channel={props.channel}
+            sidebarState={sidebarState}
+            setSidebarState={setSidebarState}
+          />
+        </Header>
+      </Show>
       <Content>
         <main class={main()}>
           <Show
@@ -399,7 +423,8 @@ export function TextChannel(props: ChannelPageProps) {
               width:
                 sidebarState().state === "search" ||
                 sidebarState().state === "pins" ||
-                sidebarState().state === "threads"
+                sidebarState().state === "threads" ||
+                sidebarState().state === "details"
                   ? "var(--z-wide-sidebar, min(360px, 100%))"
                   : "",
             }}
@@ -413,6 +438,17 @@ export function TextChannel(props: ChannelPageProps) {
                 />
               }
             >
+              <Match when={sidebarState().state === "details"}>
+                <Suspense>
+                  <ChannelDetailsPhone
+                    channel={props.channel}
+                    tab={(sidebarState() as { tab: DetailsTab }).tab}
+                    setSidebarState={setSidebarState}
+                    scrollTargetElement={sidebarScrollTargetElement}
+                    isLargeServer={isLargeServer(props.channel.server)}
+                  />
+                </Suspense>
+              </Match>
               <Match when={sidebarState().state === "search"}>
                 <WideSidebarContainer>
                   {/* phones: the search field is the page's top row and

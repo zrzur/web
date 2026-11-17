@@ -1,0 +1,14 @@
+{
+  "Channel details": ["تفاصيل القناة", "Kanaldetails"],
+  "Invite members": ["دعوة أعضاء", "Mitglieder einladen"],
+  "Media": ["الوسائط", "Medien"],
+  "Pins": ["المثبتة", "Angepinnt"],
+  "No pictures or videos yet": ["لا صور ولا فيديوهات بعد", "Noch keine Bilder oder Videos"],
+  "Pictures and videos sent in this channel show here.": ["تظهر هنا الصور والفيديوهات المرسلة في هذه القناة.", "Bilder und Videos aus diesem Kanal erscheinen hier."],
+  "No links yet": ["لا روابط بعد", "Noch keine Links"],
+  "Links sent in this channel show here.": ["تظهر هنا الروابط المرسلة في هذه القناة.", "Links aus diesem Kanal erscheinen hier."],
+  "No files yet": ["لا ملفات بعد", "Noch keine Dateien"],
+  "Files sent in this channel show here.": ["تظهر هنا الملفات المرسلة في هذه القناة.", "Dateien aus diesem Kanal erscheinen hier."],
+  "This list couldn't be loaded": ["تعذّر تحميل هذه القائمة", "Diese Liste konnte nicht geladen werden"],
+  "Still not loading.": ["ما زال التحميل متعذرًا.", "Lädt immer noch nicht."]
+}

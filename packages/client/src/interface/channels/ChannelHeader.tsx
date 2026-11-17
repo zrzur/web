@@ -128,12 +128,11 @@ export function ChannelHeader(props: Props) {
     props.channel.isVoice &&
     !voice.showCard(props.channel);
 
+  // what is left for the phone's More sheet; settings, threads and pins
+  // moved to the details screen
   const hasMoreActions = () =>
     videoCallInMore() ||
     canSelectMessages() ||
-    canOpenSettings() ||
-    canListThreads() ||
-    !!props.sidebarState ||
     props.channel.type === "Group" ||
     !!props.channel.thread;
 
@@ -155,7 +154,9 @@ export function ChannelHeader(props: Props) {
       <PhoneBack
         type="button"
         aria-label={t`Close search`}
-        onClick={() => props.setSidebarState!({ state: "default" })}
+        onClick={() =>
+          props.setSidebarState!({ state: "details", tab: "members" })
+        }
       >
         <Icon name="arrow-left" size={22} />
       </PhoneBack>
@@ -549,7 +550,9 @@ export function ChannelHeader(props: Props) {
           </IconButton>
         </Show>
 
-        <Show when={props.sidebarState && canIHasSidebar(props.channel)}>
+        <Show
+          when={!phone() && props.sidebarState && canIHasSidebar(props.channel)}
+        >
           <IconButton
             variant="toolbar"
             size="xs"
@@ -611,8 +614,18 @@ export function ChannelHeader(props: Props) {
               <IconButton
                 variant="toolbar"
                 size="xs"
+                aria-label={phone() ? t`Channel details` : undefined}
+                data-channel-details-open={phone() ? "" : undefined}
                 onPress={() =>
-                  props.setSidebarState!({ state: "search", query: "" })
+                  // phones: one screen for members, media, pins, threads,
+                  // links and files, with the search at its top (owner,
+                  // 2026-11-17)
+                  phone()
+                    ? props.setSidebarState!({
+                        state: "details",
+                        tab: "members",
+                      })
+                    : props.setSidebarState!({ state: "search", query: "" })
                 }
                 use:floating={{
                   tooltip: {
@@ -672,38 +685,8 @@ export function ChannelHeader(props: Props) {
                         : t`Select messages`}
                     </ContextMenuButton>
                   </Show>
-                  <Show when={phone() && canOpenSettings()}>
-                    <ContextMenuButton
-                      icon={<Icon name="gear-six" size={20} />}
-                      onClick={() =>
-                        openModal({
-                          type: "settings",
-                          config: "channel",
-                          context: props.channel,
-                        })
-                      }
-                    >
-                      {t`Channel settings`}
-                    </ContextMenuButton>
-                  </Show>
-                  <Show when={phone() && canListThreads()}>
-                    <ContextMenuButton
-                      icon={<Icon name="chat-circle" size={20} />}
-                      onClick={() =>
-                        props.setSidebarState!({ state: "threads" })
-                      }
-                    >
-                      {t`Threads`}
-                    </ContextMenuButton>
-                  </Show>
-                  <Show when={phone() && props.sidebarState}>
-                    <ContextMenuButton
-                      icon={<Icon name="push-pin" size={20} />}
-                      onClick={() => props.setSidebarState!({ state: "pins" })}
-                    >
-                      {t`Pinned messages`}
-                    </ContextMenuButton>
-                  </Show>
+                  {/* channel settings, threads and pinned messages are on
+                      the details screen (the search icon), not here */}
                   <Show when={phone() && props.channel.type === "Group"}>
                     <ContextMenuButton
                       icon={<Icon name="user-plus" size={20} />}

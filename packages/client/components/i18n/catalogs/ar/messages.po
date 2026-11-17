@@ -3446,6 +3446,7 @@ msgstr "أذربيجان"
 #: components/modal/modals/MFAFlow.tsx
 #: components/modal/modals/ReportContent.tsx
 #: src/interface/channels/AgeGate.tsx
+#: src/interface/channels/text/ChannelDetailsPhone.tsx
 #: src/interface/channels/voice/VoiceChannel.tsx
 #: src/interface/common/CommonHeader.tsx
 msgid "Back"
@@ -4803,6 +4804,11 @@ msgstr "وصف القناة"
 #~ msgid "Channel Description"
 #~ msgstr "وصف القناة"
 
+#: src/interface/channels/ChannelHeader.tsx
+#: src/interface/channels/text/ChannelDetailsPhone.tsx
+msgid "Channel details"
+msgstr "تفاصيل القناة"
+
 #: components/app/interface/settings/server/assistant/labels.ts
 msgid "Channel for appeals"
 msgstr "قناة الاستئنافات"
@@ -4840,6 +4846,7 @@ msgstr "صفوف القنوات عند فتح فئة أو إغلاقها."
 #: components/app/interface/settings/channel/ChannelCard.tsx
 #: components/app/interface/settings/server/channels/ChannelsSettings.tsx
 #: src/interface/channels/ChannelHeader.tsx
+#: src/interface/channels/text/ChannelDetailsPhone.tsx
 msgid "Channel settings"
 msgstr "إعدادات القناة"
 
@@ -4983,6 +4990,7 @@ msgstr "تحقق من اتصالك وحاول مجددًا بعد قليل."
 
 #: components/app/interface/settings/user/myData/MyData.tsx
 #: components/app/interface/settings/user/profile/studio/StudioHome.tsx
+#: src/interface/channels/text/ChannelDetailsPhone.tsx
 msgid "Check your connection and try again."
 msgstr "تحقق من اتصالك وحاول مرة أخرى."
 
@@ -7580,6 +7588,7 @@ msgid "Dino Frame"
 msgstr "إطار الديناصور"
 
 #: components/modal/modals/ForwardMessage.tsx
+#: src/interface/channels/text/ChannelDetailsPhone.tsx
 #: src/interface/navigation/MentionsPanel.tsx
 #: src/interface/navigation/NotificationsPhone.tsx
 msgid "Direct message"
@@ -9006,6 +9015,7 @@ msgstr "فيجي"
 
 #: components/app/interface/settings/user/bots/CommandManager.tsx
 #: components/app/interface/settings/user/profile/studio/StudioEditor.tsx
+#: src/interface/channels/text/ChannelDetailsPhone.tsx
 msgid "File"
 msgstr "ملف"
 
@@ -9044,6 +9054,7 @@ msgstr "رفع الملفات"
 msgid "Filed"
 msgstr "تاريخ الإبلاغ"
 
+#: src/interface/channels/text/ChannelDetailsPhone.tsx
 #: src/interface/channels/text/Composition.tsx
 #: src/interface/developers/docs/DocsPortal.tsx
 msgid "Files"
@@ -9056,6 +9067,10 @@ msgstr "ملفات فقط"
 #: components/app/interface/safety/labels.tsx
 msgid "Files or links that try to harm devices"
 msgstr "ملفات أو روابط تحاول إلحاق الضرر بالأجهزة"
+
+#: src/interface/channels/text/ChannelDetailsPhone.tsx
+msgid "Files sent in this channel show here."
+msgstr "تظهر هنا الملفات المرسلة في هذه القناة."
 
 #: src/interface/channels/text/Composition.tsx
 msgid "Files too large"
@@ -10242,6 +10257,7 @@ msgstr "الأساس"
 
 #: components/modal/modals/CreateGroupOrServer.tsx
 #: components/modal/modals/ForwardMessage.tsx
+#: src/interface/channels/text/ChannelDetailsPhone.tsx
 msgid "Group"
 msgstr "مجموعة"
 
@@ -11271,6 +11287,10 @@ msgstr "رابط الدعوة"
 msgid "Invite links"
 msgstr "روابط الدعوة"
 
+#: src/interface/channels/text/ChannelDetailsPhone.tsx
+msgid "Invite members"
+msgstr "دعوة أعضاء"
+
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 #: components/modal/modals/permissionTitles.ts
 msgid "Invite others"
@@ -11693,6 +11713,7 @@ msgstr "الأردن"
 msgid "Jump back in"
 msgstr "تابع من حيث توقفت"
 
+#: src/interface/channels/text/ChannelDetailsPhone.tsx
 #: src/interface/channels/text/TextSearchSidebar.tsx
 msgid "Jump to message"
 msgstr "الانتقال إلى الرسالة"
@@ -12390,6 +12411,7 @@ msgstr "جارٍ ربط حسابك في Steam…"
 #: components/app/interface/settings/user/profile/ProfileExtras.tsx
 #: components/ui/components/features/profiles/labels.ts
 #: components/ui/components/features/profiles/ProfileLinks.tsx
+#: src/interface/channels/text/ChannelDetailsPhone.tsx
 msgid "Links"
 msgstr "الروابط"
 
@@ -12404,6 +12426,10 @@ msgstr "روابط الأعضاء الجدد"
 #: components/app/interface/settings/user/profile/ProfileExtras.tsx
 msgid "Links must start with https://"
 msgstr "يجب أن تبدأ الروابط بـ https://"
+
+#: src/interface/channels/text/ChannelDetailsPhone.tsx
+msgid "Links sent in this channel show here."
+msgstr "تظهر هنا الروابط المرسلة في هذه القناة."
 
 #: components/app/interface/settings/ServerSettings.tsx
 #~ msgid "Links that bring people in."
@@ -12591,6 +12617,7 @@ msgstr "يؤدي التحميل إلى الاتصال بـ {0}. يتلقّى {0}
 #: components/ui/components/features/voice/soundboard/SoundboardPicker.tsx
 #: components/ui/components/features/voice/StreamPreviewCard.tsx
 #: src/interface/channels/forum/ForumChannel.tsx
+#: src/interface/channels/text/ChannelDetailsPhone.tsx
 #: src/interface/channels/text/ThreadsPanel.tsx
 #: src/interface/Designs.tsx
 #: src/interface/designs/ShowMore.tsx
@@ -13301,6 +13328,10 @@ msgstr "مايا"
 msgid "Meaning"
 msgstr "المعنى"
 
+#: src/interface/channels/text/ChannelDetailsPhone.tsx
+msgid "Media"
+msgstr "الوسائط"
+
 #: components/ui/components/features/messaging/composition/picker/CompositionMediaPicker.tsx
 #~ msgid "Media type"
 #~ msgstr "نوع الوسائط"
@@ -13394,6 +13425,7 @@ msgstr "عضو منذ {0}"
 #: components/app/interface/settings/ServerSettings.tsx
 #: components/modal/lib/serverTemplateText.ts
 #: components/modal/modals/permissionTitles.ts
+#: src/interface/channels/text/ChannelDetailsPhone.tsx
 #: src/interface/designs/Mirror.tsx
 msgid "Members"
 msgstr "الأعضاء"
@@ -13448,10 +13480,6 @@ msgstr "تعذّر تحميل الأعضاء"
 #: components/app/interface/settings/server/TicketsSettings.tsx
 msgid "Members get an \"Open a ticket\" entry in the server's menu."
 msgstr "يظهر للأعضاء خيار «افتح تذكرة» في قائمة السيرفر."
-
-#: components/app/interface/settings/server/TicketsSettings.tsx
-#~ msgid "Members get an \"Open a ticket\" row at the top of the channel list."
-#~ msgstr "يظهر للأعضاء صف «افتح تذكرة» أعلى قائمة القنوات."
 
 #: components/app/interface/settings/server/WingsSettings.tsx
 msgid "Members give the server Wings. More Wings unlock higher levels and their perks for everyone."
@@ -14936,6 +14964,10 @@ msgstr "لا فعاليات مخططة بعد"
 msgid "No favourites yet"
 msgstr "لا توجد مفضلة بعد"
 
+#: src/interface/channels/text/ChannelDetailsPhone.tsx
+msgid "No files yet"
+msgstr "لا ملفات بعد"
+
 #: components/modal/modals/CreateInvite.tsx
 msgid "No friends match your search."
 msgstr "لا يوجد أصدقاء يطابقون بحثك."
@@ -14995,6 +15027,10 @@ msgstr "لا مستوى بعد"
 #: components/ui/components/features/voice/rooms/RoomControlsPanel.tsx
 msgid "No limit"
 msgstr "بدون حد"
+
+#: src/interface/channels/text/ChannelDetailsPhone.tsx
+msgid "No links yet"
+msgstr "لا روابط بعد"
 
 #: components/app/interface/settings/user/profile/ProfileExtras.tsx
 msgid "No links yet."
@@ -15085,6 +15121,10 @@ msgstr "لم تُحدَّد صلاحيات بعد"
 #: components/app/interface/settings/server/apps/ServerAppPage.tsx
 msgid "No permissions were given when it was added."
 msgstr "لم تُمنح أي صلاحيات عند إضافته."
+
+#: src/interface/channels/text/ChannelDetailsPhone.tsx
+msgid "No pictures or videos yet"
+msgstr "لا صور ولا فيديوهات بعد"
 
 #: src/interface/channels/text/TextSearchSidebar.tsx
 msgid "No pinned messages in this channel yet."
@@ -15644,6 +15684,7 @@ msgstr "لا شيء بعد. ستُسأل قبل نشر هذه النسخة."
 #: components/app/interface/settings/UserSettings.tsx
 #: components/app/menus/ServerContextMenu.tsx
 #: components/app/menus/shared/NotificationContextMenu.tsx
+#: src/interface/channels/text/ChannelDetailsPhone.tsx
 #: src/interface/navigation/NotificationsPhone.tsx
 msgid "Notifications"
 msgstr "الإشعارات"
@@ -17169,6 +17210,10 @@ msgstr "اختر ما يشبه سيرفرك، وستُفعّل الوحدات ا
 msgid "Picnic Ring"
 msgstr "حلقة النزهة"
 
+#: src/interface/channels/text/ChannelDetailsPhone.tsx
+msgid "Pictures and videos sent in this channel show here."
+msgstr "تظهر هنا الصور والفيديوهات المرسلة في هذه القناة."
+
 #: components/modal/modals/PinMessage.tsx
 msgid "Pin"
 msgstr "تثبيت"
@@ -17209,6 +17254,10 @@ msgstr "الرسائل المثبّتة"
 #: src/interface/channels/text/searchLabels.ts
 msgid "pinned: takes true or false."
 msgstr "pinned: يقبل true أو false."
+
+#: src/interface/channels/text/ChannelDetailsPhone.tsx
+msgid "Pins"
+msgstr "المثبتة"
 
 #: components/app/interface/settings/user/profile/styleLabels.tsx
 msgid "Pisces"
@@ -20014,6 +20063,7 @@ msgstr "تم الحفظ"
 #: components/app/interface/desktop/Titlebar.tsx
 #: components/modal/modals/ForwardMessage.tsx
 #: src/interface/channels/ChannelHeader.tsx
+#: src/interface/channels/text/ChannelDetailsPhone.tsx
 #: src/interface/navigation/channels/HomeSidebar.tsx
 #: src/interface/navigation/MentionsPanel.tsx
 #: src/interface/navigation/NotificationsPhone.tsx
@@ -20342,6 +20392,7 @@ msgid "Search members"
 msgstr "البحث في الأعضاء"
 
 #: src/interface/channels/ChannelHeader.tsx
+#: src/interface/channels/text/ChannelDetailsPhone.tsx
 #: src/interface/channels/text/SearchBox.tsx
 msgid "Search messages"
 msgstr "ابحث في الرسائل"
@@ -22184,6 +22235,10 @@ msgstr "يبقى مجانياً للجميع"
 msgid "Still loading. Try again in a moment."
 msgstr "ما زال التحميل جارياً. حاول مجدداً بعد لحظة."
 
+#: src/interface/channels/text/ChannelDetailsPhone.tsx
+msgid "Still not loading."
+msgstr "ما زال التحميل متعذرًا."
+
 #: components/modal/modals/BillingCheckoutStatus.tsx
 msgid "Still waiting. If you paid, it will show up in Subscriptions as soon as the payment is confirmed."
 msgstr "ما زلنا ننتظر. إذا كنت قد دفعت، فسيظهر ذلك في الاشتراكات فور تأكيد الدفع."
@@ -22949,6 +23004,7 @@ msgstr "تبقى النصوص والشرائح واضحة، ويبقى الفي�
 
 #: components/app/interface/settings/server/channels/ChannelsSettings.tsx
 #: components/modal/modals/ServerEventEditor.tsx
+#: src/interface/channels/text/ChannelDetailsPhone.tsx
 msgid "Text channel"
 msgstr "قناة نصية"
 
@@ -24226,6 +24282,10 @@ msgstr "لا تنتهي صلاحية هذا الرابط."
 msgid "This link no longer works"
 msgstr "هذا الرابط لم يعد يعمل"
 
+#: src/interface/channels/text/ChannelDetailsPhone.tsx
+msgid "This list couldn't be loaded"
+msgstr "تعذّر تحميل هذه القائمة"
+
 #: components/i18n/errors.tsx
 msgid "This message doesn't exist any more."
 msgstr "لم تعد هذه الرسالة موجودة."
@@ -24573,6 +24633,7 @@ msgstr "اسم الخيط"
 
 #: components/app/interface/settings/server/ThreadFeatures.tsx
 #: src/interface/channels/ChannelHeader.tsx
+#: src/interface/channels/text/ChannelDetailsPhone.tsx
 #: src/interface/channels/text/TextChannel.tsx
 #: src/interface/channels/text/ThreadsPanel.tsx
 msgid "Threads"
@@ -24973,6 +25034,7 @@ msgstr "جرّب كلمة أخرى أو تصفّح الفئات."
 #: components/modal/modals/ReportContent.tsx
 #: components/ui/components/features/messaging/composition/picker/GifPicker.tsx
 #: src/interface/channels/forum/ForumChannel.tsx
+#: src/interface/channels/text/ChannelDetailsPhone.tsx
 #: src/interface/channels/text/ThreadsPanel.tsx
 #: src/interface/channels/voice/VoiceChannel.tsx
 #: src/interface/Designs.tsx
@@ -26281,6 +26343,7 @@ msgstr "المكالمات الصوتية"
 
 #: components/modal/modals/CreateChannel.tsx
 #: components/modal/modals/ServerEventEditor.tsx
+#: src/interface/channels/text/ChannelDetailsPhone.tsx
 msgid "Voice channel"
 msgstr "قناة صوتية"
 

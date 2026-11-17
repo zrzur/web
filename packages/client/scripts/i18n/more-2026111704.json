@@ -1,0 +1,14 @@
+{
+  "Channel details": ["Détails du salon", "Detalles del canal", "О канале", "频道详情"],
+  "Invite members": ["Inviter des membres", "Invitar miembros", "Пригласить участников", "邀请成员"],
+  "Media": ["Médias", "Multimedia", "Медиа", "媒体"],
+  "Pins": ["Épinglés", "Fijados", "Закреплённые", "置顶"],
+  "No pictures or videos yet": ["Pas encore d’images ni de vidéos", "Aún no hay imágenes ni vídeos", "Пока нет изображений и видео", "还没有图片或视频"],
+  "Pictures and videos sent in this channel show here.": ["Les images et vidéos envoyées dans ce salon apparaissent ici.", "Las imágenes y los vídeos enviados en este canal aparecen aquí.", "Здесь появляются изображения и видео, отправленные в этом канале.", "此频道中发送的图片和视频会显示在这里。"],
+  "No links yet": ["Pas encore de liens", "Aún no hay enlaces", "Пока нет ссылок", "还没有链接"],
+  "Links sent in this channel show here.": ["Les liens envoyés dans ce salon apparaissent ici.", "Los enlaces enviados en este canal aparecen aquí.", "Здесь появляются ссылки, отправленные в этом канале.", "此频道中发送的链接会显示在这里。"],
+  "No files yet": ["Pas encore de fichiers", "Aún no hay archivos", "Пока нет файлов", "还没有文件"],
+  "Files sent in this channel show here.": ["Les fichiers envoyés dans ce salon apparaissent ici.", "Los archivos enviados en este canal aparecen aquí.", "Здесь появляются файлы, отправленные в этом канале.", "此频道中发送的文件会显示在这里。"],
+  "This list couldn't be loaded": ["Impossible de charger cette liste", "No se pudo cargar esta lista", "Не удалось загрузить этот список", "无法加载此列表"],
+  "Still not loading.": ["Le chargement échoue toujours.", "Sigue sin cargar.", "Всё ещё не загружается.", "仍然无法加载。"]
+}
