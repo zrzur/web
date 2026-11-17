@@ -128,7 +128,9 @@ const askedInterests = new Set<string>();
 export const ServerSidebar = (props: Props) => {
   const navigate = useNavigate();
   const state = useState();
-  const { isMobile, layout } = useDevice();
+  const { isMobile, fingerFirst, layout } = useDevice();
+  // no dragging channels where the finger scrolls (phones, tablets)
+  const noDrag = isMobile || fingerFirst;
   const client = useClient();
   const { openModal, showError } = useModals();
 
@@ -447,7 +449,7 @@ export const ServerSidebar = (props: Props) => {
             type="category"
             //TODO - No channel ordering on mobile due to usability issue
             //Consider adding a way to enable reordering with dragHandles in server settings
-            disabled={isMobile || noOrdering()}
+            disabled={noDrag || noOrdering()}
             items={categories().filter((category) => category.id !== "default")}
             onChange={(ids) => handleOrdering({ type: "categories", ids })}
           >
@@ -638,7 +640,8 @@ function Category(
       ? `${props.server.id}:default:${props.channelType}`
       : props.category.id;
   const isOpen = () => state.layout.getSectionState(sectionId(), true);
-  const { isMobile } = useDevice();
+  const { isMobile, fingerFirst } = useDevice();
+  const noDrag = isMobile || fingerFirst;
 
   // expand and collapse animate the channel rows
   let section: HTMLDivElement | undefined;
@@ -819,7 +822,7 @@ function Category(
         }}
         //TODO - No channel ordering on mobile due to usability issue
         //Consider adding a way to enable reordering with dragHandles in server settings
-        disabled={isMobile || props.noOrdering() || !isOpen()}
+        disabled={noDrag || props.noOrdering() || !isOpen()}
         minimumDropAreaHeight="42px"
         onDragChange={props.setDragging}
       >
