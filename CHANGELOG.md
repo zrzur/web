@@ -2,6 +2,15 @@
 
 ## Unreleased
 
+### Phones: sheets in groups, and no Home page (2026-11-17)
+
+* **Every sheet that opens from the bottom shows its rows in groups:** the rows of a group share one card with a hairline between them, and there is room between two groups. One rule for the message, server, channel and person sheets (it was one long flat list).
+* **Message sheet:** six reactions and the picker in a row at the top, one tap each; then Reply, Forward, Copy and Delete as the four large buttons (Forward takes the place of React, which is the row above now).
+* **Server sheet:** starts with the server (picture, name, members) and Invite, Server info and Settings as large buttons; the rest follows in groups.
+* **Settings lists on phones** (your settings, a server's, a channel's): the rows of a section are one card, each row ends in an arrow, and no row is lit as "the open one" on a screen that is only the list.
+* **A voice room opens as a sheet over the channel list:** who is in it, the microphone on or off, and Join. A press on a room used to join at once and leave the list.
+* **No Home page on phones.** The logo opens Messages, the app opens on the lists, and a swipe there no longer uncovers a page. What Home holds is one press away: servers on the rail, settings and designs under You. Wider screens keep Home.
+
 ### Phones: the details (owner review, 2026-11-17)
 
 * **A press on a conversation always opens it.** When the system took a swipe over (its own Back gesture from the screen edge, a call coming in), no end of the touch reached the app and the slide between the lists and the page stayed held: the next press moved the address and the conversation stayed off screen until another swipe. The slide now lets go of such a touch, and a press made while it is still settling is carried out, not dropped.
