@@ -5,6 +5,7 @@ import {
   children as accessChildren,
   createEffect,
   createSignal,
+  createUniqueId,
   onCleanup,
   onMount,
   splitProps,
@@ -54,6 +55,16 @@ export function FloatingSelect(props: FloatingSelectProps) {
     "onChange",
     "onOpened",
   ]);
+
+  // Named by a label elsewhere (a settings row's title): the name also
+  // carries the value the trigger shows, "Interface font, Inter". With the
+  // title alone, what is written on the control was not in its name, and
+  // voice control could not find it by that text (WCAG 2.5.3).
+  const valueId = createUniqueId();
+  const labelledBy = () => {
+    const by = (others as { "aria-labelledby"?: string })["aria-labelledby"];
+    return by ? `${by} ${valueId}` : undefined;
+  };
 
   const [isOpen, setIsOpen] = createSignal(false);
   const [anchor, setAnchor] = createSignal<HTMLButtonElement>();
@@ -223,8 +234,9 @@ export function FloatingSelect(props: FloatingSelectProps) {
           onClick={() => (isOpen() ? close(false) : open())}
           onKeyDown={handleTriggerKey}
           {...others}
+          aria-labelledby={labelledBy()}
         >
-          <SelectValue>{selectedText() || "—"}</SelectValue>
+          <SelectValue id={valueId}>{selectedText() || "—"}</SelectValue>
           <Icon name="caret-down" size={16} />
         </SelectTrigger>
       </Field>

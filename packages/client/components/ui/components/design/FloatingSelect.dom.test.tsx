@@ -85,15 +85,15 @@ function Harness(props: { inDialog?: boolean; onClose?: () => void }) {
       <MenuItem value="c">Gamma</MenuItem>
     </FloatingSelect>
   );
-  return props.inDialog ? (
-    <I18nProvider i18n={i18n}>
-      <Dialog show title="T" onClose={() => props.onClose?.()}>
-        <textarea aria-label="text" />
-        {select}
-      </Dialog>
-    </I18nProvider>
-  ) : (
-    select
+  return (
+    <Show when={props.inDialog} fallback={select}>
+      <I18nProvider i18n={i18n}>
+        <Dialog show title="T" onClose={() => props.onClose?.()}>
+          <textarea aria-label="text" />
+          {select}
+        </Dialog>
+      </I18nProvider>
+    </Show>
   );
 }
 
@@ -243,4 +243,33 @@ describe("closed Dialog", () => {
     expect(own).toMatch(/pointer-events:none/);
     expect(kids).toMatch(/pointer-events:none/);
   }, 90000);
+});
+
+describe("FloatingSelect name", () => {
+  it("named by a label elsewhere, its name also carries the value it shows", () => {
+    dispose = render(
+      () => (
+        <>
+          <span id="row-title">Interface font</span>
+          <FloatingSelect aria-labelledby="row-title" value="b">
+            <MenuItem value="a">Alpha</MenuItem>
+            <MenuItem value="b">Beta</MenuItem>
+          </FloatingSelect>
+        </>
+      ),
+      document.getElementById("root")!,
+    );
+    const ids = trigger().getAttribute("aria-labelledby")!.split(" ");
+    expect(ids[0]).toBe("row-title");
+    // the second id is the value on the trigger: what is written on the
+    // control is part of its name (WCAG 2.5.3)
+    expect(document.getElementById(ids[1])?.textContent).toBe("Beta");
+    expect(trigger().contains(document.getElementById(ids[1]))).toBe(true);
+  });
+
+  it("with its own aria-label, nothing else names it", () => {
+    dispose = render(() => <Harness />, document.getElementById("root")!);
+    expect(trigger().getAttribute("aria-label")).toBe("Pick");
+    expect(trigger().hasAttribute("aria-labelledby")).toBe(false);
+  });
 });
