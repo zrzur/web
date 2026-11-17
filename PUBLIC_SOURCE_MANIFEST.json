@@ -262,8 +262,8 @@
     },
     {
       "path": "CHANGELOG.md",
-      "sha256": "c674b1843b1fe2706e40c33adb33c530d3433fb1dc961636afecbc15a890d44b",
-      "bytes": 160425,
+      "sha256": "c8475bd1e1adba0322127ed4fd64c19af2869944eb8352978be81eab2ff32669",
+      "bytes": 161168,
       "category": "public-documentation"
     },
     {
@@ -1306,8 +1306,8 @@
     },
     {
       "path": "packages/client/components/app/interface/settings/channel/Overview.tsx",
-      "sha256": "af4be24f37971916392ea7de9c3fff555b85bae49ea5505df971b18c51ff413d",
-      "bytes": 12561,
+      "sha256": "a21bed7fea7925a071cb64148f24f79add1c2ad2a31df0ff416723e19ee37cd7",
+      "bytes": 13784,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -1498,8 +1498,8 @@
     },
     {
       "path": "packages/client/components/app/interface/settings/server/TicketsSettings.tsx",
-      "sha256": "392f8ade6c9037172ea6fa9f6d98cdf96fb2609593b9012e11c8ff3f95e9ee7d",
-      "bytes": 8405,
+      "sha256": "b7af93ea3ef21f40a5256b40d3cdea189bdfc7c95d1f8fb7f5b3e3c3dca90a16",
+      "bytes": 18231,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -3334,8 +3334,8 @@
     },
     {
       "path": "packages/client/components/i18n/catalogs/ar/messages.po",
-      "sha256": "428da62b7fef7d3899c1987c7172d094c24b3abdd2600a0b0419c089f10144fe",
-      "bytes": 1146878,
+      "sha256": "6b41d0835ea1a6d56adc487524168075ff315c37717dcef22a42018213ed8165",
+      "bytes": 1153922,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -3478,8 +3478,8 @@
     },
     {
       "path": "packages/client/components/i18n/catalogs/de/messages.po",
-      "sha256": "a347ca3c0fe16965141a21643daa503b85361309b5fad9714056414887a99213",
-      "bytes": 1060046,
+      "sha256": "f3eabaa87b1bf4636148df5a27f78233295954e1e81ca901fd74c840eb910823",
+      "bytes": 1066682,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -3514,8 +3514,8 @@
     },
     {
       "path": "packages/client/components/i18n/catalogs/en/messages.po",
-      "sha256": "d0ed554ff9ec692f1f1eb7740d2dbcb6dd4a8c4bf187b36a7759af77abeb2a21",
-      "bytes": 1021421,
+      "sha256": "b24938d45d65ef583150c9add89bd1935afba4f5ee1504260f5951a6073846fa",
+      "bytes": 1027890,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -3538,8 +3538,8 @@
     },
     {
       "path": "packages/client/components/i18n/catalogs/es/messages.po",
-      "sha256": "c75dded471d0fd7a3e6dcf3377296ef333188c551ba254cefbd7ca64ac36d1ab",
-      "bytes": 990438,
+      "sha256": "8f4247d3640a29df58288e28524a8dd40f903febd217a4a2b4072d5fec3df1dc",
+      "bytes": 997065,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -3598,8 +3598,8 @@
     },
     {
       "path": "packages/client/components/i18n/catalogs/fr/messages.po",
-      "sha256": "1d2911d4c26001cba3ba5668106e3eda57449526474405d18edecad27748a943",
-      "bytes": 1007037,
+      "sha256": "b88161afbc2227a88989df4f9e67dc3a9a7effa5dca2421254faf82de7ef2305",
+      "bytes": 1013725,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -3862,8 +3862,8 @@
     },
     {
       "path": "packages/client/components/i18n/catalogs/ru/messages.po",
-      "sha256": "7b537a0d8bbe3642321aedc7eea2832c2c214da92d30f6fcefd728a72f561ee8",
-      "bytes": 1138608,
+      "sha256": "d32bec35197ab06fbe4227c7f0ecbf8d3dcf9a7457224ee8ea5771488b8a8092",
+      "bytes": 1145913,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -4030,8 +4030,8 @@
     },
     {
       "path": "packages/client/components/i18n/catalogs/zh-Hans/messages.po",
-      "sha256": "99e0070df29616bcbd949fcc4660c10cf9ea8e7db1b004e60b08025fab1ea349",
-      "bytes": 961101,
+      "sha256": "4cf5c694fded9f707e785561381b47e31a6ce5dd2a499793ec438d3170cba62a",
+      "bytes": 967614,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -4540,8 +4540,8 @@
     },
     {
       "path": "packages/client/components/modal/modals.tsx",
-      "sha256": "e88ac8985b6f75f5a2cb886051eb75ca69d1796d00d3a678448f78925ea2732b",
-      "bytes": 17721,
+      "sha256": "c2159f60e85ccc86c43cbe57c7b0ef1aa2cdb6798a68ad27089893b4a6616a66",
+      "bytes": 18127,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -4606,8 +4606,8 @@
     },
     {
       "path": "packages/client/components/modal/modals/CloseTicket.tsx",
-      "sha256": "113c1078a09d8370264a60942dc21fc62baafea6d2d62c99f652d66e96d067bf",
-      "bytes": 1740,
+      "sha256": "a59136a07f7e4ec45857cade57c1219b17a9140e704fad500b2dcf3b5b0ee5dd",
+      "bytes": 3667,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -4881,6 +4881,12 @@
       "category": "product-source-or-build-manifest"
     },
     {
+      "path": "packages/client/components/modal/modals/OpenTicket.tsx",
+      "sha256": "97d96839f4894f0ec42ef7582b9ac055fa6087c87b906fcbcd573e638ea1a8a9",
+      "bytes": 3521,
+      "category": "product-source-or-build-manifest"
+    },
+    {
       "path": "packages/client/components/modal/modals/PaymentMethodPicker.tsx",
       "sha256": "aab69b9f102c688394865018a472dfd1dbd4ff2390f092f14c663fc16df6de26",
       "bytes": 2775,
@@ -4956,6 +4962,12 @@
       "path": "packages/client/components/modal/modals/ResetBotToken.tsx",
       "sha256": "0ccc28f208b31cdc3975306c8dd926ae51bef7c7b0838c33da344a36f994b5ba",
       "bytes": 3333,
+      "category": "product-source-or-build-manifest"
+    },
+    {
+      "path": "packages/client/components/modal/modals/RoomControls.tsx",
+      "sha256": "d2a8b63472a51b2780a54955044d28c2024cb7e5a19e02a34106a63ceb4a6e7c",
+      "bytes": 943,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -5194,8 +5206,8 @@
     },
     {
       "path": "packages/client/components/modal/types.ts",
-      "sha256": "a2c22acd91acc0f9ad19721fb343e21cecde01d50c0953480cdbab7491775df0",
-      "bytes": 9978,
+      "sha256": "cb03c7c15419d90b50f0e4923d09cbafd60131f2c4bc866920ceceb815d02669",
+      "bytes": 10104,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -7120,14 +7132,14 @@
     },
     {
       "path": "packages/client/components/ui/components/features/voice/callCard/VoiceCallCardActions.tsx",
-      "sha256": "f72940c7797a201a55eeb84ce92f1451689220689792237b385ecc296e205c90",
-      "bytes": 8563,
+      "sha256": "4ebe057840d542424b9faa7fcaf04451fa1fa6a362abeba925752fe1e32c6b85",
+      "bytes": 9814,
       "category": "product-source-or-build-manifest"
     },
     {
       "path": "packages/client/components/ui/components/features/voice/callCard/VoiceCallCardActiveRoom.tsx",
-      "sha256": "697981e38b2354c71f059b737f14c4f40eaae227fc8ddc1bc36b97f456ec47cb",
-      "bytes": 9621,
+      "sha256": "b0f0d014772849076a5345969aa17e3f1da35af4ba3ad28b8a62e5352f79046e",
+      "bytes": 11203,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -7170,6 +7182,18 @@
       "path": "packages/client/components/ui/components/features/voice/ringing/CallRinging.tsx",
       "sha256": "66554c5cb066cd7303b0c39b1ebfef9f0f87af00b8c2d51b919b1a822de5df79",
       "bytes": 10900,
+      "category": "product-source-or-build-manifest"
+    },
+    {
+      "path": "packages/client/components/ui/components/features/voice/rooms/RoomControlsPanel.tsx",
+      "sha256": "d4136563c8d190651ea17f3b5ca9edb14d52e1c3623bb145fbe98757f432300a",
+      "bytes": 15281,
+      "category": "product-source-or-build-manifest"
+    },
+    {
+      "path": "packages/client/components/ui/components/features/voice/rooms/roomControlsOpen.ts",
+      "sha256": "6603605dda74557247bf1a7c90ba406f39164e733139547206b83fe0b08bf3af",
+      "bytes": 746,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -7660,8 +7684,8 @@
     },
     {
       "path": "packages/client/components/ui/icons/drawings.ts",
-      "sha256": "41d525d03586dd4e01185703ce5e75825d34dbbfa54d83c00abfc18af169a230",
-      "bytes": 93327,
+      "sha256": "c3681835e798871451668f02375d5f9e8aa30c2897c240055f4f5e145b1951d6",
+      "bytes": 93047,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -7672,8 +7696,8 @@
     },
     {
       "path": "packages/client/components/ui/icons/hugeicons/ZRZUR-OWN.md",
-      "sha256": "4aedd7f7cb389d8e3a811e651ca636fd4ffd0b0a3886cb1fc3f3b414a555548f",
-      "bytes": 205,
+      "sha256": "3226e131dd6913461c8a10dcc323d5f156ab8adef9ecb57bf3d2bc7ef4bbe769",
+      "bytes": 310,
       "category": "public-documentation"
     },
     {
@@ -8746,8 +8770,8 @@
     },
     {
       "path": "packages/client/components/ui/icons/hugeicons/ticket.svg",
-      "sha256": "f53ef51f760a190f7fb46d6ab0008c43e27447efaf33bb652319431d9eb4aa66",
-      "bytes": 1186,
+      "sha256": "e5b01a75de7ee398724c745072c1b550964e0db8950d50424d66a6ab45f6c511",
+      "bytes": 577,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -40186,8 +40210,8 @@
     },
     {
       "path": "packages/client/scripts/hugeicons-map.mjs",
-      "sha256": "c138d380c58532aaaab9b91f65005d52d52adfc3e963efb20bf45472ace4b56c",
-      "bytes": 6961,
+      "sha256": "6f5bd1ac51ca1261319c7b9c3484f2f03a4360bd3099e0aeff4719a7e5b5c905",
+      "bytes": 7004,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -43108,8 +43132,8 @@
     },
     {
       "path": "packages/client/src/interface/navigation/channels/AccountBar.tsx",
-      "sha256": "b05a91b849edfdb8c8db07e4c3ca2ed947a173aa135d2480046e193acf32ce72",
-      "bytes": 24210,
+      "sha256": "355c29afa9e5cfb10f8906c86df773d34b27bd334aa2b9d5c763492952434804",
+      "bytes": 26374,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -43132,8 +43156,8 @@
     },
     {
       "path": "packages/client/src/interface/navigation/channels/ServerSidebar.tsx",
-      "sha256": "730ddae8fdf5f4fd04223e74fcea7f998c291c60eeda2dd5870a50e8edd52d73",
-      "bytes": 40759,
+      "sha256": "3787f6077fa9beff05b348cd7ca11d998f12a63e37e96ec52bfe92603afacbac",
+      "bytes": 41089,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -43222,14 +43246,20 @@
     },
     {
       "path": "packages/client/src/interface/tickets/TicketAction.tsx",
-      "sha256": "051c1da66fc03abd5adb2e2041320661ca9c6e3e7ac8ca11584e83e2b2b7917c",
-      "bytes": 1420,
+      "sha256": "5cd20ea21271dbc2c81f0d9812cb200d7e0871b61f5f1886ac558e538677d500",
+      "bytes": 5651,
       "category": "product-source-or-build-manifest"
     },
     {
       "path": "packages/client/src/interface/tickets/TicketLink.tsx",
-      "sha256": "8c291bcecb3d49453026525ec4292a87cf6311f541ebceb4213cbc4cd9eb8e06",
-      "bytes": 3281,
+      "sha256": "ed1ce5f48d240a58016a619092b59afdc9fc352006b5a174ff52c5f71b16fc46",
+      "bytes": 3514,
+      "category": "product-source-or-build-manifest"
+    },
+    {
+      "path": "packages/client/src/interface/tickets/transcript.ts",
+      "sha256": "2029c07dbc811e5ff700e27f00e9a441929b412752d62cc8bbcc1ec2254e8ea2",
+      "bytes": 2147,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -44004,7 +44034,7 @@
   "submodules": [
     {
       "path": "packages/stoat.js",
-      "commit": "819e031831ce3cbb1463520c98f656eea76b9c01"
+      "commit": "7740f063f22f5c9829e3abf7261fef7dab91d430"
     }
   ]
 }
