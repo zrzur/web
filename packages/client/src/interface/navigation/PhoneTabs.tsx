@@ -14,16 +14,18 @@ import { Avatar } from "@revolt/ui";
 import { type IconName, Icon } from "@revolt/ui/icons/Icon";
 import { pendingUpdate } from "../../serviceWorkerInterface";
 import { openMentions } from "./MentionsPanel";
+import { openYouSheet } from "./YouSheet";
 
 /** the last server visited, so the Servers tab returns to it */
 const [lastServer, setLastServer] = createSignal<string>();
 
 /**
- * Phone navigation: a bar fixed to the bottom of the menu side with five
- * tabs, each with its name under the icon: Servers (rail + channels),
- * Messages, Discover, Mentions and You. The open tab's icon takes the action
- * colour and its name is full strength; no shape is drawn behind the icon
- * (the design the owner picked, 2026-11-16).
+ * Phone navigation, floating over the bottom of the menu side (the design
+ * the owner picked on 2026-11-17, replacing the square strip of 2026-11-16):
+ * a rounded capsule with the four places (Servers, Messages, Discover,
+ * Mentions) and, beside it, your picture as a round button of its own (You).
+ * Icons only; the open tab stretches into a pill that shows its name, its
+ * icon in the action colour. Every tab keeps its name for screen readers.
  * Hidden on wider screens, where the rail and account card do this job.
  */
 /**
@@ -124,41 +126,47 @@ export function PhoneTabs(props: { page?: boolean }) {
       data-phone-tabs-page={props.page ? "" : undefined}
       aria-label={t`Main navigation`}
     >
-      {tab("servers", "squares-four", t`Servers`, openServers)}
-      {tab("messages", "chat-circle-dots", t`Messages`, openMessages, () =>
-        unreadMessages(),
-      )}
-      {tab("discover", "compass", t`Discover`, openDiscover)}
-      {/* mentions open as a sheet over whatever is on screen */}
-      <Tab type="button" aria-haspopup="dialog" onClick={openMentions}>
-        <TabIcon>
-          <Icon name="at" size={24} />
-          <Show when={unreadMentions()}>
-            <Badge data-tab-badge>
-              {unreadMentions() > 99 ? "99+" : unreadMentions()}
-            </Badge>
-          </Show>
-        </TabIcon>
-        <TabName>{t`Mentions`}</TabName>
-      </Tab>
+      {/* You: first, so it stands on the servers' side, under the rail,
+          where the account sits on wide screens (owner, 2026-11-17). It
+          opens as a sheet over whatever is on screen, as Mentions does */}
       <Tab
         type="button"
+        data-me
+        aria-haspopup="dialog"
         aria-current={active() === "you" ? "page" : undefined}
         data-current={active() === "you"}
-        onClick={() => {
-          navigate("/you");
-          state.appDrawer()?.setShown(true);
-        }}
+        onClick={openYouSheet}
       >
         <TabIcon>
           <Avatar
-            size={26}
+            size={36}
             src={user()?.animatedAvatarURL}
             fallback={user()?.username}
           />
         </TabIcon>
         <TabName>{t`You`}</TabName>
       </Tab>
+      <Capsule>
+        {tab("servers", "squares-four", t`Servers`, openServers)}
+        {/* the speech bubble with three dots ("chat-circle-dots" draws an
+            eye in the bubble, which did not read as messages) */}
+        {tab("messages", "chat-circle", t`Messages`, openMessages, () =>
+          unreadMessages(),
+        )}
+        {tab("discover", "compass", t`Discover`, openDiscover)}
+        {/* mentions open as a sheet over whatever is on screen */}
+        <Tab type="button" aria-haspopup="dialog" onClick={openMentions}>
+          <TabIcon>
+            <Icon name="at" size={24} />
+            <Show when={unreadMentions()}>
+              <Badge data-tab-badge>
+                {unreadMentions() > 99 ? "99+" : unreadMentions()}
+              </Badge>
+            </Show>
+          </TabIcon>
+          <TabName>{t`Mentions`}</TabName>
+        </Tab>
+      </Capsule>
     </Bar>
   );
 }
@@ -189,8 +197,8 @@ const UpdateRow = styled("div", {
       position: "absolute",
       zIndex: 3,
       insetInline: 0,
-      // on top of the tab bar (64px)
-      bottom: "64px",
+      // on top of the floating tab bar (58px, 10px above the edge)
+      bottom: "78px",
       display: "flex",
       alignItems: "center",
       gap: "10px",
@@ -232,47 +240,70 @@ const UpdateAction = styled("button", {
   },
 });
 
+/** the fill of the floating bar: one step above the boxes, so it lifts */
+const BAR_FILL =
+  "color-mix(in srgb, var(--z-fg-primary) 8%, var(--z-bg-frame))";
+
 const Bar = styled("nav", {
   base: {
     display: "none",
     _phone: {
       position: "absolute",
       zIndex: 3,
-      insetInline: 0,
-      bottom: 0,
-      display: "grid",
-      // five equal columns: a long name (German "Benachrichtigungen")
-      // shortens inside its own column and never pushes its neighbours
-      gridTemplateColumns: "repeat(5, minmax(0, 1fr))",
-      // #root already stops above the home bar (styles.css), so no inset here
-      height: "64px",
-      paddingInline: "4px",
-      background: "var(--z-bg-frame)",
-      borderTop: "1px solid var(--z-border-subtle)",
+      // floating: in from both sides and up from the bottom edge (#root
+      // already stops above the home bar, styles.css, so no inset here)
+      insetInline: "12px",
+      bottom: "10px",
+      display: "flex",
+      alignItems: "center",
+      gap: "10px",
+      height: "58px",
+      // the room between the capsule and the round button lets a touch
+      // through to the list under it
+      pointerEvents: "none",
+      "& > *": { pointerEvents: "auto" },
     },
+  },
+});
+
+/** The four places, in one rounded capsule */
+const Capsule = styled("div", {
+  base: {
+    flex: 1,
+    minWidth: 0,
+    height: "58px",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "space-between",
+    paddingInline: "7px",
+    borderRadius: "29px",
+    background: BAR_FILL,
+    boxShadow: "var(--z-popover-lift, 0 12px 32px rgb(0 0 0 / 0.45))",
   },
 });
 
 const Tab = styled("button", {
   base: {
     position: "relative",
+    flex: "none",
     display: "flex",
-    flexDirection: "column",
     alignItems: "center",
     justifyContent: "center",
-    gap: "3px",
-    minWidth: 0,
-    paddingInline: "2px",
+    gap: "8px",
+    minWidth: "48px",
+    height: "44px",
+    paddingInline: 0,
     border: "none",
+    borderRadius: "22px",
     background: "none",
-    color: "var(--z-fg-muted)",
+    color: "var(--z-fg-secondary, var(--z-fg-primary))",
     font: "inherit",
-    fontSize: "11px",
-    fontWeight: 500,
+    fontSize: "14px",
+    fontWeight: 600,
     cursor: "pointer",
     "--z-icon-color": "currentColor",
     WebkitTapHighlightColor: "transparent",
-    transition: "color 120ms ease",
+    transition: "color 120ms ease, background-color 120ms ease",
     _motionReduce: { transition: "none" },
 
     "&:active > span:first-of-type": { scale: "0.94" },
@@ -281,46 +312,79 @@ const Tab = styled("button", {
       outline: "none",
       boxShadow: "inset 0 0 0 2px var(--z-focus)",
     },
-    // the open tab: full-strength name and the icon in the action colour;
-    // no shape is drawn behind the icon (owner, 2026-11-16)
-    "&[data-current='true']": {
+    // a closed tab is its icon; the name stays for screen readers
+    "&:not([data-current='true']) > span:last-of-type, &[data-me] > span:last-of-type":
+      {
+        position: "absolute",
+        width: "1px",
+        height: "1px",
+        overflow: "hidden",
+        clipPath: "inset(50%)",
+      },
+    // the open tab: a pill with its name, the icon in the action colour
+    "&[data-current='true']:not([data-me])": {
+      flex: "0 1 auto",
+      minWidth: 0,
+      paddingInline: "14px 16px",
       color: "var(--z-fg-primary)",
-      fontWeight: 600,
+      background: "color-mix(in srgb, var(--z-fg-primary) 10%, transparent)",
       "& > span:first-of-type": {
         "--z-icon-color": "var(--z-accent)",
         color: "var(--z-accent)",
       },
     },
+    // You: your picture, a round button of its own beside the capsule
+    "&[data-me]": {
+      width: "58px",
+      height: "58px",
+      padding: 0,
+      borderRadius: "50%",
+      // the picture sits in the exact middle of the circle: its box is the
+      // picture's own size, with no line of text under it to push it off
+      "& > span:first-of-type": {
+        width: "36px",
+        height: "36px",
+        minWidth: 0,
+        lineHeight: 0,
+        "& > *": { display: "block", margin: 0 },
+      },
+      background: BAR_FILL,
+      boxShadow: "var(--z-popover-lift, 0 12px 32px rgb(0 0 0 / 0.45))",
+    },
+    "&[data-me][data-current='true']": {
+      boxShadow:
+        "0 0 0 2px var(--z-accent), var(--z-popover-lift, 0 12px 32px rgb(0 0 0 / 0.45))",
+    },
   },
 });
 
-/** The tab's name; shortens inside its column */
+/** The tab's name; shortens inside the pill */
 const TabName = styled("span", {
   base: {
-    maxWidth: "100%",
+    minWidth: 0,
     overflow: "hidden",
     textOverflow: "ellipsis",
     whiteSpace: "nowrap",
   },
 });
 
-/** The icon's tile: the unread count reaches past it, so it is never cut */
+/** The icon's box: the unread count reaches past it, so it is never cut */
 const TabIcon = styled("span", {
   base: {
     position: "relative",
+    flex: "none",
     display: "grid",
     placeItems: "center",
-    width: "52px",
-    height: "30px",
-    borderRadius: "15px",
+    minWidth: "28px",
+    height: "28px",
   },
 });
 
 const Badge = styled("span", {
   base: {
     position: "absolute",
-    top: "-4px",
-    insetInlineStart: "58%",
+    top: "-7px",
+    insetInlineStart: "62%",
     minWidth: "18px",
     height: "18px",
     paddingInline: "5px",

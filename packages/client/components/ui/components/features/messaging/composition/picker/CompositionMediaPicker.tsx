@@ -16,19 +16,26 @@ import {
   type Setter,
   Match,
   Show,
+  Suspense,
   Switch,
   createContext,
   createEffect,
   createSignal,
+  lazy,
   onCleanup,
   onMount,
 } from "solid-js";
 import { Portal } from "solid-js/web";
 import { cva } from "styled-system/css";
 import { EmojiPicker } from "./EmojiPicker";
-import { GifPicker } from "./GifPicker";
 import { mediaPickerTrigger } from "./mediaPickerTrigger";
 import "./picker.css";
+
+// fetched when the GIF side is first opened: kept out of the files the app
+// installs up front (scripts/precacheShell.mjs)
+const GifPicker = lazy(() =>
+  import("./GifPicker").then((m) => ({ default: m.GifPicker })),
+);
 
 export type MediaPickerProps = {
   ref: Setter<HTMLElement | undefined>;
@@ -254,7 +261,9 @@ function Picker(
       <div class="z-picker-panel">
         <Switch>
           <Match when={props.show() === "gif" && allowGifs()}>
-            <GifPicker />
+            <Suspense>
+              <GifPicker />
+            </Suspense>
           </Match>
           <Match when={props.show() === "emoji"}>
             <EmojiPicker />

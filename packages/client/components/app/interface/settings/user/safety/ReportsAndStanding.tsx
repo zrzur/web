@@ -644,6 +644,15 @@ const Facts = styled("dl", {
     margin: 0,
     padding: "12px",
     borderRadius: "var(--z-radius, 10px)",
+    // phones: the fill and corner of every settings group, no frame
+    // (owner, 2026-11-17: one box look everywhere)
+    _phone: {
+      border: "none",
+      borderRadius: "14px",
+      boxShadow: "none",
+      background:
+        "var(--z-sheet-group, color-mix(in srgb, var(--z-fg-primary) 5%, transparent))",
+    },
     border: "1px solid var(--z-border-subtle)",
     background: "var(--z-bg-input)",
     fontSize: "13px",
@@ -668,6 +677,15 @@ const Row = styled("article", {
     gap: "6px",
     padding: "12px 14px",
     borderRadius: "12px",
+    // phones: the fill and corner of every settings group, no frame
+    // (owner, 2026-11-17: one box look everywhere)
+    _phone: {
+      border: "none",
+      borderRadius: "14px",
+      boxShadow: "none",
+      background:
+        "var(--z-sheet-group, color-mix(in srgb, var(--z-fg-primary) 5%, transparent))",
+    },
     border: "1px solid var(--z-border-subtle)",
     "& header": {
       display: "flex",

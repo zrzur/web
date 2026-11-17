@@ -2,10 +2,12 @@ import {
   For,
   Match,
   Show,
+  Suspense,
   Switch,
   createEffect,
   createResource,
   createSignal,
+  lazy,
   onCleanup,
 } from "solid-js";
 import { Portal } from "solid-js/web";
@@ -21,7 +23,13 @@ import { useDevice } from "@revolt/common";
 import { Avatar, CircularProgress, Time } from "@revolt/ui";
 import { Icon } from "@revolt/ui/icons/Icon";
 
-import { NotificationsPhone } from "./NotificationsPhone";
+// phones only, and only once it is opened: kept out of the files the app
+// installs up front (scripts/precacheShell.mjs)
+const NotificationsPhone = lazy(() =>
+  import("./NotificationsPhone").then((m) => ({
+    default: m.NotificationsPhone,
+  })),
+);
 
 const [open, setOpen] = createSignal(false);
 
@@ -63,7 +71,9 @@ export function MentionsHost() {
             </>
           }
         >
-          <NotificationsPhone onClose={() => setOpen(false)} />
+          <Suspense>
+            <NotificationsPhone onClose={() => setOpen(false)} />
+          </Suspense>
         </Show>
       </Portal>
     </Show>

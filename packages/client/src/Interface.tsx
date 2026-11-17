@@ -342,11 +342,11 @@ const Content = styled("div", {
     minHeight: 0,
     _phone: {
       background: "var(--z-bg-shell, #1d1f2d)",
-      // a tab's page: the tab bar (64px) sits on its bottom edge, the page
-      // ends above it, and the bar steps aside while the keyboard is up
+      // a tab's page: the floating tab bar lies over its bottom edge, the
+      // page ends above it, and the bar steps aside while the keyboard is up
       "&[data-tab-page]": {
         position: "relative",
-        paddingBottom: "64px",
+        paddingBottom: "80px",
       },
       "&[data-tab-page]:has(input:focus, textarea:focus, [contenteditable='true']:focus)":
         {

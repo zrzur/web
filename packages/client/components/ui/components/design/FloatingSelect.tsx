@@ -129,6 +129,11 @@ export function FloatingSelect(props: FloatingSelectProps) {
       const selected = list.findIndex(
         (item) => readItemValue(item) === local.value,
       );
+      // the value in use is marked in the list (drawn on phones, where the
+      // list covers the field that shows it)
+      list.forEach((item, index) =>
+        item.toggleAttribute("data-chosen", index === selected),
+      );
       if (focusEdge === "last") focusItem(list.length - 1);
       else if (focusEdge === "first") focusItem(0);
       else focusItem(selected >= 0 ? selected : 0);
@@ -367,5 +372,19 @@ const DropdownMenu = styled("div", {
     color: "var(--z-fg-primary)",
     border: "1px solid var(--z-popover-border)",
     boxShadow: "var(--z-popover-lift)",
+    // phones: the look of the filled groups on the sheet it opens over (no
+    // frame, 14 px), one step lighter so it reads as lying on top
+    _phone: {
+      border: "none",
+      borderRadius: "14px",
+      padding: "4px",
+      background:
+        "color-mix(in srgb, var(--z-fg-primary) 9%, var(--z-bg-frame))",
+      "& > *": { borderRadius: "10px" },
+      "& [data-chosen]": {
+        fontWeight: 600,
+        background: "color-mix(in srgb, var(--z-fg-primary) 8%, transparent)",
+      },
+    },
   },
 });

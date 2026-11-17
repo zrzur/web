@@ -28,6 +28,7 @@ import { pendingUpdate } from "../serviceWorkerInterface";
 import { HomeSidebar, ServerList, ServerSidebar } from "./navigation";
 import { MentionsHost } from "./navigation/MentionsPanel";
 import { PhoneTabs, PhoneUpdateRow } from "./navigation/PhoneTabs";
+import { YouSheetHost } from "./navigation/YouSheet";
 import { AccountBar } from "./navigation/channels/AccountBar";
 
 const MainBar = styled("div", {
@@ -50,17 +51,18 @@ const MainBar = styled("div", {
       width: "100vw",
       height: "100%",
 
-      // the tab bar (64px) takes the bottom edge; the account card only stays
+      // the floating tab bar (58px, 10px above the edge) lies over the bottom
+      // of the lists, which end 12px above it; the account card only stays
       // for its call controls, just above the tabs (#root already stops
       // above the home bar, so no safe-area inset here)
       // (--z-update-row-space: the "new version" row, when it shows)
       "& > *:not([data-account-panel]):not([data-phone-tabs]):not([data-phone-update])":
         {
           paddingBottom:
-            "calc(64px + var(--z-voice-panel-space, 0px) + var(--z-update-row-space, 0px))",
+            "calc(80px + var(--z-voice-panel-space, 0px) + var(--z-update-row-space, 0px))",
         },
       "& > [data-account-panel]": {
-        bottom: "72px",
+        bottom: "80px",
       },
       "& > [data-account-panel]:not([data-in-call='true'])": {
         display: "none",
@@ -167,6 +169,7 @@ export const Sidebar = (props: {
       </Show>
       <PhoneTabs />
       <MentionsHost />
+      <YouSheetHost />
     </MainBar>
   );
 };

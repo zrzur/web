@@ -22,6 +22,7 @@ import Breakpoint from "../../../common/Breakpoint";
 
 import { Button } from "./Button";
 import { typography } from "./Text";
+import { sheetSwipe } from "./sheetSwipe";
 
 export interface DialogProps {
   show: boolean;
@@ -168,25 +169,14 @@ export function Dialog(props: Props) {
     ),
   );
 
-  let dragStart: number | undefined;
-  const onDragStart = (e: TouchEvent) => {
-    if (!phone || !(e.target as Element).closest("[data-sheet-drag]")) return;
-    dragStart = e.touches[0].clientY;
-    if (sheetElement) sheetElement.style.transition = "none";
-  };
-  const onDragMove = (e: TouchEvent) => {
-    if (dragStart === undefined || !sheetElement) return;
-    const dy = Math.max(0, e.touches[0].clientY - dragStart);
-    sheetElement.style.transform = `translateY(${dy}px)`;
-  };
-  const onDragEnd = (e: TouchEvent) => {
-    if (dragStart === undefined || !sheetElement) return;
-    const dy = e.changedTouches[0].clientY - dragStart;
-    dragStart = undefined;
-    sheetElement.style.transition = "transform 0.18s ease-out";
-    sheetElement.style.transform = "";
-    if (dy > 90) props.onClose();
-  };
+  // phones: the sheet closes by a pull down from anywhere on it, unless its
+  // content is scrolled away from the top (sheetSwipe.ts); a sheet that
+  // must be answered (persistent) does not move
+  const swipe = sheetSwipe(
+    () => sheetElement,
+    () => props.onClose(),
+    () => phone && !props.persistent,
+  );
   createEffect(() => {
     if (!props.show) return;
     const previousFocus = document.activeElement as HTMLElement | null;
@@ -356,9 +346,10 @@ export function Dialog(props: Props) {
           >
             <Container
               ref={sheetElement}
-              onTouchStart={onDragStart}
-              onTouchMove={onDragMove}
-              onTouchEnd={onDragEnd}
+              onTouchStart={swipe.onTouchStart}
+              onTouchMove={swipe.onTouchMove}
+              onTouchEnd={swipe.onTouchEnd}
+              onTouchCancel={swipe.onTouchCancel}
               data-creation={props.appearance === "creation"}
               data-phone-page={props.phonePage ? "true" : undefined}
               size={props.size ?? "md"}
@@ -712,7 +703,9 @@ const Container = styled("div", {
 });
 
 /**
- * Phone sheet handle: pull down to close
+ * Phone sheet: the strip along the top edge that pulls the sheet down to
+ * close. Nothing is drawn (owner, 2026-11-17: no bar on the sheets); a sheet
+ * also closes by its X, by a tap outside it and by Back.
  */
 const Grabber = styled("div", {
   base: {
@@ -720,16 +713,11 @@ const Grabber = styled("div", {
     _phone: {
       display: "block",
       position: "absolute",
-      top: "8px",
-      insetInlineStart: "50%",
-      translate: "-50% 0",
-      width: "36px",
-      height: "4px",
-      borderRadius: "999px",
-      background: "var(--z-border-strong)",
+      top: 0,
+      insetInline: 0,
+      height: "16px",
       zIndex: 2,
     },
-    _rtl: { _phone: { translate: "50% 0" } },
   },
 });
 
@@ -780,12 +768,17 @@ const CloseBtn = styled("button", {
     cursor: "pointer",
     transition: "background-color 120ms ease, color 120ms ease",
     _motionReduce: { transition: "none" },
-    // phones: a 44 px target in the corner of the sheet
+    // phones: no X on a sheet (owner, 2026-11-17). It closes by a pull
+    // down, a tap outside it, Escape or Back. The button stays in the tree,
+    // out of sight, so a screen reader and a keyboard still find "Close".
     _phone: {
       top: "8px",
       insetInlineEnd: "4px",
       width: "44px",
       height: "44px",
+      opacity: 0,
+      pointerEvents: "none",
+      "&:focus-visible": { opacity: 1, pointerEvents: "auto" },
     },
 
     _hover: {

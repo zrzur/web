@@ -297,9 +297,10 @@ const Bar = styled("div", {
     alignItems: "center",
     gap: "16px",
     minHeight: "64px",
-    // a phone with a fourth chapter: the feather stands for the word, so the
-    // search stays on this line
-    _phone: { "&[data-full='true'] [data-brand] > span": { display: "none" } },
+    // phones: the top line carries the way back, the name and the search,
+    // nothing else; the chapters are a row of named chips under it (owner,
+    // 2026-11-17: the line was crowded and its icons hard to reach)
+    _phone: { "& [data-brand]": { marginInlineEnd: "auto" } },
     // flat on the page; once scrolled it stays at the top on a solid strip
     // that runs edge to edge
     position: "sticky",
@@ -389,6 +390,39 @@ const Tabs = styled("nav", {
       "& button": { minWidth: "44px", paddingInline: "8px" },
       "& button > span": { display: "none" },
       "& button::after": { insetInline: "8px" },
+    },
+    // phones: a line of its own under the name. Each chapter is a chip with
+    // its icon and its name, drawn 36 px; the ::after that underlines a tab
+    // on wide screens is the unseen touch area here (44 px)
+    _phone: {
+      order: "3 !important",
+      flexBasis: "100%",
+      gap: "8px",
+      marginInline: "0 !important",
+      paddingBlock: "6px 10px",
+      "& button": {
+        minWidth: "0 !important",
+        minHeight: "36px !important",
+        gap: "6px",
+        paddingInline: "12px 14px !important",
+        borderRadius: "18px",
+        fontSize: "14px",
+        fontWeight: 600,
+        color: "var(--z-fg-secondary)",
+        background:
+          "var(--z-sheet-group, color-mix(in srgb, var(--z-fg-primary) 5%, transparent))",
+      },
+      "& button > span": { display: "inline !important" },
+      "& button::after": {
+        insetInline: "0 !important",
+        insetBlock: "-4px",
+        height: "auto",
+        background: "transparent !important",
+      },
+      "& button[aria-current='page']": {
+        color: "var(--z-fg-primary)",
+        background: "var(--z-nav-selected)",
+      },
     },
   },
 });
