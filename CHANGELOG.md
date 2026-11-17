@@ -9,6 +9,7 @@
 * **Server sheet:** starts with the server (picture, name, members) and Invite, Server info and Settings as large buttons; the rest follows in groups.
 * **Settings lists on phones** (your settings, a server's, a channel's): the rows of a section are one card, each row ends in an arrow, and no row is lit as "the open one" on a screen that is only the list.
 * **A voice room opens as a sheet over the channel list:** who is in it, the microphone on or off, and Join. A press on a room used to join at once and leave the list.
+* **The top edge of a sheet is clean.** A line along the top only thinned out to nothing round the corners; it is gone, both kinds of sheet (menus and dialogs) have the same 20 px corners, and the menus' sheet sits one step above the page like the dialogs' (it had the page's own colour).
 * **No Home page on phones.** The logo opens Messages, the app opens on the lists, and a swipe there no longer uncovers a page. What Home holds is one press away: servers on the rail, settings and designs under You. Wider screens keep Home.
 
 ### Phones: the details (owner review, 2026-11-17)

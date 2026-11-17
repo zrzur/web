@@ -645,9 +645,10 @@ const Container = styled("div", {
       paddingTop: "28px !important",
       paddingInline: "16px !important",
       paddingBottom: "calc(16px + var(--z-safe-bottom)) !important",
-      borderRadius: "14px 14px 0 0 !important",
-      borderInline: "none",
-      borderBottom: "none",
+      // the same corners as the menus' sheet, and no line on any side: a
+      // top-only border thins out round the corners (owner, 2026-11-17)
+      borderRadius: "20px 20px 0 0 !important",
+      border: "none !important",
       // a body that lays itself out to the sheet's edges
       "&:has([data-sheet-edge])": { padding: "0 !important" },
       // a page: the whole screen under the status bar, square corners, the

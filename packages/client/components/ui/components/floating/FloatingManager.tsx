@@ -368,9 +368,13 @@ const SheetPanel = styled("div", {
     overflowY: "auto",
     overscrollBehavior: "contain",
     padding: "24px 16px calc(16px + var(--z-safe-bottom))",
-    borderRadius: "22px 22px 0 0",
-    background: "var(--z-bg-modal, var(--z-bg-raised))",
-    borderTop: "1px solid var(--z-border-strong)",
+    // No line along the top: a border on one side of a rounded box thins
+    // out to nothing round the corners, which reads as a drawing mistake
+    // (owner, 2026-11-17). The surface against the dimmed page is the edge.
+    borderRadius: "20px 20px 0 0",
+    // one step above the page, the surface dialogs' sheets use: it was the
+    // page's own colour, so only the line told the sheet from the page
+    background: "var(--z-dialog-bg, var(--z-bg-floating, var(--z-bg-raised)))",
     boxShadow: "0 -18px 48px -12px rgba(0, 0, 0, 0.55)",
 
     // the menu fills the sheet: no second card inside it
