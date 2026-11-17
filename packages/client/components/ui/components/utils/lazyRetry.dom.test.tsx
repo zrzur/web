@@ -1,4 +1,5 @@
 import { Show, Suspense, createResource, createSignal } from "solid-js";
+import type { JSX } from "solid-js";
 import { render } from "solid-js/web";
 import { afterEach, describe, expect, it } from "vitest";
 
@@ -32,9 +33,9 @@ describe("lazyRetry keeps its wait to itself", () => {
   }
 
   it("the app stays on screen while the part's file loads", async () => {
-    let arrive!: (part: { default: () => unknown }) => void;
+    let arrive!: (part: { default: () => JSX.Element }) => void;
     const Part = lazyRetry(
-      () => new Promise<{ default: () => unknown }>((done) => (arrive = done)),
+      () => new Promise<{ default: () => JSX.Element }>((done) => (arrive = done)),
       () => null,
     );
     const { host, setOpen } = mount(() => <Part />);
