@@ -1,4 +1,4 @@
-import { For, Show } from "solid-js";
+import { For, Show, createSignal } from "solid-js";
 
 import { Trans, useLingui } from "@lingui/solid/macro";
 import { useQuery } from "@tanstack/solid-query";
@@ -7,6 +7,7 @@ import { styled } from "styled-system/jsx";
 
 import { useClient, useUser } from "@revolt/client";
 import { billingAvailable } from "@revolt/client/billing";
+import { useDevice } from "@revolt/common";
 import { presencePatch } from "@revolt/common/lib/statusWrite";
 import { useInstance } from "@revolt/instance";
 import { useModals } from "@revolt/modal";
@@ -75,6 +76,12 @@ function Body(props: { user: User }) {
   const navigate = useNavigate();
   const { openModal } = useModals();
   const { limits } = useInstance();
+  const device = useDevice();
+  const phone = () => device.layout() === "phone";
+  /** phones: the four statuses open under the Status row */
+  const [choosing, setChoosing] = createSignal(false);
+  const friends = () =>
+    client().users.filter((user) => user.relationship === "Friend").length;
 
   const query = useQuery(() => ({
     queryKey: ["profile", props.user.id],
@@ -182,6 +189,139 @@ function Body(props: { user: User }) {
       },
       { icon: "gear-six", label: () => t`All settings` },
     ];
+
+  // Phones (design pack approved by the owner, 2026-11-17): the look of the
+  // settings list. The profile on top without a frame, then groups of rows
+  // with bare icons, the value at the end of the row.
+  if (phone())
+    return (
+      <Content data-you-phone>
+        <Card style={theme()} data-flat>
+          <Profile.Banner
+            size="card"
+            user={props.user}
+            bannerUrl={query.data?.animatedBannerURL}
+            onClickAvatar={() => settings("profile")}
+          />
+          <CardBody>
+            <Profile.Identity user={props.user} size="card" />
+            <Action type="button" onClick={() => settings("profile")}>
+              <Icon name="pencil-simple" size={18} />
+              <Trans>Edit profile</Trans>
+            </Action>
+          </CardBody>
+        </Card>
+
+        <PGroup data-status>
+          <PRow
+            type="button"
+            aria-expanded={choosing()}
+            onClick={() => setChoosing(!choosing())}
+          >
+            <StatusSlot data-status-slot>
+              <UserStatus status={presence()} size="12px" />
+            </StatusSlot>
+            <PName>
+              <Trans>Status</Trans>
+            </PName>
+            <PValue>
+              {presences.find((item) => item.value === presence())?.label()}
+              <Icon name={choosing() ? "caret-up" : "caret-down"} size={16} />
+            </PValue>
+          </PRow>
+          <Show when={choosing()}>
+            <div role="radiogroup" aria-label={t`Status`}>
+              <For each={presences}>
+                {(item) => (
+                  <PRow
+                    type="button"
+                    role="radio"
+                    data-inner
+                    aria-checked={presence() === item.value}
+                    onClick={() => {
+                      setPresence(item.value);
+                      setChoosing(false);
+                    }}
+                  >
+                    <StatusSlot data-status-slot>
+                      <UserStatus status={item.value} size="12px" />
+                    </StatusSlot>
+                    <PName>{item.label()}</PName>
+                    <Show when={presence() === item.value}>
+                      <PValue>
+                        <Icon name="check" size={18} />
+                      </PValue>
+                    </Show>
+                  </PRow>
+                )}
+              </For>
+            </div>
+          </Show>
+          <PRow
+            type="button"
+            onClick={() =>
+              openModal({ type: "custom_status", client: client() })
+            }
+          >
+            <Icon name="chat-circle" size={22} />
+            <PName>
+              <Trans>Edit status</Trans>
+            </PName>
+            <PValue>
+              <Icon name="caret-right" size={16} />
+            </PValue>
+          </PRow>
+        </PGroup>
+
+        <PGroup data-links>
+          <For each={links}>
+            {(link) => (
+              <PRow type="button" onClick={link.onPress}>
+                <Icon name={link.icon} size={22} />
+                <PName>{link.label()}</PName>
+                <PValue>
+                  <Show when={link.icon === "users" && friends()}>
+                    {friends()}
+                  </Show>
+                  <Icon name="caret-right" size={16} />
+                </PValue>
+              </PRow>
+            )}
+          </For>
+        </PGroup>
+
+        <PGroup data-settings>
+          <PRow
+            type="button"
+            data-settings-page="all"
+            onClick={() => settings()}
+          >
+            <Icon name="gear-six" size={22} />
+            <PName>
+              <Trans>Settings</Trans>
+            </PName>
+            <PValue>
+              <Icon name="caret-right" size={16} />
+            </PValue>
+          </PRow>
+          <Show when={installWay()}>
+            <PRow
+              type="button"
+              data-install-row
+              onClick={() => openModal({ type: "install_app" })}
+            >
+              <Icon name="download-simple" size={22} />
+              <PName>
+                <Trans>Install the app</Trans>
+              </PName>
+              <PValue>
+                <Icon name="caret-right" size={16} />
+              </PValue>
+            </PRow>
+          </Show>
+        </PGroup>
+      </Content>
+    );
 
   return (
     <Content>
@@ -331,6 +471,92 @@ const Base = styled("div", {
     flexGrow: 1,
     display: "flex",
     flexDirection: "column",
+    // phones: the surface of the settings list, so the page and the
+    // settings it leads to are one place
+    _phone: {
+      background: "var(--z-bg-frame)",
+      "& > :first-child": { background: "var(--z-bg-frame)" },
+    },
+  },
+});
+
+/** Phones: a group of rows, filled, no frame */
+const PGroup = styled("div", {
+  base: {
+    display: "flex",
+    flexDirection: "column",
+    borderRadius: "14px",
+    overflow: "hidden",
+    background:
+      "var(--z-sheet-group, color-mix(in srgb, var(--z-fg-primary) 5%, transparent))",
+  },
+});
+
+/** Phones: one row. [icon] name ........ value > */
+const PRow = styled("button", {
+  base: {
+    display: "flex",
+    alignItems: "center",
+    gap: "14px",
+    width: "100%",
+    minHeight: "52px",
+    padding: "8px 14px",
+    border: "none",
+    background: "none",
+    color: "var(--z-fg-primary)",
+    font: "inherit",
+    fontSize: "16px",
+    fontWeight: 500,
+    textAlign: "start",
+    cursor: "pointer",
+    "--z-icon-color": "var(--z-icon-neutral)",
+    WebkitTapHighlightColor: "transparent",
+    "& + &, div + &, & + div": {
+      borderTop: "1px solid var(--z-float-divider, var(--z-border-subtle))",
+    },
+    "&[data-inner]": { paddingInlineStart: "28px" },
+    "&[data-inner] + &[data-inner]": { borderTop: "none" },
+    _active: {
+      background: "color-mix(in srgb, var(--z-fg-primary) 10%, transparent)",
+    },
+    _focusVisible: {
+      outline: "none",
+      boxShadow: "inset 0 0 0 2px var(--z-focus)",
+    },
+  },
+});
+
+/** The status dot in the icons' column, so every row's name starts on one line */
+const StatusSlot = styled("span", {
+  base: {
+    flex: "none",
+    width: "22px",
+    height: "22px",
+    display: "grid",
+    placeItems: "center",
+  },
+});
+
+const PName = styled("span", {
+  base: {
+    flex: 1,
+    minWidth: 0,
+    overflow: "hidden",
+    textOverflow: "ellipsis",
+    whiteSpace: "nowrap",
+  },
+});
+
+const PValue = styled("span", {
+  base: {
+    flex: "none",
+    display: "inline-flex",
+    alignItems: "center",
+    gap: "6px",
+    fontSize: "14px",
+    fontWeight: 400,
+    color: "var(--z-fg-muted)",
+    "--z-icon-color": "var(--z-icon-muted)",
   },
 });
 
@@ -365,6 +591,15 @@ const Card = styled("div", {
     border: "1px solid var(--z-btn-surface-border, var(--z-border-subtle))",
     background: "var(--profile-surface, var(--z-card-bg, var(--z-bg-raised)))",
     boxShadow: "var(--z-card-lift)",
+    // phones: the profile is the top of the page, edge to edge, no frame
+    "&[data-flat]": {
+      marginInline: "-16px",
+      marginBlockStart: "-16px",
+      border: "none",
+      borderRadius: 0,
+      boxShadow: "none",
+      background: "transparent",
+    },
   },
 });
 

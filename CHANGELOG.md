@@ -2,6 +2,11 @@
 
 ## Unreleased
 
+### Phones: one look for groups of rows (design pack, 2026-11-17)
+
+* **You page on phones** follows the settings list: the profile on top without a frame, then filled groups of rows with bare icons and the value at the end of the row. Status is one row that opens its four choices under it; Friends shows the count; Settings is one row that opens the settings list. The statuses as four buttons, the About panel and the eight settings rows are gone from the phone page (wider screens keep theirs).
+* **Settings pages on phones** sit on the same surface as the list they open from, and their groups are filled cards with no frame.
+
 ### Phones: page by page (2026-11-17)
 
 * **Search on a phone:** no "Search results" title over a page with no results yet (the search field is the top row); "where" and "sort" are full-width rows of equal choices; before anything is typed the help is one line and the filters one card of rows on the page's own edge (it was a centred notice with a narrow column of examples).

@@ -345,6 +345,15 @@ const Panel = styled("div", {
       "1px solid var(--z-card-border, var(--z-btn-surface-border, color-mix(in srgb, var(--z-fg-primary) 8%, transparent)))",
     background: "var(--z-card-bg)",
     boxShadow: "var(--z-card-lift)",
+    // phones: a group is a filled card with no frame, as in the settings
+    // list (owner, 2026-11-17: one look for every group of rows)
+    _phone: {
+      border: "none",
+      borderRadius: "14px",
+      boxShadow: "none",
+      background:
+        "var(--z-sheet-group, color-mix(in srgb, var(--z-fg-primary) 5%, transparent))",
+    },
   },
 });
 
