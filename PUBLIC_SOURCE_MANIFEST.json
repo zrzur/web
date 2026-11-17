@@ -262,8 +262,8 @@
     },
     {
       "path": "CHANGELOG.md",
-      "sha256": "7edeabe2ca77d795865d86ae683bd2d426a71148a2d3657064f85b9cbab88b5c",
-      "bytes": 169005,
+      "sha256": "bd994fc4b3c6bed939a1478513569dd04167b651d1e8d268eb790b20889f9897",
+      "bytes": 169215,
       "category": "public-documentation"
     },
     {
@@ -6070,8 +6070,8 @@
     },
     {
       "path": "packages/client/components/ui/components/design/Settings.tsx",
-      "sha256": "5ef5e5cd7844b1ed6d2f063ec5235d5c12ec88eef7b4f63f341dced0e84760a6",
-      "bytes": 12650,
+      "sha256": "78f0db9cce2ec3738c9f559da372e39b8ad3a792ebb2658d3d1334a8d42692e2",
+      "bytes": 13106,
       "category": "product-source-or-build-manifest"
     },
     {
