@@ -132,6 +132,18 @@ function button(text: string) {
   return result;
 }
 const settle = () => new Promise((resolve) => setTimeout(resolve, 40));
+/** The GIF side is fetched when first opened: wait until it is on the page */
+const loaded = async () => {
+  for (let i = 0; i < 100; i++) {
+    if (
+      document.querySelector('input[type="search"]') ||
+      document.body.textContent?.includes("GIFs aren't available yet")
+    )
+      break;
+    await new Promise((resolve) => setTimeout(resolve, 20));
+  }
+  await settle();
+};
 const type = async (value: string) => {
   const input = document.querySelector<HTMLInputElement>(
     'input[type="search"]',
@@ -167,14 +179,14 @@ describe("KLIPY GIF picker", () => {
   it("fails closed without a GIF service: no requests", async () => {
     fixture.key = undefined;
     mount();
-    await settle();
+    await loaded();
     expect(fetch).not.toHaveBeenCalled();
     expect(document.body.textContent).toContain("GIFs aren't available yet");
   });
 
   it("talks only to our GIF service and sends no user id", async () => {
     mount();
-    await settle();
+    await loaded();
     await type("cats");
     const urls = vi.mocked(fetch).mock.calls.map(([u]) => new URL(String(u)));
     expect(urls.length).toBeGreaterThan(0);
