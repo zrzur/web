@@ -1,4 +1,12 @@
-﻿import { Accessor, Match, Setter, Show, Switch } from "solid-js";
+import {
+  Accessor,
+  createSignal,
+  Match,
+  onCleanup,
+  Setter,
+  Show,
+  Switch,
+} from "solid-js";
 
 import { Trans, useLingui } from "@lingui/solid/macro";
 import { Channel } from "@zrzur/sdk/solid";
@@ -96,7 +104,22 @@ export function ChannelHeader(props: Props) {
       ? cancelSelection()
       : startSelection(props.channel.id);
 
+  // Phones under 360 px: back, name, call, video, search and More do not
+  // fit; a direct message's name was cut down to "…". The video call moves
+  // into the More sheet there, and the name gets its 44 px.
+  const narrowQuery = window.matchMedia("(max-width: 359px)");
+  const [narrow, setNarrow] = createSignal(narrowQuery.matches);
+  const onNarrow = () => setNarrow(narrowQuery.matches);
+  narrowQuery.addEventListener("change", onNarrow);
+  onCleanup(() => narrowQuery.removeEventListener("change", onNarrow));
+  const videoCallInMore = () =>
+    narrow() &&
+    !props.channel.serverId &&
+    props.channel.isVoice &&
+    !voice.showCard(props.channel);
+
   const hasMoreActions = () =>
+    videoCallInMore() ||
     canSelectMessages() ||
     canOpenSettings() ||
     canListThreads() ||
@@ -219,7 +242,7 @@ export function ChannelHeader(props: Props) {
                   >
                     <TextWithEmoji content={parent().name!} />
                   </ParentLink>
-                  <Separator aria-hidden="true">â€º</Separator>
+                  <Separator aria-hidden="true">›</Separator>
                 </>
               )}
             </Show>
@@ -312,8 +335,9 @@ export function ChannelHeader(props: Props) {
               call
             </Symbol>
           </IconButton>
-          {/* DMs and groups: a call with the camera on from the start */}
-          <Show when={!props.channel.serverId}>
+          {/* DMs and groups: a call with the camera on from the start (on a
+              very narrow phone it is in the More sheet, see `narrow`) */}
+          <Show when={!props.channel.serverId && !narrow()}>
             <IconButton
               variant="toolbar"
               size="xs"
@@ -610,6 +634,19 @@ export function ChannelHeader(props: Props) {
             use:floating={{
               contextMenu: () => (
                 <ContextMenu>
+                  <Show when={videoCallInMore()}>
+                    <ContextMenuButton
+                      icon={<Icon name="video-camera" size={20} />}
+                      onClick={() =>
+                        voice.connect(props.channel, undefined, undefined, 0, {
+                          video: true,
+                        })
+                      }
+                      data-start-video-call
+                    >
+                      {t`Start a video call`}
+                    </ContextMenuButton>
+                  </Show>
                   <Show when={canSelectMessages()}>
                     <ContextMenuButton
                       icon={<Icon name="check-square" size={20} />}

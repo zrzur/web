@@ -28,8 +28,14 @@ export const sidebarBase = cva({
       textDecoration: "none",
     },
 
+    // phones: the list takes what the rail leaves. Its desktop width (260 px)
+    // plus the rail is 332 px: on a 320 px screen the list ran 12 px past
+    // the edge and its dates and buttons were cut
     _phone: {
       flexGrow: 1,
+      flexShrink: 1,
+      width: "auto",
+      minWidth: 0,
     },
   },
 });
