@@ -262,8 +262,8 @@
     },
     {
       "path": "CHANGELOG.md",
-      "sha256": "f2fec22d8d7bb6a1eb6b0ea73cc319e2f903b8f14e2e9aabc0af566944eb2c9c",
-      "bytes": 162178,
+      "sha256": "2184611361308c8bd288fa89cb6cbd421616da535faaee07c704a3972764955e",
+      "bytes": 162630,
       "category": "public-documentation"
     },
     {
@@ -2824,8 +2824,8 @@
     },
     {
       "path": "packages/client/components/auth/src/AuthPage.tsx",
-      "sha256": "cede83f79fd068fd9106e5fe0f56e892c67aec379b34409376dc5f57aa213d41",
-      "bytes": 10266,
+      "sha256": "5e6501064e39c87910901b689f32c7b6b90e0f51a914d4e33fc5aac1d1fa6b95",
+      "bytes": 10685,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -5962,8 +5962,8 @@
     },
     {
       "path": "packages/client/components/ui/components/design/FloatingSelect.dom.test.tsx",
-      "sha256": "cc66286d60f81155544464528706c4fbbe7b2dee92dc2f672c5a42b2230c02d1",
-      "bytes": 9340,
+      "sha256": "18c3e452bc2e39ad141278d6497736516562e87bbdb969cb990d631656273a69",
+      "bytes": 9301,
       "category": "synthetic-test-source-or-fixture"
     },
     {
@@ -41926,8 +41926,8 @@
     },
     {
       "path": "packages/client/src/interface/Friends.tsx",
-      "sha256": "5e4562ed362ace1c430ba318d978878874e21f2049ac32dba3459db025a07777",
-      "bytes": 22828,
+      "sha256": "895cd8e4337c86cefedbb5826c36ca109a93ccdf33858f2f3a139b6790305bd9",
+      "bytes": 23125,
       "category": "product-source-or-build-manifest"
     },
     {
