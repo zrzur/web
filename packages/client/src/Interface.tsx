@@ -22,6 +22,7 @@ import { NoticeCenter } from "@revolt/app/interface/support/NoticeCenter";
 import { useClient, useClientLifecycle } from "@revolt/client";
 import { State } from "@revolt/client/Controller";
 import { NotificationsWorker } from "@revolt/client/NotificationsWorker";
+import { useDevice } from "@revolt/common";
 import { useModals } from "@revolt/modal";
 import { PluginHostGate } from "@revolt/plugins/PluginHostGate";
 import { Navigate, useBeforeLeave, useLocation } from "@revolt/routing";
@@ -34,6 +35,7 @@ import { Sidebar } from "./interface/Sidebar";
 import { FirstScreen } from "./interface/home/FirstScreen";
 import { goingHome } from "./interface/home/goingHome";
 import { NEXT_SCREENS, preloadWhenIdle } from "./interface/idlePreload";
+import { PhoneTabs } from "./interface/navigation/PhoneTabs";
 
 /** Longest wait for unread state before Home draws without it */
 const UNREADS_WAIT = 800;
@@ -54,6 +56,7 @@ const Interface = (props: { children?: JSX.Element }) => {
   const client = useClient();
   const { openModal } = useModals();
   const { isLoggedIn, lifecycle } = useClientLifecycle();
+  const device = useDevice();
   // reactive copy, for the panel corner when the channel list is hidden
   const location = useLocation();
 
@@ -94,6 +97,13 @@ const Interface = (props: { children?: JSX.Element }) => {
     const timer = setTimeout(() => setSettled(true), UNREADS_WAIT);
     onCleanup(() => clearTimeout(timer));
   });
+
+  // Discover and You are tabs of the phone's bar, and each is a whole page
+  // on the page side of the slide: the bar stays under them
+  const tabPage = () =>
+    device.layout() === "phone" &&
+    (location.pathname.startsWith("/discover") ||
+      location.pathname.startsWith("/you"));
 
   function isDisconnected() {
     return [
@@ -195,6 +205,7 @@ const Interface = (props: { children?: JSX.Element }) => {
               <Content
                 ref={setContRef}
                 class="app_body"
+                data-tab-page={tabPage() ? "" : undefined}
                 sidebar={
                   state.layout.getSectionState(
                     LAYOUT_SECTIONS.PRIMARY_SIDEBAR,
@@ -207,6 +218,10 @@ const Interface = (props: { children?: JSX.Element }) => {
                 }
               >
                 {props.children}
+                {/* phones: a tab's own page keeps the tab bar under it */}
+                <Show when={tabPage()}>
+                  <PhoneTabs page />
+                </Show>
               </Content>
             </Layout>
           </Match>
@@ -290,6 +305,17 @@ const Content = styled("div", {
     minHeight: 0,
     _phone: {
       background: "var(--z-bg-shell, #1d1f2d)",
+      // a tab's page: the tab bar (64px) sits on its bottom edge, the page
+      // ends above it, and the bar steps aside while the keyboard is up
+      "&[data-tab-page]": {
+        position: "relative",
+        paddingBottom: "64px",
+      },
+      "&[data-tab-page]:has(input:focus, textarea:focus, [contenteditable='true']:focus)":
+        {
+          paddingBottom: 0,
+          "& > [data-phone-tabs-page]": { display: "none" },
+        },
     },
   },
   variants: {

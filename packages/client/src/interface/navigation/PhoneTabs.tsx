@@ -26,7 +26,13 @@ const [lastServer, setLastServer] = createSignal<string>();
  * (the design the owner picked, 2026-11-16).
  * Hidden on wider screens, where the rail and account card do this job.
  */
-export function PhoneTabs() {
+/**
+ * @param props.page The bar under a tab's own page (Discover, You), on the
+ *   page side of the phone's slide: Servers and Messages lead back to the
+ *   menu side from there. Without it the page had no way out but a swipe,
+ *   and an installed app has no browser Back button.
+ */
+export function PhoneTabs(props: { page?: boolean }) {
   const { t } = useLingui();
   const state = useState();
   const client = useClient();
@@ -66,10 +72,17 @@ export function PhoneTabs() {
       return openModal({ type: "create_or_join_server", client: client() });
     if (params.server !== id)
       navigate(state.layout.getLastActiveServerPath(id));
+    toMenuSide();
   };
 
   const openMessages = () => {
     if (active() !== "messages") navigate("/app");
+    toMenuSide();
+  };
+
+  /** from a tab's page, the lists are on the other side of the slide */
+  const toMenuSide = () => {
+    if (props.page) state.appDrawer()?.setShown(false);
   };
 
   const openDiscover = () => {
@@ -104,7 +117,13 @@ export function PhoneTabs() {
   );
 
   return (
-    <Bar data-phone-tabs aria-label={t`Main navigation`}>
+    <Bar
+      // two names: tests and the menu side's layout rules look for the
+      // first, and must not find the page's copy
+      data-phone-tabs={props.page ? undefined : ""}
+      data-phone-tabs-page={props.page ? "" : undefined}
+      aria-label={t`Main navigation`}
+    >
       {tab("servers", "squares-four", t`Servers`, openServers)}
       {tab("messages", "chat-circle-dots", t`Messages`, openMessages, () =>
         unreadMessages(),
