@@ -926,6 +926,7 @@ const Maker = styled("button", {
       outlineOffset: "2px",
     },
     "@media (max-width: 899px)": { gridColumn: "span 3" },
+    "@media (max-width: 600px)": { gridColumn: "span 6" },
   },
 });
 
@@ -995,6 +996,12 @@ const TileBase = styled("div", {
         "& > button:last-child, & > div:last-child": { paddingBlock: "4px" },
       },
       "&[data-kind='ink']": { gridColumn: "span 3", gridRow: "span 1" },
+    },
+    // Phones: every card is the width of the page, one under the other
+    // (owner, 2026-11-17: all the same size, as the search field is). Two
+    // sizes side by side left a single small card with a hole beside it.
+    "@media (max-width: 600px)": {
+      "&, &[data-kind]": { gridColumn: "span 6" },
     },
   },
 });

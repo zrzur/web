@@ -2,9 +2,9 @@ import { t } from "@lingui/core/macro";
 import { folder as MdFolder } from "@revolt/ui/icons/legacy";
 import { For, Show } from "solid-js";
 
-import { Trans } from "@lingui/solid/macro";
-import dayjs from "dayjs";
+import { Plural, Trans } from "@lingui/solid/macro";
 import { Server } from "@zrzur/sdk/solid";
+import dayjs from "dayjs";
 
 import { canOpenServerSettings } from "@revolt/app/interface/settings/server/access";
 import { useClient } from "@revolt/client";
@@ -12,7 +12,12 @@ import { billingAvailable } from "@revolt/client/billing";
 import { useDevice } from "@revolt/common";
 import { useModals } from "@revolt/modal";
 import { useState } from "@revolt/state";
-import { Column, Text, Time } from "@revolt/ui";
+import { Avatar, Column, Text, Time } from "@revolt/ui";
+import { Icon } from "@revolt/ui/icons/Icon";
+import { styled } from "styled-system/jsx";
+
+import Breakpoint from "../../common/Breakpoint";
+import { QuickAction, QuickRow } from "./MessageContextMenu";
 
 import {
   alternate_email as MdAlternateEmail,
@@ -169,9 +174,84 @@ export function ServerContextMenu(props: {
    */
   const permissionServerSettings = () => canOpenServerSettings(props.server);
 
+  /**
+   * Phones show this menu as a bottom sheet (FloatingManager, same query):
+   * it starts with the server itself and the three things people open it
+   * for, as large buttons; the rows below are everything else.
+   */
+  const sheet =
+    typeof window !== "undefined" &&
+    !!window.matchMedia?.(Breakpoint.phone).matches;
+
   return (
     <ContextMenu>
-      <Show when={props.openServerInfo}>
+      <Show when={sheet}>
+        <SheetHead data-server-sheet-head>
+          <SheetHeadIcon>
+            <Avatar
+              size={56}
+              shape="rounded-square"
+              src={props.server.animatedIconURL ?? props.server.iconURL}
+              fallback={props.server.name}
+            />
+          </SheetHeadIcon>
+          <SheetHeadText>
+            <strong dir="auto">{props.server.name}</strong>
+            <Show when={props.server.approximateMemberCount}>
+              <small>
+                <Plural
+                  value={props.server.approximateMemberCount}
+                  one="# member"
+                  other="# members"
+                />
+              </small>
+            </Show>
+          </SheetHeadText>
+        </SheetHead>
+        <QuickRow role="group" data-quick-actions>
+          <Show when={permissionInviteOthers()}>
+            <QuickAction
+              role="menuitem"
+              tabIndex={0}
+              aria-label={t`Create invite`}
+              onClick={createInvite}
+            >
+              <Icon name="user-plus" size={22} />
+              <span>
+                <Trans>Invite</Trans>
+              </span>
+            </QuickAction>
+          </Show>
+          <Show when={props.openServerInfo}>
+            <QuickAction
+              role="menuitem"
+              tabIndex={0}
+              aria-label={t`Server info`}
+              onClick={() => props.openServerInfo!()}
+            >
+              <Icon name="info" size={22} />
+              <span>
+                <Trans>Server info</Trans>
+              </span>
+            </QuickAction>
+          </Show>
+          <Show when={permissionServerSettings()}>
+            <QuickAction
+              role="menuitem"
+              tabIndex={0}
+              aria-label={t`Open server settings`}
+              onClick={openSettings}
+            >
+              <Icon name="gear-six" size={22} />
+              <span>
+                <Trans>Settings</Trans>
+              </span>
+            </QuickAction>
+          </Show>
+        </QuickRow>
+        <ContextMenuDivider />
+      </Show>
+      <Show when={props.openServerInfo && !sheet}>
         <ContextMenuButton
           icon={MdInfo}
           onClick={() => props.openServerInfo!()}
@@ -390,7 +470,7 @@ export function ServerContextMenu(props: {
       </ContextMenuSubMenu>
       <ContextMenuDivider />
 
-      <Show when={permissionInviteOthers()}>
+      <Show when={permissionInviteOthers() && !sheet}>
         <ContextMenuButton icon={MdPersonAdd} onClick={createInvite}>
           <Trans>Create invite</Trans>
         </ContextMenuButton>
@@ -400,7 +480,7 @@ export function ServerContextMenu(props: {
           <Trans>Edit your identity</Trans>
         </ContextMenuButton>
       </Show>
-      <Show when={permissionServerSettings()}>
+      <Show when={permissionServerSettings() && !sheet}>
         <ContextMenuButton icon={MdSettings} onClick={openSettings}>
           <Trans>Open server settings</Trans>
         </ContextMenuButton>
@@ -432,3 +512,51 @@ export function ServerContextMenu(props: {
     </ContextMenu>
   );
 }
+
+/** Phone sheet: the server this sheet is about */
+const SheetHead = styled("div", {
+  base: {
+    display: "flex",
+    alignItems: "center",
+    gap: "14px",
+    padding: "0 2px 14px",
+  },
+});
+
+/** A server without a picture shows its initials: on a tile, as on the rail */
+const SheetHeadIcon = styled("span", {
+  base: {
+    flex: "none",
+    width: "56px",
+    height: "56px",
+    display: "grid",
+    placeItems: "center",
+    overflow: "hidden",
+    borderRadius: "16px",
+    background: "var(--z-bg-frame)",
+    boxShadow: "inset 0 0 0 1px var(--z-border-subtle)",
+  },
+});
+
+const SheetHeadText = styled("div", {
+  base: {
+    minWidth: 0,
+    display: "flex",
+    flexDirection: "column",
+    gap: "2px",
+    "& strong": {
+      fontSize: "18px",
+      fontWeight: 700,
+      lineHeight: "24px",
+      color: "var(--z-fg-primary)",
+      overflow: "hidden",
+      textOverflow: "ellipsis",
+      whiteSpace: "nowrap",
+    },
+    "& small": {
+      fontSize: "13px",
+      lineHeight: "18px",
+      color: "var(--z-fg-muted)",
+    },
+  },
+});

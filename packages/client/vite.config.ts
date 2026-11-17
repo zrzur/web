@@ -21,6 +21,7 @@ import { preloadApp } from "./scripts/preloadApp.mjs";
 import { siteCatalogs } from "./scripts/siteCatalogs.mjs";
 import { buildDefine, readReleaseInfo } from "./scripts/release-info.mjs";
 import { thirdPartyNotices } from "./scripts/third-party-notices.mjs";
+import { localisedManifests, webManifest } from "./scripts/webManifest.mjs";
 
 // version + git commit + tag of this build; "source code" links use it
 const releaseInfo = readReleaseInfo({ dir: resolve(__dirname, "../..") });
@@ -42,6 +43,7 @@ export default defineConfig(({ command }) => {
     base,
     define: {
       __ZRZUR_BUILD__: buildDefine(releaseInfo, "web"),
+      __ZRZUR_PWA_SCOPE__: JSON.stringify(pwaScope),
     },
     plugins: [
       buildJsonPlugin(releaseInfo, "web"),
@@ -139,7 +141,7 @@ export default defineConfig(({ command }) => {
       shell.plugin,
       VitePWA({
         srcDir: "src",
-        registerType: "autoUpdate",
+        registerType: "prompt",
         filename: "serviceWorker.ts",
         strategies: "injectManifest",
         injectManifest: {
@@ -158,56 +160,18 @@ export default defineConfig(({ command }) => {
           enabled: false,
           type: "module",
         },
-        manifest: {
-          name: "Zrzur",
-          short_name: "Zrzur",
-          description: "Zrzur 26 — community chat platform.",
-          categories: ["communication", "chat", "messaging"],
-          start_url: base,
-          scope: pwaScope,
-          display_override: ["window-controls-overlay"],
-          display: "standalone",
-          background_color: "#0D0E16",
-          theme_color: "#0D0E16",
-          icons: [
-            {
-              // official A mark (controller face) on Midnight Pulse
-              src: `${base}assets/web/zrzur-pwa-192.png`,
-              type: "image/png",
-              sizes: "192x192",
-            },
-            {
-              src: `${base}assets/web/zrzur-pwa-512.png`,
-              type: "image/png",
-              sizes: "512x512",
-            },
-            {
-              // legacy filenames kept with the same bytes for older caches
-              src: `${base}assets/web/android-chrome-192x192.png`,
-              type: "image/png",
-              sizes: "192x192",
-            },
-            {
-              src: `${base}assets/web/android-chrome-512x512.png`,
-              type: "image/png",
-              sizes: "512x512",
-            },
-            {
-              src: `${base}assets/web/monochrome.svg`,
-              type: "image/svg+xml",
-              sizes: "any",
-              purpose: "monochrome",
-            },
-            {
-              src: `${base}assets/web/masking-512x512.png`,
-              type: "image/png",
-              sizes: "512x512",
-              purpose: "maskable",
-            },
-          ],
-          // TODO: take advantage of shortcuts
-        },
+        // registered by src/serviceWorkerInterface.ts, which also decides
+        // when a new release takes over (never by reloading on its own)
+        injectRegister: false,
+        // the worker keeps scripts, styles and fonts only: the icons are
+        // read by the system when the app is installed, not by the app
+        includeManifestIcons: false,
+        // the legacy icon files (android-chrome-*.png) stay on the server
+        // for apps installed from an older manifest
+        manifest: webManifest({ base, scope: pwaScope }),
       }),
+      // manifest.ar.webmanifest: the app is named زرزور on an Arabic device
+      localisedManifests({ base, scope: pwaScope }),
     ],
     build: {
       target: "esnext",

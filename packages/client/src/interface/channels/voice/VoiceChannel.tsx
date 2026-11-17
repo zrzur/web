@@ -24,6 +24,7 @@ import { Icon } from "@revolt/ui/icons/Icon";
 
 import { ChannelHeader } from "../ChannelHeader";
 import { ChannelPageProps } from "../ChannelPage";
+import { pullCallDown } from "./callPull";
 import "./phoneCall.css";
 
 /**
@@ -49,6 +50,7 @@ export function VoiceChannel(props: ChannelPageProps) {
   );
 
   const device = useDevice();
+  const state = useState();
   const phoneCall = () => device.layout() === "phone" && inThisCall();
   // the call card is drawn over the stage from outside it: the phone look of
   // its tiles and controls hangs on <html> (phoneCall.css)
@@ -57,6 +59,13 @@ export function VoiceChannel(props: ChannelPageProps) {
     document.documentElement.setAttribute("data-phone-call", "");
     onCleanup(() =>
       document.documentElement.removeAttribute("data-phone-call"),
+    );
+    // drag the call down to put it aside: the call goes on, the lists come
+    // back (the same as the arrow in the top row)
+    onCleanup(
+      pullCallDown(() => {
+        state.appDrawer()?.setShown(false);
+      }),
     );
   });
 
@@ -115,7 +124,7 @@ function CallTop(props: ChannelPageProps) {
       <span style={{ flex: 1 }} />
       <TopButton
         type="button"
-        data-on={voice.deafen() ? undefined : ""}
+        data-off={voice.deafen() ? "" : undefined}
         aria-pressed={voice.deafen()}
         aria-label={voice.deafen() ? t`Undeafen` : t`Deafen`}
         aria-disabled={!voice.listenPermission}
@@ -176,10 +185,16 @@ const TopButton = styled("button", {
     color: "var(--z-fg-primary)",
     background: "var(--z-bg-raised)",
     "--z-icon-color": "currentColor",
-    // sound is on: the button is lit
-    "&[data-on]": {
-      color: "var(--z-bg-frame)",
-      background: "var(--z-fg-primary)",
+    transition: "background-color .15s ease, color .15s ease, scale .1s ease",
+    _motionReduce: { transition: "none" },
+    "&:active:not([aria-disabled='true'])": { scale: "0.94" },
+    // The row is one family: every button the same tile. Only "you hear
+    // nothing" stands out, in the colour the call's own controls use for
+    // "off" (a white tile for "sound is on" read as a different kind of
+    // button; owner, 2026-11-17).
+    "&[data-off]": {
+      color: "var(--z-danger)",
+      background: "var(--z-danger-muted)",
     },
     "&[aria-disabled='true']": { opacity: 0.4 },
     _focusVisible: {

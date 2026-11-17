@@ -71,7 +71,8 @@ const Base = styled("div", {
     display: "flex",
     flexDirection: "column",
     gap: "10px",
-    padding: "4px 16px 12px",
+    // room under the header line: the count used to sit right against it
+    padding: "12px 16px 12px",
     borderBottom: "1px solid var(--z-border-subtle)",
   },
 });

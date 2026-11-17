@@ -122,6 +122,7 @@ msgstr "{0, plural, other {# 次安装。}}"
 #. placeholder {0}: memberCount()
 #: components/app/interface/discover/Cards.tsx
 #: components/app/interface/discover/ReviewQueue.tsx
+#: components/app/menus/ServerContextMenu.tsx
 #: components/ui/components/features/messaging/elements/Invite.tsx
 #: src/interface/lobby/Lobby.tsx
 #: src/interface/navigation/channels/HomeSidebar.tsx
@@ -479,11 +480,6 @@ msgstr "{0} 已满员。现在支付 {1}，有名额空出时将自动开始。"
 msgid "{0} is not available from other apps. Try another key."
 msgstr "{0} 在其他应用中不可用。请换一个按键。"
 
-#. placeholder {0}: nameOf(claimedBy()!)
-#: src/interface/tickets/TicketAction.tsx
-msgid "{0} is on it"
-msgstr "{0} 正在处理"
-
 #. placeholder {0}: done()!.name
 #: components/modal/modals/PromoteServer.tsx
 msgid "{0} is on. It may take a moment to show."
@@ -659,6 +655,7 @@ msgid "{0} options"
 msgstr "{0} 个选项"
 
 #. placeholder {0}: count()
+#: components/modal/modals/VoiceRoom.tsx
 #: src/interface/channels/voice/VoiceChannel.tsx
 msgid "{0} people are here"
 msgstr "{0} 人在这里"
@@ -855,11 +852,6 @@ msgstr "第 {0}-{1} 项，共 {2} 项"
 msgid "{0}: position {1}"
 msgstr "{0}：第 {1} 位"
 
-#. placeholder {0}: userHandle(props.user)
-#: components/app/interface/settings/user/profile/UserProfileEditor.tsx
-msgid "{0}. Change it in My Account."
-msgstr "{0}。可在“我的账号”中更改。"
-
 #. placeholder {0}: props.member.displayName
 #: components/modal/modals/UserProfileRoles.tsx
 msgid "{0}'s roles"
@@ -880,8 +872,8 @@ msgstr "{0}/月"
 #. placeholder {0}: props.user.username
 #. placeholder {1}: props.user.discriminator
 #: components/app/interface/settings/user/profile/UserProfileEditor.tsx
-#~ msgid "{0}#{1}. Change it in My Account."
-#~ msgstr "{0}#{1}。你可以在“我的账号”中修改。"
+msgid "{0}#{1}. Change it in My Account."
+msgstr "{0}#{1}。你可以在“我的账号”中修改。"
 
 #. placeholder {0}: item.coverage
 #: components/app/interface/settings/user/Language.tsx
@@ -917,10 +909,6 @@ msgstr "房间里现有 {inside} 人"
 #: components/app/interface/settings/server/channels/ChannelsSettings.tsx
 msgid "{n, plural, one {# person} other {# people}}"
 msgstr "{n, plural, other {# 人}}"
-
-#: components/app/interface/settings/channel/Overview.tsx
-msgid "{NAME_TOKEN} stands for the member. Empty: the room carries the member's name alone."
-msgstr "{NAME_TOKEN} 代表成员。留空：房间仅以成员的名字命名。"
 
 #: components/app/interface/settings/user/connections/ServiceCards.tsx
 msgid "{name} is a US company: what we send it and read from it goes to the United States, where your data may be less protected than in the EU (for example, US authorities may be able to access it)."
@@ -977,10 +965,6 @@ msgstr "{value, plural, other {最近 # 条消息}}"
 #: components/app/interface/settings/user/voice/InputSensitivityOptions.tsx
 msgid "{value} dB"
 msgstr "{value} dB"
-
-#: components/modal/modals/CloseTicket.tsx
-msgid "{value} out of 5"
-msgstr "{value} 分（满分 5）"
 
 #. placeholder {0}: s().days
 #: components/modal/modals/PromoteServer.tsx
@@ -1078,7 +1062,7 @@ msgid "<0>{0}</0> loses access to your account at once."
 msgstr "<0>{0}</0> 将立即失去对你账号的访问权限。"
 
 #. placeholder {0}: item.username
-#. placeholder {1}: place(item).join(" · ")
+#. placeholder {1}: placed(item)
 #: src/interface/navigation/NotificationsPhone.tsx
 msgid "<0>{0}</0> mentioned you in <1>{1}</1>"
 msgstr "<0>{0}</0> 在 <1>{1}</1> 中提到了你"
@@ -1142,6 +1126,7 @@ msgstr "1 个月"
 msgid "1 month, 3 months or a year, paid once."
 msgstr "1 个月、3 个月或一年，一次性付费。"
 
+#: components/modal/modals/VoiceRoom.tsx
 #: src/interface/channels/voice/VoiceChannel.tsx
 msgid "1 person is here"
 msgstr "1 人在这里"
@@ -1184,12 +1169,8 @@ msgid "16 px are cropped at the top and bottom"
 msgstr "上下各裁剪 16 px"
 
 #: components/modal/modals/EditUsername.tsx
-msgid "2 to 32 characters. Capital and small letters count as the same name. You can change it twice a day."
-msgstr "2 到 32 个字符。大小写字母视为同一个名称。每天可更改两次。"
-
-#: components/modal/modals/EditUsername.tsx
-#~ msgid "2 to 32 characters. Your number tag may change if this name is taken."
-#~ msgstr "2 到 32 个字符。如果该名称已被占用，你的数字标签可能会改变。"
+msgid "2 to 32 characters. Your number tag may change if this name is taken."
+msgstr "2 到 32 个字符。如果该名称已被占用，你的数字标签可能会改变。"
 
 #: components/modal/modals/CreatePoll.tsx
 msgid "2 weeks"
@@ -1435,6 +1416,11 @@ msgstr "最小化的窗口不会列出。请先打开它。"
 msgid "A new version is saved as a draft"
 msgstr "新版本已保存为草稿"
 
+#: components/app/interface/desktop/Titlebar.tsx
+#: src/interface/navigation/PhoneTabs.tsx
+msgid "A new version of Zrzur is ready"
+msgstr "Zrzur 新版本已就绪"
+
 #: components/app/interface/settings/user/subscriptions/PlusPage.tsx
 msgid "A note on money"
 msgstr "关于费用的说明"
@@ -1466,11 +1452,6 @@ msgstr "在“发现”中占有一席之地"
 #: components/app/interface/settings/server/assistant/labels.ts
 msgid "A private channel"
 msgstr "私密频道"
-
-#: components/modal/modals/OpenTicket.tsx
-#: src/interface/tickets/TicketLink.tsx
-msgid "A private channel between you and the staff of this server."
-msgstr "你与此服务器管理团队之间的私密频道。"
 
 #: components/app/interface/settings/user/safety/ReportsAndStanding.tsx
 msgid "A report from another person."
@@ -1572,10 +1553,6 @@ msgstr "子命令只有名称、描述和选项。"
 #: src/interface/events/EventCard.tsx
 msgid "A text channel"
 msgstr "一个文字频道"
-
-#: components/app/interface/settings/server/TicketsSettings.tsx
-msgid "A ticket is a private channel: only the member who opened it, the roles you pick and the people who see every channel can read it."
-msgstr "工单是一个私密频道：只有创建它的成员、你选择的身份组以及能看到所有频道的人可以阅读。"
 
 #: components/app/interface/settings/user/profile/CreatorStudio.tsx
 #~ msgid "A transparent animation that plays once over a profile. 576 × 1024 px, up to 4 seconds, up to 2 MB. Reviewers look at it before it goes live."
@@ -1772,8 +1749,8 @@ msgid "Account suspended"
 msgstr "账号已被停用"
 
 #: src/interface/You.tsx
-msgid "Account, privacy, appearance and more"
-msgstr "账号、隐私、外观等"
+#~ msgid "Account, privacy, appearance and more"
+#~ msgstr "账号、隐私、外观等"
 
 #: components/ui/components/features/profiles/badges/useBadgeText.ts
 msgid "Accounts created before the early adopter cut-off."
@@ -1886,10 +1863,6 @@ msgstr "向“{label}”添加文件。"
 #: src/interface/Home.tsx
 msgid "Add a friend"
 msgstr "添加好友"
-
-#: components/app/interface/settings/server/TicketsSettings.tsx
-msgid "Add a kind"
-msgstr "添加类型"
 
 #: components/modal/modals/AddFriend.tsx
 msgid "Add a new friend"
@@ -2107,6 +2080,10 @@ msgstr "请添加你的出生年月以继续。"
 #: components/app/interface/settings/server/assistant/AssistantPage.tsx
 msgid "Add Zrzur Assistant to this server first."
 msgstr "请先将 Zrzur 助手添加到此服务器。"
+
+#: components/modal/modals/InstallApp.tsx
+msgid "Add Zrzur to your home screen"
+msgstr "将 Zrzur 添加到主屏幕"
 
 #: components/app/interface/settings/server/assistant/AssistantFields.tsx
 msgid "Add…"
@@ -2384,6 +2361,10 @@ msgstr "所有角色都设有覆盖设置。"
 #: src/interface/Discover.tsx
 msgid "All servers"
 msgstr "所有服务器"
+
+#: src/interface/You.tsx
+msgid "All settings"
+msgstr "全部设置"
 
 #: components/app/interface/settings/user/profile/studio/StudioHome.tsx
 msgid "All shortcuts"
@@ -2719,10 +2700,6 @@ msgstr "回答新成员最常问的问题，最多二十个。"
 msgid "Answered"
 msgstr "已回答"
 
-#: components/app/interface/settings/server/TicketsSettings.tsx
-msgid "Answered by (none: the roles above)"
-msgstr "由谁回复（未选：上面的身份组）"
-
 #: src/interface/developers/docs/DocsPortal.tsx
 msgid "Answering interactions"
 msgstr "响应交互"
@@ -2849,6 +2826,7 @@ msgstr "无法加载申诉。"
 #: components/app/interface/settings/user/plugins/text.ts
 #: components/app/interface/settings/user/Sync.tsx
 #: components/app/interface/settings/UserSettings.tsx
+#: src/interface/You.tsx
 msgid "Appearance"
 msgstr "外观"
 
@@ -3314,10 +3292,6 @@ msgstr "头像装饰"
 #: src/interface/Designs.tsx
 #~ msgid "Avatar decorations"
 #~ msgstr ""
-
-#: components/app/interface/settings/server/TicketsSettings.tsx
-msgid "Average rating"
-msgstr "平均评分"
 
 #: components/ui/components/features/profiles/plateNames.ts
 msgid "Azerbaijan"
@@ -4174,7 +4148,6 @@ msgstr "加拿大"
 #: components/modal/modals/BanMember.tsx
 #: components/modal/modals/BanNonMember.tsx
 #: components/modal/modals/BulkDeleteMessages.tsx
-#: components/modal/modals/CloseTicket.tsx
 #: components/modal/modals/CreateBot.tsx
 #: components/modal/modals/CreateCategory.tsx
 #: components/modal/modals/CreateChannel.tsx
@@ -4204,7 +4177,6 @@ msgstr "加拿大"
 #: components/modal/modals/MFAFlow.tsx
 #: components/modal/modals/MoveSupercharge.tsx
 #: components/modal/modals/Onboarding.tsx
-#: components/modal/modals/OpenTicket.tsx
 #: components/modal/modals/PinMessage.tsx
 #: components/modal/modals/PlusCheckout.tsx
 #: components/modal/modals/PromoteServer.tsx
@@ -4396,10 +4368,6 @@ msgstr "分类"
 #: components/app/interface/settings/user/plugins/DeveloperTab.tsx
 msgid "Category"
 msgstr "分类"
-
-#: components/app/interface/settings/server/TicketsSettings.tsx
-msgid "Category for new tickets"
-msgstr "新工单所在的分类"
 
 #: components/app/interface/settings/category/Overview.tsx
 msgid "Category info"
@@ -4879,6 +4847,10 @@ msgstr "选项值"
 msgid "Choose \"{name}\" from the list."
 msgstr "请从列表中选择“{name}”。"
 
+#: components/modal/modals/InstallApp.tsx
+msgid "Choose “Add to Home Screen”"
+msgstr "选择“添加到主屏幕”"
+
 #: components/app/interface/settings/user/plugins/DeveloperTab.tsx
 msgid "Choose a `.zplugin.json` package (or a manifest) to check it, preview it on this device, or submit it for review."
 msgstr "选择 `.zplugin.json` 包（或清单文件），可对其进行检查、在此设备上预览，或提交审核。"
@@ -5045,7 +5017,6 @@ msgstr "每次开始直播时选择画质。"
 msgid "Choose the role this answer gives."
 msgstr "选择此答案对应的角色。"
 
-#: components/app/interface/settings/user/account/UsernameNotice.tsx
 #: components/modal/modals/Onboarding.tsx
 msgid "Choose username"
 msgstr "选择用户名"
@@ -5073,10 +5044,6 @@ msgstr "请选择举办地点。"
 #: components/app/interface/settings/user/Keybinds.tsx
 msgid "Choose where to forward"
 msgstr "选择转发位置"
-
-#: components/modal/modals/EditUsername.tsx
-msgid "Choose your username"
-msgstr "选择你的用户名"
 
 #: components/app/interface/channels/text/interactions/CommandPicker.tsx
 #: components/app/interface/channels/text/interactions/InteractionModal.tsx
@@ -5262,10 +5229,10 @@ msgstr "短片"
 #: components/modal/modals/UserProfileMutualFriends.tsx
 #: components/modal/modals/UserProfileMutualGroups.tsx
 #: components/modal/modals/UserProfileRoles.tsx
+#: components/modal/modals/VoiceRoom.tsx
 #: components/plugins/PluginHostRoot.tsx
 #: components/ui/components/design/Dialog.tsx
 #: components/ui/components/features/profiles/ProfileActions.tsx
-#: components/ui/components/features/voice/rooms/RoomControlsPanel.tsx
 #: components/ui/components/features/voice/soundboard/SoundsUnavailable.tsx
 #: src/interface/navigation/NotificationsPhone.tsx
 #: src/interface/OAuth.tsx
@@ -5323,17 +5290,7 @@ msgstr "关闭命令列表"
 msgid "Close the stage"
 msgstr "关闭舞台"
 
-#: components/modal/modals/CloseTicket.tsx
-msgid "Close this ticket?"
-msgstr "关闭此工单？"
-
-#: components/modal/modals/CloseTicket.tsx
-#: src/interface/tickets/TicketAction.tsx
-msgid "Close ticket"
-msgstr "关闭工单"
-
 #: components/app/interface/safety/labels.tsx
-#: components/app/interface/settings/server/TicketsSettings.tsx
 #: components/app/interface/settings/user/badges/BugQueue.tsx
 #: components/app/interface/settings/user/support/ContactSupport.tsx
 msgid "Closed"
@@ -5748,6 +5705,7 @@ msgstr "连接已断开，正在重新连接…"
 
 #: components/app/interface/settings/UserSettings.tsx
 #: components/ui/components/features/profiles/labels.ts
+#: src/interface/You.tsx
 msgid "Connections"
 msgstr "关联账号"
 
@@ -5866,6 +5824,7 @@ msgstr "已复制！"
 #: components/app/interface/settings/server/roles/ServerRoleEditor.tsx
 #: components/app/interface/settings/server/webhooks/ServerWebhooks.tsx
 #: components/app/interface/settings/user/bots/ViewBot.tsx
+#: components/app/menus/MessageContextMenu.tsx
 #: components/modal/modals/CreateInvite.tsx
 #: src/interface/Developers.tsx
 #: src/interface/developers/docs/CodeBlock.tsx
@@ -6812,6 +6771,7 @@ msgstr "性能下降"
 #: components/app/interface/settings/user/bots/CommandManager.tsx
 #: components/app/interface/settings/user/bots/ViewBot.tsx
 #: components/app/interface/settings/user/profile/studio/StudioDesign.tsx
+#: components/app/menus/MessageContextMenu.tsx
 #: components/modal/modals/DeleteBot.tsx
 #: components/modal/modals/DeleteCategory.tsx
 #: components/modal/modals/DeleteChannel.tsx
@@ -7545,12 +7505,12 @@ msgstr "向 Zrzur 捐赠"
 #: components/app/interface/settings/server/LobbyAppearanceEditor.tsx
 #: components/app/interface/settings/server/webhooks/ServerWebhooks.tsx
 #: components/modal/modals/EditEmail.tsx
+#: components/modal/modals/EditUsername.tsx
 #: components/modal/modals/GiftPlus.tsx
 #: components/modal/modals/InterestsModal.tsx
 #: components/modal/modals/MFARecovery.tsx
 #: components/modal/modals/ReportContent.tsx
 #: components/modal/modals/ResetBotToken.tsx
-#: components/modal/modals/RoomControls.tsx
 msgid "Done"
 msgstr "完成"
 
@@ -8631,10 +8591,6 @@ msgstr "反馈"
 msgid "Feedback & reports"
 msgstr "反馈与举报"
 
-#: components/ui/components/features/voice/rooms/RoomControlsPanel.tsx
-msgid "Fewer people"
-msgstr "减少人数"
-
 #: components/app/interface/settings/server/insights/InsightsPage.tsx
 msgid "fewer than 5"
 msgstr "少于 5"
@@ -8765,10 +8721,6 @@ msgstr "寻找社区"
 msgid "Find a look you like"
 msgstr "找到你喜欢的风格"
 
-#: components/ui/components/features/voice/rooms/RoomControlsPanel.tsx
-msgid "Find a member"
-msgstr "查找成员"
-
 #: src/interface/navigation/servers/ServerList.tsx
 msgid "Find new servers to join"
 msgstr "发现可以加入的新服务器"
@@ -8844,10 +8796,6 @@ msgstr "排在最前"
 #: components/modal/modals/CreateThread.tsx
 msgid "First message (optional)"
 msgstr "第一条消息（可选）"
-
-#: components/app/interface/settings/server/TicketsSettings.tsx
-msgid "First message in a ticket"
-msgstr "工单中的第一条消息"
 
 #: components/app/interface/settings/user/profile/studio/StudioDesign.tsx
 msgid "First published"
@@ -9164,8 +9112,8 @@ msgid "Friends server"
 msgstr "好友服务器"
 
 #: components/modal/modals/EditUsername.tsx
-#~ msgid "Friends use your username and number tag to find you. Enter your current password to confirm."
-#~ msgstr "好友通过你的用户名和数字标签找到你。请输入当前密码以确认。"
+msgid "Friends use your username and number tag to find you. Enter your current password to confirm."
+msgstr "好友通过你的用户名和数字标签找到你。请输入当前密码以确认。"
 
 #. placeholder {0}: friends().length
 #: components/ui/components/features/profiles/ProfileMutuals.tsx
@@ -9598,10 +9546,6 @@ msgstr "请提供 1 到 {max} 个选项值。"
 msgid "Give a Wing"
 msgstr "赠送一枚羽翼"
 
-#: src/interface/tickets/TicketAction.tsx
-msgid "Give back"
-msgstr "交回"
-
 #: components/modal/modals/MoveSupercharge.tsx
 #~ msgid "Give feather"
 #~ msgstr ""
@@ -9787,6 +9731,7 @@ msgid "Got an invite?"
 msgstr "有邀请吗？"
 
 #: components/app/interface/support/NoticeCenter.tsx
+#: components/modal/modals/InstallApp.tsx
 msgid "Got it"
 msgstr "知道了"
 
@@ -9931,10 +9876,6 @@ msgstr "海地"
 #: components/ui/components/features/profiles/pack/labels.generated.ts
 msgid "Halo"
 msgstr "光环"
-
-#: components/ui/components/features/voice/rooms/RoomControlsPanel.tsx
-msgid "Hand over the room"
-msgstr "移交房间"
 
 #: components/app/interface/discover/Cards.tsx
 #: src/interface/Discover.tsx
@@ -10101,7 +10042,6 @@ msgid "Hibiscus Ring"
 msgstr "木槿花环"
 
 #: components/app/interface/settings/server/LobbyAppearanceEditor.tsx
-#: components/ui/components/features/voice/rooms/RoomControlsPanel.tsx
 msgid "Hidden"
 msgstr "已隐藏"
 
@@ -10291,10 +10231,6 @@ msgstr "服务器的外观、人们如何找到并加入它，以及它的主要
 #: components/app/interface/settings/user/safety/ReportsAndStanding.tsx
 msgid "How to appeal"
 msgstr "如何申诉"
-
-#: components/modal/modals/CloseTicket.tsx
-msgid "How was the help? (optional)"
-msgstr "这次帮助如何？（可选）"
 
 #: components/app/interface/settings/user/bots/ViewBot.tsx
 #: components/modal/modals/InteractionsEndpoint.tsx
@@ -10533,10 +10469,6 @@ msgstr "自 {1} 起在 {0}"
 msgid "In a channel where you can post polls."
 msgstr "在你可以发起投票的频道中。"
 
-#: components/modal/modals/OpenTicket.tsx
-msgid "In a few words (optional)"
-msgstr "简单说明（可选）"
-
 #: components/app/interface/settings/user/Keybinds.tsx
 msgid "In a server channel or a DM with a bot."
 msgstr "在服务器频道或与机器人的私信中。"
@@ -10598,10 +10530,6 @@ msgstr "在此期间，请从 Google Play 安装 Zrzur，获得专为安卓设�
 #: components/app/interface/settings/user/Keybinds.tsx
 msgid "In the preview step of a design."
 msgstr "在设计的预览步骤中。"
-
-#: components/ui/components/features/voice/rooms/RoomControlsPanel.tsx
-msgid "In the room"
-msgstr "房间内"
 
 #. placeholder {0}: date(s().promoted!.ends_at)
 #: components/modal/modals/PromoteServer.tsx
@@ -10690,8 +10618,17 @@ msgid "Insights"
 msgstr "数据洞察"
 
 #: components/app/interface/settings/user/plugins/PluginDetail.tsx
+#: components/modal/modals/InstallApp.tsx
 msgid "Install"
 msgstr "安装"
+
+#: src/interface/You.tsx
+msgid "Install the app"
+msgstr "安装应用"
+
+#: components/modal/modals/InstallApp.tsx
+msgid "Install Zrzur on your phone"
+msgstr "在手机上安装 Zrzur"
 
 #: components/app/interface/settings/user/Advanced.tsx
 msgid "Install, turn on and manage reviewed plugins."
@@ -10781,6 +10718,7 @@ msgstr "隐身"
 #: components/app/interface/safety/labels.tsx
 #: components/app/interface/settings/user/badges/BetaAdmin.tsx
 #: components/app/interface/settings/user/bots/ViewBot.tsx
+#: components/app/menus/ServerContextMenu.tsx
 #: components/modal/modals/CreateInvite.tsx
 msgid "Invite"
 msgstr "邀请"
@@ -11100,10 +11038,12 @@ msgstr "加入 {0}"
 msgid "Join a server"
 msgstr "加入服务器"
 
+#: components/modal/modals/VoiceRoom.tsx
 #: src/interface/channels/voice/VoiceChannel.tsx
 msgid "Join call"
 msgstr "加入通话"
 
+#: components/modal/modals/VoiceRoom.tsx
 #: src/interface/channels/voice/VoiceChannel.tsx
 msgid "Join muted"
 msgstr "静音加入"
@@ -11147,6 +11087,7 @@ msgstr "加入 Zrzur 社区"
 msgid "Join with an invite"
 msgstr "通过邀请加入"
 
+#: components/modal/modals/VoiceRoom.tsx
 #: src/interface/channels/voice/VoiceChannel.tsx
 msgid "Join with microphone on"
 msgstr "开麦加入"
@@ -11410,10 +11351,6 @@ msgstr "踢出成员"
 msgid "Kinds of designs"
 msgstr "设计类型"
 
-#: components/app/interface/settings/server/TicketsSettings.tsx
-msgid "Kinds of ticket"
-msgstr "工单类型"
-
 #: components/ui/components/features/profiles/plateNames.ts
 msgid "Kiribati"
 msgstr "基里巴斯"
@@ -11456,6 +11393,7 @@ msgstr "标签"
 #: components/app/interface/settings/user/Language.tsx
 #: components/app/interface/settings/user/Sync.tsx
 #: components/app/interface/settings/UserSettings.tsx
+#: src/interface/You.tsx
 msgid "Language"
 msgstr "语言"
 
@@ -11686,7 +11624,6 @@ msgid "Let {role} see this channel"
 msgstr "允许 {role} 查看此频道"
 
 #: components/app/interface/settings/channel/permissions/VisibilitySection.tsx
-#: components/ui/components/features/voice/rooms/RoomControlsPanel.tsx
 msgid "Let in"
 msgstr "允许"
 
@@ -12127,7 +12064,6 @@ msgid "Lock thread: only moderators can write"
 msgstr "锁定子区：仅管理员可发言"
 
 #: components/app/interface/settings/server/ServerAccess.tsx
-#: components/ui/components/features/voice/rooms/RoomControlsPanel.tsx
 msgid "Locked"
 msgstr "已锁定"
 
@@ -12901,10 +12837,6 @@ msgstr "成员每 {0} 可以发送一条消息。"
 msgid "Members couldn't be loaded"
 msgstr "无法加载成员"
 
-#: components/app/interface/settings/server/TicketsSettings.tsx
-msgid "Members get an \"Open a ticket\" row at the top of the channel list."
-msgstr "成员会在频道列表顶部看到“创建工单”一行。"
-
 #: components/app/interface/settings/server/WingsSettings.tsx
 msgid "Members give the server Wings. More Wings unlock higher levels and their perks for everyone."
 msgstr "成员为服务器赠送羽翼。羽翼越多，就能解锁越高的等级及其权益，惠及所有人。"
@@ -12916,10 +12848,6 @@ msgstr "成员加入、离开以及角色变更"
 #: components/app/interface/settings/server/roles/ServerRoleEditor.tsx
 msgid "Members lose this role and its permissions."
 msgstr "成员将失去此角色及其权限。"
-
-#: components/app/interface/settings/server/pages.tsx
-msgid "Members open a private channel with your staff."
-msgstr "成员可与你的管理团队开启私密频道。"
 
 #: components/app/interface/settings/channel/ForumTags.tsx
 msgid "Members pick up to five tags for each post, and everyone can filter posts by tag."
@@ -13371,10 +13299,6 @@ msgstr "更多类似内容"
 msgid "More pages"
 msgstr "更多页面"
 
-#: components/ui/components/features/voice/rooms/RoomControlsPanel.tsx
-msgid "More people"
-msgstr "增加人数"
-
 #: components/ui/components/features/profiles/plateNames.ts
 msgid "Morocco"
 msgstr "摩洛哥"
@@ -13599,6 +13523,7 @@ msgstr "共同群组"
 #: components/app/interface/settings/user/_AccountCard.tsx
 #: components/app/interface/settings/user/support/ContactSupport.tsx
 #: components/app/interface/settings/UserSettings.tsx
+#: src/interface/You.tsx
 msgid "My account"
 msgstr "我的账号"
 
@@ -13651,7 +13576,6 @@ msgstr "名称"
 #: components/app/interface/settings/server/members/ListMembers.tsx
 #: components/app/interface/settings/server/soundboard/SoundboardList.tsx
 #: components/app/interface/settings/server/soundboard/SoundLibrary.tsx
-#: components/app/interface/settings/server/TicketsSettings.tsx
 #: components/app/interface/settings/user/badges/BetaAdmin.tsx
 #: components/app/interface/settings/user/bots/CommandManager.tsx
 #: components/app/interface/settings/user/plugins/DeveloperTab.tsx
@@ -13672,10 +13596,6 @@ msgstr "名称 A–Z"
 #: components/app/interface/settings/user/profile/studio/StudioEditor.tsx
 msgid "Name and words"
 msgstr "名称与关键词"
-
-#: components/app/interface/settings/channel/Overview.tsx
-msgid "Name of the rooms"
-msgstr "房间名称"
 
 #: components/app/interface/settings/user/profile/UserProfileEditor.tsx
 msgid "Name style"
@@ -14015,10 +13935,6 @@ msgstr "新建 Webhook"
 msgid "New Zealand"
 msgstr "新西兰"
 
-#: components/app/interface/settings/user/account/UsernameNotice.tsx
-msgid "New: usernames no longer have a number tag. Choose the username that will be yours alone."
-msgstr "新功能：用户名不再带数字标签。选择只属于你的用户名。"
-
 #: components/app/interface/settings/user/profile/CommunityGallery.tsx
 #: src/interface/designs/Home.tsx
 msgid "Newest"
@@ -14185,9 +14101,9 @@ msgstr "还没有上架机器人。"
 msgid "No bots in this server."
 msgstr "此服务器中没有机器人。"
 
-#: components/app/interface/settings/server/TicketsSettings.tsx
-msgid "No category"
-msgstr "无分类"
+#: components/modal/modals/InstallApp.tsx
+msgid "No browser bar, like any app"
+msgstr "没有浏览器栏，和普通应用一样"
 
 #: components/app/interface/settings/user/plugins/PluginDetail.tsx
 msgid "No changelog."
@@ -14376,7 +14292,6 @@ msgstr "暂无等级"
 #: components/app/interface/settings/channel/UserLimitSlider.tsx
 #: components/app/interface/settings/server/channels/ChannelsSettings.tsx
 #: components/modal/modals/CreateInvite.tsx
-#: components/ui/components/features/voice/rooms/RoomControlsPanel.tsx
 msgid "No limit"
 msgstr "无限制"
 
@@ -14432,6 +14347,7 @@ msgstr "未留下备注。"
 msgid "No one is banned"
 msgstr "没有人被封禁"
 
+#: components/modal/modals/VoiceRoom.tsx
 #: src/interface/channels/voice/VoiceChannel.tsx
 msgid "No one is here yet. Start the call and others can join."
 msgstr "这里还没有人。开始通话后，其他人就可以加入。"
@@ -14640,10 +14556,6 @@ msgstr "没有人可以通过邀请、自定义链接或“发现”加入。"
 msgid "Nobody chose this answer yet."
 msgstr "还没有人选择这个选项。"
 
-#: components/ui/components/features/voice/rooms/RoomControlsPanel.tsx
-msgid "Nobody found by that name."
-msgstr "没有找到叫这个名字的人。"
-
 #: components/app/interface/settings/user/badges/BetaAdmin.tsx
 msgid "Nobody here yet."
 msgstr "这里还没有人。"
@@ -14803,6 +14715,7 @@ msgstr "目前未在直播。"
 #: components/app/interface/settings/user/connections/Connections.tsx
 #: components/app/interface/settings/user/connections/ServiceCards.tsx
 #: components/client/AgePrompt.tsx
+#: components/modal/modals/InstallApp.tsx
 msgid "Not now"
 msgstr "暂不"
 
@@ -14991,8 +14904,13 @@ msgstr "暂无。发布此版本前会先询问你。"
 #: components/app/menus/ServerContextMenu.tsx
 #: components/app/menus/shared/NotificationContextMenu.tsx
 #: src/interface/navigation/NotificationsPhone.tsx
+#: src/interface/You.tsx
 msgid "Notifications"
 msgstr "通知"
+
+#: components/modal/modals/InstallApp.tsx
+msgid "Notifications for messages and mentions"
+msgstr "消息和提及的通知"
 
 #: components/app/interface/settings/server/ServerDefaultNotifications.tsx
 msgid "Notify members about"
@@ -15430,14 +15348,6 @@ msgstr "只有所有者可以这样做。"
 msgid "Only the owner of the server can change how it appears in Discover."
 msgstr "只有服务器所有者才能更改它在“发现”中的显示方式。"
 
-#: components/ui/components/features/voice/rooms/RoomControlsPanel.tsx
-msgid "Only the people you let in can join. People already inside stay."
-msgstr "只有你允许的人可以加入。已经在里面的人会留下。"
-
-#: components/ui/components/features/voice/rooms/RoomControlsPanel.tsx
-msgid "Only the people you let in can see the room."
-msgstr "只有你允许的人可以看到这个房间。"
-
 #: components/app/interface/settings/channel/permissions/ChannelVisibility.tsx
 msgid "Only the roles you let in below can see it."
 msgstr "只有你在下方允许的角色才能看到它。"
@@ -15479,7 +15389,6 @@ msgstr "只有 Zrzur 工作人员可以这样做。"
 #~ msgstr ""
 
 #: components/app/interface/settings/server/ServerAccess.tsx
-#: components/app/interface/settings/server/TicketsSettings.tsx
 #: components/app/interface/settings/user/badges/BugReportDialog.tsx
 #: components/app/interface/settings/user/plugins/DeveloperTab.tsx
 #: components/app/interface/settings/user/plugins/PluginDetail.tsx
@@ -15517,11 +15426,6 @@ msgstr "打开分类设置"
 #: components/app/interface/settings/user/subscriptions/Subscriptions.tsx
 msgid "Open a server's menu and choose Give Wings. Each one is {0} a month."
 msgstr "打开服务器菜单，选择“赠送羽翼”。每枚每月 {0}。"
-
-#: components/modal/modals/OpenTicket.tsx
-#: src/interface/tickets/TicketLink.tsx
-msgid "Open a ticket"
-msgstr "创建工单"
 
 #: components/app/menus/ChannelContextMenu.tsx
 #: src/interface/navigation/channels/ServerSidebar.tsx
@@ -15661,10 +15565,6 @@ msgstr "打开此邀请，看看它通向哪里。"
 msgid "Open thread"
 msgstr "打开子区"
 
-#: components/modal/modals/OpenTicket.tsx
-msgid "Open ticket"
-msgstr "创建工单"
-
 #: components/app/interface/discover/ServerPage.tsx
 msgid "Open to everyone"
 msgstr "向所有人开放"
@@ -15682,10 +15582,6 @@ msgstr "向所有人开放"
 msgid "Open Zrzur when the computer starts"
 msgstr "电脑启动时打开 Zrzur"
 
-#: components/app/interface/settings/server/TicketsSettings.tsx
-msgid "Open, taken and closed tickets, newest first."
-msgstr "未处理、已接手和已关闭的工单，最新的在前。"
-
 #: components/app/interface/settings/user/appearance/AnimationSettings.tsx
 msgid "Opening"
 msgstr "正在打开"
@@ -15693,6 +15589,14 @@ msgstr "正在打开"
 #: components/app/interface/settings/server/LobbySettings.tsx
 msgid "Opens"
 msgstr "开放"
+
+#: components/modal/modals/InstallApp.tsx
+msgid "Opens faster every time"
+msgstr "每次打开都更快"
+
+#: components/modal/modals/InstallApp.tsx
+msgid "Opens from your home screen, in full screen."
+msgstr "从主屏幕打开，全屏显示。"
 
 #: components/app/interface/settings/user/bots/CommandManager.tsx
 msgid "Option description"
@@ -16157,10 +16061,6 @@ msgstr "人们申请加入，由你允许的人放他们进入。"
 #~ msgid "People ask to join. You or someone you allow approves them first."
 #~ msgstr ""
 
-#: components/ui/components/features/voice/rooms/RoomControlsPanel.tsx
-msgid "People at most"
-msgstr "人数上限"
-
 #: components/modal/modals/CreatePoll.tsx
 msgid "People can pick several answers."
 msgstr "大家可以选择多个选项。"
@@ -16209,10 +16109,6 @@ msgstr "拥有加入链接的人可以再次提交申请，包括自定义链接
 #: components/app/interface/settings/server/bans/ListBans.tsx
 msgid "People you ban from the member list show up here."
 msgstr "你从成员列表中封禁的人会显示在这里。"
-
-#: components/ui/components/features/voice/rooms/RoomControlsPanel.tsx
-msgid "People you let in"
-msgstr "你允许进入的人"
 
 #: components/app/interface/settings/user/subscriptions/PlusPage.tsx
 msgid "per 7 days"
@@ -17421,11 +17317,6 @@ msgstr "速率限制"
 msgid "Rate limits"
 msgstr "速率限制"
 
-#. placeholder {0}: rating()
-#: src/interface/tickets/TicketAction.tsx
-msgid "Rated {0} out of 5"
-msgstr "评分 {0}（满分 5）"
-
 #: components/app/interface/support/OfficialBanner.tsx
 msgid "Re: {first}"
 msgstr "回复：{first}"
@@ -17790,7 +17681,6 @@ msgstr "远程服务器"
 #: components/modal/modals/RemoveMember.tsx
 #: components/modal/modals/ServerIdentity.tsx
 #: components/ui/components/features/messaging/composition/FileCarousel.tsx
-#: components/ui/components/features/voice/rooms/RoomControlsPanel.tsx
 #: src/interface/Designs.tsx
 msgid "Remove"
 msgstr "移除"
@@ -17997,10 +17887,6 @@ msgstr "移除 {0} 的规则"
 msgid "Remove this app?"
 msgstr "移除此应用？"
 
-#: components/app/interface/settings/server/TicketsSettings.tsx
-msgid "Remove this kind"
-msgstr "移除此类型"
-
 #: components/app/menus/UserContextMenu.tsx
 #: components/modal/modals/RemoveTimeout.tsx
 msgid "Remove timeout"
@@ -18091,10 +17977,6 @@ msgstr "重新开启"
 #: src/interface/channels/ChannelHeader.tsx
 msgid "Reopen thread"
 msgstr "重新开启子区"
-
-#: src/interface/tickets/TicketAction.tsx
-msgid "Reopen ticket"
-msgstr "重新打开工单"
 
 #: components/app/interface/settings/user/profile/ReviewQueue.tsx
 msgid "Reopened by an admin"
@@ -18367,7 +18249,6 @@ msgid "Resend verification"
 msgstr "重新发送验证码"
 
 #: components/app/interface/settings/server/LobbyAppearanceEditor.tsx
-#: components/app/interface/settings/server/TicketsSettings.tsx
 #: components/app/interface/settings/user/Account.tsx
 #: components/app/interface/settings/user/bots/ViewBot.tsx
 #: components/app/interface/settings/user/profile/studio/StudioEditor.tsx
@@ -18751,10 +18632,6 @@ msgstr "{0} 中的身份组"
 msgid "Roles Shield trusts"
 msgstr "Shield 信任的角色"
 
-#: components/app/interface/settings/server/TicketsSettings.tsx
-#~ msgid "Roles that answer tickets"
-#~ msgstr "负责回复工单的身份组"
-
 #: components/app/interface/settings/server/assistant/AssistantPage.tsx
 msgid "Roles that may use this module"
 msgstr "可使用此模块的角色"
@@ -18789,11 +18666,6 @@ msgstr "屋顶上的猫"
 msgid "Room between cards and inside them."
 msgstr "卡片之间和卡片内部留出空隙。"
 
-#: components/ui/components/features/voice/callCard/VoiceCallCardActions.tsx
-#: src/interface/navigation/channels/AccountBar.tsx
-msgid "Room controls"
-msgstr "房间控制"
-
 #: components/app/interface/settings/user/subscriptions/PlusPage.tsx
 msgid "Room for a long story, patch notes or a whole recipe in one message. Edits get the same room."
 msgstr "一条消息就能容纳长篇故事、更新日志或整份食谱，编辑时也同样宽松。"
@@ -18801,14 +18673,6 @@ msgstr "一条消息就能容纳长篇故事、更新日志或整份食谱，编
 #: components/ui/components/features/voice/callCard/VoiceCallCardPreview.tsx
 msgid "Room full. Admission is checked by the server."
 msgstr "房间已满。入场由服务器检查。"
-
-#: components/app/interface/settings/channel/Overview.tsx
-msgid "Room maker"
-msgstr "房间创建器"
-
-#: components/ui/components/features/voice/rooms/RoomControlsPanel.tsx
-msgid "Room name"
-msgstr "房间名称"
 
 #. placeholder {0}: channel.name
 #: components/app/interface/settings/server/channels/ChannelsSettings.tsx
@@ -19029,7 +18893,6 @@ msgstr "沙特阿拉伯"
 #: components/app/interface/settings/channel/Overview.tsx
 #: components/app/interface/settings/server/AutoModSettings.tsx
 #: components/app/interface/settings/server/invites/VanityInvite.tsx
-#: components/app/interface/settings/server/TicketsSettings.tsx
 #: components/app/interface/settings/server/webhooks/ServerWebhooks.tsx
 #: components/app/interface/settings/user/account/AgeSettings.tsx
 #: components/app/interface/settings/user/connections/Connections.tsx
@@ -19039,7 +18902,6 @@ msgstr "沙特阿拉伯"
 #: components/modal/modals/EditServerFolder.tsx
 #: components/modal/modals/ServerEventEditor.tsx
 #: components/modal/modals/ServerIdentity.tsx
-#: components/ui/components/features/voice/rooms/RoomControlsPanel.tsx
 #: components/ui/components/features/voice/stage/StagePanel.tsx
 #: src/interface/Designs.tsx
 #: src/interface/designs/Dock.tsx
@@ -19100,10 +18962,6 @@ msgstr "保存重定向 URI"
 #: components/app/interface/settings/server/assistant/AssistantPage.tsx
 msgid "Save settings file"
 msgstr "保存设置文件"
-
-#: src/interface/tickets/TicketAction.tsx
-msgid "Save the conversation"
-msgstr "保存对话"
 
 #: components/app/interface/settings/server/assistant/AssistantPage.tsx
 msgid "Save these settings as a file, or load them back."
@@ -19351,7 +19209,6 @@ msgid "SDKs"
 msgstr "SDK"
 
 #: components/app/interface/channels/text/interactions/MessageComponents.tsx
-#: components/ui/components/features/voice/rooms/RoomControlsPanel.tsx
 #: src/interface/channels/ChannelHeader.tsx
 #: src/interface/Friends.tsx
 msgid "Search"
@@ -20004,6 +19861,7 @@ msgstr "服务器：{0}"
 
 #: components/app/interface/settings/user/Account.tsx
 #: components/app/interface/settings/UserSettings.tsx
+#: src/interface/You.tsx
 msgid "Sessions"
 msgstr "登录会话"
 
@@ -20058,6 +19916,7 @@ msgstr "正在设置…"
 
 #: components/app/interface/settings/_layout/Content.tsx
 #: components/app/interface/settings/server/assistant/labels.ts
+#: components/app/menus/ServerContextMenu.tsx
 #: components/modal/modals/ServerInfo.tsx
 #: src/interface/You.tsx
 msgid "Settings"
@@ -21485,7 +21344,6 @@ msgid "Super Creator is chosen by the team after at least {0} published designs.
 msgstr "团队会在你至少发布 {0} 个设计后选出超级创作者。"
 
 #: components/app/interface/settings/server/assistant/labels.ts
-#: components/app/interface/settings/server/TicketsSettings.tsx
 msgid "Support"
 msgstr "支持"
 
@@ -21740,26 +21598,13 @@ msgstr "收回一个"
 msgid "Take this action? It applies immediately and is recorded on the case."
 msgstr "执行此操作？它会立即生效，并记录在案件中。"
 
-#: src/interface/tickets/TicketAction.tsx
-msgid "Take ticket"
-msgstr "接手工单"
-
 #: components/auth/src/AppUpsell.tsx
 msgid "Take your communities <0>with you.</0>"
 msgstr "把你的社区<0>随身带走。</0>"
 
-#: components/app/interface/settings/server/TicketsSettings.tsx
-msgid "Taken"
-msgstr "已接手"
-
 #: components/app/interface/settings/user/profile/studio/parts.tsx
 msgid "Taken back as a draft"
 msgstr "已取回为草稿"
-
-#. placeholder {0}: nameOf(channel.ticket!.claimedById)
-#: components/app/interface/settings/server/TicketsSettings.tsx
-msgid "Taken by {0}"
-msgstr "由 {0} 接手"
 
 #: components/app/interface/settings/user/profile/studio/parts.tsx
 msgid "Taken down"
@@ -21789,6 +21634,10 @@ msgstr "正在说话（已开启）"
 msgid "Tanzania"
 msgstr "坦桑尼亚"
 
+#: components/modal/modals/InstallApp.tsx
+msgid "Tap “Add”, then open Zrzur from its icon"
+msgstr "轻点“添加”，然后从图标打开 Zrzur"
+
 #: src/interface/designs/Dock.tsx
 msgid "Tap any design to try it on"
 msgstr "点按任意设计即可试穿"
@@ -21809,6 +21658,10 @@ msgstr "点按设计上的心形，即可保存到这里。"
 #: src/interface/Designs.tsx
 msgid "Tap the heart on any design to keep it here. Only you see this list."
 msgstr "点按任意设计上的心形，即可保留在这里。只有你能看到此列表。"
+
+#: components/modal/modals/InstallApp.tsx
+msgid "Tap the Share button in the browser's bar"
+msgstr "轻点浏览器栏中的“分享”按钮"
 
 #: src/interface/designs/Scenes.tsx
 msgid "Tarek"
@@ -21845,10 +21698,6 @@ msgstr "科技"
 #: components/app/interface/settings/server/assistant/labels.ts
 msgid "Tell members by direct message"
 msgstr "通过私信通知成员"
-
-#: components/app/interface/settings/server/TicketsSettings.tsx
-msgid "Tell us what you need and we will answer here."
-msgstr "告诉我们你需要什么，我们会在这里回复。"
 
 #: components/app/interface/safety/labels.tsx
 msgid "Tell us what's wrong in your own words"
@@ -22121,8 +21970,8 @@ msgstr "此服务器中已有人使用该名称。"
 #. placeholder {0}: props.client.user!.username
 #. placeholder {1}: tag(newTag())
 #: components/modal/modals/EditUsername.tsx
-#~ msgid "That name was already taken with your previous number, so you are now <0>{0}#{1}</0>."
-#~ msgstr "该名称在你之前的编号下已被占用，所以你现在是 <0>{0}#{1}</0>。"
+msgid "That name was already taken with your previous number, so you are now <0>{0}#{1}</0>."
+msgstr "该名称在你之前的编号下已被占用，所以你现在是 <0>{0}#{1}</0>。"
 
 #: components/modal/modals/billingErrors.ts
 msgid "That user couldn't be found."
@@ -22425,10 +22274,6 @@ msgstr "在审核员批准新版本之前，线上版本会继续保留。"
 msgid "The member sees the rule's name as the reason."
 msgstr "成员会看到规则名称作为原因。"
 
-#: components/modal/modals/CloseTicket.tsx
-msgid "The member who opened it will no longer see it. You can reopen it or delete it later."
-msgstr "创建它的成员将不再看到它。你之后可以重新打开或删除它。"
-
 #: components/app/interface/settings/user/bots/CommandManager.tsx
 msgid "The minimum is larger than the maximum."
 msgstr "最小值大于最大值。"
@@ -22563,10 +22408,6 @@ msgstr "无法加载原因。"
 #: components/app/interface/settings/user/profile/ReviewQueue.tsx
 msgid "The review queue couldn't be loaded."
 msgstr "无法加载审核队列。"
-
-#: components/app/interface/settings/server/TicketsSettings.tsx
-msgid "The roles that see and answer tickets."
-msgstr "可以查看并回复工单的身份组。"
 
 #: components/app/interface/settings/server/pages.tsx
 msgid "The rules channel, system messages and counters."
@@ -23313,10 +23154,6 @@ msgstr "此角色可以在服务器中执行所有操作"
 msgid "This role doesn't exist any more."
 msgstr "该角色已不存在。"
 
-#: components/modal/modals/RoomControls.tsx
-msgid "This room is yours while you are in it. It is removed when everyone has left."
-msgstr "只要你在里面，这个房间就归你。所有人离开后会被移除。"
-
 #. placeholder {0}: err.max
 #: components/i18n/errors.tsx
 msgid "This server already has {0} upcoming events. Cancel or delete one first."
@@ -23346,10 +23183,6 @@ msgstr "此服务器的 Webhook 数量已达上限（{0}）。请先删除一个
 #: src/interface/ServerHome.tsx
 msgid "This server has no channels yet"
 msgstr "此服务器还没有频道"
-
-#: components/app/interface/settings/server/TicketsSettings.tsx
-msgid "This server has no roles yet. Until it does, only people who can see every channel answer tickets."
-msgstr "此服务器还没有身份组。在此之前，只有能看到所有频道的人回复工单。"
 
 #: components/modal/modals/ServerEventEditor.tsx
 msgid "This server has no text channel you can see."
@@ -23514,6 +23347,7 @@ msgstr "此版本未获批准。"
 msgid "This version was revoked for safety and won't run again."
 msgstr "此版本因安全原因已被撤销，不会再运行。"
 
+#: components/modal/modals/VoiceRoom.tsx
 #: components/rtc/messages.ts
 #: components/ui/components/features/voice/VoiceOccupancy.tsx
 #: src/interface/channels/voice/VoiceChannel.tsx
@@ -23572,6 +23406,10 @@ msgstr "无法加载子区。"
 msgid "Threat of violence"
 msgstr "暴力威胁"
 
+#: components/modal/modals/InstallApp.tsx
+msgid "Three steps in your browser."
+msgstr "在浏览器中只需三步。"
+
 #: components/ui/components/features/profiles/badges/useBadgeText.ts
 msgid "Three Years on Zrzur"
 msgstr "陪伴 Zrzur 三年"
@@ -23588,22 +23426,9 @@ msgstr "请先勾选复选框表示接受，然后继续。"
 msgid "Ticket categories, one per line"
 msgstr "工单分类，每行一个"
 
-#: components/app/interface/settings/server/TicketsSettings.tsx
-msgid "Tickets"
-msgstr "工单"
-
-#: components/app/interface/settings/server/pages.tsx
-msgctxt "server-settings"
-msgid "Tickets"
-msgstr "工单"
-
 #: components/app/interface/settings/server/assistant/labels.ts
 msgid "Tickets and direct messages in one queue."
 msgstr "工单和私信集中在一个队列中。"
-
-#: components/app/interface/settings/server/TicketsSettings.tsx
-msgid "Tickets you can see"
-msgstr "你能看到的工单"
 
 #: components/ui/components/features/profiles/pack/labels.generated.ts
 msgid "Tilted Crown"
@@ -23704,6 +23529,10 @@ msgstr "禁言"
 #: components/ui/components/features/profiles/plateNames.ts
 msgid "Timor-Leste"
 msgstr "东帝汶"
+
+#: components/ui/components/features/messaging/composition/picker/EmojiPicker.tsx
+msgid "Tip: hold any emoji to add it to your favorites."
+msgstr "提示：长按任意表情即可添加到收藏。"
 
 #: components/ui/components/features/messaging/composition/picker/EmojiPicker.tsx
 msgid "Tip: right-click (or hold) any emoji to add it to your favorites."
@@ -24487,7 +24316,9 @@ msgstr "名称下方最多三个按钮，每个按钮打开一个频道。设置
 msgid "Upcoming"
 msgstr "即将举行"
 
+#: components/app/interface/desktop/Titlebar.tsx
 #: components/app/interface/settings/user/plugins/PluginDetail.tsx
+#: src/interface/navigation/PhoneTabs.tsx
 msgid "Update"
 msgstr "更新"
 
@@ -24798,10 +24629,6 @@ msgstr "用户设置"
 #~ msgid "User Settings"
 #~ msgstr "用户设置"
 
-#: components/modal/modals/AddFriend.tsx
-msgid "username"
-msgstr "用户名"
-
 #: components/app/interface/settings/user/Account.tsx
 #: components/app/interface/settings/user/bots/ViewBot.tsx
 #: components/app/interface/settings/user/profile/UserProfileEditor.tsx
@@ -24815,13 +24642,8 @@ msgid "Username"
 msgstr "用户名"
 
 #: components/modal/modals/AddFriend.tsx
-#~ msgid "username#1234"
-#~ msgstr "username#1234"
-
-#. placeholder {0}: userHandle(props.client.user, state.settings.streamerMode)
-#: components/modal/modals/EditUsername.tsx
-msgid "Usernames no longer have a number tag. Choose a username that will be yours alone; you can keep <0>{currentUsername}</0> if nobody has taken it. Until then you stay <1>{0}</1>."
-msgstr "用户名不再带数字标签。请选择只属于你的用户名；如果没有人占用，你可以保留 <0>{currentUsername}</0>。在此之前，你仍是 <1>{0}</1>。"
+msgid "username#1234"
+msgstr "username#1234"
 
 #: src/interface/developers/docs/DocsPortal.tsx
 msgid "Users and members"
@@ -25114,6 +24936,7 @@ msgstr "访问"
 #: components/app/interface/settings/UserSettings.tsx
 #: components/modal/modals/CreateChannel.tsx
 #: components/modal/modals/permissionTitles.ts
+#: src/interface/You.tsx
 msgid "Voice"
 msgstr "语音"
 
@@ -25122,6 +24945,7 @@ msgid "VOICE"
 msgstr "语音"
 
 #: components/app/interface/settings/UserSettings.tsx
+#: src/interface/You.tsx
 msgid "Voice & Video"
 msgstr "语音与视频"
 
@@ -25224,10 +25048,6 @@ msgstr "投票详情"
 #: components/modal/modals/EndPoll.tsx
 msgid "Voting stops for everyone and the results become final. This can't be undone."
 msgstr "所有人都将无法继续投票，结果成为最终结果。此操作无法撤销。"
-
-#: components/app/interface/settings/server/TicketsSettings.tsx
-msgid "Waiting"
-msgstr "等待中"
 
 #: components/app/interface/settings/user/profile/studio/StudioDesign.tsx
 msgid "Waiting for a reviewer"
@@ -25616,10 +25436,6 @@ msgstr "服务器里发生的事，集中在一个员工频道中。"
 msgid "What happens next"
 msgstr "接下来会怎样"
 
-#: components/modal/modals/OpenTicket.tsx
-msgid "What is it about?"
-msgstr "关于什么？"
-
 #: components/app/interface/settings/user/plugins/PluginDetail.tsx
 msgid "What it adds"
 msgstr "它添加了什么"
@@ -25750,10 +25566,6 @@ msgctxt "scheduled events"
 msgid "Where"
 msgstr "地点"
 
-#: components/app/interface/settings/server/TicketsSettings.tsx
-msgid "Where a new ticket appears in the channel list."
-msgstr "新工单出现在频道列表中的位置。"
-
 #: components/app/interface/settings/user/safety/ReportsAndStanding.tsx
 #: components/app/interface/settings/user/safety/SafetyDashboard.tsx
 msgid "Where it applies"
@@ -25847,10 +25659,6 @@ msgstr "制作设计时。"
 msgid "While selecting messages to delete."
 msgstr "在选择要删除的消息时。"
 
-#: components/app/interface/settings/server/TicketsSettings.tsx
-msgid "Who answers"
-msgstr "由谁回复"
-
 #: components/app/interface/settings/user/Privacy.tsx
 msgid "Who can add you to group chats"
 msgstr "谁可以把你加入群聊"
@@ -25933,10 +25741,6 @@ msgstr "谁会聚集在这里？"
 #: src/interface/events/EventCard.tsx
 msgid "Who's interested"
 msgstr "谁感兴趣"
-
-#: components/app/interface/settings/channel/Overview.tsx
-msgid "Whoever joins this channel gets a voice room of their own next to it. The room is removed when everyone has left it."
-msgstr "加入此频道的人会在旁边获得一个自己的语音房间。所有人离开后，房间会被移除。"
 
 #: components/app/interface/settings/server/webhooks/ServerWebhooks.tsx
 msgid "Whoever runs this Zrzur server can turn them on in its configuration."
@@ -26061,10 +25865,6 @@ msgstr "与另外 {0} 人"
 #: components/app/interface/settings/user/subscriptions/PlusPage.tsx
 msgid "With Feather"
 msgstr "拥有 Feather"
-
-#: components/app/interface/settings/server/TicketsSettings.tsx
-msgid "With kinds, a member chooses one when opening a ticket, and each kind can go to roles of its own. Without any, there is one kind of ticket."
-msgstr "设置类型后，成员创建工单时选择一种，每种类型可以交给各自的身份组。不设置则只有一种工单。"
 
 #: components/app/interface/settings/user/Privacy.tsx
 msgid "With Nobody, no one can put you in a group chat, not even friends. You can still make your own."
@@ -26466,10 +26266,6 @@ msgstr "你不能禁言自己。"
 #~ msgid "You cannot undo this action."
 #~ msgstr "您无法撤销此操作。"
 
-#: components/i18n/errors.tsx
-msgid "You changed your username twice today. Try again tomorrow."
-msgstr "你今天已更改用户名两次。请明天再试。"
-
 #. placeholder {0}: props.display
 #: components/modal/modals/LinkWarning.tsx
 msgid "You clicked on \"{0}\""
@@ -26491,6 +26287,7 @@ msgstr "你没有 Feather"
 msgid "You don't have permission for this."
 msgstr "你无权执行此操作。"
 
+#: components/modal/modals/VoiceRoom.tsx
 #: components/ui/components/features/voice/callCard/VoiceCallCardPreview.tsx
 #: src/interface/channels/voice/VoiceChannel.tsx
 msgid "You don't have permission to join."
@@ -26682,10 +26479,6 @@ msgstr "你已断开语音连接。"
 #: components/modal/modals/SignOutSessions.tsx
 msgid "You will need to sign in again."
 msgstr "你需要重新登录。"
-
-#: components/modal/modals/CloseTicket.tsx
-msgid "You will no longer see this ticket. The staff keep it and can open it again for you."
-msgstr "你将不再看到此工单。管理团队会保留它，并可为你重新打开。"
 
 #. placeholder {0}: name()
 #: components/app/interface/settings/user/connections/ServiceCards.tsx
@@ -27004,8 +26797,8 @@ msgid "Your discover request has been removed"
 msgstr "你的发现申请已被移除"
 
 #: components/i18n/errors.tsx
-#~ msgid "Your discriminator change has been ratelimited, please try again later."
-#~ msgstr "你的用户标签更改已被限速，请稍后再试。"
+msgid "Your discriminator change has been ratelimited, please try again later."
+msgstr "你的用户标签更改已被限速，请稍后再试。"
 
 #: components/auth/src/flows/FlowCreate.tsx
 #~ msgid "Your email stays private"
@@ -27130,11 +26923,6 @@ msgstr "你在 {0} 提交的请求正在等待审核。"
 msgid "Your role ranking is too low to take this action."
 msgstr "你的角色等级过低，无法执行此操作。"
 
-#: components/modal/modals/RoomControls.tsx
-#: components/ui/components/features/voice/rooms/RoomControlsPanel.tsx
-msgid "Your room"
-msgstr "你的房间"
-
 #: src/interface/Designs.tsx
 msgid "Your saved designs"
 msgstr "你保存的设计"
@@ -27211,10 +26999,6 @@ msgstr "你的订阅"
 msgid "Your system keeps <0>{keys}</0> for itself. Choose other keys."
 msgstr "系统保留了 <0>{keys}</0>。请选择其他按键。"
 
-#: src/interface/tickets/TicketLink.tsx
-msgid "Your ticket"
-msgstr "你的工单"
-
 #: components/app/interface/settings/user/support/ContactSupport.tsx
 msgid "Your tickets couldn't be loaded. Try again later."
 msgstr "无法加载你的工单。请稍后再试。"
@@ -27228,12 +27012,8 @@ msgid "Your user has already been created? Try logging in again or refreshing th
 msgstr "你的用户已经创建了吗？请尝试重新登录或刷新应用。"
 
 #: components/modal/modals/EditUsername.tsx
-#~ msgid "Your username has been updated."
-#~ msgstr "你的用户名已更新。"
-
-#: components/modal/modals/EditUsername.tsx
-msgid "Your username is yours alone, and friends use it to find you. Enter your current password to confirm."
-msgstr "用户名只属于你，好友可以用它找到你。请输入当前密码以确认。"
+msgid "Your username has been updated."
+msgstr "你的用户名已更新。"
 
 #: components/app/interface/settings/server/LobbySettings.tsx
 msgid "Your welcome text."
@@ -27390,6 +27170,10 @@ msgstr "为了保护未成年人，Zrzur 现在会向所有人询问这一信息
 #: src/AndroidNag.tsx
 msgid "Zrzur on Android"
 msgstr "Android 版 Zrzur"
+
+#: src/interface/You.tsx
+msgid "Zrzur on your home screen, in full screen"
+msgstr "Zrzur 在主屏幕上，全屏显示"
 
 #: components/app/interface/settings/user/Native.tsx
 msgid "Zrzur opens by itself after you sign in to your computer."

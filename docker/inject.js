@@ -74,6 +74,25 @@ function listFiles(dir) {
     .filter((file) => statSync(join(dir, file)).isFile());
 }
 
+/** What Zrzur Beta is called on a home screen, by manifest language */
+const BETA_NAMES = { en: "Zrzur Beta", ar: "زرزور التجريبي" };
+
+/**
+ * Zrzur Beta installs under its own name, so a phone with both shows which
+ * icon is which. The web manifests (manifest.webmanifest, manifest.ar.…)
+ * are built once with the stable name.
+ */
+function nameBetaInstall(outDir, env) {
+  if ((env.VITE_RELEASE_CHANNEL || DEFAULTS.VITE_RELEASE_CHANNEL) !== "beta") return;
+  for (const file of readdirSync(outDir)) {
+    if (!/^manifest(\.[a-z-]+)?\.webmanifest$/i.test(file)) continue;
+    const path = join(outDir, file);
+    const manifest = JSON.parse(readFileSync(path, "utf-8"));
+    const name = BETA_NAMES[manifest.lang] || BETA_NAMES.en;
+    writeFileSync(path, JSON.stringify({ ...manifest, name, short_name: name }));
+  }
+}
+
 function inject({ buildDir = "dist", outDir = "dist_injected", env = process.env, log = console.log } = {}) {
   rmSync(outDir, { recursive: true, force: true });
   cpSync(buildDir, outDir, { recursive: true });
@@ -112,6 +131,8 @@ function inject({ buildDir = "dist", outDir = "dist_injected", env = process.env
 
     if (data !== before) writeFileSync(path, data);
   }
+
+  nameBetaInstall(outDir, env);
 
   mkdirSync(join(assets, release));
   for (const name of emitted) renameSync(join(assets, name), join(assets, release, name));

@@ -663,13 +663,16 @@ const SwatchRow = styled("div", {
     justifyContent: "flex-end",
     gap: "6px",
     maxWidth: "min(320px, 48vw)",
+    // phones: each swatch is its own 44 px target, so no gap between them
+    _phone: { gap: 0, maxWidth: "min(264px, 60vw)" },
   },
 });
 
 const Swatch = styled("button", {
   base: {
-    width: "22px",
-    height: "22px",
+    // 24 px: the smallest target allowed (was 22)
+    width: "24px",
+    height: "24px",
     padding: 0,
     display: "grid",
     placeItems: "center",
@@ -692,6 +695,34 @@ const Swatch = styled("button", {
     "&:focus-visible": {
       outline: "2px solid var(--z-focus)",
       outlineOffset: "3px",
+    },
+
+    // phones: the button is a 44 px target and the colour is a 28 px dot
+    // drawn inside it
+    _phone: {
+      width: "44px",
+      height: "44px",
+      background: "transparent",
+      boxShadow: "none",
+      "&::before": {
+        content: '""',
+        gridArea: "1 / 1",
+        width: "28px",
+        height: "28px",
+        borderRadius: "50%",
+        background: "var(--swatch)",
+        boxShadow: "inset 0 0 0 1px rgba(0,0,0,0.25)",
+      },
+      "& > *": { gridArea: "1 / 1", zIndex: 1 },
+      "&:hover": { transform: "none" },
+      "&[aria-checked='true']": { boxShadow: "none" },
+      "&[aria-checked='true']::before": {
+        boxShadow:
+          "0 0 0 2px var(--z-bg-sidebar), 0 0 0 4px var(--swatch, var(--z-fg-primary))",
+      },
+      "&[data-custom]": { border: "none" },
+      "&[data-custom]::before": { border: "1px dashed var(--z-fg-muted)" },
+      "&:focus-visible": { outlineOffset: "-4px" },
     },
   },
 });

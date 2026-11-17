@@ -54,8 +54,11 @@ export const ZRZUR_UNIFIED_DARK = {
   selected: "#303348",
   headerPrimary: "#F7F8FC",
   fgPrimary: "#F0F1F8",
-  fgSecondary: "#A1A5B8",
-  // lifted 2026-11-01 so hints stay ≥4.5:1 on cards, fields and selected rows
+  // Three levels the eye can tell apart (2026-11-17): secondary was
+  // #A1A5B8, 3 points of lightness above muted, one level to the eye. Now
+  // 79 against 69. Muted cannot go darker: it is the lowest that stays
+  // ≥4.5:1 on selected rows (lifted 2026-11-01, guarded by the theme test).
+  fgSecondary: "#B6BACD",
   fgMuted: "#979BB1",
   channelsDefault: "#979BB1",
   // Raspberry: actions, focus, selection (not every chrome icon)

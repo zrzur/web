@@ -85,7 +85,9 @@ export function ServerInfoModal(
             });
           },
         },
-        { text: <Trans>Close</Trans> },
+        // an information sheet has no main action: closing it is not one,
+        // so it is not the filled button (owner review, 2026-11-17)
+        { text: <Trans>Close</Trans>, variant: "secondary" },
       ]}
     >
       <Column gap="lg">

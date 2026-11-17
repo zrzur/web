@@ -1,0 +1,84 @@
+{
+  "Install Zrzur on your phone": [
+    "Installer Zrzur sur votre téléphone",
+    "Instala Zrzur en tu teléfono",
+    "Установите Zrzur на телефон",
+    "在手机上安装 Zrzur"
+  ],
+  "Opens from your home screen, in full screen.": [
+    "S’ouvre depuis l’écran d’accueil, en plein écran.",
+    "Se abre desde la pantalla de inicio, a pantalla completa.",
+    "Открывается с главного экрана, во весь экран.",
+    "从主屏幕打开，全屏显示。"
+  ],
+  "No browser bar, like any app": [
+    "Sans barre de navigateur, comme une application",
+    "Sin barra del navegador, como cualquier aplicación",
+    "Без панели браузера, как обычное приложение",
+    "没有浏览器栏，和普通应用一样"
+  ],
+  "Notifications for messages and mentions": [
+    "Notifications pour les messages et les mentions",
+    "Notificaciones de mensajes y menciones",
+    "Уведомления о сообщениях и упоминаниях",
+    "消息和提及的通知"
+  ],
+  "Opens faster every time": [
+    "S’ouvre plus vite à chaque fois",
+    "Se abre más rápido cada vez",
+    "Каждый раз открывается быстрее",
+    "每次打开都更快"
+  ],
+  "Install": ["Installer", "Instalar", "Установить", "安装"],
+  "Not now": ["Pas maintenant", "Ahora no", "Не сейчас", "以后再说"],
+  "Add Zrzur to your home screen": [
+    "Ajouter Zrzur à l’écran d’accueil",
+    "Añade Zrzur a la pantalla de inicio",
+    "Добавьте Zrzur на главный экран",
+    "将 Zrzur 添加到主屏幕"
+  ],
+  "Three steps in your browser.": [
+    "Trois étapes dans votre navigateur.",
+    "Tres pasos en tu navegador.",
+    "Три шага в браузере.",
+    "在浏览器中只需三步。"
+  ],
+  "Tap the Share button in the browser's bar": [
+    "Touchez le bouton Partager dans la barre du navigateur",
+    "Toca el botón Compartir en la barra del navegador",
+    "Нажмите «Поделиться» на панели браузера",
+    "轻点浏览器栏中的“分享”按钮"
+  ],
+  "Choose “Add to Home Screen”": [
+    "Choisissez « Sur l’écran d’accueil »",
+    "Elige «Añadir a pantalla de inicio»",
+    "Выберите «На экран „Домой“»",
+    "选择“添加到主屏幕”"
+  ],
+  "Tap “Add”, then open Zrzur from its icon": [
+    "Touchez « Ajouter », puis ouvrez Zrzur depuis son icône",
+    "Toca «Añadir» y abre Zrzur desde su icono",
+    "Нажмите «Добавить», затем откройте Zrzur по значку",
+    "轻点“添加”，然后从图标打开 Zrzur"
+  ],
+  "Got it": ["Compris", "Entendido", "Понятно", "知道了"],
+  "Install the app": [
+    "Installer l’application",
+    "Instalar la aplicación",
+    "Установить приложение",
+    "安装应用"
+  ],
+  "Zrzur on your home screen, in full screen": [
+    "Zrzur sur votre écran d’accueil, en plein écran",
+    "Zrzur en tu pantalla de inicio, a pantalla completa",
+    "Zrzur на главном экране, во весь экран",
+    "Zrzur 在主屏幕上，全屏显示"
+  ],
+  "A new version of Zrzur is ready": [
+    "Une nouvelle version de Zrzur est prête",
+    "Hay una nueva versión de Zrzur lista",
+    "Новая версия Zrzur готова",
+    "Zrzur 新版本已就绪"
+  ],
+  "Update": ["Mettre à jour", "Actualizar", "Обновить", "更新"]
+}

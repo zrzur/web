@@ -7,7 +7,19 @@ import {
 
 import { pageHandlesPush } from "../components/client/notificationRules";
 
-import { RUNTIME_CACHE, isRuntimeAsset, overLimit } from "./runtimeAssets";
+import {
+  OFFLINE_CACHE,
+  OFFLINE_HEADERS,
+  OFFLINE_LANGUAGE_KEY,
+  offlineLocale,
+  offlinePage,
+} from "./offlinePage";
+import {
+  RUNTIME_CACHE,
+  isAppNavigation,
+  isRuntimeAsset,
+  overLimit,
+} from "./runtimeAssets";
 
 declare let self: ServiceWorkerGlobalScope;
 
@@ -29,7 +41,32 @@ interface StoatPushNotification {
 
 self.addEventListener("message", (event) => {
   if (event.data && event.data.type === "SKIP_WAITING") self.skipWaiting();
+  // the app's language, for the "no connection" page (the only thing the
+  // worker knows about the person: two letters, no account data)
+  if (event.data && event.data.type === "LANGUAGE") {
+    const locale = offlineLocale(event.data.locale);
+    if (locale)
+      event.waitUntil(
+        caches
+          .open(OFFLINE_CACHE)
+          .then((cache) =>
+            cache.put(OFFLINE_LANGUAGE_KEY, new Response(locale)),
+          ),
+      );
+  }
 });
+
+/** The language the app last ran in, then the device's own */
+async function offlineLanguages() {
+  const device = self.navigator.languages ?? [];
+  try {
+    const cache = await caches.open(OFFLINE_CACHE);
+    const saved = await (await cache.match(OFFLINE_LANGUAGE_KEY))?.text();
+    return saved ? [saved, ...device] : device;
+  } catch {
+    return device;
+  }
+}
 
 self.addEventListener("notificationclick", (event) => {
   event.notification.close();
@@ -87,13 +124,11 @@ self.addEventListener("push", (event) => {
   );
 });
 
-// A new release takes over at once: it installs without waiting for open tabs
-// to close and controls them right away; registerSW (autoUpdate) then reloads
-// the page onto the new files. Without this a tab could stay on an old release
-// (old URLs included) until every Zrzur tab was closed.
-self.addEventListener("install", () => {
-  void self.skipWaiting();
-});
+// A new release waits until a page asks for it (the SKIP_WAITING message
+// above, src/serviceWorkerInterface.ts): taking over at once reloaded every
+// open page, also in the middle of a message or a call. A page opened after
+// the release asks right away, a page opened before it shows "Update".
+// Once active, the new worker controls the open pages without a reload.
 self.addEventListener("activate", (event) => {
   event.waitUntil(self.clients.claim());
 });
@@ -102,7 +137,13 @@ cleanupOutdatedCaches();
 
 // Only the shell is listed (scripts/precacheShell.mjs); the rest of the app is
 // kept the first time it is used
-precacheAndRoute(self.__WB_MANIFEST);
+// (scripts and styles only: the build tool adds the web manifest to the list
+// by itself, and nothing else may be kept)
+precacheAndRoute(
+  self.__WB_MANIFEST.filter((entry) =>
+    /\.(js|css)$/.test(typeof entry === "string" ? entry : entry.url),
+  ),
+);
 
 async function cachedAsset(request: Request) {
   const cache = await caches.open(RUNTIME_CACHE);
@@ -122,6 +163,22 @@ self.addEventListener("fetch", (event) => {
   if (event.request.method !== "GET") return;
   const url = new URL(event.request.url);
   const scope = new URL(self.registration.scope).pathname;
+
+  // Opening the app: always from the network, never from a cache. Only when
+  // the network cannot be reached at all, a page that says so and asks again
+  if (isAppNavigation(event.request, url, self.location.origin, scope)) {
+    event.respondWith(
+      fetch(event.request).catch(
+        async () =>
+          new Response(offlinePage(await offlineLanguages()), {
+            status: 503,
+            headers: OFFLINE_HEADERS,
+          }),
+      ),
+    );
+    return;
+  }
+
   if (!isRuntimeAsset(url, self.location.origin, scope)) return;
   // the precache answers its own files
   if (getCacheKeyForURL(url.href)) return;

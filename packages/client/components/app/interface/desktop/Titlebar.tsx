@@ -120,7 +120,8 @@ export function Titlebar(props: { bare?: boolean }) {
       data-desktop-titlebar
       data-disconnected={isDisconnected()}
       data-native={isNative}
-      data-phone-show={phoneShow() || !!pendingUpdate()}
+      // phones show a waiting update on top of the tab bar (PhoneUpdateRow)
+      data-phone-show={phoneShow()}
       style={{ "-webkit-user-select": "none", "-webkit-app-region": "drag" }}
     >
       {/* room for the macOS traffic lights */}
@@ -207,11 +208,14 @@ export function Titlebar(props: { bare?: boolean }) {
 
       <Side data-end>
         <Show when={pendingUpdate()}>
-          <div style={{ "-webkit-app-region": "no-drag" }}>
+          <UpdateSlot
+            style={{ "-webkit-app-region": "no-drag" }}
+            title={t`A new version of Zrzur is ready`}
+          >
             <Button size="xs" onPress={pendingUpdate()}>
-              Update
+              {t`Update`}
             </Button>
-          </div>
+          </UpdateSlot>
         </Show>
         <Show when={isNative && !isMacOS}>
           <Action
@@ -365,6 +369,15 @@ const Status = styled("div", {
         paddingInline: "8px",
       },
     },
+  },
+});
+
+/** "Update" in the bar; phones have their own row above the tab bar */
+const UpdateSlot = styled("div", {
+  base: {
+    // the bar is always left to right; the label reads in its own direction
+    direction: "inherit",
+    _phone: { display: "none" },
   },
 });
 

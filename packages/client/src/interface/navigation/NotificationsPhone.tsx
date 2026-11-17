@@ -85,6 +85,21 @@ export function NotificationsPhone(props: { onClose: () => void }) {
     return channel.server ? [channel.server.name, name] : [name];
   };
 
+  /**
+   * The place as it is shown: each name keeps its own direction (in an
+   * Arabic line "#Announcements" came out as "Announcements#")
+   */
+  const placed = (message: Message) => (
+    <For each={place(message)}>
+      {(part, index) => (
+        <>
+          {index() ? " · " : ""}
+          <bdi>{part}</bdi>
+        </>
+      )}
+    </For>
+  );
+
   const when = (message: Message) => {
     const at = dayjs(message.createdAt);
     return at.isSame(dayjs(), "day") ? at.format("LT") : at.format("L");
@@ -152,43 +167,45 @@ export function NotificationsPhone(props: { onClose: () => void }) {
           <Group>
             <Trans>Friend requests</Trans>
           </Group>
-          <For each={requests()}>
-            {(user) => (
-              <Row data-new>
-                <Avatar
-                  size={44}
-                  src={user.animatedAvatarURL}
-                  fallback={user.displayName}
-                />
-                <Text>
-                  <p>
-                    <Trans>
-                      <strong dir="auto">{user.displayName}</strong> sent you a
-                      friend request.
-                    </Trans>
-                  </p>
-                  <Answers>
-                    <Answer
-                      type="button"
-                      data-primary
-                      onClick={() => user.addFriend().catch(showError)}
-                    >
-                      <Trans>Accept</Trans>
-                    </Answer>
-                    <Answer
-                      type="button"
-                      onClick={() => user.removeFriend().catch(showError)}
-                    >
-                      <Trans>Decline</Trans>
-                    </Answer>
-                    <Answer type="button" onClick={() => message(user)}>
-                      <Trans>Send message</Trans>
-                    </Answer>
-                  </Answers>
-                </Text>
-              </Row>
-            )}
-          </For>
+          <Rows>
+            <For each={requests()}>
+              {(user) => (
+                <Row data-new>
+                  <Avatar
+                    size={44}
+                    src={user.animatedAvatarURL}
+                    fallback={user.displayName}
+                  />
+                  <Text>
+                    <p>
+                      <Trans>
+                        <strong dir="auto">{user.displayName}</strong> sent you
+                        a friend request.
+                      </Trans>
+                    </p>
+                    <Answers>
+                      <Answer
+                        type="button"
+                        data-primary
+                        onClick={() => user.addFriend().catch(showError)}
+                      >
+                        <Trans>Accept</Trans>
+                      </Answer>
+                      <Answer
+                        type="button"
+                        onClick={() => user.removeFriend().catch(showError)}
+                      >
+                        <Trans>Decline</Trans>
+                      </Answer>
+                      <Answer type="button" onClick={() => message(user)}>
+                        <Trans>Send message</Trans>
+                      </Answer>
+                    </Answers>
+                  </Text>
+                </Row>
+              )}
+            </For>
+          </Rows>
         </Show>
 
         <Show when={showMentions()}>
@@ -209,41 +226,43 @@ export function NotificationsPhone(props: { onClose: () => void }) {
                 {(day) => (
                   <>
                     <Group>{day.label}</Group>
-                    <For each={day.items}>
-                      {(item) => (
-                        <RowButton
-                          type="button"
-                          data-new={isNew(item) ? "" : undefined}
-                          onClick={() => open(item)}
-                        >
-                          <Avatar
-                            size={44}
-                            src={item.animatedAvatarURL}
-                            fallback={item.username}
-                          />
-                          <Text>
-                            <p>
-                              <Trans>
-                                <strong dir="auto">{item.username}</strong>{" "}
-                                mentioned you in{" "}
-                                <strong dir="auto">
-                                  {place(item).join(" · ")}
-                                </strong>
-                              </Trans>
-                            </p>
-                            <Quote>
-                              <bdi>{client().markdownToText(item.content)}</bdi>
-                            </Quote>
-                          </Text>
-                          <When>
-                            {when(item)}
-                            <Show when={isNew(item)}>
-                              <Dot aria-label={t`Unread`} />
-                            </Show>
-                          </When>
-                        </RowButton>
-                      )}
-                    </For>
+                    <Rows>
+                      <For each={day.items}>
+                        {(item) => (
+                          <RowButton
+                            type="button"
+                            data-new={isNew(item) ? "" : undefined}
+                            onClick={() => open(item)}
+                          >
+                            <Avatar
+                              size={44}
+                              src={item.animatedAvatarURL}
+                              fallback={item.username}
+                            />
+                            <Text>
+                              <p>
+                                <Trans>
+                                  <strong dir="auto">{item.username}</strong>{" "}
+                                  mentioned you in{" "}
+                                  <strong>{placed(item)}</strong>
+                                </Trans>
+                              </p>
+                              <Quote>
+                                <bdi>
+                                  {client().markdownToText(item.content)}
+                                </bdi>
+                              </Quote>
+                            </Text>
+                            <When>
+                              {when(item)}
+                              <Show when={isNew(item)}>
+                                <Dot aria-label={t`Unread`} />
+                              </Show>
+                            </When>
+                          </RowButton>
+                        )}
+                      </For>
+                    </Rows>
                   </>
                 )}
               </For>
@@ -330,11 +349,13 @@ const Chip = styled("button", {
     font: "inherit",
     fontSize: "14px",
     cursor: "pointer",
-    // the chosen filter: the page's ink on its background, turned round
+    // The chosen filter is raised, as the chosen status on the You page and
+    // the chosen tab of Friends are: one look for "this one is on" (a white
+    // pill here was a fourth way of saying it; owner, 2026-11-17).
     "&[aria-checked='true']": {
-      color: "var(--z-bg-frame)",
-      background: "var(--z-fg-primary)",
-      borderColor: "transparent",
+      color: "var(--z-fg-primary)",
+      background: "var(--z-nav-selected)",
+      borderColor: "var(--z-border-strong)",
       fontWeight: 600,
     },
     _focusVisible: {
@@ -363,13 +384,30 @@ const Group = styled("h2", {
   },
 });
 
+/**
+ * The rows under one title: one filled group with a hairline between its
+ * rows, the look of the settings list (design pack, 2026-11-17)
+ */
+const Rows = styled("div", {
+  base: {
+    marginInline: "12px",
+    borderRadius: "14px",
+    overflow: "hidden",
+    background:
+      "var(--z-sheet-group, color-mix(in srgb, var(--z-fg-primary) 5%, transparent))",
+    "& > * + *": {
+      borderTop: "1px solid var(--z-float-divider, var(--z-border-subtle))",
+    },
+  },
+});
+
 const rowStyle = {
   base: {
     display: "flex",
     alignItems: "flex-start",
     gap: "12px",
     width: "100%",
-    padding: "12px 16px",
+    padding: "12px 14px",
     border: "none",
     background: "none",
     color: "inherit",

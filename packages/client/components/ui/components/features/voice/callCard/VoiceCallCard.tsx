@@ -379,7 +379,12 @@ function VoiceCallCard(props: {
           >["layout"]
         }
       >
-        <Card active={props.inCall} layout={props.layout} stage={stage()}>
+        <Card
+          active={props.inCall}
+          layout={props.layout}
+          stage={stage()}
+          data-conversation-call={stage() ? undefined : ""}
+        >
           <Show
             when={props.inCall}
             fallback={<VoiceCallCardPreview channel={props.channel} />}
@@ -439,6 +444,36 @@ const Card = styled("div", {
     background: "var(--z-card-bg)",
     boxShadow: "var(--z-card-lift)",
     border: "1px solid var(--z-btn-surface-border)",
+
+    // Phones, a call in a direct message or group: the card is a strip over
+    // the conversation, too short for people one under another (the second
+    // person was cut off behind the buttons). They sit side by side, each
+    // as tall as the strip; more than two are reached by a sideways swipe.
+    _phone: {
+      "&[data-conversation-call] :has(> .vc_tile)": {
+        flexWrap: "nowrap",
+        justifyContent: "safe center",
+        alignContent: "stretch",
+        alignItems: "stretch",
+        gap: "8px",
+        minHeight: 0,
+        height: "100%",
+        overflowX: "auto",
+        overflowY: "hidden",
+        scrollbarWidth: "none",
+      },
+      "&[data-conversation-call] .vc_tile": {
+        flex: "0 0 calc(50% - 4px)",
+        width: "auto !important",
+        maxWidth: "none !important",
+        height: "100% !important",
+        minHeight: 0,
+        aspectRatio: "auto",
+      },
+      "&[data-conversation-call] .vc_tile:only-child": {
+        flex: "0 0 100%",
+      },
+    },
   },
   variants: {
     active: {

@@ -28,9 +28,11 @@ import { useInstance } from "@revolt/instance";
 import { TextWithEmoji } from "@revolt/markdown";
 import { useModals } from "@revolt/modal";
 import { useVoice } from "@revolt/rtc";
+import { canShareScreen } from "@revolt/rtc/screenShare";
 import { Avatar, OverflowingText, UserStatus } from "@revolt/ui";
 import { SignalBars } from "@revolt/ui/components/features/voice/SignalBars";
 import { watchVoiceStrip } from "@revolt/ui/components/features/voice/callCard/voiceStrip";
+import SoundsUnavailable from "@revolt/ui/components/features/voice/soundboard/SoundsUnavailable";
 import {
   setSoundboardOpen,
   soundboardOpen,
@@ -40,9 +42,8 @@ import {
   roomControlsOpen,
   setRoomControlsOpen,
 } from "@revolt/ui/components/features/voice/rooms/roomControlsOpen";
-import { Icon } from "@revolt/ui/icons/Icon";
-import SoundsUnavailable from "@revolt/ui/components/features/voice/soundboard/SoundsUnavailable";
 import { lazyRetry } from "@revolt/ui/components/utils/lazyRetry";
+import { Icon } from "@revolt/ui/icons/Icon";
 
 /**
  * Account / voice control panel: a card floating at the bottom of the left
@@ -416,22 +417,26 @@ function VoiceSection() {
             <Icon name="video-camera" size={20} />
           </Show>
         </button>
-        <button
-          class={voiceAction()}
-          data-voice-control="screenshare"
-          aria-label={voice.screenshare() ? t`Stop sharing` : t`Share screen`}
-          aria-pressed={!!voice.screenshare()}
-          aria-disabled={screenDisabled()}
-          onClick={() => !screenDisabled() && voice.toggleScreenshare()}
-          use:floating={{
-            tooltip: {
-              placement: "top",
-              content: voice.screenshare() ? t`Stop sharing` : t`Share screen`,
-            },
-          }}
-        >
-          <Icon name="monitor-arrow-up" size={20} />
-        </button>
+        <Show when={canShareScreen}>
+          <button
+            class={voiceAction()}
+            data-voice-control="screenshare"
+            aria-label={voice.screenshare() ? t`Stop sharing` : t`Share screen`}
+            aria-pressed={!!voice.screenshare()}
+            aria-disabled={screenDisabled()}
+            onClick={() => !screenDisabled() && voice.toggleScreenshare()}
+            use:floating={{
+              tooltip: {
+                placement: "top",
+                content: voice.screenshare()
+                  ? t`Stop sharing`
+                  : t`Share screen`,
+              },
+            }}
+          >
+            <Icon name="monitor-arrow-up" size={20} />
+          </button>
+        </Show>
         <Show when={voice.channel()?.server}>
           <button
             class={voiceAction()}
@@ -864,6 +869,15 @@ const controlButton = cva({
     "&[data-danger='true']": {
       color: "var(--z-danger, var(--md-sys-color-error, #F87171))",
       "--z-icon-color": "var(--z-icon-danger)",
+    },
+    // Leaving the call sits with the call's other buttons (camera, screen,
+    // sounds): the same tile, in the danger tint, not a bare icon beside
+    // three tiles (owner, 2026-11-17).
+    "&[data-voice-control='disconnect']": {
+      width: "40px",
+      borderRadius: "8px",
+      background: "var(--z-danger-muted)",
+      _phone: { width: "48px", height: "36px" },
     },
     "&[data-danger='true']:hover": {
       color: "var(--z-danger)",

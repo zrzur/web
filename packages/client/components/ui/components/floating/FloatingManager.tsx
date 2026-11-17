@@ -316,7 +316,10 @@ function Floating(props: FloatingElement & { mouseX: number; mouseY: number }) {
         animate={{ y: 0 }}
         transition={{ duration: sheetSeconds(), easing: [0.2, 0.8, 0.2, 1] }}
       >
-        <SheetPanel ref={setFloating}>
+        <SheetPanel
+          ref={setFloating}
+          data-card={props.show()?.userCard ? "" : undefined}
+        >
           <SheetGrabber aria-hidden="true" />
           {content()}
         </SheetPanel>
@@ -367,10 +370,14 @@ const SheetPanel = styled("div", {
     maxHeight: "78dvh",
     overflowY: "auto",
     overscrollBehavior: "contain",
-    padding: "22px 8px calc(12px + var(--z-safe-bottom))",
-    borderRadius: "22px 22px 0 0",
-    background: "var(--z-bg-modal, var(--z-bg-raised))",
-    borderTop: "1px solid var(--z-border-strong)",
+    padding: "24px 16px calc(16px + var(--z-safe-bottom))",
+    // No line along the top: a border on one side of a rounded box thins
+    // out to nothing round the corners, which reads as a drawing mistake
+    // (owner, 2026-11-17). The surface against the dimmed page is the edge.
+    borderRadius: "20px 20px 0 0",
+    // one step above the page, the surface dialogs' sheets use: it was the
+    // page's own colour, so only the line told the sheet from the page
+    background: "var(--z-dialog-bg, var(--z-bg-floating, var(--z-bg-raised)))",
     boxShadow: "0 -18px 48px -12px rgba(0, 0, 0, 0.55)",
 
     // the menu fills the sheet: no second card inside it
@@ -385,13 +392,69 @@ const SheetPanel = styled("div", {
       outline: "none !important",
     },
     "& [role='menuitem']": {
-      minHeight: "48px",
-      paddingInline: "12px",
+      minHeight: "50px",
+      paddingInline: "16px",
       fontSize: "16px",
       gap: "14px",
     },
+    // a row's name is the thing to read: full-strength text, the icon one
+    // step quieter (grey text on a grey card looked washed out)
+    "& [role='menuitem']:not([data-destructive]):not([data-danger])": {
+      color: "var(--z-fg-primary)",
+      "--z-icon-color": "var(--z-icon-neutral)",
+    },
+    // Groups of rows are cards (owner, 2026-11-17): the rows of a group share
+    // one surface with a hairline between them, and the divider between two
+    // groups is the room between two cards. Written once here, so the
+    // message, server, channel and person sheets all look the same.
+    "& [role='menu'][tabindex]": {
+      gap: 0,
+      "& > :is(a, [role='menuitem'])": {
+        borderRadius: 0,
+        background:
+          "var(--z-sheet-group, color-mix(in srgb, var(--z-fg-primary) 5%, transparent))",
+      },
+      "& > :is(a, [role='menuitem']):active": {
+        background: "color-mix(in srgb, var(--z-fg-primary) 10%, transparent)",
+      },
+      "& > :is(a, [role='menuitem']) + :is(a, [role='menuitem'])": {
+        borderTop: "1px solid var(--z-float-divider, var(--z-border-subtle))",
+      },
+      // the first row of a group, and the last
+      "& > :is(a, [role='menuitem']):not(:is(a, [role='menuitem']) + *)": {
+        borderStartStartRadius: "14px",
+        borderStartEndRadius: "14px",
+      },
+      "& > :is(a, [role='menuitem']):not(:has(+ :is(a, [role='menuitem'])))": {
+        borderEndStartRadius: "14px",
+        borderEndEndRadius: "14px",
+      },
+      "& > [data-menu-divider]": {
+        height: "12px",
+        margin: 0,
+        background: "none",
+      },
+      "& > [data-menu-divider] + [data-menu-divider], & > [data-menu-divider]:last-child, & > [data-menu-divider]:first-child":
+        { display: "none" },
+    },
     // profile cards use the sheet's width
     "& > :not([aria-hidden])": { width: "100% !important", maxWidth: "none" },
+    // A profile is the sheet itself, not a card inside it: its banner runs
+    // to the sheet's edges and takes the sheet's corners, with the handle
+    // drawn over it (it sat as a box in a box, 8 px in from every side).
+    "&[data-card]": {
+      padding: "0 0 var(--z-safe-bottom)",
+      overflowX: "hidden",
+      "& > :not([aria-hidden])": {
+        border: "none !important",
+        borderRadius: "0 !important",
+        boxShadow: "none !important",
+      },
+      "& > [aria-hidden]": {
+        zIndex: 2,
+        background: "rgb(255 255 255 / 0.55)",
+      },
+    },
   },
 });
 

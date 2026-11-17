@@ -39,7 +39,8 @@ const Label = styled("span", {
     border: "1px solid var(--z-border-soft)",
     background: "var(--z-bg-raised)",
     color: "var(--z-fg-secondary)",
-    fontSize: "10px",
+    // 11 px: the smallest text allowed anywhere (was 10)
+    fontSize: "11px",
     lineHeight: "14px",
     fontWeight: 600,
     whiteSpace: "nowrap",

@@ -15,6 +15,76 @@
 * The ticket icon is Zrzur's own drawing.
 * English, Arabic, German, French, Spanish, Russian and Chinese.
 
+### Phones: one look for groups of rows (design pack, 2026-11-17)
+
+* **You page on phones** follows the settings list: the profile on top without a frame, then filled groups of rows with bare icons and the value at the end of the row. Status is one row that opens its four choices under it; Friends shows the count; Settings is one row that opens the settings list. The statuses as four buttons, the About panel and the eight settings rows are gone from the phone page (wider screens keep theirs).
+* **Every phone screen wears the colours of the settings list:** the page is the frame colour, every box (card, field, message box, group of rows) is one fill a step above it, a sheet is a hair above the page. One block in `styles.css` for screens up to 600 px; wider screens keep their colours.
+* **Designs on phones:** every card is the width of the page, one under the other (two sizes side by side left a single small card with a hole beside it).
+* **Notifications on phones:** the rows under each day are one filled group with a hairline between them.
+* **Friends on phones:** the tabs are chips, people are one filled group with no frame, and the two actions of a row are bare icons with a 44 px target (they were ringed circles).
+* **Settings pages on phones** sit on the same surface as the list they open from, and their groups are filled cards with no frame.
+
+### Phones: page by page (2026-11-17)
+
+* **Search on a phone:** no "Search results" title over a page with no results yet (the search field is the top row); "where" and "sort" are full-width rows of equal choices; before anything is typed the help is one line and the filters one card of rows on the page's own edge (it was a centred notice with a narrow column of examples).
+* **A profile fills its sheet:** the banner runs to the sheet's edges and takes its corners, with the handle over it (it sat as a box inside the sheet).
+* **Notifications:** a channel's name keeps its own direction in an Arabic line ("#Announcements" came out as "Announcements#").
+* **Emoji picker on a touch screen:** the tip says "hold", not "right-click (or hold)".
+
+### Phones: sheets in groups, and no Home page (2026-11-17)
+
+* **Every sheet that opens from the bottom shows its rows in groups:** the rows of a group share one card with a hairline between them, and there is room between two groups. One rule for the message, server, channel and person sheets (it was one long flat list).
+* **Message sheet:** six reactions and the picker in a row at the top, one tap each; then Reply, Forward, Copy and Delete as the four large buttons (Forward takes the place of React, which is the row above now).
+* **Server sheet:** starts with the server (picture, name, members) and Invite, Server info and Settings as large buttons; the rest follows in groups.
+* **Settings lists on phones** (your settings, a server's, a channel's): the rows of a section are one card, each row ends in an arrow, and no row is lit as "the open one" on a screen that is only the list.
+* **A voice room opens as a sheet over the channel list:** who is in it, the microphone on or off, and Join. A press on a room used to join at once and leave the list.
+* **The top edge of a sheet is clean.** A line along the top only thinned out to nothing round the corners; it is gone, both kinds of sheet (menus and dialogs) have the same 20 px corners, and the menus' sheet sits one step above the page like the dialogs' (it had the page's own colour).
+* **Rows in a sheet and in a settings list are full-strength text** with the icon one step quieter (grey text on a grey card looked washed out).
+* **Secondary text is one clear step above muted text** (dark themes: `#B6BACD`, was `#A1A5B8`, three points of lightness above muted and one level to the eye). This one reaches every screen, desktop too; muted text is unchanged.
+* **Settings pages on phones: a select or a slider takes the whole width of its row** (it kept the 40 % of the screen it has in a wide window: a half-width select and a 120 px slider under a full-width title).
+* **No Home page on phones.** The logo opens Messages, the app opens on the lists, and a swipe there no longer uncovers a page. What Home holds is one press away: servers on the rail, settings and designs under You. Wider screens keep Home.
+
+### Phones: the details (owner review, 2026-11-17)
+
+* **A press on a conversation always opens it.** When the system took a swipe over (its own Back gesture from the screen edge, a call coming in), no end of the touch reached the app and the slide between the lists and the page stayed held: the next press moved the address and the conversation stayed off screen until another swipe. The slide now lets go of such a touch, and a press made while it is still settling is carried out, not dropped.
+* **Back from a conversation returns to the list of conversations** (it showed the Home page, which shares the list's address). In an installed app this is the only Back there is.
+* **The logo opens the Home page** on phones; the Messages tab keeps the list of conversations. The tab bar stays under the Home page too.
+* **Nothing stays lit after a touch.** Every `:hover` style now applies only where hovering exists (a build step, `scripts/postcssHoverOnly.cjs`, for hand-written `:hover`; `_hover` already did). On touch screens the row under the finger looked selected when a sheet opened (the message sheet showed "Start thread" in another colour), and buttons kept their hover colour after a press.
+* **Lifting the finger of a long press no longer presses the row that appeared under it** (the message sheet could open "Start thread" by itself).
+* **One look for "this one is on".** The chosen filter of Notifications was a white pill and the speaker button of a call a white tile, two more ways of saying what the chosen status and the chosen Friends tab say by being raised. Both are now the raised look; "you hear nothing" in a call uses the tint the call's own controls use for "off".
+* **Leaving a call from the list side is a tile like the buttons next to it** (camera, screen, sounds), in the danger tint; it was a bare icon beside three tiles.
+* **You page on phones:** the four statuses are two by two, all in view (one row cut "Online" off in German); Friends, Designs, Saved notes and Feather are rows with their one-line hint (the small tiles cut "Saved notes" short); and a new **Settings** group lists My account, Appearance, Notifications, Voice, Language, Sessions, Connections and All settings, each opening the settings on that page.
+* **Server on a phone:** the member count has room above it (it sat 4 px under the header line).
+* **"New unreads" in the channel list** is 44 px tall on phones (was 24) and uses the brand's own colours (mentions in the mention colour).
+* **Server information:** Close is no longer the filled button; an information sheet has no main action.
+
+### Phones: faster replies, and calls that fit the hand (2026-11-17)
+
+* **Pull a message sideways to reply.** Away from the menu side (left in English, right in Arabic): the row follows the finger, an arrow fills, and letting go starts the reply with the message box ready. A short pull or a scroll does nothing; the other direction still slides the menu in.
+* **The message sheet starts with what you do most:** Reply, React, Copy and Delete as four large buttons at the top of the long-press sheet. Delete used to be the eleventh row. It still asks before deleting.
+* **Drag a call down to put it aside.** Anywhere on the call screen (the top row, a person's tile): the call goes on and the lists come back, as with the arrow.
+* **Many people in a call:** the first rows could end up above the top edge where no scroll reached; the tiles now start at the top and scroll. Two people get two tiles of the same size. A camera fills its tile; a shared screen keeps its bars.
+* **A call in a direct message or group:** people sit side by side in the strip over the conversation (the second person was cut off behind the buttons).
+* **An incoming call on a phone:** the card sits under the status bar, the caller's name on its own row, and Decline, Video and Accept are three wide 48 px buttons.
+* **No screen-share button where the browser cannot share** (phone browsers): it only showed an error. You still watch what others share.
+* **Scrolling the list of rooms no longer drags a room away.** On a tablet, and on a phone whose browser is set to "desktop site", the finger that scrolls the channel list picked a channel up and could drop it somewhere else, changing the server's order. Reordering by dragging is now off wherever a finger is the main input (it was already off on phones in their normal mode).
+
+### Install Zrzur on your phone (2026-11-17)
+
+* **Install sheet.** On an Android phone, from the second visit, a sheet offers to install Zrzur; **Install** opens the browser's own install window. On iPhone and iPad it shows the three steps (Share, Add to Home Screen, Add). It shows once; closed, it stays away for 30 days. **Install the app** stays on the You page. Nothing shows inside the installed app or on a computer.
+* **A new version never reloads the page by itself.** It used to, also in the middle of a message or a call. A page opened before the release now shows **Update** (a row above the tab bar on phones, the button in the top bar elsewhere; never during a call); a page opened after it takes the new version quietly.
+* **Opened with no connection:** the installed app shows its own page, in the app's language, and opens by itself when the connection is back, instead of the browser's error page. No page, message or account data is kept on the device for this: the app is always loaded from the network.
+* **Home screen:** the iPhone icon has a solid background (iOS painted black behind the transparent one), launch images for iPhone and iPad, a maskable icon at both sizes, and shortcuts to Messages, Discover and You on the icon's long-press menu.
+* **Name:** the app is installed as زرزور when the app's language is Arabic and as Zrzur otherwise; Zrzur Beta installs under its own name. Both manifests describe the same app (`id`), so changing language never makes a second one.
+* The service worker keeps scripts, styles and fonts only (it used to keep the app icons and the manifest too).
+* **Phones: the tab bar stays under Discover and You.** Discover had no way back but a swipe, and an installed app has no browser Back button.
+* **320 px phones:** the channel and conversation list no longer runs 12 px past the screen edge (its dates and buttons were cut), and a direct message keeps its name in the header (the video call moves into More there).
+* **Sign-in on a 320 px phone in German:** the page was as wide as its longest row (the footer links) and the form ran 36 px past the right edge, hiding the theme button and "show password". The page is now exactly as wide as the screen and the footer links wrap.
+* **Friends on a tablet (601 to 840 px):** the filters had shrunk to nothing and "Add friend" ran past the screen edge; the filters and the search take their own rows there, as on phones.
+* **Tap targets:** accent colour swatches are 24 px (44 px on phones, were 22), the Emoji / GIF switch and emoji cells are 44 px on touch screens. The Beta badge text is 11 px (was 10).
+* The message list can be reached with Tab and scrolled with the keyboard. A select in a settings row is named by the row's title and the value it shows (it was the title alone).
+* Fixed: a thread's header showed garbled characters instead of the "›" between the channel and the thread.
+
 ### Design pack (2026-11-16)
 
 * **250 new designs by Zrzur**, free for everyone: 125 avatar decorations, 67 nameplates and 58 profile effects, in 76 sets. Pixel art for games (arcade, quest, racing, a sunset coast, an arcade hall, a handheld console and more), nature and seasons, the Levant, rank emblems and a game HUD, ears, headphones and crowns, and pixel sets about Syria: the flag, Damascus and its sword, the Ghouta, Aleppo, Hama, Palmyra and the Syrian table. Every name is in English, Arabic and German.

@@ -209,7 +209,14 @@ export function EmojiPicker() {
     if (!scroller) return;
     const measure = () => {
       setViewport(scroller!.clientHeight);
-      setColumns(Math.max(1, Math.floor((scroller!.clientWidth - 12) / CELL)));
+      // the room between the list's own paddings: a guessed 12 px gave one
+      // column too many at 320 px, and 43 px cells
+      const style = getComputedStyle(scroller!);
+      const room =
+        scroller!.clientWidth -
+        (parseFloat(style.paddingLeft) || 0) -
+        (parseFloat(style.paddingRight) || 0);
+      setColumns(Math.max(1, Math.floor(room / CELL)));
     };
     measure();
     const observer = new ResizeObserver(measure);
@@ -358,10 +365,20 @@ export function EmojiPicker() {
                       <Switch>
                         <Match when={item.row.kind === "tip"}>
                           <p class="z-emoji-tip">
-                            <Trans>
-                              Tip: right-click (or hold) any emoji to add it to
-                              your favorites.
-                            </Trans>
+                            {/* a finger has no right button */}
+                            <Show
+                              when={COARSE}
+                              fallback={
+                                <Trans>
+                                  Tip: right-click (or hold) any emoji to add it
+                                  to your favorites.
+                                </Trans>
+                              }
+                            >
+                              <Trans>
+                                Tip: hold any emoji to add it to your favorites.
+                              </Trans>
+                            </Show>
                           </p>
                         </Match>
                         <Match when={item.row.kind === "heading"}>

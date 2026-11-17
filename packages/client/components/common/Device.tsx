@@ -67,6 +67,16 @@ export class Device {
     typeof window !== "undefined" &&
     ("ontouchstart" in window || navigator.maxTouchPoints > 0);
 
+  /**
+   * A finger is the main way in (phones and tablets, whatever the browser
+   * calls itself; an iPad says it is a Mac). Lists are not reordered by
+   * dragging there: the same movement is the scroll, and a row came away
+   * under the finger instead of the list moving.
+   */
+  readonly fingerFirst =
+    typeof window !== "undefined" &&
+    !!window.matchMedia?.("(pointer: coarse)").matches;
+
   private pMedia;
   private tMedia;
   private setLayout;

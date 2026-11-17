@@ -415,11 +415,16 @@ export function TextChannel(props: ChannelPageProps) {
             >
               <Match when={sidebarState().state === "search"}>
                 <WideSidebarContainer>
-                  <SidebarTitle>
-                    <Text class="label" size="large">
-                      <Trans>Search results</Trans>
-                    </Text>
-                  </SidebarTitle>
+                  {/* phones: the search field is the page's top row and
+                      says what this is; "Search results" over a page with no
+                      results yet was a second, wrong title */}
+                  <Show when={layout() !== "phone"}>
+                    <SidebarTitle>
+                      <Text class="label" size="large">
+                        <Trans>Search results</Trans>
+                      </Text>
+                    </SidebarTitle>
+                  </Show>
                   <TextSearchSidebar
                     channel={props.channel}
                     query={{

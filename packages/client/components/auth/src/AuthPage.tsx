@@ -51,6 +51,10 @@ const Page = styled("main", {
     boxSizing: "border-box",
     display: "grid",
     gridTemplateRows: "auto minmax(0, 1fr) auto",
+    // one column exactly as wide as the page: without this the column took
+    // the width of its longest row (the footer links in German), and at
+    // 320 px the whole form ran past the right edge of the screen
+    gridTemplateColumns: "minmax(0, 1fr)",
     width: "100%",
     minHeight: "100%",
     padding: "16px 24px",
@@ -169,7 +173,9 @@ const Footer = styled("footer", {
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
-    gap: "16px",
+    // long link names (German) take a second row instead of the page's width
+    flexWrap: "wrap",
+    gap: "0 16px",
     minHeight: "44px",
     color: "var(--z-fg-secondary)",
     fontSize: "13px",
@@ -178,7 +184,9 @@ const Footer = styled("footer", {
     "& nav": {
       display: "flex",
       alignItems: "center",
-      gap: "16px",
+      justifyContent: "center",
+      flexWrap: "wrap",
+      gap: "0 16px",
     },
 
     "& a": {

@@ -20,6 +20,7 @@ import { styled } from "styled-system/jsx";
 import { ServerContextMenu } from "@revolt/app/menus";
 import { useClient } from "@revolt/client";
 import { useDevice } from "@revolt/common";
+import Breakpoint from "@revolt/common/Breakpoint";
 import { KeybindAction, createKeybind } from "@revolt/keybinds";
 import { TextWithEmoji } from "@revolt/markdown";
 import { useModals } from "@revolt/modal";
@@ -129,7 +130,9 @@ const askedInterests = new Set<string>();
 export const ServerSidebar = (props: Props) => {
   const navigate = useNavigate();
   const state = useState();
-  const { isMobile, layout } = useDevice();
+  const { isMobile, fingerFirst, layout } = useDevice();
+  // no dragging channels where the finger scrolls (phones, tablets)
+  const noDrag = isMobile || fingerFirst;
   const client = useClient();
   const { openModal, showError } = useModals();
 
@@ -449,7 +452,7 @@ export const ServerSidebar = (props: Props) => {
             type="category"
             //TODO - No channel ordering on mobile due to usability issue
             //Consider adding a way to enable reordering with dragHandles in server settings
-            disabled={isMobile || noOrdering()}
+            disabled={noDrag || noOrdering()}
             items={categories().filter((category) => category.id !== "default")}
             onChange={(ids) => handleOrdering({ type: "categories", ids })}
           >
@@ -640,7 +643,8 @@ function Category(
       ? `${props.server.id}:default:${props.channelType}`
       : props.category.id;
   const isOpen = () => state.layout.getSectionState(sectionId(), true);
-  const { isMobile } = useDevice();
+  const { isMobile, fingerFirst } = useDevice();
+  const noDrag = isMobile || fingerFirst;
 
   // expand and collapse animate the channel rows
   let section: HTMLDivElement | undefined;
@@ -821,7 +825,7 @@ function Category(
         }}
         //TODO - No channel ordering on mobile due to usability issue
         //Consider adding a way to enable reordering with dragHandles in server settings
-        disabled={isMobile || props.noOrdering() || !isOpen()}
+        disabled={noDrag || props.noOrdering() || !isOpen()}
         minimumDropAreaHeight="42px"
         onDragChange={props.setDragging}
       >
@@ -1038,6 +1042,13 @@ function Entry(
               : "normal",
   );
 
+  /** a voice room you are not in, on a phone */
+  const roomSheet = () =>
+    props.channel.isVoice &&
+    !closedVoice() &&
+    !inCall() &&
+    !!window.matchMedia?.(Breakpoint.phone).matches;
+
   return (
     <Column
       gap="sm"
@@ -1055,10 +1066,17 @@ function Entry(
               ? undefined
               : `/server/${props.channel.serverId}/channel/${props.channel.id}`
           }
-          noDrawer={closedVoice()}
+          noDrawer={closedVoice() || roomSheet()}
           aria-disabled={closedVoice() || undefined}
           title={closedVoice() ? lockedLabel() : undefined}
           onClick={(event: MouseEvent) => {
+            // phones: a room opens as a sheet over this list (who is in,
+            // microphone, Join); the list stays where it is
+            if (roomSheet() && !event.defaultPrevented) {
+              event.preventDefault();
+              openModal({ type: "voice_room", channel: props.channel });
+              return;
+            }
             // Restoring a server's last page must not join its voice channel.
             // Only an explicit, unmodified channel activation changes the call.
             if (

@@ -23,6 +23,7 @@ import { NoticeCenter } from "@revolt/app/interface/support/NoticeCenter";
 import { useClient, useClientLifecycle } from "@revolt/client";
 import { State } from "@revolt/client/Controller";
 import { NotificationsWorker } from "@revolt/client/NotificationsWorker";
+import { useDevice } from "@revolt/common";
 import { useModals } from "@revolt/modal";
 import { PluginHostGate } from "@revolt/plugins/PluginHostGate";
 import { Navigate, useBeforeLeave, useLocation } from "@revolt/routing";
@@ -35,6 +36,7 @@ import { Sidebar } from "./interface/Sidebar";
 import { FirstScreen } from "./interface/home/FirstScreen";
 import { goingHome } from "./interface/home/goingHome";
 import { NEXT_SCREENS, preloadWhenIdle } from "./interface/idlePreload";
+import { PhoneTabs } from "./interface/navigation/PhoneTabs";
 
 /** Longest wait for unread state before Home draws without it */
 const UNREADS_WAIT = 800;
@@ -46,11 +48,16 @@ const StreamerIndicator = lazy(
   () => import("@revolt/app/interface/StreamerIndicator"),
 );
 
+const InstallOffer = lazy(() =>
+  import("@revolt/pwa/InstallOffer").then((m) => ({ default: m.InstallOffer })),
+);
+
 const Interface = (props: { children?: JSX.Element }) => {
   const state = useState();
   const client = useClient();
   const { openModal } = useModals();
   const { isLoggedIn, lifecycle } = useClientLifecycle();
+  const device = useDevice();
   // reactive copy, for the panel corner when the channel list is hidden
   const location = useLocation();
 
@@ -92,6 +99,13 @@ const Interface = (props: { children?: JSX.Element }) => {
     onCleanup(() => clearTimeout(timer));
   });
 
+  // Discover and You are tabs of the phone's bar, and each is a whole page
+  // on the page side of the slide: the bar stays under them.
+  const tabPage = () =>
+    device.layout() === "phone" &&
+    (location.pathname.startsWith("/discover") ||
+      location.pathname.startsWith("/you"));
+
   function isDisconnected() {
     return [
       State.Connecting,
@@ -112,6 +126,12 @@ const Interface = (props: { children?: JSX.Element }) => {
     //Create drawer
     const cont = contRef();
     if (cont && !sDrawer) sDrawer = new SlideDrawer(cont, rootRef!);
+    // Phones have no Home page (owner, 2026-11-17): at the lists' own
+    // address the lists stay on screen. What Home holds is one press away
+    // there: servers on the rail, settings and designs under You.
+    if (sDrawer)
+      sDrawer.locked =
+        device.layout() === "phone" && goingHome(location.pathname);
     //Update on layout change
     if (sDrawer) {
       const en = sDrawer.enabled;
@@ -125,6 +145,37 @@ const Interface = (props: { children?: JSX.Element }) => {
     sDrawer?.delete();
     state.setAppDrawer((sDrawer = undefined));
   });
+
+  // Phones: Back (the system's, in an installed app the only one) from a
+  // conversation returns to the list it was opened from, not to the Home
+  // page that shares the list's address.
+  // The router may move the address before or after this listener hears of
+  // the Back, so each side notes its time and either one settles it.
+  let popped = -Infinity;
+  let moved: { from?: string; to: string; at: number } | undefined;
+  const settleBack = () => {
+    if (!moved || Math.abs(moved.at - popped) > 600) return;
+    const { from, to } = moved;
+    moved = undefined;
+    popped = -Infinity;
+    if (from?.startsWith("/channel/") && goingHome(to))
+      sDrawer?.setShown(false);
+  };
+  const onPop = () => {
+    popped = performance.now();
+    settleBack();
+  };
+  window.addEventListener("popstate", onPop);
+  onCleanup(() => window.removeEventListener("popstate", onPop));
+  createEffect(
+    on(
+      () => location.pathname,
+      (to, from) => {
+        moved = { from, to, at: performance.now() };
+        settleBack();
+      },
+    ),
+  );
 
   // switching servers animates the channel list and the page, switching
   // channels only the page
@@ -192,6 +243,7 @@ const Interface = (props: { children?: JSX.Element }) => {
               <Content
                 ref={setContRef}
                 class="app_body"
+                data-tab-page={tabPage() ? "" : undefined}
                 sidebar={
                   state.layout.getSectionState(
                     LAYOUT_SECTIONS.PRIMARY_SIDEBAR,
@@ -204,6 +256,10 @@ const Interface = (props: { children?: JSX.Element }) => {
                 }
               >
                 {props.children}
+                {/* phones: a tab's own page keeps the tab bar under it */}
+                <Show when={tabPage()}>
+                  <PhoneTabs page />
+                </Show>
               </Content>
             </Layout>
           </Match>
@@ -225,6 +281,12 @@ const Interface = (props: { children?: JSX.Element }) => {
         </Show>
         <Show when={isLoggedIn()}>
           <PluginHostGate />
+        </Show>
+        {/* "install the app", once, on a phone (loaded after the app is up) */}
+        <Show when={lifecycle.loadedOnce() && settled()}>
+          <Suspense>
+            <InstallOffer />
+          </Suspense>
         </Show>
       </AppRoot>
     </MessageCache>
@@ -282,6 +344,17 @@ const Content = styled("div", {
     minHeight: 0,
     _phone: {
       background: "var(--z-bg-shell, #1d1f2d)",
+      // a tab's page: the tab bar (64px) sits on its bottom edge, the page
+      // ends above it, and the bar steps aside while the keyboard is up
+      "&[data-tab-page]": {
+        position: "relative",
+        paddingBottom: "64px",
+      },
+      "&[data-tab-page]:has(input:focus, textarea:focus, [contenteditable='true']:focus)":
+        {
+          paddingBottom: 0,
+          "& > [data-phone-tabs-page]": { display: "none" },
+        },
     },
   },
   variants: {

@@ -9,6 +9,7 @@ import { useDevice } from "@revolt/common";
 import { useInstance } from "@revolt/instance";
 import { useModals } from "@revolt/modal";
 import { useVoice } from "@revolt/rtc";
+import { canShareScreen } from "@revolt/rtc/screenShare";
 import { useState } from "@revolt/state";
 import { Icon } from "@revolt/ui/icons/Icon";
 import { lazyRetry } from "../../../utils/lazyRetry";
@@ -117,27 +118,29 @@ export function VoiceCallCardActions(props: { size: "xs" | "sm" }) {
             <Icon name="video-camera" size={iconSize()} />
           </Show>
         </ControlButton>
-        <ControlButton
-          size={props.size}
-          tone={limits().video && voice.screenshare() ? "on" : "neutral"}
-          data-voice-control="screenshare"
-          aria-pressed={!!voice.screenshare()}
-          disabled={
-            voice.state() !== "CONNECTED" ||
-            !limits().video ||
-            (!voice.videoPermission && !voice.screenshare())
-          }
-          label={
-            limits().video
-              ? voice.screenshare()
-                ? t`Stop sharing`
-                : t`Share screen`
-              : t`Screen share unavailable`
-          }
-          onClick={() => limits().video && voice.toggleScreenshare()}
-        >
-          <Icon name="monitor-arrow-up" size={iconSize()} />
-        </ControlButton>
+        <Show when={canShareScreen}>
+          <ControlButton
+            size={props.size}
+            tone={limits().video && voice.screenshare() ? "on" : "neutral"}
+            data-voice-control="screenshare"
+            aria-pressed={!!voice.screenshare()}
+            disabled={
+              voice.state() !== "CONNECTED" ||
+              !limits().video ||
+              (!voice.videoPermission && !voice.screenshare())
+            }
+            label={
+              limits().video
+                ? voice.screenshare()
+                  ? t`Stop sharing`
+                  : t`Share screen`
+                : t`Screen share unavailable`
+            }
+            onClick={() => limits().video && voice.toggleScreenshare()}
+          >
+            <Icon name="monitor-arrow-up" size={iconSize()} />
+          </ControlButton>
+        </Show>
         {/* server calls only; the button loads with the first one */}
         <Show when={voice.channel()?.server}>
           <SoundboardButton size={props.size} />

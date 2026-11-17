@@ -20,6 +20,7 @@ import {
 } from "@revolt/i18n/catalog";
 import type { Language } from "@revolt/i18n/Languages";
 import { startEarlyConfig } from "@revolt/instance/earlyConfig";
+import { listenForInstall } from "@revolt/pwa/installPrompt";
 
 import siteCatalogs from "virtual:zrzur-site-catalogs";
 import { bootFailed, bootLoaded, opensSignIn } from "./boot";
@@ -31,6 +32,9 @@ import { watchForStaleBuild } from "./staleBuild";
 
 // a tab opened before an update loads the new build instead of failing
 watchForStaleBuild();
+
+// Android says once, early, that the app can be installed: keep it for later
+listenForInstall();
 
 /**
  * Move into top window if the client was loaded inside itself

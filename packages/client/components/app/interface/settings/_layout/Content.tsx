@@ -156,6 +156,8 @@ const base = css({
   },
 
   _phone: {
+    // the same surface as the list this page was opened from
+    background: "var(--z-bg-frame)",
     borderRadius: 0,
     borderTop: "none",
     borderInlineStart: "none",

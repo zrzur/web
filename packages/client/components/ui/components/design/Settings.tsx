@@ -345,6 +345,15 @@ const Panel = styled("div", {
       "1px solid var(--z-card-border, var(--z-btn-surface-border, color-mix(in srgb, var(--z-fg-primary) 8%, transparent)))",
     background: "var(--z-card-bg)",
     boxShadow: "var(--z-card-lift)",
+    // phones: a group is a filled card with no frame, as in the settings
+    // list (owner, 2026-11-17: one look for every group of rows)
+    _phone: {
+      border: "none",
+      borderRadius: "14px",
+      boxShadow: "none",
+      background:
+        "var(--z-sheet-group, color-mix(in srgb, var(--z-fg-primary) 5%, transparent))",
+    },
   },
 });
 
@@ -480,5 +489,15 @@ const RowControl = styled("div", {
     marginInlineStart: "auto",
     display: "flex",
     alignItems: "center",
+    // Phones: a select or a slider drops under its title anyway; there it
+    // takes the row's whole width, not the 40 % of the screen a wide window
+    // gives it (a 120 px slider and a half-width select under a full-width
+    // title looked unfinished).
+    _phone: {
+      "&:has([aria-haspopup='menu'], input[type='range'])": {
+        flexBasis: "100%",
+        "& > *": { width: "100% !important", maxWidth: "none !important" },
+      },
+    },
   },
 });

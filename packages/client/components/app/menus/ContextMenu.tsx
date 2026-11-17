@@ -70,15 +70,51 @@ function onMenuKeyDown(e: KeyboardEvent) {
   }
 }
 
+/** Fingers on the screen now */
+let fingers = 0;
+if (typeof document !== "undefined") {
+  const count = (event: TouchEvent) => (fingers = event.touches.length);
+  for (const type of ["touchstart", "touchend", "touchcancel"] as const)
+    document.addEventListener(type, count, { capture: true, passive: true });
+}
+
+/**
+ * A long press opens the menu under the finger that is still down. Lifting
+ * that finger must not press the row that appeared beneath it ("Start
+ * thread" opened by itself): presses count once the finger has left.
+ */
+function ignoreOpeningFinger(menu: HTMLElement) {
+  if (!fingers) return;
+  let held = true;
+  const guard = (event: Event) => {
+    if (!held) return;
+    event.preventDefault();
+    event.stopPropagation();
+  };
+  const release = () => {
+    document.removeEventListener("touchend", release, true);
+    document.removeEventListener("touchcancel", release, true);
+    // the press that may follow the lift arrives right after it
+    setTimeout(() => {
+      held = false;
+      menu.removeEventListener("click", guard, true);
+    }, 80);
+  };
+  menu.addEventListener("click", guard, true);
+  document.addEventListener("touchend", release, true);
+  document.addEventListener("touchcancel", release, true);
+}
+
 export function ContextMenu(props: ComponentProps<typeof Base>) {
   return (
     <Base
       role="menu"
       tabIndex={-1}
       // take focus on open so arrows and Escape work right away
-      ref={(el: HTMLDivElement) =>
-        queueMicrotask(() => el.focus({ preventScroll: true }))
-      }
+      ref={(el: HTMLDivElement) => {
+        ignoreOpeningFinger(el);
+        queueMicrotask(() => el.focus({ preventScroll: true }));
+      }}
       onKeyDown={onMenuKeyDown}
       // prevent context menu closing itself before click event
       onpointerdown={(e) => e.stopImmediatePropagation()}
@@ -87,13 +123,22 @@ export function ContextMenu(props: ComponentProps<typeof Base>) {
   );
 }
 
-export const ContextMenuDivider = styled("div", {
+const Divider = styled("div", {
   base: {
     height: "1px",
     margin: "4px 8px",
     background: "var(--z-float-divider, var(--z-border-subtle))",
   },
 });
+
+/**
+ * The line between two groups of a menu. On a phone's sheet the groups are
+ * cards and this is the room between them (FloatingManager finds it by its
+ * attribute).
+ */
+export function ContextMenuDivider() {
+  return <Divider role="separator" data-menu-divider />;
+}
 
 export const ContextMenuItem = styled("a", {
   base: {
@@ -204,6 +249,10 @@ export function ContextMenuButton(props: ButtonProps) {
       button
       role="menuitem"
       tabIndex={0}
+      // for rules written from outside (the phone sheet's row colour)
+      data-destructive={
+        (props as { destructive?: boolean }).destructive ? "" : undefined
+      }
       onKeyDown={(e: KeyboardEvent) => {
         if (e.key === "Enter" || e.key === " ") {
           e.preventDefault();

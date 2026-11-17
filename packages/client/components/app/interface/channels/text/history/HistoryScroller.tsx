@@ -10,7 +10,6 @@ import {
 } from "solid-js";
 
 import { cva } from "styled-system/css";
-import { styled } from "styled-system/jsx";
 
 import { Placeholders } from "./Placeholders";
 import type { HistoryView, Pending, ScrollMark, ViewMove } from "./controller";
@@ -469,6 +468,9 @@ export function HistoryScroller(props: Props) {
     <div
       ref={scroller}
       data-message-scroller
+      // reachable with Tab, so the arrow and page keys can scroll the
+      // conversation when no message in view has a link or button
+      tabIndex={0}
       use:scrollable={{
         direction: "y",
         class: container({ parent: true }),

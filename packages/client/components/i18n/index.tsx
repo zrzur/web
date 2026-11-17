@@ -3,6 +3,7 @@ import { type JSX, Show, createSignal } from "solid-js";
 import { i18n } from "@lingui/core";
 import { I18nProvider as LinguiProvider } from "@lingui/solid";
 
+import { setInstallLanguage } from "../pwa/installLanguage";
 import { browserPreferredLanguage, importCatalog } from "./catalog";
 import { initTime, loadTimeLocale } from "./dayjs";
 import { updateDurationLocale } from "./durations";
@@ -74,4 +75,6 @@ function applyDocumentDirection(key: Language, localeOptions: LocaleOptions) {
   const root = document.documentElement;
   root.lang = key;
   root.dir = rtl ? "rtl" : "ltr";
+  // installed from now on, the app is named in this language
+  setInstallLanguage(key);
 }

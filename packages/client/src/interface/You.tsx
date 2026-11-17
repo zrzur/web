@@ -1,4 +1,4 @@
-import { For, Show } from "solid-js";
+import { For, Show, createSignal } from "solid-js";
 
 import { Trans, useLingui } from "@lingui/solid/macro";
 import { useQuery } from "@tanstack/solid-query";
@@ -7,8 +7,11 @@ import { styled } from "styled-system/jsx";
 
 import { useClient, useUser } from "@revolt/client";
 import { billingAvailable } from "@revolt/client/billing";
+import { useDevice } from "@revolt/common";
 import { presencePatch } from "@revolt/common/lib/statusWrite";
+import { useInstance } from "@revolt/instance";
 import { useModals } from "@revolt/modal";
+import { installWay } from "@revolt/pwa/installPrompt";
 import { useNavigate } from "@revolt/routing";
 import { Header, UserStatus } from "@revolt/ui";
 import { Profile } from "@revolt/ui/components/features";
@@ -37,7 +40,13 @@ type Presence = "Online" | "Idle" | "Busy" | "Invisible";
  * [Edit status] [Edit profile]
  * presence: Online · Idle · Do not disturb · Invisible
  * About me / Member since
- * Friends · Designs · Saved notes · Feather · Settings
+ * Friends · Designs · Saved notes · Feather
+ * Settings: My account · Appearance · Notifications · Voice · Language ·
+ *           Sessions · Connections · All settings
+ *
+ * Each settings row opens the settings on that page, so the whole account is
+ * one screen away from here (owner, 2026-11-17: the page is the place for the
+ * profile and the settings, complete).
  */
 export function You() {
   const user = useUser();
@@ -66,6 +75,13 @@ function Body(props: { user: User }) {
   const client = useClient();
   const navigate = useNavigate();
   const { openModal } = useModals();
+  const { limits } = useInstance();
+  const device = useDevice();
+  const phone = () => device.layout() === "phone";
+  /** phones: the four statuses open under the Status row */
+  const [choosing, setChoosing] = createSignal(false);
+  const friends = () =>
+    client().users.filter((user) => user.relationship === "Friend").length;
 
   const query = useQuery(() => ({
     queryKey: ["profile", props.user.id],
@@ -147,13 +163,165 @@ function Body(props: { user: User }) {
           },
         ]
       : []),
-    {
-      icon: "gear-six",
-      label: () => t`Settings`,
-      hint: () => t`Account, privacy, appearance and more`,
-      onPress: () => settings(),
-    },
   ];
+
+  /** the settings people reach for, each one tap away; the rest behind the last row */
+  const settingRows: { icon: IconName; label: () => string; page?: string }[] =
+    [
+      {
+        icon: "identification-card",
+        label: () => t`My account`,
+        page: "account",
+      },
+      { icon: "paint-brush", label: () => t`Appearance`, page: "appearance" },
+      { icon: "bell", label: () => t`Notifications`, page: "notifications" },
+      {
+        icon: "microphone",
+        label: () => (limits().video ? t`Voice & Video` : t`Voice`),
+        page: "voice",
+      },
+      { icon: "translate", label: () => t`Language`, page: "language" },
+      { icon: "shield-check", label: () => t`Sessions`, page: "sessions" },
+      {
+        icon: "game-controller",
+        label: () => t`Connections`,
+        page: "connections",
+      },
+      { icon: "gear-six", label: () => t`All settings` },
+    ];
+
+  // Phones (design pack approved by the owner, 2026-11-17): the look of the
+  // settings list. The profile on top without a frame, then groups of rows
+  // with bare icons, the value at the end of the row.
+  if (phone())
+    return (
+      <Content data-you-phone>
+        <Card style={theme()} data-flat>
+          <Profile.Banner
+            size="card"
+            user={props.user}
+            bannerUrl={query.data?.animatedBannerURL}
+            onClickAvatar={() => settings("profile")}
+          />
+          <CardBody>
+            <Profile.Identity user={props.user} size="card" />
+            <Action type="button" onClick={() => settings("profile")}>
+              <Icon name="pencil-simple" size={18} />
+              <Trans>Edit profile</Trans>
+            </Action>
+          </CardBody>
+        </Card>
+
+        <PGroup data-status>
+          <PRow
+            type="button"
+            aria-expanded={choosing()}
+            onClick={() => setChoosing(!choosing())}
+          >
+            <StatusSlot data-status-slot>
+              <UserStatus status={presence()} size="12px" />
+            </StatusSlot>
+            <PName>
+              <Trans>Status</Trans>
+            </PName>
+            <PValue>
+              {presences.find((item) => item.value === presence())?.label()}
+              <Icon name={choosing() ? "caret-up" : "caret-down"} size={16} />
+            </PValue>
+          </PRow>
+          <Show when={choosing()}>
+            <div role="radiogroup" aria-label={t`Status`}>
+              <For each={presences}>
+                {(item) => (
+                  <PRow
+                    type="button"
+                    role="radio"
+                    data-inner
+                    aria-checked={presence() === item.value}
+                    onClick={() => {
+                      setPresence(item.value);
+                      setChoosing(false);
+                    }}
+                  >
+                    <StatusSlot data-status-slot>
+                      <UserStatus status={item.value} size="12px" />
+                    </StatusSlot>
+                    <PName>{item.label()}</PName>
+                    <Show when={presence() === item.value}>
+                      <PValue>
+                        <Icon name="check" size={18} />
+                      </PValue>
+                    </Show>
+                  </PRow>
+                )}
+              </For>
+            </div>
+          </Show>
+          <PRow
+            type="button"
+            onClick={() =>
+              openModal({ type: "custom_status", client: client() })
+            }
+          >
+            <Icon name="chat-circle" size={22} />
+            <PName>
+              <Trans>Edit status</Trans>
+            </PName>
+            <PValue>
+              <Icon name="caret-right" size={16} />
+            </PValue>
+          </PRow>
+        </PGroup>
+
+        <PGroup data-links>
+          <For each={links}>
+            {(link) => (
+              <PRow type="button" onClick={link.onPress}>
+                <Icon name={link.icon} size={22} />
+                <PName>{link.label()}</PName>
+                <PValue>
+                  <Show when={link.icon === "users" && friends()}>
+                    {friends()}
+                  </Show>
+                  <Icon name="caret-right" size={16} />
+                </PValue>
+              </PRow>
+            )}
+          </For>
+        </PGroup>
+
+        <PGroup data-settings>
+          <PRow
+            type="button"
+            data-settings-page="all"
+            onClick={() => settings()}
+          >
+            <Icon name="gear-six" size={22} />
+            <PName>
+              <Trans>Settings</Trans>
+            </PName>
+            <PValue>
+              <Icon name="caret-right" size={16} />
+            </PValue>
+          </PRow>
+          <Show when={installWay()}>
+            <PRow
+              type="button"
+              data-install-row
+              onClick={() => openModal({ type: "install_app" })}
+            >
+              <Icon name="download-simple" size={22} />
+              <PName>
+                <Trans>Install the app</Trans>
+              </PName>
+              <PValue>
+                <Icon name="caret-right" size={16} />
+              </PValue>
+            </PRow>
+          </Show>
+        </PGroup>
+      </Content>
+    );
 
   return (
     <Content>
@@ -214,6 +382,30 @@ function Body(props: { user: User }) {
         </Presences>
       </Section>
 
+      {/* phones and tablets that can install the app and have not yet */}
+      <Show when={installWay()}>
+        <InstallRow
+          type="button"
+          data-install-row
+          onClick={() => openModal({ type: "install_app" })}
+        >
+          <InstallIcon>
+            <Icon name="download-simple" size={20} />
+          </InstallIcon>
+          <InstallText>
+            <strong>
+              <Trans>Install the app</Trans>
+            </strong>
+            <small>
+              <Trans>Zrzur on your home screen, in full screen</Trans>
+            </small>
+          </InstallText>
+          <InstallChevron>
+            <Icon name="caret-right" size={16} />
+          </InstallChevron>
+        </InstallRow>
+      </Show>
+
       <Panel data-about>
         <Show when={query.data?.content}>
           <Profile.Bio content={query.data?.content} />
@@ -239,6 +431,34 @@ function Body(props: { user: User }) {
           )}
         </For>
       </Panel>
+
+      <Group aria-labelledby="you-settings">
+        <GroupTitle id="you-settings">
+          <Trans>Settings</Trans>
+        </GroupTitle>
+        <Panel data-settings>
+          <For each={settingRows}>
+            {(row) => (
+              <Row
+                type="button"
+                data-compact
+                data-settings-page={row.page ?? "all"}
+                onClick={() => settings(row.page)}
+              >
+                <RowIcon>
+                  <Icon name={row.icon} size={20} />
+                </RowIcon>
+                <RowText>
+                  <strong>{row.label()}</strong>
+                </RowText>
+                <Chevron>
+                  <Icon name="caret-right" size={16} />
+                </Chevron>
+              </Row>
+            )}
+          </For>
+        </Panel>
+      </Group>
     </Content>
   );
 }
@@ -251,6 +471,92 @@ const Base = styled("div", {
     flexGrow: 1,
     display: "flex",
     flexDirection: "column",
+    // phones: the surface of the settings list, so the page and the
+    // settings it leads to are one place
+    _phone: {
+      background: "var(--z-bg-frame)",
+      "& > :first-child": { background: "var(--z-bg-frame)" },
+    },
+  },
+});
+
+/** Phones: a group of rows, filled, no frame */
+const PGroup = styled("div", {
+  base: {
+    display: "flex",
+    flexDirection: "column",
+    borderRadius: "14px",
+    overflow: "hidden",
+    background:
+      "var(--z-sheet-group, color-mix(in srgb, var(--z-fg-primary) 5%, transparent))",
+  },
+});
+
+/** Phones: one row. [icon] name ........ value > */
+const PRow = styled("button", {
+  base: {
+    display: "flex",
+    alignItems: "center",
+    gap: "14px",
+    width: "100%",
+    minHeight: "52px",
+    padding: "8px 14px",
+    border: "none",
+    background: "none",
+    color: "var(--z-fg-primary)",
+    font: "inherit",
+    fontSize: "16px",
+    fontWeight: 500,
+    textAlign: "start",
+    cursor: "pointer",
+    "--z-icon-color": "var(--z-icon-neutral)",
+    WebkitTapHighlightColor: "transparent",
+    "& + &, div + &, & + div": {
+      borderTop: "1px solid var(--z-float-divider, var(--z-border-subtle))",
+    },
+    "&[data-inner]": { paddingInlineStart: "28px" },
+    "&[data-inner] + &[data-inner]": { borderTop: "none" },
+    _active: {
+      background: "color-mix(in srgb, var(--z-fg-primary) 10%, transparent)",
+    },
+    _focusVisible: {
+      outline: "none",
+      boxShadow: "inset 0 0 0 2px var(--z-focus)",
+    },
+  },
+});
+
+/** The status dot in the icons' column, so every row's name starts on one line */
+const StatusSlot = styled("span", {
+  base: {
+    flex: "none",
+    width: "22px",
+    height: "22px",
+    display: "grid",
+    placeItems: "center",
+  },
+});
+
+const PName = styled("span", {
+  base: {
+    flex: 1,
+    minWidth: 0,
+    overflow: "hidden",
+    textOverflow: "ellipsis",
+    whiteSpace: "nowrap",
+  },
+});
+
+const PValue = styled("span", {
+  base: {
+    flex: "none",
+    display: "inline-flex",
+    alignItems: "center",
+    gap: "6px",
+    fontSize: "14px",
+    fontWeight: 400,
+    color: "var(--z-fg-muted)",
+    "--z-icon-color": "var(--z-icon-muted)",
   },
 });
 
@@ -285,6 +591,15 @@ const Card = styled("div", {
     border: "1px solid var(--z-btn-surface-border, var(--z-border-subtle))",
     background: "var(--profile-surface, var(--z-card-bg, var(--z-bg-raised)))",
     boxShadow: "var(--z-card-lift)",
+    // phones: the profile is the top of the page, edge to edge, no frame
+    "&[data-flat]": {
+      marginInline: "-16px",
+      marginBlockStart: "-16px",
+      border: "none",
+      borderRadius: 0,
+      boxShadow: "none",
+      background: "transparent",
+    },
   },
 });
 
@@ -393,13 +708,12 @@ const Presences = styled("div", {
     // every choice stays in view: a narrow screen gets a second row, not a
     // row that is cut off at the edge
     flexWrap: "wrap",
-    // phones: one row; the four fill it, and in a language with long names
-    // (German) the row swipes sideways and no name is cut
+    // phones: two by two, all four in view in every language (one row cut
+    // "Online" off at the screen edge in German and had to be swiped)
     _phone: {
-      flexWrap: "nowrap",
-      gap: "6px",
-      overflowX: "auto",
-      scrollbarWidth: "none",
+      display: "grid",
+      gridTemplateColumns: "repeat(2, minmax(0, 1fr))",
+      gap: "8px",
     },
   },
 });
@@ -425,11 +739,10 @@ const PresenceChip = styled("button", {
     _motionReduce: { transition: "none" },
     _phone: {
       minHeight: "44px",
-      flex: "1 0 auto",
-      justifyContent: "center",
-      gap: "6px",
-      paddingInline: "10px",
-      fontSize: "13px",
+      minWidth: 0,
+      justifyContent: "flex-start",
+      borderRadius: "12px",
+      paddingInline: "14px",
     },
     "&:hover": {
       color: "var(--z-fg-primary)",
@@ -460,14 +773,86 @@ const Panel = styled("div", {
     background: "var(--z-card-bg, var(--z-bg-raised))",
     boxShadow: "var(--z-card-lift)",
     "&:has(> button)": { gap: "2px" },
-    // phones: the links are a row of tiles, icon over name
-    _phone: {
-      "&[data-links]": {
-        flexDirection: "row",
-        justifyContent: "space-around",
-        padding: "10px 6px",
-      },
+  },
+});
+
+/** A titled group of rows */
+const Group = styled("section", {
+  base: { display: "flex", flexDirection: "column", gap: "8px" },
+});
+
+const GroupTitle = styled("h2", {
+  base: {
+    margin: 0,
+    paddingInline: "8px",
+    fontSize: "13px",
+    fontWeight: 600,
+    lineHeight: "18px",
+    color: "var(--z-fg-muted)",
+  },
+});
+
+/** One row of its own: [icon] Install the app / one line why  > */
+const InstallRow = styled("button", {
+  base: {
+    display: "flex",
+    alignItems: "center",
+    gap: "12px",
+    minHeight: "64px",
+    padding: "10px 16px",
+    borderRadius: "var(--z-shape-card, calc(var(--z-radius, 10px) + 4px))",
+    border: "1px solid var(--z-btn-surface-border, var(--z-border-subtle))",
+    background: "var(--z-card-bg, var(--z-bg-raised))",
+    boxShadow: "var(--z-card-lift)",
+    color: "var(--z-fg-primary)",
+    font: "inherit",
+    textAlign: "start",
+    cursor: "pointer",
+    transition: "background-color 120ms ease",
+    _motionReduce: { transition: "none" },
+    _hover: { background: "var(--z-nav-hover)" },
+    _active: { background: "var(--z-nav-selected)" },
+    _focusVisible: {
+      outline: "2px solid var(--z-focus)",
+      outlineOffset: "2px",
     },
+  },
+});
+
+const InstallIcon = styled("span", {
+  base: {
+    flexShrink: 0,
+    width: "40px",
+    height: "40px",
+    display: "grid",
+    placeItems: "center",
+    borderRadius: "50%",
+    background: "color-mix(in srgb, var(--z-accent) 16%, transparent)",
+    "--z-icon-color": "var(--z-accent-text, var(--z-accent))",
+  },
+});
+
+const InstallText = styled("span", {
+  base: {
+    flex: 1,
+    minWidth: 0,
+    display: "flex",
+    flexDirection: "column",
+    gap: "2px",
+    "& strong": { fontSize: "15px", fontWeight: 600 },
+    "& small": {
+      fontSize: "13px",
+      lineHeight: "18px",
+      color: "var(--z-fg-muted)",
+    },
+  },
+});
+
+const InstallChevron = styled("span", {
+  base: {
+    flexShrink: 0,
+    // RTL: the chevron icon mirrors itself (see styles.css)
+    "--z-icon-color": "var(--z-icon-muted)",
   },
 });
 
@@ -490,15 +875,8 @@ const Row = styled("button", {
     _hover: { background: "var(--z-nav-hover)" },
     _active: { background: "var(--z-nav-selected)" },
     _focusVisible: { outline: "2px solid var(--z-focus)" },
-    _phone: {
-      flex: "1 1 0",
-      minWidth: 0,
-      flexDirection: "column",
-      gap: "2px",
-      minHeight: "56px",
-      padding: "4px 2px",
-      textAlign: "center",
-    },
+    // a name alone, no second line
+    "&[data-compact]": { minHeight: "52px" },
   },
 });
 
@@ -509,8 +887,14 @@ const RowIcon = styled("span", {
     height: "40px",
     display: "grid",
     placeItems: "center",
+    borderRadius: "12px",
+    background: "color-mix(in srgb, var(--z-fg-primary) 6%, transparent)",
     "--z-icon-color": "var(--z-icon-neutral)",
-    _phone: { width: "28px", height: "28px" },
+    "[data-compact] > &": {
+      width: "36px",
+      height: "36px",
+      borderRadius: "10px",
+    },
   },
 });
 
@@ -522,20 +906,10 @@ const RowText = styled("span", {
     flexDirection: "column",
     gap: "2px",
     "& strong": { fontSize: "15px", fontWeight: 600 },
-    "& small": { fontSize: "13px", color: "var(--z-fg-muted)" },
-    // phones: the name under the icon; the hint line is for wider screens
-    _phone: {
-      flex: "none",
-      maxWidth: "100%",
-      "& strong": {
-        fontSize: "12px",
-        fontWeight: 500,
-        overflow: "hidden",
-        textOverflow: "ellipsis",
-        whiteSpace: "nowrap",
-        color: "var(--z-fg-secondary, var(--z-fg-primary))",
-      },
-      "& small": { display: "none" },
+    "& small": {
+      fontSize: "13px",
+      lineHeight: "18px",
+      color: "var(--z-fg-muted)",
     },
   },
 });
@@ -545,6 +919,5 @@ const Chevron = styled("span", {
     flexShrink: 0,
     "--z-icon-color": "var(--z-icon-muted)",
     // RTL: the chevron icon mirrors itself (see styles.css)
-    _phone: { display: "none" },
   },
 });

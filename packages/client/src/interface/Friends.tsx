@@ -94,7 +94,11 @@ export function Friends() {
     { value: "blocked", label: () => <Trans>Blocked</Trans> },
   ];
 
-  const phone = () => layout() === "phone";
+  // Phones, and tablets too (up to 840 px): beside the conversation list the
+  // header has no room for the title, four filters, the search and the
+  // button; the filters shrank to nothing and "Add friend" ran past the
+  // screen edge. There the filters and the search take their own rows.
+  const phone = () => layout() !== "desktop";
 
   const tabsEl = () => (
     <Tabs role="tablist" aria-label={t`Friends filter`}>
@@ -574,6 +578,19 @@ const Tab = styled("button", {
       outline: "2px solid var(--z-focus)",
       outlineOffset: "-2px",
     },
+    // phones: the tabs are chips; the open one is raised and never framed
+    _phone: {
+      height: "44px",
+      paddingInline: "16px",
+      borderRadius: "999px",
+      background:
+        "var(--z-sheet-group, color-mix(in srgb, var(--z-fg-primary) 5%, transparent))",
+      "&[aria-selected='true']": {
+        fontWeight: 600,
+        background: "var(--z-nav-selected)",
+        boxShadow: "none",
+      },
+    },
   },
 });
 
@@ -610,6 +627,10 @@ const Content = styled("div", {
     padding: "16px 24px 32px",
     display: "flex",
     flexDirection: "column",
+    // phones: the list starts and ends on the same edges as the search
+    // field above it (it sat 20 px further in on each side). The page's
+    // own frame already gives 12 px, so 4 more make the 16 of the field.
+    _phone: { padding: "12px 4px 24px" },
   },
 });
 
@@ -704,6 +725,14 @@ const Rows = styled("div", {
     border: "1px solid var(--z-btn-surface-border)",
     background: "var(--z-card-bg)",
     boxShadow: "var(--z-card-lift)",
+    // phones: a filled group with no frame, the look of the settings list
+    // (design pack, 2026-11-17)
+    _phone: {
+      border: "none",
+      boxShadow: "none",
+      background:
+        "var(--z-sheet-group, color-mix(in srgb, var(--z-fg-primary) 5%, transparent))",
+    },
   },
 });
 
@@ -796,5 +825,21 @@ const Actions = styled("div", {
       "--z-icon-color": "var(--z-accent)",
     },
     "& button:active": { boxShadow: "var(--z-btn-pressed)" },
+    // phones: bare icons, no ring round them (design pack, 2026-11-17);
+    // the button keeps its 44 px target
+    _phone: {
+      gap: 0,
+      "& button": {
+        width: "44px !important",
+        height: "44px !important",
+        background: "none !important",
+        border: "none !important",
+        boxShadow: "none !important",
+      },
+      "& button:active": {
+        background:
+          "color-mix(in srgb, var(--z-fg-primary) 10%, transparent) !important",
+      },
+    },
   },
 });
