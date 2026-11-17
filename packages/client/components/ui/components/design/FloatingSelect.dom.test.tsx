@@ -85,15 +85,15 @@ function Harness(props: { inDialog?: boolean; onClose?: () => void }) {
       <MenuItem value="c">Gamma</MenuItem>
     </FloatingSelect>
   );
-  return (
-    <Show when={props.inDialog} fallback={select}>
-      <I18nProvider i18n={i18n}>
-        <Dialog show title="T" onClose={() => props.onClose?.()}>
-          <textarea aria-label="text" />
-          {select}
-        </Dialog>
-      </I18nProvider>
-    </Show>
+  return props.inDialog ? (
+    <I18nProvider i18n={i18n}>
+      <Dialog show title="T" onClose={() => props.onClose?.()}>
+        <textarea aria-label="text" />
+        {select}
+      </Dialog>
+    </I18nProvider>
+  ) : (
+    select
   );
 }
 
