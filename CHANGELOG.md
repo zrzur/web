@@ -11,7 +11,7 @@
 * **A call in a direct message or group:** people sit side by side in the strip over the conversation (the second person was cut off behind the buttons).
 * **An incoming call on a phone:** the card sits under the status bar, the caller's name on its own row, and Decline, Video and Accept are three wide 48 px buttons.
 * **No screen-share button where the browser cannot share** (phone browsers): it only showed an error. You still watch what others share.
-* **Tablets:** channels and servers are no longer picked up and dragged by the finger that scrolls the list (it was already so on phones).
+* **Scrolling the list of rooms no longer drags a room away.** On a tablet, and on a phone whose browser is set to "desktop site", the finger that scrolls the channel list picked a channel up and could drop it somewhere else, changing the server's order. Reordering by dragging is now off wherever a finger is the main input (it was already off on phones in their normal mode).
 
 ### Install Zrzur on your phone (2026-11-17)
 
