@@ -1252,8 +1252,8 @@
     },
     {
       "path": "packages/client/components/app/interface/settings/_layout/Sidebar.tsx",
-      "sha256": "a16a0c97d351277a17666799b61e75858f03ee6c60bd892270831e8ac96b53c3",
-      "bytes": 10737,
+      "sha256": "8358ad9df8650fa03af94e4759f75169b7a2e2ba1102d68a00d25a3a2784b969",
+      "bytes": 10926,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -2758,8 +2758,8 @@
     },
     {
       "path": "packages/client/components/app/menus/ServerContextMenu.tsx",
-      "sha256": "ce179676b087a6beb3b819b87f1c2c729d9a4e346689648a0a97dfbdd79aef1c",
-      "bytes": 16175,
+      "sha256": "104c99b917ca759cea4aa8d5f3715a0755164c991a107ac8a259e65cc436517f",
+      "bytes": 16368,
       "category": "product-source-or-build-manifest"
     },
     {
