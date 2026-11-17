@@ -239,8 +239,22 @@ const chipBase = {
   userSelect: "none",
   transition:
     "background-color 120ms ease, border-color 120ms ease, color 120ms ease, opacity 120ms ease",
-  // the finger needs the height, the row keeps its size
-  _phone: { height: "32px", minWidth: "44px", justifyContent: "center" },
+  position: "relative",
+  // phones: the chip is drawn at its desktop size (owner, 2026-11-17: 44 px
+  // chips looked far too big); the finger still gets 44 px, from an unseen
+  // area around the chip (!important: a phone rule sizes every button)
+  _phone: {
+    height: "28px !important",
+    minHeight: "28px !important",
+    minWidth: "0 !important",
+    justifyContent: "center",
+    _before: {
+      content: '""',
+      position: "absolute",
+      insetBlock: "-8px",
+      insetInline: "-4px",
+    },
+  },
 
   _hover: {
     background: "color-mix(in srgb, var(--z-fg-primary) 12%, transparent)",
