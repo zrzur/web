@@ -727,7 +727,8 @@ const Banner = styled("div", {
     gap: "14px",
     padding: "12px 16px 12px 12px",
     borderRadius: "calc(var(--z-radius, 10px) + 4px)",
-    border: "1px solid var(--z-btn-surface-border)",
+    border:
+      "1px solid var(--z-card-border, var(--z-btn-surface-border, color-mix(in srgb, var(--z-fg-primary) 8%, transparent)))",
     background: "var(--z-card-bg)",
     boxShadow: "var(--z-card-lift)",
     "--tone": "var(--z-fg-secondary)",

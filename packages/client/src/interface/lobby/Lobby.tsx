@@ -1315,7 +1315,8 @@ const Card = styled("section", {
     padding: "var(--lobby-card-pad, 22px)",
     borderRadius: "var(--lobby-radius, 14px)",
     background: "var(--z-card-bg)",
-    border: "1px solid var(--z-border-subtle)",
+    border:
+      "1px solid var(--z-card-border, var(--z-btn-surface-border, color-mix(in srgb, var(--z-fg-primary) 8%, transparent)))",
     boxShadow: "var(--z-card-lift)",
     _phone: { padding: "16px" },
   },
