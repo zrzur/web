@@ -10,6 +10,11 @@
 * **Home screen:** the iPhone icon has a solid background (iOS painted black behind the transparent one), launch images for iPhone and iPad, a maskable icon at both sizes, and shortcuts to Messages, Discover and You on the icon's long-press menu.
 * **Name:** the app is installed as زرزور when the app's language is Arabic and as Zrzur otherwise; Zrzur Beta installs under its own name. Both manifests describe the same app (`id`), so changing language never makes a second one.
 * The service worker keeps scripts, styles and fonts only (it used to keep the app icons and the manifest too).
+* **Phones: the tab bar stays under Discover and You.** Discover had no way back but a swipe, and an installed app has no browser Back button.
+* **320 px phones:** the channel and conversation list no longer runs 12 px past the screen edge (its dates and buttons were cut), and a direct message keeps its name in the header (the video call moves into More there).
+* **Tap targets:** accent colour swatches are 24 px (44 px on phones, were 22), the Emoji / GIF switch and emoji cells are 44 px on touch screens. The Beta badge text is 11 px (was 10).
+* The message list can be reached with Tab and scrolled with the keyboard.
+* Fixed: a thread's header showed garbled characters instead of the "›" between the channel and the thread.
 
 ### Design pack (2026-11-16)
 
