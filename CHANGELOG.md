@@ -6,6 +6,15 @@
 
 * Opening the soundboard in a call put the whole app back on its loading screen until the sounds had loaded, which looked like a refresh. The sounds (and the stage controls) now wait inside their own space; everything else stays on screen.
 
+### Temporary voice rooms and tickets (2026-11-17)
+
+* **Room maker:** a voice channel can be switched to "Room maker" in its settings. Whoever joins it gets a voice room of their own next to it, named after them; they can rename it, set its user limit and remove it. The room goes when everyone has left.
+* **Tickets:** switched on under Server settings, Overview, Tickets (category, the roles that answer, a first message). Members then see "Open a ticket" at the top of the channel list; it opens a private channel with the staff. "Close ticket" is in the channel header for the member and the staff; the staff can reopen a closed ticket.
+* **Room controls:** the member a room was made for locks it, hides it, lets people in by name and hands it over, from a button in the room's header. A room maker can name its rooms ("Room of {name}"). When the room's member leaves, the room goes to whoever has been in it longest.
+* **Ticket kinds, taking, rating and a board:** a server can offer up to five kinds of ticket, each answered by roles of its own; the member picks one and writes a few words. The staff take a ticket ("Take ticket"), anyone in it can save the conversation as a text file, and the member can rate the help when closing. Server settings list the tickets you can see with their state, who took them and the average rating.
+* The ticket icon is Zrzur's own drawing.
+* English, Arabic, German, French, Spanish, Russian and Chinese.
+
 ### Design pack (2026-11-16)
 
 * **250 new designs by Zrzur**, free for everyone: 125 avatar decorations, 67 nameplates and 58 profile effects, in 76 sets. Pixel art for games (arcade, quest, racing, a sunset coast, an arcade hall, a handheld console and more), nature and seasons, the Levant, rank emblems and a game HUD, ears, headphones and crowns, and pixel sets about Syria: the flag, Damascus and its sword, the Ghouta, Aleppo, Hama, Palmyra and the Syrian table. Every name is in English, Arabic and German.

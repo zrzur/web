@@ -479,6 +479,11 @@ msgstr "{0} est complet. Paie {1} maintenant et la mise en avant démarrera auto
 msgid "{0} is not available from other apps. Try another key."
 msgstr "{0} n'est pas disponible depuis d'autres applis. Essaie une autre touche."
 
+#. placeholder {0}: nameOf(claimedBy()!)
+#: src/interface/tickets/TicketAction.tsx
+msgid "{0} is on it"
+msgstr "{0} s’en occupe"
+
 #. placeholder {0}: done()!.name
 #: components/modal/modals/PromoteServer.tsx
 msgid "{0} is on. It may take a moment to show."
@@ -913,6 +918,10 @@ msgstr "{inside} dans le salon en ce moment"
 msgid "{n, plural, one {# person} other {# people}}"
 msgstr "{n, plural, one {# personne} other {# personnes}}"
 
+#: components/app/interface/settings/channel/Overview.tsx
+msgid "{NAME_TOKEN} stands for the member. Empty: the room carries the member's name alone."
+msgstr "{NAME_TOKEN} représente le membre. Vide : le salon porte seulement le nom du membre."
+
 #: components/app/interface/settings/user/connections/ServiceCards.tsx
 msgid "{name} is a US company: what we send it and read from it goes to the United States, where your data may be less protected than in the EU (for example, US authorities may be able to access it)."
 msgstr "{name} est une entreprise américaine : ce que nous lui envoyons et ce que nous y lisons passe par les États-Unis, où vos données peuvent être moins protégées que dans l'UE (les autorités américaines peuvent par exemple y avoir accès)."
@@ -968,6 +977,10 @@ msgstr "{value, plural, one {Le dernier message} other {Les # derniers messages}
 #: components/app/interface/settings/user/voice/InputSensitivityOptions.tsx
 msgid "{value} dB"
 msgstr "{value} dB"
+
+#: components/modal/modals/CloseTicket.tsx
+msgid "{value} out of 5"
+msgstr "{value} sur 5"
 
 #. placeholder {0}: s().days
 #: components/modal/modals/PromoteServer.tsx
@@ -1454,6 +1467,11 @@ msgstr "Une place sur Découvrir"
 msgid "A private channel"
 msgstr "Un salon privé"
 
+#: components/modal/modals/OpenTicket.tsx
+#: src/interface/tickets/TicketLink.tsx
+msgid "A private channel between you and the staff of this server."
+msgstr "Un salon privé entre vous et l’équipe de ce serveur."
+
 #: components/app/interface/settings/user/safety/ReportsAndStanding.tsx
 msgid "A report from another person."
 msgstr "Un signalement d’une autre personne."
@@ -1554,6 +1572,10 @@ msgstr "Une sous-commande n’a qu’un nom, une description et des options."
 #: src/interface/events/EventCard.tsx
 msgid "A text channel"
 msgstr "Un salon textuel"
+
+#: components/app/interface/settings/server/TicketsSettings.tsx
+msgid "A ticket is a private channel: only the member who opened it, the roles you pick and the people who see every channel can read it."
+msgstr "Un ticket est un salon privé : seuls le membre qui l’a ouvert, les rôles que vous choisissez et les personnes qui voient tous les salons peuvent le lire."
 
 #: components/app/interface/settings/user/profile/CreatorStudio.tsx
 #~ msgid "A transparent animation that plays once over a profile. 576 × 1024 px, up to 4 seconds, up to 2 MB. Reviewers look at it before it goes live."
@@ -1864,6 +1886,10 @@ msgstr "Ajoute un fichier à « {label} »."
 #: src/interface/Home.tsx
 msgid "Add a friend"
 msgstr "Ajouter un ami"
+
+#: components/app/interface/settings/server/TicketsSettings.tsx
+msgid "Add a kind"
+msgstr "Ajouter un type"
 
 #: components/modal/modals/AddFriend.tsx
 msgid "Add a new friend"
@@ -2693,6 +2719,10 @@ msgstr "Réponds à ce que les nouveaux membres demandent le plus. Vingt au maxi
 msgid "Answered"
 msgstr "Répondu"
 
+#: components/app/interface/settings/server/TicketsSettings.tsx
+msgid "Answered by (none: the roles above)"
+msgstr "Traité par (aucun : les rôles ci-dessus)"
+
 #: src/interface/developers/docs/DocsPortal.tsx
 msgid "Answering interactions"
 msgstr "Répondre aux interactions"
@@ -3284,6 +3314,10 @@ msgstr "Décoration d’avatar"
 #: src/interface/Designs.tsx
 #~ msgid "Avatar decorations"
 #~ msgstr ""
+
+#: components/app/interface/settings/server/TicketsSettings.tsx
+msgid "Average rating"
+msgstr "Note moyenne"
 
 #: components/ui/components/features/profiles/plateNames.ts
 msgid "Azerbaijan"
@@ -4140,6 +4174,7 @@ msgstr "Canada"
 #: components/modal/modals/BanMember.tsx
 #: components/modal/modals/BanNonMember.tsx
 #: components/modal/modals/BulkDeleteMessages.tsx
+#: components/modal/modals/CloseTicket.tsx
 #: components/modal/modals/CreateBot.tsx
 #: components/modal/modals/CreateCategory.tsx
 #: components/modal/modals/CreateChannel.tsx
@@ -4169,6 +4204,7 @@ msgstr "Canada"
 #: components/modal/modals/MFAFlow.tsx
 #: components/modal/modals/MoveSupercharge.tsx
 #: components/modal/modals/Onboarding.tsx
+#: components/modal/modals/OpenTicket.tsx
 #: components/modal/modals/PinMessage.tsx
 #: components/modal/modals/PlusCheckout.tsx
 #: components/modal/modals/PromoteServer.tsx
@@ -4360,6 +4396,10 @@ msgstr "Catégories"
 #: components/app/interface/settings/user/plugins/DeveloperTab.tsx
 msgid "Category"
 msgstr "Catégorie"
+
+#: components/app/interface/settings/server/TicketsSettings.tsx
+msgid "Category for new tickets"
+msgstr "Catégorie des nouveaux tickets"
 
 #: components/app/interface/settings/category/Overview.tsx
 msgid "Category info"
@@ -5225,6 +5265,7 @@ msgstr "clips"
 #: components/plugins/PluginHostRoot.tsx
 #: components/ui/components/design/Dialog.tsx
 #: components/ui/components/features/profiles/ProfileActions.tsx
+#: components/ui/components/features/voice/rooms/RoomControlsPanel.tsx
 #: components/ui/components/features/voice/soundboard/SoundsUnavailable.tsx
 #: src/interface/navigation/NotificationsPhone.tsx
 #: src/interface/OAuth.tsx
@@ -5282,7 +5323,17 @@ msgstr "Fermer la liste des commandes"
 msgid "Close the stage"
 msgstr "Fermer la scène"
 
+#: components/modal/modals/CloseTicket.tsx
+msgid "Close this ticket?"
+msgstr "Fermer ce ticket ?"
+
+#: components/modal/modals/CloseTicket.tsx
+#: src/interface/tickets/TicketAction.tsx
+msgid "Close ticket"
+msgstr "Fermer le ticket"
+
 #: components/app/interface/safety/labels.tsx
+#: components/app/interface/settings/server/TicketsSettings.tsx
 #: components/app/interface/settings/user/badges/BugQueue.tsx
 #: components/app/interface/settings/user/support/ContactSupport.tsx
 msgid "Closed"
@@ -7499,6 +7550,7 @@ msgstr "Faire un don à Zrzur"
 #: components/modal/modals/MFARecovery.tsx
 #: components/modal/modals/ReportContent.tsx
 #: components/modal/modals/ResetBotToken.tsx
+#: components/modal/modals/RoomControls.tsx
 msgid "Done"
 msgstr "Terminé"
 
@@ -8579,6 +8631,10 @@ msgstr "Commentaires"
 msgid "Feedback & reports"
 msgstr "Retours et signalements"
 
+#: components/ui/components/features/voice/rooms/RoomControlsPanel.tsx
+msgid "Fewer people"
+msgstr "Moins de personnes"
+
 #: components/app/interface/settings/server/insights/InsightsPage.tsx
 msgid "fewer than 5"
 msgstr "moins de 5"
@@ -8709,6 +8765,10 @@ msgstr "Trouve une communauté"
 msgid "Find a look you like"
 msgstr "Trouve un style qui te plaît"
 
+#: components/ui/components/features/voice/rooms/RoomControlsPanel.tsx
+msgid "Find a member"
+msgstr "Chercher un membre"
+
 #: src/interface/navigation/servers/ServerList.tsx
 msgid "Find new servers to join"
 msgstr "Trouver de nouveaux serveurs à rejoindre"
@@ -8784,6 +8844,10 @@ msgstr "Premier servi"
 #: components/modal/modals/CreateThread.tsx
 msgid "First message (optional)"
 msgstr "Premier message (facultatif)"
+
+#: components/app/interface/settings/server/TicketsSettings.tsx
+msgid "First message in a ticket"
+msgstr "Premier message d’un ticket"
 
 #: components/app/interface/settings/user/profile/studio/StudioDesign.tsx
 msgid "First published"
@@ -9534,6 +9598,10 @@ msgstr "Indique entre 1 et {max} choix."
 msgid "Give a Wing"
 msgstr "Offrir une Aile"
 
+#: src/interface/tickets/TicketAction.tsx
+msgid "Give back"
+msgstr "Rendre"
+
 #: components/modal/modals/MoveSupercharge.tsx
 #~ msgid "Give feather"
 #~ msgstr ""
@@ -9864,6 +9932,10 @@ msgstr "Haïti"
 msgid "Halo"
 msgstr "Auréole"
 
+#: components/ui/components/features/voice/rooms/RoomControlsPanel.tsx
+msgid "Hand over the room"
+msgstr "Céder le salon"
+
 #: components/app/interface/discover/Cards.tsx
 #: src/interface/Discover.tsx
 msgid "Hand-picked"
@@ -10029,6 +10101,7 @@ msgid "Hibiscus Ring"
 msgstr "Anneau d'hibiscus"
 
 #: components/app/interface/settings/server/LobbyAppearanceEditor.tsx
+#: components/ui/components/features/voice/rooms/RoomControlsPanel.tsx
 msgid "Hidden"
 msgstr "Masqué"
 
@@ -10218,6 +10291,10 @@ msgstr "L’apparence du serveur, la façon dont on le trouve et le rejoint, et 
 #: components/app/interface/settings/user/safety/ReportsAndStanding.tsx
 msgid "How to appeal"
 msgstr "Comment faire appel"
+
+#: components/modal/modals/CloseTicket.tsx
+msgid "How was the help? (optional)"
+msgstr "Comment était l’aide ? (facultatif)"
 
 #: components/app/interface/settings/user/bots/ViewBot.tsx
 #: components/modal/modals/InteractionsEndpoint.tsx
@@ -10456,6 +10533,10 @@ msgstr "dans {0} depuis {1}"
 msgid "In a channel where you can post polls."
 msgstr "Dans un salon où tu peux publier des sondages."
 
+#: components/modal/modals/OpenTicket.tsx
+msgid "In a few words (optional)"
+msgstr "En quelques mots (facultatif)"
+
 #: components/app/interface/settings/user/Keybinds.tsx
 msgid "In a server channel or a DM with a bot."
 msgstr "Dans un salon de serveur ou en MP avec un bot."
@@ -10517,6 +10598,10 @@ msgstr "En attendant, installez Zrzur depuis le Google Play pour une expérience
 #: components/app/interface/settings/user/Keybinds.tsx
 msgid "In the preview step of a design."
 msgstr "À l'étape d'aperçu d'un design."
+
+#: components/ui/components/features/voice/rooms/RoomControlsPanel.tsx
+msgid "In the room"
+msgstr "Dans le salon"
 
 #. placeholder {0}: date(s().promoted!.ends_at)
 #: components/modal/modals/PromoteServer.tsx
@@ -11325,6 +11410,10 @@ msgstr "Expulser des membres"
 msgid "Kinds of designs"
 msgstr "Types de designs"
 
+#: components/app/interface/settings/server/TicketsSettings.tsx
+msgid "Kinds of ticket"
+msgstr "Types de ticket"
+
 #: components/ui/components/features/profiles/plateNames.ts
 msgid "Kiribati"
 msgstr "Kiribati"
@@ -11597,6 +11686,7 @@ msgid "Let {role} see this channel"
 msgstr "Laisser {role} voir ce salon"
 
 #: components/app/interface/settings/channel/permissions/VisibilitySection.tsx
+#: components/ui/components/features/voice/rooms/RoomControlsPanel.tsx
 msgid "Let in"
 msgstr "Autoriser"
 
@@ -12037,6 +12127,7 @@ msgid "Lock thread: only moderators can write"
 msgstr "Verrouiller le fil : seuls les modérateurs peuvent écrire"
 
 #: components/app/interface/settings/server/ServerAccess.tsx
+#: components/ui/components/features/voice/rooms/RoomControlsPanel.tsx
 msgid "Locked"
 msgstr "Verrouillé"
 
@@ -12810,6 +12901,10 @@ msgstr "Les membres peuvent envoyer un message toutes les {0}."
 msgid "Members couldn't be loaded"
 msgstr "Impossible de charger les membres"
 
+#: components/app/interface/settings/server/TicketsSettings.tsx
+msgid "Members get an \"Open a ticket\" row at the top of the channel list."
+msgstr "Les membres voient une ligne « Ouvrir un ticket » en haut de la liste des salons."
+
 #: components/app/interface/settings/server/WingsSettings.tsx
 msgid "Members give the server Wings. More Wings unlock higher levels and their perks for everyone."
 msgstr "Les membres offrent des Ailes au serveur. Plus il y a d’Ailes, plus les niveaux supérieurs et leurs avantages se débloquent pour tout le monde."
@@ -12821,6 +12916,10 @@ msgstr "Arrivées, départs et changements de rôle des membres"
 #: components/app/interface/settings/server/roles/ServerRoleEditor.tsx
 msgid "Members lose this role and its permissions."
 msgstr "Les membres perdent ce rôle et ses permissions."
+
+#: components/app/interface/settings/server/pages.tsx
+msgid "Members open a private channel with your staff."
+msgstr "Les membres ouvrent un salon privé avec votre équipe."
 
 #: components/app/interface/settings/channel/ForumTags.tsx
 msgid "Members pick up to five tags for each post, and everyone can filter posts by tag."
@@ -13272,6 +13371,10 @@ msgstr "Plus de contenus comme celui-ci"
 msgid "More pages"
 msgstr "Plus de pages"
 
+#: components/ui/components/features/voice/rooms/RoomControlsPanel.tsx
+msgid "More people"
+msgstr "Plus de personnes"
+
 #: components/ui/components/features/profiles/plateNames.ts
 msgid "Morocco"
 msgstr "Maroc"
@@ -13548,6 +13651,7 @@ msgstr "nom"
 #: components/app/interface/settings/server/members/ListMembers.tsx
 #: components/app/interface/settings/server/soundboard/SoundboardList.tsx
 #: components/app/interface/settings/server/soundboard/SoundLibrary.tsx
+#: components/app/interface/settings/server/TicketsSettings.tsx
 #: components/app/interface/settings/user/badges/BetaAdmin.tsx
 #: components/app/interface/settings/user/bots/CommandManager.tsx
 #: components/app/interface/settings/user/plugins/DeveloperTab.tsx
@@ -13568,6 +13672,10 @@ msgstr "Nom A–Z"
 #: components/app/interface/settings/user/profile/studio/StudioEditor.tsx
 msgid "Name and words"
 msgstr "Nom et mots-clés"
+
+#: components/app/interface/settings/channel/Overview.tsx
+msgid "Name of the rooms"
+msgstr "Nom des salons"
 
 #: components/app/interface/settings/user/profile/UserProfileEditor.tsx
 msgid "Name style"
@@ -14077,6 +14185,10 @@ msgstr "Aucun bot n’est encore listé."
 msgid "No bots in this server."
 msgstr "Aucun bot dans ce serveur."
 
+#: components/app/interface/settings/server/TicketsSettings.tsx
+msgid "No category"
+msgstr "Aucune catégorie"
+
 #: components/app/interface/settings/user/plugins/PluginDetail.tsx
 msgid "No changelog."
 msgstr "Aucun journal des modifications."
@@ -14264,6 +14376,7 @@ msgstr "Pas encore de niveau"
 #: components/app/interface/settings/channel/UserLimitSlider.tsx
 #: components/app/interface/settings/server/channels/ChannelsSettings.tsx
 #: components/modal/modals/CreateInvite.tsx
+#: components/ui/components/features/voice/rooms/RoomControlsPanel.tsx
 msgid "No limit"
 msgstr "Aucune limite"
 
@@ -14526,6 +14639,10 @@ msgstr "Personne ne peut rejoindre avec une invitation, le lien personnalisé ou
 #: components/modal/modals/PollVoters.tsx
 msgid "Nobody chose this answer yet."
 msgstr "Personne n’a encore choisi cette réponse."
+
+#: components/ui/components/features/voice/rooms/RoomControlsPanel.tsx
+msgid "Nobody found by that name."
+msgstr "Personne trouvé sous ce nom."
 
 #: components/app/interface/settings/user/badges/BetaAdmin.tsx
 msgid "Nobody here yet."
@@ -15313,6 +15430,14 @@ msgstr "Seul le propriétaire peut faire cela."
 msgid "Only the owner of the server can change how it appears in Discover."
 msgstr "Seul le propriétaire du serveur peut modifier la façon dont il apparaît dans Découvrir."
 
+#: components/ui/components/features/voice/rooms/RoomControlsPanel.tsx
+msgid "Only the people you let in can join. People already inside stay."
+msgstr "Seules les personnes que vous laissez entrer peuvent rejoindre. Celles déjà présentes restent."
+
+#: components/ui/components/features/voice/rooms/RoomControlsPanel.tsx
+msgid "Only the people you let in can see the room."
+msgstr "Seules les personnes que vous laissez entrer voient le salon."
+
 #: components/app/interface/settings/channel/permissions/ChannelVisibility.tsx
 msgid "Only the roles you let in below can see it."
 msgstr "Seuls les rôles que tu autorises ci-dessous peuvent le voir."
@@ -15354,6 +15479,7 @@ msgstr "Seule l’équipe Zrzur peut faire cela."
 #~ msgstr "Oups, quelque chose s'est mal passé ! {e}"
 
 #: components/app/interface/settings/server/ServerAccess.tsx
+#: components/app/interface/settings/server/TicketsSettings.tsx
 #: components/app/interface/settings/user/badges/BugReportDialog.tsx
 #: components/app/interface/settings/user/plugins/DeveloperTab.tsx
 #: components/app/interface/settings/user/plugins/PluginDetail.tsx
@@ -15391,6 +15517,11 @@ msgstr "Ouvrir les paramètres d'une catégorie"
 #: components/app/interface/settings/user/subscriptions/Subscriptions.tsx
 msgid "Open a server's menu and choose Give Wings. Each one is {0} a month."
 msgstr "Ouvre le menu d’un serveur et choisis Offrir des Ailes. Chacune coûte {0} par mois."
+
+#: components/modal/modals/OpenTicket.tsx
+#: src/interface/tickets/TicketLink.tsx
+msgid "Open a ticket"
+msgstr "Ouvrir un ticket"
 
 #: components/app/menus/ChannelContextMenu.tsx
 #: src/interface/navigation/channels/ServerSidebar.tsx
@@ -15530,6 +15661,10 @@ msgstr "Ouvrez cette invitation pour voir où elle mène."
 msgid "Open thread"
 msgstr "Ouvrir le fil"
 
+#: components/modal/modals/OpenTicket.tsx
+msgid "Open ticket"
+msgstr "Ouvrir le ticket"
+
 #: components/app/interface/discover/ServerPage.tsx
 msgid "Open to everyone"
 msgstr "Ouvert à tous"
@@ -15546,6 +15681,10 @@ msgstr "Ouvert à tous"
 #: components/app/interface/settings/user/Native.tsx
 msgid "Open Zrzur when the computer starts"
 msgstr "Ouvrir Zrzur au démarrage de l'ordinateur"
+
+#: components/app/interface/settings/server/TicketsSettings.tsx
+msgid "Open, taken and closed tickets, newest first."
+msgstr "Tickets ouverts, pris et fermés, les plus récents d’abord."
 
 #: components/app/interface/settings/user/appearance/AnimationSettings.tsx
 msgid "Opening"
@@ -16018,6 +16157,10 @@ msgstr "Les gens demandent à rejoindre, et une personne que tu autorises les la
 #~ msgid "People ask to join. You or someone you allow approves them first."
 #~ msgstr ""
 
+#: components/ui/components/features/voice/rooms/RoomControlsPanel.tsx
+msgid "People at most"
+msgstr "Personnes au maximum"
+
 #: components/modal/modals/CreatePoll.tsx
 msgid "People can pick several answers."
 msgstr "Chacun peut choisir plusieurs réponses."
@@ -16066,6 +16209,10 @@ msgstr "Les personnes disposant d’un lien d’invitation peuvent de nouveau en
 #: components/app/interface/settings/server/bans/ListBans.tsx
 msgid "People you ban from the member list show up here."
 msgstr "Les personnes que tu bannis depuis la liste des membres apparaissent ici."
+
+#: components/ui/components/features/voice/rooms/RoomControlsPanel.tsx
+msgid "People you let in"
+msgstr "Personnes que vous laissez entrer"
 
 #: components/app/interface/settings/user/subscriptions/PlusPage.tsx
 msgid "per 7 days"
@@ -17274,6 +17421,11 @@ msgstr "Limite de débit"
 msgid "Rate limits"
 msgstr "Limites de débit"
 
+#. placeholder {0}: rating()
+#: src/interface/tickets/TicketAction.tsx
+msgid "Rated {0} out of 5"
+msgstr "Noté {0} sur 5"
+
 #: components/app/interface/support/OfficialBanner.tsx
 msgid "Re: {first}"
 msgstr "Re : {first}"
@@ -17638,6 +17790,7 @@ msgstr "Serveur distant"
 #: components/modal/modals/RemoveMember.tsx
 #: components/modal/modals/ServerIdentity.tsx
 #: components/ui/components/features/messaging/composition/FileCarousel.tsx
+#: components/ui/components/features/voice/rooms/RoomControlsPanel.tsx
 #: src/interface/Designs.tsx
 msgid "Remove"
 msgstr "Retirer"
@@ -17844,6 +17997,10 @@ msgstr "Retirer la règle pour {0}"
 msgid "Remove this app?"
 msgstr "Retirer cette appli ?"
 
+#: components/app/interface/settings/server/TicketsSettings.tsx
+msgid "Remove this kind"
+msgstr "Supprimer ce type"
+
 #: components/app/menus/UserContextMenu.tsx
 #: components/modal/modals/RemoveTimeout.tsx
 msgid "Remove timeout"
@@ -17934,6 +18091,10 @@ msgstr "Rouvrir"
 #: src/interface/channels/ChannelHeader.tsx
 msgid "Reopen thread"
 msgstr "Rouvrir le fil"
+
+#: src/interface/tickets/TicketAction.tsx
+msgid "Reopen ticket"
+msgstr "Rouvrir le ticket"
 
 #: components/app/interface/settings/user/profile/ReviewQueue.tsx
 msgid "Reopened by an admin"
@@ -18206,6 +18367,7 @@ msgid "Resend verification"
 msgstr "Renvoyer la vérification"
 
 #: components/app/interface/settings/server/LobbyAppearanceEditor.tsx
+#: components/app/interface/settings/server/TicketsSettings.tsx
 #: components/app/interface/settings/user/Account.tsx
 #: components/app/interface/settings/user/bots/ViewBot.tsx
 #: components/app/interface/settings/user/profile/studio/StudioEditor.tsx
@@ -18589,6 +18751,10 @@ msgstr "Rôles dans {0}"
 msgid "Roles Shield trusts"
 msgstr "Rôles auxquels le Bouclier fait confiance"
 
+#: components/app/interface/settings/server/TicketsSettings.tsx
+#~ msgid "Roles that answer tickets"
+#~ msgstr "Rôles qui répondent aux tickets"
+
 #: components/app/interface/settings/server/assistant/AssistantPage.tsx
 msgid "Roles that may use this module"
 msgstr "Rôles qui peuvent utiliser ce module"
@@ -18623,6 +18789,11 @@ msgstr "Chats sur les toits"
 msgid "Room between cards and inside them."
 msgstr "De l’espace entre les cartes et à l’intérieur."
 
+#: components/ui/components/features/voice/callCard/VoiceCallCardActions.tsx
+#: src/interface/navigation/channels/AccountBar.tsx
+msgid "Room controls"
+msgstr "Contrôles du salon"
+
 #: components/app/interface/settings/user/subscriptions/PlusPage.tsx
 msgid "Room for a long story, patch notes or a whole recipe in one message. Edits get the same room."
 msgstr "De la place pour une longue histoire, des notes de version ou toute une recette dans un seul message. Les modifications bénéficient de la même place."
@@ -18630,6 +18801,14 @@ msgstr "De la place pour une longue histoire, des notes de version ou toute une 
 #: components/ui/components/features/voice/callCard/VoiceCallCardPreview.tsx
 msgid "Room full. Admission is checked by the server."
 msgstr "Salle pleine. L’accès est vérifié par le serveur."
+
+#: components/app/interface/settings/channel/Overview.tsx
+msgid "Room maker"
+msgstr "Créateur de salons"
+
+#: components/ui/components/features/voice/rooms/RoomControlsPanel.tsx
+msgid "Room name"
+msgstr "Nom du salon"
 
 #. placeholder {0}: channel.name
 #: components/app/interface/settings/server/channels/ChannelsSettings.tsx
@@ -18850,6 +19029,7 @@ msgstr "Arabie saoudite"
 #: components/app/interface/settings/channel/Overview.tsx
 #: components/app/interface/settings/server/AutoModSettings.tsx
 #: components/app/interface/settings/server/invites/VanityInvite.tsx
+#: components/app/interface/settings/server/TicketsSettings.tsx
 #: components/app/interface/settings/server/webhooks/ServerWebhooks.tsx
 #: components/app/interface/settings/user/account/AgeSettings.tsx
 #: components/app/interface/settings/user/connections/Connections.tsx
@@ -18859,6 +19039,7 @@ msgstr "Arabie saoudite"
 #: components/modal/modals/EditServerFolder.tsx
 #: components/modal/modals/ServerEventEditor.tsx
 #: components/modal/modals/ServerIdentity.tsx
+#: components/ui/components/features/voice/rooms/RoomControlsPanel.tsx
 #: components/ui/components/features/voice/stage/StagePanel.tsx
 #: src/interface/Designs.tsx
 #: src/interface/designs/Dock.tsx
@@ -18919,6 +19100,10 @@ msgstr "Enregistrer les URI de redirection"
 #: components/app/interface/settings/server/assistant/AssistantPage.tsx
 msgid "Save settings file"
 msgstr "Enregistrer le fichier de paramètres"
+
+#: src/interface/tickets/TicketAction.tsx
+msgid "Save the conversation"
+msgstr "Enregistrer la conversation"
 
 #: components/app/interface/settings/server/assistant/AssistantPage.tsx
 msgid "Save these settings as a file, or load them back."
@@ -19166,6 +19351,7 @@ msgid "SDKs"
 msgstr "SDK"
 
 #: components/app/interface/channels/text/interactions/MessageComponents.tsx
+#: components/ui/components/features/voice/rooms/RoomControlsPanel.tsx
 #: src/interface/channels/ChannelHeader.tsx
 #: src/interface/Friends.tsx
 msgid "Search"
@@ -21299,6 +21485,7 @@ msgid "Super Creator is chosen by the team after at least {0} published designs.
 msgstr "Le titre de Super créateur est attribué par l’équipe après au moins {0} designs publiés."
 
 #: components/app/interface/settings/server/assistant/labels.ts
+#: components/app/interface/settings/server/TicketsSettings.tsx
 msgid "Support"
 msgstr "Support"
 
@@ -21553,13 +21740,26 @@ msgstr "En reprendre un"
 msgid "Take this action? It applies immediately and is recorded on the case."
 msgstr "Prendre cette mesure ? Elle s’applique immédiatement et est enregistrée dans le dossier."
 
+#: src/interface/tickets/TicketAction.tsx
+msgid "Take ticket"
+msgstr "Prendre le ticket"
+
 #: components/auth/src/AppUpsell.tsx
 msgid "Take your communities <0>with you.</0>"
 msgstr "Emportez vos communautés <0>avec vous.</0>"
 
+#: components/app/interface/settings/server/TicketsSettings.tsx
+msgid "Taken"
+msgstr "Pris"
+
 #: components/app/interface/settings/user/profile/studio/parts.tsx
 msgid "Taken back as a draft"
 msgstr "Repris en brouillon"
+
+#. placeholder {0}: nameOf(channel.ticket!.claimedById)
+#: components/app/interface/settings/server/TicketsSettings.tsx
+msgid "Taken by {0}"
+msgstr "Pris par {0}"
 
 #: components/app/interface/settings/user/profile/studio/parts.tsx
 msgid "Taken down"
@@ -21645,6 +21845,10 @@ msgstr "Technologie"
 #: components/app/interface/settings/server/assistant/labels.ts
 msgid "Tell members by direct message"
 msgstr "Prévenir les membres par message privé"
+
+#: components/app/interface/settings/server/TicketsSettings.tsx
+msgid "Tell us what you need and we will answer here."
+msgstr "Dites-nous ce dont vous avez besoin et nous vous répondrons ici."
 
 #: components/app/interface/safety/labels.tsx
 msgid "Tell us what's wrong in your own words"
@@ -22221,6 +22425,10 @@ msgstr "La version en ligne reste active jusqu’à ce qu’un relecteur approuv
 msgid "The member sees the rule's name as the reason."
 msgstr "Le membre voit le nom de la règle comme motif."
 
+#: components/modal/modals/CloseTicket.tsx
+msgid "The member who opened it will no longer see it. You can reopen it or delete it later."
+msgstr "Le membre qui l’a ouvert ne le verra plus. Vous pourrez le rouvrir ou le supprimer plus tard."
+
 #: components/app/interface/settings/user/bots/CommandManager.tsx
 msgid "The minimum is larger than the maximum."
 msgstr "Le minimum est plus grand que le maximum."
@@ -22355,6 +22563,10 @@ msgstr "Les motifs n’ont pas pu être chargés."
 #: components/app/interface/settings/user/profile/ReviewQueue.tsx
 msgid "The review queue couldn't be loaded."
 msgstr "La file d’examen n’a pas pu être chargée."
+
+#: components/app/interface/settings/server/TicketsSettings.tsx
+msgid "The roles that see and answer tickets."
+msgstr "Les rôles qui voient les tickets et y répondent."
 
 #: components/app/interface/settings/server/pages.tsx
 msgid "The rules channel, system messages and counters."
@@ -23101,6 +23313,10 @@ msgstr "Ce rôle peut tout faire sur le serveur"
 msgid "This role doesn't exist any more."
 msgstr "Ce rôle n’existe plus."
 
+#: components/modal/modals/RoomControls.tsx
+msgid "This room is yours while you are in it. It is removed when everyone has left."
+msgstr "Ce salon est à vous tant que vous y êtes. Il est supprimé quand tout le monde est parti."
+
 #. placeholder {0}: err.max
 #: components/i18n/errors.tsx
 msgid "This server already has {0} upcoming events. Cancel or delete one first."
@@ -23130,6 +23346,10 @@ msgstr "Ce serveur a atteint le nombre maximal de webhooks ({0}). Supprime-en un
 #: src/interface/ServerHome.tsx
 msgid "This server has no channels yet"
 msgstr "Ce serveur n’a pas encore de salons"
+
+#: components/app/interface/settings/server/TicketsSettings.tsx
+msgid "This server has no roles yet. Until it does, only people who can see every channel answer tickets."
+msgstr "Ce serveur n’a pas encore de rôles. D’ici là, seules les personnes qui voient tous les salons répondent aux tickets."
 
 #: components/modal/modals/ServerEventEditor.tsx
 msgid "This server has no text channel you can see."
@@ -23368,9 +23588,22 @@ msgstr "Cochez la case pour accepter avant de continuer."
 msgid "Ticket categories, one per line"
 msgstr "Catégories de tickets, une par ligne"
 
+#: components/app/interface/settings/server/TicketsSettings.tsx
+msgid "Tickets"
+msgstr "Tickets"
+
+#: components/app/interface/settings/server/pages.tsx
+msgctxt "server-settings"
+msgid "Tickets"
+msgstr "Tickets"
+
 #: components/app/interface/settings/server/assistant/labels.ts
 msgid "Tickets and direct messages in one queue."
 msgstr "Tickets et messages privés dans une seule file."
+
+#: components/app/interface/settings/server/TicketsSettings.tsx
+msgid "Tickets you can see"
+msgstr "Tickets que vous voyez"
 
 #: components/ui/components/features/profiles/pack/labels.generated.ts
 msgid "Tilted Crown"
@@ -24992,6 +25225,10 @@ msgstr "Votes"
 msgid "Voting stops for everyone and the results become final. This can't be undone."
 msgstr "Le vote s’arrête pour tout le monde et les résultats deviennent définitifs. C’est irréversible."
 
+#: components/app/interface/settings/server/TicketsSettings.tsx
+msgid "Waiting"
+msgstr "En attente"
+
 #: components/app/interface/settings/user/profile/studio/StudioDesign.tsx
 msgid "Waiting for a reviewer"
 msgstr "En attente d'un examinateur"
@@ -25379,6 +25616,10 @@ msgstr "Ce qui se passe sur le serveur, dans un seul salon du personnel."
 msgid "What happens next"
 msgstr "Et ensuite"
 
+#: components/modal/modals/OpenTicket.tsx
+msgid "What is it about?"
+msgstr "De quoi s’agit-il ?"
+
 #: components/app/interface/settings/user/plugins/PluginDetail.tsx
 msgid "What it adds"
 msgstr "Ce qu’il ajoute"
@@ -25509,6 +25750,10 @@ msgctxt "scheduled events"
 msgid "Where"
 msgstr "Lieu"
 
+#: components/app/interface/settings/server/TicketsSettings.tsx
+msgid "Where a new ticket appears in the channel list."
+msgstr "Où un nouveau ticket apparaît dans la liste des salons."
+
 #: components/app/interface/settings/user/safety/ReportsAndStanding.tsx
 #: components/app/interface/settings/user/safety/SafetyDashboard.tsx
 msgid "Where it applies"
@@ -25602,6 +25847,10 @@ msgstr "Pendant la création d'un design."
 msgid "While selecting messages to delete."
 msgstr "Pendant la sélection de messages à supprimer."
 
+#: components/app/interface/settings/server/TicketsSettings.tsx
+msgid "Who answers"
+msgstr "Qui répond"
+
 #: components/app/interface/settings/user/Privacy.tsx
 msgid "Who can add you to group chats"
 msgstr "Qui peut t’ajouter à des discussions de groupe"
@@ -25684,6 +25933,10 @@ msgstr "Qui se réunira ici ?"
 #: src/interface/events/EventCard.tsx
 msgid "Who's interested"
 msgstr "Qui est intéressé"
+
+#: components/app/interface/settings/channel/Overview.tsx
+msgid "Whoever joins this channel gets a voice room of their own next to it. The room is removed when everyone has left it."
+msgstr "Toute personne qui rejoint ce salon obtient à côté un salon vocal à elle. Le salon est supprimé quand tout le monde l’a quitté."
 
 #: components/app/interface/settings/server/webhooks/ServerWebhooks.tsx
 msgid "Whoever runs this Zrzur server can turn them on in its configuration."
@@ -25808,6 +26061,10 @@ msgstr "avec {0} autres"
 #: components/app/interface/settings/user/subscriptions/PlusPage.tsx
 msgid "With Feather"
 msgstr "Avec Feather"
+
+#: components/app/interface/settings/server/TicketsSettings.tsx
+msgid "With kinds, a member chooses one when opening a ticket, and each kind can go to roles of its own. Without any, there is one kind of ticket."
+msgstr "Avec des types, un membre en choisit un à l’ouverture, et chaque type peut aller à ses propres rôles. Sans type, il n’y a qu’un seul genre de ticket."
 
 #: components/app/interface/settings/user/Privacy.tsx
 msgid "With Nobody, no one can put you in a group chat, not even friends. You can still make your own."
@@ -26426,6 +26683,10 @@ msgstr "Tu as été déconnecté du vocal."
 msgid "You will need to sign in again."
 msgstr "Tu devras te reconnecter."
 
+#: components/modal/modals/CloseTicket.tsx
+msgid "You will no longer see this ticket. The staff keep it and can open it again for you."
+msgstr "Vous ne verrez plus ce ticket. L’équipe le conserve et peut le rouvrir pour vous."
+
 #. placeholder {0}: name()
 #: components/app/interface/settings/user/connections/ServiceCards.tsx
 msgid "You will sign in on {0}'s own page. Zrzur never sees that password."
@@ -26869,6 +27130,11 @@ msgstr "Ta demande du {0} est en attente d’examen."
 msgid "Your role ranking is too low to take this action."
 msgstr "Le classement de votre rôle est trop bas pour effectuer cette action."
 
+#: components/modal/modals/RoomControls.tsx
+#: components/ui/components/features/voice/rooms/RoomControlsPanel.tsx
+msgid "Your room"
+msgstr "Votre salon"
+
 #: src/interface/Designs.tsx
 msgid "Your saved designs"
 msgstr "Tes designs enregistrés"
@@ -26944,6 +27210,10 @@ msgstr "Tes abonnements"
 #: components/app/interface/settings/user/Keybinds.tsx
 msgid "Your system keeps <0>{keys}</0> for itself. Choose other keys."
 msgstr "Ton système garde <0>{keys}</0> pour lui. Choisis d’autres touches."
+
+#: src/interface/tickets/TicketLink.tsx
+msgid "Your ticket"
+msgstr "Votre ticket"
 
 #: components/app/interface/settings/user/support/ContactSupport.tsx
 msgid "Your tickets couldn't be loaded. Try again later."

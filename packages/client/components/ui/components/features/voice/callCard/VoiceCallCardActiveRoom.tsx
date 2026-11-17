@@ -4,7 +4,9 @@ import { createEffect, createMemo, For, on, onMount, Show } from "solid-js";
 import { TrackLoop } from "solid-livekit-components";
 import { styled } from "styled-system/jsx";
 
+import { useClient } from "@revolt/client";
 import { useDevice } from "@revolt/common";
+import { useModals } from "@revolt/modal";
 import { InRoom, useVoice } from "@revolt/rtc";
 import { IconButton } from "@revolt/ui/components/design";
 import { Symbol } from "@revolt/ui/components/utils/Symbol";
@@ -18,6 +20,9 @@ import {
 
 import { lazyRetry } from "../../../utils/lazyRetry";
 import SoundsUnavailable from "../soundboard/SoundsUnavailable";
+
+import { controlsRoom } from "../rooms/roomControlsOpen";
+
 import { ParticipantTile, tile } from "./ParticipantTile";
 import { VoiceCallCardActions } from "./VoiceCallCardActions";
 import { VoiceCallCardStatus } from "./VoiceCallCardStatus";
@@ -39,6 +44,9 @@ const SoundboardPicker = lazyRetry(
 export function VoiceCallCardActiveRoom() {
   const voice = useVoice();
   const { layout } = useDevice();
+  const { t } = useLingui();
+  const client = useClient();
+  const { openModal } = useModals();
   const collapsed = createMemo(() => voice.layout() === "collapsed");
   // desktop: every call button sits in the voice card at the bottom of the
   // channel list (AccountBar), so the room shows no second row of them. A
@@ -70,6 +78,33 @@ export function VoiceCallCardActiveRoom() {
       >
         {(channel) => <SoundboardPicker channel={channel()} />}
       </Show>
+      {/* a phone's call bar has no room for a seventh button: your own
+          temporary room gets its controls from here */}
+      <Show
+        when={
+          !collapsed() &&
+          layout() === "phone" &&
+          controlsRoom(voice.channel(), client().user?.id)
+        }
+      >
+        <RoomPill
+          type="button"
+          data-voice-control="room"
+          onClick={() =>
+            openModal({ type: "room_controls", channel: voice.channel()! })
+          }
+        >
+          <Icon
+            name={
+              voice.channel()?.voice?.locked
+                ? "lock-simple"
+                : "lock-simple-open"
+            }
+            size={18}
+          />
+          {t`Room controls`}
+        </RoomPill>
+      </Show>
       <VoiceCallControls phone={layout() === "phone"}>
         <VoiceCallControlHolder left collapsed={collapsed()}>
           {/* the voice card already says "Connected" on desktop: here only
@@ -86,6 +121,29 @@ export function VoiceCallCardActiveRoom() {
     </View>
   );
 }
+
+const RoomPill = styled("button", {
+  base: {
+    alignSelf: "center",
+    flexShrink: 0,
+    display: "inline-flex",
+    alignItems: "center",
+    gap: "8px",
+    minHeight: "44px",
+    paddingInline: "16px",
+    marginBlockEnd: "8px",
+    border: "1px solid var(--z-border-subtle)",
+    borderRadius: "999px",
+    background: "var(--z-bg-raised)",
+    color: "var(--z-fg-primary)",
+    fontFamily: "inherit",
+    fontSize: "14px",
+    fontWeight: 600,
+    cursor: "pointer",
+    "--z-icon-color": "currentColor",
+    _focusVisible: { outline: "2px solid var(--z-focus)" },
+  },
+});
 
 /**
  * Only fullscreen remains: the voice room already fills the channel view

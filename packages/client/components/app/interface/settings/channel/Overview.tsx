@@ -33,6 +33,9 @@ import { UserLimitSlider } from "./UserLimitSlider";
 /**
  * Channel overview
  */
+/** What a room maker's name template puts the member's name in place of */
+const NAME_TOKEN = "{name}";
+
 export default function ChannelOverview(props: ChannelSettingsProps) {
   const { t } = useLingui();
   const client = useClient();
@@ -55,6 +58,7 @@ export default function ChannelOverview(props: ChannelSettingsProps) {
       props.channel.voice?.maxUsers?.toString() ?? "",
     ),
     announcement: createFormControl(props.channel.announcement),
+    roomName: createFormControl(props.channel.voice?.roomName ?? ""),
   });
   /* eslint-enable solid/reactivity */
 
@@ -69,6 +73,7 @@ export default function ChannelOverview(props: ChannelSettingsProps) {
       props.channel.voice?.maxUsers?.toString() ?? "",
     );
     editGroup.controls.announcement.setValue(props.channel.announcement);
+    editGroup.controls.roomName.setValue(props.channel.voice?.roomName ?? "");
   }
 
   async function onSubmit() {
@@ -114,6 +119,13 @@ export default function ChannelOverview(props: ChannelSettingsProps) {
       );
     }
 
+    if (props.channel.isRoomMaker && editGroup.controls.roomName.isDirty) {
+      changes.voice = {
+        ...changes.voice,
+        room_name: editGroup.controls.roomName.value.trim(),
+      };
+    }
+
     await props.channel.edit(changes);
   }
 
@@ -122,6 +134,14 @@ export default function ChannelOverview(props: ChannelSettingsProps) {
       !editGroup.controls.announcement.value,
     );
     editGroup.controls.announcement.markDirty(true);
+  };
+
+  /** The room maker switch saves at once, apart from the form */
+  const toggleRoomMaker = () => {
+    if (!props.channel.havePermission("ManageChannel")) return;
+    void props.channel
+      .edit({ voice: { maker: !props.channel.isRoomMaker } })
+      .catch((error) => openModal({ type: "error2", error }));
   };
 
   const submit = Form2.useSubmitHandler(editGroup, onSubmit, onReset);
@@ -195,6 +215,56 @@ export default function ChannelOverview(props: ChannelSettingsProps) {
                     </Trans>
                   </Hint>
                 </SettingsFormPanel>
+                {/* not for a stage, nor for a room a room maker made */}
+                <Show
+                  when={
+                    !props.channel.isStage && !props.channel.temporaryForId
+                  }
+                >
+                  <SettingsRow
+                    icon={<Icon name="speaker-plus" size={20} />}
+                    title={<Trans>Room maker</Trans>}
+                    description={
+                      <Trans>
+                        Whoever joins this channel gets a voice room of their
+                        own next to it. The room is removed when everyone has
+                        left it.
+                      </Trans>
+                    }
+                    disabled={!props.channel.havePermission("ManageChannel")}
+                    onClick={toggleRoomMaker}
+                    control={(ids) => (
+                      <Toggle
+                        checked={props.channel.isRoomMaker}
+                        disabled={
+                          !props.channel.havePermission("ManageChannel")
+                        }
+                        onChange={toggleRoomMaker}
+                        aria-labelledby={ids.labelId}
+                        aria-describedby={ids.descriptionId}
+                        data-testid="room-maker-switch"
+                      />
+                    )}
+                  />
+                  <Show when={props.channel.isRoomMaker}>
+                    <SettingsFormPanel>
+                      <Form2.TextField
+                        maxlength={32}
+                        counter
+                        name="roomName"
+                        control={editGroup.controls.roomName}
+                        label={t`Name of the rooms`}
+                        placeholder={NAME_TOKEN}
+                      />
+                      <Hint>
+                        <Trans>
+                          {NAME_TOKEN} stands for the member. Empty: the room
+                          carries the member's name alone.
+                        </Trans>
+                      </Hint>
+                    </SettingsFormPanel>
+                  </Show>
+                </Show>
               </SettingsSection>
             </Show>
             {/* voice rooms have no chat: slowmode and announcement don't apply

@@ -4,11 +4,15 @@ import { useLingui } from "@lingui/solid/macro";
 import { cva } from "styled-system/css";
 import { styled } from "styled-system/jsx";
 
+import { useClient } from "@revolt/client";
+import { useDevice } from "@revolt/common";
 import { useInstance } from "@revolt/instance";
+import { useModals } from "@revolt/modal";
 import { useVoice } from "@revolt/rtc";
 import { useState } from "@revolt/state";
 import { Icon } from "@revolt/ui/icons/Icon";
 import { lazyRetry } from "../../../utils/lazyRetry";
+import { controlsRoom } from "../rooms/roomControlsOpen";
 
 // the soundboard button and its state are not in the app's first download
 const SoundboardButton = lazyRetry(
@@ -21,6 +25,9 @@ export function VoiceCallCardActions(props: { size: "xs" | "sm" }) {
   const state = useState();
   const { t } = useLingui();
   const { limits } = useInstance();
+  const client = useClient();
+  const { openModal } = useModals();
+  const { layout } = useDevice();
 
   const iconSize = () => (props.size === "xs" ? 18 : 22);
 
@@ -134,6 +141,34 @@ export function VoiceCallCardActions(props: { size: "xs" | "sm" }) {
         {/* server calls only; the button loads with the first one */}
         <Show when={voice.channel()?.server}>
           <SoundboardButton size={props.size} />
+        </Show>
+        {/* your own temporary room: lock it, hide it, hand it over. A phone's
+            bar is full with six buttons: there the room has a button of its
+            own above the bar (VoiceCallCardActiveRoom) */}
+        <Show
+          when={
+            layout() !== "phone" &&
+            controlsRoom(voice.channel(), client().user?.id)
+          }
+        >
+          <ControlButton
+            size={props.size}
+            tone={voice.channel()?.voice?.locked ? "on" : "neutral"}
+            data-voice-control="room"
+            label={t`Room controls`}
+            onClick={() =>
+              openModal({ type: "room_controls", channel: voice.channel()! })
+            }
+          >
+            <Icon
+              name={
+                voice.channel()?.voice?.locked
+                  ? "lock-simple"
+                  : "lock-simple-open"
+              }
+              size={iconSize()}
+            />
+          </ControlButton>
         </Show>
       </Show>
       <ControlButton

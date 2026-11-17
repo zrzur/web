@@ -1,4 +1,4 @@
-﻿import { Accessor, Match, Setter, Show, Switch } from "solid-js";
+import { Accessor, Match, Setter, Show, Switch } from "solid-js";
 
 import { Trans, useLingui } from "@lingui/solid/macro";
 import { Channel } from "@zrzur/sdk/solid";
@@ -36,6 +36,7 @@ import { isOfficialChannel } from "@revolt/app/interface/support/official";
 import { ContextMenu, ContextMenuButton } from "@revolt/app/menus/ContextMenu";
 
 import { HeaderIcon } from "../common/CommonHeader";
+import { TicketAction } from "../tickets/TicketAction";
 
 import { SearchBox } from "./text/SearchBox";
 import { canIHasSidebar, SidebarState } from "./text/TextChannel";
@@ -292,6 +293,10 @@ export function ChannelHeader(props: Props) {
         </Switch>
 
         <Spacer />
+
+        <Show when={props.channel.ticket}>
+          <TicketAction channel={props.channel} />
+        </Show>
 
         <Show when={props.channel.isVoice && !voice.showCard(props.channel)}>
           <IconButton

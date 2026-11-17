@@ -7,6 +7,9 @@ const names = {
   hash: "hash",
   voice: "speaker-high",
   stage: "waveform",
+  // a voice channel that hands out rooms; a member's ticket
+  roomMaker: "speaker-plus",
+  ticket: "ticket",
   pencil: "pencil-simple",
   trash: "trash",
   plus: "plus",
