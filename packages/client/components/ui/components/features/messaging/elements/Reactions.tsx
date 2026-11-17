@@ -230,9 +230,11 @@ const chipBase = {
   display: "inline-flex",
   alignItems: "center",
   margin: 0,
-  border: "1px solid var(--z-border-subtle)",
-  borderRadius: "999px",
-  background: "var(--z-bg-raised)",
+  border: "1px solid transparent",
+  // a rounded rectangle, not a pill (owner, 2026-11-17)
+  borderRadius: "8px",
+  // a neutral fill: an emoji of any colour stays readable on it
+  background: "color-mix(in srgb, var(--z-fg-primary) 7%, transparent)",
   cursor: "pointer",
   userSelect: "none",
   transition:
@@ -241,7 +243,7 @@ const chipBase = {
   _phone: { height: "32px", minWidth: "44px", justifyContent: "center" },
 
   _hover: {
-    borderColor: "var(--z-border-strong)",
+    background: "color-mix(in srgb, var(--z-fg-primary) 12%, transparent)",
   },
   "&:active": { scale: "0.96" },
   _focusVisible: {
@@ -262,10 +264,12 @@ const Chip = styled("button", {
     paddingInline: "8px 10px",
     color: "var(--z-fg-secondary)",
 
+    // yours: the accent frames it and colours the count; the fill stays
+    // neutral, so a red or pink emoji does not sink into a pink chip
     "&[data-active]": {
       color: "var(--z-accent-text, var(--z-accent))",
       borderColor: "var(--z-accent)",
-      background: "var(--z-accent-muted)",
+      background: "color-mix(in srgb, var(--z-fg-primary) 10%, transparent)",
     },
   },
 });
