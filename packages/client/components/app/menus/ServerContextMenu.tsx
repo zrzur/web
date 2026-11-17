@@ -17,7 +17,7 @@ import { Icon } from "@revolt/ui/icons/Icon";
 import { styled } from "styled-system/jsx";
 
 import Breakpoint from "../../common/Breakpoint";
-import { QuickAction, QuickRow } from "./MessageContextMenu";
+import { QuickAction, QuickRow } from "./shared/QuickRow";
 
 import {
   alternate_email as MdAlternateEmail,

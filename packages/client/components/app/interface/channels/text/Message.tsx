@@ -45,7 +45,7 @@ import { MediaPickerProps } from "@revolt/ui/components/features/messaging/compo
 import { AvatarDecoration } from "@revolt/ui/components/features/profiles/AvatarDecoration";
 import { Symbol } from "@revolt/ui/components/utils/Symbol";
 
-import { MessageContextMenu } from "../../../menus/MessageContextMenu";
+import { MessageContextMenu } from "../../../menus";
 import {
   floatingUserMenus,
   floatingUserMenusFromMessage,
