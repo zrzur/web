@@ -262,8 +262,8 @@
     },
     {
       "path": "CHANGELOG.md",
-      "sha256": "ec96c4c4ea9f1293d9f4c5b964049cadec2e3730c509967e54529baa25127096",
-      "bytes": 169962,
+      "sha256": "719b93a6398213d5644b3858e891ce766873b2b86f8d6e8c2127531fc4dfc90c",
+      "bytes": 170593,
       "category": "public-documentation"
     },
     {
@@ -1246,8 +1246,8 @@
     },
     {
       "path": "packages/client/components/app/interface/settings/_layout/Content.tsx",
-      "sha256": "a489a2b86ea443874fa55319024e32f51270219749cf2e0c077cf2b29b74b5fb",
-      "bytes": 8402,
+      "sha256": "f8350711fa1c91a86be4bef63a14882d64fed984885993338079bade2407879f",
+      "bytes": 8501,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -6070,8 +6070,8 @@
     },
     {
       "path": "packages/client/components/ui/components/design/Settings.tsx",
-      "sha256": "78f0db9cce2ec3738c9f559da372e39b8ad3a792ebb2658d3d1334a8d42692e2",
-      "bytes": 13106,
+      "sha256": "2589895da84dcaf77f6166345c39f6ac429e28335bb318b891a6bd8f0bc2c946",
+      "bytes": 13449,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -42028,8 +42028,8 @@
     },
     {
       "path": "packages/client/src/interface/You.tsx",
-      "sha256": "dee1730eb7c5cabb037f0e5d1c9cd81e1fe43f6c257bd5a335f454e036c26b28",
-      "bytes": 19314,
+      "sha256": "c1023b9eedb97967b919b319d98da43d5c7a47754e9f92b5cb90ad0d8765538d",
+      "bytes": 26424,
       "category": "product-source-or-build-manifest"
     },
     {
