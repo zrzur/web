@@ -249,6 +249,10 @@ export function ContextMenuButton(props: ButtonProps) {
       button
       role="menuitem"
       tabIndex={0}
+      // for rules written from outside (the phone sheet's row colour)
+      data-destructive={
+        (props as { destructive?: boolean }).destructive ? "" : undefined
+      }
       onKeyDown={(e: KeyboardEvent) => {
         if (e.key === "Enter" || e.key === " ") {
           e.preventDefault();

@@ -394,6 +394,12 @@ const SheetPanel = styled("div", {
       fontSize: "16px",
       gap: "14px",
     },
+    // a row's name is the thing to read: full-strength text, the icon one
+    // step quieter (grey text on a grey card looked washed out)
+    "& [role='menuitem']:not([data-destructive]):not([data-danger])": {
+      color: "var(--z-fg-primary)",
+      "--z-icon-color": "var(--z-icon-neutral)",
+    },
     // Groups of rows are cards (owner, 2026-11-17): the rows of a group share
     // one surface with a hairline between them, and the divider between two
     // groups is the room between two cards. Written once here, so the

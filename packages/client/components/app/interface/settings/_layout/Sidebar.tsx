@@ -312,10 +312,12 @@ const group = css({
     "& > .button[aria-current='page']:not(:active)": {
       background: "transparent",
     },
-    "& > .button[aria-current='page']": {
+    // a row's name is the thing to read: full-strength text, the icon
+    // one step quieter
+    "& > .button, & > .button[aria-current='page']": {
       fontWeight: 500,
-      color: "var(--z-fg-secondary, var(--md-sys-color-on-surface))",
-      "--z-icon-color": "var(--z-icon-muted)",
+      color: "var(--z-fg-primary)",
+      "--z-icon-color": "var(--z-icon-neutral)",
     },
     "& > .button[data-marker='bar']::before": { display: "none" },
   },
