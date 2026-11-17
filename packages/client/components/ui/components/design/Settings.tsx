@@ -480,5 +480,15 @@ const RowControl = styled("div", {
     marginInlineStart: "auto",
     display: "flex",
     alignItems: "center",
+    // Phones: a select or a slider drops under its title anyway; there it
+    // takes the row's whole width, not the 40 % of the screen a wide window
+    // gives it (a 120 px slider and a half-width select under a full-width
+    // title looked unfinished).
+    _phone: {
+      "&:has([aria-haspopup='menu'], input[type='range'])": {
+        flexBasis: "100%",
+        "& > *": { width: "100% !important", maxWidth: "none !important" },
+      },
+    },
   },
 });
