@@ -4,6 +4,7 @@
 
 ### Phones: page by page (2026-11-17)
 
+* **Search on a phone:** no "Search results" title over a page with no results yet (the search field is the top row); "where" and "sort" are full-width rows of equal choices; before anything is typed the help is one line and the filters one card of rows on the page's own edge (it was a centred notice with a narrow column of examples).
 * **A profile fills its sheet:** the banner runs to the sheet's edges and takes its corners, with the handle over it (it sat as a box inside the sheet).
 * **Notifications:** a channel's name keeps its own direction in an Arabic line ("#Announcements" came out as "Announcements#").
 * **Emoji picker on a touch screen:** the tip says "hold", not "right-click (or hold)".

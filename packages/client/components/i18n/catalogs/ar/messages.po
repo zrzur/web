@@ -28458,3 +28458,5 @@ msgstr "كل الإعدادات"
 #: components/ui/components/features/messaging/composition/picker/EmojiPicker.tsx
 msgid "Tip: hold any emoji to add it to your favorites."
 msgstr "نصيحة: اضغط مطوّلًا على أي إيموجي لإضافته إلى المفضلة."
+
+

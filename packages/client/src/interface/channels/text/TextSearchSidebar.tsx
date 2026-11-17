@@ -216,12 +216,20 @@ export function TextSearchSidebar(props: {
       </Show>
 
       <Show when={!pinsList() && request().empty && !problems().length}>
-        <Empty role="status">
+        <Empty role="status" data-search-help>
           <Icon name="magnifying-glass" size={22} />
           <span>
-            <Trans>
-              Type words to search, or a filter like from:, has: or before:.
-            </Trans>
+            {/* the filter words read left to right in every language: in an
+                Arabic line "from:" came out as ":from" */}
+            <For
+              each={t`Type words to search, or a filter like from:, has: or before:.`.split(
+                /((?:from|has|before):)/,
+              )}
+            >
+              {(part, index) =>
+                index() % 2 ? <bdi dir="ltr">{part}</bdi> : part
+              }
+            </For>
           </span>
           <Help>
             <li>
@@ -336,6 +344,8 @@ const Body = styled("div", {
     gap: "8px",
     paddingBlockEnd: "12px",
     "& > section > a, & > section": { display: "block" },
+    // phones: the page starts a little below the search field
+    _phone: { paddingBlockStart: "12px" },
   },
 });
 
@@ -351,6 +361,19 @@ const Empty = styled("div", {
     fontSize: "14px",
     color: "var(--z-fg-muted)",
     "--z-icon-color": "var(--z-icon-neutral)",
+    // Phones, before anything is typed: not a centred notice with a narrow
+    // column of examples beside it, but one block on the page's own edge:
+    // the line of help, then the filters as one card of rows.
+    _phone: {
+      "&[data-search-help]": {
+        alignItems: "stretch",
+        gap: "10px",
+        paddingBlock: "8px",
+        textAlign: "start",
+        "& > .z-icon": { display: "none !important" },
+        "& > span": { paddingInline: "4px", lineHeight: "22px" },
+      },
+    },
   },
 });
 
@@ -386,6 +409,25 @@ const Help = styled("ul", {
       color: "var(--z-fg-primary)",
       fontFamily: "var(--fonts-monospace, monospace)",
     },
+    // phones: the filters are one card, a hairline between its rows
+    _phone: {
+      gap: 0,
+      marginBlockStart: 0,
+      borderRadius: "14px",
+      overflow: "hidden",
+      fontSize: "14px",
+      background:
+        "var(--z-sheet-group, color-mix(in srgb, var(--z-fg-primary) 5%, transparent))",
+      "& li": { gap: "6px", padding: "12px 14px" },
+      "& li + li": {
+        borderTop: "1px solid var(--z-float-divider, var(--z-border-subtle))",
+      },
+      "& code": {
+        fontSize: "13px",
+        background: "color-mix(in srgb, var(--z-fg-primary) 8%, transparent)",
+      },
+      "& li > span": { color: "var(--z-fg-secondary)" },
+    },
   },
 });
 
@@ -396,6 +438,17 @@ const Row = styled("div", {
     justifyContent: "flex-start",
     paddingBlock: "4px",
     paddingInline: "12px",
+    // phones: each choice row takes the page's width, its choices equal
+    _phone: {
+      paddingInline: "16px",
+      "& > [role='radiogroup']": {
+        display: "grid",
+        gridAutoFlow: "column",
+        gridAutoColumns: "minmax(0, 1fr)",
+        width: "100%",
+      },
+      "& [role='radio']": { height: "44px", paddingInline: "4px" },
+    },
   },
 });
 
