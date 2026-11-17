@@ -262,8 +262,8 @@
     },
     {
       "path": "CHANGELOG.md",
-      "sha256": "bd994fc4b3c6bed939a1478513569dd04167b651d1e8d268eb790b20889f9897",
-      "bytes": 169215,
+      "sha256": "bb33cc0609f8147547f2070766661ef19809e589b4ad6eb2c21ae2bf57b0f464",
+      "bytes": 169982,
       "category": "public-documentation"
     },
     {
@@ -1036,8 +1036,8 @@
     },
     {
       "path": "packages/client/components/app/interface/discover/Cards.tsx",
-      "sha256": "94dbc7d1e6d69c98cbcfa85d131fc1b7cf276e5b7155d9e350946c1b78bf32f6",
-      "bytes": 19492,
+      "sha256": "b5f857afb086193a3aaca04d10e2d52671f4c44f98b3a195f7ec352bd02315ed",
+      "bytes": 19720,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -3340,8 +3340,8 @@
     },
     {
       "path": "packages/client/components/i18n/catalogs/ar/messages.po",
-      "sha256": "a461fde794a37f54e12c520f3f49443365705095b9c483fecef261ab9f2f913b",
-      "bytes": 1144097,
+      "sha256": "c72e5ac61ed011a53763902ce8012d5ebb54d34ec5e4e617368c2ca6bd2b461a",
+      "bytes": 1144345,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -3484,8 +3484,8 @@
     },
     {
       "path": "packages/client/components/i18n/catalogs/de/messages.po",
-      "sha256": "91db97a5757688afad3b403580125d9fea1308536f60f82453bd8afdde028b8e",
-      "bytes": 1057368,
+      "sha256": "c57fc86faef6019bdf4eefa15d5fb554e3ca8c837eac7029e61f1acac9493a14",
+      "bytes": 1057591,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -3520,8 +3520,8 @@
     },
     {
       "path": "packages/client/components/i18n/catalogs/en/messages.po",
-      "sha256": "ed207ee718f3847d6017947531370c48d8230fa07a10ceb990ee3b16ebe52b95",
-      "bytes": 1018795,
+      "sha256": "15cf82cbb44517e964ec59d17b9810e8ef4dafdea6c6895767fd9c57e2c17ea5",
+      "bytes": 1018993,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -3544,8 +3544,8 @@
     },
     {
       "path": "packages/client/components/i18n/catalogs/es/messages.po",
-      "sha256": "f693c97c8abefb57c2d71bd416681980e96946dca02a54c626377043e159c7fc",
-      "bytes": 989098,
+      "sha256": "2eed84ff8946db1ea4e04aa65f0160ad55b62c45117035cbe5c0946e491549f0",
+      "bytes": 989808,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -3604,8 +3604,8 @@
     },
     {
       "path": "packages/client/components/i18n/catalogs/fr/messages.po",
-      "sha256": "a183785ad056d5b124db01ec2ce804e3775a1ce01d3900df293108b42a70a7bb",
-      "bytes": 1005664,
+      "sha256": "f4595825d399a5fc87ab75f2b403048d02ebf44d73dac938084151796d495025",
+      "bytes": 1006369,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -3868,8 +3868,8 @@
     },
     {
       "path": "packages/client/components/i18n/catalogs/ru/messages.po",
-      "sha256": "b4fbe49e24cafd4d2d04a5d4d77c66e0a97314e720f22038a46ded359cebdcb9",
-      "bytes": 1136813,
+      "sha256": "b4ef7008be6b0ce22f8dc72810b8a024187cc78e7c0b28e5fc4d2d04f2fb748c",
+      "bytes": 1137564,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -4036,8 +4036,8 @@
     },
     {
       "path": "packages/client/components/i18n/catalogs/zh-Hans/messages.po",
-      "sha256": "7d300f5b79437331c6d067ff62e332f61d5568d8c444588c681fc0250dd61d1f",
-      "bytes": 959712,
+      "sha256": "a7eceef41651aed85e194259900bfe1dc2312f3a5c7f5375616d68c47d9959dc",
+      "bytes": 960408,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -6340,8 +6340,8 @@
     },
     {
       "path": "packages/client/components/ui/components/features/messaging/composition/picker/EmojiPicker.tsx",
-      "sha256": "a2f2f1c8659cd45c9ec7199ba19568c156de39b90430fd1b1cc5c3d5ecf99840",
-      "bytes": 13374,
+      "sha256": "02460786a365beaea37e74c808e828426a8d470f4604b11cb7d8c24caa022efa",
+      "bytes": 13830,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -7324,8 +7324,8 @@
     },
     {
       "path": "packages/client/components/ui/components/floating/FloatingManager.tsx",
-      "sha256": "24e31b05787682f56d8c0ae39e47a592947b20deb5cf203af3e837e640e0067f",
-      "bytes": 13329,
+      "sha256": "b1a467c040e1228210c2f51bbc482d902bbab0cb7ef2e8dd9887d902ea6b8784",
+      "bytes": 13993,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -40497,6 +40497,12 @@
       "category": "product-source-or-build-manifest"
     },
     {
+      "path": "packages/client/scripts/i18n/more-2026111703.json",
+      "sha256": "cf5a23955694cfd26e27e43fd04306f2af4315e1db41cf0194beac569afabb79",
+      "bytes": 357,
+      "category": "product-source-or-build-manifest"
+    },
+    {
       "path": "packages/client/scripts/i18n/ui-1.json",
       "sha256": "881b9dbbecb93cb06c97e236bca5e9bc47014b7c711857a15a4c01b9e39dfa88",
       "bytes": 14817,
@@ -41118,6 +41124,12 @@
       "path": "packages/client/scripts/i18n/ui-2026111702.json",
       "sha256": "bb263a56b7347d5c08911dd2385bf9b7c55892c4f8667890c39c6b190266c3e3",
       "bytes": 72,
+      "category": "product-source-or-build-manifest"
+    },
+    {
+      "path": "packages/client/scripts/i18n/ui-2026111703.json",
+      "sha256": "ac076c9dd361e736579697ff72c639e2436ae5c99ef3150463c5b34ea2ed86aa",
+      "bytes": 238,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -41968,8 +41980,8 @@
     },
     {
       "path": "packages/client/src/interface/Discover.tsx",
-      "sha256": "1b04f9416c35a2d22df826ae104d7db5eaaa8e167f8816a8bbf863abbd7aec6e",
-      "bytes": 63307,
+      "sha256": "f1d781ab81fcae35bab8a82d6ce064dd7a27b5e434f35041fe144e669ea3b7a6",
+      "bytes": 65464,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -43336,8 +43348,8 @@
     },
     {
       "path": "packages/client/src/interface/navigation/NotificationsPhone.tsx",
-      "sha256": "5a5e0717b0e14d5156b8a9862aa1bc144961aadddccdca8b11c5cb5aed58c059",
-      "bytes": 14117,
+      "sha256": "a189a5da7b36645e87ef8f0d5986452135f7674a5bce9783dbb06f7e3e6f9a5d",
+      "bytes": 14347,
       "category": "product-source-or-build-manifest"
     },
     {
