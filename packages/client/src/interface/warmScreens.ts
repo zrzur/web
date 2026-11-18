@@ -26,6 +26,7 @@ export function mayWarm(connection: Connection | undefined): boolean {
 
 /** the screens, the smallest first */
 const screens: (() => Promise<unknown>)[] = [
+  () => import("./channels/text/ComposerAddPanel"),
   () => import("./navigation/NotificationsPhone"),
   () => import("./You"),
   () => import("./channels/text/ChannelDetailsPhone"),

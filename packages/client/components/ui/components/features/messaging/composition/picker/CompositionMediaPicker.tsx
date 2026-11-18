@@ -63,6 +63,8 @@ interface Props {
   placement?: Placement;
   /** Phones: the content of the "add" panel (see onClickAdd) */
   add?: MediaPickerAdd;
+  /** Told what the panel shows now (nothing when it is closed) */
+  onShown?: (shown: "gif" | "emoji" | "add" | undefined) => void;
 }
 export const CompositionMediaPickerContext = createContext(
   null as unknown as Pick<Props, "onMessage" | "onTextReplacement">,
@@ -71,6 +73,7 @@ export const CompositionMediaPickerContext = createContext(
 export function CompositionMediaPicker(props: Props) {
   const [anchor, setAnchor] = createSignal<HTMLElement>();
   const [show, setShow] = createSignal<Shown>();
+  createEffect(() => props.onShown?.(show()));
   const [altRef, setAltRef] = createSignal<HTMLElement>();
   const [trigger, setTrigger] = createSignal<HTMLElement>();
   function captureTrigger(event: unknown, ref?: HTMLDivElement) {
