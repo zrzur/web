@@ -25,6 +25,24 @@ const isMacOS = navigator.platform.startsWith("Mac");
 const isNative = !!window.native;
 
 /**
+ * The desktop app draws the window's frame itself unless "Custom window
+ * frame" is switched off in its settings; then the system draws one, with
+ * its own title, icon and buttons. Ours showed a second set under it (owner,
+ * 2026-11-18): the logo and the three buttons belong to our frame only.
+ */
+const ownsFrame = (): boolean => {
+  if (!isNative) return false;
+  try {
+    return (
+      (window.desktopConfig.get() as { customFrame?: boolean }).customFrame !==
+      false
+    );
+  } catch {
+    return true;
+  }
+};
+
+/**
  * Top bar across the whole window, on the frame colour shared with the
  * server rail. Shows where you are (server icon + name, or the page) in the
  * centre, connection problems in place of that title, and on the desktop
@@ -129,7 +147,7 @@ export function Titlebar(props: { bare?: boolean }) {
     >
       {/* room for the macOS traffic lights */}
       <Side data-macos={isMacOS && isNative}>
-        <Show when={isNative}>
+        <Show when={ownsFrame()}>
           <img
             src={titlebarMark}
             alt="Zrzur"
@@ -220,7 +238,7 @@ export function Titlebar(props: { bare?: boolean }) {
             </Button>
           </UpdateSlot>
         </Show>
-        <Show when={isNative && !isMacOS}>
+        <Show when={ownsFrame() && !isMacOS}>
           <Action
             aria-label={t`Minimise`}
             style={{ "-webkit-app-region": "no-drag" }}
