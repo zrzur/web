@@ -4,6 +4,7 @@ import {
   Match,
   Show,
   Switch,
+  createEffect,
   createMemo,
   createResource,
   createSignal,
@@ -26,10 +27,13 @@ import { lobbyStyle } from "@revolt/app/interface/settings/server/lobbyAppearanc
 
 import { DEFAULT_SECTIONS } from "@revolt/app/interface/settings/server/lobbySections";
 import { useClient } from "@revolt/client";
+import { useDevice } from "@revolt/common";
 import { Markdown } from "@revolt/markdown";
 import { useModals } from "@revolt/modal";
 import { Navigate, useNavigate, useParams } from "@revolt/routing";
+import { useState } from "@revolt/state";
 import { Avatar, Header, UserStatus } from "@revolt/ui";
+import { SlideState } from "@revolt/ui/components/navigation/SlideDrawer";
 import { Icon } from "@revolt/ui/icons/Icon";
 import { RulesIcon } from "@revolt/ui/icons/RulesIcon";
 
@@ -77,11 +81,44 @@ function useSteps(serverId: string) {
 export function LobbyPage() {
   const params = useParams();
   const client = useClient();
+  const state = useState();
+  const device = useDevice();
   const server = createMemo(() => client()!.servers.get(params.server));
+
+  // Phones: a press on a server shows its channels, and this page lies
+  // behind them, unseen. Drawing it in the same moment made that press the
+  // slowest thing in the app (owner, 2026-11-18: 0.9 s on a slow phone). So
+  // while the lists cover it, the page of a newly opened server is drawn a
+  // moment later, when the phone has nothing else to do, or at once when the
+  // person starts to bring it on screen.
+  const covered = () =>
+    device.layout() === "phone" &&
+    state.appDrawer()?.state === SlideState.HIDDEN;
+  const [drawn, setDrawn] = createSignal<string | undefined>(
+    // eslint-disable-next-line solid/reactivity
+    covered() ? undefined : params.server,
+  );
+  createEffect(() => {
+    const id = params.server;
+    if (drawn() === id) return;
+    if (!covered()) return void setDrawn(id);
+    const later = setTimeout(() => {
+      const idle =
+        window.requestIdleCallback ?? ((run: () => void) => setTimeout(run, 0));
+      idle(() => setDrawn(id), { timeout: 1500 });
+      // long enough for the usual next press (a channel) to come first: that
+      // press leaves this page, and it is then never drawn at all
+    }, 2500);
+    onCleanup(() => clearTimeout(later));
+  });
 
   return (
     <Show when={server()} fallback={<Navigate href="/" />}>
-      {(server) => <Lobby server={server()} />}
+      {(server) => (
+        <Show when={drawn() === params.server}>
+          <Lobby server={server()} />
+        </Show>
+      )}
     </Show>
   );
 }
@@ -869,9 +906,11 @@ function ServerAbout(props: { text: string }) {
     if (!body || typeof ResizeObserver === "undefined") return;
     // a little slack: a fold that hides one line is worse than none
     const measure = () => setLong(body!.scrollHeight > ABOUT_FOLD + 48);
+    // (the observer reports once by itself when it starts, after the page is
+    // laid out; measuring here as well forced a layout of the whole page
+    // while it was still being built)
     const watch = new ResizeObserver(measure);
     watch.observe(body.firstElementChild ?? body);
-    measure();
     onCleanup(() => watch.disconnect());
   });
 
