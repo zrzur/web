@@ -3418,8 +3418,8 @@
     },
     {
       "path": "packages/client/components/i18n/catalogs/ar/messages.po",
-      "sha256": "34c5dc77ff8e60b63cd25d3ae07f3fe31d7b31286b9f56548fcc79d2c0d08545",
-      "bytes": 1164306,
+      "sha256": "b564111c8a4039c59259acfe3b7b0beaddc82d96bff1c2fdb76f5c715cf522ea",
+      "bytes": 1164478,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -3562,8 +3562,8 @@
     },
     {
       "path": "packages/client/components/i18n/catalogs/de/messages.po",
-      "sha256": "a6adf8d642e9eae84a083f535298a902df520c2fedf274091c00f2b346664d45",
-      "bytes": 1076418,
+      "sha256": "e59a8b5bbd3c9c78e9b541f6255c0077a42359ec936a45bca9afbbc2acfd3c97",
+      "bytes": 1076568,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -3598,8 +3598,8 @@
     },
     {
       "path": "packages/client/components/i18n/catalogs/en/messages.po",
-      "sha256": "0d0252cb366add0957d1e25391febacbb93a4b1dd5f04ab6efe1631ac1f1d308",
-      "bytes": 1037309,
+      "sha256": "56f3183080c9ac446b23460e52fc8bbbfd59b347b9bc3b55980229f7f1bec7ad",
+      "bytes": 1037445,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -3622,8 +3622,8 @@
     },
     {
       "path": "packages/client/components/i18n/catalogs/es/messages.po",
-      "sha256": "f1ee5a585415d8c4ff04b94520b9e87fbf008eada6ba7974716c1eb37e4d4928",
-      "bytes": 1007637,
+      "sha256": "6b65022eb511bb1346a80e91143e824dd53d2470f8f4eb7dae6fb7ab26d4c86d",
+      "bytes": 1008071,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -3682,8 +3682,8 @@
     },
     {
       "path": "packages/client/components/i18n/catalogs/fr/messages.po",
-      "sha256": "e61ebd5577a65a15c8b0b4ca48a7a7f976353fb7dc70bf3aaaf72189b00e738e",
-      "bytes": 1024535,
+      "sha256": "23e6a9eeae11e7afeb445b6b69aaf43211069d2dfb4bf16f284abd2c145e606b",
+      "bytes": 1024969,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -3946,8 +3946,8 @@
     },
     {
       "path": "packages/client/components/i18n/catalogs/ru/messages.po",
-      "sha256": "18e208d41bcbc9fa31d93b35c5dfc7a7e1c00d29aef44d37924dc65d6c64c64f",
-      "bytes": 1157969,
+      "sha256": "03b5af4e962bbc92570e7e0bebf64ad410247c0fdfb70e27dea90f232a0675ea",
+      "bytes": 1158442,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -4114,8 +4114,8 @@
     },
     {
       "path": "packages/client/components/i18n/catalogs/zh-Hans/messages.po",
-      "sha256": "9c2ce185c5b2ffef0150399ed32d81a65a9475bfa8132ac5f75dc35b5ed9529a",
-      "bytes": 977870,
+      "sha256": "348bc2b0e92561dc015626083f51598b7c9f1b1416467416643d04d22751d207",
+      "bytes": 978304,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -4180,8 +4180,8 @@
     },
     {
       "path": "packages/client/components/i18n/errors.tsx",
-      "sha256": "8844490620f2ba4a9f7cc779c1df1b0de1cafb8cd5fa61ceef7fcd6e083faa6f",
-      "bytes": 31199,
+      "sha256": "601035c6d8f377f33fac990e7a687ff1088a077bde2597c1829dced4d105bc77",
+      "bytes": 31406,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -40701,6 +40701,12 @@
       "category": "product-source-or-build-manifest"
     },
     {
+      "path": "packages/client/scripts/i18n/more-2026111802.json",
+      "sha256": "3914fa9980dd085cc7e46f030f7bc65d05807339edf9e604e6f61b1a651861c7",
+      "bytes": 301,
+      "category": "product-source-or-build-manifest"
+    },
+    {
       "path": "packages/client/scripts/i18n/ui-1.json",
       "sha256": "881b9dbbecb93cb06c97e236bca5e9bc47014b7c711857a15a4c01b9e39dfa88",
       "bytes": 14817,
@@ -41346,6 +41352,12 @@
       "path": "packages/client/scripts/i18n/ui-2026111801.json",
       "sha256": "f372894cd8fbf03a23c4032ff8d37a064ef28b3e03879a4ec7e92418a66de7f4",
       "bytes": 693,
+      "category": "product-source-or-build-manifest"
+    },
+    {
+      "path": "packages/client/scripts/i18n/ui-2026111802.json",
+      "sha256": "d7503d267b69c93022b4ca1a776e6e9b7d8328dbb58dd3faaca845d2bcdba89c",
+      "bytes": 198,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -42304,8 +42316,8 @@
     },
     {
       "path": "packages/client/src/interface/channels/text/Composition.tsx",
-      "sha256": "b9a9357c589fa063f688caa050664042a1a100e52025fb3155a27af2027764d0",
-      "bytes": 24925,
+      "sha256": "0293613fdc06e28a2f3e25a5d4d703aa2a5c14fc558612e1153759ffa28f1b19",
+      "bytes": 25288,
       "category": "product-source-or-build-manifest"
     },
     {

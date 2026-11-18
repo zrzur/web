@@ -290,7 +290,10 @@ export function useError() {
       }
       if ((err.type as string) === "AutoModBlocked") {
         const { rule } = err as unknown as { rule?: string };
-        return t`This server's AutoMod blocked your message: ${rule ?? ""}`;
+        // a rule may have no name: then the sentence ends, with no colon
+        // left hanging (owner's screenshot, 2026-11-18)
+        if (!rule?.trim()) return t`This server's AutoMod blocked your message.`;
+        return t`This server's AutoMod blocked your message: ${rule}`;
       }
       if ((err.type as string) === "RulesNotAccepted") {
         return t`Accept the server rules before you write here.`;

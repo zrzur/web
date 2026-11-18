@@ -1861,6 +1861,7 @@ msgstr "广告"
 
 #: components/app/interface/settings/server/soundboard/SoundLibrary.tsx
 #: components/modal/modals/AddMembersToGroup.tsx
+#: components/ui/components/features/messaging/composition/picker/CompositionMediaPicker.tsx
 #: src/interface/channels/text/Composition.tsx
 #: src/interface/Discover.tsx
 msgid "Add"
@@ -5294,6 +5295,7 @@ msgstr "短片"
 #: components/ui/components/features/profiles/ProfileActions.tsx
 #: components/ui/components/features/voice/rooms/RoomControlsPanel.tsx
 #: components/ui/components/features/voice/soundboard/SoundsUnavailable.tsx
+#: src/interface/channels/text/Composition.tsx
 #: src/interface/navigation/NotificationsPhone.tsx
 #: src/interface/OAuth.tsx
 msgid "Close"
@@ -14067,6 +14069,7 @@ msgstr "新密钥：请立即复制，之后不会再显示"
 msgid "New this week"
 msgstr "本周新品"
 
+#: src/interface/channels/text/Composition.tsx
 #: src/interface/channels/text/ThreadsPanel.tsx
 msgid "New thread"
 msgstr "新建子区"
@@ -23606,8 +23609,16 @@ msgstr "此服务器暂时不接收新成员。请稍后再试。"
 
 #. placeholder {0}: rule ?? ""
 #: components/i18n/errors.tsx
-msgid "This server's AutoMod blocked your message: {0}"
-msgstr "此服务器的 AutoMod 拦截了你的消息：{0}"
+#~ msgid "This server's AutoMod blocked your message: {0}"
+#~ msgstr "此服务器的 AutoMod 拦截了你的消息：{0}"
+
+#: components/i18n/errors.tsx
+msgid "This server's AutoMod blocked your message: {rule}"
+msgstr ""
+
+#: components/i18n/errors.tsx
+msgid "This server's AutoMod blocked your message."
+msgstr "此服务器的 AutoMod 拦截了你的消息。"
 
 #: components/i18n/errors.tsx
 msgid "This sign up is marked as spam."

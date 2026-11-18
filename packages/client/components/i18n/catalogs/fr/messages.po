@@ -1861,6 +1861,7 @@ msgstr "Pub"
 
 #: components/app/interface/settings/server/soundboard/SoundLibrary.tsx
 #: components/modal/modals/AddMembersToGroup.tsx
+#: components/ui/components/features/messaging/composition/picker/CompositionMediaPicker.tsx
 #: src/interface/channels/text/Composition.tsx
 #: src/interface/Discover.tsx
 msgid "Add"
@@ -5294,6 +5295,7 @@ msgstr "clips"
 #: components/ui/components/features/profiles/ProfileActions.tsx
 #: components/ui/components/features/voice/rooms/RoomControlsPanel.tsx
 #: components/ui/components/features/voice/soundboard/SoundsUnavailable.tsx
+#: src/interface/channels/text/Composition.tsx
 #: src/interface/navigation/NotificationsPhone.tsx
 #: src/interface/OAuth.tsx
 msgid "Close"
@@ -14067,6 +14069,7 @@ msgstr "Nouveau secret : copie-le maintenant, il ne sera plus affiché"
 msgid "New this week"
 msgstr "Nouveautés de la semaine"
 
+#: src/interface/channels/text/Composition.tsx
 #: src/interface/channels/text/ThreadsPanel.tsx
 msgid "New thread"
 msgstr "Nouveau fil"
@@ -23606,8 +23609,16 @@ msgstr "Ce serveur a suspendu les nouveaux membres pour le moment. Réessaie plu
 
 #. placeholder {0}: rule ?? ""
 #: components/i18n/errors.tsx
-msgid "This server's AutoMod blocked your message: {0}"
-msgstr "L’AutoMod de ce serveur a bloqué ton message : {0}"
+#~ msgid "This server's AutoMod blocked your message: {0}"
+#~ msgstr "L’AutoMod de ce serveur a bloqué ton message : {0}"
+
+#: components/i18n/errors.tsx
+msgid "This server's AutoMod blocked your message: {rule}"
+msgstr ""
+
+#: components/i18n/errors.tsx
+msgid "This server's AutoMod blocked your message."
+msgstr "L’AutoMod de ce serveur a bloqué ton message."
 
 #: components/i18n/errors.tsx
 msgid "This sign up is marked as spam."
