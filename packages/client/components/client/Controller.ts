@@ -248,6 +248,8 @@ class Lifecycle {
         this.#controller.state.auth.markValid();
         this.#setLoadedOnce(true);
         this.#connectionFailures = 0;
+        // what was written without a connection goes out now, in order
+        void this.#controller.state.draft.flushOutbox(this.client);
         break;
       case State.Dispose:
         // an error dismissed with a session the server still knows must not

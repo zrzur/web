@@ -9,6 +9,7 @@ import { useInstance } from "@revolt/instance";
 import { AbstractStore } from ".";
 import { State } from "..";
 import { LAYOUT_SECTIONS } from "./Layout";
+import { outboxRetryDelay, outcomeOfError, waitsToBeSent } from "./outboxRules";
 
 export interface DraftData {
   /**
@@ -210,13 +211,19 @@ export class Draft extends AbstractStore<"draft", TypeDraft> {
               typeof message.idempotencyKey === "string" &&
               typeof message.content === "string" // shouldn't be enforced once we support caching files
             ) {
+              // a message the server refused stays refused across a
+              // restart; everything else waits to be sent again
+              const refused =
+                message.status === "failed" &&
+                typeof message.error === "string";
               const msg: UnsentMessage = {
                 idempotencyKey: message.idempotencyKey,
                 content: message.content,
-                status: "unsent",
+                status: refused ? "failed" : "unsent",
                 // TODO: support storing unsent files in local storage
                 // files: [..]
               };
+              if (refused) msg.error = message.error;
 
               if (validateReplies(message.replies)) {
                 msg.replies = message.replies;
@@ -297,16 +304,25 @@ export class Draft extends AbstractStore<"draft", TypeDraft> {
     // Check if this is something we can even send
     if (!draft.content && !draft.files?.length) return;
 
-    // Add message to the outbox
-    const idempotencyKey = ulid();
+    // Add message to the outbox. A message keeps its key for life: a retry
+    // posts under the same one, so the server never takes it twice.
+    const idempotencyKey =
+      (existingDraft as Partial<UnsentMessage> | undefined)?.idempotencyKey ??
+      ulid();
+    const offline = typeof navigator !== "undefined" && !navigator.onLine;
     this.set("outbox", channel.id, [
-      ...this.getPendingMessages(channel.id),
+      ...this.getPendingMessages(channel.id).filter(
+        (entry) => entry.idempotencyKey !== idempotencyKey,
+      ),
       {
         ...draft,
         idempotencyKey,
-        status: "sending",
+        // without a connection it waits; flushOutbox sends it later
+        status: offline ? "unsent" : "sending",
+        error: undefined,
       } as UnsentMessage,
     ]);
+    if (offline) return;
 
     // Try sending the message
     const { content, replies, files } = draft;
@@ -406,21 +422,81 @@ export class Draft extends AbstractStore<"draft", TypeDraft> {
         ),
       );
     } catch (error) {
-      const type = (error as { type?: unknown } | undefined)?.type;
+      const outcome = outcomeOfError(error);
+      if (outcome.kind === "sent") {
+        // an earlier attempt reached the server: this message is posted
+        this.set(
+          "outbox",
+          channel.id,
+          this.getPendingMessages(channel.id).filter(
+            (entry) => entry.idempotencyKey !== idempotencyKey,
+          ),
+        );
+        return;
+      }
       this.set(
         "outbox",
         channel.id,
         this.getPendingMessages(channel.id).map((entry) =>
           entry.idempotencyKey === idempotencyKey
-            ? {
-                ...entry,
-                status: "failed",
-                error: typeof type === "string" ? type : undefined,
-              }
+            ? outcome.kind === "wait"
+              ? // the network failed: it waits and goes out by itself
+                { ...entry, status: "unsent" as const, error: undefined }
+              : { ...entry, status: "failed" as const, error: outcome.error }
             : entry,
         ),
       );
+      if (outcome.kind === "wait") this.#scheduleFlush(client);
     }
+  }
+
+  /** Passes of the queue that failed in a row */
+  #flushFailures = 0;
+  #flushTimer: ReturnType<typeof setTimeout> | undefined;
+  #flushing = false;
+
+  /** Try the queue again after a pause that grows with each failure */
+  #scheduleFlush(client: Client) {
+    if (this.#flushTimer) return;
+    this.#flushFailures++;
+    this.#flushTimer = setTimeout(() => {
+      this.#flushTimer = undefined;
+      void this.flushOutbox(client);
+    }, outboxRetryDelay(this.#flushFailures));
+  }
+
+  /**
+   * Send what waits in the outbox: called when the connection is back and
+   * after a failed attempt. One message at a time and in the order written,
+   * so a conversation keeps its order; a channel whose message fails keeps
+   * the rest for the next pass.
+   * @param client Client
+   */
+  async flushOutbox(client: Client) {
+    if (this.#flushing) return;
+    if (typeof navigator !== "undefined" && !navigator.onLine) return;
+    this.#flushing = true;
+    let failed = false;
+    try {
+      for (const channelId of Object.keys(this.get().outbox)) {
+        const channel = client.channels.get(channelId);
+        if (!channel) continue;
+        for (const entry of [...this.getPendingMessages(channelId)]) {
+          if (!waitsToBeSent(entry)) continue;
+          await this.sendDraft(client, channel, entry);
+          const after = this.getPendingMessages(channelId).find(
+            (now) => now.idempotencyKey === entry.idempotencyKey,
+          );
+          if (after && waitsToBeSent(after)) {
+            failed = true;
+            break;
+          }
+        }
+      }
+    } finally {
+      this.#flushing = false;
+    }
+    if (!failed) this.#flushFailures = 0;
   }
 
   /**
@@ -453,13 +529,13 @@ export class Draft extends AbstractStore<"draft", TypeDraft> {
    */
   retrySend(client: Client, channel: Channel, idempotencyKey: string) {
     batch(() => {
-      const draft = this.get().outbox[channel.id].find(
+      const draft = this.get().outbox[channel.id]?.find(
         (entry) => entry.idempotencyKey === idempotencyKey,
       );
-      // TODO: validation?
-
-      this.cancelSend(channel, idempotencyKey);
-      this.sendDraft(client, channel, draft!);
+      if (!draft) return;
+      // the same key again: if the first attempt did reach the server, it
+      // answers that it has this message and nothing is posted twice
+      void this.sendDraft(client, channel, draft);
     });
   }
 

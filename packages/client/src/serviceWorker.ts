@@ -21,6 +21,12 @@ import {
   isRuntimeAsset,
   overLimit,
 } from "./runtimeAssets";
+import {
+  SHELL_CACHE_PREFIX,
+  buildKey,
+  openApp,
+  staleShellCaches,
+} from "./shellPage";
 
 declare let self: ServiceWorkerGlobalScope;
 
@@ -130,21 +136,48 @@ self.addEventListener("push", (event) => {
 // open page, also in the middle of a message or a call. A page opened after
 // the release asks right away, a page opened before it shows "Update".
 // Once active, the new worker controls the open pages without a reload.
-self.addEventListener("activate", (event) => {
-  event.waitUntil(self.clients.claim());
-});
-
-cleanupOutdatedCaches();
-
 // Only the shell is listed (scripts/precacheShell.mjs); the rest of the app is
 // kept the first time it is used
 // (scripts and styles only: the build tool adds the web manifest to the list
 // by itself, and nothing else may be kept)
-precacheAndRoute(
-  self.__WB_MANIFEST.filter((entry) =>
-    /\.(js|css)$/.test(typeof entry === "string" ? entry : entry.url),
-  ),
+const SHELL_FILES = self.__WB_MANIFEST.filter((entry) =>
+  /\.(js|css)$/.test(typeof entry === "string" ? entry : entry.url),
 );
+
+// The app's page of this build, for opening without a connection
+// (src/shellPage.ts): one cache per build, named after the build's files
+const SHELL_CACHE =
+  SHELL_CACHE_PREFIX +
+  buildKey(
+    SHELL_FILES.map((entry) =>
+      typeof entry === "string"
+        ? entry
+        : `${entry.url}?${entry.revision ?? ""}`,
+    ),
+  );
+const SHELL_KEY = new URL("__shell", self.registration.scope).href;
+
+self.addEventListener("activate", (event) => {
+  event.waitUntil(
+    Promise.all([
+      self.clients.claim(),
+      // the kept pages of older builds: their files are gone from the precache
+      caches
+        .keys()
+        .then((names) =>
+          Promise.all(
+            staleShellCaches(names, SHELL_CACHE).map((name) =>
+              caches.delete(name),
+            ),
+          ),
+        ),
+    ]),
+  );
+});
+
+cleanupOutdatedCaches();
+
+precacheAndRoute(SHELL_FILES);
 
 async function cachedAsset(request: Request) {
   const cache = await caches.open(RUNTIME_CACHE);
@@ -166,17 +199,27 @@ self.addEventListener("fetch", (event) => {
   const url = new URL(event.request.url);
   const scope = new URL(self.registration.scope).pathname;
 
-  // Opening the app: always from the network, never from a cache. Only when
-  // the network cannot be reached at all, a page that says so and asks again
+  // Opening the app: the network first, always. Without an answer from it,
+  // the page kept from the last open (the app then starts offline); with
+  // nothing kept yet, a page that says so and asks again
   if (isAppNavigation(event.request, url, self.location.origin, scope)) {
     event.respondWith(
-      fetch(event.request).catch(
-        async () =>
+      openApp<Response>({
+        ask: () => fetch(event.request),
+        copy: (response) => response.clone(),
+        store: {
+          get: async () =>
+            (await (await caches.open(SHELL_CACHE)).match(SHELL_KEY)) ??
+            undefined,
+          put: async (response) =>
+            (await caches.open(SHELL_CACHE)).put(SHELL_KEY, response),
+        },
+        offline: async () =>
           new Response(offlinePage(await offlineLanguages()), {
             status: 503,
             headers: OFFLINE_HEADERS,
           }),
-      ),
+      }),
     );
     return;
   }
