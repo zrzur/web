@@ -6472,8 +6472,8 @@
     },
     {
       "path": "packages/client/components/ui/components/features/messaging/composition/picker/CompositionMediaPicker.tsx",
-      "sha256": "73106d87a00270c411f44df4ff2b8b4ca6f366bfa1428e4ac1382d911a089d13",
-      "bytes": 10157,
+      "sha256": "f1de3e586138ff559d2fa99f504b1e6c987a721e1e11464c66a1cdf41c863092",
+      "bytes": 10337,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -6520,8 +6520,8 @@
     },
     {
       "path": "packages/client/components/ui/components/features/messaging/composition/picker/picker.css",
-      "sha256": "a4112ab6b7ffe41c78507222138f5d19422f3f55d96d212503163b1c3da90c95",
-      "bytes": 16874,
+      "sha256": "1880829dbd7f07a8774b76103fb4179ab8ac450e93af840b3d2d69cc96b4ff6d",
+      "bytes": 17232,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -42292,8 +42292,8 @@
     },
     {
       "path": "packages/client/src/interface/channels/text/Composition.tsx",
-      "sha256": "5fb6f55b5ecc60cb4fb57a970fbe5b28ad1b5fa49562a21abf5937171f3bd800",
-      "bytes": 24032,
+      "sha256": "b9a9357c589fa063f688caa050664042a1a100e52025fb3155a27af2027764d0",
+      "bytes": 24925,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -43732,8 +43732,8 @@
     },
     {
       "path": "packages/client/src/interface/warmScreens.ts",
-      "sha256": "d9d539630ac5b8d67e14c8d8bcf69387f44c10192455a699e5805bb0e827766d",
-      "bytes": 2244,
+      "sha256": "3c88d8d08da56e20a225463017aba8835df51fa97d5fff90d637f38116b9d763",
+      "bytes": 2296,
       "category": "product-source-or-build-manifest"
     },
     {
