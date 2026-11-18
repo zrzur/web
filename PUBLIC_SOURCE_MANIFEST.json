@@ -43570,8 +43570,8 @@
     },
     {
       "path": "packages/client/src/interface/lobby/Lobby.tsx",
-      "sha256": "cab3b7d6333bd9ffbdbd441df5c783b4c43773e83542bd8fdb8b0fb9191c9d1d",
-      "bytes": 53118,
+      "sha256": "f197e39d4c5a639268803de2be35dc26ec700fb97c04c6ddb134042a900c82f9",
+      "bytes": 54831,
       "category": "product-source-or-build-manifest"
     },
     {
