@@ -252,7 +252,13 @@ export function MessageComposition(props: Props) {
         });
         return state.draft.sendDraft(client(), props.channel);
       }
-      return props.channel.sendMessage(useContent);
+      // a GIF (or anything else sent in one tap) goes out at once, with no
+      // row in the chat while it is on its way: a refusal (auto-moderation,
+      // slow mode, no connection) must be said, or the tap looks like it
+      // did nothing (owner, 2026-11-18: "a GIF is not sent")
+      return props.channel.sendMessage(useContent).catch((error) => {
+        openModal({ type: "error2", error });
+      });
     }
 
     state.draft.sendDraft(client(), props.channel);
