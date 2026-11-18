@@ -262,8 +262,8 @@
     },
     {
       "path": "CHANGELOG.md",
-      "sha256": "62173db45e02f9b5f86650d55ebb44a13998c6788c6ef5c31ed891a57e1d5061",
-      "bytes": 175040,
+      "sha256": "a89e40023432e92e2ce54ce2ccff6d0982d59f112632ff878d57fa7cf4f7807c",
+      "bytes": 176470,
       "category": "public-documentation"
     },
     {
@@ -42136,8 +42136,8 @@
     },
     {
       "path": "packages/client/src/index.tsx",
-      "sha256": "1d140e3478caedcea0de9449349d5cc9dec6257eb8c723deac6111e492370baa",
-      "bytes": 4069,
+      "sha256": "9c9ee866f308999d2d7eceea56972a6766ce3e78f5c53312cef942f11f61c593",
+      "bytes": 4233,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -43716,6 +43716,18 @@
       "path": "packages/client/src/offlinePage.ts",
       "sha256": "cfc232819d58587cdcbb645f3fbe94a53469313c621d4ce8199426249a8aabd0",
       "bytes": 5147,
+      "category": "product-source-or-build-manifest"
+    },
+    {
+      "path": "packages/client/src/offlinePictures.dom.test.tsx",
+      "sha256": "9143cd630a62483dbacde1bcfef452a653b633c917bdf376268a189331beca5b",
+      "bytes": 2287,
+      "category": "synthetic-test-source-or-fixture"
+    },
+    {
+      "path": "packages/client/src/offlinePictures.ts",
+      "sha256": "26cc94155531b8d76a3d402f6be97fc574826694ffbc2551abaa4819bcc379e7",
+      "bytes": 2982,
       "category": "product-source-or-build-manifest"
     },
     {
