@@ -6472,8 +6472,8 @@
     },
     {
       "path": "packages/client/components/ui/components/features/messaging/composition/picker/CompositionMediaPicker.tsx",
-      "sha256": "1e5520c7c7e99c4ce7fe32da6ab000183cbc44c122df5fad03db2e9ee4454b62",
-      "bytes": 9164,
+      "sha256": "73106d87a00270c411f44df4ff2b8b4ca6f366bfa1428e4ac1382d911a089d13",
+      "bytes": 10157,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -42285,9 +42285,15 @@
       "category": "product-source-or-build-manifest"
     },
     {
+      "path": "packages/client/src/interface/channels/text/ComposerAddPanel.tsx",
+      "sha256": "828deb17b0899755ce0b6ccbcaf090372b0047ef2aca2a79fe07d059884fc133",
+      "bytes": 2205,
+      "category": "product-source-or-build-manifest"
+    },
+    {
       "path": "packages/client/src/interface/channels/text/Composition.tsx",
-      "sha256": "bcd090a5f56a392a4c5ecd456d401d472cc142bbacf376f55aa78564383ec46b",
-      "bytes": 25146,
+      "sha256": "5fb6f55b5ecc60cb4fb57a970fbe5b28ad1b5fa49562a21abf5937171f3bd800",
+      "bytes": 24032,
       "category": "product-source-or-build-manifest"
     },
     {
