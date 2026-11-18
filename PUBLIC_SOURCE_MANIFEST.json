@@ -712,8 +712,8 @@
     },
     {
       "path": "packages/client/components/app/interface/channels/text/Messages.tsx",
-      "sha256": "0ed55fc96a9c4fab5e35279ab60a8873971e165a00404a63316decc94c6c5b0b",
-      "bytes": 23053,
+      "sha256": "1f98a20c11f9483cfef564e9af77f68985fe1b4d67638ddf1626f39fe1877364",
+      "bytes": 23384,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -760,8 +760,8 @@
     },
     {
       "path": "packages/client/components/app/interface/channels/text/history/HistoryScroller.tsx",
-      "sha256": "368baa6a9dd7f185f1ee4337d815846a6c9b8f0e31104a039cbec077a25e0d4d",
-      "bytes": 17283,
+      "sha256": "59b8bc9c1524749826d8657397be396d28fbd2be413f07e4031ce8f43ff5a24f",
+      "bytes": 18018,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -778,14 +778,14 @@
     },
     {
       "path": "packages/client/components/app/interface/channels/text/history/controller.test.ts",
-      "sha256": "a96ff64e676c183b4559853a111db5064736180c5822a335feb90ff3c5d23ad0",
-      "bytes": 18911,
+      "sha256": "2c08a13a9a2d82e7133ea019724abbe7d2c0c3b253833e1b07f9d64157fd5c23",
+      "bytes": 19730,
       "category": "synthetic-test-source-or-fixture"
     },
     {
       "path": "packages/client/components/app/interface/channels/text/history/controller.ts",
-      "sha256": "8db12b7eb633d988e63d8e80283d56f7a508f82caa50a5bef421bfe61782e216",
-      "bytes": 15813,
+      "sha256": "f3ef12f9930db139bed08a26394bd0ea871c99ccc09d065dce360464237be920",
+      "bytes": 16082,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -5182,8 +5182,8 @@
     },
     {
       "path": "packages/client/components/modal/modals/VoiceRoom.tsx",
-      "sha256": "fb016574d8d795c274c2fed7c90cc976e03723b0a7d5aa364e6271b78bc0a7f0",
-      "bytes": 5212,
+      "sha256": "c4f72270dee98c7dc96bf98458db289c149c8bb72ca2c8210d9ff1dcd6befe07",
+      "bytes": 5489,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -7306,8 +7306,8 @@
     },
     {
       "path": "packages/client/components/ui/components/features/voice/callCard/ParticipantTile.tsx",
-      "sha256": "e8bd3279010ed17dc6e9f6ba2f6ebb1dcbf8bf9700cb1ce3d84a86490120bff4",
-      "bytes": 14851,
+      "sha256": "c4a1791d9a1fdd904998d440c81718d157bd1848774ef68907ab93e12568b38a",
+      "bytes": 15101,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -7350,6 +7350,18 @@
       "path": "packages/client/components/ui/components/features/voice/callCard/VoiceCallCardStatus.tsx",
       "sha256": "af9d6de782cb30c591eef3b2799ba6fc64b766a2130615d9036ae9e4b04ff122",
       "bytes": 4883,
+      "category": "product-source-or-build-manifest"
+    },
+    {
+      "path": "packages/client/components/ui/components/features/voice/callCard/keepVideoPlaying.dom.test.tsx",
+      "sha256": "1844eb1b127883139925603847bd13a5be84a6c6be82cd78764629a14223e70a",
+      "bytes": 2603,
+      "category": "synthetic-test-source-or-fixture"
+    },
+    {
+      "path": "packages/client/components/ui/components/features/voice/callCard/keepVideoPlaying.ts",
+      "sha256": "cc2bad1ab14c2e75149906a608d413db9ead034114da3634b9301237d113bafb",
+      "bytes": 1479,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -9220,8 +9232,8 @@
     },
     {
       "path": "packages/client/components/ui/styles.css",
-      "sha256": "3331bddcc71e52139059b2e1d7138013160c62ffd35f81152cc4832ad2b72e55",
-      "bytes": 12147,
+      "sha256": "59534842b891c391de663e6d05ef101fde982b5795d2547a7a2ae4aa2fefeff8",
+      "bytes": 12531,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -42280,8 +42292,8 @@
     },
     {
       "path": "packages/client/src/interface/channels/text/ChannelDetailsPhone.tsx",
-      "sha256": "7056434afc238b2061f7f0b709f4bf88abb16cb4a31f502dc9d60bde74f3aa88",
-      "bytes": 26978,
+      "sha256": "0699912b063d9d62625207720cac8add2694a983cff19d86a37689ec623121f2",
+      "bytes": 27569,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -42376,8 +42388,8 @@
     },
     {
       "path": "packages/client/src/interface/channels/voice/VoiceChannel.tsx",
-      "sha256": "0d20c091840891ea6fad618edbb6fe994d3ef8efcb62b60bbb6727701eb58e34",
-      "bytes": 14038,
+      "sha256": "c5d0fc6c8f882da52684dd486981adda397bd12114d948ad6cfb3972e4df7f87",
+      "bytes": 14112,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -42394,8 +42406,8 @@
     },
     {
       "path": "packages/client/src/interface/channels/voice/phoneCall.css",
-      "sha256": "9aaf82e54b49ece9cd3a4b427f992e929f7f9f26d4cb50508c106c24c3396832",
-      "bytes": 2924,
+      "sha256": "0b496f5434cb46610884fb8ac4b67c7e87dde0ed25567ca72c0c2c81af75ff1c",
+      "bytes": 3350,
       "category": "product-source-or-build-manifest"
     },
     {
