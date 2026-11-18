@@ -25,6 +25,7 @@ import Breakpoint from "../../../common/Breakpoint";
 
 import { FloatingElement, floatingElements } from "../../directives";
 
+import { backCloses } from "@revolt/common/lib/backCloses";
 import { dismissFloatingElements } from ".";
 import { sheetSwipe } from "../design/sheetSwipe";
 import { takesEscape } from "./takesEscape";
@@ -292,6 +293,9 @@ function Floating(props: FloatingElement & { mouseX: number; mouseY: number }) {
     ) || (still ? 0 : 220)) / 1000;
   const sheet = () =>
     phone && !!(props.show()?.contextMenu || props.show()?.userCard);
+
+  // phones: Back closes the sheet
+  backCloses(sheet, () => props.hide());
 
   // the sheet closes by a pull down (sheetSwipe.ts), as every sheet does
   const swipe = sheetSwipe(

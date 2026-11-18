@@ -11,6 +11,7 @@ import { useState } from "@revolt/state";
 import { DialogProps } from "@revolt/ui";
 import { SlideDrawer } from "@revolt/ui/components/navigation/SlideDrawer";
 
+import { backCloses } from "@revolt/common/lib/backCloses";
 import { Modals } from "../types";
 
 /**
@@ -20,6 +21,11 @@ export function SettingsModal(
   props: DialogProps & Modals & { type: "settings" },
 ) {
   const { setDiagDrawer } = useState();
+  // phones: Back closes the settings; it used to leave the page under them
+  backCloses(
+    () => !!props.show,
+    () => props.onClose(),
+  );
   // eslint-disable-next-line solid/reactivity
   const config = SettingsConfigurations[props.config];
 
@@ -50,7 +56,10 @@ export function SettingsModal(
           "z-index": 100,
           position: "fixed",
           width: "100%",
-          height: "100vh",
+          // what is seen, not the screen with the browser's bar hidden: with
+          // 100vh the end of the settings lay under the bottom edge on phones
+          // and could not be reached (owner, 2026-11-18)
+          height: "100dvh",
           left: 0,
           top: 0,
           "pointer-events": "none",

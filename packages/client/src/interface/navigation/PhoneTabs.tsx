@@ -62,6 +62,14 @@ export function PhoneTabs(props: { page?: boolean }) {
       0,
     );
 
+  // friend requests waiting for an answer: counted here too, the bottom
+  // bar is the one place for counts on phones (the notifications page
+  // that this button opens lists them)
+  const friendRequests = () =>
+    client().users.filter((person) => person.relationship === "Incoming")
+      .length;
+  const waiting = () => unreadMentions() + friendRequests();
+
   const unreadMessages = () =>
     state.ordering
       .orderedConversations(client())
@@ -88,7 +96,10 @@ export function PhoneTabs(props: { page?: boolean }) {
   };
 
   const openDiscover = () => {
-    navigate(state.layout.getLastActiveDiscoverPath());
+    // always the list: the tab used to return to the last address inside
+    // Discover, which is a server's page once one was opened, so the tab
+    // "went straight into a server" (owner, 2026-11-18)
+    navigate("/discover/servers");
     // full pages live on the content side
     state.appDrawer()?.setShown(true);
   };
@@ -138,10 +149,8 @@ export function PhoneTabs(props: { page?: boolean }) {
         <Tab type="button" aria-haspopup="dialog" onClick={openMentions}>
           <TabIcon>
             <Icon name="at" size={24} />
-            <Show when={unreadMentions()}>
-              <Badge data-tab-badge>
-                {unreadMentions() > 99 ? "99+" : unreadMentions()}
-              </Badge>
+            <Show when={waiting()}>
+              <Badge data-tab-badge>{waiting() > 99 ? "99+" : waiting()}</Badge>
             </Show>
           </TabIcon>
           <TabName>{t`Mentions`}</TabName>

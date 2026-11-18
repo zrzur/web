@@ -66,7 +66,10 @@ export function HomeSidebarPhone(props: Props) {
 
   return (
     <SidebarBase class="channel_bar home">
-      <div class={scroller} use:invisibleScrollable>
+      {/* the directive takes the class: a class attribute beside it replaced
+          the classes the directive adds, and the list could not scroll
+          (owner, 2026-11-18: many conversations, no way down) */}
+      <div use:invisibleScrollable={{ class: scroller }}>
         <Title>
           <Trans>Messages</Trans>
         </Title>

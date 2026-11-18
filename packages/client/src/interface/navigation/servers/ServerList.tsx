@@ -1072,6 +1072,10 @@ const HomeMark = styled("span", {
 /** pending friend requests on the home mark */
 const HomeBadge = styled("span", {
   base: {
+    // phones: counts live in one place, the notifications button of the
+    // bottom bar (owner, 2026-11-18: a count on the logo at the top read as
+    // misplaced); see PhoneTabs
+    _phone: { display: "none" },
     position: "absolute",
     top: "0",
     insetInlineEnd: "0",
