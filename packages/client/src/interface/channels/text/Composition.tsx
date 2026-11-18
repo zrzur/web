@@ -7,6 +7,7 @@ import {
   onCleanup,
   onMount,
   Show,
+  Suspense,
 } from "solid-js";
 
 import { useLingui } from "@lingui/solid/macro";
@@ -34,6 +35,7 @@ import {
 import { VoiceRecorder } from "@revolt/ui/components/features/messaging/composition/VoiceRecorder";
 import { Symbol } from "@revolt/ui/components/utils/Symbol";
 import { useSearchSpace } from "@revolt/ui/components/utils/autoComplete";
+import { lazyRetry } from "@revolt/ui/components/utils/lazyRetry";
 import { Icon } from "@revolt/ui/icons/Icon";
 
 import {
@@ -52,8 +54,16 @@ import { startAccess } from "@revolt/app/interface/channels/threadAccess";
 import { ContextMenu, ContextMenuButton } from "@revolt/app/menus/ContextMenu";
 import Breakpoint from "@revolt/common/Breakpoint";
 import { isMac } from "@revolt/keybinds/shortcuts";
-import { type AddChoice, ComposerAddPanel } from "./ComposerAddPanel";
+import type { AddChoice } from "./ComposerAddPanel";
 import { RulesGate } from "./RulesGate";
+
+// phones only, fetched on the first tap on the "+": kept out of the files
+// the app installs up front (scripts/precacheShell.mjs)
+const ComposerAddPanel = lazyRetry(
+  () =>
+    import("./ComposerAddPanel").then((m) => ({ default: m.ComposerAddPanel })),
+  () => null,
+);
 
 interface Props {
   /**
@@ -317,6 +327,8 @@ export function MessageComposition(props: Props) {
       }
     | undefined;
   let addButton: HTMLDivElement | undefined;
+  // phones: the "+" panel is open (the button shows an X meanwhile)
+  const [adding, setAdding] = createSignal(false);
 
   // announcement channels: only people who can manage messages post
   const announcementOnly = () =>
@@ -621,17 +633,25 @@ export function MessageComposition(props: Props) {
                 }
               >
                 <IconButton
-                  aria-label={phone ? t`Add` : t`Upload file`}
+                  aria-label={
+                    phone ? (adding() ? t`Close` : t`Add`) : t`Upload file`
+                  }
                   aria-haspopup={phone ? "dialog" : undefined}
+                  aria-expanded={phone ? adding() : undefined}
                   data-testid="composer-add"
                   onPress={(event) => {
                     if (phone) pickerTriggers?.onClickAdd(event, addButton);
                     else addFile();
                   }}
                 >
-                  <Symbol type="outlined" size={22}>
-                    add
-                  </Symbol>
+                  <span
+                    class="z-add-turn"
+                    data-open={adding() ? "" : undefined}
+                  >
+                    <Symbol type="outlined" size={22}>
+                      add
+                    </Symbol>
+                  </span>
                 </IconButton>
               </div>
             </MessageBox.InlineIcon>
@@ -657,10 +677,13 @@ export function MessageComposition(props: Props) {
                 add={
                   phone
                     ? (panel) => (
-                        <ComposerAddPanel choices={addChoices(panel)} />
+                        <Suspense>
+                          <ComposerAddPanel choices={addChoices(panel)} />
+                        </Suspense>
                       )
                     : undefined
                 }
+                onShown={(shown) => setAdding(shown === "add")}
               >
                 {(triggerProps) => (
                   <>

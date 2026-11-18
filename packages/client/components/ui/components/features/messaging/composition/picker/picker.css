@@ -752,3 +752,18 @@
 .z-media-picker--phone .z-emoji-cell {
   border-radius: 10px;
 }
+
+/* Phones: the "+" of the message box turns into an X while its panel is
+   open, in place (owner, 2026-11-18) */
+.z-add-turn {
+  display: inline-flex;
+  transition: transform 160ms cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+.z-add-turn[data-open] {
+  transform: rotate(45deg);
+}
+@media (prefers-reduced-motion: reduce) {
+  .z-add-turn {
+    transition: none;
+  }
+}
