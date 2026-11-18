@@ -1006,8 +1006,8 @@
     },
     {
       "path": "packages/client/components/app/interface/desktop/Titlebar.tsx",
-      "sha256": "fb87108272236ede913488d4f50fe8d7cc5046507fd06fb80f6da12e6a8a25cd",
-      "bytes": 12111,
+      "sha256": "1083637a21ed384b2d9c7a624eede16d305a0810b64d2bb27e3997bb6571d2ac",
+      "bytes": 13155,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -4192,8 +4192,8 @@
     },
     {
       "path": "packages/client/components/instance/index.tsx",
-      "sha256": "ef9c95f21e2d99b342b3fceb1a67045f432cf3edb0acd1baf5e0a92287e19c44",
-      "bytes": 5521,
+      "sha256": "21932a83b3d2c42a4f6bbec9aef0aa06e98bb40558a0efacdb055ad1c3e5f087",
+      "bytes": 6227,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -6105,6 +6105,12 @@
       "category": "product-source-or-build-manifest"
     },
     {
+      "path": "packages/client/components/ui/components/design/PhoneFrame.tsx",
+      "sha256": "5c94a007449f5576499b4fa20af708567fec3896b5cbd846e1821e2ccadf8868",
+      "bytes": 5304,
+      "category": "product-source-or-build-manifest"
+    },
+    {
       "path": "packages/client/components/ui/components/design/Radio.tsx",
       "sha256": "b7c507903f1d420d1bba3cc8d14aba916dc839b4decc7b7df8b987c5a42510c7",
       "bytes": 3246,
@@ -6280,8 +6286,8 @@
     },
     {
       "path": "packages/client/components/ui/components/design/index.ts",
-      "sha256": "d9e16ed15f2774e283dd2ce6be3b482dc0d54e5d95c7d7ac0e471db40588808f",
-      "bytes": 2494,
+      "sha256": "8a735a6f630fa2a76db636eea2ea119a9e5590852d07060bcf93b6d3f37a5afa",
+      "bytes": 2570,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -6298,8 +6304,8 @@
     },
     {
       "path": "packages/client/components/ui/components/design/sheetSwipe.ts",
-      "sha256": "60eed97a1f46ceaaad582ca3cb992a91fef2a4450ee2fbca9941ac09d45be463",
-      "bytes": 3527,
+      "sha256": "be42c293cd6a5b75fa96025645bfb4311814ab7b1d7fbafe9af057e865b8cce9",
+      "bytes": 4231,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -42034,8 +42040,8 @@
     },
     {
       "path": "packages/client/src/Interface.tsx",
-      "sha256": "bca6ab1a9d40a7cfb411da21194140b269867378c1d6ef9b9dfefa61e840c59a",
-      "bytes": 13100,
+      "sha256": "4a2b3ef7daa0ca59755fa718bfb87129790445dbcd25ab02641966a9752e5004",
+      "bytes": 13497,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -43426,8 +43432,8 @@
     },
     {
       "path": "packages/client/src/interface/home/FirstScreen.tsx",
-      "sha256": "b54a1b9288c06af6f4b01e636d10a824b381f0af9cf0e9599ec29f593c8996ae",
-      "bytes": 3774,
+      "sha256": "506cf3c7f9cb84956107bf62cb7f1026c2a2383066b7bef621d974ae60f003bb",
+      "bytes": 4632,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -43492,7 +43498,7 @@
     },
     {
       "path": "packages/client/src/interface/navigation/PhoneTabs.tsx",
-      "sha256": "6c5da5a4dd31fde6a2cc3957c29436e4d6d2e3ca742e5ba4389962d7fb68de37",
+      "sha256": "8fbd9d592d05e49e7ef4188149a4f6cc13cef36cefeb9ece8c9bd353d786815d",
       "bytes": 12896,
       "category": "product-source-or-build-manifest"
     },
