@@ -55,7 +55,6 @@ import { MemberSidebar } from "./MemberSidebar";
 import { TextSearchSidebar } from "./TextSearchSidebar";
 
 import type { DetailsTab } from "./ChannelDetailsPhone";
-import { ThreadsPanel } from "./ThreadsPanel";
 
 // Phones, and only once it is opened: kept out of the files the app installs
 // up front (scripts/precacheShell.mjs)
@@ -66,6 +65,12 @@ const ChannelDetailsPhone = lazyRetry(
     import("./ChannelDetailsPhone").then((m) => ({
       default: m.ChannelDetailsPhone,
     })),
+  () => null,
+);
+
+// The list of a channel's threads, opened from the header: loads on first use
+const ThreadsPanel = lazyRetry(
+  () => import("./ThreadsPanel").then((m) => ({ default: m.ThreadsPanel })),
   () => null,
 );
 
@@ -485,7 +490,9 @@ export function TextChannel(props: ChannelPageProps) {
                       <Trans>Threads</Trans>
                     </Text>
                   </SidebarTitle>
-                  <ThreadsPanel channel={props.channel} />
+                  <Suspense>
+                    <ThreadsPanel channel={props.channel} />
+                  </Suspense>
                 </WideSidebarContainer>
               </Match>
               <Match when={sidebarState().state === "pins"}>

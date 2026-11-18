@@ -98,6 +98,13 @@ export class OfflineData {
     };
   }
 
+  /** Keep a state the gateway sent before this was attached */
+  keepState(ready: unknown) {
+    const packet = ready as Packet | undefined;
+    if (packet?.type !== "Ready") return;
+    void this.#vault.saveSnapshot(trimReady(packet)).catch(() => undefined);
+  }
+
   /** Stop, and forget what was about to be written */
   detach() {
     this.#detach?.();

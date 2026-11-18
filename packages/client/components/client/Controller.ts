@@ -4,7 +4,16 @@ import { Accessor, Setter, createMemo, createSignal } from "solid-js";
 
 import { API, Client, ConnectionState, ProtocolV1 } from "@zrzur/sdk/solid";
 
-import { type OfflineData, forgetOfflineData, offlineDataFor } from "./offline";
+import type { OfflineData } from "./offline";
+
+// Reading without a connection is not part of the files the app installs up
+// front: it loads once someone is signed in (scripts/precacheShell.mjs)
+const offlineParts = () => import("./offline");
+/** Remove what an account kept on this device */
+const forgetOfflineData = (userId: string | undefined) =>
+  offlineParts()
+    .then((parts) => parts.forgetOfflineData(userId))
+    .catch(() => undefined);
 
 import { ModalControllerExtended } from "@revolt/modal";
 import type { State as ApplicationState } from "@revolt/state";
@@ -468,7 +477,29 @@ class Lifecycle {
 
   #keepOffline(userId: string) {
     this.#offline?.detach();
-    this.#offline = offlineDataFor(this.client, userId);
+    this.#offline = undefined;
+    const client = this.client;
+    // the gateway may answer before the part has loaded: hold its state
+    let early: unknown;
+    const hold = (event: { type: string }) => {
+      if (event.type === "Ready") early = event;
+    };
+    const events = client.events as unknown as {
+      on(name: "event", listener: (event: { type: string }) => void): void;
+      off?(name: "event", listener: (event: { type: string }) => void): void;
+    };
+    events.on("event", hold);
+    void offlineParts()
+      .then((parts) => {
+        events.off?.("event", hold);
+        // logged out or replaced while it loaded
+        if (this.client !== client) return;
+        this.#offline = parts.offlineDataFor(client, userId);
+        if (early) this.#offline?.keepState(early);
+        // the first connection already failed: start from what was kept
+        else if (this.#connectionFailures > 0) void this.#startFromKept();
+      })
+      .catch(() => events.off?.("event", hold));
   }
 
   /**
