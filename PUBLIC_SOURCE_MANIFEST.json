@@ -262,8 +262,8 @@
     },
     {
       "path": "CHANGELOG.md",
-      "sha256": "e819eb1ad44139344fd11def3d5182bbd73be54bd1516c50a526a79b202eae84",
-      "bytes": 174340,
+      "sha256": "62173db45e02f9b5f86650d55ebb44a13998c6788c6ef5c31ed891a57e1d5061",
+      "bytes": 175040,
       "category": "public-documentation"
     },
     {
@@ -2074,8 +2074,8 @@
     },
     {
       "path": "packages/client/components/app/interface/settings/user/account/UsernameNotice.tsx",
-      "sha256": "955d142729da979a2cb5ff103e3ea98dd703c4052159697b26cfcddb94694017",
-      "bytes": 1616,
+      "sha256": "c1dda2af8bf2ef9b3b840c845694f560fce08f2a30a99b9e67731bd50786ed92",
+      "bytes": 1904,
       "category": "license-and-attribution"
     },
     {
@@ -42070,8 +42070,8 @@
     },
     {
       "path": "packages/client/src/index.tsx",
-      "sha256": "590226aea12baae2b7254bad9408a484f9911fb2082337931dda2de8910b647d",
-      "bytes": 3902,
+      "sha256": "1d140e3478caedcea0de9449349d5cc9dec6257eb8c723deac6111e492370baa",
+      "bytes": 4069,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -42232,8 +42232,8 @@
     },
     {
       "path": "packages/client/src/interface/channels/text/TextChannel.tsx",
-      "sha256": "e022ae02532cc5f6771be00ef1941297e7150e162c76c96360372201030ea47a",
-      "bytes": 17747,
+      "sha256": "7a70a4b6f81f7049d1e741fc077c3b157b85c54774a52838dc7000ba098750f7",
+      "bytes": 18007,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -43642,14 +43642,14 @@
     },
     {
       "path": "packages/client/src/runtimeAssets.test.ts",
-      "sha256": "b48405ecd3a6fa1d567fa7ac74ba26574b771f35f22b387cff97955689e59e1a",
-      "bytes": 2390,
+      "sha256": "98dfbcdfd5d2626c32cb33d4097a6918193b6606492df826fa675a125906ad29",
+      "bytes": 3799,
       "category": "synthetic-test-source-or-fixture"
     },
     {
       "path": "packages/client/src/runtimeAssets.ts",
-      "sha256": "07ecc51a7da4d6740227313674662eb5e7b27fd79e3d210732fad450bddee5da",
-      "bytes": 1205,
+      "sha256": "d95c1763d5eb16a79df54f4b86e73c42c998ec2e9f1d18e4cc5a4967863dafb4",
+      "bytes": 2198,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -43660,8 +43660,8 @@
     },
     {
       "path": "packages/client/src/serviceWorker.ts",
-      "sha256": "70ab1456aef4dae6b2e6571ccd54dd54486a6097c522cf17a6f58d466c85b8b3",
-      "bytes": 5595,
+      "sha256": "4217275a635d8d73b978e05553ed143693e33882122508b837865012cc38011d",
+      "bytes": 5715,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -43690,14 +43690,14 @@
     },
     {
       "path": "packages/client/src/staleBuild.test.ts",
-      "sha256": "638d99d7ab45a3c9c95fc7a6805f0d2df6e67a27ca2661221749062d7a29cd9b",
-      "bytes": 2576,
+      "sha256": "fec1b0bcc647e6445aaa570ec02ece3defd5679c94f27a824f14608a2b821c8b",
+      "bytes": 4502,
       "category": "synthetic-test-source-or-fixture"
     },
     {
       "path": "packages/client/src/staleBuild.ts",
-      "sha256": "40c1e36ad5d2a0f1f9cf38ead3292c040a9cb7ab94e94f374c3c467727425583",
-      "bytes": 2181,
+      "sha256": "601c8a7b4d7f89878d9a0df115bb4548ed92d406e2e2732db290d0e9598d8f4b",
+      "bytes": 4491,
       "category": "product-source-or-build-manifest"
     },
     {
