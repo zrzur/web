@@ -48,9 +48,11 @@ import {
   noteComposer,
   noteComposerFocus,
 } from "@revolt/app/interface/channels/text/poll/pollShortcut";
+import { startAccess } from "@revolt/app/interface/channels/threadAccess";
 import { ContextMenu, ContextMenuButton } from "@revolt/app/menus/ContextMenu";
 import Breakpoint from "@revolt/common/Breakpoint";
 import { isMac } from "@revolt/keybinds/shortcuts";
+import { type AddChoice, ComposerAddPanel } from "./ComposerAddPanel";
 import { RulesGate } from "./RulesGate";
 
 interface Props {
@@ -309,8 +311,12 @@ export function MessageComposition(props: Props) {
    */
   const phone = window.matchMedia(Breakpoint.phone).matches;
   let pickerTriggers:
-    | { onClickGif: (event: unknown, ref?: HTMLDivElement) => void }
+    | {
+        onClickGif: (event: unknown, ref?: HTMLDivElement) => void;
+        onClickAdd: (event: unknown, ref?: HTMLDivElement) => void;
+      }
     | undefined;
+  let addButton: HTMLDivElement | undefined;
 
   // announcement channels: only people who can manage messages post
   const announcementOnly = () =>
@@ -414,6 +420,81 @@ export function MessageComposition(props: Props) {
 
   const searchSpace = useSearchSpace(() => props.channel, client);
 
+  // phones: what the "+" panel offers here; a choice that is not allowed in
+  // this channel is left out
+  function addChoices(panel: { close: () => void; openGif: () => void }) {
+    const then = (act: () => void) => () => {
+      panel.close();
+      act();
+    };
+    const list: AddChoice[] = [];
+    if (canUploadFiles()) {
+      list.push(
+        {
+          id: "camera",
+          icon: "video-camera",
+          label: t`Camera`,
+          onPick: then(() => addFile("image/*", "environment")),
+        },
+        {
+          id: "pictures",
+          icon: "image",
+          label: t`Photos and videos`,
+          onPick: then(() => addFile("image/*,video/*")),
+        },
+        {
+          id: "files",
+          icon: "file",
+          label: t`Files`,
+          onPick: then(() => addFile()),
+        },
+      );
+      if (props.channel.havePermission("SendEmbeds"))
+        list.push({
+          id: "gif",
+          icon: "gif",
+          label: t`GIF picker`,
+          onPick: panel.openGif,
+        });
+      list.push({
+        id: "voice",
+        icon: "microphone",
+        label: t`Voice message`,
+        onPick: then(() => setRecording(true)),
+      });
+    }
+    if (canPoll())
+      list.push({
+        id: "poll",
+        icon: "poll",
+        label: t`Create poll`,
+        onPick: then(createPoll),
+        testId: "composer-create-poll",
+      });
+    if (startAccess(props.channel) === "allowed")
+      list.push({
+        id: "thread",
+        icon: "chats-circle",
+        label: t`New thread`,
+        onPick: then(() =>
+          openModal({ type: "create_thread", channel: props.channel }),
+        ),
+      });
+    list.push({
+      id: "commands",
+      icon: "lightning",
+      label: t`Commands`,
+      onPick: then(() => {
+        const content = draft()?.content ?? "";
+        if (!content.startsWith("/")) {
+          state.draft.setDraft(props.channel.id, { content: "/" + content });
+          setInitialValue(["/" + content]);
+        }
+      }),
+    });
+    return list;
+  }
+
   // voice messages: recorded audio is sent as a normal attachment
   const [recording, setRecording] = createSignal(false);
   createEffect(
@@ -511,6 +592,7 @@ export function MessageComposition(props: Props) {
                   screens upload a file with one click, and a right-click
                   offers a file or a poll where polls can be posted */}
               <div
+                ref={addButton}
                 style={{ display: "contents" }}
                 use:floating={
                   !phone && canPoll()
@@ -535,88 +617,16 @@ export function MessageComposition(props: Props) {
                           </ContextMenu>
                         ),
                       }
-                    : phone
-                      ? {
-                          contextMenu: () => (
-                            <ContextMenu>
-                              <Show when={canPoll()}>
-                                <ContextMenuButton
-                                  icon={<Icon name="poll" size={20} />}
-                                  onClick={createPoll}
-                                  data-testid="composer-create-poll"
-                                >
-                                  {t`Create poll`}
-                                </ContextMenuButton>
-                              </Show>
-                              <Show when={canUploadFiles()}>
-                                <ContextMenuButton
-                                  icon={<Icon name="video-camera" size={20} />}
-                                  onClick={() =>
-                                    addFile("image/*", "environment")
-                                  }
-                                >
-                                  {t`Camera`}
-                                </ContextMenuButton>
-                                <ContextMenuButton
-                                  icon={<Icon name="image" size={20} />}
-                                  onClick={() => addFile("image/*,video/*")}
-                                >
-                                  {t`Photos and videos`}
-                                </ContextMenuButton>
-                                <ContextMenuButton
-                                  icon={<Icon name="file" size={20} />}
-                                  onClick={() => addFile()}
-                                >
-                                  {t`Files`}
-                                </ContextMenuButton>
-                                <Show
-                                  when={props.channel.havePermission(
-                                    "SendEmbeds",
-                                  )}
-                                >
-                                  <ContextMenuButton
-                                    icon={<Icon name="gif" size={20} />}
-                                    onClick={() =>
-                                      pickerTriggers?.onClickGif(undefined)
-                                    }
-                                  >
-                                    {t`GIF picker`}
-                                  </ContextMenuButton>
-                                </Show>
-                                <ContextMenuButton
-                                  icon={<Icon name="microphone" size={20} />}
-                                  onClick={() => setRecording(true)}
-                                >
-                                  {t`Voice message`}
-                                </ContextMenuButton>
-                              </Show>
-                              <ContextMenuButton
-                                icon={<Icon name="lightning" size={20} />}
-                                onClick={() => {
-                                  const content = draft()?.content ?? "";
-                                  if (!content.startsWith("/")) {
-                                    state.draft.setDraft(props.channel.id, {
-                                      content: "/" + content,
-                                    });
-                                    setInitialValue(["/" + content]);
-                                  }
-                                }}
-                              >
-                                {t`Commands`}
-                              </ContextMenuButton>
-                            </ContextMenu>
-                          ),
-                          contextMenuHandler: "click",
-                        }
-                      : {}
+                    : {}
                 }
               >
                 <IconButton
                   aria-label={phone ? t`Add` : t`Upload file`}
-                  aria-haspopup={phone ? "menu" : undefined}
+                  aria-haspopup={phone ? "dialog" : undefined}
                   data-testid="composer-add"
-                  onPress={() => {
-                    if (!phone) addFile();
+                  onPress={(event) => {
+                    if (phone) pickerTriggers?.onClickAdd(event, addButton);
+                    else addFile();
                   }}
                 >
                   <Symbol type="outlined" size={22}>
@@ -644,6 +654,13 @@ export function MessageComposition(props: Props) {
                 onMessage={sendMessage}
                 onTextReplacement={(text) => setNodeReplacement([text])}
                 channel={props.channel}
+                add={
+                  phone
+                    ? (panel) => (
+                        <ComposerAddPanel choices={addChoices(panel)} />
+                      )
+                    : undefined
+                }
               >
                 {(triggerProps) => (
                   <>
