@@ -17,7 +17,6 @@ import { styled } from "styled-system/jsx";
 import { ChannelContextMenu, ServerContextMenu } from "@revolt/app";
 import { MessageCache } from "@revolt/app/interface/channels/text/MessageCache";
 import { Titlebar } from "@revolt/app/interface/desktop/Titlebar";
-import { lazyRetry } from "@revolt/ui/components/utils/lazyRetry";
 import { ChangeRequestNotice } from "@revolt/app/interface/settings/user/account/ChangeRequestNotice";
 import { NoticeCenter } from "@revolt/app/interface/support/NoticeCenter";
 import { useClient, useClientLifecycle } from "@revolt/client";
@@ -29,6 +28,7 @@ import { PluginHostGate } from "@revolt/plugins/PluginHostGate";
 import { Navigate, useBeforeLeave, useLocation } from "@revolt/routing";
 import { useState } from "@revolt/state";
 import { LAYOUT_SECTIONS } from "@revolt/state/stores/Layout";
+import { lazyRetry } from "@revolt/ui/components/utils/lazyRetry";
 import { useMotion } from "@revolt/ui/motion";
 
 import { SlideDrawer } from "../components/ui/components/navigation/SlideDrawer";
@@ -37,6 +37,7 @@ import { FirstScreen } from "./interface/home/FirstScreen";
 import { goingHome } from "./interface/home/goingHome";
 import { NEXT_SCREENS, preloadWhenIdle } from "./interface/idlePreload";
 import { PhoneTabs } from "./interface/navigation/PhoneTabs";
+import { warmPhoneScreens } from "./interface/warmScreens";
 
 /** Longest wait for unread state before Home draws without it */
 const UNREADS_WAIT = 800;
@@ -141,6 +142,8 @@ const Interface = (props: { children?: JSX.Element }) => {
     if (sDrawer)
       sDrawer.locked =
         device.layout() === "phone" && goingHome(location.pathname);
+    // phones: bring the code of the screens a tap opens, while idle
+    if (device.layout() === "phone") warmPhoneScreens();
     //Update on layout change
     if (sDrawer) {
       const en = sDrawer.enabled;
