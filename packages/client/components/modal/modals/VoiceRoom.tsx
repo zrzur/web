@@ -32,6 +32,11 @@ export function VoiceRoomModal(
   const state = useState();
   const navigate = useNavigate();
 
+  // The saved choice, not the call's "unmuted": that one asks the call the
+  // person is in for the right to speak, and before joining there is none, so
+  // the row always read "muted" and a press changed nothing (owner, 2026-11-18)
+  const micOn = () => state.voice.micOn && !state.voice.deafen;
+
   const ids = () => [...props.channel.voiceParticipants.keys()];
   const users = useUsers(ids);
   const count = () => ids().length;
@@ -91,17 +96,17 @@ export function VoiceRoomModal(
           {/* mute before joining: the choice is kept for the call */}
           <Mic
             type="button"
-            aria-pressed={!voice.unmuted()}
+            aria-pressed={!micOn()}
             onClick={() => void voice.toggleMute()}
           >
             <MicIcon>
               <Icon
-                name={voice.unmuted() ? "microphone" : "microphone-slash"}
+                name={micOn() ? "microphone" : "microphone-slash"}
                 size={22}
               />
             </MicIcon>
             <span>
-              <Show when={voice.unmuted()} fallback={<Trans>Join muted</Trans>}>
+              <Show when={micOn()} fallback={<Trans>Join muted</Trans>}>
                 <Trans>Join with microphone on</Trans>
               </Show>
             </span>

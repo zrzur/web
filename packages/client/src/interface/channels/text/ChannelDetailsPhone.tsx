@@ -1,4 +1,12 @@
-import { For, Match, Show, Switch, createMemo, createSignal } from "solid-js";
+import {
+  For,
+  Match,
+  Show,
+  Suspense,
+  Switch,
+  createMemo,
+  createSignal,
+} from "solid-js";
 
 import { Trans, useLingui } from "@lingui/solid/macro";
 import { useQuery } from "@tanstack/solid-query";
@@ -233,76 +241,88 @@ export function ChannelDetailsPhone(props: {
       </Tabs>
 
       <Body role="tabpanel">
-        <Switch>
-          <Match when={tab() === "members"}>
-            <Show when={canInvite()}>
-              <Group>
-                <Row
-                  type="button"
-                  data-invite
-                  onClick={() =>
-                    openModal({
-                      type: "create_invite",
-                      channel: props.channel,
-                    })
-                  }
-                >
-                  <Icon name="user-plus" size={22} />
-                  <span>
-                    <Trans>Invite members</Trans>
-                  </span>
-                  <Icon name="caret-right" size={16} />
-                </Row>
-              </Group>
-            </Show>
-            <Members>
-              <MemberSidebar
-                channel={props.channel}
-                scrollTargetElement={props.scrollTargetElement}
-                isLargeServer={props.isLargeServer}
-              />
-            </Members>
-          </Match>
-          <Match when={tab() === "media"}>
-            <Finds channel={props.channel} what="media" />
-          </Match>
-          <Match when={tab() === "links"}>
-            <Finds channel={props.channel} what="links" />
-          </Match>
-          <Match when={tab() === "files"}>
-            <Finds channel={props.channel} what="files" />
-          </Match>
-          <Match when={tab() === "pins"}>
-            <Show
-              when={pins.data?.length !== 0}
-              fallback={
-                <Empty data-empty="pins">
-                  <Icon name="push-pin" size={44} />
-                  <b>
-                    <Trans>No pinned messages yet</Trans>
-                  </b>
-                  <span>
-                    <Trans>
-                      Pin an important message from its menu to keep it here.
-                    </Trans>
-                  </span>
-                </Empty>
-              }
-            >
-              <Listed>
-                <TextSearchSidebar
+        {/* A tab that is still asking for its content waits here, under the
+            header and the tabs. Without this the nearest place to wait was
+            the whole screen: every change of tab blanked it (owner,
+            2026-11-18) */}
+        <Suspense
+          fallback={
+            <Quiet role="status">
+              <Trans>Loading…</Trans>
+            </Quiet>
+          }
+        >
+          <Switch>
+            <Match when={tab() === "members"}>
+              <Show when={canInvite()}>
+                <Group>
+                  <Row
+                    type="button"
+                    data-invite
+                    onClick={() =>
+                      openModal({
+                        type: "create_invite",
+                        channel: props.channel,
+                      })
+                    }
+                  >
+                    <Icon name="user-plus" size={22} />
+                    <span>
+                      <Trans>Invite members</Trans>
+                    </span>
+                    <Icon name="caret-right" size={16} />
+                  </Row>
+                </Group>
+              </Show>
+              <Members>
+                <MemberSidebar
                   channel={props.channel}
-                  query={{ pinned: true, sort: "Latest" }}
+                  scrollTargetElement={props.scrollTargetElement}
+                  isLargeServer={props.isLargeServer}
                 />
+              </Members>
+            </Match>
+            <Match when={tab() === "media"}>
+              <Finds channel={props.channel} what="media" />
+            </Match>
+            <Match when={tab() === "links"}>
+              <Finds channel={props.channel} what="links" />
+            </Match>
+            <Match when={tab() === "files"}>
+              <Finds channel={props.channel} what="files" />
+            </Match>
+            <Match when={tab() === "pins"}>
+              <Show
+                when={pins.data?.length !== 0}
+                fallback={
+                  <Empty data-empty="pins">
+                    <Icon name="push-pin" size={44} />
+                    <b>
+                      <Trans>No pinned messages yet</Trans>
+                    </b>
+                    <span>
+                      <Trans>
+                        Pin an important message from its menu to keep it here.
+                      </Trans>
+                    </span>
+                  </Empty>
+                }
+              >
+                <Listed>
+                  <TextSearchSidebar
+                    channel={props.channel}
+                    query={{ pinned: true, sort: "Latest" }}
+                  />
+                </Listed>
+              </Show>
+            </Match>
+            <Match when={tab() === "threads"}>
+              <Listed>
+                <ThreadsPanel channel={props.channel} />
               </Listed>
-            </Show>
-          </Match>
-          <Match when={tab() === "threads"}>
-            <Listed>
-              <ThreadsPanel channel={props.channel} />
-            </Listed>
-          </Match>
-        </Switch>
+            </Match>
+          </Switch>
+        </Suspense>
       </Body>
     </Page>
   );

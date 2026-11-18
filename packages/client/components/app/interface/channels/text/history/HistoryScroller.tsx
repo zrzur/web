@@ -76,6 +76,12 @@ const TOUCH_SETTLE_MS = 150;
 const TOUCH_SCROLL_NEEDS_HOLD =
   typeof CSS !== "undefined" && !!CSS.supports?.("overflow-anchor", "auto");
 
+/**
+ * The longest an older page waits for a touch scroll to rest before its rows
+ * are added anyway (browsers without a held scroll, see `ready`)
+ */
+const OLDER_WAIT_MS = 500;
+
 /** After a jump, late-loading rows may still shift the target for this long */
 const LANDING_MS = 1500;
 
@@ -130,19 +136,36 @@ export function HistoryScroller(props: Props) {
    * Resolves when rows may be added on a side. Older rows go above the view:
    * at once where a touch scroll can be held (above). Elsewhere (Safari:
    * setting the position stops a glide) they wait for the scroll to rest,
-   * but not for ever. Newer rows always need the position set, so they
+   * but only briefly, and not at all once the reader has reached the end of
+   * the loaded rows: there the placeholders are on screen and there is no
+   * glide worth keeping. Newer rows always need the position set, so they
    * wait a moment for a calm frame.
    */
   function ready(side: PageSide) {
     if (side === "older") {
-      return TOUCH_SCROLL_NEEDS_HOLD ? Promise.resolve() : settled(1500);
+      return TOUCH_SCROLL_NEEDS_HOLD
+        ? Promise.resolve()
+        : settled(OLDER_WAIT_MS, atOldestLoaded);
     }
     return settled(300);
   }
 
-  async function settled(maxWaitMs = Infinity) {
+  /** The reader is within half a screen of the oldest loaded row */
+  function atOldestLoaded() {
+    const rows = rowsElement();
+    if (!rows) return true;
+    const view = scroller.getBoundingClientRect();
+    return view.top - rows.getBoundingClientRect().top <= view.height / 2;
+  }
+
+  async function settled(maxWaitMs = Infinity, enough?: () => boolean) {
     const until = performance.now() + maxWaitMs;
-    while (alive && touchScrolling() && performance.now() < until) {
+    while (
+      alive &&
+      touchScrolling() &&
+      performance.now() < until &&
+      !enough?.()
+    ) {
       await new Promise((resolve) => setTimeout(resolve, 50));
     }
   }

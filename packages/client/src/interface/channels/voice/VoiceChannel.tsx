@@ -295,6 +295,9 @@ function Unavailable(props: ChannelPageProps) {
 Unavailable.Action = function Action(props: ChannelPageProps) {
   const { t } = useLingui();
   const voice = useVoice();
+  const state = useState();
+  // the saved choice: before joining there is no call to ask (VoiceRoom.tsx)
+  const micOn = () => state.voice.micOn && !state.voice.deafen;
 
   return (
     <Notice>
@@ -316,17 +319,13 @@ Unavailable.Action = function Action(props: ChannelPageProps) {
             {/* mute before joining: the choice is kept for the call */}
             <MicToggle
               type="button"
-              aria-pressed={!voice.unmuted()}
-              aria-label={
-                voice.unmuted() ? t`Join muted` : t`Join with microphone on`
-              }
-              title={
-                voice.unmuted() ? t`Join muted` : t`Join with microphone on`
-              }
+              aria-pressed={!micOn()}
+              aria-label={micOn() ? t`Join muted` : t`Join with microphone on`}
+              title={micOn() ? t`Join muted` : t`Join with microphone on`}
               onClick={() => void voice.toggleMute()}
             >
               <Icon
-                name={voice.unmuted() ? "microphone" : "microphone-slash"}
+                name={micOn() ? "microphone" : "microphone-slash"}
                 size={20}
               />
             </MicToggle>

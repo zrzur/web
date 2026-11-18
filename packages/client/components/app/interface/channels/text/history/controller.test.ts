@@ -77,6 +77,7 @@ function setup(total: number, options: { timeoutMs?: number } = {}) {
   const ch = channel(total);
   const moves: ViewMove[] = [];
   const commits: number[] = [];
+  const readies: string[] = [];
   let atPresent = true;
   let rowLimit = 150;
   let touching: Promise<void> | undefined;
@@ -92,7 +93,10 @@ function setup(total: number, options: { timeoutMs?: number } = {}) {
     nextFrame: () => Promise.resolve(),
     settled: (maxWaitMs) =>
       touching && maxWaitMs === undefined ? touching : Promise.resolve(),
-    ready: () => Promise.resolve(),
+    ready: (side) => {
+      readies.push(side);
+      return Promise.resolve();
+    },
     rowLimit: () => rowLimit,
   };
   const history = createHistory<Msg>({
@@ -107,6 +111,7 @@ function setup(total: number, options: { timeoutMs?: number } = {}) {
     history,
     moves,
     commits,
+    readies,
     state: () => state,
     nums: () => state.window.items.map(num),
     reader: (present: boolean) => (atPresent = present),
@@ -590,5 +595,26 @@ describe("history: leaving and coming back", () => {
     await page;
     expect(t.moves).toHaveLength(moves);
     expect(t.nums()).toHaveLength(30);
+  });
+});
+
+describe("history: waiting for a calm list", () => {
+  it("an older page waits once, however many parts it is drawn in", async () => {
+    const t = setup(3000);
+    await t.history.open();
+    t.readies.length = 0;
+    await t.history.loadOlder();
+    // 50 rows are drawn in four parts
+    expect(t.commits.length).toBeGreaterThan(3);
+    expect(t.readies).toEqual(["older"]);
+  });
+
+  it("a newer page waits before each part: its rows move the list", async () => {
+    const t = setup(3000);
+    await t.history.open({ around: id(1500) });
+    t.readies.length = 0;
+    await t.history.loadNewer();
+    expect(t.readies.length).toBeGreaterThan(1);
+    expect(new Set(t.readies)).toEqual(new Set(["newer"]));
   });
 });

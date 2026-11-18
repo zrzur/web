@@ -34,6 +34,7 @@ import {
 
 import { VoiceParticipantContextMenu } from "../VoiceParticipantMenu";
 import { VoiceStatefulUserIcons } from "../VoiceStatefulUserIcons";
+import { keepVideoPlaying } from "./keepVideoPlaying";
 
 type TileProps = {
   focus?: boolean;
@@ -208,7 +209,11 @@ export function ParticipantTile(props: TileProps) {
             }}
             trackRef={track as TrackReference}
             manageSubscription={true}
-            ref={videoRef}
+            ref={(element: HTMLVideoElement) => {
+              videoRef = element;
+              // iPhones may refuse to start it: the tile stayed empty
+              onCleanup(keepVideoPlaying(element));
+            }}
             on:resize={() => {
               setVideoDims({
                 height: videoRef?.videoHeight || 0,

@@ -224,10 +224,17 @@ html[data-installed] {
      phone look oversized (owner, 2026-11-17). Now an unseen ::after reaches
      past a button shorter than 44 px, and does nothing on a taller one.
      Zero specificity, so a component that uses ::after itself keeps its own;
-     a switch sets its own 44 px target (Toggle.tsx). */
-  :where(.app_body, .settings_cont, .z-dialog)
-    :where(button:not([role="switch"])) {
-    position: relative;
+     a switch sets its own 44 px target (Toggle.tsx).
+     In a layer below the components' own styles: those are layered, and a
+     rule outside every layer beats them whatever its specificity. Outside
+     a layer this made every button "relative", also the ones a component
+     places itself: the close button of a full profile left its corner and
+     lay at the bottom of the sheet (owner, 2026-11-18). */
+  @layer base {
+    :where(.app_body, .settings_cont, .z-dialog)
+      :where(button:not([role="switch"])) {
+      position: relative;
+    }
   }
   :where(.app_body, .settings_cont, .z-dialog)
     :where(button:not([role="switch"]))::after {

@@ -580,7 +580,11 @@ export function Messages(props: Props) {
    * In place of the placeholders of a page that could not be loaded
    */
   const pageFailure = (side: PageSide) => (
-    <LoadFailure data-history-failure={side} older={side === "older"}>
+    <LoadFailure
+      data-history-failure={side}
+      data-phone={device.layout() === "phone" ? "" : undefined}
+      older={side === "older"}
+    >
       <span>
         <Trans>Couldn't load messages.</Trans>
       </span>
@@ -687,7 +691,12 @@ export function Messages(props: Props) {
         <div>
           <Switch>
             <Match when={jumpFailed()}>
-              <LoadFailure floating data-history-failure="jump" role="alert">
+              <LoadFailure
+                floating
+                data-history-failure="jump"
+                data-phone={device.layout() === "phone" ? "" : undefined}
+                role="alert"
+              >
                 <span>
                   <Trans>Couldn't load messages.</Trans>
                 </span>
@@ -762,6 +771,11 @@ const LoadFailure = styled("div", {
     fontSize: "13px",
     lineHeight: "20px",
     color: "var(--z-fg-secondary)",
+
+    // phones: "Try again" is a full touch target
+    "&[data-phone] button": {
+      minHeight: "44px",
+    },
   },
   variants: {
     // at the very top of the list: clear of the bar that floats over it

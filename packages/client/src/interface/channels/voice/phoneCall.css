@@ -37,6 +37,21 @@ html[data-phone-call] .vc_tile:nth-child(2):last-child {
 html[data-phone-call] .vc_tile:not(.group) video {
   object-fit: cover !important;
 }
+/* the picture takes its size from the tile's edges, not from a percentage of
+   a height the tile itself gets from its shape: the same in every browser */
+html[data-phone-call] .vc_tile {
+  position: relative;
+}
+html[data-phone-call] .vc_tile video {
+  position: absolute;
+  inset: 0;
+  width: 100% !important;
+  height: 100% !important;
+}
+html[data-phone-call] .vc_tile > :not(video) {
+  position: relative;
+  z-index: 1;
+}
 html[data-phone-call] :has(> .vc_tile) {
   gap: 10px !important;
   padding-inline: 14px;

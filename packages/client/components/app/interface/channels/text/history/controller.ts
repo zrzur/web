@@ -292,8 +292,11 @@ export function createHistory<T extends { id: string }>(options: {
       // the edge is only known once the whole page is in
       const limit = last ? PAGE : 0;
       // rows added below the view have to be made up for by moving the
-      // list, which the view may want to put off for a moment under a finger
-      await view.ready(side);
+      // list, which the view may want to put off for a moment under a finger.
+      // An older page waits once, not once for each of its parts: on phones
+      // that wait for the scroll to rest, four waits made one page take
+      // seconds while the reader kept scrolling (owner, 2026-11-18)
+      if (side === "newer" || shown <= ROWS_PER_FRAME) await view.ready(side);
       if (mine !== ticket) return;
       view.commit(
         () => {
