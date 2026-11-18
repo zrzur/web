@@ -615,6 +615,12 @@ export function ChannelHeader(props: Props) {
           </IconButton>
         </Show>
 
+        {/* a ticket's actions: icons beside the others, before Search
+            (owner, 2026-11-18); on phones they are rows of the More sheet */}
+        <Show when={props.channel.ticket && !phone()}>
+          <TicketAction channel={props.channel} />
+        </Show>
+
         <Show when={searchValue() !== null}>
           <Show
             when={
@@ -665,12 +671,6 @@ export function ChannelHeader(props: Props) {
         {/* phones: the less-used actions share one "More" sheet, so the
             channel name keeps the room it needs. Desktop has no More menu:
             selecting messages starts from a message's own menu. */}
-        {/* a ticket's actions: one button after Search (owner, 2026-11-17);
-            on phones they are rows of the More sheet below */}
-        <Show when={props.channel.ticket && !phone()}>
-          <TicketAction channel={props.channel} />
-        </Show>
-
         <Show when={phone() && !phoneSearch() && hasMoreActions()}>
           <div
             style={{ display: "contents" }}
