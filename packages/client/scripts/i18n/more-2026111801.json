@@ -1,0 +1,10 @@
+{
+  "Filter results": ["Filtrer les résultats", "Filtrar resultados", "Фильтр результатов", "筛选结果"],
+  "Find a channel": ["Trouver un salon", "Buscar un canal", "Найти канал", "查找频道"],
+  "From a member": ["D’un membre", "De un miembro", "От участника", "来自某位成员"],
+  "In a channel": ["Dans un salon", "En un canal", "В канале", "在某个频道"],
+  "On a day": ["Un jour précis", "En un día", "За день", "某一天"],
+  "Remove filter: {0}": ["Retirer le filtre : {0}", "Quitar filtro: {0}", "Убрать фильтр: {0}", "移除筛选：{0}"],
+  "Show results": ["Afficher les résultats", "Ver resultados", "Показать результаты", "显示结果"],
+  "Type words, or choose filters with the button beside the field.": ["Saisissez des mots, ou choisissez des filtres avec le bouton à côté du champ.", "Escribe palabras o elige filtros con el botón junto al campo.", "Введите слова или выберите фильтры кнопкой рядом с полем.", "输入文字，或用输入框旁的按钮选择筛选条件。"]
+}
