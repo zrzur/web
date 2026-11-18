@@ -42034,8 +42034,8 @@
     },
     {
       "path": "packages/client/src/Interface.tsx",
-      "sha256": "63b17cb9518601a3ddfe86a8e5c502f4631000a107b7c74ca38ef1f76a992c0c",
-      "bytes": 12914,
+      "sha256": "bca6ab1a9d40a7cfb411da21194140b269867378c1d6ef9b9dfefa61e840c59a",
+      "bytes": 13100,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -43626,6 +43626,18 @@
       "path": "packages/client/src/interface/tickets/transcript.ts",
       "sha256": "2029c07dbc811e5ff700e27f00e9a441929b412752d62cc8bbcc1ec2254e8ea2",
       "bytes": 2147,
+      "category": "product-source-or-build-manifest"
+    },
+    {
+      "path": "packages/client/src/interface/warmScreens.test.ts",
+      "sha256": "527fea91c23aa3825bb84ac94731269f65a6a98b1fd6d318619d838ca4680210",
+      "bytes": 808,
+      "category": "synthetic-test-source-or-fixture"
+    },
+    {
+      "path": "packages/client/src/interface/warmScreens.ts",
+      "sha256": "d9d539630ac5b8d67e14c8d8bcf69387f44c10192455a699e5805bb0e827766d",
+      "bytes": 2244,
       "category": "product-source-or-build-manifest"
     },
     {
