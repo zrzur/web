@@ -307,7 +307,12 @@ const Row = styled("div", {
     alignItems: "center",
     gap: "8px",
     // under the name on a phone: More sits on the far end of the row
-    _phone: { "& > [data-more]": { marginInlineStart: "auto" } },
+    // and every button of the row is as tall as the square ones beside it:
+    // "Message" was drawn shorter than "More" (owner, 2026-11-18)
+    _phone: {
+      "& > [data-more]": { marginInlineStart: "auto" },
+      "& > button": { height: "44px", minHeight: "44px" },
+    },
     // in the small card the buttons share the width equally
     "&[data-compact] > button": { flex: "1 1 0", justifyContent: "center" },
   },

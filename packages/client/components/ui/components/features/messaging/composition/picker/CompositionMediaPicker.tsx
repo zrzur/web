@@ -37,10 +37,20 @@ const GifPicker = lazy(() =>
   import("./GifPicker").then((m) => ({ default: m.GifPicker })),
 );
 
+/** What the docked panel shows: "add" is the phone's list of things to add */
+type Shown = "gif" | "emoji" | "add";
+
+/** The things-to-add panel: drawn by the message box, given these to act */
+export type MediaPickerAdd = (actions: {
+  close: () => void;
+  openGif: () => void;
+}) => JSX.Element;
+
 export type MediaPickerProps = {
   ref: Setter<HTMLElement | undefined>;
   onClickGif: (_: unknown, ref?: HTMLDivElement) => void;
   onClickEmoji: (_: unknown, ref?: HTMLDivElement) => void;
+  onClickAdd: (_: unknown, ref?: HTMLDivElement) => void;
 };
 interface Props {
   children: (trigProps: MediaPickerProps) => JSX.Element;
@@ -51,6 +61,8 @@ interface Props {
   closeOnPick?: boolean;
   /** Where the picker opens next to its button (default: above, at the end) */
   placement?: Placement;
+  /** Phones: the content of the "add" panel (see onClickAdd) */
+  add?: MediaPickerAdd;
 }
 export const CompositionMediaPickerContext = createContext(
   null as unknown as Pick<Props, "onMessage" | "onTextReplacement">,
@@ -58,7 +70,7 @@ export const CompositionMediaPickerContext = createContext(
 
 export function CompositionMediaPicker(props: Props) {
   const [anchor, setAnchor] = createSignal<HTMLElement>();
-  const [show, setShow] = createSignal<"gif" | "emoji">();
+  const [show, setShow] = createSignal<Shown>();
   const [altRef, setAltRef] = createSignal<HTMLElement>();
   const [trigger, setTrigger] = createSignal<HTMLElement>();
   function captureTrigger(event: unknown, ref?: HTMLDivElement) {
@@ -91,6 +103,11 @@ export function CompositionMediaPicker(props: Props) {
           captureTrigger(event, ref);
           setShow((current) => (current === "emoji" ? undefined : "emoji"));
         },
+        onClickAdd: (event, ref) => {
+          if (!props.add) return;
+          captureTrigger(event, ref);
+          setShow((current) => (current === "add" ? undefined : "add"));
+        },
       })}
       <Show when={show()}>
         <Portal mount={document.getElementById("floating")!}>
@@ -101,6 +118,7 @@ export function CompositionMediaPicker(props: Props) {
             show={show}
             setShow={setShow}
             placement={props.placement}
+            add={props.add}
           />
         </Portal>
       </Show>
@@ -109,11 +127,11 @@ export function CompositionMediaPicker(props: Props) {
 }
 
 function Picker(
-  props: Pick<Props, "channel"> & {
+  props: Pick<Props, "channel" | "add"> & {
     anchor: Accessor<HTMLElement | undefined>;
     trigger: Accessor<HTMLElement | undefined>;
-    show: Accessor<"gif" | "emoji" | undefined>;
-    setShow: Setter<"gif" | "emoji" | undefined>;
+    show: Accessor<Shown | undefined>;
+    setShow: Setter<Shown | undefined>;
     placement?: Placement;
   },
 ) {
@@ -219,7 +237,13 @@ function Picker(
       data-picker-type={props.show()}
       classList={{ "z-media-picker--phone": phone() }}
       role="dialog"
-      aria-label={props.show() === "gif" ? t`GIF picker` : t`Emoji`}
+      aria-label={
+        props.show() === "gif"
+          ? t`GIF picker`
+          : props.show() === "add"
+            ? t`Add`
+            : t`Emoji`
+      }
       style={
         phone()
           ? undefined
@@ -232,7 +256,7 @@ function Picker(
             }
       }
     >
-      <Show when={phone()}>
+      <Show when={phone() && props.show() !== "add"}>
         <div class="z-picker-dock-head">
           <span class="z-picker-grab" aria-hidden="true" />
           {/* a message can take either; a field for one emoji has no GIFs */}
@@ -267,6 +291,12 @@ function Picker(
           </Match>
           <Match when={props.show() === "emoji"}>
             <EmojiPicker />
+          </Match>
+          <Match when={props.show() === "add" && props.add}>
+            {props.add!({
+              close: () => props.setShow(undefined),
+              openGif: () => props.setShow("gif"),
+            })}
           </Match>
         </Switch>
       </div>

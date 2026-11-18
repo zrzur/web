@@ -217,6 +217,22 @@ const Close = styled("button", {
       outline: "2px solid var(--z-focus)",
       outlineOffset: "2px",
     },
-    _phone: { width: "44px", height: "44px" },
+    // phones: the profile is a sheet and closes as every sheet does (pulled
+    // down, the back gesture, a tap outside); no close button on it (owner,
+    // 2026-11-18). Still there for a screen reader and a keyboard.
+    _phone: {
+      // (!important: the phone rule for dialog close buttons sets 44 px so)
+      width: "1px !important",
+      height: "1px !important",
+      overflow: "hidden",
+      opacity: 0,
+      pointerEvents: "none",
+      _focusVisible: {
+        width: "44px !important",
+        height: "44px !important",
+        opacity: 1,
+        pointerEvents: "auto",
+      },
+    },
   },
 });

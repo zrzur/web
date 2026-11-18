@@ -52,7 +52,6 @@ import { writeAccess } from "@revolt/app/interface/channels/threadAccess";
 import { MessageComposition } from "./Composition";
 import { isLargeServer } from "./largeServer";
 import { MemberSidebar } from "./MemberSidebar";
-import { TextSearchSidebar } from "./TextSearchSidebar";
 
 import type { DetailsTab } from "./ChannelDetailsPhone";
 
@@ -64,6 +63,16 @@ const ChannelDetailsPhone = lazyRetry(
   () =>
     import("./ChannelDetailsPhone").then((m) => ({
       default: m.ChannelDetailsPhone,
+    })),
+  () => null,
+);
+
+// Search results and pinned messages, opened from the header: load on first
+// use (the installed shell has a size limit, scripts/precacheShell.mjs)
+const TextSearchSidebar = lazyRetry(
+  () =>
+    import("./TextSearchSidebar").then((m) => ({
+      default: m.TextSearchSidebar,
     })),
   () => null,
 );
@@ -472,15 +481,17 @@ export function TextChannel(props: ChannelPageProps) {
                       </Text>
                     </SidebarTitle>
                   </Show>
-                  <TextSearchSidebar
-                    channel={props.channel}
-                    query={{
-                      query: (sidebarState() as { query: string }).query,
-                    }}
-                    onQuery={(query) =>
-                      setSidebarState({ state: "search", query })
-                    }
-                  />
+                  <Suspense>
+                    <TextSearchSidebar
+                      channel={props.channel}
+                      query={{
+                        query: (sidebarState() as { query: string }).query,
+                      }}
+                      onQuery={(query) =>
+                        setSidebarState({ state: "search", query })
+                      }
+                    />
+                  </Suspense>
                 </WideSidebarContainer>
               </Match>
               <Match when={sidebarState().state === "threads"}>
@@ -502,10 +513,12 @@ export function TextChannel(props: ChannelPageProps) {
                       <Trans>Pinned messages</Trans>
                     </Text>
                   </SidebarTitle>
-                  <TextSearchSidebar
-                    channel={props.channel}
-                    query={{ pinned: true, sort: "Latest" }}
-                  />
+                  <Suspense>
+                    <TextSearchSidebar
+                      channel={props.channel}
+                      query={{ pinned: true, sort: "Latest" }}
+                    />
+                  </Suspense>
                 </WideSidebarContainer>
               </Match>
             </Switch>
