@@ -42268,8 +42268,8 @@
     },
     {
       "path": "packages/client/src/interface/channels/ChannelHeader.tsx",
-      "sha256": "02f26e83ef618993512f21dbb0f9905f7fc024e9eacecef98438584d94daa2db",
-      "bytes": 27796,
+      "sha256": "27e33749f34c2fa7f952da993de15f467eb30ba9547dd7b9950e63d3efa0a0b7",
+      "bytes": 27805,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -43738,8 +43738,8 @@
     },
     {
       "path": "packages/client/src/interface/tickets/TicketAction.tsx",
-      "sha256": "acd050cde902934fa6fe89f2cfb709a0126d90d48f9818bfc069784b230d5893",
-      "bytes": 4820,
+      "sha256": "1ff3ce42308fb2bae796811bb4911555e1e0aee0057f28191c5b9e089e5a0166",
+      "bytes": 7351,
       "category": "product-source-or-build-manifest"
     },
     {
