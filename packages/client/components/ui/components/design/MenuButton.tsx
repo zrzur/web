@@ -150,8 +150,14 @@ const base = cva({
       minHeight: "44px",
       borderBlock: "4px solid transparent",
       backgroundClip: "padding-box",
-      // 16 on the outside is 12 on the painted box, the field's corner
-      borderRadius: "16px !important",
+      // The painted box (36 px high inside the 44 px row) has a soft 10 px
+      // corner, a little under the search field's 12 as it is lower. The
+      // unseen border is on the block sides only, so the outside radius is
+      // 10 across and 14 down: one radius of 16 painted a corner 16 wide
+      // and 12 high, which read as a pill (owner, 2026-11-18: too round).
+      borderRadius: "10px / 14px !important",
+      // room at the start for the chosen row's mark
+      paddingInlineStart: "14px",
     },
     flexShrink: 0,
 
@@ -253,7 +259,9 @@ const base = cva({
           // phones: a marker seen at a glance, in the middle of the row's
           // side as before (a marker running the whole height was tried on
           // 2026-11-17 and the owner asked for it back where it was)
-          _phone: { width: "4px", height: "20px" },
+          // inside the box with room around it, not squeezed into its
+          // corner (owner, 2026-11-18)
+          _phone: { width: "3px", height: "16px", insetInlineStart: "5px" },
         },
       },
     },

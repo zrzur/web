@@ -6154,8 +6154,8 @@
     },
     {
       "path": "packages/client/components/ui/components/design/MenuButton.tsx",
-      "sha256": "1f3f64b27cf5d2255a5a43fe1513eb10ab367c77a2a2aaf2f34cfee3d0728521",
-      "bytes": 6912,
+      "sha256": "38930c1928c90500cbe09c8da33d08f68374aab2e5a77a9a4ff25769f7250abb",
+      "bytes": 7445,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -43636,8 +43636,8 @@
     },
     {
       "path": "packages/client/src/interface/navigation/channels/ServerSidebar.tsx",
-      "sha256": "be3bf5073a9d0f26dad18b1fdfd46cd4a755ff2d71c6c1638875bf53f1ac7e91",
-      "bytes": 41841,
+      "sha256": "620d465a9859e885d0580ec7f796858ea9146430fb0409008a393996e16c6db2",
+      "bytes": 42138,
       "category": "product-source-or-build-manifest"
     },
     {
