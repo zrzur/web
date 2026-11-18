@@ -28865,3 +28865,37 @@ msgstr "Zrzur, right on <0>your desktop.</0>"
 #: components/app/interface/settings/user/appearance/AppearanceMenu.tsx
 #~ msgid "Zrzur's own look: very dark neutral panels with Zrzur Pink as the one accent."
 #~ msgstr "Zrzur's own look: very dark neutral panels with Zrzur Pink as the one accent."
+
+#: src/interface/channels/text/SearchFiltersPhone.tsx
+msgid "Filter results"
+msgstr "Filter results"
+
+#: src/interface/channels/text/SearchFiltersPhone.tsx
+msgid "Find a channel"
+msgstr "Find a channel"
+
+#: src/interface/channels/text/SearchFiltersPhone.tsx
+msgid "From a member"
+msgstr "From a member"
+
+#: src/interface/channels/text/SearchFiltersPhone.tsx
+msgid "In a channel"
+msgstr "In a channel"
+
+#: src/interface/channels/text/SearchFiltersPhone.tsx
+msgid "On a day"
+msgstr "On a day"
+
+#. placeholder {0}: chip(token.key, token.value)
+#. placeholder {0}: item.label
+#: src/interface/channels/text/TextSearchSidebar.tsx
+msgid "Remove filter: {0}"
+msgstr "Remove filter: {0}"
+
+#: src/interface/channels/text/SearchFiltersPhone.tsx
+msgid "Show results"
+msgstr "Show results"
+
+#: src/interface/channels/text/TextSearchSidebar.tsx
+msgid "Type words, or choose filters with the button beside the field."
+msgstr "Type words, or choose filters with the button beside the field."

@@ -8786,6 +8786,10 @@ msgstr "Фильтр команд по приложению"
 msgid "Filter posts"
 msgstr "Фильтр публикаций"
 
+#: src/interface/channels/text/SearchFiltersPhone.tsx
+msgid "Filter results"
+msgstr "Фильтр результатов"
+
 #: components/app/interface/settings/server/pages.tsx
 #: components/app/interface/settings/server/ServerEmergency.tsx
 #: components/app/interface/settings/ServerSettings.tsx
@@ -8797,6 +8801,10 @@ msgstr "Фильтры"
 msgid "Final results"
 msgstr "Итоговые результаты"
 
+#: src/interface/channels/text/SearchFiltersPhone.tsx
+msgid "Find a channel"
+msgstr "Найти канал"
+
 #: src/interface/Home.tsx
 msgid "Find a community"
 msgstr "Найдите сообщество"
@@ -8806,6 +8814,7 @@ msgid "Find a look you like"
 msgstr "Найдите оформление по душе"
 
 #: components/ui/components/features/voice/rooms/RoomControlsPanel.tsx
+#: src/interface/channels/text/SearchFiltersPhone.tsx
 msgid "Find a member"
 msgstr "Найти участника"
 
@@ -9231,6 +9240,10 @@ msgstr "Из {0} · {1}"
 #: components/app/interface/settings/server/WingsSettings.tsx
 msgid "From {0} Wings"
 msgstr "От {0} Крыльев"
+
+#: src/interface/channels/text/SearchFiltersPhone.tsx
+msgid "From a member"
+msgstr "От участника"
 
 #: components/app/interface/settings/user/appearance/AnimationSettings.tsx
 msgid "From above"
@@ -10571,6 +10584,10 @@ msgstr "В"
 msgid "in {0} since {1}"
 msgstr "в {0} с {1}"
 
+#: src/interface/channels/text/SearchFiltersPhone.tsx
+msgid "In a channel"
+msgstr "В канале"
+
 #: components/app/interface/settings/user/Keybinds.tsx
 msgid "In a channel where you can post polls."
 msgstr "В канале, где вы можете публиковать опросы."
@@ -11580,6 +11597,7 @@ msgstr "Последнее использование: <0/>"
 msgid "Lasting protection"
 msgstr "Постоянная защита"
 
+#: src/interface/channels/text/SearchFiltersPhone.tsx
 #: src/interface/channels/text/TextSearchSidebar.tsx
 msgid "Latest"
 msgstr "Последние"
@@ -15240,6 +15258,7 @@ msgstr "Фонари Старого города"
 msgid "Old City Walls"
 msgstr "Стены Старого города"
 
+#: src/interface/channels/text/SearchFiltersPhone.tsx
 #: src/interface/channels/text/TextSearchSidebar.tsx
 msgid "Oldest"
 msgstr "Старые"
@@ -15272,6 +15291,10 @@ msgstr "Вкл"
 #: components/app/interface/settings/user/bots/PrivilegedIntents.tsx
 msgid "On (saved)"
 msgstr "Включено (сохранено)"
+
+#: src/interface/channels/text/SearchFiltersPhone.tsx
+msgid "On a day"
+msgstr "За день"
 
 #: components/app/interface/discover/Detail.tsx
 #: components/modal/modals/AddBot.tsx
@@ -17888,6 +17911,7 @@ msgstr "Подключиться снова"
 msgid "Release delay"
 msgstr "Задержка отпускания"
 
+#: src/interface/channels/text/SearchFiltersPhone.tsx
 #: src/interface/channels/text/TextSearchSidebar.tsx
 msgid "Relevance"
 msgstr "Актуальные"
@@ -18008,6 +18032,12 @@ msgstr "Убрать фильтр"
 #: src/interface/designs/Home.tsx
 msgid "Remove filter {0}"
 msgstr "Убрать фильтр {0}"
+
+#. placeholder {0}: chip(token.key, token.value)
+#. placeholder {0}: item.label
+#: src/interface/channels/text/TextSearchSidebar.tsx
+msgid "Remove filter: {0}"
+msgstr "Убрать фильтр: {0}"
 
 #: components/app/menus/UserContextMenu.tsx
 msgid "Remove friend"
@@ -19587,6 +19617,7 @@ msgstr "Поиск участников"
 #: src/interface/channels/ChannelHeader.tsx
 #: src/interface/channels/text/ChannelDetailsPhone.tsx
 #: src/interface/channels/text/SearchBox.tsx
+#: src/interface/channels/text/TextSearchSidebar.tsx
 msgid "Search messages"
 msgstr "Поиск сообщений"
 
@@ -20425,6 +20456,10 @@ msgstr "Показать предпросмотр"
 msgid "Show profile effects"
 msgstr "Показывать эффекты профиля"
 
+#: src/interface/channels/text/SearchFiltersPhone.tsx
+msgid "Show results"
+msgstr "Показать результаты"
+
 #: components/app/interface/settings/server/assistant/labels.ts
 msgid "Show the Hijri date"
 msgstr "Показывать дату по хиджре"
@@ -20912,6 +20947,7 @@ msgstr "Сортировать"
 msgid "Sort members"
 msgstr "Сортировка участников"
 
+#: src/interface/channels/text/SearchFiltersPhone.tsx
 #: src/interface/channels/text/TextSearchSidebar.tsx
 msgid "Sort results"
 msgstr "Сортировка результатов"
@@ -23059,6 +23095,7 @@ msgstr "Не удалось загрузить это обращение."
 msgid "This category is no longer here."
 msgstr "Этой категории здесь больше нет."
 
+#: src/interface/channels/text/SearchFiltersPhone.tsx
 #: src/interface/channels/text/TextSearchSidebar.tsx
 msgid "This channel"
 msgstr "Этот канал"
@@ -23899,6 +23936,7 @@ msgstr "Чтобы ответить на какое-либо из них, отк
 
 #: components/modal/modals/CustomStatus.tsx
 #: src/interface/channels/text/SearchBox.tsx
+#: src/interface/channels/text/SearchFiltersPhone.tsx
 #: src/interface/navigation/NotificationsPhone.tsx
 msgid "Today"
 msgstr "Сегодня"
@@ -24283,6 +24321,10 @@ msgstr "Введите новое название выше, затем пере
 #: src/interface/channels/text/TextSearchSidebar.tsx
 msgid "Type words to search, or a filter like from:, has: or before:."
 msgstr "Введите слова для поиска или фильтр, например from:, has: или before:."
+
+#: src/interface/channels/text/TextSearchSidebar.tsx
+msgid "Type words, or choose filters with the button beside the field."
+msgstr "Введите слова или выберите фильтры кнопкой рядом с полем."
 
 #: src/interface/developers/docs/EndpointReference.tsx
 msgid "Type-checked only."
@@ -25973,6 +26015,7 @@ msgstr "Где открываются обращения"
 msgid "Where to preview"
 msgstr "Где просмотреть"
 
+#: src/interface/channels/text/SearchFiltersPhone.tsx
 #: src/interface/channels/text/TextSearchSidebar.tsx
 msgid "Where to search"
 msgstr "Где искать"
@@ -26128,6 +26171,7 @@ msgstr "Тот, кто управляет этим сервером Zrzur, мо�
 msgid "Whole number"
 msgstr "Целое число"
 
+#: src/interface/channels/text/SearchFiltersPhone.tsx
 #: src/interface/channels/text/TextSearchSidebar.tsx
 msgid "Whole server"
 msgstr "Весь сервер"
@@ -26441,6 +26485,7 @@ msgid "Yes, uninstall"
 msgstr "Да, удалить"
 
 #: src/interface/channels/text/SearchBox.tsx
+#: src/interface/channels/text/SearchFiltersPhone.tsx
 #: src/interface/navigation/channels/HomeSidebarPhone.tsx
 #: src/interface/navigation/NotificationsPhone.tsx
 msgid "Yesterday"

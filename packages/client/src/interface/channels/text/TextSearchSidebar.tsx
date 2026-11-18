@@ -1,4 +1,4 @@
-import { For, Show, Suspense, createMemo, createSignal } from "solid-js";
+import { For, Show, Suspense, createMemo } from "solid-js";
 
 import { Trans, useLingui } from "@lingui/solid/macro";
 import { useQuery } from "@tanstack/solid-query";
@@ -6,12 +6,20 @@ import { API, Channel, Message as MessageClass } from "@zrzur/sdk/solid";
 
 import { Message } from "@revolt/app";
 import { useClient } from "@revolt/client";
+import { useDevice } from "@revolt/common";
 import { errorDetails } from "@revolt/i18n/errors";
 import { CircularProgress, Segmented } from "@revolt/ui";
 import { Icon } from "@revolt/ui/icons/Icon";
 import { styled } from "styled-system/jsx";
 
 import { searchChannels, searchPeople } from "./SearchBox";
+import {
+  removeFilter,
+  searchScope,
+  searchSort,
+  setSearchScope,
+  setSearchSort,
+} from "./searchChoices";
 import { useSearchLabels } from "./searchLabels";
 import {
   type HasValue,
@@ -31,12 +39,24 @@ type Scope = "channel" | "server";
 export function TextSearchSidebar(props: {
   channel: Channel;
   query: Omit<API.DataMessageSearch, "include_users">;
+  /** Phones: a chip was tapped away; the search field takes the new text */
+  onQuery?: (query: string) => void;
 }) {
   const { t } = useLingui();
   const client = useClient();
   const labels = useSearchLabels();
-  const [sort, setSort] = createSignal<API.DataMessageSearch["sort"]>("Latest");
-  const [scope, setScope] = createSignal<Scope>("channel");
+  // shared with the phone's filter sheet, which is opened from the search
+  // field's row, far from this page (searchChoices.ts)
+  const sort = searchSort as () => API.DataMessageSearch["sort"];
+  const setSort = setSearchSort as (
+    value: API.DataMessageSearch["sort"],
+  ) => void;
+  const scope = searchScope;
+  const setScope = setSearchScope;
+  const device = useDevice();
+  // phones: the place, the order and the filters are picked in the sheet;
+  // this page keeps the chips and the results
+  const phone = () => device.layout() === "phone" && !pinsList();
 
   // the pins list sends its own query; typed text goes through the syntax
   const pinsList = () =>
@@ -156,9 +176,73 @@ export function TextSearchSidebar(props: {
     return `${labels.key(token.key)}: ${shown}`;
   };
 
+  /** what is chosen besides the typed filters, shown as chips on phones */
+  const choiceChips = () => {
+    const list: { key: string; label: string; remove: () => void }[] = [];
+    if (props.channel.server && scope() === "server")
+      list.push({
+        key: "scope",
+        label: t`Whole server`,
+        remove: () => setScope("channel"),
+      });
+    if (sort() !== "Latest")
+      list.push({
+        key: "sort",
+        label: sort() === "Oldest" ? t`Oldest` : t`Relevance`,
+        remove: () => setSort("Latest"),
+      });
+    return list;
+  };
+
   return (
-    <Body>
-      <Show when={!pinsList()}>
+    <Body data-search-page={pinsList() ? undefined : ""}>
+      <Show when={phone()}>
+        <Show
+          when={
+            parsed().tokens.some((token) => token.value) || choiceChips().length
+          }
+        >
+          <Chips aria-label={t`Filters`} data-removable>
+            <For each={parsed().tokens.filter((token) => token.value)}>
+              {(token) => (
+                <ChipButton
+                  type="button"
+                  data-filter-chip
+                  data-key={token.key}
+                  aria-label={t`Remove filter: ${chip(token.key, token.value)}`}
+                  onClick={() =>
+                    props.onQuery?.(
+                      removeFilter(
+                        props.query.query ?? "",
+                        token.key,
+                        token.value,
+                      ),
+                    )
+                  }
+                >
+                  <bdi>{chip(token.key, token.value)}</bdi>
+                  <Icon name="x" size={14} />
+                </ChipButton>
+              )}
+            </For>
+            <For each={choiceChips()}>
+              {(item) => (
+                <ChipButton
+                  type="button"
+                  data-filter-chip
+                  data-key={item.key}
+                  aria-label={t`Remove filter: ${item.label}`}
+                  onClick={item.remove}
+                >
+                  <bdi>{item.label}</bdi>
+                  <Icon name="x" size={14} />
+                </ChipButton>
+              )}
+            </For>
+          </Chips>
+        </Show>
+      </Show>
+      <Show when={!pinsList() && !phone()}>
         <Show when={props.channel.server}>
           <Row>
             <Segmented
@@ -181,7 +265,7 @@ export function TextSearchSidebar(props: {
         </Show>
       </Show>
 
-      <Show when={!props.query.sort}>
+      <Show when={!props.query.sort && !phone()}>
         <Row>
           <Segmented
             aria-label={t`Sort results`}
@@ -215,7 +299,23 @@ export function TextSearchSidebar(props: {
         <CircularProgress />
       </Show>
 
-      <Show when={!pinsList() && request().empty && !problems().length}>
+      <Show when={phone() && request().empty && !problems().length}>
+        {/* phones: the one empty state, in the middle of the free page */}
+        <Empty role="status" data-empty="search" data-middle>
+          <Icon name="magnifying-glass" size={44} />
+          <b>
+            <Trans>Search messages</Trans>
+          </b>
+          <span>
+            <Trans>
+              Type words, or choose filters with the button beside the field.
+            </Trans>
+          </span>
+        </Empty>
+      </Show>
+      <Show
+        when={!pinsList() && !phone() && request().empty && !problems().length}
+      >
         <Empty role="status" data-search-help>
           <Icon name="magnifying-glass" size={22} />
           <span>
@@ -344,6 +444,9 @@ const Body = styled("div", {
     gap: "8px",
     paddingBlockEnd: "12px",
     "& > section > a, & > section": { display: "block" },
+    // phones: the page fills its screen, so the empty state can sit in the
+    // middle of it
+    "&[data-search-page]": { _phone: { flex: 1, minHeight: "100%" } },
     // phones: the page starts a little below the search field
     _phone: { paddingBlockStart: "12px" },
   },
@@ -364,6 +467,23 @@ const Empty = styled("div", {
     // Phones, before anything is typed: not a centred notice with a narrow
     // column of examples beside it, but one block on the page's own edge:
     // the line of help, then the filters as one card of rows.
+    // phones: the one empty state of a page, in the middle of its room
+    "&[data-middle]": {
+      flex: 1,
+      // the page under the search field's row, whatever its parent's height
+      minHeight: "calc(100dvh - 180px - var(--z-safe-top, 0px))",
+      justifyContent: "center",
+      gap: "6px",
+      padding: "48px 32px",
+      "--z-icon-color": "var(--z-icon-muted)",
+      "& b": {
+        marginBlockStart: "8px",
+        fontSize: "18px",
+        fontWeight: 600,
+        color: "var(--z-fg-primary)",
+      },
+      "& span": { lineHeight: "22px" },
+    },
     _phone: {
       "&[data-search-help]": {
         alignItems: "stretch",
@@ -473,6 +593,44 @@ const Chip = styled("span", {
     background: "var(--z-bg-raised)",
     color: "var(--z-fg-primary)",
     fontSize: "12px",
+  },
+});
+
+/** Phones: a chosen filter; a tap takes it away */
+const ChipButton = styled("button", {
+  base: {
+    position: "relative",
+    display: "inline-flex",
+    alignItems: "center",
+    gap: "6px",
+    maxWidth: "100%",
+    minHeight: "32px",
+    paddingInline: "12px 8px",
+    border: "none",
+    borderRadius: "16px",
+    background:
+      "var(--z-sheet-group, color-mix(in srgb, var(--z-fg-primary) 5%, transparent))",
+    color: "var(--z-fg-primary)",
+    font: "inherit",
+    fontSize: "13px",
+    fontWeight: 500,
+    cursor: "pointer",
+    "--z-icon-color": "var(--z-icon-muted)",
+    // drawn 32 px, 44 to the finger
+    "&::after": { content: '""', position: "absolute", inset: "-6px 0" },
+    "& bdi": {
+      minWidth: 0,
+      overflow: "hidden",
+      textOverflow: "ellipsis",
+      whiteSpace: "nowrap",
+    },
+    _active: {
+      background: "color-mix(in srgb, var(--z-fg-primary) 10%, transparent)",
+    },
+    _focusVisible: {
+      outline: "none",
+      boxShadow: "inset 0 0 0 2px var(--z-focus)",
+    },
   },
 });
 

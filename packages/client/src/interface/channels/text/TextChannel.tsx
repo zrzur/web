@@ -472,6 +472,9 @@ export function TextChannel(props: ChannelPageProps) {
                     query={{
                       query: (sidebarState() as { query: string }).query,
                     }}
+                    onQuery={(query) =>
+                      setSidebarState({ state: "search", query })
+                    }
                   />
                 </WideSidebarContainer>
               </Match>

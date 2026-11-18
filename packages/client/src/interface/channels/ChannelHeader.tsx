@@ -63,6 +63,7 @@ const TicketMenuItems = lazyRetry(
 );
 
 import { SearchBox } from "./text/SearchBox";
+import { SearchFilterButton } from "./text/SearchFiltersPhone";
 import { canIHasSidebar, SidebarState } from "./text/TextChannel";
 
 interface Props {
@@ -176,6 +177,11 @@ export function ChannelHeader(props: Props) {
         value={searchValue() ?? ""}
         onCommit={(query) => props.setSidebarState!({ state: "search", query })}
         onClear={() => props.setSidebarState!({ state: "search", query: "" })}
+      />
+      <SearchFilterButton
+        channel={props.channel}
+        query={searchValue() ?? ""}
+        onQuery={(query) => props.setSidebarState!({ state: "search", query })}
       />
     </>
   );

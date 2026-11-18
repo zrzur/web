@@ -1,0 +1,10 @@
+{
+  "Filter results": ["تصفية النتائج", "Ergebnisse filtern"],
+  "Find a channel": ["ابحث عن قناة", "Kanal suchen"],
+  "From a member": ["من عضو", "Von einem Mitglied"],
+  "In a channel": ["في قناة", "In einem Kanal"],
+  "On a day": ["في يوم", "An einem Tag"],
+  "Remove filter: {0}": ["إزالة التصفية: {0}", "Filter entfernen: {0}"],
+  "Show results": ["عرض النتائج", "Ergebnisse anzeigen"],
+  "Type words, or choose filters with the button beside the field.": ["اكتب كلمات، أو اختر التصفية من الزر بجانب الحقل.", "Gib Wörter ein oder wähle Filter über die Schaltfläche neben dem Feld."]
+}
