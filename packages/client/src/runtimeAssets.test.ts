@@ -1,6 +1,11 @@
 import { describe, expect, it } from "vitest";
 
-import { isAppNavigation, isRuntimeAsset, overLimit } from "./runtimeAssets";
+import {
+  fetchWithRetry,
+  isAppNavigation,
+  isRuntimeAsset,
+  overLimit,
+} from "./runtimeAssets";
 
 const origin = "https://app.zrzur.com";
 const url = (path: string) => new URL(path, origin);
@@ -59,5 +64,60 @@ describe("runtime asset cache", () => {
   it("drops only the oldest entries over the limit", () => {
     expect(overLimit([1, 2, 3, 4], 2)).toEqual([1, 2]);
     expect(overLimit([1, 2], 2)).toEqual([]);
+  });
+});
+
+describe("a file that does not arrive", () => {
+  const none = async () => undefined;
+
+  it("is asked for again after a lost request, and the page gets the file", async () => {
+    let tries = 0;
+    const answer = await fetchWithRetry(
+      async () => {
+        if (++tries < 3) throw new TypeError("Failed to fetch");
+        return { status: 200 };
+      },
+      [0, 1, 1],
+      none,
+    );
+    expect(answer.status).toBe(200);
+    expect(tries).toBe(3);
+  });
+
+  it("is asked for again after a server error", async () => {
+    let tries = 0;
+    const answer = await fetchWithRetry(
+      async () => ({ status: ++tries < 2 ? 503 : 200 }),
+      [0, 1, 1],
+      none,
+    );
+    expect(answer.status).toBe(200);
+    expect(tries).toBe(2);
+  });
+
+  it("takes not found as the answer, without asking again", async () => {
+    let tries = 0;
+    const answer = await fetchWithRetry(
+      async () => ({ status: (tries++, 404) }),
+      [0, 1, 1],
+      none,
+    );
+    expect(answer.status).toBe(404);
+    expect(tries).toBe(1);
+  });
+
+  it("fails only after every try failed", async () => {
+    let tries = 0;
+    await expect(
+      fetchWithRetry(
+        async () => {
+          tries++;
+          throw new TypeError("Failed to fetch");
+        },
+        [0, 1, 1],
+        none,
+      ),
+    ).rejects.toThrow("Failed to fetch");
+    expect(tries).toBe(3);
   });
 });

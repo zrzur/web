@@ -67,4 +67,57 @@ describe("stale build after an update", () => {
     listeners["vite:preloadError"](event);
     expect(reload).toHaveBeenCalledOnce();
   });
+  /** A page that knows its commit, and what the server answers */
+  function page(server: string | undefined) {
+    const store = new Map<string, string>();
+    const listeners: Record<string, (event: Event) => void> = {};
+    const reload = vi.fn();
+    const fake = {
+      addEventListener: (name: string, fn: (event: Event) => void) => {
+        listeners[name] = fn;
+      },
+      sessionStorage: {
+        getItem: (key: string) => store.get(key) ?? null,
+        setItem: (key: string, value: string) => store.set(key, value),
+      },
+      location: { reload },
+    } as unknown as Window;
+    watchForStaleBuild(fake, {
+      runningCommit: "aaaa111",
+      serverCommit: async () => server,
+    });
+    const fail = async () => {
+      const event = { preventDefault: vi.fn() } as unknown as Event;
+      listeners["vite:preloadError"](event);
+      await Promise.resolve();
+      await Promise.resolve();
+      return event;
+    };
+    return { reload, fail };
+  }
+
+  it("does not reload when the same build is still on the server", async () => {
+    const { reload, fail } = page("aaaa111");
+    const event = await fail();
+    await fail();
+    expect(reload).not.toHaveBeenCalled();
+    // the failure reaches the part that asked for the file: it retries
+    expect(event.preventDefault).not.toHaveBeenCalled();
+  });
+
+  it("does not reload when the server cannot be asked (no connection)", async () => {
+    const { reload, fail } = page(undefined);
+    await fail();
+    expect(reload).not.toHaveBeenCalled();
+  });
+
+  it("reloads once when the server has another build", async () => {
+    const { reload, fail } = page("bbbb222");
+    await fail();
+    expect(reload).toHaveBeenCalledOnce();
+    // known now: the next failure is handled at once, and not twice in a row
+    const next = await fail();
+    expect(reload).toHaveBeenCalledOnce();
+    expect(next.preventDefault).not.toHaveBeenCalled();
+  });
 });

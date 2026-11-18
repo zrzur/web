@@ -22,6 +22,7 @@ import type { Language } from "@revolt/i18n/Languages";
 import { startEarlyConfig } from "@revolt/instance/earlyConfig";
 import { listenForInstall } from "@revolt/pwa/installPrompt";
 
+import { buildInfo } from "@revolt/common/lib/buildInfo";
 import siteCatalogs from "virtual:zrzur-site-catalogs";
 import { bootFailed, bootLoaded, opensSignIn } from "./boot";
 import "./index.css";
@@ -30,8 +31,9 @@ import "./serviceWorkerInterface";
 import { isDesignsSite, isDiscoverSite, isDocsSite } from "./siteKind";
 import { watchForStaleBuild } from "./staleBuild";
 
-// a tab opened before an update loads the new build instead of failing
-watchForStaleBuild();
+// a tab opened before an update loads the new build instead of failing;
+// a part that fails for any other reason never reloads the page
+watchForStaleBuild(window, { runningCommit: buildInfo.commit });
 
 // Android says once, early, that the app can be installed: keep it for later
 listenForInstall();

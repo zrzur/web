@@ -5,7 +5,7 @@
 export const RUNTIME_CACHE = "zrzur-assets-v1";
 
 /** Oldest entries go first; old builds leave files nobody asks for again */
-export const RUNTIME_CACHE_LIMIT = 150;
+export const RUNTIME_CACHE_LIMIT = 400;
 
 export function isRuntimeAsset(url: URL, origin: string, scopePath: string) {
   return (
@@ -36,4 +36,34 @@ export function isAppNavigation(
 /** Keys to remove so the cache stays within the limit, oldest first */
 export function overLimit<T>(keys: readonly T[], limit = RUNTIME_CACHE_LIMIT) {
   return keys.slice(0, Math.max(0, keys.length - limit));
+}
+
+/** Waits before each try at a file: at once, then twice more */
+export const ASSET_RETRY_WAITS_MS = [0, 400, 1200] as const;
+
+/**
+ * Ask for a file up to three times. A phone's network drops single requests;
+ * one lost request for a part of the app must not look like a failure to the
+ * page (owner report 2026-11-18). A plain "not found" is an answer and is
+ * returned at once; a server error or no answer is tried again.
+ */
+export async function fetchWithRetry<T extends { status: number }>(
+  ask: () => Promise<T>,
+  waits: readonly number[] = ASSET_RETRY_WAITS_MS,
+  sleep: (ms: number) => Promise<void> = (ms) =>
+    new Promise((done) => setTimeout(done, ms)),
+): Promise<T> {
+  let answer: T | undefined;
+  let failure: unknown;
+  for (const wait of waits) {
+    if (wait) await sleep(wait);
+    try {
+      answer = await ask();
+      if (answer.status < 500) return answer;
+    } catch (error) {
+      failure = error;
+    }
+  }
+  if (answer) return answer;
+  throw failure;
 }

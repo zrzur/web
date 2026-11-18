@@ -2,6 +2,12 @@
 
 ## Unreleased
 
+### The app no longer reloads by itself (2026-11-18)
+
+* A part of the app that failed to download (a phone's network dropping one request) reloaded the whole page: opening channel details, a settings page or anything else that loads on first use could look like a refresh. The page now reloads only when the server really has a newer release; otherwise the download is tried three times and the part that asked for it tries again or stays as it was.
+* More of the parts used on a device are kept on it (400 files, was 150), so they are not downloaded again.
+* Phones: the one-time notice about usernames leaves by itself after 12 seconds; it lay over the lower rows of lists and menus until closed.
+
 ### Owner's review before Beta 4 (2026-11-17)
 
 * **One box look on desktop:** every box in user settings, server settings and the lobby has the settings card's border, corner and fill (sessions, support, feedback, connected apps, the account card, insights, the Discover box, the lobby's cards).

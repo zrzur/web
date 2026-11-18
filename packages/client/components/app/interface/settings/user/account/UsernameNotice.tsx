@@ -2,6 +2,7 @@ import { useLingui } from "@lingui/solid/macro";
 import { createEffect } from "solid-js";
 
 import { useClient } from "@revolt/client";
+import { useDevice } from "@revolt/common";
 import { hasOldTag } from "@revolt/common/lib/userTag";
 import { useModals } from "@revolt/modal";
 import { useSnackbar } from "@revolt/ui";
@@ -18,6 +19,7 @@ export function UsernameNotice() {
   const snackbar = useSnackbar();
   const { openModal } = useModals();
   const { t } = useLingui();
+  const { layout } = useDevice();
   let told = false;
 
   createEffect(() => {
@@ -45,6 +47,9 @@ export function UsernameNotice() {
       closeable: true,
       messageLine: 2,
       placement: "bottom",
+      // phones: it lies over the lower rows of a list or a menu, so it
+      // leaves by itself; the same choice stays in Settings, My account
+      autoCloseDelay: layout() === "phone" ? 12_000 : undefined,
       closeOnAction: true,
       onAction: () => openModal({ type: "edit_username", client: client() }),
     });

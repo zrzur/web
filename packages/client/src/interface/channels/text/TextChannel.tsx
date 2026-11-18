@@ -5,13 +5,13 @@ import {
   Switch,
   createEffect,
   createSignal,
-  lazy,
   on,
   onCleanup,
 } from "solid-js";
 
 import { Trans } from "@lingui/solid/macro";
 
+import { lazyRetry } from "@revolt/ui/components/utils/lazyRetry";
 import { cva } from "styled-system/css";
 import { styled } from "styled-system/jsx";
 import { decodeTime, ulid } from "ulid";
@@ -59,17 +59,23 @@ import { ThreadsPanel } from "./ThreadsPanel";
 
 // Phones, and only once it is opened: kept out of the files the app installs
 // up front (scripts/precacheShell.mjs)
-const ChannelDetailsPhone = lazy(() =>
-  import("./ChannelDetailsPhone").then((m) => ({
-    default: m.ChannelDetailsPhone,
-  })),
+// A file that does not arrive is asked for again; if it still fails the
+// screen stays as it was: nothing reloads the page (owner, 2026-11-18)
+const ChannelDetailsPhone = lazyRetry(
+  () =>
+    import("./ChannelDetailsPhone").then((m) => ({
+      default: m.ChannelDetailsPhone,
+    })),
+  () => null,
 );
 
 // Shown only while a moderator selects messages: loads on first use.
-const MessageSelectionBar = lazy(() =>
-  import("@revolt/app/interface/channels/text/MessageSelectionBar").then(
-    (m) => ({ default: m.MessageSelectionBar }),
-  ),
+const MessageSelectionBar = lazyRetry(
+  () =>
+    import("@revolt/app/interface/channels/text/MessageSelectionBar").then(
+      (m) => ({ default: m.MessageSelectionBar }),
+    ),
+  () => null,
 );
 
 /**

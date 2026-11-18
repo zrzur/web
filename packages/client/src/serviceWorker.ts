@@ -16,6 +16,7 @@ import {
 } from "./offlinePage";
 import {
   RUNTIME_CACHE,
+  fetchWithRetry,
   isAppNavigation,
   isRuntimeAsset,
   overLimit,
@@ -150,7 +151,8 @@ async function cachedAsset(request: Request) {
   const hit = await cache.match(request);
   if (hit) return hit;
 
-  const response = await fetch(request);
+  // tried again before the page hears of a failure: see fetchWithRetry
+  const response = await fetchWithRetry(() => fetch(request.clone()));
   if (response.ok) {
     await cache.put(request, response.clone());
     const stale = overLimit(await cache.keys());
