@@ -1006,8 +1006,8 @@
     },
     {
       "path": "packages/client/components/app/interface/desktop/Titlebar.tsx",
-      "sha256": "1083637a21ed384b2d9c7a624eede16d305a0810b64d2bb27e3997bb6571d2ac",
-      "bytes": 13155,
+      "sha256": "7102c160b11df7a3b3c24393a0894ef49260c7ec23001cf8ceaf8b69453c6398",
+      "bytes": 13691,
       "category": "product-source-or-build-manifest"
     },
     {
