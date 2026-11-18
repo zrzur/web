@@ -5,7 +5,7 @@ import { styled } from "styled-system/jsx";
 
 import { useLocation } from "@revolt/routing";
 import { useState } from "@revolt/state";
-import { LoadingScreen } from "@revolt/ui";
+import { LoadingScreen, PhoneFrame } from "@revolt/ui";
 
 import { goingHome } from "./goingHome";
 import { useGreeting } from "./greeting";
@@ -16,6 +16,13 @@ import { useGreeting } from "./greeting";
  * frame around it; the rest of Home needs the server's answer, which on a slow
  * phone is the slowest part of opening the app. Everyone else gets the
  * loading screen.
+ *
+ * Phones (owner, 2026-11-18, an installed app on an iPhone, which starts
+ * cold most times): no greeting card and no logo alone on an empty screen.
+ * Someone signed in sees the app's own frame straight away, as quiet
+ * placeholders: the rail, the list, the floating bar where they will be (or
+ * a page's top line and message box, when the app opens on a page). When the
+ * app arrives it fills the same frame, it is not a change of screen.
  */
 export function FirstScreen() {
   const state = useState();
@@ -23,12 +30,25 @@ export function FirstScreen() {
 
   const name = () => state.auth.getName();
   const greeting = useGreeting(() => name() ?? "");
+  const phone = window.matchMedia("(max-width: 600px)").matches;
 
   return (
     <Show
-      when={name() && goingHome(location.pathname)}
-      fallback={<LoadingScreen />}
+      when={!(phone && name())}
+      fallback={<PhoneFrame lists={goingHome(location.pathname)} />}
     >
+      <WideFirstScreen
+        show={!!name() && goingHome(location.pathname)}
+        greeting={greeting()}
+      />
+    </Show>
+  );
+}
+
+function WideFirstScreen(props: { show: boolean; greeting: string }) {
+  const greeting = () => props.greeting;
+  return (
+    <Show when={props.show} fallback={<LoadingScreen />}>
       <Frame>
         <Rail />
         <Side />

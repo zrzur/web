@@ -18,6 +18,11 @@ export const FLICK_SPEED = 0.6;
 const FLICK_DISTANCE = 36;
 /** movement (px) before a touch counts as a pull */
 const SLOP = 8;
+/**
+ * ...and on a button or a link: a finger pressing a button slides a little,
+ * and a sheet that starts to follow it takes the press away
+ */
+const SLOP_ON_CONTROL = 24;
 
 /**
  * Is the touched element inside content that is scrolled down?
@@ -51,6 +56,7 @@ export function sheetSwipe(
   let startX = 0;
   let startTime = 0;
   let pulling = false;
+  let slop = SLOP;
 
   const settle = () => {
     const el = sheet();
@@ -74,6 +80,9 @@ export function sheetSwipe(
       startY = event.touches[0].clientY;
       startX = event.touches[0].clientX;
       startTime = event.timeStamp;
+      slop = target.closest("button, a, [role='button'], [role='tab']")
+        ? SLOP_ON_CONTROL
+        : SLOP;
     },
     onTouchMove(event: TouchEvent) {
       const el = sheet();
@@ -82,11 +91,11 @@ export function sheetSwipe(
       const dx = event.touches[0].clientX - startX;
       if (!pulling) {
         // upward, or sideways first: this touch is not a pull
-        if (dy < -SLOP || Math.abs(dx) > Math.max(SLOP, dy)) {
+        if (dy < -slop || Math.abs(dx) > Math.max(slop, dy)) {
           startY = undefined;
           return;
         }
-        if (dy < SLOP) return;
+        if (dy < slop) return;
         pulling = true;
         el.style.transition = "none";
       }
@@ -94,6 +103,14 @@ export function sheetSwipe(
     },
     onTouchEnd(event: TouchEvent) {
       if (startY === undefined) return;
+      // a plain tap: touch nothing. Writing the sheet's style while a finger
+      // lifts off a button in it is a change under the finger, and a phone's
+      // browser may then not deliver the press (owner, 2026-11-18, iPhone:
+      // "Join call" in the room's sheet did nothing)
+      if (!pulling) {
+        startY = undefined;
+        return;
+      }
       const dy = event.changedTouches[0].clientY - startY;
       const speed = dy / Math.max(1, event.timeStamp - startTime);
       const close =
@@ -103,7 +120,8 @@ export function sheetSwipe(
       if (close) onClose();
     },
     onTouchCancel() {
-      if (startY !== undefined) settle();
+      if (startY !== undefined && pulling) settle();
+      startY = undefined;
     },
   };
 }

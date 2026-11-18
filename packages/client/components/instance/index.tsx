@@ -5,6 +5,7 @@ import {
   createMemo,
   createSignal,
   JSXElement,
+  onCleanup,
   Show,
   useContext,
 } from "solid-js";
@@ -20,7 +21,12 @@ import {
   ZRZUR_OFFICIAL_HOSTS,
 } from "@revolt/common/lib/env";
 import { useError } from "@revolt/i18n";
-import { LoadingScreen, useSnackbar } from "@revolt/ui";
+import {
+  LoadingScreen,
+  PhoneFrame,
+  phoneFrameFor,
+  useSnackbar,
+} from "@revolt/ui";
 
 import { takeEarlyConfig } from "./earlyConfig";
 import Instance, { type RevoltConfig, _newClient } from "./Instance";
@@ -144,6 +150,11 @@ export function InstanceContext(props: { children?: JSXElement }) {
     appLoadedOnce = true;
   })();
 
+  const frame = () => phoneFrameFor(window.location.pathname);
+  const [slow, setSlow] = createSignal(false);
+  const slowTimer = setTimeout(() => setSlow(true), 8000);
+  onCleanup(() => clearTimeout(slowTimer));
+
   //Finish init in reactive scope
   const instInit = createMemo(() => {
     const i = inst();
@@ -155,9 +166,20 @@ export function InstanceContext(props: { children?: JSXElement }) {
     <Show
       when={instInit()}
       fallback={
-        <LoadingScreen
-          isOfficial={ZRZUR_OFFICIAL_HOSTS.includes(host || DefaultHost)}
-        />
+        // phones: someone who was signed in sees the app's frame from the
+        // first moment, not a logo alone on an empty screen (owner,
+        // 2026-11-18). If the settings take long, the loading screen takes
+        // over, with its word on what is wrong.
+        <Show
+          when={frame() && !slow()}
+          fallback={
+            <LoadingScreen
+              isOfficial={ZRZUR_OFFICIAL_HOSTS.includes(host || DefaultHost)}
+            />
+          }
+        >
+          <PhoneFrame lists={frame() === "lists"} />
+        </Show>
       }
     >
       <Dynamic component={instanceContext.Provider} value={instInit()}>

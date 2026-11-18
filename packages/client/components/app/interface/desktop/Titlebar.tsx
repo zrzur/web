@@ -69,13 +69,16 @@ export function Titlebar(props: { bare?: boolean }) {
   // over 1.5 s) or an update waiting shows it.
   const [phoneShow, setPhoneShow] = createSignal(false);
   createEffect(() => {
-    const state = lifecycle.state();
+    // read, so the wait starts again when the state changes
+    lifecycle.state();
     setPhoneShow(false);
     if (!isDisconnected()) return;
+    // A phone coming back from the background has a dead connection for a
+    // moment, every time: saying so each time is noise (owner, 2026-11-18,
+    // an installed app on an iPhone). Nothing for the first 4 s of any break;
+    // only a device that is offline is told at once.
     if (!online()) return setPhoneShow(true);
-    if (state !== State.Connecting && state !== State.Reconnecting)
-      return setPhoneShow(true);
-    const timer = setTimeout(() => setPhoneShow(true), 1500);
+    const timer = setTimeout(() => setPhoneShow(true), PHONE_QUIET_MS);
     onCleanup(() => clearTimeout(timer));
   });
 
@@ -251,6 +254,9 @@ export function Titlebar(props: { bare?: boolean }) {
   );
 }
 
+/** Phones: how long a broken connection is not mentioned */
+const PHONE_QUIET_MS = 4000;
+
 const Base = styled("div", {
   base: {
     flexShrink: 0,
@@ -277,14 +283,29 @@ const Base = styled("div", {
     // go to the chat), tall enough to tap "Reconnect now"
     _phone: {
       "&[data-disconnected='true']": { minHeight: "44px" },
-      // the status line is the whole bar: full width, in the reading direction
+      // A small pill that lies over the top of the app and moves nothing
+      // (it was a band above the whole app that pushed everything down each
+      // time the connection blinked). As wide as its words, never wider than
+      // the screen; the words wrap inside it and are not cut.
       "&:not([data-native='true'])": {
         direction: "inherit",
+        position: "fixed",
+        top: "calc(var(--z-safe-top, 0px) + 8px)",
+        insetInlineStart: "50%",
+        translate: "-50% 0",
+        width: "max-content",
+        maxWidth: "calc(100vw - 24px)",
         height: "auto",
         display: "flex",
         justifyContent: "center",
-        gap: "12px",
-        paddingInline: "12px",
+        paddingInline: "16px",
+        borderRadius: "22px",
+        boxShadow: "var(--z-popover-lift, 0 12px 32px rgb(0 0 0 / 0.45))",
+        // the two empty sides of the wide bar take no room here
+        "& > :not(:nth-child(2))": { display: "none" },
+      },
+      _rtl: {
+        "&:not([data-native='true'])": { translate: "50% 0" },
       },
       "&:not([data-native='true']):not([data-phone-show='true'])": {
         display: "none",
