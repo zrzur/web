@@ -1319,7 +1319,14 @@ const ChannelRow = styled("div", {
       "&[data-tools='true'] > :is(a, [aria-disabled])": {
         paddingInlineEnd: "8px !important",
       },
-      "& > :is(a, [aria-disabled])": { minHeight: "44px !important" },
+      "& > :is(a, [aria-disabled])": {
+        minHeight: "44px !important",
+        // room at the start for the chosen row's mark, inside the box
+        paddingInlineStart: "14px",
+      },
+      // inside the column with the search field's edges, the same room on
+      // both sides (owner, 2026-11-18: the chosen row ran to the edge)
+      marginInline: "12px",
     },
   },
 });
