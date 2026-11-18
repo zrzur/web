@@ -312,6 +312,30 @@ const Row = styled("div", {
     _phone: {
       "& > [data-more]": { marginInlineStart: "auto" },
       "& > button": { height: "44px", minHeight: "44px" },
+      // One line beside the avatar. A bot's "Add bot" and "Message" with
+      // "More" did not fit and "More" fell to a line of its own (owner,
+      // 2026-11-18). With three buttons or more, the first keeps its words
+      // and the others that have an icon show the icon alone (their words
+      // stay for a screen reader); the first may shorten with "…".
+      flexWrap: "nowrap",
+      "& > button:first-of-type": {
+        flex: "0 1 auto",
+        minWidth: 0,
+        overflow: "hidden",
+        whiteSpace: "nowrap",
+        textOverflow: "ellipsis",
+      },
+      "&:has(> button:nth-of-type(3)) > button:not(:first-of-type):not([data-more]):has(svg)":
+        {
+          flex: "none",
+          width: "44px",
+          paddingInline: 0,
+          gap: 0,
+          fontSize: 0,
+          justifyContent: "center",
+        },
+      // (a request to answer has buttons with words only: those may wrap)
+      "&:has(> button:nth-of-type(4))": { flexWrap: "wrap" },
     },
     // in the small card the buttons share the width equally
     "&[data-compact] > button": { flex: "1 1 0", justifyContent: "center" },
