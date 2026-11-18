@@ -183,7 +183,8 @@ const InnerContent = styled("div", {
     zIndex: 1,
 
     _tablet: { padding: "16px" },
-    _phone: { height: "calc(100vh - var(--z-settings-frame-gap, 0px))" },
+    // dvh: the height that is seen (see modals/Settings.tsx)
+    _phone: { height: "calc(100dvh - var(--z-settings-frame-gap, 0px))" },
   },
 });
 
@@ -271,7 +272,7 @@ const PageTitle = styled("h1", {
  */
 const ActionRail = styled("div", {
   base: {
-    height: "calc(100vh - var(--z-settings-frame-gap, 0px))",
+    height: "calc(100dvh - var(--z-settings-frame-gap, 0px))",
     minWidth: "56px",
     padding: "24px 16px calc(var(--gap-xl) + var(--z-safe-bottom))",
 

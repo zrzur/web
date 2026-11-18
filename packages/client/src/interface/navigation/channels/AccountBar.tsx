@@ -29,19 +29,20 @@ import { TextWithEmoji } from "@revolt/markdown";
 import { useModals } from "@revolt/modal";
 import { useVoice } from "@revolt/rtc";
 import { canShareScreen } from "@revolt/rtc/screenShare";
+import { useState } from "@revolt/state";
 import { Avatar, OverflowingText, UserStatus } from "@revolt/ui";
 import { SignalBars } from "@revolt/ui/components/features/voice/SignalBars";
 import { watchVoiceStrip } from "@revolt/ui/components/features/voice/callCard/voiceStrip";
-import SoundsUnavailable from "@revolt/ui/components/features/voice/soundboard/SoundsUnavailable";
-import {
-  setSoundboardOpen,
-  soundboardOpen,
-} from "@revolt/ui/components/features/voice/soundboard/soundboardOpen";
 import {
   controlsRoom,
   roomControlsOpen,
   setRoomControlsOpen,
 } from "@revolt/ui/components/features/voice/rooms/roomControlsOpen";
+import SoundsUnavailable from "@revolt/ui/components/features/voice/soundboard/SoundsUnavailable";
+import {
+  setSoundboardOpen,
+  soundboardOpen,
+} from "@revolt/ui/components/features/voice/soundboard/soundboardOpen";
 import { lazyRetry } from "@revolt/ui/components/utils/lazyRetry";
 import { Icon } from "@revolt/ui/icons/Icon";
 
@@ -551,8 +552,7 @@ const SoundboardPicker = lazyRetry(
 
 // the room's controls load with their first open
 const RoomControlsPanel = lazyRetry(
-  () =>
-    import("@revolt/ui/components/features/voice/rooms/RoomControlsPanel"),
+  () => import("@revolt/ui/components/features/voice/rooms/RoomControlsPanel"),
   () => null,
 );
 
@@ -710,6 +710,7 @@ const VoiceLocation = styled("div", {
  */
 function PhoneCallStrip() {
   const { t } = useLingui();
+  const state = useState();
   const voice = useVoice();
   const navigate = useNavigate();
   let strip: HTMLDivElement | undefined;
@@ -724,7 +725,12 @@ function PhoneCallStrip() {
         type="button"
         data-call-return
         aria-label={t`Return to voice channel`}
-        onClick={() => navigate(voice.channel()?.path ?? "")}
+        onClick={() => {
+          // the address may already be the call's (he is looking at the
+          // lists beside it): the page side has to come on screen too
+          navigate(voice.channel()?.path ?? "");
+          state.appDrawer()?.setShown(true);
+        }}
       >
         <SignalBars state={voice.state()} size={16} />
         <bdi>{conversationName(voice.channel())}</bdi>

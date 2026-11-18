@@ -77,7 +77,10 @@ export function UserCard(
           file={userStyleOf(props.user)?.effect_file}
         />
 
-        <div class={scroller()} use:invisibleScrollable>
+        {/* the directive takes the class (see HomeSidebarPhone): beside a
+            class attribute its own classes were lost and a long profile
+            could not be scrolled to its end */}
+        <div use:invisibleScrollable={{ class: scroller() }}>
           <Profile.Banner
             size="card"
             user={props.user}

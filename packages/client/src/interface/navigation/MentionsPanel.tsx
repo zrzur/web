@@ -20,6 +20,7 @@ import { styled } from "styled-system/jsx";
 import { useClient } from "@revolt/client";
 import { holdMessages } from "@revolt/client/messagePruner";
 import { useDevice } from "@revolt/common";
+import { backCloses } from "@revolt/common/lib/backCloses";
 import { Avatar, CircularProgress, Time } from "@revolt/ui";
 import { Icon } from "@revolt/ui/icons/Icon";
 
@@ -43,6 +44,9 @@ export const openMentions = () => setOpen(true);
 export function MentionsHost() {
   const { t } = useLingui();
   const device = useDevice();
+
+  // phones: Back closes the notifications page
+  backCloses(open, () => setOpen(false));
 
   createEffect(() => {
     if (!open()) return;

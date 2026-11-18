@@ -12,6 +12,7 @@ import { presencePatch } from "@revolt/common/lib/statusWrite";
 import { useModals } from "@revolt/modal";
 import { installWay } from "@revolt/pwa/installPrompt";
 import { useLocation, useNavigate } from "@revolt/routing";
+import { useState } from "@revolt/state";
 import { Dialog, Header, UserStatus } from "@revolt/ui";
 import { Profile } from "@revolt/ui/components/features";
 import { fetchFullProfile } from "@revolt/ui/components/features/profiles/linkedGames";
@@ -123,6 +124,7 @@ function Body(props: { user: User }) {
   const navigate = useNavigate();
   const { openModal } = useModals();
   const device = useDevice();
+  const state = useState();
   const phone = () => device.layout() === "phone";
   /** phones: the four statuses open under the Status row */
   const [choosing, setChoosing] = createSignal(false);
@@ -162,15 +164,25 @@ function Body(props: { user: User }) {
       .finally(() => setPendingPresence(undefined));
   };
 
+  /**
+   * Go to a page. On phones the lists and the page share the screen: the
+   * address alone left the lists showing, and Saved notes "opened" only
+   * after a swipe (owner, 2026-11-18).
+   */
+  const goTo = (path: string) => {
+    navigate(path);
+    state.appDrawer()?.setShown(true);
+  };
+
   const openSavedNotes = () => {
     const id = [...client()!.channels.values()].find(
       (channel) => channel.type === "SavedMessages",
     )?.id;
-    if (id) navigate(`/channel/${id}`);
+    if (id) goTo(`/channel/${id}`);
     else
       client()!
         .user!.openDM()
-        .then((channel) => navigate(`/channel/${channel.id}`));
+        .then((channel) => goTo(`/channel/${channel.id}`));
   };
 
   const links: {
@@ -183,13 +195,13 @@ function Body(props: { user: User }) {
       icon: "users",
       label: () => t`Friends`,
       hint: () => t`Add people and see who is online`,
-      onPress: () => navigate("/friends"),
+      onPress: () => goTo("/friends"),
     },
     {
       icon: "palette",
       label: () => t`Designs`,
       hint: () => t`Decorations, nameplates and colours`,
-      onPress: () => navigate("/designs"),
+      onPress: () => goTo("/designs"),
     },
     {
       icon: "notebook",
@@ -582,11 +594,12 @@ const Scroll = styled("div", {
 /** The sheet's own scroller; the profile's banner takes the sheet's corners */
 const SheetBody = styled("div", {
   base: {
-    minHeight: 0,
-    overflowY: "auto",
-    overscrollBehavior: "contain",
+    // not a scroller: the sheet scrolls (a box here with "contain" and
+    // nothing to scroll kept every drag to itself, and the last rows could
+    // not be reached; owner, 2026-11-18)
     borderRadius: "20px 20px 0 0",
-    scrollbarWidth: "none",
+    // room for the home bar under the last row
+    paddingBottom: "var(--z-safe-bottom, 0px)",
   },
 });
 

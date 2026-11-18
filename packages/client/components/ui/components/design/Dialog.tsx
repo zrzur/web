@@ -20,6 +20,7 @@ import { MotionPresence, useMotion } from "@revolt/ui/motion";
 
 import Breakpoint from "../../../common/Breakpoint";
 
+import { backCloses } from "@revolt/common/lib/backCloses";
 import { Button } from "./Button";
 import { typography } from "./Text";
 import { sheetSwipe } from "./sheetSwipe";
@@ -167,6 +168,12 @@ export function Dialog(props: Props) {
           backdrop: true,
         }),
     ),
+  );
+
+  // phones: Back closes the dialog and leaves the page under it alone
+  backCloses(
+    () => !!props.show && !props.persistent,
+    () => props.onClose(),
   );
 
   // phones: the sheet closes by a pull down from anywhere on it, unless its
