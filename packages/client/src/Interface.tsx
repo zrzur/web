@@ -31,9 +31,11 @@ import { LAYOUT_SECTIONS } from "@revolt/state/stores/Layout";
 import { lazyRetry } from "@revolt/ui/components/utils/lazyRetry";
 import { useMotion } from "@revolt/ui/motion";
 
+import { rememberSignedIn } from "@revolt/ui";
 import { SlideDrawer } from "../components/ui/components/navigation/SlideDrawer";
 import { Sidebar } from "./interface/Sidebar";
 import { FirstScreen } from "./interface/home/FirstScreen";
+
 import { goingHome } from "./interface/home/goingHome";
 import { NEXT_SCREENS, preloadWhenIdle } from "./interface/idlePreload";
 import { PhoneTabs } from "./interface/navigation/PhoneTabs";
@@ -95,13 +97,22 @@ const Interface = (props: { children?: JSX.Element }) => {
     if (lifecycle.loadedOnce()) onCleanup(preloadWhenIdle(NEXT_SCREENS));
   });
 
+  // the very first screen of the next start reads this (PhoneFrame.tsx)
+  createEffect(() => rememberSignedIn(isLoggedIn()));
+
   // Home's first draw waits a moment for unread state: what is waiting joins
   // the page and the server rail, and arriving later pushed both down. Never
   // for long, the request can be slow or refused (see the SDK's Ready)
   const [settled, setSettled] = createSignal(false);
   createEffect(() => {
     if (settled() || !lifecycle.loadedOnce()) return;
-    if (!goingHome(location.pathname) || client().channelUnreads.loaded) {
+    if (
+      !goingHome(location.pathname) ||
+      client().channelUnreads.loaded ||
+      // phones have no Home page to keep still: nothing to wait for, and the
+      // first screen stays up to 0.8 s shorter on every cold start
+      window.matchMedia("(max-width: 600px)").matches
+    ) {
       setSettled(true);
       return;
     }
