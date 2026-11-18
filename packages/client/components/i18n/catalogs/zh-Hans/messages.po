@@ -8786,6 +8786,10 @@ msgstr "按应用筛选命令"
 msgid "Filter posts"
 msgstr "筛选帖子"
 
+#: src/interface/channels/text/SearchFiltersPhone.tsx
+msgid "Filter results"
+msgstr "筛选结果"
+
 #: components/app/interface/settings/server/pages.tsx
 #: components/app/interface/settings/server/ServerEmergency.tsx
 #: components/app/interface/settings/ServerSettings.tsx
@@ -8797,6 +8801,10 @@ msgstr "筛选器"
 msgid "Final results"
 msgstr "最终结果"
 
+#: src/interface/channels/text/SearchFiltersPhone.tsx
+msgid "Find a channel"
+msgstr "查找频道"
+
 #: src/interface/Home.tsx
 msgid "Find a community"
 msgstr "寻找社区"
@@ -8806,6 +8814,7 @@ msgid "Find a look you like"
 msgstr "找到你喜欢的风格"
 
 #: components/ui/components/features/voice/rooms/RoomControlsPanel.tsx
+#: src/interface/channels/text/SearchFiltersPhone.tsx
 msgid "Find a member"
 msgstr "查找成员"
 
@@ -9231,6 +9240,10 @@ msgstr "来自 {0} · {1}"
 #: components/app/interface/settings/server/WingsSettings.tsx
 msgid "From {0} Wings"
 msgstr "来自 {0} 个羽翼"
+
+#: src/interface/channels/text/SearchFiltersPhone.tsx
+msgid "From a member"
+msgstr "来自某位成员"
 
 #: components/app/interface/settings/user/appearance/AnimationSettings.tsx
 msgid "From above"
@@ -10571,6 +10584,10 @@ msgstr "位于"
 msgid "in {0} since {1}"
 msgstr "自 {1} 起在 {0}"
 
+#: src/interface/channels/text/SearchFiltersPhone.tsx
+msgid "In a channel"
+msgstr "在某个频道"
+
 #: components/app/interface/settings/user/Keybinds.tsx
 msgid "In a channel where you can post polls."
 msgstr "在你可以发起投票的频道中。"
@@ -11580,6 +11597,7 @@ msgstr "上次使用 <0/>"
 msgid "Lasting protection"
 msgstr "持久保护"
 
+#: src/interface/channels/text/SearchFiltersPhone.tsx
 #: src/interface/channels/text/TextSearchSidebar.tsx
 msgid "Latest"
 msgstr "最新"
@@ -15240,6 +15258,7 @@ msgstr "老城灯笼"
 msgid "Old City Walls"
 msgstr "老城城墙"
 
+#: src/interface/channels/text/SearchFiltersPhone.tsx
 #: src/interface/channels/text/TextSearchSidebar.tsx
 msgid "Oldest"
 msgstr "最旧"
@@ -15272,6 +15291,10 @@ msgstr "开"
 #: components/app/interface/settings/user/bots/PrivilegedIntents.tsx
 msgid "On (saved)"
 msgstr "开启（已保存）"
+
+#: src/interface/channels/text/SearchFiltersPhone.tsx
+msgid "On a day"
+msgstr "某一天"
 
 #: components/app/interface/discover/Detail.tsx
 #: components/modal/modals/AddBot.tsx
@@ -17888,6 +17911,7 @@ msgstr "重新加入"
 msgid "Release delay"
 msgstr "松开延迟"
 
+#: src/interface/channels/text/SearchFiltersPhone.tsx
 #: src/interface/channels/text/TextSearchSidebar.tsx
 msgid "Relevance"
 msgstr "相关性"
@@ -18008,6 +18032,12 @@ msgstr "移除筛选"
 #: src/interface/designs/Home.tsx
 msgid "Remove filter {0}"
 msgstr "移除筛选 {0}"
+
+#. placeholder {0}: chip(token.key, token.value)
+#. placeholder {0}: item.label
+#: src/interface/channels/text/TextSearchSidebar.tsx
+msgid "Remove filter: {0}"
+msgstr "移除筛选：{0}"
 
 #: components/app/menus/UserContextMenu.tsx
 msgid "Remove friend"
@@ -19587,6 +19617,7 @@ msgstr "搜索成员"
 #: src/interface/channels/ChannelHeader.tsx
 #: src/interface/channels/text/ChannelDetailsPhone.tsx
 #: src/interface/channels/text/SearchBox.tsx
+#: src/interface/channels/text/TextSearchSidebar.tsx
 msgid "Search messages"
 msgstr "搜索消息"
 
@@ -20425,6 +20456,10 @@ msgstr "显示预览"
 msgid "Show profile effects"
 msgstr "显示资料特效"
 
+#: src/interface/channels/text/SearchFiltersPhone.tsx
+msgid "Show results"
+msgstr "显示结果"
+
 #: components/app/interface/settings/server/assistant/labels.ts
 msgid "Show the Hijri date"
 msgstr "显示伊斯兰历日期"
@@ -20912,6 +20947,7 @@ msgstr "排序"
 msgid "Sort members"
 msgstr "对成员排序"
 
+#: src/interface/channels/text/SearchFiltersPhone.tsx
 #: src/interface/channels/text/TextSearchSidebar.tsx
 msgid "Sort results"
 msgstr "对结果排序"
@@ -23059,6 +23095,7 @@ msgstr "无法加载此案件。"
 msgid "This category is no longer here."
 msgstr "此分类已不存在。"
 
+#: src/interface/channels/text/SearchFiltersPhone.tsx
 #: src/interface/channels/text/TextSearchSidebar.tsx
 msgid "This channel"
 msgstr "此频道"
@@ -23899,6 +23936,7 @@ msgstr "要回答其中一个，请开启工单。"
 
 #: components/modal/modals/CustomStatus.tsx
 #: src/interface/channels/text/SearchBox.tsx
+#: src/interface/channels/text/SearchFiltersPhone.tsx
 #: src/interface/navigation/NotificationsPhone.tsx
 msgid "Today"
 msgstr "今天"
@@ -24283,6 +24321,10 @@ msgstr "在上方输入新名称，然后重命名"
 #: src/interface/channels/text/TextSearchSidebar.tsx
 msgid "Type words to search, or a filter like from:, has: or before:."
 msgstr "输入要搜索的词语，或使用 from:、has:、before: 等筛选。"
+
+#: src/interface/channels/text/TextSearchSidebar.tsx
+msgid "Type words, or choose filters with the button beside the field."
+msgstr "输入文字，或用输入框旁的按钮选择筛选条件。"
 
 #: src/interface/developers/docs/EndpointReference.tsx
 msgid "Type-checked only."
@@ -25977,6 +26019,7 @@ msgstr "工单开启的位置"
 msgid "Where to preview"
 msgstr "预览位置"
 
+#: src/interface/channels/text/SearchFiltersPhone.tsx
 #: src/interface/channels/text/TextSearchSidebar.tsx
 msgid "Where to search"
 msgstr "搜索范围"
@@ -26132,6 +26175,7 @@ msgstr "运行此 Zrzur 服务器的人可以在其配置中开启它们。"
 msgid "Whole number"
 msgstr "整数"
 
+#: src/interface/channels/text/SearchFiltersPhone.tsx
 #: src/interface/channels/text/TextSearchSidebar.tsx
 msgid "Whole server"
 msgstr "整个服务器"
@@ -26445,6 +26489,7 @@ msgid "Yes, uninstall"
 msgstr "是，卸载"
 
 #: src/interface/channels/text/SearchBox.tsx
+#: src/interface/channels/text/SearchFiltersPhone.tsx
 #: src/interface/navigation/channels/HomeSidebarPhone.tsx
 #: src/interface/navigation/NotificationsPhone.tsx
 msgid "Yesterday"
