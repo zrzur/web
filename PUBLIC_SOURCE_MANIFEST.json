@@ -3004,8 +3004,8 @@
     },
     {
       "path": "packages/client/components/client/Controller.ts",
-      "sha256": "d04427022bfa896384c99796e9b8ea38492b4b19e85ebebc54b619af5ae75088",
-      "bytes": 23811,
+      "sha256": "69b7bdef738fe919ded30abb89ffe442ccc063aaa92310012ef2aa4023871b92",
+      "bytes": 24444,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -4222,8 +4222,8 @@
     },
     {
       "path": "packages/client/components/instance/index.tsx",
-      "sha256": "8b64ef97b863140d515fd2658ca3b270ef8c92d63497975c940ee21fa738d1cc",
-      "bytes": 6935,
+      "sha256": "0f7963843d6aab474f4f7ad2084ec4ef7e53b557890a8bd3c7d84234d8cae776",
+      "bytes": 8129,
       "category": "product-source-or-build-manifest"
     },
     {
