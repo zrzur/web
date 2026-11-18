@@ -2,6 +2,16 @@
 
 ## Unreleased
 
+### Zrzur without a connection (2026-11-18)
+
+* **The app opens offline** after one visit with a connection: the worker keeps the page of its build and uses it only when the network gives no answer (the network is always asked first, so a release is never served from the device while the server can be reached).
+* **Saved conversations and messages can be read offline:** the servers, conversations and members of the last connection and the latest 50 messages of the 30 channels opened last are kept on the device, encrypted (AES-GCM under a key that cannot be read out), one store per account. When the connection is back, what changed meanwhile is corrected without reloading.
+* **Messages written offline wait and send themselves** when the connection returns, in order. A message keeps one key for life, so a retry can never post it twice; a message the server refuses stays, marked, until you decide.
+* **Pictures that cannot load offline** show a quiet placeholder of their own size instead of a broken mark, and load again by themselves.
+* **Logging out removes** what the account kept on the device: saved conversations and messages, drafts and waiting messages. Signing in as someone else does the same for the account before.
+* The worker still keeps no answer of the API and no session; a test checks it.
+* Not kept in this round: attached files of a waiting message across a restart, and people's uploaded pictures.
+
 ### The app no longer reloads by itself (2026-11-18)
 
 * A part of the app that failed to download (a phone's network dropping one request) reloaded the whole page: opening channel details, a settings page or anything else that loads on first use could look like a refresh. The page now reloads only when the server really has a newer release; otherwise the download is tried three times and the part that asked for it tries again or stays as it was.

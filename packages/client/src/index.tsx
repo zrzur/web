@@ -27,6 +27,7 @@ import siteCatalogs from "virtual:zrzur-site-catalogs";
 import { bootFailed, bootLoaded, opensSignIn } from "./boot";
 import "./index.css";
 import { opensWall, startEarlyDesigns } from "./interface/designs/early";
+import { watchOfflinePictures } from "./offlinePictures";
 import "./serviceWorkerInterface";
 import { isDesignsSite, isDiscoverSite, isDocsSite } from "./siteKind";
 import { watchForStaleBuild } from "./staleBuild";
@@ -34,6 +35,9 @@ import { watchForStaleBuild } from "./staleBuild";
 // a tab opened before an update loads the new build instead of failing;
 // a part that fails for any other reason never reloads the page
 watchForStaleBuild(window, { runningCommit: buildInfo.commit });
+
+// pictures that cannot load offline show a quiet placeholder, not a broken mark
+watchOfflinePictures();
 
 // Android says once, early, that the app can be installed: keep it for later
 listenForInstall();
