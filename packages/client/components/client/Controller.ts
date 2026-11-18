@@ -6,6 +6,11 @@ import { API, Client, ConnectionState, ProtocolV1 } from "@zrzur/sdk/solid";
 
 import type { OfflineData } from "./offline";
 
+/** Phones open from the state this device kept, before the server answers */
+const opensFromKept = () =>
+  typeof window !== "undefined" &&
+  !!window.matchMedia?.("(max-width: 600px)").matches;
+
 // Reading without a connection is not part of the files the app installs up
 // front: it loads once someone is signed in (scripts/precacheShell.mjs)
 const offlineParts = () => import("./offline");
@@ -496,8 +501,15 @@ class Lifecycle {
         if (this.client !== client) return;
         this.#offline = parts.offlineDataFor(client, userId);
         if (early) this.#offline?.keepState(early);
-        // the first connection already failed: start from what was kept
-        else if (this.#connectionFailures > 0) void this.#startFromKept();
+        // The first connection already failed: start from what was kept.
+        // Phones start from it at once, without waiting for the server: an
+        // installed app is opened many times a day, and each time the
+        // lists waited for several round trips (settings, sign-in, the
+        // live connection and its first answer) before showing anything.
+        // What was kept is corrected when the server answers, as after a
+        // start without a connection.
+        else if (this.#connectionFailures > 0 || opensFromKept())
+          void this.#startFromKept();
       })
       .catch(() => events.off?.("event", hold));
   }

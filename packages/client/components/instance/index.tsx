@@ -108,6 +108,33 @@ export function InstanceContext(props: { children?: JSXElement }) {
       // Protocol path `.well-known/stoat` is compatibility-critical; still validate api URL.
       assertAllowedServiceUrl(appCfg.api, "instance discovery api");
 
+      // The configuration kept at the last visit starts the app at once: it
+      // is public, changes rarely, and waiting for the server's answer put a
+      // whole round trip in front of everything on every start (owner,
+      // 2026-11-18: an installed app took a second to open on a fast
+      // connection). The fresh answer is kept for the next start.
+      const keptNow = host ? undefined : keptConfig<RevoltConfig>(appCfg.api);
+      if (keptNow) {
+        const fresh =
+          takeEarlyConfig<RevoltConfig>(appCfg.api) ??
+          fetch(`${appCfg.api.replace(/\/+$/, "")}/`, {
+            credentials: "omit",
+          }).then((response) =>
+            response.ok
+              ? (response.json() as Promise<RevoltConfig>)
+              : undefined,
+          );
+        void fresh
+          .then((configuration) => keepConfig(appCfg.api, configuration))
+          .catch(() => undefined);
+        // (a copy: the client writes its address overrides into it)
+        const cli = _newClient(appCfg.api, structuredClone(keptNow));
+        await cli.initConfig();
+        setInst(new Instance(appCfg, cli, host, nav));
+        appLoadedOnce = true;
+        return;
+      }
+
       // the configuration the first code asked for (earlyConfig.ts); if
       // that failed, the client asks again below
       const early = await takeEarlyConfig<RevoltConfig>(appCfg.api)?.catch(
