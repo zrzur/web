@@ -15,10 +15,13 @@ import {
   offlinePage,
 } from "./offlinePage";
 import {
+  IMAGE_CACHE,
+  IMAGE_CACHE_LIMIT,
   RUNTIME_CACHE,
   fetchWithRetry,
   isAppNavigation,
   isRuntimeAsset,
+  isRuntimeImage,
   overLimit,
 } from "./runtimeAssets";
 import {
@@ -179,8 +182,12 @@ cleanupOutdatedCaches();
 
 precacheAndRoute(SHELL_FILES);
 
-async function cachedAsset(request: Request) {
-  const cache = await caches.open(RUNTIME_CACHE);
+async function cachedAsset(
+  request: Request,
+  name = RUNTIME_CACHE,
+  limit?: number,
+) {
+  const cache = await caches.open(name);
   const hit = await cache.match(request);
   if (hit) return hit;
 
@@ -188,7 +195,7 @@ async function cachedAsset(request: Request) {
   const response = await fetchWithRetry(() => fetch(request.clone()));
   if (response.ok) {
     await cache.put(request, response.clone());
-    const stale = overLimit(await cache.keys());
+    const stale = overLimit(await cache.keys(), limit);
     await Promise.all(stale.map((key) => cache.delete(key)));
   }
   return response;
@@ -220,6 +227,14 @@ self.addEventListener("fetch", (event) => {
             headers: OFFLINE_HEADERS,
           }),
       }),
+    );
+    return;
+  }
+
+  // the app's own pictures, so a start without a connection has them
+  if (isRuntimeImage(event.request, url, self.location.origin, scope)) {
+    event.respondWith(
+      cachedAsset(event.request, IMAGE_CACHE, IMAGE_CACHE_LIMIT),
     );
     return;
   }

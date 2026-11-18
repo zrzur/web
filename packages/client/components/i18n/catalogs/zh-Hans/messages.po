@@ -24539,8 +24539,8 @@ msgid "Unsaved changes"
 msgstr "有未保存的更改"
 
 #: components/app/interface/channels/text/DraftMessage.tsx
-msgid "Unsent message"
-msgstr "未发送的消息"
+#~ msgid "Unsent message"
+#~ msgstr "未发送的消息"
 
 #: components/app/interface/safety/labels.tsx
 msgid "Unsolicited ads"
@@ -25443,6 +25443,10 @@ msgstr "等你处理"
 #: components/modal/modals/BillingCheckoutStatus.tsx
 msgid "Waiting for your payment"
 msgstr "等待你付款"
+
+#: components/app/interface/channels/text/DraftMessage.tsx
+msgid "Waiting to send"
+msgstr "等待发送"
 
 #: components/app/interface/settings/user/profile/studio/StudioEditor.tsx
 msgid "Waits for a reviewer"

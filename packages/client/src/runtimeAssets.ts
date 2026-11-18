@@ -67,3 +67,28 @@ export async function fetchWithRetry<T extends { status: number }>(
   if (answer) return answer;
   throw failure;
 }
+
+/** The app's own pictures (default avatars, the logo, design art), kept the first time they are shown */
+export const IMAGE_CACHE = "zrzur-images-v1";
+
+/** Pictures kept; the oldest go first */
+export const IMAGE_CACHE_LIMIT = 300;
+
+/**
+ * A picture that belongs to the app itself: asked for as an image, from the
+ * app's own address. What people upload (avatars, attachments) lives on the
+ * media server, another address, and is never kept by the worker.
+ */
+export function isRuntimeImage(
+  request: { destination: string },
+  url: URL,
+  origin: string,
+  scopePath: string,
+) {
+  return (
+    request.destination === "image" &&
+    url.origin === origin &&
+    url.pathname.startsWith(scopePath) &&
+    /\.(svg|png|webp|jpe?g|gif|ico|avif)$/i.test(url.pathname)
+  );
+}

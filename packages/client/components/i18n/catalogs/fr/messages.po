@@ -24539,8 +24539,8 @@ msgid "Unsaved changes"
 msgstr "Modifications non enregistrées"
 
 #: components/app/interface/channels/text/DraftMessage.tsx
-msgid "Unsent message"
-msgstr "Message non envoyé"
+#~ msgid "Unsent message"
+#~ msgstr "Message non envoyé"
 
 #: components/app/interface/safety/labels.tsx
 msgid "Unsolicited ads"
@@ -25443,6 +25443,10 @@ msgstr "En attente de ta part"
 #: components/modal/modals/BillingCheckoutStatus.tsx
 msgid "Waiting for your payment"
 msgstr "En attente de ton paiement"
+
+#: components/app/interface/channels/text/DraftMessage.tsx
+msgid "Waiting to send"
+msgstr "En attente d’envoi"
 
 #: components/app/interface/settings/user/profile/studio/StudioEditor.tsx
 msgid "Waits for a reviewer"

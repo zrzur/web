@@ -4,6 +4,7 @@ import {
   fetchWithRetry,
   isAppNavigation,
   isRuntimeAsset,
+  isRuntimeImage,
   overLimit,
 } from "./runtimeAssets";
 
@@ -119,5 +120,44 @@ describe("a file that does not arrive", () => {
       ),
     ).rejects.toThrow("Failed to fetch");
     expect(tries).toBe(3);
+  });
+});
+
+describe("the app's own pictures", () => {
+  const origin = "https://app.zrzur.com";
+  const at = (path: string) => new URL(path, origin);
+  const image = { destination: "image" };
+
+  it("are kept: default avatars, the logo, design art", () => {
+    expect(
+      isRuntimeImage(image, at("/avatars/avatar-12-ocean.svg"), origin, "/"),
+    ).toBe(true);
+    expect(
+      isRuntimeImage(image, at("/brand/mark-white.svg?v=b-1"), origin, "/"),
+    ).toBe(true);
+    expect(isRuntimeImage(image, at("/assets/web/icon.png"), origin, "/")).toBe(
+      true,
+    );
+  });
+
+  it("are never what people upload, which lives at another address", () => {
+    expect(
+      isRuntimeImage(
+        image,
+        new URL("https://cdn.zrzur.com/avatars/abc/photo.png"),
+        origin,
+        "/",
+      ),
+    ).toBe(false);
+  });
+
+  it("are only pictures, asked for as pictures, inside the app", () => {
+    expect(
+      isRuntimeImage({ destination: "" }, at("/avatars/a.svg"), origin, "/"),
+    ).toBe(false);
+    expect(isRuntimeImage(image, at("/build.json"), origin, "/")).toBe(false);
+    expect(isRuntimeImage(image, at("/avatars/a.svg"), origin, "/app/")).toBe(
+      false,
+    );
   });
 });

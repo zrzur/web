@@ -49,10 +49,11 @@ export function DraftMessage(props: Props) {
         ) : props.draft.status === "failed" ? (
           <Trans>Failed to send</Trans>
         ) : (
-          <Trans>Unsent message</Trans>
+          // written without a connection: it goes out by itself
+          <Trans>Waiting to send</Trans>
         )
       }
-      sendStatus={props.draft.status === "sending" ? "sending" : "failed"}
+      sendStatus={props.draft.status === "failed" ? "failed" : "sending"}
       username={<Username username={userInfo().username} />}
       header={
         <For each={props.draft.replies}>
@@ -188,6 +189,5 @@ const SpoilerLabel = styled("div", {
 
     color: "var(--md-sys-color-on-surface)",
     background: "var(--md-sys-color-surface)",
-
   },
 });

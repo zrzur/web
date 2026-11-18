@@ -24539,8 +24539,8 @@ msgid "Unsaved changes"
 msgstr "Несохранённые изменения"
 
 #: components/app/interface/channels/text/DraftMessage.tsx
-msgid "Unsent message"
-msgstr "Остановить отправку сообщения"
+#~ msgid "Unsent message"
+#~ msgstr "Остановить отправку сообщения"
 
 #: components/app/interface/safety/labels.tsx
 msgid "Unsolicited ads"
@@ -25443,6 +25443,10 @@ msgstr "Ожидает вас"
 #: components/modal/modals/BillingCheckoutStatus.tsx
 msgid "Waiting for your payment"
 msgstr "Ожидает вашей оплаты"
+
+#: components/app/interface/channels/text/DraftMessage.tsx
+msgid "Waiting to send"
+msgstr "Ожидает отправки"
 
 #: components/app/interface/settings/user/profile/studio/StudioEditor.tsx
 msgid "Waits for a reviewer"

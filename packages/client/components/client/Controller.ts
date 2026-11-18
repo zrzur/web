@@ -4,6 +4,8 @@ import { Accessor, Setter, createMemo, createSignal } from "solid-js";
 
 import { API, Client, ConnectionState, ProtocolV1 } from "@zrzur/sdk/solid";
 
+import { type OfflineData, forgetOfflineData, offlineDataFor } from "./offline";
+
 import { ModalControllerExtended } from "@revolt/modal";
 import type { State as ApplicationState } from "@revolt/state";
 import type { Session } from "@revolt/state/stores/Auth";
@@ -156,6 +158,8 @@ class Lifecycle {
     // a failed request must not become an unhandled rejection
     if (logout) this.client.logout().catch(() => undefined);
 
+    this.#offline?.detach();
+    this.#offline = undefined;
     this.client = this.#controller.instance.newClient();
 
     this.client.options.channelIsMuted = (ch) =>
@@ -263,6 +267,8 @@ class Lifecycle {
         break;
       case State.Disconnected:
         this.#connectionFailures++;
+        // no connection at the first try: start from what this device kept
+        void this.#startFromKept();
 
         if (!navigator.onLine) {
           this.transition({
@@ -304,6 +310,7 @@ class Lifecycle {
             ...transition.session,
             user_id: transition.session.userId,
           });
+          this.#keepOffline(transition.session.userId);
 
           this.#enter(State.LoggingIn);
         } else if (transition.type === TransitionType.LoginCached) {
@@ -311,6 +318,7 @@ class Lifecycle {
             ...transition.session,
             user_id: transition.session.userId,
           });
+          this.#keepOffline(transition.session.userId);
 
           this.#enter(State.Connecting);
         }
@@ -455,7 +463,34 @@ class Lifecycle {
     }
   }
 
+  /** What this client keeps for reading without a connection */
+  #offline: OfflineData | undefined;
+
+  #keepOffline(userId: string) {
+    this.#offline?.detach();
+    this.#offline = offlineDataFor(this.client, userId);
+  }
+
+  /**
+   * The first connection failed (no network, or the server cannot be
+   * reached): show the app with the state kept at the last connection. The
+   * lifecycle stays where it is, so the connection is tried again as usual
+   * and the kept state is corrected when the gateway answers.
+   */
+  async #startFromKept() {
+    const offline = this.#offline;
+    if (!offline || this.loadedOnce()) return;
+    const restored = await offline.restore().catch(() => false);
+    // connected, or logged out, while the kept state was being read
+    if (!restored || this.loadedOnce() || this.#offline !== offline) return;
+    const user = this.client.user;
+    if (user) this.#controller.state.auth.setName(user.displayName);
+    this.#setLoadedOnce(true);
+  }
+
   private onReady() {
+    // the kept state on its way in is not the gateway's answer
+    if (this.#offline?.restoring) return;
     const user = this.client.user;
     if (user) this.#controller.state.auth.setName(user.displayName);
 
@@ -483,6 +518,10 @@ class Lifecycle {
             if (type === "InvalidSession") {
               this.#sessionGone = true;
               forgetCreators();
+              // the session ended elsewhere: what this account kept goes too
+              void forgetOfflineData(
+                this.#controller.state.auth.getSession()?.userId,
+              );
               this.#controller.state.auth.removeSession();
             }
 
@@ -706,6 +745,9 @@ export default class ClientController {
     forgetStoredEphemeral(ephemeralStorage());
     this.state.settings.resetNotificationsState();
     killServiceWorkerSubscription(this.instance.client, true);
+    // what this account kept for reading offline, and what it was writing
+    void forgetOfflineData(this.state.auth.getSession()?.userId);
+    this.state.draft.forgetAccount();
     this.state.auth.removeSession();
     this.lifecycle.transition({
       type: TransitionType.Logout,

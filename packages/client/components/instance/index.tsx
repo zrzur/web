@@ -24,6 +24,7 @@ import { LoadingScreen, useSnackbar } from "@revolt/ui";
 
 import { takeEarlyConfig } from "./earlyConfig";
 import Instance, { type RevoltConfig, _newClient } from "./Instance";
+import { isNetworkFailure, keepConfig, keptConfig } from "./keptConfig";
 
 /** Comparison origin only — never used as a connection default. */
 export const StoatOrigin = new URL(`https://${STOAT_HOST}`).origin;
@@ -106,20 +107,35 @@ export function InstanceContext(props: { children?: JSXElement }) {
       const early = await takeEarlyConfig<RevoltConfig>(appCfg.api)?.catch(
         () => undefined,
       );
-      const cli = _newClient(appCfg.api, early);
+      let cli = _newClient(appCfg.api, early);
       // too many requests: wait as long as the server asks, then try again,
       // instead of leaving the loading screen up for good
-      for (let attempt = 0; ; attempt++) {
-        try {
-          await cli.initConfig();
-          break;
-        } catch (error) {
-          const retryAfter = retryAfterOf(error);
-          if (!retryAfter || attempt >= 4) throw error;
-          await new Promise((resolve) =>
-            setTimeout(resolve, Math.min(retryAfter + 250, 30000)),
-          );
+      try {
+        for (let attempt = 0; ; attempt++) {
+          try {
+            await cli.initConfig();
+            break;
+          } catch (error) {
+            const retryAfter = retryAfterOf(error);
+            if (!retryAfter || attempt >= 4) throw error;
+            await new Promise((resolve) =>
+              setTimeout(resolve, Math.min(retryAfter + 250, 30000)),
+            );
+          }
         }
+        // the server's public configuration, for a start without a connection
+        keepConfig(
+          appCfg.api,
+          early ??
+            (cli as unknown as { configuration?: unknown }).configuration,
+        );
+      } catch (error) {
+        // no answer from the network: start with the configuration kept at
+        // the last visit; the app then opens offline with what it kept
+        const kept = keptConfig<RevoltConfig>(appCfg.api);
+        if (!kept || !isNetworkFailure(error)) throw error;
+        cli = _newClient(appCfg.api, kept);
+        await cli.initConfig();
       }
       setInst(new Instance(appCfg, cli, host, nav));
     } catch (e) {

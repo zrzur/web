@@ -276,6 +276,23 @@ export class Draft extends AbstractStore<"draft", TypeDraft> {
   }
 
   /**
+   * Logout: what the account was writing (drafts, messages that wait to be
+   * sent) does not stay on the device for whoever signs in next.
+   */
+  forgetAccount() {
+    if (this.#flushTimer) clearTimeout(this.#flushTimer);
+    this.#flushTimer = undefined;
+    this.#flushFailures = 0;
+    this.fileCache = {};
+    batch(() => {
+      for (const channelId of Object.keys(this.get().drafts))
+        this.set("drafts", channelId, undefined!);
+      for (const channelId of Object.keys(this.get().outbox))
+        this.set("outbox", channelId, undefined!);
+    });
+  }
+
+  /**
    * Clear draft from a channel.
    * @param channelId Channel ID
    */
