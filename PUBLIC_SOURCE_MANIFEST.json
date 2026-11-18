@@ -42304,8 +42304,8 @@
     },
     {
       "path": "packages/client/src/interface/channels/text/Composition.tsx",
-      "sha256": "b9a9357c589fa063f688caa050664042a1a100e52025fb3155a27af2027764d0",
-      "bytes": 24925,
+      "sha256": "0293613fdc06e28a2f3e25a5d4d703aa2a5c14fc558612e1153759ffa28f1b19",
+      "bytes": 25288,
       "category": "product-source-or-build-manifest"
     },
     {
