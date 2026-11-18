@@ -27,7 +27,6 @@
 
 export { Avatar } from "./Avatar";
 export { Badge } from "./Badge";
-export { ReleaseBadge } from "./ReleaseBadge";
 export { BirthMonthField } from "./BirthMonthField";
 export { Button } from "./Button";
 export { type CategorySelectOption, CategoryButton } from "./CategoryButton";
@@ -59,6 +58,7 @@ export { LoadingScreen } from "./LoadingScreen";
 export { MenuItem } from "./Menu";
 export { MenuButton } from "./MenuButton";
 export { Radio2 } from "./Radio";
+export { ReleaseBadge } from "./ReleaseBadge";
 export { Ripple } from "./Ripple";
 export { Segmented } from "./Segmented";
 export {
@@ -86,6 +86,7 @@ export { Switch } from "./Switch";
 export { Text, typography } from "./Text";
 // The ProseMirror TextEditor is not used (the CodeMirror TextEditor2 replaced
 // it); not exported, so it stays out of the bundle
+export { PhoneFrame, phoneFrameFor, rememberSignedIn } from "./PhoneFrame";
 export { TextField } from "./TextField";
 export { Toggle } from "./Toggle";
 export { Unreads } from "./Unreads";
