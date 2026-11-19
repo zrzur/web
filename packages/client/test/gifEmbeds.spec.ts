@@ -9,6 +9,9 @@ import { Embed } from "../components/ui/components/features/messaging/elements/E
 vi.mock("@zrzur/sdk/solid", () => ({}));
 vi.mock("@revolt/modal", () => ({ useModals: () => ({ openModal: vi.fn() }) }));
 vi.mock("@revolt/app", () => ({ MessageContextMenu: () => null }));
+// HeldMedia (save data) draws an icon; the icon set reaches the design
+// library, which this test does not load
+vi.mock("@revolt/ui/icons/Icon", () => ({ Icon: () => null }));
 vi.mock("@revolt/ui/components/utils", () => ({
   SizedContent: (props: { children: unknown }) => props.children,
 }));
