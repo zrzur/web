@@ -21,45 +21,14 @@ export function SettingsTabs<T extends string>(props: {
     setTab(() => value);
   });
 
-  let bar!: HTMLDivElement;
-  function move(delta: number) {
-    const index = props.tabs.findIndex((item) => item.id === tab());
-    const next =
-      props.tabs[(index + delta + props.tabs.length) % props.tabs.length];
-    setTab(() => next.id);
-    queueMicrotask(() =>
-      (bar.querySelector("[aria-selected='true']") as HTMLElement)?.focus(),
-    );
-  }
-
   return (
     <Column gap="lg">
-      <Bar
-        ref={bar}
-        role="tablist"
-        aria-label={props.label}
-        onKeyDown={(e) => {
-          const rtl = getComputedStyle(bar).direction === "rtl";
-          if (e.key === "ArrowRight" || e.key === "ArrowLeft") {
-            e.preventDefault();
-            move((e.key === "ArrowRight") !== rtl ? 1 : -1);
-          }
-        }}
-      >
-        <For each={props.tabs}>
-          {(item) => (
-            <Tab
-              type="button"
-              role="tab"
-              aria-selected={tab() === item.id}
-              tabIndex={tab() === item.id ? 0 : -1}
-              onClick={() => setTab(() => item.id)}
-            >
-              {item.label}
-            </Tab>
-          )}
-        </For>
-      </Bar>
+      <TextTabs
+        label={props.label}
+        value={tab()}
+        onChange={(id) => setTab(() => id)}
+        tabs={props.tabs}
+      />
       <For each={props.tabs}>
         {(item) => (
           <Show when={tab() === item.id}>
@@ -68,6 +37,60 @@ export function SettingsTabs<T extends string>(props: {
         )}
       </For>
     </Column>
+  );
+}
+
+/**
+ * The tab bar of Settings on its own: plain text tabs on a hairline, the
+ * chosen one underlined in the accent. Arrow keys move between them
+ * (mirrored right to left). Every switch between parts of one place uses
+ * it, so they all look the same (the mentions box, 2026-11-19).
+ */
+export function TextTabs<T extends string>(props: {
+  label: string;
+  value: T;
+  onChange: (id: T) => void;
+  tabs: { id: T; label: JSX.Element }[];
+}) {
+  let bar!: HTMLDivElement;
+  function move(delta: number) {
+    const index = props.tabs.findIndex((item) => item.id === props.value);
+    const next =
+      props.tabs[(index + delta + props.tabs.length) % props.tabs.length];
+    props.onChange(next.id);
+    queueMicrotask(() =>
+      (bar.querySelector("[aria-selected='true']") as HTMLElement)?.focus(),
+    );
+  }
+
+  return (
+    <Bar
+      ref={bar}
+      role="tablist"
+      aria-label={props.label}
+      onKeyDown={(e) => {
+        const rtl = getComputedStyle(bar).direction === "rtl";
+        if (e.key === "ArrowRight" || e.key === "ArrowLeft") {
+          e.preventDefault();
+          move((e.key === "ArrowRight") !== rtl ? 1 : -1);
+        }
+      }}
+    >
+      <For each={props.tabs}>
+        {(item) => (
+          <Tab
+            type="button"
+            role="tab"
+            data-tab={item.id}
+            aria-selected={props.value === item.id}
+            tabIndex={props.value === item.id ? 0 : -1}
+            onClick={() => props.onChange(item.id)}
+          >
+            {item.label}
+          </Tab>
+        )}
+      </For>
+    </Bar>
   );
 }
 
