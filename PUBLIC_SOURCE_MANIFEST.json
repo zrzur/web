@@ -5800,20 +5800,26 @@
     },
     {
       "path": "packages/client/components/rtc/weakNetwork.test.ts",
-      "sha256": "4b91119c3c49f9d9c80889812468fef155bcd2f05c3d657c0e07d8dde60f0abc",
-      "bytes": 6357,
+      "sha256": "69505488353a8bd43c9fdb91a3eaccf18df6840dee709f8d09dff2914a36671d",
+      "bytes": 6719,
       "category": "synthetic-test-source-or-fixture"
     },
     {
       "path": "packages/client/components/rtc/weakNetwork.ts",
-      "sha256": "fa46ab4f395ff86d78abfd8e2d6b5d9e85c6341123ff388c0aefe8a2ac0da41d",
-      "bytes": 7376,
+      "sha256": "0f89ac2a67103737a791da8d348a705c2449b99687b4c1db75f05e80d044669d",
+      "bytes": 7506,
       "category": "product-source-or-build-manifest"
     },
     {
+      "path": "packages/client/components/rtc/weakNetworkWatch.test.ts",
+      "sha256": "435e0bb86bb8b186d395af98edc35b15deb19b0caf8bf58f946e5cd023d7a961",
+      "bytes": 4744,
+      "category": "synthetic-test-source-or-fixture"
+    },
+    {
       "path": "packages/client/components/rtc/weakNetworkWatch.ts",
-      "sha256": "64964916f3bdf8b25d0e81ca9a21a2cf16074e718c0ff73eaab02c53ee7f61e7",
-      "bytes": 7995,
+      "sha256": "d1db408dfe52822c062b4fc02d9dc0ef83f394f408e62d448c991c2be754b234",
+      "bytes": 12008,
       "category": "product-source-or-build-manifest"
     },
     {
