@@ -20,12 +20,14 @@ import { isTypingTarget } from "@revolt/keybinds/shortcuts";
 import { useModals } from "@revolt/modal";
 import { Navigate, useNavigate, useParams } from "@revolt/routing";
 import { useState } from "@revolt/state";
-import { Button, EmptyState, Header } from "@revolt/ui";
+import { Button, EmptyState, Header, Segmented } from "@revolt/ui";
 import { hour12From } from "@revolt/ui/components/design/dateTime";
 import { Icon } from "@revolt/ui/icons/Icon";
 
 import { HeaderIcon } from "../common/CommonHeader";
 
+import { EventCalendar } from "./EventCalendar";
+import { type PlaceFilter, eventMatches } from "./calendarDays";
 import { EventCard, EventHero } from "./EventCard";
 import { EventDetail } from "./EventDetail";
 import { eventKey, eventWhen, eventsShortcutAllowed } from "./eventFormat";
@@ -115,9 +117,14 @@ function Events(props: { server: Server; focus?: string }) {
   onCleanup(() => clearInterval(timer));
 
   const canManage = () => props.server.havePermission("ManageEvents");
-  const [tab, setTab] = createSignal<"upcoming" | "mine" | "past" | "drafts">(
-    "upcoming",
-  );
+  const [tab, setTab] = createSignal<
+    "upcoming" | "mine" | "calendar" | "past" | "drafts"
+  >("upcoming");
+  const [search, setSearch] = createSignal("");
+  const [place, setPlace] = createSignal<PlaceFilter>("any");
+  const found = (event: Parameters<typeof eventMatches>[0]) =>
+    eventMatches(event, search(), place());
+  const finding = () => search().trim() !== "" || place() !== "any";
   const [loaded, { refetch }] = createResource(
     () => [props.server.id, canManage()] as const,
     ([id, drafts]) => client().serverEvents.fetchForServer(id, { drafts }),
@@ -160,7 +167,7 @@ function Events(props: { server: Server; focus?: string }) {
       const answer = client().serverEvents.answerOf(event._id);
       return !!answer && answer.answer !== "NotGoing";
     });
-  const shown = () => (tab() === "mine" ? mine() : upcoming());
+  const shown = () => (tab() === "mine" ? mine() : upcoming()).filter(found);
   // the event of the address, once it is known
   const opened = () => {
     if (!props.focus) return undefined;
@@ -333,6 +340,15 @@ function Events(props: { server: Server; focus?: string }) {
               <TabButton
                 type="button"
                 role="tab"
+                aria-selected={tab() === "calendar"}
+                onClick={() => setTab("calendar")}
+                data-testid="events-tab-calendar"
+              >
+                <Trans context="scheduled events">Calendar</Trans>
+              </TabButton>
+              <TabButton
+                type="button"
+                role="tab"
                 aria-selected={tab() === "past"}
                 onClick={() => setTab("past")}
                 data-testid="events-tab-past"
@@ -352,6 +368,15 @@ function Events(props: { server: Server; focus?: string }) {
               </Show>
             </TabRow>
 
+            <Show when={tab() !== "drafts"}>
+              <EventFind
+                search={search()}
+                onSearch={setSearch}
+                place={place()}
+                onPlace={setPlace}
+              />
+            </Show>
+
             <Show when={deletedNote()}>
               <Note role="status" data-testid="events-deleted-note">
                 {deletedNote()}
@@ -359,6 +384,27 @@ function Events(props: { server: Server; focus?: string }) {
             </Show>
 
             <Switch>
+              <Match when={tab() === "calendar"}>
+                <EventCalendar
+                  load={(from, to) =>
+                    client().serverEvents.fetchRange(props.server.id, from, to)
+                  }
+                  filter={found}
+                  day={(list) => (
+                    <Grid>
+                      <For each={list}>
+                        {(event) => (
+                          <EventCard
+                            event={event}
+                            server={props.server}
+                            now={now()}
+                          />
+                        )}
+                      </For>
+                    </Grid>
+                  )}
+                />
+              </Match>
               <Match when={tab() === "past"}>
                 <Switch>
                   <Match when={past.loading}>
@@ -374,9 +420,9 @@ function Events(props: { server: Server; focus?: string }) {
                       <TranslatedError error={past.error} />
                     </Problem>
                   </Match>
-                  <Match when={past()?.length}>
+                  <Match when={past()?.filter(found).length}>
                     <Grid>
-                      <For each={past()}>
+                      <For each={past()?.filter(found)}>
                         {(event) => (
                           <EventCard
                             event={
@@ -388,6 +434,9 @@ function Events(props: { server: Server; focus?: string }) {
                         )}
                       </For>
                     </Grid>
+                  </Match>
+                  <Match when={past()?.length}>
+                    <NothingFound />
                   </Match>
                   <Match when={true}>
                     <EmptyState
@@ -423,13 +472,13 @@ function Events(props: { server: Server; focus?: string }) {
                 </Show>
               </Match>
               <Match when={true}>
-                <Show when={tab() === "upcoming" && live().length}>
+                <Show when={tab() === "upcoming" && live().filter(found).length}>
                   <Section aria-labelledby="events-live">
                     <SectionTitle id="events-live" data-live>
                       <Trans>Happening now</Trans>
                     </SectionTitle>
                     <List>
-                      <For each={live()}>
+                      <For each={live().filter(found)}>
                         {(event) => (
                           <EventHero
                             event={event}
@@ -444,6 +493,18 @@ function Events(props: { server: Server; focus?: string }) {
                 <Show
                   when={shown().length}
                   fallback={
+                    <Show
+                      when={!finding()}
+                      fallback={
+                        <Show
+                          when={
+                            tab() === "mine" || !live().filter(found).length
+                          }
+                        >
+                          <NothingFound />
+                        </Show>
+                      }
+                    >
                     <Show when={tab() === "mine" || !live().length}>
                       <Show
                         when={tab() === "mine"}
@@ -473,6 +534,7 @@ function Events(props: { server: Server; focus?: string }) {
                           action={<AllServersLink />}
                         />
                       </Show>
+                    </Show>
                     </Show>
                   }
                 >
@@ -510,6 +572,91 @@ function Events(props: { server: Server; focus?: string }) {
     </Page>
   );
 }
+
+/** A search or filter that leaves nothing */
+export function NothingFound() {
+  return (
+    <Note role="status" data-testid="events-nothing-found">
+      <Trans>No event matches. Try other words or another place.</Trans>
+    </Note>
+  );
+}
+
+/** Search and the place filter above a list of events */
+export function EventFind(props: {
+  search: string;
+  onSearch: (value: string) => void;
+  place: PlaceFilter;
+  onPlace: (value: PlaceFilter) => void;
+}) {
+  const { t } = useLingui();
+  return (
+    <FindRow data-testid="events-find">
+      <FindField>
+        <Icon name="magnifying-glass" size={16} />
+        <input
+          type="search"
+          value={props.search}
+          placeholder={t`Search events`}
+          aria-label={t`Search events`}
+          onInput={(event) => props.onSearch(event.currentTarget.value)}
+          data-testid="events-search"
+        />
+      </FindField>
+      <Segmented<PlaceFilter>
+        aria-label={t`Where it takes place`}
+        value={props.place}
+        onChange={props.onPlace}
+        options={[
+          { value: "any", label: t({ message: "All", context: "event places" }) },
+          { value: "Voice", label: t({ message: "Voice", context: "event places" }) },
+          { value: "Text", label: t({ message: "Text", context: "event places" }) },
+          { value: "External", label: t({ message: "Elsewhere", context: "event places" }) },
+        ]}
+      />
+    </FindRow>
+  );
+}
+
+const FindRow = styled("div", {
+  base: {
+    display: "flex",
+    flexWrap: "wrap",
+    alignItems: "center",
+    gap: "8px",
+    _phone: { "& > :last-child": { width: "100%", overflowX: "auto" } },
+  },
+});
+
+const FindField = styled("label", {
+  base: {
+    flex: 1,
+    display: "flex",
+    alignItems: "center",
+    gap: "8px",
+    minWidth: "200px",
+    minHeight: "36px",
+    paddingInline: "12px",
+    borderRadius: "var(--z-radius, 10px)",
+    background: "var(--z-bg-input)",
+    "--z-icon-color": "var(--z-fg-muted)",
+    "& input": {
+      all: "unset",
+      flex: 1,
+      minWidth: 0,
+      fontSize: "14px",
+      lineHeight: "20px",
+      color: "var(--z-fg-primary)",
+      "&::placeholder": { color: "var(--z-fg-muted)" },
+      "&::-webkit-search-cancel-button": { display: "none" },
+    },
+    "&:focus-within": {
+      outline: "2px solid var(--z-focus)",
+      outlineOffset: "1px",
+    },
+    _phone: { minHeight: "44px", minWidth: 0, "& input": { fontSize: "16px" } },
+  },
+});
 
 /** The way to your events in every server */
 function AllServersLink() {

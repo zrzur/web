@@ -101,6 +101,7 @@ vi.mock("@revolt/ui", () => {
       />
     ),
     Toggle: () => <span />,
+    Checkbox: (props: any) => <label>{props.children}</label>,
     Form2: {
       TextField: Field,
       FileInput: () => <span />,

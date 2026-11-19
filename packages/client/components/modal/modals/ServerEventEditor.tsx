@@ -37,7 +37,18 @@ import {
   DrawnCover,
   coverFile,
 } from "../../../src/interface/events/eventCovers";
+import {
+  DEFAULT_REMINDERS,
+  MAX_REMINDERS,
+  REMINDER_CHOICES,
+  reminderSpan,
+} from "../../../src/interface/events/eventLinks";
+import {
+  EVENT_TEMPLATES,
+  type EventTemplate,
+} from "../../../src/interface/events/eventTemplates";
 import { MemberPicker } from "../../../src/interface/events/MemberPicker";
+import { Ticket, TicketStub } from "../../../src/interface/events/Ticket";
 
 import { useModals } from "..";
 import { Modals } from "../types";
@@ -81,7 +92,7 @@ export function eventTimeProblem(
 export function ServerEventEditorModal(
   props: DialogProps & Modals & { type: "server_event" },
 ) {
-  const { t } = useLingui();
+  const { t, i18n } = useLingui();
   const client = useClient();
   const instance = useInstance();
   const navigate = useNavigate();
@@ -132,7 +143,55 @@ export function ServerEventEditorModal(
     existing?.attendee_list ?? "Organisers",
   );
   // a ready cover, drawn here and uploaded like a picture when saved
+  // a new event reminds a day and a quarter of an hour before
+  const [reminders, setReminders] = createSignal<number[]>(
+    existing ? (existing.reminders ?? []) : DEFAULT_REMINDERS,
+  );
   const [readyCover, setReadyCover] = createSignal<CoverKind>();
+  const [template, setTemplate] = createSignal("blank");
+  // the words of the ready starts, in the person's language
+  const templateText = (id: EventTemplate["id"]): [string, string] => {
+    switch (id) {
+      case "game-night":
+        return [
+          t`Game night`,
+          t`We play together in voice. Bring a game you like, or join the one that is running.`,
+        ];
+      case "tournament":
+        return [
+          t`Tournament`,
+          t`Sign up with Going to take a place. The rules and the brackets come before the start.`,
+        ];
+      case "watch-party":
+        return [
+          t`Watch party`,
+          t`We watch together and talk about it in voice. Come a few minutes early.`,
+        ];
+      case "questions":
+        return [
+          t`Questions and answers`,
+          t`Ask anything. Write your questions in the channel before the start.`,
+        ];
+      case "hangout":
+        return [t`Voice hangout`, t`No plan. Drop in and talk.`];
+    }
+  };
+  /** Fill the form from a ready start; the person changes what they like */
+  function useTemplate(id: string) {
+    setTemplate(id);
+    const chosen = EVENT_TEMPLATES.find((entry) => entry.id === id);
+    if (!chosen) return;
+    const [title, description] = templateText(chosen.id);
+    group.controls.title.setValue(title);
+    group.controls.description.setValue(description);
+    setKind(chosen.place);
+    setRepeat(chosen.repeat ?? "None");
+    setHasEnd(true);
+    const from = start() ?? initialStart;
+    setEnd(new Date(from.getTime() + chosen.hours * 60 * 60_000));
+    setLimited(chosen.seats !== undefined);
+    if (chosen.seats !== undefined) setSeats(String(chosen.seats));
+  }
   const group = createFormGroup({
     title: createFormControl(existing?.title ?? "", { required: true }),
     description: createFormControl(existing?.description ?? ""),
@@ -320,6 +379,7 @@ export function ServerEventEditorModal(
           changes.invited = visibility() === "Invited" ? invited() : [];
         }
         changes.co_organisers = helpers();
+        changes.reminders = reminders();
         changes.attendee_list = attendeeList();
         if (limited()) {
           changes.capacity = seatCount();
@@ -348,6 +408,7 @@ export function ServerEventEditorModal(
           invited: visibility() === "Invited" ? invited() : undefined,
           co_organisers: helpers().length ? helpers() : undefined,
           attendee_list: attendeeList(),
+          reminders: reminders(),
           capacity: limited() ? seatCount() : undefined,
           waitlist: limited() ? waitlist() : undefined,
         });
@@ -404,6 +465,44 @@ export function ServerEventEditorModal(
     >
       <form onSubmit={submit} data-testid="server-event-form">
         <Fields>
+          <Preview aria-hidden="true" data-testid="server-event-preview">
+            <Ticket>
+              <TicketStub
+                startsAt={(start() ?? initialStart).toISOString()}
+              />
+              <PreviewBody>
+                <b dir="auto">
+                  {group.controls.title.value.trim() ||
+                    t({ message: "Title", context: "scheduled events" })}
+                </b>
+                <span>
+                  {new Intl.DateTimeFormat(i18n().locale ?? "en", {
+                    numberingSystem: "latn",
+                    hour: "numeric",
+                    minute: "2-digit",
+                    hour12: hour12(),
+                  }).format(start() ?? initialStart)}
+                </span>
+              </PreviewBody>
+            </Ticket>
+          </Preview>
+          <Show when={!existing}>
+            <FloatingSelect
+              id="server-event-template"
+              label={t`Start from`}
+              value={template()}
+              onChange={(event) => useTemplate(event.currentTarget.value)}
+            >
+              <MenuItem value="blank">{t`An empty event`}</MenuItem>
+              <For each={EVENT_TEMPLATES}>
+                {(entry) => (
+                  <MenuItem value={entry.id}>
+                    {templateText(entry.id)[0]}
+                  </MenuItem>
+                )}
+              </For>
+            </FloatingSelect>
+          </Show>
           <Form2.TextField
             minlength={1}
             maxlength={100}
@@ -719,6 +818,41 @@ export function ServerEventEditorModal(
             <MenuItem value="Everyone">{t`Everyone who sees the event`}</MenuItem>
           </FloatingSelect>
 
+          <fieldset data-testid="server-event-reminders">
+            <legend>
+              <Trans>Remind the people who are coming</Trans>
+            </legend>
+            <RoleList>
+              <For each={REMINDER_CHOICES}>
+                {(minutes) => (
+                  <Checkbox
+                    checked={reminders().includes(minutes)}
+                    disabled={
+                      !reminders().includes(minutes) &&
+                      reminders().length >= MAX_REMINDERS
+                    }
+                    onChange={(event) =>
+                      setReminders(
+                        event.currentTarget.checked
+                          ? [...reminders(), minutes]
+                          : reminders().filter((value) => value !== minutes),
+                      )
+                    }
+                  >
+                    <Trans>
+                      {reminderSpan(minutes, i18n().locale ?? "en")} before
+                    </Trans>
+                  </Checkbox>
+                )}
+              </For>
+            </RoleList>
+            <Hint>
+              <Trans>
+                Up to 3. Each person can switch reminders off for themselves.
+              </Trans>
+            </Hint>
+          </fieldset>
+
           <Show when={problem()}>
             <Failure role="alert" data-testid="server-event-problem">
               {problemText(problem())}
@@ -755,6 +889,42 @@ const Fields = styled("div", {
       fontSize: "12px",
       fontWeight: 650,
       color: "var(--z-fg-muted)",
+    },
+  },
+});
+
+const Preview = styled("div", {
+  base: {
+    // the page behind a ticket's notches is the dialog here
+    "--z-bg-chat": "var(--z-bg-modal, var(--z-bg-raised))",
+    "& > div": {
+      minHeight: "88px",
+      background: "var(--z-bg-input)",
+    },
+  },
+});
+
+const PreviewBody = styled("div", {
+  base: {
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "center",
+    gap: "2px",
+    padding: "12px 20px",
+    minWidth: 0,
+    "& b": {
+      fontSize: "16px",
+      lineHeight: "24px",
+      fontWeight: 700,
+      color: "var(--z-header-primary, var(--z-fg-primary))",
+      overflow: "hidden",
+      textOverflow: "ellipsis",
+      whiteSpace: "nowrap",
+    },
+    "& span": {
+      fontSize: "13px",
+      lineHeight: "18px",
+      color: "var(--z-fg-secondary)",
     },
   },
 });

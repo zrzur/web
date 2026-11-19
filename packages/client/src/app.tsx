@@ -47,6 +47,16 @@ const EventsPage = lazy(() =>
     default: m.EventsPage,
   })),
 );
+const EventLinkPage = lazy(() =>
+  import("./interface/events/EventLinkPage").then((m) => ({
+    default: m.EventLinkPage,
+  })),
+);
+const EventInvitationPage = lazy(() =>
+  import("./interface/events/EventLinkPage").then((m) => ({
+    default: m.EventInvitationPage,
+  })),
+);
 const LobbyPage = lazy(() =>
   import("./interface/lobby/Lobby").then((m) => ({ default: m.LobbyPage })),
 );
@@ -159,7 +169,10 @@ const appRoutes = () => (
     {loginRoutes()}
     {/* the docs never wait for the gateway, signed in or not */}
     <Route path="/developers/docs/*" component={DevelopersDocs} />
+    {/* an event's share link opens for people who are not signed in too */}
+    <Route path="/e/:path" component={EventLinkPage} />
     <Route path="/" component={Interface}>
+      <Route path="/e/join/:code" component={EventInvitationPage} />
       <Route path="/pwa" component={PWARedirect} />
       <Route path="/dev" component={DevelopmentPage} />
       <Route path="/discover/*" component={Discover} />

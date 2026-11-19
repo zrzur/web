@@ -46,6 +46,9 @@ vi.mock("@revolt/ui/icons/Icon", () => ({ Icon: () => <span /> }));
 vi.mock("@revolt/ui", () => ({
   Avatar: () => <span />,
   TextField: () => <input />,
+  FloatingSelect: () => <span />,
+  MenuItem: () => <span />,
+  Toggle: () => <input type="checkbox" />,
   Button: (props: any) => (
     <button
       type="button"

@@ -29457,3 +29457,332 @@ msgstr "لك مقعد محفوظ. غيّر إجابتك متى شئت."
 #: src/interface/events/EventsPage.tsx
 msgid "You have not answered any event here"
 msgstr "لم تُجب عن أي فعالية هنا"
+
+#. placeholder {0}: invitation.uses
+#: src/interface/events/EventShare.tsx
+msgid "{0, plural, one {Used # time} other {Used # times}}"
+msgstr "{0, plural, zero {لم يُستخدم} one {استُخدم مرة واحدة} two {استُخدم مرتين} few {استُخدم # مرات} many {استُخدم # مرة} other {استُخدم # مرة}}"
+
+#. placeholder {0}: reminderSpan(minutes, i18n().locale ?? "en")
+#: components/modal/modals/ServerEventEditor.tsx
+msgid "{0} before"
+msgstr "قبلها بـ{0}"
+
+#. placeholder {0}: list().length - CELL_EVENTS
+#: src/interface/events/EventCalendar.tsx
+msgid "{0} more"
+msgstr "{0} أخرى"
+
+#. placeholder {0}: longDay(key)
+#. placeholder {1}: list().length
+#: src/interface/events/EventCalendar.tsx
+msgid "{0}, {1} events"
+msgstr "{0}، {1} فعاليات"
+
+#: src/interface/events/EventShare.tsx
+msgid "A member of the server who opens one joins the invited people."
+msgstr "عضو السيرفر الذي يفتح أحدها ينضم إلى المدعوين."
+
+#: components/app/interface/settings/user/notifications/EventNotices.tsx
+msgid "A seat came free for you"
+msgstr "أصبح لك مقعد"
+
+#: src/interface/events/EventShare.tsx
+msgid "A short link that opens this event. Only people who can already see the event can open it."
+msgstr "رابط قصير يفتح هذه الفعالية. لا يفتحه إلا من يرى الفعالية أصلًا."
+
+#: src/interface/events/EventDetail.tsx
+msgid "Add to my calendar"
+msgstr "أضف إلى تقويمي"
+
+#: src/interface/events/EventsPage.tsx
+msgctxt "event places"
+msgid "All"
+msgstr "الكل"
+
+#: components/modal/modals/ServerEventEditor.tsx
+msgid "An empty event"
+msgstr "فعالية فارغة"
+
+#: src/interface/events/EventShare.tsx
+msgid "An event has at most 10 invitation links."
+msgstr "للفعالية 10 روابط دعوة على الأكثر."
+
+#: components/modal/modals/ServerEventEditor.tsx
+msgid "Ask anything. Write your questions in the channel before the start."
+msgstr "اسأل ما تشاء. اكتب أسئلتك في القناة قبل البداية."
+
+#: src/interface/events/EventsPage.tsx
+#: src/interface/events/MyEventsPage.tsx
+msgctxt "scheduled events"
+msgid "Calendar"
+msgstr "التقويم"
+
+#: components/app/interface/settings/user/notifications/EventNotices.tsx
+msgid "Changed or called off"
+msgstr "تغيّرت أو أُلغيت"
+
+#: src/interface/events/EventShare.tsx
+msgctxt "scheduled events"
+msgid "Copy"
+msgstr "نسخ"
+
+#: src/interface/events/EventShare.tsx
+msgid "Copy the invitation link"
+msgstr "انسخ رابط الدعوة"
+
+#: src/interface/events/EventsPage.tsx
+msgctxt "event places"
+msgid "Elsewhere"
+msgstr "مكان آخر"
+
+#: components/app/interface/settings/user/notifications/EventNotices.tsx
+msgctxt "notification settings"
+msgid "Events"
+msgstr "الفعاليات"
+
+#: components/app/interface/settings/user/notifications/EventNotices.tsx
+msgid "For events you are going to, or maybe going to."
+msgstr "للفعاليات التي ستحضرها أو ربما تحضرها."
+
+#: components/modal/modals/ServerEventEditor.tsx
+msgid "Game night"
+msgstr "ليلة ألعاب"
+
+#: src/interface/events/EventShare.tsx
+msgid "How many people"
+msgstr "عدد الأشخاص"
+
+#: src/interface/events/EventCalendar.tsx
+msgid "How much to show"
+msgstr "مقدار ما يُعرض"
+
+#: src/interface/events/EventShare.tsx
+msgid "Invitation links"
+msgstr "روابط الدعوة"
+
+#: components/app/interface/settings/user/notifications/EventNotices.tsx
+msgid "Invitations to events"
+msgstr "الدعوات إلى الفعاليات"
+
+#: src/interface/events/EventLinkPage.tsx
+msgid "It may have been removed, or the event is only for the members of its server."
+msgstr "ربما أُزيل، أو أن الفعالية لأعضاء سيرفرها فقط."
+
+#: src/interface/events/EventLinkPage.tsx
+msgid "It ran out or was taken away. Ask the organiser for a new one."
+msgstr "انتهت أو أُزيلت. اطلب من المنظّم دعوة جديدة."
+
+#: src/interface/events/EventLinkPage.tsx
+msgid "Join the server first"
+msgstr "انضم إلى السيرفر أولًا"
+
+#: src/interface/events/EventShare.tsx
+msgid "Make a share link"
+msgstr "أنشئ رابط مشاركة"
+
+#: src/interface/events/EventLinkPage.tsx
+msgid "Members of the server see the whole event and can answer it."
+msgstr "أعضاء السيرفر يرون الفعالية كاملة ويجيبون عليها."
+
+#: src/interface/events/EventCalendar.tsx
+msgctxt "calendar"
+msgid "Month"
+msgstr "شهر"
+
+#: src/interface/events/EventCalendar.tsx
+msgid "Month after"
+msgstr "الشهر التالي"
+
+#: src/interface/events/EventCalendar.tsx
+msgid "Month before"
+msgstr "الشهر السابق"
+
+#: src/interface/events/EventShare.tsx
+msgid "Name in the link"
+msgstr "الاسم في الرابط"
+
+#: src/interface/events/EventShare.tsx
+msgid "New invitation link"
+msgstr "رابط دعوة جديد"
+
+#: src/interface/events/EventsPage.tsx
+msgid "No event matches. Try other words or another place."
+msgstr "لا فعالية مطابقة. جرّب كلمات أخرى أو مكانًا آخر."
+
+#: components/modal/modals/ServerEventEditor.tsx
+msgid "No plan. Drop in and talk."
+msgstr "بلا خطة. ادخل وتحدّث."
+
+#: src/interface/events/EventCalendar.tsx
+msgid "Nothing on this day."
+msgstr "لا شيء في هذا اليوم."
+
+#: src/interface/events/EventLinkPage.tsx
+msgid "Open Zrzur"
+msgstr "افتح زرزور"
+
+#: src/interface/events/EventShare.tsx
+msgid "People outside the server can open it"
+msgstr "يستطيع من هم خارج السيرفر فتحه"
+
+#: components/modal/modals/ServerEventEditor.tsx
+msgid "Remind the people who are coming"
+msgstr "ذكّر الحاضرين"
+
+#: src/interface/events/EventDetail.tsx
+msgid "Reminders are off"
+msgstr "التذكيرات متوقفة"
+
+#: src/interface/events/EventDetail.tsx
+msgid "Reminders are on"
+msgstr "التذكيرات تعمل"
+
+#: components/app/interface/settings/user/notifications/EventNotices.tsx
+msgid "Reminders before an event"
+msgstr "تذكيرات قبل الفعالية"
+
+#: src/interface/events/EventShare.tsx
+msgid "Remove the invitation link"
+msgstr "أزل رابط الدعوة"
+
+#: src/interface/events/EventShare.tsx
+msgid "Remove the link"
+msgstr "أزل الرابط"
+
+#: src/interface/events/EventShare.tsx
+msgctxt "scheduled events"
+msgid "Save"
+msgstr "حفظ"
+
+#: src/interface/events/EventsPage.tsx
+msgid "Search events"
+msgstr "ابحث في الفعاليات"
+
+#: src/interface/events/EventShare.tsx
+msgctxt "scheduled events"
+msgid "Sharing"
+msgstr "المشاركة"
+
+#: src/interface/events/EventLinkPage.tsx
+msgid "Sign in"
+msgstr "تسجيل الدخول"
+
+#: components/modal/modals/ServerEventEditor.tsx
+msgid "Sign up with Going to take a place. The rules and the brackets come before the start."
+msgstr "سجّل بـ«سأحضر» لتحجز مكانًا. القواعد وجدول المباريات تُنشر قبل البداية."
+
+#: components/modal/modals/ServerEventEditor.tsx
+msgid "Start from"
+msgstr "ابدأ من"
+
+#: src/interface/events/EventsPage.tsx
+msgctxt "event places"
+msgid "Text"
+msgstr "نصية"
+
+#: src/interface/events/EventShare.tsx
+msgid "The link could not be copied. Select it and copy it."
+msgstr "تعذّر نسخ الرابط. حدّده وانسخه."
+
+#: src/interface/events/EventShare.tsx
+msgid "They see the title, the time, the cover and the server's name. Never who is coming."
+msgstr "يرون العنوان والوقت والغلاف واسم السيرفر. ولا يرون أبدًا من سيحضر."
+
+#: src/interface/events/EventLinkPage.tsx
+msgid "This event was called off."
+msgstr "أُلغيت هذه الفعالية."
+
+#: src/interface/events/EventLinkPage.tsx
+msgid "This invitation is for the members of the event's server. Join it, then open the link again."
+msgstr "هذه الدعوة لأعضاء سيرفر الفعالية. انضم إليه ثم افتح الرابط من جديد."
+
+#: src/interface/events/EventLinkPage.tsx
+msgid "This invitation no longer works"
+msgstr "هذه الدعوة لم تعد تعمل"
+
+#: src/interface/events/EventLinkPage.tsx
+msgid "This link does not open an event"
+msgstr "هذا الرابط لا يفتح فعالية"
+
+#: src/interface/events/EventCalendar.tsx
+msgctxt "calendar"
+msgid "Today"
+msgstr "اليوم"
+
+#: components/modal/modals/ServerEventEditor.tsx
+msgid "Tournament"
+msgstr "بطولة"
+
+#. placeholder {0}: until(invitation)
+#: src/interface/events/EventShare.tsx
+msgid "until {0}"
+msgstr "حتى {0}"
+
+#: src/interface/events/EventShare.tsx
+msgid "Until the event"
+msgstr "حتى موعد الفعالية"
+
+#: components/modal/modals/ServerEventEditor.tsx
+msgid "Up to 3. Each person can switch reminders off for themselves."
+msgstr "حتى 3. يستطيع كل شخص إيقاف التذكيرات لنفسه."
+
+#. placeholder {0}: invitation.uses
+#. placeholder {1}: invitation.max_uses
+#: src/interface/events/EventShare.tsx
+msgid "Used {0} of {1}"
+msgstr "استُخدم {0} من {1}"
+
+#: src/interface/events/EventsPage.tsx
+msgctxt "event places"
+msgid "Voice"
+msgstr "صوتية"
+
+#: components/modal/modals/ServerEventEditor.tsx
+msgid "Voice hangout"
+msgstr "جلسة صوتية"
+
+#: components/modal/modals/ServerEventEditor.tsx
+msgid "Watch party"
+msgstr "مشاهدة جماعية"
+
+#: components/modal/modals/ServerEventEditor.tsx
+msgid "We play together in voice. Bring a game you like, or join the one that is running."
+msgstr "نلعب معًا في القناة الصوتية. أحضر لعبة تحبها، أو انضم إلى اللعبة الجارية."
+
+#: components/modal/modals/ServerEventEditor.tsx
+msgid "We watch together and talk about it in voice. Come a few minutes early."
+msgstr "نشاهد معًا ونتحدث في القناة الصوتية. احضر قبل الموعد بدقائق."
+
+#: src/interface/events/EventCalendar.tsx
+msgctxt "calendar"
+msgid "Week"
+msgstr "أسبوع"
+
+#: src/interface/events/EventCalendar.tsx
+msgid "Week after"
+msgstr "الأسبوع التالي"
+
+#: src/interface/events/EventCalendar.tsx
+msgid "Week before"
+msgstr "الأسبوع السابق"
+
+#: components/app/interface/settings/user/notifications/EventNotices.tsx
+msgid "When an organiser invites you to an event."
+msgstr "حين يدعوك منظّم إلى فعالية."
+
+#: components/app/interface/settings/user/notifications/EventNotices.tsx
+msgid "When the time or place of an event you answered changes."
+msgstr "حين يتغيّر وقت أو مكان فعالية أجبت عليها."
+
+#: components/app/interface/settings/user/notifications/EventNotices.tsx
+msgid "When you move up from the waiting list."
+msgstr "حين تنتقل من قائمة الانتظار إلى مقعد."
+
+#: src/interface/events/EventsPage.tsx
+msgid "Where it takes place"
+msgstr "مكان الفعالية"
+
+#: src/interface/events/EventShare.tsx
+msgid "Works for"
+msgstr "صالح لمدة"

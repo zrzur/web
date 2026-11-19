@@ -21,10 +21,13 @@ import { Icon } from "@revolt/ui/icons/Icon";
 
 import { HeaderIcon } from "../common/CommonHeader";
 
+import { EventCalendar } from "./EventCalendar";
+import { type PlaceFilter, eventMatches } from "./calendarDays";
 import { EventCard } from "./EventCard";
+import { EventFind, NothingFound } from "./EventsPage";
 import { eventsEnabled } from "./EventsLink";
 
-type Which = "mine" | "all";
+type Which = "mine" | "all" | "calendar";
 
 /**
  * Your events in every server at once, soonest first: the ones you answered
@@ -36,6 +39,10 @@ export function MyEventsPage() {
   const client = useClient();
   const state = useState();
   const [which, setWhich] = createSignal<Which>("mine");
+  const [search, setSearch] = createSignal("");
+  const [place, setPlace] = createSignal<PlaceFilter>("any");
+  const found = (event: API.ServerEvent) =>
+    eventMatches(event, search(), place());
 
   const [now, setNow] = createSignal(Date.now());
   const timer = setInterval(() => setNow(Date.now()), 30_000);
@@ -64,6 +71,8 @@ export function MyEventsPage() {
           !!client().servers.get(event.server),
       );
   const shown = () =>
+    (which() === "mine" ? events().filter(takingPart) : events()).filter(found);
+  const all = () =>
     which() === "mine" ? events().filter(takingPart) : events();
 
   return (
@@ -105,8 +114,48 @@ export function MyEventsPage() {
             >
               <Trans>Everything coming up</Trans> <i>{events().length}</i>
             </TabButton>
+            <TabButton
+              type="button"
+              role="tab"
+              aria-selected={which() === "calendar"}
+              onClick={() => setWhich("calendar")}
+              data-testid="my-events-tab-calendar"
+            >
+              <Trans context="scheduled events">Calendar</Trans>
+            </TabButton>
           </TabRow>
+          <EventFind
+            search={search()}
+            onSearch={setSearch}
+            place={place()}
+            onPlace={setPlace}
+          />
           <Switch>
+            <Match when={which() === "calendar"}>
+              <EventCalendar
+                load={async (from, to) =>
+                  (await client().serverEvents.fetchMine({ from, to, limit: 200 }))
+                    .events
+                }
+                filter={(event) =>
+                  found(event) && !!client().servers.get(event.server)
+                }
+                day={(list) => (
+                  <Grid>
+                    <For each={list}>
+                      {(event) => (
+                        <EventCard
+                          event={event}
+                          server={client().servers.get(event.server)!}
+                          now={now()}
+                          showServer
+                        />
+                      )}
+                    </For>
+                  </Grid>
+                )}
+              />
+            </Match>
             <Match when={loaded.error}>
               <Problem role="alert">
                 <strong>
@@ -142,6 +191,9 @@ export function MyEventsPage() {
                   )}
                 </For>
               </Grid>
+            </Match>
+            <Match when={all().length}>
+              <NothingFound />
             </Match>
             <Match when={which() === "mine"}>
               <EmptyState

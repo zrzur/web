@@ -10,7 +10,7 @@ import {
 
 import { Plural, Trans, useLingui } from "@lingui/solid/macro";
 import type { API, Server } from "@zrzur/sdk/solid";
-import { serverEventLink } from "@zrzur/sdk/solid";
+import { serverEventChannel, serverEventLink } from "@zrzur/sdk/solid";
 import { styled } from "styled-system/jsx";
 
 import { useClient } from "@revolt/client";
@@ -27,6 +27,8 @@ import { EventAnswer, SeatBar, seatState } from "./EventAnswer";
 import { EventPlace, JoinButton, OwnAnswerMark, eventPath } from "./EventCard";
 import { EventCover } from "./eventCovers";
 import { eventLink, eventPhase, eventWhen, startsIn } from "./eventFormat";
+import { eventIcs, icsFileName, linkBase, shareLink } from "./eventLinks";
+import { EventShare } from "./EventShare";
 import { EventStats } from "./EventStats";
 import { Ticket, TicketStub } from "./Ticket";
 
@@ -120,14 +122,36 @@ export function EventDetail(props: Props) {
     }
   }
 
-  function share() {
+  /** The link that opens this event: its share link when it has one */
+  function linkOfEvent() {
     // the app address of this Zrzur, not the page the app happens to run on
     const origin = client().configuration?.app || location.origin;
-    const url = eventLink(
-      origin.replace(/\/$/, ""),
-      props.server.id,
-      props.event._id,
-    );
+    return props.event.link
+      ? shareLink(linkBase(origin), props.event.link)
+      : eventLink(origin.replace(/\/$/, ""), props.server.id, props.event._id);
+  }
+
+  /** Save the event as a calendar file, for the calendar of the device */
+  function addToCalendar() {
+    const channel = serverEventChannel(props.event.place);
+    const place = channel
+      ? client().channels.get(channel)?.name
+      : (props.event.place as { location?: string }).location;
+    const file = new Blob([eventIcs(props.event, place, linkOfEvent())], {
+      type: "text/calendar;charset=utf-8",
+    });
+    const url = URL.createObjectURL(file);
+    const anchor = document.createElement("a");
+    anchor.href = url;
+    anchor.download = icsFileName(props.event.title);
+    document.body.append(anchor);
+    anchor.click();
+    anchor.remove();
+    setTimeout(() => URL.revokeObjectURL(url), 10_000);
+  }
+
+  function share() {
+    const url = linkOfEvent();
     const done = (state: "yes" | "failed") => {
       setCopied(state);
       setTimeout(() => setCopied(undefined), state === "yes" ? 2000 : 6000);
@@ -295,6 +319,42 @@ export function EventDetail(props: Props) {
                 <Trans>Link copied</Trans>
               ) : (
                 <Trans>Copy link</Trans>
+              )}
+            </Button>
+          </Show>
+          <Show when={upcoming()}>
+            <Button
+              size="sm"
+              variant="text"
+              onPress={addToCalendar}
+              data-testid="event-calendar-file"
+            >
+              <Icon name="calendar" size={16} />
+              <Trans>Add to my calendar</Trans>
+            </Button>
+          </Show>
+          <Show when={upcoming() && holds()}>
+            <Button
+              size="sm"
+              variant="text"
+              isDisabled={busy()}
+              aria-pressed={mine()?.muted === true}
+              onPress={() =>
+                void act(() =>
+                  client().serverEvents.setMuted(
+                    props.server.id,
+                    props.event._id,
+                    !mine()?.muted,
+                  ),
+                )
+              }
+              data-testid="event-mute"
+            >
+              <Icon name={mine()?.muted ? "bell-slash" : "bell"} size={16} />
+              {mine()?.muted ? (
+                <Trans>Reminders are off</Trans>
+              ) : (
+                <Trans>Reminders are on</Trans>
               )}
             </Button>
           </Show>
@@ -554,6 +614,10 @@ export function EventDetail(props: Props) {
               </Confirm>
             </Show>
           </Manage>
+        </Show>
+
+        <Show when={organiser() && (upcoming() || draft())}>
+          <EventShare event={props.event} serverId={props.server.id} />
         </Show>
 
         <Show when={error()}>
