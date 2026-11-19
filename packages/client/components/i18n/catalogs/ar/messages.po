@@ -28915,3 +28915,139 @@ msgstr "زرزور، مباشرةً على <0>سطح مكتبك.</0>"
 #: components/i18n/errors.tsx
 msgid "This server's AutoMod blocked your message."
 msgstr "حجب الإشراف التلقائي في هذا السيرفر رسالتك."
+
+#. placeholder {0}: data().user_name
+#: components/auth/src/invite/InvitePage.tsx
+msgid "{0} invited you"
+msgstr "دعاك {0}"
+
+#: components/auth/src/invite/InvitePage.tsx
+msgid "Already on Zrzur? <0>Log in</0>"
+msgstr "لديك حساب في زرزور؟ <0>سجّل الدخول</0>"
+
+#: components/auth/src/invite/InvitePage.tsx
+msgid "By continuing you accept the <0>Terms</0> and the <1>Community Guidelines</1>, and have read the <2>Privacy Policy</2>. Zrzur is for people aged 16 and over."
+msgstr "بالمتابعة توافق على <0>الشروط</0> و<1>إرشادات المجتمع</1>، وتقرّ بأنك قرأت <2>سياسة الخصوصية</2>. زرزور لمن أتمّوا 16 عامًا فأكثر."
+
+#: components/auth/src/invite/InvitePage.tsx
+msgid "Check your connection and try again. The link itself may be fine."
+msgstr "تحقّق من اتصالك وحاول مجددًا. قد يكون الرابط نفسه سليمًا."
+
+#: components/auth/src/flows/FlowVerify.tsx
+msgid "Choose a password"
+msgstr "اختر كلمة مرور"
+
+#. placeholder {0}: left().count
+#: components/auth/src/invite/ConfirmEmailStrip.tsx
+msgid "Confirm your email within {0} days to keep this account."
+msgstr "أكّد بريدك الإلكتروني خلال {0} أيام لتحتفظ بهذا الحساب."
+
+#. placeholder {0}: left().count
+#: components/auth/src/invite/ConfirmEmailStrip.tsx
+msgid "Confirm your email within {0} hours to keep this account."
+msgstr "أكّد بريدك الإلكتروني خلال {0} ساعة لتحتفظ بهذا الحساب."
+
+#: components/auth/src/invite/InvitePage.tsx
+msgid "Create account and join"
+msgstr "أنشئ الحساب وانضم"
+
+#: components/auth/src/invite/InvitePage.tsx
+msgid "Find servers in Discover"
+msgstr "ابحث عن سيرفرات في «اكتشف»"
+
+#: components/auth/src/invite/InvitePage.tsx
+msgid "Inside"
+msgstr "في الداخل"
+
+#. placeholder {0}: data().server_name
+#: components/auth/src/invite/InvitePage.tsx
+msgid "Joining {0}"
+msgstr "الانضمام إلى {0}"
+
+#: components/auth/src/invite/InvitePage.tsx
+msgid "Links can run out or be switched off. Ask the person who sent it for a new one."
+msgstr "قد تنتهي مدة الروابط أو يوقفها أصحابها. اطلب رابطًا جديدًا ممن أرسله إليك."
+
+#: components/auth/src/invite/ConfirmEmailStrip.tsx
+msgid "Open mail"
+msgstr "افتح البريد"
+
+#: components/auth/src/invite/InvitePage.tsx
+msgid "Open Zrzur"
+msgstr "افتح زرزور"
+
+#: components/auth/src/flows/FlowVerify.tsx
+msgid "Save and continue"
+msgstr "احفظ وتابع"
+
+#: components/auth/src/invite/ConfirmEmailStrip.tsx
+msgid "Send again"
+msgstr "أرسل مجددًا"
+
+#: components/auth/src/invite/ConfirmEmailStrip.tsx
+msgid "Send the email again"
+msgstr "أرسل الرسالة مجددًا"
+
+#: components/auth/src/invite/InvitePage.tsx
+msgid "Someone who runs it will look at your request."
+msgstr "سيطّلع أحد القائمين عليه على طلبك."
+
+#: components/auth/src/invite/InvitePage.tsx
+msgid "The people who run it have paused invites for a while. Try the same link again later."
+msgstr "أوقف القائمون عليه الدعوات لبعض الوقت. جرّب الرابط نفسه لاحقًا."
+
+#: components/auth/src/invite/InvitePage.tsx
+msgid "This invite link has ended"
+msgstr "انتهى رابط الدعوة هذا"
+
+#: components/auth/src/invite/InvitePage.tsx
+msgid "This server asks before letting people in"
+msgstr "هذا السيرفر يسأل قبل إدخال الناس"
+
+#: components/auth/src/invite/InvitePage.tsx
+msgid "This server isn't taking new people right now"
+msgstr "هذا السيرفر لا يستقبل أعضاء جددًا الآن"
+
+#: components/i18n/errors.tsx
+msgid "This server's AutoMod blocked your message: {rule}"
+msgstr "حظر المشرف الآلي في هذا السيرفر رسالتك: {rule}"
+
+#: components/auth/src/invite/InvitePage.tsx
+msgid "Three things and you're in."
+msgstr "ثلاثة أشياء وتصبح في الداخل."
+
+#: components/auth/src/invite/InvitePage.tsx
+msgid "Use another address"
+msgstr "استخدم عنوانًا آخر"
+
+#: components/auth/src/invite/InvitePage.tsx
+msgid "We couldn't open this invite"
+msgstr "تعذّر فتح هذه الدعوة"
+
+#: components/auth/src/invite/InvitePage.tsx
+msgid "We've sent a message to that address. Open it to continue."
+msgstr "أرسلنا رسالة إلى ذلك العنوان. افتحها لتتابع."
+
+#: components/auth/src/flows/Form.tsx
+msgid "What should people call you?"
+msgstr "بماذا يناديك الناس؟"
+
+#: components/auth/src/invite/InvitePage.tsx
+msgid "You'll choose a password from the email we send you. Confirm it within 3 days to keep the account."
+msgstr "تختار كلمة المرور من الرسالة التي نرسلها إلى بريدك. أكّده خلال 3 أيام لتحتفظ بالحساب."
+
+#: components/auth/src/invite/InvitePage.tsx
+msgid "You'll join this server as soon as someone who runs it approves you."
+msgstr "ستنضم إلى هذا السيرفر حالما يوافق عليك أحد القائمين عليه."
+
+#: components/auth/src/invite/InvitePage.tsx
+msgid "Your account is ready, but you couldn't join"
+msgstr "حسابك جاهز، لكن تعذّر انضمامك"
+
+#: components/auth/src/flows/FlowVerify.tsx
+msgid "Your email is confirmed once you choose a password. You'll use it to log in on other devices."
+msgstr "يُؤكَّد بريدك الإلكتروني حالما تختار كلمة مرور. ستستخدمها لتسجيل الدخول على أجهزة أخرى."
+
+#: components/auth/src/flows/Form.tsx
+msgid "Your name"
+msgstr "اسمك"

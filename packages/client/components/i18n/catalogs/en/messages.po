@@ -28918,3 +28918,139 @@ msgstr "Zrzur, right on <0>your desktop.</0>"
 #: components/i18n/errors.tsx
 msgid "This server's AutoMod blocked your message."
 msgstr "This server's AutoMod blocked your message."
+
+#. placeholder {0}: data().user_name
+#: components/auth/src/invite/InvitePage.tsx
+msgid "{0} invited you"
+msgstr "{0} invited you"
+
+#: components/auth/src/invite/InvitePage.tsx
+msgid "Already on Zrzur? <0>Log in</0>"
+msgstr "Already on Zrzur? <0>Log in</0>"
+
+#: components/auth/src/invite/InvitePage.tsx
+msgid "By continuing you accept the <0>Terms</0> and the <1>Community Guidelines</1>, and have read the <2>Privacy Policy</2>. Zrzur is for people aged 16 and over."
+msgstr "By continuing you accept the <0>Terms</0> and the <1>Community Guidelines</1>, and have read the <2>Privacy Policy</2>. Zrzur is for people aged 16 and over."
+
+#: components/auth/src/invite/InvitePage.tsx
+msgid "Check your connection and try again. The link itself may be fine."
+msgstr "Check your connection and try again. The link itself may be fine."
+
+#: components/auth/src/flows/FlowVerify.tsx
+msgid "Choose a password"
+msgstr "Choose a password"
+
+#. placeholder {0}: left().count
+#: components/auth/src/invite/ConfirmEmailStrip.tsx
+msgid "Confirm your email within {0} days to keep this account."
+msgstr "Confirm your email within {0} days to keep this account."
+
+#. placeholder {0}: left().count
+#: components/auth/src/invite/ConfirmEmailStrip.tsx
+msgid "Confirm your email within {0} hours to keep this account."
+msgstr "Confirm your email within {0} hours to keep this account."
+
+#: components/auth/src/invite/InvitePage.tsx
+msgid "Create account and join"
+msgstr "Create account and join"
+
+#: components/auth/src/invite/InvitePage.tsx
+msgid "Find servers in Discover"
+msgstr "Find servers in Discover"
+
+#: components/auth/src/invite/InvitePage.tsx
+msgid "Inside"
+msgstr "Inside"
+
+#. placeholder {0}: data().server_name
+#: components/auth/src/invite/InvitePage.tsx
+msgid "Joining {0}"
+msgstr "Joining {0}"
+
+#: components/auth/src/invite/InvitePage.tsx
+msgid "Links can run out or be switched off. Ask the person who sent it for a new one."
+msgstr "Links can run out or be switched off. Ask the person who sent it for a new one."
+
+#: components/auth/src/invite/ConfirmEmailStrip.tsx
+msgid "Open mail"
+msgstr "Open mail"
+
+#: components/auth/src/invite/InvitePage.tsx
+msgid "Open Zrzur"
+msgstr "Open Zrzur"
+
+#: components/auth/src/flows/FlowVerify.tsx
+msgid "Save and continue"
+msgstr "Save and continue"
+
+#: components/auth/src/invite/ConfirmEmailStrip.tsx
+msgid "Send again"
+msgstr "Send again"
+
+#: components/auth/src/invite/ConfirmEmailStrip.tsx
+msgid "Send the email again"
+msgstr "Send the email again"
+
+#: components/auth/src/invite/InvitePage.tsx
+msgid "Someone who runs it will look at your request."
+msgstr "Someone who runs it will look at your request."
+
+#: components/auth/src/invite/InvitePage.tsx
+msgid "The people who run it have paused invites for a while. Try the same link again later."
+msgstr "The people who run it have paused invites for a while. Try the same link again later."
+
+#: components/auth/src/invite/InvitePage.tsx
+msgid "This invite link has ended"
+msgstr "This invite link has ended"
+
+#: components/auth/src/invite/InvitePage.tsx
+msgid "This server asks before letting people in"
+msgstr "This server asks before letting people in"
+
+#: components/auth/src/invite/InvitePage.tsx
+msgid "This server isn't taking new people right now"
+msgstr "This server isn't taking new people right now"
+
+#: components/i18n/errors.tsx
+msgid "This server's AutoMod blocked your message: {rule}"
+msgstr "This server's AutoMod blocked your message: {rule}"
+
+#: components/auth/src/invite/InvitePage.tsx
+msgid "Three things and you're in."
+msgstr "Three things and you're in."
+
+#: components/auth/src/invite/InvitePage.tsx
+msgid "Use another address"
+msgstr "Use another address"
+
+#: components/auth/src/invite/InvitePage.tsx
+msgid "We couldn't open this invite"
+msgstr "We couldn't open this invite"
+
+#: components/auth/src/invite/InvitePage.tsx
+msgid "We've sent a message to that address. Open it to continue."
+msgstr "We've sent a message to that address. Open it to continue."
+
+#: components/auth/src/flows/Form.tsx
+msgid "What should people call you?"
+msgstr "What should people call you?"
+
+#: components/auth/src/invite/InvitePage.tsx
+msgid "You'll choose a password from the email we send you. Confirm it within 3 days to keep the account."
+msgstr "You'll choose a password from the email we send you. Confirm it within 3 days to keep the account."
+
+#: components/auth/src/invite/InvitePage.tsx
+msgid "You'll join this server as soon as someone who runs it approves you."
+msgstr "You'll join this server as soon as someone who runs it approves you."
+
+#: components/auth/src/invite/InvitePage.tsx
+msgid "Your account is ready, but you couldn't join"
+msgstr "Your account is ready, but you couldn't join"
+
+#: components/auth/src/flows/FlowVerify.tsx
+msgid "Your email is confirmed once you choose a password. You'll use it to log in on other devices."
+msgstr "Your email is confirmed once you choose a password. You'll use it to log in on other devices."
+
+#: components/auth/src/flows/Form.tsx
+msgid "Your name"
+msgstr "Your name"

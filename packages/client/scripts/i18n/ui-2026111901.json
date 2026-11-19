@@ -1,0 +1,138 @@
+{
+  "{0} invited you": [
+    "دعاك {0}",
+    "{0} hat dich eingeladen"
+  ],
+  "Already on Zrzur? <0>Log in</0>": [
+    "لديك حساب في زرزور؟ <0>سجّل الدخول</0>",
+    "Schon bei Zrzur? <0>Anmelden</0>"
+  ],
+  "By continuing you accept the <0>Terms</0> and the <1>Community Guidelines</1>, and have read the <2>Privacy Policy</2>. Zrzur is for people aged 16 and over.": [
+    "بالمتابعة توافق على <0>الشروط</0> و<1>إرشادات المجتمع</1>، وتقرّ بأنك قرأت <2>سياسة الخصوصية</2>. زرزور لمن أتمّوا 16 عامًا فأكثر.",
+    "Wenn du fortfährst, akzeptierst du die <0>Nutzungsbedingungen</0> und die <1>Community-Richtlinien</1> und hast die <2>Datenschutzerklärung</2> gelesen. Zrzur ist für Personen ab 16 Jahren."
+  ],
+  "Check your connection and try again. The link itself may be fine.": [
+    "تحقّق من اتصالك وحاول مجددًا. قد يكون الرابط نفسه سليمًا.",
+    "Prüfe deine Verbindung und versuche es noch einmal. Der Link selbst kann in Ordnung sein."
+  ],
+  "Choose a password": [
+    "اختر كلمة مرور",
+    "Passwort wählen"
+  ],
+  "Create account and join": [
+    "أنشئ الحساب وانضم",
+    "Konto erstellen und beitreten"
+  ],
+  "Find servers in Discover": [
+    "ابحث عن سيرفرات في «اكتشف»",
+    "Server in „Entdecken“ finden"
+  ],
+  "Inside": [
+    "في الداخل",
+    "Drinnen"
+  ],
+  "Joining {0}": [
+    "الانضمام إلى {0}",
+    "Du trittst {0} bei"
+  ],
+  "Links can run out or be switched off. Ask the person who sent it for a new one.": [
+    "قد تنتهي مدة الروابط أو يوقفها أصحابها. اطلب رابطًا جديدًا ممن أرسله إليك.",
+    "Links können ablaufen oder abgeschaltet werden. Bitte die Person, die ihn geschickt hat, um einen neuen."
+  ],
+  "Open mail": [
+    "افتح البريد",
+    "E-Mails öffnen"
+  ],
+  "Open Zrzur": [
+    "افتح زرزور",
+    "Zrzur öffnen"
+  ],
+  "Save and continue": [
+    "احفظ وتابع",
+    "Speichern und weiter"
+  ],
+  "Send again": [
+    "أرسل مجددًا",
+    "Erneut senden"
+  ],
+  "Send the email again": [
+    "أرسل الرسالة مجددًا",
+    "E-Mail erneut senden"
+  ],
+  "Someone who runs it will look at your request.": [
+    "سيطّلع أحد القائمين عليه على طلبك.",
+    "Jemand, der ihn leitet, sieht sich deine Anfrage an."
+  ],
+  "The people who run it have paused invites for a while. Try the same link again later.": [
+    "أوقف القائمون عليه الدعوات لبعض الوقت. جرّب الرابط نفسه لاحقًا.",
+    "Die Leitung hat Einladungen für eine Weile pausiert. Versuche denselben Link später noch einmal."
+  ],
+  "This invite link has ended": [
+    "انتهى رابط الدعوة هذا",
+    "Dieser Einladungslink ist abgelaufen"
+  ],
+  "This server asks before letting people in": [
+    "هذا السيرفر يسأل قبل إدخال الناس",
+    "Dieser Server fragt nach, bevor er jemanden hereinlässt"
+  ],
+  "This server isn't taking new people right now": [
+    "هذا السيرفر لا يستقبل أعضاء جددًا الآن",
+    "Dieser Server nimmt gerade niemanden neu auf"
+  ],
+  "This server's AutoMod blocked your message: {rule}": [
+    "حظر المشرف الآلي في هذا السيرفر رسالتك: {rule}",
+    "AutoMod dieses Servers hat deine Nachricht blockiert: {rule}"
+  ],
+  "This server's AutoMod blocked your message.": [
+    "حظر المشرف الآلي في هذا السيرفر رسالتك.",
+    "AutoMod dieses Servers hat deine Nachricht blockiert."
+  ],
+  "Three things and you're in.": [
+    "ثلاثة أشياء وتصبح في الداخل.",
+    "Drei Angaben, und du bist drin."
+  ],
+  "Use another address": [
+    "استخدم عنوانًا آخر",
+    "Andere Adresse verwenden"
+  ],
+  "We couldn't open this invite": [
+    "تعذّر فتح هذه الدعوة",
+    "Diese Einladung ließ sich nicht öffnen"
+  ],
+  "We've sent a message to that address. Open it to continue.": [
+    "أرسلنا رسالة إلى ذلك العنوان. افتحها لتتابع.",
+    "Wir haben eine Nachricht an diese Adresse geschickt. Öffne sie, um fortzufahren."
+  ],
+  "What should people call you?": [
+    "بماذا يناديك الناس؟",
+    "Wie sollen dich die Leute nennen?"
+  ],
+  "You'll choose a password from the email we send you. Confirm it within 3 days to keep the account.": [
+    "تختار كلمة المرور من الرسالة التي نرسلها إلى بريدك. أكّده خلال 3 أيام لتحتفظ بالحساب.",
+    "Dein Passwort wählst du über die E-Mail, die wir dir schicken. Bestätige sie innerhalb von 3 Tagen, um das Konto zu behalten."
+  ],
+  "You'll join this server as soon as someone who runs it approves you.": [
+    "ستنضم إلى هذا السيرفر حالما يوافق عليك أحد القائمين عليه.",
+    "Du trittst diesem Server bei, sobald dich jemand aus der Leitung freigibt."
+  ],
+  "Your account is ready, but you couldn't join": [
+    "حسابك جاهز، لكن تعذّر انضمامك",
+    "Dein Konto ist bereit, aber der Beitritt hat nicht geklappt"
+  ],
+  "Your email is confirmed once you choose a password. You'll use it to log in on other devices.": [
+    "يُؤكَّد بريدك الإلكتروني حالما تختار كلمة مرور. ستستخدمها لتسجيل الدخول على أجهزة أخرى.",
+    "Deine E-Mail-Adresse ist bestätigt, sobald du ein Passwort wählst. Damit meldest du dich auf anderen Geräten an."
+  ],
+  "Your name": [
+    "اسمك",
+    "Dein Name"
+  ],
+  "Confirm your email within {0} days to keep this account.": [
+    "أكّد بريدك الإلكتروني خلال {0} أيام لتحتفظ بهذا الحساب.",
+    "Bestätige deine E-Mail-Adresse innerhalb von {0} Tagen, um dieses Konto zu behalten."
+  ],
+  "Confirm your email within {0} hours to keep this account.": [
+    "أكّد بريدك الإلكتروني خلال {0} ساعة لتحتفظ بهذا الحساب.",
+    "Bestätige deine E-Mail-Adresse innerhalb von {0} Stunden, um dieses Konto zu behalten."
+  ]
+}

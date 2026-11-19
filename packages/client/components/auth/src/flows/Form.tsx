@@ -63,6 +63,7 @@ type Field =
   | "log-out"
   | "username"
   | "invite"
+  | "display-name"
   | "birth-month";
 
 /**
@@ -117,6 +118,15 @@ const useFieldConfiguration = () => {
       autocomplete: "off",
       name: () => t`Invite code`,
       placeholder: () => t`Enter your invite code.`,
+    },
+    // same limits as the server (2 to 32 characters)
+    "display-name": {
+      minLength: 2,
+      maxLength: 32,
+      type: "text" as const,
+      autocomplete: "nickname",
+      name: () => t`Your name`,
+      placeholder: () => t`What should people call you?`,
     },
     "birth-month": {
       name: () => t`Month and year of birth`,

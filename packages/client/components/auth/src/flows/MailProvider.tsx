@@ -13,7 +13,7 @@ interface Props {
  * @param email Email
  * @returns Provider
  */
-function mapMailProvider(email?: string): [string, string] | undefined {
+export function mapMailProvider(email?: string): [string, string] | undefined {
   if (!email) return;
 
   const match = /@(.+)/.exec(email);

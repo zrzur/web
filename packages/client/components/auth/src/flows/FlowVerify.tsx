@@ -15,10 +15,15 @@ import {
   FlowTitle,
   showDevMocks,
 } from "./Flow";
+import { Fields, Form, SubmitButton } from "./Form";
 
 type State =
   | {
       state: "verifying";
+    }
+  | {
+      // an account made from an invite link has no password yet
+      state: "password";
     }
   | {
       state: "error";
@@ -61,6 +66,16 @@ export default function FlowVerify() {
         }
       }
 
+      // asking first uses nothing up; an older server has no such route and
+      // the link is confirmed as before
+      const info = (await api
+        .get(`/auth/account/verify/${params.token}` as never)
+        .catch(() => undefined)) as { needs_password?: boolean } | undefined;
+      if (info?.needs_password) {
+        setState({ state: "password" });
+        return;
+      }
+
       const data = (await api.post(`/auth/account/verify/${params.token}`)) as {
         ticket?: { token: string };
       };
@@ -70,6 +85,18 @@ export default function FlowVerify() {
       setState({ state: "error", error: err });
     }
   });
+
+  /**
+   * Confirm the address and set the password the person chose
+   */
+  async function choosePassword(form: FormData) {
+    const data = (await api.post(
+      `/auth/account/verify/${params.token}` as never,
+      { password: form.get("new-password") } as never,
+    )) as { ticket?: { token: string } };
+
+    setState({ state: "success", mfa_ticket: data.ticket?.token });
+  }
 
   /**
    * Only the server's own "bad token" means the link is bad. A limit or a lost
@@ -117,6 +144,30 @@ export default function FlowVerify() {
         <FlowTitle>
           <Trans>Verifying your account…</Trans>
         </FlowTitle>
+      </Match>
+      <Match when={state().state === "password"}>
+        <FlowTitle
+          subtitle={
+            <Trans>
+              Your email is confirmed once you choose a password. You'll use
+              it to log in on other devices.
+            </Trans>
+          }
+        >
+          <Trans>Choose a password</Trans>
+        </FlowTitle>
+        <Form
+          onSubmit={choosePassword}
+          actions={
+            <FlowActions>
+              <SubmitButton>
+                <Trans>Save and continue</Trans>
+              </SubmitButton>
+            </FlowActions>
+          }
+        >
+          <Fields fields={["new-password"]} />
+        </Form>
       </Match>
       <Match when={state().state === "error"}>
         <FlowTitle

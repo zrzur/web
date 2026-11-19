@@ -25,6 +25,7 @@ import { NotificationsWorker } from "@revolt/client/NotificationsWorker";
 import { useDevice } from "@revolt/common";
 import { useModals } from "@revolt/modal";
 import { PluginHostGate } from "@revolt/plugins/PluginHostGate";
+import { ConfirmEmailStrip } from "@revolt/auth/src/invite/ConfirmEmailStrip";
 import { Navigate, useBeforeLeave, useLocation } from "@revolt/routing";
 import { useState } from "@revolt/state";
 import { LAYOUT_SECTIONS } from "@revolt/state/stores/Layout";
@@ -234,6 +235,7 @@ const Interface = (props: { children?: JSX.Element }) => {
     <MessageCache client={client()}>
       <AppRoot ref={rootRef} class="app_root">
         <Titlebar />
+        <ConfirmEmailStrip />
         <Switch fallback={<FirstScreen />}>
           {/* the developer docs have their own route (index.tsx) */}
           <Match when={!isLoggedIn()}>

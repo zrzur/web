@@ -761,6 +761,25 @@ export default class ClientController {
   }
 
   /**
+   * Enter with a session the server has just made: signing up from an invite
+   * link answers with one, so there is no log-in step
+   */
+  enterWithSession(session: { _id: string; token: string; user_id: string }) {
+    const createdSession = {
+      _id: session._id,
+      token: session.token,
+      userId: session.user_id,
+      valid: false,
+    };
+
+    this.state.auth.setSession(createdSession);
+    this.lifecycle.transition({
+      type: TransitionType.LoginUncached,
+      session: createdSession,
+    });
+  }
+
+  /**
    * Declare the month and year of birth the server waits for, then connect
    * @param birthMonth Year and month of birth, `YYYY-MM`
    * @returns The age group the server worked out
