@@ -8,6 +8,9 @@ import {
   Button,
   Column,
   Form2,
+  SettingsRow,
+  SettingsSection,
+  SettingsStatus,
   TextField,
   Toggle,
 } from "@revolt/ui";
@@ -23,20 +26,14 @@ import {
   Switch,
   batch,
   createSignal,
-  createUniqueId,
 } from "solid-js";
 import { styled } from "styled-system/jsx";
 import { useModals } from "..";
-import {
-  Failure,
-  IconPicker,
-  PlusBadge,
-  Progress,
-  Rules,
-} from "./ServerFlowParts";
+import { Failure, IconPicker, PlusBadge, Progress } from "./ServerFlowParts";
 import {
   type ImportFailure,
   type ImportPreview,
+  type PreviewRow,
   asksForText,
   buildServer,
   importAvailability,
@@ -62,6 +59,7 @@ type DialogAction = NonNullable<
   ComponentProps<typeof Dialog>["actions"]
 >[number];
 type Stage = "link" | "preview" | "done";
+type ChannelRow = Extract<PreviewRow, { kind: "channel" }>;
 
 /** The code at the end of a template link, to name the address of its text */
 export function codeIn(link: string) {
@@ -86,7 +84,6 @@ export function createServerImport(options: {
   const { t } = useLingui();
   const instance = useInstance();
   const { openModal } = useModals();
-  const rulesLabel = createUniqueId();
   const availability = () => importAvailability(options.client);
 
   const [stage, setStage] = createSignal<Stage>("link");
@@ -274,8 +271,10 @@ export function createServerImport(options: {
   );
 
   const actions = (): DialogAction[] => {
+    // the plain text button beside the main one, as Cancel is in every
+    // other create dialog
     const back = (onClick: () => void): DialogAction => ({
-      variant: "secondary",
+      variant: "text",
       text: <Trans>Back</Trans>,
       isDisabled: busy(),
       onClick: () => {
@@ -442,30 +441,28 @@ export function createServerImport(options: {
             {failureText()}
           </Failure>
         </Show>
-        <Two>
-          <div>
-            <h4 data-moves>
-              <Trans>Comes over</Trans>
-            </h4>
-            <p>
+        <SettingsSection>
+          <SettingsRow
+            icon={<Icon name="check-circle" size={20} />}
+            title={<Trans>Comes over</Trans>}
+            description={
               <Trans>
                 Categories, text and voice channels, topics, order, roles and
                 colours. Permissions as closely as Zrzur can match them.
               </Trans>
-            </p>
-          </div>
-          <div>
-            <h4>
-              <Trans>Stays behind</Trans>
-            </h4>
-            <p>
+            }
+          />
+          <SettingsRow
+            icon={<Icon name="minus-circle" size={20} />}
+            title={<Trans>Stays behind</Trans>}
+            description={
               <Trans>
                 Messages, members, bots, emoji, files and pins. Forum,
                 announcement and stage channels are not in a template.
               </Trans>
-            </p>
-          </div>
-        </Two>
+            }
+          />
+        </SettingsSection>
         <Fine>
           <Trans>
             Zrzur keeps only what becomes your server. Nothing changes in
@@ -478,144 +475,192 @@ export function createServerImport(options: {
 
   function PreviewStep(props: { preview: ImportPreview }) {
     const report = () => props.preview.report;
-    const rows = () => previewRows(props.preview.structure);
     const held = () => new Set(report().held_back);
+    /** The channels under their categories, the uncategorised ones first */
+    const groups = () => {
+      const out: { title?: string; rows: ChannelRow[] }[] = [];
+      for (const row of previewRows(props.preview.structure)) {
+        if (row.kind === "category") out.push({ title: row.title, rows: [] });
+        else {
+          if (!out.length) out.push({ rows: [] });
+          out[out.length - 1].rows.push(row);
+        }
+      }
+      return out.filter((group) => group.rows.length);
+    };
+    const count = (what: string, value: number) => () => (
+      <Count data-import-count={what}>{value}</Count>
+    );
+    /** A line under "Will not come over": a warning sign when it needs a look */
+    const wont = (text: JSX.Element, warn?: boolean) => (
+      <SettingsRow
+        icon={
+          <Icon
+            name={warn ? "warning-circle" : "minus-circle"}
+            size={20}
+            style={
+              warn ? { "--z-icon-color": "var(--z-status-warning)" } : undefined
+            }
+          />
+        }
+        title={text}
+      />
+    );
     return (
       <Stack>
-        <Counts>
-          <div>
-            <b data-import-count="categories">{report().categories}</b>
-            <Trans>Categories</Trans>
-          </div>
-          <div>
-            <b data-import-count="channels">{report().channels}</b>
-            <Trans>Channels</Trans>
-          </div>
-          <div>
-            <b data-import-count="roles">{report().roles}</b>
-            <Trans>Roles</Trans>
-          </div>
-        </Counts>
-        <Panes>
-          <Pane data-import-channels aria-label={t`Channels`} role="list">
-            <For each={rows()}>
-              {(row) =>
-                row.kind === "category" ? (
-                  <CategoryTitle role="listitem">{row.title}</CategoryTitle>
-                ) : (
-                  <Line role="listitem">
-                    <Icon
-                      size={16}
-                      name={
-                        row.type === "Voice"
-                          ? "speaker-high"
-                          : row.type === "Forum"
-                            ? "chats-circle"
-                            : row.announcement
-                              ? "megaphone"
-                              : "hash"
+        <SettingsSection>
+          <SettingsRow
+            icon={<Icon name="folder" size={20} />}
+            title={<Trans>Categories</Trans>}
+            control={count("categories", report().categories)}
+          />
+          <SettingsRow
+            icon={<Icon name="hash" size={20} />}
+            title={<Trans>Channels</Trans>}
+            control={count("channels", report().channels)}
+          />
+          <SettingsRow
+            icon={<Icon name="users" size={20} />}
+            title={<Trans>Roles</Trans>}
+            control={count("roles", report().roles)}
+          />
+        </SettingsSection>
+        <Groups data-import-channels aria-label={t`Channels`} role="group">
+          <For each={groups()}>
+            {(group) => (
+              <SettingsSection title={group.title}>
+                <For each={group.rows}>
+                  {(row) => (
+                    <SettingsRow
+                      icon={
+                        <Icon
+                          size={20}
+                          name={
+                            row.type === "Voice"
+                              ? "speaker-high"
+                              : row.type === "Forum"
+                                ? "chats-circle"
+                                : row.announcement
+                                  ? "megaphone"
+                                  : "hash"
+                          }
+                        />
+                      }
+                      title={<Bidi>{row.name}</Bidi>}
+                      control={
+                        row.mature || row.private || row.readOnly
+                          ? () => (
+                              <Tags>
+                                <Show when={row.mature}>
+                                  <SettingsStatus>18+</SettingsStatus>
+                                </Show>
+                                <Show when={row.private}>
+                                  <SettingsStatus>
+                                    <Trans>Private</Trans>
+                                  </SettingsStatus>
+                                </Show>
+                                <Show when={row.readOnly}>
+                                  <SettingsStatus>
+                                    <Trans>Read-only</Trans>
+                                  </SettingsStatus>
+                                </Show>
+                              </Tags>
+                            )
+                          : undefined
                       }
                     />
-                    <span>{row.name}</span>
-                    <Show when={row.mature}>
-                      <small>18+</small>
-                    </Show>
-                    <Show when={row.private}>
-                      <small>
-                        <Icon name="lock-simple" size={12} />
-                        <Trans>Private</Trans>
-                      </small>
-                    </Show>
-                    <Show when={row.readOnly}>
-                      <small>
-                        <Trans>Read-only</Trans>
-                      </small>
-                    </Show>
-                  </Line>
-                )
-              }
-            </For>
-          </Pane>
-          <Show when={props.preview.structure.roles.length}>
-            <Pane data-import-roles aria-label={t`Roles`} role="list">
-              <PaneTitle>
-                <Trans>Roles, highest first</Trans>
-              </PaneTitle>
+                  )}
+                </For>
+              </SettingsSection>
+            )}
+          </For>
+        </Groups>
+        <Show when={props.preview.structure.roles.length}>
+          <div data-import-roles>
+            <SettingsSection title={<Trans>Roles, highest first</Trans>}>
               <For each={props.preview.structure.roles}>
                 {(role) => (
-                  <Line role="listitem">
-                    <Dot
-                      style={{
-                        background: role.colour ?? "var(--z-fg-muted)",
-                      }}
-                    />
-                    <span>{role.name}</span>
-                    <Show when={held().has(role.name)}>
-                      <small data-held>
-                        <Trans>Control held back</Trans>
-                      </small>
-                    </Show>
-                  </Line>
+                  <SettingsRow
+                    icon={
+                      <Dot
+                        data-icon-mark
+                        style={{
+                          background: role.colour ?? "var(--z-fg-muted)",
+                        }}
+                      />
+                    }
+                    title={<Bidi>{role.name}</Bidi>}
+                    control={
+                      held().has(role.name)
+                        ? () => (
+                            <SettingsStatus tone="warning">
+                              <Trans>Control held back</Trans>
+                            </SettingsStatus>
+                          )
+                        : undefined
+                    }
+                  />
                 )}
               </For>
-            </Pane>
-          </Show>
-        </Panes>
-        <Wont data-import-wont>
-          <h4>
-            <Trans>Will not come over</Trans>
-          </h4>
-          <ul>
+            </SettingsSection>
+          </div>
+        </Show>
+        <div data-import-wont>
+          <SettingsSection title={<Trans>Will not come over</Trans>}>
             <Show when={report().held_back.length}>
-              <li data-warn>
-                {t`Control of the server (managing the server, its roles and permissions) is not copied. You switch it on yourself in Roles for: ${listed(report().held_back)}`}
-              </li>
+              {wont(
+                t`Control of the server (managing the server, its roles and permissions) is not copied. You switch it on yourself in Roles for: ${listed(report().held_back)}`,
+                true,
+              )}
             </Show>
             <Show when={report().skipped_channels.length}>
-              <li data-warn>
-                {t`Channels of a kind Zrzur can't build: ${listed(report().skipped_channels)}`}
-              </li>
+              {wont(
+                t`Channels of a kind Zrzur can't build: ${listed(report().skipped_channels)}`,
+                true,
+              )}
             </Show>
             <Show
               when={report().over_limit_channels + report().over_limit_roles}
             >
-              <li data-warn>
-                {t`Beyond what one server holds here and left out: ${report().over_limit_channels} channels, ${report().over_limit_roles} roles`}
-              </li>
+              {wont(
+                t`Beyond what one server holds here and left out: ${report().over_limit_channels} channels, ${report().over_limit_roles} roles`,
+                true,
+              )}
             </Show>
             <Show when={report().shortened.length}>
-              <li data-warn>
-                {t`Names longer than ${NAME_LIMIT} characters were shortened: ${report().shortened.length}`}
-              </li>
+              {wont(
+                t`Names longer than ${NAME_LIMIT} characters were shortened: ${report().shortened.length}`,
+                true,
+              )}
             </Show>
             <Show when={report().unmatched_permissions.length}>
-              <li>
-                {t`Kinds of permission Zrzur has no match for: ${report().unmatched_permissions.length}`}
-              </li>
+              {wont(
+                t`Kinds of permission Zrzur has no match for: ${report().unmatched_permissions.length}`,
+              )}
             </Show>
             <Show when={report().member_overrides}>
-              <li>
-                {t`Permissions set for single members: ${report().member_overrides}`}
-              </li>
+              {wont(
+                t`Permissions set for single members: ${report().member_overrides}`,
+              )}
             </Show>
             <Show when={report().mature_channels}>
-              <li>
-                {t`Age-restricted channels stay age-restricted and follow Zrzur's age rules: ${report().mature_channels}`}
-              </li>
+              {wont(
+                t`Age-restricted channels stay age-restricted and follow Zrzur's age rules: ${report().mature_channels}`,
+              )}
             </Show>
-            <li>
+            {wont(
               <Trans>
                 Voice quality settings, the AFK channel and the server picture
-              </Trans>
-            </li>
-            <li>
+              </Trans>,
+            )}
+            {wont(
               <Trans>
                 Messages, members, bots, emoji, files and pins. Members join
                 only through your invite link.
-              </Trans>
-            </li>
-          </ul>
-        </Wont>
+              </Trans>,
+            )}
+          </SettingsSection>
+        </div>
         <Fine>
           <Trans>
             Permissions are matched as closely as Zrzur can. Check them before
@@ -668,32 +713,37 @@ export function createServerImport(options: {
                   label={t`Server name`}
                 />
               </fieldset>
-              <Rules
-                data-flow-rules
-                onClick={() => {
-                  if (!busy()) setAgreed(!agreed());
-                }}
-              >
-                <span id={rulesLabel}>
-                  <Trans>
-                    I agree to{" "}
-                    <a
-                      href={SERVER_RULES}
-                      target="_blank"
-                      rel="noreferrer"
-                      onClick={(event) => event.stopPropagation()}
-                    >
-                      Zrzur's rules for server owners
-                    </a>
-                  </Trans>
-                </span>
-                <Toggle
-                  checked={agreed()}
-                  onChange={setAgreed}
-                  disabled={busy()}
-                  aria-labelledby={rulesLabel}
-                />
-              </Rules>
+              <div data-flow-rules>
+                <SettingsSection>
+                  <SettingsRow
+                    title={
+                      <RulesText>
+                        <Trans>
+                          I agree to{" "}
+                          <a
+                            href={SERVER_RULES}
+                            target="_blank"
+                            rel="noreferrer"
+                            onClick={(event) => event.stopPropagation()}
+                          >
+                            Zrzur's rules for server owners
+                          </a>
+                        </Trans>
+                      </RulesText>
+                    }
+                    disabled={busy()}
+                    onClick={() => setAgreed(!agreed())}
+                    control={(ids) => (
+                      <Toggle
+                        checked={agreed()}
+                        onChange={setAgreed}
+                        disabled={busy()}
+                        aria-labelledby={ids.labelId}
+                      />
+                    )}
+                  />
+                </SettingsSection>
+              </div>
             </Column>
           </form>
         </Show>
@@ -718,12 +768,14 @@ export function createServerImport(options: {
     const report = () => preview()?.report;
     return (
       <Stack>
-        <Ready role="status" data-import-ready>
-          <Icon name="check-circle" size={18} />
-          <span>
-            {t`${report()?.categories ?? 0} categories, ${report()?.channels ?? 0} channels and ${report()?.roles ?? 0} roles are in place.`}
-          </span>
-        </Ready>
+        <div role="status" data-import-ready>
+          <SettingsSection>
+            <SettingsRow
+              icon={<Icon name="check-circle" size={20} />}
+              title={t`${report()?.categories ?? 0} categories, ${report()?.channels ?? 0} channels and ${report()?.roles ?? 0} roles are in place.`}
+            />
+          </SettingsSection>
+        </div>
         <Show
           when={built()?.invite}
           fallback={
@@ -902,11 +954,6 @@ const TextLink = styled("button", {
 const Paste = styled("div", {
   base: { display: "flex", flexDirection: "column", gap: "12px", minWidth: 0 },
 });
-const box = {
-  border: "1px solid var(--z-border-subtle)",
-  borderRadius: "10px",
-  background: "var(--z-bg-sidebar)",
-} as const;
 const CopyRow = styled("div", {
   base: {
     display: "flex",
@@ -938,161 +985,6 @@ const CopyRow = styled("div", {
     "& button": { flexShrink: 0, minHeight: "44px" },
   },
 });
-const Two = styled("div", {
-  base: {
-    ...box,
-    display: "grid",
-    gridTemplateColumns: "1fr 1fr",
-    "& > div": { padding: "12px 16px", minWidth: 0 },
-    "& > div + div": { borderInlineStart: "1px solid var(--z-border-subtle)" },
-    "& h4": {
-      margin: "0 0 4px",
-      ...text13,
-      fontWeight: 600,
-      color: "var(--z-fg-secondary)",
-    },
-    "& h4[data-moves]": { color: "var(--z-status-success)" },
-    "& p": { margin: 0, ...text13, color: "var(--z-fg-secondary)" },
-    _phone: {
-      gridTemplateColumns: "1fr",
-      "& > div + div": {
-        borderInlineStart: 0,
-        borderBlockStart: "1px solid var(--z-border-subtle)",
-      },
-    },
-  },
-});
-const Counts = styled("div", {
-  base: {
-    display: "flex",
-    gap: "24px",
-    ...text13,
-    color: "var(--z-fg-secondary)",
-    "& > div": { display: "flex", flexDirection: "column" },
-    "& b": {
-      fontSize: "22px",
-      lineHeight: "28px",
-      fontWeight: 600,
-      color: "var(--z-fg-primary)",
-    },
-  },
-});
-const Panes = styled("div", {
-  base: {
-    display: "grid",
-    gridTemplateColumns: "minmax(0, 1.25fr) minmax(0, 1fr)",
-    gap: "12px",
-    alignItems: "start",
-    _phone: { gridTemplateColumns: "minmax(0, 1fr)" },
-  },
-});
-const Pane = styled("div", {
-  base: {
-    ...box,
-    padding: "8px 0",
-    maxHeight: "264px",
-    overflowY: "auto",
-    minWidth: 0,
-  },
-});
-const PaneTitle = styled("div", {
-  base: {
-    padding: "8px 16px 4px",
-    fontSize: "12px",
-    lineHeight: "16px",
-    fontWeight: 600,
-    color: "var(--z-fg-muted)",
-  },
-});
-const CategoryTitle = styled("div", {
-  base: {
-    padding: "12px 16px 4px",
-    fontSize: "12px",
-    lineHeight: "16px",
-    fontWeight: 600,
-    color: "var(--z-fg-muted)",
-    overflow: "hidden",
-    textOverflow: "ellipsis",
-    whiteSpace: "nowrap",
-    "&:first-child": { paddingBlockStart: "4px" },
-  },
-});
-const Line = styled("div", {
-  base: {
-    display: "flex",
-    alignItems: "center",
-    gap: "8px",
-    minHeight: "32px",
-    padding: "4px 16px",
-    fontSize: "14px",
-    lineHeight: "20px",
-    color: "var(--z-fg-secondary)",
-    "--z-icon-color": "var(--z-icon-muted)",
-    "& > .z-icon": { flexShrink: 0 },
-    "& > span:not(.z-icon)": {
-      flex: 1,
-      minWidth: 0,
-      overflow: "hidden",
-      textOverflow: "ellipsis",
-      whiteSpace: "nowrap",
-    },
-    "& small": {
-      display: "inline-flex",
-      alignItems: "center",
-      gap: "4px",
-      flexShrink: 0,
-      fontSize: "12px",
-      lineHeight: "16px",
-      color: "var(--z-fg-muted)",
-    },
-    "& small[data-held]": { color: "var(--z-status-warning)" },
-  },
-});
-const Dot = styled("span", {
-  base: {
-    width: "10px",
-    height: "10px",
-    borderRadius: "50%",
-    flex: "0 0 10px!",
-  },
-});
-const Wont = styled("div", {
-  base: {
-    ...box,
-    padding: "12px 16px",
-    "& h4": {
-      margin: "0 0 8px",
-      fontSize: "14px",
-      lineHeight: "20px",
-      fontWeight: 600,
-      color: "var(--z-fg-primary)",
-    },
-    "& ul": {
-      margin: 0,
-      paddingInlineStart: "18px",
-      display: "flex",
-      flexDirection: "column",
-      gap: "4px",
-      ...text13,
-      color: "var(--z-fg-secondary)",
-      overflowWrap: "anywhere",
-    },
-    "& li[data-warn]": { color: "var(--z-fg-primary)" },
-    "& li[data-warn]::marker": { color: "var(--z-status-warning)" },
-  },
-});
-const Ready = styled("div", {
-  base: {
-    display: "flex",
-    alignItems: "center",
-    gap: "8px",
-    fontSize: "14px",
-    lineHeight: "20px",
-    color: "var(--z-status-success)",
-    "--z-icon-color": "currentColor",
-    "& > .z-icon": { flexShrink: 0 },
-  },
-});
 const Tail = styled("div", {
   base: {
     display: "flex",
@@ -1100,5 +992,36 @@ const Tail = styled("div", {
     justifyContent: "space-between",
     gap: "12px",
     "& button": { flexShrink: 0, minHeight: "44px" },
+  },
+});
+/** The channel groups: Settings sections, 16 px apart like the steps */
+const Groups = styled("div", {
+  base: { display: "flex", flexDirection: "column", gap: "16px", minWidth: 0 },
+});
+/** A count at the end of a Settings row */
+const Count = styled("span", {
+  base: {
+    fontSize: "14px",
+    lineHeight: "20px",
+    fontWeight: 600,
+    color: "var(--z-fg-primary)",
+    fontVariantNumeric: "tabular-nums",
+  },
+});
+const Tags = styled("span", {
+  base: { display: "inline-flex", flexWrap: "wrap", gap: "4px" },
+});
+/** A name from the template keeps its own direction inside the row */
+const Bidi = styled("span", { base: { unicodeBidi: "plaintext" } });
+const RulesText = styled("span", {
+  base: { "& a": { color: "var(--z-link)", textDecoration: "underline" } },
+});
+/** A role's colour, in the row's icon slot */
+const Dot = styled("span", {
+  base: {
+    display: "block",
+    width: "12px",
+    height: "12px",
+    borderRadius: "50%",
   },
 });
