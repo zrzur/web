@@ -30,7 +30,18 @@ import {
 } from "solid-js";
 import { styled } from "styled-system/jsx";
 import { useModals } from "..";
-import { type ServerFlowArtName, ServerFlowArt } from "./ServerFlowArt";
+import {
+  Failure,
+  IconPicker,
+  PlusBadge,
+  Progress,
+  Row,
+  Rows,
+  Rules,
+  SectionTitle,
+} from "./ServerFlowParts";
+import { createServerImport } from "./ServerImportFlow";
+import { importAvailability } from "./serverImport";
 import { useLocalisedTemplate, useTemplateTitles } from "./serverTemplateText";
 import {
   type ServerAnswer,
@@ -56,7 +67,7 @@ function clip(text: string, limit: number) {
   return out;
 }
 
-type Step = "start" | "audience" | "yours";
+type Step = "start" | "audience" | "yours" | "copy";
 type DialogAction = NonNullable<
   ComponentProps<typeof Dialog>["actions"]
 >[number];
@@ -108,14 +119,31 @@ export function CreateServerFlow(props: DialogProps & { client: Client }) {
   // The create can't be left while it runs; it has a timeout, so it always ends.
   // eslint-disable-next-line solid/reactivity
   const modalId = props.modalId;
-  // eslint-disable-next-line solid/reactivity
-  if (modalId) onCleanup(modals.guardClose(modalId, busy));
+  if (modalId) onCleanup(modals.guardClose(modalId, () => working()));
+
+  // "Copy a server setup": its own steps inside this dialog
+  const copying = createServerImport({
+    // eslint-disable-next-line solid/reactivity
+    client: props.client,
+    onLeave: () => setStep("start"),
+    onOpen: (serverId, channelId) => {
+      navigate(
+        channelId
+          ? `/server/${serverId}/channel/${channelId}`
+          : `/server/${serverId}`,
+      );
+      props.onClose();
+    },
+  });
+  const working = () => busy() || copying.busy();
 
   let body: HTMLDivElement | undefined;
   // the choice a person came from when going back, else the first thing to use
   const focusTarget = (current: Step) => {
     if (current === "yours")
       return body?.querySelector<HTMLElement>("input[name=name]");
+    if (current === "copy")
+      return body?.querySelector<HTMLElement>("input[name=template-link]");
     const choice = current === "start" ? picked() : answer();
     return (
       body?.querySelector<HTMLElement>(`[data-flow-choice="${choice}"]`) ??
@@ -193,6 +221,7 @@ export function CreateServerFlow(props: DialogProps & { client: Client }) {
   });
   const actions = (): DialogAction[] | undefined => {
     if (step() === "start") return undefined;
+    if (step() === "copy") return copying.actions();
     if (step() === "audience") return [backTo("start")];
     const main: DialogAction = {
       text: busy() ? t`Setting up…` : t`Create`,
@@ -208,6 +237,8 @@ export function CreateServerFlow(props: DialogProps & { client: Client }) {
   const title = (): JSX.Element =>
     step() === "start" ? (
       <Trans>Make your server</Trans>
+    ) : step() === "copy" ? (
+      copying.title()
     ) : step() === "audience" ? (
       <Trans>Who will gather here?</Trans>
     ) : (
@@ -230,11 +261,11 @@ export function CreateServerFlow(props: DialogProps & { client: Client }) {
       appearance="creation"
       show={props.show}
       onClose={props.onClose}
-      showClose={!busy()}
-      persistent={step() === "yours"}
-      size="sm"
+      showClose={!working()}
+      persistent={step() === "yours" || step() === "copy"}
+      size={step() === "copy" ? "md" : "sm"}
       phonePage
-      isDisabled={busy()}
+      isDisabled={working()}
       title={title()}
       description={
         step() === "start" ? (
@@ -242,6 +273,8 @@ export function CreateServerFlow(props: DialogProps & { client: Client }) {
             Your server is where you and your friends hang out. Start from
             scratch or pick a ready-made one.
           </Trans>
+        ) : step() === "copy" ? (
+          copying.description()
         ) : undefined
       }
       actions={actions()}
@@ -270,6 +303,20 @@ export function CreateServerFlow(props: DialogProps & { client: Client }) {
                 )}
               </For>
             </Rows>
+            <Show when={importAvailability(props.client).open}>
+              <SectionTitle>
+                <Trans>Already have a community somewhere else?</Trans>
+              </SectionTitle>
+              <Row
+                art="community"
+                choice="copy"
+                label={t`Copy a server setup`}
+                onPick={() => {
+                  setPicked(undefined);
+                  setStep("copy");
+                }}
+              />
+            </Show>
             <Join>
               <span>
                 <Trans>Got an invite?</Trans>
@@ -287,6 +334,10 @@ export function CreateServerFlow(props: DialogProps & { client: Client }) {
                 <Trans>Join with an invite</Trans>
               </Button>
             </Join>
+          </Match>
+
+          <Match when={step() === "copy"}>
+            <copying.Body />
           </Match>
 
           <Match when={step() === "audience"}>
@@ -410,77 +461,10 @@ export function CreateServerFlow(props: DialogProps & { client: Client }) {
   );
 }
 
-function Row(props: {
-  art: ServerFlowArtName;
-  choice: string;
-  label: string;
-  onPick: () => void;
-}) {
-  return (
-    <Choice
-      type="button"
-      data-flow-row
-      data-flow-choice={props.choice}
-      onClick={() => props.onPick()}
-    >
-      <ServerFlowArt name={props.art} />
-      <span>{props.label}</span>
-      <Icon name="caret-right" size={16} />
-    </Choice>
-  );
-}
-
 /** Phones: a column as tall as the page, so the invite block ends it */
 const FlowBody = styled("div", {
   base: {
     _phone: { display: "flex", flexDirection: "column", minHeight: "100%" },
-  },
-});
-const SectionTitle = styled("h3", {
-  base: {
-    margin: "16px 0 8px",
-    fontSize: "13px",
-    fontWeight: 600,
-    lineHeight: "20px",
-    color: "var(--z-fg-muted)",
-  },
-});
-const Rows = styled("div", {
-  base: { display: "flex", flexDirection: "column", gap: "8px" },
-});
-const Choice = styled("button", {
-  base: {
-    width: "100%",
-    display: "flex",
-    alignItems: "center",
-    gap: "12px",
-    minHeight: "48px",
-    padding: "8px 12px",
-    border: "1px solid var(--z-border-subtle)",
-    borderRadius: "10px",
-    background: "var(--z-bg-sidebar)",
-    color: "var(--z-fg-primary)",
-    fontFamily: "inherit",
-    fontSize: "15px",
-    fontWeight: 600,
-    textAlign: "start",
-    cursor: "pointer",
-    "--z-icon-color": "var(--z-icon-muted)",
-    transition: "background-color 0.12s ease, border-color 0.12s ease",
-    "& > span:not(.z-icon)": { flex: 1, minWidth: 0 },
-    // direction icons turn by themselves in right-to-left (styles.css)
-    "& > .z-icon": { flexShrink: 0 },
-    _hover: {
-      background: "var(--z-nav-hover)",
-      borderColor: "var(--z-accent)",
-    },
-    "&:active": { background: "var(--z-nav-selected)" },
-    _focusVisible: {
-      outline: "2px solid var(--z-focus)",
-      outlineOffset: "2px",
-    },
-    _motionReduce: { transition: "none" },
-    _phone: { minHeight: "52px" },
   },
 });
 const Join = styled("div", {
@@ -518,56 +502,5 @@ const Skip = styled("button", {
     _hover: { textDecoration: "underline" },
     _focusVisible: { outline: "2px solid var(--z-focus)" },
     _phone: { minHeight: "44px" },
-  },
-});
-const IconPicker = styled("div", {
-  base: {
-    position: "relative",
-    alignSelf: "center",
-    minHeight: "80px",
-  },
-});
-const PlusBadge = styled("span", {
-  base: {
-    position: "absolute",
-    insetBlockStart: 0,
-    insetInlineStart: "56px",
-    width: "24px",
-    height: "24px",
-    display: "grid",
-    placeItems: "center",
-    borderRadius: "50%",
-    background: "var(--z-accent)",
-    color: "var(--z-on-accent)",
-    "--z-icon-color": "currentColor",
-    pointerEvents: "none",
-  },
-});
-const Rules = styled("div", {
-  base: {
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "space-between",
-    gap: "12px",
-    fontSize: "13px",
-    lineHeight: "20px",
-    color: "var(--z-fg-secondary)",
-    cursor: "pointer",
-    "& a": { color: "var(--z-link)", textDecoration: "underline" },
-    "& button": { flexShrink: 0 },
-    _phone: { minHeight: "44px" },
-  },
-});
-const Progress = styled("div", {
-  base: { fontSize: "13px", color: "var(--z-fg-secondary)" },
-});
-const Failure = styled("div", {
-  base: {
-    padding: "12px",
-    borderRadius: "6px",
-    background: "var(--z-danger-muted)",
-    color: "var(--z-status-error)",
-    fontSize: "13px",
-    "& p": { margin: "8px 0", color: "var(--z-fg-secondary)" },
   },
 });
