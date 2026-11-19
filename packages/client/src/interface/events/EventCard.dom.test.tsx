@@ -48,7 +48,37 @@ vi.mock("@revolt/ui", () => ({
   TextField: () => <input />,
   FloatingSelect: () => <span />,
   MenuItem: () => <span />,
-  Toggle: () => <input type="checkbox" />,
+  Toggle: (props: any) => (
+    <input
+      type="checkbox"
+      data-testid={props["data-testid"]}
+      checked={props.checked}
+      onChange={() => props.onChange?.(!props.checked)}
+    />
+  ),
+  SettingsSection: (props: any) => (
+    <section>
+      <h3>{props.title}</h3>
+      {props.aside}
+      {props.children}
+    </section>
+  ),
+  SettingsFormPanel: (props: any) => (
+    <div data-testid={props["data-testid"]}>{props.children}</div>
+  ),
+  SettingsRow: (props: any) => (
+    <div
+      data-testid={props["data-testid"]}
+      role={props.navigational ? "button" : undefined}
+      onClick={() => !props.disabled && props.onClick?.()}
+    >
+      {props.icon}
+      <span>{props.title}</span>
+      <span>{props.description}</span>
+      {props.secondary}
+      {props.control?.({ labelId: "l", descriptionId: "d" })}
+    </div>
+  ),
   Button: (props: any) => (
     <button
       type="button"
@@ -159,10 +189,8 @@ describe("EventCard", () => {
     expect(
       document.querySelector("[data-testid=event-own-answer]")!.textContent,
     ).toContain("You have a seat");
-    // a ticket: the day on its stub, marked as yours
-    expect(
-      document.querySelector("[data-testid=ticket-stub][data-mine]"),
-    ).not.toBeNull();
+    // a settings row: the event opens from its row
+    expect(document.querySelector("[data-testid=event-card]")).not.toBeNull();
     // management lives on the event's own page
     expect(document.querySelector("[data-testid=event-delete]")).toBeNull();
   });
@@ -376,7 +404,7 @@ describe("EventDetail", () => {
       stats.querySelectorAll("[data-testid=event-stats-days] [role=listitem]")
         .length,
     ).toBe(2);
-    expect(stats.textContent).toContain("Only the number is kept.");
+    expect(stats.textContent).toContain("Only the number is kept, never who it was.");
   });
 
   it("keeps the numbers from people who do not run the event", async () => {

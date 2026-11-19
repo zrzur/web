@@ -1,12 +1,13 @@
 import { For, Match, Show, Switch, createResource } from "solid-js";
 
-import { Plural, Trans, useLingui } from "@lingui/solid/macro";
+import { Trans, useLingui } from "@lingui/solid/macro";
 import type { API } from "@zrzur/sdk/solid";
 import { styled } from "styled-system/jsx";
 
 import { useClient } from "@revolt/client";
 import { TranslatedError } from "@revolt/i18n/errors";
-import { Button } from "@revolt/ui";
+import { Button, SettingsFormPanel, SettingsRow } from "@revolt/ui";
+import { Icon } from "@revolt/ui/icons/Icon";
 
 /** A day of the numbers as "12 Nov" */
 function dayLabel(day: string, locale: string) {
@@ -19,9 +20,10 @@ function dayLabel(day: string, locale: string) {
 }
 
 /**
- * Organisers: the numbers of an event. How many answered and how, how full
- * it is, on which days people signed up, and how many were in the voice
- * channel when it started. Numbers only: no names.
+ * Organisers: the numbers of an event, as rows of a settings group. How many
+ * answered and how, how full it is, on which days people signed up, and how
+ * many were in the voice channel when it started. Numbers only: no names.
+ * Goes inside a SettingsSection.
  */
 export function EventStats(props: {
   event: API.ServerEvent;
@@ -62,59 +64,51 @@ export function EventStats(props: {
     if (!now?.capacity) return undefined;
     return Math.round((now.counts.going / now.capacity) * 100);
   };
+  const number = (value: number | string, testid?: string) => () => (
+    <Value data-testid={testid}>{value}</Value>
+  );
 
   return (
-    <Box data-testid="event-stats">
-      <Switch>
-        <Match when={stats.latest?.counts && stats.latest}>
-          {(now) => (
-            <>
-              <Tiles>
-                <Tile>
-                  <b data-testid="event-stats-answered">{answered()}</b>
-                  <span>
-                    <Trans>Answers</Trans>
-                  </span>
-                </Tile>
-                <Tile>
-                  <b>{now().counts.going}</b>
-                  <span>
-                    <Trans context="event answer">Going</Trans>
-                  </span>
-                </Tile>
-                <Show when={fill() !== undefined}>
-                  <Tile>
-                    <b data-testid="event-stats-fill">{fill()}%</b>
-                    <span>
-                      <Trans>Seats taken</Trans>
-                    </span>
-                  </Tile>
-                </Show>
-                <Show when={now().counts.waiting}>
-                  <Tile>
-                    <b>{now().counts.waiting}</b>
-                    <span>
-                      <Trans>Waiting</Trans>
-                    </span>
-                  </Tile>
-                </Show>
-                <Show when={now().present_at_start != null}>
-                  <Tile>
-                    <b>{now().present_at_start}</b>
-                    <span>
-                      <Trans>In voice at the start</Trans>
-                    </span>
-                  </Tile>
-                </Show>
-              </Tiles>
-              <Show
-                when={days().length}
-                fallback={
-                  <Note>
-                    <Trans>Nobody has answered yet.</Trans>
-                  </Note>
+    <Switch>
+      <Match when={stats.latest?.counts && stats.latest}>
+        {(now) => (
+          <div data-testid="event-stats">
+            <SettingsRow
+              icon={<Icon name="chat-circle" size={20} />}
+              title={<Trans>Answers</Trans>}
+              control={number(answered(), "event-stats-answered")}
+            />
+            <SettingsRow
+              icon={<Icon name="check" size={20} />}
+              title={<Trans context="event answer">Going</Trans>}
+              control={number(now().counts.going)}
+            />
+            <Show when={fill() !== undefined}>
+              <SettingsRow
+                icon={<Icon name="users-three" size={20} />}
+                title={<Trans>Seats taken</Trans>}
+                control={number(`${fill()}%`, "event-stats-fill")}
+              />
+            </Show>
+            <Show when={now().counts.waiting}>
+              <SettingsRow
+                icon={<Icon name="hourglass" size={20} />}
+                title={<Trans>Waiting</Trans>}
+                control={number(now().counts.waiting ?? 0)}
+              />
+            </Show>
+            <Show when={now().present_at_start != null}>
+              <SettingsRow
+                icon={<Icon name="speaker-high" size={20} />}
+                title={<Trans>In voice at the start</Trans>}
+                description={
+                  <Trans>Only the number is kept, never who it was.</Trans>
                 }
-              >
+                control={number(now().present_at_start ?? 0)}
+              />
+            </Show>
+            <Show when={days().length}>
+              <SettingsFormPanel>
                 <ChartTitle>
                   <Trans>Answers by day</Trans>
                 </ChartTitle>
@@ -141,85 +135,51 @@ export function EventStats(props: {
                     )}
                   </For>
                 </Chart>
-              </Show>
-              <Show when={now().present_at_start != null}>
-                <Note>
-                  <Plural
-                    value={now().present_at_start ?? 0}
-                    one="# person was in the voice channel when it started. Only the number is kept."
-                    other="# people were in the voice channel when it started. Only the number is kept."
-                  />
-                </Note>
-              </Show>
-            </>
-          )}
-        </Match>
-        <Match when={stats.error}>
+              </SettingsFormPanel>
+            </Show>
+          </div>
+        )}
+      </Match>
+      <Match when={stats.error}>
+        <SettingsFormPanel data-testid="event-stats">
           <Note role="alert">
             <TranslatedError error={stats.error} />
           </Note>
-          <Button size="sm" variant="tonal" onPress={() => void refetch()}>
-            <Trans>Try again</Trans>
-          </Button>
-        </Match>
-        <Match when={true}>
+          <div>
+            <Button size="sm" variant="tonal" onPress={() => void refetch()}>
+              <Trans>Try again</Trans>
+            </Button>
+          </div>
+        </SettingsFormPanel>
+      </Match>
+      <Match when={true}>
+        <SettingsFormPanel data-testid="event-stats">
           <Note aria-busy="true">
             <Trans>Loading the numbers…</Trans>
           </Note>
-        </Match>
-      </Switch>
-    </Box>
+        </SettingsFormPanel>
+      </Match>
+    </Switch>
   );
 }
 
-const Box = styled("div", {
+const Value = styled("span", {
   base: {
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "stretch",
-    gap: "12px",
-    minWidth: 0,
-  },
-});
-
-const Tiles = styled("div", {
-  base: {
-    display: "grid",
-    gridTemplateColumns: "repeat(auto-fill, minmax(88px, 1fr))",
-    gap: "8px",
-  },
-});
-
-const Tile = styled("div", {
-  base: {
-    display: "flex",
-    flexDirection: "column",
-    gap: "2px",
-    padding: "10px 12px",
-    minWidth: 0,
-    borderRadius: "var(--z-radius-sm, 6px)",
-    background: "var(--z-bg-input)",
-    "& b": {
-      fontSize: "18px",
-      lineHeight: "24px",
-      fontWeight: 700,
-      color: "var(--z-fg-primary)",
-    },
-    "& span": {
-      fontSize: "12px",
-      lineHeight: "16px",
-      color: "var(--z-fg-secondary)",
-    },
+    fontSize: "15px",
+    lineHeight: "20px",
+    fontWeight: 650,
+    color: "var(--z-fg-primary)",
+    fontVariantNumeric: "tabular-nums",
   },
 });
 
 const ChartTitle = styled("h4", {
   base: {
     margin: 0,
-    fontSize: "12px",
-    lineHeight: "16px",
-    fontWeight: 650,
-    color: "var(--z-fg-muted)",
+    fontSize: "13px",
+    lineHeight: "20px",
+    fontWeight: 600,
+    color: "var(--z-fg-secondary)",
   },
 });
 

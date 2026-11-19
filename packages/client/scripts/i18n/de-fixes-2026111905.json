@@ -1,0 +1,4 @@
+{
+  "event places::Voice": "Sprachkanal",
+  "event places::Text": "Textkanal"
+}

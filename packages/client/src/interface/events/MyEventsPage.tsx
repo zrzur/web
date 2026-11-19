@@ -13,6 +13,7 @@ import type { API } from "@zrzur/sdk/solid";
 import { styled } from "styled-system/jsx";
 
 import { useClient } from "@revolt/client";
+import { useDevice } from "@revolt/common";
 import { TranslatedError } from "@revolt/i18n/errors";
 import { Navigate } from "@revolt/routing";
 import { useState } from "@revolt/state";
@@ -20,12 +21,19 @@ import { Button, EmptyState, Header } from "@revolt/ui";
 import { Icon } from "@revolt/ui/icons/Icon";
 
 import { HeaderIcon } from "../common/CommonHeader";
+import {
+  ListDivider,
+  ListPhoneFilters,
+  ListSpacer,
+  ListTab,
+  ListTabs,
+} from "../common/ListPageHeader";
 
-import { EventCalendar } from "./EventCalendar";
 import { type PlaceFilter, eventMatches } from "./calendarDays";
-import { EventCard } from "./EventCard";
-import { EventFind, NothingFound } from "./EventsPage";
+import { EventCalendar } from "./EventCalendar";
+import { EventCard, EventGroup } from "./EventCard";
 import { eventsEnabled } from "./EventsLink";
+import { EventFind, NothingFound } from "./EventsPage";
 
 type Which = "mine" | "all" | "calendar";
 
@@ -38,6 +46,9 @@ export function MyEventsPage() {
   const { t } = useLingui();
   const client = useClient();
   const state = useState();
+  const { layout } = useDevice();
+  // phones and narrow tablets: the tabs and the search get their own rows
+  const phone = () => layout() !== "desktop";
   const [which, setWhich] = createSignal<Which>("mine");
   const [search, setSearch] = createSignal("");
   const [place, setPlace] = createSignal<PlaceFilter>("any");
@@ -75,6 +86,46 @@ export function MyEventsPage() {
   const all = () =>
     which() === "mine" ? events().filter(takingPart) : events();
 
+  const tabsEl = () => (
+    <ListTabs role="tablist" aria-label={t`Which events`}>
+      <ListTab
+        type="button"
+        role="tab"
+        aria-selected={which() === "mine"}
+        onClick={() => setWhich("mine")}
+        data-testid="my-events-tab-mine"
+      >
+        <Trans>I'm taking part</Trans>
+      </ListTab>
+      <ListTab
+        type="button"
+        role="tab"
+        aria-selected={which() === "all"}
+        onClick={() => setWhich("all")}
+        data-testid="my-events-tab-all"
+      >
+        <Trans>Everything coming up</Trans>
+      </ListTab>
+      <ListTab
+        type="button"
+        role="tab"
+        aria-selected={which() === "calendar"}
+        onClick={() => setWhich("calendar")}
+        data-testid="my-events-tab-calendar"
+      >
+        <Trans context="scheduled events">Calendar</Trans>
+      </ListTab>
+    </ListTabs>
+  );
+  const findEl = () => (
+    <EventFind
+      search={search()}
+      onSearch={setSearch}
+      place={place()}
+      onPlace={setPlace}
+    />
+  );
+
   return (
     <Show when={eventsEnabled(client())} fallback={<Navigate href="/" />}>
       <Page data-testid="my-events-page">
@@ -92,56 +143,38 @@ export function MyEventsPage() {
               <Trans>My events</Trans>
             </h1>
           </Title>
+          <Show when={!phone()}>
+            <ListDivider />
+            {tabsEl()}
+            <ListSpacer />
+            {findEl()}
+          </Show>
         </Header>
+        {/* phones: the tabs and the search get their own rows under the title */}
+        <Show when={phone()}>
+          <ListPhoneFilters>
+            {tabsEl()}
+            {findEl()}
+          </ListPhoneFilters>
+        </Show>
         <Body>
-          <TabRow role="tablist" aria-label={t`Which events`}>
-            <TabButton
-              type="button"
-              role="tab"
-              aria-selected={which() === "mine"}
-              onClick={() => setWhich("mine")}
-              data-testid="my-events-tab-mine"
-            >
-              <Trans>I'm taking part</Trans>{" "}
-              <i>{events().filter(takingPart).length}</i>
-            </TabButton>
-            <TabButton
-              type="button"
-              role="tab"
-              aria-selected={which() === "all"}
-              onClick={() => setWhich("all")}
-              data-testid="my-events-tab-all"
-            >
-              <Trans>Everything coming up</Trans> <i>{events().length}</i>
-            </TabButton>
-            <TabButton
-              type="button"
-              role="tab"
-              aria-selected={which() === "calendar"}
-              onClick={() => setWhich("calendar")}
-              data-testid="my-events-tab-calendar"
-            >
-              <Trans context="scheduled events">Calendar</Trans>
-            </TabButton>
-          </TabRow>
-          <EventFind
-            search={search()}
-            onSearch={setSearch}
-            place={place()}
-            onPlace={setPlace}
-          />
           <Switch>
             <Match when={which() === "calendar"}>
               <EventCalendar
                 load={async (from, to) =>
-                  (await client().serverEvents.fetchMine({ from, to, limit: 200 }))
-                    .events
+                  (
+                    await client().serverEvents.fetchMine({
+                      from,
+                      to,
+                      limit: 200,
+                    })
+                  ).events
                 }
                 filter={(event) =>
                   found(event) && !!client().servers.get(event.server)
                 }
                 day={(list) => (
-                  <Grid>
+                  <EventGroup>
                     <For each={list}>
                       {(event) => (
                         <EventCard
@@ -152,7 +185,7 @@ export function MyEventsPage() {
                         />
                       )}
                     </For>
-                  </Grid>
+                  </EventGroup>
                 )}
               />
             </Match>
@@ -179,7 +212,7 @@ export function MyEventsPage() {
               </Grid>
             </Match>
             <Match when={shown().length}>
-              <Grid>
+              <EventGroup>
                 <For each={shown()}>
                   {(event) => (
                     <EventCard
@@ -190,7 +223,7 @@ export function MyEventsPage() {
                     />
                   )}
                 </For>
-              </Grid>
+              </EventGroup>
             </Match>
             <Match when={all().length}>
               <NothingFound />
@@ -241,7 +274,7 @@ const Title = styled("div", {
     display: "flex",
     alignItems: "center",
     gap: "8px",
-    flex: 1,
+    flex: "0 1 auto",
     minWidth: 0,
     "--z-icon-color": "var(--z-fg-secondary)",
     "& h1": {
@@ -270,61 +303,6 @@ const Body = styled("div", {
     marginInline: "auto",
     padding: "24px",
     _phone: { padding: "12px 16px" },
-  },
-});
-
-const TabRow = styled("div", {
-  base: {
-    display: "flex",
-    flexWrap: "wrap",
-    gap: "4px",
-    // phones: one row of chips that scrolls on its own
-    _phone: {
-      flexWrap: "nowrap",
-      gap: "8px",
-      overflowX: "auto",
-      scrollbarWidth: "none",
-      flexShrink: 0,
-    },
-  },
-});
-
-const TabButton = styled("button", {
-  base: {
-    display: "inline-flex",
-    alignItems: "center",
-    gap: "6px",
-    minHeight: "32px",
-    paddingInline: "14px",
-    border: "none",
-    borderRadius: "999px",
-    background: "transparent",
-    color: "var(--z-fg-secondary)",
-    font: "inherit",
-    fontSize: "14px",
-    fontWeight: 500,
-    cursor: "pointer",
-    "& i": {
-      fontStyle: "normal",
-      fontSize: "12px",
-      color: "var(--z-fg-muted)",
-    },
-    "&:hover": { background: "var(--z-hover)" },
-    "&[aria-selected=true]": {
-      background: "var(--z-selected)",
-      color: "var(--z-fg-primary)",
-    },
-    "&:focus-visible": {
-      outline: "2px solid var(--z-focus)",
-      outlineOffset: "2px",
-    },
-    _phone: {
-      minHeight: "44px",
-      paddingInline: "16px",
-      flexShrink: 0,
-      background: "var(--z-bg-raised)",
-      "&[aria-selected=true]": { background: "var(--z-nav-selected)" },
-    },
   },
 });
 

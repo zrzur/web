@@ -13,22 +13,33 @@ import { Trans, useLingui } from "@lingui/solid/macro";
 import type { Server } from "@zrzur/sdk/solid";
 import { styled } from "styled-system/jsx";
 
+import { ContextMenu, ContextMenuButton } from "@revolt/app/menus/ContextMenu";
 import { useClient } from "@revolt/client";
+import { useDevice } from "@revolt/common";
 import { timeLocale } from "@revolt/i18n";
 import { TranslatedError } from "@revolt/i18n/errors";
 import { isTypingTarget } from "@revolt/keybinds/shortcuts";
 import { useModals } from "@revolt/modal";
 import { Navigate, useNavigate, useParams } from "@revolt/routing";
 import { useState } from "@revolt/state";
-import { Button, EmptyState, Header, Segmented } from "@revolt/ui";
+import { Button, EmptyState, Header } from "@revolt/ui";
 import { hour12From } from "@revolt/ui/components/design/dateTime";
 import { Icon } from "@revolt/ui/icons/Icon";
+import type { IconName } from "@revolt/ui/icons/registry";
 
 import { HeaderIcon } from "../common/CommonHeader";
+import {
+  ListDivider,
+  ListPhoneFilters,
+  ListSearch,
+  ListSpacer,
+  ListTab,
+  ListTabs,
+} from "../common/ListPageHeader";
 
-import { EventCalendar } from "./EventCalendar";
 import { type PlaceFilter, eventMatches } from "./calendarDays";
-import { EventCard, EventHero } from "./EventCard";
+import { EventCalendar } from "./EventCalendar";
+import { EventCard, EventGroup, EventHero } from "./EventCard";
 import { EventDetail } from "./EventDetail";
 import { eventKey, eventWhen, eventsShortcutAllowed } from "./eventFormat";
 import { eventsEnabled, serverEventsOn } from "./EventsLink";
@@ -110,6 +121,10 @@ function Events(props: { server: Server; focus?: string }) {
   const { openModal } = useModals();
   const navigate = useNavigate();
   const state = useState();
+  const { layout } = useDevice();
+  // phones and narrow tablets: the tabs and the search get their own rows
+  // under the title, as on Friends
+  const phone = () => layout() !== "desktop";
 
   // "starts in 5 minutes" stays right while the page is open
   const [now, setNow] = createSignal(Date.now());
@@ -214,10 +229,72 @@ function Events(props: { server: Server; focus?: string }) {
     return t`Deleted. The next one is on ${date}.`;
   });
 
+  const tabsEl = () => (
+    <ListTabs role="tablist" aria-label={t`Which events`}>
+      <ListTab
+        type="button"
+        role="tab"
+        aria-selected={tab() === "upcoming"}
+        onClick={() => setTab("upcoming")}
+        data-testid="events-tab-upcoming"
+      >
+        <Trans>Upcoming</Trans>
+      </ListTab>
+      <ListTab
+        type="button"
+        role="tab"
+        aria-selected={tab() === "mine"}
+        onClick={() => setTab("mine")}
+        data-testid="events-tab-mine"
+      >
+        <Trans>My events</Trans>
+      </ListTab>
+      <ListTab
+        type="button"
+        role="tab"
+        aria-selected={tab() === "calendar"}
+        onClick={() => setTab("calendar")}
+        data-testid="events-tab-calendar"
+      >
+        <Trans context="scheduled events">Calendar</Trans>
+      </ListTab>
+      <ListTab
+        type="button"
+        role="tab"
+        aria-selected={tab() === "past"}
+        onClick={() => setTab("past")}
+        data-testid="events-tab-past"
+      >
+        <Trans>Past</Trans>
+      </ListTab>
+      <Show when={canManage()}>
+        <ListTab
+          type="button"
+          role="tab"
+          aria-selected={tab() === "drafts"}
+          onClick={() => setTab("drafts")}
+          data-testid="events-tab-drafts"
+        >
+          <Trans>Drafts</Trans>
+        </ListTab>
+      </Show>
+    </ListTabs>
+  );
+  const findEl = () => (
+    <Show when={tab() !== "drafts"}>
+      <EventFind
+        search={search()}
+        onSearch={setSearch}
+        place={place()}
+        onPlace={setPlace}
+      />
+    </Show>
+  );
+
   return (
     <Page data-testid="events-page">
       <Header placement="primary">
-        <Title>
+        <Title data-grow={props.focus ? "" : undefined}>
           <Show
             when={props.focus}
             fallback={
@@ -251,19 +328,35 @@ function Events(props: { server: Server; focus?: string }) {
               t({ message: "Events", context: "scheduled events" })}
           </h1>
         </Title>
+        <Show when={!props.focus && !phone()} fallback={<ListSpacer />}>
+          <ListDivider />
+          {tabsEl()}
+          <ListSpacer />
+          {findEl()}
+        </Show>
         <Show when={canManage() && !props.focus}>
           <Button
             size="sm"
             variant={live().length ? "tonal" : "filled"}
             onPress={schedule}
             aria-keyshortcuts="N"
+            aria-label={t`New event`}
             data-testid="events-schedule"
           >
             <Icon name="plus" size={16} />
-            <Trans>New event</Trans>
+            <WideLabel>
+              <Trans>New event</Trans>
+            </WideLabel>
           </Button>
         </Show>
       </Header>
+      {/* phones: the tabs and the search get their own rows under the title */}
+      <Show when={!props.focus && phone()}>
+        <ListPhoneFilters>
+          {tabsEl()}
+          {findEl()}
+        </ListPhoneFilters>
+      </Show>
       <Body data-wide={props.focus ? undefined : true}>
         <Switch>
           <Match when={props.focus}>
@@ -317,66 +410,6 @@ function Events(props: { server: Server; focus?: string }) {
             </Grid>
           </Match>
           <Match when={true}>
-            <TabRow role="tablist" aria-label={t`Which events`}>
-              <TabButton
-                type="button"
-                role="tab"
-                aria-selected={tab() === "upcoming"}
-                onClick={() => setTab("upcoming")}
-                data-testid="events-tab-upcoming"
-              >
-                <Trans>Upcoming</Trans>{" "}
-                <i>{upcoming().length + live().length}</i>
-              </TabButton>
-              <TabButton
-                type="button"
-                role="tab"
-                aria-selected={tab() === "mine"}
-                onClick={() => setTab("mine")}
-                data-testid="events-tab-mine"
-              >
-                <Trans>My events</Trans> <i>{mine().length}</i>
-              </TabButton>
-              <TabButton
-                type="button"
-                role="tab"
-                aria-selected={tab() === "calendar"}
-                onClick={() => setTab("calendar")}
-                data-testid="events-tab-calendar"
-              >
-                <Trans context="scheduled events">Calendar</Trans>
-              </TabButton>
-              <TabButton
-                type="button"
-                role="tab"
-                aria-selected={tab() === "past"}
-                onClick={() => setTab("past")}
-                data-testid="events-tab-past"
-              >
-                <Trans>Past</Trans>
-              </TabButton>
-              <Show when={canManage()}>
-                <TabButton
-                  type="button"
-                  role="tab"
-                  aria-selected={tab() === "drafts"}
-                  onClick={() => setTab("drafts")}
-                  data-testid="events-tab-drafts"
-                >
-                  <Trans>Drafts</Trans> <i>{drafts().length}</i>
-                </TabButton>
-              </Show>
-            </TabRow>
-
-            <Show when={tab() !== "drafts"}>
-              <EventFind
-                search={search()}
-                onSearch={setSearch}
-                place={place()}
-                onPlace={setPlace}
-              />
-            </Show>
-
             <Show when={deletedNote()}>
               <Note role="status" data-testid="events-deleted-note">
                 {deletedNote()}
@@ -391,7 +424,7 @@ function Events(props: { server: Server; focus?: string }) {
                   }
                   filter={found}
                   day={(list) => (
-                    <Grid>
+                    <EventGroup>
                       <For each={list}>
                         {(event) => (
                           <EventCard
@@ -401,7 +434,7 @@ function Events(props: { server: Server; focus?: string }) {
                           />
                         )}
                       </For>
-                    </Grid>
+                    </EventGroup>
                   )}
                 />
               </Match>
@@ -421,7 +454,7 @@ function Events(props: { server: Server; focus?: string }) {
                     </Problem>
                   </Match>
                   <Match when={past()?.filter(found).length}>
-                    <Grid>
+                    <EventGroup>
                       <For each={past()?.filter(found)}>
                         {(event) => (
                           <EventCard
@@ -433,7 +466,7 @@ function Events(props: { server: Server; focus?: string }) {
                           />
                         )}
                       </For>
-                    </Grid>
+                    </EventGroup>
                   </Match>
                   <Match when={past()?.length}>
                     <NothingFound />
@@ -458,7 +491,7 @@ function Events(props: { server: Server; focus?: string }) {
                     />
                   }
                 >
-                  <Grid>
+                  <EventGroup>
                     <For each={drafts()}>
                       {(event) => (
                         <EventCard
@@ -468,27 +501,24 @@ function Events(props: { server: Server; focus?: string }) {
                         />
                       )}
                     </For>
-                  </Grid>
+                  </EventGroup>
                 </Show>
               </Match>
               <Match when={true}>
-                <Show when={tab() === "upcoming" && live().filter(found).length}>
-                  <Section aria-labelledby="events-live">
-                    <SectionTitle id="events-live" data-live>
-                      <Trans>Happening now</Trans>
-                    </SectionTitle>
-                    <List>
-                      <For each={live().filter(found)}>
-                        {(event) => (
-                          <EventHero
-                            event={event}
-                            server={props.server}
-                            now={now()}
-                          />
-                        )}
-                      </For>
-                    </List>
-                  </Section>
+                <Show
+                  when={tab() === "upcoming" && live().filter(found).length}
+                >
+                  <EventGroup title={<Trans>Happening now</Trans>}>
+                    <For each={live().filter(found)}>
+                      {(event) => (
+                        <EventHero
+                          event={event}
+                          server={props.server}
+                          now={now()}
+                        />
+                      )}
+                    </For>
+                  </EventGroup>
                 </Show>
                 <Show
                   when={shown().length}
@@ -505,64 +535,63 @@ function Events(props: { server: Server; focus?: string }) {
                         </Show>
                       }
                     >
-                    <Show when={tab() === "mine" || !live().length}>
-                      <Show
-                        when={tab() === "mine"}
-                        fallback={
+                      <Show when={tab() === "mine" || !live().length}>
+                        <Show
+                          when={tab() === "mine"}
+                          fallback={
+                            <EmptyState
+                              art="communities"
+                              title={t`No events planned yet`}
+                              description={
+                                canManage()
+                                  ? t`Plan a game night, a tournament or a meetup. Members answer once and keep their place.`
+                                  : t`When the organisers plan something, it shows up here.`
+                              }
+                              action={
+                                <Show when={canManage()}>
+                                  <Button variant="filled" onPress={schedule}>
+                                    <Trans>New event</Trans>
+                                  </Button>
+                                </Show>
+                              }
+                            />
+                          }
+                        >
                           <EmptyState
                             art="communities"
-                            title={t`No events planned yet`}
-                            description={
-                              canManage()
-                                ? t`Plan a game night, a tournament or a meetup. Members answer once and keep their place.`
-                                : t`When the organisers plan something, it shows up here.`
-                            }
-                            action={
-                              <Show when={canManage()}>
-                                <Button variant="filled" onPress={schedule}>
-                                  <Trans>New event</Trans>
-                                </Button>
-                              </Show>
-                            }
+                            title={t`You have not answered any event here`}
+                            description={t`Events you answer Going or Maybe to are kept here.`}
+                            action={<AllServersLink />}
                           />
-                        }
-                      >
-                        <EmptyState
-                          art="communities"
-                          title={t`You have not answered any event here`}
-                          description={t`Events you answer Going or Maybe to are kept here.`}
-                          action={<AllServersLink />}
-                        />
+                        </Show>
                       </Show>
-                    </Show>
                     </Show>
                   }
                 >
-                  <Section aria-labelledby="events-upcoming">
-                    <SectionHead>
-                      <SectionTitle id="events-upcoming">
-                        {tab() === "mine" ? (
-                          <Trans>My events</Trans>
-                        ) : (
-                          <Trans>Upcoming</Trans>
-                        )}
-                      </SectionTitle>
+                  <EventGroup
+                    title={
+                      tab() === "mine" ? (
+                        <Trans>My events</Trans>
+                      ) : (
+                        <Trans>Upcoming</Trans>
+                      )
+                    }
+                    aside={
                       <Show when={tab() === "mine"}>
                         <AllServersLink />
                       </Show>
-                    </SectionHead>
-                    <Grid>
-                      <For each={shown()}>
-                        {(event) => (
-                          <EventCard
-                            event={event}
-                            server={props.server}
-                            now={now()}
-                          />
-                        )}
-                      </For>
-                    </Grid>
-                  </Section>
+                    }
+                  >
+                    <For each={shown()}>
+                      {(event) => (
+                        <EventCard
+                          event={event}
+                          server={props.server}
+                          now={now()}
+                        />
+                      )}
+                    </For>
+                  </EventGroup>
                 </Show>
               </Match>
             </Switch>
@@ -582,7 +611,11 @@ export function NothingFound() {
   );
 }
 
-/** Search and the place filter above a list of events */
+/**
+ * Search and the place filter of a list of events, where the app's other
+ * list pages keep them: in the header on desktop (as on Friends), in their
+ * own row under it on phones. The place is picked from a menu.
+ */
 export function EventFind(props: {
   search: string;
   onSearch: (value: string) => void;
@@ -590,9 +623,34 @@ export function EventFind(props: {
   onPlace: (value: PlaceFilter) => void;
 }) {
   const { t } = useLingui();
+  const places = (): { value: PlaceFilter; label: string; icon: string }[] => [
+    {
+      value: "any",
+      label: t({ message: "Every place", context: "event places" }),
+      icon: "squares-four",
+    },
+    {
+      value: "Voice",
+      label: t({ message: "Voice", context: "event places" }),
+      icon: "speaker-high",
+    },
+    {
+      value: "Text",
+      label: t({ message: "Text", context: "event places" }),
+      icon: "hash",
+    },
+    {
+      value: "External",
+      label: t({ message: "Elsewhere", context: "event places" }),
+      icon: "globe",
+    },
+  ];
+  const current = () =>
+    places().find((entry) => entry.value === props.place) ?? places()[0];
+
   return (
     <FindRow data-testid="events-find">
-      <FindField>
+      <ListSearch>
         <Icon name="magnifying-glass" size={16} />
         <input
           type="search"
@@ -602,59 +660,81 @@ export function EventFind(props: {
           onInput={(event) => props.onSearch(event.currentTarget.value)}
           data-testid="events-search"
         />
-      </FindField>
-      <Segmented<PlaceFilter>
-        aria-label={t`Where it takes place`}
-        value={props.place}
-        onChange={props.onPlace}
-        options={[
-          { value: "any", label: t({ message: "All", context: "event places" }) },
-          { value: "Voice", label: t({ message: "Voice", context: "event places" }) },
-          { value: "Text", label: t({ message: "Text", context: "event places" }) },
-          { value: "External", label: t({ message: "Elsewhere", context: "event places" }) },
-        ]}
-      />
+      </ListSearch>
+      <div
+        style={{ display: "contents" }}
+        use:floating={{
+          contextMenu: () => (
+            <ContextMenu>
+              <For each={places()}>
+                {(entry) => (
+                  <ContextMenuButton
+                    icon={<Icon name={entry.icon as IconName} size={18} />}
+                    actionIcon={
+                      props.place === entry.value ? (
+                        <Icon name="check" size={16} />
+                      ) : undefined
+                    }
+                    selected={props.place === entry.value}
+                    onClick={() => props.onPlace(entry.value)}
+                    data-testid={`events-place-${entry.value}`}
+                  >
+                    {entry.label}
+                  </ContextMenuButton>
+                )}
+              </For>
+            </ContextMenu>
+          ),
+          contextMenuHandler: "click",
+        }}
+      >
+        <Button
+          size="sm"
+          variant="tonal"
+          aria-haspopup="menu"
+          aria-label={t`Where it takes place: ${current().label}`}
+          data-testid="events-place"
+        >
+          <Icon name="funnel" size={16} />
+          <WideLabel>{current().label}</WideLabel>
+          <Show when={props.place !== "any"}>
+            <Chosen aria-hidden="true" />
+          </Show>
+        </Button>
+      </div>
     </FindRow>
   );
 }
 
-const FindRow = styled("div", {
+/**
+ * Words on a header button that only fit on wide desktops; the icon stays
+ * (phones have the row to themselves and keep the words)
+ */
+const WideLabel = styled("span", {
   base: {
-    display: "flex",
-    flexWrap: "wrap",
-    alignItems: "center",
-    gap: "8px",
-    _phone: { "& > :last-child": { width: "100%", overflowX: "auto" } },
+    "@media (min-width: 768px) and (max-width: 1499px)": { display: "none" },
   },
 });
 
-const FindField = styled("label", {
+/** A place is chosen: a dot on the place button */
+const Chosen = styled("span", {
   base: {
-    flex: 1,
+    width: "6px",
+    height: "6px",
+    borderRadius: "999px",
+    background: "var(--z-accent)",
+  },
+});
+
+const FindRow = styled("div", {
+  base: {
     display: "flex",
     alignItems: "center",
     gap: "8px",
-    minWidth: "200px",
-    minHeight: "36px",
-    paddingInline: "12px",
-    borderRadius: "var(--z-radius, 10px)",
-    background: "var(--z-bg-input)",
-    "--z-icon-color": "var(--z-fg-muted)",
-    "& input": {
-      all: "unset",
-      flex: 1,
-      minWidth: 0,
-      fontSize: "14px",
-      lineHeight: "20px",
-      color: "var(--z-fg-primary)",
-      "&::placeholder": { color: "var(--z-fg-muted)" },
-      "&::-webkit-search-cancel-button": { display: "none" },
-    },
-    "&:focus-within": {
-      outline: "2px solid var(--z-focus)",
-      outlineOffset: "1px",
-    },
-    _phone: { minHeight: "44px", minWidth: 0, "& input": { fontSize: "16px" } },
+    flexShrink: 0,
+    "& > label": { marginInlineEnd: 0 },
+    // phones: the search takes the row, the place button keeps its size
+    _phone: { "& > label": { flex: 1 } },
   },
 });
 
@@ -696,8 +776,9 @@ const Title = styled("div", {
     display: "flex",
     alignItems: "center",
     gap: "8px",
-    flex: 1,
+    flex: "0 0 auto",
     minWidth: 0,
+    "&[data-grow]": { flex: "1 1 auto" },
     "--z-icon-color": "var(--z-fg-secondary)",
     "& h1": {
       margin: 0,
@@ -747,61 +828,6 @@ const BackLink = styled("a", {
   },
 });
 
-const TabRow = styled("div", {
-  base: {
-    display: "flex",
-    flexWrap: "wrap",
-    gap: "4px",
-    // phones: one row of chips that scrolls on its own
-    _phone: {
-      flexWrap: "nowrap",
-      gap: "8px",
-      overflowX: "auto",
-      scrollbarWidth: "none",
-      flexShrink: 0,
-    },
-  },
-});
-
-const TabButton = styled("button", {
-  base: {
-    display: "inline-flex",
-    alignItems: "center",
-    gap: "6px",
-    minHeight: "32px",
-    paddingInline: "14px",
-    border: "none",
-    borderRadius: "999px",
-    background: "transparent",
-    color: "var(--z-fg-secondary)",
-    font: "inherit",
-    fontSize: "14px",
-    fontWeight: 500,
-    cursor: "pointer",
-    "& i": {
-      fontStyle: "normal",
-      fontSize: "12px",
-      color: "var(--z-fg-muted)",
-    },
-    "&:hover": { background: "var(--z-hover)" },
-    "&[aria-selected=true]": {
-      background: "var(--z-selected)",
-      color: "var(--z-fg-primary)",
-    },
-    "&:focus-visible": {
-      outline: "2px solid var(--z-focus)",
-      outlineOffset: "2px",
-    },
-    _phone: {
-      minHeight: "44px",
-      paddingInline: "16px",
-      flexShrink: 0,
-      background: "var(--z-bg-raised)",
-      "&[aria-selected=true]": { background: "var(--z-nav-selected)" },
-    },
-  },
-});
-
 const Grid = styled("div", {
   base: {
     display: "flex",
@@ -831,30 +857,6 @@ const Off = styled("div", {
     fontSize: "15px",
     lineHeight: "24px",
     "& p": { margin: 0 },
-  },
-});
-
-const Section = styled("section", {
-  base: { display: "flex", flexDirection: "column", gap: "12px" },
-});
-
-const SectionHead = styled("div", {
-  base: {
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "space-between",
-    gap: "12px",
-    minHeight: "32px",
-  },
-});
-
-const SectionTitle = styled("h2", {
-  base: {
-    margin: 0,
-    fontSize: "13px",
-    fontWeight: 650,
-    color: "var(--z-fg-secondary)",
-    "&[data-live]": { color: "var(--z-live)" },
   },
 });
 

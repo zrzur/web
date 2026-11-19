@@ -19,18 +19,25 @@ import { TranslatedError } from "@revolt/i18n/errors";
 import { Markdown } from "@revolt/markdown";
 import { useModals } from "@revolt/modal";
 import { useNavigate } from "@revolt/routing";
-import { Avatar, Button, TextField } from "@revolt/ui";
+import {
+  Avatar,
+  Button,
+  SettingsFormPanel,
+  SettingsRow,
+  SettingsSection,
+  TextField,
+  Toggle,
+} from "@revolt/ui";
 import { hour12From } from "@revolt/ui/components/design/dateTime";
 import { Icon } from "@revolt/ui/icons/Icon";
 
 import { EventAnswer, SeatBar, seatState } from "./EventAnswer";
-import { EventPlace, JoinButton, OwnAnswerMark, eventPath } from "./EventCard";
+import { JoinButton, eventPath } from "./EventCard";
 import { EventCover } from "./eventCovers";
 import { eventLink, eventPhase, eventWhen, startsIn } from "./eventFormat";
 import { eventIcs, icsFileName, linkBase, shareLink } from "./eventLinks";
 import { EventShare } from "./EventShare";
 import { EventStats } from "./EventStats";
-import { Ticket, TicketStub } from "./Ticket";
 
 type Attendee = API.ServerEventAttendee;
 type Filter = "Going" | "Waiting" | "Maybe" | "NotGoing";
@@ -48,7 +55,8 @@ const errorType = (failure: unknown) =>
 
 /**
  * The page of one event: its cover, when and where, your answer, the seats,
- * who comes, and for organisers the tools to run it.
+ * who comes, and for organisers the tools to run it. Every box is a settings
+ * group (owner, 2026-11-19: the same group, rows and headings as Settings).
  */
 export function EventDetail(props: Props) {
   const { t, i18n } = useLingui();
@@ -110,6 +118,27 @@ export function EventDetail(props: Props) {
         !!mine() &&
         mine()!.answer !== "NotGoing"));
 
+  /** Where it takes place: the channel's name, or the place written down */
+  const placeName = () => {
+    const channel = serverEventChannel(props.event.place);
+    if (channel) {
+      const name = client().channels.get(channel)?.name;
+      if (name) return name;
+      return props.event.place.type === "Text"
+        ? t`A text channel`
+        : t`A voice channel`;
+    }
+    return (props.event.place as { location?: string }).location ?? "";
+  };
+  const placeIcon = () =>
+    props.event.place.type === "Voice"
+      ? "speaker-high"
+      : props.event.place.type === "Text"
+        ? "hash"
+        : serverEventLink(props.event.place)
+          ? "link"
+          : "globe";
+
   async function act(action: () => Promise<unknown>) {
     setError(undefined);
     setBusy(true);
@@ -133,11 +162,7 @@ export function EventDetail(props: Props) {
 
   /** Save the event as a calendar file, for the calendar of the device */
   function addToCalendar() {
-    const channel = serverEventChannel(props.event.place);
-    const place = channel
-      ? client().channels.get(channel)?.name
-      : (props.event.place as { location?: string }).location;
-    const file = new Blob([eventIcs(props.event, place, linkOfEvent())], {
+    const file = new Blob([eventIcs(props.event, placeName(), linkOfEvent())], {
       type: "text/calendar;charset=utf-8",
     });
     const url = URL.createObjectURL(file);
@@ -163,6 +188,13 @@ export function EventDetail(props: Props) {
     );
   }
 
+  const edit = () =>
+    openModal({
+      type: "server_event",
+      server: props.server,
+      event: props.event,
+    });
+
   return (
     <Layout
       data-testid="event-detail"
@@ -176,74 +208,98 @@ export function EventDetail(props: Props) {
           </CoverBox>
         </Show>
 
-        <Ticket
-          data-live={phase() === "live" || undefined}
-          data-testid="event-ticket"
-        >
-          <TicketStub
-            startsAt={props.event.starts_at}
-            liveSince={
-              phase() === "live"
-                ? startsIn(
-                    props.event.started_at ?? props.event.starts_at,
-                    props.now,
-                    i18n().locale ?? "en",
-                  )
-                : undefined
-            }
-            mine={holds()}
-            quiet={!upcoming()}
-          />
-          <TicketBody>
-            <Heading>
-              <Show when={!upcoming()}>
-                <State>
+        <Heading>
+          <Show when={!upcoming() || phase() === "live"}>
+            <State data-live={phase() === "live" || undefined}>
+              <Switch>
+                <Match when={phase() === "live"}>
+                  <Trans>Happening now</Trans>
+                </Match>
+                <Match when={draft()}>
+                  <Trans>Draft: only organisers see it</Trans>
+                </Match>
+                <Match when={props.event.status === "Cancelled"}>
+                  <Trans context="scheduled events">Cancelled</Trans>
+                </Match>
+                <Match when={true}>
+                  <Trans>This event is over</Trans>
+                </Match>
+              </Switch>
+            </State>
+          </Show>
+          <h2 id={`event-${props.event._id}-title`}>{props.event.title}</h2>
+          <Show when={phase() === "live"}>
+            <div>
+              <JoinButton
+                event={props.event}
+                server={props.server}
+                link={serverEventLink(props.event.place)}
+              />
+            </div>
+          </Show>
+        </Heading>
+
+        <div data-testid="event-ticket">
+          <SettingsSection>
+            <SettingsRow
+              icon={<Icon name="calendar" size={20} />}
+              title={<time datetime={props.event.starts_at}>{when()}</time>}
+              description={
+                phase() === "live"
+                  ? t`Started ${startsIn(
+                      props.event.started_at ?? props.event.starts_at,
+                      props.now,
+                      i18n().locale ?? "en",
+                    )}`
+                  : upcoming()
+                    ? startsIn(
+                        props.event.starts_at,
+                        props.now,
+                        i18n().locale ?? "en",
+                      )
+                    : undefined
+              }
+            />
+            <SettingsRow
+              icon={<Icon name={placeIcon()} size={20} />}
+              title={<span dir="auto">{placeName()}</span>}
+              description={
+                <Switch>
+                  <Match when={props.event.place.type === "Voice"}>
+                    <Trans>Voice channel</Trans>
+                  </Match>
+                  <Match when={props.event.place.type === "Text"}>
+                    <Trans>Text channel</Trans>
+                  </Match>
+                  <Match when={true}>
+                    <Trans>Outside the server</Trans>
+                  </Match>
+                </Switch>
+              }
+            />
+            <Show when={props.event.repeat}>
+              <SettingsRow
+                icon={<Icon name="arrows-clockwise" size={20} />}
+                title={
                   <Switch>
-                    <Match when={draft()}>
-                      <Trans>Draft: only organisers see it</Trans>
+                    <Match when={props.event.repeat === "Daily"}>
+                      <Trans>Every day</Trans>
                     </Match>
-                    <Match when={props.event.status === "Cancelled"}>
-                      <Trans context="scheduled events">Cancelled</Trans>
+                    <Match when={props.event.repeat === "Weekly"}>
+                      <Trans>Every week</Trans>
                     </Match>
-                    <Match when={true}>
-                      <Trans>This event is over</Trans>
+                    <Match when={props.event.repeat === "EveryTwoWeeks"}>
+                      <Trans>Every 2 weeks</Trans>
+                    </Match>
+                    <Match when={props.event.repeat === "Monthly"}>
+                      <Trans>Every month</Trans>
                     </Match>
                   </Switch>
-                </State>
-              </Show>
-              <h2 id={`event-${props.event._id}-title`}>{props.event.title}</h2>
-            </Heading>
-
-            <Facts>
-              <Fact>
-                <Icon name="calendar" size={20} />
-                <time datetime={props.event.starts_at}>{when()}</time>
-              </Fact>
-              <Fact>
-                <EventPlace event={props.event} />
-              </Fact>
-              <Show when={props.event.repeat}>
-                <Fact>
-                  <Icon name="arrows-clockwise" size={20} />
-                  <span>
-                    <Switch>
-                      <Match when={props.event.repeat === "Daily"}>
-                        <Trans>Every day</Trans>
-                      </Match>
-                      <Match when={props.event.repeat === "Weekly"}>
-                        <Trans>Every week</Trans>
-                      </Match>
-                      <Match when={props.event.repeat === "EveryTwoWeeks"}>
-                        <Trans>Every 2 weeks</Trans>
-                      </Match>
-                      <Match when={props.event.repeat === "Monthly"}>
-                        <Trans>Every month</Trans>
-                      </Match>
-                    </Switch>
-                  </span>
-                </Fact>
-              </Show>
-              <Fact>
+                }
+              />
+            </Show>
+            <SettingsRow
+              icon={
                 <Icon
                   name={
                     props.event.visibility && props.event.visibility !== "Place"
@@ -252,6 +308,8 @@ export function EventDetail(props: Props) {
                   }
                   size={20}
                 />
+              }
+              title={
                 <span data-testid="event-visibility">
                   <Switch>
                     <Match when={props.event.visibility === "Invited"}>
@@ -265,355 +323,367 @@ export function EventDetail(props: Props) {
                     </Match>
                   </Switch>
                 </span>
-              </Fact>
-              <Show when={organiserNames().length}>
-                <Fact>
-                  <Icon name="users" size={20} />
-                  <span>
-                    <Trans>Organised by {organiserNames().join(", ")}</Trans>
-                  </span>
-                </Fact>
-              </Show>
-            </Facts>
-            <Show when={holds()}>
-              <StampRow>
-                <OwnAnswerMark event={props.event} />
-              </StampRow>
+              }
+            />
+            <Show when={organiserNames().length}>
+              <SettingsRow
+                icon={<Icon name="users" size={20} />}
+                title={organiserNames().join(", ")}
+                description={<Trans>Organisers</Trans>}
+              />
             </Show>
-          </TicketBody>
-        </Ticket>
+          </SettingsSection>
+        </div>
 
         <Show when={props.event.description}>
-          <Description>
-            <Markdown content={props.event.description!} />
-          </Description>
+          <SettingsSection title={<Trans>About this event</Trans>}>
+            <SettingsFormPanel>
+              <Description>
+                <Markdown content={props.event.description!} />
+              </Description>
+            </SettingsFormPanel>
+          </SettingsSection>
         </Show>
 
         <Show when={upcoming()}>
-          <Panel>
-            <EventAnswer
-              event={props.event}
-              serverId={props.server.id}
-              shortcuts
-            />
-          </Panel>
+          <SettingsSection title={<Trans>Your answer</Trans>}>
+            <SettingsFormPanel>
+              <EventAnswer
+                event={props.event}
+                serverId={props.server.id}
+                shortcuts
+              />
+            </SettingsFormPanel>
+          </SettingsSection>
         </Show>
 
-        <Actions>
-          <Show when={phase() === "live"}>
-            <JoinButton
-              event={props.event}
-              server={props.server}
-              link={serverEventLink(props.event.place)}
-            />
-          </Show>
-          <Show when={!draft()}>
-            <Button
-              size="sm"
-              variant="text"
-              onPress={share}
-              data-testid="event-share"
-            >
-              <Icon name="share-network" size={16} />
-              {copied() === "yes" ? (
-                <Trans>Link copied</Trans>
-              ) : (
-                <Trans>Copy link</Trans>
-              )}
-            </Button>
-          </Show>
-          <Show when={upcoming()}>
-            <Button
-              size="sm"
-              variant="text"
-              onPress={addToCalendar}
-              data-testid="event-calendar-file"
-            >
-              <Icon name="calendar" size={16} />
-              <Trans>Add to my calendar</Trans>
-            </Button>
-          </Show>
-          <Show when={upcoming() && holds()}>
-            <Button
-              size="sm"
-              variant="text"
-              isDisabled={busy()}
-              aria-pressed={mine()?.muted === true}
-              onPress={() =>
-                void act(() =>
-                  client().serverEvents.setMuted(
-                    props.server.id,
-                    props.event._id,
-                    !mine()?.muted,
-                  ),
+        <Show when={!draft()}>
+          <SettingsSection title={<Trans>For you</Trans>}>
+            <SettingsRow
+              icon={<Icon name="share-network" size={20} />}
+              title={
+                copied() === "yes" ? (
+                  <Trans>Link copied</Trans>
+                ) : (
+                  <Trans>Copy link</Trans>
                 )
               }
-              data-testid="event-mute"
-            >
-              <Icon name={mine()?.muted ? "bell-slash" : "bell"} size={16} />
-              {mine()?.muted ? (
-                <Trans>Reminders are off</Trans>
-              ) : (
-                <Trans>Reminders are on</Trans>
-              )}
-            </Button>
-          </Show>
-          <Show when={copied() === "failed"}>
-            <Problem role="alert">
-              <Trans>
-                The link could not be copied. Copy it from the address bar.
-              </Trans>
-            </Problem>
-          </Show>
-        </Actions>
+              description={
+                copied() === "failed" ? (
+                  <Problem role="alert">
+                    <Trans>
+                      The link could not be copied. Copy it from the address
+                      bar.
+                    </Trans>
+                  </Problem>
+                ) : undefined
+              }
+              navigational
+              onClick={share}
+            />
+            <Show when={upcoming()}>
+              <SettingsRow
+                icon={<Icon name="calendar" size={20} />}
+                title={<Trans>Add to my calendar</Trans>}
+                description={
+                  <Trans>Saves a file your calendar app opens.</Trans>
+                }
+                navigational
+                onClick={addToCalendar}
+              />
+            </Show>
+            <Show when={upcoming() && holds()}>
+              <SettingsRow
+                icon={
+                  <Icon
+                    name={mine()?.muted ? "bell-slash" : "bell"}
+                    size={20}
+                  />
+                }
+                title={<Trans>Reminders for this event</Trans>}
+                description={
+                  <Trans>The organisers choose when they come.</Trans>
+                }
+                control={(ids) => (
+                  <Toggle
+                    checked={mine()?.muted !== true}
+                    disabled={busy()}
+                    onChange={(on: boolean) =>
+                      void act(() =>
+                        client().serverEvents.setMuted(
+                          props.server.id,
+                          props.event._id,
+                          !on,
+                        ),
+                      )
+                    }
+                    aria-labelledby={ids.labelId}
+                    aria-describedby={ids.descriptionId}
+                    data-testid="event-mute"
+                  />
+                )}
+              />
+            </Show>
+          </SettingsSection>
+        </Show>
 
         <Show when={organiser()}>
-          <Manage aria-label={t`Organiser tools`}>
-            <Show
-              when={confirm()}
-              fallback={
-                <>
-                  <Show when={draft()}>
-                    <Button
-                      size="sm"
-                      variant="filled"
-                      isDisabled={busy()}
-                      onPress={() =>
-                        void act(() =>
-                          client().serverEvents.publish(
-                            props.server.id,
-                            props.event._id,
-                          ),
-                        )
-                      }
-                      data-testid="event-publish"
-                    >
-                      <Trans context="scheduled events">Publish</Trans>
-                    </Button>
-                  </Show>
-                  <Show when={upcoming() || draft()}>
-                    <Button
-                      size="sm"
-                      variant="tonal"
-                      onPress={() =>
-                        openModal({
-                          type: "server_event",
-                          server: props.server,
-                          event: props.event,
-                        })
-                      }
-                      data-testid="event-edit"
-                    >
-                      <Icon name="pencil-simple" size={16} />
-                      <Trans context="scheduled events">Edit</Trans>
-                    </Button>
-                  </Show>
-                  <Show when={props.event.status === "Scheduled"}>
-                    <Button
-                      size="sm"
-                      variant="text"
-                      isDisabled={busy()}
-                      onPress={() =>
-                        void act(() =>
-                          client().serverEvents.start(
-                            props.server.id,
-                            props.event._id,
-                          ),
-                        )
-                      }
-                      data-testid="event-start"
-                    >
-                      <Icon name="play" size={16} />
-                      <Trans>Start now</Trans>
-                    </Button>
-                  </Show>
-                  <Show when={props.event.status === "Active"}>
-                    <Button
-                      size="sm"
-                      variant="text"
-                      isDisabled={busy()}
-                      onPress={() =>
-                        void act(() =>
-                          client().serverEvents.end(
-                            props.server.id,
-                            props.event._id,
-                          ),
-                        )
-                      }
-                      data-testid="event-end"
-                    >
-                      <Icon name="stop" size={16} />
-                      <Trans context="scheduled events">End now</Trans>
-                    </Button>
-                  </Show>
+          <SettingsSection title={<Trans>Organiser tools</Trans>}>
+            <div data-testid="event-manage" style={{ display: "contents" }}>
+              <Show when={draft()}>
+                <SettingsRow
+                  icon={<Icon name="paper-plane-tilt" size={20} />}
+                  title={<Trans context="scheduled events">Publish</Trans>}
+                  description={
+                    <Trans>Members who may see it get it in their list.</Trans>
+                  }
+                  disabled={busy()}
+                  navigational
+                  onClick={() =>
+                    void act(() =>
+                      client().serverEvents.publish(
+                        props.server.id,
+                        props.event._id,
+                      ),
+                    )
+                  }
+                  data-testid="event-publish"
+                />
+              </Show>
+              <Show when={upcoming() || draft()}>
+                <SettingsRow
+                  icon={<Icon name="pencil-simple" size={20} />}
+                  title={<Trans context="scheduled events">Edit</Trans>}
+                  description={
+                    <Trans>Title, time, place, seats and who sees it.</Trans>
+                  }
+                  navigational
+                  onClick={edit}
+                  data-testid="event-edit"
+                />
+              </Show>
+              <Show when={props.event.status === "Scheduled"}>
+                <SettingsRow
+                  icon={<Icon name="play" size={20} />}
+                  title={<Trans>Start now</Trans>}
+                  description={
+                    <Trans>Starts it before its time; people are told.</Trans>
+                  }
+                  disabled={busy()}
+                  navigational
+                  onClick={() =>
+                    void act(() =>
+                      client().serverEvents.start(
+                        props.server.id,
+                        props.event._id,
+                      ),
+                    )
+                  }
+                  data-testid="event-start"
+                />
+              </Show>
+              <Show when={props.event.status === "Active"}>
+                <SettingsRow
+                  icon={<Icon name="stop" size={20} />}
+                  title={<Trans context="scheduled events">End now</Trans>}
+                  disabled={busy()}
+                  navigational
+                  onClick={() =>
+                    void act(() =>
+                      client().serverEvents.end(
+                        props.server.id,
+                        props.event._id,
+                      ),
+                    )
+                  }
+                  data-testid="event-end"
+                />
+              </Show>
+              <SettingsRow
+                icon={<Icon name="copy" size={20} />}
+                title={<Trans>Copy as a draft</Trans>}
+                description={
+                  <Trans>A new draft with the same details, to change.</Trans>
+                }
+                disabled={busy()}
+                navigational
+                onClick={() =>
+                  void act(async () => {
+                    const copy = await client().serverEvents.copy(
+                      props.server.id,
+                      props.event._id,
+                    );
+                    navigate(eventPath(props.server.id, copy._id));
+                  })
+                }
+                data-testid="event-copy"
+              />
+            </div>
+          </SettingsSection>
+
+          <SettingsSection title={<Trans>Cancel or delete</Trans>}>
+            <Show when={upcoming()}>
+              <SettingsRow
+                icon={<Icon name="x-circle" size={20} />}
+                title={
+                  repeating() ? (
+                    <Trans>Cancel this time</Trans>
+                  ) : (
+                    <Trans>Cancel event</Trans>
+                  )
+                }
+                description={
+                  repeating() ? (
+                    <Trans>The next one stays scheduled.</Trans>
+                  ) : (
+                    <Trans>It stays in the list, marked as cancelled.</Trans>
+                  )
+                }
+                danger
+                navigational
+                onClick={() => setConfirm("cancel")}
+                data-testid="event-cancel"
+              />
+              <Show when={repeating()}>
+                <SettingsRow
+                  icon={<Icon name="arrows-clockwise" size={20} />}
+                  title={<Trans>Cancel the whole series</Trans>}
+                  danger
+                  navigational
+                  onClick={() => setConfirm("series")}
+                  data-testid="event-cancel-series"
+                />
+              </Show>
+            </Show>
+            <SettingsRow
+              icon={<Icon name="trash" size={20} />}
+              title={
+                repeating() && upcoming() ? (
+                  <Trans>Delete this time</Trans>
+                ) : (
+                  <Trans context="scheduled events">Delete</Trans>
+                )
+              }
+              description={<Trans>Gone for good, with its answers.</Trans>}
+              danger
+              navigational
+              onClick={() => setConfirm("delete")}
+              data-testid="event-delete"
+            />
+            <Show when={repeating() && upcoming()}>
+              <SettingsRow
+                icon={<Icon name="trash" size={20} />}
+                title={<Trans>Delete the whole series</Trans>}
+                danger
+                navigational
+                onClick={() => setConfirm("delete-series")}
+                data-testid="event-delete-series"
+              />
+            </Show>
+            <Show when={confirm()}>
+              <SettingsFormPanel>
+                <Confirm role="group">
+                  <span>
+                    <Switch>
+                      <Match when={confirm() === "cancel" && repeating()}>
+                        <Trans>
+                          Cancel this time only? The next one stays scheduled.
+                        </Trans>
+                      </Match>
+                      <Match when={confirm() === "cancel"}>
+                        <Trans>
+                          Cancel this event? The people who answered see that it
+                          is off.
+                        </Trans>
+                      </Match>
+                      <Match when={confirm() === "series"}>
+                        <Trans>
+                          Cancel this one and every one after it? Nothing more
+                          of this series is scheduled.
+                        </Trans>
+                      </Match>
+                      <Match when={confirm() === "delete-series"}>
+                        <Trans>
+                          Delete this one and every one after it for good?
+                          Nothing more of this series is scheduled.
+                        </Trans>
+                      </Match>
+                      <Match when={repeating() && upcoming()}>
+                        <Trans>
+                          Delete this time and its answers for good? The next
+                          one stays scheduled.
+                        </Trans>
+                      </Match>
+                      <Match when={true}>
+                        <Trans>
+                          Delete this event and its answers for good?
+                        </Trans>
+                      </Match>
+                    </Switch>
+                  </span>
                   <Button
                     size="sm"
-                    variant="text"
+                    variant="_error"
                     isDisabled={busy()}
                     onPress={() =>
                       void act(async () => {
-                        const copy = await client().serverEvents.copy(
+                        const choice = confirm();
+                        if (choice === "cancel" || choice === "series") {
+                          await client().serverEvents.cancel(
+                            props.server.id,
+                            props.event._id,
+                            choice === "series",
+                          );
+                          setConfirm(undefined);
+                          return;
+                        }
+                        const id = props.event._id;
+                        const series = choice === "delete-series";
+                        await client().serverEvents.delete(
                           props.server.id,
-                          props.event._id,
+                          id,
+                          series,
                         );
-                        navigate(eventPath(props.server.id, copy._id));
+                        setConfirm(undefined);
+                        props.onDeleted?.({ id, series });
+                        navigate(`/server/${props.server.id}/events`);
                       })
                     }
-                    data-testid="event-copy"
+                    data-testid="event-confirm"
                   >
-                    <Icon name="copy" size={16} />
-                    <Trans>Copy as a draft</Trans>
-                  </Button>
-                  <Show when={upcoming()}>
-                    <Button
-                      size="sm"
-                      variant="text"
-                      onPress={() => setConfirm("cancel")}
-                      data-testid="event-cancel"
+                    <Switch
+                      fallback={
+                        <Trans context="scheduled events">Delete</Trans>
+                      }
                     >
-                      <Icon name="x" size={16} />
-                      {repeating() ? (
-                        <Trans>Cancel this time</Trans>
-                      ) : (
-                        <Trans>Cancel event</Trans>
-                      )}
-                    </Button>
-                    <Show when={repeating()}>
-                      <Button
-                        size="sm"
-                        variant="text"
-                        onPress={() => setConfirm("series")}
-                        data-testid="event-cancel-series"
-                      >
-                        <Icon name="arrows-clockwise" size={16} />
+                      <Match when={confirm() === "series"}>
                         <Trans>Cancel the whole series</Trans>
-                      </Button>
-                    </Show>
-                  </Show>
+                      </Match>
+                      <Match when={confirm() === "cancel" && repeating()}>
+                        <Trans>Cancel this time</Trans>
+                      </Match>
+                      <Match when={confirm() === "cancel"}>
+                        <Trans>Cancel event</Trans>
+                      </Match>
+                      <Match when={confirm() === "delete-series"}>
+                        <Trans>Delete the whole series</Trans>
+                      </Match>
+                      <Match when={repeating() && upcoming()}>
+                        <Trans>Delete this time</Trans>
+                      </Match>
+                    </Switch>
+                  </Button>
                   <Button
                     size="sm"
                     variant="text"
-                    onPress={() => setConfirm("delete")}
-                    data-testid="event-delete"
+                    onPress={() => setConfirm(undefined)}
                   >
-                    <Icon name="trash" size={16} />
-                    {repeating() && upcoming() ? (
-                      <Trans>Delete this time</Trans>
-                    ) : (
-                      <Trans context="scheduled events">Delete</Trans>
-                    )}
+                    <Trans context="scheduled events">Keep it</Trans>
                   </Button>
-                  <Show when={repeating() && upcoming()}>
-                    <Button
-                      size="sm"
-                      variant="text"
-                      onPress={() => setConfirm("delete-series")}
-                      data-testid="event-delete-series"
-                    >
-                      <Icon name="trash" size={16} />
-                      <Trans>Delete the whole series</Trans>
-                    </Button>
-                  </Show>
-                </>
-              }
-            >
-              <Confirm role="group">
-                <span>
-                  <Switch>
-                    <Match when={confirm() === "cancel" && repeating()}>
-                      <Trans>
-                        Cancel this time only? The next one stays scheduled.
-                      </Trans>
-                    </Match>
-                    <Match when={confirm() === "cancel"}>
-                      <Trans>
-                        Cancel this event? The people who answered see that it
-                        is off.
-                      </Trans>
-                    </Match>
-                    <Match when={confirm() === "series"}>
-                      <Trans>
-                        Cancel this one and every one after it? Nothing more of
-                        this series is scheduled.
-                      </Trans>
-                    </Match>
-                    <Match when={confirm() === "delete-series"}>
-                      <Trans>
-                        Delete this one and every one after it for good? Nothing
-                        more of this series is scheduled.
-                      </Trans>
-                    </Match>
-                    <Match when={repeating() && upcoming()}>
-                      <Trans>
-                        Delete this time and its answers for good? The next one
-                        stays scheduled.
-                      </Trans>
-                    </Match>
-                    <Match when={true}>
-                      <Trans>Delete this event and its answers for good?</Trans>
-                    </Match>
-                  </Switch>
-                </span>
-                <Button
-                  size="sm"
-                  variant="_error"
-                  isDisabled={busy()}
-                  onPress={() =>
-                    void act(async () => {
-                      const choice = confirm();
-                      if (choice === "cancel" || choice === "series") {
-                        await client().serverEvents.cancel(
-                          props.server.id,
-                          props.event._id,
-                          choice === "series",
-                        );
-                        setConfirm(undefined);
-                        return;
-                      }
-                      const id = props.event._id;
-                      const series = choice === "delete-series";
-                      await client().serverEvents.delete(
-                        props.server.id,
-                        id,
-                        series,
-                      );
-                      setConfirm(undefined);
-                      props.onDeleted?.({ id, series });
-                      navigate(`/server/${props.server.id}/events`);
-                    })
-                  }
-                  data-testid="event-confirm"
-                >
-                  <Switch
-                    fallback={<Trans context="scheduled events">Delete</Trans>}
-                  >
-                    <Match when={confirm() === "series"}>
-                      <Trans>Cancel the whole series</Trans>
-                    </Match>
-                    <Match when={confirm() === "cancel" && repeating()}>
-                      <Trans>Cancel this time</Trans>
-                    </Match>
-                    <Match when={confirm() === "cancel"}>
-                      <Trans>Cancel event</Trans>
-                    </Match>
-                    <Match when={confirm() === "delete-series"}>
-                      <Trans>Delete the whole series</Trans>
-                    </Match>
-                    <Match when={repeating() && upcoming()}>
-                      <Trans>Delete this time</Trans>
-                    </Match>
-                  </Switch>
-                </Button>
-                <Button
-                  size="sm"
-                  variant="text"
-                  onPress={() => setConfirm(undefined)}
-                >
-                  <Trans context="scheduled events">Keep it</Trans>
-                </Button>
-              </Confirm>
+                </Confirm>
+              </SettingsFormPanel>
             </Show>
-          </Manage>
+          </SettingsSection>
         </Show>
 
         <Show when={organiser() && (upcoming() || draft())}>
@@ -629,107 +699,104 @@ export function EventDetail(props: Props) {
 
       <Side>
         <Show when={seats().capacity !== undefined}>
-          <Panel data-testid="event-seats">
-            <PanelTitle>
-              <Trans context="scheduled events">Seats</Trans>
-            </PanelTitle>
-            <Big>
-              {seats().going}{" "}
-              <small>
-                <Trans>of {seats().capacity}</Trans>
-              </small>
-            </Big>
-            <SeatBar event={props.event} />
-            <Note>
-              <Switch>
-                <Match when={props.event.over_capacity}>
-                  <Trans>
-                    Over its limit: an organiser seated more people than there
-                    are seats.
-                  </Trans>
-                </Match>
-                <Match when={seats().full}>
-                  <Plural
-                    value={seats().waiting}
-                    _0="Full"
-                    one="Full · # on the waiting list"
-                    other="Full · # on the waiting list"
-                  />
-                </Match>
-                <Match when={true}>
-                  <Plural
-                    value={seats().left ?? 0}
-                    one="# seat left"
-                    other="# seats left"
-                  />
-                </Match>
-              </Switch>
-            </Note>
-          </Panel>
+          <div data-testid="event-seats">
+            <SettingsSection
+              title={<Trans context="scheduled events">Seats</Trans>}
+            >
+              <SettingsFormPanel>
+                <Big>
+                  {seats().going}{" "}
+                  <small>
+                    <Trans>of {seats().capacity}</Trans>
+                  </small>
+                </Big>
+                <SeatBar event={props.event} />
+                <Note>
+                  <Switch>
+                    <Match when={props.event.over_capacity}>
+                      <Trans>
+                        Over its limit: an organiser seated more people than
+                        there are seats.
+                      </Trans>
+                    </Match>
+                    <Match when={seats().full}>
+                      <Plural
+                        value={seats().waiting}
+                        _0="Full"
+                        one="Full · # on the waiting list"
+                        other="Full · # on the waiting list"
+                      />
+                    </Match>
+                    <Match when={true}>
+                      <Plural
+                        value={seats().left ?? 0}
+                        one="# seat left"
+                        other="# seats left"
+                      />
+                    </Match>
+                  </Switch>
+                </Note>
+              </SettingsFormPanel>
+            </SettingsSection>
+          </div>
         </Show>
 
-        <Panel data-testid="event-people">
-          <PanelTitle>
-            {upcoming() || draft() ? (
-              <Trans>Who is coming</Trans>
-            ) : (
-              <Trans>Who came</Trans>
-            )}
-          </PanelTitle>
-          <Counts>
-            <span>
-              <b>{props.event.counts?.going ?? 0}</b>{" "}
-              <Trans context="event answer">Going</Trans>
-            </span>
-            <span>
-              <b>{props.event.counts?.maybe ?? 0}</b>{" "}
-              <Trans context="event answer">Maybe</Trans>
-            </span>
-            <Show when={organiser()}>
-              <span>
-                <b>{props.event.counts?.not_going ?? 0}</b>{" "}
-                <Trans context="event answer">Can't go</Trans>
-              </span>
-            </Show>
-          </Counts>
-          <Switch>
-            <Match when={props.event.people_removed_at}>
-              <Note data-testid="event-people-removed">
-                <Trans>
-                  The names were removed 12 months after the event. The numbers
-                  stay.
-                </Trans>
-              </Note>
-            </Match>
-            <Match when={!namesShown()}>
-              <Note data-testid="event-people-hidden">
-                <Switch>
-                  <Match when={props.event.attendee_list === "Participants"}>
-                    <Trans>Only the people taking part see the names.</Trans>
-                  </Match>
-                  <Match when={true}>
-                    <Trans>Only the organisers see the names.</Trans>
-                  </Match>
-                </Switch>
-              </Note>
-            </Match>
-            <Match when={true}>
-              <People
-                event={props.event}
-                server={props.server}
-                organiser={organiser()}
-              />
-            </Match>
-          </Switch>
-        </Panel>
+        <div data-testid="event-people">
+          <SettingsSection
+            title={
+              upcoming() || draft() ? (
+                <Trans>Who is coming</Trans>
+              ) : (
+                <Trans>Who came</Trans>
+              )
+            }
+          >
+            <Switch>
+              <Match when={props.event.people_removed_at}>
+                <SettingsFormPanel>
+                  <Note data-testid="event-people-removed">
+                    <Trans>
+                      The names were removed 12 months after the event. The
+                      numbers stay.
+                    </Trans>
+                  </Note>
+                </SettingsFormPanel>
+              </Match>
+              <Match when={!namesShown()}>
+                <SettingsFormPanel>
+                  <Note data-testid="event-people-hidden">
+                    <Switch>
+                      <Match
+                        when={props.event.attendee_list === "Participants"}
+                      >
+                        <Trans>
+                          Only the people taking part see the names.
+                        </Trans>
+                      </Match>
+                      <Match when={true}>
+                        <Trans>Only the organisers see the names.</Trans>
+                      </Match>
+                    </Switch>
+                  </Note>
+                </SettingsFormPanel>
+              </Match>
+              <Match when={true}>
+                <People
+                  event={props.event}
+                  server={props.server}
+                  organiser={organiser()}
+                />
+              </Match>
+            </Switch>
+          </SettingsSection>
+        </div>
 
         <Show when={organiser() && !draft()}>
-          <Panel>
-            <PanelTitle>
-              <Trans context="scheduled events">Numbers</Trans>
-            </PanelTitle>
+          <SettingsSection
+            title={<Trans context="scheduled events">Numbers</Trans>}
+          >
             <EventStats event={props.event} serverId={props.server.id} />
-          </Panel>
+          </SettingsSection>
         </Show>
       </Side>
     </Layout>
@@ -737,8 +804,10 @@ export function EventDetail(props: Props) {
 }
 
 /**
- * The people of an event, by answer. Organisers can take an answer away and
- * give a waiting person a seat; seating past the limit asks first.
+ * The people of an event, by answer, as rows of the "Who is coming" group.
+ * The answers are buttons with their counts above the rows. Organisers can
+ * take an answer away and give a waiting person a seat; seating past the
+ * limit asks first.
  */
 function People(props: {
   event: API.ServerEvent;
@@ -825,7 +894,7 @@ function People(props: {
     }
   }
 
-  // the list follows the tab, and the counts (someone answered meanwhile)
+  // the list follows the chosen answer, and the counts (someone answered meanwhile)
   createEffect(
     on(
       () =>
@@ -866,185 +935,196 @@ function People(props: {
     attendee.user.username;
 
   return (
-    <PeopleBox>
-      <Tabs role="tablist" aria-label={t`Answers`}>
-        <For each={filters()}>
-          {(entry) => (
-            <Tab
-              type="button"
-              role="tab"
-              aria-selected={filter() === entry.value}
-              onClick={() => setFilter(entry.value)}
-              data-testid={`event-people-${entry.value}`}
-            >
-              {entry.label} <i>{entry.count}</i>
-            </Tab>
-          )}
-        </For>
-      </Tabs>
+    <>
+      <SettingsFormPanel>
+        <Answers role="tablist" aria-label={t`Answers`}>
+          <For each={filters()}>
+            {(entry) => (
+              <Button
+                size="sm"
+                variant={filter() === entry.value ? "filled" : "tonal"}
+                role="tab"
+                aria-selected={filter() === entry.value}
+                onPress={() => setFilter(entry.value)}
+                data-testid={`event-people-${entry.value}`}
+              >
+                {entry.label} ({entry.count})
+              </Button>
+            )}
+          </For>
+        </Answers>
 
-      <Show when={needsReason()}>
-        <ReasonBox data-testid="event-people-reason">
-          <Note>
-            <Trans>
-              This event is private and you are not one of its organisers. Write
-              why you need its list of people; your access is noted in the audit
-              log.
-            </Trans>
-          </Note>
-          <TextField
-            variant="outlined"
-            label={t`Reason`}
-            value={reason()}
-            maxlength={200}
-            onChange={(event) => setReason(event.currentTarget.value)}
-          />
-          <Button
-            size="sm"
-            variant="tonal"
-            isDisabled={!reason().trim() || loading()}
-            onPress={() => void load()}
-          >
-            <Trans>Show the list</Trans>
-          </Button>
-        </ReasonBox>
-      </Show>
-
-      <Show when={overLimit()}>
-        {(attendee) => (
-          <ConfirmBox role="alertdialog" data-testid="event-over-capacity">
-            <strong>
-              <Trans>Seat {name(attendee())} past the limit?</Trans>
-            </strong>
+        <Show when={needsReason()}>
+          <ReasonBox data-testid="event-people-reason">
             <Note>
               <Trans>
-                All {props.event.capacity} seats are taken. The event then shows
-                as over its limit, and the audit log notes it under your name.
+                This event is private and you are not one of its organisers.
+                Write why you need its list of people; your access is noted in
+                the audit log.
               </Trans>
             </Note>
-            <Row>
-              <Button
-                size="sm"
-                variant="filled"
-                isDisabled={!!acting()}
-                onPress={() =>
-                  void change(attendee(), () =>
-                    client().serverEvents.seatAttendee(
-                      props.server.id,
-                      props.event._id,
-                      attendee().user._id,
-                      { overCapacity: true },
-                    ),
-                  )
-                }
-                data-testid="event-over-capacity-confirm"
-              >
-                <Trans>Seat past the limit</Trans>
-              </Button>
-              <Button
-                size="sm"
-                variant="text"
-                onPress={() => setOverLimit(undefined)}
-              >
-                <Trans>Cancel</Trans>
-              </Button>
-            </Row>
-          </ConfirmBox>
-        )}
-      </Show>
+            <TextField
+              variant="outlined"
+              label={t`Reason`}
+              value={reason()}
+              maxlength={200}
+              onChange={(event) => setReason(event.currentTarget.value)}
+            />
+            <Button
+              size="sm"
+              variant="tonal"
+              isDisabled={!reason().trim() || loading()}
+              onPress={() => void load()}
+            >
+              <Trans>Show the list</Trans>
+            </Button>
+          </ReasonBox>
+        </Show>
 
-      <Show
-        when={people().length}
-        fallback={
-          <Show when={!loading() && !needsReason() && !error()}>
-            <Note>
-              <Trans>Nobody yet.</Trans>
-            </Note>
-          </Show>
-        }
-      >
-        <PeopleList>
-          <For each={people()}>
-            {(attendee, index) => (
-              <Person data-testid="event-person">
-                <Show when={filter() === "Waiting"}>
-                  <Order>{index() + 1}</Order>
-                </Show>
-                <Avatar
-                  size={28}
-                  src={client().users.get(attendee.user._id)?.avatarURL}
-                  fallback={name(attendee)}
-                />
-                <span>{name(attendee)}</span>
-                <Show when={props.organiser}>
-                  <RowActions>
-                    <Show when={filter() === "Waiting"}>
+        <Show when={overLimit()}>
+          {(attendee) => (
+            <ConfirmBox role="alertdialog" data-testid="event-over-capacity">
+              <strong>
+                <Trans>Seat {name(attendee())} past the limit?</Trans>
+              </strong>
+              <Note>
+                <Trans>
+                  All {props.event.capacity} seats are taken. The event then
+                  shows as over its limit, and the audit log notes it under your
+                  name.
+                </Trans>
+              </Note>
+              <ButtonRow>
+                <Button
+                  size="sm"
+                  variant="filled"
+                  isDisabled={!!acting()}
+                  onPress={() =>
+                    void change(attendee(), () =>
+                      client().serverEvents.seatAttendee(
+                        props.server.id,
+                        props.event._id,
+                        attendee().user._id,
+                        { overCapacity: true },
+                      ),
+                    )
+                  }
+                  data-testid="event-over-capacity-confirm"
+                >
+                  <Trans>Seat past the limit</Trans>
+                </Button>
+                <Button
+                  size="sm"
+                  variant="text"
+                  onPress={() => setOverLimit(undefined)}
+                >
+                  <Trans>Cancel</Trans>
+                </Button>
+              </ButtonRow>
+            </ConfirmBox>
+          )}
+        </Show>
+
+        <Show
+          when={!people().length && !loading() && !needsReason() && !error()}
+        >
+          <Note>
+            <Trans>Nobody yet.</Trans>
+          </Note>
+        </Show>
+      </SettingsFormPanel>
+
+      <For each={people()}>
+        {(attendee, index) => (
+          <SettingsRow
+            icon={
+              <Avatar
+                size={28}
+                src={client().users.get(attendee.user._id)?.avatarURL}
+                fallback={name(attendee)}
+              />
+            }
+            title={name(attendee)}
+            description={
+              filter() === "Waiting" ? (
+                <Trans>Number {index() + 1} in line</Trans>
+              ) : undefined
+            }
+            control={
+              props.organiser
+                ? () => (
+                    <RowActions>
+                      <Show when={filter() === "Waiting"}>
+                        <Button
+                          size="sm"
+                          variant="tonal"
+                          aria-label={t`Give ${name(attendee)} a seat`}
+                          isDisabled={acting() === attendee.user._id}
+                          onPress={() =>
+                            void change(attendee, () =>
+                              client().serverEvents.seatAttendee(
+                                props.server.id,
+                                props.event._id,
+                                attendee.user._id,
+                              ),
+                            )
+                          }
+                          data-testid="event-person-seat"
+                        >
+                          <Icon name="check" size={16} />
+                        </Button>
+                      </Show>
                       <Button
                         size="sm"
-                        variant="tonal"
+                        variant="text"
+                        aria-label={t`Remove ${name(attendee)}`}
                         isDisabled={acting() === attendee.user._id}
                         onPress={() =>
                           void change(attendee, () =>
-                            client().serverEvents.seatAttendee(
+                            client().serverEvents.removeAttendee(
                               props.server.id,
                               props.event._id,
                               attendee.user._id,
                             ),
                           )
                         }
-                        data-testid="event-person-seat"
+                        data-testid="event-person-remove"
                       >
-                        <Trans>Give a seat</Trans>
+                        <Icon name="x" size={16} />
                       </Button>
-                    </Show>
-                    <Button
-                      size="sm"
-                      variant="text"
-                      isDisabled={acting() === attendee.user._id}
-                      onPress={() =>
-                        void change(attendee, () =>
-                          client().serverEvents.removeAttendee(
-                            props.server.id,
-                            props.event._id,
-                            attendee.user._id,
-                          ),
-                        )
-                      }
-                      data-testid="event-person-remove"
-                    >
-                      <Trans context="event attendee">Remove</Trans>
-                    </Button>
-                  </RowActions>
-                </Show>
-              </Person>
-            )}
-          </For>
-        </PeopleList>
-        <Show when={next()}>
-          <Button
-            size="sm"
-            variant="text"
-            isDisabled={loading()}
-            onPress={() => void load(true)}
-          >
-            <Trans>Show more</Trans>
-          </Button>
-        </Show>
+                    </RowActions>
+                  )
+                : undefined
+            }
+            data-testid="event-person"
+          />
+        )}
+      </For>
+      <Show when={next()}>
+        <SettingsRow
+          icon={<Icon name="caret-down" size={20} />}
+          title={<Trans>Show more</Trans>}
+          disabled={loading()}
+          navigational
+          onClick={() => void load(true)}
+        />
       </Show>
 
       <Show when={error()}>
-        <Failure role="alert">
-          <TranslatedError error={error()} />
-        </Failure>
+        <SettingsFormPanel>
+          <Failure role="alert">
+            <TranslatedError error={error()} />
+          </Failure>
+        </SettingsFormPanel>
       </Show>
-    </PeopleBox>
+    </>
   );
 }
 
 const Layout = styled("div", {
   base: {
     display: "grid",
-    gridTemplateColumns: "minmax(0, 1fr) 300px",
+    gridTemplateColumns: "minmax(0, 1fr) 320px",
     gap: "24px",
     alignItems: "start",
     "@media (max-width: 900px)": { gridTemplateColumns: "minmax(0, 1fr)" },
@@ -1055,7 +1135,7 @@ const Main = styled("div", {
   base: {
     display: "flex",
     flexDirection: "column",
-    gap: "16px",
+    gap: "24px",
     minWidth: 0,
   },
 });
@@ -1064,7 +1144,7 @@ const Side = styled("aside", {
   base: {
     display: "flex",
     flexDirection: "column",
-    gap: "16px",
+    gap: "24px",
     minWidth: 0,
   },
 });
@@ -1075,39 +1155,24 @@ const CoverBox = styled("div", {
     aspectRatio: "16 / 5",
     minHeight: "140px",
     overflow: "hidden",
-    borderRadius: "var(--z-radius, 10px)",
+    borderRadius: "var(--z-shape-card, calc(var(--z-radius, 10px) + 4px))",
     background: "var(--z-bg-input)",
   },
-});
-
-const TicketBody = styled("div", {
-  base: {
-    display: "flex",
-    flexDirection: "column",
-    gap: "12px",
-    padding: "24px 28px",
-    minWidth: 0,
-    _phone: { padding: "16px" },
-  },
-});
-
-const StampRow = styled("div", {
-  base: { display: "flex", paddingBlockStart: "4px" },
 });
 
 const Heading = styled("div", {
   base: {
     display: "flex",
     flexDirection: "column",
-    gap: "4px",
+    alignItems: "flex-start",
+    gap: "8px",
     "& h2": {
       margin: 0,
-      fontSize: "28px",
-      lineHeight: "40px",
+      fontSize: "22px",
+      lineHeight: "32px",
       fontWeight: 700,
       overflowWrap: "anywhere",
       color: "var(--z-header-primary, var(--z-fg-primary))",
-      _phone: { fontSize: "22px", lineHeight: "32px" },
     },
   },
 });
@@ -1115,65 +1180,19 @@ const Heading = styled("div", {
 const State = styled("span", {
   base: {
     fontSize: "13px",
-    fontWeight: 650,
-    color: "var(--z-fg-muted)",
-  },
-});
-
-const Facts = styled("ul", {
-  base: {
-    display: "flex",
-    flexDirection: "column",
-    gap: "8px",
-    margin: 0,
-    padding: 0,
-    listStyle: "none",
-  },
-});
-
-const Fact = styled("li", {
-  base: {
-    display: "flex",
-    alignItems: "center",
-    gap: "10px",
-    minWidth: 0,
-    fontSize: "15px",
-    lineHeight: "24px",
-    color: "var(--z-fg-primary)",
-    "--z-icon-color": "var(--z-fg-secondary)",
-    "& > span, & > time": { minWidth: 0, overflowWrap: "anywhere" },
+    lineHeight: "20px",
+    fontWeight: 600,
+    color: "var(--z-fg-secondary)",
+    "&[data-live]": { color: "var(--z-live)" },
   },
 });
 
 const Description = styled("div", {
   base: {
-    fontSize: "15px",
-    lineHeight: "24px",
-    color: "var(--z-fg-secondary)",
-    maxWidth: "640px",
+    fontSize: "14px",
+    lineHeight: "22px",
+    color: "var(--z-fg-primary)",
     overflowWrap: "anywhere",
-  },
-});
-
-const Panel = styled("section", {
-  base: {
-    display: "flex",
-    flexDirection: "column",
-    gap: "10px",
-    padding: "16px",
-    minWidth: 0,
-    borderRadius: "var(--z-radius-md, 14px)",
-    background: "var(--z-bg-raised)",
-  },
-});
-
-const PanelTitle = styled("h3", {
-  base: {
-    margin: 0,
-    fontSize: "13px",
-    lineHeight: "20px",
-    fontWeight: 650,
-    color: "var(--z-fg-muted)",
   },
 });
 
@@ -1191,23 +1210,6 @@ const Big = styled("div", {
   },
 });
 
-const Counts = styled("div", {
-  base: {
-    display: "flex",
-    flexWrap: "wrap",
-    columnGap: "16px",
-    rowGap: "4px",
-    fontSize: "13px",
-    lineHeight: "20px",
-    color: "var(--z-fg-secondary)",
-    "& b": {
-      fontSize: "15px",
-      fontWeight: 700,
-      color: "var(--z-fg-primary)",
-    },
-  },
-});
-
 const Note = styled("p", {
   base: {
     margin: 0,
@@ -1217,44 +1219,8 @@ const Note = styled("p", {
   },
 });
 
-const Actions = styled("div", {
-  base: {
-    display: "flex",
-    flexWrap: "wrap",
-    alignItems: "center",
-    gap: "8px",
-    "&:empty": { display: "none" },
-  },
-});
-
 const Problem = styled("span", {
-  base: { fontSize: "13px", color: "var(--z-danger)" },
-});
-
-const Manage = styled("div", {
-  base: {
-    display: "flex",
-    flexWrap: "wrap",
-    gap: "4px",
-    paddingBlockStart: "12px",
-    borderBlockStart: "1px solid var(--z-border-subtle)",
-    // phones: one box of rows, as in the settings list
-    _phone: {
-      flexDirection: "column",
-      flexWrap: "nowrap",
-      alignItems: "stretch",
-      gap: 0,
-      padding: "4px",
-      border: "none",
-      borderRadius: "var(--z-radius-md, 14px)",
-      background: "var(--z-bg-raised)",
-      "& > button": {
-        justifyContent: "flex-start",
-        minHeight: "48px",
-        width: "100%",
-      },
-    },
-  },
+  base: { color: "var(--z-danger)" },
 });
 
 const Confirm = styled("div", {
@@ -1264,88 +1230,16 @@ const Confirm = styled("div", {
     alignItems: "center",
     gap: "8px",
     fontSize: "14px",
+    lineHeight: "20px",
     "& > span": { flexBasis: "100%" },
   },
 });
 
-const PeopleBox = styled("div", {
+const Answers = styled("div", {
   base: {
     display: "flex",
-    flexDirection: "column",
-    gap: "12px",
-    minWidth: 0,
-  },
-});
-
-const Tabs = styled("div", {
-  base: { display: "flex", flexWrap: "wrap", gap: "4px" },
-});
-
-const Tab = styled("button", {
-  base: {
-    display: "inline-flex",
-    alignItems: "center",
-    gap: "6px",
-    minHeight: "28px",
-    paddingInline: "10px",
-    border: "none",
-    borderRadius: "999px",
-    background: "transparent",
-    color: "var(--z-fg-secondary)",
-    font: "inherit",
-    fontSize: "13px",
-    fontWeight: 500,
-    cursor: "pointer",
-    "& i": {
-      fontStyle: "normal",
-      fontSize: "12px",
-      color: "var(--z-fg-muted)",
-    },
-    "&:hover": { background: "var(--z-hover)" },
-    "&[aria-selected=true]": {
-      background: "var(--z-selected)",
-      color: "var(--z-fg-primary)",
-    },
-    "&:focus-visible": {
-      outline: "2px solid var(--z-focus)",
-      outlineOffset: "2px",
-    },
-    _phone: { minHeight: "44px" },
-  },
-});
-
-const PeopleList = styled("div", {
-  base: { display: "flex", flexDirection: "column", gap: "10px" },
-});
-
-const Person = styled("div", {
-  base: {
-    display: "flex",
-    alignItems: "center",
     flexWrap: "wrap",
-    gap: "10px",
-    fontSize: "14px",
-    fontWeight: 500,
-    minWidth: 0,
-    // the name keeps room for itself: the actions drop to their own line
-    // only when both do not fit beside it
-    "& > span": {
-      flex: "1 1 96px",
-      minWidth: 0,
-      overflow: "hidden",
-      textOverflow: "ellipsis",
-      whiteSpace: "nowrap",
-    },
-  },
-});
-
-const Order = styled("i", {
-  base: {
-    fontStyle: "normal",
-    minWidth: "16px",
-    textAlign: "center",
-    fontSize: "13px",
-    color: "var(--z-fg-muted)",
+    gap: "8px",
   },
 });
 
@@ -1353,12 +1247,11 @@ const RowActions = styled("div", {
   base: {
     display: "flex",
     gap: "4px",
-    marginInlineStart: "auto",
     justifyContent: "flex-end",
   },
 });
 
-const Row = styled("div", {
+const ButtonRow = styled("div", {
   base: { display: "flex", flexWrap: "wrap", gap: "8px" },
 });
 
