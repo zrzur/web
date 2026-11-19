@@ -99,10 +99,10 @@ const appRoutes = () => (
     {loginRoutes()}
     {/* an invite link shows the server before any form, signed in or not */}
     <Route path="/invite/:code" component={InvitePage} />
-    {/* the docs never wait for the gateway, signed in or not */}
-    <Route path="/developers/docs/*" component={DevelopersDocs} />
     {/* an event's share link opens for people who are not signed in too */}
     <Route path="/e/:path" component={EventLinkPage} />
+    {/* the docs never wait for the gateway, signed in or not */}
+    <Route path="/developers/docs/*" component={DevelopersDocs} />
     <Route path="/" component={Interface}>
       <Route path="/e/join/:code" component={EventInvitationPage} />
       <Route path="/pwa" component={PWARedirect} />

@@ -81,7 +81,8 @@ describe("keys that can talk from other apps", () => {
   });
 
   it("allows the default key, other letters, digits, F keys and the numpad", () => {
-    for (const code of ["Backquote", "KeyB", "Digit4", "F13", "F24", "Numpad5"])
+    // Digit4 is "Open saved messages" (Ctrl+Shift+4) since 26.2.0-beta.1
+    for (const code of ["Backquote", "KeyB", "Digit2", "F13", "F24", "Numpad5"])
       expect(globalTalkAllowed(code), code).toBe(true);
   });
 });

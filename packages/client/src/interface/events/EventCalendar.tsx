@@ -342,8 +342,8 @@ const Step = styled("div", {
       fontWeight: 700,
       color: "var(--z-header-primary, var(--z-fg-primary))",
     },
-    // the arrows point with the reading direction
-    _rtl: { "& svg": { transform: "scaleX(-1)" } },
+    // caret-left/right already follow the reading direction (styles.css);
+    // flipping them here too turned them back the wrong way in Arabic
     _phone: {
       flex: 1,
       justifyContent: "space-between",
