@@ -226,6 +226,8 @@ export function eventIcs(
 export function icsFileName(title: string) {
   const clean = title
     .normalize("NFKC")
+    // control characters are not allowed in file names on any system
+    // eslint-disable-next-line no-control-regex
     .replace(/[\\/:*?"<>|\u0000-\u001f]+/g, " ")
     .trim()
     .replace(/\s+/g, "-")

@@ -1,4 +1,5 @@
 "use strict";
+/* global AudioWorkletProcessor, registerProcessor -- AudioWorkletGlobalScope */
 // Hands the mixed voices of a call to the page in blocks of a tenth of a
 // second, for clips and recorded rooms (components/rtc/capture). It only
 // runs while clips are on or a recording runs, and it hears only the voices
