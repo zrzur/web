@@ -54,6 +54,16 @@
 * **Messages that came from Discord carry the mark "from Discord"** next to the bot tag. The server sets it; the bot cannot remove it.
 * Ending the link removes the messages that came from Discord; what members wrote stays.
 * The SDK does not know the two new system messages and the three routes yet: the app reads them itself until the contract carries them.
+### Events: tickets, calendar, sharing, reminders (26.1.0-beta.5, 2026-11-19)
+
+* **Every event is a ticket:** a stub with the day and the date, your answer stamped on it; the event that is happening is a green ticket with Join.
+* **Calendar:** a month and a week view in a server's events and in My events, days in the reading direction, the week starting where your language starts it; a day's tickets under the grid. Phones show the days as numbers with a mark per event.
+* **Search and places:** words in the title or the description, and voice, text or elsewhere, on every list.
+* **Ready starts:** game night, tournament, watch party, questions, hangout fill the new-event form; a small ticket at the top shows how it will look.
+* **Reminders:** an organiser picks up to three (a quarter of an hour, an hour, a day, a week before; a new event starts with a day and a quarter of an hour). Each person can switch the reminders of one event off on its page, and kinds of notices off for every event in Settings > Notifications > Events.
+* **Sharing:** organisers make a short link (`/e/<name>-<code>`) with a name of their choice, and may open it to people outside the server (title, time and server only). Events for invited people get invitation links with a number of uses and an end. A link opens a page of its own, also for people who are not signed in.
+* **Add to my calendar** saves the event as a calendar file; a repeating event keeps its local time.
+* **Phones:** the way back in the header, tabs as one row of chips, the organiser's tools as one box of rows.
 
 ### Zrzur without a connection (2026-11-18)
 

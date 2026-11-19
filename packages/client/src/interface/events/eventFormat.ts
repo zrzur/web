@@ -38,6 +38,73 @@ export function eventWhen(
     : `${format.format(start)} – ${format.format(end)}`;
 }
 
+/** The day of an event for its date chip: "20" and "Nov" */
+export function eventDay(
+  startsAt: string,
+  locale: string,
+  timeZone?: string,
+): { day: string; month: string } {
+  const zone = timeZone ? { timeZone } : {};
+  const start = new Date(startsAt);
+  const part = (options: Intl.DateTimeFormatOptions) =>
+    new Intl.DateTimeFormat(locale || "en", {
+      numberingSystem: "latn",
+      ...zone,
+      ...options,
+    }).format(start);
+  return { day: part({ day: "numeric" }), month: part({ month: "short" }) };
+}
+
+/** The weekday an event starts on, as "Saturday" */
+export function eventWeekday(
+  startsAt: string,
+  locale: string,
+  timeZone?: string,
+): string {
+  return new Intl.DateTimeFormat(locale || "en", {
+    weekday: "long",
+    ...(timeZone ? { timeZone } : {}),
+  }).format(new Date(startsAt));
+}
+
+/** The hours of an event, as "21:00 – 23:30" (the start alone without an end) */
+export function eventTimes(
+  event: Pick<ServerEvent, "starts_at" | "ends_at">,
+  locale: string,
+  hour12?: boolean,
+  timeZone?: string,
+): string {
+  const format = new Intl.DateTimeFormat(locale || "en", {
+    numberingSystem: "latn",
+    hour: "numeric",
+    minute: "2-digit",
+    ...(timeZone ? { timeZone } : {}),
+    ...(hour12 === undefined ? {} : { hour12 }),
+  });
+  const start = new Date(event.starts_at);
+  const end = event.ends_at ? new Date(event.ends_at) : undefined;
+  return end && end > start
+    ? format.formatRange(start, end)
+    : format.format(start);
+}
+
+/** A short start for a card: "Fri 21:00" */
+export function eventStartShort(
+  startsAt: string,
+  locale: string,
+  hour12?: boolean,
+  timeZone?: string,
+): string {
+  return new Intl.DateTimeFormat(locale || "en", {
+    numberingSystem: "latn",
+    weekday: "short",
+    hour: "numeric",
+    minute: "2-digit",
+    ...(timeZone ? { timeZone } : {}),
+    ...(hour12 === undefined ? {} : { hour12 }),
+  }).format(new Date(startsAt));
+}
+
 /** "in 3 hours", "tomorrow", "in 5 days" */
 export function startsIn(
   startsAt: string,
@@ -99,6 +166,39 @@ export function isEventsShortcut(
   mac: boolean,
 ): boolean {
   return shortcutFor(event, mac) === "open_events";
+}
+
+/**
+ * The plain keys of the events screens: N plans a new event on the list, and
+ * on an event's page G, M and X answer Going, Maybe and Can't go. By physical
+ * key, so they are the same on an Arabic or German layout; never with a
+ * modifier, which belongs to the browser and the app's other shortcuts.
+ */
+export function eventKey(
+  event: Pick<
+    KeyboardEvent,
+    "code" | "altKey" | "shiftKey" | "ctrlKey" | "metaKey" | "repeat"
+  >,
+): "new" | "Going" | "Maybe" | "NotGoing" | undefined {
+  if (
+    event.altKey ||
+    event.shiftKey ||
+    event.ctrlKey ||
+    event.metaKey ||
+    event.repeat
+  )
+    return undefined;
+  switch (event.code) {
+    case "KeyN":
+      return "new";
+    case "KeyG":
+      return "Going";
+    case "KeyM":
+      return "Maybe";
+    case "KeyX":
+      return "NotGoing";
+  }
+  return undefined;
 }
 
 /** The shortcut leaves text fields and open dialogs alone */

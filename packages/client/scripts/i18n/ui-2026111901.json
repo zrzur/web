@@ -1,7 +1,23 @@
 {
+  "Add a helper": [
+    "أضف مساعدًا",
+    "Helfer hinzufügen"
+  ],
   "Already on Zrzur? <0>Log in</0>": [
     "لديك حساب في زرزور؟ <0>سجّل الدخول</0>",
     "Schon bei Zrzur? <0>Anmelden</0>"
+  ],
+  "Answer Going or Maybe to an event in any of your servers and it is kept here.": [
+    "أجب بـ«سأحضر» أو «ربما» عن فعالية في أي من سيرفراتك فتُحفظ هنا.",
+    "Antworte in einem deiner Server mit „Komme“ oder „Vielleicht“, dann steht das Event hier."
+  ],
+  "Answer an event: going, maybe, can't go": [
+    "الإجابة عن فعالية: سأحضر، ربما، لن أحضر",
+    "Auf ein Event antworten: komme, vielleicht, kann nicht"
+  ],
+  "Answers by day": [
+    "الإجابات حسب اليوم",
+    "Antworten nach Tag"
   ],
   "By continuing you accept the <0>Terms</0> and the <1>Community Guidelines</1>, and have read the <2>Privacy Policy</2>. Zrzur is for people aged 16 and over.": [
     "بالمتابعة توافق على <0>الشروط</0> و<1>إرشادات المجتمع</1>، وتقرّ بأنك قرأت <2>سياسة الخصوصية</2>. زرزور لمن أتمّوا 16 عامًا فأكثر.",
@@ -15,6 +31,10 @@
     "اختر كلمة مرور",
     "Passwort wählen"
   ],
+  "Choose at least one person to invite.": [
+    "اختر شخصًا واحدًا على الأقل لدعوته.",
+    "Wähle mindestens eine Person zum Einladen."
+  ],
   "Confirm your email within {0} days to keep this account.": [
     "أكّد بريدك الإلكتروني خلال {0} أيام لتحتفظ بهذا الحساب.",
     "Bestätige deine E-Mail-Adresse innerhalb von {0} Tagen, um dieses Konto zu behalten."
@@ -27,9 +47,37 @@
     "أنشئ الحساب وانضم",
     "Konto erstellen und beitreten"
   ],
+  "Events of the next 90 days in servers that use events show up here.": [
+    "تظهر هنا فعاليات التسعين يومًا القادمة في السيرفرات التي تستخدم الفعاليات.",
+    "Hier stehen die Events der nächsten 90 Tage aus Servern, die Events nutzen."
+  ],
+  "Everything coming up": [
+    "كل القادم",
+    "Alles Kommende"
+  ],
   "Find servers in Discover": [
     "ابحث عن سيرفرات في «اكتشف»",
     "Server in „Entdecken“ finden"
+  ],
+  "Helpers": [
+    "المساعدون",
+    "Helfer"
+  ],
+  "Helpers can change this event and manage who comes, without managing the server's other events.": [
+    "يستطيع المساعدون تعديل هذه الفعالية وإدارة الحضور، من دون إدارة فعاليات السيرفر الأخرى.",
+    "Helfer können dieses Event ändern und die Teilnehmenden verwalten, ohne die anderen Events des Servers zu verwalten."
+  ],
+  "I'm taking part": [
+    "أشارك فيها",
+    "Ich nehme teil"
+  ],
+  "In all my servers": [
+    "في كل سيرفراتي",
+    "In allen meinen Servern"
+  ],
+  "In voice at the start": [
+    "في الصوت عند البدء",
+    "Beim Start im Sprachkanal"
   ],
   "Inside": [
     "في الداخل",
@@ -43,6 +91,38 @@
     "قد تنتهي مدة الروابط أو يوقفها أصحابها. اطلب رابطًا جديدًا ممن أرسله إليك.",
     "Links können ablaufen oder abgeschaltet werden. Bitte die Person, die ihn geschickt hat, um einen neuen."
   ],
+  "Loading the numbers…": [
+    "جارٍ تحميل الأرقام…",
+    "Zahlen werden geladen…"
+  ],
+  "Members found": [
+    "الأعضاء الموجودون",
+    "Gefundene Mitglieder"
+  ],
+  "No member with this name.": [
+    "لا يوجد عضو بهذا الاسم.",
+    "Kein Mitglied mit diesem Namen."
+  ],
+  "Nobody has answered yet.": [
+    "لم يُجب أحد بعد.",
+    "Noch hat niemand geantwortet."
+  ],
+  "Nothing is planned in your servers": [
+    "لا شيء مخطط في سيرفراتك",
+    "In deinen Servern ist nichts geplant"
+  ],
+  "On a server's events, if you manage events.": [
+    "في فعاليات السيرفر، إن كنت تدير الفعاليات.",
+    "In den Events eines Servers, wenn du Events verwaltest."
+  ],
+  "On the event's page.": [
+    "في صفحة الفعالية.",
+    "Auf der Seite des Events."
+  ],
+  "Only they and the organisers see this event. Nobody else learns that it exists.": [
+    "يراها المدعوون والمنظِّمون فقط. لا يعلم أحد غيرهم بوجودها.",
+    "Nur sie und die Organisatoren sehen dieses Event. Sonst erfährt niemand, dass es existiert."
+  ],
   "Open Zrzur": [
     "افتح زرزور",
     "Zrzur öffnen"
@@ -51,9 +131,21 @@
     "افتح البريد",
     "E-Mails öffnen"
   ],
+  "Plan a new event": [
+    "خطّط لفعالية جديدة",
+    "Neues Event planen"
+  ],
   "Save and continue": [
     "احفظ وتابع",
     "Speichern und weiter"
+  ],
+  "Seats taken": [
+    "المقاعد المشغولة",
+    "Belegte Plätze"
+  ],
+  "See everything coming up": [
+    "اعرض كل القادم",
+    "Alles Kommende ansehen"
   ],
   "Send again": [
     "أرسل مجددًا",
@@ -67,9 +159,17 @@
     "سيطّلع أحد القائمين عليه على طلبك.",
     "Jemand, der ihn leitet, sieht sich deine Anfrage an."
   ],
+  "That is the most you can choose here: {0}.": [
+    "هذا أقصى ما يمكن اختياره هنا: {0}.",
+    "Mehr kannst du hier nicht auswählen: {0}."
+  ],
   "The people who run it have paused invites for a while. Try the same link again later.": [
     "أوقف القائمون عليه الدعوات لبعض الوقت. جرّب الرابط نفسه لاحقًا.",
     "Die Leitung hat Einladungen für eine Weile pausiert. Versuche denselben Link später noch einmal."
+  ],
+  "The search did not work. Try again.": [
+    "لم ينجح البحث. حاول مرة أخرى.",
+    "Die Suche hat nicht funktioniert. Versuch es noch einmal."
   ],
   "This invite link has ended": [
     "انتهى رابط الدعوة هذا",
@@ -115,6 +215,10 @@
     "بماذا يناديك الناس؟",
     "Wie sollen dich die Leute nennen?"
   ],
+  "You are not taking part in any event yet": [
+    "لا تشارك في أي فعالية بعد",
+    "Du nimmst noch an keinem Event teil"
+  ],
   "You'll choose a password from the email we send you. Confirm it within 3 days to keep the account.": [
     "تختار كلمة المرور من الرسالة التي نرسلها إلى بريدك. أكّده خلال 3 أيام لتحتفظ بالحساب.",
     "Dein Passwort wählst du über die E-Mail, die wir dir schicken. Bestätige sie innerhalb von 3 Tagen, um das Konto zu behalten."
@@ -134,6 +238,18 @@
   "Your name": [
     "اسمك",
     "Dein Name"
+  ],
+  "scheduled events::Numbers": [
+    "الأرقام",
+    "Zahlen"
+  ],
+  "{0, plural, one {# person was in the voice channel when it started. Only the number is kept.} other {# people were in the voice channel when it started. Only the number is kept.}}": [
+    "{0, plural, one {كان شخص واحد في القناة الصوتية عند البدء. يُحفظ العدد فقط.} two {كان شخصان في القناة الصوتية عند البدء. يُحفظ العدد فقط.} few {كان # أشخاص في القناة الصوتية عند البدء. يُحفظ العدد فقط.} many {كان # شخصًا في القناة الصوتية عند البدء. يُحفظ العدد فقط.} other {كان # شخص في القناة الصوتية عند البدء. يُحفظ العدد فقط.}}",
+    "{0, plural, one {# Person war beim Start im Sprachkanal. Nur die Zahl wird gespeichert.} other {# Personen waren beim Start im Sprachkanal. Nur die Zahl wird gespeichert.}}"
+  ],
+  "{0} answers, {1} going": [
+    "{0} إجابة، منها {1} سيحضر",
+    "{0} Antworten, {1} kommen"
   ],
   "{0} invited you": [
     "دعاك {0}",

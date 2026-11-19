@@ -1,0 +1,141 @@
+{
+  "{0, plural, one {Used # time} other {Used # times}}": [
+    "{0, plural, zero {لم يُستخدم} one {استُخدم مرة واحدة} two {استُخدم مرتين} few {استُخدم # مرات} many {استُخدم # مرة} other {استُخدم # مرة}}",
+    "{0, plural, one {# Mal verwendet} other {# Mal verwendet}}"
+  ],
+  "{0} before": ["قبلها بـ{0}", "{0} vorher"],
+  "{0} more": ["{0} أخرى", "{0} weitere"],
+  "{0}, {1} events": ["{0}، {1} فعاليات", "{0}, {1} Events"],
+  "A member of the server who opens one joins the invited people.": [
+    "عضو السيرفر الذي يفتح أحدها ينضم إلى المدعوين.",
+    "Ein Mitglied des Servers, das einen öffnet, kommt zu den Eingeladenen."
+  ],
+  "A seat came free for you": ["أصبح لك مقعد", "Ein Platz ist für dich frei geworden"],
+  "A short link that opens this event. Only people who can already see the event can open it.": [
+    "رابط قصير يفتح هذه الفعالية. لا يفتحه إلا من يرى الفعالية أصلًا.",
+    "Ein kurzer Link, der dieses Event öffnet. Nur wer das Event schon sehen kann, kann ihn öffnen."
+  ],
+  "Add to my calendar": ["أضف إلى تقويمي", "In meinen Kalender"],
+  "event places::All": ["الكل", "Alle"],
+  "An empty event": ["فعالية فارغة", "Ein leeres Event"],
+  "An event has at most 10 invitation links.": [
+    "للفعالية 10 روابط دعوة على الأكثر.",
+    "Ein Event hat höchstens 10 Einladungslinks."
+  ],
+  "Ask anything. Write your questions in the channel before the start.": [
+    "اسأل ما تشاء. اكتب أسئلتك في القناة قبل البداية.",
+    "Frag, was du willst. Schreib deine Fragen vor dem Start in den Kanal."
+  ],
+  "scheduled events::Calendar": ["التقويم", "Kalender"],
+  "Changed or called off": ["تغيّرت أو أُلغيت", "Geändert oder abgesagt"],
+  "scheduled events::Copy": ["نسخ", "Kopieren"],
+  "Copy the invitation link": ["انسخ رابط الدعوة", "Einladungslink kopieren"],
+  "event places::Elsewhere": ["مكان آخر", "Woanders"],
+  "notification settings::Events": ["الفعاليات", "Events"],
+  "For events you are going to, or maybe going to.": [
+    "للفعاليات التي ستحضرها أو ربما تحضرها.",
+    "Für Events, zu denen du kommst oder vielleicht kommst."
+  ],
+  "Game night": ["ليلة ألعاب", "Spieleabend"],
+  "How many people": ["عدد الأشخاص", "Wie viele Personen"],
+  "How much to show": ["مقدار ما يُعرض", "Wie viel anzeigen"],
+  "Invitation links": ["روابط الدعوة", "Einladungslinks"],
+  "Invitations to events": ["الدعوات إلى الفعاليات", "Einladungen zu Events"],
+  "It may have been removed, or the event is only for the members of its server.": [
+    "ربما أُزيل، أو أن الفعالية لأعضاء سيرفرها فقط.",
+    "Vielleicht wurde er entfernt, oder das Event ist nur für die Mitglieder seines Servers."
+  ],
+  "It ran out or was taken away. Ask the organiser for a new one.": [
+    "انتهت أو أُزيلت. اطلب من المنظّم دعوة جديدة.",
+    "Sie ist abgelaufen oder wurde entfernt. Bitte die Organisatoren um eine neue."
+  ],
+  "Join the server first": ["انضم إلى السيرفر أولًا", "Tritt zuerst dem Server bei"],
+  "Make a share link": ["أنشئ رابط مشاركة", "Link zum Teilen erstellen"],
+  "Members of the server see the whole event and can answer it.": [
+    "أعضاء السيرفر يرون الفعالية كاملة ويجيبون عليها.",
+    "Mitglieder des Servers sehen das ganze Event und können antworten."
+  ],
+  "calendar::Month": ["شهر", "Monat"],
+  "Month after": ["الشهر التالي", "Nächster Monat"],
+  "Month before": ["الشهر السابق", "Voriger Monat"],
+  "Name in the link": ["الاسم في الرابط", "Name im Link"],
+  "New invitation link": ["رابط دعوة جديد", "Neuer Einladungslink"],
+  "No event matches. Try other words or another place.": [
+    "لا فعالية مطابقة. جرّب كلمات أخرى أو مكانًا آخر.",
+    "Kein Event passt. Versuch andere Wörter oder einen anderen Ort."
+  ],
+  "No plan. Drop in and talk.": ["بلا خطة. ادخل وتحدّث.", "Kein Plan. Komm vorbei und rede mit."],
+  "Nothing on this day.": ["لا شيء في هذا اليوم.", "Nichts an diesem Tag."],
+  "People outside the server can open it": [
+    "يستطيع من هم خارج السيرفر فتحه",
+    "Personen außerhalb des Servers können ihn öffnen"
+  ],
+  "Remind the people who are coming": ["ذكّر الحاضرين", "Die Teilnehmenden erinnern"],
+  "Reminders are off": ["التذكيرات متوقفة", "Erinnerungen sind aus"],
+  "Reminders are on": ["التذكيرات تعمل", "Erinnerungen sind an"],
+  "Reminders before an event": ["تذكيرات قبل الفعالية", "Erinnerungen vor einem Event"],
+  "Remove the invitation link": ["أزل رابط الدعوة", "Einladungslink entfernen"],
+  "Remove the link": ["أزل الرابط", "Link entfernen"],
+  "scheduled events::Save": ["حفظ", "Speichern"],
+  "Search events": ["ابحث في الفعاليات", "Events durchsuchen"],
+  "scheduled events::Sharing": ["المشاركة", "Teilen"],
+  "Sign in": ["تسجيل الدخول", "Anmelden"],
+  "Sign up with Going to take a place. The rules and the brackets come before the start.": [
+    "سجّل بـ«سأحضر» لتحجز مكانًا. القواعد وجدول المباريات تُنشر قبل البداية.",
+    "Melde dich mit „Ich komme“ an, um einen Platz zu bekommen. Regeln und Turnierbaum kommen vor dem Start."
+  ],
+  "Start from": ["ابدأ من", "Beginnen mit"],
+  "event places::Text": ["نصية", "Text"],
+  "The link could not be copied. Select it and copy it.": [
+    "تعذّر نسخ الرابط. حدّده وانسخه.",
+    "Der Link konnte nicht kopiert werden. Markiere ihn und kopiere ihn."
+  ],
+  "They see the title, the time, the cover and the server's name. Never who is coming.": [
+    "يرون العنوان والوقت والغلاف واسم السيرفر. ولا يرون أبدًا من سيحضر.",
+    "Sie sehen Titel, Zeit, Titelbild und den Namen des Servers. Nie, wer kommt."
+  ],
+  "This event was called off.": ["أُلغيت هذه الفعالية.", "Dieses Event wurde abgesagt."],
+  "This invitation is for the members of the event's server. Join it, then open the link again.": [
+    "هذه الدعوة لأعضاء سيرفر الفعالية. انضم إليه ثم افتح الرابط من جديد.",
+    "Diese Einladung ist für die Mitglieder des Servers des Events. Tritt ihm bei und öffne den Link dann noch einmal."
+  ],
+  "This invitation no longer works": ["هذه الدعوة لم تعد تعمل", "Diese Einladung funktioniert nicht mehr"],
+  "This link does not open an event": ["هذا الرابط لا يفتح فعالية", "Dieser Link öffnet kein Event"],
+  "calendar::Today": ["اليوم", "Heute"],
+  "Tournament": ["بطولة", "Turnier"],
+  "until {0}": ["حتى {0}", "bis {0}"],
+  "Until the event": ["حتى موعد الفعالية", "Bis zum Event"],
+  "Up to 3. Each person can switch reminders off for themselves.": [
+    "حتى 3. يستطيع كل شخص إيقاف التذكيرات لنفسه.",
+    "Bis zu 3. Jede Person kann Erinnerungen für sich ausschalten."
+  ],
+  "Used {0} of {1}": ["استُخدم {0} من {1}", "{0} von {1} verwendet"],
+  "event places::Voice": ["صوتية", "Sprache"],
+  "Voice hangout": ["جلسة صوتية", "Sprachtreff"],
+  "Watch party": ["مشاهدة جماعية", "Watchparty"],
+  "We play together in voice. Bring a game you like, or join the one that is running.": [
+    "نلعب معًا في القناة الصوتية. أحضر لعبة تحبها، أو انضم إلى اللعبة الجارية.",
+    "Wir spielen zusammen im Sprachkanal. Bring ein Spiel mit, das du magst, oder mach beim laufenden mit."
+  ],
+  "We watch together and talk about it in voice. Come a few minutes early.": [
+    "نشاهد معًا ونتحدث في القناة الصوتية. احضر قبل الموعد بدقائق.",
+    "Wir schauen zusammen und reden im Sprachkanal darüber. Komm ein paar Minuten früher."
+  ],
+  "calendar::Week": ["أسبوع", "Woche"],
+  "Week after": ["الأسبوع التالي", "Nächste Woche"],
+  "Week before": ["الأسبوع السابق", "Vorige Woche"],
+  "When an organiser invites you to an event.": [
+    "حين يدعوك منظّم إلى فعالية.",
+    "Wenn dich jemand aus der Organisation zu einem Event einlädt."
+  ],
+  "When the time or place of an event you answered changes.": [
+    "حين يتغيّر وقت أو مكان فعالية أجبت عليها.",
+    "Wenn sich Zeit oder Ort eines Events ändern, auf das du geantwortet hast."
+  ],
+  "When you move up from the waiting list.": [
+    "حين تنتقل من قائمة الانتظار إلى مقعد.",
+    "Wenn du von der Warteliste nachrückst."
+  ],
+  "Where it takes place": ["مكان الفعالية", "Wo es stattfindet"],
+  "Works for": ["صالح لمدة", "Gültig für"]
+}

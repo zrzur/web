@@ -1,8 +1,4 @@
 {
-  "{0} can change the server or act on other members. A stranger with an invite link gets it too.": [
-    "{0} يستطيع تغيير السيرفر أو التصرّف بحق الأعضاء الآخرين. وسيحصل عليه أي غريب معه رابط دعوة.",
-    "{0} kann den Server verändern oder gegen andere Mitglieder vorgehen. Auch Fremde mit einem Einladungslink bekommen das."
-  ],
   "#{0} typed like this is plain text, not a link. Use \"Add a channel link\" so people can tap it.": [
     "#{0} بهذه الكتابة نص عادي وليس رابطًا. استخدم «أضف رابط قناة» ليتمكن الناس من الضغط عليه.",
     "#{0} so geschrieben ist nur Text, kein Link. Nutze „Kanallink hinzufügen“, damit man darauf tippen kann."
@@ -87,13 +83,17 @@
     "لا توجد أدوار في هذا السيرفر بعد. أنشئ دورًا في «الأدوار» أولًا.",
     "Dieser Server hat noch keine Rollen. Lege zuerst unter „Rollen“ eine an."
   ],
-  "Welcome {MEMBER} to {SERVER}!": [
-    "أهلًا {MEMBER} في {SERVER}!",
-    "Willkommen {MEMBER} bei {SERVER}!"
+  "Type a name or username": [
+    "اكتب اسمًا أو اسم مستخدم",
+    "Namen oder Benutzernamen eingeben"
   ],
   "Welcome message": [
     "رسالة الترحيب",
     "Willkommensnachricht"
+  ],
+  "Welcome {MEMBER} to {SERVER}!": [
+    "أهلًا {MEMBER} في {SERVER}!",
+    "Willkommen {MEMBER} bei {SERVER}!"
   ],
   "When someone joins": [
     "عند انضمام أحد",
@@ -102,5 +102,9 @@
   "Where the message appears.": [
     "حيث تظهر الرسالة.",
     "Wo die Nachricht erscheint."
+  ],
+  "{0} can change the server or act on other members. A stranger with an invite link gets it too.": [
+    "{0} يستطيع تغيير السيرفر أو التصرّف بحق الأعضاء الآخرين. وسيحصل عليه أي غريب معه رابط دعوة.",
+    "{0} kann den Server verändern oder gegen andere Mitglieder vorgehen. Auch Fremde mit einem Einladungslink bekommen das."
   ]
 }

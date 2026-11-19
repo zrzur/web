@@ -7,6 +7,7 @@ import { useState } from "@revolt/state";
 import { Column, SettingsRow, SettingsSection, Toggle } from "@revolt/ui";
 import { Icon } from "@revolt/ui/icons/Icon";
 
+import EventNotices from "./EventNotices";
 import Sounds from "./Sounds";
 
 /**
@@ -71,6 +72,8 @@ export default function Notifications(props: { isDesktop: boolean }) {
           </Show>
         </SettingsSection>
       </Show>
+
+      <EventNotices />
 
       <Sounds />
     </Column>
