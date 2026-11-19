@@ -262,8 +262,8 @@
     },
     {
       "path": "CHANGELOG.md",
-      "sha256": "e24d11d956a02b71dfd21871a1c7076d48f433fa9fac8177f7e9d73d85c6b53d",
-      "bytes": 177989,
+      "sha256": "98daffc6d20b2b1b3f69ad86211f9b8e7efaa7bcdbff50499f7f831faaf7b57b",
+      "bytes": 178805,
       "category": "public-documentation"
     },
     {
@@ -1443,6 +1443,12 @@
       "category": "product-source-or-build-manifest"
     },
     {
+      "path": "packages/client/components/app/interface/settings/server/OnJoinSettings.tsx",
+      "sha256": "0c681a32eccef2d2eabef527a9c0fbb9be62011709a16f6d6b9fa76598184c9c",
+      "bytes": 15930,
+      "category": "product-source-or-build-manifest"
+    },
+    {
       "path": "packages/client/components/app/interface/settings/server/Overview.tsx",
       "sha256": "56c65e81bb1b3b52c1885de6d004159d5075a523b82c763fbc2913f2bc08a9e0",
       "bytes": 8637,
@@ -1773,6 +1779,18 @@
       "category": "product-source-or-build-manifest"
     },
     {
+      "path": "packages/client/components/app/interface/settings/server/onJoin.test.ts",
+      "sha256": "08a98ee3c1555a6a48e4d3ced3ec0adf0ce15bbb4f8e3d92a369b4022498eb1f",
+      "bytes": 4877,
+      "category": "synthetic-test-source-or-fixture"
+    },
+    {
+      "path": "packages/client/components/app/interface/settings/server/onJoin.ts",
+      "sha256": "9f47bc2c569e9a9b9f65dbf7492da08c26b63f5836a8e8e0f3506877c7f85aac",
+      "bytes": 4207,
+      "category": "product-source-or-build-manifest"
+    },
+    {
       "path": "packages/client/components/app/interface/settings/server/ownership.test.ts",
       "sha256": "5fbe2498b601de506085457a1584e3bddee4d21f6a531a9009541a1ed8cefeb8",
       "bytes": 811,
@@ -1792,8 +1810,8 @@
     },
     {
       "path": "packages/client/components/app/interface/settings/server/pages.tsx",
-      "sha256": "deb064ac0fafa1b3709c28f0d31154a633727aa074f0a66afdacde76f8d5fe14",
-      "bytes": 12673,
+      "sha256": "e9ff72b48c9057df5f9ff8e89714a23d26f382c153e0bde58c1f677e477e273b",
+      "bytes": 13166,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -1828,8 +1846,8 @@
     },
     {
       "path": "packages/client/components/app/interface/settings/server/registry.ts",
-      "sha256": "9c1e86fe5db5c7944689bfbceaab06674eef1f39f000888e7e579384182f6321",
-      "bytes": 11829,
+      "sha256": "e784eadabd332f6fd9c689ac2f587d9f0d4f542e7a9ae687c210cc3e82a9c648",
+      "bytes": 12324,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -3442,8 +3460,8 @@
     },
     {
       "path": "packages/client/components/i18n/catalogs/ar/messages.po",
-      "sha256": "3f207e64e369323186d70d185d0f6d371e178408139b9e1b60ba9898aa33087d",
-      "bytes": 1170274,
+      "sha256": "70ce4c885135c7981d39ef2a540deb400cfcdd1212308491c45714efb0911a77",
+      "bytes": 1175145,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -3586,8 +3604,8 @@
     },
     {
       "path": "packages/client/components/i18n/catalogs/de/messages.po",
-      "sha256": "36b118807d8610e5a20ed7880d9c55ca0a6b2c28a8cc7d98ab74b62bde7b7a4d",
-      "bytes": 1081967,
+      "sha256": "9ae6313f79975bb7774a22410ea20f9f231a316c460a60c43c41e84897a81b43",
+      "bytes": 1086436,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -3622,8 +3640,8 @@
     },
     {
       "path": "packages/client/components/i18n/catalogs/en/messages.po",
-      "sha256": "afc97e82d4474ee09b88af09ec0569586a046fd55bcd24e2175167ef100c9c1f",
-      "bytes": 1042479,
+      "sha256": "54034941714ed3d7f6ffa96e8564246137c44d91e1c1c5197ce193c1876f6f57",
+      "bytes": 1046778,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -6664,8 +6682,8 @@
     },
     {
       "path": "packages/client/components/ui/components/features/messaging/elements/SystemMessage.tsx",
-      "sha256": "69d5b77b778dae194f4691d004b884c4e8e548d1cde05beb2fa768e2d3ac733d",
-      "bytes": 9721,
+      "sha256": "b07c4db50648c8b7431e389ee8a0ce5dd0e622be5d69e3d5f27fbec9d0314f05",
+      "bytes": 9868,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -41388,6 +41406,12 @@
       "path": "packages/client/scripts/i18n/ui-2026111901.json",
       "sha256": "355d26003673ff9d6499117181267416bdde112731bba346ac7f5bef2daab4f7",
       "bytes": 6364,
+      "category": "product-source-or-build-manifest"
+    },
+    {
+      "path": "packages/client/scripts/i18n/ui-2026111902.json",
+      "sha256": "318f03e42980d5fc3d96825f540308d62ec8f3e12a9bf8a4b136fd9def539ed8",
+      "bytes": 4562,
       "category": "product-source-or-build-manifest"
     },
     {
