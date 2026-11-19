@@ -2,6 +2,12 @@
 
 ## Unreleased
 
+### When someone joins: roles for everyone and a welcome message (2026-11-19)
+
+* **Server settings › Joining › When someone joins.** Pick up to five roles that everyone gets the moment they become a member, whichever way they came in (an invite, Discover, an approved request). Bots get none. A role that can manage the server or moderate shows a warning and needs a second yes before Save.
+* **Welcome message:** off by default. Choose a channel and write the text; buttons add the member's mention, the server's name and a channel as a real link. A channel typed as `#name` is pointed out as plain text. A preview shows the message as a new member will see it.
+* The server's welcome is posted by Zrzur as a system line, and its mention and channel link work (text system messages are now drawn as Markdown).
+
 ### Joining from an invite link (2026-11-19)
 
 * **An invite link opens the server's own page**, for everyone, signed in or not: banner, picture, name, member count, description and who invited. Before, a person without an account got the log-in form with nothing about the server.
