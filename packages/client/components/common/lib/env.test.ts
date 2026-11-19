@@ -130,9 +130,9 @@ describe("resolveDefaultHost / resolveDefaultApiUrl", () => {
     expect(
       resolveDefaultHost({ DEV: false, VITE_HOST: "https://app.zrzur.com" }),
     ).toBe("app.zrzur.com");
-    expect(
-      resolveDefaultHost({ DEV: false, VITE_HOST: "app.zrzur.com" }),
-    ).toBe("app.zrzur.com");
+    expect(resolveDefaultHost({ DEV: false, VITE_HOST: "app.zrzur.com" })).toBe(
+      "app.zrzur.com",
+    );
   });
 
   test("dev defaults to localhost / local API when unset", () => {
@@ -146,9 +146,9 @@ describe("resolveDefaultHost / resolveDefaultApiUrl", () => {
   });
 
   test("production accepts Zrzur-owned configuration", () => {
-    expect(
-      resolveDefaultHost({ DEV: false, VITE_HOST: "app.zrzur.com" }),
-    ).toBe("app.zrzur.com");
+    expect(resolveDefaultHost({ DEV: false, VITE_HOST: "app.zrzur.com" })).toBe(
+      "app.zrzur.com",
+    );
     expect(
       resolveDefaultApiUrl({
         DEV: false,

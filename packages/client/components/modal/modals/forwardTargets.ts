@@ -1,3 +1,5 @@
+import { textMatches } from "../../common/lib/arabicFold";
+
 /**
  * Where a message can be forwarded: the conversations and channels this
  * person can write in, searched by name and sorted by recent activity. The
@@ -81,9 +83,10 @@ export function forwardChannels<T>(
     if (sourceMature && !isMatureTarget(channel)) continue;
     if (
       needle &&
-      !`${channel.displayName ?? ""}\n${channel.server?.name ?? ""}`
-        .toLocaleLowerCase()
-        .includes(needle)
+      !textMatches(
+        `${channel.displayName ?? ""}\n${channel.server?.name ?? ""}`,
+        needle,
+      )
     )
       continue;
     list.push({ item, updatedAt: channel.updatedAt.getTime() });

@@ -28918,3 +28918,7 @@ msgstr "Zrzur, right on <0>your desktop.</0>"
 #: components/i18n/errors.tsx
 msgid "This server's AutoMod blocked your message."
 msgstr "This server's AutoMod blocked your message."
+
+#: components/i18n/errors.tsx
+msgid "Usernames take letters, digits and _ . - only, with no spaces or vowel marks."
+msgstr "Usernames take letters, digits and _ . - only, with no spaces or vowel marks."

@@ -35,6 +35,31 @@ describe("forwardChannels", () => {
     expect(first[0]).toBe(recent);
     expect(again[1]).toBe(first[1]);
   });
+
+  it("finds an Arabic name however it is typed", () => {
+    type Room = { id: string; name: string };
+    const rooms: Room[] = [
+      { id: "a", name: "المكتبة العامة" },
+      { id: "b", name: "أخبار اللاعبين" },
+    ];
+    const view = (room: Room): TargetLike => ({
+      id: room.id,
+      type: "TextChannel",
+      displayName: room.name,
+      active: true,
+      isForum: false,
+      mature: false,
+      updatedAt: new Date(Date.UTC(2026, 10, 19)),
+      canSend: true,
+    });
+    const found = (typed: string) =>
+      forwardChannels(rooms, view, typed, false).map((room) => room.id);
+    expect(found("مكتبه")).toEqual(["a"]);
+    expect(found("المكتبة")).toEqual(["a"]);
+    expect(found("اخبار")).toEqual(["b"]);
+    expect(found("لاعبين")).toEqual(["b"]);
+    expect(found("مدرسة")).toEqual([]);
+  });
 });
 
 describe("chosenTarget", () => {

@@ -15,6 +15,7 @@ import { styled } from "styled-system/jsx";
 
 import { floatingUserMenus } from "@revolt/app/menus/UserContextMenu";
 import { useClient } from "@revolt/client";
+import { compareNames } from "@revolt/common/lib/arabicFold";
 import { createIsTimedOut } from "@revolt/common/lib/createIsTimedOut";
 import { statusLine } from "@revolt/common/lib/statusWrite";
 import { TextWithEmoji } from "@revolt/markdown";
@@ -158,7 +159,7 @@ export function ServerMemberSidebar(props: Props) {
     for (const role of roles) {
       const roleMembers = byRole
         .get(role.id)!
-        .sort((a, b) => a.displayName?.localeCompare(b.displayName) || 0);
+        .sort((a, b) => compareNames(a.displayName ?? "", b.displayName ?? ""));
 
       if (!roleMembers?.length) {
         continue;
@@ -240,7 +241,7 @@ export function GroupMemberSidebar(props: Props) {
       <Deferred>
         <VirtualContainer
           items={props.channel.recipients.toSorted((a, b) =>
-            a.displayName.localeCompare(b.displayName),
+            compareNames(a.displayName, b.displayName),
           )}
           scrollTarget={props.scrollTargetElement}
           itemSize={{ height: 44 }}

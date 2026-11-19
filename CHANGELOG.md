@@ -6,6 +6,14 @@
 
 * **An invite link inside a sentence opens the invite** when it is pressed in the app (also in a bot's private reply). Before, the press did nothing: the invite was only shown when the page was loaded at that address. The same fault is fixed for bot links.
 * **The person stays where they are:** the invite, a bot or settings opens over the page in front of them instead of sending them to the last page they visited.
+### Arabic first: what you type is found (2026-11-19)
+
+* **Mentions, channels and roles in the composer** are offered however the name is typed: «احمد» offers «أحمد», «مصطفي» offers «مصطفى», «كريم» offers a name written on a Persian keyboard («کریم»), and the list no longer closes when a vowel mark is typed («هُد»). Latin text keeps its matching as before.
+* **Every list filter** (friends, server members, bans, invite and group pickers, forward targets, gift and move pickers, the phone's channel and conversation filters, search filters, slash commands) compares names the same way: any form of alef, ta marbuta or ha, alef maqsura or ya, with or without vowel marks and tatweel, Arabic-Indic or Latin digits, with or without «ال». One helper: `components/common/lib/arabicFold.ts`. Nothing stored changes.
+* **Names sort by the app's language**, not the browser's, and numbers in names count as numbers («قناة 2» before «قناة 10»).
+* **A link that ends in Arabic** is drawn in one piece, left to right, inside an Arabic sentence.
+* **Initials of an Arabic name** no longer join into a word: «مكتبة الأصدقاء» shows «م أ» (the article «ال» is skipped), not «ما».
+* **A refused username says what a username may hold** (letters, digits, `_ . -`; no spaces, no vowel marks).
 
 ### Zrzur without a connection (2026-11-18)
 

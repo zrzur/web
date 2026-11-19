@@ -25,6 +25,7 @@ import { Icon } from "@revolt/ui/icons/Icon";
 
 import { Modals } from "../types";
 
+import { compareNames, textMatches } from "@revolt/common/lib/arabicFold";
 import {
   askedGroups,
   askedPermissions,
@@ -82,7 +83,6 @@ export function AddBotModal(props: DialogProps & Modals & { type: "add_bot" }) {
     }));
 
   const [filter, setFilter] = createSignal("");
-  const filterLowercase = createMemo(() => filter().toLowerCase());
 
   const places = createMemo(() => {
     const instance = client();
@@ -95,8 +95,8 @@ export function AddBotModal(props: DialogProps & Modals & { type: "add_bot" }) {
         .filter((channel) => channel.type === "Group")
         .filter((channel) => !channel.recipientIds.has(props.invite.id)),
     ]
-      .filter((place) => place.name.toLowerCase().includes(filterLowercase()))
-      .toSorted((a, b) => a.name.localeCompare(b.name))
+      .filter((place) => textMatches(place.name, filter()))
+      .toSorted((a, b) => compareNames(a.name, b.name))
       .map((item) => ({ item, value: item.id }));
   });
 

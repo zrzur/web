@@ -20,6 +20,7 @@ import { OfficialLabel } from "@revolt/ui/components/features/profiles/OfficialL
 import { nameStyle } from "@revolt/ui/components/features/profiles/userStyle";
 import { Icon } from "@revolt/ui/icons/Icon";
 
+import { textMatches } from "@revolt/common/lib/arabicFold";
 import { SidebarBase } from "./common";
 
 interface Props {
@@ -46,14 +47,12 @@ export function HomeSidebarPhone(props: Props) {
   /** type to narrow the list */
   const [query, setQuery] = createSignal("");
   const conversations = createMemo(() => {
-    const q = query().trim().toLocaleLowerCase();
+    const q = query().trim();
     if (!q) return props.conversations();
     return props
       .conversations()
       .filter((channel) =>
-        (channel.recipient?.displayName ?? channel.name ?? "")
-          .toLocaleLowerCase()
-          .includes(q),
+        textMatches(channel.recipient?.displayName ?? channel.name ?? "", q),
       );
   });
 

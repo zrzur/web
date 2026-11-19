@@ -15,6 +15,7 @@ import {
 } from "@revolt/ui";
 import { Icon } from "@revolt/ui/icons/Icon";
 
+import { anyTextMatches } from "@revolt/common/lib/arabicFold";
 import { ConfirmDialog } from "../ConfirmDialog";
 
 /**
@@ -43,12 +44,10 @@ export function ListServerBans(props: { server: Server }) {
 
   // one search over name and reason
   const data = createMemo(() => {
-    const q = filter().trim().toLowerCase();
+    const q = filter().trim();
     if (!query.data || !q) return query.data;
-    return query.data.filter(
-      (entry) =>
-        (entry.user?.username ?? "").toLowerCase().includes(q) ||
-        (entry.reason ?? "").toLowerCase().includes(q),
+    return query.data.filter((entry) =>
+      anyTextMatches([entry.user?.username, entry.reason], q),
     );
   });
 

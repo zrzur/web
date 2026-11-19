@@ -21,6 +21,7 @@ import { Icon } from "@revolt/ui/icons/Icon";
 import { useModals } from "..";
 import { Modals } from "../types";
 
+import { anyTextMatches, compareNames } from "@revolt/common/lib/arabicFold";
 import { getInviteLink } from "./inviteLink";
 import {
   DEFAULT_EXPIRY,
@@ -97,16 +98,14 @@ export function CreateInviteModal(
   const place = () => props.channel.server?.name ?? props.channel.name ?? "";
 
   const friends = createMemo(() => {
-    const needle = query().trim().toLowerCase();
+    const needle = query().trim();
     return client()
       .users.filter((user) => user.relationship === "Friend")
       .filter(
         (user) =>
-          !needle ||
-          user.username.toLowerCase().includes(needle) ||
-          user.displayName.toLowerCase().includes(needle),
+          !needle || anyTextMatches([user.username, user.displayName], needle),
       )
-      .sort((a, b) => a.displayName.localeCompare(b.displayName))
+      .sort((a, b) => compareNames(a.displayName, b.displayName))
       .slice(0, 50);
   });
 

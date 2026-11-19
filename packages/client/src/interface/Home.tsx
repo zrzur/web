@@ -18,6 +18,7 @@ import {
 } from "@revolt/ui/components/features/profiles/userStyle";
 import { Icon, IconName } from "@revolt/ui/icons/Icon";
 
+import { compareNames } from "@revolt/common/lib/arabicFold";
 import { HeaderIcon } from "./common/CommonHeader";
 import { useGreeting } from "./home/greeting";
 
@@ -65,7 +66,7 @@ export function HomePage() {
   const onlineFriends = createMemo(() =>
     client()
       .users.filter((u) => u.relationship === "Friend" && u.online)
-      .sort((a, b) => a.displayName.localeCompare(b.displayName))
+      .sort((a, b) => compareNames(a.displayName, b.displayName))
       .slice(0, 12),
   );
 

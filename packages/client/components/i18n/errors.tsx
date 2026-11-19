@@ -170,6 +170,10 @@ export function useError() {
       ? (problems[0] as ValidationProblem | undefined)
       : undefined;
     if (!first || typeof first.field !== "string") return undefined;
+    // a refused username says what a username may hold: «باسل الخطيب» (a
+    // space) and «بَاسِل» (vowel marks) were refused with "wrong format" only
+    if (first.field === "username" && first.rule === "format")
+      return t`Usernames take letters, digits and _ . - only, with no spaces or vowel marks.`;
     const rule = fieldRule(first);
     if (!rule) return undefined;
     const name = fieldName(first.field);
@@ -292,7 +296,8 @@ export function useError() {
         const { rule } = err as unknown as { rule?: string };
         // a rule may have no name: then the sentence ends, with no colon
         // left hanging (owner's screenshot, 2026-11-18)
-        if (!rule?.trim()) return t`This server's AutoMod blocked your message.`;
+        if (!rule?.trim())
+          return t`This server's AutoMod blocked your message.`;
         return t`This server's AutoMod blocked your message: ${rule}`;
       }
       if ((err.type as string) === "RulesNotAccepted") {
