@@ -29054,3 +29054,109 @@ msgstr "Your email is confirmed once you choose a password. You'll use it to log
 #: components/auth/src/flows/Form.tsx
 msgid "Your name"
 msgstr "Your name"
+
+#. placeholder {0}: powerful() .map((role) => role.name) .join(", ")
+#: components/app/interface/settings/server/OnJoinSettings.tsx
+msgid "{0} can change the server or act on other members. A stranger with an invite link gets it too."
+msgstr "{0} can change the server or act on other members. A stranger with an invite link gets it too."
+
+#. placeholder {0}: dead()[0]
+#: components/app/interface/settings/server/OnJoinSettings.tsx
+msgid "#{0} typed like this is plain text, not a link. Use \"Add a channel link\" so people can tap it."
+msgstr "#{0} typed like this is plain text, not a link. Use \"Add a channel link\" so people can tap it."
+
+#: components/app/interface/settings/server/OnJoinSettings.tsx
+msgid "Add a channel link"
+msgstr "Add a channel link"
+
+#: components/app/interface/settings/server/OnJoinSettings.tsx
+msgid "Add to the message"
+msgstr "Add to the message"
+
+#: components/app/interface/settings/server/OnJoinSettings.tsx
+msgid "As a new member sees it"
+msgstr "As a new member sees it"
+
+#: components/app/interface/settings/server/OnJoinSettings.tsx
+msgid "Can manage or moderate"
+msgstr "Can manage or moderate"
+
+#: components/app/interface/settings/server/OnJoinSettings.tsx
+msgid "Choose a channel"
+msgstr "Choose a channel"
+
+#: components/app/interface/settings/server/OnJoinSettings.tsx
+msgid "Choose a channel for the message."
+msgstr "Choose a channel for the message."
+
+#: components/app/interface/settings/server/OnJoinSettings.tsx
+msgid "Choosing these roles needs the Manage Roles permission."
+msgstr "Choosing these roles needs the Manage Roles permission."
+
+#: components/app/interface/settings/server/OnJoinSettings.tsx
+msgid "Discard"
+msgstr "Discard"
+
+#: components/app/interface/settings/server/OnJoinSettings.tsx
+msgid "Everyone who joins would be able to manage or moderate"
+msgstr "Everyone who joins would be able to manage or moderate"
+
+#: components/app/interface/settings/server/OnJoinSettings.tsx
+msgid "Give it to everyone anyway"
+msgstr "Give it to everyone anyway"
+
+#: components/app/interface/settings/server/OnJoinSettings.tsx
+msgid "Given the moment someone becomes a member, whichever way they came in. Bots get none. Up to {MAX_ROLES} roles."
+msgstr "Given the moment someone becomes a member, whichever way they came in. Bots get none. Up to {MAX_ROLES} roles."
+
+#: components/app/interface/settings/server/OnJoinSettings.tsx
+msgid "Off. Nothing is posted when someone joins."
+msgstr "Off. Nothing is posted when someone joins."
+
+#: components/app/interface/settings/server/OnJoinSettings.tsx
+msgid "On. When many people join at once, the first ten of each minute are welcomed."
+msgstr "On. When many people join at once, the first ten of each minute are welcomed."
+
+#: components/app/interface/settings/server/OnJoinSettings.tsx
+msgid "Post a welcome message"
+msgstr "Post a welcome message"
+
+#: components/app/interface/settings/server/OnJoinSettings.tsx
+msgid "Posted by Zrzur in a channel you pick when someone joins. Nobody is notified."
+msgstr "Posted by Zrzur in a channel you pick when someone joins. Nobody is notified."
+
+#: components/app/interface/settings/server/pages.tsx
+msgid "Roles everyone gets, and a welcome message."
+msgstr "Roles everyone gets, and a welcome message."
+
+#: components/app/interface/settings/server/OnJoinSettings.tsx
+msgid "Roles for everyone who joins"
+msgstr "Roles for everyone who joins"
+
+#: components/app/interface/settings/server/OnJoinSettings.tsx
+msgid "The member"
+msgstr "The member"
+
+#: components/app/interface/settings/server/OnJoinSettings.tsx
+msgid "The server's name"
+msgstr "The server's name"
+
+#: components/app/interface/settings/server/OnJoinSettings.tsx
+msgid "This server has no roles yet. Make one in Roles first."
+msgstr "This server has no roles yet. Make one in Roles first."
+
+#: components/app/interface/settings/server/OnJoinSettings.tsx
+msgid "Welcome {MEMBER} to {SERVER}!"
+msgstr "Welcome {MEMBER} to {SERVER}!"
+
+#: components/app/interface/settings/server/OnJoinSettings.tsx
+msgid "Welcome message"
+msgstr "Welcome message"
+
+#: components/app/interface/settings/server/pages.tsx
+msgid "When someone joins"
+msgstr "When someone joins"
+
+#: components/app/interface/settings/server/OnJoinSettings.tsx
+msgid "Where the message appears."
+msgstr "Where the message appears."

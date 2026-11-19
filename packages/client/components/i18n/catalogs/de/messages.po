@@ -29051,3 +29051,109 @@ msgstr "Deine E-Mail-Adresse ist bestätigt, sobald du ein Passwort wählst. Dam
 #: components/auth/src/flows/Form.tsx
 msgid "Your name"
 msgstr "Dein Name"
+
+#. placeholder {0}: powerful() .map((role) => role.name) .join(", ")
+#: components/app/interface/settings/server/OnJoinSettings.tsx
+msgid "{0} can change the server or act on other members. A stranger with an invite link gets it too."
+msgstr "{0} kann den Server verändern oder gegen andere Mitglieder vorgehen. Auch Fremde mit einem Einladungslink bekommen das."
+
+#. placeholder {0}: dead()[0]
+#: components/app/interface/settings/server/OnJoinSettings.tsx
+msgid "#{0} typed like this is plain text, not a link. Use \"Add a channel link\" so people can tap it."
+msgstr "#{0} so geschrieben ist nur Text, kein Link. Nutze „Kanallink hinzufügen“, damit man darauf tippen kann."
+
+#: components/app/interface/settings/server/OnJoinSettings.tsx
+msgid "Add a channel link"
+msgstr "Kanallink hinzufügen"
+
+#: components/app/interface/settings/server/OnJoinSettings.tsx
+msgid "Add to the message"
+msgstr "Zur Nachricht hinzufügen"
+
+#: components/app/interface/settings/server/OnJoinSettings.tsx
+msgid "As a new member sees it"
+msgstr "So sieht es ein neues Mitglied"
+
+#: components/app/interface/settings/server/OnJoinSettings.tsx
+msgid "Can manage or moderate"
+msgstr "Kann verwalten oder moderieren"
+
+#: components/app/interface/settings/server/OnJoinSettings.tsx
+msgid "Choose a channel"
+msgstr "Kanal wählen"
+
+#: components/app/interface/settings/server/OnJoinSettings.tsx
+msgid "Choose a channel for the message."
+msgstr "Wähle einen Kanal für die Nachricht."
+
+#: components/app/interface/settings/server/OnJoinSettings.tsx
+msgid "Choosing these roles needs the Manage Roles permission."
+msgstr "Für die Auswahl dieser Rollen brauchst du die Berechtigung „Rollen verwalten“."
+
+#: components/app/interface/settings/server/OnJoinSettings.tsx
+msgid "Discard"
+msgstr "Verwerfen"
+
+#: components/app/interface/settings/server/OnJoinSettings.tsx
+msgid "Everyone who joins would be able to manage or moderate"
+msgstr "Alle, die beitreten, könnten verwalten oder moderieren"
+
+#: components/app/interface/settings/server/OnJoinSettings.tsx
+msgid "Give it to everyone anyway"
+msgstr "Trotzdem allen geben"
+
+#: components/app/interface/settings/server/OnJoinSettings.tsx
+msgid "Given the moment someone becomes a member, whichever way they came in. Bots get none. Up to {MAX_ROLES} roles."
+msgstr "Vergeben in dem Moment, in dem jemand Mitglied wird, egal auf welchem Weg. Bots bekommen keine. Bis zu {MAX_ROLES} Rollen."
+
+#: components/app/interface/settings/server/OnJoinSettings.tsx
+msgid "Off. Nothing is posted when someone joins."
+msgstr "Aus. Beim Beitritt wird nichts gepostet."
+
+#: components/app/interface/settings/server/OnJoinSettings.tsx
+msgid "On. When many people join at once, the first ten of each minute are welcomed."
+msgstr "An. Treten viele auf einmal bei, werden die ersten zehn jeder Minute begrüßt."
+
+#: components/app/interface/settings/server/OnJoinSettings.tsx
+msgid "Post a welcome message"
+msgstr "Willkommensnachricht posten"
+
+#: components/app/interface/settings/server/OnJoinSettings.tsx
+msgid "Posted by Zrzur in a channel you pick when someone joins. Nobody is notified."
+msgstr "Von Zrzur in einem Kanal deiner Wahl gepostet, wenn jemand beitritt. Niemand wird benachrichtigt."
+
+#: components/app/interface/settings/server/pages.tsx
+msgid "Roles everyone gets, and a welcome message."
+msgstr "Rollen für alle und eine Willkommensnachricht."
+
+#: components/app/interface/settings/server/OnJoinSettings.tsx
+msgid "Roles for everyone who joins"
+msgstr "Rollen für alle, die beitreten"
+
+#: components/app/interface/settings/server/OnJoinSettings.tsx
+msgid "The member"
+msgstr "Das Mitglied"
+
+#: components/app/interface/settings/server/OnJoinSettings.tsx
+msgid "The server's name"
+msgstr "Name des Servers"
+
+#: components/app/interface/settings/server/OnJoinSettings.tsx
+msgid "This server has no roles yet. Make one in Roles first."
+msgstr "Dieser Server hat noch keine Rollen. Lege zuerst unter „Rollen“ eine an."
+
+#: components/app/interface/settings/server/OnJoinSettings.tsx
+msgid "Welcome {MEMBER} to {SERVER}!"
+msgstr "Willkommen {MEMBER} bei {SERVER}!"
+
+#: components/app/interface/settings/server/OnJoinSettings.tsx
+msgid "Welcome message"
+msgstr "Willkommensnachricht"
+
+#: components/app/interface/settings/server/pages.tsx
+msgid "When someone joins"
+msgstr "Wenn jemand beitritt"
+
+#: components/app/interface/settings/server/OnJoinSettings.tsx
+msgid "Where the message appears."
+msgstr "Wo die Nachricht erscheint."

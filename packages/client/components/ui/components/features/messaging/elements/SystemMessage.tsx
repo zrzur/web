@@ -22,6 +22,7 @@ import { styled } from "styled-system/jsx";
 import { useTime } from "@revolt/i18n";
 import { useInstance } from "@revolt/instance";
 import { time } from "@revolt/markdown/elements";
+import { Markdown } from "@revolt/markdown";
 import { RenderAnchor } from "@revolt/markdown/plugins/anchors";
 import { UserMention } from "@revolt/markdown/plugins/mentions";
 import { useSmartParams } from "@revolt/routing";
@@ -267,7 +268,8 @@ export function SystemMessage(props: Props) {
           </Show>
         </Match>
         <Match when={sm.type === "text"}>
-          {(sm as TextSystemMessage).content}
+          {/* a server's welcome message: its mention and channel links work */}
+          <Markdown content={(sm as TextSystemMessage).content} />
         </Match>
       </Switch>
     </Base>

@@ -40,6 +40,8 @@ export const ALIASES: Record<string, string> = {
   emergency: "safety#emergency",
   safety: "safety",
   verification: "joining#verification",
+  autorole: "joining#on-join",
+  welcome: "joining#on-join",
   filters: "safety#filters",
   audit: "log",
   stats: "insights",
@@ -190,6 +192,15 @@ export const SECTIONS: SectionInfo[] = [
       en: "verification level email age account new members",
       ar: "التحقق مستوى البريد الإلكتروني عمر الحساب أعضاء جدد",
       de: "überprüfung verifizierung stufe e-mail kontoalter neue mitglieder",
+    },
+  },
+  {
+    id: "on-join",
+    page: "joining",
+    words: {
+      en: "when someone joins automatic roles auto role everyone welcome message greeting new members",
+      ar: "عند الانضمام أدوار تلقائية دور تلقائي الجميع رسالة الترحيب تحية أعضاء جدد",
+      de: "beim beitritt automatische rollen auto rolle alle willkommensnachricht begrüßung neue mitglieder",
     },
   },
   {

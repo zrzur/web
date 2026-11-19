@@ -1,0 +1,106 @@
+{
+  "{0} can change the server or act on other members. A stranger with an invite link gets it too.": [
+    "{0} يستطيع تغيير السيرفر أو التصرّف بحق الأعضاء الآخرين. وسيحصل عليه أي غريب معه رابط دعوة.",
+    "{0} kann den Server verändern oder gegen andere Mitglieder vorgehen. Auch Fremde mit einem Einladungslink bekommen das."
+  ],
+  "#{0} typed like this is plain text, not a link. Use \"Add a channel link\" so people can tap it.": [
+    "#{0} بهذه الكتابة نص عادي وليس رابطًا. استخدم «أضف رابط قناة» ليتمكن الناس من الضغط عليه.",
+    "#{0} so geschrieben ist nur Text, kein Link. Nutze „Kanallink hinzufügen“, damit man darauf tippen kann."
+  ],
+  "Add a channel link": [
+    "أضف رابط قناة",
+    "Kanallink hinzufügen"
+  ],
+  "Add to the message": [
+    "أضف إلى الرسالة",
+    "Zur Nachricht hinzufügen"
+  ],
+  "As a new member sees it": [
+    "كما يراها العضو الجديد",
+    "So sieht es ein neues Mitglied"
+  ],
+  "Can manage or moderate": [
+    "يستطيع الإدارة أو الإشراف",
+    "Kann verwalten oder moderieren"
+  ],
+  "Choose a channel": [
+    "اختر قناة",
+    "Kanal wählen"
+  ],
+  "Choose a channel for the message.": [
+    "اختر قناة للرسالة.",
+    "Wähle einen Kanal für die Nachricht."
+  ],
+  "Choosing these roles needs the Manage Roles permission.": [
+    "اختيار هذه الأدوار يحتاج إلى صلاحية إدارة الأدوار.",
+    "Für die Auswahl dieser Rollen brauchst du die Berechtigung „Rollen verwalten“."
+  ],
+  "Discard": [
+    "تجاهل التغييرات",
+    "Verwerfen"
+  ],
+  "Everyone who joins would be able to manage or moderate": [
+    "كل من ينضم سيتمكن من الإدارة أو الإشراف",
+    "Alle, die beitreten, könnten verwalten oder moderieren"
+  ],
+  "Give it to everyone anyway": [
+    "امنحه للجميع على أي حال",
+    "Trotzdem allen geben"
+  ],
+  "Given the moment someone becomes a member, whichever way they came in. Bots get none. Up to {MAX_ROLES} roles.": [
+    "تُمنح لحظة يصبح الشخص عضوًا، أيًّا كانت طريقة دخوله. البوتات لا تحصل على شيء. حتى {MAX_ROLES} أدوار.",
+    "Vergeben in dem Moment, in dem jemand Mitglied wird, egal auf welchem Weg. Bots bekommen keine. Bis zu {MAX_ROLES} Rollen."
+  ],
+  "Off. Nothing is posted when someone joins.": [
+    "متوقفة. لا يُنشر شيء عند انضمام أحد.",
+    "Aus. Beim Beitritt wird nichts gepostet."
+  ],
+  "On. When many people join at once, the first ten of each minute are welcomed.": [
+    "مفعّلة. إذا انضم كثيرون دفعة واحدة، يُرحَّب بأول عشرة في كل دقيقة.",
+    "An. Treten viele auf einmal bei, werden die ersten zehn jeder Minute begrüßt."
+  ],
+  "Post a welcome message": [
+    "انشر رسالة ترحيب",
+    "Willkommensnachricht posten"
+  ],
+  "Posted by Zrzur in a channel you pick when someone joins. Nobody is notified.": [
+    "ينشرها زرزور في قناة تختارها عند انضمام أحد. لا يصل إشعار لأحد.",
+    "Von Zrzur in einem Kanal deiner Wahl gepostet, wenn jemand beitritt. Niemand wird benachrichtigt."
+  ],
+  "Roles everyone gets, and a welcome message.": [
+    "أدوار يحصل عليها الجميع، ورسالة ترحيب.",
+    "Rollen für alle und eine Willkommensnachricht."
+  ],
+  "Roles for everyone who joins": [
+    "أدوار لكل من ينضم",
+    "Rollen für alle, die beitreten"
+  ],
+  "The member": [
+    "العضو",
+    "Das Mitglied"
+  ],
+  "The server's name": [
+    "اسم السيرفر",
+    "Name des Servers"
+  ],
+  "This server has no roles yet. Make one in Roles first.": [
+    "لا توجد أدوار في هذا السيرفر بعد. أنشئ دورًا في «الأدوار» أولًا.",
+    "Dieser Server hat noch keine Rollen. Lege zuerst unter „Rollen“ eine an."
+  ],
+  "Welcome {MEMBER} to {SERVER}!": [
+    "أهلًا {MEMBER} في {SERVER}!",
+    "Willkommen {MEMBER} bei {SERVER}!"
+  ],
+  "Welcome message": [
+    "رسالة الترحيب",
+    "Willkommensnachricht"
+  ],
+  "When someone joins": [
+    "عند انضمام أحد",
+    "Wenn jemand beitritt"
+  ],
+  "Where the message appears.": [
+    "حيث تظهر الرسالة.",
+    "Wo die Nachricht erscheint."
+  ]
+}
