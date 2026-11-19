@@ -2,6 +2,16 @@
 
 ## Unreleased
 
+### Joining from an invite link (2026-11-19)
+
+* **An invite link opens the server's own page**, for everyone, signed in or not: banner, picture, name, member count, description and who invited. Before, a person without an account got the log-in form with nothing about the server.
+* **One button joins.** Signed in, it lands in the invite's channel with the message box on screen (phones showed the channel list first). A server that asks before letting people in takes a request and says so.
+* **Without an account, the button opens three fields in place** (name, email, month and year of birth) when the server offers the short join path (`features.join_by_link`). The person is in the conversation at once; the confirmation email also sets the password. A strip across the app says by when to confirm. Where the server does not offer it, the usual sign-up opens and the person comes back to the invite afterwards.
+* **The invite is remembered across logging in**, on the device, for a day. It was lost between the username and age steps.
+* **A link that has ended says so**, as does one of a server that paused invites, with a way on. A lost connection is not blamed on the link.
+* **Link previews:** `packages/public-pages` gains `SITE=invite`, which fills the head of `/invite/{code}` with the server's name, picture, description and a rounded member count for other apps' previews. Never the inviter, never a message. Invite pages carry `noindex`.
+* The page of a server's custom link does not say "invited by".
+
 ### Zrzur without a connection (2026-11-18)
 
 * **The app opens offline** after one visit with a connection: the worker keeps the page of its build and uses it only when the network gives no answer (the network is always asked first, so a release is never served from the device while the server can be reached).
