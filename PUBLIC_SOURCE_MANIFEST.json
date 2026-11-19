@@ -5704,8 +5704,8 @@
     },
     {
       "path": "packages/client/components/rtc/desktopPushToTalk.test.ts",
-      "sha256": "db18cc839905af4ba840b9494b0ceea9c24503ad81a3497b832a9934e3d7466a",
-      "bytes": 3691,
+      "sha256": "ab8c3eef850c61aac03902b6ad77bfbb7b3a02e8f7c33800861946923085229b",
+      "bytes": 3765,
       "category": "synthetic-test-source-or-fixture"
     },
     {
@@ -42310,8 +42310,8 @@
     },
     {
       "path": "packages/client/scripts/precacheShell.test.ts",
-      "sha256": "3b182344c2145ebea1a711a8cb429010da3a36429f62947122c305619debdef7",
-      "bytes": 3804,
+      "sha256": "d69ceee3eab65b48f6d8db4591381eba9c03968cba736f09885649385bd8b87f",
+      "bytes": 3870,
       "category": "synthetic-test-source-or-fixture"
     },
     {
@@ -42454,7 +42454,7 @@
     },
     {
       "path": "packages/client/src/app.tsx",
-      "sha256": "33b807af9887b6ecde9300eed5040848e984c89676b43e27dba7891e6b483e33",
+      "sha256": "de4c2fd4db7fbbd8fdb637f2f83090866d8edd1e6e9510d2ebf13131983857e9",
       "bytes": 5007,
       "category": "product-source-or-build-manifest"
     },
@@ -43834,8 +43834,8 @@
     },
     {
       "path": "packages/client/src/interface/events/EventCalendar.tsx",
-      "sha256": "e4a472aaef721bf08b82901be305351f6d5f8ea281398034c489af9909b33f8e",
-      "bytes": 16897,
+      "sha256": "1164ddaf75e426ab2e981a35b4bdbb841af257176380913d7f0441da3385fb81",
+      "bytes": 16940,
       "category": "product-source-or-build-manifest"
     },
     {
