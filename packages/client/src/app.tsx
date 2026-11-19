@@ -73,6 +73,8 @@ const ServiceReturn = lazy(() =>
     default: m.ServiceReturn,
   })),
 );
+// the page behind an invite link: open to everyone, its own small chunk
+const InvitePage = lazy(() => import("@revolt/auth/src/invite/InvitePage"));
 const OAuthPages = lazy(() =>
   import("./interface/OAuth").then((m) => ({ default: m.OAuthPages })),
 );
@@ -80,6 +82,8 @@ const OAuthPages = lazy(() =>
 const appRoutes = () => (
   <Route component={MountContext}>
     {loginRoutes()}
+    {/* an invite link shows the server before any form, signed in or not */}
+    <Route path="/invite/:code" component={InvitePage} />
     {/* the docs never wait for the gateway, signed in or not */}
     <Route path="/developers/docs/*" component={DevelopersDocs} />
     <Route path="/" component={Interface}>
@@ -95,7 +99,7 @@ const appRoutes = () => (
       />
       <Route path="/designs/*" component={Designs} />
       <Route path="/settings" component={SettingsRedirect} />
-      <Route path="/invite/:code" component={InviteRedirect} />
+      <Route path="/invite-dialog/:code" component={InviteRedirect} />
       <Route path="/bot/:code" component={BotRedirect} />
       {/* the short form, for a server whose short-link origin is the app itself */}
       <Route path="/b/:code" component={BotRedirect} />

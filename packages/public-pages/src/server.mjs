@@ -22,6 +22,13 @@ import {
   routeOf,
   sitePreloads,
 } from "./head.mjs";
+import {
+  inviteCard,
+  inviteCode,
+  inviteImageCode,
+  inviteMeta,
+  roughMembers,
+} from "./invite.mjs";
 import { designSvg, renderPng, serverSvg, siteSvg } from "./og.mjs";
 
 /**
@@ -33,7 +40,8 @@ import { designSvg, renderPng, serverSvg, siteSvg } from "./og.mjs";
  * running JavaScript. Also /sitemap.xml, /robots.txt and the preview
  * images under /og/.
  *
- * SITE           discover | designs | docs
+ * SITE           discover | designs | docs | invite (the app's own host:
+ *                only `/invite/{code}` and its preview image are sent here)
  * PUBLIC_ORIGIN  https://discover.zrzur.com (docs: https://developers.zrzur.com)
  * API_URL        https://api.zrzur.com
  * MEDIA_URL      https://cdn.zrzur.com (icons, banners, design art)
@@ -49,8 +57,10 @@ import { designSvg, renderPng, serverSvg, siteSvg } from "./og.mjs";
  */
 
 const env = process.env;
-const SITE = ["designs", "docs"].includes(env.SITE) ? env.SITE : "discover";
-const HOST = SITE === "docs" ? "developers" : SITE;
+const SITE = ["designs", "docs", "invite"].includes(env.SITE)
+  ? env.SITE
+  : "discover";
+const HOST = SITE === "docs" ? "developers" : SITE === "invite" ? "app" : SITE;
 const ORIGIN = (env.PUBLIC_ORIGIN ?? `https://${HOST}.zrzur.com`).replace(
   /\/+$/,
   "",
@@ -123,7 +133,12 @@ export function contentSecurityPolicy() {
 const SECURITY = {
   "X-Content-Type-Options": "nosniff",
   "Referrer-Policy": "strict-origin-when-cross-origin",
-  "Content-Security-Policy": contentSecurityPolicy(),
+  // An invite page is the whole app: the person joins and carries on in the
+  // same document (voice, GIFs, link previews), so the public sites' policy
+  // would break it. The app's host keeps the policy it has.
+  ...(SITE === "invite"
+    ? {}
+    : { "Content-Security-Policy": contentSecurityPolicy() }),
   "Permissions-Policy": "interest-cohort=()",
 };
 
@@ -247,6 +262,10 @@ const OG_TEXT = {
     title: "تصاميم زرزور · Zrzur Designs",
     line: "Style your profile — زيّن ملفك",
   },
+  invite: {
+    title: "زرزور · Zrzur",
+    line: "Everything in one app — كل شيء في تطبيق واحد",
+  },
   docs: {
     title: "مطوّرو زرزور · Zrzur Developers",
     line: "Build bots for Zrzur — ابنِ بوتات لزرزور",
@@ -315,7 +334,38 @@ export function countsLine(card) {
   return words.filter(Boolean).join(" · ");
 }
 
+/** What `GET /invites/{code}` answers, kept a minute (null: no such link) */
+const inviteData = (code) =>
+  cached(`invite:${code}`, 60_000, () =>
+    api(`/invites/${encodeURIComponent(code)}`),
+  );
+
+/** The preview image of an invite: the server's banner, picture and name */
+async function inviteImage(code) {
+  const card = inviteCard(await inviteData(code).catch(() => null));
+  if (!card) return null;
+  return cached(
+    `og:invite:${card._id}:${card.name}:${card.icon?._id}:${card.banner?._id}`,
+    600_000,
+    async () =>
+      renderPng(
+        serverSvg(
+          card,
+          { counts: roughMembers(card.member_count), brand: "Zrzur" },
+          {
+            icon: await dataUrl(fileUrl(card.icon)),
+            banner: await dataUrl(fileUrl(card.banner)),
+          },
+        ),
+      ),
+  );
+}
+
 async function ogImage(path) {
+  if (SITE === "invite") {
+    const code = inviteImageCode(path);
+    if (code) return inviteImage(code);
+  }
   const [, , kind, file] = path.split("/");
   const slug = decodeURIComponent((file ?? "").replace(/\.png$/, ""));
   if (kind === "site.png")
@@ -431,7 +481,10 @@ export async function handle(req, res) {
         res,
         200,
         TYPES[".txt"],
-        `User-agent: *\nAllow: /\nDisallow: /login\nSitemap: ${ORIGIN}/sitemap.xml\n`,
+        SITE === "invite"
+          ? // nothing on the app's host is for search engines
+            "User-agent: *\nDisallow: /\n"
+          : `User-agent: *\nAllow: /\nDisallow: /login\nSitemap: ${ORIGIN}/sitemap.xml\n`,
       );
     if (SITE === "docs" && path === "/sitemap.xml")
       return send(res, 200, TYPES[".xml"], docsSitemap(docs(), ORIGIN), {
@@ -445,6 +498,8 @@ export async function handle(req, res) {
           "Cache-Control": "public, max-age=3600",
         });
     }
+    if (SITE === "invite" && path === "/sitemap.xml")
+      return send(res, 404, TYPES[".txt"], "Not found");
     if (path === "/sitemap.xml")
       return send(
         res,
@@ -484,6 +539,28 @@ export async function handle(req, res) {
     }
 
     if (SITE === "docs") return docsPage(res, url);
+
+    if (SITE === "invite") {
+      const code = inviteCode(path);
+      // any other path is the app as it is
+      if (!code)
+        return send(res, 200, TYPES[".html"], index(), {
+          "Cache-Control": "no-cache",
+        });
+      // an API hiccup is not a dead link: the page is served and says so itself
+      const data = await inviteData(code).catch(() => undefined);
+      const meta = inviteMeta({
+        origin: ORIGIN,
+        code,
+        lang: url.searchParams.get("hl") ?? undefined,
+        data: data ?? null,
+      });
+      return send(res, 200, TYPES[".html"], injectHead(index(), meta), {
+        "Cache-Control": "public, max-age=60",
+        "Content-Language": meta.lang,
+        "X-Robots-Tag": "noindex",
+      });
+    }
 
     const route = routeOf(SITE, path);
     const data = await pageData(route).catch(() => undefined);

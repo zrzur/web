@@ -25,6 +25,7 @@ import {
   FlowText,
   FlowTitle,
 } from "./Flow";
+import { takePendingInvite } from "../invite/inviteLogic";
 import { Fields, Form, SubmitButton } from "./Form";
 import { asksForCaptcha, loginCredentials } from "./loginStepUp";
 
@@ -133,6 +134,17 @@ export default function FlowLogin() {
     }
   }
 
+  /**
+   * Where to go once signed in: the invite the person came for wins over
+   * the last page (the remembered page was lost between the username and
+   * age steps, which sent people home without their invite)
+   */
+  function afterLogin() {
+    const invite = takePendingInvite();
+    const next = state.layout.popNextPath();
+    return invite ? `/invite/${invite}` : (next ?? "/app");
+  }
+
   const [confirmUnder16, setConfirmUnder16] = createSignal<string>();
   const [refused, setRefused] = createSignal(false);
 
@@ -182,7 +194,7 @@ export default function FlowLogin() {
         </FlowActions>
       </Match>
       <Match when={isLoggedIn()}>
-        <Navigate href={state.layout.popNextPath() ?? "/app"} />
+        <Navigate href={afterLogin()} />
       </Match>
       <Match when={isError() && lifecycle.permanentError === "InvalidSession"}>
         <FlowTitle

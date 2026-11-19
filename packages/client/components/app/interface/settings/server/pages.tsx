@@ -40,6 +40,7 @@ import {
 } from "./layout";
 import { ListServerMembers } from "./members/ListMembers";
 import { PageSave } from "./pageSave";
+import { OnJoinSettings } from "./OnJoinSettings";
 import { RulesScreening } from "./RulesScreening";
 import { RoleQuestions } from "./roles/RoleQuestions";
 import { ServerRoleOverview } from "./roles/ServerRoleOverview";
@@ -212,6 +213,21 @@ export function JoiningPage(props: { server: Server }) {
           description={<Trans>New members agree to the rules before they write.</Trans>}
         >
           <RulesScreening server={props.server} />
+        </Anchor>
+
+        <Anchor
+          id="on-join"
+          needs={
+            props.server.havePermission("ManageRole")
+              ? undefined
+              : missing(props.server, "ManageServer")
+          }
+          title={<Trans>When someone joins</Trans>}
+          description={
+            <Trans>Roles everyone gets, and a welcome message.</Trans>
+          }
+        >
+          <OnJoinSettings server={props.server} />
         </Anchor>
 
         <Anchor

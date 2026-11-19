@@ -4409,12 +4409,6 @@ msgstr "Cancel this time only? The next one stays scheduled."
 msgid "Cancelled"
 msgstr "Cancelled"
 
-#: src/interface/events/EventCard.tsx
-#: src/interface/events/EventsPage.tsx
-msgctxt "scheduled events"
-msgid "Cancelled"
-msgstr "Cancelled"
-
 #. placeholder {0}: date(item.current_period_end)
 #: components/app/interface/settings/user/subscriptions/Subscriptions.tsx
 msgid "Cancelled, ends on {0}"
@@ -7096,11 +7090,6 @@ msgstr "Degraded Performance"
 msgid "Delete"
 msgstr "Delete"
 
-#: src/interface/events/EventCard.tsx
-msgctxt "scheduled events"
-msgid "Delete"
-msgstr "Delete"
-
 #. placeholder {0}: props.emoji.name
 #: components/modal/modals/DeleteEmoji.tsx
 msgid "Delete :{0}:?"
@@ -7678,16 +7667,6 @@ msgstr "Disconnecting deletes everything Zrzur copied from Steam at once."
 msgid "Discover"
 msgstr "Discover"
 
-#: components/app/interface/settings/server/insights/InsightsPage.tsx
-msgctxt "server insights"
-msgid "Discover"
-msgstr "Discover"
-
-#: components/app/interface/settings/server/ServerAccess.tsx
-msgctxt "server-settings"
-msgid "Discover"
-msgstr "Discover"
-
 #: components/app/interface/safety/labels.tsx
 msgid "Discover bot listing"
 msgstr "Discover bot listing"
@@ -8071,11 +8050,6 @@ msgstr "Edelweiss Ring"
 msgid "Edit"
 msgstr "Edit"
 
-#: src/interface/events/EventCard.tsx
-msgctxt "scheduled events"
-msgid "Edit"
-msgstr "Edit"
-
 #. placeholder {0}: props.member.displayName
 #: components/modal/modals/UserProfileRoles.tsx
 msgid "Edit {0}'s roles"
@@ -8382,11 +8356,6 @@ msgstr "Enabled · not running"
 msgid "End now"
 msgstr "End now"
 
-#: src/interface/events/EventCard.tsx
-msgctxt "scheduled events"
-msgid "End now"
-msgstr "End now"
-
 #. placeholder {0}: p.label
 #: components/app/interface/settings/server/ServerEmergency.tsx
 msgid "End now: {0}"
@@ -8420,11 +8389,6 @@ msgid "Endpoints"
 msgstr "Endpoints"
 
 #: components/app/interface/settings/user/safety/ReportsAndStanding.tsx
-msgid "Ends"
-msgstr "Ends"
-
-#: components/modal/modals/ServerEventEditor.tsx
-msgctxt "scheduled events"
 msgid "Ends"
 msgstr "Ends"
 
@@ -8592,13 +8556,6 @@ msgid "events"
 msgstr "events"
 
 #: src/interface/developers/docs/DocsPortal.tsx
-msgid "Events"
-msgstr "Events"
-
-#: components/app/interface/settings/server/EventsLobbySwitches.tsx
-#: src/interface/events/EventsLink.tsx
-#: src/interface/events/EventsPage.tsx
-msgctxt "scheduled events"
 msgid "Events"
 msgstr "Events"
 
@@ -9005,11 +8962,6 @@ msgstr "Fiji"
 #: components/app/interface/settings/user/bots/CommandManager.tsx
 #: components/app/interface/settings/user/profile/studio/StudioEditor.tsx
 #: src/interface/channels/text/ChannelDetailsPhone.tsx
-msgid "File"
-msgstr "File"
-
-#: src/interface/channels/text/searchLabels.ts
-msgctxt "search filter"
 msgid "File"
 msgstr "File"
 
@@ -9582,11 +9534,6 @@ msgid "Friends: {0}"
 msgstr "Friends: {0}"
 
 #: components/modal/modals/BulkDeleteMessages.tsx
-msgid "From"
-msgstr "From"
-
-#: src/interface/channels/text/searchLabels.ts
-msgctxt "search filter"
 msgid "From"
 msgstr "From"
 
@@ -10933,11 +10880,6 @@ msgstr "Illegal under a law"
 msgid "Image"
 msgstr "Image"
 
-#: src/interface/channels/text/searchLabels.ts
-msgctxt "search filter"
-msgid "Image"
-msgstr "Image"
-
 #: components/app/interface/channels/text/interactions/MediaBlocks.tsx
 msgid "Image not available"
 msgstr "Image not available"
@@ -11586,11 +11528,6 @@ msgstr "Jasmine Ring"
 msgid "Join"
 msgstr "Join"
 
-#: src/interface/events/EventCard.tsx
-msgctxt "scheduled events"
-msgid "Join"
-msgstr "Join"
-
 #. placeholder {0}: item().name
 #: components/app/interface/discover/ServerPage.tsx
 msgid "Join {0}"
@@ -11780,11 +11717,6 @@ msgstr "Keep in mind:"
 
 #: components/app/interface/settings/server/roles/ServerRoleOverview.tsx
 #: components/app/interface/settings/user/profile/ReviewQueue.tsx
-msgid "Keep it"
-msgstr "Keep it"
-
-#: src/interface/events/EventCard.tsx
-msgctxt "scheduled events"
 msgid "Keep it"
 msgstr "Keep it"
 
@@ -12373,11 +12305,6 @@ msgstr "Lina"
 msgid "Link"
 msgstr "Link"
 
-#: src/interface/channels/text/searchLabels.ts
-msgctxt "search filter"
-msgid "Link"
-msgstr "Link"
-
 #. placeholder {0}: index + 1
 #: components/app/interface/settings/user/profile/ProfileExtras.tsx
 msgid "Link {0}"
@@ -12636,11 +12563,6 @@ msgstr "Loading…"
 #: components/modal/lib/serverTemplateText.ts
 #: src/interface/lobby/Lobby.tsx
 #: src/interface/lobby/LobbyLink.tsx
-msgid "Lobby"
-msgstr "Lobby"
-
-#: components/app/interface/settings/server/pages.tsx
-msgctxt "server-settings"
 msgid "Lobby"
 msgstr "Lobby"
 
@@ -13433,11 +13355,6 @@ msgstr "Member since {0}"
 msgid "Members"
 msgstr "Members"
 
-#: components/app/interface/settings/server/insights/InsightsPage.tsx
-msgctxt "server insights"
-msgid "Members"
-msgstr "Members"
-
 #. placeholder {0}: query.data?.length ?? 0
 #: components/app/interface/settings/server/members/ListMembers.tsx
 #~ msgid "Members — {0}"
@@ -13572,11 +13489,6 @@ msgstr "Mention specific roles"
 msgid "Mentions"
 msgstr "Mentions"
 
-#: src/interface/channels/text/searchLabels.ts
-msgctxt "search filter"
-msgid "Mentions"
-msgstr "Mentions"
-
 #: src/interface/navigation/MentionsPanel.tsx
 #: src/interface/navigation/NotificationsPhone.tsx
 msgid "Mentions couldn't load. Try again soon."
@@ -13697,11 +13609,6 @@ msgstr "Message was sent on another platform"
 #: src/interface/developers/docs/DocsPortal.tsx
 #: src/interface/navigation/channels/HomeSidebarPhone.tsx
 #: src/interface/navigation/PhoneTabs.tsx
-msgid "Messages"
-msgstr "Messages"
-
-#: components/app/interface/settings/server/insights/InsightsPage.tsx
-msgctxt "server insights"
 msgid "Messages"
 msgstr "Messages"
 
@@ -16236,11 +16143,6 @@ msgstr "Only Zrzur staff can do this."
 #: components/app/interface/settings/user/plugins/DeveloperTab.tsx
 #: components/app/interface/settings/user/plugins/PluginDetail.tsx
 #: components/modal/modals/Invite.tsx
-msgid "Open"
-msgstr "Open"
-
-#: src/interface/events/EventCard.tsx
-msgctxt "scheduled events"
 msgid "Open"
 msgstr "Open"
 
@@ -19899,11 +19801,6 @@ msgstr "Safe Mode is on: no plugin runs. Your plugins and their settings are kep
 msgid "Safety"
 msgstr "Safety"
 
-#: components/app/interface/settings/ServerSettings.tsx
-msgctxt "server-settings"
-msgid "Safety"
-msgstr "Safety"
-
 #: components/app/interface/settings/user/support/ContactSupport.tsx
 msgid "Safety and reports"
 msgstr "Safety and reports"
@@ -22013,11 +21910,6 @@ msgstr "Staff tools"
 
 #: components/modal/modals/CreateChannel.tsx
 #: components/ui/components/features/voice/stage/StagePanel.tsx
-msgid "Stage"
-msgstr "Stage"
-
-#: components/modal/modals/CreateChannel.tsx
-msgctxt "channel-type"
 msgid "Stage"
 msgstr "Stage"
 
@@ -24733,11 +24625,6 @@ msgstr "Ticket categories, one per line"
 msgid "Tickets"
 msgstr "Tickets"
 
-#: components/app/interface/settings/server/pages.tsx
-msgctxt "server-settings"
-msgid "Tickets"
-msgstr "Tickets"
-
 #: components/app/interface/settings/server/assistant/labels.ts
 msgid "Tickets and direct messages in one queue."
 msgstr "Tickets and direct messages in one queue."
@@ -24856,11 +24743,6 @@ msgstr "Tip: right-click (or hold) any emoji to add it to your favorites."
 
 #: components/app/interface/settings/user/badges/BugReportDialog.tsx
 #: components/modal/modals/CreateThread.tsx
-msgid "Title"
-msgstr "Title"
-
-#: components/modal/modals/ServerEventEditor.tsx
-msgctxt "scheduled events"
 msgid "Title"
 msgstr "Title"
 
@@ -26115,13 +25997,6 @@ msgstr "Venezuela"
 msgid "Verification"
 msgstr "Verification"
 
-#: components/app/interface/settings/server/pages.tsx
-#: components/app/interface/settings/server/ServerEmergency.tsx
-#: components/app/interface/settings/ServerSettings.tsx
-msgctxt "server-settings"
-msgid "Verification"
-msgstr "Verification"
-
 #: components/app/interface/settings/server/ServerSafety.tsx
 #~ msgid "Verification level"
 #~ msgstr "Verification level"
@@ -26237,11 +26112,6 @@ msgstr "Victory"
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 #: components/modal/modals/permissionTitles.ts
-msgid "Video"
-msgstr "Video"
-
-#: src/interface/channels/text/searchLabels.ts
-msgctxt "search filter"
 msgid "Video"
 msgstr "Video"
 
@@ -26750,12 +26620,6 @@ msgstr "Webhook name"
 msgid "Webhooks"
 msgstr "Webhooks"
 
-#: components/app/interface/settings/server/pages.tsx
-#: components/app/interface/settings/ServerSettings.tsx
-msgctxt "server-settings"
-msgid "Webhooks"
-msgstr "Webhooks"
-
 #: components/app/interface/settings/server/webhooks/ServerWebhooks.tsx
 msgid "Webhooks are switched off here."
 msgstr "Webhooks are switched off here."
@@ -27029,11 +26893,6 @@ msgid "When your friends come online, they show up here."
 msgstr "When your friends come online, they show up here."
 
 #: components/app/interface/settings/user/safety/SafetyDashboard.tsx
-msgid "Where"
-msgstr "Where"
-
-#: components/modal/modals/ServerEventEditor.tsx
-msgctxt "scheduled events"
 msgid "Where"
 msgstr "Where"
 
@@ -27328,11 +27187,6 @@ msgstr "Wing, {name}"
 #: components/app/interface/settings/server/channels/ChannelExtras.tsx
 #: components/app/interface/settings/user/subscriptions/PlusPage.tsx
 #: components/app/interface/settings/user/subscriptions/Subscriptions.tsx
-msgid "Wings"
-msgstr "Wings"
-
-#: components/app/interface/settings/ServerSettings.tsx
-msgctxt "server-settings"
 msgid "Wings"
 msgstr "Wings"
 
@@ -28922,3 +28776,245 @@ msgstr "This server's AutoMod blocked your message."
 #: components/i18n/errors.tsx
 msgid "Usernames take letters, digits and _ . - only, with no spaces or vowel marks."
 msgstr "Usernames take letters, digits and _ . - only, with no spaces or vowel marks."
+
+#. placeholder {0}: data().user_name
+#: components/auth/src/invite/InvitePage.tsx
+msgid "{0} invited you"
+msgstr "{0} invited you"
+
+#: components/auth/src/invite/InvitePage.tsx
+msgid "Already on Zrzur? <0>Log in</0>"
+msgstr "Already on Zrzur? <0>Log in</0>"
+
+#: components/auth/src/invite/InvitePage.tsx
+msgid "By continuing you accept the <0>Terms</0> and the <1>Community Guidelines</1>, and have read the <2>Privacy Policy</2>. Zrzur is for people aged 16 and over."
+msgstr "By continuing you accept the <0>Terms</0> and the <1>Community Guidelines</1>, and have read the <2>Privacy Policy</2>. Zrzur is for people aged 16 and over."
+
+#: components/auth/src/invite/InvitePage.tsx
+msgid "Check your connection and try again. The link itself may be fine."
+msgstr "Check your connection and try again. The link itself may be fine."
+
+#: components/auth/src/flows/FlowVerify.tsx
+msgid "Choose a password"
+msgstr "Choose a password"
+
+#. placeholder {0}: left().count
+#: components/auth/src/invite/ConfirmEmailStrip.tsx
+msgid "Confirm your email within {0} days to keep this account."
+msgstr "Confirm your email within {0} days to keep this account."
+
+#. placeholder {0}: left().count
+#: components/auth/src/invite/ConfirmEmailStrip.tsx
+msgid "Confirm your email within {0} hours to keep this account."
+msgstr "Confirm your email within {0} hours to keep this account."
+
+#: components/auth/src/invite/InvitePage.tsx
+msgid "Create account and join"
+msgstr "Create account and join"
+
+#: components/auth/src/invite/InvitePage.tsx
+msgid "Find servers in Discover"
+msgstr "Find servers in Discover"
+
+#: components/auth/src/invite/InvitePage.tsx
+msgid "Inside"
+msgstr "Inside"
+
+#. placeholder {0}: data().server_name
+#: components/auth/src/invite/InvitePage.tsx
+msgid "Joining {0}"
+msgstr "Joining {0}"
+
+#: components/auth/src/invite/InvitePage.tsx
+msgid "Links can run out or be switched off. Ask the person who sent it for a new one."
+msgstr "Links can run out or be switched off. Ask the person who sent it for a new one."
+
+#: components/auth/src/invite/ConfirmEmailStrip.tsx
+msgid "Open mail"
+msgstr "Open mail"
+
+#: components/auth/src/invite/InvitePage.tsx
+msgid "Open Zrzur"
+msgstr "Open Zrzur"
+
+#: components/auth/src/flows/FlowVerify.tsx
+msgid "Save and continue"
+msgstr "Save and continue"
+
+#: components/auth/src/invite/ConfirmEmailStrip.tsx
+msgid "Send again"
+msgstr "Send again"
+
+#: components/auth/src/invite/ConfirmEmailStrip.tsx
+msgid "Send the email again"
+msgstr "Send the email again"
+
+#: components/auth/src/invite/InvitePage.tsx
+msgid "Someone who runs it will look at your request."
+msgstr "Someone who runs it will look at your request."
+
+#: components/auth/src/invite/InvitePage.tsx
+msgid "The people who run it have paused invites for a while. Try the same link again later."
+msgstr "The people who run it have paused invites for a while. Try the same link again later."
+
+#: components/auth/src/invite/InvitePage.tsx
+msgid "This invite link has ended"
+msgstr "This invite link has ended"
+
+#: components/auth/src/invite/InvitePage.tsx
+msgid "This server asks before letting people in"
+msgstr "This server asks before letting people in"
+
+#: components/auth/src/invite/InvitePage.tsx
+msgid "This server isn't taking new people right now"
+msgstr "This server isn't taking new people right now"
+
+#: components/i18n/errors.tsx
+msgid "This server's AutoMod blocked your message: {rule}"
+msgstr "This server's AutoMod blocked your message: {rule}"
+
+#: components/auth/src/invite/InvitePage.tsx
+msgid "Three things and you're in."
+msgstr "Three things and you're in."
+
+#: components/auth/src/invite/InvitePage.tsx
+msgid "Use another address"
+msgstr "Use another address"
+
+#: components/auth/src/invite/InvitePage.tsx
+msgid "We couldn't open this invite"
+msgstr "We couldn't open this invite"
+
+#: components/auth/src/invite/InvitePage.tsx
+msgid "We've sent a message to that address. Open it to continue."
+msgstr "We've sent a message to that address. Open it to continue."
+
+#: components/auth/src/flows/Form.tsx
+msgid "What should people call you?"
+msgstr "What should people call you?"
+
+#: components/auth/src/invite/InvitePage.tsx
+msgid "You'll choose a password from the email we send you. Confirm it within 3 days to keep the account."
+msgstr "You'll choose a password from the email we send you. Confirm it within 3 days to keep the account."
+
+#: components/auth/src/invite/InvitePage.tsx
+msgid "You'll join this server as soon as someone who runs it approves you."
+msgstr "You'll join this server as soon as someone who runs it approves you."
+
+#: components/auth/src/invite/InvitePage.tsx
+msgid "Your account is ready, but you couldn't join"
+msgstr "Your account is ready, but you couldn't join"
+
+#: components/auth/src/flows/FlowVerify.tsx
+msgid "Your email is confirmed once you choose a password. You'll use it to log in on other devices."
+msgstr "Your email is confirmed once you choose a password. You'll use it to log in on other devices."
+
+#: components/auth/src/flows/Form.tsx
+msgid "Your name"
+msgstr "Your name"
+
+#. placeholder {0}: powerful() .map((role) => role.name) .join(", ")
+#: components/app/interface/settings/server/OnJoinSettings.tsx
+msgid "{0} can change the server or act on other members. A stranger with an invite link gets it too."
+msgstr "{0} can change the server or act on other members. A stranger with an invite link gets it too."
+
+#. placeholder {0}: dead()[0]
+#: components/app/interface/settings/server/OnJoinSettings.tsx
+msgid "#{0} typed like this is plain text, not a link. Use \"Add a channel link\" so people can tap it."
+msgstr "#{0} typed like this is plain text, not a link. Use \"Add a channel link\" so people can tap it."
+
+#: components/app/interface/settings/server/OnJoinSettings.tsx
+msgid "Add a channel link"
+msgstr "Add a channel link"
+
+#: components/app/interface/settings/server/OnJoinSettings.tsx
+msgid "Add to the message"
+msgstr "Add to the message"
+
+#: components/app/interface/settings/server/OnJoinSettings.tsx
+msgid "As a new member sees it"
+msgstr "As a new member sees it"
+
+#: components/app/interface/settings/server/OnJoinSettings.tsx
+msgid "Can manage or moderate"
+msgstr "Can manage or moderate"
+
+#: components/app/interface/settings/server/OnJoinSettings.tsx
+msgid "Choose a channel"
+msgstr "Choose a channel"
+
+#: components/app/interface/settings/server/OnJoinSettings.tsx
+msgid "Choose a channel for the message."
+msgstr "Choose a channel for the message."
+
+#: components/app/interface/settings/server/OnJoinSettings.tsx
+msgid "Choosing these roles needs the Manage Roles permission."
+msgstr "Choosing these roles needs the Manage Roles permission."
+
+#: components/app/interface/settings/server/OnJoinSettings.tsx
+msgid "Discard"
+msgstr "Discard"
+
+#: components/app/interface/settings/server/OnJoinSettings.tsx
+msgid "Everyone who joins would be able to manage or moderate"
+msgstr "Everyone who joins would be able to manage or moderate"
+
+#: components/app/interface/settings/server/OnJoinSettings.tsx
+msgid "Give it to everyone anyway"
+msgstr "Give it to everyone anyway"
+
+#: components/app/interface/settings/server/OnJoinSettings.tsx
+msgid "Given the moment someone becomes a member, whichever way they came in. Bots get none. Up to {MAX_ROLES} roles."
+msgstr "Given the moment someone becomes a member, whichever way they came in. Bots get none. Up to {MAX_ROLES} roles."
+
+#: components/app/interface/settings/server/OnJoinSettings.tsx
+msgid "Off. Nothing is posted when someone joins."
+msgstr "Off. Nothing is posted when someone joins."
+
+#: components/app/interface/settings/server/OnJoinSettings.tsx
+msgid "On. When many people join at once, the first ten of each minute are welcomed."
+msgstr "On. When many people join at once, the first ten of each minute are welcomed."
+
+#: components/app/interface/settings/server/OnJoinSettings.tsx
+msgid "Post a welcome message"
+msgstr "Post a welcome message"
+
+#: components/app/interface/settings/server/OnJoinSettings.tsx
+msgid "Posted by Zrzur in a channel you pick when someone joins. Nobody is notified."
+msgstr "Posted by Zrzur in a channel you pick when someone joins. Nobody is notified."
+
+#: components/app/interface/settings/server/pages.tsx
+msgid "Roles everyone gets, and a welcome message."
+msgstr "Roles everyone gets, and a welcome message."
+
+#: components/app/interface/settings/server/OnJoinSettings.tsx
+msgid "Roles for everyone who joins"
+msgstr "Roles for everyone who joins"
+
+#: components/app/interface/settings/server/OnJoinSettings.tsx
+msgid "The member"
+msgstr "The member"
+
+#: components/app/interface/settings/server/OnJoinSettings.tsx
+msgid "The server's name"
+msgstr "The server's name"
+
+#: components/app/interface/settings/server/OnJoinSettings.tsx
+msgid "This server has no roles yet. Make one in Roles first."
+msgstr "This server has no roles yet. Make one in Roles first."
+
+#: components/app/interface/settings/server/OnJoinSettings.tsx
+msgid "Welcome {MEMBER} to {SERVER}!"
+msgstr "Welcome {MEMBER} to {SERVER}!"
+
+#: components/app/interface/settings/server/OnJoinSettings.tsx
+msgid "Welcome message"
+msgstr "Welcome message"
+
+#: components/app/interface/settings/server/pages.tsx
+msgid "When someone joins"
+msgstr "When someone joins"
+
+#: components/app/interface/settings/server/OnJoinSettings.tsx
+msgid "Where the message appears."
+msgstr "Where the message appears."

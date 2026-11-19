@@ -4409,12 +4409,6 @@ msgstr "أتريد إلغاء هذه المرة فقط؟ تبقى المرة ا�
 msgid "Cancelled"
 msgstr "ملغى"
 
-#: src/interface/events/EventCard.tsx
-#: src/interface/events/EventsPage.tsx
-msgctxt "scheduled events"
-msgid "Cancelled"
-msgstr "ملغاة"
-
 #. placeholder {0}: date(item.current_period_end)
 #: components/app/interface/settings/user/subscriptions/Subscriptions.tsx
 msgid "Cancelled, ends on {0}"
@@ -7096,11 +7090,6 @@ msgstr "أداء متراجع"
 msgid "Delete"
 msgstr "حذف"
 
-#: src/interface/events/EventCard.tsx
-msgctxt "scheduled events"
-msgid "Delete"
-msgstr "حذف"
-
 #. placeholder {0}: props.emoji.name
 #: components/modal/modals/DeleteEmoji.tsx
 msgid "Delete :{0}:?"
@@ -7678,16 +7667,6 @@ msgstr "يؤدي فصل الحساب إلى حذف كل ما نسخه زرزور
 msgid "Discover"
 msgstr "اكتشف"
 
-#: components/app/interface/settings/server/insights/InsightsPage.tsx
-msgctxt "server insights"
-msgid "Discover"
-msgstr "اكتشف"
-
-#: components/app/interface/settings/server/ServerAccess.tsx
-msgctxt "server-settings"
-msgid "Discover"
-msgstr "الاكتشاف"
-
 #: components/app/interface/safety/labels.tsx
 msgid "Discover bot listing"
 msgstr "عرض بوت في «اكتشف»"
@@ -8070,11 +8049,6 @@ msgstr "حلقة الإديلفايس"
 msgid "Edit"
 msgstr "تعديل"
 
-#: src/interface/events/EventCard.tsx
-msgctxt "scheduled events"
-msgid "Edit"
-msgstr "تعديل"
-
 #. placeholder {0}: props.member.displayName
 #: components/modal/modals/UserProfileRoles.tsx
 msgid "Edit {0}'s roles"
@@ -8381,11 +8355,6 @@ msgstr "مفعّلة · لا تعمل"
 msgid "End now"
 msgstr "أنهِ الآن"
 
-#: src/interface/events/EventCard.tsx
-msgctxt "scheduled events"
-msgid "End now"
-msgstr "إنهاء الآن"
-
 #. placeholder {0}: p.label
 #: components/app/interface/settings/server/ServerEmergency.tsx
 msgid "End now: {0}"
@@ -8421,11 +8390,6 @@ msgstr "نقاط النهاية"
 #: components/app/interface/settings/user/safety/ReportsAndStanding.tsx
 msgid "Ends"
 msgstr "ينتهي"
-
-#: components/modal/modals/ServerEventEditor.tsx
-msgctxt "scheduled events"
-msgid "Ends"
-msgstr "تنتهي"
 
 #. placeholder {0}: ends()
 #: components/app/interface/channels/text/poll/PollCard.tsx
@@ -8593,13 +8557,6 @@ msgstr "الفعاليات"
 #: src/interface/developers/docs/DocsPortal.tsx
 msgid "Events"
 msgstr "الأحداث"
-
-#: components/app/interface/settings/server/EventsLobbySwitches.tsx
-#: src/interface/events/EventsLink.tsx
-#: src/interface/events/EventsPage.tsx
-msgctxt "scheduled events"
-msgid "Events"
-msgstr "الفعاليات"
 
 #: components/app/interface/settings/server/pages.tsx
 #: components/app/interface/settings/ServerSettings.tsx
@@ -9002,11 +8959,6 @@ msgstr "فيجي"
 #: components/app/interface/settings/user/bots/CommandManager.tsx
 #: components/app/interface/settings/user/profile/studio/StudioEditor.tsx
 #: src/interface/channels/text/ChannelDetailsPhone.tsx
-msgid "File"
-msgstr "ملف"
-
-#: src/interface/channels/text/searchLabels.ts
-msgctxt "search filter"
 msgid "File"
 msgstr "ملف"
 
@@ -9579,11 +9531,6 @@ msgid "Friends: {0}"
 msgstr "الأصدقاء: {0}"
 
 #: components/modal/modals/BulkDeleteMessages.tsx
-msgid "From"
-msgstr "من"
-
-#: src/interface/channels/text/searchLabels.ts
-msgctxt "search filter"
 msgid "From"
 msgstr "من"
 
@@ -10930,11 +10877,6 @@ msgstr "مخالف لقانون"
 msgid "Image"
 msgstr "صورة"
 
-#: src/interface/channels/text/searchLabels.ts
-msgctxt "search filter"
-msgid "Image"
-msgstr "صورة"
-
 #: components/app/interface/channels/text/interactions/MediaBlocks.tsx
 msgid "Image not available"
 msgstr "الصورة غير متاحة"
@@ -11583,11 +11525,6 @@ msgstr "طوق الياسمين"
 msgid "Join"
 msgstr "انضمام"
 
-#: src/interface/events/EventCard.tsx
-msgctxt "scheduled events"
-msgid "Join"
-msgstr "انضم"
-
 #. placeholder {0}: item().name
 #: components/app/interface/discover/ServerPage.tsx
 msgid "Join {0}"
@@ -11779,11 +11716,6 @@ msgstr "تذكّر:"
 #: components/app/interface/settings/user/profile/ReviewQueue.tsx
 msgid "Keep it"
 msgstr "إبقاؤه"
-
-#: src/interface/events/EventCard.tsx
-msgctxt "scheduled events"
-msgid "Keep it"
-msgstr "إبقاؤها"
 
 #: components/app/interface/settings/user/connections/Connections.tsx
 msgid "Keep it as it is"
@@ -12370,11 +12302,6 @@ msgstr "لينا"
 msgid "Link"
 msgstr "الرابط"
 
-#: src/interface/channels/text/searchLabels.ts
-msgctxt "search filter"
-msgid "Link"
-msgstr "رابط"
-
 #. placeholder {0}: index + 1
 #: components/app/interface/settings/user/profile/ProfileExtras.tsx
 msgid "Link {0}"
@@ -12635,11 +12562,6 @@ msgstr "جارٍ التحميل…"
 #: src/interface/lobby/LobbyLink.tsx
 msgid "Lobby"
 msgstr "الردهة"
-
-#: components/app/interface/settings/server/pages.tsx
-msgctxt "server-settings"
-msgid "Lobby"
-msgstr "اللوبي"
 
 #: components/app/interface/settings/server/pages.tsx
 #: components/app/interface/settings/ServerSettings.tsx
@@ -13430,11 +13352,6 @@ msgstr "عضو منذ {0}"
 msgid "Members"
 msgstr "الأعضاء"
 
-#: components/app/interface/settings/server/insights/InsightsPage.tsx
-msgctxt "server insights"
-msgid "Members"
-msgstr "الأعضاء"
-
 #. placeholder {0}: query.data?.length ?? 0
 #: components/app/interface/settings/server/members/ListMembers.tsx
 #~ msgid "Members — {0}"
@@ -13569,11 +13486,6 @@ msgstr "الإشارة إلى أدوار محددة"
 msgid "Mentions"
 msgstr "الإشارات"
 
-#: src/interface/channels/text/searchLabels.ts
-msgctxt "search filter"
-msgid "Mentions"
-msgstr "يذكر"
-
 #: src/interface/navigation/MentionsPanel.tsx
 #: src/interface/navigation/NotificationsPhone.tsx
 msgid "Mentions couldn't load. Try again soon."
@@ -13694,11 +13606,6 @@ msgstr "أُرسلت هذه الرسالة من منصة أخرى"
 #: src/interface/developers/docs/DocsPortal.tsx
 #: src/interface/navigation/channels/HomeSidebarPhone.tsx
 #: src/interface/navigation/PhoneTabs.tsx
-msgid "Messages"
-msgstr "الرسائل"
-
-#: components/app/interface/settings/server/insights/InsightsPage.tsx
-msgctxt "server insights"
 msgid "Messages"
 msgstr "الرسائل"
 
@@ -16235,11 +16142,6 @@ msgstr "فريق زرزور وحده يستطيع فعل ذلك."
 #: components/modal/modals/Invite.tsx
 msgid "Open"
 msgstr "فتح"
-
-#: src/interface/events/EventCard.tsx
-msgctxt "scheduled events"
-msgid "Open"
-msgstr "افتح"
 
 #. placeholder {0}: item.pending?.name ?? item.name
 #. placeholder {0}: provider()![0]
@@ -19896,11 +19798,6 @@ msgstr "الوضع الآمن مفعّل: لا تعمل أي إضافة. تبق�
 msgid "Safety"
 msgstr "الأمان"
 
-#: components/app/interface/settings/ServerSettings.tsx
-msgctxt "server-settings"
-msgid "Safety"
-msgstr "الحماية"
-
 #: components/app/interface/settings/user/support/ContactSupport.tsx
 msgid "Safety and reports"
 msgstr "الأمان والبلاغات"
@@ -22012,11 +21909,6 @@ msgstr "أدوات الفريق"
 #: components/ui/components/features/voice/stage/StagePanel.tsx
 msgid "Stage"
 msgstr "المنصة"
-
-#: components/modal/modals/CreateChannel.tsx
-msgctxt "channel-type"
-msgid "Stage"
-msgstr "منصة"
 
 #: components/ui/components/features/messaging/composition/picker/EmojiPicker.tsx
 #~ msgid "Standard"
@@ -24730,11 +24622,6 @@ msgstr "أقسام التذاكر، كل قسم في سطر"
 msgid "Tickets"
 msgstr "التذاكر"
 
-#: components/app/interface/settings/server/pages.tsx
-msgctxt "server-settings"
-msgid "Tickets"
-msgstr "التذاكر"
-
 #: components/app/interface/settings/server/assistant/labels.ts
 msgid "Tickets and direct messages in one queue."
 msgstr "التذاكر والرسائل الخاصة في صندوق واحد."
@@ -24853,11 +24740,6 @@ msgstr "نصيحة: انقر بزر الفأرة الأيمن (أو اضغط م�
 
 #: components/app/interface/settings/user/badges/BugReportDialog.tsx
 #: components/modal/modals/CreateThread.tsx
-msgid "Title"
-msgstr "العنوان"
-
-#: components/modal/modals/ServerEventEditor.tsx
-msgctxt "scheduled events"
 msgid "Title"
 msgstr "العنوان"
 
@@ -26112,13 +25994,6 @@ msgstr "فنزويلا"
 msgid "Verification"
 msgstr "التوثيق"
 
-#: components/app/interface/settings/server/pages.tsx
-#: components/app/interface/settings/server/ServerEmergency.tsx
-#: components/app/interface/settings/ServerSettings.tsx
-msgctxt "server-settings"
-msgid "Verification"
-msgstr "التحقق"
-
 #: components/app/interface/settings/server/ServerSafety.tsx
 #~ msgid "Verification level"
 #~ msgstr "مستوى التحقق"
@@ -26234,11 +26109,6 @@ msgstr "انتصار"
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 #: components/modal/modals/permissionTitles.ts
-msgid "Video"
-msgstr "فيديو"
-
-#: src/interface/channels/text/searchLabels.ts
-msgctxt "search filter"
 msgid "Video"
 msgstr "فيديو"
 
@@ -26747,12 +26617,6 @@ msgstr "اسم الويب هوك"
 msgid "Webhooks"
 msgstr "الويب هوك"
 
-#: components/app/interface/settings/server/pages.tsx
-#: components/app/interface/settings/ServerSettings.tsx
-msgctxt "server-settings"
-msgid "Webhooks"
-msgstr "الخطافات"
-
 #: components/app/interface/settings/server/webhooks/ServerWebhooks.tsx
 msgid "Webhooks are switched off here."
 msgstr "الويب هوك مُعطَّل هنا."
@@ -27026,11 +26890,6 @@ msgid "When your friends come online, they show up here."
 msgstr "عندما يتصل أصدقاؤك، سيظهرون هنا."
 
 #: components/app/interface/settings/user/safety/SafetyDashboard.tsx
-msgid "Where"
-msgstr "المكان"
-
-#: components/modal/modals/ServerEventEditor.tsx
-msgctxt "scheduled events"
 msgid "Where"
 msgstr "المكان"
 
@@ -27327,11 +27186,6 @@ msgstr "جناح، {name}"
 #: components/app/interface/settings/user/subscriptions/Subscriptions.tsx
 msgid "Wings"
 msgstr "أجنحة"
-
-#: components/app/interface/settings/ServerSettings.tsx
-msgctxt "server-settings"
-msgid "Wings"
-msgstr "الأجنحة"
 
 #. placeholder {0}: isolate(props.server.name)
 #: components/modal/modals/SuperchargeServer.tsx
@@ -28919,3 +28773,245 @@ msgstr "حجب الإشراف التلقائي في هذا السيرفر رسا
 #: components/i18n/errors.tsx
 msgid "Usernames take letters, digits and _ . - only, with no spaces or vowel marks."
 msgstr "يتكوّن اسم المستخدم من حروف وأرقام والرموز _ . - فقط، دون مسافات أو تشكيل."
+
+#. placeholder {0}: data().user_name
+#: components/auth/src/invite/InvitePage.tsx
+msgid "{0} invited you"
+msgstr "دعاك {0}"
+
+#: components/auth/src/invite/InvitePage.tsx
+msgid "Already on Zrzur? <0>Log in</0>"
+msgstr "لديك حساب في زرزور؟ <0>سجّل الدخول</0>"
+
+#: components/auth/src/invite/InvitePage.tsx
+msgid "By continuing you accept the <0>Terms</0> and the <1>Community Guidelines</1>, and have read the <2>Privacy Policy</2>. Zrzur is for people aged 16 and over."
+msgstr "بالمتابعة توافق على <0>الشروط</0> و<1>إرشادات المجتمع</1>، وتقرّ بأنك قرأت <2>سياسة الخصوصية</2>. زرزور لمن أتمّوا 16 عامًا فأكثر."
+
+#: components/auth/src/invite/InvitePage.tsx
+msgid "Check your connection and try again. The link itself may be fine."
+msgstr "تحقّق من اتصالك وحاول مجددًا. قد يكون الرابط نفسه سليمًا."
+
+#: components/auth/src/flows/FlowVerify.tsx
+msgid "Choose a password"
+msgstr "اختر كلمة مرور"
+
+#. placeholder {0}: left().count
+#: components/auth/src/invite/ConfirmEmailStrip.tsx
+msgid "Confirm your email within {0} days to keep this account."
+msgstr "أكّد بريدك الإلكتروني خلال {0} أيام لتحتفظ بهذا الحساب."
+
+#. placeholder {0}: left().count
+#: components/auth/src/invite/ConfirmEmailStrip.tsx
+msgid "Confirm your email within {0} hours to keep this account."
+msgstr "أكّد بريدك الإلكتروني خلال {0} ساعة لتحتفظ بهذا الحساب."
+
+#: components/auth/src/invite/InvitePage.tsx
+msgid "Create account and join"
+msgstr "أنشئ الحساب وانضم"
+
+#: components/auth/src/invite/InvitePage.tsx
+msgid "Find servers in Discover"
+msgstr "ابحث عن سيرفرات في «اكتشف»"
+
+#: components/auth/src/invite/InvitePage.tsx
+msgid "Inside"
+msgstr "في الداخل"
+
+#. placeholder {0}: data().server_name
+#: components/auth/src/invite/InvitePage.tsx
+msgid "Joining {0}"
+msgstr "الانضمام إلى {0}"
+
+#: components/auth/src/invite/InvitePage.tsx
+msgid "Links can run out or be switched off. Ask the person who sent it for a new one."
+msgstr "قد تنتهي مدة الروابط أو يوقفها أصحابها. اطلب رابطًا جديدًا ممن أرسله إليك."
+
+#: components/auth/src/invite/ConfirmEmailStrip.tsx
+msgid "Open mail"
+msgstr "افتح البريد"
+
+#: components/auth/src/invite/InvitePage.tsx
+msgid "Open Zrzur"
+msgstr "افتح زرزور"
+
+#: components/auth/src/flows/FlowVerify.tsx
+msgid "Save and continue"
+msgstr "احفظ وتابع"
+
+#: components/auth/src/invite/ConfirmEmailStrip.tsx
+msgid "Send again"
+msgstr "أرسل مجددًا"
+
+#: components/auth/src/invite/ConfirmEmailStrip.tsx
+msgid "Send the email again"
+msgstr "أرسل الرسالة مجددًا"
+
+#: components/auth/src/invite/InvitePage.tsx
+msgid "Someone who runs it will look at your request."
+msgstr "سيطّلع أحد القائمين عليه على طلبك."
+
+#: components/auth/src/invite/InvitePage.tsx
+msgid "The people who run it have paused invites for a while. Try the same link again later."
+msgstr "أوقف القائمون عليه الدعوات لبعض الوقت. جرّب الرابط نفسه لاحقًا."
+
+#: components/auth/src/invite/InvitePage.tsx
+msgid "This invite link has ended"
+msgstr "انتهى رابط الدعوة هذا"
+
+#: components/auth/src/invite/InvitePage.tsx
+msgid "This server asks before letting people in"
+msgstr "هذا السيرفر يسأل قبل إدخال الناس"
+
+#: components/auth/src/invite/InvitePage.tsx
+msgid "This server isn't taking new people right now"
+msgstr "هذا السيرفر لا يستقبل أعضاء جددًا الآن"
+
+#: components/i18n/errors.tsx
+msgid "This server's AutoMod blocked your message: {rule}"
+msgstr "حظر المشرف الآلي في هذا السيرفر رسالتك: {rule}"
+
+#: components/auth/src/invite/InvitePage.tsx
+msgid "Three things and you're in."
+msgstr "ثلاثة أشياء وتصبح في الداخل."
+
+#: components/auth/src/invite/InvitePage.tsx
+msgid "Use another address"
+msgstr "استخدم عنوانًا آخر"
+
+#: components/auth/src/invite/InvitePage.tsx
+msgid "We couldn't open this invite"
+msgstr "تعذّر فتح هذه الدعوة"
+
+#: components/auth/src/invite/InvitePage.tsx
+msgid "We've sent a message to that address. Open it to continue."
+msgstr "أرسلنا رسالة إلى ذلك العنوان. افتحها لتتابع."
+
+#: components/auth/src/flows/Form.tsx
+msgid "What should people call you?"
+msgstr "بماذا يناديك الناس؟"
+
+#: components/auth/src/invite/InvitePage.tsx
+msgid "You'll choose a password from the email we send you. Confirm it within 3 days to keep the account."
+msgstr "تختار كلمة المرور من الرسالة التي نرسلها إلى بريدك. أكّده خلال 3 أيام لتحتفظ بالحساب."
+
+#: components/auth/src/invite/InvitePage.tsx
+msgid "You'll join this server as soon as someone who runs it approves you."
+msgstr "ستنضم إلى هذا السيرفر حالما يوافق عليك أحد القائمين عليه."
+
+#: components/auth/src/invite/InvitePage.tsx
+msgid "Your account is ready, but you couldn't join"
+msgstr "حسابك جاهز، لكن تعذّر انضمامك"
+
+#: components/auth/src/flows/FlowVerify.tsx
+msgid "Your email is confirmed once you choose a password. You'll use it to log in on other devices."
+msgstr "يُؤكَّد بريدك الإلكتروني حالما تختار كلمة مرور. ستستخدمها لتسجيل الدخول على أجهزة أخرى."
+
+#: components/auth/src/flows/Form.tsx
+msgid "Your name"
+msgstr "اسمك"
+
+#. placeholder {0}: powerful() .map((role) => role.name) .join(", ")
+#: components/app/interface/settings/server/OnJoinSettings.tsx
+msgid "{0} can change the server or act on other members. A stranger with an invite link gets it too."
+msgstr "{0} يستطيع تغيير السيرفر أو التصرّف بحق الأعضاء الآخرين. وسيحصل عليه أي غريب معه رابط دعوة."
+
+#. placeholder {0}: dead()[0]
+#: components/app/interface/settings/server/OnJoinSettings.tsx
+msgid "#{0} typed like this is plain text, not a link. Use \"Add a channel link\" so people can tap it."
+msgstr "#{0} بهذه الكتابة نص عادي وليس رابطًا. استخدم «أضف رابط قناة» ليتمكن الناس من الضغط عليه."
+
+#: components/app/interface/settings/server/OnJoinSettings.tsx
+msgid "Add a channel link"
+msgstr "أضف رابط قناة"
+
+#: components/app/interface/settings/server/OnJoinSettings.tsx
+msgid "Add to the message"
+msgstr "أضف إلى الرسالة"
+
+#: components/app/interface/settings/server/OnJoinSettings.tsx
+msgid "As a new member sees it"
+msgstr "كما يراها العضو الجديد"
+
+#: components/app/interface/settings/server/OnJoinSettings.tsx
+msgid "Can manage or moderate"
+msgstr "يستطيع الإدارة أو الإشراف"
+
+#: components/app/interface/settings/server/OnJoinSettings.tsx
+msgid "Choose a channel"
+msgstr "اختر قناة"
+
+#: components/app/interface/settings/server/OnJoinSettings.tsx
+msgid "Choose a channel for the message."
+msgstr "اختر قناة للرسالة."
+
+#: components/app/interface/settings/server/OnJoinSettings.tsx
+msgid "Choosing these roles needs the Manage Roles permission."
+msgstr "اختيار هذه الأدوار يحتاج إلى صلاحية إدارة الأدوار."
+
+#: components/app/interface/settings/server/OnJoinSettings.tsx
+msgid "Discard"
+msgstr "تجاهل التغييرات"
+
+#: components/app/interface/settings/server/OnJoinSettings.tsx
+msgid "Everyone who joins would be able to manage or moderate"
+msgstr "كل من ينضم سيتمكن من الإدارة أو الإشراف"
+
+#: components/app/interface/settings/server/OnJoinSettings.tsx
+msgid "Give it to everyone anyway"
+msgstr "امنحه للجميع على أي حال"
+
+#: components/app/interface/settings/server/OnJoinSettings.tsx
+msgid "Given the moment someone becomes a member, whichever way they came in. Bots get none. Up to {MAX_ROLES} roles."
+msgstr "تُمنح لحظة يصبح الشخص عضوًا، أيًّا كانت طريقة دخوله. البوتات لا تحصل على شيء. حتى {MAX_ROLES} أدوار."
+
+#: components/app/interface/settings/server/OnJoinSettings.tsx
+msgid "Off. Nothing is posted when someone joins."
+msgstr "متوقفة. لا يُنشر شيء عند انضمام أحد."
+
+#: components/app/interface/settings/server/OnJoinSettings.tsx
+msgid "On. When many people join at once, the first ten of each minute are welcomed."
+msgstr "مفعّلة. إذا انضم كثيرون دفعة واحدة، يُرحَّب بأول عشرة في كل دقيقة."
+
+#: components/app/interface/settings/server/OnJoinSettings.tsx
+msgid "Post a welcome message"
+msgstr "انشر رسالة ترحيب"
+
+#: components/app/interface/settings/server/OnJoinSettings.tsx
+msgid "Posted by Zrzur in a channel you pick when someone joins. Nobody is notified."
+msgstr "ينشرها زرزور في قناة تختارها عند انضمام أحد. لا يصل إشعار لأحد."
+
+#: components/app/interface/settings/server/pages.tsx
+msgid "Roles everyone gets, and a welcome message."
+msgstr "أدوار يحصل عليها الجميع، ورسالة ترحيب."
+
+#: components/app/interface/settings/server/OnJoinSettings.tsx
+msgid "Roles for everyone who joins"
+msgstr "أدوار لكل من ينضم"
+
+#: components/app/interface/settings/server/OnJoinSettings.tsx
+msgid "The member"
+msgstr "العضو"
+
+#: components/app/interface/settings/server/OnJoinSettings.tsx
+msgid "The server's name"
+msgstr "اسم السيرفر"
+
+#: components/app/interface/settings/server/OnJoinSettings.tsx
+msgid "This server has no roles yet. Make one in Roles first."
+msgstr "لا توجد أدوار في هذا السيرفر بعد. أنشئ دورًا في «الأدوار» أولًا."
+
+#: components/app/interface/settings/server/OnJoinSettings.tsx
+msgid "Welcome {MEMBER} to {SERVER}!"
+msgstr "أهلًا {MEMBER} في {SERVER}!"
+
+#: components/app/interface/settings/server/OnJoinSettings.tsx
+msgid "Welcome message"
+msgstr "رسالة الترحيب"
+
+#: components/app/interface/settings/server/pages.tsx
+msgid "When someone joins"
+msgstr "عند انضمام أحد"
+
+#: components/app/interface/settings/server/OnJoinSettings.tsx
+msgid "Where the message appears."
+msgstr "حيث تظهر الرسالة."

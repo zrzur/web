@@ -14,6 +14,21 @@
 * **A link that ends in Arabic** is drawn in one piece, left to right, inside an Arabic sentence.
 * **Initials of an Arabic name** no longer join into a word: «مكتبة الأصدقاء» shows «م أ» (the article «ال» is skipped), not «ما».
 * **A refused username says what a username may hold** (letters, digits, `_ . -`; no spaces, no vowel marks).
+### When someone joins: roles for everyone and a welcome message (2026-11-19)
+
+* **Server settings › Joining › When someone joins.** Pick up to five roles that everyone gets the moment they become a member, whichever way they came in (an invite, Discover, an approved request). Bots get none. A role that can manage the server or moderate shows a warning and needs a second yes before Save.
+* **Welcome message:** off by default. Choose a channel and write the text; buttons add the member's mention, the server's name and a channel as a real link. A channel typed as `#name` is pointed out as plain text. A preview shows the message as a new member will see it.
+* The server's welcome is posted by Zrzur as a system line, and its mention and channel link work (text system messages are now drawn as Markdown).
+
+### Joining from an invite link (2026-11-19)
+
+* **An invite link opens the server's own page**, for everyone, signed in or not: banner, picture, name, member count, description and who invited. Before, a person without an account got the log-in form with nothing about the server.
+* **One button joins.** Signed in, it lands in the invite's channel with the message box on screen (phones showed the channel list first). A server that asks before letting people in takes a request and says so.
+* **Without an account, the button opens three fields in place** (name, email, month and year of birth) when the server offers the short join path (`features.join_by_link`). The person is in the conversation at once; the confirmation email also sets the password. A strip across the app says by when to confirm. Where the server does not offer it, the usual sign-up opens and the person comes back to the invite afterwards.
+* **The invite is remembered across logging in**, on the device, for a day. It was lost between the username and age steps.
+* **A link that has ended says so**, as does one of a server that paused invites, with a way on. A lost connection is not blamed on the link.
+* **Link previews:** `packages/public-pages` gains `SITE=invite`, which fills the head of `/invite/{code}` with the server's name, picture, description and a rounded member count for other apps' previews. Never the inviter, never a message. Invite pages carry `noindex`.
+* The page of a server's custom link does not say "invited by".
 
 ### Zrzur without a connection (2026-11-18)
 

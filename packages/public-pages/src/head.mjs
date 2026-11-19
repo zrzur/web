@@ -552,7 +552,8 @@ export function headTags(meta) {
     `<meta name="twitter:description" content="${escape(meta.description)}">`,
     `<meta name="twitter:image" content="${escape(meta.image)}">`,
   ];
-  if (meta.status === 404) tags.push(`<meta name="robots" content="noindex">`);
+  if (meta.status === 404 || meta.noindex)
+    tags.push(`<meta name="robots" content="noindex">`);
   if (meta.jsonLd)
     tags.push(
       `<script type="application/ld+json">${JSON.stringify(meta.jsonLd).replace(/</g, "\\u003c")}</script>`,

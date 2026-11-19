@@ -4409,12 +4409,6 @@ msgstr "Nur dieses Mal absagen? Das nächste bleibt geplant."
 msgid "Cancelled"
 msgstr "Storniert"
 
-#: src/interface/events/EventCard.tsx
-#: src/interface/events/EventsPage.tsx
-msgctxt "scheduled events"
-msgid "Cancelled"
-msgstr "Abgesagt"
-
 #. placeholder {0}: date(item.current_period_end)
 #: components/app/interface/settings/user/subscriptions/Subscriptions.tsx
 msgid "Cancelled, ends on {0}"
@@ -7096,11 +7090,6 @@ msgstr "Verminderte Leistung"
 msgid "Delete"
 msgstr "Löschen"
 
-#: src/interface/events/EventCard.tsx
-msgctxt "scheduled events"
-msgid "Delete"
-msgstr "Löschen"
-
 #. placeholder {0}: props.emoji.name
 #: components/modal/modals/DeleteEmoji.tsx
 msgid "Delete :{0}:?"
@@ -7678,16 +7667,6 @@ msgstr "Beim Trennen löscht Zrzur sofort alles, was es von Steam kopiert hat."
 msgid "Discover"
 msgstr "Entdecken"
 
-#: components/app/interface/settings/server/insights/InsightsPage.tsx
-msgctxt "server insights"
-msgid "Discover"
-msgstr "Entdecken"
-
-#: components/app/interface/settings/server/ServerAccess.tsx
-msgctxt "server-settings"
-msgid "Discover"
-msgstr "Entdecken"
-
 #: components/app/interface/safety/labels.tsx
 msgid "Discover bot listing"
 msgstr "Bot-Eintrag in Entdecken"
@@ -8070,11 +8049,6 @@ msgstr "Edelweißkranz"
 msgid "Edit"
 msgstr "Bearbeiten"
 
-#: src/interface/events/EventCard.tsx
-msgctxt "scheduled events"
-msgid "Edit"
-msgstr "Bearbeiten"
-
 #. placeholder {0}: props.member.displayName
 #: components/modal/modals/UserProfileRoles.tsx
 msgid "Edit {0}'s roles"
@@ -8381,11 +8355,6 @@ msgstr "Aktiviert · läuft nicht"
 msgid "End now"
 msgstr "Jetzt beenden"
 
-#: src/interface/events/EventCard.tsx
-msgctxt "scheduled events"
-msgid "End now"
-msgstr "Jetzt beenden"
-
 #. placeholder {0}: p.label
 #: components/app/interface/settings/server/ServerEmergency.tsx
 msgid "End now: {0}"
@@ -8419,11 +8388,6 @@ msgid "Endpoints"
 msgstr "Endpunkte"
 
 #: components/app/interface/settings/user/safety/ReportsAndStanding.tsx
-msgid "Ends"
-msgstr "Endet"
-
-#: components/modal/modals/ServerEventEditor.tsx
-msgctxt "scheduled events"
 msgid "Ends"
 msgstr "Endet"
 
@@ -8593,13 +8557,6 @@ msgstr "events"
 #: src/interface/developers/docs/DocsPortal.tsx
 msgid "Events"
 msgstr "Ereignisse"
-
-#: components/app/interface/settings/server/EventsLobbySwitches.tsx
-#: src/interface/events/EventsLink.tsx
-#: src/interface/events/EventsPage.tsx
-msgctxt "scheduled events"
-msgid "Events"
-msgstr "Events"
 
 #: components/app/interface/settings/server/pages.tsx
 #: components/app/interface/settings/ServerSettings.tsx
@@ -9002,11 +8959,6 @@ msgstr "Fidschi"
 #: components/app/interface/settings/user/bots/CommandManager.tsx
 #: components/app/interface/settings/user/profile/studio/StudioEditor.tsx
 #: src/interface/channels/text/ChannelDetailsPhone.tsx
-msgid "File"
-msgstr "Datei"
-
-#: src/interface/channels/text/searchLabels.ts
-msgctxt "search filter"
 msgid "File"
 msgstr "Datei"
 
@@ -9579,11 +9531,6 @@ msgid "Friends: {0}"
 msgstr "Freunde: {0}"
 
 #: components/modal/modals/BulkDeleteMessages.tsx
-msgid "From"
-msgstr "Von"
-
-#: src/interface/channels/text/searchLabels.ts
-msgctxt "search filter"
 msgid "From"
 msgstr "Von"
 
@@ -10930,11 +10877,6 @@ msgstr "Rechtswidrig nach einem Gesetz"
 msgid "Image"
 msgstr "Bild"
 
-#: src/interface/channels/text/searchLabels.ts
-msgctxt "search filter"
-msgid "Image"
-msgstr "Bild"
-
 #: components/app/interface/channels/text/interactions/MediaBlocks.tsx
 msgid "Image not available"
 msgstr "Bild nicht verfügbar"
@@ -11583,11 +11525,6 @@ msgstr "Jasminring"
 msgid "Join"
 msgstr "Beitreten"
 
-#: src/interface/events/EventCard.tsx
-msgctxt "scheduled events"
-msgid "Join"
-msgstr "Beitreten"
-
 #. placeholder {0}: item().name
 #: components/app/interface/discover/ServerPage.tsx
 msgid "Join {0}"
@@ -11777,11 +11714,6 @@ msgstr "Bedenke:"
 
 #: components/app/interface/settings/server/roles/ServerRoleOverview.tsx
 #: components/app/interface/settings/user/profile/ReviewQueue.tsx
-msgid "Keep it"
-msgstr "Behalten"
-
-#: src/interface/events/EventCard.tsx
-msgctxt "scheduled events"
 msgid "Keep it"
 msgstr "Behalten"
 
@@ -12370,11 +12302,6 @@ msgstr "Lina"
 msgid "Link"
 msgstr "Link"
 
-#: src/interface/channels/text/searchLabels.ts
-msgctxt "search filter"
-msgid "Link"
-msgstr "Link"
-
 #. placeholder {0}: index + 1
 #: components/app/interface/settings/user/profile/ProfileExtras.tsx
 msgid "Link {0}"
@@ -12633,11 +12560,6 @@ msgstr "Wird geladen…"
 #: components/modal/lib/serverTemplateText.ts
 #: src/interface/lobby/Lobby.tsx
 #: src/interface/lobby/LobbyLink.tsx
-msgid "Lobby"
-msgstr "Lobby"
-
-#: components/app/interface/settings/server/pages.tsx
-msgctxt "server-settings"
 msgid "Lobby"
 msgstr "Lobby"
 
@@ -13430,11 +13352,6 @@ msgstr "Mitglied seit {0}"
 msgid "Members"
 msgstr "Mitglieder"
 
-#: components/app/interface/settings/server/insights/InsightsPage.tsx
-msgctxt "server insights"
-msgid "Members"
-msgstr "Mitglieder"
-
 #. placeholder {0}: query.data?.length ?? 0
 #: components/app/interface/settings/server/members/ListMembers.tsx
 #~ msgid "Members — {0}"
@@ -13569,11 +13486,6 @@ msgstr "Spezifische Rollen erwähnen"
 msgid "Mentions"
 msgstr "Erwähnungen"
 
-#: src/interface/channels/text/searchLabels.ts
-msgctxt "search filter"
-msgid "Mentions"
-msgstr "Erwähnt"
-
 #: src/interface/navigation/MentionsPanel.tsx
 #: src/interface/navigation/NotificationsPhone.tsx
 msgid "Mentions couldn't load. Try again soon."
@@ -13694,11 +13606,6 @@ msgstr "Nachricht wurde auf einer anderen Plattform gesendet"
 #: src/interface/developers/docs/DocsPortal.tsx
 #: src/interface/navigation/channels/HomeSidebarPhone.tsx
 #: src/interface/navigation/PhoneTabs.tsx
-msgid "Messages"
-msgstr "Nachrichten"
-
-#: components/app/interface/settings/server/insights/InsightsPage.tsx
-msgctxt "server insights"
 msgid "Messages"
 msgstr "Nachrichten"
 
@@ -16235,11 +16142,6 @@ msgstr "Nur das Zrzur-Team kann das."
 #: components/modal/modals/Invite.tsx
 msgid "Open"
 msgstr "Offen"
-
-#: src/interface/events/EventCard.tsx
-msgctxt "scheduled events"
-msgid "Open"
-msgstr "Öffnen"
 
 #. placeholder {0}: item.pending?.name ?? item.name
 #. placeholder {0}: provider()![0]
@@ -19896,11 +19798,6 @@ msgstr "Der abgesicherte Modus ist aktiv: Kein Plugin läuft. Deine Plugins und 
 msgid "Safety"
 msgstr "Sicherheit"
 
-#: components/app/interface/settings/ServerSettings.tsx
-msgctxt "server-settings"
-msgid "Safety"
-msgstr "Schutz"
-
 #: components/app/interface/settings/user/support/ContactSupport.tsx
 msgid "Safety and reports"
 msgstr "Sicherheit und Meldungen"
@@ -22010,11 +21907,6 @@ msgstr "Team-Werkzeuge"
 
 #: components/modal/modals/CreateChannel.tsx
 #: components/ui/components/features/voice/stage/StagePanel.tsx
-msgid "Stage"
-msgstr "Bühne"
-
-#: components/modal/modals/CreateChannel.tsx
-msgctxt "channel-type"
 msgid "Stage"
 msgstr "Bühne"
 
@@ -24730,11 +24622,6 @@ msgstr "Ticket-Bereiche, einer pro Zeile"
 msgid "Tickets"
 msgstr "Tickets"
 
-#: components/app/interface/settings/server/pages.tsx
-msgctxt "server-settings"
-msgid "Tickets"
-msgstr "Tickets"
-
 #: components/app/interface/settings/server/assistant/labels.ts
 msgid "Tickets and direct messages in one queue."
 msgstr "Tickets und Direktnachrichten in einer Warteschlange."
@@ -24853,11 +24740,6 @@ msgstr "Tipp: Rechtsklick (oder gedrückt halten) auf ein Emoji, um es zu deinen
 
 #: components/app/interface/settings/user/badges/BugReportDialog.tsx
 #: components/modal/modals/CreateThread.tsx
-msgid "Title"
-msgstr "Titel"
-
-#: components/modal/modals/ServerEventEditor.tsx
-msgctxt "scheduled events"
 msgid "Title"
 msgstr "Titel"
 
@@ -26112,13 +25994,6 @@ msgstr "Venezuela"
 msgid "Verification"
 msgstr "Verifizierung"
 
-#: components/app/interface/settings/server/pages.tsx
-#: components/app/interface/settings/server/ServerEmergency.tsx
-#: components/app/interface/settings/ServerSettings.tsx
-msgctxt "server-settings"
-msgid "Verification"
-msgstr "Prüfung"
-
 #: components/app/interface/settings/server/ServerSafety.tsx
 #~ msgid "Verification level"
 #~ msgstr "Verifizierungsstufe"
@@ -26234,11 +26109,6 @@ msgstr "Sieg"
 
 #: components/app/interface/settings/channel/permissions/ChannelPermissionsEditor.tsx
 #: components/modal/modals/permissionTitles.ts
-msgid "Video"
-msgstr "Video"
-
-#: src/interface/channels/text/searchLabels.ts
-msgctxt "search filter"
 msgid "Video"
 msgstr "Video"
 
@@ -26747,12 +26617,6 @@ msgstr "Webhook-Name"
 msgid "Webhooks"
 msgstr "Webhooks"
 
-#: components/app/interface/settings/server/pages.tsx
-#: components/app/interface/settings/ServerSettings.tsx
-msgctxt "server-settings"
-msgid "Webhooks"
-msgstr "Webhooks"
-
 #: components/app/interface/settings/server/webhooks/ServerWebhooks.tsx
 msgid "Webhooks are switched off here."
 msgstr "Webhooks sind hier ausgeschaltet."
@@ -27026,11 +26890,6 @@ msgid "When your friends come online, they show up here."
 msgstr "Wenn deine Freunde online sind, erscheinen sie hier."
 
 #: components/app/interface/settings/user/safety/SafetyDashboard.tsx
-msgid "Where"
-msgstr "Wo"
-
-#: components/modal/modals/ServerEventEditor.tsx
-msgctxt "scheduled events"
 msgid "Where"
 msgstr "Wo"
 
@@ -27325,11 +27184,6 @@ msgstr "Flügel, {name}"
 #: components/app/interface/settings/server/channels/ChannelExtras.tsx
 #: components/app/interface/settings/user/subscriptions/PlusPage.tsx
 #: components/app/interface/settings/user/subscriptions/Subscriptions.tsx
-msgid "Wings"
-msgstr "Flügel"
-
-#: components/app/interface/settings/ServerSettings.tsx
-msgctxt "server-settings"
 msgid "Wings"
 msgstr "Flügel"
 
@@ -28919,3 +28773,245 @@ msgstr "Der AutoMod dieses Servers hat deine Nachricht blockiert."
 #: components/i18n/errors.tsx
 msgid "Usernames take letters, digits and _ . - only, with no spaces or vowel marks."
 msgstr "Benutzernamen bestehen nur aus Buchstaben, Ziffern und _ . -, ohne Leerzeichen und ohne Vokalzeichen."
+
+#. placeholder {0}: data().user_name
+#: components/auth/src/invite/InvitePage.tsx
+msgid "{0} invited you"
+msgstr "{0} hat dich eingeladen"
+
+#: components/auth/src/invite/InvitePage.tsx
+msgid "Already on Zrzur? <0>Log in</0>"
+msgstr "Schon bei Zrzur? <0>Anmelden</0>"
+
+#: components/auth/src/invite/InvitePage.tsx
+msgid "By continuing you accept the <0>Terms</0> and the <1>Community Guidelines</1>, and have read the <2>Privacy Policy</2>. Zrzur is for people aged 16 and over."
+msgstr "Wenn du fortfährst, akzeptierst du die <0>Nutzungsbedingungen</0> und die <1>Community-Richtlinien</1> und hast die <2>Datenschutzerklärung</2> gelesen. Zrzur ist für Personen ab 16 Jahren."
+
+#: components/auth/src/invite/InvitePage.tsx
+msgid "Check your connection and try again. The link itself may be fine."
+msgstr "Prüfe deine Verbindung und versuche es noch einmal. Der Link selbst kann in Ordnung sein."
+
+#: components/auth/src/flows/FlowVerify.tsx
+msgid "Choose a password"
+msgstr "Passwort wählen"
+
+#. placeholder {0}: left().count
+#: components/auth/src/invite/ConfirmEmailStrip.tsx
+msgid "Confirm your email within {0} days to keep this account."
+msgstr "Bestätige deine E-Mail-Adresse innerhalb von {0} Tagen, um dieses Konto zu behalten."
+
+#. placeholder {0}: left().count
+#: components/auth/src/invite/ConfirmEmailStrip.tsx
+msgid "Confirm your email within {0} hours to keep this account."
+msgstr "Bestätige deine E-Mail-Adresse innerhalb von {0} Stunden, um dieses Konto zu behalten."
+
+#: components/auth/src/invite/InvitePage.tsx
+msgid "Create account and join"
+msgstr "Konto erstellen und beitreten"
+
+#: components/auth/src/invite/InvitePage.tsx
+msgid "Find servers in Discover"
+msgstr "Server in „Entdecken“ finden"
+
+#: components/auth/src/invite/InvitePage.tsx
+msgid "Inside"
+msgstr "Drinnen"
+
+#. placeholder {0}: data().server_name
+#: components/auth/src/invite/InvitePage.tsx
+msgid "Joining {0}"
+msgstr "Du trittst {0} bei"
+
+#: components/auth/src/invite/InvitePage.tsx
+msgid "Links can run out or be switched off. Ask the person who sent it for a new one."
+msgstr "Links können ablaufen oder abgeschaltet werden. Bitte die Person, die ihn geschickt hat, um einen neuen."
+
+#: components/auth/src/invite/ConfirmEmailStrip.tsx
+msgid "Open mail"
+msgstr "E-Mails öffnen"
+
+#: components/auth/src/invite/InvitePage.tsx
+msgid "Open Zrzur"
+msgstr "Zrzur öffnen"
+
+#: components/auth/src/flows/FlowVerify.tsx
+msgid "Save and continue"
+msgstr "Speichern und weiter"
+
+#: components/auth/src/invite/ConfirmEmailStrip.tsx
+msgid "Send again"
+msgstr "Erneut senden"
+
+#: components/auth/src/invite/ConfirmEmailStrip.tsx
+msgid "Send the email again"
+msgstr "E-Mail erneut senden"
+
+#: components/auth/src/invite/InvitePage.tsx
+msgid "Someone who runs it will look at your request."
+msgstr "Jemand, der ihn leitet, sieht sich deine Anfrage an."
+
+#: components/auth/src/invite/InvitePage.tsx
+msgid "The people who run it have paused invites for a while. Try the same link again later."
+msgstr "Die Leitung hat Einladungen für eine Weile pausiert. Versuche denselben Link später noch einmal."
+
+#: components/auth/src/invite/InvitePage.tsx
+msgid "This invite link has ended"
+msgstr "Dieser Einladungslink ist abgelaufen"
+
+#: components/auth/src/invite/InvitePage.tsx
+msgid "This server asks before letting people in"
+msgstr "Dieser Server fragt nach, bevor er jemanden hereinlässt"
+
+#: components/auth/src/invite/InvitePage.tsx
+msgid "This server isn't taking new people right now"
+msgstr "Dieser Server nimmt gerade niemanden neu auf"
+
+#: components/i18n/errors.tsx
+msgid "This server's AutoMod blocked your message: {rule}"
+msgstr "AutoMod dieses Servers hat deine Nachricht blockiert: {rule}"
+
+#: components/auth/src/invite/InvitePage.tsx
+msgid "Three things and you're in."
+msgstr "Drei Angaben, und du bist drin."
+
+#: components/auth/src/invite/InvitePage.tsx
+msgid "Use another address"
+msgstr "Andere Adresse verwenden"
+
+#: components/auth/src/invite/InvitePage.tsx
+msgid "We couldn't open this invite"
+msgstr "Diese Einladung ließ sich nicht öffnen"
+
+#: components/auth/src/invite/InvitePage.tsx
+msgid "We've sent a message to that address. Open it to continue."
+msgstr "Wir haben eine Nachricht an diese Adresse geschickt. Öffne sie, um fortzufahren."
+
+#: components/auth/src/flows/Form.tsx
+msgid "What should people call you?"
+msgstr "Wie sollen dich die Leute nennen?"
+
+#: components/auth/src/invite/InvitePage.tsx
+msgid "You'll choose a password from the email we send you. Confirm it within 3 days to keep the account."
+msgstr "Dein Passwort wählst du über die E-Mail, die wir dir schicken. Bestätige sie innerhalb von 3 Tagen, um das Konto zu behalten."
+
+#: components/auth/src/invite/InvitePage.tsx
+msgid "You'll join this server as soon as someone who runs it approves you."
+msgstr "Du trittst diesem Server bei, sobald dich jemand aus der Leitung freigibt."
+
+#: components/auth/src/invite/InvitePage.tsx
+msgid "Your account is ready, but you couldn't join"
+msgstr "Dein Konto ist bereit, aber der Beitritt hat nicht geklappt"
+
+#: components/auth/src/flows/FlowVerify.tsx
+msgid "Your email is confirmed once you choose a password. You'll use it to log in on other devices."
+msgstr "Deine E-Mail-Adresse ist bestätigt, sobald du ein Passwort wählst. Damit meldest du dich auf anderen Geräten an."
+
+#: components/auth/src/flows/Form.tsx
+msgid "Your name"
+msgstr "Dein Name"
+
+#. placeholder {0}: powerful() .map((role) => role.name) .join(", ")
+#: components/app/interface/settings/server/OnJoinSettings.tsx
+msgid "{0} can change the server or act on other members. A stranger with an invite link gets it too."
+msgstr "{0} kann den Server verändern oder gegen andere Mitglieder vorgehen. Auch Fremde mit einem Einladungslink bekommen das."
+
+#. placeholder {0}: dead()[0]
+#: components/app/interface/settings/server/OnJoinSettings.tsx
+msgid "#{0} typed like this is plain text, not a link. Use \"Add a channel link\" so people can tap it."
+msgstr "#{0} so geschrieben ist nur Text, kein Link. Nutze „Kanallink hinzufügen“, damit man darauf tippen kann."
+
+#: components/app/interface/settings/server/OnJoinSettings.tsx
+msgid "Add a channel link"
+msgstr "Kanallink hinzufügen"
+
+#: components/app/interface/settings/server/OnJoinSettings.tsx
+msgid "Add to the message"
+msgstr "Zur Nachricht hinzufügen"
+
+#: components/app/interface/settings/server/OnJoinSettings.tsx
+msgid "As a new member sees it"
+msgstr "So sieht es ein neues Mitglied"
+
+#: components/app/interface/settings/server/OnJoinSettings.tsx
+msgid "Can manage or moderate"
+msgstr "Kann verwalten oder moderieren"
+
+#: components/app/interface/settings/server/OnJoinSettings.tsx
+msgid "Choose a channel"
+msgstr "Kanal wählen"
+
+#: components/app/interface/settings/server/OnJoinSettings.tsx
+msgid "Choose a channel for the message."
+msgstr "Wähle einen Kanal für die Nachricht."
+
+#: components/app/interface/settings/server/OnJoinSettings.tsx
+msgid "Choosing these roles needs the Manage Roles permission."
+msgstr "Für die Auswahl dieser Rollen brauchst du die Berechtigung „Rollen verwalten“."
+
+#: components/app/interface/settings/server/OnJoinSettings.tsx
+msgid "Discard"
+msgstr "Verwerfen"
+
+#: components/app/interface/settings/server/OnJoinSettings.tsx
+msgid "Everyone who joins would be able to manage or moderate"
+msgstr "Alle, die beitreten, könnten verwalten oder moderieren"
+
+#: components/app/interface/settings/server/OnJoinSettings.tsx
+msgid "Give it to everyone anyway"
+msgstr "Trotzdem allen geben"
+
+#: components/app/interface/settings/server/OnJoinSettings.tsx
+msgid "Given the moment someone becomes a member, whichever way they came in. Bots get none. Up to {MAX_ROLES} roles."
+msgstr "Vergeben in dem Moment, in dem jemand Mitglied wird, egal auf welchem Weg. Bots bekommen keine. Bis zu {MAX_ROLES} Rollen."
+
+#: components/app/interface/settings/server/OnJoinSettings.tsx
+msgid "Off. Nothing is posted when someone joins."
+msgstr "Aus. Beim Beitritt wird nichts gepostet."
+
+#: components/app/interface/settings/server/OnJoinSettings.tsx
+msgid "On. When many people join at once, the first ten of each minute are welcomed."
+msgstr "An. Treten viele auf einmal bei, werden die ersten zehn jeder Minute begrüßt."
+
+#: components/app/interface/settings/server/OnJoinSettings.tsx
+msgid "Post a welcome message"
+msgstr "Willkommensnachricht posten"
+
+#: components/app/interface/settings/server/OnJoinSettings.tsx
+msgid "Posted by Zrzur in a channel you pick when someone joins. Nobody is notified."
+msgstr "Von Zrzur in einem Kanal deiner Wahl gepostet, wenn jemand beitritt. Niemand wird benachrichtigt."
+
+#: components/app/interface/settings/server/pages.tsx
+msgid "Roles everyone gets, and a welcome message."
+msgstr "Rollen für alle und eine Willkommensnachricht."
+
+#: components/app/interface/settings/server/OnJoinSettings.tsx
+msgid "Roles for everyone who joins"
+msgstr "Rollen für alle, die beitreten"
+
+#: components/app/interface/settings/server/OnJoinSettings.tsx
+msgid "The member"
+msgstr "Das Mitglied"
+
+#: components/app/interface/settings/server/OnJoinSettings.tsx
+msgid "The server's name"
+msgstr "Name des Servers"
+
+#: components/app/interface/settings/server/OnJoinSettings.tsx
+msgid "This server has no roles yet. Make one in Roles first."
+msgstr "Dieser Server hat noch keine Rollen. Lege zuerst unter „Rollen“ eine an."
+
+#: components/app/interface/settings/server/OnJoinSettings.tsx
+msgid "Welcome {MEMBER} to {SERVER}!"
+msgstr "Willkommen {MEMBER} bei {SERVER}!"
+
+#: components/app/interface/settings/server/OnJoinSettings.tsx
+msgid "Welcome message"
+msgstr "Willkommensnachricht"
+
+#: components/app/interface/settings/server/pages.tsx
+msgid "When someone joins"
+msgstr "Wenn jemand beitritt"
+
+#: components/app/interface/settings/server/OnJoinSettings.tsx
+msgid "Where the message appears."
+msgstr "Wo die Nachricht erscheint."
