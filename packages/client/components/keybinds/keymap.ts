@@ -34,6 +34,7 @@ export type ShortcutId =
   | "open_events"
   | "toggle_streamer"
   | "toggle_soundboard"
+  | "save_clip"
   | "open_shortcuts";
 
 export type CustomCombos = Partial<Record<ShortcutId, Combo>>;
@@ -55,6 +56,7 @@ export const DEFAULTS: Record<ShortcutId, string> = {
   open_events: "MS:Digit9",
   toggle_streamer: "MS:KeyL",
   toggle_soundboard: "MS:Digit6|MC:KeyS",
+  save_clip: "MS:Digit5|MC:KeyK",
   open_shortcuts: "M:Slash",
 };
 

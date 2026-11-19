@@ -28915,3 +28915,184 @@ msgstr "زرزور، مباشرةً على <0>سطح مكتبك.</0>"
 #: components/i18n/errors.tsx
 msgid "This server's AutoMod blocked your message."
 msgstr "حجب الإشراف التلقائي في هذا السيرفر رسالتك."
+
+#: components/ui/components/features/voice/capture/CapturePanel.tsx
+msgid ", "
+msgstr "، "
+
+#: components/ui/components/features/voice/capture/CapturePanel.tsx
+msgid "Clip"
+msgstr "مقطع"
+
+#: components/ui/components/features/voice/capture/CapturePanel.tsx
+msgid "Clip shared in this room's chat."
+msgstr "نُشر المقطع في دردشة هذه الغرفة."
+
+#: components/ui/components/features/voice/capture/CapturePanel.tsx
+msgid "Clips and recording"
+msgstr "المقاطع والتسجيل"
+
+#. placeholder {0}: starterName()
+#: components/ui/components/features/voice/capture/CapturePanel.tsx
+msgid "Clips are on. Turned on by {0}."
+msgstr "المقاطع مفعّلة. فعّلها {0}."
+
+#: components/ui/components/features/voice/capture/CapturePanel.tsx
+msgid "Delete for everyone"
+msgstr "احذف للجميع"
+
+#: components/ui/components/features/voice/capture/CapturePanel.tsx
+msgid "Episode"
+msgstr "حلقة"
+
+#: components/ui/components/features/voice/capture/CapturePanel.tsx
+msgid "Episode name"
+msgstr "اسم الحلقة"
+
+#: components/ui/components/features/voice/capture/CapturePanel.tsx
+msgid "Episode saved in this room's chat."
+msgstr "حُفظت الحلقة في دردشة هذه الغرفة."
+
+#: components/ui/components/features/voice/capture/CapturePanel.tsx
+msgid "Hide details"
+msgstr "أخفِ التفاصيل"
+
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "In a voice room where clips are on."
+msgstr "في غرفة صوتية فُعّلت فيها المقاطع."
+
+#: components/ui/components/features/voice/capture/CapturePanel.tsx
+msgid "Include my voice"
+msgstr "ضمّ صوتي"
+
+#: components/ui/components/features/voice/capture/CapturePanel.tsx
+msgid "Keep recording"
+msgstr "تابع التسجيل"
+
+#: components/ui/components/features/voice/capture/CapturePanel.tsx
+msgid "Leave me out"
+msgstr "استبعدني"
+
+#: components/ui/components/features/voice/capture/CapturePanel.tsx
+msgid "No clips or episodes from this room yet."
+msgstr "لا مقاطع ولا حلقات من هذه الغرفة بعد."
+
+#: components/ui/components/features/voice/capture/CapturePanel.tsx
+msgid "No voices listed"
+msgstr "لا أصوات مذكورة"
+
+#: components/ui/components/features/voice/capture/CapturePanel.tsx
+msgid "Only the voices of people who chose \"Include my voice\" are saved. Everyone whose voice is in a clip or an episode can delete it."
+msgstr "لا تُحفظ إلا أصوات من اختاروا «ضمّ صوتي». ويستطيع كل من يُسمع صوته في مقطع أو حلقة أن يحذفها."
+
+#: components/i18n/errors.tsx
+#: components/ui/components/features/voice/capture/CapturePanel.tsx
+msgid "Recording needs Wings on this server."
+msgstr "يحتاج التسجيل إلى أجنحة في هذا السيرفر."
+
+#. placeholder {0}: clock(left().recording_seconds_left)
+#. placeholder {1}: clock(left().recording_seconds_per_month)
+#: components/ui/components/features/voice/capture/CapturePanel.tsx
+msgid "Recording time left this month: {0} of {1}"
+msgstr "وقت التسجيل المتبقي هذا الشهر: {0} من {1}"
+
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "Save a voice clip"
+msgstr "احفظ مقطعًا صوتيًا"
+
+#. placeholder {0}: allowance()?.clip_seconds ?? 30
+#: components/ui/components/features/voice/capture/CapturePanel.tsx
+msgid "Save the last {0} seconds"
+msgstr "احفظ آخر {0} ثانية"
+
+#: components/ui/components/features/voice/capture/CapturePanel.tsx
+msgid "Someone"
+msgstr "أحدهم"
+
+#: components/i18n/errors.tsx
+msgid "Someone in it did not agree to be recorded. Nothing was saved."
+msgstr "أحد من فيه لم يوافق على التسجيل. لم يُحفظ شيء."
+
+#: components/ui/components/features/voice/capture/CapturePanel.tsx
+msgid "Start recording"
+msgstr "ابدأ التسجيل"
+
+#: components/ui/components/features/voice/capture/CapturePanel.tsx
+msgid "Stop and delete"
+msgstr "أوقف واحذف"
+
+#: components/ui/components/features/voice/capture/CapturePanel.tsx
+msgid "Stop and save the episode"
+msgstr "أوقف واحفظ الحلقة"
+
+#: components/ui/components/features/voice/capture/CapturePanel.tsx
+msgid "Stop without saving"
+msgstr "أوقف دون حفظ"
+
+#. placeholder {0}: clock(session()!.recordingLeft() ?? 0)
+#: components/ui/components/features/voice/capture/CapturePanel.tsx
+msgid "Stops by itself in {0}. Keep this page open: the recording is made on your device."
+msgstr "يتوقف تلقائيًا بعد {0}. أبقِ هذه الصفحة مفتوحة: فالتسجيل يُصنع على جهازك."
+
+#: components/ui/components/features/voice/capture/CapturePanel.tsx
+msgid "The recording will be lost. Stop it?"
+msgstr "سيضيع التسجيل. أتريد إيقافه؟"
+
+#: components/ui/components/features/voice/capture/CapturePanel.tsx
+msgid "This browser cannot make clips."
+msgstr "لا يستطيع هذا المتصفح صنع المقاطع."
+
+#. placeholder {0}: starterName()
+#: components/ui/components/features/voice/capture/CapturePanel.tsx
+msgid "This room is being recorded by {0}."
+msgstr "تُسجَّل هذه الغرفة بواسطة {0}."
+
+#: components/i18n/errors.tsx
+msgid "This server used its recording time for this month."
+msgstr "استنفد هذا السيرفر وقت التسجيل لهذا الشهر."
+
+#: components/ui/components/features/voice/capture/CapturePanel.tsx
+msgid "Turn clips off"
+msgstr "أوقف المقاطع"
+
+#: components/ui/components/features/voice/capture/CapturePanel.tsx
+msgid "Turn clips on"
+msgstr "فعّل المقاطع"
+
+#: components/ui/components/features/voice/WeakNetworkSign.tsx
+msgid "Very weak connection. Video is paused, sound stays on."
+msgstr "الاتصال ضعيف جدًا. أُوقف الفيديو مؤقتًا ويبقى الصوت."
+
+#. placeholder {0}: names()
+#: components/ui/components/features/voice/capture/CapturePanel.tsx
+msgid "Voices: {0}"
+msgstr "الأصوات: {0}"
+
+#: components/ui/components/features/voice/WeakNetworkSign.tsx
+msgid "Weak connection. Video is lowered to keep the call."
+msgstr "الاتصال ضعيف. خُفّضت جودة الفيديو للحفاظ على المكالمة."
+
+#. placeholder {0}: allowance()?.clips_per_month ?? 0
+#. placeholder {0}: voice.max ?? 0
+#: components/i18n/errors.tsx
+#: components/ui/components/features/voice/capture/CapturePanel.tsx
+msgid "You shared all {0} clips of this month. Feather gives you more."
+msgstr "نشرت كل مقاطعك الـ{0} لهذا الشهر. تمنحك ريشة المزيد."
+
+#. placeholder {0}: left().clips_left
+#. placeholder {1}: left().clips_per_month
+#: components/ui/components/features/voice/capture/CapturePanel.tsx
+msgid "Your clips left this month: {0} of {1}"
+msgstr "مقاطعك المتبقية هذا الشهر: {0} من {1}"
+
+#: components/ui/components/features/voice/capture/CapturePanel.tsx
+msgid "Your voice is included."
+msgstr "صوتك مضمَّن."
+
+#: components/ui/components/features/voice/capture/CapturePanel.tsx
+msgid "Your voice is left out until you choose. Include it?"
+msgstr "صوتك مستبعد حتى تختار. أتضمّه؟"
+
+#: components/ui/components/features/voice/capture/CapturePanel.tsx
+msgid "Your voice is left out."
+msgstr "صوتك مستبعد."

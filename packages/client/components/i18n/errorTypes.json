@@ -108,6 +108,7 @@
   "ProxyError",
   "RateLimited",
   "ReachedMaximumBots",
+  "RecordingTimeUsedUp",
   "RenderFail",
   "RulesNotAccepted",
   "SafetyCaseConflict",
@@ -135,6 +136,7 @@
   "TooManySounds",
   "TooManySpeakers",
   "TooManySupercharges",
+  "TooManyVoiceClips",
   "TotpAlreadyEnabled",
   "UnknownApplication",
   "UnknownAttachment",
@@ -152,5 +154,6 @@
   "VanityTaken",
   "VanityUnavailable",
   "VerificationRequired",
+  "VoiceNotAgreed",
   "VosoUnavailable"
 ]

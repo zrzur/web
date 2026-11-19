@@ -79,6 +79,7 @@ export function KeybindsSettings() {
     open_events: () => t`Open the server's events`,
     toggle_streamer: () => t`Streamer mode on or off`,
     toggle_soundboard: () => t`Open or close the soundboard`,
+    save_clip: () => t`Save a voice clip`,
     open_shortcuts: () => t`Show keyboard shortcuts`,
   };
 
@@ -113,6 +114,11 @@ export function KeybindsSettings() {
           id: "toggle_soundboard",
           title: <Trans>Open or close the soundboard</Trans>,
           description: <Trans>During a server call.</Trans>,
+        },
+        {
+          id: "save_clip",
+          title: <Trans>Save a voice clip</Trans>,
+          description: <Trans>In a voice room where clips are on.</Trans>,
         },
         {
           title: <Trans>Accept a call</Trans>,

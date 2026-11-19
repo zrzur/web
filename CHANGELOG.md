@@ -2,6 +2,13 @@
 
 ## Unreleased
 
+### Voice on a weak connection, clips and recorded rooms (2026-11-19, behind flags, off)
+
+* **A call steps down on a weak connection** (`features.voice_weak_network.enabled`): the app watches packet loss, round trip time and the voice server's verdict every two seconds. Weak: lighter voice (24 kbps), video received and sent at its lowest layer, and a sign in the room. Very weak: video paused both ways, sound kept (16 kbps). It moves one level at a time, down after two bad samples and back up after ten good seconds. Opus FEC, DTX and RED were already on. The numbers are server settings; `lightVoiceBitrate()` gives low-data mode the same "lighter voice".
+* **Voice clips** (`features.voice_clips`): with clips turned on by someone with Manage Channel, "Save the last 30 seconds" (Ctrl+Shift+5) shares the room's last seconds in its chat. Only voices of people who chose "Include my voice" are mixed, on the device of the person clipping; nobody is included before they choose.
+* **Recorded rooms** (`features.voice_recordings`): an episode recorded on the device of the person who started it, saved in the room's chat. The same consent; recording time by Wings level.
+* Everyone in the room sees when clips are on or a recording runs, and who started it. Everyone whose voice is in a clip or an episode can delete it.
+
 ### Links that open a dialog (2026-11-19)
 
 * **An invite link inside a sentence opens the invite** when it is pressed in the app (also in a bot's private reply). Before, the press did nothing: the invite was only shown when the page was loaded at that address. The same fault is fixed for bot links.

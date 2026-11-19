@@ -5,6 +5,7 @@ import { useClient } from "@revolt/client";
 import { useInstance } from "@revolt/instance";
 
 import { useVoice } from "../state";
+import { attachVoiceCapture } from "../capture/captureStore";
 import { attachVoiceExtras } from "../voiceExtras";
 
 import { RoomAudioManager } from "./RoomAudioManager";
@@ -21,6 +22,8 @@ export default function RoomAudio() {
     const channel = voice.channel();
     if (!channel) return;
     onCleanup(attachVoiceExtras(client(), channel, voice, mediaUrl));
+    // clips and recorded rooms (nothing happens where the server has them off)
+    onCleanup(attachVoiceCapture(client(), channel, voice));
   });
   return (
     <RoomContext.Provider value={voice.room}>

@@ -23,6 +23,8 @@ import SoundsUnavailable from "../soundboard/SoundsUnavailable";
 
 import { controlsRoom } from "../rooms/roomControlsOpen";
 
+import { WeakNetworkSign } from "../WeakNetworkSign";
+
 import { ParticipantTile, tile } from "./ParticipantTile";
 import { VoiceCallCardActions } from "./VoiceCallCardActions";
 import { VoiceCallCardStatus } from "./VoiceCallCardStatus";
@@ -33,10 +35,24 @@ const StagePanel = lazyRetry(
   () => import("../stage/StagePanel"),
   () => null,
 );
+// clips and recording: only a server call loads them (the panel shows
+// nothing where the server has both features off)
+const CapturePanel = lazyRetry(
+  () => import("../capture/CapturePanel"),
+  () => null,
+);
 const SoundboardPicker = lazyRetry(
   () => import("../soundboard/SoundboardPicker"),
   SoundsUnavailable,
 );
+
+/** Whether the server has clips or recorded rooms on */
+function captureOn(client: ReturnType<ReturnType<typeof useClient>>) {
+  const features = client.configuration?.features as
+    | { voice_clips?: boolean; voice_recordings?: boolean }
+    | undefined;
+  return !!features?.voice_clips || !!features?.voice_recordings;
+}
 
 /**
  * Call card (active)
@@ -65,6 +81,19 @@ export function VoiceCallCardActiveRoom() {
     <View collapsed={collapsed()}>
       <Show when={!collapsed() && voice.channel()?.isStage && voice.channel()}>
         {(channel) => <StagePanel channel={channel()} />}
+      </Show>
+      <Show when={!collapsed()}>
+        <WeakNetworkSign />
+      </Show>
+      <Show
+        when={
+          !collapsed() &&
+          voice.channel()?.server &&
+          captureOn(client()) &&
+          voice.channel()
+        }
+      >
+        {(channel) => <CapturePanel channel={channel()} />}
       </Show>
       <Participants />
       <Show
