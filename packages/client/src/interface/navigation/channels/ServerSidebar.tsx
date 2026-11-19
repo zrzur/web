@@ -65,6 +65,7 @@ import { EventsLink } from "../../events/EventsLink";
 import { LobbyLink } from "../../lobby/LobbyLink";
 import { sidebarBase } from "./common";
 
+import { textMatches } from "@revolt/common/lib/arabicFold";
 import {
   OrderedCategory,
   applyChannelOrdering,
@@ -189,12 +190,12 @@ export const ServerSidebar = (props: Props) => {
             .filter((channel) => channel),
         }))
         .map((category) => {
-          const q = phone() ? query().trim().toLocaleLowerCase() : "";
+          const q = phone() ? query().trim() : "";
           if (!q) return category;
           return {
             ...category,
             channels: category.channels.filter((channel) =>
-              (channel.name ?? "").toLocaleLowerCase().includes(q),
+              textMatches(channel.name ?? "", q),
             ),
           };
         })

@@ -7,21 +7,23 @@ const MEDIA = "https://cdn.zrzur.com";
 
 describe("proxiedImageURL", () => {
   it("sends outside images through the proxy", () => {
-    expect(proxiedImageURL("https://evil.example/t.png?u=1", PROXY, MEDIA)).toBe(
+    expect(
+      proxiedImageURL("https://evil.example/t.png?u=1", PROXY, MEDIA),
+    ).toBe(
       "https://proxy.zrzur.com/proxy?url=https%3A%2F%2Fevil.example%2Ft.png%3Fu%3D1",
     );
   });
 
   it("never loads an outside image directly when there is no proxy", () => {
-    expect(proxiedImageURL("https://evil.example/t.png", undefined, MEDIA)).toBe(
-      undefined,
-    );
+    expect(
+      proxiedImageURL("https://evil.example/t.png", undefined, MEDIA),
+    ).toBe(undefined);
   });
 
   it("loads the server's own files as they are", () => {
-    expect(proxiedImageURL("https://cdn.zrzur.com/avatars/abc", undefined, MEDIA)).toBe(
-      "https://cdn.zrzur.com/avatars/abc",
-    );
+    expect(
+      proxiedImageURL("https://cdn.zrzur.com/avatars/abc", undefined, MEDIA),
+    ).toBe("https://cdn.zrzur.com/avatars/abc");
     // a look-alike host is not the server's own
     expect(
       proxiedImageURL("https://cdn.zrzur.com.evil.example/x", undefined, MEDIA),

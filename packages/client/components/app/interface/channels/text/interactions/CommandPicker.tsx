@@ -40,6 +40,7 @@ import {
 } from "@revolt/ui/components/features/texteditor/commandText";
 import { Icon } from "@revolt/ui/icons/Icon";
 
+import { anyTextMatches } from "@revolt/common/lib/arabicFold";
 import { InteractionError } from "./api";
 import { dedupeCommands, typedCommand } from "./commandList";
 import {
@@ -181,8 +182,7 @@ export function CommandPicker(props: Props) {
         .filter((command) => !only || command.application_id === only)
         .map((command) => ({ command, name: label(command) }))
         .filter(
-          ({ command, name }) =>
-            !q || name.includes(q) || command.name.includes(q),
+          ({ command, name }) => !q || anyTextMatches([name, command.name], q),
         )
         .sort((a, b) => {
           const aStarts = a.name.startsWith(q) || a.command.name.startsWith(q);
@@ -630,7 +630,7 @@ function CommandBar(props: {
     }
     const q = typed.toLocaleLowerCase();
     const has = (...texts: (string | undefined)[]) =>
-      !q || texts.some((s) => s?.toLocaleLowerCase().includes(q));
+      !q || anyTextMatches(texts, q);
 
     let list: Suggestion[] = [];
     if (option.choices?.length) {

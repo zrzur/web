@@ -33,6 +33,7 @@ import {
 } from "@revolt/ui";
 import { Icon } from "@revolt/ui/icons/Icon";
 
+import { anyTextMatches, compareNames } from "@revolt/common/lib/arabicFold";
 import { HeaderIcon } from "./common/CommonHeader";
 
 type Page = "online" | "all" | "pending" | "blocked";
@@ -51,7 +52,7 @@ export function Friends() {
   const lists = createMemo(() => {
     const list = client()!.users.toList();
     const byName = (a: User, b: User) =>
-      a.displayName.localeCompare(b.displayName);
+      compareNames(a.displayName, b.displayName);
 
     const friends = list
       .filter((user) => user.relationship === "Friend")
@@ -73,13 +74,9 @@ export function Friends() {
   });
 
   const matches = (users: User[]) => {
-    const q = query().trim().toLowerCase();
+    const q = query().trim();
     return q
-      ? users.filter(
-          (u) =>
-            u.displayName.toLowerCase().includes(q) ||
-            u.username.toLowerCase().includes(q),
-        )
+      ? users.filter((u) => anyTextMatches([u.displayName, u.username], q))
       : users;
   };
 

@@ -8,6 +8,7 @@ import { useClient } from "@revolt/client";
 import { Avatar, Dialog, Segmented } from "@revolt/ui";
 import { Icon } from "@revolt/ui/icons/Icon";
 
+import { anyTextMatches, textMatches } from "@revolt/common/lib/arabicFold";
 import { searchChannels, searchPeople } from "./SearchBox";
 import {
   addFilter,
@@ -108,22 +109,18 @@ function Filters(props: {
   const day = () => tokens().find((token) => token.key === "during")?.value;
 
   const people = createMemo(() => {
-    const wanted = find().trim().toLowerCase();
+    const wanted = find().trim();
     return searchPeople(props.channel, client())
       .filter(
         (person) =>
-          !wanted ||
-          person.name.toLowerCase().includes(wanted) ||
-          (person.username ?? "").toLowerCase().includes(wanted),
+          !wanted || anyTextMatches([person.name, person.username], wanted),
       )
       .slice(0, 40);
   });
   const channels = createMemo(() => {
-    const wanted = find().trim().toLowerCase();
+    const wanted = find().trim();
     return searchChannels(props.channel)
-      .filter(
-        (channel) => !wanted || channel.name.toLowerCase().includes(wanted),
-      )
+      .filter((channel) => textMatches(channel.name, wanted))
       .slice(0, 40);
   });
 

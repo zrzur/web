@@ -14,6 +14,7 @@ import {
   TextField,
 } from "@revolt/ui";
 
+import { anyTextMatches, compareNames } from "@revolt/common/lib/arabicFold";
 import { useModals } from "..";
 import { Modals } from "../types";
 
@@ -45,16 +46,14 @@ export function AddMembersToGroupModal(
 
   const [filter, setFilter] = createSignal("");
 
-  const filterLowercase = createMemo(() => filter().toLowerCase());
-
   const users = createMemo(() =>
     client()
       .users.filter((user) => user.relationship === "Friend")
       .filter((user) => !props.group.recipientIds.has(user.id))
       .filter((user) =>
-        user.displayName.toLowerCase().includes(filterLowercase()),
+        anyTextMatches([user.displayName, user.username], filter()),
       )
-      .toSorted((a, b) => a.displayName.localeCompare(b.displayName))
+      .toSorted((a, b) => compareNames(a.displayName, b.displayName))
       .map((user) => ({ item: user, value: user.id })),
   );
 

@@ -1,6 +1,11 @@
 import { describe, expect, it } from "vitest";
 
-import { SOURCE_CODE_URL, buildInfo, serverBuildOf, shortCommit } from "./buildInfo";
+import {
+  SOURCE_CODE_URL,
+  buildInfo,
+  serverBuildOf,
+  shortCommit,
+} from "./buildInfo";
 
 describe("serverBuildOf", () => {
   it("links the server to its own commit", () => {
@@ -14,7 +19,9 @@ describe("serverBuildOf", () => {
     expect(serverBuildOf({ zrzur: "26.0.0" })?.sourceUrl).toBe(
       "https://github.com/zrzur/backend",
     );
-    expect(serverBuildOf({ zrzur: "26.0.0", commit: "x/../y" })?.commit).toBe("");
+    expect(serverBuildOf({ zrzur: "26.0.0", commit: "x/../y" })?.commit).toBe(
+      "",
+    );
     expect(serverBuildOf(undefined)).toBeNull();
   });
 });

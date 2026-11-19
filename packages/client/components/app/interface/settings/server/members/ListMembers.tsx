@@ -25,6 +25,7 @@ import { BotLabel } from "@revolt/ui/components/features/profiles/BotLabel";
 import { BadgeMark } from "@revolt/ui/components/features/profiles/badges/BadgeMark";
 import { Icon } from "@revolt/ui/icons/Icon";
 
+import { anyTextMatches, compareNames } from "@revolt/common/lib/arabicFold";
 import { fetchMemberPage } from "./fetchMemberPage";
 import { mergeMembers, needsServerSearch } from "./memberPages";
 
@@ -90,19 +91,20 @@ export function ListServerMembers(props: { server: Server }) {
     new Intl.DateTimeFormat(i18n.locale, { dateStyle: "medium" }).format(value);
 
   const members = createMemo(() => {
-    const q = search().trim().toLowerCase();
+    const q = search().trim();
     const list = loaded().filter((member) => {
       if (role() && !member.roles.includes(role())) return false;
       if (!q) return true;
-      return [member.displayName, member.user?.username, member.id.user]
-        .filter(Boolean)
-        .some((text) => text!.toLowerCase().includes(q));
+      return (
+        anyTextMatches([member.displayName, member.user?.username], q) ||
+        member.id.user.toLowerCase() === q.toLowerCase()
+      );
     });
     const name = (m: ServerMember) =>
       (m.displayName ?? m.user?.username ?? "").toLowerCase();
     return list.sort((a, b) =>
       sort() === "name"
-        ? name(a).localeCompare(name(b))
+        ? compareNames(name(a), name(b))
         : sort() === "oldest"
           ? +a.joinedAt - +b.joinedAt
           : +b.joinedAt - +a.joinedAt,

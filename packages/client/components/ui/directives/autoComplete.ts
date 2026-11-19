@@ -1,7 +1,14 @@
 import { Accessor, createSignal, JSX, onCleanup } from "solid-js";
 
-import { Channel, Client, ServerMember, ServerRole, User } from "@zrzur/sdk/solid";
+import {
+  Channel,
+  Client,
+  ServerMember,
+  ServerRole,
+  User,
+} from "@zrzur/sdk/solid";
 
+import { compareNames, textMatches } from "@revolt/common/lib/arabicFold";
 import { EMOJI_KEYS, getEmojiByShorthand, MAPPED_EMOJI_KEYS } from "../emojis";
 import { registerFloatingElement, unregisterFloatingElement } from "./floating";
 
@@ -321,15 +328,15 @@ function searchMatches(
         config.searchSpace?.members ??
         config.searchSpace?.users ??
         config.client.users.toList()
-      ).sort((a, b) => a.displayName!.localeCompare(b.displayName!));
+      ).sort((a, b) => compareNames(a.displayName!, b.displayName!));
 
       let i = 0;
       while (matches.length < 10 && i < searchSpace.length) {
         const user = searchSpace[i];
         if (
-          user.displayName?.toLowerCase().includes(query) ||
+          textMatches(user.displayName, query) ||
           (user instanceof ServerMember &&
-            user.user?.username.toLowerCase().includes(query))
+            textMatches(user.user?.username, query))
         ) {
           matches.push(searchSpace[i]);
         }
@@ -359,7 +366,7 @@ function searchMatches(
       let i = 0;
       while (matches.length < 10 && i < searchSpace.length) {
         const role = searchSpace[i];
-        if (role.name?.toLowerCase().includes(query)) {
+        if (textMatches(role.name, query)) {
           matches.push(searchSpace[i]);
         }
 
@@ -388,7 +395,7 @@ function searchMatches(
 
       let i = 0;
       while (matches.length < 10 && i < searchSpace.length) {
-        if (searchSpace[i].name!.toLowerCase().includes(query)) {
+        if (textMatches(searchSpace[i].name, query)) {
           matches.push(searchSpace[i]);
         }
 

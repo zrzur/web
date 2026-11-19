@@ -15,6 +15,7 @@ import { Icon } from "@revolt/ui/icons/Icon";
 
 import { Modals } from "../types";
 
+import { anyTextMatches, compareNames } from "@revolt/common/lib/arabicFold";
 import { PaymentMethodPicker, usePaymentMethod } from "./PaymentMethodPicker";
 import { Line, Notes, Summary } from "./PlusCheckout";
 import { useStartPurchase } from "./billingCheckout";
@@ -61,16 +62,14 @@ export function GiftPlusModal(
     );
 
   const friends = createMemo(() => {
-    const query = filter().trim().toLowerCase();
+    const query = filter().trim();
     return client()
       .users.filter((user) => user.relationship === "Friend" && !user.bot)
       .filter(
         (user) =>
-          !query ||
-          user.displayName.toLowerCase().includes(query) ||
-          user.username.toLowerCase().includes(query),
+          !query || anyTextMatches([user.displayName, user.username], query),
       )
-      .toSorted((a, b) => a.displayName.localeCompare(b.displayName));
+      .toSorted((a, b) => compareNames(a.displayName, b.displayName));
   });
 
   const selected = () =>

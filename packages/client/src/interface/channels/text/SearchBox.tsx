@@ -19,6 +19,7 @@ import { useClient } from "@revolt/client";
 import { Avatar } from "@revolt/ui";
 import { Icon } from "@revolt/ui/icons/Icon";
 
+import { textMatches } from "@revolt/common/lib/arabicFold";
 import { useSearchLabels } from "./searchLabels";
 import {
   HAS_VALUES,
@@ -144,8 +145,7 @@ export function SearchBox(props: {
   const suggestions = createMemo<Suggestion[]>(() => {
     const at = tokenAt(draft(), caret());
     const partial = at.partial.toLowerCase();
-    const starts = (text?: string) =>
-      !!text && text.toLowerCase().includes(partial);
+    const starts = (text?: string) => !!text && textMatches(text, partial);
 
     switch (at.key) {
       case null:

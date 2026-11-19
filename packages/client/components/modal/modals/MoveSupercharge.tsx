@@ -10,6 +10,7 @@ import { Icon } from "@revolt/ui/icons/Icon";
 
 import { Modals } from "../types";
 
+import { compareNames, textMatches } from "@revolt/common/lib/arabicFold";
 import { useBillingError } from "./billingErrors";
 
 /**
@@ -27,12 +28,12 @@ export function MoveSuperchargeModal(
   const [error, setError] = createSignal<string>();
 
   const servers = createMemo(() => {
-    const query = filter().trim().toLowerCase();
+    const query = filter().trim();
     return client()
       .servers.toList()
       .filter((server) => server.id !== props.supercharge.server_id)
-      .filter((server) => !query || server.name.toLowerCase().includes(query))
-      .toSorted((a, b) => a.name.localeCompare(b.name));
+      .filter((server) => textMatches(server.name, query))
+      .toSorted((a, b) => compareNames(a.name, b.name));
   });
 
   async function move() {
