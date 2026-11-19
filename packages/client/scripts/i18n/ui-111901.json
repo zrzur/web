@@ -1,0 +1,184 @@
+{
+  "{0} categories, {1} channels and {2} roles are in place.": [
+    "الفئات: {0}، القنوات: {1}، الأدوار: {2}. كلها في مكانها.",
+    "{0} Kategorien, {1} Kanäle und {2} Rollen sind angelegt."
+  ],
+  "A message for your old community": [
+    "رسالة لمجتمعك القديم",
+    "Eine Nachricht für deine alte Community"
+  ],
+  "Address of the template text": [
+    "عنوان نص القالب",
+    "Adresse des Vorlagentexts"
+  ],
+  "Age-restricted channels stay age-restricted and follow Zrzur's age rules: {0}": [
+    "القنوات المقيّدة بالعمر تبقى مقيّدة وتخضع لقواعد العمر في زرزور: {0}",
+    "Altersbeschränkte Kanäle bleiben altersbeschränkt und folgen den Altersregeln von Zrzur: {0}"
+  ],
+  "Already have a community somewhere else?": [
+    "لديك مجتمع في مكان آخر؟",
+    "Du hast schon eine Community woanders?"
+  ],
+  "Beyond what one server holds here and left out: {0} channels, {1} roles": [
+    "تجاوز ما يتّسع له سيرفر واحد هنا فلم يُنسخ: القنوات {0}، الأدوار {1}",
+    "Mehr, als ein Server hier fasst, und daher weggelassen: {0} Kanäle, {1} Rollen"
+  ],
+  "Build the server": ["ابنِ السيرفر", "Server anlegen"],
+  "Building your server…": ["جارٍ بناء سيرفرك…", "Dein Server wird angelegt…"],
+  "Building…": ["جارٍ البناء…", "Wird angelegt…"],
+  "Categories, text and voice channels, topics, order, roles and colours. Permissions as closely as Zrzur can match them.": [
+    "الفئات والقنوات النصية والصوتية ووصفها وترتيبها، والأدوار وألوانها. الصلاحيات بأقرب ما يطابقها في زرزور.",
+    "Kategorien, Text- und Sprachkanäle, Themen, Reihenfolge, Rollen und Farben. Berechtigungen so genau, wie Zrzur sie abbilden kann."
+  ],
+  "Channels of a kind Zrzur can't build: {0}": [
+    "قنوات من نوع لا يستطيع زرزور بناءه: {0}",
+    "Kanäle einer Art, die Zrzur nicht anlegen kann: {0}"
+  ],
+  "Comes over": ["ينتقل", "Kommt mit"],
+  "Control held back": ["التحكم معلّق", "Kontrolle zurückgehalten"],
+  "Control of the server (managing the server, its roles and permissions) is not copied. You switch it on yourself in Roles for: {0}": [
+    "التحكم بالسيرفر (إدارة السيرفر وأدواره وصلاحياته) لا يُنسخ. تفعّله أنت من صفحة الأدوار لـ: {0}",
+    "Die Kontrolle über den Server (Server, Rollen und Berechtigungen verwalten) wird nicht kopiert. Du schaltest sie selbst unter Rollen ein für: {0}"
+  ],
+  "Copy a server setup": ["انسخ إعداد سيرفر", "Server-Einrichtung übernehmen"],
+  "Copy message": ["انسخ الرسالة", "Nachricht kopieren"],
+  "Copy the link and paste it here.": [
+    "انسخ الرابط والصقه هنا.",
+    "Kopiere den Link und füge ihn hier ein."
+  ],
+  "Copy your server's channels and roles from Discord": [
+    "انسخ قنوات سيرفرك وأدواره من Discord",
+    "Kanäle und Rollen deines Servers von Discord übernehmen"
+  ],
+  "Give the template a name and press <0>Generate Template</0>.": [
+    "اكتب اسمًا للقالب واضغط <0>Generate Template</0>.",
+    "Gib der Vorlage einen Namen und drücke <0>Generate Template</0>."
+  ],
+  "In Discord, open <0>Server Settings</0>, then <1>Server Templates</1>.": [
+    "في Discord افتح <0>Server Settings</0> ثم <1>Server Templates</1>.",
+    "Öffne in Discord <0>Server Settings</0>, dann <1>Server Templates</1>."
+  ],
+  "Kinds of permission Zrzur has no match for: {0}": [
+    "أنواع صلاحيات لا مقابل لها في زرزور: {0}",
+    "Arten von Berechtigungen, für die Zrzur keine Entsprechung hat: {0}"
+  ],
+  "Make an invite from the server's menu when you are ready to bring people in.": [
+    "أنشئ دعوة من قائمة السيرفر حين تكون جاهزًا لاستقبال الناس.",
+    "Erstelle eine Einladung im Servermenü, wenn du Leute hereinholen möchtest."
+  ],
+  "Messages, members, bots, emoji, files and pins. Forum, announcement and stage channels are not in a template.": [
+    "الرسائل والأعضاء والبوتات والإيموجي والملفات والرسائل المثبّتة. قنوات المنتدى والإعلانات والمنصّة ليست ضمن القالب.",
+    "Nachrichten, Mitglieder, Bots, Emojis, Dateien und angepinnte Nachrichten. Forum-, Ankündigungs- und Bühnenkanäle sind nicht in einer Vorlage."
+  ],
+  "Messages, members, bots, emoji, files and pins. Members join only through your invite link.": [
+    "الرسائل والأعضاء والبوتات والإيموجي والملفات والرسائل المثبّتة. ينضم الأعضاء عبر رابط دعوتك فقط.",
+    "Nachrichten, Mitglieder, Bots, Emojis, Dateien und angepinnte Nachrichten. Mitglieder kommen nur über deinen Einladungslink."
+  ],
+  "Names longer than {NAME_LIMIT} characters were shortened: {0}": [
+    "أسماء أطول من {NAME_LIMIT} حرفًا تم اختصارها: {0}",
+    "Namen mit mehr als {NAME_LIMIT} Zeichen wurden gekürzt: {0}"
+  ],
+  "No link? Paste the template text instead": [
+    "لا تملك رابطًا؟ الصق نص القالب بدلًا منه",
+    "Kein Link? Füge stattdessen den Vorlagentext ein"
+  ],
+  "Nothing exists yet. Check it, then build.": [
+    "لم يُنشأ شيء بعد. راجعه ثم ابنِ.",
+    "Noch existiert nichts. Prüfe es, dann lege an."
+  ],
+  "Only copy a server you run or have permission to copy.": [
+    "انسخ فقط سيرفرًا تديره أو يحق لك نسخه.",
+    "Kopiere nur einen Server, den du leitest oder kopieren darfst."
+  ],
+  "Open the server": ["افتح السيرفر", "Server öffnen"],
+  "Open the template's address in your browser, copy all the text on that page and paste it here.": [
+    "افتح عنوان القالب في متصفحك، وانسخ كل النص في تلك الصفحة والصقه هنا.",
+    "Öffne die Adresse der Vorlage in deinem Browser, kopiere den ganzen Text der Seite und füge ihn hier ein."
+  ],
+  "Open this address in your browser, copy all the text on that page and paste it here.": [
+    "افتح هذا العنوان في متصفحك، وانسخ كل النص في تلك الصفحة والصقه هنا.",
+    "Öffne diese Adresse in deinem Browser, kopiere den ganzen Text der Seite und füge ihn hier ein."
+  ],
+  "Paste your template link first.": [
+    "الصق رابط القالب أولًا.",
+    "Füge zuerst deinen Vorlagenlink ein."
+  ],
+  "Permissions are matched as closely as Zrzur can. Check them before you invite people.": [
+    "تُطابَق الصلاحيات بأقرب ما يستطيعه زرزور. راجعها قبل أن تدعو الناس.",
+    "Berechtigungen werden so genau abgebildet, wie Zrzur es kann. Prüfe sie, bevor du Leute einlädst."
+  ],
+  "Permissions set for single members: {0}": [
+    "صلاحيات مضبوطة لأعضاء بعينهم: {0}",
+    "Berechtigungen für einzelne Mitglieder: {0}"
+  ],
+  "Read the template": ["اقرأ القالب", "Vorlage lesen"],
+  "Read-only": ["للقراءة فقط", "Nur lesen"],
+  "Reading…": ["جارٍ القراءة…", "Wird gelesen…"],
+  "Roles are empty until people join: give them out in Server settings. A role that belonged to a bot can be removed there.": [
+    "الأدوار فارغة حتى ينضم الأعضاء: وزّعها من إعدادات السيرفر. والدور الذي كان لبوت يمكن حذفه من هناك.",
+    "Rollen sind leer, bis Leute beitreten: Vergib sie in den Servereinstellungen. Eine Rolle, die einem Bot gehörte, kannst du dort entfernen."
+  ],
+  "Roles, highest first": ["الأدوار، الأعلى أولًا", "Rollen, höchste zuerst"],
+  "Stays behind": ["يبقى هناك", "Bleibt dort"],
+  "Template link": ["رابط القالب", "Vorlagenlink"],
+  "Template text": ["نص القالب", "Vorlagentext"],
+  "This is an invite link, not a template link. Follow the three steps above to make a template link.": [
+    "هذا رابط دعوة وليس رابط قالب. اتبع الخطوات الثلاث أعلاه لإنشاء رابط قالب.",
+    "Das ist ein Einladungslink, kein Vorlagenlink. Folge den drei Schritten oben, um einen Vorlagenlink zu erstellen."
+  ],
+  "This is not a complete server template. Copy the whole text and paste it again.": [
+    "هذا ليس قالب سيرفر كاملًا. انسخ النص كله والصقه مرة أخرى.",
+    "Das ist keine vollständige Servervorlage. Kopiere den ganzen Text und füge ihn noch einmal ein."
+  ],
+  "This is not a server template link.": [
+    "هذا ليس رابط قالب سيرفر.",
+    "Das ist kein Link zu einer Servervorlage."
+  ],
+  "This is what will be built": ["هذا ما سيُبنى", "Das wird angelegt"],
+  "This server already has channels or roles. Copy the setup into a new server.": [
+    "في هذا السيرفر قنوات أو أدوار بالفعل. انسخ الإعداد إلى سيرفر جديد.",
+    "Dieser Server hat schon Kanäle oder Rollen. Übernimm die Einrichtung in einen neuen Server."
+  ],
+  "This template has no channels or roles to copy.": [
+    "لا قنوات ولا أدوار في هذا القالب لنسخها.",
+    "Diese Vorlage enthält keine Kanäle oder Rollen zum Kopieren."
+  ],
+  "This template is too large to read.": [
+    "هذا القالب أكبر من أن يُقرأ.",
+    "Diese Vorlage ist zu groß zum Lesen."
+  ],
+  "This template link does not work any more. Generate a new one in Discord and paste it again.": [
+    "رابط القالب لم يعد يعمل. أنشئ رابطًا جديدًا في Discord والصقه مرة أخرى.",
+    "Dieser Vorlagenlink funktioniert nicht mehr. Erstelle in Discord einen neuen und füge ihn noch einmal ein."
+  ],
+  "Too many tries. Wait a little and try again.": [
+    "محاولات كثيرة. انتظر قليلًا ثم حاول مرة أخرى.",
+    "Zu viele Versuche. Warte kurz und versuche es noch einmal."
+  ],
+  "Voice quality settings, the AFK channel and the server picture": [
+    "إعدادات جودة الصوت وقناة الغياب وصورة السيرفر",
+    "Einstellungen zur Sprachqualität, der AFK-Kanal und das Serverbild"
+  ],
+  "We are opening a home on Zrzur. The channels and roles are set up. Join here: {invite}": [
+    "نفتح بيتًا لنا على زرزور. القنوات والأدوار جاهزة. انضموا من هنا: {invite}",
+    "Wir eröffnen ein Zuhause auf Zrzur. Kanäle und Rollen sind eingerichtet. Hier beitreten: {invite}"
+  ],
+  "Will not come over": ["لن ينتقل", "Kommt nicht mit"],
+  "Your server is ready": ["سيرفرك جاهز", "Dein Server ist bereit"],
+  "Yours to edit and post. Zrzur posts nothing anywhere.": [
+    "عدّلها وانشرها أنت. زرزور لا ينشر شيئًا في أي مكان.",
+    "Du bearbeitest und postest sie selbst. Zrzur postet nirgendwo etwas."
+  ],
+  "Zrzur builds them from a server template that you make in Discord. Zrzur never asks for your Discord password.": [
+    "يبنيها زرزور من قالب سيرفر تنشئه أنت في Discord. لا يطلب زرزور كلمة مرور Discord أبدًا.",
+    "Zrzur legt sie aus einer Servervorlage an, die du in Discord erstellst. Zrzur fragt nie nach deinem Discord-Passwort."
+  ],
+  "Zrzur can't read the link from Discord right now. Paste the template text instead.": [
+    "لا يستطيع زرزور قراءة الرابط من Discord الآن. الصق نص القالب بدلًا منه.",
+    "Zrzur kann den Link gerade nicht von Discord lesen. Füge stattdessen den Vorlagentext ein."
+  ],
+  "Zrzur keeps only what becomes your server. Nothing changes in Discord. Zrzur is not affiliated with Discord.": [
+    "لا يحتفظ زرزور إلا بما يصير سيرفرك. لا يتغير شيء في Discord. زرزور غير تابع لـ Discord.",
+    "Zrzur behält nur, was zu deinem Server wird. In Discord ändert sich nichts. Zrzur steht in keiner Verbindung zu Discord."
+  ]
+}

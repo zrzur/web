@@ -28918,3 +28918,254 @@ msgstr "Zrzur, right on <0>your desktop.</0>"
 #: components/i18n/errors.tsx
 msgid "This server's AutoMod blocked your message."
 msgstr "This server's AutoMod blocked your message."
+
+#. placeholder {0}: report()?.categories ?? 0
+#. placeholder {1}: report()?.channels ?? 0
+#. placeholder {2}: report()?.roles ?? 0
+#: components/modal/lib/ServerImportFlow.tsx
+msgid "{0} categories, {1} channels and {2} roles are in place."
+msgstr "{0} categories, {1} channels and {2} roles are in place."
+
+#: components/modal/lib/ServerImportFlow.tsx
+msgid "A message for your old community"
+msgstr "A message for your old community"
+
+#: components/modal/lib/ServerImportFlow.tsx
+msgid "Address of the template text"
+msgstr "Address of the template text"
+
+#. placeholder {0}: report().mature_channels
+#: components/modal/lib/ServerImportFlow.tsx
+msgid "Age-restricted channels stay age-restricted and follow Zrzur's age rules: {0}"
+msgstr "Age-restricted channels stay age-restricted and follow Zrzur's age rules: {0}"
+
+#: components/modal/lib/CreateServerFlow.tsx
+msgid "Already have a community somewhere else?"
+msgstr "Already have a community somewhere else?"
+
+#. placeholder {0}: report().over_limit_channels
+#. placeholder {1}: report().over_limit_roles
+#: components/modal/lib/ServerImportFlow.tsx
+msgid "Beyond what one server holds here and left out: {0} channels, {1} roles"
+msgstr "Beyond what one server holds here and left out: {0} channels, {1} roles"
+
+#: components/modal/lib/ServerImportFlow.tsx
+msgid "Build the server"
+msgstr "Build the server"
+
+#: components/modal/lib/ServerImportFlow.tsx
+msgid "Building your server…"
+msgstr "Building your server…"
+
+#: components/modal/lib/ServerImportFlow.tsx
+msgid "Building…"
+msgstr "Building…"
+
+#: components/modal/lib/ServerImportFlow.tsx
+msgid "Categories, text and voice channels, topics, order, roles and colours. Permissions as closely as Zrzur can match them."
+msgstr "Categories, text and voice channels, topics, order, roles and colours. Permissions as closely as Zrzur can match them."
+
+#. placeholder {0}: listed(report().skipped_channels)
+#: components/modal/lib/ServerImportFlow.tsx
+msgid "Channels of a kind Zrzur can't build: {0}"
+msgstr "Channels of a kind Zrzur can't build: {0}"
+
+#: components/modal/lib/ServerImportFlow.tsx
+msgid "Comes over"
+msgstr "Comes over"
+
+#: components/modal/lib/ServerImportFlow.tsx
+msgid "Control held back"
+msgstr "Control held back"
+
+#. placeholder {0}: listed(report().held_back)
+#: components/modal/lib/ServerImportFlow.tsx
+msgid "Control of the server (managing the server, its roles and permissions) is not copied. You switch it on yourself in Roles for: {0}"
+msgstr "Control of the server (managing the server, its roles and permissions) is not copied. You switch it on yourself in Roles for: {0}"
+
+#: components/modal/lib/CreateServerFlow.tsx
+msgid "Copy a server setup"
+msgstr "Copy a server setup"
+
+#: components/modal/lib/ServerImportFlow.tsx
+msgid "Copy message"
+msgstr "Copy message"
+
+#: components/modal/lib/ServerImportFlow.tsx
+msgid "Copy the link and paste it here."
+msgstr "Copy the link and paste it here."
+
+#: components/modal/lib/ServerImportFlow.tsx
+msgid "Copy your server's channels and roles from Discord"
+msgstr "Copy your server's channels and roles from Discord"
+
+#: components/modal/lib/ServerImportFlow.tsx
+msgid "Give the template a name and press <0>Generate Template</0>."
+msgstr "Give the template a name and press <0>Generate Template</0>."
+
+#: components/modal/lib/ServerImportFlow.tsx
+msgid "In Discord, open <0>Server Settings</0>, then <1>Server Templates</1>."
+msgstr "In Discord, open <0>Server Settings</0>, then <1>Server Templates</1>."
+
+#. placeholder {0}: report().unmatched_permissions.length
+#: components/modal/lib/ServerImportFlow.tsx
+msgid "Kinds of permission Zrzur has no match for: {0}"
+msgstr "Kinds of permission Zrzur has no match for: {0}"
+
+#: components/modal/lib/ServerImportFlow.tsx
+msgid "Make an invite from the server's menu when you are ready to bring people in."
+msgstr "Make an invite from the server's menu when you are ready to bring people in."
+
+#: components/modal/lib/ServerImportFlow.tsx
+msgid "Messages, members, bots, emoji, files and pins. Forum, announcement and stage channels are not in a template."
+msgstr "Messages, members, bots, emoji, files and pins. Forum, announcement and stage channels are not in a template."
+
+#: components/modal/lib/ServerImportFlow.tsx
+msgid "Messages, members, bots, emoji, files and pins. Members join only through your invite link."
+msgstr "Messages, members, bots, emoji, files and pins. Members join only through your invite link."
+
+#. placeholder {0}: report().shortened.length
+#: components/modal/lib/ServerImportFlow.tsx
+msgid "Names longer than {NAME_LIMIT} characters were shortened: {0}"
+msgstr "Names longer than {NAME_LIMIT} characters were shortened: {0}"
+
+#: components/modal/lib/ServerImportFlow.tsx
+msgid "No link? Paste the template text instead"
+msgstr "No link? Paste the template text instead"
+
+#: components/modal/lib/ServerImportFlow.tsx
+msgid "Nothing exists yet. Check it, then build."
+msgstr "Nothing exists yet. Check it, then build."
+
+#: components/modal/lib/ServerImportFlow.tsx
+msgid "Only copy a server you run or have permission to copy."
+msgstr "Only copy a server you run or have permission to copy."
+
+#: components/modal/lib/ServerImportFlow.tsx
+msgid "Open the server"
+msgstr "Open the server"
+
+#: components/modal/lib/ServerImportFlow.tsx
+msgid "Open the template's address in your browser, copy all the text on that page and paste it here."
+msgstr "Open the template's address in your browser, copy all the text on that page and paste it here."
+
+#: components/modal/lib/ServerImportFlow.tsx
+msgid "Open this address in your browser, copy all the text on that page and paste it here."
+msgstr "Open this address in your browser, copy all the text on that page and paste it here."
+
+#: components/modal/lib/ServerImportFlow.tsx
+msgid "Paste your template link first."
+msgstr "Paste your template link first."
+
+#: components/modal/lib/ServerImportFlow.tsx
+msgid "Permissions are matched as closely as Zrzur can. Check them before you invite people."
+msgstr "Permissions are matched as closely as Zrzur can. Check them before you invite people."
+
+#. placeholder {0}: report().member_overrides
+#: components/modal/lib/ServerImportFlow.tsx
+msgid "Permissions set for single members: {0}"
+msgstr "Permissions set for single members: {0}"
+
+#: components/modal/lib/ServerImportFlow.tsx
+msgid "Read the template"
+msgstr "Read the template"
+
+#: components/modal/lib/ServerImportFlow.tsx
+msgid "Read-only"
+msgstr "Read-only"
+
+#: components/modal/lib/ServerImportFlow.tsx
+msgid "Reading…"
+msgstr "Reading…"
+
+#: components/modal/lib/ServerImportFlow.tsx
+msgid "Roles are empty until people join: give them out in Server settings. A role that belonged to a bot can be removed there."
+msgstr "Roles are empty until people join: give them out in Server settings. A role that belonged to a bot can be removed there."
+
+#: components/modal/lib/ServerImportFlow.tsx
+msgid "Roles, highest first"
+msgstr "Roles, highest first"
+
+#: components/modal/lib/ServerImportFlow.tsx
+msgid "Stays behind"
+msgstr "Stays behind"
+
+#: components/modal/lib/ServerImportFlow.tsx
+msgid "Template link"
+msgstr "Template link"
+
+#: components/modal/lib/ServerImportFlow.tsx
+msgid "Template text"
+msgstr "Template text"
+
+#: components/modal/lib/ServerImportFlow.tsx
+msgid "This is an invite link, not a template link. Follow the three steps above to make a template link."
+msgstr "This is an invite link, not a template link. Follow the three steps above to make a template link."
+
+#: components/i18n/errors.tsx
+#: components/modal/lib/ServerImportFlow.tsx
+msgid "This is not a complete server template. Copy the whole text and paste it again."
+msgstr "This is not a complete server template. Copy the whole text and paste it again."
+
+#: components/modal/lib/ServerImportFlow.tsx
+msgid "This is not a server template link."
+msgstr "This is not a server template link."
+
+#: components/modal/lib/ServerImportFlow.tsx
+msgid "This is what will be built"
+msgstr "This is what will be built"
+
+#: components/i18n/errors.tsx
+#: components/modal/lib/ServerImportFlow.tsx
+msgid "This server already has channels or roles. Copy the setup into a new server."
+msgstr "This server already has channels or roles. Copy the setup into a new server."
+
+#: components/modal/lib/ServerImportFlow.tsx
+msgid "This template has no channels or roles to copy."
+msgstr "This template has no channels or roles to copy."
+
+#: components/modal/lib/ServerImportFlow.tsx
+msgid "This template is too large to read."
+msgstr "This template is too large to read."
+
+#: components/i18n/errors.tsx
+#: components/modal/lib/ServerImportFlow.tsx
+msgid "This template link does not work any more. Generate a new one in Discord and paste it again."
+msgstr "This template link does not work any more. Generate a new one in Discord and paste it again."
+
+#: components/modal/lib/ServerImportFlow.tsx
+msgid "Too many tries. Wait a little and try again."
+msgstr "Too many tries. Wait a little and try again."
+
+#: components/modal/lib/ServerImportFlow.tsx
+msgid "Voice quality settings, the AFK channel and the server picture"
+msgstr "Voice quality settings, the AFK channel and the server picture"
+
+#: components/modal/lib/ServerImportFlow.tsx
+msgid "We are opening a home on Zrzur. The channels and roles are set up. Join here: {invite}"
+msgstr "We are opening a home on Zrzur. The channels and roles are set up. Join here: {invite}"
+
+#: components/modal/lib/ServerImportFlow.tsx
+msgid "Will not come over"
+msgstr "Will not come over"
+
+#: components/modal/lib/ServerImportFlow.tsx
+msgid "Your server is ready"
+msgstr "Your server is ready"
+
+#: components/modal/lib/ServerImportFlow.tsx
+msgid "Yours to edit and post. Zrzur posts nothing anywhere."
+msgstr "Yours to edit and post. Zrzur posts nothing anywhere."
+
+#: components/modal/lib/ServerImportFlow.tsx
+msgid "Zrzur builds them from a server template that you make in Discord. Zrzur never asks for your Discord password."
+msgstr "Zrzur builds them from a server template that you make in Discord. Zrzur never asks for your Discord password."
+
+#: components/i18n/errors.tsx
+#: components/modal/lib/ServerImportFlow.tsx
+msgid "Zrzur can't read the link from Discord right now. Paste the template text instead."
+msgstr "Zrzur can't read the link from Discord right now. Paste the template text instead."
+
+#: components/modal/lib/ServerImportFlow.tsx
+msgid "Zrzur keeps only what becomes your server. Nothing changes in Discord. Zrzur is not affiliated with Discord."
+msgstr "Zrzur keeps only what becomes your server. Nothing changes in Discord. Zrzur is not affiliated with Discord."

@@ -248,6 +248,20 @@ export function useError() {
       if ((err.type as string) === "AgeChangeNotAllowed") {
         return t`Your age can't be changed this way. If it is wrong, write to privacy@zrzur.com.`;
       }
+      // "Copy a server setup": the dialog words these itself; these lines
+      // are for anywhere else the errors may surface
+      if ((err.type as string) === "ImportInvalid") {
+        return t`This is not a complete server template. Copy the whole text and paste it again.`;
+      }
+      if ((err.type as string) === "ImportTemplateNotFound") {
+        return t`This template link does not work any more. Generate a new one in Discord and paste it again.`;
+      }
+      if ((err.type as string) === "ImportSourceUnavailable") {
+        return t`Zrzur can't read the link from Discord right now. Paste the template text instead.`;
+      }
+      if ((err.type as string) === "ImportTargetNotEmpty") {
+        return t`This server already has channels or roles. Copy the setup into a new server.`;
+      }
       if ((err.type as string) === "VanityUnavailable") {
         return t`This server needs a higher Wings level for a custom link.`;
       }
@@ -292,7 +306,8 @@ export function useError() {
         const { rule } = err as unknown as { rule?: string };
         // a rule may have no name: then the sentence ends, with no colon
         // left hanging (owner's screenshot, 2026-11-18)
-        if (!rule?.trim()) return t`This server's AutoMod blocked your message.`;
+        if (!rule?.trim())
+          return t`This server's AutoMod blocked your message.`;
         return t`This server's AutoMod blocked your message: ${rule}`;
       }
       if ((err.type as string) === "RulesNotAccepted") {

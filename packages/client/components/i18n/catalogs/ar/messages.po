@@ -28915,3 +28915,254 @@ msgstr "زرزور، مباشرةً على <0>سطح مكتبك.</0>"
 #: components/i18n/errors.tsx
 msgid "This server's AutoMod blocked your message."
 msgstr "حجب الإشراف التلقائي في هذا السيرفر رسالتك."
+
+#. placeholder {0}: report()?.categories ?? 0
+#. placeholder {1}: report()?.channels ?? 0
+#. placeholder {2}: report()?.roles ?? 0
+#: components/modal/lib/ServerImportFlow.tsx
+msgid "{0} categories, {1} channels and {2} roles are in place."
+msgstr "الفئات: {0}، القنوات: {1}، الأدوار: {2}. كلها في مكانها."
+
+#: components/modal/lib/ServerImportFlow.tsx
+msgid "A message for your old community"
+msgstr "رسالة لمجتمعك القديم"
+
+#: components/modal/lib/ServerImportFlow.tsx
+msgid "Address of the template text"
+msgstr "عنوان نص القالب"
+
+#. placeholder {0}: report().mature_channels
+#: components/modal/lib/ServerImportFlow.tsx
+msgid "Age-restricted channels stay age-restricted and follow Zrzur's age rules: {0}"
+msgstr "القنوات المقيّدة بالعمر تبقى مقيّدة وتخضع لقواعد العمر في زرزور: {0}"
+
+#: components/modal/lib/CreateServerFlow.tsx
+msgid "Already have a community somewhere else?"
+msgstr "لديك مجتمع في مكان آخر؟"
+
+#. placeholder {0}: report().over_limit_channels
+#. placeholder {1}: report().over_limit_roles
+#: components/modal/lib/ServerImportFlow.tsx
+msgid "Beyond what one server holds here and left out: {0} channels, {1} roles"
+msgstr "تجاوز ما يتّسع له سيرفر واحد هنا فلم يُنسخ: القنوات {0}، الأدوار {1}"
+
+#: components/modal/lib/ServerImportFlow.tsx
+msgid "Build the server"
+msgstr "ابنِ السيرفر"
+
+#: components/modal/lib/ServerImportFlow.tsx
+msgid "Building your server…"
+msgstr "جارٍ بناء سيرفرك…"
+
+#: components/modal/lib/ServerImportFlow.tsx
+msgid "Building…"
+msgstr "جارٍ البناء…"
+
+#: components/modal/lib/ServerImportFlow.tsx
+msgid "Categories, text and voice channels, topics, order, roles and colours. Permissions as closely as Zrzur can match them."
+msgstr "الفئات والقنوات النصية والصوتية ووصفها وترتيبها، والأدوار وألوانها. الصلاحيات بأقرب ما يطابقها في زرزور."
+
+#. placeholder {0}: listed(report().skipped_channels)
+#: components/modal/lib/ServerImportFlow.tsx
+msgid "Channels of a kind Zrzur can't build: {0}"
+msgstr "قنوات من نوع لا يستطيع زرزور بناءه: {0}"
+
+#: components/modal/lib/ServerImportFlow.tsx
+msgid "Comes over"
+msgstr "ينتقل"
+
+#: components/modal/lib/ServerImportFlow.tsx
+msgid "Control held back"
+msgstr "التحكم معلّق"
+
+#. placeholder {0}: listed(report().held_back)
+#: components/modal/lib/ServerImportFlow.tsx
+msgid "Control of the server (managing the server, its roles and permissions) is not copied. You switch it on yourself in Roles for: {0}"
+msgstr "التحكم بالسيرفر (إدارة السيرفر وأدواره وصلاحياته) لا يُنسخ. تفعّله أنت من صفحة الأدوار لـ: {0}"
+
+#: components/modal/lib/CreateServerFlow.tsx
+msgid "Copy a server setup"
+msgstr "انسخ إعداد سيرفر"
+
+#: components/modal/lib/ServerImportFlow.tsx
+msgid "Copy message"
+msgstr "انسخ الرسالة"
+
+#: components/modal/lib/ServerImportFlow.tsx
+msgid "Copy the link and paste it here."
+msgstr "انسخ الرابط والصقه هنا."
+
+#: components/modal/lib/ServerImportFlow.tsx
+msgid "Copy your server's channels and roles from Discord"
+msgstr "انسخ قنوات سيرفرك وأدواره من Discord"
+
+#: components/modal/lib/ServerImportFlow.tsx
+msgid "Give the template a name and press <0>Generate Template</0>."
+msgstr "اكتب اسمًا للقالب واضغط <0>Generate Template</0>."
+
+#: components/modal/lib/ServerImportFlow.tsx
+msgid "In Discord, open <0>Server Settings</0>, then <1>Server Templates</1>."
+msgstr "في Discord افتح <0>Server Settings</0> ثم <1>Server Templates</1>."
+
+#. placeholder {0}: report().unmatched_permissions.length
+#: components/modal/lib/ServerImportFlow.tsx
+msgid "Kinds of permission Zrzur has no match for: {0}"
+msgstr "أنواع صلاحيات لا مقابل لها في زرزور: {0}"
+
+#: components/modal/lib/ServerImportFlow.tsx
+msgid "Make an invite from the server's menu when you are ready to bring people in."
+msgstr "أنشئ دعوة من قائمة السيرفر حين تكون جاهزًا لاستقبال الناس."
+
+#: components/modal/lib/ServerImportFlow.tsx
+msgid "Messages, members, bots, emoji, files and pins. Forum, announcement and stage channels are not in a template."
+msgstr "الرسائل والأعضاء والبوتات والإيموجي والملفات والرسائل المثبّتة. قنوات المنتدى والإعلانات والمنصّة ليست ضمن القالب."
+
+#: components/modal/lib/ServerImportFlow.tsx
+msgid "Messages, members, bots, emoji, files and pins. Members join only through your invite link."
+msgstr "الرسائل والأعضاء والبوتات والإيموجي والملفات والرسائل المثبّتة. ينضم الأعضاء عبر رابط دعوتك فقط."
+
+#. placeholder {0}: report().shortened.length
+#: components/modal/lib/ServerImportFlow.tsx
+msgid "Names longer than {NAME_LIMIT} characters were shortened: {0}"
+msgstr "أسماء أطول من {NAME_LIMIT} حرفًا تم اختصارها: {0}"
+
+#: components/modal/lib/ServerImportFlow.tsx
+msgid "No link? Paste the template text instead"
+msgstr "لا تملك رابطًا؟ الصق نص القالب بدلًا منه"
+
+#: components/modal/lib/ServerImportFlow.tsx
+msgid "Nothing exists yet. Check it, then build."
+msgstr "لم يُنشأ شيء بعد. راجعه ثم ابنِ."
+
+#: components/modal/lib/ServerImportFlow.tsx
+msgid "Only copy a server you run or have permission to copy."
+msgstr "انسخ فقط سيرفرًا تديره أو يحق لك نسخه."
+
+#: components/modal/lib/ServerImportFlow.tsx
+msgid "Open the server"
+msgstr "افتح السيرفر"
+
+#: components/modal/lib/ServerImportFlow.tsx
+msgid "Open the template's address in your browser, copy all the text on that page and paste it here."
+msgstr "افتح عنوان القالب في متصفحك، وانسخ كل النص في تلك الصفحة والصقه هنا."
+
+#: components/modal/lib/ServerImportFlow.tsx
+msgid "Open this address in your browser, copy all the text on that page and paste it here."
+msgstr "افتح هذا العنوان في متصفحك، وانسخ كل النص في تلك الصفحة والصقه هنا."
+
+#: components/modal/lib/ServerImportFlow.tsx
+msgid "Paste your template link first."
+msgstr "الصق رابط القالب أولًا."
+
+#: components/modal/lib/ServerImportFlow.tsx
+msgid "Permissions are matched as closely as Zrzur can. Check them before you invite people."
+msgstr "تُطابَق الصلاحيات بأقرب ما يستطيعه زرزور. راجعها قبل أن تدعو الناس."
+
+#. placeholder {0}: report().member_overrides
+#: components/modal/lib/ServerImportFlow.tsx
+msgid "Permissions set for single members: {0}"
+msgstr "صلاحيات مضبوطة لأعضاء بعينهم: {0}"
+
+#: components/modal/lib/ServerImportFlow.tsx
+msgid "Read the template"
+msgstr "اقرأ القالب"
+
+#: components/modal/lib/ServerImportFlow.tsx
+msgid "Read-only"
+msgstr "للقراءة فقط"
+
+#: components/modal/lib/ServerImportFlow.tsx
+msgid "Reading…"
+msgstr "جارٍ القراءة…"
+
+#: components/modal/lib/ServerImportFlow.tsx
+msgid "Roles are empty until people join: give them out in Server settings. A role that belonged to a bot can be removed there."
+msgstr "الأدوار فارغة حتى ينضم الأعضاء: وزّعها من إعدادات السيرفر. والدور الذي كان لبوت يمكن حذفه من هناك."
+
+#: components/modal/lib/ServerImportFlow.tsx
+msgid "Roles, highest first"
+msgstr "الأدوار، الأعلى أولًا"
+
+#: components/modal/lib/ServerImportFlow.tsx
+msgid "Stays behind"
+msgstr "يبقى هناك"
+
+#: components/modal/lib/ServerImportFlow.tsx
+msgid "Template link"
+msgstr "رابط القالب"
+
+#: components/modal/lib/ServerImportFlow.tsx
+msgid "Template text"
+msgstr "نص القالب"
+
+#: components/modal/lib/ServerImportFlow.tsx
+msgid "This is an invite link, not a template link. Follow the three steps above to make a template link."
+msgstr "هذا رابط دعوة وليس رابط قالب. اتبع الخطوات الثلاث أعلاه لإنشاء رابط قالب."
+
+#: components/i18n/errors.tsx
+#: components/modal/lib/ServerImportFlow.tsx
+msgid "This is not a complete server template. Copy the whole text and paste it again."
+msgstr "هذا ليس قالب سيرفر كاملًا. انسخ النص كله والصقه مرة أخرى."
+
+#: components/modal/lib/ServerImportFlow.tsx
+msgid "This is not a server template link."
+msgstr "هذا ليس رابط قالب سيرفر."
+
+#: components/modal/lib/ServerImportFlow.tsx
+msgid "This is what will be built"
+msgstr "هذا ما سيُبنى"
+
+#: components/i18n/errors.tsx
+#: components/modal/lib/ServerImportFlow.tsx
+msgid "This server already has channels or roles. Copy the setup into a new server."
+msgstr "في هذا السيرفر قنوات أو أدوار بالفعل. انسخ الإعداد إلى سيرفر جديد."
+
+#: components/modal/lib/ServerImportFlow.tsx
+msgid "This template has no channels or roles to copy."
+msgstr "لا قنوات ولا أدوار في هذا القالب لنسخها."
+
+#: components/modal/lib/ServerImportFlow.tsx
+msgid "This template is too large to read."
+msgstr "هذا القالب أكبر من أن يُقرأ."
+
+#: components/i18n/errors.tsx
+#: components/modal/lib/ServerImportFlow.tsx
+msgid "This template link does not work any more. Generate a new one in Discord and paste it again."
+msgstr "رابط القالب لم يعد يعمل. أنشئ رابطًا جديدًا في Discord والصقه مرة أخرى."
+
+#: components/modal/lib/ServerImportFlow.tsx
+msgid "Too many tries. Wait a little and try again."
+msgstr "محاولات كثيرة. انتظر قليلًا ثم حاول مرة أخرى."
+
+#: components/modal/lib/ServerImportFlow.tsx
+msgid "Voice quality settings, the AFK channel and the server picture"
+msgstr "إعدادات جودة الصوت وقناة الغياب وصورة السيرفر"
+
+#: components/modal/lib/ServerImportFlow.tsx
+msgid "We are opening a home on Zrzur. The channels and roles are set up. Join here: {invite}"
+msgstr "نفتح بيتًا لنا على زرزور. القنوات والأدوار جاهزة. انضموا من هنا: {invite}"
+
+#: components/modal/lib/ServerImportFlow.tsx
+msgid "Will not come over"
+msgstr "لن ينتقل"
+
+#: components/modal/lib/ServerImportFlow.tsx
+msgid "Your server is ready"
+msgstr "سيرفرك جاهز"
+
+#: components/modal/lib/ServerImportFlow.tsx
+msgid "Yours to edit and post. Zrzur posts nothing anywhere."
+msgstr "عدّلها وانشرها أنت. زرزور لا ينشر شيئًا في أي مكان."
+
+#: components/modal/lib/ServerImportFlow.tsx
+msgid "Zrzur builds them from a server template that you make in Discord. Zrzur never asks for your Discord password."
+msgstr "يبنيها زرزور من قالب سيرفر تنشئه أنت في Discord. لا يطلب زرزور كلمة مرور Discord أبدًا."
+
+#: components/i18n/errors.tsx
+#: components/modal/lib/ServerImportFlow.tsx
+msgid "Zrzur can't read the link from Discord right now. Paste the template text instead."
+msgstr "لا يستطيع زرزور قراءة الرابط من Discord الآن. الصق نص القالب بدلًا منه."
+
+#: components/modal/lib/ServerImportFlow.tsx
+msgid "Zrzur keeps only what becomes your server. Nothing changes in Discord. Zrzur is not affiliated with Discord."
+msgstr "لا يحتفظ زرزور إلا بما يصير سيرفرك. لا يتغير شيء في Discord. زرزور غير تابع لـ Discord."
