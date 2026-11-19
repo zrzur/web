@@ -13,10 +13,13 @@ import {
   useContext,
 } from "solid-js";
 
-import { useLingui } from "@lingui/solid/macro";
+import { Trans, useLingui } from "@lingui/solid/macro";
 import { threadIsReadOnly } from "@revolt/app/interface/channels/threadAccess";
+import { BadgeTag } from "@revolt/ui/components/features/profiles/badges/BadgeMark";
 import { BotLabel } from "@revolt/ui/components/features/profiles/BotLabel";
+
 import { OfficialLabel } from "@revolt/ui/components/features/profiles/OfficialLabel";
+import { isBridged } from "../linkedChannels";
 
 import { Message as MessageInterface } from "@zrzur/sdk/solid";
 import { cva } from "styled-system/css";
@@ -301,6 +304,34 @@ export function Message(props: Props) {
         info={
           <Switch fallback={<div />}>
             {/* a bot under another name always says it is a bot, and which one */}
+            {/* written on Discord, carried here by the server's bridge bot:
+                the server sets the mark, the bot cannot remove it */}
+            <Match
+              when={
+                props.message.masquerade &&
+                props.message.author?.bot &&
+                isBridged(props.message.flags)
+              }
+            >
+              <Tooltip
+                content={t`Message from Discord, posted by the bot ${botName()} (run by this server)`}
+                placement="top"
+              >
+                <BridgeMarks
+                  tabindex="0"
+                  data-bridged
+                  aria-label={t`Message from Discord, posted by the bot ${botName()} (run by this server)`}
+                >
+                  <BotLabel
+                    official={props.message.author?.officialBot}
+                    verified={props.message.author?.verifiedBot}
+                  />
+                  <BadgeTag>
+                    <Trans>from Discord</Trans>
+                  </BadgeTag>
+                </BridgeMarks>
+              </Tooltip>
+            </Match>
             <Match when={props.message.masquerade && props.message.author?.bot}>
               <Tooltip
                 content={t`Sent by the bot ${botName()}`}
@@ -552,6 +583,11 @@ const BreakText = styled("div", {
 });
 
 /** "via name": who really sent a message under another name */
+/** The bot tag and the "from Discord" mark of a bridged message */
+const BridgeMarks = styled("span", {
+  base: { display: "inline-flex", alignItems: "center", gap: "4px" },
+});
+
 const SentBy = styled("span", {
   base: {
     fontSize: "12px",

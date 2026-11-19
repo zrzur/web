@@ -271,6 +271,9 @@ export function useError() {
       if ((err.type as string) === "ImportSourceUnavailable") {
         return t`Zrzur can't read the link from Discord right now. Paste the template text instead.`;
       }
+      if ((err.type as string) === "ChannelLinkRefused") {
+        return t`This channel can't be linked.`;
+      }
       if ((err.type as string) === "ImportTargetNotEmpty") {
         return t`This server already has channels or roles. Copy the setup into a new server.`;
       }
