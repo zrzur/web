@@ -19,7 +19,9 @@ import { useState } from "@revolt/state";
 
 import { AutoCompleteSearchSpace } from "../../utils/autoComplete";
 
+import { pickByFold } from "@revolt/common/lib/arabicFold";
 import { EMOJI_KEYS, getEmojiByShorthand } from "@revolt/ui/emojis";
+
 import { isInCodeBlock } from "./codeMirrorCommon";
 
 const MAPPED_EMOJI_KEYS = EMOJI_KEYS.values()
@@ -33,11 +35,43 @@ const MAPPED_EMOJI_KEYS = EMOJI_KEYS.values()
       }) as Completion,
   );
 
-const RE_match = /(?<!\p{L}\w)[:@%#][\p{L}\w\-+]*/u;
+// a name may hold vowel marks (\p{M}) and digits of any script (\p{N}):
+// «هُدى», «غرفة٢». Without them the list closed at the first mark typed.
+const RE_match = /(?<!\p{L}\w)[:@%#][\p{L}\p{M}\p{N}\w\-+]*/u;
+
+/** Most names offered at once when the list is filtered here */
+const MAX_FOLDED = 25;
+
+/**
+ * CodeMirror compares what was typed with a label letter by letter, so
+ * «احمد» never reached «أحمد», nor «كريم» the «کریم» of a Persian keyboard.
+ * Text outside ASCII is compared here instead, folded (see foldText): names
+ * that start with it first, then the others, each group in name order.
+ * ASCII text keeps CodeMirror's own matching and ranking.
+ */
+function foldedOptions(
+  options: (Completion & { search?: string })[],
+  typed: string,
+): Completion[] | undefined {
+  if (![...typed].some((c) => c.charCodeAt(0) > 0x7f)) return undefined;
+  const name = (option: Completion) =>
+    String(option.displayLabel ?? option.label).replace(/^[@%#]/, "");
+  return pickByFold(
+    options,
+    typed,
+    (option) => option.search ?? name(option),
+    name,
+  ).slice(0, MAX_FOLDED);
+}
+
 const RE_emojiValidFor = /(?<!\p{L}\w):[\p{L}\w\-+]*/u;
-const RE_mentionValidFor = /(?<!\p{L}\w)@[\p{L}\w\-+]*/u;
-const RE_roleValidFor = /(?<!\p{L}\w)@[\p{L}\w\-+]*/u;
-const RE_channelValidFor = /(?<!\p{L}\w)#[\p{L}\w\-+]*/u;
+// CodeMirror's own list (asked for once, then narrowed by it) stays only
+// while the text is ASCII. The first letter outside it asks again, and the
+// names are then compared folded: the list given for "@" used to be kept,
+// narrowed letter by letter, and «مصطفي» lost «مصطفى» at its last letter.
+const RE_mentionValidFor = /(?<!\p{L}\w)@[\w\-+]*$/u;
+const RE_roleValidFor = /(?<!\p{L}\w)%[\w\-+]*$/u;
+const RE_channelValidFor = /(?<!\p{L}\w)#[\w\-+]*$/u;
 
 export function codeMirrorAutoCompleteSource(
   searchSpace: Accessor<AutoCompleteSearchSpace>,
@@ -83,6 +117,8 @@ export function codeMirrorAutoCompleteSource(
         type: "user",
         label: ("@" + displayName).normalize("NFKC"),
         displayLabel: displayName,
+        // found by the name shown or by the username
+        search: `${displayName} ${userName}`,
         detail: displayName !== userName ? userHandle(user) : undefined,
         apply: `<@${typeof id === "string" ? id : id.user}> `,
         url: entry.animatedAvatarURL,
@@ -117,8 +153,18 @@ export function codeMirrorAutoCompleteSource(
     ),
   );
 
-  // eslint-disable-next-line solid/reactivity
-  return (context: CompletionContext) => {
+  // Names are answered again on the same keystroke (CodeMirror's `update`),
+  // not after its typing delay: while a list waited to be asked again, the
+  // old one stayed on screen and Enter sent the message with "@احم" in it
+  // instead of picking the name.
+  const again = (
+    _current: CompletionResult,
+    _from: number,
+    _to: number,
+    next: CompletionContext,
+  ) => source(next);
+
+  const source = (context: CompletionContext): CompletionResult | null => {
     if (isInCodeBlock(context.state, context.pos, context.pos)) {
       return null;
     }
@@ -126,6 +172,19 @@ export function codeMirrorAutoCompleteSource(
     const token = context.matchBefore(RE_match);
     if (!token) return null;
     const normalizedText = token.text.normalize("NFKC");
+    // the list filtered here (text outside ASCII)
+    const folded = (options: Completion[]) => {
+      const matches = foldedOptions(options, normalizedText.slice(1));
+      return (
+        matches &&
+        ({
+          from: token.from,
+          options: matches,
+          filter: false,
+          update: again,
+        } as CompletionResult)
+      );
+    };
     switch (normalizedText[0]) {
       case ":":
         return {
@@ -134,25 +193,39 @@ export function codeMirrorAutoCompleteSource(
           validFor: RE_emojiValidFor,
         } as CompletionResult;
       case "@":
-        return {
-          from: token.from,
-          options: users(),
-          validFor: RE_mentionValidFor,
-        } as CompletionResult;
+        return (
+          folded(users()) ??
+          ({
+            from: token.from,
+            options: users(),
+            validFor: RE_mentionValidFor,
+            update: again,
+          } as CompletionResult)
+        );
       case "%":
-        return {
-          from: token.from,
-          options: roles(),
-          validFor: RE_roleValidFor,
-        } as CompletionResult;
+        return (
+          folded(roles()) ??
+          ({
+            from: token.from,
+            options: roles(),
+            validFor: RE_roleValidFor,
+            update: again,
+          } as CompletionResult)
+        );
       case "#":
-        return {
-          from: token.from,
-          options: channels(),
-          validFor: RE_channelValidFor,
-        } as CompletionResult;
+        return (
+          folded(channels()) ??
+          ({
+            from: token.from,
+            options: channels(),
+            validFor: RE_channelValidFor,
+            update: again,
+          } as CompletionResult)
+        );
       default:
         return null;
     }
   };
+
+  return source;
 }
