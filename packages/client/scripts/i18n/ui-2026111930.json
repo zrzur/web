@@ -1,0 +1,170 @@
+{
+  ", ": [
+    "، ",
+    ", "
+  ],
+  "Weak connection. Video is lowered to keep the call.": [
+    "الاتصال ضعيف. خُفّضت جودة الفيديو للحفاظ على المكالمة.",
+    "Schwache Verbindung. Das Video ist reduziert, damit der Anruf hält."
+  ],
+  "Very weak connection. Video is paused, sound stays on.": [
+    "الاتصال ضعيف جدًا. أُوقف الفيديو مؤقتًا ويبقى الصوت.",
+    "Sehr schwache Verbindung. Das Video ist pausiert, der Ton bleibt."
+  ],
+  "Clip": [
+    "مقطع",
+    "Clip"
+  ],
+  "Clip shared in this room's chat.": [
+    "نُشر المقطع في دردشة هذه الغرفة.",
+    "Clip im Chat dieses Raums geteilt."
+  ],
+  "Clips and recording": [
+    "المقاطع والتسجيل",
+    "Clips und Aufnahme"
+  ],
+  "Clips are on. Turned on by {0}.": [
+    "المقاطع مفعّلة. فعّلها {0}.",
+    "Clips sind an. Eingeschaltet von {0}."
+  ],
+  "Delete for everyone": [
+    "احذف للجميع",
+    "Für alle löschen"
+  ],
+  "Episode": [
+    "حلقة",
+    "Folge"
+  ],
+  "Episode name": [
+    "اسم الحلقة",
+    "Name der Folge"
+  ],
+  "Episode saved in this room's chat.": [
+    "حُفظت الحلقة في دردشة هذه الغرفة.",
+    "Folge im Chat dieses Raums gespeichert."
+  ],
+  "Hide details": [
+    "أخفِ التفاصيل",
+    "Details ausblenden"
+  ],
+  "In a voice room where clips are on.": [
+    "في غرفة صوتية فُعّلت فيها المقاطع.",
+    "In einem Sprachraum, in dem Clips an sind."
+  ],
+  "Include my voice": [
+    "ضمّ صوتي",
+    "Meine Stimme aufnehmen"
+  ],
+  "Keep recording": [
+    "تابع التسجيل",
+    "Weiter aufnehmen"
+  ],
+  "Leave me out": [
+    "استبعدني",
+    "Mich weglassen"
+  ],
+  "No clips or episodes from this room yet.": [
+    "لا مقاطع ولا حلقات من هذه الغرفة بعد.",
+    "Noch keine Clips oder Folgen aus diesem Raum."
+  ],
+  "No voices listed": [
+    "لا أصوات مذكورة",
+    "Keine Stimmen genannt"
+  ],
+  "Only the voices of people who chose \"Include my voice\" are saved. Everyone whose voice is in a clip or an episode can delete it.": [
+    "لا تُحفظ إلا أصوات من اختاروا «ضمّ صوتي». ويستطيع كل من يُسمع صوته في مقطع أو حلقة أن يحذفها.",
+    "Gespeichert werden nur die Stimmen der Personen, die „Meine Stimme aufnehmen“ gewählt haben. Wer in einem Clip oder einer Folge zu hören ist, kann sie löschen."
+  ],
+  "Recording needs Wings on this server.": [
+    "يحتاج التسجيل إلى أجنحة في هذا السيرفر.",
+    "Für Aufnahmen braucht dieser Server Wings."
+  ],
+  "Recording time left this month: {0} of {1}": [
+    "وقت التسجيل المتبقي هذا الشهر: {0} من {1}",
+    "Aufnahmezeit diesen Monat übrig: {0} von {1}"
+  ],
+  "Save a voice clip": [
+    "احفظ مقطعًا صوتيًا",
+    "Sprachclip speichern"
+  ],
+  "Save the last {0} seconds": [
+    "احفظ آخر {0} ثانية",
+    "Letzte {0} Sekunden speichern"
+  ],
+  "Someone": [
+    "أحدهم",
+    "Jemand"
+  ],
+  "Start recording": [
+    "ابدأ التسجيل",
+    "Aufnahme starten"
+  ],
+  "Stop and delete": [
+    "أوقف واحذف",
+    "Stoppen und löschen"
+  ],
+  "Stop and save the episode": [
+    "أوقف واحفظ الحلقة",
+    "Stoppen und Folge speichern"
+  ],
+  "Stop without saving": [
+    "أوقف دون حفظ",
+    "Ohne Speichern stoppen"
+  ],
+  "Stops by itself in {0}. Keep this page open: the recording is made on your device.": [
+    "يتوقف تلقائيًا بعد {0}. أبقِ هذه الصفحة مفتوحة: فالتسجيل يُصنع على جهازك.",
+    "Endet von selbst in {0}. Lass diese Seite offen: Die Aufnahme entsteht auf deinem Gerät."
+  ],
+  "The recording will be lost. Stop it?": [
+    "سيضيع التسجيل. أتريد إيقافه؟",
+    "Die Aufnahme geht verloren. Stoppen?"
+  ],
+  "This browser cannot make clips.": [
+    "لا يستطيع هذا المتصفح صنع المقاطع.",
+    "Dieser Browser kann keine Clips erstellen."
+  ],
+  "This room is being recorded by {0}.": [
+    "تُسجَّل هذه الغرفة بواسطة {0}.",
+    "Dieser Raum wird von {0} aufgenommen."
+  ],
+  "Turn clips off": [
+    "أوقف المقاطع",
+    "Clips ausschalten"
+  ],
+  "Turn clips on": [
+    "فعّل المقاطع",
+    "Clips einschalten"
+  ],
+  "Voices: {0}": [
+    "الأصوات: {0}",
+    "Stimmen: {0}"
+  ],
+  "You shared all {0} clips of this month. Feather gives you more.": [
+    "نشرت كل مقاطعك الـ{0} لهذا الشهر. تمنحك ريشة المزيد.",
+    "Du hast alle {0} Clips dieses Monats geteilt. Mit Feather bekommst du mehr."
+  ],
+  "Your clips left this month: {0} of {1}": [
+    "مقاطعك المتبقية هذا الشهر: {0} من {1}",
+    "Deine Clips diesen Monat übrig: {0} von {1}"
+  ],
+  "Your voice is included.": [
+    "صوتك مضمَّن.",
+    "Deine Stimme ist dabei."
+  ],
+  "Your voice is left out until you choose. Include it?": [
+    "صوتك مستبعد حتى تختار. أتضمّه؟",
+    "Deine Stimme bleibt draußen, bis du wählst. Aufnehmen?"
+  ],
+  "Your voice is left out.": [
+    "صوتك مستبعد.",
+    "Deine Stimme ist nicht dabei."
+  ],
+  "Someone in it did not agree to be recorded. Nothing was saved.": [
+    "أحد من فيه لم يوافق على التسجيل. لم يُحفظ شيء.",
+    "Jemand darin hat der Aufnahme nicht zugestimmt. Nichts wurde gespeichert."
+  ],
+  "This server used its recording time for this month.": [
+    "استنفد هذا السيرفر وقت التسجيل لهذا الشهر.",
+    "Dieser Server hat seine Aufnahmezeit für diesen Monat verbraucht."
+  ]
+}

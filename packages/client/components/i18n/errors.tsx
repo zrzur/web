@@ -462,6 +462,19 @@ export function useError() {
         return known();
       }
 
+      // voice clips and recorded rooms: not in the SDK's error list until
+      // the voice-beta2 contract change is generated
+      {
+        const voice = err as unknown as { type: string; max?: number };
+        if (voice.type === "TooManyVoiceClips")
+          return t`You shared all ${voice.max ?? 0} clips of this month. Feather gives you more.`;
+        if (voice.type === "RecordingTimeUsedUp")
+          return voice.max
+            ? t`This server used its recording time for this month.`
+            : t`Recording needs Wings on this server.`;
+        if (voice.type === "VoiceNotAgreed")
+          return t`Someone in it did not agree to be recorded. Nothing was saved.`;
+      }
       switch (err.type) {
         case "AlreadyFriends":
           return t`Already friends with this user.`;

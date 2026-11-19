@@ -444,6 +444,8 @@ export const RESERVED_KEYS = [
   "Ctrl+Shift+6",
   // Zrzur: saved messages and reminders
   "Ctrl+Shift+4",
+  // Zrzur: save a voice clip in a call
+  "Ctrl+Shift+3",
   "Ctrl+Shift+5",
 ];
 

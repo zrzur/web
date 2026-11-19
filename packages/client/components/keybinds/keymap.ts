@@ -36,6 +36,7 @@ export type ShortcutId =
   | "toggle_soundboard"
   | "view_saved"
   | "view_reminders"
+  | "save_clip"
   | "open_shortcuts";
 
 export type CustomCombos = Partial<Record<ShortcutId, Combo>>;
@@ -61,6 +62,7 @@ export const DEFAULTS: Record<ShortcutId, string> = {
   // there. On a Mac, Command+Shift+4 and 5 take screenshots.
   view_saved: "MS:Digit4|MC:KeyB",
   view_reminders: "MS:Digit5|MC:KeyR",
+  save_clip: "MS:Digit3|MC:KeyK",
   open_shortcuts: "M:Slash",
 };
 
