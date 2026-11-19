@@ -415,3 +415,133 @@ describe("avatars, icons and banners where small previews are made", () => {
     undo();
   });
 });
+
+describe("the switch in more than one window", () => {
+  /** A window and its page, enough to send the events a browser sends */
+  function fakeWindow() {
+    const handlers = new Map<string, Set<(event: unknown) => void>>();
+    const on = (type: string, handler: (event: unknown) => void) => {
+      if (!handlers.has(type)) handlers.set(type, new Set());
+      handlers.get(type)!.add(handler);
+    };
+    const off = (type: string, handler: (event: unknown) => void) =>
+      handlers.get(type)?.delete(handler);
+    const page = {
+      visibilityState: "visible" as DocumentVisibilityState,
+      addEventListener: on,
+      removeEventListener: off,
+    };
+    return {
+      target: { addEventListener: on, removeEventListener: off },
+      page,
+      send: (type: string, event: unknown = {}) =>
+        [...(handlers.get(type) ?? [])].forEach((handler) => handler(event)),
+      listeners: () =>
+        [...handlers.values()].reduce((sum, set) => sum + set.size, 0),
+    };
+  }
+
+  it("follows a change another window made, both ways", async () => {
+    const { lib, storage } = await load();
+    const win = fakeWindow();
+    const stop = lib.followSaveDataAcrossWindows(
+      win.target as never,
+      win.page as never,
+    );
+    expect(lib.saveData()).toBe(false);
+    // the other window stores "1" and the browser tells this one
+    storage.data.set("zrzur:save-data", "1");
+    win.send("storage", { key: "zrzur:save-data", newValue: "1" });
+    expect(lib.saveData()).toBe(true);
+    storage.data.set("zrzur:save-data", "0");
+    win.send("storage", { key: "zrzur:save-data", newValue: "0" });
+    expect(lib.saveData()).toBe(false);
+    stop();
+    expect(win.listeners()).toBe(0);
+  });
+
+  it("ignores changes of other stored values", async () => {
+    const { lib } = await load();
+    const win = fakeWindow();
+    lib.followSaveDataAcrossWindows(win.target as never, win.page as never);
+    win.send("storage", { key: "zrzur:something-else", newValue: "1" });
+    expect(lib.saveData()).toBe(false);
+  });
+
+  it("reads the stored value again when the window comes back to the front", async () => {
+    const { lib, storage } = await load();
+    const win = fakeWindow();
+    lib.followSaveDataAcrossWindows(win.target as never, win.page as never);
+    // changed while this window was frozen in the background: no event came
+    storage.data.set("zrzur:save-data", "1");
+    win.page.visibilityState = "hidden";
+    win.send("visibilitychange");
+    expect(lib.saveData()).toBe(false);
+    win.page.visibilityState = "visible";
+    win.send("visibilitychange");
+    expect(lib.saveData()).toBe(true);
+    storage.data.set("zrzur:save-data", "0");
+    win.send("pageshow");
+    expect(lib.saveData()).toBe(false);
+    storage.data.set("zrzur:save-data", "1");
+    win.send("focus");
+    expect(lib.saveData()).toBe(true);
+  });
+
+  it("follows storage being cleared by another window", async () => {
+    const { lib, storage } = await load({ "zrzur:save-data": "1" });
+    const win = fakeWindow();
+    lib.followSaveDataAcrossWindows(win.target as never, win.page as never);
+    expect(lib.saveData()).toBe(true);
+    storage.data.clear();
+    win.send("storage", { key: null, newValue: null });
+    expect(lib.saveData()).toBe(false);
+  });
+
+  it("never switches itself off when the browser refused to store the choice", async () => {
+    let refuse = false;
+    const data = new Map<string, string>();
+    vi.stubGlobal("localStorage", {
+      getItem: (key: string) => data.get(key) ?? null,
+      setItem: (key: string, value: string) => {
+        if (refuse) throw new DOMException("full", "QuotaExceededError");
+        data.set(key, value);
+      },
+    });
+    vi.resetModules();
+    const lib = await import("./saveData");
+    const warn = vi.spyOn(console, "warn").mockImplementation(() => {});
+    const win = fakeWindow();
+    lib.followSaveDataAcrossWindows(win.target as never, win.page as never);
+    refuse = true;
+    lib.setSaveData(true);
+    expect(warn).toHaveBeenCalledTimes(1);
+    // the stored value is still the old "off": coming back to the front keeps "on"
+    win.send("focus");
+    win.send("visibilitychange");
+    win.send("pageshow");
+    expect(lib.saveData()).toBe(true);
+    // a choice another window did store is newer, and is taken
+    win.send("storage", { key: "zrzur:save-data", newValue: "0" });
+    expect(lib.saveData()).toBe(false);
+    warn.mockRestore();
+  });
+
+  it("stays on when it is turned on and the window comes back to the front", async () => {
+    const { lib } = await load();
+    const win = fakeWindow();
+    lib.followSaveDataAcrossWindows(win.target as never, win.page as never);
+    lib.setSaveData(true);
+    win.send("focus");
+    win.send("visibilitychange");
+    win.send("pageshow");
+    expect(lib.saveData()).toBe(true);
+  });
+
+  it("does nothing where there is no window", async () => {
+    const { lib } = await load();
+    expect(
+      lib.followSaveDataAcrossWindows(undefined, undefined)(),
+    ).toBeUndefined();
+  });
+});

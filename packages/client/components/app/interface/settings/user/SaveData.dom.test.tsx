@@ -76,7 +76,7 @@ describe("the Save data page", () => {
   it("lists what it changes, one line each", () => {
     mount();
     const lines = [
-      ...document.querySelectorAll("[data-save-data-changes] li"),
+      ...document.querySelectorAll("[data-save-data-changes] [data-row-title]"),
     ].map((line) => line.textContent);
     expect(lines).toEqual([
       "Large pictures wait for a tap. Small ones load as usual.",
@@ -92,7 +92,8 @@ describe("the Save data page", () => {
   it("shows the list whether the switch is on or off", () => {
     mount();
     const count = () =>
-      document.querySelectorAll("[data-save-data-changes] li").length;
+      document.querySelectorAll("[data-save-data-changes] [data-row-title]")
+        .length;
     expect(count()).toBe(7);
     toggle().click();
     expect(count()).toBe(7);
@@ -103,9 +104,11 @@ describe("on a media server that makes small previews", () => {
   it("says pictures load small and animated emoji show still", async () => {
     mount();
     const lines = () =>
-      [...document.querySelectorAll("[data-save-data-changes] li")].map(
-        (line) => line.textContent,
-      );
+      [
+        ...document.querySelectorAll(
+          "[data-save-data-changes] [data-row-title]",
+        ),
+      ].map((line) => line.textContent);
     expect(lines()).not.toContain("Animated emoji show still.");
     await learnSmallPreviews("https://files.test", async () => ({
       small_previews: true,

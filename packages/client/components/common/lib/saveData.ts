@@ -40,11 +40,16 @@ function read(key: string) {
   }
 }
 
+/** @returns Whether the value was kept */
 function write(key: string, value: boolean) {
   try {
-    globalThis.localStorage?.setItem(key, value ? "1" : "0");
+    const storage = globalThis.localStorage;
+    if (!storage) return false;
+    storage.setItem(key, value ? "1" : "0");
+    return true;
   } catch {
-    // storage blocked: the choice lasts until the page closes
+    // storage blocked or full: the choice lasts until the page closes
+    return false;
   }
 }
 
@@ -53,11 +58,75 @@ const [on, setOn] = createSignal(read(KEY));
 /** Whether Save data is on for this device (reactive) */
 export const saveData = on;
 
+/**
+ * This window's choice could not be stored (storage blocked or full): the
+ * stored value is older than the choice, so it must not replace it
+ */
+let unsaved = false;
+
 /** Turn Save data on or off on this device */
 export function setSaveData(value: boolean) {
   setOn(value);
-  write(KEY, value);
+  unsaved = !write(KEY, value);
+  if (unsaved)
+    console.warn(
+      "[save data] the browser refused to store the choice; it lasts until this page closes",
+    );
 }
+
+/**
+ * The switch is one value for the whole device, but each open window (a tab,
+ * the installed app) read it once, when it loaded. Turned on in one window,
+ * another that was already open went on showing it off and loading
+ * everything (owner, 2026-11-19, beta: "it keeps switching itself off").
+ * Every window now follows the stored value: at once when another window
+ * changes it, and again when a window comes back to the front (a phone that
+ * froze the page in the background may not deliver the change).
+ * @returns Stop following (for tests)
+ */
+export function followSaveDataAcrossWindows(
+  target:
+    | Pick<Window, "addEventListener" | "removeEventListener">
+    | undefined = typeof window === "undefined" ? undefined : window,
+  page:
+    | Pick<
+        Document,
+        "addEventListener" | "removeEventListener" | "visibilityState"
+      >
+    | undefined = typeof document === "undefined" ? undefined : document,
+) {
+  if (!target) return () => undefined;
+  const sync = () => {
+    // a choice this window could not store stays as it was
+    if (unsaved) return;
+    const stored = read(KEY);
+    if (stored !== on()) setOn(stored);
+  };
+  const onStorage = (event: StorageEvent) => {
+    // another window stored a choice: it is the newer one
+    if (event.key === KEY) {
+      unsaved = false;
+      setOn(event.newValue === "1");
+    }
+    // null: another window cleared the whole storage
+    else if (event.key === null) sync();
+  };
+  const onVisible = () => {
+    if (!page || page.visibilityState === "visible") sync();
+  };
+  target.addEventListener("storage", onStorage);
+  target.addEventListener("pageshow", sync);
+  target.addEventListener("focus", sync);
+  page?.addEventListener("visibilitychange", onVisible);
+  return () => {
+    target.removeEventListener("storage", onStorage);
+    target.removeEventListener("pageshow", sync);
+    target.removeEventListener("focus", sync);
+    page?.removeEventListener("visibilitychange", onVisible);
+  };
+}
+
+followSaveDataAcrossWindows();
 
 /** The browser's own hints, if it gives any */
 export function connectionHints(): ConnectionHints | undefined {
