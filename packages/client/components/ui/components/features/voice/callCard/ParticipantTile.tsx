@@ -523,6 +523,10 @@ const Overlay = styled("div", {
         _groupFocusWithin: {
           opacity: 1,
         },
+        // a phone has no hover: the name and controls stay visible there
+        "@media (hover: none)": {
+          opacity: 1,
+        },
       },
       false: {
         opacity: 1,
