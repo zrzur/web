@@ -211,7 +211,7 @@ export function CreateServerFlow(props: DialogProps & { client: Client }) {
   }
 
   const backTo = (target: Step): DialogAction => ({
-    variant: "secondary",
+    variant: "text",
     text: <Trans>Back</Trans>,
     isDisabled: busy(),
     onClick: () => {
