@@ -1,7 +1,6 @@
 import { For, JSX, Show } from "solid-js";
 
 import { Trans } from "@lingui/solid/macro";
-import { styled } from "styled-system/jsx";
 
 import {
   saveData,
@@ -10,6 +9,7 @@ import {
 } from "@revolt/common/lib/saveData";
 import { useInstance } from "@revolt/instance";
 import { SettingsRow, SettingsSection, Toggle } from "@revolt/ui";
+import { Column } from "@revolt/ui/components/layout";
 import { Icon } from "@revolt/ui/icons/Icon";
 import type { IconName } from "@revolt/ui/icons/registry";
 
@@ -104,105 +104,50 @@ export function SaveDataSettings() {
   ];
 
   return (
-    <SettingsSection
-      // the page's own title says "Save data"; a second one here would repeat it
-      description={
-        <Trans>
-          For weak or metered internet. The choice is kept on this device only,
-          so your phone and your computer can differ.
-        </Trans>
-      }
-    >
-      <SettingsRow
-        icon={<Icon name="cloud-arrow-down" size={20} />}
-        title={<Trans>Save data</Trans>}
+    <Column gap="xl">
+      <SettingsSection
+        // the page's own title says "Save data"; a second one here would repeat it
         description={
           <Trans>
-            Uses less mobile data. You can load anything with a tap.
+            For weak or metered internet. The choice is kept on this device
+            only, so your phone and your computer can differ.
           </Trans>
         }
-        onClick={() => setSaveData(!saveData())}
-        control={(ids) => (
-          <Toggle
-            checked={saveData()}
-            onChange={setSaveData}
-            aria-labelledby={ids.labelId}
-            aria-describedby={ids.descriptionId}
-          />
-        )}
-      />
-      <Changes data-save-data-changes>
-        <Heading>
-          <Trans>What changes while it is on</Trans>
-        </Heading>
-        <List>
+      >
+        <SettingsRow
+          icon={<Icon name="cloud-arrow-down" size={20} />}
+          title={<Trans>Save data</Trans>}
+          description={
+            <Trans>
+              Uses less mobile data. You can load anything with a tap.
+            </Trans>
+          }
+          onClick={() => setSaveData(!saveData())}
+          control={(ids) => (
+            <Toggle
+              checked={saveData()}
+              onChange={setSaveData}
+              aria-labelledby={ids.labelId}
+              aria-describedby={ids.descriptionId}
+            />
+          )}
+        />
+      </SettingsSection>
+      {/* what it changes: an ordinary group of settings rows, one per line */}
+      <div data-save-data-changes style={{ display: "contents" }}>
+        <SettingsSection title={<Trans>What changes while it is on</Trans>}>
           <For each={changes}>
             {(change) => (
               <Show when={!change.needsSmall || small()}>
-                <li>
-                  <Mark aria-hidden="true">
-                    <Icon name={change.icon} size={20} />
-                  </Mark>
-                  <span>{change.text()}</span>
-                </li>
+                <SettingsRow
+                  icon={<Icon name={change.icon} size={20} />}
+                  title={change.text()}
+                />
               </Show>
             )}
           </For>
-        </List>
-      </Changes>
-    </SettingsSection>
+        </SettingsSection>
+      </div>
+    </Column>
   );
 }
-
-const Changes = styled("div", {
-  base: {
-    display: "flex",
-    flexDirection: "column",
-    gap: "12px",
-    padding: "16px",
-    color: "var(--z-fg-primary)",
-  },
-});
-
-const Heading = styled("span", {
-  base: {
-    fontSize: "13px",
-    lineHeight: "20px",
-    fontWeight: 600,
-    color: "var(--z-fg-secondary)",
-  },
-});
-
-const List = styled("ul", {
-  base: {
-    display: "flex",
-    flexDirection: "column",
-    gap: "12px",
-    margin: 0,
-    padding: 0,
-    listStyle: "none",
-    "& li": {
-      display: "flex",
-      alignItems: "flex-start",
-      gap: "12px",
-      fontSize: "14px",
-      lineHeight: "20px",
-      minWidth: 0,
-    },
-    "& li > span:last-child": {
-      minWidth: 0,
-      overflowWrap: "anywhere",
-    },
-  },
-});
-
-const Mark = styled("span", {
-  base: {
-    display: "grid",
-    placeItems: "center",
-    flexShrink: 0,
-    width: "20px",
-    height: "20px",
-    color: "var(--z-fg-secondary)",
-  },
-});

@@ -2068,14 +2068,14 @@
     },
     {
       "path": "packages/client/components/app/interface/settings/user/SaveData.dom.test.tsx",
-      "sha256": "af3e339506197ac6c5095ade4e82a5cc103c7612b1235a4780cbba2742032c92",
-      "bytes": 3938,
+      "sha256": "0f5fad61842db50e265459d53ae96b64ff4db5a6e19275f4a1041c1cbf723efa",
+      "bytes": 4010,
       "category": "synthetic-test-source-or-fixture"
     },
     {
       "path": "packages/client/components/app/interface/settings/user/SaveData.tsx",
-      "sha256": "8f03cb3386d947f3f5325ca64fd156f6a5db84768be406669b109e130e12b7ac",
-      "bytes": 5154,
+      "sha256": "18bb272b855397996ec7b5390c31ba1e171d0f9283fae2f1b70ae589acda6b70",
+      "bytes": 4333,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -3442,14 +3442,14 @@
     },
     {
       "path": "packages/client/components/common/lib/saveData.test.ts",
-      "sha256": "30390b3f89addc8be7a021e7867feb7327b30a40f2ca17b7ccb0699171ea212b",
-      "bytes": 15188,
+      "sha256": "f64322671e70917ebca8ec628e3cc6a36fcda9f617baeb8cc85a7700a430b66b",
+      "bytes": 20215,
       "category": "synthetic-test-source-or-fixture"
     },
     {
       "path": "packages/client/components/common/lib/saveData.ts",
-      "sha256": "06289dfe016fe6514309674d8db06d4b10cbc55afe882b0d3151146e099a3ac0",
-      "bytes": 11306,
+      "sha256": "2ae506eed050f0ba2edc9818e86a7bdbd91d8be2dcf709d4f402584f6955940d",
+      "bytes": 13793,
       "category": "product-source-or-build-manifest"
     },
     {
