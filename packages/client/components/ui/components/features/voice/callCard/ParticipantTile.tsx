@@ -14,6 +14,12 @@ import { cva } from "styled-system/css";
 import { styled } from "styled-system/jsx";
 
 import { useClient } from "@revolt/client";
+import {
+  holdsRemoteVideo,
+  markLoadedByTap,
+  saveData,
+  wasLoadedByTap,
+} from "@revolt/common/lib/saveData";
 import { useUser } from "@revolt/markdown/users";
 import {
   liveStatsLabel,
@@ -139,6 +145,16 @@ export function ParticipantTile(props: TileProps) {
     onCleanup(() => clearInterval(timer));
   });
 
+  // Save data: someone else's camera or screen is received only after a
+  // tap on its tile (nothing of it is subscribed before). Your own picture
+  // costs no download and shows as always.
+  const watchKey = () => `call:${participant.identity}:${track.source}`;
+  const heldVideo = () =>
+    !participant.isLocal &&
+    (isVideo() || isScreenShare()) &&
+    holdsRemoteVideo(saveData()) &&
+    !wasLoadedByTap(watchKey());
+
   const getHeight = () => {
     if (!props.focus || videoDims().height == 0) return {};
     // Calculate the aspect ratio
@@ -187,16 +203,40 @@ export function ParticipantTile(props: TileProps) {
         }}
       >
         <Show
-          when={isVideo() || isScreenShare()}
+          when={(isVideo() || isScreenShare()) && !heldVideo()}
           fallback={
-            <AvatarOnly>
-              <Avatar
-                src={user().avatar}
-                fallback={user().username}
-                size={48}
-                interactive={false}
-              />
-            </AvatarOnly>
+            <Show
+              when={heldVideo()}
+              fallback={
+                <AvatarOnly>
+                  <Avatar
+                    src={user().avatar}
+                    fallback={user().username}
+                    size={48}
+                    interactive={false}
+                  />
+                </AvatarOnly>
+              }
+            >
+              <HeldVideo>
+                <WatchButton
+                  type="button"
+                  data-watch-video={isScreenShare() ? "screen" : "camera"}
+                  onClick={(event) => {
+                    event.stopPropagation();
+                    markLoadedByTap(watchKey());
+                  }}
+                >
+                  <Icon
+                    size={20}
+                    name={isScreenShare() ? "monitor-arrow-up" : "video-camera"}
+                  />
+                  <span>
+                    {isScreenShare() ? t`Show screen` : t`Show camera`}
+                  </span>
+                </WatchButton>
+              </HeldVideo>
+            </Show>
           }
         >
           <VideoTrack
@@ -394,6 +434,49 @@ export const tile = cva({
       },
     },
   ],
+});
+
+/** Save data: where a camera or screen would be, until it is asked for */
+const HeldVideo = styled("div", {
+  base: {
+    gridArea: "1/1",
+    display: "grid",
+    placeItems: "center",
+    padding: "12px",
+    minWidth: 0,
+    overflow: "hidden",
+  },
+});
+
+const WatchButton = styled("button", {
+  base: {
+    display: "inline-flex",
+    alignItems: "center",
+    justifyContent: "center",
+    gap: "8px",
+    minHeight: "44px",
+    maxWidth: "100%",
+    padding: "8px 16px",
+    cursor: "pointer",
+    font: "inherit",
+    fontSize: "14px",
+    fontWeight: 500,
+    color: "var(--z-fg-primary)",
+    background: "var(--z-bg-raised)",
+    border: "1px solid var(--z-border-strong)",
+    borderRadius: "999px",
+    "& span": {
+      minWidth: 0,
+      overflow: "hidden",
+      textOverflow: "ellipsis",
+      whiteSpace: "nowrap",
+    },
+    "&:hover": { background: "var(--z-hover)" },
+    "&:focus-visible": {
+      outline: "2px solid var(--z-focus)",
+      outlineOffset: "2px",
+    },
+  },
 });
 
 const AvatarOnly = styled("div", {
