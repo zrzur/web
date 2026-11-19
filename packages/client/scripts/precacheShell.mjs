@@ -16,7 +16,10 @@ const SHELL_SCREENS =
 const POLYFILLS = /(^|\/)polyfills-[^/]+\.js$/;
 
 /** The most the shell may weigh: the service worker installs all of it */
-const MAX_SHELL_BYTES = 2_000_000;
+// 26.1.0-beta.5: the merged release came to 2,016,360 bytes (+16 KB from eight new features,
+// spread thin: no single import to make lazy). Raised for this test release only; bring it
+// back under 2,000,000 in 26.1.1 (owner's decision, listed in the release report).
+const MAX_SHELL_BYTES = 2_050_000;
 
 /** Output files of the shell, from a Rollup output bundle */
 export function shellFiles(bundle) {
