@@ -70,6 +70,8 @@ import {
   watchAudioSettings,
 } from "./audioQuality";
 import { deviceFallback } from "./callHealth";
+import { type NetworkLevel, weakNetworkSettings } from "./weakNetwork";
+import { watchWeakNetwork } from "./weakNetworkWatch";
 import { InRoom } from "./components/InRoom";
 import { desktopPushToTalk, latchPress } from "./desktopPushToTalk";
 import type { GameKeyAction, GameKeysStatus } from "./gameKeys";
@@ -166,6 +168,11 @@ class Voice {
   #recentRemoval?: { channelId: string; at: number };
   #disconnecting: Promise<void> = Promise.resolve();
   #disposeTracks?: () => void;
+  /** Weak-connection steps of the current call (see weakNetwork.ts) */
+  network: Accessor<NetworkLevel>;
+  #setNetwork: Setter<NetworkLevel>;
+  #stopNetworkWatch?: () => void;
+  #networkBitrateCap?: number;
   /** LiveKit, once the first call loaded it */
   #lk?: VoiceRuntime;
   error: Accessor<string | undefined>;
@@ -289,6 +296,10 @@ class Voice {
     const [channel, setChannel] = createSignal<Channel>();
     this.channel = channel;
     this.#setChannel = setChannel;
+
+    const [network, setNetwork] = createSignal<NetworkLevel>("good");
+    this.network = network;
+    this.#setNetwork = setNetwork;
 
     const [bitrate, setBitrate] = createSignal(64_000);
     this.bitrate = bitrate;
@@ -656,6 +667,7 @@ class Voice {
       this.#setState("CONNECTED");
       if (previousSession) this.showNotice("reconnected");
       void this.enableMicrophone(room);
+      this.#watchNetwork(room);
       if (options?.video) void this.toggleCamera();
       // a DM or group call nobody else is in yet rings the others (the
       // server rings them; this side plays the tone and ends the call when
@@ -925,6 +937,8 @@ class Voice {
       const room = this.room();
       if (!room) return;
 
+      this.#stopNetworkWatch?.();
+      this.#stopNetworkWatch = undefined;
       room.removeAllListeners();
       this.#disconnecting = room
         .disconnect()
@@ -1460,6 +1474,9 @@ class Voice {
       TrackSource.Microphone,
     )?.track?.sender;
     if (!sender) return;
+    // a weak connection sends lighter voice, whatever the call's rate is
+    if (this.#networkBitrateCap)
+      bitrate = Math.min(bitrate, this.#networkBitrateCap);
     try {
       const parameters = sender.getParameters();
       if (!parameters.encodings?.length) parameters.encodings = [{}];
@@ -1470,6 +1487,39 @@ class Voice {
     } catch {
       // the next join uses the new quality anyway
     }
+  }
+
+  /**
+   * Step the call down on a weak connection and back up when it recovers
+   * (only when the server turned it on: features.voice_weak_network)
+   */
+  #watchNetwork(room: Room) {
+    this.#stopNetworkWatch?.();
+    this.#stopNetworkWatch = undefined;
+    const feature = (
+      this.#client().configuration?.features as
+        | {
+            voice_weak_network?: { enabled?: boolean } & Partial<
+              Parameters<typeof weakNetworkSettings>[0] & object
+            >;
+          }
+        | undefined
+    )?.voice_weak_network;
+    if (!feature?.enabled) return;
+    this.#stopNetworkWatch = watchWeakNetwork(room, {
+      settings: weakNetworkSettings(feature),
+      baseBitrate: () => this.bitrate(),
+      music: () => this.#settings.highQualityAudio,
+      setVoiceBitrate: (bitrate) => {
+        this.#networkBitrateCap =
+          bitrate < this.bitrate() ? bitrate : undefined;
+        void this.applyVoiceBitrate(room, this.bitrate());
+      },
+      onLevel: (level) => {
+        if (level === "good") this.#networkBitrateCap = undefined;
+        this.#setNetwork(level);
+      },
+    });
   }
 
   private async enableMicrophone(room: Room) {
@@ -1599,6 +1649,13 @@ export function VoiceContext(props: { children: JSX.Element }) {
       event.preventDefault();
       if (!event.repeat)
         state.settings.streamerMode = !state.settings.streamerMode;
+      return;
+    }
+    if (shortcut === "save_clip") {
+      // only in a call; the capture code listens while clips are on
+      if (!inCall()) return;
+      event.preventDefault();
+      if (!event.repeat) window.dispatchEvent(new Event("zrzur:save-clip"));
       return;
     }
     if (shortcut === "toggle_soundboard") {
