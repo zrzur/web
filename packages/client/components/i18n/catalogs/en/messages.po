@@ -29169,3 +29169,158 @@ msgstr "Zrzur can't read the link from Discord right now. Paste the template tex
 #: components/modal/lib/ServerImportFlow.tsx
 msgid "Zrzur keeps only what becomes your server. Nothing changes in Discord. Zrzur is not affiliated with Discord."
 msgstr "Zrzur keeps only what becomes your server. Nothing changes in Discord. Zrzur is not affiliated with Discord."
+
+#: components/app/interface/settings/channel/LinkedChannel.tsx
+msgid "A channel marked as mature can't be linked."
+msgstr "A channel marked as mature can't be linked."
+
+#: components/app/interface/settings/channel/LinkedChannel.tsx
+msgid "Add your bot to this server first."
+msgstr "Add your bot to this server first."
+
+#: components/app/interface/settings/channel/LinkedChannel.tsx
+msgid "Bridge bot"
+msgstr "Bridge bot"
+
+#. placeholder {0}: botName()
+#: components/app/interface/settings/channel/LinkedChannel.tsx
+msgid "Bridge bot: {0}"
+msgstr "Bridge bot: {0}"
+
+#: components/app/interface/settings/channel/LinkedChannel.tsx
+msgid "Choose a bot that you made yourself."
+msgstr "Choose a bot that you made yourself."
+
+#: components/app/interface/settings/channel/LinkedChannel.tsx
+msgid "Discord's rules for developers apply to your bot there, and Discord can stop it at any time."
+msgstr "Discord's rules for developers apply to your bot there, and Discord can stop it at any time."
+
+#: components/app/interface/settings/channel/LinkedChannel.tsx
+msgid "End link"
+msgstr "End link"
+
+#: components/app/interface/settings/channel/LinkedChannel.tsx
+msgid "End the link?"
+msgstr "End the link?"
+
+#: components/app/interface/channels/text/Message.tsx
+msgid "from Discord"
+msgstr "from Discord"
+
+#: components/app/interface/settings/channel/LinkedChannel.tsx
+msgid "I posted a notice in the Discord channel that messages are copied to Zrzur, with a way to opt out."
+msgstr "I posted a notice in the Discord channel that messages are copied to Zrzur, with a way to opt out."
+
+#: components/app/interface/settings/channel/LinkedChannel.tsx
+msgid "I run the bridge bot myself and I am responsible for it."
+msgstr "I run the bridge bot myself and I am responsible for it."
+
+#: components/app/interface/settings/channel/LinkedChannel.tsx
+msgid "Link channel"
+msgstr "Link channel"
+
+#: components/app/interface/settings/channel/LinkedChannel.tsx
+msgid "Link this channel"
+msgstr "Link this channel"
+
+#: components/app/interface/settings/channel/LinkedChannel.tsx
+msgid "Link this channel with a channel on Discord through a bridge bot that you run. People on both sides then read the same conversation."
+msgstr "Link this channel with a channel on Discord through a bridge bot that you run. People on both sides then read the same conversation."
+
+#: components/app/interface/settings/channel/LinkedChannel.tsx
+#: components/app/interface/settings/ChannelSettings.tsx
+msgid "Linked channel"
+msgstr "Linked channel"
+
+#: components/app/interface/settings/channel/LinkedChannel.tsx
+msgid "Linked channels are switched off here."
+msgstr "Linked channels are switched off here."
+
+#: components/app/interface/settings/channel/LinkedChannel.tsx
+msgid "Members on each side see the names and pictures of the other side. Edits and deletions are copied only while your bridge runs."
+msgstr "Members on each side see the names and pictures of the other side. Edits and deletions are copied only while your bridge runs."
+
+#. placeholder {0}: botName()
+#: components/app/interface/channels/text/Message.tsx
+msgid "Message from Discord, posted by the bot {0} (run by this server)"
+msgstr "Message from Discord, posted by the bot {0} (run by this server)"
+
+#: components/app/interface/channels/LinkedChannelNotice.tsx
+msgid "Messages here are also posted to a Discord server by this server's bridge bot. Discord's privacy policy applies there."
+msgstr "Messages here are also posted to a Discord server by this server's bridge bot. Discord's privacy policy applies there."
+
+#: components/app/interface/settings/channel/LinkedChannel.tsx
+msgid "Only a channel every member can read can be linked."
+msgstr "Only a channel every member can read can be linked."
+
+#: components/app/interface/settings/channel/LinkedChannel.tsx
+msgid "Only a text channel of a server can be linked."
+msgstr "Only a text channel of a server can be linked."
+
+#: components/app/interface/settings/channel/LinkedChannel.tsx
+msgid "Only messages written after linking are copied."
+msgstr "Only messages written after linking are copied."
+
+#: components/app/interface/settings/channel/LinkedChannel.tsx
+msgid "Only text is copied, and only messages written after linking. Files, reactions, threads and voice stay where they are."
+msgstr "Only text is copied, and only messages written after linking. Files, reactions, threads and voice stay where they are."
+
+#: components/app/interface/settings/channel/LinkedChannel.tsx
+msgid "That did not work. Try again."
+msgstr "That did not work. Try again."
+
+#: components/app/interface/settings/channel/LinkedChannel.tsx
+msgid "The Discord channel is not age-restricted."
+msgstr "The Discord channel is not age-restricted."
+
+#: components/app/interface/settings/channel/LinkedChannel.tsx
+msgid "The link has ended. Messages that came from Discord were removed here."
+msgstr "The link has ended. Messages that came from Discord were removed here."
+
+#: components/app/interface/settings/channel/LinkedChannel.tsx
+msgid "The messages that came from Discord are deleted here. What members wrote in this channel stays. Stop your bridge bot as well."
+msgstr "The messages that came from Discord are deleted here. What members wrote in this channel stays. Stop your bridge bot as well."
+
+#: components/i18n/errors.tsx
+msgid "This channel can't be linked."
+msgstr "This channel can't be linked."
+
+#: components/app/interface/settings/channel/LinkedChannel.tsx
+msgid "This channel is already linked."
+msgstr "This channel is already linked."
+
+#: components/app/interface/settings/channel/LinkedChannel.tsx
+msgid "This channel is linked."
+msgstr "This channel is linked."
+
+#: components/ui/components/features/messaging/elements/SystemMessage.tsx
+msgid "This channel is no longer linked with Discord."
+msgstr "This channel is no longer linked with Discord."
+
+#: components/ui/components/features/messaging/elements/SystemMessage.tsx
+msgid "This channel is now linked with a Discord channel through this server's bridge bot. Messages written here are also posted there."
+msgstr "This channel is now linked with a Discord channel through this server's bridge bot. Messages written here are also posted there."
+
+#: components/app/interface/settings/channel/LinkedChannel.tsx
+msgid "This server has reached its number of linked channels."
+msgstr "This server has reached its number of linked channels."
+
+#: components/app/interface/settings/channel/LinkedChannel.tsx
+msgid "Tick all four boxes to link the channel."
+msgstr "Tick all four boxes to link the channel."
+
+#: components/app/interface/settings/channel/LinkedChannel.tsx
+msgid "You have no bot yet. Make one in your settings under Bots, add it to this server, then come back."
+msgstr "You have no bot yet. Make one in your settings under Bots, add it to this server, then come back."
+
+#: components/app/interface/settings/channel/LinkedChannel.tsx
+msgid "You need the permission to manage the server."
+msgstr "You need the permission to manage the server."
+
+#: components/app/interface/settings/channel/LinkedChannel.tsx
+msgid "You run the bridge bot and you answer for it. Zrzur does not connect to Discord and never asks for a Discord token or webhook address."
+msgstr "You run the bridge bot and you answer for it. Zrzur does not connect to Discord and never asks for a Discord token or webhook address."
+
+#: components/app/interface/settings/channel/LinkedChannel.tsx
+msgid "Zrzur is not affiliated with Discord."
+msgstr "Zrzur is not affiliated with Discord."

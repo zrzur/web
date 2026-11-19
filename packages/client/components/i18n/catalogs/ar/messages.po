@@ -29166,3 +29166,158 @@ msgstr "لا يستطيع زرزور قراءة الرابط من Discord الآ
 #: components/modal/lib/ServerImportFlow.tsx
 msgid "Zrzur keeps only what becomes your server. Nothing changes in Discord. Zrzur is not affiliated with Discord."
 msgstr "لا يحتفظ زرزور إلا بما يصير سيرفرك. لا يتغير شيء في Discord. زرزور غير تابع لـ Discord."
+
+#: components/app/interface/settings/channel/LinkedChannel.tsx
+msgid "A channel marked as mature can't be linked."
+msgstr "لا يمكن ربط قناة مصنّفة للبالغين."
+
+#: components/app/interface/settings/channel/LinkedChannel.tsx
+msgid "Add your bot to this server first."
+msgstr "أضف بوتك إلى هذا السيرفر أولًا."
+
+#: components/app/interface/settings/channel/LinkedChannel.tsx
+msgid "Bridge bot"
+msgstr "بوت الجسر"
+
+#. placeholder {0}: botName()
+#: components/app/interface/settings/channel/LinkedChannel.tsx
+msgid "Bridge bot: {0}"
+msgstr "بوت الجسر: {0}"
+
+#: components/app/interface/settings/channel/LinkedChannel.tsx
+msgid "Choose a bot that you made yourself."
+msgstr "اختر بوتًا أنشأته أنت."
+
+#: components/app/interface/settings/channel/LinkedChannel.tsx
+msgid "Discord's rules for developers apply to your bot there, and Discord can stop it at any time."
+msgstr "قواعد Discord للمطورين تسري على بوتك هناك، ويستطيع Discord إيقافه في أي وقت."
+
+#: components/app/interface/settings/channel/LinkedChannel.tsx
+msgid "End link"
+msgstr "إنهاء الربط"
+
+#: components/app/interface/settings/channel/LinkedChannel.tsx
+msgid "End the link?"
+msgstr "إنهاء الربط؟"
+
+#: components/app/interface/channels/text/Message.tsx
+msgid "from Discord"
+msgstr "من Discord"
+
+#: components/app/interface/settings/channel/LinkedChannel.tsx
+msgid "I posted a notice in the Discord channel that messages are copied to Zrzur, with a way to opt out."
+msgstr "نشرت في قناة Discord إشعارًا بأن الرسائل تُنسخ إلى زرزور، مع طريقة للاعتراض."
+
+#: components/app/interface/settings/channel/LinkedChannel.tsx
+msgid "I run the bridge bot myself and I am responsible for it."
+msgstr "أشغّل بوت الجسر بنفسي وأنا المسؤول عنه."
+
+#: components/app/interface/settings/channel/LinkedChannel.tsx
+msgid "Link channel"
+msgstr "ربط القناة"
+
+#: components/app/interface/settings/channel/LinkedChannel.tsx
+msgid "Link this channel"
+msgstr "ربط هذه القناة"
+
+#: components/app/interface/settings/channel/LinkedChannel.tsx
+msgid "Link this channel with a channel on Discord through a bridge bot that you run. People on both sides then read the same conversation."
+msgstr "اربط هذه القناة بقناة على Discord عبر بوت جسر تشغّله أنت. عندها يقرأ الأعضاء في الجهتين المحادثة نفسها."
+
+#: components/app/interface/settings/channel/LinkedChannel.tsx
+#: components/app/interface/settings/ChannelSettings.tsx
+msgid "Linked channel"
+msgstr "قناة مرتبطة"
+
+#: components/app/interface/settings/channel/LinkedChannel.tsx
+msgid "Linked channels are switched off here."
+msgstr "القنوات المرتبطة متوقفة هنا."
+
+#: components/app/interface/settings/channel/LinkedChannel.tsx
+msgid "Members on each side see the names and pictures of the other side. Edits and deletions are copied only while your bridge runs."
+msgstr "يرى الأعضاء في كل جهة أسماء الجهة الأخرى وصورها. التعديلات والحذف تُنسخ فقط ما دام جسرك يعمل."
+
+#. placeholder {0}: botName()
+#: components/app/interface/channels/text/Message.tsx
+msgid "Message from Discord, posted by the bot {0} (run by this server)"
+msgstr "رسالة من Discord نشرها البوت {0} (يشغّله هذا السيرفر)"
+
+#: components/app/interface/channels/LinkedChannelNotice.tsx
+msgid "Messages here are also posted to a Discord server by this server's bridge bot. Discord's privacy policy applies there."
+msgstr "الرسائل هنا تُنشر أيضًا في سيرفر على Discord عبر بوت الجسر التابع لهذا السيرفر. هناك تسري سياسة الخصوصية الخاصة بـDiscord."
+
+#: components/app/interface/settings/channel/LinkedChannel.tsx
+msgid "Only a channel every member can read can be linked."
+msgstr "لا يمكن ربط إلا قناة يستطيع كل الأعضاء قراءتها."
+
+#: components/app/interface/settings/channel/LinkedChannel.tsx
+msgid "Only a text channel of a server can be linked."
+msgstr "لا يمكن ربط إلا قناة نصية في سيرفر."
+
+#: components/app/interface/settings/channel/LinkedChannel.tsx
+msgid "Only messages written after linking are copied."
+msgstr "لا تُنسخ إلا الرسائل المكتوبة بعد الربط."
+
+#: components/app/interface/settings/channel/LinkedChannel.tsx
+msgid "Only text is copied, and only messages written after linking. Files, reactions, threads and voice stay where they are."
+msgstr "يُنسخ النص فقط، ومن الرسائل المكتوبة بعد الربط فقط. الملفات والتفاعلات والمواضيع والصوت تبقى في مكانها."
+
+#: components/app/interface/settings/channel/LinkedChannel.tsx
+msgid "That did not work. Try again."
+msgstr "لم ينجح ذلك. حاول مرة أخرى."
+
+#: components/app/interface/settings/channel/LinkedChannel.tsx
+msgid "The Discord channel is not age-restricted."
+msgstr "قناة Discord غير مقيّدة بالعمر."
+
+#: components/app/interface/settings/channel/LinkedChannel.tsx
+msgid "The link has ended. Messages that came from Discord were removed here."
+msgstr "انتهى الربط. حُذفت من هنا الرسائل التي جاءت من Discord."
+
+#: components/app/interface/settings/channel/LinkedChannel.tsx
+msgid "The messages that came from Discord are deleted here. What members wrote in this channel stays. Stop your bridge bot as well."
+msgstr "تُحذف من هنا الرسائل التي جاءت من Discord. ما كتبه الأعضاء في هذه القناة يبقى. أوقف بوت الجسر أيضًا."
+
+#: components/i18n/errors.tsx
+msgid "This channel can't be linked."
+msgstr "لا يمكن ربط هذه القناة."
+
+#: components/app/interface/settings/channel/LinkedChannel.tsx
+msgid "This channel is already linked."
+msgstr "هذه القناة مرتبطة من قبل."
+
+#: components/app/interface/settings/channel/LinkedChannel.tsx
+msgid "This channel is linked."
+msgstr "هذه القناة مرتبطة."
+
+#: components/ui/components/features/messaging/elements/SystemMessage.tsx
+msgid "This channel is no longer linked with Discord."
+msgstr "هذه القناة لم تعد مرتبطة بـDiscord."
+
+#: components/ui/components/features/messaging/elements/SystemMessage.tsx
+msgid "This channel is now linked with a Discord channel through this server's bridge bot. Messages written here are also posted there."
+msgstr "هذه القناة مرتبطة الآن بقناة على Discord عبر بوت الجسر التابع لهذا السيرفر. الرسائل المكتوبة هنا تُنشر هناك أيضًا."
+
+#: components/app/interface/settings/channel/LinkedChannel.tsx
+msgid "This server has reached its number of linked channels."
+msgstr "بلغ هذا السيرفر عدد القنوات المرتبطة المسموح."
+
+#: components/app/interface/settings/channel/LinkedChannel.tsx
+msgid "Tick all four boxes to link the channel."
+msgstr "ضع علامة على المربعات الأربعة لربط القناة."
+
+#: components/app/interface/settings/channel/LinkedChannel.tsx
+msgid "You have no bot yet. Make one in your settings under Bots, add it to this server, then come back."
+msgstr "ليس لديك بوت بعد. أنشئ بوتًا من إعداداتك في قسم البوتات، وأضفه إلى هذا السيرفر، ثم عد إلى هنا."
+
+#: components/app/interface/settings/channel/LinkedChannel.tsx
+msgid "You need the permission to manage the server."
+msgstr "تحتاج إلى صلاحية إدارة السيرفر."
+
+#: components/app/interface/settings/channel/LinkedChannel.tsx
+msgid "You run the bridge bot and you answer for it. Zrzur does not connect to Discord and never asks for a Discord token or webhook address."
+msgstr "أنت من يشغّل بوت الجسر وأنت المسؤول عنه. زرزور لا يتصل بـDiscord ولا يطلب أبدًا رمز Discord أو عنوان webhook."
+
+#: components/app/interface/settings/channel/LinkedChannel.tsx
+msgid "Zrzur is not affiliated with Discord."
+msgstr "زرزور غير تابع لـDiscord."

@@ -2,6 +2,14 @@
 
 ## Unreleased
 
+### Linked channels (2026-11-19)
+
+* **A channel can be linked with a channel on Discord** through a bridge bot that the server's owner runs himself (channel settings, "Linked channel"; only where the server offers it, for people who manage the server). Zrzur does not connect to Discord and never asks for a Discord token or webhook address. The owner picks his own bot and ticks four confirmations; none is ticked for him.
+* **Everyone who reads a linked channel is told**, in a line above the message box, that messages there are also posted to a Discord server and that Discord's privacy policy applies there. A line in the channel says when a link begins and ends.
+* **Messages that came from Discord carry the mark "from Discord"** next to the bot tag. The server sets it; the bot cannot remove it.
+* Ending the link removes the messages that came from Discord; what members wrote stays.
+* The SDK does not know the two new system messages and the three routes yet: the app reads them itself until the contract carries them.
+
 ### Zrzur without a connection (2026-11-18)
 
 * **The app opens offline** after one visit with a connection: the worker keeps the page of its build and uses it only when the network gives no answer (the network is always asked first, so a release is never served from the device while the server can be reached).

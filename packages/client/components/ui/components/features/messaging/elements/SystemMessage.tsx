@@ -266,6 +266,33 @@ export function SystemMessage(props: Props) {
             </span>
           </Show>
         </Match>
+        {/* a link with another platform began or ended. The SDK does not
+            know these two kinds yet and hands them over as this text. */}
+        <Match
+          when={
+            sm.type === "text" &&
+            (sm as TextSystemMessage).content ===
+              "channel_linked is not supported."
+          }
+        >
+          <span data-system-link="linked">
+            <Trans>
+              This channel is now linked with a Discord channel through this
+              server's bridge bot. Messages written here are also posted there.
+            </Trans>
+          </span>
+        </Match>
+        <Match
+          when={
+            sm.type === "text" &&
+            (sm as TextSystemMessage).content ===
+              "channel_unlinked is not supported."
+          }
+        >
+          <span data-system-link="unlinked">
+            <Trans>This channel is no longer linked with Discord.</Trans>
+          </span>
+        </Match>
         <Match when={sm.type === "text"}>
           {(sm as TextSystemMessage).content}
         </Match>
