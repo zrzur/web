@@ -75,7 +75,10 @@ export function weakNetworkSettings(
 
 /** The bitrate of "lighter voice" (low-data mode uses it too) */
 export function lightVoiceBitrate(
-  settings: Pick<WeakNetworkSettings, "weak_audio_bitrate"> = DEFAULT_WEAK_NETWORK,
+  settings: Pick<
+    WeakNetworkSettings,
+    "weak_audio_bitrate"
+  > = DEFAULT_WEAK_NETWORK,
 ) {
   return settings.weak_audio_bitrate;
 }
@@ -89,6 +92,7 @@ export type NetworkSample = {
   /** Round trip time in ms */
   rttMs?: number;
   /** What the voice server says about this connection */
+  /** What the voice server says, kept for diagnosis only (never counted) */
   quality?: ConnectionQualityName;
 };
 
@@ -112,8 +116,8 @@ export function rateSample(
     if (sample.rttMs >= settings.bad_rtt_ms) level = worse(level, "bad");
     else if (sample.rttMs >= settings.weak_rtt_ms) level = worse(level, "weak");
   }
-  if (sample.quality === "lost") level = worse(level, "bad");
-  else if (sample.quality === "poor") level = worse(level, "weak");
+  // the voice server's verdict (sample.quality) does not count: it reacts
+  // to the steps themselves and to a fresh join, and kept clean calls down
   return level;
 }
 
@@ -184,7 +188,9 @@ export function planFor(
     case "weak":
       return {
         sign: true,
-        audioBitrate: music ? base : Math.min(base, settings.weak_audio_bitrate),
+        audioBitrate: music
+          ? base
+          : Math.min(base, settings.weak_audio_bitrate),
         remoteVideo: "low",
         ownVideo: "low",
       };

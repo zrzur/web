@@ -1,10 +1,10 @@
 import { describe, expect, it } from "vitest";
 
 import {
-  DEFAULT_WEAK_NETWORK,
-  GOOD_NETWORK,
   type NetworkSample,
   type NetworkState,
+  DEFAULT_WEAK_NETWORK,
+  GOOD_NETWORK,
   lightVoiceBitrate,
   lossBetween,
   nextNetworkState,
@@ -36,15 +36,21 @@ describe("rating one sample", () => {
     expect(rateSample({ at: 0, quality: "excellent" }, S)).toBe("good");
   });
 
-  it("takes the worst of loss, delay and the server's verdict", () => {
+  it("takes the worst of loss and delay", () => {
     expect(rateSample({ at: 0, lossPercent: 5 }, S)).toBe("weak");
     expect(rateSample({ at: 0, lossPercent: 15 }, S)).toBe("bad");
     expect(rateSample({ at: 0, rttMs: 400 }, S)).toBe("weak");
     expect(rateSample({ at: 0, rttMs: 900, lossPercent: 0 }, S)).toBe("bad");
+    expect(rateSample({ at: 0, rttMs: 900, lossPercent: 6 }, S)).toBe("bad");
+  });
+
+  it("never steps down on the voice server's verdict alone", () => {
+    // it reacts to a fresh join and to the steps themselves (release test,
+    // 2026-11-19: a clean loopback call locked at "very weak")
     expect(rateSample({ at: 0, quality: "poor", lossPercent: 0 }, S)).toBe(
-      "weak",
+      "good",
     );
-    expect(rateSample({ at: 0, quality: "lost" }, S)).toBe("bad");
+    expect(rateSample({ at: 0, quality: "lost" }, S)).toBe("good");
     expect(rateSample({ at: 0, quality: "poor", lossPercent: 20 }, S)).toBe(
       "bad",
     );
@@ -90,7 +96,18 @@ describe("moving between levels", () => {
     const good = { lossPercent: 0 };
     const state = run(
       weak,
-      [good, good, good, good, { lossPercent: 7 }, good, good, good, good, good],
+      [
+        good,
+        good,
+        good,
+        good,
+        { lossPercent: 7 },
+        good,
+        good,
+        good,
+        good,
+        good,
+      ],
       50_000,
     );
     expect(state.level).toBe("weak");
