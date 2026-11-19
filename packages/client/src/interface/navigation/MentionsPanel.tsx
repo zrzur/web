@@ -1,12 +1,12 @@
 import {
   For,
+  type JSX,
   Match,
   Show,
   Suspense,
   Switch,
   createEffect,
   createResource,
-  createSignal,
   lazy,
   onCleanup,
 } from "solid-js";
@@ -17,11 +17,28 @@ import { useNavigate } from "@solidjs/router";
 import type { Message } from "@zrzur/sdk/solid";
 import { styled } from "styled-system/jsx";
 
+import {
+  type InboxView,
+  closeInbox,
+  inboxOpen,
+  inboxView,
+  openInbox,
+  setInboxView,
+} from "@revolt/app/interface/saved/inboxView";
+import {
+  type Reminder,
+  attachReminders,
+} from "@revolt/app/interface/saved/savedStore";
+import { savedRemindersEnabled } from "@revolt/app/interface/saved/savedModel";
 import { useClient } from "@revolt/client";
 import { holdMessages } from "@revolt/client/messagePruner";
 import { useDevice } from "@revolt/common";
 import { backCloses } from "@revolt/common/lib/backCloses";
-import { Avatar, CircularProgress, Time } from "@revolt/ui";
+import { shortcutFor } from "@revolt/keybinds/active";
+import { useModals } from "@revolt/modal";
+import { useState } from "@revolt/state";
+import { Avatar, CircularProgress, Time, useSnackbar } from "@revolt/ui";
+import { Segmented } from "@revolt/ui/components/design/Segmented";
 import { Icon } from "@revolt/ui/icons/Icon";
 
 // phones only, and only once it is opened: kept out of the files the app
@@ -32,10 +49,30 @@ const NotificationsPhone = lazy(() =>
   })),
 );
 
-const [open, setOpen] = createSignal(false);
+// opened from a message's menu, the You page or a shortcut: kept out of the
+// first download like the phone page
+const SavedPanel = lazy(() =>
+  import("./SavedPanel").then((m) => ({ default: m.SavedPanel })),
+);
+const RemindersPanel = lazy(() =>
+  import("./RemindersPanel").then((m) => ({ default: m.RemindersPanel })),
+);
+
+const open = inboxOpen;
+const view = inboxView;
+const setView = setInboxView;
 
 /** Open the mentions box (from the account card or the phone tab) */
-export const openMentions = () => setOpen(true);
+export const openMentions = () => openInbox("mentions");
+
+/** What a list in the box gets from the box */
+export type InboxPanelProps = {
+  /** Wide screens: the switch between the lists, drawn above the title */
+  tabs?: JSX.Element;
+  /** Phones: the sheet has a close button */
+  onClose?: () => void;
+  onNavigate?: () => void;
+};
 
 /**
  * Where the mentions box appears: in the middle of the window on wide
@@ -44,16 +81,111 @@ export const openMentions = () => setOpen(true);
 export function MentionsHost() {
   const { t } = useLingui();
   const device = useDevice();
+  const client = useClient();
+  const navigate = useNavigate();
+  const modals = useModals();
+  const snackbar = useSnackbar();
+  const app = useState();
+  const phone = () => device.layout() === "phone";
+  /** saving and reminders are on for this server */
+  const more = () => savedRemindersEnabled(client());
+  const shown = (): InboxView => (more() ? view() : "mentions");
+  const close = closeInbox;
 
   // phones: Back closes the notifications page
-  backCloses(open, () => setOpen(false));
+  backCloses(open, close);
+
+  // a reminder that comes due while the app is open: a notice with a way
+  // to the message, and a system notification when the window is hidden
+  const onDue = (reminder: Reminder, message: Message | undefined) => {
+    const text = message
+      ? t`Reminder: ${client().markdownToText(message.content).slice(0, 80)}`
+      : t`A reminder is due, but its message is no longer available.`;
+    const go = () => {
+      if (message) {
+        navigate(message.path);
+        // phones: the lists and the conversation share the screen
+        app.appDrawer()?.setShown(true);
+        close();
+      } else openInbox("reminders");
+    };
+    snackbar.show({
+      message: text,
+      messageLine: 2,
+      action: message ? t`Open message` : t`Show reminders`,
+      onAction: go,
+      closeable: true,
+      closeOnAction: true,
+    });
+    if (
+      document.hidden &&
+      typeof Notification !== "undefined" &&
+      Notification.permission === "granted"
+    ) {
+      try {
+        const notice = new Notification(t`Reminder`, {
+          body: message
+            ? client().markdownToText(message.content).slice(0, 200)
+            : text,
+          tag: `reminder-${reminder._id}`,
+        });
+        notice.onclick = () => {
+          window.focus();
+          go();
+        };
+      } catch {
+        // phones only allow notifications from the service worker: the
+        // notice in the app is enough here
+      }
+    }
+  };
+  createEffect(() => {
+    if (more()) attachReminders(client(), onDue);
+  });
+
+  // Ctrl+Shift+4 and Ctrl+Shift+5 (changeable in Ctrl+/)
+  const onShortcut = (event: KeyboardEvent) => {
+    const id = shortcutFor(event);
+    if (id !== "view_saved" && id !== "view_reminders") return;
+    if (!more() || modals.isOpen()) return;
+    event.preventDefault();
+    openInbox(id === "view_saved" ? "saved" : "reminders");
+  };
+  document.addEventListener("keydown", onShortcut);
+  onCleanup(() => document.removeEventListener("keydown", onShortcut));
+
+  const label = () =>
+    shown() === "saved"
+      ? t`Saved messages`
+      : shown() === "reminders"
+        ? t`Reminders`
+        : t`Mentions`;
+
+  /** wide screens: the three lists side by side in one switch */
+  const tabs = () => (
+    <Show when={more() && !phone()}>
+      <Tabs>
+        <Segmented<InboxView>
+          aria-label={t`Lists`}
+          value={shown()}
+          onChange={setView}
+          options={[
+            { value: "mentions", label: <Trans>Mentions</Trans> },
+            { value: "saved", label: <Trans>Saved list</Trans> },
+            { value: "reminders", label: <Trans>Reminders</Trans> },
+          ]}
+        />
+      </Tabs>
+    </Show>
+  );
 
   createEffect(() => {
     if (!open()) return;
     const onKey = (e: KeyboardEvent) => {
-      if (e.key === "Escape") {
+      // a dialog opened from a list (Remind me) closes first
+      if (e.key === "Escape" && !modals.isOpen()) {
         e.stopPropagation();
-        setOpen(false);
+        close();
       }
     };
     document.addEventListener("keydown", onKey, true);
@@ -65,18 +197,38 @@ export function MentionsHost() {
       <Portal mount={document.getElementById("floating")!}>
         {/* phones: a whole page, with friend requests as well */}
         <Show
-          when={device.layout() === "phone"}
+          when={phone() && shown() === "mentions"}
           fallback={
             <>
-              <Scrim onClick={() => setOpen(false)} />
-              <Frame role="dialog" aria-modal="true" aria-label={t`Mentions`}>
-                <MentionsPanel onNavigate={() => setOpen(false)} />
+              <Scrim onClick={close} />
+              <Frame role="dialog" aria-modal="true" aria-label={label()}>
+                <Suspense>
+                  <Switch>
+                    <Match when={shown() === "saved"}>
+                      <SavedPanel
+                        tabs={tabs()}
+                        onNavigate={close}
+                        onClose={phone() ? close : undefined}
+                      />
+                    </Match>
+                    <Match when={shown() === "reminders"}>
+                      <RemindersPanel
+                        tabs={tabs()}
+                        onNavigate={close}
+                        onClose={phone() ? close : undefined}
+                      />
+                    </Match>
+                    <Match when={shown() === "mentions"}>
+                      <MentionsPanel tabs={tabs()} onNavigate={close} />
+                    </Match>
+                  </Switch>
+                </Suspense>
               </Frame>
             </>
           }
         >
           <Suspense>
-            <NotificationsPhone onClose={() => setOpen(false)} />
+            <NotificationsPhone onClose={close} />
           </Suspense>
         </Show>
       </Portal>
@@ -95,7 +247,7 @@ export function MentionsHost() {
  * [avatar] Name  Server · #channel · 1h
  *          preview of the message…
  */
-export function MentionsPanel(props: { onNavigate?: () => void }) {
+export function MentionsPanel(props: InboxPanelProps) {
   const { t } = useLingui();
   const client = useClient();
   const navigate = useNavigate();
@@ -128,6 +280,7 @@ export function MentionsPanel(props: { onNavigate?: () => void }) {
 
   return (
     <Panel>
+      {props.tabs}
       <Head>
         <h2>
           <Trans>Mentions</Trans>
@@ -237,7 +390,7 @@ const Frame = styled("div", {
   },
 });
 
-const Panel = styled("div", {
+export const Panel = styled("div", {
   base: {
     display: "flex",
     flexDirection: "column",
@@ -264,7 +417,12 @@ const Panel = styled("div", {
   },
 });
 
-const Head = styled("div", {
+/** The switch between the lists, above the title */
+const Tabs = styled("div", {
+  base: { paddingInline: "4px", paddingBlockEnd: "12px" },
+});
+
+export const Head = styled("div", {
   base: {
     paddingInline: "4px",
     paddingBlockEnd: "12px",
@@ -277,7 +435,7 @@ const Head = styled("div", {
   },
 });
 
-const List = styled("div", {
+export const List = styled("div", {
   base: {
     minHeight: 0,
     overflowY: "auto",
@@ -289,7 +447,7 @@ const List = styled("div", {
 });
 
 /** One mention, in its own box */
-const Item = styled("button", {
+export const Item = styled("button", {
   base: {
     display: "flex",
     alignItems: "flex-start",
@@ -310,7 +468,7 @@ const Item = styled("button", {
   },
 });
 
-const Body = styled("div", {
+export const Body = styled("div", {
   base: {
     minWidth: 0,
     flex: 1,
@@ -320,7 +478,7 @@ const Body = styled("div", {
   },
 });
 
-const Line = styled("div", {
+export const Line = styled("div", {
   base: {
     display: "flex",
     alignItems: "baseline",
@@ -337,7 +495,7 @@ const Line = styled("div", {
   },
 });
 
-const When = styled("span", {
+export const When = styled("span", {
   base: {
     flexShrink: 0,
     fontSize: "12px",
@@ -345,7 +503,7 @@ const When = styled("span", {
   },
 });
 
-const Where = styled("div", {
+export const Where = styled("div", {
   base: {
     minWidth: 0,
     overflow: "hidden",
@@ -356,7 +514,7 @@ const Where = styled("div", {
   },
 });
 
-const Preview = styled("p", {
+export const Preview = styled("p", {
   base: {
     margin: "4px 0 0",
     fontSize: "14px",
@@ -367,7 +525,7 @@ const Preview = styled("p", {
   },
 });
 
-const Center = styled("div", {
+export const Center = styled("div", {
   base: {
     display: "flex",
     flexDirection: "column",

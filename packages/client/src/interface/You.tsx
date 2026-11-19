@@ -6,6 +6,8 @@ import type { User } from "@zrzur/sdk/solid";
 import { styled } from "styled-system/jsx";
 
 import { useClient, useUser } from "@revolt/client";
+import { savedRemindersEnabled } from "@revolt/app/interface/saved/savedModel";
+import { openInbox } from "@revolt/app/interface/saved/inboxView";
 import { billingAvailable } from "@revolt/client/billing";
 import { useDevice } from "@revolt/common";
 import { presencePatch } from "@revolt/common/lib/statusWrite";
@@ -209,6 +211,23 @@ function Body(props: { user: User }) {
       hint: () => t`Messages and links you keep for later`,
       onPress: openSavedNotes,
     },
+    // only when the server has saving and reminders on
+    ...(savedRemindersEnabled(client())
+      ? [
+          {
+            icon: "bookmark-simple" as const,
+            label: () => t`Saved messages`,
+            hint: () => t`Messages you kept from any conversation`,
+            onPress: () => openInbox("saved"),
+          },
+          {
+            icon: "clock" as const,
+            label: () => t`Reminders`,
+            hint: () => t`Messages that come back to you at a time you pick`,
+            onPress: () => openInbox("reminders"),
+          },
+        ]
+      : []),
     // only when the server offers Feather, as in the settings menu
     ...(billingAvailable()
       ? [

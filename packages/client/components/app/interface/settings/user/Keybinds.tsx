@@ -12,6 +12,8 @@ import { Trans, useLingui } from "@lingui/solid/macro";
 import { css } from "styled-system/css";
 import { styled } from "styled-system/jsx";
 
+import { savedRemindersEnabled } from "@revolt/app/interface/saved/savedModel";
+import { useClient } from "@revolt/client";
 import { deviceMac, pauseShortcuts } from "@revolt/keybinds/active";
 import { comboLabel, keyLabel } from "@revolt/keybinds/keyLabels";
 import { type Combo, type ShortcutId } from "@revolt/keybinds/keymap";
@@ -62,6 +64,7 @@ type Row = {
 export function KeybindsSettings() {
   const { t } = useLingui();
   const state = useState();
+  const client = useClient();
   const { voice } = state;
   const { navigate } = useSettingsNavigation();
   const mac = deviceMac();
@@ -79,6 +82,8 @@ export function KeybindsSettings() {
     open_events: () => t`Open the server's events`,
     toggle_streamer: () => t`Streamer mode on or off`,
     toggle_soundboard: () => t`Open or close the soundboard`,
+    view_saved: () => t`Open saved messages`,
+    view_reminders: () => t`Open reminders`,
     open_shortcuts: () => t`Show keyboard shortcuts`,
   };
 
@@ -251,6 +256,24 @@ export function KeybindsSettings() {
           title: <Trans>Open the server's events</Trans>,
           description: <Trans>In a server.</Trans>,
         },
+        ...(savedRemindersEnabled(client())
+          ? [
+              {
+                id: "view_saved" as const,
+                title: <Trans>Open saved messages</Trans>,
+                description: (
+                  <Trans>Your private list of messages you kept.</Trans>
+                ),
+              },
+              {
+                id: "view_reminders" as const,
+                title: <Trans>Open reminders</Trans>,
+                description: (
+                  <Trans>Messages you asked to be reminded of.</Trans>
+                ),
+              },
+            ]
+          : []),
         {
           title: <Trans>Open a category's settings</Trans>,
           description: (

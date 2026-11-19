@@ -442,6 +442,9 @@ export const RESERVED_KEYS = [
   "Ctrl+Shift+L",
   // Zrzur: the soundboard in a call
   "Ctrl+Shift+6",
+  // Zrzur: saved messages and reminders
+  "Ctrl+Shift+4",
+  "Ctrl+Shift+5",
 ];
 
 /** Reserved for Zrzur's own plugins */

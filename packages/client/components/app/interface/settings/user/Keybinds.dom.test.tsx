@@ -39,6 +39,12 @@ vi.mock("@revolt/ui", async () => ({
   ),
 }));
 vi.mock("@revolt/ui/icons/Icon", () => ({ Icon: () => <span /> }));
+// saving and reminders are on: their two shortcuts are listed
+vi.mock("@revolt/client", () => ({
+  useClient: () => () => ({
+    configuration: { features: { saved_reminders: true } },
+  }),
+}));
 vi.mock("../Settings", () => ({
   useSettingsNavigation: () => ({ navigate: () => undefined }),
 }));

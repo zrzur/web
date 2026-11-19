@@ -14,6 +14,9 @@ import { useNavigate } from "@solidjs/router";
 import type { Message, User } from "@zrzur/sdk/solid";
 import { styled } from "styled-system/jsx";
 
+import { openInbox } from "@revolt/app/interface/saved/inboxView";
+import { savedRemindersEnabled } from "@revolt/app/interface/saved/savedModel";
+import { arrivedReminders } from "@revolt/app/interface/saved/savedStore";
 import { useClient } from "@revolt/client";
 import { holdMessages } from "@revolt/client/messagePruner";
 import { useTime } from "@revolt/i18n/dayjs";
@@ -160,6 +163,31 @@ export function NotificationsPhone(props: { onClose: () => void }) {
             </Chip>
           )}
         </For>
+        {/* reminders and saved messages have their own lists */}
+        <Show when={savedRemindersEnabled(client())}>
+          <Chip
+            type="button"
+            role="radio"
+            aria-checked={false}
+            data-testid="notifications-reminders"
+            onClick={() => openInbox("reminders")}
+          >
+            <Trans>Reminders</Trans>
+            <Show when={arrivedReminders().length}>
+              {" "}
+              {arrivedReminders().length}
+            </Show>
+          </Chip>
+          <Chip
+            type="button"
+            role="radio"
+            aria-checked={false}
+            data-testid="notifications-saved"
+            onClick={() => openInbox("saved")}
+          >
+            <Trans>Saved list</Trans>
+          </Chip>
+        </Show>
       </Filters>
 
       <List>

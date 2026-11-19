@@ -217,6 +217,11 @@ const MoveSuperchargeModal = lazy(() =>
 const PinMessageModal = lazy(() =>
   import("./modals/PinMessage").then((m) => ({ default: m.PinMessageModal })),
 );
+const RemindMessageModal = lazy(() =>
+  import("./modals/RemindMessage").then((m) => ({
+    default: m.RemindMessageModal,
+  })),
+);
 const CreatePollModal = lazy(() =>
   import("./modals/CreatePoll").then((m) => ({
     default: m.CreatePollModal,
@@ -528,6 +533,8 @@ export function RenderModal(props: ActiveModal & { onClose: () => void }) {
       return <PinMessageModal {...modalProps} />;
     case "create_poll":
       return <CreatePollModal {...modalProps} />;
+    case "remind_message":
+      return <RemindMessageModal {...modalProps} />;
     case "poll_voters":
       return <PollVotersModal {...modalProps} />;
     case "end_poll":
