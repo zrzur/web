@@ -25,6 +25,11 @@ const link = cva({
   base: {
     cursor: "pointer",
     color: "var(--z-link, var(--md-sys-color-primary)) !important",
+    // a link reads in its own direction, apart from the sentence around it:
+    // an address stays left to right in one piece inside Arabic text (its
+    // Arabic end used to jump in front of "https"), an Arabic label stays
+    // right to left inside English
+    unicodeBidi: "plaintext",
   },
 });
 
