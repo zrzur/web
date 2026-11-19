@@ -1,4 +1,4 @@
-import { Match, Show, Switch } from "solid-js";
+import { JSX, Match, Show, Switch } from "solid-js";
 
 import { Plural, Trans, useLingui } from "@lingui/solid/macro";
 import {
@@ -15,13 +15,13 @@ import { useModals } from "@revolt/modal";
 import { useNavigate } from "@revolt/routing";
 import { useVoice } from "@revolt/rtc";
 import { useState } from "@revolt/state";
-import { Button } from "@revolt/ui";
+import { Button, SettingsRow, SettingsSection } from "@revolt/ui";
 import { hour12From } from "@revolt/ui/components/design/dateTime";
 import { Icon } from "@revolt/ui/icons/Icon";
 
 import { seatState } from "./EventAnswer";
-import { eventPhase, eventTimes, startsIn } from "./eventFormat";
-import { Stamp, Ticket, TicketStub } from "./Ticket";
+import { eventDay, eventPhase, eventTimes, startsIn } from "./eventFormat";
+import { Stamp } from "./Ticket";
 
 type Props = {
   event: API.ServerEvent;
@@ -144,9 +144,10 @@ export function OwnAnswerMark(props: { event: API.ServerEvent }) {
 }
 
 /**
- * One event in the list, as a ticket: the day on the stub, then the title,
- * when and where, how many come, and your answer stamped on it. The whole
- * story is on the page of the event.
+ * One event in a list, as a settings row (owner, 2026-11-19: every box is a
+ * settings group): the day at the start, then the title, when and where,
+ * how many come, and your answer at the end. Goes inside `EventGroup`.
+ * The whole story is on the page of the event.
  */
 export function EventCard(props: Props) {
   const { i18n } = useLingui();
@@ -158,132 +159,128 @@ export function EventCard(props: Props) {
   const upcoming = () =>
     props.event.status === "Scheduled" || props.event.status === "Active";
   const mine = () => client().serverEvents.answerOf(props.event._id);
-  const holds = () => !!mine() && mine()!.answer !== "NotGoing";
+  const day = () => eventDay(props.event.starts_at, i18n().locale ?? "en");
 
   return (
-    <Ticket
-      role="article"
-      data-testid="event-card"
-      data-event={props.event._id}
-      data-phase={phase()}
-      aria-labelledby={`event-${props.event._id}-title`}
-    >
-      <TicketStub
-        startsAt={props.event.starts_at}
-        mine={holds()}
-        quiet={!upcoming()}
-      />
-      <Body>
-        <Text>
-          <CardTitle id={`event-${props.event._id}-title`}>
-            <a
-              href={path()}
-              onClick={(click) => {
-                click.preventDefault();
-                navigate(path());
-              }}
-              data-testid="event-open"
-            >
-              {props.event.title}
-            </a>
-          </CardTitle>
-          <Meta>
-            <Switch>
-              <Match when={props.event.status === "Draft"}>
-                <State>
-                  <Trans context="scheduled events">Draft</Trans>
-                </State>
-              </Match>
-              <Match when={props.event.status === "Cancelled"}>
-                <State>
-                  <Trans context="scheduled events">Cancelled</Trans>
-                </State>
-              </Match>
-              <Match when={props.event.status === "Completed"}>
-                <State>
-                  <Trans>Over</Trans>
-                </State>
-              </Match>
-              <Match when={phase() === "soon"}>
-                <Soon>
-                  {startsIn(
-                    props.event.starts_at,
-                    props.now,
-                    i18n().locale ?? "en",
-                  )}
-                </Soon>
-              </Match>
-            </Switch>
-            <MetaItem>
-              <time datetime={props.event.starts_at}>
-                {eventTimes(
-                  props.event,
+    <SettingsRow
+      icon={
+        <DateMark data-quiet={!upcoming() || undefined} aria-hidden="true">
+          <b>{day().day}</b>
+          <small>{day().month}</small>
+        </DateMark>
+      }
+      title={
+        <span data-event={props.event._id} data-phase={phase()}>
+          <TitleLink
+            href={path()}
+            onClick={(click) => {
+              click.stopPropagation();
+              click.preventDefault();
+              navigate(path());
+            }}
+            data-testid="event-open"
+          >
+            {props.event.title}
+          </TitleLink>
+        </span>
+      }
+      description={
+        <Meta>
+          <Switch>
+            <Match when={props.event.status === "Draft"}>
+              <State>
+                <Trans context="scheduled events">Draft</Trans>
+              </State>
+            </Match>
+            <Match when={props.event.status === "Cancelled"}>
+              <State>
+                <Trans context="scheduled events">Cancelled</Trans>
+              </State>
+            </Match>
+            <Match when={props.event.status === "Completed"}>
+              <State>
+                <Trans>Over</Trans>
+              </State>
+            </Match>
+            <Match when={phase() === "soon"}>
+              <Soon>
+                {startsIn(
+                  props.event.starts_at,
+                  props.now,
                   i18n().locale ?? "en",
-                  hour12From(timeLocale()[1].formats?.LT),
                 )}
-              </time>
+              </Soon>
+            </Match>
+          </Switch>
+          <MetaItem>
+            <time datetime={props.event.starts_at}>
+              {eventTimes(
+                props.event,
+                i18n().locale ?? "en",
+                hour12From(timeLocale()[1].formats?.LT),
+              )}
+            </time>
+          </MetaItem>
+          <MetaItem>
+            <EventPlace event={props.event} />
+          </MetaItem>
+          <Show when={props.showServer}>
+            <MetaItem data-testid="event-server">
+              <Icon name="users-three" size={16} />
+              <span>{props.server.name}</span>
             </MetaItem>
+          </Show>
+          <Show
+            when={props.event.visibility && props.event.visibility !== "Place"}
+          >
             <MetaItem>
-              <EventPlace event={props.event} />
+              <Icon name="lock-simple" size={16} />
+              <span>
+                {props.event.visibility === "Invited" ? (
+                  <Trans>Invited only</Trans>
+                ) : (
+                  <Trans>Some roles</Trans>
+                )}
+              </span>
             </MetaItem>
-            <Show when={props.showServer}>
-              <MetaItem data-testid="event-server">
-                <Icon name="users-three" size={16} />
-                <span>{props.server.name}</span>
-              </MetaItem>
-            </Show>
-            <Show
-              when={
-                props.event.visibility && props.event.visibility !== "Place"
-              }
-            >
-              <MetaItem>
-                <Icon name="lock-simple" size={16} />
-                <span>
-                  {props.event.visibility === "Invited" ? (
-                    <Trans>Invited only</Trans>
-                  ) : (
-                    <Trans>Some roles</Trans>
-                  )}
-                </span>
-              </MetaItem>
-            </Show>
-          </Meta>
+          </Show>
           <CountLine
             data-testid="event-count-line"
             data-full={seatState(props.event).full || undefined}
           >
             <EventCountLine event={props.event} />
           </CountLine>
-        </Text>
-        <End>
-          <Show
-            when={mine() || !upcoming()}
-            fallback={
-              <Button
-                size="sm"
-                variant="tonal"
-                onPress={() => navigate(path())}
-                data-testid="event-answer-open"
-              >
-                <Trans context="event answer">Answer</Trans>
-              </Button>
-            }
-          >
-            <OwnAnswerMark event={props.event} />
-          </Show>
-        </End>
-      </Body>
-    </Ticket>
+        </Meta>
+      }
+      secondary={
+        <Show
+          when={mine() || !upcoming()}
+          fallback={
+            <Button
+              size="sm"
+              variant="tonal"
+              onPress={() => navigate(path())}
+              data-testid="event-answer-open"
+            >
+              <Trans context="event answer">Answer</Trans>
+            </Button>
+          }
+        >
+          <OwnAnswerMark event={props.event} />
+        </Show>
+      }
+      onClick={() => navigate(path())}
+      data-testid="event-card"
+    />
   );
 }
 
 /**
- * The event that is happening now, at the top of the page: a ticket in the
- * live colour with the way in
+ * The event that is happening now, at the top of the page: a row with the
+ * way in. Goes inside `EventGroup`.
  */
 export function EventHero(props: Props) {
-  const { i18n } = useLingui();
+  const { t, i18n } = useLingui();
   const navigate = useNavigate();
   const path = () => eventPath(props.server.id, props.event._id);
   const started = () =>
@@ -294,49 +291,56 @@ export function EventHero(props: Props) {
     );
 
   return (
-    <Ticket
-      role="article"
-      data-live
-      data-testid="event-hero"
-      data-event={props.event._id}
-      aria-labelledby={`event-${props.event._id}-hero`}
-    >
-      <TicketStub startsAt={props.event.starts_at} liveSince={started()} />
-      <Body>
-        <Text>
-          <CardTitle id={`event-${props.event._id}-hero`}>
-            <a
-              href={path()}
-              onClick={(click) => {
-                click.preventDefault();
-                navigate(path());
-              }}
-            >
-              {props.event.title}
-            </a>
-          </CardTitle>
-          <Meta>
-            <MetaItem>
-              <EventPlace event={props.event} />
-            </MetaItem>
-            <Show when={props.event.description}>
-              <HeroLine dir="auto">{props.event.description}</HeroLine>
-            </Show>
-          </Meta>
+    <SettingsRow
+      icon={<LiveDot aria-hidden="true" />}
+      title={
+        <span data-event={props.event._id}>
+          <TitleLink
+            href={path()}
+            onClick={(click) => {
+              click.stopPropagation();
+              click.preventDefault();
+              navigate(path());
+            }}
+          >
+            {props.event.title}
+          </TitleLink>
+        </span>
+      }
+      description={
+        <Meta>
+          <Soon data-live>{t`Started ${started()}`}</Soon>
+          <MetaItem>
+            <EventPlace event={props.event} />
+          </MetaItem>
           <CountLine>
             <EventCountLine event={props.event} />
           </CountLine>
-        </Text>
-        <End>
-          <JoinButton
-            event={props.event}
-            server={props.server}
-            link={serverEventLink(props.event.place)}
-            size="md"
-          />
-        </End>
-      </Body>
-    </Ticket>
+        </Meta>
+      }
+      secondary={
+        <JoinButton
+          event={props.event}
+          server={props.server}
+          link={serverEventLink(props.event.place)}
+        />
+      }
+      onClick={() => navigate(path())}
+      data-testid="event-hero"
+    />
+  );
+}
+
+/** A titled group of event rows: the settings group (SettingsSection) */
+export function EventGroup(props: {
+  title?: JSX.Element;
+  aside?: JSX.Element;
+  children: JSX.Element;
+}) {
+  return (
+    <SettingsSection title={props.title} aside={props.aside}>
+      {props.children}
+    </SettingsSection>
   );
 }
 
@@ -400,75 +404,69 @@ export function JoinButton(props: {
   );
 }
 
-const Body = styled("div", {
+/** The day of an event in the icon column of its row */
+const DateMark = styled("span", {
   base: {
-    display: "grid",
-    gridTemplateColumns: "minmax(0, 1fr) auto",
+    display: "flex",
+    flexDirection: "column",
     alignItems: "center",
-    gap: "24px",
-    padding: "16px 28px",
-    minWidth: 0,
-    _phone: {
-      gridTemplateColumns: "minmax(0, 1fr)",
-      gap: "12px",
-      padding: "12px 16px",
+    justifyContent: "center",
+    width: "40px",
+    minHeight: "40px",
+    borderRadius: "var(--z-radius, 10px)",
+    background: "var(--z-bg-input)",
+    "& b": {
+      fontSize: "16px",
+      lineHeight: "18px",
+      fontWeight: 700,
+      color: "var(--z-fg-primary)",
+    },
+    "& small": {
+      fontSize: "11px",
+      lineHeight: "14px",
+      color: "var(--z-fg-secondary)",
+    },
+    "&[data-quiet] b": { color: "var(--z-fg-muted)" },
+  },
+});
+
+/** Happening now: a dot in the live colour where the day would be */
+const LiveDot = styled("span", {
+  base: {
+    width: "40px",
+    display: "grid",
+    placeItems: "center",
+    "&::before": {
+      content: '""',
+      width: "10px",
+      height: "10px",
+      borderRadius: "999px",
+      background: "var(--z-live)",
     },
   },
 });
 
-const Text = styled("div", {
+const TitleLink = styled("a", {
   base: {
-    display: "flex",
-    flexDirection: "column",
-    gap: "4px",
-    minWidth: 0,
+    color: "inherit",
+    textDecoration: "none",
+    fontWeight: 600,
+    borderRadius: "var(--z-radius-sm, 6px)",
+    "&:hover": { textDecoration: "underline" },
+    "&:focus-visible": {
+      outline: "2px solid var(--z-focus)",
+      outlineOffset: "2px",
+    },
   },
 });
 
-const End = styled("div", {
-  base: {
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "flex-end",
-    minWidth: 0,
-    _phone: { justifyContent: "flex-start" },
-  },
-});
-
-const titleLink = {
-  color: "inherit",
-  textDecoration: "none",
-  borderRadius: "var(--z-radius-sm, 6px)",
-  "&:hover": { textDecoration: "underline" },
-  "&:focus-visible": {
-    outline: "2px solid var(--z-focus)",
-    outlineOffset: "2px",
-  },
-} as const;
-
-const CardTitle = styled("h3", {
-  base: {
-    margin: 0,
-    fontSize: "18px",
-    lineHeight: "28px",
-    fontWeight: 650,
-    overflowWrap: "anywhere",
-    color: "var(--z-header-primary, var(--z-fg-primary))",
-    "& a": titleLink,
-    _phone: { fontSize: "15px", lineHeight: "24px" },
-  },
-});
-
-const Meta = styled("div", {
+const Meta = styled("span", {
   base: {
     display: "flex",
     flexWrap: "wrap",
     alignItems: "center",
-    columnGap: "16px",
-    rowGap: "4px",
-    fontSize: "13px",
-    lineHeight: "20px",
-    color: "var(--z-fg-secondary)",
+    columnGap: "12px",
+    rowGap: "2px",
     "--z-icon-color": "var(--z-fg-muted)",
   },
 });
@@ -477,34 +475,27 @@ const MetaItem = styled("span", {
   base: {
     display: "inline-flex",
     alignItems: "center",
-    gap: "6px",
+    gap: "4px",
     minWidth: 0,
     "& > span, & > time": { minWidth: 0, overflowWrap: "anywhere" },
   },
 });
 
 const State = styled("span", {
-  base: { fontWeight: 650, color: "var(--z-fg-muted)" },
+  base: { fontWeight: 600, color: "var(--z-fg-secondary)" },
 });
 
 const Soon = styled("span", {
-  base: { color: "var(--z-status-warning)", fontWeight: 650 },
+  base: {
+    color: "var(--z-status-warning)",
+    fontWeight: 600,
+    "&[data-live]": { color: "var(--z-live)" },
+  },
 });
 
 const CountLine = styled("span", {
   base: {
-    marginBlockStart: "4px",
-    fontSize: "13px",
-    lineHeight: "20px",
     color: "var(--z-fg-muted)",
     "&[data-full]": { color: "var(--z-status-warning)" },
-  },
-});
-
-const HeroLine = styled("span", {
-  base: {
-    minWidth: 0,
-    color: "var(--z-fg-secondary)",
-    lineClamp: 1,
   },
 });

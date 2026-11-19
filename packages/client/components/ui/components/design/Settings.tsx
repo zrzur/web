@@ -65,6 +65,8 @@ export function SettingsRow(props: {
    * activate it, and a chevron is drawn when there is no control
    */
   navigational?: boolean;
+  /** For tests: finds the row */
+  "data-testid"?: string;
 }) {
   const labelId = createUniqueId();
   const descriptionId = createUniqueId();
@@ -76,6 +78,7 @@ export function SettingsRow(props: {
       data-clickable={!!props.onClick && !props.disabled}
       data-disabled={!!props.disabled}
       data-danger={!!props.danger}
+      data-testid={props["data-testid"]}
       role={props.navigational ? "button" : undefined}
       tabIndex={props.navigational && !props.disabled ? 0 : undefined}
       aria-labelledby={props.navigational ? labelId : undefined}

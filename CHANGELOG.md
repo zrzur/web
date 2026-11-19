@@ -2,6 +2,14 @@
 
 ## Unreleased
 
+### Events look like Settings (2026-11-19, owner's review of 26.2.0-beta.1)
+
+* **Every box is a settings group:** the event's facts, your answer, your own options, the organiser's tools, sharing, seats, who is coming and the numbers are the same grouped rows as Settings (`SettingsSection`, `SettingsRow`, `SettingsFormPanel`), with the same headings, row height, corners and dividers. The lists show each event as a row with its day at the start, in one group per section, instead of a ticket.
+* **Organiser tools in order:** Publish, Edit, Start now or End now, Copy as a draft; then a second group for Cancel and Delete, in red, each with a line on what it does. Nothing wraps onto a second line any more.
+* **Who is coming:** the answers are buttons again (the chosen one filled), with the count in the label; the separate count line is gone.
+* **Tabs, search and place filter in the header**, as on Friends (the same parts, now shared in `common/ListPageHeader.tsx`); on phones they get their own rows under the title. The place is picked from a menu.
+* **No English in Arabic or German:** strings with a context (Numbers, Edit, Delete, Publish, Answer, Title, Voice, Text and others, also outside Events) were never added to the catalogs and showed in English or as an id. They are now in ar, en and de.
+
 ### Voice on a weak connection, clips and recorded rooms (2026-11-19, behind flags, off)
 
 * **A call steps down on a weak connection** (`features.voice_weak_network.enabled`): the app watches packet loss, round trip time and the voice server's verdict every two seconds. Weak: lighter voice (24 kbps), video received and sent at its lowest layer, and a sign in the room. Very weak: video paused both ways, sound kept (16 kbps). It moves one level at a time, down after two bad samples and back up after ten good seconds. Opus FEC, DTX and RED were already on. The numbers are server settings; `lightVoiceBitrate()` gives low-data mode the same "lighter voice".

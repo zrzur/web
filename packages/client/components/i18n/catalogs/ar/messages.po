@@ -30695,3 +30695,300 @@ msgstr "مكان الفعالية"
 #: src/interface/events/EventShare.tsx
 msgid "Works for"
 msgstr "صالح لمدة"
+
+#: src/interface/events/EventDetail.tsx
+msgid "A new draft with the same details, to change."
+msgstr "مسودة جديدة بالتفاصيل نفسها لتعدّلها."
+
+#: src/interface/events/EventDetail.tsx
+msgid "About this event"
+msgstr "عن هذه الفعالية"
+
+#: src/interface/events/EventCard.tsx
+msgctxt "event answer"
+msgid "Answer"
+msgstr "أجب"
+
+#: src/interface/events/EventDetail.tsx
+msgid "Cancel or delete"
+msgstr "الإلغاء والحذف"
+
+#: src/interface/events/EventCard.tsx
+#: src/interface/events/EventDetail.tsx
+msgctxt "scheduled events"
+msgid "Cancelled"
+msgstr "ملغاة"
+
+#: src/interface/events/EventShare.tsx
+msgctxt "scheduled events"
+msgid "Copy"
+msgstr "نسخ"
+
+#: src/interface/events/EventDetail.tsx
+msgctxt "scheduled events"
+msgid "Delete"
+msgstr "حذف"
+
+#: components/app/interface/settings/server/insights/InsightsPage.tsx
+msgctxt "server insights"
+msgid "Discover"
+msgstr "اكتشف"
+
+#: components/app/interface/settings/server/ServerAccess.tsx
+msgctxt "server-settings"
+msgid "Discover"
+msgstr "اكتشف"
+
+#: src/interface/events/EventCard.tsx
+msgctxt "scheduled events"
+msgid "Draft"
+msgstr "مسودة"
+
+#: src/interface/events/EventDetail.tsx
+msgctxt "scheduled events"
+msgid "Edit"
+msgstr "تعديل"
+
+#: src/interface/events/EventDetail.tsx
+msgctxt "scheduled events"
+msgid "End now"
+msgstr "إنهاء الآن"
+
+#: components/modal/modals/ServerEventEditor.tsx
+msgctxt "scheduled events"
+msgid "Ends"
+msgstr "تنتهي"
+
+#: components/app/interface/settings/user/notifications/EventNotices.tsx
+msgctxt "notification settings"
+msgid "Events"
+msgstr "الفعاليات"
+
+#: components/app/interface/settings/server/EventsLobbySwitches.tsx
+#: src/interface/events/EventsLink.tsx
+#: src/interface/events/EventsPage.tsx
+msgctxt "scheduled events"
+msgid "Events"
+msgstr "الفعاليات"
+
+#: src/interface/events/EventsPage.tsx
+msgctxt "event places"
+msgid "Every place"
+msgstr "كل الأماكن"
+
+#: src/interface/channels/text/searchLabels.ts
+msgctxt "search filter"
+msgid "File"
+msgstr "ملف"
+
+#: src/interface/events/EventDetail.tsx
+msgid "For you"
+msgstr "لك"
+
+#: src/interface/channels/text/searchLabels.ts
+msgctxt "search filter"
+msgid "From"
+msgstr "من"
+
+#. placeholder {0}: name(attendee)
+#: src/interface/events/EventDetail.tsx
+msgid "Give {0} a seat"
+msgstr "امنح {0} مقعدًا"
+
+#: src/interface/events/EventDetail.tsx
+msgid "Gone for good, with its answers."
+msgstr "تُحذف نهائيًا مع إجاباتها."
+
+#: src/interface/channels/text/searchLabels.ts
+msgctxt "search filter"
+msgid "Image"
+msgstr "صورة"
+
+#: src/interface/events/EventDetail.tsx
+msgid "It stays in the list, marked as cancelled."
+msgstr "تبقى في القائمة مع علامة الإلغاء."
+
+#: src/interface/events/EventCard.tsx
+msgctxt "scheduled events"
+msgid "Join"
+msgstr "انضم"
+
+#: src/interface/events/EventDetail.tsx
+msgctxt "scheduled events"
+msgid "Keep it"
+msgstr "إبقاؤها"
+
+#: src/interface/channels/text/searchLabels.ts
+msgctxt "search filter"
+msgid "Link"
+msgstr "رابط"
+
+#: components/app/interface/settings/server/pages.tsx
+msgctxt "server-settings"
+msgid "Lobby"
+msgstr "الردهة"
+
+#: components/app/interface/settings/server/insights/InsightsPage.tsx
+msgctxt "server insights"
+msgid "Members"
+msgstr "الأعضاء"
+
+#: src/interface/events/EventDetail.tsx
+msgid "Members who may see it get it in their list."
+msgstr "تظهر في قائمة الأعضاء الذين يحق لهم رؤيتها."
+
+#: src/interface/channels/text/searchLabels.ts
+msgctxt "search filter"
+msgid "Mentions"
+msgstr "يذكر"
+
+#: components/app/interface/settings/server/insights/InsightsPage.tsx
+msgctxt "server insights"
+msgid "Messages"
+msgstr "الرسائل"
+
+#: src/interface/events/EventCalendar.tsx
+msgctxt "calendar"
+msgid "Month"
+msgstr "شهر"
+
+#: src/interface/events/EventDetail.tsx
+msgctxt "scheduled events"
+msgid "Numbers"
+msgstr "الأرقام"
+
+#: src/interface/events/EventStats.tsx
+msgid "Only the number is kept, never who it was."
+msgstr "يُحفظ العدد فقط، لا الأسماء."
+
+#: src/interface/events/EventCard.tsx
+msgctxt "scheduled events"
+msgid "Open"
+msgstr "افتح"
+
+#: src/interface/events/EventDetail.tsx
+msgid "Organisers"
+msgstr "المنظِّمون"
+
+#: src/interface/events/EventDetail.tsx
+msgid "Outside the server"
+msgstr "خارج السيرفر"
+
+#: components/modal/modals/ServerEventEditor.tsx
+#: src/interface/events/EventDetail.tsx
+msgctxt "scheduled events"
+msgid "Publish"
+msgstr "نشر"
+
+#: src/interface/events/EventDetail.tsx
+msgid "Reminders for this event"
+msgstr "تذكيرات هذه الفعالية"
+
+#: components/app/interface/settings/ServerSettings.tsx
+msgctxt "server-settings"
+msgid "Safety"
+msgstr "الأمان"
+
+#: src/interface/events/EventShare.tsx
+msgctxt "scheduled events"
+msgid "Save"
+msgstr "حفظ"
+
+#: src/interface/events/EventDetail.tsx
+msgid "Saves a file your calendar app opens."
+msgstr "يحفظ ملفًا يفتحه تطبيق التقويم."
+
+#: src/interface/events/EventDetail.tsx
+msgctxt "scheduled events"
+msgid "Seats"
+msgstr "المقاعد"
+
+#: components/modal/modals/CreateChannel.tsx
+msgctxt "channel-type"
+msgid "Stage"
+msgstr "منصة"
+
+#. placeholder {0}: started()
+#. placeholder {0}: startsIn( props.event.started_at ?? props.event.starts_at, props.now, i18n().locale ?? "en", )
+#: src/interface/events/EventCard.tsx
+#: src/interface/events/EventDetail.tsx
+msgid "Started {0}"
+msgstr "بدأت {0}"
+
+#: src/interface/events/EventDetail.tsx
+msgid "Starts it before its time; people are told."
+msgstr "تبدأ قبل موعدها، ويُبلَّغ الحاضرون."
+
+#: src/interface/events/EventsPage.tsx
+msgctxt "event places"
+msgid "Text"
+msgstr "نصية"
+
+#: src/interface/events/EventShare.tsx
+msgid "The link stops working at once."
+msgstr "يتوقف الرابط عن العمل فورًا."
+
+#: src/interface/events/EventDetail.tsx
+msgid "The next one stays scheduled."
+msgstr "تبقى المرة القادمة في موعدها."
+
+#: src/interface/events/EventDetail.tsx
+msgid "The organisers choose when they come."
+msgstr "يحدد المنظِّمون موعدها."
+
+#: components/app/interface/settings/server/pages.tsx
+msgctxt "server-settings"
+msgid "Tickets"
+msgstr "التذاكر"
+
+#: components/modal/modals/ServerEventEditor.tsx
+msgctxt "scheduled events"
+msgid "Title"
+msgstr "العنوان"
+
+#: src/interface/events/EventDetail.tsx
+msgid "Title, time, place, seats and who sees it."
+msgstr "العنوان والوقت والمكان والمقاعد ومن يراها."
+
+#: src/interface/events/EventCalendar.tsx
+msgctxt "calendar"
+msgid "Today"
+msgstr "اليوم"
+
+#: components/app/interface/settings/server/pages.tsx
+#: components/app/interface/settings/server/ServerEmergency.tsx
+#: components/app/interface/settings/ServerSettings.tsx
+msgctxt "server-settings"
+msgid "Verification"
+msgstr "التوثيق"
+
+#: src/interface/channels/text/searchLabels.ts
+msgctxt "search filter"
+msgid "Video"
+msgstr "فيديو"
+
+#: src/interface/events/EventsPage.tsx
+msgctxt "event places"
+msgid "Voice"
+msgstr "صوتية"
+
+#: components/app/interface/settings/server/pages.tsx
+#: components/app/interface/settings/ServerSettings.tsx
+msgctxt "server-settings"
+msgid "Webhooks"
+msgstr "الويب هوك"
+
+#: components/modal/modals/ServerEventEditor.tsx
+msgctxt "scheduled events"
+msgid "Where"
+msgstr "المكان"
+
+#. placeholder {0}: current().label
+#: src/interface/events/EventsPage.tsx
+msgid "Where it takes place: {0}"
+msgstr "المكان: {0}"
+
+#: components/app/interface/settings/ServerSettings.tsx
+msgctxt "server-settings"
+msgid "Wings"
+msgstr "أجنحة"
