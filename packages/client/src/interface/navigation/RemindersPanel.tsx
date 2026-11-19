@@ -122,16 +122,26 @@ export function RemindersPanel(props: InboxPanelProps) {
 
   return (
     <Panel data-testid="reminders-panel">
-      {props.tabs}
       <Head>
-        <TitleRow>
-          <h2>
-            <Trans>Reminders</Trans>
-          </h2>
-          <Show when={props.onClose}>
-            <EntryAction icon="x" label={t`Close`} onPress={props.onClose!} />
-          </Show>
-        </TitleRow>
+        <Show
+          when={props.tabs}
+          fallback={
+            <TitleRow>
+              <h2>
+                <Trans>Reminders</Trans>
+              </h2>
+              <Show when={props.onClose}>
+                <EntryAction
+                  icon="x"
+                  label={t`Close`}
+                  onPress={props.onClose!}
+                />
+              </Show>
+            </TitleRow>
+          }
+        >
+          {props.tabs}
+        </Show>
         <Show
           when={answer()}
           fallback={

@@ -1,6 +1,6 @@
 import {
-  For,
   type JSX,
+  For,
   Match,
   Show,
   Suspense,
@@ -25,11 +25,12 @@ import {
   openInbox,
   setInboxView,
 } from "@revolt/app/interface/saved/inboxView";
+import { savedRemindersEnabled } from "@revolt/app/interface/saved/savedModel";
 import {
   type Reminder,
   attachReminders,
 } from "@revolt/app/interface/saved/savedStore";
-import { savedRemindersEnabled } from "@revolt/app/interface/saved/savedModel";
+import { TextTabs } from "@revolt/app/interface/settings/SettingsTabs";
 import { useClient } from "@revolt/client";
 import { holdMessages } from "@revolt/client/messagePruner";
 import { useDevice } from "@revolt/common";
@@ -38,7 +39,6 @@ import { shortcutFor } from "@revolt/keybinds/active";
 import { useModals } from "@revolt/modal";
 import { useState } from "@revolt/state";
 import { Avatar, CircularProgress, Time, useSnackbar } from "@revolt/ui";
-import { Segmented } from "@revolt/ui/components/design/Segmented";
 import { Icon } from "@revolt/ui/icons/Icon";
 
 // phones only, and only once it is opened: kept out of the files the app
@@ -67,7 +67,10 @@ export const openMentions = () => openInbox("mentions");
 
 /** What a list in the box gets from the box */
 export type InboxPanelProps = {
-  /** Wide screens: the switch between the lists, drawn above the title */
+  /**
+   * Wide screens: the switch between the lists. The tabs name the lists,
+   * so they take the place of the title (as the tabs of Settings do).
+   */
   tabs?: JSX.Element;
   /** Phones: the sheet has a close button */
   onClose?: () => void;
@@ -161,23 +164,23 @@ export function MentionsHost() {
         ? t`Reminders`
         : t`Mentions`;
 
-  /** wide screens: the three lists side by side in one switch */
-  const tabs = () => (
-    <Show when={more() && !phone()}>
-      <Tabs>
-        <Segmented<InboxView>
-          aria-label={t`Lists`}
-          value={shown()}
-          onChange={setView}
-          options={[
-            { value: "mentions", label: <Trans>Mentions</Trans> },
-            { value: "saved", label: <Trans>Saved list</Trans> },
-            { value: "reminders", label: <Trans>Reminders</Trans> },
-          ]}
-        />
-      </Tabs>
-    </Show>
-  );
+  /**
+   * wide screens: the three lists side by side, in the text tabs of
+   * Settings (a boxed switch here looked pasted on; owner, 2026-11-19)
+   */
+  const tabs = () =>
+    more() && !phone() ? (
+      <TextTabs<InboxView>
+        label={t`Lists`}
+        value={shown()}
+        onChange={setView}
+        tabs={[
+          { id: "mentions", label: <Trans>Mentions</Trans> },
+          { id: "saved", label: <Trans>Saved list</Trans> },
+          { id: "reminders", label: <Trans>Reminders</Trans> },
+        ]}
+      />
+    ) : undefined;
 
   createEffect(() => {
     if (!open()) return;
@@ -280,11 +283,17 @@ export function MentionsPanel(props: InboxPanelProps) {
 
   return (
     <Panel>
-      {props.tabs}
       <Head>
-        <h2>
-          <Trans>Mentions</Trans>
-        </h2>
+        <Show
+          when={props.tabs}
+          fallback={
+            <h2>
+              <Trans>Mentions</Trans>
+            </h2>
+          }
+        >
+          {props.tabs}
+        </Show>
         <p>
           <Trans>The last 30 days. Select one to jump to it.</Trans>
         </p>
@@ -403,6 +412,11 @@ export const Panel = styled("div", {
     boxShadow:
       "0 24px 60px -18px rgb(0 0 0 / 0.65), 0 2px 6px rgb(0 0 0 / 0.25)",
     color: "var(--z-fg-primary)",
+    // with the tabs the box keeps one height, so it does not jump in the
+    // middle of the window when a shorter list is chosen
+    "&:has([role='tablist'])": {
+      height: "min(560px, calc(100dvh - 120px))",
+    },
     // phones: the sheet is the frame
     _phone: {
       width: "100%",
@@ -417,11 +431,6 @@ export const Panel = styled("div", {
   },
 });
 
-/** The switch between the lists, above the title */
-const Tabs = styled("div", {
-  base: { paddingInline: "4px", paddingBlockEnd: "12px" },
-});
-
 export const Head = styled("div", {
   base: {
     paddingInline: "4px",
@@ -431,6 +440,10 @@ export const Head = styled("div", {
       margin: "4px 0 0",
       fontSize: "13px",
       color: "var(--z-fg-muted)",
+    },
+    // the tabs in place of the title: the line under them leaves room
+    "& [role='tablist'] + p, & [role='tablist'] + div": {
+      marginBlockStart: "12px",
     },
   },
 });
@@ -442,7 +455,9 @@ export const List = styled("div", {
     display: "flex",
     flexDirection: "column",
     gap: "8px",
-    _phone: { paddingInline: "4px" },
+    // phones: entries touch, as one group (InboxEntry); the mentions use
+    // their own page there
+    _phone: { paddingInline: "4px", gap: 0 },
   },
 });
 

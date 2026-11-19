@@ -129,16 +129,26 @@ export function SavedPanel(props: InboxPanelProps) {
 
   return (
     <Panel data-testid="saved-panel">
-      {props.tabs}
       <Head>
-        <TitleRow>
-          <h2>
-            <Trans>Saved messages</Trans>
-          </h2>
-          <Show when={props.onClose}>
-            <EntryAction icon="x" label={t`Close`} onPress={props.onClose!} />
-          </Show>
-        </TitleRow>
+        <Show
+          when={props.tabs}
+          fallback={
+            <TitleRow>
+              <h2>
+                <Trans>Saved messages</Trans>
+              </h2>
+              <Show when={props.onClose}>
+                <EntryAction
+                  icon="x"
+                  label={t`Close`}
+                  onPress={props.onClose!}
+                />
+              </Show>
+            </TitleRow>
+          }
+        >
+          {props.tabs}
+        </Show>
         <p>
           <Trans>Only you see this list.</Trans>
         </p>
@@ -247,5 +257,6 @@ const MoreRow = styled("div", {
     justifyContent: "center",
     flexShrink: 0,
     paddingBlock: "4px",
+    _phone: { paddingBlock: "12px 4px" },
   },
 });

@@ -49,6 +49,7 @@ export function InboxEntry(props: {
 
   return (
     <Row
+      data-entry
       data-testid={props.testId}
       data-unavailable={!props.message || undefined}
     >
@@ -137,16 +138,48 @@ export function EntryAction(props: {
   );
 }
 
+/**
+ * The card of a mention (MentionsPanel `Item`) with the same padding, border,
+ * radius and states: the whole card lights up and opens the message; only
+ * the icon buttons at the end sit above it. Phones: the rows of one list
+ * form one filled group with a hairline between them, as the mentions page
+ * and the settings lists do.
+ */
 const Row = styled("div", {
   base: {
+    position: "relative",
     display: "flex",
     alignItems: "flex-start",
-    gap: "4px",
+    gap: "12px",
+    width: "100%",
     flexShrink: 0,
-    padding: "4px",
+    padding: "12px",
     border: "1px solid var(--z-card-border, var(--z-border-soft))",
     borderRadius: "var(--z-shape-card, calc(var(--z-radius, 10px) + 4px))",
     background: "var(--z-card-bg)",
+    "&:has(> button:hover)": { background: "var(--z-nav-hover)" },
+    "&:has(> button:active)": { background: "var(--z-nav-selected)" },
+    "&:has(> button:focus-visible)": {
+      outline: "2px solid var(--z-focus)",
+    },
+    _phone: {
+      padding: "12px 14px",
+      border: "none",
+      borderRadius: 0,
+      background:
+        "var(--z-sheet-group, color-mix(in srgb, var(--z-fg-primary) 5%, transparent))",
+      "[data-entry] + &": {
+        borderTop: "1px solid var(--z-float-divider, var(--z-border-subtle))",
+      },
+      "&:not([data-entry] + &)": {
+        borderStartStartRadius: "14px",
+        borderStartEndRadius: "14px",
+      },
+      "&:not(:has(+ [data-entry]))": {
+        borderEndStartRadius: "14px",
+        borderEndEndRadius: "14px",
+      },
+    },
   },
 });
 
@@ -157,17 +190,21 @@ const Main = styled("button", {
     gap: "12px",
     flex: 1,
     minWidth: 0,
-    padding: "8px",
+    padding: 0,
     border: "none",
-    borderRadius: "var(--z-radius, 10px)",
     background: "none",
     color: "inherit",
     font: "inherit",
     textAlign: "start",
     cursor: "pointer",
-    _hover: { background: "var(--z-nav-hover)" },
-    _active: { background: "var(--z-nav-selected)" },
-    _focusVisible: { outline: "2px solid var(--z-focus)" },
+    outline: "none",
+    // the whole card is the target, not only the words
+    "&::after": {
+      content: '""',
+      position: "absolute",
+      inset: 0,
+      borderRadius: "inherit",
+    },
   },
 });
 
@@ -178,8 +215,7 @@ const Gone = styled("div", {
     gap: "12px",
     flex: 1,
     minWidth: 0,
-    minHeight: "44px",
-    padding: "8px",
+    minHeight: "36px",
     fontSize: "14px",
     color: "var(--z-fg-muted)",
     "--z-icon-color": "var(--z-icon-neutral)",
@@ -206,12 +242,18 @@ const Files = styled("div", {
   },
 });
 
+/** Above the card's own target; pulled into the padding so the card keeps
+ * the height of a mention */
 const Actions = styled("div", {
   base: {
+    position: "relative",
+    zIndex: 1,
     display: "flex",
     alignItems: "center",
     flexShrink: 0,
-    paddingBlockStart: "4px",
+    marginBlock: "-8px",
+    marginInlineEnd: "-8px",
+    _phone: { marginBlock: "-10px", marginInlineEnd: "-10px" },
   },
 });
 
@@ -232,5 +274,7 @@ export const Section = styled("h3", {
     fontSize: "13px",
     fontWeight: 600,
     color: "var(--z-fg-muted)",
+    // as the day titles of the mentions page
+    _phone: { margin: 0, padding: "10px 12px 4px" },
   },
 });
