@@ -5,6 +5,7 @@ import type { API } from "@zrzur/sdk/solid";
 import { styled } from "styled-system/jsx";
 
 import { useClient } from "@revolt/client";
+import { saveData } from "@revolt/common/lib/saveData";
 import { useInstance } from "@revolt/instance";
 import { useModals } from "@revolt/modal";
 import { Avatar } from "@revolt/ui";
@@ -15,8 +16,7 @@ import {
   sampleAvatarFor,
 } from "@revolt/ui/components/features/profiles/sampleAvatars";
 import {
-  communityFileUrl,
-  effectFileUrl,
+  communityShownUrl,
   userStyleOf,
 } from "@revolt/ui/components/features/profiles/userStyle";
 import { FeatherField, WaveEdge } from "@revolt/ui/icons/PremiumArt";
@@ -197,10 +197,15 @@ export function CommunityImage(props: {
     !props.private &&
     props.item.status === "Published" &&
     file()._id === props.item.file._id;
+  // Save data: the still frame, never the animated file (a design shown on
+  // Home cost a megabyte before anything was opened)
   const url = () =>
-    (props.item.kind === "Effect"
-      ? effectFileUrl(instance.mediaUrl, file()._id)
-      : communityFileUrl(instance.mediaUrl, file()._id)) ?? "";
+    communityShownUrl(
+      instance.mediaUrl,
+      props.item.kind,
+      file()._id,
+      saveData(),
+    ) ?? "";
 
   const [privateUrl] = createResource(
     () => (isPublic() ? undefined : url()),

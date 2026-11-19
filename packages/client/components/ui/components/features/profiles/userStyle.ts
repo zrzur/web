@@ -598,6 +598,27 @@ export function effectStillUrl(mediaUrl: string, fileId: string | undefined) {
 }
 
 /**
+ * The address a community design is shown from in a gallery or a card: its
+ * file as uploaded (it may move), or, for a viewer who is saving data, the
+ * one still frame the media server draws (some twenty kilobytes instead of
+ * up to a megabyte).
+ */
+export function communityShownUrl(
+  mediaUrl: string,
+  kind: string,
+  fileId: string | undefined,
+  saving: boolean,
+) {
+  if (kind === "Effect")
+    return saving
+      ? effectStillUrl(mediaUrl, fileId)
+      : effectFileUrl(mediaUrl, fileId);
+  return saving
+    ? communityStillUrl(mediaUrl, fileId)
+    : communityFileUrl(mediaUrl, fileId);
+}
+
+/**
  * The nameplate's art, for `--plate` on a `.z-plate` element, or undefined. Community nameplates are images; built-in ones are our own SVGs.
  * A community image is a still unless `moving` is set, which a caller does only
  * when this viewer sees motion: on hover in a list, always in a preview.
