@@ -29350,3 +29350,219 @@ msgstr "Animated emoji show still."
 #: components/app/interface/settings/user/SaveData.tsx
 msgid "Pictures load as small previews. One tap loads the full picture."
 msgstr "Pictures load as small previews. One tap loads the full picture."
+
+#. placeholder {0}: lists().waiting.length
+#. placeholder {1}: answer()!.max_active
+#: src/interface/navigation/RemindersPanel.tsx
+msgid "{0} of {1} waiting."
+msgstr "{0} of {1} waiting."
+
+#: src/interface/navigation/MentionsPanel.tsx
+msgid "A reminder is due, but its message is no longer available."
+msgstr "A reminder is due, but its message is no longer available."
+
+#: src/interface/navigation/RemindersPanel.tsx
+msgid "Cancel reminder"
+msgstr "Cancel reminder"
+
+#: components/modal/modals/RemindMessage.tsx
+#: src/interface/navigation/RemindersPanel.tsx
+msgid "Change the time"
+msgstr "Change the time"
+
+#: src/interface/navigation/RemindersPanel.tsx
+msgid "Done, clear it"
+msgstr "Done, clear it"
+
+#: src/interface/navigation/RemindersPanel.tsx
+msgid "Due"
+msgstr "Due"
+
+#: components/modal/modals/RemindMessage.tsx
+msgid "In 1 hour"
+msgstr "In 1 hour"
+
+#: components/modal/modals/RemindMessage.tsx
+msgid "In 20 minutes"
+msgstr "In 20 minutes"
+
+#: src/interface/navigation/MentionsPanel.tsx
+msgid "Lists"
+msgstr "Lists"
+
+#: src/interface/You.tsx
+msgid "Messages that come back to you at a time you pick"
+msgstr "Messages that come back to you at a time you pick"
+
+#: components/app/interface/settings/user/Keybinds.tsx
+#: src/interface/navigation/RemindersPanel.tsx
+msgid "Messages you asked to be reminded of."
+msgstr "Messages you asked to be reminded of."
+
+#: src/interface/You.tsx
+msgid "Messages you kept from any conversation"
+msgstr "Messages you kept from any conversation"
+
+#: src/interface/navigation/RemindersPanel.tsx
+msgid "No reminders. Choose \"Remind me\" in a message's menu and it comes back to you at the time you pick."
+msgstr "No reminders. Choose \"Remind me\" in a message's menu and it comes back to you at the time you pick."
+
+#: src/interface/navigation/SavedPanel.tsx
+msgid "No saved message matches your search."
+msgstr "No saved message matches your search."
+
+#: src/interface/navigation/SavedPanel.tsx
+msgid "Nothing saved yet. Choose \"Save message\" in a message's menu to keep it here."
+msgstr "Nothing saved yet. Choose \"Save message\" in a message's menu to keep it here."
+
+#: src/interface/navigation/SavedPanel.tsx
+msgid "Only you see this list."
+msgstr "Only you see this list."
+
+#: components/app/menus/MessageContextMenu.tsx
+msgid "Open list"
+msgstr "Open list"
+
+#: src/interface/navigation/MentionsPanel.tsx
+msgid "Open message"
+msgstr "Open message"
+
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "Open reminders"
+msgstr "Open reminders"
+
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "Open saved messages"
+msgstr "Open saved messages"
+
+#: components/modal/modals/RemindMessage.tsx
+msgid "Pick a time"
+msgstr "Pick a time"
+
+#: components/modal/modals/RemindMessage.tsx
+msgid "Pick a time that is still ahead."
+msgstr "Pick a time that is still ahead."
+
+#: components/modal/modals/RemindMessage.tsx
+msgid "Pick a time within the next year."
+msgstr "Pick a time within the next year."
+
+#: components/app/menus/MessageContextMenu.tsx
+#: components/modal/modals/RemindMessage.tsx
+#: src/interface/navigation/SavedPanel.tsx
+msgid "Remind me"
+msgstr "Remind me"
+
+#: components/modal/modals/RemindMessage.tsx
+msgid "Remind me at"
+msgstr "Remind me at"
+
+#: src/interface/navigation/MentionsPanel.tsx
+msgid "Reminder"
+msgstr "Reminder"
+
+#. placeholder {0}: dayjs(time).calendar()
+#: components/modal/modals/RemindMessage.tsx
+msgid "Reminder set for {0}."
+msgstr "Reminder set for {0}."
+
+#. placeholder {0}: client().markdownToText(message.content).slice(0, 80)
+#: src/interface/navigation/MentionsPanel.tsx
+msgid "Reminder: {0}"
+msgstr "Reminder: {0}"
+
+#: src/interface/navigation/MentionsPanel.tsx
+#: src/interface/navigation/NotificationsPhone.tsx
+#: src/interface/navigation/RemindersPanel.tsx
+#: src/interface/You.tsx
+msgid "Reminders"
+msgstr "Reminders"
+
+#: src/interface/navigation/RemindersPanel.tsx
+msgid "Reminders couldn't load. Try again soon."
+msgstr "Reminders couldn't load. Try again soon."
+
+#: components/app/menus/MessageContextMenu.tsx
+#: src/interface/navigation/SavedPanel.tsx
+msgid "Remove from saved"
+msgstr "Remove from saved"
+
+#: components/app/menus/MessageContextMenu.tsx
+msgid "Removed from saved messages."
+msgstr "Removed from saved messages."
+
+#: components/app/menus/MessageContextMenu.tsx
+msgid "Save message"
+msgstr "Save message"
+
+#: src/interface/navigation/MentionsPanel.tsx
+#: src/interface/navigation/NotificationsPhone.tsx
+msgid "Saved list"
+msgstr "Saved list"
+
+#: src/interface/navigation/MentionsPanel.tsx
+#: src/interface/navigation/SavedPanel.tsx
+#: src/interface/You.tsx
+msgid "Saved messages"
+msgstr "Saved messages"
+
+#: src/interface/navigation/SavedPanel.tsx
+msgid "Saved messages couldn't load. Try again soon."
+msgstr "Saved messages couldn't load. Try again soon."
+
+#: components/app/menus/MessageContextMenu.tsx
+msgid "Saved. Only you see your saved messages."
+msgstr "Saved. Only you see your saved messages."
+
+#: src/interface/navigation/SavedPanel.tsx
+msgid "Search saved messages"
+msgstr "Search saved messages"
+
+#: components/modal/modals/RemindMessage.tsx
+msgid "Set reminder"
+msgstr "Set reminder"
+
+#: src/interface/navigation/MentionsPanel.tsx
+msgid "Show reminders"
+msgstr "Show reminders"
+
+#: src/interface/navigation/InboxEntry.tsx
+msgid "This message is no longer available."
+msgstr "This message is no longer available."
+
+#: components/modal/modals/RemindMessage.tsx
+msgid "This morning"
+msgstr "This morning"
+
+#: components/modal/modals/RemindMessage.tsx
+msgid "Tomorrow morning"
+msgstr "Tomorrow morning"
+
+#: components/modal/modals/RemindMessage.tsx
+msgid "Tonight"
+msgstr "Tonight"
+
+#. placeholder {0}: answer()!.max_active_plus
+#: src/interface/navigation/RemindersPanel.tsx
+msgid "Up to {0} with Feather"
+msgstr "Up to {0} with Feather"
+
+#: components/modal/modals/RemindMessage.tsx
+msgid "When"
+msgstr "When"
+
+#: components/i18n/errors.tsx
+msgid "You have {max} reminders waiting already. Cancel one first."
+msgstr "You have {max} reminders waiting already. Cancel one first."
+
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "Your private list of messages you kept."
+msgstr "Your private list of messages you kept."
+
+#: components/i18n/errors.tsx
+msgid "Your saved list is full ({max} messages). Remove one first."
+msgstr "Your saved list is full ({max} messages). Remove one first."
+
+#: components/modal/modals/RemindMessage.tsx
+msgid "Your time zone: {zone}"
+msgstr "Your time zone: {zone}"

@@ -13,6 +13,13 @@ import {
   startAccess,
   threadIsReadOnly,
 } from "@revolt/app/interface/channels/threadAccess";
+import { openInbox } from "@revolt/app/interface/saved/inboxView";
+import { savedRemindersEnabled } from "@revolt/app/interface/saved/savedModel";
+import {
+  isKnownSaved,
+  saveMessage,
+  unsaveMessage,
+} from "@revolt/app/interface/saved/savedStore";
 import { useClient, useUser } from "@revolt/client";
 import { useInstance } from "@revolt/instance";
 import { CustomEmoji, UnicodeEmoji } from "@revolt/markdown/emoji";
@@ -106,6 +113,43 @@ export function MessageContextMenu(props: {
    */
   function reply() {
     state.draft.addReply(props.message!, user()!.id);
+  }
+
+  /** saving and reminders are on, and this is a message a person keeps */
+  const canKeep = () =>
+    !!props.message &&
+    !props.message.systemMessage &&
+    savedRemindersEnabled(client());
+  const isSaved = () => !!props.message && isKnownSaved(props.message.id);
+
+  /**
+   * Put this message into the private saved list, or take it out
+   */
+  function toggleSaved() {
+    const id = props.message!.id;
+    if (isSaved())
+      unsaveMessage(client(), id)
+        .then(() => snackbar.show({ message: t`Removed from saved messages.` }))
+        .catch(showError);
+    else
+      saveMessage(client(), id)
+        .then(() =>
+          snackbar.show({
+            message: t`Saved. Only you see your saved messages.`,
+            action: t`Open list`,
+            onAction: () => openInbox("saved"),
+            closeOnAction: true,
+            autoCloseDelay: 5000,
+          }),
+        )
+        .catch(showError);
+  }
+
+  /**
+   * Be reminded of this message later
+   */
+  function remind() {
+    openModal({ type: "remind_message", message: props.message! });
   }
 
   /**
@@ -598,6 +642,27 @@ export function MessageContextMenu(props: {
           />
         </Show>
         <Show when={canReact() || canReply() || canForward()}>
+          <ContextMenuDivider />
+        </Show>
+
+        {/* keep for later: the private saved list and reminders */}
+        <Show when={canKeep()}>
+          <ContextMenuButton
+            icon={<Icon name="bookmark-simple" size={16} />}
+            onClick={toggleSaved}
+            data-testid="menu-save-message"
+          >
+            <Show when={isSaved()} fallback={<Trans>Save message</Trans>}>
+              <Trans>Remove from saved</Trans>
+            </Show>
+          </ContextMenuButton>
+          <ContextMenuButton
+            icon={<Icon name="clock" size={16} />}
+            onClick={remind}
+            data-testid="menu-remind-me"
+          >
+            <Trans>Remind me</Trans>
+          </ContextMenuButton>
           <ContextMenuDivider />
         </Show>
 

@@ -223,6 +223,14 @@ export function useError() {
         }
         return t`You've reached the limit of ${limit} new bots a week. Each one counts for 7 days, then you can make another.`;
       }
+      if ((err.type as string) === "TooManyReminders") {
+        const { max } = err as unknown as { max?: number };
+        return t`You have ${max} reminders waiting already. Cancel one first.`;
+      }
+      if ((err.type as string) === "TooManySavedMessages") {
+        const { max } = err as unknown as { max?: number };
+        return t`Your saved list is full (${max} messages). Remove one first.`;
+      }
       if ((err.type as string) === "MissingPlatformPermission") {
         return t`Only verified creators and Zrzur staff can do this.`;
       }

@@ -1,0 +1,202 @@
+{
+  "Reminder: {0}": [
+    "تذكير: {0}",
+    "Erinnerung: {0}"
+  ],
+  "A reminder is due, but its message is no longer available.": [
+    "حان موعد تذكير، لكن رسالته لم تعد متاحة.",
+    "Eine Erinnerung ist fällig, aber ihre Nachricht ist nicht mehr verfügbar."
+  ],
+  "Open message": [
+    "افتح الرسالة",
+    "Nachricht öffnen"
+  ],
+  "Show reminders": [
+    "اعرض التذكيرات",
+    "Erinnerungen anzeigen"
+  ],
+  "Reminder": [
+    "تذكير",
+    "Erinnerung"
+  ],
+  "Saved messages": [
+    "الرسائل المحفوظة",
+    "Gespeicherte Nachrichten"
+  ],
+  "Reminders": [
+    "التذكيرات",
+    "Erinnerungen"
+  ],
+  "Lists": [
+    "القوائم",
+    "Listen"
+  ],
+  "This message is no longer available.": [
+    "هذه الرسالة لم تعد متاحة.",
+    "Diese Nachricht ist nicht mehr verfügbar."
+  ],
+  "Only you see this list.": [
+    "لا يرى هذه القائمة أحد سواك.",
+    "Nur du siehst diese Liste."
+  ],
+  "Search saved messages": [
+    "ابحث في الرسائل المحفوظة",
+    "Gespeicherte Nachrichten durchsuchen"
+  ],
+  "Saved messages couldn't load. Try again soon.": [
+    "تعذّر تحميل الرسائل المحفوظة. حاول مجددًا بعد قليل.",
+    "Gespeicherte Nachrichten konnten nicht geladen werden. Versuche es gleich noch einmal."
+  ],
+  "No saved message matches your search.": [
+    "لا توجد رسالة محفوظة تطابق بحثك.",
+    "Keine gespeicherte Nachricht passt zu deiner Suche."
+  ],
+  "Nothing saved yet. Choose \"Save message\" in a message's menu to keep it here.": [
+    "لم تحفظ شيئًا بعد. اختر «احفظ الرسالة» من قائمة أي رسالة لتبقى هنا.",
+    "Noch nichts gespeichert. Wähle im Menü einer Nachricht „Nachricht speichern“, um sie hier aufzubewahren."
+  ],
+  "Remind me": [
+    "ذكّرني",
+    "Erinnere mich"
+  ],
+  "Remove from saved": [
+    "أزل من المحفوظات",
+    "Aus Gespeichert entfernen"
+  ],
+  "Messages you asked to be reminded of.": [
+    "رسائل طلبت أن تُذكَّر بها.",
+    "Nachrichten, an die du erinnert werden möchtest."
+  ],
+  "{0} of {1} waiting.": [
+    "{0} من {1} بالانتظار.",
+    "{0} von {1} warten."
+  ],
+  "Up to {0} with Feather": [
+    "حتى {0} مع ريشة",
+    "Bis zu {0} mit Feather"
+  ],
+  "Reminders couldn't load. Try again soon.": [
+    "تعذّر تحميل التذكيرات. حاول مجددًا بعد قليل.",
+    "Erinnerungen konnten nicht geladen werden. Versuche es gleich noch einmal."
+  ],
+  "No reminders. Choose \"Remind me\" in a message's menu and it comes back to you at the time you pick.": [
+    "لا توجد تذكيرات. اختر «ذكّرني» من قائمة أي رسالة لتعود إليك في الوقت الذي تحدده.",
+    "Keine Erinnerungen. Wähle im Menü einer Nachricht „Erinnere mich“, dann kommt sie zur gewählten Zeit zu dir zurück."
+  ],
+  "Due": [
+    "حان موعدها",
+    "Fällig"
+  ],
+  "Done, clear it": [
+    "تمّ، أزِله",
+    "Erledigt, entfernen"
+  ],
+  "Change the time": [
+    "غيّر الوقت",
+    "Zeit ändern"
+  ],
+  "Cancel reminder": [
+    "ألغِ التذكير",
+    "Erinnerung abbrechen"
+  ],
+  "In 20 minutes": [
+    "بعد 20 دقيقة",
+    "In 20 Minuten"
+  ],
+  "In 1 hour": [
+    "بعد ساعة",
+    "In 1 Stunde"
+  ],
+  "Tonight": [
+    "الليلة",
+    "Heute Abend"
+  ],
+  "Tomorrow morning": [
+    "صباح الغد",
+    "Morgen früh"
+  ],
+  "This morning": [
+    "هذا الصباح",
+    "Heute Morgen"
+  ],
+  "Pick a time that is still ahead.": [
+    "اختر وقتًا لم يحن بعد.",
+    "Wähle eine Zeit, die noch vor dir liegt."
+  ],
+  "Pick a time within the next year.": [
+    "اختر وقتًا خلال السنة القادمة.",
+    "Wähle eine Zeit innerhalb des nächsten Jahres."
+  ],
+  "Reminder set for {0}.": [
+    "ضُبط التذكير: {0}.",
+    "Erinnerung gesetzt: {0}."
+  ],
+  "Set reminder": [
+    "اضبط التذكير",
+    "Erinnerung setzen"
+  ],
+  "When": [
+    "متى",
+    "Wann"
+  ],
+  "Pick a time": [
+    "اختر وقتًا",
+    "Zeit wählen"
+  ],
+  "Remind me at": [
+    "ذكّرني في",
+    "Erinnere mich um"
+  ],
+  "Your time zone: {zone}": [
+    "منطقتك الزمنية: {zone}",
+    "Deine Zeitzone: {zone}"
+  ],
+  "Open saved messages": [
+    "فتح الرسائل المحفوظة",
+    "Gespeicherte Nachrichten öffnen"
+  ],
+  "Open reminders": [
+    "فتح التذكيرات",
+    "Erinnerungen öffnen"
+  ],
+  "Your private list of messages you kept.": [
+    "قائمتك الخاصة بالرسائل التي احتفظت بها.",
+    "Deine private Liste aufbewahrter Nachrichten."
+  ],
+  "Messages you kept from any conversation": [
+    "رسائل احتفظت بها من أي محادثة",
+    "Nachrichten, die du aus beliebigen Unterhaltungen aufbewahrt hast"
+  ],
+  "Messages that come back to you at a time you pick": [
+    "رسائل تعود إليك في الوقت الذي تحدده",
+    "Nachrichten, die zur gewählten Zeit zu dir zurückkommen"
+  ],
+  "Removed from saved messages.": [
+    "أُزيلت من الرسائل المحفوظة.",
+    "Aus den gespeicherten Nachrichten entfernt."
+  ],
+  "Saved. Only you see your saved messages.": [
+    "حُفظت. لا يرى رسائلك المحفوظة أحد سواك.",
+    "Gespeichert. Nur du siehst deine gespeicherten Nachrichten."
+  ],
+  "Save message": [
+    "احفظ الرسالة",
+    "Nachricht speichern"
+  ],
+  "You have {max} reminders waiting already. Cancel one first.": [
+    "بلغت الحد الأقصى للتذكيرات المنتظرة ({max}). ألغِ واحدًا أولًا.",
+    "Du hast bereits {max} wartende Erinnerungen. Brich zuerst eine ab."
+  ],
+  "Your saved list is full ({max} messages). Remove one first.": [
+    "قائمة محفوظاتك ممتلئة (الحد الأقصى {max}). أزل رسالة أولًا.",
+    "Deine gespeicherte Liste ist voll ({max} Nachrichten). Entferne zuerst eine."
+  ],
+  "Saved list": [
+    "المحفوظات",
+    "Gespeichert"
+  ],
+  "Open list": [
+    "افتح القائمة",
+    "Liste öffnen"
+  ]
+}

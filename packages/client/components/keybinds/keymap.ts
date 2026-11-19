@@ -34,6 +34,8 @@ export type ShortcutId =
   | "open_events"
   | "toggle_streamer"
   | "toggle_soundboard"
+  | "view_saved"
+  | "view_reminders"
   | "open_shortcuts";
 
 export type CustomCombos = Partial<Record<ShortcutId, Combo>>;
@@ -55,6 +57,10 @@ export const DEFAULTS: Record<ShortcutId, string> = {
   open_events: "MS:Digit9",
   toggle_streamer: "MS:KeyL",
   toggle_soundboard: "MS:Digit6|MC:KeyS",
+  // not Shift+7: it types "/" on German and Nordic layouts and is Ctrl+/
+  // there. On a Mac, Command+Shift+4 and 5 take screenshots.
+  view_saved: "MS:Digit4|MC:KeyB",
+  view_reminders: "MS:Digit5|MC:KeyR",
   open_shortcuts: "M:Slash",
 };
 

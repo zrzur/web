@@ -181,6 +181,12 @@ export type Modals =
       channel: Channel;
     }
   | {
+      type: "remind_message";
+      message: Message;
+      /** Change the time of this waiting reminder instead of setting one */
+      reminder?: { _id: string; due_at: number };
+    }
+  | {
       type: "poll_voters";
       message: Message;
     }
