@@ -1,4 +1,5 @@
 import { useLingui } from "@lingui/solid/macro";
+import { mediaPreload, saveData } from "@revolt/common/lib/saveData";
 import { Icon } from "@revolt/ui/icons/Icon";
 import {
   For,
@@ -39,7 +40,8 @@ export function VoiceMessage(props: {
   const [voice, setVoice] =
     createSignal<Awaited<ReturnType<typeof readVoice>>>();
   createEffect(() => {
-    const src = props.decode === false ? undefined : props.src;
+    // the real waveform needs the whole file: not while saving data
+    const src = props.decode === false || saveData() ? undefined : props.src;
     setVoice(undefined);
     if (!src) return;
     let current = true;
@@ -139,7 +141,7 @@ export function VoiceMessage(props: {
       <audio
         ref={audio}
         src={props.src}
-        preload="metadata"
+        preload={mediaPreload(saveData())}
         onPlay={() => setPlaying(true)}
         onPause={() => setPlaying(false)}
         onEnded={() => {

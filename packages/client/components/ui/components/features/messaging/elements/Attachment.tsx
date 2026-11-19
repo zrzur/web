@@ -5,11 +5,17 @@ import { css } from "styled-system/css";
 import { styled } from "styled-system/jsx";
 
 import { MessageContextMenu, useMessage } from "@revolt/app";
+import {
+  holdsPicture,
+  isAnimatedPicture,
+  saveData,
+} from "@revolt/common/lib/saveData";
 import { useModals } from "@revolt/modal";
 import { Column } from "@revolt/ui/components/layout";
 import { SizedContent, Spoiler } from "@revolt/ui/components/utils";
 
 import { FileInfo } from "./FileInfo";
+import { HeldMedia } from "./HeldMedia";
 import { MediaPlayer } from "./MediaPlayer";
 import { TextFile } from "./TextFile";
 import { VoiceMessage } from "./VoiceMessage";
@@ -86,27 +92,35 @@ export function Attachment(props: { file: File; message?: Message }) {
           <Show when={props.file.isSpoiler}>
             <Spoiler contentType="Image" />
           </Show>
-          <img
-            alt={props.file.filename ?? ""}
-            class={css({ cursor: "pointer" })}
-            onClick={() =>
-              openModal({
-                type: "image_viewer",
-                file: props.file,
-              })
-            }
-            loading="lazy"
-            src={props.file.createFileURL()}
-            use:floating={{
-              contextMenu: () => (
-                <MessageContextMenu
-                  message={props.message}
-                  reactPicker={reactPicker}
-                  file={props.file}
-                />
-              ),
-            }}
-          />
+          {/* Save data: a large picture or a GIF waits for a tap */}
+          <HeldMedia
+            held={holdsPicture(saveData(), props.file)}
+            kind={isAnimatedPicture(props.file) ? "gif" : "picture"}
+            id={props.file.id}
+            size={props.file.size}
+          >
+            <img
+              alt={props.file.filename ?? ""}
+              class={css({ cursor: "pointer" })}
+              onClick={() =>
+                openModal({
+                  type: "image_viewer",
+                  file: props.file,
+                })
+              }
+              loading="lazy"
+              src={props.file.createFileURL()}
+              use:floating={{
+                contextMenu: () => (
+                  <MessageContextMenu
+                    message={props.message}
+                    reactPicker={reactPicker}
+                    file={props.file}
+                  />
+                ),
+              }}
+            />
+          </HeldMedia>
         </SizedContent>
       </Match>
       <Match when={props.file.metadata.type === "Video"}>
@@ -137,8 +151,9 @@ export function Attachment(props: { file: File; message?: Message }) {
           title={props.file.filename ?? ""}
           detail={props.file.humanReadableSize}
           download={props.file.originalUrl}
-          // a real waveform needs the whole file; skip it for big files
-          decode={(props.file.size ?? 0) <= 15_000_000}
+          // a real waveform needs the whole file; skip it for big files,
+          // and for every file while saving data
+          decode={!saveData() && (props.file.size ?? 0) <= 15_000_000}
           contextMenu={() => (
             <MessageContextMenu
               message={props.message}

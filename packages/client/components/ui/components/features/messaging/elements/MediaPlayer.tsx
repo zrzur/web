@@ -1,4 +1,5 @@
 import { useLingui } from "@lingui/solid/macro";
+import { mediaPreload, saveData } from "@revolt/common/lib/saveData";
 import { Icon } from "@revolt/ui/icons/Icon";
 import {
   createEffect,
@@ -165,7 +166,8 @@ export function MediaPlayer(props: {
         }}
         src={props.src}
         playsinline
-        preload="metadata"
+        // Save data: nothing of the file is fetched before Play
+        preload={mediaPreload(saveData())}
         controls={false}
         onPlay={() => {
           setPlaying(true);

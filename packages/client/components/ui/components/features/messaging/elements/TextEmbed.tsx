@@ -22,7 +22,13 @@ import {
 } from "@revolt/ui/components/utils";
 
 import { MessageContextMenu } from "@revolt/app";
+import {
+  holdsLinkMedia,
+  holdsPicture,
+  saveData,
+} from "@revolt/common/lib/saveData";
 import { Attachment } from "./Attachment";
+import { HeldMedia } from "./HeldMedia";
 import { MediaPlayer } from "./MediaPlayer";
 import { SpecialEmbed } from "./SpecialEmbed";
 import { isPlayerEmbed } from "./embedSettings";
@@ -403,7 +409,16 @@ export function TextEmbed(props: { embed: TextEmbedClass | WebsiteEmbed }) {
         </Show>
 
         <Show when={rich()?.proxiedImageURL}>
-          {(src) => <EmbedImage src={src()} alt="" loading="lazy" />}
+          {(src) => (
+            <HeldMedia
+              held={holdsLinkMedia(saveData())}
+              kind="picture"
+              id={src()}
+              frame={{ width: 320, height: 120 }}
+            >
+              <EmbedImage src={src()} alt="" loading="lazy" />
+            </HeldMedia>
+          )}
         </Show>
 
         <Show when={props.embed.type === "Website"}>
@@ -436,25 +451,33 @@ export function TextEmbed(props: { embed: TextEmbedClass | WebsiteEmbed }) {
                 width={(props.embed as WebsiteEmbed).image!.width}
                 height={(props.embed as WebsiteEmbed).image!.height}
               >
-                <img
-                  src={(props.embed as WebsiteEmbed).image!.proxiedURL}
-                  alt={t`Image`}
-                  loading="lazy"
-                  class={css({ cursor: "pointer" })}
-                  use:floating={{
-                    contextMenu: () => (
-                      <MessageContextMenu
-                        file={(props.embed as WebsiteEmbed).image!}
-                      />
-                    ),
-                  }}
-                  onClick={() =>
-                    openModal({
-                      type: "image_viewer",
-                      embed: (props.embed as WebsiteEmbed).image!,
-                    })
-                  }
-                />
+                {/* Save data: the words of a link preview show, its
+                    picture waits for a tap */}
+                <HeldMedia
+                  held={holdsLinkMedia(saveData())}
+                  kind="picture"
+                  id={(props.embed as WebsiteEmbed).image!.url}
+                >
+                  <img
+                    src={(props.embed as WebsiteEmbed).image!.proxiedURL}
+                    alt={t`Image`}
+                    loading="lazy"
+                    class={css({ cursor: "pointer" })}
+                    use:floating={{
+                      contextMenu: () => (
+                        <MessageContextMenu
+                          file={(props.embed as WebsiteEmbed).image!}
+                        />
+                      ),
+                    }}
+                    onClick={() =>
+                      openModal({
+                        type: "image_viewer",
+                        embed: (props.embed as WebsiteEmbed).image!,
+                      })
+                    }
+                  />
+                </HeldMedia>
               </SizedContent>
             </Match>
           </Switch>
@@ -486,20 +509,39 @@ export function TextEmbed(props: { embed: TextEmbedClass | WebsiteEmbed }) {
 
       <Show when={rich()?.thumbnail}>
         {(thumbnail) => (
-          <PreviewImage
-            src={thumbnail().createFileURL()}
-            alt=""
-            loading="lazy"
-            class={css({ cursor: "pointer" })}
-            onClick={() =>
-              openModal({ type: "image_viewer", file: thumbnail() })
-            }
-          />
+          <HeldMedia
+            held={holdsPicture(saveData(), thumbnail())}
+            kind="picture"
+            id={thumbnail().id}
+            size={thumbnail().size}
+            compact
+            frame={{ width: 48, height: 48 }}
+          >
+            <PreviewImage
+              src={thumbnail().createFileURL()}
+              alt=""
+              loading="lazy"
+              class={css({ cursor: "pointer" })}
+              onClick={() =>
+                openModal({ type: "image_viewer", file: thumbnail() })
+              }
+            />
+          </HeldMedia>
         )}
       </Show>
 
       <Show when={rich()?.proxiedThumbnailURL}>
-        {(src) => <PreviewImage src={src()} alt="" loading="lazy" />}
+        {(src) => (
+          <HeldMedia
+            held={holdsLinkMedia(saveData())}
+            kind="picture"
+            id={src()}
+            compact
+            frame={{ width: 48, height: 48 }}
+          >
+            <PreviewImage src={src()} alt="" loading="lazy" />
+          </HeldMedia>
+        )}
       </Show>
 
       <Show
@@ -509,11 +551,19 @@ export function TextEmbed(props: { embed: TextEmbedClass | WebsiteEmbed }) {
           !(props.embed as WebsiteEmbed).video
         }
       >
-        <PreviewImage
-          src={(props.embed as WebsiteEmbed).image!.proxiedURL}
-          alt=""
-          loading="lazy"
-        />
+        <HeldMedia
+          held={holdsLinkMedia(saveData())}
+          kind="picture"
+          id={(props.embed as WebsiteEmbed).image!.url}
+          compact
+          frame={{ width: 48, height: 48 }}
+        >
+          <PreviewImage
+            src={(props.embed as WebsiteEmbed).image!.proxiedURL}
+            alt=""
+            loading="lazy"
+          />
+        </HeldMedia>
       </Show>
     </Base>
   );

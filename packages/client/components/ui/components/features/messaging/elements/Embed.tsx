@@ -12,10 +12,12 @@ import {
 import { css } from "styled-system/css";
 
 import { isGif as isGifLib } from "@revolt/common/lib/gifs";
+import { holdsLinkMedia, saveData } from "@revolt/common/lib/saveData";
 import { useModals } from "@revolt/modal";
 import { SizedContent } from "@revolt/ui/components/utils";
 
 import { MessageContextMenu } from "@revolt/app";
+import { HeldMedia } from "./HeldMedia";
 import { MediaPlayer } from "./MediaPlayer";
 import { SpecialEmbed } from "./SpecialEmbed";
 import { TextEmbed } from "./TextEmbed";
@@ -53,22 +55,28 @@ export function Embed(props: { embed: MessageEmbed }) {
     <Switch fallback={`Could not render ${props.embed.type}!`}>
       <Match when={image() && !(isGIF() && video())}>
         <SizedContent width={image()!.width} height={image()!.height}>
-          <img
-            // always our link proxy, also for Klipy, Tenor and Giphy
-            src={image()!.proxiedURL}
-            alt={t`Image`}
-            use:floating={{
-              contextMenu: () => <MessageContextMenu file={image()} />,
-            }}
-            loading="lazy"
-            class={css({ cursor: "pointer" })}
-            onClick={() =>
-              openModal({
-                type: "image_viewer",
-                embed: image(),
-              })
-            }
-          />
+          <HeldMedia
+            held={holdsLinkMedia(saveData())}
+            kind={isGIF() ? "gif" : "picture"}
+            id={image()!.url}
+          >
+            <img
+              // always our link proxy, also for Klipy, Tenor and Giphy
+              src={image()!.proxiedURL}
+              alt={t`Image`}
+              use:floating={{
+                contextMenu: () => <MessageContextMenu file={image()} />,
+              }}
+              loading="lazy"
+              class={css({ cursor: "pointer" })}
+              onClick={() =>
+                openModal({
+                  type: "image_viewer",
+                  embed: image(),
+                })
+              }
+            />
+          </HeldMedia>
         </SizedContent>
       </Match>
       <Match when={video()}>
@@ -83,27 +91,34 @@ export function Embed(props: { embed: MessageEmbed }) {
               />
             }
           >
-            <video
-              playsinline
-              loop={isGIF()}
-              muted={isGIF()}
-              autoplay={isGIF()}
-              controls={!isGIF()}
-              preload="metadata"
-              // always our link proxy, also for Klipy, Tenor and Giphy
-              src={video()!.proxiedURL}
-              use:floating={{
-                contextMenu: () => <MessageContextMenu file={video()} />,
-              }}
-              class={css({ cursor: isGIF() ? "pointer" : "unset" })}
-              onClick={() =>
-                isGIF() &&
-                openModal({
-                  type: "image_viewer",
-                  gif: video(),
-                })
-              }
-            />
+            {/* Save data: a GIF neither loads nor plays before a tap */}
+            <HeldMedia
+              held={holdsLinkMedia(saveData())}
+              kind="gif"
+              id={video()!.url}
+            >
+              <video
+                playsinline
+                loop={isGIF()}
+                muted={isGIF()}
+                autoplay={isGIF()}
+                controls={!isGIF()}
+                preload="metadata"
+                // always our link proxy, also for Klipy, Tenor and Giphy
+                src={video()!.proxiedURL}
+                use:floating={{
+                  contextMenu: () => <MessageContextMenu file={video()} />,
+                }}
+                class={css({ cursor: isGIF() ? "pointer" : "unset" })}
+                onClick={() =>
+                  isGIF() &&
+                  openModal({
+                    type: "image_viewer",
+                    gif: video(),
+                  })
+                }
+              />
+            </HeldMedia>
           </Show>
         </SizedContent>
       </Match>
