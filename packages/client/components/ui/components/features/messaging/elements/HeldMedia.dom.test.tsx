@@ -121,6 +121,86 @@ describe("a GIF", () => {
   });
 });
 
+describe("with a small preview from the media server", () => {
+  const still = () =>
+    document.querySelector<HTMLImageElement>("[data-tap-to-load] img");
+
+  it("shows the small still picture, not the full one, with the size on a chip", () => {
+    mount(() => (
+      <HeldMedia
+        held
+        kind="picture"
+        id="small-1"
+        size={8_589_528}
+        preview="https://files.test/attachments/small-1?size=small"
+      >
+        <img src="https://files.test/attachments/small-1" alt="" />
+      </HeldMedia>
+    ));
+    expect(still()!.getAttribute("src")).toBe(
+      "https://files.test/attachments/small-1?size=small",
+    );
+    expect(document.querySelectorAll("img").length).toBe(1);
+    expect(tile()!.textContent).toBe("8.6 MB");
+    expect(tile()!.getAttribute("aria-label")).toBe("Load picture (8.6 MB)");
+    expect(tile()!.hasAttribute("data-preview")).toBe(true);
+  });
+
+  it("loads the full picture on one tap", () => {
+    mount(() => (
+      <HeldMedia
+        held
+        kind="picture"
+        id="small-2"
+        size={900_000}
+        preview="https://files.test/attachments/small-2?size=small"
+      >
+        <img src="https://files.test/attachments/small-2" alt="" />
+      </HeldMedia>
+    ));
+    tile()!.click();
+    expect(tile()).toBeNull();
+    expect(picture()!.getAttribute("src")).toBe(
+      "https://files.test/attachments/small-2",
+    );
+  });
+
+  it("marks a GIF with a play sign over its first frame", () => {
+    mount(() => (
+      <HeldMedia
+        held
+        kind="gif"
+        id="small-3"
+        size={445_604}
+        preview="https://files.test/attachments/small-3?size=small"
+      >
+        <img src="https://files.test/attachments/small-3/original" alt="" />
+      </HeldMedia>
+    ));
+    expect(still()!.getAttribute("src")).toContain("?size=small");
+    expect(tile()!.querySelector('[data-icon="play"]')).not.toBeNull();
+    expect(tile()!.getAttribute("aria-label")).toBe("Play GIF (446 KB)");
+    expect(document.querySelector('img[src$="/original"]')).toBeNull();
+  });
+
+  it("is the picture alone in the small square of a link card", () => {
+    mount(() => (
+      <HeldMedia
+        held
+        kind="picture"
+        id="small-4"
+        compact
+        frame={{ width: 48, height: 48 }}
+        preview="https://files.test/attachments/small-4?size=small"
+      >
+        <img src="https://files.test/attachments/small-4" alt="" />
+      </HeldMedia>
+    ));
+    expect(still()).not.toBeNull();
+    expect(tile()!.textContent).toBe("");
+  });
+});
+
 describe("the small square of a link preview", () => {
   it("shows the icon alone but keeps its name for screen readers", () => {
     mount(() => (

@@ -16,5 +16,7 @@
   "Show screen": ["Afficher l’écran", "Mostrar pantalla", "Показать экран", "显示屏幕"],
   "Your device asks to use less data. Turn on Save data?": ["Ton appareil demande à utiliser moins de données. Activer « Économiser les données » ?", "Tu dispositivo pide usar menos datos. ¿Activar «Ahorrar datos»?", "Ваше устройство просит расходовать меньше трафика. Включить экономию трафика?", "你的设备要求减少数据用量。要开启“节省流量”吗？"],
   "Turn on": ["Activer", "Activar", "Включить", "开启"],
-  "Save data is on. You can change it in Settings.": ["« Économiser les données » est activé. Tu peux le changer dans les paramètres.", "«Ahorrar datos» está activado. Puedes cambiarlo en Ajustes.", "Экономия трафика включена. Изменить это можно в настройках.", "“节省流量”已开启。可以在设置中更改。"]
+  "Save data is on. You can change it in Settings.": ["« Économiser les données » est activé. Tu peux le changer dans les paramètres.", "«Ahorrar datos» está activado. Puedes cambiarlo en Ajustes.", "Экономия трафика включена. Изменить это можно в настройках.", "“节省流量”已开启。可以在设置中更改。"],
+  "Pictures load as small previews. One tap loads the full picture.": ["Les images se chargent en petit aperçu. Un toucher charge l’image entière.", "Las imágenes se cargan como vista previa pequeña. Un toque carga la imagen completa.", "Изображения загружаются как маленькие превью. Одно нажатие загружает изображение целиком.", "图片以小预览图加载。轻触一次即可加载完整图片。"],
+  "Animated emoji show still.": ["Les émojis animés restent immobiles.", "Los emojis animados se muestran quietos.", "Анимированные эмодзи показываются неподвижными.", "动态表情显示为静止。"]
 }

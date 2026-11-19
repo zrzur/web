@@ -2653,6 +2653,10 @@ msgstr "Анимированные аватары и эмодзи"
 msgid "Animated decorations, nameplates and profile effects stay still."
 msgstr "Анимированные украшения, таблички с именем и эффекты профиля остаются неподвижными."
 
+#: components/app/interface/settings/user/SaveData.tsx
+msgid "Animated emoji show still."
+msgstr "Анимированные эмодзи показываются неподвижными."
+
 #: components/app/interface/settings/user/profile/studio/StudioHome.tsx
 msgid "Animated PNG, GIF, WebP or WebM"
 msgstr "Анимированный PNG, GIF, WebP или WebM"
@@ -16583,6 +16587,10 @@ msgstr "Кольцо для пикника"
 #: src/interface/channels/text/ChannelDetailsPhone.tsx
 msgid "Pictures and videos sent in this channel show here."
 msgstr "Здесь появляются изображения и видео, отправленные в этом канале."
+
+#: components/app/interface/settings/user/SaveData.tsx
+msgid "Pictures load as small previews. One tap loads the full picture."
+msgstr "Изображения загружаются как маленькие превью. Одно нажатие загружает изображение целиком."
 
 #: components/modal/modals/PinMessage.tsx
 msgid "Pin"

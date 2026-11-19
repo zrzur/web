@@ -8,8 +8,15 @@ vi.mock("@revolt/ui", async () => ({
   Toggle: (await import("@revolt/ui/components/design/Toggle")).Toggle,
 }));
 vi.mock("@revolt/ui/icons/Icon", () => ({ Icon: () => <span /> }));
+vi.mock("@revolt/instance", () => ({
+  useInstance: () => ({ mediaUrl: "https://files.test" }),
+}));
 
-import { saveData, setSaveData } from "@revolt/common/lib/saveData";
+import {
+  learnSmallPreviews,
+  saveData,
+  setSaveData,
+} from "@revolt/common/lib/saveData";
 
 import { SaveDataSettings } from "./SaveData";
 
@@ -89,5 +96,27 @@ describe("the Save data page", () => {
     expect(count()).toBe(7);
     toggle().click();
     expect(count()).toBe(7);
+  });
+});
+
+describe("on a media server that makes small previews", () => {
+  it("says pictures load small and animated emoji show still", async () => {
+    mount();
+    const lines = () =>
+      [...document.querySelectorAll("[data-save-data-changes] li")].map(
+        (line) => line.textContent,
+      );
+    expect(lines()).not.toContain("Animated emoji show still.");
+    await learnSmallPreviews("https://files.test", async () => ({
+      small_previews: true,
+    }));
+    expect(lines()[0]).toBe(
+      "Pictures load as small previews. One tap loads the full picture.",
+    );
+    expect(lines()).toContain("Animated emoji show still.");
+    expect(lines()).not.toContain(
+      "Large pictures wait for a tap. Small ones load as usual.",
+    );
+    expect(lines().length).toBe(8);
   });
 });

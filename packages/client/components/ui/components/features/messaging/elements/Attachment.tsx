@@ -6,10 +6,13 @@ import { styled } from "styled-system/jsx";
 
 import { MessageContextMenu, useMessage } from "@revolt/app";
 import {
-  holdsPicture,
   isAnimatedPicture,
+  pictureShown,
   saveData,
+  smallPreviewUrl,
+  smallPreviews,
 } from "@revolt/common/lib/saveData";
+import { useInstance } from "@revolt/instance";
 import { useModals } from "@revolt/modal";
 import { Column } from "@revolt/ui/components/layout";
 import { SizedContent, Spoiler } from "@revolt/ui/components/utils";
@@ -61,6 +64,11 @@ export const AttachmentContainer = styled(Column, {
 export function Attachment(props: { file: File; message?: Message }) {
   const { openModal } = useModals();
   const { reactPicker } = useMessage();
+  const instance = useInstance();
+  // Save data: the small still preview where the media server makes one,
+  // a placeholder with the size where it does not; the picture on a tap
+  const shown = () =>
+    pictureShown(saveData(), smallPreviews(instance.mediaUrl), props.file);
 
   return (
     <Switch fallback={`Could not render ${props.file.metadata.type}!`}>
@@ -92,12 +100,16 @@ export function Attachment(props: { file: File; message?: Message }) {
           <Show when={props.file.isSpoiler}>
             <Spoiler contentType="Image" />
           </Show>
-          {/* Save data: a large picture or a GIF waits for a tap */}
           <HeldMedia
-            held={holdsPicture(saveData(), props.file)}
+            held={shown() !== "full"}
             kind={isAnimatedPicture(props.file) ? "gif" : "picture"}
             id={props.file.id}
             size={props.file.size}
+            preview={
+              shown() === "small"
+                ? smallPreviewUrl(props.file.previewUrl)
+                : undefined
+            }
           >
             <img
               alt={props.file.filename ?? ""}

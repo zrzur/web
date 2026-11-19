@@ -1,15 +1,17 @@
-import { onCleanup, onMount } from "solid-js";
+import { createEffect, onCleanup, onMount } from "solid-js";
 
 import { useLingui } from "@lingui/solid/macro";
 
 import {
   connectionHints,
+  learnSmallPreviews,
   markSaveDataOffered,
   saveData,
   saveDataOffered,
   setSaveData,
   shouldOfferSaveData,
 } from "@revolt/common/lib/saveData";
+import { useInstance } from "@revolt/instance";
 import { useSnackbar } from "@revolt/ui";
 
 /** Let the app settle before speaking: the offer is never the first thing seen */
@@ -25,6 +27,12 @@ const OFFER_DELAY_MS = 6000;
 export function SaveDataOffer() {
   const snackbar = useSnackbar();
   const { t } = useLingui();
+  const instance = useInstance();
+
+  // while saving: ask the media server once whether it makes small previews
+  createEffect(() => {
+    if (saveData()) void learnSmallPreviews(instance.mediaUrl);
+  });
 
   onMount(() => {
     const timer = setTimeout(() => {

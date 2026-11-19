@@ -245,3 +245,173 @@ describe("avatar, icon and banner addresses", () => {
     );
   });
 });
+
+describe("small previews", () => {
+  const MEDIA = "https://files.test";
+
+  it("are not assumed: a media server has to say it makes them", async () => {
+    const { lib } = await load();
+    expect(lib.smallPreviews(MEDIA)).toBe(false);
+    await lib.learnSmallPreviews(MEDIA, async () => ({
+      autumn: "Hello, I am a file server!",
+      version: "0.16.2",
+    }));
+    expect(lib.smallPreviews(MEDIA)).toBe(false);
+  });
+
+  it("are used once the media server's greeting says so, and remembered", async () => {
+    const { lib, storage } = await load();
+    const asked: string[] = [];
+    await lib.learnSmallPreviews(MEDIA, async (url) => {
+      asked.push(url);
+      return { small_previews: true };
+    });
+    expect(asked).toEqual(["https://files.test/"]);
+    expect(lib.smallPreviews(MEDIA)).toBe(true);
+    expect(lib.smallPreviews("https://other.test")).toBe(false);
+    expect(lib.smallPreviews(undefined)).toBe(false);
+    // the next visit knows before it asks
+    const again = await load(Object.fromEntries(storage.data));
+    expect(again.lib.smallPreviews(MEDIA)).toBe(true);
+  });
+
+  it("ask the media server once per visit", async () => {
+    const { lib } = await load();
+    let times = 0;
+    const get = async () => {
+      times++;
+      return { small_previews: true };
+    };
+    await lib.learnSmallPreviews(MEDIA, get);
+    await lib.learnSmallPreviews(MEDIA, get);
+    await lib.learnSmallPreviews(undefined, get);
+    expect(times).toBe(1);
+  });
+
+  it("are forgotten when the server stops making them", async () => {
+    const { lib, storage } = await load({ "zrzur:small-previews": MEDIA });
+    expect(lib.smallPreviews(MEDIA)).toBe(true);
+    await lib.learnSmallPreviews(MEDIA, async () => ({
+      small_previews: false,
+    }));
+    expect(lib.smallPreviews(MEDIA)).toBe(false);
+    expect(storage.data.get("zrzur:small-previews")).toBe("");
+  });
+
+  it("keep what was known when the server cannot be reached", async () => {
+    const { lib } = await load({ "zrzur:small-previews": MEDIA });
+    await lib.learnSmallPreviews(MEDIA, async () => {
+      throw new Error("offline");
+    });
+    expect(lib.smallPreviews(MEDIA)).toBe(true);
+  });
+
+  it("are asked for with ?size=small on a plain preview address only", async () => {
+    const { lib } = await load();
+    expect(lib.smallPreviewUrl("https://files.test/attachments/Ab_c-1")).toBe(
+      "https://files.test/attachments/Ab_c-1?size=small",
+    );
+    expect(lib.smallPreviewUrl("http://127.0.0.1:14814/emojis/01ABC")).toBe(
+      "http://127.0.0.1:14814/emojis/01ABC?size=small",
+    );
+    expect(lib.smallPreviewUrl("https://cdn.test/files/avatars/x1")).toBe(
+      "https://cdn.test/files/avatars/x1?size=small",
+    );
+    // the original, a named file and an address with a query stay as they are
+    for (const url of [
+      "https://files.test/attachments/abc/original",
+      "https://files.test/attachments/abc/photo.jpg",
+      "https://files.test/attachments/abc?size=small",
+      "https://files.test/attachments/abc?x=1",
+      "blob:https://app.test/1234",
+    ])
+      expect(lib.smallPreviewUrl(url)).toBe(url);
+  });
+});
+
+describe("how an uploaded picture is shown", () => {
+  const big = { size: 8_500_000, contentType: "image/jpeg" };
+  const tiny = { size: 60_000, contentType: "image/jpeg" };
+  const gif = { size: 400_000, contentType: "image/gif" };
+
+  it("as always while the mode is off", async () => {
+    const { lib } = await load();
+    for (const small of [true, false])
+      for (const file of [big, tiny, gif])
+        expect(lib.pictureShown(false, small, file)).toBe("full");
+  });
+
+  it("as its small preview where the media server makes one, GIFs and small pictures too", async () => {
+    const { lib } = await load();
+    expect(lib.pictureShown(true, true, big)).toBe("small");
+    expect(lib.pictureShown(true, true, tiny)).toBe("small");
+    expect(lib.pictureShown(true, true, gif)).toBe("small");
+  });
+
+  it("held back whole where it does not: large pictures and GIFs, not small ones", async () => {
+    const { lib } = await load();
+    expect(lib.pictureShown(true, false, big)).toBe("held");
+    expect(lib.pictureShown(true, false, gif)).toBe("held");
+    expect(lib.pictureShown(true, false, tiny)).toBe("full");
+  });
+});
+
+describe("avatars, icons and banners where small previews are made", () => {
+  class Tagged {
+    constructor(readonly tag: string) {}
+    createFileURL(forceAnimation?: boolean) {
+      return `https://files.test/${this.tag}/1${forceAnimation ? "/original" : ""}`;
+    }
+  }
+
+  it("come small while saving, never as the animated original", async () => {
+    const { lib } = await load();
+    await lib.learnSmallPreviews("https://files.test", async () => ({
+      small_previews: true,
+    }));
+    const undo = lib.stillFileUrlsWhenSaving(Tagged.prototype);
+    lib.setSaveData(true);
+    for (const tag of ["avatars", "icons", "banners"]) {
+      expect(new Tagged(tag).createFileURL()).toBe(
+        `https://files.test/${tag}/1?size=small`,
+      );
+      expect(new Tagged(tag).createFileURL(true)).toBe(
+        `https://files.test/${tag}/1?size=small`,
+      );
+    }
+    undo();
+  });
+
+  it("leave attachments to the message that shows them", async () => {
+    const { lib } = await load();
+    await lib.learnSmallPreviews("https://files.test", async () => ({
+      small_previews: true,
+    }));
+    const undo = lib.stillFileUrlsWhenSaving(Tagged.prototype);
+    lib.setSaveData(true);
+    expect(new Tagged("attachments").createFileURL()).toBe(
+      "https://files.test/attachments/1",
+    );
+    undo();
+  });
+
+  it("stay ordinary with the mode off, and on a server without small previews", async () => {
+    const { lib } = await load();
+    const undo = lib.stillFileUrlsWhenSaving(Tagged.prototype);
+    lib.setSaveData(true);
+    expect(new Tagged("avatars").createFileURL()).toBe(
+      "https://files.test/avatars/1",
+    );
+    await lib.learnSmallPreviews("https://files.test", async () => ({
+      small_previews: true,
+    }));
+    lib.setSaveData(false);
+    expect(new Tagged("avatars").createFileURL()).toBe(
+      "https://files.test/avatars/1",
+    );
+    expect(new Tagged("avatars").createFileURL(true)).toBe(
+      "https://files.test/avatars/1/original",
+    );
+    undo();
+  });
+});

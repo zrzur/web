@@ -2653,6 +2653,10 @@ msgstr "Avatares y emoji animados"
 msgid "Animated decorations, nameplates and profile effects stay still."
 msgstr "Las decoraciones animadas, las placas de nombre y los efectos de perfil permanecen quietos."
 
+#: components/app/interface/settings/user/SaveData.tsx
+msgid "Animated emoji show still."
+msgstr "Los emojis animados se muestran quietos."
+
 #: components/app/interface/settings/user/profile/studio/StudioHome.tsx
 msgid "Animated PNG, GIF, WebP or WebM"
 msgstr "PNG animado, GIF, WebP o WebM"
@@ -16583,6 +16587,10 @@ msgstr "Anillo de pícnic"
 #: src/interface/channels/text/ChannelDetailsPhone.tsx
 msgid "Pictures and videos sent in this channel show here."
 msgstr "Las imágenes y los vídeos enviados en este canal aparecen aquí."
+
+#: components/app/interface/settings/user/SaveData.tsx
+msgid "Pictures load as small previews. One tap loads the full picture."
+msgstr "Las imágenes se cargan como vista previa pequeña. Un toque carga la imagen completa."
 
 #: components/modal/modals/PinMessage.tsx
 msgid "Pin"

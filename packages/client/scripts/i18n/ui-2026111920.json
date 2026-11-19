@@ -16,5 +16,7 @@
   "Show screen": ["عرض الشاشة", "Bildschirm anzeigen"],
   "Your device asks to use less data. Turn on Save data?": ["جهازك يطلب استهلاك بيانات أقل. هل تريد تفعيل توفير البيانات؟", "Dein Gerät möchte weniger Daten verbrauchen. „Daten sparen“ einschalten?"],
   "Turn on": ["تفعيل", "Einschalten"],
-  "Save data is on. You can change it in Settings.": ["توفير البيانات مفعّل. يمكنك تغييره من الإعدادات.", "„Daten sparen“ ist an. Du kannst es in den Einstellungen ändern."]
+  "Save data is on. You can change it in Settings.": ["توفير البيانات مفعّل. يمكنك تغييره من الإعدادات.", "„Daten sparen“ ist an. Du kannst es in den Einstellungen ändern."],
+  "Pictures load as small previews. One tap loads the full picture.": ["الصور تُحمَّل كمعاينات صغيرة. ضغطة واحدة تحمّل الصورة كاملة.", "Bilder laden als kleine Vorschau. Ein Tippen lädt das ganze Bild."],
+  "Animated emoji show still.": ["الإيموجي المتحركة تظهر ثابتة.", "Animierte Emojis werden unbewegt gezeigt."]
 }

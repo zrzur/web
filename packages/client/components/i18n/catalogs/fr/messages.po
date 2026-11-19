@@ -2653,6 +2653,10 @@ msgstr "Avatars et émojis animés"
 msgid "Animated decorations, nameplates and profile effects stay still."
 msgstr "Les décorations animées, plaques de nom et effets de profil restent immobiles."
 
+#: components/app/interface/settings/user/SaveData.tsx
+msgid "Animated emoji show still."
+msgstr "Les émojis animés restent immobiles."
+
 #: components/app/interface/settings/user/profile/studio/StudioHome.tsx
 msgid "Animated PNG, GIF, WebP or WebM"
 msgstr "PNG animé, GIF, WebP ou WebM"
@@ -16583,6 +16587,10 @@ msgstr "Anneau pique-nique"
 #: src/interface/channels/text/ChannelDetailsPhone.tsx
 msgid "Pictures and videos sent in this channel show here."
 msgstr "Les images et vidéos envoyées dans ce salon apparaissent ici."
+
+#: components/app/interface/settings/user/SaveData.tsx
+msgid "Pictures load as small previews. One tap loads the full picture."
+msgstr "Les images se chargent en petit aperçu. Un toucher charge l’image entière."
 
 #: components/modal/modals/PinMessage.tsx
 msgid "Pin"

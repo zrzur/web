@@ -2653,6 +2653,10 @@ msgstr "动态头像和表情"
 msgid "Animated decorations, nameplates and profile effects stay still."
 msgstr "动态装饰、名牌和个人资料特效保持静止。"
 
+#: components/app/interface/settings/user/SaveData.tsx
+msgid "Animated emoji show still."
+msgstr "动态表情显示为静止。"
+
 #: components/app/interface/settings/user/profile/studio/StudioHome.tsx
 msgid "Animated PNG, GIF, WebP or WebM"
 msgstr "动态 PNG、GIF、WebP 或 WebM"
@@ -16583,6 +16587,10 @@ msgstr "野餐环"
 #: src/interface/channels/text/ChannelDetailsPhone.tsx
 msgid "Pictures and videos sent in this channel show here."
 msgstr "此频道中发送的图片和视频会显示在这里。"
+
+#: components/app/interface/settings/user/SaveData.tsx
+msgid "Pictures load as small previews. One tap loads the full picture."
+msgstr "图片以小预览图加载。轻触一次即可加载完整图片。"
 
 #: components/modal/modals/PinMessage.tsx
 msgid "Pin"

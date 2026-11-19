@@ -1,9 +1,14 @@
-import { For, JSX } from "solid-js";
+import { For, JSX, Show } from "solid-js";
 
 import { Trans } from "@lingui/solid/macro";
 import { styled } from "styled-system/jsx";
 
-import { saveData, setSaveData } from "@revolt/common/lib/saveData";
+import {
+  saveData,
+  setSaveData,
+  smallPreviews,
+} from "@revolt/common/lib/saveData";
+import { useInstance } from "@revolt/instance";
 import { SettingsRow, SettingsSection, Toggle } from "@revolt/ui";
 import { Icon } from "@revolt/ui/icons/Icon";
 import type { IconName } from "@revolt/ui/icons/registry";
@@ -12,14 +17,35 @@ import type { IconName } from "@revolt/ui/icons/registry";
  * Settings page "Save data": one switch for this device, and under it what
  * the switch changes, one plain line each. The lines are the promise the
  * code keeps (`common/lib/saveData.ts`); nothing is listed that the app does
- * not do.
+ * not do. Two lines depend on the media server: one that makes small previews
+ * shows every picture small and animated emoji still; one that does not
+ * holds large pictures back.
  */
 export function SaveDataSettings() {
-  const changes: { icon: IconName; text: () => JSX.Element }[] = [
+  const instance = useInstance();
+  const small = () => smallPreviews(instance.mediaUrl);
+
+  const changes: {
+    icon: IconName;
+    text: () => JSX.Element;
+    /** only where the media server makes small previews */
+    needsSmall?: boolean;
+  }[] = [
     {
       icon: "image",
       text: () => (
-        <Trans>Large pictures wait for a tap. Small ones load as usual.</Trans>
+        <Show
+          when={small()}
+          fallback={
+            <Trans>
+              Large pictures wait for a tap. Small ones load as usual.
+            </Trans>
+          }
+        >
+          <Trans>
+            Pictures load as small previews. One tap loads the full picture.
+          </Trans>
+        </Show>
       ),
     },
     {
@@ -44,6 +70,11 @@ export function SaveDataSettings() {
           animated original.
         </Trans>
       ),
+    },
+    {
+      icon: "smiley",
+      needsSmall: true,
+      text: () => <Trans>Animated emoji show still.</Trans>,
     },
     {
       icon: "sparkle",
@@ -107,12 +138,14 @@ export function SaveDataSettings() {
         <List>
           <For each={changes}>
             {(change) => (
-              <li>
-                <Mark aria-hidden="true">
-                  <Icon name={change.icon} size={20} />
-                </Mark>
-                <span>{change.text()}</span>
-              </li>
+              <Show when={!change.needsSmall || small()}>
+                <li>
+                  <Mark aria-hidden="true">
+                    <Icon name={change.icon} size={20} />
+                  </Mark>
+                  <span>{change.text()}</span>
+                </li>
+              </Show>
             )}
           </For>
         </List>

@@ -28988,3 +28988,11 @@ msgstr "ما الذي يتغيّر عند تفعيله"
 #: components/app/interface/support/SaveDataOffer.tsx
 msgid "Your device asks to use less data. Turn on Save data?"
 msgstr "جهازك يطلب استهلاك بيانات أقل. هل تريد تفعيل توفير البيانات؟"
+
+#: components/app/interface/settings/user/SaveData.tsx
+msgid "Animated emoji show still."
+msgstr "الإيموجي المتحركة تظهر ثابتة."
+
+#: components/app/interface/settings/user/SaveData.tsx
+msgid "Pictures load as small previews. One tap loads the full picture."
+msgstr "الصور تُحمَّل كمعاينات صغيرة. ضغطة واحدة تحمّل الصورة كاملة."

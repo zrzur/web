@@ -19,9 +19,11 @@ import { createSignal } from "solid-js";
  * - voice is sent at `SAVE_DATA_VOICE_BITRATE`, and other people's cameras
  *   and screens wait for a tap
  *
- * The media server makes one preview size per kind of file (1280 px for an
- * attachment, 256 px for an avatar). A smaller size does not exist yet, so a
- * large picture is held back whole instead of being shown small.
+ * A media server that makes small previews says so in its greeting (see
+ * `learnSmallPreviews`). Then every picture and GIF shows as its small still
+ * preview and the ordinary one loads on a tap, and avatars, icons, banners
+ * and custom emoji come small too. On a server without them, a large picture
+ * is held back whole instead.
  */
 
 const KEY = "zrzur:save-data";
@@ -209,7 +211,104 @@ export function markLoadedByTap(key?: string) {
   if (key && !loaded().has(key)) setLoaded(new Set([...loaded(), key]));
 }
 
-type FileLike = { createFileURL(forceAnimation?: boolean): string | undefined };
+const SMALL_KEY = "zrzur:small-previews";
+
+/**
+ * The media server that is known to make small previews (its address), kept
+ * from the last visit so the first screen does not wait for the question.
+ */
+function readSmall() {
+  try {
+    return globalThis.localStorage?.getItem(SMALL_KEY) ?? "";
+  } catch {
+    return "";
+  }
+}
+
+const [smallAt, setSmallAt] = createSignal(readSmall());
+
+/**
+ * Whether this media server makes small previews (`?size=small`: 480 px for
+ * an attachment, 96 px for an avatar, always one still frame). Reactive.
+ */
+export const smallPreviews = (mediaUrl?: string) =>
+  !!mediaUrl && smallAt() === mediaUrl;
+
+/** Media servers already asked in this visit */
+const asked = new Set<string>();
+
+/**
+ * Ask the media server once per visit whether it makes small previews (its
+ * greeting, some hundred bytes). An old server does not say so, and is never
+ * asked for one: it would answer a GIF's small preview with the whole GIF.
+ */
+export async function learnSmallPreviews(
+  mediaUrl: string | undefined,
+  get: (url: string) => Promise<unknown> = (url) =>
+    fetch(url).then((response) => response.json()),
+) {
+  if (!mediaUrl || asked.has(mediaUrl)) return;
+  asked.add(mediaUrl);
+  let makes = false;
+  try {
+    const hello = (await get(`${mediaUrl}/`)) as { small_previews?: unknown };
+    makes = hello?.small_previews === true;
+  } catch {
+    // unreachable now: keep what the last visit knew
+    return;
+  }
+  if (makes) setSmallAt(mediaUrl);
+  else if (smallAt() === mediaUrl) setSmallAt("");
+  try {
+    globalThis.localStorage?.setItem(SMALL_KEY, smallAt());
+  } catch {
+    // storage blocked: known until the page closes
+  }
+}
+
+/**
+ * The small preview of a media server's preview address. Only a plain
+ * preview address gets it: an original, a named file or an address that
+ * already carries a query is returned as it is.
+ */
+export function smallPreviewUrl(previewUrl: string) {
+  const path = previewUrl.replace(/^https?:\/\/[^/]+/, "");
+  if (!/^(\/[\w.-]+)*\/[a-z]+\/[\w-]+$/.test(path)) return previewUrl;
+  if (path.endsWith("/original")) return previewUrl;
+  return `${previewUrl}?size=small`;
+}
+
+/** How an uploaded picture is shown */
+export type PictureShown =
+  /** as always */
+  | "full"
+  /** its small still preview, the ordinary one on a tap */
+  | "small"
+  /** a placeholder with its size, the ordinary one on a tap */
+  | "held";
+
+/**
+ * How an uploaded picture or GIF is shown.
+ * @param saving Save data is on
+ * @param small The media server makes small previews
+ */
+export function pictureShown(
+  saving: boolean,
+  small: boolean,
+  file: Parameters<typeof holdsPicture>[1],
+): PictureShown {
+  if (!saving) return "full";
+  if (small) return "small";
+  return holdsPicture(saving, file) ? "held" : "full";
+}
+
+type FileLike = {
+  tag?: string;
+  createFileURL(forceAnimation?: boolean): string | undefined;
+};
+
+/** Kinds of file whose every use may be the small preview while saving */
+const SMALL_EVERYWHERE = new Set(["avatars", "icons", "banners"]);
 
 /**
  * Every avatar, icon and banner address in the app comes from the SDK's
@@ -217,6 +316,10 @@ type FileLike = { createFileURL(forceAnimation?: boolean): string | undefined };
  * Wrapped once here, that request is dropped while Save data is on, so the
  * hundred places that show an animated avatar need no change of their own.
  * Reading the switch inside keeps every address reactive.
+ *
+ * Where the media server makes small previews, avatars, icons and banners
+ * are asked for small as well (96 px and 640 px instead of 256 and 1920).
+ * Attachments are not touched here: a message decides for each picture.
  * @returns Undo (for tests)
  */
 export function stillFileUrlsWhenSaving(prototype: FileLike) {
@@ -225,10 +328,15 @@ export function stillFileUrlsWhenSaving(prototype: FileLike) {
     this: FileLike,
     forceAnimation?: boolean,
   ) {
-    return original.call(
+    const saving = saveData();
+    const url = original.call(
       this,
-      forceAnimation && allowsAnimatedOriginal(saveData()),
+      forceAnimation && allowsAnimatedOriginal(saving),
     );
+    if (!saving || !url || !SMALL_EVERYWHERE.has(this.tag ?? "")) return url;
+    // the media server's address is the part before "/<tag>/"
+    const mediaUrl = url.slice(0, url.lastIndexOf(`/${this.tag}/`));
+    return smallPreviews(mediaUrl) ? smallPreviewUrl(url) : url;
   };
   return () => {
     prototype.createFileURL = original;

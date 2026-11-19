@@ -24,9 +24,12 @@ import {
 import { MessageContextMenu } from "@revolt/app";
 import {
   holdsLinkMedia,
-  holdsPicture,
+  pictureShown,
   saveData,
+  smallPreviewUrl,
+  smallPreviews,
 } from "@revolt/common/lib/saveData";
+import { useInstance } from "@revolt/instance";
 import { Attachment } from "./Attachment";
 import { HeldMedia } from "./HeldMedia";
 import { MediaPlayer } from "./MediaPlayer";
@@ -260,6 +263,11 @@ const MoreButton = styled("button", {
 export function TextEmbed(props: { embed: TextEmbedClass | WebsiteEmbed }) {
   const { t } = useLingui();
   const { openModal } = useModals();
+  const instance = useInstance();
+
+  /** Save data: how an uploaded thumbnail is shown (see `pictureShown`) */
+  const thumbnailShown = (file: Parameters<typeof pictureShown>[2]) =>
+    pictureShown(saveData(), smallPreviews(instance.mediaUrl), file);
 
   /** Text embed parts only bots and webhooks send */
   const rich = createMemo(() =>
@@ -510,12 +518,17 @@ export function TextEmbed(props: { embed: TextEmbedClass | WebsiteEmbed }) {
       <Show when={rich()?.thumbnail}>
         {(thumbnail) => (
           <HeldMedia
-            held={holdsPicture(saveData(), thumbnail())}
+            held={thumbnailShown(thumbnail()) !== "full"}
             kind="picture"
             id={thumbnail().id}
             size={thumbnail().size}
             compact
             frame={{ width: 48, height: 48 }}
+            preview={
+              thumbnailShown(thumbnail()) === "small"
+                ? smallPreviewUrl(thumbnail().previewUrl)
+                : undefined
+            }
           >
             <PreviewImage
               src={thumbnail().createFileURL()}

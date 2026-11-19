@@ -28988,3 +28988,11 @@ msgstr "Was sich ändert, solange es an ist"
 #: components/app/interface/support/SaveDataOffer.tsx
 msgid "Your device asks to use less data. Turn on Save data?"
 msgstr "Dein Gerät möchte weniger Daten verbrauchen. „Daten sparen“ einschalten?"
+
+#: components/app/interface/settings/user/SaveData.tsx
+msgid "Animated emoji show still."
+msgstr "Animierte Emojis werden unbewegt gezeigt."
+
+#: components/app/interface/settings/user/SaveData.tsx
+msgid "Pictures load as small previews. One tap loads the full picture."
+msgstr "Bilder laden als kleine Vorschau. Ein Tippen lädt das ganze Bild."
