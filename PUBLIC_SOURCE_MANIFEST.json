@@ -2410,8 +2410,8 @@
     },
     {
       "path": "packages/client/components/app/interface/settings/user/profile/CommunityParts.tsx",
-      "sha256": "4b17b5d3462cb12a33968af22c8d1a80260e2108ef69b783ee9a4f1fd3c62f24",
-      "bytes": 15162,
+      "sha256": "0453d00499e506d314e526b2630028efb95ae86b91f1bec37f32ef8448d3e7f0",
+      "bytes": 15301,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -7204,14 +7204,14 @@
     },
     {
       "path": "packages/client/components/ui/components/features/profiles/userStyle.test.ts",
-      "sha256": "23356f3da09bdbce4bf1c1e4cbbd513eae71c223e47fd591deccfd12c8d12c0f",
-      "bytes": 8007,
+      "sha256": "43cb66d3ca8b58b01feda47ba45e2e095b343215f4dc8aaa015e74f3aa31a009",
+      "bytes": 9016,
       "category": "synthetic-test-source-or-fixture"
     },
     {
       "path": "packages/client/components/ui/components/features/profiles/userStyle.ts",
-      "sha256": "b769cadf9205c742a285217f121bb9d202525cda6c15f8d878dec207787dd7a1",
-      "bytes": 14413,
+      "sha256": "43f1bb493babcfcf6bf82e5fb4227b6903970b7336d7df49a33ff8322722abe8",
+      "bytes": 15023,
       "category": "product-source-or-build-manifest"
     },
     {
