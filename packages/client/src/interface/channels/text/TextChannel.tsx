@@ -33,7 +33,6 @@ import {
 import { VoiceChannelCallCardMount } from "@revolt/ui/components/features/voice/callCard/VoiceCallCard";
 import { MotionPresence } from "@revolt/ui/motion";
 
-import { LinkedChannelNotice } from "@revolt/app/interface/channels/LinkedChannelNotice";
 import { isOfficialChannel } from "@revolt/app/interface/support/official";
 import { OfficialBanner } from "@revolt/app/interface/support/OfficialBanner";
 
@@ -350,8 +349,6 @@ export function TextChannel(props: ChannelPageProps) {
           />
 
           <InteractionModal />
-
-          <LinkedChannelNotice channel={props.channel} />
 
           {/* nobody writes to an official account; replies go to a ticket */}
           <Show

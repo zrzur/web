@@ -47,13 +47,6 @@
 * **Calls:** your voice is sent at 24 kbps instead of 64, and other people's cameras and screen shares wait for a tap ("Show camera", "Show screen"). Music mode keeps its own rate.
 * **Offered once, never forced:** a device whose own data saver is on, or whose connection the browser rates as 2G, gets one short message with a "Turn on" button. Closing it is a no; it is not shown again.
 * Not in this round: small previews of the pictures of link previews (the link proxy passes a site's file through unchanged), so those wait for a tap.
-### Linked channels (2026-11-19)
-
-* **A channel can be linked with a channel on Discord** through a bridge bot that the server's owner runs himself (channel settings, "Linked channel"; only where the server offers it, for people who manage the server). Zrzur does not connect to Discord and never asks for a Discord token or webhook address. The owner picks his own bot and ticks four confirmations; none is ticked for him.
-* **Everyone who reads a linked channel is told**, in a line above the message box, that messages there are also posted to a Discord server and that Discord's privacy policy applies there. A line in the channel says when a link begins and ends.
-* **Messages that came from Discord carry the mark "from Discord"** next to the bot tag. The server sets it; the bot cannot remove it.
-* Ending the link removes the messages that came from Discord; what members wrote stays.
-* The SDK does not know the two new system messages and the three routes yet: the app reads them itself until the contract carries them.
 ### Events: tickets, calendar, sharing, reminders (26.1.0-beta.5, 2026-11-19)
 
 * **Every event is a ticket:** a stub with the day and the date, your answer stamped on it; the event that is happening is a green ticket with Join.

@@ -4,7 +4,6 @@ import { Channel } from "@zrzur/sdk/solid";
 import { styled } from "styled-system/jsx";
 
 import { DraftMessages, Messages } from "@revolt/app";
-import { LinkedChannelNotice } from "@revolt/app/interface/channels/LinkedChannelNotice";
 import {
   EphemeralMessages,
   InteractionModal,
@@ -58,7 +57,6 @@ export function ChannelChat(props: { channel: Channel }) {
         atPresent={[atEnd, setEnd]}
       />
       <InteractionModal />
-      <LinkedChannelNotice channel={props.channel} />
       <Show when={props.channel.havePermission("SendMessage")}>
         <MessageComposition
           channel={props.channel}

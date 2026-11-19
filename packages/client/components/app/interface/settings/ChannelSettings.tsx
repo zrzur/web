@@ -2,18 +2,14 @@ import { Trans, useLingui } from "@lingui/solid/macro";
 import { Channel } from "@zrzur/sdk/solid";
 
 import { useClient } from "@revolt/client";
-import { useInstance } from "@revolt/instance";
 import { useModals } from "@revolt/modal";
 import { ColouredText } from "@revolt/ui";
 import { Icon } from "@revolt/ui/icons/Icon";
 
-import { linkedChannelsOpen } from "../channels/linkedChannels";
-
 import { SettingsConfiguration } from ".";
 import { ChannelCard } from "./channel/ChannelCard";
-import { ForumTags } from "./channel/ForumTags";
-import { LinkedChannel } from "./channel/LinkedChannel";
 import ChannelOverview from "./channel/Overview";
+import { ForumTags } from "./channel/ForumTags";
 import { ChannelPermissionsEditor } from "./channel/permissions/ChannelPermissionsEditor";
 import { ChannelPermissionsOverview } from "./channel/permissions/ChannelPermissionsOverview";
 import { WebhooksPanel } from "./server/webhooks/ServerWebhooks";
@@ -105,8 +101,6 @@ const Config: SettingsConfiguration<Channel> = {
         }
       case "webhooks":
         return <WebhooksPanel channel={channel} />;
-      case "link":
-        return <LinkedChannel channel={channel} />;
       default:
         return null;
     }
@@ -119,7 +113,6 @@ const Config: SettingsConfiguration<Channel> = {
    */
   list(channel, onClose) {
     const { openModal } = useModals();
-    const instance = useInstance();
 
     return {
       context: channel,
@@ -172,22 +165,6 @@ const Config: SettingsConfiguration<Channel> = {
               id: "webhooks",
               icon: <Icon name="webhooks-logo" size={20} />,
               title: <Trans>Webhooks</Trans>,
-            },
-          ],
-        },
-        {
-          // a bridge the owner runs: only where the server offers it, for
-          // a server's text channel, to those who manage the server
-          hidden:
-            !linkedChannelsOpen(instance.config.features) ||
-            channel.type !== "TextChannel" ||
-            channel.isVoiceRoom ||
-            !channel.server?.havePermission("ManageServer"),
-          entries: [
-            {
-              id: "link",
-              icon: <Icon name="link" size={20} />,
-              title: <Trans>Linked channel</Trans>,
             },
           ],
         },
