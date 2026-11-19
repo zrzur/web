@@ -1,5 +1,12 @@
 import { createFormControl, createFormGroup } from "solid-forms";
-import { For, Match, Show, Switch, createSignal } from "solid-js";
+import {
+  For,
+  Match,
+  Show,
+  Switch,
+  createResource,
+  createSignal,
+} from "solid-js";
 
 import { Trans, useLingui } from "@lingui/solid/macro";
 import { type API, File as StoatFile } from "@zrzur/sdk/solid";
@@ -11,6 +18,7 @@ import { TranslatedError } from "@revolt/i18n/errors";
 import { useInstance } from "@revolt/instance";
 import { useNavigate } from "@revolt/routing";
 import {
+  Checkbox,
   DateTimeField,
   Dialog,
   DialogProps,
@@ -18,9 +26,18 @@ import {
   Form2,
   MenuItem,
   Segmented,
+  TextField,
   Toggle,
 } from "@revolt/ui";
 import { hour12From, roundUp } from "@revolt/ui/components/design/dateTime";
+
+import {
+  type CoverKind,
+  COVER_KINDS,
+  DrawnCover,
+  coverFile,
+} from "../../../src/interface/events/eventCovers";
+import { MemberPicker } from "../../../src/interface/events/MemberPicker";
 
 import { useModals } from "..";
 import { Modals } from "../types";
@@ -29,6 +46,15 @@ import { cropProcess } from "./CropProcess";
 
 type PlaceKind = API.ServerEventPlace["type"];
 type Repeat = API.ServerEventRepeat | "None";
+type Visibility = API.ServerEventVisibility;
+type AttendeeList = API.ServerEventAttendeeList;
+
+/** Invited people and helpers an event can have at most (the server's limits) */
+const MAX_INVITED = 200;
+const MAX_HELPERS = 10;
+
+/** Seats an event can have at most (the server decides; this is the field) */
+const MAX_SEATS = 10000;
 
 /** Problems found before anything is sent, in plain words */
 export function eventTimeProblem(
@@ -85,6 +111,28 @@ export function ServerEventEditorModal(
       : "",
   );
   const [repeat, setRepeat] = createSignal<Repeat>(existing?.repeat ?? "None");
+  // the invited people reach only organisers, and not over the gateway: an
+  // event whose list did not come with it keeps who sees it as it is
+  const invitedOnly =
+    existing?.visibility === "Invited" && existing.invited == null;
+  const [visibility, setVisibility] = createSignal<Visibility>(
+    existing?.visibility ?? "Place",
+  );
+  const [invited, setInvited] = createSignal<string[]>(existing?.invited ?? []);
+  const [helpers, setHelpers] = createSignal<string[]>(
+    existing?.co_organisers ?? [],
+  );
+  const [roles, setRoles] = createSignal<string[]>(
+    existing?.visible_roles ?? [],
+  );
+  const [limited, setLimited] = createSignal(existing?.capacity != null);
+  const [seats, setSeats] = createSignal(String(existing?.capacity ?? 20));
+  const [waitlist, setWaitlist] = createSignal(existing?.waitlist !== false);
+  const [attendeeList, setAttendeeList] = createSignal<AttendeeList>(
+    existing?.attendee_list ?? "Organisers",
+  );
+  // a ready cover, drawn here and uploaded like a picture when saved
+  const [readyCover, setReadyCover] = createSignal<CoverKind>();
   const group = createFormGroup({
     title: createFormControl(existing?.title ?? "", { required: true }),
     description: createFormControl(existing?.description ?? ""),
@@ -133,23 +181,65 @@ export function ServerEventEditorModal(
         return t`An event can last up to 31 days.`;
       case "place":
         return t`Choose where it takes place.`;
+      case "roles":
+        return t`Choose at least one role that sees this event.`;
+      case "invited":
+        return t`Choose at least one person to invite.`;
+      case "seats":
+        return t`The seat limit is a number from 1 to ${MAX_SEATS}.`;
     }
   };
 
   // one press, one event: further presses (and Enter) wait for the answer
   const [saving, setSaving] = createSignal(false);
 
-  async function onSubmit() {
+  async function onSubmit(draft = false) {
     if (saving()) return;
     setSaving(true);
     try {
-      await save();
+      await save(draft);
     } finally {
       setSaving(false);
     }
   }
 
-  async function save() {
+  // other events of the server at this time and place: a warning, no block
+  const [clashes] = createResource(
+    () => {
+      const startsAt = start();
+      const where = place();
+      if (!startsAt || !where) return undefined;
+      return {
+        starts_at: startsAt.toISOString(),
+        ends_at: hasEnd() ? end()?.toISOString() : undefined,
+        channel: where.type === "External" ? undefined : where.channel,
+        location: where.type === "External" ? where.location : undefined,
+        exclude: existing?._id,
+      };
+    },
+    async (query) => {
+      try {
+        return await client().serverEvents.fetchClashes(props.server.id, query);
+      } catch {
+        // the warning is a help, never a reason to stop
+        return [];
+      }
+    },
+  );
+  const clashNames = () =>
+    (clashes.latest ?? [])
+      .slice(0, 3)
+      .map((event) => event.title)
+      .join(", ");
+
+  const seatCount = () => {
+    const count = Number(seats());
+    return Number.isInteger(count) && count >= 1 && count <= MAX_SEATS
+      ? count
+      : undefined;
+  };
+
+  async function save(draft: boolean) {
     setError(undefined);
     const startsAt = start();
     const endsAt = hasEnd() ? end() : undefined;
@@ -171,12 +261,31 @@ export function ServerEventEditorModal(
       setProblem("place");
       return;
     }
+    if (!invitedOnly && visibility() === "Roles" && !roles().length) {
+      setProblem("roles");
+      return;
+    }
+    if (!invitedOnly && visibility() === "Invited" && !invited().length) {
+      setProblem("invited");
+      return;
+    }
+    if (limited() && seatCount() === undefined) {
+      setProblem("seats");
+      return;
+    }
     setProblem(undefined);
 
     try {
       let cover: string | undefined;
       const coverValue = group.controls.cover.value;
-      if (Array.isArray(coverValue) && coverValue.length) {
+      const ready = readyCover();
+      if (ready) {
+        cover = await client().uploadFile(
+          "banners",
+          await coverFile(ready),
+          instance.mediaUrl,
+        );
+      } else if (Array.isArray(coverValue) && coverValue.length) {
         cover = await client().uploadFile(
           "banners",
           coverValue[0],
@@ -205,6 +314,17 @@ export function ServerEventEditorModal(
         else if (existing.repeat) remove.push("Repeat");
         if (cover) changes.cover = cover;
         else if (!coverValue && existing.cover) remove.push("Cover");
+        if (!invitedOnly) {
+          changes.visibility = visibility();
+          changes.visible_roles = visibility() === "Roles" ? roles() : [];
+          changes.invited = visibility() === "Invited" ? invited() : [];
+        }
+        changes.co_organisers = helpers();
+        changes.attendee_list = attendeeList();
+        if (limited()) {
+          changes.capacity = seatCount();
+          changes.waitlist = waitlist();
+        } else if (existing.capacity != null) remove.push("Capacity");
         await client().serverEvents.edit(
           props.server.id,
           existing._id,
@@ -222,6 +342,14 @@ export function ServerEventEditorModal(
           cover,
           // repeats keep this wall-clock time where the event is planned
           time_zone: Intl.DateTimeFormat().resolvedOptions().timeZone,
+          draft: draft || undefined,
+          visibility: visibility(),
+          visible_roles: visibility() === "Roles" ? roles() : undefined,
+          invited: visibility() === "Invited" ? invited() : undefined,
+          co_organisers: helpers().length ? helpers() : undefined,
+          attendee_list: attendeeList(),
+          capacity: limited() ? seatCount() : undefined,
+          waitlist: limited() ? waitlist() : undefined,
         });
         props.onClose();
         navigate(`/server/${props.server.id}/events/${created._id}`);
@@ -231,7 +359,7 @@ export function ServerEventEditorModal(
     }
   }
 
-  const submit = Form2.useSubmitHandler(group, onSubmit);
+  const submit = Form2.useSubmitHandler(group, () => onSubmit());
 
   return (
     <Dialog
@@ -242,13 +370,28 @@ export function ServerEventEditorModal(
       show={props.show}
       onClose={props.onClose}
       size="md"
-      title={
-        existing ? <Trans>Edit event</Trans> : <Trans>Schedule an event</Trans>
-      }
+      title={existing ? <Trans>Edit event</Trans> : <Trans>New event</Trans>}
       actions={[
         { variant: "text", text: <Trans>Cancel</Trans> },
+        ...(existing
+          ? []
+          : [
+              {
+                variant: "secondary" as const,
+                text: <Trans>Save as draft</Trans>,
+                onClick: () => {
+                  void onSubmit(true);
+                  return false;
+                },
+                isDisabled: !Form2.canSubmit(group) || saving(),
+              },
+            ]),
         {
-          text: existing ? <Trans>Save</Trans> : <Trans>Schedule</Trans>,
+          text: existing ? (
+            <Trans>Save</Trans>
+          ) : (
+            <Trans context="scheduled events">Publish</Trans>
+          ),
           onClick: () => {
             void onSubmit();
             return false;
@@ -374,6 +517,14 @@ export function ServerEventEditorModal(
             </Match>
           </Switch>
 
+          <Show when={clashes.latest?.length}>
+            <Warning role="status" data-testid="server-event-clash">
+              <Trans>
+                At this time there is another event: {clashNames()}.
+              </Trans>
+            </Warning>
+          </Show>
+
           <FloatingSelect
             id="server-event-repeat"
             label={t({ message: "Repeat", context: "scheduled events" })}
@@ -381,32 +532,192 @@ export function ServerEventEditorModal(
             onChange={(event) => setRepeat(event.currentTarget.value as Repeat)}
           >
             <MenuItem value="None">{t`Does not repeat`}</MenuItem>
+            <MenuItem value="Daily">{t`Every day`}</MenuItem>
             <MenuItem value="Weekly">{t`Every week`}</MenuItem>
             <MenuItem value="EveryTwoWeeks">{t`Every 2 weeks`}</MenuItem>
             <MenuItem value="Monthly">{t`Every month`}</MenuItem>
           </FloatingSelect>
 
-          <Form2.FileInput
-            control={group.controls.cover}
-            accept="image/*"
-            label={t`Cover image (optional)`}
-            removeLabel={t`Remove cover image`}
-            imageAspect="16/9"
-            imageRounded={false}
-            imageJustify={false}
-            imageHeight={96}
-            maxSize={instance.limits().file_upload_size_limits["banners"]}
-            process={cropProcess({
-              ratio: 16 / 9,
-              ratioLabel: t`Cover`,
-              openModal,
-              allowModeToggle: false,
-              dialogTitle: t`Crop cover image`,
-              maxWidth: 1920,
-              outputType: "image/webp",
-              outputQuality: 0.9,
-            })}
-          />
+          <fieldset>
+            <legend>
+              <Trans>Cover</Trans>
+            </legend>
+            <Covers role="radiogroup" aria-label={t`Ready covers`}>
+              <For each={COVER_KINDS}>
+                {(kind, index) => (
+                  <CoverChoice
+                    type="button"
+                    role="radio"
+                    aria-checked={readyCover() === kind}
+                    aria-label={t`Ready cover ${index() + 1}`}
+                    onClick={() =>
+                      setReadyCover(readyCover() === kind ? undefined : kind)
+                    }
+                    data-testid={`server-event-cover-${kind}`}
+                  >
+                    <DrawnCover kind={kind} />
+                  </CoverChoice>
+                )}
+              </For>
+            </Covers>
+            <Hint>
+              <Trans>
+                Pick a ready cover, or upload a picture of your own.
+              </Trans>
+            </Hint>
+          </fieldset>
+          <Show when={!readyCover()}>
+            <Form2.FileInput
+              control={group.controls.cover}
+              accept="image/*"
+              label={t`Cover image (optional)`}
+              removeLabel={t`Remove cover image`}
+              imageAspect="16/9"
+              imageRounded={false}
+              imageJustify={false}
+              imageHeight={96}
+              maxSize={instance.limits().file_upload_size_limits["banners"]}
+              process={cropProcess({
+                ratio: 16 / 9,
+                ratioLabel: t`Cover`,
+                openModal,
+                allowModeToggle: false,
+                dialogTitle: t`Crop cover image`,
+                maxWidth: 1920,
+                outputType: "image/webp",
+                outputQuality: 0.9,
+              })}
+            />
+          </Show>
+
+          <Show when={!invitedOnly}>
+            <fieldset>
+              <legend>
+                <Trans>Who sees it</Trans>
+              </legend>
+              <Segmented<Visibility>
+                aria-label={t`Who sees it`}
+                value={visibility()}
+                onChange={setVisibility}
+                options={[
+                  { value: "Place", label: t`Everyone who sees its place` },
+                  { value: "Roles", label: t`Some roles` },
+                  { value: "Invited", label: t`Invited only` },
+                ]}
+              />
+              <Show when={visibility() === "Invited"}>
+                <MemberPicker
+                  server={props.server}
+                  label={t`Invite people`}
+                  value={invited()}
+                  onChange={setInvited}
+                  max={MAX_INVITED}
+                  testId="server-event-invited"
+                />
+                <Hint>
+                  <Trans>
+                    Only they and the organisers see this event. Nobody else
+                    learns that it exists.
+                  </Trans>
+                </Hint>
+              </Show>
+              <Show when={visibility() === "Roles"}>
+                <RoleList data-testid="server-event-roles">
+                  <For each={props.server.orderedRoles}>
+                    {(role) => (
+                      <Checkbox
+                        checked={roles().includes(role.id)}
+                        onChange={(event) =>
+                          setRoles(
+                            event.currentTarget.checked
+                              ? [...roles(), role.id]
+                              : roles().filter((id) => id !== role.id),
+                          )
+                        }
+                      >
+                        {role.name}
+                      </Checkbox>
+                    )}
+                  </For>
+                </RoleList>
+              </Show>
+            </fieldset>
+          </Show>
+          <Show when={invitedOnly}>
+            <Hint>
+              <Trans>Only the invited people see this event.</Trans>
+            </Hint>
+          </Show>
+
+          <fieldset>
+            <legend>
+              <Trans>Helpers</Trans>
+            </legend>
+            <MemberPicker
+              server={props.server}
+              label={t`Add a helper`}
+              value={helpers()}
+              onChange={setHelpers}
+              max={MAX_HELPERS}
+              exclude={[existing?.creator ?? client().user?.id ?? ""]}
+              testId="server-event-helpers"
+            />
+            <Hint>
+              <Trans>
+                Helpers can change this event and manage who comes, without
+                managing the server's other events.
+              </Trans>
+            </Hint>
+          </fieldset>
+
+          <ToggleRow>
+            <label for="server-event-limited">
+              <Trans>Seat limit</Trans>
+              <small>
+                <Trans>After it, people join a waiting list in order.</Trans>
+              </small>
+            </label>
+            <Toggle
+              id="server-event-limited"
+              checked={limited()}
+              onChange={setLimited}
+            />
+          </ToggleRow>
+          <Show when={limited()}>
+            <TextField
+              variant="outlined"
+              type="number"
+              min={1}
+              max={MAX_SEATS}
+              label={t`Seats`}
+              value={seats()}
+              onChange={(event) => setSeats(event.currentTarget.value)}
+              data-testid="server-event-seats"
+            />
+            <ToggleRow>
+              <label for="server-event-waitlist">
+                <Trans>Waiting list</Trans>
+              </label>
+              <Toggle
+                id="server-event-waitlist"
+                checked={waitlist()}
+                onChange={setWaitlist}
+              />
+            </ToggleRow>
+          </Show>
+
+          <FloatingSelect
+            id="server-event-attendee-list"
+            label={t`Who sees the names of the people coming`}
+            value={attendeeList()}
+            onChange={(event) =>
+              setAttendeeList(event.currentTarget.value as AttendeeList)
+            }
+          >
+            <MenuItem value="Organisers">{t`Organisers only`}</MenuItem>
+            <MenuItem value="Participants">{t`People taking part`}</MenuItem>
+            <MenuItem value="Everyone">{t`Everyone who sees the event`}</MenuItem>
+          </FloatingSelect>
 
           <Show when={problem()}>
             <Failure role="alert" data-testid="server-event-problem">
@@ -457,6 +768,64 @@ const ToggleRow = styled("div", {
     minHeight: "44px",
     color: "var(--z-fg-primary)",
     fontSize: "15px",
+    "& label": { display: "flex", flexDirection: "column", minWidth: 0 },
+    "& small": {
+      fontSize: "13px",
+      lineHeight: "18px",
+      color: "var(--z-fg-muted)",
+    },
+  },
+});
+
+const Warning = styled("div", {
+  base: {
+    padding: "10px 12px",
+    borderRadius: "var(--z-radius-sm, 6px)",
+    background: "color-mix(in srgb, var(--z-status-warning) 12%, transparent)",
+    color: "var(--z-status-warning)",
+    fontSize: "13px",
+    lineHeight: "18px",
+  },
+});
+
+const Covers = styled("div", {
+  base: {
+    display: "grid",
+    gridTemplateColumns: "repeat(5, minmax(0, 1fr))",
+    gap: "8px",
+  },
+});
+
+const CoverChoice = styled("button", {
+  base: {
+    aspectRatio: "16 / 9",
+    padding: 0,
+    border: "none",
+    borderRadius: "var(--z-radius-sm, 6px)",
+    overflow: "hidden",
+    cursor: "pointer",
+    background: "var(--z-bg-input)",
+    "&[aria-checked=true]": {
+      outline: "2px solid var(--z-accent)",
+      outlineOffset: "2px",
+    },
+    "&:focus-visible": {
+      outline: "2px solid var(--z-focus)",
+      outlineOffset: "2px",
+    },
+  },
+});
+
+const RoleList = styled("div", {
+  base: {
+    display: "flex",
+    flexDirection: "column",
+    gap: "4px",
+    maxHeight: "168px",
+    overflowY: "auto",
+    padding: "8px 12px",
+    borderRadius: "var(--z-radius-sm, 6px)",
+    background: "var(--z-bg-input)",
   },
 });
 

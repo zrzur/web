@@ -1,11 +1,9 @@
-import { For, Match, Show, Switch, createSignal } from "solid-js";
+import { Match, Show, Switch } from "solid-js";
 
 import { Plural, Trans, useLingui } from "@lingui/solid/macro";
 import {
   type API,
   type Server,
-  type User,
-  File as StoatFile,
   serverEventChannel,
   serverEventLink,
 } from "@zrzur/sdk/solid";
@@ -13,546 +11,332 @@ import { styled } from "styled-system/jsx";
 
 import { useClient } from "@revolt/client";
 import { timeLocale } from "@revolt/i18n";
-import { TranslatedError } from "@revolt/i18n/errors";
-import { Markdown } from "@revolt/markdown";
 import { useModals } from "@revolt/modal";
 import { useNavigate } from "@revolt/routing";
 import { useVoice } from "@revolt/rtc";
 import { useState } from "@revolt/state";
-import { Avatar, Button } from "@revolt/ui";
+import { Button } from "@revolt/ui";
 import { hour12From } from "@revolt/ui/components/design/dateTime";
 import { Icon } from "@revolt/ui/icons/Icon";
 
-import { eventLink, eventPhase, eventWhen, startsIn } from "./eventFormat";
+import { seatState } from "./EventAnswer";
+import { eventPhase, eventTimes, startsIn } from "./eventFormat";
+import { Stamp, Ticket, TicketStub } from "./Ticket";
 
 type Props = {
   event: API.ServerEvent;
   server: Server;
   now: number;
-  /** Opened from a shared link */
-  highlighted?: boolean;
-  /** After a delete: the page says what happens next for a series */
-  onDeleted?: (info: { id: string; series: boolean }) => void;
+  /** Name the server on the card (a list across servers) */
+  showServer?: boolean;
 };
 
-/**
- * One event: cover, when (in your language and time zone), where, how many
- * are interested, and what you can do with it.
- */
-export function EventCard(props: Props) {
-  const { t, i18n } = useLingui();
-  const client = useClient();
-  const { openModal } = useModals();
-  const [error, setError] = createSignal<unknown>();
-  const [busy, setBusy] = createSignal(false);
-  const [copied, setCopied] = createSignal<"yes" | "failed">();
-  const [confirm, setConfirm] = createSignal<
-    "cancel" | "series" | "delete" | "delete-series"
-  >();
-  // a mark on its way: further presses wait (the button keeps its focus)
-  const [marking, setMarking] = createSignal(false);
-  const [people, setPeople] = createSignal<User[]>();
-  const [next, setNext] = createSignal<string>();
-  const [showPeople, setShowPeople] = createSignal(false);
+/** The address of an event's own page */
+export function eventPath(serverId: string, eventId: string) {
+  return `/server/${serverId}/events/${eventId}`;
+}
 
-  const phase = () => eventPhase(props.event, props.now);
-  const interested = () => client().serverEvents.isInterested(props.event._id);
-  // being the creator gives no rights: Manage Server, like the server
-  const manager = () => props.server.havePermission("ManageServer");
-  const repeating = () => !!props.event.repeat;
-  const upcoming = () =>
-    props.event.status === "Scheduled" || props.event.status === "Active";
+/** Where an event takes place, in a few words */
+export function EventPlace(props: { event: API.ServerEvent }) {
+  const { t } = useLingui();
+  const client = useClient();
   const channel = () => {
     const id = serverEventChannel(props.event.place);
     return id ? client().channels.get(id) : undefined;
   };
-  const link = () => serverEventLink(props.event.place);
-  const cover = () =>
-    props.event.cover
-      ? new StoatFile(client(), props.event.cover).createFileURL()
-      : undefined;
-  const when = () =>
-    eventWhen(
-      props.event,
-      i18n().locale ?? "en",
-      hour12From(timeLocale()[1].formats?.LT),
-    );
+  return (
+    <Switch>
+      <Match when={props.event.place.type === "Voice"}>
+        <Icon name="speaker-high" size={16} />
+        <span>{channel()?.name ?? t`A voice channel`}</span>
+      </Match>
+      <Match when={props.event.place.type === "Text"}>
+        <Icon name="hash" size={16} />
+        <span>{channel()?.name ?? t`A text channel`}</span>
+      </Match>
+      <Match when={props.event.place.type === "External"}>
+        <Icon
+          name={serverEventLink(props.event.place) ? "link" : "globe"}
+          size={16}
+        />
+        <span dir="auto">
+          {(props.event.place as { location: string }).location}
+        </span>
+      </Match>
+    </Switch>
+  );
+}
 
-  async function act(action: () => Promise<unknown>) {
-    setError(undefined);
-    setBusy(true);
-    try {
-      await action();
-    } catch (failure) {
-      setError(failure);
-    } finally {
-      setBusy(false);
-    }
-  }
+/** How many take part, in one short line */
+export function EventCountLine(props: { event: API.ServerEvent }) {
+  const seats = () => seatState(props.event);
+  const going = () => seats().going;
+  const maybe = () => props.event.counts?.maybe ?? 0;
+  return (
+    <Switch>
+      <Match when={seats().capacity !== undefined && seats().full}>
+        <Plural
+          value={seats().waiting}
+          _0="Full"
+          one="Full · # waiting"
+          other="Full · # waiting"
+        />
+      </Match>
+      <Match when={seats().capacity !== undefined}>
+        <Trans>
+          {going()} of {seats().capacity} seats
+        </Trans>
+      </Match>
+      <Match when={going() + maybe() === 0}>
+        <Trans>Nobody answered yet</Trans>
+      </Match>
+      <Match when={maybe() === 0}>
+        <Plural value={going()} one="# going" other="# going" />
+      </Match>
+      <Match when={true}>
+        <Trans>
+          {going()} going · {maybe()} maybe
+        </Trans>
+      </Match>
+    </Switch>
+  );
+}
 
-  async function toggleInterest() {
-    if (marking()) return;
-    setMarking(true);
-    setError(undefined);
-    try {
-      await client().serverEvents.setInterested(
-        props.server.id,
-        props.event._id,
-        !interested(),
-      );
-    } catch (failure) {
-      setError(failure);
-    } finally {
-      setMarking(false);
-    }
-  }
+/** Your own answer to an event, as a short mark */
+export function OwnAnswerMark(props: { event: API.ServerEvent }) {
+  const client = useClient();
+  const mine = () => client().serverEvents.answerOf(props.event._id);
+  const limited = () => props.event.capacity != null;
+  return (
+    <Switch>
+      <Match when={mine()?.answer === "Going" && mine()?.waiting}>
+        <Stamp data-tone="wait" data-testid="event-own-answer">
+          <Show
+            when={mine()?.position}
+            fallback={<Trans>On the waiting list</Trans>}
+          >
+            <Trans>Number {mine()!.position} in line</Trans>
+          </Show>
+        </Stamp>
+      </Match>
+      <Match when={mine()?.answer === "Going"}>
+        <Stamp data-tone="good" data-testid="event-own-answer">
+          <Icon name="check" size={16} />
+          {limited() ? (
+            <Trans>You have a seat</Trans>
+          ) : (
+            <Trans>You are going</Trans>
+          )}
+        </Stamp>
+      </Match>
+      <Match when={mine()?.answer === "Maybe"}>
+        <Stamp data-testid="event-own-answer">
+          <Trans context="event answer">Maybe</Trans>
+        </Stamp>
+      </Match>
+      <Match when={mine()?.answer === "NotGoing"}>
+        <Stamp data-testid="event-own-answer">
+          <Trans context="event answer">Can't go</Trans>
+        </Stamp>
+      </Match>
+    </Switch>
+  );
+}
 
-  async function loadPeople(more = false) {
-    await act(async () => {
-      const page = await client().serverEvents.fetchInterested(
-        props.server.id,
-        props.event._id,
-        more ? next() : undefined,
-      );
-      setPeople([
-        ...(more ? (people() ?? []) : []),
-        ...page.users
-          .map((user) => client().users.get(user._id)!)
-          .filter(Boolean),
-      ]);
-      setNext(page.next ?? undefined);
-    });
-  }
+/**
+ * One event in the list, as a ticket: the day on the stub, then the title,
+ * when and where, how many come, and your answer stamped on it. The whole
+ * story is on the page of the event.
+ */
+export function EventCard(props: Props) {
+  const { i18n } = useLingui();
+  const client = useClient();
+  const navigate = useNavigate();
 
-  function share() {
-    // the app address of this Zrzur, not the page the app happens to run on
-    const origin = client().configuration?.app || location.origin;
-    const url = eventLink(
-      origin.replace(/\/$/, ""),
-      props.server.id,
-      props.event._id,
-    );
-    const done = (state: "yes" | "failed") => {
-      setCopied(state);
-      setTimeout(() => setCopied(undefined), state === "yes" ? 2000 : 6000);
-    };
-    if (!navigator.clipboard) return done("failed");
-    navigator.clipboard.writeText(url).then(
-      () => done("yes"),
-      () => done("failed"),
-    );
-  }
+  const phase = () => eventPhase(props.event, props.now);
+  const path = () => eventPath(props.server.id, props.event._id);
+  const upcoming = () =>
+    props.event.status === "Scheduled" || props.event.status === "Active";
+  const mine = () => client().serverEvents.answerOf(props.event._id);
+  const holds = () => !!mine() && mine()!.answer !== "NotGoing";
 
   return (
-    <Card
+    <Ticket
+      role="article"
       data-testid="event-card"
       data-event={props.event._id}
       data-phase={phase()}
-      data-highlighted={props.highlighted || undefined}
       aria-labelledby={`event-${props.event._id}-title`}
     >
-      <Show when={cover()}>
-        <Cover src={cover()} alt="" loading="lazy" />
-      </Show>
-      <Content>
-        <Badges>
-          <Switch>
-            <Match when={phase() === "live"}>
-              <Badge data-tone="live">
-                <Dot aria-hidden="true" />
-                <Trans>Happening now</Trans>
-              </Badge>
-            </Match>
-            <Match when={phase() === "soon"}>
-              <Badge data-tone="soon">
-                {startsIn(
-                  props.event.starts_at,
-                  props.now,
-                  i18n().locale ?? "en",
-                )}
-              </Badge>
-            </Match>
-            <Match when={props.event.status === "Cancelled"}>
-              <Badge data-tone="over">
-                <Trans context="scheduled events">Cancelled</Trans>
-              </Badge>
-            </Match>
-            <Match when={props.event.status === "Completed"}>
-              <Badge data-tone="over">
-                <Trans>Over</Trans>
-              </Badge>
-            </Match>
-          </Switch>
-          <Show when={props.event.repeat}>
-            <Badge>
-              <Icon name="arrows-clockwise" size={14} />
-              <Switch>
-                <Match when={props.event.repeat === "Weekly"}>
-                  <Trans>Every week</Trans>
-                </Match>
-                <Match when={props.event.repeat === "EveryTwoWeeks"}>
-                  <Trans>Every 2 weeks</Trans>
-                </Match>
-                <Match when={props.event.repeat === "Monthly"}>
-                  <Trans>Every month</Trans>
-                </Match>
-              </Switch>
-            </Badge>
-          </Show>
-        </Badges>
-
-        <CardTitle id={`event-${props.event._id}-title`}>
-          {props.event.title}
-        </CardTitle>
-
-        <Facts>
-          <Fact>
-            <Icon name="clock" size={16} />
-            <time datetime={props.event.starts_at}>{when()}</time>
-          </Fact>
-          <Fact>
+      <TicketStub
+        startsAt={props.event.starts_at}
+        mine={holds()}
+        quiet={!upcoming()}
+      />
+      <Body>
+        <Text>
+          <CardTitle id={`event-${props.event._id}-title`}>
+            <a
+              href={path()}
+              onClick={(click) => {
+                click.preventDefault();
+                navigate(path());
+              }}
+              data-testid="event-open"
+            >
+              {props.event.title}
+            </a>
+          </CardTitle>
+          <Meta>
             <Switch>
-              <Match when={props.event.place.type === "Voice"}>
-                <Icon name="speaker-high" size={16} />
-                <span>{channel()?.name ?? t`A voice channel`}</span>
+              <Match when={props.event.status === "Draft"}>
+                <State>
+                  <Trans context="scheduled events">Draft</Trans>
+                </State>
               </Match>
-              <Match when={props.event.place.type === "Text"}>
-                <Icon name="hash" size={16} />
-                <span>{channel()?.name ?? t`A text channel`}</span>
+              <Match when={props.event.status === "Cancelled"}>
+                <State>
+                  <Trans context="scheduled events">Cancelled</Trans>
+                </State>
               </Match>
-              <Match when={props.event.place.type === "External"}>
-                <Icon name={link() ? "link" : "globe"} size={16} />
-                <span dir="auto">
-                  {(props.event.place as { location: string }).location}
-                </span>
+              <Match when={props.event.status === "Completed"}>
+                <State>
+                  <Trans>Over</Trans>
+                </State>
+              </Match>
+              <Match when={phase() === "soon"}>
+                <Soon>
+                  {startsIn(
+                    props.event.starts_at,
+                    props.now,
+                    i18n().locale ?? "en",
+                  )}
+                </Soon>
               </Match>
             </Switch>
-          </Fact>
-          <Fact>
-            <Icon name="users" size={16} />
-            <span data-testid="event-interested-count">
-              <Plural
-                value={props.event.interested_count}
-                _0="Nobody is interested yet"
-                one="# interested"
-                other="# interested"
-              />
-            </span>
-          </Fact>
-        </Facts>
-
-        <Show when={props.event.description}>
-          <Description tabIndex={0} role="region" aria-label={t`Description`}>
-            <Markdown content={props.event.description!} />
-          </Description>
-        </Show>
-
-        <Actions>
-          <Show when={upcoming()}>
-            <Button
-              size="sm"
-              variant={interested() ? "tonal" : "outlined"}
-              aria-pressed={interested()}
-              aria-disabled={marking() || undefined}
-              onPress={() => void toggleInterest()}
-              data-testid="event-interested"
-            >
-              <Icon name={interested() ? "bell-ringing" : "bell"} size={16} />
-              {interested() ? (
-                <Trans>Interested</Trans>
-              ) : (
-                <Trans>I'm interested</Trans>
-              )}
-            </Button>
-          </Show>
-          <Show when={phase() === "live"}>
-            <JoinButton
-              event={props.event}
-              server={props.server}
-              link={link()}
-            />
-          </Show>
-          <Button
-            size="sm"
-            variant="text"
-            onPress={share}
-            data-testid="event-share"
-          >
-            <Icon name="share-network" size={16} />
-            {copied() === "yes" ? (
-              <Trans>Link copied</Trans>
-            ) : (
-              <Trans>Copy link</Trans>
-            )}
-          </Button>
-          <Show when={copied() === "failed"}>
-            <CopyFailed role="alert">
-              <Trans>
-                The link could not be copied. Copy it from the address bar.
-              </Trans>
-            </CopyFailed>
-          </Show>
-          <Show when={props.event.interested_count > 0}>
-            <Button
-              size="sm"
-              variant="text"
-              aria-expanded={showPeople()}
-              onPress={() => {
-                const open = !showPeople();
-                setShowPeople(open);
-                if (open && !people()) void loadPeople();
-              }}
-            >
-              <Trans>Who's interested</Trans>
-            </Button>
-          </Show>
-        </Actions>
-
-        <Show when={showPeople()}>
-          <People aria-label={t`Interested members`}>
-            <For each={people()}>
-              {(user) => (
-                <Person>
-                  <Avatar
-                    size={24}
-                    src={user.avatarURL}
-                    fallback={user.displayName}
-                  />
-                  <span>{user.displayName}</span>
-                </Person>
-              )}
-            </For>
-            <Show when={next()}>
-              <Button
-                size="sm"
-                variant="text"
-                onPress={() => void loadPeople(true)}
-              >
-                <Trans>Show more</Trans>
-              </Button>
+            <MetaItem>
+              <time datetime={props.event.starts_at}>
+                {eventTimes(
+                  props.event,
+                  i18n().locale ?? "en",
+                  hour12From(timeLocale()[1].formats?.LT),
+                )}
+              </time>
+            </MetaItem>
+            <MetaItem>
+              <EventPlace event={props.event} />
+            </MetaItem>
+            <Show when={props.showServer}>
+              <MetaItem data-testid="event-server">
+                <Icon name="users-three" size={16} />
+                <span>{props.server.name}</span>
+              </MetaItem>
             </Show>
-          </People>
-        </Show>
-
-        <Show when={manager() && upcoming()}>
-          <Manage>
             <Show
-              when={confirm()}
-              fallback={
-                <>
-                  <Button
-                    size="sm"
-                    variant="text"
-                    onPress={() =>
-                      openModal({
-                        type: "server_event",
-                        server: props.server,
-                        event: props.event,
-                      })
-                    }
-                    data-testid="event-edit"
-                  >
-                    <Icon name="pencil-simple" size={16} />
-                    <Trans context="scheduled events">Edit</Trans>
-                  </Button>
-                  <Show
-                    when={props.event.status === "Scheduled"}
-                    fallback={
-                      <Button
-                        size="sm"
-                        variant="text"
-                        isDisabled={busy()}
-                        onPress={() =>
-                          void act(() =>
-                            client().serverEvents.end(
-                              props.server.id,
-                              props.event._id,
-                            ),
-                          )
-                        }
-                        data-testid="event-end"
-                      >
-                        <Icon name="stop" size={16} />
-                        <Trans context="scheduled events">End now</Trans>
-                      </Button>
-                    }
-                  >
-                    <Button
-                      size="sm"
-                      variant="text"
-                      isDisabled={busy()}
-                      onPress={() =>
-                        void act(() =>
-                          client().serverEvents.start(
-                            props.server.id,
-                            props.event._id,
-                          ),
-                        )
-                      }
-                      data-testid="event-start"
-                    >
-                      <Icon name="play" size={16} />
-                      <Trans>Start now</Trans>
-                    </Button>
-                  </Show>
-                  <Button
-                    size="sm"
-                    variant="text"
-                    onPress={() => setConfirm("cancel")}
-                    data-testid="event-cancel"
-                  >
-                    <Icon name="x" size={16} />
-                    {repeating() ? (
-                      <Trans>Cancel this time</Trans>
-                    ) : (
-                      <Trans>Cancel event</Trans>
-                    )}
-                  </Button>
-                  <Show when={repeating()}>
-                    <Button
-                      size="sm"
-                      variant="text"
-                      onPress={() => setConfirm("series")}
-                      data-testid="event-cancel-series"
-                    >
-                      <Icon name="arrows-clockwise" size={16} />
-                      <Trans>Cancel the whole series</Trans>
-                    </Button>
-                  </Show>
-                  <Button
-                    size="sm"
-                    variant="text"
-                    onPress={() => setConfirm("delete")}
-                    data-testid="event-delete"
-                  >
-                    <Icon name="trash" size={16} />
-                    {repeating() ? (
-                      <Trans>Delete this time</Trans>
-                    ) : (
-                      <Trans context="scheduled events">Delete</Trans>
-                    )}
-                  </Button>
-                  <Show when={repeating()}>
-                    <Button
-                      size="sm"
-                      variant="text"
-                      onPress={() => setConfirm("delete-series")}
-                      data-testid="event-delete-series"
-                    >
-                      <Icon name="trash" size={16} />
-                      <Trans>Delete the whole series</Trans>
-                    </Button>
-                  </Show>
-                </>
+              when={
+                props.event.visibility && props.event.visibility !== "Place"
               }
             >
-              <Confirm role="group">
+              <MetaItem>
+                <Icon name="lock-simple" size={16} />
                 <span>
-                  <Switch>
-                    <Match when={confirm() === "cancel" && repeating()}>
-                      <Trans>
-                        Cancel this time only? The next one stays scheduled.
-                      </Trans>
-                    </Match>
-                    <Match when={confirm() === "cancel"}>
-                      <Trans>
-                        Cancel this event? Interested members see that it is
-                        off.
-                      </Trans>
-                    </Match>
-                    <Match when={confirm() === "series"}>
-                      <Trans>
-                        Cancel this one and every one after it? Nothing more of
-                        this series is scheduled.
-                      </Trans>
-                    </Match>
-                    <Match when={confirm() === "delete-series"}>
-                      <Trans>
-                        Delete this one and every one after it for good? Nothing
-                        more of this series is scheduled.
-                      </Trans>
-                    </Match>
-                    <Match when={repeating()}>
-                      <Trans>
-                        Delete this time and its interested list for good? The
-                        next one stays scheduled.
-                      </Trans>
-                    </Match>
-                    <Match when={true}>
-                      <Trans>
-                        Delete this event and its interested list for good?
-                      </Trans>
-                    </Match>
-                  </Switch>
+                  {props.event.visibility === "Invited" ? (
+                    <Trans>Invited only</Trans>
+                  ) : (
+                    <Trans>Some roles</Trans>
+                  )}
                 </span>
-                <Button
-                  size="sm"
-                  variant="_error"
-                  isDisabled={busy()}
-                  onPress={() =>
-                    void act(async () => {
-                      const choice = confirm();
-                      if (choice === "cancel" || choice === "series") {
-                        await client().serverEvents.cancel(
-                          props.server.id,
-                          props.event._id,
-                          choice === "series",
-                        );
-                        setConfirm(undefined);
-                        return;
-                      }
-                      const id = props.event._id;
-                      const series = choice === "delete-series";
-                      await client().serverEvents.delete(
-                        props.server.id,
-                        id,
-                        series,
-                      );
-                      setConfirm(undefined);
-                      props.onDeleted?.({ id, series });
-                    })
-                  }
-                  data-testid="event-confirm"
-                >
-                  <Switch
-                    fallback={<Trans context="scheduled events">Delete</Trans>}
-                  >
-                    <Match when={confirm() === "series"}>
-                      <Trans>Cancel the whole series</Trans>
-                    </Match>
-                    <Match when={confirm() === "cancel" && repeating()}>
-                      <Trans>Cancel this time</Trans>
-                    </Match>
-                    <Match when={confirm() === "cancel"}>
-                      <Trans>Cancel event</Trans>
-                    </Match>
-                    <Match when={confirm() === "delete-series"}>
-                      <Trans>Delete the whole series</Trans>
-                    </Match>
-                    <Match when={repeating()}>
-                      <Trans>Delete this time</Trans>
-                    </Match>
-                  </Switch>
-                </Button>
-                <Button
-                  size="sm"
-                  variant="text"
-                  onPress={() => setConfirm(undefined)}
-                >
-                  <Trans context="scheduled events">Keep it</Trans>
-                </Button>
-              </Confirm>
+              </MetaItem>
             </Show>
-          </Manage>
-        </Show>
+          </Meta>
+          <CountLine
+            data-testid="event-count-line"
+            data-full={seatState(props.event).full || undefined}
+          >
+            <EventCountLine event={props.event} />
+          </CountLine>
+        </Text>
+        <End>
+          <Show
+            when={mine() || !upcoming()}
+            fallback={
+              <Button
+                size="sm"
+                variant="tonal"
+                onPress={() => navigate(path())}
+                data-testid="event-answer-open"
+              >
+                <Trans context="event answer">Answer</Trans>
+              </Button>
+            }
+          >
+            <OwnAnswerMark event={props.event} />
+          </Show>
+        </End>
+      </Body>
+    </Ticket>
+  );
+}
 
-        <Show when={error()}>
-          <Failure role="alert">
-            <TranslatedError error={error()} />
-          </Failure>
-        </Show>
-      </Content>
-    </Card>
+/**
+ * The event that is happening now, at the top of the page: a ticket in the
+ * live colour with the way in
+ */
+export function EventHero(props: Props) {
+  const { i18n } = useLingui();
+  const navigate = useNavigate();
+  const path = () => eventPath(props.server.id, props.event._id);
+  const started = () =>
+    startsIn(
+      props.event.started_at ?? props.event.starts_at,
+      props.now,
+      i18n().locale ?? "en",
+    );
+
+  return (
+    <Ticket
+      role="article"
+      data-live
+      data-testid="event-hero"
+      data-event={props.event._id}
+      aria-labelledby={`event-${props.event._id}-hero`}
+    >
+      <TicketStub startsAt={props.event.starts_at} liveSince={started()} />
+      <Body>
+        <Text>
+          <CardTitle id={`event-${props.event._id}-hero`}>
+            <a
+              href={path()}
+              onClick={(click) => {
+                click.preventDefault();
+                navigate(path());
+              }}
+            >
+              {props.event.title}
+            </a>
+          </CardTitle>
+          <Meta>
+            <MetaItem>
+              <EventPlace event={props.event} />
+            </MetaItem>
+            <Show when={props.event.description}>
+              <HeroLine dir="auto">{props.event.description}</HeroLine>
+            </Show>
+          </Meta>
+          <CountLine>
+            <EventCountLine event={props.event} />
+          </CountLine>
+        </Text>
+        <End>
+          <JoinButton
+            event={props.event}
+            server={props.server}
+            link={serverEventLink(props.event.place)}
+            size="md"
+          />
+        </End>
+      </Body>
+    </Ticket>
   );
 }
 
@@ -616,208 +400,111 @@ export function JoinButton(props: {
   );
 }
 
-const Card = styled("article", {
+const Body = styled("div", {
   base: {
-    display: "flex",
-    flexDirection: "column",
-    overflow: "hidden",
-    borderRadius: "var(--z-radius-md, 14px)",
-    background: "var(--z-card-bg, var(--z-bg-raised))",
-    border: "1px solid var(--z-border-subtle)",
-    "&[data-highlighted]": {
-      borderColor: "var(--z-accent)",
-    },
-    "&[data-phase=live]": {
-      borderColor: "color-mix(in srgb, var(--z-live) 60%, transparent)",
-    },
-  },
-});
-
-const Cover = styled("img", {
-  base: {
-    display: "block",
-    width: "100%",
-    aspectRatio: "16 / 9",
-    maxHeight: "220px",
-    objectFit: "cover",
-    background: "var(--z-bg-input)",
-  },
-});
-
-const Content = styled("div", {
-  base: {
-    display: "flex",
-    flexDirection: "column",
-    gap: "12px",
-    padding: "16px",
-    minWidth: 0,
-    _phone: { padding: "12px" },
-  },
-});
-
-const Badges = styled("div", {
-  base: {
-    display: "flex",
-    flexWrap: "wrap",
-    gap: "8px",
-    "&:empty": { display: "none" },
-  },
-});
-
-const Badge = styled("span", {
-  base: {
-    display: "inline-flex",
+    display: "grid",
+    gridTemplateColumns: "minmax(0, 1fr) auto",
     alignItems: "center",
-    gap: "4px",
-    paddingInline: "8px",
-    minHeight: "24px",
-    borderRadius: "999px",
-    fontSize: "12px",
-    fontWeight: 650,
-    background: "var(--z-bg-input)",
-    color: "var(--z-fg-secondary)",
-    "--z-icon-color": "currentColor",
-    "&[data-tone=live]": {
-      background: "color-mix(in srgb, var(--z-live) 16%, transparent)",
-      color: "var(--z-live)",
+    gap: "24px",
+    padding: "16px 28px",
+    minWidth: 0,
+    _phone: {
+      gridTemplateColumns: "minmax(0, 1fr)",
+      gap: "12px",
+      padding: "12px 16px",
     },
-    "&[data-tone=soon]": {
-      background:
-        "color-mix(in srgb, var(--z-status-warning) 16%, transparent)",
-      color: "var(--z-status-warning)",
-    },
-    "&[data-tone=over]": { color: "var(--z-fg-muted)" },
   },
 });
 
-const Dot = styled("span", {
+const Text = styled("div", {
   base: {
-    width: "8px",
-    height: "8px",
-    borderRadius: "999px",
-    background: "currentColor",
+    display: "flex",
+    flexDirection: "column",
+    gap: "4px",
+    minWidth: 0,
   },
 });
+
+const End = styled("div", {
+  base: {
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "flex-end",
+    minWidth: 0,
+    _phone: { justifyContent: "flex-start" },
+  },
+});
+
+const titleLink = {
+  color: "inherit",
+  textDecoration: "none",
+  borderRadius: "var(--z-radius-sm, 6px)",
+  "&:hover": { textDecoration: "underline" },
+  "&:focus-visible": {
+    outline: "2px solid var(--z-focus)",
+    outlineOffset: "2px",
+  },
+} as const;
 
 const CardTitle = styled("h3", {
   base: {
     margin: 0,
     fontSize: "18px",
-    lineHeight: "24px",
+    lineHeight: "28px",
     fontWeight: 650,
     overflowWrap: "anywhere",
+    color: "var(--z-header-primary, var(--z-fg-primary))",
+    "& a": titleLink,
+    _phone: { fontSize: "15px", lineHeight: "24px" },
   },
 });
 
-const Facts = styled("ul", {
+const Meta = styled("div", {
   base: {
     display: "flex",
-    flexDirection: "column",
-    gap: "4px",
-    margin: 0,
-    padding: 0,
-    listStyle: "none",
-  },
-});
-
-const Fact = styled("li", {
-  base: {
-    display: "flex",
+    flexWrap: "wrap",
     alignItems: "center",
-    gap: "8px",
-    minWidth: 0,
-    fontSize: "14px",
+    columnGap: "16px",
+    rowGap: "4px",
+    fontSize: "13px",
     lineHeight: "20px",
     color: "var(--z-fg-secondary)",
     "--z-icon-color": "var(--z-fg-muted)",
+  },
+});
+
+const MetaItem = styled("span", {
+  base: {
+    display: "inline-flex",
+    alignItems: "center",
+    gap: "6px",
+    minWidth: 0,
     "& > span, & > time": { minWidth: 0, overflowWrap: "anywhere" },
   },
 });
 
-const Description = styled("div", {
+const State = styled("span", {
+  base: { fontWeight: 650, color: "var(--z-fg-muted)" },
+});
+
+const Soon = styled("span", {
+  base: { color: "var(--z-status-warning)", fontWeight: 650 },
+});
+
+const CountLine = styled("span", {
   base: {
-    fontSize: "14px",
+    marginBlockStart: "4px",
+    fontSize: "13px",
     lineHeight: "20px",
-    color: "var(--z-fg-primary)",
-    maxHeight: "120px",
-    overflowY: "auto",
-    borderRadius: "var(--z-radius-sm, 6px)",
-    _focusVisible: {
-      outline: "2px solid var(--z-focus)",
-      outlineOffset: "4px",
-    },
+    color: "var(--z-fg-muted)",
+    "&[data-full]": { color: "var(--z-status-warning)" },
   },
 });
 
-const Actions = styled("div", {
+const HeroLine = styled("span", {
   base: {
-    display: "flex",
-    flexWrap: "wrap",
-    alignItems: "center",
-    gap: "8px",
-  },
-});
-
-const CopyFailed = styled("span", {
-  base: {
-    fontSize: "13px",
-    color: "var(--z-danger)",
-  },
-});
-
-const Manage = styled("div", {
-  base: {
-    display: "flex",
-    flexWrap: "wrap",
-    gap: "4px",
-    paddingBlockStart: "8px",
-    borderBlockStart: "1px solid var(--z-border-subtle)",
-  },
-});
-
-const Confirm = styled("div", {
-  base: {
-    display: "flex",
-    flexWrap: "wrap",
-    alignItems: "center",
-    gap: "8px",
-    fontSize: "14px",
-    "& > span": { flexBasis: "100%" },
-  },
-});
-
-const People = styled("div", {
-  base: {
-    display: "flex",
-    flexDirection: "column",
-    gap: "8px",
-    padding: "12px",
-    borderRadius: "var(--z-radius, 10px)",
-    background: "var(--z-bg-input)",
-  },
-});
-
-const Person = styled("div", {
-  base: {
-    display: "flex",
-    alignItems: "center",
-    gap: "8px",
-    fontSize: "14px",
     minWidth: 0,
-    "& > span": {
-      overflow: "hidden",
-      textOverflow: "ellipsis",
-      whiteSpace: "nowrap",
-    },
-  },
-});
-
-const Failure = styled("div", {
-  base: {
-    padding: "12px",
-    borderRadius: "var(--z-radius, 10px)",
-    background: "color-mix(in srgb, var(--z-danger) 12%, transparent)",
-    fontSize: "13px",
-    lineHeight: "18px",
+    color: "var(--z-fg-secondary)",
+    lineClamp: 1,
   },
 });

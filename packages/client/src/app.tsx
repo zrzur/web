@@ -37,6 +37,11 @@ const Friends = lazy(() =>
 const You = lazy(() =>
   import("./interface/You").then((m) => ({ default: m.You })),
 );
+const MyEventsPage = lazy(() =>
+  import("./interface/events/MyEventsPage").then((m) => ({
+    default: m.MyEventsPage,
+  })),
+);
 const EventsPage = lazy(() =>
   import("./interface/events/EventsPage").then((m) => ({
     default: m.EventsPage,
@@ -172,6 +177,7 @@ const appRoutes = () => (
       {/* the short form, for a server whose short-link origin is the app itself */}
       <Route path="/b/:code" component={BotRedirect} />
       <Route path="/friends" component={Friends} />
+      <Route path="/events" component={MyEventsPage} />
       <Route path="/you" component={You} />
       <Route path="/server/:server/*">
         <Route path="/channel/:channel/*" component={ChannelPage} />

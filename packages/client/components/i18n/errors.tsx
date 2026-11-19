@@ -292,7 +292,8 @@ export function useError() {
         const { rule } = err as unknown as { rule?: string };
         // a rule may have no name: then the sentence ends, with no colon
         // left hanging (owner's screenshot, 2026-11-18)
-        if (!rule?.trim()) return t`This server's AutoMod blocked your message.`;
+        if (!rule?.trim())
+          return t`This server's AutoMod blocked your message.`;
         return t`This server's AutoMod blocked your message: ${rule}`;
       }
       if ((err.type as string) === "RulesNotAccepted") {
@@ -540,6 +541,16 @@ export function useError() {
           return t`This channel has as many webhooks as it can have (${err.max}). Delete one first.`;
         case "TooManyServerEvents":
           return t`This server already has ${err.max} upcoming events. Cancel or delete one first.`;
+        case "TooManyServerEventDrafts":
+          return t`This server already has ${err.max} event drafts. Publish or delete one first.`;
+        case "ServerEventFull":
+          return t`All seats are taken and there is no waiting list.`;
+        case "ServerEventOverCapacity":
+          return t`All ${err.capacity} seats are taken. Confirm to seat one more person.`;
+        case "ServerEventReasonRequired":
+          return t`This event is private. Write why you need its list of people; your access is noted in the audit log.`;
+        case "ServerEventInvalid":
+          return t`This event can't be saved like this. Check the fields and try again.`;
         case "TooManyServerWebhooks":
           return t`This server has as many webhooks as it can have (${err.max}). Delete one first.`;
         case "ThreadsDisabled":

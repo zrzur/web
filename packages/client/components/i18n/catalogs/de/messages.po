@@ -26471,7 +26471,7 @@ msgstr "Die Abstimmung endet für alle und das Ergebnis steht fest. Das lässt s
 
 #: components/app/interface/settings/server/TicketsSettings.tsx
 msgid "Waiting"
-msgstr "Wartet"
+msgstr "Wartend"
 
 #: components/app/interface/settings/user/profile/studio/StudioDesign.tsx
 msgid "Waiting for a reviewer"
@@ -28915,3 +28915,545 @@ msgstr "Zrzur, direkt auf <0>deinem Desktop.</0>"
 #: components/i18n/errors.tsx
 msgid "This server's AutoMod blocked your message."
 msgstr "Der AutoMod dieses Servers hat deine Nachricht blockiert."
+
+#. placeholder {0}: seats().waiting
+#: src/interface/events/EventDetail.tsx
+msgid "{0, plural, =0 {Full} one {Full · # on the waiting list} other {Full · # on the waiting list}}"
+msgstr "{0, plural, =0 {Voll} one {Voll · # auf der Warteliste} other {Voll · # auf der Warteliste}}"
+
+#. placeholder {0}: seats().waiting
+#: src/interface/events/EventCard.tsx
+msgid "{0, plural, =0 {Full} one {Full · # waiting} other {Full · # waiting}}"
+msgstr "{0, plural, =0 {Voll} one {Voll · # wartet} other {Voll · # warten}}"
+
+#. placeholder {0}: seats().waiting
+#: src/interface/events/EventAnswer.tsx
+msgid "{0, plural, =0 {Nobody is waiting yet. Seats go to whoever came first.} one {# person is waiting before you. Seats go to whoever came first.} other {# people are waiting before you. Seats go to whoever came first.}}"
+msgstr "{0, plural, =0 {Noch wartet niemand. Plätze gehen an die, die zuerst da waren.} one {# Person wartet vor dir. Plätze gehen an die, die zuerst da waren.} other {# Personen warten vor dir. Plätze gehen an die, die zuerst da waren.}}"
+
+#. placeholder {0}: going()
+#: src/interface/events/EventCard.tsx
+msgid "{0, plural, one {# going} other {# going}}"
+msgstr "{0, plural, one {# kommt} other {# kommen}}"
+
+#. placeholder {0}: now().present_at_start ?? 0
+#: src/interface/events/EventStats.tsx
+msgid "{0, plural, one {# person was in the voice channel when it started. Only the number is kept.} other {# people were in the voice channel when it started. Only the number is kept.}}"
+msgstr "{0, plural, one {# Person war beim Start im Sprachkanal. Nur die Zahl wird gespeichert.} other {# Personen waren beim Start im Sprachkanal. Nur die Zahl wird gespeichert.}}"
+
+#. placeholder {0}: seats().left ?? 0
+#: src/interface/events/EventDetail.tsx
+msgid "{0, plural, one {# seat left} other {# seats left}}"
+msgstr "{0, plural, one {# Platz frei} other {# Plätze frei}}"
+
+#. placeholder {0}: day.total
+#. placeholder {1}: day.going
+#: src/interface/events/EventStats.tsx
+msgid "{0} answers, {1} going"
+msgstr "{0} Antworten, {1} kommen"
+
+#. placeholder {0}: going()
+#. placeholder {1}: maybe()
+#: src/interface/events/EventCard.tsx
+msgid "{0} going · {1} maybe"
+msgstr "{0} kommen · {1} vielleicht"
+
+#. placeholder {0}: going()
+#. placeholder {1}: seats().capacity
+#: src/interface/events/EventCard.tsx
+msgid "{0} of {1} seats"
+msgstr "{0} von {1} Plätzen"
+
+#. placeholder {0}: seats().left ?? 0
+#. placeholder {1}: seats().capacity
+#: src/interface/events/EventAnswer.tsx
+msgid "{0} of {1} seats are free."
+msgstr "{0} von {1} Plätzen sind frei."
+
+#: components/modal/modals/ServerEventEditor.tsx
+msgid "Add a helper"
+msgstr "Helfer hinzufügen"
+
+#: components/modal/modals/ServerEventEditor.tsx
+msgid "After it, people join a waiting list in order."
+msgstr "Danach kommen Leute der Reihe nach auf die Warteliste."
+
+#. placeholder {0}: err.capacity
+#: components/i18n/errors.tsx
+msgid "All {0} seats are taken. Confirm to seat one more person."
+msgstr "Alle {0} Plätze sind belegt. Bestätige, um eine weitere Person zu setzen."
+
+#. placeholder {0}: props.event.capacity
+#: src/interface/events/EventDetail.tsx
+msgid "All {0} seats are taken. The event then shows as over its limit, and the audit log notes it under your name."
+msgstr "Alle {0} Plätze sind belegt. Das Event wird dann als über dem Limit angezeigt, und das Audit-Log vermerkt es unter deinem Namen."
+
+#: src/interface/events/EventAnswer.tsx
+msgid "All seats are taken"
+msgstr "Alle Plätze sind belegt"
+
+#: components/i18n/errors.tsx
+msgid "All seats are taken and there is no waiting list."
+msgstr "Alle Plätze sind belegt und es gibt keine Warteliste."
+
+#: src/interface/events/EventCard.tsx
+msgctxt "event answer"
+msgid "Answer"
+msgstr "Antworten"
+
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "Answer an event: going, maybe, can't go"
+msgstr "Auf ein Event antworten: komme, vielleicht, kann nicht"
+
+#: src/interface/events/MyEventsPage.tsx
+msgid "Answer Going or Maybe to an event in any of your servers and it is kept here."
+msgstr "Antworte in einem deiner Server mit „Komme“ oder „Vielleicht“, dann steht das Event hier."
+
+#: src/interface/events/EventStats.tsx
+msgid "Answers by day"
+msgstr "Antworten nach Tag"
+
+#. placeholder {0}: clashNames()
+#: components/modal/modals/ServerEventEditor.tsx
+msgid "At this time there is another event: {0}."
+msgstr "Zu dieser Zeit gibt es ein anderes Event: {0}."
+
+#: src/interface/events/EventAnswer.tsx
+#: src/interface/events/EventCard.tsx
+#: src/interface/events/EventDetail.tsx
+msgctxt "event answer"
+msgid "Can't go"
+msgstr "Kann nicht"
+
+#: src/interface/events/EventDetail.tsx
+msgid "Cancel this event? The people who answered see that it is off."
+msgstr "Dieses Event absagen? Wer geantwortet hat, sieht, dass es ausfällt."
+
+#: src/interface/events/EventAnswer.tsx
+msgid "Change your answer any time."
+msgstr "Du kannst deine Antwort jederzeit ändern."
+
+#: components/modal/modals/ServerEventEditor.tsx
+msgid "Choose at least one person to invite."
+msgstr "Wähle mindestens eine Person zum Einladen."
+
+#: components/modal/modals/ServerEventEditor.tsx
+msgid "Choose at least one role that sees this event."
+msgstr "Wähle mindestens eine Rolle, die dieses Event sieht."
+
+#: src/interface/events/EventDetail.tsx
+msgid "Copy as a draft"
+msgstr "Als Entwurf kopieren"
+
+#: src/interface/events/EventDetail.tsx
+msgid "Delete this event and its answers for good?"
+msgstr "Dieses Event und seine Antworten endgültig löschen?"
+
+#: src/interface/events/EventDetail.tsx
+msgid "Delete this time and its answers for good? The next one stays scheduled."
+msgstr "Diesen Termin und seine Antworten endgültig löschen? Der nächste bleibt geplant."
+
+#: src/interface/events/EventCard.tsx
+msgctxt "scheduled events"
+msgid "Draft"
+msgstr "Entwurf"
+
+#: src/interface/events/EventDetail.tsx
+msgid "Draft: only organisers see it"
+msgstr "Entwurf: nur die Organisatoren sehen ihn"
+
+#: src/interface/events/MyEventsPage.tsx
+msgid "Events of the next 90 days in servers that use events show up here."
+msgstr "Hier stehen die Events der nächsten 90 Tage aus Servern, die Events nutzen."
+
+#: src/interface/events/EventsPage.tsx
+msgid "Events that are over or were called off show up here."
+msgstr "Hier erscheinen Events, die vorbei sind oder abgesagt wurden."
+
+#: src/interface/events/EventsPage.tsx
+msgid "Events you answer Going or Maybe to are kept here."
+msgstr "Hier stehen die Events, bei denen du „Ich komme“ oder „Vielleicht“ geantwortet hast."
+
+#: components/modal/modals/ServerEventEditor.tsx
+#: src/interface/events/EventDetail.tsx
+msgid "Every day"
+msgstr "Jeden Tag"
+
+#: components/modal/modals/ServerEventEditor.tsx
+msgid "Everyone who sees its place"
+msgstr "Alle, die den Ort sehen"
+
+#: src/interface/events/EventDetail.tsx
+msgid "Everyone who sees its place sees it"
+msgstr "Alle, die den Ort sehen, sehen es"
+
+#: components/modal/modals/ServerEventEditor.tsx
+msgid "Everyone who sees the event"
+msgstr "Alle, die das Event sehen"
+
+#: src/interface/events/MyEventsPage.tsx
+msgid "Everything coming up"
+msgstr "Alles Kommende"
+
+#: src/interface/events/EventDetail.tsx
+msgid "Give a seat"
+msgstr "Platz geben"
+
+#: src/interface/events/EventAnswer.tsx
+#: src/interface/events/EventDetail.tsx
+#: src/interface/events/EventStats.tsx
+msgctxt "event answer"
+msgid "Going"
+msgstr "Ich komme"
+
+#: components/modal/modals/ServerEventEditor.tsx
+msgid "Helpers"
+msgstr "Helfer"
+
+#: components/modal/modals/ServerEventEditor.tsx
+msgid "Helpers can change this event and manage who comes, without managing the server's other events."
+msgstr "Helfer können dieses Event ändern und die Teilnehmenden verwalten, ohne die anderen Events des Servers zu verwalten."
+
+#: src/interface/events/MyEventsPage.tsx
+msgid "I'm taking part"
+msgstr "Ich nehme teil"
+
+#: src/interface/events/EventsPage.tsx
+msgid "In all my servers"
+msgstr "In allen meinen Servern"
+
+#: src/interface/events/EventStats.tsx
+msgid "In voice at the start"
+msgstr "Beim Start im Sprachkanal"
+
+#: components/modal/modals/ServerEventEditor.tsx
+#: src/interface/events/EventCard.tsx
+msgid "Invited only"
+msgstr "Nur Eingeladene"
+
+#: src/interface/events/EventAnswer.tsx
+msgid "Join the waiting list"
+msgstr "Auf die Warteliste"
+
+#: src/interface/events/EventStats.tsx
+msgid "Loading the numbers…"
+msgstr "Zahlen werden geladen…"
+
+#: src/interface/events/EventAnswer.tsx
+#: src/interface/events/EventCard.tsx
+#: src/interface/events/EventDetail.tsx
+msgctxt "event answer"
+msgid "Maybe"
+msgstr "Vielleicht"
+
+#: src/interface/events/MemberPicker.tsx
+msgid "Members found"
+msgstr "Gefundene Mitglieder"
+
+#: src/interface/events/EventsPage.tsx
+#: src/interface/events/MyEventsPage.tsx
+#: src/interface/navigation/channels/HomeSidebar.tsx
+msgid "My events"
+msgstr "Meine Events"
+
+#: components/modal/modals/ServerEventEditor.tsx
+#: src/interface/events/EventsPage.tsx
+msgid "New event"
+msgstr "Neues Event"
+
+#: src/interface/events/EventsPage.tsx
+msgid "No drafts"
+msgstr "Keine Entwürfe"
+
+#: src/interface/events/MemberPicker.tsx
+msgid "No member with this name."
+msgstr "Kein Mitglied mit diesem Namen."
+
+#: src/interface/events/EventCard.tsx
+msgid "Nobody answered yet"
+msgstr "Noch hat niemand geantwortet"
+
+#: src/interface/events/EventStats.tsx
+msgid "Nobody has answered yet."
+msgstr "Noch hat niemand geantwortet."
+
+#: src/interface/events/EventDetail.tsx
+msgid "Nobody yet."
+msgstr "Noch niemand."
+
+#: src/interface/events/EventsPage.tsx
+msgid "Nothing in the last three months"
+msgstr "Nichts in den letzten drei Monaten"
+
+#: src/interface/events/MyEventsPage.tsx
+msgid "Nothing is planned in your servers"
+msgstr "In deinen Servern ist nichts geplant"
+
+#: src/interface/events/Ticket.tsx
+msgctxt "scheduled events"
+msgid "Now"
+msgstr "Jetzt"
+
+#. placeholder {0}: mine()!.position
+#: src/interface/events/EventCard.tsx
+msgid "Number {0} in line"
+msgstr "Platz {0} in der Warteliste"
+
+#: src/interface/events/EventDetail.tsx
+msgctxt "scheduled events"
+msgid "Numbers"
+msgstr "Zahlen"
+
+#. placeholder {0}: seats().capacity
+#: src/interface/events/EventDetail.tsx
+msgid "of {0}"
+msgstr "von {0}"
+
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "On a server's events, if you manage events."
+msgstr "In den Events eines Servers, wenn du Events verwaltest."
+
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "On the event's page."
+msgstr "Auf der Seite des Events."
+
+#: src/interface/events/EventAnswer.tsx
+#: src/interface/events/EventCard.tsx
+msgid "On the waiting list"
+msgstr "Auf der Warteliste"
+
+#: src/interface/events/EventDetail.tsx
+msgid "Only some roles see it"
+msgstr "Nur bestimmte Rollen sehen es"
+
+#: src/interface/events/EventDetail.tsx
+msgid "Only the invited people see it"
+msgstr "Nur die Eingeladenen sehen es"
+
+#: components/modal/modals/ServerEventEditor.tsx
+msgid "Only the invited people see this event."
+msgstr "Nur die Eingeladenen sehen dieses Event."
+
+#: src/interface/events/EventDetail.tsx
+msgid "Only the organisers see the names."
+msgstr "Nur die Organisatoren sehen die Namen."
+
+#: src/interface/events/EventDetail.tsx
+msgid "Only the people taking part see the names."
+msgstr "Nur die Teilnehmenden sehen die Namen."
+
+#: components/modal/modals/ServerEventEditor.tsx
+msgid "Only they and the organisers see this event. Nobody else learns that it exists."
+msgstr "Nur sie und die Organisatoren sehen dieses Event. Sonst erfährt niemand, dass es existiert."
+
+#. placeholder {0}: organiserNames().join(", ")
+#: src/interface/events/EventDetail.tsx
+msgid "Organised by {0}"
+msgstr "Organisiert von {0}"
+
+#: src/interface/events/EventDetail.tsx
+msgid "Organiser tools"
+msgstr "Werkzeuge für Organisatoren"
+
+#: components/modal/modals/ServerEventEditor.tsx
+msgid "Organisers only"
+msgstr "Nur Organisatoren"
+
+#: src/interface/events/EventDetail.tsx
+msgid "Over its limit: an organiser seated more people than there are seats."
+msgstr "Über dem Limit: Ein Organisator hat mehr Leute gesetzt, als es Plätze gibt."
+
+#: src/interface/events/EventsPage.tsx
+msgid "Past"
+msgstr "Vergangen"
+
+#: components/modal/modals/ServerEventEditor.tsx
+msgid "People taking part"
+msgstr "Teilnehmende"
+
+#: components/modal/modals/ServerEventEditor.tsx
+msgid "Pick a ready cover, or upload a picture of your own."
+msgstr "Wähle ein fertiges Titelbild oder lade ein eigenes Bild hoch."
+
+#: src/interface/events/EventsPage.tsx
+msgid "Plan a game night, a tournament or a meetup. Members answer once and keep their place."
+msgstr "Plane einen Spieleabend, ein Turnier oder ein Treffen. Mitglieder antworten einmal und behalten ihren Platz."
+
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "Plan a new event"
+msgstr "Neues Event planen"
+
+#: components/modal/modals/ServerEventEditor.tsx
+#: src/interface/events/EventDetail.tsx
+msgctxt "scheduled events"
+msgid "Publish"
+msgstr "Veröffentlichen"
+
+#. placeholder {0}: index() + 1
+#: components/modal/modals/ServerEventEditor.tsx
+msgid "Ready cover {0}"
+msgstr "Fertiges Titelbild {0}"
+
+#: components/modal/modals/ServerEventEditor.tsx
+msgid "Ready covers"
+msgstr "Fertige Titelbilder"
+
+#: src/interface/events/EventDetail.tsx
+msgctxt "event attendee"
+msgid "Remove"
+msgstr "Entfernen"
+
+#: src/interface/events/EventsPage.tsx
+msgid "Save an event as a draft to finish it later. Only organisers see drafts."
+msgstr "Speichere ein Event als Entwurf, um es später fertigzustellen. Entwürfe sehen nur Organisatoren."
+
+#: components/modal/modals/ServerEventEditor.tsx
+msgid "Save as draft"
+msgstr "Als Entwurf speichern"
+
+#. placeholder {0}: name(attendee())
+#: src/interface/events/EventDetail.tsx
+msgid "Seat {0} past the limit?"
+msgstr "{0} über dem Limit setzen?"
+
+#: components/modal/modals/ServerEventEditor.tsx
+msgid "Seat limit"
+msgstr "Platzlimit"
+
+#: src/interface/events/EventDetail.tsx
+msgid "Seat past the limit"
+msgstr "Über dem Limit setzen"
+
+#: components/modal/modals/ServerEventEditor.tsx
+msgid "Seats"
+msgstr "Plätze"
+
+#: src/interface/events/EventDetail.tsx
+msgctxt "scheduled events"
+msgid "Seats"
+msgstr "Plätze"
+
+#: src/interface/events/EventStats.tsx
+msgid "Seats taken"
+msgstr "Belegte Plätze"
+
+#: src/interface/events/MyEventsPage.tsx
+msgid "See everything coming up"
+msgstr "Alles Kommende ansehen"
+
+#: src/interface/events/EventDetail.tsx
+msgid "Show the list"
+msgstr "Liste anzeigen"
+
+#: components/modal/modals/ServerEventEditor.tsx
+#: src/interface/events/EventCard.tsx
+msgid "Some roles"
+msgstr "Bestimmte Rollen"
+
+#. placeholder {0}: props.max
+#: src/interface/events/MemberPicker.tsx
+msgid "That is the most you can choose here: {0}."
+msgstr "Mehr kannst du hier nicht auswählen: {0}."
+
+#: src/interface/events/EventDetail.tsx
+msgid "The names were removed 12 months after the event. The numbers stay."
+msgstr "Die Namen wurden 12 Monate nach dem Event entfernt. Die Zahlen bleiben."
+
+#: src/interface/events/MemberPicker.tsx
+msgid "The search did not work. Try again."
+msgstr "Die Suche hat nicht funktioniert. Versuch es noch einmal."
+
+#: src/interface/events/EventAnswer.tsx
+msgid "The seat becomes yours by itself when one is free."
+msgstr "Der Platz gehört automatisch dir, sobald einer frei wird."
+
+#: components/modal/modals/ServerEventEditor.tsx
+msgid "The seat limit is a number from 1 to {MAX_SEATS}."
+msgstr "Das Platzlimit ist eine Zahl von 1 bis {MAX_SEATS}."
+
+#: components/i18n/errors.tsx
+msgid "This event can't be saved like this. Check the fields and try again."
+msgstr "So kann das Event nicht gespeichert werden. Prüfe die Felder und versuche es erneut."
+
+#: src/interface/events/EventAnswer.tsx
+msgid "This event has no waiting list."
+msgstr "Dieses Event hat keine Warteliste."
+
+#: src/interface/events/EventDetail.tsx
+msgid "This event is private and you are not one of its organisers. Write why you need its list of people; your access is noted in the audit log."
+msgstr "Dieses Event ist privat und du gehörst nicht zu seinen Organisatoren. Schreibe, warum du die Personenliste brauchst; dein Zugriff wird im Audit-Log vermerkt."
+
+#: components/i18n/errors.tsx
+msgid "This event is private. Write why you need its list of people; your access is noted in the audit log."
+msgstr "Dieses Event ist privat. Schreibe, warum du die Personenliste brauchst; dein Zugriff wird im Audit-Log vermerkt."
+
+#. placeholder {0}: err.max
+#: components/i18n/errors.tsx
+msgid "This server already has {0} event drafts. Publish or delete one first."
+msgstr "Dieser Server hat bereits {0} Event-Entwürfe. Veröffentliche oder lösche zuerst einen."
+
+#: src/interface/events/MemberPicker.tsx
+msgid "Type a name or username"
+msgstr "Namen oder Benutzernamen eingeben"
+
+#: components/modal/modals/ServerEventEditor.tsx
+msgid "Waiting list"
+msgstr "Warteliste"
+
+#: src/interface/events/EventsPage.tsx
+msgid "When the organisers plan something, it shows up here."
+msgstr "Wenn die Organisatoren etwas planen, erscheint es hier."
+
+#: src/interface/events/EventsPage.tsx
+#: src/interface/events/MyEventsPage.tsx
+msgid "Which events"
+msgstr "Welche Events"
+
+#: src/interface/events/EventDetail.tsx
+msgid "Who came"
+msgstr "Wer da war"
+
+#: src/interface/events/EventDetail.tsx
+msgid "Who is coming"
+msgstr "Wer kommt"
+
+#: components/modal/modals/ServerEventEditor.tsx
+msgid "Who sees it"
+msgstr "Wer es sieht"
+
+#: components/modal/modals/ServerEventEditor.tsx
+msgid "Who sees the names of the people coming"
+msgstr "Wer die Namen der Teilnehmenden sieht"
+
+#: src/interface/events/EventAnswer.tsx
+msgid "Will you come?"
+msgstr "Kommst du?"
+
+#: src/interface/events/EventCard.tsx
+msgid "You are going"
+msgstr "Du kommst"
+
+#: src/interface/events/MyEventsPage.tsx
+msgid "You are not taking part in any event yet"
+msgstr "Du nimmst noch an keinem Event teil"
+
+#. placeholder {0}: mine()!.position
+#: src/interface/events/EventAnswer.tsx
+msgid "You are number {0} on the waiting list"
+msgstr "Du bist Nummer {0} auf der Warteliste"
+
+#: src/interface/events/EventAnswer.tsx
+msgid "You are on the waiting list"
+msgstr "Du stehst auf der Warteliste"
+
+#: src/interface/events/EventCard.tsx
+msgid "You have a seat"
+msgstr "Du hast einen Platz"
+
+#: src/interface/events/EventAnswer.tsx
+msgid "You have a seat. Change your answer any time."
+msgstr "Du hast einen Platz. Du kannst deine Antwort jederzeit ändern."
+
+#: src/interface/events/EventsPage.tsx
+msgid "You have not answered any event here"
+msgstr "Du hast hier noch auf kein Event geantwortet"

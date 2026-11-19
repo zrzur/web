@@ -4,6 +4,7 @@ import { RESERVED_KEYS } from "../../../../plugin-sdk/src/manifest";
 
 import {
   EVENTS_PLUGIN_KEYS,
+  eventKey,
   eventLink,
   eventPhase,
   eventWhen,
@@ -122,6 +123,28 @@ describe("event times", () => {
 
   it("is reserved for Zrzur so plugins can't take it", () => {
     expect(RESERVED_KEYS).toContain(EVENTS_PLUGIN_KEYS);
+  });
+
+  it("reads the plain keys of the events screens by physical key", () => {
+    const plain = {
+      altKey: false,
+      shiftKey: false,
+      ctrlKey: false,
+      metaKey: false,
+      repeat: false,
+    };
+    expect(eventKey({ ...plain, code: "KeyN" })).toBe("new");
+    expect(eventKey({ ...plain, code: "KeyG" })).toBe("Going");
+    expect(eventKey({ ...plain, code: "KeyM" })).toBe("Maybe");
+    expect(eventKey({ ...plain, code: "KeyX" })).toBe("NotGoing");
+    expect(eventKey({ ...plain, code: "KeyA" })).toBeUndefined();
+    // a modifier belongs to the browser (Ctrl+N) and to other shortcuts
+    expect(eventKey({ ...plain, code: "KeyN", ctrlKey: true })).toBeUndefined();
+    expect(
+      eventKey({ ...plain, code: "KeyG", shiftKey: true }),
+    ).toBeUndefined();
+    // a held key answers once
+    expect(eventKey({ ...plain, code: "KeyG", repeat: true })).toBeUndefined();
   });
 
   it("stays out of text fields and open dialogs", () => {

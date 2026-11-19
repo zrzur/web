@@ -32,6 +32,8 @@ import {
 import { Symbol } from "@revolt/ui/components/utils/Symbol";
 import { Icon } from "@revolt/ui/icons/Icon";
 
+import { eventsEnabled } from "../../events/EventsLink";
+
 import { HomeSidebarPhone } from "./HomeSidebarPhone";
 import { SidebarBase } from "./common";
 
@@ -148,6 +150,26 @@ const HomeSidebarWide = (props: Props) => {
           </MenuButton>
 
           <div style={{ height: "5px" }} />
+
+          <Show when={eventsEnabled(client())}>
+            <MenuButton
+              href="/events"
+              size="normal"
+              icon={<Symbol>calendar_month</Symbol>}
+              attention={
+                Instance.relPath(location.pathname) === "/events"
+                  ? "selected"
+                  : "normal"
+              }
+              data-testid="home-my-events"
+            >
+              <ButtonTitle>
+                <Trans>My events</Trans>
+              </ButtonTitle>
+            </MenuButton>
+
+            <div style={{ height: "5px" }} />
+          </Show>
 
           <MenuButton
             href="/designs"

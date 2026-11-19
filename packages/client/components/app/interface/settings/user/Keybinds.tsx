@@ -252,11 +252,23 @@ export function KeybindsSettings() {
           description: <Trans>In a server.</Trans>,
         },
         {
+          title: <Trans>Plan a new event</Trans>,
+          description: (
+            <Trans>On a server's events, if you manage events.</Trans>
+          ),
+          keys: [["N"]],
+        },
+        {
+          title: <Trans>Answer an event: going, maybe, can't go</Trans>,
+          description: <Trans>On the event's page.</Trans>,
+          keys: [["G"], ["M"], ["X"]],
+        },
+        {
           title: <Trans>Open a category's settings</Trans>,
           description: (
             <Trans>
-              With the category selected in the channel list, if you manage
-              the server.
+              With the category selected in the channel list, if you manage the
+              server.
             </Trans>
           ),
           keys: [["Mod", "Shift", "E"]],
