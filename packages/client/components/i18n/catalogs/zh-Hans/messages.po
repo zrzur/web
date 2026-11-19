@@ -2649,6 +2649,10 @@ msgstr "动态"
 msgid "Animated avatars and emoji"
 msgstr "动态头像和表情"
 
+#: components/app/interface/settings/user/SaveData.tsx
+msgid "Animated decorations, nameplates and profile effects stay still."
+msgstr "动态装饰、名牌和个人资料特效保持静止。"
+
 #: components/app/interface/settings/user/profile/studio/StudioHome.tsx
 msgid "Animated PNG, GIF, WebP or WebM"
 msgstr "动态 PNG、GIF、WebP 或 WebM"
@@ -3329,6 +3333,10 @@ msgstr "头像装饰"
 #: src/interface/Designs.tsx
 #~ msgid "Avatar decorations"
 #~ msgstr ""
+
+#: components/app/interface/settings/user/SaveData.tsx
+msgid "Avatars, server icons and banners load as previews, never as the animated original."
+msgstr "头像、服务器图标和横幅以预览图加载，不加载动态原图。"
 
 #: components/app/interface/settings/server/TicketsSettings.tsx
 #~ msgid "Average rating"
@@ -9071,6 +9079,10 @@ msgstr "适合音乐：128 kbps 立体声，并关闭下方的处理功能。"
 msgid "For the people who keep Zrzur flying."
 msgstr "献给让 Zrzur 继续飞翔的人们。"
 
+#: components/app/interface/settings/user/SaveData.tsx
+msgid "For weak or metered internet. The choice is kept on this device only, so your phone and your computer can differ."
+msgstr "适用于网络较弱或按流量计费的情况。此选择只保存在这台设备上，手机和电脑可以不同。"
+
 #: src/interface/Developers.tsx
 msgid "For your app's sign-in: the app puts a new state and code challenge into it for every sign-in. Opened as it is, the link does not work."
 msgstr "用于你应用的登录：应用每次登录都会向其中放入新的 state 和 code challenge。直接打开该链接是无效的。"
@@ -9578,6 +9590,10 @@ msgstr "GIF"
 #: src/interface/channels/text/Composition.tsx
 msgid "GIF picker"
 msgstr "GIF 选择器"
+
+#: components/app/interface/settings/user/SaveData.tsx
+msgid "GIFs and videos do not load or play until you tap them."
+msgstr "GIF 和视频在你轻触之前不会加载或播放。"
 
 #: components/ui/components/features/messaging/composition/picker/GifPicker.tsx
 msgid "GIFs aren't available yet"
@@ -10618,6 +10634,10 @@ msgstr "在服务器中。"
 #~ msgid "In about ten minutes you will have a bot that answers a slash command in your own test server. You need a Zrzur account, a server of your own and Node.js 22 or newer. There is nothing to install."
 #~ msgstr "大约十分钟后，你就会拥有一个能在自己的测试服务器中响应斜杠命令的机器人。你需要一个 Zrzur 账号、一个自己的服务器和 Node.js 22 或更高版本。无需安装任何其他东西。"
 
+#: components/app/interface/settings/user/SaveData.tsx
+msgid "In calls your voice is sent at a lower bitrate, and other people's cameras and screens wait for a tap."
+msgstr "通话中你的声音以较低码率发送，其他人的摄像头和屏幕等待轻触后显示。"
+
 #: components/ui/components/features/profiles/ProfileMutuals.tsx
 msgid "In common"
 msgstr "共同"
@@ -11575,6 +11595,10 @@ msgstr "灯笼"
 msgid "Laos"
 msgstr "老挝"
 
+#: components/app/interface/settings/user/SaveData.tsx
+msgid "Large pictures wait for a tap. Small ones load as usual."
+msgstr "大图片等待轻触后加载。小图片照常加载。"
+
 #: components/app/interface/settings/user/bots/CommandManager.tsx
 msgid "Largest value"
 msgstr "最大值"
@@ -11934,6 +11958,10 @@ msgstr "链接已复制"
 msgid "Link name"
 msgstr "链接名称"
 
+#: components/app/interface/settings/user/SaveData.tsx
+msgid "Link previews show their text. Their pictures wait for a tap."
+msgstr "链接预览显示文字。其中的图片等待轻触后加载。"
+
 #: components/app/interface/settings/server/AutoModSettings.tsx
 msgid "Link spam"
 msgstr "链接垃圾信息"
@@ -12069,6 +12097,10 @@ msgstr "加载更多成员"
 #: components/app/interface/settings/server/audit/AuditLog.tsx
 msgid "Load older entries"
 msgstr "加载更早的条目"
+
+#: components/ui/components/features/messaging/elements/HeldMedia.tsx
+msgid "Load picture"
+msgstr "加载图片"
 
 #: components/app/interface/settings/server/assistant/AssistantPage.tsx
 msgid "Load settings file"
@@ -15067,6 +15099,10 @@ msgstr "鸟群中没有匹配的内容"
 #~ msgid "Nothing included matches. Community designs are below."
 #~ msgstr ""
 
+#: components/app/interface/settings/user/SaveData.tsx
+msgid "Nothing is downloaded ahead for screens you have not opened."
+msgstr "不会为你没有打开的界面提前下载任何内容。"
+
 #: components/app/interface/settings/user/plugins/ReviewTab.tsx
 msgid "Nothing is waiting for review."
 msgstr "没有等待审核的内容。"
@@ -16721,6 +16757,10 @@ msgstr "再玩一次"
 #: components/auth/src/AuthPage.tsx
 #~ msgid "Play all"
 #~ msgstr "全部播放"
+
+#: components/ui/components/features/messaging/elements/HeldMedia.tsx
+msgid "Play GIF"
+msgstr "播放 GIF"
 
 #: components/app/interface/settings/user/appearance/AnimationSettings.tsx
 msgid "Play preview"
@@ -19238,6 +19278,15 @@ msgstr "保存命令"
 msgid "Save current"
 msgstr "保存当前设置"
 
+#: components/app/interface/settings/user/SaveData.tsx
+#: components/app/interface/settings/UserSettings.tsx
+msgid "Save data"
+msgstr "节省流量"
+
+#: components/app/interface/support/SaveDataOffer.tsx
+msgid "Save data is on. You can change it in Settings."
+msgstr "“节省流量”已开启。可以在设置中更改。"
+
 #: components/app/interface/settings/user/profile/studio/StudioEditor.tsx
 msgid "Save draft"
 msgstr "保存草稿"
@@ -20358,6 +20407,10 @@ msgstr "显示全部 {0} 项"
 msgid "Show as a card"
 msgstr "显示为卡片"
 
+#: components/ui/components/features/voice/callCard/ParticipantTile.tsx
+msgid "Show camera"
+msgstr "显示摄像头"
+
 #: components/app/interface/settings/user/plugins/ReviewTab.tsx
 msgid "Show code"
 msgstr "显示代码"
@@ -20462,6 +20515,10 @@ msgstr "显示资料特效"
 #: src/interface/channels/text/SearchFiltersPhone.tsx
 msgid "Show results"
 msgstr "显示结果"
+
+#: components/ui/components/features/voice/callCard/ParticipantTile.tsx
+msgid "Show screen"
+msgstr "显示屏幕"
 
 #: components/app/interface/settings/server/assistant/labels.ts
 msgid "Show the Hijri date"
@@ -23799,8 +23856,8 @@ msgid "Tick the box to accept before you continue."
 msgstr "请先勾选复选框表示接受，然后继续。"
 
 #: src/interface/tickets/TicketAction.tsx
-msgid "Ticket actions"
-msgstr "工单操作"
+#~ msgid "Ticket actions"
+#~ msgstr "工单操作"
 
 #: components/app/interface/settings/server/assistant/labels.ts
 msgid "Ticket categories, one per line"
@@ -24253,6 +24310,10 @@ msgstr "关闭即可启动安全模式，它会一次性停止所有插件。你
 #: components/auth/src/flows/FlowConfirmChange.tsx
 msgid "Turn off two-factor authentication?"
 msgstr "要关闭双重验证吗？"
+
+#: components/app/interface/support/SaveDataOffer.tsx
+msgid "Turn on"
+msgstr "开启"
 
 #: components/app/interface/settings/user/StreamerMode.tsx
 msgid "Turn on while sharing your screen"
@@ -25069,6 +25130,10 @@ msgstr "用户打开此频道前会被要求确认年龄。"
 msgid "Users will no longer be asked to confirm their age before joining this channel.<0/> Please ensure the content is appropriate for all ages."
 msgstr "用户加入此频道前将不再被要求确认年龄。<0/> 请确保内容适合所有年龄段。"
 
+#: components/app/interface/settings/user/SaveData.tsx
+msgid "Uses less mobile data. You can load anything with a tap."
+msgstr "使用更少的移动数据。任何内容都可以轻触加载。"
+
 #: components/app/interface/settings/user/voice/VoiceProcessingOptions.tsx
 msgid "Uses the browser's echo cancellation."
 msgstr "使用浏览器的回声消除。"
@@ -25810,6 +25875,10 @@ msgstr "你为什么来到这里？"
 #: components/app/interface/settings/user/plugins/DeveloperTab.tsx
 msgid "What changed (shown to users)"
 msgstr "有哪些变化（展示给用户）"
+
+#: components/app/interface/settings/user/SaveData.tsx
+msgid "What changes while it is on"
+msgstr "开启后的变化"
 
 #: components/modal/modals/CreatePoll.tsx
 msgid "What do you want to ask?"
@@ -27237,6 +27306,10 @@ msgstr "你的设备允许完整动效。"
 #: components/app/interface/settings/user/appearance/AnimationSettings.tsx
 msgid "Your device asks for less motion."
 msgstr "你的设备要求减少动效。"
+
+#: components/app/interface/support/SaveDataOffer.tsx
+msgid "Your device asks to use less data. Turn on Save data?"
+msgstr "你的设备要求减少数据用量。要开启“节省流量”吗？"
 
 #: components/app/interface/settings/shared/Discoverable.tsx
 msgid "Your discover request has been denied"

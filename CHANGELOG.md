@@ -2,6 +2,18 @@
 
 ## Unreleased
 
+### Save data (2026-11-19)
+
+* **A new setting, Settings > Save data,** for weak or metered internet. It is off until you turn it on and is kept on the device, so a phone on mobile data and a computer on a home line can differ.
+* **Pictures:** a large picture waits for a tap and says its size first; small ones (up to 150 KB) load as usual.
+* **GIFs and videos** neither load nor play until tapped; sound and video players fetch nothing before Play.
+* **Link previews** show their text; their pictures wait for a tap.
+* **Avatars, server icons and banners** load as the media server's preview, never as the animated original. Animated decorations, nameplates and profile effects stay still.
+* **Nothing is downloaded ahead** for screens that were not opened.
+* **Calls:** your voice is sent at 24 kbps instead of 64, and other people's cameras and screen shares wait for a tap ("Show camera", "Show screen"). Music mode keeps its own rate.
+* **Offered once, never forced:** a device whose own data saver is on, or whose connection the browser rates as 2G, gets one short message with a "Turn on" button. Closing it is a no; it is not shown again.
+* Not in this round: smaller previews. The media server makes one preview size per kind of file, so a large picture is held back whole instead of shown small, and animated emoji still load as they are.
+
 ### Zrzur without a connection (2026-11-18)
 
 * **The app opens offline** after one visit with a connection: the worker keeps the page of its build and uses it only when the network gives no answer (the network is always asked first, so a release is never served from the device while the server can be reached).

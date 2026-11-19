@@ -28915,3 +28915,76 @@ msgstr "زرزور، مباشرةً على <0>سطح مكتبك.</0>"
 #: components/i18n/errors.tsx
 msgid "This server's AutoMod blocked your message."
 msgstr "حجب الإشراف التلقائي في هذا السيرفر رسالتك."
+
+#: components/app/interface/settings/user/SaveData.tsx
+msgid "Animated decorations, nameplates and profile effects stay still."
+msgstr "الإطارات المتحركة ولوحات الاسم وتأثيرات الملف الشخصي تبقى ثابتة."
+
+#: components/app/interface/settings/user/SaveData.tsx
+msgid "Avatars, server icons and banners load as previews, never as the animated original."
+msgstr "الصور الرمزية وأيقونات السيرفرات والبانرات تُحمَّل كمعاينات، لا كأصل متحرك."
+
+#: components/app/interface/settings/user/SaveData.tsx
+msgid "For weak or metered internet. The choice is kept on this device only, so your phone and your computer can differ."
+msgstr "للإنترنت الضعيف أو المحدود. يُحفظ هذا الاختيار على هذا الجهاز فقط، فيمكن أن يختلف هاتفك عن حاسوبك."
+
+#: components/app/interface/settings/user/SaveData.tsx
+msgid "GIFs and videos do not load or play until you tap them."
+msgstr "صور GIF ومقاطع الفيديو لا تُحمَّل ولا تعمل حتى تضغط عليها."
+
+#: components/app/interface/settings/user/SaveData.tsx
+msgid "In calls your voice is sent at a lower bitrate, and other people's cameras and screens wait for a tap."
+msgstr "في المكالمات يُرسَل صوتك بمعدل بت أقل، وكاميرات الآخرين وشاشاتهم تنتظر ضغطة منك."
+
+#: components/app/interface/settings/user/SaveData.tsx
+msgid "Large pictures wait for a tap. Small ones load as usual."
+msgstr "الصور الكبيرة تنتظر ضغطة منك. الصور الصغيرة تُحمَّل كالمعتاد."
+
+#: components/app/interface/settings/user/SaveData.tsx
+msgid "Link previews show their text. Their pictures wait for a tap."
+msgstr "معاينات الروابط تعرض نصها. صورها تنتظر ضغطة منك."
+
+#: components/ui/components/features/messaging/elements/HeldMedia.tsx
+msgid "Load picture"
+msgstr "تحميل الصورة"
+
+#: components/app/interface/settings/user/SaveData.tsx
+msgid "Nothing is downloaded ahead for screens you have not opened."
+msgstr "لا يُحمَّل شيء مسبقًا لشاشات لم تفتحها."
+
+#: components/ui/components/features/messaging/elements/HeldMedia.tsx
+msgid "Play GIF"
+msgstr "تشغيل GIF"
+
+#: components/app/interface/settings/user/SaveData.tsx
+#: components/app/interface/settings/UserSettings.tsx
+msgid "Save data"
+msgstr "توفير البيانات"
+
+#: components/app/interface/support/SaveDataOffer.tsx
+msgid "Save data is on. You can change it in Settings."
+msgstr "توفير البيانات مفعّل. يمكنك تغييره من الإعدادات."
+
+#: components/ui/components/features/voice/callCard/ParticipantTile.tsx
+msgid "Show camera"
+msgstr "عرض الكاميرا"
+
+#: components/ui/components/features/voice/callCard/ParticipantTile.tsx
+msgid "Show screen"
+msgstr "عرض الشاشة"
+
+#: components/app/interface/support/SaveDataOffer.tsx
+msgid "Turn on"
+msgstr "تفعيل"
+
+#: components/app/interface/settings/user/SaveData.tsx
+msgid "Uses less mobile data. You can load anything with a tap."
+msgstr "يستهلك بيانات أقل. يمكنك تحميل أي شيء بضغطة."
+
+#: components/app/interface/settings/user/SaveData.tsx
+msgid "What changes while it is on"
+msgstr "ما الذي يتغيّر عند تفعيله"
+
+#: components/app/interface/support/SaveDataOffer.tsx
+msgid "Your device asks to use less data. Turn on Save data?"
+msgstr "جهازك يطلب استهلاك بيانات أقل. هل تريد تفعيل توفير البيانات؟"

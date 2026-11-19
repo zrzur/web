@@ -68,6 +68,7 @@ import {
   SafetyReviewPage,
   safetyAccess,
 } from "./user/safety";
+import { SaveDataSettings } from "./user/SaveData";
 import { Sessions } from "./user/Sessions";
 import { PlusPage, Subscriptions } from "./user/subscriptions";
 import { ContactSupport } from "./user/support/ContactSupport";
@@ -195,6 +196,8 @@ const Config: SettingsConfiguration<{ server: Server }> = {
         return <KeybindsSettings />;
       case "notifications":
         return <Notifications isDesktop={!!window.native} />;
+      case "data":
+        return <SaveDataSettings />;
       default:
         return null;
     }
@@ -482,6 +485,11 @@ const Config: SettingsConfiguration<{ server: Server }> = {
               id: "notifications",
               icon: <MdNotifications {...iconSize(20)} />,
               title: <Trans>Notifications</Trans>,
+            },
+            {
+              id: "data",
+              icon: <Icon name="cloud-arrow-down" size={20} />,
+              title: <Trans>Save data</Trans>,
             },
             {
               id: "keybinds",

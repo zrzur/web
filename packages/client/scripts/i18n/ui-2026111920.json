@@ -1,0 +1,20 @@
+{
+  "Save data": ["توفير البيانات", "Daten sparen"],
+  "For weak or metered internet. The choice is kept on this device only, so your phone and your computer can differ.": ["للإنترنت الضعيف أو المحدود. يُحفظ هذا الاختيار على هذا الجهاز فقط، فيمكن أن يختلف هاتفك عن حاسوبك.", "Für schwaches oder volumenbegrenztes Internet. Die Wahl gilt nur für dieses Gerät, Handy und Computer können sich also unterscheiden."],
+  "Uses less mobile data. You can load anything with a tap.": ["يستهلك بيانات أقل. يمكنك تحميل أي شيء بضغطة.", "Verbraucht weniger mobile Daten. Alles lässt sich mit einem Tippen laden."],
+  "What changes while it is on": ["ما الذي يتغيّر عند تفعيله", "Was sich ändert, solange es an ist"],
+  "Large pictures wait for a tap. Small ones load as usual.": ["الصور الكبيرة تنتظر ضغطة منك. الصور الصغيرة تُحمَّل كالمعتاد.", "Große Bilder warten auf ein Tippen. Kleine laden wie gewohnt."],
+  "GIFs and videos do not load or play until you tap them.": ["صور GIF ومقاطع الفيديو لا تُحمَّل ولا تعمل حتى تضغط عليها.", "GIFs und Videos laden und starten erst, wenn du sie antippst."],
+  "Link previews show their text. Their pictures wait for a tap.": ["معاينات الروابط تعرض نصها. صورها تنتظر ضغطة منك.", "Linkvorschauen zeigen ihren Text. Ihre Bilder warten auf ein Tippen."],
+  "Avatars, server icons and banners load as previews, never as the animated original.": ["الصور الرمزية وأيقونات السيرفرات والبانرات تُحمَّل كمعاينات، لا كأصل متحرك.", "Avatare, Server-Icons und Banner laden als Vorschau, nie als animiertes Original."],
+  "Animated decorations, nameplates and profile effects stay still.": ["الإطارات المتحركة ولوحات الاسم وتأثيرات الملف الشخصي تبقى ثابتة.", "Animierte Rahmen, Namensschilder und Profileffekte bleiben unbewegt."],
+  "Nothing is downloaded ahead for screens you have not opened.": ["لا يُحمَّل شيء مسبقًا لشاشات لم تفتحها.", "Für Ansichten, die du nicht geöffnet hast, wird nichts vorab geladen."],
+  "In calls your voice is sent at a lower bitrate, and other people's cameras and screens wait for a tap.": ["في المكالمات يُرسَل صوتك بمعدل بت أقل، وكاميرات الآخرين وشاشاتهم تنتظر ضغطة منك.", "In Anrufen wird deine Stimme mit niedrigerer Bitrate gesendet, und Kameras und Bildschirme anderer warten auf ein Tippen."],
+  "Load picture": ["تحميل الصورة", "Bild laden"],
+  "Play GIF": ["تشغيل GIF", "GIF abspielen"],
+  "Show camera": ["عرض الكاميرا", "Kamera anzeigen"],
+  "Show screen": ["عرض الشاشة", "Bildschirm anzeigen"],
+  "Your device asks to use less data. Turn on Save data?": ["جهازك يطلب استهلاك بيانات أقل. هل تريد تفعيل توفير البيانات؟", "Dein Gerät möchte weniger Daten verbrauchen. „Daten sparen“ einschalten?"],
+  "Turn on": ["تفعيل", "Einschalten"],
+  "Save data is on. You can change it in Settings.": ["توفير البيانات مفعّل. يمكنك تغييره من الإعدادات.", "„Daten sparen“ ist an. Du kannst es in den Einstellungen ändern."]
+}
