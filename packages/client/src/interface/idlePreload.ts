@@ -1,3 +1,8 @@
+import {
+  allowsLoadingAhead,
+  saveData,
+} from "../../components/common/lib/saveData";
+
 type Load = () => Promise<unknown>;
 
 type Connection = { saveData?: boolean; effectiveType?: string };
@@ -21,8 +26,12 @@ export const NEXT_SCREENS: Load[] = [
 ];
 
 /** Whether downloading ahead is welcome on this connection */
-export function canLoadAhead(connection?: Connection) {
-  return !connection?.saveData && !connection?.effectiveType?.includes("2g");
+export function canLoadAhead(connection?: Connection, saving = false) {
+  return (
+    allowsLoadingAhead(saving) &&
+    !connection?.saveData &&
+    !connection?.effectiveType?.includes("2g")
+  );
 }
 
 /**
@@ -33,7 +42,7 @@ export function canLoadAhead(connection?: Connection) {
 export function preloadWhenIdle(loads: Load[]) {
   const connection = (navigator as Navigator & { connection?: Connection })
     .connection;
-  if (!canLoadAhead(connection)) return () => undefined;
+  if (!canLoadAhead(connection, saveData())) return () => undefined;
 
   let stopped = false;
   let cancelWait = () => {};
