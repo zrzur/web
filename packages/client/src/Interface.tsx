@@ -40,6 +40,7 @@ import { goingHome } from "./interface/home/goingHome";
 import { NEXT_SCREENS, preloadWhenIdle } from "./interface/idlePreload";
 import { PhoneTabs } from "./interface/navigation/PhoneTabs";
 import { warmPhoneScreens } from "./interface/warmScreens";
+import { dialogAddress, openDialogAt } from "./redirects";
 
 /** Longest wait for unread state before Home draws without it */
 const UNREADS_WAIT = 800;
@@ -67,7 +68,7 @@ const InstallOffer = lazy(() =>
 const Interface = (props: { children?: JSX.Element }) => {
   const state = useState();
   const client = useClient();
-  const { openModal } = useModals();
+  const { openModal, showError } = useModals();
   const { isLoggedIn, lifecycle } = useClientLifecycle();
   const device = useDevice();
   // reactive copy, for the panel corner when the channel list is hidden
@@ -75,9 +76,12 @@ const Interface = (props: { children?: JSX.Element }) => {
 
   useBeforeLeave((e) => {
     if (!e.defaultPrevented) {
-      if (e.to === "/settings") {
+      // an address that stands for a dialog (settings, an invite, a bot):
+      // the dialog opens over this page and the person stays where they are
+      const dialog = typeof e.to === "string" ? dialogAddress(e.to) : undefined;
+      if (dialog) {
         e.preventDefault();
-        openModal({ type: "settings", config: "user" });
+        openDialogAt(dialog, client, { openModal, showError });
       } else if (typeof e.to === "string") {
         state.layout.setLastActivePath(e.to);
       }

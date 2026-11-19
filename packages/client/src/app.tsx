@@ -2,17 +2,17 @@
 /**
  * The app: every page of the signed-in app, plus sign-in
  */
-import { lazy, onMount } from "solid-js";
+import { lazy } from "solid-js";
 
-import { Navigate, Route, useParams } from "@solidjs/router";
-import { PublicChannelInvite } from "@zrzur/sdk/solid";
-
-import { useClient } from "@revolt/client";
-import { useModals } from "@revolt/modal";
-import { isInviteCode } from "@revolt/modal/modals/inviteLink";
-import { useState } from "@revolt/state";
+import { Route } from "@solidjs/router";
 
 import { MountContext, loginRoutes, renderRoutes } from "./mount";
+import {
+  BotRedirect,
+  InviteRedirect,
+  PWARedirect,
+  SettingsRedirect,
+} from "./redirects";
 
 // pages that are not part of chatting load on first visit
 // The signed-in app loads after the first screen: someone on the login page
@@ -76,78 +76,6 @@ const ServiceReturn = lazy(() =>
 const OAuthPages = lazy(() =>
   import("./interface/OAuth").then((m) => ({ default: m.OAuthPages })),
 );
-
-/**
- * Redirect PWA start to the last active path
- */
-function PWARedirect() {
-  const state = useState();
-  return <Navigate href={state.layout.getLastActivePath()} />;
-}
-
-/**
- * Open settings and redirect to last active path
- */
-function SettingsRedirect() {
-  const { openModal } = useModals();
-
-  onMount(() => openModal({ type: "settings", config: "user" }));
-  return <PWARedirect />;
-}
-
-/**
- * Open invite and redirect to last active path
- */
-function InviteRedirect() {
-  const params = useParams();
-  const client = useClient();
-  const { openModal, showError } = useModals();
-
-  onMount(() => {
-    if (params.code && isInviteCode(params.code)) {
-      client()
-        // TODO: add a helper to stoat.js for this
-        .api.get(`/invites/${params.code as ""}`)
-        .then((invite) => PublicChannelInvite.from(client(), invite))
-        .then((invite) => openModal({ type: "invite", invite }))
-        .catch(showError);
-    }
-  });
-
-  return <PWARedirect />;
-}
-
-/**
- * Open bot invite and redirect to last active path
- */
-function BotRedirect() {
-  const params = useParams();
-  const client = useClient();
-  const { openModal, showError } = useModals();
-
-  onMount(() => {
-    if (params.code && isInviteCode(params.code)) {
-      client()
-        // kept by the SDK: the bot's card and this dialog share one request
-        .bots.fetchPublic(params.code)
-        .then((invite) => {
-          // invite links from the Developer Portal carry the permissions
-          const asked = Number(
-            new URLSearchParams(window.location.search).get("permissions"),
-          );
-          openModal({
-            type: "add_bot",
-            invite,
-            permissions:
-              Number.isSafeInteger(asked) && asked > 0 ? asked : undefined,
-          });
-        })
-        .catch(showError);
-    }
-  });
-
-  return <PWARedirect />;
-}
 
 const appRoutes = () => (
   <Route component={MountContext}>

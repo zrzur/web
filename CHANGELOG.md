@@ -2,6 +2,11 @@
 
 ## Unreleased
 
+### Links that open a dialog (2026-11-19)
+
+* **An invite link inside a sentence opens the invite** when it is pressed in the app (also in a bot's private reply). Before, the press did nothing: the invite was only shown when the page was loaded at that address. The same fault is fixed for bot links.
+* **The person stays where they are:** the invite, a bot or settings opens over the page in front of them instead of sending them to the last page they visited.
+
 ### Zrzur without a connection (2026-11-18)
 
 * **The app opens offline** after one visit with a connection: the worker keeps the page of its build and uses it only when the network gives no answer (the network is always asked first, so a release is never served from the device while the server can be reached).
