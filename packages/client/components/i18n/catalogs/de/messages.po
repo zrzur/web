@@ -29266,3 +29266,84 @@ msgstr "Zrzur kann den Link gerade nicht von Discord lesen. Füge stattdessen de
 #: components/modal/lib/ServerImportFlow.tsx
 msgid "Zrzur keeps only what becomes your server. Nothing changes in Discord. Zrzur is not affiliated with Discord."
 msgstr "Zrzur behält nur, was zu deinem Server wird. In Discord ändert sich nichts. Zrzur steht in keiner Verbindung zu Discord."
+
+#: components/app/interface/settings/user/SaveData.tsx
+msgid "Animated decorations, nameplates and profile effects stay still."
+msgstr "Animierte Rahmen, Namensschilder und Profileffekte bleiben unbewegt."
+
+#: components/app/interface/settings/user/SaveData.tsx
+msgid "Avatars, server icons and banners load as previews, never as the animated original."
+msgstr "Avatare, Server-Icons und Banner laden als Vorschau, nie als animiertes Original."
+
+#: components/app/interface/settings/user/SaveData.tsx
+msgid "For weak or metered internet. The choice is kept on this device only, so your phone and your computer can differ."
+msgstr "Für schwaches oder volumenbegrenztes Internet. Die Wahl gilt nur für dieses Gerät, Handy und Computer können sich also unterscheiden."
+
+#: components/app/interface/settings/user/SaveData.tsx
+msgid "GIFs and videos do not load or play until you tap them."
+msgstr "GIFs und Videos laden und starten erst, wenn du sie antippst."
+
+#: components/app/interface/settings/user/SaveData.tsx
+msgid "In calls your voice is sent at a lower bitrate, and other people's cameras and screens wait for a tap."
+msgstr "In Anrufen wird deine Stimme mit niedrigerer Bitrate gesendet, und Kameras und Bildschirme anderer warten auf ein Tippen."
+
+#: components/app/interface/settings/user/SaveData.tsx
+msgid "Large pictures wait for a tap. Small ones load as usual."
+msgstr "Große Bilder warten auf ein Tippen. Kleine laden wie gewohnt."
+
+#: components/app/interface/settings/user/SaveData.tsx
+msgid "Link previews show their text. Their pictures wait for a tap."
+msgstr "Linkvorschauen zeigen ihren Text. Ihre Bilder warten auf ein Tippen."
+
+#: components/ui/components/features/messaging/elements/HeldMedia.tsx
+msgid "Load picture"
+msgstr "Bild laden"
+
+#: components/app/interface/settings/user/SaveData.tsx
+msgid "Nothing is downloaded ahead for screens you have not opened."
+msgstr "Für Ansichten, die du nicht geöffnet hast, wird nichts vorab geladen."
+
+#: components/ui/components/features/messaging/elements/HeldMedia.tsx
+msgid "Play GIF"
+msgstr "GIF abspielen"
+
+#: components/app/interface/settings/user/SaveData.tsx
+#: components/app/interface/settings/UserSettings.tsx
+msgid "Save data"
+msgstr "Daten sparen"
+
+#: components/app/interface/support/SaveDataOffer.tsx
+msgid "Save data is on. You can change it in Settings."
+msgstr "„Daten sparen“ ist an. Du kannst es in den Einstellungen ändern."
+
+#: components/ui/components/features/voice/callCard/ParticipantTile.tsx
+msgid "Show camera"
+msgstr "Kamera anzeigen"
+
+#: components/ui/components/features/voice/callCard/ParticipantTile.tsx
+msgid "Show screen"
+msgstr "Bildschirm anzeigen"
+
+#: components/app/interface/support/SaveDataOffer.tsx
+msgid "Turn on"
+msgstr "Einschalten"
+
+#: components/app/interface/settings/user/SaveData.tsx
+msgid "Uses less mobile data. You can load anything with a tap."
+msgstr "Verbraucht weniger mobile Daten. Alles lässt sich mit einem Tippen laden."
+
+#: components/app/interface/settings/user/SaveData.tsx
+msgid "What changes while it is on"
+msgstr "Was sich ändert, solange es an ist"
+
+#: components/app/interface/support/SaveDataOffer.tsx
+msgid "Your device asks to use less data. Turn on Save data?"
+msgstr "Dein Gerät möchte weniger Daten verbrauchen. „Daten sparen“ einschalten?"
+
+#: components/app/interface/settings/user/SaveData.tsx
+msgid "Animated emoji show still."
+msgstr "Animierte Emojis werden unbewegt gezeigt."
+
+#: components/app/interface/settings/user/SaveData.tsx
+msgid "Pictures load as small previews. One tap loads the full picture."
+msgstr "Bilder laden als kleine Vorschau. Ein Tippen lädt das ganze Bild."

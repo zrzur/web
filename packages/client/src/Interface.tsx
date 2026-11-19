@@ -19,6 +19,7 @@ import { MessageCache } from "@revolt/app/interface/channels/text/MessageCache";
 import { Titlebar } from "@revolt/app/interface/desktop/Titlebar";
 import { ChangeRequestNotice } from "@revolt/app/interface/settings/user/account/ChangeRequestNotice";
 import { NoticeCenter } from "@revolt/app/interface/support/NoticeCenter";
+import { SaveDataOffer } from "@revolt/app/interface/support/SaveDataOffer";
 import { useClient, useClientLifecycle } from "@revolt/client";
 import { State } from "@revolt/client/Controller";
 import { NotificationsWorker } from "@revolt/client/NotificationsWorker";
@@ -307,6 +308,7 @@ const Interface = (props: { children?: JSX.Element }) => {
           <ChangeRequestNotice />
           <UsernameNotice />
           <NoticeCenter />
+          <SaveDataOffer />
         </Show>
         <Show when={isLoggedIn()}>
           <PluginHostGate />

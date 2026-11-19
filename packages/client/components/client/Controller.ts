@@ -2,7 +2,13 @@ import { t } from "@lingui/core/macro";
 import { detect } from "detect-browser";
 import { Accessor, Setter, createMemo, createSignal } from "solid-js";
 
-import { API, Client, ConnectionState, ProtocolV1 } from "@zrzur/sdk/solid";
+import {
+  API,
+  Client,
+  ConnectionState,
+  File,
+  ProtocolV1,
+} from "@zrzur/sdk/solid";
 
 import type { OfflineData } from "./offline";
 
@@ -29,9 +35,13 @@ import {
   forgetStoredEphemeral,
 } from "../app/interface/channels/text/interactions/ephemeralStorage";
 import { forgetCreators } from "../common/lib/creatorCache";
+import { stillFileUrlsWhenSaving } from "../common/lib/saveData";
 import Instance from "../instance/Instance";
 import { killServiceWorkerSubscription } from "./NotificationsController";
 import { reconnectDelay } from "./reconnectDelay";
+
+// Save data: no avatar, icon or banner is asked for as its animated original
+stillFileUrlsWhenSaving(File.prototype);
 
 /** Tries of the first "does this account exist" question after the first */
 const HELLO_RETRIES = 3;

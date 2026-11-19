@@ -29,6 +29,17 @@
 * **A link that has ended says so**, as does one of a server that paused invites, with a way on. A lost connection is not blamed on the link.
 * **Link previews:** `packages/public-pages` gains `SITE=invite`, which fills the head of `/invite/{code}` with the server's name, picture, description and a rounded member count for other apps' previews. Never the inviter, never a message. Invite pages carry `noindex`.
 * The page of a server's custom link does not say "invited by".
+### Save data (2026-11-19)
+
+* **A new setting, Settings > Save data,** for weak or metered internet. It is off until you turn it on and is kept on the device, so a phone on mobile data and a computer on a home line can differ.
+* **Pictures** show as a small preview (up to 480 px, a few kilobytes) with the full size on a chip; one tap loads the picture. This needs a file server that makes small previews (it says so in its greeting). On an older one, a large picture waits for a tap behind a placeholder with its size, and pictures up to 150 KB load as usual.
+* **GIFs and videos** neither load nor play until tapped; a GIF shows its first frame with a play mark where small previews are made. Sound and video players fetch nothing before Play.
+* **Link previews** show their text; their pictures wait for a tap.
+* **Avatars, server icons and banners** never load as the animated original, and come small (96 px, banners 640 px) where small previews are made; custom emoji come small and still there too. Animated decorations, nameplates and profile effects stay still.
+* **Nothing is downloaded ahead** for screens that were not opened.
+* **Calls:** your voice is sent at 24 kbps instead of 64, and other people's cameras and screen shares wait for a tap ("Show camera", "Show screen"). Music mode keeps its own rate.
+* **Offered once, never forced:** a device whose own data saver is on, or whose connection the browser rates as 2G, gets one short message with a "Turn on" button. Closing it is a no; it is not shown again.
+* Not in this round: small previews of the pictures of link previews (the link proxy passes a site's file through unchanged), so those wait for a tap.
 
 ### Zrzur without a connection (2026-11-18)
 

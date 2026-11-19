@@ -2649,6 +2649,14 @@ msgstr "Animé"
 msgid "Animated avatars and emoji"
 msgstr "Avatars et émojis animés"
 
+#: components/app/interface/settings/user/SaveData.tsx
+msgid "Animated decorations, nameplates and profile effects stay still."
+msgstr "Les décorations animées, plaques de nom et effets de profil restent immobiles."
+
+#: components/app/interface/settings/user/SaveData.tsx
+msgid "Animated emoji show still."
+msgstr "Les émojis animés restent immobiles."
+
 #: components/app/interface/settings/user/profile/studio/StudioHome.tsx
 msgid "Animated PNG, GIF, WebP or WebM"
 msgstr "PNG animé, GIF, WebP ou WebM"
@@ -3329,6 +3337,10 @@ msgstr "Décoration d’avatar"
 #: src/interface/Designs.tsx
 #~ msgid "Avatar decorations"
 #~ msgstr ""
+
+#: components/app/interface/settings/user/SaveData.tsx
+msgid "Avatars, server icons and banners load as previews, never as the animated original."
+msgstr "Les avatars, icônes de serveur et bannières se chargent en aperçu, jamais en original animé."
 
 #: components/app/interface/settings/server/TicketsSettings.tsx
 #~ msgid "Average rating"
@@ -9071,6 +9083,10 @@ msgstr "Pour la musique : 128 kbit/s en stéréo, avec les traitements ci-dessou
 msgid "For the people who keep Zrzur flying."
 msgstr "Pour celles et ceux qui font voler Zrzur."
 
+#: components/app/interface/settings/user/SaveData.tsx
+msgid "For weak or metered internet. The choice is kept on this device only, so your phone and your computer can differ."
+msgstr "Pour une connexion faible ou limitée. Ce choix reste sur cet appareil seulement : ton téléphone et ton ordinateur peuvent différer."
+
 #: src/interface/Developers.tsx
 msgid "For your app's sign-in: the app puts a new state and code challenge into it for every sign-in. Opened as it is, the link does not work."
 msgstr "Pour la connexion de ton appli : l’appli y place un nouveau state et un nouveau code challenge à chaque connexion. Ouvert tel quel, le lien ne fonctionne pas."
@@ -9578,6 +9594,10 @@ msgstr "GIF"
 #: src/interface/channels/text/Composition.tsx
 msgid "GIF picker"
 msgstr "Sélecteur de GIF"
+
+#: components/app/interface/settings/user/SaveData.tsx
+msgid "GIFs and videos do not load or play until you tap them."
+msgstr "Les GIF et les vidéos ne se chargent et ne se lancent que lorsque tu les touches."
 
 #: components/ui/components/features/messaging/composition/picker/GifPicker.tsx
 msgid "GIFs aren't available yet"
@@ -10618,6 +10638,10 @@ msgstr "Dans un serveur."
 #~ msgid "In about ten minutes you will have a bot that answers a slash command in your own test server. You need a Zrzur account, a server of your own and Node.js 22 or newer. There is nothing to install."
 #~ msgstr "En une dizaine de minutes, tu auras un bot qui répond à une commande slash dans ton propre serveur de test. Il te faut un compte Zrzur, un serveur à toi et Node.js 22 ou une version plus récente. Il n’y a rien à installer."
 
+#: components/app/interface/settings/user/SaveData.tsx
+msgid "In calls your voice is sent at a lower bitrate, and other people's cameras and screens wait for a tap."
+msgstr "En appel, ta voix est envoyée à un débit plus faible, et les caméras et écrans des autres attendent un toucher."
+
 #: components/ui/components/features/profiles/ProfileMutuals.tsx
 msgid "In common"
 msgstr "En commun"
@@ -11575,6 +11599,10 @@ msgstr "Lanternes"
 msgid "Laos"
 msgstr "Laos"
 
+#: components/app/interface/settings/user/SaveData.tsx
+msgid "Large pictures wait for a tap. Small ones load as usual."
+msgstr "Les grandes images attendent un toucher. Les petites se chargent comme d’habitude."
+
 #: components/app/interface/settings/user/bots/CommandManager.tsx
 msgid "Largest value"
 msgstr "Valeur maximale"
@@ -11934,6 +11962,10 @@ msgstr "Lien copié"
 msgid "Link name"
 msgstr "Nom du lien"
 
+#: components/app/interface/settings/user/SaveData.tsx
+msgid "Link previews show their text. Their pictures wait for a tap."
+msgstr "Les aperçus de liens affichent leur texte. Leurs images attendent un toucher."
+
 #: components/app/interface/settings/server/AutoModSettings.tsx
 msgid "Link spam"
 msgstr "Spam de liens"
@@ -12069,6 +12101,10 @@ msgstr "Charger plus de membres"
 #: components/app/interface/settings/server/audit/AuditLog.tsx
 msgid "Load older entries"
 msgstr "Charger les entrées plus anciennes"
+
+#: components/ui/components/features/messaging/elements/HeldMedia.tsx
+msgid "Load picture"
+msgstr "Charger l’image"
 
 #: components/app/interface/settings/server/assistant/AssistantPage.tsx
 msgid "Load settings file"
@@ -15067,6 +15103,10 @@ msgstr "Rien dans la nuée ne correspond"
 #~ msgid "Nothing included matches. Community designs are below."
 #~ msgstr ""
 
+#: components/app/interface/settings/user/SaveData.tsx
+msgid "Nothing is downloaded ahead for screens you have not opened."
+msgstr "Rien n’est téléchargé à l’avance pour les écrans que tu n’as pas ouverts."
+
 #: components/app/interface/settings/user/plugins/ReviewTab.tsx
 msgid "Nothing is waiting for review."
 msgstr "Rien n’attend d’être examiné."
@@ -16548,6 +16588,10 @@ msgstr "Anneau pique-nique"
 msgid "Pictures and videos sent in this channel show here."
 msgstr "Les images et vidéos envoyées dans ce salon apparaissent ici."
 
+#: components/app/interface/settings/user/SaveData.tsx
+msgid "Pictures load as small previews. One tap loads the full picture."
+msgstr "Les images se chargent en petit aperçu. Un toucher charge l’image entière."
+
 #: components/modal/modals/PinMessage.tsx
 msgid "Pin"
 msgstr "Épingler"
@@ -16721,6 +16765,10 @@ msgstr "Rejouer"
 #: components/auth/src/AuthPage.tsx
 #~ msgid "Play all"
 #~ msgstr "Tout lire"
+
+#: components/ui/components/features/messaging/elements/HeldMedia.tsx
+msgid "Play GIF"
+msgstr "Lire le GIF"
 
 #: components/app/interface/settings/user/appearance/AnimationSettings.tsx
 msgid "Play preview"
@@ -19238,6 +19286,15 @@ msgstr "Enregistrer la commande"
 msgid "Save current"
 msgstr "Enregistrer l’actuel"
 
+#: components/app/interface/settings/user/SaveData.tsx
+#: components/app/interface/settings/UserSettings.tsx
+msgid "Save data"
+msgstr "Économiser les données"
+
+#: components/app/interface/support/SaveDataOffer.tsx
+msgid "Save data is on. You can change it in Settings."
+msgstr "« Économiser les données » est activé. Tu peux le changer dans les paramètres."
+
 #: components/app/interface/settings/user/profile/studio/StudioEditor.tsx
 msgid "Save draft"
 msgstr "Enregistrer le brouillon"
@@ -20358,6 +20415,10 @@ msgstr "Tout afficher ({0})"
 msgid "Show as a card"
 msgstr "Afficher sous forme de carte"
 
+#: components/ui/components/features/voice/callCard/ParticipantTile.tsx
+msgid "Show camera"
+msgstr "Afficher la caméra"
+
 #: components/app/interface/settings/user/plugins/ReviewTab.tsx
 msgid "Show code"
 msgstr "Afficher le code"
@@ -20462,6 +20523,10 @@ msgstr "Afficher les effets de profil"
 #: src/interface/channels/text/SearchFiltersPhone.tsx
 msgid "Show results"
 msgstr "Afficher les résultats"
+
+#: components/ui/components/features/voice/callCard/ParticipantTile.tsx
+msgid "Show screen"
+msgstr "Afficher l’écran"
 
 #: components/app/interface/settings/server/assistant/labels.ts
 msgid "Show the Hijri date"
@@ -23799,8 +23864,8 @@ msgid "Tick the box to accept before you continue."
 msgstr "Cochez la case pour accepter avant de continuer."
 
 #: src/interface/tickets/TicketAction.tsx
-msgid "Ticket actions"
-msgstr "Actions du ticket"
+#~ msgid "Ticket actions"
+#~ msgstr "Actions du ticket"
 
 #: components/app/interface/settings/server/assistant/labels.ts
 msgid "Ticket categories, one per line"
@@ -24253,6 +24318,10 @@ msgstr "Désactive pour démarrer le mode sans échec, qui arrête tous les plug
 #: components/auth/src/flows/FlowConfirmChange.tsx
 msgid "Turn off two-factor authentication?"
 msgstr "Désactiver l’authentification à deux facteurs ?"
+
+#: components/app/interface/support/SaveDataOffer.tsx
+msgid "Turn on"
+msgstr "Activer"
 
 #: components/app/interface/settings/user/StreamerMode.tsx
 msgid "Turn on while sharing your screen"
@@ -25069,6 +25138,10 @@ msgstr "Les utilisateurs devront confirmer leur âge avant d'ouvrir ce salon."
 msgid "Users will no longer be asked to confirm their age before joining this channel.<0/> Please ensure the content is appropriate for all ages."
 msgstr "Les utilisateurs ne seront plus invités à confirmer leur âge avant de rejoindre ce salon.<0/> Veuillez vous assurer que le contenu est adapté à tous les âges."
 
+#: components/app/interface/settings/user/SaveData.tsx
+msgid "Uses less mobile data. You can load anything with a tap."
+msgstr "Consomme moins de données mobiles. Tu peux tout charger d’un simple toucher."
+
 #: components/app/interface/settings/user/voice/VoiceProcessingOptions.tsx
 msgid "Uses the browser's echo cancellation."
 msgstr "Utilise l’annulation d’écho du navigateur."
@@ -25810,6 +25883,10 @@ msgstr "Qu’est-ce qui t’amène ?"
 #: components/app/interface/settings/user/plugins/DeveloperTab.tsx
 msgid "What changed (shown to users)"
 msgstr "Ce qui a changé (visible par les utilisateurs)"
+
+#: components/app/interface/settings/user/SaveData.tsx
+msgid "What changes while it is on"
+msgstr "Ce qui change quand c’est activé"
 
 #: components/modal/modals/CreatePoll.tsx
 msgid "What do you want to ask?"
@@ -27237,6 +27314,10 @@ msgstr "Ton appareil autorise tous les mouvements."
 #: components/app/interface/settings/user/appearance/AnimationSettings.tsx
 msgid "Your device asks for less motion."
 msgstr "Ton appareil demande moins de mouvement."
+
+#: components/app/interface/support/SaveDataOffer.tsx
+msgid "Your device asks to use less data. Turn on Save data?"
+msgstr "Ton appareil demande à utiliser moins de données. Activer « Économiser les données » ?"
 
 #: components/app/interface/settings/shared/Discoverable.tsx
 msgid "Your discover request has been denied"

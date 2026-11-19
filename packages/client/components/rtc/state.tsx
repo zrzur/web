@@ -1,3 +1,4 @@
+import { saveData, voiceBitrateWhenSaving } from "@revolt/common/lib/saveData";
 import {
   Accessor,
   batch,
@@ -398,7 +399,12 @@ class Voice {
       const room = this.room();
       const level = this.channel()?.server?.supercharge?.level;
       const bitrate = callBitrate(
-        voiceBitrateFor(level),
+        // Save data sends voice at a lower rate; music mode is the
+        // person's own choice and keeps its rate
+        voiceBitrateWhenSaving(
+          saveData() && !this.#settings.highQualityAudio,
+          voiceBitrateFor(level),
+        ),
         this.#settings.highQualityAudio,
       );
       this.#setBitrate(bitrate);
@@ -571,7 +577,10 @@ class Voice {
 
     // the call carries the voice quality of the server's level; the call
     // bar shows the same number
-    const voiceBitrate = voiceBitrateFor(channel.server?.supercharge?.level);
+    const voiceBitrate = voiceBitrateWhenSaving(
+      saveData() && !this.#settings.highQualityAudio,
+      voiceBitrateFor(channel.server?.supercharge?.level),
+    );
     this.#setBitrate(
       callBitrate(voiceBitrate, this.#settings.highQualityAudio),
     );

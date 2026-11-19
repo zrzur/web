@@ -31,6 +31,12 @@ describe("canLoadAhead", () => {
     expect(canLoadAhead({ effectiveType: "2g" })).toBe(false);
     expect(canLoadAhead({ effectiveType: "slow-2g" })).toBe(false);
   });
+
+  it("loads nothing ahead while Save data is on, whatever the connection", () => {
+    expect(canLoadAhead(undefined, true)).toBe(false);
+    expect(canLoadAhead({ effectiveType: "4g" }, true)).toBe(false);
+    expect(canLoadAhead({ effectiveType: "4g" }, false)).toBe(true);
+  });
 });
 
 describe("preloadWhenIdle", () => {

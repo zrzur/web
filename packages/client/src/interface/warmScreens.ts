@@ -15,10 +15,20 @@
  * they may never open.
  */
 
+import {
+  allowsLoadingAhead,
+  saveData,
+} from "../../components/common/lib/saveData";
+
 type Connection = { saveData?: boolean; effectiveType?: string };
 
 /** May this device fetch ahead? */
-export function mayWarm(connection: Connection | undefined): boolean {
+export function mayWarm(
+  connection: Connection | undefined,
+  saving = false,
+): boolean {
+  // Save data: a person pays for what they may never open
+  if (!allowsLoadingAhead(saving)) return false;
   if (!connection) return true;
   if (connection.saveData) return false;
   return !/(^|-)2g$/.test(connection.effectiveType ?? "");
@@ -44,7 +54,10 @@ export function warmPhoneScreens(delay = 4000) {
   if (started) return;
   started = true;
   if (
-    !mayWarm((navigator as Navigator & { connection?: Connection }).connection)
+    !mayWarm(
+      (navigator as Navigator & { connection?: Connection }).connection,
+      saveData(),
+    )
   )
     return;
 

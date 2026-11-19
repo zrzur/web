@@ -16,6 +16,12 @@ describe("warmScreens: when a phone may fetch screens ahead", () => {
     expect(mayWarm({ effectiveType: "4g", saveData: true })).toBe(false);
   });
 
+  it("does not while Save data is on in the app, whatever the connection", () => {
+    expect(mayWarm(undefined, true)).toBe(false);
+    expect(mayWarm({ effectiveType: "4g" }, true)).toBe(false);
+    expect(mayWarm({ effectiveType: "4g" }, false)).toBe(true);
+  });
+
   it("does not on a very slow connection", () => {
     expect(mayWarm({ effectiveType: "2g" })).toBe(false);
     expect(mayWarm({ effectiveType: "slow-2g" })).toBe(false);

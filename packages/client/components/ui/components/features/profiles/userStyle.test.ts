@@ -9,6 +9,7 @@ import {
   DECORATIONS,
   NAMEPLATES,
   NAME_FONTS,
+  communityShownUrl,
   effectFileUrl,
   effectStillUrl,
   nameStyle,
@@ -213,5 +214,34 @@ describe("a creator's effect", () => {
     );
     expect(effectFileUrl("https://cdn", "../x")).toBeUndefined();
     expect(effectStillUrl("https://cdn", undefined)).toBeUndefined();
+  });
+});
+
+describe("a community design shown to someone saving data", () => {
+  it("comes as its still frame, for decorations, nameplates and effects", () => {
+    expect(communityShownUrl("https://cdn", "Decoration", "abc", true)).toBe(
+      "https://cdn/decorations/abc",
+    );
+    expect(communityShownUrl("https://cdn", "Nameplate", "abc", true)).toBe(
+      "https://cdn/decorations/abc",
+    );
+    expect(communityShownUrl("https://cdn", "Effect", "abc", true)).toBe(
+      "https://cdn/effects/abc",
+    );
+  });
+
+  it("comes as uploaded for everyone else", () => {
+    expect(communityShownUrl("https://cdn", "Decoration", "abc", false)).toBe(
+      "https://cdn/decorations/abc/original",
+    );
+    expect(communityShownUrl("https://cdn", "Effect", "abc", false)).toBe(
+      "https://cdn/effects/abc/original",
+    );
+  });
+
+  it("is nothing without a file", () => {
+    expect(
+      communityShownUrl("https://cdn", "Decoration", undefined, true),
+    ).toBeUndefined();
   });
 });

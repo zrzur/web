@@ -1,3 +1,4 @@
+import { saveData } from "@revolt/common/lib/saveData";
 import { Show, createSignal } from "solid-js";
 
 import type { WebsiteEmbed } from "@zrzur/sdk/solid";
@@ -131,8 +132,9 @@ export function SpecialEmbed(props: {
             title={props.embed.title ?? undefined}
             // the embed around the card shows the site name and the title
             heading={props.standalone || !props.embed.siteName}
-            // proxied by our own link proxy, never the provider's address
-            thumbnail={props.embed.image?.proxiedURL}
+            // proxied by our own link proxy, never the provider's address;
+            // left out while saving data (the words are enough to decide)
+            thumbnail={saveData() ? undefined : props.embed.image?.proxiedURL}
             onLoad={() => {
               setClicked(true);
               allowMediaPlayer(playerKey(props.embed.specialContent));

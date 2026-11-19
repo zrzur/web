@@ -1,3 +1,4 @@
+import { saveData } from "@revolt/common/lib/saveData";
 import { Show, createSignal, onCleanup, onMount } from "solid-js";
 
 import { useState } from "@revolt/state";
@@ -8,6 +9,8 @@ import { nameplateDrift } from "./userStyle";
 export function useDesignMotion() {
   const state = useState();
   return () =>
+    // Save data: the still frame only, the animated file is never fetched
+    !saveData() &&
     !state.motion.reduced &&
     state.settings.getValue("appearance:profile_effects") !== false;
 }
