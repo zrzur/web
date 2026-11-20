@@ -142,11 +142,11 @@ const base = cva({
     // rows out of view are not styled, laid out or painted: a channel keeps
     // 150 rows or more, and scrolling back or opening a channel spent most of
     // its time on rows nobody could see. A row keeps the size it last had;
-    // one never drawn counts as a typical row. The message list keeps the
+    // one never drawn counts as a short row. The message list keeps the
     // rows it measures exact (HistoryScroller: the reader's row, the rows
     // below it, and all rows while a jump lands).
     contentVisibility: "auto",
-    containIntrinsicSize: "auto 160px",
+    containIntrinsicSize: "auto 64px",
     "[data-exact-rows] &": { contentVisibility: "visible" },
     "&[data-reader-anchor]": { contentVisibility: "visible" },
     "[data-reader-anchor] ~ &": { contentVisibility: "visible" },
