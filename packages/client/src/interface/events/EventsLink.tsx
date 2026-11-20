@@ -2,7 +2,12 @@ import { Show, createEffect, on, onCleanup } from "solid-js";
 
 import { plural } from "@lingui/core/macro";
 import { Trans, useLingui } from "@lingui/solid/macro";
-import { type Client, type Server, serverEventLink } from "@zrzur/sdk/solid";
+import {
+  type Client,
+  type Server,
+  serverEventChannel,
+  serverEventLink,
+} from "@zrzur/sdk/solid";
 import { styled } from "styled-system/jsx";
 
 import { useClient } from "@revolt/client";
@@ -68,6 +73,11 @@ export function EventsLink(props: { server: Server }) {
   const events = () => client().serverEvents.forServer(props.server.id);
   const count = () => events().length;
   const live = () => events().find((event) => event.status === "Active");
+  /** The channel the live event runs in, by its name; none for a link */
+  const placeName = (event: ReturnType<typeof events>[number]) => {
+    const id = serverEventChannel(event.place);
+    return id ? client().channels.get(id)?.name : undefined;
+  };
 
   const onKey = (event: KeyboardEvent) => {
     if (!isEventsShortcut(event, isMac()) || !shown()) return;
@@ -114,16 +124,23 @@ export function EventsLink(props: { server: Server }) {
       <Show when={live()}>
         {(event) => (
           <Banner data-testid="event-banner" aria-live="polite">
-            <BannerHead>
-              <LiveDot aria-hidden="true" />
-              <Trans>Happening now</Trans>
-            </BannerHead>
-            <BannerTitle
-              href={`${href()}/${event()._id}`}
-              onClick={showContent}
-            >
-              {event().title}
-            </BannerTitle>
+            <BannerText>
+              <BannerTitle
+                href={`${href()}/${event()._id}`}
+                onClick={showContent}
+              >
+                {event().title}
+              </BannerTitle>
+              <BannerHead>
+                <LiveDot aria-hidden="true" />
+                <span>
+                  <Trans>Happening now</Trans>
+                </span>
+                <Show when={placeName(event())}>
+                  {(name) => <Place>· {name()}</Place>}
+                </Show>
+              </BannerHead>
+            </BannerText>
             <JoinButton
               event={event()}
               server={props.server}
@@ -185,45 +202,63 @@ const Count = styled("span", {
     fontVariantNumeric: "tabular-nums",
     background: "var(--z-bg-input)",
     color: "var(--z-fg-primary)",
-    "&[data-live]": {
-      background: "color-mix(in srgb, var(--z-live) 20%, transparent)",
-      color: "var(--z-live)",
-    },
   },
 });
 
+/**
+ * The live event as one Settings group: the same surface, border and corners
+ * as the groups in Settings, no colour of its own; only the dot says "live".
+ * Name and place on the start side, the one action on the end side.
+ */
 const Banner = styled("div", {
   base: {
     display: "flex",
-    flexDirection: "column",
-    alignItems: "flex-start",
-    gap: "8px",
+    alignItems: "center",
+    gap: "12px",
     marginInline: "8px",
     marginBlock: "4px 8px",
     padding: "12px",
-    borderRadius: "var(--z-radius, 10px)",
-    background: "color-mix(in srgb, var(--z-live) 10%, var(--z-bg-raised))",
-    border: "1px solid color-mix(in srgb, var(--z-live) 35%, transparent)",
+    borderRadius: "var(--z-shape-card, calc(var(--z-radius, 10px) + 4px))",
+    border:
+      "1px solid var(--z-card-border, var(--z-btn-surface-border, color-mix(in srgb, var(--z-fg-primary) 8%, transparent)))",
+    background: "var(--z-card-bg)",
+  },
+});
+
+const BannerText = styled("div", {
+  base: {
+    flex: 1,
+    minWidth: 0,
+    display: "flex",
+    flexDirection: "column",
+    gap: "4px",
   },
 });
 
 const BannerHead = styled("span", {
   base: {
-    display: "inline-flex",
+    display: "flex",
     alignItems: "center",
-    gap: "8px",
+    gap: "6px",
+    minWidth: 0,
     fontSize: "12px",
-    fontWeight: 700,
-    color: "var(--z-live)",
+    fontWeight: 500,
+    color: "var(--z-fg-secondary)",
+    whiteSpace: "nowrap",
   },
+});
+
+const Place = styled("span", {
+  base: { overflow: "hidden", textOverflow: "ellipsis" },
 });
 
 const LiveDot = styled("span", {
   base: {
+    flexShrink: 0,
     width: "8px",
     height: "8px",
     borderRadius: "999px",
-    background: "currentColor",
+    background: "var(--z-live)",
   },
 });
 
@@ -231,7 +266,7 @@ const BannerTitle = styled(A, {
   base: {
     maxWidth: "100%",
     fontSize: "14px",
-    fontWeight: 650,
+    fontWeight: 600,
     color: "var(--z-fg-primary)",
     textDecoration: "none",
     overflow: "hidden",
