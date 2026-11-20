@@ -294,20 +294,13 @@ const Content = styled("div", {
     lineHeight: "1.5",
     _rtl: { lineHeight: "1.625" },
 
-    // each line reads in its own direction, but stays against the same edge
-    // as the name above it: in an Arabic interface an English line used to
-    // sit far across the screen from its author
+    // each paragraph, list and heading follows its own language, whatever
+    // the app's language (owner, 2026-11-20): English starts at the left,
+    // Arabic at the right. "start" is resolved from the element's own
+    // direction (dir="auto"), so a list's numbers sit on its text's side
     "& [dir='auto']": { textAlign: "start" },
     "& p[dir='auto'], & li[dir='auto'], & blockquote[dir='auto'], & h1[dir='auto'], & h2[dir='auto'], & h3[dir='auto']":
       { unicodeBidi: "plaintext" },
-    ":root:not([dir='rtl']) &": {
-      "& p[dir='auto'], & li[dir='auto'], & blockquote[dir='auto'], & h1[dir='auto'], & h2[dir='auto'], & h3[dir='auto']":
-        { textAlign: "left" },
-    },
-    ":root[dir='rtl'] &": {
-      "& p[dir='auto'], & li[dir='auto'], & blockquote[dir='auto'], & h1[dir='auto'], & h2[dir='auto'], & h3[dir='auto']":
-        { textAlign: "right" },
-    },
   },
 });
 
