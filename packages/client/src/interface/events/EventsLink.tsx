@@ -162,8 +162,8 @@ const Row = styled(A, {
     // icon on the list's start line
     minHeight: "var(--z-row-height, 34px)",
     marginInline: "8px",
-    // the same spacing as the Lobby and Rules rows under it
-    marginBlock: "2px",
+    // no gap between pinned rows, as between channels (owner, 2026-11-20)
+    marginBlock: 0,
     "&:first-child": { marginBlockStart: "8px" },
     paddingInline: "8px",
     borderRadius: "8px",
