@@ -248,7 +248,10 @@ export function HistoryScroller(props: Props) {
   function captureAnchors() {
     anchors = [];
     const rows = rowsElement();
-    if (!rows) return;
+    if (!rows) {
+      markReaderAnchor(undefined);
+      return;
+    }
     const list = rows.children;
     const viewTop = scroller.getBoundingClientRect().top;
 
@@ -265,7 +268,37 @@ export function HistoryScroller(props: Props) {
       const box = list[i].getBoundingClientRect();
       if (box.height) anchors.push({ el: list[i], top: box.top - viewTop });
     }
+    markReaderAnchor(anchors[0]?.el);
   }
+
+  // --- rows the browser may skip
+  //
+  // Message rows have content-visibility: auto (MessageContainer): a row out
+  // of view is not styled, laid out or painted, and counts with the size it
+  // last had, or an estimate if it was never drawn. Rows above the reader
+  // may be estimated: in this column-reverse list their size never moves the
+  // view. The reader's first row and every row below it are always exact
+  // (`[data-reader-anchor] ~ row`), and so is every row while a jump lands
+  // (`data-exact-rows` on the content), because there the measurements
+  // decide where the view goes and which page comes next.
+
+  let readerAnchor: Element | undefined;
+  function markReaderAnchor(el: Element | undefined) {
+    if (el === readerAnchor) return;
+    readerAnchor?.removeAttribute("data-reader-anchor");
+    el?.setAttribute("data-reader-anchor", "");
+    readerAnchor = el;
+  }
+
+  let exactTimer: ReturnType<typeof setTimeout> | undefined;
+  function exactRows(on: boolean) {
+    clearTimeout(exactTimer);
+    exactTimer = undefined;
+    content?.toggleAttribute("data-exact-rows", on);
+    // a landing that is never ended by the list or the reader still ends
+    if (on) exactTimer = setTimeout(() => exactRows(false), LANDING_MS + 500);
+  }
+  onCleanup(() => clearTimeout(exactTimer));
 
   /** Put the remembered rows back where they were */
   function restoreAnchors() {
@@ -319,6 +352,8 @@ export function HistoryScroller(props: Props) {
 
   function apply(move: ViewMove, again = false) {
     if (move.to === "keep") return;
+    // a jump into the history measures rows on both sides of its target
+    if (!again && move.to !== "present") exactRows(true);
     if (!rowsElement() && move.to !== "present") {
       waiting = move;
       return;
@@ -358,7 +393,10 @@ export function HistoryScroller(props: Props) {
   }
 
   /** The reader took over: a landing is no longer corrected */
-  const userInput = () => (landing = undefined);
+  const userInput = () => {
+    if (landing) exactRows(false);
+    landing = undefined;
+  };
 
   // --- the contract with the controller
 
@@ -468,6 +506,7 @@ export function HistoryScroller(props: Props) {
       if (landing && performance.now() < landing.until) {
         apply(landing.move, true);
       } else {
+        if (landing) exactRows(false);
         landing = undefined;
         if (atBottom()) {
           if (scroller.scrollTop !== 0) scroller.scrollTop = 0;
