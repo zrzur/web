@@ -262,8 +262,8 @@
     },
     {
       "path": "CHANGELOG.md",
-      "sha256": "f9de74444ebd73f2b8a0bd853fcaf5bd8bb705cd615f22933a4551d60eba8985",
-      "bytes": 187490,
+      "sha256": "a258c168646c156eae245f09dc85cb9337f74a1005bc07af0e3875a517d8c9d0",
+      "bytes": 189599,
       "category": "public-documentation"
     },
     {
@@ -3550,8 +3550,8 @@
     },
     {
       "path": "packages/client/components/i18n/catalogs/ar/messages.po",
-      "sha256": "ccd02c674bd83927e9584debfb50b87396d296ce007b4fc04df85c30b08f8348",
-      "bytes": 1249165,
+      "sha256": "f2cc3f7b94088f3bdc9c4637320b432354cafd338bc3e69601d0be9b5d725ab8",
+      "bytes": 1251366,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -3694,8 +3694,8 @@
     },
     {
       "path": "packages/client/components/i18n/catalogs/de/messages.po",
-      "sha256": "4ab521d1ccc340b2d7e324483353ac47db605915d42033448ac26c0fbd51ed08",
-      "bytes": 1154404,
+      "sha256": "87b6699a511c763ad1c18ea87de00934103ead80b2403187c350423a93523c21",
+      "bytes": 1156399,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -3730,8 +3730,8 @@
     },
     {
       "path": "packages/client/components/i18n/catalogs/en/messages.po",
-      "sha256": "194d6c9a671bd170c7cfbd761c29838f22964b182b915807eddd2787dc811868",
-      "bytes": 1111805,
+      "sha256": "bbc28f11a5530e086a188eb78409371a50c85e95783106ba56ce125f11aed088",
+      "bytes": 1113766,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -5260,14 +5260,14 @@
     },
     {
       "path": "packages/client/components/modal/modals/ServerEventEditor.dom.test.tsx",
-      "sha256": "33ffef784878614144f63775318b69b04fd901d23cde23885e223adb5468c349",
-      "bytes": 7375,
+      "sha256": "af38ee030e4de4e5c0e94d606f4b444eb79eddad3c94cb1cb14449d64d495ab8",
+      "bytes": 11038,
       "category": "synthetic-test-source-or-fixture"
     },
     {
       "path": "packages/client/components/modal/modals/ServerEventEditor.tsx",
-      "sha256": "3f6d8b164094094c2077ef59dcebae69c8512f12d06aecb297bf39cca5577f8f",
-      "bytes": 33297,
+      "sha256": "0bba3a56ab0a75bbeeeaa40426cf96f87ac005179a9dc47940fea62d517d6372",
+      "bytes": 42436,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -6304,8 +6304,8 @@
     },
     {
       "path": "packages/client/components/ui/components/design/Dialog.tsx",
-      "sha256": "88baa8e6eae8160ceaebcfe5fcba088c67012d95017c7d90cc7d06da42a530d0",
-      "bytes": 27768,
+      "sha256": "2265da33112110c528cec2738ccf58a6e60e973ef4592855cf23b5d0cd3e40e4",
+      "bytes": 28640,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -41691,6 +41691,12 @@
       "category": "product-source-or-build-manifest"
     },
     {
+      "path": "packages/client/scripts/i18n/ui-2026112001.json",
+      "sha256": "6cadcbe177cf12827ee723067369aac45aed3282c2d9dd7f5827f6a1b2d6d765",
+      "bytes": 2120,
+      "category": "product-source-or-build-manifest"
+    },
+    {
       "path": "packages/client/scripts/i18n/ui-210.json",
       "sha256": "a2000336a3928f21687a94a1262b2adbd34f017573f3d1b9b342b3ca93df6d09",
       "bytes": 644,
@@ -43846,14 +43852,14 @@
     },
     {
       "path": "packages/client/src/interface/events/EventCalendar.dom.test.tsx",
-      "sha256": "40931ad00b0b9f2f9a1e0eb2f8002cd79144ca9d68dbab087ab1c532fcc8413b",
-      "bytes": 7647,
+      "sha256": "5817a2c7edd5791e7697ca939377830a6cfd5b78b5a10c8bc10a0e1ff152847c",
+      "bytes": 9249,
       "category": "synthetic-test-source-or-fixture"
     },
     {
       "path": "packages/client/src/interface/events/EventCalendar.tsx",
-      "sha256": "1164ddaf75e426ab2e981a35b4bdbb841af257176380913d7f0441da3385fb81",
-      "bytes": 16940,
+      "sha256": "fe736ae57f2399e6be86cdc51c298119aabca1eee47b7f4d430a241d5748b980",
+      "bytes": 20461,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -43864,8 +43870,8 @@
     },
     {
       "path": "packages/client/src/interface/events/EventCard.tsx",
-      "sha256": "9b9ab5ec1bc19d005df42de7a1e640bf9cf06522a6b8b478e1bcf646d9921a95",
-      "bytes": 14451,
+      "sha256": "1a5bde904061f00d465b5fd9962aa8dba77b65db18af767177f4ef934ff2683d",
+      "bytes": 13855,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -43888,8 +43894,8 @@
     },
     {
       "path": "packages/client/src/interface/events/EventStats.tsx",
-      "sha256": "2412db0b586c44c26055bbc08564ff26a1c331fe78d4ffab2b1764a922f1a8aa",
-      "bytes": 6924,
+      "sha256": "5ef0e169b20da74046281d62aa518844a4b76441d6e5a6dc1b6e46b0de670eb1",
+      "bytes": 6972,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -43906,8 +43912,8 @@
     },
     {
       "path": "packages/client/src/interface/events/EventsPage.tsx",
-      "sha256": "d050233beab4f8b388d4ff0499a7612816c6744a407acef2a17e3019fc855d9c",
-      "bytes": 28023,
+      "sha256": "8396134548d4fa6d144e57d5e69a75630172d2bf0578de7f4fd00ff5f54fbaeb",
+      "bytes": 31505,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -43918,8 +43924,8 @@
     },
     {
       "path": "packages/client/src/interface/events/MyEventsPage.tsx",
-      "sha256": "09a83f863ed0a1d5ce32cf7d9ac3897e790f6b8207cec38c2701daadf939238a",
-      "bytes": 9954,
+      "sha256": "11f9fb50a9384939c1dba68c4623f554a8a7c4671f257fc244ccf669bb6dd126",
+      "bytes": 9956,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -43936,8 +43942,14 @@
     },
     {
       "path": "packages/client/src/interface/events/calendarDays.ts",
-      "sha256": "064a0046594c18b42c8c3c2f77acaf0e8306dad7855f0b8c9b4c360fa0cbded4",
-      "bytes": 4746,
+      "sha256": "a013bf606739158689e01d893f866ece3d684cba1c17ce393ef2fddffd4feeb5",
+      "bytes": 4848,
+      "category": "product-source-or-build-manifest"
+    },
+    {
+      "path": "packages/client/src/interface/events/dateMark.ts",
+      "sha256": "2dff8ed1ebd6304a64f1b772e725f22ffe22bf3a527f6c49d174a1792844c2b1",
+      "bytes": 686,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -43974,6 +43986,12 @@
       "path": "packages/client/src/interface/events/eventTemplates.ts",
       "sha256": "25b5a453b034f180f987ac6921d7dfdb3673a9b55ecb668213c7a0f40a9db35b",
       "bytes": 931,
+      "category": "product-source-or-build-manifest"
+    },
+    {
+      "path": "packages/client/src/interface/events/settled.ts",
+      "sha256": "01f34a2a70873259d1867cad313e66f7762c485bf5b77bd12a0dce735210191a",
+      "bytes": 670,
       "category": "product-source-or-build-manifest"
     },
     {
