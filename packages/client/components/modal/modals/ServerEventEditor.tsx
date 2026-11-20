@@ -1043,30 +1043,43 @@ export function ServerEventEditorModal(
               </Trans>
             }
           >
-            <SettingsFormPanel data-testid="server-event-reminders">
-              <For each={REMINDER_CHOICES}>
-                {(minutes) => (
-                  <Checkbox
-                    checked={reminders().includes(minutes)}
-                    disabled={
-                      !reminders().includes(minutes) &&
-                      reminders().length >= MAX_REMINDERS
+            {/* one Settings row each: the words at the start, the switch at
+                the end, as the seat limit above (owner, 2026-11-20) */}
+            <For each={REMINDER_CHOICES}>
+              {(minutes) => {
+                const on = () => reminders().includes(minutes);
+                const full = () => !on() && reminders().length >= MAX_REMINDERS;
+                const set = (value: boolean) =>
+                  setReminders(
+                    value
+                      ? [
+                          ...reminders().filter((other) => other !== minutes),
+                          minutes,
+                        ]
+                      : reminders().filter((other) => other !== minutes),
+                  );
+                return (
+                  <SettingsRow
+                    data-testid={`server-event-reminder-${minutes}`}
+                    title={
+                      <Trans>
+                        {reminderSpan(minutes, i18n().locale ?? "en")} before
+                      </Trans>
                     }
-                    onChange={(event) =>
-                      setReminders(
-                        event.currentTarget.checked
-                          ? [...reminders(), minutes]
-                          : reminders().filter((value) => value !== minutes),
-                      )
-                    }
-                  >
-                    <Trans>
-                      {reminderSpan(minutes, i18n().locale ?? "en")} before
-                    </Trans>
-                  </Checkbox>
-                )}
-              </For>
-            </SettingsFormPanel>
+                    disabled={full()}
+                    onClick={() => !full() && set(!on())}
+                    control={(ids) => (
+                      <Toggle
+                        aria-labelledby={ids.labelId}
+                        checked={on()}
+                        disabled={full()}
+                        onChange={set}
+                      />
+                    )}
+                  />
+                );
+              }}
+            </For>
           </SettingsSection>
 
           <Show when={problem()}>
