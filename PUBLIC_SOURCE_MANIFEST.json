@@ -45108,7 +45108,7 @@
   "submodules": [
     {
       "path": "packages/stoat.js",
-      "commit": "bbb4962028b46debb9e2a1be180a6d9bc366f3c4"
+      "commit": "d517e8ebcba8a6df6e90be96ed299d262634eb19"
     }
   ]
 }
