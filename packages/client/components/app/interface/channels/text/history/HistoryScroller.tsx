@@ -248,10 +248,7 @@ export function HistoryScroller(props: Props) {
   function captureAnchors() {
     anchors = [];
     const rows = rowsElement();
-    if (!rows) {
-      markReaderAnchor(undefined);
-      return;
-    }
+    if (!rows) return;
     const list = rows.children;
     const viewTop = scroller.getBoundingClientRect().top;
 
@@ -268,27 +265,18 @@ export function HistoryScroller(props: Props) {
       const box = list[i].getBoundingClientRect();
       if (box.height) anchors.push({ el: list[i], top: box.top - viewTop });
     }
-    markReaderAnchor(anchors[0]?.el);
   }
 
   // --- rows the browser may skip
   //
   // Message rows have content-visibility: auto (MessageContainer): a row out
   // of view is not styled, laid out or painted, and counts with the size it
-  // last had, or an estimate if it was never drawn. Rows above the reader
-  // may be estimated: in this column-reverse list their size never moves the
-  // view. The reader's first row and every row below it are always exact
-  // (`[data-reader-anchor] ~ row`), and so is every row while a jump lands
-  // (`data-exact-rows` on the content), because there the measurements
-  // decide where the view goes and which page comes next.
-
-  let readerAnchor: Element | undefined;
-  function markReaderAnchor(el: Element | undefined) {
-    if (el === readerAnchor) return;
-    readerAnchor?.removeAttribute("data-reader-anchor");
-    el?.setAttribute("data-reader-anchor", "");
-    readerAnchor = el;
-  }
+  // last had, or an estimate if it was never drawn. While a jump lands
+  // (a link to a message, a reply, the first unread, coming back to a
+  // channel) every row is exact (`data-exact-rows` on the content): there the
+  // measurements decide where the view goes and which page comes next.
+  // (Marking the reader's row and keeping the rows below it exact was tried:
+  // the sibling selector restyled the whole list on every scroll step.)
 
   let exactTimer: ReturnType<typeof setTimeout> | undefined;
   function exactRows(on: boolean) {

@@ -5,7 +5,7 @@
 ### Speed: scrolling, switching and starting (2026-11-20)
 
 * **Scrolling back and opening a channel or server no longer stall:** a channel keeps 150 rows or more, and the browser styled, laid out and painted every one of them each time a page of older messages came in or a channel opened. Rows out of view are now skipped (`content-visibility: auto` on the message row, which keeps its last size; the hover toolbar and avatar frames are not cut). On the 4x slow-phone profile, scrolling back spends about a quarter less time; on a desktop the blocking time of scrolling back went from 423 ms to 17 ms and of the first server switch from 485 ms to 46 ms.
-* **Jumps stay exact:** only rows above the one being read may be skipped; that row, the rows below it, and every row while a jump lands (a link to a message, a reply, the first unread message, coming back to a channel) are always measured exactly (`HistoryScroller.tsx`), so the view never moves on an estimate.
+* **Jumps stay exact:** while a jump lands (a link to a message, a reply, the first unread message, coming back to a channel) every row is measured exactly (`HistoryScroller.tsx`), so the view never lands on an estimate.
 * **The connection to the API opens earlier:** the page now asks the browser to connect to the API while the app's code is still downloading (`scripts/preconnectApi.mjs`), saving up to one connection set-up (about three round trips) on every start.
 * **Starting is lighter:** every server, channel, member and user in the first answer of the live connection, and every fetched message, was turned into the app's shape by copying the object once per field. The SDK now fills one object (`@zrzur/sdk` hydration, 3x faster, same output).
 
