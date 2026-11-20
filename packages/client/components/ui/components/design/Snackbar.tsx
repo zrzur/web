@@ -216,9 +216,12 @@ const ToastHost = styled("div", {
     transform: "translateX(-50%)",
     pointerEvents: "none",
     width: "min(420px, calc(100vw - 32px))",
-    // phones: above the message box and the tabs, clear of the thumb
+    // phones: one place, just above the message box and the tabs, clear of
+    // the thumb. The computer's extra lift over the chat bar is not added on
+    // top (it put a notice in the middle of the page, owner 2026-11-20)
     _phone: {
       bottom: "calc(88px + var(--z-safe-bottom) + var(--z-screen-bottom, 0px))",
+      "--snackbar-offset-bottom": "0px",
     },
 
     '&[data-placement="top"], &[data-placement="top-start"], &[data-placement="top-end"]':
