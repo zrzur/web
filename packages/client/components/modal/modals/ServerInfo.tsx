@@ -1,6 +1,6 @@
-import { For, Show } from "solid-js";
+import { For, Show, createSignal } from "solid-js";
 
-import { Trans } from "@lingui/solid/macro";
+import { Trans, useLingui } from "@lingui/solid/macro";
 import { styled } from "styled-system/jsx";
 
 import { useClient } from "@revolt/client";
@@ -25,7 +25,9 @@ export function ServerInfoModal(
   props: DialogProps & Modals & { type: "server_info" },
 ) {
   const client = useClient();
+  const { t } = useLingui();
   const { openModal } = useModals();
+  const [copied, setCopied] = createSignal(false);
   const dayjs = useTime();
   const visibleChannels = () =>
     props.server.channels.filter((channel) =>
@@ -85,15 +87,10 @@ export function ServerInfoModal(
             });
           },
         },
-        // on a phone's sheet closing is not the main action, so it is not
-        // the filled button (owner review, 2026-11-17); the computer's
-        // dialog keeps it as it was
-        {
-          text: <Trans>Close</Trans>,
-          variant: window.matchMedia?.("(max-width: 600px)").matches
-            ? "secondary"
-            : undefined,
-        },
+        // closing is not the main action of an information window, so it
+        // is never the filled button (owner review, 2026-11-17 phones,
+        // 2026-11-20 everywhere)
+        { text: <Trans>Close</Trans>, variant: "secondary" },
       ]}
     >
       <Column gap="lg">
@@ -164,16 +161,36 @@ export function ServerInfoModal(
           <SettingsRow
             icon={<Icon name="users" size={20} />}
             title={<Trans>Server owner</Trans>}
-            description={
-              props.server.owner?.displayName ??
-              props.server.owner?.username ??
-              props.server.ownerId
-            }
+            control={() => (
+              <Value dir="auto">
+                {props.server.owner?.displayName ??
+                  props.server.owner?.username ??
+                  props.server.ownerId}
+              </Value>
+            )}
           />
           <SettingsRow
             icon={<Icon name="identification-card" size={20} />}
             title={<Trans>Server ID</Trans>}
-            description={<code>{props.server.id}</code>}
+            control={() => (
+              <CopyId
+                type="button"
+                title={props.server.id}
+                aria-label={`${t`Copy`}: ${props.server.id}`}
+                onClick={() => {
+                  void navigator.clipboard?.writeText(props.server.id);
+                  setCopied(true);
+                  setTimeout(() => setCopied(false), 1500);
+                }}
+              >
+                <code>
+                  {copied()
+                    ? t`Copied`
+                    : `${props.server.id.slice(0, 6)}…${props.server.id.slice(-6)}`}
+                </code>
+                <Icon name={copied() ? "check" : "copy"} size={16} />
+              </CopyId>
+            )}
           />
           <Show when={props.server.mature}>
             <SettingsRow
@@ -260,6 +277,27 @@ const Value = styled("span", {
     fontSize: "15px",
     fontWeight: 600,
     fontVariantNumeric: "tabular-nums",
+  },
+});
+/** The server's id, shortened to one line; a press copies the whole id */
+const CopyId = styled("button", {
+  base: {
+    display: "inline-flex",
+    alignItems: "center",
+    gap: "8px",
+    minHeight: "32px",
+    paddingInline: "8px",
+    border: "none",
+    borderRadius: "8px",
+    background: "transparent",
+    color: "var(--z-fg-secondary)",
+    cursor: "pointer",
+    fontSize: "13px",
+    "--z-icon-color": "currentColor",
+    _hover: { background: "var(--z-nav-hover)", color: "var(--z-fg-primary)" },
+    _focusVisible: { outline: "2px solid var(--z-focus)" },
+    "& code": { unicodeBidi: "plaintext", fontVariantNumeric: "tabular-nums" },
+    _phone: { minHeight: "44px" },
   },
 });
 const Description = styled("div", {

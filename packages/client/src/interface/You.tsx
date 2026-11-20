@@ -5,9 +5,9 @@ import { useQuery } from "@tanstack/solid-query";
 import type { User } from "@zrzur/sdk/solid";
 import { styled } from "styled-system/jsx";
 
-import { useClient, useUser } from "@revolt/client";
-import { savedRemindersEnabled } from "@revolt/app/interface/saved/savedModel";
 import { openInbox } from "@revolt/app/interface/saved/inboxView";
+import { savedRemindersEnabled } from "@revolt/app/interface/saved/savedModel";
+import { useClient, useUser } from "@revolt/client";
 import { billingAvailable } from "@revolt/client/billing";
 import { useDevice } from "@revolt/common";
 import { presencePatch } from "@revolt/common/lib/statusWrite";
@@ -818,10 +818,10 @@ const Panel = styled("div", {
     flexDirection: "column",
     gap: "12px",
     padding: "8px",
-    borderRadius: "var(--z-shape-card, calc(var(--z-radius, 10px) + 4px))",
-    border: "1px solid var(--z-btn-surface-border, var(--z-border-subtle))",
-    background: "var(--z-card-bg, var(--z-bg-raised))",
-    boxShadow: "var(--z-card-lift)",
+    borderRadius: "var(--z-box-radius)",
+    border: "var(--z-box-border)",
+    background: "var(--z-box-bg)",
+    boxShadow: "var(--z-box-shadow)",
     "&:has(> button)": { gap: "2px" },
   },
 });

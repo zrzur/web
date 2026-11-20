@@ -16,9 +16,9 @@ import { Icon } from "@revolt/ui/icons/Icon";
 
 import { useSafetyLabels } from "../../../safety/labels";
 import {
-  SafetyReceipt,
   CONTACT_EMAIL,
   SafetyCategory,
+  SafetyReceipt,
   SafetyStandingEntry,
   SafetyStandingLevel,
   decisionReference,
@@ -190,10 +190,7 @@ export function ReportsAndStanding() {
  * the ground, whether machines were involved, where and how long it applies,
  * how to appeal and the out-of-court option.
  */
-function Statement(props: {
-  entry: SafetyStandingEntry;
-  outOfCourt?: string;
-}) {
+function Statement(props: { entry: SafetyStandingEntry; outOfCourt?: string }) {
   const { t } = useLingui();
   const labels = useSafetyLabels();
   const yes = () => <Trans>yes</Trans>;
@@ -220,9 +217,7 @@ function Statement(props: {
             <Trans>What this followed</Trans>
           </dt>
           <dd>
-            <Switch
-              fallback={<Trans>A report from another person.</Trans>}
-            >
+            <Switch fallback={<Trans>A report from another person.</Trans>}>
               <Match when={props.entry.basis === "Notice"}>
                 <Trans>A notice of illegal content.</Trans>
               </Match>
@@ -643,7 +638,7 @@ const Facts = styled("dl", {
     gap: "8px",
     margin: 0,
     padding: "12px",
-    borderRadius: "var(--z-radius, 10px)",
+    borderRadius: "var(--z-box-radius)",
     // phones: the fill and corner of every settings group, no frame
     // (owner, 2026-11-17: one box look everywhere)
     _phone: {
@@ -653,8 +648,8 @@ const Facts = styled("dl", {
       background:
         "var(--z-sheet-group, color-mix(in srgb, var(--z-fg-primary) 5%, transparent))",
     },
-    border: "1px solid var(--z-border-subtle)",
-    background: "var(--z-bg-input)",
+    border: "var(--z-box-border)",
+    background: "var(--z-box-bg)",
     fontSize: "13px",
     "& dt": {
       fontSize: "12px",

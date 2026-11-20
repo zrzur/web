@@ -156,9 +156,10 @@ export const Summary = styled("div", {
     flexDirection: "column",
     gap: "8px",
     padding: "14px",
-    borderRadius: "12px",
-    background: "var(--z-bg-input)",
+    borderRadius: "var(--z-box-radius)",
+    background: "var(--z-box-bg)",
     fontSize: "14px",
+    border: "var(--z-box-border)",
   },
 });
 

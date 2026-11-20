@@ -45,10 +45,10 @@ const Base = styled("div", {
     flexDirection: "row",
     gap: "12px",
     padding: "12px",
-    borderRadius: "10px",
+    borderRadius: "var(--z-box-radius)",
     color: "var(--z-fg-secondary)",
-    background: "var(--z-bg-raised)",
-    border: "1px solid var(--z-border-soft)",
+    background: "var(--z-box-bg)",
+    border: "var(--z-box-border)",
     // the embed's own colour as a slim leading rule; neutral when it has none
     borderInlineStart: "2px solid var(--z-border-strong)",
     fontSize: "13px",

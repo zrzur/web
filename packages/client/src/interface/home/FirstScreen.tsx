@@ -137,10 +137,10 @@ const Hero = styled("section", {
     gap: "16px",
     minWidth: 0,
     padding: "24px",
-    borderRadius: "var(--z-shape-card, calc(var(--z-radius, 10px) + 4px))",
-    border: "1px solid var(--z-card-border)",
-    background: "var(--z-card-bg, transparent)",
-    boxShadow: "var(--z-card-lift)",
+    borderRadius: "var(--z-box-radius)",
+    border: "var(--z-box-border)",
+    background: "var(--z-box-bg)",
+    boxShadow: "var(--z-box-shadow)",
     _phone: { padding: "16px" },
 
     "& h1": {

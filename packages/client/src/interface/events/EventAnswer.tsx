@@ -284,9 +284,10 @@ const Fill = styled("div", {
 const Failure = styled("div", {
   base: {
     padding: "12px",
-    borderRadius: "var(--z-radius, 10px)",
-    background: "color-mix(in srgb, var(--z-danger) 12%, transparent)",
+    borderRadius: "var(--z-box-radius)",
+    background: "var(--z-box-bg)",
     fontSize: "13px",
     lineHeight: "18px",
+    border: "var(--z-box-border)",
   },
 });

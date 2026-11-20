@@ -725,11 +725,10 @@ const Banner = styled("div", {
     alignItems: "center",
     gap: "14px",
     padding: "12px 16px 12px 12px",
-    borderRadius: "calc(var(--z-radius, 10px) + 4px)",
-    border:
-      "1px solid var(--z-card-border, var(--z-btn-surface-border, color-mix(in srgb, var(--z-fg-primary) 8%, transparent)))",
-    background: "var(--z-card-bg)",
-    boxShadow: "var(--z-card-lift)",
+    borderRadius: "var(--z-box-radius)",
+    border: "var(--z-box-border)",
+    background: "var(--z-box-bg)",
+    boxShadow: "var(--z-box-shadow)",
     "--tone": "var(--z-fg-secondary)",
     "--z-icon-color": "var(--tone)",
 
@@ -794,10 +793,10 @@ const Form = styled("div", {
     flexDirection: "column",
     gap: "18px",
     padding: "16px",
-    borderRadius: "calc(var(--z-radius, 10px) + 4px)",
-    border: "1px solid var(--z-card-border)",
-    background: "var(--z-card-bg)",
-    boxShadow: "var(--z-card-lift)",
+    borderRadius: "var(--z-box-radius)",
+    border: "var(--z-box-border)",
+    background: "var(--z-box-bg)",
+    boxShadow: "var(--z-box-shadow)",
   },
 });
 

@@ -31,10 +31,10 @@ export const AttachmentContainer = styled(Column, {
   base: {
     gap: "8px",
     padding: "8px 12px",
-    borderRadius: "10px",
+    borderRadius: "var(--z-box-radius)",
     color: "var(--z-fg-primary)",
-    background: "var(--z-bg-raised)",
-    border: "1px solid var(--z-border-soft)",
+    background: "var(--z-box-bg)",
+    border: "var(--z-box-border)",
     alignSelf: "start",
     width: "420px",
     maxWidth: "100%",

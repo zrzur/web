@@ -1432,11 +1432,12 @@ const Notice = styled("p", {
 const ErrorBox = styled("div", {
   base: {
     padding: "12px",
-    borderRadius: "var(--z-radius-md, 10px)",
-    background: "var(--z-card-bg)",
+    borderRadius: "var(--z-box-radius)",
+    background: "var(--z-box-bg)",
     borderInlineStart: "4px solid var(--z-danger)",
     color: "var(--z-fg-primary)",
     "& ul": { margin: "8px 0 0", paddingInlineStart: "20px" },
+    border: "var(--z-box-border)",
   },
 });
 

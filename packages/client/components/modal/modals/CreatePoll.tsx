@@ -488,9 +488,9 @@ const Preview = styled("section", {
     flexDirection: "column",
     gap: "8px",
     padding: "12px",
-    borderRadius: "var(--z-radius-md)",
-    border: "1px dashed var(--z-border-strong)",
-    background: "var(--z-bg-raised)",
+    borderRadius: "var(--z-box-radius)",
+    border: "var(--z-box-border)",
+    background: "var(--z-box-bg)",
     minWidth: 0,
   },
 });

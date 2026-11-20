@@ -141,8 +141,8 @@ const Notice = styled("div", {
     flexDirection: "column",
     gap: "12px",
     padding: "12px",
-    borderRadius: "var(--z-radius, 10px)",
-    background: "var(--z-bg-raised)",
+    borderRadius: "var(--z-box-radius)",
+    background: "var(--z-box-bg)",
     color: "var(--z-fg-secondary)",
     fontSize: "13px",
     lineHeight: "20px",
@@ -156,6 +156,7 @@ const Notice = styled("div", {
     },
     "& dt": { color: "var(--z-fg-muted)" },
     "& dd": { margin: 0, overflowWrap: "anywhere" },
+    border: "var(--z-box-border)",
   },
 });
 

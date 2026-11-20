@@ -301,10 +301,11 @@ const Failure = styled("div", {
     flexDirection: "column",
     gap: "12px",
     padding: "12px 16px",
-    borderRadius: "var(--z-radius-md, 10px)",
-    background: "color-mix(in srgb, var(--z-danger) 12%, transparent)",
+    borderRadius: "var(--z-box-radius)",
+    background: "var(--z-box-bg)",
     color: "var(--z-fg-primary)",
     fontSize: "13px",
+    border: "var(--z-box-border)",
   },
 });
 

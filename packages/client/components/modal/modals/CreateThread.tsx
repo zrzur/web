@@ -162,10 +162,11 @@ const Fields = styled("div", {
 const Failure = styled("div", {
   base: {
     padding: "12px 16px",
-    borderRadius: "var(--z-radius-md, 10px)",
-    background: "color-mix(in srgb, var(--z-danger) 12%, transparent)",
+    borderRadius: "var(--z-box-radius)",
+    background: "var(--z-box-bg)",
     color: "var(--z-fg-primary)",
     fontSize: "14px",
+    border: "var(--z-box-border)",
   },
 });
 

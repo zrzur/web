@@ -833,14 +833,15 @@ const RowNote = styled("p", {
     gridColumn: "2 / -1",
     margin: 0,
     padding: "8px 12px",
-    borderRadius: "var(--z-radius, 10px)",
-    background: "var(--z-bg-raised)",
+    borderRadius: "var(--z-box-radius)",
+    background: "var(--z-box-bg)",
     fontSize: "13px",
     lineHeight: "20px",
     color: "var(--z-fg-secondary)",
     overflowWrap: "anywhere",
     "& b": { fontWeight: 600, color: "var(--z-fg-primary)" },
     "@container (max-width: 760px)": { gridColumn: "1 / -1" },
+    border: "var(--z-box-border)",
   },
 });
 

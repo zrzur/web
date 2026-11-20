@@ -647,11 +647,12 @@ const ErrorLine = styled("div", {
     alignItems: "center",
     gap: "8px",
     padding: "8px 12px",
-    borderRadius: "10px",
+    borderRadius: "var(--z-box-radius)",
     fontSize: "13px",
     color: "var(--z-fg-primary)",
-    background: "rgb(237 66 69 / 12%)",
+    background: "var(--z-box-bg)",
     "& svg": { color: "var(--z-danger, #F27488)", flexShrink: 0 },
+    border: "var(--z-box-border)",
   },
 });
 

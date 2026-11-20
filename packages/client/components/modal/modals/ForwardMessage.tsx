@@ -320,10 +320,11 @@ const Preview = styled("div", {
     flexDirection: "column",
     gap: "4px",
     padding: "12px",
-    borderRadius: "var(--z-radius-md)",
-    background: "var(--z-bg-raised)",
+    borderRadius: "var(--z-box-radius)",
+    background: "var(--z-box-bg)",
     borderInlineStart: "4px solid var(--z-border-strong)",
     minWidth: 0,
+    border: "var(--z-box-border)",
   },
 });
 

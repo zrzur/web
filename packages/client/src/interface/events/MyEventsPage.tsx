@@ -321,10 +321,11 @@ const Problem = styled("div", {
     alignItems: "flex-start",
     gap: "8px",
     padding: "16px",
-    borderRadius: "var(--z-radius-md, 14px)",
-    background: "color-mix(in srgb, var(--z-danger) 10%, var(--z-bg-raised))",
+    borderRadius: "var(--z-box-radius)",
+    background: "var(--z-box-bg)",
     fontSize: "14px",
     lineHeight: "20px",
+    border: "var(--z-box-border)",
   },
 });
 

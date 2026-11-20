@@ -14,8 +14,8 @@ import { Trans, useLingui } from "@lingui/solid/macro";
 import { styled } from "styled-system/jsx";
 
 import { useClient } from "@revolt/client";
-import { useState } from "@revolt/state";
 import { useError } from "@revolt/i18n";
+import { useState } from "@revolt/state";
 import { Dialog, FloatingSelect, MenuItem } from "@revolt/ui";
 import { Icon } from "@revolt/ui/icons/Icon";
 
@@ -640,10 +640,7 @@ function CaseView(props: {
       if (facts().trim().length < 3) {
         throw t`Write the facts the user will see.`;
       }
-      if (
-        groundType() === "Law" &&
-        (!law().trim() || !provision().trim())
-      ) {
+      if (groundType() === "Law" && (!law().trim() || !provision().trim())) {
         throw t`Name the law and the provision.`;
       }
       if (limitedScope() && !countries().trim()) {
@@ -665,7 +662,11 @@ function CaseView(props: {
         statement: {
           ground:
             groundType() === "Law"
-              ? { type: "Law", law: law().trim(), provision: provision().trim() }
+              ? {
+                  type: "Law",
+                  law: law().trim(),
+                  provision: provision().trim(),
+                }
               : { type: "Terms", rule: `rule:${c().category}` },
           facts: facts().trim(),
           territorial_scope: limitedScope() ? countries().trim() : "worldwide",
@@ -765,7 +766,9 @@ function CaseView(props: {
                 {" · "}
                 <bdi dir="ltr">
                   {/* a reporter's address stays off screen in streamer mode */}
-                  {state.settings.streamerMode ? "•••@•••" : (who().email ?? "-")}
+                  {state.settings.streamerMode
+                    ? "•••@•••"
+                    : (who().email ?? "-")}
                 </bdi>
                 {" · "}
                 <bdi dir="auto">{who().location}</bdi>
@@ -977,9 +980,7 @@ function CaseView(props: {
                 );
               }}
             >
-              {c().legal_hold
-                ? t`Lift legal hold`
-                : t`Legal hold`}
+              {c().legal_hold ? t`Lift legal hold` : t`Legal hold`}
             </button>
           </Show>
         </Buttons>
@@ -1133,8 +1134,8 @@ function CaseView(props: {
             />
             <small>
               <Trans>
-                What happened, in short plain sentences, in the user's
-                language if you can. No internal ids.
+                What happened, in short plain sentences, in the user's language
+                if you can. No internal ids.
               </Trans>
             </small>
           </Field>
@@ -1605,8 +1606,9 @@ const Panel = styled("div", {
     maxHeight: "72vh",
     overflowY: "auto",
     padding: "12px",
-    borderRadius: "14px",
-    background: "color-mix(in srgb, var(--z-bg-input) 45%, transparent)",
+    borderRadius: "var(--z-box-radius)",
+    background: "var(--z-box-bg)",
+    border: "var(--z-box-border)",
   },
 });
 
@@ -1672,11 +1674,12 @@ const Evidence = styled("article", {
 const Content = styled("div", {
   base: {
     padding: "8px 10px",
-    borderRadius: "8px",
-    background: "var(--z-bg-input)",
+    borderRadius: "var(--z-box-radius)",
+    background: "var(--z-box-bg)",
     fontSize: "14px",
     whiteSpace: "pre-wrap",
     overflowWrap: "anywhere",
+    border: "var(--z-box-border)",
   },
 });
 

@@ -693,8 +693,8 @@ const UploadedFile = styled("div", {
     alignItems: "center",
     gap: "10px",
     padding: "8px 10px",
-    borderRadius: "8px",
-    background: "var(--z-bg-input)",
+    borderRadius: "var(--z-box-radius)",
+    background: "var(--z-box-bg)",
     fontSize: "14px",
     "& > span": {
       flex: 1,
@@ -718,6 +718,7 @@ const UploadedFile = styled("div", {
         color: "var(--z-fg-primary)",
       },
     },
+    border: "var(--z-box-border)",
   },
 });
 

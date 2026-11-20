@@ -458,6 +458,9 @@ const LinkRow = styled("div", {
     ...field,
     paddingInlineEnd: "4px",
     "& input": { ...field["& input"], fontSize: "14px", cursor: "text" },
+    borderRadius: "var(--z-box-radius)",
+    border: "var(--z-box-border)",
+    background: "var(--z-box-bg)",
   },
 });
 
@@ -470,9 +473,8 @@ const CopyButton = styled("button", {
     borderRadius: "calc(var(--z-radius, 10px) - 3px)",
     fontSize: "14px",
     color: "var(--z-on-accent, #fff)",
-    background:
-      "linear-gradient(180deg, var(--z-accent-fill, var(--z-accent)), var(--z-accent-hover, var(--z-accent)))",
-    boxShadow: "inset 0 1px 0 rgb(255 255 255 / 0.14)",
+    // flat, like every filled button (no gradient)
+    background: "var(--z-accent-fill, var(--z-accent))",
     _hover: { background: "var(--z-accent-hover, var(--z-accent))" },
     "&:active": { transform: "scale(0.97)" },
     _disabled: { opacity: 0.5, cursor: "default" },

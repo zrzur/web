@@ -118,10 +118,11 @@ export const Progress = styled("div", {
 export const Failure = styled("div", {
   base: {
     padding: "12px",
-    borderRadius: "6px",
-    background: "var(--z-danger-muted)",
+    borderRadius: "var(--z-box-radius)",
+    background: "var(--z-box-bg)",
     color: "var(--z-status-error)",
     fontSize: "13px",
     "& p": { margin: "8px 0", color: "var(--z-fg-secondary)" },
+    border: "var(--z-box-border)",
   },
 });

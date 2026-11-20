@@ -321,7 +321,7 @@ export const Showcase = styled("section", {
     flexDirection: "column",
     gap: "18px",
     padding: "20px",
-    borderRadius: "calc(var(--z-radius, 10px) + 6px)",
+    borderRadius: "var(--z-box-radius)",
     // phones: the fill and corner of every settings group, no frame
     // (owner, 2026-11-17: one box look everywhere)
     _phone: {
@@ -331,11 +331,9 @@ export const Showcase = styled("section", {
       background:
         "var(--z-sheet-group, color-mix(in srgb, var(--z-fg-primary) 5%, transparent))",
     },
-    border: "1px solid color-mix(in srgb, var(--z-fg-primary) 8%, transparent)",
-    background:
-      "radial-gradient(420px 180px at 100% 0%, color-mix(in srgb, var(--z-accent) 16%, transparent), transparent 70%), linear-gradient(180deg, color-mix(in srgb, white 3%, color-mix(in srgb, var(--z-bg-sidebar) 70%, var(--z-bg-chat))), color-mix(in srgb, var(--z-bg-sidebar) 70%, var(--z-bg-chat)))",
-    boxShadow:
-      "inset 0 1px 0 rgb(255 255 255 / 0.04), 0 8px 24px -16px rgb(0 0 0 / 0.6)",
+    border: "var(--z-box-border)",
+    background: "var(--z-box-bg)",
+    boxShadow: "var(--z-box-shadow)",
   },
 });
 

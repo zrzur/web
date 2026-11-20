@@ -132,8 +132,8 @@ export function Subscriptions() {
                 </Match>
                 <Match when={plus()!.source.type === "Grant"}>
                   <Trans>
-                    Given by Zrzur. Ends on {date(plus()!.current_period_end)}
-                    , nothing renews.
+                    Given by Zrzur. Ends on {date(plus()!.current_period_end)},
+                    nothing renews.
                   </Trans>
                 </Match>
                 <Match
@@ -420,11 +420,12 @@ const ErrorLine = styled("div", {
     alignItems: "center",
     gap: "8px",
     padding: "8px 12px",
-    borderRadius: "10px",
+    borderRadius: "var(--z-box-radius)",
     fontSize: "13px",
     color: "var(--z-fg-primary)",
-    background: "rgb(237 66 69 / 12%)",
+    background: "var(--z-box-bg)",
     "& svg": { color: "var(--z-danger, #F27488)" },
+    border: "var(--z-box-border)",
   },
 });
 

@@ -1126,10 +1126,11 @@ const Stat = styled("div", {
     flexDirection: "column",
     alignItems: "center",
     padding: "10px",
-    borderRadius: "10px",
-    background: "var(--z-bg-input)",
+    borderRadius: "var(--z-box-radius)",
+    background: "var(--z-box-bg)",
     "& strong": { fontSize: "20px", color: "var(--z-fg-primary)" },
     "& span": { fontSize: "12px", color: "var(--z-fg-muted)" },
+    border: "var(--z-box-border)",
   },
 });
 

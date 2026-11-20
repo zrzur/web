@@ -795,8 +795,8 @@ const Side = styled("div", {
     gap: "16px",
     marginBlockStart: "24px",
     padding: "24px",
-    background: "var(--z-bg-chat)",
-    borderRadius: "var(--z-radius-md, 10px)",
+    background: "var(--z-box-bg)",
+    borderRadius: "var(--z-box-radius)",
     [PHONE]: {
       position: "fixed",
       zIndex: 3,
@@ -819,6 +819,7 @@ const Side = styled("div", {
         borderRadius: "var(--z-radius-lg, 14px) var(--z-radius-lg, 14px) 0 0",
       },
     },
+    border: "var(--z-box-border)",
   },
 });
 

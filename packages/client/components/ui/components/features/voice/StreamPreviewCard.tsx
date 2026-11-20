@@ -126,11 +126,12 @@ const Empty = styled("div", {
     display: "grid",
     placeItems: "center",
     padding: "12px",
-    borderRadius: "var(--z-radius-sm)",
-    background: "var(--z-bg-input)",
+    borderRadius: "var(--z-box-radius)",
+    background: "var(--z-box-bg)",
     fontSize: "13px",
     color: "var(--z-fg-muted)",
     textAlign: "center",
+    border: "var(--z-box-border)",
   },
 });
 

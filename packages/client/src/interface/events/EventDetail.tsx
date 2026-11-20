@@ -1271,19 +1271,21 @@ const ConfirmBox = styled("div", {
     flexDirection: "column",
     gap: "8px",
     padding: "12px",
-    borderRadius: "var(--z-radius, 10px)",
-    background: "color-mix(in srgb, var(--z-status-warning) 12%, transparent)",
+    borderRadius: "var(--z-box-radius)",
+    background: "var(--z-box-bg)",
     fontSize: "14px",
     lineHeight: "20px",
+    border: "var(--z-box-border)",
   },
 });
 
 const Failure = styled("div", {
   base: {
     padding: "12px",
-    borderRadius: "var(--z-radius, 10px)",
-    background: "color-mix(in srgb, var(--z-danger) 12%, transparent)",
+    borderRadius: "var(--z-box-radius)",
+    background: "var(--z-box-bg)",
     fontSize: "13px",
     lineHeight: "18px",
+    border: "var(--z-box-border)",
   },
 });

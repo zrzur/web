@@ -400,10 +400,11 @@ const LinkLine = styled("div", {
     gap: "8px",
     minHeight: "44px",
     paddingInline: "12px",
-    borderRadius: "var(--z-radius, 10px)",
-    background: "var(--z-bg-input)",
+    borderRadius: "var(--z-box-radius)",
+    background: "var(--z-box-bg)",
     "& code": code,
     _phone: { paddingInlineEnd: "4px" },
+    border: "var(--z-box-border)",
   },
 });
 

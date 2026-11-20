@@ -2,7 +2,11 @@ import { For, JSX, Show, createMemo, createSignal } from "solid-js";
 import { createStore, reconcile, unwrap } from "solid-js/store";
 
 import { Trans, useLingui } from "@lingui/solid/macro";
-import type { LobbyAppearance, LobbySection, ServerLobby } from "@zrzur/sdk/solid";
+import type {
+  LobbyAppearance,
+  LobbySection,
+  ServerLobby,
+} from "@zrzur/sdk/solid";
 import { styled } from "styled-system/jsx";
 
 import { useError } from "@revolt/i18n";
@@ -805,8 +809,9 @@ const Question = styled("div", {
     flexDirection: "column",
     gap: "12px",
     padding: "12px 14px 16px",
-    borderRadius: "12px",
-    background: "var(--z-bg-input)",
+    borderRadius: "var(--z-box-radius)",
+    background: "var(--z-box-bg)",
+    border: "var(--z-box-border)",
   },
 });
 

@@ -455,11 +455,12 @@ const Notice = styled("div", {
   base: {
     margin: "4px 8px",
     padding: "9px 10px",
-    borderRadius: "7px",
-    background: "var(--z-nav-hover)",
+    borderRadius: "var(--z-box-radius)",
+    background: "var(--z-box-bg)",
     fontSize: "12px",
     color: "var(--z-fg-secondary)",
     "&[data-error]": { color: "var(--z-status-error)" },
+    border: "var(--z-box-border)",
   },
 });
 const Action = styled("button", {

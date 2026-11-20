@@ -609,9 +609,10 @@ const Failure = styled("div", {
     flexDirection: "column",
     gap: "12px",
     padding: "16px",
-    borderRadius: "var(--z-radius-md)",
-    background: "var(--z-bg-raised)",
+    borderRadius: "var(--z-box-radius)",
+    background: "var(--z-box-bg)",
     color: "var(--z-fg-primary)",
+    border: "var(--z-box-border)",
   },
 });
 

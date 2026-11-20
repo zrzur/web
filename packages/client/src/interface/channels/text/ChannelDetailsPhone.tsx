@@ -776,9 +776,9 @@ const Row = styled("button", {
  */
 const Members = styled("div", {
   base: {
-    borderRadius: "14px",
+    borderRadius: "var(--z-box-radius)",
     overflow: "hidden",
-    background: FILL,
+    background: "var(--z-box-bg)",
     // room under the last person; the first title brings its own room above
     paddingBlock: "0 8px",
     "& > *": {
@@ -805,6 +805,7 @@ const Members = styled("div", {
       fontWeight: 500,
       borderRadius: "12px !important",
     },
+    border: "var(--z-box-border)",
   },
 });
 

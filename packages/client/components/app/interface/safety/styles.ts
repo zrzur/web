@@ -85,8 +85,8 @@ export const TargetCard = styled("div", {
     alignItems: "center",
     gap: "10px",
     padding: "10px 12px",
-    borderRadius: "12px",
-    background: "var(--z-bg-input)",
+    borderRadius: "var(--z-box-radius)",
+    background: "var(--z-box-bg)",
     color: "var(--z-fg-primary)",
     minWidth: 0,
     "& img": {
@@ -113,6 +113,7 @@ export const TargetCard = styled("div", {
       fontSize: "14px",
       overflowWrap: "anywhere",
     },
+    border: "var(--z-box-border)",
   },
 });
 
@@ -137,7 +138,7 @@ export const Notice = styled("p", {
   base: {
     margin: 0,
     padding: "10px 12px",
-    borderRadius: "10px",
+    borderRadius: "var(--z-box-radius)",
     // phones: the fill and corner of every settings group, no frame
     // (owner, 2026-11-17: one box look everywhere)
     _phone: {
@@ -151,8 +152,8 @@ export const Notice = styled("p", {
     lineHeight: 1.45,
     color: "var(--z-fg-secondary)",
     // a neutral card: raspberry is for actions, not for information
-    background: "var(--z-card-bg, var(--z-bg-raised))",
-    border: "1px solid var(--z-card-border, var(--z-border-subtle))",
+    background: "var(--z-box-bg)",
+    border: "var(--z-box-border)",
     "&[data-tone='danger']": {
       borderColor: "transparent",
       color: "var(--z-danger, #F27488)",
@@ -249,7 +250,7 @@ export const Empty = styled("div", {
     color: "var(--z-fg-muted)",
     "--z-icon-color": "var(--z-status-success, #55DCC8)",
     // the empty / error state sits on the settings panel surface
-    borderRadius: "calc(var(--z-radius, 10px) + 4px)",
+    borderRadius: "var(--z-box-radius)",
     // phones: the fill and corner of every settings group, no frame
     // (owner, 2026-11-17: one box look everywhere)
     _phone: {
@@ -259,11 +260,9 @@ export const Empty = styled("div", {
       background:
         "var(--z-sheet-group, color-mix(in srgb, var(--z-fg-primary) 5%, transparent))",
     },
-    border: "1px solid color-mix(in srgb, var(--z-fg-primary) 8%, transparent)",
-    background:
-      "linear-gradient(180deg, color-mix(in srgb, white 3%, color-mix(in srgb, var(--z-bg-sidebar) 70%, var(--z-bg-chat))), color-mix(in srgb, var(--z-bg-sidebar) 70%, var(--z-bg-chat)))",
-    boxShadow:
-      "inset 0 1px 0 rgb(255 255 255 / 0.04), 0 8px 24px -16px rgb(0 0 0 / 0.6)",
+    border: "var(--z-box-border)",
+    background: "var(--z-box-bg)",
+    boxShadow: "var(--z-box-shadow)",
     // a surface button, same as Button variant="tonal"
     "& button": {
       height: "32px",

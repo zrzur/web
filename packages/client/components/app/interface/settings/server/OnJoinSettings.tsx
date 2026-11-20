@@ -20,12 +20,12 @@ import {
 import { Icon } from "@revolt/ui/icons/Icon";
 
 import {
+  type OnJoin,
+  type OnJoinDraft,
   MAX_ROLES,
   MAX_WELCOME,
   MEMBER,
   SERVER,
-  type OnJoin,
-  type OnJoinDraft,
   bodyOf,
   channelLink,
   deadChannelNames,
@@ -77,7 +77,8 @@ export function OnJoinSettings(props: { server: Server }) {
   const roles = () => props.server.orderedRoles.filter((role) => !role.owner);
   const powerful = () =>
     roles().filter(
-      (role) => now().roles.includes(role.id) && isPowerful(role.permissions?.a),
+      (role) =>
+        now().roles.includes(role.id) && isPowerful(role.permissions?.a),
     );
   const textChannels = () =>
     props.server.channels.filter(
@@ -92,7 +93,10 @@ export function OnJoinSettings(props: { server: Server }) {
         )
       : [];
   const blocked = () =>
-    !dirty() || pending() || !!problem() || (powerful().length > 0 && !confirmed());
+    !dirty() ||
+    pending() ||
+    !!problem() ||
+    (powerful().length > 0 && !confirmed());
 
   function insert(token: string) {
     const start = box?.selectionStart ?? now().content.length;
@@ -145,8 +149,8 @@ export function OnJoinSettings(props: { server: Server }) {
         title={<Trans>Roles for everyone who joins</Trans>}
         description={
           <Trans>
-            Given the moment someone becomes a member, whichever way they
-            came in. Bots get none. Up to {MAX_ROLES} roles.
+            Given the moment someone becomes a member, whichever way they came
+            in. Bots get none. Up to {MAX_ROLES} roles.
           </Trans>
         }
       >
@@ -155,7 +159,9 @@ export function OnJoinSettings(props: { server: Server }) {
             when={roles().length}
             fallback={
               <Text class="label" size="small">
-                <Trans>This server has no roles yet. Make one in Roles first.</Trans>
+                <Trans>
+                  This server has no roles yet. Make one in Roles first.
+                </Trans>
               </Text>
             }
           >
@@ -174,7 +180,11 @@ export function OnJoinSettings(props: { server: Server }) {
                     <RoleDot style={{ background: role.colour ?? undefined }} />
                     {role.name}
                     <Show when={isPowerful(role.permissions?.a)}>
-                      <Icon name="warning" size={14} aria-label={t`Can manage or moderate`} />
+                      <Icon
+                        name="warning"
+                        size={14}
+                        aria-label={t`Can manage or moderate`}
+                      />
                     </Show>
                   </Chip>
                 )}
@@ -215,7 +225,9 @@ export function OnJoinSettings(props: { server: Server }) {
           </Show>
           <Show when={!canRoles()}>
             <Text class="label" size="small">
-              <Trans>Choosing these roles needs the Manage Roles permission.</Trans>
+              <Trans>
+                Choosing these roles needs the Manage Roles permission.
+              </Trans>
             </Text>
           </Show>
         </Inside>
@@ -225,8 +237,8 @@ export function OnJoinSettings(props: { server: Server }) {
         title={<Trans>Welcome message</Trans>}
         description={
           <Trans>
-            Posted by Zrzur in a channel you pick when someone joins. Nobody
-            is notified.
+            Posted by Zrzur in a channel you pick when someone joins. Nobody is
+            notified.
           </Trans>
         }
       >
@@ -236,11 +248,13 @@ export function OnJoinSettings(props: { server: Server }) {
           description={
             <Show
               when={now().welcomeOn}
-              fallback={<Trans>Off. Nothing is posted when someone joins.</Trans>}
+              fallback={
+                <Trans>Off. Nothing is posted when someone joins.</Trans>
+              }
             >
               <Trans>
-                On. When many people join at once, the first ten of each
-                minute are welcomed.
+                On. When many people join at once, the first ten of each minute
+                are welcomed.
               </Trans>
             </Show>
           }
@@ -302,11 +316,19 @@ export function OnJoinSettings(props: { server: Server }) {
               onInput={(e) => change({ content: e.currentTarget.value })}
             />
             <Chips role="group" aria-label={t`Add to the message`}>
-              <Chip type="button" disabled={!canMessage()} onClick={() => insert(MEMBER)}>
+              <Chip
+                type="button"
+                disabled={!canMessage()}
+                onClick={() => insert(MEMBER)}
+              >
                 <Icon name="at" size={14} aria-hidden="true" />
                 <Trans>The member</Trans>
               </Chip>
-              <Chip type="button" disabled={!canMessage()} onClick={() => insert(SERVER)}>
+              <Chip
+                type="button"
+                disabled={!canMessage()}
+                onClick={() => insert(SERVER)}
+              >
                 <Icon name="house" size={14} aria-hidden="true" />
                 <Trans>The server's name</Trans>
               </Chip>
@@ -428,7 +450,10 @@ const Chip = styled("button", {
     cursor: "pointer",
     _hover: { background: "var(--z-nav-hover)" },
     _disabled: { cursor: "default", opacity: 0.6 },
-    _focusVisible: { outline: "2px solid var(--z-focus)", outlineOffset: "2px" },
+    _focusVisible: {
+      outline: "2px solid var(--z-focus)",
+      outlineOffset: "2px",
+    },
     "&[aria-pressed=true]": {
       borderColor: "var(--z-accent)",
       background: "color-mix(in srgb, var(--z-accent) 16%, transparent)",
@@ -458,7 +483,11 @@ const Warning = styled("div", {
     color: "var(--z-fg-primary)",
     "& > svg": { flex: "none", color: "var(--z-warning)" },
     "& strong": { display: "block", fontWeight: 600 },
-    "& p": { margin: "4px 0 0", fontSize: "13px", color: "var(--z-fg-secondary)" },
+    "& p": {
+      margin: "4px 0 0",
+      fontSize: "13px",
+      color: "var(--z-fg-secondary)",
+    },
   },
 });
 
@@ -484,10 +513,11 @@ const PreviewLabel = styled("span", {
 const Preview = styled("div", {
   base: {
     padding: "12px",
-    borderRadius: "var(--z-radius-md, 10px)",
-    background: "var(--z-bg-raised)",
+    borderRadius: "var(--z-box-radius)",
+    background: "var(--z-box-bg)",
     color: "var(--z-fg-primary)",
     overflowWrap: "anywhere",
+    border: "var(--z-box-border)",
   },
 });
 

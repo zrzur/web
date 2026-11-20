@@ -78,9 +78,7 @@ export function ServiceReturn() {
               <Trans>Nothing was linked</Trans>
             </h1>
             <p>
-              <Trans>
-                The sign-in was cancelled, so nothing was copied.
-              </Trans>
+              <Trans>The sign-in was cancelled, so nothing was copied.</Trans>
             </p>
             <div>
               <Button onPress={openConnections}>
@@ -128,8 +126,8 @@ const Card = styled("section", {
     alignItems: "flex-start",
     gap: "12px",
     padding: "24px",
-    borderRadius: "var(--z-radius-lg)",
-    background: "var(--z-bg-raised)",
+    borderRadius: "var(--z-box-radius)",
+    background: "var(--z-box-bg)",
 
     "& h1": {
       margin: 0,
@@ -143,5 +141,6 @@ const Card = styled("section", {
       lineHeight: "20px",
       color: "var(--z-fg-secondary)",
     },
+    border: "var(--z-box-border)",
   },
 });

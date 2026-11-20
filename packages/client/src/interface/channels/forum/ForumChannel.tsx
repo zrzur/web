@@ -219,10 +219,11 @@ const Reason = styled("p", {
   base: {
     margin: 0,
     padding: "12px 16px",
-    borderRadius: "var(--z-radius-md)",
-    background: "var(--z-bg-raised)",
+    borderRadius: "var(--z-box-radius)",
+    background: "var(--z-box-bg)",
     color: "var(--z-fg-secondary)",
     fontSize: "14px",
+    border: "var(--z-box-border)",
   },
 });
 

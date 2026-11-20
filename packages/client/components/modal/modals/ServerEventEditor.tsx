@@ -44,8 +44,8 @@ import {
   reminderSpan,
 } from "../../../src/interface/events/eventLinks";
 import {
-  EVENT_TEMPLATES,
   type EventTemplate,
+  EVENT_TEMPLATES,
 } from "../../../src/interface/events/eventTemplates";
 import { MemberPicker } from "../../../src/interface/events/MemberPicker";
 import { Ticket, TicketStub } from "../../../src/interface/events/Ticket";
@@ -467,9 +467,7 @@ export function ServerEventEditorModal(
         <Fields>
           <Preview aria-hidden="true" data-testid="server-event-preview">
             <Ticket>
-              <TicketStub
-                startsAt={(start() ?? initialStart).toISOString()}
-              />
+              <TicketStub startsAt={(start() ?? initialStart).toISOString()} />
               <PreviewBody>
                 <b dir="auto">
                   {group.controls.title.value.trim() ||
@@ -950,11 +948,12 @@ const ToggleRow = styled("div", {
 const Warning = styled("div", {
   base: {
     padding: "10px 12px",
-    borderRadius: "var(--z-radius-sm, 6px)",
-    background: "color-mix(in srgb, var(--z-status-warning) 12%, transparent)",
+    borderRadius: "var(--z-box-radius)",
+    background: "var(--z-box-bg)",
     color: "var(--z-status-warning)",
     fontSize: "13px",
     lineHeight: "18px",
+    border: "var(--z-box-border)",
   },
 });
 
@@ -994,8 +993,9 @@ const RoleList = styled("div", {
     maxHeight: "168px",
     overflowY: "auto",
     padding: "8px 12px",
-    borderRadius: "var(--z-radius-sm, 6px)",
-    background: "var(--z-bg-input)",
+    borderRadius: "var(--z-box-radius)",
+    background: "var(--z-box-bg)",
+    border: "var(--z-box-border)",
   },
 });
 
@@ -1011,10 +1011,11 @@ const Hint = styled("p", {
 const Failure = styled("div", {
   base: {
     padding: "12px",
-    borderRadius: "var(--z-radius, 10px)",
-    background: "color-mix(in srgb, var(--z-danger) 12%, transparent)",
+    borderRadius: "var(--z-box-radius)",
+    background: "var(--z-box-bg)",
     color: "var(--z-fg-primary)",
     fontSize: "13px",
     lineHeight: "18px",
+    border: "var(--z-box-border)",
   },
 });

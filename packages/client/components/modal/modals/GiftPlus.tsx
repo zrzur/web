@@ -299,8 +299,9 @@ const Friends = styled("div", {
     maxHeight: "200px",
     overflowY: "auto",
     padding: "4px",
-    borderRadius: "10px",
-    background: "var(--z-bg-input)",
+    borderRadius: "var(--z-box-radius)",
+    background: "var(--z-box-bg)",
+    border: "var(--z-box-border)",
   },
 });
 
