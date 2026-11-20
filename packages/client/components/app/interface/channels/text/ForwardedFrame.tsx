@@ -119,6 +119,10 @@ const Footer = styled("div", {
 const OriginLink = styled("button", {
   base: {
     all: "unset",
+    // all: unset drops the button's "relative": the phones' unseen 44 px
+    // tap area (styles.css) then spread over the whole page and took every
+    // tap
+    position: "relative",
     cursor: "pointer",
     color: "var(--z-link)",
     maxWidth: "100%",

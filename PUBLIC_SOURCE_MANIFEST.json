@@ -262,8 +262,8 @@
     },
     {
       "path": "CHANGELOG.md",
-      "sha256": "f70db51e40f318c845d2481f051b8a70b30cdeebad0b1656f85093af52c3b908",
-      "bytes": 189705,
+      "sha256": "ff3aec43f8c95fd5b6783c0245ba46a336bde7b750a53e1aaf4fb74b2311198b",
+      "bytes": 190213,
       "category": "public-documentation"
     },
     {
@@ -663,9 +663,15 @@
       "category": "product-source-or-build-manifest"
     },
     {
+      "path": "packages/client/components/app/interface/channels/text/ForwardedFrame.dom.test.tsx",
+      "sha256": "e4337fa483ba59f08ea900ea408f0b8fde019f0daf4722216a5bf0f6f25b0f0d",
+      "bytes": 1958,
+      "category": "synthetic-test-source-or-fixture"
+    },
+    {
       "path": "packages/client/components/app/interface/channels/text/ForwardedFrame.tsx",
-      "sha256": "9a1bae51127f4d970d2dc2cc8920b3cf876ebb03ab3d87298c4c75861f67c6c5",
-      "bytes": 3560,
+      "sha256": "195d3e214443194afb3a2c0752e59f7cf758b48a2a5e166b0e8775ae16155cc6",
+      "bytes": 3747,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -2715,9 +2721,15 @@
       "category": "product-source-or-build-manifest"
     },
     {
+      "path": "packages/client/components/app/interface/settings/user/support/ContactSupport.dom.test.tsx",
+      "sha256": "5a2d3ee5d1e7246cdd1d89a5eab6b21d693007751416f0b30fcfeda306085c7d",
+      "bytes": 1877,
+      "category": "synthetic-test-source-or-fixture"
+    },
+    {
       "path": "packages/client/components/app/interface/settings/user/support/ContactSupport.tsx",
-      "sha256": "02cd0b8a112e4da452919e9bd2ca2880cdd60d549dc4ef0a7f7eb30f6276c763",
-      "bytes": 11742,
+      "sha256": "4705614a0bba2d5e7d6a5c6f904b7c59ec6f5c00299c6c0c4bc5235021399678",
+      "bytes": 12152,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -5302,14 +5314,14 @@
     },
     {
       "path": "packages/client/components/modal/modals/SteamGames.dom.test.tsx",
-      "sha256": "f667201a4cc759f2d83e013ed3117aa5638660e86ae4267df50cdd3443d1951b",
-      "bytes": 4527,
+      "sha256": "ad980bb16f2188551ca268f1513df360ec15ecb572692d35882035e051ed4107",
+      "bytes": 4967,
       "category": "synthetic-test-source-or-fixture"
     },
     {
       "path": "packages/client/components/modal/modals/SteamGames.tsx",
-      "sha256": "0b92e5b9470b92d34c239834cbccf5204509dcd66140ffb86891a81b284720ac",
-      "bytes": 11979,
+      "sha256": "fb558f8e3f1b3efe92276599b74e355b1adb22af76b54e0c912417ab2a9f7dd1",
+      "bytes": 12166,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -9619,6 +9631,12 @@
       "sha256": "6d8cdf83b6baeb5c83a1386bf1c71e9ed15e909c6a46cb00faa1be6c2aaa60be",
       "bytes": 40994,
       "category": "product-source-or-build-manifest"
+    },
+    {
+      "path": "packages/client/components/ui/unsetTapArea.test.ts",
+      "sha256": "852814cd5ea2c384ddd0c594982246e0c56bf1a6e6b65e800024c7c0cada34d2",
+      "bytes": 5076,
+      "category": "synthetic-test-source-or-fixture"
     },
     {
       "path": "packages/client/components/ui/web-components.d.ts",
