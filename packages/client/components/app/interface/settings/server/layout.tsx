@@ -94,9 +94,9 @@ export const ReadOnlyNote = styled("p", {
   base: {
     margin: 0,
     padding: "12px 16px",
-    borderRadius: "var(--z-radius-md, 10px)",
-    border: "1px solid var(--z-border-soft)",
-    background: "var(--z-bg-card, var(--z-bg-panel))",
+    borderRadius: "var(--z-box-radius)",
+    border: "var(--z-box-border)",
+    background: "var(--z-box-bg)",
     color: "var(--z-fg-muted)",
     fontSize: "14px",
     lineHeight: "20px",

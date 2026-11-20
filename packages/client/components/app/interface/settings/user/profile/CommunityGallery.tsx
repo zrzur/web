@@ -454,6 +454,9 @@ const Error = styled("p", {
 
 const Empty = styled("div", {
   base: {
+    background: "var(--z-box-bg)",
+    border: "var(--z-box-border)",
+    borderRadius: "var(--z-box-radius)",
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
@@ -507,10 +510,10 @@ const Card = styled("button", {
     gap: "5px",
     minHeight: "148px",
     padding: "14px 8px 10px",
-    border: "1px solid var(--z-btn-surface-border)",
-    borderRadius: "var(--z-radius, 10px)",
-    background: "var(--z-card-bg)",
-    boxShadow: "var(--z-card-lift)",
+    border: "var(--z-box-border)",
+    borderRadius: "var(--z-box-radius)",
+    background: "var(--z-box-bg)",
+    boxShadow: "var(--z-box-shadow)",
     color: "var(--z-fg-primary)",
     font: "inherit",
     cursor: "pointer",

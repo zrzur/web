@@ -427,10 +427,9 @@ const Card = styled("div", {
     gap: "8px",
     minWidth: 0,
     padding: "16px",
-    borderRadius: "var(--z-shape-card, calc(var(--z-radius, 10px) + 4px))",
-    border:
-      "1px solid var(--z-card-border, var(--z-btn-surface-border, color-mix(in srgb, var(--z-fg-primary) 8%, transparent)))",
-    background: "var(--z-card-bg)",
+    borderRadius: "var(--z-box-radius)",
+    border: "var(--z-box-border)",
+    background: "var(--z-box-bg)",
     color: "var(--z-fg-primary)",
     fontSize: "14px",
     lineHeight: "20px",

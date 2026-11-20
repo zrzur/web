@@ -759,10 +759,10 @@ const HeroFacts = styled("div", {
     gap: "10px",
     marginTop: "6px",
     padding: "4px 12px",
-    borderRadius: "999px",
+    borderRadius: "var(--z-box-radius)",
     fontSize: "12px",
-    background: "rgb(0 0 0 / 30%)",
-    border: "1px solid rgb(255 255 255 / 40%)",
+    background: "var(--z-box-bg)",
+    border: "var(--z-box-border)",
     "& i": {
       width: "1px",
       height: "14px",
@@ -793,17 +793,18 @@ const Body = styled("div", {
 
 const Notice = styled("div", {
   base: {
+    border: "var(--z-box-border)",
     display: "grid",
     gridTemplateColumns: "auto 1fr",
     alignItems: "start",
     columnGap: "10px",
     padding: "10px 12px",
-    borderRadius: "10px",
+    borderRadius: "var(--z-box-radius)",
     fontSize: "13px",
     lineHeight: "19px",
     textAlign: "start",
     color: "var(--z-fg-primary)",
-    background: "var(--z-bg-input)",
+    background: "var(--z-box-bg)",
     "& p": { margin: 0 },
     "& > svg": { marginTop: "2px", color: "var(--z-fg-muted)" },
     "& > div": {
@@ -1079,10 +1080,9 @@ const Promoted = styled("section", {
     flexDirection: "column",
     gap: "12px",
     padding: "16px",
-    borderRadius: "14px",
-    background:
-      "linear-gradient(135deg, color-mix(in srgb, var(--z-premium) 10%, transparent), transparent 60%), var(--z-bg-raised)",
-    border: "1px solid color-mix(in srgb, var(--z-premium) 40%, transparent)",
+    borderRadius: "var(--z-box-radius)",
+    background: "var(--z-box-bg)",
+    border: "var(--z-box-border)",
     "& svg": { color: AMBER },
     "&[data-active=true]": { borderColor: AMBER, borderWidth: "2px" },
   },

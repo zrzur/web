@@ -390,9 +390,9 @@ const Header = styled("div", {
     flexWrap: "wrap",
     gap: "12px 16px",
     padding: "16px",
-    borderRadius: "var(--z-radius-lg)",
-    background: "var(--z-card-bg)",
-    border: "1px solid var(--z-card-border)",
+    borderRadius: "var(--z-box-radius)",
+    background: "var(--z-box-bg)",
+    border: "var(--z-box-border)",
     minWidth: 0,
   },
 });

@@ -216,9 +216,9 @@ const Card = styled("section", {
     maxInlineSize: "480px",
     marginBlock: "4px",
     padding: "12px",
-    borderRadius: "var(--z-radius-md)",
-    border: "1px solid var(--z-border-subtle)",
-    background: "var(--z-bg-raised)",
+    borderRadius: "var(--z-box-radius)",
+    border: "var(--z-box-border)",
+    background: "var(--z-box-bg)",
     minWidth: 0,
   },
 });

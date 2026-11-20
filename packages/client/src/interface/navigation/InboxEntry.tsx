@@ -154,9 +154,9 @@ const Row = styled("div", {
     width: "100%",
     flexShrink: 0,
     padding: "12px",
-    border: "1px solid var(--z-card-border, var(--z-border-soft))",
-    borderRadius: "var(--z-shape-card, calc(var(--z-radius, 10px) + 4px))",
-    background: "var(--z-card-bg)",
+    border: "var(--z-box-border)",
+    borderRadius: "var(--z-box-radius)",
+    background: "var(--z-box-bg)",
     "&:has(> button:hover)": { background: "var(--z-nav-hover)" },
     "&:has(> button:active)": { background: "var(--z-nav-selected)" },
     "&:has(> button:focus-visible)": {

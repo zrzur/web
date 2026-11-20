@@ -21,16 +21,16 @@ import {
   SettingsSection,
   Toggle,
 } from "@revolt/ui";
-import { Icon } from "@revolt/ui/icons/Icon";
 import type { IconName } from "@revolt/ui/icons/Icon";
+import { Icon } from "@revolt/ui/icons/Icon";
 
 import { leaveForSignIn } from "./leaveForSignIn";
 import {
-  LINKED_CONSENT_VERSION,
-  MAX_SHOWN_REPOS,
   type ServiceAccount,
   type ServiceConnection,
   type ServiceId,
+  LINKED_CONSENT_VERSION,
+  MAX_SHOWN_REPOS,
   daysLeft,
   needsConsent,
   serviceConnectionsApi,
@@ -212,8 +212,8 @@ function WhatWeCopy(props: { service: ServiceId }) {
         <Trans>
           your GitHub username, name, picture, bio and link, your follower and
           repository counts, and up to 12 of your most starred own public
-          repositories with their description, language and stars, and keep
-          them in the EU.
+          repositories with their description, language and stars, and keep them
+          in the EU.
         </Trans>
       </Match>
       <Match when={props.service === "battlenet"}>
@@ -471,8 +471,7 @@ function ServiceLinked(props: {
   }
 
   const expired = () =>
-    props.account.expires_at !== undefined &&
-    now() >= props.account.expires_at;
+    props.account.expires_at !== undefined && now() >= props.account.expires_at;
   const days = () =>
     props.account.expires_at !== undefined
       ? daysLeft(props.account.expires_at, now())
@@ -505,7 +504,9 @@ function ServiceLinked(props: {
         description={
           <Switch>
             <Match when={service() === "twitch" && !props.account.display_name}>
-              <Trans>Waiting for Twitch: the name shows again once Twitch answers.</Trans>
+              <Trans>
+                Waiting for Twitch: the name shows again once Twitch answers.
+              </Trans>
             </Match>
             <Match when={service() === "twitch" && props.account.live}>
               <LiveLine>
@@ -686,8 +687,8 @@ function ServiceLinked(props: {
               </Match>
               <Match when={service() === "github"}>
                 <Trans>
-                  Only public repositories. Refresh reads GitHub again; it
-                  never runs by itself.
+                  Only public repositories. Refresh reads GitHub again; it never
+                  runs by itself.
                 </Trans>
               </Match>
               <Match when={service() === "twitch"}>
@@ -707,7 +708,9 @@ function ServiceLinked(props: {
                 onPress={() =>
                   needsConsent(props.account)
                     ? askFirst()
-                    : run(() => serviceConnectionsApi.refresh(client(), "github"))
+                    : run(() =>
+                        serviceConnectionsApi.refresh(client(), "github"),
+                      )
                 }
               >
                 <Trans>Refresh</Trans>
@@ -765,21 +768,21 @@ const Small = styled("p", {
 
 const Consent = styled("div", {
   base: {
+    background: "var(--z-box-bg)",
     display: "flex",
     flexDirection: "column",
     gap: "12px",
     padding: "16px",
-    borderRadius: "var(--z-radius-md)",
+    borderRadius: "var(--z-box-radius)",
     // phones: the fill and corner of every settings group, no frame
     // (owner, 2026-11-17: one box look everywhere)
     _phone: {
       border: "none",
       borderRadius: "14px",
       boxShadow: "none",
-      background:
-        "color-mix(in srgb, var(--z-fg-primary) 4%, transparent)",
+      background: "color-mix(in srgb, var(--z-fg-primary) 4%, transparent)",
     },
-    border: "1px solid var(--z-border-subtle)",
+    border: "var(--z-box-border)",
     color: "var(--z-fg-primary)",
     fontSize: "14px",
     lineHeight: "20px",

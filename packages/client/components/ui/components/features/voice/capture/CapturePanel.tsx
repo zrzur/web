@@ -87,7 +87,8 @@ export default function CapturePanel(props: { channel: Channel }) {
 
   const [items, { refetch }] = createResource(
     () => (open() ? props.channel.id : undefined),
-    () => listCaptures(client(), props.channel).catch(() => [] as CaptureItem[]),
+    () =>
+      listCaptures(client(), props.channel).catch(() => [] as CaptureItem[]),
   );
   createEffect(() => {
     const current = session();
@@ -107,8 +108,7 @@ export default function CapturePanel(props: { channel: Channel }) {
     const id = recording()?.by ?? state().clips;
     return id ? [id] : [];
   });
-  const starterName = () =>
-    starter()[0]?.username ?? t`Someone`;
+  const starterName = () => starter()[0]?.username ?? t`Someone`;
 
   const block = createMemo(() =>
     clipBlock({
@@ -120,8 +120,7 @@ export default function CapturePanel(props: { channel: Channel }) {
   );
 
   // everyone while something is on; otherwise only those who can turn it on
-  const visible = () =>
-    captureActive(state()) || (manager() && !!session());
+  const visible = () => captureActive(state()) || (manager() && !!session());
 
   return (
     <Show when={visible()}>
@@ -475,7 +474,11 @@ export default function CapturePanel(props: { channel: Channel }) {
                       busy={busy()}
                       onDelete={() =>
                         act(async () => {
-                          await deleteCapture(client(), props.channel, item._id);
+                          await deleteCapture(
+                            client(),
+                            props.channel,
+                            item._id,
+                          );
                           await refetch();
                         })
                       }
@@ -598,9 +601,9 @@ const Panel = styled("section", {
     gap: "8px",
     flexShrink: 0,
     padding: "12px 16px",
-    borderRadius: "var(--z-radius, 10px)",
-    border: "1px solid var(--z-border-subtle)",
-    background: "var(--z-bg-nav, var(--z-bg-sidebar))",
+    borderRadius: "var(--z-box-radius)",
+    border: "var(--z-box-border)",
+    background: "var(--z-box-bg)",
     color: "var(--z-fg-primary)",
     "--z-icon-color": "var(--z-icon-muted)",
   },

@@ -342,21 +342,14 @@ const Panel = styled("div", {
     display: "flex",
     flexDirection: "column",
     overflow: "hidden",
-    borderRadius: "var(--z-shape-card, calc(var(--z-radius, 10px) + 4px))",
-    // free content inside a settings card: token card surface + 16px feel via rows
-    border:
-      "1px solid var(--z-card-border, var(--z-btn-surface-border, color-mix(in srgb, var(--z-fg-primary) 8%, transparent)))",
-    background: "var(--z-card-bg)",
-    boxShadow: "var(--z-card-lift)",
-    // phones: a group is a filled card with no frame, as in the settings
-    // list (owner, 2026-11-17: one look for every group of rows)
-    _phone: {
-      border: "none",
-      borderRadius: "14px",
-      boxShadow: "none",
-      background:
-        "var(--z-sheet-group, color-mix(in srgb, var(--z-fg-primary) 5%, transparent))",
-    },
+    // the one box surface of the app (styles.css, --z-box-*): every card,
+    // panel and notice uses the same tokens, so they all look like this
+    // group (owner, 2026-11-20: "every box like each other"); on phones a
+    // filled card with no frame (owner, 2026-11-17)
+    borderRadius: "var(--z-box-radius)",
+    border: "var(--z-box-border)",
+    background: "var(--z-box-bg)",
+    boxShadow: "var(--z-box-shadow)",
   },
 });
 

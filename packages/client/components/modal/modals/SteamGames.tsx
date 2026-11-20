@@ -406,6 +406,9 @@ const Small = styled("span", {
 
 const Achievements = styled("ul", {
   base: {
+    background: "var(--z-box-bg)",
+    border: "var(--z-box-border)",
+    borderRadius: "var(--z-box-radius)",
     listStyle: "none",
     margin: 0,
     padding: 0,

@@ -207,12 +207,12 @@ export function ServerInfoModal(
 const Identity = styled("div", {
   base: {
     overflow: "hidden",
-    borderRadius: "14px",
+    borderRadius: "var(--z-box-radius)",
     // the shared dialog card surface; the server icon fallback sits on its
     // own tile one step up
-    background: "var(--z-card-bg)",
+    background: "var(--z-box-bg)",
     "--md-sys-color-surface-container-low": "var(--z-float-tile)",
-    border: "1px solid var(--z-border-subtle)",
+    border: "var(--z-box-border)",
   },
 });
 const Banner = styled("img", {

@@ -547,10 +547,9 @@ const PromoteCta = styled("div", {
     gap: "12px",
     marginTop: "16px",
     padding: "14px 16px",
-    borderRadius: "14px",
-    border: "1px solid color-mix(in srgb, var(--z-premium) 40%, transparent)",
-    background:
-      "linear-gradient(135deg, color-mix(in srgb, var(--z-premium) 10%, transparent), transparent 60%), var(--z-bg-raised)",
+    borderRadius: "var(--z-box-radius)",
+    border: "var(--z-box-border)",
+    background: "var(--z-box-bg)",
     "& > svg": { color: "var(--z-premium)", flexShrink: 0 },
     "& > div": {
       flex: 1,

@@ -343,9 +343,9 @@ const Note = styled("textarea", {
   base: {
     resize: "none",
     padding: "8px 10px",
-    borderRadius: "8px",
-    border: "1px solid var(--z-border-subtle)",
-    background: "var(--z-bg-input)",
+    borderRadius: "var(--z-box-radius)",
+    border: "var(--z-box-border)",
+    background: "var(--z-box-bg)",
     color: "var(--z-fg-primary)",
     fontSize: "14px",
     fontFamily: "inherit",

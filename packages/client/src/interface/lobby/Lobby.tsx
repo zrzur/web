@@ -1352,11 +1352,10 @@ const Card = styled("section", {
     gap: "14px",
     minWidth: 0,
     padding: "var(--lobby-card-pad, 22px)",
-    borderRadius: "var(--lobby-radius, 14px)",
-    background: "var(--z-card-bg)",
-    border:
-      "1px solid var(--z-card-border, var(--z-btn-surface-border, color-mix(in srgb, var(--z-fg-primary) 8%, transparent)))",
-    boxShadow: "var(--z-card-lift)",
+    borderRadius: "var(--z-box-radius)",
+    background: "var(--z-box-bg)",
+    border: "var(--z-box-border)",
+    boxShadow: "var(--z-box-shadow)",
     _phone: { padding: "16px" },
   },
 });
@@ -1680,9 +1679,9 @@ const Arrival = styled("button", {
     alignItems: "center",
     gap: "8px",
     padding: "10px 6px",
-    borderRadius: "var(--z-shape-control, 10px)",
-    border: "1px solid transparent",
-    background: "none",
+    borderRadius: "var(--z-box-radius)",
+    border: "var(--z-box-border)",
+    background: "var(--z-box-bg)",
     color: "var(--z-fg-secondary)",
     fontSize: "12px",
     fontWeight: 600,
@@ -1729,6 +1728,9 @@ const Search = styled("input", {
 /** Native disclosure rows: keyboard and screen readers work as is */
 const Questions = styled("div", {
   base: {
+    background: "var(--z-box-bg)",
+    border: "var(--z-box-border)",
+    borderRadius: "var(--z-box-radius)",
     display: "flex",
     flexDirection: "column",
     gap: "6px",

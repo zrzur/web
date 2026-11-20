@@ -117,10 +117,9 @@ const Banner = styled("div", {
     flexWrap: "wrap",
     margin: "0 16px 16px",
     padding: "12px 16px",
-    borderRadius: "12px",
-    background:
-      "var(--z-surface-raised, var(--md-sys-color-surface-container-high))",
-    border: "1px solid var(--z-border, var(--md-sys-color-outline-variant))",
+    borderRadius: "var(--z-box-radius)",
+    background: "var(--z-box-bg)",
+    border: "var(--z-box-border)",
     "@media (max-width: 600px)": {
       "& > button": { width: "100%", minHeight: "44px" },
     },

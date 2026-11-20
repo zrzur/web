@@ -89,6 +89,35 @@ body {
   );
 }
 
+/* The one box surface (owner, 2026-11-20: "every box like each other"):
+   every card, panel, notice and group of rows takes these, the same as the
+   groups in Settings. Set on <body>, where the theme writes its colours, so
+   they follow the theme. Phones: a filled card with no frame (2026-11-17). */
+body {
+  --z-box-bg: var(--z-card-bg);
+  --z-box-border: 1px solid
+    var(
+      --z-card-border,
+      var(
+        --z-btn-surface-border,
+        color-mix(in srgb, var(--z-fg-primary) 8%, transparent)
+      )
+    );
+  --z-box-radius: var(--z-shape-card, calc(var(--z-radius, 10px) + 4px));
+  --z-box-shadow: var(--z-card-lift, none);
+}
+@media (max-width: 600px) {
+  body {
+    --z-box-bg: var(
+      --z-sheet-group,
+      color-mix(in srgb, var(--z-fg-primary) 5%, transparent)
+    );
+    --z-box-border: none;
+    --z-box-radius: 14px;
+    --z-box-shadow: none;
+  }
+}
+
 /* Phones: room above the first row of every screen (screen headers, the
    server rail, the sidebar lists). Headers grow by this much instead of
    starting right at the top edge / under the status bar. Desktop: 0. */

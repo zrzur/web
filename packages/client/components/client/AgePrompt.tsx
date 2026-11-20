@@ -224,9 +224,9 @@ const Card = styled("form", {
     flexDirection: "column",
     gap: "16px",
     padding: "24px",
-    borderRadius: "14px",
-    border: "1px solid var(--z-border-subtle)",
-    background: "var(--z-bg-modal, var(--z-bg-raised))",
+    borderRadius: "var(--z-box-radius)",
+    border: "var(--z-box-border)",
+    background: "var(--z-box-bg)",
     color: "var(--z-fg-primary)",
     "& h1": {
       margin: 0,

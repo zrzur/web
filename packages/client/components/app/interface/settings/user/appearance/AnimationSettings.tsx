@@ -1012,9 +1012,9 @@ const Card = styled("div", {
     flexDirection: "column",
     gap: "8px",
     padding: "12px",
-    borderRadius: "var(--z-radius-md, 10px)",
-    border: "1px solid var(--z-border-subtle)",
-    background: "var(--z-bg-modal, var(--z-bg-raised))",
+    borderRadius: "var(--z-box-radius)",
+    border: "var(--z-box-border)",
+    background: "var(--z-box-bg)",
   },
 });
 

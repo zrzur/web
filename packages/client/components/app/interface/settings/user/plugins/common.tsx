@@ -181,10 +181,9 @@ export const Card = styled("div", {
     flexDirection: "column",
     gap: "12px",
     padding: "16px",
-    borderRadius: "var(--z-radius-lg, 14px)",
-    border:
-      "1px solid var(--z-border-subtle, var(--md-sys-color-outline-variant))",
-    background: "var(--z-bg-raised, var(--md-sys-color-surface-container))",
+    borderRadius: "var(--z-box-radius)",
+    border: "var(--z-box-border)",
+    background: "var(--z-box-bg)",
   },
 });
 

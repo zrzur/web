@@ -983,10 +983,10 @@ const Card = styled("div", {
   base: {
     position: "relative",
     padding: "14px 16px",
-    borderRadius: "8px",
+    borderRadius: "var(--z-box-radius)",
     // a step above the chat, so the card reads as raised, never as a hole
-    background: "color-mix(in srgb, var(--z-bg-raised) 55%, var(--z-bg-chat))",
-    border: "1px solid var(--z-border-subtle)",
+    background: "var(--z-box-bg)",
+    border: "var(--z-box-border)",
     overflow: "hidden",
     // the blocks inside (card > veil > content > blocks) start at the padding
     "& > div > div > div": { marginBlockStart: 0, gap: "8px" },

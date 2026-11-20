@@ -331,10 +331,10 @@ const Box = styled("div", {
     overflowY: "auto",
     // the same chrome as the call card it opens above, so the two read as
     // one piece
-    borderRadius: "var(--z-dock-radius, 12px)",
-    border: "1px solid var(--z-dock-border)",
-    background: "var(--z-dock-bg)",
-    boxShadow: "var(--z-dock-lift)",
+    borderRadius: "var(--z-box-radius)",
+    border: "var(--z-box-border)",
+    background: "var(--z-box-bg)",
+    boxShadow: "var(--z-box-shadow)",
     color: "var(--z-fg-primary)",
     fontSize: "14px",
     "&[data-bare]": {

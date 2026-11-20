@@ -138,9 +138,9 @@ const Starter = styled("div", {
     marginTop: "8px",
     paddingBlock: "12px",
     paddingInline: "16px",
-    borderRadius: "var(--z-radius-md, 10px)",
-    border: "1px solid var(--z-border-soft)",
-    background: "var(--z-bg-raised)",
+    borderRadius: "var(--z-box-radius)",
+    border: "var(--z-box-border)",
+    background: "var(--z-box-bg)",
     userSelect: "text",
   },
 });

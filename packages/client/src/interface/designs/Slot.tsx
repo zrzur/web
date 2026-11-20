@@ -65,10 +65,10 @@ const SlotBase = styled("div", {
     alignItems: "flex-start",
     gap: "8px",
     padding: "24px",
-    borderRadius: "var(--z-shape-card, 14px)",
-    border: "1px dashed var(--z-designs-edge-hover)",
+    borderRadius: "var(--z-box-radius)",
+    border: "var(--z-box-border)",
     // see-through, so the Designs atmosphere shows in the open slot
-    background: "var(--z-card-bg)",
+    background: "var(--z-box-bg)",
     color: "var(--z-fg-primary)",
     textAlign: "start",
     "& > strong": { marginTop: "8px", fontSize: "16px", fontWeight: 750 },

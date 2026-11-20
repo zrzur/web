@@ -11,13 +11,13 @@ import {
 } from "solid-js";
 
 import { Trans, useLingui } from "@lingui/solid/macro";
-import { styled } from "styled-system/jsx";
 import {
   JoinRequestCreated,
   PublicChannelInvite,
   ServerPublicInvite,
   File as StoatFile,
 } from "@zrzur/sdk/solid";
+import { styled } from "styled-system/jsx";
 
 import { useClient, useClientLifecycle } from "@revolt/client";
 import { State } from "@revolt/client/Controller";
@@ -107,12 +107,9 @@ export default function InvitePage() {
   const member = () =>
     signedIn() && invite() && client().servers.get(invite()!.server_id);
   const asksFirst = () => invite()?.server_access === "Approval";
-  const members = () =>
-    memberCount(invite()?.member_count ?? 0, i18n().locale);
+  const members = () => memberCount(invite()?.member_count ?? 0, i18n().locale);
   const file = (value?: unknown) =>
-    value
-      ? new StoatFile(client(), value as never).createFileURL()
-      : undefined;
+    value ? new StoatFile(client(), value as never).createFileURL() : undefined;
 
   /** Join as the person who is signed in */
   async function joinSignedIn() {
@@ -123,7 +120,9 @@ export default function InvitePage() {
     setBusy(true);
     setJoinError(undefined);
     try {
-      await (PublicChannelInvite.from(client(), data) as ServerPublicInvite).join();
+      await (
+        PublicChannelInvite.from(client(), data) as ServerPublicInvite
+      ).join();
       forgetInvite();
       navigate(arrivalPath(data.server_id, data.channel_id));
     } catch (error) {
@@ -165,16 +164,19 @@ export default function InvitePage() {
 
   /** Name, e-mail, month and year of birth: make the account and enter */
   async function signUp(data: FormData) {
-    const answer = (await client().api.post("/auth/account/join" as never, {
-      email: data.get("email"),
-      display_name: data.get("display-name"),
-      birth_month: toBirthMonth(
-        Number(data.get("birth-year")),
-        Number(data.get("birth-month")),
-      ),
-      invite: code(),
-      captcha: data.get("captcha") ?? undefined,
-    } as never)) as JoinByLinkResponse;
+    const answer = (await client().api.post(
+      "/auth/account/join" as never,
+      {
+        email: data.get("email"),
+        display_name: data.get("display-name"),
+        birth_month: toBirthMonth(
+          Number(data.get("birth-year")),
+          Number(data.get("birth-month")),
+        ),
+        invite: code(),
+        captcha: data.get("captcha") ?? undefined,
+      } as never,
+    )) as JoinByLinkResponse;
 
     if (answer.result === "CheckEmail") {
       setStep({ at: "check-email" });
@@ -212,10 +214,7 @@ export default function InvitePage() {
           <BrandName />
         </Brand>
         <Show when={!signedIn()}>
-          <TopLink
-            href="/login/auth"
-            onClick={() => rememberInvite(code())}
-          >
+          <TopLink href="/login/auth" onClick={() => rememberInvite(code())}>
             <Trans>Log in</Trans>
           </TopLink>
         </Show>
@@ -290,10 +289,7 @@ export default function InvitePage() {
                     navigate(signedIn() ? "/discover" : "/login");
                   }}
                 >
-                  <Show
-                    when={signedIn()}
-                    fallback={<Trans>Open Zrzur</Trans>}
-                  >
+                  <Show when={signedIn()} fallback={<Trans>Open Zrzur</Trans>}>
                     <Trans>Find servers in Discover</Trans>
                   </Show>
                 </AuthButton>
@@ -348,7 +344,11 @@ export default function InvitePage() {
                     <Show when={asksFirst() && step().at === "server"}>
                       <Inside>
                         <li>
-                          <Icon name="lock-simple" size={20} aria-hidden="true" />
+                          <Icon
+                            name="lock-simple"
+                            size={20}
+                            aria-hidden="true"
+                          />
                           <div>
                             <b>
                               <Trans>
@@ -440,8 +440,8 @@ export default function InvitePage() {
                                 <br />
                                 <Trans>
                                   You'll choose a password from the email we
-                                  send you. Confirm it within 3 days to keep
-                                  the account.
+                                  send you. Confirm it within 3 days to keep the
+                                  account.
                                 </Trans>
                               </Legal>
                             </>
@@ -538,9 +538,7 @@ export default function InvitePage() {
                           onPress={onJoin}
                         >
                           <Switch
-                            fallback={
-                              <Trans>Join {data().server_name}</Trans>
-                            }
+                            fallback={<Trans>Join {data().server_name}</Trans>}
                           >
                             <Match when={member()}>
                               <Trans>Open {data().server_name}</Trans>
@@ -614,7 +612,10 @@ const Brand = styled(A, {
     minHeight: "44px",
     textDecoration: "none",
     borderRadius: "var(--z-radius-sm, 6px)",
-    _focusVisible: { outline: "2px solid var(--z-focus)", outlineOffset: "2px" },
+    _focusVisible: {
+      outline: "2px solid var(--z-focus)",
+      outlineOffset: "2px",
+    },
   },
 });
 
@@ -630,7 +631,10 @@ const TopLink = styled(A, {
     textDecoration: "none",
     borderRadius: "var(--z-radius-sm, 6px)",
     _hover: { color: "var(--z-fg-primary)" },
-    _focusVisible: { outline: "2px solid var(--z-focus)", outlineOffset: "2px" },
+    _focusVisible: {
+      outline: "2px solid var(--z-focus)",
+      outlineOffset: "2px",
+    },
   },
 });
 
@@ -651,9 +655,9 @@ const Card = styled("article", {
     width: "100%",
     maxWidth: "960px",
     overflow: "hidden",
-    background: "var(--z-bg-nav)",
-    border: "1px solid var(--z-border-soft)",
-    borderRadius: "var(--z-radius-lg, 14px)",
+    background: "var(--z-box-bg)",
+    border: "var(--z-box-border)",
+    borderRadius: "var(--z-box-radius)",
     [PHONE]: {
       display: "flex",
       flexDirection: "column",
@@ -887,7 +891,10 @@ const Quiet = styled("button", {
     borderRadius: "var(--z-radius-md, 10px)",
     cursor: "pointer",
     _hover: { background: "var(--z-hover)" },
-    _focusVisible: { outline: "2px solid var(--z-focus)", outlineOffset: "2px" },
+    _focusVisible: {
+      outline: "2px solid var(--z-focus)",
+      outlineOffset: "2px",
+    },
   },
 });
 
@@ -906,9 +913,9 @@ const Notice = styled("section", {
     padding: "48px 32px",
     textAlign: "center",
     color: "var(--z-fg-muted)",
-    background: "var(--z-bg-nav)",
-    border: "1px solid var(--z-border-soft)",
-    borderRadius: "var(--z-radius-lg, 14px)",
+    background: "var(--z-box-bg)",
+    border: "var(--z-box-border)",
+    borderRadius: "var(--z-box-radius)",
     "& h1": {
       margin: 0,
       fontSize: "22px",

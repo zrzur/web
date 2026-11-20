@@ -34,13 +34,13 @@ import {
   SignInStuck,
   UsTransfer,
 } from "./ServiceCards";
-import { leaveForSignIn } from "./leaveForSignIn";
 import {
   type LinkedAccount,
   type LinkedAccounts,
   STEAM_CONSENT_VERSION,
   connectionsApi,
 } from "./connectionsApi";
+import { leaveForSignIn } from "./leaveForSignIn";
 
 /**
  * Accounts on other services shown on the profile. Steam for now: the person
@@ -138,8 +138,8 @@ export function Connections() {
       </Small>
       <Small>
         <Trans>
-          Twitch, GitHub and Battle.net are trademarks of their owners. Zrzur
-          is not affiliated with them or endorsed by them.
+          Twitch, GitHub and Battle.net are trademarks of their owners. Zrzur is
+          not affiliated with them or endorsed by them.
         </Trans>
       </Small>
     </Column>
@@ -156,8 +156,8 @@ function SteamWhatWeCopy() {
       <Trans>
         your Steam name and link, your game count, hours played, your 10 most
         played games with their achievement counts, and up to 60 of your latest
-        achievements in those games with their name, description and the day
-        you unlocked them (no time of day). We take this from what Steam shows
+        achievements in those games with their name, description and the day you
+        unlocked them (no time of day). We take this from what Steam shows
         publicly and keep it in the EU. Game pictures and achievement icons come
         from Steam and load through Zrzur's servers, so Steam does not see who
         views your profile.
@@ -517,21 +517,21 @@ function SteamLinked(props: {
                     }
                   >
                     <GameRow>
-                    <SteamTile
-                      url={game.icon_url}
-                      name={game.name}
-                      size={28}
-                    />
-                    <GameLine>
-                      <bdi lang="en">{game.name}</bdi>
-                      <GameFacts>
-                        {t`${number(game.hours)} h`}
-                        <Show when={game.achievements_total}>
-                          {" · "}
-                          {t`${number(game.achievements_unlocked ?? 0)} of ${number(game.achievements_total ?? 0)} achievements`}
-                        </Show>
-                      </GameFacts>
-                    </GameLine>
+                      <SteamTile
+                        url={game.icon_url}
+                        name={game.name}
+                        size={28}
+                      />
+                      <GameLine>
+                        <bdi lang="en">{game.name}</bdi>
+                        <GameFacts>
+                          {t`${number(game.hours)} h`}
+                          <Show when={game.achievements_total}>
+                            {" · "}
+                            {t`${number(game.achievements_unlocked ?? 0)} of ${number(game.achievements_total ?? 0)} achievements`}
+                          </Show>
+                        </GameFacts>
+                      </GameLine>
                     </GameRow>
                   </Checkbox>
                 </li>
@@ -617,21 +617,21 @@ const Failure = styled("div", {
 
 const Consent = styled("div", {
   base: {
+    background: "var(--z-box-bg)",
     display: "flex",
     flexDirection: "column",
     gap: "12px",
     padding: "16px",
-    borderRadius: "var(--z-radius-md)",
+    borderRadius: "var(--z-box-radius)",
     // phones: the fill and corner of every settings group, no frame
     // (owner, 2026-11-17: one box look everywhere)
     _phone: {
       border: "none",
       borderRadius: "14px",
       boxShadow: "none",
-      background:
-        "color-mix(in srgb, var(--z-fg-primary) 4%, transparent)",
+      background: "color-mix(in srgb, var(--z-fg-primary) 4%, transparent)",
     },
-    border: "1px solid var(--z-border-subtle)",
+    border: "var(--z-box-border)",
     color: "var(--z-fg-primary)",
     fontSize: "14px",
     lineHeight: "20px",

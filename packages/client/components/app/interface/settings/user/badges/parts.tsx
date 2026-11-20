@@ -42,7 +42,7 @@ export const Tile = styled("li", {
     alignItems: "flex-start",
     minWidth: 0,
     padding: "12px",
-    borderRadius: "calc(var(--z-radius, 10px) + 2px)",
+    borderRadius: "var(--z-box-radius)",
     // phones: the fill and corner of every settings group, no frame
     // (owner, 2026-11-17: one box look everywhere)
     _phone: {
@@ -52,9 +52,9 @@ export const Tile = styled("li", {
       background:
         "var(--z-sheet-group, color-mix(in srgb, var(--z-fg-primary) 5%, transparent))",
     },
-    border: "1px solid var(--z-btn-surface-border)",
-    background: "var(--z-card-bg)",
-    boxShadow: "var(--z-card-lift)",
+    border: "var(--z-box-border)",
+    background: "var(--z-box-bg)",
+    boxShadow: "var(--z-box-shadow)",
     // locked art (BadgeMark) comes back to colour while you read the tile
     "&:hover [data-state='locked']": {
       filter: "grayscale(0.2)",
@@ -124,7 +124,7 @@ export const Card = styled("div", {
     flexDirection: "column",
     gap: "8px",
     padding: "14px",
-    borderRadius: "calc(var(--z-radius, 10px) + 2px)",
+    borderRadius: "var(--z-box-radius)",
     // phones: the fill and corner of every settings group, no frame
     // (owner, 2026-11-17: one box look everywhere)
     _phone: {
@@ -134,9 +134,9 @@ export const Card = styled("div", {
       background:
         "var(--z-sheet-group, color-mix(in srgb, var(--z-fg-primary) 5%, transparent))",
     },
-    border: "1px solid var(--z-btn-surface-border)",
-    background: "var(--z-card-bg)",
-    boxShadow: "var(--z-card-lift)",
+    border: "var(--z-box-border)",
+    background: "var(--z-box-bg)",
+    boxShadow: "var(--z-box-shadow)",
     minWidth: 0,
     "& h4": { margin: 0, fontSize: "14px" },
     "& p": { margin: 0, fontSize: "13px", color: "var(--z-fg-secondary)" },

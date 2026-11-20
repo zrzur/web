@@ -430,10 +430,10 @@ const Row = styled("div", {
     flexDirection: "column",
     gap: "8px",
     padding: "10px 12px",
-    borderRadius: "calc(var(--z-radius, 10px) + 2px)",
-    border: "1px solid var(--z-btn-surface-border)",
-    background: "var(--z-card-bg)",
-    boxShadow: "var(--z-card-lift)",
+    borderRadius: "var(--z-box-radius)",
+    border: "var(--z-box-border)",
+    background: "var(--z-box-bg)",
+    boxShadow: "var(--z-box-shadow)",
   },
 });
 

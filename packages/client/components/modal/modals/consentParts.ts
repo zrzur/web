@@ -84,9 +84,9 @@ export const Panel = styled("div", {
     flexDirection: "column",
     gap: "12px",
     padding: "16px",
-    borderRadius: "var(--z-radius-md, 14px)",
-    background: "var(--z-bg-nav, var(--z-bg-sidebar))",
-    border: "1px solid var(--z-border-subtle)",
+    borderRadius: "var(--z-box-radius)",
+    background: "var(--z-box-bg)",
+    border: "var(--z-box-border)",
     minWidth: 0,
   },
 });

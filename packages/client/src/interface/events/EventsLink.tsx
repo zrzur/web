@@ -218,10 +218,9 @@ const Banner = styled("div", {
     marginInline: "8px",
     marginBlock: "4px 8px",
     padding: "12px",
-    borderRadius: "var(--z-shape-card, calc(var(--z-radius, 10px) + 4px))",
-    border:
-      "1px solid var(--z-card-border, var(--z-btn-surface-border, color-mix(in srgb, var(--z-fg-primary) 8%, transparent)))",
-    background: "var(--z-card-bg)",
+    borderRadius: "var(--z-box-radius)",
+    border: "var(--z-box-border)",
+    background: "var(--z-box-bg)",
   },
 });
 

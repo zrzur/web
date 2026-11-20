@@ -230,9 +230,9 @@ const Card = styled("div", {
     flexDirection: "column",
     gap: "2px",
     padding: "6px",
-    borderRadius: "var(--z-radius, 10px)",
-    background: "var(--z-bg-input)",
-    border: "1px solid var(--z-border-subtle)",
+    borderRadius: "var(--z-box-radius)",
+    background: "var(--z-box-bg)",
+    border: "var(--z-box-border)",
 
     "&[data-ignored='true']": { opacity: 0.45 },
   },

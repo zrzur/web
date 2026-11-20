@@ -199,10 +199,10 @@ const Base = styled("div", {
     minHeight: "72px",
     marginBlock: "4px",
     padding: "12px 16px",
-    borderRadius: "12px",
+    borderRadius: "var(--z-box-radius)",
 
-    background: "var(--z-card-bg)",
-    border: "1px solid var(--z-border-subtle)",
+    background: "var(--z-box-bg)",
+    border: "var(--z-box-border)",
   },
 });
 

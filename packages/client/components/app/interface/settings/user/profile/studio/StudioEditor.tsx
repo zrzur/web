@@ -1604,6 +1604,9 @@ const CounterText = styled("span", {
 
 const Steps = styled("ol", {
   base: {
+    background: "var(--z-box-bg)",
+    border: "var(--z-box-border)",
+    borderRadius: "var(--z-box-radius)",
     display: "flex",
     gap: "4px",
     margin: 0,
@@ -1780,9 +1783,9 @@ const TypeCard = styled("div", {
     flexDirection: "column",
     gap: "12px",
     padding: "20px",
-    borderRadius: "var(--z-shape-card, 14px)",
-    border: "1px solid var(--z-border-subtle)",
-    background: "var(--z-bg-sidebar)",
+    borderRadius: "var(--z-box-radius)",
+    border: "var(--z-box-border)",
+    background: "var(--z-box-bg)",
     "&[data-on='true']": {
       borderColor: "var(--z-accent-fill)",
       background:
@@ -1810,9 +1813,9 @@ const Question = styled("section", {
     flexDirection: "column",
     gap: "8px",
     padding: "20px",
-    borderRadius: "var(--z-shape-card, 14px)",
-    border: "1px solid var(--z-border-subtle)",
-    background: "var(--z-bg-sidebar)",
+    borderRadius: "var(--z-box-radius)",
+    border: "var(--z-box-border)",
+    background: "var(--z-box-bg)",
     "& h2": {
       margin: 0,
       fontSize: "15px",

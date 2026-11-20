@@ -157,9 +157,9 @@ const Destination = styled("div", {
     flexDirection: "column",
     gap: "2px",
     padding: "12px 14px",
-    borderRadius: "var(--z-radius, 10px)",
-    border: "1px solid var(--z-border-subtle)",
-    background: "var(--z-bg-input)",
+    borderRadius: "var(--z-box-radius)",
+    border: "var(--z-box-border)",
+    background: "var(--z-box-bg)",
     unicodeBidi: "plaintext",
 
     "& strong": {

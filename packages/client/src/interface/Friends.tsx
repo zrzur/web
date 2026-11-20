@@ -565,10 +565,10 @@ const Rows = styled("div", {
     maxWidth: "860px",
     alignSelf: "center",
     overflow: "hidden",
-    borderRadius: "14px",
-    border: "1px solid var(--z-btn-surface-border)",
-    background: "var(--z-card-bg)",
-    boxShadow: "var(--z-card-lift)",
+    borderRadius: "var(--z-box-radius)",
+    border: "var(--z-box-border)",
+    background: "var(--z-box-bg)",
+    boxShadow: "var(--z-box-shadow)",
     // phones: a filled group with no frame, the look of the settings list
     // (design pack, 2026-11-17)
     _phone: {

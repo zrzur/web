@@ -2,8 +2,8 @@ import { useLingui } from "@lingui/solid/macro";
 import { useUser } from "@revolt/client";
 import { FloatingSelect, MenuItem, TextField } from "@revolt/ui";
 import { Icon } from "@revolt/ui/icons/Icon";
-import { For, Index, Show } from "solid-js";
 import type { LobbyRoleQuestion, Server } from "@zrzur/sdk/solid";
+import { For, Index, Show } from "solid-js";
 import { styled } from "styled-system/jsx";
 import { ulid } from "ulid";
 
@@ -330,9 +330,9 @@ const Question = styled("div", {
     flexDirection: "column",
     gap: "16px",
     padding: "16px",
-    borderRadius: "12px",
-    border: "1px solid var(--z-border-subtle)",
-    background: "color-mix(in srgb, var(--z-fg-primary) 3%, transparent)",
+    borderRadius: "var(--z-box-radius)",
+    border: "var(--z-box-border)",
+    background: "var(--z-box-bg)",
   },
 });
 
