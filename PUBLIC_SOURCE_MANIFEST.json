@@ -5266,8 +5266,8 @@
     },
     {
       "path": "packages/client/components/modal/modals/ServerEventEditor.tsx",
-      "sha256": "0bba3a56ab0a75bbeeeaa40426cf96f87ac005179a9dc47940fea62d517d6372",
-      "bytes": 42436,
+      "sha256": "14b6ef98b86153c18984e2d5e4c12e7e6b8df97c4e95f1a2f8ca5362c86dc3a1",
+      "bytes": 42985,
       "category": "product-source-or-build-manifest"
     },
     {
