@@ -1,6 +1,6 @@
 import {
-  For,
   type JSX,
+  For,
   Match,
   Show,
   Switch,
@@ -21,7 +21,6 @@ import { Button, Segmented } from "@revolt/ui";
 import { hour12From } from "@revolt/ui/components/design/dateTime";
 import { Icon } from "@revolt/ui/icons/Icon";
 
-import { eventPath } from "./EventCard";
 import {
   type CalendarView,
   calendarRange,
@@ -31,6 +30,8 @@ import {
   moveAnchor,
   weekStartsOn,
 } from "./calendarDays";
+import { eventPath } from "./EventCard";
+import { settled } from "./settled";
 
 type Event = API.ServerEvent;
 
@@ -65,11 +66,12 @@ export function EventCalendar(props: {
   const range = createMemo(() => calendarRange(view(), anchor(), weekStart()));
   const [loaded, { refetch }] = createResource(
     () => [range().from.toISOString(), range().to.toISOString()] as const,
-    async ([from, to]) => (await props.load(from, to)).map((event) => event._id),
+    async ([from, to]) =>
+      (await props.load(from, to)).map((event) => event._id),
   );
   // read from the collection, so an answer or a change shows at once
   const events = createMemo(() =>
-    (loaded.latest ?? [])
+    (settled(loaded) ?? [])
       .map((id) => client().serverEvents.get(id))
       .filter(
         (event): event is Event =>
@@ -116,10 +118,18 @@ export function EventCalendar(props: {
     const next = moveAnchor(view(), anchor(), step);
     setAnchor(next);
     // the chosen day follows into the new span
-    if (!calendarRange(view(), next, weekStart()).days.some(
-      (day) => dayKey(day) === chosen(),
-    ))
-      setChosen(dayKey(view() === "week" ? next : new Date(next.getFullYear(), next.getMonth(), 1)));
+    if (
+      !calendarRange(view(), next, weekStart()).days.some(
+        (day) => dayKey(day) === chosen(),
+      )
+    )
+      setChosen(
+        dayKey(
+          view() === "week"
+            ? next
+            : new Date(next.getFullYear(), next.getMonth(), 1),
+        ),
+      );
   }
 
   function goToday() {
@@ -140,9 +150,6 @@ export function EventCalendar(props: {
           >
             <Icon name="caret-left" size={16} />
           </Button>
-          <h2 aria-live="polite" data-testid="calendar-title">
-            {calendarTitle(view(), anchor(), weekStart(), locale())}
-          </h2>
           <Button
             size="sm"
             variant="text"
@@ -153,6 +160,14 @@ export function EventCalendar(props: {
             <Icon name="caret-right" size={16} />
           </Button>
         </Step>
+        <h2 aria-live="polite" data-testid="calendar-title">
+          <span data-long>
+            {calendarTitle(view(), anchor(), weekStart(), locale())}
+          </span>
+          <span data-short aria-hidden="true">
+            {calendarTitle(view(), anchor(), weekStart(), locale(), true)}
+          </span>
+        </h2>
         <Tools>
           <Button
             size="sm"
@@ -167,8 +182,14 @@ export function EventCalendar(props: {
             value={view()}
             onChange={setView}
             options={[
-              { value: "month", label: t({ message: "Month", context: "calendar" }) },
-              { value: "week", label: t({ message: "Week", context: "calendar" }) },
+              {
+                value: "month",
+                label: t({ message: "Month", context: "calendar" }),
+              },
+              {
+                value: "week",
+                label: t({ message: "Week", context: "calendar" }),
+              },
             ]}
           />
         </Tools>
@@ -205,7 +226,8 @@ export function EventCalendar(props: {
                   const key = dayKey(day);
                   const list = () => byDay().get(key) ?? [];
                   const outside = () =>
-                    view() === "month" && day.getMonth() !== anchor().getMonth();
+                    view() === "month" &&
+                    day.getMonth() !== anchor().getMonth();
                   return (
                     <Cell
                       role="gridcell"
@@ -217,6 +239,7 @@ export function EventCalendar(props: {
                       <DayButton
                         type="button"
                         data-today={today() === key || undefined}
+                        aria-current={today() === key ? "date" : undefined}
                         aria-label={
                           list().length
                             ? t`${longDay(key)}, ${list().length} events`
@@ -231,7 +254,9 @@ export function EventCalendar(props: {
                           <For each={list().slice(0, CELL_EVENTS)}>
                             {(event) => (
                               <i
-                                data-live={event.status === "Active" || undefined}
+                                data-live={
+                                  event.status === "Active" || undefined
+                                }
                                 data-mine={mine(event) || undefined}
                               />
                             )}
@@ -250,6 +275,15 @@ export function EventCalendar(props: {
                             <Chip
                               href={eventPath(event.server, event._id)}
                               onClick={(click) => {
+                                // a modified click opens a new tab, as links do
+                                if (
+                                  click.button !== 0 ||
+                                  click.metaKey ||
+                                  click.ctrlKey ||
+                                  click.shiftKey ||
+                                  click.altKey
+                                )
+                                  return;
                                 click.preventDefault();
                                 navigate(eventPath(event.server, event._id));
                               }}
@@ -261,6 +295,9 @@ export function EventCalendar(props: {
                               data-testid="calendar-event"
                             >
                               <time datetime={event.starts_at}>
+                                <Show when={event.status === "Active"}>
+                                  <LiveMark aria-hidden="true" />
+                                </Show>
                                 {time(event)}
                               </time>
                               <span dir="auto">{event.title}</span>
@@ -292,7 +329,7 @@ export function EventCalendar(props: {
           <Match when={chosenEvents().length}>
             {props.day(chosenEvents())}
           </Match>
-          <Match when={loaded.loading && !loaded.latest}>
+          <Match when={loaded.loading && !settled(loaded)}>
             <Quiet aria-busy="true">
               <Trans>Loading events</Trans>
             </Quiet>
@@ -312,18 +349,40 @@ const Box = styled("div", {
   base: {
     display: "flex",
     flexDirection: "column",
-    gap: "14px",
+    gap: "16px",
     minWidth: 0,
   },
 });
 
+/**
+ * One line: the arrows, the month, then Today and Month/Week at the end.
+ * Phones keep the line with the short month name.
+ */
 const Bar = styled("div", {
   base: {
     display: "flex",
-    flexWrap: "wrap",
     alignItems: "center",
-    justifyContent: "space-between",
     gap: "8px",
+    minWidth: 0,
+    "& h2": {
+      flex: "1 1 auto",
+      minWidth: 0,
+      margin: 0,
+      fontSize: "18px",
+      lineHeight: "28px",
+      fontWeight: 650,
+      color: "var(--z-header-primary, var(--z-fg-primary))",
+      overflow: "hidden",
+      textOverflow: "ellipsis",
+      whiteSpace: "nowrap",
+    },
+    "& h2 [data-short]": { display: "none" },
+    _phone: {
+      gap: "4px",
+      "& h2": { fontSize: "15px", lineHeight: "22px" },
+      "& h2 [data-long]": { display: "none" },
+      "& h2 [data-short]": { display: "inline" },
+    },
   },
 });
 
@@ -331,24 +390,12 @@ const Step = styled("div", {
   base: {
     display: "flex",
     alignItems: "center",
-    gap: "4px",
-    minWidth: 0,
-    "& h2": {
-      margin: 0,
-      minWidth: "9em",
-      textAlign: "center",
-      fontSize: "18px",
-      lineHeight: "28px",
-      fontWeight: 700,
-      color: "var(--z-header-primary, var(--z-fg-primary))",
-    },
+    gap: "2px",
+    flex: "none",
     // caret-left/right already follow the reading direction (styles.css);
     // flipping them here too turned them back the wrong way in Arabic
     _phone: {
-      flex: 1,
-      justifyContent: "space-between",
-      "& h2": { minWidth: 0, fontSize: "16px" },
-      "& button": { minWidth: "44px", minHeight: "44px" },
+      "& button": { minWidth: "36px", minHeight: "44px", paddingInline: 0 },
     },
   },
 });
@@ -358,17 +405,27 @@ const Tools = styled("div", {
     display: "flex",
     alignItems: "center",
     gap: "8px",
-    _phone: { width: "100%", justifyContent: "space-between" },
+    flex: "none",
+    _phone: {
+      gap: "4px",
+      "& > button": { minHeight: "44px", paddingInline: "6px" },
+      "& [role=radiogroup] button": { paddingInline: "8px" },
+    },
   },
 });
 
+/** The month on the one box surface, quiet lines between the days */
 const Grid = styled("div", {
   base: {
     display: "flex",
     flexDirection: "column",
-    borderRadius: "var(--z-radius-md, 14px)",
-    background: "var(--z-bg-raised)",
+    borderRadius: "var(--z-box-radius)",
+    background: "var(--z-box-bg)",
+    border: "var(--z-box-border)",
+    boxShadow: "var(--z-box-shadow)",
     overflow: "hidden",
+    transition: "opacity 0.15s ease",
+    _motionReduce: { transition: "none" },
     "&[aria-busy=true]": { opacity: 0.7 },
   },
 });
@@ -377,21 +434,25 @@ const Week = styled("div", {
   base: {
     display: "grid",
     gridTemplateColumns: "repeat(7, minmax(0, 1fr))",
-    "& + &": { borderBlockStart: "1px solid var(--z-border-subtle)" },
+    "& + &": {
+      borderBlockStart:
+        "1px solid color-mix(in srgb, var(--z-fg-primary) 6%, transparent)",
+    },
   },
 });
 
 const Head = styled("div", {
   base: {
-    padding: "8px 4px",
-    textAlign: "center",
+    padding: "10px 10px 8px",
+    textAlign: "start",
     fontSize: "12px",
     lineHeight: "16px",
-    fontWeight: 650,
+    fontWeight: 600,
     color: "var(--z-fg-muted)",
     overflow: "hidden",
     textOverflow: "ellipsis",
     whiteSpace: "nowrap",
+    _phone: { padding: "8px 0 6px", textAlign: "center" },
   },
 });
 
@@ -401,19 +462,26 @@ const Cell = styled("div", {
     flexDirection: "column",
     gap: "4px",
     minWidth: 0,
-    minHeight: "104px",
+    minHeight: "108px",
     padding: "6px",
-    "& + &": { borderInlineStart: "1px solid var(--z-border-subtle)" },
-    "&[data-outside]": { opacity: 0.45 },
-    "&[data-chosen]": {
-      background: "color-mix(in srgb, var(--z-fg-primary) 5%, transparent)",
+    transition: "background-color 0.12s ease",
+    _motionReduce: { transition: "none" },
+    "& + &": {
+      borderInlineStart:
+        "1px solid color-mix(in srgb, var(--z-fg-primary) 6%, transparent)",
     },
-    "[data-view=week] &": { minHeight: "220px" },
+    "&[data-outside] b": { color: "var(--z-fg-muted)", fontWeight: 500 },
+    "&[data-outside] a": { opacity: 0.6 },
+    "&[data-chosen]": {
+      background: "color-mix(in srgb, var(--z-fg-primary) 4%, transparent)",
+    },
+    "[data-view=week] &": { minHeight: "260px" },
     _phone: {
       minHeight: "52px",
       padding: "2px",
       alignItems: "center",
-      "[data-view=week] &": { minHeight: "52px" },
+      "& + &": { borderInlineStart: "none" },
+      "[data-view=week] &": { minHeight: "56px" },
     },
   },
 });
@@ -421,30 +489,40 @@ const Cell = styled("div", {
 const DayButton = styled("button", {
   base: {
     all: "unset",
+    // all: unset drops the button's "relative": the phones' unseen 44 px
+    // tap area (styles.css) then spread over the whole page and took every
+    // tap (the calendar's last day answered taps on the tabs)
+    position: "relative",
     boxSizing: "border-box",
     display: "inline-flex",
     flexDirection: "column",
     alignItems: "center",
     alignSelf: "flex-start",
     cursor: "pointer",
-    borderRadius: "var(--z-radius-sm, 6px)",
+    borderRadius: "999px",
     "& b": {
       display: "inline-grid",
       placeItems: "center",
-      minWidth: "28px",
-      height: "28px",
+      minWidth: "26px",
+      height: "26px",
       paddingInline: "4px",
       borderRadius: "999px",
       fontSize: "13px",
+      lineHeight: "16px",
       fontWeight: 600,
       color: "var(--z-fg-secondary)",
+      fontVariantNumeric: "tabular-nums",
     },
-    "&[data-today] b": {
-      background: "var(--z-nav-selected)",
+    "&:hover b": {
       color: "var(--z-fg-primary)",
+      background: "color-mix(in srgb, var(--z-fg-primary) 7%, transparent)",
+    },
+    // today: the accent on the date only
+    "&[data-today] b, &[data-today]:hover b": {
+      background: "var(--z-accent)",
+      color: "var(--z-on-accent, #fff)",
       fontWeight: 700,
     },
-    "&:hover b": { color: "var(--z-fg-primary)" },
     "&:focus-visible": {
       outline: "2px solid var(--z-focus)",
       outlineOffset: "1px",
@@ -453,7 +531,8 @@ const DayButton = styled("button", {
       alignSelf: "stretch",
       minHeight: "48px",
       justifyContent: "center",
-      gap: "2px",
+      gap: "3px",
+      "& b": { minWidth: "30px", height: "30px", fontSize: "14px" },
     },
   },
 });
@@ -463,10 +542,10 @@ const Marks = styled("span", {
   base: {
     display: "none",
     gap: "3px",
-    height: "6px",
+    height: "5px",
     "& i": {
-      width: "6px",
-      height: "6px",
+      width: "5px",
+      height: "5px",
       borderRadius: "999px",
       background: "var(--z-fg-muted)",
     },
@@ -480,40 +559,50 @@ const Chips = styled("div", {
   base: {
     display: "flex",
     flexDirection: "column",
-    gap: "2px",
+    gap: "3px",
     minWidth: 0,
     _phone: { display: "none" },
   },
 });
 
+/** An event in a day: its time, then its title, on a quiet chip */
 const Chip = styled("a", {
   base: {
     display: "flex",
+    alignItems: "baseline",
     gap: "6px",
     minWidth: 0,
-    padding: "2px 6px",
+    padding: "3px 6px",
     borderRadius: "var(--z-radius-sm, 6px)",
     fontSize: "12px",
-    lineHeight: "18px",
-    color: "var(--z-fg-secondary)",
+    lineHeight: "16px",
+    color: "var(--z-fg-primary)",
     textDecoration: "none",
-    background: "color-mix(in srgb, var(--z-fg-primary) 6%, transparent)",
-    "& time": { flexShrink: 0, color: "var(--z-fg-muted)" },
+    background: "color-mix(in srgb, var(--z-fg-primary) 7%, transparent)",
+    transition: "background-color 0.12s ease",
+    _motionReduce: { transition: "none" },
+    "& time": {
+      display: "inline-flex",
+      alignItems: "center",
+      gap: "4px",
+      flexShrink: 0,
+      color: "var(--z-fg-muted)",
+      fontVariantNumeric: "tabular-nums",
+    },
     "& span": {
       minWidth: 0,
       overflow: "hidden",
       textOverflow: "ellipsis",
       whiteSpace: "nowrap",
+      fontWeight: 500,
     },
-    "&[data-mine]": { color: "var(--z-fg-primary)", fontWeight: 600 },
-    "&[data-live]": {
-      background: "color-mix(in srgb, var(--z-live) 16%, transparent)",
-      color: "var(--z-fg-primary)",
+    "&[data-mine] span": { fontWeight: 650 },
+    "&[data-off] span": {
+      textDecoration: "line-through",
+      color: "var(--z-fg-muted)",
     },
-    "&[data-off] span": { textDecoration: "line-through" },
     "&:hover": {
-      background: "color-mix(in srgb, var(--z-fg-primary) 11%, transparent)",
-      color: "var(--z-fg-primary)",
+      background: "color-mix(in srgb, var(--z-fg-primary) 12%, transparent)",
     },
     "&:focus-visible": {
       outline: "2px solid var(--z-focus)",
@@ -521,21 +610,42 @@ const Chip = styled("a", {
     },
     "[data-view=week] &": {
       flexDirection: "column",
-      gap: 0,
+      alignItems: "stretch",
+      gap: "2px",
       padding: "6px 8px",
-      "& span": { whiteSpace: "normal", overflowWrap: "anywhere" },
+      "& span": {
+        whiteSpace: "normal",
+        overflowWrap: "anywhere",
+        lineClamp: 3,
+      },
     },
+  },
+});
+
+/** A live event's chip: the live dot before its time */
+const LiveMark = styled("i", {
+  base: {
+    width: "6px",
+    height: "6px",
+    borderRadius: "999px",
+    background: "var(--z-live)",
   },
 });
 
 const More = styled("button", {
   base: {
     all: "unset",
+    // all: unset drops the button's "relative": the phones' unseen 44 px
+    // tap area (styles.css) then spread over the whole page and took every
+    // tap (the calendar's last day answered taps on the tabs)
+    position: "relative",
     cursor: "pointer",
     paddingInline: "6px",
     fontSize: "12px",
     lineHeight: "18px",
+    fontWeight: 600,
     color: "var(--z-fg-muted)",
+    borderRadius: "var(--z-radius-sm, 6px)",
     "&:hover": { color: "var(--z-fg-primary)" },
     "&:focus-visible": {
       outline: "2px solid var(--z-focus)",
@@ -551,10 +661,10 @@ const DaySection = styled("section", {
     gap: "10px",
     "& h3": {
       margin: 0,
-      fontSize: "13px",
-      lineHeight: "20px",
+      fontSize: "15px",
+      lineHeight: "22px",
       fontWeight: 650,
-      color: "var(--z-fg-muted)",
+      color: "var(--z-fg-primary)",
     },
   },
 });

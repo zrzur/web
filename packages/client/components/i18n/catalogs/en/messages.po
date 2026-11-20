@@ -30995,3 +30995,70 @@ msgstr "Where it takes place: {0}"
 msgctxt "server-settings"
 msgid "Wings"
 msgstr "Wings"
+
+#: src/interface/events/EventsPage.tsx
+msgctxt "event places"
+msgid "All"
+msgstr "All"
+
+#: components/modal/modals/ServerEventEditor.tsx
+msgid "Change picture"
+msgstr "Change picture"
+
+#: components/modal/modals/ServerEventEditor.tsx
+msgid "Change the cover"
+msgstr "Change the cover"
+
+#: src/interface/events/EventsPage.tsx
+msgid "Clear the search"
+msgstr "Clear the search"
+
+#: components/modal/modals/ServerEventEditor.tsx
+msgid "Members who can open the channel."
+msgstr "Members who can open the channel."
+
+#: components/modal/modals/ServerEventEditor.tsx
+msgid "No cover yet"
+msgstr "No cover yet"
+
+#: components/modal/modals/ServerEventEditor.tsx
+msgid "Or a ready cover"
+msgstr "Or a ready cover"
+
+#: components/modal/modals/ServerEventEditor.tsx
+msgctxt "event editor"
+msgid "Save draft"
+msgstr "Save draft"
+
+#: src/interface/events/EventsPage.tsx
+msgid "Search and filter events"
+msgstr "Search and filter events"
+
+#: src/interface/events/EventsPage.tsx
+msgid "Search and filter events (a filter is set)"
+msgstr "Search and filter events (a filter is set)"
+
+#: components/modal/modals/ServerEventEditor.tsx
+msgid "The roles you choose, and the organisers."
+msgstr "The roles you choose, and the organisers."
+
+#: components/modal/modals/ServerEventEditor.tsx
+msgid "This picture is too large. Choose a smaller one."
+msgstr "This picture is too large. Choose a smaller one."
+
+#: components/modal/modals/ServerEventEditor.tsx
+msgctxt "event editor"
+msgid "Time"
+msgstr "Time"
+
+#: components/modal/modals/ServerEventEditor.tsx
+msgid "Upload a cover picture"
+msgstr "Upload a cover picture"
+
+#: components/modal/modals/ServerEventEditor.tsx
+msgid "Upload a picture"
+msgstr "Upload a picture"
+
+#: components/modal/modals/ServerEventEditor.tsx
+msgid "Upload a picture of your own; it is cropped to 16:9. The ready covers are there if you have none."
+msgstr "Upload a picture of your own; it is cropped to 16:9. The ready covers are there if you have none."

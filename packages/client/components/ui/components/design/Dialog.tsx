@@ -132,6 +132,13 @@ type Props = DialogProps & {
 
   /** Explicit width in px (overrides size) */
   width?: number;
+
+  /**
+   * The actions come at the end of the body and scroll with it, in one row
+   * that never wraps (a long form: the person reads to the end, then
+   * decides; owner, 2026-11-20). Without it they stay on the bottom edge.
+   */
+  actionsAtEnd?: boolean;
 };
 
 const FOCUSABLE =
@@ -321,6 +328,47 @@ export function Dialog(props: Props) {
     );
   };
 
+  /** The buttons of the actions, in the order given */
+  const actionButtons = () => (
+    <For each={actions()}>
+      {(action, index) => (
+        <Button
+          variant={buttonVariant(actionVariant(action, index()))}
+          size="md"
+          shape="square"
+          aria-busy={action.isLoading || undefined}
+          onPress={() => {
+            if (action.isDisabled || action.isLoading) return;
+
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+            const value = action.onClick?.() as any;
+            if (value instanceof Promise) {
+              value.then(props.onClose).catch(() => {});
+            } else if (value !== false) {
+              props.onClose();
+            }
+          }}
+          isDisabled={
+            action.isDisabled ||
+            action.isLoading ||
+            props.isDisabled
+          }
+        >
+          <Show when={action.isLoading}>
+            <Spinner aria-hidden="true" />
+          </Show>
+          {actionIcon(action, index())}
+          <Show
+            when={action.variant === "warning"}
+            fallback={action.text}
+          >
+            <WarningLabel>{action.text}</WarningLabel>
+          </Show>
+        </Button>
+      )}
+    </For>
+  );
+
   return (
     <Portal mount={document.getElementById("floating")!}>
       <Dialog.Scrim
@@ -408,6 +456,11 @@ export function Dialog(props: Props) {
 
               <Body class={typography()} data-dialog-body>
                 {props.children}
+                <Show when={actions().length && props.actionsAtEnd}>
+                  <Actions data-dialog-actions data-at-end>
+                    {actionButtons()}
+                  </Actions>
+                </Show>
               </Body>
 
               <Show when={props.error}>
@@ -417,46 +470,8 @@ export function Dialog(props: Props) {
                 </ErrorBanner>
               </Show>
 
-              <Show when={actions().length}>
-                <Actions data-dialog-actions>
-                  <For each={actions()}>
-                    {(action, index) => (
-                      <Button
-                        variant={buttonVariant(actionVariant(action, index()))}
-                        size="md"
-                        shape="square"
-                        aria-busy={action.isLoading || undefined}
-                        onPress={() => {
-                          if (action.isDisabled || action.isLoading) return;
-
-                          // eslint-disable-next-line @typescript-eslint/no-explicit-any
-                          const value = action.onClick?.() as any;
-                          if (value instanceof Promise) {
-                            value.then(props.onClose).catch(() => {});
-                          } else if (value !== false) {
-                            props.onClose();
-                          }
-                        }}
-                        isDisabled={
-                          action.isDisabled ||
-                          action.isLoading ||
-                          props.isDisabled
-                        }
-                      >
-                        <Show when={action.isLoading}>
-                          <Spinner aria-hidden="true" />
-                        </Show>
-                        {actionIcon(action, index())}
-                        <Show
-                          when={action.variant === "warning"}
-                          fallback={action.text}
-                        >
-                          <WarningLabel>{action.text}</WarningLabel>
-                        </Show>
-                      </Button>
-                    )}
-                  </For>
-                </Actions>
+              <Show when={actions().length && !props.actionsAtEnd}>
+                <Actions data-dialog-actions>{actionButtons()}</Actions>
               </Show>
             </Container>
           </div>
@@ -903,6 +918,30 @@ const Actions = styled("div", {
       flexDirection: "column-reverse",
       alignItems: "stretch",
       "& > button": { width: "100%" },
+    },
+    // at the end of a long form: one row in the given order, never wrapped;
+    // on phones the buttons share the row
+    "&[data-at-end]": {
+      flexWrap: "nowrap",
+      marginBlockStart: "24px",
+      paddingBlockStart: "20px",
+      borderTop: "1px solid var(--z-border-subtle)",
+      "& > button": { flex: "none", whiteSpace: "nowrap" },
+      _phone: {
+        flexDirection: "row",
+        alignItems: "center",
+        gap: "8px",
+        paddingBlockEnd: "4px",
+        "& > button": {
+          width: "auto",
+          flex: "1 1 auto",
+          minWidth: 0,
+          paddingInline: "8px",
+          fontSize: "14px",
+        },
+        // the words carry the buttons here: no icon beside them
+        "& > button .z-icon": { display: "none" },
+      },
     },
   },
 });

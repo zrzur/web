@@ -34,6 +34,7 @@ import { EventCalendar } from "./EventCalendar";
 import { EventCard, EventGroup } from "./EventCard";
 import { eventsEnabled } from "./EventsLink";
 import { EventFind, NothingFound } from "./EventsPage";
+import { settled } from "./settled";
 
 type Which = "mine" | "all" | "calendar";
 
@@ -73,7 +74,7 @@ export function MyEventsPage() {
     return !!answer && answer.answer !== "NotGoing";
   };
   const events = () =>
-    (loaded.latest ?? [])
+    (settled(loaded) ?? [])
       .map((id) => client().serverEvents.get(id))
       .filter(
         (event): event is API.ServerEvent =>
@@ -143,19 +144,16 @@ export function MyEventsPage() {
               <Trans>My events</Trans>
             </h1>
           </Title>
-          <Show when={!phone()}>
+          <Show when={!phone()} fallback={<ListSpacer />}>
             <ListDivider />
             {tabsEl()}
             <ListSpacer />
-            {findEl()}
           </Show>
+          {findEl()}
         </Header>
-        {/* phones: the tabs and the search get their own rows under the title */}
+        {/* phones: the tabs get their own row under the title */}
         <Show when={phone()}>
-          <ListPhoneFilters>
-            {tabsEl()}
-            {findEl()}
-          </ListPhoneFilters>
+          <ListPhoneFilters>{tabsEl()}</ListPhoneFilters>
         </Show>
         <Body>
           <Switch>
@@ -204,7 +202,7 @@ export function MyEventsPage() {
                 </Button>
               </Problem>
             </Match>
-            <Match when={loaded.loading && !loaded.latest}>
+            <Match when={loaded.loading && !settled(loaded)}>
               <Grid aria-busy="true" aria-label={t`Loading events`}>
                 <For each={[0, 1, 2]}>
                   {() => <SkeletonCard aria-hidden="true" />}

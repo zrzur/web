@@ -9,6 +9,8 @@ import { TranslatedError } from "@revolt/i18n/errors";
 import { Button, SettingsFormPanel, SettingsRow } from "@revolt/ui";
 import { Icon } from "@revolt/ui/icons/Icon";
 
+import { settled } from "./settled";
+
 /** A day of the numbers as "12 Nov" */
 function dayLabel(day: string, locale: string) {
   return new Intl.DateTimeFormat(locale || "en", {
@@ -46,7 +48,7 @@ export function EventStats(props: {
   );
 
   const days = () => {
-    const list = stats.latest?.registrations ?? [];
+    const list = settled(stats)?.registrations ?? [];
     return list.slice(-14).map((day) => ({
       ...day,
       total: day.going + day.maybe + day.not_going,
@@ -54,13 +56,13 @@ export function EventStats(props: {
   };
   const most = () => Math.max(1, ...days().map((day) => day.total));
   const answered = () => {
-    const counts = stats.latest?.counts;
+    const counts = settled(stats)?.counts;
     return counts
       ? counts.going + counts.maybe + counts.not_going + (counts.waiting ?? 0)
       : 0;
   };
   const fill = () => {
-    const now = stats.latest;
+    const now = settled(stats);
     if (!now?.capacity) return undefined;
     return Math.round((now.counts.going / now.capacity) * 100);
   };
@@ -70,7 +72,7 @@ export function EventStats(props: {
 
   return (
     <Switch>
-      <Match when={stats.latest?.counts && stats.latest}>
+      <Match when={settled(stats)?.counts && settled(stats)}>
         {(now) => (
           <div data-testid="event-stats">
             <SettingsRow

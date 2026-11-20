@@ -11,9 +11,14 @@ import {
 
 import { Trans, useLingui } from "@lingui/solid/macro";
 import type { Server } from "@zrzur/sdk/solid";
+import { css } from "styled-system/css";
 import { styled } from "styled-system/jsx";
 
-import { ContextMenu, ContextMenuButton } from "@revolt/app/menus/ContextMenu";
+import {
+  ContextMenu,
+  ContextMenuButton,
+  ContextMenuDivider,
+} from "@revolt/app/menus/ContextMenu";
 import { useClient } from "@revolt/client";
 import { useDevice } from "@revolt/common";
 import { timeLocale } from "@revolt/i18n";
@@ -31,7 +36,6 @@ import { HeaderIcon } from "../common/CommonHeader";
 import {
   ListDivider,
   ListPhoneFilters,
-  ListSearch,
   ListSpacer,
   ListTab,
   ListTabs,
@@ -43,6 +47,7 @@ import { EventCard, EventGroup, EventHero } from "./EventCard";
 import { EventDetail } from "./EventDetail";
 import { eventKey, eventWhen, eventsShortcutAllowed } from "./eventFormat";
 import { eventsEnabled, serverEventsOn } from "./EventsLink";
+import { settled } from "./settled";
 
 /**
  * A server's events: what is happening now and what is coming up, with
@@ -186,7 +191,7 @@ function Events(props: { server: Server; focus?: string }) {
   // the event of the address, once it is known
   const opened = () => {
     if (!props.focus) return undefined;
-    return client().serverEvents.get(props.focus) ?? focused.latest;
+    return client().serverEvents.get(props.focus) ?? settled(focused);
   };
   const schedule = () =>
     openModal({ type: "server_event", server: props.server });
@@ -332,8 +337,8 @@ function Events(props: { server: Server; focus?: string }) {
           <ListDivider />
           {tabsEl()}
           <ListSpacer />
-          {findEl()}
         </Show>
+        <Show when={!props.focus}>{findEl()}</Show>
         <Show when={canManage() && !props.focus}>
           <Button
             size="sm"
@@ -350,12 +355,9 @@ function Events(props: { server: Server; focus?: string }) {
           </Button>
         </Show>
       </Header>
-      {/* phones: the tabs and the search get their own rows under the title */}
+      {/* phones: the tabs get their own row under the title */}
       <Show when={!props.focus && phone()}>
-        <ListPhoneFilters>
-          {tabsEl()}
-          {findEl()}
-        </ListPhoneFilters>
+        <ListPhoneFilters>{tabsEl()}</ListPhoneFilters>
       </Show>
       <Body data-wide={props.focus ? undefined : true}>
         <Switch>
@@ -453,9 +455,9 @@ function Events(props: { server: Server; focus?: string }) {
                       <TranslatedError error={past.error} />
                     </Problem>
                   </Match>
-                  <Match when={past()?.filter(found).length}>
+                  <Match when={settled(past)?.filter(found).length}>
                     <EventGroup>
-                      <For each={past()?.filter(found)}>
+                      <For each={settled(past)?.filter(found)}>
                         {(event) => (
                           <EventCard
                             event={
@@ -468,7 +470,7 @@ function Events(props: { server: Server; focus?: string }) {
                       </For>
                     </EventGroup>
                   </Match>
-                  <Match when={past()?.length}>
+                  <Match when={settled(past)?.length}>
                     <NothingFound />
                   </Match>
                   <Match when={true}>
@@ -612,9 +614,11 @@ export function NothingFound() {
 }
 
 /**
- * Search and the place filter of a list of events, where the app's other
- * list pages keep them: in the header on desktop (as on Friends), in their
- * own row under it on phones. The place is picked from a menu.
+ * Search and the place filter of a list of events, behind one search
+ * button in the header (owner, 2026-11-20: the search field took too much
+ * room). The button opens a small panel with the search field and the
+ * places; on phones the panel is a sheet. Nothing of it shows until the
+ * button is pressed; a dot on the button says a search or a place is set.
  */
 export function EventFind(props: {
   search: string;
@@ -623,10 +627,65 @@ export function EventFind(props: {
   onPlace: (value: PlaceFilter) => void;
 }) {
   const { t } = useLingui();
-  const places = (): { value: PlaceFilter; label: string; icon: string }[] => [
+  const active = () => props.search.trim() !== "" || props.place !== "any";
+
+  return (
+    // a real box, so the panel opens under the button (a "contents" wrapper
+    // has no place of its own and the panel went to the window's corner)
+    <div
+      class={css({ display: "inline-flex", flex: "none" })}
+      use:floating={{
+        contextMenu: () => (
+          <FindPanel
+            search={props.search}
+            onSearch={props.onSearch}
+            place={props.place}
+            onPlace={props.onPlace}
+          />
+        ),
+        contextMenuHandler: "click",
+        contextMenuPlacement: "bottom-end",
+      }}
+    >
+      <Button
+        size="sm"
+        variant="text"
+        aria-haspopup="menu"
+        aria-label={
+          active()
+            ? t`Search and filter events (a filter is set)`
+            : t`Search and filter events`
+        }
+        data-testid="events-find"
+        data-active={active() || undefined}
+      >
+        <FindIcon>
+          <Icon name="magnifying-glass" size={18} />
+          <Show when={active()}>
+            <Chosen aria-hidden="true" data-testid="events-find-set" />
+          </Show>
+        </FindIcon>
+      </Button>
+    </div>
+  );
+}
+
+/** The panel behind the search button: the search field, then the places */
+function FindPanel(props: {
+  search: string;
+  onSearch: (value: string) => void;
+  place: PlaceFilter;
+  onPlace: (value: PlaceFilter) => void;
+}) {
+  const { t } = useLingui();
+  const places = (): {
+    value: PlaceFilter;
+    label: string;
+    icon: IconName;
+  }[] => [
     {
       value: "any",
-      label: t({ message: "Every place", context: "event places" }),
+      label: t({ message: "All", context: "event places" }),
       icon: "squares-four",
     },
     {
@@ -645,14 +704,22 @@ export function EventFind(props: {
       icon: "globe",
     },
   ];
-  const current = () =>
-    places().find((entry) => entry.value === props.place) ?? places()[0];
 
   return (
-    <FindRow data-testid="events-find">
-      <ListSearch>
+    <ContextMenu
+      data-persistent-context-menu
+      aria-label={t`Search and filter events`}
+      data-testid="events-filter"
+    >
+      <PanelSearch>
         <Icon name="magnifying-glass" size={16} />
         <input
+          ref={(input: HTMLInputElement) => {
+            // a computer types at once; a phone keeps its keyboard closed
+            // until the field is tapped, so the places stay in sight
+            if (!window.matchMedia?.("(max-width: 600px)").matches)
+              setTimeout(() => input.focus({ preventScroll: true }), 30);
+          }}
           type="search"
           value={props.search}
           placeholder={t`Search events`}
@@ -660,51 +727,112 @@ export function EventFind(props: {
           onInput={(event) => props.onSearch(event.currentTarget.value)}
           data-testid="events-search"
         />
-      </ListSearch>
-      <div
-        style={{ display: "contents" }}
-        use:floating={{
-          contextMenu: () => (
-            <ContextMenu>
-              <For each={places()}>
-                {(entry) => (
-                  <ContextMenuButton
-                    icon={<Icon name={entry.icon as IconName} size={18} />}
-                    actionIcon={
-                      props.place === entry.value ? (
-                        <Icon name="check" size={16} />
-                      ) : undefined
-                    }
-                    selected={props.place === entry.value}
-                    onClick={() => props.onPlace(entry.value)}
-                    data-testid={`events-place-${entry.value}`}
-                  >
-                    {entry.label}
-                  </ContextMenuButton>
-                )}
-              </For>
-            </ContextMenu>
-          ),
-          contextMenuHandler: "click",
-        }}
-      >
-        <Button
-          size="sm"
-          variant="tonal"
-          aria-haspopup="menu"
-          aria-label={t`Where it takes place: ${current().label}`}
-          data-testid="events-place"
-        >
-          <Icon name="funnel" size={16} />
-          <WideLabel>{current().label}</WideLabel>
-          <Show when={props.place !== "any"}>
-            <Chosen aria-hidden="true" />
-          </Show>
-        </Button>
-      </div>
-    </FindRow>
+        <Show when={props.search}>
+          <ClearButton
+            type="button"
+            aria-label={t`Clear the search`}
+            onClick={() => props.onSearch("")}
+            data-testid="events-search-clear"
+          >
+            <Icon name="x" size={14} />
+          </ClearButton>
+        </Show>
+      </PanelSearch>
+      <ContextMenuDivider />
+      <PanelLabel>
+        {t({ message: "Where", context: "scheduled events" })}
+      </PanelLabel>
+      <For each={places()}>
+        {(entry) => (
+          <ContextMenuButton
+            role="menuitemradio"
+            aria-checked={props.place === entry.value}
+            icon={<Icon name={entry.icon} size={18} />}
+            actionIcon={
+              props.place === entry.value ? (
+                <Icon name="check" size={16} />
+              ) : undefined
+            }
+            selected={props.place === entry.value}
+            onClick={() => props.onPlace(entry.value)}
+            data-testid={`events-place-${entry.value}`}
+          >
+            {entry.label}
+          </ContextMenuButton>
+        )}
+      </For>
+    </ContextMenu>
   );
 }
+
+const FindIcon = styled("span", {
+  base: { position: "relative", display: "inline-flex" },
+});
+
+const PanelSearch = styled("label", {
+  base: {
+    display: "flex",
+    alignItems: "center",
+    gap: "8px",
+    height: "36px",
+    margin: "2px 2px 4px",
+    paddingInline: "10px",
+    borderRadius: "var(--z-radius, 10px)",
+    background: "var(--z-field-bg)",
+    border: "1px solid var(--z-field-border)",
+    color: "var(--z-fg-muted)",
+    cursor: "text",
+    "--z-icon-color": "currentColor",
+    "&:focus-within": {
+      borderColor: "var(--z-accent)",
+      boxShadow: "var(--z-field-focus-shadow)",
+    },
+    "& input": {
+      flex: 1,
+      minWidth: 0,
+      border: "none",
+      outline: "none",
+      background: "transparent",
+      color: "var(--z-fg-primary)",
+      fontSize: "14px",
+      fontFamily: "inherit",
+    },
+    "& input::-webkit-search-cancel-button": { display: "none" },
+    "& input::placeholder": { color: "var(--z-fg-muted)" },
+    _phone: { height: "44px", margin: "4px 4px 8px" },
+  },
+});
+
+const ClearButton = styled("button", {
+  base: {
+    all: "unset",
+    // all: unset drops the button's "relative": the phones' unseen 44 px
+    // tap area (styles.css) then spread over the whole page and took every
+    // tap (the calendar's last day answered taps on the tabs)
+    position: "relative",
+    display: "inline-grid",
+    placeItems: "center",
+    width: "24px",
+    height: "24px",
+    borderRadius: "999px",
+    cursor: "pointer",
+    color: "var(--z-fg-muted)",
+    "--z-icon-color": "currentColor",
+    "&:hover": { color: "var(--z-fg-primary)" },
+    "&:focus-visible": { outline: "2px solid var(--z-focus)" },
+    _phone: { width: "44px", height: "44px" },
+  },
+});
+
+const PanelLabel = styled("div", {
+  base: {
+    padding: "6px 10px 2px",
+    fontSize: "12px",
+    lineHeight: "16px",
+    fontWeight: 650,
+    color: "var(--z-fg-muted)",
+  },
+});
 
 /**
  * Words on a header button that only fit on wide desktops; the icon stays
@@ -716,25 +844,16 @@ const WideLabel = styled("span", {
   },
 });
 
-/** A place is chosen: a dot on the place button */
+/** A search or a place is set: a dot on the search button */
 const Chosen = styled("span", {
   base: {
-    width: "6px",
-    height: "6px",
+    position: "absolute",
+    top: "-2px",
+    insetInlineEnd: "-3px",
+    width: "7px",
+    height: "7px",
     borderRadius: "999px",
     background: "var(--z-accent)",
-  },
-});
-
-const FindRow = styled("div", {
-  base: {
-    display: "flex",
-    alignItems: "center",
-    gap: "8px",
-    flexShrink: 0,
-    "& > label": { marginInlineEnd: 0 },
-    // phones: the search takes the row, the place button keeps its size
-    _phone: { "& > label": { flex: 1 } },
   },
 });
 

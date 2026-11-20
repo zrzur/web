@@ -4,8 +4,10 @@ import {
   Match,
   Show,
   Switch,
+  createMemo,
   createResource,
   createSignal,
+  onCleanup,
 } from "solid-js";
 
 import { Trans, useLingui } from "@lingui/solid/macro";
@@ -17,7 +19,9 @@ import { timeLocale } from "@revolt/i18n";
 import { TranslatedError } from "@revolt/i18n/errors";
 import { useInstance } from "@revolt/instance";
 import { useNavigate } from "@revolt/routing";
+import { ALLOWED_IMAGE_TYPES } from "@revolt/state";
 import {
+  Button,
   Checkbox,
   DateTimeField,
   Dialog,
@@ -26,17 +30,24 @@ import {
   Form2,
   MenuItem,
   Segmented,
+  SettingsChoices,
+  SettingsFormPanel,
+  SettingsRow,
+  SettingsSection,
   TextField,
   Toggle,
 } from "@revolt/ui";
 import { hour12From, roundUp } from "@revolt/ui/components/design/dateTime";
+import { Icon } from "@revolt/ui/icons/Icon";
 
+import { DateMark } from "../../../src/interface/events/dateMark";
 import {
   type CoverKind,
   COVER_KINDS,
   DrawnCover,
   coverFile,
 } from "../../../src/interface/events/eventCovers";
+import { eventDay } from "../../../src/interface/events/eventFormat";
 import {
   DEFAULT_REMINDERS,
   MAX_REMINDERS,
@@ -48,7 +59,7 @@ import {
   EVENT_TEMPLATES,
 } from "../../../src/interface/events/eventTemplates";
 import { MemberPicker } from "../../../src/interface/events/MemberPicker";
-import { Ticket, TicketStub } from "../../../src/interface/events/Ticket";
+import { settled } from "../../../src/interface/events/settled";
 
 import { useModals } from "..";
 import { Modals } from "../types";
@@ -286,7 +297,7 @@ export function ServerEventEditorModal(
     },
   );
   const clashNames = () =>
-    (clashes.latest ?? [])
+    (settled(clashes) ?? [])
       .slice(0, 3)
       .map((event) => event.title)
       .join(", ");
@@ -422,6 +433,83 @@ export function ServerEventEditorModal(
 
   const submit = Form2.useSubmitHandler(group, () => onSubmit());
 
+  // the cover: an own picture (cropped to 16:9) or a ready one, never both
+  let coverInput: HTMLInputElement | undefined;
+  const coverCrop = cropProcess({
+    ratio: 16 / 9,
+    ratioLabel: t`Cover`,
+    openModal,
+    allowModeToggle: false,
+    dialogTitle: t`Crop cover image`,
+    maxWidth: 1920,
+    outputType: "image/webp",
+    outputQuality: 0.9,
+  });
+  const [coverTooBig, setCoverTooBig] = createSignal(false);
+  const coverLimit = () =>
+    instance.limits().file_upload_size_limits["banners"] as number | undefined;
+  function pickCover() {
+    coverInput?.click();
+  }
+  function onCoverPicked(event: Event & { currentTarget: HTMLInputElement }) {
+    const files = [...(event.currentTarget.files ?? [])];
+    event.currentTarget.value = "";
+    if (!files.length) return;
+    if (!ALLOWED_IMAGE_TYPES.includes(files[0].type)) return;
+    setCoverTooBig(false);
+    coverCrop(
+      files,
+      (result) => {
+        if (!result?.length) return;
+        if (coverLimit() && result[0].size > coverLimit()!) {
+          setCoverTooBig(true);
+          return;
+        }
+        setReadyCover(undefined);
+        group.controls.cover.setValue(result);
+      },
+      coverLimit(),
+    );
+  }
+  function removeCover() {
+    setReadyCover(undefined);
+    group.controls.cover.setValue(null);
+  }
+  const ownCoverUrl = createMemo<string | undefined>((previous) => {
+    if (previous?.startsWith("blob:")) URL.revokeObjectURL(previous);
+    const value = group.controls.cover.value;
+    if (typeof value === "string") return value;
+    if (Array.isArray(value) && value.length)
+      return URL.createObjectURL(value[0]);
+    return undefined;
+  });
+  onCleanup(() => {
+    const url = ownCoverUrl();
+    if (url?.startsWith("blob:")) URL.revokeObjectURL(url);
+  });
+  const hasCover = () => !!readyCover() || !!ownCoverUrl();
+
+  // the row the event gets in the list, as it is typed
+  const previewDay = () =>
+    eventDay((start() ?? initialStart).toISOString(), i18n().locale ?? "en");
+  const previewWhen = () =>
+    new Intl.DateTimeFormat(i18n().locale ?? "en", {
+      numberingSystem: "latn",
+      weekday: "short",
+      day: "numeric",
+      month: "short",
+      hour: "numeric",
+      minute: "2-digit",
+      hour12: hour12(),
+    }).format(start() ?? initialStart);
+  const previewPlace = () => {
+    if (kind() === "External")
+      return group.controls.location.value.trim() || t`Somewhere else`;
+    const id = chosenChannel();
+    const name = props.server.channels.find((entry) => entry.id === id)?.name;
+    return name ?? (kind() === "Voice" ? t`Voice channel` : t`Text channel`);
+  };
+
   return (
     <Dialog
       tone={existing ? "edit" : "create"}
@@ -430,7 +518,8 @@ export function ServerEventEditorModal(
       showClose={false}
       show={props.show}
       onClose={props.onClose}
-      size="md"
+      size="lg"
+      actionsAtEnd
       title={existing ? <Trans>Edit event</Trans> : <Trans>New event</Trans>}
       actions={[
         { variant: "text", text: <Trans>Cancel</Trans> },
@@ -439,7 +528,12 @@ export function ServerEventEditorModal(
           : [
               {
                 variant: "secondary" as const,
-                text: <Trans>Save as draft</Trans>,
+                text: (
+                  <span data-testid="server-event-draft">
+                    {/* short, so the three buttons share one row on a phone */}
+                    <Trans context="event editor">Save draft</Trans>
+                  </span>
+                ),
                 onClick: () => {
                   void onSubmit(true);
                   return false;
@@ -448,10 +542,14 @@ export function ServerEventEditorModal(
               },
             ]),
         {
-          text: existing ? (
-            <Trans>Save</Trans>
-          ) : (
-            <Trans context="scheduled events">Publish</Trans>
+          text: (
+            <span data-testid="server-event-publish">
+              {existing ? (
+                <Trans>Save</Trans>
+              ) : (
+                <Trans context="scheduled events">Publish</Trans>
+              )}
+            </span>
           ),
           onClick: () => {
             void onSubmit();
@@ -465,400 +563,537 @@ export function ServerEventEditorModal(
     >
       <form onSubmit={submit} data-testid="server-event-form">
         <Fields>
-          <Preview aria-hidden="true" data-testid="server-event-preview">
-            <Ticket>
-              <TicketStub startsAt={(start() ?? initialStart).toISOString()} />
-              <PreviewBody>
-                <b dir="auto">
-                  {group.controls.title.value.trim() ||
-                    t({ message: "Title", context: "scheduled events" })}
-                </b>
-                <span>
-                  {new Intl.DateTimeFormat(i18n().locale ?? "en", {
-                    numberingSystem: "latn",
-                    hour: "numeric",
-                    minute: "2-digit",
-                    hour12: hour12(),
-                  }).format(start() ?? initialStart)}
-                </span>
-              </PreviewBody>
-            </Ticket>
-          </Preview>
-          <Show when={!existing}>
-            <FloatingSelect
-              id="server-event-template"
-              label={t`Start from`}
-              value={template()}
-              onChange={(event) => useTemplate(event.currentTarget.value)}
-            >
-              <MenuItem value="blank">{t`An empty event`}</MenuItem>
-              <For each={EVENT_TEMPLATES}>
-                {(entry) => (
-                  <MenuItem value={entry.id}>
-                    {templateText(entry.id)[0]}
-                  </MenuItem>
-                )}
-              </For>
-            </FloatingSelect>
-          </Show>
-          <Form2.TextField
-            minlength={1}
-            maxlength={100}
-            counter
-            name="title"
-            control={group.controls.title}
-            label={t({ message: "Title", context: "scheduled events" })}
-            data-testid="server-event-title"
-          />
-          <Form2.TextField
-            maxlength={1000}
-            counter
-            rows={3}
-            name="description"
-            control={group.controls.description}
-            label={t`Description (optional)`}
-            helper={t`Markdown works here.`}
-          />
+          {/* how it shows in the list, as it is typed */}
+          <SettingsSection>
+            <div aria-hidden="true" data-testid="server-event-preview">
+              <SettingsRow
+                icon={
+                  <DateMark>
+                    <b>{previewDay().day}</b>
+                    <small>{previewDay().month}</small>
+                  </DateMark>
+                }
+                title={
+                  <PreviewTitle dir="auto">
+                    {group.controls.title.value.trim() ||
+                      t({ message: "Title", context: "scheduled events" })}
+                  </PreviewTitle>
+                }
+                description={
+                  <PreviewMeta>
+                    <span>{previewWhen()}</span>
+                    <span aria-hidden="true">·</span>
+                    <bdi>{previewPlace()}</bdi>
+                  </PreviewMeta>
+                }
+              />
+            </div>
+          </SettingsSection>
 
-          <DateTimeField
-            label={t`Starts`}
-            value={start()}
-            min={existing?.status === "Active" ? undefined : new Date()}
-            hour12={hour12()}
-            testId="server-event-start"
-            onChange={(value) => {
-              // keep the length when the start moves
-              const length =
-                start() && end() ? end()!.getTime() - start()!.getTime() : 0;
-              setStart(value);
-              if (length > 0) setEnd(new Date(value.getTime() + length));
-            }}
-          />
-          <ToggleRow>
-            <label for="server-event-has-end">
-              <Trans>Set an end time</Trans>
-            </label>
-            <Toggle
-              id="server-event-has-end"
-              checked={hasEnd()}
-              onChange={setHasEnd}
-            />
-          </ToggleRow>
-          <Show when={hasEnd()}>
-            <DateTimeField
-              label={t({ message: "Ends", context: "scheduled events" })}
-              value={end()}
-              min={start()}
-              hour12={hour12()}
-              testId="server-event-end"
-              onChange={setEnd}
-            />
-          </Show>
-          <Show when={!hasEnd()}>
-            <Hint>
-              <Trans>
-                Without an end time it ends 12 hours after it starts, or when a
-                manager ends it.
-              </Trans>
-            </Hint>
-          </Show>
-
-          <fieldset>
-            <legend>
-              <Trans context="scheduled events">Where</Trans>
-            </legend>
-            <Segmented<PlaceKind>
-              aria-label={t({ message: "Where", context: "scheduled events" })}
-              value={kind()}
-              onChange={setKind}
-              options={[
-                { value: "Voice", label: t`Voice channel` },
-                { value: "Text", label: t`Text channel` },
-                { value: "External", label: t`Somewhere else` },
-              ]}
-            />
-          </fieldset>
-          <Switch>
-            <Match when={kind() === "External"}>
+          <SettingsSection title={<Trans>Details</Trans>}>
+            <SettingsFormPanel>
+              <Show when={!existing}>
+                <FloatingSelect
+                  id="server-event-template"
+                  label={t`Start from`}
+                  value={template()}
+                  onChange={(event) => useTemplate(event.currentTarget.value)}
+                >
+                  <MenuItem value="blank">{t`An empty event`}</MenuItem>
+                  <For each={EVENT_TEMPLATES}>
+                    {(entry) => (
+                      <MenuItem value={entry.id}>
+                        {templateText(entry.id)[0]}
+                      </MenuItem>
+                    )}
+                  </For>
+                </FloatingSelect>
+              </Show>
               <Form2.TextField
+                minlength={1}
                 maxlength={100}
                 counter
-                name="location"
-                control={group.controls.location}
-                label={t`Address or link`}
-                data-testid="server-event-location"
+                name="title"
+                control={group.controls.title}
+                label={t({ message: "Title", context: "scheduled events" })}
+                data-testid="server-event-title"
               />
-            </Match>
-            <Match when={channels().length}>
+              <Form2.TextField
+                maxlength={1000}
+                counter
+                rows={3}
+                name="description"
+                control={group.controls.description}
+                label={t`Description (optional)`}
+                helper={t`Markdown works here.`}
+              />
+            </SettingsFormPanel>
+          </SettingsSection>
+
+          <SettingsSection title={<Trans context="event editor">Time</Trans>}>
+            <SettingsFormPanel>
+              <DateTimeField
+                label={t`Starts`}
+                value={start()}
+                min={existing?.status === "Active" ? undefined : new Date()}
+                hour12={hour12()}
+                testId="server-event-start"
+                onChange={(value) => {
+                  // keep the length when the start moves
+                  const length =
+                    start() && end()
+                      ? end()!.getTime() - start()!.getTime()
+                      : 0;
+                  setStart(value);
+                  if (length > 0) setEnd(new Date(value.getTime() + length));
+                }}
+              />
+              <Show when={hasEnd()}>
+                <DateTimeField
+                  label={t({ message: "Ends", context: "scheduled events" })}
+                  value={end()}
+                  min={start()}
+                  hour12={hour12()}
+                  testId="server-event-end"
+                  onChange={setEnd}
+                />
+              </Show>
               <FloatingSelect
-                id="server-event-channel"
-                label={kind() === "Voice" ? t`Voice channel` : t`Text channel`}
-                value={chosenChannel()}
-                onChange={(event) => setChannel(event.currentTarget.value)}
+                id="server-event-repeat"
+                label={t({ message: "Repeat", context: "scheduled events" })}
+                value={repeat()}
+                onChange={(event) =>
+                  setRepeat(event.currentTarget.value as Repeat)
+                }
               >
-                <For each={channels()}>
-                  {(entry) => (
-                    <MenuItem value={entry.id}>{entry.name}</MenuItem>
-                  )}
-                </For>
+                <MenuItem value="None">{t`Does not repeat`}</MenuItem>
+                <MenuItem value="Daily">{t`Every day`}</MenuItem>
+                <MenuItem value="Weekly">{t`Every week`}</MenuItem>
+                <MenuItem value="EveryTwoWeeks">{t`Every 2 weeks`}</MenuItem>
+                <MenuItem value="Monthly">{t`Every month`}</MenuItem>
               </FloatingSelect>
-            </Match>
-            <Match when={!channels().length}>
-              <Hint>
-                {kind() === "Voice" ? (
-                  <Trans>This server has no voice channel you can see.</Trans>
-                ) : (
-                  <Trans>This server has no text channel you can see.</Trans>
-                )}
-              </Hint>
-            </Match>
-          </Switch>
-
-          <Show when={clashes.latest?.length}>
-            <Warning role="status" data-testid="server-event-clash">
-              <Trans>
-                At this time there is another event: {clashNames()}.
-              </Trans>
-            </Warning>
-          </Show>
-
-          <FloatingSelect
-            id="server-event-repeat"
-            label={t({ message: "Repeat", context: "scheduled events" })}
-            value={repeat()}
-            onChange={(event) => setRepeat(event.currentTarget.value as Repeat)}
-          >
-            <MenuItem value="None">{t`Does not repeat`}</MenuItem>
-            <MenuItem value="Daily">{t`Every day`}</MenuItem>
-            <MenuItem value="Weekly">{t`Every week`}</MenuItem>
-            <MenuItem value="EveryTwoWeeks">{t`Every 2 weeks`}</MenuItem>
-            <MenuItem value="Monthly">{t`Every month`}</MenuItem>
-          </FloatingSelect>
-
-          <fieldset>
-            <legend>
-              <Trans>Cover</Trans>
-            </legend>
-            <Covers role="radiogroup" aria-label={t`Ready covers`}>
-              <For each={COVER_KINDS}>
-                {(kind, index) => (
-                  <CoverChoice
-                    type="button"
-                    role="radio"
-                    aria-checked={readyCover() === kind}
-                    aria-label={t`Ready cover ${index() + 1}`}
-                    onClick={() =>
-                      setReadyCover(readyCover() === kind ? undefined : kind)
-                    }
-                    data-testid={`server-event-cover-${kind}`}
-                  >
-                    <DrawnCover kind={kind} />
-                  </CoverChoice>
-                )}
-              </For>
-            </Covers>
-            <Hint>
-              <Trans>
-                Pick a ready cover, or upload a picture of your own.
-              </Trans>
-            </Hint>
-          </fieldset>
-          <Show when={!readyCover()}>
-            <Form2.FileInput
-              control={group.controls.cover}
-              accept="image/*"
-              label={t`Cover image (optional)`}
-              removeLabel={t`Remove cover image`}
-              imageAspect="16/9"
-              imageRounded={false}
-              imageJustify={false}
-              imageHeight={96}
-              maxSize={instance.limits().file_upload_size_limits["banners"]}
-              process={cropProcess({
-                ratio: 16 / 9,
-                ratioLabel: t`Cover`,
-                openModal,
-                allowModeToggle: false,
-                dialogTitle: t`Crop cover image`,
-                maxWidth: 1920,
-                outputType: "image/webp",
-                outputQuality: 0.9,
-              })}
+            </SettingsFormPanel>
+            <SettingsRow
+              title={<Trans>Set an end time</Trans>}
+              description={
+                hasEnd() ? undefined : (
+                  <Trans>
+                    Without an end time it ends 12 hours after it starts, or
+                    when a manager ends it.
+                  </Trans>
+                )
+              }
+              onClick={() => setHasEnd(!hasEnd())}
+              control={(ids) => (
+                <Toggle
+                  id="server-event-has-end"
+                  aria-labelledby={ids.labelId}
+                  checked={hasEnd()}
+                  onChange={setHasEnd}
+                />
+              )}
             />
-          </Show>
+          </SettingsSection>
 
-          <Show when={!invitedOnly}>
-            <fieldset>
-              <legend>
-                <Trans>Who sees it</Trans>
-              </legend>
-              <Segmented<Visibility>
-                aria-label={t`Who sees it`}
-                value={visibility()}
-                onChange={setVisibility}
+          <SettingsSection
+            title={<Trans context="scheduled events">Where</Trans>}
+          >
+            <SettingsFormPanel>
+              <Segmented<PlaceKind>
+                aria-label={t({
+                  message: "Where",
+                  context: "scheduled events",
+                })}
+                value={kind()}
+                onChange={setKind}
                 options={[
-                  { value: "Place", label: t`Everyone who sees its place` },
-                  { value: "Roles", label: t`Some roles` },
-                  { value: "Invited", label: t`Invited only` },
+                  { value: "Voice", label: t`Voice channel` },
+                  { value: "Text", label: t`Text channel` },
+                  { value: "External", label: t`Somewhere else` },
                 ]}
               />
-              <Show when={visibility() === "Invited"}>
-                <MemberPicker
-                  server={props.server}
-                  label={t`Invite people`}
-                  value={invited()}
-                  onChange={setInvited}
-                  max={MAX_INVITED}
-                  testId="server-event-invited"
-                />
-                <Hint>
+              <Switch>
+                <Match when={kind() === "External"}>
+                  <Form2.TextField
+                    maxlength={100}
+                    counter
+                    name="location"
+                    control={group.controls.location}
+                    label={t`Address or link`}
+                    data-testid="server-event-location"
+                  />
+                </Match>
+                <Match when={channels().length}>
+                  <FloatingSelect
+                    id="server-event-channel"
+                    label={
+                      kind() === "Voice" ? t`Voice channel` : t`Text channel`
+                    }
+                    value={chosenChannel()}
+                    onChange={(event) => setChannel(event.currentTarget.value)}
+                  >
+                    <For each={channels()}>
+                      {(entry) => (
+                        <MenuItem value={entry.id}>{entry.name}</MenuItem>
+                      )}
+                    </For>
+                  </FloatingSelect>
+                </Match>
+                <Match when={!channels().length}>
+                  <Hint>
+                    {kind() === "Voice" ? (
+                      <Trans>
+                        This server has no voice channel you can see.
+                      </Trans>
+                    ) : (
+                      <Trans>
+                        This server has no text channel you can see.
+                      </Trans>
+                    )}
+                  </Hint>
+                </Match>
+              </Switch>
+              <Show when={settled(clashes)?.length}>
+                <Warning role="status" data-testid="server-event-clash">
+                  <Icon name="warning" size={16} />
+                  <span>
+                    <Trans>
+                      At this time there is another event: {clashNames()}.
+                    </Trans>
+                  </span>
+                </Warning>
+              </Show>
+            </SettingsFormPanel>
+          </SettingsSection>
+
+          <SettingsSection
+            title={<Trans>Cover</Trans>}
+            description={
+              <Trans>
+                Upload a picture of your own; it is cropped to 16:9. The ready
+                covers are there if you have none.
+              </Trans>
+            }
+          >
+            <SettingsFormPanel>
+              <input
+                ref={coverInput}
+                type="file"
+                hidden
+                accept={ALLOWED_IMAGE_TYPES.join(",")}
+                onChange={onCoverPicked}
+                data-testid="server-event-cover-file"
+              />
+              <CoverPreview
+                type="button"
+                onClick={pickCover}
+                data-empty={!hasCover() || undefined}
+                aria-label={
+                  hasCover() ? t`Change the cover` : t`Upload a cover picture`
+                }
+                data-testid="server-event-cover-preview"
+              >
+                <Switch
+                  fallback={
+                    <CoverEmpty>
+                      <Icon name="image" size={28} />
+                      <span>
+                        <Trans>No cover yet</Trans>
+                      </span>
+                    </CoverEmpty>
+                  }
+                >
+                  <Match when={readyCover()}>
+                    {(chosen) => <DrawnCover kind={chosen()} />}
+                  </Match>
+                  <Match when={ownCoverUrl()}>
+                    {(url) => (
+                      <img
+                        src={url()}
+                        alt=""
+                        data-testid="server-event-cover-own"
+                      />
+                    )}
+                  </Match>
+                </Switch>
+              </CoverPreview>
+              <CoverActions>
+                <Button
+                  size="sm"
+                  variant="tonal"
+                  onPress={pickCover}
+                  data-testid="server-event-cover-upload"
+                >
+                  <Icon name="upload-simple" size={16} />
+                  {ownCoverUrl() && !readyCover() ? (
+                    <Trans>Change picture</Trans>
+                  ) : (
+                    <Trans>Upload a picture</Trans>
+                  )}
+                </Button>
+                <Show when={hasCover()}>
+                  <Button
+                    size="sm"
+                    variant="text"
+                    onPress={removeCover}
+                    data-testid="server-event-cover-remove"
+                  >
+                    <Trans>Remove</Trans>
+                  </Button>
+                </Show>
+              </CoverActions>
+              <Show when={coverTooBig()}>
+                <Hint role="alert">
                   <Trans>
-                    Only they and the organisers see this event. Nobody else
-                    learns that it exists.
+                    This picture is too large. Choose a smaller one.
                   </Trans>
                 </Hint>
               </Show>
-              <Show when={visibility() === "Roles"}>
-                <RoleList data-testid="server-event-roles">
-                  <For each={props.server.orderedRoles}>
-                    {(role) => (
-                      <Checkbox
-                        checked={roles().includes(role.id)}
-                        onChange={(event) =>
-                          setRoles(
-                            event.currentTarget.checked
-                              ? [...roles(), role.id]
-                              : roles().filter((id) => id !== role.id),
-                          )
-                        }
-                      >
-                        {role.name}
-                      </Checkbox>
-                    )}
-                  </For>
-                </RoleList>
-              </Show>
-            </fieldset>
-          </Show>
-          <Show when={invitedOnly}>
-            <Hint>
-              <Trans>Only the invited people see this event.</Trans>
-            </Hint>
-          </Show>
+              <ReadyLabel id="server-event-ready-covers">
+                <Trans>Or a ready cover</Trans>
+              </ReadyLabel>
+              <Covers
+                role="radiogroup"
+                aria-labelledby="server-event-ready-covers"
+              >
+                <For each={COVER_KINDS}>
+                  {(coverKind, index) => (
+                    <CoverChoice
+                      type="button"
+                      role="radio"
+                      aria-checked={readyCover() === coverKind}
+                      aria-label={t`Ready cover ${index() + 1}`}
+                      onClick={() => {
+                        if (readyCover() === coverKind)
+                          return setReadyCover(undefined);
+                        setReadyCover(coverKind);
+                        group.controls.cover.setValue(null);
+                      }}
+                      data-testid={`server-event-cover-${coverKind}`}
+                    >
+                      <DrawnCover kind={coverKind} />
+                    </CoverChoice>
+                  )}
+                </For>
+              </Covers>
+            </SettingsFormPanel>
+          </SettingsSection>
 
-          <fieldset>
-            <legend>
-              <Trans>Helpers</Trans>
-            </legend>
-            <MemberPicker
-              server={props.server}
-              label={t`Add a helper`}
-              value={helpers()}
-              onChange={setHelpers}
-              max={MAX_HELPERS}
-              exclude={[existing?.creator ?? client().user?.id ?? ""]}
-              testId="server-event-helpers"
-            />
-            <Hint>
+          {/* the choices carry the title "Who sees it" themselves */}
+          <SettingsSection>
+            <SettingsFormPanel>
+              <Show
+                when={!invitedOnly}
+                fallback={
+                  <Hint>
+                    <Trans>Only the invited people see this event.</Trans>
+                  </Hint>
+                }
+              >
+                <SettingsChoices<Visibility>
+                  label={<Trans>Who sees it</Trans>}
+                  value={visibility()}
+                  onChange={setVisibility}
+                  options={[
+                    {
+                      value: "Place",
+                      title: <Trans>Everyone who sees its place</Trans>,
+                      description: (
+                        <Trans>Members who can open the channel.</Trans>
+                      ),
+                    },
+                    {
+                      value: "Roles",
+                      title: <Trans>Some roles</Trans>,
+                      description: (
+                        <Trans>The roles you choose, and the organisers.</Trans>
+                      ),
+                    },
+                    {
+                      value: "Invited",
+                      title: <Trans>Invited only</Trans>,
+                      description: (
+                        <Trans>
+                          Only they and the organisers see this event. Nobody
+                          else learns that it exists.
+                        </Trans>
+                      ),
+                    },
+                  ]}
+                />
+                <Show when={visibility() === "Invited"}>
+                  <MemberPicker
+                    server={props.server}
+                    label={t`Invite people`}
+                    value={invited()}
+                    onChange={setInvited}
+                    max={MAX_INVITED}
+                    testId="server-event-invited"
+                  />
+                </Show>
+                <Show when={visibility() === "Roles"}>
+                  <RoleList data-testid="server-event-roles">
+                    <For each={props.server.orderedRoles}>
+                      {(role) => (
+                        <Checkbox
+                          checked={roles().includes(role.id)}
+                          onChange={(event) =>
+                            setRoles(
+                              event.currentTarget.checked
+                                ? [...roles(), role.id]
+                                : roles().filter((id) => id !== role.id),
+                            )
+                          }
+                        >
+                          {role.name}
+                        </Checkbox>
+                      )}
+                    </For>
+                  </RoleList>
+                </Show>
+              </Show>
+              <FloatingSelect
+                id="server-event-attendee-list"
+                label={t`Who sees the names of the people coming`}
+                value={attendeeList()}
+                onChange={(event) =>
+                  setAttendeeList(event.currentTarget.value as AttendeeList)
+                }
+              >
+                <MenuItem value="Organisers">{t`Organisers only`}</MenuItem>
+                <MenuItem value="Participants">{t`People taking part`}</MenuItem>
+                <MenuItem value="Everyone">
+                  {t`Everyone who sees the event`}
+                </MenuItem>
+              </FloatingSelect>
+            </SettingsFormPanel>
+          </SettingsSection>
+
+          <SettingsSection
+            title={<Trans>Helpers</Trans>}
+            description={
               <Trans>
                 Helpers can change this event and manage who comes, without
                 managing the server's other events.
               </Trans>
-            </Hint>
-          </fieldset>
-
-          <ToggleRow>
-            <label for="server-event-limited">
-              <Trans>Seat limit</Trans>
-              <small>
-                <Trans>After it, people join a waiting list in order.</Trans>
-              </small>
-            </label>
-            <Toggle
-              id="server-event-limited"
-              checked={limited()}
-              onChange={setLimited}
-            />
-          </ToggleRow>
-          <Show when={limited()}>
-            <TextField
-              variant="outlined"
-              type="number"
-              min={1}
-              max={MAX_SEATS}
-              label={t`Seats`}
-              value={seats()}
-              onChange={(event) => setSeats(event.currentTarget.value)}
-              data-testid="server-event-seats"
-            />
-            <ToggleRow>
-              <label for="server-event-waitlist">
-                <Trans>Waiting list</Trans>
-              </label>
-              <Toggle
-                id="server-event-waitlist"
-                checked={waitlist()}
-                onChange={setWaitlist}
-              />
-            </ToggleRow>
-          </Show>
-
-          <FloatingSelect
-            id="server-event-attendee-list"
-            label={t`Who sees the names of the people coming`}
-            value={attendeeList()}
-            onChange={(event) =>
-              setAttendeeList(event.currentTarget.value as AttendeeList)
             }
           >
-            <MenuItem value="Organisers">{t`Organisers only`}</MenuItem>
-            <MenuItem value="Participants">{t`People taking part`}</MenuItem>
-            <MenuItem value="Everyone">{t`Everyone who sees the event`}</MenuItem>
-          </FloatingSelect>
+            <SettingsFormPanel>
+              <MemberPicker
+                server={props.server}
+                label={t`Add a helper`}
+                value={helpers()}
+                onChange={setHelpers}
+                max={MAX_HELPERS}
+                exclude={[existing?.creator ?? client().user?.id ?? ""]}
+                testId="server-event-helpers"
+              />
+            </SettingsFormPanel>
+          </SettingsSection>
 
-          <fieldset data-testid="server-event-reminders">
-            <legend>
-              <Trans>Remind the people who are coming</Trans>
-            </legend>
-            <RoleList>
-              <For each={REMINDER_CHOICES}>
-                {(minutes) => (
-                  <Checkbox
-                    checked={reminders().includes(minutes)}
-                    disabled={
-                      !reminders().includes(minutes) &&
-                      reminders().length >= MAX_REMINDERS
-                    }
-                    onChange={(event) =>
-                      setReminders(
-                        event.currentTarget.checked
-                          ? [...reminders(), minutes]
-                          : reminders().filter((value) => value !== minutes),
-                      )
-                    }
-                  >
-                    <Trans>
-                      {reminderSpan(minutes, i18n().locale ?? "en")} before
-                    </Trans>
-                  </Checkbox>
+          <SettingsSection title={<Trans>Seats</Trans>}>
+            <SettingsRow
+              title={<Trans>Seat limit</Trans>}
+              description={
+                <Trans>After it, people join a waiting list in order.</Trans>
+              }
+              onClick={() => setLimited(!limited())}
+              control={(ids) => (
+                <Toggle
+                  id="server-event-limited"
+                  aria-labelledby={ids.labelId}
+                  checked={limited()}
+                  onChange={setLimited}
+                />
+              )}
+            />
+            <Show when={limited()}>
+              <SettingsFormPanel>
+                <TextField
+                  variant="outlined"
+                  type="number"
+                  min={1}
+                  max={MAX_SEATS}
+                  label={t`Seats`}
+                  value={seats()}
+                  onChange={(event) => setSeats(event.currentTarget.value)}
+                  data-testid="server-event-seats"
+                />
+              </SettingsFormPanel>
+              <SettingsRow
+                title={<Trans>Waiting list</Trans>}
+                onClick={() => setWaitlist(!waitlist())}
+                control={(ids) => (
+                  <Toggle
+                    id="server-event-waitlist"
+                    aria-labelledby={ids.labelId}
+                    checked={waitlist()}
+                    onChange={setWaitlist}
+                  />
                 )}
-              </For>
-            </RoleList>
-            <Hint>
+              />
+            </Show>
+          </SettingsSection>
+
+          <SettingsSection
+            title={<Trans>Remind the people who are coming</Trans>}
+            description={
               <Trans>
                 Up to 3. Each person can switch reminders off for themselves.
               </Trans>
-            </Hint>
-          </fieldset>
+            }
+          >
+            {/* one Settings row each: the words at the start, the switch at
+                the end, as the seat limit above (owner, 2026-11-20) */}
+            <For each={REMINDER_CHOICES}>
+              {(minutes) => {
+                const on = () => reminders().includes(minutes);
+                const full = () => !on() && reminders().length >= MAX_REMINDERS;
+                const set = (value: boolean) =>
+                  setReminders(
+                    value
+                      ? [
+                          ...reminders().filter((other) => other !== minutes),
+                          minutes,
+                        ]
+                      : reminders().filter((other) => other !== minutes),
+                  );
+                return (
+                  <SettingsRow
+                    data-testid={`server-event-reminder-${minutes}`}
+                    title={
+                      <Trans>
+                        {reminderSpan(minutes, i18n().locale ?? "en")} before
+                      </Trans>
+                    }
+                    disabled={full()}
+                    onClick={() => !full() && set(!on())}
+                    control={(ids) => (
+                      <Toggle
+                        aria-labelledby={ids.labelId}
+                        checked={on()}
+                        disabled={full()}
+                        onChange={set}
+                      />
+                    )}
+                  />
+                );
+              }}
+            </For>
+          </SettingsSection>
 
           <Show when={problem()}>
             <Failure role="alert" data-testid="server-event-problem">
-              {problemText(problem())}
+              <Icon name="warning-circle" size={18} />
+              <span>{problemText(problem())}</span>
             </Failure>
           </Show>
           <Show when={error()}>
             <Failure role="alert" data-testid="server-event-error">
-              <TranslatedError error={error()} />
+              <Icon name="warning-circle" size={18} />
+              <span>
+                <TranslatedError error={error()} />
+              </span>
             </Failure>
           </Show>
         </Fields>
@@ -871,89 +1106,104 @@ const Fields = styled("div", {
   base: {
     display: "flex",
     flexDirection: "column",
-    gap: "16px",
-    "& fieldset": {
-      display: "flex",
-      flexDirection: "column",
-      gap: "8px",
-      border: "none",
-      padding: 0,
-      margin: 0,
-      minWidth: 0,
-    },
-    "& legend": {
-      padding: 0,
-      marginBottom: "8px",
-      fontSize: "12px",
-      fontWeight: 650,
-      color: "var(--z-fg-muted)",
-    },
+    gap: "24px",
+    // every label, helper and counter starts on the reading side
+    textAlign: "start",
   },
 });
 
-const Preview = styled("div", {
+const PreviewTitle = styled("span", {
   base: {
-    // the page behind a ticket's notches is the dialog here
-    "--z-bg-chat": "var(--z-bg-modal, var(--z-bg-raised))",
-    "& > div": {
-      minHeight: "88px",
-      background: "var(--z-bg-input)",
-    },
+    display: "block",
+    fontWeight: 600,
+    overflow: "hidden",
+    textOverflow: "ellipsis",
+    whiteSpace: "nowrap",
   },
 });
 
-const PreviewBody = styled("div", {
+const PreviewMeta = styled("span", {
   base: {
     display: "flex",
-    flexDirection: "column",
-    justifyContent: "center",
-    gap: "2px",
-    padding: "12px 20px",
-    minWidth: 0,
-    "& b": {
-      fontSize: "16px",
-      lineHeight: "24px",
-      fontWeight: 700,
-      color: "var(--z-header-primary, var(--z-fg-primary))",
-      overflow: "hidden",
-      textOverflow: "ellipsis",
-      whiteSpace: "nowrap",
-    },
-    "& span": {
-      fontSize: "13px",
-      lineHeight: "18px",
-      color: "var(--z-fg-secondary)",
-    },
-  },
-});
-
-const ToggleRow = styled("div", {
-  base: {
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "space-between",
-    gap: "12px",
-    minHeight: "44px",
-    color: "var(--z-fg-primary)",
-    fontSize: "15px",
-    "& label": { display: "flex", flexDirection: "column", minWidth: 0 },
-    "& small": {
-      fontSize: "13px",
-      lineHeight: "18px",
-      color: "var(--z-fg-muted)",
-    },
+    flexWrap: "wrap",
+    gap: "0 8px",
+    "& > span[aria-hidden]": { color: "var(--z-fg-muted)" },
   },
 });
 
 const Warning = styled("div", {
   base: {
-    padding: "10px 12px",
-    borderRadius: "var(--z-box-radius)",
-    background: "var(--z-box-bg)",
-    color: "var(--z-status-warning)",
+    display: "flex",
+    alignItems: "flex-start",
+    gap: "8px",
     fontSize: "13px",
     lineHeight: "18px",
-    border: "var(--z-box-border)",
+    color: "var(--z-fg-secondary)",
+    "--z-icon-color": "var(--z-status-warning)",
+  },
+});
+
+/** The chosen cover, as wide as the form, 16:9 */
+const CoverPreview = styled("button", {
+  base: {
+    all: "unset",
+    boxSizing: "border-box",
+    position: "relative",
+    display: "grid",
+    placeItems: "center",
+    width: "100%",
+    aspectRatio: "16 / 9",
+    maxHeight: "220px",
+    borderRadius: "var(--z-radius, 10px)",
+    overflow: "hidden",
+    cursor: "pointer",
+    background: "var(--z-bg-input)",
+    "& > img, & > div": {
+      width: "100%",
+      height: "100%",
+      objectFit: "cover",
+    },
+    "&[data-empty]": {
+      border:
+        "1px dashed color-mix(in srgb, var(--z-fg-primary) 22%, transparent)",
+    },
+    "&:hover[data-empty]": {
+      borderColor: "color-mix(in srgb, var(--z-fg-primary) 40%, transparent)",
+    },
+    "&:focus-visible": {
+      outline: "2px solid var(--z-focus)",
+      outlineOffset: "2px",
+    },
+  },
+});
+
+const CoverEmpty = styled("span", {
+  base: {
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+    gap: "6px",
+    fontSize: "13px",
+    color: "var(--z-fg-muted)",
+    "--z-icon-color": "currentColor",
+  },
+});
+
+const CoverActions = styled("div", {
+  base: {
+    display: "flex",
+    alignItems: "center",
+    gap: "8px",
+  },
+});
+
+const ReadyLabel = styled("div", {
+  base: {
+    marginBlockStart: "4px",
+    fontSize: "13px",
+    lineHeight: "18px",
+    fontWeight: 600,
+    color: "var(--z-fg-secondary)",
   },
 });
 
@@ -962,12 +1212,17 @@ const Covers = styled("div", {
     display: "grid",
     gridTemplateColumns: "repeat(5, minmax(0, 1fr))",
     gap: "8px",
+    marginBlockStart: "-8px",
   },
 });
 
 const CoverChoice = styled("button", {
   base: {
     aspectRatio: "16 / 9",
+    // the phones' 44 px minimum made each 16:9 picture 78 px wide, and five
+    // of them ran out of the box; the unseen tap area keeps the 44 px
+    minWidth: "0 !important",
+    minHeight: "0 !important",
     padding: 0,
     border: "none",
     borderRadius: "var(--z-radius-sm, 6px)",
@@ -992,10 +1247,6 @@ const RoleList = styled("div", {
     gap: "4px",
     maxHeight: "168px",
     overflowY: "auto",
-    padding: "8px 12px",
-    borderRadius: "var(--z-box-radius)",
-    background: "var(--z-box-bg)",
-    border: "var(--z-box-border)",
   },
 });
 
@@ -1010,6 +1261,9 @@ const Hint = styled("p", {
 
 const Failure = styled("div", {
   base: {
+    display: "flex",
+    alignItems: "flex-start",
+    gap: "8px",
     padding: "12px",
     borderRadius: "var(--z-box-radius)",
     background: "var(--z-box-bg)",
@@ -1017,5 +1271,6 @@ const Failure = styled("div", {
     fontSize: "13px",
     lineHeight: "18px",
     border: "var(--z-box-border)",
+    "--z-icon-color": "var(--z-danger)",
   },
 });

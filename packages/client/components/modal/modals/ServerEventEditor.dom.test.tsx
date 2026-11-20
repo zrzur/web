@@ -44,12 +44,18 @@ vi.mock("@revolt/i18n/errors", () => ({
 vi.mock("@revolt/instance", () => ({
   useInstance: () => ({
     mediaUrl: "",
-    limits: () => ({ file_upload_size_limits: { banners: 1 } }),
+    limits: () => ({ file_upload_size_limits: { banners: 1_000_000 } }),
   }),
 }));
 vi.mock("@revolt/routing", () => ({ useNavigate: () => vi.fn() }));
 vi.mock("..", () => ({ useModals: () => ({ openModal: vi.fn() }) }));
-vi.mock("./CropProcess", () => ({ cropProcess: () => undefined }));
+// the crop step hands the picture back as it is
+vi.mock("./CropProcess", () => ({
+  cropProcess: () => (files: File[], resolve: (files: File[]) => void) =>
+    resolve(files),
+}));
+vi.mock("@revolt/state", () => ({ ALLOWED_IMAGE_TYPES: ["image/png"] }));
+vi.mock("@revolt/ui/icons/Icon", () => ({ Icon: () => <span /> }));
 vi.mock("@revolt/ui/components/design/dateTime", () => ({
   hour12From: () => false,
   roundUp: (date: Date) => date,
@@ -64,7 +70,10 @@ vi.mock("@revolt/ui", () => {
   );
   return {
     Dialog: (props: any) => (
-      <div role="dialog">
+      <div
+        role="dialog"
+        data-actions-at-end={props.actionsAtEnd ? "" : undefined}
+      >
         {props.children}
         <For each={props.actions}>
           {(action: any) => (
@@ -80,6 +89,37 @@ vi.mock("@revolt/ui", () => {
       </div>
     ),
     DateTimeField: () => <span />,
+    Button: (props: any) => (
+      <button
+        type="button"
+        data-testid={props["data-testid"]}
+        onClick={() => props.onPress?.()}
+      >
+        {props.children}
+      </button>
+    ),
+    SettingsSection: (props: any) => (
+      <section>
+        {props.title}
+        {props.children}
+      </section>
+    ),
+    SettingsFormPanel: (props: any) => <div>{props.children}</div>,
+    SettingsRow: (props: any) => (
+      <div>
+        {props.title}
+        {props.control?.({ labelId: "l" })}
+      </div>
+    ),
+    SettingsChoices: (props: any) => (
+      <For each={props.options}>
+        {(option: any) => (
+          <button type="button" onClick={() => props.onChange(option.value)}>
+            {option.title}
+          </button>
+        )}
+      </For>
+    ),
     FloatingSelect: (props: any) => <div>{props.children}</div>,
     MenuItem: (props: any) => <span>{props.children}</span>,
     Segmented: (props: any) => (
@@ -240,5 +280,84 @@ describe("ServerEventEditor", () => {
     expect(create).toHaveBeenCalledTimes(1);
     expect(create.mock.calls[0][1].visibility).toBe("Invited");
     expect(create.mock.calls[0][1].invited).toEqual(["sara"]);
+  });
+
+  it("puts the buttons at the end of the form, in the order Cancel, Save as draft, Publish", () => {
+    dispose = render(
+      () => (
+        <I18nProvider i18n={i18n}>
+          <ServerEventEditorModal
+            type="server_event"
+            server={server}
+            show
+            onClose={() => undefined}
+          />
+        </I18nProvider>
+      ),
+      document.getElementById("root")!,
+    );
+    const dialog = document.querySelector("[role=dialog]")!;
+    expect(dialog.hasAttribute("data-actions-at-end")).toBe(true);
+    const labels = [...dialog.querySelectorAll(":scope > button")].map(
+      (button) => button.textContent,
+    );
+    expect(labels).toEqual(["Cancel", "Save draft", "Publish"]);
+  });
+
+  it("takes an own picture as the cover and uploads it with the event", async () => {
+    fake.uploadFile = vi.fn(async () => "cover-id");
+    dispose = render(
+      () => (
+        <I18nProvider i18n={i18n}>
+          <ServerEventEditorModal
+            type="server_event"
+            server={server}
+            show
+            onClose={() => undefined}
+          />
+        </I18nProvider>
+      ),
+      document.getElementById("root")!,
+    );
+    const title = document.querySelector<HTMLInputElement>(
+      "input[aria-label=Title]",
+    )!;
+    title.value = "Film night";
+    title.dispatchEvent(new InputEvent("input", { bubbles: true }));
+    // the upload button opens the file picker
+    const file = document.querySelector<HTMLInputElement>(
+      "[data-testid=server-event-cover-file]",
+    )!;
+    const opened = vi.fn();
+    file.addEventListener("click", (event) => {
+      event.preventDefault();
+      opened();
+    });
+    document
+      .querySelector<HTMLButtonElement>(
+        "[data-testid=server-event-cover-upload]",
+      )!
+      .click();
+    expect(opened).toHaveBeenCalledTimes(1);
+
+    const picture = new File([new Uint8Array([1, 2, 3])], "mine.png", {
+      type: "image/png",
+    });
+    Object.defineProperty(file, "files", {
+      value: [picture],
+      configurable: true,
+    });
+    file.dispatchEvent(new Event("change", { bubbles: true }));
+    await flush();
+    expect(
+      document.querySelector("[data-testid=server-event-cover-own]"),
+    ).not.toBeNull();
+
+    [...document.querySelectorAll("button")]
+      .find((button) => button.textContent === "Publish")!
+      .click();
+    await flush(50);
+    expect(fake.uploadFile).toHaveBeenCalledWith("banners", picture, "");
+    expect(create.mock.calls[0][1].cover).toBe("cover-id");
   });
 });

@@ -30992,3 +30992,70 @@ msgstr "Ort: {0}"
 msgctxt "server-settings"
 msgid "Wings"
 msgstr "Flügel"
+
+#: src/interface/events/EventsPage.tsx
+msgctxt "event places"
+msgid "All"
+msgstr "Alle"
+
+#: components/modal/modals/ServerEventEditor.tsx
+msgid "Change picture"
+msgstr "Bild ändern"
+
+#: components/modal/modals/ServerEventEditor.tsx
+msgid "Change the cover"
+msgstr "Cover ändern"
+
+#: src/interface/events/EventsPage.tsx
+msgid "Clear the search"
+msgstr "Suche leeren"
+
+#: components/modal/modals/ServerEventEditor.tsx
+msgid "Members who can open the channel."
+msgstr "Mitglieder, die den Kanal öffnen können."
+
+#: components/modal/modals/ServerEventEditor.tsx
+msgid "No cover yet"
+msgstr "Noch kein Cover"
+
+#: components/modal/modals/ServerEventEditor.tsx
+msgid "Or a ready cover"
+msgstr "Oder ein fertiges Cover"
+
+#: components/modal/modals/ServerEventEditor.tsx
+msgctxt "event editor"
+msgid "Save draft"
+msgstr "Als Entwurf"
+
+#: src/interface/events/EventsPage.tsx
+msgid "Search and filter events"
+msgstr "Events suchen und filtern"
+
+#: src/interface/events/EventsPage.tsx
+msgid "Search and filter events (a filter is set)"
+msgstr "Events suchen und filtern (ein Filter ist gesetzt)"
+
+#: components/modal/modals/ServerEventEditor.tsx
+msgid "The roles you choose, and the organisers."
+msgstr "Die Rollen, die du wählst, und die Organisatoren."
+
+#: components/modal/modals/ServerEventEditor.tsx
+msgid "This picture is too large. Choose a smaller one."
+msgstr "Dieses Bild ist zu groß. Wähle ein kleineres."
+
+#: components/modal/modals/ServerEventEditor.tsx
+msgctxt "event editor"
+msgid "Time"
+msgstr "Zeit"
+
+#: components/modal/modals/ServerEventEditor.tsx
+msgid "Upload a cover picture"
+msgstr "Coverbild hochladen"
+
+#: components/modal/modals/ServerEventEditor.tsx
+msgid "Upload a picture"
+msgstr "Bild hochladen"
+
+#: components/modal/modals/ServerEventEditor.tsx
+msgid "Upload a picture of your own; it is cropped to 16:9. The ready covers are there if you have none."
+msgstr "Lade ein eigenes Bild hoch; es wird auf 16:9 zugeschnitten. Die fertigen Cover sind da, wenn du keins hast."

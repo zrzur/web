@@ -30992,3 +30992,70 @@ msgstr "المكان: {0}"
 msgctxt "server-settings"
 msgid "Wings"
 msgstr "أجنحة"
+
+#: src/interface/events/EventsPage.tsx
+msgctxt "event places"
+msgid "All"
+msgstr "الكل"
+
+#: components/modal/modals/ServerEventEditor.tsx
+msgid "Change picture"
+msgstr "غيّر الصورة"
+
+#: components/modal/modals/ServerEventEditor.tsx
+msgid "Change the cover"
+msgstr "غيّر الغلاف"
+
+#: src/interface/events/EventsPage.tsx
+msgid "Clear the search"
+msgstr "امسح البحث"
+
+#: components/modal/modals/ServerEventEditor.tsx
+msgid "Members who can open the channel."
+msgstr "الأعضاء الذين يمكنهم فتح القناة."
+
+#: components/modal/modals/ServerEventEditor.tsx
+msgid "No cover yet"
+msgstr "لا غلاف بعد"
+
+#: components/modal/modals/ServerEventEditor.tsx
+msgid "Or a ready cover"
+msgstr "أو غلاف جاهز"
+
+#: components/modal/modals/ServerEventEditor.tsx
+msgctxt "event editor"
+msgid "Save draft"
+msgstr "حفظ كمسودة"
+
+#: src/interface/events/EventsPage.tsx
+msgid "Search and filter events"
+msgstr "البحث في الفعاليات وتصفيتها"
+
+#: src/interface/events/EventsPage.tsx
+msgid "Search and filter events (a filter is set)"
+msgstr "البحث في الفعاليات وتصفيتها (التصفية مفعّلة)"
+
+#: components/modal/modals/ServerEventEditor.tsx
+msgid "The roles you choose, and the organisers."
+msgstr "الأدوار التي تختارها، والمنظِّمون."
+
+#: components/modal/modals/ServerEventEditor.tsx
+msgid "This picture is too large. Choose a smaller one."
+msgstr "هذه الصورة كبيرة جدًا. اختر صورة أصغر."
+
+#: components/modal/modals/ServerEventEditor.tsx
+msgctxt "event editor"
+msgid "Time"
+msgstr "الوقت"
+
+#: components/modal/modals/ServerEventEditor.tsx
+msgid "Upload a cover picture"
+msgstr "ارفع صورة للغلاف"
+
+#: components/modal/modals/ServerEventEditor.tsx
+msgid "Upload a picture"
+msgstr "ارفع صورة"
+
+#: components/modal/modals/ServerEventEditor.tsx
+msgid "Upload a picture of your own; it is cropped to 16:9. The ready covers are there if you have none."
+msgstr "ارفع صورة من عندك، وتُقَصّ بنسبة 16:9. والأغلفة الجاهزة متاحة إن لم تكن لديك صورة."

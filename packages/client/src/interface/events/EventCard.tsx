@@ -20,6 +20,7 @@ import { hour12From } from "@revolt/ui/components/design/dateTime";
 import { Icon } from "@revolt/ui/icons/Icon";
 
 import { seatState } from "./EventAnswer";
+import { DateMark } from "./dateMark";
 import { eventDay, eventPhase, eventTimes, startsIn } from "./eventFormat";
 import { Stamp } from "./Ticket";
 
@@ -403,32 +404,6 @@ export function JoinButton(props: {
     </Show>
   );
 }
-
-/** The day of an event in the icon column of its row */
-const DateMark = styled("span", {
-  base: {
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center",
-    justifyContent: "center",
-    width: "40px",
-    minHeight: "40px",
-    borderRadius: "var(--z-radius, 10px)",
-    background: "var(--z-bg-input)",
-    "& b": {
-      fontSize: "16px",
-      lineHeight: "18px",
-      fontWeight: 700,
-      color: "var(--z-fg-primary)",
-    },
-    "& small": {
-      fontSize: "11px",
-      lineHeight: "14px",
-      color: "var(--z-fg-secondary)",
-    },
-    "&[data-quiet] b": { color: "var(--z-fg-muted)" },
-  },
-});
 
 /** Happening now: a dot in the live colour where the day would be */
 const LiveDot = styled("span", {
