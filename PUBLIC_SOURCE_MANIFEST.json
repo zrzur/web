@@ -262,8 +262,8 @@
     },
     {
       "path": "CHANGELOG.md",
-      "sha256": "0571f6754263a2b089ad98be8ff0a9e20771d7ee8259f6d68dee71eec4b245d8",
-      "bytes": 191732,
+      "sha256": "9a84c97455ab7cff88a71dcce3e3881c25b586d72e157f9253df0e53d95ceb29",
+      "bytes": 191640,
       "category": "public-documentation"
     },
     {
@@ -766,8 +766,8 @@
     },
     {
       "path": "packages/client/components/app/interface/channels/text/history/HistoryScroller.tsx",
-      "sha256": "034f612bdd7122edf128f7dd2c1a84aaeed26a54a667e10bce50cca10c305914",
-      "bytes": 19626,
+      "sha256": "d3a5fb7e30877462314ed812eedc50a5620fea72b72b66e5db992680ff56726d",
+      "bytes": 19284,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -6784,8 +6784,8 @@
     },
     {
       "path": "packages/client/components/ui/components/features/messaging/elements/Container.tsx",
-      "sha256": "924291561e6ec442423cb6e9a61e986a36a46f530fffa69bb975ce5e51bbd317",
-      "bytes": 16039,
+      "sha256": "689947483d50c5b3153be3282138796813cf84c5c2f91e6c8c3e75c2871607bc",
+      "bytes": 15841,
       "category": "product-source-or-build-manifest"
     },
     {
