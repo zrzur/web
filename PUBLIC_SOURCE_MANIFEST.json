@@ -262,8 +262,8 @@
     },
     {
       "path": "CHANGELOG.md",
-      "sha256": "ff3aec43f8c95fd5b6783c0245ba46a336bde7b750a53e1aaf4fb74b2311198b",
-      "bytes": 190213,
+      "sha256": "0571f6754263a2b089ad98be8ff0a9e20771d7ee8259f6d68dee71eec4b245d8",
+      "bytes": 191732,
       "category": "public-documentation"
     },
     {
@@ -766,8 +766,8 @@
     },
     {
       "path": "packages/client/components/app/interface/channels/text/history/HistoryScroller.tsx",
-      "sha256": "59b8bc9c1524749826d8657397be396d28fbd2be413f07e4031ce8f43ff5a24f",
-      "bytes": 18018,
+      "sha256": "034f612bdd7122edf128f7dd2c1a84aaeed26a54a667e10bce50cca10c305914",
+      "bytes": 19626,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -6784,8 +6784,8 @@
     },
     {
       "path": "packages/client/components/ui/components/features/messaging/elements/Container.tsx",
-      "sha256": "513ae390d48fa5a78a504ff04db88e55731e2a7e2825bf1c432c95d36af282d1",
-      "bytes": 15190,
+      "sha256": "924291561e6ec442423cb6e9a61e986a36a46f530fffa69bb975ce5e51bbd317",
+      "bytes": 16039,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -42351,6 +42351,24 @@
       "category": "synthetic-test-source-or-fixture"
     },
     {
+      "path": "packages/client/scripts/preconnectApi.d.mts",
+      "sha256": "b937393a9d21428d4dfb602eb4f1c15d1847ef76bf6cee369332746744c65eb3",
+      "bytes": 306,
+      "category": "product-source-or-build-manifest"
+    },
+    {
+      "path": "packages/client/scripts/preconnectApi.mjs",
+      "sha256": "d10d7f532d29f2751186804c025cc0090286d0cf551d2407b0fe045e0a77a8e8",
+      "bytes": 1695,
+      "category": "product-source-or-build-manifest"
+    },
+    {
+      "path": "packages/client/scripts/preconnectApi.test.ts",
+      "sha256": "7edd0db0a1b53398e77f2323f4ec17042c2b4a3e9e4eb6c1d54394f623684c90",
+      "bytes": 1776,
+      "category": "synthetic-test-source-or-fixture"
+    },
+    {
       "path": "packages/client/scripts/preloadApp.d.mts",
       "sha256": "79da82f44c922458ec5ea1f6e0ac30e1961e255f1ac94a874cb9b97bf59d35d0",
       "bytes": 440,
@@ -44512,8 +44530,8 @@
     },
     {
       "path": "packages/client/vite.config.ts",
-      "sha256": "cdf8e54c73e17930f91d5b6c59b418d83c702dab4d86a308c03fe8e406243e34",
-      "bytes": 9589,
+      "sha256": "9c49980978faa2c5982b50e13d8a78d7878f1c54ed12ba9007336c93add7d116",
+      "bytes": 9740,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -45090,7 +45108,7 @@
   "submodules": [
     {
       "path": "packages/stoat.js",
-      "commit": "9d70e08626b06fe9cb4135d6477dde79a7a4e7d5"
+      "commit": "bbb4962028b46debb9e2a1be180a6d9bc366f3c4"
     }
   ]
 }
