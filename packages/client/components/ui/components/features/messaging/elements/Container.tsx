@@ -139,6 +139,15 @@ const base = cva({
     transition: "background-color 120ms ease, border-color 120ms ease",
     _motionReduce: { transition: "none" },
 
+    // rows out of view are not styled, laid out or painted: a channel keeps
+    // 150 rows or more, and scrolling back or opening a channel spent most of
+    // its time on rows nobody could see. A row keeps the size it last had.
+    contentVisibility: "auto",
+    containIntrinsicSize: "auto 64px",
+    // the paint containment that comes with it must not cut the hover
+    // toolbar (16 px above the row) or avatar frames
+    overflowClipMargin: "48px",
+
     "& a:hover": {
       textDecoration: "underline",
     },
