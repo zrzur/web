@@ -185,11 +185,11 @@ test("one version: RELEASE.json (what the app shows) equals package.json (the im
 test("build.json names the version and the exact commit of the running build", async () => {
   const { buildJson } = await import("./build-json.mjs");
   const commit = "b".repeat(40);
-  const json = JSON.parse(buildJson({ version: "26.2.0-beta.2", commit, tag: "" }, "web"));
+  const json = JSON.parse(buildJson({ version: "26.2.0", commit, tag: "" }, "web"));
   assert.deepEqual(json, {
     product: "Zrzur",
     component: "web",
-    version: "26.2.0-beta.2",
+    version: "26.2.0",
     commit,
     tag: "",
     sourceUrl: `https://github.com/zrzur/web/tree/${commit}`,

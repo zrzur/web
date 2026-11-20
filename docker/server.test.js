@@ -25,7 +25,7 @@ test("build.json is served to any origin; other files are not", async () => {
   const build = {
     product: "Zrzur",
     component: "web",
-    version: "26.2.0-beta.2",
+    version: "26.2.0",
     commit: "a".repeat(40),
   };
   writeFileSync(join(root, "index.html"), "<!doctype html><title>x</title>");
