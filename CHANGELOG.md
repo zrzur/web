@@ -12,6 +12,10 @@ The official release for everyone. It brings the work of 26.2.0-beta.1 and 26.2.
 * **Calendar:** the month sits on the one box surface with quiet lines between the days; days outside the month are muted; today is marked by the accent on the date only; event chips are easier to read. The toolbar is one line (arrows, month, then Today and Month/Week), with the short month name on phones. The week view matches.
 * **New event:** grouped like Settings (Details, Time, Where, Cover, Who sees it, Helpers, Seats, Reminders). Cancel, Save draft and Publish come at the end of the form in one row that never wraps (Dialog `actionsAtEnd`). A row at the top shows the event as it will look in the list, in place of the ticket. **Cover:** upload your own picture (cropped to 16:9), change or remove it; the ready covers are a second choice below.
 
+### Phone taps reach the right button (2026-11-20)
+
+* **Three buttons no longer take every tap on phones:** the "Forwarded from" link, a game card in the Steam games dialog and a ticket in Contact support were styled with `all: unset`, which dropped the `position: relative` the phones' unseen 44 px tap area needs, so that area covered the page. They keep their position now, and a unit test (`components/ui/unsetTapArea.test.ts`) fails on any button with `all: unset` and no `position` in the same block.
+
 ### Events look like Settings (2026-11-19, owner's review of 26.2.0-beta.1)
 
 * **Every box is a settings group:** the event's facts, your answer, your own options, the organiser's tools, sharing, seats, who is coming and the numbers are the same grouped rows as Settings (`SettingsSection`, `SettingsRow`, `SettingsFormPanel`), with the same headings, row height, corners and dividers. The lists show each event as a row with its day at the start, in one group per section, instead of a ticket.

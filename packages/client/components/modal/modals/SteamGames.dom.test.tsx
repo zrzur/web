@@ -1,6 +1,7 @@
 import { i18n } from "@lingui/core";
 import { I18nProvider } from "@lingui/solid";
 import { render } from "solid-js/web";
+import { css } from "styled-system/css";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 
 vi.mock("@revolt/ui", () => ({
@@ -61,7 +62,8 @@ const games = {
       hours: 210,
       achievements_unlocked: 12,
       achievements_total: 30,
-      header_url: "https://cdn.cloudflare.steamstatic.com/steam/apps/570/header.jpg",
+      header_url:
+        "https://cdn.cloudflare.steamstatic.com/steam/apps/570/header.jpg",
       store_url: "https://store.steampowered.com/app/570/",
     },
     {
@@ -113,6 +115,15 @@ beforeEach(() => {
 afterEach(() => dispose?.());
 
 describe("SteamGamesModal", () => {
+  it("keeps position: relative on the game cards next to all: unset (phone tap area)", () => {
+    const cards = [...document.querySelectorAll("button")].filter((el) =>
+      el.classList.contains(css({ all: "unset" })),
+    );
+    expect(cards.length).toBeGreaterThan(0);
+    for (const card of cards)
+      expect(card.classList.contains(css({ position: "relative" }))).toBe(true);
+  });
+
   it("shows the person, the games and the latest achievements with days", () => {
     expect(text()).toContain("MAHER");
     expect(text()).toContain("32 games");

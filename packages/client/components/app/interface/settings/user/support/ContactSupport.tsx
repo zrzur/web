@@ -94,7 +94,17 @@ export function ContactSupport() {
                     <button
                       type="button"
                       onClick={() => setOpen(ticket._id)}
-                      style={{ all: "unset", cursor: "pointer", display: "grid", gap: "4px", width: "100%" }}
+                      style={{
+                        all: "unset",
+                        // all: unset drops the button's "relative": the phones' unseen 44 px
+                        // tap area (styles.css) then spread over the whole page and took
+                        // every tap
+                        position: "relative",
+                        cursor: "pointer",
+                        display: "grid",
+                        gap: "4px",
+                        width: "100%",
+                      }}
                     >
                       <TitleLine>
                         <span dir="auto">{ticket.subject}</span>
