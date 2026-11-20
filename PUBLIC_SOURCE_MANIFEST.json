@@ -43900,8 +43900,8 @@
     },
     {
       "path": "packages/client/src/interface/events/EventsLink.tsx",
-      "sha256": "c38571f19801c3c752e9771114e6fe4743127bb7fea6f5ad030b05b55ee8056e",
-      "bytes": 8273,
+      "sha256": "5b3cfb4ebaf28cecf68e7aa7e038d7906e1bc6972f25fce7d55b13bc025315f2",
+      "bytes": 8283,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -44026,8 +44026,8 @@
     },
     {
       "path": "packages/client/src/interface/lobby/LobbyLink.tsx",
-      "sha256": "50087e98f30249c8b54da729e27208f38aa8edb7df21ea6be5ba88b665ecabe7",
-      "bytes": 3024,
+      "sha256": "5c7fd42905af4ffe422f7e9786814f8d114eea11a54e43c747a72ca1fadf47a9",
+      "bytes": 3025,
       "category": "product-source-or-build-manifest"
     },
     {
