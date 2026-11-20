@@ -40,8 +40,8 @@
     },
     {
       "path": ".github/workflows/source-check.yml",
-      "sha256": "77892baf7a1320076b9fe463b6fc6db1fedde08452b7d642b7a296e18d971c70",
-      "bytes": 955,
+      "sha256": "97434a50d2a0ba0f11b8216beefa850e7edf5dcc7096a8c0c61110c5adef09e2",
+      "bytes": 948,
       "category": "reviewed-build-and-ci"
     },
     {
@@ -262,8 +262,8 @@
     },
     {
       "path": "CHANGELOG.md",
-      "sha256": "a258c168646c156eae245f09dc85cb9337f74a1005bc07af0e3875a517d8c9d0",
-      "bytes": 189599,
+      "sha256": "f70db51e40f318c845d2481f051b8a70b30cdeebad0b1656f85093af52c3b908",
+      "bytes": 189705,
       "category": "public-documentation"
     },
     {
@@ -322,8 +322,8 @@
     },
     {
       "path": "RELEASE.json",
-      "sha256": "92f8e92663b054c393a39ea24888754254cc68ca04ff1d54d4a09c80c536b9e7",
-      "bytes": 295,
+      "sha256": "e913ae8b3d691dd62238282c32ddad121f8854aeda79f72321acc4a3e7151bba",
+      "bytes": 281,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -340,8 +340,8 @@
     },
     {
       "path": "ZRZUR_RELEASE.md",
-      "sha256": "68f20f02438bb7c0115ee6c2baf0a66a114a578f094390954f37c2ffb69a85a3",
-      "bytes": 1384,
+      "sha256": "b9effdadfa1ca9c27b395536afe520c2096ff9dc5627606d86f63d5b6ad4e676",
+      "bytes": 1396,
       "category": "public-documentation"
     },
     {
@@ -520,8 +520,8 @@
     },
     {
       "path": "docker/server.test.js",
-      "sha256": "293b3ca76a46c74fc40328a21c527e56ee706bed81e6df80ce6ce5f0f7c982f9",
-      "bytes": 2344,
+      "sha256": "50ad3c57bcc4c1de1605ca2ab812a11817370b3b019d28a108279c193896e69f",
+      "bytes": 2337,
       "category": "synthetic-test-source-or-fixture"
     },
     {
@@ -580,8 +580,8 @@
     },
     {
       "path": "package.json",
-      "sha256": "77ab270cc790e9b85e5395773e8dc590840aae7b686730273a99c1e4ac0b9d25",
-      "bytes": 735,
+      "sha256": "19b094c6aa7d8b4885d0f7b3a4ebb03ada0f250816e9819d623d9bf1da9912de",
+      "bytes": 728,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -6772,8 +6772,8 @@
     },
     {
       "path": "packages/client/components/ui/components/features/messaging/elements/Container.tsx",
-      "sha256": "28ecfdefec2423d1947dd7cd45c8a03e917be6eb7817d9caa511585e3f2eadfa",
-      "bytes": 15482,
+      "sha256": "513ae390d48fa5a78a504ff04db88e55731e2a7e2825bf1c432c95d36af282d1",
+      "bytes": 15190,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -42370,8 +42370,8 @@
     },
     {
       "path": "packages/client/scripts/release-integrity.test.mjs",
-      "sha256": "1181edb034a7a64eb99fd9ff0264206475a5312ed78ec37453493412899c197c",
-      "bytes": 8084,
+      "sha256": "01c93abecd73e14aa8089a59b18f118d05a6a6aaa00a74ecd8efde5a92cda119",
+      "bytes": 8070,
       "category": "synthetic-test-source-or-fixture"
     },
     {
