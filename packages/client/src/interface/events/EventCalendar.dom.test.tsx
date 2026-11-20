@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any -- test doubles */
 import { i18n } from "@lingui/core";
 import { I18nProvider } from "@lingui/solid";
-import { For } from "solid-js";
+import { For, Suspense } from "solid-js";
 import { render } from "solid-js/web";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 
@@ -131,7 +131,9 @@ async function mount(filter?: (event: any) => boolean) {
     document.getElementById("root")!,
   );
   await vi.waitFor(() =>
-    expect(document.querySelectorAll("[data-testid=calendar-event]").length).toBeGreaterThan(0),
+    expect(
+      document.querySelectorAll("[data-testid=calendar-event]").length,
+    ).toBeGreaterThan(0),
   );
 }
 
@@ -164,7 +166,9 @@ describe("the calendar of events", () => {
     expect(cell(other).textContent).toContain("1 more");
     expect(document.body.textContent).not.toContain("Event G");
     // a called-off event is still there, marked
-    (cell(other).querySelector("button:not([data-testid])") as HTMLElement).click();
+    (
+      cell(other).querySelector("button:not([data-testid])") as HTMLElement
+    ).click();
     expect(
       document.querySelector("[data-testid=day-events]")!.textContent,
     ).toContain("Event C");
@@ -172,12 +176,15 @@ describe("the calendar of events", () => {
 
   it("starts on today and shows the tickets of the chosen day", async () => {
     await mount();
-    const list = () => document.querySelector("[data-testid=calendar-day-list]")!;
+    const list = () =>
+      document.querySelector("[data-testid=calendar-day-list]")!;
     expect(cell(today).getAttribute("aria-selected")).toBe("true");
     expect(list().textContent).toContain("Event B");
     expect(list().textContent).not.toContain("Event D");
 
-    (cell(other).querySelector("[data-testid=calendar-day]") as HTMLElement).click();
+    (
+      cell(other).querySelector("[data-testid=calendar-day]") as HTMLElement
+    ).click();
     expect(cell(other).getAttribute("aria-selected")).toBe("true");
     expect(list().textContent).toContain("Event D");
     expect(list().textContent).not.toContain("Event B");
@@ -185,7 +192,9 @@ describe("the calendar of events", () => {
 
   it("opens an event from its chip", async () => {
     await mount();
-    (cell(today).querySelector("[data-testid=calendar-event]") as HTMLElement).click();
+    (
+      cell(today).querySelector("[data-testid=calendar-event]") as HTMLElement
+    ).click();
     expect(navigate).toHaveBeenCalledWith(`/server/${SV}/events/B`);
   });
 
@@ -194,14 +203,20 @@ describe("the calendar of events", () => {
     const title = () =>
       document.querySelector("[data-testid=calendar-title]")!.textContent;
     const thisMonth = title();
-    (document.querySelector("[data-testid=calendar-next]") as HTMLElement).click();
+    (
+      document.querySelector("[data-testid=calendar-next]") as HTMLElement
+    ).click();
     await vi.waitFor(() => expect(asked.length).toBe(2));
     expect(title()).not.toBe(thisMonth);
-    (document.querySelector("[data-testid=calendar-today]") as HTMLElement).click();
+    (
+      document.querySelector("[data-testid=calendar-today]") as HTMLElement
+    ).click();
     await vi.waitFor(() => expect(title()).toBe(thisMonth));
     expect(cell(today).getAttribute("aria-selected")).toBe("true");
 
-    (document.querySelector("[data-testid=calendar-view-week]") as HTMLElement).click();
+    (
+      document.querySelector("[data-testid=calendar-view-week]") as HTMLElement
+    ).click();
     await vi.waitFor(() =>
       expect(document.querySelectorAll("[role=gridcell]").length).toBe(7),
     );
@@ -217,5 +232,43 @@ describe("the calendar of events", () => {
   it("leaves out what the search does not match", async () => {
     await mount((event) => event.title !== "Event B");
     expect(titles(cell(today))).toEqual(["Event A"]);
+  });
+
+  it("never suspends the page around it while the month loads", async () => {
+    // a slow server: the month is answered later
+    let answer: (value: unknown) => void = () => undefined;
+    fake.api.get = (_path: string, query: { from: string; to: string }) => {
+      asked.push(query);
+      return new Promise((resolve) => (answer = resolve));
+    };
+    const fallback = vi.fn(() => <p data-testid="app-loading" />);
+    dispose = render(
+      () => (
+        <I18nProvider i18n={i18n}>
+          <Suspense fallback={fallback()}>
+            <p data-testid="around">page</p>
+            <EventCalendar
+              load={(from, to) => fake.serverEvents.fetchRange(SV, from, to)}
+              day={() => <span />}
+            />
+          </Suspense>
+        </I18nProvider>
+      ),
+      document.getElementById("root")!,
+    );
+    await new Promise((resolve) => setTimeout(resolve, 20));
+    // the app's loading screen never took the page's place
+    expect(document.querySelector("[data-testid=app-loading]")).toBeNull();
+    expect(document.querySelector("[data-testid=around]")).not.toBeNull();
+    expect(
+      document.querySelector("[data-testid=event-calendar]"),
+    ).not.toBeNull();
+    answer({ events: listed, interested: [], answers: [] });
+    await vi.waitFor(() =>
+      expect(
+        document.querySelectorAll("[data-testid=calendar-event]").length,
+      ).toBeGreaterThan(0),
+    );
+    expect(document.querySelector("[data-testid=app-loading]")).toBeNull();
   });
 });

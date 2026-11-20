@@ -1,0 +1,74 @@
+{
+  "event places::All": [
+    "الكل",
+    "Alle"
+  ],
+  "Search and filter events": [
+    "البحث في الفعاليات وتصفيتها",
+    "Events suchen und filtern"
+  ],
+  "Search and filter events (a filter is set)": [
+    "البحث في الفعاليات وتصفيتها (التصفية مفعّلة)",
+    "Events suchen und filtern (ein Filter ist gesetzt)"
+  ],
+  "Clear the search": [
+    "امسح البحث",
+    "Suche leeren"
+  ],
+  "Details": [
+    "التفاصيل",
+    "Details"
+  ],
+  "Members who can open the channel.": [
+    "الأعضاء الذين يمكنهم فتح القناة.",
+    "Mitglieder, die den Kanal öffnen können."
+  ],
+  "The roles you choose, and the organisers.": [
+    "الأدوار التي تختارها، والمنظِّمون.",
+    "Die Rollen, die du wählst, und die Organisatoren."
+  ],
+  "Upload a picture of your own; it is cropped to 16:9. The ready covers are there if you have none.": [
+    "ارفع صورة من عندك، وتُقَصّ بنسبة 16:9. والأغلفة الجاهزة متاحة إن لم تكن لديك صورة.",
+    "Lade ein eigenes Bild hoch; es wird auf 16:9 zugeschnitten. Die fertigen Cover sind da, wenn du keins hast."
+  ],
+  "Change the cover": [
+    "غيّر الغلاف",
+    "Cover ändern"
+  ],
+  "Upload a cover picture": [
+    "ارفع صورة للغلاف",
+    "Coverbild hochladen"
+  ],
+  "No cover yet": [
+    "لا غلاف بعد",
+    "Noch kein Cover"
+  ],
+  "Change picture": [
+    "غيّر الصورة",
+    "Bild ändern"
+  ],
+  "Upload a picture": [
+    "ارفع صورة",
+    "Bild hochladen"
+  ],
+  "Remove": [
+    "إزالة",
+    "Entfernen"
+  ],
+  "This picture is too large. Choose a smaller one.": [
+    "هذه الصورة كبيرة جدًا. اختر صورة أصغر.",
+    "Dieses Bild ist zu groß. Wähle ein kleineres."
+  ],
+  "Or a ready cover": [
+    "أو غلاف جاهز",
+    "Oder ein fertiges Cover"
+  ],
+  "event editor::Save draft": [
+    "حفظ كمسودة",
+    "Als Entwurf"
+  ],
+  "event editor::Time": [
+    "الوقت",
+    "Zeit"
+  ]
+}

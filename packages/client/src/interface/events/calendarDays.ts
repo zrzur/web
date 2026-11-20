@@ -113,11 +113,13 @@ export function calendarTitle(
   anchor: Date,
   weekStart: number,
   locale: string,
+  /** The short form, for a phone's toolbar */
+  short = false,
 ): string {
   if (view === "month")
     return new Intl.DateTimeFormat(locale, {
       numberingSystem: "latn",
-      month: "long",
+      month: short ? "short" : "long",
       year: "numeric",
     }).format(anchor);
   const week = weekOf(anchor, weekStart);
@@ -125,7 +127,7 @@ export function calendarTitle(
     numberingSystem: "latn",
     day: "numeric",
     month: "short",
-    year: "numeric",
+    year: short ? undefined : "numeric",
   }).formatRange(week[0], week[6]);
 }
 

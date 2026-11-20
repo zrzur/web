@@ -2,6 +2,14 @@
 
 ## Unreleased
 
+### Events: search behind one button, a calm calendar, a tidy New event (2026-11-20, owner's review)
+
+* **Opening the calendar no longer looks like a reload:** the calendar read its month before it had loaded, which suspended up to the app's own loading screen, so the whole app showed its logo until the month came. On a slow connection that looked exactly like the page reloading. The calendar, the event page, the past events, My events, the numbers and the clash warning now read their data only once it is there (`events/settled.ts`). A DOM test fails on the old code, and the e2e answers the month slowly on purpose and checks that the page never reloads, navigates or gives way to the loading screen.
+* **Taps on phones reached the wrong button:** a button styled with `all: unset` loses its `position: relative`, so the phones' invisible 44 px tap area spread over the whole page. In the phone calendar, the last day took every tap (the tabs, Today, Month/Week). The calendar's day and "more" buttons and the search's clear button now keep their position.
+* **Search and the place filter behind one search button** in the header. It opens a panel under it (a sheet on phones) with the search field and All, Voice, Text, Elsewhere; a dot on the button shows when something is set. The search field and the place button are gone from the page.
+* **Calendar:** the month sits on the one box surface with quiet lines between the days; days outside the month are muted; today is marked by the accent on the date only; event chips are easier to read. The toolbar is one line (arrows, month, then Today and Month/Week), with the short month name on phones. The week view matches.
+* **New event:** grouped like Settings (Details, Time, Where, Cover, Who sees it, Helpers, Seats, Reminders). Cancel, Save draft and Publish come at the end of the form in one row that never wraps (Dialog `actionsAtEnd`). A row at the top shows the event as it will look in the list, in place of the ticket. **Cover:** upload your own picture (cropped to 16:9), change or remove it; the ready covers are a second choice below.
+
 ### Events look like Settings (2026-11-19, owner's review of 26.2.0-beta.1)
 
 * **Every box is a settings group:** the event's facts, your answer, your own options, the organiser's tools, sharing, seats, who is coming and the numbers are the same grouped rows as Settings (`SettingsSection`, `SettingsRow`, `SettingsFormPanel`), with the same headings, row height, corners and dividers. The lists show each event as a row with its day at the start, in one group per section, instead of a ticket.
