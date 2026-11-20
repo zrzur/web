@@ -848,6 +848,8 @@ const CategorySection = styled("div", {
     gap: "2px",
     flexDirection: "column",
     paddingTop: "16px",
+    // phones: the 44 px title already gives the air
+    _phone: { paddingTop: "4px" },
 
     "&:first-child": {
       paddingTop: "8px",
@@ -877,7 +879,11 @@ const CategoryBase = styled("button", {
     alignItems: "center",
     gap: "2px",
 
-    padding: "0 8px 4px 10px",
+    // the chevron on the list's one start line (16 px), on both sides of
+    // the screen (the old physical padding put it 9 px in RTL, 11 in LTR)
+    paddingBlock: "0 4px",
+    paddingInlineStart: "16px",
+    paddingInlineEnd: "8px",
     height: "24px",
 
     cursor: "pointer",
@@ -1294,7 +1300,10 @@ const ChannelRow = styled("div", {
   base: {
     position: "relative",
     minWidth: 0,
-    marginInline: "6px",
+    // one start line for the whole list (owner, 2026-11-20, as in his
+    // reference): search, categories, pinned rows and channel icons 16 px
+    // from the list's edge; a row's box reaches 8 px past it
+    marginInline: "8px",
     "& > :is(a, [aria-disabled])": {
       margin: 0,
       borderRadius: "var(--z-shape-chip, var(--z-radius-sm, 6px))",
@@ -1322,12 +1331,10 @@ const ChannelRow = styled("div", {
       },
       "& > :is(a, [aria-disabled])": {
         minHeight: "44px !important",
-        // room at the start for the chosen row's mark, inside the box
-        paddingInlineStart: "14px",
       },
-      // inside the column with the search field's edges, the same room on
-      // both sides (owner, 2026-11-18: the chosen row ran to the edge)
-      marginInline: "12px",
+      // 8 px from the edge, like the computer: the chosen row's box still
+      // keeps clear of the edge (owner, 2026-11-18)
+      marginInline: "8px",
     },
   },
 });

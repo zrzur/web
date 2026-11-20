@@ -261,7 +261,8 @@ const base = cva({
           // 2026-11-17 and the owner asked for it back where it was)
           // inside the box with room around it, not squeezed into its
           // corner (owner, 2026-11-18)
-          _phone: { width: "3px", height: "16px", insetInlineStart: "5px" },
+          // clear of the icon, which starts 8 px into the box
+          _phone: { width: "3px", height: "16px", insetInlineStart: "2px" },
         },
       },
     },

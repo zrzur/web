@@ -64,8 +64,8 @@ const Base = styled("div", {
     flex: "none",
     display: "flex",
     flexDirection: "column",
-    // one compact line: 8 + 36 + 8
-    padding: "8px 12px",
+    // one compact line: 8 + 36 + 8; the field on the list's start line
+    padding: "8px 16px",
     borderBottom: "1px solid var(--z-border-subtle)",
   },
 });

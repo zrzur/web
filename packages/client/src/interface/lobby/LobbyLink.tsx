@@ -75,11 +75,13 @@ const Row = styled(A, {
     // the same row as Events above it (owner, 2026-11-20: tidy, no gap):
     // 12px icon gap and padding, 2px between pinned rows, 8px above the first
     gap: "12px",
-    minHeight: "36px",
+    // the same row as a channel: height and the 8 px padding that puts the
+    // icon on the list's start line
+    minHeight: "var(--z-row-height, 34px)",
     marginInline: "8px",
     marginBlock: "2px",
     "&:first-child": { marginBlockStart: "8px" },
-    paddingInline: "12px",
+    paddingInline: "8px",
     borderRadius: "8px",
     color: "var(--z-fg-secondary)",
     fontSize: "15px",

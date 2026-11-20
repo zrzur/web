@@ -158,12 +158,14 @@ const Row = styled(A, {
     display: "flex",
     alignItems: "center",
     gap: "12px",
-    minHeight: "36px",
+    // the same row as a channel: height and the 8 px padding that puts the
+    // icon on the list's start line
+    minHeight: "var(--z-row-height, 34px)",
     marginInline: "8px",
     // the same spacing as the Lobby and Rules rows under it
     marginBlock: "2px",
     "&:first-child": { marginBlockStart: "8px" },
-    paddingInline: "12px",
+    paddingInline: "8px",
     borderRadius: "8px",
     color: "var(--z-fg-secondary)",
     fontSize: "15px",
