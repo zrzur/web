@@ -246,6 +246,9 @@ const Info = styled("div", {
         // 12 + 36 avatar + 12: the text column starts on the same line at any
         // width, 62 px in with the mention bar
         width: "60px",
+        // phones: the avatar against the start edge and 12 px to the text,
+        // so the words get the width (owner, 2026-11-20)
+        _phone: { width: "48px", justifyContent: "flex-start" },
       },
     },
   },
@@ -266,6 +269,8 @@ const Body = styled("div", {
     minWidth: 0,
     overflow: "hidden",
     paddingInlineEnd: "16px",
+    // phones: the list already keeps 12 px from the far edge
+    _phone: { paddingInlineEnd: "4px" },
   },
   variants: {
     editing: {
@@ -323,6 +328,7 @@ const infoText = cva({
     prefix: {
       true: {
         width: "60px",
+        _phone: { width: "48px" },
         fontSize: "11px",
         lineHeight: "1.5rem",
 
