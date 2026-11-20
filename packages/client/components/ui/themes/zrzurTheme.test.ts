@@ -162,7 +162,9 @@ describe("Midnight Pulse palette (brand.md section 4)", () => {
     // secondary buttons are close shades of one navy; raspberry stays the
     // primary action only. Light = white sheet + mist cards.
     const dark = tokens(true);
-    expect(dark["--z-dialog-bg"]).toBe("var(--z-bg-floating)");
+    // owner, 2026-11-20: a dialog has the Settings page's ground, so its
+    // boxes are the Settings boxes on it (menus keep the floating family)
+    expect(dark["--z-dialog-bg"]).toBe("var(--z-bg-shell)");
     expect(dark["--z-dialog-card"]).toBe("#262838");
     expect(dark["--z-float-divider"]).toBe("#33364D");
     // light touches only: the Report label; no accent wash on the sheet
@@ -181,7 +183,7 @@ describe("Midnight Pulse palette (brand.md section 4)", () => {
     expect(contrast("#9AA0B8", "#262838")).toBeGreaterThanOrEqual(4.5);
     expect(contrast("#7C82A0", "#262838")).toBeGreaterThanOrEqual(3);
     const light = tokens(false);
-    expect(light["--z-dialog-bg"]).toBe("var(--z-bg-chat)");
+    expect(light["--z-dialog-bg"]).toBe("var(--z-bg-shell)");
     expect(light["--z-dialog-card"]).toBe("var(--z-bg-sidebar)");
   });
 

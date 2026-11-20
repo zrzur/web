@@ -87,10 +87,15 @@ export function ServerInfoModal(
             });
           },
         },
-        // closing is not the main action of an information window, so it
-        // is never the filled button (owner review, 2026-11-17 phones,
-        // 2026-11-20 everywhere)
-        { text: <Trans>Close</Trans>, variant: "secondary" },
+        // on a phone's sheet closing is not the main action, so it is not
+        // the filled button (owner review, 2026-11-17); the computer's
+        // dialog keeps the filled Close (owner, 2026-11-20: "it was nice")
+        {
+          text: <Trans>Close</Trans>,
+          variant: window.matchMedia?.("(max-width: 600px)").matches
+            ? "secondary"
+            : undefined,
+        },
       ]}
     >
       <Column gap="lg">

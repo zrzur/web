@@ -728,7 +728,10 @@ export function createZrzurSemanticVariables(
     // within one navy family (owner palette 2026-11-01). Library themes
     // derive the same steps from their own floating colour; light mode is a
     // white sheet with mist cards.
-    "--z-dialog-bg": dark ? "var(--z-bg-floating)" : "var(--z-bg-chat)",
+    // a dialog is a page of Settings in a window (owner, 2026-11-20: the
+    // window's colour and its boxes' colour must belong together): the same
+    // ground as the Settings page, the same boxes on it
+    "--z-dialog-bg": "var(--z-bg-shell)",
     "--z-dialog-card": brandShell
       ? d.floatCard
       : dark

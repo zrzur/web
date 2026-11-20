@@ -160,7 +160,9 @@ const Row = styled(A, {
     gap: "12px",
     minHeight: "36px",
     marginInline: "8px",
-    marginBlock: "8px 4px",
+    // the same spacing as the Lobby and Rules rows under it
+    marginBlock: "2px",
+    "&:first-child": { marginBlockStart: "8px" },
     paddingInline: "12px",
     borderRadius: "8px",
     color: "var(--z-fg-secondary)",

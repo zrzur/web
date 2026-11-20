@@ -593,19 +593,9 @@ const Container = styled("div", {
     color: "var(--z-fg-primary)",
     background:
       "var(--z-dialog-bg, var(--z-popover-bg, var(--z-bg-modal, var(--z-bg-raised))))",
-    // everything inside a dialog steps within the floating family: one card
-    // surface (settings sections included), its dividers, labels, icons and
-    // buttons (owner palette 2026-11-01)
-    "--z-btn-tonal-bg": "var(--z-float-button)",
-    "--z-btn-tonal-hover": "var(--z-float-button-hover)",
-    "--z-btn-tonal-border": "var(--z-float-button-border)",
-    "--z-card-bg": "var(--z-dialog-card, var(--z-bg-raised))",
-    "--z-border-subtle": "var(--z-float-divider)",
-    "--z-card-border": "var(--z-float-divider)",
-    "--z-section-label": "var(--z-float-label)",
-    "--z-fg-muted": "var(--z-float-muted)",
-    "--z-icon-neutral": "var(--z-float-icon)",
-    "--z-icon-muted": "var(--z-float-icon)",
+    // inside a dialog everything is as on the Settings page: its boxes,
+    // dividers, labels, icons and buttons (owner, 2026-11-20); the window
+    // keeps only its own border and shadow, as it floats
 
     "&[data-creation='true']": {
       boxSizing: "border-box",

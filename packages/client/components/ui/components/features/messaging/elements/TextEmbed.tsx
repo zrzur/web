@@ -49,8 +49,8 @@ const Base = styled("div", {
     color: "var(--z-fg-secondary)",
     background: "var(--z-box-bg)",
     border: "var(--z-box-border)",
-    // the embed's own colour as a slim leading rule; neutral when it has none
-    borderInlineStart: "2px solid var(--z-border-strong)",
+    // like every box (owner, 2026-11-20); an embed that sets its own colour
+    // shows it as a slim leading rule (style below)
     fontSize: "13px",
     lineHeight: "20px",
     // fields need room to sit side by side
@@ -299,7 +299,11 @@ export function TextEmbed(props: { embed: TextEmbedClass | WebsiteEmbed }) {
   return (
     <Base
       dir={direction()}
-      style={{ "border-inline-start-color": props.embed.colour }}
+      style={
+        props.embed.colour
+          ? { "border-inline-start": `2px solid ${props.embed.colour}` }
+          : undefined
+      }
       data-rich={rows().length ? "" : undefined}
     >
       <Content gap="md" grow>

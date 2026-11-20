@@ -366,7 +366,13 @@ const Friends = styled("div", {
     flexDirection: "column",
     maxHeight: "240px",
     overflowY: "auto",
-    marginInline: "-6px",
+    // the friends as one group of rows, like Settings (owner, 2026-11-20)
+    padding: "4px 8px",
+    borderRadius: "var(--z-box-radius)",
+    border: "var(--z-box-border)",
+    background: "var(--z-box-bg)",
+    // rows split by the same hairline as a Settings group
+    "& > * + *": { borderTop: "1px solid var(--z-border-subtle)" },
   },
 });
 
@@ -375,9 +381,9 @@ const Friend = styled("div", {
     display: "flex",
     alignItems: "center",
     gap: "10px",
-    padding: "6px",
-    borderRadius: "var(--z-radius, 10px)",
-    _hover: { background: "var(--z-nav-hover)" },
+    minHeight: "52px",
+    paddingBlock: "8px",
+    paddingInline: "4px",
 
     "& > span": {
       flex: 1,

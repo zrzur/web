@@ -1,4 +1,4 @@
-import { For, Show } from "solid-js";
+import { For, Show, createSignal } from "solid-js";
 
 import { useLingui } from "@lingui/solid/macro";
 import type { Message } from "@zrzur/sdk/solid";
@@ -35,27 +35,44 @@ export function MessageEmbeds(props: { message: Message }) {
 
   return (
     <For each={embeds()}>
-      {(embed) => (
-        <Show
-          when={embed.type !== "Text" && canRemoveLinkPreviews(props.message)}
-          fallback={<Embed embed={embed} />}
-        >
-          <Frame data-link-preview>
-            <Embed embed={embed} />
-            <Corner data-preview-corner>
-              <IconButton
-                variant="outlined"
-                size="xs"
-                aria-label={t`Remove link previews`}
-                data-remove-previews
-                onPress={remove}
-              >
-                <Icon name="x" size={16} />
-              </IconButton>
-            </Corner>
-          </Frame>
-        </Show>
-      )}
+      {(embed) => {
+        // phones have no hover: a press on the card shows its X, a second
+        // press (or the X itself) hides it again (owner, 2026-11-20: "only
+        // when I press on it")
+        const [open, setOpen] = createSignal(false);
+        return (
+          <Show
+            when={embed.type !== "Text" && canRemoveLinkPreviews(props.message)}
+            fallback={<Embed embed={embed} />}
+          >
+            <Frame
+              data-link-preview
+              data-open={open() || undefined}
+              onClick={(event) => {
+                const target = event.target as HTMLElement;
+                if (target.closest("a, button, video, audio")) return;
+                setOpen(!open());
+              }}
+            >
+              <Embed embed={embed} />
+              <Corner data-preview-corner>
+                <IconButton
+                  variant="outlined"
+                  size="xs"
+                  aria-label={t`Remove link previews`}
+                  data-remove-previews
+                  onPress={(event) => {
+                    setOpen(false);
+                    remove(event);
+                  }}
+                >
+                  <Icon name="x" size={16} />
+                </IconButton>
+              </Corner>
+            </Frame>
+          </Show>
+        );
+      }}
     </For>
   );
 }
@@ -83,6 +100,7 @@ const Frame = styled("div", {
     "& > :first-child": { minWidth: 0 },
     "& [data-remove-previews]": {
       opacity: 0,
+      transition: "opacity 120ms ease",
       // a quiet, neutral control: the confirmation carries the warning
       background: "var(--z-bg-raised)",
       borderColor: "var(--z-border-subtle)",
@@ -91,17 +109,23 @@ const Frame = styled("div", {
     "& [data-remove-previews]:hover": {
       "--colour": "var(--z-fg-primary)",
     },
-    "&:hover [data-remove-previews], & [data-remove-previews]:focus-visible": {
-      opacity: 1,
-    },
+    "&:hover [data-remove-previews], &[data-open] [data-remove-previews], & [data-remove-previews]:focus-visible":
+      { opacity: 1 },
+    // hidden, the X takes no presses
+    "&:not(:hover):not([data-open]) [data-remove-previews]:not(:focus-visible)":
+      { pointerEvents: "none" },
     // A card takes its direction from its own words, so in an Arabic app an
     // English card still starts on the left. The X goes to the card's own
     // end, where its header row is empty, and not onto the site name.
     _rtl: { "&:has(> [dir=ltr]) [data-preview-corner]": cornerAtStart },
     _ltr: { "&:has(> [dir=rtl]) [data-preview-corner]": cornerAtStart },
-    // phones have no hover: the X is always there
+    // phones have no hover: the X shows after a press on the card (data-open)
     _phone: {
-      "& [data-remove-previews]": { opacity: 1 },
+      // a tap leaves :hover behind on phones: only the press decides
+      "&:hover:not([data-open]) [data-remove-previews]:not(:focus-visible)": {
+        opacity: 0,
+        pointerEvents: "none",
+      },
       // the button is 44px there (tap target), so the pull-back grows too
       _rtl: {
         "&:has(> [dir=ltr]) [data-preview-corner]": cornerAtStartPhone,

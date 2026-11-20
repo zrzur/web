@@ -312,7 +312,7 @@ const Card = styled("button", {
     overflow: "hidden",
     borderRadius: "var(--z-radius-md)",
     border: "1px solid var(--z-float-divider, var(--z-border-subtle))",
-    background: "var(--z-dialog-card, var(--z-bg-raised))",
+    background: "var(--z-box-bg)",
     transition: "background-color 0.12s ease",
 
     "&:hover": { background: "var(--z-float-hover, var(--z-nav-hover))" },
@@ -424,7 +424,7 @@ const Achievements = styled("ul", {
       padding: "12px",
       borderRadius: "var(--z-radius-md)",
       border: "1px solid var(--z-float-divider, var(--z-border-subtle))",
-      background: "var(--z-dialog-card, var(--z-bg-raised))",
+      background: "var(--z-box-bg)",
     },
   },
 });

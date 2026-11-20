@@ -72,11 +72,14 @@ const Row = styled(A, {
   base: {
     display: "flex",
     alignItems: "center",
-    gap: "10px",
+    // the same row as Events above it (owner, 2026-11-20: tidy, no gap):
+    // 12px icon gap and padding, 2px between pinned rows, 8px above the first
+    gap: "12px",
     minHeight: "36px",
     marginInline: "8px",
-    marginBlock: "8px 2px",
-    paddingInline: "10px",
+    marginBlock: "2px",
+    "&:first-child": { marginBlockStart: "8px" },
+    paddingInline: "12px",
     borderRadius: "8px",
     color: "var(--z-fg-secondary)",
     fontSize: "15px",
@@ -89,8 +92,6 @@ const Row = styled(A, {
       background: "var(--z-nav-active)",
       color: "var(--z-fg-primary)",
     },
-    // the second pinned row sits right under the first
-    "&[data-tight]": { marginBlockStart: "2px" },
     _phone: { minHeight: "44px" },
   },
 });

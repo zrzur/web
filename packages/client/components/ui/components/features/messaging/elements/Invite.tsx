@@ -200,13 +200,24 @@ const Base = styled("div", {
     marginBlock: "4px",
     padding: "12px 16px",
     borderRadius: "var(--z-box-radius)",
+    _phone: { maxWidth: "100%", padding: "12px", rowGap: "12px" },
 
     background: "var(--z-box-bg)",
     border: "var(--z-box-border)",
   },
 });
 
-const action = css({ flexShrink: 0, marginInlineStart: "auto" });
+const action = css({
+  flexShrink: 0,
+  marginInlineStart: "auto",
+  // phones: the button takes the card's whole width under the name, so the
+  // card reads as one block, not a name with a button left over
+  _phone: {
+    flexBasis: "100%",
+    marginInlineStart: 0,
+    "& > button": { width: "100%", minHeight: "44px" },
+  },
+});
 
 const Info = styled("div", {
   base: {
