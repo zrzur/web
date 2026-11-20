@@ -6460,8 +6460,8 @@
     },
     {
       "path": "packages/client/components/ui/components/design/Snackbar.tsx",
-      "sha256": "221ea758ea5301ba085666979417c656593ac44ddbc378844b6965b4484e64c5",
-      "bytes": 7719,
+      "sha256": "aaad20607f779f2312526f7496306d3644ddf576c9636d140da4b742096d0bc7",
+      "bytes": 7917,
       "category": "product-source-or-build-manifest"
     },
     {
