@@ -4,8 +4,8 @@
 
 ### A friend request opens the sender's profile (2026-11-21)
 
-* **From the phone Notifications page:** the sender's picture and the line "… sent you a friend request" are one button (44 px high, named "Open <name>'s profile" in ar, en and de) that opens their profile. Accept, Decline and Send message are separate buttons and are not touched by it. The page closes first so the profile is not under it; the profile has its own Accept.
-* **From a notification:** `/friends?profile=<user id>` opens that person's profile on the Friends page (fetched when not in the cache) and takes the parameter off the address. An unknown or malformed id shows a short notice instead ("This profile could not be opened…"). The backend now sends this link with friend-request web pushes; the service worker still opens only links on its own origin.
+* **From the phone Notifications page:** the sender's picture and the line "… sent you a friend request" are one button (44 px high) that opens their profile. Screen readers hear the sentence they see as its name, then "Open profile" (ar, en, de) as its description. Accept, Decline and Send message are separate buttons and are not touched by it. The page closes first so the profile is not under it; the profile has its own Accept.
+* **From a notification:** `/friends?profile=<user id>` opens that person's profile on the Friends page (fetched when not in the cache) and takes the parameter off the address. An unknown or malformed id shows a short notice instead ("This profile could not be opened…"). The backend now sends this link with friend-request web pushes; the service worker still opens only links on its own origin. Signed out, the link goes through sign-in and still opens the profile (the page and query are kept for after login, as before).
 
 ### Speed: scrolling, switching and starting (2026-11-21)
 

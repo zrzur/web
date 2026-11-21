@@ -31087,10 +31087,10 @@ msgstr "Use letters, numbers, spaces and _ . - only."
 msgid "Change bot name"
 msgstr "Change bot name"
 
-#: src/interface/navigation/NotificationsPhone.tsx
-msgid "Open {name}'s profile"
-msgstr "Open {name}'s profile"
-
 #: src/interface/Friends.tsx
 msgid "This profile could not be opened. The account may no longer exist."
 msgstr "This profile could not be opened. The account may no longer exist."
+
+#: src/interface/navigation/NotificationsPhone.tsx
+msgid "Open profile"
+msgstr "Open profile"

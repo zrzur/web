@@ -6,12 +6,14 @@ import {
   createMemo,
   createResource,
   createSignal,
+  createUniqueId,
   onCleanup,
 } from "solid-js";
 
 import { Trans, useLingui } from "@lingui/solid/macro";
 import { useNavigate } from "@solidjs/router";
 import type { Message, User } from "@zrzur/sdk/solid";
+import { css } from "styled-system/css";
 import { styled } from "styled-system/jsx";
 
 import { openInbox } from "@revolt/app/interface/saved/inboxView";
@@ -127,10 +129,8 @@ export function NotificationsPhone(props: { onClose: () => void }) {
       })
       .catch(showError);
 
-  const profileLabel = (user: User) => {
-    const name = user.displayName;
-    return t`Open ${name}'s profile`;
-  };
+  // ids that tie each request button to its sentence and its hint
+  const ids = createUniqueId();
 
   const openProfile = (user: User) => {
     props.onClose();
@@ -211,11 +211,13 @@ export function NotificationsPhone(props: { onClose: () => void }) {
                 <Request data-new>
                   {/* who sent it: one area that opens their profile (the
                       page is closed first, it would cover the profile; the
-                      profile has its own Accept) */}
+                      profile has its own Accept). Its name is the sentence
+                      people see; "Open profile" is said after it */}
                   <Who
                     type="button"
                     data-testid="friend-request-profile"
-                    aria-label={profileLabel(user)}
+                    aria-labelledby={`${ids}-${user.id}-line`}
+                    aria-describedby={`${ids}-${user.id}-hint`}
                     onClick={() => openProfile(user)}
                   >
                     <Avatar
@@ -224,12 +226,15 @@ export function NotificationsPhone(props: { onClose: () => void }) {
                       fallback={user.displayName}
                     />
                     <Text>
-                      <p>
+                      <p id={`${ids}-${user.id}-line`}>
                         <Trans>
                           <strong dir="auto">{user.displayName}</strong> sent
                           you a friend request.
                         </Trans>
                       </p>
+                      <span id={`${ids}-${user.id}-hint`} class={srOnly}>
+                        <Trans>Open profile</Trans>
+                      </span>
                     </Text>
                   </Who>
                   <Answers data-request>
@@ -492,6 +497,7 @@ const Request = styled("div", {
 const Who = styled("button", {
   base: {
     ...rowStyle.base,
+    position: "relative",
     minHeight: "44px",
     paddingBlockEnd: 0,
     cursor: "pointer",
@@ -599,4 +605,14 @@ const Center = styled("div", {
     color: "var(--z-fg-muted)",
     "--z-icon-color": "var(--z-icon-neutral)",
   },
+});
+
+/** Said by screen readers, not shown */
+const srOnly = css({
+  position: "absolute",
+  width: "1px",
+  height: "1px",
+  overflow: "hidden",
+  clip: "rect(0 0 0 0)",
+  whiteSpace: "nowrap",
 });
