@@ -16,7 +16,7 @@ Das Token erscheint einmal, direkt nach dem Erstellen der Anwendung. Kopiere es 
 
 Wähle im Tab „Übersicht“ deiner Anwendung „Zu einem Server hinzufügen“ und dann einen Server, auf dem du „Server verwalten“ hast. [Mehr zum Installieren](/developers/docs/applications#install)
 
-Der Bot bekommt eine eigene Rolle mit den Standardberechtigungen, die du für ihn festgelegt hast (Bot-Einstellungen, Standardberechtigungen), auch wenn ihn jemand über einen Link oder die API installiert. Ein Link mit `?permissions=` gibt stattdessen genau diese Berechtigungen. Wer installiert, kann nur geben, was er selbst hat.
+Der Bot bekommt eine eigene Rolle mit den Standardberechtigungen, die du für ihn festgelegt hast (Bot-Einstellungen, Standardberechtigungen), auch wenn ihn jemand über einen Link oder die API installiert. Ein Link mit `?permissions=` gibt stattdessen genau diese Berechtigungen, und `?permissions=0` gibt keine Rolle. Wer installiert, gibt die Standardberechtigungen nur mit Rollen verwalten, und nur den Teil, den er selbst hat; ohne Rollen verwalten kommt der Bot ohne Rolle.
 
 Mach das vor dem ersten Start. Ein Bot, der nicht auf dem Server ist, bekommt beim Schreiben in dessen Kanäle 403 MissingPermission, und das sieht aus wie eine fehlende Berechtigung. [Ist der Bot auf diesem Server?](/developers/docs/errors#not-installed)
 

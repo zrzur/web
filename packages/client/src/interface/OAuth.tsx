@@ -144,9 +144,12 @@ function Consent() {
         code_challenge_method: value("code_challenge_method"),
         approve,
       };
-      if (approve && installs()) body.server_id = server();
-      const permissions = params().get("permissions");
-      if (permissions) body.permissions = Number(permissions);
+      if (approve && installs()) {
+        body.server_id = server();
+        // exactly what the page showed (the preview names the defaults when
+        // the link has none); 0 means no permissions, never "the defaults"
+        body.permissions = preview()?.permissions ?? 0;
+      }
       const { redirect } = await oauthApi.decide(client(), body);
       // The server only answers with the app's registered redirect URI
       window.location.assign(redirect);

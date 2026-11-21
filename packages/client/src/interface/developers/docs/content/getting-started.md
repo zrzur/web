@@ -16,7 +16,7 @@ The token appears once, right after you create the application. Copy it now. Who
 
 On the Overview tab of your application choose Add to a server, and pick a server where you have Manage Server. [More about installing](/developers/docs/applications#install)
 
-The bot gets a role of its own with the default permissions you set for it (Bot settings, Default permissions), also when someone installs it with a link or the API. A link with `?permissions=` gives exactly those permissions instead. Whoever installs can only give what they hold themselves.
+The bot gets a role of its own with the default permissions you set for it (Bot settings, Default permissions), also when someone installs it with a link or the API. A link with `?permissions=` gives exactly those permissions instead, and `?permissions=0` gives no role. Whoever installs gives the default permissions only if they have Manage Roles, and only the part they hold themselves; without Manage Roles the bot joins without a role.
 
 Do this before the first run. A bot that is not in the server gets 403 MissingPermission when it writes to one of its channels, which looks like a missing permission. [Is the bot in that server?](/developers/docs/errors#not-installed)
 

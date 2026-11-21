@@ -5368,14 +5368,14 @@
     },
     {
       "path": "packages/client/components/modal/modals/addBotPermissions.test.ts",
-      "sha256": "98ffdf9ecbb902a4d28124eb4fa03521d197c557416c0e4648d40d71f7d93dc2",
-      "bytes": 2821,
+      "sha256": "ef080d6dfb67cd76f939bebc24203df6f08a51c4b1782c97635bc1e942ef32e1",
+      "bytes": 2915,
       "category": "synthetic-test-source-or-fixture"
     },
     {
       "path": "packages/client/components/modal/modals/addBotPermissions.ts",
-      "sha256": "b26a42bdacd1f2dee6af7683704ac8f1b558feb4351d2ef755929a151d76f759",
-      "bytes": 2786,
+      "sha256": "a439738d9f5ac7ca7cc338a109525fb1c8d50adcfc4ad4e8e9e94309d10ce9a5",
+      "bytes": 2930,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -42604,8 +42604,8 @@
     },
     {
       "path": "packages/client/src/interface/OAuth.tsx",
-      "sha256": "768594898592127d287cac2cef1a469bc16b88a27d5d0f3710d25b72c15fbf12",
-      "bytes": 13149,
+      "sha256": "8d5c6c7e2f44b0741f59442f52fd34d67b2777636130441b8eecdbb36c331d82",
+      "bytes": 13258,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -43150,8 +43150,8 @@
     },
     {
       "path": "packages/client/src/interface/developers/docs/content/ar/changelog.md",
-      "sha256": "c8b652cd06372549b9feed3df6aa3007387fdb7e7aec2683f4eadf5aeee45dee",
-      "bytes": 12431,
+      "sha256": "42a122fc38db6a39ac96aaa1de5ae6d9f6ff9b853bb180ed5460c42e985a9e28",
+      "bytes": 12955,
       "category": "public-documentation"
     },
     {
@@ -43180,8 +43180,8 @@
     },
     {
       "path": "packages/client/src/interface/developers/docs/content/ar/errors.md",
-      "sha256": "1efcf8e98634b17c9489f93322272e423b77d9e2d67da584e67028e52a1516be",
-      "bytes": 4236,
+      "sha256": "cf3462e85d5ac07af3e42fbf6cc798150797b39f7a93728e4c74baae820561ce",
+      "bytes": 4370,
       "category": "public-documentation"
     },
     {
@@ -43204,8 +43204,8 @@
     },
     {
       "path": "packages/client/src/interface/developers/docs/content/ar/getting-started.md",
-      "sha256": "c960ee9ceeb29560885752d3259a5482a290993c4c77a862b3ccc1da027fa3ab",
-      "bytes": 4268,
+      "sha256": "78e8fa79b56ddec32a188ed22c2372be35c5b5132eab17e14121154914e1c3cf",
+      "bytes": 4521,
       "category": "public-documentation"
     },
     {
@@ -43378,8 +43378,8 @@
     },
     {
       "path": "packages/client/src/interface/developers/docs/content/changelog.md",
-      "sha256": "7f905deed830823c06d7ac1b4cdd5c9c9d574d5754a7736a0a84795c2f139162",
-      "bytes": 9197,
+      "sha256": "8bfcb271188176e4c26ca9ce00f6df77a9d7f17b0814831dbbcdb742dfe115c4",
+      "bytes": 9574,
       "category": "public-documentation"
     },
     {
@@ -43420,8 +43420,8 @@
     },
     {
       "path": "packages/client/src/interface/developers/docs/content/de/changelog.md",
-      "sha256": "98de41e00a942028feaedb5a31fcc89d97742947bb03a25ca0cf20ef6e4b7872",
-      "bytes": 10076,
+      "sha256": "ad147d5edbd84d47c022804f2b6fe287af0f90ae415d750be864de548ca785e7",
+      "bytes": 10484,
       "category": "public-documentation"
     },
     {
@@ -43450,8 +43450,8 @@
     },
     {
       "path": "packages/client/src/interface/developers/docs/content/de/errors.md",
-      "sha256": "987c5f1735179d86696fd81b84b6066f72ab3847e50adfb686054d7f52fe5e57",
-      "bytes": 3603,
+      "sha256": "6701135861ddca3b19f978a4a2848e8e03e079af16a3e94b0160dd2afd0cd7b8",
+      "bytes": 3687,
       "category": "public-documentation"
     },
     {
@@ -43474,8 +43474,8 @@
     },
     {
       "path": "packages/client/src/interface/developers/docs/content/de/getting-started.md",
-      "sha256": "0719d4f1d10c41ca3754d0063b53cf7192dcb707d2d864f30a1955ba38c148ae",
-      "bytes": 3438,
+      "sha256": "ef651ac78d062a4dffe60f5e26ec9d017784018803718348b92819e9b7b70c24",
+      "bytes": 3585,
       "category": "public-documentation"
     },
     {
@@ -43642,8 +43642,8 @@
     },
     {
       "path": "packages/client/src/interface/developers/docs/content/errors.md",
-      "sha256": "581ed56d5e510a24d422b43831e515203f06a4126fc500e633bcc23d1a10b218",
-      "bytes": 3598,
+      "sha256": "7b0ec352a737441e57a07eee8957cb9fb5bd3302a13af754778bc0eeccd606eb",
+      "bytes": 3679,
       "category": "public-documentation"
     },
     {
@@ -43666,8 +43666,8 @@
     },
     {
       "path": "packages/client/src/interface/developers/docs/content/getting-started.md",
-      "sha256": "ba70efa223caa512cb7085bcfa9d28a96c1ad2492b5f580e79ec7fcd9f5eb8ee",
-      "bytes": 3303,
+      "sha256": "0650cef10a3a39acc497e00e28a802ae4c1d212f659199eecb84f08b7a9d22c3",
+      "bytes": 3451,
       "category": "public-documentation"
     },
     {
@@ -45138,7 +45138,7 @@
   "submodules": [
     {
       "path": "packages/stoat.js",
-      "commit": "47cba81a0d5cd5c32c904b366ab9613771795084"
+      "commit": "cfd21731559b1f2524371370f0dce230a915aa35"
     }
   ]
 }
