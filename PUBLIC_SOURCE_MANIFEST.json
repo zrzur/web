@@ -262,8 +262,8 @@
     },
     {
       "path": "CHANGELOG.md",
-      "sha256": "9a84c97455ab7cff88a71dcce3e3881c25b586d72e157f9253df0e53d95ceb29",
-      "bytes": 191640,
+      "sha256": "8e84ee0fff20840b55f0ac9a1923efaab88b9067eb91bf811b9940cb2e98a073",
+      "bytes": 191868,
       "category": "public-documentation"
     },
     {
@@ -766,8 +766,8 @@
     },
     {
       "path": "packages/client/components/app/interface/channels/text/history/HistoryScroller.tsx",
-      "sha256": "d3a5fb7e30877462314ed812eedc50a5620fea72b72b66e5db992680ff56726d",
-      "bytes": 19284,
+      "sha256": "9a3ffe09d08ee94b268cbb26eab558a60aa67b7d6837ae31f47a6e0ef5bc4399",
+      "bytes": 21268,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -6784,8 +6784,8 @@
     },
     {
       "path": "packages/client/components/ui/components/features/messaging/elements/Container.tsx",
-      "sha256": "689947483d50c5b3153be3282138796813cf84c5c2f91e6c8c3e75c2871607bc",
-      "bytes": 15841,
+      "sha256": "22c97fb41af0b6c636655c45ebf6c51501dcd8154a310a225383361c437ec9e0",
+      "bytes": 17145,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -42358,14 +42358,14 @@
     },
     {
       "path": "packages/client/scripts/preconnectApi.mjs",
-      "sha256": "d10d7f532d29f2751186804c025cc0090286d0cf551d2407b0fe045e0a77a8e8",
-      "bytes": 1695,
+      "sha256": "b97531be8398789bd4be21154628aa19f09d54708fc453815835439f21339f9c",
+      "bytes": 2020,
       "category": "product-source-or-build-manifest"
     },
     {
       "path": "packages/client/scripts/preconnectApi.test.ts",
-      "sha256": "7edd0db0a1b53398e77f2323f4ec17042c2b4a3e9e4eb6c1d54394f623684c90",
-      "bytes": 1776,
+      "sha256": "29b6b5b7d5b5093f67babb29eaa2a177a1142209aa609ac5d95c572f8aa9a4be",
+      "bytes": 2149,
       "category": "synthetic-test-source-or-fixture"
     },
     {
