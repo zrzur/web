@@ -2,6 +2,12 @@
 
 ## Unreleased
 
+### People on a private channel (2026-11-21, owner's request)
+
+* **Add a person to a private channel without a role for them:** Channel settings → Permissions → "Who can see this channel" has a People list under the roles. On a private channel, "Add people" searches the server's members by name (Arabic letters folded as in the other searches) and lets the chosen person in with their own channel override; Remove takes away only that person's View bits, and the override goes when nothing else was set. On an open channel the list shows only the people it is hidden from. A person gets what a let-in role gets (View).
+* **Plain words when the server says no,** in the same panel, with the detail under Details: you need "Manage permissions", you can't change someone ranked the same as you or above you, you can't give permissions you don't have. People who can't manage permissions don't get the buttons.
+* The member picker of events now matches Arabic names with the folded letters too (أ/إ/آ/ا, ة/ه, ى/ي).
+
 ### Speed: scrolling, switching and starting (2026-11-21)
 
 * **Scrolling back and opening a channel or server stall less:** a channel keeps 150 rows or more, and the browser styled, laid out and painted every one of them each time a page of older messages came in or a channel opened. In Chromium engines (Chrome, Edge, the desktop app, Android) the content of rows out of view is now skipped (`content-visibility: auto` on an inner box of the message row, which keeps its last height). The hover toolbar is outside that box, and the box has room for avatar frames, so neither is cut. WebKit keeps drawing every row: there, rows above the reader that changed size moved the text. Timings are measured in the speed report of 2026-11-21.
