@@ -5398,14 +5398,14 @@
     },
     {
       "path": "packages/client/components/modal/modals/botName.test.ts",
-      "sha256": "53a8c74ce74cbef11753bd2873c136d77b4ba8e132d1b002293c0937a80fd022",
-      "bytes": 1330,
+      "sha256": "ee16fb8756983d1a7c45374a21312fe3ea5b566e6fdb0a9646be4b2d4db02e3b",
+      "bytes": 1510,
       "category": "synthetic-test-source-or-fixture"
     },
     {
       "path": "packages/client/components/modal/modals/botName.ts",
-      "sha256": "5944222b0c17c66d8584fe22b1e9c9a6838a1733242cbe4880f0139a03f7feac",
-      "bytes": 1363,
+      "sha256": "8c339c27e9eeec2ed9ca2ffdeb44189e0baacfbb130a3e96447f76cc826431da",
+      "bytes": 1498,
       "category": "product-source-or-build-manifest"
     },
     {

@@ -4,7 +4,9 @@
  * space it is the bot's display name ("Liro Bot") and its username has `_`
  * for the spaces ("Liro_Bot").
  */
-export const BOT_NAME = /^(\p{L}|[\d_.-])+( (\p{L}|[\d_.-])+)*$/u;
+// \p{Nd}, not \d: in JavaScript \d is 0-9 only, while the server's \d
+// takes every decimal digit (Arabic-Indic ٠-٩ too)
+export const BOT_NAME = /^(\p{L}|\p{Nd}|[_.-])+( (\p{L}|\p{Nd}|[_.-])+)*$/u;
 
 export const BOT_NAME_MIN = 2;
 export const BOT_NAME_MAX = 32;

@@ -14,6 +14,11 @@ describe("bot names", () => {
       expect(botNameProblem(name)).toBeUndefined();
   });
 
+  it("takes every decimal digit, as the server does", () => {
+    expect(botNameProblem("بوت ٢")).toBeUndefined();
+    expect(botNameProblem("Bot ۳")).toBeUndefined();
+  });
+
   it("says what is wrong as the person types", () => {
     expect(botNameProblem("")).toBeUndefined();
     expect(botNameProblem("L")).toBe("length");
