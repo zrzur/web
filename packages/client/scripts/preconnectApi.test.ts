@@ -15,6 +15,17 @@ describe("preconnectOrigin", () => {
     );
   });
 
+  it("keeps the build placeholder that docker/inject.js replaces", () => {
+    expect(preconnectOrigin("__VITE_API_URL__", "__VITE_HOST__")).toBe(
+      "__VITE_API_URL__",
+    );
+    const plugin = preconnectApi({
+      apiUrl: "__VITE_API_URL__",
+      host: "__VITE_HOST__",
+    });
+    expect(plugin.transformIndexHtml()[0].attrs.href).toBe("__VITE_API_URL__");
+  });
+
   it("is nothing for the app's own host, a relative address or no address", () => {
     expect(preconnectOrigin("https://app.zrzur.com", "app.zrzur.com")).toBe(
       undefined,

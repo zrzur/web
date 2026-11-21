@@ -271,12 +271,52 @@ export function HistoryScroller(props: Props) {
   //
   // Message rows have content-visibility: auto (MessageContainer): a row out
   // of view is not styled, laid out or painted, and counts with the size it
-  // last had, or an estimate if it was never drawn. While a jump lands
-  // (a link to a message, a reply, the first unread, coming back to a
-  // channel) every row is exact (`data-exact-rows` on the content): there the
-  // measurements decide where the view goes and which page comes next.
-  // (Marking the reader's row and keeping the rows below it exact was tried:
+  // last had, or an estimate if it was never drawn. Rows above the reader
+  // may be estimates: in this column-reverse list they never move the view.
+  // Two cases must be exact:
+  // - while a jump lands (a link to a message, a reply, the first unread,
+  //   coming back to a channel) every row is (`data-exact-rows` on the
+  //   content): there the measurements decide where the view goes and which
+  //   page comes next;
+  // - rows added below the reader (a newer page after a jump) are exact until
+  //   they have been drawn once (`data-fresh`), so the correction in commit
+  //   uses their real height. Otherwise they would grow when drawn, and under
+  //   a finger (touchScrolling) nothing corrects that: the text would move.
+  // (Marking the reader's row and keeping every row below it exact was tried:
   // the sibling selector restyled the whole list on every scroll step.)
+
+  // Chromium engines (Chrome, Edge, the desktop app, Android's WebView) keep
+  // a column-reverse list still when rows above the reader change size;
+  // WebKit did not (the text moved by up to 256 px), so there every row is
+  // drawn as before. `userAgentData` exists in Chromium engines only.
+  const skipRows =
+    typeof navigator !== "undefined" && "userAgentData" in navigator;
+  onMount(() => content.toggleAttribute("data-skip-rows", skipRows));
+
+  const freshRows = new Set<Element>();
+  let freshFrame = 0;
+  /** Mark rows that are new since `known` and come after `reader` */
+  function markFresh(known: Set<Element>, reader: Element | undefined) {
+    const rows = rowsElement();
+    if (!rows || !reader || reader.parentElement !== rows) return;
+    for (let el = reader.nextElementSibling; el; el = el.nextElementSibling) {
+      if (known.has(el) || freshRows.has(el)) continue;
+      el.setAttribute("data-fresh", "");
+      freshRows.add(el);
+    }
+    // two frames: drawn once, so the browser keeps their real height
+    if (freshRows.size && !freshFrame) {
+      freshFrame = requestAnimationFrame(() => {
+        freshFrame = requestAnimationFrame(releaseFresh);
+      });
+    }
+  }
+  function releaseFresh() {
+    freshFrame = 0;
+    for (const el of freshRows) el.removeAttribute("data-fresh");
+    freshRows.clear();
+  }
+  onCleanup(() => cancelAnimationFrame(freshFrame));
 
   let exactTimer: ReturnType<typeof setTimeout> | undefined;
   function exactRows(on: boolean) {
@@ -399,12 +439,15 @@ export function HistoryScroller(props: Props) {
       // that change is not taken for where they were
       if (wasAtBottom) captureAnchors();
       else restoreAnchors();
+      const known = new Set(rowsElement()?.children ?? []);
+      const reader = anchors[0]?.el;
       batch(change);
 
       if (move.to === "keep") {
         // at the bottom new rows simply appear; anywhere else nothing moves
         const hold = () => {
           if (!alive) return;
+          markFresh(known, reader);
           if (wasAtBottom) scroller.scrollTop = 0;
           else {
             restoreAnchors();

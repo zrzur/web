@@ -15,6 +15,11 @@
  */
 export function preconnectOrigin(apiUrl, host) {
   if (!apiUrl) return undefined;
+  // Docker images are built with placeholders ("__VITE_API_URL__") that
+  // docker/inject.js replaces in every .html and .js file at start: keep the
+  // placeholder, it becomes the real address there (a link to a path of the
+  // API host connects to the same origin)
+  if (/^__[A-Z0-9_]+__$/.test(apiUrl)) return apiUrl;
   let api;
   try {
     api = new URL(apiUrl);
