@@ -31094,3 +31094,63 @@ msgstr "This profile could not be opened. The account may no longer exist."
 #: src/interface/navigation/NotificationsPhone.tsx
 msgid "Open profile"
 msgstr "Open profile"
+
+#: components/app/interface/settings/channel/permissions/VisibilityPeople.tsx
+msgid "Add people"
+msgstr "Add people"
+
+#: components/app/interface/settings/channel/permissions/VisibilityPeople.tsx
+msgid "People"
+msgstr "People"
+
+#: components/app/interface/settings/channel/permissions/VisibilityPeople.tsx
+msgid "People you add here can see it, whatever their roles."
+msgstr "People you add here can see it, whatever their roles."
+
+#. placeholder {0}: nameOf(id)
+#: components/app/interface/settings/channel/permissions/VisibilityPeople.tsx
+msgid "Remove {0} from this list"
+msgstr "Remove {0} from this list"
+
+#: components/app/interface/settings/channel/permissions/VisibilityPeople.tsx
+msgid "These people can't see it, whatever their roles allow."
+msgstr "These people can't see it, whatever their roles allow."
+
+#: components/app/interface/settings/channel/permissions/VisibilityPeople.tsx
+msgid "You can't change access for someone ranked the same as you or above you."
+msgstr "You can't change access for someone ranked the same as you or above you."
+
+#: components/app/interface/settings/channel/permissions/VisibilityPeople.tsx
+msgid "You can't give permissions you don't have yourself."
+msgstr "You can't give permissions you don't have yourself."
+
+#: components/app/interface/settings/channel/permissions/VisibilityPeople.tsx
+msgid "You need “Manage permissions” to change who can see this channel."
+msgstr "You need “Manage permissions” to change who can see this channel."
+
+
+
+#: components/app/interface/settings/channel/permissions/VisibilityPeople.tsx
+msgid "This person is no longer in the server."
+msgstr "This person is no longer in the server."
+
+#. placeholder {0}: props.context.parent?.name ?? ""
+#: components/app/interface/settings/channel/permissions/ChannelVisibility.tsx
+msgid "This thread follows who can see #{0}."
+msgstr "This thread follows who can see #{0}."
+
+#: components/app/interface/settings/channel/permissions/VisibilityPeople.tsx
+msgid "{name} was added to the list"
+msgstr "{name} was added to the list"
+
+#: components/app/interface/settings/channel/permissions/VisibilityPeople.tsx
+msgid "{name} was removed from the list"
+msgstr "{name} was removed from the list"
+
+#: components/app/interface/settings/channel/permissions/VisibilityPeople.tsx
+msgid "A member who left"
+msgstr "A member who left"
+
+#: components/app/interface/settings/channel/permissions/ChannelVisibility.tsx
+msgid "This thread follows who can see its channel."
+msgstr "This thread follows who can see its channel."

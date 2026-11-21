@@ -49,6 +49,8 @@ export function VisibilitySection(props: {
   words: VisibilityWords;
   /** Prefix of the test ids: "channel" or "category" */
   testId: string;
+  /** Rows under the roles (a channel's people), told whether it is private */
+  more?: (state: { isPrivate: boolean }) => JSX.Element;
 }) {
   const describeError = useError();
   const [busy, setBusy] = createSignal<string>();
@@ -183,6 +185,8 @@ export function VisibilitySection(props: {
           );
         }}
       </For>
+
+      {props.more?.({ isPrivate: isPrivate() })}
 
       <SettingsRow
         icon={<Icon name="crown" size={20} />}

@@ -4,6 +4,7 @@ import {
   anyTextMatches,
   compareNames,
   foldText,
+  hasSearchText,
   pickByFold,
   textMatches,
 } from "./arabicFold";
@@ -227,5 +228,21 @@ describe("pickByFold", () => {
         (name) => name,
       ),
     ).toEqual(["المكتبة-العامة"]);
+  });
+});
+
+describe("a query with nothing to search for", () => {
+  it("is only marks: tatweel, tashkeel, zero-width or direction marks", () => {
+    expect(hasSearchText("ـــ")).toBe(false);
+    expect(hasSearchText("َِّ")).toBe(false);
+    expect(hasSearchText("​‏‫⁦")).toBe(false);
+    expect(hasSearchText("   ")).toBe(false);
+    expect(hasSearchText("")).toBe(false);
+  });
+
+  it("a real letter or digit is something to search for", () => {
+    expect(hasSearchText("ـمـ")).toBe(true);
+    expect(hasSearchText("a")).toBe(true);
+    expect(hasSearchText("٣")).toBe(true);
   });
 });

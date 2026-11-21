@@ -31091,3 +31091,63 @@ msgstr "تعذّر فتح هذا الملف الشخصي. ربما لم يعد �
 #: src/interface/navigation/NotificationsPhone.tsx
 msgid "Open profile"
 msgstr "فتح الملف الشخصي"
+
+#: components/app/interface/settings/channel/permissions/VisibilityPeople.tsx
+msgid "Add people"
+msgstr "إضافة أشخاص"
+
+#: components/app/interface/settings/channel/permissions/VisibilityPeople.tsx
+msgid "People"
+msgstr "الأشخاص"
+
+#: components/app/interface/settings/channel/permissions/VisibilityPeople.tsx
+msgid "People you add here can see it, whatever their roles."
+msgstr "الأشخاص الذين تضيفهم هنا يرون القناة، أيًّا كانت أدوارهم."
+
+#. placeholder {0}: nameOf(id)
+#: components/app/interface/settings/channel/permissions/VisibilityPeople.tsx
+msgid "Remove {0} from this list"
+msgstr "إزالة {0} من هذه القائمة"
+
+#: components/app/interface/settings/channel/permissions/VisibilityPeople.tsx
+msgid "These people can't see it, whatever their roles allow."
+msgstr "لا يرى هؤلاء الأشخاص القناة، مهما سمحت لهم أدوارهم."
+
+#: components/app/interface/settings/channel/permissions/VisibilityPeople.tsx
+msgid "You can't change access for someone ranked the same as you or above you."
+msgstr "لا يمكنك تغيير وصول شخص رتبته مثل رتبتك أو أعلى منها."
+
+#: components/app/interface/settings/channel/permissions/VisibilityPeople.tsx
+msgid "You can't give permissions you don't have yourself."
+msgstr "لا يمكنك منح صلاحيات لا تملكها أنت."
+
+#: components/app/interface/settings/channel/permissions/VisibilityPeople.tsx
+msgid "You need “Manage permissions” to change who can see this channel."
+msgstr "تحتاج إلى صلاحية «إدارة الصلاحيات» لتغيير من يرى هذه القناة."
+
+
+
+#: components/app/interface/settings/channel/permissions/VisibilityPeople.tsx
+msgid "This person is no longer in the server."
+msgstr "هذا الشخص لم يعد في السيرفر."
+
+#. placeholder {0}: props.context.parent?.name ?? ""
+#: components/app/interface/settings/channel/permissions/ChannelVisibility.tsx
+msgid "This thread follows who can see #{0}."
+msgstr "يتبع هذا الخيط إعدادات من يرى القناة #{0}."
+
+#: components/app/interface/settings/channel/permissions/VisibilityPeople.tsx
+msgid "{name} was added to the list"
+msgstr "تمت إضافة {name} إلى القائمة"
+
+#: components/app/interface/settings/channel/permissions/VisibilityPeople.tsx
+msgid "{name} was removed from the list"
+msgstr "تمت إزالة {name} من القائمة"
+
+#: components/app/interface/settings/channel/permissions/VisibilityPeople.tsx
+msgid "A member who left"
+msgstr "عضو غادر السيرفر"
+
+#: components/app/interface/settings/channel/permissions/ChannelVisibility.tsx
+msgid "This thread follows who can see its channel."
+msgstr "يتبع هذا الخيط إعدادات من يرى قناته."

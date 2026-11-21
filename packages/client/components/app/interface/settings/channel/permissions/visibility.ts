@@ -58,3 +58,53 @@ export function roleOverride(
     return { a: next.a, d: next.d | VIEW };
   return next;
 }
+
+const NONE: Pair = { a: 0n, d: 0n };
+
+/**
+ * One person's own channel override with View allowed: the same as letting
+ * a role in (roleOverride with see), other bits kept
+ */
+export function memberAdd(current?: Pair): Pair {
+  const value = current ?? NONE;
+  return { a: (value.a & ~VIEW) | VIEW, d: value.d & ~VIEW };
+}
+
+/**
+ * One person's own override without the View bits, other bits kept; allow 0
+ * and deny 0 left over deletes the override
+ */
+export function memberRemove(current?: Pair): Pair {
+  const value = current ?? NONE;
+  return { a: value.a & ~VIEW, d: value.d & ~VIEW };
+}
+
+/** Whether the override lets the person in (View allowed) */
+export function hasOwnAccess(value?: Pair): boolean {
+  return !!value && (value.a & VIEW) === VIEW;
+}
+
+/** Whether the override keeps the person out (View denied) */
+export function isHiddenFrom(value?: Pair): boolean {
+  return !!value && (value.d & VIEW) === VIEW;
+}
+
+/** Allow 0 / deny 0: the API removes such an override */
+export function isEmptyOverride(value: Pair): boolean {
+  return value.a === 0n && value.d === 0n;
+}
+
+/**
+ * The people the "People" list shows, by user id: those let in on a private
+ * channel, or those kept out of an open one
+ */
+export function listedPeople(
+  overrides: Record<string, Pair> | undefined,
+  isPrivate: boolean,
+): string[] {
+  return Object.entries(overrides ?? {})
+    .filter(([, value]) =>
+      isPrivate ? hasOwnAccess(value) : isHiddenFrom(value),
+    )
+    .map(([id]) => id);
+}

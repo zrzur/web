@@ -1,7 +1,17 @@
 import { DEFAULT_PERMISSION_SERVER, Permission } from "@zrzur/sdk";
 import { describe, expect, it } from "vitest";
 
-import { everyoneOverride, roleOverride, sees } from "./visibility";
+import {
+  everyoneOverride,
+  hasOwnAccess,
+  isEmptyOverride,
+  isHiddenFrom,
+  listedPeople,
+  memberAdd,
+  memberRemove,
+  roleOverride,
+  sees,
+} from "./visibility";
 
 const VIEW = Permission.ViewChannel;
 const server = DEFAULT_PERMISSION_SERVER;
@@ -91,5 +101,61 @@ describe("Administrator", () => {
         override: { a: Permission.Administrator, d: 0n },
       }),
     ).toBe(false);
+  });
+});
+
+describe("one person's own access", () => {
+  const SEND = Permission.SendMessage;
+  const REACT = Permission.React;
+
+  it("adding a person allows View, as letting a role in does", () => {
+    expect(memberAdd()).toEqual({ a: VIEW, d: 0n });
+    expect(memberAdd()).toEqual(roleOverride(server, closed, plainRole, true));
+    expect(memberAdd({ a: SEND, d: VIEW | REACT })).toEqual({
+      a: SEND | VIEW,
+      d: REACT,
+    });
+  });
+
+  it("adding then removing gives back the bits there were before", () => {
+    const before = { a: SEND, d: REACT };
+    const added = memberAdd(before);
+    expect(hasOwnAccess(added)).toBe(true);
+    expect(memberRemove(added)).toEqual(before);
+    expect(hasOwnAccess(memberRemove(added))).toBe(false);
+  });
+
+  it("removing the last bit leaves allow 0 / deny 0, which deletes the override", () => {
+    const removed = memberRemove(memberAdd());
+    expect(removed).toEqual({ a: 0n, d: 0n });
+    expect(isEmptyOverride(removed)).toBe(true);
+    expect(memberRemove({ a: 0n, d: VIEW })).toEqual({ a: 0n, d: 0n });
+  });
+
+  it("removing keeps every bit but View", () => {
+    expect(memberRemove({ a: VIEW | SEND, d: REACT })).toEqual({
+      a: SEND,
+      d: REACT,
+    });
+    expect(isEmptyOverride({ a: SEND, d: 0n })).toBe(false);
+  });
+
+  it("knows who is let in and who is kept out", () => {
+    expect(hasOwnAccess({ a: VIEW, d: 0n })).toBe(true);
+    expect(hasOwnAccess({ a: SEND, d: 0n })).toBe(false);
+    expect(hasOwnAccess(undefined)).toBe(false);
+    expect(isHiddenFrom({ a: 0n, d: VIEW })).toBe(true);
+    expect(isHiddenFrom({ a: 0n, d: SEND })).toBe(false);
+  });
+
+  it("lists people let in on a private channel, and kept out of an open one", () => {
+    const overrides = {
+      in: { a: VIEW, d: 0n },
+      out: { a: 0n, d: VIEW },
+      other: { a: SEND, d: 0n },
+    };
+    expect(listedPeople(overrides, true)).toEqual(["in"]);
+    expect(listedPeople(overrides, false)).toEqual(["out"]);
+    expect(listedPeople(undefined, true)).toEqual([]);
   });
 });
