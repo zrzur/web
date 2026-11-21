@@ -50,13 +50,17 @@
 
 @@2
 
+وعلى ويندوز، في PowerShell:
+
+@@3
+
 في Windows PowerShell استخدم `$env:ZRZUR_BOT_TOKEN = "YOUR_BOT_TOKEN"`. وعلى سيرفر مستضاف ذاتيًا اضبط أيضًا `ZRZUR_API_URL` و`ZRZUR_WS_URL`.
 
 ## ما يجب أن تراه {#what-you-should-see}
 
 في الطرفية:
 
-@@3
+@@4
 
 في سيرفرك، اكتب `/` في قناة. تظهر الأوامر الأربعة باسم بوتك. ثم جربها:
 

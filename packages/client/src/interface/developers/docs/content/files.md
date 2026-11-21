@@ -44,3 +44,18 @@ await bot.messages.send(channelId, {
 ```
 
 The [file upload tutorial](/developers/docs/tutorial-upload) builds `/report`.
+
+## Files people give your bot {#from-people}
+
+A command option of type `Attachment` and a form field `FileUpload` hand your bot files people uploaded. The interaction carries them in `resolved.attachments`, by id, with `tag`, `filename`, `content_type` and `size`. Download them like any file; the SDK has `interaction.attachmentUrl(name)`, `interaction.downloadAttachment(name)` and `interaction.fieldFiles(id)`. Treat what you download as untrusted: check the type and size before you open it.
+
+## Common errors {#errors}
+
+| Error | Cause | Fix |
+| --- | --- | --- |
+| `401 InvalidSession` | The bot token is wrong or was reset | Use the current token |
+| `400 FileTooLarge` | Over the tag's limit; the answer names the maximum | Make the file smaller, or check `features.limits` first |
+| `400 FileTooSmall` | An empty file | Send the bytes |
+| `400 FileTypeNotAllowed` | Not an image for an image tag, or not MP3, OGG or WAV for `sounds` | Use the tag that fits the file |
+| `403 MissingPermission` (when sending) | The bot lacks Upload Files in the channel | Give it the permission |
+| `429` | Uploads share the bot's limits | Wait `retry_after` milliseconds |

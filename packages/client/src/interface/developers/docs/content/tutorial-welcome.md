@@ -14,6 +14,14 @@ export ZRZUR_API_URL=https://api.zrzur.com
 export ZRZUR_WS_URL=wss://events.zrzur.com
 ```
 
+On Windows, in PowerShell:
+
+```powershell PowerShell
+$env:ZRZUR_BOT_TOKEN = "YOUR_BOT_TOKEN"
+$env:ZRZUR_API_URL = "https://api.zrzur.com"
+$env:ZRZUR_WS_URL = "wss://events.zrzur.com"
+```
+
 Then switch on the **Server Members** intent for the bot in the Developer Portal: without it the bot never hears of new members, and connecting with it asked for but off fails. See [Intents](/developers/docs/gateway#intents).
 
 ## The code

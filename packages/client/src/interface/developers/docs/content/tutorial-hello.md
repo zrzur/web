@@ -12,6 +12,14 @@ export ZRZUR_API_URL=https://api.zrzur.com
 export ZRZUR_WS_URL=wss://events.zrzur.com
 ```
 
+On Windows, in PowerShell:
+
+```powershell PowerShell
+$env:ZRZUR_BOT_TOKEN = "YOUR_BOT_TOKEN"
+$env:ZRZUR_API_URL = "https://api.zrzur.com"
+$env:ZRZUR_WS_URL = "wss://events.zrzur.com"
+```
+
 ## With the SDK
 
 Run `npm install @zrzur/sdk` in your bot's folder (Node 22.3 or newer), then save this file there:

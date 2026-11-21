@@ -125,6 +125,7 @@ function gateway(token, query = "") {
   return {
     events,
     opened,
+    send: (packet) => socket.send(JSON.stringify(packet)),
     clear: () => events.splice(0),
     close: () => socket.close(),
     wait(match, ms = 10_000) {
@@ -992,6 +993,114 @@ async function collectSamples() {
   }).catch(() => {});
   await must("POST", `/channels/${text._id}/typing`, as).catch(() => {});
   await sleep(1000);
+  // --- more events for the Event reference (audit 2026-11-21) ---
+  const step = async (what, fn) => {
+    try {
+      await fn();
+    } catch (error) {
+      console.log(`  (sample step skipped: ${what}: ${String(error?.message ?? error).slice(0, 120)})`);
+    }
+  };
+  await step("Pong", async () => {
+    observer.send({ type: "Ping", data: 1 });
+    await observer.wait((e) => e.type === "Pong", 4000);
+  });
+  await step("BulkMessageDelete", async () => {
+    const ids = [];
+    for (const content of ["one", "two"])
+      ids.push((await must("POST", `/channels/${text._id}/messages`, { ...as, body: { content } }))._id);
+    await must("DELETE", `/channels/${text._id}/messages/bulk`, { ...as, body: { ids } });
+  });
+  await step("MessageRemoveReaction", async () => {
+    const m = await must("POST", `/channels/${text._id}/messages`, { ...as, body: { content: "React" } });
+    await must("PUT", `/channels/${text._id}/messages/${m._id}/reactions/%F0%9F%91%8D`, as);
+    await must("DELETE", `/channels/${text._id}/messages/${m._id}/reactions/%F0%9F%91%8D?remove_all=true`, as);
+  });
+  await step("ServerRoleRanksUpdate", async () => {
+    const server = await must("GET", `/servers/${serverId}`, as);
+    const ranks = Object.entries(server.roles ?? {})
+      .sort(([, a], [, b]) => (a.rank ?? 0) - (b.rank ?? 0))
+      .map(([id]) => id);
+    if (ranks.length > 1) await must("PATCH", `/servers/${serverId}/roles/ranks`, { ...as, body: { ranks } });
+  });
+  await step("UserUpdate", async () => {
+    await must("PATCH", "/users/@me", { bot: tutorialToken, body: { status: { text: "Reading the docs" } } });
+  });
+  await step("WebhookCreate/Update/Delete", async () => {
+    const hook = await must("POST", `/channels/${text._id}/webhooks`, { ...as, body: { name: "Sample hook" } });
+    await must("PATCH", `/webhooks/${hook.id}`, { ...as, body: { name: "Sample hook 2" } });
+    await must("DELETE", `/webhooks/${hook.id}`, as);
+  });
+  await step("ServerEvent*", async () => {
+    await must("PATCH", `/servers/${serverId}`, { ...as, body: { events_enabled: true } });
+    const at = new Date(Date.now() + 2 * 86_400_000).toISOString();
+    const event = await must("POST", `/servers/${serverId}/events`, {
+      ...as,
+      body: { title: "Sample event", starts_at: at, place: { type: "Text", channel: text._id } },
+    });
+    const id = event._id ?? event.id;
+    await must("PATCH", `/servers/${serverId}/events/${id}`, { ...as, body: { description: "Sample" } });
+    await must("PUT", `/servers/${serverId}/events/${id}/interested`, { session: member.session }).catch(() => {});
+    await must("PUT", `/servers/${serverId}/events/${id}/rsvp`, { session: member.session, body: { answer: "Going" } }).catch(() => {});
+    await must("DELETE", `/servers/${serverId}/events/${id}`, as);
+  });
+  await step("SoundboardSound*", async () => {
+    const library = await must("GET", "/soundboard/library", as);
+    const first = (library?.categories ?? []).flatMap((c) => c.sounds ?? [])[0] ?? library?.sounds?.[0];
+    if (!first) throw new Error("no sound library on this stack");
+    const added = await must("PUT", `/servers/${serverId}/soundboard/library/${first.id}`, { ...as, body: {} });
+    const sound = added.id ?? added._id;
+    await must("PATCH", `/servers/${serverId}/soundboard/${sound}`, { ...as, body: { name: "sample" } });
+    await must("DELETE", `/servers/${serverId}/soundboard/${sound}`, as);
+  });
+  await step("ServerCreate/ServerDelete", async () => {
+    const made = await must("POST", "/servers/create", { ...as, body: { name: "Sample server" } });
+    await must("POST", `/bots/${bot._id}/invite`, { ...as, body: { server: made.server._id } });
+    await observer.wait((e) => e.type === "ServerCreate", 5000);
+    // the bot leaves it (deleting a server needs its owner to sign in again)
+    await must("DELETE", `/servers/${made.server._id}`, { bot: tutorialToken });
+    await observer.wait((e) => e.type === "ServerDelete", 5000);
+  });
+  await step("ChannelGroupJoin/Leave", async () => {
+    const group = await must("POST", "/channels/create", { ...as, body: { name: "Sample group", users: [] } });
+    await must("POST", `/bots/${bot._id}/invite`, { ...as, body: { group: group._id } });
+    await must("DELETE", `/channels/${group._id}/recipients/${bot._id}`, as);
+    await must("DELETE", `/channels/${group._id}`, as).catch(() => {});
+  });
+  await step("Error, Resumed, InvalidSession", async () => {
+    const watch = (first) =>
+      new Promise((res) => {
+        const seen = [];
+        const socket = new WebSocket(`${WS}/?version=1&format=json`);
+        socket.addEventListener("open", () => socket.send(JSON.stringify(first)));
+        socket.addEventListener("message", ({ data }) => {
+          const packet = JSON.parse(data);
+          seen.push(packet);
+          if (["Ready", "Resumed", "InvalidSession", "Error"].includes(packet.type)) {
+            res({ seen, socket });
+          }
+        });
+        setTimeout(() => res({ seen, socket }), 5000);
+      });
+    const wrong = await watch({ type: "Authenticate", token: "not-a-token" });
+    collect(wrong.seen);
+    wrong.socket.close();
+    const first = await watch({ type: "Authenticate", token: tutorialToken, resumable: true });
+    const ready = first.seen.find((e) => e.type === "Ready");
+    first.socket.close();
+    await sleep(500);
+    if (ready?.session_id) {
+      const resumed = await watch({ type: "Resume", token: tutorialToken, session_id: ready.session_id, seq: 0 });
+      collect(resumed.seen.filter((e) => e.type === "Resumed"));
+      resumed.socket.close();
+    }
+    const gone = await watch({ type: "Resume", token: tutorialToken, session_id: "no-such-session", seq: 0 });
+    collect(gone.seen.filter((e) => e.type === "InvalidSession"));
+    gone.socket.close();
+  });
+  await sleep(1000);
+  collect(observer.events);
+
   // and one real interaction, from a command made for this
   await must("PUT", `/applications/${bot._id}/commands`, {
     bot: tutorialToken,

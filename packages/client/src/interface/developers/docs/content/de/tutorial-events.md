@@ -10,11 +10,15 @@ Erstelle eine Anwendung, installiere sie auf einem Testserver und setze drei Umg
 
 @@0
 
+Unter Windows, in PowerShell:
+
+@@1
+
 Schalte dann im Entwicklerportal den Intent **Nachrichteninhalt** für den Bot ein: Ohne ihn bekommt der Bot Nachrichten ohne Text, und wenn er angefordert wird, aber aus ist, scheitert die Verbindung. Siehe [Intents](/developers/docs/gateway#intents).
 
 ## Der Code {#the-code}
 
-@@1
+@@2
 
 Starte es mit `node events.mjs`.
 

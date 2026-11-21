@@ -18,8 +18,11 @@ const bot = new Client({
   wsUrl: process.env.ZRZUR_WS_URL,
 });
 
+// connected: after the first Ready, and again after each reconnect, which
+// ends with Resumed when the session was resumed, or with Ready when not
 let ready = false;
 bot.on("Ready", () => (ready = true));
+bot.on("Resumed", () => (ready = true));
 bot.on("Disconnected", () => (ready = false));
 
 bot.command("hello", (i) => i.reply("Hello!"));

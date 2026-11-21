@@ -16,6 +16,8 @@ The token appears once, right after you create the application. Copy it now. Who
 
 On the Overview tab of your application choose Add to a server, and pick a server where you have Manage Server. [More about installing](/developers/docs/applications#install)
 
+The bot gets a role of its own with the default permissions you set for it (Bot settings, Default permissions), also when someone installs it with a link or the API. A link with `?permissions=` gives exactly those permissions instead. Whoever installs can only give what they hold themselves.
+
 Do this before the first run. A bot that is not in the server gets 403 MissingPermission when it writes to one of its channels, which looks like a missing permission. [Is the bot in that server?](/developers/docs/errors#not-installed)
 
 ## 4. Install the library {#get-the-sdk}
@@ -46,6 +48,13 @@ export ZRZUR_BOT_TOKEN=YOUR_BOT_TOKEN
 node hello.mjs
 ```
 
+On Windows, in PowerShell:
+
+```powershell PowerShell
+$env:ZRZUR_BOT_TOKEN = "YOUR_BOT_TOKEN"
+node hello.mjs
+```
+
 When the terminal shows ready, type /hello in a channel of your test server. The bot answers Hello and your name.
 
 ## 7. Receive events {#gateway}
@@ -54,7 +63,7 @@ The bot keeps a WebSocket connection to the gateway. Commands, button clicks, ne
 
 ## 8. Build a real bot {#deploy}
 
-This bot knows only one command. The complete bot has commands, buttons, a form, moderation, saved data, error handling and reconnects, in one file and without a library. [Build a complete bot](/developers/docs/tutorial-full-bot)
+This bot knows only one command. The next tutorials keep the same library and add one thing each: [commands with options](/developers/docs/tutorial-commands), [events](/developers/docs/tutorial-events), [moderation](/developers/docs/tutorial-moderation) and [deployment](/developers/docs/tutorial-deploy). The [complete bot](/developers/docs/tutorial-full-bot) does all of it in one file without a library, to show what the library does for you.
 
 ## Next steps {#next-steps}
 

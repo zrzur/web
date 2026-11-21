@@ -10,9 +10,13 @@ Erstelle eine Anwendung, installiere sie auf einem Testserver und setze drei Umg
 
 @@0
 
-## Der Code {#the-code}
+Unter Windows, in PowerShell:
 
 @@1
+
+## Der Code {#the-code}
+
+@@2
 
 Starte es mit `node voice.mjs`.
 

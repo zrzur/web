@@ -97,7 +97,15 @@
   "SoundAlreadyAdded": ["This library sound is on the server's soundboard already.", "Nothing to do."],
   "SoundLibraryUnavailable": ["The sound library is not ready yet.", "Try again in a minute."],
   "TooManySpeakers": ["The stage has as many speakers as it may have.", "Move a speaker back to the audience first. `max` is the limit."],
-  "PollEnded": ["The poll is over: no more votes, and it cannot be ended again.", "Do not retry."]
+  "PollEnded": ["The poll is over: no more votes, and it cannot be ended again.", "Do not retry."],
+  "TooManyServerEventDrafts": ["The server has as many draft events as it may (`max`).", "Publish or delete a draft first."],
+  "ServerEventFull": ["Every seat of the event is taken and it has no waiting list.", "Do not retry. An organiser can add seats."],
+  "ServerEventReasonRequired": ["Reading who takes part in an event limited to roles or invited people needs a reason when the reader is not named on the event.", "Send the reason in `X-Audit-Log-Reason`; the access is noted in the audit log."],
+  "ServerEventOverCapacity": ["Seating this person would put more people in the event than it has seats (`max`).", "Repeat with `over_capacity=true` if you mean it."],
+  "ServerEventInvalid": ["A field of the event was refused. `field` names it and `reason` says why (`too_many`, `out_of_range`, `not_a_member`, `unknown_role`, `empty`, `not_a_time`, `unknown`).", "Fix that field and send again."],
+  "TooManyVoiceClips": ["This person shared as many clips this month as they may (`max`).", "Wait for next month, or delete a clip."],
+  "RecordingTimeUsedUp": ["The server recorded as long this month as its Wings level allows (`max`, in seconds; 0 means recording needs Wings).", "Do not retry this month."],
+  "VoiceNotAgreed": ["Someone named in the clip or episode did not agree to be in it.", "Name only people who agreed, or ask them to agree first."]
  },
  "accounts": {
   "AlreadyOnboarded": ["The account already has a username.", "Used by the app only."],
@@ -150,6 +158,16 @@
   "AgeChangeNotAllowed": ["The age cannot be changed.", "People only."],
   "AgeRestricted": ["The content is limited by age.", "People only."],
   "TooManyServerEvents": ["The server has as many scheduled events as it may have.", "People only."],
-  "ForwardMatureContent": ["A message from a mature channel can only be forwarded into another mature channel.", "People only: bots cannot forward."]
+  "ForwardMatureContent": ["A message from a mature channel can only be forwarded into another mature channel.", "People only: bots cannot forward."],
+  "TooManyReminders": ["The person has as many reminders waiting as they may (`max`).", "Delete a reminder first."],
+  "TooManySavedMessages": ["The person has as many saved messages as they may (`max`).", "Remove a saved message first."],
+  "ImportInvalid": ["A server layout can't be read from what was given. `reason` is `invite_link`, `not_a_link`, `not_a_template`, `empty`, `too_large` or `nothing_given`.", "Give a template link or its text."],
+  "ImportTemplateNotFound": ["The template link names nothing: it was deleted or never existed.", "Check the link."],
+  "ImportSourceUnavailable": ["The template can't be fetched right now.", "Paste the template's text instead."],
+  "ImportTargetNotEmpty": ["A layout can only be built into a server nothing was built in yet.", "Use a new server."],
+  "LinkedAccountTaken": ["This account on the other service is linked to another Zrzur account.", "Unlink it there first."],
+  "LinkedSignInFailed": ["The sign-in at the other service could not be confirmed.", "Start linking again."],
+  "LinkedServiceFailed": ["The other service did not answer or refused the request.", "Try again later."],
+  "LinkedRefreshTooSoon": ["The link was refreshed a moment ago; `retry_after` says how many seconds to wait.", "Wait, then refresh again."]
  }
 }

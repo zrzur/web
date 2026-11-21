@@ -9,6 +9,21 @@ curl "https://api.zrzur.com/"
 
 Every entry says whether existing bots must change. A removal is announced here with its date before it happens. Follow it in a feed reader: [RSS feed](/developers/api-changelog.xml).
 
+## Coming in the next release {#next}
+
+**Written and tested locally on 2026-11-21; not live on `api.zrzur.com` yet.** Existing bots keep working: nothing below removes a field. Two behaviours change, marked with **Changes**.
+
+- **Changes: an install gives the default permissions.** An install without `?permissions=` (`POST /bots/{target}/invite`, OAuth2) gives the bot its `default_permissions` through a role of its own, as an install from the Developer Portal does. The installer gives the part they hold, with Manage Roles. An explicit `?permissions=` works as before. See [Start your bot](/developers/docs/getting-started#install-the-bot).
+- **A refused public answer leaves the interaction open.** When the server refuses a public answer (the bot may not write in the channel), the interaction is not used up: answer it again, for example privately. The same for `UpdateMessage` and for finishing a deferred answer.
+- **Changes: a suspended or banned owner stops their bots.** Their tokens get `401 InvalidSession` on the API, the file service and the gateway, open connections receive `Logout`, and they are added to no server or group. They work again when the owner's standing is restored.
+- **Deleting a bot** takes it out of its group DMs and closes its connections at once.
+- **Bots and refused requests.** A bot with a real token is never blocked by the address rule for refused requests, and its `403`s do not count towards it. See [Rate limits](/developers/docs/rate-limits#limits).
+- **Webhooks.** A new token and a test message have their own bucket, `webhook_manage`, 5 per 10 seconds for each webhook. See [Webhooks](/developers/docs/webhooks#managing).
+- **Smaller fixes.** An unchanged command sync no longer sends `ApplicationCommandsUpdate` to every server. `PATCH /bots/{bot_id}` checks everything before it changes anything and refuses unknown `default_permissions` bits. The file service answers a reset token with `401 InvalidSession`. Follow-ups sent at the same moment stay within 5. A bot that leaves a server no longer shows in its Apps list. The Discover bot routes answer `404 NotFound` for someone else's bot, like every other bot route.
+- **OpenAPI.** The document has a `Bot Token` security scheme (`x-bot-token`), and an MFA ticket is listed on top of signing in, not instead of it.
+- **New pages and sections.** [Webhooks](/developers/docs/webhooks); AutoMod, the soundboard, scheduled events, on-join settings and server tools on [Servers](/developers/docs/servers#automod); stages, clips and recordings on [Voice calls](/developers/docs/voice#stages). Scheduled events are documented as a bot feature.
+- **`@zrzur/sdk`.** A failing async event handler or collector handler goes to the error handler of the client instead of ending the bot; `login()` fails instead of waiting for ever; heartbeat every 20 s and 60 s without a Pong, as on the [Gateway](/developers/docs/gateway) page; new `off()`. The full list is in the SDK's changelog.
+
 ## Since 26.0.0 {#since-26-0-0}
 
 **Live on `api.zrzur.com`, checked on 2026-11-14.** `GET /` still reports `26.0.0`. Existing bots keep working: nothing below removes a field or changes one.

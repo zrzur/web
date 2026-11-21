@@ -8,11 +8,15 @@ Erstelle eine Anwendung, installiere sie auf einem Testserver und setze drei Umg
 
 @@0
 
+Unter Windows, in PowerShell:
+
+@@1
+
 ## Mit dem SDK {#with-the-sdk}
 
 Führe `npm install @zrzur/sdk` im Ordner deines Bots aus (Node 22.3 oder neuer) und speichere dann diese Datei dort:
 
-@@1
+@@2
 
 Starte es mit `node hello.mjs`.
 
@@ -20,7 +24,7 @@ Starte es mit `node hello.mjs`.
 
 Node 22 oder neuer, nichts zu installieren. Das ist derselbe Bot:
 
-@@2
+@@3
 
 Starte es mit `node hello-raw.mjs`.
 

@@ -121,65 +121,7 @@ await bot.invites.delete(invite._id);
 
 ## Webhooks
 
-> **Webhooks are switched on per server installation.** `GET /` on the API shows `features.webhooks`. Where it is `false`, creating or listing webhooks answers `FeatureDisabled` and every `/webhooks/...` address answers `404 NotFound`. On `api.zrzur.com` it was `false` when this page was checked (2026-11-14).
-
-A webhook posts into one channel without a gateway connection. Create one with a bot token or in server settings (needs Manage Webhooks). The answer has `token` and `url`. They are shown once: the server keeps only a hash, so save them now. A lost token can only be replaced.
-
-```bash
-curl -X POST "https://api.zrzur.com/webhooks/$WEBHOOK_ID/$WEBHOOK_TOKEN?wait=true" \
-  -H "content-type: application/json" \
-  -d '{"content": "Build finished", "username": "CI"}'
-```
-
-Anyone with the address can post, so treat it like a password. Tokens start with `zrzur_wh_`, so secret scanners can find a leaked one. `POST /webhooks/{webhook_id}/token` makes a new token; the old one stops at once.
-
-### Sending
-
-`POST /webhooks/{webhook_id}/{token}` answers `204`. With `?wait=true` it returns the message.
-
-| Field              | Meaning                                                                                                       |
-| ------------------ | ------------------------------------------------------------------------------------------------------------- |
-| `content`          | Up to 2000 characters. A message needs at least one of `content`, `embeds`, `attachments`, `components`        |
-| `username`         | Name on this message, 1 to 80 characters. The webhook mark stays                                               |
-| `avatar_url`       | Avatar on this message, a public web address. Clients load it through the media proxy, which checks it          |
-| `embeds`           | Up to 10, 6000 characters in total. `type` is ignored: embeds are always rich                                  |
-| `allowed_mentions` | Which mentions may notify anyone. `{ "parse": [] }` turns them all off                                         |
-| `flags`            | `4` hides link previews, `4096` sends without a notification                                                   |
-| `thread_id`        | Query parameter: post into this thread of the webhook's channel                                                |
-| `thread_name`      | Forum: start a thread with this name. `applied_tags` sets its tags. A forum without either answers `ForumThreadRequired` |
-
-Embeds take `title` (256), `description` (4096), `url`, `color` (a number) or `colour` (CSS text), `timestamp`, `author` (name 256), `footer` (text 2048), up to 25 `fields` (name 256, value 1024), `image.url`, `thumbnail.url`.
-
-To send files, use `multipart/form-data` with `files[0]`, `files[1]`, ... and the JSON body in `payload_json`. Each file passes the same checks as a member's upload. Up to 5 files of 20 MB; refer to one from an embed with `attachment://name.png`. A webhook without Upload Files gets `403`, never a message without its files.
-
-`@everyone`, `@online` and role mentions notify people only if the webhook has the matching permission and `allowed_mentions` allows them. New webhooks have neither permission, and the text is still posted. Edits never notify anyone.
-
-Interactive components work only on webhooks a bot created, and clicks go to that bot. Other webhooks can post links, text and media.
-
-### Editing a webhook
-
-`PATCH /webhooks/{webhook_id}` with Manage Webhooks changes the name, avatar, permissions and channel, and takes `X-Audit-Log-Reason`. With the token, `PATCH /webhooks/{webhook_id}/{token}` changes only the name and avatar; `permissions` or `channel_id` there answer `403`. `GET` with the token leaves out who made it. Names have 1 to 80 characters and cannot contain hidden characters or pass for Zrzur, its staff or a verified bot.
-
-### Its own messages
-
-`GET`, `PATCH` and `DELETE /webhooks/{webhook_id}/{token}/messages/{message_id}` work on messages this webhook sent, and no others.
-
-In a thread a webhook needs `SendMessageInThreads`, and `CreateForumPosts` to start a forum post. What the roles of its creator deny is denied to it too. Where threads or forums are switched off it can't send or edit, but it can delete its own messages.
-
-### Limits
-
-Each channel has up to 15 webhooks (`TooManyChannelWebhooks`) and each server up to 1000 (`TooManyServerWebhooks`).
-
-One webhook sends 5 messages in 2 seconds, and all webhooks of a channel 30 a minute. Over that, the answer is `429` with `{ "type": "RateLimited", "retry_after": 1200, "global": false }` (milliseconds) and the `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset-After` and `Retry-After` headers. After 20 wrong tokens in a minute an address waits, even with a right token.
-
-AutoMod reads webhook messages and their embeds, on edits too. Moderators can delete and report them like any message.
-
-### Other formats
-
-- `POST /webhooks/{webhook_id}/{token}/github` takes GitHub deliveries: set the content type to `application/json` or form. It shows `commit_comment`, `create`, `delete`, `fork`, `issue_comment`, `issues`, `member`, `public`, `pull_request`, `pull_request_review`, `pull_request_review_comment`, `push`, `release`, `watch`, `check_run`, `check_suite`, `discussion`, `discussion_comment` and `star`. Every other event answers `204`.
-- `POST /webhooks/{webhook_id}/{token}/slack` takes `text`, `attachments`, `blocks`, `username` and `icon_url`. It returns the message unless `?wait=false`.
-
-Nothing from these two formats notifies anyone.
+A webhook posts into one channel without a bot or a gateway connection: a CI job, a form or a feed. Making them, sending through them, their limits and their events have their own page: [Webhooks](/developers/docs/webhooks).
 
 ## Reference
 

@@ -59,6 +59,14 @@ export ZRZUR_TEST_SERVER=YOUR_SERVER_ID
 node full-bot.mjs
 ```
 
+On Windows, in PowerShell:
+
+```powershell PowerShell
+$env:ZRZUR_BOT_TOKEN = "YOUR_BOT_TOKEN"
+$env:ZRZUR_TEST_SERVER = "YOUR_SERVER_ID"
+node full-bot.mjs
+```
+
 In Windows PowerShell, use `$env:ZRZUR_BOT_TOKEN = "YOUR_BOT_TOKEN"`. On a self-hosted server, also set `ZRZUR_API_URL` and `ZRZUR_WS_URL`.
 
 ## What you should see {#what-you-should-see}

@@ -137,6 +137,7 @@ export function DocsPortal(props: {
     "http-interactions": t`Interactions over HTTP`,
     messages: t`Messages`,
     channels: t`Channels and webhooks`,
+    webhooks: t`Webhooks`,
     servers: t`Servers`,
     users: t`Users and members`,
     roles: t`Roles and permissions`,

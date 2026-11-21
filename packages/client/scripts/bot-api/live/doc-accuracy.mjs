@@ -509,6 +509,8 @@ const ALL = Number(
   [
     0, 1, 2, 3, 4, 6, 7, 8, 9, 10, 11, 12, 13, 20, 21, 22, 23, 24, 25, 26, 27,
     28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41,
+    // join requests, threads, forums, soundboard, events (not Administrator)
+    42, 43, 44, 45, 47, 48, 49,
   ]
     .map((b) => 1n << BigInt(b))
     .reduce((a, b) => a | b),
@@ -1688,6 +1690,154 @@ await test("voice: a bot gets a LiveKit ticket; force_disconnect is refused", as
     { target: voice._id, target_user: member.id },
     { expectStatus: (s) => s < 300 || s >= 400 },
   );
+});
+
+/* ------------------------------------------------------------------ */
+/* Entries without a live check before (audit 2026-11-21)              */
+/* ------------------------------------------------------------------ */
+
+await test("servers: AutoMod rules, read and replaced", async () => {
+  const rules = {
+    rules: [
+      {
+        id: "docs",
+        name: "No docs-test word",
+        enabled: true,
+        trigger: { type: "Keywords", words: ["docs-test-word"], allow: [] },
+        actions: { block: true },
+        exempt_roles: [],
+        exempt_channels: [],
+      },
+    ],
+  };
+  await botCall("PUT", "/servers/{target}/automod", { target: serverId }, { body: rules });
+  const read = await botCall("GET", "/servers/{target}/automod", { target: serverId });
+  expect(JSON.stringify(read).includes("docs-test-word"), "the rule was stored");
+  await botCall("PUT", "/servers/{target}/automod", { target: serverId }, { body: { rules: [] } });
+});
+
+await test("servers: one category, its title and its permissions", async () => {
+  // a ULID-shaped id, as the app makes for a new category
+  const alphabet = "0123456789ABCDEFGHJKMNPQRSTVWXYZ";
+  const id = "01" + Array.from({ length: 24 }, () => alphabet[Math.floor(Math.random() * 32)]).join("");
+  await must("PATCH", "/servers/{target}", { target: serverId }, {
+    session: owner.session,
+    body: { categories: [{ id, title: "Docs", channels: [text._id] }] },
+  });
+  await botCall("PATCH", "/servers/{target}/categories/{category_id}", { target: serverId, category_id: id }, {
+    body: { title: "Docs category", description: "Checked by the docs" },
+  });
+  await botCall("PUT", "/servers/{target}/categories/{category_id}/permissions/default", { target: serverId, category_id: id }, {
+    body: { permissions: { allow: 0, deny: 0 } },
+  });
+  // a role below the bot's own, as a bot can only set what ranks below it
+  const below = await must("POST", "/servers/{target}/roles", { target: serverId }, { bot: bot.token, body: { name: "Docs readers" } });
+  await botCall("PUT", "/servers/{target}/categories/{category_id}/permissions/{role_id}", { target: serverId, category_id: id, role_id: below.id }, {
+    body: { permissions: { allow: 0, deny: 0 } },
+  });
+});
+
+await test("servers: on-join settings, insights and a security pause", async () => {
+  const current = await botCall("GET", "/servers/{target}/on_join", { target: serverId });
+  await botCall("PUT", "/servers/{target}/on_join", { target: serverId }, { body: current ?? {} });
+  await botCall("GET", "/servers/{target}/insights", { target: serverId }, { query: { days: "7" } });
+  await botCall("PUT", "/servers/{target}/safety/pause", { target: serverId }, { body: { invites_hours: 1 } });
+  await botCall("PUT", "/servers/{target}/safety/pause", { target: serverId }, { body: { invites_hours: 0, dms_hours: 0 } });
+});
+
+await test("servers: soundboard list and the library", async () => {
+  await botCall("GET", "/servers/{target}/soundboard", { target: serverId });
+  const library = await botCall("GET", "/soundboard/library", {});
+  const first = (library?.categories ?? []).flatMap((c) => c.sounds ?? [])[0] ?? library?.sounds?.[0];
+  if (first) {
+    await botCall("GET", "/soundboard/library/{id}/audio", { id: first.id }, { query: { v: String(first.version ?? 1) }, raw: true });
+    const added = await botCall("PUT", "/servers/{target}/soundboard/library/{library_id}", { target: serverId, library_id: first.id }, { body: {} });
+    const soundId = added?.id ?? added?._id;
+    await botCall("PATCH", "/servers/{target}/soundboard/{sound_id}", { target: serverId, sound_id: soundId }, { body: { name: "docs" } });
+    await botCall("DELETE", "/servers/{target}/soundboard/{sound_id}", { target: serverId, sound_id: soundId });
+  }
+});
+
+await test("servers: a scheduled event, from draft to its end", async () => {
+  await must("PATCH", "/servers/{target}", { target: serverId }, { session: owner.session, body: { events_enabled: true } });
+  const at = new Date(Date.now() + 3 * 86_400_000).toISOString();
+  const event = await botCall("POST", "/servers/{target}/events", { target: serverId }, {
+    // invitation links are for events only invited people see
+    body: { title: "Docs night", starts_at: at, place: { type: "Text", channel: text._id }, visibility: "Invited", draft: true },
+  });
+  const e = { target: serverId, event: event._id ?? event.id };
+  await botCall("GET", "/servers/{target}/events", { target: serverId }, { query: { drafts: "true" } });
+  await botCall("GET", "/servers/{target}/events/{event}", e);
+  await botCall("PATCH", "/servers/{target}/events/{event}", e, { body: { description: "Checked by the docs" } });
+  await botCall("GET", "/servers/{target}/events/clashes", { target: serverId }, { query: { starts_at: at } });
+  await botCall("POST", "/servers/{target}/events/{event}/publish", e, { body: {} });
+  await botCall("PUT", "/servers/{target}/events/{event}/link", e, { body: { name: "docs-night", public: false } });
+  const invitation = await botCall("POST", "/servers/{target}/events/{event}/invitations", e, { body: { max_uses: 5 } });
+  await botCall("GET", "/servers/{target}/events/{event}/invitations", e);
+  await botCall("DELETE", "/servers/{target}/events/{event}/invitations/{code}", { ...e, code: invitation.code ?? invitation._id });
+  await botCall("DELETE", "/servers/{target}/events/{event}/link", e);
+  // notices are for people who answered: answer first
+  await botCall("PUT", "/servers/{target}/events/{event}/rsvp", e, { body: { answer: "Going" } });
+  await botCall("PUT", "/servers/{target}/events/{event}/notices", e, { body: { muted: true } });
+  await botCall("DELETE", "/servers/{target}/events/{event}/rsvp", e);
+  await botCall("PUT", "/servers/{target}/events/{event}/interested", e);
+  await botCall("DELETE", "/servers/{target}/events/{event}/interested", e);
+  await botCall("GET", "/servers/{target}/events/{event}/stats", e);
+  await botCall("GET", "/servers/{target}/events/{event}/attendees", e);
+  await botCall("GET", "/servers/{target}/events/{event}/interested", e);
+  const copy = await botCall("POST", "/servers/{target}/events/{event}/copy", e, { body: {} });
+  await botCall("POST", "/servers/{target}/events/{event}/start", e, { body: {} });
+  await botCall("POST", "/servers/{target}/events/{event}/end", e, { body: {} });
+  const c = { target: serverId, event: copy._id ?? copy.id };
+  // a copy is a draft: only a scheduled event can be called off
+  await botCall("POST", "/servers/{target}/events/{event}/publish", c, { body: {} });
+  await botCall("POST", "/servers/{target}/events/{event}/cancel", c, { body: {} });
+  await botCall("DELETE", "/servers/{target}/events/{event}", c);
+});
+
+await test("webhooks: the server list, a test message, a new token, its own messages, Slack", async () => {
+  const hook = await botCall("POST", "/channels/{channel_id}/webhooks", { channel_id: text._id }, { body: { name: "Docs audit" } });
+  secrets.add(hook.token);
+  await botCall("GET", "/servers/{target}/webhooks", { target: serverId });
+  await botCall("POST", "/webhooks/{webhook_id}/test", { webhook_id: hook.id }, { body: { content: "Test from the docs" } });
+  const fresh = await botCall("POST", "/webhooks/{webhook_id}/token", { webhook_id: hook.id });
+  secrets.add(fresh.token);
+  const t = { webhook_id: hook.id, token: fresh.token };
+  const sent = await botCall("POST", "/webhooks/{webhook_id}/{token}", t, { as: "", query: { wait: "true" }, body: { content: "Audit" } });
+  const m = { ...t, message_id: sent._id };
+  await botCall("GET", "/webhooks/{webhook_id}/{token}/messages/{message_id}", m, { as: "" });
+  await botCall("PATCH", "/webhooks/{webhook_id}/{token}/messages/{message_id}", m, { as: "", body: { content: "Audit, edited" } });
+  await botCall("DELETE", "/webhooks/{webhook_id}/{token}/messages/{message_id}", m, { as: "" });
+  await botCall("POST", "/webhooks/{webhook_id}/{token}/slack", t, { as: "", body: { text: "From Slack" } });
+  await botCall("DELETE", "/webhooks/{webhook_id}", { webhook_id: hook.id });
+});
+
+await test("roles: a member's own channel permissions and syncing a channel to its category", async () => {
+  await botCall("PUT", "/channels/{target}/permissions/members/{user_id}", { target: text._id, user_id: member.id }, {
+    body: { permissions: { allow: 0, deny: 0 } },
+  });
+  await botCall("POST", "/channels/{target}/permissions/sync", { target: text._id }, { body: {} });
+});
+
+await test("messages: typing over HTTP", async () => {
+  await botCall("POST", "/channels/{target}/typing", { target: text._id });
+});
+
+await test("interactions: command permissions in a server", async () => {
+  const [command] = await must("PUT", "/applications/{application_id}/servers/{server_id}/commands", { application_id: bot.id, server_id: serverId }, {
+    bot: bot.token,
+    body: [{ name: "audit", description: "Audit" }],
+  });
+  await botCall("PUT", "/servers/{server_id}/applications/{application_id}/permissions", { server_id: serverId, application_id: bot.id }, {
+    body: { permissions: [] },
+  });
+  await botCall("PUT", "/servers/{server_id}/applications/{application_id}/commands/{command_id}/permissions", { server_id: serverId, application_id: bot.id, command_id: command._id }, {
+    body: { permissions: [] },
+  });
+});
+
+await test("members: join requests of a server that asks first", async () => {
+  await botCall("GET", "/servers/{target}/join_requests", { target: serverId });
 });
 
 /* ------------------------------------------------------------------ */

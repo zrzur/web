@@ -1,4 +1,17 @@
 {
+ "Error": {
+  "type": "Error",
+  "data": {
+   "type": "InvalidSession"
+  }
+ },
+ "Resumed": {
+  "type": "Resumed"
+ },
+ "InvalidSession": {
+  "type": "InvalidSession",
+  "resumable": false
+ },
  "Authenticated": {
   "type": "Authenticated"
  },
@@ -9,9 +22,6 @@
     "_id": "01JC0000000000000000000001",
     "username": "example_user",
     "discriminator": "1234",
-    "status": {
-     "presence": "Online"
-    },
     "relationship": "None",
     "online": true
    }
@@ -20,93 +30,56 @@
    {
     "_id": "01JC0000000000000000000002",
     "owner": "01JC0000000000000000000003",
-    "name": "Docs examples",
+    "name": "Sample server",
     "channels": [
-     "01JC0000000000000000000004",
-     "01JC0000000000000000000005"
+     "01JC0000000000000000000004"
     ],
-    "roles": {
-     "01JC0000000000000000000006": {
-      "_id": "01JC0000000000000000000006",
-      "name": "Moderators",
-      "permissions": {
-       "a": 256,
-       "d": 0
-      },
-      "rank": 1
-     },
-     "01JC0000000000000000000007": {
-      "_id": "01JC0000000000000000000007",
-      "name": "Bots",
-      "permissions": {
-       "a": 4398045478879,
-       "d": 0
-      },
-      "rank": 0
-     }
-    },
     "default_permissions": 204586177532928,
-    "approximate_member_count": 3
+    "approximate_member_count": 2
    }
   ],
   "channels": [
    {
     "channel_type": "DirectMessage",
-    "_id": "01JC0000000000000000000008",
+    "_id": "01JC0000000000000000000005",
     "active": true,
     "recipients": [
-     "01JC0000000000000000000009",
+     "01JC0000000000000000000006",
      "01JC0000000000000000000001"
     ],
-    "last_message_id": "01JC0000000000000000000010"
+    "last_message_id": "01JC0000000000000000000007"
    }
   ],
   "members": [
    {
     "_id": {
      "server": "01JC0000000000000000000002",
-     "user": "01JC0000000000000000000009"
+     "user": "01JC0000000000000000000006"
     },
-    "joined_at": "2026-11-14T10:50:04.526Z",
-    "roles": [
-     "01JC0000000000000000000007"
-    ]
+    "joined_at": "2026-11-21T11:13:13.620Z"
    }
   ],
   "emojis": []
  },
  "Message": {
   "type": "Message",
-  "_id": "01JC0000000000000000000011",
-  "nonce": "01JC0000000000000000000012",
-  "channel": "01JC0000000000000000000004",
+  "_id": "01JC0000000000000000000008",
+  "nonce": "01JC0000000000000000000009",
+  "channel": "01JC0000000000000000000010",
   "author": "01JC0000000000000000000003",
   "user": {
    "_id": "01JC0000000000000000000003",
    "username": "example_user",
    "discriminator": "1234",
-   "style": {
-    "theme": [
-     "#3d1e6d",
-     "#035aa6"
-    ],
-    "name_font": "bold",
-    "name_colour": [
-     "#8e2de2",
-     "#e100ff"
-    ],
-    "decoration": "glow",
-    "nameplate": "galaxy"
-   },
    "relationship": "None",
    "online": false
   },
   "member": {
    "_id": {
-    "server": "01JC0000000000000000000002",
+    "server": "01JC0000000000000000000011",
     "user": "01JC0000000000000000000003"
    },
-   "joined_at": "2026-11-14T10:50:04.047Z",
+   "joined_at": "2026-11-21T11:17:32.654Z",
    "nickname": "مشرف"
   },
   "content": "Hello",
@@ -114,11 +87,11 @@
  },
  "MessageUpdate": {
   "type": "MessageUpdate",
-  "id": "01JC0000000000000000000011",
-  "channel": "01JC0000000000000000000004",
+  "id": "01JC0000000000000000000008",
+  "channel": "01JC0000000000000000000010",
   "data": {
    "content": "Hello again",
-   "edited": "2026-11-14T10:50:47.483Z",
+   "edited": "2026-11-21T11:18:16.871Z",
    "embeds": []
   },
   "clear": [],
@@ -126,33 +99,33 @@
  },
  "MessageReact": {
   "type": "MessageReact",
-  "id": "01JC0000000000000000000011",
-  "channel_id": "01JC0000000000000000000004",
+  "id": "01JC0000000000000000000008",
+  "channel_id": "01JC0000000000000000000010",
   "user_id": "01JC0000000000000000000003",
   "emoji_id": "👍",
   "seq": 3
  },
  "MessageUnreact": {
   "type": "MessageUnreact",
-  "id": "01JC0000000000000000000011",
-  "channel_id": "01JC0000000000000000000004",
+  "id": "01JC0000000000000000000008",
+  "channel_id": "01JC0000000000000000000010",
   "user_id": "01JC0000000000000000000003",
   "emoji_id": "👍",
   "seq": 4
  },
  "MessageDelete": {
   "type": "MessageDelete",
-  "id": "01JC0000000000000000000011",
-  "channel": "01JC0000000000000000000004",
+  "id": "01JC0000000000000000000008",
+  "channel": "01JC0000000000000000000010",
   "seq": 5
  },
  "ServerUpdate": {
   "type": "ServerUpdate",
-  "id": "01JC0000000000000000000002",
+  "id": "01JC0000000000000000000011",
   "data": {
    "channels": [
-    "01JC0000000000000000000004",
-    "01JC0000000000000000000005"
+    "01JC0000000000000000000010",
+    "01JC0000000000000000000012"
    ]
   },
   "clear": [],
@@ -162,7 +135,7 @@
   "type": "ChannelCreate",
   "channel_type": "TextChannel",
   "_id": "01JC0000000000000000000013",
-  "server": "01JC0000000000000000000002",
+  "server": "01JC0000000000000000000011",
   "name": "samples",
   "seq": 7
  },
@@ -182,7 +155,7 @@
  },
  "ServerRoleUpdate": {
   "type": "ServerRoleUpdate",
-  "id": "01JC0000000000000000000002",
+  "id": "01JC0000000000000000000011",
   "role_id": "01JC0000000000000000000014",
   "data": {
    "id": "01JC0000000000000000000014",
@@ -199,34 +172,34 @@
  },
  "ServerRoleDelete": {
   "type": "ServerRoleDelete",
-  "id": "01JC0000000000000000000002",
+  "id": "01JC0000000000000000000011",
   "role_id": "01JC0000000000000000000014",
   "seq": 11
  },
  "ServerMemberLeave": {
   "type": "ServerMemberLeave",
-  "id": "01JC0000000000000000000002",
+  "id": "01JC0000000000000000000011",
   "user": "01JC0000000000000000000001",
   "reason": "Leave",
   "seq": 13
  },
  "ServerMemberJoin": {
   "type": "ServerMemberJoin",
-  "id": "01JC0000000000000000000002",
+  "id": "01JC0000000000000000000011",
   "user": "01JC0000000000000000000001",
   "member": {
    "_id": {
-    "server": "01JC0000000000000000000002",
+    "server": "01JC0000000000000000000011",
     "user": "01JC0000000000000000000001"
    },
-   "joined_at": "2026-11-14T10:50:47.840Z"
+   "joined_at": "2026-11-21T11:18:17.259Z"
   },
   "seq": 14
  },
  "ServerMemberUpdate": {
   "type": "ServerMemberUpdate",
   "id": {
-   "server": "01JC0000000000000000000002",
+   "server": "01JC0000000000000000000011",
    "user": "01JC0000000000000000000001"
   },
   "data": {
@@ -237,53 +210,261 @@
  },
  "ChannelStartTyping": {
   "type": "ChannelStartTyping",
-  "id": "01JC0000000000000000000004",
-  "user": "01JC0000000000000000000009",
+  "id": "01JC0000000000000000000010",
+  "user": "01JC0000000000000000000006",
   "seq": 16
+ },
+ "Pong": {
+  "type": "Pong",
+  "data": 1
+ },
+ "BulkMessageDelete": {
+  "type": "BulkMessageDelete",
+  "channel": "01JC0000000000000000000010",
+  "ids": [
+   "01JC0000000000000000000015",
+   "01JC0000000000000000000016"
+  ],
+  "seq": 20
+ },
+ "MessageRemoveReaction": {
+  "type": "MessageRemoveReaction",
+  "id": "01JC0000000000000000000017",
+  "channel_id": "01JC0000000000000000000010",
+  "emoji_id": "👍",
+  "seq": 23
+ },
+ "ServerRoleRanksUpdate": {
+  "type": "ServerRoleRanksUpdate",
+  "id": "01JC0000000000000000000011",
+  "ranks": [
+   "01JC0000000000000000000018",
+   "01JC0000000000000000000019"
+  ],
+  "seq": 24
+ },
+ "UserUpdate": {
+  "type": "UserUpdate",
+  "id": "01JC0000000000000000000006",
+  "data": {
+   "status": {
+    "text": "Reading the docs"
+   }
+  },
+  "clear": [],
+  "event_id": null,
+  "seq": 25
+ },
+ "WebhookCreate": {
+  "type": "WebhookCreate",
+  "id": "01JC0000000000000000000020",
+  "name": "Sample hook",
+  "creator_id": "01JC0000000000000000000003",
+  "channel_id": "01JC0000000000000000000010",
+  "permissions": 52777568960512,
+  "seq": 26
+ },
+ "WebhookUpdate": {
+  "type": "WebhookUpdate",
+  "id": "01JC0000000000000000000020",
+  "channel_id": "01JC0000000000000000000010",
+  "data": {
+   "name": "Sample hook 2"
+  },
+  "remove": [],
+  "seq": 27
+ },
+ "WebhookDelete": {
+  "type": "WebhookDelete",
+  "id": "01JC0000000000000000000020",
+  "channel_id": "01JC0000000000000000000010",
+  "seq": 28
+ },
+ "ServerEventCreate": {
+  "type": "ServerEventCreate",
+  "_id": "01JC0000000000000000000021",
+  "server": "01JC0000000000000000000011",
+  "creator": "01JC0000000000000000000003",
+  "title": "Sample event",
+  "starts_at": "2026-11-23T11:18:27.173Z",
+  "place": {
+   "type": "Text",
+   "channel": "01JC0000000000000000000010"
+  },
+  "status": "Scheduled",
+  "interested_count": 0,
+  "counts": {
+   "going": 0,
+   "maybe": 0,
+   "not_going": 0,
+   "waiting": 0
+  },
+  "waitlist": true,
+  "over_capacity": false,
+  "visibility": "Place",
+  "attendee_list": "Organisers",
+  "link_public": false,
+  "seq": 30
+ },
+ "ServerEventUpdate": {
+  "type": "ServerEventUpdate",
+  "event": {
+   "_id": "01JC0000000000000000000021",
+   "server": "01JC0000000000000000000011",
+   "creator": "01JC0000000000000000000003",
+   "title": "Sample event",
+   "description": "Sample",
+   "starts_at": "2026-11-23T11:18:27.173Z",
+   "place": {
+    "type": "Text",
+    "channel": "01JC0000000000000000000010"
+   },
+   "status": "Scheduled",
+   "interested_count": 0,
+   "counts": {
+    "going": 0,
+    "maybe": 0,
+    "not_going": 0,
+    "waiting": 0
+   },
+   "waitlist": true,
+   "over_capacity": false,
+   "visibility": "Place",
+   "attendee_list": "Organisers",
+   "link_public": false
+  },
+  "seq": 31
+ },
+ "ServerEventCounts": {
+  "type": "ServerEventCounts",
+  "id": "01JC0000000000000000000021",
+  "server": "01JC0000000000000000000011",
+  "channel": "01JC0000000000000000000010",
+  "counts": {
+   "going": 0,
+   "maybe": 1,
+   "not_going": 0,
+   "waiting": 0
+  },
+  "seq": 32
+ },
+ "ServerEventInterest": {
+  "type": "ServerEventInterest",
+  "id": "01JC0000000000000000000021",
+  "server": "01JC0000000000000000000011",
+  "channel": "01JC0000000000000000000010",
+  "user": "",
+  "interested": true,
+  "count": 1,
+  "seq": 33
+ },
+ "ServerEventDelete": {
+  "type": "ServerEventDelete",
+  "id": "01JC0000000000000000000021",
+  "server": "01JC0000000000000000000011",
+  "seq": 36
+ },
+ "SoundboardSoundCreate": {
+  "type": "SoundboardSoundCreate",
+  "_id": "01JC0000000000000000000022",
+  "server": "01JC0000000000000000000011",
+  "creator_id": "01JC0000000000000000000003",
+  "name": "“Go”",
+  "emoji": "🏁",
+  "duration_ms": 654,
+  "volume": 100,
+  "library_id": "voice-go",
+  "seq": 37
+ },
+ "SoundboardSoundUpdate": {
+  "type": "SoundboardSoundUpdate",
+  "_id": "01JC0000000000000000000022",
+  "server": "01JC0000000000000000000011",
+  "creator_id": "01JC0000000000000000000003",
+  "name": "sample",
+  "emoji": "🏁",
+  "duration_ms": 654,
+  "volume": 100,
+  "library_id": "voice-go",
+  "seq": 38
+ },
+ "SoundboardSoundDelete": {
+  "type": "SoundboardSoundDelete",
+  "id": "01JC0000000000000000000022",
+  "server": "01JC0000000000000000000011",
+  "seq": 39
+ },
+ "ServerCreate": {
+  "type": "ServerCreate",
+  "id": "01JC0000000000000000000023",
+  "server": {
+   "_id": "01JC0000000000000000000023",
+   "owner": "01JC0000000000000000000003",
+   "name": "Sample server",
+   "channels": [
+    "01JC0000000000000000000024"
+   ],
+   "default_permissions": 204586177532928,
+   "approximate_member_count": 2
+  },
+  "channels": [
+   {
+    "channel_type": "TextChannel",
+    "_id": "01JC0000000000000000000024",
+    "server": "01JC0000000000000000000023",
+    "name": "General"
+   }
+  ],
+  "emojis": [],
+  "voice_states": [],
+  "seq": 40
+ },
+ "ChannelGroupLeave": {
+  "type": "ChannelGroupLeave",
+  "id": "01JC0000000000000000000025",
+  "user": "01JC0000000000000000000006",
+  "seq": 43
  },
  "ApplicationCommandsUpdate": {
   "type": "ApplicationCommandsUpdate",
-  "application_id": "01JC0000000000000000000009",
+  "application_id": "01JC0000000000000000000006",
   "server_id": "01JC0000000000000000000002",
-  "seq": 18
+  "seq": 44
  },
  "InteractionCreate": {
   "type": "InteractionCreate",
   "interaction": {
-   "_id": "01JC0000000000000000000015",
+   "_id": "01JC0000000000000000000026",
    "version": 1,
-   "application_id": "01JC0000000000000000000009",
+   "application_id": "01JC0000000000000000000006",
    "type": "Command",
    "token": "YOUR_TOKEN_HERE",
    "user": {
     "_id": "01JC0000000000000000000001",
     "username": "example_user",
     "discriminator": "1234",
-    "status": {
-     "presence": "Online"
-    },
     "relationship": "None",
     "online": true
    },
    "member": {
     "_id": {
-     "server": "01JC0000000000000000000002",
+     "server": "01JC0000000000000000000011",
      "user": "01JC0000000000000000000001"
     },
-    "joined_at": "2026-11-14T10:50:47.840Z",
+    "joined_at": "2026-11-21T11:18:17.259Z",
     "nickname": "Sample"
    },
-   "server_id": "01JC0000000000000000000002",
-   "channel_id": "01JC0000000000000000000004",
+   "server_id": "01JC0000000000000000000011",
+   "channel_id": "01JC0000000000000000000010",
    "user_permissions": 204586177532928,
    "app_permissions": 206708184989663,
    "user_permissions_string": "204586177532928",
    "app_permissions_string": "206708184989663",
    "command": {
-    "id": "01JC0000000000000000000016",
+    "id": "01JC0000000000000000000027",
     "name": "sample",
     "type": "ChatInput",
-    "version": "01JC0000000000000000000017",
+    "version": "01JC0000000000000000000028",
     "options": [
      {
       "name": "who",
@@ -297,19 +478,6 @@
        "_id": "01JC0000000000000000000003",
        "username": "example_user",
        "discriminator": "1234",
-       "style": {
-        "theme": [
-         "#3d1e6d",
-         "#035aa6"
-        ],
-        "name_font": "bold",
-        "name_colour": [
-         "#8e2de2",
-         "#e100ff"
-        ],
-        "decoration": "glow",
-        "nameplate": "galaxy"
-       },
        "relationship": "None",
        "online": false
       }
@@ -317,24 +485,24 @@
      "members": {
       "01JC0000000000000000000003": {
        "_id": {
-        "server": "01JC0000000000000000000002",
+        "server": "01JC0000000000000000000011",
         "user": "01JC0000000000000000000003"
        },
-       "joined_at": "2026-11-14T10:50:04.047Z",
+       "joined_at": "2026-11-21T11:17:32.654Z",
        "nickname": "مشرف"
       }
      }
     }
    },
-   "respond_by": "2026-11-14T10:50:53.523Z",
-   "expires_at": "2026-11-14T11:05:50.523Z"
+   "respond_by": "2026-11-21T11:18:47.018Z",
+   "expires_at": "2026-11-21T11:33:44.018Z"
   },
-  "seq": 19
+  "seq": 46
  },
  "__headers": {
-  "x-ratelimit-bucket": "10916110026516615864",
+  "x-ratelimit-bucket": "14374377748772072456",
   "x-ratelimit-limit": "20",
-  "x-ratelimit-remaining": "14",
-  "x-ratelimit-reset-after": "3448"
+  "x-ratelimit-remaining": "19",
+  "x-ratelimit-reset-after": "10000"
  }
 }

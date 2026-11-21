@@ -145,7 +145,11 @@ function routeList(modPath, fnName) {
   if (!file) return [];
   const src = show(file);
   const at = src.search(new RegExp(`pub fn ${fnName}\\s*\\(`));
-  if (at === -1) return [];
+  if (at === -1) {
+    // `pub use admin::routes as admin_routes;` points to another module
+    const alias = src.match(new RegExp(`pub use ([\\w:]+)::(\\w+) as ${fnName};`));
+    return alias ? routeList([...modPath, ...alias[1].split("::")], alias[2]) : [];
+  }
   const macro = src.indexOf("openapi_get_routes_spec!", at);
   const open = src.indexOf("[", macro);
   const close = src.indexOf("]", open);
@@ -158,8 +162,10 @@ function routeList(modPath, fnName) {
     .map((entry) => {
       const parts = entry.split("::");
       const fn = parts.pop();
-      const path = [...modPath];
-      for (const p of parts) {
+      // `crate::routes::servers::events::mine` starts from the routes folder
+      const fromRoot = parts[0] === "crate" && parts[1] === "routes";
+      const path = fromRoot ? [] : [...modPath];
+      for (const p of fromRoot ? parts.slice(2) : parts) {
         if (p === "super") path.pop();
         else if (p === "self") continue;
         else path.push(p);
@@ -170,9 +176,11 @@ function routeList(modPath, fnName) {
 
 // Top-level mounts: "/prefix" => module::fn()
 const mountSrc = show(`${ROUTES}/mod.rs`);
+// the API mounts its routes with revolt_rocket_okapi's macro or its own copy of it
+const mountTableAt = mountSrc.search(/mount_endpoints_and_(?:merged|fixed)_docs!/);
 const mountBlock = mountSrc.slice(
-  mountSrc.indexOf("mount_endpoints_and_merged_docs!"),
-  mountSrc.indexOf("}", mountSrc.indexOf("mount_endpoints_and_merged_docs!")),
+  mountTableAt,
+  mountSrc.indexOf("}", mountTableAt),
 );
 const mounts = [...mountBlock.matchAll(/"(\/[^"]*)"\s*=>\s*([\w:]+)\(\)/g)].map(
   ([, prefix, call]) => {
@@ -581,7 +589,10 @@ const SECTION_BY_TAG = {
   "Server Customisation": "servers",
   Emojis: "servers",
   Invites: "servers",
-  Webhooks: "channels",
+  Webhooks: "webhooks",
+  // bots may use scheduled server events (owner, 2026-11-21); only
+  // accepting an invitation to one is for people (refused in the code)
+  "Server Events": "servers",
   "Audit Logs": "moderation",
   Bots: "authentication",
   Threads: "channels",
@@ -607,6 +618,11 @@ const eventGuide = JSON.parse(
 );
 const eventSamples = JSON.parse(
   readFileSync(join(here, "event-samples.json"), "utf8"),
+);
+// written from the gateway schema for events the local checks cannot
+// cause; a recorded sample always wins
+const writtenSamples = JSON.parse(
+  readFileSync(join(here, "event-samples.written.json"), "utf8"),
 );
 // The gateway's own description of itself (`GET /gateway/schema`), kept as
 // a snapshot next to the OpenAPI one: the SDK the web app pins can be older
@@ -939,7 +955,10 @@ const inventory = {
       fields: gatewayBranches[e.name]
         ? gatewayFields(gatewayBranches[e.name])
         : [],
-      sample: eventSamples[e.name] ?? null,
+      sample: eventSamples[e.name] ?? writtenSamples[e.name] ?? null,
+      ...(eventSamples[e.name] || !writtenSamples[e.name]
+        ? {}
+        : { sampleWritten: true }),
     })),
     clientMessages: serverMessages.map((m) => ({
       ...m,
