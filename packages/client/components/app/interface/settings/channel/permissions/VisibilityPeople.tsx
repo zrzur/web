@@ -69,6 +69,8 @@ export function VisibilityPeople(props: {
         return t`You can't change access for someone ranked the same as you or above you.`;
       case "CannotGiveMissingPermissions":
         return t`You can't give permissions you don't have yourself.`;
+      case "NotFound":
+        return t`This person is no longer in the server.`;
       default:
         return describeError(err);
     }
@@ -91,121 +93,192 @@ export function VisibilityPeople(props: {
     }
   }
 
-  const add = async (id: string) => {
-    if (await save(id, memberAdd(overrides()[id]))) setPicking(false);
+  /** Said aloud after a change (a polite live region) */
+  const [said, setSpoken] = createSignal("");
+  // the same words twice are read out twice
+  const setSaid = (text: string) => {
+    setSpoken("");
+    queueMicrotask(() => setSpoken(text));
   };
-  const remove = (id: string) => save(id, memberRemove(overrides()[id]));
+  const focusOn = (testId: string) =>
+    document.querySelector<HTMLElement>(`[data-testid="${testId}"]`)?.focus();
 
+  const add = async (id: string) => {
+    if (!(await save(id, memberAdd(overrides()[id])))) return;
+    closePicker();
+    const name = nameOf(id);
+    setSaid(t`${name} can now see this channel`);
+    // back to the button that opened the picker
+    queueMicrotask(() => focusOn("channel-people-add"));
+  };
+
+  /** After Remove, focus goes on once the row has gone: to the next row */
+  const [leaving, setLeaving] = createSignal<{ id: string; next?: string }>();
+  createEffect(() => {
+    const pending = leaving();
+    if (!pending || people().includes(pending.id)) return;
+    setLeaving(undefined);
+    const next =
+      pending.next && people().includes(pending.next)
+        ? `channel-person-remove-${pending.next}`
+        : "channel-people-add";
+    queueMicrotask(() => focusOn(next));
+  });
+
+  const remove = async (id: string) => {
+    // your own row has no Remove, so it is skipped
+    const removable = people().filter((other) => other !== self());
+    const next = removable[removable.indexOf(id) + 1];
+    const wasPrivate = props.isPrivate;
+    if (!(await save(id, memberRemove(overrides()[id])))) return;
+    const name = nameOf(id);
+    setSaid(
+      wasPrivate
+        ? t`${name} can no longer see this channel`
+        : t`${name} can now see this channel`,
+    );
+    setLeaving({ id, next });
+  };
+
+  const closePicker = () => {
+    setPicking(false);
+    setError(undefined);
+  };
+
+  /** You: never offered in the picker, and your own row has no Remove */
+  const self = () => client().user?.id;
   const exclude = () => [
     ...people(),
+    ...(self() ? [self()!] : []),
     ...(props.context.server?.ownerId ? [props.context.server.ownerId] : []),
   ];
 
   return (
-    <Show when={props.isPrivate || people().length}>
-      <SettingsRow
-        data-testid="channel-people"
-        icon={<Icon name="users" size={20} />}
-        title={<Trans>People</Trans>}
-        description={
-          <>
-            <Show
-              when={props.isPrivate}
-              fallback={
+    <>
+      <Show when={props.isPrivate || people().length}>
+        <SettingsRow
+          data-testid="channel-people"
+          icon={<Icon name="users" size={20} />}
+          title={<Trans>People</Trans>}
+          description={
+            <>
+              <Show
+                when={props.isPrivate}
+                fallback={
+                  <Trans>
+                    These people can't see it, whatever their roles allow.
+                  </Trans>
+                }
+              >
                 <Trans>
-                  These people can't see it, whatever their roles allow.
+                  People you add here can see it, whatever their roles.
                 </Trans>
-              }
-            >
-              <Trans>
-                People you add here can see it, whatever their roles.
-              </Trans>
-            </Show>
-            <Show when={error()}>
-              <ErrorBox role="alert" data-testid="channel-people-error">
-                <span>{message(error())}</span>
-                <Show when={errorDetails(error())}>
-                  <details class="z-error-details">
-                    <summary>
-                      <Trans>Details</Trans>
-                    </summary>
-                    <code>{errorDetails(error())}</code>
-                  </details>
+              </Show>
+              <Show when={error()}>
+                <ErrorBox role="alert" data-testid="channel-people-error">
+                  <span>{message(error())}</span>
+                  <Show when={errorDetails(error())}>
+                    <details class="z-error-details">
+                      <summary>
+                        <Trans>Details</Trans>
+                      </summary>
+                      <code>{errorDetails(error())}</code>
+                    </details>
+                  </Show>
+                </ErrorBox>
+              </Show>
+            </>
+          }
+          control={() => (
+            <Show when={props.isPrivate && props.canEdit}>
+              <Button
+                data-testid="channel-people-add"
+                size="sm"
+                variant="tonal"
+                isDisabled={!!busy()}
+                aria-expanded={picking()}
+                onPress={() => (picking() ? closePicker() : setPicking(true))}
+              >
+                <Show when={picking()} fallback={<Trans>Add people</Trans>}>
+                  <Trans>Close</Trans>
                 </Show>
-              </ErrorBox>
+              </Button>
             </Show>
-          </>
-        }
-        control={() => (
-          <Show when={props.isPrivate && props.canEdit}>
-            <Button
-              data-testid="channel-people-add"
-              size="sm"
-              variant="tonal"
-              isDisabled={!!busy()}
-              aria-expanded={picking()}
-              onPress={() => setPicking(!picking())}
-            >
-              <Show when={picking()} fallback={<Trans>Add people</Trans>}>
-                <Trans>Close</Trans>
-              </Show>
-            </Button>
-          </Show>
-        )}
-      />
+          )}
+        />
 
-      <Show when={picking() && props.isPrivate && props.context.server}>
-        {(server) => (
-          <PickerBox>
-            <MemberPicker
-              server={server()}
-              label={t`Add people`}
-              value={[]}
-              onChange={(ids) => {
-                const id = ids[ids.length - 1];
-                if (id && !busy()) void add(id);
-              }}
-              max={1}
-              exclude={exclude()}
-              testId="channel-people-picker"
+        <Show when={picking() && props.isPrivate && props.context.server}>
+          {(server) => (
+            <PickerBox>
+              <MemberPicker
+                server={server()}
+                label={t`Add people`}
+                value={[]}
+                onChange={(ids) => {
+                  const id = ids[ids.length - 1];
+                  if (id && !busy()) void add(id);
+                }}
+                max={1}
+                exclude={exclude()}
+                keepQueryOnPick
+                testId="channel-people-picker"
+              />
+            </PickerBox>
+          )}
+        </Show>
+
+        <For each={people()}>
+          {(id) => (
+            <SettingsRow
+              data-testid={`channel-person-${id}`}
+              icon={
+                <Avatar size={20} src={avatarOf(id)} fallback={nameOf(id)} />
+              }
+              title={<Name>{nameOf(id)}</Name>}
+              description={
+                props.isPrivate ? (
+                  <Trans>Can see this channel</Trans>
+                ) : (
+                  <Trans>Can't see this channel</Trans>
+                )
+              }
+              control={() => (
+                <Show when={props.canEdit && id !== self()}>
+                  <Button
+                    data-testid={`channel-person-remove-${id}`}
+                    size="sm"
+                    variant="text"
+                    isDisabled={!!busy()}
+                    onPress={() => void remove(id)}
+                    aria-label={t`Remove ${nameOf(id)} from this list`}
+                  >
+                    <Trans>Remove</Trans>
+                  </Button>
+                </Show>
+              )}
             />
-          </PickerBox>
-        )}
+          )}
+        </For>
       </Show>
-
-      <For each={people()}>
-        {(id) => (
-          <SettingsRow
-            data-testid={`channel-person-${id}`}
-            icon={<Avatar size={20} src={avatarOf(id)} fallback={nameOf(id)} />}
-            title={<Name>{nameOf(id)}</Name>}
-            description={
-              props.isPrivate ? (
-                <Trans>Can see this channel</Trans>
-              ) : (
-                <Trans>Can't see this channel</Trans>
-              )
-            }
-            control={() => (
-              <Show when={props.canEdit}>
-                <Button
-                  data-testid={`channel-person-remove-${id}`}
-                  size="sm"
-                  variant="text"
-                  isDisabled={!!busy()}
-                  onPress={() => void remove(id)}
-                  aria-label={t`Remove ${nameOf(id)} from this list`}
-                >
-                  <Trans>Remove</Trans>
-                </Button>
-              </Show>
-            )}
-          />
-        )}
-      </For>
-    </Show>
+      {/* outside the list: it stays when the last row goes */}
+      <LiveRegion aria-live="polite" data-testid="channel-people-said">
+        {said()}
+      </LiveRegion>
+    </>
   );
 }
+
+/** Read out, not shown */
+const LiveRegion = styled("span", {
+  base: {
+    position: "absolute",
+    width: "1px",
+    height: "1px",
+    overflow: "hidden",
+    clipPath: "inset(50%)",
+    whiteSpace: "nowrap",
+  },
+});
 
 const PickerBox = styled("div", {
   base: {

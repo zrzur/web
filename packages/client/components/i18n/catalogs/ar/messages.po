@@ -31092,3 +31092,20 @@ msgstr "لا يمكنك منح صلاحيات لا تملكها أنت."
 #: components/app/interface/settings/channel/permissions/VisibilityPeople.tsx
 msgid "You need “Manage permissions” to change who can see this channel."
 msgstr "تحتاج إلى صلاحية «إدارة الصلاحيات» لتغيير من يرى هذه القناة."
+
+#: components/app/interface/settings/channel/permissions/VisibilityPeople.tsx
+msgid "{name} can no longer see this channel"
+msgstr "{name} لم يعد يستطيع رؤية هذه القناة"
+
+#: components/app/interface/settings/channel/permissions/VisibilityPeople.tsx
+msgid "{name} can now see this channel"
+msgstr "{name} يستطيع الآن رؤية هذه القناة"
+
+#: components/app/interface/settings/channel/permissions/VisibilityPeople.tsx
+msgid "This person is no longer in the server."
+msgstr "هذا الشخص لم يعد في السيرفر."
+
+#. placeholder {0}: props.context.parent?.name ?? ""
+#: components/app/interface/settings/channel/permissions/ChannelVisibility.tsx
+msgid "This thread follows who can see #{0}."
+msgstr "يتبع هذا الخيط إعدادات من يرى القناة #{0}."

@@ -26,5 +26,21 @@
   "You need “Manage permissions” to change who can see this channel.": [
     "تحتاج إلى صلاحية «إدارة الصلاحيات» لتغيير من يرى هذه القناة.",
     "Du brauchst „Berechtigungen verwalten“, um zu ändern, wer diesen Kanal sieht."
+  ],
+  "{name} can now see this channel": [
+    "{name} يستطيع الآن رؤية هذه القناة",
+    "{name} sieht diesen Kanal jetzt"
+  ],
+  "{name} can no longer see this channel": [
+    "{name} لم يعد يستطيع رؤية هذه القناة",
+    "{name} sieht diesen Kanal nicht mehr"
+  ],
+  "This person is no longer in the server.": [
+    "هذا الشخص لم يعد في السيرفر.",
+    "Diese Person ist nicht mehr auf dem Server."
+  ],
+  "This thread follows who can see #{0}.": [
+    "يتبع هذا الخيط إعدادات من يرى القناة #{0}.",
+    "Dieser Thread folgt, wer #{0} sieht."
   ]
 }

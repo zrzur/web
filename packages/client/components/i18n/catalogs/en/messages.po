@@ -31095,3 +31095,20 @@ msgstr "You can't give permissions you don't have yourself."
 #: components/app/interface/settings/channel/permissions/VisibilityPeople.tsx
 msgid "You need “Manage permissions” to change who can see this channel."
 msgstr "You need “Manage permissions” to change who can see this channel."
+
+#: components/app/interface/settings/channel/permissions/VisibilityPeople.tsx
+msgid "{name} can no longer see this channel"
+msgstr "{name} can no longer see this channel"
+
+#: components/app/interface/settings/channel/permissions/VisibilityPeople.tsx
+msgid "{name} can now see this channel"
+msgstr "{name} can now see this channel"
+
+#: components/app/interface/settings/channel/permissions/VisibilityPeople.tsx
+msgid "This person is no longer in the server."
+msgstr "This person is no longer in the server."
+
+#. placeholder {0}: props.context.parent?.name ?? ""
+#: components/app/interface/settings/channel/permissions/ChannelVisibility.tsx
+msgid "This thread follows who can see #{0}."
+msgstr "This thread follows who can see #{0}."
