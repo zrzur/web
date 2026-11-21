@@ -5,7 +5,7 @@ import type { Server, User } from "@zrzur/sdk/solid";
 import { styled } from "styled-system/jsx";
 
 import { useClient } from "@revolt/client";
-import { anyTextMatches } from "@revolt/common/lib/arabicFold";
+import { anyTextMatches, hasSearchText } from "@revolt/common/lib/arabicFold";
 import { Avatar, TextField } from "@revolt/ui";
 import { Icon } from "@revolt/ui/icons/Icon";
 
@@ -24,6 +24,8 @@ export function MemberPicker(props: {
   max: number;
   /** Members that can't be chosen here (e.g. yourself) */
   exclude?: string[];
+  /** Keep what was typed after a pick (the parent closes the picker when the pick is saved) */
+  keepQueryOnPick?: boolean;
   testId: string;
 }) {
   const { t } = useLingui();
@@ -67,7 +69,9 @@ export function MemberPicker(props: {
     setQuery(text);
     clearTimeout(timer);
     const name = text.trim();
-    if (!name) {
+    // only marks (tatweel, vowel marks, invisible ones) fold to nothing,
+    // which would match everyone: that is no search yet
+    if (!hasSearchText(name)) {
       asked++;
       setFound([]);
       setSearching(false);
@@ -117,7 +121,8 @@ export function MemberPicker(props: {
   const add = (user: User) => {
     if (full() || props.value.includes(user.id)) return;
     props.onChange([...props.value, user.id]);
-    search("");
+    // where the choice is saved at once, a refusal keeps the search
+    if (!props.keepQueryOnPick) search("");
   };
 
   return (
@@ -166,7 +171,7 @@ export function MemberPicker(props: {
           data-testid={`${props.testId}-search`}
         />
       </Show>
-      <Show when={query().trim() && !full()}>
+      <Show when={hasSearchText(query()) && !full()}>
         <Results role="listbox" aria-label={t`Members found`}>
           <For
             each={choices()}

@@ -60,6 +60,15 @@ export function textMatches(text: string | undefined | null, query: string) {
   );
 }
 
+/**
+ * Whether a query has anything left to search for once folded: one made of
+ * tatweel, vowel marks or invisible marks only folds to nothing, and an
+ * empty query matches every name
+ */
+export function hasSearchText(query: string) {
+  return foldText(query) !== "";
+}
+
 /** Whether any of the texts has what was typed */
 export function anyTextMatches(
   texts: (string | undefined | null)[],
