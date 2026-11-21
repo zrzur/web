@@ -27,20 +27,28 @@
     "تحتاج إلى صلاحية «إدارة الصلاحيات» لتغيير من يرى هذه القناة.",
     "Du brauchst „Berechtigungen verwalten“, um zu ändern, wer diesen Kanal sieht."
   ],
-  "{name} can now see this channel": [
-    "{name} يستطيع الآن رؤية هذه القناة",
-    "{name} sieht diesen Kanal jetzt"
-  ],
-  "{name} can no longer see this channel": [
-    "{name} لم يعد يستطيع رؤية هذه القناة",
-    "{name} sieht diesen Kanal nicht mehr"
-  ],
   "This person is no longer in the server.": [
     "هذا الشخص لم يعد في السيرفر.",
     "Diese Person ist nicht mehr auf dem Server."
   ],
   "This thread follows who can see #{0}.": [
     "يتبع هذا الخيط إعدادات من يرى القناة #{0}.",
-    "Dieser Thread folgt, wer #{0} sieht."
+    "Dieser Thread übernimmt, wer #{0} sehen kann."
+  ],
+  "This thread follows who can see its channel.": [
+    "يتبع هذا الخيط إعدادات من يرى قناته.",
+    "Dieser Thread übernimmt, wer seinen Kanal sehen kann."
+  ],
+  "{name} was added to the list": [
+    "تمت إضافة {name} إلى القائمة",
+    "{name} wurde zur Liste hinzugefügt"
+  ],
+  "{name} was removed from the list": [
+    "تمت إزالة {name} من القائمة",
+    "{name} wurde von der Liste entfernt"
+  ],
+  "A member who left": [
+    "عضو غادر السيرفر",
+    "Ein Mitglied, das gegangen ist"
   ]
 }

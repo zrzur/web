@@ -31096,13 +31096,7 @@ msgstr "You can't give permissions you don't have yourself."
 msgid "You need “Manage permissions” to change who can see this channel."
 msgstr "You need “Manage permissions” to change who can see this channel."
 
-#: components/app/interface/settings/channel/permissions/VisibilityPeople.tsx
-msgid "{name} can no longer see this channel"
-msgstr "{name} can no longer see this channel"
 
-#: components/app/interface/settings/channel/permissions/VisibilityPeople.tsx
-msgid "{name} can now see this channel"
-msgstr "{name} can now see this channel"
 
 #: components/app/interface/settings/channel/permissions/VisibilityPeople.tsx
 msgid "This person is no longer in the server."
@@ -31112,3 +31106,19 @@ msgstr "This person is no longer in the server."
 #: components/app/interface/settings/channel/permissions/ChannelVisibility.tsx
 msgid "This thread follows who can see #{0}."
 msgstr "This thread follows who can see #{0}."
+
+#: components/app/interface/settings/channel/permissions/VisibilityPeople.tsx
+msgid "{name} was added to the list"
+msgstr "{name} was added to the list"
+
+#: components/app/interface/settings/channel/permissions/VisibilityPeople.tsx
+msgid "{name} was removed from the list"
+msgstr "{name} was removed from the list"
+
+#: components/app/interface/settings/channel/permissions/VisibilityPeople.tsx
+msgid "A member who left"
+msgstr "A member who left"
+
+#: components/app/interface/settings/channel/permissions/ChannelVisibility.tsx
+msgid "This thread follows who can see its channel."
+msgstr "This thread follows who can see its channel."

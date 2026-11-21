@@ -24,6 +24,8 @@ export function VisibilityPeople(props: {
   context: Channel;
   isPrivate: boolean;
   canEdit: boolean;
+  /** Say a change aloud (the live region lives outside the panel) */
+  onSay: (text: string) => void;
 }) {
   const { t } = useLingui();
   const client = useClient();
@@ -37,13 +39,17 @@ export function VisibilityPeople(props: {
 
   // names and pictures of people not loaded yet: asked for once each
   const asked = new Set<string>();
+  /** People the server no longer has as members */
+  const [gone, setGone] = createSignal<ReadonlySet<string>>(new Set());
   createEffect(() => {
     const server = props.context.server;
     if (!server) return;
     for (const id of people()) {
       if (asked.has(id) || memberOf(id)) continue;
       asked.add(id);
-      void server.fetchMember(id).catch(() => undefined);
+      void server
+        .fetchMember(id)
+        .catch(() => setGone((now) => new Set([...now, id])));
     }
   });
 
@@ -54,8 +60,12 @@ export function VisibilityPeople(props: {
           user: id,
         })
       : undefined;
+  // never a raw id: someone who left is named as such, and keeps Remove
   const nameOf = (id: string) =>
-    memberOf(id)?.displayName ?? client().users.get(id)?.displayName ?? id;
+    memberOf(id)?.displayName ??
+    (gone().has(id) ? t`A member who left` : undefined) ??
+    client().users.get(id)?.displayName ??
+    t`Member`;
   const avatarOf = (id: string) =>
     memberOf(id)?.animatedAvatarURL ??
     client().users.get(id)?.animatedAvatarURL;
@@ -93,13 +103,6 @@ export function VisibilityPeople(props: {
     }
   }
 
-  /** Said aloud after a change (a polite live region) */
-  const [said, setSpoken] = createSignal("");
-  // the same words twice are read out twice
-  const setSaid = (text: string) => {
-    setSpoken("");
-    queueMicrotask(() => setSpoken(text));
-  };
   const focusOn = (testId: string) =>
     document.querySelector<HTMLElement>(`[data-testid="${testId}"]`)?.focus();
 
@@ -107,7 +110,8 @@ export function VisibilityPeople(props: {
     if (!(await save(id, memberAdd(overrides()[id])))) return;
     closePicker();
     const name = nameOf(id);
-    setSaid(t`${name} can now see this channel`);
+    // what certainly happened: roles may still decide what they see
+    props.onSay(t`${name} was added to the list`);
     // back to the button that opened the picker
     queueMicrotask(() => focusOn("channel-people-add"));
   };
@@ -129,14 +133,9 @@ export function VisibilityPeople(props: {
     // your own row has no Remove, so it is skipped
     const removable = people().filter((other) => other !== self());
     const next = removable[removable.indexOf(id) + 1];
-    const wasPrivate = props.isPrivate;
     if (!(await save(id, memberRemove(overrides()[id])))) return;
     const name = nameOf(id);
-    setSaid(
-      wasPrivate
-        ? t`${name} can no longer see this channel`
-        : t`${name} can now see this channel`,
-    );
+    props.onSay(t`${name} was removed from the list`);
     setLeaving({ id, next });
   };
 
@@ -260,25 +259,9 @@ export function VisibilityPeople(props: {
           )}
         </For>
       </Show>
-      {/* outside the list: it stays when the last row goes */}
-      <LiveRegion aria-live="polite" data-testid="channel-people-said">
-        {said()}
-      </LiveRegion>
     </>
   );
 }
-
-/** Read out, not shown */
-const LiveRegion = styled("span", {
-  base: {
-    position: "absolute",
-    width: "1px",
-    height: "1px",
-    overflow: "hidden",
-    clipPath: "inset(50%)",
-    whiteSpace: "nowrap",
-  },
-});
 
 const PickerBox = styled("div", {
   base: {

@@ -1,7 +1,8 @@
-import { Show, createMemo } from "solid-js";
+import { Show, createMemo, createSignal } from "solid-js";
 
 import { Trans, useLingui } from "@lingui/solid/macro";
 import { Channel } from "@zrzur/sdk/solid";
+import { styled } from "styled-system/jsx";
 
 import { SettingsRow, SettingsSection } from "@revolt/ui";
 import { Icon } from "@revolt/ui/icons/Icon";
@@ -37,6 +38,15 @@ export function ChannelVisibility(props: { context: Channel }) {
     };
   });
 
+  /** Said aloud after a change, from a live region outside the panel (a
+   *  span inside it would break the hairline between its rows) */
+  const [said, setSpoken] = createSignal("");
+  // the same words twice are read out twice
+  const say = (text: string) => {
+    setSpoken("");
+    queueMicrotask(() => setSpoken(text));
+  };
+
   return (
     <Show
       when={!props.context.parentId}
@@ -47,43 +57,69 @@ export function ChannelVisibility(props: { context: Channel }) {
             data-testid="channel-visibility-thread"
             icon={<Icon name="link" size={20} />}
             title={
-              <Trans>
-                This thread follows who can see #
-                {props.context.parent?.name ?? ""}.
-              </Trans>
+              <Show
+                when={props.context.parent?.name}
+                fallback={
+                  <Trans>This thread follows who can see its channel.</Trans>
+                }
+              >
+                {(name) => (
+                  <Trans>This thread follows who can see #{name()}.</Trans>
+                )}
+              </Show>
             }
           />
         </SettingsSection>
       }
     >
-      <VisibilitySection
-        server={props.context.server}
-        overrides={overrides()}
-        setPermissions={(target, value) =>
-          props.context.setPermissions(target, value)
-        }
-        canEdit={props.context.havePermission("ManagePermissions")}
-        testId="channel"
-        more={(state) => (
-          <VisibilityPeople
-            context={props.context}
-            isPrivate={state.isPrivate}
-            canEdit={props.context.havePermission("ManagePermissions")}
-          />
-        )}
-        words={{
-          title: <Trans>Who can see this channel</Trans>,
-          privateTitle: <Trans>Private channel</Trans>,
-          privateOn: <Trans>Only the roles you let in below can see it.</Trans>,
-          privateOff: <Trans>Everyone in the server can see it.</Trans>,
-          administrator: <Trans>Administrator: sees every channel</Trans>,
-          roleSees: <Trans>Can see this channel</Trans>,
-          roleHidden: <Trans>Can't see this channel</Trans>,
-          owner: <Trans>The server owner sees every channel.</Trans>,
-          hideFrom: (role) => t`Hide this channel from ${role}`,
-          letIn: (role) => t`Let ${role} see this channel`,
-        }}
-      />
+      <>
+        <VisibilitySection
+          server={props.context.server}
+          overrides={overrides()}
+          setPermissions={(target, value) =>
+            props.context.setPermissions(target, value)
+          }
+          canEdit={props.context.havePermission("ManagePermissions")}
+          testId="channel"
+          more={(state) => (
+            <VisibilityPeople
+              context={props.context}
+              isPrivate={state.isPrivate}
+              canEdit={props.context.havePermission("ManagePermissions")}
+              onSay={say}
+            />
+          )}
+          words={{
+            title: <Trans>Who can see this channel</Trans>,
+            privateTitle: <Trans>Private channel</Trans>,
+            privateOn: (
+              <Trans>Only the roles you let in below can see it.</Trans>
+            ),
+            privateOff: <Trans>Everyone in the server can see it.</Trans>,
+            administrator: <Trans>Administrator: sees every channel</Trans>,
+            roleSees: <Trans>Can see this channel</Trans>,
+            roleHidden: <Trans>Can't see this channel</Trans>,
+            owner: <Trans>The server owner sees every channel.</Trans>,
+            hideFrom: (role) => t`Hide this channel from ${role}`,
+            letIn: (role) => t`Let ${role} see this channel`,
+          }}
+        />
+        <LiveRegion aria-live="polite" data-testid="channel-people-said">
+          {said()}
+        </LiveRegion>
+      </>
     </Show>
   );
 }
+
+/** Read out, not shown */
+const LiveRegion = styled("span", {
+  base: {
+    position: "absolute",
+    width: "1px",
+    height: "1px",
+    overflow: "hidden",
+    clipPath: "inset(50%)",
+    whiteSpace: "nowrap",
+  },
+});
