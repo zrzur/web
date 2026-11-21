@@ -23187,6 +23187,10 @@ msgid "The bot will not be granted any permissions."
 msgstr "The bot will not be granted any permissions."
 
 #: src/interface/OAuth.tsx
+msgid "The bot's permissions there, at most (only the ones you hold, with Manage Roles):"
+msgstr "The bot's permissions there, at most (only the ones you hold, with Manage Roles):"
+
+#: src/interface/OAuth.tsx
 msgid "The bot's permissions there:"
 msgstr "The bot's permissions there:"
 

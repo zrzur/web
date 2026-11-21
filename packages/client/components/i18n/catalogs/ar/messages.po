@@ -23184,6 +23184,10 @@ msgid "The bot will not be granted any permissions."
 msgstr "لن يُمنح البوت أي صلاحيات."
 
 #: src/interface/OAuth.tsx
+msgid "The bot's permissions there, at most (only the ones you hold, with Manage Roles):"
+msgstr "صلاحيات البوت هناك، في أقصى حد (ما تملكه منها فقط، مع إدارة الأدوار):"
+
+#: src/interface/OAuth.tsx
 msgid "The bot's permissions there:"
 msgstr "صلاحيات البوت هناك:"
 

@@ -144,12 +144,15 @@ function Consent() {
         code_challenge_method: value("code_challenge_method"),
         approve,
       };
-      if (approve && installs()) {
-        body.server_id = server();
-        // exactly what the page showed (the preview names the defaults when
-        // the link has none); 0 means no permissions, never "the defaults"
-        body.permissions = preview()?.permissions ?? 0;
-      }
+      if (approve && installs()) body.server_id = server();
+      // Only what the link names. Without it the server gives the bot its
+      // default permissions, the ones the page lists, at most: only the
+      // part the installer holds, and none without Manage Roles. Sending
+      // the list back would make it a strict request that fails for an
+      // installer without Manage Roles.
+      const permissions = params().get("permissions");
+      if (permissions !== null && permissions !== "")
+        body.permissions = Number(permissions);
       const { redirect } = await oauthApi.decide(client(), body);
       // The server only answers with the app's registered redirect URI
       window.location.assign(redirect);
@@ -324,7 +327,17 @@ function Consent() {
                       return (
                         <>
                           <PanelTitle>
-                            <Trans>The bot's permissions there:</Trans>
+                            <Show
+                              when={params().get("permissions")}
+                              fallback={
+                                <Trans>
+                                  The bot's permissions there, at most (only
+                                  the ones you hold, with Manage Roles):
+                                </Trans>
+                              }
+                            >
+                              <Trans>The bot's permissions there:</Trans>
+                            </Show>
                           </PanelTitle>
                           <Allow>
                             <For each={listed}>
