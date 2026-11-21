@@ -177,7 +177,7 @@ export function VisibilityPeople(props: {
         {(id) => (
           <SettingsRow
             data-testid={`channel-person-${id}`}
-            icon={<Avatar size={24} src={avatarOf(id)} fallback={nameOf(id)} />}
+            icon={<Avatar size={20} src={avatarOf(id)} fallback={nameOf(id)} />}
             title={<Name>{nameOf(id)}</Name>}
             description={
               props.isPrivate ? (
