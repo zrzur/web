@@ -2,6 +2,11 @@
 
 ## Unreleased
 
+### Custom invite links follow the rule (2026-11-21, owner's rule)
+
+* Server settings → Invites and sharing says in one line who can have a custom link: official and partner servers, and servers with 1,000 members that are active (100 messages from 20 members in 30 days; the numbers come from the server). A server that can't have one sees why instead of the claim field: its members against 1,000 and its activity against the rule (and, with billing on, the Wings level as another way in).
+* A server whose link counts down sees a banner with the date the link ends and what keeps it. A refused claim (`VanityNotEligible`) is explained in plain words in the same panel (ar, en, de).
+
 ### A friend request opens the sender's profile (2026-11-21)
 
 * **From the phone Notifications page:** the sender's picture and the line "… sent you a friend request" are one button (44 px high) that opens their profile. Screen readers hear the sentence they see as its name, then "Open profile" (ar, en, de) as its description. Accept, Decline and Send message are separate buttons and are not touched by it. The page closes first so the profile is not under it; the profile has its own Accept.

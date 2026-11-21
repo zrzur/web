@@ -1,0 +1,42 @@
+{
+  "Official and partner servers can have one, and so can servers with {0} members that are active ({1} messages from {2} members in {3} days).": [
+    "يمكن للسيرفرات الرسمية والشريكة الحصول عليه، وكذلك السيرفرات النشطة التي لا يقل عدد أعضائها عن {0} ({1} رسالة من {2} عضوًا خلال {3} يومًا).",
+    "Offizielle Server und Partnerserver können einen haben, ebenso aktive Server mit {0} Mitgliedern ({1} Nachrichten von {2} Mitgliedern in {3} Tagen)."
+  ],
+  "Checking this server…": [
+    "جارٍ فحص هذا السيرفر…",
+    "Server wird geprüft …"
+  ],
+  "This server can't have a custom link yet": [
+    "لا يمكن لهذا السيرفر الحصول على رابط مخصص بعد",
+    "Dieser Server kann noch keinen eigenen Link haben"
+  ],
+  "Members: {0} of {1}": [
+    "الأعضاء: {0} من {1}",
+    "Mitglieder: {0} von {1}"
+  ],
+  "Activity: {0} of {1} messages from {2} of {3} members in the last {4} days": [
+    "النشاط: {0} من {1} رسالة، كتبها {2} من {3} عضوًا خلال آخر {4} يومًا",
+    "Aktivität: {0} von {1} Nachrichten von {2} von {3} Mitgliedern in den letzten {4} Tagen"
+  ],
+  "Or reach Wings level {0} ({1} Wings)": [
+    "أو بلّغ مستوى الأجنحة {0} ({1} من الأجنحة)",
+    "Oder erreiche Flügel-Stufe {0} ({1} Flügel)"
+  ],
+  "This server no longer meets the rule for a custom link. The link works until {0}, then the name is released. Reach {1} members and stay active to keep it.": [
+    "لم يعد هذا السيرفر يستوفي شرط الرابط المخصص. يعمل الرابط حتى {0}، ثم يُسترَدّ الاسم. للاحتفاظ به، يجب أن يبلغ عدد الأعضاء {1} وأن يبقى السيرفر نشطًا.",
+    "Dieser Server erfüllt die Regel für einen eigenen Link nicht mehr. Der Link funktioniert bis {0}, danach wird der Name freigegeben. Erreiche {1} Mitglieder und bleib aktiv, um ihn zu behalten."
+  ],
+  "This server needs at least {members} members for a custom link.": [
+    "يحتاج هذا السيرفر إلى {members} عضو على الأقل للحصول على رابط مخصص.",
+    "Dieser Server braucht mindestens {members} Mitglieder für einen eigenen Link."
+  ],
+  "This server needs to be more active for a custom link: {messages} messages from {authors} members in the last {period} days.": [
+    "يحتاج هذا السيرفر إلى نشاط أكبر للحصول على رابط مخصص: {messages} رسالة من {authors} عضوًا خلال آخر {period} يومًا.",
+    "Dieser Server muss für einen eigenen Link aktiver sein: {messages} Nachrichten von {authors} Mitgliedern in den letzten {period} Tagen."
+  ],
+  "A custom link needs at least {members} members and an active server: {messages} messages from {authors} members in the last {period} days.": [
+    "يحتاج الرابط المخصص إلى {members} عضو على الأقل وسيرفر نشط: {messages} رسالة من {authors} عضوًا خلال آخر {period} يومًا.",
+    "Ein eigener Link braucht mindestens {members} Mitglieder und einen aktiven Server: {messages} Nachrichten von {authors} Mitgliedern in den letzten {period} Tagen."
+  ]
+}
