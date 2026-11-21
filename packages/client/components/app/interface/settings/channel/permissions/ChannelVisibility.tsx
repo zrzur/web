@@ -3,6 +3,7 @@ import { createMemo } from "solid-js";
 import { Trans, useLingui } from "@lingui/solid/macro";
 import { Channel } from "@zrzur/sdk/solid";
 
+import { VisibilityPeople } from "./VisibilityPeople";
 import { VisibilitySection, pairs } from "./VisibilitySection";
 import { pair } from "./visibility";
 
@@ -42,6 +43,13 @@ export function ChannelVisibility(props: { context: Channel }) {
       }
       canEdit={props.context.havePermission("ManagePermissions")}
       testId="channel"
+      more={(state) => (
+        <VisibilityPeople
+          context={props.context}
+          isPrivate={state.isPrivate}
+          canEdit={props.context.havePermission("ManagePermissions")}
+        />
+      )}
       words={{
         title: <Trans>Who can see this channel</Trans>,
         privateTitle: <Trans>Private channel</Trans>,

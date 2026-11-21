@@ -1,0 +1,30 @@
+{
+  "Add people": [
+    "إضافة أشخاص",
+    "Personen hinzufügen"
+  ],
+  "People you add here can see it, whatever their roles.": [
+    "الأشخاص الذين تضيفهم هنا يرون القناة، أيًّا كانت أدوارهم.",
+    "Personen, die du hier hinzufügst, sehen ihn, egal welche Rollen sie haben."
+  ],
+  "Remove {0} from this list": [
+    "إزالة {0} من هذه القائمة",
+    "{0} aus dieser Liste entfernen"
+  ],
+  "These people can't see it, whatever their roles allow.": [
+    "لا يرى هؤلاء الأشخاص القناة، مهما سمحت لهم أدوارهم.",
+    "Diese Personen sehen ihn nicht, egal was ihre Rollen erlauben."
+  ],
+  "You can't change access for someone ranked the same as you or above you.": [
+    "لا يمكنك تغيير وصول شخص رتبته مثل رتبتك أو أعلى منها.",
+    "Du kannst den Zugang von jemandem mit gleichem oder höherem Rang nicht ändern."
+  ],
+  "You can't give permissions you don't have yourself.": [
+    "لا يمكنك منح صلاحيات لا تملكها أنت.",
+    "Du kannst keine Berechtigungen vergeben, die du selbst nicht hast."
+  ],
+  "You need “Manage permissions” to change who can see this channel.": [
+    "تحتاج إلى صلاحية «إدارة الصلاحيات» لتغيير من يرى هذه القناة.",
+    "Du brauchst „Berechtigungen verwalten“, um zu ändern, wer diesen Kanal sieht."
+  ]
+}

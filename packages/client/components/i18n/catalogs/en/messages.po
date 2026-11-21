@@ -31062,3 +31062,36 @@ msgstr "Upload a picture"
 #: components/modal/modals/ServerEventEditor.tsx
 msgid "Upload a picture of your own; it is cropped to 16:9. The ready covers are there if you have none."
 msgstr "Upload a picture of your own; it is cropped to 16:9. The ready covers are there if you have none."
+
+#: components/app/interface/settings/channel/permissions/VisibilityPeople.tsx
+msgid "Add people"
+msgstr "Add people"
+
+#: components/app/interface/settings/channel/permissions/VisibilityPeople.tsx
+msgid "People"
+msgstr "People"
+
+#: components/app/interface/settings/channel/permissions/VisibilityPeople.tsx
+msgid "People you add here can see it, whatever their roles."
+msgstr "People you add here can see it, whatever their roles."
+
+#. placeholder {0}: nameOf(id)
+#: components/app/interface/settings/channel/permissions/VisibilityPeople.tsx
+msgid "Remove {0} from this list"
+msgstr "Remove {0} from this list"
+
+#: components/app/interface/settings/channel/permissions/VisibilityPeople.tsx
+msgid "These people can't see it, whatever their roles allow."
+msgstr "These people can't see it, whatever their roles allow."
+
+#: components/app/interface/settings/channel/permissions/VisibilityPeople.tsx
+msgid "You can't change access for someone ranked the same as you or above you."
+msgstr "You can't change access for someone ranked the same as you or above you."
+
+#: components/app/interface/settings/channel/permissions/VisibilityPeople.tsx
+msgid "You can't give permissions you don't have yourself."
+msgstr "You can't give permissions you don't have yourself."
+
+#: components/app/interface/settings/channel/permissions/VisibilityPeople.tsx
+msgid "You need “Manage permissions” to change who can see this channel."
+msgstr "You need “Manage permissions” to change who can see this channel."
