@@ -31086,3 +31086,11 @@ msgstr "Use letters, numbers, spaces and _ . - only."
 #: components/modal/modals/EditBotUsername.tsx
 msgid "Change bot name"
 msgstr "Change bot name"
+
+#: src/interface/Friends.tsx
+msgid "This profile could not be opened. The account may no longer exist."
+msgstr "This profile could not be opened. The account may no longer exist."
+
+#: src/interface/navigation/NotificationsPhone.tsx
+msgid "Open profile"
+msgstr "Open profile"

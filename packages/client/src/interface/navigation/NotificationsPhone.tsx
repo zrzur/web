@@ -6,12 +6,14 @@ import {
   createMemo,
   createResource,
   createSignal,
+  createUniqueId,
   onCleanup,
 } from "solid-js";
 
 import { Trans, useLingui } from "@lingui/solid/macro";
 import { useNavigate } from "@solidjs/router";
 import type { Message, User } from "@zrzur/sdk/solid";
+import { css } from "styled-system/css";
 import { styled } from "styled-system/jsx";
 
 import { openInbox } from "@revolt/app/interface/saved/inboxView";
@@ -40,7 +42,7 @@ export function NotificationsPhone(props: { onClose: () => void }) {
   const navigate = useNavigate();
   const state = useState();
   const dayjs = useTime();
-  const { showError } = useModals();
+  const { openModal, showError } = useModals();
 
   const [filter, setFilter] = createSignal<Filter>("all");
   const [mentions] = createResource(() => client().fetchMentions(50));
@@ -127,6 +129,14 @@ export function NotificationsPhone(props: { onClose: () => void }) {
       })
       .catch(showError);
 
+  // ids that tie each request button to its sentence and its hint
+  const ids = createUniqueId();
+
+  const openProfile = (user: User) => {
+    props.onClose();
+    openModal({ type: "user_profile", user });
+  };
+
   const showRequests = () => filter() !== "mentions" && requests().length > 0;
   const showMentions = () => filter() !== "friends";
   const nothing = () =>
@@ -198,39 +208,54 @@ export function NotificationsPhone(props: { onClose: () => void }) {
           <Rows>
             <For each={requests()}>
               {(user) => (
-                <Row data-new>
-                  <Avatar
-                    size={44}
-                    src={user.animatedAvatarURL}
-                    fallback={user.displayName}
-                  />
-                  <Text>
-                    <p>
-                      <Trans>
-                        <strong dir="auto">{user.displayName}</strong> sent you
-                        a friend request.
-                      </Trans>
-                    </p>
-                    <Answers>
-                      <Answer
-                        type="button"
-                        data-primary
-                        onClick={() => user.addFriend().catch(showError)}
-                      >
-                        <Trans>Accept</Trans>
-                      </Answer>
-                      <Answer
-                        type="button"
-                        onClick={() => user.removeFriend().catch(showError)}
-                      >
-                        <Trans>Decline</Trans>
-                      </Answer>
-                      <Answer type="button" onClick={() => message(user)}>
-                        <Trans>Send message</Trans>
-                      </Answer>
-                    </Answers>
-                  </Text>
-                </Row>
+                <Request data-new>
+                  {/* who sent it: one area that opens their profile (the
+                      page is closed first, it would cover the profile; the
+                      profile has its own Accept). Its name is the sentence
+                      people see; "Open profile" is said after it */}
+                  <Who
+                    type="button"
+                    data-testid="friend-request-profile"
+                    aria-labelledby={`${ids}-${user.id}-line`}
+                    aria-describedby={`${ids}-${user.id}-hint`}
+                    onClick={() => openProfile(user)}
+                  >
+                    <Avatar
+                      size={44}
+                      src={user.animatedAvatarURL}
+                      fallback={user.displayName}
+                    />
+                    <Text>
+                      <p id={`${ids}-${user.id}-line`}>
+                        <Trans>
+                          <strong dir="auto">{user.displayName}</strong> sent
+                          you a friend request.
+                        </Trans>
+                      </p>
+                      <span id={`${ids}-${user.id}-hint`} class={srOnly}>
+                        <Trans>Open profile</Trans>
+                      </span>
+                    </Text>
+                  </Who>
+                  <Answers data-request>
+                    <Answer
+                      type="button"
+                      data-primary
+                      onClick={() => user.addFriend().catch(showError)}
+                    >
+                      <Trans>Accept</Trans>
+                    </Answer>
+                    <Answer
+                      type="button"
+                      onClick={() => user.removeFriend().catch(showError)}
+                    >
+                      <Trans>Decline</Trans>
+                    </Answer>
+                    <Answer type="button" onClick={() => message(user)}>
+                      <Trans>Send message</Trans>
+                    </Answer>
+                  </Answers>
+                </Request>
               )}
             </For>
           </Rows>
@@ -456,7 +481,28 @@ const rowStyle = {
   },
 } as const;
 
-const Row = styled("div", rowStyle);
+/** A friend request: who sent it, then the answers under the words */
+const Request = styled("div", {
+  base: {
+    display: "flex",
+    flexDirection: "column",
+    paddingBlockEnd: "12px",
+    "&[data-new]": {
+      background: "color-mix(in srgb, var(--z-accent) 7%, transparent)",
+    },
+  },
+});
+
+/** The sender's picture and the sentence: one target that opens the profile */
+const Who = styled("button", {
+  base: {
+    ...rowStyle.base,
+    position: "relative",
+    minHeight: "44px",
+    paddingBlockEnd: 0,
+    cursor: "pointer",
+  },
+});
 
 /** A row that opens what it shows */
 const RowButton = styled("button", rowStyle);
@@ -518,6 +564,8 @@ const Answers = styled("div", {
     flexWrap: "wrap",
     gap: "8px",
     marginTop: "8px",
+    // under the words, past the 44 px picture and the 12 px gap
+    "&[data-request]": { paddingInline: "70px 14px" },
   },
 });
 
@@ -557,4 +605,14 @@ const Center = styled("div", {
     color: "var(--z-fg-muted)",
     "--z-icon-color": "var(--z-icon-neutral)",
   },
+});
+
+/** Said by screen readers, not shown */
+const srOnly = css({
+  position: "absolute",
+  width: "1px",
+  height: "1px",
+  overflow: "hidden",
+  clip: "rect(0 0 0 0)",
+  whiteSpace: "nowrap",
 });

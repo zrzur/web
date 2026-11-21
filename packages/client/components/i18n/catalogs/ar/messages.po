@@ -31083,3 +31083,11 @@ msgstr "استخدم الحروف والأرقام والمسافات و_ . - ف
 #: components/modal/modals/EditBotUsername.tsx
 msgid "Change bot name"
 msgstr "تغيير اسم البوت"
+
+#: src/interface/Friends.tsx
+msgid "This profile could not be opened. The account may no longer exist."
+msgstr "تعذّر فتح هذا الملف الشخصي. ربما لم يعد الحساب موجودًا."
+
+#: src/interface/navigation/NotificationsPhone.tsx
+msgid "Open profile"
+msgstr "فتح الملف الشخصي"

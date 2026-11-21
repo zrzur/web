@@ -2,6 +2,11 @@
 
 ## Unreleased
 
+### A friend request opens the sender's profile (2026-11-21)
+
+* **From the phone Notifications page:** the sender's picture and the line "… sent you a friend request" are one button (44 px high) that opens their profile. Screen readers hear the sentence they see as its name, then "Open profile" (ar, en, de) as its description. Accept, Decline and Send message are separate buttons and are not touched by it. The page closes first so the profile is not under it; the profile has its own Accept.
+* **From a notification:** `/friends?profile=<user id>` opens that person's profile on the Friends page (fetched when not in the cache) and takes the parameter off the address. An unknown or malformed id shows a short notice instead ("This profile could not be opened…"). The backend now sends this link with friend-request web pushes; the service worker still opens only links on its own origin. Signed out, the link goes through sign-in and still opens the profile (the page and query are kept for after login, as before).
+
 ### Speed: scrolling, switching and starting (2026-11-21)
 
 * **Scrolling back and opening a channel or server stall less:** a channel keeps 150 rows or more, and the browser styled, laid out and painted every one of them each time a page of older messages came in or a channel opened. In Chromium engines (Chrome, Edge, the desktop app, Android) the content of rows out of view is now skipped (`content-visibility: auto` on an inner box of the message row, which keeps its last height). The hover toolbar is outside that box, and the box has room for avatar frames, so neither is cut. WebKit keeps drawing every row: there, rows above the reader that changed size moved the text. Timings are measured in the speed report of 2026-11-21.
