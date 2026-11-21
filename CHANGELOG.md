@@ -2,6 +2,10 @@
 
 ## Unreleased
 
+### Speed: the first answer of the live connection comes compressed (2026-11-21)
+
+* **Opening the app waits less on a slow connection:** the app asks the gateway for compressed frames (`compression: true` in `components/instance/Instance.ts`, SDK `Gateway` option). The first answer, which lists every server, channel and member, is about a sixth of its size where the server allows it; a server that does not compress sends text as before. Packets are still handled in the order they came.
+
 ### Speed: scrolling, switching and starting (2026-11-21)
 
 * **Scrolling back and opening a channel or server stall less:** a channel keeps 150 rows or more, and the browser styled, laid out and painted every one of them each time a page of older messages came in or a channel opened. In Chromium engines (Chrome, Edge, the desktop app, Android) the content of rows out of view is now skipped (`content-visibility: auto` on an inner box of the message row, which keeps its last height). The hover toolbar is outside that box, and the box has room for avatar frames, so neither is cut. WebKit keeps drawing every row: there, rows above the reader that changed size moved the text. Timings are measured in the speed report of 2026-11-21.
