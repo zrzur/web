@@ -40684,8 +40684,8 @@
     },
     {
       "path": "packages/client/scripts/bot-api/extract.mjs",
-      "sha256": "ff02c385235cf4b8ba7896895f15c5ed8e34b964411e0a4cb4a388ada6d1f11a",
-      "bytes": 34793,
+      "sha256": "ef26e9e090a8c2897d78d763c2933b5990b390292b314fd4948a17895c399e27",
+      "bytes": 34939,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -40696,8 +40696,8 @@
     },
     {
       "path": "packages/client/scripts/bot-api/live/doc-accuracy.mjs",
-      "sha256": "2dae30a1ef213254ad1d52ee9111043805aaca230fecd71f407cd92197dec150",
-      "bytes": 84877,
+      "sha256": "bf09c292e72a82683f4465ac67801eef34b52131e03dbe4f28931516a487db40",
+      "bytes": 85031,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -40719,6 +40719,12 @@
       "category": "product-source-or-build-manifest"
     },
     {
+      "path": "packages/client/scripts/bot-api/public-sample.mjs",
+      "sha256": "c186dd2a3ede5667227360c8702af3e70faf7673d31aa649fe2dc39c37fecd14",
+      "bytes": 797,
+      "category": "product-source-or-build-manifest"
+    },
+    {
       "path": "packages/client/scripts/bot-api/split.mjs",
       "sha256": "f39941812aa278735ce703b4dd12a1adc5951ac1884c72c35e10356c2ac91ef9",
       "bytes": 4790,
@@ -40726,8 +40732,8 @@
     },
     {
       "path": "packages/client/scripts/bot-api/verification.json",
-      "sha256": "a362585731a18e1629fb16498a04c5dbbf83d0823af60542644ac6f20878d98e",
-      "bytes": 106867,
+      "sha256": "7bd0dbd954aa8c1ae3453d20a7c0af5eb53ea24cdeb8bdc90ac99c2d1ac5192a",
+      "bytes": 106800,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -42988,8 +42994,8 @@
     },
     {
       "path": "packages/client/src/interface/developers/data/botApi.json",
-      "sha256": "45ec83d9f253749d3a6383895c935666084d07f123daeb288e6b05f023230e14",
-      "bytes": 1158014,
+      "sha256": "ad1dbfab7312ba26b96f090f0f822d7bea37152dc47e87fd326bb9e120ba869b",
+      "bytes": 1157947,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -43012,7 +43018,7 @@
     },
     {
       "path": "packages/client/src/interface/developers/data/botApi/meta.json",
-      "sha256": "356c8d902d9293a35f6c369d1f90ca7c6836069b2d80350ef277b93cc4c8709c",
+      "sha256": "2bb4fab0a958a7bf5fce007eed48a76d994f1019cf1d6cd027b3ad8cbd480423",
       "bytes": 10187,
       "category": "product-source-or-build-manifest"
     },
@@ -43036,13 +43042,13 @@
     },
     {
       "path": "packages/client/src/interface/developers/data/botApi/section-getting-started.json",
-      "sha256": "a33ac3b46907dfbbd3dd2d9dcbed6eaf38bd6060b2fdd1f2afabbbacc4692cc0",
-      "bytes": 12687,
+      "sha256": "c900aa7cd80ecb00701220e6daa905f6fc160d2d55ba07efe1591abde04c78fe",
+      "bytes": 12620,
       "category": "product-source-or-build-manifest"
     },
     {
       "path": "packages/client/src/interface/developers/data/botApi/section-interactions.json",
-      "sha256": "42151e7f07716e111d43de291c81952054a0b7907235e734c71759fde8299f0a",
+      "sha256": "903450faaf7a8160724545c87126b07d59019a63d7482f67f59ee9b5220d7a13",
       "bytes": 79176,
       "category": "product-source-or-build-manifest"
     },
@@ -43066,7 +43072,7 @@
     },
     {
       "path": "packages/client/src/interface/developers/data/botApi/section-oauth2.json",
-      "sha256": "e78ceb1be086e2a85164f121858f6fffc209ac0069aaff505957d2a797428dae",
+      "sha256": "3519388cae19e2c53591ebbfe8505c18bbe71101bb2b8d207fcdfc8d30987a69",
       "bytes": 15830,
       "category": "product-source-or-build-manifest"
     },

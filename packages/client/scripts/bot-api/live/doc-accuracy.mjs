@@ -2570,10 +2570,14 @@ const passed = results.filter((r) => r.ok).length;
 const pending = results.filter((r) => !r.ok && r.pending).length;
 const failed = results.length - passed - pending;
 
-const ordered = Object.fromEntries(
-  Object.keys(verification)
-    .sort()
-    .map((k) => [k, verification[k]]),
+// the dev stack's own keys never reach the public docs
+const { maskServerValues } = await import("../public-sample.mjs");
+const ordered = maskServerValues(
+  Object.fromEntries(
+    Object.keys(verification)
+      .sort()
+      .map((k) => [k, verification[k]]),
+  ),
 );
 writeFileSync(
   join(botApiDir, "verification.json"),

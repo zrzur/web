@@ -17,6 +17,8 @@ import { readdirSync, readFileSync, statSync, writeFileSync } from "node:fs";
 import { dirname, join, relative, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 
+import { maskServerValues } from "./public-sample.mjs";
+
 const here = dirname(fileURLToPath(import.meta.url));
 const clientRoot = resolve(here, "../..");
 const webRoot = resolve(clientRoot, "../..");
@@ -705,7 +707,10 @@ function gatewayTypes() {
 }
 const verification = (() => {
   try {
-    return JSON.parse(readFileSync(join(here, "verification.json"), "utf8"));
+    // recorded answers, without the dev stack's own keys
+    return maskServerValues(
+      JSON.parse(readFileSync(join(here, "verification.json"), "utf8")),
+    );
   } catch {
     return {};
   }
