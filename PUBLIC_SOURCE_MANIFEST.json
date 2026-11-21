@@ -766,8 +766,8 @@
     },
     {
       "path": "packages/client/components/app/interface/channels/text/history/HistoryScroller.tsx",
-      "sha256": "9a3ffe09d08ee94b268cbb26eab558a60aa67b7d6837ae31f47a6e0ef5bc4399",
-      "bytes": 21268,
+      "sha256": "9e3692ebe7cd2c68b2132fa9a69991c05a505ca593e6371687a4cb7790f529e3",
+      "bytes": 23517,
       "category": "product-source-or-build-manifest"
     },
     {
