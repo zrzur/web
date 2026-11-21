@@ -295,28 +295,91 @@ export function HistoryScroller(props: Props) {
 
   const freshRows = new Set<Element>();
   let freshFrame = 0;
+  /** Keep a row exact until it has been drawn once */
+  function freshen(el: Element) {
+    if (!skipRows || freshRows.has(el)) return;
+    el.setAttribute("data-fresh", "");
+    freshRows.add(el);
+    releaseLater();
+  }
   /** Mark rows that are new since `known` and come after `reader` */
   function markFresh(known: Set<Element>, reader: Element | undefined) {
     const rows = rowsElement();
     if (!rows || !reader || reader.parentElement !== rows) return;
     for (let el = reader.nextElementSibling; el; el = el.nextElementSibling) {
-      if (known.has(el) || freshRows.has(el)) continue;
-      el.setAttribute("data-fresh", "");
-      freshRows.add(el);
-    }
-    // two frames: drawn once, so the browser keeps their real height
-    if (freshRows.size && !freshFrame) {
-      freshFrame = requestAnimationFrame(() => {
-        freshFrame = requestAnimationFrame(releaseFresh);
-      });
+      if (!known.has(el)) freshen(el);
     }
   }
-  function releaseFresh() {
-    freshFrame = 0;
-    for (const el of freshRows) el.removeAttribute("data-fresh");
-    freshRows.clear();
+  /**
+   * Two frames: the rows marked before the first are drawn in it, then
+   * released. Rows marked after the first frame began are not in its
+   * snapshot and wait for two frames of their own.
+   */
+  function releaseLater() {
+    if (freshFrame) return;
+    freshFrame = requestAnimationFrame(() => {
+      const drawn = [...freshRows];
+      freshFrame = requestAnimationFrame(() => {
+        freshFrame = 0;
+        for (const el of drawn) {
+          el.removeAttribute("data-fresh");
+          freshRows.delete(el);
+        }
+        if (freshRows.size) releaseLater();
+      });
+    });
   }
   onCleanup(() => cancelAnimationFrame(freshFrame));
+
+  /** The row (a child of the rows element) that holds a node */
+  function rowOf(node: Node | null): Element | undefined {
+    const rows = rowsElement();
+    let el: Element | null =
+      node instanceof Element ? node : (node?.parentElement ?? null);
+    while (el && el.parentElement !== rows) el = el.parentElement;
+    return el ?? undefined;
+  }
+  // A row out of view keeps its old height while it is skipped: an edit, a
+  // new reaction or a picture that got its size there would only change its
+  // height when it is drawn again, under a finger, where nothing corrects
+  // it. A change inside a row at or below the reader's row makes it exact
+  // until drawn once, so its height changes at once, as it did before rows
+  // were skipped. Rows above the reader never move the view: pictures loading
+  // there must not cost the skipping.
+  function changedBelow(node: Node | null) {
+    const reader = anchors[0]?.el;
+    const row = rowOf(node);
+    if (!reader || !row) return;
+    if (
+      row === reader ||
+      reader.compareDocumentPosition(row) & Node.DOCUMENT_POSITION_FOLLOWING
+    ) {
+      freshen(row);
+    }
+  }
+  onMount(() => {
+    if (!skipRows) return;
+    const observer = new MutationObserver((records) => {
+      for (const record of records) {
+        if (record.target === rowsElement()) continue;
+        changedBelow(record.target);
+      }
+    });
+    observer.observe(content, {
+      subtree: true,
+      childList: true,
+      characterData: true,
+      attributes: true,
+      attributeFilter: ["src", "width", "height"],
+    });
+    const loaded = (event: Event) => changedBelow(event.target as Node);
+    // load does not bubble: listen in the capture phase
+    content.addEventListener("load", loaded, true);
+    onCleanup(() => {
+      observer.disconnect();
+      content.removeEventListener("load", loaded, true);
+    });
+  });
 
   let exactTimer: ReturnType<typeof setTimeout> | undefined;
   function exactRows(on: boolean) {
