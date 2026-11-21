@@ -697,7 +697,7 @@
    },
    "ws": "wss://events.zrzur.com",
    "app": "https://app.zrzur.com",
-   "vapid": "YOUR_VAPID_PUBLIC_KEY"
+   "vapid": "<VAPID public key>"
   }
  },
  "GET /applications/{application_id}/commands": {

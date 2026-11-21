@@ -3,7 +3,7 @@
 // placeholder: the docs show the shape, never one server's key, and secret
 // scanners do not stop the publication on it.
 const PLACEHOLDERS = {
-  vapid: "YOUR_VAPID_PUBLIC_KEY",
+  vapid: "<VAPID public key>",
 };
 
 /** A copy of `value` with every field named in PLACEHOLDERS replaced */
