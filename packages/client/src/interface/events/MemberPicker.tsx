@@ -5,6 +5,7 @@ import type { Server, User } from "@zrzur/sdk/solid";
 import { styled } from "styled-system/jsx";
 
 import { useClient } from "@revolt/client";
+import { anyTextMatches } from "@revolt/common/lib/arabicFold";
 import { Avatar, TextField } from "@revolt/ui";
 import { Icon } from "@revolt/ui/icons/Icon";
 
@@ -76,7 +77,6 @@ export function MemberPicker(props: {
     timer = setTimeout(async () => {
       const mine = ++asked;
       try {
-        const lower = name.toLowerCase();
         const [near, searched] = await Promise.all([
           firstMembers(),
           props.server
@@ -84,10 +84,9 @@ export function MemberPicker(props: {
             .then((result) => result.users),
         ]);
         if (mine !== asked) return;
-        const matches = near.filter(
-          (user) =>
-            user.displayName.toLowerCase().includes(lower) ||
-            user.username.toLowerCase().includes(lower),
+        // Arabic folded as in the other name searches (أ/إ/آ/ا, ة/ه, ى/ي)
+        const matches = near.filter((user) =>
+          anyTextMatches([user.displayName, user.username], name),
         );
         const seen = new Set(matches.map((user) => user.id));
         setFailed(false);
