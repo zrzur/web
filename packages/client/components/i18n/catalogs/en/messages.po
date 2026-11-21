@@ -31066,3 +31066,23 @@ msgstr "Upload a picture"
 #: components/modal/modals/ServerEventEditor.tsx
 msgid "Upload a picture of your own; it is cropped to 16:9. The ready covers are there if you have none."
 msgstr "Upload a picture of your own; it is cropped to 16:9. The ready covers are there if you have none."
+
+#: components/modal/modals/BotNameField.tsx
+msgid "Bot name"
+msgstr "Bot name"
+
+#: components/modal/modals/BotNameField.tsx
+msgid "Letters, numbers, spaces between words, and _ . -"
+msgstr "Letters, numbers, spaces between words, and _ . -"
+
+#: components/modal/modals/BotNameField.tsx
+msgid "One space between words, and none at the start or end."
+msgstr "One space between words, and none at the start or end."
+
+#: components/modal/modals/BotNameField.tsx
+msgid "Use letters, numbers, spaces and _ . - only."
+msgstr "Use letters, numbers, spaces and _ . - only."
+
+#: components/modal/modals/EditBotUsername.tsx
+msgid "Change bot name"
+msgstr "Change bot name"

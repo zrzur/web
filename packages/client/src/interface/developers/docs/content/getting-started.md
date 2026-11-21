@@ -4,7 +4,7 @@ In about ten minutes you will have a bot that answers a slash command in your ow
 
 ## 1. Create an application {#create-an-application}
 
-In the Developer Portal, choose New application, give it a name and choose Create. The application comes with a bot account. [Open My applications](/developers)
+In the Developer Portal, choose New application, give it a name and choose Create. The application comes with a bot account. The name takes letters, numbers and `_ . -`, with one space between words, 2 to 32 characters: "Liro Bot" is shown as typed, and its username is `Liro_Bot`. [Open My applications](/developers)
 
 ## 2. Copy the token {#copy-the-token}
 

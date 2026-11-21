@@ -31063,3 +31063,23 @@ msgstr "ارفع صورة"
 #: components/modal/modals/ServerEventEditor.tsx
 msgid "Upload a picture of your own; it is cropped to 16:9. The ready covers are there if you have none."
 msgstr "ارفع صورة من عندك، وتُقَصّ بنسبة 16:9. والأغلفة الجاهزة متاحة إن لم تكن لديك صورة."
+
+#: components/modal/modals/BotNameField.tsx
+msgid "Bot name"
+msgstr "اسم البوت"
+
+#: components/modal/modals/BotNameField.tsx
+msgid "Letters, numbers, spaces between words, and _ . -"
+msgstr "حروف وأرقام ومسافات بين الكلمات، و_ . -"
+
+#: components/modal/modals/BotNameField.tsx
+msgid "One space between words, and none at the start or end."
+msgstr "مسافة واحدة بين الكلمات، ولا مسافة في البداية أو النهاية."
+
+#: components/modal/modals/BotNameField.tsx
+msgid "Use letters, numbers, spaces and _ . - only."
+msgstr "استخدم الحروف والأرقام والمسافات و_ . - فقط."
+
+#: components/modal/modals/EditBotUsername.tsx
+msgid "Change bot name"
+msgstr "تغيير اسم البوت"

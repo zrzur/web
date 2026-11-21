@@ -31063,3 +31063,23 @@ msgstr "Bild hochladen"
 #: components/modal/modals/ServerEventEditor.tsx
 msgid "Upload a picture of your own; it is cropped to 16:9. The ready covers are there if you have none."
 msgstr "Lade ein eigenes Bild hoch; es wird auf 16:9 zugeschnitten. Die fertigen Cover sind da, wenn du keins hast."
+
+#: components/modal/modals/BotNameField.tsx
+msgid "Bot name"
+msgstr "Name des Bots"
+
+#: components/modal/modals/BotNameField.tsx
+msgid "Letters, numbers, spaces between words, and _ . -"
+msgstr "Buchstaben, Zahlen, Leerzeichen zwischen Wörtern und _ . -"
+
+#: components/modal/modals/BotNameField.tsx
+msgid "One space between words, and none at the start or end."
+msgstr "Ein Leerzeichen zwischen Wörtern, keins am Anfang oder Ende."
+
+#: components/modal/modals/BotNameField.tsx
+msgid "Use letters, numbers, spaces and _ . - only."
+msgstr "Nur Buchstaben, Zahlen, Leerzeichen und _ . - verwenden."
+
+#: components/modal/modals/EditBotUsername.tsx
+msgid "Change bot name"
+msgstr "Namen des Bots ändern"

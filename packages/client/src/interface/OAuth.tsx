@@ -331,8 +331,8 @@ function Consent() {
                               when={params().get("permissions")}
                               fallback={
                                 <Trans>
-                                  The bot's permissions there, at most (only
-                                  the ones you hold, with Manage Roles):
+                                  The bot's permissions there, at most (only the
+                                  ones you hold, with Manage Roles):
                                 </Trans>
                               }
                             >

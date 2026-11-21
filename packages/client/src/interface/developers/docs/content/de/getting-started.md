@@ -4,7 +4,7 @@ In etwa zehn Minuten hast du einen Bot, der in deinem Testserver auf einen Slash
 
 ## 1. Erstelle eine Anwendung {#create-an-application}
 
-Wähle im Entwicklerportal „Neue Anwendung“, gib einen Namen ein und wähle „Erstellen“. Die Anwendung bringt ein Bot-Konto mit. [Meine Anwendungen öffnen](/developers)
+Wähle im Entwicklerportal „Neue Anwendung“, gib einen Namen ein und wähle „Erstellen“. Die Anwendung bringt ein Bot-Konto mit. Der Name nimmt Buchstaben, Zahlen und `_ . -`, mit einem Leerzeichen zwischen Wörtern, 2 bis 32 Zeichen: „Liro Bot“ erscheint wie eingegeben, sein Benutzername ist `Liro_Bot`. [Meine Anwendungen öffnen](/developers)
 
 ## 2. Kopiere das Token {#copy-the-token}
 

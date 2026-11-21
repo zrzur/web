@@ -3562,8 +3562,8 @@
     },
     {
       "path": "packages/client/components/i18n/catalogs/ar/messages.po",
-      "sha256": "7508263695c2622a12671e16137d15a1542864ee5b67de091ed79b54c96d2591",
-      "bytes": 1251617,
+      "sha256": "4f1dd3cbefe7f6a4c9237ace5f4496179a86f70c5f218ed249be9673d8638263",
+      "bytes": 1252404,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -3706,8 +3706,8 @@
     },
     {
       "path": "packages/client/components/i18n/catalogs/de/messages.po",
-      "sha256": "96ad6132f8c772daf50c233b37486429e3deae09acde08efcc84bcdb1b7e44f0",
-      "bytes": 1156613,
+      "sha256": "1de62f9012ae78743c3192939ae58a653b9becae8281cfb889148409ec4eb396",
+      "bytes": 1157317,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -3742,8 +3742,8 @@
     },
     {
       "path": "packages/client/components/i18n/catalogs/en/messages.po",
-      "sha256": "f05db76ec4c0bce3a939b68630e73c075ae346706d59d3fbc155d438fb845d31",
-      "bytes": 1113975,
+      "sha256": "8da482a7689e8068775f133f5ba3c8c1d65fb97e7053e402816beabf1ad97882",
+      "bytes": 1114638,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -4845,6 +4845,12 @@
       "category": "product-source-or-build-manifest"
     },
     {
+      "path": "packages/client/components/modal/modals/BotNameField.tsx",
+      "sha256": "f959b2badba0b60af8c7eb414127a3d0e075528f71e639f3d855a5c360bfe7ea",
+      "bytes": 3261,
+      "category": "product-source-or-build-manifest"
+    },
+    {
       "path": "packages/client/components/modal/modals/BulkDeleteMessages.tsx",
       "sha256": "9298486fbffc573a057e35a815699c425d32289b766b2448339681446f83d383",
       "bytes": 5880,
@@ -4876,8 +4882,8 @@
     },
     {
       "path": "packages/client/components/modal/modals/CreateBot.tsx",
-      "sha256": "476087b97f472b8902556c221fe42950a451367a068ddeaa18dd630c057e2a50",
-      "bytes": 3397,
+      "sha256": "2afe0d032f7090ae98f00f63e788ebc21681afaf5176090bd5fbb3e806ee1fe4",
+      "bytes": 3521,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -4996,8 +5002,8 @@
     },
     {
       "path": "packages/client/components/modal/modals/EditBotUsername.tsx",
-      "sha256": "48459ffaf0050dbc0141e807e38653b1a948e17f6a480e36cd3c996db07f6586",
-      "bytes": 2038,
+      "sha256": "20f29530d6b366af66e892e414013735cfa367f5e90d83074517f627f544dbd4",
+      "bytes": 2276,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -5388,6 +5394,18 @@
       "path": "packages/client/components/modal/modals/billingErrors.ts",
       "sha256": "35a2d9571438569ecef18049fd223bbc7d45f409e14edbc2de91fe1b2ce08606",
       "bytes": 2243,
+      "category": "product-source-or-build-manifest"
+    },
+    {
+      "path": "packages/client/components/modal/modals/botName.test.ts",
+      "sha256": "53a8c74ce74cbef11753bd2873c136d77b4ba8e132d1b002293c0937a80fd022",
+      "bytes": 1330,
+      "category": "synthetic-test-source-or-fixture"
+    },
+    {
+      "path": "packages/client/components/modal/modals/botName.ts",
+      "sha256": "5944222b0c17c66d8584fe22b1e9c9a6838a1733242cbe4880f0139a03f7feac",
+      "bytes": 1363,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -40546,8 +40564,8 @@
     },
     {
       "path": "packages/client/scripts/bot-api/check-names.allow.json",
-      "sha256": "ea169ce09cf32a2fbcd08e8f6f167efc706229c0ac34572f15d58a43d86a6874",
-      "bytes": 1625,
+      "sha256": "1e3dfd5ec96fe977cdd0859e6f6517018328bcfc203ad629f6e378e97d489a7e",
+      "bytes": 1638,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -42604,7 +42622,7 @@
     },
     {
       "path": "packages/client/src/interface/OAuth.tsx",
-      "sha256": "372ed011081bb09c5c7d1471f1ae51879088451e542a71775c9634f651ac7bf0",
+      "sha256": "13645bc255ee8d46dec6206460d3b2677961909f8030e74437575911ccaa4dba",
       "bytes": 13994,
       "category": "product-source-or-build-manifest"
     },
@@ -43150,8 +43168,8 @@
     },
     {
       "path": "packages/client/src/interface/developers/docs/content/ar/changelog.md",
-      "sha256": "21c0d040ca36251bf7ec93e0ab326d3ca5bc3e621dda37b30a4f7cafd61ebb68",
-      "bytes": 13138,
+      "sha256": "e3df1c37c321b197fa7a026ee5b840f21c95d02e0e8b844b285288ba90ad7c39",
+      "bytes": 13651,
       "category": "public-documentation"
     },
     {
@@ -43204,8 +43222,8 @@
     },
     {
       "path": "packages/client/src/interface/developers/docs/content/ar/getting-started.md",
-      "sha256": "78e8fa79b56ddec32a188ed22c2372be35c5b5132eab17e14121154914e1c3cf",
-      "bytes": 4521,
+      "sha256": "689db847f066c993c018ac86b1c1a4238e2d1cc881f4268aa04b74d422edeea5",
+      "bytes": 4748,
       "category": "public-documentation"
     },
     {
@@ -43378,8 +43396,8 @@
     },
     {
       "path": "packages/client/src/interface/developers/docs/content/changelog.md",
-      "sha256": "81cd87231e8a57bfdebde5440d30b0992bcbcbe30cf3f4a95fb790f2b6905738",
-      "bytes": 9691,
+      "sha256": "5b9936af3bfa7d01249886d6144ea04e4e4649def2ee0deb6daed67d411977ec",
+      "bytes": 10041,
       "category": "public-documentation"
     },
     {
@@ -43420,8 +43438,8 @@
     },
     {
       "path": "packages/client/src/interface/developers/docs/content/de/changelog.md",
-      "sha256": "71727dd27f3ced98e3ebab4a53d3dc082a38d2d8bd4964f88f7298cd828a4498",
-      "bytes": 10602,
+      "sha256": "193f88b7fdaf24e74cbdb3fba7de9d520665992deb7f0720672c8445cc617ef8",
+      "bytes": 10998,
       "category": "public-documentation"
     },
     {
@@ -43474,8 +43492,8 @@
     },
     {
       "path": "packages/client/src/interface/developers/docs/content/de/getting-started.md",
-      "sha256": "ef651ac78d062a4dffe60f5e26ec9d017784018803718348b92819e9b7b70c24",
-      "bytes": 3585,
+      "sha256": "da0eff9bd87b5ca7842541bc251f8fb4f035c801da4410814f6ce64c6e280f9c",
+      "bytes": 3766,
       "category": "public-documentation"
     },
     {
@@ -43666,8 +43684,8 @@
     },
     {
       "path": "packages/client/src/interface/developers/docs/content/getting-started.md",
-      "sha256": "0650cef10a3a39acc497e00e28a802ae4c1d212f659199eecb84f08b7a9d22c3",
-      "bytes": 3451,
+      "sha256": "ae48ae35df21465a23e723cd01e777e9c11af5370238627f3b72de23ed824430",
+      "bytes": 3608,
       "category": "public-documentation"
     },
     {
@@ -45138,7 +45156,7 @@
   "submodules": [
     {
       "path": "packages/stoat.js",
-      "commit": "cfd21731559b1f2524371370f0dce230a915aa35"
+      "commit": "f999de3101a3bd41f54f256cda876f09252abf57"
     }
   ]
 }
