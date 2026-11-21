@@ -262,8 +262,8 @@
     },
     {
       "path": "CHANGELOG.md",
-      "sha256": "8e84ee0fff20840b55f0ac9a1923efaab88b9067eb91bf811b9940cb2e98a073",
-      "bytes": 191868,
+      "sha256": "9694edf0fb3f1be86c413713250cb285c5eb52abffb0017c35f8c03976270290",
+      "bytes": 192360,
       "category": "public-documentation"
     },
     {
@@ -4348,8 +4348,8 @@
     },
     {
       "path": "packages/client/components/instance/Instance.ts",
-      "sha256": "5a531110eb3d9ad8a27d5754ad782a2ea0441ed9fd66778f3aa4479687236a22",
-      "bytes": 6649,
+      "sha256": "8109f8cb7ddf3cb30e5c1f8ad346772067fa170419e839391a4712d82766e9ae",
+      "bytes": 6812,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -45108,7 +45108,7 @@
   "submodules": [
     {
       "path": "packages/stoat.js",
-      "commit": "d9865c291c26c97b0f21b31ee2d959e1c4ed8939"
+      "commit": "bd915db42af10516858bc507c46445b24ddf0d6f"
     }
   ]
 }
