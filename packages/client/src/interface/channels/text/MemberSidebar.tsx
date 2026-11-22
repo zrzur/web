@@ -83,7 +83,14 @@ export function ServerMemberSidebar(props: Props) {
   const { t } = useLingui();
 
   type MemberRoleElement =
-    | { t: 0; name: string; count: number; icon?: string | null }
+    | {
+        t: 0;
+        name: string;
+        count: number;
+        icon?: string | null;
+        /** A real role (not Online or Offline): Shift+click mentions it */
+        roleId?: string;
+      }
     | { t: 1; member: ServerMember; icon?: never; isOnline: boolean };
 
   const elements = createMemo(() => {
@@ -169,6 +176,8 @@ export function ServerMemberSidebar(props: Props) {
         t: 0,
         name: role.name,
         icon: role.icon,
+        roleId:
+          role.id === "default" || role.id === "offline" ? undefined : role.id,
         count: roleMembers.length,
       });
 
@@ -202,7 +211,11 @@ export function ServerMemberSidebar(props: Props) {
             >
               <Switch
                 fallback={
-                  <CategoryTitle>
+                  <CategoryTitle
+                    data-mention-role={
+                      (item.item as { roleId?: string }).roleId
+                    }
+                  >
                     <Show when={item.item.icon}>
                       <RoleIcon src={item.item.icon!} alt="" />
                     </Show>

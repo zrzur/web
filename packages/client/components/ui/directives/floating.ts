@@ -11,6 +11,7 @@ import {
   untrack,
 } from "solid-js";
 
+import { insertMention, isMentionClick } from "@revolt/keybinds/mention";
 import { applyTooltipName } from "../components/floating/tooltipName";
 import { addLongPressListener } from "./longPress";
 
@@ -151,10 +152,17 @@ export function floating(element: HTMLElement, accessor: Accessor<Props>) {
   }
 
   /**
-   * Handle click events
+   * Handle click events: Shift+click mentions the person in the open
+   * message box instead of opening their card (listed in Ctrl+/)
    */
-  function onClick() {
-    // TODO: handle shift+click for mention
+  function onClick(event: MouseEvent) {
+    const user = accessor().userCard?.user;
+    if (user && isMentionClick(event) && insertMention("user", user.id)) {
+      event.preventDefault();
+      event.stopPropagation();
+      if (show()?.userCard) setShow(undefined);
+      return;
+    }
     trigger("userCard");
   }
 
