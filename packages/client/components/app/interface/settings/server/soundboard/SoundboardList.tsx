@@ -36,6 +36,7 @@ import {
   SettingsSection,
   TextField,
 } from "@revolt/ui";
+import { PageBoundary } from "@revolt/ui/components/utils/PageBoundary";
 import { Icon } from "@revolt/ui/icons/Icon";
 
 import {
@@ -233,11 +234,15 @@ export function SoundboardList(props: { server: Server }) {
               </Empty>
             }
           >
-            <SoundLibrary
-              server={props.server}
-              board={board()}
-              canAdd={canManage()}
-            />
+            {/* not downloaded: a note in its place; the window and the
+                upload form stay */}
+            <PageBoundary>
+              <SoundLibrary
+                server={props.server}
+                board={board()}
+                canAdd={canManage()}
+              />
+            </PageBoundary>
           </Suspense>
         </Show>
         <form

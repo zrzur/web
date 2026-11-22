@@ -12,12 +12,12 @@ import { useLingui } from "@lingui/solid/macro";
 
 import type { MFA, MFATicket } from "@zrzur/sdk/solid";
 
-import { isPartLoadError } from "@revolt/common/lib/lazyPart";
 import { Keybind, KeybindAction } from "@revolt/keybinds";
 import { dismissFloatingElements, useSnackbar } from "@revolt/ui";
 
 import { ModalController } from "./controller";
-import { RenderModal } from "./modals";
+import { RenderModal, isWindowPart } from "./modals";
+import { windowNeverDrew } from "./windowFailure";
 
 export { type ActiveModal, ModalController } from "./controller";
 
@@ -172,8 +172,9 @@ export function ModalRenderer() {
         {(entry) => (
           <ErrorBoundary
             fallback={(error) => {
-              // any other error is not ours to hide: it goes up
-              if (!isPartLoadError(error)) throw error;
+              // only when the window's own part failed (it never drew);
+              // anything else is not ours to hide: it goes up
+              if (!windowNeverDrew(error, isWindowPart)) throw error;
               console.warn("[app] a window could not be loaded", error);
               return windowNotLoaded(() => modalController.discard(entry.id));
             }}

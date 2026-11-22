@@ -1,6 +1,8 @@
 import { lazy } from "@revolt/common/lib/lazyPart";
 import { Suspense } from "solid-js";
 
+import { PageBoundary } from "@revolt/ui/components/utils/PageBoundary";
+
 import { Trans, useLingui } from "@lingui/solid/macro";
 import { Server } from "@zrzur/sdk/solid";
 
@@ -199,7 +201,10 @@ const Config: SettingsConfiguration<Server> = {
               </p>
             }
           >
-            <InsightsPage server={server} />
+            {/* not downloaded: a note in its place, the window stays */}
+            <PageBoundary>
+              <InsightsPage server={server} />
+            </PageBoundary>
           </Suspense>
         );
       case "channels":

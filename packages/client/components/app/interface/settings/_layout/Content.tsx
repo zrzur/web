@@ -8,6 +8,7 @@ import { Trans, useLingui } from "@lingui/solid/macro";
 
 import { useState } from "@revolt/state";
 import { Breadcrumbs, IconButton } from "@revolt/ui";
+import { PageBoundary } from "@revolt/ui/components/utils/PageBoundary";
 import { Icon } from "@revolt/ui/icons/Icon";
 import { useMotion } from "@revolt/ui/motion";
 
@@ -79,7 +80,9 @@ export function SettingsContent(props: {
                 </Show>
               </PageHeader>
             </Show>
-            {props.children}
+            {/* a settings page that could not be downloaded says so here,
+                and the window stays open */}
+            <PageBoundary resetKey={props.page}>{props.children}</PageBoundary>
             <div class={css({ minHeight: "80px" })} />
           </InnerColumn>
         </InnerContent>
