@@ -1942,8 +1942,8 @@
     },
     {
       "path": "packages/client/components/app/interface/settings/server/soundboard/SoundboardList.dom.test.tsx",
-      "sha256": "ede5631e821a917587c0224ac4805b46a867bda97b2552372f3b427c0706693a",
-      "bytes": 4562,
+      "sha256": "b150c36871663a1a3b5329b5c3f56c1f6c3341d5164ba31a1f72dc4b4a12246e",
+      "bytes": 4780,
       "category": "synthetic-test-source-or-fixture"
     },
     {
