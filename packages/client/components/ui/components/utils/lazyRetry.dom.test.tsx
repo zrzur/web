@@ -1,5 +1,5 @@
-import { Show, Suspense, createResource, createSignal } from "solid-js";
 import type { JSX } from "solid-js";
+import { Show, Suspense, createResource, createSignal } from "solid-js";
 import { render } from "solid-js/web";
 import { afterEach, describe, expect, it } from "vitest";
 
@@ -35,7 +35,8 @@ describe("lazyRetry keeps its wait to itself", () => {
   it("the app stays on screen while the part's file loads", async () => {
     let arrive!: (part: { default: () => JSX.Element }) => void;
     const Part = lazyRetry(
-      () => new Promise<{ default: () => JSX.Element }>((done) => (arrive = done)),
+      () =>
+        new Promise<{ default: () => JSX.Element }>((done) => (arrive = done)),
       () => null,
     );
     const { host, setOpen } = mount(() => <Part />);
@@ -90,5 +91,36 @@ describe("lazyRetry keeps its wait to itself", () => {
     setOpen(true);
     await tick(5);
     expect(host.querySelector("[data-part]")?.textContent).toBe("lounge");
+  });
+
+  it("a part that failed to download shows its fallback, and is asked for again when it opens next", async () => {
+    let tries = 0;
+    const Part = lazyRetry(
+      () => {
+        tries++;
+        return tries <= 2
+          ? Promise.reject(
+              new TypeError("Failed to fetch dynamically imported module"),
+            )
+          : Promise.resolve({ default: () => <aside data-part>panel</aside> });
+      },
+      () => <i data-fallback />,
+      0,
+    );
+    const { host, setOpen } = mount(() => <Part />);
+
+    setOpen(true);
+    await tick(50);
+    expect(host.querySelector("[data-part]")).toBeNull();
+    expect(host.querySelector("[data-fallback]")).not.toBeNull();
+    expect(host.querySelector("[data-app]")).not.toBeNull();
+
+    // the connection is back: the + is pressed again
+    setOpen(false);
+    await tick();
+    setOpen(true);
+    await tick(5);
+    expect(host.querySelector("[data-part]")?.textContent).toBe("panel");
+    expect(tries).toBe(3);
   });
 });
