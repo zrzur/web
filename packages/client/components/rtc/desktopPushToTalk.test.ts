@@ -3,7 +3,7 @@ import { afterEach, describe, expect, it, vi } from "vitest";
 import { bindKeymap, defaultKeymap } from "../keybinds/active";
 import { globalPttCombo } from "../keybinds/keyLabels";
 import { compileKeymap } from "../keybinds/keymapCompile";
-import { globalTalkAllowed } from "./globalTalk";
+import { globalTalkAllowed, shortcutTakenByTalk } from "./globalTalk";
 
 import { desktopPushToTalk, latchPress } from "./desktopPushToTalk";
 
@@ -124,6 +124,23 @@ describe("talk from other apps and the app's own shortcuts", () => {
     expect(globalTalkAllowed("KeyU")).toBe(true);
     expect(globalTalkAllowed("KeyH")).toBe(true);
     expect(globalTalkAllowed("Digit2")).toBe(true);
+  });
+
+  it("lets the talk key win only while upload and leave-call keep their default keys", () => {
+    expect(shortcutTakenByTalk("KeyU")).toBe("upload_file");
+    expect(shortcutTakenByTalk("KeyH")).toBe("leave_call");
+    expect(shortcutTakenByTalk("KeyM")).toBe(undefined);
+    expect(shortcutTakenByTalk(undefined)).toBe(undefined);
+    // keys a person chose for upload are never taken from it
+    bindKeymap((mac) =>
+      compileKeymap(
+        { upload_file: { code: "KeyK", mod: true, shift: true } },
+        mac,
+      ),
+    );
+    expect(globalTalkAllowed("KeyK")).toBe(false);
+    expect(shortcutTakenByTalk("KeyK")).toBe(undefined);
+    expect(globalTalkAllowed("KeyU")).toBe(true);
   });
 
   it("follows the person's own shortcuts", () => {

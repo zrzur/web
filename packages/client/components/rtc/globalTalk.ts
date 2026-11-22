@@ -24,12 +24,41 @@ export function globalTalkBlock(code: string): "editing" | "app" | undefined {
   if (NOT_GLOBAL.test(code)) return "editing";
   const mac = deviceMac();
   // the table itself, also while a new combination is being recorded
+  const map = activeKeymap(mac);
   const taken = matchShortcut(
-    activeKeymap(mac),
+    map,
     { code, ctrlKey: !mac, metaKey: mac, shiftKey: true, altKey: false },
     mac,
   );
-  return taken && !TALK_KEY_WINS.has(taken) ? "app" : undefined;
+  return taken && !talkKeyWins(taken, map.custom) ? "app" : undefined;
+}
+
+/**
+ * Whether the talk key keeps these keys from a shortcut: only for the
+ * shortcuts below, and only while they are on their default keys (keys a
+ * person chose for a shortcut are never taken from it)
+ */
+export function talkKeyWins(id: ShortcutId, custom: ReadonlySet<ShortcutId>) {
+  return TALK_KEY_WINS.has(id) && !custom.has(id);
+}
+
+/**
+ * The shortcut whose keys talking from other apps takes now (the desktop
+ * app holds Ctrl/Cmd+Shift with the talk key), for a note in Ctrl+/
+ * @param code The push-to-talk key, when talking from other apps is on
+ */
+export function shortcutTakenByTalk(
+  code: string | undefined,
+): ShortcutId | undefined {
+  if (!code || NOT_GLOBAL.test(code)) return;
+  const mac = deviceMac();
+  const map = activeKeymap(mac);
+  const taken = matchShortcut(
+    map,
+    { code, ctrlKey: !mac, metaKey: mac, shiftKey: true, altKey: false },
+    mac,
+  );
+  return taken && talkKeyWins(taken, map.custom) ? taken : undefined;
 }
 
 /**

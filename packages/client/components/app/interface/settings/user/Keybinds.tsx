@@ -44,6 +44,7 @@ import {
   desktopGameKeys,
   parseBind,
 } from "@revolt/rtc/gameKeys";
+import { shortcutTakenByTalk } from "@revolt/rtc/globalTalk";
 import { useState } from "@revolt/state";
 import {
   Button,
@@ -110,6 +111,26 @@ export function KeybindsSettings() {
 
   // desktop app: binds heard in games (set in voice settings)
   const gameKeys = !!desktopGameKeys() && voice.gameKeys;
+
+  /**
+   * The shortcut whose keys talking from other apps holds now (desktop app,
+   * push to talk on): it waits while that is on
+   */
+  const takenByTalk = () =>
+    desktopPushToTalk() && voice.globalTalk && voice.inputMode === "ptt"
+      ? shortcutTakenByTalk(voice.pttKey)
+      : undefined;
+  /** A short line under a shortcut whose keys the talk key holds */
+  const talkNote = (id: ShortcutId) => (
+    <Show when={takenByTalk() === id}>
+      <span data-testid="keybind-talk-note">
+        {" "}
+        <Trans>
+          Your talk key holds these keys while talking from other apps is on.
+        </Trans>
+      </span>
+    </Show>
+  );
   const gameBinds = () => cleanStoredBinds(voice.gameBinds);
   const gameRows: { action: GameKeyAction; title: JSX.Element }[] = [
     { action: "talk", title: <Trans>Push to talk (hold)</Trans> },
@@ -138,7 +159,12 @@ export function KeybindsSettings() {
         {
           id: "leave_call",
           title: <Trans>Leave the call</Trans>,
-          description: <Trans>During a call.</Trans>,
+          description: (
+            <>
+              <Trans>During a call.</Trans>
+              {talkNote("leave_call")}
+            </>
+          ),
         },
         {
           id: "toggle_soundboard",
@@ -234,7 +260,12 @@ export function KeybindsSettings() {
         {
           id: "upload_file",
           title: <Trans>Upload a file</Trans>,
-          description: <Trans>Where you can send files.</Trans>,
+          description: (
+            <>
+              <Trans>Where you can send files.</Trans>
+              {talkNote("upload_file")}
+            </>
+          ),
         },
         {
           title: <Trans>Edit your last message</Trans>,
