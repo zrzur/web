@@ -204,10 +204,21 @@ function Picker(
       !floating()?.contains(target) &&
       !props.anchor()?.contains(target) &&
       !props.trigger()?.contains(target)
-    )
-      // not close(): a tap into the text keeps the focus there, so the
-      // phone keyboard comes back instead of the focus jumping to the button
+    ) {
+      // not close(): that moves the focus to the button. A tap into the
+      // message text gives the focus to the text, so the phone keyboard
+      // comes back. Closing the docked panel moves the text down at once, so
+      // the tap's own mouse events would land on the message list instead:
+      // they are cancelled and the text is focused here, in the gesture
+      const text = (target as Element).closest?.(
+        "[data-composer-box] .cm-editor",
+      );
       props.setShow(undefined);
+      if (text && phone()) {
+        e.preventDefault();
+        text.querySelector<HTMLElement>(".cm-content")?.focus();
+      }
+    }
   }
   function onKeyDown(e: KeyboardEvent) {
     if (e.key !== "Escape") return;
