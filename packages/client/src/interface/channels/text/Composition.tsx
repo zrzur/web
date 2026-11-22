@@ -367,7 +367,11 @@ export function MessageComposition(props: Props) {
   const phone = window.matchMedia(Breakpoint.phone).matches;
   let pickerTriggers:
     | {
-        onClickGif: (event: unknown, ref?: HTMLElement) => void;
+        onClickGif: (
+          event: unknown,
+          ref?: HTMLElement,
+          placement?: "top-start",
+        ) => void;
         onClickAdd: (event: unknown, ref?: HTMLElement) => void;
       }
     | undefined;
@@ -701,9 +705,13 @@ export function MessageComposition(props: Props) {
                                     const plus =
                                       addButton?.querySelector("button") ??
                                       undefined;
+                                    // start side: grows from the "+" over
+                                    // the text, in Arabic too (floating-ui
+                                    // reads start in the writing direction)
                                     pickerTriggers?.onClickGif(
                                       { currentTarget: plus },
                                       plus,
+                                      "top-start",
                                     );
                                   }}
                                 >

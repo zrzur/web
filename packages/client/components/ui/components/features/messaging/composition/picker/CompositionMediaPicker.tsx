@@ -48,7 +48,11 @@ export type MediaPickerAdd = (actions: {
 
 export type MediaPickerProps = {
   ref: Setter<HTMLElement | undefined>;
-  onClickGif: (_: unknown, ref?: HTMLElement) => void;
+  /**
+   * Open the GIF picker. `placement` places it against `ref` for this
+   * opening only (the "+" menu opens it at the start side, next to "+")
+   */
+  onClickGif: (_: unknown, ref?: HTMLElement, placement?: Placement) => void;
   onClickEmoji: (_: unknown, ref?: HTMLElement) => void;
   onClickAdd: (_: unknown, ref?: HTMLElement) => void;
 };
@@ -76,6 +80,7 @@ export function CompositionMediaPicker(props: Props) {
   createEffect(() => props.onShown?.(show()));
   const [altRef, setAltRef] = createSignal<HTMLElement>();
   const [trigger, setTrigger] = createSignal<HTMLElement>();
+  const [openPlacement, setOpenPlacement] = createSignal<Placement>();
   function captureTrigger(event: unknown, ref?: HTMLElement) {
     const button = mediaPickerTrigger(event);
     if (button instanceof HTMLElement) setTrigger(button);
@@ -96,14 +101,16 @@ export function CompositionMediaPicker(props: Props) {
     >
       {props.children({
         ref: setAnchor,
-        onClickGif: (event, ref) => {
+        onClickGif: (event, ref, placement) => {
           if (props.channel && !props.channel.havePermission("SendEmbeds"))
             return;
           captureTrigger(event, ref);
+          setOpenPlacement(placement);
           setShow((current) => (current === "gif" ? undefined : "gif"));
         },
         onClickEmoji: (event, ref) => {
           captureTrigger(event, ref);
+          setOpenPlacement(undefined);
           setShow((current) => (current === "emoji" ? undefined : "emoji"));
         },
         onClickAdd: (event, ref) => {
@@ -120,7 +127,7 @@ export function CompositionMediaPicker(props: Props) {
             trigger={trigger}
             show={show}
             setShow={setShow}
-            placement={props.placement}
+            placement={openPlacement() ?? props.placement}
             add={props.add}
           />
         </Portal>
@@ -198,7 +205,9 @@ function Picker(
       !props.anchor()?.contains(target) &&
       !props.trigger()?.contains(target)
     )
-      close();
+      // not close(): a tap into the text keeps the focus there, so the
+      // phone keyboard comes back instead of the focus jumping to the button
+      props.setShow(undefined);
   }
   function onKeyDown(e: KeyboardEvent) {
     if (e.key !== "Escape") return;
@@ -216,6 +225,13 @@ function Picker(
   // phones: the panel is docked at the bottom; the app above it gives it room
   createEffect(() => {
     if (!phone()) return;
+    // the panel takes the keyboard's place: the text loses focus so the
+    // keyboard goes down. The emoji button keeps the focus in the text when
+    // pressed (preventFocusOnPress), so the keyboard stayed open, the panel
+    // was squeezed above it and the app between them was ~130 px tall
+    const active = document.activeElement as HTMLElement | null;
+    if (active?.isContentEditable || active?.closest?.(".cm-editor"))
+      active.blur();
     const style = document.documentElement.style;
     style.setProperty("--z-picker-dock", "min(360px, 48dvh)");
     onCleanup(() => style.removeProperty("--z-picker-dock"));
