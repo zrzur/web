@@ -262,8 +262,8 @@
     },
     {
       "path": "CHANGELOG.md",
-      "sha256": "4fc89f9eb8fc067971b721c548db5d62f4bc72c46aef3a6dfc2600597a2f22ff",
-      "bytes": 194746,
+      "sha256": "40bc82d13f73a29a45f28236a7ffc134b3119cdd244474d923eae3dd8308a131",
+      "bytes": 195736,
       "category": "public-documentation"
     },
     {
@@ -784,14 +784,14 @@
     },
     {
       "path": "packages/client/components/app/interface/channels/text/history/controller.test.ts",
-      "sha256": "2c08a13a9a2d82e7133ea019724abbe7d2c0c3b253833e1b07f9d64157fd5c23",
-      "bytes": 19730,
+      "sha256": "5012b2c2468c70565bade9a141f4ea723115ff6e7b6447db3e224d23e10b4f73",
+      "bytes": 21542,
       "category": "synthetic-test-source-or-fixture"
     },
     {
       "path": "packages/client/components/app/interface/channels/text/history/controller.ts",
-      "sha256": "f3ef12f9930db139bed08a26394bd0ea871c99ccc09d065dce360464237be920",
-      "bytes": 16082,
+      "sha256": "b2dd2d572d51de1b13a0686f724124091d5448a2e19e53ada51d7824afc00605",
+      "bytes": 16820,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -42766,8 +42766,8 @@
     },
     {
       "path": "packages/client/src/interface/channels/text/TextChannel.tsx",
-      "sha256": "18debd713bb37a68d77d8c33e97639cb9ea75bcf667472ea0b9eb20b396bdd8c",
-      "bytes": 18782,
+      "sha256": "1d1bbd9765304413c0e03db8f4854ab6458c997b723f6f553a6cd672dbb36e50",
+      "bytes": 19313,
       "category": "product-source-or-build-manifest"
     },
     {
