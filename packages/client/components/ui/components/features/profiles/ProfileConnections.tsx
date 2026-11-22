@@ -65,9 +65,7 @@ export function connectionInterests(
  * media proxy: the viewer's browser never contacts the service. Links open
  * only that service's own pages, through the link warning.
  */
-export function ProfileConnectionPanel(props: {
-  connection: ProfileConnection;
-}) {
+export function ProfileConnectionPanel(props: { connection: ProfileConnection }) {
   return (
     <div class={panel()} data-testid={`profile-${props.connection.service}`}>
       <Switch>
@@ -300,10 +298,7 @@ function GithubPanel(props: { connection: ProfileConnection }) {
           aria-expanded={open()}
           onClick={() => setOpen(!open())}
         >
-          <Show
-            when={open()}
-            fallback={<Trans>Show all {list().length}</Trans>}
-          >
+          <Show when={open()} fallback={<Trans>Show all {list().length}</Trans>}>
             <Trans>Show less</Trans>
           </Show>
         </More>

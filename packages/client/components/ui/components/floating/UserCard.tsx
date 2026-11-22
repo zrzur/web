@@ -159,12 +159,9 @@ const Card = styled("div", {
     position: "relative",
     display: "flex",
     flexDirection: "column",
-    // the one profile size (size.ts): the full profile and every preview
-    // are the same box
-    // (written out for Panda; size.test.ts keeps them equal to size.ts)
-    width: "300px",
-    height: "min(620px, calc(100dvh - 32px))",
+    width: "360px",
     maxWidth: "calc(100vw - 24px)",
+    maxHeight: "min(640px, calc(100dvh - 32px))",
     overflow: "hidden",
 
     color: "var(--profile-ink, var(--z-fg-primary))",
@@ -175,7 +172,6 @@ const Card = styled("div", {
 
     // a phone shows it as a sheet: edge to edge, on the sheet's own edge
     _phone: {
-      height: "auto",
       minWidth: "100vw",
       marginInline: "-8px",
       marginBlockEnd: "calc(-12px - var(--z-safe-bottom))",

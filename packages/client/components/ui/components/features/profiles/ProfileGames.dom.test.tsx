@@ -140,10 +140,10 @@ describe("ProfileGamesPanel", () => {
     expect(document.querySelectorAll("li[title]").length).toBe(0);
   });
 
-  it("the full profile opens the same two rows (one profile size)", () => {
+  it("the full profile opens two wider rows of achievements", () => {
     show(games, "full");
     button("Show more")!.click();
-    expect(document.querySelectorAll("li[title]").length).toBe(14);
+    expect(document.querySelectorAll("li[title]").length).toBe(20);
   });
 
   it("no Show more without achievements", () => {

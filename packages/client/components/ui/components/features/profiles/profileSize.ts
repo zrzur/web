@@ -10,11 +10,9 @@ export const ProfileSizeContext = createContext<() => ProfileSize>(
 
 export const useProfileSize = () => useContext(ProfileSizeContext);
 
-/**
- * Tiles (creations, worn items) in one row before Show more. The card and
- * the full profile are the same width (size.ts), so the same three.
- */
-export const tilesShown = (_size: ProfileSize) => 3;
+/** Tiles (creations, worn items) in one row before Show more */
+export const tilesShown = (size: ProfileSize) => (size === "full" ? 4 : 3);
 
-/** Achievement icons under the games: two rows of seven, in either view */
-export const achievementsShown = (_size: ProfileSize) => 14;
+/** Achievement icons under the games: two rows of the panel's width */
+export const achievementsShown = (size: ProfileSize) =>
+  size === "full" ? 20 : 14;

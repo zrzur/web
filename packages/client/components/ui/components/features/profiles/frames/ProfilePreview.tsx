@@ -11,8 +11,6 @@ import { fetchFullProfile } from "../linkedGames";
 import { createProfileTheme } from "../profileTheme";
 import { type UserStyle, isCommunityRef, themeColours } from "../userStyle";
 
-import { PROFILE_HEIGHT, PROFILE_WIDTH } from "../size";
-
 import { FramedCard } from "./ProfileFrame";
 import {
   type FrameRoom,
@@ -21,9 +19,10 @@ import {
   pixelSize,
 } from "./builtinFrames";
 
-/** The one profile size, the same as the card's and the full profile's */
-const CARD_WIDTH = PROFILE_WIDTH;
-const CARD_HEIGHT = PROFILE_HEIGHT;
+/** The profile card's own width (UserCard) */
+const CARD_WIDTH = 360;
+/** Tallest the card is shown here; it scrolls in the real one */
+const CARD_HEIGHT = 560;
 
 /** Room a frame takes round a card of this width */
 function frameRoom(frame: string | undefined, width: number): FrameRoom {
@@ -173,7 +172,7 @@ const Card = styled("div", {
     display: "flex",
     flexDirection: "column",
     width: `${CARD_WIDTH}px`,
-    height: `${CARD_HEIGHT}px`,
+    maxHeight: `${CARD_HEIGHT}px`,
     overflow: "hidden",
     textAlign: "start",
     color: "var(--profile-ink, var(--z-fg-primary))",

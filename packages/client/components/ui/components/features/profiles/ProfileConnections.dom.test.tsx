@@ -6,9 +6,7 @@ import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 const openModal = vi.fn();
 vi.mock("@revolt/modal", () => ({ useModals: () => ({ openModal }) }));
 vi.mock("@revolt/client", () => ({
-  useClient: () => () => ({
-    proxyFile: (url: string) => `https://proxy.test/?u=${url}`,
-  }),
+  useClient: () => () => ({ proxyFile: (url: string) => `https://proxy.test/?u=${url}` }),
 }));
 vi.mock("@revolt/ui/icons/Icon", () => ({
   Icon: (props: { name: string }) => <i data-icon={props.name} />,
@@ -88,9 +86,7 @@ afterEach(() => dispose?.());
 describe("linked services in Interests", () => {
   it("gives each service its own tab, the first one open", () => {
     mount([twitch, github, battlenet]);
-    const tabs = [...document.querySelectorAll("[role=tab]")].map(
-      (el) => el.textContent,
-    );
+    const tabs = [...document.querySelectorAll("[role=tab]")].map((el) => el.textContent);
     expect(tabs).toEqual(["Twitch", "GitHub", "Battle.net"]);
     expect(tab("Twitch").getAttribute("aria-selected")).toBe("true");
   });
@@ -145,9 +141,7 @@ describe("linked services in Interests", () => {
     expect(text()).toContain("From Battle.net");
     // no "Copy" word on screen
     expect(button("Copy")).toBeUndefined();
-    const copy = document.querySelector<HTMLButtonElement>(
-      "[aria-label='Copy BattleTag']",
-    )!;
+    const copy = document.querySelector<HTMLButtonElement>("[aria-label='Copy BattleTag']")!;
     expect(copy.querySelector("[data-icon=copy]")).toBeTruthy();
     copy.click();
     await Promise.resolve();

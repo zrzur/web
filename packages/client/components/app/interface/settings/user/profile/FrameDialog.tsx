@@ -154,8 +154,7 @@ const Stack = styled("div", {
 const Grid = styled("div", {
   base: {
     display: "grid",
-    // wide enough for the profile at its one size with a frame round it
-    gridTemplateColumns: "repeat(auto-fill, minmax(420px, 1fr))",
+    gridTemplateColumns: "repeat(auto-fill, minmax(240px, 1fr))",
     alignContent: "start",
     gap: "12px",
     maxHeight: "min(520px, 60dvh)",
