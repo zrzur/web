@@ -11,6 +11,8 @@
  * settings pages on a phone).
  */
 
+import { onRepeatedPartFailure } from "../components/common/lib/lazyPart";
+
 /** Session storage key: when this tab last reloaded for a missing file */
 export const STALE_RELOAD_KEY = "zrzur:stale-build-reload";
 
@@ -102,6 +104,22 @@ export function watchForStaleBuild(
     event?.preventDefault();
     target.location.reload();
   };
+
+  // A part failed to download twice in a row while the device says it is
+  // online (common/lib/lazyPart.ts). Safari keeps a failed module in its
+  // module map, so asking again can never work there; a reload clears it.
+  // Only when the server answers: with no connection a reload would show
+  // the "no connection" page instead of the app (owner, 2026-11-18: no
+  // reloads for network trouble). A call still holds it, and the 30 s gap
+  // stops a loop.
+  onRepeatedPartFailure(() => {
+    if (holds.size) return;
+    void serverCommit().then((commit) => {
+      if (!commit) return;
+      console.warn("[app] a part failed twice while online: reloading");
+      reload();
+    });
+  });
 
   target.addEventListener("vite:preloadError", (event) => {
     if (holds.size) {

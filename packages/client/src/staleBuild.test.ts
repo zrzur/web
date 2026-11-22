@@ -8,6 +8,8 @@ import {
   watchForStaleBuild,
 } from "./staleBuild";
 
+import { lazy } from "../components/common/lib/lazyPart";
+
 describe("stale build after an update", () => {
   it("reloads the first time, not again right after", () => {
     const now = 1_000_000;
@@ -119,5 +121,46 @@ describe("stale build after an update", () => {
     const next = await fail();
     expect(reload).toHaveBeenCalledOnce();
     expect(next.preventDefault).not.toHaveBeenCalled();
+  });
+
+  describe("a part that failed twice in a row while online (Safari keeps failed modules)", () => {
+    const failingPart = () =>
+      lazy(() =>
+        Promise.reject(new TypeError("Importing a module script failed.")),
+      );
+    const twice = async (part: ReturnType<typeof failingPart>) => {
+      await part.preload().catch(() => undefined);
+      await part.preload().catch(() => undefined);
+      for (let i = 0; i < 5; i++) await Promise.resolve();
+    };
+
+    it("reloads when the server answers, even with the same build", async () => {
+      const { reload } = page("aaaa111");
+      await twice(failingPart());
+      expect(reload).toHaveBeenCalledOnce();
+    });
+
+    it("does not reload when the server cannot be asked (no connection)", async () => {
+      const { reload } = page(undefined);
+      await twice(failingPart());
+      expect(reload).not.toHaveBeenCalled();
+    });
+
+    it("does not reload after one failure", async () => {
+      const { reload } = page("aaaa111");
+      await failingPart()
+        .preload()
+        .catch(() => undefined);
+      for (let i = 0; i < 5; i++) await Promise.resolve();
+      expect(reload).not.toHaveBeenCalled();
+    });
+
+    it("never reloads during a call", async () => {
+      const { reload } = page("aaaa111");
+      const release = holdStaleReload();
+      await twice(failingPart());
+      release();
+      expect(reload).not.toHaveBeenCalled();
+    });
   });
 });
