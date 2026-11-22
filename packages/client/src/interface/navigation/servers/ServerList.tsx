@@ -21,6 +21,7 @@ import { VoiceStatus } from "@revolt/ui/components/design/VoiceStatus";
 import { Tooltip } from "@revolt/ui/components/floating";
 import { Icon } from "@revolt/ui/icons/Icon";
 
+import { keepEntries } from "./keepEntries";
 import { RailEntry, createRailDrag } from "./railDrag";
 
 interface Props {
@@ -119,6 +120,12 @@ export const ServerList = (props: Props) => {
   });
 
   let rail!: HTMLDivElement;
+
+  // the same server keeps the same row (keepEntries): no redraw on every
+  // server change, so menus, tooltips and a resting finger stay put
+  const entries = createMemo<ResolvedEntry[] | undefined>((previous) =>
+    keepEntries(previous, props.orderedEntries),
+  );
 
   /**
    * Fold an entry into another
@@ -328,7 +335,7 @@ export const ServerList = (props: Props) => {
         </Show>
         <LineDivider />
         <div ref={rail} class={railList}>
-          <For each={props.orderedEntries}>
+          <For each={entries()}>
             {(entry) => (
               <Switch>
                 <Match when={entry?.type === "server" && entry}>
