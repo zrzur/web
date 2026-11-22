@@ -10,7 +10,7 @@ import { styled } from "styled-system/jsx";
 import { conversationName } from "@revolt/app/interface/channels/conversationName";
 import { ServerFolderContextMenu } from "@revolt/app/menus";
 import { useClient } from "@revolt/client";
-import { CONFIGURATION, useDevice } from "@revolt/common";
+import { CONFIGURATION } from "@revolt/common";
 import { brandMarkSrc } from "@revolt/common/lib/brandMark";
 import { KeybindAction, createKeybind } from "@revolt/keybinds";
 import { useLocation, useNavigate } from "@revolt/routing";
@@ -73,7 +73,6 @@ export const ServerList = (props: Props) => {
   const state = useState();
   const client = useClient();
   const navigate = useNavigate();
-  const { isMobile, fingerFirst } = useDevice();
   const { t } = useLingui();
   const location = useLocation();
   const onDiscover = () => location.pathname.startsWith("/discover");
@@ -212,9 +211,8 @@ export const ServerList = (props: Props) => {
         if (member) return member.name;
       }
     },
-    //TODO - No server ordering on mobile due to usability issue
-    //Consider adding a way to enable reordering in user settings
-    disabled: () => isMobile || fingerFirst,
+    // phones and tablets too: a finger rests on an entry to lift it
+    // (railDrag), so moving at once still scrolls the rail
     onFold: fold,
     onMove: (moved, before, parent) => place(moved, before, parent),
   });
@@ -523,6 +521,8 @@ function ServerEntry(props: {
           [railHeld]:
             props.drag.dragging() === props.server.id ||
             props.drag.carrying() === props.server.id,
+          [railLifted]:
+            props.drag.lifted() === props.server.id && !props.drag.dragging(),
         }}
         use:floating={props.menuGenerator(props.server)}
       >
@@ -635,6 +635,8 @@ function FolderEntry(props: {
             [railHeld]:
               props.drag.dragging() === props.entry.id ||
               props.drag.carrying() === props.entry.id,
+            [railLifted]:
+              props.drag.lifted() === props.entry.id && !props.drag.dragging(),
           }}
           use:floating={{
             contextMenu: () => (
@@ -759,6 +761,18 @@ const railFolding = css({
  */
 const railHeld = css({
   opacity: 0.35,
+  touchAction: "none",
+});
+
+/**
+ * A finger has rested long enough: the entry rises a little to say it can
+ * be dragged now
+ */
+const railLifted = css({
+  touchAction: "none",
+  transform: "scale(1.08)",
+  transition: "transform 120ms ease",
+  _motionReduce: { transition: "none" },
 });
 
 /**
@@ -906,6 +920,23 @@ const entryContainer = cva({
     display: "grid",
     flexShrink: 0,
     placeItems: "center",
+
+    /*
+     * A long press belongs to the rail (drag or the entry's menu), never to
+     * the browser: no link preview, "open in new tab", text selection or
+     * dragging the link or icon out (iPadOS). Links stay real links for a
+     * middle-click or Ctrl+click.
+     */
+    WebkitTouchCallout: "none",
+    WebkitUserSelect: "none",
+    userSelect: "none",
+    "& a, & img": {
+      WebkitTouchCallout: "none",
+      WebkitUserSelect: "none",
+      userSelect: "none",
+      // @ts-expect-error WebKit-only property Panda has no type for
+      WebkitUserDrag: "none",
+    },
 
     /*
      * State bar on the rail edge (the side the rail starts on, so it mirrors
