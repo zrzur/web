@@ -43,8 +43,11 @@ export type ProfileConnection = {
 /** The linked accounts of a profile, if it has any to show */
 export function profileConnections(profile?: UserProfile): ProfileConnection[] {
   return (
-    (profile as (UserProfile & { connections?: ProfileConnection[] }) | undefined)
-      ?.connections ?? []
+    (
+      profile as
+        | (UserProfile & { connections?: ProfileConnection[] })
+        | undefined
+    )?.connections ?? []
   );
 }
 
@@ -92,7 +95,8 @@ export function serviceImage(
   if (!host || !url) return undefined;
   try {
     const parsed = new URL(url);
-    if (parsed.protocol !== "https:" || parsed.hostname !== host) return undefined;
+    if (parsed.protocol !== "https:" || parsed.hostname !== host)
+      return undefined;
   } catch {
     return undefined;
   }

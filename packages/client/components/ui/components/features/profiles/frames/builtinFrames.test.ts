@@ -32,6 +32,7 @@ describe("built-in profile frames", () => {
   });
 
   it("use 4 px pixels on a card, 3 on a phone, less on small previews", () => {
+    expect(pixelSize(300)).toBe(4);
     expect(pixelSize(360)).toBe(4);
     expect(pixelSize(460)).toBe(4);
     expect(pixelSize(375, true)).toBe(3);

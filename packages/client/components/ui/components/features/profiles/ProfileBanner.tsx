@@ -101,9 +101,10 @@ const Header = styled("div", {
     position: "relative",
     flexShrink: 0,
     userSelect: "none",
-    // the card's banner is 3:1 of its 360 px, or of the phone's width
-    "--banner-height": "120px",
-    "--avatar-ring": "88px",
+    // the profile's banner is 3:1 of its one width (size.ts), or of the
+    // phone's width
+    "--banner-height": "100px",
+    "--avatar-ring": "80px",
     _phone: { "--banner-height": "calc(100vw / 3)" },
     "--header-inset": "16px",
 

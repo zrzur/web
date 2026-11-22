@@ -53,7 +53,7 @@ export const FRAME_DRAWINGS: Record<ProfileFrameId, Drawing> = {
  * its proportions everywhere.
  */
 export function pixelSize(width: number, phone = false) {
-  const cell = Math.min(4, Math.max(2, Math.round(width / 90)));
+  const cell = Math.min(4, Math.max(2, Math.round(width / 75)));
   return phone ? Math.min(cell, 3) : cell;
 }
 

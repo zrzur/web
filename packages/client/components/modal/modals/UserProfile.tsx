@@ -12,6 +12,7 @@ import { ProfileEffect } from "@revolt/ui/components/features/profiles/effects/P
 import { FramedCard } from "@revolt/ui/components/features/profiles/frames/ProfileFrame";
 import { fetchFullProfile } from "@revolt/ui/components/features/profiles/linkedGames";
 import { createProfileTheme } from "@revolt/ui/components/features/profiles/profileTheme";
+import { PROFILE_WIDTH } from "@revolt/ui/components/features/profiles/size";
 import {
   themeColours,
   userStyleOf,
@@ -59,7 +60,7 @@ export function UserProfileModal(
       onClose={props.onClose}
       bare
       unclipped={framed()}
-      width={460}
+      width={PROFILE_WIDTH}
     >
       <FramedCard
         class={framedBox()}
@@ -77,7 +78,7 @@ export function UserProfileModal(
           />
           <div class={main()} use:scrollable>
             <Profile.Banner
-              size="full"
+              size="card"
               user={props.user}
               member={props.member}
               bannerUrl={query.data?.animatedBannerURL}
@@ -109,7 +110,7 @@ export function UserProfileModal(
               <Profile.Identity
                 user={props.user}
                 member={props.member}
-                size="full"
+                size="card"
               />
               <Profile.Body
                 user={props.user}
@@ -169,7 +170,9 @@ const Layout = styled("div", {
     display: "flex",
     flexDirection: "column",
     background: "var(--profile-surface)",
-    maxHeight: "min(760px, calc(100dvh - 98px))",
+    // the window has a 1 px border: inside it, 2 px less, so the outside is
+    // the one profile size (written out for Panda; size.test.ts checks it)
+    height: "min(618px, calc(100dvh - 34px))",
     minHeight: 0,
 
     // the window no longer clips when a frame reaches past it: the profile

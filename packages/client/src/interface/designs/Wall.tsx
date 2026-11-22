@@ -1023,7 +1023,7 @@ const TileBase = styled("div", {
     "&[data-kind='effect']": { gridRow: "span 4" },
     // a card in its frame: the frame reaches past the card, so room round it
     // a whole profile card in its frame: a poster of a tile
-    "&[data-kind='card']": { gridColumn: "span 4", gridRow: "span 6" },
+    "&[data-kind='card']": { gridColumn: "span 5", gridRow: "span 7" },
     "&[data-kind='frame'][data-big='true']": {
       gridColumn: "span 6",
       gridRow: "span 4",
