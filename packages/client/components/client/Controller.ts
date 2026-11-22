@@ -17,6 +17,14 @@ const opensFromKept = () =>
   typeof window !== "undefined" &&
   !!window.matchMedia?.("(max-width: 600px)").matches;
 
+/**
+ * Wider screens wait this long for the server's first answer, then open from
+ * the kept state too. On a good line the answer is there well before; on a
+ * slow one (it can take 5–15 s at 400 kbps) the lists show instead of a
+ * loading screen, and are corrected when the answer comes.
+ */
+export const KEPT_START_WIDE_MS = 1500;
+
 // Reading without a connection is not part of the files the app installs up
 // front: it loads once someone is signed in (scripts/precacheShell.mjs)
 const offlineParts = () => import("./offline");
@@ -184,6 +192,8 @@ class Lifecycle {
 
     this.#offline?.detach();
     this.#offline = undefined;
+    clearTimeout(this.#keptTimer);
+    this.#keptTimer = undefined;
     this.client = this.#controller.instance.newClient();
 
     this.client.options.channelIsMuted = (ch) =>
@@ -489,10 +499,15 @@ class Lifecycle {
 
   /** What this client keeps for reading without a connection */
   #offline: OfflineData | undefined;
+  /** Wider screens: opens from the kept state when the server is slow */
+  #keptTimer: ReturnType<typeof setTimeout> | undefined;
 
   #keepOffline(userId: string) {
     this.#offline?.detach();
     this.#offline = undefined;
+    clearTimeout(this.#keptTimer);
+    this.#keptTimer = undefined;
+    const asked = Date.now();
     const client = this.client;
     // the gateway may answer before the part has loaded: hold its state
     let early: unknown;
@@ -520,6 +535,14 @@ class Lifecycle {
         // start without a connection.
         else if (this.#connectionFailures > 0 || opensFromKept())
           void this.#startFromKept();
+        else
+          this.#keptTimer = setTimeout(
+            () => {
+              this.#keptTimer = undefined;
+              if (this.client === client) void this.#startFromKept();
+            },
+            Math.max(0, KEPT_START_WIDE_MS - (Date.now() - asked)),
+          );
       })
       .catch(() => events.off?.("event", hold));
   }
@@ -533,7 +556,11 @@ class Lifecycle {
   async #startFromKept() {
     const offline = this.#offline;
     if (!offline || this.loadedOnce()) return;
-    const restored = await offline.restore().catch(() => false);
+    // the server may answer while the kept state is being read: its answer
+    // wins, and the older kept one is not put over it
+    const restored = await offline
+      .restore(() => !this.loadedOnce() && this.#offline === offline)
+      .catch(() => false);
     // connected, or logged out, while the kept state was being read
     if (!restored || this.loadedOnce() || this.#offline !== offline) return;
     const user = this.client.user;
