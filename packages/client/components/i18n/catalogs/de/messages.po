@@ -31151,3 +31151,7 @@ msgstr "Ein Mitglied, das gegangen ist"
 #: components/app/interface/settings/channel/permissions/ChannelVisibility.tsx
 msgid "This thread follows who can see its channel."
 msgstr "Dieser Thread übernimmt, wer seinen Kanal sehen kann."
+
+#: components/modal/index.tsx
+msgid "Could not open. Check your connection and try again."
+msgstr "Konnte nicht geöffnet werden. Prüfe deine Verbindung und versuche es erneut."

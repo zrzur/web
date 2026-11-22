@@ -31151,3 +31151,7 @@ msgstr "عضو غادر السيرفر"
 #: components/app/interface/settings/channel/permissions/ChannelVisibility.tsx
 msgid "This thread follows who can see its channel."
 msgstr "يتبع هذا الخيط إعدادات من يرى قناته."
+
+#: components/modal/index.tsx
+msgid "Could not open. Check your connection and try again."
+msgstr "تعذّر الفتح. تحقّق من اتصالك وحاول مرة أخرى."
