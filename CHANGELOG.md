@@ -2,6 +2,10 @@
 
 ## Unreleased
 
+### Buttons keep working after the connection drops for a moment (2026-11-22, user report)
+
+* **Installed app on phones: buttons no longer die "after a while".** Dialogs, sheets, panels and pages load the first time they open. When that first download failed (the network gone for a moment, often right after the app comes back from the background), Solid's `lazy()` kept the failure, and the button that opens the part did nothing from then on, however good the connection was, until the page was reloaded; in the installed app that meant closing it. The app's own `lazy()` (`components/common/lib/lazyPart.ts`) forgets a failed download, so the next press asks again (the service worker already tries each file three times; the part does not retry by itself, so no dialog turns up seconds late and opens twice). A part that loaded is never downloaded twice. `lazyRetry` (call parts, the + panel, channel details, search, threads) no longer keeps its empty fallback for good either, and badge art that failed to load is asked for again. ESLint now refuses `lazy` from `solid-js` in the client.
+
 ### A friend request opens the sender's profile (2026-11-21)
 
 * **From the phone Notifications page:** the sender's picture and the line "… sent you a friend request" are one button (44 px high) that opens their profile. Screen readers hear the sentence they see as its name, then "Open profile" (ar, en, de) as its description. Accept, Decline and Send message are separate buttons and are not touched by it. The page closes first so the profile is not under it; the profile has its own Accept.
