@@ -3,17 +3,20 @@ import { join } from "node:path";
 
 import { describe, expect, it } from "vitest";
 
-import { NAME_GRADIENTS, NAME_SOLIDS } from "./nameStyles";
+import { NAME_GRADIENTS, NAME_SOLIDS, NAME_SPECTRA } from "./nameStyles";
 import { PACK_DECORATIONS, PACK_NAMEPLATES } from "./pack/designs.generated";
 import {
   DECORATIONS,
   NAMEPLATES,
+  NAME_EFFECTS,
   NAME_FONTS,
   communityShownUrl,
   effectFileUrl,
   effectStillUrl,
+  nameColourForLight,
   nameStyle,
   nameplateBackground,
+  setNameView,
   themeColours,
   userStyleOf,
 } from "./userStyle";
@@ -197,7 +200,11 @@ describe("user style", () => {
   it("keeps every name colour readable on dark surfaces", () => {
     expect(NAME_GRADIENTS.length).toBeGreaterThanOrEqual(60);
     for (const surface of ["#171925", "#1D1F2D", "#242638"]) {
-      for (const colour of [...NAME_SOLIDS, ...NAME_GRADIENTS.flat()]) {
+      for (const colour of [
+        ...NAME_SOLIDS,
+        ...NAME_GRADIENTS.flat(),
+        ...NAME_SPECTRA.flat(),
+      ]) {
         expect(contrast(colour, surface)).toBeGreaterThanOrEqual(4.5);
       }
     }
@@ -243,5 +250,88 @@ describe("a community design shown to someone saving data", () => {
     expect(
       communityShownUrl("https://cdn", "Decoration", undefined, true),
     ).toBeUndefined();
+  });
+});
+
+describe("name effects", () => {
+  const still = { plain: false, light: false, still: false };
+
+  it("draws a spectrum of three to five colours, still unless asked", () => {
+    setNameView(still);
+    const five = ["#ff5c8a", "#ffb347", "#7ee081", "#6dd5ed", "#b794ff"];
+    const css = nameStyle({ name_colour: five });
+    expect(css["background-image"]).toContain("#b794ff");
+    expect(css.animation).toBeUndefined();
+    expect(
+      nameStyle({ name_colour: five }, { moving: true }).animation,
+    ).toContain("z-name-flow");
+    // a sixth colour is never drawn
+    const six = nameStyle({ name_colour: [...five, "#000000"] });
+    expect(six["background-image"]).not.toContain("#000000");
+  });
+
+  it("draws each effect and ignores unknown ones", () => {
+    setNameView(still);
+    for (const effect of NAME_EFFECTS) {
+      const css = nameStyle({ name_colour: ["#6dd5ed"], name_effect: effect });
+      expect(
+        css["text-shadow"] ?? css.filter ?? css["background-image"],
+      ).toBeTruthy();
+    }
+    const unknown = nameStyle({
+      name_colour: ["#6dd5ed"],
+      name_effect: "x;background:url(y)",
+    });
+    expect(unknown).toEqual({ color: "#6dd5ed" });
+  });
+
+  it("keeps an effect with a role colour, as a filter", () => {
+    setNameView(still);
+    const css = nameStyle(
+      { name_colour: ["#6dd5ed"], name_effect: "halo" },
+      { colour: false },
+    );
+    expect(css.color).toBeUndefined();
+    expect(css.filter).toContain("drop-shadow");
+  });
+
+  it("stops moving under reduced motion", () => {
+    setNameView({ ...still, still: true });
+    const css = nameStyle(
+      { name_colour: ["#b794ff", "#ff8ac4"], name_effect: "sheen" },
+      { moving: true },
+    );
+    expect(css.animation).toBeUndefined();
+    setNameView(still);
+  });
+
+  it("darkens colours on light surfaces until they read", () => {
+    for (const colour of [
+      ...NAME_SOLIDS,
+      ...NAME_GRADIENTS.flat(),
+      ...NAME_SPECTRA.flat(),
+    ]) {
+      const shade = nameColourForLight(colour);
+      for (const surface of ["#FFFFFF", "#F3F4FA", "#EEF0F7", "#E4E6F0"]) {
+        expect(contrast(shade, surface)).toBeGreaterThanOrEqual(4.5);
+      }
+    }
+    // a colour that already reads stays as it is
+    expect(nameColourForLight("#171925")).toBe("#171925");
+    setNameView({ ...still, light: true });
+    expect(nameStyle({ name_colour: ["#ffffff"] }).color).not.toBe("#ffffff");
+    expect(
+      nameStyle({ name_colour: ["#ffffff"] }, { surface: "dark" }).color,
+    ).toBe("#ffffff");
+    setNameView(still);
+  });
+
+  it("shows every name plain when the viewer turns name styles off", () => {
+    setNameView({ ...still, plain: true });
+    const style = { name_font: "serif", name_colour: ["#ff0000"] };
+    expect(nameStyle(style)).toEqual({});
+    // the editor's own preview still draws
+    expect(nameStyle(style, { always: true }).color).toBe("#ff0000");
+    setNameView(still);
   });
 });

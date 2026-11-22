@@ -31151,3 +31151,61 @@ msgstr "عضو غادر السيرفر"
 #: components/app/interface/settings/channel/permissions/ChannelVisibility.tsx
 msgid "This thread follows who can see its channel."
 msgstr "يتبع هذا الخيط إعدادات من يرى قناته."
+
+#: components/app/interface/settings/user/profile/StyleEditors.tsx
+#: components/app/interface/settings/user/profile/UserProfileEditor.tsx
+msgid "Edge"
+msgstr "حافّة"
+
+#: components/app/interface/settings/user/profile/StyleEditors.tsx
+#: components/app/interface/settings/user/profile/UserProfileEditor.tsx
+msgid "Lifted"
+msgstr "بارز"
+
+#: components/app/interface/settings/user/profile/StyleEditors.tsx
+#: components/app/interface/settings/user/profile/UserProfileEditor.tsx
+msgid "Sheen"
+msgstr "لمعة"
+
+#: components/app/interface/settings/user/profile/StyleEditors.tsx
+#: components/app/interface/settings/user/profile/UserProfileEditor.tsx
+msgid "Spectrum"
+msgstr "طيف"
+
+#: components/app/interface/settings/user/profile/StyleEditors.tsx
+msgid "Choose effect"
+msgstr "اختر المؤثر"
+
+#: components/app/interface/settings/user/profile/StyleEditors.tsx
+msgid "Add a colour"
+msgstr "أضف لونًا"
+
+#. placeholder {0}: index + 1
+#: components/app/interface/settings/user/profile/StyleEditors.tsx
+msgid "Colour {0}"
+msgstr "اللون {0}"
+
+#. placeholder {0}: index + 1
+#: components/app/interface/settings/user/profile/StyleEditors.tsx
+msgid "Remove colour {0}"
+msgstr "إزالة اللون {0}"
+
+#: components/app/interface/settings/user/profile/StyleEditors.tsx
+msgid "Edge: the first colour fills the letters, the second draws the border."
+msgstr "الحافّة: اللون الأول يملأ الحروف، والثاني يرسم حدّها."
+
+#: components/app/interface/settings/user/profile/StyleEditors.tsx
+msgid "Pick a font, colours and an effect for your display name."
+msgstr "اختر خطًا وألوانًا ومؤثرًا لاسمك الظاهر."
+
+#: components/app/interface/settings/user/profile/StyleEditors.tsx
+msgid "In a server, a role colour wins over yours, but your font and effect stay. On light themes your colours are darkened a little so the name stays readable."
+msgstr "في السيرفر يتقدّم لون الدور على لونك، ويبقى خطّك ومؤثرك. في السمات الفاتحة تُعتَّم ألوانك قليلًا ليبقى الاسم مقروءًا."
+
+#: components/app/interface/settings/user/Advanced.tsx
+msgid "Show name styles"
+msgstr "إظهار أنماط الأسماء"
+
+#: components/app/interface/settings/user/Advanced.tsx
+msgid "Fonts, colours and effects people chose for their names. Off shows every name plain."
+msgstr "الخطوط والألوان والمؤثرات التي اختارها الناس لأسمائهم. عند الإيقاف تظهر كل الأسماء بخط عادي."

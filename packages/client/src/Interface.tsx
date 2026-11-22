@@ -20,13 +20,13 @@ import { Titlebar } from "@revolt/app/interface/desktop/Titlebar";
 import { ChangeRequestNotice } from "@revolt/app/interface/settings/user/account/ChangeRequestNotice";
 import { NoticeCenter } from "@revolt/app/interface/support/NoticeCenter";
 import { SaveDataOffer } from "@revolt/app/interface/support/SaveDataOffer";
+import { ConfirmEmailStrip } from "@revolt/auth/src/invite/ConfirmEmailStrip";
 import { useClient, useClientLifecycle } from "@revolt/client";
 import { State } from "@revolt/client/Controller";
 import { NotificationsWorker } from "@revolt/client/NotificationsWorker";
 import { useDevice } from "@revolt/common";
 import { useModals } from "@revolt/modal";
 import { PluginHostGate } from "@revolt/plugins/PluginHostGate";
-import { ConfirmEmailStrip } from "@revolt/auth/src/invite/ConfirmEmailStrip";
 import { Navigate, useBeforeLeave, useLocation } from "@revolt/routing";
 import { useState } from "@revolt/state";
 import { LAYOUT_SECTIONS } from "@revolt/state/stores/Layout";
@@ -34,6 +34,7 @@ import { lazyRetry } from "@revolt/ui/components/utils/lazyRetry";
 import { useMotion } from "@revolt/ui/motion";
 
 import { rememberSignedIn } from "@revolt/ui";
+import { useNameStyleSync } from "@revolt/ui/components/features/profiles/nameStyleView";
 import { SlideDrawer } from "../components/ui/components/navigation/SlideDrawer";
 import { Sidebar } from "./interface/Sidebar";
 import { FirstScreen } from "./interface/home/FirstScreen";
@@ -69,6 +70,7 @@ const InstallOffer = lazy(() =>
 
 const Interface = (props: { children?: JSX.Element }) => {
   const state = useState();
+  useNameStyleSync();
   const client = useClient();
   const { openModal, showError } = useModals();
   const { isLoggedIn, lifecycle } = useClientLifecycle();

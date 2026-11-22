@@ -1,11 +1,11 @@
-import { For, JSX, Match, Show, Switch, createSignal } from "solid-js";
+import { For, Index, JSX, Match, Show, Switch, createSignal } from "solid-js";
 
 import { Trans, useLingui } from "@lingui/solid/macro";
 import { styled } from "styled-system/jsx";
 
 import { useState } from "@revolt/state";
 import type { CollectibleRef } from "@revolt/state/stores/Collectibles";
-import { Avatar, Dialog, UserStatus } from "@revolt/ui";
+import { Avatar, Dialog, Segmented, UserStatus } from "@revolt/ui";
 import { ColourWell } from "@revolt/ui/components/design/ColourWell";
 import { AvatarDecoration } from "@revolt/ui/components/features/profiles/AvatarDecoration";
 import {
@@ -15,12 +15,16 @@ import {
 import {
   NAME_GRADIENTS,
   NAME_SOLIDS,
+  NAME_SPECTRA,
 } from "@revolt/ui/components/features/profiles/nameStyles";
 import {
+  type NameEffect,
   type NameplateGroup,
   DECORATIONS,
   NAMEPLATES,
+  NAME_EFFECTS,
   NAME_FONTS,
+  NAME_MAX_COLOURS,
   THEME_PRESETS,
   UserStyle,
   isCommunityRef,
@@ -107,8 +111,20 @@ export function ThemePicker(props: {
   );
 }
 
+/** Colour modes, by how many colours each one uses */
+type NameMode = "none" | "solid" | "gradient" | "spectrum";
+const modeOf = (count: number): NameMode =>
+  count >= 3
+    ? "spectrum"
+    : count === 2
+      ? "gradient"
+      : count === 1
+        ? "solid"
+        : "none";
+
 /**
- * Display name style: font, then no colour / one colour / gradient
+ * Display name style: font, colour (none, one, gradient or a spectrum of
+ * three to five), and an effect on top. The preview shows dark and light.
  */
 export function NameStyleDialog(props: {
   show: boolean;
@@ -118,35 +134,71 @@ export function NameStyleDialog(props: {
   handle?: string;
   avatar?: string;
   value: UserStyle;
-  onApply: (style: Pick<UserStyle, "name_font" | "name_colour">) => void;
+  onApply: (
+    style: Pick<UserStyle, "name_font" | "name_colour" | "name_effect">,
+  ) => void;
 }) {
   const { t, i18n } = useLingui();
   const fontLabel = useNameFontLabel();
+  const state = useState();
   // the dialog edits a copy; it opens fresh each time
   /* eslint-disable solid/reactivity */
   const [font, setFont] = createSignal(props.value.name_font ?? "default");
   const [colour, setColour] = createSignal<string[]>(
-    props.value.name_colour ?? [],
+    (props.value.name_colour ?? []).slice(0, NAME_MAX_COLOURS),
+  );
+  const [effect, setEffect] = createSignal<string | undefined>(
+    props.value.name_effect,
+  );
+  const [surface, setSurface] = createSignal<"dark" | "light">(
+    state.theme.activeTheme.darkMode ? "dark" : "light",
   );
   /* eslint-enable solid/reactivity */
-  const mode = () =>
-    colour().length === 2
-      ? "gradient"
-      : colour().length === 1
-        ? "solid"
-        : "none";
-  const draft = (): UserStyle => ({ name_font: font(), name_colour: colour() });
+  const mode = () => modeOf(colour().length);
+  const draft = (): UserStyle => ({
+    name_font: font(),
+    name_colour: colour(),
+    name_effect: effect(),
+  });
+  /** the preview's look: always drawn, moving, on the chosen surface */
+  const look = () =>
+    nameStyle(draft(), { always: true, moving: true, surface: surface() });
   const changed = () =>
     font() !== (props.value.name_font ?? "default") ||
-    !sameColours(colour(), props.value.name_colour);
+    !sameColours(colour(), props.value.name_colour) ||
+    effect() !== props.value.name_effect;
+  const sample = () => (i18n().locale === "ar" ? "زر" : "Gg");
+
+  const effects = (): { id: NameEffect | undefined; label: string }[] => [
+    { id: undefined, label: t`No effect` },
+    { id: "halo", label: t`Halo` },
+    { id: "edge", label: t`Edge` },
+    { id: "lifted", label: t`Lifted` },
+    { id: "sheen", label: t`Sheen` },
+  ];
+
+  function pickMode(next: NameMode) {
+    const now = colour();
+    if (next === "none") setColour([]);
+    else if (next === "solid") setColour([now[0] ?? NAME_SOLIDS[0]]);
+    else if (next === "gradient")
+      setColour(now.length === 2 ? now : [...NAME_GRADIENTS[0]]);
+    else setColour(now.length >= 3 ? now : [...NAME_SPECTRA[0]]);
+  }
 
   function surprise() {
     const pick = <T,>(list: readonly T[]) =>
       list[Math.floor(Math.random() * list.length)];
     setFont(pick(NAME_FONTS).id);
+    const roll = Math.random();
     setColour(
-      Math.random() < 0.5 ? [pick(NAME_SOLIDS)] : [...pick(NAME_GRADIENTS)],
+      roll < 0.35
+        ? [pick(NAME_SOLIDS)]
+        : roll < 0.7
+          ? [...pick(NAME_GRADIENTS)]
+          : [...pick(NAME_SPECTRA)],
     );
+    setEffect(Math.random() < 0.6 ? pick(NAME_EFFECTS) : undefined);
   }
 
   return (
@@ -156,7 +208,9 @@ export function NameStyleDialog(props: {
       show={props.show}
       onClose={props.onClose}
       title={<Trans>Display name style</Trans>}
-      description={<Trans>Pick a font and colour for your display name.</Trans>}
+      description={
+        <Trans>Pick a font, colours and an effect for your display name.</Trans>
+      }
       size="xl"
       actions={[
         {
@@ -165,6 +219,7 @@ export function NameStyleDialog(props: {
           onClick: () => {
             setFont("default");
             setColour([]);
+            setEffect(undefined);
             return false;
           },
         },
@@ -175,6 +230,7 @@ export function NameStyleDialog(props: {
             props.onApply({
               name_font: font() === "default" ? undefined : font(),
               name_colour: colour(),
+              name_effect: effect(),
             }),
         },
       ]}
@@ -191,11 +247,11 @@ export function NameStyleDialog(props: {
                   type="button"
                   aria-pressed={font() === option.id}
                   onClick={() => setFont(option.id)}
-                  style={nameStyle({ name_font: option.id })}
+                  style={nameStyle({ name_font: option.id }, { always: true })}
                   title={fontLabel(option.id)}
                   aria-label={fontLabel(option.id)}
                 >
-                  {i18n().locale === "ar" ? "زر" : "Gg"}
+                  {sample()}
                 </Choice>
               )}
             </For>
@@ -208,71 +264,154 @@ export function NameStyleDialog(props: {
             <Mode
               type="button"
               aria-pressed={mode() === "none"}
-              onClick={() => setColour([])}
+              onClick={() => pickMode("none")}
             >
               <Trans>None</Trans>
             </Mode>
             <Mode
               type="button"
               aria-pressed={mode() === "solid"}
-              onClick={() => setColour([colour()[0] ?? NAME_SOLIDS[0]])}
+              onClick={() => pickMode("solid")}
             >
               <Trans>Solid</Trans>
             </Mode>
             <Mode
               type="button"
               aria-pressed={mode() === "gradient"}
-              onClick={() =>
-                setColour(
-                  colour().length === 2 ? colour() : [...NAME_GRADIENTS[0]],
-                )
-              }
+              onClick={() => pickMode("gradient")}
             >
               <Trans>Gradient</Trans>
+            </Mode>
+            <Mode
+              type="button"
+              aria-pressed={mode() === "spectrum"}
+              onClick={() => pickMode("spectrum")}
+            >
+              <Trans>Spectrum</Trans>
             </Mode>
           </Modes>
 
           <Show when={mode() !== "none"}>
-            <ColourRow>
-              <ColourWell
-                size="lg"
-                label={t`Pick a colour`}
-                value={colour()[0]}
-                onInput={(picked) => setColour([picked, ...colour().slice(1)])}
-              />
-              <Show when={mode() === "gradient"}>
-                <ColourWell
-                  size="lg"
-                  label={t`Second colour`}
-                  value={colour()[1]}
-                  onInput={(picked) => setColour([colour()[0], picked])}
-                />
-              </Show>
-              <SmallSwatches>
-                <For
-                  each={
-                    mode() === "solid"
-                      ? NAME_SOLIDS.map((c) => [c])
-                      : NAME_GRADIENTS.map((g) => [...g])
+            <ColourRow data-wrap>
+              <Index each={colour()}>
+                {(value, index) => (
+                  <ColourStop>
+                    <ColourWell
+                      size="lg"
+                      label={
+                        index === 0
+                          ? t`Pick a colour`
+                          : index === 1
+                            ? t`Second colour`
+                            : t`Colour ${index + 1}`
+                      }
+                      value={value()}
+                      onInput={(picked) =>
+                        setColour(
+                          colour().map((c, at) => (at === index ? picked : c)),
+                        )
+                      }
+                    />
+                    <Show when={mode() === "spectrum" && colour().length > 3}>
+                      <StopRemove
+                        type="button"
+                        aria-label={t`Remove colour ${index + 1}`}
+                        onClick={() =>
+                          setColour(colour().filter((_, at) => at !== index))
+                        }
+                      >
+                        <Icon name="x" size={12} />
+                      </StopRemove>
+                    </Show>
+                  </ColourStop>
+                )}
+              </Index>
+              <Show
+                when={
+                  mode() === "spectrum" && colour().length < NAME_MAX_COLOURS
+                }
+              >
+                <StopAdd
+                  type="button"
+                  aria-label={t`Add a colour`}
+                  onClick={() =>
+                    setColour([
+                      ...colour(),
+                      NAME_SOLIDS[(colour().length * 5) % NAME_SOLIDS.length],
+                    ])
                   }
                 >
-                  {(option) => (
-                    <SmallSwatch
-                      type="button"
-                      aria-label={option.join(" → ")}
-                      aria-pressed={sameColours(colour(), option)}
-                      style={{
-                        background:
-                          option.length === 2
-                            ? `linear-gradient(90deg, ${option[0]}, ${option[1]})`
-                            : option[0],
-                      }}
-                      onClick={() => setColour(option)}
-                    />
-                  )}
-                </For>
-              </SmallSwatches>
+                  <Icon name="plus" size={18} />
+                </StopAdd>
+              </Show>
             </ColourRow>
+            <SmallSwatches data-mode={mode()}>
+              <For
+                each={
+                  mode() === "solid"
+                    ? NAME_SOLIDS.map((c) => [c])
+                    : mode() === "gradient"
+                      ? NAME_GRADIENTS.map((g) => [...g])
+                      : NAME_SPECTRA
+                }
+              >
+                {(option) => (
+                  <SmallSwatch
+                    type="button"
+                    aria-label={option.join(" → ")}
+                    aria-pressed={sameColours(colour(), option)}
+                    style={{
+                      background:
+                        option.length >= 2
+                          ? `linear-gradient(90deg, ${option.join(", ")})`
+                          : option[0],
+                    }}
+                    onClick={() => setColour([...option])}
+                  />
+                )}
+              </For>
+            </SmallSwatches>
+          </Show>
+
+          <Label>
+            <Trans>Choose effect</Trans>
+          </Label>
+          <EffectGrid>
+            <For each={effects()}>
+              {(option) => (
+                <EffectTile
+                  type="button"
+                  aria-pressed={effect() === option.id}
+                  onClick={() => setEffect(option.id)}
+                  data-effect={option.id ?? "none"}
+                >
+                  <b
+                    aria-hidden="true"
+                    style={nameStyle(
+                      {
+                        name_font: "bold",
+                        name_colour: colour().length
+                          ? colour()
+                          : ["#6dd5ed", "#b794ff"],
+                        name_effect: option.id,
+                      },
+                      { always: true, surface: "dark" },
+                    )}
+                  >
+                    {sample()}
+                  </b>
+                  <span>{option.label}</span>
+                </EffectTile>
+              )}
+            </For>
+          </EffectGrid>
+          <Show when={effect() === "edge" && colour().length >= 2}>
+            <Note>
+              <Trans>
+                Edge: the first colour fills the letters, the second draws the
+                border.
+              </Trans>
+            </Note>
           </Show>
 
           <Surprise type="button" onClick={surprise}>
@@ -282,47 +421,63 @@ export function NameStyleDialog(props: {
         </div>
 
         <PreviewStack>
-          <MiniProfile>
-            <MiniBanner />
-            <MiniAvatar>
-              <Avatar size={72} src={props.avatar} fallback={props.name} />
-            </MiniAvatar>
-            <strong style={nameStyle(draft())}>
-              <bdi>{props.name}</bdi>
-            </strong>
-            <Show when={props.handle}>
-              <small>
-                <bdi>@{props.handle}</bdi>
-              </small>
-            </Show>
-          </MiniProfile>
-          <PreviewMessage>
-            <Avatar size={36} src={props.avatar} fallback={props.name} />
-            <div>
-              <span class={"head"}>
-                <strong style={nameStyle(draft())}>
-                  <bdi>{props.name}</bdi>
-                </strong>
-                <time>
-                  <Trans>now</Trans>
-                </time>
-              </span>
-              <span>
-                <Trans>does anyone read this?</Trans>
-              </span>
-            </div>
-          </PreviewMessage>
-          <MemberRow>
-            <Avatar size={24} src={props.avatar} fallback={props.name} />
-            <strong style={nameStyle(draft())}>
-              <bdi>{props.name}</bdi>
-            </strong>
-          </MemberRow>
+          <PreviewHead>
+            <PreviewTitle id="name-preview-label">
+              <Trans>Preview</Trans>
+            </PreviewTitle>
+            <Segmented<"dark" | "light">
+              aria-labelledby="name-preview-label"
+              value={surface()}
+              onChange={setSurface}
+              options={[
+                { value: "dark", label: <Trans>Dark</Trans> },
+                { value: "light", label: <Trans>Light</Trans> },
+              ]}
+            />
+          </PreviewHead>
+          <PreviewSurface data-surface={surface()}>
+            <MiniProfile>
+              <MiniBanner />
+              <MiniAvatar>
+                <Avatar size={72} src={props.avatar} fallback={props.name} />
+              </MiniAvatar>
+              <strong style={look()} data-name-preview>
+                <bdi>{props.name}</bdi>
+              </strong>
+              <Show when={props.handle}>
+                <small>
+                  <bdi>@{props.handle}</bdi>
+                </small>
+              </Show>
+            </MiniProfile>
+            <PreviewMessage>
+              <Avatar size={36} src={props.avatar} fallback={props.name} />
+              <div>
+                <span class={"head"}>
+                  <strong style={look()}>
+                    <bdi>{props.name}</bdi>
+                  </strong>
+                  <time>
+                    <Trans>now</Trans>
+                  </time>
+                </span>
+                <span>
+                  <Trans>does anyone read this?</Trans>
+                </span>
+              </div>
+            </PreviewMessage>
+            <MemberRow>
+              <Avatar size={24} src={props.avatar} fallback={props.name} />
+              <strong style={look()}>
+                <bdi>{props.name}</bdi>
+              </strong>
+            </MemberRow>
+          </PreviewSurface>
           <Note>
             <Trans>
-              In a server, a role colour wins over yours, but your font stays.
-              On a profile card with a theme, your name turns white so it stays
-              readable.
+              In a server, a role colour wins over yours, but your font and
+              effect stay. On light themes your colours are darkened a little so
+              the name stays readable.
             </Trans>
           </Note>
         </PreviewStack>
@@ -1136,13 +1291,19 @@ const Choice = styled("button", {
 });
 
 const Modes = styled("div", {
-  base: { display: "flex", gap: "8px", marginBottom: "12px" },
+  base: {
+    display: "flex",
+    flexWrap: "wrap",
+    gap: "8px",
+    marginBottom: "12px",
+  },
 });
 
 const Mode = styled("button", {
   base: {
     ...choice,
     height: "38px",
+    "@media (pointer: coarse)": { height: "44px" },
     paddingInline: "14px",
     font: "inherit",
     fontSize: "14px",
@@ -1151,14 +1312,23 @@ const Mode = styled("button", {
 });
 
 const ColourRow = styled("div", {
-  base: { display: "flex", alignItems: "center", gap: "12px" },
+  base: {
+    display: "flex",
+    alignItems: "center",
+    gap: "12px",
+    "&[data-wrap]": { flexWrap: "wrap", marginBottom: "12px" },
+  },
 });
 
 const SmallSwatches = styled("div", {
   base: {
     display: "grid",
-    gridTemplateColumns: "repeat(4, 34px)",
+    gridTemplateColumns: "repeat(auto-fill, minmax(34px, 1fr))",
     gap: "6px",
+    marginBottom: "16px",
+    "&[data-mode='spectrum']": {
+      gridTemplateColumns: "repeat(auto-fill, minmax(72px, 1fr))",
+    },
   },
 });
 
@@ -1173,6 +1343,121 @@ const SmallSwatch = styled("button", {
     _focusVisible: {
       outline: "2px solid var(--z-focus)",
       outlineOffset: "2px",
+    },
+  },
+});
+
+const ColourStop = styled("div", {
+  base: { position: "relative", display: "inline-flex" },
+});
+
+/** small round × on a spectrum colour, inside the 44 px of its well */
+const StopRemove = styled("button", {
+  base: {
+    position: "absolute",
+    top: "-6px",
+    insetInlineEnd: "-6px",
+    display: "grid",
+    placeItems: "center",
+    width: "20px",
+    height: "20px",
+    padding: 0,
+    borderRadius: "50%",
+    border: "1px solid var(--z-border-strong)",
+    background: "var(--z-bg-raised)",
+    color: "var(--z-fg-secondary)",
+    cursor: "pointer",
+    "--z-icon-color": "currentColor",
+    _hover: { color: "var(--z-fg-primary)" },
+    _focusVisible: {
+      outline: "2px solid var(--z-focus)",
+      outlineOffset: "2px",
+    },
+  },
+});
+
+const StopAdd = styled("button", {
+  base: {
+    ...choice,
+    display: "grid",
+    placeItems: "center",
+    width: "44px",
+    height: "44px",
+    padding: 0,
+    borderStyle: "dashed",
+    color: "var(--z-fg-secondary)",
+    "--z-icon-color": "currentColor",
+  },
+});
+
+const EffectGrid = styled("div", {
+  base: {
+    display: "grid",
+    gridTemplateColumns: "repeat(5, minmax(0, 1fr))",
+    gap: "8px",
+    marginBottom: "8px",
+    "@media (max-width: 480px)": {
+      gridTemplateColumns: "repeat(3, minmax(0, 1fr))",
+    },
+  },
+});
+
+const EffectTile = styled("button", {
+  base: {
+    ...choice,
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+    justifyContent: "center",
+    gap: "2px",
+    minHeight: "64px",
+    padding: "8px 4px",
+    font: "inherit",
+    "& b": { fontSize: "20px", lineHeight: "26px" },
+    "& span": { fontSize: "12px", color: "var(--z-fg-secondary)" },
+  },
+});
+
+const PreviewHead = styled("div", {
+  base: {
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "space-between",
+    flexWrap: "wrap",
+    gap: "8px",
+  },
+});
+
+const PreviewTitle = styled("span", {
+  base: {
+    fontSize: "12px",
+    fontWeight: 700,
+    color: "var(--z-fg-secondary)",
+  },
+});
+
+/**
+ * The preview's own surface. Light draws with the light theme's surface and
+ * ink values (ZRZUR_LIGHT), so a dark-theme user sees how their name reads
+ * there too.
+ */
+const PreviewSurface = styled("div", {
+  base: {
+    display: "flex",
+    flexDirection: "column",
+    gap: "10px",
+    padding: "10px",
+    borderRadius: "calc(var(--z-radius, 10px) + 4px)",
+    border: "1px solid var(--z-border-subtle)",
+    "&[data-surface='light']": {
+      "--z-bg-input": "#EEF0F7",
+      "--z-bg-raised": "#E7E8F2",
+      "--z-border-subtle": "#DADCEA",
+      "--z-fg-primary": "#171925",
+      "--z-fg-secondary": "#454A62",
+      "--z-fg-muted": "#5E6379",
+      background: "#FFFFFF",
+      color: "#171925",
     },
   },
 });

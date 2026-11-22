@@ -208,6 +208,7 @@ export function UserProfileEditor(props: Props) {
         ...(style.name_colour?.length
           ? { name_colour: style.name_colour }
           : {}),
+        ...(style.name_effect ? { name_effect: style.name_effect } : {}),
         ...(style.decoration ? { decoration: style.decoration } : {}),
         ...(style.nameplate ? { nameplate: style.nameplate } : {}),
         ...(style.effect ? { effect: style.effect } : {}),
@@ -311,11 +312,20 @@ export function UserProfileEditor(props: Props) {
     return index > 0 ? t`Font ` : t`Default font`;
   };
   const colourLabel = () =>
-    style().name_colour?.length === 2
-      ? t`Gradient`
-      : style().name_colour?.length === 1
-        ? t`Solid colour`
-        : t`No colour`;
+    (style().name_colour?.length ?? 0) >= 3
+      ? t`Spectrum`
+      : style().name_colour?.length === 2
+        ? t`Gradient`
+        : style().name_colour?.length === 1
+          ? t`Solid colour`
+          : t`No colour`;
+  const nameEffectLabel = () =>
+    ({
+      halo: t`Halo`,
+      edge: t`Edge`,
+      lifted: t`Lifted`,
+      sheen: t`Sheen`,
+    })[style().name_effect ?? ""];
   const shownName = () =>
     editGroup.controls.displayName.value?.trim() || props.user.username;
   const previewTheme = (): JSX.CSSProperties | undefined => {
@@ -448,6 +458,10 @@ export function UserProfileEditor(props: Props) {
                   value={
                     <>
                       {fontLabel()} · {colourLabel()}
+                      <Show when={nameEffectLabel()}>
+                        {" · "}
+                        {nameEffectLabel()}
+                      </Show>
                     </>
                   }
                   onClick={() => setNameDialog(true)}

@@ -1,0 +1,26 @@
+/* Display-name effects that move (see `nameStyle` in userStyle.ts).
+   Only single places ask for motion; `nameStyle` leaves it out under
+   reduced motion, and the media rule below is a second guard. */
+@keyframes z-name-flow {
+  from {
+    background-position: 0% 0;
+  }
+  to {
+    background-position: -200% 0;
+  }
+}
+@keyframes z-name-sheen {
+  0%,
+  60% {
+    background-position: 100% 0;
+  }
+  90%,
+  100% {
+    background-position: 0% 0;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  [style*="z-name-"] {
+    animation: none !important;
+  }
+}

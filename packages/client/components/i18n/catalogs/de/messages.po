@@ -31151,3 +31151,61 @@ msgstr "Ein Mitglied, das gegangen ist"
 #: components/app/interface/settings/channel/permissions/ChannelVisibility.tsx
 msgid "This thread follows who can see its channel."
 msgstr "Dieser Thread übernimmt, wer seinen Kanal sehen kann."
+
+#: components/app/interface/settings/user/profile/StyleEditors.tsx
+#: components/app/interface/settings/user/profile/UserProfileEditor.tsx
+msgid "Edge"
+msgstr "Kontur"
+
+#: components/app/interface/settings/user/profile/StyleEditors.tsx
+#: components/app/interface/settings/user/profile/UserProfileEditor.tsx
+msgid "Lifted"
+msgstr "Erhaben"
+
+#: components/app/interface/settings/user/profile/StyleEditors.tsx
+#: components/app/interface/settings/user/profile/UserProfileEditor.tsx
+msgid "Sheen"
+msgstr "Glanz"
+
+#: components/app/interface/settings/user/profile/StyleEditors.tsx
+#: components/app/interface/settings/user/profile/UserProfileEditor.tsx
+msgid "Spectrum"
+msgstr "Spektrum"
+
+#: components/app/interface/settings/user/profile/StyleEditors.tsx
+msgid "Choose effect"
+msgstr "Effekt wählen"
+
+#: components/app/interface/settings/user/profile/StyleEditors.tsx
+msgid "Add a colour"
+msgstr "Farbe hinzufügen"
+
+#. placeholder {0}: index + 1
+#: components/app/interface/settings/user/profile/StyleEditors.tsx
+msgid "Colour {0}"
+msgstr "Farbe {0}"
+
+#. placeholder {0}: index + 1
+#: components/app/interface/settings/user/profile/StyleEditors.tsx
+msgid "Remove colour {0}"
+msgstr "Farbe {0} entfernen"
+
+#: components/app/interface/settings/user/profile/StyleEditors.tsx
+msgid "Edge: the first colour fills the letters, the second draws the border."
+msgstr "Kontur: Die erste Farbe füllt die Buchstaben, die zweite zeichnet den Rand."
+
+#: components/app/interface/settings/user/profile/StyleEditors.tsx
+msgid "Pick a font, colours and an effect for your display name."
+msgstr "Wähle Schriftart, Farben und einen Effekt für deinen Anzeigenamen."
+
+#: components/app/interface/settings/user/profile/StyleEditors.tsx
+msgid "In a server, a role colour wins over yours, but your font and effect stay. On light themes your colours are darkened a little so the name stays readable."
+msgstr "Auf einem Server gilt die Rollenfarbe statt deiner, Schriftart und Effekt bleiben. In hellen Designs werden deine Farben etwas abgedunkelt, damit der Name lesbar bleibt."
+
+#: components/app/interface/settings/user/Advanced.tsx
+msgid "Show name styles"
+msgstr "Namensstile anzeigen"
+
+#: components/app/interface/settings/user/Advanced.tsx
+msgid "Fonts, colours and effects people chose for their names. Off shows every name plain."
+msgstr "Schriftarten, Farben und Effekte, die andere für ihre Namen gewählt haben. Aus zeigt alle Namen schlicht."
