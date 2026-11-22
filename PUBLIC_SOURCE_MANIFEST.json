@@ -262,8 +262,8 @@
     },
     {
       "path": "CHANGELOG.md",
-      "sha256": "4fc89f9eb8fc067971b721c548db5d62f4bc72c46aef3a6dfc2600597a2f22ff",
-      "bytes": 194746,
+      "sha256": "e3203e984d18a47126b2bb7708985c76a43aafc828099e780d8fa4fc6d3c9fcc",
+      "bytes": 195128,
       "category": "public-documentation"
     },
     {
@@ -43276,8 +43276,8 @@
     },
     {
       "path": "packages/client/src/interface/developers/docs/content/ar/oauth2.md",
-      "sha256": "45e5f159404e8622dafdfdccb0213fbd1fc5b0c98d9e48f06908895dabe67947",
-      "bytes": 4220,
+      "sha256": "0ce168f3de543f6b89f5c2b38df7ba428eb4248a59b5d2cdcf755c7c40889c63",
+      "bytes": 5731,
       "category": "public-documentation"
     },
     {
@@ -43546,8 +43546,8 @@
     },
     {
       "path": "packages/client/src/interface/developers/docs/content/de/oauth2.md",
-      "sha256": "2aa96775a1345579ca4fe4ca61d37a6657efd1b8527a7033840382e81e1a0330",
-      "bytes": 3623,
+      "sha256": "641fc6f49f4221e0e236d9c7b138ba089d942446afcf6375195efe14faa6ac7d",
+      "bytes": 4874,
       "category": "public-documentation"
     },
     {
@@ -43738,8 +43738,8 @@
     },
     {
       "path": "packages/client/src/interface/developers/docs/content/oauth2.md",
-      "sha256": "639921d97d27a34923e35ecfe616225de0f9bab36844acd0767e0c4c3c674bf7",
-      "bytes": 4646,
+      "sha256": "8a1b7f9997d74945ea17d2506cdf0934a2dac5f79870e197804bbc86dea0109a",
+      "bytes": 5983,
       "category": "public-documentation"
     },
     {
