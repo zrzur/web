@@ -110,6 +110,14 @@ export const ESCAPE_ACTIONS: KeybindAction[] = ACTION_PRIORITY.slice(
   8,
 ).filter((action) => action !== KeybindAction.CHAT_MARK_SERVER_AS_READ);
 
+/** Shortcuts on keys the message editor also uses for its lines */
+const LINE_KEYS = new Set<KeybindAction>([
+  KeybindAction.NAVIGATION_CHANNEL_UP,
+  KeybindAction.NAVIGATION_CHANNEL_DOWN,
+  KeybindAction.NAVIGATION_UNREAD_UP,
+  KeybindAction.NAVIGATION_UNREAD_DOWN,
+]);
+
 /**
  * Filter keybinds with special logic
  * @param keybind Keybind to filter
@@ -123,6 +131,15 @@ export function keybindFilter(
   currentlyBound: Record<KeybindAction, number>,
   target: HTMLElement | null,
 ) {
+  // Alt+arrows (and with Shift) move and copy lines in a draft of several
+  // lines: there they belong to the editor, and the channel stays
+  if (
+    LINE_KEYS.has(keybind) &&
+    (target?.closest?.(".cm-content")?.querySelectorAll(".cm-line").length ??
+      0) > 1
+  )
+    return false;
+
   if (keybind === KeybindAction.CHAT_FOCUS_COMPOSITION) {
     // don't allow focusing if modal/floating is open
     // or if we're editing a message
