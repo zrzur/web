@@ -2,31 +2,20 @@ import { createSignal, onCleanup } from "solid-js";
 
 import { useLingui } from "@lingui/solid/macro";
 
-import { claimLongPress } from "@revolt/ui/directives/longPress";
+import {
+  TOUCH_HOLD_MS,
+  TOUCH_MENU_MS,
+  createTouchHold,
+} from "@revolt/ui/components/utils/touchHold";
+
+// the rules for a finger live in touchHold, shared with the channel list
+export { TOUCH_HOLD_MS, TOUCH_MENU_MS };
 
 /**
  * How far the pointer must travel before a press turns into a drag, so that
  * clicking a server still navigates to it
  */
 const DRAG_THRESHOLD_PX = 5;
-
-/**
- * A finger has to rest this long on an entry before it lifts and can be
- * dragged; moving earlier is a scroll of the rail
- */
-export const TOUCH_HOLD_MS = 350;
-
-/**
- * A finger that keeps resting this long, still without moving, opens the
- * entry's menu, as a long press does everywhere else in the app
- */
-export const TOUCH_MENU_MS = 500;
-
-/**
- * How far a finger may wander while it rests before the press counts as a
- * scroll
- */
-const TOUCH_SLOP_PX = 8;
 
 /**
  * Band at the top and bottom of the rail where a drag scrolls it
@@ -146,69 +135,19 @@ export function createRailDrag(options: {
         y: number;
         pointerId: number;
         touch: boolean;
-        /** the entry's menu was opened by this press */
-        menu: boolean;
       }
     | undefined;
 
-  /**
-   * Node the finger landed on. Touch events keep going to it even when it
-   * is redrawn and leaves the page (then they no longer reach the entry), so
-   * it gets its own listener for as long as the press lasts
-   */
-  let pressTarget: EventTarget | undefined;
-
-  let holdTimer: ReturnType<typeof setTimeout> | undefined;
-  let menuTimer: ReturnType<typeof setTimeout> | undefined;
-
-  /** our own menu event is on its way, let it through */
-  let openingMenu = false;
-
-  function clearTimers() {
-    clearTimeout(holdTimer);
-    clearTimeout(menuTimer);
-    holdTimer = menuTimer = undefined;
-  }
-
-  /**
-   * Open (or, once open, close) an entry's menu through the same event a
-   * right-click sends, so the entry's own menu shows as it does today
-   */
-  function toggleMenu(id: string) {
-    const el = elements.get(id);
-    if (!el) return;
-
-    openingMenu = true;
-    try {
-      el.dispatchEvent(
-        new MouseEvent("contextmenu", { bubbles: true, cancelable: true }),
-      );
-    } finally {
-      openingMenu = false;
-    }
-  }
-
-  /**
-   * The finger has rested long enough: lift the entry so it can be dragged
-   */
-  function lift() {
-    holdTimer = undefined;
-    if (!armed || dragging()) return;
-
-    setLifted(armed.id);
-    try {
-      navigator.vibrate?.(10);
-    } catch {
-      // not allowed or not there: the lift itself is the feedback
-    }
-
-    menuTimer = setTimeout(() => {
-      menuTimer = undefined;
-      if (!armed || dragging()) return;
-      armed.menu = true;
-      toggleMenu(armed.id);
-    }, TOUCH_MENU_MS - TOUCH_HOLD_MS);
-  }
+  // a finger: rest to lift, then move to drag; rest still for the menu
+  const hold = createTouchHold({
+    menuTarget: () => (armed ? elements.get(armed.id) : undefined),
+    onLift: () => armed && setLifted(armed.id),
+    onDragStart: () => armed && setDragging(armed.id),
+    onEnd: (how, dragged) => {
+      if (how === "release" && dragged) drop();
+      else reset();
+    },
+  });
 
   let scroller: HTMLElement | undefined;
   let scrollFrame: number | undefined;
@@ -422,9 +361,7 @@ export function createRailDrag(options: {
   }
 
   function reset() {
-    clearTimers();
-    pressTarget?.removeEventListener("touchmove", onTouchMove as EventListener);
-    pressTarget = undefined;
+    hold.cancel();
     if (scrollFrame !== undefined) cancelAnimationFrame(scrollFrame);
     scrollFrame = undefined;
     scroller = undefined;
@@ -437,24 +374,12 @@ export function createRailDrag(options: {
 
   function onPointerMove(e: PointerEvent) {
     if (armed && e.pointerId !== armed.pointerId) return;
+    // a finger's press is started by the hold, not by a few pixels
+    if (armed?.touch && !dragging()) return;
 
     if (armed && !dragging()) {
       const moved = Math.hypot(e.clientX - armed.x, e.clientY - armed.y);
-
-      if (armed.touch && !lifted()) {
-        // still resting: a finger that moves now is scrolling the rail
-        if (moved >= TOUCH_SLOP_PX) reset();
-        return;
-      }
-
       if (moved < DRAG_THRESHOLD_PX) return;
-
-      clearTimers();
-      // the menu opened while the finger rested: the drag takes over
-      if (armed.menu) {
-        armed.menu = false;
-        toggleMenu(armed.id);
-      }
 
       setDragging(armed.id);
     }
@@ -480,49 +405,37 @@ export function createRailDrag(options: {
   }
 
   function onPointerUp(e: PointerEvent) {
+    // a finger's press ends in the hold (drop, menu or nothing)
+    if (armed?.touch) return;
     if (armed && e.pointerId !== armed.pointerId) return;
 
     if (dragging()) {
-      swallowNextClick(armed?.touch ? 400 : 0);
+      swallowNextClick(0);
       drop();
       return;
     }
 
-    if (armed?.touch && lifted()) {
-      // a long press that never moved is the menu, never the link
-      if (!armed.menu) toggleMenu(armed.id);
-      swallowNextClick(400);
-    }
-
     reset();
   }
 
   /**
-   * The browser took the press (a system gesture, a scroll): put it back
+   * The browser took the press: put it back
    */
   function onPointerCancel(e: PointerEvent) {
+    if (armed?.touch) return;
     if (armed && e.pointerId !== armed.pointerId) return;
     reset();
   }
 
   /**
-   * The browser's own long-press menu (Android) and a right-click during a
-   * drag stay away; the entry's menu is opened by us when it is wanted
+   * A right-click during a mouse drag stays away (a finger's press keeps
+   * the browser's menu away in the hold)
    */
   function onContextMenu(e: Event) {
-    if (openingMenu) return;
-    if (!dragging() && !armed?.touch) return;
+    if (!dragging() || armed?.touch) return;
 
     e.preventDefault();
     e.stopPropagation();
-  }
-
-  /**
-   * A lifted or dragged entry holds the finger: the page must not scroll
-   */
-  function onTouchMove(e: TouchEvent) {
-    if (!lifted() && !dragging()) return;
-    if (e.cancelable) e.preventDefault();
   }
 
   function swallowClick(e: MouseEvent) {
@@ -576,6 +489,7 @@ export function createRailDrag(options: {
     window.removeEventListener("keydown", onKeyDown);
     window.removeEventListener("blur", onWindowBlur);
     window.removeEventListener("scroll", onScroll, { capture: true });
+    hold.dispose();
   });
 
   return {
@@ -657,11 +571,10 @@ export function createRailDrag(options: {
      */
     register(id: string, el: HTMLElement) {
       elements.set(id, el);
-      // not passive: a lifted entry has to stop the page scrolling, and the
-      // browser only lets a listener on the touched element do that in time
-      el.addEventListener("touchmove", onTouchMove, { passive: false });
+      // a lifted entry has to stop the page scrolling under the finger
+      const unwatch = hold.watch(el);
       onCleanup(() => {
-        el.removeEventListener("touchmove", onTouchMove);
+        unwatch();
         elements.delete(id);
       });
     },
@@ -682,22 +595,9 @@ export function createRailDrag(options: {
         y: e.clientY,
         pointerId: e.pointerId,
         touch,
-        menu: false,
       };
 
-      if (touch) {
-        // this press decides between a drag and the menu itself
-        claimLongPress(e);
-        pressTarget = e.target ?? undefined;
-        pressTarget?.addEventListener(
-          "touchmove",
-          onTouchMove as EventListener,
-          {
-            passive: false,
-          },
-        );
-        holdTimer = setTimeout(lift, TOUCH_HOLD_MS);
-      }
+      if (touch) hold.press(e);
     },
   };
 }
