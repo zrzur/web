@@ -42,26 +42,46 @@ export function overLimit<T>(keys: readonly T[], limit = RUNTIME_CACHE_LIMIT) {
 export const ASSET_RETRY_WAITS_MS = [0, 400, 1200] as const;
 
 /**
+ * Each try may wait this long for the answer to start. A half-dead connection (a phone between two
+ * networks) can leave a request open for minutes: without a limit the
+ * part that asked waited for it, and the next tries never came.
+ */
+export const ASSET_TRY_TIMEOUT_MS = 9000;
+
+/**
  * Ask for a file up to three times. A phone's network drops single requests;
  * one lost request for a part of the app must not look like a failure to the
  * page (owner report 2026-11-18). A plain "not found" is an answer and is
- * returned at once; a server error or no answer is tried again.
+ * returned at once; a server error, no answer or a try that ran out of time
+ * is tried again.
+ * @param ask One try; it is given the signal that ends it when its time is up
  */
 export async function fetchWithRetry<T extends { status: number }>(
-  ask: () => Promise<T>,
+  ask: (signal: AbortSignal) => Promise<T>,
   waits: readonly number[] = ASSET_RETRY_WAITS_MS,
   sleep: (ms: number) => Promise<void> = (ms) =>
     new Promise((done) => setTimeout(done, ms)),
+  timeoutMs: number = ASSET_TRY_TIMEOUT_MS,
 ): Promise<T> {
   let answer: T | undefined;
   let failure: unknown;
   for (const wait of waits) {
     if (wait) await sleep(wait);
+    // the limit is for the answer to start, not for the whole file: a big
+    // part on a slow but working connection must not be cut off mid-way
+    // (AbortSignal.timeout would also end the body while it streams)
+    const limit = new AbortController();
+    const timer = setTimeout(
+      () => limit.abort(new DOMException("No answer in time", "TimeoutError")),
+      timeoutMs,
+    );
     try {
-      answer = await ask();
+      answer = await ask(limit.signal);
       if (answer.status < 500) return answer;
     } catch (error) {
       failure = error;
+    } finally {
+      clearTimeout(timer);
     }
   }
   if (answer) return answer;

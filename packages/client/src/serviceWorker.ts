@@ -192,7 +192,9 @@ async function cachedAsset(
   if (hit) return hit;
 
   // tried again before the page hears of a failure: see fetchWithRetry
-  const response = await fetchWithRetry(() => fetch(request.clone()));
+  const response = await fetchWithRetry((signal) =>
+    fetch(request.clone(), { signal }),
+  );
   if (response.ok) {
     await cache.put(request, response.clone());
     const stale = overLimit(await cache.keys(), limit);
