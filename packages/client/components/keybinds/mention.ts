@@ -31,13 +31,22 @@ export function needsLeadingSpace(before: string): boolean {
   return before !== "" && !/\s/.test(before);
 }
 
-/** Takes the text; false when it can't (no right to write here) */
-type Target = (text: string) => boolean;
+/** A message box that takes mentions */
+type Target = {
+  /** Its own key (the `data-composer` of its buttons) */
+  key: string;
+  /** The channel it writes to */
+  channelId: string;
+  /** Takes the text; false when it can't (no right to write here) */
+  insert: (text: string) => boolean;
+};
 const targets: Target[] = [];
+/** The key of the message box that had the focus last */
+let focusedKey: string | undefined;
 
 /**
- * Where mentions go (the message box calls this when it opens). The last
- * one registered wins; returns the function that removes it.
+ * Where mentions go (the message box calls this when it opens). Returns the
+ * function that removes it.
  */
 export function setMentionTarget(target: Target): () => void {
   targets.push(target);
@@ -45,6 +54,33 @@ export function setMentionTarget(target: Target): () => void {
     const at = targets.lastIndexOf(target);
     if (at >= 0) targets.splice(at, 1);
   };
+}
+
+/** A message box got the focus (its key) */
+export function noteMentionFocus(key: string | undefined) {
+  focusedKey = key;
+}
+
+/** The channel the page shows, from its address */
+function shownChannel() {
+  if (typeof location === "undefined") return;
+  return /\/channel\/([0-9A-HJKMNP-TV-Z]{26})/.exec(location.pathname)?.[1];
+}
+
+/**
+ * The box a mention goes to: the one focused last, else the one of the
+ * channel on screen, else the newest
+ */
+export function mentionTarget(
+  list: readonly Target[] = targets,
+  focused = focusedKey,
+  channel = shownChannel(),
+): Target | undefined {
+  return (
+    list.find((target) => target.key === focused) ??
+    list.find((target) => target.channelId === channel) ??
+    list.at(-1)
+  );
 }
 
 /** Whether a message box is open to take a mention */
@@ -58,9 +94,9 @@ export function canInsertMention() {
  */
 export function insertMention(kind: MentionKind, id: string): boolean {
   const text = mentionText(kind, id);
-  const target = targets.at(-1);
+  const target = mentionTarget();
   if (!text || !target) return false;
-  return target(text);
+  return target.insert(text);
 }
 
 type ClickLike = Pick<
@@ -108,6 +144,31 @@ export function mentionAt(
   if (channel) return { kind: "channel", id: channel };
 }
 
+/**
+ * Whether a Shift+click here extends a text selection the person is making
+ * in a message (the browser's own Shift+click): then nothing is mentioned
+ */
+export function extendsSelection(target: Node | null): boolean {
+  if (typeof document === "undefined" || !target) return false;
+  const selection = document.getSelection();
+  if (!selection || selection.isCollapsed || !selection.toString().trim())
+    return false;
+  const row = (
+    target instanceof Element ? target : target.parentElement
+  )?.closest("[data-message-row]");
+  return !!row && selection.containsNode(row, true);
+}
+
+/**
+ * The key of the message box an element belongs to: the nearest box around
+ * it that holds a button marked with `data-composer`
+ */
+function composerKeyOf(node: Element) {
+  let at: Element | null = node.closest(".cm-editor");
+  while (at && !at.querySelector("[data-composer]")) at = at.parentElement;
+  return at?.querySelector<HTMLElement>("[data-composer]")?.dataset.composer;
+}
+
 let listening = false;
 
 /**
@@ -123,6 +184,7 @@ export function listenForMentionClicks() {
     "click",
     (event) => {
       if (!isMentionClick(event) || !canInsertMention()) return;
+      if (extendsSelection(event.target as Node | null)) return;
       const found = mentionAt(event.target as Element | null);
       if (!found) return;
       if (!insertMention(found.kind, found.id)) return;
@@ -131,4 +193,10 @@ export function listenForMentionClicks() {
     },
     true,
   );
+  // which message box was used last, so a mention goes there
+  document.addEventListener("focusin", (event) => {
+    const target = event.target as Element | null;
+    if (target?.closest?.(".cm-editor"))
+      noteMentionFocus(composerKeyOf(target));
+  });
 }

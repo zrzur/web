@@ -168,16 +168,6 @@ export function MessageComposition(props: Props) {
   state.draft._setNodeReplacement = setNodeReplacement;
   onCleanup(() => (state.draft._setNodeReplacement = undefined));
 
-  // Shift+click on a person, role or channel mentions it here (Ctrl+/)
-  onCleanup(
-    setMentionTarget((text) => {
-      if (!props.channel.havePermission("SendMessage")) return false;
-      setNodeReplacement([text]);
-      return true;
-    }),
-  );
-  listenForMentionClicks();
-
   createEffect(
     on(
       () => props.channel,
@@ -380,6 +370,24 @@ export function MessageComposition(props: Props) {
   const keysFor = (id: ShortcutId) =>
     ariaKeys(state.keybinds.table().byId[id], deviceMac());
   const composerKey = `${props.channel.id}:${Math.random().toString(36).slice(2)}`;
+
+  // Shift+click on a person, role or channel mentions it here (Ctrl+/):
+  // in the box used last, else the box of the channel on screen
+  onCleanup(
+    setMentionTarget({
+      key: composerKey,
+      // the box stays when the channel changes: read it each time
+      get channelId() {
+        return props.channel.id;
+      },
+      insert: (text) => {
+        if (!props.channel.havePermission("SendMessage")) return false;
+        setNodeReplacement([text]);
+        return true;
+      },
+    }),
+  );
+  listenForMentionClicks();
   const mac = isMac();
   let composerRoot: HTMLDivElement | undefined;
   onMount(() => {

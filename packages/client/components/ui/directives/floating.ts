@@ -11,7 +11,11 @@ import {
   untrack,
 } from "solid-js";
 
-import { insertMention, isMentionClick } from "@revolt/keybinds/mention";
+import {
+  extendsSelection,
+  insertMention,
+  isMentionClick,
+} from "@revolt/keybinds/mention";
 import { applyTooltipName } from "../components/floating/tooltipName";
 import { addLongPressListener } from "./longPress";
 
@@ -157,6 +161,9 @@ export function floating(element: HTMLElement, accessor: Accessor<Props>) {
    */
   function onClick(event: MouseEvent) {
     const user = accessor().userCard?.user;
+    // Shift+click inside text being selected only extends the selection
+    if (isMentionClick(event) && extendsSelection(event.target as Node | null))
+      return;
     if (user && isMentionClick(event) && insertMention("user", user.id)) {
       event.preventDefault();
       event.stopPropagation();

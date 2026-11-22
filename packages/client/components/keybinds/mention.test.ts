@@ -5,6 +5,7 @@ import {
   channelFromHref,
   insertMention,
   isMentionClick,
+  mentionTarget,
   mentionText,
   needsLeadingSpace,
   setMentionTarget,
@@ -64,11 +65,17 @@ describe("isMentionClick", () => {
 });
 
 describe("insertMention", () => {
+  const box = (key: string, channelId: string, got: string[], ok = true) => ({
+    key,
+    channelId,
+    insert: (text: string) => (got.push(text), ok),
+  });
+
   it("goes to the newest message box, and nowhere once it closed", () => {
     const first: string[] = [];
     const second: string[] = [];
-    const offFirst = setMentionTarget((text) => (first.push(text), true));
-    const offSecond = setMentionTarget((text) => (second.push(text), true));
+    const offFirst = setMentionTarget(box("a", "C1", first));
+    const offSecond = setMentionTarget(box("b", "C2", second));
     expect(insertMention("user", ID)).toBe(true);
     expect(second).toEqual([`<@${ID}> `]);
     expect(first).toEqual([]);
@@ -80,9 +87,25 @@ describe("insertMention", () => {
   });
 
   it("says no when the box can't take it (no right to write)", () => {
-    const off = setMentionTarget(() => false);
+    const off = setMentionTarget(box("a", "C1", [], false));
     expect(insertMention("user", ID)).toBe(false);
     off();
+  });
+});
+
+describe("mentionTarget", () => {
+  const boxes = [
+    { key: "thread", channelId: "T", insert: () => true },
+    { key: "main", channelId: "C", insert: () => true },
+    { key: "other", channelId: "O", insert: () => true },
+  ];
+
+  it("prefers the box used last, then the channel on screen, then the newest", () => {
+    expect(mentionTarget(boxes, "thread", "C")?.key).toBe("thread");
+    expect(mentionTarget(boxes, undefined, "C")?.key).toBe("main");
+    expect(mentionTarget(boxes, "gone", "C")?.key).toBe("main");
+    expect(mentionTarget(boxes, undefined, undefined)?.key).toBe("other");
+    expect(mentionTarget([], "main", "C")).toBe(undefined);
   });
 });
 
