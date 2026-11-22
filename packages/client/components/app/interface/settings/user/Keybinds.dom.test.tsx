@@ -6,6 +6,7 @@ import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 
 vi.mock("@revolt/ui", async () => ({
   ...(await import("@revolt/ui/components/design/Settings")),
+  Segmented: (await import("@revolt/ui/components/design/Segmented")).Segmented,
   Column: (props: { children?: unknown }) => (
     <div>{props.children as never}</div>
   ),
@@ -72,6 +73,17 @@ function fakeState() {
   return state as unknown as { keybinds: Keybinds };
 }
 
+// the Windows set, on any machine that runs the tests (jsdom reports the
+// host system in its user agent)
+Object.defineProperty(navigator, "platform", {
+  value: "Win32",
+  configurable: true,
+});
+Object.defineProperty(navigator, "userAgent", {
+  value: "Mozilla/5.0 (Windows NT 10.0; Win64; x64) jsdom",
+  configurable: true,
+});
+
 let state = fakeState();
 vi.mock("@revolt/state", () => ({ useState: () => state }));
 
@@ -119,6 +131,53 @@ beforeEach(() => {
 afterEach(() => {
   dispose?.();
   bindKeymap(defaultKeymap);
+});
+
+describe("the keys of each system", () => {
+  const view = (name: string) =>
+    [...document.querySelectorAll<HTMLElement>("[role=radio]")]
+      .find((radio) => radio.textContent?.trim() === name)!
+      .click();
+  const shown = (id: string) =>
+    [...document.querySelectorAll(`[data-shortcut="${id}"][data-platform] kbd`)]
+      .map((k) => k.textContent)
+      .join("+");
+
+  it("shows this device's set first, then the Mac and Linux sets to read", () => {
+    mount();
+    expect(capsText("navigation_unread_down")).toBe("Alt+Shift+↓");
+    expect(capsText("upload_file")).toBe("Ctrl+Shift+U");
+    view("macOS");
+    expect(shown("navigation_server_up")).toBe("⌘+⌥+↑");
+    expect(shown("upload_file")).toBe("⌘+⇧+U");
+    expect(shown("navigation_channel_down")).toBe("⌥+↓");
+    // another system's keys can't be recorded from here
+    expect(document.querySelector('button[data-shortcut="upload_file"]')).toBe(
+      null,
+    );
+    view("Linux");
+    expect(shown("navigation_server_up")).toBe("Alt+Page Up");
+    expect(shown("upload_file")).toBe("Ctrl+Alt+U");
+    view("Windows");
+    expect(capsText("navigation_server_up")).toBe("Ctrl+Alt+↑");
+  });
+
+  it("lists the message keys and the mention click", () => {
+    mount();
+    const text = document.body.textContent ?? "";
+    for (const title of [
+      "Mention someone",
+      "Mention a role or a channel",
+      "Reply",
+      "Pin or unpin",
+      "Copy the text",
+      "Move between messages",
+      "Next unread channel",
+      "Open your mentions",
+      "Leave the call",
+    ])
+      expect(text, title).toContain(title);
+  });
 });
 
 describe("changing a shortcut on the Ctrl+/ screen", () => {
@@ -217,10 +276,11 @@ describe("changing a shortcut on the Ctrl+/ screen", () => {
   it("asks before replacing a browser shortcut", () => {
     mount();
     caps("toggle_streamer").click();
-    press("KeyF", { ctrlKey: true, key: "f" });
+    // Ctrl+F is "Search this channel" now: Ctrl+G is find-next
+    press("KeyG", { ctrlKey: true, key: "g" });
     expect(note()).toContain("replaces a browser shortcut");
     buttonNamed("Use anyway").click();
-    expect(capsText("toggle_streamer")).toBe("Ctrl+F");
+    expect(capsText("toggle_streamer")).toBe("Ctrl+G");
   });
 
   it("resets one shortcut, then all of them", () => {

@@ -31151,3 +31151,131 @@ msgstr "عضو غادر السيرفر"
 #: components/app/interface/settings/channel/permissions/ChannelVisibility.tsx
 msgid "This thread follows who can see its channel."
 msgstr "يتبع هذا الخيط إعدادات من يرى قناته."
+
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "Accept a suggestion"
+msgstr "قبول اقتراح"
+
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "Also closes the emoji picker."
+msgstr "ويغلق منتقي الإيموجي أيضًا."
+
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "Another system's keys, to read. You change your own on this device's set."
+msgstr "مفاتيح نظام آخر للاطلاع فقط. تغيّر مفاتيحك من مجموعة هذا الجهاز."
+
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "Bold text"
+msgstr "نص عريض"
+
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "Cancel a reply"
+msgstr "إلغاء الرد"
+
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "Copy the text"
+msgstr "نسخ النص"
+
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "In the message list. The keys below then work on that message."
+msgstr "في قائمة الرسائل. بعدها تعمل المفاتيح التالية على تلك الرسالة."
+
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "Italic text"
+msgstr "نص مائل"
+
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "Keys shown"
+msgstr "المفاتيح المعروضة"
+
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "Leave the call"
+msgstr "مغادرة المكالمة"
+
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "Mention a role or a channel"
+msgstr "الإشارة إلى دور أو قناة"
+
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "Mention someone"
+msgstr "الإشارة إلى شخص"
+
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "Move between messages"
+msgstr "التنقل بين الرسائل"
+
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "Next unread channel"
+msgstr "القناة غير المقروءة التالية"
+
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "On the message under the pointer or with focus."
+msgstr "على الرسالة التي تحت المؤشر أو التي عليها التركيز."
+
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "Open the emoji picker"
+msgstr "فتح منتقي الإيموجي"
+
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "Open your mentions"
+msgstr "فتح الإشارات إليك"
+
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "Pin or unpin"
+msgstr "تثبيت أو إلغاء التثبيت"
+
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "Previous unread channel"
+msgstr "القناة غير المقروءة السابقة"
+
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "Scroll the messages"
+msgstr "تمرير الرسائل"
+
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "Search this channel"
+msgstr "البحث في هذه القناة"
+
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "Shift+click a name or picture: the mention goes in at the cursor."
+msgstr "انقر مع Shift على اسم أو صورة، فتُضاف الإشارة عند موضع المؤشر."
+
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "Shift+click the role or the channel."
+msgstr "انقر مع Shift على الدور أو القناة."
+
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "Show the keys for"
+msgstr "عرض المفاتيح لنظام"
+
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "This device's keys. Look at another system's set."
+msgstr "مفاتيح هذا الجهاز. اطّلع على مجموعة نظام آخر."
+
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "Upload a file"
+msgstr "رفع ملف"
+
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "When no text is selected."
+msgstr "عندما لا يكون أي نص محددًا."
+
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "Where you can send files."
+msgstr "حيث يمكنك إرسال الملفات."
+
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "Where you may pin messages."
+msgstr "حيث يُسمح لك بتثبيت الرسائل."
+
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "While names or emoji are suggested."
+msgstr "أثناء ظهور اقتراحات الأسماء أو الإيموجي."
+
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "Your own message."
+msgstr "رسالتك أنت."
+
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "Your own message. Asks first; with Shift it doesn't."
+msgstr "رسالتك أنت. يُطلب التأكيد أولًا، ومع Shift لا يُطلب."

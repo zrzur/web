@@ -31154,3 +31154,131 @@ msgstr "A member who left"
 #: components/app/interface/settings/channel/permissions/ChannelVisibility.tsx
 msgid "This thread follows who can see its channel."
 msgstr "This thread follows who can see its channel."
+
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "Accept a suggestion"
+msgstr "Accept a suggestion"
+
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "Also closes the emoji picker."
+msgstr "Also closes the emoji picker."
+
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "Another system's keys, to read. You change your own on this device's set."
+msgstr "Another system's keys, to read. You change your own on this device's set."
+
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "Bold text"
+msgstr "Bold text"
+
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "Cancel a reply"
+msgstr "Cancel a reply"
+
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "Copy the text"
+msgstr "Copy the text"
+
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "In the message list. The keys below then work on that message."
+msgstr "In the message list. The keys below then work on that message."
+
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "Italic text"
+msgstr "Italic text"
+
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "Keys shown"
+msgstr "Keys shown"
+
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "Leave the call"
+msgstr "Leave the call"
+
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "Mention a role or a channel"
+msgstr "Mention a role or a channel"
+
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "Mention someone"
+msgstr "Mention someone"
+
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "Move between messages"
+msgstr "Move between messages"
+
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "Next unread channel"
+msgstr "Next unread channel"
+
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "On the message under the pointer or with focus."
+msgstr "On the message under the pointer or with focus."
+
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "Open the emoji picker"
+msgstr "Open the emoji picker"
+
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "Open your mentions"
+msgstr "Open your mentions"
+
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "Pin or unpin"
+msgstr "Pin or unpin"
+
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "Previous unread channel"
+msgstr "Previous unread channel"
+
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "Scroll the messages"
+msgstr "Scroll the messages"
+
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "Search this channel"
+msgstr "Search this channel"
+
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "Shift+click a name or picture: the mention goes in at the cursor."
+msgstr "Shift+click a name or picture: the mention goes in at the cursor."
+
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "Shift+click the role or the channel."
+msgstr "Shift+click the role or the channel."
+
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "Show the keys for"
+msgstr "Show the keys for"
+
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "This device's keys. Look at another system's set."
+msgstr "This device's keys. Look at another system's set."
+
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "Upload a file"
+msgstr "Upload a file"
+
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "When no text is selected."
+msgstr "When no text is selected."
+
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "Where you can send files."
+msgstr "Where you can send files."
+
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "Where you may pin messages."
+msgstr "Where you may pin messages."
+
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "While names or emoji are suggested."
+msgstr "While names or emoji are suggested."
+
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "Your own message."
+msgstr "Your own message."
+
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "Your own message. Asks first; with Shift it doesn't."
+msgstr "Your own message. Asks first; with Shift it doesn't."
