@@ -4,6 +4,7 @@ import { Icon } from "@revolt/ui/icons/Icon";
 import {
   createEffect,
   createSignal,
+  createUniqueId,
   JSX,
   onCleanup,
   onMount,
@@ -11,7 +12,7 @@ import {
 } from "solid-js";
 import { Dynamic } from "solid-js/web";
 import "./media-player.css";
-import { endTurn, takeTurn } from "./voicePlayback";
+import { endTurn, playFailed, takeTurn } from "./voicePlayback";
 
 export function mediaTime(value: number): string {
   if (!Number.isFinite(value) || value < 0) return "0:00";
@@ -27,6 +28,7 @@ export function MediaPlayer(props: {
   contextMenu?: () => JSX.Element;
 }) {
   const { t } = useLingui();
+  const failureId = createUniqueId();
   let volumePopup!: HTMLDivElement;
   let volumeButton!: HTMLButtonElement;
   let volumeRoot!: HTMLDivElement;
@@ -73,11 +75,16 @@ export function MediaPlayer(props: {
       media.pause();
       return;
     }
+    // as voice messages: after a failed load a tap loads the file again
+    if (error()) {
+      setError(false);
+      media.load();
+    }
+    takeTurn(media);
     try {
       await media.play();
     } catch (failure) {
-      if (!(failure instanceof DOMException && failure.name === "AbortError"))
-        setError(true);
+      if (playFailed(failure)) setError(true);
     }
   }
   function seek(value: number) {
@@ -202,10 +209,9 @@ export function MediaPlayer(props: {
         </button>
       </Show>
       <Show when={error()}>
-        <div
-          class="z-media-error"
-          role="alert"
-        >{t`Couldn't play this media.`}</div>
+        <div class="z-media-error" id={failureId} role="alert">
+          {t`Couldn't play this media.`}
+        </div>
       </Show>
       <div class="z-media-controls">
         <input
@@ -226,8 +232,8 @@ export function MediaPlayer(props: {
         <div class="z-media-toolbar">
           <button
             type="button"
-            aria-label={playing() ? t`Pause` : t`Play`}
-            disabled={error()}
+            aria-label={error() ? t`Try again` : playing() ? t`Pause` : t`Play`}
+            aria-describedby={error() ? failureId : undefined}
             onClick={() => void togglePlay()}
           >
             <Icon name={playing() ? "pause" : "play"} size={18} filled />

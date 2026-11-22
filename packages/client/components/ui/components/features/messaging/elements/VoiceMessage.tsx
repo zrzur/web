@@ -8,6 +8,7 @@ import {
   createEffect,
   createMemo,
   createSignal,
+  createUniqueId,
   onCleanup,
   untrack,
 } from "solid-js";
@@ -15,7 +16,7 @@ import {
 import { mediaTime } from "./MediaPlayer";
 import { placeholderBars, readVoice } from "./voice";
 import "./voice.css";
-import { voiceClip } from "./voicePlayback";
+import { stillIn, voiceClip } from "./voicePlayback";
 
 /**
  * Compact voice note: play button, waveform that fills as it plays (click
@@ -34,16 +35,31 @@ export function VoiceMessage(props: {
   download?: string;
   /** read the whole file for a real waveform (skip for very large files) */
   decode?: boolean;
+  /** the conversation of the message: leaving it stops the sound at once */
+  channelId?: string;
   contextMenu?: () => JSX.Element;
 }) {
   const { t } = useLingui();
+  const failureId = createUniqueId();
   // one shared player per file, picked up again when the row is drawn again
   const clip = createMemo(() => {
+    const src = props.src;
     const shared = voiceClip(
-      props.src,
+      src,
       untrack(() => mediaPreload(saveData())),
     );
-    onCleanup(() => shared.release());
+    onCleanup(() =>
+      shared.release({
+        // the row shows another file now, or the reader left the channel;
+        // a row only drawn again or scrolled away keeps a playing clip
+        left:
+          untrack(() => props.src) !== src ||
+          !stillIn(
+            untrack(() => props.channelId),
+            window.location.pathname,
+          ),
+      }),
+    );
     return shared;
   });
   const playing = () => clip().playing();
@@ -143,8 +159,9 @@ export function VoiceMessage(props: {
       <button
         type="button"
         class="z-voice-play"
-        aria-label={playing() ? t`Pause` : t`Play`}
+        aria-label={error() ? t`Try again` : playing() ? t`Pause` : t`Play`}
         // after a failed load a tap tries again
+        aria-describedby={error() ? failureId : undefined}
         onClick={() => void toggle()}
       >
         <Icon name={playing() ? "pause" : "play"} size={16} filled />
@@ -167,6 +184,11 @@ export function VoiceMessage(props: {
           ? t`Unavailable`
           : mediaTime(playing() || current() ? current() : duration())}
       </span>
+      <Show when={error()}>
+        <span id={failureId} class="z-voice-failure">
+          {t`This audio could not be loaded. Check your connection and try again.`}
+        </span>
+      </Show>
       <Show when={props.download}>
         <a
           class="z-voice-download"

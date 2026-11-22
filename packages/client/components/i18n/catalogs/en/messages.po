@@ -31154,3 +31154,7 @@ msgstr "A member who left"
 #: components/app/interface/settings/channel/permissions/ChannelVisibility.tsx
 msgid "This thread follows who can see its channel."
 msgstr "This thread follows who can see its channel."
+
+#: components/ui/components/features/messaging/elements/VoiceMessage.tsx
+msgid "This audio could not be loaded. Check your connection and try again."
+msgstr "This audio could not be loaded. Check your connection and try again."

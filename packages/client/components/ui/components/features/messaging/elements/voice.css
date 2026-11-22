@@ -11,8 +11,18 @@
   background: var(--z-bg-raised);
   color: var(--z-fg-primary);
 }
-.z-voice audio {
-  display: none;
+/* The sound plays outside the row (voicePlayback.ts); only the reason a
+   file failed is here, for screen readers (the button's description) */
+.z-voice-failure {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
 }
 .z-voice-play,
 .z-recorder-send {
