@@ -31155,3 +31155,7 @@ msgstr "Dieser Thread übernimmt, wer seinen Kanal sehen kann."
 #: components/modal/index.tsx
 msgid "Could not open. Check your connection and try again."
 msgstr "Konnte nicht geöffnet werden. Prüfe deine Verbindung und versuche es erneut."
+
+#: components/ui/components/utils/PageBoundary.tsx
+msgid "Could not open."
+msgstr "Konnte nicht geöffnet werden."

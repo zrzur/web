@@ -31158,3 +31158,7 @@ msgstr "This thread follows who can see its channel."
 #: components/modal/index.tsx
 msgid "Could not open. Check your connection and try again."
 msgstr "Could not open. Check your connection and try again."
+
+#: components/ui/components/utils/PageBoundary.tsx
+msgid "Could not open."
+msgstr "Could not open."

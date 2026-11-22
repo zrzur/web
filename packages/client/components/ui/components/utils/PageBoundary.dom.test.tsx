@@ -1,12 +1,12 @@
 import { i18n } from "@lingui/core";
 import { I18nProvider } from "@lingui/solid";
-import { ErrorBoundary, type JSX, createSignal } from "solid-js";
+import { type JSX, createSignal, ErrorBoundary } from "solid-js";
 import { render } from "solid-js/web";
 import { afterEach, describe, expect, it, vi } from "vitest";
 
 import { lazy } from "@revolt/common/lib/lazyPart";
 
-vi.mock("@revolt/ui", () => ({
+vi.mock("../design/Button", () => ({
   Button: (props: { children?: unknown; onPress?: () => void }) => (
     <button type="button" onClick={() => props.onPress?.()}>
       {props.children as never}
@@ -17,7 +17,8 @@ vi.mock("@revolt/ui", () => ({
 import { PageBoundary } from "./PageBoundary";
 
 const tick = (ms = 20) => new Promise((r) => setTimeout(r, ms));
-const NOTE = "Could not open. Check your connection and try again.";
+const NOTE = "Could not open.";
+const HINT = "Check your connection and try again.";
 
 let dispose: (() => void) | undefined;
 afterEach(() => {
@@ -64,7 +65,6 @@ function mount(children: () => JSX.Element, resetKey?: () => unknown) {
   return seen;
 }
 
-
 const note = () =>
   [...document.querySelectorAll('[role="alert"]')].find((el) =>
     el.textContent?.includes(NOTE),
@@ -80,6 +80,10 @@ describe("a page that could not be downloaded", () => {
     mount(() => <Page />);
     await tick();
     expect(note()).toBeDefined();
+    // the app's empty state: its mood, a title and one line
+    expect(note()!.querySelector("[data-empty-state]")).not.toBeNull();
+    expect(note()!.querySelector('[data-mood="alert"]')).not.toBeNull();
+    expect(note()!.textContent).toContain(HINT);
     expect(document.querySelector('[data-testid="page"]')).toBeNull();
 
     tryAgain()!.click();
