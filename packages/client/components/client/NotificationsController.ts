@@ -7,6 +7,7 @@ import { useState } from "@revolt/state";
 import { useSnackbar } from "@revolt/ui";
 
 import { IS_DEV, useClient } from ".";
+import { canNotifyAfterProbe, repairedDesktopState } from "./pageNotification";
 
 export function useNotifications() {
   const { settings } = useState();
@@ -16,6 +17,7 @@ export function useNotifications() {
   const { showError } = useModals();
 
   const supportsNotification = "Notification" in window;
+  const supportsServiceWorker = "serviceWorker" in navigator;
 
   const onDeny = async (showModal?: boolean) => {
     settings.resetNotificationsState("denied");
@@ -39,6 +41,14 @@ export function useNotifications() {
   };
 
   const initNotifications = async () => {
+    // phones the old probe below marked "unsupported" for good
+    const repaired = repairedDesktopState(settings.desktopNotificationsState, {
+      hasNotification: supportsNotification,
+      hasServiceWorker: supportsServiceWorker,
+    });
+    if (repaired !== settings.desktopNotificationsState)
+      settings.resetNotificationsState();
+
     if (
       settings.desktopNotificationsState === "default" ||
       notificationStateMismatch()
@@ -56,8 +66,10 @@ export function useNotifications() {
             setTimeout(() => noti.close(), 100),
           );
         } catch {
-          // An error means not supported.
-          settings.desktopNotificationsState = "unsupported";
+          // Chrome on Android and iOS home-screen apps refuse the
+          // constructor but show notifications through the service worker
+          if (!canNotifyAfterProbe(true, supportsServiceWorker))
+            settings.desktopNotificationsState = "unsupported";
         }
       } else {
         settings.desktopNotificationsState = "unsupported";

@@ -17,7 +17,11 @@ import { useNavigate, useSmartParams } from "@revolt/routing";
 import { useState } from "@revolt/state";
 
 import { useClient, useNotifications, useSound } from ".";
-import { skipDesktopNotification } from "./notificationRules";
+import {
+  openFromNotification,
+  skipDesktopNotification,
+} from "./notificationRules";
+import { browserHost, showPageNotification } from "./pageNotification";
 
 /**
  * Process and display desktop notifications
@@ -55,8 +59,12 @@ export function NotificationsWorker() {
     // Ignore blocked users
     if (message.author?.relationship === "Blocked") return;
 
+    // the channel is not known yet (the rules below need it)
+    const channel = message.channel;
+    if (!channel) return;
+
     // Ignore muted channels
-    if (state.notifications.isMuted(message.channel)) return;
+    if (state.notifications.isMuted(channel)) return;
 
     // a mention after the reader's suppress options (@everyone, roles)
     const mentioned = state.notifications.mentionsForNotification(
@@ -65,7 +73,7 @@ export function NotificationsWorker() {
     );
 
     // Check channel notification settings
-    switch (state.notifications.computeForChannel(message.channel!)) {
+    switch (state.notifications.computeForChannel(channel)) {
       case "none":
         return; // ignore if muted/none
       case "mention":
@@ -81,7 +89,7 @@ export function NotificationsWorker() {
 
     // Generate the title
     let title;
-    switch (message.channel!.type) {
+    switch (channel.type) {
       case "SavedMessages":
         return;
       case "DirectMessage":
@@ -209,6 +217,7 @@ export function NotificationsWorker() {
 
     // Don't continue if we don't have notification permissions
     if (
+      typeof Notification === "undefined" ||
       Notification.permission !== "granted" ||
       state.settings.desktopNotificationsState !== "allowed"
     )
@@ -227,22 +236,41 @@ export function NotificationsWorker() {
         (message.channel?.type === "DirectMessage" ||
           message.channel?.type === "Group"));
 
-    const notification = new Notification(title!, {
-      icon,
-      // @ts-expect-error this does exist on some platforms
-      image: hidePreview ? undefined : image,
-      body: hidePreview ? t`New message` : body,
-      timestamp: message.createdAt,
-      tag: message.channelId,
-      badge: "/assets/web/zrzur-pwa-512.png",
-      silent: true,
-    });
-
-    notification.addEventListener("click", () => {
-      window.focus();
-      navigate(message.path);
+    // phones refuse a notification built in the page and get it through
+    // the service worker instead (pageNotification.ts)
+    void showPageNotification(browserHost(), {
+      title: title!,
+      options: {
+        icon,
+        // @ts-expect-error this does exist on some platforms
+        image: hidePreview ? undefined : image,
+        body: hidePreview ? t`New message` : body,
+        timestamp: message.createdAt,
+        tag: message.channelId,
+        badge: "/assets/web/zrzur-pwa-512.png",
+        silent: true,
+      },
+      path: message.path,
+      onClick: () => {
+        window.focus();
+        navigate(message.path);
+      },
     });
   }
+
+  // a tap on a notification the service worker showed, while this page is
+  // open: the worker brings the page forward and asks it to go there
+  function onWorkerMessage(event: MessageEvent) {
+    const path = openFromNotification(event.data);
+    if (path) navigate(path);
+  }
+
+  onMount(() =>
+    navigator.serviceWorker?.addEventListener("message", onWorkerMessage),
+  );
+  onCleanup(() =>
+    navigator.serviceWorker?.removeEventListener("message", onWorkerMessage),
+  );
 
   createEffect(() => {
     client().addListener("messageCreate", onMessage);

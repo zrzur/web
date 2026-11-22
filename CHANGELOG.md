@@ -2,6 +2,13 @@
 
 ## Unreleased
 
+### Notifications on phones: messages and DMs notify again (2026-11-22, user report)
+
+* **Root cause:** Chrome on Android and home-screen apps on iOS refuse a notification built by the page (`new Notification()` throws "Illegal constructor"); they only show one through the service worker. The first-tap set-up took that refusal for "this browser has no notifications" and stored `unsupported` for good. From then on the phone showed no notification and played no message sound while the app was open, and Settings › Notifications hid both switches. With the app open the server sends no web push either (it pushes only to people who are offline), so a new DM showed only as the sender's picture in the list.
+* The page now shows its notification through the service worker where the browser refuses the page's own (`components/client/pageNotification.ts`). A refused test notification means "unsupported" only when there is no service worker. Phones already stored as `unsupported` start over on the next tap and get their switches back.
+* A tap on a notification brings the open app forward and opens the message there; only with no app open does a new window open (still only pages of this app).
+* A message in a channel the app does not know yet no longer stops the notification code with an error.
+
 ### A friend request opens the sender's profile (2026-11-21)
 
 * **From the phone Notifications page:** the sender's picture and the line "… sent you a friend request" are one button (44 px high) that opens their profile. Screen readers hear the sentence they see as its name, then "Open profile" (ar, en, de) as its description. Accept, Decline and Send message are separate buttons and are not touched by it. The page closes first so the profile is not under it; the profile has its own Accept.

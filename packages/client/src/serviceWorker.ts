@@ -5,7 +5,11 @@ import {
   precacheAndRoute,
 } from "workbox-precaching";
 
-import { pageHandlesPush } from "../components/client/notificationRules";
+import {
+  NOTIFICATION_OPEN,
+  pageForNotification,
+  pageHandlesPush,
+} from "../components/client/notificationRules";
 
 import {
   OFFLINE_CACHE,
@@ -88,8 +92,23 @@ self.addEventListener("notificationclick", (event) => {
     } catch {
       return;
     }
-    if (url.origin === self.location.origin)
-      event.waitUntil(self.clients.openWindow(url.href));
+    if (url.origin !== self.location.origin) return;
+    const target = url;
+    // an open page comes forward and goes there itself (no second copy of
+    // the app); with none open, a new window opens on that page
+    event.waitUntil(
+      self.clients
+        .matchAll({ type: "window", includeUncontrolled: true })
+        .then(async (clients) => {
+          const page = pageForNotification(clients as WindowClient[]);
+          if (!page) return self.clients.openWindow(target.href);
+          await page.focus().catch(() => page);
+          page.postMessage({
+            type: NOTIFICATION_OPEN,
+            path: target.pathname + target.search + target.hash,
+          });
+        }),
+    );
   }
 });
 
