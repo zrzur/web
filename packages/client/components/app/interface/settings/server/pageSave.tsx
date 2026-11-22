@@ -101,13 +101,15 @@ export function usePageSaveRegistration(form: {
   error: () => string | undefined;
   reset: () => void;
   save: () => unknown;
+  /** Whether what was entered can be sent (default: yes) */
+  canSave?: () => boolean;
 }) {
   const page = useContext(PageSaveContext);
   if (!page) return false;
   onCleanup(
     page.add({
       ...form,
-      canSave: () => true,
+      canSave: form.canSave ?? (() => true),
       form: () => undefined,
     }),
   );

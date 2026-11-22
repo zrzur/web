@@ -2,6 +2,11 @@
 
 ## Unreleased
 
+### Tickets settings save from the page's save bar (2026-11-22, user report)
+
+* **Root cause:** every part of Server settings › Overview joins the page's one save bar ("Unsaved changes · Reset · Save changes"), except Tickets. Its changes (category, who answers, kinds and their roles) had their own Save button at the very end of the Tickets part, under "First message in a ticket", out of view while you pick a kind's roles or the category, and leaving the page dropped them without a word.
+* Tickets now joins the page's save bar: the bar appears as soon as something changed, stays in view, saves all of it, and holds the page while there are unsaved changes, as for the rest of Overview. Save stays off while a kind has no name.
+
 ### Forums show new posts and replies (2026-11-22, user report)
 
 * **Root cause:** a forum has no messages of its own; every post is a thread, and threads are not in the server's channel list. The channel list, the server icon and the forum page only looked at the forum channel itself, so a new post or a reply in a post never lit anything.

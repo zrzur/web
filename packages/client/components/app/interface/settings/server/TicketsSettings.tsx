@@ -21,6 +21,7 @@ import {
 } from "@revolt/ui";
 import { Icon } from "@revolt/ui/icons/Icon";
 
+import { usePageSaveRegistration } from "./pageSave";
 import { useSaved } from "./savedNotice";
 
 type Draft = {
@@ -69,6 +70,19 @@ export function TicketsSettings(props: { server: Server }) {
     equals: (a, b) => a.length === b.length && a.every((id, i) => id === b[i]),
   });
   const typesReady = () => draft().types.every((type) => type.name.trim());
+
+  // Changes join the page's one save bar ("Unsaved changes · Save
+  // changes"), as every other part of Overview does; the bar stays in
+  // sight wherever on the page the change was made. Only outside a page
+  // with that bar does this part show its own Save.
+  const inPageBar = usePageSaveRegistration({
+    dirty: () => on() && canManage() && dirty(),
+    saving: pending,
+    error: () => undefined,
+    canSave: typesReady,
+    reset: () => setDraft(stored()),
+    save: () => send(true, draft()),
+  });
 
   async function send(enabled: boolean, values: Draft) {
     if (!canManage() || pending()) return;
@@ -358,7 +372,7 @@ export function TicketsSettings(props: { server: Server }) {
               }}
             />
 
-            <Show when={dirty()}>
+            <Show when={!inPageBar && dirty()}>
               <Actions>
                 <Button
                   variant="text"
