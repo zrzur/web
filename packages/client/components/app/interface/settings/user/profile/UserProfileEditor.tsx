@@ -1,3 +1,4 @@
+import { writeStatusWithRetry } from "@revolt/common/lib/statusWrite";
 import { userHandle, userTag } from "@revolt/common/lib/userTag";
 import { createFormControl, createFormGroup, IFormGroup } from "solid-forms";
 import {
@@ -113,7 +114,12 @@ export function UserProfileEditor(props: Props) {
 
   const [initialBio, setInitialBio] = createSignal<readonly [string]>();
   const [saving, setSaving] = createSignal(false);
+  // a save that takes more than a moment: the server asked to wait (a 429
+  // the SDK waits out by itself, or a longer one sent again once below)
+  const [waiting, setWaiting] = createSignal(false);
   const [error, setError] = createSignal<string>();
+  let saveRun: AbortController | undefined;
+  onCleanup(() => saveRun?.abort());
 
   // once profile data is loaded, copy it into the form
   createEffect(
@@ -236,7 +242,15 @@ export function UserProfileEditor(props: Props) {
       }
     }
 
-    await props.user.edit(changes);
+    // only the edit is sent again after a 429 (the files are already up);
+    // the wait is what the server said in retry_after
+    saveRun?.abort();
+    saveRun = new AbortController();
+    await writeStatusWithRetry(() => props.user.edit(changes), {
+      signal: saveRun.signal,
+      retries: 1,
+      retrying: (on) => on && setWaiting(true),
+    });
 
     if (
       (editGroup.controls.banner.isDirty || editGroup.controls.bio.isDirty) &&
@@ -259,6 +273,8 @@ export function UserProfileEditor(props: Props) {
     if (saving() || !editGroup.isDirty) return;
     setError(undefined);
     setSaving(true);
+    // say so calmly instead of a silent wait
+    const slow = setTimeout(() => setWaiting(true), 1500);
     try {
       await onSubmit();
       for (const control of Object.values(editGroup.controls)) {
@@ -268,6 +284,8 @@ export function UserProfileEditor(props: Props) {
     } catch (err) {
       setError(describeError(err));
     } finally {
+      clearTimeout(slow);
+      setWaiting(false);
       setSaving(false);
     }
   }
@@ -598,7 +616,19 @@ export function UserProfileEditor(props: Props) {
           <Show when={editGroup.isDirty || saving() || error()}>
             <SaveBar role="region" aria-label={t`Unsaved changes`}>
               <SaveText data-error={!!error()}>
-                <Show when={error()} fallback={<Trans>Unsaved changes</Trans>}>
+                <Show
+                  when={error()}
+                  fallback={
+                    <Show
+                      when={waiting()}
+                      fallback={<Trans>Unsaved changes</Trans>}
+                    >
+                      <span role="status">
+                        <Trans>Saving… one moment.</Trans>
+                      </span>
+                    </Show>
+                  }
+                >
                   <Icon name="warning-circle" size={18} />
                   {error()}
                 </Show>

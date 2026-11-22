@@ -31159,3 +31159,7 @@ msgstr "انقل بطاقة المكالمة الصغيرة إلى زاوية أ
 #: components/app/interface/settings/user/Keybinds.tsx
 msgid "While the small call card is focused (you are in a call and look at another page)."
 msgstr "عندما يكون التركيز على بطاقة المكالمة الصغيرة (أنت في مكالمة وتتصفح صفحة أخرى)."
+
+#: components/app/interface/settings/user/profile/UserProfileEditor.tsx
+msgid "Saving… one moment."
+msgstr "جارٍ الحفظ… لحظة واحدة."
