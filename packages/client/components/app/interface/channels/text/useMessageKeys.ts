@@ -1,14 +1,17 @@
 import { onCleanup } from "solid-js";
 
+import { useLingui } from "@lingui/solid/macro";
+
 import { useClient } from "@revolt/client";
 import { deviceMac } from "@revolt/keybinds/active";
+import { announce } from "@revolt/keybinds/announce";
 import { useModals } from "@revolt/modal";
 import { useState } from "@revolt/state";
+import { useSnackbar } from "@revolt/ui";
 
-import { canSend, threadIsReadOnly } from "../threadAccess";
-import { editableByMe } from "./editable";
 import {
   handleMessageKey,
+  messageAbilities,
   moveMessageFocus,
   pageMessages,
 } from "./messageKeys";
@@ -20,8 +23,10 @@ import {
  * a message replies instead of typing an "r".
  */
 export function useMessageKeys() {
+  const { t } = useLingui();
   const client = useClient();
   const state = useState();
+  const snackbar = useSnackbar();
   const { openModal, isOpen, showError } = useModals();
   const mac = deviceMac();
 
@@ -41,23 +46,36 @@ export function useMessageKeys() {
       message: (id) => client().messages.get(id),
       blocked: () =>
         isOpen() || !!document.querySelector("[role=dialog][aria-modal=true]"),
-      canReply: (message) =>
-        !!message.channel &&
-        canSend(message.channel) &&
-        !threadIsReadOnly(message.channel),
-      canEdit: (message) =>
-        editableByMe(message) && !!message.channel && canSend(message.channel),
-      canPin: (message) =>
-        message.channel?.type === "DirectMessage" ||
-        !!message.channel?.havePermission("ManageMessages"),
-      reply: (message) => state.draft.addReply(message, client().user!.id),
+      can: messageAbilities,
+      reply: (message) => {
+        state.draft.addReply(message, client().user!.id);
+        const name =
+          message.masquerade?.name ??
+          message.member?.nickname ??
+          message.author?.displayName ??
+          message.username ??
+          "";
+        announce(t`Replying to ${name}`);
+      },
       edit: (message) => state.draft.setEditingMessage(message),
       remove: (message, now) =>
         now
           ? void message.delete().catch(showError)
           : openModal({ type: "delete_message", message }),
       pin: (message) => openModal({ type: "pin_message", message }),
-      copy: (text) => void navigator.clipboard?.writeText(text),
+      copy: (message) => {
+        // the text as it reads: names for mentions, not their ids
+        const text = client().markdownToText(message.content ?? "");
+        const write = navigator.clipboard?.writeText(text);
+        if (!write) {
+          snackbar.show({ message: t`The text could not be copied.` });
+          return;
+        }
+        write.then(
+          () => announce(t`Copied`),
+          () => snackbar.show({ message: t`The text could not be copied.` }),
+        );
+      },
     });
     if (done) {
       event.preventDefault();

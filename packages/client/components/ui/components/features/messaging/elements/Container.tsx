@@ -5,7 +5,12 @@ import { css, cva } from "styled-system/css";
 import { styled } from "styled-system/jsx";
 
 import { useMessage } from "@revolt/app";
-import { messageAriaKeys } from "@revolt/app/interface/channels/text/messageKeys";
+import {
+  messageAbilities,
+  messageAriaKeys,
+  noteRowFocus,
+  rovingRow,
+} from "@revolt/app/interface/channels/text/messageKeys";
 import { useDevice } from "@revolt/common";
 import { deviceMac } from "@revolt/keybinds/active";
 import { Ripple, typography } from "@revolt/ui/components/design";
@@ -144,9 +149,9 @@ const base = cva({
     // a message reached with Up and Down in the list
     outline: "none",
     _focusVisible: {
-      outline: "2px solid var(--z-accent)",
+      outline: "2px solid var(--z-focus)",
       outlineOffset: "-2px",
-      borderRadius: "6px",
+      borderRadius: "var(--z-radius-sm)",
     },
 
     "& a:hover": {
@@ -421,14 +426,42 @@ export function MessageContainer(props: Props) {
   // of the time of a channel switch: it is made the first time it is needed
   const [wanted, setWanted] = createSignal(false);
 
+  /** What a screen reader says for the message: who and when */
+  const rowLabel = () => {
+    const name =
+      message?.masquerade?.name ??
+      message?.member?.nickname ??
+      message?.author?.displayName ??
+      message?.username ??
+      "";
+    const time = message?.createdAt
+      ? new Intl.DateTimeFormat(document.documentElement.lang || undefined, {
+          dateStyle: "medium",
+          timeStyle: "short",
+        }).format(message.createdAt)
+      : "";
+    return t`Message from ${name}, ${time}`;
+  };
+
   return (
     <div
       id={message?.id}
       // keys on a message (R reply, E edit, …): Up and Down in the list
       // move the focus here (messageKeys.ts, listed in Ctrl+/)
       data-message-row={message?.id}
-      tabIndex={message ? -1 : undefined}
-      aria-keyshortcuts={message ? messageAriaKeys(deviceMac()) : undefined}
+      // one message in the tab order: the one the keyboard was on last
+      tabIndex={message ? (rovingRow() === message.id ? 0 : -1) : undefined}
+      onFocus={(event) => {
+        if (message && event.target === event.currentTarget)
+          noteRowFocus(message.id);
+      }}
+      role={message ? "article" : undefined}
+      aria-label={message ? rowLabel() : undefined}
+      aria-keyshortcuts={
+        message
+          ? messageAriaKeys(deviceMac(), messageAbilities(message)) || undefined
+          : undefined
+      }
       ref={props.ref}
       onMouseEnter={() => {
         setWanted(true);

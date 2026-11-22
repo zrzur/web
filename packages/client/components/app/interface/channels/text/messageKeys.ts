@@ -6,7 +6,7 @@
  *
  *   R             reply
  *   E             edit (your own)
- *   Delete        delete (your own; asks first)
+ *   Delete        delete (your own; asks first); on a Mac also Backspace
  *   Shift+Delete  delete without asking
  *   P             pin or unpin (where you may; asks first)
  *   Ctrl+C        copy the text (Command+C on a Mac), when nothing is selected
@@ -15,9 +15,13 @@
  * are the same on Arabic and German layouts. A single key never acts while
  * you type in a text field.
  */
+import { createSignal } from "solid-js";
+
 import type { Message } from "@zrzur/sdk/solid";
 
 import { isTypingTarget } from "../../../../keybinds/shortcuts";
+import { canSend, threadIsReadOnly } from "../threadAccess";
+import { editableByMe } from "./editable";
 
 export type MessageKeyAction =
   | "reply"
@@ -30,7 +34,7 @@ export type MessageKeyAction =
 type KeyLike = Pick<
   KeyboardEvent,
   "code" | "ctrlKey" | "metaKey" | "shiftKey" | "altKey"
-> & { isComposing?: boolean };
+> & { isComposing?: boolean; keyCode?: number };
 
 /** The fixed keys, for the shortcuts screen and `aria-keyshortcuts` */
 export const MESSAGE_KEYS: Record<MessageKeyAction, string[]> = {
@@ -47,13 +51,17 @@ export function messageKeyAction(
   event: KeyLike,
   mac: boolean,
 ): MessageKeyAction | undefined {
-  if (event.isComposing) return;
+  // a character being composed (Chinese, Japanese input), also in browsers
+  // that only say so with key code 229
+  if (event.isComposing || event.keyCode === 229) return;
   const mod = mac ? event.metaKey : event.ctrlKey;
   // the other one of Ctrl and Command, or Alt: never a message key
   const other = mac ? event.ctrlKey : event.metaKey;
   if (event.altKey || other) return;
   if (mod) return event.code === "KeyC" && !event.shiftKey ? "copy" : undefined;
-  if (event.code === "Delete") return event.shiftKey ? "delete_now" : "delete";
+  // a Mac's Delete key is Backspace; fn+Delete is the forward Delete
+  if (event.code === "Delete" || (mac && event.code === "Backspace"))
+    return event.shiftKey ? "delete_now" : "delete";
   if (event.shiftKey) return;
   switch (event.code) {
     case "KeyR":
@@ -65,9 +73,56 @@ export function messageKeyAction(
   }
 }
 
-/** `aria-keyshortcuts` for a message row */
-export function messageAriaKeys(mac: boolean) {
-  return `R E P Delete Shift+Delete ${mac ? "Meta" : "Control"}+C`;
+/** What a person may do to a message with the keys */
+export type MessageAbilities = Record<
+  "reply" | "edit" | "remove" | "pin" | "copy",
+  boolean
+>;
+
+/** The keys a message takes for this person (the same rules as its menu) */
+export function messageAbilities(message: Message): MessageAbilities {
+  const channel = message.channel;
+  const official = !!message.author?.official;
+  const writable =
+    !official && !!channel && canSend(channel) && !threadIsReadOnly(channel);
+  return {
+    reply: writable,
+    edit: writable && editableByMe(message),
+    remove: !official && !!message.author?.self,
+    pin:
+      !official &&
+      !!channel &&
+      (channel.type === "DirectMessage" ||
+        channel.havePermission("ManageMessages")),
+    copy: !!message.content,
+  };
+}
+
+/** `aria-keyshortcuts` for a message row: only the keys it takes */
+export function messageAriaKeys(mac: boolean, can: MessageAbilities) {
+  return [
+    can.reply && "R",
+    can.edit && "E",
+    can.pin && "P",
+    can.remove && "Delete Shift+Delete",
+    can.remove && mac && "Backspace Shift+Backspace",
+    can.copy && `${mac ? "Meta" : "Control"}+C`,
+  ]
+    .filter(Boolean)
+    .join(" ");
+}
+
+const [rovingRow, setRovingRow] = createSignal<string>();
+
+/**
+ * The message the keyboard was on last: the one message in the tab order
+ * (a roving tab index), so Tab comes back to it
+ */
+export { rovingRow };
+
+/** A message row got the focus */
+export function noteRowFocus(id: string) {
+  setRovingRow(id);
 }
 
 /**
@@ -96,16 +151,15 @@ export type MessageKeyDeps = {
   message: (id: string) => Message | undefined;
   /** Whether a window is open over the app (then keys go to it) */
   blocked: () => boolean;
-  /** Whether you may write in this message's channel */
-  canReply: (message: Message) => boolean;
-  canEdit: (message: Message) => boolean;
-  canPin: (message: Message) => boolean;
+  /** What this person may do to the message */
+  can: (message: Message) => MessageAbilities;
   reply: (message: Message) => void;
   edit: (message: Message) => void;
   /** Ask, then delete (`now`: without asking) */
   remove: (message: Message, now: boolean) => void;
   pin: (message: Message) => void;
-  copy: (text: string) => void;
+  /** Copy the message's text as it reads (names, not ids) */
+  copy: (message: Message) => void;
 };
 
 /**
@@ -123,31 +177,32 @@ export function handleMessageKey(
   const id = row?.dataset.messageRow;
   const message = id ? deps.message(id) : undefined;
   if (!message || message.author?.official) return false;
+  const can = deps.can(message);
 
   switch (action) {
     case "reply":
-      if (!deps.canReply(message)) return false;
+      if (!can.reply) return false;
       deps.reply(message);
       return true;
     case "edit":
-      if (!deps.canEdit(message)) return false;
+      if (!can.edit) return false;
       deps.edit(message);
       return true;
     case "delete":
     case "delete_now":
-      if (!message.author?.self) return false;
+      if (!can.remove) return false;
       deps.remove(message, action === "delete_now");
       return true;
     case "pin":
-      if (!deps.canPin(message)) return false;
+      if (!can.pin) return false;
       deps.pin(message);
       return true;
     case "copy": {
       // selected text is copied by the browser as usual
       const selection = document.getSelection();
       if (selection && !selection.isCollapsed) return false;
-      if (!message.content) return false;
-      deps.copy(message.content);
+      if (!can.copy) return false;
+      deps.copy(message);
       return true;
     }
   }

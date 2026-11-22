@@ -2,11 +2,20 @@ import { describe, expect, it } from "vitest";
 
 import { messageAriaKeys, messageKeyAction } from "./messageKeys";
 
+const ALL = { reply: true, edit: true, remove: true, pin: true, copy: true };
+const NONE = {
+  reply: false,
+  edit: false,
+  remove: false,
+  pin: false,
+  copy: false,
+};
+
 const key = (
   code: string,
   mods: Partial<
     Pick<KeyboardEvent, "ctrlKey" | "metaKey" | "shiftKey" | "altKey">
-  > & { isComposing?: boolean } = {},
+  > & { isComposing?: boolean; keyCode?: number } = {},
 ) => ({
   code,
   ctrlKey: false,
@@ -59,15 +68,34 @@ describe("messageKeyAction", () => {
     expect(messageKeyAction(key("KeyQ"), false)).toBe(undefined);
   });
 
-  it("never acts while a character is being composed", () => {
+  it("never acts while a character is being composed (also key code 229)", () => {
     expect(messageKeyAction(key("KeyR", { isComposing: true }), false)).toBe(
+      undefined,
+    );
+    expect(messageKeyAction(key("Enter", { keyCode: 229 }), false)).toBe(
+      undefined,
+    );
+    expect(messageKeyAction(key("KeyR", { keyCode: 229 }), false)).toBe(
       undefined,
     );
   });
 
-  it("names the keys for screen readers", () => {
-    expect(messageAriaKeys(false)).toContain("Control+C");
-    expect(messageAriaKeys(true)).toContain("Meta+C");
-    expect(messageAriaKeys(false)).toContain("Shift+Delete");
+  it("takes Backspace for Delete on a Mac only", () => {
+    expect(messageKeyAction(key("Backspace"), true)).toBe("delete");
+    expect(messageKeyAction(key("Backspace", { shiftKey: true }), true)).toBe(
+      "delete_now",
+    );
+    expect(messageKeyAction(key("Backspace"), false)).toBe(undefined);
+  });
+
+  it("names only the keys a message takes, for screen readers", () => {
+    expect(messageAriaKeys(false, ALL)).toBe(
+      "R E P Delete Shift+Delete Control+C",
+    );
+    expect(messageAriaKeys(true, ALL)).toContain("Backspace Shift+Backspace");
+    expect(messageAriaKeys(true, ALL)).toContain("Meta+C");
+    // someone else's message in a channel you can only read
+    expect(messageAriaKeys(false, { ...NONE, copy: true })).toBe("Control+C");
+    expect(messageAriaKeys(false, NONE)).toBe("");
   });
 });
