@@ -5,7 +5,8 @@
 ### Links to old messages land on phones (2026-11-22)
 
 * **A link to a message opened by a page load shows that message:** on phones the channel is drawn while the live connection is still being made. When the connection came up while the page around the message was on its way, the list treated it as a reconnect, loaded the newest page and dropped the jump, so the newest messages showed instead (seen in about half the tries at 375 px; desktop draws the channel later and hit it rarely). The jump now lands; if the connection came back meanwhile, newer messages are asked for again once it has landed (`history/controller.ts`).
-* **A search result, a pin or a picture in the channel's details shows the conversation on phones:** those lists are whole screens over the conversation, and they stayed open after a tap, so the message was loaded and marked behind them. Going to a message from them now closes the list (`TextChannel.tsx`). Desktop keeps the search beside the conversation.
+* **A search result, a pin or a picture in the channel's details shows the conversation on phones and tablets:** on phones those lists are whole screens over the conversation, on tablets (up to 840 px wide) a panel over its side, and they stayed open after a tap, so the message was loaded and marked behind them. Going to a message from them now closes the list (`TextChannel.tsx`). Desktop keeps the search beside the conversation.
+* **The hover toolbar of a message no longer covers its first line:** it sat 22 px into the row, so a link at the toolbar's end of the first line (on the left in Arabic, on the right in English) could not be clicked while the toolbar showed. It now sits on the row's top edge, above the text; a row at the very top of the list has it below instead.
 
 ### A friend request opens the sender's profile (2026-11-21)
 

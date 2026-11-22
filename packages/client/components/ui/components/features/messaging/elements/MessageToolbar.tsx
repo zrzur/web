@@ -156,8 +156,15 @@ const Base = styled("div", {
   base: {
     // phones: no hover row; the same actions are in the long-press sheet
     _phone: { display: "none !important" },
-    top: "-16px",
+    // Above the row, touching its top edge, so the pointer moves onto it
+    // without leaving the row: it never covers the row's own text, links
+    // included (it used to reach 22 px into the first line, where a link at
+    // the line's end side could not be clicked while the toolbar showed).
+    // A row too close to the top of the list has it below instead
+    // (`data-toolbar-below`, set by MessageContainer on hover).
+    bottom: "100%",
     insetInlineEnd: "16px",
+    "[data-toolbar-below] > &": { bottom: "auto", top: "100%" },
     position: "absolute",
     zIndex: 2,
 
