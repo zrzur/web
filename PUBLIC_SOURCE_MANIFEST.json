@@ -262,8 +262,8 @@
     },
     {
       "path": "CHANGELOG.md",
-      "sha256": "8cb2a2ec3d1d6658ac22b9aa87839f54fe2b5253aa7dd9a1aa0a7e135326be32",
-      "bytes": 196153,
+      "sha256": "48cc02edad7d3fa6b3f264633bf5bdf543c5510e72cbbbae68c0ba5f29ee8a10",
+      "bytes": 196213,
       "category": "public-documentation"
     },
     {
@@ -718,8 +718,8 @@
     },
     {
       "path": "packages/client/components/app/interface/channels/text/Messages.tsx",
-      "sha256": "a3f11e741c5b66667b490377e5ac8967731875def3c88641e75b0ee07540704f",
-      "bytes": 23634,
+      "sha256": "05546032bd72929261eb7da881393dcc4d8b01a1d8dbc94a56c1b05abf99da09",
+      "bytes": 24114,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -784,14 +784,14 @@
     },
     {
       "path": "packages/client/components/app/interface/channels/text/history/controller.test.ts",
-      "sha256": "0da5443cb7016a4baceb35432496bb46f4f668916ef6cc51dfac9908d794f137",
-      "bytes": 23345,
+      "sha256": "ab333ab3f4031ee2571933b9c6a65a00c295760e3dc39e815742988a6adf77df",
+      "bytes": 24196,
       "category": "synthetic-test-source-or-fixture"
     },
     {
       "path": "packages/client/components/app/interface/channels/text/history/controller.ts",
-      "sha256": "b7e32725eb4a043d9345fa8e482450a95289fad42252eea4c957472b36839aa9",
-      "bytes": 17825,
+      "sha256": "76c7a6bb62ca043b13fd792a32b9b9695908120e24c882b23f4130bf38fb38f4",
+      "bytes": 17992,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -42724,8 +42724,8 @@
     },
     {
       "path": "packages/client/src/interface/channels/text/ChannelDetailsPhone.tsx",
-      "sha256": "8781b46e1f5b23b9a22d5943e50268a092cea6963dcc9743fbaf498cb68ac171",
-      "bytes": 28109,
+      "sha256": "3242b26ec3100c1af4ac6235bbd9b578551ab2463e510cf3cbf5d47d77b8487e",
+      "bytes": 28155,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -42766,8 +42766,8 @@
     },
     {
       "path": "packages/client/src/interface/channels/text/TextChannel.tsx",
-      "sha256": "4c818d0cb6a894194e33bc747b87968458b2d83f656d85d367bc4fd343af98c2",
-      "bytes": 19484,
+      "sha256": "d87e493cee7224a1b97c5cff1538092b3d242e3a7b057d3da5fa81f78dde3efe",
+      "bytes": 20015,
       "category": "product-source-or-build-manifest"
     },
     {
