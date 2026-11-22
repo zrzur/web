@@ -3,8 +3,12 @@
     "اضغط Escape <0>للإلغاء</0> · Enter <1>للحفظ</1>",
     "Escape zum <0>Abbrechen</0> · Enter zum <1>Speichern</1>"
   ],
-  "This message is too long. Remove {over} characters to send it (up to {max}).": [
-    "هذه الرسالة طويلة جدًا. احذف {over} من الأحرف لإرسالها (الحد الأقصى {max}).",
-    "Diese Nachricht ist zu lang. Entferne {over} Zeichen, um sie zu senden (höchstens {max})."
+  "{over, plural, one {This message is too long. Remove # character to send it (up to {max}).} other {This message is too long. Remove # characters to send it (up to {max}).}}": [
+    "{over, plural, zero {هذه الرسالة طويلة جدًا. احذف # حرفًا لإرسالها (الحد الأقصى {max}).} one {هذه الرسالة طويلة جدًا. احذف حرفًا واحدًا لإرسالها (الحد الأقصى {max}).} two {هذه الرسالة طويلة جدًا. احذف حرفين لإرسالها (الحد الأقصى {max}).} few {هذه الرسالة طويلة جدًا. احذف # أحرف لإرسالها (الحد الأقصى {max}).} many {هذه الرسالة طويلة جدًا. احذف # حرفًا لإرسالها (الحد الأقصى {max}).} other {هذه الرسالة طويلة جدًا. احذف # حرف لإرسالها (الحد الأقصى {max}).}}",
+    "{over, plural, one {Diese Nachricht ist zu lang. Entferne # Zeichen, um sie zu senden (höchstens {max}).} other {Diese Nachricht ist zu lang. Entferne # Zeichen, um sie zu senden (höchstens {max}).}}"
+  ],
+  "Your message is longer than the limit.": [
+    "رسالتك أطول من الحد المسموح به.",
+    "Deine Nachricht ist länger als erlaubt."
   ]
 }

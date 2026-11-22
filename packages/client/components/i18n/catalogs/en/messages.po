@@ -31160,5 +31160,9 @@ msgid "Escape to <0>cancel</0> · Enter to <1>save</1>"
 msgstr "Escape to <0>cancel</0> · Enter to <1>save</1>"
 
 #: src/interface/channels/text/Composition.tsx
-msgid "This message is too long. Remove {over} characters to send it (up to {max})."
-msgstr "This message is too long. Remove {over} characters to send it (up to {max})."
+msgid "{over, plural, one {This message is too long. Remove # character to send it (up to {max}).} other {This message is too long. Remove # characters to send it (up to {max}).}}"
+msgstr "{over, plural, one {This message is too long. Remove # character to send it (up to {max}).} other {This message is too long. Remove # characters to send it (up to {max}).}}"
+
+#: src/interface/channels/text/Composition.tsx
+msgid "Your message is longer than the limit."
+msgstr "Your message is longer than the limit."

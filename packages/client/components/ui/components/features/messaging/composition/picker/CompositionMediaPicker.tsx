@@ -48,9 +48,9 @@ export type MediaPickerAdd = (actions: {
 
 export type MediaPickerProps = {
   ref: Setter<HTMLElement | undefined>;
-  onClickGif: (_: unknown, ref?: HTMLDivElement) => void;
-  onClickEmoji: (_: unknown, ref?: HTMLDivElement) => void;
-  onClickAdd: (_: unknown, ref?: HTMLDivElement) => void;
+  onClickGif: (_: unknown, ref?: HTMLElement) => void;
+  onClickEmoji: (_: unknown, ref?: HTMLElement) => void;
+  onClickAdd: (_: unknown, ref?: HTMLElement) => void;
 };
 interface Props {
   children: (trigProps: MediaPickerProps) => JSX.Element;
@@ -76,7 +76,7 @@ export function CompositionMediaPicker(props: Props) {
   createEffect(() => props.onShown?.(show()));
   const [altRef, setAltRef] = createSignal<HTMLElement>();
   const [trigger, setTrigger] = createSignal<HTMLElement>();
-  function captureTrigger(event: unknown, ref?: HTMLDivElement) {
+  function captureTrigger(event: unknown, ref?: HTMLElement) {
     const button = mediaPickerTrigger(event);
     if (button instanceof HTMLElement) setTrigger(button);
     setAltRef(ref ?? (button instanceof HTMLElement ? button : undefined));
