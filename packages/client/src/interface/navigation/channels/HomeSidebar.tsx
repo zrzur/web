@@ -5,7 +5,7 @@ import { Match, Show, Switch, createMemo, splitProps } from "solid-js";
 import { Plural, Trans, useLingui } from "@lingui/solid/macro";
 import { VirtualContainer } from "@minht11/solid-virtual-container";
 import { Channel } from "@zrzur/sdk/solid";
-import { css } from "styled-system/css";
+import { css, cx } from "styled-system/css";
 import { styled } from "styled-system/jsx";
 
 import { ChannelContextMenu, UserContextMenu } from "@revolt/app";
@@ -30,6 +30,7 @@ import {
   typography,
 } from "@revolt/ui";
 import { Symbol } from "@revolt/ui/components/utils/Symbol";
+import { touchHitArea } from "@revolt/ui/components/utils/touchHitArea";
 import { Icon } from "@revolt/ui/icons/Icon";
 
 import { eventsEnabled } from "../../events/EventsLink";
@@ -112,6 +113,7 @@ const HomeSidebarWide = (props: Props) => {
           </Header>
 
           <MenuButton
+            class={touchHitArea}
             href="/app"
             size="normal"
             icon={<Symbol>home</Symbol>}
@@ -129,6 +131,7 @@ const HomeSidebarWide = (props: Props) => {
           <div style={{ height: "5px" }} />
 
           <MenuButton
+            class={touchHitArea}
             href="/friends"
             size="normal"
             icon={<Symbol>group</Symbol>}
@@ -153,6 +156,7 @@ const HomeSidebarWide = (props: Props) => {
 
           <Show when={eventsEnabled(client())}>
             <MenuButton
+              class={touchHitArea}
               href="/events"
               size="normal"
               icon={<Symbol>calendar_month</Symbol>}
@@ -172,6 +176,7 @@ const HomeSidebarWide = (props: Props) => {
           </Show>
 
           <MenuButton
+            class={touchHitArea}
             href="/designs"
             size="normal"
             icon={<Symbol>palette</Symbol>}
@@ -189,6 +194,7 @@ const HomeSidebarWide = (props: Props) => {
           <Switch
             fallback={
               <MenuButton
+                class={touchHitArea}
                 size="normal"
                 attention={"normal"}
                 icon={<Symbol>note_stack</Symbol>}
@@ -202,6 +208,7 @@ const HomeSidebarWide = (props: Props) => {
           >
             <Match when={savedNotesChannelId()}>
               <MenuButton
+                class={touchHitArea}
                 href={`/channel/${savedNotesChannelId()}`}
                 size="normal"
                 icon={<Symbol>note_stack</Symbol>}
@@ -222,6 +229,7 @@ const HomeSidebarWide = (props: Props) => {
             <div style={{ height: "5px" }} />
 
             <MenuButton
+              class={touchHitArea}
               href="/designs/studio"
               size="normal"
               icon={<Icon name="upload-simple" size={20} />}
@@ -239,22 +247,25 @@ const HomeSidebarWide = (props: Props) => {
             <button
               type="button"
               aria-label={t`Create a new group`}
-              class={css({
-                cursor: "pointer",
-                border: "none",
-                background: "transparent",
-                padding: "2px",
-                color: "inherit",
-                display: "flex",
-                // phones: a 44 px tap target (phone rules)
-                _phone: {
-                  minWidth: "44px",
-                  minHeight: "44px",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  marginBlock: "-12px",
-                },
-              })}
+              class={cx(
+                touchHitArea,
+                css({
+                  cursor: "pointer",
+                  border: "none",
+                  background: "transparent",
+                  padding: "2px",
+                  color: "inherit",
+                  display: "flex",
+                  // phones: a 44 px tap target (phone rules)
+                  _phone: {
+                    minWidth: "44px",
+                    minHeight: "44px",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    marginBlock: "-12px",
+                  },
+                }),
+              )}
               onClick={() =>
                 openModal({
                   type: "create_group",
@@ -424,6 +435,7 @@ function Entry(
 
   return (
     <MenuButton
+      class={touchHitArea}
       {...remote}
       href={`/channel/${local.channel.id}`}
       size="normal"

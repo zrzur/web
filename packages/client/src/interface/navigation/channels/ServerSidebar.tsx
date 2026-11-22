@@ -14,7 +14,7 @@ import {
 
 import { Trans, useLingui } from "@lingui/solid/macro";
 import type { API, Channel, Server } from "@zrzur/sdk/solid";
-import { css } from "styled-system/css";
+import { css, cx } from "styled-system/css";
 import { styled } from "styled-system/jsx";
 
 import { ServerContextMenu } from "@revolt/app/menus";
@@ -53,6 +53,7 @@ import { ServerStatusBadges } from "@revolt/ui/components/features/profiles/Serv
 import { VoiceChannelPreview } from "@revolt/ui/components/features/voice/VoiceChannelPreview";
 import { createDragHandle } from "@revolt/ui/components/utils/Draggable";
 import { Symbol } from "@revolt/ui/components/utils/Symbol";
+import { touchHitArea } from "@revolt/ui/components/utils/touchHitArea";
 
 import { isPrivateCategory } from "@revolt/app/interface/settings/category/category";
 import { chevron_right as MdChevronRight } from "@revolt/ui/icons/legacy";
@@ -538,7 +539,7 @@ function ServerInfo(
           part of its accessible name. Its click reaches the row */}
       <button
         type="button"
-        class={serverMenuButton}
+        class={cx(serverMenuButton, touchHitArea)}
         aria-haspopup="menu"
         aria-expanded={open()}
         aria-label={t`Server menu`}
@@ -745,6 +746,7 @@ function Category(
             }}
           >
             <CategoryBase
+              class={touchHitArea}
               type="button"
               aria-expanded={isOpen()}
               open={isOpen()}
@@ -1289,7 +1291,19 @@ const ToolButton = styled("button", {
       outline: "2px solid var(--z-focus)",
       outlineOffset: "-2px",
     },
-    "@media (pointer: coarse)": { width: "32px", height: "32px" },
+    "@media (pointer: coarse)": {
+      width: "32px",
+      height: "32px",
+      // a finger's tap area is 44 px (see touchHitArea)
+      position: "relative",
+      isolation: "isolate",
+      "&::after": {
+        content: '""',
+        position: "absolute",
+        zIndex: -1,
+        inset: "calc((32px - var(--z-control-xl)) / 2)",
+      },
+    },
   },
 });
 const ChannelRow = styled("div", {
