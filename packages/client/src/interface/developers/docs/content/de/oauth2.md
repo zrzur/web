@@ -8,7 +8,7 @@ Eine Anwendung und eine Website oder ein Programm, das eine Weiterleitung empfan
 
 ## Was es kann und was nicht {#scope}
 
-Ein Zugriffstoken liest, wer jemand ist und auf welchen Servern. Es funktioniert nur auf `/oauth2/@me...`. Es handelt nie als die Person auf dem Rest der API.
+Ein Zugriffstoken liest, wer jemand ist, auf welchen Servern und was die Person dort darf. Es funktioniert nur auf `/oauth2/@me...`. Es handelt nie als die Person auf dem Rest der API.
 
 | Scope                   | Gibt                                      |
 | ----------------------- | ----------------------------------------- |
@@ -44,11 +44,27 @@ Dieser Pfad liegt in der Zrzur-App. Der **URL-Generator** im Tab OAuth2 baut die
 
 @@4
 
+## Bot-Dashboards: prüfen, wer verwalten darf {#dashboards}
+
+`GET /oauth2/@me/servers` listet jeden Server, auf dem die Person **Mitglied** ist. Mitglied zu sein heißt nicht, dass sie dort die Einstellungen deines Bots ändern darf. Jeder Eintrag sagt, was sie darf:
+
+| Feld         | Bedeutung                                                     |
+| ------------ | ------------------------------------------------------------- |
+| `owner`      | Ihr gehört der Server                                         |
+| `can_manage` | Ihr gehört der Server oder sie hat „Server verwalten“         |
+| `permissions`| Ihre serverweiten Berechtigungen als Dezimalzahl in Textform  |
+
+Frage `GET /oauth2/@me/servers?manageable=true` ab, um nur die Server zu bekommen, die sie verwalten kann. Zeige nur diese und prüfe vor jeder Änderung noch einmal mit deinem Bot-Token: `members.canManage(serverId, userId)` in `@zrzur/sdk/bot`. Rechte können sich nach der Anmeldung ändern.
+
+Die Bits sind die von Zrzur, nicht die von Discord. „Server verwalten“ ist `1 << 1` (`2`), Administrator `1 << 46`. Code für Discords `0x8` oder `0x20` liest die falschen Bits. Nutze `Permissions` aus dem SDK und `BigInt` auf den Text.
+
+@@5
+
 ## Aktualisieren und widerrufen {#refresh}
 
 Zugriffstokens halten 1 Stunde, Aktualisierungstokens 30 Tage. Jedes Aktualisierungstoken geht einmal und kommt neu zurück. Ein altes zu nutzen beendet die ganze Kette, denn das sieht nach Diebstahl aus.
 
-@@5
+@@6
 
 Beide Routen nehmen ein Formular, kein JSON. Sie stehen nicht im OpenAPI-Dokument. Eine Person kann deine App auch in ihren Einstellungen entziehen.
 
@@ -66,7 +82,7 @@ Diese Routen antworten `{ "error": "...", "error_description": "..." }`.
 
 ## Referenz {#reference}
 
-@@6
+@@7
 
 ## Weiter {#next}
 

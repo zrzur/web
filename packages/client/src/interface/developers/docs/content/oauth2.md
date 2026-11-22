@@ -8,7 +8,7 @@ An application, and a website or program that can receive a redirect.
 
 ## What it can and cannot do {#scope}
 
-An access token reads who someone is and which servers they are in. It works only on `/oauth2/@me...`. It never acts as the person on the rest of the API.
+An access token reads who someone is, which servers they are in and what they may do there. It works only on `/oauth2/@me...`. It never acts as the person on the rest of the API.
 
 | Scope                   | Gives                                     |
 | ----------------------- | ----------------------------------------- |
@@ -74,6 +74,26 @@ import { createHash, randomBytes } from "node:crypto";
 
 const verifier = randomBytes(32).toString("base64url");
 const challenge = createHash("sha256").update(verifier).digest("base64url");
+```
+
+## Bot dashboards: check who may manage {#dashboards}
+
+`GET /oauth2/@me/servers` lists every server the person is **in**. Being in a server does not mean they may change your bot's settings there. Each entry says what they may do:
+
+| Field        | Meaning                                                       |
+| ------------ | ------------------------------------------------------------- |
+| `owner`      | They own the server                                           |
+| `can_manage` | They own it or hold Manage Server                             |
+| `permissions`| Their server-wide permissions, as a decimal string            |
+
+Ask for `GET /oauth2/@me/servers?manageable=true` to get only the servers they can manage. Show only those, and check again on the server before every change, with your bot token: `members.canManage(serverId, userId)` in `@zrzur/sdk/bot`. Rights can change after sign-in.
+
+The bits are Zrzur's, not Discord's. Manage Server is `1 << 1` (`2`), Administrator `1 << 46`. Code written for Discord's `0x8` or `0x20` reads the wrong bits. Use `Permissions` from the SDK and `BigInt` on the string.
+
+```js
+const servers = await fetch("https://api.zrzur.com/oauth2/@me/servers?manageable=true", {
+  headers: { Authorization: `Bearer ${accessToken}` },
+}).then((r) => r.json());
 ```
 
 ## Refresh and revoke {#refresh}

@@ -2,6 +2,10 @@
 
 ## Unreleased
 
+### Developer docs: bot dashboards must check who may manage (2026-11-22)
+
+* The OAuth2 page (ar, en, de) has a section "Bot dashboards: check who may manage": `/oauth2/@me/servers` lists servers someone is in, not servers they manage; use `can_manage` or `?manageable=true`, check again with `members.canManage` before each change, and use Zrzur's permission bits, not Discord's.
+
 ### A friend request opens the sender's profile (2026-11-21)
 
 * **From the phone Notifications page:** the sender's picture and the line "… sent you a friend request" are one button (44 px high) that opens their profile. Screen readers hear the sentence they see as its name, then "Open profile" (ar, en, de) as its description. Accept, Decline and Send message are separate buttons and are not touched by it. The page closes first so the profile is not under it; the profile has its own Accept.
