@@ -17,7 +17,8 @@ export type GlobalShortcut =
   | "toggle_streamer"
   | "toggle_soundboard"
   | "save_clip"
-  | "leave_call";
+  | "leave_call"
+  | "open_quick_switcher";
 
 type KeyLike = Pick<
   KeyboardEvent,
@@ -36,8 +37,12 @@ export function matchGlobalShortcut(
 ): GlobalShortcut | undefined {
   const id = shortcutFor(event, sys);
   // the app-wide ones: toggle_mute, toggle_deafen, toggle_streamer,
-  // toggle_soundboard, save_clip, open_shortcuts, leave_call
-  return id && /^(toggle_|open_shortcuts|save_clip|leave_call)/.test(id)
+  // toggle_soundboard, save_clip, open_shortcuts, leave_call,
+  // open_quick_switcher
+  return id &&
+    /^(toggle_\w+|open_shortcuts|open_quick_switcher|save_clip|leave_call)$/.test(
+      id,
+    )
     ? (id as GlobalShortcut)
     : undefined;
 }

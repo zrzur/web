@@ -20,13 +20,13 @@ import { Titlebar } from "@revolt/app/interface/desktop/Titlebar";
 import { ChangeRequestNotice } from "@revolt/app/interface/settings/user/account/ChangeRequestNotice";
 import { NoticeCenter } from "@revolt/app/interface/support/NoticeCenter";
 import { SaveDataOffer } from "@revolt/app/interface/support/SaveDataOffer";
+import { ConfirmEmailStrip } from "@revolt/auth/src/invite/ConfirmEmailStrip";
 import { useClient, useClientLifecycle } from "@revolt/client";
 import { State } from "@revolt/client/Controller";
 import { NotificationsWorker } from "@revolt/client/NotificationsWorker";
 import { useDevice } from "@revolt/common";
 import { useModals } from "@revolt/modal";
 import { PluginHostGate } from "@revolt/plugins/PluginHostGate";
-import { ConfirmEmailStrip } from "@revolt/auth/src/invite/ConfirmEmailStrip";
 import { Navigate, useBeforeLeave, useLocation } from "@revolt/routing";
 import { useState } from "@revolt/state";
 import { LAYOUT_SECTIONS } from "@revolt/state/stores/Layout";
@@ -38,6 +38,7 @@ import { SlideDrawer } from "../components/ui/components/navigation/SlideDrawer"
 import { Sidebar } from "./interface/Sidebar";
 import { FirstScreen } from "./interface/home/FirstScreen";
 
+import { notePlace } from "@revolt/keybinds/quickSwitch";
 import { goingHome } from "./interface/home/goingHome";
 import { NEXT_SCREENS, preloadWhenIdle } from "./interface/idlePreload";
 import { PhoneTabs } from "./interface/navigation/PhoneTabs";
@@ -86,6 +87,8 @@ const Interface = (props: { children?: JSX.Element }) => {
         openDialogAt(dialog, client, { openModal, showError });
       } else if (typeof e.to === "string") {
         state.layout.setLastActivePath(e.to);
+        // recent places for the quick switcher (Ctrl+K)
+        notePlace(e.to);
       }
     }
   });

@@ -31282,3 +31282,44 @@ msgstr "Your own message."
 #: components/app/interface/settings/user/Keybinds.tsx
 msgid "Your own message. Asks first; with Shift it doesn't."
 msgstr "Your own message. Asks first; with Shift it doesn't."
+
+#. placeholder {0}: entry.mentions
+#: components/modal/modals/QuickSwitcher.tsx
+msgid "{0, plural, one {# mention} other {# mentions}}"
+msgstr "{0, plural, one {# mention} other {# mentions}}"
+
+#: components/modal/modals/QuickSwitcher.tsx
+msgid "Channels, conversations, servers and friends"
+msgstr "Channels, conversations, servers and friends"
+
+#: components/modal/modals/QuickSwitcher.tsx
+msgid "Friend"
+msgstr "Friend"
+
+#: components/modal/modals/QuickSwitcher.tsx
+msgid "Go to"
+msgstr "Go to"
+
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "Go to a channel, conversation or server"
+msgstr "Go to a channel, conversation or server"
+
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "On the message with the keyboard focus. Reach it with ↑ and ↓."
+msgstr "On the message with the keyboard focus. Reach it with ↑ and ↓."
+
+#: components/modal/modals/QuickSwitcher.tsx
+msgid "Recent and unread places"
+msgstr "Recent and unread places"
+
+#: components/modal/modals/QuickSwitcher.tsx
+msgid "Results"
+msgstr "Results"
+
+#: components/modal/modals/QuickSwitcher.tsx
+msgid "Start with # for channels, @ for people or * for servers."
+msgstr "Start with # for channels, @ for people or * for servers."
+
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "Type a name. Start with # for channels, @ for people or * for servers."
+msgstr "Type a name. Start with # for channels, @ for people or * for servers."

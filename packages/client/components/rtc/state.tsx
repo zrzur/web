@@ -1653,6 +1653,13 @@ export function VoiceContext(props: { children: JSX.Element }) {
         });
       return;
     }
+    if (shortcut === "open_quick_switcher") {
+      // heard before the message box, so Ctrl+K works while typing too
+      event.preventDefault();
+      if (!event.repeat && !modals.isOpen())
+        modals.openModal({ type: "quick_switcher" });
+      return;
+    }
     if (shortcut === "toggle_streamer") {
       event.preventDefault();
       if (!event.repeat)

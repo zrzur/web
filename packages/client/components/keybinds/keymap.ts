@@ -67,7 +67,8 @@ export type ShortcutId =
   | "open_emoji_picker"
   | "search_channel"
   | "view_mentions"
-  | "leave_call";
+  | "leave_call"
+  | "open_quick_switcher";
 
 export type CustomCombos = Partial<Record<ShortcutId, Combo>>;
 
@@ -106,6 +107,8 @@ export const DEFAULTS: Record<ShortcutId, string> = {
   // not Ctrl+I: that is italic in the message box
   view_mentions: "MS:Digit2|MC:KeyI",
   leave_call: "MS:KeyH",
+  // the browser's search-bar key, taken while Zrzur is open
+  open_quick_switcher: "M:KeyK",
 };
 
 /** Shortcuts that can be changed, in the order the shortcuts screen shows them */

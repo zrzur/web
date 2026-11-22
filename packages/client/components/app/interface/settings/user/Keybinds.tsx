@@ -105,6 +105,7 @@ export function KeybindsSettings() {
     search_channel: () => t`Search this channel`,
     view_mentions: () => t`Open your mentions`,
     leave_call: () => t`Leave the call`,
+    open_quick_switcher: () => t`Go to a channel, conversation or server`,
   };
 
   // desktop app: binds heard in games (set in voice settings)
@@ -280,7 +281,9 @@ export function KeybindsSettings() {
         {
           title: <Trans>Reply</Trans>,
           description: (
-            <Trans>On the message under the pointer or with focus.</Trans>
+            <Trans>
+              On the message with the keyboard focus. Reach it with ↑ and ↓.
+            </Trans>
           ),
           keys: [["R"]],
         },
@@ -358,6 +361,16 @@ export function KeybindsSettings() {
     {
       title: <Trans>Navigation</Trans>,
       rows: [
+        {
+          id: "open_quick_switcher",
+          title: <Trans>Go to a channel, conversation or server</Trans>,
+          description: (
+            <Trans>
+              Type a name. Start with # for channels, @ for people or * for
+              servers.
+            </Trans>
+          ),
+        },
         { id: "navigation_channel_up", title: <Trans>Previous channel</Trans> },
         { id: "navigation_channel_down", title: <Trans>Next channel</Trans> },
         {

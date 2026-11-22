@@ -31279,3 +31279,44 @@ msgstr "رسالتك أنت."
 #: components/app/interface/settings/user/Keybinds.tsx
 msgid "Your own message. Asks first; with Shift it doesn't."
 msgstr "رسالتك أنت. يُطلب التأكيد أولًا، ومع Shift لا يُطلب."
+
+#. placeholder {0}: entry.mentions
+#: components/modal/modals/QuickSwitcher.tsx
+msgid "{0, plural, one {# mention} other {# mentions}}"
+msgstr "{0, plural, zero {لا إشارات} one {إشارة واحدة} two {إشارتان} few {# إشارات} many {# إشارة} other {# إشارة}}"
+
+#: components/modal/modals/QuickSwitcher.tsx
+msgid "Channels, conversations, servers and friends"
+msgstr "القنوات والمحادثات والسيرفرات والأصدقاء"
+
+#: components/modal/modals/QuickSwitcher.tsx
+msgid "Friend"
+msgstr "صديق"
+
+#: components/modal/modals/QuickSwitcher.tsx
+msgid "Go to"
+msgstr "انتقل إلى"
+
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "Go to a channel, conversation or server"
+msgstr "الانتقال إلى قناة أو محادثة أو سيرفر"
+
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "On the message with the keyboard focus. Reach it with ↑ and ↓."
+msgstr "على الرسالة التي عليها تركيز لوحة المفاتيح. انتقل إليها بالسهمين ↑ و↓."
+
+#: components/modal/modals/QuickSwitcher.tsx
+msgid "Recent and unread places"
+msgstr "الأماكن الأخيرة وغير المقروءة"
+
+#: components/modal/modals/QuickSwitcher.tsx
+msgid "Results"
+msgstr "النتائج"
+
+#: components/modal/modals/QuickSwitcher.tsx
+msgid "Start with # for channels, @ for people or * for servers."
+msgstr "ابدأ بـ # للقنوات، أو @ للأشخاص، أو * للسيرفرات."
+
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "Type a name. Start with # for channels, @ for people or * for servers."
+msgstr "اكتب اسمًا. ابدأ بـ # للقنوات، أو @ للأشخاص، أو * للسيرفرات."
