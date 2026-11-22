@@ -262,8 +262,8 @@
     },
     {
       "path": "CHANGELOG.md",
-      "sha256": "ef14624c87a2591ac5547ffaa30d1c50b91f9d1b1d1a0d6169ff4027c628e7f2",
-      "bytes": 196983,
+      "sha256": "3bd78d4c488f32782090e07c03b691665a79e7a72d24cfc735fd7608ab2120d4",
+      "bytes": 197611,
       "category": "public-documentation"
     },
     {
@@ -6712,8 +6712,8 @@
     },
     {
       "path": "packages/client/components/ui/components/features/messaging/composition/MessageBox.tsx",
-      "sha256": "85dbfe5d078393412ec367ce9cb0bd31f955dab4d30c2488700d11052887d57f",
-      "bytes": 10063,
+      "sha256": "4585d54085c7a1861d6886337c9cbe6f3bc2623c0ec3cdbac3b50357f9a853fd",
+      "bytes": 11822,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -42694,8 +42694,8 @@
     },
     {
       "path": "packages/client/src/interface/channels/ChannelHeader.tsx",
-      "sha256": "27e33749f34c2fa7f952da993de15f467eb30ba9547dd7b9950e63d3efa0a0b7",
-      "bytes": 27805,
+      "sha256": "11ee04a36d681578d20d2a66caed5165b82a9c960e87d19896022be7143db2d4",
+      "bytes": 27849,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -42742,8 +42742,8 @@
     },
     {
       "path": "packages/client/src/interface/channels/text/Composition.tsx",
-      "sha256": "b37906965523babb79075f64d886b3fc016f740cd8536acffdcf63f961bdb5f5",
-      "bytes": 26930,
+      "sha256": "bf61d3acbf506bdef8f49144a379639ad24f23e11a52cb9de4deeee182cc23c7",
+      "bytes": 29245,
       "category": "product-source-or-build-manifest"
     },
     {
