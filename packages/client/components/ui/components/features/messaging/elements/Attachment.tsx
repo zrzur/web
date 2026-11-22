@@ -22,7 +22,7 @@ import { HeldMedia } from "./HeldMedia";
 import { MediaPlayer } from "./MediaPlayer";
 import { TextFile } from "./TextFile";
 import { VoiceMessage } from "./VoiceMessage";
-import { isVoiceMessageName } from "./voice";
+import { isVoiceMessageName, playableVoiceSrc } from "./voice";
 
 /**
  * List of attachments
@@ -82,7 +82,12 @@ export function Attachment(props: { file: File; message?: Message }) {
         }
       >
         <VoiceMessage
-          src={props.file.originalUrl}
+          // the AAC copy where the browser can't play the recording
+          src={playableVoiceSrc(props.file.originalUrl, {
+            contentType: props.file.contentType,
+            name: props.file.filename,
+          })}
+          channelId={props.message?.channelId}
           contextMenu={() => (
             <MessageContextMenu
               message={props.message}
@@ -163,6 +168,7 @@ export function Attachment(props: { file: File; message?: Message }) {
           title={props.file.filename ?? ""}
           detail={props.file.humanReadableSize}
           download={props.file.originalUrl}
+          channelId={props.message?.channelId}
           // a real waveform needs the whole file; skip it for big files,
           // and for every file while saving data
           decode={!saveData() && (props.file.size ?? 0) <= 15_000_000}

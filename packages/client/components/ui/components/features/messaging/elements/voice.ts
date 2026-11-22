@@ -16,8 +16,14 @@ export function isVoiceMessageName(name: string | undefined) {
   return !!name && /^voice-message-\d+\.(ogg|webm|m4a|mp4)$/i.test(name);
 }
 
-/** Recording formats in order of preference, with the file extension */
-const FORMATS: [mime: string, ext: string][] = [
+/**
+ * Recording formats in order of preference, with the file extension. AAC in
+ * MP4 first: every browser plays it, iPhones before iOS 18.4 too (they play
+ * neither Ogg nor, before 17.4, WebM). Plain "audio/mp4" last: Chrome may put
+ * Opus in it, which those iPhones can't play either.
+ */
+export const FORMATS: [mime: string, ext: string][] = [
+  ["audio/mp4;codecs=mp4a.40.2", "m4a"],
   ["audio/ogg;codecs=opus", "ogg"],
   ["audio/webm;codecs=opus", "webm"],
   ["audio/mp4", "m4a"],
@@ -41,6 +47,37 @@ export function toBars(samples: ArrayLike<number>, count = WAVEFORM_BARS) {
   }
   const max = Math.max(...bars, 1e-6);
   return bars.map((value) => Math.max(0.08, value / max));
+}
+
+/** Query that asks the media server for the AAC copy of a voice message */
+export const AAC_COPY = "format=m4a";
+
+/** What `canPlayType` is asked about a voice file's container with Opus in it */
+export function opusTypeOf(contentType?: string, name?: string) {
+  const type = (contentType ?? "").toLowerCase();
+  const ext = name?.split(".").pop()?.toLowerCase();
+  if (type.includes("ogg") || type === "audio/opus" || ext === "ogg")
+    return 'audio/ogg; codecs="opus"';
+  if (type.includes("webm") || ext === "webm")
+    return 'audio/webm; codecs="opus"';
+  return 'audio/mp4; codecs="opus"';
+}
+
+/**
+ * The address a voice message is played (and its waveform read) from. A
+ * browser that can't play Opus in the file's container (Safari before 18.4
+ * and Ogg) gets the AAC copy the media server makes of every voice message.
+ */
+export function playableVoiceSrc(
+  src: string,
+  file: { contentType?: string; name?: string },
+  canPlay: (type: string) => string = (type) =>
+    typeof document === "undefined"
+      ? "probably"
+      : document.createElement("audio").canPlayType(type),
+) {
+  if (canPlay(opusTypeOf(file.contentType, file.name))) return src;
+  return `${src}${src.includes("?") ? "&" : "?"}${AAC_COPY}`;
 }
 
 /** Stand-in bars when the audio can't be read: stable for the same file */
