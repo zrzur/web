@@ -262,8 +262,8 @@
     },
     {
       "path": "CHANGELOG.md",
-      "sha256": "8886d24213cbf40ea59fdd5a2d2106c10ac8650db52146a1092624bf6fd00853",
-      "bytes": 198141,
+      "sha256": "1a08a58ac8b535b7e80b80c6acd316b7a2daf49eef64bb8591ec6e19426cdf8e",
+      "bytes": 198831,
       "category": "public-documentation"
     },
     {
@@ -6736,8 +6736,8 @@
     },
     {
       "path": "packages/client/components/ui/components/features/messaging/composition/picker/CompositionMediaPicker.tsx",
-      "sha256": "8ee5e233f66c028289e380703ff46f0c48dcf497025fb91ca09c65e648319949",
-      "bytes": 10325,
+      "sha256": "24bae6ed665abd2983bd1fdfa0c9c3986da947d3a8785cdf3180533020cf4f88",
+      "bytes": 11766,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -42742,8 +42742,8 @@
     },
     {
       "path": "packages/client/src/interface/channels/text/Composition.tsx",
-      "sha256": "ecab0780c300b49e2456dd044d0f774246ecac3560432b8737b6e1982781c28a",
-      "bytes": 33080,
+      "sha256": "c46e2638858f0a3062d28568be0afd8d0e0ed0f00b9aa7bc911a269028115ab9",
+      "bytes": 33425,
       "category": "product-source-or-build-manifest"
     },
     {
