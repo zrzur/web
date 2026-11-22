@@ -31151,3 +31151,36 @@ msgstr "عضو غادر السيرفر"
 #: components/app/interface/settings/channel/permissions/ChannelVisibility.tsx
 msgid "This thread follows who can see its channel."
 msgstr "يتبع هذا الخيط إعدادات من يرى قناته."
+
+#: components/app/interface/settings/user/profile/FrameDialog.tsx
+msgid "A frame around your whole profile card. Everyone who opens your profile sees it."
+msgstr "إطار يحيط ببطاقة ملفك الشخصي كلها، ويراه كل من يفتح ملفك."
+
+#: components/app/interface/settings/user/profile/FrameDialog.tsx
+msgid "Change profile frame"
+msgstr "تغيير إطار البطاقة"
+
+#: components/app/interface/settings/user/profile/styleLabels.tsx
+msgid "Community frame"
+msgstr "إطار من المجتمع"
+
+#: components/app/interface/settings/user/profile/styleLabels.tsx
+msgid "Crystal cave"
+msgstr "كهف الكريستال"
+
+#: src/interface/designs/Home.tsx
+msgid "Frames"
+msgstr "إطارات البطاقة"
+
+#: components/app/interface/settings/user/profile/UserProfileEditor.tsx
+#: src/interface/designs/DesignPage.tsx
+msgid "Profile frame"
+msgstr "إطار البطاقة"
+
+#: components/app/interface/settings/user/profile/FrameDialog.tsx
+msgid "Profile frames"
+msgstr "إطارات البطاقة"
+
+#: components/app/interface/settings/user/profile/FrameDialog.tsx
+msgid "The frame goes round your card and your full profile. It never covers your name, your buttons or what you wrote."
+msgstr "يحيط الإطار ببطاقتك وبملفك الكامل، ولا يغطي اسمك أو أزرارك أو ما كتبته أبدًا."

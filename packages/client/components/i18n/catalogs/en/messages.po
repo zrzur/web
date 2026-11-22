@@ -31154,3 +31154,36 @@ msgstr "A member who left"
 #: components/app/interface/settings/channel/permissions/ChannelVisibility.tsx
 msgid "This thread follows who can see its channel."
 msgstr "This thread follows who can see its channel."
+
+#: components/app/interface/settings/user/profile/FrameDialog.tsx
+msgid "A frame around your whole profile card. Everyone who opens your profile sees it."
+msgstr "A frame around your whole profile card. Everyone who opens your profile sees it."
+
+#: components/app/interface/settings/user/profile/FrameDialog.tsx
+msgid "Change profile frame"
+msgstr "Change profile frame"
+
+#: components/app/interface/settings/user/profile/styleLabels.tsx
+msgid "Community frame"
+msgstr "Community frame"
+
+#: components/app/interface/settings/user/profile/styleLabels.tsx
+msgid "Crystal cave"
+msgstr "Crystal cave"
+
+#: src/interface/designs/Home.tsx
+msgid "Frames"
+msgstr "Frames"
+
+#: components/app/interface/settings/user/profile/UserProfileEditor.tsx
+#: src/interface/designs/DesignPage.tsx
+msgid "Profile frame"
+msgstr "Profile frame"
+
+#: components/app/interface/settings/user/profile/FrameDialog.tsx
+msgid "Profile frames"
+msgstr "Profile frames"
+
+#: components/app/interface/settings/user/profile/FrameDialog.tsx
+msgid "The frame goes round your card and your full profile. It never covers your name, your buttons or what you wrote."
+msgstr "The frame goes round your card and your full profile. It never covers your name, your buttons or what you wrote."

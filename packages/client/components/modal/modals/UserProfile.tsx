@@ -9,6 +9,7 @@ import { useClient } from "@revolt/client";
 import { Dialog, DialogProps, Profile } from "@revolt/ui";
 import { ProfileId } from "@revolt/ui/components/features/profiles/ProfileId";
 import { ProfileEffect } from "@revolt/ui/components/features/profiles/effects/ProfileEffect";
+import { FramedCard } from "@revolt/ui/components/features/profiles/frames/ProfileFrame";
 import { fetchFullProfile } from "@revolt/ui/components/features/profiles/linkedGames";
 import { createProfileTheme } from "@revolt/ui/components/features/profiles/profileTheme";
 import {
@@ -49,90 +50,111 @@ export function UserProfileModal(
     () => themeColours(userStyleOf(props.user)),
   );
 
+  const style = () => userStyleOf(props.user);
+  const framed = () => !!style()?.profile_frame;
+
   return (
-    <Dialog show={props.show} onClose={props.onClose} bare width={460}>
-      <Layout data-sheet-edge style={theme()}>
-        <ProfileEffect
-          effect={userStyleOf(props.user)?.effect}
-          file={userStyleOf(props.user)?.effect_file}
-        />
-        <div class={main()} use:scrollable>
-          <Profile.Banner
-            size="full"
-            user={props.user}
-            member={props.member}
-            bannerUrl={query.data?.animatedBannerURL}
-            onClick={
-              query.data?.banner
-                ? () =>
-                    openModal({
-                      type: "image_viewer",
-                      file: query.data!.banner!,
-                    })
-                : undefined
-            }
-            onClickAvatar={(e) => {
-              e.stopPropagation();
-              if (props.user.avatar) {
-                openModal({ type: "image_viewer", file: props.user.avatar });
-              }
-            }}
-            edge={
-              <Profile.Actions
-                user={props.user}
-                member={props.member}
-                onClose={props.onClose}
-              />
-            }
-          />
-
-          <Details>
-            <Profile.Identity
-              user={props.user}
-              member={props.member}
-              size="full"
-            />
-            <Profile.Body
-              user={props.user}
-              member={props.member}
-              profile={query.data}
-              loading={query.isLoading}
-              failed={query.isError}
-              full
-              bot={props.user.bot ? { owner: props.user.bot.owner } : undefined}
-              onClose={props.onClose}
-            >
-              <Show when={!props.user.self}>
-                <Profile.Note user={props.user} />
-              </Show>
-            </Profile.Body>
-          </Details>
-
-          {/* the last thing in the profile: it scrolls with the rest */}
-          <Foot data-testid="profile-full-foot">
-            <Show
-              when={!props.user.self && props.user.relationship !== "Blocked"}
-            >
-              <Profile.Message
-                user={props.user}
-                member={props.member}
-                onClose={props.onClose}
-              />
-            </Show>
-            <ProfileId user={props.user} />
-          </Foot>
-        </div>
-
-        <Close
-          type="button"
-          data-dialog-close
-          aria-label={t`Close`}
-          title={t`Close (Esc)`}
-          onClick={props.onClose}
+    <Dialog
+      show={props.show}
+      onClose={props.onClose}
+      bare
+      unclipped={framed()}
+      width={460}
+    >
+      <FramedCard
+        class={framedBox()}
+        frame={style()?.profile_frame}
+        file={style()?.profile_frame_file}
+      >
+        <Layout
+          data-sheet-edge
+          style={theme()}
+          data-framed={framed() || undefined}
         >
-          <Icon name="x" size={18} />
-        </Close>
-      </Layout>
+          <ProfileEffect
+            effect={userStyleOf(props.user)?.effect}
+            file={userStyleOf(props.user)?.effect_file}
+          />
+          <div class={main()} use:scrollable>
+            <Profile.Banner
+              size="full"
+              user={props.user}
+              member={props.member}
+              bannerUrl={query.data?.animatedBannerURL}
+              onClick={
+                query.data?.banner
+                  ? () =>
+                      openModal({
+                        type: "image_viewer",
+                        file: query.data!.banner!,
+                      })
+                  : undefined
+              }
+              onClickAvatar={(e) => {
+                e.stopPropagation();
+                if (props.user.avatar) {
+                  openModal({ type: "image_viewer", file: props.user.avatar });
+                }
+              }}
+              edge={
+                <Profile.Actions
+                  user={props.user}
+                  member={props.member}
+                  onClose={props.onClose}
+                />
+              }
+            />
+
+            <Details>
+              <Profile.Identity
+                user={props.user}
+                member={props.member}
+                size="full"
+              />
+              <Profile.Body
+                user={props.user}
+                member={props.member}
+                profile={query.data}
+                loading={query.isLoading}
+                failed={query.isError}
+                full
+                bot={
+                  props.user.bot ? { owner: props.user.bot.owner } : undefined
+                }
+                onClose={props.onClose}
+              >
+                <Show when={!props.user.self}>
+                  <Profile.Note user={props.user} />
+                </Show>
+              </Profile.Body>
+            </Details>
+
+            {/* the last thing in the profile: it scrolls with the rest */}
+            <Foot data-testid="profile-full-foot">
+              <Show
+                when={!props.user.self && props.user.relationship !== "Blocked"}
+              >
+                <Profile.Message
+                  user={props.user}
+                  member={props.member}
+                  onClose={props.onClose}
+                />
+              </Show>
+              <ProfileId user={props.user} />
+            </Foot>
+          </div>
+
+          <Close
+            type="button"
+            data-dialog-close
+            aria-label={t`Close`}
+            title={t`Close (Esc)`}
+            onClick={props.onClose}
+          >
+            <Icon name="x" size={18} />
+          </Close>
+        </Layout>
+      </FramedCard>
     </Dialog>
   );
 }
@@ -150,6 +172,14 @@ const Layout = styled("div", {
     maxHeight: "min(760px, calc(100dvh - 98px))",
     minHeight: 0,
 
+    // the window no longer clips when a frame reaches past it: the profile
+    // keeps the window's corners itself
+    "&[data-framed]": {
+      overflow: "hidden",
+      borderRadius: "14px",
+      _phone: { borderRadius: "20px 20px 0 0" },
+    },
+
     // edge to edge on a phone: `data-sheet-edge` takes the sheet's padding off
     _phone: {
       paddingBlockEnd: "var(--z-safe-bottom)",
@@ -157,6 +187,15 @@ const Layout = styled("div", {
         "calc(100dvh - 48px - var(--z-safe-top) - max(var(--keyboard-inset, 0px), env(keyboard-inset-height, 0px)))",
       maxHeight: "none",
     },
+  },
+});
+
+/** The profile and its frame fill the window as the profile alone did */
+const framedBox = cva({
+  base: {
+    flex: "1 1 auto",
+    minHeight: 0,
+    "& > [data-sheet-edge]": { flex: "1 1 auto" },
   },
 });
 

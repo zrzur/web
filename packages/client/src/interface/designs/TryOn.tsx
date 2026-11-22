@@ -36,7 +36,8 @@ function sameStyle(a: UserStyle, b: UserStyle) {
     same(a.name_colour, b.name_colour) &&
     (a.decoration ?? "") === (b.decoration ?? "") &&
     (a.nameplate ?? "") === (b.nameplate ?? "") &&
-    (a.effect ?? "") === (b.effect ?? "")
+    (a.effect ?? "") === (b.effect ?? "") &&
+    (a.profile_frame ?? "") === (b.profile_frame ?? "")
   );
 }
 
@@ -136,6 +137,12 @@ function createTryOn() {
         key: "nameplate",
         label: labels.nameplate(style.nameplate),
         clear: { nameplate: undefined, nameplate_file: undefined },
+      });
+    if (style.profile_frame)
+      list.push({
+        key: "profile_frame",
+        label: labels.frame(style.profile_frame),
+        clear: { profile_frame: undefined, profile_frame_file: undefined },
       });
     if (style.effect)
       list.push({

@@ -34,6 +34,7 @@ import { AvatarDecoration } from "@revolt/ui/components/features/profiles/Avatar
 import {
   NAME_FONTS,
   nameStyle,
+  sendableStyle,
   themeColours,
   UserStyle,
   userStyleOf,
@@ -43,6 +44,7 @@ import { useSettingsNavigation } from "../../Settings";
 import { useEffectLabels } from "@revolt/ui/components/features/profiles/labels";
 
 import { EffectDialog } from "./EffectDialog";
+import { FrameDialog } from "./FrameDialog";
 import {
   DecorationDialog,
   LookRow,
@@ -202,19 +204,8 @@ export function UserProfileEditor(props: Props) {
     if (editGroup.controls.style.isDirty) {
       // an empty style tells the server to remove it
       const style = editGroup.controls.style.value;
-      (changes as API.DataEditUser & { style?: UserStyle }).style = {
-        ...(style.theme?.length ? { theme: style.theme } : {}),
-        ...(style.name_font ? { name_font: style.name_font } : {}),
-        ...(style.name_colour?.length
-          ? { name_colour: style.name_colour }
-          : {}),
-        ...(style.decoration ? { decoration: style.decoration } : {}),
-        ...(style.nameplate ? { nameplate: style.nameplate } : {}),
-        ...(style.effect ? { effect: style.effect } : {}),
-        ...(style.effect && style.effect_file
-          ? { effect_file: style.effect_file }
-          : {}),
-      };
+      (changes as API.DataEditUser & { style?: UserStyle }).style =
+        sendableStyle(style);
     }
 
     let newBannerUrl: string | null = null;
@@ -304,6 +295,7 @@ export function UserProfileEditor(props: Props) {
   const [decorationDialog, setDecorationDialog] = createSignal(false);
   const [nameplateDialog, setNameplateDialog] = createSignal(false);
   const [effectDialog, setEffectDialog] = createSignal(false);
+  const [frameDialog, setFrameDialog] = createSignal(false);
   const effectLabel = useEffectLabels();
   const styleLabels = useStyleLabels();
   const fontLabel = () => {
@@ -464,6 +456,12 @@ export function UserProfileEditor(props: Props) {
                   value={effectLabel(style().effect)}
                   onClick={() => setEffectDialog(true)}
                 />
+                <LookRow
+                  icon={<Icon name="user-focus" size={20} />}
+                  title={<Trans>Profile frame</Trans>}
+                  value={styleLabels.frame(style().profile_frame)}
+                  onClick={() => setFrameDialog(true)}
+                />
               </LookStack>
             </SettingsSection>
             <SettingsSection title={<Trans>Profile theme</Trans>}>
@@ -495,6 +493,20 @@ export function UserProfileEditor(props: Props) {
                         ? style().effect_file
                         : undefined,
                   })
+                }
+              />
+            </Show>
+            <Show when={frameDialog()}>
+              <FrameDialog
+                show={frameDialog()}
+                onClose={() => setFrameDialog(false)}
+                name={shownName()}
+                handle={props.user.username}
+                avatar={avatarUrl()}
+                value={style().profile_frame}
+                file={style().profile_frame_file}
+                onApply={(profile_frame, file) =>
+                  setStyle({ profile_frame, profile_frame_file: file })
                 }
               />
             </Show>

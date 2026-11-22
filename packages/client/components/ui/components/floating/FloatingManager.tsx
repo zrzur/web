@@ -463,6 +463,22 @@ const SheetPanel = styled("div", {
     "&[data-card]": {
       padding: "0 0 var(--z-safe-bottom)",
       overflowX: "hidden",
+      // a profile frame reaches past the sheet's top and sides; the card
+      // scrolls inside itself, so the sheet needs no scroll of its own then
+      "&:has(> [data-framed])": { overflow: "visible" },
+      // the card sits one level down, in the box that holds its frame
+      "& > [data-frame-host] > [role='dialog']": {
+        width: "100% !important",
+        maxWidth: "none",
+        border: "none !important",
+        borderRadius: "0 !important",
+        boxShadow: "none !important",
+        // the card fits the sheet exactly: its own phone margins were for a
+        // sheet with padding, and pushed it 8 px off to the side (its avatar
+        // touched the screen's edge) and 12 px past the bottom
+        minWidth: "0 !important",
+        margin: "0 !important",
+      },
       "& > :not([aria-hidden])": {
         border: "none !important",
         borderRadius: "0 !important",

@@ -14,6 +14,7 @@ import {
 
 import { Profile } from "../features";
 import { ProfileEffect } from "../features/profiles/effects/ProfileEffect";
+import { FramedCard } from "../features/profiles/frames/ProfileFrame";
 import { fetchFullProfile } from "../features/profiles/linkedGames";
 import { createProfileTheme } from "../features/profiles/profileTheme";
 
@@ -69,77 +70,84 @@ export function UserCard(
     () => themeColours(userStyleOf(props.user)),
   );
 
+  const style = () => userStyleOf(props.user);
+
   return (
     <Show when={!isMobile}>
-      <Card role="dialog" aria-label={props.user.displayName} style={theme()}>
-        <ProfileEffect
-          effect={userStyleOf(props.user)?.effect}
-          file={userStyleOf(props.user)?.effect_file}
-        />
+      <FramedCard
+        frame={style()?.profile_frame}
+        file={style()?.profile_frame_file}
+      >
+        <Card role="dialog" aria-label={props.user.displayName} style={theme()}>
+          <ProfileEffect
+            effect={userStyleOf(props.user)?.effect}
+            file={userStyleOf(props.user)?.effect_file}
+          />
 
-        {/* the directive takes the class (see HomeSidebarPhone): beside a
+          {/* the directive takes the class (see HomeSidebarPhone): beside a
             class attribute its own classes were lost and a long profile
             could not be scrolled to its end */}
-        <div use:invisibleScrollable={{ class: scroller() }}>
-          <Profile.Banner
-            size="card"
-            user={props.user}
-            member={props.member}
-            bannerUrl={query.data?.animatedBannerURL}
-            onClick={openFull}
-            onClickAvatar={openFull}
-            corner={
-              <Profile.CornerActions
-                user={props.user}
-                member={props.member}
-                onClose={props.onClose}
-              />
-            }
-            edge={
-              <Profile.AddFriend
-                user={props.user}
-                member={props.member}
-                onClose={props.onClose}
-              />
-            }
-          />
-
-          <Body>
-            <Profile.Identity
-              user={props.user}
-              member={props.member}
+          <div use:invisibleScrollable={{ class: scroller() }}>
+            <Profile.Banner
               size="card"
-            />
-            {/* a bot's main action: under the name */}
-            <Show when={props.user.bot && !props.user.self}>
-              <Profile.Actions
-                user={props.user}
-                member={props.member}
-                onClose={props.onClose}
-                compact
-              />
-            </Show>
-
-            <Profile.Body
               user={props.user}
               member={props.member}
-              profile={query.data}
-              loading={query.isLoading}
-              failed={query.isError}
-              bot={props.bot}
-              onClose={props.onClose}
+              bannerUrl={query.data?.animatedBannerURL}
+              onClick={openFull}
+              onClickAvatar={openFull}
+              corner={
+                <Profile.CornerActions
+                  user={props.user}
+                  member={props.member}
+                  onClose={props.onClose}
+                />
+              }
+              edge={
+                <Profile.AddFriend
+                  user={props.user}
+                  member={props.member}
+                  onClose={props.onClose}
+                />
+              }
             />
-          </Body>
 
-          {/* the last thing in the card: it scrolls with the rest */}
-          <Profile.Footer
-            user={props.user}
-            member={props.member}
-            onClose={props.onClose}
-            onOpenFull={() => openFull(true)}
-          />
-        </div>
-      </Card>
+            <Body>
+              <Profile.Identity
+                user={props.user}
+                member={props.member}
+                size="card"
+              />
+              {/* a bot's main action: under the name */}
+              <Show when={props.user.bot && !props.user.self}>
+                <Profile.Actions
+                  user={props.user}
+                  member={props.member}
+                  onClose={props.onClose}
+                  compact
+                />
+              </Show>
+
+              <Profile.Body
+                user={props.user}
+                member={props.member}
+                profile={query.data}
+                loading={query.isLoading}
+                failed={query.isError}
+                bot={props.bot}
+                onClose={props.onClose}
+              />
+            </Body>
+
+            {/* the last thing in the card: it scrolls with the rest */}
+            <Profile.Footer
+              user={props.user}
+              member={props.member}
+              onClose={props.onClose}
+              onOpenFull={() => openFull(true)}
+            />
+          </div>
+        </Card>
+      </FramedCard>
     </Show>
   );
 }
