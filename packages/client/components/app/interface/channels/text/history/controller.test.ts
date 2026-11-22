@@ -82,6 +82,8 @@ function setup(total: number, options: { timeoutMs?: number } = {}) {
   let rowLimit = 150;
   let touching: Promise<void> | undefined;
   let liftFinger = () => {};
+  let frame: Promise<void> | undefined;
+  let showFrame = () => {};
   let state!: HistoryState<Msg>;
   const view: HistoryView = {
     atPresent: () => atPresent,
@@ -90,7 +92,7 @@ function setup(total: number, options: { timeoutMs?: number } = {}) {
       commits.push(state.window.items.length);
       moves.push(move);
     },
-    nextFrame: () => Promise.resolve(),
+    nextFrame: () => frame ?? Promise.resolve(),
     settled: (maxWaitMs) =>
       touching && maxWaitMs === undefined ? touching : Promise.resolve(),
     ready: (side) => {
@@ -119,6 +121,14 @@ function setup(total: number, options: { timeoutMs?: number } = {}) {
     /** A finger is on the list until `lift()` */
     touch: () => {
       touching = new Promise<void>((resolve) => (liftFinger = resolve));
+    },
+    /** The next frames wait until `drawFrame()` */
+    holdFrames: () => {
+      frame = new Promise<void>((resolve) => (showFrame = resolve));
+    },
+    drawFrame: () => {
+      frame = undefined;
+      showFrame();
     },
     lift: () => {
       touching = undefined;
@@ -594,6 +604,23 @@ describe("history: reconnecting", () => {
     t.release();
     await Promise.all([first, second]);
     expect(t.state().window.atEnd).toBe(true);
+  });
+
+  it("a reconnect while the first rows are being drawn is not lost", async () => {
+    const t = setup(3000);
+    t.holdFrames();
+    const opening = t.history.open();
+    await flush();
+    // the newest rows are on screen, the rest waits for the next frame
+    expect(t.commits).toEqual([15]);
+    expect(t.state().pending).toBe("initial");
+    t.add();
+    await t.history.reconnected();
+    t.drawFrame();
+    await opening;
+    await flush();
+    expect(t.calls).toEqual(["latest 30", "latest 30"]);
+    expect(t.nums()[0]).toBe(3001);
   });
 
   it("a jump that fails after the connection came back leaves the newer side to be asked again", async () => {

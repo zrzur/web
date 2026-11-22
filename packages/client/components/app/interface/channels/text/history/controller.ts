@@ -247,7 +247,10 @@ export function createHistory<T extends { id: string }>(options: {
       target,
     );
     again = undefined;
-    if (missed && kind !== "around") await afterReconnect();
+    // also a reconnect during the staging frame above (still pending then)
+    const missedNow = missed || reconnectedMeanwhile;
+    reconnectedMeanwhile = false;
+    if (missedNow && kind !== "around") await afterReconnect();
   }
 
   /** Load the page around a message and land on it */
