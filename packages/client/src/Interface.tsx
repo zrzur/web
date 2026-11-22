@@ -15,6 +15,7 @@ import { Server } from "@zrzur/sdk/solid";
 import { styled } from "styled-system/jsx";
 
 import { ChannelContextMenu, ServerContextMenu } from "@revolt/app";
+import { PageBoundary } from "@revolt/app/interface/PageBoundary";
 import { MessageCache } from "@revolt/app/interface/channels/text/MessageCache";
 import { Titlebar } from "@revolt/app/interface/desktop/Titlebar";
 import { ChangeRequestNotice } from "@revolt/app/interface/settings/user/account/ChangeRequestNotice";
@@ -285,7 +286,10 @@ const Interface = (props: { children?: JSX.Element }) => {
                   !location.pathname.startsWith("/developers")
                 }
               >
-                {props.children}
+                {/* a page that could not be downloaded says so, with Try again */}
+                <PageBoundary resetKey={() => location.pathname}>
+                  {props.children}
+                </PageBoundary>
                 {/* phones: a tab's own page keeps the tab bar under it */}
                 <Show when={tabPage()}>
                   <PhoneTabs page />
