@@ -216,12 +216,18 @@ export function TextEditor2(props: Props) {
     scroller.classList.add(...editorScrollbarClasses.split(" "));
   }
 
+  // what the editor was made with; the first run below only applies a change
+  // made since (not deferred, for the same reason as the initial value)
+  // eslint-disable-next-line solid/reactivity
+  const madeWith = [props.placeholder, props.ariaLabel ?? props.placeholder] as const;
+
   // connect signals to extensions; the two follow the same text, so a channel
   // switch changes them in one update instead of laying out the editor twice
   createEffect(
     on(
       () => [props.placeholder, props.ariaLabel ?? props.placeholder] as const,
-      ([text, name], previous) => {
+      ([text, name], previous = madeWith) => {
+        if (text === previous[0] && name === previous[1]) return;
         view.dispatch({
           effects: [
             ...(text !== previous?.[0]
@@ -237,13 +243,13 @@ export function TextEditor2(props: Props) {
           ],
         });
       },
-      {
-        defer: true,
-      },
     ),
   );
 
-  // set initial value
+  // set initial value; not deferred: a value set after the editor was made
+  // but before this effect first ran (a profile bio copied in by the form's
+  // own effect) would be taken as the starting point and never shown. The
+  // first run compares with the text the editor was made with instead.
   createEffect(
     on(
       () => props.initialValue?.[0] ?? "",
@@ -259,9 +265,6 @@ export function TextEditor2(props: Props) {
             },
           }),
         );
-      },
-      {
-        defer: true,
       },
     ),
   );
