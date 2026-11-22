@@ -1,10 +1,10 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 
 import {
-  ADDRESS_SETTLE_MS,
-  RELEASE_GRACE_MS,
+  addressChanged,
   liveClips,
   playFailed,
+  RELEASE_GRACE_MS,
   resetVoicePlayback,
   stillIn,
   takeTurn,
@@ -124,22 +124,41 @@ describe("voice playback", () => {
     expect(liveClips()).toBe(0);
   });
 
-  it("leaving the channel stops a playing clip once the address says so", async () => {
-    let here = true;
-    const clip = voiceClip("a.ogg");
+  it("a clip whose row a scroll trimmed stops when the reader leaves", async () => {
+    addressChanged("/server/S/channel/C1");
+    const clip = voiceClip("a.ogg", "metadata", "C1");
     await clip.toggle();
-    clip.release({ stillHere: () => here });
-    here = false; // the router changes the address after the rows go
-    vi.advanceTimersByTime(ADDRESS_SETTLE_MS);
+    clip.release(); // trimmed: the reader is still in C1
+    vi.advanceTimersByTime(RELEASE_GRACE_MS * 10);
+    expect(made[0].paused).toBe(false);
+
+    addressChanged("/server/S/channel/C2");
     expect(made[0].paused).toBe(true);
     expect(liveClips()).toBe(0);
   });
 
-  it("a row trimmed while the reader stays keeps the clip playing", async () => {
+  it("rows that go after the address changed stop their clip at once", async () => {
+    const clip = voiceClip("a.ogg", "metadata", "C1");
+    await clip.toggle();
+    addressChanged("/app"); // the router first, then the rows
+    expect(made[0].paused).toBe(true); // a row still shows it: paused
+    clip.release();
+    expect(liveClips()).toBe(0);
+  });
+
+  it("another clip of the same channel is left alone", async () => {
+    addressChanged("/server/S/channel/C1");
+    const clip = voiceClip("a.ogg", "metadata", "C1");
+    await clip.toggle();
+    clip.release();
+    addressChanged("/server/S/channel/C1/01MESSAGE");
+    expect(made[0].paused).toBe(false);
+  });
+
+  it("a clip from a row without a channel ignores the address", async () => {
     const clip = voiceClip("a.ogg");
     await clip.toggle();
-    clip.release({ stillHere: () => true });
-    vi.advanceTimersByTime(ADDRESS_SETTLE_MS + RELEASE_GRACE_MS);
+    addressChanged("/app");
     expect(made[0].paused).toBe(false);
   });
 

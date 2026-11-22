@@ -11,19 +11,6 @@
   background: var(--z-bg-raised);
   color: var(--z-fg-primary);
 }
-/* The sound plays outside the row (voicePlayback.ts); only the reason a
-   file failed is here, for screen readers (the button's description) */
-.z-voice-failure {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  margin: -1px;
-  padding: 0;
-  overflow: hidden;
-  clip-path: inset(50%);
-  white-space: nowrap;
-  border: 0;
-}
 .z-voice-play,
 .z-recorder-send {
   flex-shrink: 0;
@@ -34,8 +21,8 @@
   padding: 0;
   border: 0;
   border-radius: 50%;
-  background: var(--z-accent-fill, #e0195f);
-  color: var(--z-on-accent, #fff);
+  background: var(--z-accent-fill);
+  color: var(--z-on-accent);
   cursor: pointer;
   --z-icon-color: currentColor;
   transition:
@@ -44,8 +31,22 @@
 }
 .z-voice-play:hover,
 .z-recorder-send:hover:not(:disabled) {
-  background: var(--z-accent-hover, var(--z-accent, #e0195f));
+  background: var(--z-accent-hover);
   scale: 1.06;
+}
+/* Phones: a 44 px touch target around the same 32 px (40 px) circle */
+@media (pointer: coarse) {
+  .z-voice-play {
+    position: relative;
+  }
+  .z-voice-play::after {
+    content: "";
+    position: absolute;
+    inset: -6px;
+  }
+  .z-voice[data-kind="track"] .z-voice-play::after {
+    inset: -2px;
+  }
 }
 .z-voice-play:disabled,
 .z-recorder-send:disabled {
@@ -82,7 +83,7 @@
   transition: background-color 0.1s linear;
 }
 .z-voice-wave > span[data-played="true"] {
-  background: var(--z-accent-text, var(--z-accent, #e0195f));
+  background: var(--z-accent-text);
 }
 .z-voice-time,
 .z-recorder-time {
@@ -121,15 +122,15 @@
   --z-icon-color: currentColor;
 }
 .z-recorder-cancel:hover {
-  color: var(--z-danger, #f27488);
-  background: color-mix(in srgb, var(--z-danger, #f27488) 12%, transparent);
+  color: var(--z-danger);
+  background: color-mix(in srgb, var(--z-danger) 12%, transparent);
 }
 .z-recorder-dot {
   flex-shrink: 0;
   width: 10px;
   height: 10px;
   border-radius: 50%;
-  background: var(--z-danger-strong, #d92d2d);
+  background: var(--z-danger-strong);
   animation: z-recorder-pulse 1.2s ease-in-out infinite;
 }
 .z-recorder-dot[data-paused="true"] {
@@ -141,7 +142,7 @@
   color: var(--z-fg-primary);
 }
 .z-recorder-wave > span {
-  background: color-mix(in srgb, var(--z-accent, #e0195f) 70%, transparent);
+  background: color-mix(in srgb, var(--z-accent) 70%, transparent);
   transition: height 0.1s linear;
 }
 .z-recorder-note {

@@ -1,4 +1,10 @@
-import { type Accessor, createSignal } from "solid-js";
+import {
+  type Accessor,
+  createEffect,
+  createRoot,
+  createSignal,
+  on,
+} from "solid-js";
 
 /**
  * Playback of voice messages and audio files, kept outside the message rows.
@@ -11,7 +17,9 @@ import { type Accessor, createSignal } from "solid-js";
  *
  * How long a clip lives once no row shows it:
  * - playing: until it ends, also when scrolling took its row away;
- * - the reader left the conversation (another channel or page): stops at once;
+ * - the reader left the conversation (another channel or page): stops at
+ *   once. One watcher on the address ([`watchAddress`]) does this for every
+ *   clip, also for one whose row is long gone;
  * - not playing: after RELEASE_GRACE_MS, unless a row shows it again.
  *
  * One rule for every player in the conversation: starting one pauses the
@@ -35,15 +43,15 @@ export interface VoiceClip {
   seek(seconds: number): void;
   /**
    * The row that showed it is gone. `left`: the row shows another file now,
-   * so the clip stops at once. `stillHere`: asked once the address has
-   * settled (the router changes it after the old rows are gone); when the
-   * reader has left the conversation, the clip stops then.
+   * so the clip stops at once.
    */
-  release(options?: { left?: boolean; stillHere?: () => boolean }): void;
+  release(options?: { left?: boolean }): void;
 }
 
 interface Entry {
   src: string;
+  /** the conversation the clip belongs to */
+  channelId?: string;
   audio: HTMLAudioElement;
   views: number;
   timer?: ReturnType<typeof setTimeout>;
@@ -89,6 +97,7 @@ export function resetVoicePlayback(factory?: () => HTMLAudioElement) {
   }
   clips.clear();
   current = undefined;
+  resetAddress();
   createAudio = factory ?? (() => document.createElement("audio"));
 }
 
@@ -100,9 +109,6 @@ export function liveClips() {
 function finite(value: number) {
   return Number.isFinite(value) && value > 0 ? value : 0;
 }
-
-/** How long after a row goes the address is read again */
-export const ADDRESS_SETTLE_MS = 100;
 
 /** Stop the clip, stop loading it and forget it */
 function dispose(entry: Entry) {
@@ -169,14 +175,8 @@ function create(src: string, preload: "none" | "metadata"): Entry {
       release(options) {
         entry.views = Math.max(0, entry.views - 1);
         if (entry.views) return;
-        if (options?.left) return dispose(entry);
+        if (options?.left || away(entry)) return dispose(entry);
         settle(entry);
-        const stillHere = options?.stillHere;
-        if (stillHere)
-          setTimeout(() => {
-            if (!entry.views && clips.get(src) === entry && !stillHere())
-              dispose(entry);
-          }, ADDRESS_SETTLE_MS);
       },
     },
   };
@@ -216,6 +216,7 @@ function create(src: string, preload: "none" | "metadata"): Entry {
 export function voiceClip(
   src: string,
   preload: "none" | "metadata" = "metadata",
+  channelId?: string,
 ): VoiceClip {
   let entry = clips.get(src);
   if (!entry) {
@@ -224,6 +225,7 @@ export function voiceClip(
   } else if (preload === "metadata" && entry.audio.preload === "none") {
     entry.audio.preload = preload;
   }
+  if (channelId && !entry.channelId) entry.channelId = channelId;
   clearTimeout(entry.timer);
   entry.timer = undefined;
   entry.views++;
@@ -237,4 +239,47 @@ export function voiceClip(
  */
 export function stillIn(channelId: string | undefined, path: string) {
   return !channelId || path.split("/").includes(channelId);
+}
+
+/** The address the reader is at, as the watcher last saw it */
+let address: string | undefined;
+
+/** The reader is no longer in the clip's conversation */
+function away(entry: Entry) {
+  return address !== undefined && !stillIn(entry.channelId, address);
+}
+
+/**
+ * The address changed. Clips of another conversation stop: a clip no row
+ * shows (gone with its row, or trimmed away by scrolling) is let go; a clip
+ * whose row the app keeps drawn in the background is paused.
+ */
+export function addressChanged(path: string) {
+  address = path;
+  for (const entry of [...clips.values()]) {
+    if (!away(entry)) continue;
+    if (entry.views) entry.audio.pause();
+    else dispose(entry);
+  }
+}
+
+let watching: (() => void) | undefined;
+
+/**
+ * Follow the router's address, once for the whole app (the first row that
+ * has a router starts it). Rows drawn outside a router (tests) never call it.
+ */
+export function watchAddress(pathname: Accessor<string>) {
+  if (watching) return;
+  createRoot((dispose) => {
+    watching = dispose;
+    createEffect(on(pathname, addressChanged));
+  });
+}
+
+/** For tests: forget the address and stop watching it */
+export function resetAddress() {
+  watching?.();
+  watching = undefined;
+  address = undefined;
 }

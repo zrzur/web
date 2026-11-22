@@ -12,6 +12,7 @@ import {
 } from "solid-js";
 import { Dynamic } from "solid-js/web";
 import "./media-player.css";
+import { PlaybackFailure } from "./PlaybackFailure";
 import { endTurn, playFailed, takeTurn } from "./voicePlayback";
 
 export function mediaTime(value: number): string {
@@ -209,9 +210,7 @@ export function MediaPlayer(props: {
         </button>
       </Show>
       <Show when={error()}>
-        <div class="z-media-error" id={failureId} role="alert">
-          {t`Couldn't play this media.`}
-        </div>
+        <PlaybackFailure id={failureId} />
       </Show>
       <div class="z-media-controls">
         <input
@@ -236,11 +235,17 @@ export function MediaPlayer(props: {
             aria-describedby={error() ? failureId : undefined}
             onClick={() => void togglePlay()}
           >
-            <Icon name={playing() ? "pause" : "play"} size={18} filled />
+            <Icon
+              name={error() ? "arrow-clockwise" : playing() ? "pause" : "play"}
+              size={18}
+              filled={!error()}
+            />
           </button>
-          <span class="z-media-time">
-            {mediaTime(current())}
-            <span> / {mediaTime(duration())}</span>
+          <span class="z-media-time" data-failed={error()}>
+            <Show when={!error()} fallback={t`Try again`}>
+              {mediaTime(current())}
+              <span> / {mediaTime(duration())}</span>
+            </Show>
           </span>
           <div
             class="z-media-volume"

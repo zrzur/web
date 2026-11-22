@@ -1,6 +1,6 @@
 {
-  "This audio could not be loaded. Check your connection and try again.": [
-    "تعذّر تحميل هذا الملف الصوتي. تحقّق من اتصالك ثم حاول مرة أخرى.",
-    "Diese Audiodatei konnte nicht geladen werden. Prüfe deine Verbindung und versuche es noch einmal."
+  "This file could not be played. Check your connection and try again.": [
+    "تعذّر تشغيل هذا الملف. تحقّق من اتصالك ثم حاول مرة أخرى.",
+    "Diese Datei konnte nicht abgespielt werden. Prüfe deine Verbindung und versuche es noch einmal."
   ]
 }

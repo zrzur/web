@@ -15,9 +15,10 @@ import {
 } from "solid-js";
 
 import { mediaTime } from "./MediaPlayer";
+import { PlaybackFailure } from "./PlaybackFailure";
 import { placeholderBars, readVoice } from "./voice";
 import "./voice.css";
-import { stillIn, voiceClip } from "./voicePlayback";
+import { voiceClip, watchAddress } from "./voicePlayback";
 
 /**
  * Compact voice note: play button, waveform that fills as it plays (click
@@ -48,33 +49,21 @@ export function VoiceMessage(props: {
     const shared = voiceClip(
       src,
       untrack(() => mediaPreload(saveData())),
+      untrack(() => props.channelId),
     );
-    onCleanup(() => {
-      const channelId = untrack(() => props.channelId);
-      shared.release({
-        // the row shows another file now: the old one stops
-        left: untrack(() => props.src) !== src,
-        // a row only drawn again or scrolled away keeps a playing clip;
-        // leaving the channel stops it
-        stillHere: () => stillIn(channelId, window.location.pathname),
-      });
-    });
+    // the row shows another file now: the old one stops. A row only drawn
+    // again or scrolled away keeps a playing clip; leaving the channel stops
+    // it (watchAddress)
+    onCleanup(() => shared.release({ left: untrack(() => props.src) !== src }));
     return shared;
   });
-  // Leaving the conversation stops the sound at once, also where the app
-  // keeps the conversation drawn in the background
-  const location = (() => {
-    try {
-      return useLocation();
-    } catch {
-      return undefined; // outside the app's router (tests)
-    }
-  })();
-  createEffect(() => {
-    const path = location?.pathname;
-    if (path !== undefined && !stillIn(props.channelId, path))
-      untrack(clip).pause();
-  });
+  // one watcher for the whole app: leaving a conversation stops its sound
+  try {
+    const location = useLocation();
+    watchAddress(() => location.pathname);
+  } catch {
+    // outside the app's router (tests): nothing to follow
+  }
   const playing = () => clip().playing();
   const current = () => clip().current();
   const mediaDuration = () => clip().mediaDuration();
@@ -163,6 +152,7 @@ export function VoiceMessage(props: {
       class="z-voice"
       data-kind={props.title ? "track" : "voice"}
       data-playing={playing()}
+      data-failed={error()}
       role="group"
       aria-label={props.title ?? t`Voice message`}
       // the waveform is dragged sideways to seek: never a pull to reply
@@ -177,7 +167,11 @@ export function VoiceMessage(props: {
         aria-describedby={error() ? failureId : undefined}
         onClick={() => void toggle()}
       >
-        <Icon name={playing() ? "pause" : "play"} size={16} filled />
+        <Icon
+          name={error() ? "arrow-clockwise" : playing() ? "pause" : "play"}
+          size={16}
+          filled={!error()}
+        />
       </button>
       <Show when={props.title} fallback={wave}>
         <div class="z-voice-main">
@@ -194,13 +188,11 @@ export function VoiceMessage(props: {
       </Show>
       <span class="z-voice-time">
         {error()
-          ? t`Unavailable`
+          ? t`Try again`
           : mediaTime(playing() || current() ? current() : duration())}
       </span>
       <Show when={error()}>
-        <span id={failureId} class="z-voice-failure">
-          {t`This audio could not be loaded. Check your connection and try again.`}
-        </span>
+        <PlaybackFailure id={failureId} />
       </Show>
       <Show when={props.download}>
         <a

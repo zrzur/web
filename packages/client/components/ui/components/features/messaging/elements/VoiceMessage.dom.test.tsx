@@ -121,7 +121,45 @@ describe("a voice message row", () => {
     const reason = document.getElementById(
       button.getAttribute("aria-describedby")!,
     );
-    expect(reason?.textContent).toContain("could not be loaded");
+    expect(reason?.textContent).toContain("could not be played");
+    expect(reason?.getAttribute("role")).toBe("alert");
+    // on screen: the retry arrow, and "Try again" where the time was
+    expect(button.querySelector("[data-icon]")?.getAttribute("data-icon")).toBe(
+      "arrow-clockwise",
+    );
+    expect(document.querySelector(".z-voice-time")?.textContent).toBe(
+      "Try again",
+    );
+  });
+
+  it("the video player fails the same way: arrow, Try again, the same sentence", () => {
+    vi.spyOn(HTMLMediaElement.prototype, "load").mockImplementation(
+      () => undefined,
+    );
+    vi.spyOn(HTMLMediaElement.prototype, "pause").mockImplementation(
+      () => undefined,
+    );
+    mount(() => (
+      <MediaPlayer kind="video" src="https://files.test/v/original" />
+    ));
+    document.querySelector("video")!.dispatchEvent(new Event("error"));
+
+    const button = document.querySelector<HTMLButtonElement>(
+      ".z-media-toolbar button",
+    )!;
+    expect(button.disabled).toBe(false);
+    expect(button.getAttribute("aria-label")).toBe("Try again");
+    expect(button.querySelector("[data-icon]")?.getAttribute("data-icon")).toBe(
+      "arrow-clockwise",
+    );
+    const reason = document.getElementById(
+      button.getAttribute("aria-describedby")!,
+    );
+    expect(reason?.getAttribute("role")).toBe("alert");
+    expect(reason?.textContent).toContain("could not be played");
+    expect(document.querySelector(".z-media-time")?.textContent).toBe(
+      "Try again",
+    );
   });
 
   it("a video that starts pauses the voice message", async () => {
