@@ -10,6 +10,8 @@ import { scrollableStyles } from "../../../directives/scrollable";
 import { AutoCompleteSearchSpace } from "../../utils/autoComplete";
 
 import { useDevice } from "@revolt/common";
+import { deviceMac } from "@revolt/keybinds/active";
+import { MENTION_TOKEN, needsLeadingSpace } from "@revolt/keybinds/mention";
 import { codeMirrorAutoComplete } from "./codeMirrorAutoComplete";
 import { commandPlugins } from "./codeMirrorCommand";
 import { isInFencedCodeBlock } from "./codeMirrorCommon";
@@ -17,6 +19,7 @@ import { smartLineWrapping } from "./codeMirrorLineWrap";
 import { markPlugins } from "./codeMirrorMarks";
 import { markdownTheme } from "./codeMirrorTheme";
 import { codeMirrorWidgets } from "./codeMirrorWidgets";
+import { formatKeymap } from "./formatKeys";
 
 interface Props {
   /**
@@ -157,6 +160,8 @@ export function TextEditor2(props: Props) {
         /* Mount keymaps */
         enterKeymap,
         arrowUpKeymap,
+        /* Ctrl+B bold, Ctrl+I italic (Command on a Mac) */
+        formatKeymap(deviceMac()),
         keymap.of(defaultKeymap), // required for atomic ranges to work: https://github.com/codemirror/dev/issues/923
 
         /* Enable history */
@@ -275,7 +280,16 @@ export function TextEditor2(props: Props) {
           const text = value[0];
           if (text !== "_focus") {
             if (!isMobile) view.focus();
-            view.dispatch(view.state.replaceSelection(text));
+            // a mention (Shift+click) never runs into the word before it
+            const at = view.state.selection.main.from;
+            const before = at > 0 ? view.state.sliceDoc(at - 1, at) : "";
+            view.dispatch(
+              view.state.replaceSelection(
+                MENTION_TOKEN.test(text) && needsLeadingSpace(before)
+                  ? ` ${text}`
+                  : text,
+              ),
+            );
             if (text) props.onTyping?.();
             props.onChange(view.state.doc.toString());
           } else {
