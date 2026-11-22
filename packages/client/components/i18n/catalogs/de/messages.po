@@ -3870,6 +3870,10 @@ msgstr "Bot-Besitzer können ihre in den Bot-Einstellungen einreichen."
 msgid "Bot permissions"
 msgstr "Bot-Berechtigungen"
 
+#: src/interface/Developers.tsx
+msgid "The servers list shows servers the user is in. Check <0>can_manage</0> before letting them change settings."
+msgstr "Die Serverliste zeigt die Server, auf denen die Person Mitglied ist. Prüfe <0>can_manage</0>, bevor du sie Einstellungen ändern lässt."
+
 #: components/app/interface/settings/user/safety/SafetyDashboard.tsx
 #~ msgid "Bot requests couldn't be loaded."
 #~ msgstr "Bot-Anfragen konnten nicht geladen werden."

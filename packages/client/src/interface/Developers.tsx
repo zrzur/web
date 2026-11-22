@@ -518,6 +518,14 @@ function UrlGenerator(props: { bot: Bot; redirects: string[] }) {
           </For>
         </Checks>
       </Group>
+      <Show when={scopes().includes("servers.read")}>
+        <ScopeWarning role="note">
+          <Trans>
+            The servers list shows servers the user is in. Check{" "}
+            <code>can_manage</code> before letting them change settings.
+          </Trans>
+        </ScopeWarning>
+      </Show>
       <Show when={scopes().includes("bot.install")}>
         <Group>
           <legend>{t`Bot permissions`}</legend>
@@ -935,6 +943,18 @@ const TextArea = styled("textarea", {
 });
 
 const Muted = styled("span", { base: { color: "var(--z-fg-muted)" } });
+
+/** A short warning next to a scope: amber edge, the text stays readable */
+const ScopeWarning = styled("p", {
+  base: {
+    margin: 0,
+    padding: "8px 12px",
+    borderRadius: "var(--z-radius, 8px)",
+    borderInlineStart: "4px solid var(--z-status-warning)",
+    background: "color-mix(in srgb, var(--z-status-warning) 12%, transparent)",
+    color: "var(--z-fg)",
+  },
+});
 
 const Group = styled("fieldset", {
   base: {
