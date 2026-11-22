@@ -262,8 +262,8 @@
     },
     {
       "path": "CHANGELOG.md",
-      "sha256": "4fc89f9eb8fc067971b721c548db5d62f4bc72c46aef3a6dfc2600597a2f22ff",
-      "bytes": 194746,
+      "sha256": "10b8c70b241f16d4c7762dcc8284ed76765bd3cd981de856e00fe3294dd359a1",
+      "bytes": 196115,
       "category": "public-documentation"
     },
     {
@@ -6856,8 +6856,8 @@
     },
     {
       "path": "packages/client/components/ui/components/features/messaging/elements/MediaPlayer.tsx",
-      "sha256": "53673121842ea22c50e2604743997b282808e29335c80a2efc6af1f829c81493",
-      "bytes": 9722,
+      "sha256": "18c24b058f2ff5b0dacad3d8b7c15db13bb463ef6d4bd4f390d4a183f88e03c4",
+      "bytes": 9899,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -6940,8 +6940,8 @@
     },
     {
       "path": "packages/client/components/ui/components/features/messaging/elements/VoiceMessage.tsx",
-      "sha256": "0e38ecd314b962081e7ab702cb8f169ed8e5c944770516647e2d3c4c9076b43e",
-      "bytes": 6231,
+      "sha256": "018ed8a4d271e6b055bb4012625b2649fd230b565fef0975cc372219dc24de92",
+      "bytes": 6012,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -6984,6 +6984,18 @@
       "path": "packages/client/components/ui/components/features/messaging/elements/voice.ts",
       "sha256": "a10459effab081ccdaacfba7124e674513cc9dfbabaefe4c6944c0bb28453b84",
       "bytes": 2856,
+      "category": "product-source-or-build-manifest"
+    },
+    {
+      "path": "packages/client/components/ui/components/features/messaging/elements/voicePlayback.test.ts",
+      "sha256": "87a91c8e4d6ce3aae1df39ab9d927ca4206216d061e972788a01d81a4f209dba",
+      "bytes": 3957,
+      "category": "synthetic-test-source-or-fixture"
+    },
+    {
+      "path": "packages/client/components/ui/components/features/messaging/elements/voicePlayback.ts",
+      "sha256": "9ec216f4434c592e8442aa7ca66f79ccde63a1e93bd04274fd238e63b662d73f",
+      "bytes": 5421,
       "category": "product-source-or-build-manifest"
     },
     {
