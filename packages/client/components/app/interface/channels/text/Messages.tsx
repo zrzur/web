@@ -96,6 +96,12 @@ interface Props {
    * read.
    */
   atPresent?: Signal<boolean>;
+
+  /**
+   * A jump to a message started: the address changed to a message, or a link
+   * to the message already in the address was followed again
+   */
+  onJump?: () => void;
 }
 
 /**
@@ -286,7 +292,10 @@ export function Messages(props: Props) {
     on(
       () => props.highlightedMessageId(),
       (messageId) => {
-        if (messageId) controller?.toMessage(messageId);
+        if (messageId) {
+          controller?.toMessage(messageId);
+          props.onJump?.();
+        }
       },
       { defer: true },
     ),
@@ -318,6 +327,7 @@ export function Messages(props: Props) {
       target.pathname === location.pathname
     ) {
       controller?.toMessage(messageId);
+      props.onJump?.();
     }
   }
 

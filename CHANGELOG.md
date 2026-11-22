@@ -2,10 +2,11 @@
 
 ## Unreleased
 
-### Links to old messages land on phones (2026-11-22)
+### Links to old messages land on phones and tablets (2026-11-22)
 
-* **A link to a message opened by a page load shows that message:** on phones the channel is drawn while the live connection is still being made. When the connection came up while the page around the message was on its way, the list treated it as a reconnect, loaded the newest page and dropped the jump, so the newest messages showed instead (seen in about half the tries at 375 px; desktop draws the channel later and hit it rarely). The jump now lands; if the connection came back meanwhile, newer messages are asked for again once it has landed (`history/controller.ts`).
-* **A search result, a pin or a picture in the channel's details shows the conversation on phones:** those lists are whole screens over the conversation, and they stayed open after a tap, so the message was loaded and marked behind them. Going to a message from them now closes the list (`TextChannel.tsx`). Desktop keeps the search beside the conversation.
+* **A link to a message opened by a page load shows that message:** on phones the channel is drawn while the live connection is still being made. When the connection came up while the page around the message was on its way, the list treated it as a reconnect, loaded the newest page and dropped the jump, so the newest messages showed instead (seen in about half the tries at 375 px; desktop draws the channel later and hit it rarely). The jump now lands (`history/controller.ts`).
+* **Nothing sent while the connection was away is missed:** when the connection comes back while a first load, a jump or "Jump to present" is on its way, that request is no longer replaced. Once it has landed, the newest page is asked for again at the present, or the newer side when the reader is further back. A jump that fails meanwhile leaves the newer side to be asked again too.
+* **A search result, a pin or a picture in the channel's details shows the conversation on phones and tablets:** on phones those lists are whole screens over the conversation, and on tablets (up to 840 px wide) a panel over its side. They stayed open after a tap, so the message was loaded and marked behind them. Every jump now closes them, also a second tap on the same result or pin (the address does not change then). Desktop keeps the search beside the conversation.
 
 ### A friend request opens the sender's profile (2026-11-21)
 

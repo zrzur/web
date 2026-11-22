@@ -278,22 +278,14 @@ export function TextChannel(props: ChannelPageProps) {
   // over the conversation (the whole screen on phones, a side panel on
   // tablets). Going to a message from one of them (a result, a pin, a
   // picture) shows the conversation, or the message lands under the panel.
-  // On desktop the panel sits beside the conversation and stays.
-  createEffect(
-    on(
-      highlightMessageId,
-      (messageId) => {
-        if (
-          messageId &&
-          overlaySidebar() &&
-          sidebarState().state !== "default"
-        ) {
-          setSidebarState({ state: "default" });
-        }
-      },
-      { defer: true },
-    ),
-  );
+  // Called by every jump, also to the message already in the address (the
+  // same pin tapped twice). On desktop the panel sits beside the
+  // conversation and stays.
+  const makeWayForJump = () => {
+    if (overlaySidebar() && sidebarState().state !== "default") {
+      setSidebarState({ state: "default" });
+    }
+  };
 
   // If this is a server text channel, sync the members
   // todo: useQuery
@@ -366,6 +358,7 @@ export function TextChannel(props: ChannelPageProps) {
             highlightedMessageId={highlightMessageId}
             clearHighlightedMessage={() => navigate(".")}
             jumpToBottomRef={(ref) => (jumpToBottomRef = ref)}
+            onJump={makeWayForJump}
             atPresent={[atEnd, setEnd]}
           />
 
@@ -487,6 +480,7 @@ export function TextChannel(props: ChannelPageProps) {
                     setSidebarState={setSidebarState}
                     scrollTargetElement={sidebarScrollTargetElement}
                     isLargeServer={isLargeServer(props.channel.server)}
+                    onJump={makeWayForJump}
                   />
                 </Suspense>
               </Match>
