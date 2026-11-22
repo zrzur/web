@@ -33,6 +33,7 @@ import {
   EFFECT_IDS,
   EffectId,
 } from "@revolt/ui/components/features/profiles/effects/effectIds";
+import { ProfilePreview } from "@revolt/ui/components/features/profiles/frames/ProfilePreview";
 import { PROFILE_FRAME_IDS } from "@revolt/ui/components/features/profiles/frames/builtinFrames";
 import { useEffectLabels } from "@revolt/ui/components/features/profiles/labels";
 import {
@@ -46,6 +47,7 @@ import {
   THEME_PRESETS,
   effectStillUrl,
   nameStyle,
+  userStyleOf,
 } from "@revolt/ui/components/features/profiles/userStyle";
 import { withoutNull } from "@zrzur/sdk/solid";
 
@@ -437,10 +439,10 @@ function useTileActions(wear: () => Wear | undefined, name: () => string) {
     },
     onFocus: () => tryOn.peek(wear()),
     onBlur: () => tryOn.peek(undefined),
-    tap: (el: HTMLElement) => {
+    tap: (el: HTMLElement, fly = true) => {
       const pieces = wear();
       if (!pieces || isDesignsSite()) return;
-      if (!tryOn.wearing(pieces)) flyToDock(el);
+      if (fly && !tryOn.wearing(pieces)) flyToDock(el);
       tryOn.toggle(pieces, name());
     },
   };
@@ -489,6 +491,7 @@ function DesignTile(props: {
   const wearer = useWearer();
   const { t } = useLingui();
   const instance = useInstance();
+  const client = useClient();
   const act = useTileActions(
     () => props.tile.wear,
     () => props.tile.name,
@@ -533,7 +536,8 @@ function DesignTile(props: {
         }}
         onClick={(e) => {
           start();
-          act.tap(e.currentTarget);
+          // a whole framed profile is too big to fly to the dock
+          act.tap(e.currentTarget, props.tile.kind !== "card");
         }}
       >
         <Switch>
@@ -586,11 +590,25 @@ function DesignTile(props: {
             <MemberRow style={props.tile.wear!} person={props.tile.person} />
           </Match>
           <Match when={props.tile.kind === "card"}>
-            <StyleCard
-              style={props.tile.wear!}
-              person={props.tile.person}
-              compact
-            />
+            {/* signed in: your own profile, as people will see it, with
+                your look and this frame; a visitor sees the sample card */}
+            <Show
+              when={client().user}
+              fallback={
+                <StyleCard
+                  style={props.tile.wear!}
+                  person={props.tile.person}
+                  compact
+                />
+              }
+            >
+              {(me) => (
+                <ProfilePreview
+                  user={me()}
+                  style={{ ...userStyleOf(me()), ...props.tile.wear }}
+                />
+              )}
+            </Show>
           </Match>
           <Match when={props.tile.kind === "open"}>
             <OpenRing />
@@ -1004,7 +1022,8 @@ const TileBase = styled("div", {
     // as tall as a profile card, so the tile shows how the effect will look
     "&[data-kind='effect']": { gridRow: "span 4" },
     // a card in its frame: the frame reaches past the card, so room round it
-    "&[data-kind='card']": { gridRow: "span 4" },
+    // a whole profile card in its frame: a poster of a tile
+    "&[data-kind='card']": { gridColumn: "span 4", gridRow: "span 6" },
     "&[data-kind='frame'][data-big='true']": {
       gridColumn: "span 6",
       gridRow: "span 4",
@@ -1070,8 +1089,9 @@ const Art = styled("button", {
     // the card and the room its frame needs round it (framedCompact, 30 px
     // at each side) fit the tile; the frame is never cut at the tile's edge
     "[data-kind='card'] > &": {
-      overflow: "visible",
-      "& > div": { width: "calc(100% - 60px)", maxWidth: "220px" },
+      alignItems: "start",
+      padding: "12px",
+      "& > div": { width: "100%" },
       "&:hover > *": { transform: "none" },
     },
     _focusVisible: {

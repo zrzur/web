@@ -1,27 +1,33 @@
 import { For, Show, createSignal } from "solid-js";
 
 import { Trans, useLingui } from "@lingui/solid/macro";
+import type { User } from "@zrzur/sdk/solid";
 import { styled } from "styled-system/jsx";
 
-import { Avatar, Dialog } from "@revolt/ui";
-import { FramedCard } from "@revolt/ui/components/features/profiles/frames/ProfileFrame";
+import { Dialog } from "@revolt/ui";
+import { ProfilePreview } from "@revolt/ui/components/features/profiles/frames/ProfilePreview";
 import { PROFILE_FRAME_IDS } from "@revolt/ui/components/features/profiles/frames/builtinFrames";
-import { isCommunityRef } from "@revolt/ui/components/features/profiles/userStyle";
+import {
+  type UserStyle,
+  isCommunityRef,
+} from "@revolt/ui/components/features/profiles/userStyle";
 import { Icon } from "@revolt/ui/icons/Icon";
 
 import { useStyleLabels } from "./styleLabels";
 
 /**
- * Choose the frame drawn around your whole profile card. Zrzur's own frames
- * are here; a creator's frame is put on from Designs and shows here as the
- * one you wear.
+ * Choose the frame drawn around your whole profile card. Every choice is
+ * your own whole profile card, as people will see it, wearing that frame. Zrzur's
+ * own frames are here; a creator's frame is put on from Designs and shows
+ * here as the one you wear.
  */
 export function FrameDialog(props: {
   show: boolean;
   onClose: () => void;
-  name: string;
-  handle: string;
-  avatar?: string;
+  /** whose profile: the card shown is theirs */
+  user: User;
+  /** the look being edited, so the preview has the colours and decoration too */
+  style: UserStyle;
   value?: string;
   file?: string;
   onApply: (frame: string | undefined, file?: string) => void;
@@ -37,28 +43,18 @@ export function FrameDialog(props: {
     setFile(image);
   };
 
-  /** a small profile card, framed */
-  const Card = (card: { frame?: string; file?: string; big?: boolean }) => (
-    <FramedCard frame={card.frame} file={card.file} phone={false}>
-      <Mini data-big={card.big ? "" : undefined}>
-        <MiniBanner />
-        <MiniAvatar>
-          <Avatar
-            size={card.big ? 56 : 32}
-            src={props.avatar}
-            fallback={props.name}
-          />
-        </MiniAvatar>
-        <strong>
-          <bdi>{props.name}</bdi>
-        </strong>
-        <Show when={card.big}>
-          <small>
-            <bdi>@{props.handle}</bdi>
-          </small>
-        </Show>
-      </Mini>
-    </FramedCard>
+  /** your profile card wearing a frame (or none) */
+  const Card = (card: { frame?: string; file?: string }) => (
+    <ProfilePreview
+      user={props.user}
+      // every choice at the same size, "None" too
+      sizeAs={PROFILE_FRAME_IDS[0]}
+      style={{
+        ...props.style,
+        profile_frame: card.frame,
+        profile_frame_file: card.file,
+      }}
+    />
   );
 
   return (
@@ -84,7 +80,7 @@ export function FrameDialog(props: {
         },
       ]}
     >
-      <Split>
+      <Stack>
         <Grid role="list" aria-label={t`Profile frames`}>
           <Tile
             type="button"
@@ -140,38 +136,28 @@ export function FrameDialog(props: {
             )}
           </For>
         </Grid>
-
-        <Preview>
-          <Card frame={choice()} file={file()} big />
-          <Note>
-            <Trans>
-              The frame goes round your card and your full profile. It never
-              covers your name, your buttons or what you wrote.
-            </Trans>
-          </Note>
-        </Preview>
-      </Split>
+        <Note>
+          <Trans>
+            The frame goes round your card and your full profile. It never
+            covers your name, your buttons or what you wrote.
+          </Trans>
+        </Note>
+      </Stack>
     </Dialog>
   );
 }
 
-const Split = styled("div", {
-  base: {
-    display: "grid",
-    gridTemplateColumns: "minmax(0, 1fr) 280px",
-    gap: "20px",
-    alignItems: "start",
-    "@media (max-width: 720px)": { gridTemplateColumns: "minmax(0, 1fr)" },
-  },
+const Stack = styled("div", {
+  base: { display: "flex", flexDirection: "column", gap: "12px" },
 });
 
 const Grid = styled("div", {
   base: {
     display: "grid",
-    gridTemplateColumns: "repeat(auto-fill, minmax(150px, 1fr))",
+    gridTemplateColumns: "repeat(auto-fill, minmax(240px, 1fr))",
     alignContent: "start",
     gap: "12px",
-    maxHeight: "min(460px, 55dvh)",
+    maxHeight: "min(520px, 60dvh)",
     overflowY: "auto",
     padding: "4px",
   },
@@ -184,8 +170,7 @@ const Tile = styled("button", {
     flexDirection: "column",
     alignItems: "stretch",
     gap: "8px",
-    // room for the frame, which reaches past the small card
-    padding: "60px 28px 12px",
+    padding: "12px 12px 12px",
     minHeight: "44px",
     border: "1px solid var(--z-btn-surface-border)",
     borderRadius: "var(--z-radius, 10px)",
@@ -207,7 +192,6 @@ const Tile = styled("button", {
       outline: "2px solid var(--z-focus)",
       outlineOffset: "2px",
     },
-    "& > span": { marginBlockStart: "36px" },
   },
 });
 
@@ -216,6 +200,7 @@ const Check = styled("span", {
     position: "absolute",
     top: "6px",
     insetInlineEnd: "6px",
+    zIndex: 3,
     display: "grid",
     placeItems: "center",
     width: "20px",
@@ -227,76 +212,11 @@ const Check = styled("span", {
   },
 });
 
-const Preview = styled("div", {
-  base: {
-    display: "flex",
-    flexDirection: "column",
-    gap: "16px",
-    // the frame's crest and foot reach past the card
-    padding: "96px 32px 16px",
-    borderRadius: "calc(var(--z-radius, 10px) + 4px)",
-    border: "1px solid var(--z-border-subtle)",
-    background: "var(--z-bg-input)",
-    overflow: "hidden",
-  },
-});
-
 const Note = styled("p", {
   base: {
-    margin: "28px 0 0",
+    margin: 0,
     fontSize: "13px",
     lineHeight: "18px",
     color: "var(--z-fg-secondary)",
-  },
-});
-
-const Mini = styled("div", {
-  base: {
-    position: "relative",
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center",
-    gap: "2px",
-    paddingBottom: "12px",
-    overflow: "hidden",
-    borderRadius: "12px",
-    border: "1px solid var(--z-border-subtle)",
-    background: "var(--z-bg-floating, var(--z-bg-raised))",
-    "& strong": {
-      marginTop: "6px",
-      maxWidth: "100%",
-      paddingInline: "8px",
-      overflow: "hidden",
-      textOverflow: "ellipsis",
-      whiteSpace: "nowrap",
-      fontSize: "13px",
-      fontWeight: 700,
-    },
-    "& small": { fontSize: "13px", color: "var(--z-fg-muted)" },
-    "&[data-big]": {
-      paddingBottom: "20px",
-      "& strong": { fontSize: "18px" },
-    },
-  },
-});
-
-const MiniBanner = styled("div", {
-  base: {
-    alignSelf: "stretch",
-    height: "40px",
-    background:
-      "linear-gradient(135deg, color-mix(in srgb, var(--z-accent) 40%, var(--z-bg-raised)), var(--z-bg-raised))",
-    "[data-big] > &": { height: "72px" },
-  },
-});
-
-const MiniAvatar = styled("div", {
-  base: {
-    marginTop: "-20px",
-    padding: "3px",
-    borderRadius: "50%",
-    background: "var(--z-bg-floating, var(--z-bg-raised))",
-    lineHeight: 0,
-    "[data-big] > &": { marginTop: "-32px" },
   },
 });

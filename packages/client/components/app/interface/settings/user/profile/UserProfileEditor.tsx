@@ -500,9 +500,8 @@ export function UserProfileEditor(props: Props) {
               <FrameDialog
                 show={frameDialog()}
                 onClose={() => setFrameDialog(false)}
-                name={shownName()}
-                handle={props.user.username}
-                avatar={avatarUrl()}
+                user={props.user}
+                style={style()}
                 value={style().profile_frame}
                 file={style().profile_frame_file}
                 onApply={(profile_frame, file) =>

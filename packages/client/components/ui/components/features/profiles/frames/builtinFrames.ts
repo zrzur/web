@@ -8,7 +8,7 @@
  * palettes, never text from a user, so the string is safe to set as markup.
  */
 
-import { crystalCave } from "./pixel/crystalCave";
+import { CRYSTAL_ROOM, crystalCave } from "./pixel/crystalCave";
 
 export const PROFILE_FRAME_IDS = ["crystal"] as const;
 
@@ -28,12 +28,23 @@ type Drawing = {
     h: number,
     cell: number,
   ) => { svg: string; room: FrameRoom };
+  /** the room it uses at a pixel size, without drawing it */
+  room: (cell: number) => FrameRoom;
   /** whether something in it moves (stopped under reduced motion) */
   moves?: boolean;
 };
 
+/** a room given in cells, at a pixel size */
+const inCells =
+  (room: FrameRoom) =>
+  (cell: number): FrameRoom => ({
+    x: room.x * cell,
+    top: room.top * cell,
+    bottom: room.bottom * cell,
+  });
+
 export const FRAME_DRAWINGS: Record<ProfileFrameId, Drawing> = {
-  crystal: { draw: crystalCave, moves: true },
+  crystal: { draw: crystalCave, room: inCells(CRYSTAL_ROOM), moves: true },
 };
 
 /**
