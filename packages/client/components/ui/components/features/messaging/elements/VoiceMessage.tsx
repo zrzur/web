@@ -6,17 +6,24 @@ import {
   JSX,
   Show,
   createEffect,
+  createMemo,
   createSignal,
   onCleanup,
+  untrack,
 } from "solid-js";
 
 import { mediaTime } from "./MediaPlayer";
 import { placeholderBars, readVoice } from "./voice";
 import "./voice.css";
+import { voiceClip } from "./voicePlayback";
 
 /**
  * Compact voice note: play button, waveform that fills as it plays (click
  * or drag across it to seek) and the time.
+ *
+ * The sound itself lives in voicePlayback.ts, not in this row: the message
+ * list draws a row again for many harmless reasons, and that must never stop
+ * a voice message part-way. Starting one pauses the one that played.
  */
 export function VoiceMessage(props: {
   src: string;
@@ -30,11 +37,19 @@ export function VoiceMessage(props: {
   contextMenu?: () => JSX.Element;
 }) {
   const { t } = useLingui();
-  let audio!: HTMLAudioElement;
-  const [playing, setPlaying] = createSignal(false);
-  const [current, setCurrent] = createSignal(0);
-  const [mediaDuration, setMediaDuration] = createSignal(0);
-  const [error, setError] = createSignal(false);
+  // one shared player per file, picked up again when the row is drawn again
+  const clip = createMemo(() => {
+    const shared = voiceClip(
+      props.src,
+      untrack(() => mediaPreload(saveData())),
+    );
+    onCleanup(() => shared.release());
+    return shared;
+  });
+  const playing = () => clip().playing();
+  const current = () => clip().current();
+  const mediaDuration = () => clip().mediaDuration();
+  const error = () => clip().error();
   // A signal, not a resource: a pending resource would suspend the channel's
   // <Suspense> and detach (and re-scroll) the whole message list.
   const [voice, setVoice] =
@@ -60,28 +75,14 @@ export function VoiceMessage(props: {
   const progress = () => (duration() ? Math.min(1, current() / duration()) : 0);
   const bars = () => voice()?.bars ?? placeholderBars(props.src);
 
-  onCleanup(() => {
-    audio?.pause();
-  });
-
-  async function toggle() {
-    if (!audio.paused) return audio.pause();
-    try {
-      await audio.play();
-    } catch (failure) {
-      if (!(failure instanceof DOMException && failure.name === "AbortError"))
-        setError(true);
-    }
-  }
+  const toggle = () => clip().toggle();
 
   function seekTo(event: PointerEvent, element: HTMLElement) {
     if (!duration()) return;
     const box = element.getBoundingClientRect();
     const rtl = getComputedStyle(element).direction === "rtl";
     const ratio = (event.clientX - box.left) / box.width;
-    audio.currentTime =
-      Math.min(1, Math.max(0, rtl ? 1 - ratio : ratio)) * duration();
-    setCurrent(audio.currentTime);
+    clip().seek(Math.min(1, Math.max(0, rtl ? 1 - ratio : ratio)) * duration());
   }
 
   const wave = (
@@ -111,9 +112,8 @@ export function VoiceMessage(props: {
         } else if (step && duration()) {
           event.preventDefault();
           const rtl = getComputedStyle(event.currentTarget).direction === "rtl";
-          audio.currentTime = Math.min(
-            duration(),
-            Math.max(0, audio.currentTime + (rtl ? -step : step)),
+          clip().seek(
+            Math.min(duration(), Math.max(0, current() + (rtl ? -step : step))),
           );
         }
       }}
@@ -136,28 +136,15 @@ export function VoiceMessage(props: {
       data-playing={playing()}
       role="group"
       aria-label={props.title ?? t`Voice message`}
+      // the waveform is dragged sideways to seek: never a pull to reply
+      data-no-swipe
       use:floating={{ contextMenu: props.contextMenu }}
     >
-      <audio
-        ref={audio}
-        src={props.src}
-        preload={mediaPreload(saveData())}
-        onPlay={() => setPlaying(true)}
-        onPause={() => setPlaying(false)}
-        onEnded={() => {
-          setPlaying(false);
-          setCurrent(0);
-        }}
-        onTimeUpdate={() => setCurrent(audio.currentTime)}
-        onLoadedMetadata={() => setMediaDuration(audio.duration)}
-        onDurationChange={() => setMediaDuration(audio.duration)}
-        onError={() => setError(true)}
-      />
       <button
         type="button"
         class="z-voice-play"
         aria-label={playing() ? t`Pause` : t`Play`}
-        disabled={error()}
+        // after a failed load a tap tries again
         onClick={() => void toggle()}
       >
         <Icon name={playing() ? "pause" : "play"} size={16} filled />

@@ -11,6 +11,7 @@ import {
 } from "solid-js";
 import { Dynamic } from "solid-js/web";
 import "./media-player.css";
+import { endTurn, takeTurn } from "./voicePlayback";
 
 export function mediaTime(value: number): string {
   if (!Number.isFinite(value) || value < 0) return "0:00";
@@ -49,6 +50,7 @@ export function MediaPlayer(props: {
   onCleanup(() => clearTimeout(idleTimer));
   onCleanup(() => {
     if (media) {
+      endTurn(media);
       media.pause();
       media.removeAttribute("src");
       media.load();
@@ -170,6 +172,8 @@ export function MediaPlayer(props: {
         preload={mediaPreload(saveData())}
         controls={false}
         onPlay={() => {
+          // one player at a time: a voice message or another video pauses
+          takeTurn(media);
           setPlaying(true);
           wake();
         }}
