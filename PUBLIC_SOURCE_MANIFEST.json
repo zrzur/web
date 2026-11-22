@@ -1198,8 +1198,8 @@
     },
     {
       "path": "packages/client/components/app/interface/safety/labels.tsx",
-      "sha256": "35ff4e698059e87cf9e3d867670bf516cc7a6dfeb744020f0b7d88d6cd64766f",
-      "bytes": 7030,
+      "sha256": "bfd026d9c4d650898b5b20293ca0ac8ce1b64908497a5ac1e4d605565c1b9b2d",
+      "bytes": 7186,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -3610,8 +3610,8 @@
     },
     {
       "path": "packages/client/components/i18n/catalogs/ar/messages.po",
-      "sha256": "bc79a3d8210c81e444dd40845a4d9663c66a96a5c3700574da38479863089030",
-      "bytes": 1273764,
+      "sha256": "6881747b45b8bd44e476e99671473308d361e5fef5756160cf8053f3e8a8f8f3",
+      "bytes": 1274145,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -3754,8 +3754,8 @@
     },
     {
       "path": "packages/client/components/i18n/catalogs/de/messages.po",
-      "sha256": "01ec7f3fb5f1d62fc3dbf6b8bb37678f6c0c31ccd41707f41528abf367ba9481",
-      "bytes": 1176513,
+      "sha256": "0660879f2f9f3e2f5dcdc7bd7f9b9f80d73e2495f7904196a5f084f83351d3af",
+      "bytes": 1176865,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -3790,8 +3790,8 @@
     },
     {
       "path": "packages/client/components/i18n/catalogs/en/messages.po",
-      "sha256": "4be792bc96cf8512765b782e58e55355d7994a24231775ac31d7c3735c694d3c",
-      "bytes": 1132924,
+      "sha256": "3a25177b505d9a590a27d84d2d4aa7767f91f90d8e9306575bf142143601dc7f",
+      "bytes": 1133270,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -41836,8 +41836,8 @@
     },
     {
       "path": "packages/client/scripts/i18n/ui-2026112201.json",
-      "sha256": "96c54aafd19140ac2c4bc097437452b90aa5f0af363e24cbdb6e4750686f597e",
-      "bytes": 15068,
+      "sha256": "113b38d1da65240b3eb1ba11ae309cd33d05c8b11fefa5d9418e77b69d117ae7",
+      "bytes": 15415,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -45300,7 +45300,7 @@
   "submodules": [
     {
       "path": "packages/stoat.js",
-      "commit": "1425c8929ef455b9ce5f5531c252f86b426599f5"
+      "commit": "d671bfe405c054e069c654d2d49b6ccb2cccae3e"
     }
   ]
 }
