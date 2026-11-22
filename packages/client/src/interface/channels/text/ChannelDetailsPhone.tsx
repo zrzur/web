@@ -57,7 +57,7 @@ export function ChannelDetailsPhone(props: {
   scrollTargetElement: HTMLDivElement;
   isLargeServer: boolean;
   /** A message was picked here: the list makes way for the conversation */
-  onJump?: () => void;
+  onJump?: (message: Message) => void;
 }) {
   const { t } = useLingui();
   const { openModal } = useModals();
@@ -351,7 +351,11 @@ const isPicture = (file: File) =>
  * Media, links or files of a channel: its search with a "has" filter, newest
  * first, drawn as a grid (media) or as cards (links, files)
  */
-function Finds(props: { channel: Channel; what: What; onJump?: () => void }) {
+function Finds(props: {
+  channel: Channel;
+  what: What;
+  onJump?: (message: Message) => void;
+}) {
   const { t } = useLingui();
   const navigate = useNavigate();
   const [failedOnce, setFailedOnce] = createSignal(false);
@@ -387,7 +391,7 @@ function Finds(props: { channel: Channel; what: What; onJump?: () => void }) {
 
   // the same message twice keeps the address: the list still makes way
   const jump = (message: Message) => {
-    props.onJump?.();
+    props.onJump?.(message);
     navigate(message.path);
   };
   const who = (message: Message) =>

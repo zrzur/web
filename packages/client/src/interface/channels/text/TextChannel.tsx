@@ -162,6 +162,9 @@ export function TextChannel(props: ChannelPageProps) {
   // Get a reference to the message box's load latest function
   let jumpToBottomRef: (() => void) | undefined;
 
+  // ... and its "go to this message" function
+  let jumpToMessageRef: ((messageId: string) => void) | undefined;
+
   // Whether the reader sees the newest message (the newest messages are
   // loaded and the list is scrolled to its bottom)
   const [atEnd, setEnd] = createSignal(true);
@@ -358,6 +361,7 @@ export function TextChannel(props: ChannelPageProps) {
             highlightedMessageId={highlightMessageId}
             clearHighlightedMessage={() => navigate(".")}
             jumpToBottomRef={(ref) => (jumpToBottomRef = ref)}
+            jumpToMessageRef={(ref) => (jumpToMessageRef = ref)}
             onJump={makeWayForJump}
             atPresent={[atEnd, setEnd]}
           />
@@ -480,7 +484,14 @@ export function TextChannel(props: ChannelPageProps) {
                     setSidebarState={setSidebarState}
                     scrollTargetElement={sidebarScrollTargetElement}
                     isLargeServer={isLargeServer(props.channel.server)}
-                    onJump={makeWayForJump}
+                    onJump={(message) => {
+                      makeWayForJump();
+                      // the details' cards are buttons: the message already
+                      // in the address is gone to again from here
+                      if (message.id === highlightMessageId()) {
+                        jumpToMessageRef?.(message.id);
+                      }
+                    }}
                   />
                 </Suspense>
               </Match>

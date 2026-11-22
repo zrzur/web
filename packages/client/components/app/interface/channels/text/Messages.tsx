@@ -91,6 +91,13 @@ interface Props {
   jumpToBottomRef?: (fn: () => void) => void;
 
   /**
+   * Bind "go to this message" to the parent component, for controls that
+   * are not links (the address does not change for the message already in it)
+   * @param fn Function
+   */
+  jumpToMessageRef?: (fn: (messageId: string) => void) => void;
+
+  /**
    * Whether the reader sees the newest message: the newest messages are
    * loaded and the list is scrolled to its bottom. Only then is the channel
    * read.
@@ -382,6 +389,10 @@ export function Messages(props: Props) {
   onMount(() => {
     // Setup references if they exist
     props.jumpToBottomRef?.(jumpToBottom);
+    props.jumpToMessageRef?.((messageId) => {
+      controller?.toMessage(messageId);
+      props.onJump?.();
+    });
 
     const c = client();
     c.addListener("messageCreate", onMessage);
