@@ -262,8 +262,8 @@
     },
     {
       "path": "CHANGELOG.md",
-      "sha256": "4fc89f9eb8fc067971b721c548db5d62f4bc72c46aef3a6dfc2600597a2f22ff",
-      "bytes": 194746,
+      "sha256": "952897f8e5f3849a4fa7f5634846323fa69f4a351b06a07d92d145cd7f44610b",
+      "bytes": 195490,
       "category": "public-documentation"
     },
     {
@@ -6712,8 +6712,8 @@
     },
     {
       "path": "packages/client/components/ui/components/features/messaging/composition/MessageBox.tsx",
-      "sha256": "95930932e59e0dcedb82592035890d71cd36e3acbc081dc070ec4a62b68ebe27",
-      "bytes": 8090,
+      "sha256": "718889a3d9b4a39e0f8e685d90d82a48fb8ceb59ffb20ffb9d5ee2d802461405",
+      "bytes": 8719,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -7462,8 +7462,8 @@
     },
     {
       "path": "packages/client/components/ui/components/features/texteditor/TextEditor2.tsx",
-      "sha256": "5fcbb71d6745731710c9b6bcb6bd245ef8df5eefd0c05c785a900c9b57762492",
-      "bytes": 10641,
+      "sha256": "6e0bc38fcaf2df403cfbaac0ff500cbd59ff471ea31f88f3b59b56d145427edf",
+      "bytes": 11006,
       "category": "product-source-or-build-manifest"
     },
     {
