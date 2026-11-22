@@ -131,9 +131,7 @@ const askedInterests = new Set<string>();
 export const ServerSidebar = (props: Props) => {
   const navigate = useNavigate();
   const state = useState();
-  const { isMobile, fingerFirst, layout } = useDevice();
-  // no dragging channels where the finger scrolls (phones, tablets)
-  const noDrag = isMobile || fingerFirst;
+  const { layout } = useDevice();
   const client = useClient();
   const { openModal, showError } = useModals();
 
@@ -451,9 +449,9 @@ export const ServerSidebar = (props: Props) => {
             dragHandles
             dropIndicator
             type="category"
-            //TODO - No channel ordering on mobile due to usability issue
-            //Consider adding a way to enable reordering with dragHandles in server settings
-            disabled={noDrag || noOrdering()}
+            // a finger rests on the category name to lift it (touchHold)
+            touchHold
+            disabled={noOrdering()}
             items={categories().filter((category) => category.id !== "default")}
             onChange={(ids) => handleOrdering({ type: "categories", ids })}
           >
@@ -644,8 +642,6 @@ function Category(
       ? `${props.server.id}:default:${props.channelType}`
       : props.category.id;
   const isOpen = () => state.layout.getSectionState(sectionId(), true);
-  const { isMobile, fingerFirst } = useDevice();
-  const noDrag = isMobile || fingerFirst;
 
   // expand and collapse animate the channel rows
   let section: HTMLDivElement | undefined;
@@ -824,9 +820,9 @@ function Category(
             moved: reorderedIds.length !== current.length,
           });
         }}
-        //TODO - No channel ordering on mobile due to usability issue
-        //Consider adding a way to enable reordering with dragHandles in server settings
-        disabled={noDrag || props.noOrdering() || !isOpen()}
+        // a finger rests on a channel to lift it, a quick swipe scrolls
+        touchHold
+        disabled={props.noOrdering() || !isOpen()}
         minimumDropAreaHeight="42px"
         onDragChange={props.setDragging}
       >

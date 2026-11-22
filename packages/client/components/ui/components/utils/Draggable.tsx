@@ -8,10 +8,14 @@ import {
   createEffect,
   createSignal,
   on,
+  onCleanup,
+  onMount,
   untrack,
 } from "solid-js";
 
-import { css } from "styled-system/css";
+import { css, cx } from "styled-system/css";
+
+import { createTouchHold } from "./touchHold";
 
 interface Props<T> {
   type?: string;
@@ -25,6 +29,11 @@ interface Props<T> {
   }) => JSX.Element;
   onChange: (ids: string[]) => void;
   minimumDropAreaHeight?: string;
+  /**
+   * Phones and tablets: a finger rests on a row to lift it, then drags it;
+   * resting still opens the row's menu and a quick swipe scrolls (touchHold)
+   */
+  touchHold?: boolean;
   dropIndicator?: boolean;
   /** Told when a drag out of this list starts and ends */
   onDragChange?: (active: boolean) => void;
@@ -113,6 +122,7 @@ export function Draggable<T>(props: Props<T>) {
    * @param e
    */
   function handleDndEvent(e: DragHandleEvent<T>) {
+    pressRow?.removeAttribute("data-lifted");
     setDragDisabled(props.dragHandles || false);
     props.onDragChange?.(e.type === "consider");
 
@@ -139,6 +149,72 @@ export function Draggable<T>(props: Props<T>) {
 
   let zone: HTMLDivElement | undefined;
 
+  // a finger's press: the row it landed on and the node under it
+  let pressRow: HTMLElement | undefined;
+  let pressTarget: EventTarget | undefined;
+
+  const hold = untrack(() => props.touchHold)
+    ? createTouchHold({
+        menuTarget: () => pressTarget,
+        onLift: () => pressRow?.setAttribute("data-lifted", ""),
+        onDragStart: (from) => {
+          const row = pressRow;
+          if (!row) return;
+          // the row stays lifted until the drag zone takes it (Chrome lets
+          // it see the finger only past its touch slop, about 15 px)
+          if (props.dragHandles) setDragDisabled(false);
+          // hand the finger to the drag zone, as if it had just landed here
+          // (its own touch start is kept from it: that one has to scroll)
+          queueMicrotask(() => {
+            const start = new Event("touchstart", {
+              bubbles: true,
+              cancelable: true,
+            });
+            Object.defineProperty(start, "touches", {
+              value: [{ clientX: from.x, clientY: from.y }],
+            });
+            handedOver.add(start);
+            row.dispatchEvent(start);
+          });
+        },
+        onEnd: (how, dragged) => {
+          pressRow?.removeAttribute("data-lifted");
+          // the browser took the finger mid-drag: drop where it is
+          if (dragged && how === "cancel") {
+            window.dispatchEvent(new Event("touchend"));
+          } else if (!dragged && props.dragHandles) {
+            setDragDisabled(true);
+          }
+          pressRow = pressTarget = undefined;
+        },
+      })
+    : undefined;
+
+  /**
+   * A finger's own touch start never reaches the drag zone: it would start
+   * a drag at once and stop the list scrolling. The hold hands it over.
+   */
+  function keepTouchStart(e: TouchEvent) {
+    if (!handedOver.has(e)) e.stopPropagation();
+  }
+
+  onMount(() => {
+    if (!hold || !zone) return;
+    zone.addEventListener("touchstart", keepTouchStart, {
+      capture: true,
+      passive: true,
+    });
+    const unwatch = hold.watch(zone);
+    onCleanup(() => {
+      zone?.removeEventListener("touchstart", keepTouchStart, {
+        capture: true,
+      });
+      unwatch();
+    });
+  });
+
+  onCleanup(() => hold?.dispose());
+
   // keep track of where elements are grabbed to offset cursor to corner
   let grabbedAt = { x: 0, y: 0 };
 
@@ -148,6 +224,18 @@ export function Draggable<T>(props: Props<T>) {
     );
 
     if (!row) return;
+
+    // a finger: the innermost list that can move the row watches the press
+    if (hold && !props.disabled && !pressedHere.has(e)) {
+      const target = e.target as Element | null;
+      const handle =
+        !props.dragHandles || !!target?.closest?.("[data-drag-handle]");
+      if (handle && hold.press(e)) {
+        pressedHere.add(e);
+        pressRow = row as HTMLElement;
+        pressTarget = e.target ?? undefined;
+      }
+    }
 
     const { left, top } = row.getBoundingClientRect();
     grabbedAt = { x: e.clientX - left, y: e.clientY - top };
@@ -177,7 +265,10 @@ export function Draggable<T>(props: Props<T>) {
     <div
       ref={zone}
       data-drop-zone
-      class={props.dropIndicator ? dropIndicatorStyles : undefined}
+      class={cx(
+        props.dropIndicator && dropIndicatorStyles,
+        props.touchHold && touchRowStyles,
+      )}
       onPointerDown={onPointerDown}
       use:dndzone={{
         type: props.type,
@@ -216,6 +307,37 @@ export function Draggable<T>(props: Props<T>) {
     </div>
   );
 }
+
+/** Presses a list's finger hold has taken (the inner list of two wins) */
+const pressedHere = new WeakSet<Event>();
+
+/** Touch starts the hold handed to the drag zone */
+const handedOver = new WeakSet<Event>();
+
+/**
+ * A long press belongs to the list (drag or the row's menu), never to the
+ * browser: no link preview, text selection or dragging a link out
+ */
+const touchRowStyles = css({
+  "@media (pointer: coarse)": {
+    "& > *": {
+      WebkitTouchCallout: "none",
+      WebkitUserSelect: "none",
+      userSelect: "none",
+    },
+    "& a, & img": {
+      WebkitTouchCallout: "none",
+      // @ts-expect-error WebKit-only property Panda has no type for
+      WebkitUserDrag: "none",
+    },
+  },
+  // lifted by a resting finger: it can move now
+  "& > [data-lifted]": {
+    transform: "scale(1.02)",
+    transition: "transform 120ms ease",
+    _motionReduce: { transition: "none" },
+  },
+});
 
 const dropIndicatorStyles = css({
   "& > [data-is-dnd-shadow-item-internal]": {
@@ -262,5 +384,7 @@ export function createDragHandle(
     // what the handle shows stays its name; a handle with only an icon passes
     // its own aria-label
     "aria-description": t`Drag to reorder`,
+    // a finger's long press starts a drag only on the handle
+    "data-drag-handle": "",
   };
 }
