@@ -165,6 +165,24 @@ describe("a try that hangs (half-dead connection)", () => {
     expect(tries).toBe(3);
   });
 
+  it("stops the clock once the answer has started: the body may take longer", async () => {
+    let seen: AbortSignal | undefined;
+    const answer = await fetchWithRetry(
+      (signal: AbortSignal) => {
+        seen = signal;
+        return new Promise<{ status: number }>((done) =>
+          setTimeout(() => done({ status: 200 }), 10),
+        );
+      },
+      [0],
+      none,
+      20,
+    );
+    expect(answer.status).toBe(200);
+    await new Promise((done) => setTimeout(done, 40));
+    expect(seen?.aborted).toBe(false);
+  });
+
   it("allows about nine seconds per try by default", () => {
     expect(ASSET_TRY_TIMEOUT_MS).toBeGreaterThanOrEqual(8000);
     expect(ASSET_TRY_TIMEOUT_MS).toBeLessThanOrEqual(10000);
