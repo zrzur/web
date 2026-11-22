@@ -1,5 +1,6 @@
 import { useLingui } from "@lingui/solid/macro";
 import { mediaPreload, saveData } from "@revolt/common/lib/saveData";
+import { useLocation } from "@revolt/routing";
 import { Icon } from "@revolt/ui/icons/Icon";
 import {
   For,
@@ -61,6 +62,20 @@ export function VoiceMessage(props: {
       }),
     );
     return shared;
+  });
+  // Leaving the conversation stops the sound at once, also where the app
+  // keeps the conversation drawn in the background
+  const location = (() => {
+    try {
+      return useLocation();
+    } catch {
+      return undefined; // outside the app's router (tests)
+    }
+  })();
+  createEffect(() => {
+    const path = location?.pathname;
+    if (path !== undefined && !stillIn(props.channelId, path))
+      untrack(clip).pause();
   });
   const playing = () => clip().playing();
   const current = () => clip().current();

@@ -30,6 +30,8 @@ export interface VoiceClip {
   /** the file could not be loaded or played */
   error: Accessor<boolean>;
   toggle(): Promise<void>;
+  /** stop playing (the reader left the conversation) */
+  pause(): void;
   seek(seconds: number): void;
   /**
    * The row that showed it is gone. `left`: the reader left the
@@ -151,6 +153,9 @@ function create(src: string, preload: "none" | "metadata"): Entry {
         } catch (failure) {
           if (playFailed(failure)) setError(true);
         }
+      },
+      pause() {
+        audio.pause();
       },
       seek(seconds) {
         audio.currentTime = Math.max(0, seconds);
