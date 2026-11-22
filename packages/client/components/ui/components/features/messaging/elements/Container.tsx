@@ -1,4 +1,4 @@
-import { JSX, Match, Show, Switch, createSignal } from "solid-js";
+import { JSX, Match, Show, Switch, createSignal, onMount } from "solid-js";
 
 import { useLingui } from "@lingui/solid/macro";
 import { css, cva } from "styled-system/css";
@@ -426,6 +426,13 @@ export function MessageContainer(props: Props) {
   // of the time of a channel switch: it is made the first time it is needed
   const [wanted, setWanted] = createSignal(false);
 
+  // a row of the conversation, not a copy shown elsewhere (the message in
+  // the delete dialog): only these take the focus and the keys
+  let row: HTMLDivElement | undefined;
+  const [inList, setInList] = createSignal(false);
+  onMount(() => setInList(!!row?.closest("[data-message-scroller]")));
+  const listed = () => (inList() ? message : undefined);
+
   /** What a screen reader says for the message: who and when */
   const rowLabel = () => {
     const name =
@@ -448,21 +455,27 @@ export function MessageContainer(props: Props) {
       id={message?.id}
       // keys on a message (R reply, E edit, …): Up and Down in the list
       // move the focus here (messageKeys.ts, listed in Ctrl+/)
-      data-message-row={message?.id}
+      data-message-row={listed()?.id}
       // one message in the tab order: the one the keyboard was on last
-      tabIndex={message ? (rovingRow() === message.id ? 0 : -1) : undefined}
+      tabIndex={listed() ? (rovingRow() === listed()!.id ? 0 : -1) : undefined}
       onFocus={(event) => {
-        if (message && event.target === event.currentTarget)
-          noteRowFocus(message.id);
+        const own = listed();
+        if (own && event.target === event.currentTarget) noteRowFocus(own.id);
       }}
-      role={message ? "article" : undefined}
-      aria-label={message ? rowLabel() : undefined}
+      role={listed() ? "article" : undefined}
+      aria-label={listed() ? rowLabel() : undefined}
       aria-keyshortcuts={
-        message
-          ? messageAriaKeys(deviceMac(), messageAbilities(message)) || undefined
+        listed()
+          ? messageAriaKeys(deviceMac(), messageAbilities(listed()!)) ||
+            undefined
           : undefined
       }
-      ref={props.ref}
+      ref={(element: HTMLDivElement) => {
+        row = element;
+        // the parent's `ref={…}` arrives as a function
+        const parentRef = props.ref as unknown;
+        if (typeof parentRef === "function") parentRef(element);
+      }}
       onMouseEnter={() => {
         setWanted(true);
         props.onHover?.(true);
