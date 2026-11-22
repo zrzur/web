@@ -31209,10 +31209,6 @@ msgid "Next unread channel"
 msgstr "القناة غير المقروءة التالية"
 
 #: components/app/interface/settings/user/Keybinds.tsx
-msgid "On the message under the pointer or with focus."
-msgstr "على الرسالة التي تحت المؤشر أو التي عليها التركيز."
-
-#: components/app/interface/settings/user/Keybinds.tsx
 msgid "Open the emoji picker"
 msgstr "فتح منتقي الإيموجي"
 
@@ -31327,8 +31323,20 @@ msgstr "رسالة من {name}، {time}"
 
 #: components/app/interface/channels/text/useMessageKeys.ts
 msgid "Replying to {name}"
-msgstr "رد على {name}"
+msgstr "الرد على {name}"
 
 #: components/app/interface/channels/text/useMessageKeys.ts
 msgid "The text could not be copied."
 msgstr "تعذّر نسخ النص."
+
+#: components/modal/modals/QuickSwitcher.tsx
+msgid "{RESULT_LIMIT}+ results"
+msgstr "أكثر من {RESULT_LIMIT} نتيجة"
+
+#: components/modal/modals/QuickSwitcher.tsx
+msgid "You can't open this channel any more."
+msgstr "لم يعد بإمكانك فتح هذه القناة."
+
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "Your talk key holds these keys while talking from other apps is on."
+msgstr "يأخذ مفتاح التحدث هذه المفاتيح ما دام التحدث من التطبيقات الأخرى مفعّلًا."

@@ -3,7 +3,19 @@
     "رسالة من {name}، {time}",
     "Nachricht von {name}, {time}"
   ],
-  "Replying to {name}": ["رد على {name}", "Antwort an {name}"],
+  "Replying to {name}": ["الرد على {name}", "Antwort an {name}"],
+  "{RESULT_LIMIT}+ results": [
+    "أكثر من {RESULT_LIMIT} نتيجة",
+    "{RESULT_LIMIT}+ Ergebnisse"
+  ],
+  "You can't open this channel any more.": [
+    "لم يعد بإمكانك فتح هذه القناة.",
+    "Du kannst diesen Kanal nicht mehr öffnen."
+  ],
+  "Your talk key holds these keys while talking from other apps is on.": [
+    "يأخذ مفتاح التحدث هذه المفاتيح ما دام التحدث من التطبيقات الأخرى مفعّلًا.",
+    "Deine Sprechtaste belegt diese Tasten, solange Sprechen aus anderen Apps an ist."
+  ],
   "The text could not be copied.": [
     "تعذّر نسخ النص.",
     "Der Text ließ sich nicht kopieren."

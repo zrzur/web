@@ -7,10 +7,7 @@
     "القناة غير المقروءة التالية",
     "Nächster ungelesener Kanal"
   ],
-  "Upload a file": [
-    "رفع ملف",
-    "Datei hochladen"
-  ],
+  "Upload a file": ["رفع ملف", "Datei hochladen"],
   "Open the emoji picker": [
     "فتح منتقي الإيموجي",
     "Emoji-Auswahl öffnen"
@@ -23,14 +20,8 @@
     "فتح الإشارات إليك",
     "Deine Erwähnungen öffnen"
   ],
-  "Leave the call": [
-    "مغادرة المكالمة",
-    "Anruf verlassen"
-  ],
-  "Mention someone": [
-    "الإشارة إلى شخص",
-    "Jemanden erwähnen"
-  ],
+  "Leave the call": ["مغادرة المكالمة", "Anruf verlassen"],
+  "Mention someone": ["الإشارة إلى شخص", "Jemanden erwähnen"],
   "Shift+click a name or picture: the mention goes in at the cursor.": [
     "انقر مع Shift على اسم أو صورة، فتُضاف الإشارة عند موضع المؤشر.",
     "Shift+Klick auf einen Namen oder ein Bild: Die Erwähnung kommt an die Schreibmarke."
@@ -43,38 +34,23 @@
     "انقر مع Shift على الدور أو القناة.",
     "Shift+Klick auf die Rolle oder den Kanal."
   ],
-  "Accept a suggestion": [
-    "قبول اقتراح",
-    "Vorschlag übernehmen"
-  ],
+  "Accept a suggestion": ["قبول اقتراح", "Vorschlag übernehmen"],
   "While names or emoji are suggested.": [
     "أثناء ظهور اقتراحات الأسماء أو الإيموجي.",
     "Während Namen oder Emojis vorgeschlagen werden."
   ],
-  "Bold text": [
-    "نص عريض",
-    "Fetter Text"
-  ],
-  "Italic text": [
-    "نص مائل",
-    "Kursiver Text"
-  ],
+  "Bold text": ["نص عريض", "Fetter Text"],
+  "Italic text": ["نص مائل", "Kursiver Text"],
   "Where you can send files.": [
     "حيث يمكنك إرسال الملفات.",
     "Wo du Dateien senden kannst."
   ],
-  "Cancel a reply": [
-    "إلغاء الرد",
-    "Antwort abbrechen"
-  ],
+  "Cancel a reply": ["إلغاء الرد", "Antwort abbrechen"],
   "Also closes the emoji picker.": [
     "ويغلق منتقي الإيموجي أيضًا.",
     "Schließt auch die Emoji-Auswahl."
   ],
-  "Scroll the messages": [
-    "تمرير الرسائل",
-    "Durch die Nachrichten blättern"
-  ],
+  "Scroll the messages": ["تمرير الرسائل", "Durch die Nachrichten blättern"],
   "Move between messages": [
     "التنقل بين الرسائل",
     "Zwischen Nachrichten wechseln"
@@ -83,34 +59,22 @@
     "في قائمة الرسائل. بعدها تعمل المفاتيح التالية على تلك الرسالة.",
     "In der Nachrichtenliste. Die Tasten darunter wirken dann auf diese Nachricht."
   ],
-  "Your own message.": [
-    "رسالتك أنت.",
-    "Deine eigene Nachricht."
-  ],
+  "Your own message.": ["رسالتك أنت.", "Deine eigene Nachricht."],
   "Your own message. Asks first; with Shift it doesn't.": [
     "رسالتك أنت. يُطلب التأكيد أولًا، ومع Shift لا يُطلب.",
     "Deine eigene Nachricht. Fragt erst nach, mit Shift nicht."
   ],
-  "Pin or unpin": [
-    "تثبيت أو إلغاء التثبيت",
-    "Anheften oder lösen"
-  ],
+  "Pin or unpin": ["تثبيت أو إلغاء التثبيت", "Anheften oder lösen"],
   "Where you may pin messages.": [
     "حيث يُسمح لك بتثبيت الرسائل.",
     "Wo du Nachrichten anheften darfst."
   ],
-  "Copy the text": [
-    "نسخ النص",
-    "Text kopieren"
-  ],
+  "Copy the text": ["نسخ النص", "Text kopieren"],
   "When no text is selected.": [
     "عندما لا يكون أي نص محددًا.",
     "Wenn kein Text markiert ist."
   ],
-  "Keys shown": [
-    "المفاتيح المعروضة",
-    "Angezeigte Tasten"
-  ],
+  "Keys shown": ["المفاتيح المعروضة", "Angezeigte Tasten"],
   "Another system's keys, to read. You change your own on this device's set.": [
     "مفاتيح نظام آخر للاطلاع فقط. تغيّر مفاتيحك من مجموعة هذا الجهاز.",
     "Die Tasten eines anderen Systems, nur zum Lesen. Deine eigenen änderst du im Satz dieses Geräts."
@@ -119,8 +83,5 @@
     "مفاتيح هذا الجهاز. اطّلع على مجموعة نظام آخر.",
     "Die Tasten dieses Geräts. Sieh dir den Satz eines anderen Systems an."
   ],
-  "Show the keys for": [
-    "عرض المفاتيح لنظام",
-    "Tasten anzeigen für"
-  ]
+  "Show the keys for": ["عرض المفاتيح لنظام", "Tasten anzeigen für"]
 }

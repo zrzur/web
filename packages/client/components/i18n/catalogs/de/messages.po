@@ -31209,10 +31209,6 @@ msgid "Next unread channel"
 msgstr "Nächster ungelesener Kanal"
 
 #: components/app/interface/settings/user/Keybinds.tsx
-msgid "On the message under the pointer or with focus."
-msgstr "Auf der Nachricht unter dem Zeiger oder mit dem Fokus."
-
-#: components/app/interface/settings/user/Keybinds.tsx
 msgid "Open the emoji picker"
 msgstr "Emoji-Auswahl öffnen"
 
@@ -31332,3 +31328,15 @@ msgstr "Antwort an {name}"
 #: components/app/interface/channels/text/useMessageKeys.ts
 msgid "The text could not be copied."
 msgstr "Der Text ließ sich nicht kopieren."
+
+#: components/modal/modals/QuickSwitcher.tsx
+msgid "{RESULT_LIMIT}+ results"
+msgstr "{RESULT_LIMIT}+ Ergebnisse"
+
+#: components/modal/modals/QuickSwitcher.tsx
+msgid "You can't open this channel any more."
+msgstr "Du kannst diesen Kanal nicht mehr öffnen."
+
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "Your talk key holds these keys while talking from other apps is on."
+msgstr "Deine Sprechtaste belegt diese Tasten, solange Sprechen aus anderen Apps an ist."

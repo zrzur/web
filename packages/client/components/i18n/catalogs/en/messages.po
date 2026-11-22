@@ -31212,10 +31212,6 @@ msgid "Next unread channel"
 msgstr "Next unread channel"
 
 #: components/app/interface/settings/user/Keybinds.tsx
-msgid "On the message under the pointer or with focus."
-msgstr "On the message under the pointer or with focus."
-
-#: components/app/interface/settings/user/Keybinds.tsx
 msgid "Open the emoji picker"
 msgstr "Open the emoji picker"
 
@@ -31335,3 +31331,15 @@ msgstr "Replying to {name}"
 #: components/app/interface/channels/text/useMessageKeys.ts
 msgid "The text could not be copied."
 msgstr "The text could not be copied."
+
+#: components/modal/modals/QuickSwitcher.tsx
+msgid "{RESULT_LIMIT}+ results"
+msgstr "{RESULT_LIMIT}+ results"
+
+#: components/modal/modals/QuickSwitcher.tsx
+msgid "You can't open this channel any more."
+msgstr "You can't open this channel any more."
+
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "Your talk key holds these keys while talking from other apps is on."
+msgstr "Your talk key holds these keys while talking from other apps is on."
