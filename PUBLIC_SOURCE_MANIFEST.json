@@ -6946,8 +6946,8 @@
     },
     {
       "path": "packages/client/components/ui/components/features/messaging/elements/VoiceMessage.tsx",
-      "sha256": "a51a6cbb24d6c8f530b282fc20d9a2b560d52838c68c4a2585a8a6e6d233c873",
-      "bytes": 6820,
+      "sha256": "4977db1f28c5de078f0cc0ba66c93b9b4005db6311452984860495d7bb1e5115",
+      "bytes": 7335,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -6994,14 +6994,14 @@
     },
     {
       "path": "packages/client/components/ui/components/features/messaging/elements/voicePlayback.test.ts",
-      "sha256": "4875f3a1f136655865ae780255bd709a5b4f1e8f1534381d63d3f2999c093b92",
-      "bytes": 5752,
+      "sha256": "745002c92e5bdabcdd3572960d40ad3b21d3acd6af00d1088806c315de70ee1a",
+      "bytes": 6487,
       "category": "synthetic-test-source-or-fixture"
     },
     {
       "path": "packages/client/components/ui/components/features/messaging/elements/voicePlayback.ts",
-      "sha256": "d23be18dd755b8b19bf4032fecd942de554b28042df4dc979be7ef4f6bdb0d5c",
-      "bytes": 6829,
+      "sha256": "d4cc19155f94276a85bead3a2a951f8dcc4d6e01fe218738fa24826bde135711",
+      "bytes": 7454,
       "category": "product-source-or-build-manifest"
     },
     {
