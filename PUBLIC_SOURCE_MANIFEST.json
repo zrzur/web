@@ -262,8 +262,8 @@
     },
     {
       "path": "CHANGELOG.md",
-      "sha256": "e1129b48d0979f633dbf5e9d85ec76f5da3853802b4dbc83486d4ab52cc3b8d4",
-      "bytes": 195842,
+      "sha256": "d96a6bb39c4307016dac6448203ee290cb049504b86d06e77efc97c36576ef20",
+      "bytes": 196675,
       "category": "public-documentation"
     },
     {
@@ -3418,14 +3418,14 @@
     },
     {
       "path": "packages/client/components/common/lib/lazyPart.dom.test.tsx",
-      "sha256": "7d664cef55d767b714a605728918a1ba8952c0738d0b413d2d24f0f507b9e389",
-      "bytes": 3846,
+      "sha256": "7f6ee25b4c35e6f4cda1de1ae83b6fc7460ed565c43cbd62ea32306efc0e0576",
+      "bytes": 7557,
       "category": "synthetic-test-source-or-fixture"
     },
     {
       "path": "packages/client/components/common/lib/lazyPart.ts",
-      "sha256": "3f0f15e3096074071f4d7acd2143c6d529168bd56ff4305e55fdb7f5dfa9877e",
-      "bytes": 2679,
+      "sha256": "65b9c3fc9f5050cc542e49ac4fe2dac0e509a8c84f92724fd0eaed54f2049a0a",
+      "bytes": 5329,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -3580,8 +3580,8 @@
     },
     {
       "path": "packages/client/components/i18n/catalogs/ar/messages.po",
-      "sha256": "e373572caa80abda89406a33626fb2f15f5ff68e47e14852b434e19510bae442",
-      "bytes": 1255577,
+      "sha256": "ef23cdf053be913835ce2ccef5029ff5bbf41e6495adc149d69fabecdf3bca0b",
+      "bytes": 1255758,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -3724,8 +3724,8 @@
     },
     {
       "path": "packages/client/components/i18n/catalogs/de/messages.po",
-      "sha256": "8fd3adc7ac9a2b14600fcc7dee24be63cf4c135fb1cc39070cabf1bcd4cc7dfb",
-      "bytes": 1160277,
+      "sha256": "73e5d707337bf83782bd4f4c2e18d267f7b8117ffbb18388590cd8febe7e4e3d",
+      "bytes": 1160457,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -3760,8 +3760,8 @@
     },
     {
       "path": "packages/client/components/i18n/catalogs/en/messages.po",
-      "sha256": "d3b32c6fd3a1216998b3a86409e7e155ff9c6a311de1f4e68d96ac490f649d6b",
-      "bytes": 1117448,
+      "sha256": "3f32e027035273eedaf96c6fe9419404d62fd5224b5a66065b3ac3b2c8e46d58",
+      "bytes": 1117602,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -4756,14 +4756,20 @@
     },
     {
       "path": "packages/client/components/modal/controller.ts",
-      "sha256": "213d40926d8422dcd31aab10b86dc01138b509044304192e3d8913d38632a40c",
-      "bytes": 3464,
+      "sha256": "1e86e6d8ec479c23d810931d6dec7fd2b747a9f0e64e48af13a396b5df5ebac5",
+      "bytes": 3895,
       "category": "product-source-or-build-manifest"
     },
     {
+      "path": "packages/client/components/modal/discard.test.ts",
+      "sha256": "90446e3da0c4389040539604f3926e6075e2d127d838860983cf4079d901681d",
+      "bytes": 1044,
+      "category": "synthetic-test-source-or-fixture"
+    },
+    {
       "path": "packages/client/components/modal/index.tsx",
-      "sha256": "e8c7d34e110357cc4de62ebd56c7779b9cdf50a57f72feec824d036a6b9898e7",
-      "bytes": 4303,
+      "sha256": "70adf89b89f83c5f15ee14ca5386a281eb311360ec4b138ba2c4014594e46e19",
+      "bytes": 5434,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -7197,9 +7203,15 @@
       "category": "synthetic-test-source-or-fixture"
     },
     {
+      "path": "packages/client/components/ui/components/features/profiles/badges/BadgeGlyph.retry.dom.test.tsx",
+      "sha256": "06c690e61414dd93d6e458040d72409927aff1a6154edc4dab64e3302944c97e",
+      "bytes": 877,
+      "category": "synthetic-test-source-or-fixture"
+    },
+    {
       "path": "packages/client/components/ui/components/features/profiles/badges/BadgeGlyph.tsx",
-      "sha256": "44b28d2809afab05c179193c6ec545c7cf5257c80cb6faae786bce14e3e5bc03",
-      "bytes": 23910,
+      "sha256": "a21f8877c34623694fc7531e98fc03a203ff802693fc0f96a1e8f4377d13d36d",
+      "bytes": 24051,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -8074,14 +8086,14 @@
     },
     {
       "path": "packages/client/components/ui/components/utils/lazyRetry.dom.test.tsx",
-      "sha256": "8cefc975140668b520a0b6239f2c5e90b56747f812100a91959289d0166c1d17",
-      "bytes": 4086,
+      "sha256": "33e21bed90bbba48402e7f43aa30e8a6879d09580b1968e6e825fe5f299e588a",
+      "bytes": 6343,
       "category": "synthetic-test-source-or-fixture"
     },
     {
       "path": "packages/client/components/ui/components/utils/lazyRetry.ts",
-      "sha256": "7ff70b96b15b124541c41310b322901540dc1d8aabc030920f49b84a43718407",
-      "bytes": 2059,
+      "sha256": "2709d90cc0b26353cb31a085f419feb7bbb839e4c28e752fb6a67715e1aa2cfa",
+      "bytes": 2388,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -41769,6 +41781,12 @@
       "category": "product-source-or-build-manifest"
     },
     {
+      "path": "packages/client/scripts/i18n/ui-2026112201.json",
+      "sha256": "4b285ee2514b377108d8a6b14185466a6b215c300f9b66f9e9ffce66721f7660",
+      "bytes": 240,
+      "category": "product-source-or-build-manifest"
+    },
+    {
       "path": "packages/client/scripts/i18n/ui-210.json",
       "sha256": "a2000336a3928f21687a94a1262b2adbd34f017573f3d1b9b342b3ca93df6d09",
       "bytes": 644,
@@ -42556,7 +42574,7 @@
     },
     {
       "path": "packages/client/src/Interface.tsx",
-      "sha256": "20ecefa9661ecd6e7ec99be9f8243f82ecf9012511d7b6e48777df041787e179",
+      "sha256": "bb19e019fd0499fe0a56c3cc3e491ef03cf7e3b659903e0f2b3f5e45dddd0cdf",
       "bytes": 14051,
       "category": "product-source-or-build-manifest"
     },
@@ -44398,14 +44416,14 @@
     },
     {
       "path": "packages/client/src/runtimeAssets.test.ts",
-      "sha256": "2eaf8e74a181cc2489a91de5a27fc0b12be24d55d8d09b57a479a82fac25438f",
-      "bytes": 5010,
+      "sha256": "081b3cb6ede591e0ff72debba86468cf1c8f618ec114e810b3e1de5c1c566bec",
+      "bytes": 6373,
       "category": "synthetic-test-source-or-fixture"
     },
     {
       "path": "packages/client/src/runtimeAssets.ts",
-      "sha256": "17bb794b579a32a35e28c2336bd3ea7e188ecf352fd8c8aaad77d1f3da72fb74",
-      "bytes": 2976,
+      "sha256": "6032e77a0252b691d6ed2df2f5edbcf8404448b70fb44083946659442646acc0",
+      "bytes": 3884,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -44416,8 +44434,8 @@
     },
     {
       "path": "packages/client/src/serviceWorker.ts",
-      "sha256": "5d16d19c05709af9f56b21f279985e45a75c44b3113f787b29c6748aa6cc622f",
-      "bytes": 7326,
+      "sha256": "b4bb3581baeb889592142d29ff9397eac841ba9475dac82d0bac0ab0ea7028a6",
+      "bytes": 7352,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -44458,14 +44476,14 @@
     },
     {
       "path": "packages/client/src/staleBuild.test.ts",
-      "sha256": "fec1b0bcc647e6445aaa570ec02ece3defd5679c94f27a824f14608a2b821c8b",
-      "bytes": 4502,
+      "sha256": "37ae83ef30fae9a4554c7131a98429e62fede5f4d699e83107f3a9f5492b5a3e",
+      "bytes": 5996,
       "category": "synthetic-test-source-or-fixture"
     },
     {
       "path": "packages/client/src/staleBuild.ts",
-      "sha256": "601c8a7b4d7f89878d9a0df115bb4548ed92d406e2e2732db290d0e9598d8f4b",
-      "bytes": 4491,
+      "sha256": "bc653d8dc2392724a2f5066213fe4806d59709093d65a2a74718f1135b35cd2c",
+      "bytes": 5264,
       "category": "product-source-or-build-manifest"
     },
     {
