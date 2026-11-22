@@ -29,9 +29,18 @@ export const TOUCH_DRAG_PX = 5;
  */
 export const TOUCH_HOLD_EVENT = "touchhold";
 
-/** A finger or a pen (an Apple Pencil on iPad); never a mouse */
+/**
+ * A finger, or a pen on a touch screen (an Apple Pencil on iPad); never a
+ * mouse. A pen on a desktop drawing tablet (a fine pointer) keeps the
+ * mouse's instant drag.
+ */
 export function isTouchLike(e: PointerEvent) {
-  return e.pointerType === "touch" || e.pointerType === "pen";
+  if (e.pointerType === "touch") return true;
+  return (
+    e.pointerType === "pen" &&
+    typeof matchMedia === "function" &&
+    matchMedia("(pointer: coarse)").matches
+  );
 }
 
 /** How long to wait for the click that follows a finger's press */

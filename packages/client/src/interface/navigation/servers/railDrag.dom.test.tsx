@@ -310,7 +310,27 @@ describe("rail drag with a finger", () => {
 });
 
 describe("rail drag with a pen", () => {
+  const coarse = (on: boolean) => {
+    window.matchMedia = ((query: string) => ({
+      matches: on && query.includes("coarse"),
+    })) as unknown as typeof window.matchMedia;
+  };
+
+  afterEach(() => coarse(false));
+
+  it("a pen on a drawing tablet drags at once, like a mouse", () => {
+    coarse(false);
+    const { drag, rows, onMove } = mount();
+    press(drag, rows.get("c")!, "c", 36, 130, "pen");
+    window.dispatchEvent(pointer("pointermove", 36, 120, "pen"));
+    window.dispatchEvent(pointer("pointermove", 36, 4, "pen"));
+    expect(drag.dragging()).toBe("c");
+    window.dispatchEvent(pointer("pointerup", 36, 4, "pen"));
+    expect(onMove).toHaveBeenCalledWith("c", "a", undefined);
+  });
+
   it("an Apple Pencil rests to lift, like a finger", () => {
+    coarse(true);
     const { drag, rows, onMove } = mount();
     press(drag, rows.get("c")!, "c", 36, 130, "pen");
     // a pen that moves at once scrolls; resting lifts
