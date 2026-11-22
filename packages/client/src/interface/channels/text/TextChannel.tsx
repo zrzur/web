@@ -274,16 +274,18 @@ export function TextChannel(props: ChannelPageProps) {
     ),
   );
 
-  // Phones: search, pins and the channel's details are whole screens over
-  // the conversation. Going to a message from one of them (a result, a pin,
-  // a picture) shows the conversation, or the message lands out of sight.
+  // Phones and tablets: search, pins, members and the channel's details lie
+  // over the conversation (the whole screen on phones, a side panel on
+  // tablets). Going to a message from one of them (a result, a pin, a
+  // picture) shows the conversation, or the message lands under the panel.
+  // On desktop the panel sits beside the conversation and stays.
   createEffect(
     on(
       highlightMessageId,
       (messageId) => {
         if (
           messageId &&
-          layout() === "phone" &&
+          overlaySidebar() &&
           sidebarState().state !== "default"
         ) {
           setSidebarState({ state: "default" });
