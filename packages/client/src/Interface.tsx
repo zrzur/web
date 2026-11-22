@@ -87,11 +87,13 @@ const Interface = (props: { children?: JSX.Element }) => {
         openDialogAt(dialog, client, { openModal, showError });
       } else if (typeof e.to === "string") {
         state.layout.setLastActivePath(e.to);
-        // recent places for the quick switcher (Ctrl+K)
-        notePlace(e.to, client()?.user?.id);
       }
     }
   });
+
+  // recent places for the quick switcher (Ctrl+K): every page shown, the
+  // first one after a load included
+  createEffect(() => notePlace(location.pathname, client()?.user?.id));
 
   createEffect(() => {
     if (!isLoggedIn()) {
