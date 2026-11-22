@@ -426,7 +426,8 @@ export function MessageContainer(props: Props) {
         row.toggleAttribute(
           "data-toolbar-below",
           !!list &&
-            row.getBoundingClientRect().top - list.getBoundingClientRect().top <
+            row.getBoundingClientRect().top -
+              list.getBoundingClientRect().top <
               TOOLBAR_ROOM,
         );
         setWanted(true);
