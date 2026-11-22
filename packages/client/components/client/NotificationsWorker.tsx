@@ -262,7 +262,10 @@ export function NotificationsWorker() {
   // open: the worker brings the page forward and asks it to go there
   function onWorkerMessage(event: MessageEvent) {
     const path = openFromNotification(event.data);
-    if (path) navigate(path);
+    if (!path) return;
+    navigate(path);
+    // tell the worker it was handled, so it opens no second window
+    event.ports[0]?.postMessage("opened");
   }
 
   onMount(() =>

@@ -47,7 +47,7 @@ export function useNotifications() {
       hasServiceWorker: supportsServiceWorker,
     });
     if (repaired !== settings.desktopNotificationsState)
-      settings.resetNotificationsState();
+      settings.resetDesktopNotificationsState();
 
     if (
       settings.desktopNotificationsState === "default" ||

@@ -37,6 +37,9 @@ import {
 
 declare let self: ServiceWorkerGlobalScope;
 
+/** How long an open page has to say it opened a tapped notification */
+const OPEN_ANSWER_MS = 1500;
+
 interface ChannelPartial {
   channel_type: string;
   name?: string;
@@ -103,10 +106,24 @@ self.addEventListener("notificationclick", (event) => {
           const page = pageForNotification(clients as WindowClient[]);
           if (!page) return self.clients.openWindow(target.href);
           await page.focus().catch(() => page);
-          page.postMessage({
-            type: NOTIFICATION_OPEN,
-            path: target.pathname + target.search + target.hash,
+          // a page of an older build does not know the message: without an
+          // answer in time, a new window opens there as before
+          const answered = await new Promise<boolean>((done) => {
+            const channel = new MessageChannel();
+            const timer = setTimeout(() => done(false), OPEN_ANSWER_MS);
+            channel.port1.onmessage = () => {
+              clearTimeout(timer);
+              done(true);
+            };
+            page.postMessage(
+              {
+                type: NOTIFICATION_OPEN,
+                path: target.pathname + target.search + target.hash,
+              },
+              [channel.port2],
+            );
           });
+          if (!answered) return self.clients.openWindow(target.href);
         }),
     );
   }
