@@ -386,5 +386,8 @@ const MentionCount = styled("span", {
     fontSize: "12px",
     lineHeight: "16px",
     fontVariantNumeric: "tabular-nums",
+    // "@2" reads the same way in Arabic
+    direction: "ltr",
+    unicodeBidi: "isolate",
   },
 });
