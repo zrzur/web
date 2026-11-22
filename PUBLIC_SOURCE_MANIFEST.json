@@ -262,8 +262,8 @@
     },
     {
       "path": "CHANGELOG.md",
-      "sha256": "667977342488280dd328b55bc7c9521a93583f842c2fc100265334463fc6127a",
-      "bytes": 196508,
+      "sha256": "fedcdd2b9fb93c9328ed4b345714248d35c6c243cd9334d66e6237a730743639",
+      "bytes": 197684,
       "category": "public-documentation"
     },
     {
@@ -2170,8 +2170,8 @@
     },
     {
       "path": "packages/client/components/app/interface/settings/user/activity/ActivitySettings.tsx",
-      "sha256": "506a685461ae48863c58fa7c480e1d42f26444f3d95761bea29fb446227219bf",
-      "bytes": 23638,
+      "sha256": "8ccfbd5e74b19688bfc7f69860d5666f1682eedac01137062d00b32bf218b3fe",
+      "bytes": 31045,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -3123,9 +3123,15 @@
       "category": "product-source-or-build-manifest"
     },
     {
+      "path": "packages/client/components/client/ActivityIntro.tsx",
+      "sha256": "66e73924f0dd1eb8baa8ab06d45dbbe3dcfe9f70f1722ad2856c5c6e27c69de3",
+      "bytes": 3189,
+      "category": "product-source-or-build-manifest"
+    },
+    {
       "path": "packages/client/components/client/ActivityWorker.tsx",
-      "sha256": "d7768fc3f613ff9113dee8d58e3c8a70209800fb2e69668893b58299085e8ce6",
-      "bytes": 4785,
+      "sha256": "ba6322d9dddcf270e4165a724eae28b585ddb01e1fca3ca99132730c77b26468",
+      "bytes": 6723,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -3165,15 +3171,27 @@
       "category": "product-source-or-build-manifest"
     },
     {
+      "path": "packages/client/components/client/activityIntroRule.test.ts",
+      "sha256": "582bd37c6f4f807afba5e0ac8d3d6ae832408cb981e011c7ba94372ef51e9ba8",
+      "bytes": 804,
+      "category": "synthetic-test-source-or-fixture"
+    },
+    {
+      "path": "packages/client/components/client/activityIntroRule.ts",
+      "sha256": "a2fac8cd6cefc3a74614860fcf2a5efe2dbecc5e07573202d7da90f4af972278",
+      "bytes": 453,
+      "category": "product-source-or-build-manifest"
+    },
+    {
       "path": "packages/client/components/client/activitySender.test.ts",
-      "sha256": "2d669e6b1e592fdcd3b4e54ac31918ce74a33cb1585ae066efee99542b8bbda5",
-      "bytes": 3708,
+      "sha256": "9745205a1bf9e94b52a2772bcd36ed829a98c917838e5d97a834311c9cd7c1ae",
+      "bytes": 4777,
       "category": "synthetic-test-source-or-fixture"
     },
     {
       "path": "packages/client/components/client/activitySender.ts",
-      "sha256": "a29b617a123df54e3b7a1194981497e7e8f2530cf66b6e6c18934475288ab1f5",
-      "bytes": 2539,
+      "sha256": "d4b76fe8ae18ff1a0a21a11cac87981356e46b2ddfa51bfccb8d3a121e5bf703",
+      "bytes": 3594,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -3592,8 +3610,8 @@
     },
     {
       "path": "packages/client/components/i18n/catalogs/ar/messages.po",
-      "sha256": "3b852ef8911eceee5e26e79418b039c72f5612a08adb293c34f700d516dbb212",
-      "bytes": 1266178,
+      "sha256": "bc79a3d8210c81e444dd40845a4d9663c66a96a5c3700574da38479863089030",
+      "bytes": 1273764,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -3736,8 +3754,8 @@
     },
     {
       "path": "packages/client/components/i18n/catalogs/de/messages.po",
-      "sha256": "181b45777c6069b4bd2f00d5d8904e79d5a9eedfad6a7107ec31839f4f3a2a4d",
-      "bytes": 1169853,
+      "sha256": "01ec7f3fb5f1d62fc3dbf6b8bb37678f6c0c31ccd41707f41528abf367ba9481",
+      "bytes": 1176513,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -3772,8 +3790,8 @@
     },
     {
       "path": "packages/client/components/i18n/catalogs/en/messages.po",
-      "sha256": "91abca6b3fa3a4c13c6c62f9fd5d5121b8440f7905b2dd253f0ab032cf82f90c",
-      "bytes": 1126705,
+      "sha256": "4be792bc96cf8512765b782e58e55355d7994a24231775ac31d7c3735c694d3c",
+      "bytes": 1132924,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -4368,6 +4386,12 @@
       "path": "packages/client/components/i18n/translatedErrorUse.test.ts",
       "sha256": "85bb8dca84896133a3c85af02a41062ee11d95fd1698674d9093ace8404291ea",
       "bytes": 1231,
+      "category": "synthetic-test-source-or-fixture"
+    },
+    {
+      "path": "packages/client/components/i18n/translationCollisions.test.ts",
+      "sha256": "6da9bf463e34e5358d6be501ec392f1ebe1a0590e676e63b974c29a7397f6693",
+      "bytes": 3253,
       "category": "synthetic-test-source-or-fixture"
     },
     {
@@ -6658,20 +6682,20 @@
     },
     {
       "path": "packages/client/components/ui/components/features/activity/ProfileActivity.tsx",
-      "sha256": "9465709a80133a6e2b655bdf1cbcd7f2fbc4b06e224063a94a787212ec168b81",
-      "bytes": 8607,
+      "sha256": "8e20670ff0b1ef570678e6f384cbaaada4f5bce7af4dfbca43b3d56163188c74",
+      "bytes": 8293,
       "category": "product-source-or-build-manifest"
     },
     {
       "path": "packages/client/components/ui/components/features/activity/activityText.test.ts",
-      "sha256": "076e71010d4d70bfac2b66a644ed69bffa908c969e7f75d223d12e9c876880ab",
-      "bytes": 3898,
+      "sha256": "9176b0bc9bbdc323b8a4b04a7cf35b32d7a5943a8dcc348e9a46e1f853debf77",
+      "bytes": 3990,
       "category": "synthetic-test-source-or-fixture"
     },
     {
       "path": "packages/client/components/ui/components/features/activity/activityText.ts",
-      "sha256": "ea3ead7c6b4d040e74b26163673b90c3c565bcbd68416b4100bbba52534137e6",
-      "bytes": 4598,
+      "sha256": "8adfb6d43890327c5475d5b82dab1df458de8061af31195cdc824fac822e0ffc",
+      "bytes": 4262,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -41812,8 +41836,8 @@
     },
     {
       "path": "packages/client/scripts/i18n/ui-2026112201.json",
-      "sha256": "279228d3444c5a43b8c9d8ea0efc343bfcf4870e6260ab21a55ade5a37939f5f",
-      "bytes": 9666,
+      "sha256": "96c54aafd19140ac2c4bc097437452b90aa5f0af363e24cbdb6e4750686f597e",
+      "bytes": 15068,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -42610,8 +42634,8 @@
     },
     {
       "path": "packages/client/src/Interface.tsx",
-      "sha256": "22e31ebbd3fda43585f97449a0a52642982198cded5b83ed656176628ec6dc42",
-      "bytes": 14098,
+      "sha256": "921f87b347bbd56fcd6382d76ff2c4ab4760ac1c110a086dbb0cab28cb39398f",
+      "bytes": 14188,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -45276,7 +45300,7 @@
   "submodules": [
     {
       "path": "packages/stoat.js",
-      "commit": "9560242c7d13bcfe2a7fc83cef91630a4c12302a"
+      "commit": "1425c8929ef455b9ce5f5531c252f86b426599f5"
     }
   ]
 }
