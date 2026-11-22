@@ -27,6 +27,7 @@ import {
 } from "solid-js";
 import { Portal } from "solid-js/web";
 import { cva } from "styled-system/css";
+import { editorHooks } from "../../../texteditor/editorHooks";
 import { EmojiPicker } from "./EmojiPicker";
 import { mediaPickerTrigger } from "./mediaPickerTrigger";
 import "./picker.css";
@@ -121,15 +122,20 @@ export function CompositionMediaPicker(props: Props) {
       })}
       <Show when={show()}>
         <Portal mount={document.getElementById("floating")!}>
-          <Picker
-            channel={props.channel}
-            anchor={() => altRef() || anchor()}
-            trigger={trigger}
-            show={show}
-            setShow={setShow}
-            placement={openPlacement() ?? props.placement}
-            add={props.add}
-          />
+          {/* placed once when it opens: a new placement opens a new one */}
+          <Show when={openPlacement() ?? props.placement ?? "top-end"} keyed>
+            {(placement) => (
+              <Picker
+                channel={props.channel}
+                anchor={() => altRef() || anchor()}
+                trigger={trigger}
+                show={show}
+                setShow={setShow}
+                placement={placement}
+                add={props.add}
+              />
+            )}
+          </Show>
         </Portal>
       </Show>
     </CompositionMediaPickerContext.Provider>
@@ -213,10 +219,15 @@ function Picker(
       const text = (target as Element).closest?.(
         "[data-composer-box] .cm-editor",
       );
+      // where the finger is in the text, measured before the panel closes
+      // and the text moves down
+      const hooks = text && phone() ? editorHooks.get(text) : undefined;
+      const pos = hooks?.posAt(e.clientX, e.clientY) ?? null;
       props.setShow(undefined);
       if (text && phone()) {
         e.preventDefault();
-        text.querySelector<HTMLElement>(".cm-content")?.focus();
+        if (hooks) hooks.focusAt(pos);
+        else text.querySelector<HTMLElement>(".cm-content")?.focus();
       }
     }
   }

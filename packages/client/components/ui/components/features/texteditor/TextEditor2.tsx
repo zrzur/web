@@ -17,6 +17,7 @@ import { smartLineWrapping } from "./codeMirrorLineWrap";
 import { markPlugins } from "./codeMirrorMarks";
 import { markdownTheme } from "./codeMirrorTheme";
 import { codeMirrorWidgets } from "./codeMirrorWidgets";
+import { editorHooks } from "./editorHooks";
 
 interface Props {
   /**
@@ -209,6 +210,16 @@ export function TextEditor2(props: Props) {
   // it is destroyed; without this every editor that ever opened stayed in
   // memory together with the channel page around it
   onCleanup(() => view.destroy());
+
+  // the docked emoji panel closes on a tap into the text and puts the caret
+  // where the finger was (editorHooks: no CodeMirror import there)
+  editorHooks.set(view.dom, {
+    posAt: (x, y) => view.posAtCoords({ x, y }),
+    focusAt: (pos) => {
+      view.focus();
+      if (pos != null) view.dispatch({ selection: { anchor: pos } });
+    },
+  });
 
   // Apply shared scrollbar styles from the exported scrollable style classes.
   const scroller = codeMirror.querySelector<HTMLDivElement>(".cm-scroller");

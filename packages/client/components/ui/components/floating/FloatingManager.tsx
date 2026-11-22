@@ -217,7 +217,11 @@ function Floating(props: FloatingElement & { mouseX: number; mouseY: number }) {
 
     e.stopPropagation();
     props.hide();
-    props.element.focus({ preventScroll: true });
+    // a wrapper with the button inside (the composer's "+"): focus the button
+    (
+      (props.element.querySelector?.("button") as HTMLElement | null) ??
+      props.element
+    ).focus({ preventScroll: true });
   }
 
   if (props.config().contextMenu || props.config().userCard) {
