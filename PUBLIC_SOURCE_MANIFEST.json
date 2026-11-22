@@ -7456,14 +7456,14 @@
     },
     {
       "path": "packages/client/components/ui/components/features/texteditor/TextEditor2.dom.test.tsx",
-      "sha256": "1a516c746f66ab490a85478c419dd5a8b3212b79a989edfa8bd05002090e716c",
-      "bytes": 5127,
+      "sha256": "bb5f910b246165ecf7cfca48f81a421bb703626a6cc38c457e557054b23b30df",
+      "bytes": 5571,
       "category": "synthetic-test-source-or-fixture"
     },
     {
       "path": "packages/client/components/ui/components/features/texteditor/TextEditor2.tsx",
-      "sha256": "e471424d61ad29a52a925303f22d77a966d2d196bd18727955c4f72eb7d9d80c",
-      "bytes": 11205,
+      "sha256": "ba906baae848f0c7549f7445352899b5a959ea95eea306d7563c6cd648b5ce2b",
+      "bytes": 11246,
       "category": "product-source-or-build-manifest"
     },
     {
