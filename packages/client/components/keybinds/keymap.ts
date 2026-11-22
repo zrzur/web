@@ -11,6 +11,10 @@
  * Mac still works on Windows. Written short as a table key: "MS:KeyM" is
  * Ctrl/Cmd+Shift+M (M mod, C Mac Control, S Shift, A Alt).
  *
+ * Each system has its own full set: macOS, Windows and Linux. A default is
+ * written "windows|mac|linux"; an empty or missing part is the Windows one.
+ * Option is the Mac's Alt key (the same `altKey` flag).
+ *
  * Every key press is one `Map.get`: no scan over the list of shortcuts.
  */
 
@@ -22,6 +26,25 @@ export type Combo = {
   alt?: boolean;
 };
 
+/** The system whose conventions and reserved keys apply */
+export type Platform = "mac" | "windows" | "linux";
+
+/**
+ * A system: one of the three, or the older form `true` = Mac,
+ * `false` = Windows (tests and callers that only care about Command)
+ */
+export type Sys = Platform | boolean;
+
+/** The system a `Sys` stands for */
+export function platformOf(sys: Sys): Platform {
+  return sys === true ? "mac" : sys === false ? "windows" : sys;
+}
+
+/** Whether Command takes the place of Ctrl on this system */
+export function macOf(sys: Sys): boolean {
+  return sys === true || sys === "mac";
+}
+
 export type ShortcutId =
   | "toggle_mute"
   | "toggle_deafen"
@@ -30,6 +53,8 @@ export type ShortcutId =
   | "navigation_channel_down"
   | "navigation_server_up"
   | "navigation_server_down"
+  | "navigation_unread_up"
+  | "navigation_unread_down"
   | "chat_mark_server_as_read"
   | "open_events"
   | "toggle_streamer"
@@ -37,14 +62,21 @@ export type ShortcutId =
   | "view_saved"
   | "view_reminders"
   | "save_clip"
-  | "open_shortcuts";
+  | "open_shortcuts"
+  | "upload_file"
+  | "open_emoji_picker"
+  | "search_channel"
+  | "view_mentions"
+  | "leave_call";
 
 export type CustomCombos = Partial<Record<ShortcutId, Combo>>;
 
 /**
- * Defaults as table keys, "other|mac" where a Mac differs. Not Shift+7 for
- * the poll (it types "/" on German, Spanish and Nordic layouts); no browser
- * uses Ctrl+Shift+L, and plugins can't take it (RESERVED_KEYS).
+ * Defaults as table keys, "windows|mac|linux" where a system differs. Not
+ * Shift+7 for the poll (it types "/" on German, Spanish and Nordic
+ * layouts); no browser uses Ctrl+Shift+L, and plugins can't take it
+ * (RESERVED_KEYS). Every default is checked against the keys each system
+ * and browser keep (keymapRules.test.ts).
  */
 export const DEFAULTS: Record<ShortcutId, string> = {
   toggle_mute: "MS:KeyM",
@@ -52,8 +84,11 @@ export const DEFAULTS: Record<ShortcutId, string> = {
   create_poll: "MS:Digit8",
   navigation_channel_up: "A:ArrowUp",
   navigation_channel_down: "A:ArrowDown",
-  navigation_server_up: "MA:ArrowUp|CA:ArrowUp",
-  navigation_server_down: "MA:ArrowDown|CA:ArrowDown",
+  // Linux: Ctrl+Alt+arrows switch workspaces on GNOME, KDE and others
+  navigation_server_up: "MA:ArrowUp||A:PageUp",
+  navigation_server_down: "MA:ArrowDown||A:PageDown",
+  navigation_unread_up: "AS:ArrowUp",
+  navigation_unread_down: "AS:ArrowDown",
   chat_mark_server_as_read: "S:Escape",
   open_events: "MS:Digit9",
   toggle_streamer: "MS:KeyL",
@@ -64,6 +99,13 @@ export const DEFAULTS: Record<ShortcutId, string> = {
   view_reminders: "MS:Digit5|MC:KeyR",
   save_clip: "MS:Digit3|MC:KeyK",
   open_shortcuts: "M:Slash",
+  // Linux: Ctrl+Shift+U starts a Unicode character in IBus (GNOME)
+  upload_file: "MS:KeyU||MA:KeyU",
+  open_emoji_picker: "M:KeyE",
+  search_channel: "M:KeyF",
+  // not Ctrl+I: that is italic in the message box
+  view_mentions: "MS:Digit2|MC:KeyI",
+  leave_call: "MS:KeyH",
 };
 
 /** Shortcuts that can be changed, in the order the shortcuts screen shows them */
@@ -81,18 +123,22 @@ function parse(key: string): Combo {
 }
 
 /** The combination a shortcut has when nobody changed it */
-export function defaultCombo(id: ShortcutId, mac: boolean): Combo {
-  const [other, onMac] = DEFAULTS[id].split("|");
-  return parse((mac && onMac) || other);
+export function defaultCombo(id: ShortcutId, sys: Sys): Combo {
+  const [windows, mac, linux] = DEFAULTS[id].split("|");
+  const platform = platformOf(sys);
+  return parse(
+    (platform === "mac" && mac) || (platform === "linux" && linux) || windows,
+  );
 }
 
 /** The same combination with only the fields that are set, for this system */
-export function normalize(combo: Combo, mac: boolean): Combo {
-  return parse(keyOf(combo, mac));
+export function normalize(combo: Combo, sys: Sys): Combo {
+  return parse(keyOf(combo, sys));
 }
 
 /** The table key for a combination on this system */
-export function keyOf(c: Combo, mac: boolean) {
+export function keyOf(c: Combo, sys: Sys) {
+  const mac = macOf(sys);
   const mod = c.mod || (!mac && c.ctrl);
   return `${mod ? "M" : ""}${mac && c.ctrl ? "C" : ""}${c.shift ? "S" : ""}${c.alt ? "A" : ""}:${c.code}`;
 }
@@ -114,7 +160,7 @@ export type Keymap = {
 };
 
 /** The table with every default, for this system */
-export function defaultTable(mac: boolean): Keymap {
+export function defaultTable(mac: Sys): Keymap {
   const byId = {} as Record<ShortcutId, Combo>;
   const byCombo = new Map<string, ShortcutId>();
   for (const id of REMAPPABLE) {
@@ -138,7 +184,8 @@ export type KeyLike = Pick<
 export const MODIFIER_CODE = /^(Control|Meta|Shift|Alt|OS)(Left|Right)?$/;
 
 /** The combination of a key press, or undefined when it can't be one */
-export function eventCombo(event: KeyLike, mac: boolean): Combo | undefined {
+export function eventCombo(event: KeyLike, sys: Sys): Combo | undefined {
+  const mac = macOf(sys);
   // the Windows key belongs to the system
   if (!event.code || MODIFIER_CODE.test(event.code) || (!mac && event.metaKey))
     return;
@@ -163,8 +210,9 @@ export function eventCombo(event: KeyLike, mac: boolean): Combo | undefined {
 export function matchShortcut(
   map: Keymap,
   event: KeyLike,
-  mac: boolean,
+  sys: Sys,
 ): ShortcutId | undefined {
+  const mac = macOf(sys);
   // a character being composed (Chinese, Japanese input) is never a shortcut
   if (event.isComposing) return;
   const combo = eventCombo(event, mac);

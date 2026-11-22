@@ -50,6 +50,7 @@ export function comboLabel(keys: string[], mac: boolean) {
     Shift: "⇧",
     Alt: "⌥",
     Ctrl: "⌃",
+    Delete: "⌦",
   };
   return keys.map((key) =>
     mac ? (macNames[key] ?? key) : key === "Mod" ? "Ctrl" : key,
