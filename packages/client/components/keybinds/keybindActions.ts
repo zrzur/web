@@ -20,6 +20,16 @@ export enum KeybindAction {
   NAVIGATION_SERVER_DOWN = "navigation_server_down",
 
   /**
+   * Navigate to the nearest unread channel above the current one
+   */
+  NAVIGATION_UNREAD_UP = "navigation_unread_up",
+
+  /**
+   * Navigate to the nearest unread channel below the current one
+   */
+  NAVIGATION_UNREAD_DOWN = "navigation_unread_down",
+
+  /**
    * Mark channel as read, jump to the end of conversation, and focus composition
    */
   CHAT_JUMP_END = "chat_jump_end",
@@ -84,6 +94,8 @@ export const ACTION_PRIORITY: KeybindAction[] = [
   KeybindAction.NAVIGATION_SERVER_DOWN,
   KeybindAction.NAVIGATION_CHANNEL_UP,
   KeybindAction.NAVIGATION_CHANNEL_DOWN,
+  KeybindAction.NAVIGATION_UNREAD_UP,
+  KeybindAction.NAVIGATION_UNREAD_DOWN,
 
   // ... all others
   KeybindAction.CHAT_FOCUS_COMPOSITION,

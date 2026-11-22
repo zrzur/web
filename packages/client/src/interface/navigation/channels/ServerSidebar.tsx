@@ -22,6 +22,7 @@ import { useClient } from "@revolt/client";
 import { useDevice } from "@revolt/common";
 import Breakpoint from "@revolt/common/Breakpoint";
 import { KeybindAction, createKeybind } from "@revolt/keybinds";
+import { nextIndex } from "@revolt/keybinds/navigate";
 import { TextWithEmoji } from "@revolt/markdown";
 import { useModals } from "@revolt/modal";
 import {
@@ -262,6 +263,23 @@ export const ServerSidebar = (props: Props) => {
   createKeybind(KeybindAction.NAVIGATION_CHANNEL_DOWN, () =>
     navigateChannel(1),
   );
+
+  /** Opens the nearest unread channel in one direction, wrapping around */
+  const navigateUnread = (step: 1 | -1) => {
+    const channels = visibleChannels();
+    const index = nextIndex(
+      channels.length,
+      channels.findIndex((channel) => channel.id === props.channelId),
+      step,
+      (i) => !!channels[i].unread,
+    );
+    if (index >= 0)
+      navigate(`/server/${props.server.id}/channel/${channels[index].id}`);
+  };
+
+  createKeybind(KeybindAction.NAVIGATION_UNREAD_UP, () => navigateUnread(-1));
+
+  createKeybind(KeybindAction.NAVIGATION_UNREAD_DOWN, () => navigateUnread(1));
 
   createKeybind(KeybindAction.CHAT_MARK_SERVER_AS_READ, () => {
     if (props.server.unread) {

@@ -57,9 +57,8 @@ import {
 
 import { Device, useDevice } from "@revolt/common";
 import { holdStaleReload } from "../../src/staleBuild";
-import { shortcutsPaused } from "../keybinds/active";
+import { devicePlatform, shortcutsPaused } from "../keybinds/active";
 import {
-  isMac,
   isTypingTarget,
   matchGlobalShortcut,
   transmitting,
@@ -71,8 +70,6 @@ import {
   watchAudioSettings,
 } from "./audioQuality";
 import { deviceFallback } from "./callHealth";
-import { type NetworkLevel, weakNetworkSettings } from "./weakNetwork";
-import { watchWeakNetwork } from "./weakNetworkWatch";
 import { InRoom } from "./components/InRoom";
 import { desktopPushToTalk, latchPress } from "./desktopPushToTalk";
 import type { GameKeyAction, GameKeysStatus } from "./gameKeys";
@@ -102,6 +99,8 @@ import {
 } from "./screenShare";
 import { createTalkGate } from "./talkGate";
 import type { VoiceProcessor } from "./VoiceProcessor";
+import { type NetworkLevel, weakNetworkSettings } from "./weakNetwork";
+import { watchWeakNetwork } from "./weakNetworkWatch";
 
 /** The call's audio, with LiveKit (loaded with the first call) */
 const RoomAudio = lazy(() => import("./components/RoomAudio"));
@@ -1634,7 +1633,7 @@ export function VoiceContext(props: { children: JSX.Element }) {
 
   // App-wide shortcuts (listed in Ctrl+/) and push to talk. Physical keys,
   // so they match on every keyboard layout.
-  const mac = isMac();
+  const mac = devicePlatform();
   const inCall = () => voice.state() === "CONNECTED";
   // push to talk is open while the key is held in this window or heard by
   // the desktop app, and for the release delay after it is let go
@@ -1665,6 +1664,14 @@ export function VoiceContext(props: { children: JSX.Element }) {
       if (!inCall()) return;
       event.preventDefault();
       if (!event.repeat) window.dispatchEvent(new Event("zrzur:save-clip"));
+      return;
+    }
+    if (shortcut === "leave_call") {
+      // only while connected; three keys, so it never happens by accident,
+      // and joining again is one click
+      if (!inCall()) return;
+      event.preventDefault();
+      if (!event.repeat) voice.disconnect();
       return;
     }
     if (shortcut === "toggle_soundboard") {
