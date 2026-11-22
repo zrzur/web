@@ -89,7 +89,8 @@ export function ForumChannel(props: ChannelPageProps) {
     const newest = newestActivity(postsOf(client(), props.channel));
     const mark = untrack(() => forumSeen(client(), props.channel));
     if (newest && (!mark || mark.localeCompare(newest) < 0))
-      props.channel.ack(newest).catch(() => undefined);
+      // at once: a reload right after must find the mark on the server
+      props.channel.ack(newest, true).catch(() => undefined);
   });
 
   const tagName = (id: string) =>
