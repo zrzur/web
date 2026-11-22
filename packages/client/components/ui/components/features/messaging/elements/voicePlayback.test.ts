@@ -3,7 +3,9 @@ import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import {
   RELEASE_GRACE_MS,
   liveClips,
+  playFailed,
   resetVoicePlayback,
+  stillIn,
   takeTurn,
   voiceClip,
 } from "./voicePlayback";
@@ -30,6 +32,9 @@ class FakeAudio extends EventTarget {
   }
   removeAttribute(name: string) {
     if (name === "src") this.src = "";
+  }
+  getAttribute(name: string) {
+    return name === "src" ? this.src || null : null;
   }
 }
 
@@ -84,17 +89,63 @@ describe("voice playback", () => {
     expect(again.playing()).toBe(true);
   });
 
-  it("stops a clip that no row shows any more", async () => {
+  it("a playing clip whose row a scroll took away plays on to its end", async () => {
     const clip = voiceClip("a.ogg");
     await clip.toggle();
     clip.release();
 
-    vi.advanceTimersByTime(RELEASE_GRACE_MS - 1);
+    vi.advanceTimersByTime(RELEASE_GRACE_MS * 10);
     expect(made[0].paused).toBe(false);
-    vi.advanceTimersByTime(1);
-    expect(made[0].paused).toBe(true);
-    expect(made[0].src).toBe("");
+    expect(liveClips()).toBe(1);
+
+    // it ends: then it goes after the grace
+    made[0].paused = true;
+    made[0].dispatchEvent(new Event("ended"));
+    vi.advanceTimersByTime(RELEASE_GRACE_MS);
     expect(liveClips()).toBe(0);
+    expect(made[0].src).toBe("");
+  });
+
+  it("a paused clip that no row shows goes after the grace", async () => {
+    const clip = voiceClip("a.ogg");
+    clip.release();
+    vi.advanceTimersByTime(RELEASE_GRACE_MS - 1);
+    expect(liveClips()).toBe(1);
+    vi.advanceTimersByTime(1);
+    expect(liveClips()).toBe(0);
+  });
+
+  it("leaving the conversation stops a playing clip at once", async () => {
+    const clip = voiceClip("a.ogg");
+    await clip.toggle();
+    clip.release({ left: true });
+    expect(made[0].paused).toBe(true);
+    expect(liveClips()).toBe(0);
+  });
+
+  it("a rowless clip paused by another one goes after the grace", async () => {
+    const first = voiceClip("a.ogg");
+    await first.toggle();
+    first.release();
+    const second = voiceClip("b.ogg");
+    await second.toggle();
+    expect(made[0].paused).toBe(true);
+    vi.advanceTimersByTime(RELEASE_GRACE_MS);
+    expect(liveClips()).toBe(1);
+  });
+
+  it("knows when the reader left the channel", () => {
+    expect(stillIn("C1", "/server/S/channel/C1")).toBe(true);
+    expect(stillIn("C1", "/server/S/channel/C1/M9")).toBe(true);
+    expect(stillIn("C1", "/server/S/channel/C2")).toBe(false);
+    expect(stillIn("C1", "/app")).toBe(false);
+    expect(stillIn(undefined, "/app")).toBe(true);
+  });
+
+  it("only real failures of play() count", () => {
+    expect(playFailed(new DOMException("", "AbortError"))).toBe(false);
+    expect(playFailed(new DOMException("", "NotAllowedError"))).toBe(false);
+    expect(playFailed(new DOMException("", "NotSupportedError"))).toBe(true);
   });
 
   it("two rows showing the same file share one element", async () => {
