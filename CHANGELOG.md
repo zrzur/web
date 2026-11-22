@@ -2,6 +2,12 @@
 
 ## Unreleased
 
+### Reorder servers with a finger on tablets and phones (2026-11-22, bug #11)
+
+* **Long press, then drag:** on an iPad (Safari or the installed app), an Android tablet or a phone, rest a finger on a server or folder in the left rail for about a third of a second. It rises a little (and the device ticks where it can); then drag it up or down, into a folder or out of one, and let go. The rail scrolls by itself when you hold the server near its top or bottom. The new order is saved to your account as with the mouse. Before, dragging was switched off on every touch screen.
+* **A long press no longer opens the browser's own menu:** iPadOS showed its link preview ("Open in New Tab") and opened a second page, and the server menu came up at the same time. The rail now keeps the press for itself: no link preview, no text selection, no dragging the icon out. A press that stays still opens the server's menu, as before; starting to drag closes it again.
+* A quick swipe still scrolls the rail, and a tap still opens the server. On a computer nothing changes: a mouse drag reorders, a right-click opens the menu, and middle-click or Ctrl+click opens a server in a new tab.
+
 ### A friend request opens the sender's profile (2026-11-21)
 
 * **From the phone Notifications page:** the sender's picture and the line "… sent you a friend request" are one button (44 px high) that opens their profile. Screen readers hear the sentence they see as its name, then "Open profile" (ar, en, de) as its description. Accept, Decline and Send message are separate buttons and are not touched by it. The page closes first so the profile is not under it; the profile has its own Accept.
