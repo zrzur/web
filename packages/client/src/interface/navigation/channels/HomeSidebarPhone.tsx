@@ -18,7 +18,7 @@ import { Avatar, UserStatus } from "@revolt/ui";
 import { AvatarDecoration } from "@revolt/ui/components/features/profiles/AvatarDecoration";
 import { OfficialLabel } from "@revolt/ui/components/features/profiles/OfficialLabel";
 import { nameStyle } from "@revolt/ui/components/features/profiles/userStyle";
-import { touchHitArea } from "@revolt/ui/components/utils/touchHitArea";
+import { touchHitAreaSolo } from "@revolt/ui/components/utils/touchHitArea";
 import { Icon } from "@revolt/ui/icons/Icon";
 
 import { textMatches } from "@revolt/common/lib/arabicFold";
@@ -86,7 +86,7 @@ export function HomeSidebarPhone(props: Props) {
             />
           </SearchField>
           <ToolButton
-            class={touchHitArea}
+            class={touchHitAreaSolo}
             type="button"
             aria-label={t`Add friend`}
             onClick={() => openModal({ type: "add_friend", client: client() })}
@@ -94,7 +94,7 @@ export function HomeSidebarPhone(props: Props) {
             <Icon name="user-plus" size={22} />
           </ToolButton>
           <ToolButton
-            class={touchHitArea}
+            class={touchHitAreaSolo}
             type="button"
             data-primary
             aria-label={t`Create a new group`}
@@ -400,7 +400,7 @@ const SearchField = styled("label", {
 const ToolButton = styled("button", {
   base: {
     flex: "none",
-    // drawn 36 px; a finger's tap area is 44 (touchHitArea)
+    // drawn 36 px; a finger's tap area is 44 (touchHitAreaSolo)
     width: "36px",
     height: "36px",
     display: "grid",

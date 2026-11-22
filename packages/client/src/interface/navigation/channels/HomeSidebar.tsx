@@ -30,7 +30,10 @@ import {
   typography,
 } from "@revolt/ui";
 import { Symbol } from "@revolt/ui/components/utils/Symbol";
-import { touchHitArea } from "@revolt/ui/components/utils/touchHitArea";
+import {
+  touchHitArea,
+  touchHitAreaSolo,
+} from "@revolt/ui/components/utils/touchHitArea";
 import { Icon } from "@revolt/ui/icons/Icon";
 
 import { eventsEnabled } from "../../events/EventsLink";
@@ -248,7 +251,7 @@ const HomeSidebarWide = (props: Props) => {
               type="button"
               aria-label={t`Create a new group`}
               class={cx(
-                touchHitArea,
+                touchHitAreaSolo,
                 css({
                   cursor: "pointer",
                   border: "none",

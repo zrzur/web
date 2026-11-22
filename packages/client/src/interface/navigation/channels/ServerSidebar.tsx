@@ -1,6 +1,7 @@
 import { VoiceOccupancy } from "@revolt/ui/components/features/voice/VoiceOccupancy";
 import {
   Accessor,
+  ComponentProps,
   JSX,
   Match,
   Show,
@@ -53,7 +54,10 @@ import { ServerStatusBadges } from "@revolt/ui/components/features/profiles/Serv
 import { VoiceChannelPreview } from "@revolt/ui/components/features/voice/VoiceChannelPreview";
 import { createDragHandle } from "@revolt/ui/components/utils/Draggable";
 import { Symbol } from "@revolt/ui/components/utils/Symbol";
-import { touchHitArea } from "@revolt/ui/components/utils/touchHitArea";
+import {
+  touchHitArea,
+  touchHitAreaSolo,
+} from "@revolt/ui/components/utils/touchHitArea";
 
 import { isPrivateCategory } from "@revolt/app/interface/settings/category/category";
 import { chevron_right as MdChevronRight } from "@revolt/ui/icons/legacy";
@@ -539,7 +543,7 @@ function ServerInfo(
           part of its accessible name. Its click reaches the row */}
       <button
         type="button"
-        class={cx(serverMenuButton, touchHitArea)}
+        class={cx(serverMenuButton, touchHitAreaSolo)}
         aria-haspopup="menu"
         aria-expanded={open()}
         aria-label={t`Server menu`}
@@ -1267,7 +1271,7 @@ const SectionHeader = styled("div", {
     },
   },
 });
-const ToolButton = styled("button", {
+const ToolButtonBase = styled("button", {
   base: {
     // phones: not shown. These are the actions a pointer finds on a row; a
     // finger has them in the row's long-press menu (owner, 2026-11-17: they
@@ -1291,21 +1295,14 @@ const ToolButton = styled("button", {
       outline: "2px solid var(--z-focus)",
       outlineOffset: "-2px",
     },
-    "@media (pointer: coarse)": {
-      width: "32px",
-      height: "32px",
-      // a finger's tap area is 44 px (see touchHitArea)
-      position: "relative",
-      isolation: "isolate",
-      "&::after": {
-        content: '""',
-        position: "absolute",
-        zIndex: -1,
-        inset: "calc((32px - var(--z-control-xl)) / 2)",
-      },
-    },
+    "@media (pointer: coarse)": { width: "32px", height: "32px" },
   },
 });
+
+/** Row tools; a finger's tap area is 44 px tall (touchHitArea) */
+function ToolButton(props: ComponentProps<typeof ToolButtonBase>) {
+  return <ToolButtonBase {...props} class={cx(touchHitArea, props.class)} />;
+}
 const ChannelRow = styled("div", {
   base: {
     position: "relative",
