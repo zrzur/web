@@ -1,4 +1,4 @@
-import { createSignal, onCleanup } from "solid-js";
+import { createSignal, onCleanup, onMount } from "solid-js";
 
 import { useLingui } from "@lingui/solid/macro";
 
@@ -6,6 +6,7 @@ import {
   TOUCH_HOLD_MS,
   TOUCH_MENU_MS,
   createTouchHold,
+  isTouchLike,
 } from "@revolt/ui/components/utils/touchHold";
 
 // the rules for a finger live in touchHold, shared with the channel list
@@ -492,6 +493,14 @@ export function createRailDrag(options: {
     hold.dispose();
   });
 
+  // a lifted entry has to stop the page scrolling under the finger: one
+  // non-passive touch move listener on the rail (not one per entry). The
+  // price: a scroll that starts on the rail waits for the page's script.
+  onMount(() => {
+    const rail = options.container();
+    if (rail) onCleanup(hold.watch(rail));
+  });
+
   return {
     /**
      * Entry currently being dragged, if any
@@ -571,12 +580,7 @@ export function createRailDrag(options: {
      */
     register(id: string, el: HTMLElement) {
       elements.set(id, el);
-      // a lifted entry has to stop the page scrolling under the finger
-      const unwatch = hold.watch(el);
-      onCleanup(() => {
-        unwatch();
-        elements.delete(id);
-      });
+      onCleanup(() => elements.delete(id));
     },
 
     /**
@@ -588,7 +592,8 @@ export function createRailDrag(options: {
       if (options.disabled?.() || e.button || !e.isPrimary) return;
 
       reset();
-      const touch = e.pointerType === "touch";
+      // a pen (an Apple Pencil) scrolls the rail like a finger: same hold
+      const touch = isTouchLike(e);
       armed = {
         id,
         x: e.clientX,

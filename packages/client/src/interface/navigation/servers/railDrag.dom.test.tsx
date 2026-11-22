@@ -309,6 +309,21 @@ describe("rail drag with a finger", () => {
   });
 });
 
+describe("rail drag with a pen", () => {
+  it("an Apple Pencil rests to lift, like a finger", () => {
+    const { drag, rows, onMove } = mount();
+    press(drag, rows.get("c")!, "c", 36, 130, "pen");
+    // a pen that moves at once scrolls; resting lifts
+    vi.advanceTimersByTime(TOUCH_HOLD_MS);
+    expect(drag.lifted()).toBe("c");
+
+    window.dispatchEvent(pointer("pointermove", 36, 60, "pen"));
+    window.dispatchEvent(pointer("pointermove", 36, 4, "pen"));
+    window.dispatchEvent(pointer("pointerup", 36, 4, "pen"));
+    expect(onMove).toHaveBeenCalledWith("c", "a", undefined);
+  });
+});
+
 describe("rail drag with a mouse", () => {
   it("drags at once after a few pixels and still reorders", () => {
     const { drag, rows, onMove } = mount();

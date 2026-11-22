@@ -21,6 +21,8 @@ import { VoiceStatus } from "@revolt/ui/components/design/VoiceStatus";
 import { Tooltip } from "@revolt/ui/components/floating";
 import { Icon } from "@revolt/ui/icons/Icon";
 
+import { touchLift } from "@revolt/ui/components/utils/touchLift";
+
 import { keepEntries } from "./keepEntries";
 import { RailEntry, createRailDrag } from "./railDrag";
 
@@ -528,7 +530,7 @@ function ServerEntry(props: {
           [railHeld]:
             props.drag.dragging() === props.server.id ||
             props.drag.carrying() === props.server.id,
-          [railLifted]:
+          [touchLift]:
             props.drag.lifted() === props.server.id && !props.drag.dragging(),
         }}
         use:floating={props.menuGenerator(props.server)}
@@ -642,7 +644,7 @@ function FolderEntry(props: {
             [railHeld]:
               props.drag.dragging() === props.entry.id ||
               props.drag.carrying() === props.entry.id,
-            [railLifted]:
+            [touchLift]:
               props.drag.lifted() === props.entry.id && !props.drag.dragging(),
           }}
           use:floating={{
@@ -759,7 +761,7 @@ const railFolding = css({
     width: "48px",
     height: "48px",
     borderRadius: "16px",
-    outline: "2px solid var(--md-sys-color-primary)",
+    outline: "2px solid var(--z-accent)",
   },
 });
 
@@ -768,18 +770,6 @@ const railFolding = css({
  */
 const railHeld = css({
   opacity: 0.35,
-  touchAction: "none",
-});
-
-/**
- * A finger has rested long enough: the entry rises a little to say it can
- * be dragged now
- */
-const railLifted = css({
-  touchAction: "none",
-  transform: "scale(1.08)",
-  transition: "transform 120ms ease",
-  _motionReduce: { transition: "none" },
 });
 
 /**
@@ -802,7 +792,7 @@ const railInsertion = css({
   right: "6px",
   height: "4px",
   borderRadius: "2px",
-  background: "var(--md-sys-color-primary)",
+  background: "var(--z-accent)",
 });
 
 /**
