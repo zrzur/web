@@ -5,7 +5,7 @@ import type { Channel, Server, TicketType } from "@zrzur/sdk/solid";
 import { styled } from "styled-system/jsx";
 
 import { useClient } from "@revolt/client";
-import { TranslatedError } from "@revolt/i18n/errors";
+import { TranslatedError, useError } from "@revolt/i18n/errors";
 import { useModals } from "@revolt/modal";
 import { useNavigate } from "@revolt/routing";
 import {
@@ -57,6 +57,7 @@ const newId = () =>
 export function TicketsSettings(props: { server: Server }) {
   const { t } = useLingui();
   const saved = useSaved();
+  const errorText = useError();
   const [pending, setPending] = createSignal(false);
   const [error, setError] = createSignal<unknown>();
   // eslint-disable-next-line solid/reactivity
@@ -78,7 +79,8 @@ export function TicketsSettings(props: { server: Server }) {
   const inPageBar = usePageSaveRegistration({
     dirty: () => on() && canManage() && dirty(),
     saving: pending,
-    error: () => undefined,
+    // plain words on the bar; the details stay under the section
+    error: () => (error() ? errorText(error()) : undefined),
     canSave: typesReady,
     reset: () => setDraft(stored()),
     save: () => send(true, draft()),
