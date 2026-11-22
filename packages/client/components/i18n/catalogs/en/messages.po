@@ -31154,3 +31154,11 @@ msgstr "A member who left"
 #: components/app/interface/settings/channel/permissions/ChannelVisibility.tsx
 msgid "This thread follows who can see its channel."
 msgstr "This thread follows who can see its channel."
+
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "Move the small call card to another corner"
+msgstr "Move the small call card to another corner"
+
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "While the small call card is focused (you are in a call and look at another page)."
+msgstr "While the small call card is focused (you are in a call and look at another page)."

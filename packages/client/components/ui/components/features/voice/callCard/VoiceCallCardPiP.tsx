@@ -68,6 +68,8 @@ export function VoiceCallCardPiP() {
       <Back
         data-pip-back
         type="button"
+        // the arrow keys move the card to another corner (VoiceCallCard.tsx)
+        aria-keyshortcuts="ArrowUp ArrowDown ArrowLeft ArrowRight"
         aria-label={t`Return to voice channel`}
         title={t`Return to voice channel`}
         onClick={backToCall}

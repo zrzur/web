@@ -70,24 +70,58 @@ export function clampToViewport(
 }
 
 /**
+ * The part of the page the person really sees, from the top of the layout
+ * viewport: smaller than it while a phone's on-screen keyboard is open
+ * (`visualViewport.offsetTop` and `.height`)
+ */
+export type Visible = { top: number; height: number };
+
+/**
  * Top-left point of the card in a corner, clear of the header, the composer
- * and the safe area, and never off the visible screen
+ * and the safe area, and never off the visible screen. The bottom corners
+ * sit above the bottom of what is really visible, so an on-screen keyboard
+ * (iOS keeps the layout viewport and only shrinks the visual one) never
+ * covers the card.
  */
 export function cornerPosition(
   corner: Corner,
   card: Size,
   viewport: Size,
   insets: Insets = NO_INSETS,
+  visible?: Visible,
 ): Point {
   const x =
     corner[1] === "l"
       ? insets.left + EDGE_GAP
       : viewport.width - insets.right - EDGE_GAP - card.width;
+  const bottom = visible
+    ? Math.min(viewport.height, visible.top + visible.height)
+    : viewport.height;
   const y =
     corner[0] === "t"
       ? insets.top + TOP_GAP
-      : viewport.height - insets.bottom - BOTTOM_GAP - card.height;
+      : bottom - insets.bottom - BOTTOM_GAP - card.height;
   return clampToViewport({ x, y }, card, viewport, insets);
+}
+
+/**
+ * The corner an arrow key moves the card to (physical directions, as the
+ * corners are), or nothing when the key is not an arrow or the card is
+ * already on that side
+ */
+export function cornerAfterKey(corner: Corner, key: string): Corner | undefined {
+  const [row, side] = [corner[0], corner[1]];
+  const next =
+    key === "ArrowUp"
+      ? `t${side}`
+      : key === "ArrowDown"
+        ? `b${side}`
+        : key === "ArrowLeft"
+          ? `${row}l`
+          : key === "ArrowRight"
+            ? `${row}r`
+            : undefined;
+  return next && next !== corner && isCorner(next) ? next : undefined;
 }
 
 /** Controls a press may not start a drag from: their own press is theirs */

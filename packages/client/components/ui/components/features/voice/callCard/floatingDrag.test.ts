@@ -8,6 +8,7 @@ import {
   EDGE_GAP,
   TOP_GAP,
   clampToViewport,
+  cornerAfterKey,
   cornerPosition,
   isCorner,
   movedPastThreshold,
@@ -86,5 +87,39 @@ describe("tap or drag", () => {
     expect(isCorner("br")).toBe(true);
     expect(isCorner("middle")).toBe(false);
     expect(isCorner(null)).toBe(false);
+  });
+});
+
+describe("an on-screen keyboard", () => {
+  it("never covers a card in a bottom corner", () => {
+    // iOS: the layout viewport stays 812 high, what is visible shrinks
+    const keyboard = { top: 0, height: 420 };
+    const p = cornerPosition("br", card, { width: 375, height: 812 }, undefined, keyboard);
+    expect(p.y + card.height).toBe(420 - BOTTOM_GAP);
+  });
+
+  it("leaves a top corner where it is", () => {
+    const p = cornerPosition("tl", card, { width: 375, height: 812 }, undefined, { top: 0, height: 420 });
+    expect(p.y).toBe(TOP_GAP);
+  });
+
+  it("follows the visible part when the page is scrolled under the keyboard", () => {
+    const p = cornerPosition("bl", card, { width: 375, height: 812 }, undefined, { top: 100, height: 420 });
+    expect(p.y + card.height).toBe(520 - BOTTOM_GAP);
+  });
+});
+
+describe("arrow keys", () => {
+  it("move the card between corners", () => {
+    expect(cornerAfterKey("tr", "ArrowDown")).toBe("br");
+    expect(cornerAfterKey("br", "ArrowLeft")).toBe("bl");
+    expect(cornerAfterKey("bl", "ArrowUp")).toBe("tl");
+    expect(cornerAfterKey("tl", "ArrowRight")).toBe("tr");
+  });
+
+  it("do nothing at the edge or for other keys", () => {
+    expect(cornerAfterKey("tr", "ArrowUp")).toBeUndefined();
+    expect(cornerAfterKey("tr", "ArrowRight")).toBeUndefined();
+    expect(cornerAfterKey("tr", "Enter")).toBeUndefined();
   });
 });

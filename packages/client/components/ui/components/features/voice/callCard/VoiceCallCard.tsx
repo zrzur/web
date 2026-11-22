@@ -29,7 +29,9 @@ import {
   EDGE_GAP,
   type Insets,
   type Size,
+  type Visible,
   clampToViewport,
+  cornerAfterKey,
   cornerPosition,
   createDragGesture,
   isCorner,
@@ -80,6 +82,15 @@ function viewport(): Size {
   };
 }
 
+/**
+ * What the person really sees of it: smaller while a phone's on-screen
+ * keyboard is open (iOS keeps the layout viewport and shrinks this one)
+ */
+function visible(): Visible | undefined {
+  const vv = window.visualViewport;
+  return vv ? { top: vv.offsetTop, height: vv.height } : undefined;
+}
+
 function floatSize(view: Size): Size {
   return {
     width: Math.max(0, Math.min(FLOAT_W, view.width - 2 * EDGE_GAP)),
@@ -126,7 +137,11 @@ export function VoiceCallCardContext(props: { children: JSX.Element }) {
   const [info, setInfo] = createSignal<Info>();
 
   let ref: HTMLDivElement | undefined,
-    corner: Corner = savedCorner();
+    corner: Corner = savedCorner(),
+    // measured once and again only when the window changes (it costs a
+    // layout); the notch and home bar do not move otherwise
+    insets: Insets | undefined,
+    frame = 0;
 
   // A press is a tap (the card's own click opens the call) until it moves
   // past the threshold; then it is a drag, which never opens the call
@@ -189,20 +204,43 @@ export function VoiceCallCardContext(props: { children: JSX.Element }) {
     } else if (!mode()) setFloat(savedCorner());
   });
 
-  // the window changed size (a phone turned, the browser bar came or went):
-  // the card stays in its corner, on screen
+  // the window changed size (a phone turned, the browser bar came or went,
+  // the on-screen keyboard opened): the card stays in its corner, on screen.
+  // Those events come many times a frame while it changes: at most one
+  // placement per frame.
   const keepInCorner = () => {
-    if (mode() === "floating") setFloat(corner);
+    if (frame) return;
+    frame = requestAnimationFrame(() => {
+      frame = 0;
+      insets = undefined;
+      if (mode() === "floating") setFloat(corner);
+    });
   };
   onMount(() => {
     addEventListener("resize", keepInCorner);
     visualViewport?.addEventListener("resize", keepInCorner);
+    visualViewport?.addEventListener("scroll", keepInCorner);
   });
   onCleanup(() => {
     drag.cancel();
+    if (frame) cancelAnimationFrame(frame);
     removeEventListener("resize", keepInCorner);
     visualViewport?.removeEventListener("resize", keepInCorner);
+    visualViewport?.removeEventListener("scroll", keepInCorner);
   });
+
+  // keyboard: while the card has focus, the arrow keys move it to another
+  // corner (listed in the shortcuts screen)
+  function moveByKey(e: KeyboardEvent) {
+    if (mode() !== "floating" || e.altKey || e.ctrlKey || e.metaKey || e.shiftKey)
+      return;
+    if (!(e.target as Element | null)?.closest?.("[data-voice-pip]")) return;
+    const next = cornerAfterKey(corner, e.key);
+    if (!next) return;
+    e.preventDefault();
+    saveCorner(next);
+    setFloat(next);
+  }
 
   const channel = () => info()?.channel;
 
@@ -229,7 +267,7 @@ export function VoiceCallCardContext(props: { children: JSX.Element }) {
     const sty = ref!.style,
       view = viewport(),
       size = floatSize(view),
-      p = cornerPosition(float, size, view, safeInsets());
+      p = cornerPosition(float, size, view, (insets ??= safeInsets()), visible());
     sty.transform = `translate(${p.x}px, ${p.y}px)`;
     sty.width = `${size.width}px`;
     sty.height = `${size.height}px`;
@@ -269,6 +307,7 @@ export function VoiceCallCardContext(props: { children: JSX.Element }) {
           ref={ref}
           mode={mode()}
           onPointerDown={(e) => drag.pointerDown(e)}
+          onKeyDown={moveByKey}
           fullscreen={voice.layout() === "fullscreen"}
         >
           <Switch>

@@ -135,6 +135,16 @@ export function KeybindsSettings() {
           description: <Trans>While a call rings.</Trans>,
           keys: [["Mod", "Shift", "Backspace"]],
         },
+        {
+          title: <Trans>Move the small call card to another corner</Trans>,
+          description: (
+            <Trans>
+              While the small call card is focused (you are in a call and look
+              at another page).
+            </Trans>
+          ),
+          keys: [["←"], ["→"], ["↑"], ["↓"]],
+        },
         // desktop app: the binds that work in games
         ...(gameKeys
           ? gameRows.flatMap((row) => {

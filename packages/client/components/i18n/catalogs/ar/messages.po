@@ -31151,3 +31151,11 @@ msgstr "عضو غادر السيرفر"
 #: components/app/interface/settings/channel/permissions/ChannelVisibility.tsx
 msgid "This thread follows who can see its channel."
 msgstr "يتبع هذا الخيط إعدادات من يرى قناته."
+
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "Move the small call card to another corner"
+msgstr "انقل بطاقة المكالمة الصغيرة إلى زاوية أخرى"
+
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "While the small call card is focused (you are in a call and look at another page)."
+msgstr "عندما يكون التركيز على بطاقة المكالمة الصغيرة (أنت في مكالمة وتتصفح صفحة أخرى)."
