@@ -1,6 +1,6 @@
 import { i18n } from "@lingui/core";
 import { I18nProvider } from "@lingui/solid";
-import { createSignal } from "solid-js";
+import { createRoot, createSignal } from "solid-js";
 import { render } from "solid-js/web";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 
@@ -22,6 +22,8 @@ import {
   RELEASE_GRACE_MS,
   liveClips,
   resetVoicePlayback,
+  voiceClip,
+  watchAddress,
 } from "./voicePlayback";
 
 /** Just enough of an <audio> element: play/pause fire their events */
@@ -58,6 +60,9 @@ function mount(view: () => unknown) {
     document.body.firstElementChild as HTMLElement,
   );
 }
+
+const announcer = () =>
+  document.querySelector<HTMLElement>("[data-playback-announcer]");
 
 const play = (index = 0) =>
   document.querySelectorAll<HTMLButtonElement>(".z-voice-play")[index];
@@ -122,7 +127,10 @@ describe("a voice message row", () => {
       button.getAttribute("aria-describedby")!,
     );
     expect(reason?.textContent).toContain("could not be played");
-    expect(reason?.getAttribute("role")).toBe("alert");
+    // a description only: nothing is announced for a clip nobody tapped
+    expect(reason?.getAttribute("role")).toBeNull();
+    vi.advanceTimersByTime(100);
+    expect(announcer()?.textContent ?? "").toBe("");
     // on screen: the retry arrow, and "Try again" where the time was
     expect(button.querySelector("[data-icon]")?.getAttribute("data-icon")).toBe(
       "arrow-clockwise",
@@ -155,11 +163,55 @@ describe("a voice message row", () => {
     const reason = document.getElementById(
       button.getAttribute("aria-describedby")!,
     );
-    expect(reason?.getAttribute("role")).toBe("alert");
+    expect(reason?.getAttribute("role")).toBeNull();
     expect(reason?.textContent).toContain("could not be played");
     expect(document.querySelector(".z-media-time")?.textContent).toBe(
       "Try again",
     );
+  });
+
+  it("says the failure aloud once, for the clip the user tapped", async () => {
+    mount(() => (
+      <>
+        <VoiceMessage src="https://files.test/a/original" />
+        <VoiceMessage src="https://files.test/b/original" />
+      </>
+    ));
+    made[0].play = () => {
+      made[0].dispatchEvent(new Event("error"));
+      return Promise.reject(new DOMException("gone", "NotSupportedError"));
+    };
+    made[0].src = "https://files.test/a/original";
+    made[1].src = "https://files.test/b/original";
+    play(0).click();
+    await Promise.resolve();
+    await Promise.resolve();
+    vi.advanceTimersByTime(100);
+    expect(document.querySelectorAll("[data-playback-announcer]")).toHaveLength(
+      1,
+    );
+    expect(announcer()?.getAttribute("aria-live")).toBe("assertive");
+    expect(announcer()?.textContent).toContain("could not be played");
+
+    // the other one fails too, untapped: nothing new is said
+    announcer()!.textContent = "";
+    made[1].dispatchEvent(new Event("error"));
+    vi.advanceTimersByTime(100);
+    expect(announcer()?.textContent).toBe("");
+  });
+
+  it("a ?format=m4a the server refuses ends in Try again, not a broken player", () => {
+    mount(() => (
+      <VoiceMessage src="https://files.test/a/original?format=m4a" />
+    ));
+    // 404 or 400 from an older media server: the element fails to load
+    made[0].src = "https://files.test/a/original?format=m4a";
+    made[0].dispatchEvent(new Event("error"));
+    expect(play().getAttribute("aria-label")).toBe("Try again");
+    expect(play().disabled).toBe(false);
+    expect(
+      document.querySelectorAll(".z-voice-wave > span").length,
+    ).toBeGreaterThan(0);
   });
 
   it("a video that starts pauses the voice message", async () => {
@@ -191,5 +243,34 @@ describe("a voice message row", () => {
     expect(
       document.querySelector(".z-voice")!.getAttribute("data-playing"),
     ).toBe("false");
+  });
+
+  it("the watch moves to a new router's location", async () => {
+    const place = (path: string) =>
+      createRoot(() => {
+        const [pathname, setPathname] = createSignal(path);
+        return {
+          location: {
+            get pathname() {
+              return pathname();
+            },
+          },
+          go: setPathname,
+        };
+      });
+    const first = place("/server/S/channel/C1");
+    watchAddress(first.location);
+    const clip = voiceClip("a.ogg", "metadata", "C1");
+    await clip.toggle();
+    clip.release();
+
+    // a new router (signed out and in again): the old one is no longer heard
+    const second = place("/server/S/channel/C1");
+    watchAddress(second.location);
+    first.go("/app");
+    expect(made[0].paused).toBe(false);
+    second.go("/server/S/channel/C2");
+    expect(made[0].paused).toBe(true);
+    expect(liveClips()).toBe(0);
   });
 });

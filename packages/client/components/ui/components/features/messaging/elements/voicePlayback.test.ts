@@ -235,4 +235,15 @@ describe("voice playback", () => {
     expect(clip.playing()).toBe(false);
     expect(clip.current()).toBe(0);
   });
+
+  it("knows which clip the user tapped last", async () => {
+    const one = voiceClip("a.ogg");
+    const two = voiceClip("b.ogg");
+    expect(one.tapped()).toBe(false);
+    await one.toggle();
+    expect(one.tapped()).toBe(true);
+    await two.toggle();
+    expect(one.tapped()).toBe(false);
+    expect(two.tapped()).toBe(true);
+  });
 });

@@ -12,7 +12,11 @@ import {
 } from "solid-js";
 import { Dynamic } from "solid-js/web";
 import "./media-player.css";
-import { PlaybackFailure } from "./PlaybackFailure";
+import {
+  announcePlaybackFailure,
+  PlaybackFailure,
+  usePlaybackFailureText,
+} from "./PlaybackFailure";
 import { endTurn, playFailed, takeTurn } from "./voicePlayback";
 
 export function mediaTime(value: number): string {
@@ -30,6 +34,9 @@ export function MediaPlayer(props: {
 }) {
   const { t } = useLingui();
   const failureId = createUniqueId();
+  const failureText = usePlaybackFailureText();
+  /** the user pressed play here: a failure is said aloud */
+  let tapped = false;
   let volumePopup!: HTMLDivElement;
   let volumeButton!: HTMLButtonElement;
   let volumeRoot!: HTMLDivElement;
@@ -72,6 +79,7 @@ export function MediaPlayer(props: {
     setDuration(media.duration);
   };
   async function togglePlay() {
+    tapped = true;
     if (!media.paused) {
       media.pause();
       return;
@@ -194,6 +202,7 @@ export function MediaPlayer(props: {
         onError={() => {
           setPlaying(false);
           setError(true);
+          if (tapped) announcePlaybackFailure(failureText());
         }}
         onClick={() => {
           if (props.kind === "video") void togglePlay();

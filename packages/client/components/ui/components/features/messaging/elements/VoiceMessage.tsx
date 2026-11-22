@@ -10,12 +10,17 @@ import {
   createMemo,
   createSignal,
   createUniqueId,
+  on,
   onCleanup,
   untrack,
 } from "solid-js";
 
 import { mediaTime } from "./MediaPlayer";
-import { PlaybackFailure } from "./PlaybackFailure";
+import {
+  PlaybackFailure,
+  announcePlaybackFailure,
+  usePlaybackFailureText,
+} from "./PlaybackFailure";
 import { placeholderBars, readVoice } from "./voice";
 import "./voice.css";
 import { voiceClip, watchAddress } from "./voicePlayback";
@@ -43,6 +48,7 @@ export function VoiceMessage(props: {
 }) {
   const { t } = useLingui();
   const failureId = createUniqueId();
+  const failureText = usePlaybackFailureText();
   // one shared player per file, picked up again when the row is drawn again
   const clip = createMemo(() => {
     const src = props.src;
@@ -60,10 +66,22 @@ export function VoiceMessage(props: {
   // one watcher for the whole app: leaving a conversation stops its sound
   try {
     const location = useLocation();
-    watchAddress(() => location.pathname);
+    watchAddress(location);
   } catch {
     // outside the app's router (tests): nothing to follow
   }
+  // said aloud once, and only for the clip the user tapped: a page full of
+  // voice messages that fail together must not read out every one
+  createEffect(
+    on(
+      () => clip().error(),
+      (failed) => {
+        if (failed && untrack(() => clip().tapped()))
+          announcePlaybackFailure(failureText());
+      },
+      { defer: true },
+    ),
+  );
   const playing = () => clip().playing();
   const current = () => clip().current();
   const mediaDuration = () => clip().mediaDuration();

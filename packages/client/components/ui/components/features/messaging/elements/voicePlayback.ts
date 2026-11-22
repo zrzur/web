@@ -38,6 +38,8 @@ export interface VoiceClip {
   /** the file could not be loaded or played */
   error: Accessor<boolean>;
   toggle(): Promise<void>;
+  /** the user tapped this clip last: its failure is the one to say aloud */
+  tapped(): boolean;
   /** stop playing (the reader left the conversation) */
   pause(): void;
   seek(seconds: number): void;
@@ -59,6 +61,9 @@ interface Entry {
 }
 
 const clips = new Map<string, Entry>();
+
+/** The clip the user tapped last */
+let lastTapped: Entry | undefined;
 
 /** The media element that plays now, if any */
 let current: HTMLMediaElement | undefined;
@@ -97,6 +102,7 @@ export function resetVoicePlayback(factory?: () => HTMLAudioElement) {
   }
   clips.clear();
   current = undefined;
+  lastTapped = undefined;
   resetAddress();
   createAudio = factory ?? (() => document.createElement("audio"));
 }
@@ -151,7 +157,9 @@ function create(src: string, preload: "none" | "metadata"): Entry {
       current: position,
       mediaDuration,
       error,
+      tapped: () => lastTapped === entry,
       async toggle() {
+        lastTapped = entry;
         if (!audio.paused) return audio.pause();
         // a failed load (a dropped connection) is tried again on the next tap
         if (error()) {
@@ -264,16 +272,21 @@ export function addressChanged(path: string) {
 }
 
 let watching: (() => void) | undefined;
+let watched: { pathname: string } | undefined;
 
 /**
  * Follow the router's address, once for the whole app (the first row that
- * has a router starts it). Rows drawn outside a router (tests) never call it.
+ * has a router starts it). A new router (signing out and in again, a new
+ * window) brings a new location object: the watch moves to it. Rows drawn
+ * outside a router (tests) never call it.
  */
-export function watchAddress(pathname: Accessor<string>) {
-  if (watching) return;
+export function watchAddress(location: { pathname: string }) {
+  if (watching && watched === location) return;
+  watching?.();
+  watched = location;
   createRoot((dispose) => {
     watching = dispose;
-    createEffect(on(pathname, addressChanged));
+    createEffect(on(() => location.pathname, addressChanged));
   });
 }
 
@@ -281,5 +294,6 @@ export function watchAddress(pathname: Accessor<string>) {
 export function resetAddress() {
   watching?.();
   watching = undefined;
+  watched = undefined;
   address = undefined;
 }
