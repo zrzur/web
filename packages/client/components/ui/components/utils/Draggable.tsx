@@ -15,7 +15,8 @@ import {
 
 import { css, cx } from "styled-system/css";
 
-import { createTouchHold } from "./touchHold";
+import { createTouchHold, isTouchLike } from "./touchHold";
+import { setTouchLift } from "./touchLift";
 
 interface Props<T> {
   type?: string;
@@ -122,7 +123,7 @@ export function Draggable<T>(props: Props<T>) {
    * @param e
    */
   function handleDndEvent(e: DragHandleEvent<T>) {
-    pressRow?.removeAttribute("data-lifted");
+    setTouchLift(pressRow, false);
     setDragDisabled(props.dragHandles || false);
     props.onDragChange?.(e.type === "consider");
 
@@ -144,7 +145,7 @@ export function Draggable<T>(props: Props<T>) {
   function isDisabled() {
     renderSignal();
 
-    return props.disabled || dragDisabled();
+    return props.disabled || dragDisabled() || fingerDown();
   }
 
   let zone: HTMLDivElement | undefined;
@@ -153,32 +154,51 @@ export function Draggable<T>(props: Props<T>) {
   let pressRow: HTMLElement | undefined;
   let pressTarget: EventTarget | undefined;
 
+  /**
+   * A finger (or pen) is down on this list. The drag zone is switched off
+   * meanwhile, so the finger's own touch start never reaches it (it would
+   * start a drag at once and stop the scroll); the touch start still goes on
+   * to everything else, the phone drawer's swipe included. The hold turns it
+   * back on when it hands the press over.
+   */
+  const [fingerDown, setFingerDown] = createSignal(false);
+  let fingerId = -1;
+
   const hold = untrack(() => props.touchHold)
     ? createTouchHold({
         menuTarget: () => pressTarget,
-        onLift: () => pressRow?.setAttribute("data-lifted", ""),
-        onDragStart: (from) => {
+        onLift: () => setTouchLift(pressRow, true),
+        onDragStart: (from, e) => {
           const row = pressRow;
           if (!row) return;
           // the row stays lifted until the drag zone takes it (Chrome lets
           // it see the finger only past its touch slop, about 15 px)
+          setFingerDown(false);
           if (props.dragHandles) setDragDisabled(false);
-          // hand the finger to the drag zone, as if it had just landed here
-          // (its own touch start is kept from it: that one has to scroll)
+          // hand the finger to the drag zone, as if it had just landed here;
+          // the zone stops this touch start, so nothing else sees it
           queueMicrotask(() => {
             const start = new Event("touchstart", {
               bubbles: true,
               cancelable: true,
             });
-            Object.defineProperty(start, "touches", {
-              value: [{ clientX: from.x, clientY: from.y }],
-            });
-            handedOver.add(start);
+            const touch = {
+              identifier: e.pointerId,
+              target: row,
+              clientX: from.x,
+              clientY: from.y,
+              pageX: from.x + window.scrollX,
+              pageY: from.y + window.scrollY,
+              screenX: from.screenX,
+              screenY: from.screenY,
+            };
+            Object.defineProperty(start, "touches", { value: [touch] });
+            Object.defineProperty(start, "changedTouches", { value: [touch] });
             row.dispatchEvent(start);
           });
         },
         onEnd: (how, dragged) => {
-          pressRow?.removeAttribute("data-lifted");
+          setTouchLift(pressRow, false);
           // the browser took the finger mid-drag: drop where it is
           if (dragged && how === "cancel") {
             window.dispatchEvent(new Event("touchend"));
@@ -190,26 +210,25 @@ export function Draggable<T>(props: Props<T>) {
       })
     : undefined;
 
-  /**
-   * A finger's own touch start never reaches the drag zone: it would start
-   * a drag at once and stop the list scrolling. The hold hands it over.
-   */
-  function keepTouchStart(e: TouchEvent) {
-    if (!handedOver.has(e)) e.stopPropagation();
+  /** The finger that switched the drag zone off has gone */
+  function onFingerUp(e: PointerEvent) {
+    if (e.pointerId === fingerId) setFingerDown(false);
   }
 
   onMount(() => {
     if (!hold || !zone) return;
-    zone.addEventListener("touchstart", keepTouchStart, {
-      capture: true,
-      passive: true,
-    });
-    const unwatch = hold.watch(zone);
+    window.addEventListener("pointerup", onFingerUp);
+    window.addEventListener("pointercancel", onFingerUp);
+    // one non-passive touch move listener for the whole list (the outermost
+    // finger list holds it for the lists inside it). It lets a lifted row
+    // stop the scroll; the price is that a scroll starting on the list waits
+    // for the page's script to answer first.
+    const outer = !zone.parentElement?.closest("[data-touch-hold]");
+    const unwatch = outer ? hold.watch(zone) : undefined;
     onCleanup(() => {
-      zone?.removeEventListener("touchstart", keepTouchStart, {
-        capture: true,
-      });
-      unwatch();
+      window.removeEventListener("pointerup", onFingerUp);
+      window.removeEventListener("pointercancel", onFingerUp);
+      unwatch?.();
     });
   });
 
@@ -224,6 +243,11 @@ export function Draggable<T>(props: Props<T>) {
     );
 
     if (!row) return;
+
+    if (hold && isTouchLike(e) && e.isPrimary) {
+      fingerId = e.pointerId;
+      setFingerDown(true);
+    }
 
     // a finger: the innermost list that can move the row watches the press
     if (hold && !props.disabled && !pressedHere.has(e)) {
@@ -265,6 +289,7 @@ export function Draggable<T>(props: Props<T>) {
     <div
       ref={zone}
       data-drop-zone
+      data-touch-hold={props.touchHold ? "" : undefined}
       class={cx(
         props.dropIndicator && dropIndicatorStyles,
         props.touchHold && touchRowStyles,
@@ -285,7 +310,7 @@ export function Draggable<T>(props: Props<T>) {
             ? {}
             : {
                 outline:
-                  "2px solid color-mix(in srgb, 40% var(--md-sys-color-primary), transparent)",
+                  "2px solid color-mix(in srgb, 40% var(--z-accent), transparent)",
                 borderRadius: "4px",
                 outlineOffset: "-2px",
               }),
@@ -311,9 +336,6 @@ export function Draggable<T>(props: Props<T>) {
 /** Presses a list's finger hold has taken (the inner list of two wins) */
 const pressedHere = new WeakSet<Event>();
 
-/** Touch starts the hold handed to the drag zone */
-const handedOver = new WeakSet<Event>();
-
 /**
  * A long press belongs to the list (drag or the row's menu), never to the
  * browser: no link preview, text selection or dragging a link out
@@ -331,18 +353,12 @@ const touchRowStyles = css({
       WebkitUserDrag: "none",
     },
   },
-  // lifted by a resting finger: it can move now
-  "& > [data-lifted]": {
-    transform: "scale(1.02)",
-    transition: "transform 120ms ease",
-    _motionReduce: { transition: "none" },
-  },
 });
 
 const dropIndicatorStyles = css({
   "& > [data-is-dnd-shadow-item-internal]": {
     visibility: "visible !important",
-    outline: "2px solid var(--md-sys-color-primary)",
+    outline: "2px solid var(--z-accent)",
     outlineOffset: "-2px",
     borderRadius: "var(--borderRadius-md)",
     background: "var(--md-sys-color-surface-container-high)",

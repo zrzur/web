@@ -5,7 +5,8 @@ import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import { addLongPressListener } from "../../directives/longPress";
 
 import { Draggable } from "./Draggable";
-import { TOUCH_HOLD_MS, TOUCH_MENU_MS } from "./touchHold";
+import { TOUCH_HOLD_EVENT, TOUCH_HOLD_MS, TOUCH_MENU_MS } from "./touchHold";
+import { touchLift } from "./touchLift";
 
 vi.mock("@lingui/solid/macro", () => ({ useLingui: () => ({ t: String }) }));
 vi.mock("@lingui/solid", () => {
@@ -92,19 +93,44 @@ function pointer(type: string, x: number, y: number, pointerType = "touch") {
 function land(el: HTMLElement, x: number, y: number) {
   el.dispatchEvent(pointer("pointerdown", x, y));
   const start = new Event("touchstart", { bubbles: true, cancelable: true });
+  const point = {
+    identifier: 3,
+    clientX: x,
+    clientY: y,
+    screenX: x,
+    screenY: y,
+  };
+  Object.assign(start, { touches: [point], changedTouches: [point] });
   el.dispatchEvent(start);
   return start;
 }
 
+const lifted = (el: HTMLElement) =>
+  touchLift.split(" ").every((name) => el.classList.contains(name));
+
 describe("Draggable with a finger (touchHold)", () => {
-  it("keeps the finger's own touch start from the drag zone", () => {
-    const { row } = mount({ touchHold: true });
-    const seen = vi.fn();
-    row("a").addEventListener("touchstart", seen);
+  it("keeps the finger's own touch start from the drag zone only", () => {
+    const { host, row } = mount({ touchHold: true });
+    // the phone drawer listens above the list for its swipe
+    const drawer = vi.fn();
+    host.parentElement!.addEventListener("touchstart", drawer);
+
+    const start = land(row("a").querySelector("span")!, 20, 10);
+
+    expect(drawer).toHaveBeenCalledTimes(1);
+    // the drag zone would have taken it (and stopped the scroll)
+    expect(start.defaultPrevented).toBe(false);
+  });
+
+  it("tells the drawer above when a row lifts", () => {
+    const { host, row } = mount({ touchHold: true });
+    const heard = vi.fn();
+    host.parentElement!.addEventListener(TOUCH_HOLD_EVENT, heard);
 
     land(row("a").querySelector("span")!, 20, 10);
+    vi.advanceTimersByTime(TOUCH_HOLD_MS);
 
-    expect(seen).not.toHaveBeenCalled();
+    expect(heard).toHaveBeenCalledTimes(1);
   });
 
   it("a long press, then a move, hands the drag to the drag zone", async () => {
@@ -114,19 +140,24 @@ describe("Draggable with a finger (touchHold)", () => {
 
     land(row("a").querySelector("span")!, 20, 10);
     vi.advanceTimersByTime(TOUCH_HOLD_MS);
-    expect(row("a").hasAttribute("data-lifted")).toBe(true);
+    expect(lifted(row("a"))).toBe(true);
 
     window.dispatchEvent(pointer("pointermove", 20, 30));
     await Promise.resolve();
 
-    expect(seen).toHaveLength(1);
-    const touches = (seen[0] as unknown as { touches: Touch[] }).touches;
-    expect(touches[0].clientY).toBe(10);
-    // still lifted until the drag zone takes the row
-    expect(row("a").hasAttribute("data-lifted")).toBe(true);
+    // the finger's own start, then the one handed over
+    expect(seen).toHaveLength(2);
+    const handed = seen[1] as unknown as { touches: Touch[] } & Event;
+    expect(handed.touches[0].clientY).toBe(10);
+    expect(handed.touches[0].identifier).toBe(3);
+    expect(typeof handed.touches[0].screenY).toBe("number");
+    // the drag zone took this one
+    expect(handed.defaultPrevented).toBe(true);
+    // still lifted until the drag zone starts the drag
+    expect(lifted(row("a"))).toBe(true);
 
     window.dispatchEvent(pointer("pointerup", 20, 30));
-    expect(row("a").hasAttribute("data-lifted")).toBe(false);
+    expect(lifted(row("a"))).toBe(false);
   });
 
   it("moving before the hold ends is a scroll: no drag, no lift", async () => {
@@ -139,8 +170,9 @@ describe("Draggable with a finger (touchHold)", () => {
     vi.advanceTimersByTime(TOUCH_MENU_MS + 100);
     await Promise.resolve();
 
-    expect(seen).not.toHaveBeenCalled();
-    expect(row("a").hasAttribute("data-lifted")).toBe(false);
+    // only the finger's own start: nothing handed over
+    expect(seen).toHaveBeenCalledTimes(1);
+    expect(lifted(row("a"))).toBe(false);
   });
 
   it("holding still opens the row's menu, not the link", () => {
@@ -190,15 +222,23 @@ describe("Draggable with a finger (touchHold)", () => {
     land(row("a").querySelector("span")!, 20, 10);
     vi.advanceTimersByTime(TOUCH_MENU_MS);
 
-    expect(row("a").hasAttribute("data-lifted")).toBe(false);
+    expect(lifted(row("a"))).toBe(false);
     expect(menu).not.toHaveBeenCalled();
   });
 
-  it("without touchHold a mouse-and-pen list is unchanged", () => {
+  it("without touchHold the drag zone still takes a touch start", () => {
     const { row } = mount();
-    const seen = vi.fn();
-    row("a").addEventListener("touchstart", seen);
-    land(row("a").querySelector("span")!, 20, 10);
-    expect(seen).toHaveBeenCalledTimes(1);
+    const start = land(row("a").querySelector("span")!, 20, 10);
+    expect(start.defaultPrevented).toBe(true);
+  });
+
+  it("a pen rests and lifts like a finger", () => {
+    const { row } = mount({ touchHold: true });
+    row("a")
+      .querySelector("span")!
+      .dispatchEvent(pointer("pointerdown", 20, 10, "pen"));
+    vi.advanceTimersByTime(TOUCH_HOLD_MS);
+    expect(lifted(row("a"))).toBe(true);
+    window.dispatchEvent(pointer("pointerup", 20, 10, "pen"));
   });
 });

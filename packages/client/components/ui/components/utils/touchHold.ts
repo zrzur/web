@@ -23,6 +23,17 @@ export const TOUCH_SLOP_PX = 8;
  */
 export const TOUCH_DRAG_PX = 5;
 
+/**
+ * Sent (bubbling) from the touched node when a row lifts: a swipe that
+ * follows belongs to the drag, so the phone drawer lets go of this touch
+ */
+export const TOUCH_HOLD_EVENT = "touchhold";
+
+/** A finger or a pen (an Apple Pencil on iPad); never a mouse */
+export function isTouchLike(e: PointerEvent) {
+  return e.pointerType === "touch" || e.pointerType === "pen";
+}
+
 /** How long to wait for the click that follows a finger's press */
 const CLICK_AFTER_TOUCH_MS = 400;
 
@@ -74,7 +85,10 @@ export type TouchHoldOptions = {
    * @param from Where the finger first landed
    * @param e The move that started it
    */
-  onDragStart: (from: { x: number; y: number }, e: PointerEvent) => void;
+  onDragStart: (
+    from: { x: number; y: number; screenX: number; screenY: number },
+    e: PointerEvent,
+  ) => void;
 
   /**
    * The press is over
@@ -98,7 +112,7 @@ export type TouchHoldOptions = {
 export function createTouchHold(options: TouchHoldOptions) {
   type State = "idle" | "pending" | "lifted" | "dragging";
   let state: State = "idle";
-  let start = { x: 0, y: 0 };
+  let start = { x: 0, y: 0, screenX: 0, screenY: 0 };
   let pointerId = -1;
   let menuOpen = false;
   let target: EventTarget | undefined;
@@ -128,6 +142,7 @@ export function createTouchHold(options: TouchHoldOptions) {
 
     state = "lifted";
     options.onLift?.();
+    target?.dispatchEvent(new Event(TOUCH_HOLD_EVENT, { bubbles: true }));
     try {
       navigator.vibrate?.(10);
     } catch {
@@ -214,11 +229,16 @@ export function createTouchHold(options: TouchHoldOptions) {
      * @returns Whether the press is a finger's and is now watched
      */
     press(e: PointerEvent) {
-      if (e.pointerType !== "touch" || !e.isPrimary) return false;
+      if (!isTouchLike(e) || !e.isPrimary) return false;
 
       finish("cancel");
       state = "pending";
-      start = { x: e.clientX, y: e.clientY };
+      start = {
+        x: e.clientX,
+        y: e.clientY,
+        screenX: e.screenX,
+        screenY: e.screenY,
+      };
       pointerId = e.pointerId;
       // this press decides between a drag and the menu itself
       claimLongPress(e);
