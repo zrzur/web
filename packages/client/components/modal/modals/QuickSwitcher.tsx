@@ -15,6 +15,7 @@ import { styled } from "styled-system/jsx";
 
 import { conversationName } from "@revolt/app/interface/channels/conversationName";
 import { useClient } from "@revolt/client";
+import { announce } from "@revolt/keybinds/announce";
 import {
   type SwitchItem,
   channelListed,
@@ -35,6 +36,8 @@ type Entry = SwitchItem & {
   avatar?: string;
   voice?: boolean;
   open: () => void | Promise<void>;
+  /** Still allowed now (rights can change while the window is open) */
+  allowed?: () => boolean;
 };
 
 /**
@@ -76,6 +79,7 @@ export function QuickSwitcherModal(
             name: channel.name ?? "",
             place: channel.server!.name,
             voice: channel.isVoice,
+            allowed: () => channelListed(channel),
             open: () =>
               navigate(`/server/${channel.serverId}/channel/${channel.id}`),
           });
@@ -152,7 +156,9 @@ export function QuickSwitcherModal(
   const recents = recentPlaces(untrack(() => client().user?.id));
 
   // the same objects every time: rows are kept, and the choice follows its id
-  const results = createMemo(() => rankItems(entries, query(), recents));
+  const results = createMemo(() =>
+    rankItems(entries, query(), recents, RESULT_LIMIT),
+  );
   const selected = () => {
     const id = selectedId(results(), chosen());
     return results().find((entry) => entry.id === id);
@@ -160,6 +166,11 @@ export function QuickSwitcherModal(
 
   function choose(entry: Entry | undefined) {
     if (!entry) return;
+    // checked again: the list was taken when the window opened
+    if (entry.allowed && !entry.allowed()) {
+      announce(t`You can't open this channel any more.`);
+      return;
+    }
     props.onClose();
     void entry.open();
   }
@@ -219,10 +230,12 @@ export function QuickSwitcherModal(
           onKeyDown={onKey}
         />
         <span aria-live="polite" style={VISUALLY_HIDDEN}>
-          {t`${plural(results().length, {
-            one: "# result",
-            other: "# results",
-          })}`}
+          {results().length >= RESULT_LIMIT
+            ? t`${RESULT_LIMIT}+ results`
+            : t`${plural(results().length, {
+                one: "# result",
+                other: "# results",
+              })}`}
         </span>
 
         <Results
@@ -302,6 +315,9 @@ export function QuickSwitcherModal(
   );
 }
 
+/** How many results show at once */
+const RESULT_LIMIT = 30;
+
 const VISUALLY_HIDDEN = {
   position: "absolute",
   width: "1px",
@@ -320,6 +336,8 @@ const Fields = styled("div", {
   },
 });
 
+// the same list box, rows and states as the forward window's list
+// (ForwardMessage.tsx), so the two read as one design
 const Results = styled("div", {
   base: {
     display: "flex",
@@ -328,6 +346,9 @@ const Results = styled("div", {
     maxHeight: "360px",
     overflowY: "auto",
     minWidth: 0,
+    padding: "12px",
+    borderRadius: "var(--z-radius-md)",
+    border: "1px solid var(--z-border-subtle)",
     _phone: { maxHeight: "55vh" },
   },
 });
@@ -349,6 +370,7 @@ const Option = styled("button", {
     cursor: "pointer",
     minWidth: 0,
     "--z-icon-color": "var(--z-icon-muted)",
+    "&:hover": { background: "var(--z-nav-hover)" },
     _focusVisible: {
       outline: "2px solid var(--z-focus)",
       outlineOffset: "-2px",
@@ -385,7 +407,7 @@ const Text = styled("span", {
 
 const Name = styled("span", {
   base: {
-    fontSize: "15px",
+    fontSize: "14px",
     fontWeight: 600,
     overflow: "hidden",
     textOverflow: "ellipsis",
@@ -419,7 +441,7 @@ const Empty = styled("p", {
   base: {
     margin: 0,
     padding: "12px",
-    fontSize: "13px",
+    fontSize: "14px",
     color: "var(--z-fg-muted)",
   },
 });
