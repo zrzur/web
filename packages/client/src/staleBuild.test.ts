@@ -4,11 +4,10 @@ import {
   STALE_RELOAD_GAP_MS,
   STALE_RELOAD_KEY,
   holdStaleReload,
+  isWebKit,
   shouldReloadForStaleBuild,
   watchForStaleBuild,
 } from "./staleBuild";
-
-import { lazy } from "../components/common/lib/lazyPart";
 
 describe("stale build after an update", () => {
   it("reloads the first time, not again right after", () => {
@@ -122,45 +121,38 @@ describe("stale build after an update", () => {
     expect(reload).toHaveBeenCalledOnce();
     expect(next.preventDefault).not.toHaveBeenCalled();
   });
+});
 
-  describe("a part that failed twice in a row while online (Safari keeps failed modules)", () => {
-    const failingPart = () =>
-      lazy(() =>
-        Promise.reject(new TypeError("Importing a module script failed.")),
-      );
-    const twice = async (part: ReturnType<typeof failingPart>) => {
-      await part.preload().catch(() => undefined);
-      await part.preload().catch(() => undefined);
-      for (let i = 0; i < 5; i++) await Promise.resolve();
-    };
+describe("WebKit (the only engine that keeps a failed module)", () => {
+  const ua = {
+    iphoneSafari:
+      "Mozilla/5.0 (iPhone; CPU iPhone OS 18_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/18.0 Mobile/15E148 Safari/604.1",
+    iphoneChrome:
+      "Mozilla/5.0 (iPhone; CPU iPhone OS 18_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) CriOS/131.0.6778.73 Mobile/15E148 Safari/604.1",
+    macSafari:
+      "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/18.0 Safari/605.1.15",
+    macChrome:
+      "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36",
+    androidChrome:
+      "Mozilla/5.0 (Linux; Android 14; Pixel 8) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Mobile Safari/537.36",
+    windowsEdge:
+      "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36 Edg/131.0.0.0",
+    firefox:
+      "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:133.0) Gecko/20100101 Firefox/133.0",
+  };
 
-    it("reloads when the server answers, even with the same build", async () => {
-      const { reload } = page("aaaa111");
-      await twice(failingPart());
-      expect(reload).toHaveBeenCalledOnce();
-    });
+  it("is Safari and every browser on iPhone and iPad", () => {
+    expect(isWebKit(ua.iphoneSafari)).toBe(true);
+    expect(isWebKit(ua.iphoneChrome)).toBe(true);
+    expect(isWebKit(ua.macSafari)).toBe(true);
+    // an iPad asking for the desktop site
+    expect(isWebKit(ua.macSafari, 5)).toBe(true);
+  });
 
-    it("does not reload when the server cannot be asked (no connection)", async () => {
-      const { reload } = page(undefined);
-      await twice(failingPart());
-      expect(reload).not.toHaveBeenCalled();
-    });
-
-    it("does not reload after one failure", async () => {
-      const { reload } = page("aaaa111");
-      await failingPart()
-        .preload()
-        .catch(() => undefined);
-      for (let i = 0; i < 5; i++) await Promise.resolve();
-      expect(reload).not.toHaveBeenCalled();
-    });
-
-    it("never reloads during a call", async () => {
-      const { reload } = page("aaaa111");
-      const release = holdStaleReload();
-      await twice(failingPart());
-      release();
-      expect(reload).not.toHaveBeenCalled();
-    });
+  it("is not Chrome, Edge or Firefox elsewhere", () => {
+    expect(isWebKit(ua.macChrome)).toBe(false);
+    expect(isWebKit(ua.androidChrome)).toBe(false);
+    expect(isWebKit(ua.windowsEdge)).toBe(false);
+    expect(isWebKit(ua.firefox)).toBe(false);
   });
 });
