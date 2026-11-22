@@ -31175,7 +31175,7 @@ msgstr "تتصل التطبيقات عبر تطبيق زرزور لسطح الم
 
 #: components/app/interface/settings/user/activity/ActivitySettings.tsx
 msgid "Apps never learn who you are from Zrzur. Pictures are shown through Zrzur's servers, and links open with a warning."
-msgstr "لا تعرف التطبيقات هويتك من زرزور أبداً. تُعرض الصور عبر خوادم زرزور، وتُفتح الروابط بعد تحذير."
+msgstr "لا تعرف التطبيقات هويتك من زرزور أبداً. تُعرض الصور عبر سيرفرات زرزور، وتُفتح الروابط بعد تحذير."
 
 #: components/app/interface/settings/user/activity/ActivitySettings.tsx
 msgid "Blocked: never shown"

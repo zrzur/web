@@ -4,27 +4,66 @@ Zeige „Spielt My Game“ mit den Details deines Spiels unter dem Namen der Per
 
 Das ist für Spiele und Apps, die die Person selbst startet, nicht für Bots: Ein Bot kann nie festlegen, was eine Person gerade tut. Dein Spiel schickt nichts über das Netz; die Desktop-App gibt es weiter, und nur solange die Person ihre Aktivität teilt.
 
-## Das brauchst du
+## Das brauchst du {#you-will-need}
 
 - Node 22.3 oder neuer und `npm install @zrzur/sdk` (oder eine Sprache, die eine Named Pipe oder einen Unix-Socket öffnen kann).
 - Die Zrzur-Desktop-App läuft auf demselben Computer, mit Einstellungen → Aktivität → „Teilen, was du gerade tust“ an.
 
-## Schritte
+## Schritte {#steps}
 
 1. Wähle eine kurze ID für deine App, zum Beispiel `my-game`. Buchstaben, Ziffern, `.`, `_` und `-`, höchstens 64 Zeichen.
 2. Verbinde dich mit `new ZrzurRpc({ clientId })` und `connect()`. Es findet die Desktop-App auf der Pipe `zrzur-ipc-0` bis `zrzur-ipc-9`.
 3. Rufe `setActivity({ details, state, timestamps, buttons })` auf, wenn sich im Spiel etwas ändert.
 4. Rufe `setActivity(null)` auf, um sie zu löschen, und `close()`, wenn das Spiel endet. Schließen löscht sie auch.
 
-## Vollständiges Beispiel
+## Vollständiges Beispiel {#full-example}
 
-```example rich-presence.mjs
+```js
+// Rich presence from a game: tell the Zrzur desktop app what the player is
+// doing, so their friends see "Playing <your game>" with the details.
+// Node 22.3 or newer, `npm install @zrzur/sdk`. The Zrzur desktop app must
+// be running on the same computer, with "Share what you are doing" on.
+import { ZrzurRpc } from "@zrzur/sdk/rpc";
 
+const rpc = new ZrzurRpc({
+  clientId: process.env.ZRZUR_RPC_CLIENT_ID ?? "my-game",
+});
+await rpc.connect();
+console.log("Connected to the Zrzur desktop app");
+
+const startedAt = Date.now();
+let round = 1;
+
+async function show() {
+  await rpc.setActivity({
+    name: "My Game",
+    details: "Ranked match",
+    state: `Round ${round} of 12`,
+    timestamps: { start: startedAt },
+    buttons: [{ label: "Get the game", url: "https://example.com/my-game" }],
+  });
+  console.log(`Showing round ${round}`);
+}
+
+await show();
+
+// change it when something happens in the game, not on a timer: Zrzur
+// takes 5 changes in 20 seconds
+const timer = setInterval(async () => {
+  round += 1;
+  await show();
+  if (round === 3) {
+    clearInterval(timer);
+    await rpc.setActivity(null);
+    console.log("Cleared");
+    rpc.close();
+  }
+}, 10_000);
 ```
 
 Starte es mit `node rich-presence.mjs`, während die Desktop-App offen ist.
 
-## Das solltest du sehen
+## Das solltest du sehen {#what-you-should-see}
 
 ```text
 Connected to the Zrzur desktop app
@@ -36,7 +75,7 @@ Cleared
 
 Freunde sehen „Spielt My Game“, „Ranked match“, „Round 1 of 12“ und die Zeit seit dem Start, in der Mitgliederliste und im Profil.
 
-## Die Aktivität
+## Die Aktivität {#the-activity}
 
 | Feld | Grenze | Hinweise |
 | --- | --- | --- |
@@ -49,7 +88,7 @@ Freunde sehen „Spielt My Game“, „Ranked match“, „Round 1 of 12“ und 
 
 Texte laufen durch die Wortliste von Zrzur. Eine Aktivität, die der Server ablehnt, wird nicht gezeigt, und dein Spiel bekommt dafür keinen Fehler.
 
-## Das Protokoll
+## Das Protokoll {#the-protocol}
 
 Ohne SDK: Öffne die Pipe `\\?\pipe\zrzur-ipc-0` unter Windows oder den Socket `zrzur-ipc-0` in `$XDG_RUNTIME_DIR` (oder `$TMPDIR`) unter macOS und Linux. Jeder Frame beginnt mit 8 Byte, dem Opcode und der Länge des Inhalts (beide 32 Bit, Little Endian), danach folgt der Inhalt als UTF-8-JSON.
 
@@ -62,13 +101,13 @@ Ohne SDK: Öffne die Pipe `\\?\pipe\zrzur-ipc-0` unter Windows oder den Socket `
 
 Die Desktop-App antwortet auf den Handshake mit einem `READY`-Frame und auf jedes `SET_ACTIVITY` mit einem Frame mit derselben `nonce`. Der `READY`-Frame verrät deiner App nie, wer angemeldet ist. Ein Frame über 64 KiB oder alles, was nicht dieses Protokoll ist, schließt die Verbindung.
 
-## Grenzen
+## Grenzen {#limits}
 
 - Der Server nimmt 5 Änderungen in 20 Sekunden pro Person an. Ändere die Aktivität, wenn sich das Spiel ändert, nicht per Timer.
 - Die Person sieht deine App unter Einstellungen → Aktivität → Verbundene Apps und kann sie blockieren.
 - Nichts wird gespeichert: Die Aktivität verschwindet, wenn deine App sie löscht, sich schließt oder die Person offline geht.
 
-## Häufige Fehler
+## Häufige Fehler {#common-errors}
 
 | Fehler | Ursache | Lösung |
 | --- | --- | --- |
@@ -76,7 +115,7 @@ Die Desktop-App antwortet auf den Handshake mit einem `READY`-Frame und auf jede
 | `The Zrzur desktop app did not answer` | Die App ist beschäftigt oder Teilen ist aus | Später erneut versuchen; bei ausgeschaltetem Teilen wird nichts gezeigt |
 | `clientId: 1 to 64 letters...` | Die ID enthält Leerzeichen oder andere Zeichen | Buchstaben, Ziffern, `.`, `_` oder `-` verwenden |
 
-## Weiter
+## Weiter {#next}
 
 - [SDK](/developers/docs/sdk)
 - [Nutzer und Mitglieder](/developers/docs/users)
