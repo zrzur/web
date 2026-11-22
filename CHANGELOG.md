@@ -2,6 +2,13 @@
 
 ## Unreleased
 
+### Voice messages play to the end, one at a time (2026-11-22, bug reports)
+
+* **No more stops part-way:** the sound of a voice message (and of an audio file) lived in its message row, and the row paused it when it went. The message list draws a row again for harmless reasons (the message above it is deleted, the "New" line comes or goes, so it joins or leaves a group), and each time the voice message stopped and had to be started again. The sound now lives outside the rows (`voicePlayback.ts`): a row drawn again picks up the same player, still playing. A clip that no row shows for 1.5 s (another channel, rows far out of view) stops.
+* **One at a time:** starting a voice message, an audio file or a video pauses the one that was playing, so tapping the second of two voice messages always plays it, and tapping the first again brings it back.
+* **Phones: seeking no longer starts a reply.** Dragging along the waveform counted as the sideways pull that replies to a message: the message box took the focus and the keyboard came up while you listened. The player is now outside that gesture; a pull on the rest of the message still replies.
+* After a failed load (a dropped connection) the play button is no longer greyed out for good: the next tap loads the file again. A browser that refuses to start without a tap no longer marks the file as "Unavailable".
+
 ### A friend request opens the sender's profile (2026-11-21)
 
 * **From the phone Notifications page:** the sender's picture and the line "… sent you a friend request" are one button (44 px high) that opens their profile. Screen readers hear the sentence they see as its name, then "Open profile" (ar, en, de) as its description. Accept, Decline and Send message are separate buttons and are not touched by it. The page closes first so the profile is not under it; the profile has its own Accept.
