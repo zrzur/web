@@ -382,9 +382,6 @@ const CompactInfo = styled(Row, {
  * layout does not change, and that extra room lets the pointer through to
  * the neighbouring rows.
  */
-/** Room the hover toolbar needs above a row: 32 px buttons, padding and border, plus air */
-const TOOLBAR_ROOM = 40;
-
 const body = cva({
   base: {
     display: "flex",
@@ -418,18 +415,7 @@ export function MessageContainer(props: Props) {
     <div
       id={message?.id}
       ref={props.ref}
-      onMouseEnter={(event) => {
-        // the toolbar sits above the row; where the list's top edge would
-        // cut it off, below the row (MessageToolbar)
-        const row = event.currentTarget;
-        const list = row.closest("[data-message-scroller]");
-        row.toggleAttribute(
-          "data-toolbar-below",
-          !!list &&
-            row.getBoundingClientRect().top -
-              list.getBoundingClientRect().top <
-              TOOLBAR_ROOM,
-        );
+      onMouseEnter={() => {
         setWanted(true);
         props.onHover?.(true);
       }}
