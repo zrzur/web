@@ -1,7 +1,13 @@
 import { ulid } from "ulid";
 import { describe, expect, it } from "vitest";
 
-import { type PostRead, forumSummary, postUnread } from "./unreadRules";
+import {
+  type PostRead,
+  forumSummary,
+  postUnread,
+  postsToAck,
+  serverForumsSummary,
+} from "./unreadRules";
 
 /** One id per moment, so the same moment compares equal */
 const ids = new Map<number, string>();
@@ -92,5 +98,38 @@ describe("forumSummary", () => {
 
   it("an empty forum is read", () => {
     expect(forumSummary([], undefined)).toEqual({ unread: false, mentions: 0 });
+  });
+});
+
+describe("postsToAck", () => {
+  it("acks opened posts with something new and posts with a mention", () => {
+    const opened = read({ id: at(1100), readUpTo: at(4000) });
+    const mentioned = read({ id: at(1200), mentions: 1 });
+    const neverOpened = read({ id: at(1300) });
+    const readAlready = read({ id: at(1400), readUpTo: at(5000) });
+    expect(
+      postsToAck([opened, mentioned, neverOpened, readAlready], at(500)).map(
+        (post) => post.id,
+      ),
+    ).toEqual([at(1100), at(1200)]);
+  });
+});
+
+describe("serverForumsSummary", () => {
+  it("a muted forum adds neither the dot nor its mentions to the server", () => {
+    expect(
+      serverForumsSummary([
+        { muted: true, unread: true, mentions: 3 },
+        { muted: false, unread: false, mentions: 0 },
+      ]),
+    ).toEqual({ unread: false, mentions: 0 });
+  });
+  it("forums that are not muted add both", () => {
+    expect(
+      serverForumsSummary([
+        { muted: true, unread: true, mentions: 3 },
+        { muted: false, unread: true, mentions: 2 },
+      ]),
+    ).toEqual({ unread: true, mentions: 2 });
   });
 });

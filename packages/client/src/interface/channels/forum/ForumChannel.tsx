@@ -14,6 +14,7 @@ import {
 import { plural } from "@lingui/core/macro";
 import { Trans, useLingui } from "@lingui/solid/macro";
 import type { Channel } from "@zrzur/sdk/solid";
+import { css } from "styled-system/css";
 import { styled } from "styled-system/jsx";
 
 import { validTagEmoji } from "@revolt/app/interface/settings/channel/tagEmoji";
@@ -65,14 +66,21 @@ export function ForumChannel(props: ChannelPageProps) {
   // the forum's own read mark then moves to its newest post, so a post
   // never opened is new only until the list has been seen
   const isMuted = (post: Channel) => state.notifications.isMuted(post);
+  // Taken once the unread state has loaded: on a reload the page opens
+  // before it, and a mark read too early made every post look new
   const seenBefore = createMemo(
     on(
-      () => props.channel.id,
-      () => untrack(() => forumSeen(client(), props.channel)),
+      () => [props.channel.id, client().channelUnreads.loaded] as const,
+      ([, loaded]) =>
+        loaded
+          ? { mark: untrack(() => forumSeen(client(), props.channel)) }
+          : undefined,
     ),
   );
-  const postIsNew = (post: Channel) =>
-    isPostUnread(client(), post, isMuted, seenBefore());
+  const postIsNew = (post: Channel) => {
+    const seen = seenBefore();
+    return !!seen && isPostUnread(client(), post, isMuted, seen.mark);
+  };
   const postMentions = (post: Channel) =>
     client().channelUnreads.get(post.id)?.messageMentionIds.size ?? 0;
 
@@ -203,15 +211,16 @@ export function ForumChannel(props: ChannelPageProps) {
                           <Trans context="forum post">New</Trans>
                         </NewLabel>
                       </Show>
-                      <Show when={postMentions(post)}>
+                      <Show when={seenBefore() && postMentions(post)}>
                         {(count) => (
-                          <MentionCount
-                            aria-label={t`${plural(count(), {
-                              one: "# mention",
-                              other: "# mentions",
-                            })}`}
-                          >
-                            @{count()}
+                          <MentionCount>
+                            <span aria-hidden="true">@{count()}</span>
+                            <span class={srOnly}>
+                              {t`${plural(count(), {
+                                one: "# mention",
+                                other: "# mentions",
+                              })}`}
+                            </span>
                           </MentionCount>
                         )}
                       </Show>
@@ -365,7 +374,7 @@ const TagLabel = styled("span", {
 /** A post with something the reader has not seen */
 const NewLabel = styled("span", {
   base: {
-    padding: "2px 8px",
+    padding: "4px 8px",
     borderRadius: "var(--z-radius-pill)",
     background: "var(--z-unread, var(--z-fg-primary))",
     color: "var(--z-bg-app)",
@@ -378,7 +387,8 @@ const NewLabel = styled("span", {
 /** Unread mentions of the reader in a post */
 const MentionCount = styled("span", {
   base: {
-    padding: "2px 8px",
+    position: "relative",
+    padding: "4px 8px",
     borderRadius: "var(--z-radius-pill)",
     background: "var(--z-mention-badge)",
     color: "var(--z-on-mention-badge)",
@@ -390,4 +400,14 @@ const MentionCount = styled("span", {
     direction: "ltr",
     unicodeBidi: "isolate",
   },
+});
+
+/** Read by screen readers, not shown */
+const srOnly = css({
+  position: "absolute",
+  width: "1px",
+  height: "1px",
+  overflow: "hidden",
+  clip: "rect(0 0 0 0)",
+  whiteSpace: "nowrap",
 });

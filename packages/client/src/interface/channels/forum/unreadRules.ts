@@ -61,3 +61,34 @@ export function newestActivity(
   }
   return newest;
 }
+
+/**
+ * Posts that need their own read mark when the reader marks a forum read.
+ * A post never opened is covered by the forum's own mark (moved to the
+ * newest activity at the same time); only opened posts with something new
+ * and posts with a mention need one.
+ */
+export function postsToAck(posts: PostRead[], forumSeen: string | undefined) {
+  return posts.filter(
+    (post) =>
+      postUnread(post, forumSeen) &&
+      (post.readUpTo !== undefined || post.mentions > 0),
+  );
+}
+
+/**
+ * Forums of one server for its icon: a forum the reader muted adds neither
+ * the unread dot nor its mentions, as for any muted channel
+ */
+export function serverForumsSummary(
+  forums: { muted: boolean; unread: boolean; mentions: number }[],
+): { unread: boolean; mentions: number } {
+  let unread = false;
+  let mentions = 0;
+  for (const forum of forums) {
+    if (forum.muted) continue;
+    if (forum.unread) unread = true;
+    mentions += forum.mentions;
+  }
+  return { unread, mentions };
+}

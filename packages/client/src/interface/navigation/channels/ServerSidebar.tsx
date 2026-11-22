@@ -61,7 +61,12 @@ import { SidebarIcon } from "./SidebarIcon";
 
 import { RulesIcon } from "@revolt/ui/icons/RulesIcon";
 import { useListToggle } from "@revolt/ui/motion";
-import { channelUnread, forumUnread } from "../../channels/forum/unread";
+import {
+  channelUnread,
+  forumUnread,
+  markServerRead,
+  serverHasNews,
+} from "../../channels/forum/unread";
 import { EventsLink } from "../../events/EventsLink";
 import { LobbyLink } from "../../lobby/LobbyLink";
 import { sidebarBase } from "./common";
@@ -269,10 +274,10 @@ export const ServerSidebar = (props: Props) => {
   );
 
   createKeybind(KeybindAction.CHAT_MARK_SERVER_AS_READ, () => {
-    if (props.server.unread) {
-      // a failed request is only a mark that comes back with the next sync
-      props.server.ack().catch(() => undefined);
-    }
+    const isMuted = (channel: Channel) => state.notifications.isMuted(channel);
+    // forums too: their posts are not in the server's channel list
+    if (serverHasNews(client(), props.server, isMuted))
+      void markServerRead(client(), props.server, isMuted);
   });
 
   const noOrdering = () => !props.server.havePermission("ManageChannel");

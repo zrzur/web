@@ -21,10 +21,16 @@ import {
 } from "@revolt/ui/icons/legacy";
 
 import {
+  channelUnread,
+  forumUnread,
+  markForumRead,
+} from "../../../src/interface/channels/forum/unread";
+import {
   ContextMenu,
   ContextMenuButton,
   ContextMenuDivider,
 } from "./ContextMenu";
+
 import { NotificationContextMenu } from "./shared/NotificationContextMenu";
 
 /**
@@ -40,8 +46,16 @@ export function ChannelContextMenu(props: { channel: Channel }) {
    * Mark channel as read
    */
   function markAsRead() {
-    props.channel.ack();
+    // a forum is read through its posts
+    if (props.channel.isForum) markForumRead(client(), props.channel, isMuted);
+    else props.channel.ack();
   }
+  const isMuted = (channel: Channel) => state.notifications.isMuted(channel);
+  const hasNews = () =>
+    channelUnread(client(), props.channel, isMuted) ||
+    !!props.channel.mentions?.size ||
+    (props.channel.isForum &&
+      forumUnread(client(), props.channel, isMuted).mentions > 0);
 
   /**
    * Create a new invite
@@ -136,14 +150,8 @@ export function ChannelContextMenu(props: { channel: Channel }) {
 
   return (
     <ContextMenu>
-      <Show
-        when={
-          props.channel.unread ||
-          !!props.channel.mentions?.size ||
-          props.channel.havePermission("InviteOthers")
-        }
-      >
-        <Show when={props.channel.unread || !!props.channel.mentions?.size}>
+      <Show when={hasNews() || props.channel.havePermission("InviteOthers")}>
+        <Show when={hasNews()}>
           <ContextMenuButton icon={MdMarkChatRead} onClick={markAsRead}>
             <Trans>Mark as read</Trans>
           </ContextMenuButton>
