@@ -543,6 +543,59 @@ describe("history: reconnecting", () => {
     expect(t.nums()[0]).toBe(160);
   });
 
+  it("a link being opened is not replaced by the newest page when the connection comes up", async () => {
+    // a page load with a saved session draws the channel while still
+    // connecting; the socket comes up while the page around the message is
+    // on its way
+    const t = setup(3000);
+    t.gate(true);
+    const opening = t.history.open({ around: id(1500) });
+    await flush();
+    const reload = t.history.reconnected();
+    t.release();
+    await flush();
+    t.release();
+    await Promise.all([opening, reload]);
+    expect(t.calls).toEqual(["nearby 1500"]);
+    expect(t.nums()).toContain(1500);
+    expect(t.state().window.atEnd).toBe(false);
+    expect(t.moves.at(-1)).toEqual({
+      to: "message",
+      id: id(1500),
+      glide: false,
+    });
+  });
+
+  it("after a jump that the connection overtook, missed newer messages are asked for", async () => {
+    const t = setup(3000);
+    t.gate(true);
+    const opening = t.history.open({ around: id(2990) });
+    await flush();
+    await t.history.reconnected();
+    t.release();
+    await opening;
+    t.gate(false);
+    expect(t.nums()).toContain(2990);
+    // the page reached the newest message, but one may have come meanwhile
+    expect(t.state().window.atEnd).toBe(false);
+    await t.history.loadNewer();
+    expect(t.calls).toEqual(["nearby 2990", "after 3000"]);
+    expect(t.state().window.atEnd).toBe(true);
+  });
+
+  it("a later jump is not marked stale by an earlier reconnect", async () => {
+    const t = setup(3000);
+    t.gate(true);
+    const first = t.history.open({ around: id(2990) });
+    await flush();
+    await t.history.reconnected();
+    t.gate(false);
+    const second = t.history.toMessage(id(2995));
+    t.release();
+    await Promise.all([first, second]);
+    expect(t.state().window.atEnd).toBe(true);
+  });
+
   it("clears an earlier failure so loading resumes", async () => {
     const t = setup(3000);
     await t.history.open();

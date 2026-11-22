@@ -131,6 +131,12 @@ export function createHistory<T extends { id: string }>(options: {
   /** What `retry` repeats */
   let again: (() => Promise<void>) | undefined;
 
+  /**
+   * The connection came back while a jump was on its way: once it lands,
+   * the newer side is asked for again (messages may have been missed)
+   */
+  let reconnectedDuringJump = false;
+
   function set(patch: Partial<HistoryState<T>>) {
     state = { ...state, ...patch };
     options.onChange(state);
@@ -172,6 +178,7 @@ export function createHistory<T extends { id: string }>(options: {
     const mine = ++ticket;
     arrivals = [];
     aroundTarget = undefined;
+    reconnectedDuringJump = false;
     again = () => replace(kind, request, build, move, stage);
     set({ pending: kind, failed: undefined });
 
@@ -192,6 +199,10 @@ export function createHistory<T extends { id: string }>(options: {
       window = addLive(window, message, { trim: false, limit: Infinity });
     }
     arrivals = undefined;
+    if (reconnectedDuringJump) {
+      reconnectedDuringJump = false;
+      window = markStale(window);
+    }
 
     const target = move(window);
     const unseen = window.atEnd && target.to === "present" ? 0 : state.unseen;
@@ -477,6 +488,14 @@ export function createHistory<T extends { id: string }>(options: {
     async reconnected(): Promise<void> {
       if (disposed) return;
       if (state.pending === "initial" || state.pending === "present") return;
+      // A jump is on its way (a link opened by a page load comes up while
+      // the connection is still being made, on phones mostly): its page is
+      // the server's answer, so it lands; the newest page must not replace
+      // it. Missed newer messages are asked for once it has landed.
+      if (state.pending === "around") {
+        reconnectedDuringJump = true;
+        return;
+      }
       if (
         !state.window.items.length ||
         (state.window.atEnd && view.atPresent())
