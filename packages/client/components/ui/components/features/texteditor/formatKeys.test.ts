@@ -63,6 +63,18 @@ describe("toggleMark", () => {
     expect(apply("**hi**", 2, 4, "*").next).toBe("***hi***");
   });
 
+  it("takes italic or bold off bold italic text, one mark at a time", () => {
+    expect(apply("***hi***", 3, 5, "*")).toEqual({
+      next: "**hi**",
+      selected: "hi",
+    });
+    expect(apply("***hi***", 3, 5, "**")).toEqual({
+      next: "*hi*",
+      selected: "hi",
+    });
+    expect(apply("*hi*", 1, 3, "**").next).toBe("***hi***");
+  });
+
   it("puts an empty pair at the cursor", () => {
     const edit = toggleMark("ab", 1, 1, "**");
     expect(edit.insert).toBe("****");

@@ -1,3 +1,5 @@
+import { deviceMac } from "./active";
+
 export enum KeybindAction {
   /**
    * Navigate to channel above current channel
@@ -137,6 +139,14 @@ export function keybindFilter(
     LINE_KEYS.has(keybind) &&
     (target?.closest?.(".cm-content")?.querySelectorAll(".cm-line").length ??
       0) > 1
+  )
+    return false;
+  // on a Mac, Option+arrows move by word and paragraph in a text field
+  if (
+    LINE_KEYS.has(keybind) &&
+    deviceMac() &&
+    (target instanceof HTMLInputElement ||
+      target instanceof HTMLTextAreaElement)
   )
     return false;
 
