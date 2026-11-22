@@ -669,6 +669,7 @@ export function MessageComposition(props: Props) {
               <MessageBox.FloatingAction
                 size="normal"
                 error={messageLength() > maxMessageLength()}
+                data-composer-counter
               >
                 {wayTooLong()
                   ? t`Too long`
@@ -782,6 +783,10 @@ export function MessageComposition(props: Props) {
         }
         hasActionsAppend={
           state.settings.getValue("appearance:show_send_button") || false
+        }
+        crowded={
+          (draft().files?.length ?? 0) > 0 ||
+          (draft().replies?.length ?? 0) > 0
         }
         actionsAppend={
           <Show when={state.settings.getValue("appearance:show_send_button")}>

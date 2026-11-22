@@ -330,12 +330,6 @@ const editor = css({
     maxHeight: "var(--z-text-editor-max-height, 100%)",
   },
 
-  // a finger or wheel at the top or bottom of the text does not carry on
-  // into the message list behind it
-  "& .cm-scroller": {
-    overscrollBehavior: "contain",
-  },
-
   "& .cm-editor.cm-focused": {
     outline: "none !important",
   },

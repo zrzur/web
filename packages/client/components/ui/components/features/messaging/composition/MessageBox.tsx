@@ -66,6 +66,11 @@ interface Props {
   hasActionsAppend: boolean;
 
   /**
+   * Whether a reply bar or a row of files shows above the box
+   */
+  crowded?: boolean;
+
+  /**
    * Placeholder in message box
    */
   placeholder: string;
@@ -127,12 +132,29 @@ const Base = styled("div", {
     // a long message stops growing the box at 40 % of the height that is
     // seen (above the on-screen keyboard and a docked emoji panel) and
     // scrolls inside the editor instead; the box used to grow past its row
-    // and over the message list, with the send button pushed off screen
+    // and over the message list, with the send button pushed off screen.
+    // Never below one dock row, so a very short screen still has a line.
+    "--z-composer-share": "0.4",
     "--z-composer-max-height":
-      "calc((100dvh - max(var(--keyboard-inset, 0px), env(keyboard-inset-height, 0px)) - var(--z-picker-dock, 0px)) * 0.4)",
-    // the editor gets what is left inside the padding (2 × 7) and border (2 × 1)
-    "--z-text-editor-max-height": "calc(var(--z-composer-max-height) - 16px)",
-    maxHeight: "var(--z-composer-max-height)",
+      "max(var(--z-dock-height, 56px), calc((100dvh - max(var(--keyboard-inset, 0px), env(keyboard-inset-height, 0px)) - var(--z-picker-dock, 0px)) * var(--z-composer-share)))",
+    // browsers without dvh (before Safari 15.4 / Chrome 108): a custom
+    // property keeps an unknown unit and only fails where it is used, so the
+    // fallback has to be a separate rule, not a second line before it
+    "@supports not (height: 1dvh)": {
+      "--z-composer-max-height":
+        "max(var(--z-dock-height, 56px), calc((100vh - max(var(--keyboard-inset, 0px), env(keyboard-inset-height, 0px)) - var(--z-picker-dock, 0px)) * var(--z-composer-share)))",
+    },
+    // the editor gets what is left inside the padding (2 × 7) and border
+    // (2 × 1), at least one 40 px row. The box itself has no max-height: the
+    // action column (with the length counter it is 64 px) must never be cut
+    "--z-text-editor-max-height":
+      "max(40px, calc(var(--z-composer-max-height) - 16px))",
+
+    // a finger or wheel at the top or bottom of the text does not carry on
+    // into the message list behind it
+    "& .cm-scroller": {
+      overscrollBehavior: "contain",
+    },
 
     display: "flex",
     alignItems: "flex-start",
@@ -148,9 +170,16 @@ const Base = styled("div", {
       true: {},
       false: {},
     },
+    // a reply bar or a row of files sits above the box: a smaller share, so
+    // the message list keeps room on a phone with the keyboard open
+    crowded: {
+      true: { "--z-composer-share": "0.2" },
+      false: {},
+    },
   },
   defaultVariants: {
     hasActionsAppend: false,
+    crowded: false,
   },
 });
 
@@ -294,7 +323,11 @@ export function MessageBox(props: Props) {
 
   return (
     <Parent>
-      <Base hasActionsAppend={props.hasActionsAppend} data-composer-box>
+      <Base
+        hasActionsAppend={props.hasActionsAppend}
+        crowded={!!props.crowded}
+        data-composer-box
+      >
         <Switch fallback={props.actionsStart}>
           <Match when={props.timeoutActive || !props.sendingAllowed}>
             <InlineIcon>
