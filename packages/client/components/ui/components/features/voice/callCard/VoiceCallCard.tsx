@@ -1,3 +1,4 @@
+import { lazy } from "@revolt/common/lib/lazyPart";
 import {
   type ComponentProps,
   JSX,
@@ -7,7 +8,6 @@ import {
   createContext,
   createEffect,
   createSignal,
-  lazy,
   onCleanup,
   onMount,
   useContext,

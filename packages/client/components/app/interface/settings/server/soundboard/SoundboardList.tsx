@@ -1,10 +1,10 @@
+import { lazy } from "@revolt/common/lib/lazyPart";
 import {
   For,
   Show,
   Suspense,
   createResource,
   createSignal,
-  lazy,
   onCleanup,
   onMount,
 } from "solid-js";

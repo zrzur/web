@@ -1,4 +1,5 @@
-import { Suspense, lazy } from "solid-js";
+import { lazy } from "@revolt/common/lib/lazyPart";
+import { Suspense } from "solid-js";
 
 import { Trans, useLingui } from "@lingui/solid/macro";
 import { Server } from "@zrzur/sdk/solid";

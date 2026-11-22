@@ -2,7 +2,7 @@
 /**
  * The app: every page of the signed-in app, plus sign-in
  */
-import { lazy } from "solid-js";
+import { lazy } from "@revolt/common/lib/lazyPart";
 
 import { Route } from "@solidjs/router";
 

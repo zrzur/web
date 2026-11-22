@@ -1,3 +1,4 @@
+import { lazy } from "@revolt/common/lib/lazyPart";
 import {
   type JSX,
   For,
@@ -7,7 +8,6 @@ import {
   Switch,
   createEffect,
   createResource,
-  lazy,
   onCleanup,
 } from "solid-js";
 import { Portal } from "solid-js/web";

@@ -1,4 +1,5 @@
-import { lazy, mergeProps, splitProps } from "solid-js";
+import { lazy } from "@revolt/common/lib/lazyPart";
+import { mergeProps, splitProps } from "solid-js";
 
 import { IS_DEV } from "@revolt/client";
 

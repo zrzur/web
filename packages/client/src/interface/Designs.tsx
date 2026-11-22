@@ -1,3 +1,4 @@
+import { lazy } from "@revolt/common/lib/lazyPart";
 import {
   For,
   Match,
@@ -8,7 +9,6 @@ import {
   createMemo,
   createResource,
   createSignal,
-  lazy,
   on,
   onCleanup,
   onMount,

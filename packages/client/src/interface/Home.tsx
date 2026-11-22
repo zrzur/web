@@ -1,5 +1,6 @@
+import { lazy } from "@revolt/common/lib/lazyPart";
 import { AvatarDecoration } from "@revolt/ui/components/features/profiles/AvatarDecoration";
-import { For, JSX, Show, Suspense, createMemo, lazy } from "solid-js";
+import { For, JSX, Show, Suspense, createMemo } from "solid-js";
 
 import { Trans, useLingui } from "@lingui/solid/macro";
 import { styled } from "styled-system/jsx";

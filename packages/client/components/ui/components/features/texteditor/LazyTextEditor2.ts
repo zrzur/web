@@ -1,4 +1,4 @@
-import { lazy } from "solid-js";
+import { lazy } from "@revolt/common/lib/lazyPart";
 
 /**
  * The text editor (CodeMirror) loads when the first editor is shown, not

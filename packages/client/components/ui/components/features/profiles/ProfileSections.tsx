@@ -1,13 +1,5 @@
-import {
-  For,
-  JSX,
-  Match,
-  Show,
-  Suspense,
-  Switch,
-  createMemo,
-  lazy,
-} from "solid-js";
+import { lazy } from "@revolt/common/lib/lazyPart";
+import { For, JSX, Match, Show, Suspense, Switch, createMemo } from "solid-js";
 
 import { Trans, useLingui } from "@lingui/solid/macro";
 import { ServerMember, User, UserProfile } from "@zrzur/sdk/solid";

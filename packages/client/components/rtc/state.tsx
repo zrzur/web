@@ -1,3 +1,4 @@
+import { lazy } from "@revolt/common/lib/lazyPart";
 import { saveData, voiceBitrateWhenSaving } from "@revolt/common/lib/saveData";
 import {
   Accessor,
@@ -8,7 +9,6 @@ import {
   createSignal,
   getOwner,
   JSX,
-  lazy,
   on,
   onCleanup,
   runWithOwner,
