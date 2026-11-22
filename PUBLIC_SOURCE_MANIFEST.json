@@ -262,8 +262,8 @@
     },
     {
       "path": "CHANGELOG.md",
-      "sha256": "d96a6bb39c4307016dac6448203ee290cb049504b86d06e77efc97c36576ef20",
-      "bytes": 196675,
+      "sha256": "f56192a41e1d5fc871c62eb71d0c541eb20ace522bcab0a802c19a9eaccf3fc4",
+      "bytes": 196870,
       "category": "public-documentation"
     },
     {
@@ -618,6 +618,18 @@
       "path": "packages/client/components/app/index.tsx",
       "sha256": "2faffd1a9dcccbb929ed2e09cb0e56e72578c8f83599174daaca938e738b4dd7",
       "bytes": 390,
+      "category": "product-source-or-build-manifest"
+    },
+    {
+      "path": "packages/client/components/app/interface/PageBoundary.dom.test.tsx",
+      "sha256": "c610a5e397e49d337dbd93fd09030fb1a2b88f90d6995c1975cd297d1866207b",
+      "bytes": 3532,
+      "category": "synthetic-test-source-or-fixture"
+    },
+    {
+      "path": "packages/client/components/app/interface/PageBoundary.tsx",
+      "sha256": "0d8475b011050c45018c322b658e21ed5c9ca9210643ede7d58f07c8a896e3d5",
+      "bytes": 1935,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -42574,8 +42586,8 @@
     },
     {
       "path": "packages/client/src/Interface.tsx",
-      "sha256": "bb19e019fd0499fe0a56c3cc3e491ef03cf7e3b659903e0f2b3f5e45dddd0cdf",
-      "bytes": 14051,
+      "sha256": "29e47aca026eab2ebea6b86f76d8dd42c345c34c54568b67528db8228bcfc508",
+      "bytes": 14302,
       "category": "product-source-or-build-manifest"
     },
     {
