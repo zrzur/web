@@ -202,27 +202,72 @@ describe("the same part failing twice in a row while online (Safari keeps failed
     vi.spyOn(navigator, "onLine", "get").mockReturnValue(value);
   afterEach(() => vi.restoreAllMocks());
 
-  it("asks the app to reload once the second try fails too", async () => {
+  /** open the part (a press), then close it again */
+  async function press(setOpen: (open: boolean) => void, ms = 20) {
+    setOpen(true);
+    await tick(ms);
+    setOpen(false);
+    await tick();
+  }
+
+  it("asks the app to reload when the second press fails too", async () => {
     online(true);
     const { Part } = flakyPart(5);
-    await Part.preload().catch(() => undefined);
+    const setOpen = mountBehindSwitch(Part);
+    await press(setOpen);
     expect(repeated).not.toHaveBeenCalled();
-    await Part.preload().catch(() => undefined);
+    await press(setOpen);
     expect(repeated).toHaveBeenCalledTimes(1);
   });
 
-  it("counts the quiet second try of retryMs as the second try", async () => {
+  it("does not count preloads (hover, focus, a finger landing on a link)", async () => {
     online(true);
-    const { Part } = flakyPart(5, 1);
-    await Part.preload().catch(() => undefined);
+    const { load, Part } = flakyPart(5);
+    for (let i = 0; i < 4; i++) await Part.preload().catch(() => undefined);
+    expect(load).toHaveBeenCalledTimes(4);
+    expect(repeated).not.toHaveBeenCalled();
+    // one real press after them is still only the first
+    await press(mountBehindSwitch(Part));
+    expect(repeated).not.toHaveBeenCalled();
+  });
+
+  it("counts a part's quiet second try (retryMs) with its first: one press is one failure", async () => {
+    online(true);
+    const { load, Part } = flakyPart(5, 1);
+    const setOpen = mountBehindSwitch(Part);
+    await press(setOpen, 50);
+    expect(load).toHaveBeenCalledTimes(2);
+    expect(repeated).not.toHaveBeenCalled();
+    await press(setOpen, 50);
     expect(repeated).toHaveBeenCalledTimes(1);
+  });
+
+  it("a bug in the part's code is passed on as it is, and never counts", async () => {
+    online(true);
+    const bug = new ReferenceError("thing is not defined");
+    const load = vi.fn(() => Promise.reject(bug));
+    const setOpen = mountBehindSwitch(lazy(load));
+    await press(setOpen);
+    await press(setOpen);
+    expect(caught).toEqual([bug, bug]);
+    expect(caught[0]).not.toBeInstanceOf(PartLoadError);
+    expect(repeated).not.toHaveBeenCalled();
+  });
+
+  it("a TypeError that is not a lost download is a bug too", async () => {
+    online(true);
+    const bug = new TypeError("Cannot read properties of undefined");
+    const setOpen = mountBehindSwitch(lazy(() => Promise.reject(bug)));
+    await press(setOpen);
+    expect(caught[0]).toBe(bug);
   });
 
   it("does nothing while the device is offline", async () => {
     online(false);
     const { Part } = flakyPart(5);
-    await Part.preload().catch(() => undefined);
-    await Part.preload().catch(() => undefined);
+    const setOpen = mountBehindSwitch(Part);
+    await press(setOpen);
+    await press(setOpen);
     expect(repeated).not.toHaveBeenCalled();
   });
 
@@ -234,9 +279,9 @@ describe("the same part failing twice in a row while online (Safari keeps failed
         ? Promise.reject(lost())
         : Promise.resolve({ default: Loaded }),
     );
-    const Part = lazy(load);
-    await Part.preload().catch(() => undefined);
-    await Part.preload();
+    const setOpen = mountBehindSwitch(lazy(load));
+    await press(setOpen);
+    await press(setOpen);
     expect(repeated).not.toHaveBeenCalled();
   });
 });

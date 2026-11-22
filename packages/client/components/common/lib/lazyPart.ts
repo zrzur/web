@@ -29,7 +29,11 @@ import { type Component, createComponent, lazy as solidLazy } from "solid-js";
 
 /** A part of the app could not be downloaded; `cause` is the import's error */
 export class PartLoadError extends Error {
-  constructor(cause: unknown) {
+  constructor(
+    cause: unknown,
+    /** the part that failed (what `lazy()` returned) */
+    readonly part?: unknown,
+  ) {
     super("A part of the app could not be loaded", { cause });
     this.name = "PartLoadError";
   }
@@ -40,8 +44,21 @@ export const isPartLoadError = (error: unknown): error is PartLoadError =>
   error instanceof PartLoadError;
 
 /**
- * Called when one part failed to download twice in a row while the device
- * says it is online. Safari keeps a failed module in its module map, so
+ * The errors browsers give a dynamic import whose file did not arrive:
+ * Chrome "Failed to fetch dynamically imported module", Safari "Importing a
+ * module script failed.", Firefox "error loading dynamically imported
+ * module". Anything else (a SyntaxError, a ReferenceError while the module
+ * runs) is a bug in the code and must not be dressed up as a lost download.
+ */
+const DOWNLOAD_FAILED =
+  /dynamically imported module|Importing a module script failed|error loading dynamically imported module/i;
+
+export const isDownloadFailure = (error: unknown) =>
+  error instanceof TypeError && DOWNLOAD_FAILED.test(error.message);
+
+/**
+ * Called when one part failed to download twice in a row, each time when it
+ * was opened (not preloaded), while the device says it is online. Safari keeps a failed module in its module map, so
  * asking again can never work there; only a reload clears it. The app hands
  * this to the stale-build reload (src/staleBuild.ts), which reloads only
  * when the server answers, never during a call, and at most once in 30 s.
@@ -72,48 +89,59 @@ export function lazy<T extends Component<any>>(
   fn: () => Promise<{ default: T }>,
   retryMs?: number,
 ): T & { preload: () => Promise<{ default: T }> } {
-  /** failed tries in a row while online */
+  /**
+   * Failed downloads in a row while online, counted only for a press or an
+   * open (a person waited for the part): a preload (hover, focus, the
+   * router getting a page ready) never counts, and a part's quiet second
+   * try (retryMs) is one failure with its first, not two
+   */
   let failuresOnline = 0;
   /** the download under way, or the one that worked */
   let pending: Promise<{ default: T }> | undefined;
-
-  const ask = () =>
-    fn().catch((error: unknown) => {
-      failuresOnline = online() ? failuresOnline + 1 : 0;
-      if (failuresOnline >= 2) {
-        failuresOnline = 0;
-        repeatedFailure?.();
-      }
-      throw error;
-    });
+  /** someone opened the part while the download under way runs */
+  let opened = false;
 
   const attempt = () =>
     retryMs === undefined
-      ? ask()
-      : ask().catch(
+      ? fn()
+      : fn().catch(
           () =>
             new Promise<{ default: T }>((resolve, reject) =>
-              setTimeout(() => ask().then(resolve, reject), retryMs),
+              setTimeout(() => fn().then(resolve, reject), retryMs),
             ),
         );
 
-  const load = (): Promise<{ default: T }> =>
-    (pending ??= attempt().then(
+  const load = (byOpen: boolean): Promise<{ default: T }> => {
+    if (byOpen) opened = true;
+    return (pending ??= attempt().then(
       (module) => {
         failuresOnline = 0;
+        opened = false;
         // drawn straight from now on: no loading pass, no empty frame
         current = module.default;
         return module;
       },
       (error: unknown) => {
+        const counts = opened;
+        opened = false;
         // forget the failure: the next time the part opens it asks again
         pending = undefined;
-        current = solidLazy(load);
-        throw new PartLoadError(error);
+        current = solidLazy(() => load(true));
+        // a bug in the code is not a lost download: as it was
+        if (!isDownloadFailure(error)) throw error;
+        if (counts) {
+          failuresOnline = online() ? failuresOnline + 1 : 0;
+          if (failuresOnline >= 2) {
+            failuresOnline = 0;
+            repeatedFailure?.();
+          }
+        }
+        throw new PartLoadError(error, part);
       },
     ));
+  };
 
-  let current: T = solidLazy(load) as unknown as T;
+  let current: T = solidLazy(() => load(true)) as unknown as T;
 
   // the part as rendered now: Solid's lazy while it is not here (a new copy
   // after a failure, so it starts over), the part itself once it is
@@ -130,7 +158,7 @@ export function lazy<T extends Component<any>>(
   // promise as handled, so a dropped one leaves no unhandled rejection;
   // whoever awaits it still gets the failure.
   part.preload = () => {
-    const promise = load();
+    const promise = load(false);
     promise.catch(() => undefined);
     return promise;
   };
