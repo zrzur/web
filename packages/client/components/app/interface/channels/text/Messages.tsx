@@ -389,10 +389,7 @@ export function Messages(props: Props) {
   onMount(() => {
     // Setup references if they exist
     props.jumpToBottomRef?.(jumpToBottom);
-    props.jumpToMessageRef?.((messageId) => {
-      controller?.toMessage(messageId);
-      props.onJump?.();
-    });
+    props.jumpToMessageRef?.(jumpToMessage);
 
     const c = client();
     c.addListener("messageCreate", onMessage);
@@ -559,6 +556,14 @@ export function Messages(props: Props) {
 
     return messagesWithTail.reverse();
   });
+
+  /**
+   * Go to a message, also the one already in the address
+   */
+  function jumpToMessage(messageId: string) {
+    controller?.toMessage(messageId);
+    props.onJump?.();
+  }
 
   /**
    * Go to the newest message
