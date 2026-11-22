@@ -31320,3 +31320,15 @@ msgstr "ابدأ بـ # للقنوات، أو @ للأشخاص، أو * للسي
 #: components/app/interface/settings/user/Keybinds.tsx
 msgid "Type a name. Start with # for channels, @ for people or * for servers."
 msgstr "اكتب اسمًا. ابدأ بـ # للقنوات، أو @ للأشخاص، أو * للسيرفرات."
+
+#: components/ui/components/features/messaging/elements/Container.tsx
+msgid "Message from {name}, {time}"
+msgstr "رسالة من {name}، {time}"
+
+#: components/app/interface/channels/text/useMessageKeys.ts
+msgid "Replying to {name}"
+msgstr "رد على {name}"
+
+#: components/app/interface/channels/text/useMessageKeys.ts
+msgid "The text could not be copied."
+msgstr "تعذّر نسخ النص."

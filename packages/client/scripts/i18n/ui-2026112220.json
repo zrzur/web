@@ -1,0 +1,11 @@
+{
+  "Message from {name}, {time}": [
+    "رسالة من {name}، {time}",
+    "Nachricht von {name}, {time}"
+  ],
+  "Replying to {name}": ["رد على {name}", "Antwort an {name}"],
+  "The text could not be copied.": [
+    "تعذّر نسخ النص.",
+    "Der Text ließ sich nicht kopieren."
+  ]
+}
