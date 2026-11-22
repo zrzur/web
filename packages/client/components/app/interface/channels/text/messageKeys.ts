@@ -1,6 +1,8 @@
 /**
- * Keys on a message: the one under the pointer, or the one with keyboard
- * focus (Up and Down move between messages in the list). Listed in Ctrl+/.
+ * Keys on the message with keyboard focus (Up and Down move between
+ * messages in the list, from the list or a clicked message). Never on a
+ * message only under the pointer: with no field focused, a typed letter
+ * goes into the message box as before. Listed in Ctrl+/.
  *
  *   R             reply
  *   E             edit (your own)
@@ -68,16 +70,24 @@ export function messageAriaKeys(mac: boolean) {
   return `R E P Delete Shift+Delete ${mac ? "Meta" : "Control"}+C`;
 }
 
-/** The message row a key press is about: focused first, then hovered */
+/**
+ * The message row a key press is about: the one the keyboard moved the
+ * focus to (a row a click focused shows no focus ring and takes no keys)
+ */
 export function targetMessageRow(doc: Document = document) {
-  const focused = doc.activeElement?.closest<HTMLElement>("[data-message-row]");
-  if (focused) return focused;
-  // a row under the pointer, in the open conversation only
-  return (
-    doc.querySelector<HTMLElement>(
-      "[data-message-scroller] [data-message-row]:hover",
-    ) ?? undefined
-  );
+  const active = doc.activeElement;
+  // the row itself, not a link or button inside it
+  if (!(active instanceof HTMLElement) || !active.matches("[data-message-row]"))
+    return;
+  return keyboardFocused(active) ? active : undefined;
+}
+
+function keyboardFocused(element: HTMLElement) {
+  try {
+    return element.matches(":focus-visible");
+  } catch {
+    return true;
+  }
 }
 
 export type MessageKeyDeps = {
