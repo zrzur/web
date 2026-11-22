@@ -2,6 +2,14 @@
 
 ## Unreleased
 
+### Rich presence (2026-11-22, shown only when the server has `features.rich_presence` on)
+
+* **What people are doing right now:** one line under the name in the member list and the DM list ("Playing Star Kebab", "Using Visual Studio Code", "Listening to Spotify", with its own icon) when they have no status text, and an Activity part at the top of the profile card and the full profile: picture (only from Zrzur's file server or proxy), name, details, state, a live timer ("for 12:05", or the time left with a bar), where it came from (the app, the desktop app, Steam) and up to two buttons that open through the link warning. The main activity first (the app's own report, then what the desktop saw, then Steam); a game reported twice shows once. Hidden while the person is offline or invisible. One clock ticks for all timers, only while one is on screen.
+* **Settings → Activity** (web and desktop): "Share what you are doing" (on for adults, off under 18 until chosen; off removes what others see at once), "Show what you play on Steam", a preview of what others see, and the privacy facts. In the desktop app also: "Detect games and apps", the list of 88 games and apps with on/off and Rename, "Add a program" from the programs running, the apps that set an activity with Block and Forget, pairing for the browser extension, and "Games made for other chat apps". In a browser the page says it cannot see running programs.
+* The desktop app's reports go to the server at most once every 4.5 s (the server takes 5 changes in 20 s), the newest of each kind wins, and both are sent again after a reconnect.
+* Developer docs: "Rich presence for games" (en, ar, de) with a runnable example (`@zrzur/sdk/rpc`).
+* Every new text in English, Arabic and German.
+
 ### A friend request opens the sender's profile (2026-11-21)
 
 * **From the phone Notifications page:** the sender's picture and the line "… sent you a friend request" are one button (44 px high) that opens their profile. Screen readers hear the sentence they see as its name, then "Open profile" (ar, en, de) as its description. Accept, Decline and Send message are separate buttons and are not touched by it. The page closes first so the profile is not under it; the profile has its own Accept.

@@ -29,6 +29,7 @@ import {
   UserStatus,
   typography,
 } from "@revolt/ui";
+import { ActivityLine } from "@revolt/ui/components/features/activity/ActivityLine";
 import { Symbol } from "@revolt/ui/components/utils/Symbol";
 import { Icon } from "@revolt/ui/icons/Icon";
 
@@ -524,6 +525,10 @@ function Entry(
                   <TextWithEmoji content={status()!} />
                 </OverflowingText>
               </Tooltip>
+            </Show>
+            {/* rich presence: what they are doing, when no status says it */}
+            <Show when={!status()}>
+              <ActivityLine user={local.channel.recipient} />
             </Show>
           </Match>
         </Switch>

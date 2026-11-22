@@ -521,7 +521,7 @@ msgstr "Sprache mit {0} kbit/s"
 #. placeholder {0}: (message.systemMessage as UserSystemMessage).user?.username
 #: components/client/NotificationsWorker.tsx
 msgid "{0} left"
-msgstr "{0} ist gegangen"
+msgstr "noch {0}"
 
 #. placeholder {0}: mood.looks.length
 #: src/interface/designs/Home.tsx
@@ -31151,3 +31151,213 @@ msgstr "Ein Mitglied, das gegangen ist"
 #: components/app/interface/settings/channel/permissions/ChannelVisibility.tsx
 msgid "This thread follows who can see its channel."
 msgstr "Dieser Thread übernimmt, wer seinen Kanal sehen kann."
+
+#: components/app/interface/settings/user/activity/ActivitySettings.tsx
+msgid "A browser cannot see which games or programs are running, so nothing is detected here. The Zrzur desktop app can, and apps can tell it what they do. Steam works everywhere."
+msgstr "Ein Browser kann nicht sehen, welche Spiele oder Programme laufen, daher wird hier nichts erkannt. Die Zrzur-Desktop-App kann das, und Apps können ihr sagen, was sie tun. Steam funktioniert überall."
+
+#: components/app/interface/settings/UserSettings.tsx
+#: components/ui/components/features/activity/ProfileActivity.tsx
+msgid "Activity"
+msgstr "Aktivität"
+
+#: components/app/interface/settings/user/activity/ActivitySettings.tsx
+msgid "Add a program"
+msgstr "Programm hinzufügen"
+
+#: components/app/interface/settings/user/activity/ActivitySettings.tsx
+msgid "Allowed"
+msgstr "Erlaubt"
+
+#: components/app/interface/settings/user/activity/ActivitySettings.tsx
+msgid "Apps connect through the Zrzur desktop app."
+msgstr "Apps verbinden sich über die Zrzur-Desktop-App."
+
+#: components/app/interface/settings/user/activity/ActivitySettings.tsx
+msgid "Apps never learn who you are from Zrzur. Pictures are shown through Zrzur's servers, and links open with a warning."
+msgstr "Apps erfahren von Zrzur nie, wer du bist. Bilder werden über die Server von Zrzur gezeigt, und Links öffnen sich mit einer Warnung."
+
+#: components/app/interface/settings/user/activity/ActivitySettings.tsx
+msgid "Blocked: never shown"
+msgstr "Blockiert: wird nie gezeigt"
+
+#: components/app/interface/settings/user/activity/ActivitySettings.tsx
+msgid "Browser extension"
+msgstr "Browser-Erweiterung"
+
+#: components/ui/components/features/activity/ActivityLine.tsx
+msgid "Competing in {name}"
+msgstr "Tritt an in {name}"
+
+#: components/app/interface/settings/user/activity/ActivitySettings.tsx
+msgid "Detect games and apps"
+msgstr "Spiele und Apps erkennen"
+
+#: components/app/interface/settings/user/activity/ActivitySettings.tsx
+msgid "Find a game or app"
+msgstr "Spiel oder App suchen"
+
+#. placeholder {0}: time()
+#: components/ui/components/features/activity/ProfileActivity.tsx
+msgid "for {0}"
+msgstr "seit {0}"
+
+#: components/app/interface/settings/user/activity/ActivitySettings.tsx
+msgid "Friends and people in your servers see the game or app you are using, with how long you have been at it."
+msgstr "Freunde und Leute in deinen Servern sehen das Spiel oder die App, die du gerade nutzt, und wie lange schon."
+
+#: components/app/interface/settings/user/activity/ActivitySettings.tsx
+msgid "Games and apps on this computer"
+msgstr "Spiele und Apps auf diesem Computer"
+
+#: components/app/interface/settings/user/activity/ActivitySettings.tsx
+msgid "Games and apps that told Zrzur what you are doing, through the desktop app. Block one and it is never shown."
+msgstr "Spiele und Apps, die Zrzur über die Desktop-App gesagt haben, was du tust. Blockiere eine, und sie wird nie gezeigt."
+
+#: components/app/interface/settings/user/activity/ActivitySettings.tsx
+msgid "Games made for other chat apps"
+msgstr "Spiele für andere Chat-Apps"
+
+#: components/app/interface/settings/user/activity/ActivitySettings.tsx
+msgid "Hidden while you are invisible or offline. Turn it off and it disappears at once."
+msgstr "Unsichtbar, solange du unsichtbar oder offline bist. Schalte es aus, und es verschwindet sofort."
+
+#: components/app/interface/settings/user/activity/ActivitySettings.tsx
+msgid "Kind"
+msgstr "Art"
+
+#: components/ui/components/features/activity/ActivityLine.tsx
+msgid "Listening to {name}"
+msgstr "Hört {name}"
+
+#: components/app/interface/settings/user/activity/ActivitySettings.tsx
+msgid "Looks at the names of running programs every 15 seconds, on this computer only. Only the program's name is shown, never window titles, tabs or files."
+msgstr "Liest alle 15 Sekunden die Namen laufender Programme, nur auf diesem Computer. Gezeigt wird nur der Name des Programms, nie Fenstertitel, Tabs oder Dateien."
+
+#: components/app/interface/settings/user/activity/ActivitySettings.tsx
+msgid "Many games already report what you do to another chat app. Zrzur can listen in its place, only while that app is closed."
+msgstr "Viele Spiele melden schon einer anderen Chat-App, was du tust. Zrzur kann an ihrer Stelle zuhören, nur solange diese App geschlossen ist."
+
+#: components/app/interface/settings/user/activity/ActivitySettings.tsx
+msgid "Name others see"
+msgstr "Name, den andere sehen"
+
+#: components/app/interface/settings/user/activity/ActivitySettings.tsx
+msgid "No app has connected yet. Zrzur for VS Code and the Zrzur browser extension show here once they connect."
+msgstr "Noch keine App verbunden. Zrzur für VS Code und die Zrzur-Browser-Erweiterung erscheinen hier, sobald sie sich verbinden."
+
+#: components/app/interface/settings/user/activity/ActivitySettings.tsx
+msgid "Nothing right now."
+msgstr "Gerade nichts."
+
+#: components/app/interface/settings/user/activity/ActivitySettings.tsx
+msgid "Nothing: sharing is off."
+msgstr "Nichts: Teilen ist aus."
+
+#: components/app/interface/settings/user/activity/ActivitySettings.tsx
+msgid "Pair"
+msgstr "Koppeln"
+
+#: components/app/interface/settings/user/activity/ActivitySettings.tsx
+msgid "Paired."
+msgstr "Gekoppelt."
+
+#: components/ui/components/features/activity/ActivityLine.tsx
+msgid "Playing {name}"
+msgstr "Spielt {name}"
+
+#: components/app/interface/settings/user/activity/ActivitySettings.tsx
+msgid "Read from your linked Steam account about once a minute while you are online. Works on the web and on phones too. Link Steam in Connections first."
+msgstr "Etwa einmal pro Minute aus deinem verknüpften Steam-Konto gelesen, solange du online bist. Funktioniert auch im Web und auf Handys. Verknüpfe Steam zuerst unter Verbindungen."
+
+#: components/ui/components/features/activity/ProfileActivity.tsx
+msgid "Reported by the app"
+msgstr "Von der App gemeldet"
+
+#: src/interface/developers/docs/DocsPortal.tsx
+msgid "Rich presence for games"
+msgstr "Aktivitätsstatus für Spiele"
+
+#: components/app/interface/settings/user/activity/ActivitySettings.tsx
+msgid "Running now"
+msgstr "Läuft gerade"
+
+#: components/app/interface/settings/user/activity/ActivitySettings.tsx
+msgid "Running program"
+msgstr "Laufendes Programm"
+
+#: components/ui/components/features/activity/ProfileActivity.tsx
+msgid "Seen by the Zrzur desktop app"
+msgstr "Von der Zrzur-Desktop-App erkannt"
+
+#: components/app/interface/settings/user/activity/ActivitySettings.tsx
+msgid "Share what you are doing"
+msgstr "Teilen, was du gerade tust"
+
+#: components/app/interface/settings/user/activity/ActivitySettings.tsx
+msgid "Share your activity"
+msgstr "Deine Aktivität teilen"
+
+#: components/app/interface/settings/user/activity/ActivitySettings.tsx
+msgid "Show fewer"
+msgstr "Weniger zeigen"
+
+#: components/app/interface/settings/user/activity/ActivitySettings.tsx
+msgid "Show what you play on Steam"
+msgstr "Zeigen, was du auf Steam spielst"
+
+#: components/app/interface/settings/user/activity/ActivitySettings.tsx
+msgid "Showing your activity now"
+msgstr "Zeigt gerade deine Aktivität"
+
+#: components/app/interface/settings/user/activity/ActivitySettings.tsx
+msgid "Shows the site you choose, never the page or its title."
+msgstr "Zeigt die Website, die du wählst, nie die Seite oder ihren Titel."
+
+#: components/ui/components/features/activity/ActivityLine.tsx
+msgid "Streaming {name}"
+msgstr "Streamt {name}"
+
+#: components/app/interface/settings/user/activity/ActivitySettings.tsx
+msgid "The desktop app reads program names on this computer only; the list of programs never leaves it."
+msgstr "Die Desktop-App liest Programmnamen nur auf diesem Computer; die Liste der Programme verlässt ihn nie."
+
+#: components/ui/components/features/activity/ProfileActivity.tsx
+msgid "Time gone"
+msgstr "Verstrichene Zeit"
+
+#: components/app/interface/settings/user/activity/ActivitySettings.tsx
+msgid "Type this code in the extension:"
+msgstr "Gib diesen Code in der Erweiterung ein:"
+
+#: components/app/interface/settings/user/activity/ActivitySettings.tsx
+msgid "Under 18 this starts off. Turn it on only if you want others to see it."
+msgstr "Unter 18 ist das zuerst aus. Schalte es nur ein, wenn andere es sehen sollen."
+
+#: components/ui/components/features/activity/ActivityLine.tsx
+msgid "Using {name}"
+msgstr "Nutzt {name}"
+
+#: components/ui/components/features/activity/ActivityLine.tsx
+msgid "Watching {name}"
+msgstr "Schaut {name}"
+
+#: components/app/interface/settings/user/activity/ActivitySettings.tsx
+msgid "What others see now"
+msgstr "Was andere jetzt sehen"
+
+#: components/app/interface/settings/user/activity/ActivitySettings.tsx
+msgid "Who sees it: the people who can see that you are online. Nobody while you are invisible."
+msgstr "Wer es sieht: die Leute, die sehen können, dass du online bist. Niemand, solange du unsichtbar bist."
+
+#: components/app/interface/settings/user/activity/ActivitySettings.tsx
+msgid "Your choices here (programs turned off or renamed, blocked apps) stay on this computer."
+msgstr "Deine Entscheidungen hier (ausgeschaltete oder umbenannte Programme, blockierte Apps) bleiben auf diesem Computer."
+
+#: components/app/interface/settings/user/activity/ActivitySettings.tsx
+msgid "Your privacy"
+msgstr "Deine Privatsphäre"
+
+#: components/app/interface/settings/user/activity/ActivitySettings.tsx
+msgid "Zrzur keeps no history: an activity exists only while you are online and goes when you go offline."
+msgstr "Zrzur speichert keinen Verlauf: Eine Aktivität gibt es nur, solange du online bist, und sie verschwindet, wenn du offline gehst."

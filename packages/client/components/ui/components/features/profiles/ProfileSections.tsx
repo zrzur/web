@@ -13,6 +13,8 @@ import { Trans, useLingui } from "@lingui/solid/macro";
 import { ServerMember, User, UserProfile } from "@zrzur/sdk/solid";
 import { styled } from "styled-system/jsx";
 
+import { ProfileActivity } from "../activity/ProfileActivity";
+
 import { ProfileBio } from "./ProfileBio";
 import { ProfileCard, ProfileSkeleton } from "./ProfileCard";
 import { connectionInterests } from "./ProfileConnections";
@@ -74,6 +76,8 @@ export function ProfileBody(props: {
               </LoadError>
             </section>
           </Show>
+          {/* what they are doing right now, above everything else */}
+          <ProfileActivity user={props.user} />
           <ProfileSections
             user={props.user}
             member={props.member}

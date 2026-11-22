@@ -22,6 +22,7 @@ import { NoticeCenter } from "@revolt/app/interface/support/NoticeCenter";
 import { SaveDataOffer } from "@revolt/app/interface/support/SaveDataOffer";
 import { useClient, useClientLifecycle } from "@revolt/client";
 import { State } from "@revolt/client/Controller";
+import { ActivityWorker } from "@revolt/client/ActivityWorker";
 import { NotificationsWorker } from "@revolt/client/NotificationsWorker";
 import { useDevice } from "@revolt/common";
 import { useModals } from "@revolt/modal";
@@ -296,6 +297,7 @@ const Interface = (props: { children?: JSX.Element }) => {
         </Switch>
 
         <NotificationsWorker />
+        <ActivityWorker />
         {/* the small "Streamer mode" sign at the top, loaded the first time
             the mode is on */}
         <Show when={state.settings.streamerMode}>

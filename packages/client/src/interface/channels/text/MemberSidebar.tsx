@@ -32,6 +32,7 @@ import {
   Username,
   UserStatus,
 } from "@revolt/ui";
+import { ActivityLine } from "@revolt/ui/components/features/activity/ActivityLine";
 import { BotLabel } from "@revolt/ui/components/features/profiles/BotLabel";
 import { BadgeMark } from "@revolt/ui/components/features/profiles/badges/BadgeMark";
 
@@ -570,6 +571,10 @@ function Member(props: {
                 <TextWithEmoji content={status()!} />
               </OverflowingText>
             </Tooltip>
+          </Show>
+          {/* rich presence: what they are doing, when no status says it */}
+          <Show when={!status()}>
+            <ActivityLine user={props.user ?? props.member?.user} />
           </Show>
         </NameStatusStack>
       </MenuButton>
