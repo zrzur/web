@@ -156,6 +156,7 @@ export function DocsPortal(props: {
     "tutorial-moderation": t`Moderation bot`,
     "tutorial-welcome": t`Welcome messages`,
     "tutorial-games": t`Games with buttons`,
+    "rich-presence": t`Rich presence for games`,
     "tutorial-multi-server": t`Many servers`,
     "tutorial-upload": t`File upload`,
     "tutorial-voice": t`Voice bot`,

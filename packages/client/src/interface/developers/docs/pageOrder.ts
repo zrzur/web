@@ -23,6 +23,7 @@ export const PAGE_ORDER: [PageGroup, string[]][] = [
       "webhooks",
       "servers",
       "users",
+      "rich-presence",
       "roles",
       "moderation",
       "files",
