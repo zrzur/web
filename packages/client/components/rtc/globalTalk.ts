@@ -4,7 +4,7 @@
  * the app.
  */
 import { activeKeymap, deviceMac } from "../keybinds/active";
-import { matchShortcut } from "../keybinds/keymap";
+import { type ShortcutId, matchShortcut } from "../keybinds/keymap";
 
 /**
  * Keys the desktop app never takes with Ctrl/Cmd+Shift, because other apps
@@ -29,8 +29,15 @@ export function globalTalkBlock(code: string): "editing" | "app" | undefined {
     { code, ctrlKey: !mac, metaKey: mac, shiftKey: true, altKey: false },
     mac,
   );
-  return taken ? "app" : undefined;
+  return taken && !TALK_KEY_WINS.has(taken) ? "app" : undefined;
 }
+
+/**
+ * Shortcuts added after people had chosen their talk keys (2026-11-22). A
+ * talk key chosen before keeps working from other apps; the shortcut on
+ * the same keys then doesn't reach the window while that talk is on.
+ */
+export const TALK_KEY_WINS = new Set<ShortcutId>(["upload_file", "leave_call"]);
 
 /** Whether this push-to-talk key can also talk from other apps */
 export function globalTalkAllowed(code: string): boolean {

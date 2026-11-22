@@ -223,10 +223,17 @@ describe("each system's own set", () => {
     expect(
       matchShortcut(
         win,
-        press("Digit2", { ctrlKey: true, shiftKey: true }),
+        press("KeyF", { ctrlKey: true, shiftKey: true }),
         "windows",
       ),
     ).toBe("view_mentions");
+    expect(
+      matchShortcut(
+        win,
+        press("Digit2", { ctrlKey: true, shiftKey: true }),
+        "windows",
+      ),
+    ).toBe(undefined);
     expect(
       matchShortcut(
         mac,

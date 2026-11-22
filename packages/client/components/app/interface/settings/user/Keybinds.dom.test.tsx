@@ -195,12 +195,13 @@ describe("changing a shortcut on the Ctrl+/ screen", () => {
     // a modifier alone waits for the real key
     press("ShiftLeft", { shiftKey: true });
     expect(note()).toContain("Press the new keys");
-    press("KeyF", { ctrlKey: true, shiftKey: true, key: "F" });
-    expect(capsText("toggle_mute")).toBe("Ctrl+Shift+F");
+    // (Ctrl+Shift+F opens the mentions now: Ctrl+Shift+2 is free)
+    press("Digit2", { ctrlKey: true, shiftKey: true, key: "@" });
+    expect(capsText("toggle_mute")).toBe("Ctrl+Shift+2");
     expect(
       shortcutFor(
         {
-          code: "KeyF",
+          code: "Digit2",
           ctrlKey: true,
           shiftKey: true,
           altKey: false,
@@ -290,7 +291,7 @@ describe("changing a shortcut on the Ctrl+/ screen", () => {
     )!;
     expect(resetAll.disabled).toBe(true);
     caps("toggle_mute").click();
-    press("KeyF", { ctrlKey: true, shiftKey: true, key: "F" });
+    press("Digit2", { ctrlKey: true, shiftKey: true, key: "@" });
     caps("create_poll").click();
     press("Digit1", { ctrlKey: true, shiftKey: true, key: "!" });
     expect(resetAll.disabled).toBe(false);

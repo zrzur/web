@@ -81,9 +81,8 @@ describe("keys that can talk from other apps", () => {
   });
 
   it("allows the default key, other letters, digits, F keys and the numpad", () => {
-    // Digit4 is "Open saved messages" (Ctrl+Shift+4) since 26.2.0-beta.1,
-    // Digit2 "Open your mentions" (Ctrl+Shift+2) since the shortcuts stream
-    for (const code of ["Backquote", "KeyB", "Digit1", "F13", "F24", "Numpad5"])
+    // Digit4 is "Open saved messages" (Ctrl+Shift+4) since 26.2.0-beta.1
+    for (const code of ["Backquote", "KeyB", "Digit2", "F13", "F24", "Numpad5"])
       expect(globalTalkAllowed(code), code).toBe(true);
   });
 });
@@ -95,6 +94,36 @@ describe("talk from other apps and the app's own shortcuts", () => {
     // Ctrl+Shift+M mutes, D deafens, L is streamer mode, 8 a poll, 9 events
     for (const code of ["KeyM", "KeyD", "KeyL", "Digit8", "Digit9"])
       expect(globalTalkAllowed(code), code).toBe(false);
+  });
+
+  it("keeps every talk key people could choose before the 2026-11-22 shortcuts", () => {
+    // keys refused before: editing keys and the older shortcuts (M D L 8 9
+    // 4 5 3 6 and the poll); every other letter, digit and F key still works
+    const before = new Set([
+      ..."ACFNTVWXZ".split("").map((l) => `Key${l}`),
+      "KeyM",
+      "KeyD",
+      "KeyL",
+      "Digit3",
+      "Digit4",
+      "Digit5",
+      "Digit6",
+      "Digit8",
+      "Digit9",
+    ]);
+    const codes = [
+      ..."ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("").map((l) => `Key${l}`),
+      ..."0123456789".split("").map((d) => `Digit${d}`),
+      ...Array.from({ length: 24 }, (_, i) => `F${i + 1}`),
+      "Backquote",
+    ];
+    for (const code of codes)
+      if (!before.has(code)) expect(globalTalkAllowed(code), code).toBe(true);
+    // the new shortcuts on Ctrl+Shift+<key>: the talk key wins (U, H), or
+    // the key could never talk from other apps (F)
+    expect(globalTalkAllowed("KeyU")).toBe(true);
+    expect(globalTalkAllowed("KeyH")).toBe(true);
+    expect(globalTalkAllowed("Digit2")).toBe(true);
   });
 
   it("follows the person's own shortcuts", () => {

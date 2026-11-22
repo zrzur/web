@@ -104,8 +104,10 @@ export const DEFAULTS: Record<ShortcutId, string> = {
   upload_file: "MS:KeyU||MA:KeyU",
   open_emoji_picker: "M:KeyE",
   search_channel: "M:KeyF",
-  // not Ctrl+I: that is italic in the message box
-  view_mentions: "MS:Digit2|MC:KeyI",
+  // not Ctrl+I (italic in the message box), and not Ctrl+Shift+<digit>: the
+  // desktop app's talk-from-other-apps key is Ctrl+Shift+<talk key>, and F
+  // can never be a talk key there (globalTalk.ts, NOT_GLOBAL)
+  view_mentions: "MS:KeyF|MC:KeyI",
   leave_call: "MS:KeyH",
   // the browser's search-bar key, taken while Zrzur is open
   open_quick_switcher: "M:KeyK",
@@ -182,7 +184,7 @@ export function defaultTable(mac: Sys): Keymap {
 export type KeyLike = Pick<
   KeyboardEvent,
   "code" | "ctrlKey" | "metaKey" | "shiftKey" | "altKey"
-> & { key?: string; isComposing?: boolean };
+> & { key?: string; isComposing?: boolean; keyCode?: number };
 
 export const MODIFIER_CODE = /^(Control|Meta|Shift|Alt|OS)(Left|Right)?$/;
 
@@ -216,8 +218,9 @@ export function matchShortcut(
   sys: Sys,
 ): ShortcutId | undefined {
   const mac = macOf(sys);
-  // a character being composed (Chinese, Japanese input) is never a shortcut
-  if (event.isComposing) return;
+  // a character being composed (Chinese, Japanese input) is never a
+  // shortcut; some browsers say so only with key code 229
+  if (event.isComposing || event.keyCode === 229) return;
   const combo = eventCombo(event, mac);
   const hit = combo && map.byCombo.get(keyOf(combo, mac));
   if (hit && map.custom.has(hit)) return hit;
