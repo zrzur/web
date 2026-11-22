@@ -2,6 +2,11 @@
 
 ## Unreleased
 
+### A long message stays editable (2026-11-22, user reports)
+
+* **The message box stops growing at 40 % of the visible height** (above the on-screen keyboard and a docked emoji panel) and the text scrolls inside it. Before, the box only had a cap on its outer row (32 % of the screen) that did not hold the box itself: a long message grew it over the message list, the send button was pushed off screen on phones, and the text could not be scrolled, so earlier lines could not be reached to edit them; a swipe moved the conversation instead.
+* A swipe at the top or bottom of the text no longer carries on into the message list. The send button, the "+" and the emoji button stay in view in both directions (Arabic and English) and at 375 px.
+
 ### A friend request opens the sender's profile (2026-11-21)
 
 * **From the phone Notifications page:** the sender's picture and the line "… sent you a friend request" are one button (44 px high) that opens their profile. Screen readers hear the sentence they see as its name, then "Open profile" (ar, en, de) as its description. Accept, Decline and Send message are separate buttons and are not touched by it. The page closes first so the profile is not under it; the profile has its own Accept.

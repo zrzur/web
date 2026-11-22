@@ -124,6 +124,16 @@ const Base = styled("div", {
       boxShadow: "var(--z-dock-focus-lift)",
     },
 
+    // a long message stops growing the box at 40 % of the height that is
+    // seen (above the on-screen keyboard and a docked emoji panel) and
+    // scrolls inside the editor instead; the box used to grow past its row
+    // and over the message list, with the send button pushed off screen
+    "--z-composer-max-height":
+      "calc((100dvh - max(var(--keyboard-inset, 0px), env(keyboard-inset-height, 0px)) - var(--z-picker-dock, 0px)) * 0.4)",
+    // the editor gets what is left inside the padding (2 × 7) and border (2 × 1)
+    "--z-text-editor-max-height": "calc(var(--z-composer-max-height) - 16px)",
+    maxHeight: "var(--z-composer-max-height)",
+
     display: "flex",
     alignItems: "flex-start",
     gap: "2px",
@@ -154,7 +164,6 @@ const Parent = styled("div", {
     gap: "8px",
     // same distance from the window bottom as the account panel
     margin: "0 0 var(--z-dock-gap, 8px) 0",
-    maxHeight: "var(--layout-height-message-box)",
   },
 });
 
@@ -285,7 +294,7 @@ export function MessageBox(props: Props) {
 
   return (
     <Parent>
-      <Base hasActionsAppend={props.hasActionsAppend}>
+      <Base hasActionsAppend={props.hasActionsAppend} data-composer-box>
         <Switch fallback={props.actionsStart}>
           <Match when={props.timeoutActive || !props.sendingAllowed}>
             <InlineIcon>
