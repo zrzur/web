@@ -1,9 +1,11 @@
 import {
   For,
   Show,
+  createEffect,
   createMemo,
   createResource,
   createSignal,
+  on,
   onCleanup,
   onMount,
 } from "solid-js";
@@ -18,7 +20,6 @@ import {
   desktopActivity,
   setActivitySharing,
 } from "@revolt/client/ActivityWorker";
-import { directMessagesFriendsOnly } from "@revolt/client/age";
 import { useModals } from "@revolt/modal";
 import {
   Button,
@@ -33,12 +34,20 @@ import { ProfileActivity } from "@revolt/ui/components/features/activity/Profile
 import { Symbol } from "@revolt/ui/components/utils/Symbol";
 
 type Privacy = {
-  share_activity?: boolean;
+  share_activity?: boolean | null;
   share_steam_activity?: boolean;
+  /** Set by the server: under 18 or no stated age, friends only */
+  activity_friends_only?: boolean;
+  activity_intro_seen?: boolean;
 };
+
+type DesktopApp = DesktopActivityState["apps"][number];
 
 /** Entries shown before "Show all" */
 const FIRST = 12;
+
+/** How often a shown pairing code is checked (it lasts five minutes) */
+const PAIRING_CHECK_MS = 10_000;
 
 /**
  * Settings → Activity: whether others see what you are doing right now,
@@ -58,8 +67,8 @@ export function ActivitySettings() {
   const steamFeature = () =>
     !!(client()?.configuration?.features as { rich_presence_steam?: boolean })
       ?.rich_presence_steam;
-  // under 18 the same rule as direct messages: friends only, sharing off
-  const young = () => directMessagesFriendsOnly();
+  // the server decides: under 18 or no stated age, friends only
+  const friendsOnly = () => privacy()?.activity_friends_only === true;
 
   async function change(update: Privacy) {
     const before = privacy();
@@ -67,7 +76,8 @@ export function ActivitySettings() {
     mutate({ ...before, ...update });
     try {
       const after = (await client().users.editPrivacy(
-        update as never,
+        // answering here also answers the one-time question
+        { ...update, activity_intro_seen: true } as never,
       )) as Privacy;
       mutate(after);
       setActivitySharing(after.share_activity === true);
@@ -84,9 +94,9 @@ export function ActivitySettings() {
   const [editing, setEditing] = createSignal<string>();
   const [draft, setDraft] = createSignal("");
   const [adding, setAdding] = createSignal(false);
-  const [running, setRunning] = createSignal<{ pid: number; name: string }[]>(
-    [],
-  );
+  const [running, setRunning] = createSignal<
+    { pid: number; name: string; path?: string }[]
+  >([]);
   const [pick, setPick] = createSignal<string>("");
   const [pickName, setPickName] = createSignal("");
   const [pickKind, setPickKind] = createSignal("Playing");
@@ -97,6 +107,22 @@ export function ActivitySettings() {
     onCleanup(bridge.onState(setState));
   });
 
+  // a pairing code lasts five minutes and the desktop says nothing when it
+  // runs out: look again while one is shown, so an old code never stays
+  createEffect(
+    on(
+      () => state()?.extension.pairingCode,
+      (code) => {
+        if (!bridge || !code) return;
+        const timer = setInterval(
+          () => void bridge.state().then(setState),
+          PAIRING_CHECK_MS,
+        );
+        onCleanup(() => clearInterval(timer));
+      },
+    ),
+  );
+
   const desktop = async (run: () => Promise<DesktopActivityState>) => {
     try {
       setState(await run());
@@ -105,22 +131,39 @@ export function ActivitySettings() {
     }
   };
 
-  const entries = createMemo(() => {
+  /* rows are keyed by id, so a row keeps its focus and input while the
+     desktop sends a new state */
+  const entryById = createMemo(
+    () => new Map((state()?.entries ?? []).map((entry) => [entry.id, entry])),
+  );
+  const entryIds = createMemo(() => {
     const list = state()?.entries ?? [];
     const q = filter().trim().toLocaleLowerCase();
     const found = q
       ? list.filter((e) => e.name.toLocaleLowerCase().includes(q))
       : list;
     // running and added first, then games, then apps
-    return [...found].sort(
-      (a, b) =>
-        Number(b.running) - Number(a.running) ||
-        Number(b.added) - Number(a.added) ||
-        (a.category === b.category ? 0 : a.category === "game" ? -1 : 1),
-    );
+    return [...found]
+      .sort(
+        (a, b) =>
+          Number(b.running) - Number(a.running) ||
+          Number(b.added) - Number(a.added) ||
+          (a.category === b.category ? 0 : a.category === "game" ? -1 : 1),
+      )
+      .map((entry) => entry.id);
   });
-  const shown = () =>
-    all() || filter() ? entries() : entries().slice(0, FIRST);
+  const shownIds = () =>
+    all() || filter() ? entryIds() : entryIds().slice(0, FIRST);
+
+  const appById = createMemo(
+    () => new Map((state()?.apps ?? []).map((app) => [app.id, app])),
+  );
+  // apps waiting for Show or Block come first
+  const appIds = createMemo(() =>
+    [...(state()?.apps ?? [])]
+      .sort((a, b) => Number(a.decided !== false) - Number(b.decided !== false))
+      .map((app) => app.id),
+  );
 
   const kindLabel = (entry: Pick<DesktopActivityEntry, "kind" | "category">) =>
     entry.kind === "Listening"
@@ -130,6 +173,15 @@ export function ActivitySettings() {
         : entry.category === "game"
           ? t`Game`
           : t`App`;
+
+  const appStatus = (app: DesktopApp) =>
+    app.decided === false
+      ? t`${app.name} wants to show what you are doing on Zrzur.`
+      : app.blocked
+        ? t`Blocked: never shown`
+        : app.active
+          ? t`Showing your activity now`
+          : t`Allowed`;
 
   async function openAdd() {
     if (!bridge) return;
@@ -154,33 +206,36 @@ export function ActivitySettings() {
 
   return (
     <Page data-testid="activity-settings">
-      <SettingsSection
-        title={<Trans>Share your activity</Trans>}
-        description={
-          <Trans>
-            Friends and people in your servers see the game or app you are
-            using, with how long you have been at it.
-          </Trans>
-        }
-      >
+      <SettingsSection title={<Trans>Share your activity</Trans>}>
         <SettingsRow
           icon={<Symbol size={20}>sports_esports</Symbol>}
           title={<Trans>Share what you are doing</Trans>}
           description={
-            <Show
-              when={young()}
-              fallback={
+            <Lines>
+              <span>
                 <Trans>
-                  Hidden while you are invisible or offline. Turn it off and it
-                  disappears at once.
+                  Off until you turn it on. Then friends and people in your
+                  servers see the game or app you are using. Hidden while you
+                  are invisible or offline; turn it off and it disappears at
+                  once.
                 </Trans>
-              }
-            >
-              <Trans>
-                Under 18 this starts off. Turn it on only if you want others to
-                see it.
-              </Trans>
-            </Show>
+              </span>
+              <Show when={friendsOnly()}>
+                <span data-testid="activity-friends-only">
+                  <Trans>
+                    Only your friends see this, because you are under 18 or have
+                    not given your age.
+                  </Trans>
+                </span>
+              </Show>
+              <span>
+                <Trans>
+                  Names of apps and sites can say something about your health,
+                  beliefs or private life. Turn off or rename any you do not
+                  want to show.
+                </Trans>
+              </span>
+            </Lines>
           }
           disabled={!privacy()}
           onClick={() => change({ share_activity: !shares() })}
@@ -201,9 +256,11 @@ export function ActivitySettings() {
             title={<Trans>Show what you play on Steam</Trans>}
             description={
               <Trans>
-                Read from your linked Steam account about once a minute while
-                you are online. Works on the web and on phones too. Link Steam
-                in Connections first.
+                While you are online, Zrzur asks Steam (Valve, USA) about once a
+                minute which game your linked account is playing, and shows it
+                as your activity. Only games your Steam profile shows publicly.
+                Turn it off and it stops at once. Works on the web and on phones
+                too. Link Steam in Connections first.
               </Trans>
             }
             disabled={!privacy() || !shares()}
@@ -235,14 +292,14 @@ export function ActivitySettings() {
               <Show
                 when={shares() && me().activities.length}
                 fallback={
-                  <Hint data-testid="activity-nothing">
+                  <PreviewHint data-testid="activity-nothing">
                     <Show
                       when={shares()}
                       fallback={<Trans>Nothing: sharing is off.</Trans>}
                     >
                       <Trans>Nothing right now.</Trans>
                     </Show>
-                  </Hint>
+                  </PreviewHint>
                 }
               >
                 <ProfileActivity user={me()} />
@@ -352,103 +409,109 @@ export function ActivitySettings() {
               </Actions>
             </AddBox>
           </Show>
-          <For each={shown()}>
-            {(entry) => (
-              <SettingsRow
-                data-testid={`activity-entry-${entry.id}`}
-                icon={
-                  <Symbol size={20}>
-                    {entry.category === "game" ? "sports_esports" : "apps"}
-                  </Symbol>
-                }
-                title={
-                  <Show
-                    when={editing() === entry.id}
-                    fallback={<span dir="auto">{entry.name}</span>}
-                  >
-                    <TextField
-                      aria-label={t`Name others see`}
-                      maxlength={128}
-                      value={draft()}
-                      onInput={(e) => setDraft(e.currentTarget.value)}
-                      onKeyDown={(e: KeyboardEvent) => {
-                        if (e.key === "Enter") {
-                          void desktop(() =>
-                            bridge!.setEntry(entry.id, { name: draft() }),
-                          );
-                          setEditing(undefined);
+          <For each={shownIds()}>
+            {(id) => (
+              <Show when={entryById().get(id)}>
+                {(entry) => (
+                  <SettingsRow
+                    data-testid={`activity-entry-${id}`}
+                    icon={
+                      <Symbol size={20}>
+                        {entry().category === "game"
+                          ? "sports_esports"
+                          : "apps"}
+                      </Symbol>
+                    }
+                    title={
+                      <Show
+                        when={editing() === id}
+                        fallback={<span dir="auto">{entry().name}</span>}
+                      >
+                        <TextField
+                          aria-label={t`Name others see`}
+                          maxlength={128}
+                          value={draft()}
+                          onInput={(e) => setDraft(e.currentTarget.value)}
+                          onKeyDown={(e: KeyboardEvent) => {
+                            if (e.key === "Enter") {
+                              void desktop(() =>
+                                bridge!.setEntry(id, { name: draft() }),
+                              );
+                              setEditing(undefined);
+                            }
+                            if (e.key === "Escape") setEditing(undefined);
+                          }}
+                        />
+                      </Show>
+                    }
+                    description={
+                      <>
+                        {kindLabel(entry())}
+                        <Show when={entry().running}> · {t`Running now`}</Show>
+                        <Show when={entry().name !== entry().originalName}>
+                          {" · "}
+                          <bdi dir="auto">{entry().originalName}</bdi>
+                        </Show>
+                      </>
+                    }
+                    secondary={
+                      <Show
+                        when={editing() === id}
+                        fallback={
+                          <Row>
+                            <Button
+                              variant="text"
+                              onPress={() => {
+                                setDraft(entry().name);
+                                setEditing(id);
+                              }}
+                            >
+                              <Trans>Rename</Trans>
+                            </Button>
+                            <Show when={entry().added}>
+                              <Button
+                                variant="text"
+                                onPress={() =>
+                                  desktop(() => bridge!.removeAdded(id))
+                                }
+                              >
+                                <Trans>Remove</Trans>
+                              </Button>
+                            </Show>
+                          </Row>
                         }
-                        if (e.key === "Escape") setEditing(undefined);
-                      }}
-                    />
-                  </Show>
-                }
-                description={
-                  <>
-                    {kindLabel(entry)}
-                    <Show when={entry.running}> · {t`Running now`}</Show>
-                    <Show when={entry.name !== entry.originalName}>
-                      {" · "}
-                      <bdi dir="auto">{entry.originalName}</bdi>
-                    </Show>
-                  </>
-                }
-                secondary={
-                  <Show
-                    when={editing() === entry.id}
-                    fallback={
-                      <Row>
+                      >
                         <Button
-                          variant="text"
+                          variant="tonal"
                           onPress={() => {
-                            setDraft(entry.name);
-                            setEditing(entry.id);
+                            void desktop(() =>
+                              bridge!.setEntry(id, { name: draft() }),
+                            );
+                            setEditing(undefined);
                           }}
                         >
-                          <Trans>Rename</Trans>
+                          <Trans>Save</Trans>
                         </Button>
-                        <Show when={entry.added}>
-                          <Button
-                            variant="text"
-                            onPress={() =>
-                              desktop(() => bridge!.removeAdded(entry.id))
-                            }
-                          >
-                            <Trans>Remove</Trans>
-                          </Button>
-                        </Show>
-                      </Row>
+                      </Show>
                     }
-                  >
-                    <Button
-                      variant="tonal"
-                      onPress={() => {
-                        void desktop(() =>
-                          bridge!.setEntry(entry.id, { name: draft() }),
-                        );
-                        setEditing(undefined);
-                      }}
-                    >
-                      <Trans>Save</Trans>
-                    </Button>
-                  </Show>
-                }
-                control={(ids) => (
-                  <Toggle
-                    checked={!entry.off}
-                    onChange={() =>
-                      desktop(() =>
-                        bridge!.setEntry(entry.id, { off: !entry.off }),
-                      )
-                    }
-                    aria-labelledby={ids.labelId}
-                    aria-describedby={ids.descriptionId}
+                    control={(ids) => (
+                      <Toggle
+                        checked={!entry().off}
+                        onChange={() =>
+                          desktop(() =>
+                            bridge!.setEntry(id, { off: !entry().off }),
+                          )
+                        }
+                        aria-labelledby={ids.labelId}
+                        aria-describedby={ids.descriptionId}
+                      />
+                    )}
                   />
                 )}
-              />
+              </Show>
             )}
           </For>
-          <Show when={!filter() && entries().length > FIRST}>
+          <Show when={!filter() && entryIds().length > FIRST}>
             <Button variant="text" onPress={() => setAll(!all())}>
               <Show when={all()} fallback={<Trans>Show all</Trans>}>
                 <Trans>Show fewer</Trans>
@@ -476,7 +539,7 @@ export function ActivitySettings() {
           }
         >
           <Show
-            when={state()?.apps.length}
+            when={appIds().length}
             fallback={
               <Hint data-testid="activity-no-apps">
                 <Trans>
@@ -486,44 +549,86 @@ export function ActivitySettings() {
               </Hint>
             }
           >
-            <For each={state()?.apps}>
-              {(app) => (
-                <SettingsRow
-                  data-testid={`activity-app-${app.id}`}
-                  icon={
-                    <Symbol size={20}>
-                      {app.id === "zrzur-browser-extension"
-                        ? "public"
-                        : "terminal"}
-                    </Symbol>
-                  }
-                  title={<span dir="auto">{app.name}</span>}
-                  description={
-                    app.blocked
-                      ? t`Blocked: never shown`
-                      : app.active
-                        ? t`Showing your activity now`
-                        : t`Allowed`
-                  }
-                  secondary={
-                    <Button
-                      variant="text"
-                      onPress={() => desktop(() => bridge!.forgetApp(app.id))}
-                    >
-                      <Trans>Forget</Trans>
-                    </Button>
-                  }
-                  control={(ids) => (
-                    <Toggle
-                      checked={!app.blocked}
-                      onChange={() =>
-                        desktop(() => bridge!.blockApp(app.id, !app.blocked))
+            <For each={appIds()}>
+              {(id) => (
+                <Show when={appById().get(id)}>
+                  {(app) => (
+                    <SettingsRow
+                      data-testid={`activity-app-${id}`}
+                      icon={
+                        <Symbol size={20}>
+                          {id === "zrzur-browser-extension"
+                            ? "public"
+                            : "terminal"}
+                        </Symbol>
                       }
-                      aria-labelledby={ids.labelId}
-                      aria-describedby={ids.descriptionId}
+                      title={<span dir="auto">{app().name}</span>}
+                      description={
+                        <Lines>
+                          <span data-testid="activity-app-status">
+                            {appStatus(app())}
+                          </span>
+                          <Show when={app().path}>
+                            {(path) => (
+                              <AppPath dir="ltr" title={path()}>
+                                {path()}
+                              </AppPath>
+                            )}
+                          </Show>
+                        </Lines>
+                      }
+                      secondary={
+                        <Show when={app().decided !== false && !app().blocked}>
+                          <Button
+                            variant="text"
+                            onPress={() => desktop(() => bridge!.forgetApp(id))}
+                          >
+                            <Trans>Forget</Trans>
+                          </Button>
+                        </Show>
+                      }
+                      control={(ids) => (
+                        <Show
+                          when={app().decided === false}
+                          fallback={
+                            <Toggle
+                              checked={!app().blocked}
+                              onChange={() =>
+                                desktop(() =>
+                                  bridge!.blockApp(id, !app().blocked),
+                                )
+                              }
+                              aria-labelledby={ids.labelId}
+                              aria-describedby={ids.descriptionId}
+                            />
+                          }
+                        >
+                          {/* two answers of the same weight (legal RP-03) */}
+                          <Choice data-testid="activity-app-ask">
+                            <Button
+                              variant="tonal"
+                              onPress={() =>
+                                desktop(() => bridge!.decideApp(id, false))
+                              }
+                              data-testid="activity-app-block"
+                            >
+                              {t({ message: "Block", context: "activity" })}
+                            </Button>
+                            <Button
+                              variant="tonal"
+                              onPress={() =>
+                                desktop(() => bridge!.decideApp(id, true))
+                              }
+                              data-testid="activity-app-show"
+                            >
+                              {t({ message: "Show", context: "activity" })}
+                            </Button>
+                          </Choice>
+                        </Show>
+                      )}
                     />
                   )}
-                />
+                </Show>
               )}
             </For>
           </Show>
@@ -583,10 +688,24 @@ export function ActivitySettings() {
             icon={<Symbol size={20}>sync</Symbol>}
             title={<Trans>Games made for other chat apps</Trans>}
             description={
-              <Trans>
-                Many games already report what you do to another chat app. Zrzur
-                can listen in its place, only while that app is closed.
-              </Trans>
+              <Lines>
+                <span>
+                  <Trans>
+                    Many games report what you play to another chat app. While
+                    that app is closed, Zrzur can receive these reports instead.
+                    When that app starts, Zrzur steps aside.
+                  </Trans>
+                </span>
+                <Show
+                  when={
+                    shares() && state()?.discordCompat && !state()?.compatOpen
+                  }
+                >
+                  <span data-testid="activity-compat-aside">
+                    <Trans>Stepped aside: the other chat app is open.</Trans>
+                  </span>
+                </Show>
+              </Lines>
             }
             disabled={!shares()}
             onClick={() =>
@@ -609,35 +728,38 @@ export function ActivitySettings() {
       </SettingsSection>
 
       <SettingsSection title={<Trans>Your privacy</Trans>}>
+        {/* the same words as the privacy policy (legal RP-04) */}
         <Facts data-testid="activity-privacy">
           <li>
             <Trans>
-              Zrzur keeps no history: an activity exists only while you are
-              online and goes when you go offline.
+              On your computer: when sharing and "Detect games and apps" are on,
+              the Zrzur desktop app reads the names of running programs every 15
+              seconds and compares them with its list and the programs you
+              added. This happens only on your computer: only the name of a
+              matched program is sent to Zrzur, the list of running programs
+              never leaves your computer, and window titles, files and tabs are
+              never read. Your choices (programs turned off, renamed or added,
+              blocked apps, the paired browser extension) are stored only on
+              your computer. Games, apps and the Zrzur extensions for browsers
+              and VS Code report to the desktop app on your computer; they learn
+              nothing about your account from Zrzur. With sharing off, the
+              desktop app reads nothing and listens for nothing.
             </Trans>
           </li>
           <li>
             <Trans>
-              Who sees it: the people who can see that you are online. Nobody
-              while you are invisible.
+              Your activity is shown to the people who can see that you are
+              online: your friends and people in your Servers, and bots with
+              access to presence in those Servers. Nobody sees it while you are
+              invisible or offline, and people you blocked never see it. On
+              accounts of people aged 16 or 17, and accounts with no stated age,
+              only friends see it.
             </Trans>
           </li>
           <li>
             <Trans>
-              The desktop app reads program names on this computer only; the
-              list of programs never leaves it.
-            </Trans>
-          </li>
-          <li>
-            <Trans>
-              Apps never learn who you are from Zrzur. Pictures are shown
-              through Zrzur's servers, and links open with a warning.
-            </Trans>
-          </li>
-          <li>
-            <Trans>
-              Your choices here (programs turned off or renamed, blocked apps)
-              stay on this computer.
+              Activity: kept only in memory while you are online, and never
+              longer than 24 hours. We keep no history of what you did.
             </Trans>
           </li>
         </Facts>
@@ -653,6 +775,10 @@ const Page = styled("div", {
     gap: "24px",
     maxWidth: "920px",
   },
+});
+
+const Lines = styled("span", {
+  base: { display: "flex", flexDirection: "column", gap: "4px" },
 });
 
 const Preview = styled("div", {
@@ -678,6 +804,16 @@ const Hint = styled("p", {
   base: {
     margin: 0,
     padding: "12px 16px",
+    fontSize: "13px",
+    lineHeight: "20px",
+    color: "var(--z-fg-secondary)",
+  },
+});
+
+/* inside the preview, which already has the row's padding */
+const PreviewHint = styled("p", {
+  base: {
+    margin: 0,
     fontSize: "13px",
     lineHeight: "20px",
     color: "var(--z-fg-secondary)",
@@ -720,6 +856,30 @@ const Row = styled("div", {
   base: { display: "flex", gap: "4px" },
 });
 
+/* Show and Block side by side, the same size */
+const Choice = styled("div", {
+  base: {
+    display: "grid",
+    gridTemplateColumns: "1fr 1fr",
+    gap: "8px",
+    "& > button": { _phone: { minHeight: "44px" } },
+  },
+});
+
+const AppPath = styled("bdi", {
+  base: {
+    display: "block",
+    overflow: "hidden",
+    textOverflow: "ellipsis",
+    whiteSpace: "nowrap",
+    fontFamily: "var(--z-font-mono, monospace)",
+    fontSize: "12px",
+    lineHeight: "16px",
+    color: "var(--z-fg-muted)",
+    textAlign: "start",
+  },
+});
+
 const Code = styled("strong", {
   base: {
     fontFamily: "var(--z-font-mono, monospace)",
@@ -729,17 +889,32 @@ const Code = styled("strong", {
   },
 });
 
+/* the list sits on the same 16 px line as every row; each bullet is a dot
+   in the start margin, so wrapped lines stay aligned in ltr and rtl */
 const Facts = styled("ul", {
   base: {
     margin: 0,
-    paddingBlock: "12px",
-    paddingInlineStart: "36px",
-    paddingInlineEnd: "16px",
+    padding: "12px 16px",
+    listStyle: "none",
     display: "flex",
     flexDirection: "column",
     gap: "8px",
     fontSize: "13px",
     lineHeight: "20px",
     color: "var(--z-fg-secondary)",
+    "& > li": {
+      position: "relative",
+      paddingInlineStart: "16px",
+    },
+    "& > li::before": {
+      content: '""',
+      position: "absolute",
+      insetInlineStart: "4px",
+      top: "8px",
+      width: "4px",
+      height: "4px",
+      borderRadius: "full",
+      background: "var(--z-fg-muted)",
+    },
   },
 });

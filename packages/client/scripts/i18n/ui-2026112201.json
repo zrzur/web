@@ -1,105 +1,234 @@
 {
-  "Playing {name}": ["يلعب {name}", "Spielt {name}"],
-  "Listening to {name}": ["يستمع إلى {name}", "Hört {name}"],
-  "Watching {name}": ["يشاهد {name}", "Schaut {name}"],
-  "Streaming {name}": ["يبث {name}", "Streamt {name}"],
-  "Competing in {name}": ["ينافس في {name}", "Tritt an in {name}"],
-  "Using {name}": ["يستخدم {name}", "Nutzt {name}"],
-  "Activity": ["النشاط", "Aktivität"],
-  "From Steam": ["من Steam", "Von Steam"],
-  "Seen by the Zrzur desktop app": ["رآه تطبيق زرزور لسطح المكتب", "Von der Zrzur-Desktop-App erkannt"],
-  "Reported by the app": ["أرسله التطبيق نفسه", "Von der App gemeldet"],
-  "for {0}": ["منذ {0}", "seit {0}"],
-  "{0} left": ["بقي {0}", "noch {0}"],
-  "Time gone": ["الوقت المنقضي", "Verstrichene Zeit"],
-  "Share your activity": ["شارك نشاطك", "Deine Aktivität teilen"],
-  "Friends and people in your servers see the game or app you are using, with how long you have been at it.": [
-    "يرى أصدقاؤك والأشخاص في سيرفراتك اللعبة أو التطبيق الذي تستخدمه، ومنذ متى تستخدمه.",
-    "Freunde und Leute in deinen Servern sehen das Spiel oder die App, die du gerade nutzt, und wie lange schon."
+  "Playing {name}": [
+    "يلعب {name}",
+    "Spielt {name}"
   ],
-  "Share what you are doing": ["شارك ما تفعله", "Teilen, was du gerade tust"],
-  "Hidden while you are invisible or offline. Turn it off and it disappears at once.": [
-    "يُخفى ما دمت غير مرئي أو غير متصل. أوقفه فيختفي فوراً.",
-    "Unsichtbar, solange du unsichtbar oder offline bist. Schalte es aus, und es verschwindet sofort."
+  "Listening to {name}": [
+    "يستمع إلى {name}",
+    "Hört {name}"
   ],
-  "Under 18 this starts off. Turn it on only if you want others to see it.": [
-    "لمن هم دون 18 عاماً يبدأ هذا متوقفاً. فعّله فقط إن أردت أن يراه الآخرون.",
-    "Unter 18 ist das zuerst aus. Schalte es nur ein, wenn andere es sehen sollen."
+  "Watching {name}": [
+    "يشاهد {name}",
+    "Schaut {name}"
   ],
-  "Show what you play on Steam": ["اعرض ما تلعبه على Steam", "Zeigen, was du auf Steam spielst"],
-  "Read from your linked Steam account about once a minute while you are online. Works on the web and on phones too. Link Steam in Connections first.": [
-    "يُقرأ من حساب Steam المرتبط نحو مرة في الدقيقة ما دمت متصلاً. يعمل على الويب والهواتف أيضاً. اربط Steam أولاً من الاتصالات.",
-    "Etwa einmal pro Minute aus deinem verknüpften Steam-Konto gelesen, solange du online bist. Funktioniert auch im Web und auf Handys. Verknüpfe Steam zuerst unter Verbindungen."
+  "Streaming {name}": [
+    "يبث {name}",
+    "Streamt {name}"
   ],
-  "What others see now": ["ما يراه الآخرون الآن", "Was andere jetzt sehen"],
-  "Nothing: sharing is off.": ["لا شيء: المشاركة متوقفة.", "Nichts: Teilen ist aus."],
-  "Nothing right now.": ["لا شيء الآن.", "Gerade nichts."],
-  "Games and apps on this computer": ["الألعاب والتطبيقات على هذا الحاسوب", "Spiele und Apps auf diesem Computer"],
+  "Competing in {name}": [
+    "ينافس في {name}",
+    "Tritt an in {name}"
+  ],
+  "Using {name}": [
+    "يستخدم {name}",
+    "Nutzt {name}"
+  ],
+  "Activity": [
+    "النشاط",
+    "Aktivität"
+  ],
+  "Seen by the Zrzur desktop app": [
+    "رآه تطبيق زرزور لسطح المكتب",
+    "Von der Zrzur-Desktop-App erkannt"
+  ],
+  "Reported by the app": [
+    "أرسله التطبيق نفسه",
+    "Von der App gemeldet"
+  ],
+  "Share your activity": [
+    "شارك نشاطك",
+    "Deine Aktivität teilen"
+  ],
+  "Share what you are doing": [
+    "شارك ما تفعله",
+    "Teilen, was du gerade tust"
+  ],
+  "Show what you play on Steam": [
+    "اعرض ما تلعبه على Steam",
+    "Zeigen, was du auf Steam spielst"
+  ],
+  "What others see now": [
+    "ما يراه الآخرون الآن",
+    "Was andere jetzt sehen"
+  ],
+  "Nothing: sharing is off.": [
+    "لا شيء: المشاركة متوقفة.",
+    "Nichts: Teilen ist aus."
+  ],
+  "Nothing right now.": [
+    "لا شيء الآن.",
+    "Gerade nichts."
+  ],
+  "Games and apps on this computer": [
+    "الألعاب والتطبيقات على هذا الحاسوب",
+    "Spiele und Apps auf diesem Computer"
+  ],
   "A browser cannot see which games or programs are running, so nothing is detected here. The Zrzur desktop app can, and apps can tell it what they do. Steam works everywhere.": [
     "لا يستطيع المتصفح أن يرى الألعاب أو البرامج التي تعمل، لذلك لا يُكتشف شيء هنا. يستطيع ذلك تطبيق زرزور لسطح المكتب، ويمكن للتطبيقات أن تخبره بما تفعله. أما Steam فيعمل في كل مكان.",
     "Ein Browser kann nicht sehen, welche Spiele oder Programme laufen, daher wird hier nichts erkannt. Die Zrzur-Desktop-App kann das, und Apps können ihr sagen, was sie tun. Steam funktioniert überall."
   ],
-  "Detect games and apps": ["اكتشف الألعاب والتطبيقات", "Spiele und Apps erkennen"],
+  "Detect games and apps": [
+    "اكتشف الألعاب والتطبيقات",
+    "Spiele und Apps erkennen"
+  ],
   "Looks at the names of running programs every 15 seconds, on this computer only. Only the program's name is shown, never window titles, tabs or files.": [
     "يقرأ أسماء البرامج التي تعمل كل 15 ثانية، على هذا الحاسوب فقط. يُعرض اسم البرنامج وحده، لا عناوين النوافذ ولا الألسنة ولا الملفات.",
     "Liest alle 15 Sekunden die Namen laufender Programme, nur auf diesem Computer. Gezeigt wird nur der Name des Programms, nie Fenstertitel, Tabs oder Dateien."
   ],
-  "Find a game or app": ["ابحث عن لعبة أو تطبيق", "Spiel oder App suchen"],
-  "Add a program": ["أضف برنامجاً", "Programm hinzufügen"],
-  "Running program": ["برنامج يعمل", "Laufendes Programm"],
-  "Name others see": ["الاسم الذي يراه الآخرون", "Name, den andere sehen"],
-  "Kind": ["النوع", "Art"],
-  "Game": ["لعبة", "Spiel"],
-  "App": ["تطبيق", "App"],
-  "Music": ["موسيقى", "Musik"],
-  "Video": ["فيديو", "Video"],
-  "Running now": ["يعمل الآن", "Läuft gerade"],
-  "Show fewer": ["اعرض أقل", "Weniger zeigen"],
+  "Find a game or app": [
+    "ابحث عن لعبة أو تطبيق",
+    "Spiel oder App suchen"
+  ],
+  "Add a program": [
+    "أضف برنامجاً",
+    "Programm hinzufügen"
+  ],
+  "Running program": [
+    "برنامج يعمل",
+    "Laufendes Programm"
+  ],
+  "Name others see": [
+    "الاسم الذي يراه الآخرون",
+    "Name, den andere sehen"
+  ],
+  "Kind": [
+    "النوع",
+    "Art"
+  ],
+  "Music": [
+    "موسيقى",
+    "Musik"
+  ],
+  "Running now": [
+    "يعمل الآن",
+    "Läuft gerade"
+  ],
+  "Show fewer": [
+    "اعرض أقل",
+    "Weniger zeigen"
+  ],
   "Games and apps that told Zrzur what you are doing, through the desktop app. Block one and it is never shown.": [
     "الألعاب والتطبيقات التي أخبرت زرزور بما تفعله عبر تطبيق سطح المكتب. احظر أحدها فلا يُعرض أبداً.",
     "Spiele und Apps, die Zrzur über die Desktop-App gesagt haben, was du tust. Blockiere eine, und sie wird nie gezeigt."
   ],
-  "Apps connect through the Zrzur desktop app.": ["تتصل التطبيقات عبر تطبيق زرزور لسطح المكتب.", "Apps verbinden sich über die Zrzur-Desktop-App."],
+  "Apps connect through the Zrzur desktop app.": [
+    "تتصل التطبيقات عبر تطبيق زرزور لسطح المكتب.",
+    "Apps verbinden sich über die Zrzur-Desktop-App."
+  ],
   "No app has connected yet. Zrzur for VS Code and the Zrzur browser extension show here once they connect.": [
     "لم يتصل أي تطبيق بعد. يظهر هنا زرزور لـ VS Code وإضافة زرزور للمتصفح بمجرد اتصالهما.",
     "Noch keine App verbunden. Zrzur für VS Code und die Zrzur-Browser-Erweiterung erscheinen hier, sobald sie sich verbinden."
   ],
-  "Blocked: never shown": ["محظور: لا يُعرض أبداً", "Blockiert: wird nie gezeigt"],
-  "Showing your activity now": ["يعرض نشاطك الآن", "Zeigt gerade deine Aktivität"],
-  "Allowed": ["مسموح", "Erlaubt"],
-  "Browser extension": ["إضافة المتصفح", "Browser-Erweiterung"],
+  "Blocked: never shown": [
+    "محظور: لا يُعرض أبداً",
+    "Blockiert: wird nie gezeigt"
+  ],
+  "Showing your activity now": [
+    "يعرض نشاطك الآن",
+    "Zeigt gerade deine Aktivität"
+  ],
+  "Allowed": [
+    "مسموح",
+    "Erlaubt"
+  ],
+  "Browser extension": [
+    "إضافة المتصفح",
+    "Browser-Erweiterung"
+  ],
   "Shows the site you choose, never the page or its title.": [
     "تعرض الموقع الذي تختاره، لا الصفحة ولا عنوانها أبداً.",
     "Zeigt die Website, die du wählst, nie die Seite oder ihren Titel."
   ],
-  "Paired.": ["تم الاقتران.", "Gekoppelt."],
-  "Type this code in the extension:": ["اكتب هذا الرمز في الإضافة:", "Gib diesen Code in der Erweiterung ein:"],
-  "Pair": ["اقتران", "Koppeln"],
-  "Games made for other chat apps": ["ألعاب صُنعت لتطبيقات دردشة أخرى", "Spiele für andere Chat-Apps"],
-  "Many games already report what you do to another chat app. Zrzur can listen in its place, only while that app is closed.": [
-    "كثير من الألعاب تُبلغ تطبيق دردشة آخر بما تفعله. يستطيع زرزور أن يستمع بدلاً منه، فقط ما دام ذلك التطبيق مغلقاً.",
-    "Viele Spiele melden schon einer anderen Chat-App, was du tust. Zrzur kann an ihrer Stelle zuhören, nur solange diese App geschlossen ist."
+  "Paired.": [
+    "تم الاقتران.",
+    "Gekoppelt."
   ],
-  "Your privacy": ["خصوصيتك", "Deine Privatsphäre"],
-  "Zrzur keeps no history: an activity exists only while you are online and goes when you go offline.": [
-    "لا يحتفظ زرزور بأي سجل: يوجد النشاط ما دمت متصلاً فقط، ويزول حين تصبح غير متصل.",
-    "Zrzur speichert keinen Verlauf: Eine Aktivität gibt es nur, solange du online bist, und sie verschwindet, wenn du offline gehst."
+  "Type this code in the extension:": [
+    "اكتب هذا الرمز في الإضافة:",
+    "Gib diesen Code in der Erweiterung ein:"
   ],
-  "Who sees it: the people who can see that you are online. Nobody while you are invisible.": [
-    "من يراه: الأشخاص الذين يستطيعون رؤية أنك متصل. لا أحد ما دمت غير مرئي.",
-    "Wer es sieht: die Leute, die sehen können, dass du online bist. Niemand, solange du unsichtbar bist."
+  "Pair": [
+    "اقتران",
+    "Koppeln"
   ],
-  "The desktop app reads program names on this computer only; the list of programs never leaves it.": [
-    "يقرأ تطبيق سطح المكتب أسماء البرامج على هذا الحاسوب فقط؛ ولا تغادره قائمة البرامج أبداً.",
-    "Die Desktop-App liest Programmnamen nur auf diesem Computer; die Liste der Programme verlässt ihn nie."
+  "Games made for other chat apps": [
+    "ألعاب صُنعت لتطبيقات دردشة أخرى",
+    "Spiele für andere Chat-Apps"
   ],
-  "Apps never learn who you are from Zrzur. Pictures are shown through Zrzur's servers, and links open with a warning.": [
-    "لا تعرف التطبيقات هويتك من زرزور أبداً. تُعرض الصور عبر سيرفرات زرزور، وتُفتح الروابط بعد تحذير.",
-    "Apps erfahren von Zrzur nie, wer du bist. Bilder werden über die Server von Zrzur gezeigt, und Links öffnen sich mit einer Warnung."
+  "Your privacy": [
+    "خصوصيتك",
+    "Deine Privatsphäre"
   ],
-  "Your choices here (programs turned off or renamed, blocked apps) stay on this computer.": [
-    "تبقى اختياراتك هنا (البرامج المتوقفة أو المعاد تسميتها، والتطبيقات المحظورة) على هذا الحاسوب.",
-    "Deine Entscheidungen hier (ausgeschaltete oder umbenannte Programme, blockierte Apps) bleiben auf diesem Computer."
+  "Rich presence for games": [
+    "النشاط المباشر للألعاب",
+    "Aktivitätsstatus für Spiele"
   ],
-  "Rich presence for games": ["النشاط المباشر للألعاب", "Aktivitätsstatus für Spiele"]
+  "Off until you turn it on. Then friends and people in your servers see the game or app you are using. Hidden while you are invisible or offline; turn it off and it disappears at once.": [
+    "متوقف حتى تشغّله. عندها يرى أصدقاؤك والأشخاص في سيرفراتك اللعبة أو التطبيق الذي تستخدمه. يُخفى ما دمت غير مرئي أو غير متصل، وإذا أوقفته اختفى فوراً.",
+    "Aus, bis du es einschaltest. Dann sehen Freunde und Leute in deinen Servern das Spiel oder die App, die du gerade nutzt. Ausgeblendet, solange du unsichtbar oder offline bist; schalte es aus, und es verschwindet sofort."
+  ],
+  "Only your friends see this, because you are under 18 or have not given your age.": [
+    "لا يرى هذا إلا أصدقاؤك، لأن عمرك دون 18 عاماً أو لم تذكر عمرك.",
+    "Nur deine Freunde sehen das, weil du unter 18 bist oder kein Alter angegeben hast."
+  ],
+  "Names of apps and sites can say something about your health, beliefs or private life. Turn off or rename any you do not want to show.": [
+    "قد تكشف أسماء التطبيقات والمواقع شيئاً عن صحتك أو معتقداتك أو حياتك الخاصة. أوقف أو أعد تسمية ما لا تريد إظهاره.",
+    "Namen von Apps und Websites können etwas über deine Gesundheit, deinen Glauben oder dein Privatleben verraten. Schalte aus oder benenne um, was du nicht zeigen willst."
+  ],
+  "{0} wants to show what you are doing on Zrzur.": [
+    "يريد {0} أن يُظهر ما تفعله على زرزور.",
+    "{0} möchte auf Zrzur zeigen, was du gerade machst."
+  ],
+  "activity::Show": [
+    "إظهار",
+    "Zeigen"
+  ],
+  "activity::Block": [
+    "حظر",
+    "Blockieren"
+  ],
+  "While you are online, Zrzur asks Steam (Valve, USA) about once a minute which game your linked account is playing, and shows it as your activity. Only games your Steam profile shows publicly. Turn it off and it stops at once. Works on the web and on phones too. Link Steam in Connections first.": [
+    "ما دمت متصلاً، يسأل زرزور منصة Steam (شركة Valve في الولايات المتحدة) نحو مرة في الدقيقة عن اللعبة التي يلعبها حسابك المرتبط، ويعرضها نشاطاً لك. لا يظهر إلا ما يعرضه ملفك في Steam للعموم. إذا أوقفته توقف فوراً. يعمل على الويب والهواتف أيضاً. اربط Steam أولاً من الاتصالات.",
+    "Solange du online bist, fragt Zrzur etwa einmal pro Minute bei Steam (Valve, USA) nach, welches Spiel dein verknüpftes Konto spielt, und zeigt es als deine Aktivität. Nur Spiele, die dein Steam-Profil öffentlich zeigt. Schalte es aus, und es endet sofort. Funktioniert auch im Web und auf Handys. Verknüpfe Steam zuerst unter Verbindungen."
+  ],
+  "Many games report what you play to another chat app. While that app is closed, Zrzur can receive these reports instead. When that app starts, Zrzur steps aside.": [
+    "كثير من الألعاب تُبلغ تطبيق دردشة آخر بما تلعبه. ما دام ذلك التطبيق مغلقاً، يستطيع زرزور أن يستقبل هذه البلاغات بدلاً منه. وحين يعمل ذلك التطبيق، يتنحّى زرزور.",
+    "Viele Spiele melden einer anderen Chat-App, was du spielst. Solange diese App geschlossen ist, kann Zrzur diese Meldungen stattdessen empfangen. Sobald die App startet, tritt Zrzur zurück."
+  ],
+  "Stepped aside: the other chat app is open.": [
+    "تنحّى زرزور: تطبيق الدردشة الآخر يعمل.",
+    "Zrzur ist zurückgetreten: Die andere Chat-App ist offen."
+  ],
+  "Show what you are playing?": [
+    "هل تريد إظهار ما تلعبه؟",
+    "Zeigen, was du spielst?"
+  ],
+  "Friends and people in your servers would see the game or app you are using. It stays off until you choose.": [
+    "سيرى أصدقاؤك والأشخاص في سيرفراتك اللعبة أو التطبيق الذي تستخدمه. يبقى متوقفاً حتى تختار.",
+    "Freunde und Leute in deinen Servern würden das Spiel oder die App sehen, die du gerade nutzt. Es bleibt aus, bis du dich entscheidest."
+  ],
+  "activity::Turn on": [
+    "تشغيل",
+    "Einschalten"
+  ],
+  "activity::Not now": [
+    "ليس الآن",
+    "Nicht jetzt"
+  ],
+  "activity::Started {0}": [
+    "بدأ {0}",
+    "Begonnen {0}"
+  ],
+  "On your computer: when sharing and \"Detect games and apps\" are on, the Zrzur desktop app reads the names of running programs every 15 seconds and compares them with its list and the programs you added. This happens only on your computer: only the name of a matched program is sent to Zrzur, the list of running programs never leaves your computer, and window titles, files and tabs are never read. Your choices (programs turned off, renamed or added, blocked apps, the paired browser extension) are stored only on your computer. Games, apps and the Zrzur extensions for browsers and VS Code report to the desktop app on your computer; they learn nothing about your account from Zrzur. With sharing off, the desktop app reads nothing and listens for nothing.": [
+    "على حاسوبك: إذا كانت المشاركة و«اكتشاف الألعاب والتطبيقات» مشغّلتين، يقرأ تطبيق زرزور لسطح المكتب أسماء البرامج العاملة كل 15 ثانية ويقارنها بقائمته وبالبرامج التي أضفتها. ويجري ذلك على حاسوبك وحده: لا يُرسَل إلى زرزور إلا اسم البرنامج المطابق، ولا تغادر قائمة البرامج العاملة حاسوبك أبداً، ولا تُقرأ عناوين النوافذ ولا الملفات ولا علامات التبويب أبداً. وتُحفظ اختياراتك (البرامج التي أوقفتها أو أعدت تسميتها أو أضفتها، والتطبيقات المحظورة، وإضافة المتصفح المقترنة) على حاسوبك وحده. وتُبلغ الألعاب والتطبيقات وإضافتا زرزور للمتصفح ولـ VS Code تطبيقَ سطح المكتب على حاسوبك، ولا تعرف من زرزور شيئاً عن حسابك. وإذا كانت المشاركة متوقفة، فلا يقرأ تطبيق سطح المكتب شيئاً ولا ينتظر أي بلاغ.",
+    "Auf deinem Computer: Wenn das Teilen und „Spiele und Apps erkennen“ eingeschaltet sind, liest die Zrzur-Desktop-App alle 15 Sekunden die Namen der laufenden Programme und vergleicht sie mit ihrer Liste und den Programmen, die du hinzugefügt hast. Das geschieht nur auf deinem Computer: Nur der Name eines erkannten Programms wird an Zrzur gesendet, die Liste der laufenden Programme verlässt deinen Computer nie, und Fenstertitel, Dateien und Tabs werden nie gelesen. Deine Einstellungen (ausgeschaltete, umbenannte oder hinzugefügte Programme, blockierte Apps, die gekoppelte Browser-Erweiterung) werden nur auf deinem Computer gespeichert. Spiele, Apps und die Zrzur-Erweiterungen für Browser und VS Code melden an die Desktop-App auf deinem Computer; sie erfahren von Zrzur nichts über dein Konto. Ist das Teilen aus, liest die Desktop-App nichts und wartet auf keine Meldungen."
+  ],
+  "Your activity is shown to the people who can see that you are online: your friends and people in your Servers, and bots with access to presence in those Servers. Nobody sees it while you are invisible or offline, and people you blocked never see it. On accounts of people aged 16 or 17, and accounts with no stated age, only friends see it.": [
+    "يظهر نشاطك للأشخاص الذين يرون أنك متصل: أصدقاؤك والأشخاص في سيرفراتك، والبوتات التي تملك صلاحية الاطلاع على حالة الاتصال في تلك السيرفرات. ولا يراه أحد ما دمت غير مرئي أو غير متصل، ولا يراه أبداً من حظرتهم. وفي حسابات من يبلغون 16 أو 17 عاماً والحسابات التي لم يُذكر عمر أصحابها، لا يراه إلا الأصدقاء.",
+    "Deine Aktivität sehen die Personen, die sehen, dass du online bist: deine Freunde und Leute in deinen Servern sowie Bots mit Zugriff auf den Online-Status in diesen Servern. Niemand sieht sie, solange du unsichtbar oder offline bist, und Personen, die du blockiert hast, sehen sie nie. Bei Konten von Personen im Alter von 16 oder 17 Jahren und bei Konten ohne Altersangabe sehen sie nur Freunde."
+  ],
+  "Activity: kept only in memory while you are online, and never longer than 24 hours. We keep no history of what you did.": [
+    "النشاط: يُحفظ في الذاكرة فقط ما دمت متصلاً، ولا يزيد أبداً على 24 ساعة. ولا نحتفظ بأي سجل لما فعلته.",
+    "Aktivität: nur im Arbeitsspeicher, solange du online bist, und nie länger als 24 Stunden. Wir führen keinen Verlauf darüber, was du gemacht hast."
+  ]
 }

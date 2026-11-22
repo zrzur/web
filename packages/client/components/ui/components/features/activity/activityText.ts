@@ -52,49 +52,48 @@ export function shownActivities(
   });
 }
 
-/** `m:ss`, or `h:mm:ss` from an hour on; nothing for a time ahead */
-export function clock(ms: number): string | undefined {
-  if (!Number.isFinite(ms) || ms < 0) return undefined;
-  const total = Math.floor(ms / 1000);
-  const hours = Math.floor(total / 3600);
-  const minutes = Math.floor((total % 3600) / 60);
-  const seconds = total % 60;
-  const ss = String(seconds).padStart(2, "0");
-  if (hours > 0) return `${hours}:${String(minutes).padStart(2, "0")}:${ss}`;
-  return `${minutes}:${ss}`;
-}
-
-/** Time since it started, or `undefined` */
-export function elapsedText(
-  activity: Activity,
+/**
+ * When an activity began (or ends), in the reader's own words from the
+ * browser: "12 minutes ago", "قبل 12 دقيقة", "vor 12 Minuten"; "in 3
+ * minutes" for an end. Seconds under a minute, then minutes, hours, days.
+ * `undefined` without a time, or for an end already past.
+ */
+export function relativeTime(
+  iso: string | null | undefined,
   now: number,
+  locale: string,
+  future = false,
 ): string | undefined {
-  if (!activity.started_at) return undefined;
-  const start = Date.parse(activity.started_at);
-  if (Number.isNaN(start)) return undefined;
-  // a clock a little ahead of the server's still reads 0:00
-  return clock(Math.max(0, now - start));
-}
-
-/** Time left until it ends, or `undefined` */
-export function remainingText(
-  activity: Activity,
-  now: number,
-): string | undefined {
-  if (!activity.ends_at) return undefined;
-  const end = Date.parse(activity.ends_at);
-  if (Number.isNaN(end) || end <= now) return undefined;
-  return clock(end - now);
-}
-
-/** Share of the time gone, 0 to 1, when both ends are known */
-export function progress(activity: Activity, now: number): number | undefined {
-  if (!activity.started_at || !activity.ends_at) return undefined;
-  const start = Date.parse(activity.started_at);
-  const end = Date.parse(activity.ends_at);
-  if (Number.isNaN(start) || Number.isNaN(end) || end <= start)
-    return undefined;
-  return Math.min(1, Math.max(0, (now - start) / (end - start)));
+  if (!iso) return undefined;
+  const at = Date.parse(iso);
+  if (Number.isNaN(at)) return undefined;
+  // a clock a little ahead of the server's still reads "now"
+  let seconds = Math.round((at - now) / 1000);
+  if (future) {
+    if (seconds <= 0) return undefined;
+  } else {
+    seconds = Math.min(0, seconds);
+  }
+  const size = Math.abs(seconds);
+  const [value, unit]: [number, Intl.RelativeTimeFormatUnit] =
+    size < 60
+      ? [seconds, "second"]
+      : size < 3600
+        ? [Math.trunc(seconds / 60), "minute"]
+        : size < 86400
+          ? [Math.trunc(seconds / 3600), "hour"]
+          : [Math.trunc(seconds / 86400), "day"];
+  try {
+    return new Intl.RelativeTimeFormat(locale, { numeric: "auto" }).format(
+      value,
+      unit,
+    );
+  } catch {
+    return new Intl.RelativeTimeFormat("en", { numeric: "auto" }).format(
+      value,
+      unit,
+    );
+  }
 }
 
 /**

@@ -3,11 +3,8 @@ import { describe, expect, it } from "vitest";
 import {
   type Activity,
   activityIcon,
-  clock,
-  elapsedText,
   ownPicture,
-  progress,
-  remainingText,
+  relativeTime,
   safeButtonUrl,
   shownActivities,
 } from "./activityText";
@@ -44,34 +41,25 @@ describe("which activities show", () => {
   });
 });
 
-describe("the timer", () => {
-  it("reads minutes and seconds, then hours", () => {
-    expect(clock(0)).toBe("0:00");
-    expect(clock(65_000)).toBe("1:05");
-    expect(clock(3_600_000 + 2 * 60_000 + 3_000)).toBe("1:02:03");
-    expect(clock(-1)).toBeUndefined();
+describe("the time, in the reader's words", () => {
+  const now = Date.parse("2026-11-22T12:00:00Z");
+
+  it("says how long ago it began, by the minute and the hour", () => {
+    expect(relativeTime("2026-11-22T11:48:00Z", now, "en")).toBe("12 minutes ago");
+    expect(relativeTime("2026-11-22T09:30:00Z", now, "en")).toBe("2 hours ago");
+    expect(relativeTime("2026-11-22T11:59:30Z", now, "en")).toBe("30 seconds ago");
+    expect(relativeTime("2026-11-20T12:00:00Z", now, "en")).toBe("2 days ago");
+    expect(relativeTime("2026-11-22T11:48:00Z", now, "de")).toBe("vor 12 Minuten");
+    expect(relativeTime("2026-11-22T11:48:00Z", now, "ar")).toMatch(/12|١٢/);
   });
 
-  it("counts from the start and down to the end", () => {
-    const now = Date.parse("2026-11-22T12:00:00Z");
-    const a = game({
-      started_at: "2026-11-22T11:58:30Z",
-      ends_at: "2026-11-22T12:01:00Z",
-    });
-    expect(elapsedText(a, now)).toBe("1:30");
-    expect(remainingText(a, now)).toBe("1:00");
-    expect(progress(a, now)).toBeCloseTo(0.6, 5);
-    // a start a moment ahead of this clock still reads 0:00
-    expect(elapsedText(game({ started_at: "2026-11-22T12:00:02Z" }), now)).toBe(
-      "0:00",
-    );
-    expect(
-      elapsedText(game({ started_at: "not a time" }), now),
-    ).toBeUndefined();
-    expect(
-      remainingText(game({ ends_at: "2026-11-22T11:00:00Z" }), now),
-    ).toBeUndefined();
-    expect(progress(game(), now)).toBeUndefined();
+  it("says when it ends, and nothing for a past end or no time", () => {
+    expect(relativeTime("2026-11-22T12:03:00Z", now, "en", true)).toBe("in 3 minutes");
+    expect(relativeTime("2026-11-22T11:00:00Z", now, "en", true)).toBeUndefined();
+    expect(relativeTime(undefined, now, "en")).toBeUndefined();
+    expect(relativeTime("not a time", now, "en")).toBeUndefined();
+    // a start a moment ahead of this clock reads "now"
+    expect(relativeTime("2026-11-22T12:00:02Z", now, "en")).toBe("now");
   });
 });
 

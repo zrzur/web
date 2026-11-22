@@ -9667,7 +9667,7 @@ msgstr "غامبيا"
 
 #: components/modal/modals/SteamGames.tsx
 msgid "Game"
-msgstr "لعبة"
+msgstr "اللعبة"
 
 #: components/ui/components/features/profiles/pack/labels.generated.ts
 msgid "Game Shelf"
@@ -31361,3 +31361,78 @@ msgstr "خصوصيتك"
 #: components/app/interface/settings/user/activity/ActivitySettings.tsx
 msgid "Zrzur keeps no history: an activity exists only while you are online and goes when you go offline."
 msgstr "لا يحتفظ زرزور بأي سجل: يوجد النشاط ما دمت متصلاً فقط، ويزول حين تصبح غير متصل."
+
+#. placeholder {0}: app.name
+#: components/app/interface/settings/user/activity/ActivitySettings.tsx
+msgid "{0} wants to show what you are doing on Zrzur."
+msgstr "يريد {0} أن يُظهر ما تفعله على زرزور."
+
+#: components/app/interface/settings/user/activity/ActivitySettings.tsx
+msgid "Activity: kept only in memory while you are online, and never longer than 24 hours. We keep no history of what you did."
+msgstr "النشاط: يُحفظ في الذاكرة فقط ما دمت متصلاً، ولا يزيد أبداً على 24 ساعة. ولا نحتفظ بأي سجل لما فعلته."
+
+#: components/app/interface/settings/user/activity/ActivitySettings.tsx
+msgctxt "activity"
+msgid "Block"
+msgstr "حظر"
+
+#: components/client/ActivityIntro.tsx
+msgid "Friends and people in your servers would see the game or app you are using. It stays off until you choose."
+msgstr "سيرى أصدقاؤك والأشخاص في سيرفراتك اللعبة أو التطبيق الذي تستخدمه. يبقى متوقفاً حتى تختار."
+
+#: components/app/interface/settings/user/activity/ActivitySettings.tsx
+msgid "Many games report what you play to another chat app. While that app is closed, Zrzur can receive these reports instead. When that app starts, Zrzur steps aside."
+msgstr "كثير من الألعاب تُبلغ تطبيق دردشة آخر بما تلعبه. ما دام ذلك التطبيق مغلقاً، يستطيع زرزور أن يستقبل هذه البلاغات بدلاً منه. وحين يعمل ذلك التطبيق، يتنحّى زرزور."
+
+#: components/app/interface/settings/user/activity/ActivitySettings.tsx
+msgid "Names of apps and sites can say something about your health, beliefs or private life. Turn off or rename any you do not want to show."
+msgstr "قد تكشف أسماء التطبيقات والمواقع شيئاً عن صحتك أو معتقداتك أو حياتك الخاصة. أوقف أو أعد تسمية ما لا تريد إظهاره."
+
+#: components/client/ActivityIntro.tsx
+msgctxt "activity"
+msgid "Not now"
+msgstr "ليس الآن"
+
+#: components/app/interface/settings/user/activity/ActivitySettings.tsx
+msgid "Off until you turn it on. Then friends and people in your servers see the game or app you are using. Hidden while you are invisible or offline; turn it off and it disappears at once."
+msgstr "متوقف حتى تشغّله. عندها يرى أصدقاؤك والأشخاص في سيرفراتك اللعبة أو التطبيق الذي تستخدمه. يُخفى ما دمت غير مرئي أو غير متصل، وإذا أوقفته اختفى فوراً."
+
+#: components/app/interface/settings/user/activity/ActivitySettings.tsx
+msgid "On your computer: when sharing and \"Detect games and apps\" are on, the Zrzur desktop app reads the names of running programs every 15 seconds and compares them with its list and the programs you added. This happens only on your computer: only the name of a matched program is sent to Zrzur, the list of running programs never leaves your computer, and window titles, files and tabs are never read. Your choices (programs turned off, renamed or added, blocked apps, the paired browser extension) are stored only on your computer. Games, apps and the Zrzur extensions for browsers and VS Code report to the desktop app on your computer; they learn nothing about your account from Zrzur. With sharing off, the desktop app reads nothing and listens for nothing."
+msgstr "على حاسوبك: إذا كانت المشاركة و«اكتشاف الألعاب والتطبيقات» مشغّلتين، يقرأ تطبيق زرزور لسطح المكتب أسماء البرامج العاملة كل 15 ثانية ويقارنها بقائمته وبالبرامج التي أضفتها. ويجري ذلك على حاسوبك وحده: لا يُرسَل إلى زرزور إلا اسم البرنامج المطابق، ولا تغادر قائمة البرامج العاملة حاسوبك أبداً، ولا تُقرأ عناوين النوافذ ولا الملفات ولا علامات التبويب أبداً. وتُحفظ اختياراتك (البرامج التي أوقفتها أو أعدت تسميتها أو أضفتها، والتطبيقات المحظورة، وإضافة المتصفح المقترنة) على حاسوبك وحده. وتُبلغ الألعاب والتطبيقات وإضافتا زرزور للمتصفح ولـ VS Code تطبيقَ سطح المكتب على حاسوبك، ولا تعرف من زرزور شيئاً عن حسابك. وإذا كانت المشاركة متوقفة، فلا يقرأ تطبيق سطح المكتب شيئاً ولا ينتظر أي بلاغ."
+
+#: components/app/interface/settings/user/activity/ActivitySettings.tsx
+msgid "Only your friends see this, because you are under 18 or have not given your age."
+msgstr "لا يرى هذا إلا أصدقاؤك، لأن عمرك دون 18 عاماً أو لم تذكر عمرك."
+
+#: components/app/interface/settings/user/activity/ActivitySettings.tsx
+msgctxt "activity"
+msgid "Show"
+msgstr "إظهار"
+
+#: components/client/ActivityIntro.tsx
+msgid "Show what you are playing?"
+msgstr "هل تريد إظهار ما تلعبه؟"
+
+#. placeholder {0}: time()
+#: components/ui/components/features/activity/ProfileActivity.tsx
+msgctxt "activity"
+msgid "Started {0}"
+msgstr "بدأ {0}"
+
+#: components/app/interface/settings/user/activity/ActivitySettings.tsx
+msgid "Stepped aside: the other chat app is open."
+msgstr "تنحّى زرزور: تطبيق الدردشة الآخر يعمل."
+
+#: components/client/ActivityIntro.tsx
+msgctxt "activity"
+msgid "Turn on"
+msgstr "تشغيل"
+
+#: components/app/interface/settings/user/activity/ActivitySettings.tsx
+msgid "While you are online, Zrzur asks Steam (Valve, USA) about once a minute which game your linked account is playing, and shows it as your activity. Only games your Steam profile shows publicly. Turn it off and it stops at once. Works on the web and on phones too. Link Steam in Connections first."
+msgstr "ما دمت متصلاً، يسأل زرزور منصة Steam (شركة Valve في الولايات المتحدة) نحو مرة في الدقيقة عن اللعبة التي يلعبها حسابك المرتبط، ويعرضها نشاطاً لك. لا يظهر إلا ما يعرضه ملفك في Steam للعموم. إذا أوقفته توقف فوراً. يعمل على الويب والهواتف أيضاً. اربط Steam أولاً من الاتصالات."
+
+#: components/app/interface/settings/user/activity/ActivitySettings.tsx
+msgid "Your activity is shown to the people who can see that you are online: your friends and people in your Servers, and bots with access to presence in those Servers. Nobody sees it while you are invisible or offline, and people you blocked never see it. On accounts of people aged 16 or 17, and accounts with no stated age, only friends see it."
+msgstr "يظهر نشاطك للأشخاص الذين يرون أنك متصل: أصدقاؤك والأشخاص في سيرفراتك، والبوتات التي تملك صلاحية الاطلاع على حالة الاتصال في تلك السيرفرات. ولا يراه أحد ما دمت غير مرئي أو غير متصل، ولا يراه أبداً من حظرتهم. وفي حسابات من يبلغون 16 أو 17 عاماً والحسابات التي لم يُذكر عمر أصحابها، لا يراه إلا الأصدقاء."

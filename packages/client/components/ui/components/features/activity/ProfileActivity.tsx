@@ -21,16 +21,16 @@ import { cutLine } from "../profiles/cutLine";
 import { useActivityLabel } from "./ActivityLine";
 import {
   type Activity,
+  type ActivitySource,
   activityIcon,
-  elapsedText,
   ownPicture,
-  progress,
-  remainingText,
+  relativeTime,
   safeButtonUrl,
   shownActivities,
 } from "./activityText";
 
-/* One clock for every timer on screen, ticking only while one is shown */
+/* One clock for every activity on screen; a relative time moves by the
+   minute, so it ticks every 30 seconds and only while one is shown */
 const [now, setNow] = createSignal(Date.now());
 let watchers = 0;
 let ticker: ReturnType<typeof setInterval> | undefined;
@@ -38,7 +38,7 @@ function useNow() {
   onMount(() => {
     watchers++;
     setNow(Date.now());
-    ticker ??= setInterval(() => setNow(Date.now()), 1000);
+    ticker ??= setInterval(() => setNow(Date.now()), 30_000);
   });
   onCleanup(() => {
     watchers--;
@@ -51,21 +51,34 @@ function useNow() {
   return now;
 }
 
+const SOURCES: ActivitySource[] = ["Rpc", "Desktop", "Steam"];
+
 /**
  * What the person is doing right now, on the profile card and the full
- * profile: one panel per activity, the main one first. Pictures load only
- * from Zrzur's servers; buttons open through the link warning.
+ * profile, in the same panel as the Steam games card: one row per source,
+ * the main one first. Each source keeps its own row while it updates, so
+ * focus and the time stay put. Pictures load only from Zrzur's servers;
+ * buttons open through the link warning.
  */
 export function ProfileActivity(props: { user: User }) {
   const activities = createMemo(() =>
     shownActivities(props.user.activities as Activity[] | undefined),
   );
+  const bySource = (source: ActivitySource) =>
+    activities().find((activity) => activity.source === source);
+  const present = createMemo(() =>
+    SOURCES.filter((source) => !!bySource(source)),
+  );
 
   return (
     <Show when={activities().length}>
       <ProfileSection title={<Trans>Activity</Trans>}>
-        <For each={activities()}>
-          {(activity) => <ActivityPanel activity={activity} />}
+        <For each={present()}>
+          {(source) => (
+            <Show when={bySource(source)}>
+              {(activity) => <ActivityPanel activity={activity()} />}
+            </Show>
+          )}
         </For>
       </ProfileSection>
     </Show>
@@ -73,7 +86,7 @@ export function ProfileActivity(props: { user: User }) {
 }
 
 function ActivityPanel(props: { activity: Activity }) {
-  const { t } = useLingui();
+  const { t, i18n } = useLingui();
   const label = useActivityLabel();
   const client = useClient();
   const { openModal } = useModals();
@@ -86,11 +99,15 @@ function ActivityPanel(props: { activity: Activity }) {
       features?.autumn?.url,
     ];
   };
-  const large = () => ownPicture(props.activity.large_image, hosts());
-  const small = () => ownPicture(props.activity.small_image, hosts());
-  const elapsed = () => elapsedText(props.activity, clock());
-  const left = () => remainingText(props.activity, clock());
-  const share = () => progress(props.activity, clock());
+  const picture = () =>
+    ownPicture(props.activity.large_image, hosts()) ??
+    ownPicture(props.activity.small_image, hosts());
+  const started = () =>
+    relativeTime(props.activity.started_at, clock(), i18n().locale);
+  const ends = () =>
+    relativeTime(props.activity.ends_at, clock(), i18n().locale, true);
+  const facts = () =>
+    [props.activity.details, props.activity.state].filter(Boolean).join(" · ");
   const buttons = createMemo(() =>
     (props.activity.buttons ?? [])
       .map((button) => ({
@@ -108,13 +125,17 @@ function ActivityPanel(props: { activity: Activity }) {
         : t`Reported by the app`;
 
   return (
-    <div class={panel()} data-testid="profile-activity">
+    <div
+      class={panel()}
+      data-testid="profile-activity"
+      data-source={props.activity.source}
+    >
       <div class={head()}>
-        <div class={art()}>
+        <div class={tile()}>
           <Show
-            when={large()}
+            when={picture()}
             fallback={
-              <Symbol size={24} aria-hidden="true">
+              <Symbol size={20} aria-hidden="true">
                 {activityIcon(props.activity.type)}
               </Symbol>
             }
@@ -122,75 +143,51 @@ function ActivityPanel(props: { activity: Activity }) {
             {(url) => (
               <img
                 src={url()}
-                alt={props.activity.large_text ?? ""}
-                title={props.activity.large_text ?? undefined}
+                alt=""
+                title={
+                  props.activity.large_text ??
+                  props.activity.small_text ??
+                  undefined
+                }
                 loading="lazy"
                 referrerpolicy="no-referrer"
-                class={picture()}
-              />
-            )}
-          </Show>
-          <Show when={small()}>
-            {(url) => (
-              <img
-                src={url()}
-                alt={props.activity.small_text ?? ""}
-                title={props.activity.small_text ?? undefined}
-                loading="lazy"
-                referrerpolicy="no-referrer"
-                class={badge()}
+                class={image()}
               />
             )}
           </Show>
         </div>
         <div class={lines()}>
-          <span class={cx(cutLine(), title())} dir="auto">
+          <strong class={cx(cutLine(), title())} dir="auto">
             {label(props.activity)}
-          </span>
-          <Show when={props.activity.details}>
-            <span class={cx(cutLine(), body())} dir="auto">
-              {props.activity.details}
+          </strong>
+          <Show when={facts()}>
+            <span class={cx(cutLine(), fact())} dir="auto">
+              {facts()}
             </span>
           </Show>
-          <Show when={props.activity.state}>
-            <span class={cx(cutLine(), body())} dir="auto">
-              {props.activity.state}
-            </span>
-          </Show>
-          <span class={meta()}>
+          <span class={meta()} data-testid="activity-time">
             <Show
-              when={left()}
+              when={ends()}
               fallback={
-                <Show when={elapsed()}>
-                  {(time) => (
-                    <span data-testid="activity-elapsed">
-                      {t`for ${time()}`}
-                    </span>
-                  )}
+                <Show when={started()}>
+                  {(time) =>
+                    t({
+                      message: `Started ${time()}`,
+                      context: "activity",
+                    })
+                  }
                 </Show>
               }
             >
-              {(time) => <span>{t`${time()} left`}</span>}
+              {(time) => t`Ends ${time()}`}
             </Show>
-            <Show when={elapsed() || left()}>
-              <span aria-hidden="true">·</span>
+            <Show when={started() || ends()}>
+              <span aria-hidden="true"> · </span>
             </Show>
             <span>{source()}</span>
           </span>
         </div>
       </div>
-      <Show when={share() !== undefined}>
-        <div
-          class={track()}
-          role="progressbar"
-          aria-valuemin={0}
-          aria-valuemax={100}
-          aria-valuenow={Math.round((share() ?? 0) * 100)}
-          aria-label={t`Time gone`}
-        >
-          <div class={fill()} style={{ width: `${(share() ?? 0) * 100}%` }} />
-        </div>
-      </Show>
       <Show when={buttons().length}>
         <div class={row()}>
           <For each={buttons()}>
@@ -216,71 +213,54 @@ function ActivityPanel(props: { activity: Activity }) {
           </For>
         </div>
       </Show>
+      {/* a Steam picture carries Valve's credit (legal RP-05, T-11) */}
+      <Show when={props.activity.source === "Steam" && picture()}>
+        <p class={credit()}>
+          {t`From Steam. Steam is a trademark of Valve Corporation; Zrzur is not affiliated with Valve. Game pictures, achievement names and icons belong to their owners.`}
+        </p>
+      </Show>
     </div>
   );
 }
 
 const head = cva({
-  base: { display: "flex", alignItems: "center", gap: "12px", minWidth: 0 },
+  base: { display: "flex", alignItems: "center", gap: "8px", minWidth: 0 },
 });
 
-const art = cva({
+/* the same 36 px tile as a game on the Steam card */
+const tile = cva({
   base: {
-    position: "relative",
     flexShrink: 0,
-    width: "56px",
-    height: "56px",
+    width: "36px",
+    height: "36px",
     display: "grid",
     placeItems: "center",
-    borderRadius: "var(--z-radius, 10px)",
+    borderRadius: "var(--z-radius-xs, 4px)",
     background: "var(--profile-chip, var(--z-bg-input))",
-    "--z-icon-color": "var(--z-fg-secondary)",
+    overflow: "hidden",
+    "--z-icon-color": "var(--profile-ink-2, var(--z-fg-secondary))",
   },
 });
 
-const picture = cva({
-  base: {
-    width: "56px",
-    height: "56px",
-    objectFit: "cover",
-    borderRadius: "var(--z-radius, 10px)",
-  },
-});
-
-const badge = cva({
-  base: {
-    position: "absolute",
-    insetInlineEnd: "-4px",
-    insetBlockEnd: "-4px",
-    width: "20px",
-    height: "20px",
-    borderRadius: "999px",
-    objectFit: "cover",
-    border: "2px solid var(--profile-panel, var(--z-bg-raised))",
-    background: "var(--z-bg-raised)",
-  },
+const image = cva({
+  base: { width: "36px", height: "36px", objectFit: "cover" },
 });
 
 const lines = cva({
-  base: {
-    display: "flex",
-    flexDirection: "column",
-    gap: "2px",
-    minWidth: 0,
-    flex: 1,
-  },
+  base: { display: "flex", flexDirection: "column", flex: 1, minWidth: 0 },
 });
 
 const title = cva({
   base: {
-    fontSize: "13px",
-    lineHeight: "20px",
+    maxWidth: "100%",
     fontWeight: 600,
+    fontSize: "15px",
+    lineHeight: "20px",
     color: "var(--profile-ink, var(--z-fg-primary))",
   },
 });
 
-const body = cva({
+const fact = cva({
   base: {
     fontSize: "12px",
     lineHeight: "16px",
@@ -290,30 +270,9 @@ const body = cva({
 
 const meta = cva({
   base: {
-    display: "flex",
-    flexWrap: "wrap",
-    gap: "4px",
     fontSize: "12px",
     lineHeight: "16px",
-    color: "var(--profile-ink-2, var(--z-fg-muted))",
-    fontVariantNumeric: "tabular-nums",
-  },
-});
-
-const track = cva({
-  base: {
-    height: "4px",
-    borderRadius: "999px",
-    background: "var(--profile-line, var(--z-border-subtle))",
-    overflow: "hidden",
-  },
-});
-
-const fill = cva({
-  base: {
-    height: "100%",
-    borderRadius: "999px",
-    background: "var(--profile-ink-2, var(--z-fg-secondary))",
+    color: "var(--profile-ink-2, var(--z-fg-secondary))",
   },
 });
 
@@ -327,5 +286,14 @@ const row = cva({
 });
 
 const wide = cva({
-  base: { flex: 1, justifyContent: "center" },
+  base: { flex: 1, justifyContent: "center", _phone: { minHeight: "44px" } },
+});
+
+const credit = cva({
+  base: {
+    margin: 0,
+    fontSize: "12px",
+    lineHeight: "16px",
+    color: "var(--profile-ink-2, var(--z-fg-muted))",
+  },
 });
