@@ -262,8 +262,8 @@
     },
     {
       "path": "CHANGELOG.md",
-      "sha256": "b0f80a55f8cd6a75c08a5d778fbd64c865539dd93fe9fb2627a076295f01ccec",
-      "bytes": 195921,
+      "sha256": "81b2f664e34fce9dc1f41f9727ec246624d5ad0cbeb4549bbcfbcde249fade99",
+      "bytes": 196688,
       "category": "public-documentation"
     },
     {
@@ -7917,9 +7917,15 @@
       "category": "synthetic-test-source-or-fixture"
     },
     {
+      "path": "packages/client/components/ui/components/utils/Draggable.touch.dom.test.tsx",
+      "sha256": "e5dfa79f09f8e822c7a620809217c6d5518ff5b59b9eb63ad9abdd00f86cf0e9",
+      "bytes": 6583,
+      "category": "synthetic-test-source-or-fixture"
+    },
+    {
       "path": "packages/client/components/ui/components/utils/Draggable.tsx",
-      "sha256": "d03ad82da1287c3ffea3d6c94ef7ed71adcfb58b4aa3715948fc79570e284785",
-      "bytes": 7063,
+      "sha256": "50f66c5ae416c38e8500aca34ce6566821bde0123ea040810150b131d0d7875b",
+      "bytes": 11107,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -8082,6 +8088,18 @@
       "path": "packages/client/components/ui/components/utils/mediaSize.ts",
       "sha256": "2691ee7bb4f7e197b6244389d5ac6583103706cb1f3038142a42d717d76f39c5",
       "bytes": 497,
+      "category": "product-source-or-build-manifest"
+    },
+    {
+      "path": "packages/client/components/ui/components/utils/touchHitArea.ts",
+      "sha256": "cd7d6710b1cb1fba72e040fd2d0c3cb25319aabf90326e8433179fa5acbd7d75",
+      "bytes": 841,
+      "category": "product-source-or-build-manifest"
+    },
+    {
+      "path": "packages/client/components/ui/components/utils/touchHold.ts",
+      "sha256": "8f49c06d58cadbb3882631cb770a27d1cc45f49fc74b332ce88c469e5952900c",
+      "bytes": 8281,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -44218,8 +44236,8 @@
     },
     {
       "path": "packages/client/src/interface/navigation/channels/HomeSidebar.tsx",
-      "sha256": "9d663e097147b32ca723125d971375eb2484463f31ca4aa812a9986cef9ace79",
-      "bytes": 15911,
+      "sha256": "6fe03d0b26b11d98d197694ba858aa181e076197872dce7ea822f5637ca460ff",
+      "bytes": 16355,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -44236,8 +44254,8 @@
     },
     {
       "path": "packages/client/src/interface/navigation/channels/ServerSidebar.tsx",
-      "sha256": "ab3de6d22216c29c9ba2a608df3a74f44931ecf9a4a8410c6de5e48aeca062dc",
-      "bytes": 42536,
+      "sha256": "83f0dd188cec84afe181d9a8ee17315480b20aaa64aa61aeb64f048e5881022c",
+      "bytes": 42571,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -44284,8 +44302,8 @@
     },
     {
       "path": "packages/client/src/interface/navigation/servers/ServerList.tsx",
-      "sha256": "a872c957bf84a4ea0caedc8c8b414c799be480005aa5f95578496dfaf68a3887",
-      "bytes": 33021,
+      "sha256": "072d26c25eb2c367b9ff7f17f157a6df55c6a812f8c774b18b2c3a30030bc485",
+      "bytes": 33325,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -44304,6 +44322,18 @@
       "path": "packages/client/src/interface/navigation/servers/index.ts",
       "sha256": "06e0735b6d026eeb9d737978caab378da1d3b748da7ffaed2ec168f58e07742d",
       "bytes": 43,
+      "category": "product-source-or-build-manifest"
+    },
+    {
+      "path": "packages/client/src/interface/navigation/servers/keepEntries.test.ts",
+      "sha256": "3dadd5e394dd4e2fc331ecbaff0b2dd3b494bc713585b47c835ea6d790208692",
+      "bytes": 1834,
+      "category": "synthetic-test-source-or-fixture"
+    },
+    {
+      "path": "packages/client/src/interface/navigation/servers/keepEntries.ts",
+      "sha256": "89d3dba1f066a0a4fbfb94334f07d4e476178754571e031ed6fd93cfe5a154ef",
+      "bytes": 1504,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -44326,8 +44356,8 @@
     },
     {
       "path": "packages/client/src/interface/navigation/servers/railDrag.ts",
-      "sha256": "55b147ad8f22f70572ab5cae4f36ffa58eca8f44a2ec8a863fe85af0559fb261",
-      "bytes": 18893,
+      "sha256": "7e22280598907b36602e667769fc6e26bcc827f5cb4d2be24a0fcd7eff1f6359",
+      "bytes": 16059,
       "category": "product-source-or-build-manifest"
     },
     {
