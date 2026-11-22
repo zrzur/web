@@ -70,6 +70,8 @@ import {
   watchAudioSettings,
 } from "./audioQuality";
 import { deviceFallback } from "./callHealth";
+import { type NetworkLevel, weakNetworkSettings } from "./weakNetwork";
+import { watchWeakNetwork } from "./weakNetworkWatch";
 import { InRoom } from "./components/InRoom";
 import { desktopPushToTalk, latchPress } from "./desktopPushToTalk";
 import type { GameKeyAction, GameKeysStatus } from "./gameKeys";
@@ -99,8 +101,6 @@ import {
 } from "./screenShare";
 import { createTalkGate } from "./talkGate";
 import type { VoiceProcessor } from "./VoiceProcessor";
-import { type NetworkLevel, weakNetworkSettings } from "./weakNetwork";
-import { watchWeakNetwork } from "./weakNetworkWatch";
 
 /** The call's audio, with LiveKit (loaded with the first call) */
 const RoomAudio = lazy(() => import("./components/RoomAudio"));
