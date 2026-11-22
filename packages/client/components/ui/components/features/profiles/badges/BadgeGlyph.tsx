@@ -20,9 +20,14 @@ type Art = Readonly<Record<string, string>>;
 const [loadedArt, setLoadedArt] = createSignal<Art>();
 let artRequest: Promise<void> | undefined;
 
-/** Load the badge art once; resolves when it is ready (tests await it). */
-export function loadBadgeArt(): Promise<void> {
-  artRequest ??= import("./badgeArt").then(
+/**
+ * Load the badge art once; resolves when it is ready (tests await it).
+ * @param importArt Where the art comes from (tests give their own)
+ */
+export function loadBadgeArt(
+  importArt: () => Promise<{ BADGE_ART: Art }> = () => import("./badgeArt"),
+): Promise<void> {
+  artRequest ??= importArt().then(
     (module) => {
       setLoadedArt(module.BADGE_ART);
     },
