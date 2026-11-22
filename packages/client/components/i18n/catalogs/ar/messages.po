@@ -31151,3 +31151,11 @@ msgstr "عضو غادر السيرفر"
 #: components/app/interface/settings/channel/permissions/ChannelVisibility.tsx
 msgid "This thread follows who can see its channel."
 msgstr "يتبع هذا الخيط إعدادات من يرى قناته."
+
+#: components/app/interface/channels/text/EditMessage.tsx
+msgid "Escape to <0>cancel</0> · Enter to <1>save</1>"
+msgstr "اضغط Escape <0>للإلغاء</0> · Enter <1>للحفظ</1>"
+
+#: src/interface/channels/text/Composition.tsx
+msgid "This message is too long. Remove {over} characters to send it (up to {max})."
+msgstr "هذه الرسالة طويلة جدًا. احذف {over} من الأحرف لإرسالها (الحد الأقصى {max})."

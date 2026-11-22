@@ -31151,3 +31151,11 @@ msgstr "Ein Mitglied, das gegangen ist"
 #: components/app/interface/settings/channel/permissions/ChannelVisibility.tsx
 msgid "This thread follows who can see its channel."
 msgstr "Dieser Thread übernimmt, wer seinen Kanal sehen kann."
+
+#: components/app/interface/channels/text/EditMessage.tsx
+msgid "Escape to <0>cancel</0> · Enter to <1>save</1>"
+msgstr "Escape zum <0>Abbrechen</0> · Enter zum <1>Speichern</1>"
+
+#: src/interface/channels/text/Composition.tsx
+msgid "This message is too long. Remove {over} characters to send it (up to {max})."
+msgstr "Diese Nachricht ist zu lang. Entferne {over} Zeichen, um sie zu senden (höchstens {max})."

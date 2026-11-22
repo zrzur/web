@@ -11,6 +11,7 @@ import {
 } from "solid-js";
 
 import { useLingui } from "@lingui/solid/macro";
+import { styled } from "styled-system/jsx";
 import { Channel, ConnectionState } from "@zrzur/sdk/solid";
 
 import { useClient } from "@revolt/client";
@@ -112,6 +113,17 @@ export function MessageComposition(props: Props) {
   const isAlmostTooLong = () => messageLength() > maxMessageLength() - 200;
   const wayTooLong = () => messageLength() > maxMessageLength() + 9999;
 
+  /**
+   * What to do about a message over the limit, in plain words (the counter
+   * alone only turned red, and Send did nothing)
+   */
+  function tooLongText() {
+    // plain digits, like the counter next to the box
+    const over = messageLength() - maxMessageLength();
+    const max = maxMessageLength();
+    return t`This message is too long. Remove ${over} characters to send it (up to ${max}).`;
+  }
+
   // Can the user upload files here?
   const canUploadFiles = createMemo(() => {
     return (
@@ -144,6 +156,15 @@ export function MessageComposition(props: Props) {
       !isTimedOut()
     );
   });
+
+  // Nothing typed or attached: the row has room for the poll, GIF and voice
+  // buttons. They used to follow !canSend(), so a message over the length
+  // limit (it cannot be sent) brought all three back while the text was
+  // still there, and the text column was squeezed to a few pixels
+  const draftEmpty = createMemo(
+    () =>
+      !(draft()?.content ?? "").trim().length && !(draft()?.files ?? []).length,
+  );
 
   // TEMP
   function currentValue() {
@@ -589,6 +610,11 @@ export function MessageComposition(props: Props) {
       <Show when={props.channel.server?.mustAcceptRules}>
         <RulesGate server={props.channel.server!} />
       </Show>
+      <Show when={messageLength() > maxMessageLength()}>
+        <TooLong role="status" data-composer-too-long>
+          {tooLongText()}
+        </TooLong>
+      </Show>
       <MessageBox
         initialValue={initialValue()}
         nodeReplacement={nodeReplacement()}
@@ -699,7 +725,7 @@ export function MessageComposition(props: Props) {
                     {void (pickerTriggers = triggerProps)}
                     {/* polls: their own button where they can be posted
                         (phones have it in the "+" sheet) */}
-                    <Show when={canPoll() && !canSend() && !phone}>
+                    <Show when={canPoll() && draftEmpty() && !phone}>
                       <MessageBox.InlineIcon>
                         <IconButton
                           aria-label={t`Create poll`}
@@ -718,7 +744,7 @@ export function MessageComposition(props: Props) {
                     </Show>
                     <Show
                       when={
-                        !canSend() &&
+                        draftEmpty() &&
                         props.channel.havePermission("SendEmbeds") &&
                         !(phone && canUploadFiles())
                       }
@@ -749,7 +775,7 @@ export function MessageComposition(props: Props) {
                 )}
               </CompositionMediaPicker>
               <Show
-                when={!canSend() && canUploadFiles() && !recording() && !phone}
+                when={draftEmpty() && canUploadFiles() && !recording() && !phone}
               >
                 <MessageBox.InlineIcon>
                   <IconButton
@@ -810,3 +836,20 @@ export function MessageComposition(props: Props) {
     </>
   );
 }
+
+/**
+ * The line above the message box while the text is over the length limit
+ */
+const TooLong = styled("div", {
+  base: {
+    marginBlockEnd: "8px",
+    paddingBlock: "8px",
+    paddingInline: "12px",
+    borderRadius: "var(--z-box-radius, 12px)",
+    border: "1px solid var(--z-danger)",
+    color: "var(--z-danger)",
+    fontSize: "14px",
+    lineHeight: "20px",
+    overflowWrap: "anywhere",
+  },
+});
