@@ -151,12 +151,14 @@ export function mentionAt(
 export function extendsSelection(target: Node | null): boolean {
   if (typeof document === "undefined" || !target) return false;
   const selection = document.getSelection();
-  if (!selection || selection.isCollapsed || !selection.toString().trim())
-    return false;
+  if (!selection?.rangeCount) return false;
+  const range = selection.getRangeAt(0);
+  if (range.collapsed || !range.toString().trim()) return false;
   const row = (
     target instanceof Element ? target : target.parentElement
   )?.closest("[data-message-row]");
-  return !!row && selection.containsNode(row, true);
+  // the selection reaches into this message
+  return !!row && range.intersectsNode(row);
 }
 
 /**
