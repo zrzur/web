@@ -117,6 +117,39 @@ describe("sending the desktop's activity", () => {
     ]);
   });
 
+  it("never sends a refused value again, not even after a reconnect", () => {
+    const { c, sent, sender } = setup();
+    sender.set("Rpc", { name: "Bad" });
+    sender.refused("Rpc");
+    c.advance(10_000);
+    sender.reconnected();
+    c.advance(10_000);
+    sender.set("Rpc", { name: "Bad" });
+    c.advance(10_000);
+    expect(sent).toEqual([["Rpc", { name: "Bad" }]]);
+    // a new value goes out as usual, and the other source is not held
+    sender.set("Rpc", { name: "Good" });
+    sender.set("Desktop", { name: "Code" });
+    c.advance(10_000);
+    expect(sent.slice(1)).toEqual([
+      ["Rpc", { name: "Good" }],
+      ["Desktop", { name: "Code" }],
+    ]);
+  });
+
+  it("tries a value again after a rate limit, once the wait is over", () => {
+    const { c, sent, sender } = setup();
+    sender.set("Desktop", { name: "Code" });
+    sender.refused("Desktop", 8000);
+    c.advance(7000);
+    expect(sent).toHaveLength(1);
+    c.advance(2000);
+    expect(sent).toEqual([
+      ["Desktop", { name: "Code" }],
+      ["Desktop", { name: "Code" }],
+    ]);
+  });
+
   it("stops its timer", () => {
     const { c, sent, sender } = setup();
     sender.set("Rpc", { name: "A" });

@@ -2,6 +2,8 @@ import { createEffect, createSignal, on, onCleanup } from "solid-js";
 
 import type { Client } from "@zrzur/sdk/solid";
 
+import { useModals } from "@revolt/modal";
+
 import { useClient } from ".";
 import { createActivitySender } from "./activitySender";
 
@@ -15,10 +17,14 @@ export type DesktopActivity = {
     id: string,
     change: { name?: string; off?: boolean },
   ): Promise<DesktopActivityState>;
-  running(): Promise<{ pid: number; name: string }[]>;
+  running(): Promise<{ pid: number; name: string; path?: string }[]>;
   add(pid: number, name: string, kind: string): Promise<DesktopActivityState>;
   removeAdded(id: string): Promise<DesktopActivityState>;
   blockApp(id: string, blocked: boolean): Promise<DesktopActivityState>;
+  /** A new app asked to show what you do: Show (true) or Block (false) */
+  decideApp(id: string, show: boolean): Promise<DesktopActivityState>;
+  /** The person clicked the desktop notice about a new app */
+  onAsk(callback: (id: string) => void): () => void;
   forgetApp(id: string): Promise<DesktopActivityState>;
   setCompat(on: boolean): Promise<DesktopActivityState>;
   startPairing(): Promise<DesktopActivityState>;
@@ -52,9 +58,20 @@ export type DesktopActivityState = {
   discordCompat: boolean;
   platform: "win" | "mac" | "linux";
   entries: DesktopActivityEntry[];
-  apps: { id: string; name: string; blocked: boolean; active: boolean }[];
+  apps: {
+    id: string;
+    name: string;
+    blocked: boolean;
+    active: boolean;
+    /** false: held until the person picks Show or Block */
+    decided?: boolean;
+    /** Where the program that connected lives, when it is one of yours */
+    path?: string;
+  }[];
   extension: { port?: number; paired: number; pairingCode?: string };
   pipes: number;
+  /** The common-name pipe is open now (closed while the other app runs) */
+  compatOpen?: boolean;
 };
 
 /** The bridge, on the desktop app only */
@@ -87,6 +104,7 @@ export { sharing as activitySharing, setSharing as setActivitySharing };
  */
 export function ActivityWorker() {
   const client = useClient();
+  const { openModal } = useModals();
   const bridge = desktopActivity();
   if (!bridge) return null;
 
@@ -132,6 +150,48 @@ export function ActivityWorker() {
   };
   const stopUpdates = bridge.onUpdate(apply);
   onCleanup(stopUpdates);
+
+  // a value the server refused is not sent again (the connection stays);
+  // your privacy changed elsewhere: the desktop follows at once
+  createEffect(
+    on(
+      () => client(),
+      (current) => {
+        if (!current) return;
+        const refused = (
+          source: string,
+          error: { type?: string; retry_after?: number },
+        ) => {
+          if (source !== "Rpc" && source !== "Desktop") return;
+          sender.refused(
+            source,
+            error?.type === "RateLimited"
+              ? (error.retry_after ?? 0)
+              : undefined,
+          );
+        };
+        const privacy = (value: { share_activity?: boolean | null }) =>
+          setSharing(value?.share_activity === true);
+        current.on("activityRefused", refused as never);
+        current.on("privacyUpdate", privacy as never);
+        onCleanup(() => {
+          current.removeListener("activityRefused", refused as never);
+          current.removeListener("privacyUpdate", privacy as never);
+        });
+      },
+    ),
+  );
+
+  // the desktop notice about a new app opens the page where it is decided
+  onCleanup(
+    bridge.onAsk(() =>
+      openModal({
+        type: "settings",
+        config: "user",
+        context: { page: "activity" },
+      }),
+    ),
+  );
 
   // a new connection forgets this session's activities: send them again
   createEffect(

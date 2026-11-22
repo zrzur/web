@@ -13,6 +13,12 @@ export type Sender<A> = {
   set(source: Source, activity: A | null): void;
   /** The gateway is back: the server forgot this session's activities */
   reconnected(): void;
+  /**
+   * The server refused the last value sent for `source`. Without
+   * `retryAfter` the value is never sent again (not after a reconnect
+   * either); with it (a rate limit) it is tried once more after that wait.
+   */
+  refused(source: Source, retryAfter?: number): void;
   /** Stop all timers */
   stop(): void;
 };
@@ -34,6 +40,8 @@ export function createActivitySender<A>(options: {
 
   /** What the server has, as far as this side knows */
   const sent = new Map<Source, string>();
+  /** Values the server refused: never sent again */
+  const refusedValues = new Map<Source, Set<string>>();
   /** The newest value of each source */
   const latest = new Map<Source, A | null>();
   let last = -Infinity;
@@ -45,7 +53,8 @@ export function createActivitySender<A>(options: {
     return (["Rpc", "Desktop"] as Source[]).filter(
       (source) =>
         latest.has(source) &&
-        key(latest.get(source)!) !== (sent.get(source) ?? key(null)),
+        key(latest.get(source)!) !== (sent.get(source) ?? key(null)) &&
+        !refusedValues.get(source)?.has(key(latest.get(source)!)),
     );
   }
 
@@ -75,6 +84,22 @@ export function createActivitySender<A>(options: {
       if (timer !== undefined) clearTimer(timer);
       timer = undefined;
       flush();
+    },
+    refused(source, retryAfter) {
+      const value = sent.get(source);
+      if (value === undefined) return;
+      // what the server holds for this source is unknown now, so a later
+      // clear is sent even if nothing else was
+      sent.set(source, "?");
+      if (retryAfter !== undefined) {
+        sent.delete(source);
+        if (timer !== undefined) clearTimer(timer);
+        timer = setTimer(flush, Math.max(retryAfter, gap));
+        return;
+      }
+      const set = refusedValues.get(source) ?? new Set<string>();
+      set.add(value);
+      refusedValues.set(source, set);
     },
     stop() {
       if (timer !== undefined) clearTimer(timer);
