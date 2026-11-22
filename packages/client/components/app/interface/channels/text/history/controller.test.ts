@@ -596,6 +596,61 @@ describe("history: reconnecting", () => {
     expect(t.state().window.atEnd).toBe(true);
   });
 
+  it("a jump that fails after the connection came back leaves the newer side to be asked again", async () => {
+    const t = setup(3000);
+    await t.history.open();
+    expect(t.state().window.atEnd).toBe(true);
+    t.gate(true);
+    const jump = t.history.toMessage(id(100));
+    await flush();
+    await t.history.reconnected();
+    t.failing(true);
+    t.release();
+    await jump;
+    t.gate(false);
+    t.failing(false);
+    expect(t.state().failed).toBe("around");
+    // the list kept on screen may lack what was sent while away
+    expect(t.state().window.atEnd).toBe(false);
+    t.calls.length = 0;
+    await t.history.loadNewer();
+    expect(t.calls).toEqual(["after 3000"]);
+  });
+
+  it("a first load that the connection overtook asks for the newest page again once drawn", async () => {
+    const t = setup(3000);
+    t.gate(true);
+    const opening = t.history.open();
+    await flush();
+    // sent while the connection was away: not in the first answer, never received live
+    t.add();
+    await t.history.reconnected();
+    t.gate(false);
+    t.release();
+    await opening;
+    await flush();
+    expect(t.calls).toEqual(["latest 30", "latest 30"]);
+    expect(t.nums()[0]).toBe(3001);
+    expect(t.state().window.atEnd).toBe(true);
+    expect(t.state().pending).toBeUndefined();
+  });
+
+  it("'jump to present' that the connection overtook asks for the newest page again once drawn", async () => {
+    const t = setup(3000);
+    await t.history.open({ around: id(100) });
+    t.gate(true);
+    const going = t.history.toPresent();
+    await flush();
+    t.add();
+    await t.history.reconnected();
+    t.gate(false);
+    t.release();
+    await going;
+    await flush();
+    expect(t.calls).toEqual(["nearby 100", "latest 50", "latest 30"]);
+    expect(t.nums()[0]).toBe(3001);
+  });
+
   it("clears an earlier failure so loading resumes", async () => {
     const t = setup(3000);
     await t.history.open();

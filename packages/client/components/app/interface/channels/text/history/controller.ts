@@ -132,10 +132,12 @@ export function createHistory<T extends { id: string }>(options: {
   let again: (() => Promise<void>) | undefined;
 
   /**
-   * The connection came back while a jump was on its way: once it lands,
-   * the newer side is asked for again (messages may have been missed)
+   * The connection came back while a request that replaces the window (a
+   * first load, a jump, "jump to present") was on its way: its answer may
+   * miss messages sent meanwhile, so once it lands (or fails) the newer side
+   * is asked for again
    */
-  let reconnectedDuringJump = false;
+  let reconnectedMeanwhile = false;
 
   function set(patch: Partial<HistoryState<T>>) {
     state = { ...state, ...patch };
@@ -178,7 +180,7 @@ export function createHistory<T extends { id: string }>(options: {
     const mine = ++ticket;
     arrivals = [];
     aroundTarget = undefined;
-    reconnectedDuringJump = false;
+    reconnectedMeanwhile = false;
     again = () => replace(kind, request, build, move, stage);
     set({ pending: kind, failed: undefined });
 
@@ -188,7 +190,13 @@ export function createHistory<T extends { id: string }>(options: {
     } catch {
       if (mine !== ticket) return;
       arrivals = undefined;
-      set({ pending: undefined, failed: kind });
+      // the window kept on screen may now lack messages sent while the
+      // connection was away: its newer side is asked for again
+      const window = reconnectedMeanwhile
+        ? markStale(state.window)
+        : state.window;
+      reconnectedMeanwhile = false;
+      set({ window, pending: undefined, failed: kind });
       return;
     }
     if (mine !== ticket) return;
@@ -199,10 +207,12 @@ export function createHistory<T extends { id: string }>(options: {
       window = addLive(window, message, { trim: false, limit: Infinity });
     }
     arrivals = undefined;
-    if (reconnectedDuringJump) {
-      reconnectedDuringJump = false;
-      window = markStale(window);
-    }
+    const missed = reconnectedMeanwhile;
+    reconnectedMeanwhile = false;
+    // away from the present (a jump), the newer side is asked for again as
+    // the reader reaches it; at the present the newest page is asked for
+    // again once this one is drawn (below)
+    if (missed && kind === "around") window = markStale(window);
 
     const target = move(window);
     const unseen = window.atEnd && target.to === "present" ? 0 : state.unseen;
@@ -237,6 +247,7 @@ export function createHistory<T extends { id: string }>(options: {
       target,
     );
     again = undefined;
+    if (missed && kind !== "around") await afterReconnect();
   }
 
   /** Load the page around a message and land on it */
@@ -356,6 +367,28 @@ export function createHistory<T extends { id: string }>(options: {
       () => set({ window: dropNewest(state.window, view.rowLimit()) }),
       { to: "keep" },
     );
+  }
+
+  /**
+   * The connection is back; messages may have been missed. At the present
+   * the newest page replaces the list. While the reader is elsewhere
+   * nothing moves: the newer side is asked for again as they scroll down.
+   */
+  async function afterReconnect(): Promise<void> {
+    if (disposed) return;
+    if (
+      !state.window.items.length ||
+      (state.window.atEnd && view.atPresent())
+    ) {
+      return replace(
+        "initial",
+        () => source.latest(INITIAL_PAGE),
+        (page) => fromLatest(page, INITIAL_PAGE),
+        () => ({ to: "present", glide: false }),
+        false,
+      );
+    }
+    set({ window: markStale(state.window), failed: undefined });
   }
 
   return {
@@ -487,28 +520,19 @@ export function createHistory<T extends { id: string }>(options: {
      */
     async reconnected(): Promise<void> {
       if (disposed) return;
-      if (state.pending === "initial" || state.pending === "present") return;
-      // A jump is on its way (a link opened by a page load comes up while
-      // the connection is still being made, on phones mostly): its page is
-      // the server's answer, so it lands; the newest page must not replace
-      // it. Missed newer messages are asked for once it has landed.
-      if (state.pending === "around") {
-        reconnectedDuringJump = true;
+      // A request that replaces the window is on its way (a page load comes
+      // up while the connection is still being made, on phones mostly): its
+      // answer lands; it is not replaced by another one (that dropped a
+      // jump). Messages it may miss are asked for once it has landed.
+      if (
+        state.pending === "initial" ||
+        state.pending === "present" ||
+        state.pending === "around"
+      ) {
+        reconnectedMeanwhile = true;
         return;
       }
-      if (
-        !state.window.items.length ||
-        (state.window.atEnd && view.atPresent())
-      ) {
-        return replace(
-          "initial",
-          () => source.latest(INITIAL_PAGE),
-          (page) => fromLatest(page, INITIAL_PAGE),
-          () => ({ to: "present", glide: false }),
-          false,
-        );
-      }
-      set({ window: markStale(state.window), failed: undefined });
+      return afterReconnect();
     },
 
     /** The window as it is, to put aside */
