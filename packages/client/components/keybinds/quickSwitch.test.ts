@@ -2,12 +2,15 @@ import { beforeEach, describe, expect, it } from "vitest";
 
 import {
   type SwitchItem,
+  channelListed,
+  forgetRecentPlaces,
   notePlace,
   parseQuery,
   placeFromPath,
   rankItems,
   recentPlaces,
-  stepSelection,
+  selectedId,
+  withFolds,
 } from "./quickSwitch";
 
 const id = (n: number) =>
@@ -94,13 +97,63 @@ describe("rankItems", () => {
   });
 });
 
-describe("stepSelection", () => {
-  it("moves inside the list", () => {
-    expect(stepSelection(3, 0, 1)).toBe(1);
-    expect(stepSelection(3, 2, 1)).toBe(2);
-    expect(stepSelection(3, 0, -1)).toBe(0);
-    expect(stepSelection(3, -1, -1)).toBe(2);
-    expect(stepSelection(0, 0, 1)).toBe(-1);
+describe("folded once", () => {
+  it("ranks the same with names folded when the list is built", () => {
+    const folded = ITEMS.map((entry) => withFolds({ ...entry }));
+    for (const query of ["", "ra", "اسامه", "مكتبة", "#game", "support"])
+      expect(names(rankItems(folded, query))).toEqual(
+        names(rankItems(ITEMS, query)),
+      );
+    expect(folded[1].folded).toBe("اخبار");
+  });
+});
+
+describe("channelListed", () => {
+  const channel = (type: string, more: Record<string, unknown> = {}) => ({
+    type,
+    server: {},
+    havePermission: () => true,
+    ...more,
+  });
+
+  it("lists a server channel only with View Channel", () => {
+    expect(channelListed(channel("TextChannel"))).toBe(true);
+    expect(
+      channelListed(channel("TextChannel", { havePermission: () => false })),
+    ).toBe(false);
+    expect(channelListed(channel("TextChannel", { server: undefined }))).toBe(
+      false,
+    );
+  });
+
+  it("lists open direct messages, groups and saved notes", () => {
+    expect(channelListed(channel("DirectMessage", { active: true }))).toBe(
+      true,
+    );
+    expect(channelListed(channel("DirectMessage", { active: false }))).toBe(
+      false,
+    );
+    expect(channelListed(channel("Group"))).toBe(true);
+    expect(channelListed(channel("SavedMessages"))).toBe(true);
+    expect(channelListed(channel("VoiceChannel"))).toBe(false);
+  });
+});
+
+describe("selectedId", () => {
+  const list = [{ id: "a" }, { id: "b" }, { id: "c" }];
+
+  it("keeps the same item when the list changes around it", () => {
+    expect(selectedId(list, "b")).toBe("b");
+    expect(selectedId([{ id: "x" }, { id: "b" }], "b")).toBe("b");
+    expect(selectedId([{ id: "x" }], "b")).toBe("x");
+  });
+
+  it("moves with the arrows and stays inside the list", () => {
+    expect(selectedId(list, "a", 1)).toBe("b");
+    expect(selectedId(list, "c", 1)).toBe("c");
+    expect(selectedId(list, "a", -1)).toBe("a");
+    expect(selectedId(list, undefined, -1)).toBe("c");
+    expect(selectedId([], "a", 1)).toBe(undefined);
   });
 });
 
@@ -111,6 +164,11 @@ describe("recent places", () => {
     globalThis.localStorage = {
       getItem: (key: string) => store.get(key) ?? null,
       setItem: (key: string, value: string) => void store.set(key, value),
+      removeItem: (key: string) => void store.delete(key),
+      key: (index: number) => [...store.keys()][index] ?? null,
+      get length() {
+        return store.size;
+      },
     } as Storage;
   });
 
@@ -119,10 +177,24 @@ describe("recent places", () => {
     expect(placeFromPath(`/channel/${id(3)}`)).toBe(id(3));
     expect(placeFromPath(`/server/${id(4)}`)).toBe(id(4));
     expect(placeFromPath("/settings")).toBe(undefined);
-    notePlace(`/channel/${id(3)}`);
-    notePlace(`/server/${id(4)}`);
-    notePlace(`/channel/${id(3)}`);
-    notePlace("/friends");
-    expect(recentPlaces()).toEqual([id(3), id(4)]);
+    const me = id(90);
+    notePlace(`/channel/${id(3)}`, me);
+    notePlace(`/server/${id(4)}`, me);
+    notePlace(`/channel/${id(3)}`, me);
+    notePlace("/friends", me);
+    expect(recentPlaces(me)).toEqual([id(3), id(4)]);
+  });
+
+  it("keeps each account's places apart, and forgets them all on sign-out", () => {
+    notePlace(`/channel/${id(3)}`, id(90));
+    notePlace(`/channel/${id(5)}`, id(91));
+    expect(recentPlaces(id(90))).toEqual([id(3)]);
+    expect(recentPlaces(id(91))).toEqual([id(5)]);
+    expect(recentPlaces(undefined)).toEqual([]);
+    store.set("other-key", "kept");
+    forgetRecentPlaces();
+    expect(recentPlaces(id(90))).toEqual([]);
+    expect(recentPlaces(id(91))).toEqual([]);
+    expect(store.get("other-key")).toBe("kept");
   });
 });

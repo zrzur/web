@@ -1,4 +1,12 @@
-import { For, Match, Show, Switch, createMemo, createSignal } from "solid-js";
+import {
+  For,
+  Match,
+  Show,
+  Switch,
+  createMemo,
+  createSignal,
+  untrack,
+} from "solid-js";
 
 import { plural } from "@lingui/core/macro";
 import { Trans, useLingui } from "@lingui/solid/macro";
@@ -9,14 +17,17 @@ import { conversationName } from "@revolt/app/interface/channels/conversationNam
 import { useClient } from "@revolt/client";
 import {
   type SwitchItem,
+  channelListed,
   rankItems,
   recentPlaces,
-  stepSelection,
+  selectedId,
+  withFolds,
 } from "@revolt/keybinds/quickSwitch";
 import { useNavigate } from "@revolt/routing";
 import { Avatar, Badge, Dialog, DialogProps, TextField } from "@revolt/ui";
 import { Icon } from "@revolt/ui/icons/Icon";
 
+import { useModals } from "..";
 import { Modals } from "../types";
 
 /** A result and what it opens */
@@ -30,6 +41,9 @@ type Entry = SwitchItem & {
  * Ctrl+K (⌘K on a Mac): jump to a channel, a conversation, a server or a
  * friend by name. Recent places first; ↑ ↓ choose, Enter opens, Esc closes.
  * Listed in Ctrl+/.
+ *
+ * The list is taken once when the window opens (names folded once): new
+ * messages arriving meanwhile don't rebuild it or move the choice.
  */
 export function QuickSwitcherModal(
   props: DialogProps & Modals & { type: "quick_switcher" },
@@ -37,16 +51,17 @@ export function QuickSwitcherModal(
   const { t } = useLingui();
   const client = useClient();
   const navigate = useNavigate();
+  const { showError } = useModals();
 
   const [query, setQuery] = createSignal("");
-  const [at, setAt] = createSignal(0);
-  const recents = recentPlaces();
+  const [chosen, setChosen] = createSignal<string>();
 
-  const entries = createMemo<Entry[]>(() => {
+  const entries: Entry[] = untrack(() => {
     const list: Entry[] = [];
     const withConversation = new Set<string>();
 
     for (const channel of client().channels.toList() as Channel[]) {
+      if (!channelListed(channel)) continue;
       const base = {
         id: channel.id,
         unread: !!channel.unread,
@@ -55,19 +70,17 @@ export function QuickSwitcherModal(
       };
       switch (channel.type) {
         case "TextChannel":
-          if (!channel.server) break;
           list.push({
             ...base,
             kind: "channel",
             name: channel.name ?? "",
-            place: channel.server.name,
+            place: channel.server!.name,
             voice: channel.isVoice,
             open: () =>
               navigate(`/server/${channel.serverId}/channel/${channel.id}`),
           });
           break;
         case "DirectMessage":
-          if (!channel.active) break;
           if (channel.recipient) withConversation.add(channel.recipient.id);
           list.push({
             ...base,
@@ -126,20 +139,24 @@ export function QuickSwitcherModal(
           mentions: 0,
           updatedAt: 0,
           avatar: user.animatedAvatarURL,
-          open: async () => {
-            const dm = await user.openDM();
-            navigate(`/channel/${dm.id}`);
-          },
+          open: () =>
+            user
+              .openDM()
+              .then((dm) => navigate(`/channel/${dm.id}`))
+              .catch(showError),
         });
 
-    return list;
+    return list.map(withFolds);
   });
 
-  const results = createMemo(
-    () => rankItems(entries(), query(), recents) as Entry[],
-  );
+  const recents = recentPlaces(untrack(() => client().user?.id));
 
-  const selected = () => results()[at()];
+  // the same objects every time: rows are kept, and the choice follows its id
+  const results = createMemo(() => rankItems(entries, query(), recents));
+  const selected = () => {
+    const id = selectedId(results(), chosen());
+    return results().find((entry) => entry.id === id);
+  };
 
   function choose(entry: Entry | undefined) {
     if (!entry) return;
@@ -148,19 +165,19 @@ export function QuickSwitcherModal(
   }
 
   function onKey(event: KeyboardEvent) {
-    if (event.isComposing) return;
+    // a character being composed (Chinese, Japanese input): its Enter is not ours
+    if (event.isComposing || event.keyCode === 229) return;
     if (event.key === "ArrowDown" || event.key === "ArrowUp") {
       event.preventDefault();
-      const next = stepSelection(
-        results().length,
-        at(),
+      const id = selectedId(
+        results(),
+        selected()?.id,
         event.key === "ArrowDown" ? 1 : -1,
       );
-      setAt(next);
-      const entry = results()[next];
-      if (entry)
+      setChosen(id);
+      if (id)
         document
-          .getElementById(`switch-${entry.id}`)
+          .getElementById(`switch-${id}`)
           ?.scrollIntoView({ block: "nearest" });
     } else if (event.key === "Enter") {
       event.preventDefault();
@@ -188,16 +205,25 @@ export function QuickSwitcherModal(
           value={query()}
           label={t`Search`}
           placeholder={t`Channels, conversations, servers and friends`}
+          role="combobox"
+          aria-expanded="true"
+          aria-autocomplete="list"
           aria-controls="switch-results"
           aria-activedescendant={
             selected() ? `switch-${selected()!.id}` : undefined
           }
           onInput={(event) => {
             setQuery(event.currentTarget.value);
-            setAt(0);
+            setChosen(undefined);
           }}
           onKeyDown={onKey}
         />
+        <span aria-live="polite" style={VISUALLY_HIDDEN}>
+          {t`${plural(results().length, {
+            one: "# result",
+            other: "# results",
+          })}`}
+        </span>
 
         <Results
           id="switch-results"
@@ -212,15 +238,15 @@ export function QuickSwitcherModal(
               </Empty>
             }
           >
-            {(entry, index) => (
+            {(entry) => (
               <Option
                 id={`switch-${entry.id}`}
                 type="button"
                 role="option"
                 tabIndex={-1}
-                aria-selected={index() === at()}
+                aria-selected={entry.id === selected()?.id}
                 data-kind={entry.kind}
-                onMouseMove={() => setAt(index())}
+                onMouseMove={() => setChosen(entry.id)}
                 onClick={() => choose(entry)}
               >
                 <Switch
@@ -275,6 +301,15 @@ export function QuickSwitcherModal(
     </Dialog>
   );
 }
+
+const VISUALLY_HIDDEN = {
+  position: "absolute",
+  width: "1px",
+  height: "1px",
+  overflow: "hidden",
+  clip: "rect(0 0 0 0)",
+  "white-space": "nowrap",
+} as const;
 
 const Fields = styled("div", {
   base: {
