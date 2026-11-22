@@ -262,8 +262,8 @@
     },
     {
       "path": "CHANGELOG.md",
-      "sha256": "4fc89f9eb8fc067971b721c548db5d62f4bc72c46aef3a6dfc2600597a2f22ff",
-      "bytes": 194746,
+      "sha256": "e58e5b6e8f37e26ff95a7844631d2810309046db2ead6521a7dc9da124cee450",
+      "bytes": 195563,
       "category": "public-documentation"
     },
     {
@@ -7456,14 +7456,14 @@
     },
     {
       "path": "packages/client/components/ui/components/features/texteditor/TextEditor2.dom.test.tsx",
-      "sha256": "9d088b85e189d6a7ce878e07fa72ce6eba076c7334992fe86ff551d618ff6917",
-      "bytes": 3825,
+      "sha256": "1a516c746f66ab490a85478c419dd5a8b3212b79a989edfa8bd05002090e716c",
+      "bytes": 5127,
       "category": "synthetic-test-source-or-fixture"
     },
     {
       "path": "packages/client/components/ui/components/features/texteditor/TextEditor2.tsx",
-      "sha256": "5fcbb71d6745731710c9b6bcb6bd245ef8df5eefd0c05c785a900c9b57762492",
-      "bytes": 10641,
+      "sha256": "e471424d61ad29a52a925303f22d77a966d2d196bd18727955c4f72eb7d9d80c",
+      "bytes": 11205,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -7924,8 +7924,8 @@
     },
     {
       "path": "packages/client/components/ui/components/utils/Form2.tsx",
-      "sha256": "ee23f32420488a2c68cc51f68c5e08b9c1cc42e43e7af79c0c6ba78da48b806d",
-      "bytes": 15476,
+      "sha256": "d385b61d51aa0bc2a0cb99f682334f2da8ce09bac89b0dbe27706363b9cc530b",
+      "bytes": 15563,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -8010,6 +8010,18 @@
       "path": "packages/client/components/ui/components/utils/cropProcessor.ts",
       "sha256": "30310dc0f807cda3acbc8893ac5978f3de2daa8fba536de0e43a31049f344e1a",
       "bytes": 2852,
+      "category": "product-source-or-build-manifest"
+    },
+    {
+      "path": "packages/client/components/ui/components/utils/editorDirty.test.ts",
+      "sha256": "bed974b646b637b66d0e18fc7cae6303e2076a6f7d6ce79abcb133db3b28e7d4",
+      "bytes": 592,
+      "category": "synthetic-test-source-or-fixture"
+    },
+    {
+      "path": "packages/client/components/ui/components/utils/editorDirty.ts",
+      "sha256": "906d3a72c33072707e4c299c519075b6ec8c8aacd30d3eb4cb9909961a60874a",
+      "bytes": 445,
       "category": "product-source-or-build-manifest"
     },
     {
