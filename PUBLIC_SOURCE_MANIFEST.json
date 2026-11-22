@@ -262,8 +262,8 @@
     },
     {
       "path": "CHANGELOG.md",
-      "sha256": "4fc89f9eb8fc067971b721c548db5d62f4bc72c46aef3a6dfc2600597a2f22ff",
-      "bytes": 194746,
+      "sha256": "340a5169669ada1442817354c738d691b3e7cfd4c10e9ef1bdc14e56313307dd",
+      "bytes": 197052,
       "category": "public-documentation"
     },
     {
@@ -939,6 +939,18 @@
       "category": "product-source-or-build-manifest"
     },
     {
+      "path": "packages/client/components/app/interface/channels/text/messageKeys.test.ts",
+      "sha256": "0ee7fa387e2b682f3de750704b8f0984e71f218bc7743d4701003be61da066af",
+      "bytes": 2326,
+      "category": "synthetic-test-source-or-fixture"
+    },
+    {
+      "path": "packages/client/components/app/interface/channels/text/messageKeys.ts",
+      "sha256": "a6ff827108b172ca5061569071d49a6b48a9e228a4000f3320cfac5dd2dceb7e",
+      "bytes": 7246,
+      "category": "product-source-or-build-manifest"
+    },
+    {
       "path": "packages/client/components/app/interface/channels/text/messageSelection.test.ts",
       "sha256": "49c6b1178015e77c5d21a0b094e160077b4b5f11c73598ccfff6f15e69c5ecc9",
       "bytes": 4804,
@@ -996,6 +1008,12 @@
       "path": "packages/client/components/app/interface/channels/text/swipeToReply.ts",
       "sha256": "e83697d0bd09d906ac3b8c0c38784dcd42d90cc3d8c4a6da505eb7ad7bb1e812",
       "bytes": 7338,
+      "category": "product-source-or-build-manifest"
+    },
+    {
+      "path": "packages/client/components/app/interface/channels/text/useMessageKeys.ts",
+      "sha256": "760b89769651c3736cebaf8f87caab2395276686f85f89a417a7958a54369380",
+      "bytes": 2403,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -2050,14 +2068,14 @@
     },
     {
       "path": "packages/client/components/app/interface/settings/user/Keybinds.dom.test.tsx",
-      "sha256": "96ee27ebc71b2071774d8e403fbaa99f0cf48ea2809aaeb3df10fe162eb2a950",
-      "bytes": 9444,
+      "sha256": "21e5fa0076f23f10e7b2f5db4ba0cf616baccb772a9d5aa753a174c941931f14",
+      "bytes": 11557,
       "category": "synthetic-test-source-or-fixture"
     },
     {
       "path": "packages/client/components/app/interface/settings/user/Keybinds.tsx",
-      "sha256": "1a267df16ace96acdd650e3aa99228ba38d5044f70ca6a5f11ec3825d33f60b9",
-      "bytes": 25839,
+      "sha256": "c2f5b828e82ce931b152f689d06dafb4fdb3c448a9b7462f32f6a5a2e1cb1787",
+      "bytes": 31433,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -3568,8 +3586,8 @@
     },
     {
       "path": "packages/client/components/i18n/catalogs/ar/messages.po",
-      "sha256": "e373572caa80abda89406a33626fb2f15f5ff68e47e14852b434e19510bae442",
-      "bytes": 1255577,
+      "sha256": "a1b06be31ffa6c4e2670a609df976e764bfc56c150eed08a0d195e728c4d53e7",
+      "bytes": 1260336,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -3712,8 +3730,8 @@
     },
     {
       "path": "packages/client/components/i18n/catalogs/de/messages.po",
-      "sha256": "8fd3adc7ac9a2b14600fcc7dee24be63cf4c135fb1cc39070cabf1bcd4cc7dfb",
-      "bytes": 1160277,
+      "sha256": "ae9f5b2c731bca3ff856787fd9acdfb2bb6ba89bba70977bb5d7b5e8ced28884",
+      "bytes": 1164611,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -3748,8 +3766,8 @@
     },
     {
       "path": "packages/client/components/i18n/catalogs/en/messages.po",
-      "sha256": "d3b32c6fd3a1216998b3a86409e7e155ff9c6a311de1f4e68d96ac490f649d6b",
-      "bytes": 1117448,
+      "sha256": "247ba4aac6910e0ec5c621dbca5dee23612f2319e804d5349535a66d9822fa63",
+      "bytes": 1121560,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -4390,8 +4408,8 @@
     },
     {
       "path": "packages/client/components/keybinds/active.ts",
-      "sha256": "c2b6cb3b6b3d84a921421039a0592fc65123ea5198499136de8f78731cb6e688",
-      "bytes": 2647,
+      "sha256": "1b4a4fe453bb16d5f83d550ed32b2331e8d00f5ad4180d404193258a0c6c84dd",
+      "bytes": 2808,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -4402,14 +4420,14 @@
     },
     {
       "path": "packages/client/components/keybinds/keyLabels.ts",
-      "sha256": "894122d3fd26bcb3b62db973c881d73cacb7c7713a4b9ada590546212d6c8aab",
-      "bytes": 1965,
+      "sha256": "4b7f98e7308e307f36d5fa36a9dc8fb4225bf8983ab069cd2fd60b32b1bda6dd",
+      "bytes": 1984,
       "category": "product-source-or-build-manifest"
     },
     {
       "path": "packages/client/components/keybinds/keybindActions.ts",
-      "sha256": "d7899f0d47ece8fdf820840912101435d063020a347c76d738fdb5abaedca630",
-      "bytes": 3622,
+      "sha256": "ea135bcfbeb7292172277f196c5006c17cbccc1192d29023ec59e127ad70bd78",
+      "bytes": 3960,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -4426,27 +4444,51 @@
     },
     {
       "path": "packages/client/components/keybinds/keymap.test.ts",
-      "sha256": "a102ed54a6a2b06c7d75cd0658e367f15bfb90d25de578359425af018fc229d9",
-      "bytes": 14484,
+      "sha256": "920fc8ce78d6ae0f932c0965f33cbfd5d794a8c7f06088a4a3c49742f9405023",
+      "bytes": 14684,
       "category": "synthetic-test-source-or-fixture"
     },
     {
       "path": "packages/client/components/keybinds/keymap.ts",
-      "sha256": "a072802ae7764971754225d2f8d5c012606fc6ce4aaba29602d1e5e8c1234ab7",
-      "bytes": 5992,
+      "sha256": "7c850e06c864ebd6fc1ad942590fb31ffe58496a5c4a27e07f9dbd320dccfc40",
+      "bytes": 7648,
       "category": "product-source-or-build-manifest"
     },
     {
       "path": "packages/client/components/keybinds/keymapCompile.ts",
-      "sha256": "4042b24e5a0894503aa9facf9595a506581b04f8ec3cb5cbed4383c2d5c3de12",
-      "bytes": 4474,
+      "sha256": "ebabb224906e2e20f20e6f8d6c47b2e5eae2e2f842afedde6f8fa391a75d7b75",
+      "bytes": 4647,
       "category": "product-source-or-build-manifest"
     },
     {
       "path": "packages/client/components/keybinds/keymapRules.ts",
-      "sha256": "bd09fa2cfe7052ae9ba2510f913f36d610f282bc640f15cef8e34d56de7a0129",
-      "bytes": 7778,
+      "sha256": "83babb6cdc51ca43cfd1ef87b668c6bb8344b49ab6e31b4b2bda79e39a0789e9",
+      "bytes": 9110,
       "category": "product-source-or-build-manifest"
+    },
+    {
+      "path": "packages/client/components/keybinds/mention.test.ts",
+      "sha256": "4893ea7debbc9d86677f97c762bff6d7faa236fd64c23b333ea6c00a9baf4deb",
+      "bytes": 3144,
+      "category": "synthetic-test-source-or-fixture"
+    },
+    {
+      "path": "packages/client/components/keybinds/mention.ts",
+      "sha256": "0f5fd5741ca1e980139fb43fbf7bdeb73047f32960425149bf942ee4c15ce37a",
+      "bytes": 4370,
+      "category": "product-source-or-build-manifest"
+    },
+    {
+      "path": "packages/client/components/keybinds/navigate.ts",
+      "sha256": "595b0745bfd108787a23270ab1ead72b293f9323f5162d9329b67304a4b45027",
+      "bytes": 945,
+      "category": "product-source-or-build-manifest"
+    },
+    {
+      "path": "packages/client/components/keybinds/platformKeys.test.ts",
+      "sha256": "6a680a695fddfec37a34f8855db2db0a9724ae6704e3068b2f2666e3450753e0",
+      "bytes": 9913,
+      "category": "synthetic-test-source-or-fixture"
     },
     {
       "path": "packages/client/components/keybinds/shortcuts.test.ts",
@@ -4456,8 +4498,8 @@
     },
     {
       "path": "packages/client/components/keybinds/shortcuts.ts",
-      "sha256": "85a7dbf7d5d1e95dfc1d50ab61195b7d287e91966f9402afe91153f24d7f2045",
-      "bytes": 2856,
+      "sha256": "387b2947f642919860e52f0d105aa671afbfe1997eee0e930d19c796fac5978a",
+      "bytes": 4997,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -4618,8 +4660,8 @@
     },
     {
       "path": "packages/client/components/markdown/plugins/mentions.tsx",
-      "sha256": "3556f3aef91746c9a115818f47622f9465ce2d9b5979b9d348e0676b141d41a9",
-      "bytes": 6257,
+      "sha256": "cdb5abf8cd5063b716fb5a008c58d3c09a0ccf8725629764409645e270569da2",
+      "bytes": 6290,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -5740,8 +5782,8 @@
     },
     {
       "path": "packages/client/components/rtc/desktopPushToTalk.test.ts",
-      "sha256": "ab8c3eef850c61aac03902b6ad77bfbb7b3a02e8f7c33800861946923085229b",
-      "bytes": 3765,
+      "sha256": "000708c3cfbe2782e53806ef859d453aeac8adf65e830632cc8e4a08f1a02714",
+      "bytes": 3843,
       "category": "synthetic-test-source-or-fixture"
     },
     {
@@ -5908,8 +5950,8 @@
     },
     {
       "path": "packages/client/components/rtc/state.tsx",
-      "sha256": "f1559ae46911cc3a82a721a8d3739a3a6ee37de4938699bdd8ccf7780fb2336d",
-      "bytes": 64950,
+      "sha256": "a3e6c283e49c7f32cfd56c5e888e127da1593de5867118d3e67ce060421e58c5",
+      "bytes": 65243,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -6118,8 +6160,8 @@
     },
     {
       "path": "packages/client/components/state/stores/Keybinds.ts",
-      "sha256": "c20da5963eb8097309af19871210fc70f75a834630e3c5472d7c9114e623ecc1",
-      "bytes": 2816,
+      "sha256": "6a2a45eeea5b38ff5d4b766b6a321e7d66357f8d794f3e42aa5a0e0e2eb74ddf",
+      "bytes": 3341,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -6808,8 +6850,8 @@
     },
     {
       "path": "packages/client/components/ui/components/features/messaging/elements/Container.tsx",
-      "sha256": "22c97fb41af0b6c636655c45ebf6c51501dcd8154a310a225383361c437ec9e0",
-      "bytes": 17145,
+      "sha256": "933baf8a449375b6c097f87d7b7bc3eab75c4297687126ac20253aa3b988e980",
+      "bytes": 17780,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -7144,8 +7186,8 @@
     },
     {
       "path": "packages/client/components/ui/components/features/profiles/ProfileRoles.tsx",
-      "sha256": "c6c668451d47ea5b4414baadbb36fd1f4dec0ec1f3eeb7f8b39578777e02c0f3",
-      "bytes": 1589,
+      "sha256": "f5b05dacc69e69aaf9ad4fa7cb144c83571b18d90d8fa6258cfd7fa6fce986a0",
+      "bytes": 1617,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -7462,8 +7504,8 @@
     },
     {
       "path": "packages/client/components/ui/components/features/texteditor/TextEditor2.tsx",
-      "sha256": "5fcbb71d6745731710c9b6bcb6bd245ef8df5eefd0c05c785a900c9b57762492",
-      "bytes": 10641,
+      "sha256": "6604d7c20573e7352f4c3a2be650d7c6cdea0c0943250c03fd95051ccea8187e",
+      "bytes": 11281,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -7533,6 +7575,18 @@
       "category": "product-source-or-build-manifest"
     },
     {
+      "path": "packages/client/components/ui/components/features/texteditor/formatKeys.test.ts",
+      "sha256": "5482ee7379e3ccb89c5aea1cfbabb8942e59c2bcdf06aefd00732b61f710245a",
+      "bytes": 2137,
+      "category": "synthetic-test-source-or-fixture"
+    },
+    {
+      "path": "packages/client/components/ui/components/features/texteditor/formatKeys.ts",
+      "sha256": "1514a2d25f280b647bc2a3d37df089494e1fa345603cf8fc3bb8e9a1d517e8be",
+      "bytes": 2652,
+      "category": "product-source-or-build-manifest"
+    },
+    {
       "path": "packages/client/components/ui/components/features/voice/LiveVoiceChannelPreview.tsx",
       "sha256": "1fdf7ef3fd025256a04da1ec2bc66e2ca98c09b5863f4256f2998132c9ffd8f0",
       "bytes": 1735,
@@ -7588,8 +7642,8 @@
     },
     {
       "path": "packages/client/components/ui/components/features/voice/callCard/ParticipantTile.tsx",
-      "sha256": "74ff4e3eb6d8097d30177ea6ccc124713427e1892daca1af34ff3022e581780e",
-      "bytes": 17636,
+      "sha256": "745b6dc1cf42d0e4421fdfa9d77b13f6bffe81749642329519d9eb5c05060b54",
+      "bytes": 17756,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -7786,8 +7840,8 @@
     },
     {
       "path": "packages/client/components/ui/components/floating/UserCard.tsx",
-      "sha256": "539c22f3cf2e5cf74d22671c7e631358c3375c2e2c1952d258bba67a1db15e5c",
-      "bytes": 5797,
+      "sha256": "2dc1759849c4f266c39f2afe9b020f5ed8524da521d288c8a1213f23e36684a9",
+      "bytes": 6132,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -8104,8 +8158,8 @@
     },
     {
       "path": "packages/client/components/ui/directives/floating.ts",
-      "sha256": "c0721e04245159f4fca3ddcdf7b2a67544b0f0c532b5e1105393848970843848",
-      "bytes": 10028,
+      "sha256": "6a553d0598539b13ec14516eb8cf9c70096e1ae0b9f574c640eff3cff945b03a",
+      "bytes": 10434,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -41763,6 +41817,12 @@
       "category": "product-source-or-build-manifest"
     },
     {
+      "path": "packages/client/scripts/i18n/ui-2026112218.json",
+      "sha256": "b2aad67a3c1ab8a15a74e876aaafc4e988e6a3ff59551817d775b97104579c31",
+      "bytes": 4180,
+      "category": "product-source-or-build-manifest"
+    },
+    {
       "path": "packages/client/scripts/i18n/ui-210.json",
       "sha256": "a2000336a3928f21687a94a1262b2adbd34f017573f3d1b9b342b3ca93df6d09",
       "bytes": 644,
@@ -42736,14 +42796,14 @@
     },
     {
       "path": "packages/client/src/interface/channels/text/Composition.tsx",
-      "sha256": "0293613fdc06e28a2f3e25a5d4d703aa2a5c14fc558612e1153759ffa28f1b19",
-      "bytes": 25288,
+      "sha256": "aaed811ea6ff531b18706cad624e83fe37891cddc8bbad87445eddfcd054bf0f",
+      "bytes": 26829,
       "category": "product-source-or-build-manifest"
     },
     {
       "path": "packages/client/src/interface/channels/text/MemberSidebar.tsx",
-      "sha256": "c35b01dc79f37fd71bfb8e13c281bf0074c9f42c9e112f812c4f3c9aaa59968c",
-      "bytes": 16511,
+      "sha256": "0cb82d7fc4b6e42e0f0532de1e38e2911e72b066d0080c2f20a1349dd4918779",
+      "bytes": 16892,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -42754,8 +42814,8 @@
     },
     {
       "path": "packages/client/src/interface/channels/text/SearchBox.tsx",
-      "sha256": "25974370de2d88b7f205c108934e716232a4a054eca30bbf2ff81b38a897317b",
-      "bytes": 15704,
+      "sha256": "124870288f73e98007674897fc79411f6ba23e462233af21cb53c28e27b05270",
+      "bytes": 16640,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -42766,8 +42826,8 @@
     },
     {
       "path": "packages/client/src/interface/channels/text/TextChannel.tsx",
-      "sha256": "18debd713bb37a68d77d8c33e97639cb9ea75bcf667472ea0b9eb20b396bdd8c",
-      "bytes": 18782,
+      "sha256": "17c23004813a5f6fcfff28abf3534aa4c4132b0e18cb65dad0ab3715e55d5d17",
+      "bytes": 19017,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -44176,8 +44236,8 @@
     },
     {
       "path": "packages/client/src/interface/navigation/MentionsPanel.tsx",
-      "sha256": "124fe3b9f75a71a3f3cb38dfeee2a0356253de6ca7a4a37eb6861ef762a4ed0f",
-      "bytes": 16207,
+      "sha256": "8e4b4ac8fc44e10fd97b11594df16dc0c7905efa611abc2d2914f2c9716f3d5c",
+      "bytes": 16396,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -44236,8 +44296,8 @@
     },
     {
       "path": "packages/client/src/interface/navigation/channels/ServerSidebar.tsx",
-      "sha256": "ab3de6d22216c29c9ba2a608df3a74f44931ecf9a4a8410c6de5e48aeca062dc",
-      "bytes": 42536,
+      "sha256": "2236d763ebc926afccf2a320391bdcd1012fb3288ec6786a073aa6c92c168863",
+      "bytes": 43192,
       "category": "product-source-or-build-manifest"
     },
     {
