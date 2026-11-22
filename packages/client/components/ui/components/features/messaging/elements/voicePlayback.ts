@@ -34,10 +34,12 @@ export interface VoiceClip {
   pause(): void;
   seek(seconds: number): void;
   /**
-   * The row that showed it is gone. `left`: the reader left the
-   * conversation, or the row shows another file now; the clip stops at once.
+   * The row that showed it is gone. `left`: the row shows another file now,
+   * so the clip stops at once. `stillHere`: asked once the address has
+   * settled (the router changes it after the old rows are gone); when the
+   * reader has left the conversation, the clip stops then.
    */
-  release(options?: { left?: boolean }): void;
+  release(options?: { left?: boolean; stillHere?: () => boolean }): void;
 }
 
 interface Entry {
@@ -98,6 +100,9 @@ export function liveClips() {
 function finite(value: number) {
   return Number.isFinite(value) && value > 0 ? value : 0;
 }
+
+/** How long after a row goes the address is read again */
+export const ADDRESS_SETTLE_MS = 100;
 
 /** Stop the clip, stop loading it and forget it */
 function dispose(entry: Entry) {
@@ -164,8 +169,14 @@ function create(src: string, preload: "none" | "metadata"): Entry {
       release(options) {
         entry.views = Math.max(0, entry.views - 1);
         if (entry.views) return;
-        if (options?.left) dispose(entry);
-        else settle(entry);
+        if (options?.left) return dispose(entry);
+        settle(entry);
+        const stillHere = options?.stillHere;
+        if (stillHere)
+          setTimeout(() => {
+            if (!entry.views && clips.get(src) === entry && !stillHere())
+              dispose(entry);
+          }, ADDRESS_SETTLE_MS);
       },
     },
   };

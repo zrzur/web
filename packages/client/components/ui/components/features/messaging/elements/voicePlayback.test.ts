@@ -1,6 +1,7 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 
 import {
+  ADDRESS_SETTLE_MS,
   RELEASE_GRACE_MS,
   liveClips,
   playFailed,
@@ -121,6 +122,25 @@ describe("voice playback", () => {
     clip.release({ left: true });
     expect(made[0].paused).toBe(true);
     expect(liveClips()).toBe(0);
+  });
+
+  it("leaving the channel stops a playing clip once the address says so", async () => {
+    let here = true;
+    const clip = voiceClip("a.ogg");
+    await clip.toggle();
+    clip.release({ stillHere: () => here });
+    here = false; // the router changes the address after the rows go
+    vi.advanceTimersByTime(ADDRESS_SETTLE_MS);
+    expect(made[0].paused).toBe(true);
+    expect(liveClips()).toBe(0);
+  });
+
+  it("a row trimmed while the reader stays keeps the clip playing", async () => {
+    const clip = voiceClip("a.ogg");
+    await clip.toggle();
+    clip.release({ stillHere: () => true });
+    vi.advanceTimersByTime(ADDRESS_SETTLE_MS + RELEASE_GRACE_MS);
+    expect(made[0].paused).toBe(false);
   });
 
   it("a rowless clip paused by another one goes after the grace", async () => {

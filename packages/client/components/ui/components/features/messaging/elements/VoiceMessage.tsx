@@ -49,18 +49,16 @@ export function VoiceMessage(props: {
       src,
       untrack(() => mediaPreload(saveData())),
     );
-    onCleanup(() =>
+    onCleanup(() => {
+      const channelId = untrack(() => props.channelId);
       shared.release({
-        // the row shows another file now, or the reader left the channel;
-        // a row only drawn again or scrolled away keeps a playing clip
-        left:
-          untrack(() => props.src) !== src ||
-          !stillIn(
-            untrack(() => props.channelId),
-            window.location.pathname,
-          ),
-      }),
-    );
+        // the row shows another file now: the old one stops
+        left: untrack(() => props.src) !== src,
+        // a row only drawn again or scrolled away keeps a playing clip;
+        // leaving the channel stops it
+        stillHere: () => stillIn(channelId, window.location.pathname),
+      });
+    });
     return shared;
   });
   // Leaving the conversation stops the sound at once, also where the app
