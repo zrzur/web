@@ -262,8 +262,8 @@
     },
     {
       "path": "CHANGELOG.md",
-      "sha256": "0f3055bf5641dafe54df4ce9ba733c336b5fc188d5565a1b3b1e0dc79aaa370b",
-      "bytes": 196596,
+      "sha256": "f660969a54e7b95103333466c1383a85bfc92716445cf074f98e9c3574ec37ee",
+      "bytes": 196752,
       "category": "public-documentation"
     },
     {
@@ -7642,14 +7642,14 @@
     },
     {
       "path": "packages/client/components/ui/components/features/voice/callCard/floatingDrag.test.ts",
-      "sha256": "10b0c84f360607ff4b01b3867d5354caa656de07203a1f72bf1dbe8b76e82780",
-      "bytes": 4426,
+      "sha256": "7189514fecfba1d566f887b397dd43aee9682c8fc7766bd33e10ef4e49ce965a",
+      "bytes": 4708,
       "category": "synthetic-test-source-or-fixture"
     },
     {
       "path": "packages/client/components/ui/components/features/voice/callCard/floatingDrag.ts",
-      "sha256": "898ad1d53b85f313ec61c161828d6c25dff4d3c693981f12b51c71e28517581a",
-      "bytes": 8545,
+      "sha256": "4288bafc830b7a019dca266504c16c854452422c5646a2510809cfc9d9e42b9b",
+      "bytes": 8797,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -45216,7 +45216,7 @@
   "submodules": [
     {
       "path": "packages/stoat.js",
-      "commit": "2bba21b08d1f644095d2cd62955518e13233763b"
+      "commit": "5948ced762562ac17e211c4a6741b43684af7af6"
     }
   ]
 }
