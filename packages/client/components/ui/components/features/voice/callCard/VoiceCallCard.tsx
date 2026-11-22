@@ -24,10 +24,20 @@ import { useState } from "@revolt/state";
 import { SlideState } from "@revolt/ui/components/navigation/SlideDrawer";
 
 import { VoiceCallCardPreview } from "./VoiceCallCardPreview";
+import {
+  type Corner,
+  EDGE_GAP,
+  type Insets,
+  type Size,
+  clampToViewport,
+  cornerPosition,
+  createDragGesture,
+  isCorner,
+  nearestCorner,
+} from "./floatingDrag";
 import { voiceStripOnScreen } from "./voiceStrip";
 
 type Mode = "floating" | "moving";
-type FloatType = "tl" | "tr" | "bl" | "br";
 
 const CORNER_KEY = "zrzur:voice-card-corner";
 
@@ -40,23 +50,59 @@ const VoiceCallCardPiP = lazy(() =>
 );
 
 /** The corner the floating call card was last put in (per device) */
-function savedCorner(): FloatType {
+function savedCorner(): Corner {
   try {
     const value = localStorage.getItem(CORNER_KEY);
-    if (value === "tl" || value === "tr" || value === "bl" || value === "br")
-      return value;
+    if (isCorner(value)) return value;
   } catch {
     /* storage blocked: use the default */
   }
   return "tr";
 }
 
-function saveCorner(corner: FloatType) {
+function saveCorner(corner: Corner) {
   try {
     localStorage.setItem(CORNER_KEY, corner);
   } catch {
     /* storage blocked: the card still moves, it just isn't remembered */
   }
+}
+
+/** Size of the floating card (px); narrower on a very small screen */
+const FLOAT_W = 300,
+  FLOAT_H = 170;
+
+/** The part of the page that is really on screen (px) */
+function viewport(): Size {
+  return {
+    width: document.documentElement.clientWidth || innerWidth,
+    height: innerHeight,
+  };
+}
+
+function floatSize(view: Size): Size {
+  return {
+    width: Math.max(0, Math.min(FLOAT_W, view.width - 2 * EDGE_GAP)),
+    height: Math.max(0, Math.min(FLOAT_H, view.height - 2 * EDGE_GAP)),
+  };
+}
+
+/** The safe area (notch, status bar, home bar) in pixels */
+function safeInsets(): Insets {
+  const probe = document.createElement("div");
+  probe.style.cssText =
+    "position:fixed;visibility:hidden;pointer-events:none;" +
+    "padding:var(--z-safe-top,0px) var(--z-safe-right,0px) var(--z-safe-bottom,0px) var(--z-safe-left,0px)";
+  document.body.append(probe);
+  const style = getComputedStyle(probe);
+  const insets = {
+    top: parseFloat(style.paddingTop) || 0,
+    right: parseFloat(style.paddingRight) || 0,
+    bottom: parseFloat(style.paddingBottom) || 0,
+    left: parseFloat(style.paddingLeft) || 0,
+  };
+  probe.remove();
+  return insets;
 }
 
 type Info = {
@@ -67,10 +113,6 @@ type Info = {
   /** voice channel page: the call fills the whole channel view */
   stage?: boolean;
 };
-
-const PAD = 16,
-  PAD_X = `${PAD}px`,
-  PAD_Y = `${PAD + 56}px`;
 
 const callCardContext = createContext<(info?: Info) => void>();
 
@@ -84,67 +126,39 @@ export function VoiceCallCardContext(props: { children: JSX.Element }) {
   const [info, setInfo] = createSignal<Info>();
 
   let ref: HTMLDivElement | undefined,
-    events: AbortController | null,
-    pid = 0,
-    ofsX = 0,
-    ofsY = 0;
+    corner: Corner = savedCorner();
 
-  function mouseDown(e: PointerEvent) {
-    pid = e.pointerId;
-    if (mode() === "floating") {
-      const pos = ref!.getBoundingClientRect();
-      ofsX = e.clientX - pos.x;
-      ofsY = e.clientY - pos.y;
-      setMode("moving");
-      addEvents();
-    }
-  }
-
-  function mouseMove(e: PointerEvent) {
-    if (e.pointerId !== pid) return;
-    e.preventDefault();
-    const x = e.clientX - ofsX,
-      y = e.clientY - ofsY;
-    ref!.style.transform = `translate(${x}px, ${y}px)`;
-  }
-
-  function mouseUp(e: PointerEvent) {
-    if (e.pointerId !== pid) return;
-    const sty = ref!.style,
-      pos = ref!.getBoundingClientRect(),
-      left = e.clientX - ofsX + pos.width / 2 < innerWidth / 2,
-      top = e.clientY - ofsY + pos.height / 2 < innerHeight / 2;
-
-    sty.transition = "all .2s cubic-bezier(0, 1.5, 0.85, 0.8)";
-    const corner = left ? (top ? "tl" : "bl") : top ? "tr" : "br";
-    saveCorner(corner);
-    setFloat(corner);
-    //Reset CSS transition on next render pass
-    setTimeout(() => (sty.transition = ""), 1);
-    resetEvents();
-  }
-
-  function addEvents() {
-    if (events) return;
-    events = new AbortController();
-    const opt = { passive: false, signal: events.signal };
-    document.addEventListener("pointermove", mouseMove, opt);
-    document.addEventListener("pointerup", mouseUp, opt);
-  }
-
-  function resetEvents() {
-    events?.abort();
-    events = null;
-  }
+  // A press is a tap (the card's own click opens the call) until it moves
+  // past the threshold; then it is a drag, which never opens the call
+  // (bug #9). Its buttons never start one.
+  const drag = createDragGesture({
+    element: () => (mode() === "floating" ? ref : undefined),
+    onStart: () => setMode("moving"),
+    onMove: (point) => {
+      const view = viewport();
+      const p = clampToViewport(point, floatSize(view), view);
+      ref!.style.transform = `translate(${p.x}px, ${p.y}px)`;
+    },
+    onDrop: (point) => {
+      const sty = ref!.style,
+        view = viewport();
+      corner = nearestCorner(point, floatSize(view), view);
+      saveCorner(corner);
+      sty.transition = "all .2s cubic-bezier(0, 1.5, 0.85, 0.8)";
+      setFloat(corner);
+      //Reset CSS transition on next render pass
+      setTimeout(() => (sty.transition = ""), 1);
+    },
+  });
 
   createEffect(() => {
     const inf = info();
     if (!ref) return;
     const sty = ref.style;
-    resetEvents();
 
     //Set mode based on state
     if (voice.layout() === "fullscreen") {
+      drag.cancel();
       sty.transform = ``;
       sty.width = `100%`;
       sty.height = "";
@@ -154,22 +168,40 @@ export function VoiceCallCardContext(props: { children: JSX.Element }) {
       inf?.parentRect &&
       (!inf.drawer || inf.drawer === SlideState.SHOWN)
     ) {
+      drag.cancel();
       sty.transform = `translate(${inf.parentRect.x}px, ${inf.parentRect.y}px)`;
       sty.width = `${inf.parentRect.width}px`;
       sty.height = `${inf.parentRect.height}px`;
       setMode();
     } else if (inf?.pos && (!inf.drawer || inf.drawer === SlideState.SHOWN)) {
+      drag.cancel();
       sty.transform = `translate(${inf.pos.x}px, ${inf.pos.y}px)`;
       sty.width = `${inf.pos.width}px`;
       sty.height = voice.layout() === "collapsed" ? "56px" : "";
       setMode();
     } else if (!inCall()) {
+      drag.cancel();
       const y = inf?.pos.y ?? ref.getBoundingClientRect().y;
       sty.transform = `translate(${innerWidth + 50}px, ${y}px)`;
       sty.width = "";
       sty.height = "";
       setMode();
     } else if (!mode()) setFloat(savedCorner());
+  });
+
+  // the window changed size (a phone turned, the browser bar came or went):
+  // the card stays in its corner, on screen
+  const keepInCorner = () => {
+    if (mode() === "floating") setFloat(corner);
+  };
+  onMount(() => {
+    addEventListener("resize", keepInCorner);
+    visualViewport?.addEventListener("resize", keepInCorner);
+  });
+  onCleanup(() => {
+    drag.cancel();
+    removeEventListener("resize", keepInCorner);
+    visualViewport?.removeEventListener("resize", keepInCorner);
   });
 
   const channel = () => info()?.channel;
@@ -188,25 +220,21 @@ export function VoiceCallCardContext(props: { children: JSX.Element }) {
       .vidTracks()
       .some((track) => track.publication && !track.publication.isMuted);
 
-  function setFloat(float: FloatType) {
-    // the card is fixed to the screen, outside #root: its corners stay
-    // inside the safe area (notch, status bar, home bar)
+  function setFloat(float: Corner) {
+    // the card is fixed to the screen, outside #root: it is placed in
+    // pixels of the part of the page really on screen (100vh is taller than
+    // that in a phone browser), clear of the header, the composer and the
+    // safe area (notch, status bar, home bar)
+    corner = float;
     const sty = ref!.style,
-      x =
-        float[1] === "l"
-          ? `calc(${PAD_X} + var(--z-safe-left, 0px))`
-          : `calc(100vw - var(--flt-w) - ${PAD_X} - var(--z-safe-right, 0px))`,
-      y =
-        float[0] === "t"
-          ? `calc(${PAD_Y} + var(--z-safe-top, 0px))`
-          : `calc(100vh - var(--flt-h) - ${PAD_Y} - var(--z-safe-bottom, 0px))`;
-    sty.transform = `translate(${x}, ${y})`;
-    sty.width = "";
-    sty.height = "";
+      view = viewport(),
+      size = floatSize(view),
+      p = cornerPosition(float, size, view, safeInsets());
+    sty.transform = `translate(${p.x}px, ${p.y}px)`;
+    sty.width = `${size.width}px`;
+    sty.height = `${size.height}px`;
     setMode("floating");
   }
-
-  onCleanup(resetEvents);
 
   onMount(() => {
     document
@@ -240,7 +268,7 @@ export function VoiceCallCardContext(props: { children: JSX.Element }) {
         <Float
           ref={ref}
           mode={mode()}
-          onPointerDown={mouseDown}
+          onPointerDown={(e) => drag.pointerDown(e)}
           fullscreen={voice.layout() === "fullscreen"}
         >
           <Switch>
