@@ -6736,8 +6736,8 @@
     },
     {
       "path": "packages/client/components/ui/components/features/messaging/composition/picker/CompositionMediaPicker.tsx",
-      "sha256": "24bae6ed665abd2983bd1fdfa0c9c3986da947d3a8785cdf3180533020cf4f88",
-      "bytes": 11766,
+      "sha256": "b335684514e32720a1259eb039d29217d26ae4eb638aa3e94c2ccdf10bacc17f",
+      "bytes": 12345,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -7462,8 +7462,8 @@
     },
     {
       "path": "packages/client/components/ui/components/features/texteditor/TextEditor2.tsx",
-      "sha256": "e1fc1c8a358a4a858ae014bca85c2bf115b388366e5fc57d65336cd92845e1f8",
-      "bytes": 10832,
+      "sha256": "4fed66dfc92b75138abe429a8f31ae8ffce8a9203d4b5ef4559dc6970f8ae351",
+      "bytes": 11229,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -7530,6 +7530,12 @@
       "path": "packages/client/components/ui/components/features/texteditor/commandText.ts",
       "sha256": "bba3fb63b261c80e40f7811f3c12a6b2aaf5237cac957e9b675ca3663df80b15",
       "bytes": 2781,
+      "category": "product-source-or-build-manifest"
+    },
+    {
+      "path": "packages/client/components/ui/components/features/texteditor/editorHooks.ts",
+      "sha256": "e11bd90291eeb3e4c6438f68aa0507f5799d4d0885501b22cf53760a989034a6",
+      "bytes": 513,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -7774,8 +7780,8 @@
     },
     {
       "path": "packages/client/components/ui/components/floating/FloatingManager.tsx",
-      "sha256": "af760c0d591efe778dae7003dfd022f2cdba4bf5bb202228ae08d20f1f6b98db",
-      "bytes": 14398,
+      "sha256": "0735d9b95b73fa7de493f6eb6189f243e8071393187f11c6a774eaffee0ff90b",
+      "bytes": 14564,
       "category": "product-source-or-build-manifest"
     },
     {
