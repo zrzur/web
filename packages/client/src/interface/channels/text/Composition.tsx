@@ -11,8 +11,8 @@ import {
 } from "solid-js";
 
 import { useLingui } from "@lingui/solid/macro";
-import { styled } from "styled-system/jsx";
 import { Channel, ConnectionState } from "@zrzur/sdk/solid";
+import { styled } from "styled-system/jsx";
 
 import { useClient } from "@revolt/client";
 import { levelPerks } from "@revolt/client/billing";
@@ -775,7 +775,9 @@ export function MessageComposition(props: Props) {
                 )}
               </CompositionMediaPicker>
               <Show
-                when={draftEmpty() && canUploadFiles() && !recording() && !phone}
+                when={
+                  draftEmpty() && canUploadFiles() && !recording() && !phone
+                }
               >
                 <MessageBox.InlineIcon>
                   <IconButton
@@ -811,8 +813,7 @@ export function MessageComposition(props: Props) {
           state.settings.getValue("appearance:show_send_button") || false
         }
         crowded={
-          (draft().files?.length ?? 0) > 0 ||
-          (draft().replies?.length ?? 0) > 0
+          (draft().files?.length ?? 0) > 0 || (draft().replies?.length ?? 0) > 0
         }
         actionsAppend={
           <Show when={state.settings.getValue("appearance:show_send_button")}>
