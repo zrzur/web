@@ -97,16 +97,35 @@ describe("TextEditor2 with a value that arrives while it mounts", () => {
     expect(content.textContent).toBe("Answers questions.");
   });
 
-  it("does not dispatch on mount when the value was already there", () => {
+  it("does not dispatch on mount with a placeholder and a value", () => {
     const dispatch = vi.spyOn(EditorView.prototype, "dispatch");
     mount(() => (
-      <TextEditor2 initialValue={["draft"]} onChange={() => undefined} />
+      <TextEditor2
+        placeholder="Something cool about me..."
+        initialValue={["draft"]}
+        onChange={() => undefined}
+      />
     ));
 
-    expect(
-      dispatch.mock.calls.some(([spec]) => "changes" in (spec as object)),
-    ).toBe(false);
+    expect(dispatch).not.toHaveBeenCalled();
     dispatch.mockRestore();
+  });
+
+  it("calls neither onChange nor onTyping on mount", async () => {
+    const onChange = vi.fn();
+    const onTyping = vi.fn();
+    mount(() => (
+      <TextEditor2
+        placeholder="Message #general"
+        initialValue={["draft"]}
+        onChange={onChange}
+        onTyping={onTyping}
+      />
+    ));
+    await Promise.resolve();
+
+    expect(onChange).not.toHaveBeenCalled();
+    expect(onTyping).not.toHaveBeenCalled();
   });
 });
 

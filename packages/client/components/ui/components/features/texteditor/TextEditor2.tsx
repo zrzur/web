@@ -218,8 +218,12 @@ export function TextEditor2(props: Props) {
 
   // what the editor was made with; the first run below only applies a change
   // made since (not deferred, for the same reason as the initial value)
-  // eslint-disable-next-line solid/reactivity
-  const madeWith = [props.placeholder, props.ariaLabel ?? props.placeholder] as const;
+  /* eslint-disable solid/reactivity */
+  const madeWith = [
+    props.placeholder,
+    props.ariaLabel ?? props.placeholder,
+  ] as const;
+  /* eslint-enable solid/reactivity */
 
   // connect signals to extensions; the two follow the same text, so a channel
   // switch changes them in one update instead of laying out the editor twice
@@ -230,14 +234,14 @@ export function TextEditor2(props: Props) {
         if (text === previous[0] && name === previous[1]) return;
         view.dispatch({
           effects: [
-            ...(text !== previous?.[0]
+            ...(text !== previous[0]
               ? [
                   placeholderCompartment.reconfigure(
                     text ? placeholder(text) : [],
                   ),
                 ]
               : []),
-            ...(name !== previous?.[1]
+            ...(name !== previous[1]
               ? [nameCompartment.reconfigure(nameAttributes(name))]
               : []),
           ],
