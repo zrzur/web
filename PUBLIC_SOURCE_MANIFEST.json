@@ -44446,8 +44446,8 @@
     },
     {
       "path": "packages/client/src/serviceWorker.ts",
-      "sha256": "b12c939e4b096a825232d1f16c91afdc9a1db0c3d47a7402727825156daa688c",
-      "bytes": 8687,
+      "sha256": "59ea0f54826624f462fd7a0f0d2ea6a4c2a33bdb1bb3e29eb778eb9d37775ad3",
+      "bytes": 8808,
       "category": "product-source-or-build-manifest"
     },
     {
