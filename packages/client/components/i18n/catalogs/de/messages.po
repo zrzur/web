@@ -31436,3 +31436,15 @@ msgstr "Solange du online bist, fragt Zrzur etwa einmal pro Minute bei Steam (Va
 #: components/app/interface/settings/user/activity/ActivitySettings.tsx
 msgid "Your activity is shown to the people who can see that you are online: your friends and people in your Servers, and bots with access to presence in those Servers. Nobody sees it while you are invisible or offline, and people you blocked never see it. On accounts of people aged 16 or 17, and accounts with no stated age, only friends see it."
 msgstr "Deine Aktivität sehen die Personen, die sehen, dass du online bist: deine Freunde und Leute in deinen Servern sowie Bots mit Zugriff auf den Online-Status in diesen Servern. Niemand sieht sie, solange du unsichtbar oder offline bist, und Personen, die du blockiert hast, sehen sie nie. Bei Konten von Personen im Alter von 16 oder 17 Jahren und bei Konten ohne Altersangabe sehen sie nur Freunde."
+
+#: components/app/interface/safety/labels.tsx
+msgid "Activity removed"
+msgstr "Aktivität entfernt"
+
+#: components/app/interface/safety/labels.tsx
+msgid "App blocked from activities"
+msgstr "App für Aktivitäten gesperrt"
+
+#: components/app/interface/safety/labels.tsx
+msgid "Picture blocked from activities"
+msgstr "Bild für Aktivitäten gesperrt"

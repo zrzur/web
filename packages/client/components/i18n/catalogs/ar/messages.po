@@ -31436,3 +31436,15 @@ msgstr "ما دمت متصلاً، يسأل زرزور منصة Steam (شركة 
 #: components/app/interface/settings/user/activity/ActivitySettings.tsx
 msgid "Your activity is shown to the people who can see that you are online: your friends and people in your Servers, and bots with access to presence in those Servers. Nobody sees it while you are invisible or offline, and people you blocked never see it. On accounts of people aged 16 or 17, and accounts with no stated age, only friends see it."
 msgstr "يظهر نشاطك للأشخاص الذين يرون أنك متصل: أصدقاؤك والأشخاص في سيرفراتك، والبوتات التي تملك صلاحية الاطلاع على حالة الاتصال في تلك السيرفرات. ولا يراه أحد ما دمت غير مرئي أو غير متصل، ولا يراه أبداً من حظرتهم. وفي حسابات من يبلغون 16 أو 17 عاماً والحسابات التي لم يُذكر عمر أصحابها، لا يراه إلا الأصدقاء."
+
+#: components/app/interface/safety/labels.tsx
+msgid "Activity removed"
+msgstr "أُزيل النشاط"
+
+#: components/app/interface/safety/labels.tsx
+msgid "App blocked from activities"
+msgstr "حُظر التطبيق من الأنشطة"
+
+#: components/app/interface/safety/labels.tsx
+msgid "Picture blocked from activities"
+msgstr "حُظرت الصورة من الأنشطة"

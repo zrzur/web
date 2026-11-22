@@ -189,6 +189,9 @@ export function useSafetyLabels() {
     RemoveDiscoverListing: t`Removed from Discover`,
     SuspendCommunityItem: t`Design suspended`,
     SuspendCreator: t`Creator access paused`,
+    ClearActivity: t`Activity removed`,
+    BlockActivityApp: t`App blocked from activities`,
+    BlockActivityPicture: t`Picture blocked from activities`,
   };
 
   const appeal: Record<SafetyAppealStatus, string> = {

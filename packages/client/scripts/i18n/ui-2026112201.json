@@ -230,5 +230,17 @@
   "Activity: kept only in memory while you are online, and never longer than 24 hours. We keep no history of what you did.": [
     "النشاط: يُحفظ في الذاكرة فقط ما دمت متصلاً، ولا يزيد أبداً على 24 ساعة. ولا نحتفظ بأي سجل لما فعلته.",
     "Aktivität: nur im Arbeitsspeicher, solange du online bist, und nie länger als 24 Stunden. Wir führen keinen Verlauf darüber, was du gemacht hast."
+  ],
+  "Activity removed": [
+    "أُزيل النشاط",
+    "Aktivität entfernt"
+  ],
+  "App blocked from activities": [
+    "حُظر التطبيق من الأنشطة",
+    "App für Aktivitäten gesperrt"
+  ],
+  "Picture blocked from activities": [
+    "حُظرت الصورة من الأنشطة",
+    "Bild für Aktivitäten gesperrt"
   ]
 }
