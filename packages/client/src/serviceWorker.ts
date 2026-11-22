@@ -37,8 +37,12 @@ import {
 
 declare let self: ServiceWorkerGlobalScope;
 
-/** How long an open page has to say it opened a tapped notification */
-const OPEN_ANSWER_MS = 1500;
+/**
+ * How long an open page has to say it opened a tapped notification. Short:
+ * a browser lets the worker open a window only within a moment of the tap
+ * (Firefox allows about a second)
+ */
+const OPEN_ANSWER_MS = 700;
 
 interface ChannelPartial {
   channel_type: string;
