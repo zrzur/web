@@ -262,8 +262,8 @@
     },
     {
       "path": "CHANGELOG.md",
-      "sha256": "81b2f664e34fce9dc1f41f9727ec246624d5ad0cbeb4549bbcfbcde249fade99",
-      "bytes": 196688,
+      "sha256": "17b4a577233e455d517758f93cd67f41ba5fe9d79743ea60fc909fee161fc014",
+      "bytes": 196813,
       "category": "public-documentation"
     },
     {
@@ -44230,8 +44230,8 @@
     },
     {
       "path": "packages/client/src/interface/navigation/channels/AccountBar.tsx",
-      "sha256": "89b61ef5294173e17c6d340b40ab94624c84381c4f7a41f12fcac1cf250a5eec",
-      "bytes": 30426,
+      "sha256": "0f16b7ff79c395032a14930a1ed22fca3dc3efa8d9434bfae88f3ac26aa95415",
+      "bytes": 30575,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -44242,8 +44242,8 @@
     },
     {
       "path": "packages/client/src/interface/navigation/channels/HomeSidebarPhone.tsx",
-      "sha256": "9fc356f3dc9af43449378f202c08ef66cc720503248b4354b2824998f9a63e60",
-      "bytes": 16228,
+      "sha256": "0059669a6a473689bc52f80d275e7de371f5bf57c171f9e20a119999e974662d",
+      "bytes": 16260,
       "category": "product-source-or-build-manifest"
     },
     {
