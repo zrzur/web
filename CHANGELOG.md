@@ -2,6 +2,14 @@
 
 ## Unreleased
 
+### Keyboard shortcuts for everyday actions (2026-11-22, owner's request)
+
+* **Mention by Shift+click:** Shift+click a person's name or picture (message author, member list, reply line, voice room, call tile, profile card) writes a mention of them into the message box at the cursor, with a space after it, and puts the focus there. Shift+click a role (in a message, a profile, a member list heading) or a channel (in the channel list or a link) mentions it, and a channel link no longer opens a new window on Shift+click. Without an open message box, or without the right to write, the click does what it did before. A tap on a phone never carries Shift: long press is unchanged.
+* **Keys on a message:** on the message under the pointer or with keyboard focus, R replies, E edits (yours), Delete deletes (yours, asks first; Shift+Delete does not ask), P pins or unpins (where you may; asks first), Ctrl+C copies the text when nothing is selected. Up and Down in the message list move the focus from message to message (a visible focus ring, `aria-keyshortcuts` on each message). Page Up and Page Down scroll the conversation from the message box too.
+* **New changeable shortcuts:** previous or next unread channel (Alt+Shift+↑/↓), upload a file (Ctrl+Shift+U), emoji picker (Ctrl+E), search this channel (Ctrl+F), your mentions (Ctrl+Shift+2), leave the call (Ctrl+Shift+H, only while in a call). Ctrl+B and Ctrl+I put bold and italic marks around the selection (and take them off again).
+* **Each system has its own set:** macOS uses Command and Option (Command+Option+↑/↓ for servers, Command+Control+I for mentions); Linux keeps the Windows keys except where the desktop takes them: servers are Alt+Page Up/Down (Ctrl+Alt+arrows switch workspaces) and upload is Ctrl+Alt+U (Ctrl+Shift+U is IBus's Unicode entry). The system is read from the desktop app, then the browser's client hints, then `navigator.platform`. The Ctrl+/ screen shows this device's keys with its own symbols, and a switch shows the macOS, Windows or Linux set to read. Keys macOS, Windows and Linux keep for themselves are refused when you record a shortcut.
+* All keys are matched by their place on the keyboard (`event.code`), so they work with Arabic and German layouts; a single-letter key never acts while you type.
+
 ### A friend request opens the sender's profile (2026-11-21)
 
 * **From the phone Notifications page:** the sender's picture and the line "… sent you a friend request" are one button (44 px high) that opens their profile. Screen readers hear the sentence they see as its name, then "Open profile" (ar, en, de) as its description. Accept, Decline and Send message are separate buttons and are not touched by it. The page closes first so the profile is not under it; the profile has its own Accept.
