@@ -2,6 +2,11 @@
 
 ## Unreleased
 
+### Weak network: the lists show while a slow server answers (2026-11-22)
+
+* **Computers and the desktop app open from the kept state when the line is slow:** phones already showed the servers, channels and messages kept from the last connection at once. Wider screens waited for the live connection's first answer, which takes 10–15 s for a busy account on a 400 kbps line. They now wait 1.5 s for it, then show what was kept, with "Connecting…" in the title bar, and the server's answer corrects it when it comes. On a good line the answer comes first and nothing changes (`components/client/Controller.ts`).
+* **The fresh answer always wins:** when the server answered while the kept state was still being read from the device, the older kept state was put over the fresh one. It is now left out (`offline/index.ts`, every screen size).
+
 ### A friend request opens the sender's profile (2026-11-21)
 
 * **From the phone Notifications page:** the sender's picture and the line "… sent you a friend request" are one button (44 px high) that opens their profile. Screen readers hear the sentence they see as its name, then "Open profile" (ar, en, de) as its description. Accept, Decline and Send message are separate buttons and are not touched by it. The page closes first so the profile is not under it; the profile has its own Accept.
