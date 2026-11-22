@@ -262,8 +262,8 @@
     },
     {
       "path": "CHANGELOG.md",
-      "sha256": "4fc89f9eb8fc067971b721c548db5d62f4bc72c46aef3a6dfc2600597a2f22ff",
-      "bytes": 194746,
+      "sha256": "b0f80a55f8cd6a75c08a5d778fbd64c865539dd93fe9fb2627a076295f01ccec",
+      "bytes": 195921,
       "category": "public-documentation"
     },
     {
@@ -8122,8 +8122,8 @@
     },
     {
       "path": "packages/client/components/ui/directives/longPress.ts",
-      "sha256": "101ddb1aae18bee5b08aeb549a2539c507cc389f8f7f38b812905ef5889032f9",
-      "bytes": 2676,
+      "sha256": "185158e64ae1ffecd681c818b814eb387036556e7300aee4f2d5f11414746ba2",
+      "bytes": 2969,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -44284,8 +44284,8 @@
     },
     {
       "path": "packages/client/src/interface/navigation/servers/ServerList.tsx",
-      "sha256": "b17381f196d6b5145e9adca7e030b1b7b21410f524514eada7b81f8b3bd7dd48",
-      "bytes": 32054,
+      "sha256": "a872c957bf84a4ea0caedc8c8b414c799be480005aa5f95578496dfaf68a3887",
+      "bytes": 33021,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -44319,9 +44319,15 @@
       "category": "product-source-or-build-manifest"
     },
     {
+      "path": "packages/client/src/interface/navigation/servers/railDrag.dom.test.tsx",
+      "sha256": "5a71a1b9b0989aba22accdb716673900712226873b58145c31c0502d628e679b",
+      "bytes": 10890,
+      "category": "synthetic-test-source-or-fixture"
+    },
+    {
       "path": "packages/client/src/interface/navigation/servers/railDrag.ts",
-      "sha256": "0361b5a5743b23babdedf3d1eaaf21eb34c2084e9c92f636c8116c7070d20454",
-      "bytes": 11306,
+      "sha256": "55b147ad8f22f70572ab5cae4f36ffa58eca8f44a2ec8a863fe85af0559fb261",
+      "bytes": 18893,
       "category": "product-source-or-build-manifest"
     },
     {
