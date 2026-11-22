@@ -21,6 +21,8 @@ import { VoiceStatus } from "@revolt/ui/components/design/VoiceStatus";
 import { Tooltip } from "@revolt/ui/components/floating";
 import { Icon } from "@revolt/ui/icons/Icon";
 
+import { serverForumsUnread } from "../../channels/forum/unread";
+
 import { RailEntry, createRailDrag } from "./railDrag";
 
 interface Props {
@@ -463,6 +465,14 @@ function ServerEntry(props: {
   drag: RailDrag;
 }) {
   const state = useState();
+  const client = useClient();
+
+  // forums carry their messages in their posts (threads)
+  const forums = createMemo(() =>
+    serverForumsUnread(client(), props.server, (channel) =>
+      state.notifications.isMuted(channel),
+    ),
+  );
 
   // Mention count for the server badge, excluding channel-muted channels
   const mentions = () =>
@@ -473,7 +483,7 @@ function ServerEntry(props: {
           ? 0
           : (channel.mentions?.size ?? 0)),
       0,
-    );
+    ) + forums().mentions;
 
   return (
     <Tooltip
@@ -513,7 +523,7 @@ function ServerEntry(props: {
           indicator:
             props.selectedServer() === props.server.id
               ? "selected"
-              : props.server.unread &&
+              : (props.server.unread || forums().unread) &&
                   !state.notifications.isMuted(props.server)
                 ? "alert"
                 : undefined,
@@ -577,7 +587,13 @@ function FolderEntry(props: {
   drag: RailDrag;
 }) {
   const state = useState();
+  const client = useClient();
   const { t } = useLingui();
+
+  const forumsOf = (server: Server) =>
+    serverForumsUnread(client(), server, (channel) =>
+      state.notifications.isMuted(channel),
+    );
 
   const collapsed = () => props.entry.folder.collapsed ?? false;
 
@@ -595,13 +611,16 @@ function FolderEntry(props: {
               ? 0
               : (channel.mentions?.size ?? 0)),
           0,
-        ),
+        ) +
+        forumsOf(server).mentions,
       0,
     );
 
   const unread = () =>
     props.entry.servers.some(
-      (server) => server.unread && !state.notifications.isMuted(server),
+      (server) =>
+        (server.unread || forumsOf(server).unread) &&
+        !state.notifications.isMuted(server),
     );
 
   const holdsSelected = () =>

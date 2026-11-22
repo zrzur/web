@@ -31154,3 +31154,12 @@ msgstr "A member who left"
 #: components/app/interface/settings/channel/permissions/ChannelVisibility.tsx
 msgid "This thread follows who can see its channel."
 msgstr "This thread follows who can see its channel."
+
+#: src/interface/channels/forum/ForumChannel.tsx
+msgctxt "forum post"
+msgid "New"
+msgstr "New"
+
+#: src/interface/channels/forum/ForumChannel.tsx
+msgid "{0, plural, one {# mention} other {# mentions}}"
+msgstr "{0, plural, one {# mention} other {# mentions}}"

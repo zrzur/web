@@ -3,12 +3,17 @@ import {
   Match,
   Show,
   Switch,
+  createEffect,
+  createMemo,
   createResource,
   createSignal,
+  on,
+  untrack,
 } from "solid-js";
 
 import { plural } from "@lingui/core/macro";
 import { Trans, useLingui } from "@lingui/solid/macro";
+import type { Channel } from "@zrzur/sdk/solid";
 import { styled } from "styled-system/jsx";
 
 import { validTagEmoji } from "@revolt/app/interface/settings/channel/tagEmoji";
@@ -17,6 +22,7 @@ import { useTime } from "@revolt/i18n";
 import { Emoji } from "@revolt/markdown/emoji";
 import { useModals } from "@revolt/modal";
 import { useNavigate } from "@revolt/routing";
+import { useState } from "@revolt/state";
 import { Button, Header } from "@revolt/ui";
 import { Icon } from "@revolt/ui/icons/Icon";
 
@@ -27,6 +33,8 @@ import { ChannelHeader } from "../ChannelHeader";
 import { ChannelPageProps } from "../ChannelPage";
 
 import { activity, forumPosts } from "./posts";
+import { forumSeen, isPostUnread, postsOf } from "./unread";
+import { newestActivity } from "./unreadRules";
 
 /**
  * A forum: posts (threads with a title and tags), the most recently active
@@ -35,6 +43,7 @@ import { activity, forumPosts } from "./posts";
 export function ForumChannel(props: ChannelPageProps) {
   const { t } = useLingui();
   const client = useClient();
+  const state = useState();
   const dayjs = useTime();
   const navigate = useNavigate();
   const { openModal } = useModals();
@@ -51,6 +60,29 @@ export function ForumChannel(props: ChannelPageProps) {
       archived: archived(),
       tag: tag(),
     });
+
+  // What was new when the forum opened stays marked during this visit;
+  // the forum's own read mark then moves to its newest post, so a post
+  // never opened is new only until the list has been seen
+  const isMuted = (post: Channel) => state.notifications.isMuted(post);
+  const seenBefore = createMemo(
+    on(
+      () => props.channel.id,
+      () => untrack(() => forumSeen(client(), props.channel)),
+    ),
+  );
+  const postIsNew = (post: Channel) =>
+    isPostUnread(client(), post, isMuted, seenBefore());
+  const postMentions = (post: Channel) =>
+    client().channelUnreads.get(post.id)?.messageMentionIds.size ?? 0;
+
+  createEffect(() => {
+    if (!client().channelUnreads.loaded) return;
+    const newest = newestActivity(postsOf(client(), props.channel));
+    const mark = untrack(() => forumSeen(client(), props.channel));
+    if (newest && (!mark || mark.localeCompare(newest) < 0))
+      props.channel.ack(newest).catch(() => undefined);
+  });
 
   const tagName = (id: string) =>
     props.channel.forum?.tags.find((entry) => entry.id === id);
@@ -153,6 +185,8 @@ export function ForumChannel(props: ChannelPageProps) {
                 {(post) => (
                   <Post
                     type="button"
+                    data-unread={postIsNew(post) ? "" : undefined}
+                    data-mentions={postMentions(post) || undefined}
                     onClick={() =>
                       navigate(`/server/${post.serverId}/channel/${post.id}`)
                     }
@@ -164,6 +198,23 @@ export function ForumChannel(props: ChannelPageProps) {
                       {post.name}
                     </PostTitle>
                     <PostMeta>
+                      <Show when={postIsNew(post)}>
+                        <NewLabel data-testid="forum-post-new">
+                          <Trans context="forum post">New</Trans>
+                        </NewLabel>
+                      </Show>
+                      <Show when={postMentions(post)}>
+                        {(count) => (
+                          <MentionCount
+                            aria-label={t`${plural(count(), {
+                              one: "# mention",
+                              other: "# mentions",
+                            })}`}
+                          >
+                            @{count()}
+                          </MentionCount>
+                        )}
+                      </Show>
                       <For each={post.thread?.tags ?? []}>
                         {(id) => (
                           <Show when={tagName(id)}>
@@ -308,5 +359,32 @@ const TagLabel = styled("span", {
     borderRadius: "var(--z-radius-pill)",
     background: "var(--z-accent-muted)",
     color: "var(--z-fg-primary)",
+  },
+});
+
+/** A post with something the reader has not seen */
+const NewLabel = styled("span", {
+  base: {
+    padding: "2px 8px",
+    borderRadius: "var(--z-radius-pill)",
+    background: "var(--z-unread, var(--z-fg-primary))",
+    color: "var(--z-bg-app)",
+    fontWeight: 600,
+    fontSize: "12px",
+    lineHeight: "16px",
+  },
+});
+
+/** Unread mentions of the reader in a post */
+const MentionCount = styled("span", {
+  base: {
+    padding: "2px 8px",
+    borderRadius: "var(--z-radius-pill)",
+    background: "var(--z-mention-badge)",
+    color: "var(--z-on-mention-badge)",
+    fontWeight: 600,
+    fontSize: "12px",
+    lineHeight: "16px",
+    fontVariantNumeric: "tabular-nums",
   },
 });

@@ -2,6 +2,13 @@
 
 ## Unreleased
 
+### Forums show new posts and replies (2026-11-22, user report)
+
+* **Root cause:** a forum has no messages of its own; every post is a thread, and threads are not in the server's channel list. The channel list, the server icon and the forum page only looked at the forum channel itself, so a new post or a reply in a post never lit anything.
+* A forum's row in the channel list now shows the unread dot when one of its posts has something new, and the mention count when someone mentioned you in a post. The server icon and server folders count them too. Muted posts and archived posts without a mention stay quiet.
+* Inside the forum, each post with something new carries a "New" label, and a post that mentions you shows its mention count. Opening a post marks it read. A post you never opened is new until you have seen it in the forum's list: opening the forum moves the forum's own read mark to its newest post, and the labels of that visit stay until you leave.
+* Threads and forum posts follow their channel's notification level and mute.
+
 ### Notifications on phones: messages and DMs notify again (2026-11-22, user report)
 
 * **Root cause:** Chrome on Android and home-screen apps on iOS refuse a notification built by the page (`new Notification()` throws "Illegal constructor"); they only show one through the service worker. The first-tap set-up took that refusal for "this browser has no notifications" and stored `unsupported` for good. From then on the phone showed no notification and played no message sound while the app was open, and Settings › Notifications hid both switches. With the app open the server sends no web push either (it pushes only to people who are offline), so a new DM showed only as the sender's picture in the list.

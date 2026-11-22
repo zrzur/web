@@ -280,6 +280,8 @@ export class NotificationOptions extends AbstractSyncedStore<
   computeForChannel(channel: Channel) {
     return (
       this.get().channel[channel.id] ??
+      // a thread or forum post follows its channel's choice
+      (channel.parentId ? this.get().channel[channel.parentId] : undefined) ??
       this.computeForServer(channel.server) ??
       DEFAULT_STATES[channel.type]
     );
@@ -357,6 +359,8 @@ export class NotificationOptions extends AbstractSyncedStore<
     let value: MuteState | undefined;
     if (target instanceof Channel) {
       if (this.isMuted(target.server)) return true;
+      // a thread or forum post is muted with its channel
+      if (target.parent && this.isChannelMuted(target.parent)) return true;
       value = this.get().channel_mutes[target.id];
     } else if (target instanceof Server) {
       value = this.get().server_mutes[target.id];

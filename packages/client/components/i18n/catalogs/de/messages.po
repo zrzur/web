@@ -31151,3 +31151,12 @@ msgstr "Ein Mitglied, das gegangen ist"
 #: components/app/interface/settings/channel/permissions/ChannelVisibility.tsx
 msgid "This thread follows who can see its channel."
 msgstr "Dieser Thread übernimmt, wer seinen Kanal sehen kann."
+
+#: src/interface/channels/forum/ForumChannel.tsx
+msgctxt "forum post"
+msgid "New"
+msgstr "Neu"
+
+#: src/interface/channels/forum/ForumChannel.tsx
+msgid "{0, plural, one {# mention} other {# mentions}}"
+msgstr "{0, plural, one {# Erwähnung} other {# Erwähnungen}}"
