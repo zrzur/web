@@ -494,8 +494,10 @@ export function createRailDrag(options: {
   });
 
   // a lifted entry has to stop the page scrolling under the finger: one
-  // non-passive touch move listener on the rail (not one per entry). The
-  // price: a scroll that starts on the rail waits for the page's script.
+  // non-passive touch move listener, on the rail list itself (not one per
+  // entry, and not on the scroll container around it). The price: a gesture
+  // that starts on the rail waits for the page's script to answer its first
+  // touch move before the browser scrolls.
   onMount(() => {
     const rail = options.container();
     if (rail) onCleanup(hold.watch(rail));

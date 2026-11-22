@@ -16,7 +16,7 @@ import {
 import { css, cx } from "styled-system/css";
 
 import { createTouchHold, isTouchLike } from "./touchHold";
-import { setTouchLift } from "./touchLift";
+import { liftScope, setLifted } from "./touchLift";
 
 interface Props<T> {
   type?: string;
@@ -123,7 +123,7 @@ export function Draggable<T>(props: Props<T>) {
    * @param e
    */
   function handleDndEvent(e: DragHandleEvent<T>) {
-    setTouchLift(pressRow, false);
+    setLifted(pressRow, false);
     setDragDisabled(props.dragHandles || false);
     props.onDragChange?.(e.type === "consider");
 
@@ -167,7 +167,7 @@ export function Draggable<T>(props: Props<T>) {
   const hold = untrack(() => props.touchHold)
     ? createTouchHold({
         menuTarget: () => pressTarget,
-        onLift: () => setTouchLift(pressRow, true),
+        onLift: () => setLifted(pressRow, true),
         onDragStart: (from, e) => {
           const row = pressRow;
           if (!row) return;
@@ -198,13 +198,14 @@ export function Draggable<T>(props: Props<T>) {
           });
         },
         onEnd: (how, dragged) => {
-          setTouchLift(pressRow, false);
+          setLifted(pressRow, false);
           // the browser took the finger mid-drag: drop where it is
           if (dragged && how === "cancel") {
             window.dispatchEvent(new Event("touchend"));
           } else if (!dragged && props.dragHandles) {
             setDragDisabled(true);
           }
+          setFingerDown(false);
           pressRow = pressTarget = undefined;
         },
       })
@@ -215,19 +216,31 @@ export function Draggable<T>(props: Props<T>) {
     if (e.pointerId === fingerId) setFingerDown(false);
   }
 
+  /** The window lost the finger (another app, a call, the tab hidden) */
+  function onLeave() {
+    if (document.visibilityState === "hidden" || !document.hasFocus())
+      setFingerDown(false);
+  }
+
   onMount(() => {
     if (!hold || !zone) return;
     window.addEventListener("pointerup", onFingerUp);
     window.addEventListener("pointercancel", onFingerUp);
-    // one non-passive touch move listener for the whole list (the outermost
-    // finger list holds it for the lists inside it). It lets a lifted row
-    // stop the scroll; the price is that a scroll starting on the list waits
-    // for the page's script to answer first.
+    window.addEventListener("blur", onLeave);
+    document.addEventListener("visibilitychange", onLeave);
+    // One non-passive touch move listener per stack of finger lists: the
+    // outermost one (the category list) holds it, and the channel lists
+    // inside it add none. It sits on that list, not on the scroll container
+    // around it. It lets a lifted row stop the scroll; the price is that a
+    // gesture starting on the list waits for the page's script to answer
+    // its first touch move before the browser scrolls.
     const outer = !zone.parentElement?.closest("[data-touch-hold]");
     const unwatch = outer ? hold.watch(zone) : undefined;
     onCleanup(() => {
       window.removeEventListener("pointerup", onFingerUp);
       window.removeEventListener("pointercancel", onFingerUp);
+      window.removeEventListener("blur", onLeave);
+      document.removeEventListener("visibilitychange", onLeave);
       unwatch?.();
     });
   });
@@ -238,6 +251,9 @@ export function Draggable<T>(props: Props<T>) {
   let grabbedAt = { x: 0, y: 0 };
 
   function onPointerDown(e: PointerEvent) {
+    // a new press: whatever an earlier one left behind is over
+    if (hold) setFingerDown(false);
+
     const row = [...(zone?.children ?? [])].find((child) =>
       child.contains(e.target as Node),
     );
@@ -293,6 +309,7 @@ export function Draggable<T>(props: Props<T>) {
       class={cx(
         props.dropIndicator && dropIndicatorStyles,
         props.touchHold && touchRowStyles,
+        props.touchHold && liftScope,
       )}
       onPointerDown={onPointerDown}
       use:dndzone={{

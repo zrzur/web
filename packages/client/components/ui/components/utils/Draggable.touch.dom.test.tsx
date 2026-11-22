@@ -6,7 +6,6 @@ import { addLongPressListener } from "../../directives/longPress";
 
 import { Draggable } from "./Draggable";
 import { TOUCH_HOLD_EVENT, TOUCH_HOLD_MS, TOUCH_MENU_MS } from "./touchHold";
-import { touchLift } from "./touchLift";
 
 vi.mock("@lingui/solid/macro", () => ({ useLingui: () => ({ t: String }) }));
 vi.mock("@lingui/solid", () => {
@@ -105,8 +104,14 @@ function land(el: HTMLElement, x: number, y: number) {
   return start;
 }
 
-const lifted = (el: HTMLElement) =>
-  touchLift.split(" ").every((name) => el.classList.contains(name));
+const lifted = (el: HTMLElement) => el.hasAttribute("data-lifted");
+
+/** Pretend the screen is a touch screen (pointer: coarse) or not */
+function coarse(on: boolean) {
+  window.matchMedia = ((query: string) => ({
+    matches: on && query.includes("coarse"),
+  })) as unknown as typeof window.matchMedia;
+}
 
 describe("Draggable with a finger (touchHold)", () => {
   it("keeps the finger's own touch start from the drag zone only", () => {
@@ -134,9 +139,11 @@ describe("Draggable with a finger (touchHold)", () => {
   });
 
   it("a long press, then a move, hands the drag to the drag zone", async () => {
-    const { row } = mount({ touchHold: true });
+    const { host, row } = mount({ touchHold: true });
     const seen: Event[] = [];
     row("a").addEventListener("touchstart", (e) => seen.push(e));
+    const drawer = vi.fn();
+    host.parentElement!.addEventListener("touchstart", drawer);
 
     land(row("a").querySelector("span")!, 20, 10);
     vi.advanceTimersByTime(TOUCH_HOLD_MS);
@@ -151,8 +158,9 @@ describe("Draggable with a finger (touchHold)", () => {
     expect(handed.touches[0].clientY).toBe(10);
     expect(handed.touches[0].identifier).toBe(3);
     expect(typeof handed.touches[0].screenY).toBe("number");
-    // the drag zone took this one
+    // the drag zone took this one, and the drawer above never saw it
     expect(handed.defaultPrevented).toBe(true);
+    expect(drawer).toHaveBeenCalledTimes(1);
     // still lifted until the drag zone starts the drag
     expect(lifted(row("a"))).toBe(true);
 
@@ -232,7 +240,8 @@ describe("Draggable with a finger (touchHold)", () => {
     expect(start.defaultPrevented).toBe(true);
   });
 
-  it("a pen rests and lifts like a finger", () => {
+  it("a pen on a touch screen rests and lifts like a finger", () => {
+    coarse(true);
     const { row } = mount({ touchHold: true });
     row("a")
       .querySelector("span")!
@@ -240,5 +249,35 @@ describe("Draggable with a finger (touchHold)", () => {
     vi.advanceTimersByTime(TOUCH_HOLD_MS);
     expect(lifted(row("a"))).toBe(true);
     window.dispatchEvent(pointer("pointerup", 20, 10, "pen"));
+    coarse(false);
+  });
+
+  it("a pen on a drawing tablet keeps the instant drag", () => {
+    coarse(false);
+    const { row } = mount({ touchHold: true });
+    row("a")
+      .querySelector("span")!
+      .dispatchEvent(pointer("pointerdown", 20, 10, "pen"));
+    vi.advanceTimersByTime(TOUCH_HOLD_MS);
+    expect(lifted(row("a"))).toBe(false);
+  });
+
+  it("a finger the window lost does not keep the drag zone off", () => {
+    const { row } = mount({ touchHold: true });
+    land(row("a").querySelector("span")!, 20, 10);
+    // the app goes to the background before the finger lifts
+    window.dispatchEvent(new Event("blur"));
+    const start = new Event("touchstart", { bubbles: true, cancelable: true });
+    const point = {
+      identifier: 4,
+      clientX: 20,
+      clientY: 10,
+      screenX: 20,
+      screenY: 10,
+    };
+    Object.assign(start, { touches: [point], changedTouches: [point] });
+    row("a").dispatchEvent(start);
+    // the drag zone is on again: it takes a touch start
+    expect(start.defaultPrevented).toBe(true);
   });
 });

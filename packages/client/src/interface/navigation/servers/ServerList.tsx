@@ -21,7 +21,7 @@ import { VoiceStatus } from "@revolt/ui/components/design/VoiceStatus";
 import { Tooltip } from "@revolt/ui/components/floating";
 import { Icon } from "@revolt/ui/icons/Icon";
 
-import { touchLift } from "@revolt/ui/components/utils/touchLift";
+import { liftScope } from "@revolt/ui/components/utils/touchLift";
 
 import { keepEntries } from "./keepEntries";
 import { RailEntry, createRailDrag } from "./railDrag";
@@ -336,7 +336,7 @@ export const ServerList = (props: Props) => {
           </a>
         </Show>
         <LineDivider />
-        <div ref={rail} class={railList}>
+        <div ref={rail} class={`${railList} ${liftScope}`}>
           <For each={entries()}>
             {(entry) => (
               <Switch>
@@ -530,8 +530,6 @@ function ServerEntry(props: {
           [railHeld]:
             props.drag.dragging() === props.server.id ||
             props.drag.carrying() === props.server.id,
-          [touchLift]:
-            props.drag.lifted() === props.server.id && !props.drag.dragging(),
         }}
         use:floating={props.menuGenerator(props.server)}
       >
@@ -541,6 +539,12 @@ function ServerEntry(props: {
         <a
           draggable="false"
           tabindex="0"
+          // the icon itself lifts, so the shadow has its size and corners
+          data-lifted={
+            props.drag.lifted() === props.server.id && !props.drag.dragging()
+              ? ""
+              : undefined
+          }
           href={state.layout.getLastActiveServerPath(props.server.id)}
           aria-label={props.server.name}
         >
@@ -644,8 +648,6 @@ function FolderEntry(props: {
             [railHeld]:
               props.drag.dragging() === props.entry.id ||
               props.drag.carrying() === props.entry.id,
-            [touchLift]:
-              props.drag.lifted() === props.entry.id && !props.drag.dragging(),
           }}
           use:floating={{
             contextMenu: () => (
@@ -660,6 +662,11 @@ function FolderEntry(props: {
           <a
             role="button"
             tabindex="0"
+            data-lifted={
+              props.drag.lifted() === props.entry.id && !props.drag.dragging()
+                ? ""
+                : undefined
+            }
             aria-label={folderName()}
             aria-expanded={!collapsed()}
             onClick={() => state.ordering.toggleFolder(props.entry.folder.id)}
