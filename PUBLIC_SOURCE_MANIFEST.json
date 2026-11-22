@@ -262,8 +262,8 @@
     },
     {
       "path": "CHANGELOG.md",
-      "sha256": "b271b600301869d66fa0207422380aef7ecff512ac0165176bea08a65dd9e2f3",
-      "bytes": 196114,
+      "sha256": "0f3055bf5641dafe54df4ce9ba733c336b5fc188d5565a1b3b1e0dc79aaa370b",
+      "bytes": 196596,
       "category": "public-documentation"
     },
     {
@@ -2056,8 +2056,8 @@
     },
     {
       "path": "packages/client/components/app/interface/settings/user/Keybinds.tsx",
-      "sha256": "1a267df16ace96acdd650e3aa99228ba38d5044f70ca6a5f11ec3825d33f60b9",
-      "bytes": 25839,
+      "sha256": "8da9d75fc93bdf151a3053f8d31601fa01b669caf74ee684bf6933e11d893410",
+      "bytes": 26180,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -3568,8 +3568,8 @@
     },
     {
       "path": "packages/client/components/i18n/catalogs/ar/messages.po",
-      "sha256": "e373572caa80abda89406a33626fb2f15f5ff68e47e14852b434e19510bae442",
-      "bytes": 1255577,
+      "sha256": "d679bbd9bd0c1f7e9908acac305f2c9c9d3a06b09ab2026e98f356632b6ff053",
+      "bytes": 1256072,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -3712,8 +3712,8 @@
     },
     {
       "path": "packages/client/components/i18n/catalogs/de/messages.po",
-      "sha256": "8fd3adc7ac9a2b14600fcc7dee24be63cf4c135fb1cc39070cabf1bcd4cc7dfb",
-      "bytes": 1160277,
+      "sha256": "9f9671dbf18898f777b531cea0c921b49943c32625c677f9ee9bee02b84dfc74",
+      "bytes": 1160697,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -3748,8 +3748,8 @@
     },
     {
       "path": "packages/client/components/i18n/catalogs/en/messages.po",
-      "sha256": "d3b32c6fd3a1216998b3a86409e7e155ff9c6a311de1f4e68d96ac490f649d6b",
-      "bytes": 1117448,
+      "sha256": "cb6a80c3997bab2671bd391e83e79e7709576c89059f278656c6c28171a2d177",
+      "bytes": 1117846,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -7594,8 +7594,8 @@
     },
     {
       "path": "packages/client/components/ui/components/features/voice/callCard/VoiceCallCard.tsx",
-      "sha256": "cf6924f507ddc320c6a39bc0f4af7ed7918671ad3906276e5179466979e17fd7",
-      "bytes": 14908,
+      "sha256": "64d3c7149abee5b285a363fedc249338a945b7bb8a4337d4f6c916056c9ee844",
+      "bytes": 16377,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -7612,8 +7612,8 @@
     },
     {
       "path": "packages/client/components/ui/components/features/voice/callCard/VoiceCallCardPiP.tsx",
-      "sha256": "be24d10dc01312433a00736c45f1aaecc6e7bbc6572a5ad5f2a4895a081055e7",
-      "bytes": 5017,
+      "sha256": "7a43fe9ce20fa811a87c4ef5b077d8c01db890f91950348e326780dc7addaf36",
+      "bytes": 5162,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -7642,14 +7642,14 @@
     },
     {
       "path": "packages/client/components/ui/components/features/voice/callCard/floatingDrag.test.ts",
-      "sha256": "7f4794eab6d5c5bb965fd7741d1d565f7bcb238bef9e25d6691268c189d60db2",
-      "bytes": 3020,
+      "sha256": "10b0c84f360607ff4b01b3867d5354caa656de07203a1f72bf1dbe8b76e82780",
+      "bytes": 4426,
       "category": "synthetic-test-source-or-fixture"
     },
     {
       "path": "packages/client/components/ui/components/features/voice/callCard/floatingDrag.ts",
-      "sha256": "87a7ead0d58de9b49c4df5e0e32e5d4c548ba0c71c73ed74089aea063ed8cdf1",
-      "bytes": 7358,
+      "sha256": "898ad1d53b85f313ec61c161828d6c25dff4d3c693981f12b51c71e28517581a",
+      "bytes": 8545,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -41781,6 +41781,12 @@
       "category": "product-source-or-build-manifest"
     },
     {
+      "path": "packages/client/scripts/i18n/ui-2026112201.json",
+      "sha256": "2f46b1cb9241883b3886f7ce602031c0420ab1678d7c8155f5bb104d3be68add",
+      "bytes": 550,
+      "category": "product-source-or-build-manifest"
+    },
+    {
       "path": "packages/client/scripts/i18n/ui-210.json",
       "sha256": "a2000336a3928f21687a94a1262b2adbd34f017573f3d1b9b342b3ca93df6d09",
       "bytes": 644,
@@ -45210,7 +45216,7 @@
   "submodules": [
     {
       "path": "packages/stoat.js",
-      "commit": "d6e1a328f97fe829fe1cd1495055a077ff84e745"
+      "commit": "2bba21b08d1f644095d2cd62955518e13233763b"
     }
   ]
 }
