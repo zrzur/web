@@ -2,6 +2,11 @@
 
 ## Unreleased
 
+### Links to old messages land on phones (2026-11-22)
+
+* **A link to a message opened by a page load shows that message:** on phones the channel is drawn while the live connection is still being made. When the connection came up while the page around the message was on its way, the list treated it as a reconnect, loaded the newest page and dropped the jump, so the newest messages showed instead (seen in about half the tries at 375 px; desktop draws the channel later and hit it rarely). The jump now lands; if the connection came back meanwhile, newer messages are asked for again once it has landed (`history/controller.ts`).
+* **A search result, a pin or a picture in the channel's details shows the conversation on phones:** those lists are whole screens over the conversation, and they stayed open after a tap, so the message was loaded and marked behind them. Going to a message from them now closes the list (`TextChannel.tsx`). Desktop keeps the search beside the conversation.
+
 ### A friend request opens the sender's profile (2026-11-21)
 
 * **From the phone Notifications page:** the sender's picture and the line "… sent you a friend request" are one button (44 px high) that opens their profile. Screen readers hear the sentence they see as its name, then "Open profile" (ar, en, de) as its description. Accept, Decline and Send message are separate buttons and are not touched by it. The page closes first so the profile is not under it; the profile has its own Accept.

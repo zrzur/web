@@ -274,6 +274,25 @@ export function TextChannel(props: ChannelPageProps) {
     ),
   );
 
+  // Phones: search, pins and the channel's details are whole screens over
+  // the conversation. Going to a message from one of them (a result, a pin,
+  // a picture) shows the conversation, or the message lands out of sight.
+  createEffect(
+    on(
+      highlightMessageId,
+      (messageId) => {
+        if (
+          messageId &&
+          layout() === "phone" &&
+          sidebarState().state !== "default"
+        ) {
+          setSidebarState({ state: "default" });
+        }
+      },
+      { defer: true },
+    ),
+  );
+
   // If this is a server text channel, sync the members
   // todo: useQuery
   createEffect(
