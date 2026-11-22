@@ -1,4 +1,12 @@
-import { Accessor, JSX, Match, Show, Switch, onMount } from "solid-js";
+import {
+  Accessor,
+  JSX,
+  Match,
+  Show,
+  Switch,
+  onCleanup,
+  onMount,
+} from "solid-js";
 
 import { Trans } from "@lingui/solid/macro";
 import { styled } from "styled-system/jsx";
@@ -64,6 +72,12 @@ interface Props {
    * Whether there are elements appended after the message box row
    */
   hasActionsAppend: boolean;
+
+  /**
+   * Called when the box becomes narrower or wider than
+   * COMPOSER_COMPACT_WIDTH (the poll, GIF and voice buttons then hide)
+   */
+  onCompact?: (compact: boolean) => void;
 
   /**
    * Whether a reply bar or a row of files shows above the box
@@ -154,6 +168,18 @@ const Base = styled("div", {
     // into the message list behind it
     "& .cm-scroller": {
       overscrollBehavior: "contain",
+    },
+
+    // a narrow box (a 900 px window with the member list: 284 px) cannot
+    // hold the text and six buttons: the poll, GIF and voice buttons
+    // (data-composer-extra) step out and wait in the "+" menu instead, so
+    // the text keeps at least half of the box. 540 px = the six 40 px
+    // buttons, gaps, padding and border (266 px) plus as much again for the
+    // text; COMPOSER_COMPACT_WIDTH below is the same number for the "+" menu
+    containerType: "inline-size",
+    containerName: "composer",
+    "@container composer (max-width: 539.98px)": {
+      "& [data-composer-extra]": { display: "none" },
     },
 
     display: "flex",
@@ -306,9 +332,32 @@ const ActionContainer = styled("div", {
 });
 
 /**
+ * Below this width (the content box of the message box, px) the poll, GIF
+ * and voice buttons are hidden by the container query in Base and offered in
+ * the "+" menu (keep the two numbers equal)
+ */
+export const COMPOSER_COMPACT_WIDTH = 540;
+
+/**
  * Message box
  */
 export function MessageBox(props: Props) {
+  let box: HTMLDivElement | undefined;
+
+  // tell the composition when the box is narrow (same test as the
+  // container query), so the "+" opens a menu with the hidden buttons
+  onMount(() => {
+    if (!box || !props.onCompact || typeof ResizeObserver === "undefined")
+      return;
+    let last: boolean | undefined;
+    const observer = new ResizeObserver((entries) => {
+      const width = entries[entries.length - 1].contentRect.width;
+      const compact = width > 0 && width < COMPOSER_COMPACT_WIDTH;
+      if (compact !== last) props.onCompact?.((last = compact));
+    });
+    observer.observe(box);
+    onCleanup(() => observer.disconnect());
+  });
   // props.updateDraftSelection?.(
   //   event.currentTarget.selectionStart,
   //   event.currentTarget.selectionEnd,
@@ -324,6 +373,7 @@ export function MessageBox(props: Props) {
   return (
     <Parent>
       <Base
+        ref={box}
         hasActionsAppend={props.hasActionsAppend}
         crowded={!!props.crowded}
         data-composer-box

@@ -536,6 +536,10 @@ export function MessageComposition(props: Props) {
 
   // voice messages: recorded audio is sent as a normal attachment
   const [recording, setRecording] = createSignal(false);
+
+  // the message box is narrow: poll, GIF and voice live in the "+" menu
+  const [compact, setCompact] = createSignal(false);
+  const canGif = () => props.channel.havePermission("SendEmbeds");
   createEffect(
     on(
       () => props.channel.id,
@@ -627,19 +631,23 @@ export function MessageComposition(props: Props) {
           <Show
             when={
               props.channel.havePermission("UploadFiles") ||
-              (phone && canPoll())
+              (phone && canPoll()) ||
+              (!phone && compact() && (canPoll() || canGif()))
             }
             fallback={<MessageBox.InlineIcon size="short" />}
           >
             <MessageBox.InlineIcon>
               {/* phones: the plus opens a sheet of things to add; wider
                   screens upload a file with one click, and a right-click
-                  offers a file or a poll where polls can be posted */}
+                  offers a file or a poll where polls can be posted. In a
+                  narrow box (MessageBox COMPOSER_COMPACT_WIDTH) the poll,
+                  GIF and voice buttons are hidden and the plus opens a
+                  menu with them on a click */}
               <div
                 ref={addButton}
                 style={{ display: "contents" }}
                 use:floating={
-                  !phone && canPoll()
+                  !phone && (canPoll() || compact())
                     ? {
                         contextMenu: () => (
                           <ContextMenu>
@@ -651,29 +659,65 @@ export function MessageComposition(props: Props) {
                                 {t`Upload file`}
                               </ContextMenuButton>
                             </Show>
-                            <ContextMenuButton
-                              icon={<Icon name="poll" size={20} />}
-                              onClick={createPoll}
-                              data-testid="composer-create-poll"
+                            <Show when={canPoll()}>
+                              <ContextMenuButton
+                                icon={<Icon name="poll" size={20} />}
+                                onClick={createPoll}
+                                data-testid="composer-create-poll"
+                              >
+                                {t`Create poll`}
+                              </ContextMenuButton>
+                            </Show>
+                            <Show when={compact() && canGif()}>
+                              <ContextMenuButton
+                                icon={<Icon name="gif" size={20} />}
+                                onClick={(event) =>
+                                  pickerTriggers?.onClickGif(event, addButton)
+                                }
+                              >
+                                {t`GIF picker`}
+                              </ContextMenuButton>
+                            </Show>
+                            <Show
+                              when={
+                                compact() && canUploadFiles() && !recording()
+                              }
                             >
-                              {t`Create poll`}
-                            </ContextMenuButton>
+                              <ContextMenuButton
+                                icon={<Icon name="microphone" size={20} />}
+                                onClick={() => setRecording(true)}
+                              >
+                                {t`Voice message`}
+                              </ContextMenuButton>
+                            </Show>
                           </ContextMenu>
                         ),
+                        ...(compact()
+                          ? { contextMenuHandler: "click" as const }
+                          : {}),
                       }
                     : {}
                 }
               >
                 <IconButton
                   aria-label={
-                    phone ? (adding() ? t`Close` : t`Add`) : t`Upload file`
+                    phone
+                      ? adding()
+                        ? t`Close`
+                        : t`Add`
+                      : compact()
+                        ? t`Add`
+                        : t`Upload file`
                   }
-                  aria-haspopup={phone ? "dialog" : undefined}
+                  aria-haspopup={
+                    phone ? "dialog" : compact() ? "menu" : undefined
+                  }
                   aria-expanded={phone ? adding() : undefined}
                   data-testid="composer-add"
                   onPress={(event) => {
                     if (phone) pickerTriggers?.onClickAdd(event, addButton);
-                    else addFile();
+                    // narrow box: the click opens the menu (use:floating)
+                    else if (!compact() && canUploadFiles()) addFile();
                   }}
                 >
                   <span
@@ -726,7 +770,7 @@ export function MessageComposition(props: Props) {
                     {/* polls: their own button where they can be posted
                         (phones have it in the "+" sheet) */}
                     <Show when={canPoll() && draftEmpty() && !phone}>
-                      <MessageBox.InlineIcon>
+                      <MessageBox.InlineIcon data-composer-extra>
                         <IconButton
                           aria-label={t`Create poll`}
                           data-testid="composer-create-poll"
@@ -749,7 +793,9 @@ export function MessageComposition(props: Props) {
                         !(phone && canUploadFiles())
                       }
                     >
-                      <MessageBox.InlineIcon>
+                      <MessageBox.InlineIcon
+                        data-composer-extra={phone ? undefined : ""}
+                      >
                         <IconButton
                           aria-label={t`Open GIF picker`}
                           onPress={triggerProps.onClickGif}
@@ -779,7 +825,7 @@ export function MessageComposition(props: Props) {
                   draftEmpty() && canUploadFiles() && !recording() && !phone
                 }
               >
-                <MessageBox.InlineIcon>
+                <MessageBox.InlineIcon data-composer-extra>
                   <IconButton
                     aria-label={t`Record a voice message`}
                     onPress={() => setRecording(true)}
@@ -812,6 +858,7 @@ export function MessageComposition(props: Props) {
         hasActionsAppend={
           state.settings.getValue("appearance:show_send_button") || false
         }
+        onCompact={phone ? undefined : setCompact}
         crowded={
           (draft().files?.length ?? 0) > 0 || (draft().replies?.length ?? 0) > 0
         }
