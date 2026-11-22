@@ -98,7 +98,12 @@ describe("an on-screen keyboard", () => {
     expect(p.y + card.height).toBe(420 - BOTTOM_GAP);
   });
 
-  it("leaves a top corner where it is", () => {
+  it("puts a top corner below the top of what is visible", () => {
+    const p = cornerPosition("tr", card, { width: 375, height: 812 }, { top: 20, right: 0, bottom: 0, left: 0 }, { top: 100, height: 420 });
+    expect(p.y).toBe(100 + 20 + TOP_GAP);
+  });
+
+  it("leaves a top corner where it is when nothing is scrolled", () => {
     const p = cornerPosition("tl", card, { width: 375, height: 812 }, undefined, { top: 0, height: 420 });
     expect(p.y).toBe(TOP_GAP);
   });

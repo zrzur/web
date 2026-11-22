@@ -79,9 +79,9 @@ export type Visible = { top: number; height: number };
 /**
  * Top-left point of the card in a corner, clear of the header, the composer
  * and the safe area, and never off the visible screen. The bottom corners
- * sit above the bottom of what is really visible, so an on-screen keyboard
- * (iOS keeps the layout viewport and only shrinks the visual one) never
- * covers the card.
+ * sit above the bottom of what is really visible, and the top ones below
+ * its top, so an on-screen keyboard (iOS keeps the layout viewport and only
+ * shrinks and moves the visual one) never covers or hides the card.
  */
 export function cornerPosition(
   corner: Corner,
@@ -97,9 +97,12 @@ export function cornerPosition(
   const bottom = visible
     ? Math.min(viewport.height, visible.top + visible.height)
     : viewport.height;
+  // what is visible may start lower than the layout viewport (a page
+  // scrolled under the on-screen keyboard): the top corners follow it
+  const top = visible ? Math.max(0, visible.top) : 0;
   const y =
     corner[0] === "t"
-      ? insets.top + TOP_GAP
+      ? top + insets.top + TOP_GAP
       : bottom - insets.bottom - BOTTOM_GAP - card.height;
   return clampToViewport({ x, y }, card, viewport, insets);
 }
