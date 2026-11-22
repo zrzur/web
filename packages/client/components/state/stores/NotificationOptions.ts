@@ -7,9 +7,12 @@ import { State } from "..";
 
 import {
   type NotificationState,
+  effectiveChannelMute,
+  effectiveChannelState,
   effectiveServerState,
   effectiveSuppress,
   mentionsForNotification,
+  muteActive,
 } from "./notificationLevels";
 
 export type { NotificationState };
@@ -278,13 +281,15 @@ export class NotificationOptions extends AbstractSyncedStore<
    * @returns Notification state
    */
   computeForChannel(channel: Channel) {
-    return (
-      this.get().channel[channel.id] ??
-      // a thread or forum post follows its channel's choice
-      (channel.parentId ? this.get().channel[channel.parentId] : undefined) ??
-      this.computeForServer(channel.server) ??
-      DEFAULT_STATES[channel.type]
-    );
+    // a thread or forum post follows its channel's choice
+    return effectiveChannelState({
+      own: this.get().channel[channel.id],
+      parent: channel.parentId
+        ? this.get().channel[channel.parentId]
+        : undefined,
+      server: this.computeForServer(channel.server),
+      typeDefault: DEFAULT_STATES[channel.type],
+    });
   }
 
   /**
@@ -356,17 +361,17 @@ export class NotificationOptions extends AbstractSyncedStore<
    * @returns Whether this object is muted
    */
   isMuted(target?: Channel | Server): boolean {
-    let value: MuteState | undefined;
     if (target instanceof Channel) {
-      if (this.isMuted(target.server)) return true;
       // a thread or forum post is muted with its channel
-      if (target.parent && this.isChannelMuted(target.parent)) return true;
-      value = this.get().channel_mutes[target.id];
-    } else if (target instanceof Server) {
-      value = this.get().server_mutes[target.id];
+      return effectiveChannelMute({
+        server: this.isMuted(target.server),
+        parent: !!target.parent && this.isChannelMuted(target.parent),
+        own: this.isChannelMuted(target),
+      });
     }
-
-    return !!value && (!value.until || value.until > this.#now());
+    if (target instanceof Server)
+      return muteActive(this.get().server_mutes[target.id], this.#now());
+    return false;
   }
 
   /**
@@ -375,8 +380,7 @@ export class NotificationOptions extends AbstractSyncedStore<
    * @returns Whether this channel is muted
    */
   isChannelMuted(channel: Channel): boolean {
-    const value = this.get().channel_mutes[channel.id];
-    return !!value && (!value.until || value.until > this.#now());
+    return muteActive(this.get().channel_mutes[channel.id], this.#now());
   }
 }
 
