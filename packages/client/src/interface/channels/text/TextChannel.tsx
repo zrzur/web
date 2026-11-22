@@ -47,6 +47,7 @@ import {
 import { Channel } from "@zrzur/sdk/solid";
 
 import { isSelecting } from "@revolt/app/interface/channels/text/messageSelection";
+import { useMessageKeys } from "@revolt/app/interface/channels/text/useMessageKeys";
 
 import { writeAccess } from "@revolt/app/interface/channels/threadAccess";
 import { MessageComposition } from "./Composition";
@@ -241,6 +242,10 @@ export function TextChannel(props: ChannelPageProps) {
     // Chromium + webkit
     window.removeEventListener("focus", onFocus);
   });
+
+  // R reply, E edit, Delete, P pin, Ctrl+C on a message; Up and Down
+  // between messages; Page Up and Down (listed in Ctrl+/)
+  useMessageKeys();
 
   // Register ack/jump latest
   createKeybind(KeybindAction.CHAT_JUMP_END, () => {

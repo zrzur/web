@@ -5,7 +5,9 @@ import { css, cva } from "styled-system/css";
 import { styled } from "styled-system/jsx";
 
 import { useMessage } from "@revolt/app";
+import { messageAriaKeys } from "@revolt/app/interface/channels/text/messageKeys";
 import { useDevice } from "@revolt/common";
+import { deviceMac } from "@revolt/keybinds/active";
 import { Ripple, typography } from "@revolt/ui/components/design";
 import { Column, Row } from "@revolt/ui/components/layout";
 import {
@@ -138,6 +140,14 @@ const base = cva({
 
     transition: "background-color 120ms ease, border-color 120ms ease",
     _motionReduce: { transition: "none" },
+
+    // a message reached with Up and Down in the list
+    outline: "none",
+    _focusVisible: {
+      outline: "2px solid var(--z-accent)",
+      outlineOffset: "-2px",
+      borderRadius: "6px",
+    },
 
     "& a:hover": {
       textDecoration: "underline",
@@ -414,6 +424,11 @@ export function MessageContainer(props: Props) {
   return (
     <div
       id={message?.id}
+      // keys on a message (R reply, E edit, …): Up and Down in the list
+      // move the focus here (messageKeys.ts, listed in Ctrl+/)
+      data-message-row={message?.id}
+      tabIndex={message ? -1 : undefined}
+      aria-keyshortcuts={message ? messageAriaKeys(deviceMac()) : undefined}
       ref={props.ref}
       onMouseEnter={() => {
         setWanted(true);
