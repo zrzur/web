@@ -262,8 +262,8 @@
     },
     {
       "path": "CHANGELOG.md",
-      "sha256": "4fc89f9eb8fc067971b721c548db5d62f4bc72c46aef3a6dfc2600597a2f22ff",
-      "bytes": 194746,
+      "sha256": "b271b600301869d66fa0207422380aef7ecff512ac0165176bea08a65dd9e2f3",
+      "bytes": 196114,
       "category": "public-documentation"
     },
     {
@@ -7594,8 +7594,8 @@
     },
     {
       "path": "packages/client/components/ui/components/features/voice/callCard/VoiceCallCard.tsx",
-      "sha256": "78c494940027858dd7ddebee60eeb75dbe6d4456edb18c0b2213ae4f7c2676f9",
-      "bytes": 13777,
+      "sha256": "cf6924f507ddc320c6a39bc0f4af7ed7918671ad3906276e5179466979e17fd7",
+      "bytes": 14908,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -7612,8 +7612,8 @@
     },
     {
       "path": "packages/client/components/ui/components/features/voice/callCard/VoiceCallCardPiP.tsx",
-      "sha256": "4e52fdfbc75501180e7f9f1e1ef37a0c140de06e57953c48c17d91eeefb1ea5d",
-      "bytes": 4596,
+      "sha256": "be24d10dc01312433a00736c45f1aaecc6e7bbc6572a5ad5f2a4895a081055e7",
+      "bytes": 5017,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -7632,6 +7632,24 @@
       "path": "packages/client/components/ui/components/features/voice/callCard/VoiceCallCardStatus.tsx",
       "sha256": "af9d6de782cb30c591eef3b2799ba6fc64b766a2130615d9036ae9e4b04ff122",
       "bytes": 4883,
+      "category": "product-source-or-build-manifest"
+    },
+    {
+      "path": "packages/client/components/ui/components/features/voice/callCard/floatingDrag.dom.test.tsx",
+      "sha256": "cc88140552f5aa9ed80b5e9f8ab825244570d860ef6797e4bfe66a5541c7c2c8",
+      "bytes": 5449,
+      "category": "synthetic-test-source-or-fixture"
+    },
+    {
+      "path": "packages/client/components/ui/components/features/voice/callCard/floatingDrag.test.ts",
+      "sha256": "7f4794eab6d5c5bb965fd7741d1d565f7bcb238bef9e25d6691268c189d60db2",
+      "bytes": 3020,
+      "category": "synthetic-test-source-or-fixture"
+    },
+    {
+      "path": "packages/client/components/ui/components/features/voice/callCard/floatingDrag.ts",
+      "sha256": "87a7ead0d58de9b49c4df5e0e32e5d4c548ba0c71c73ed74089aea063ed8cdf1",
+      "bytes": 7358,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -45192,7 +45210,7 @@
   "submodules": [
     {
       "path": "packages/stoat.js",
-      "commit": "f999de3101a3bd41f54f256cda876f09252abf57"
+      "commit": "d6e1a328f97fe829fe1cd1495055a077ff84e745"
     }
   ]
 }
