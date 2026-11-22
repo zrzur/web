@@ -337,11 +337,8 @@ export function nameStyle(
   const light = options.surface ? options.surface === "light" : view.light;
   const moving = options.moving && !view.still;
   const own = options.colour !== false;
-  const list = own
-    ? colours(style.name_colour, NAME_MAX_COLOURS).map((c) =>
-        light ? nameColourForLight(c) : c,
-      )
-    : [];
+  const chosen = own ? colours(style.name_colour, NAME_MAX_COLOURS) : [];
+  const list = light ? chosen.map(nameColourForLight) : chosen;
   const effect = (NAME_EFFECTS as readonly string[]).includes(
     style.name_effect ?? "",
   )
@@ -386,10 +383,13 @@ export function nameStyle(
 
   // the effect on top; a clipped or borrowed fill takes it as a filter
   const glow = own ? (list[0] ?? "currentColor") : "currentColor";
+  // a halo is light: on a light surface it comes from the bright colour as
+  // chosen, not the darkened letters (a dark blur looks smudged there)
+  const shine = own ? (chosen[0] ?? "currentColor") : "currentColor";
   const asFilter = clipped || !own;
   if (effect === "halo") {
-    const near = `color-mix(in srgb, ${glow} ${light ? 55 : 70}%, transparent)`;
-    const far = `color-mix(in srgb, ${glow} ${light ? 25 : 40}%, transparent)`;
+    const near = `color-mix(in srgb, ${shine} ${light ? 60 : 70}%, transparent)`;
+    const far = `color-mix(in srgb, ${shine} ${light ? 30 : 40}%, transparent)`;
     if (asFilter)
       css.filter = `drop-shadow(0 0 4px ${near}) drop-shadow(0 0 10px ${far})`;
     else css["text-shadow"] = `0 0 6px ${near}, 0 0 14px ${far}`;

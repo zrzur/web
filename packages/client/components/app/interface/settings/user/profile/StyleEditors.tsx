@@ -5,7 +5,7 @@ import { styled } from "styled-system/jsx";
 
 import { useState } from "@revolt/state";
 import type { CollectibleRef } from "@revolt/state/stores/Collectibles";
-import { Avatar, Dialog, Segmented, UserStatus } from "@revolt/ui";
+import { Avatar, Dialog, UserStatus } from "@revolt/ui";
 import { ColourWell } from "@revolt/ui/components/design/ColourWell";
 import { AvatarDecoration } from "@revolt/ui/components/features/profiles/AvatarDecoration";
 import {
@@ -124,7 +124,8 @@ const modeOf = (count: number): NameMode =>
 
 /**
  * Display name style: font, colour (none, one, gradient or a spectrum of
- * three to five), and an effect on top. The preview shows dark and light.
+ * three to five), and an effect on top, with a live preview in the viewer's
+ * own theme. On a phone the preview stays pinned above the choices.
  */
 export function NameStyleDialog(props: {
   show: boolean;
@@ -140,7 +141,6 @@ export function NameStyleDialog(props: {
 }) {
   const { t, i18n } = useLingui();
   const fontLabel = useNameFontLabel();
-  const state = useState();
   // the dialog edits a copy; it opens fresh each time
   /* eslint-disable solid/reactivity */
   const [font, setFont] = createSignal(props.value.name_font ?? "default");
@@ -150,9 +150,6 @@ export function NameStyleDialog(props: {
   const [effect, setEffect] = createSignal<string | undefined>(
     props.value.name_effect,
   );
-  const [surface, setSurface] = createSignal<"dark" | "light">(
-    state.theme.activeTheme.darkMode ? "dark" : "light",
-  );
   /* eslint-enable solid/reactivity */
   const mode = () => modeOf(colour().length);
   const draft = (): UserStyle => ({
@@ -160,15 +157,20 @@ export function NameStyleDialog(props: {
     name_colour: colour(),
     name_effect: effect(),
   });
-  /** the preview's look: always drawn, moving, on the chosen surface */
-  const look = () =>
-    nameStyle(draft(), { always: true, moving: true, surface: surface() });
+  /** the preview's look: always drawn (even with name styles off), moving */
+  const look = () => nameStyle(draft(), { always: true, moving: true });
   const changed = () =>
     font() !== (props.value.name_font ?? "default") ||
     !sameColours(colour(), props.value.name_colour) ||
     effect() !== props.value.name_effect;
   const sample = () => (i18n().locale === "ar" ? "زر" : "Gg");
 
+  const modes = (): { id: NameMode; label: string }[] => [
+    { id: "none", label: t`None` },
+    { id: "solid", label: t`Solid` },
+    { id: "gradient", label: t`Gradient` },
+    { id: "spectrum", label: t`Spectrum` },
+  ];
   const effects = (): { id: NameEffect | undefined; label: string }[] => [
     { id: undefined, label: t`No effect` },
     { id: "halo", label: t`Halo` },
@@ -176,6 +178,12 @@ export function NameStyleDialog(props: {
     { id: "lifted", label: t`Lifted` },
     { id: "sheen", label: t`Sheen` },
   ];
+  const presets = () =>
+    mode() === "solid"
+      ? NAME_SOLIDS.map((c) => [c])
+      : mode() === "gradient"
+        ? NAME_GRADIENTS.map((g) => [...g])
+        : NAME_SPECTRA;
 
   function pickMode(next: NameMode) {
     const now = colour();
@@ -235,69 +243,105 @@ export function NameStyleDialog(props: {
         },
       ]}
     >
-      <Split>
-        <div>
-          <Label>
-            <Trans>Choose font</Trans>
-          </Label>
-          <FontGrid>
-            <For each={NAME_FONTS}>
-              {(option) => (
-                <Choice
-                  type="button"
-                  aria-pressed={font() === option.id}
-                  onClick={() => setFont(option.id)}
-                  style={nameStyle({ name_font: option.id }, { always: true })}
-                  title={fontLabel(option.id)}
-                  aria-label={fontLabel(option.id)}
-                >
-                  {sample()}
-                </Choice>
-              )}
-            </For>
-          </FontGrid>
+      <NsLayout>
+        {/* first in reading order: on a phone it stays pinned on top */}
+        <NsPreview aria-label={t`Preview`} role="group">
+          <NsProfile data-profile-preview>
+            <MiniBanner />
+            <MiniAvatar>
+              <Avatar size={64} src={props.avatar} fallback={props.name} />
+            </MiniAvatar>
+            <strong style={look()} data-name-preview>
+              <bdi>{props.name}</bdi>
+            </strong>
+            <Show when={props.handle}>
+              <small>
+                <bdi>@{props.handle}</bdi>
+              </small>
+            </Show>
+          </NsProfile>
+          <NsRows>
+            <NsMessage>
+              <Avatar size={32} src={props.avatar} fallback={props.name} />
+              <div>
+                <span class={"head"}>
+                  <strong style={look()} data-name-preview-row>
+                    <bdi>{props.name}</bdi>
+                  </strong>
+                  <time>
+                    <Trans>now</Trans>
+                  </time>
+                </span>
+                <span>
+                  <Trans>does anyone read this?</Trans>
+                </span>
+              </div>
+            </NsMessage>
+            <NsMember>
+              <Avatar size={24} src={props.avatar} fallback={props.name} />
+              <strong style={look()}>
+                <bdi>{props.name}</bdi>
+              </strong>
+            </NsMember>
+          </NsRows>
+          <NsNote data-wide>
+            <Trans>
+              In a server, a role colour wins over yours, but your font and
+              effect stay. On light themes your colours are darkened a little so
+              the name stays readable.
+            </Trans>
+          </NsNote>
+        </NsPreview>
 
-          <Label>
-            <Trans>Choose colour</Trans>
-          </Label>
-          <Modes>
-            <Mode
-              type="button"
-              aria-pressed={mode() === "none"}
-              onClick={() => pickMode("none")}
-            >
-              <Trans>None</Trans>
-            </Mode>
-            <Mode
-              type="button"
-              aria-pressed={mode() === "solid"}
-              onClick={() => pickMode("solid")}
-            >
-              <Trans>Solid</Trans>
-            </Mode>
-            <Mode
-              type="button"
-              aria-pressed={mode() === "gradient"}
-              onClick={() => pickMode("gradient")}
-            >
-              <Trans>Gradient</Trans>
-            </Mode>
-            <Mode
-              type="button"
-              aria-pressed={mode() === "spectrum"}
-              onClick={() => pickMode("spectrum")}
-            >
-              <Trans>Spectrum</Trans>
-            </Mode>
-          </Modes>
+        <NsForm>
+          <NsSection>
+            <NsLabel>
+              <Trans>Choose font</Trans>
+            </NsLabel>
+            <NsFonts>
+              <For each={NAME_FONTS}>
+                {(option) => (
+                  <NsFont
+                    type="button"
+                    aria-pressed={font() === option.id}
+                    onClick={() => setFont(option.id)}
+                    style={nameStyle(
+                      { name_font: option.id },
+                      { always: true },
+                    )}
+                    title={fontLabel(option.id)}
+                    aria-label={fontLabel(option.id)}
+                  >
+                    {sample()}
+                  </NsFont>
+                )}
+              </For>
+            </NsFonts>
+          </NsSection>
 
-          <Show when={mode() !== "none"}>
-            <ColourRow data-wrap>
-              <Index each={colour()}>
-                {(value, index) => (
-                  <ColourStop>
+          <NsSection>
+            <NsLabel>
+              <Trans>Choose colour</Trans>
+            </NsLabel>
+            <NsModes role="group">
+              <For each={modes()}>
+                {(option) => (
+                  <NsMode
+                    type="button"
+                    aria-pressed={mode() === option.id}
+                    onClick={() => pickMode(option.id)}
+                  >
+                    {option.label}
+                  </NsMode>
+                )}
+              </For>
+            </NsModes>
+
+            <Show when={mode() !== "none"}>
+              <NsStops>
+                <Index each={colour()}>
+                  {(value, index) => (
                     <ColourWell
-                      size="lg"
                       label={
                         index === 0
                           ? t`Pick a colour`
@@ -312,176 +356,121 @@ export function NameStyleDialog(props: {
                         )
                       }
                     />
-                    <Show when={mode() === "spectrum" && colour().length > 3}>
-                      <StopRemove
+                  )}
+                </Index>
+                <Show when={mode() === "spectrum"}>
+                  <NsStopButtons>
+                    <Show when={colour().length > 3}>
+                      <NsStopButton
                         type="button"
-                        aria-label={t`Remove colour ${index + 1}`}
+                        aria-label={t`Remove the last colour`}
+                        title={t`Remove the last colour`}
+                        onClick={() => setColour(colour().slice(0, -1))}
+                      >
+                        <Icon name="minus" size={18} />
+                      </NsStopButton>
+                    </Show>
+                    <Show when={colour().length < NAME_MAX_COLOURS}>
+                      <NsStopButton
+                        type="button"
+                        aria-label={t`Add a colour`}
+                        title={t`Add a colour`}
                         onClick={() =>
-                          setColour(colour().filter((_, at) => at !== index))
+                          setColour([
+                            ...colour(),
+                            NAME_SOLIDS[
+                              (colour().length * 5) % NAME_SOLIDS.length
+                            ],
+                          ])
                         }
                       >
-                        <Icon name="x" size={12} />
-                      </StopRemove>
+                        <Icon name="plus" size={18} />
+                      </NsStopButton>
                     </Show>
-                  </ColourStop>
-                )}
-              </Index>
-              <Show
-                when={
-                  mode() === "spectrum" && colour().length < NAME_MAX_COLOURS
-                }
-              >
-                <StopAdd
-                  type="button"
-                  aria-label={t`Add a colour`}
-                  onClick={() =>
-                    setColour([
-                      ...colour(),
-                      NAME_SOLIDS[(colour().length * 5) % NAME_SOLIDS.length],
-                    ])
-                  }
-                >
-                  <Icon name="plus" size={18} />
-                </StopAdd>
-              </Show>
-            </ColourRow>
-            <SmallSwatches data-mode={mode()}>
-              <For
-                each={
-                  mode() === "solid"
-                    ? NAME_SOLIDS.map((c) => [c])
-                    : mode() === "gradient"
-                      ? NAME_GRADIENTS.map((g) => [...g])
-                      : NAME_SPECTRA
-                }
-              >
+                  </NsStopButtons>
+                </Show>
+              </NsStops>
+
+              <NsPresets data-mode={mode()}>
+                <For each={presets()}>
+                  {(option) => (
+                    <NsPreset
+                      type="button"
+                      aria-label={option.join(" → ")}
+                      aria-pressed={sameColours(colour(), option)}
+                      onClick={() => setColour([...option])}
+                    >
+                      <span
+                        style={{
+                          background:
+                            option.length >= 2
+                              ? `linear-gradient(90deg, ${option.join(", ")})`
+                              : option[0],
+                        }}
+                      />
+                    </NsPreset>
+                  )}
+                </For>
+              </NsPresets>
+            </Show>
+          </NsSection>
+
+          <NsSection>
+            <NsLabel>
+              <Trans>Choose effect</Trans>
+            </NsLabel>
+            <NsEffects>
+              <For each={effects()}>
                 {(option) => (
-                  <SmallSwatch
+                  <NsEffect
                     type="button"
-                    aria-label={option.join(" → ")}
-                    aria-pressed={sameColours(colour(), option)}
-                    style={{
-                      background:
-                        option.length >= 2
-                          ? `linear-gradient(90deg, ${option.join(", ")})`
-                          : option[0],
-                    }}
-                    onClick={() => setColour([...option])}
-                  />
+                    aria-pressed={effect() === option.id}
+                    onClick={() => setEffect(option.id)}
+                    data-effect={option.id ?? "none"}
+                  >
+                    <b
+                      aria-hidden="true"
+                      style={nameStyle(
+                        {
+                          name_font: "bold",
+                          name_colour: colour().length
+                            ? colour()
+                            : ["#6dd5ed", "#b794ff"],
+                          name_effect: option.id,
+                        },
+                        { always: true },
+                      )}
+                    >
+                      {sample()}
+                    </b>
+                    <span>{option.label}</span>
+                  </NsEffect>
                 )}
               </For>
-            </SmallSwatches>
-          </Show>
+            </NsEffects>
+            <Show when={effect() === "edge" && colour().length >= 2}>
+              <NsNote>
+                <Trans>
+                  Edge: the first colour fills the letters, the second draws the
+                  border.
+                </Trans>
+              </NsNote>
+            </Show>
+          </NsSection>
 
-          <Label>
-            <Trans>Choose effect</Trans>
-          </Label>
-          <EffectGrid>
-            <For each={effects()}>
-              {(option) => (
-                <EffectTile
-                  type="button"
-                  aria-pressed={effect() === option.id}
-                  onClick={() => setEffect(option.id)}
-                  data-effect={option.id ?? "none"}
-                >
-                  <b
-                    aria-hidden="true"
-                    style={nameStyle(
-                      {
-                        name_font: "bold",
-                        name_colour: colour().length
-                          ? colour()
-                          : ["#6dd5ed", "#b794ff"],
-                        name_effect: option.id,
-                      },
-                      { always: true, surface: "dark" },
-                    )}
-                  >
-                    {sample()}
-                  </b>
-                  <span>{option.label}</span>
-                </EffectTile>
-              )}
-            </For>
-          </EffectGrid>
-          <Show when={effect() === "edge" && colour().length >= 2}>
-            <Note>
-              <Trans>
-                Edge: the first colour fills the letters, the second draws the
-                border.
-              </Trans>
-            </Note>
-          </Show>
-
-          <Surprise type="button" onClick={surprise}>
-            <Icon name="sparkle" size={16} />
+          <NsSurprise type="button" onClick={surprise}>
+            <Icon name="sparkle" size={18} />
             <Trans>Surprise me</Trans>
-          </Surprise>
-        </div>
-
-        <PreviewStack>
-          <PreviewHead>
-            <PreviewTitle id="name-preview-label">
-              <Trans>Preview</Trans>
-            </PreviewTitle>
-            <Segmented<"dark" | "light">
-              aria-labelledby="name-preview-label"
-              value={surface()}
-              onChange={setSurface}
-              options={[
-                { value: "dark", label: <Trans>Dark</Trans> },
-                { value: "light", label: <Trans>Light</Trans> },
-              ]}
-            />
-          </PreviewHead>
-          <PreviewSurface data-surface={surface()}>
-            <MiniProfile>
-              <MiniBanner />
-              <MiniAvatar>
-                <Avatar size={72} src={props.avatar} fallback={props.name} />
-              </MiniAvatar>
-              <strong style={look()} data-name-preview>
-                <bdi>{props.name}</bdi>
-              </strong>
-              <Show when={props.handle}>
-                <small>
-                  <bdi>@{props.handle}</bdi>
-                </small>
-              </Show>
-            </MiniProfile>
-            <PreviewMessage>
-              <Avatar size={36} src={props.avatar} fallback={props.name} />
-              <div>
-                <span class={"head"}>
-                  <strong style={look()}>
-                    <bdi>{props.name}</bdi>
-                  </strong>
-                  <time>
-                    <Trans>now</Trans>
-                  </time>
-                </span>
-                <span>
-                  <Trans>does anyone read this?</Trans>
-                </span>
-              </div>
-            </PreviewMessage>
-            <MemberRow>
-              <Avatar size={24} src={props.avatar} fallback={props.name} />
-              <strong style={look()}>
-                <bdi>{props.name}</bdi>
-              </strong>
-            </MemberRow>
-          </PreviewSurface>
-          <Note>
+          </NsSurprise>
+          <NsNote data-narrow>
             <Trans>
               In a server, a role colour wins over yours, but your font and
               effect stay. On light themes your colours are darkened a little so
               the name stays readable.
             </Trans>
-          </Note>
-        </PreviewStack>
-      </Split>
+          </NsNote>
+        </NsForm>
+      </NsLayout>
     </Dialog>
   );
 }
@@ -1252,24 +1241,6 @@ const Split = styled("div", {
   },
 });
 
-const Label = styled("div", {
-  base: {
-    margin: "4px 0 8px",
-    fontSize: "12px",
-    fontWeight: 700,
-    color: "var(--z-fg-secondary)",
-  },
-});
-
-const FontGrid = styled("div", {
-  base: {
-    display: "grid",
-    gridTemplateColumns: "repeat(4, minmax(0, 1fr))",
-    gap: "8px",
-    marginBottom: "16px",
-  },
-});
-
 const choice = {
   border: "1px solid var(--z-border-subtle)",
   borderRadius: "var(--z-radius, 10px)",
@@ -1286,198 +1257,368 @@ const choice = {
   _focusVisible: { outline: "2px solid var(--z-focus)", outlineOffset: "2px" },
 } as const;
 
-const Choice = styled("button", {
-  base: { ...choice, height: "52px", fontSize: "20px" },
+/* ---- display-name style dialog (its own parts; other dialogs keep theirs) ---- */
+
+/** one column on a phone; the preview beside the choices on wider screens */
+const NS_NARROW = "@media (max-width: 720px)";
+
+const NsLayout = styled("div", {
+  base: {
+    display: "grid",
+    gridTemplateColumns: "minmax(0, 1fr) 272px",
+    gap: "24px",
+    alignItems: "start",
+    [NS_NARROW]: { gridTemplateColumns: "minmax(0, 1fr)", gap: "4px" },
+  },
 });
 
-const Modes = styled("div", {
+const NsPreview = styled("div", {
+  base: {
+    gridColumn: "2",
+    gridRow: "1",
+    position: "sticky",
+    top: 0,
+    display: "flex",
+    flexDirection: "column",
+    gap: "12px",
+    [NS_NARROW]: {
+      gridColumn: "1",
+      // pinned on top while the choices scroll under it
+      zIndex: 2,
+      marginInline: "-16px",
+      paddingInline: "16px",
+      paddingBlock: "4px 12px",
+      background:
+        "var(--z-dialog-bg, var(--z-popover-bg, var(--z-bg-modal, var(--z-bg-raised))))",
+      borderBottom: "1px solid var(--z-border-subtle)",
+      // the sheet's body has a little room above its first row: cover it, so
+      // nothing scrolling under the preview peeks out above it
+      "&::before": {
+        content: '""',
+        position: "absolute",
+        insetInline: 0,
+        bottom: "100%",
+        height: "16px",
+        background: "inherit",
+      },
+      "& [data-profile-preview]": { display: "none" },
+      "& [data-wide]": { display: "none" },
+    },
+  },
+});
+
+/** small profile card: banner, avatar over it, name and handle */
+const NsProfile = styled("div", {
   base: {
     display: "flex",
-    flexWrap: "wrap",
-    gap: "8px",
-    marginBottom: "12px",
+    flexDirection: "column",
+    alignItems: "center",
+    gap: "2px",
+    paddingBottom: "16px",
+    overflow: "hidden",
+    borderRadius: "14px",
+    border: "1px solid var(--z-border-subtle)",
+    background: "var(--z-bg-input)",
+    "& strong": {
+      marginTop: "8px",
+      paddingInline: "16px",
+      maxWidth: "100%",
+      fontSize: "20px",
+      lineHeight: "28px",
+      fontWeight: 700,
+      overflow: "hidden",
+      whiteSpace: "nowrap",
+      textOverflow: "ellipsis",
+    },
+    "& small": { fontSize: "13px", color: "var(--z-fg-muted)" },
   },
 });
 
-const Mode = styled("button", {
+/** a message and a member-list row, in one box */
+const NsRows = styled("div", {
   base: {
-    ...choice,
-    height: "38px",
-    "@media (pointer: coarse)": { height: "44px" },
-    paddingInline: "14px",
-    font: "inherit",
-    fontSize: "14px",
-    fontWeight: 700,
+    overflow: "hidden",
+    borderRadius: "14px",
+    border: "1px solid var(--z-border-subtle)",
+    background: "var(--z-bg-input)",
   },
 });
 
-const ColourRow = styled("div", {
+const NsMessage = styled("div", {
   base: {
     display: "flex",
     alignItems: "center",
     gap: "12px",
-    "&[data-wrap]": { flexWrap: "wrap", marginBottom: "12px" },
-  },
-});
-
-const SmallSwatches = styled("div", {
-  base: {
-    display: "grid",
-    gridTemplateColumns: "repeat(auto-fill, minmax(34px, 1fr))",
-    gap: "6px",
-    marginBottom: "16px",
-    "&[data-mode='spectrum']": {
-      gridTemplateColumns: "repeat(auto-fill, minmax(72px, 1fr))",
+    padding: "12px",
+    "& > div": { display: "flex", flexDirection: "column", minWidth: 0 },
+    "& .head": {
+      display: "flex",
+      alignItems: "baseline",
+      gap: "8px",
+      minWidth: 0,
+    },
+    "& .head strong": {
+      fontSize: "15px",
+      fontWeight: 700,
+      overflow: "hidden",
+      whiteSpace: "nowrap",
+      textOverflow: "ellipsis",
+    },
+    "& time": { flexShrink: 0, fontSize: "12px", color: "var(--z-fg-muted)" },
+    "& > div > span:last-child": {
+      fontSize: "14px",
+      color: "var(--z-fg-primary)",
     },
   },
 });
 
-const SmallSwatch = styled("button", {
+const NsMember = styled("div", {
   base: {
-    width: "34px",
-    height: "24px",
-    border: "2px solid transparent",
-    borderRadius: "7px",
-    cursor: "pointer",
-    "&[aria-pressed='true']": { borderColor: "#fff" },
-    _focusVisible: {
-      outline: "2px solid var(--z-focus)",
-      outlineOffset: "2px",
+    display: "flex",
+    alignItems: "center",
+    gap: "12px",
+    padding: "10px 12px",
+    borderTop: "1px solid var(--z-border-subtle)",
+    "& strong": {
+      minWidth: 0,
+      fontSize: "14px",
+      fontWeight: 600,
+      overflow: "hidden",
+      whiteSpace: "nowrap",
+      textOverflow: "ellipsis",
     },
   },
 });
 
-const ColourStop = styled("div", {
-  base: { position: "relative", display: "inline-flex" },
+const NsForm = styled("div", {
+  base: {
+    gridColumn: "1",
+    gridRow: "1",
+    display: "flex",
+    flexDirection: "column",
+    gap: "24px",
+    minWidth: 0,
+    [NS_NARROW]: { gridRow: "2", paddingTop: "12px" },
+  },
 });
 
-/** small round × on a spectrum colour, inside the 44 px of its well */
-const StopRemove = styled("button", {
+const NsSection = styled("section", {
+  base: { display: "flex", flexDirection: "column", gap: "12px", minWidth: 0 },
+});
+
+const NsLabel = styled("h3", {
   base: {
-    position: "absolute",
-    top: "-6px",
-    insetInlineEnd: "-6px",
-    display: "grid",
-    placeItems: "center",
-    width: "20px",
-    height: "20px",
-    padding: 0,
-    borderRadius: "50%",
-    border: "1px solid var(--z-border-strong)",
-    background: "var(--z-bg-raised)",
+    margin: 0,
+    fontSize: "13px",
+    lineHeight: "18px",
+    fontWeight: 700,
     color: "var(--z-fg-secondary)",
-    cursor: "pointer",
-    "--z-icon-color": "currentColor",
-    _hover: { color: "var(--z-fg-primary)" },
-    _focusVisible: {
-      outline: "2px solid var(--z-focus)",
-      outlineOffset: "2px",
-    },
   },
 });
 
-const StopAdd = styled("button", {
+const nsTile = {
+  border: "1px solid var(--z-border-subtle)",
+  borderRadius: "10px",
+  background: "var(--z-bg-input)",
+  color: "var(--z-fg-primary)",
+  cursor: "pointer",
+  transition: "border-color 0.12s ease, background 0.12s ease",
+  _hover: { borderColor: "var(--z-border-strong)" },
+  "&[aria-pressed='true']": {
+    borderColor: "var(--z-accent)",
+    boxShadow: "inset 0 0 0 1px var(--z-accent)",
+    background: "color-mix(in srgb, var(--z-accent) 10%, var(--z-bg-input))",
+  },
+  _focusVisible: { outline: "2px solid var(--z-focus)", outlineOffset: "2px" },
+} as const;
+
+const NsFonts = styled("div", {
   base: {
-    ...choice,
+    display: "grid",
+    gridTemplateColumns: "repeat(5, minmax(0, 1fr))",
+    gap: "8px",
+  },
+});
+
+const NsFont = styled("button", {
+  base: { ...nsTile, height: "52px", padding: 0, fontSize: "20px" },
+});
+
+/** four equal parts in one row */
+const NsModes = styled("div", {
+  base: {
+    display: "grid",
+    gridTemplateColumns: "repeat(4, minmax(0, 1fr))",
+    gap: "8px",
+  },
+});
+
+const NsMode = styled("button", {
+  base: {
+    ...nsTile,
+    minHeight: "44px",
+    paddingInline: "4px",
+    font: "inherit",
+    fontSize: "14px",
+    fontWeight: 700,
+    whiteSpace: "nowrap",
+    overflow: "hidden",
+    textOverflow: "ellipsis",
+    [NS_NARROW]: { fontSize: "13px" },
+  },
+});
+
+/** the chosen colours, then − and + for a spectrum */
+const NsStops = styled("div", {
+  base: {
+    display: "flex",
+    alignItems: "center",
+    flexWrap: "wrap",
+    gap: "8px",
+    // the wells are 44 px everywhere in this dialog
+    "& > label": { width: "44px", height: "44px", borderRadius: "10px" },
+  },
+});
+
+const NsStopButtons = styled("div", {
+  base: { display: "flex", gap: "8px", marginInlineStart: "4px" },
+});
+
+const NsStopButton = styled("button", {
+  base: {
+    ...nsTile,
     display: "grid",
     placeItems: "center",
     width: "44px",
     height: "44px",
     padding: 0,
-    borderStyle: "dashed",
     color: "var(--z-fg-secondary)",
     "--z-icon-color": "currentColor",
-  },
-});
-
-const EffectGrid = styled("div", {
-  base: {
-    display: "grid",
-    gridTemplateColumns: "repeat(5, minmax(0, 1fr))",
-    gap: "8px",
-    marginBottom: "8px",
-    "@media (max-width: 480px)": {
-      gridTemplateColumns: "repeat(3, minmax(0, 1fr))",
+    _hover: {
+      borderColor: "var(--z-border-strong)",
+      color: "var(--z-fg-primary)",
     },
-  },
-});
-
-const EffectTile = styled("button", {
-  base: {
-    ...choice,
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center",
-    justifyContent: "center",
-    gap: "2px",
-    minHeight: "64px",
-    padding: "8px 4px",
-    font: "inherit",
-    "& b": { fontSize: "20px", lineHeight: "26px" },
-    "& span": { fontSize: "12px", color: "var(--z-fg-secondary)" },
-  },
-});
-
-const PreviewHead = styled("div", {
-  base: {
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "space-between",
-    flexWrap: "wrap",
-    gap: "8px",
-  },
-});
-
-const PreviewTitle = styled("span", {
-  base: {
-    fontSize: "12px",
-    fontWeight: 700,
-    color: "var(--z-fg-secondary)",
   },
 });
 
 /**
- * The preview's own surface. Light draws with the light theme's surface and
- * ink values (ZRZUR_LIGHT), so a dark-theme user sees how their name reads
- * there too.
+ * Ready-made colours. A desktop shows them all; a phone scrolls the row
+ * sideways (its own scroll, never the page's).
  */
-const PreviewSurface = styled("div", {
+const NsPresets = styled("div", {
   base: {
-    display: "flex",
-    flexDirection: "column",
-    gap: "10px",
-    padding: "10px",
-    borderRadius: "calc(var(--z-radius, 10px) + 4px)",
-    border: "1px solid var(--z-border-subtle)",
-    "&[data-surface='light']": {
-      "--z-bg-input": "#EEF0F7",
-      "--z-bg-raised": "#E7E8F2",
-      "--z-border-subtle": "#DADCEA",
-      "--z-fg-primary": "#171925",
-      "--z-fg-secondary": "#454A62",
-      "--z-fg-muted": "#5E6379",
-      background: "#FFFFFF",
-      color: "#171925",
+    display: "grid",
+    gridTemplateColumns: "repeat(auto-fill, minmax(44px, 1fr))",
+    gap: "8px",
+    "&[data-mode='gradient'], &[data-mode='spectrum']": {
+      gridTemplateColumns: "repeat(auto-fill, minmax(64px, 1fr))",
+    },
+    [NS_NARROW]: {
+      display: "flex",
+      overflowX: "auto",
+      overscrollBehaviorX: "contain",
+      scrollbarWidth: "none",
+      marginInline: "-16px",
+      paddingInline: "16px",
+      paddingBlock: "2px",
+      "&::-webkit-scrollbar": { display: "none" },
+      "& > button": { flex: "0 0 44px" },
+      "&[data-mode='gradient'] > button, &[data-mode='spectrum'] > button": {
+        flex: "0 0 72px",
+      },
     },
   },
 });
 
-const Surprise = styled("button", {
+/** 44 px to tap; the colour inside it */
+const NsPreset = styled("button", {
   base: {
+    height: "44px",
+    padding: "4px",
+    border: "2px solid transparent",
+    borderRadius: "12px",
+    background: "none",
+    cursor: "pointer",
+    "& > span": {
+      display: "block",
+      width: "100%",
+      height: "100%",
+      borderRadius: "8px",
+      boxShadow: "inset 0 0 0 1px rgb(255 255 255 / 0.08)",
+    },
+    "&[aria-pressed='true']": { borderColor: "var(--z-accent)" },
+    _focusVisible: {
+      outline: "2px solid var(--z-focus)",
+      outlineOffset: "2px",
+    },
+  },
+});
+
+const NsEffects = styled("div", {
+  base: {
+    display: "grid",
+    gridTemplateColumns: "repeat(5, minmax(0, 1fr))",
+    gap: "8px",
+    [NS_NARROW]: {
+      display: "flex",
+      overflowX: "auto",
+      overscrollBehaviorX: "contain",
+      scrollbarWidth: "none",
+      marginInline: "-16px",
+      paddingInline: "16px",
+      paddingBlock: "2px",
+      "&::-webkit-scrollbar": { display: "none" },
+      "& > button": { flex: "0 0 84px" },
+    },
+  },
+});
+
+const NsEffect = styled("button", {
+  base: {
+    ...nsTile,
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+    justifyContent: "center",
+    gap: "4px",
+    minHeight: "72px",
+    padding: "8px 4px",
+    font: "inherit",
+    "& b": { fontSize: "22px", lineHeight: "28px" },
+    "& span": {
+      fontSize: "12px",
+      lineHeight: "16px",
+      color: "var(--z-fg-secondary)",
+      textAlign: "center",
+    },
+    "&[aria-pressed='true'] span": { color: "var(--z-fg-primary)" },
+  },
+});
+
+const NsSurprise = styled("button", {
+  base: {
+    ...nsTile,
+    alignSelf: "flex-start",
     display: "inline-flex",
     alignItems: "center",
-    gap: "6px",
-    marginTop: "16px",
-    padding: 0,
-    border: "none",
-    background: "none",
-    color: "var(--z-fg-secondary)",
+    gap: "8px",
+    minHeight: "44px",
+    paddingInline: "16px",
     font: "inherit",
     fontSize: "14px",
     fontWeight: 600,
-    cursor: "pointer",
     "--z-icon-color": "currentColor",
-    _hover: { color: "var(--z-fg-primary)" },
+  },
+});
+
+const NsNote = styled("p", {
+  base: {
+    margin: 0,
+    fontSize: "13px",
+    lineHeight: "20px",
+    color: "var(--z-fg-muted)",
+    "&[data-narrow]": { display: "none" },
+    [NS_NARROW]: { "&[data-narrow]": { display: "block" } },
   },
 });
 
@@ -1529,24 +1670,6 @@ const PreviewMessage = styled("div", {
   },
 });
 
-/** Small profile card: banner, avatar overlapping it, name and handle */
-const MiniProfile = styled("div", {
-  base: {
-    position: "relative",
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center",
-    gap: "2px",
-    paddingBottom: "16px",
-    overflow: "hidden",
-    borderRadius: "calc(var(--z-radius, 10px) + 4px)",
-    border: "1px solid var(--z-border-subtle)",
-    background: "var(--z-bg-input)",
-    "& strong": { marginTop: "8px", fontSize: "20px", fontWeight: 700 },
-    "& small": { fontSize: "13px", color: "var(--z-fg-muted)" },
-  },
-});
-
 const MiniBanner = styled("div", {
   base: {
     alignSelf: "stretch",
@@ -1563,26 +1686,6 @@ const MiniAvatar = styled("div", {
     borderRadius: "50%",
     background: "var(--z-bg-input)",
     lineHeight: 0,
-  },
-});
-
-/** A member-list row */
-const MemberRow = styled("div", {
-  base: {
-    display: "flex",
-    alignItems: "center",
-    gap: "10px",
-    padding: "8px 12px",
-    borderRadius: "var(--z-radius, 10px)",
-    border: "1px solid var(--z-border-subtle)",
-    background: "var(--z-bg-input)",
-    "& strong": { fontSize: "14px", fontWeight: 600 },
-    "&[data-plain]": {
-      border: "none",
-      borderTop: "1px solid var(--z-border-subtle)",
-      borderRadius: 0,
-      background: "none",
-    },
   },
 });
 

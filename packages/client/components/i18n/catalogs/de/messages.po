@@ -31185,10 +31185,9 @@ msgstr "Farbe hinzufügen"
 msgid "Colour {0}"
 msgstr "Farbe {0}"
 
-#. placeholder {0}: index + 1
 #: components/app/interface/settings/user/profile/StyleEditors.tsx
-msgid "Remove colour {0}"
-msgstr "Farbe {0} entfernen"
+msgid "Remove the last colour"
+msgstr "Letzte Farbe entfernen"
 
 #: components/app/interface/settings/user/profile/StyleEditors.tsx
 msgid "Edge: the first colour fills the letters, the second draws the border."
