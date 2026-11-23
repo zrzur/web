@@ -37,11 +37,20 @@ export function dmBot(channel: Channel): User | undefined {
  * Whether the empty conversation still waits for Start: nobody wrote in it
  * and Start was not pressed (a bot link opened again resets that). With
  * messages, a bot link gets the Start bar above the message box instead.
+ *
+ * The card is drawn only once the history is loaded to its start, so the
+ * messages the app holds decide: the channel's last message id can still
+ * name a message that was deleted.
  */
 export function waitsForStart(client: Client, channel: Channel) {
   const bot = dmBot(channel);
   if (!bot || bot.relationship === "Blocked") return false;
-  return !hasHistory(client, channel) && !botStartState.started[channel.id];
+  return !loadedMessage(client, channel) && !botStartState.started[channel.id];
+}
+
+/** A message of this conversation the app holds, if any */
+function loadedMessage(client: Client, channel: Channel) {
+  return client.messages.find((message) => message.channelId === channel.id);
 }
 
 /**
@@ -50,10 +59,7 @@ export function waitsForStart(client: Client, channel: Channel) {
  * then has none: the messages the app holds count too.
  */
 export function hasHistory(client: Client, channel: Channel) {
-  return (
-    !!channel.lastMessageId ||
-    !!client.messages.find((message) => message.channelId === channel.id)
-  );
+  return !!channel.lastMessageId || !!loadedMessage(client, channel);
 }
 
 /** Restart bot: unblock it, then press Start again */
