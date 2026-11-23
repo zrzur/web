@@ -13,26 +13,13 @@ import { Avatar, Button } from "@revolt/ui";
 import { BotLabel } from "@revolt/ui/components/features/profiles/BotLabel";
 import { Icon } from "@revolt/ui/icons/Icon";
 
-import {
-  botDmsOn,
-  dmBot,
-  markStarted,
-  startPlace,
-  waitingPayload,
-} from "./botLinks";
+import { useBotDms } from "./botDms";
+import { dmBot, markStarted, startPlace, waitingPayload } from "./botLinks";
 import { interactionState, loadDmCommands, runStart } from "./store";
 import { localized } from "./types";
 
-export { botDmsOn, dmBot, startPlace };
-
 /** Commands shown before "and N more" */
 const SHOWN = 5;
-
-/** Whether bots can be started in DMs on this server (`features.bot_dms`) */
-export function useBotDms() {
-  const client = useClient();
-  return () => botDmsOn(client());
-}
 
 /** Restart bot: unblock it, then press Start again */
 function useRestartBot(channel: () => Channel) {

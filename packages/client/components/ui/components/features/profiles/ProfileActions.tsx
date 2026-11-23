@@ -12,7 +12,7 @@ import { Icon } from "@revolt/ui/icons/Icon";
 
 import { Button } from "../../design";
 
-import { useBotDms } from "@revolt/app/interface/channels/text/interactions/BotStart";
+import { useBotDms } from "@revolt/app/interface/channels/text/interactions/botDms";
 
 import { usePublicBot } from "./usePublicBot";
 

@@ -48,13 +48,15 @@ import { Channel } from "@zrzur/sdk/solid";
 
 import { isSelecting } from "@revolt/app/interface/channels/text/messageSelection";
 
+import { useBotDms } from "@revolt/app/interface/channels/text/interactions/botDms";
+import {
+  dmBot,
+  startPlace,
+} from "@revolt/app/interface/channels/text/interactions/botLinks";
 import {
   BotStartBar,
   BotStopped,
-  dmBot,
-  startPlace,
-  useBotDms,
-} from "@revolt/app/interface/channels/text/interactions/BotStart";
+} from "@revolt/app/interface/channels/text/interactions/botStartParts";
 import { writeAccess } from "@revolt/app/interface/channels/threadAccess";
 import { MessageComposition } from "./Composition";
 import { isLargeServer } from "./largeServer";

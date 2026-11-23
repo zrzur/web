@@ -4,11 +4,9 @@ import { Trans } from "@lingui/solid/macro";
 import { Channel } from "@zrzur/sdk/solid";
 import { styled } from "styled-system/jsx";
 
-import {
-  BotStart,
-  dmBot,
-  useBotDms,
-} from "@revolt/app/interface/channels/text/interactions/BotStart";
+import { useBotDms } from "@revolt/app/interface/channels/text/interactions/botDms";
+import { dmBot } from "@revolt/app/interface/channels/text/interactions/botLinks";
+import { BotStart } from "@revolt/app/interface/channels/text/interactions/botStartParts";
 import { isOfficialChannel } from "@revolt/app/interface/support/official";
 import { Markdown } from "@revolt/markdown";
 import { useNavigate } from "@revolt/routing";

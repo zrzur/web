@@ -42,11 +42,11 @@ import {
   CommandPicker,
   runActiveCommand,
 } from "@revolt/app/interface/channels/text/interactions";
+import { useBotDms } from "@revolt/app/interface/channels/text/interactions/botDms";
 import {
   dmBot,
-  useBotDms,
-} from "@revolt/app/interface/channels/text/interactions/BotStart";
-import { markStarted } from "@revolt/app/interface/channels/text/interactions/botLinks";
+  markStarted,
+} from "@revolt/app/interface/channels/text/interactions/botLinks";
 import { pollsEnabled } from "@revolt/app/interface/channels/text/poll/pollModel";
 import {
   composerForShortcut,

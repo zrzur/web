@@ -35,11 +35,9 @@ import { lazyRetry } from "@revolt/ui/components/utils/lazyRetry";
 import { Icon } from "@revolt/ui/icons/Icon";
 import { RulesIcon } from "@revolt/ui/icons/RulesIcon";
 
-import {
-  BotMenuItems,
-  dmBot,
-  useBotDms,
-} from "@revolt/app/interface/channels/text/interactions/BotStart";
+import { useBotDms } from "@revolt/app/interface/channels/text/interactions/botDms";
+import { dmBot } from "@revolt/app/interface/channels/text/interactions/botLinks";
+import { BotMenuItems } from "@revolt/app/interface/channels/text/interactions/botStartParts";
 import {
   cancelSelection,
   isSelecting,
