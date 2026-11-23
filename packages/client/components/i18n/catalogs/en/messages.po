@@ -31389,3 +31389,60 @@ msgstr "You can't open this channel any more."
 #: components/app/interface/settings/user/Keybinds.tsx
 msgid "Your talk key holds these keys while talking from other apps is on."
 msgstr "Your talk key holds these keys while talking from other apps is on."
+
+#: components/app/interface/settings/user/profile/StyleEditors.tsx
+#: components/app/interface/settings/user/profile/UserProfileEditor.tsx
+msgid "Edge"
+msgstr "Edge"
+
+#: components/app/interface/settings/user/profile/StyleEditors.tsx
+#: components/app/interface/settings/user/profile/UserProfileEditor.tsx
+msgid "Lifted"
+msgstr "Lifted"
+
+#: components/app/interface/settings/user/profile/StyleEditors.tsx
+#: components/app/interface/settings/user/profile/UserProfileEditor.tsx
+msgid "Sheen"
+msgstr "Sheen"
+
+#: components/app/interface/settings/user/profile/StyleEditors.tsx
+#: components/app/interface/settings/user/profile/UserProfileEditor.tsx
+msgid "Spectrum"
+msgstr "Spectrum"
+
+#: components/app/interface/settings/user/profile/StyleEditors.tsx
+msgid "Choose effect"
+msgstr "Choose effect"
+
+#: components/app/interface/settings/user/profile/StyleEditors.tsx
+msgid "Add a colour"
+msgstr "Add a colour"
+
+#. placeholder {0}: index + 1
+#: components/app/interface/settings/user/profile/StyleEditors.tsx
+msgid "Colour {0}"
+msgstr "Colour {0}"
+
+#: components/app/interface/settings/user/profile/StyleEditors.tsx
+msgid "Remove the last colour"
+msgstr "Remove the last colour"
+
+#: components/app/interface/settings/user/profile/StyleEditors.tsx
+msgid "Edge: the first colour fills the letters, the second draws the border."
+msgstr "Edge: the first colour fills the letters, the second draws the border."
+
+#: components/app/interface/settings/user/profile/StyleEditors.tsx
+msgid "Pick a font, colours and an effect for your display name."
+msgstr "Pick a font, colours and an effect for your display name."
+
+#: components/app/interface/settings/user/profile/StyleEditors.tsx
+msgid "In a server, a role colour wins over yours, but your font and effect stay. On light themes your colours are darkened a little so the name stays readable."
+msgstr "In a server, a role colour wins over yours, but your font and effect stay. On light themes your colours are darkened a little so the name stays readable."
+
+#: components/app/interface/settings/user/Advanced.tsx
+msgid "Show name styles"
+msgstr "Show name styles"
+
+#: components/app/interface/settings/user/Advanced.tsx
+msgid "Fonts, colours and effects people chose for their names. Off shows every name plain."
+msgstr "Fonts, colours and effects people chose for their names. Off shows every name plain."

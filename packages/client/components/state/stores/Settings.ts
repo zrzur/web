@@ -71,6 +71,11 @@ interface SettingsDefinition {
   "appearance:profile_effects": boolean;
 
   /**
+   * Show the fonts, colours and effects people chose for their names
+   */
+  "appearance:name_styles": boolean;
+
+  /**
    * Indicate new users to Stoat
    * TODO: implement
    */
@@ -127,6 +132,7 @@ const EXPECTED_TYPES: { [K in keyof SettingsDefinition]: ValueType<K> } = {
   "appearance:show_send_button": "boolean",
   "appearance:compact_mode": "boolean",
   "appearance:profile_effects": "boolean",
+  "appearance:name_styles": "boolean",
   "advanced:copy_id": "boolean",
   "advanced:admin_panel": "boolean",
   "privacy:streamer_mode": "boolean",
@@ -175,6 +181,7 @@ export class Settings extends AbstractStore<"settings", TypeSettings> {
       "appearance:show_send_button": true,
       "appearance:compact_mode": false,
       "appearance:profile_effects": true,
+      "appearance:name_styles": true,
       "advanced:copy_id": false,
       "advanced:admin_panel": false,
     };

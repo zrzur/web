@@ -30,6 +30,7 @@ export default function AdvancedSettings() {
     key:
       | "appearance:compact_mode"
       | "appearance:profile_effects"
+      | "appearance:name_styles"
       | "advanced:copy_id",
     icon: IconName,
     title: string,
@@ -76,6 +77,12 @@ export default function AdvancedSettings() {
           "sparkle",
           t`Show profile effects`,
           t`Play the short effects people add to their profiles. They never play with reduced motion on.`,
+        )}
+        {settingRow(
+          "appearance:name_styles",
+          "text-aa",
+          t`Show name styles`,
+          t`Fonts, colours and effects people chose for their names. Off shows every name plain.`,
         )}
       </SettingsSection>
       <SettingsSection title={<Trans>Developer tools</Trans>}>

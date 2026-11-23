@@ -37,12 +37,13 @@ export function ProfileIdentity(props: {
   const style = () => {
     const chosen = userStyleOf(props.user);
     const theme = themeColours(chosen);
-    if (!theme) return nameStyle(chosen);
+    // one name on screen: a spectrum may flow, a sheen may pass
+    if (!theme) return nameStyle(chosen, { moving: true });
     const reads = readableName(chosen?.name_colour ?? [], readableTheme(theme));
     return reads
-      ? nameStyle(chosen)
+      ? nameStyle(chosen, { moving: true })
       : {
-          ...nameStyle(chosen, { colour: false }),
+          ...nameStyle(chosen, { colour: false, moving: true }),
           color: "var(--profile-ink, var(--z-fg-primary))",
         };
   };

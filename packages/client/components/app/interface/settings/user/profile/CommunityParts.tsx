@@ -49,6 +49,7 @@ export function useWearDesign() {
       ...(next.theme?.length ? { theme: next.theme } : {}),
       ...(next.name_font ? { name_font: next.name_font } : {}),
       ...(next.name_colour?.length ? { name_colour: next.name_colour } : {}),
+      ...(next.name_effect ? { name_effect: next.name_effect } : {}),
       ...(next.decoration ? { decoration: next.decoration } : {}),
       ...(next.nameplate ? { nameplate: next.nameplate } : {}),
       ...(next.effect ? { effect: next.effect } : {}),

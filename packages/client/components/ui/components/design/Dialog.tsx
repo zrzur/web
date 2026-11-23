@@ -349,20 +349,13 @@ export function Dialog(props: Props) {
               props.onClose();
             }
           }}
-          isDisabled={
-            action.isDisabled ||
-            action.isLoading ||
-            props.isDisabled
-          }
+          isDisabled={action.isDisabled || action.isLoading || props.isDisabled}
         >
           <Show when={action.isLoading}>
             <Spinner aria-hidden="true" />
           </Show>
           {actionIcon(action, index())}
-          <Show
-            when={action.variant === "warning"}
-            fallback={action.text}
-          >
+          <Show when={action.variant === "warning"} fallback={action.text}>
             <WarningLabel>{action.text}</WarningLabel>
           </Show>
         </Button>
@@ -920,7 +913,8 @@ const Actions = styled("div", {
     _phone: {
       flexDirection: "column-reverse",
       alignItems: "stretch",
-      "& > button": { width: "100%" },
+      // 44 px to tap on a phone (notes/mobile-design-rules.md §1)
+      "& > button": { width: "100%", minHeight: "44px" },
     },
     // at the end of a long form: one row in the given order, never wrapped;
     // on phones the buttons share the row
@@ -937,6 +931,7 @@ const Actions = styled("div", {
         paddingBlockEnd: "4px",
         "& > button": {
           width: "auto",
+          minHeight: "44px",
           flex: "1 1 auto",
           minWidth: 0,
           paddingInline: "8px",
