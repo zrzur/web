@@ -27,7 +27,7 @@ import { useDevice } from "@revolt/common";
 import { useModals } from "@revolt/modal";
 import { PluginHostGate } from "@revolt/plugins/PluginHostGate";
 import { ConfirmEmailStrip } from "@revolt/auth/src/invite/ConfirmEmailStrip";
-import { notePlace } from "@revolt/keybinds/quickSwitch";
+import { notePlace } from "@revolt/keybinds/recentPlaces";
 import { Navigate, useBeforeLeave, useLocation } from "@revolt/routing";
 import { useState } from "@revolt/state";
 import { LAYOUT_SECTIONS } from "@revolt/state/stores/Layout";

@@ -35,7 +35,7 @@ import {
   forgetStoredEphemeral,
 } from "../app/interface/channels/text/interactions/ephemeralStorage";
 import { forgetCreators } from "../common/lib/creatorCache";
-import { forgetRecentPlaces } from "../keybinds/quickSwitch";
+import { forgetRecentPlaces } from "../keybinds/recentPlaces";
 import { stillFileUrlsWhenSaving } from "../common/lib/saveData";
 import Instance from "../instance/Instance";
 import { killServiceWorkerSubscription } from "./NotificationsController";
