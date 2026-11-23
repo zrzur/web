@@ -5,6 +5,7 @@
 ### Weak network: the lists show while a slow server answers (2026-11-22)
 
 * **Computers and the desktop app open from the kept state when the line is slow:** phones already showed the servers, channels and messages kept from the last connection at once. Wider screens waited for the live connection's first answer, which takes 10–15 s for a busy account on a 400 kbps line. They now wait 1.5 s for it, then show what was kept, with "Connecting…" in the title bar, and the server's answer corrects it when it comes. On a good line the answer comes first and nothing changes (`components/client/Controller.ts`).
+* **A reconnect resumes the session:** after a drop the app asks the live connection for the same session, and only the events missed in between come again, in order. Before, every reconnect downloaded the whole first answer once more (407 KB for a busy account, 14 s on a 400 kbps line). When the server can't resume (more than 2 minutes away, or it restarted), it sends the whole answer, as before (`Controller.ts`, `Instance.ts`; SDK `connect({ resume: true })`).
 * **The fresh answer always wins:** when the server answered while the kept state was still being read from the device, the older kept state was put over the fresh one. It is now left out (`offline/index.ts`, every screen size).
 
 ### A friend request opens the sender's profile (2026-11-21)
