@@ -61,6 +61,12 @@ import { SidebarIcon } from "./SidebarIcon";
 
 import { RulesIcon } from "@revolt/ui/icons/RulesIcon";
 import { useListToggle } from "@revolt/ui/motion";
+import {
+  channelUnread,
+  forumUnread,
+  markServerRead,
+  serverHasNews,
+} from "../../channels/forum/unread";
 import { EventsLink } from "../../events/EventsLink";
 import { LobbyLink } from "../../lobby/LobbyLink";
 import { sidebarBase } from "./common";
@@ -135,6 +141,10 @@ export const ServerSidebar = (props: Props) => {
   // no dragging channels where the finger scrolls (phones, tablets)
   const noDrag = isMobile || fingerFirst;
   const client = useClient();
+  const hasNews = (channel: Channel) =>
+    channelUnread(client(), channel, (post) =>
+      state.notifications.isMuted(post),
+    );
   const { openModal, showError } = useModals();
 
   /** phones: type under the server name to narrow the channel list */
@@ -227,7 +237,7 @@ export const ServerSidebar = (props: Props) => {
             : category.id;
         return (
           state.layout.getSectionState(sectionId, true) ||
-          channel.unread ||
+          hasNews(channel) ||
           channel.id === props.channelId
         );
       });
@@ -264,10 +274,10 @@ export const ServerSidebar = (props: Props) => {
   );
 
   createKeybind(KeybindAction.CHAT_MARK_SERVER_AS_READ, () => {
-    if (props.server.unread) {
-      // a failed request is only a mark that comes back with the next sync
-      props.server.ack().catch(() => undefined);
-    }
+    const isMuted = (channel: Channel) => state.notifications.isMuted(channel);
+    // forums too: their posts are not in the server's channel list
+    if (serverHasNews(client(), props.server, isMuted))
+      void markServerRead(client(), props.server, isMuted);
   });
 
   const noOrdering = () => !props.server.havePermission("ManageChannel");
@@ -637,6 +647,11 @@ function Category(
     },
 ) {
   const state = useState();
+  const client = useClient();
+  const hasNews = (channel: Channel) =>
+    channelUnread(client(), channel, (post) =>
+      state.notifications.isMuted(post),
+    );
   const { t } = useLingui();
   const { openModal } = useModals();
   const sectionId = () =>
@@ -667,7 +682,9 @@ function Category(
       keep: (item) => {
         const id = rowChannelId(item);
         const channel = props.category.channels.find((c) => c.id === id);
-        return !!channel && (channel.unread || channel.id === props.channelId);
+        return (
+          !!channel && (hasNews(channel) || channel.id === props.channelId)
+        );
       },
       toggle: () => state.layout.toggleSectionState(sectionId(), true),
     });
@@ -716,7 +733,7 @@ function Category(
           (props.channelType === "Voice"
             ? channel.isVoice
             : !channel.isVoice)) &&
-        (isOpen() || channel.unread || channel.id === props.channelId),
+        (isOpen() || hasNews(channel) || channel.id === props.channelId),
     ),
   );
 
@@ -943,9 +960,21 @@ function Entry(
    * One badge at most, by rank: a mention count, else an unread dot.
    * Muted channels only surface mentions.
    */
+  // a forum has no messages of its own: its posts (threads) carry them
+  const forum = createMemo(() =>
+    props.channel.isForum
+      ? forumUnread(client(), props.channel, (post) =>
+          state.notifications.isMuted(post),
+        )
+      : undefined,
+  );
+  const unread = () => forum()?.unread ?? props.channel.unread;
+  const mentionCount = () =>
+    forum()?.mentions ?? props.channel.mentions?.size ?? 0;
+
   const alertState = createMemo(() => {
-    if (props.active || !props.channel.unread) return false;
-    const mentions = props.channel.mentions?.size ?? 0;
+    if (props.active || !unread()) return false;
+    const mentions = mentionCount();
     if (mentions) return mentions;
     return !muted();
   });
@@ -1025,7 +1054,7 @@ function Entry(
         ? "active"
         : muted()
           ? "muted"
-          : props.channel.unread
+          : unread()
             ? "active"
             : locked()
               ? "muted"
@@ -1090,8 +1119,8 @@ function Entry(
           }}
           use:floating={props.menuGenerator(props.channel)}
           size="normal"
-          data-unread={props.channel.unread ? "" : undefined}
-          data-mentions={props.channel.mentions?.size || undefined}
+          data-unread={unread() ? "" : undefined}
+          data-mentions={mentionCount() || undefined}
           alert={alertState()}
           attention={attentionState()}
           icon={

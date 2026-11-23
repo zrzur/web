@@ -31174,3 +31174,12 @@ msgstr "Your message is longer than the limit."
 #: components/ui/components/features/messaging/elements/PlaybackFailure.tsx
 msgid "This file could not be played. Check your connection and try again."
 msgstr "This file could not be played. Check your connection and try again."
+
+#: src/interface/channels/forum/ForumChannel.tsx
+msgctxt "forum post"
+msgid "New"
+msgstr "New"
+
+#: src/interface/channels/forum/ForumChannel.tsx
+msgid "{0, plural, one {# mention} other {# mentions}}"
+msgstr "{0, plural, one {# mention} other {# mentions}}"

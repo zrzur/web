@@ -21,6 +21,8 @@ import { VoiceStatus } from "@revolt/ui/components/design/VoiceStatus";
 import { Tooltip } from "@revolt/ui/components/floating";
 import { Icon } from "@revolt/ui/icons/Icon";
 
+import { serverForumsUnread } from "../../channels/forum/unread";
+
 import { RailEntry, createRailDrag } from "./railDrag";
 
 interface Props {
@@ -463,6 +465,17 @@ function ServerEntry(props: {
   drag: RailDrag;
 }) {
   const state = useState();
+  const client = useClient();
+
+  // forums carry their messages in their posts (threads)
+  const forums = createMemo(() =>
+    serverForumsUnread(
+      client(),
+      props.server,
+      (post) => state.notifications.isMuted(post),
+      (forum) => state.notifications.isChannelMuted(forum),
+    ),
+  );
 
   // Mention count for the server badge, excluding channel-muted channels
   const mentions = () =>
@@ -473,7 +486,7 @@ function ServerEntry(props: {
           ? 0
           : (channel.mentions?.size ?? 0)),
       0,
-    );
+    ) + forums().mentions;
 
   return (
     <Tooltip
@@ -513,7 +526,7 @@ function ServerEntry(props: {
           indicator:
             props.selectedServer() === props.server.id
               ? "selected"
-              : props.server.unread &&
+              : (props.server.unread || forums().unread) &&
                   !state.notifications.isMuted(props.server)
                 ? "alert"
                 : undefined,
@@ -525,6 +538,13 @@ function ServerEntry(props: {
             props.drag.carrying() === props.server.id,
         }}
         use:floating={props.menuGenerator(props.server)}
+        data-server-unread={
+          (props.server.unread || forums().unread) &&
+          !state.notifications.isMuted(props.server)
+            ? ""
+            : undefined
+        }
+        data-mentions={mentions() || undefined}
       >
         <Show when={isInsertionBefore(props.drag, props.server.id)}>
           <div class={railInsertion} />
@@ -577,7 +597,26 @@ function FolderEntry(props: {
   drag: RailDrag;
 }) {
   const state = useState();
+  const client = useClient();
   const { t } = useLingui();
+
+  // one pass over the folder's servers, not one per read of the badge
+  const forums = createMemo(
+    () =>
+      new Map(
+        props.entry.servers.map((server) => [
+          server.id,
+          serverForumsUnread(
+            client(),
+            server,
+            (post) => state.notifications.isMuted(post),
+            (forum) => state.notifications.isChannelMuted(forum),
+          ),
+        ]),
+      ),
+  );
+  const forumsOf = (server: Server) =>
+    forums().get(server.id) ?? { unread: false, mentions: 0 };
 
   const collapsed = () => props.entry.folder.collapsed ?? false;
 
@@ -595,13 +634,16 @@ function FolderEntry(props: {
               ? 0
               : (channel.mentions?.size ?? 0)),
           0,
-        ),
+        ) +
+        forumsOf(server).mentions,
       0,
     );
 
   const unread = () =>
     props.entry.servers.some(
-      (server) => server.unread && !state.notifications.isMuted(server),
+      (server) =>
+        (server.unread || forumsOf(server).unread) &&
+        !state.notifications.isMuted(server),
     );
 
   const holdsSelected = () =>

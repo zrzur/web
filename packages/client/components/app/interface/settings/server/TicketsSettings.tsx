@@ -5,7 +5,7 @@ import type { Channel, Server, TicketType } from "@zrzur/sdk/solid";
 import { styled } from "styled-system/jsx";
 
 import { useClient } from "@revolt/client";
-import { TranslatedError } from "@revolt/i18n/errors";
+import { TranslatedError, useError } from "@revolt/i18n/errors";
 import { useModals } from "@revolt/modal";
 import { useNavigate } from "@revolt/routing";
 import {
@@ -21,6 +21,7 @@ import {
 } from "@revolt/ui";
 import { Icon } from "@revolt/ui/icons/Icon";
 
+import { usePageSaveRegistration } from "./pageSave";
 import { useSaved } from "./savedNotice";
 
 type Draft = {
@@ -56,6 +57,7 @@ const newId = () =>
 export function TicketsSettings(props: { server: Server }) {
   const { t } = useLingui();
   const saved = useSaved();
+  const errorText = useError();
   const [pending, setPending] = createSignal(false);
   const [error, setError] = createSignal<unknown>();
   // eslint-disable-next-line solid/reactivity
@@ -69,6 +71,20 @@ export function TicketsSettings(props: { server: Server }) {
     equals: (a, b) => a.length === b.length && a.every((id, i) => id === b[i]),
   });
   const typesReady = () => draft().types.every((type) => type.name.trim());
+
+  // Changes join the page's one save bar ("Unsaved changes · Save
+  // changes"), as every other part of Overview does; the bar stays in
+  // sight wherever on the page the change was made. Only outside a page
+  // with that bar does this part show its own Save.
+  const inPageBar = usePageSaveRegistration({
+    dirty: () => on() && canManage() && dirty(),
+    saving: pending,
+    // plain words on the bar; the details stay under the section
+    error: () => (error() ? errorText(error()) : undefined),
+    canSave: typesReady,
+    reset: () => setDraft(stored()),
+    save: () => send(true, draft()),
+  });
 
   async function send(enabled: boolean, values: Draft) {
     if (!canManage() || pending()) return;
@@ -358,7 +374,7 @@ export function TicketsSettings(props: { server: Server }) {
               }}
             />
 
-            <Show when={dirty()}>
+            <Show when={!inPageBar && dirty()}>
               <Actions>
                 <Button
                   variant="text"

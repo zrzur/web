@@ -290,6 +290,14 @@ export class Settings extends AbstractStore<"settings", TypeSettings> {
   }
 
   /**
+   * Start desktop notifications over ("default"), also from "unsupported".
+   * Push stays as it is: its subscription is its own.
+   */
+  resetDesktopNotificationsState() {
+    this.setValue("notifications:desktop", "default");
+  }
+
+  /**
    * Reset the notifications state for both desktop and push notifications.
    * @param newState The state to set both notification states to. Defaults to "default"
    */

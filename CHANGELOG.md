@@ -35,6 +35,30 @@
 * **Leaving a conversation stops its sound,** also a clip that is still playing after scrolling took its row away: one watcher on the address stops every clip of the conversation you left.
 * **Phones:** the play button of a voice message is a 44 px touch target (the circle keeps its size).
 
+### Tickets settings save from the page's save bar (2026-11-22, user report)
+
+* **Root cause:** every part of Server settings › Overview joins the page's one save bar ("Unsaved changes · Reset · Save changes"), except Tickets. Its changes (category, who answers, kinds and their roles) had their own Save button at the very end of the Tickets part, under "First message in a ticket", out of view while you pick a kind's roles or the category, and leaving the page dropped them without a word.
+* Tickets now joins the page's save bar: the bar appears as soon as something changed, stays in view, saves all of it, and holds the page while there are unsaved changes, as for the rest of Overview. Save stays off while a kind has no name. A refused save shows in plain words on the bar, with the details under the Tickets part.
+
+### Forums show new posts and replies (2026-11-22, user report)
+
+* **Root cause:** a forum has no messages of its own; every post is a thread, and threads are not in the server's channel list. The channel list, the server icon and the forum page only looked at the forum channel itself, so a new post or a reply in a post never lit anything.
+* A forum's row in the channel list now shows the unread dot when one of its posts has something new, and the mention count when someone mentioned you in a post. The server icon and server folders count them too. Muted posts and archived posts without a mention stay quiet.
+* Inside the forum, each post with something new carries a "New" label, and a post that mentions you shows its mention count. Opening a post marks it read. A post you never opened is new until you have seen it in the forum's list: opening the forum moves the forum's own read mark to its newest post, and the labels of that visit stay until you leave.
+* Threads and forum posts follow their channel's notification level and mute.
+* **Mark as read** (server menu, its shortcut, a category, a forum's own menu) also marks the forum's posts read on the server: each opened post with something new up to its last message, and the forum up to its newest post. The server's own "mark server read" skips channels without messages, which a forum always is, so the forum came back unread after a reload.
+* A reload on a forum page no longer labels every post "New": the forum's read mark is taken once the unread state has loaded, and no label shows before.
+* A muted forum adds neither the unread dot nor its mentions to the server icon. Screen readers hear "2 mentions" for a post's "@2". The labels sit on the 4 px grid.
+* Posts are found through one shared index of the channel list (rebuilt only when a channel comes, goes or moves), not by every row walking the whole list.
+
+### Notifications on phones: messages and DMs notify again (2026-11-22, user report)
+
+* **Root cause:** Chrome on Android and home-screen apps on iOS refuse a notification built by the page (`new Notification()` throws "Illegal constructor"); they only show one through the service worker. The first-tap set-up took that refusal for "this browser has no notifications" and stored `unsupported` for good. From then on the phone showed no notification and played no message sound while the app was open, and Settings › Notifications hid both switches. With the app open the server sends no web push either (it pushes only to people who are offline), so a new DM showed only as the sender's picture in the list.
+* The page now shows its notification through the service worker where the browser refuses the page's own (`components/client/pageNotification.ts`). A refused test notification means "unsupported" only when there is no service worker. Phones already stored as `unsupported` start over on the next tap and get their switches back.
+* A tap on a notification brings the open app forward and opens the message there; only with no app open does a new window open (still only pages of this app).
+* A message in a channel the app does not know yet no longer stops the notification code with an error.
+* The one-time repair resets only the notification setting, never the push setting. A page of an older build that does not answer the worker's "open this" message within 1.5 s gets a new window, as before.
+
 ### A friend request opens the sender's profile (2026-11-21)
 
 * **From the phone Notifications page:** the sender's picture and the line "… sent you a friend request" are one button (44 px high) that opens their profile. Screen readers hear the sentence they see as its name, then "Open profile" (ar, en, de) as its description. Accept, Decline and Send message are separate buttons and are not touched by it. The page closes first so the profile is not under it; the profile has its own Accept.

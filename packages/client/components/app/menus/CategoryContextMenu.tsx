@@ -4,6 +4,7 @@ import { Trans } from "@lingui/solid/macro";
 import type { API } from "@zrzur/sdk/solid";
 import { Channel, Server } from "@zrzur/sdk/solid";
 
+import { useClient } from "@revolt/client";
 import { useModals } from "@revolt/modal";
 import { useState } from "@revolt/state";
 
@@ -15,6 +16,11 @@ import {
 } from "@revolt/ui/icons/legacy";
 
 import { Symbol } from "@revolt/ui/components/utils/Symbol";
+
+import {
+  channelUnread,
+  markForumsRead,
+} from "../../../src/interface/channels/forum/unread";
 import {
   ContextMenu,
   ContextMenuButton,
@@ -33,14 +39,21 @@ export function CategoryContextMenu(props: {
   category: CategoryData;
 }) {
   const state = useState();
+  const client = useClient();
   const { openModal } = useModals();
+  const isMuted = (channel: Channel) => state.notifications.isMuted(channel);
 
   /**
    * Mark category as read
    */
   function markAsRead() {
+    // forums are read through their posts
+    markForumsRead(client(), props.category.channels, isMuted);
     props.category.channels
-      .filter((channel) => channel.unread || channel.mentions?.size)
+      .filter(
+        (channel) =>
+          !channel.isForum && (channel.unread || channel.mentions?.size),
+      )
       .forEach((channel) => channel.ack());
   }
 
@@ -99,7 +112,9 @@ export function CategoryContextMenu(props: {
    */
   const hasUnread = () => {
     return props.category.channels.some(
-      (channel) => channel?.unread || channel?.mentions?.size,
+      (channel) =>
+        !!channel &&
+        (channelUnread(client(), channel, isMuted) || channel.mentions?.size),
     );
   };
 

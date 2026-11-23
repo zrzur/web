@@ -5,7 +5,11 @@ import {
   precacheAndRoute,
 } from "workbox-precaching";
 
-import { pageHandlesPush } from "../components/client/notificationRules";
+import {
+  NOTIFICATION_OPEN,
+  pageForNotification,
+  pageHandlesPush,
+} from "../components/client/notificationRules";
 
 import {
   OFFLINE_CACHE,
@@ -32,6 +36,13 @@ import {
 } from "./shellPage";
 
 declare let self: ServiceWorkerGlobalScope;
+
+/**
+ * How long an open page has to say it opened a tapped notification. Short:
+ * a browser lets the worker open a window only within a moment of the tap
+ * (Firefox allows about a second)
+ */
+const OPEN_ANSWER_MS = 700;
 
 interface ChannelPartial {
   channel_type: string;
@@ -88,8 +99,37 @@ self.addEventListener("notificationclick", (event) => {
     } catch {
       return;
     }
-    if (url.origin === self.location.origin)
-      event.waitUntil(self.clients.openWindow(url.href));
+    if (url.origin !== self.location.origin) return;
+    const target = url;
+    // an open page comes forward and goes there itself (no second copy of
+    // the app); with none open, a new window opens on that page
+    event.waitUntil(
+      self.clients
+        .matchAll({ type: "window", includeUncontrolled: true })
+        .then(async (clients) => {
+          const page = pageForNotification(clients as WindowClient[]);
+          if (!page) return self.clients.openWindow(target.href);
+          await page.focus().catch(() => page);
+          // a page of an older build does not know the message: without an
+          // answer in time, a new window opens there as before
+          const answered = await new Promise<boolean>((done) => {
+            const channel = new MessageChannel();
+            const timer = setTimeout(() => done(false), OPEN_ANSWER_MS);
+            channel.port1.onmessage = () => {
+              clearTimeout(timer);
+              done(true);
+            };
+            page.postMessage(
+              {
+                type: NOTIFICATION_OPEN,
+                path: target.pathname + target.search + target.hash,
+              },
+              [channel.port2],
+            );
+          });
+          if (!answered) return self.clients.openWindow(target.href);
+        }),
+    );
   }
 });
 
