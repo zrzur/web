@@ -31829,3 +31829,6 @@ msgstr "يحتاج هذا السيرفر إلى نشاط أكبر للحصول �
 msgid "This server no longer meets the rule for a custom link. The link works until {0}, then the name is released. Reach {1} members and stay active to keep it."
 msgstr "لم يعد هذا السيرفر يستوفي شرط الرابط المخصص. يعمل الرابط حتى {0}، ثم يُسترَدّ الاسم. للاحتفاظ به، يجب أن يبلغ عدد الأعضاء {1} وأن يبقى السيرفر نشطًا."
 
+#: components/app/interface/settings/user/activity/ActivitySettings.tsx
+msgid "Show all"
+msgstr "عرض الكل"

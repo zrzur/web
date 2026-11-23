@@ -31829,3 +31829,6 @@ msgstr "Dieser Server muss für einen eigenen Link aktiver sein: {messages} Nach
 msgid "This server no longer meets the rule for a custom link. The link works until {0}, then the name is released. Reach {1} members and stay active to keep it."
 msgstr "Dieser Server erfüllt die Regel für einen eigenen Link nicht mehr. Der Link funktioniert bis {0}, danach wird der Name freigegeben. Erreiche {1} Mitglieder und bleib aktiv, um ihn zu behalten."
 
+#: components/app/interface/settings/user/activity/ActivitySettings.tsx
+msgid "Show all"
+msgstr "Alle anzeigen"

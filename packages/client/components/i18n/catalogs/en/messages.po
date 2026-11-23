@@ -31831,3 +31831,7 @@ msgstr "This server needs to be more active for a custom link: {messages} messag
 #: components/app/interface/settings/server/invites/VanityInvite.tsx
 msgid "This server no longer meets the rule for a custom link. The link works until {0}, then the name is released. Reach {1} members and stay active to keep it."
 msgstr "This server no longer meets the rule for a custom link. The link works until {0}, then the name is released. Reach {1} members and stay active to keep it."
+
+#: components/app/interface/settings/user/activity/ActivitySettings.tsx
+msgid "Show all"
+msgstr "Show all"
