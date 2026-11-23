@@ -21,6 +21,8 @@ import { ChangeRequestNotice } from "@revolt/app/interface/settings/user/account
 import { NoticeCenter } from "@revolt/app/interface/support/NoticeCenter";
 import { SaveDataOffer } from "@revolt/app/interface/support/SaveDataOffer";
 import { useClient, useClientLifecycle } from "@revolt/client";
+import { ActivityIntro } from "@revolt/client/ActivityIntro";
+import { ActivityWorker } from "@revolt/client/ActivityWorker";
 import { State } from "@revolt/client/Controller";
 import { NotificationsWorker } from "@revolt/client/NotificationsWorker";
 import { useDevice } from "@revolt/common";
@@ -310,6 +312,7 @@ const Interface = (props: { children?: JSX.Element }) => {
         </Switch>
 
         <NotificationsWorker />
+        <ActivityWorker />
         {/* the small "Streamer mode" sign at the top, loaded the first time
             the mode is on */}
         <Show when={state.settings.streamerMode}>
@@ -323,6 +326,7 @@ const Interface = (props: { children?: JSX.Element }) => {
           <UsernameNotice />
           <NoticeCenter />
           <SaveDataOffer />
+          <ActivityIntro />
         </Show>
         <Show when={isLoggedIn()}>
           <PluginHostGate />

@@ -1,5 +1,5 @@
 import { useLingui } from "@lingui/solid/macro";
-import { createEffect } from "solid-js";
+import { createEffect, createSignal } from "solid-js";
 
 import { useClient } from "@revolt/client";
 import { useDevice } from "@revolt/common";
@@ -8,6 +8,13 @@ import { useModals } from "@revolt/modal";
 import { useSnackbar } from "@revolt/ui";
 
 import { usernameNoticeDue, usernameNoticeKey } from "./usernameNoticeDue";
+
+/**
+ * Whether the notice is on screen: other one-time questions wait for it
+ * (on a phone both would lie over each other)
+ */
+const [usernameNoticeOpen, setUsernameNoticeOpen] = createSignal(false);
+export { usernameNoticeOpen };
 
 /**
  * Tells a signed-in person whose account still has a number tag that
@@ -41,7 +48,9 @@ export function UsernameNotice() {
       // storage is full or refused: the notice shows again next visit
     }
 
+    setUsernameNoticeOpen(true);
     snackbar.show({
+      onClose: () => setUsernameNoticeOpen(false),
       message: t`New: usernames no longer have a number tag. Choose the username that will be yours alone.`,
       action: t`Choose username`,
       closeable: true,
