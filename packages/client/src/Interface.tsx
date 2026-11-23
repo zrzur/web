@@ -20,7 +20,6 @@ import { Titlebar } from "@revolt/app/interface/desktop/Titlebar";
 import { ChangeRequestNotice } from "@revolt/app/interface/settings/user/account/ChangeRequestNotice";
 import { NoticeCenter } from "@revolt/app/interface/support/NoticeCenter";
 import { SaveDataOffer } from "@revolt/app/interface/support/SaveDataOffer";
-import { ConfirmEmailStrip } from "@revolt/auth/src/invite/ConfirmEmailStrip";
 import { useClient, useClientLifecycle } from "@revolt/client";
 import { State } from "@revolt/client/Controller";
 import { NotificationsWorker } from "@revolt/client/NotificationsWorker";
