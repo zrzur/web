@@ -31167,3 +31167,7 @@ msgstr "{over, plural, zero {هذه الرسالة طويلة جدًا. احذف
 #: src/interface/channels/text/Composition.tsx
 msgid "Your message is longer than the limit."
 msgstr "رسالتك أطول من الحد المسموح به."
+
+#: components/ui/components/features/messaging/elements/PlaybackFailure.tsx
+msgid "This file could not be played. Check your connection and try again."
+msgstr "تعذّر تشغيل هذا الملف. تحقّق من اتصالك ثم حاول مرة أخرى."

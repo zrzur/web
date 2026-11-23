@@ -31170,3 +31170,7 @@ msgstr "{over, plural, one {This message is too long. Remove # character to send
 #: src/interface/channels/text/Composition.tsx
 msgid "Your message is longer than the limit."
 msgstr "Your message is longer than the limit."
+
+#: components/ui/components/features/messaging/elements/PlaybackFailure.tsx
+msgid "This file could not be played. Check your connection and try again."
+msgstr "This file could not be played. Check your connection and try again."
