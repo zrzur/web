@@ -15,7 +15,10 @@ import { Plural, Trans, useLingui } from "@lingui/solid/macro";
 import { isolate } from "@revolt/common/lib/isolate";
 import { styled } from "styled-system/jsx";
 
-import { waitForStart } from "@revolt/app/interface/channels/text/interactions/botLinks";
+import {
+  botDmsOn,
+  waitForStart,
+} from "@revolt/app/interface/channels/text/interactions/botLinks";
 import {
   CATEGORIES,
   CardRoom,
@@ -695,7 +698,8 @@ export function Discover() {
   }
 
   /** Whether a bot can be written to from here (`features.bot_dms`) */
-  const botDms = () => client()?.configuration?.features?.bot_dms === true;
+  // the site reads it from the API too: with it off, no Message anywhere
+  const botDms = () => botDmsOn(client());
 
   /** The conversation with a bot, Start waiting in it */
   async function messageBot(id: string) {
@@ -1395,7 +1399,7 @@ export function Discover() {
                     </PrimaryButton>
                   )}
                 </Show>
-                <Show when={item.kind === "bots" && (site || botDms())}>
+                <Show when={item.kind === "bots" && botDms()}>
                   <PrimaryButton
                     type="button"
                     data-variant="secondary"

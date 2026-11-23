@@ -28,9 +28,9 @@ $env:ZRZUR_WS_URL = "wss://events.zrzur.com"
 
 1. The person opens the conversation: **Message** on the bot's profile or its Discover page, or a bot link.
 2. While the conversation is empty, Zrzur shows the bot's name, its description, up to five of its global commands and a **Start** button.
-3. Pressing Start sends your bot an interaction of type `Start`. From then on your bot may write to the person, as if they had written first. Writing a message works the same way.
+3. Pressing Start sends your bot an interaction of type `Start`. From then on your bot may write to the person. Writing a message to your bot works the same way.
 
-Until then your bot cannot write to someone it shares nothing with: `POST /channels/{id}/messages` answers `403`. A person who shares a server with your bot follows their own privacy setting, as before.
+Your bot hears of the conversation only then: its `ChannelCreate` comes with the Start or the first message, not when the person opens the conversation. Until then your bot cannot write to the person: `POST /channels/{id}/messages` answers `403`. A person who shares a server with your bot follows their own privacy setting, as before.
 
 ## Bot links {#bot-links}
 
@@ -79,7 +79,7 @@ Open `https://zrzur.cc/b/YOUR_BOT_ID?start=spring-sale`, then press **Start**. T
 
 ## Stop and block {#stop-and-block}
 
-The person can choose **Stop bot** in the conversation's menu. It blocks your bot: your messages and answers there are refused with `403`, and new interactions from them stop. After **Restart bot** they press Start again, and you get a new `Start` interaction.
+The person can choose **Stop bot** in the conversation's menu. It blocks your bot: your messages and answers there are refused with `403`, and new interactions from them stop. After **Restart bot** they press Start again, and you get a new `Start` interaction. What they wrote before the stop no longer counts: until a new Start or a new message, your bot can't write to them.
 
 ## Common errors {#common-errors}
 

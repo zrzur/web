@@ -31176,7 +31176,7 @@ msgstr "ابدأ"
 #. placeholder {0}: name()
 #: components/app/interface/channels/text/interactions/BotStart.tsx
 msgid "Start lets {0} send you messages here."
-msgstr "يسمح الضغط على «ابدأ» لـ{0} بمراسلتك هنا."
+msgstr "يسمح «ابدأ» للبوت {0} بمراسلتك هنا."
 
 #: components/app/interface/channels/text/interactions/InteractionHeader.tsx
 msgid "started the bot"
@@ -31199,3 +31199,5 @@ msgstr "فتحت رابطًا إلى {0}."
 #: components/app/interface/channels/text/interactions/BotStart.tsx
 msgid "You stopped {0}. It can't send you messages."
 msgstr "أوقفت {0}، فلا يستطيع مراسلتك."
+
+

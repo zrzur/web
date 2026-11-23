@@ -11,7 +11,7 @@
   "Restart bot": ["أعد تشغيل البوت", "Bot neu starten"],
   "Start": ["ابدأ", "Starten"],
   "Start lets {0} send you messages here.": [
-    "يسمح الضغط على «ابدأ» لـ{0} بمراسلتك هنا.",
+    "يسمح «ابدأ» للبوت {0} بمراسلتك هنا.",
     "Mit Starten darf {0} dir hier Nachrichten schicken."
   ],
   "started the bot": ["بدأ البوت", "hat den Bot gestartet"],

@@ -17,7 +17,11 @@ const showError = vi.fn();
 const get = vi.fn(async (path: string) => ({ path }));
 const fetchPublic = vi.fn(async (id: string) => ({ id }));
 const openDM = vi.fn(async () => ({ id: "D1", path: "/channel/D1" }));
-const fetchUser = vi.fn(async (id: string) => ({ id, openDM }));
+const fetchUser = vi.fn(async (id: string) => ({
+  id,
+  openDM,
+  bot: { owner: "O" },
+}));
 
 vi.mock("@zrzur/sdk/solid", () => ({
   PublicChannelInvite: { from: (_: unknown, invite: unknown) => invite },
@@ -107,6 +111,12 @@ function setup(start: string, layout = true) {
     document.getElementById("root")!,
   );
 }
+
+/** A client whose server has bots in DMs on or off */
+const botDmsClient = (on: boolean) => ({
+  configured: () => true,
+  configuration: { features: { bot_dms: on } },
+});
 
 const settle = () => new Promise((done) => setTimeout(done, 20));
 
@@ -239,7 +249,7 @@ describe("addresses that open a dialog", () => {
     const go = vi.fn();
     openDialogAt(
       { kind: "bot-start", code: BOT, payload: "ref-7" },
-      () => ({ users: { fetch: fetchUser } }) as never,
+      () => ({ ...botDmsClient(true), users: { fetch: fetchUser } }) as never,
       { openModal, showError },
       go,
     );
@@ -249,6 +259,49 @@ describe("addresses that open a dialog", () => {
     expect(go).toHaveBeenCalledWith("/channel/D1");
     expect(botStartState.waiting.D1).toBe("ref-7");
     expect(openModal).not.toHaveBeenCalled();
+  });
+
+  it("with bots in DMs off, a link with ?start opens Add bot as before", async () => {
+    const go = vi.fn();
+    openDialogAt(
+      { kind: "bot-start", code: BOT, payload: "ref-7" },
+      () =>
+        ({
+          ...botDmsClient(false),
+          users: { fetch: fetchUser },
+          bots: { fetchPublic },
+        }) as never,
+      { openModal, showError },
+      go,
+    );
+    await settle();
+    expect(fetchUser).not.toHaveBeenCalled();
+    expect(fetchPublic).toHaveBeenCalledWith(BOT);
+    expect(openModal).toHaveBeenCalledWith(
+      expect.objectContaining({ type: "add_bot" }),
+    );
+    expect(go).not.toHaveBeenCalled();
+  });
+
+  it("the id of a person in a link with ?start opens their profile", async () => {
+    const person = { id: "P1", openDM };
+    const go = vi.fn();
+    openDialogAt(
+      { kind: "bot-start", code: "P1", payload: undefined },
+      () =>
+        ({
+          ...botDmsClient(true),
+          users: { fetch: vi.fn(async () => person) },
+        }) as never,
+      { openModal, showError },
+      go,
+    );
+    await settle();
+    expect(openDM).not.toHaveBeenCalled();
+    expect(openModal).toHaveBeenCalledWith({
+      type: "user_profile",
+      user: person,
+    });
   });
 
   it("asks for nothing when the code could change the request path", async () => {

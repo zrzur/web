@@ -48,12 +48,11 @@ import { Channel } from "@zrzur/sdk/solid";
 
 import { isSelecting } from "@revolt/app/interface/channels/text/messageSelection";
 
-import { botStartState } from "@revolt/app/interface/channels/text/interactions/botLinks";
 import {
   BotStartBar,
   BotStopped,
   dmBot,
-  hasHistory,
+  startPlace,
   useBotDms,
 } from "@revolt/app/interface/channels/text/interactions/BotStart";
 import { writeAccess } from "@revolt/app/interface/channels/threadAccess";
@@ -390,15 +389,7 @@ export function TextChannel(props: ChannelPageProps) {
             >
               {/* a bot link opened for a conversation with history: Start
                   sits here, the card with it is far up */}
-              <Show
-                when={
-                  botDms() &&
-                  dmBot(props.channel) &&
-                  hasHistory(client(), props.channel) &&
-                  botStartState.waiting[props.channel.id] !== undefined &&
-                  props.channel.recipient?.relationship !== "Blocked"
-                }
-              >
+              <Show when={startPlace(client(), props.channel) === "bar"}>
                 <BotStartBar
                   channel={props.channel}
                   onStart={() => jumpToBottomRef?.()}
@@ -417,6 +408,7 @@ export function TextChannel(props: ChannelPageProps) {
                 </Match>
                 <Match
                   when={
+                    botDms() &&
                     dmBot(props.channel) &&
                     props.channel.recipient?.relationship === "Blocked"
                   }

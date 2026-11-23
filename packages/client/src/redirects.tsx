@@ -18,6 +18,7 @@ import { Navigate, useNavigate, useParams } from "@solidjs/router";
 import { PublicChannelInvite } from "@zrzur/sdk/solid";
 
 import {
+  botDmsOn,
   startOf,
   waitForStart,
 } from "@revolt/app/interface/channels/text/interactions/botLinks";
@@ -62,9 +63,22 @@ export function dialogAddress(to: string): DialogAddress | undefined {
     : { kind: "bot", code, search };
 }
 
+/**
+ * What a bot link with ?start stands for here: with bots in DMs off on this
+ * server, the Add bot dialog, as before
+ */
+export function effectiveAddress(
+  address: DialogAddress,
+  client: ReturnType<Client>,
+): DialogAddress {
+  return address.kind === "bot-start" && !botDmsOn(client)
+    ? { kind: "bot", code: address.code, search: "" }
+    : address;
+}
+
 /** Open the dialog of an address; a failed request is shown as an error */
 export function openDialogAt(
-  address: DialogAddress,
+  given: DialogAddress,
   client: Client,
   { openModal, showError }: Modals,
   go?: Go,
@@ -72,21 +86,32 @@ export function openDialogAt(
   // after this pass: a change made while the router is switching pages
   // belongs to that switch and is dropped with it
   queueMicrotask(() => {
+    const address = effectiveAddress(given, client());
+    // a page loaded at the link has nothing behind it: go home
+    const leaveLink = () => {
+      if (/^\/(b|bot)\//.test(window.location.pathname)) go?.("/");
+    };
     if (address.kind === "settings") {
       openModal({ type: "settings", config: "user" });
     } else if (address.kind === "bot-start") {
       // the conversation with the bot, Start waiting with the link's payload
       client()
         .users.fetch(address.code)
-        .then((user) => user.openDM())
-        .then((channel) => {
-          waitForStart(channel.id, address.payload);
-          go?.(channel.path);
+        .then((user) => {
+          // the id of a person: their profile, never a conversation
+          if (!user.bot) {
+            openModal({ type: "user_profile", user });
+            leaveLink();
+            return;
+          }
+          return user.openDM().then((channel) => {
+            waitForStart(channel.id, address.payload);
+            go?.(channel.path);
+          });
         })
         .catch((error) => {
           showError(error);
-          // a page loaded at the link has nothing behind it: go home
-          if (/^\/(b|bot)\//.test(window.location.pathname)) go?.("/");
+          leaveLink();
         });
     } else if (address.kind === "invite") {
       client()
@@ -151,10 +176,12 @@ export function BotRedirect() {
   const address = dialogAddress(
     `/bot/${params.code ?? ""}${window.location.search}`,
   );
-  if (address) openDialogAt(address, useClient(), useModals(), navigate);
+  const client = useClient();
+  if (address) openDialogAt(address, client, useModals(), navigate);
   // a bot link with ?start goes straight to the conversation, in one move:
   // passing the last page first left that page half set up when it was the
   // same conversation, and the bot's answer did not show until a reload
-  if (address?.kind === "bot-start") return null;
+  if (address && effectiveAddress(address, client()).kind === "bot-start")
+    return null;
   return <PWARedirect />;
 }

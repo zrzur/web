@@ -7,6 +7,7 @@ import { styled } from "styled-system/jsx";
 import {
   BotStart,
   dmBot,
+  useBotDms,
 } from "@revolt/app/interface/channels/text/interactions/BotStart";
 import { isOfficialChannel } from "@revolt/app/interface/support/official";
 import { Markdown } from "@revolt/markdown";
@@ -26,11 +27,12 @@ interface Props {
  */
 export function ConversationStart(props: Props) {
   const official = () => isOfficialChannel(props.channel);
+  const botDms = useBotDms();
 
   // a bot: who it is, what it can do, and Start
   return (
     <Show
-      when={!dmBot(props.channel)}
+      when={!(botDms() && dmBot(props.channel))}
       fallback={<BotStart channel={props.channel} />}
     >
       <Base>

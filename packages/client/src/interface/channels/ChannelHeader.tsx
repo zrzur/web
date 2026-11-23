@@ -38,6 +38,7 @@ import { RulesIcon } from "@revolt/ui/icons/RulesIcon";
 import {
   BotMenuItems,
   dmBot,
+  useBotDms,
 } from "@revolt/app/interface/channels/text/interactions/BotStart";
 import {
   cancelSelection,
@@ -134,7 +135,14 @@ export function ChannelHeader(props: Props) {
   const onNarrow = () => setNarrow(narrowQuery.matches);
   narrowQuery.addEventListener("change", onNarrow);
   onCleanup(() => narrowQuery.removeEventListener("change", onNarrow));
+  // a phone in a conversation with a bot: no call buttons (bots don't
+  // answer calls), so the bot's name has the room
+  const botDms = useBotDms();
+  const dmWithBot = () => botDms() && !!dmBot(props.channel);
+  const botOnPhone = () => phone() && dmWithBot();
+
   const videoCallInMore = () =>
+    !botOnPhone() &&
     narrow() &&
     !props.channel.serverId &&
     props.channel.isVoice &&
@@ -143,7 +151,7 @@ export function ChannelHeader(props: Props) {
   // what is left for the phone's More sheet; settings, threads and pins
   // moved to the details screen
   const hasMoreActions = () =>
-    !!dmBot(props.channel) ||
+    dmWithBot() ||
     videoCallInMore() ||
     canSelectMessages() ||
     props.channel.type === "Group" ||
@@ -346,7 +354,13 @@ export function ChannelHeader(props: Props) {
 
         <Spacer />
 
-        <Show when={props.channel.isVoice && !voice.showCard(props.channel)}>
+        <Show
+          when={
+            props.channel.isVoice &&
+            !voice.showCard(props.channel) &&
+            !botOnPhone()
+          }
+        >
           <IconButton
             variant="toolbar"
             size="xs"
@@ -678,7 +692,7 @@ export function ChannelHeader(props: Props) {
             selecting messages starts from a message's own menu. */}
         {/* a DM with a bot: its profile and Stop bot, on wider screens
             too (phones have them in the More sheet below) */}
-        <Show when={!phone() && dmBot(props.channel)}>
+        <Show when={!phone() && dmWithBot()}>
           <div
             style={{ display: "contents" }}
             use:floating={{
@@ -710,7 +724,7 @@ export function ChannelHeader(props: Props) {
             use:floating={{
               contextMenu: () => (
                 <ContextMenu>
-                  <Show when={dmBot(props.channel)}>
+                  <Show when={dmWithBot()}>
                     <BotMenuItems channel={props.channel} />
                   </Show>
                   <Show when={props.channel.ticket}>

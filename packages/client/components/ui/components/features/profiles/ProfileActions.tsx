@@ -12,6 +12,8 @@ import { Icon } from "@revolt/ui/icons/Icon";
 
 import { Button } from "../../design";
 
+import { useBotDms } from "@revolt/app/interface/channels/text/interactions/BotStart";
+
 import { usePublicBot } from "./usePublicBot";
 
 interface Props {
@@ -396,11 +398,15 @@ const edgeButton = cva({
  */
 export function ProfileFooter(props: Props & { onOpenFull: () => void }) {
   const actions = useProfileActions(props);
+  const botDms = useBotDms();
   return (
     <Show when={!props.user.self && props.user.relationship !== "Blocked"}>
       <Foot data-testid="profile-footer">
         {/* a bot is started in its conversation, not with a first line here */}
-        <Show when={props.user.bot} fallback={<ProfileMessage {...props} />}>
+        <Show
+          when={botDms() && props.user.bot}
+          fallback={<ProfileMessage {...props} />}
+        >
           <Button
             size="sm"
             shape="square"

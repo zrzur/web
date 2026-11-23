@@ -20,9 +20,9 @@ Unter Windows, in PowerShell:
 
 1. Die Person öffnet die Unterhaltung: **Nachricht** im Profil des Bots oder auf seiner Discover-Seite, oder ein Bot-Link.
 2. Solange die Unterhaltung leer ist, zeigt Zrzur den Namen des Bots, seine Beschreibung, bis zu fünf seiner globalen Befehle und eine Schaltfläche **Starten**.
-3. Starten schickt deinem Bot eine Interaktion vom Typ `Start`. Ab dann darf dein Bot der Person schreiben, als hätte sie zuerst geschrieben. Eine Nachricht zu schreiben wirkt genauso.
+3. Starten schickt deinem Bot eine Interaktion vom Typ `Start`. Ab dann darf dein Bot der Person schreiben. Eine Nachricht an deinen Bot wirkt genauso.
 
-Bis dahin kann dein Bot niemandem schreiben, mit dem er nichts teilt: `POST /channels/{id}/messages` antwortet mit `403`. Wer einen Server mit deinem Bot teilt, folgt wie bisher seiner eigenen Privatsphäre-Einstellung.
+Erst dann erfährt dein Bot von der Unterhaltung: Sein `ChannelCreate` kommt mit dem Start oder der ersten Nachricht, nicht schon, wenn die Person die Unterhaltung öffnet. Bis dahin kann dein Bot der Person nicht schreiben: `POST /channels/{id}/messages` antwortet mit `403`. Wer einen Server mit deinem Bot teilt, folgt wie bisher seiner eigenen Privatsphäre-Einstellung.
 
 ## Bot-Links {#bot-links}
 
@@ -57,7 +57,7 @@ Starte ihn mit `node dm-start.mjs`.
 
 ## Stoppen und blockieren {#stop-and-block}
 
-Die Person kann im Menü der Unterhaltung **Bot stoppen** wählen. Das blockiert deinen Bot: Deine Nachrichten und Antworten dort werden mit `403` abgelehnt, und neue Interaktionen von ihr kommen nicht mehr an. Nach **Bot neu starten** drückt sie wieder Starten, und du bekommst eine neue `Start`-Interaktion.
+Die Person kann im Menü der Unterhaltung **Bot stoppen** wählen. Das blockiert deinen Bot: Deine Nachrichten und Antworten dort werden mit `403` abgelehnt, und neue Interaktionen von ihr kommen nicht mehr an. Nach **Bot neu starten** drückt sie wieder Starten, und du bekommst eine neue `Start`-Interaktion. Was sie vor dem Stoppen geschrieben hat, zählt danach nicht mehr: Bis zu einem neuen Start oder einer neuen Nachricht kann dein Bot ihr nicht schreiben.
 
 ## Häufige Fehler {#common-errors}
 

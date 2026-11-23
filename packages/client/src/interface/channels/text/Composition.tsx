@@ -42,7 +42,10 @@ import {
   CommandPicker,
   runActiveCommand,
 } from "@revolt/app/interface/channels/text/interactions";
-import { dmBot } from "@revolt/app/interface/channels/text/interactions/BotStart";
+import {
+  dmBot,
+  useBotDms,
+} from "@revolt/app/interface/channels/text/interactions/BotStart";
 import { markStarted } from "@revolt/app/interface/channels/text/interactions/botLinks";
 import { pollsEnabled } from "@revolt/app/interface/channels/text/poll/pollModel";
 import {
@@ -86,6 +89,7 @@ export function MessageComposition(props: Props) {
   const state = useState();
   const { t } = useLingui();
   const client = useClient();
+  const botDms = useBotDms();
   const { limits } = useInstance();
   const { openModal, isOpen } = useModals();
 
@@ -749,7 +753,7 @@ export function MessageComposition(props: Props) {
                       </MessageBox.InlineIcon>
                     </Show>
                     {/* a DM with a bot: its commands, one tap away */}
-                    <Show when={dmBot(props.channel)}>
+                    <Show when={botDms() && dmBot(props.channel)}>
                       <MessageBox.InlineIcon>
                         <IconButton
                           aria-label={t`Commands`}

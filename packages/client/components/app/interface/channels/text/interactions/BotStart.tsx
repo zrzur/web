@@ -2,7 +2,7 @@ import { For, Show, createMemo, createResource, onMount } from "solid-js";
 
 import { i18n } from "@lingui/core";
 import { Trans } from "@lingui/solid/macro";
-import type { Channel, Client, User } from "@zrzur/sdk/solid";
+import type { Channel } from "@zrzur/sdk/solid";
 import { styled } from "styled-system/jsx";
 
 import { ContextMenuButton } from "@revolt/app/menus/ContextMenu";
@@ -13,9 +13,17 @@ import { Avatar, Button } from "@revolt/ui";
 import { BotLabel } from "@revolt/ui/components/features/profiles/BotLabel";
 import { Icon } from "@revolt/ui/icons/Icon";
 
-import { botStartState, markStarted, waitingPayload } from "./botLinks";
+import {
+  botDmsOn,
+  dmBot,
+  markStarted,
+  startPlace,
+  waitingPayload,
+} from "./botLinks";
 import { interactionState, loadDmCommands, runStart } from "./store";
 import { localized } from "./types";
+
+export { botDmsOn, dmBot, startPlace };
 
 /** Commands shown before "and N more" */
 const SHOWN = 5;
@@ -23,43 +31,7 @@ const SHOWN = 5;
 /** Whether bots can be started in DMs on this server (`features.bot_dms`) */
 export function useBotDms() {
   const client = useClient();
-  return () => client()?.configuration?.features?.bot_dms === true;
-}
-
-/** The bot of a DM with a bot, else nothing */
-export function dmBot(channel: Channel): User | undefined {
-  return channel.type === "DirectMessage" && channel.recipient?.bot
-    ? channel.recipient
-    : undefined;
-}
-
-/**
- * Whether the empty conversation still waits for Start: nobody wrote in it
- * and Start was not pressed (a bot link opened again resets that). With
- * messages, a bot link gets the Start bar above the message box instead.
- *
- * The card is drawn only once the history is loaded to its start, so the
- * messages the app holds decide: the channel's last message id can still
- * name a message that was deleted.
- */
-export function waitsForStart(client: Client, channel: Channel) {
-  const bot = dmBot(channel);
-  if (!bot || bot.relationship === "Blocked") return false;
-  return !loadedMessage(client, channel) && !botStartState.started[channel.id];
-}
-
-/** A message of this conversation the app holds, if any */
-function loadedMessage(client: Client, channel: Channel) {
-  return client.messages.find((message) => message.channelId === channel.id);
-}
-
-/**
- * Whether anyone wrote in the conversation. The channel's last message id
- * is saved by the server a moment after a message, so a page loaded just
- * then has none: the messages the app holds count too.
- */
-export function hasHistory(client: Client, channel: Channel) {
-  return !!channel.lastMessageId || !!loadedMessage(client, channel);
+  return () => botDmsOn(client());
 }
 
 /** Restart bot: unblock it, then press Start again */
@@ -196,7 +168,7 @@ export function BotStart(props: { channel: Channel }) {
         </Section>
       </Show>
 
-      <Show when={botDms() && waitsForStart(client(), props.channel)}>
+      <Show when={startPlace(client(), props.channel) === "card"}>
         <StartRow>
           <Button
             variant="filled"
@@ -375,7 +347,8 @@ const StartRow = styled("div", {
     flexDirection: "column",
     alignItems: "flex-start",
     gap: "8px",
-    _phone: { alignItems: "stretch" },
+    // a 44 px target on phones
+    _phone: { alignItems: "stretch", "& > button": { minHeight: "44px" } },
   },
 });
 
@@ -395,6 +368,8 @@ const Bar = styled("div", {
     borderRadius: "var(--z-box-radius)",
     border: "var(--z-box-border)",
     background: "var(--z-box-bg)",
+    // Start and Restart: 44 px targets on phones
+    _phone: { "& button": { minHeight: "44px" } },
   },
 });
 

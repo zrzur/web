@@ -31202,3 +31202,5 @@ msgstr "You opened a link to {0}."
 #: components/app/interface/channels/text/interactions/BotStart.tsx
 msgid "You stopped {0}. It can't send you messages."
 msgstr "You stopped {0}. It can't send you messages."
+
+
