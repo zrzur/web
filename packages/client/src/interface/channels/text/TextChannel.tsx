@@ -399,7 +399,10 @@ export function TextChannel(props: ChannelPageProps) {
                   props.channel.recipient?.relationship !== "Blocked"
                 }
               >
-                <BotStartBar channel={props.channel} />
+                <BotStartBar
+                  channel={props.channel}
+                  onStart={() => jumpToBottomRef?.()}
+                />
               </Show>
               <Switch
                 fallback={

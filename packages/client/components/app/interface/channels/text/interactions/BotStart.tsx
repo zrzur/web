@@ -88,7 +88,7 @@ function useRestartBot(channel: () => Channel) {
 }
 
 /** Press Start: the bot gets the link's payload, if a link was opened */
-export function useStartBot(channel: () => Channel) {
+export function useStartBot(channel: () => Channel, onStart?: () => void) {
   const client = useClient();
   const { showError } = useModals();
   return {
@@ -97,6 +97,8 @@ export function useStartBot(channel: () => Channel) {
       const bot = dmBot(channel());
       if (!bot) return;
       const id = channel().id;
+      // the answer comes at the end of the conversation: go there
+      onStart?.();
       runStart(client(), id, bot.id, waitingPayload(id))
         .then((accepted) => accepted && markStarted(id))
         // the reason is also shown in the timeline, where the answer goes
@@ -218,8 +220,15 @@ export function BotStart(props: { channel: Channel }) {
  * Above the message box when a bot link was opened for a conversation that
  * already has messages: the card with Start is far up in the history
  */
-export function BotStartBar(props: { channel: Channel }) {
-  const starter = useStartBot(() => props.channel);
+export function BotStartBar(props: {
+  channel: Channel;
+  /** Show the newest messages, where the bot's answer will be */
+  onStart?: () => void;
+}) {
+  const starter = useStartBot(
+    () => props.channel,
+    () => props.onStart?.(),
+  );
   const bot = () => dmBot(props.channel)!;
   const name = () => bot().displayName ?? bot().username;
 
