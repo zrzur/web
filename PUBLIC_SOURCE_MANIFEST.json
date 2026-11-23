@@ -2146,8 +2146,8 @@
     },
     {
       "path": "packages/client/components/app/interface/settings/user/account/UsernameNotice.tsx",
-      "sha256": "c1dda2af8bf2ef9b3b840c845694f560fce08f2a30a99b9e67731bd50786ed92",
-      "bytes": 1904,
+      "sha256": "7b31df70ca1f87b775598787dc5c64b5c5b3fe4cd60d82fdf51000795f833ef8",
+      "bytes": 2235,
       "category": "license-and-attribution"
     },
     {
@@ -3124,8 +3124,8 @@
     },
     {
       "path": "packages/client/components/client/ActivityIntro.tsx",
-      "sha256": "66e73924f0dd1eb8baa8ab06d45dbbe3dcfe9f70f1722ad2856c5c6e27c69de3",
-      "bytes": 3189,
+      "sha256": "c3dc868133d5f2fa40fa46f1121fcb549e0dc7cb87f70b7218be5b00315f3509",
+      "bytes": 3383,
       "category": "product-source-or-build-manifest"
     },
     {
