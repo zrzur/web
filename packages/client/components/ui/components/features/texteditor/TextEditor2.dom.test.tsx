@@ -1,4 +1,4 @@
-import { createSignal } from "solid-js";
+import { createEffect, createSignal } from "solid-js";
 import { render } from "solid-js/web";
 
 import { EditorView } from "@codemirror/view";
@@ -74,6 +74,58 @@ describe("TextEditor2 on a channel switch", () => {
     expect(dispatch).toHaveBeenCalledTimes(1);
     expect(content.getAttribute("aria-label")).toBe("Message #random");
     dispatch.mockRestore();
+  });
+});
+
+describe("TextEditor2 with a value that arrives while it mounts", () => {
+  // bug #13 of 2026-11-22: the profile editor copies the loaded bio into
+  // `initialValue` from its own effect, which runs after the editor was
+  // made with no text but before the editor's effects ran once; the bio
+  // stayed out of the field (Reset brought it back)
+  function Parent(props: { bio: string; onChange: (text: string) => void }) {
+    const [initial, setInitial] = createSignal<readonly [string]>();
+    createEffect(() => setInitial([props.bio]));
+    return <TextEditor2 initialValue={initial()} onChange={props.onChange} />;
+  }
+
+  it("shows the value set before its first update", async () => {
+    const content = mount(() => (
+      <Parent bio="Answers questions." onChange={() => undefined} />
+    ));
+    await Promise.resolve();
+
+    expect(content.textContent).toBe("Answers questions.");
+  });
+
+  it("does not dispatch on mount with a placeholder and a value", () => {
+    const dispatch = vi.spyOn(EditorView.prototype, "dispatch");
+    mount(() => (
+      <TextEditor2
+        placeholder="Something cool about me..."
+        initialValue={["draft"]}
+        onChange={() => undefined}
+      />
+    ));
+
+    expect(dispatch).not.toHaveBeenCalled();
+    dispatch.mockRestore();
+  });
+
+  it("calls neither onChange nor onTyping on mount", async () => {
+    const onChange = vi.fn();
+    const onTyping = vi.fn();
+    mount(() => (
+      <TextEditor2
+        placeholder="Message #general"
+        initialValue={["draft"]}
+        onChange={onChange}
+        onTyping={onTyping}
+      />
+    ));
+    await Promise.resolve();
+
+    expect(onChange).not.toHaveBeenCalled();
+    expect(onTyping).not.toHaveBeenCalled();
   });
 });
 

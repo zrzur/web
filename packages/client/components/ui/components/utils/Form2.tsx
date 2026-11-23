@@ -28,6 +28,7 @@ import { TextEditor2 } from "../features/texteditor/LazyTextEditor2";
 import { Column, Row } from "../layout";
 
 import { translatedError, useError } from "@revolt/i18n";
+import { editorTextChanged } from "./editorDirty";
 import { FileInput, humanFileSize } from "./files";
 
 /**
@@ -80,7 +81,9 @@ const FormTextEditor = (
         {...remote}
         onChange={(value) => {
           local.control.setValue(value);
-          local.control.markDirty(value !== remote.initialValue?.[0]);
+          local.control.markDirty(
+            editorTextChanged(value, remote.initialValue),
+          );
         }}
         // todo: required={local.control.isRequired}
         // todo: disabled={local.control.isDisabled}

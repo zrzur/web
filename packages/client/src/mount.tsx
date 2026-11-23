@@ -3,7 +3,8 @@
  * What the app and the Designs / Discover sites share: the contexts every
  * page runs in, the sign-in routes and the render call
  */
-import { JSX, Suspense, lazy } from "solid-js";
+import { lazy } from "@revolt/common/lib/lazyPart";
+import { JSX, Suspense } from "solid-js";
 import { render } from "solid-js/web";
 
 import { Route, Router } from "@solidjs/router";

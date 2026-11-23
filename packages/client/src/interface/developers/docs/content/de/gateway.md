@@ -35,7 +35,7 @@ Alles, was du sonst sendest, ist auf 1 MiB pro Nachricht begrenzt.
 
 | Was du bekommst                                                      | Ursache                                     | Was zu tun ist                           |
 | -------------------------------------------------------------------- | ------------------------------------------- | ---------------------------------------- |
-| `{ "type": "Error", "data": { "type": "InvalidSession" } }`, schließt | Falsches oder zurückgesetztes Token, gesperrter Bot, oder kein `Authenticate` in 15 Sekunden | Stoppe. Verbinde nicht in einer Schleife neu |
+| `{ "type": "Error", "data": { "type": "InvalidSession" } }`, schließt | Falsches oder zurückgesetztes Token, ein deaktivierter Bot, ein Bot, dessen Besitzer gesperrt oder verbannt ist, oder kein `Authenticate` in 15 Sekunden | Nach wenigen Versuchen stoppen. Verbinde nicht in einer Schleife neu |
 | `{ "type": "Error", "data": { "type": "MissingIntent", "intent": "SERVER_MEMBERS" } }`, schließt mit Code `4014` | Ein privilegierter Intent ist aus. Der Schließgrund nennt ihn, zum Beispiel `Disallowed intents: MESSAGE_CONTENT (switched on: none)` | Schalte ihn im Entwicklerportal ein und verbinde dich neu, oder [verbinde dich ohne ihn](/developers/docs/gateway#intent-off) |
 | `{ "type": "Error", "data": { "type": "InternalError" } }`, schließt mit Code `1013` | Der Server konnte die Einstellungen des Bots in dem Moment nicht lesen | Verbinde dich neu, mit der Wartezeit aus [Neu verbinden](/developers/docs/gateway#reconnect) |
 
@@ -47,7 +47,7 @@ Sende alle 20 Sekunden ein `Ping`:
 
 Der Server antwortet `Pong` mit denselben `data`. `data` ist eine Zahl oder eine Liste von Bytes.
 
-Das Zrzur-Gateway selbst schließt eine stille Bot-Verbindung nie, aber Proxys und Heimrouter tun es, und eine tote Leitung meldet sich nicht. Der Ping ist also, wie **du** es merkst: Kam 60 Sekunden kein `Pong`, schließe den Socket und verbinde neu.
+Das Zrzur-Gateway selbst schließt eine stille Bot-Verbindung nie, aber Proxys und Heimrouter tun es, und eine tote Leitung meldet sich nicht. Der Ping ist also, wie **du** es merkst: Kam 60 Sekunden kein `Pong`, schließe den Socket und verbinde neu. Genau das tut `@zrzur/sdk` (`heartbeatInterval: 20`, `pongTimeout: 60`).
 
 ## Neu verbinden {#reconnect}
 
@@ -56,7 +56,7 @@ Eine Verbindung kann jederzeit enden: ein Update bei uns, ein Netzproblem, dein 
 1. Wenn der Socket schließt, warte 1 Sekunde und verdopple die Wartezeit nach jedem Fehlschlag bis 30 Sekunden. Füge etwas Zufall hinzu, damit nicht viele Bots gleichzeitig zurückkommen.
 2. Verbinde dich und sende `Resume`, wenn die Sitzung fortsetzbar war (siehe [Fortsetzen nach einem Abbruch](/developers/docs/gateway#resume)), sonst `Authenticate`. Nach `Authenticate` bekommst du ein neues `Ready`.
 3. Setze die Wartezeit nach `Ready` oder `Resumed` zurück.
-4. Wiederhole nicht nach einem `Error`-Ereignis vom Typ `InvalidSession` und nicht nach Code `4014`: Dieselbe Anfrage scheitert wieder. Stoppe und sage einem Menschen Bescheid. Nach Code `1013` wiederhole: Der Server konnte die Einstellungen des Bots in dem Moment nicht lesen.
+4. Nach einem `Error`-Ereignis vom Typ `InvalidSession` höchstens wenige Male mit wachsender Pause wiederholen, dann stoppen und einem Menschen Bescheid sagen: eine Ablehnung kann von einem Server kommen, der neu startet, mehrere heißen, dass das Token abgelehnt wird. `@zrzur/sdk` versucht es 3-mal, dann scheitert `login()`. Nach Code `4014` nie wiederholen: Dieselbe Anfrage scheitert wieder. Nach Code `1013` wiederhole: Der Server konnte die Einstellungen des Bots in dem Moment nicht lesen.
 
 ## Fortsetzen nach einem Abbruch {#resume}
 

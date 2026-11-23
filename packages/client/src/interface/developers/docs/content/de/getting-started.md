@@ -4,7 +4,7 @@ In etwa zehn Minuten hast du einen Bot, der in deinem Testserver auf einen Slash
 
 ## 1. Erstelle eine Anwendung {#create-an-application}
 
-Wähle im Entwicklerportal „Neue Anwendung“, gib einen Namen ein und wähle „Erstellen“. Die Anwendung bringt ein Bot-Konto mit. [Meine Anwendungen öffnen](/developers)
+Wähle im Entwicklerportal „Neue Anwendung“, gib einen Namen ein und wähle „Erstellen“. Die Anwendung bringt ein Bot-Konto mit. Der Name nimmt Buchstaben, Zahlen und `_ . -`, mit einem Leerzeichen zwischen Wörtern, 2 bis 32 Zeichen: „Liro Bot“ erscheint wie eingegeben, sein Benutzername ist `Liro_Bot`. [Meine Anwendungen öffnen](/developers)
 
 ## 2. Kopiere das Token {#copy-the-token}
 
@@ -15,6 +15,8 @@ Das Token erscheint einmal, direkt nach dem Erstellen der Anwendung. Kopiere es 
 ## 3. Installiere den Bot in einem Testserver {#install-the-bot}
 
 Wähle im Tab „Übersicht“ deiner Anwendung „Zu einem Server hinzufügen“ und dann einen Server, auf dem du „Server verwalten“ hast. [Mehr zum Installieren](/developers/docs/applications#install)
+
+Der Bot bekommt eine eigene Rolle mit den Standardberechtigungen, die du für ihn festgelegt hast (Bot-Einstellungen, Standardberechtigungen), auch wenn ihn jemand über einen Link oder die API installiert. Ein Link mit `?permissions=` gibt stattdessen genau diese Berechtigungen, und `?permissions=0` gibt keine Rolle. Wer installiert, gibt die Standardberechtigungen nur mit Rollen verwalten, und nur den Teil, den er selbst hat; ohne Rollen verwalten kommt der Bot ohne Rolle.
 
 Mach das vor dem ersten Start. Ein Bot, der nicht auf dem Server ist, bekommt beim Schreiben in dessen Kanäle 403 MissingPermission, und das sieht aus wie eine fehlende Berechtigung. [Ist der Bot auf diesem Server?](/developers/docs/errors#not-installed)
 
@@ -38,6 +40,10 @@ Setze das Token und starte dann den Bot:
 
 @@2
 
+Unter Windows, in PowerShell:
+
+@@3
+
 Sobald das Terminal ready zeigt, tippe /hello in einem Kanal deines Testservers. Der Bot antwortet mit Hello und deinem Namen.
 
 ## 7. Empfange Ereignisse {#gateway}
@@ -46,7 +52,7 @@ Der Bot hält eine WebSocket-Verbindung zum Gateway. Befehle, Klicks auf Schaltf
 
 ## 8. Baue einen echten Bot {#deploy}
 
-Dieser Bot kennt nur einen Befehl. Der vollständige Bot hat Befehle, Schaltflächen, ein Formular, Moderation, gespeicherte Daten, Fehlerbehandlung und Wiederverbindung, in einer Datei und ohne Bibliothek. [Baue einen vollständigen Bot](/developers/docs/tutorial-full-bot)
+Dieser Bot kennt nur einen Befehl. Die nächsten Tutorials behalten dieselbe Bibliothek und fügen je eine Sache hinzu: [Befehle mit Optionen](/developers/docs/tutorial-commands), [Ereignisse](/developers/docs/tutorial-events), [Moderation](/developers/docs/tutorial-moderation) und [Bereitstellung](/developers/docs/tutorial-deploy). Der [vollständige Bot](/developers/docs/tutorial-full-bot) macht alles in einer Datei ohne Bibliothek, um zu zeigen, was die Bibliothek dir abnimmt.
 
 ## Nächste Schritte {#next-steps}
 

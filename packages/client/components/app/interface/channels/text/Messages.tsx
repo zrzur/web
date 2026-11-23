@@ -91,11 +91,24 @@ interface Props {
   jumpToBottomRef?: (fn: () => void) => void;
 
   /**
+   * Bind "go to this message" to the parent component, for controls that
+   * are not links (the address does not change for the message already in it)
+   * @param fn Function
+   */
+  jumpToMessageRef?: (fn: (messageId: string) => void) => void;
+
+  /**
    * Whether the reader sees the newest message: the newest messages are
    * loaded and the list is scrolled to its bottom. Only then is the channel
    * read.
    */
   atPresent?: Signal<boolean>;
+
+  /**
+   * A jump to a message started: the address changed to a message, or a link
+   * to the message already in the address was followed again
+   */
+  onJump?: () => void;
 }
 
 /**
@@ -286,7 +299,10 @@ export function Messages(props: Props) {
     on(
       () => props.highlightedMessageId(),
       (messageId) => {
-        if (messageId) controller?.toMessage(messageId);
+        if (messageId) {
+          controller?.toMessage(messageId);
+          props.onJump?.();
+        }
       },
       { defer: true },
     ),
@@ -318,6 +334,7 @@ export function Messages(props: Props) {
       target.pathname === location.pathname
     ) {
       controller?.toMessage(messageId);
+      props.onJump?.();
     }
   }
 
@@ -372,6 +389,7 @@ export function Messages(props: Props) {
   onMount(() => {
     // Setup references if they exist
     props.jumpToBottomRef?.(jumpToBottom);
+    props.jumpToMessageRef?.(jumpToMessage);
 
     const c = client();
     c.addListener("messageCreate", onMessage);
@@ -538,6 +556,14 @@ export function Messages(props: Props) {
 
     return messagesWithTail.reverse();
   });
+
+  /**
+   * Go to a message, also the one already in the address
+   */
+  function jumpToMessage(messageId: string) {
+    controller?.toMessage(messageId);
+    props.onJump?.();
+  }
 
   /**
    * Go to the newest message

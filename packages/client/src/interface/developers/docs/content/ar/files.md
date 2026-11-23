@@ -29,3 +29,18 @@
 @@1
 
 يبني [درس رفع الملفات](/developers/docs/tutorial-upload) الأمر `/report`.
+
+## الملفات التي يعطيها الناس لبوتك {#from-people}
+
+يسلّم خيار أمر من النوع `Attachment` وحقل نموذج من النوع `FileUpload` بوتك ملفات رفعها الناس. ويحملها التفاعل في `resolved.attachments` بمعرّفاتها، مع `tag` و`filename` و`content_type` و`size`. نزّلها كأي ملف؛ وفي المكتبة `interaction.attachmentUrl(name)` و`interaction.downloadAttachment(name)` و`interaction.fieldFiles(id)`. وعامل ما تنزّله على أنه غير موثوق: افحص نوعه وحجمه قبل فتحه.
+
+## الأخطاء الشائعة {#errors}
+
+| الخطأ | السبب | الحل |
+| --- | --- | --- |
+| `401 InvalidSession` | رمز البوت خاطئ أو أُعيد تعيينه | استخدم الرمز الحالي |
+| `400 FileTooLarge` | فوق حد الوسم، ويذكر الجواب الحد الأقصى | صغّر الملف، أو افحص `features.limits` أولًا |
+| `400 FileTooSmall` | ملف فارغ | أرسل محتواه |
+| `400 FileTypeNotAllowed` | ليس صورة لوسم صور، أو ليس MP3 أو OGG أو WAV للوسم `sounds` | استخدم الوسم المناسب للملف |
+| `403 MissingPermission` (عند الإرسال) | لا يملك البوت صلاحية رفع الملفات في القناة | امنحه الصلاحية |
+| `429` | تتقاسم عمليات الرفع حدود البوت | انتظر `retry_after` ملّي ثانية |

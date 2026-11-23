@@ -11,6 +11,8 @@
  * settings pages on a phone).
  */
 
+import { onRepeatedPartFailure } from "../components/common/lib/lazyPart";
+
 /** Session storage key: when this tab last reloaded for a missing file */
 export const STALE_RELOAD_KEY = "zrzur:stale-build-reload";
 
@@ -49,6 +51,27 @@ export interface StaleBuildOptions {
    * read (no connection). Default: the app's /build.json, never from a cache.
    */
   serverCommit?: () => Promise<string | undefined>;
+  /**
+   * Does this browser run on WebKit (Safari, and every browser on iOS and
+   * iPadOS)? Default: read from the page's navigator.
+   */
+  webKit?: () => boolean;
+}
+
+/**
+ * WebKit: Safari on a Mac, and every browser on iPhone and iPad (they all
+ * have to use WebKit, whatever their name). Chrome, Edge, Opera and Firefox
+ * on other systems name Safari in their user agent too, so they are ruled
+ * out by their own names; an iPad asking for the desktop site says
+ * "Macintosh" but has a touch screen.
+ */
+export function isWebKit(userAgent: string, maxTouchPoints = 0): boolean {
+  if (/iPhone|iPad|iPod/.test(userAgent)) return true;
+  if (/Macintosh/.test(userAgent) && maxTouchPoints > 1) return true;
+  return (
+    /Safari\//.test(userAgent) &&
+    !/Chrome|Chromium|CriOS|Edg|OPR|Firefox|FxiOS|Android/.test(userAgent)
+  );
 }
 
 /** The commit named by the server's /build.json */
@@ -102,6 +125,32 @@ export function watchForStaleBuild(
     event?.preventDefault();
     target.location.reload();
   };
+
+  // A part failed to download twice in a row, each time when it was opened,
+  // while the device says it is online (common/lib/lazyPart.ts). Safari keeps a failed module in its
+  // module map, so asking again can never work there; a reload clears it.
+  // Only when the server answers: with no connection a reload would show
+  // the "no connection" page instead of the app (owner, 2026-11-18: no
+  // reloads for network trouble). A call still holds it, and the 30 s gap
+  // stops a loop.
+  // Only WebKit keeps a failed module: Chrome and Firefox fetch it again on
+  // the next press, so there they never reload for it (owner, 2026-11-22:
+  // no "the app refreshed by itself")
+  const webKit =
+    options.webKit ??
+    (() =>
+      isWebKit(
+        target.navigator?.userAgent ?? "",
+        target.navigator?.maxTouchPoints,
+      ));
+  onRepeatedPartFailure(() => {
+    if (!webKit() || holds.size) return;
+    void serverCommit().then((commit) => {
+      if (!commit) return;
+      console.warn("[app] a part failed twice while online: reloading");
+      reload();
+    });
+  });
 
   target.addEventListener("vite:preloadError", (event) => {
     if (holds.size) {

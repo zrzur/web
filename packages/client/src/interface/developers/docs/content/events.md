@@ -1,6 +1,6 @@
 # Event reference
 
-Every event a bot can receive, with its fields. The samples were recorded from a running server, then ids were replaced.
+Every event a bot can receive, with its fields. Most samples were recorded from a running server, then ids were replaced. Samples of voice-call events, account wipes, link previews, polls, emojis and a few others are written from the gateway schema (`GET /gateway/schema`), because a local check cannot cause them.
 
 Events arrive as JSON objects with a `type`. Fields marked as not always there are left out when empty. A few events carry an object directly, so `Message` has `content` next to `type`.
 

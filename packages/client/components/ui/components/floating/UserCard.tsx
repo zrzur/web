@@ -5,6 +5,7 @@ import { styled } from "styled-system/jsx";
 
 import { useClient } from "@revolt/client";
 import { useDevice } from "@revolt/common";
+import { insertMention, isMentionClick } from "@revolt/keybinds/mention";
 import { useModals } from "@revolt/modal";
 
 import {
@@ -61,6 +62,15 @@ export function UserCard(
     if (isMobile) openFull(true);
   });
 
+  /** Shift+click mentions the person in the message box (Ctrl+/) */
+  function clickBanner(event: MouseEvent) {
+    if (isMentionClick(event) && insertMention("user", props.user.id)) {
+      props.onClose();
+      return;
+    }
+    openFull(event);
+  }
+
   // the person's chosen colours colour the whole card
   const theme = createProfileTheme(
     () =>
@@ -86,8 +96,8 @@ export function UserCard(
             user={props.user}
             member={props.member}
             bannerUrl={query.data?.animatedBannerURL}
-            onClick={openFull}
-            onClickAvatar={openFull}
+            onClick={clickBanner}
+            onClickAvatar={clickBanner}
             corner={
               <Profile.CornerActions
                 user={props.user}

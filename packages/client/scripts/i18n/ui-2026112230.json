@@ -1,0 +1,14 @@
+{
+  "This file could not be played. Check your connection and try again.": [
+    "تعذّر تشغيل هذا الملف. تحقّق من اتصالك ثم حاول مرة أخرى.",
+    "Diese Datei konnte nicht abgespielt werden. Prüfe deine Verbindung und versuche es noch einmal."
+  ],
+  "forum post::New": [
+    "جديد",
+    "Neu"
+  ],
+  "{0, plural, one {# mention} other {# mentions}}": [
+    "{0, plural, zero {لا إشارات} one {إشارة واحدة} two {إشارتان} few {# إشارات} many {# إشارة} other {# إشارة}}",
+    "{0, plural, one {# Erwähnung} other {# Erwähnungen}}"
+  ]
+}

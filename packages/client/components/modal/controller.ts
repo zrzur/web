@@ -44,6 +44,7 @@ export class ModalController {
     this.remove = this.remove.bind(this);
     this.isOpen = this.isOpen.bind(this);
     this.closeAll = this.closeAll.bind(this);
+    this.discard = this.discard.bind(this);
   }
 
   /**
@@ -129,6 +130,17 @@ export class ModalController {
     setTimeout(() => {
       this.setModals(this.modals.filter((entry) => entry.id !== id));
     }, 500); /** FIXME / TODO: set to motion anim time + 100ms */
+  }
+
+  /**
+   * Take a modal off the list at once, whatever it holds back: for a
+   * window that could not be drawn at all (its part did not download).
+   * It used to stay on the list, invisible and "open", so Escape and Back
+   * first closed nothing.
+   */
+  discard(id: string) {
+    this.#closeGuards.delete(id);
+    this.setModals(this.modals.filter((entry) => entry.id !== id));
   }
 
   /**

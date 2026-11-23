@@ -3,7 +3,7 @@
  * The standalone Designs, Discover and developer documentation sites: their
  * own first download, without the chat app's pages
  */
-import { lazy } from "solid-js";
+import { lazy } from "@revolt/common/lib/lazyPart";
 
 import { Navigate, Route } from "@solidjs/router";
 

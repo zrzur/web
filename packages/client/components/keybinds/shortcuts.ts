@@ -8,6 +8,7 @@
  * plugin can never take them over.
  */
 import { shortcutFor } from "./active";
+import type { Platform, Sys } from "./keymap";
 
 export type GlobalShortcut =
   | "toggle_mute"
@@ -15,7 +16,9 @@ export type GlobalShortcut =
   | "open_shortcuts"
   | "toggle_streamer"
   | "toggle_soundboard"
-  | "save_clip";
+  | "save_clip"
+  | "leave_call"
+  | "open_quick_switcher";
 
 type KeyLike = Pick<
   KeyboardEvent,
@@ -30,12 +33,16 @@ type KeyLike = Pick<
  */
 export function matchGlobalShortcut(
   event: KeyLike,
-  mac: boolean,
+  sys: Sys,
 ): GlobalShortcut | undefined {
-  const id = shortcutFor(event, mac);
+  const id = shortcutFor(event, sys);
   // the app-wide ones: toggle_mute, toggle_deafen, toggle_streamer,
-  // toggle_soundboard, save_clip, open_shortcuts
-  return id && /^(toggle_|open_s|save_clip)/.test(id)
+  // toggle_soundboard, save_clip, open_shortcuts, leave_call,
+  // open_quick_switcher
+  return id &&
+    /^(toggle_\w+|open_shortcuts|open_quick_switcher|save_clip|leave_call)$/.test(
+      id,
+    )
     ? (id as GlobalShortcut)
     : undefined;
 }
@@ -94,7 +101,63 @@ export function pttKeyAllowed(code: string) {
   return !!code && !BLOCKED_PTT.test(code);
 }
 
+type PlatformSource = {
+  /** `navigator.userAgentData.platform`: "macOS", "Windows", "Linux", … */
+  uaPlatform?: string;
+  /** `navigator.platform`: "MacIntel", "Win32", "Linux x86_64", … */
+  platform?: string;
+  userAgent?: string;
+  /** The desktop app's `process.platform`: "darwin", "win32", "linux" */
+  desktop?: string;
+};
+
+/**
+ * Which system's shortcuts apply: the desktop app says so itself; in a
+ * browser the client hints come first, then the older `navigator.platform`
+ * and the user agent. iPhones and iPads use the Mac set (Command keys on
+ * their keyboards); ChromeOS and anything unknown the Windows set.
+ */
+export function platformFrom(source: PlatformSource): Platform {
+  const desktop = source.desktop;
+  if (desktop === "darwin") return "mac";
+  if (desktop === "win32") return "windows";
+  if (desktop === "linux" || desktop === "freebsd" || desktop === "openbsd")
+    return "linux";
+  const text = [source.uaPlatform, source.platform, source.userAgent]
+    .filter(Boolean)
+    .join(" ");
+  const first =
+    (source.uaPlatform || source.platform || source.userAgent) ?? "";
+  for (const probe of [first, text]) {
+    if (/mac|iphone|ipad|ipod|ios/i.test(probe)) return "mac";
+    if (/win/i.test(probe)) return "windows";
+    if (/android|cros/i.test(probe)) return "windows";
+    if (/linux|x11|bsd/i.test(probe)) return "linux";
+  }
+  return "windows";
+}
+
+/** This device's system, from what the browser or the desktop app tells */
+export function detectPlatform(): Platform {
+  if (typeof navigator === "undefined") return "windows";
+  const nav = navigator as Navigator & {
+    userAgentData?: { platform?: string };
+  };
+  const native =
+    typeof window !== "undefined"
+      ? (window as { native?: { platform?: unknown } }).native
+      : undefined;
+  const desktop =
+    typeof native?.platform === "function"
+      ? (native.platform as () => unknown)()
+      : native?.platform;
+  return platformFrom({
+    desktop: typeof desktop === "string" ? desktop : undefined,
+    uaPlatform: nav.userAgentData?.platform,
+    platform: nav.platform,
+    userAgent: nav.userAgent,
+  });
+}
+
 /** Whether this device uses Command for shortcuts */
-export const isMac = () =>
-  typeof navigator !== "undefined" &&
-  /Mac|iPhone|iPad/.test(navigator.platform || navigator.userAgent);
+export const isMac = () => detectPlatform() === "mac";

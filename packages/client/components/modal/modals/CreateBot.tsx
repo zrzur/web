@@ -7,8 +7,8 @@ import { styled } from "styled-system/jsx";
 
 import { Checkbox, Column, Dialog, DialogProps, Form2, Text } from "@revolt/ui";
 
-import { useModals } from "..";
 import { Modals } from "../types";
+import { BotNameField, botNameBlocks } from "./BotNameField";
 
 /**
  * Create a new bot
@@ -17,9 +17,10 @@ export function CreateBotModal(
   props: DialogProps & Modals & { type: "create_bot" },
 ) {
   const { t } = useLingui();
-  const { showError } = useModals();
 
   const [accepted, setAccepted] = createSignal(false);
+  // shown in this dialog, not in a second one on top of it
+  const [error, setError] = createSignal<unknown>();
 
   /** Bot rules; creating a bot needs them read and accepted */
   const rules = () => [
@@ -35,7 +36,8 @@ export function CreateBotModal(
   });
 
   async function onSubmit() {
-    if (!accepted()) return;
+    if (!accepted() || botNameBlocks(group.controls.username.value)) return;
+    setError(undefined);
     try {
       const bot = await props.client.bots.createBot(
         group.controls.username.value,
@@ -43,8 +45,8 @@ export function CreateBotModal(
 
       props.onCreate(bot);
       props.onClose();
-    } catch (error) {
-      showError(error);
+    } catch (failure) {
+      setError(failure);
     }
   }
 
@@ -67,21 +69,17 @@ export function CreateBotModal(
             onSubmit();
             return false;
           },
-          isDisabled: !Form2.canSubmit(group) || !accepted(),
+          isDisabled:
+            !Form2.canSubmit(group) ||
+            !accepted() ||
+            botNameBlocks(group.controls.username.value),
         },
       ]}
       isDisabled={group.isPending}
     >
       <form onSubmit={submit}>
         <Column>
-          <Form2.TextField
-            minlength={2}
-            maxlength={32}
-            counter
-            name="username"
-            control={group.controls.username}
-            label={t`Username`}
-          />
+          <BotNameField control={group.controls.username} error={error()} />
           <Text>
             <Trans>Bot rules</Trans>
           </Text>

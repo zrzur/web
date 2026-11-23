@@ -5,6 +5,15 @@ const CLICK_SUPPRESS_WINDOW = 400;
 // Track pointer events so child triggers don't bubble duplicate menus to parents
 const handledEvents = new WeakSet<PointerEvent>();
 
+/**
+ * Take a touch press for another gesture (a drag that starts on a long press,
+ * with its own menu): the long-press menu listeners here leave it alone
+ * @param event Pointer down event of the press
+ */
+export function claimLongPress(event: PointerEvent) {
+  handledEvents.add(event);
+}
+
 // Suppress synthetic click after releasing a long press
 function suppressNextClick() {
   function suppress(event: MouseEvent) {

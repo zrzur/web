@@ -1,4 +1,5 @@
-import { ErrorBoundary, Show, Suspense, createMemo, lazy } from "solid-js";
+import { lazy } from "@revolt/common/lib/lazyPart";
+import { ErrorBoundary, Show, Suspense, createMemo } from "solid-js";
 
 import { useClient } from "@revolt/client";
 

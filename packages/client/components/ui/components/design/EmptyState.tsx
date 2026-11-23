@@ -15,6 +15,9 @@ const moods: Record<EmptyArt, string> = {
   chats: "cheerful",
   communities: "excited",
   search: "look-down",
+  // a part of the app could not be downloaded (no connection for a moment):
+  // the delivered "Alert" expression (15-alert), unchanged
+  offline: "alert",
 };
 
 export type EmptyArt =
@@ -24,7 +27,8 @@ export type EmptyArt =
   | "blocked"
   | "chats"
   | "communities"
-  | "search";
+  | "search"
+  | "offline";
 
 /**
  * Calm empty state: the mood, one line of context, one action

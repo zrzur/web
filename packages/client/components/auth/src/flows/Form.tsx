@@ -1,9 +1,9 @@
+import { lazy } from "@revolt/common/lib/lazyPart";
 import {
   createContext,
   createSignal,
   For,
   JSX,
-  lazy,
   onCleanup,
   Show,
   useContext,

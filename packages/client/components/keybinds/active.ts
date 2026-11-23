@@ -8,21 +8,24 @@ import { createSignal } from "solid-js";
 import {
   type CustomCombos,
   type Keymap,
+  type Platform,
   type ShortcutId,
+  type Sys,
   defaultTable,
   matchShortcut,
+  platformOf,
 } from "./keymap";
-import { isMac, isTypingTarget } from "./shortcuts";
+import { detectPlatform, isTypingTarget } from "./shortcuts";
 
-const defaults: Partial<Record<"mac" | "other", Keymap>> = {};
+const defaults: Partial<Record<Platform, Keymap>> = {};
 
 /** The default table for this system, built once */
-export function defaultKeymap(mac: boolean): Keymap {
-  const slot = mac ? "mac" : "other";
-  return (defaults[slot] ??= defaultTable(mac));
+export function defaultKeymap(sys: Sys): Keymap {
+  const slot = platformOf(sys);
+  return (defaults[slot] ??= defaultTable(slot));
 }
 
-type Compile = (custom: CustomCombos, mac: boolean) => Keymap;
+type Compile = (custom: CustomCombos, sys: Sys) => Keymap;
 const [compiler, setCompilerSignal] = createSignal<Compile>();
 /** The compiler for a person's own shortcuts, once keymapCompile.ts loaded */
 export { compiler };
@@ -31,22 +34,27 @@ export function setCompiler(compile: Compile) {
   setCompilerSignal(() => compile);
 }
 
-let source: (mac: boolean) => Keymap = defaultKeymap;
+let source: (sys: Sys) => Keymap = defaultKeymap;
 
 /** Use this table from now on (the keybinds store calls this) */
-export function bindKeymap(next: (mac: boolean) => Keymap) {
+export function bindKeymap(next: (sys: Sys) => Keymap) {
   source = next;
 }
 
 /** The table for this system */
-export function activeKeymap(mac: boolean = deviceMac()): Keymap {
-  return source(mac);
+export function activeKeymap(sys: Sys = devicePlatform()): Keymap {
+  return source(sys);
 }
 
-let mac: boolean | undefined;
-/** Whether this device uses Command, read once */
+let platform: Platform | undefined;
+/** This device's system (macOS, Windows or Linux), read once */
+export function devicePlatform(): Platform {
+  return (platform ??= detectPlatform());
+}
+
+/** Whether this device uses Command */
 export function deviceMac() {
-  return (mac ??= isMac());
+  return devicePlatform() === "mac";
 }
 
 type KeyLike = Parameters<typeof matchShortcut>[1] & {
@@ -73,11 +81,11 @@ export const shortcutsPaused = () => recording > 0;
 /** Which app shortcut this key press is, with the person's own keys */
 export function shortcutFor(
   event: KeyLike,
-  isMacDevice: boolean = deviceMac(),
+  sys: Sys = devicePlatform(),
 ): ShortcutId | undefined {
   if (recording) return undefined;
-  const map = activeKeymap(isMacDevice);
-  const id = matchShortcut(map, event, isMacDevice);
+  const map = activeKeymap(sys);
+  const id = matchShortcut(map, event, sys);
   // in a text field only combinations with Ctrl, Cmd or Alt act; the key
   // itself goes to the text (and nothing is prevented)
   if (id && event.target && isTypingTarget(event.target)) {

@@ -10,9 +10,13 @@
 
 @@0
 
-## الكود {#the-code}
+وعلى ويندوز، في PowerShell:
 
 @@1
+
+## الكود {#the-code}
+
+@@2
 
 شغّله بالأمر `node upload.mjs`.
 

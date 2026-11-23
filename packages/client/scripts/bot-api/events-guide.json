@@ -20,7 +20,7 @@
   "ServerMemberJoin": { "docs": "A member joined. The bot always sees itself join.", "intent": "SERVER_MEMBERS" },
   "ServerMemberLeave": { "docs": "A member left, was kicked or banned: `reason` says which. When `user` is the bot, it left that server.", "intent": "SERVER_MEMBERS" },
   "ServerRoleUpdate": { "docs": "A role was created or changed.", "intent": "SERVERS" },
-  "ServerRoleDelete": { "docs": "A role was deleted.", "intent": "SERVERS" },
+  "ServerRoleDelete": { "docs": "A role was deleted. Members who had it lose it; remove it from your caches and from any setting that names it.", "intent": "SERVERS" },
   "ServerRoleRanksUpdate": { "docs": "The order of the roles changed. `ranks` lists role ids from the highest down.", "intent": "SERVERS" },
   "UserUpdate": { "docs": "A user changed their profile. Without `PRESENCE` status changes are left out.", "intent": "always" },
   "UserPlatformWipe": { "docs": "An account was removed from Zrzur. Delete what you store about that user.", "intent": "always" },
@@ -58,7 +58,14 @@
   "ServerEventDelete": { "docs": "A scheduled server event is gone, or the bot can no longer see it.", "intent": "always" },
   "ServerEventInterest": { "docs": "Someone marked a scheduled server event as interesting, or took the mark back. `count` is the number after it.", "intent": "always" },
   "StageUpdate": { "docs": "The live state of a stage changed: topic, speakers or raised hands.", "intent": "VOICE_STATES" },
-  "SoundboardPlay": { "docs": "Someone played a soundboard sound in a voice channel.", "intent": "VOICE_STATES" }
+  "SoundboardPlay": { "docs": "Someone played a soundboard sound in a voice channel.", "intent": "VOICE_STATES" },
+  "Logout": { "docs": "The connection is closed for good: the token was reset, the bot was deleted or disabled, or its owner was suspended. Do not reconnect with the same token.", "intent": "always" },
+  "ServerEventCounts": { "docs": "The number of people going, maybe going and waiting for a scheduled server event changed. `counts` holds the new numbers; `channel` is set for events in a channel.", "intent": "always" },
+  "ServerEventRsvpUpdate": { "docs": "The bot's own answer to a scheduled server event changed: it answered elsewhere, a seat became free for it, or an organiser removed it. Without `rsvp` it has no answer now.", "intent": "always" },
+  "VoiceCaptureUpdate": { "docs": "Clips or a recording in a voice room changed. `data` is the whole state: whether clips are on, the running recording and who is included.", "intent": "VOICE_STATES" },
+  "VoiceRingEnd": { "docs": "A call ring to someone ended. `reason` is `Declined`, `Answered` or `Missed`.", "intent": "always" },
+  "MessageReminderDue": { "docs": "A reminder set on a message is due. `message` and `user` come along while the message can still be read.", "intent": "always" },
+  "ReportCreate": { "docs": "A report was made. Only Zrzur staff sessions receive it; bots never do." }
  },
  "clientMessages": {
   "Authenticate": "Your first message. `token` is the bot token, `intents` the sum of the intents you want. With `resumable: true` the session can be resumed after a drop, and `Ready` carries `session_id`.",

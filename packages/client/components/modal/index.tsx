@@ -1,12 +1,23 @@
-import { For, JSXElement, Show, createContext, useContext } from "solid-js";
+import {
+  ErrorBoundary,
+  For,
+  JSXElement,
+  Show,
+  createContext,
+  onMount,
+  useContext,
+} from "solid-js";
+
+import { useLingui } from "@lingui/solid/macro";
 
 import type { MFA, MFATicket } from "@zrzur/sdk/solid";
 
 import { Keybind, KeybindAction } from "@revolt/keybinds";
-import { dismissFloatingElements } from "@revolt/ui";
+import { dismissFloatingElements, useSnackbar } from "@revolt/ui";
 
 import { ModalController } from "./controller";
-import { RenderModal } from "./modals";
+import { RenderModal, isWindowPart } from "./modals";
+import { windowNeverDrew } from "./windowFailure";
 
 export { type ActiveModal, ModalController } from "./controller";
 
@@ -159,10 +170,20 @@ export function ModalRenderer() {
     <>
       <For each={modalController.modals}>
         {(entry) => (
-          <RenderModal
-            {...entry}
-            onClose={() => modalController.remove(entry.id)}
-          />
+          <ErrorBoundary
+            fallback={(error) => {
+              // only when the window's own part failed (it never drew);
+              // anything else is not ours to hide: it goes up
+              if (!windowNeverDrew(error, isWindowPart)) throw error;
+              console.warn("[app] a window could not be loaded", error);
+              return windowNotLoaded(() => modalController.discard(entry.id));
+            }}
+          >
+            <RenderModal
+              {...entry}
+              onClose={() => modalController.remove(entry.id)}
+            />
+          </ErrorBoundary>
         )}
       </For>
       <Show when={modalController.isOpen()}>
@@ -173,4 +194,23 @@ export function ModalRenderer() {
       </Show>
     </>
   );
+}
+
+/**
+ * A window whose part could not be downloaded (no connection for a moment):
+ * it is taken off the list at once, so nothing invisible stays "open", and
+ * a short note says what to do.
+ */
+function windowNotLoaded(discard: () => void) {
+  const { t } = useLingui();
+  const snackbar = useSnackbar();
+  onMount(() => {
+    // after this pass: the entry's own boundary is what draws this
+    queueMicrotask(discard);
+    snackbar.show({
+      message: t`Could not open. Check your connection and try again.`,
+      replaceActive: true,
+    });
+  });
+  return null;
 }

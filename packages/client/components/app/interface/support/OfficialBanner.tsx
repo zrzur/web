@@ -1,11 +1,5 @@
-import {
-  ErrorBoundary,
-  Show,
-  Suspense,
-  createSignal,
-  lazy,
-  onMount,
-} from "solid-js";
+import { lazy } from "@revolt/common/lib/lazyPart";
+import { ErrorBoundary, Show, Suspense, createSignal, onMount } from "solid-js";
 import { Dynamic } from "solid-js/web";
 
 import { Trans, useLingui } from "@lingui/solid/macro";

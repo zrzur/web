@@ -3,7 +3,7 @@ import { folder as MdFolder } from "@revolt/ui/icons/legacy";
 import { For, Show } from "solid-js";
 
 import { Plural, Trans } from "@lingui/solid/macro";
-import { Server } from "@zrzur/sdk/solid";
+import { Channel, Server } from "@zrzur/sdk/solid";
 import dayjs from "dayjs";
 
 import { canOpenServerSettings } from "@revolt/app/interface/settings/server/access";
@@ -17,6 +17,10 @@ import { Avatar, Column, Text, Time } from "@revolt/ui";
 import { Icon } from "@revolt/ui/icons/Icon";
 import { styled } from "styled-system/jsx";
 
+import {
+  markServerRead,
+  serverHasNews,
+} from "../../../src/interface/channels/forum/unread";
 import Breakpoint from "../../common/Breakpoint";
 import { QuickAction, QuickRow } from "./shared/QuickRow";
 
@@ -66,6 +70,7 @@ export function ServerContextMenu(props: {
 }) {
   const state = useState();
   const client = useClient();
+  const isMuted = (channel: Channel) => state.notifications.isMuted(channel);
   const device = useDevice();
   const { openModal, showError } = useModals();
   const navigate = useNavigate();
@@ -106,8 +111,8 @@ export function ServerContextMenu(props: {
    * Mark server as read
    */
   function markAsRead() {
-    // a failed request is only a mark that comes back with the next sync
-    props.server.ack().catch(() => undefined);
+    // forums too: their posts are not in the server's channel list
+    void markServerRead(client(), props.server, isMuted);
   }
 
   /**
@@ -294,7 +299,7 @@ export function ServerContextMenu(props: {
         </ContextMenuButton>
         <ContextMenuDivider />
       </Show>
-      <Show when={props.server.unread}>
+      <Show when={serverHasNews(client(), props.server, isMuted)}>
         <ContextMenuButton icon={MdMarkChatRead} onClick={markAsRead}>
           <Trans>Mark as read</Trans>
         </ContextMenuButton>

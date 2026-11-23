@@ -95,18 +95,6 @@
 .z-media-volume input {
   width: 58px;
 }
-.z-media-error {
-  position: absolute;
-  inset: 0 0 65px;
-  display: grid;
-  place-items: center;
-  padding: 8px;
-  font-size: 12px;
-  background: var(--z-bg-sidebar);
-}
-.z-media-player--audio .z-media-error {
-  position: static;
-}
 .z-media-player:fullscreen {
   width: 100vw;
   height: 100vh;

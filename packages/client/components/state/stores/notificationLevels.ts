@@ -61,3 +61,36 @@ export function mentionsForNotification(input: {
     return true;
   return !input.suppressRoles && input.mentionsMyRole;
 }
+
+/**
+ * The level for a channel: its own choice, else (threads and forum posts)
+ * its parent channel's, else the server's, else the default for its type
+ */
+export function effectiveChannelState(input: {
+  own: NotificationState | undefined;
+  parent: NotificationState | undefined;
+  server: NotificationState | undefined;
+  typeDefault: NotificationState;
+}): NotificationState {
+  return input.own ?? input.parent ?? input.server ?? input.typeDefault;
+}
+
+/** Whether a mute is on now (no end, or an end still to come) */
+export function muteActive(
+  mute: { until?: number } | undefined,
+  now: number,
+): boolean {
+  return !!mute && (!mute.until || mute.until > now);
+}
+
+/**
+ * Whether a channel is muted: by its server, by its parent channel (threads
+ * and forum posts), or on its own
+ */
+export function effectiveChannelMute(input: {
+  server: boolean;
+  parent: boolean;
+  own: boolean;
+}): boolean {
+  return input.server || input.parent || input.own;
+}

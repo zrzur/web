@@ -49,10 +49,11 @@ describe("permission bits", () => {
 });
 
 describe("inviteQuery", () => {
-  it("grants permissions only on a server, and only when there are any", () => {
+  it("names the permissions on a server, 0 when everything is unticked", () => {
     expect(inviteQuery(true, SEND)).toBe(`?permissions=${SEND}`);
-    expect(inviteQuery(true, 0)).toBe("");
-    expect(inviteQuery(true, undefined)).toBe("");
+    // a missing value would give the bot its default permissions
+    expect(inviteQuery(true, 0)).toBe("?permissions=0");
+    expect(inviteQuery(true, undefined)).toBe("?permissions=0");
     expect(inviteQuery(false, SEND)).toBe("");
   });
 });

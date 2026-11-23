@@ -77,13 +77,14 @@ Package names such as `stoat.js` and `@revolt/*` are kept so the existing protoc
 
 ## Contributing and security
 
-- Contributing: [CONTRIBUTING.md](./CONTRIBUTING.md). Keep changes focused and keep the attribution.
+- Contributing: [CONTRIBUTING.md](./CONTRIBUTING.md). Open pull requests into `beta`, keep changes focused and keep the attribution.
 - Security reports: [SECURITY.md](./SECURITY.md).
+- Code of conduct: [CODE_OF_CONDUCT.md](./CODE_OF_CONDUCT.md).
 - Changes: [CHANGELOG.md](./CHANGELOG.md).
 
 ## Licence and origin
 
-Zrzur is an independent, Arabic-first chat platform based on the open-source Stoat software (formerly Revolt), licensed under the AGPL, version 3 only (the upstream code grants no later versions). Zrzur is not affiliated with Stoat, stoat.chat or Revolt Platforms Ltd. Please do not report Zrzur issues to the Stoat team.
+Zrzur is an independent chat platform based on the open-source Stoat software (formerly Revolt), licensed under the AGPL, version 3 only (the upstream code grants no later versions). Zrzur is not affiliated with Stoat, stoat.chat or Revolt Platforms Ltd. Please do not report Zrzur issues to the Stoat team.
 
 - Licence: AGPL-3.0-only, see [LICENSE](./LICENSE).
 - Upstream: [stoatchat/for-web](https://github.com/stoatchat/for-web), basis tag `stoat-for-web-v0.16.3`.

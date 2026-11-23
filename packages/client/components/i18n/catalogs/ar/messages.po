@@ -3870,6 +3870,10 @@ msgstr "يمكن لأصحاب البوتات تقديمها من إعدادات 
 msgid "Bot permissions"
 msgstr "صلاحيات البوت"
 
+#: src/interface/Developers.tsx
+msgid "The servers list shows servers the user is in. Check <0>can_manage</0> before letting them change settings."
+msgstr "تضم قائمة السيرفرات كل سيرفر ينتمي إليه المستخدم. تحقّق من <0>can_manage</0> قبل أن تسمح له بتغيير الإعدادات."
+
 #: components/app/interface/settings/user/safety/SafetyDashboard.tsx
 #~ msgid "Bot requests couldn't be loaded."
 #~ msgstr "تعذّر تحميل طلبات البوتات."
@@ -23184,6 +23188,10 @@ msgid "The bot will not be granted any permissions."
 msgstr "لن يُمنح البوت أي صلاحيات."
 
 #: src/interface/OAuth.tsx
+msgid "The bot's permissions there, at most (only the ones you hold, with Manage Roles):"
+msgstr "صلاحيات البوت هناك، في أقصى حد (ما تملكه منها فقط، مع إدارة الأدوار):"
+
+#: src/interface/OAuth.tsx
 msgid "The bot's permissions there:"
 msgstr "صلاحيات البوت هناك:"
 
@@ -31059,3 +31067,322 @@ msgstr "ارفع صورة"
 #: components/modal/modals/ServerEventEditor.tsx
 msgid "Upload a picture of your own; it is cropped to 16:9. The ready covers are there if you have none."
 msgstr "ارفع صورة من عندك، وتُقَصّ بنسبة 16:9. والأغلفة الجاهزة متاحة إن لم تكن لديك صورة."
+
+#: components/modal/modals/BotNameField.tsx
+msgid "Bot name"
+msgstr "اسم البوت"
+
+#: components/modal/modals/BotNameField.tsx
+msgid "Letters, numbers, spaces between words, and _ . -"
+msgstr "حروف وأرقام ومسافات بين الكلمات، و_ . -"
+
+#: components/modal/modals/BotNameField.tsx
+msgid "One space between words, and none at the start or end."
+msgstr "مسافة واحدة بين الكلمات، ولا مسافة في البداية أو النهاية."
+
+#: components/modal/modals/BotNameField.tsx
+msgid "Use letters, numbers, spaces and _ . - only."
+msgstr "استخدم الحروف والأرقام والمسافات و_ . - فقط."
+
+#: components/modal/modals/EditBotUsername.tsx
+msgid "Change bot name"
+msgstr "تغيير اسم البوت"
+
+#: src/interface/Friends.tsx
+msgid "This profile could not be opened. The account may no longer exist."
+msgstr "تعذّر فتح هذا الملف الشخصي. ربما لم يعد الحساب موجودًا."
+
+#: src/interface/navigation/NotificationsPhone.tsx
+msgid "Open profile"
+msgstr "فتح الملف الشخصي"
+
+#: components/app/interface/settings/channel/permissions/VisibilityPeople.tsx
+msgid "Add people"
+msgstr "إضافة أشخاص"
+
+#: components/app/interface/settings/channel/permissions/VisibilityPeople.tsx
+msgid "People"
+msgstr "الأشخاص"
+
+#: components/app/interface/settings/channel/permissions/VisibilityPeople.tsx
+msgid "People you add here can see it, whatever their roles."
+msgstr "الأشخاص الذين تضيفهم هنا يرون القناة، أيًّا كانت أدوارهم."
+
+#. placeholder {0}: nameOf(id)
+#: components/app/interface/settings/channel/permissions/VisibilityPeople.tsx
+msgid "Remove {0} from this list"
+msgstr "إزالة {0} من هذه القائمة"
+
+#: components/app/interface/settings/channel/permissions/VisibilityPeople.tsx
+msgid "These people can't see it, whatever their roles allow."
+msgstr "لا يرى هؤلاء الأشخاص القناة، مهما سمحت لهم أدوارهم."
+
+#: components/app/interface/settings/channel/permissions/VisibilityPeople.tsx
+msgid "You can't change access for someone ranked the same as you or above you."
+msgstr "لا يمكنك تغيير وصول شخص رتبته مثل رتبتك أو أعلى منها."
+
+#: components/app/interface/settings/channel/permissions/VisibilityPeople.tsx
+msgid "You can't give permissions you don't have yourself."
+msgstr "لا يمكنك منح صلاحيات لا تملكها أنت."
+
+#: components/app/interface/settings/channel/permissions/VisibilityPeople.tsx
+msgid "You need “Manage permissions” to change who can see this channel."
+msgstr "تحتاج إلى صلاحية «إدارة الصلاحيات» لتغيير من يرى هذه القناة."
+
+
+
+#: components/app/interface/settings/channel/permissions/VisibilityPeople.tsx
+msgid "This person is no longer in the server."
+msgstr "هذا الشخص لم يعد في السيرفر."
+
+#. placeholder {0}: props.context.parent?.name ?? ""
+#: components/app/interface/settings/channel/permissions/ChannelVisibility.tsx
+msgid "This thread follows who can see #{0}."
+msgstr "يتبع هذا الخيط إعدادات من يرى القناة #{0}."
+
+#: components/app/interface/settings/channel/permissions/VisibilityPeople.tsx
+msgid "{name} was added to the list"
+msgstr "تمت إضافة {name} إلى القائمة"
+
+#: components/app/interface/settings/channel/permissions/VisibilityPeople.tsx
+msgid "{name} was removed from the list"
+msgstr "تمت إزالة {name} من القائمة"
+
+#: components/app/interface/settings/channel/permissions/VisibilityPeople.tsx
+msgid "A member who left"
+msgstr "عضو غادر السيرفر"
+
+#: components/app/interface/settings/channel/permissions/ChannelVisibility.tsx
+msgid "This thread follows who can see its channel."
+msgstr "يتبع هذا الخيط إعدادات من يرى قناته."
+
+#: components/app/interface/channels/text/EditMessage.tsx
+msgid "Escape to <0>cancel</0> · Enter to <1>save</1>"
+msgstr "اضغط Escape <0>للإلغاء</0> · Enter <1>للحفظ</1>"
+
+#: src/interface/channels/text/Composition.tsx
+msgid "{over, plural, one {This message is too long. Remove # character to send it (up to {max}).} other {This message is too long. Remove # characters to send it (up to {max}).}}"
+msgstr "{over, plural, zero {هذه الرسالة طويلة جدًا. احذف # حرفًا لإرسالها (الحد الأقصى {max}).} one {هذه الرسالة طويلة جدًا. احذف حرفًا واحدًا لإرسالها (الحد الأقصى {max}).} two {هذه الرسالة طويلة جدًا. احذف حرفين لإرسالها (الحد الأقصى {max}).} few {هذه الرسالة طويلة جدًا. احذف # أحرف لإرسالها (الحد الأقصى {max}).} many {هذه الرسالة طويلة جدًا. احذف # حرفًا لإرسالها (الحد الأقصى {max}).} other {هذه الرسالة طويلة جدًا. احذف # حرف لإرسالها (الحد الأقصى {max}).}}"
+
+#: src/interface/channels/text/Composition.tsx
+msgid "Your message is longer than the limit."
+msgstr "رسالتك أطول من الحد المسموح به."
+
+#: components/ui/components/features/messaging/elements/PlaybackFailure.tsx
+msgid "This file could not be played. Check your connection and try again."
+msgstr "تعذّر تشغيل هذا الملف. تحقّق من اتصالك ثم حاول مرة أخرى."
+
+#: src/interface/channels/forum/ForumChannel.tsx
+msgctxt "forum post"
+msgid "New"
+msgstr "جديد"
+
+#. placeholder {0}: entry.mentions
+#: components/modal/modals/QuickSwitcher.tsx
+#: src/interface/channels/forum/ForumChannel.tsx
+msgid "{0, plural, one {# mention} other {# mentions}}"
+msgstr "{0, plural, zero {لا إشارات} one {إشارة واحدة} two {إشارتان} few {# إشارات} many {# إشارة} other {# إشارة}}"
+
+#: components/modal/index.tsx
+msgid "Could not open. Check your connection and try again."
+msgstr "تعذّر الفتح. تحقّق من اتصالك وحاول مرة أخرى."
+
+#: components/ui/components/utils/PageBoundary.tsx
+msgid "Could not open."
+msgstr "تعذّر الفتح."
+
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "Move the small call card to another corner"
+msgstr "انقل بطاقة المكالمة الصغيرة إلى زاوية أخرى"
+
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "While the small call card is focused (you are in a call and look at another page)."
+msgstr "عندما يكون التركيز على بطاقة المكالمة الصغيرة (أنت في مكالمة وتتصفح صفحة أخرى)."
+
+#: components/app/interface/settings/user/profile/UserProfileEditor.tsx
+msgid "Saving… one moment."
+msgstr "جارٍ الحفظ… لحظة واحدة."
+
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "Accept a suggestion"
+msgstr "قبول اقتراح"
+
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "Also closes the emoji picker."
+msgstr "ويغلق منتقي الإيموجي أيضًا."
+
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "Another system's keys, to read. You change your own on this device's set."
+msgstr "مفاتيح نظام آخر للاطلاع فقط. تغيّر مفاتيحك من مجموعة هذا الجهاز."
+
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "Bold text"
+msgstr "نص عريض"
+
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "Cancel a reply"
+msgstr "إلغاء الرد"
+
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "Copy the text"
+msgstr "نسخ النص"
+
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "In the message list. The keys below then work on that message."
+msgstr "في قائمة الرسائل. بعدها تعمل المفاتيح التالية على تلك الرسالة."
+
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "Italic text"
+msgstr "نص مائل"
+
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "Keys shown"
+msgstr "المفاتيح المعروضة"
+
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "Leave the call"
+msgstr "مغادرة المكالمة"
+
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "Mention a role or a channel"
+msgstr "الإشارة إلى دور أو قناة"
+
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "Mention someone"
+msgstr "الإشارة إلى شخص"
+
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "Move between messages"
+msgstr "التنقل بين الرسائل"
+
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "Next unread channel"
+msgstr "القناة غير المقروءة التالية"
+
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "Open the emoji picker"
+msgstr "فتح منتقي الإيموجي"
+
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "Open your mentions"
+msgstr "فتح الإشارات إليك"
+
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "Pin or unpin"
+msgstr "تثبيت أو إلغاء التثبيت"
+
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "Previous unread channel"
+msgstr "القناة غير المقروءة السابقة"
+
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "Scroll the messages"
+msgstr "تمرير الرسائل"
+
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "Search this channel"
+msgstr "البحث في هذه القناة"
+
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "Shift+click a name or picture: the mention goes in at the cursor."
+msgstr "انقر مع Shift على اسم أو صورة، فتُضاف الإشارة عند موضع المؤشر."
+
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "Shift+click the role or the channel."
+msgstr "انقر مع Shift على الدور أو القناة."
+
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "Show the keys for"
+msgstr "عرض المفاتيح لنظام"
+
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "This device's keys. Look at another system's set."
+msgstr "مفاتيح هذا الجهاز. اطّلع على مجموعة نظام آخر."
+
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "Upload a file"
+msgstr "رفع ملف"
+
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "When no text is selected."
+msgstr "عندما لا يكون أي نص محددًا."
+
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "Where you can send files."
+msgstr "حيث يمكنك إرسال الملفات."
+
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "Where you may pin messages."
+msgstr "حيث يُسمح لك بتثبيت الرسائل."
+
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "While names or emoji are suggested."
+msgstr "أثناء ظهور اقتراحات الأسماء أو الإيموجي."
+
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "Your own message."
+msgstr "رسالتك أنت."
+
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "Your own message. Asks first; with Shift it doesn't."
+msgstr "رسالتك أنت. يُطلب التأكيد أولًا، ومع Shift لا يُطلب."
+
+#: components/modal/modals/QuickSwitcher.tsx
+msgid "Channels, conversations, servers and friends"
+msgstr "القنوات والمحادثات والسيرفرات والأصدقاء"
+
+#: components/modal/modals/QuickSwitcher.tsx
+msgid "Friend"
+msgstr "صديق"
+
+#: components/modal/modals/QuickSwitcher.tsx
+msgid "Go to"
+msgstr "انتقل إلى"
+
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "Go to a channel, conversation or server"
+msgstr "الانتقال إلى قناة أو محادثة أو سيرفر"
+
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "On the message with the keyboard focus. Reach it with ↑ and ↓."
+msgstr "على الرسالة التي عليها تركيز لوحة المفاتيح. انتقل إليها بالسهمين ↑ و↓."
+
+#: components/modal/modals/QuickSwitcher.tsx
+msgid "Recent and unread places"
+msgstr "الأماكن الأخيرة وغير المقروءة"
+
+#: components/modal/modals/QuickSwitcher.tsx
+msgid "Results"
+msgstr "النتائج"
+
+#: components/modal/modals/QuickSwitcher.tsx
+msgid "Start with # for channels, @ for people or * for servers."
+msgstr "ابدأ بـ # للقنوات، أو @ للأشخاص، أو * للسيرفرات."
+
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "Type a name. Start with # for channels, @ for people or * for servers."
+msgstr "اكتب اسمًا. ابدأ بـ # للقنوات، أو @ للأشخاص، أو * للسيرفرات."
+
+#: components/ui/components/features/messaging/elements/Container.tsx
+msgid "Message from {name}, {time}"
+msgstr "رسالة من {name}، {time}"
+
+#: components/app/interface/channels/text/useMessageKeys.ts
+msgid "Replying to {name}"
+msgstr "الرد على {name}"
+
+#: components/app/interface/channels/text/useMessageKeys.ts
+msgid "The text could not be copied."
+msgstr "تعذّر نسخ النص."
+
+#: components/modal/modals/QuickSwitcher.tsx
+msgid "{RESULT_LIMIT}+ results"
+msgstr "أكثر من {RESULT_LIMIT} نتيجة"
+
+#: components/modal/modals/QuickSwitcher.tsx
+msgid "You can't open this channel any more."
+msgstr "لم يعد بإمكانك فتح هذه القناة."
+
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "Your talk key holds these keys while talking from other apps is on."
+msgstr "يأخذ مفتاح التحدث هذه المفاتيح ما دام التحدث من التطبيقات الأخرى مفعّلًا."

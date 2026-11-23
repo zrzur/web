@@ -199,6 +199,9 @@ export type Modals =
       message: Message;
     }
   | {
+      type: "quick_switcher";
+    }
+  | {
       type: "delete_server";
       server: Server;
     }

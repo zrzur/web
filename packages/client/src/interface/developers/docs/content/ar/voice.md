@@ -29,6 +29,48 @@
 
 في [درس الصوت](/developers/docs/tutorial-voice) أمر `/join` كامل.
 
+## لوحة الأصوات {#soundboard}
+
+يستطيع البوت الموجود في مكالمة تشغيل أصوات السيرفر: `POST /channels/{target}/soundboard/{sound_id}`. ويحتاج إلى صلاحيتي استخدام لوحة الأصوات والتحدث هناك، وألّا يكون مكتومًا على مستوى السيرفر؛ وعلى المنصة لا يشغّل الأصوات إلا المتحدثون. بضعة أصوات كل عشر ثوانٍ (الحصة `soundboard_play`). ويتلقى كل من في المكالمة `SoundboardPlay`. أما إضافة الأصوات نفسها وتعديلها ففي صفحة [السيرفرات](/developers/docs/servers#soundboard).
+
+## المنصات {#stages}
+
+المنصة قناة صوتية فيها متحدثون ومستمعون.
+
+| الطلب | ما يفعله | يتطلب |
+| --- | --- | --- |
+| `GET /channels/{target}/stage` | الموضوع والمتحدثون والأيدي المرفوعة | |
+| `PATCH /channels/{target}/stage` | يضبط الموضوع أو يمسحه | كتم الأعضاء |
+| `PUT /channels/{target}/stage/speakers/{member}` | يمنح شخصًا على المنصة الكلمة، وتنزل يده | كتم الأعضاء ورتبة أعلى |
+| `DELETE /channels/{target}/stage/speakers/{member}` | يعيد متحدثًا إلى المستمعين (أو يوقف حديثك أنت) | كتم الأعضاء ورتبة أعلى، للآخرين |
+| `PUT /channels/{target}/stage/hand` | يطلب الكلمة (مرة كل 20 ثانية) | الاتصال |
+| `DELETE /channels/{target}/stage/hands/{member}` | يُنزل يدًا مرفوعة | كتم الأعضاء، للآخرين |
+| `DELETE /channels/{target}/stage` | ينهي المنصة: يغادر الجميع ويُمسح الموضوع والمتحدثون والأيدي | كتم الأعضاء ونقل الأعضاء |
+
+وترسل البوابة `StageUpdate` بما تغيّر وحده (`StageChange`). وللمنصة عدد محدود من المتحدثين في وقت واحد (`TooManySpeakers`).
+
+## معاينات البث {#stream-previews}
+
+يعيد `GET /channels/{target}/stream_preview/{member}` أحدث صورة ثابتة من مشاركة شاشة شخص في قناة صوتية يراها البوت (يتطلب رؤية القناة والاستماع). والبوت الذي يشارك شاشته يرسل صورته بـ`PUT /channels/{target}/stream_preview`: صورة JPEG أو WebP حجمها 20 كيلوبايت على الأكثر، بترميز base64، مرة كل 25 ثانية على الأكثر (`NoEffect` قبل ذلك).
+
+## المقاطع والتسجيلات {#capture}
+
+قد تكون في الغرفة الصوتية مقاطع وحلقات مسجّلة. ولا يُضمَّن صوت أحد إلا باختياره، ويُخبَر كل من يرى الغرفة.
+
+| الطلب | ما يفعله | يتطلب |
+| --- | --- | --- |
+| `GET /channels/{target}/capture` | هل المقاطع مفعّلة أو التسجيل جارٍ، ومن ضُمِّن، وما بقي هذا الشهر | |
+| `PUT /channels/{target}/capture/consent` | تختار هل يجوز أن يكون صوتك في المقاطع والتسجيل، حتى تغادر الغرفة | الوجود في الغرفة |
+| `PUT /channels/{target}/capture/clips` | يفعّل المقاطع أو يطفئها | إدارة القناة، والوجود في الغرفة |
+| `POST /channels/{target}/capture/clips` | يشارك مقطعًا: ارفع الصوت أولًا (الوسم `attachments`)، ثم سمِّه هنا مع كل من صوته فيه | الوجود في الغرفة، والمقاطع مفعّلة |
+| `POST /channels/{target}/capture/recording` | يبدأ تسجيل حلقة | إدارة القناة، وأن يبقى للسيرفر وقت تسجيل (حسب مستوى الأجنحة) |
+| `DELETE /channels/{target}/capture/recording` | يوقف التسجيل دون حفظه | من بدأه، أو إدارة القناة |
+| `POST /channels/{target}/capture/recording/finish` | يحفظ التسجيل الذي بدأته حلقةً (ارفع الصوت أولًا) | من بدأه |
+| `GET /channels/{target}/capture/items` | مقاطع الغرفة وحلقاتها، الأحدث أولًا | |
+| `DELETE /channels/{target}/capture/items/{id}` | يحذف مقطعًا أو حلقة مع رسالتها وملفها | من حفظه، أو أيُّ من صوته فيه، أو إدارة الرسائل |
+
+وترسل البوابة `VoiceCaptureUpdate` بالحالة كاملة. ومن الأخطاء المتوقعة: `VoiceNotAgreed` (لم يوافق أحد المذكورين)، و`TooManyVoiceClips`، و`RecordingTimeUsedUp`.
+
 ## المرجع {#reference}
 
 @@2

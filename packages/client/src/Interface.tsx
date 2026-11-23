@@ -1,8 +1,8 @@
+import { lazy } from "@revolt/common/lib/lazyPart";
 import {
   createEffect,
   createSignal,
   JSX,
-  lazy,
   Match,
   on,
   onCleanup,
@@ -27,9 +27,11 @@ import { useDevice } from "@revolt/common";
 import { useModals } from "@revolt/modal";
 import { PluginHostGate } from "@revolt/plugins/PluginHostGate";
 import { ConfirmEmailStrip } from "@revolt/auth/src/invite/ConfirmEmailStrip";
+import { notePlace } from "@revolt/keybinds/recentPlaces";
 import { Navigate, useBeforeLeave, useLocation } from "@revolt/routing";
 import { useState } from "@revolt/state";
 import { LAYOUT_SECTIONS } from "@revolt/state/stores/Layout";
+import { PageBoundary } from "@revolt/ui/components/utils/PageBoundary";
 import { lazyRetry } from "@revolt/ui/components/utils/lazyRetry";
 import { useMotion } from "@revolt/ui/motion";
 
@@ -89,6 +91,13 @@ const Interface = (props: { children?: JSX.Element }) => {
       }
     }
   });
+
+  // recent places for the quick switcher (Ctrl+K): every page shown, the
+  // first one after a load included
+  // (the account from the stored session: known before the connection is)
+  createEffect(() =>
+    notePlace(location.pathname, state.auth.getSession()?.userId),
+  );
 
   createEffect(() => {
     if (!isLoggedIn()) {
@@ -285,7 +294,10 @@ const Interface = (props: { children?: JSX.Element }) => {
                   !location.pathname.startsWith("/developers")
                 }
               >
-                {props.children}
+                {/* a page that could not be downloaded says so, with Try again */}
+                <PageBoundary resetKey={() => location.pathname}>
+                  {props.children}
+                </PageBoundary>
                 {/* phones: a tab's own page keeps the tab bar under it */}
                 <Show when={tabPage()}>
                   <PhoneTabs page />

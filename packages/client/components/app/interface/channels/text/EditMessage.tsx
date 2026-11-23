@@ -77,11 +77,13 @@ export function EditMessage(props: { message: Message }) {
       <Switch
         fallback={
           <Text size="small">
-            escape to{" "}
-            <Action onClick={() => state.draft.setEditingMessage(undefined)}>
-              cancel
-            </Action>{" "}
-            &middot; enter to <Action onClick={saveMessage}>save</Action>
+            <Trans>
+              Escape to{" "}
+              <Action onClick={() => state.draft.setEditingMessage(undefined)}>
+                cancel
+              </Action>{" "}
+              &middot; Enter to <Action onClick={saveMessage}>save</Action>
+            </Trans>
           </Text>
         }
       >
@@ -101,6 +103,20 @@ const EditorBox = styled("div", {
     color: "var(--md-sys-color-on-surface-container)",
     borderRadius: "var(--borderRadius-sm)",
     padding: "var(--gap-md)",
+    minWidth: 0,
+
+    // the same cap as the message box: a long message is edited in a box of
+    // at most 40 % of the height that is seen, and scrolls inside it (it
+    // grew as tall as the message before, past the screen)
+    "--z-text-editor-max-height":
+      "max(40px, calc((100dvh - max(var(--keyboard-inset, 0px), env(keyboard-inset-height, 0px)) - var(--z-picker-dock, 0px)) * 0.4 - 2 * var(--gap-md)))",
+    "@supports not (height: 1dvh)": {
+      "--z-text-editor-max-height":
+        "max(40px, calc((100vh - max(var(--keyboard-inset, 0px), env(keyboard-inset-height, 0px)) - var(--z-picker-dock, 0px)) * 0.4 - 2 * var(--gap-md)))",
+    },
+    "& .cm-scroller": {
+      overscrollBehavior: "contain",
+    },
   },
 });
 

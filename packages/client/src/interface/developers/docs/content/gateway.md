@@ -39,7 +39,7 @@ Anything else you send is limited to 1 MiB per message.
 
 | What you receive                                                     | Cause                                       | What to do                               |
 | -------------------------------------------------------------------- | ------------------------------------------- | ---------------------------------------- |
-| `{ "type": "Error", "data": { "type": "InvalidSession" } }`, closes  | Wrong or reset token, suspended bot, or no `Authenticate` in 15 seconds | Stop. Do not reconnect in a loop          |
+| `{ "type": "Error", "data": { "type": "InvalidSession" } }`, closes  | Wrong or reset token, a disabled bot, a bot whose owner is suspended or banned, or no `Authenticate` in 15 seconds | Stop after a few tries. Do not reconnect in a loop |
 | `{ "type": "Error", "data": { "type": "MissingIntent", "intent": "SERVER_MEMBERS" } }`, closes with code `4014` | A privileged intent that is off. The close reason names it, for example `Disallowed intents: MESSAGE_CONTENT (switched on: none)` | Switch it on in the Developer Portal and connect again, or [connect without it](/developers/docs/gateway#intent-off) |
 | `{ "type": "Error", "data": { "type": "InternalError" } }`, closes with code `1013` | The server could not read the bot's settings just then | Connect again, with the wait from [Reconnect](/developers/docs/gateway#reconnect) |
 
@@ -53,7 +53,7 @@ Send a `Ping` every 20 seconds:
 
 The server answers `Pong` with the same `data`. `data` is a number, or a list of bytes.
 
-The Zrzur gateway itself never closes a quiet bot connection, but proxies and home routers do, and a dead line gives no sign. So the ping is how **you** find out: when no `Pong` came for 60 seconds, close the socket and connect again.
+The Zrzur gateway itself never closes a quiet bot connection, but proxies and home routers do, and a dead line gives no sign. So the ping is how **you** find out: when no `Pong` came for 60 seconds, close the socket and connect again. `@zrzur/sdk` does exactly this (`heartbeatInterval: 20`, `pongTimeout: 60`).
 
 ## Reconnect {#reconnect}
 
@@ -62,7 +62,7 @@ A connection can end at any time: a deployment on our side, a network problem, y
 1. When the socket closes, wait 1 second, and double the wait after each failure, up to 30 seconds. Add a little randomness so many bots do not return at once.
 2. Connect and send `Resume` if the session was resumable (see [Resume after a drop](/developers/docs/gateway#resume)), `Authenticate` otherwise. After `Authenticate` you get a new `Ready`.
 3. Reset the wait after `Ready` or `Resumed`.
-4. Do not retry after an `Error` event of type `InvalidSession`, or after code `4014`: the same request fails again. Stop and tell a person. After code `1013` do retry: the server could not read the bot's settings just then.
+4. After an `Error` event of type `InvalidSession`, retry at most a few times with backoff, then stop and tell a person: one refusal can come from a server that is restarting, more mean the token is refused. `@zrzur/sdk` tries 3 times, then `login()` fails. Never retry after code `4014`: the same request fails again. After code `1013` do retry: the server could not read the bot's settings just then.
 
 ## Resume after a drop {#resume}
 

@@ -20,7 +20,7 @@
   "ServerMemberJoin": "Ein Mitglied ist beigetreten. Den eigenen Beitritt sieht der Bot immer.",
   "ServerMemberLeave": "Ein Mitglied ist gegangen, wurde gekickt oder gebannt: `reason` sagt, was davon. Ist `user` der Bot, hat er diesen Server verlassen.",
   "ServerRoleUpdate": "Eine Rolle wurde erstellt oder geändert.",
-  "ServerRoleDelete": "Eine Rolle wurde gelöscht.",
+  "ServerRoleDelete": "Eine Rolle wurde gelöscht. Mitglieder, die sie hatten, verlieren sie; entferne sie aus deinen Zwischenspeichern und aus jeder Einstellung, die sie nennt.",
   "ServerRoleRanksUpdate": "Die Reihenfolge der Rollen hat sich geändert. `ranks` listet Rollen-IDs von oben nach unten.",
   "UserUpdate": "Jemand hat sein Profil geändert. Ohne `PRESENCE` fehlen Statusänderungen.",
   "UserPlatformWipe": "Ein Konto wurde aus Zrzur entfernt. Lösche, was du über diesen Benutzer speicherst.",
@@ -58,7 +58,14 @@
   "ServerEventDelete": "Ein geplantes Server-Event ist weg, oder der Bot kann es nicht mehr sehen.",
   "ServerEventInterest": "Jemand hat ein geplantes Server-Event als interessant markiert oder die Markierung entfernt. `count` ist die Zahl danach.",
   "StageUpdate": "Der Live-Zustand einer Bühne hat sich geändert: Thema, Sprecher oder gehobene Hände.",
-  "SoundboardPlay": "Jemand hat in einem Sprachkanal einen Soundboard-Sound abgespielt."
+  "SoundboardPlay": "Jemand hat in einem Sprachkanal einen Soundboard-Sound abgespielt.",
+  "Logout": "Die Verbindung ist endgültig geschlossen: das Token wurde zurückgesetzt, der Bot gelöscht oder deaktiviert, oder sein Besitzer gesperrt. Nicht mit demselben Token neu verbinden.",
+  "ServerEventCounts": "Die Zahl derer, die kommen, vielleicht kommen oder warten, hat sich für eine geplante Server-Veranstaltung geändert. `counts` enthält die neuen Zahlen; `channel` ist bei Veranstaltungen in einem Kanal gesetzt.",
+  "ServerEventRsvpUpdate": "Die eigene Antwort des Bots auf eine geplante Server-Veranstaltung hat sich geändert: er hat anderswo geantwortet, ein Platz wurde für ihn frei, oder ein Organisator hat ihn entfernt. Ohne `rsvp` hat er jetzt keine Antwort.",
+  "VoiceCaptureUpdate": "Clips oder eine Aufnahme in einem Sprachraum haben sich geändert. `data` ist der ganze Zustand: ob Clips an sind, die laufende Aufnahme und wer dabei ist.",
+  "VoiceRingEnd": "Das Klingeln eines Anrufs bei jemandem hat geendet. `reason` ist `Declined`, `Answered` oder `Missed`.",
+  "MessageReminderDue": "Eine Erinnerung an einer Nachricht ist fällig. `message` und `user` kommen mit, solange die Nachricht noch lesbar ist.",
+  "ReportCreate": "Eine Meldung wurde erstellt. Nur Sitzungen des Zrzur-Teams erhalten sie, Bots nie."
  },
  "clientMessages": {
   "Authenticate": "Deine erste Nachricht. `token` ist das Bot-Token, `intents` die Summe der gewünschten Intents. Mit `resumable: true` lässt sich die Sitzung nach einem Abbruch fortsetzen, und `Ready` enthält `session_id`.",
@@ -110,7 +117,8 @@
   "CreateForumPosts": "Einen Beitrag in einem Forum starten",
   "Administrator": "Alle Rechte in allen Kanälen des Servers, egal was deren Einstellungen sagen",
   "UseSoundboard": "Sounds des Server-Soundboards in einem Sprachanruf abspielen",
-  "ManageSoundboard": "Sounds des Server-Soundboards hinzufügen, ändern und entfernen"
+  "ManageSoundboard": "Sounds des Server-Soundboards hinzufügen, ändern und entfernen",
+  "ManageEvents": "Geplante Server-Veranstaltungen verwalten"
  },
  "errors": {
   "UnknownUser": ["Den Benutzer gibt es nicht, oder der Bot sieht ihn nicht.", "Prüfe die ID. Vielleicht wurde das Konto gelöscht."],
@@ -261,6 +269,24 @@
   "TooManySpeakers": ["Die Bühne hat so viele Sprecher, wie sie haben darf.", "Setze zuerst einen Sprecher zurück ins Publikum. `max` ist die Grenze."],
   "PollEnded": ["Die Umfrage ist vorbei: keine Stimmen mehr, und sie lässt sich nicht noch einmal beenden.", "Nicht wiederholen."],
   "TooManyServerEvents": ["Der Server hat so viele geplante Events, wie er haben darf.", "Nur für Menschen."],
-  "ForwardMatureContent": ["Eine Nachricht aus einem Kanal für Erwachsene lässt sich nur in einen anderen solchen Kanal weiterleiten.", "Nur für Menschen: Bots können nicht weiterleiten."]
+  "ForwardMatureContent": ["Eine Nachricht aus einem Kanal für Erwachsene lässt sich nur in einen anderen solchen Kanal weiterleiten.", "Nur für Menschen: Bots können nicht weiterleiten."],
+  "TooManyServerEventDrafts": ["Der Server hat so viele Entwürfe, wie er darf (`max`).", "Zuerst einen Entwurf veröffentlichen oder löschen."],
+  "ServerEventFull": ["Alle Plätze der Veranstaltung sind vergeben, und sie hat keine Warteliste.", "Nicht wiederholen. Ein Organisator kann Plätze hinzufügen."],
+  "ServerEventReasonRequired": ["Wer Teilnehmende einer Veranstaltung nur für Rollen oder Eingeladene liest und dort nicht genannt ist, braucht einen Grund.", "Den Grund in `X-Audit-Log-Reason` senden; der Zugriff wird im Audit-Log vermerkt."],
+  "ServerEventOverCapacity": ["Diese Person zu setzen brächte mehr Menschen in die Veranstaltung, als sie Plätze hat (`max`).", "Mit `over_capacity=true` wiederholen, wenn das gewollt ist."],
+  "ServerEventInvalid": ["Ein Feld der Veranstaltung wurde abgelehnt. `field` nennt es, `reason` den Grund (`too_many`, `out_of_range`, `not_a_member`, `unknown_role`, `empty`, `not_a_time`, `unknown`).", "Dieses Feld korrigieren und erneut senden."],
+  "TooManyVoiceClips": ["Diese Person hat diesen Monat so viele Clips geteilt, wie sie darf (`max`).", "Bis nächsten Monat warten oder einen Clip löschen."],
+  "RecordingTimeUsedUp": ["Der Server hat diesen Monat so lange aufgenommen, wie seine Wings-Stufe erlaubt (`max` in Sekunden; 0 heißt, Aufnahmen brauchen Wings).", "Diesen Monat nicht wiederholen."],
+  "VoiceNotAgreed": ["Jemand, der im Clip oder in der Folge genannt ist, hat nicht zugestimmt.", "Nur Menschen nennen, die zugestimmt haben, oder sie vorher fragen."],
+  "TooManyReminders": ["Die Person hat so viele wartende Erinnerungen, wie sie darf (`max`).", "Zuerst eine Erinnerung löschen."],
+  "TooManySavedMessages": ["Die Person hat so viele gespeicherte Nachrichten, wie sie darf (`max`).", "Zuerst eine gespeicherte Nachricht entfernen."],
+  "ImportInvalid": ["Aus dem Gegebenen lässt sich kein Server-Aufbau lesen. `reason` ist `invite_link`, `not_a_link`, `not_a_template`, `empty`, `too_large` oder `nothing_given`.", "Einen Vorlagen-Link oder seinen Text angeben."],
+  "ImportTemplateNotFound": ["Der Vorlagen-Link zeigt auf nichts: gelöscht oder nie vorhanden.", "Den Link prüfen."],
+  "ImportSourceUnavailable": ["Die Vorlage lässt sich gerade nicht abrufen.", "Stattdessen den Text der Vorlage einfügen."],
+  "ImportTargetNotEmpty": ["Ein Aufbau lässt sich nur in einem Server anlegen, in dem noch nichts angelegt wurde.", "Einen neuen Server verwenden."],
+  "LinkedAccountTaken": ["Dieses Konto beim anderen Dienst ist mit einem anderen Zrzur-Konto verknüpft.", "Es dort zuerst trennen."],
+  "LinkedSignInFailed": ["Die Anmeldung beim anderen Dienst ließ sich nicht bestätigen.", "Das Verknüpfen neu beginnen."],
+  "LinkedServiceFailed": ["Der andere Dienst hat nicht geantwortet oder die Anfrage abgelehnt.", "Später erneut versuchen."],
+  "LinkedRefreshTooSoon": ["Die Verknüpfung wurde gerade aufgefrischt; `retry_after` nennt die Sekunden bis zum nächsten Versuch.", "Warten, dann erneut auffrischen."]
  }
 }

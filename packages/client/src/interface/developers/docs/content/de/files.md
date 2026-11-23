@@ -29,3 +29,18 @@ Dateien kommen von `https://cdn.zrzur.com/{tag}/{file id}/{file name}`. Bilder h
 @@1
 
 Das [Tutorial zum Hochladen](/developers/docs/tutorial-upload) baut `/report`.
+
+## Dateien, die Menschen deinem Bot geben {#from-people}
+
+Eine Befehlsoption vom Typ `Attachment` und ein Formularfeld `FileUpload` geben deinem Bot Dateien, die Menschen hochgeladen haben. Die Interaktion trägt sie in `resolved.attachments`, nach ID, mit `tag`, `filename`, `content_type` und `size`. Lade sie wie jede Datei herunter; das SDK hat `interaction.attachmentUrl(name)`, `interaction.downloadAttachment(name)` und `interaction.fieldFiles(id)`. Behandle Heruntergeladenes als nicht vertrauenswürdig: prüfe Typ und Größe, bevor du es öffnest.
+
+## Häufige Fehler {#errors}
+
+| Fehler | Ursache | Lösung |
+| --- | --- | --- |
+| `401 InvalidSession` | Das Bot-Token ist falsch oder wurde zurückgesetzt | Das aktuelle Token verwenden |
+| `400 FileTooLarge` | Über dem Limit des Tags; die Antwort nennt das Maximum | Die Datei verkleinern oder vorher `features.limits` prüfen |
+| `400 FileTooSmall` | Eine leere Datei | Den Inhalt senden |
+| `400 FileTypeNotAllowed` | Kein Bild für einen Bild-Tag, oder kein MP3, OGG oder WAV für `sounds` | Den passenden Tag nehmen |
+| `403 MissingPermission` (beim Senden) | Dem Bot fehlt Dateien hochladen im Kanal | Die Berechtigung geben |
+| `429` | Uploads teilen die Limits des Bots | `retry_after` Millisekunden warten |

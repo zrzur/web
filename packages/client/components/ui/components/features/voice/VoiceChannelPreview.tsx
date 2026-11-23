@@ -1,9 +1,9 @@
+import { lazy } from "@revolt/common/lib/lazyPart";
 import {
   For,
   Show,
   Suspense,
   createEffect,
-  lazy,
   onCleanup,
   splitProps,
 } from "solid-js";

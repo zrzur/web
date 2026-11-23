@@ -1,0 +1,26 @@
+diff --git a/dist/index.js b/dist/index.js
+index 77979ae..33a0126 100644
+--- a/dist/index.js
++++ b/dist/index.js
+@@ -1853,7 +1853,7 @@
+         node: node
+       }];
+     });
+-    var elToIdx = new Map();
++    var elToIdx = new WeakMap();
+     function addMaybeListeners() {
+       window.addEventListener("mousemove", handleMouseMoveMaybeDragStart, {
+         passive: false
+diff --git a/dist/index.mjs b/dist/index.mjs
+index 98eb194..9460e93 100644
+--- a/dist/index.mjs
++++ b/dist/index.mjs
+@@ -1847,7 +1847,7 @@ function dndzone$2(node, options) {
+       node: node
+     }];
+   });
+-  var elToIdx = new Map();
++  var elToIdx = new WeakMap();
+   function addMaybeListeners() {
+     window.addEventListener("mousemove", handleMouseMoveMaybeDragStart, {
+       passive: false

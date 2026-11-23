@@ -8,6 +8,7 @@ import {
 } from "@floating-ui/dom";
 import { useLingui } from "@lingui/solid/macro";
 import { useDevice } from "@revolt/common";
+import { lazy } from "@revolt/common/lib/lazyPart";
 import type { Channel } from "@zrzur/sdk/solid";
 import { useFloating } from "solid-floating-ui";
 import {
@@ -21,12 +22,12 @@ import {
   createContext,
   createEffect,
   createSignal,
-  lazy,
   onCleanup,
   onMount,
 } from "solid-js";
 import { Portal } from "solid-js/web";
 import { cva } from "styled-system/css";
+import { editorHooks } from "../../../texteditor/editorHooks";
 import { EmojiPicker } from "./EmojiPicker";
 import { mediaPickerTrigger } from "./mediaPickerTrigger";
 import "./picker.css";
@@ -48,9 +49,13 @@ export type MediaPickerAdd = (actions: {
 
 export type MediaPickerProps = {
   ref: Setter<HTMLElement | undefined>;
-  onClickGif: (_: unknown, ref?: HTMLDivElement) => void;
-  onClickEmoji: (_: unknown, ref?: HTMLDivElement) => void;
-  onClickAdd: (_: unknown, ref?: HTMLDivElement) => void;
+  /**
+   * Open the GIF picker. `placement` places it against `ref` for this
+   * opening only (the "+" menu opens it at the start side, next to "+")
+   */
+  onClickGif: (_: unknown, ref?: HTMLElement, placement?: Placement) => void;
+  onClickEmoji: (_: unknown, ref?: HTMLElement) => void;
+  onClickAdd: (_: unknown, ref?: HTMLElement) => void;
 };
 interface Props {
   children: (trigProps: MediaPickerProps) => JSX.Element;
@@ -76,7 +81,8 @@ export function CompositionMediaPicker(props: Props) {
   createEffect(() => props.onShown?.(show()));
   const [altRef, setAltRef] = createSignal<HTMLElement>();
   const [trigger, setTrigger] = createSignal<HTMLElement>();
-  function captureTrigger(event: unknown, ref?: HTMLDivElement) {
+  const [openPlacement, setOpenPlacement] = createSignal<Placement>();
+  function captureTrigger(event: unknown, ref?: HTMLElement) {
     const button = mediaPickerTrigger(event);
     if (button instanceof HTMLElement) setTrigger(button);
     setAltRef(ref ?? (button instanceof HTMLElement ? button : undefined));
@@ -96,14 +102,16 @@ export function CompositionMediaPicker(props: Props) {
     >
       {props.children({
         ref: setAnchor,
-        onClickGif: (event, ref) => {
+        onClickGif: (event, ref, placement) => {
           if (props.channel && !props.channel.havePermission("SendEmbeds"))
             return;
           captureTrigger(event, ref);
+          setOpenPlacement(placement);
           setShow((current) => (current === "gif" ? undefined : "gif"));
         },
         onClickEmoji: (event, ref) => {
           captureTrigger(event, ref);
+          setOpenPlacement(undefined);
           setShow((current) => (current === "emoji" ? undefined : "emoji"));
         },
         onClickAdd: (event, ref) => {
@@ -114,15 +122,20 @@ export function CompositionMediaPicker(props: Props) {
       })}
       <Show when={show()}>
         <Portal mount={document.getElementById("floating")!}>
-          <Picker
-            channel={props.channel}
-            anchor={() => altRef() || anchor()}
-            trigger={trigger}
-            show={show}
-            setShow={setShow}
-            placement={props.placement}
-            add={props.add}
-          />
+          {/* placed once when it opens: a new placement opens a new one */}
+          <Show when={openPlacement() ?? props.placement ?? "top-end"} keyed>
+            {(placement) => (
+              <Picker
+                channel={props.channel}
+                anchor={() => altRef() || anchor()}
+                trigger={trigger}
+                show={show}
+                setShow={setShow}
+                placement={placement}
+                add={props.add}
+              />
+            )}
+          </Show>
         </Portal>
       </Show>
     </CompositionMediaPickerContext.Provider>
@@ -197,8 +210,26 @@ function Picker(
       !floating()?.contains(target) &&
       !props.anchor()?.contains(target) &&
       !props.trigger()?.contains(target)
-    )
-      close();
+    ) {
+      // not close(): that moves the focus to the button. A tap into the
+      // message text gives the focus to the text, so the phone keyboard
+      // comes back. Closing the docked panel moves the text down at once, so
+      // the tap's own mouse events would land on the message list instead:
+      // they are cancelled and the text is focused here, in the gesture
+      const text = (target as Element).closest?.(
+        "[data-composer-box] .cm-editor",
+      );
+      // where the finger is in the text, measured before the panel closes
+      // and the text moves down
+      const hooks = text && phone() ? editorHooks.get(text) : undefined;
+      const pos = hooks?.posAt(e.clientX, e.clientY) ?? null;
+      props.setShow(undefined);
+      if (text && phone()) {
+        e.preventDefault();
+        if (hooks) hooks.focusAt(pos);
+        else text.querySelector<HTMLElement>(".cm-content")?.focus();
+      }
+    }
   }
   function onKeyDown(e: KeyboardEvent) {
     if (e.key !== "Escape") return;
@@ -216,6 +247,13 @@ function Picker(
   // phones: the panel is docked at the bottom; the app above it gives it room
   createEffect(() => {
     if (!phone()) return;
+    // the panel takes the keyboard's place: the text loses focus so the
+    // keyboard goes down. The emoji button keeps the focus in the text when
+    // pressed (preventFocusOnPress), so the keyboard stayed open, the panel
+    // was squeezed above it and the app between them was ~130 px tall
+    const active = document.activeElement as HTMLElement | null;
+    if (active?.isContentEditable || active?.closest?.(".cm-editor"))
+      active.blur();
     const style = document.documentElement.style;
     style.setProperty("--z-picker-dock", "min(360px, 48dvh)");
     onCleanup(() => style.removeProperty("--z-picker-dock"));

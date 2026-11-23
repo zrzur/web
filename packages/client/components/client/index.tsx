@@ -1,9 +1,9 @@
+import { lazy } from "@revolt/common/lib/lazyPart";
 import {
   type JSXElement,
   Accessor,
   createContext,
   createEffect,
-  lazy,
   onCleanup,
   Show,
   Suspense,

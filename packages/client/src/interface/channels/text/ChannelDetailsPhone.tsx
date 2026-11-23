@@ -56,6 +56,8 @@ export function ChannelDetailsPhone(props: {
   setSidebarState: (state: SidebarState) => void;
   scrollTargetElement: HTMLDivElement;
   isLargeServer: boolean;
+  /** A message was picked here: the list makes way for the conversation */
+  onJump?: (message: Message) => void;
 }) {
   const { t } = useLingui();
   const { openModal } = useModals();
@@ -283,13 +285,25 @@ export function ChannelDetailsPhone(props: {
               </Members>
             </Match>
             <Match when={tab() === "media"}>
-              <Finds channel={props.channel} what="media" />
+              <Finds
+                channel={props.channel}
+                what="media"
+                onJump={props.onJump}
+              />
             </Match>
             <Match when={tab() === "links"}>
-              <Finds channel={props.channel} what="links" />
+              <Finds
+                channel={props.channel}
+                what="links"
+                onJump={props.onJump}
+              />
             </Match>
             <Match when={tab() === "files"}>
-              <Finds channel={props.channel} what="files" />
+              <Finds
+                channel={props.channel}
+                what="files"
+                onJump={props.onJump}
+              />
             </Match>
             <Match when={tab() === "pins"}>
               <Show
@@ -337,7 +351,11 @@ const isPicture = (file: File) =>
  * Media, links or files of a channel: its search with a "has" filter, newest
  * first, drawn as a grid (media) or as cards (links, files)
  */
-function Finds(props: { channel: Channel; what: What }) {
+function Finds(props: {
+  channel: Channel;
+  what: What;
+  onJump?: (message: Message) => void;
+}) {
   const { t } = useLingui();
   const navigate = useNavigate();
   const [failedOnce, setFailedOnce] = createSignal(false);
@@ -371,7 +389,11 @@ function Finds(props: { channel: Channel; what: What }) {
     retry: false,
   }));
 
-  const jump = (message: Message) => navigate(message.path);
+  // the same message twice keeps the address: the list still makes way
+  const jump = (message: Message) => {
+    props.onJump?.(message);
+    navigate(message.path);
+  };
   const who = (message: Message) =>
     message.masquerade?.name ??
     message.member?.displayName ??

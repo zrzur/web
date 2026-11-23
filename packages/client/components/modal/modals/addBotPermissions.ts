@@ -24,9 +24,13 @@ export const hasBit = (permissions: number, bit: number) =>
 export const toggleBit = (permissions: number, bit: number) =>
   hasBit(permissions, bit) ? permissions - bit : permissions + bit;
 
-/** Query of `POST /bots/{id}/invite`: permissions only for a server */
+/**
+ * Query of `POST /bots/{id}/invite`: permissions only for a server, and
+ * always named there. With everything unticked it sends 0, because the
+ * server gives a bot its default permissions when the value is missing.
+ */
 export const inviteQuery = (isServer: boolean, permissions?: number) =>
-  isServer && permissions ? `?permissions=${permissions}` : "";
+  isServer ? `?permissions=${permissions ?? 0}` : "";
 
 /** Permission groups in the add dialog, every permission the server has */
 export const PERMISSION_GROUPS: {

@@ -1,6 +1,6 @@
 # Ereignisreferenz
 
-Jedes Ereignis, das ein Bot bekommen kann, mit seinen Feldern. Die Beispiele stammen von einem laufenden Server; die IDs wurden ersetzt.
+Jedes Ereignis, das ein Bot bekommen kann, mit seinen Feldern. Die meisten Beispiele stammen von einem laufenden Server; die IDs wurden ersetzt. Beispiele für Sprachanruf-Ereignisse, gelöschte Konten, Link-Vorschauen, Umfragen, Emojis und einige andere sind aus dem Gateway-Schema (`GET /gateway/schema`) geschrieben, weil ein lokaler Test sie nicht auslösen kann.
 
 Ereignisse kommen als JSON-Objekte mit `type`. Felder, die nicht immer da sind, fehlen, wenn sie leer sind. Einige Ereignisse tragen ein Objekt direkt, `Message` hat also `content` neben `type`.
 

@@ -4,9 +4,13 @@ import {
   bindKeymap,
   compiler,
   defaultKeymap,
-  deviceMac,
+  devicePlatform,
 } from "../../keybinds/active";
-import { type CustomCombos, type Keymap } from "../../keybinds/keymap";
+import {
+  type CustomCombos,
+  type Keymap,
+  type Platform,
+} from "../../keybinds/keymap";
 import { pttKeyAllowed } from "../../keybinds/shortcuts";
 
 import { State } from "..";
@@ -71,21 +75,33 @@ export class Keybinds extends AbstractSyncedStore<"keybinds", TypeKeybinds> {
    * never on a key press.
    */
   table(): Keymap {
-    const mac = deviceMac();
+    const platform = devicePlatform();
     this.#table ??= createRoot(() =>
       createMemo(() => {
         // reading the whole object tracks every change to it
         const custom = JSON.parse(JSON.stringify(this.get()?.custom ?? {}));
         const compile = compiler();
-        if (compile) return compile(custom, mac);
+        if (compile) return compile(custom, platform);
         // the person has their own shortcuts: load the compiler (the
         // defaults apply for the few milliseconds until it is there)
         if (Object.keys(custom).length)
           void import("../../keybinds/keymapCompile");
-        return defaultKeymap(mac);
+        return defaultKeymap(platform);
       }),
     );
     return this.#table();
+  }
+
+  /**
+   * The table another system would use with the same shortcuts (the
+   * shortcuts screen can show the Mac, Windows or Linux set). This device's
+   * own system is the live table.
+   */
+  tableFor(platform: Platform): Keymap {
+    if (platform === devicePlatform()) return this.table();
+    const custom = JSON.parse(JSON.stringify(this.get()?.custom ?? {}));
+    const compile = compiler();
+    return compile ? compile(custom, platform) : defaultKeymap(platform);
   }
 
   /** The synced push-to-talk key, if one was chosen on any device */

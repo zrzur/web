@@ -6,7 +6,7 @@
  */
 import type { Keybinds } from "../state/stores/Keybinds";
 
-import { activeKeymap, deviceMac } from "./active";
+import { activeKeymap, devicePlatform } from "./active";
 import { keyLabel } from "./keyLabels";
 import {
   type Combo,
@@ -14,12 +14,15 @@ import {
   type KeyLike,
   type Keymap,
   type ShortcutId,
+  type Sys,
   defaultCombo,
   eventCombo,
   keyOf,
+  macOf,
   matchShortcut,
   MODIFIER_CODE,
   normalize,
+  platformOf,
 } from "./keymap";
 import { cleanCustom, unusable } from "./keymapCompile";
 import { pttKeyAllowed } from "./shortcuts";
@@ -45,7 +48,7 @@ export function swapCombos(
   map: Keymap,
 ): CustomCombos {
   return {
-    ...cleanCustom(custom, deviceMac()),
+    ...cleanCustom(custom, devicePlatform()),
     [id]: combo,
     [other]: map.byId[id],
   };
@@ -91,20 +94,58 @@ export type ComboCheck = {
 };
 
 /** The system takes these before the browser */
-const SYSTEM_KEEPS_OTHER = new Set([
+const SYSTEM_KEEPS_WINDOWS = new Set([
   "A:F4",
   "A:Tab",
   "M:Escape",
   "MA:Delete",
+  "MS:Escape",
   "S:F10",
 ]);
+/**
+ * Linux desktops (GNOME, KDE, Cinnamon, Xfce): the Windows keys, plus
+ * workspace switching, the terminal, locking the screen and IBus's
+ * Unicode entry (Ctrl+Shift+U)
+ */
+const SYSTEM_KEEPS_LINUX = new Set([
+  ...SYSTEM_KEEPS_WINDOWS,
+  "MA:ArrowUp",
+  "MA:ArrowDown",
+  "MA:ArrowLeft",
+  "MA:ArrowRight",
+  "MSA:ArrowUp",
+  "MSA:ArrowDown",
+  "MSA:ArrowLeft",
+  "MSA:ArrowRight",
+  "MA:KeyT",
+  "MA:KeyL",
+  "MA:KeyD",
+  "MA:Backspace",
+  "MS:KeyU",
+  "M:Space",
+]);
+/**
+ * macOS: quit, hide, minimise, close, switching apps and windows,
+ * Spotlight, input sources, Mission Control (Control+arrows), screenshots,
+ * Force Quit, full screen
+ */
 const SYSTEM_KEEPS_MAC = new Set([
   "M:KeyQ",
   "M:KeyH",
   "M:KeyM",
+  "M:KeyW",
   "M:Space",
   "C:Space",
+  "MC:Space",
   "M:Tab",
+  "M:Backquote",
+  "MA:KeyH",
+  "MA:KeyM",
+  "MA:Escape",
+  "C:ArrowUp",
+  "C:ArrowDown",
+  "C:ArrowLeft",
+  "C:ArrowRight",
   "MS:Digit3",
   "MS:Digit4",
   "MS:Digit5",
@@ -112,6 +153,16 @@ const SYSTEM_KEEPS_MAC = new Set([
   "MC:KeyQ",
   "MC:KeyF",
 ]);
+
+/** The keys this system takes before the browser sees them */
+export function systemKeeps(sys: Sys): ReadonlySet<string> {
+  const platform = platformOf(sys);
+  return platform === "mac"
+    ? SYSTEM_KEEPS_MAC
+    : platform === "linux"
+      ? SYSTEM_KEEPS_LINUX
+      : SYSTEM_KEEPS_WINDOWS;
+}
 /** Browser shortcuts a page can take over, for a warning */
 const BROWSER_USES = new Set([
   ...[
@@ -178,6 +229,11 @@ const BROWSER_USES = new Set([
 /** Alt+letter opens the browser's menus on Windows and Linux */
 const ALT_LETTER = /^AS?:Key[A-Z]$/;
 
+/** Browser shortcuts a page can take over: a warning, not a refusal */
+export function browserUses(key: string, sys: Sys): boolean {
+  return BROWSER_USES.has(key) || (!macOf(sys) && ALT_LETTER.test(key));
+}
+
 /**
  * Whether this combination can be used for a shortcut, and what it clashes
  * with. A shortcut's own default is always fine.
@@ -186,24 +242,23 @@ export function checkCombo(
   id: ShortcutId,
   combo: Combo,
   map: Keymap,
-  mac: boolean,
+  sys: Sys,
   options: { pttKey?: string; typesSlash?: boolean } = {},
 ): ComboCheck {
+  const mac = macOf(sys);
   const key = keyOf(combo, mac);
   const c = normalize(combo, mac);
   const result: ComboCheck = {};
-  const isDefault = sameCombo(c, defaultCombo(id, mac));
+  const isDefault = sameCombo(c, defaultCombo(id, sys));
 
   if (!isDefault) {
-    const no = unusable(c, mac);
+    const no = unusable(c, sys);
     if (no) result.blocked = no;
-    else if ((mac ? SYSTEM_KEEPS_MAC : SYSTEM_KEEPS_OTHER).has(key))
-      result.blocked = "system";
+    else if (systemKeeps(sys).has(key)) result.blocked = "system";
     else if (!c.mod && !c.ctrl && !c.alt && c.code === options.pttKey)
       // held to talk: the same key alone can't also be a shortcut
       result.blocked = "ptt";
-    else if (BROWSER_USES.has(key) || (!mac && ALT_LETTER.test(key)))
-      result.warn = "browser";
+    else if (browserUses(key, sys)) result.warn = "browser";
   }
 
   const other = map.byCombo.get(key);
@@ -224,7 +279,7 @@ export function checkCombo(
 
 /** The person's changes, without the ones equal to the default again */
 function withoutDefaults(custom: CustomCombos): CustomCombos {
-  const mac = deviceMac();
+  const mac = devicePlatform();
   const out: CustomCombos = {};
   for (const [id, combo] of Object.entries(cleanCustom(custom, mac)) as [
     ShortcutId,
@@ -298,7 +353,7 @@ export function readPttKey(
     return "wait";
   if (!pttKeyAllowed(event.code)) return "blocked";
   // a key that is a shortcut on its own (an F key) can't also be held to talk
-  const mac = deviceMac();
+  const mac = devicePlatform();
   if (
     matchShortcut(
       activeKeymap(mac),

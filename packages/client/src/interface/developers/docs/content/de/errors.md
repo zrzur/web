@@ -36,6 +36,8 @@ Ein Bot sieht nur die Server, auf denen er installiert wurde. Für einen Server,
 
 Ein `403 MissingPermission` beim Schreiben in einen Kanal, dessen ID jemand deinem Bot gegeben hat, kann also heißen, dass der Bot dort nicht installiert ist. Frage `GET /channels/{target}`: `404 NotFound` heißt, der Bot ist nicht auf diesem Server (oder den Kanal gibt es nicht), installiere ihn also zuerst, mit dem Einladungslink aus dem Entwicklerportal. Ein `403 MissingPermission` dort heißt, der Bot ist auf dem Server und sieht den Kanal nicht: Ein privater Kanal braucht „Kanal sehen“ für eine der Rollen des Bots.
 
+Ein Bot, der auf dem Server ist, aber nichts darf, wurde ohne Rolle installiert: sein Besitzer hat keine Standardberechtigungen festgelegt, wer installierte, gab keine (alles abgewählt, `?permissions=0`), oder wer installierte, hat nicht Rollen verwalten. Gib ihm in den Servereinstellungen eine Rolle, oder lege seine Standardberechtigungen fest und installiere ihn neu. [Installieren](/developers/docs/applications#install)
+
 ## Fehler, die ein Bot bekommen kann {#bot-errors}
 
 @@1

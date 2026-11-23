@@ -1,3 +1,4 @@
+import { lazy } from "@revolt/common/lib/lazyPart";
 import {
   type JSX,
   For,
@@ -7,7 +8,6 @@ import {
   Switch,
   createEffect,
   createResource,
-  lazy,
   onCleanup,
 } from "solid-js";
 import { Portal } from "solid-js/web";
@@ -146,9 +146,16 @@ export function MentionsHost() {
     if (more()) attachReminders(client(), onDue);
   });
 
-  // Ctrl+Shift+4 and Ctrl+Shift+5 (changeable in Ctrl+/)
+  // Ctrl+Shift+2 mentions, Ctrl+Shift+4 saved, Ctrl+Shift+5 reminders
+  // (changeable in Ctrl+/)
   const onShortcut = (event: KeyboardEvent) => {
     const id = shortcutFor(event);
+    if (id === "view_mentions") {
+      if (modals.isOpen()) return;
+      event.preventDefault();
+      openInbox("mentions");
+      return;
+    }
     if (id !== "view_saved" && id !== "view_reminders") return;
     if (!more() || modals.isOpen()) return;
     event.preventDefault();

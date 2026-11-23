@@ -10,6 +10,8 @@ import { scrollableStyles } from "../../../directives/scrollable";
 import { AutoCompleteSearchSpace } from "../../utils/autoComplete";
 
 import { useDevice } from "@revolt/common";
+import { deviceMac } from "@revolt/keybinds/active";
+import { MENTION_TOKEN, needsLeadingSpace } from "@revolt/keybinds/mention";
 import { codeMirrorAutoComplete } from "./codeMirrorAutoComplete";
 import { commandPlugins } from "./codeMirrorCommand";
 import { isInFencedCodeBlock } from "./codeMirrorCommon";
@@ -17,6 +19,8 @@ import { smartLineWrapping } from "./codeMirrorLineWrap";
 import { markPlugins } from "./codeMirrorMarks";
 import { markdownTheme } from "./codeMirrorTheme";
 import { codeMirrorWidgets } from "./codeMirrorWidgets";
+import { editorHooks } from "./editorHooks";
+import { formatKeymap } from "./formatKeys";
 
 interface Props {
   /**
@@ -157,6 +161,8 @@ export function TextEditor2(props: Props) {
         /* Mount keymaps */
         enterKeymap,
         arrowUpKeymap,
+        /* Ctrl+B bold, Ctrl+I italic (Command on a Mac) */
+        formatKeymap(deviceMac()),
         keymap.of(defaultKeymap), // required for atomic ranges to work: https://github.com/codemirror/dev/issues/923
 
         /* Enable history */
@@ -210,40 +216,60 @@ export function TextEditor2(props: Props) {
   // memory together with the channel page around it
   onCleanup(() => view.destroy());
 
+  // the docked emoji panel closes on a tap into the text and puts the caret
+  // where the finger was (editorHooks: no CodeMirror import there)
+  editorHooks.set(view.dom, {
+    posAt: (x, y) => view.posAtCoords({ x, y }),
+    focusAt: (pos) => {
+      view.focus();
+      if (pos != null) view.dispatch({ selection: { anchor: pos } });
+    },
+  });
+
   // Apply shared scrollbar styles from the exported scrollable style classes.
   const scroller = codeMirror.querySelector<HTMLDivElement>(".cm-scroller");
   if (scroller) {
     scroller.classList.add(...editorScrollbarClasses.split(" "));
   }
 
+  // what the editor was made with; the first run below only applies a change
+  // made since (not deferred, for the same reason as the initial value)
+  /* eslint-disable solid/reactivity */
+  const madeWith = [
+    props.placeholder,
+    props.ariaLabel ?? props.placeholder,
+  ] as const;
+  /* eslint-enable solid/reactivity */
+
   // connect signals to extensions; the two follow the same text, so a channel
   // switch changes them in one update instead of laying out the editor twice
   createEffect(
     on(
       () => [props.placeholder, props.ariaLabel ?? props.placeholder] as const,
-      ([text, name], previous) => {
+      ([text, name], previous = madeWith) => {
+        if (text === previous[0] && name === previous[1]) return;
         view.dispatch({
           effects: [
-            ...(text !== previous?.[0]
+            ...(text !== previous[0]
               ? [
                   placeholderCompartment.reconfigure(
                     text ? placeholder(text) : [],
                   ),
                 ]
               : []),
-            ...(name !== previous?.[1]
+            ...(name !== previous[1]
               ? [nameCompartment.reconfigure(nameAttributes(name))]
               : []),
           ],
         });
       },
-      {
-        defer: true,
-      },
     ),
   );
 
-  // set initial value
+  // set initial value; not deferred: a value set after the editor was made
+  // but before this effect first ran (a profile bio copied in by the form's
+  // own effect) would be taken as the starting point and never shown. The
+  // first run compares with the text the editor was made with instead.
   createEffect(
     on(
       () => props.initialValue?.[0] ?? "",
@@ -260,9 +286,6 @@ export function TextEditor2(props: Props) {
           }),
         );
       },
-      {
-        defer: true,
-      },
     ),
   );
 
@@ -275,7 +298,16 @@ export function TextEditor2(props: Props) {
           const text = value[0];
           if (text !== "_focus") {
             if (!isMobile) view.focus();
-            view.dispatch(view.state.replaceSelection(text));
+            // a mention (Shift+click) never runs into the word before it
+            const at = view.state.selection.main.from;
+            const before = at > 0 ? view.state.sliceDoc(at - 1, at) : "";
+            view.dispatch(
+              view.state.replaceSelection(
+                MENTION_TOKEN.test(text) && needsLeadingSpace(before)
+                  ? ` ${text}`
+                  : text,
+              ),
+            );
             if (text) props.onTyping?.();
             props.onChange(view.state.doc.toString());
           } else {
@@ -325,7 +357,9 @@ const editor = css({
   "& .cm-editor": {
     width: "100%",
     alignSelf: "center",
-    maxHeight: "100%",
+    // a definite cap from the box around it (the composer sets it), so a long
+    // text scrolls in .cm-scroller; "100%" of an auto-height parent is no cap
+    maxHeight: "var(--z-text-editor-max-height, 100%)",
   },
 
   "& .cm-editor.cm-focused": {

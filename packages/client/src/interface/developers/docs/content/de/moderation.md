@@ -28,6 +28,24 @@ Der Header `X-Audit-Log-Reason` schreibt einen Grund ins Audit-Log. Er funktioni
 
 `GET /servers/{target}/audit_logs` listet, wer was getan hat. Aktionen deines Bots zeigen ihn als Handelnden.
 
+## Bans {#bans}
+
+`GET /servers/{target}/bans` listet die Bans mit den gebannten Nutzern; `DELETE /servers/{target}/bans/{user_id}` hebt einen auf. Bans brauchen Mitglieder bannen. Ein gebannter Nutzer kann erst wieder beitreten, wenn der Ban aufgehoben ist.
+
+## Beitrittsanfragen {#join-requests}
+
+Ein Server, der Menschen erst nach einem Blick hereinlässt (`access`), sammelt ihre Anfragen. Mit Beitrittsanfragen verwalten kann ein Bot sie bearbeiten: `GET /servers/{target}/join_requests` listet die offenen, die ältesten zuerst, mit den Antworten aus der Lobby; `POST /servers/{target}/join_requests/{applicant}/approve` macht die Person zum Mitglied, `.../reject` lehnt sie ab. Die Zusage scheitert, wenn schon jemand anderes entschieden hat oder die Person nicht beitreten kann (gebannt, voller Server, Alter). Die eigenen Anfragen der Antragsteller (`GET` und `DELETE /servers/{target}/join_requests/@me`) sind für Personen.
+
+## Audit-Log {#audit-log-filters}
+
+`GET /servers/{target}/audit_logs` nimmt `user` (wer handelte), `target` (woran oder an wem), `type` (die Aktion), `before` und `after` (Eintrags-IDs) und `limit`. Blättere rückwärts, indem du `before` auf die älteste erhaltene ID setzt.
+
+## Einen Server schützen {#safety}
+
+- [AutoMod](/developers/docs/servers#automod) hält Nachrichten zurück, bevor sie erscheinen, mit Regeln, die der Server speichert.
+- `PUT /servers/{target}/safety/pause` stoppt Einladungen, Discover-Beitritte und DMs zwischen Fremden für einige Stunden während eines Angriffs ([Server](/developers/docs/servers#tools)).
+- Das Kontingent `servers` erlaubt 5 Aktionen je 10 Sekunden und Server; ein Bot, der auf einen Angriff reagiert, sollte zuerst die schlimmsten Konten angehen und `429` erwarten ([Rate-Limits](/developers/docs/rate-limits#buckets)).
+
 ## Referenz {#reference}
 
 @@1

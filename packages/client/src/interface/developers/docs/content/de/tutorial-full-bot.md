@@ -50,13 +50,17 @@ Speichere die Datei unten als `full-bot.mjs` in deinem Ordner.
 
 @@2
 
+Unter Windows, in PowerShell:
+
+@@3
+
 In Windows PowerShell nimmst du `$env:ZRZUR_BOT_TOKEN = "YOUR_BOT_TOKEN"`. Auf einem selbst gehosteten Server setzt du auch `ZRZUR_API_URL` und `ZRZUR_WS_URL`.
 
 ## Was du sehen solltest {#what-you-should-see}
 
 Im Terminal:
 
-@@3
+@@4
 
 Tippe auf deinem Server `/` in einem Kanal. Die vier Befehle erscheinen mit dem Namen deines Bots. Probiere sie aus:
 

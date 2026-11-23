@@ -267,6 +267,130 @@ export function HistoryScroller(props: Props) {
     }
   }
 
+  // --- rows the browser may skip
+  //
+  // Message rows have content-visibility: auto (MessageContainer): a row out
+  // of view is not styled, laid out or painted, and counts with the size it
+  // last had, or an estimate if it was never drawn. Rows above the reader
+  // may be estimates: in this column-reverse list they never move the view.
+  // Two cases must be exact:
+  // - while a jump lands (a link to a message, a reply, the first unread,
+  //   coming back to a channel) every row is (`data-exact-rows` on the
+  //   content): there the measurements decide where the view goes and which
+  //   page comes next;
+  // - rows added below the reader (a newer page after a jump) are exact until
+  //   they have been drawn once (`data-fresh`), so the correction in commit
+  //   uses their real height. Otherwise they would grow when drawn, and under
+  //   a finger (touchScrolling) nothing corrects that: the text would move.
+  // (Marking the reader's row and keeping every row below it exact was tried:
+  // the sibling selector restyled the whole list on every scroll step.)
+
+  // Chromium engines (Chrome, Edge, the desktop app, Android's WebView) keep
+  // a column-reverse list still when rows above the reader change size;
+  // WebKit did not (the text moved by up to 256 px), so there every row is
+  // drawn as before. `userAgentData` exists in Chromium engines only.
+  const skipRows =
+    typeof navigator !== "undefined" && "userAgentData" in navigator;
+  onMount(() => content.toggleAttribute("data-skip-rows", skipRows));
+
+  const freshRows = new Set<Element>();
+  let freshFrame = 0;
+  /** Keep a row exact until it has been drawn once */
+  function freshen(el: Element) {
+    if (!skipRows || freshRows.has(el)) return;
+    el.setAttribute("data-fresh", "");
+    freshRows.add(el);
+    releaseLater();
+  }
+  /** Mark rows that are new since `known` and come after `reader` */
+  function markFresh(known: Set<Element>, reader: Element | undefined) {
+    const rows = rowsElement();
+    if (!rows || !reader || reader.parentElement !== rows) return;
+    for (let el = reader.nextElementSibling; el; el = el.nextElementSibling) {
+      if (!known.has(el)) freshen(el);
+    }
+  }
+  /**
+   * Two frames: the rows marked before the first are drawn in it, then
+   * released. Rows marked after the first frame began are not in its
+   * snapshot and wait for two frames of their own.
+   */
+  function releaseLater() {
+    if (freshFrame) return;
+    freshFrame = requestAnimationFrame(() => {
+      const drawn = [...freshRows];
+      freshFrame = requestAnimationFrame(() => {
+        freshFrame = 0;
+        for (const el of drawn) {
+          el.removeAttribute("data-fresh");
+          freshRows.delete(el);
+        }
+        if (freshRows.size) releaseLater();
+      });
+    });
+  }
+  onCleanup(() => cancelAnimationFrame(freshFrame));
+
+  /** The row (a child of the rows element) that holds a node */
+  function rowOf(node: Node | null): Element | undefined {
+    const rows = rowsElement();
+    let el: Element | null =
+      node instanceof Element ? node : (node?.parentElement ?? null);
+    while (el && el.parentElement !== rows) el = el.parentElement;
+    return el ?? undefined;
+  }
+  // A row out of view keeps its old height while it is skipped: an edit, a
+  // new reaction or a picture that got its size there would only change its
+  // height when it is drawn again, under a finger, where nothing corrects
+  // it. A change inside a row at or below the reader's row makes it exact
+  // until drawn once, so its height changes at once, as it did before rows
+  // were skipped. Rows above the reader never move the view: pictures loading
+  // there must not cost the skipping.
+  function changedBelow(node: Node | null) {
+    const reader = anchors[0]?.el;
+    const row = rowOf(node);
+    if (!reader || !row) return;
+    if (
+      row === reader ||
+      reader.compareDocumentPosition(row) & Node.DOCUMENT_POSITION_FOLLOWING
+    ) {
+      freshen(row);
+    }
+  }
+  onMount(() => {
+    if (!skipRows) return;
+    const observer = new MutationObserver((records) => {
+      for (const record of records) {
+        if (record.target === rowsElement()) continue;
+        changedBelow(record.target);
+      }
+    });
+    observer.observe(content, {
+      subtree: true,
+      childList: true,
+      characterData: true,
+      attributes: true,
+      attributeFilter: ["src", "width", "height"],
+    });
+    const loaded = (event: Event) => changedBelow(event.target as Node);
+    // load does not bubble: listen in the capture phase
+    content.addEventListener("load", loaded, true);
+    onCleanup(() => {
+      observer.disconnect();
+      content.removeEventListener("load", loaded, true);
+    });
+  });
+
+  let exactTimer: ReturnType<typeof setTimeout> | undefined;
+  function exactRows(on: boolean) {
+    clearTimeout(exactTimer);
+    exactTimer = undefined;
+    content?.toggleAttribute("data-exact-rows", on);
+    // a landing that is never ended by the list or the reader still ends
+    if (on) exactTimer = setTimeout(() => exactRows(false), LANDING_MS + 500);
+  }
+  onCleanup(() => clearTimeout(exactTimer));
+
   /** Put the remembered rows back where they were */
   function restoreAnchors() {
     const rows = rowsElement();
@@ -319,6 +443,8 @@ export function HistoryScroller(props: Props) {
 
   function apply(move: ViewMove, again = false) {
     if (move.to === "keep") return;
+    // a jump into the history measures rows on both sides of its target
+    if (!again && move.to !== "present") exactRows(true);
     if (!rowsElement() && move.to !== "present") {
       waiting = move;
       return;
@@ -358,7 +484,10 @@ export function HistoryScroller(props: Props) {
   }
 
   /** The reader took over: a landing is no longer corrected */
-  const userInput = () => (landing = undefined);
+  const userInput = () => {
+    if (landing) exactRows(false);
+    landing = undefined;
+  };
 
   // --- the contract with the controller
 
@@ -373,12 +502,15 @@ export function HistoryScroller(props: Props) {
       // that change is not taken for where they were
       if (wasAtBottom) captureAnchors();
       else restoreAnchors();
+      const known = new Set(rowsElement()?.children ?? []);
+      const reader = anchors[0]?.el;
       batch(change);
 
       if (move.to === "keep") {
         // at the bottom new rows simply appear; anywhere else nothing moves
         const hold = () => {
           if (!alive) return;
+          markFresh(known, reader);
           if (wasAtBottom) scroller.scrollTop = 0;
           else {
             restoreAnchors();
@@ -468,6 +600,7 @@ export function HistoryScroller(props: Props) {
       if (landing && performance.now() < landing.until) {
         apply(landing.move, true);
       } else {
+        if (landing) exactRows(false);
         landing = undefined;
         if (atBottom()) {
           if (scroller.scrollTop !== 0) scroller.scrollTop = 0;

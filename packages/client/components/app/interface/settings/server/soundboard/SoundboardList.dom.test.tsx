@@ -43,6 +43,10 @@ vi.mock("@revolt/instance", () => ({
 }));
 vi.mock("@revolt/markdown", () => ({ TextWithEmoji: () => <span /> }));
 vi.mock("@revolt/ui/icons/Icon", () => ({ Icon: () => <i /> }));
+// the boundary around the sound library (its real Button loads @solid-aria)
+vi.mock("@revolt/ui/components/utils/PageBoundary", () => ({
+  PageBoundary: (props: { children: unknown }) => props.children as never,
+}));
 vi.mock("@revolt/ui", () => {
   const Button = (props: Record<string, unknown>) => {
     const [local, rest] = splitProps(props, [

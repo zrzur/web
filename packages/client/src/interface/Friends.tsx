@@ -6,8 +6,10 @@ import {
   Match,
   Show,
   Switch,
+  createEffect,
   createMemo,
   createSignal,
+  on,
 } from "solid-js";
 
 import { Trans, useLingui } from "@lingui/solid/macro";
@@ -21,7 +23,7 @@ import { useDevice } from "@revolt/common";
 import { statusLine } from "@revolt/common/lib/statusWrite";
 import { TextWithEmoji } from "@revolt/markdown";
 import { useModals } from "@revolt/modal";
-import { useNavigate } from "@revolt/routing";
+import { useLocation, useNavigate } from "@revolt/routing";
 import {
   Avatar,
   Button,
@@ -30,6 +32,7 @@ import {
   IconButton,
   UserStatus,
   main,
+  useSnackbar,
 } from "@revolt/ui";
 import { Icon } from "@revolt/ui/icons/Icon";
 
@@ -45,6 +48,11 @@ import {
   ListTabs as Tabs,
   ListTitle as Title,
 } from "./common/ListPageHeader";
+import {
+  isUserId,
+  profileLinkId,
+  withoutProfileParam,
+} from "./friendProfileLink";
 
 type Page = "online" | "all" | "pending" | "blocked";
 
@@ -58,6 +66,42 @@ export function Friends() {
   const { layout } = useDevice();
   const [page, setPage] = createSignal<Page>("online");
   const [query, setQuery] = createSignal("");
+  const location = useLocation();
+  const navigate = useNavigate();
+  const snackbar = useSnackbar();
+
+  // `/friends?profile=<id>`, the link of a friend-request notification:
+  // open that person's profile, then take the parameter off the address so
+  // a reload or the back button does not open it again
+  createEffect(
+    on(
+      () => location.search,
+      (search) => {
+        const id = profileLinkId(search);
+        if (!id) return;
+        navigate(
+          `${location.pathname}${withoutProfileParam(search)}${location.hash}`,
+          { replace: true },
+        );
+        void openLinkedProfile(id);
+      },
+    ),
+  );
+
+  async function openLinkedProfile(id: string) {
+    const user = isUserId(id)
+      ? (client()!.users.get(id) ??
+        (await client()!
+          .users.fetch(id)
+          .catch(() => undefined)))
+      : undefined;
+    if (user) openModal({ type: "user_profile", user });
+    else
+      snackbar.show({
+        message: t`This profile could not be opened. The account may no longer exist.`,
+        closeable: true,
+      });
+  }
 
   const lists = createMemo(() => {
     const list = client()!.users.toList();

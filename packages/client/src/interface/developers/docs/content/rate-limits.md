@@ -6,7 +6,7 @@ How many requests a bot may send, how to read the headers, and what to do after 
 
 1. **Buckets.** Each route counts against a bucket, in a window of 10 seconds. The table below lists them.
 2. **Global.** A bot makes at most 50 requests a second, across all routes.
-3. **Refused requests.** One address that collects 10 000 answers of `401` or `403` within 10 minutes is blocked for 10 minutes. This stops token guessing; a healthy bot never gets near it.
+3. **Refused requests.** One address that collects 10 000 answers of `401` or `403` within 10 minutes is blocked for 10 minutes. This stops token guessing. Requests with a real bot token never count towards it and are never blocked by it: many bots share one hosting address, so a `403` such as `MissingPermission` from your bot counts against nobody.
 
 Bots are counted by their id, so the limits are the same from any address and do not change with more processes.
 
@@ -71,13 +71,16 @@ A `429` **with** a `type` is a refusal to show to a person, not one to wait out.
 
 `/servers` and `/channels` count per server and per channel. The `servers` bucket allows only 5 requests per 10 seconds per server, shared by reads and writes. Member lists (`GET /servers/{target}/members`) have their own bucket of 15, `member_list`. A busy moderation bot reaches it quickly: keep members in a cache fed by `Ready` and member events, and use the member data that comes with interactions.
 
-`/interactions/{interaction_id}/{token}/...` has a bucket of 10 per interaction, which is plenty.
+`/interactions/{interaction_id}/{token}/...` has a bucket of 10 per interaction, which is plenty. An answer is due within 3 seconds, so `@zrzur/sdk` waits out a `429` there only while the answer can still arrive in time, and throws the `ApiError` otherwise.
+
+Because most buckets count per server or channel, `@zrzur/sdk` remembers each bucket per resource: a channel whose bucket is empty makes only the requests to that channel wait.
 
 ## Other limits {#other}
 
 | What                        | Limit                                                                 |
 | --------------------------- | --------------------------------------------------------------------- |
 | One webhook                 | 5 messages in 2 seconds                                               |
+| Managing one webhook        | A new token or a test message: 5 per 10 seconds (`webhook_manage`)    |
 | All webhooks of a channel   | 30 messages a minute                                                  |
 | Typing over HTTP            | 5 per 10 seconds per channel                                          |
 | Interactions                | 3 seconds to answer, 15 minutes to finish                             |

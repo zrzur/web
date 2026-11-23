@@ -55,6 +55,47 @@ describe("KeybindContext", () => {
     expect(up).toHaveBeenCalledTimes(1);
   });
 
+  it("leaves Alt+arrows to a draft of several lines, not to one line", () => {
+    const up = vi.fn();
+    const unread = vi.fn();
+    mount([
+      [KeybindAction.NAVIGATION_CHANNEL_UP, up],
+      [KeybindAction.NAVIGATION_UNREAD_DOWN, unread],
+    ]);
+    const editor = document.createElement("div");
+    editor.className = "cm-content";
+    editor.contentEditable = "true";
+    const line = (text: string) => {
+      const el = document.createElement("div");
+      el.className = "cm-line";
+      el.textContent = text;
+      return el;
+    };
+    editor.append(line("one line"));
+    document.body.append(editor);
+    const pressIn = (init: KeyboardEventInit) =>
+      editor.dispatchEvent(
+        new KeyboardEvent("keydown", {
+          bubbles: true,
+          cancelable: true,
+          ...init,
+        }),
+      );
+    pressIn({ key: "ArrowUp", code: "ArrowUp", altKey: true });
+    expect(up).toHaveBeenCalledTimes(1);
+    editor.append(line("second line"));
+    pressIn({ key: "ArrowUp", code: "ArrowUp", altKey: true });
+    pressIn({
+      key: "ArrowDown",
+      code: "ArrowDown",
+      altKey: true,
+      shiftKey: true,
+    });
+    expect(up).toHaveBeenCalledTimes(1);
+    expect(unread).not.toHaveBeenCalled();
+    editor.remove();
+  });
+
   it("follows the person's own keys", () => {
     const up = vi.fn();
     bindKeymap((mac) =>
