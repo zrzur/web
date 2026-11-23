@@ -2,6 +2,7 @@ import { Show, createEffect, createSignal, on } from "solid-js";
 
 import { Trans, useLingui } from "@lingui/solid/macro";
 
+import { usernameNoticeOpen } from "@revolt/app/interface/settings/user/account/UsernameNotice";
 import { TranslatedError } from "@revolt/i18n/errors";
 import { Dialog, Text } from "@revolt/ui";
 
@@ -67,7 +68,8 @@ export function ActivityIntro() {
   }
 
   return (
-    <Show when={open()}>
+    // one at a time: the username notice first, this question after it
+    <Show when={open() && !usernameNoticeOpen()}>
       <Dialog
         show
         size="sm"
