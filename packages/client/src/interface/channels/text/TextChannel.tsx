@@ -49,6 +49,15 @@ import { Channel } from "@zrzur/sdk/solid";
 import { isSelecting } from "@revolt/app/interface/channels/text/messageSelection";
 import { useMessageKeys } from "@revolt/app/interface/channels/text/useMessageKeys";
 
+import { useBotDms } from "@revolt/app/interface/channels/text/interactions/botDms";
+import {
+  dmBot,
+  startPlace,
+} from "@revolt/app/interface/channels/text/interactions/botLinks";
+import {
+  BotStartBar,
+  BotStopped,
+} from "@revolt/app/interface/channels/text/interactions/botStartParts";
 import { writeAccess } from "@revolt/app/interface/channels/threadAccess";
 import { MessageComposition } from "./Composition";
 import { isLargeServer } from "./largeServer";
@@ -136,6 +145,7 @@ export function canIHasSidebar(ch: Channel) {
 export function TextChannel(props: ChannelPageProps) {
   const state = useState();
   const client = useClient();
+  const botDms = useBotDms();
   const { layout } = useDevice();
 
   // bot interactions: private answers, forms and progress for this user
@@ -402,6 +412,14 @@ export function TextChannel(props: ChannelPageProps) {
                 </ThreadNotice>
               }
             >
+              {/* a bot link opened for a conversation with history: Start
+                  sits here, the card with it is far up */}
+              <Show when={startPlace(client(), props.channel) === "bar"}>
+                <BotStartBar
+                  channel={props.channel}
+                  onStart={() => jumpToBottomRef?.()}
+                />
+              </Show>
               <Switch
                 fallback={
                   <MessageComposition
@@ -412,6 +430,15 @@ export function TextChannel(props: ChannelPageProps) {
               >
                 <Match when={isSelecting(props.channel.id)}>
                   <MessageSelectionBar channel={props.channel} />
+                </Match>
+                <Match
+                  when={
+                    botDms() &&
+                    dmBot(props.channel) &&
+                    props.channel.recipient?.relationship === "Blocked"
+                  }
+                >
+                  <BotStopped channel={props.channel} />
                 </Match>
                 <Match
                   when={

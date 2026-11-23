@@ -31832,3 +31832,53 @@ msgstr "لم يعد هذا السيرفر يستوفي شرط الرابط ال�
 #: components/app/interface/settings/user/activity/ActivitySettings.tsx
 msgid "Show all"
 msgstr "عرض الكل"
+
+#. placeholder {0}: more()
+#: components/app/interface/channels/text/interactions/BotStart.tsx
+msgid "and {0} more in Commands"
+msgstr "و{0} غيرها في «الأوامر»"
+
+#: src/interface/channels/ChannelHeader.tsx
+msgid "Bot options"
+msgstr "خيارات البوت"
+
+#: src/interface/developers/docs/DocsPortal.tsx
+msgid "Bots in direct messages"
+msgstr "البوتات في الرسائل المباشرة"
+
+#: components/app/interface/channels/text/interactions/BotStart.tsx
+msgid "Restart bot"
+msgstr "أعد تشغيل البوت"
+
+#: components/app/interface/channels/text/interactions/BotStart.tsx
+msgid "Start"
+msgstr "ابدأ"
+
+#. placeholder {0}: name()
+#: components/app/interface/channels/text/interactions/BotStart.tsx
+msgid "Start lets {0} send you messages here."
+msgstr "يسمح «ابدأ» للبوت {0} بمراسلتك هنا."
+
+#: components/app/interface/channels/text/interactions/InteractionHeader.tsx
+msgid "started the bot"
+msgstr "بدأ البوت"
+
+#: components/app/interface/channels/text/interactions/BotStart.tsx
+msgid "Stop bot"
+msgstr "أوقف البوت"
+
+#: components/app/interface/channels/text/interactions/BotStart.tsx
+msgid "What this bot can do"
+msgstr "ما يستطيع هذا البوت فعله"
+
+#. placeholder {0}: name()
+#: components/app/interface/channels/text/interactions/BotStart.tsx
+msgid "You opened a link to {0}."
+msgstr "فتحت رابطًا إلى {0}."
+
+#. placeholder {0}: name()
+#: components/app/interface/channels/text/interactions/BotStart.tsx
+msgid "You stopped {0}. It can't send you messages."
+msgstr "أوقفت {0}، فلا يستطيع مراسلتك."
+
+

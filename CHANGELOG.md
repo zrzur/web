@@ -138,6 +138,18 @@
 * Server settings → Invites and sharing says in one line who can have a custom link: official and partner servers, and servers with 1,000 members that are active (100 messages from 20 members in 30 days; the numbers come from the server). A server that can't have one sees why instead of the claim field: its members against 1,000 and its activity against the rule (and, with billing on, the Wings level as another way in).
 * A server whose link counts down sees a banner with the date the link ends and what keeps it. A refused claim (`VanityNotEligible`) is explained in plain words in the same panel (ar, en, de).
 
+### Bots in direct messages (2026-11-22, owner's request)
+
+* **Start screen:** an empty conversation with a bot shows its picture, name, Bot label (with the verified check), its About text, up to five of its global commands ("What this bot can do") and a filled **Start** button with one line on what it does. Start sends the bot a `Start` interaction; its answer shows "… started the bot" above it. The card stays at the top of the conversation without the button once someone wrote or Start was pressed. Shown only when the server has `features.bot_dms`.
+* **Bot links:** `/b/{id}?start=ref` (and `/bot/{id}?start`) open the conversation with the bot instead of the Add bot dialog, with Start carrying `ref`. In a conversation that already has messages, a Start bar sits above the message box. A value the server would refuse is dropped; the conversation still opens.
+* **Message:** the bot's profile card has a Message button where people have the message box; Discover's bot page has Message beside Copy link.
+* **Commands** button in the message box of a bot conversation (desktop and phone): opens the bot's command list, as typing `/` does.
+* **Stop bot** in the conversation's header menu (desktop: a new "Bot options" button; phones: More) blocks the bot. The message box gives way to "You stopped … It can't send you messages." with **Restart bot**, which unblocks and presses Start again. The menu also has View profile.
+* With `features.bot_dms` off nothing of this shows: no Start card, Commands button, Bot options, stopped notice or Message button for bots, and a bot link with `?start` opens Add bot as before. Discover's site reads the flag from the API.
+* Phones: a conversation with a bot has no call buttons in its header, so the bot's name shows in full. Start, the Start bar and Restart are 44 px high on phones.
+* A bot link with `?start` and the id of a person opens that person's profile.
+* Developer docs: new page "Bots in direct messages" (ar, en, de) with the runnable example `dm-start.mjs`.
+
 ### A friend request opens the sender's profile (2026-11-21)
 
 * **From the phone Notifications page:** the sender's picture and the line "… sent you a friend request" are one button (44 px high) that opens their profile. Screen readers hear the sentence they see as its name, then "Open profile" (ar, en, de) as its description. Accept, Decline and Send message are separate buttons and are not touched by it. The page closes first so the profile is not under it; the profile has its own Accept.

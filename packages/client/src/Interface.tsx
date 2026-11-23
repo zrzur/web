@@ -32,7 +32,12 @@ import { useDevice } from "@revolt/common";
 import { notePlace } from "@revolt/keybinds/recentPlaces";
 import { useModals } from "@revolt/modal";
 import { PluginHostGate } from "@revolt/plugins/PluginHostGate";
-import { Navigate, useBeforeLeave, useLocation } from "@revolt/routing";
+import {
+  Navigate,
+  useBeforeLeave,
+  useLocation,
+  useNavigate,
+} from "@revolt/routing";
 import { useState } from "@revolt/state";
 import { LAYOUT_SECTIONS } from "@revolt/state/stores/Layout";
 import { PageBoundary } from "@revolt/ui/components/utils/PageBoundary";
@@ -92,6 +97,7 @@ const Interface = (props: { children?: JSX.Element }) => {
   const device = useDevice();
   // reactive copy, for the panel corner when the channel list is hidden
   const location = useLocation();
+  const navigate = useNavigate();
 
   useBeforeLeave((e) => {
     if (!e.defaultPrevented) {
@@ -100,7 +106,7 @@ const Interface = (props: { children?: JSX.Element }) => {
       const dialog = typeof e.to === "string" ? dialogAddress(e.to) : undefined;
       if (dialog) {
         e.preventDefault();
-        openDialogAt(dialog, client, { openModal, showError });
+        openDialogAt(dialog, client, { openModal, showError }, navigate);
       } else if (typeof e.to === "string") {
         state.layout.setLastActivePath(e.to);
       }

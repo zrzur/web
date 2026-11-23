@@ -17,6 +17,7 @@ export const PAGE_ORDER: [PageGroup, string[]][] = [
       "commands",
       "interactions",
       "components",
+      "bots-in-dms",
       "http-interactions",
       "messages",
       "channels",

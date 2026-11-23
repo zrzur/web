@@ -31832,3 +31832,53 @@ msgstr "Dieser Server erfüllt die Regel für einen eigenen Link nicht mehr. Der
 #: components/app/interface/settings/user/activity/ActivitySettings.tsx
 msgid "Show all"
 msgstr "Alle anzeigen"
+
+#. placeholder {0}: more()
+#: components/app/interface/channels/text/interactions/BotStart.tsx
+msgid "and {0} more in Commands"
+msgstr "und {0} weitere unter Befehle"
+
+#: src/interface/channels/ChannelHeader.tsx
+msgid "Bot options"
+msgstr "Bot-Optionen"
+
+#: src/interface/developers/docs/DocsPortal.tsx
+msgid "Bots in direct messages"
+msgstr "Bots in Direktnachrichten"
+
+#: components/app/interface/channels/text/interactions/BotStart.tsx
+msgid "Restart bot"
+msgstr "Bot neu starten"
+
+#: components/app/interface/channels/text/interactions/BotStart.tsx
+msgid "Start"
+msgstr "Starten"
+
+#. placeholder {0}: name()
+#: components/app/interface/channels/text/interactions/BotStart.tsx
+msgid "Start lets {0} send you messages here."
+msgstr "Mit Starten darf {0} dir hier Nachrichten schicken."
+
+#: components/app/interface/channels/text/interactions/InteractionHeader.tsx
+msgid "started the bot"
+msgstr "hat den Bot gestartet"
+
+#: components/app/interface/channels/text/interactions/BotStart.tsx
+msgid "Stop bot"
+msgstr "Bot stoppen"
+
+#: components/app/interface/channels/text/interactions/BotStart.tsx
+msgid "What this bot can do"
+msgstr "Was dieser Bot kann"
+
+#. placeholder {0}: name()
+#: components/app/interface/channels/text/interactions/BotStart.tsx
+msgid "You opened a link to {0}."
+msgstr "Du hast einen Link zu {0} geöffnet."
+
+#. placeholder {0}: name()
+#: components/app/interface/channels/text/interactions/BotStart.tsx
+msgid "You stopped {0}. It can't send you messages."
+msgstr "Du hast {0} gestoppt. Der Bot kann dir keine Nachrichten schicken."
+
+

@@ -134,6 +134,7 @@ export function DocsPortal(props: {
     commands: t`Slash commands`,
     interactions: t`Answering interactions`,
     components: t`Buttons, menus and forms`,
+    "bots-in-dms": t`Bots in direct messages`,
     "http-interactions": t`Interactions over HTTP`,
     messages: t`Messages`,
     channels: t`Channels and webhooks`,

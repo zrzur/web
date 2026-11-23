@@ -16,12 +16,22 @@ const openModal = vi.fn();
 const showError = vi.fn();
 const get = vi.fn(async (path: string) => ({ path }));
 const fetchPublic = vi.fn(async (id: string) => ({ id }));
+const openDM = vi.fn(async () => ({ id: "D1", path: "/channel/D1" }));
+const fetchUser = vi.fn(async (id: string) => ({
+  id,
+  openDM,
+  bot: { owner: "O" },
+}));
 
 vi.mock("@zrzur/sdk/solid", () => ({
   PublicChannelInvite: { from: (_: unknown, invite: unknown) => invite },
 }));
 vi.mock("@revolt/client", () => ({
-  useClient: () => () => ({ api: { get }, bots: { fetchPublic } }),
+  useClient: () => () => ({
+    api: { get },
+    bots: { fetchPublic },
+    users: { fetch: fetchUser },
+  }),
 }));
 vi.mock("@revolt/modal", () => ({
   useModals: () => ({ openModal, showError }),
@@ -102,6 +112,12 @@ function setup(start: string, layout = true) {
   );
 }
 
+/** A client whose server has bots in DMs on or off */
+const botDmsClient = (on: boolean) => ({
+  configured: () => true,
+  configuration: { features: { bot_dms: on } },
+});
+
 const settle = () => new Promise((done) => setTimeout(done, 20));
 
 beforeEach(() => {
@@ -109,6 +125,8 @@ beforeEach(() => {
   showError.mockClear();
   get.mockClear();
   fetchPublic.mockClear();
+  fetchUser.mockClear();
+  openDM.mockClear();
 });
 afterEach(() => dispose?.());
 
@@ -128,6 +146,25 @@ describe("dialogAddress", () => {
       kind: "bot",
       code: BOT,
       search: "",
+    });
+  });
+
+  it("reads a bot link with ?start as the conversation with the bot", () => {
+    expect(dialogAddress(`/b/${BOT}?start=spring-sale`)).toEqual({
+      kind: "bot-start",
+      code: BOT,
+      payload: "spring-sale",
+    });
+    expect(dialogAddress(`/bot/${BOT}?start`)).toEqual({
+      kind: "bot-start",
+      code: BOT,
+      payload: undefined,
+    });
+    // a payload the server would refuse is dropped, the conversation opens
+    expect(dialogAddress(`/b/${BOT}?start=no%20spaces`)).toEqual({
+      kind: "bot-start",
+      code: BOT,
+      payload: undefined,
     });
   });
 
@@ -203,6 +240,67 @@ describe("addresses that open a dialog", () => {
     expect(openModal).toHaveBeenCalledWith({
       type: "settings",
       config: "user",
+    });
+  });
+
+  it("opens the conversation with the bot for a link with ?start", async () => {
+    const { botStartState } =
+      await import("@revolt/app/interface/channels/text/interactions/botLinks");
+    const go = vi.fn();
+    openDialogAt(
+      { kind: "bot-start", code: BOT, payload: "ref-7" },
+      () => ({ ...botDmsClient(true), users: { fetch: fetchUser } }) as never,
+      { openModal, showError },
+      go,
+    );
+    await settle();
+    expect(fetchUser).toHaveBeenCalledWith(BOT);
+    expect(openDM).toHaveBeenCalledTimes(1);
+    expect(go).toHaveBeenCalledWith("/channel/D1");
+    expect(botStartState.waiting.D1).toBe("ref-7");
+    expect(openModal).not.toHaveBeenCalled();
+  });
+
+  it("with bots in DMs off, a link with ?start opens Add bot as before", async () => {
+    const go = vi.fn();
+    openDialogAt(
+      { kind: "bot-start", code: BOT, payload: "ref-7" },
+      () =>
+        ({
+          ...botDmsClient(false),
+          users: { fetch: fetchUser },
+          bots: { fetchPublic },
+        }) as never,
+      { openModal, showError },
+      go,
+    );
+    await settle();
+    expect(fetchUser).not.toHaveBeenCalled();
+    expect(fetchPublic).toHaveBeenCalledWith(BOT);
+    expect(openModal).toHaveBeenCalledWith(
+      expect.objectContaining({ type: "add_bot" }),
+    );
+    expect(go).not.toHaveBeenCalled();
+  });
+
+  it("the id of a person in a link with ?start opens their profile", async () => {
+    const person = { id: "P1", openDM };
+    const go = vi.fn();
+    openDialogAt(
+      { kind: "bot-start", code: "P1", payload: undefined },
+      () =>
+        ({
+          ...botDmsClient(true),
+          users: { fetch: vi.fn(async () => person) },
+        }) as never,
+      { openModal, showError },
+      go,
+    );
+    await settle();
+    expect(openDM).not.toHaveBeenCalled();
+    expect(openModal).toHaveBeenCalledWith({
+      type: "user_profile",
+      user: person,
     });
   });
 
