@@ -32003,3 +32003,76 @@ msgstr "Zrzur, right on <0>your desktop.</0>"
 #: components/app/interface/settings/user/appearance/AppearanceMenu.tsx
 #~ msgid "Zrzur's own look: very dark neutral panels with Zrzur Pink as the one accent."
 #~ msgstr "Zrzur's own look: very dark neutral panels with Zrzur Pink as the one accent."
+
+#. placeholder {0}: user().username
+#: components/ui/components/features/voice/dmCall/DmCallRoom.tsx
+msgid "{0}, speaking"
+msgstr "{0}, speaking"
+
+#: components/ui/components/features/voice/dmCall/DmCallRoom.tsx
+msgid "Back to the call"
+msgstr "Back to the call"
+
+#: components/ui/components/features/voice/dmCall/DmCallRoom.tsx
+msgid "Call"
+msgstr "Call"
+
+#: components/ui/components/features/voice/dmCall/DmCallRoom.tsx
+msgid "Call controls"
+msgstr "Call controls"
+
+#: components/ui/components/features/voice/dmCall/DmCallStage.tsx
+msgid "Call in this conversation"
+msgstr "Call in this conversation"
+
+#: components/ui/components/features/voice/dmCall/DmCallRoom.tsx
+msgid "Call size"
+msgstr "Call size"
+
+#: components/ui/components/features/voice/dmCall/DmCallRoom.tsx
+msgid "Drag to resize. Enter folds the call."
+msgstr "Drag to resize. Enter folds the call."
+
+#: components/ui/components/features/voice/dmCall/DmCallRoom.tsx
+msgid "Fold the call"
+msgstr "Fold the call"
+
+#: components/ui/components/features/voice/dmCall/DmCallStage.tsx
+msgid "In a call"
+msgstr "In a call"
+
+#: components/ui/components/features/voice/dmCall/DmCallStage.tsx
+msgid "Join with video"
+msgstr "Join with video"
+
+#: components/ui/components/features/voice/dmCall/DmCallRoom.tsx
+msgid "Microphone and speaker"
+msgstr "Microphone and speaker"
+
+#: components/ui/components/features/voice/dmCall/DmCallRoom.tsx
+msgid "Minimise the call"
+msgstr "Minimise the call"
+
+#: components/ui/components/features/voice/dmCall/DmCallRoom.tsx
+msgid "Open the chat"
+msgstr "Open the chat"
+
+#: components/ui/components/features/voice/dmCall/DmCallRoom.tsx
+msgid "Ringing…"
+msgstr "Ringing…"
+
+#: components/ui/components/features/voice/dmCall/DmCallRoom.tsx
+msgid "Show the call"
+msgstr "Show the call"
+
+#: components/ui/components/features/voice/dmCall/DmCallRoom.tsx
+msgid "Speaker and microphone"
+msgstr "Speaker and microphone"
+
+#: components/ui/components/features/voice/dmCall/DmCallRoom.tsx
+msgid "This browser plays calls on the device's own speaker choice."
+msgstr "This browser plays calls on the device's own speaker choice."
+
+#: components/ui/components/features/voice/dmCall/DmCallRoom.tsx
+msgid "Voice settings"
+msgstr "Voice settings"

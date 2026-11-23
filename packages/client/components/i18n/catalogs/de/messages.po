@@ -32000,3 +32000,76 @@ msgstr "Zrzur, direkt auf <0>deinem Desktop.</0>"
 #: components/app/interface/settings/user/appearance/AppearanceMenu.tsx
 #~ msgid "Zrzur's own look: very dark neutral panels with Zrzur Pink as the one accent."
 #~ msgstr "Zrzurs eigener Look: sehr dunkle, neutrale Flächen mit Zrzur-Pink als einziger Akzentfarbe."
+
+#. placeholder {0}: user().username
+#: components/ui/components/features/voice/dmCall/DmCallRoom.tsx
+msgid "{0}, speaking"
+msgstr "{0}, spricht"
+
+#: components/ui/components/features/voice/dmCall/DmCallRoom.tsx
+msgid "Back to the call"
+msgstr "Zurück zum Anruf"
+
+#: components/ui/components/features/voice/dmCall/DmCallRoom.tsx
+msgid "Call"
+msgstr "Anruf"
+
+#: components/ui/components/features/voice/dmCall/DmCallRoom.tsx
+msgid "Call controls"
+msgstr "Anrufsteuerung"
+
+#: components/ui/components/features/voice/dmCall/DmCallStage.tsx
+msgid "Call in this conversation"
+msgstr "Anruf in dieser Unterhaltung"
+
+#: components/ui/components/features/voice/dmCall/DmCallRoom.tsx
+msgid "Call size"
+msgstr "Größe des Anrufs"
+
+#: components/ui/components/features/voice/dmCall/DmCallRoom.tsx
+msgid "Drag to resize. Enter folds the call."
+msgstr "Zum Ändern der Größe ziehen. Eingabe klappt den Anruf ein."
+
+#: components/ui/components/features/voice/dmCall/DmCallRoom.tsx
+msgid "Fold the call"
+msgstr "Anruf einklappen"
+
+#: components/ui/components/features/voice/dmCall/DmCallStage.tsx
+msgid "In a call"
+msgstr "Laufender Anruf"
+
+#: components/ui/components/features/voice/dmCall/DmCallStage.tsx
+msgid "Join with video"
+msgstr "Mit Video beitreten"
+
+#: components/ui/components/features/voice/dmCall/DmCallRoom.tsx
+msgid "Microphone and speaker"
+msgstr "Mikrofon und Lautsprecher"
+
+#: components/ui/components/features/voice/dmCall/DmCallRoom.tsx
+msgid "Minimise the call"
+msgstr "Anruf minimieren"
+
+#: components/ui/components/features/voice/dmCall/DmCallRoom.tsx
+msgid "Open the chat"
+msgstr "Chat öffnen"
+
+#: components/ui/components/features/voice/dmCall/DmCallRoom.tsx
+msgid "Ringing…"
+msgstr "Klingelt …"
+
+#: components/ui/components/features/voice/dmCall/DmCallRoom.tsx
+msgid "Show the call"
+msgstr "Anruf anzeigen"
+
+#: components/ui/components/features/voice/dmCall/DmCallRoom.tsx
+msgid "Speaker and microphone"
+msgstr "Lautsprecher und Mikrofon"
+
+#: components/ui/components/features/voice/dmCall/DmCallRoom.tsx
+msgid "This browser plays calls on the device's own speaker choice."
+msgstr "Dieser Browser spielt Anrufe über den Lautsprecher ab, den das Gerät wählt."
+
+#: components/ui/components/features/voice/dmCall/DmCallRoom.tsx
+msgid "Voice settings"
+msgstr "Spracheinstellungen"

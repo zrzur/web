@@ -32000,3 +32000,76 @@ msgstr "زرزور، مباشرةً على <0>سطح مكتبك.</0>"
 #: components/app/interface/settings/user/appearance/AppearanceMenu.tsx
 #~ msgid "Zrzur's own look: very dark neutral panels with Zrzur Pink as the one accent."
 #~ msgstr "مظهر زرزور الخاص: لوحات داكنة جدًا بألوان محايدة، وزهري زرزور هو اللون المميز الوحيد."
+
+#. placeholder {0}: user().username
+#: components/ui/components/features/voice/dmCall/DmCallRoom.tsx
+msgid "{0}, speaking"
+msgstr "{0}، يتحدث الآن"
+
+#: components/ui/components/features/voice/dmCall/DmCallRoom.tsx
+msgid "Back to the call"
+msgstr "العودة إلى المكالمة"
+
+#: components/ui/components/features/voice/dmCall/DmCallRoom.tsx
+msgid "Call"
+msgstr "مكالمة"
+
+#: components/ui/components/features/voice/dmCall/DmCallRoom.tsx
+msgid "Call controls"
+msgstr "أدوات التحكم في المكالمة"
+
+#: components/ui/components/features/voice/dmCall/DmCallStage.tsx
+msgid "Call in this conversation"
+msgstr "مكالمة في هذه المحادثة"
+
+#: components/ui/components/features/voice/dmCall/DmCallRoom.tsx
+msgid "Call size"
+msgstr "حجم المكالمة"
+
+#: components/ui/components/features/voice/dmCall/DmCallRoom.tsx
+msgid "Drag to resize. Enter folds the call."
+msgstr "اسحب لتغيير الحجم. ومفتاح الإدخال يطوي المكالمة."
+
+#: components/ui/components/features/voice/dmCall/DmCallRoom.tsx
+msgid "Fold the call"
+msgstr "اطوِ المكالمة"
+
+#: components/ui/components/features/voice/dmCall/DmCallStage.tsx
+msgid "In a call"
+msgstr "مكالمة جارية"
+
+#: components/ui/components/features/voice/dmCall/DmCallStage.tsx
+msgid "Join with video"
+msgstr "انضم بالفيديو"
+
+#: components/ui/components/features/voice/dmCall/DmCallRoom.tsx
+msgid "Microphone and speaker"
+msgstr "الميكروفون ومكبّر الصوت"
+
+#: components/ui/components/features/voice/dmCall/DmCallRoom.tsx
+msgid "Minimise the call"
+msgstr "صغّر المكالمة"
+
+#: components/ui/components/features/voice/dmCall/DmCallRoom.tsx
+msgid "Open the chat"
+msgstr "افتح الدردشة"
+
+#: components/ui/components/features/voice/dmCall/DmCallRoom.tsx
+msgid "Ringing…"
+msgstr "يرنّ…"
+
+#: components/ui/components/features/voice/dmCall/DmCallRoom.tsx
+msgid "Show the call"
+msgstr "أظهر المكالمة"
+
+#: components/ui/components/features/voice/dmCall/DmCallRoom.tsx
+msgid "Speaker and microphone"
+msgstr "مكبّر الصوت والميكروفون"
+
+#: components/ui/components/features/voice/dmCall/DmCallRoom.tsx
+msgid "This browser plays calls on the device's own speaker choice."
+msgstr "يشغّل هذا المتصفح المكالمات عبر مكبّر الصوت الذي يختاره الجهاز."
+
+#: components/ui/components/features/voice/dmCall/DmCallRoom.tsx
+msgid "Voice settings"
+msgstr "إعدادات الصوت"

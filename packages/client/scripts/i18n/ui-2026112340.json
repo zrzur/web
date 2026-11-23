@@ -1,0 +1,26 @@
+{
+  "{0}, speaking": ["{0}، يتحدث الآن", "{0}, spricht"],
+  "Back to the call": ["العودة إلى المكالمة", "Zurück zum Anruf"],
+  "Call": ["مكالمة", "Anruf"],
+  "Call controls": ["أدوات التحكم في المكالمة", "Anrufsteuerung"],
+  "Call in this conversation": ["مكالمة في هذه المحادثة", "Anruf in dieser Unterhaltung"],
+  "Call size": ["حجم المكالمة", "Größe des Anrufs"],
+  "Drag to resize. Enter folds the call.": [
+    "اسحب لتغيير الحجم. ومفتاح الإدخال يطوي المكالمة.",
+    "Zum Ändern der Größe ziehen. Eingabe klappt den Anruf ein."
+  ],
+  "Fold the call": ["اطوِ المكالمة", "Anruf einklappen"],
+  "In a call": ["مكالمة جارية", "Laufender Anruf"],
+  "Join with video": ["انضم بالفيديو", "Mit Video beitreten"],
+  "Microphone and speaker": ["الميكروفون ومكبّر الصوت", "Mikrofon und Lautsprecher"],
+  "Minimise the call": ["صغّر المكالمة", "Anruf minimieren"],
+  "Open the chat": ["افتح الدردشة", "Chat öffnen"],
+  "Ringing…": ["يرنّ…", "Klingelt …"],
+  "Show the call": ["أظهر المكالمة", "Anruf anzeigen"],
+  "Speaker and microphone": ["مكبّر الصوت والميكروفون", "Lautsprecher und Mikrofon"],
+  "This browser plays calls on the device's own speaker choice.": [
+    "يشغّل هذا المتصفح المكالمات عبر مكبّر الصوت الذي يختاره الجهاز.",
+    "Dieser Browser spielt Anrufe über den Lautsprecher ab, den das Gerät wählt."
+  ],
+  "Voice settings": ["إعدادات الصوت", "Spracheinstellungen"]
+}
