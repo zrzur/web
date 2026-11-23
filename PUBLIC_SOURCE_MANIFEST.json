@@ -3568,8 +3568,8 @@
     },
     {
       "path": "packages/client/components/i18n/catalogs/ar/messages.po",
-      "sha256": "e373572caa80abda89406a33626fb2f15f5ff68e47e14852b434e19510bae442",
-      "bytes": 1255577,
+      "sha256": "0279486a1e7701d534c53800fb55f33793f0bd0f1c57f7ba6137b82efd51e326",
+      "bytes": 1255919,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -3712,8 +3712,8 @@
     },
     {
       "path": "packages/client/components/i18n/catalogs/de/messages.po",
-      "sha256": "8fd3adc7ac9a2b14600fcc7dee24be63cf4c135fb1cc39070cabf1bcd4cc7dfb",
-      "bytes": 1160277,
+      "sha256": "cc70d1ce21051e8ba09575b64c889f692921c15280cca9e009e115a0c04a3c8e",
+      "bytes": 1160573,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -3748,8 +3748,8 @@
     },
     {
       "path": "packages/client/components/i18n/catalogs/en/messages.po",
-      "sha256": "d3b32c6fd3a1216998b3a86409e7e155ff9c6a311de1f4e68d96ac490f649d6b",
-      "bytes": 1117448,
+      "sha256": "485bae9629d94f78b23a14062311b929630e14b8552c0fd1a7c2734ceb8924fc",
+      "bytes": 1117714,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -42610,8 +42610,8 @@
     },
     {
       "path": "packages/client/src/interface/Developers.tsx",
-      "sha256": "97f11b66e08fe35571f0f0aae21fc0f101ff0ced384a19b09555be7e616ec426",
-      "bytes": 28672,
+      "sha256": "550e100796365299ec21b747efa2a17b76a178287eec39861d50ea720b367471",
+      "bytes": 29358,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -43012,8 +43012,8 @@
     },
     {
       "path": "packages/client/src/interface/developers/data/botApi.json",
-      "sha256": "2da07e48db7a077eef982e4aa67a3aea9539ca7744d1d16d47130775a1b28932",
-      "bytes": 1157944,
+      "sha256": "333238b4c6c44e38880c584110b2262bdaa29c3e78495142fd1dd29493412e17",
+      "bytes": 1159388,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -43036,7 +43036,7 @@
     },
     {
       "path": "packages/client/src/interface/developers/data/botApi/meta.json",
-      "sha256": "2bb4fab0a958a7bf5fce007eed48a76d994f1019cf1d6cd027b3ad8cbd480423",
+      "sha256": "047bbe7d6b0d0ba08162719c87876884060afb0bd01a009a2e249b6364e46fda",
       "bytes": 10187,
       "category": "product-source-or-build-manifest"
     },
@@ -43048,8 +43048,8 @@
     },
     {
       "path": "packages/client/src/interface/developers/data/botApi/section-authentication.json",
-      "sha256": "f7791191dfc4566b8faa64bc127dcfb82eca3b0beb1a8b420c686c9986af87a8",
-      "bytes": 42917,
+      "sha256": "86e460a1c2ff7e60e60950eee9840e5631290ac5f2372994bb237a72421d6cd2",
+      "bytes": 43163,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -43066,7 +43066,7 @@
     },
     {
       "path": "packages/client/src/interface/developers/data/botApi/section-interactions.json",
-      "sha256": "903450faaf7a8160724545c87126b07d59019a63d7482f67f59ee9b5220d7a13",
+      "sha256": "7d80e24e1d5221fb2b263902c65be7a556f70fe6cc89fc6bc05368fd7d8a41b8",
       "bytes": 79176,
       "category": "product-source-or-build-manifest"
     },
@@ -43090,8 +43090,8 @@
     },
     {
       "path": "packages/client/src/interface/developers/data/botApi/section-oauth2.json",
-      "sha256": "3519388cae19e2c53591ebbfe8505c18bbe71101bb2b8d207fcdfc8d30987a69",
-      "bytes": 15830,
+      "sha256": "0e438991e7a99cc607c7d9b48eb420d41d894196a282ba8b5482b87144367f20",
+      "bytes": 16861,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -43192,8 +43192,8 @@
     },
     {
       "path": "packages/client/src/interface/developers/docs/content/ar/changelog.md",
-      "sha256": "e3df1c37c321b197fa7a026ee5b840f21c95d02e0e8b844b285288ba90ad7c39",
-      "bytes": 13651,
+      "sha256": "161acb3307880a507a104696c7b392dd5e5c0ede966713816885c4d601a39e26",
+      "bytes": 14787,
       "category": "public-documentation"
     },
     {
@@ -43420,8 +43420,8 @@
     },
     {
       "path": "packages/client/src/interface/developers/docs/content/changelog.md",
-      "sha256": "5b9936af3bfa7d01249886d6144ea04e4e4649def2ee0deb6daed67d411977ec",
-      "bytes": 10041,
+      "sha256": "c60345cae81e949fda93528e51a4120099efc6aa032e04d491d72613946883a1",
+      "bytes": 10794,
       "category": "public-documentation"
     },
     {
@@ -43462,8 +43462,8 @@
     },
     {
       "path": "packages/client/src/interface/developers/docs/content/de/changelog.md",
-      "sha256": "193f88b7fdaf24e74cbdb3fba7de9d520665992deb7f0720672c8445cc617ef8",
-      "bytes": 10998,
+      "sha256": "60b5abd1083128efae8510c17acc619587bd9f1b1c7dcf2b86978f1a9abb0a63",
+      "bytes": 11872,
       "category": "public-documentation"
     },
     {
