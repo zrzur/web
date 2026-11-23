@@ -31180,6 +31180,8 @@ msgctxt "forum post"
 msgid "New"
 msgstr "New"
 
+#. placeholder {0}: entry.mentions
+#: components/modal/modals/QuickSwitcher.tsx
 #: src/interface/channels/forum/ForumChannel.tsx
 msgid "{0, plural, one {# mention} other {# mentions}}"
 msgstr "{0, plural, one {# mention} other {# mentions}}"
@@ -31327,11 +31329,6 @@ msgstr "Your own message."
 #: components/app/interface/settings/user/Keybinds.tsx
 msgid "Your own message. Asks first; with Shift it doesn't."
 msgstr "Your own message. Asks first; with Shift it doesn't."
-
-#. placeholder {0}: entry.mentions
-#: components/modal/modals/QuickSwitcher.tsx
-msgid "{0, plural, one {# mention} other {# mentions}}"
-msgstr "{0, plural, one {# mention} other {# mentions}}"
 
 #: components/modal/modals/QuickSwitcher.tsx
 msgid "Channels, conversations, servers and friends"

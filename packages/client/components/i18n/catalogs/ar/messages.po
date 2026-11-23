@@ -31177,6 +31177,8 @@ msgctxt "forum post"
 msgid "New"
 msgstr "جديد"
 
+#. placeholder {0}: entry.mentions
+#: components/modal/modals/QuickSwitcher.tsx
 #: src/interface/channels/forum/ForumChannel.tsx
 msgid "{0, plural, one {# mention} other {# mentions}}"
 msgstr "{0, plural, zero {لا إشارات} one {إشارة واحدة} two {إشارتان} few {# إشارات} many {# إشارة} other {# إشارة}}"
@@ -31324,11 +31326,6 @@ msgstr "رسالتك أنت."
 #: components/app/interface/settings/user/Keybinds.tsx
 msgid "Your own message. Asks first; with Shift it doesn't."
 msgstr "رسالتك أنت. يُطلب التأكيد أولًا، ومع Shift لا يُطلب."
-
-#. placeholder {0}: entry.mentions
-#: components/modal/modals/QuickSwitcher.tsx
-msgid "{0, plural, one {# mention} other {# mentions}}"
-msgstr "{0, plural, zero {لا إشارات} one {إشارة واحدة} two {إشارتان} few {# إشارات} many {# إشارة} other {# إشارة}}"
 
 #: components/modal/modals/QuickSwitcher.tsx
 msgid "Channels, conversations, servers and friends"
