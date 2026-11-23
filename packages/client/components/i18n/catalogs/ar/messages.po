@@ -3870,6 +3870,10 @@ msgstr "يمكن لأصحاب البوتات تقديمها من إعدادات 
 msgid "Bot permissions"
 msgstr "صلاحيات البوت"
 
+#: src/interface/Developers.tsx
+msgid "The servers list shows servers the user is in. Check <0>can_manage</0> before letting them change settings."
+msgstr "تضم قائمة السيرفرات كل سيرفر ينتمي إليه المستخدم. تحقّق من <0>can_manage</0> قبل أن تسمح له بتغيير الإعدادات."
+
 #: components/app/interface/settings/user/safety/SafetyDashboard.tsx
 #~ msgid "Bot requests couldn't be loaded."
 #~ msgstr "تعذّر تحميل طلبات البوتات."

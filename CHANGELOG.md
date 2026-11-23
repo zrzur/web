@@ -7,6 +7,10 @@
 * **Fixed:** in the Developer Portal, a bot's edit page showed an empty Bio field although the bot had one; Reset brought it back. The bio arrives with the profile, and the form copies it into the text editor from an effect that ran after the editor was made but before the editor's own effects had run once. The editor deferred its first look at the value, took the copied bio as already shown and never put it in the field. It now compares with the text it was made with, so a value set at that moment is shown. The same applies to the placeholder and name of every text editor, and to your own profile's Bio.
 * A stored bio that ends in a new line no longer shows the unsaved-changes bar on its own: the editor's text is compared with the trimmed start value.
 
+### Developer docs: bot dashboards must check who may manage (2026-11-22)
+
+* The OAuth2 page (ar, en, de) has a section "Bot dashboards: check who may manage": `/oauth2/@me/servers` lists servers someone is in, not servers they manage; use `can_manage` or `?manageable=true`, check again with `members.canManage` before each change, and use Zrzur's permission bits, not Discord's.
+
 ### A friend request opens the sender's profile (2026-11-21)
 
 * **From the phone Notifications page:** the sender's picture and the line "… sent you a friend request" are one button (44 px high) that opens their profile. Screen readers hear the sentence they see as its name, then "Open profile" (ar, en, de) as its description. Accept, Decline and Send message are separate buttons and are not touched by it. The page closes first so the profile is not under it; the profile has its own Accept.
