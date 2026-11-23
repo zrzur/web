@@ -1,11 +1,18 @@
-import { JSX, Match, Show, Switch, createSignal } from "solid-js";
+import { JSX, Match, Show, Switch, createSignal, onMount } from "solid-js";
 
 import { useLingui } from "@lingui/solid/macro";
 import { css, cva } from "styled-system/css";
 import { styled } from "styled-system/jsx";
 
 import { useMessage } from "@revolt/app";
+import {
+  messageAbilities,
+  messageAriaKeys,
+  noteRowFocus,
+  rovingRow,
+} from "@revolt/app/interface/channels/text/messageKeys";
 import { useDevice } from "@revolt/common";
+import { deviceMac } from "@revolt/keybinds/active";
 import { Ripple, typography } from "@revolt/ui/components/design";
 import { Column, Row } from "@revolt/ui/components/layout";
 import {
@@ -138,6 +145,14 @@ const base = cva({
 
     transition: "background-color 120ms ease, border-color 120ms ease",
     _motionReduce: { transition: "none" },
+
+    // a message reached with Up and Down in the list
+    outline: "none",
+    _focusVisible: {
+      outline: "2px solid var(--z-focus)",
+      outlineOffset: "-2px",
+      borderRadius: "var(--z-radius-sm)",
+    },
 
     "& a:hover": {
       textDecoration: "underline",
@@ -411,10 +426,56 @@ export function MessageContainer(props: Props) {
   // of the time of a channel switch: it is made the first time it is needed
   const [wanted, setWanted] = createSignal(false);
 
+  // a row of the conversation, not a copy shown elsewhere (the message in
+  // the delete dialog): only these take the focus and the keys
+  let row: HTMLDivElement | undefined;
+  const [inList, setInList] = createSignal(false);
+  onMount(() => setInList(!!row?.closest("[data-message-scroller]")));
+  const listed = () => (inList() ? message : undefined);
+
+  /** What a screen reader says for the message: who and when */
+  const rowLabel = () => {
+    const name =
+      message?.masquerade?.name ??
+      message?.member?.nickname ??
+      message?.author?.displayName ??
+      message?.username ??
+      "";
+    const time = message?.createdAt
+      ? new Intl.DateTimeFormat(document.documentElement.lang || undefined, {
+          dateStyle: "medium",
+          timeStyle: "short",
+        }).format(message.createdAt)
+      : "";
+    return t`Message from ${name}, ${time}`;
+  };
+
   return (
     <div
       id={message?.id}
-      ref={props.ref}
+      // keys on a message (R reply, E edit, …): Up and Down in the list
+      // move the focus here (messageKeys.ts, listed in Ctrl+/)
+      data-message-row={listed()?.id}
+      // one message in the tab order: the one the keyboard was on last
+      tabIndex={listed() ? (rovingRow() === listed()!.id ? 0 : -1) : undefined}
+      onFocus={(event) => {
+        const own = listed();
+        if (own && event.target === event.currentTarget) noteRowFocus(own.id);
+      }}
+      role={listed() ? "article" : undefined}
+      aria-label={listed() ? rowLabel() : undefined}
+      aria-keyshortcuts={
+        listed()
+          ? messageAriaKeys(deviceMac(), messageAbilities(listed()!)) ||
+            undefined
+          : undefined
+      }
+      ref={(element: HTMLDivElement) => {
+        row = element;
+        // the parent's `ref={…}` arrives as a function
+        const parentRef = props.ref as unknown;
+        if (typeof parentRef === "function") parentRef(element);
+      }}
       onMouseEnter={() => {
         setWanted(true);
         props.onHover?.(true);

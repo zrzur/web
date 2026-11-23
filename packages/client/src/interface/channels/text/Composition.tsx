@@ -22,6 +22,10 @@ import { createIsTimedOut } from "@revolt/common/lib/createIsTimedOut";
 import { translatedError } from "@revolt/i18n";
 import { useInstance } from "@revolt/instance";
 import { createKeybind, Keybind, KeybindAction } from "@revolt/keybinds";
+import {
+  listenForMentionClicks,
+  setMentionTarget,
+} from "@revolt/keybinds/mention";
 import { useModals } from "@revolt/modal";
 import { useState } from "@revolt/state";
 import {
@@ -55,6 +59,9 @@ import {
 import { startAccess } from "@revolt/app/interface/channels/threadAccess";
 import { ContextMenu, ContextMenuButton } from "@revolt/app/menus/ContextMenu";
 import Breakpoint from "@revolt/common/Breakpoint";
+import { deviceMac, shortcutFor } from "@revolt/keybinds/active";
+import { ariaKeys } from "@revolt/keybinds/keyLabels";
+import type { ShortcutId } from "@revolt/keybinds/keymap";
 import { isMac } from "@revolt/keybinds/shortcuts";
 import type { AddChoice } from "./ComposerAddPanel";
 import { RulesGate } from "./RulesGate";
@@ -402,7 +409,28 @@ export function MessageComposition(props: Props) {
   // Ctrl+Shift+8 (Command on a Mac) opens "Create poll" for the message box
   // focused last (listed in the shortcuts screen); not while a window is
   // open or something else already took the key
+  /** `aria-keyshortcuts` for a button, with the person's own keys */
+  const keysFor = (id: ShortcutId) =>
+    ariaKeys(state.keybinds.table().byId[id], deviceMac());
   const composerKey = `${props.channel.id}:${Math.random().toString(36).slice(2)}`;
+
+  // Shift+click on a person, role or channel mentions it here (Ctrl+/):
+  // in the box used last, else the box of the channel on screen
+  onCleanup(
+    setMentionTarget({
+      key: composerKey,
+      // the box stays when the channel changes: read it each time
+      get channelId() {
+        return props.channel.id;
+      },
+      insert: (text) => {
+        if (!props.channel.havePermission("SendMessage")) return false;
+        setNodeReplacement([text]);
+        return true;
+      },
+    }),
+  );
+  listenForMentionClicks();
   const mac = isMac();
   let composerRoot: HTMLDivElement | undefined;
   onMount(() => {
@@ -413,6 +441,21 @@ export function MessageComposition(props: Props) {
     };
     const onKeyDown = (event: KeyboardEvent) => {
       if (event.defaultPrevented || event.repeat) return;
+      // Ctrl+Shift+U uploads a file, Ctrl+E opens the emoji picker
+      // (Command on a Mac; changeable in Ctrl+/)
+      const id = shortcutFor(event);
+      if (id === "upload_file" || id === "open_emoji_picker") {
+        if (composerForShortcut() !== composerKey || isOpen()) return;
+        event.preventDefault();
+        if (id === "upload_file") addFile();
+        else
+          document
+            .querySelector<HTMLElement>(
+              `[data-shortcut-target="emoji"][data-composer="${composerKey}"]`,
+            )
+            ?.click();
+        return;
+      }
       if (!isCreatePollShortcut(event, mac)) return;
       if (composerForShortcut() !== composerKey || isOpen()) return;
       event.preventDefault();
@@ -776,6 +819,7 @@ export function MessageComposition(props: Props) {
                     phone ? adding() : compact() ? menuOpen() : undefined
                   }
                   data-testid="composer-add"
+                  aria-keyshortcuts={keysFor("upload_file")}
                   onPress={(event) => {
                     if (phone) pickerTriggers?.onClickAdd(event, addButton);
                     // narrow box: a click opens the menu (use:floating on
@@ -887,6 +931,9 @@ export function MessageComposition(props: Props) {
                     <MessageBox.InlineIcon>
                       <IconButton
                         aria-label={t`Open emoji picker`}
+                        aria-keyshortcuts={keysFor("open_emoji_picker")}
+                        data-shortcut-target="emoji"
+                        data-composer={composerKey}
                         onPress={triggerProps.onClickEmoji}
                       >
                         <Symbol type="outlined" size={22}>

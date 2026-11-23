@@ -35,6 +35,7 @@ import {
   forgetStoredEphemeral,
 } from "../app/interface/channels/text/interactions/ephemeralStorage";
 import { forgetCreators } from "../common/lib/creatorCache";
+import { forgetRecentPlaces } from "../keybinds/quickSwitch";
 import { stillFileUrlsWhenSaving } from "../common/lib/saveData";
 import Instance from "../instance/Instance";
 import { killServiceWorkerSubscription } from "./NotificationsController";
@@ -571,6 +572,7 @@ class Lifecycle {
             if (type === "InvalidSession") {
               this.#sessionGone = true;
               forgetCreators();
+              forgetRecentPlaces();
               // the session ended elsewhere: what this account kept goes too
               void forgetOfflineData(
                 this.#controller.state.auth.getSession()?.userId,
@@ -813,6 +815,8 @@ export default class ClientController {
 
   logout() {
     forgetCreators();
+    // places this account visited (the quick switcher's recent list)
+    forgetRecentPlaces();
     // private bot answers kept for a reload belong to this account only
     forgetStoredEphemeral(ephemeralStorage());
     this.state.settings.resetNotificationsState();

@@ -60,8 +60,9 @@ export function KeybindContext(props: { children: JSXElement }) {
   );
 
   function onKeyDown(event: KeyboardEvent) {
-    // a held key fires once, as before
-    if (event.repeat) return;
+    // a held key fires once, as before; a character being composed (IME,
+    // also when a browser only says so with key code 229) is never a shortcut
+    if (event.repeat || event.isComposing || event.keyCode === 229) return;
     const target = event.target as HTMLElement | null;
     const fired = candidateActions(event).find(
       (action) =>

@@ -57,9 +57,8 @@ import {
 
 import { Device, useDevice } from "@revolt/common";
 import { holdStaleReload } from "../../src/staleBuild";
-import { shortcutsPaused } from "../keybinds/active";
+import { devicePlatform, shortcutsPaused } from "../keybinds/active";
 import {
-  isMac,
   isTypingTarget,
   matchGlobalShortcut,
   transmitting,
@@ -1634,7 +1633,7 @@ export function VoiceContext(props: { children: JSX.Element }) {
 
   // App-wide shortcuts (listed in Ctrl+/) and push to talk. Physical keys,
   // so they match on every keyboard layout.
-  const mac = isMac();
+  const mac = devicePlatform();
   const inCall = () => voice.state() === "CONNECTED";
   // push to talk is open while the key is held in this window or heard by
   // the desktop app, and for the release delay after it is let go
@@ -1654,6 +1653,13 @@ export function VoiceContext(props: { children: JSX.Element }) {
         });
       return;
     }
+    if (shortcut === "open_quick_switcher") {
+      // heard before the message box, so Ctrl+K works while typing too
+      event.preventDefault();
+      if (!event.repeat && !modals.isOpen())
+        modals.openModal({ type: "quick_switcher" });
+      return;
+    }
     if (shortcut === "toggle_streamer") {
       event.preventDefault();
       if (!event.repeat)
@@ -1665,6 +1671,14 @@ export function VoiceContext(props: { children: JSX.Element }) {
       if (!inCall()) return;
       event.preventDefault();
       if (!event.repeat) window.dispatchEvent(new Event("zrzur:save-clip"));
+      return;
+    }
+    if (shortcut === "leave_call") {
+      // only while connected; three keys, so it never happens by accident,
+      // and joining again is one click
+      if (!inCall()) return;
+      event.preventDefault();
+      if (!event.repeat) voice.disconnect();
       return;
     }
     if (shortcut === "toggle_soundboard") {

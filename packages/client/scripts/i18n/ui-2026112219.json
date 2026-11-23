@@ -1,0 +1,33 @@
+{
+  "{0, plural, one {# mention} other {# mentions}}": [
+    "{0, plural, zero {لا إشارات} one {إشارة واحدة} two {إشارتان} few {# إشارات} many {# إشارة} other {# إشارة}}",
+    "{0, plural, one {# Erwähnung} other {# Erwähnungen}}"
+  ],
+  "Channels, conversations, servers and friends": [
+    "القنوات والمحادثات والسيرفرات والأصدقاء",
+    "Kanäle, Unterhaltungen, Server und Freunde"
+  ],
+  "Friend": ["صديق", "Freund"],
+  "Go to": ["انتقل إلى", "Gehe zu"],
+  "Go to a channel, conversation or server": [
+    "الانتقال إلى قناة أو محادثة أو سيرفر",
+    "Zu einem Kanal, einer Unterhaltung oder einem Server wechseln"
+  ],
+  "On the message with the keyboard focus. Reach it with ↑ and ↓.": [
+    "على الرسالة التي عليها تركيز لوحة المفاتيح. انتقل إليها بالسهمين ↑ و↓.",
+    "Auf der Nachricht mit dem Tastaturfokus. Du erreichst sie mit ↑ und ↓."
+  ],
+  "Recent and unread places": [
+    "الأماكن الأخيرة وغير المقروءة",
+    "Zuletzt besuchte und ungelesene Orte"
+  ],
+  "Results": ["النتائج", "Ergebnisse"],
+  "Start with # for channels, @ for people or * for servers.": [
+    "ابدأ بـ # للقنوات، أو @ للأشخاص، أو * للسيرفرات.",
+    "Beginne mit # für Kanäle, @ für Personen oder * für Server."
+  ],
+  "Type a name. Start with # for channels, @ for people or * for servers.": [
+    "اكتب اسمًا. ابدأ بـ # للقنوات، أو @ للأشخاص، أو * للسيرفرات.",
+    "Tippe einen Namen. Beginne mit # für Kanäle, @ für Personen oder * für Server."
+  ]
+}

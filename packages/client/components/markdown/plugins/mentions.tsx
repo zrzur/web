@@ -106,7 +106,7 @@ export function RoleMention(props: { roleId: string }) {
       }
     >
       <Match when={role()}>
-        <div class={mention()} dir="auto">
+        <div class={mention()} dir="auto" data-mention-role={props.roleId}>
           <RoleIcon
             style={{
               background:

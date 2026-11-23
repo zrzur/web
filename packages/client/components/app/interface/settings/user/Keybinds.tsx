@@ -14,9 +14,17 @@ import { styled } from "styled-system/jsx";
 
 import { savedRemindersEnabled } from "@revolt/app/interface/saved/savedModel";
 import { useClient } from "@revolt/client";
-import { deviceMac, pauseShortcuts } from "@revolt/keybinds/active";
+import {
+  deviceMac,
+  devicePlatform,
+  pauseShortcuts,
+} from "@revolt/keybinds/active";
 import { comboLabel, keyLabel } from "@revolt/keybinds/keyLabels";
-import { type Combo, type ShortcutId } from "@revolt/keybinds/keymap";
+import {
+  type Combo,
+  type Platform,
+  type ShortcutId,
+} from "@revolt/keybinds/keymap";
 import {
   type ComboCheck,
   checkCombo,
@@ -36,11 +44,13 @@ import {
   desktopGameKeys,
   parseBind,
 } from "@revolt/rtc/gameKeys";
+import { shortcutTakenByTalk } from "@revolt/rtc/globalTalk";
 import { useState } from "@revolt/state";
 import {
   Button,
   Column,
   IconButton,
+  Segmented,
   SettingsRow,
   SettingsSection,
 } from "@revolt/ui";
@@ -67,7 +77,10 @@ export function KeybindsSettings() {
   const client = useClient();
   const { voice } = state;
   const { navigate } = useSettingsNavigation();
-  const mac = deviceMac();
+  /** The set shown: this device's system, or another one to look at */
+  const here = devicePlatform();
+  const [platform, setPlatform] = createSignal<Platform>(here);
+  const mac = () => platform() === "mac";
 
   /** Names for the clash message */
   const names: Record<ShortcutId, () => string> = {
@@ -86,10 +99,38 @@ export function KeybindsSettings() {
     view_reminders: () => t`Open reminders`,
     save_clip: () => t`Save a voice clip`,
     open_shortcuts: () => t`Show keyboard shortcuts`,
+    navigation_unread_up: () => t`Previous unread channel`,
+    navigation_unread_down: () => t`Next unread channel`,
+    upload_file: () => t`Upload a file`,
+    open_emoji_picker: () => t`Open the emoji picker`,
+    search_channel: () => t`Search this channel`,
+    view_mentions: () => t`Open your mentions`,
+    leave_call: () => t`Leave the call`,
+    open_quick_switcher: () => t`Go to a channel, conversation or server`,
   };
 
   // desktop app: binds heard in games (set in voice settings)
   const gameKeys = !!desktopGameKeys() && voice.gameKeys;
+
+  /**
+   * The shortcut whose keys talking from other apps holds now (desktop app,
+   * push to talk on): it waits while that is on
+   */
+  const takenByTalk = () =>
+    desktopPushToTalk() && voice.globalTalk && voice.inputMode === "ptt"
+      ? shortcutTakenByTalk(voice.pttKey)
+      : undefined;
+  /** A short line under a shortcut whose keys the talk key holds */
+  const talkNote = (id: ShortcutId) => (
+    <Show when={takenByTalk() === id}>
+      <span data-testid="keybind-talk-note">
+        {" "}
+        <Trans>
+          Your talk key holds these keys while talking from other apps is on.
+        </Trans>
+      </span>
+    </Show>
+  );
   const gameBinds = () => cleanStoredBinds(voice.gameBinds);
   const gameRows: { action: GameKeyAction; title: JSX.Element }[] = [
     { action: "talk", title: <Trans>Push to talk (hold)</Trans> },
@@ -114,6 +155,16 @@ export function KeybindsSettings() {
           id: "toggle_deafen",
           title: <Trans>Deafen or undeafen</Trans>,
           description: <Trans>During a call.</Trans>,
+        },
+        {
+          id: "leave_call",
+          title: <Trans>Leave the call</Trans>,
+          description: (
+            <>
+              <Trans>During a call.</Trans>
+              {talkNote("leave_call")}
+            </>
+          ),
         },
         {
           id: "toggle_soundboard",
@@ -192,11 +243,51 @@ export function KeybindsSettings() {
         { title: <Trans>Send</Trans>, keys: [["Enter"]] },
         { title: <Trans>New line</Trans>, keys: [["Shift", "Enter"]] },
         {
+          title: <Trans>Mention someone</Trans>,
+          description: (
+            <Trans>
+              Shift+click a name or picture: the mention goes in at the cursor.
+            </Trans>
+          ),
+          keys: [["Shift", t`Click`]],
+        },
+        {
+          title: <Trans>Mention a role or a channel</Trans>,
+          description: <Trans>Shift+click the role or the channel.</Trans>,
+          keys: [["Shift", t`Click`]],
+        },
+        {
+          title: <Trans>Accept a suggestion</Trans>,
+          description: <Trans>While names or emoji are suggested.</Trans>,
+          keys: [["Tab"], ["Enter"]],
+        },
+        { title: <Trans>Bold text</Trans>, keys: [["Mod", "B"]] },
+        { title: <Trans>Italic text</Trans>, keys: [["Mod", "I"]] },
+        {
+          id: "open_emoji_picker",
+          title: <Trans>Open the emoji picker</Trans>,
+        },
+        {
+          id: "upload_file",
+          title: <Trans>Upload a file</Trans>,
+          description: (
+            <>
+              <Trans>Where you can send files.</Trans>
+              {talkNote("upload_file")}
+            </>
+          ),
+        },
+        {
           title: <Trans>Edit your last message</Trans>,
           description: <Trans>When the message box is empty.</Trans>,
           keys: [["↑"]],
         },
         { title: <Trans>Cancel editing</Trans>, keys: [["Esc"]] },
+        {
+          title: <Trans>Cancel a reply</Trans>,
+          description: <Trans>Also closes the emoji picker.</Trans>,
+          keys: [["Esc"]],
+        },
         {
           title: <Trans>Start typing</Trans>,
           description: <Trans>Any letter jumps into the message box.</Trans>,
@@ -210,6 +301,54 @@ export function KeybindsSettings() {
         {
           id: "chat_mark_server_as_read",
           title: <Trans>Mark the server as read</Trans>,
+        },
+        {
+          id: "search_channel",
+          title: <Trans>Search this channel</Trans>,
+        },
+        {
+          title: <Trans>Scroll the messages</Trans>,
+          keys: [["Page Up"], ["Page Down"]],
+        },
+        {
+          title: <Trans>Move between messages</Trans>,
+          description: (
+            <Trans>
+              In the message list. The keys below then work on that message.
+            </Trans>
+          ),
+          keys: [["↑"], ["↓"]],
+        },
+        {
+          title: <Trans>Reply</Trans>,
+          description: (
+            <Trans>
+              On the message with the keyboard focus. Reach it with ↑ and ↓.
+            </Trans>
+          ),
+          keys: [["R"]],
+        },
+        {
+          title: <Trans>Edit</Trans>,
+          description: <Trans>Your own message.</Trans>,
+          keys: [["E"]],
+        },
+        {
+          title: <Trans>Delete</Trans>,
+          description: (
+            <Trans>Your own message. Asks first; with Shift it doesn't.</Trans>
+          ),
+          keys: [["Delete"], ["Shift", "Delete"]],
+        },
+        {
+          title: <Trans>Pin or unpin</Trans>,
+          description: <Trans>Where you may pin messages.</Trans>,
+          keys: [["P"]],
+        },
+        {
+          title: <Trans>Copy the text</Trans>,
+          description: <Trans>When no text is selected.</Trans>,
+          keys: [["Mod", "C"]],
         },
         {
           title: <Trans>Select a range of messages</Trans>,
@@ -263,10 +402,32 @@ export function KeybindsSettings() {
     {
       title: <Trans>Navigation</Trans>,
       rows: [
+        {
+          id: "open_quick_switcher",
+          title: <Trans>Go to a channel, conversation or server</Trans>,
+          description: (
+            <Trans>
+              Type a name. Start with # for channels, @ for people or * for
+              servers.
+            </Trans>
+          ),
+        },
         { id: "navigation_channel_up", title: <Trans>Previous channel</Trans> },
         { id: "navigation_channel_down", title: <Trans>Next channel</Trans> },
+        {
+          id: "navigation_unread_up",
+          title: <Trans>Previous unread channel</Trans>,
+        },
+        {
+          id: "navigation_unread_down",
+          title: <Trans>Next unread channel</Trans>,
+        },
         { id: "navigation_server_up", title: <Trans>Previous server</Trans> },
         { id: "navigation_server_down", title: <Trans>Next server</Trans> },
+        {
+          id: "view_mentions",
+          title: <Trans>Open your mentions</Trans>,
+        },
         {
           id: "open_events",
           title: <Trans>Open the server's events</Trans>,
@@ -387,6 +548,39 @@ export function KeybindsSettings() {
 
   return (
     <Column gap="xl">
+      <SettingsSection>
+        <SettingsRow
+          icon={<Icon name="keyboard" size={20} />}
+          title={<Trans>Keys shown</Trans>}
+          description={
+            <Show
+              when={platform() === here}
+              fallback={
+                <Trans>
+                  Another system's keys, to read. You change your own on this
+                  device's set.
+                </Trans>
+              }
+            >
+              <Trans>This device's keys. Look at another system's set.</Trans>
+            </Show>
+          }
+          control={() => (
+            <span data-testid="keybinds-platform">
+              <Segmented<Platform>
+                aria-label={t`Show the keys for`}
+                value={platform()}
+                onChange={setPlatform}
+                options={[
+                  { value: "mac", label: "macOS" },
+                  { value: "windows", label: "Windows" },
+                  { value: "linux", label: "Linux" },
+                ]}
+              />
+            </span>
+          )}
+        />
+      </SettingsSection>
       <SettingsSection
         title={<Trans>Your shortcuts</Trans>}
         description={
@@ -466,7 +660,9 @@ export function KeybindsSettings() {
                       control={() => (
                         <Combos>
                           <For each={row.keys}>
-                            {(combo) => <Keys keys={comboLabel(combo, mac)} />}
+                            {(combo) => (
+                              <Keys keys={comboLabel(combo, mac())} />
+                            )}
                           </For>
                         </Combos>
                       )}
@@ -480,6 +676,7 @@ export function KeybindsSettings() {
                       description={row.description}
                       name={names[id()]}
                       names={names}
+                      platform={platform()}
                     />
                   )}
                 </Show>
@@ -512,10 +709,13 @@ export function ShortcutRow(props: {
   description?: JSX.Element;
   name: () => string;
   names: Record<ShortcutId, () => string>;
+  /** The system whose keys are shown; another one's are read only */
+  platform?: Platform;
 }) {
   const { t } = useLingui();
   const state = useState();
   const mac = deviceMac();
+  const own = () => !props.platform || props.platform === devicePlatform();
   const [phase, setPhase] = createSignal<Phase>({ kind: "idle" });
 
   const label = (combo: Combo) =>
@@ -695,51 +895,67 @@ export function ShortcutRow(props: {
         </Show>
       }
       control={() => (
-        <span style={CONTROLS}>
-          <Show when={state.keybinds.table().custom.has(props.id)}>
-            <IconButton
-              variant="toolbar"
-              size="xs"
-              aria-label={t`Reset ${props.name()} to the default`}
-              onPress={() => {
-                resetShortcut(state.keybinds, props.id);
-                stop(undefined, true);
-              }}
-            >
-              <Icon name="arrow-u-up-left" size={16} />
-            </IconButton>
-          </Show>
-          <button
-            ref={keysButton}
-            type="button"
-            class={PHONE_TARGET}
-            style={{
-              ...KEYS_BUTTON,
-              ...(phase().kind === "recording" ? RECORDING : {}),
-            }}
-            data-recording={phase().kind === "recording"}
-            data-shortcut={props.id}
-            aria-label={
-              phase().kind === "recording"
-                ? t`Press the new keys for ${props.name()}. Esc cancels.`
-                : t`Change the keys for ${props.name()}: ${label(state.keybinds.table().byId[props.id])}`
-            }
-            onClick={record}
-            onBlur={() => phase().kind === "recording" && stop()}
-          >
-            <Show
-              when={phase().kind !== "recording"}
-              fallback={<Trans>Press keys…</Trans>}
-            >
+        <Show
+          when={own()}
+          fallback={
+            <span data-shortcut={props.id} data-platform={props.platform}>
               <Keys
                 keys={comboLabel(
-                  comboKeys(state.keybinds.table().byId[props.id]),
-                  mac,
+                  comboKeys(
+                    state.keybinds.tableFor(props.platform!).byId[props.id],
+                  ),
+                  props.platform === "mac",
                 )}
               />
+            </span>
+          }
+        >
+          <span style={CONTROLS}>
+            <Show when={state.keybinds.table().custom.has(props.id)}>
+              <IconButton
+                variant="toolbar"
+                size="xs"
+                aria-label={t`Reset ${props.name()} to the default`}
+                onPress={() => {
+                  resetShortcut(state.keybinds, props.id);
+                  stop(undefined, true);
+                }}
+              >
+                <Icon name="arrow-u-up-left" size={16} />
+              </IconButton>
             </Show>
-          </button>
-        </span>
+            <button
+              ref={keysButton}
+              type="button"
+              class={PHONE_TARGET}
+              style={{
+                ...KEYS_BUTTON,
+                ...(phase().kind === "recording" ? RECORDING : {}),
+              }}
+              data-recording={phase().kind === "recording"}
+              data-shortcut={props.id}
+              aria-label={
+                phase().kind === "recording"
+                  ? t`Press the new keys for ${props.name()}. Esc cancels.`
+                  : t`Change the keys for ${props.name()}: ${label(state.keybinds.table().byId[props.id])}`
+              }
+              onClick={record}
+              onBlur={() => phase().kind === "recording" && stop()}
+            >
+              <Show
+                when={phase().kind !== "recording"}
+                fallback={<Trans>Press keys…</Trans>}
+              >
+                <Keys
+                  keys={comboLabel(
+                    comboKeys(state.keybinds.table().byId[props.id]),
+                    mac,
+                  )}
+                />
+              </Show>
+            </button>
+          </span>
+        </Show>
       )}
     />
   );

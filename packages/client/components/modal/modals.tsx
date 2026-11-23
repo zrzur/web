@@ -252,6 +252,11 @@ const PollVotersModal = windowPart(() =>
 const EndPollModal = windowPart(() =>
   import("./modals/EndPoll").then((m) => ({ default: m.EndPollModal })),
 );
+const QuickSwitcherModal = windowPart(() =>
+  import("./modals/QuickSwitcher").then((m) => ({
+    default: m.QuickSwitcherModal,
+  })),
+);
 const ForwardMessageModal = windowPart(() =>
   import("./modals/ForwardMessage").then((m) => ({
     default: m.ForwardMessageModal,
@@ -558,6 +563,8 @@ export function RenderModal(props: ActiveModal & { onClose: () => void }) {
       return <EndPollModal {...modalProps} />;
     case "forward_message":
       return <ForwardMessageModal {...modalProps} />;
+    case "quick_switcher":
+      return <QuickSwitcherModal {...modalProps} />;
     case "edit_bot_username":
       return <EditBotUsernameModal {...modalProps} />;
     case "screen_share_settings":

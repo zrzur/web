@@ -3,7 +3,7 @@ import { afterEach, describe, expect, it, vi } from "vitest";
 import { bindKeymap, defaultKeymap } from "../keybinds/active";
 import { globalPttCombo } from "../keybinds/keyLabels";
 import { compileKeymap } from "../keybinds/keymapCompile";
-import { globalTalkAllowed } from "./globalTalk";
+import { globalTalkAllowed, shortcutTakenByTalk } from "./globalTalk";
 
 import { desktopPushToTalk, latchPress } from "./desktopPushToTalk";
 
@@ -94,6 +94,53 @@ describe("talk from other apps and the app's own shortcuts", () => {
     // Ctrl+Shift+M mutes, D deafens, L is streamer mode, 8 a poll, 9 events
     for (const code of ["KeyM", "KeyD", "KeyL", "Digit8", "Digit9"])
       expect(globalTalkAllowed(code), code).toBe(false);
+  });
+
+  it("keeps every talk key people could choose before the 2026-11-22 shortcuts", () => {
+    // keys refused before: editing keys and the older shortcuts (M D L 8 9
+    // 4 5 3 6 and the poll); every other letter, digit and F key still works
+    const before = new Set([
+      ..."ACFNTVWXZ".split("").map((l) => `Key${l}`),
+      "KeyM",
+      "KeyD",
+      "KeyL",
+      "Digit3",
+      "Digit4",
+      "Digit5",
+      "Digit6",
+      "Digit8",
+      "Digit9",
+    ]);
+    const codes = [
+      ..."ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("").map((l) => `Key${l}`),
+      ..."0123456789".split("").map((d) => `Digit${d}`),
+      ...Array.from({ length: 24 }, (_, i) => `F${i + 1}`),
+      "Backquote",
+    ];
+    for (const code of codes)
+      if (!before.has(code)) expect(globalTalkAllowed(code), code).toBe(true);
+    // the new shortcuts on Ctrl+Shift+<key>: the talk key wins (U, H), or
+    // the key could never talk from other apps (F)
+    expect(globalTalkAllowed("KeyU")).toBe(true);
+    expect(globalTalkAllowed("KeyH")).toBe(true);
+    expect(globalTalkAllowed("Digit2")).toBe(true);
+  });
+
+  it("lets the talk key win only while upload and leave-call keep their default keys", () => {
+    expect(shortcutTakenByTalk("KeyU")).toBe("upload_file");
+    expect(shortcutTakenByTalk("KeyH")).toBe("leave_call");
+    expect(shortcutTakenByTalk("KeyM")).toBe(undefined);
+    expect(shortcutTakenByTalk(undefined)).toBe(undefined);
+    // keys a person chose for upload are never taken from it
+    bindKeymap((mac) =>
+      compileKeymap(
+        { upload_file: { code: "KeyK", mod: true, shift: true } },
+        mac,
+      ),
+    );
+    expect(globalTalkAllowed("KeyK")).toBe(false);
+    expect(shortcutTakenByTalk("KeyK")).toBe(undefined);
+    expect(globalTalkAllowed("KeyU")).toBe(true);
   });
 
   it("follows the person's own shortcuts", () => {

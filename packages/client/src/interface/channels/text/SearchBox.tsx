@@ -16,6 +16,9 @@ import { Channel } from "@zrzur/sdk/solid";
 import { styled } from "styled-system/jsx";
 
 import { useClient } from "@revolt/client";
+import { deviceMac, shortcutFor } from "@revolt/keybinds/active";
+import { ariaKeys } from "@revolt/keybinds/keyLabels";
+import { useState } from "@revolt/state";
 import { Avatar } from "@revolt/ui";
 import { Icon } from "@revolt/ui/icons/Icon";
 
@@ -90,6 +93,7 @@ export function SearchBox(props: {
   const { t } = useLingui();
   const client = useClient();
   const labels = useSearchLabels();
+  const state = useState();
   const listId = createUniqueId();
 
   let input!: HTMLInputElement;
@@ -99,6 +103,20 @@ export function SearchBox(props: {
   const [open, setOpen] = createSignal(false);
   const [active, setActive] = createSignal(-1);
   const [rect, setRect] = createSignal<DOMRect>();
+
+  // Ctrl+F (Command+F on a Mac) jumps here when this box is on screen and
+  // no window is open; changeable in Ctrl+/
+  const onFind = (event: KeyboardEvent) => {
+    if (event.defaultPrevented || event.repeat) return;
+    if (shortcutFor(event) !== "search_channel") return;
+    if (!input?.isConnected || !input.getClientRects().length) return;
+    if (document.querySelector("[role=dialog][aria-modal=true]")) return;
+    event.preventDefault();
+    input.focus();
+    input.select();
+  };
+  document.addEventListener("keydown", onFind);
+  onCleanup(() => document.removeEventListener("keydown", onFind));
 
   createEffect(
     on(
@@ -309,6 +327,10 @@ export function SearchBox(props: {
           }
           placeholder={props.placeholder}
           aria-label={t`Search messages`}
+          aria-keyshortcuts={ariaKeys(
+            state.keybinds.table().byId.search_channel,
+            deviceMac(),
+          )}
           value={draft()}
           onInput={(e) => {
             setDraft(e.currentTarget.value);

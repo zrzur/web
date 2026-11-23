@@ -4,7 +4,7 @@
  * the app.
  */
 import { activeKeymap, deviceMac } from "../keybinds/active";
-import { matchShortcut } from "../keybinds/keymap";
+import { type ShortcutId, matchShortcut } from "../keybinds/keymap";
 
 /**
  * Keys the desktop app never takes with Ctrl/Cmd+Shift, because other apps
@@ -24,13 +24,49 @@ export function globalTalkBlock(code: string): "editing" | "app" | undefined {
   if (NOT_GLOBAL.test(code)) return "editing";
   const mac = deviceMac();
   // the table itself, also while a new combination is being recorded
+  const map = activeKeymap(mac);
   const taken = matchShortcut(
-    activeKeymap(mac),
+    map,
     { code, ctrlKey: !mac, metaKey: mac, shiftKey: true, altKey: false },
     mac,
   );
-  return taken ? "app" : undefined;
+  return taken && !talkKeyWins(taken, map.custom) ? "app" : undefined;
 }
+
+/**
+ * Whether the talk key keeps these keys from a shortcut: only for the
+ * shortcuts below, and only while they are on their default keys (keys a
+ * person chose for a shortcut are never taken from it)
+ */
+export function talkKeyWins(id: ShortcutId, custom: ReadonlySet<ShortcutId>) {
+  return TALK_KEY_WINS.has(id) && !custom.has(id);
+}
+
+/**
+ * The shortcut whose keys talking from other apps takes now (the desktop
+ * app holds Ctrl/Cmd+Shift with the talk key), for a note in Ctrl+/
+ * @param code The push-to-talk key, when talking from other apps is on
+ */
+export function shortcutTakenByTalk(
+  code: string | undefined,
+): ShortcutId | undefined {
+  if (!code || NOT_GLOBAL.test(code)) return;
+  const mac = deviceMac();
+  const map = activeKeymap(mac);
+  const taken = matchShortcut(
+    map,
+    { code, ctrlKey: !mac, metaKey: mac, shiftKey: true, altKey: false },
+    mac,
+  );
+  return taken && talkKeyWins(taken, map.custom) ? taken : undefined;
+}
+
+/**
+ * Shortcuts added after people had chosen their talk keys (2026-11-22). A
+ * talk key chosen before keeps working from other apps; the shortcut on
+ * the same keys then doesn't reach the window while that talk is on.
+ */
+export const TALK_KEY_WINS = new Set<ShortcutId>(["upload_file", "leave_call"]);
 
 /** Whether this push-to-talk key can also talk from other apps */
 export function globalTalkAllowed(code: string): boolean {

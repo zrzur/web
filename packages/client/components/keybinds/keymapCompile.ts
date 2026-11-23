@@ -9,12 +9,15 @@ import {
   type CustomCombos,
   type Keymap,
   type ShortcutId,
+  type Sys,
   DEFAULTS,
   MODIFIER_CODE,
   REMAPPABLE,
   defaultCombo,
   keyOf,
+  macOf,
   normalize,
+  platformOf,
 } from "./keymap";
 
 /** Whether this is a shortcut id this version knows */
@@ -57,12 +60,15 @@ const FUNCTION_KEY = /^F([1-9]|1[0-9]|2[0-4])$/;
  * Why a combination can't be a shortcut on this system: the browser keeps
  * it, or typing needs it (plain keys, editing keys, AltGr on Windows,
  * Option+key on a Mac). Also used on synced data, so a combination written
- * on another system never breaks typing here.
+ * on another system never breaks typing here. Linux has its own AltGr key,
+ * so Ctrl+Alt+letter types nothing there.
  */
 export function unusable(
   combo: Combo,
-  mac: boolean,
+  sys: Sys,
 ): "browser" | "typing" | undefined {
+  const mac = macOf(sys);
+  const windows = platformOf(sys) === "windows";
   const c = normalize(combo, mac);
   const key = keyOf(c, mac);
   if (BROWSER_KEEPS.has(key)) return "browser";
@@ -71,7 +77,7 @@ export function unusable(
   if (EDITING.test(key)) return "typing";
   if (
     PRINTABLE.test(c.code) &&
-    ((!mac && c.mod && c.alt) || (mac && c.alt && !c.mod && !c.ctrl))
+    ((windows && c.mod && c.alt) || (mac && c.alt && !c.mod && !c.ctrl))
   )
     return "typing";
 }
@@ -80,7 +86,7 @@ export function unusable(
  * Only known ids with usable combinations for this system, written the
  * short way
  */
-export function cleanCustom(input: unknown, mac: boolean): CustomCombos {
+export function cleanCustom(input: unknown, mac: Sys): CustomCombos {
   const out: CustomCombos = {};
   if (!input || typeof input !== "object") return out;
   for (const [id, combo] of Object.entries(input as Record<string, unknown>)) {
@@ -105,7 +111,7 @@ export function cleanCustom(input: unknown, mac: boolean): CustomCombos {
  * A person's own combination wins over a default that has the same keys;
  * the pair is kept in `conflicts` so the shortcuts screen can say so.
  */
-export function compileKeymap(custom: CustomCombos, mac: boolean): Keymap {
+export function compileKeymap(custom: CustomCombos, mac: Sys): Keymap {
   const clean = cleanCustom(custom, mac);
   const byId = {} as Record<ShortcutId, Combo>;
   const byCombo = new Map<string, ShortcutId>();

@@ -27,6 +27,7 @@ import { useDevice } from "@revolt/common";
 import { useModals } from "@revolt/modal";
 import { PluginHostGate } from "@revolt/plugins/PluginHostGate";
 import { ConfirmEmailStrip } from "@revolt/auth/src/invite/ConfirmEmailStrip";
+import { notePlace } from "@revolt/keybinds/quickSwitch";
 import { Navigate, useBeforeLeave, useLocation } from "@revolt/routing";
 import { useState } from "@revolt/state";
 import { LAYOUT_SECTIONS } from "@revolt/state/stores/Layout";
@@ -90,6 +91,13 @@ const Interface = (props: { children?: JSX.Element }) => {
       }
     }
   });
+
+  // recent places for the quick switcher (Ctrl+K): every page shown, the
+  // first one after a load included
+  // (the account from the stored session: known before the connection is)
+  createEffect(() =>
+    notePlace(location.pathname, state.auth.getSession()?.userId),
+  );
 
   createEffect(() => {
     if (!isLoggedIn()) {

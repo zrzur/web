@@ -39,7 +39,7 @@ export function ProfileRoles(props: {
       >
         <ProfileChipRow items={roles()} all={props.full}>
           {(role) => (
-            <span class={chip()}>
+            <span class={chip()} data-mention-role={role.id}>
               <Dot
                 style={{
                   background: role.colour ?? "var(--z-fg-muted)",
