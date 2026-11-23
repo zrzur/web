@@ -46,9 +46,7 @@ describe("safe-area insets", () => {
     expect(root).toMatch(/top:\s*calc\(var\(--z-safe-top\)/);
     expect(root).toMatch(/left:\s*var\(--z-safe-left\)/);
     expect(root).toMatch(/right:\s*var\(--z-safe-right\)/);
-    expect(root).toMatch(
-      /bottom:\s*calc\(\s*max\(var\(--z-root-safe-bottom\)/,
-    );
+    expect(root).toMatch(/bottom:\s*calc\(\s*max\(var\(--z-root-safe-bottom\)/);
     // iOS 26 installed app: the layout box stops short of the screen bottom.
     // iOS draws nothing below that box, so nothing may be placed there: the
     // root only gives up the bottom inset, it never gets a negative offset.
@@ -106,7 +104,7 @@ describe("safe-area insets", () => {
     );
     expect(
       read(
-        "components/ui/components/features/voice/callCard/VoiceCallCard.tsx",
+        "components/ui/components/features/voice/callCard/VoiceCallCardFloat.tsx",
       ),
     ).toContain('paddingTop: "var(--z-safe-top)"');
     const dialog = read("components/ui/components/design/Dialog.tsx");
