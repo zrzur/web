@@ -31188,3 +31188,15 @@ msgstr "Konnte nicht geöffnet werden. Prüfe deine Verbindung und versuche es e
 #: components/ui/components/utils/PageBoundary.tsx
 msgid "Could not open."
 msgstr "Konnte nicht geöffnet werden."
+
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "Move the small call card to another corner"
+msgstr "Kleine Anrufkarte in eine andere Ecke verschieben"
+
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "While the small call card is focused (you are in a call and look at another page)."
+msgstr "Wenn die kleine Anrufkarte im Fokus ist (du bist in einem Anruf und siehst eine andere Seite an)."
+
+#: components/app/interface/settings/user/profile/UserProfileEditor.tsx
+msgid "Saving… one moment."
+msgstr "Wird gespeichert … einen Moment."

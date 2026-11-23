@@ -14,5 +14,13 @@
   "Could not open. Check your connection and try again.": [
     "تعذّر الفتح. تحقّق من اتصالك وحاول مرة أخرى.",
     "Konnte nicht geöffnet werden. Prüfe deine Verbindung und versuche es erneut."
+  ],
+  "Move the small call card to another corner": [
+    "انقل بطاقة المكالمة الصغيرة إلى زاوية أخرى",
+    "Kleine Anrufkarte in eine andere Ecke verschieben"
+  ],
+  "While the small call card is focused (you are in a call and look at another page).": [
+    "عندما يكون التركيز على بطاقة المكالمة الصغيرة (أنت في مكالمة وتتصفح صفحة أخرى).",
+    "Wenn die kleine Anrufkarte im Fokus ist (du bist in einem Anruf und siehst eine andere Seite an)."
   ]
 }

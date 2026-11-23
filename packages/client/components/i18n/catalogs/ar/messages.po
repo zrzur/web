@@ -31188,3 +31188,15 @@ msgstr "تعذّر الفتح. تحقّق من اتصالك وحاول مرة أ
 #: components/ui/components/utils/PageBoundary.tsx
 msgid "Could not open."
 msgstr "تعذّر الفتح."
+
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "Move the small call card to another corner"
+msgstr "انقل بطاقة المكالمة الصغيرة إلى زاوية أخرى"
+
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "While the small call card is focused (you are in a call and look at another page)."
+msgstr "عندما يكون التركيز على بطاقة المكالمة الصغيرة (أنت في مكالمة وتتصفح صفحة أخرى)."
+
+#: components/app/interface/settings/user/profile/UserProfileEditor.tsx
+msgid "Saving… one moment."
+msgstr "جارٍ الحفظ… لحظة واحدة."
