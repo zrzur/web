@@ -2,6 +2,20 @@
 
 ## Unreleased
 
+### Name styles (2026-11-22, owner's request)
+
+* **More ways to write your name:** a spectrum of three to five colours that runs round the name, and four effects on top of any colour: Halo, Edge, Lifted and Sheen. With a role colour in a server, your font and effect stay. Settings → Profile → Look → Name style; the dialog is laid out for phones first, with the preview pinned on top and drawn in the theme you use.
+* **Motion only where one name is shown** (a profile, the editor); lists keep a still frame, and reduced motion stills everything.
+* **Readable on light themes:** each colour is darkened, same hue, until it reads at 4.5:1 on the darkest light surface. The bright band of a Sheen is the lightest tint that still reads, never white. A themed profile card draws the name for its own deep surface, not the app's.
+* **Settings → Advanced → Show name styles:** off, every name is plain. Your own preview in the editor still draws.
+* **Saving keeps every part of the look:** one shared `sendableStyle` sends every choice the server stores (name effect and frame included); Designs uses it too.
+
+### Profile frames: creators' frames wait for approval (2026-11-23)
+
+* Creators' frames show only where the server has them open (`GET /` `features.community_frames`, off by default): Designs asks for none and opens no creator's frame page, and the frame dialog offers none. Zrzur's own Crystal cave is not affected.
+* The frame drawings load the first time a frame is shown, so the app's first load carries no frame art. The drawing's big cluster sits at the start side in Arabic too (mirrored in RTL).
+* The frame dialog's list items wrap the buttons (`role="listitem"` no longer on a button); Designs draws at most six frame tiles as your live profile, the rest as the sample card.
+
 ### A bot's bio shows on its edit page (2026-11-22)
 
 * **Fixed:** in the Developer Portal, a bot's edit page showed an empty Bio field although the bot had one; Reset brought it back. The bio arrives with the profile, and the form copies it into the text editor from an effect that ran after the editor was made but before the editor's own effects had run once. The editor deferred its first look at the value, took the copied bio as already shown and never put it in the field. It now compares with the text it was made with, so a value set at that moment is shown. The same applies to the placeholder and name of every text editor, and to your own profile's Bio.
