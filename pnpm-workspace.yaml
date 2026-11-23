@@ -66,5 +66,6 @@ overrides:
 
 patchedDependencies:
   livekit-client: patches/livekit-client.patch
+  svelte-dnd-action: patches/svelte-dnd-action.patch
 
 strictPeerDependencies: false
