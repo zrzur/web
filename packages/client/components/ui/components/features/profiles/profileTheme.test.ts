@@ -9,7 +9,7 @@ import {
   seededTheme,
   toneForSurface,
 } from "./profileTheme";
-import { THEME_PRESETS } from "./userStyle";
+import { THEME_PRESETS } from "./userStyleExtras";
 
 const parts = (hsl: string) => hsl.match(/[\d.]+/g)!.map(Number);
 

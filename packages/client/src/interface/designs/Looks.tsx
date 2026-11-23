@@ -21,9 +21,9 @@ import {
   NAMEPLATES,
   nameStyle,
   nameplateBackground,
-  sendableStyle,
   userStyleOf,
 } from "@revolt/ui/components/features/profiles/userStyle";
+import { sendableStyle } from "@revolt/ui/components/features/profiles/userStyleExtras";
 import { Icon } from "@revolt/ui/icons/Icon";
 import { useAccountGate } from "../../DesignsSite";
 
@@ -237,9 +237,6 @@ export function isWearing(style: UserStyle | undefined, look: Look) {
     style.nameplate === look.style.nameplate
   );
 }
-
-/** What the API accepts for a style (no file fields, no empty parts) */
-export { sendableStyle };
 
 /**
  * Wear a style (or part of one) and offer to go back: the previous style

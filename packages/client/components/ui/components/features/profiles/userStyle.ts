@@ -1,8 +1,7 @@
 import { type JSX, createSignal } from "solid-js";
 
 import { isEffectId } from "./effects/effectIds";
-import "./nameEffects.css";
-import { isProfileFrameId } from "./frames/builtinFrames";
+import { isProfileFrameId } from "./frames/frameIds";
 import {
   PACK_DECORATIONS,
   PACK_NAMEPLATES,
@@ -79,27 +78,6 @@ export function userStyleOf(user: unknown): UserStyle | undefined {
   return rest;
 }
 
-/**
- * The style as it is sent to save it: the server replaces the whole style,
- * so every piece that is on goes in, and only those. Image ids of community
- * designs are filled in by the server (a creator's effect keeps its file so
- * it plays at once).
- */
-export function sendableStyle(style: UserStyle): UserStyle {
-  return {
-    ...(style.theme?.length ? { theme: style.theme } : {}),
-    ...(style.name_font ? { name_font: style.name_font } : {}),
-    ...(style.name_colour?.length ? { name_colour: style.name_colour } : {}),
-    ...(style.decoration ? { decoration: style.decoration } : {}),
-    ...(style.nameplate ? { nameplate: style.nameplate } : {}),
-    ...(style.effect ? { effect: style.effect } : {}),
-    ...(style.effect && style.effect_file
-      ? { effect_file: style.effect_file }
-      : {}),
-    ...(style.profile_frame ? { profile_frame: style.profile_frame } : {}),
-  };
-}
-
 const HEX = /^#[0-9a-fA-F]{6}$/;
 const colours = (list: unknown, most = 2) =>
   Array.isArray(list) ? list.filter((c) => HEX.test(c)).slice(0, most) : [];
@@ -153,6 +131,26 @@ export function nameColourForLight(hex: string) {
   }
   return "#000000";
 }
+
+/**
+ * The bright band a sheen passes over the letters. On dark surfaces it is the
+ * colour mixed with white. On light surfaces white would make the letters
+ * vanish, so it is the lightest tint of the colour that still reads at 4.5:1
+ * (the same rule as `nameColourForLight`).
+ */
+export function sheenHighlight(hex: string, light: boolean) {
+  if (!light) return `color-mix(in srgb, ${hex} 30%, #fff)`;
+  const tint = toHex(rgb(hex).map((v) => v + (255 - v) * 0.5));
+  return nameColourForLight(tint);
+}
+
+/**
+ * The keyframes of the names that move (a flowing spectrum, a passing sheen),
+ * loaded the first time one moves: lists never ask for motion, so most
+ * people never download them.
+ */
+let nameMotion: Promise<unknown> | undefined;
+const loadNameMotion = () => (nameMotion ??= import("./nameEffects.css"));
 
 /** Keeps Arabic in Zrzur's own face when a font has no Arabic of its own */
 const ARABIC = "'IBM Plex Sans Arabic'";
@@ -320,22 +318,6 @@ const BASE_DECORATIONS = [
 /** Built-in avatar decorations (same ids as the API's allow-list) */
 export const DECORATIONS = [...BASE_DECORATIONS, ...PACK_DECORATIONS] as const;
 
-/** Ready-made two-colour profile themes */
-export const THEME_PRESETS: { id: string; colours: [string, string] }[] = [
-  { id: "Sunset", colours: ["#ff6b4a", "#ffb347"] },
-  { id: "Ocean", colours: ["#1e9bb8", "#6fd3e8"] },
-  { id: "Grape", colours: ["#8b2be2", "#e0218a"] },
-  { id: "Mint", colours: ["#11998e", "#38ef7d"] },
-  { id: "Midnight", colours: ["#0f2027", "#2c5364"] },
-  { id: "Cherry", colours: ["#eb3349", "#f45c43"] },
-  { id: "Gold", colours: ["#f7971e", "#ffd200"] },
-  { id: "Aurora", colours: ["#00c6ff", "#0072ff"] },
-  { id: "Rose", colours: ["#ff9a9e", "#fecfef"] },
-  { id: "Forest", colours: ["#134e5e", "#71b280"] },
-  { id: "Neon", colours: ["#00f260", "#0575e6"] },
-  { id: "Candy", colours: ["#ff758c", "#ff7eb3"] },
-];
-
 /**
  * Inline style for a display name in this user's chosen font, colours and
  * effect.
@@ -396,11 +378,14 @@ export function nameStyle(
   } else if (effect === "sheen" && list.length) {
     const [a, b = list[0]] = list;
     clip(
-      `linear-gradient(100deg, ${a} 0 42%, ${light ? "#ffffff" : "color-mix(in srgb, " + a + " 30%, #fff)"} 50%, ${b} 58% 100%)`,
+      `linear-gradient(100deg, ${a} 0 42%, ${sheenHighlight(a, light)} 50%, ${b} 58% 100%)`,
     );
     css["background-size"] = "250% 100%";
     css["background-position"] = moving ? undefined : "55% 0";
-    if (moving) css.animation = "z-name-sheen 5s ease-in-out infinite";
+    if (moving) {
+      void loadNameMotion();
+      css.animation = "z-name-sheen 5s ease-in-out infinite";
+    }
     clipped = true;
   } else if (list.length === 1) {
     css.color = list[0];
@@ -412,7 +397,10 @@ export function nameStyle(
     clip(`linear-gradient(90deg, ${[...list, list[0]].join(", ")})`);
     css["background-size"] = "200% 100%";
     css["background-position"] = moving ? undefined : "30% 0";
-    if (moving) css.animation = "z-name-flow 9s linear infinite";
+    if (moving) {
+      void loadNameMotion();
+      css.animation = "z-name-flow 9s linear infinite";
+    }
     clipped = true;
   }
 
@@ -768,41 +756,6 @@ export function communityStillUrl(
   return fileId && /^[\w-]+$/.test(fileId)
     ? `${mediaUrl}/decorations/${fileId}`
     : undefined;
-}
-
-/** URL of an effect's file: what plays */
-export function effectFileUrl(mediaUrl: string, fileId: string | undefined) {
-  return fileId && /^[\w-]+$/.test(fileId)
-    ? `${mediaUrl}/effects/${fileId}/original`
-    : undefined;
-}
-
-/** URL of one still frame of an effect, drawn by the media server for tiles */
-export function effectStillUrl(mediaUrl: string, fileId: string | undefined) {
-  return fileId && /^[\w-]+$/.test(fileId)
-    ? `${mediaUrl}/effects/${fileId}`
-    : undefined;
-}
-
-/**
- * The address a community design is shown from in a gallery or a card: its
- * file as uploaded (it may move), or, for a viewer who is saving data, the
- * one still frame the media server draws (some twenty kilobytes instead of
- * up to a megabyte).
- */
-export function communityShownUrl(
-  mediaUrl: string,
-  kind: string,
-  fileId: string | undefined,
-  saving: boolean,
-) {
-  if (kind === "Effect")
-    return saving
-      ? effectStillUrl(mediaUrl, fileId)
-      : effectFileUrl(mediaUrl, fileId);
-  return saving
-    ? communityStillUrl(mediaUrl, fileId)
-    : communityFileUrl(mediaUrl, fileId);
 }
 
 /**

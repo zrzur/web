@@ -20,6 +20,7 @@ import {
   type CommunityItem,
   type CommunityPage,
   communityApi,
+  communityFramesOpen,
   creatorName,
 } from "@revolt/app/interface/settings/user/profile/communityApi";
 import { useStyleLabels } from "@revolt/app/interface/settings/user/profile/styleLabels";
@@ -34,7 +35,7 @@ import {
   EffectId,
 } from "@revolt/ui/components/features/profiles/effects/effectIds";
 import { ProfilePreview } from "@revolt/ui/components/features/profiles/frames/ProfilePreview";
-import { PROFILE_FRAME_IDS } from "@revolt/ui/components/features/profiles/frames/builtinFrames";
+import { PROFILE_FRAME_IDS } from "@revolt/ui/components/features/profiles/frames/frameIds";
 import { useEffectLabels } from "@revolt/ui/components/features/profiles/labels";
 import {
   NAME_GRADIENTS,
@@ -44,11 +45,13 @@ import {
   DECORATIONS,
   NAMEPLATES,
   NAME_FONTS,
-  THEME_PRESETS,
-  effectStillUrl,
   nameStyle,
   userStyleOf,
 } from "@revolt/ui/components/features/profiles/userStyle";
+import {
+  THEME_PRESETS,
+  effectStillUrl,
+} from "@revolt/ui/components/features/profiles/userStyleExtras";
 import { withoutNull } from "@zrzur/sdk/solid";
 
 import { isDesignsSite } from "../../DesignsSite";
@@ -105,7 +108,15 @@ export type Tile = {
   makerId?: string;
   avatar?: string;
   count?: number;
+  /** a frame tile past the first few: drawn as the sample card, not live */
+  sample?: boolean;
 };
+
+/**
+ * Frame tiles drawn as your own live profile card. Each is a whole profile
+ * (theme, badges, sections), so the rest show the light sample card.
+ */
+const LIVE_CARDS = 6;
 
 /** Community designs, a page at a time, for any list on the site */
 export function useCommunity(
@@ -142,38 +153,38 @@ export function useCommunity(
     setLoading(true);
     setFailed(false);
     try {
+      // creators' frames only where the server has them open
+      const kinds = communityFramesOpen(client())
+        ? (["decorations", "nameplates", "effects", "frames"] as const)
+        : (["decorations", "nameplates", "effects"] as const);
       const pages = await Promise.all(
-        (["decorations", "nameplates", "effects", "frames"] as const).map(
-          (kind) => {
-            const ask = () =>
-              communityApi.list(client(), kind, {
-                query: now.query || undefined,
-                sort: now.sort === "new" ? undefined : "popular",
-                favourites: now.favourites || undefined,
-                limit: PAGE,
-                offset: offset || undefined,
-              });
-            // the first page the site asked for while this code downloaded,
-            // for visitors only (signed in, favourites are marked)
-            const first =
-              !offset &&
-              !now.query &&
-              now.sort !== "new" &&
-              !now.favourites &&
-              PAGE === EARLY_LIMIT
-                ? takeEarly<CommunityPage>(kind)
-                : undefined;
-            const asked =
-              first && !isLoggedIn()
-                ? first.then(withoutNull).catch(ask)
-                : ask();
-            // a server without effects (or, older, without frames) still
-            // shows everything else
-            return kind === "effects" || kind === "frames"
-              ? asked.catch(() => ({ items: [], creators: [] }))
-              : asked;
-          },
-        ),
+        kinds.map((kind) => {
+          const ask = () =>
+            communityApi.list(client(), kind, {
+              query: now.query || undefined,
+              sort: now.sort === "new" ? undefined : "popular",
+              favourites: now.favourites || undefined,
+              limit: PAGE,
+              offset: offset || undefined,
+            });
+          // the first page the site asked for while this code downloaded,
+          // for visitors only (signed in, favourites are marked)
+          const first =
+            !offset &&
+            !now.query &&
+            now.sort !== "new" &&
+            !now.favourites &&
+            PAGE === EARLY_LIMIT
+              ? takeEarly<CommunityPage>(kind)
+              : undefined;
+          const asked =
+            first && !isLoggedIn() ? first.then(withoutNull).catch(ask) : ask();
+          // a server without effects or frames (switched off, or older)
+          // still shows everything else
+          return kind === "effects" || kind === "frames"
+            ? asked.catch(() => ({ items: [], creators: [] }))
+            : asked;
+        }),
       );
       if (ask !== asked) return;
       const fresh = pages.flatMap((page) => page.items);
@@ -593,7 +604,7 @@ function DesignTile(props: {
             {/* signed in: your own profile, as people will see it, with
                 your look and this frame; a visitor sees the sample card */}
             <Show
-              when={client().user}
+              when={!props.tile.sample && client().user}
               fallback={
                 <StyleCard
                   style={props.tile.wear!}
@@ -790,7 +801,9 @@ export function useGalleryTiles(input: {
     const cards = [
       ...mine.filter((tile) => tile.kind === "card"),
       ...built.cards(),
-    ].filter(has);
+    ]
+      .filter(has)
+      .map((tile, i) => (i < LIVE_CARDS ? tile : { ...tile, sample: true }));
     const looks = built.looks(ids).filter(has);
     const types = built.types().filter(has);
     const inks = built.inks();
@@ -1021,8 +1034,8 @@ const TileBase = styled("div", {
     "&[data-kind='look']": { gridColumn: "span 3", gridRow: "span 3" },
     // as tall as a profile card, so the tile shows how the effect will look
     "&[data-kind='effect']": { gridRow: "span 4" },
-    // a card in its frame: the frame reaches past the card, so room round it
-    // a whole profile card in its frame: a poster of a tile
+    // a whole profile card in its frame: a poster of a tile, with room
+    // round the card for the frame that reaches past it
     "&[data-kind='card']": { gridColumn: "span 4", gridRow: "span 6" },
     "&[data-kind='frame'][data-big='true']": {
       gridColumn: "span 6",
@@ -1086,8 +1099,9 @@ const Art = styled("button", {
     // the whole name fits: its size is worked out from this box
     "[data-kind='ink'] > &": { containerType: "inline-size" },
     "[data-kind='effect'] > &": { padding: 0 },
-    // the card and the room its frame needs round it (framedCompact, 30 px
-    // at each side) fit the tile; the frame is never cut at the tile's edge
+    // the card and the room its frame needs round it (ProfilePreview keeps
+    // its own; the sample card has framedCompact in Looks.tsx) fit the tile;
+    // the frame is never cut at the tile's edge
     "[data-kind='card'] > &": {
       alignItems: "start",
       padding: "12px",

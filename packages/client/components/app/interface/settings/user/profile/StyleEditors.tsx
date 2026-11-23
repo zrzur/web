@@ -25,13 +25,13 @@ import {
   NAME_EFFECTS,
   NAME_FONTS,
   NAME_MAX_COLOURS,
-  THEME_PRESETS,
   UserStyle,
   isCommunityRef,
   nameStyle,
   nameplateBackground,
   themeColours,
 } from "@revolt/ui/components/features/profiles/userStyle";
+import { THEME_PRESETS } from "@revolt/ui/components/features/profiles/userStyleExtras";
 import { Icon } from "@revolt/ui/icons/Icon";
 
 import { useInstance } from "@revolt/instance";

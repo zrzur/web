@@ -35,11 +35,11 @@ import { AvatarDecoration } from "@revolt/ui/components/features/profiles/Avatar
 import {
   NAME_FONTS,
   nameStyle,
-  sendableStyle,
   themeColours,
   UserStyle,
   userStyleOf,
 } from "@revolt/ui/components/features/profiles/userStyle";
+import { sendableStyle } from "@revolt/ui/components/features/profiles/userStyleExtras";
 import { useSettingsNavigation } from "../../Settings";
 
 import { useEffectLabels } from "@revolt/ui/components/features/profiles/labels";
@@ -717,10 +717,16 @@ export function UserProfileEditor(props: Props) {
                 style={
                   previewTheme()
                     ? {
-                        ...nameStyle(style(), { colour: false }),
+                        // the themed preview is deep, whatever the app's theme
+                        ...nameStyle(style(), {
+                          colour: false,
+                          always: true,
+                          surface: "dark",
+                        }),
                         color: "#fff",
                       }
-                    : nameStyle(style())
+                    : // your own preview draws even with name styles off
+                      nameStyle(style(), { always: true })
                 }
               >
                 {editGroup.controls.displayName.value?.trim() ||

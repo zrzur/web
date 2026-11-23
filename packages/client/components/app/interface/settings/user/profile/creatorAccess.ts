@@ -10,11 +10,8 @@ import {
   sharedAnswer,
 } from "@revolt/common/lib/creatorCache";
 
-import {
-  type CommunityPermissions,
-  communityApi,
-  maySeeStudio,
-} from "./communityApi";
+import { fetchCommunityPermissions, maySeeStudio } from "./communityAccess";
+import type { CommunityPermissions } from "./communityApi";
 
 const VISITOR = "visitor";
 const NOTHING: CommunityPermissions = { permissions: [] };
@@ -43,7 +40,7 @@ export function useCommunityPermissions() {
     if (id === VISITOR) return;
     sharedAnswer<CommunityPermissions>(
       id,
-      () => communityApi.permissions(client()),
+      () => fetchCommunityPermissions(client()),
       { fresh },
     ).catch(() => {
       // kept with the shared answer: `failed` says so

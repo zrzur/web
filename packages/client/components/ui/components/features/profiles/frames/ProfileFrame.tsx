@@ -3,7 +3,7 @@ import {
   Match,
   Show,
   Switch,
-  createMemo,
+  createResource,
   createSignal,
   onCleanup,
   onMount,
@@ -17,12 +17,9 @@ import { useInstance } from "@revolt/instance";
 import { useDesignMotion } from "../NameplateMotion";
 import { communityFileUrl, isCommunityRef } from "../userStyle";
 
-import {
-  FRAME_DRAWINGS,
-  isProfileFrameId,
-  profileFrameSvg,
-} from "./builtinFrames";
 import { frameBorderImage } from "./communityFrame";
+import { isProfileFrameId } from "./frameIds";
+import { FRAME_FACTS } from "./frameRoom";
 import "./frames.css";
 
 /**
@@ -81,16 +78,20 @@ export function ProfileFrame(props: {
       ? communityFileUrl(instance.mediaUrl, props.file)
       : undefined;
 
-  const drawn = createMemo(() => {
+  // the drawings load the first time a built-in frame is shown, so the app's
+  // first load carries no frame art
+  const [drawings] = createResource(builtIn, () => import("./builtinFrames"));
+  const drawn = () => {
     const id = builtIn();
     const box = size();
-    if (!id || !box) return undefined;
-    return profileFrameSvg(id, box.w, box.h, { phone: phone() });
-  });
+    const art = drawings();
+    if (!id || !box || !art) return undefined;
+    return art.profileFrameSvg(id, box.w, box.h, { phone: phone() });
+  };
 
   const moving = () => {
     const id = builtIn();
-    return !!id && !!FRAME_DRAWINGS[id].moves && motion();
+    return !!id && FRAME_FACTS[id].moves && motion();
   };
 
   return (
@@ -182,6 +183,9 @@ const Art = styled("div", {
     position: "absolute",
     lineHeight: 0,
     "& svg": { display: "block", overflow: "visible" },
+    // the drawing's big cluster sits at the top start: on the right in RTL.
+    // The room is the same on both sides, so it turns round in place.
+    _rtl: { transform: "scaleX(-1)" },
   },
 });
 

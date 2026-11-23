@@ -1,15 +1,12 @@
 import { describe, expect, it } from "vitest";
 
-import { sendableStyle, userStyleOf } from "../userStyle";
+import { userStyleOf } from "../userStyle";
+import { sendableStyle } from "../userStyleExtras";
 
-import {
-  FRAME_DRAWINGS,
-  PROFILE_FRAME_IDS,
-  isProfileFrameId,
-  pixelSize,
-  profileFrameSvg,
-} from "./builtinFrames";
+import { FRAME_DRAWINGS, profileFrameSvg } from "./builtinFrames";
 import { FRAME_TEMPLATE, frameBorderImage, frameRise } from "./communityFrame";
+import { PROFILE_FRAME_IDS, isProfileFrameId } from "./frameIds";
+import { FRAME_FACTS, pixelSize } from "./frameRoom";
 import { CRYSTAL_ROOM } from "./pixel/crystalCave";
 
 /** what the backend accepts (USER_STYLE_PROFILE_FRAMES in users.rs) */
@@ -29,6 +26,21 @@ describe("built-in profile frames", () => {
     expect(isProfileFrameId("crystal")).toBe(true);
     expect(isProfileFrameId("mihrab")).toBe(false);
     expect(isProfileFrameId(undefined)).toBe(false);
+  });
+
+  it("know their room without the drawing, the same as the drawing's", () => {
+    expect(FRAME_FACTS.crystal.room).toEqual({ ...CRYSTAL_ROOM });
+    const { room } = profileFrameSvg("crystal", 360, 500);
+    expect(FRAME_DRAWINGS.crystal.room(4)).toEqual(room);
+  });
+
+  it("keep the ids free of any drawing", async () => {
+    const { readFileSync } = await import("node:fs");
+    const ids = readFileSync(`${__dirname}/frameIds.ts`, "utf8");
+    expect(ids).not.toMatch(/^import /m);
+    const style = readFileSync(`${__dirname}/../userStyle.ts`, "utf8");
+    expect(style).not.toContain("builtinFrames");
+    expect(style).not.toContain("pixel/");
   });
 
   it("use 4 px pixels on a card, 3 on a phone, less on small previews", () => {

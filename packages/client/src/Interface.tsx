@@ -20,16 +20,18 @@ import { Titlebar } from "@revolt/app/interface/desktop/Titlebar";
 import { ChangeRequestNotice } from "@revolt/app/interface/settings/user/account/ChangeRequestNotice";
 import { NoticeCenter } from "@revolt/app/interface/support/NoticeCenter";
 import { SaveDataOffer } from "@revolt/app/interface/support/SaveDataOffer";
+import { ConfirmEmailStrip } from "@revolt/auth/src/invite/ConfirmEmailStrip";
 import { useClient, useClientLifecycle } from "@revolt/client";
-import { ActivityIntro } from "@revolt/client/ActivityIntro";
-import { ActivityWorker } from "@revolt/client/ActivityWorker";
+import {
+  ActivityWorker,
+  richPresenceEnabled,
+} from "@revolt/client/ActivityWorker";
 import { State } from "@revolt/client/Controller";
 import { NotificationsWorker } from "@revolt/client/NotificationsWorker";
 import { useDevice } from "@revolt/common";
+import { notePlace } from "@revolt/keybinds/recentPlaces";
 import { useModals } from "@revolt/modal";
 import { PluginHostGate } from "@revolt/plugins/PluginHostGate";
-import { ConfirmEmailStrip } from "@revolt/auth/src/invite/ConfirmEmailStrip";
-import { notePlace } from "@revolt/keybinds/recentPlaces";
 import { Navigate, useBeforeLeave, useLocation } from "@revolt/routing";
 import { useState } from "@revolt/state";
 import { LAYOUT_SECTIONS } from "@revolt/state/stores/Layout";
@@ -62,6 +64,15 @@ const UsernameNotice = lazyRetry(
     import("@revolt/app/interface/settings/user/account/UsernameNotice").then(
       (m) => ({ default: m.UsernameNotice }),
     ),
+  () => null,
+);
+// the one-time question about sharing activity: only where the server has
+// rich presence on, and nobody needs it for the first paint
+const ActivityIntro = lazyRetry(
+  () =>
+    import("@revolt/client/ActivityIntro").then((m) => ({
+      default: m.ActivityIntro,
+    })),
   () => null,
 );
 const StreamerIndicator = lazy(
@@ -326,7 +337,9 @@ const Interface = (props: { children?: JSX.Element }) => {
           <UsernameNotice />
           <NoticeCenter />
           <SaveDataOffer />
-          <ActivityIntro />
+          <Show when={richPresenceEnabled(client())}>
+            <ActivityIntro />
+          </Show>
         </Show>
         <Show when={isLoggedIn()}>
           <PluginHostGate />

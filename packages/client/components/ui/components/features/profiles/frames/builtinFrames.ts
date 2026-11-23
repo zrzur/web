@@ -1,5 +1,6 @@
 /**
- * Zrzur's own profile frames. Each is drawn for the card's real size and
+ * Zrzur's own profile frames: the drawings (ids and sizes are in
+ * `frameIds.ts`, which loads no art). Each is drawn for the card's real size and
  * says how much room round the card it uses; the frame layer is placed by
  * that room. Drawings are hand-composed pixel art (frames/pixel/), added one
  * at a time after the owner has seen each on a real card.
@@ -8,19 +9,14 @@
  * palettes, never text from a user, so the string is safe to set as markup.
  */
 
-import { CRYSTAL_ROOM, crystalCave } from "./pixel/crystalCave";
-
-export const PROFILE_FRAME_IDS = ["crystal"] as const;
-
-export type ProfileFrameId = (typeof PROFILE_FRAME_IDS)[number];
-
-export const isProfileFrameId = (
-  id: string | undefined,
-): id is ProfileFrameId =>
-  !!id && (PROFILE_FRAME_IDS as readonly string[]).includes(id);
-
-/** Room round the card a drawing uses, in css px */
-export type FrameRoom = { x: number; top: number; bottom: number };
+import type { ProfileFrameId } from "./frameIds";
+import {
+  type FrameRoom,
+  FRAME_FACTS,
+  frameRoomAt,
+  pixelSize,
+} from "./frameRoom";
+import { crystalCave } from "./pixel/crystalCave";
 
 type Drawing = {
   draw: (
@@ -34,28 +30,13 @@ type Drawing = {
   moves?: boolean;
 };
 
-/** a room given in cells, at a pixel size */
-const inCells =
-  (room: FrameRoom) =>
-  (cell: number): FrameRoom => ({
-    x: room.x * cell,
-    top: room.top * cell,
-    bottom: room.bottom * cell,
-  });
-
 export const FRAME_DRAWINGS: Record<ProfileFrameId, Drawing> = {
-  crystal: { draw: crystalCave, room: inCells(CRYSTAL_ROOM), moves: true },
+  crystal: {
+    draw: crystalCave,
+    room: (cell) => frameRoomAt("crystal", cell),
+    moves: FRAME_FACTS.crystal.moves,
+  },
 };
-
-/**
- * The pixel size for a box this wide: 4 px on a card or a full profile,
- * 3 px on a phone, smaller on the little preview cards, so the drawing keeps
- * its proportions everywhere.
- */
-export function pixelSize(width: number, phone = false) {
-  const cell = Math.min(4, Math.max(2, Math.round(width / 90)));
-  return phone ? Math.min(cell, 3) : cell;
-}
 
 let instances = 0;
 

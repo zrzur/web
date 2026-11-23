@@ -18,7 +18,7 @@ import { Symbol } from "../../utils/Symbol";
 import { ProfileSection, chip, panel } from "../profiles/ProfileCard";
 import { cutLine } from "../profiles/cutLine";
 
-import { useActivityLabel } from "./ActivityLine";
+import { useActivityLabel } from "./ActivityLineBody";
 import {
   type Activity,
   type ActivitySource,

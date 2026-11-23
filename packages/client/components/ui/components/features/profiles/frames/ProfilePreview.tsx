@@ -12,12 +12,8 @@ import { createProfileTheme } from "../profileTheme";
 import { type UserStyle, isCommunityRef, themeColours } from "../userStyle";
 
 import { FramedCard } from "./ProfileFrame";
-import {
-  type FrameRoom,
-  FRAME_DRAWINGS,
-  isProfileFrameId,
-  pixelSize,
-} from "./builtinFrames";
+import { isProfileFrameId } from "./frameIds";
+import { type FrameRoom, frameRoomAt, pixelSize } from "./frameRoom";
 
 /** The profile card's own width (UserCard) */
 const CARD_WIDTH = 360;
@@ -26,8 +22,7 @@ const CARD_HEIGHT = 560;
 
 /** Room a frame takes round a card of this width */
 function frameRoom(frame: string | undefined, width: number): FrameRoom {
-  if (isProfileFrameId(frame))
-    return FRAME_DRAWINGS[frame].room(pixelSize(width));
+  if (isProfileFrameId(frame)) return frameRoomAt(frame, pixelSize(width));
   if (isCommunityRef(frame)) {
     // the community template: 30 px at the sides, 70 above, 40 below a 340 px card
     const s = width / 340;

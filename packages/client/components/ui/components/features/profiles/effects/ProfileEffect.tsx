@@ -5,7 +5,8 @@ import { useInstance } from "@revolt/instance";
 import { styled } from "styled-system/jsx";
 
 import { useDesignMotion } from "../NameplateMotion";
-import { effectFileUrl, isCommunityRef } from "../userStyle";
+import { isCommunityRef } from "../userStyle";
+import { effectFileUrl } from "../userStyleExtras";
 
 import { EFFECT_DURATION_MS, EffectId, isEffectId } from "./effectIds";
 

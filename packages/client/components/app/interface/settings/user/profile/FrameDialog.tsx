@@ -4,15 +4,17 @@ import { Trans, useLingui } from "@lingui/solid/macro";
 import type { User } from "@zrzur/sdk/solid";
 import { styled } from "styled-system/jsx";
 
+import { useClient } from "@revolt/client";
 import { Dialog } from "@revolt/ui";
 import { ProfilePreview } from "@revolt/ui/components/features/profiles/frames/ProfilePreview";
-import { PROFILE_FRAME_IDS } from "@revolt/ui/components/features/profiles/frames/builtinFrames";
+import { PROFILE_FRAME_IDS } from "@revolt/ui/components/features/profiles/frames/frameIds";
 import {
   type UserStyle,
   isCommunityRef,
 } from "@revolt/ui/components/features/profiles/userStyle";
 import { Icon } from "@revolt/ui/icons/Icon";
 
+import { communityFramesOpen } from "./communityApi";
 import { useStyleLabels } from "./styleLabels";
 
 /**
@@ -33,6 +35,7 @@ export function FrameDialog(props: {
   onApply: (frame: string | undefined, file?: string) => void;
 }) {
   const { t } = useLingui();
+  const client = useClient();
   const labels = useStyleLabels();
   /* eslint-disable solid/reactivity */
   const [choice, setChoice] = createSignal(props.value);
@@ -82,57 +85,67 @@ export function FrameDialog(props: {
     >
       <Stack>
         <Grid role="list" aria-label={t`Profile frames`}>
-          <Tile
-            type="button"
-            role="listitem"
-            aria-pressed={!choice()}
-            data-testid="profile-frame-none"
-            onClick={() => pick(undefined)}
+          <Item role="listitem">
+            <Tile
+              type="button"
+              aria-pressed={!choice()}
+              data-testid="profile-frame-none"
+              onClick={() => pick(undefined)}
+            >
+              <Card />
+              <span>{t`None`}</span>
+              <Show when={!choice()}>
+                <Check>
+                  <Icon name="check" size={12} />
+                </Check>
+              </Show>
+            </Tile>
+          </Item>
+          {/* the creator's frame you wear: kept, or taken off with None.
+              Not offered while the server has creators' frames closed. */}
+          <Show
+            when={
+              communityFramesOpen(client()) &&
+              isCommunityRef(props.value) &&
+              props.value
+            }
           >
-            <Card />
-            <span>{t`None`}</span>
-            <Show when={!choice()}>
-              <Check>
-                <Icon name="check" size={12} />
-              </Check>
-            </Show>
-          </Tile>
-          {/* the creator's frame you wear: kept, or taken off with None */}
-          <Show when={isCommunityRef(props.value) && props.value}>
             {(worn) => (
-              <Tile
-                type="button"
-                role="listitem"
-                aria-pressed={choice() === worn()}
-                onClick={() => pick(worn(), props.file)}
-              >
-                <Card frame={worn()} file={props.file} />
-                <span>{labels.frame(worn())}</span>
-                <Show when={choice() === worn()}>
-                  <Check>
-                    <Icon name="check" size={12} />
-                  </Check>
-                </Show>
-              </Tile>
+              <Item role="listitem">
+                <Tile
+                  type="button"
+                  aria-pressed={choice() === worn()}
+                  onClick={() => pick(worn(), props.file)}
+                >
+                  <Card frame={worn()} file={props.file} />
+                  <span>{labels.frame(worn())}</span>
+                  <Show when={choice() === worn()}>
+                    <Check>
+                      <Icon name="check" size={12} />
+                    </Check>
+                  </Show>
+                </Tile>
+              </Item>
             )}
           </Show>
           <For each={PROFILE_FRAME_IDS}>
             {(id) => (
-              <Tile
-                type="button"
-                role="listitem"
-                aria-pressed={choice() === id}
-                data-testid={`profile-frame-${id}`}
-                onClick={() => pick(id)}
-              >
-                <Card frame={id} />
-                <span>{labels.frame(id)}</span>
-                <Show when={choice() === id}>
-                  <Check>
-                    <Icon name="check" size={12} />
-                  </Check>
-                </Show>
-              </Tile>
+              <Item role="listitem">
+                <Tile
+                  type="button"
+                  aria-pressed={choice() === id}
+                  data-testid={`profile-frame-${id}`}
+                  onClick={() => pick(id)}
+                >
+                  <Card frame={id} />
+                  <span>{labels.frame(id)}</span>
+                  <Show when={choice() === id}>
+                    <Check>
+                      <Icon name="check" size={12} />
+                    </Check>
+                  </Show>
+                </Tile>
+              </Item>
             )}
           </For>
         </Grid>
@@ -163,8 +176,15 @@ const Grid = styled("div", {
   },
 });
 
+/** the list's item; the button inside fills it */
+const Item = styled("div", {
+  base: { display: "flex", minWidth: 0 },
+});
+
 const Tile = styled("button", {
   base: {
+    flex: 1,
+    minWidth: 0,
     position: "relative",
     display: "flex",
     flexDirection: "column",
@@ -207,7 +227,7 @@ const Check = styled("span", {
     height: "20px",
     borderRadius: "50%",
     background: "var(--z-accent-fill, var(--z-accent))",
-    color: "var(--z-on-accent, #fff)",
+    color: "var(--z-on-accent)",
     "--z-icon-color": "currentColor",
   },
 });

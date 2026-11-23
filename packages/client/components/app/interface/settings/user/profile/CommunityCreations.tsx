@@ -12,10 +12,8 @@ import {
   ProfileTilesMore,
   TilePlate,
 } from "@revolt/ui/components/features/profiles/ProfileTiles";
-import {
-  communityStillUrl,
-  effectStillUrl,
-} from "@revolt/ui/components/features/profiles/userStyle";
+import { communityStillUrl } from "@revolt/ui/components/features/profiles/userStyle";
+import { effectStillUrl } from "@revolt/ui/components/features/profiles/userStyleExtras";
 
 import { type CommunityItem, communityApi, hasOpenPage } from "./communityApi";
 import { useCreatorProfile } from "./creatorProfile";

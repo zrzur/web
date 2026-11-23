@@ -24,6 +24,7 @@ import {
 import {
   type CommunityItemDetails,
   communityApi,
+  communityFramesOpen,
   hasOpenPage,
 } from "@revolt/app/interface/settings/user/profile/communityApi";
 import { useStyleLabels } from "@revolt/app/interface/settings/user/profile/styleLabels";
@@ -36,10 +37,12 @@ import {
   type UserStyle,
   DECORATIONS,
   NAMEPLATES,
-  THEME_PRESETS,
-  effectFileUrl,
   userStyleOf,
 } from "@revolt/ui/components/features/profiles/userStyle";
+import {
+  THEME_PRESETS,
+  effectFileUrl,
+} from "@revolt/ui/components/features/profiles/userStyleExtras";
 import { Icon } from "@revolt/ui/icons/Icon";
 
 import { LOOKS, StyleCard, useLookText, useWear } from "./Looks";
@@ -142,6 +145,8 @@ export function DesignPage(props: {
             .catch(() => undefined);
           if (!details) return null;
           const made = details.item.kind;
+          // creators' frames are not shown while the server has them closed
+          if (made === "Frame" && !communityFramesOpen(client())) return null;
           return {
             ref,
             kind:

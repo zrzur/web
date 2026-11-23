@@ -6,13 +6,11 @@ import { describe, expect, it } from "vitest";
 import { NAME_GRADIENTS, NAME_SOLIDS, NAME_SPECTRA } from "./nameStyles";
 import { PACK_DECORATIONS, PACK_NAMEPLATES } from "./pack/designs.generated";
 import {
+  type UserStyle,
   DECORATIONS,
   NAMEPLATES,
   NAME_EFFECTS,
   NAME_FONTS,
-  communityShownUrl,
-  effectFileUrl,
-  effectStillUrl,
   nameColourForLight,
   nameStyle,
   nameplateBackground,
@@ -20,6 +18,13 @@ import {
   themeColours,
   userStyleOf,
 } from "./userStyle";
+import {
+  STYLE_FIELDS,
+  communityShownUrl,
+  effectFileUrl,
+  effectStillUrl,
+  sendableStyle,
+} from "./userStyleExtras";
 
 const PUBLIC = join(__dirname, "../../../../../public");
 
@@ -326,6 +331,34 @@ describe("name effects", () => {
     setNameView(still);
   });
 
+  it("keeps every sheen stop readable on light surfaces", () => {
+    setNameView({ ...still, light: true });
+    const pairs = [
+      ...NAME_SOLIDS.map((c) => [c]),
+      ...NAME_GRADIENTS,
+      ...NAME_SPECTRA,
+    ];
+    for (const colours of pairs) {
+      const image = nameStyle({
+        name_colour: colours,
+        name_effect: "sheen",
+      })["background-image"] as string;
+      const stops = image.match(/#[0-9a-fA-F]{6}/g) ?? [];
+      // two colours and the band: nothing left as a colour-mix or white
+      expect(stops.length, image).toBe(3);
+      expect(image).not.toContain("color-mix");
+      for (const stop of stops) {
+        for (const surface of ["#FFFFFF", "#F3F4FA", "#EEF0F7", "#E4E6F0"]) {
+          expect(
+            contrast(stop, surface),
+            `${stop} in ${image}`,
+          ).toBeGreaterThanOrEqual(4.5);
+        }
+      }
+    }
+    setNameView(still);
+  });
+
   it("shows every name plain when the viewer turns name styles off", () => {
     setNameView({ ...still, plain: true });
     const style = { name_font: "serif", name_colour: ["#ff0000"] };
@@ -333,5 +366,42 @@ describe("name effects", () => {
     // the editor's own preview still draws
     expect(nameStyle(style, { always: true }).color).toBe("#ff0000");
     setNameView(still);
+  });
+});
+
+describe("a style sent to be saved", () => {
+  it("keeps every choice the server stores, and no file but an effect's", () => {
+    const full: Required<UserStyle> = {
+      theme: ["#112233", "#445566"],
+      name_font: "serif",
+      name_colour: ["#ff5c8a", "#ffb347", "#7ee081"],
+      name_effect: "sheen",
+      decoration: "c:01M5TGZFE80SKMC8JVGJKBHS2A",
+      decoration_file: "dfile",
+      nameplate: "aurora",
+      nameplate_file: "pfile",
+      effect: "c:01M5TGZFE80SKMC8JVGJKBHS2B",
+      effect_file: "efile",
+      profile_frame: "crystal",
+      profile_frame_file: "ffile",
+    };
+    // the test's style names every field the type has
+    expect(Object.keys(full).sort()).toEqual(Object.keys(STYLE_FIELDS).sort());
+    const sent = sendableStyle(full);
+    for (const [key, kind] of Object.entries(STYLE_FIELDS)) {
+      const field = key as keyof UserStyle;
+      if (kind === "choice") expect(sent[field], key).toEqual(full[field]);
+    }
+    expect(sent.name_effect).toBe("sheen");
+    expect(sent.effect_file).toBe("efile");
+    expect(sent.decoration_file).toBeUndefined();
+    expect(sent.nameplate_file).toBeUndefined();
+    expect(sent.profile_frame_file).toBeUndefined();
+  });
+
+  it("leaves out empty parts", () => {
+    expect(
+      sendableStyle({ theme: [], name_colour: [], name_effect: "" }),
+    ).toEqual({});
   });
 });

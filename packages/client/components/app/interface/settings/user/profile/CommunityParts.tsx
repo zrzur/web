@@ -15,11 +15,11 @@ import {
   sampleAvatar,
   sampleAvatarFor,
 } from "@revolt/ui/components/features/profiles/sampleAvatars";
+import { userStyleOf } from "@revolt/ui/components/features/profiles/userStyle";
 import {
   communityShownUrl,
   sendableStyle,
-  userStyleOf,
-} from "@revolt/ui/components/features/profiles/userStyle";
+} from "@revolt/ui/components/features/profiles/userStyleExtras";
 import { FeatherField, WaveEdge } from "@revolt/ui/icons/PremiumArt";
 
 import {
