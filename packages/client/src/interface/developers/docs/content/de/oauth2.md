@@ -54,7 +54,7 @@ Dieser Pfad liegt in der Zrzur-App. Der **URL-Generator** im Tab OAuth2 baut die
 | `can_manage` | Ihr gehört der Server oder sie hat „Server verwalten“         |
 | `permissions`| Ihre serverweiten Berechtigungen als Dezimalzahl in Textform  |
 
-Frage `GET /oauth2/@me/servers?manageable=true` ab, um nur die Server zu bekommen, die sie verwalten kann. Zeige nur diese und prüfe vor jeder Änderung noch einmal mit deinem Bot-Token: `members.canManage(serverId, userId)` in `@zrzur/sdk/bot`. Rechte können sich nach der Anmeldung ändern.
+Frage `GET /oauth2/@me/servers?manageable=true` ab, um nur die Server zu bekommen, die sie verwalten kann. Zeige nur diese und prüfe vor jeder Änderung noch einmal mit deinem Bot-Token: `members.canManage(serverId, userId)` in `@zrzur/sdk/bot` (verfügbar ab der nächsten `@zrzur/sdk`-Version; bis dahin lies `GET /servers/{id}` und `GET /servers/{id}/members/{user_id}` und verlange den Besitzer oder „Server verwalten“). Rechte können sich nach der Anmeldung ändern.
 
 Die Bits sind die von Zrzur, nicht die von Discord. „Server verwalten“ ist `1 << 1` (`2`), Administrator `1 << 46`. Code für Discords `0x8` oder `0x20` liest die falschen Bits. Nutze `Permissions` aus dem SDK und `BigInt` auf den Text.
 

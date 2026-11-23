@@ -86,7 +86,7 @@ const challenge = createHash("sha256").update(verifier).digest("base64url");
 | `can_manage` | They own it or hold Manage Server                             |
 | `permissions`| Their server-wide permissions, as a decimal string            |
 
-Ask for `GET /oauth2/@me/servers?manageable=true` to get only the servers they can manage. Show only those, and check again on the server before every change, with your bot token: `members.canManage(serverId, userId)` in `@zrzur/sdk/bot`. Rights can change after sign-in.
+Ask for `GET /oauth2/@me/servers?manageable=true` to get only the servers they can manage. Show only those, and check again on the server before every change, with your bot token: `members.canManage(serverId, userId)` in `@zrzur/sdk/bot` (available from the next `@zrzur/sdk` version; until then, read `GET /servers/{id}` and `GET /servers/{id}/members/{user_id}` and require the owner or Manage Server). Rights can change after sign-in.
 
 The bits are Zrzur's, not Discord's. Manage Server is `1 << 1` (`2`), Administrator `1 << 46`. Code written for Discord's `0x8` or `0x20` reads the wrong bits. Use `Permissions` from the SDK and `BigInt` on the string.
 
