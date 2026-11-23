@@ -43012,7 +43012,7 @@
     },
     {
       "path": "packages/client/src/interface/developers/data/botApi.json",
-      "sha256": "333238b4c6c44e38880c584110b2262bdaa29c3e78495142fd1dd29493412e17",
+      "sha256": "e5a46cdade21130a9fc1e5c543c570749e1eb961cede246a8456597844063ffe",
       "bytes": 1159388,
       "category": "product-source-or-build-manifest"
     },
@@ -43036,7 +43036,7 @@
     },
     {
       "path": "packages/client/src/interface/developers/data/botApi/meta.json",
-      "sha256": "047bbe7d6b0d0ba08162719c87876884060afb0bd01a009a2e249b6364e46fda",
+      "sha256": "a9dffac43805c8595876d8e124a8eaf7042893203f9e46d5219a114e0d7c6643",
       "bytes": 10187,
       "category": "product-source-or-build-manifest"
     },
@@ -43066,7 +43066,7 @@
     },
     {
       "path": "packages/client/src/interface/developers/data/botApi/section-interactions.json",
-      "sha256": "7d80e24e1d5221fb2b263902c65be7a556f70fe6cc89fc6bc05368fd7d8a41b8",
+      "sha256": "aebd217e48289007a85d3fb2a2cecc5a5c2d1561a09199dd2362fb1dc0fecf3b",
       "bytes": 79176,
       "category": "product-source-or-build-manifest"
     },
@@ -43090,7 +43090,7 @@
     },
     {
       "path": "packages/client/src/interface/developers/data/botApi/section-oauth2.json",
-      "sha256": "0e438991e7a99cc607c7d9b48eb420d41d894196a282ba8b5482b87144367f20",
+      "sha256": "2e0534a3868945a507621f8c0f80618610f74fe411fa63a05dea2b1716790e8c",
       "bytes": 16861,
       "category": "product-source-or-build-manifest"
     },
