@@ -171,6 +171,8 @@ export function _newClient(apiUrl: string, configuration?: RevoltConfig) {
   const options = {
     baseURL: apiUrl,
     autoReconnect: false,
+    // reconnects resume the session (Controller): the missed events only
+    resume: true,
     syncUnreads: true,
     debug: import.meta.env.DEV,
   };

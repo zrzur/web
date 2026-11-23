@@ -39,6 +39,7 @@ function fakeClient() {
       clientListeners[name] = fn;
     },
     ready: () => clientListeners.ready?.(),
+    resumed: () => clientListeners.resumed?.(),
     connect: vi.fn(),
     logout: vi.fn(() => Promise.resolve()),
     useExistingSession: vi.fn(),
@@ -144,6 +145,33 @@ describe("opening from the kept state", () => {
     snapshotRead?.resolve();
     await vi.advanceTimersByTimeAsync(1);
     expect(applied).toBe(0);
+    expect(controller.lifecycle.state()).toBe(State.Connected);
+  });
+});
+
+describe("reconnecting after a drop", () => {
+  beforeEach(() => vi.useFakeTimers());
+  afterEach(() => {
+    vi.useRealTimers();
+    vi.unstubAllGlobals();
+  });
+
+  it("asks the gateway to resume, and a resumed session counts as connected", async () => {
+    screen(false);
+    const { controller, client } = setup();
+    client().ready();
+    expect(controller.lifecycle.state()).toBe(State.Connected);
+    // the first connect starts fresh
+    expect(client().connect).toHaveBeenLastCalledWith();
+
+    controller.lifecycle.transition({ type: TransitionType.TemporaryFailure });
+    // (node has no network: the device counts as offline until it is back)
+    controller.lifecycle.transition({ type: TransitionType.DeviceOnline });
+    expect(controller.lifecycle.state()).toBe(State.Reconnecting);
+    expect(client().connect).toHaveBeenLastCalledWith({ resume: true });
+
+    // the missed events came again: no second Ready
+    client().resumed();
     expect(controller.lifecycle.state()).toBe(State.Connected);
   });
 });
