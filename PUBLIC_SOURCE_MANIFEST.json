@@ -51,6 +51,12 @@
       "category": "product-source-or-build-manifest"
     },
     {
+      "path": ".gitleaksignore",
+      "sha256": "074b9f963e6217824920e2daa7addaa7acdaa38cee74a2b549ab7a14c54437ca",
+      "bytes": 363,
+      "category": "product-source-or-build-manifest"
+    },
+    {
       "path": ".gitmodules",
       "sha256": "7e0a9aaaf7405eac0635672cb0dd19a3fce5aec8899eaec41df5e114330e8d8a",
       "bytes": 97,
