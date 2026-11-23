@@ -53,6 +53,7 @@ import {
   BotStartBar,
   BotStopped,
   dmBot,
+  hasHistory,
   useBotDms,
 } from "@revolt/app/interface/channels/text/interactions/BotStart";
 import { writeAccess } from "@revolt/app/interface/channels/threadAccess";
@@ -393,7 +394,7 @@ export function TextChannel(props: ChannelPageProps) {
                 when={
                   botDms() &&
                   dmBot(props.channel) &&
-                  props.channel.lastMessageId &&
+                  hasHistory(client(), props.channel) &&
                   botStartState.waiting[props.channel.id] !== undefined &&
                   props.channel.recipient?.relationship !== "Blocked"
                 }

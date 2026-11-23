@@ -2,7 +2,7 @@ import { For, Show, createMemo, createResource, onMount } from "solid-js";
 
 import { i18n } from "@lingui/core";
 import { Trans } from "@lingui/solid/macro";
-import type { Channel, User } from "@zrzur/sdk/solid";
+import type { Channel, Client, User } from "@zrzur/sdk/solid";
 import { styled } from "styled-system/jsx";
 
 import { ContextMenuButton } from "@revolt/app/menus/ContextMenu";
@@ -38,10 +38,22 @@ export function dmBot(channel: Channel): User | undefined {
  * and Start was not pressed (a bot link opened again resets that). With
  * messages, a bot link gets the Start bar above the message box instead.
  */
-export function waitsForStart(channel: Channel) {
+export function waitsForStart(client: Client, channel: Channel) {
   const bot = dmBot(channel);
   if (!bot || bot.relationship === "Blocked") return false;
-  return !channel.lastMessageId && !botStartState.started[channel.id];
+  return !hasHistory(client, channel) && !botStartState.started[channel.id];
+}
+
+/**
+ * Whether anyone wrote in the conversation. The channel's last message id
+ * is saved by the server a moment after a message, so a page loaded just
+ * then has none: the messages the app holds count too.
+ */
+export function hasHistory(client: Client, channel: Channel) {
+  return (
+    !!channel.lastMessageId ||
+    !!client.messages.find((message) => message.channelId === channel.id)
+  );
 }
 
 /** Restart bot: unblock it, then press Start again */
@@ -176,7 +188,7 @@ export function BotStart(props: { channel: Channel }) {
         </Section>
       </Show>
 
-      <Show when={botDms() && waitsForStart(props.channel)}>
+      <Show when={botDms() && waitsForStart(client(), props.channel)}>
         <StartRow>
           <Button
             variant="filled"
