@@ -1,8 +1,8 @@
+import { lazy } from "@revolt/common/lib/lazyPart";
 import {
   createEffect,
   createSignal,
   JSX,
-  lazy,
   Match,
   on,
   onCleanup,
@@ -30,6 +30,7 @@ import { ConfirmEmailStrip } from "@revolt/auth/src/invite/ConfirmEmailStrip";
 import { Navigate, useBeforeLeave, useLocation } from "@revolt/routing";
 import { useState } from "@revolt/state";
 import { LAYOUT_SECTIONS } from "@revolt/state/stores/Layout";
+import { PageBoundary } from "@revolt/ui/components/utils/PageBoundary";
 import { lazyRetry } from "@revolt/ui/components/utils/lazyRetry";
 import { useMotion } from "@revolt/ui/motion";
 
@@ -285,7 +286,10 @@ const Interface = (props: { children?: JSX.Element }) => {
                   !location.pathname.startsWith("/developers")
                 }
               >
-                {props.children}
+                {/* a page that could not be downloaded says so, with Try again */}
+                <PageBoundary resetKey={() => location.pathname}>
+                  {props.children}
+                </PageBoundary>
                 {/* phones: a tab's own page keeps the tab bar under it */}
                 <Show when={tabPage()}>
                   <PhoneTabs page />

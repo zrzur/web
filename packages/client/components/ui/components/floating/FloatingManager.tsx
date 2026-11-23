@@ -1,4 +1,5 @@
 /* eslint-disable solid/reactivity */
+import { lazy } from "@revolt/common/lib/lazyPart";
 import { useFloating } from "solid-floating-ui";
 import {
   For,
@@ -7,7 +8,6 @@ import {
   Suspense,
   Switch,
   createSignal,
-  lazy,
   onCleanup,
   onMount,
 } from "solid-js";

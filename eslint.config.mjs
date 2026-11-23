@@ -81,6 +81,28 @@ export default defineConfig([
     },
   },
   {
+    // Solid's lazy() keeps a failed download for good: a phone that lost its
+    // connection for a moment then had buttons that never worked again until
+    // a reload (bug #3 of 2026-11-22). The app's own lazy() asks again.
+    files: ["packages/client/**/*.{ts,tsx}"],
+    ignores: ["packages/client/components/common/lib/lazyPart.ts"],
+    rules: {
+      "no-restricted-imports": [
+        "error",
+        {
+          paths: [
+            {
+              name: "solid-js",
+              importNames: ["lazy"],
+              message:
+                "Use lazy from @revolt/common/lib/lazyPart: it asks again for a part whose download failed.",
+            },
+          ],
+        },
+      ],
+    },
+  },
+  {
     // scripts, tests, bot examples and the docker entry points run in Node
     files: [
       "**/*.cjs",

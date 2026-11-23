@@ -31183,3 +31183,11 @@ msgstr "New"
 #: src/interface/channels/forum/ForumChannel.tsx
 msgid "{0, plural, one {# mention} other {# mentions}}"
 msgstr "{0, plural, one {# mention} other {# mentions}}"
+
+#: components/modal/index.tsx
+msgid "Could not open. Check your connection and try again."
+msgstr "Could not open. Check your connection and try again."
+
+#: components/ui/components/utils/PageBoundary.tsx
+msgid "Could not open."
+msgstr "Could not open."

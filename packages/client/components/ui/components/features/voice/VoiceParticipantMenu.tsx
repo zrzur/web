@@ -1,4 +1,4 @@
-import { lazy } from "solid-js";
+import { lazy } from "@revolt/common/lib/lazyPart";
 
 /**
  * Voice participant context menu, loaded on demand.

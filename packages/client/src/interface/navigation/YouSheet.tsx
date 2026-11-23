@@ -1,4 +1,5 @@
-import { Show, Suspense, createSignal, lazy } from "solid-js";
+import { lazy } from "@revolt/common/lib/lazyPart";
+import { Show, Suspense, createSignal } from "solid-js";
 
 const [open, setOpen] = createSignal(false);
 /** the sheet's code is fetched the first time it is opened */

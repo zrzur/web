@@ -21,6 +21,7 @@ import { MotionPresence, useMotion } from "@revolt/ui/motion";
 import Breakpoint from "../../../common/Breakpoint";
 
 import { backCloses } from "@revolt/common/lib/backCloses";
+import { PageBoundary } from "../utils/PageBoundary";
 import { Button } from "./Button";
 import { typography } from "./Text";
 import { sheetSwipe } from "./sheetSwipe";
@@ -455,7 +456,9 @@ export function Dialog(props: Props) {
               </Show>
 
               <Body class={typography()} data-dialog-body>
-                {props.children}
+                {/* a part inside the window that could not be downloaded
+                    says so here: the window and what was typed stay */}
+                <PageBoundary>{props.children}</PageBoundary>
                 <Show when={actions().length && props.actionsAtEnd}>
                   <Actions data-dialog-actions data-at-end>
                     {actionButtons()}

@@ -31180,3 +31180,11 @@ msgstr "جديد"
 #: src/interface/channels/forum/ForumChannel.tsx
 msgid "{0, plural, one {# mention} other {# mentions}}"
 msgstr "{0, plural, zero {لا إشارات} one {إشارة واحدة} two {إشارتان} few {# إشارات} many {# إشارة} other {# إشارة}}"
+
+#: components/modal/index.tsx
+msgid "Could not open. Check your connection and try again."
+msgstr "تعذّر الفتح. تحقّق من اتصالك وحاول مرة أخرى."
+
+#: components/ui/components/utils/PageBoundary.tsx
+msgid "Could not open."
+msgstr "تعذّر الفتح."

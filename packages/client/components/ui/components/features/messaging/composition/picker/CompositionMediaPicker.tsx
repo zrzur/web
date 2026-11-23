@@ -8,6 +8,7 @@ import {
 } from "@floating-ui/dom";
 import { useLingui } from "@lingui/solid/macro";
 import { useDevice } from "@revolt/common";
+import { lazy } from "@revolt/common/lib/lazyPart";
 import type { Channel } from "@zrzur/sdk/solid";
 import { useFloating } from "solid-floating-ui";
 import {
@@ -21,7 +22,6 @@ import {
   createContext,
   createEffect,
   createSignal,
-  lazy,
   onCleanup,
   onMount,
 } from "solid-js";

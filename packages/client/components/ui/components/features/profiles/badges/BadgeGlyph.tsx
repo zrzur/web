@@ -20,17 +20,30 @@ type Art = Readonly<Record<string, string>>;
 const [loadedArt, setLoadedArt] = createSignal<Art>();
 let artRequest: Promise<void> | undefined;
 
-/** Load the badge art once; resolves when it is ready (tests await it). */
-export function loadBadgeArt(): Promise<void> {
-  artRequest ??= import("./badgeArt").then((module) => {
-    setLoadedArt(module.BADGE_ART);
-  });
+/**
+ * Load the badge art once; resolves when it is ready (tests await it).
+ * @param importArt Where the art comes from (tests give their own)
+ */
+export function loadBadgeArt(
+  importArt: () => Promise<{ BADGE_ART: Art }> = () => import("./badgeArt"),
+): Promise<void> {
+  artRequest ??= importArt().then(
+    (module) => {
+      setLoadedArt(module.BADGE_ART);
+    },
+    (error) => {
+      // a failed download is not kept: the next badge drawn asks again
+      // (it stayed failed, and badges stayed empty, until a reload)
+      artRequest = undefined;
+      throw error;
+    },
+  );
   return artRequest;
 }
 
 export function BadgeGlyph(props: { badge: BadgeMeta; size: number }) {
   const id = `zb${createUniqueId().replace(/[^A-Za-z0-9_-]/g, "")}`;
-  void loadBadgeArt();
+  loadBadgeArt().catch(() => undefined);
   const art = () => loadedArt()?.[props.badge.id];
   return (
     <Show
