@@ -28,20 +28,20 @@
     },
     {
       "path": ".github/workflows/ci.yml",
-      "sha256": "017f1579f22b6da7cccb274e0bf4d6c334d4422fbe75d339d11f761d2119bb26",
-      "bytes": 3973,
+      "sha256": "18f684dcb2ab48e1f84559888ac1664a327b18b365e1ca45f5a5e378fbbd0e69",
+      "bytes": 3989,
       "category": "reviewed-build-and-ci"
     },
     {
       "path": ".github/workflows/images.yml",
-      "sha256": "e8e28047f00e1f9ec2f0de054bf1f874a7c972ef3ba85f016f3bd93a1f7c5eb3",
-      "bytes": 6573,
+      "sha256": "f7a839898b0731540475fe296d8ec1ce417173f731779559c9a4dc0f906aac16",
+      "bytes": 6589,
       "category": "reviewed-build-and-ci"
     },
     {
       "path": ".github/workflows/source-check.yml",
-      "sha256": "97434a50d2a0ba0f11b8216beefa850e7edf5dcc7096a8c0c61110c5adef09e2",
-      "bytes": 948,
+      "sha256": "04a41c8bcdd606d2cc8df5817091d3eec8d7435c79e8ba9d8576f6a3d2aecd8c",
+      "bytes": 952,
       "category": "reviewed-build-and-ci"
     },
     {
@@ -274,14 +274,14 @@
     },
     {
       "path": "CODE_OF_CONDUCT.md",
-      "sha256": "d436e8246b2771a5501e3eac30c24d0a2a38f8dc851a06c8e4f8664168162808",
-      "bytes": 4838,
+      "sha256": "7e96e46b4b380023870b57578c9c6615b7068bc821923a6fff1bb51cbfa50ab2",
+      "bytes": 4955,
       "category": "public-documentation"
     },
     {
       "path": "CONTRIBUTING.md",
-      "sha256": "6bc7bb97b365a50274709c2fb6dd24a227a2aa7ae72fe26583d47a69687cc067",
-      "bytes": 987,
+      "sha256": "ea74efe678bdec135ea44c8944431a239aed5cbb5bab98f97069a748bf6636fa",
+      "bytes": 2238,
       "category": "public-documentation"
     },
     {
@@ -322,8 +322,8 @@
     },
     {
       "path": "README.md",
-      "sha256": "e62ff1c00816eb7c0fb7adfe7322656c442f64e13e01163d967e1a628faf2204",
-      "bytes": 3671,
+      "sha256": "2a8e8672af79768f0c8848223b7220486082abc183666300992449a98096310e",
+      "bytes": 3752,
       "category": "public-documentation"
     },
     {
@@ -334,8 +334,8 @@
     },
     {
       "path": "SECURITY.md",
-      "sha256": "5e8b6d39a56dd15e2a82a5c5e720ef8dfb267ce110ecefd1ff1f48cee23c896a",
-      "bytes": 535,
+      "sha256": "ab57d1215ae6b406c66170f71b70dda38ed33b3fdcec66b5d6590e354d08b673",
+      "bytes": 1988,
       "category": "public-documentation"
     },
     {
