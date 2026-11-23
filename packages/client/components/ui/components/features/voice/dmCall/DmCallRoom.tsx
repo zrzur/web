@@ -922,8 +922,6 @@ function DeviceList(props: { kind: MediaDeviceKind }) {
         ? t`Microphone`
         : t`Speaker`;
 
-  const active = () => state.voice[key()] ?? "default";
-
   const devices = createMemo(() => {
     const list = media
       .devices()
@@ -941,6 +939,11 @@ function DeviceList(props: { kind: MediaDeviceKind }) {
     return ordered;
   });
 
+  // a camera has no "default" entry: the first one is used until one is picked
+  const active = () =>
+    state.voice[key()] ??
+    (props.kind === "videoinput" ? devices()[0]?.id : "default");
+
   const choose = (id: string) => {
     if (props.kind !== "videoinput" || id !== "default")
       void media.setActiveMediaDevice(id);
@@ -948,12 +951,12 @@ function DeviceList(props: { kind: MediaDeviceKind }) {
   };
 
   return (
-    <div
-      role="group"
-      aria-label={title()}
-      data-dm-call-device-list={props.kind}
-    >
-      <div class="z-dmcall-menu-title">{title()}</div>
+    // no wrapper around the rows: a phone's menu sheet groups the rows
+    // between dividers into one card, as in every other menu
+    <>
+      <div class="z-dmcall-menu-title" data-dm-call-device-title={props.kind}>
+        {title()}
+      </div>
       <Show
         when={props.kind !== "audiooutput" || devices().length > 1}
         fallback={
@@ -968,6 +971,7 @@ function DeviceList(props: { kind: MediaDeviceKind }) {
               role="menuitemradio"
               aria-checked={active() === device.id}
               selected={active() === device.id}
+              data-device-kind={props.kind}
               actionIcon={
                 active() === device.id ? (
                   <Icon name="check" size={16} />
@@ -980,6 +984,6 @@ function DeviceList(props: { kind: MediaDeviceKind }) {
           )}
         </For>
       </Show>
-    </div>
+    </>
   );
 }
