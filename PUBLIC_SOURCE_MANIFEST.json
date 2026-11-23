@@ -262,8 +262,8 @@
     },
     {
       "path": "CHANGELOG.md",
-      "sha256": "4fc89f9eb8fc067971b721c548db5d62f4bc72c46aef3a6dfc2600597a2f22ff",
-      "bytes": 194746,
+      "sha256": "9f27dfe99c233b8a9b4c5b0a550aa6e889fd565a8ba93abb8b2fb3330f3e2370",
+      "bytes": 195591,
       "category": "public-documentation"
     },
     {
@@ -3130,8 +3130,8 @@
     },
     {
       "path": "packages/client/components/client/Controller.ts",
-      "sha256": "f17fc98660605549b453cc907a1c4ea6b3ed1730f57d06e8fb9d148ac0cd3eda",
-      "bytes": 25177,
+      "sha256": "405346ffc9c7501b3a0332005cb4c2ca58fa9c8444b4ee2563e4a26229766198",
+      "bytes": 26292,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -3189,6 +3189,12 @@
       "category": "product-source-or-build-manifest"
     },
     {
+      "path": "packages/client/components/client/keptStart.test.ts",
+      "sha256": "bfdaf6bb328f33783951c6895bad5fd1360f3d2cbac7b186eb048555d001a467",
+      "bytes": 4689,
+      "category": "synthetic-test-source-or-fixture"
+    },
+    {
       "path": "packages/client/components/client/messagePruner.test.ts",
       "sha256": "417d3a429c9755b211b385cefe517616a48ebc6c3703ed011c908b4a0a281611",
       "bytes": 3935,
@@ -3214,8 +3220,8 @@
     },
     {
       "path": "packages/client/components/client/offline/index.ts",
-      "sha256": "fc6e87d1fc65783664375c4e836015e38a857bb7a686331c8e9430dd1c56ceb1",
-      "bytes": 7893,
+      "sha256": "b09bd875a35f3dd612e963b5f395a6196232dca2f68f663cf6e8984813a27d99",
+      "bytes": 8100,
       "category": "product-source-or-build-manifest"
     },
     {
