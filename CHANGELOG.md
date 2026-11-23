@@ -102,6 +102,13 @@
 * **Each system has its own set:** macOS uses Command and Option (Command+Option+↑/↓ for servers, Command+Control+I for mentions); Linux keeps the Windows keys except where the desktop takes them: servers are Alt+Page Up/Down (Ctrl+Alt+arrows switch workspaces) and upload is Ctrl+Alt+U (Ctrl+Shift+U is IBus's Unicode entry). The system is read from the desktop app, then the browser's client hints, then `navigator.platform`. The Ctrl+/ screen shows this device's keys with its own symbols, and a switch shows the macOS, Windows or Linux set to read. Keys macOS, Windows and Linux keep for themselves are refused when you record a shortcut.
 * All keys are matched by their place on the keyboard (`event.code`), so they work with Arabic and German layouts; a single-letter key never acts while you type.
 
+### Profile frames (2026-11-21, owner's request)
+
+* **A frame round the whole profile card:** Zrzur's own frames are hand-made pixel art, added one at a time; the first is Crystal cave (amethyst and teal crystals growing out of a stone shelf round two opposite corners of the card, with sparkles). Creators' frames are pictures on a fixed template. A frame is drawn round the card, the full profile and the phone profile and reaches past their edges (4 px pixels, 3 on a phone, smaller on preview cards); it reaches at most two pixels into the card. It never takes a click or a scroll, is hidden from screen readers and adds nothing to the layout. Its sparkles twinkle, but not under reduced motion, Save data or with profile effects off.
+* **Where to choose it:** Settings → Profile → Look → Profile frame (a dialog with a preview), and Designs → Frames (try on, then Save, as the other kinds).
+* **Saving a look no longer drops parts it did not name:** the three places that built the saved style each had their own list; they share `sendableStyle` now, which includes the frame.
+* A bare `Dialog` can be `unclipped` so a frame reaches past it; the profile then clips its own corners.
+
 ### A friend request opens the sender's profile (2026-11-21)
 
 * **From the phone Notifications page:** the sender's picture and the line "… sent you a friend request" are one button (44 px high) that opens their profile. Screen readers hear the sentence they see as its name, then "Open profile" (ar, en, de) as its description. Accept, Decline and Send message are separate buttons and are not touched by it. The page closes first so the profile is not under it; the profile has its own Accept.

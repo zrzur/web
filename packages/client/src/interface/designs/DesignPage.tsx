@@ -149,7 +149,9 @@ export function DesignPage(props: {
                 ? t`Avatar decoration`
                 : made === "Effect"
                   ? t`Profile effect`
-                  : t`Nameplate`,
+                  : made === "Frame"
+                    ? t`Profile frame`
+                    : t`Nameplate`,
             name: details.item.name,
             description: details.item.description,
             style:
@@ -157,8 +159,15 @@ export function DesignPage(props: {
                 ? { decoration: `c:${ref.id}` }
                 : made === "Effect"
                   ? { effect: `c:${ref.id}` }
-                  : { nameplate: `c:${ref.id}` },
-            tab: made === "Effect" ? "effects" : "community",
+                  : made === "Frame"
+                    ? { profile_frame: `c:${ref.id}` }
+                    : { nameplate: `c:${ref.id}` },
+            tab:
+              made === "Effect"
+                ? "effects"
+                : made === "Frame"
+                  ? "frames"
+                  : "community",
             community: details,
           };
         }
@@ -203,7 +212,9 @@ export function DesignPage(props: {
             ? "decoration"
             : item.community!.item.kind === "Effect"
               ? "effect"
-              : "nameplate",
+              : item.community!.item.kind === "Frame"
+                ? "profile_frame"
+                : "nameplate",
           `c:${item.ref.id}`,
         );
       else {
@@ -231,6 +242,7 @@ export function DesignPage(props: {
     const found = item.community?.item;
     if (!found) return {};
     if (found.kind === "Effect") return { effect_file: found.file._id };
+    if (found.kind === "Frame") return { profile_frame_file: found.file._id };
     return found.kind === "Decoration"
       ? { decoration_file: found.file._id }
       : { nameplate_file: found.file._id };

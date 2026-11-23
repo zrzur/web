@@ -74,6 +74,7 @@ export function DesignsHome(props: {
     { id: "decorations", label: t`Decorations` },
     { id: "nameplates", label: t`Nameplates` },
     { id: "effects", label: t`Effects` },
+    { id: "frames", label: t`Frames` },
     { id: "colours", label: t`Colours` },
     { id: "name", label: t`Name` },
     { id: "community", label: t`Community` },

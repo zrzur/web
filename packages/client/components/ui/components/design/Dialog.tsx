@@ -131,6 +131,12 @@ type Props = DialogProps & {
   /** No padding and clipped corners: the body lays itself out edge to edge */
   bare?: boolean;
 
+  /**
+   * With `bare`: nothing is clipped at the window's edge, so a profile frame
+   * can reach past it. The body then clips its own corners.
+   */
+  unclipped?: boolean;
+
   /** Explicit width in px (overrides size) */
   width?: number;
 
@@ -407,6 +413,7 @@ export function Dialog(props: Props) {
               size={props.size ?? "md"}
               data-size={props.size ?? "md"}
               bare={props.bare}
+              data-unclipped={props.unclipped ? "" : undefined}
               style={{
                 "min-width": props.minWidth
                   ? `min(${props.minWidth}px, calc(100vw - 32px))`
@@ -699,6 +706,10 @@ const Container = styled("div", {
       true: {
         padding: 0,
         overflow: "hidden",
+        // the profile scrolls inside itself, so the body needs no scroll
+        "&[data-unclipped], &[data-unclipped] > [data-dialog-body]": {
+          overflow: "visible",
+        },
         "& > [data-dialog-body]": {
           margin: 0,
           padding: 0,

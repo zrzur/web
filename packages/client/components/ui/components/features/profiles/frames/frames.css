@@ -1,0 +1,22 @@
+/* Profile frames (ProfileFrame.tsx). Sparkles in a frame twinkle while the
+   viewer sees motion, and stay lit and still otherwise. */
+
+@keyframes z-frame-twinkle {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.3;
+  }
+}
+
+[data-profile-frame][data-moving] .z-frame-twinkle > * {
+  animation: z-frame-twinkle 2.6s steps(4, end) infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  [data-profile-frame] .z-frame-twinkle > * {
+    animation: none !important;
+  }
+}

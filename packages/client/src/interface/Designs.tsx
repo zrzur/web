@@ -152,6 +152,7 @@ function Gallery() {
       first === "decorations" ||
       first === "nameplates" ||
       first === "effects" ||
+      first === "frames" ||
       first === "colours" ||
       first === "name" ||
       first === "community"

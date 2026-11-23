@@ -2,6 +2,7 @@ import { type JSX, createSignal } from "solid-js";
 
 import { isEffectId } from "./effects/effectIds";
 import "./nameEffects.css";
+import { isProfileFrameId } from "./frames/builtinFrames";
 import {
   PACK_DECORATIONS,
   PACK_NAMEPLATES,
@@ -31,6 +32,10 @@ export type UserStyle = {
   effect?: string;
   /** file of a community effect (filled in by the server) */
   effect_file?: string;
+  /** frame around the whole profile card: built-in id, or `c:<id>` */
+  profile_frame?: string;
+  /** image of a community frame (filled in by the server) */
+  profile_frame_file?: string;
 };
 
 /** Read the style the API attached to a user (absent on older servers) */
@@ -38,7 +43,7 @@ export function userStyleOf(user: unknown): UserStyle | undefined {
   const style = (user as { style?: UserStyle } | undefined)?.style;
   if (!style || typeof style !== "object") return undefined;
   // a design we no longer ship counts as none, so saving still works
-  const { decoration, nameplate, effect } = style;
+  const { decoration, nameplate, effect, profile_frame } = style;
   const staleDecoration =
     decoration &&
     !isCommunityRef(decoration) &&
@@ -48,7 +53,12 @@ export function userStyleOf(user: unknown): UserStyle | undefined {
     !isCommunityRef(nameplate) &&
     !NAMEPLATES.some((plate) => plate.id === nameplate);
   const staleEffect = effect && !isCommunityRef(effect) && !isEffectId(effect);
-  if (!staleDecoration && !stalePlate && !staleEffect) return style;
+  const staleFrame =
+    profile_frame &&
+    !isCommunityRef(profile_frame) &&
+    !isProfileFrameId(profile_frame);
+  if (!staleDecoration && !stalePlate && !staleEffect && !staleFrame)
+    return style;
   const rest = { ...style };
   if (staleDecoration) {
     delete rest.decoration;
@@ -62,7 +72,32 @@ export function userStyleOf(user: unknown): UserStyle | undefined {
     delete rest.effect;
     delete rest.effect_file;
   }
+  if (staleFrame) {
+    delete rest.profile_frame;
+    delete rest.profile_frame_file;
+  }
   return rest;
+}
+
+/**
+ * The style as it is sent to save it: the server replaces the whole style,
+ * so every piece that is on goes in, and only those. Image ids of community
+ * designs are filled in by the server (a creator's effect keeps its file so
+ * it plays at once).
+ */
+export function sendableStyle(style: UserStyle): UserStyle {
+  return {
+    ...(style.theme?.length ? { theme: style.theme } : {}),
+    ...(style.name_font ? { name_font: style.name_font } : {}),
+    ...(style.name_colour?.length ? { name_colour: style.name_colour } : {}),
+    ...(style.decoration ? { decoration: style.decoration } : {}),
+    ...(style.nameplate ? { nameplate: style.nameplate } : {}),
+    ...(style.effect ? { effect: style.effect } : {}),
+    ...(style.effect && style.effect_file
+      ? { effect_file: style.effect_file }
+      : {}),
+    ...(style.profile_frame ? { profile_frame: style.profile_frame } : {}),
+  };
 }
 
 const HEX = /^#[0-9a-fA-F]{6}$/;

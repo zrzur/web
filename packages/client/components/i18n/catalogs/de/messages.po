@@ -31443,3 +31443,36 @@ msgstr "Namensstile anzeigen"
 #: components/app/interface/settings/user/Advanced.tsx
 msgid "Fonts, colours and effects people chose for their names. Off shows every name plain."
 msgstr "Schriftarten, Farben und Effekte, die andere für ihre Namen gewählt haben. Aus zeigt alle Namen schlicht."
+
+#: components/app/interface/settings/user/profile/FrameDialog.tsx
+msgid "A frame around your whole profile card. Everyone who opens your profile sees it."
+msgstr "Ein Rahmen um deine ganze Profilkarte. Alle, die dein Profil öffnen, sehen ihn."
+
+#: components/app/interface/settings/user/profile/FrameDialog.tsx
+msgid "Change profile frame"
+msgstr "Profilrahmen ändern"
+
+#: components/app/interface/settings/user/profile/styleLabels.tsx
+msgid "Community frame"
+msgstr "Community-Rahmen"
+
+#: components/app/interface/settings/user/profile/styleLabels.tsx
+msgid "Crystal cave"
+msgstr "Kristallhöhle"
+
+#: src/interface/designs/Home.tsx
+msgid "Frames"
+msgstr "Profilrahmen"
+
+#: components/app/interface/settings/user/profile/UserProfileEditor.tsx
+#: src/interface/designs/DesignPage.tsx
+msgid "Profile frame"
+msgstr "Profilrahmen"
+
+#: components/app/interface/settings/user/profile/FrameDialog.tsx
+msgid "Profile frames"
+msgstr "Profilrahmen"
+
+#: components/app/interface/settings/user/profile/FrameDialog.tsx
+msgid "The frame goes round your card and your full profile. It never covers your name, your buttons or what you wrote."
+msgstr "Der Rahmen liegt um deine Karte und dein ganzes Profil. Er verdeckt nie deinen Namen, deine Schaltflächen oder deinen Text."

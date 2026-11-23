@@ -11,6 +11,12 @@ import { discoverRequest } from "../../../discover/api";
 
 export type CommunityKind = "decorations" | "nameplates" | "effects";
 
+/**
+ * Every list the gallery reads. Profile frames are listed and worn, but not
+ * made in the Creator Studio yet, so its kinds above leave them out.
+ */
+export type CommunityListKind = CommunityKind | "frames";
+
 export type CommunityStatus =
   | "Draft"
   | "PendingReview"
@@ -326,7 +332,7 @@ export const communityApi = {
 
   list: (
     client: Client,
-    kind: CommunityKind,
+    kind: CommunityListKind,
     params: Partial<ReturnType<typeof communityParams>> & { creator?: string },
   ) => client.api.get(`/community/${kind}`, params).then(withoutNull),
 
