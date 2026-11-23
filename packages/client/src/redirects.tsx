@@ -83,7 +83,11 @@ export function openDialogAt(
           waitForStart(channel.id, address.payload);
           go?.(channel.path);
         })
-        .catch(showError);
+        .catch((error) => {
+          showError(error);
+          // a page loaded at the link has nothing behind it: go home
+          if (/^\/(b|bot)\//.test(window.location.pathname)) go?.("/");
+        });
     } else if (address.kind === "invite") {
       client()
         // TODO: add a helper to stoat.js for this
@@ -148,5 +152,9 @@ export function BotRedirect() {
     `/bot/${params.code ?? ""}${window.location.search}`,
   );
   if (address) openDialogAt(address, useClient(), useModals(), navigate);
+  // a bot link with ?start goes straight to the conversation, in one move:
+  // passing the last page first left that page half set up when it was the
+  // same conversation, and the bot's answer did not show until a reload
+  if (address?.kind === "bot-start") return null;
   return <PWARedirect />;
 }
