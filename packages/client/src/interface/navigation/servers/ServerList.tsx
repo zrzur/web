@@ -10,7 +10,7 @@ import { styled } from "styled-system/jsx";
 import { conversationName } from "@revolt/app/interface/channels/conversationName";
 import { ServerFolderContextMenu } from "@revolt/app/menus";
 import { useClient } from "@revolt/client";
-import { CONFIGURATION, useDevice } from "@revolt/common";
+import { CONFIGURATION } from "@revolt/common";
 import { brandMarkSrc } from "@revolt/common/lib/brandMark";
 import { KeybindAction, createKeybind } from "@revolt/keybinds";
 import { useLocation, useNavigate } from "@revolt/routing";
@@ -21,8 +21,10 @@ import { VoiceStatus } from "@revolt/ui/components/design/VoiceStatus";
 import { Tooltip } from "@revolt/ui/components/floating";
 import { Icon } from "@revolt/ui/icons/Icon";
 
-import { serverForumsUnread } from "../../channels/forum/unread";
+import { liftScope } from "@revolt/ui/components/utils/touchLift";
 
+import { serverForumsUnread } from "../../channels/forum/unread";
+import { keepEntries } from "./keepEntries";
 import { RailEntry, createRailDrag } from "./railDrag";
 
 interface Props {
@@ -75,7 +77,6 @@ export const ServerList = (props: Props) => {
   const state = useState();
   const client = useClient();
   const navigate = useNavigate();
-  const { isMobile, fingerFirst } = useDevice();
   const { t } = useLingui();
   const location = useLocation();
   const onDiscover = () => location.pathname.startsWith("/discover");
@@ -122,6 +123,12 @@ export const ServerList = (props: Props) => {
   });
 
   let rail!: HTMLDivElement;
+
+  // the same server keeps the same row (keepEntries): no redraw on every
+  // server change, so menus, tooltips and a resting finger stay put
+  const entries = createMemo<ResolvedEntry[] | undefined>((previous) =>
+    keepEntries(previous, props.orderedEntries),
+  );
 
   /**
    * Fold an entry into another
@@ -214,9 +221,8 @@ export const ServerList = (props: Props) => {
         if (member) return member.name;
       }
     },
-    //TODO - No server ordering on mobile due to usability issue
-    //Consider adding a way to enable reordering in user settings
-    disabled: () => isMobile || fingerFirst,
+    // phones and tablets too: a finger rests on an entry to lift it
+    // (railDrag), so moving at once still scrolls the rail
     onFold: fold,
     onMove: (moved, before, parent) => place(moved, before, parent),
   });
@@ -331,8 +337,8 @@ export const ServerList = (props: Props) => {
           </a>
         </Show>
         <LineDivider />
-        <div ref={rail} class={railList}>
-          <For each={props.orderedEntries}>
+        <div ref={rail} class={`${railList} ${liftScope}`}>
+          <For each={entries()}>
             {(entry) => (
               <Switch>
                 <Match when={entry?.type === "server" && entry}>
@@ -552,6 +558,12 @@ function ServerEntry(props: {
         <a
           draggable="false"
           tabindex="0"
+          // the icon itself lifts, so the shadow has its size and corners
+          data-lifted={
+            props.drag.lifted() === props.server.id && !props.drag.dragging()
+              ? ""
+              : undefined
+          }
           href={state.layout.getLastActiveServerPath(props.server.id)}
           aria-label={props.server.name}
         >
@@ -691,6 +703,11 @@ function FolderEntry(props: {
           <a
             role="button"
             tabindex="0"
+            data-lifted={
+              props.drag.lifted() === props.entry.id && !props.drag.dragging()
+                ? ""
+                : undefined
+            }
             aria-label={folderName()}
             aria-expanded={!collapsed()}
             onClick={() => state.ordering.toggleFolder(props.entry.folder.id)}
@@ -792,7 +809,7 @@ const railFolding = css({
     width: "48px",
     height: "48px",
     borderRadius: "16px",
-    outline: "2px solid var(--md-sys-color-primary)",
+    outline: "2px solid var(--z-accent)",
   },
 });
 
@@ -823,7 +840,7 @@ const railInsertion = css({
   right: "6px",
   height: "4px",
   borderRadius: "2px",
-  background: "var(--md-sys-color-primary)",
+  background: "var(--z-accent)",
 });
 
 /**
@@ -948,6 +965,23 @@ const entryContainer = cva({
     display: "grid",
     flexShrink: 0,
     placeItems: "center",
+
+    /*
+     * A long press belongs to the rail (drag or the entry's menu), never to
+     * the browser: no link preview, "open in new tab", text selection or
+     * dragging the link or icon out (iPadOS). Links stay real links for a
+     * middle-click or Ctrl+click.
+     */
+    WebkitTouchCallout: "none",
+    WebkitUserSelect: "none",
+    userSelect: "none",
+    "& a, & img": {
+      WebkitTouchCallout: "none",
+      WebkitUserSelect: "none",
+      userSelect: "none",
+      // @ts-expect-error WebKit-only property Panda has no type for
+      WebkitUserDrag: "none",
+    },
 
     /*
      * State bar on the rail edge (the side the rail starts on, so it mirrors

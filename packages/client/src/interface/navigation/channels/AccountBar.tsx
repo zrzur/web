@@ -17,7 +17,7 @@ import { pendingPresence } from "../servers/presenceUpdate";
 
 import { useLingui } from "@lingui/solid/macro";
 import { useNavigate } from "@solidjs/router";
-import { cva } from "styled-system/css";
+import { cva, cx } from "styled-system/css";
 import { styled } from "styled-system/jsx";
 
 import { conversationName } from "@revolt/app/interface/channels/conversationName";
@@ -44,6 +44,7 @@ import {
   soundboardOpen,
 } from "@revolt/ui/components/features/voice/soundboard/soundboardOpen";
 import { lazyRetry } from "@revolt/ui/components/utils/lazyRetry";
+import { touchHitArea } from "@revolt/ui/components/utils/touchHitArea";
 import { Icon } from "@revolt/ui/icons/Icon";
 
 /**
@@ -167,7 +168,7 @@ export function AccountBar(props: { compact?: boolean; overPage?: boolean }) {
         <Show when={!props.compact}>
           <Controls>
             <button
-              class={controlButton()}
+              class={cx(controlButton(), touchHitArea)}
               aria-label={
                 unreadMentions()
                   ? t`Mentions, ${unreadMentions()} unread`
@@ -189,7 +190,7 @@ export function AccountBar(props: { compact?: boolean; overPage?: boolean }) {
               </Show>
             </button>
             <button
-              class={controlButton()}
+              class={cx(controlButton(), touchHitArea)}
               // off a call the two controls still need different names
               aria-label={voice.unmuted() || offCall() ? t`Mute` : t`Unmute`}
               aria-description={
@@ -222,7 +223,7 @@ export function AccountBar(props: { compact?: boolean; overPage?: boolean }) {
             </button>
 
             <button
-              class={controlButton()}
+              class={cx(controlButton(), touchHitArea)}
               aria-label={
                 voice.deafen() && !offCall() ? t`Undeafen` : t`Deafen`
               }
@@ -266,7 +267,7 @@ export function AccountBar(props: { compact?: boolean; overPage?: boolean }) {
             </button>
 
             <button
-              class={controlButton()}
+              class={cx(controlButton(), touchHitArea)}
               aria-label={t`User settings`}
               onClick={() => openModal({ type: "settings", config: "user" })}
               use:floating={{

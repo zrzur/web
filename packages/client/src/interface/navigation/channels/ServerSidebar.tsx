@@ -1,6 +1,7 @@
 import { VoiceOccupancy } from "@revolt/ui/components/features/voice/VoiceOccupancy";
 import {
   Accessor,
+  ComponentProps,
   JSX,
   Match,
   Show,
@@ -14,7 +15,7 @@ import {
 
 import { Trans, useLingui } from "@lingui/solid/macro";
 import type { API, Channel, Server } from "@zrzur/sdk/solid";
-import { css } from "styled-system/css";
+import { css, cx } from "styled-system/css";
 import { styled } from "styled-system/jsx";
 
 import { ServerContextMenu } from "@revolt/app/menus";
@@ -53,6 +54,10 @@ import { ServerStatusBadges } from "@revolt/ui/components/features/profiles/Serv
 import { VoiceChannelPreview } from "@revolt/ui/components/features/voice/VoiceChannelPreview";
 import { createDragHandle } from "@revolt/ui/components/utils/Draggable";
 import { Symbol } from "@revolt/ui/components/utils/Symbol";
+import {
+  touchHitArea,
+  touchHitAreaSolo,
+} from "@revolt/ui/components/utils/touchHitArea";
 
 import { isPrivateCategory } from "@revolt/app/interface/settings/category/category";
 import { chevron_right as MdChevronRight } from "@revolt/ui/icons/legacy";
@@ -137,9 +142,7 @@ const askedInterests = new Set<string>();
 export const ServerSidebar = (props: Props) => {
   const navigate = useNavigate();
   const state = useState();
-  const { isMobile, fingerFirst, layout } = useDevice();
-  // no dragging channels where the finger scrolls (phones, tablets)
-  const noDrag = isMobile || fingerFirst;
+  const { layout } = useDevice();
   const client = useClient();
   const hasNews = (channel: Channel) =>
     channelUnread(client(), channel, (post) =>
@@ -461,9 +464,9 @@ export const ServerSidebar = (props: Props) => {
             dragHandles
             dropIndicator
             type="category"
-            //TODO - No channel ordering on mobile due to usability issue
-            //Consider adding a way to enable reordering with dragHandles in server settings
-            disabled={noDrag || noOrdering()}
+            // a finger rests on the category name to lift it (touchHold)
+            touchHold
+            disabled={noOrdering()}
             items={categories().filter((category) => category.id !== "default")}
             onChange={(ids) => handleOrdering({ type: "categories", ids })}
           >
@@ -550,7 +553,7 @@ function ServerInfo(
           part of its accessible name. Its click reaches the row */}
       <button
         type="button"
-        class={serverMenuButton}
+        class={cx(serverMenuButton, touchHitAreaSolo)}
         aria-haspopup="menu"
         aria-expanded={open()}
         aria-label={t`Server menu`}
@@ -659,8 +662,6 @@ function Category(
       ? `${props.server.id}:default:${props.channelType}`
       : props.category.id;
   const isOpen = () => state.layout.getSectionState(sectionId(), true);
-  const { isMobile, fingerFirst } = useDevice();
-  const noDrag = isMobile || fingerFirst;
 
   // expand and collapse animate the channel rows
   let section: HTMLDivElement | undefined;
@@ -766,6 +767,7 @@ function Category(
             }}
           >
             <CategoryBase
+              class={touchHitArea}
               type="button"
               aria-expanded={isOpen()}
               open={isOpen()}
@@ -841,9 +843,9 @@ function Category(
             moved: reorderedIds.length !== current.length,
           });
         }}
-        //TODO - No channel ordering on mobile due to usability issue
-        //Consider adding a way to enable reordering with dragHandles in server settings
-        disabled={noDrag || props.noOrdering() || !isOpen()}
+        // a finger rests on a channel to lift it, a quick swipe scrolls
+        touchHold
+        disabled={props.noOrdering() || !isOpen()}
         minimumDropAreaHeight="42px"
         onDragChange={props.setDragging}
       >
@@ -1298,7 +1300,7 @@ const SectionHeader = styled("div", {
     },
   },
 });
-const ToolButton = styled("button", {
+const ToolButtonBase = styled("button", {
   base: {
     // phones: not shown. These are the actions a pointer finds on a row; a
     // finger has them in the row's long-press menu (owner, 2026-11-17: they
@@ -1325,6 +1327,11 @@ const ToolButton = styled("button", {
     "@media (pointer: coarse)": { width: "32px", height: "32px" },
   },
 });
+
+/** Row tools; a finger's tap area is 44 px tall (touchHitArea) */
+function ToolButton(props: ComponentProps<typeof ToolButtonBase>) {
+  return <ToolButtonBase {...props} class={cx(touchHitArea, props.class)} />;
+}
 const ChannelRow = styled("div", {
   base: {
     position: "relative",

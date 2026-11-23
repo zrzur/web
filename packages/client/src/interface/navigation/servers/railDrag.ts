@@ -1,12 +1,56 @@
-import { createSignal, onCleanup } from "solid-js";
+import { createSignal, onCleanup, onMount } from "solid-js";
 
 import { useLingui } from "@lingui/solid/macro";
+
+import {
+  TOUCH_HOLD_MS,
+  TOUCH_MENU_MS,
+  createTouchHold,
+  isTouchLike,
+} from "@revolt/ui/components/utils/touchHold";
+
+// the rules for a finger live in touchHold, shared with the channel list
+export { TOUCH_HOLD_MS, TOUCH_MENU_MS };
 
 /**
  * How far the pointer must travel before a press turns into a drag, so that
  * clicking a server still navigates to it
  */
 const DRAG_THRESHOLD_PX = 5;
+
+/**
+ * Band at the top and bottom of the rail where a drag scrolls it
+ */
+const EDGE_SCROLL_PX = 48;
+
+/**
+ * Fastest edge scroll, in pixels per frame
+ */
+const EDGE_SCROLL_MAX = 14;
+
+/**
+ * How many pixels to scroll the rail by in one frame while dragging
+ * @param y Pointer position
+ * @param top Top of the scrolling area
+ * @param bottom Bottom of the scrolling area
+ * @returns Negative to scroll up, positive to scroll down, zero to stay
+ */
+export function edgeScrollStep(y: number, top: number, bottom: number) {
+  const band = Math.min(EDGE_SCROLL_PX, (bottom - top) / 4);
+  if (band <= 0) return 0;
+
+  if (y < top + band) {
+    return -Math.ceil(EDGE_SCROLL_MAX * Math.min(1, (top + band - y) / band));
+  }
+
+  if (y > bottom - band) {
+    return Math.ceil(
+      EDGE_SCROLL_MAX * Math.min(1, (y - (bottom - band)) / band),
+    );
+  }
+
+  return 0;
+}
 
 /**
  * Portion of an entry, measured from its middle, which folds rather than
@@ -83,7 +127,77 @@ export function createRailDrag(options: {
   const [intent, setIntent] = createSignal<RailIntent>();
   const [pointer, setPointer] = createSignal<{ x: number; y: number }>();
 
-  let armed: { id: string; x: number; y: number } | undefined;
+  const [lifted, setLifted] = createSignal<string>();
+
+  let armed:
+    | {
+        id: string;
+        x: number;
+        y: number;
+        pointerId: number;
+        touch: boolean;
+      }
+    | undefined;
+
+  // a finger: rest to lift, then move to drag; rest still for the menu
+  const hold = createTouchHold({
+    menuTarget: () => (armed ? elements.get(armed.id) : undefined),
+    onLift: () => armed && setLifted(armed.id),
+    onDragStart: () => armed && setDragging(armed.id),
+    onEnd: (how, dragged) => {
+      if (how === "release" && dragged) drop();
+      else reset();
+    },
+  });
+
+  let scroller: HTMLElement | undefined;
+  let scrollFrame: number | undefined;
+
+  /**
+   * Nearest scrolling box around the rail
+   */
+  function findScroller() {
+    let el = options.container()?.parentElement ?? undefined;
+    while (el) {
+      const { overflowY } = getComputedStyle(el);
+      if (
+        (overflowY === "auto" || overflowY === "scroll") &&
+        el.scrollHeight > el.clientHeight
+      )
+        return el;
+      el = el.parentElement ?? undefined;
+    }
+  }
+
+  /**
+   * Scroll the rail while a dragged entry is held near its top or bottom
+   */
+  function edgeScroll() {
+    scrollFrame = undefined;
+    const pos = pointer();
+    if (!dragging() || !pos) return;
+
+    scroller ??= findScroller();
+    if (!scroller) return;
+
+    const { top, bottom } = scroller.getBoundingClientRect();
+    const step = edgeScrollStep(pos.y, top, bottom);
+    if (!step) return;
+
+    const before = scroller.scrollTop;
+    scroller.scrollTop += step;
+    if (scroller.scrollTop !== before) {
+      scrollFrame = requestAnimationFrame(edgeScroll);
+    }
+  }
+
+  function startEdgeScroll() {
+    if (
+      scrollFrame === undefined &&
+      typeof requestAnimationFrame === "function"
+    )
+      scrollFrame = requestAnimationFrame(edgeScroll);
+  }
 
   /**
    * Work out what dropping at the given position would do
@@ -248,18 +362,25 @@ export function createRailDrag(options: {
   }
 
   function reset() {
+    hold.cancel();
+    if (scrollFrame !== undefined) cancelAnimationFrame(scrollFrame);
+    scrollFrame = undefined;
+    scroller = undefined;
     armed = undefined;
+    setLifted(undefined);
     setDragging(undefined);
     setIntent(undefined);
     setPointer(undefined);
   }
 
   function onPointerMove(e: PointerEvent) {
+    if (armed && e.pointerId !== armed.pointerId) return;
+    // a finger's press is started by the hold, not by a few pixels
+    if (armed?.touch && !dragging()) return;
+
     if (armed && !dragging()) {
-      if (
-        Math.hypot(e.clientX - armed.x, e.clientY - armed.y) < DRAG_THRESHOLD_PX
-      )
-        return;
+      const moved = Math.hypot(e.clientX - armed.x, e.clientY - armed.y);
+      if (moved < DRAG_THRESHOLD_PX) return;
 
       setDragging(armed.id);
     }
@@ -270,18 +391,52 @@ export function createRailDrag(options: {
     e.preventDefault();
     setPointer({ x: e.clientX, y: e.clientY });
     setIntent(intentAt(e.clientX, e.clientY, held));
+    startEdgeScroll();
   }
 
-  function onPointerUp() {
+  /**
+   * Keep the click that follows a press from opening the link
+   * @param ms How long to wait for it (a finger's click comes later)
+   */
+  function swallowNextClick(ms: number) {
+    window.addEventListener("click", swallowClick, { capture: true });
+    setTimeout(() => {
+      window.removeEventListener("click", swallowClick, { capture: true });
+    }, ms);
+  }
+
+  function onPointerUp(e: PointerEvent) {
+    // a finger's press ends in the hold (drop, menu or nothing)
+    if (armed?.touch) return;
+    if (armed && e.pointerId !== armed.pointerId) return;
+
     if (dragging()) {
-      window.addEventListener("click", swallowClick, { capture: true });
-      setTimeout(() => {
-        window.removeEventListener("click", swallowClick, { capture: true });
-      }, 0);
+      swallowNextClick(0);
       drop();
-    } else {
-      reset();
+      return;
     }
+
+    reset();
+  }
+
+  /**
+   * The browser took the press: put it back
+   */
+  function onPointerCancel(e: PointerEvent) {
+    if (armed?.touch) return;
+    if (armed && e.pointerId !== armed.pointerId) return;
+    reset();
+  }
+
+  /**
+   * A right-click during a mouse drag stays away (a finger's press keeps
+   * the browser's menu away in the hold)
+   */
+  function onContextMenu(e: Event) {
+    if (!dragging() || armed?.touch) return;
+
+    e.preventDefault();
+    e.stopPropagation();
   }
 
   function swallowClick(e: MouseEvent) {
@@ -315,7 +470,8 @@ export function createRailDrag(options: {
 
   window.addEventListener("pointermove", onPointerMove);
   window.addEventListener("pointerup", onPointerUp);
-  window.addEventListener("pointercancel", onPointerUp);
+  window.addEventListener("pointercancel", onPointerCancel);
+  window.addEventListener("contextmenu", onContextMenu, { capture: true });
   window.addEventListener("keydown", onKeyDown);
   window.addEventListener("blur", onWindowBlur);
   // Capture and passive are required here. Capture because scroll events don't bubble
@@ -326,10 +482,25 @@ export function createRailDrag(options: {
     window.removeEventListener("click", swallowClick, { capture: true });
     window.removeEventListener("pointermove", onPointerMove);
     window.removeEventListener("pointerup", onPointerUp);
-    window.removeEventListener("pointercancel", onPointerUp);
+    window.removeEventListener("pointercancel", onPointerCancel);
+    window.removeEventListener("contextmenu", onContextMenu, {
+      capture: true,
+    });
+    reset();
     window.removeEventListener("keydown", onKeyDown);
     window.removeEventListener("blur", onWindowBlur);
     window.removeEventListener("scroll", onScroll, { capture: true });
+    hold.dispose();
+  });
+
+  // a lifted entry has to stop the page scrolling under the finger: one
+  // non-passive touch move listener, on the rail list itself (not one per
+  // entry, and not on the scroll container around it). The price: a gesture
+  // that starts on the rail waits for the page's script to answer its first
+  // touch move before the browser scrolls.
+  onMount(() => {
+    const rail = options.container();
+    if (rail) onCleanup(hold.watch(rail));
   });
 
   return {
@@ -342,6 +513,11 @@ export function createRailDrag(options: {
      * Entry picked up with the keyboard, if any
      */
     carrying,
+
+    /**
+     * Entry a finger has rested on long enough to be dragged, if any
+     */
+    lifted,
 
     /**
      * Running commentary for a live region
@@ -415,9 +591,20 @@ export function createRailDrag(options: {
      * @param e Pointer event
      */
     press(id: string, e: PointerEvent) {
-      if (options.disabled?.() || e.button) return;
+      if (options.disabled?.() || e.button || !e.isPrimary) return;
 
-      armed = { id, x: e.clientX, y: e.clientY };
+      reset();
+      // a pen (an Apple Pencil) scrolls the rail like a finger: same hold
+      const touch = isTouchLike(e);
+      armed = {
+        id,
+        x: e.clientX,
+        y: e.clientY,
+        pointerId: e.pointerId,
+        touch,
+      };
+
+      if (touch) hold.press(e);
     },
   };
 }
