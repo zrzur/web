@@ -262,8 +262,8 @@
     },
     {
       "path": "CHANGELOG.md",
-      "sha256": "587a6db026b1d4e6cd9e74dd5bb8902d45b0129ed0289f8427743d634385bb9c",
-      "bytes": 196773,
+      "sha256": "10c0ed5dc81b1cce0606838cd3a2c2a1a278e6fc81b1c408c591d8ed18c5f715",
+      "bytes": 196058,
       "category": "public-documentation"
     },
     {
@@ -676,8 +676,8 @@
     },
     {
       "path": "packages/client/components/app/interface/channels/text/Message.tsx",
-      "sha256": "5ad783b68bf6507b39a2959db4584e40a57aeba9f8f24efec4f19fd9f87a714b",
-      "bytes": 17880,
+      "sha256": "f34d8d4aef61c69be2ab1c58c33da1f80a0f09806e1d165236d7ed6914254f6e",
+      "bytes": 17683,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -819,12 +819,6 @@
       "category": "product-source-or-build-manifest"
     },
     {
-      "path": "packages/client/components/app/interface/channels/text/interactions/BotStart.tsx",
-      "sha256": "74028904e067abfca1a30bbd42d3f409ec77b1734ce060a8a23ae700197d76ab",
-      "bytes": 11650,
-      "category": "product-source-or-build-manifest"
-    },
-    {
       "path": "packages/client/components/app/interface/channels/text/interactions/CommandPicker.tsx",
       "sha256": "a4e0d9be6ed28eaaf6b5dcf03bfe8d11f584955e5eb8a0bb08f4b3d47883afe5",
       "bytes": 43925,
@@ -838,8 +832,8 @@
     },
     {
       "path": "packages/client/components/app/interface/channels/text/interactions/InteractionHeader.tsx",
-      "sha256": "ffdc63383286ca4338a78e179dcb8cd1c0c4bbaa4c400aa9e82fb28ba09d4507",
-      "bytes": 3215,
+      "sha256": "56eea338d1a411969d66c87dd93748f1d9d407e5e0b7b7091f9be770df7f72d4",
+      "bytes": 3015,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -864,30 +858,6 @@
       "path": "packages/client/components/app/interface/channels/text/interactions/api.ts",
       "sha256": "46ca613968258fbf78cccfe7a6e86b5bbb762f70e9abdebcf4ce1546d99e1668",
       "bytes": 3998,
-      "category": "product-source-or-build-manifest"
-    },
-    {
-      "path": "packages/client/components/app/interface/channels/text/interactions/botDms.ts",
-      "sha256": "53b2720c7b81698b8000a0eb593b3325a2f7cbccf94497f1ea734b1d806f9c72",
-      "bytes": 260,
-      "category": "product-source-or-build-manifest"
-    },
-    {
-      "path": "packages/client/components/app/interface/channels/text/interactions/botLinks.test.ts",
-      "sha256": "8495b74141e881e0abdc77b86a765f4605118bad90c365dff1d16914db3c067d",
-      "bytes": 3173,
-      "category": "synthetic-test-source-or-fixture"
-    },
-    {
-      "path": "packages/client/components/app/interface/channels/text/interactions/botLinks.ts",
-      "sha256": "87bec185b741b0109d909998d8892d3b9e872e3ba96a03c4aedb391d67cd9152",
-      "bytes": 3619,
-      "category": "product-source-or-build-manifest"
-    },
-    {
-      "path": "packages/client/components/app/interface/channels/text/interactions/botStartParts.tsx",
-      "sha256": "74d6e686acc5688ce5ca44d35778cf53910afe914bdc5491c91bfa2f10f662c5",
-      "bytes": 1068,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -946,8 +916,8 @@
     },
     {
       "path": "packages/client/components/app/interface/channels/text/interactions/store.ts",
-      "sha256": "ab24c5cf8cc319b4669991ce5690aa90b7d5ed1211a59738bdd23c4a7c5c49b9",
-      "bytes": 18279,
+      "sha256": "3db0d25bb1d7ce4b7ca5966cea7b2494adf1d86531d37a0b5a1dfc081d4f9383",
+      "bytes": 17685,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -3160,8 +3130,8 @@
     },
     {
       "path": "packages/client/components/client/Controller.ts",
-      "sha256": "f17fc98660605549b453cc907a1c4ea6b3ed1730f57d06e8fb9d148ac0cd3eda",
-      "bytes": 25177,
+      "sha256": "fc80aad6c87d16bafd0811f32b2eb7faa4d4319b02f62ce429b7bbb9ceb26729",
+      "bytes": 26803,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -3219,6 +3189,12 @@
       "category": "product-source-or-build-manifest"
     },
     {
+      "path": "packages/client/components/client/keptStart.test.ts",
+      "sha256": "d0b7a936ce9d2f54336f13017a9dabb07dcc93018fec990aec3090b12749b353",
+      "bytes": 5763,
+      "category": "synthetic-test-source-or-fixture"
+    },
+    {
       "path": "packages/client/components/client/messagePruner.test.ts",
       "sha256": "417d3a429c9755b211b385cefe517616a48ebc6c3703ed011c908b4a0a281611",
       "bytes": 3935,
@@ -3244,8 +3220,8 @@
     },
     {
       "path": "packages/client/components/client/offline/index.ts",
-      "sha256": "fc6e87d1fc65783664375c4e836015e38a857bb7a686331c8e9430dd1c56ceb1",
-      "bytes": 7893,
+      "sha256": "b09bd875a35f3dd612e963b5f395a6196232dca2f68f663cf6e8984813a27d99",
+      "bytes": 8100,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -3598,8 +3574,8 @@
     },
     {
       "path": "packages/client/components/i18n/catalogs/ar/messages.po",
-      "sha256": "824787bf6f3e1916a8d050784a89e31b2d1856658b43ea86e3055356d6390bd6",
-      "bytes": 1257220,
+      "sha256": "e373572caa80abda89406a33626fb2f15f5ff68e47e14852b434e19510bae442",
+      "bytes": 1255577,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -3742,8 +3718,8 @@
     },
     {
       "path": "packages/client/components/i18n/catalogs/de/messages.po",
-      "sha256": "4902288a94417f789fabcbaf18f878788647e6d2f0ca2f4b7d6196db666f646f",
-      "bytes": 1161836,
+      "sha256": "8fd3adc7ac9a2b14600fcc7dee24be63cf4c135fb1cc39070cabf1bcd4cc7dfb",
+      "bytes": 1160277,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -3778,8 +3754,8 @@
     },
     {
       "path": "packages/client/components/i18n/catalogs/en/messages.po",
-      "sha256": "1fef1db20edad843efa0070052fb5d4750faeecfa3e3419c331fd96d0c9d4e09",
-      "bytes": 1118939,
+      "sha256": "d3b32c6fd3a1216998b3a86409e7e155ff9c6a311de1f4e68d96ac490f649d6b",
+      "bytes": 1117448,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -4384,8 +4360,8 @@
     },
     {
       "path": "packages/client/components/instance/Instance.ts",
-      "sha256": "5a531110eb3d9ad8a27d5754ad782a2ea0441ed9fd66778f3aa4479687236a22",
-      "bytes": 6649,
+      "sha256": "e832b18947a705dae7c6e3309d3e3ef86f38df70b91a302f3f90cb7123a4fc95",
+      "bytes": 6741,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -6844,8 +6820,8 @@
     },
     {
       "path": "packages/client/components/ui/components/features/messaging/elements/ConversationStart.tsx",
-      "sha256": "d977b6a5db72b5be80099b45cda79b5dc6bf0a3782e9807eed86e7fb86418e15",
-      "bytes": 4961,
+      "sha256": "147dff5629de94dd72c2691a95d79095dfe460f1d07e9ed49d4c1282bcfdd3d3",
+      "bytes": 4432,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -7054,8 +7030,8 @@
     },
     {
       "path": "packages/client/components/ui/components/features/profiles/ProfileActions.tsx",
-      "sha256": "6126a8dba553be933dcd807dc5969a9b82343a055d534216fda2e5f75dc3f152",
-      "bytes": 14378,
+      "sha256": "1ac1aecbb2f6cea3d265b054160ce9ac9b03c2db896beba7fb243c3055a8cc38",
+      "bytes": 13694,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -40653,12 +40629,6 @@
       "category": "product-source-or-build-manifest"
     },
     {
-      "path": "packages/client/scripts/bot-api/examples/dm-start.mjs",
-      "sha256": "5c8abc13f1712f7e04215dc126f3d06475d0e5681b2643f03c2c740fb13f5f42",
-      "bytes": 1245,
-      "category": "product-source-or-build-manifest"
-    },
-    {
       "path": "packages/client/scripts/bot-api/examples/events.mjs",
       "sha256": "b6ff72c9785778472df5ff8fce4760e1a747845c70efc1d42d5a2047d8ebf685",
       "bytes": 1126,
@@ -40774,8 +40744,8 @@
     },
     {
       "path": "packages/client/scripts/bot-api/verification.json",
-      "sha256": "be8009aad6ee692c3815e26400693c8a37c2fc1240e78380c080290ed515cc7c",
-      "bytes": 106998,
+      "sha256": "7af18a6a2cb68695601588bfbf21a931e92ce3378e08e24bd4452934f416b6d9",
+      "bytes": 106797,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -41799,12 +41769,6 @@
       "category": "product-source-or-build-manifest"
     },
     {
-      "path": "packages/client/scripts/i18n/ui-2026112250.json",
-      "sha256": "5f5d036f77c86c602553649aa8354b27b881da200b295284c77d3f50665b45c5",
-      "bytes": 1131,
-      "category": "product-source-or-build-manifest"
-    },
-    {
       "path": "packages/client/scripts/i18n/ui-210.json",
       "sha256": "a2000336a3928f21687a94a1262b2adbd34f017573f3d1b9b342b3ca93df6d09",
       "bytes": 644,
@@ -42592,8 +42556,8 @@
     },
     {
       "path": "packages/client/src/Interface.tsx",
-      "sha256": "8ef6562b1e6116388bfcf27470800cfa86170bc86b57130690385cf096421e52",
-      "bytes": 14073,
+      "sha256": "3acd405cb8e170ede71eb25af48963aea25d48fc2344d805a258ad744cbcf5b8",
+      "bytes": 14007,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -42670,8 +42634,8 @@
     },
     {
       "path": "packages/client/src/interface/Discover.tsx",
-      "sha256": "4f750017bcec1b9cc0fa29a0319810c94a050d7b67438e9ef729bbcabd87082e",
-      "bytes": 64595,
+      "sha256": "1b04f9416c35a2d22df826ae104d7db5eaaa8e167f8816a8bbf863abbd7aec6e",
+      "bytes": 63307,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -42730,8 +42694,8 @@
     },
     {
       "path": "packages/client/src/interface/channels/ChannelHeader.tsx",
-      "sha256": "b2383efd96f5725f91b6a2f83d8fe5b316dfc52bba1aed46aae14b8493891010",
-      "bytes": 29583,
+      "sha256": "27e33749f34c2fa7f952da993de15f467eb30ba9547dd7b9950e63d3efa0a0b7",
+      "bytes": 27805,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -42778,8 +42742,8 @@
     },
     {
       "path": "packages/client/src/interface/channels/text/Composition.tsx",
-      "sha256": "a3a3fad33af6e391566d79a0bf2ae5a5c784b51a10fdd9f4fafe09e1ba26cd46",
-      "bytes": 26823,
+      "sha256": "0293613fdc06e28a2f3e25a5d4d703aa2a5c14fc558612e1153759ffa28f1b19",
+      "bytes": 25288,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -42808,8 +42772,8 @@
     },
     {
       "path": "packages/client/src/interface/channels/text/TextChannel.tsx",
-      "sha256": "89252320a665ade63846dc738e7f82e10accad56c48fd7fe486a1048e9fc962a",
-      "bytes": 19799,
+      "sha256": "18debd713bb37a68d77d8c33e97639cb9ea75bcf667472ea0b9eb20b396bdd8c",
+      "bytes": 18782,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -43198,8 +43162,8 @@
     },
     {
       "path": "packages/client/src/interface/developers/docs/DocsPortal.tsx",
-      "sha256": "45f7399eea757245e209a5f5c1388ee4b3d5f715aa1c356de147cbb22512629b",
-      "bytes": 25391,
+      "sha256": "d4d773deaecd54009fd5ae94f7182c62796abfe110779142795328775bffea02",
+      "bytes": 25344,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -43230,12 +43194,6 @@
       "path": "packages/client/src/interface/developers/docs/content/ar/authentication.md",
       "sha256": "c8740deb606660f46bc8b53cde309c0a466b304ffe31ee4f885d64946a04a52d",
       "bytes": 3636,
-      "category": "public-documentation"
-    },
-    {
-      "path": "packages/client/src/interface/developers/docs/content/ar/bots-in-dms.md",
-      "sha256": "a48819ed98911e85994ae91ab09edbf504a0c8a3fd115c4db34e73f003b595f2",
-      "bytes": 5888,
       "category": "public-documentation"
     },
     {
@@ -43467,12 +43425,6 @@
       "category": "public-documentation"
     },
     {
-      "path": "packages/client/src/interface/developers/docs/content/bots-in-dms.md",
-      "sha256": "9028a02c8870c2c24e13a712b07b3265d347253f8a6a98501352f9d52213299d",
-      "bytes": 5205,
-      "category": "public-documentation"
-    },
-    {
       "path": "packages/client/src/interface/developers/docs/content/changelog.md",
       "sha256": "5b9936af3bfa7d01249886d6144ea04e4e4649def2ee0deb6daed67d411977ec",
       "bytes": 10041,
@@ -43512,12 +43464,6 @@
       "path": "packages/client/src/interface/developers/docs/content/de/authentication.md",
       "sha256": "09fda91620cea20c12112b1345f3b58dd24a6dbda62d6e04f0906a128335d4b4",
       "bytes": 2992,
-      "category": "public-documentation"
-    },
-    {
-      "path": "packages/client/src/interface/developers/docs/content/de/bots-in-dms.md",
-      "sha256": "6b8b759f36f2d2e5adf14a9cf8ced41a89ad3e528adf1992bc41586740150917",
-      "bytes": 4896,
       "category": "public-documentation"
     },
     {
@@ -43990,8 +43936,8 @@
     },
     {
       "path": "packages/client/src/interface/developers/docs/pageOrder.ts",
-      "sha256": "d67a7a355a6913dfc8471908ef21814b4902b68d0629054d123cda5bdabd7c52",
-      "bytes": 1878,
+      "sha256": "00b61988e0e421b4a07434abdd296d62dbd3f3b6d9764a20b0c74c9d930897c5",
+      "bytes": 1857,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -44440,14 +44386,14 @@
     },
     {
       "path": "packages/client/src/redirects.dom.test.tsx",
-      "sha256": "f6708ceac2f0271741eec833dbb59260bf965b2c601817c2a5b2ebc7d1d4ea0c",
-      "bytes": 9336,
+      "sha256": "ed2fd9e219c3242c52f20bec42eec3c53337e5887508c94370c23259a229f536",
+      "bytes": 6400,
       "category": "synthetic-test-source-or-fixture"
     },
     {
       "path": "packages/client/src/redirects.tsx",
-      "sha256": "d022cd618d585eaabcccdd6f5450e7160d8502d50e34c167b3375444ab733427",
-      "bytes": 6528,
+      "sha256": "5f2937655835857017f1312fd9e137920eb8d8152e6e3cd1a922b15b31b2f24b",
+      "bytes": 4365,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -45252,7 +45198,7 @@
   "submodules": [
     {
       "path": "packages/stoat.js",
-      "commit": "44370e870f525e6a7652f2f5c1907307f3cc6555"
+      "commit": "2cf72bf58bbcc5b17168d041b1df0f1d19ff824f"
     }
   ]
 }
