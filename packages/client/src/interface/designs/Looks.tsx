@@ -1,6 +1,7 @@
 import { For, Show, createMemo, createSignal } from "solid-js";
 
 import { Trans, useLingui } from "@lingui/solid/macro";
+import { cva } from "styled-system/css";
 import { styled } from "styled-system/jsx";
 
 import { useStyleLabels } from "@revolt/app/interface/settings/user/profile/styleLabels";
@@ -9,6 +10,7 @@ import { useError } from "@revolt/i18n";
 import { useInstance } from "@revolt/instance";
 import { Avatar } from "@revolt/ui";
 import { AvatarDecoration } from "@revolt/ui/components/features/profiles/AvatarDecoration";
+import { FramedCard } from "@revolt/ui/components/features/profiles/frames/ProfileFrame";
 import {
   NameplateMotion,
   useDesignMotion,
@@ -21,6 +23,7 @@ import {
   nameplateBackground,
   userStyleOf,
 } from "@revolt/ui/components/features/profiles/userStyle";
+import { sendableStyle } from "@revolt/ui/components/features/profiles/userStyleExtras";
 import { Icon } from "@revolt/ui/icons/Icon";
 import { useAccountGate } from "../../DesignsSite";
 
@@ -235,21 +238,6 @@ export function isWearing(style: UserStyle | undefined, look: Look) {
   );
 }
 
-/** What the API accepts for a style (no file fields, no empty parts) */
-export function sendableStyle(style: UserStyle): UserStyle {
-  return {
-    ...(style.theme?.length ? { theme: style.theme } : {}),
-    ...(style.name_font ? { name_font: style.name_font } : {}),
-    ...(style.name_colour?.length ? { name_colour: style.name_colour } : {}),
-    ...(style.decoration ? { decoration: style.decoration } : {}),
-    ...(style.nameplate ? { nameplate: style.nameplate } : {}),
-    ...(style.effect ? { effect: style.effect } : {}),
-    ...(style.effect && style.effect_file
-      ? { effect_file: style.effect_file }
-      : {}),
-  };
-}
-
 /**
  * Wear a style (or part of one) and offer to go back: the previous style
  * is kept until something else is worn
@@ -319,7 +307,7 @@ export function StyleCard(props: {
     nameplateBackground(props.style, instance.mediaUrl, { moving: motion() });
   const theme = () => props.style.theme ?? ["#2a2c3d", "#1d1f2d"];
 
-  return (
+  const card = () => (
     <Card
       data-compact={props.compact ? "" : undefined}
       data-feature={props.feature ? "" : undefined}
@@ -367,7 +355,34 @@ export function StyleCard(props: {
       </Body>
     </Card>
   );
+
+  // a frame reaches past the card: the card keeps room for it around it
+  return (
+    <Show when={props.style.profile_frame} fallback={card()}>
+      <FramedCard
+        class={props.compact ? framedCompact() : framedRoom()}
+        frame={props.style.profile_frame}
+        file={props.style.profile_frame_file}
+        phone={false}
+      >
+        {card()}
+      </FramedCard>
+    </Show>
+  );
 }
+
+/**
+ * Room round the card for its frame. A preview card is drawn with 2 or 3 px
+ * pixels, so the frame uses at most 42 px at the sides, 72 above and 54 below.
+ */
+const framedRoom = cva({
+  base: { margin: "72px 42px 54px" },
+});
+
+/** A small card on a wall tile: the same room, a little tighter */
+const framedCompact = cva({
+  base: { margin: "52px 30px 38px" },
+});
 
 /** Grid of looks with a preview, a name, a line and a Wear button */
 export function LookGrid(props: { looks?: Look[]; limit?: number }) {

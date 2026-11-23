@@ -3,20 +3,28 @@ import { join } from "node:path";
 
 import { describe, expect, it } from "vitest";
 
-import { NAME_GRADIENTS, NAME_SOLIDS } from "./nameStyles";
+import { NAME_GRADIENTS, NAME_SOLIDS, NAME_SPECTRA } from "./nameStyles";
 import { PACK_DECORATIONS, PACK_NAMEPLATES } from "./pack/designs.generated";
 import {
+  type UserStyle,
   DECORATIONS,
   NAMEPLATES,
+  NAME_EFFECTS,
   NAME_FONTS,
-  communityShownUrl,
-  effectFileUrl,
-  effectStillUrl,
+  nameColourForLight,
   nameStyle,
   nameplateBackground,
+  setNameView,
   themeColours,
   userStyleOf,
 } from "./userStyle";
+import {
+  STYLE_FIELDS,
+  communityShownUrl,
+  effectFileUrl,
+  effectStillUrl,
+  sendableStyle,
+} from "./userStyleExtras";
 
 const PUBLIC = join(__dirname, "../../../../../public");
 
@@ -197,7 +205,11 @@ describe("user style", () => {
   it("keeps every name colour readable on dark surfaces", () => {
     expect(NAME_GRADIENTS.length).toBeGreaterThanOrEqual(60);
     for (const surface of ["#171925", "#1D1F2D", "#242638"]) {
-      for (const colour of [...NAME_SOLIDS, ...NAME_GRADIENTS.flat()]) {
+      for (const colour of [
+        ...NAME_SOLIDS,
+        ...NAME_GRADIENTS.flat(),
+        ...NAME_SPECTRA.flat(),
+      ]) {
         expect(contrast(colour, surface)).toBeGreaterThanOrEqual(4.5);
       }
     }
@@ -243,5 +255,153 @@ describe("a community design shown to someone saving data", () => {
     expect(
       communityShownUrl("https://cdn", "Decoration", undefined, true),
     ).toBeUndefined();
+  });
+});
+
+describe("name effects", () => {
+  const still = { plain: false, light: false, still: false };
+
+  it("draws a spectrum of three to five colours, still unless asked", () => {
+    setNameView(still);
+    const five = ["#ff5c8a", "#ffb347", "#7ee081", "#6dd5ed", "#b794ff"];
+    const css = nameStyle({ name_colour: five });
+    expect(css["background-image"]).toContain("#b794ff");
+    expect(css.animation).toBeUndefined();
+    expect(
+      nameStyle({ name_colour: five }, { moving: true }).animation,
+    ).toContain("z-name-flow");
+    // a sixth colour is never drawn
+    const six = nameStyle({ name_colour: [...five, "#000000"] });
+    expect(six["background-image"]).not.toContain("#000000");
+  });
+
+  it("draws each effect and ignores unknown ones", () => {
+    setNameView(still);
+    for (const effect of NAME_EFFECTS) {
+      const css = nameStyle({ name_colour: ["#6dd5ed"], name_effect: effect });
+      expect(
+        css["text-shadow"] ?? css.filter ?? css["background-image"],
+      ).toBeTruthy();
+    }
+    const unknown = nameStyle({
+      name_colour: ["#6dd5ed"],
+      name_effect: "x;background:url(y)",
+    });
+    expect(unknown).toEqual({ color: "#6dd5ed" });
+  });
+
+  it("keeps an effect with a role colour, as a filter", () => {
+    setNameView(still);
+    const css = nameStyle(
+      { name_colour: ["#6dd5ed"], name_effect: "halo" },
+      { colour: false },
+    );
+    expect(css.color).toBeUndefined();
+    expect(css.filter).toContain("drop-shadow");
+  });
+
+  it("stops moving under reduced motion", () => {
+    setNameView({ ...still, still: true });
+    const css = nameStyle(
+      { name_colour: ["#b794ff", "#ff8ac4"], name_effect: "sheen" },
+      { moving: true },
+    );
+    expect(css.animation).toBeUndefined();
+    setNameView(still);
+  });
+
+  it("darkens colours on light surfaces until they read", () => {
+    for (const colour of [
+      ...NAME_SOLIDS,
+      ...NAME_GRADIENTS.flat(),
+      ...NAME_SPECTRA.flat(),
+    ]) {
+      const shade = nameColourForLight(colour);
+      for (const surface of ["#FFFFFF", "#F3F4FA", "#EEF0F7", "#E4E6F0"]) {
+        expect(contrast(shade, surface)).toBeGreaterThanOrEqual(4.5);
+      }
+    }
+    // a colour that already reads stays as it is
+    expect(nameColourForLight("#171925")).toBe("#171925");
+    setNameView({ ...still, light: true });
+    expect(nameStyle({ name_colour: ["#ffffff"] }).color).not.toBe("#ffffff");
+    expect(
+      nameStyle({ name_colour: ["#ffffff"] }, { surface: "dark" }).color,
+    ).toBe("#ffffff");
+    setNameView(still);
+  });
+
+  it("keeps every sheen stop readable on light surfaces", () => {
+    setNameView({ ...still, light: true });
+    const pairs = [
+      ...NAME_SOLIDS.map((c) => [c]),
+      ...NAME_GRADIENTS,
+      ...NAME_SPECTRA,
+    ];
+    for (const colours of pairs) {
+      const image = nameStyle({
+        name_colour: colours,
+        name_effect: "sheen",
+      })["background-image"] as string;
+      const stops = image.match(/#[0-9a-fA-F]{6}/g) ?? [];
+      // two colours and the band: nothing left as a colour-mix or white
+      expect(stops.length, image).toBe(3);
+      expect(image).not.toContain("color-mix");
+      for (const stop of stops) {
+        for (const surface of ["#FFFFFF", "#F3F4FA", "#EEF0F7", "#E4E6F0"]) {
+          expect(
+            contrast(stop, surface),
+            `${stop} in ${image}`,
+          ).toBeGreaterThanOrEqual(4.5);
+        }
+      }
+    }
+    setNameView(still);
+  });
+
+  it("shows every name plain when the viewer turns name styles off", () => {
+    setNameView({ ...still, plain: true });
+    const style = { name_font: "serif", name_colour: ["#ff0000"] };
+    expect(nameStyle(style)).toEqual({});
+    // the editor's own preview still draws
+    expect(nameStyle(style, { always: true }).color).toBe("#ff0000");
+    setNameView(still);
+  });
+});
+
+describe("a style sent to be saved", () => {
+  it("keeps every choice the server stores, and no file but an effect's", () => {
+    const full: Required<UserStyle> = {
+      theme: ["#112233", "#445566"],
+      name_font: "serif",
+      name_colour: ["#ff5c8a", "#ffb347", "#7ee081"],
+      name_effect: "sheen",
+      decoration: "c:01M5TGZFE80SKMC8JVGJKBHS2A",
+      decoration_file: "dfile",
+      nameplate: "aurora",
+      nameplate_file: "pfile",
+      effect: "c:01M5TGZFE80SKMC8JVGJKBHS2B",
+      effect_file: "efile",
+      profile_frame: "crystal",
+      profile_frame_file: "ffile",
+    };
+    // the test's style names every field the type has
+    expect(Object.keys(full).sort()).toEqual(Object.keys(STYLE_FIELDS).sort());
+    const sent = sendableStyle(full);
+    for (const [key, kind] of Object.entries(STYLE_FIELDS)) {
+      const field = key as keyof UserStyle;
+      if (kind === "choice") expect(sent[field], key).toEqual(full[field]);
+    }
+    expect(sent.name_effect).toBe("sheen");
+    expect(sent.effect_file).toBe("efile");
+    expect(sent.decoration_file).toBeUndefined();
+    expect(sent.nameplate_file).toBeUndefined();
+    expect(sent.profile_frame_file).toBeUndefined();
+  });
+
+  it("leaves out empty parts", () => {
+    expect(
+      sendableStyle({ theme: [], name_colour: [], name_effect: "" }),
+    ).toEqual({});
   });
 });

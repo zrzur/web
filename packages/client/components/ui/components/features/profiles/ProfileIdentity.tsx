@@ -12,8 +12,8 @@ import { Icon } from "@revolt/ui/icons/Icon";
 import { BotLabel } from "./BotLabel";
 import { ProfileBadges, profileBadgeIds } from "./ProfileBadges";
 import { nameRowBadges } from "./nameRowBadges";
-import { readableName, readableTheme } from "./profileTheme";
-import { nameStyle, themeColours, userStyleOf } from "./userStyle";
+import { profileNameStyle } from "./profileNameStyle";
+import { userStyleOf } from "./userStyle";
 
 /**
  * Name block under the avatar: display name (+ Bot tag), then username#tag
@@ -34,18 +34,7 @@ export function ProfileIdentity(props: {
   const pronouns = () => props.member?.pronouns ?? props.user.pronouns;
   const badges = () => nameRowBadges(profileBadgeIds(props.user), props.size);
 
-  const style = () => {
-    const chosen = userStyleOf(props.user);
-    const theme = themeColours(chosen);
-    if (!theme) return nameStyle(chosen);
-    const reads = readableName(chosen?.name_colour ?? [], readableTheme(theme));
-    return reads
-      ? nameStyle(chosen)
-      : {
-          ...nameStyle(chosen, { colour: false }),
-          color: "var(--profile-ink, var(--z-fg-primary))",
-        };
-  };
+  const style = () => profileNameStyle(userStyleOf(props.user));
 
   // "Copied!" only when the browser took it; a refusal is no page error
   async function copy() {

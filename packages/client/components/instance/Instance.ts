@@ -171,8 +171,13 @@ export function _newClient(apiUrl: string, configuration?: RevoltConfig) {
   const options = {
     baseURL: apiUrl,
     autoReconnect: false,
+    // reconnects resume the session (Controller): the missed events only
+    resume: true,
     syncUnreads: true,
     debug: import.meta.env.DEV,
+    // large gateway frames (above all the first answer, Ready) come
+    // compressed where the server allows it; otherwise text as before
+    compression: true,
   };
 
   //Env overrides (already validated at CONFIGURATION load)

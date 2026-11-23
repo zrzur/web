@@ -131,6 +131,12 @@ type Props = DialogProps & {
   /** No padding and clipped corners: the body lays itself out edge to edge */
   bare?: boolean;
 
+  /**
+   * With `bare`: nothing is clipped at the window's edge, so a profile frame
+   * can reach past it. The body then clips its own corners.
+   */
+  unclipped?: boolean;
+
   /** Explicit width in px (overrides size) */
   width?: number;
 
@@ -349,20 +355,13 @@ export function Dialog(props: Props) {
               props.onClose();
             }
           }}
-          isDisabled={
-            action.isDisabled ||
-            action.isLoading ||
-            props.isDisabled
-          }
+          isDisabled={action.isDisabled || action.isLoading || props.isDisabled}
         >
           <Show when={action.isLoading}>
             <Spinner aria-hidden="true" />
           </Show>
           {actionIcon(action, index())}
-          <Show
-            when={action.variant === "warning"}
-            fallback={action.text}
-          >
+          <Show when={action.variant === "warning"} fallback={action.text}>
             <WarningLabel>{action.text}</WarningLabel>
           </Show>
         </Button>
@@ -414,6 +413,7 @@ export function Dialog(props: Props) {
               size={props.size ?? "md"}
               data-size={props.size ?? "md"}
               bare={props.bare}
+              data-unclipped={props.unclipped ? "" : undefined}
               style={{
                 "min-width": props.minWidth
                   ? `min(${props.minWidth}px, calc(100vw - 32px))`
@@ -706,6 +706,10 @@ const Container = styled("div", {
       true: {
         padding: 0,
         overflow: "hidden",
+        // the profile scrolls inside itself, so the body needs no scroll
+        "&[data-unclipped], &[data-unclipped] > [data-dialog-body]": {
+          overflow: "visible",
+        },
         "& > [data-dialog-body]": {
           margin: 0,
           padding: 0,
@@ -920,7 +924,8 @@ const Actions = styled("div", {
     _phone: {
       flexDirection: "column-reverse",
       alignItems: "stretch",
-      "& > button": { width: "100%" },
+      // 44 px to tap on a phone (notes/mobile-design-rules.md §1)
+      "& > button": { width: "100%", minHeight: "44px" },
     },
     // at the end of a long form: one row in the given order, never wrapped;
     // on phones the buttons share the row
@@ -937,6 +942,7 @@ const Actions = styled("div", {
         paddingBlockEnd: "4px",
         "& > button": {
           width: "auto",
+          minHeight: "44px",
           flex: "1 1 auto",
           minWidth: 0,
           paddingInline: "8px",

@@ -25,6 +25,7 @@ export function opensWall(path: string) {
       "decorations",
       "nameplates",
       "effects",
+      "frames",
       "colours",
       "name",
       "community",

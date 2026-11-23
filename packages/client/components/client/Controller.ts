@@ -17,6 +17,14 @@ const opensFromKept = () =>
   typeof window !== "undefined" &&
   !!window.matchMedia?.("(max-width: 600px)").matches;
 
+/**
+ * Wider screens wait this long for the server's first answer, then open from
+ * the kept state too. On a good line the answer is there well before; on a
+ * slow one (it can take 5–15 s at 400 kbps) the lists show instead of a
+ * loading screen, and are corrected when the answer comes.
+ */
+export const KEPT_START_WIDE_MS = 1500;
+
 // Reading without a connection is not part of the files the app installs up
 // front: it loads once someone is signed in (scripts/precacheShell.mjs)
 const offlineParts = () => import("./offline");
@@ -185,6 +193,8 @@ class Lifecycle {
 
     this.#offline?.detach();
     this.#offline = undefined;
+    clearTimeout(this.#keptTimer);
+    this.#keptTimer = undefined;
     this.client = this.#controller.instance.newClient();
 
     this.client.options.channelIsMuted = (ch) =>
@@ -195,6 +205,8 @@ class Lifecycle {
 
     this.client.events.on("state", this.onState);
     this.client.on("ready", this.onReady);
+    // a resumed session: the missed events came again, no Ready follows
+    this.client.on("resumed", this.onReady);
     this.client.on("policyChanges", this.onPolicyChanges);
   }
 
@@ -239,10 +251,17 @@ class Lifecycle {
     );
   }
 
-  /** Connect; a client that cannot (no gateway address yet) is a temporary failure */
-  #connect() {
+  /**
+   * Connect; a client that cannot (no gateway address yet) is a temporary
+   * failure. `resume`: after a drop, ask the gateway for the same session:
+   * only the missed events come, not the whole first answer again (407 KB
+   * for a busy account, 14 s on a 400 kbps line). A gateway that can't
+   * resume answers with a full Ready, as before.
+   */
+  #connect(resume = false) {
     try {
-      this.client.connect();
+      if (resume) this.client.connect({ resume: true });
+      else this.client.connect();
     } catch {
       this.transition({ type: TransitionType.TemporaryFailure });
     }
@@ -270,8 +289,10 @@ class Lifecycle {
         this.#hello(0);
         break;
       case State.Connecting:
-      case State.Reconnecting:
         this.#connect();
+        break;
+      case State.Reconnecting:
+        this.#connect(true);
         break;
       case State.Connected:
         this.#controller.state.auth.markValid();
@@ -490,10 +511,15 @@ class Lifecycle {
 
   /** What this client keeps for reading without a connection */
   #offline: OfflineData | undefined;
+  /** Wider screens: opens from the kept state when the server is slow */
+  #keptTimer: ReturnType<typeof setTimeout> | undefined;
 
   #keepOffline(userId: string) {
     this.#offline?.detach();
     this.#offline = undefined;
+    clearTimeout(this.#keptTimer);
+    this.#keptTimer = undefined;
+    const asked = Date.now();
     const client = this.client;
     // the gateway may answer before the part has loaded: hold its state
     let early: unknown;
@@ -521,6 +547,14 @@ class Lifecycle {
         // start without a connection.
         else if (this.#connectionFailures > 0 || opensFromKept())
           void this.#startFromKept();
+        else
+          this.#keptTimer = setTimeout(
+            () => {
+              this.#keptTimer = undefined;
+              if (this.client === client) void this.#startFromKept();
+            },
+            Math.max(0, KEPT_START_WIDE_MS - (Date.now() - asked)),
+          );
       })
       .catch(() => events.off?.("event", hold));
   }
@@ -534,7 +568,11 @@ class Lifecycle {
   async #startFromKept() {
     const offline = this.#offline;
     if (!offline || this.loadedOnce()) return;
-    const restored = await offline.restore().catch(() => false);
+    // the server may answer while the kept state is being read: its answer
+    // wins, and the older kept one is not put over it
+    const restored = await offline
+      .restore(() => !this.loadedOnce() && this.#offline === offline)
+      .catch(() => false);
     // connected, or logged out, while the kept state was being read
     if (!restored || this.loadedOnce() || this.#offline !== offline) return;
     const user = this.client.user;

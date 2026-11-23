@@ -22,6 +22,7 @@ import { touchHitAreaSolo } from "@revolt/ui/components/utils/touchHitArea";
 import { Icon } from "@revolt/ui/icons/Icon";
 
 import { textMatches } from "@revolt/common/lib/arabicFold";
+import { ActivityLine } from "@revolt/ui/components/features/activity/ActivityLine";
 import { SidebarBase } from "./common";
 
 interface Props {
@@ -322,7 +323,10 @@ function Entry(props: { channel: Channel; active: boolean }) {
                     />
                   }
                 >
-                  <Show when={status()}>
+                  <Show
+                    when={status()}
+                    fallback={<ActivityLine user={props.channel.recipient} />}
+                  >
                     <TextWithEmoji content={status()!} />
                   </Show>
                 </Show>

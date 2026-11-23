@@ -1,4 +1,4 @@
-import { onMount } from "solid-js";
+import { Show, onMount } from "solid-js";
 
 import { Trans } from "@lingui/solid/macro";
 import { cva } from "styled-system/css";
@@ -21,6 +21,8 @@ export function InteractionHeader(props: {
   serverId?: string;
   /** Bot that answered, to tell slash commands from right-click Apps commands */
   botId?: string;
+  /** The answer to Start in a DM with the bot: "<user> started the bot" */
+  started?: boolean;
 }) {
   const client = useClient();
   const user = () => client().users.get(props.userId);
@@ -62,9 +64,11 @@ export function InteractionHeader(props: {
         <Avatar src={member()?.avatarURL ?? user()?.avatarURL} size={16} />
         <strong>{name()}</strong>
       </span>
-      <Trans>
-        used <Command dir="ltr">{command()}</Command>
-      </Trans>
+      <Show when={!props.started} fallback={<Trans>started the bot</Trans>}>
+        <Trans>
+          used <Command dir="ltr">{command()}</Command>
+        </Trans>
+      </Show>
     </Base>
   );
 }

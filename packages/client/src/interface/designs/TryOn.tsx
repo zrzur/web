@@ -14,15 +14,17 @@ import { useError } from "@revolt/i18n";
 import { useEffectLabels } from "@revolt/ui/components/features/profiles/labels";
 import {
   type UserStyle,
-  THEME_PRESETS,
   isCommunityRef,
   userStyleOf,
 } from "@revolt/ui/components/features/profiles/userStyle";
+import {
+  THEME_PRESETS,
+  sendableStyle,
+} from "@revolt/ui/components/features/profiles/userStyleExtras";
 
 import { useAccountGate } from "../../DesignsSite";
 
 import { useFontLabel } from "./Home";
-import { sendableStyle } from "./Looks";
 import { type Wear, isOn, takenOff } from "./gallery";
 
 const same = (a?: string[], b?: string[]) =>
@@ -34,9 +36,11 @@ function sameStyle(a: UserStyle, b: UserStyle) {
     same(a.theme, b.theme) &&
     (a.name_font ?? "default") === (b.name_font ?? "default") &&
     same(a.name_colour, b.name_colour) &&
+    (a.name_effect ?? "") === (b.name_effect ?? "") &&
     (a.decoration ?? "") === (b.decoration ?? "") &&
     (a.nameplate ?? "") === (b.nameplate ?? "") &&
-    (a.effect ?? "") === (b.effect ?? "")
+    (a.effect ?? "") === (b.effect ?? "") &&
+    (a.profile_frame ?? "") === (b.profile_frame ?? "")
   );
 }
 
@@ -136,6 +140,12 @@ function createTryOn() {
         key: "nameplate",
         label: labels.nameplate(style.nameplate),
         clear: { nameplate: undefined, nameplate_file: undefined },
+      });
+    if (style.profile_frame)
+      list.push({
+        key: "profile_frame",
+        label: labels.frame(style.profile_frame),
+        clear: { profile_frame: undefined, profile_frame_file: undefined },
       });
     if (style.effect)
       list.push({

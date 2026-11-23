@@ -184,13 +184,16 @@ export class OfflineData {
 
   /**
    * Put the kept state into the client, as the gateway's own would be.
-   * @returns Whether there was one
+   * @param proceed Asked once the kept state has been read: false leaves
+   *   the client as it is (the server answered in the meantime)
+   * @returns Whether it was put in
    */
-  async restore(): Promise<boolean> {
+  async restore(proceed?: () => boolean): Promise<boolean> {
     const kept = await this.#vault
       .loadSnapshot<Packet>()
       .catch(() => undefined);
     if (!isSnapshot(kept)) return false;
+    if (proceed && !proceed()) return false;
     this.#restoring = true;
     try {
       (

@@ -1,9 +1,11 @@
-import { Match, Switch, createSignal } from "solid-js";
+import { Match, Show, Switch, createSignal } from "solid-js";
 
 import { useLingui } from "@lingui/solid/macro";
 import { styled } from "styled-system/jsx";
 
+import { useClient } from "@revolt/client";
 import { Segmented } from "@revolt/ui";
+import { ProfilePreview } from "@revolt/ui/components/features/profiles/frames/ProfilePreview";
 import type { UserStyle } from "@revolt/ui/components/features/profiles/userStyle";
 
 import { StyleCard } from "./Looks";
@@ -17,6 +19,7 @@ type Place = "profile" | "chat" | "members";
  */
 export function Mirror(props: { style: UserStyle; label?: string }) {
   const { t } = useLingui();
+  const client = useClient();
   const [place, setPlace] = createSignal<Place>("profile");
   return (
     <Base>
@@ -33,7 +36,15 @@ export function Mirror(props: { style: UserStyle; label?: string }) {
       <Well>
         <Switch>
           <Match when={place() === "profile"}>
-            <StyleCard style={props.style} feature />
+            {/* signed in: your own profile card as people see it, wearing
+                what you try on (a frame shows whole round it); a visitor
+                sees the sample card */}
+            <Show
+              when={client().user}
+              fallback={<StyleCard style={props.style} feature />}
+            >
+              {(me) => <ProfilePreview user={me()} style={props.style} />}
+            </Show>
           </Match>
           <Match when={place() === "chat"}>
             <ChatScene style={props.style} />

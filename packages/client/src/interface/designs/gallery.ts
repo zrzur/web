@@ -4,6 +4,8 @@ import type { UserStyle } from "@revolt/ui/components/features/profiles/userStyl
 export type TileKind =
   | "look"
   | "frame"
+  /** a frame around the whole profile card */
+  | "card"
   | "plate"
   | "effect"
   | "paint"
@@ -20,6 +22,7 @@ export type WallFilter =
   | "decorations"
   | "nameplates"
   | "effects"
+  | "frames"
   | "colours"
   | "name"
   | "community";
@@ -35,6 +38,7 @@ export const RHYTHM: TileKind[] = [
   "plate",
   "maker",
   "effect",
+  "card",
   "frame",
   "look",
   "type",

@@ -4416,6 +4416,11 @@
   "checked": "2026-11-21",
   "test": "examples-check: /join gets a voice ticket"
  },
+ "TUTORIAL dm-start.mjs": {
+  "level": "live",
+  "checked": "2026-11-23",
+  "test": "bot-dms e2e: the example runs as a real bot; Start with a payload, its button, ar and en at desktop and 375 px"
+ },
  "TUTORIAL welcome.mjs": {
   "level": "live",
   "checked": "2026-11-21",

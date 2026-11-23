@@ -1,0 +1,58 @@
+{
+  "Edge": [
+    "حافّة",
+    "Kontur"
+  ],
+  "Lifted": [
+    "بارز",
+    "Erhaben"
+  ],
+  "Sheen": [
+    "لمعة",
+    "Glanz"
+  ],
+  "Spectrum": [
+    "طيف",
+    "Spektrum"
+  ],
+  "Choose effect": [
+    "اختر المؤثر",
+    "Effekt wählen"
+  ],
+  "Add a colour": [
+    "أضف لونًا",
+    "Farbe hinzufügen"
+  ],
+  "Colour {0}": [
+    "اللون {0}",
+    "Farbe {0}"
+  ],
+  "Edge: the first colour fills the letters, the second draws the border.": [
+    "الحافّة: اللون الأول يملأ الحروف، والثاني يرسم حدّها.",
+    "Kontur: Die erste Farbe füllt die Buchstaben, die zweite zeichnet den Rand."
+  ],
+  "Pick a font, colours and an effect for your display name.": [
+    "اختر خطًا وألوانًا ومؤثرًا لاسمك الظاهر.",
+    "Wähle Schriftart, Farben und einen Effekt für deinen Anzeigenamen."
+  ],
+  "In a server, a role colour wins over yours, but your font and effect stay. On light themes your colours are darkened a little so the name stays readable.": [
+    "في السيرفر يتقدّم لون الدور على لونك، ويبقى خطّك ومؤثرك. في السمات الفاتحة تُعتَّم ألوانك قليلًا ليبقى الاسم مقروءًا.",
+    "Auf einem Server gilt die Rollenfarbe statt deiner, Schriftart und Effekt bleiben. In hellen Designs werden deine Farben etwas abgedunkelt, damit der Name lesbar bleibt."
+  ],
+  "Show name styles": [
+    "إظهار أنماط الأسماء",
+    "Namensstile anzeigen"
+  ],
+  "Fonts, colours and effects people chose for their names. Off shows every name plain.": [
+    "الخطوط والألوان والمؤثرات التي اختارها الناس لأسمائهم. عند الإيقاف تظهر كل الأسماء بخط عادي.",
+    "Schriftarten, Farben und Effekte, die andere für ihre Namen gewählt haben. Aus zeigt alle Namen schlicht."
+  ],
+  "Remove the last colour": [
+    "إزالة آخر لون",
+    "Letzte Farbe entfernen"
+  ],
+  "Show all": [
+    "عرض الكل",
+    "Alle anzeigen"
+  ]
+}

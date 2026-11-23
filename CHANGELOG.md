@@ -2,6 +2,20 @@
 
 ## Unreleased
 
+### Name styles (2026-11-22, owner's request)
+
+* **More ways to write your name:** a spectrum of three to five colours that runs round the name, and four effects on top of any colour: Halo, Edge, Lifted and Sheen. With a role colour in a server, your font and effect stay. Settings → Profile → Look → Name style; the dialog is laid out for phones first, with the preview pinned on top and drawn in the theme you use.
+* **Motion only where one name is shown** (a profile, the editor); lists keep a still frame, and reduced motion stills everything.
+* **Readable on light themes:** each colour is darkened, same hue, until it reads at 4.5:1 on the darkest light surface. The bright band of a Sheen is the lightest tint that still reads, never white. A themed profile card draws the name for its own deep surface, not the app's.
+* **Settings → Advanced → Show name styles:** off, every name is plain. Your own preview in the editor still draws.
+* **Saving keeps every part of the look:** one shared `sendableStyle` sends every choice the server stores (name effect and frame included); Designs uses it too.
+
+### Profile frames: creators' frames wait for approval (2026-11-23)
+
+* Creators' frames show only where the server has them open (`GET /` `features.community_frames`, off by default): Designs asks for none and opens no creator's frame page, and the frame dialog offers none. Zrzur's own Crystal cave is not affected.
+* The frame drawings load the first time a frame is shown, so the app's first load carries no frame art. The drawing's big cluster sits at the start side in Arabic too (mirrored in RTL).
+* The frame dialog's list items wrap the buttons (`role="listitem"` no longer on a button); Designs draws at most six frame tiles as your live profile, the rest as the sample card.
+
 ### A bot's bio shows on its edit page (2026-11-22)
 
 * **Fixed:** in the Developer Portal, a bot's edit page showed an empty Bio field although the bot had one; Reset brought it back. The bio arrives with the profile, and the form copies it into the text editor from an effect that ran after the editor was made but before the editor's own effects had run once. The editor deferred its first look at the value, took the copied bio as already shown and never put it in the field. It now compares with the text it was made with, so a value set at that moment is shown. The same applies to the placeholder and name of every text editor, and to your own profile's Bio.
@@ -102,6 +116,46 @@
 * **Each system has its own set:** macOS uses Command and Option (Command+Option+↑/↓ for servers, Command+Control+I for mentions); Linux keeps the Windows keys except where the desktop takes them: servers are Alt+Page Up/Down (Ctrl+Alt+arrows switch workspaces) and upload is Ctrl+Alt+U (Ctrl+Shift+U is IBus's Unicode entry). The system is read from the desktop app, then the browser's client hints, then `navigator.platform`. The Ctrl+/ screen shows this device's keys with its own symbols, and a switch shows the macOS, Windows or Linux set to read. Keys macOS, Windows and Linux keep for themselves are refused when you record a shortcut.
 * All keys are matched by their place on the keyboard (`event.code`), so they work with Arabic and German layouts; a single-letter key never acts while you type.
 
+### Profile frames (2026-11-21, owner's request)
+
+* **A frame round the whole profile card:** Zrzur's own frames are hand-made pixel art, added one at a time; the first is Crystal cave (amethyst and teal crystals growing out of a stone shelf round two opposite corners of the card, with sparkles). Creators' frames are pictures on a fixed template. A frame is drawn round the card, the full profile and the phone profile and reaches past their edges (4 px pixels, 3 on a phone, smaller on preview cards); it reaches at most two pixels into the card. It never takes a click or a scroll, is hidden from screen readers and adds nothing to the layout. Its sparkles twinkle, but not under reduced motion, Save data or with profile effects off.
+* **Where to choose it:** Settings → Profile → Look → Profile frame (a dialog with a preview), and Designs → Frames (try on, then Save, as the other kinds).
+* **Saving a look no longer drops parts it did not name:** the three places that built the saved style each had their own list; they share `sendableStyle` now, which includes the frame.
+* A bare `Dialog` can be `unclipped` so a frame reaches past it; the profile then clips its own corners.
+
+### Rich presence (2026-11-22, shown only when the server has `features.rich_presence` on)
+
+* **What people are doing right now:** one line under the name in the member list and the DM list ("Playing Star Kebab", "Using Visual Studio Code", "Listening to Spotify", with its own icon) when they have no status text, and an Activity part on the profile card and the full profile, in the same panel as the Steam games card: a 36 px picture tile (only from Zrzur's file server or proxy), name, details · state, "Started 12 minutes ago" or "Ends in 5 minutes", where it came from (the app, the desktop app, Steam) and up to two buttons (44 px on phones) that open through the link warning. A Steam picture carries Valve's credit line. The main activity first (the app's own report, then what the desktop saw, then Steam); a game reported twice shows once. Hidden while the person is offline or invisible. One clock ticks for all timers, only while one is on screen.
+* **Off for everyone until chosen** (legal check RP-01..RP-05): once, after the server turns the feature on, a question "Show what you are playing?" with "Turn on" and "Not now" of the same weight; "Not now" only notes the answer. Under 18 or with no stated age the page says only friends see it (the server decides).
+* **Settings → Activity** (web and desktop): "Share what you are doing" (off removes what others see at once; a line on what app and site names can reveal), "Show what you play on Steam", a preview of what others see, and the privacy facts. In the desktop app also: "Detect games and apps", the list of 88 games and apps with on/off and Rename, "Add a program" from the programs running, the apps that set an activity with Block and Forget (a new app waits with "<app> wants to show what you are doing on Zrzur." and Show / Block, with its program path), pairing for the browser extension (an expired code disappears), and "Games made for other chat apps" (says when Zrzur stepped aside). Rows are keyed by id, so a row keeps its input while the desktop updates. The privacy part uses the privacy policy's words. In a browser the page says it cannot see running programs.
+* The desktop app's reports go to the server at most once every 4.5 s (the server takes 5 changes in 20 s), the newest of each kind wins, and both are sent again after a reconnect. A value the server refused (`ActivityRefused`, the connection stays) is never sent again; after a rate limit it is tried once the wait is over. A privacy change from another device reaches the desktop at once (`PrivacyUpdate`).
+* Translations: a new dated translations file may only add strings (test), so "{0} left" (de) and "Game" (ar) keep their meaning; the activity's "Started {0}", "Turn on", "Not now", "Show" and "Block" have their own context.
+* Developer docs: "Rich presence for games" (en, ar, de) with a runnable example (`@zrzur/sdk/rpc`).
+* Every new text in English, Arabic and German.
+
+### Custom invite links follow the rule (2026-11-21, owner's rule)
+
+* Server settings → Invites and sharing says in one line who can have a custom link: official and partner servers, and servers with 1,000 members that are active (100 messages from 20 members in 30 days; the numbers come from the server). A server that can't have one sees why instead of the claim field: its members against 1,000 and its activity against the rule (and, with billing on, the Wings level as another way in).
+* A server whose link counts down sees a banner with the date the link ends and what keeps it. A refused claim (`VanityNotEligible`) is explained in plain words in the same panel (ar, en, de).
+
+### Bots in direct messages (2026-11-22, owner's request)
+
+* **Start screen:** an empty conversation with a bot shows its picture, name, Bot label (with the verified check), its About text, up to five of its global commands ("What this bot can do") and a filled **Start** button with one line on what it does. Start sends the bot a `Start` interaction; its answer shows "… started the bot" above it. The card stays at the top of the conversation without the button once someone wrote or Start was pressed. Shown only when the server has `features.bot_dms`.
+* **Bot links:** `/b/{id}?start=ref` (and `/bot/{id}?start`) open the conversation with the bot instead of the Add bot dialog, with Start carrying `ref`. In a conversation that already has messages, a Start bar sits above the message box. A value the server would refuse is dropped; the conversation still opens.
+* **Message:** the bot's profile card has a Message button where people have the message box; Discover's bot page has Message beside Copy link.
+* **Commands** button in the message box of a bot conversation (desktop and phone): opens the bot's command list, as typing `/` does.
+* **Stop bot** in the conversation's header menu (desktop: a new "Bot options" button; phones: More) blocks the bot. The message box gives way to "You stopped … It can't send you messages." with **Restart bot**, which unblocks and presses Start again. The menu also has View profile.
+* With `features.bot_dms` off nothing of this shows: no Start card, Commands button, Bot options, stopped notice or Message button for bots, and a bot link with `?start` opens Add bot as before. Discover's site reads the flag from the API.
+* Phones: a conversation with a bot has no call buttons in its header, so the bot's name shows in full. Start, the Start bar and Restart are 44 px high on phones.
+* A bot link with `?start` and the id of a person opens that person's profile.
+* Developer docs: new page "Bots in direct messages" (ar, en, de) with the runnable example `dm-start.mjs`.
+
+### Weak network: the lists show while a slow server answers (2026-11-22)
+
+* **Computers and the desktop app open from the kept state when the line is slow:** phones already showed the servers, channels and messages kept from the last connection at once. Wider screens waited for the live connection's first answer, which takes 10–15 s for a busy account on a 400 kbps line. They now wait 1.5 s for it, then show what was kept, with "Connecting…" in the title bar, and the server's answer corrects it when it comes. On a good line the answer comes first and nothing changes (`components/client/Controller.ts`).
+* **A reconnect resumes the session:** after a drop the app asks the live connection for the same session, and only the events missed in between come again, in order. Before, every reconnect downloaded the whole first answer once more (407 KB for a busy account, 14 s on a 400 kbps line). When the server can't resume (more than 2 minutes away, or it restarted), it sends the whole answer, as before (`Controller.ts`, `Instance.ts`; SDK `connect({ resume: true })`).
+* **The fresh answer always wins:** when the server answered while the kept state was still being read from the device, the older kept state was put over the fresh one. It is now left out (`offline/index.ts`, every screen size).
+
 ### A friend request opens the sender's profile (2026-11-21)
 
 * **From the phone Notifications page:** the sender's picture and the line "… sent you a friend request" are one button (44 px high) that opens their profile. Screen readers hear the sentence they see as its name, then "Open profile" (ar, en, de) as its description. Accept, Decline and Send message are separate buttons and are not touched by it. The page closes first so the profile is not under it; the profile has its own Accept.
@@ -114,6 +168,10 @@
 * The member picker of events now matches Arabic names with the folded letters too (أ/إ/آ/ا, ة/ه, ى/ي). A search of only tatweel, vowel marks or invisible marks no longer lists every member.
 * **Keyboard and screen readers:** after an add, focus returns to Add people; after a remove, it moves to the next Remove (or Add people), and a polite announcement says who was added to or removed from the list. You are never offered to yourself, and your own row has no Remove. A refused pick keeps the search; closing the picker clears the message. The row of someone who has left the server reads "A member who left" instead of an id, and keeps Remove; the server answer for them says they are no longer in the server.
 * **Threads** follow their channel's permissions, so a thread's Permissions page shows one line pointing to the channel (without a name while the channel isn't loaded) instead of the switch, the roles and the people.
+
+### Speed: the first answer of the live connection comes compressed (2026-11-21)
+
+* **Opening the app waits less on a slow connection:** the app asks the gateway for compressed frames (`compression: true` in `components/instance/Instance.ts`, SDK `Gateway` option). The first answer, which lists every server, channel and member, is about a sixth of its size where the server allows it; a server that does not compress sends text as before. Packets are still handled in the order they came.
 
 ### Speed: scrolling, switching and starting (2026-11-21)
 

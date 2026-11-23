@@ -35,6 +35,9 @@ import { lazyRetry } from "@revolt/ui/components/utils/lazyRetry";
 import { Icon } from "@revolt/ui/icons/Icon";
 import { RulesIcon } from "@revolt/ui/icons/RulesIcon";
 
+import { useBotDms } from "@revolt/app/interface/channels/text/interactions/botDms";
+import { dmBot } from "@revolt/app/interface/channels/text/interactions/botLinks";
+import { BotMenuItems } from "@revolt/app/interface/channels/text/interactions/botStartParts";
 import {
   cancelSelection,
   isSelecting,
@@ -130,7 +133,14 @@ export function ChannelHeader(props: Props) {
   const onNarrow = () => setNarrow(narrowQuery.matches);
   narrowQuery.addEventListener("change", onNarrow);
   onCleanup(() => narrowQuery.removeEventListener("change", onNarrow));
+  // a phone in a conversation with a bot: no call buttons (bots don't
+  // answer calls), so the bot's name has the room
+  const botDms = useBotDms();
+  const dmWithBot = () => botDms() && !!dmBot(props.channel);
+  const botOnPhone = () => phone() && dmWithBot();
+
   const videoCallInMore = () =>
+    !botOnPhone() &&
     narrow() &&
     !props.channel.serverId &&
     props.channel.isVoice &&
@@ -139,6 +149,7 @@ export function ChannelHeader(props: Props) {
   // what is left for the phone's More sheet; settings, threads and pins
   // moved to the details screen
   const hasMoreActions = () =>
+    dmWithBot() ||
     videoCallInMore() ||
     canSelectMessages() ||
     props.channel.type === "Group" ||
@@ -341,7 +352,13 @@ export function ChannelHeader(props: Props) {
 
         <Spacer />
 
-        <Show when={props.channel.isVoice && !voice.showCard(props.channel)}>
+        <Show
+          when={
+            props.channel.isVoice &&
+            !voice.showCard(props.channel) &&
+            !botOnPhone()
+          }
+        >
           <IconButton
             variant="toolbar"
             size="xs"
@@ -672,12 +689,43 @@ export function ChannelHeader(props: Props) {
         {/* phones: the less-used actions share one "More" sheet, so the
             channel name keeps the room it needs. Desktop has no More menu:
             selecting messages starts from a message's own menu. */}
+        {/* a DM with a bot: its profile and Stop bot, on wider screens
+            too (phones have them in the More sheet below) */}
+        <Show when={!phone() && dmWithBot()}>
+          <div
+            style={{ display: "contents" }}
+            use:floating={{
+              contextMenu: () => (
+                <ContextMenu>
+                  <BotMenuItems channel={props.channel} />
+                </ContextMenu>
+              ),
+              contextMenuHandler: "click",
+            }}
+          >
+            <IconButton
+              variant="toolbar"
+              size="xs"
+              aria-label={t`Bot options`}
+              aria-haspopup="menu"
+              data-testid="bot-dm-menu"
+              use:floating={{
+                tooltip: { placement: "bottom", content: t`Bot options` },
+              }}
+            >
+              <Icon name="dots-three" size={20} />
+            </IconButton>
+          </div>
+        </Show>
         <Show when={phone() && !phoneSearch() && hasMoreActions()}>
           <div
             style={{ display: "contents" }}
             use:floating={{
               contextMenu: () => (
                 <ContextMenu>
+                  <Show when={dmWithBot()}>
+                    <BotMenuItems channel={props.channel} />
+                  </Show>
                   <Show when={props.channel.ticket}>
                     <TicketMenuItems channel={props.channel} />
                   </Show>
@@ -769,6 +817,7 @@ export function ChannelHeader(props: Props) {
               size="xs"
               aria-label={t`More`}
               aria-haspopup="menu"
+              data-testid="channel-more"
             >
               <Icon name="dots-three" size={20} />
             </IconButton>
