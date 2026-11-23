@@ -31776,3 +31776,58 @@ msgstr "App blocked from activities"
 #: components/app/interface/safety/labels.tsx
 msgid "Picture blocked from activities"
 msgstr "Picture blocked from activities"
+
+#: components/i18n/errors.tsx
+msgid "A custom link needs at least {members} members and an active server: {messages} messages from {authors} members in the last {period} days."
+msgstr "A custom link needs at least {members} members and an active server: {messages} messages from {authors} members in the last {period} days."
+
+#. placeholder {0}: number(eligibility()?.messages ?? 0)
+#. placeholder {1}: minMessages()
+#. placeholder {2}: number(eligibility()?.authors ?? 0)
+#. placeholder {3}: minAuthors()
+#. placeholder {4}: days()
+#: components/app/interface/settings/server/invites/VanityInvite.tsx
+msgid "Activity: {0} of {1} messages from {2} of {3} members in the last {4} days"
+msgstr "Activity: {0} of {1} messages from {2} of {3} members in the last {4} days"
+
+#: components/app/interface/settings/server/invites/VanityInvite.tsx
+msgid "Checking this server…"
+msgstr "Checking this server…"
+
+#. placeholder {0}: number(eligibility()?.members ?? 0)
+#. placeholder {1}: minMembers()
+#: components/app/interface/settings/server/invites/VanityInvite.tsx
+msgid "Members: {0} of {1}"
+msgstr "Members: {0} of {1}"
+
+#. placeholder {0}: minMembers()
+#. placeholder {1}: minMessages()
+#. placeholder {2}: minAuthors()
+#. placeholder {3}: days()
+#: components/app/interface/settings/server/invites/VanityInvite.tsx
+msgid "Official and partner servers can have one, and so can servers with {0} members that are active ({1} messages from {2} members in {3} days)."
+msgstr "Official and partner servers can have one, and so can servers with {0} members that are active ({1} messages from {2} members in {3} days)."
+
+#. placeholder {0}: required()!.level
+#. placeholder {1}: required()!.supercharges
+#: components/app/interface/settings/server/invites/VanityInvite.tsx
+msgid "Or reach Wings level {0} ({1} Wings)"
+msgstr "Or reach Wings level {0} ({1} Wings)"
+
+#: components/app/interface/settings/server/invites/VanityInvite.tsx
+msgid "This server can't have a custom link yet"
+msgstr "This server can't have a custom link yet"
+
+#: components/i18n/errors.tsx
+msgid "This server needs at least {members} members for a custom link."
+msgstr "This server needs at least {members} members for a custom link."
+
+#: components/i18n/errors.tsx
+msgid "This server needs to be more active for a custom link: {messages} messages from {authors} members in the last {period} days."
+msgstr "This server needs to be more active for a custom link: {messages} messages from {authors} members in the last {period} days."
+
+#. placeholder {0}: date(endsAt()!)
+#. placeholder {1}: minMembers()
+#: components/app/interface/settings/server/invites/VanityInvite.tsx
+msgid "This server no longer meets the rule for a custom link. The link works until {0}, then the name is released. Reach {1} members and stay active to keep it."
+msgstr "This server no longer meets the rule for a custom link. The link works until {0}, then the name is released. Reach {1} members and stay active to keep it."

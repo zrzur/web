@@ -31773,3 +31773,59 @@ msgstr "حُظر التطبيق من الأنشطة"
 #: components/app/interface/safety/labels.tsx
 msgid "Picture blocked from activities"
 msgstr "حُظرت الصورة من الأنشطة"
+
+#: components/i18n/errors.tsx
+msgid "A custom link needs at least {members} members and an active server: {messages} messages from {authors} members in the last {period} days."
+msgstr "يحتاج الرابط المخصص إلى {members} عضو على الأقل وسيرفر نشط: {messages} رسالة من {authors} عضوًا خلال آخر {period} يومًا."
+
+#. placeholder {0}: number(eligibility()?.messages ?? 0)
+#. placeholder {1}: minMessages()
+#. placeholder {2}: number(eligibility()?.authors ?? 0)
+#. placeholder {3}: minAuthors()
+#. placeholder {4}: days()
+#: components/app/interface/settings/server/invites/VanityInvite.tsx
+msgid "Activity: {0} of {1} messages from {2} of {3} members in the last {4} days"
+msgstr "النشاط: {0} من {1} رسالة، كتبها {2} من {3} عضوًا خلال آخر {4} يومًا"
+
+#: components/app/interface/settings/server/invites/VanityInvite.tsx
+msgid "Checking this server…"
+msgstr "جارٍ فحص هذا السيرفر…"
+
+#. placeholder {0}: number(eligibility()?.members ?? 0)
+#. placeholder {1}: minMembers()
+#: components/app/interface/settings/server/invites/VanityInvite.tsx
+msgid "Members: {0} of {1}"
+msgstr "الأعضاء: {0} من {1}"
+
+#. placeholder {0}: minMembers()
+#. placeholder {1}: minMessages()
+#. placeholder {2}: minAuthors()
+#. placeholder {3}: days()
+#: components/app/interface/settings/server/invites/VanityInvite.tsx
+msgid "Official and partner servers can have one, and so can servers with {0} members that are active ({1} messages from {2} members in {3} days)."
+msgstr "يمكن للسيرفرات الرسمية والشريكة الحصول عليه، وكذلك السيرفرات النشطة التي لا يقل عدد أعضائها عن {0} ({1} رسالة من {2} عضوًا خلال {3} يومًا)."
+
+#. placeholder {0}: required()!.level
+#. placeholder {1}: required()!.supercharges
+#: components/app/interface/settings/server/invites/VanityInvite.tsx
+msgid "Or reach Wings level {0} ({1} Wings)"
+msgstr "أو بلّغ مستوى الأجنحة {0} ({1} من الأجنحة)"
+
+#: components/app/interface/settings/server/invites/VanityInvite.tsx
+msgid "This server can't have a custom link yet"
+msgstr "لا يمكن لهذا السيرفر الحصول على رابط مخصص بعد"
+
+#: components/i18n/errors.tsx
+msgid "This server needs at least {members} members for a custom link."
+msgstr "يحتاج هذا السيرفر إلى {members} عضو على الأقل للحصول على رابط مخصص."
+
+#: components/i18n/errors.tsx
+msgid "This server needs to be more active for a custom link: {messages} messages from {authors} members in the last {period} days."
+msgstr "يحتاج هذا السيرفر إلى نشاط أكبر للحصول على رابط مخصص: {messages} رسالة من {authors} عضوًا خلال آخر {period} يومًا."
+
+#. placeholder {0}: date(endsAt()!)
+#. placeholder {1}: minMembers()
+#: components/app/interface/settings/server/invites/VanityInvite.tsx
+msgid "This server no longer meets the rule for a custom link. The link works until {0}, then the name is released. Reach {1} members and stay active to keep it."
+msgstr "لم يعد هذا السيرفر يستوفي شرط الرابط المخصص. يعمل الرابط حتى {0}، ثم يُسترَدّ الاسم. للاحتفاظ به، يجب أن يبلغ عدد الأعضاء {1} وأن يبقى السيرفر نشطًا."
+
