@@ -117,7 +117,11 @@ declare module "solid-js" {
         /**
          * Anchor the context menu to the element (dropdown) instead of the cursor
          */
-        contextMenuPlacement?: "bottom-start" | "bottom" | "bottom-end";
+        contextMenuPlacement?:
+          | "bottom-start"
+          | "bottom"
+          | "bottom-end"
+          | "top-start";
         autoComplete?: {
           state: Accessor<AutoCompleteState>;
           selection: Accessor<number>;

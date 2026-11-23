@@ -537,6 +537,7 @@ export function ChannelHeader(props: Props) {
           <IconButton
             variant="toolbar"
             size="xs"
+            aria-label={t`Pinned messages`}
             aria-pressed={props.sidebarState!().state === "pins"}
             use:floating={{
               tooltip: {

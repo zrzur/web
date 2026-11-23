@@ -31155,3 +31155,15 @@ msgstr "عضو غادر السيرفر"
 #: components/app/interface/settings/channel/permissions/ChannelVisibility.tsx
 msgid "This thread follows who can see its channel."
 msgstr "يتبع هذا الخيط إعدادات من يرى قناته."
+
+#: components/app/interface/channels/text/EditMessage.tsx
+msgid "Escape to <0>cancel</0> · Enter to <1>save</1>"
+msgstr "اضغط Escape <0>للإلغاء</0> · Enter <1>للحفظ</1>"
+
+#: src/interface/channels/text/Composition.tsx
+msgid "{over, plural, one {This message is too long. Remove # character to send it (up to {max}).} other {This message is too long. Remove # characters to send it (up to {max}).}}"
+msgstr "{over, plural, zero {هذه الرسالة طويلة جدًا. احذف # حرفًا لإرسالها (الحد الأقصى {max}).} one {هذه الرسالة طويلة جدًا. احذف حرفًا واحدًا لإرسالها (الحد الأقصى {max}).} two {هذه الرسالة طويلة جدًا. احذف حرفين لإرسالها (الحد الأقصى {max}).} few {هذه الرسالة طويلة جدًا. احذف # أحرف لإرسالها (الحد الأقصى {max}).} many {هذه الرسالة طويلة جدًا. احذف # حرفًا لإرسالها (الحد الأقصى {max}).} other {هذه الرسالة طويلة جدًا. احذف # حرف لإرسالها (الحد الأقصى {max}).}}"
+
+#: src/interface/channels/text/Composition.tsx
+msgid "Your message is longer than the limit."
+msgstr "رسالتك أطول من الحد المسموح به."
