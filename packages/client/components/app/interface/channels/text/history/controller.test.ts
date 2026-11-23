@@ -82,6 +82,8 @@ function setup(total: number, options: { timeoutMs?: number } = {}) {
   let rowLimit = 150;
   let touching: Promise<void> | undefined;
   let liftFinger = () => {};
+  let frame: Promise<void> | undefined;
+  let showFrame = () => {};
   let state!: HistoryState<Msg>;
   const view: HistoryView = {
     atPresent: () => atPresent,
@@ -90,7 +92,7 @@ function setup(total: number, options: { timeoutMs?: number } = {}) {
       commits.push(state.window.items.length);
       moves.push(move);
     },
-    nextFrame: () => Promise.resolve(),
+    nextFrame: () => frame ?? Promise.resolve(),
     settled: (maxWaitMs) =>
       touching && maxWaitMs === undefined ? touching : Promise.resolve(),
     ready: (side) => {
@@ -119,6 +121,14 @@ function setup(total: number, options: { timeoutMs?: number } = {}) {
     /** A finger is on the list until `lift()` */
     touch: () => {
       touching = new Promise<void>((resolve) => (liftFinger = resolve));
+    },
+    /** The next frames wait until `drawFrame()` */
+    holdFrames: () => {
+      frame = new Promise<void>((resolve) => (showFrame = resolve));
+    },
+    drawFrame: () => {
+      frame = undefined;
+      showFrame();
     },
     lift: () => {
       touching = undefined;
@@ -541,6 +551,131 @@ describe("history: reconnecting", () => {
     await t.history.loadNewer();
     expect(t.state().window.atEnd).toBe(true);
     expect(t.nums()[0]).toBe(160);
+  });
+
+  it("a link being opened is not replaced by the newest page when the connection comes up", async () => {
+    // a page load with a saved session draws the channel while still
+    // connecting; the socket comes up while the page around the message is
+    // on its way
+    const t = setup(3000);
+    t.gate(true);
+    const opening = t.history.open({ around: id(1500) });
+    await flush();
+    const reload = t.history.reconnected();
+    t.release();
+    await flush();
+    t.release();
+    await Promise.all([opening, reload]);
+    expect(t.calls).toEqual(["nearby 1500"]);
+    expect(t.nums()).toContain(1500);
+    expect(t.state().window.atEnd).toBe(false);
+    expect(t.moves.at(-1)).toEqual({
+      to: "message",
+      id: id(1500),
+      glide: false,
+    });
+  });
+
+  it("after a jump that the connection overtook, missed newer messages are asked for", async () => {
+    const t = setup(3000);
+    t.gate(true);
+    const opening = t.history.open({ around: id(2990) });
+    await flush();
+    await t.history.reconnected();
+    t.release();
+    await opening;
+    t.gate(false);
+    expect(t.nums()).toContain(2990);
+    // the page reached the newest message, but one may have come meanwhile
+    expect(t.state().window.atEnd).toBe(false);
+    await t.history.loadNewer();
+    expect(t.calls).toEqual(["nearby 2990", "after 3000"]);
+    expect(t.state().window.atEnd).toBe(true);
+  });
+
+  it("a later jump is not marked stale by an earlier reconnect", async () => {
+    const t = setup(3000);
+    t.gate(true);
+    const first = t.history.open({ around: id(2990) });
+    await flush();
+    await t.history.reconnected();
+    t.gate(false);
+    const second = t.history.toMessage(id(2995));
+    t.release();
+    await Promise.all([first, second]);
+    expect(t.state().window.atEnd).toBe(true);
+  });
+
+  it("a reconnect while the first rows are being drawn is not lost", async () => {
+    const t = setup(3000);
+    t.holdFrames();
+    const opening = t.history.open();
+    await flush();
+    // the newest rows are on screen, the rest waits for the next frame
+    expect(t.commits).toEqual([15]);
+    expect(t.state().pending).toBe("initial");
+    t.add();
+    await t.history.reconnected();
+    t.drawFrame();
+    await opening;
+    await flush();
+    expect(t.calls).toEqual(["latest 30", "latest 30"]);
+    expect(t.nums()[0]).toBe(3001);
+  });
+
+  it("a jump that fails after the connection came back leaves the newer side to be asked again", async () => {
+    const t = setup(3000);
+    await t.history.open();
+    expect(t.state().window.atEnd).toBe(true);
+    t.gate(true);
+    const jump = t.history.toMessage(id(100));
+    await flush();
+    await t.history.reconnected();
+    t.failing(true);
+    t.release();
+    await jump;
+    t.gate(false);
+    t.failing(false);
+    expect(t.state().failed).toBe("around");
+    // the list kept on screen may lack what was sent while away
+    expect(t.state().window.atEnd).toBe(false);
+    t.calls.length = 0;
+    await t.history.loadNewer();
+    expect(t.calls).toEqual(["after 3000"]);
+  });
+
+  it("a first load that the connection overtook asks for the newest page again once drawn", async () => {
+    const t = setup(3000);
+    t.gate(true);
+    const opening = t.history.open();
+    await flush();
+    // sent while the connection was away: not in the first answer, never received live
+    t.add();
+    await t.history.reconnected();
+    t.gate(false);
+    t.release();
+    await opening;
+    await flush();
+    expect(t.calls).toEqual(["latest 30", "latest 30"]);
+    expect(t.nums()[0]).toBe(3001);
+    expect(t.state().window.atEnd).toBe(true);
+    expect(t.state().pending).toBeUndefined();
+  });
+
+  it("'jump to present' that the connection overtook asks for the newest page again once drawn", async () => {
+    const t = setup(3000);
+    await t.history.open({ around: id(100) });
+    t.gate(true);
+    const going = t.history.toPresent();
+    await flush();
+    t.add();
+    await t.history.reconnected();
+    t.gate(false);
+    t.release();
+    await going;
+    await flush();
+    expect(t.calls).toEqual(["nearby 100", "latest 50", "latest 30"]);
+    expect(t.nums()[0]).toBe(3001);
   });
 
   it("clears an earlier failure so loading resumes", async () => {

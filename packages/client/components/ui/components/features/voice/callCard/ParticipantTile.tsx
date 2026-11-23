@@ -179,6 +179,8 @@ export function ParticipantTile(props: TileProps) {
         onClick={() => voice.toggleFocus(track)}
         tabIndex={0}
         data-voice-participant={participant.identity}
+        // Shift+click mentions the person in the message box (Ctrl+/)
+        data-mention-user={participant.identity}
         aria-label={member()?.displayName ?? user().username}
         use:floating={{
           // TODO: Conflicts with focusing, maybe only show if clicking name itself

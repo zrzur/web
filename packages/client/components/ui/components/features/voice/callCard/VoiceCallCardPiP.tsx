@@ -57,9 +57,19 @@ export function VoiceCallCardPiP() {
   };
 
   return (
-    <MiniCard data-voice-pip>
+    <MiniCard
+      data-voice-pip
+      // the desktop app: the card can lie over the title bar, which would
+      // take the press to move the window instead
+      style={{ "-webkit-app-region": "no-drag" }}
+    >
+      {/* a tap here opens the call; a drag that starts here only moves the
+          card (floatingDrag.ts) */}
       <Back
+        data-pip-back
         type="button"
+        // the arrow keys move the card to another corner (VoiceCallCard.tsx)
+        aria-keyshortcuts="ArrowUp ArrowDown ArrowLeft ArrowRight"
         aria-label={t`Return to voice channel`}
         title={t`Return to voice channel`}
         onClick={backToCall}
@@ -162,7 +172,7 @@ const Back = styled("button", {
     justifyContent: "center",
     minHeight: "44px",
     borderRadius: "var(--borderRadius-md)",
-    cursor: "pointer",
+    cursor: "inherit",
     _focusVisible: {
       outline: "2px solid var(--z-focus)",
       outlineOffset: "2px",
@@ -173,6 +183,8 @@ const Back = styled("button", {
 const MiniCard = styled("div", {
   base: {
     userSelect: "none",
+    // a finger on the card moves it, it does not scroll or zoom the page
+    touchAction: "none",
 
     pointerEvents: "all",
     width: "100%",

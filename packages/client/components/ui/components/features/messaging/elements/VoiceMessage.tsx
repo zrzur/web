@@ -1,22 +1,37 @@
 import { useLingui } from "@lingui/solid/macro";
 import { mediaPreload, saveData } from "@revolt/common/lib/saveData";
+import { useLocation } from "@revolt/routing";
 import { Icon } from "@revolt/ui/icons/Icon";
 import {
   For,
   JSX,
   Show,
   createEffect,
+  createMemo,
   createSignal,
+  createUniqueId,
+  on,
   onCleanup,
+  untrack,
 } from "solid-js";
 
 import { mediaTime } from "./MediaPlayer";
+import {
+  PlaybackFailure,
+  announcePlaybackFailure,
+  usePlaybackFailureText,
+} from "./PlaybackFailure";
 import { placeholderBars, readVoice } from "./voice";
 import "./voice.css";
+import { voiceClip, watchAddress } from "./voicePlayback";
 
 /**
  * Compact voice note: play button, waveform that fills as it plays (click
  * or drag across it to seek) and the time.
+ *
+ * The sound itself lives in voicePlayback.ts, not in this row: the message
+ * list draws a row again for many harmless reasons, and that must never stop
+ * a voice message part-way. Starting one pauses the one that played.
  */
 export function VoiceMessage(props: {
   src: string;
@@ -27,14 +42,50 @@ export function VoiceMessage(props: {
   download?: string;
   /** read the whole file for a real waveform (skip for very large files) */
   decode?: boolean;
+  /** the conversation of the message: leaving it stops the sound at once */
+  channelId?: string;
   contextMenu?: () => JSX.Element;
 }) {
   const { t } = useLingui();
-  let audio!: HTMLAudioElement;
-  const [playing, setPlaying] = createSignal(false);
-  const [current, setCurrent] = createSignal(0);
-  const [mediaDuration, setMediaDuration] = createSignal(0);
-  const [error, setError] = createSignal(false);
+  const failureId = createUniqueId();
+  const failureText = usePlaybackFailureText();
+  // one shared player per file, picked up again when the row is drawn again
+  const clip = createMemo(() => {
+    const src = props.src;
+    const shared = voiceClip(
+      src,
+      untrack(() => mediaPreload(saveData())),
+      untrack(() => props.channelId),
+    );
+    // the row shows another file now: the old one stops. A row only drawn
+    // again or scrolled away keeps a playing clip; leaving the channel stops
+    // it (watchAddress)
+    onCleanup(() => shared.release({ left: untrack(() => props.src) !== src }));
+    return shared;
+  });
+  // one watcher for the whole app: leaving a conversation stops its sound
+  try {
+    const location = useLocation();
+    watchAddress(location);
+  } catch {
+    // outside the app's router (tests): nothing to follow
+  }
+  // said aloud once, and only for the clip the user tapped: a page full of
+  // voice messages that fail together must not read out every one
+  createEffect(
+    on(
+      () => clip().error(),
+      (failed) => {
+        if (failed && untrack(() => clip().tapped()))
+          announcePlaybackFailure(failureText());
+      },
+      { defer: true },
+    ),
+  );
+  const playing = () => clip().playing();
+  const current = () => clip().current();
+  const mediaDuration = () => clip().mediaDuration();
+  const error = () => clip().error();
   // A signal, not a resource: a pending resource would suspend the channel's
   // <Suspense> and detach (and re-scroll) the whole message list.
   const [voice, setVoice] =
@@ -60,28 +111,14 @@ export function VoiceMessage(props: {
   const progress = () => (duration() ? Math.min(1, current() / duration()) : 0);
   const bars = () => voice()?.bars ?? placeholderBars(props.src);
 
-  onCleanup(() => {
-    audio?.pause();
-  });
-
-  async function toggle() {
-    if (!audio.paused) return audio.pause();
-    try {
-      await audio.play();
-    } catch (failure) {
-      if (!(failure instanceof DOMException && failure.name === "AbortError"))
-        setError(true);
-    }
-  }
+  const toggle = () => clip().toggle();
 
   function seekTo(event: PointerEvent, element: HTMLElement) {
     if (!duration()) return;
     const box = element.getBoundingClientRect();
     const rtl = getComputedStyle(element).direction === "rtl";
     const ratio = (event.clientX - box.left) / box.width;
-    audio.currentTime =
-      Math.min(1, Math.max(0, rtl ? 1 - ratio : ratio)) * duration();
-    setCurrent(audio.currentTime);
+    clip().seek(Math.min(1, Math.max(0, rtl ? 1 - ratio : ratio)) * duration());
   }
 
   const wave = (
@@ -111,9 +148,8 @@ export function VoiceMessage(props: {
         } else if (step && duration()) {
           event.preventDefault();
           const rtl = getComputedStyle(event.currentTarget).direction === "rtl";
-          audio.currentTime = Math.min(
-            duration(),
-            Math.max(0, audio.currentTime + (rtl ? -step : step)),
+          clip().seek(
+            Math.min(duration(), Math.max(0, current() + (rtl ? -step : step))),
           );
         }
       }}
@@ -134,33 +170,26 @@ export function VoiceMessage(props: {
       class="z-voice"
       data-kind={props.title ? "track" : "voice"}
       data-playing={playing()}
+      data-failed={error()}
       role="group"
       aria-label={props.title ?? t`Voice message`}
+      // the waveform is dragged sideways to seek: never a pull to reply
+      data-no-swipe
       use:floating={{ contextMenu: props.contextMenu }}
     >
-      <audio
-        ref={audio}
-        src={props.src}
-        preload={mediaPreload(saveData())}
-        onPlay={() => setPlaying(true)}
-        onPause={() => setPlaying(false)}
-        onEnded={() => {
-          setPlaying(false);
-          setCurrent(0);
-        }}
-        onTimeUpdate={() => setCurrent(audio.currentTime)}
-        onLoadedMetadata={() => setMediaDuration(audio.duration)}
-        onDurationChange={() => setMediaDuration(audio.duration)}
-        onError={() => setError(true)}
-      />
       <button
         type="button"
         class="z-voice-play"
-        aria-label={playing() ? t`Pause` : t`Play`}
-        disabled={error()}
+        aria-label={error() ? t`Try again` : playing() ? t`Pause` : t`Play`}
+        // after a failed load a tap tries again
+        aria-describedby={error() ? failureId : undefined}
         onClick={() => void toggle()}
       >
-        <Icon name={playing() ? "pause" : "play"} size={16} filled />
+        <Icon
+          name={error() ? "arrow-clockwise" : playing() ? "pause" : "play"}
+          size={16}
+          filled={!error()}
+        />
       </button>
       <Show when={props.title} fallback={wave}>
         <div class="z-voice-main">
@@ -177,9 +206,12 @@ export function VoiceMessage(props: {
       </Show>
       <span class="z-voice-time">
         {error()
-          ? t`Unavailable`
+          ? t`Try again`
           : mediaTime(playing() || current() ? current() : duration())}
       </span>
+      <Show when={error()}>
+        <PlaybackFailure id={failureId} />
+      </Show>
       <Show when={props.download}>
         <a
           class="z-voice-download"

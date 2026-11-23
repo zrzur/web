@@ -1,4 +1,5 @@
-import { lazy, mergeProps, splitProps } from "solid-js";
+import { lazy } from "@revolt/common/lib/lazyPart";
+import { type Component, mergeProps, splitProps } from "solid-js";
 
 import { IS_DEV } from "@revolt/client";
 
@@ -7,6 +8,22 @@ import { Error2Modal } from "./modals/Error2";
 import { PolicyChangeModal } from "./modals/PolicyChange";
 import { SignedOutModal } from "./modals/SignedOut";
 
+/** The windows' own parts: a failure of one of these means the window never drew */
+const windowParts = new Set<unknown>();
+
+/** lazy() for a window's own part */
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+function windowPart<T extends Component<any>>(
+  fn: () => Promise<{ default: T }>,
+) {
+  const part = lazy(fn);
+  windowParts.add(part);
+  return part;
+}
+
+/** Is this a window's own part (not one nested inside a window)? */
+export const isWindowPart = (part: unknown) => windowParts.has(part);
+
 /**
  * Render the modal
  */
@@ -14,356 +31,361 @@ import { SignedOutModal } from "./modals/SignedOut";
 /* eslint-disable solid/components-return-once */
 // every other window loads the first time it opens (smaller first load);
 // errors, sign-out and policy changes stay ready, also offline
-const AddBotModal = lazy(() =>
+const AddBotModal = windowPart(() =>
   import("./modals/AddBot").then((m) => ({ default: m.AddBotModal })),
 );
-const AddFriendModal = lazy(() =>
+const AddFriendModal = windowPart(() =>
   import("./modals/AddFriend").then((m) => ({ default: m.AddFriendModal })),
 );
-const AddMembersToGroupModal = lazy(() =>
+const AddMembersToGroupModal = windowPart(() =>
   import("./modals/AddMembersToGroup").then((m) => ({
     default: m.AddMembersToGroupModal,
   })),
 );
-const BanMemberModal = lazy(() =>
+const BanMemberModal = windowPart(() =>
   import("./modals/BanMember").then((m) => ({ default: m.BanMemberModal })),
 );
-const BanNonMemberModal = lazy(() =>
+const BanNonMemberModal = windowPart(() =>
   import("./modals/BanNonMember").then((m) => ({
     default: m.BanNonMemberModal,
   })),
 );
-const BillingCheckoutStatusModal = lazy(() =>
+const BillingCheckoutStatusModal = windowPart(() =>
   import("./modals/BillingCheckoutStatus").then((m) => ({
     default: m.BillingCheckoutStatusModal,
   })),
 );
-const ChannelInfoModal = lazy(() =>
+const ChannelInfoModal = windowPart(() =>
   import("./modals/ChannelInfo").then((m) => ({ default: m.ChannelInfoModal })),
 );
-const ChannelToggleMatureModal = lazy(() =>
+const ChannelToggleMatureModal = windowPart(() =>
   import("./modals/ChannelToggleMature").then((m) => ({
     default: m.ChannelToggleMatureModal,
   })),
 );
-const CreateBotModal = lazy(() =>
+const CreateBotModal = windowPart(() =>
   import("./modals/CreateBot").then((m) => ({ default: m.CreateBotModal })),
 );
-const CreateCategoryModal = lazy(() =>
+const CreateCategoryModal = windowPart(() =>
   import("./modals/CreateCategory").then((m) => ({
     default: m.CreateCategoryModal,
   })),
 );
-const CreateChannelModal = lazy(() =>
+const CreateChannelModal = windowPart(() =>
   import("./modals/CreateChannel").then((m) => ({
     default: m.CreateChannelModal,
   })),
 );
-const CreateGroupModal = lazy(() =>
+const CreateGroupModal = windowPart(() =>
   import("./modals/CreateGroup").then((m) => ({ default: m.CreateGroupModal })),
 );
-const CreateGroupOrServer = lazy(() =>
+const CreateGroupOrServer = windowPart(() =>
   import("./modals/CreateGroupOrServer").then((m) => ({
     default: m.CreateGroupOrServer,
   })),
 );
-const CreateInviteModal = lazy(() =>
+const CreateInviteModal = windowPart(() =>
   import("./modals/CreateInvite").then((m) => ({
     default: m.CreateInviteModal,
   })),
 );
-const CreateOrJoinServerModal = lazy(() =>
+const CreateOrJoinServerModal = windowPart(() =>
   import("./modals/CreateOrJoinServer").then((m) => ({
     default: m.CreateOrJoinServerModal,
   })),
 );
-const CreateRoleModal = lazy(() =>
+const CreateRoleModal = windowPart(() =>
   import("./modals/CreateRole").then((m) => ({ default: m.CreateRoleModal })),
 );
-const CreateServerModal = lazy(() =>
+const CreateServerModal = windowPart(() =>
   import("./modals/CreateServer").then((m) => ({
     default: m.CreateServerModal,
   })),
 );
-const CropModal = lazy(() =>
+const CropModal = windowPart(() =>
   import("./modals/CropProcess").then((m) => ({ default: m.CropModal })),
 );
-const CustomStatusModal = lazy(() =>
+const CustomStatusModal = windowPart(() =>
   import("./modals/CustomStatus").then((m) => ({
     default: m.CustomStatusModal,
   })),
 );
-const VoiceRoomModal = lazy(() =>
+const VoiceRoomModal = windowPart(() =>
   import("./modals/VoiceRoom").then((m) => ({ default: m.VoiceRoomModal })),
 );
-const InstallAppModal = lazy(() =>
+const InstallAppModal = windowPart(() =>
   import("./modals/InstallApp").then((m) => ({ default: m.InstallAppModal })),
 );
-const DeleteBotModal = lazy(() =>
+const DeleteBotModal = windowPart(() =>
   import("./modals/DeleteBot").then((m) => ({ default: m.DeleteBotModal })),
 );
-const DeleteCategoryModal = lazy(() =>
+const DeleteCategoryModal = windowPart(() =>
   import("./modals/DeleteCategory").then((m) => ({
     default: m.DeleteCategoryModal,
   })),
 );
-const CloseTicketModal = lazy(() =>
+const CloseTicketModal = windowPart(() =>
   import("./modals/CloseTicket").then((m) => ({
     default: m.CloseTicketModal,
   })),
 );
-const OpenTicketModal = lazy(() =>
+const OpenTicketModal = windowPart(() =>
   import("./modals/OpenTicket").then((m) => ({
     default: m.OpenTicketModal,
   })),
 );
-const RoomControlsModal = lazy(() =>
+const RoomControlsModal = windowPart(() =>
   import("./modals/RoomControls").then((m) => ({
     default: m.RoomControlsModal,
   })),
 );
-const DeleteChannelModal = lazy(() =>
+const DeleteChannelModal = windowPart(() =>
   import("./modals/DeleteChannel").then((m) => ({
     default: m.DeleteChannelModal,
   })),
 );
-const DeleteEmojiModal = lazy(() =>
+const DeleteEmojiModal = windowPart(() =>
   import("./modals/DeleteEmoji").then((m) => ({ default: m.DeleteEmojiModal })),
 );
-const BulkDeleteMessagesModal = lazy(() =>
+const BulkDeleteMessagesModal = windowPart(() =>
   import("./modals/BulkDeleteMessages").then((m) => ({
     default: m.BulkDeleteMessagesModal,
   })),
 );
-const RemoveLinkPreviewsModal = lazy(() =>
+const RemoveLinkPreviewsModal = windowPart(() =>
   import("./modals/RemoveLinkPreviews").then((m) => ({
     default: m.RemoveLinkPreviewsModal,
   })),
 );
-const DeleteMessageModal = lazy(() =>
+const DeleteMessageModal = windowPart(() =>
   import("./modals/DeleteMessage").then((m) => ({
     default: m.DeleteMessageModal,
   })),
 );
-const DeleteRoleModal = lazy(() =>
+const DeleteRoleModal = windowPart(() =>
   import("./modals/DeleteRole").then((m) => ({ default: m.DeleteRoleModal })),
 );
-const DeleteServerModal = lazy(() =>
+const DeleteServerModal = windowPart(() =>
   import("./modals/DeleteServer").then((m) => ({
     default: m.DeleteServerModal,
   })),
 );
-const EditBotUsernameModal = lazy(() =>
+const EditBotUsernameModal = windowPart(() =>
   import("./modals/EditBotUsername").then((m) => ({
     default: m.EditBotUsernameModal,
   })),
 );
-const CreateThreadModal = lazy(() =>
+const CreateThreadModal = windowPart(() =>
   import("./modals/CreateThread").then((m) => ({
     default: m.CreateThreadModal,
   })),
 );
-const EditEmailModal = lazy(() =>
+const EditEmailModal = windowPart(() =>
   import("./modals/EditEmail").then((m) => ({ default: m.EditEmailModal })),
 );
-const EditEmojiModal = lazy(() =>
+const EditEmojiModal = windowPart(() =>
   import("./modals/EditEmoji").then((m) => ({ default: m.EditEmojiModal })),
 );
-const EditPasswordModal = lazy(() =>
+const EditPasswordModal = windowPart(() =>
   import("./modals/EditPassword").then((m) => ({
     default: m.EditPasswordModal,
   })),
 );
-const EditServerFolderModal = lazy(() =>
+const EditServerFolderModal = windowPart(() =>
   import("./modals/EditServerFolder").then((m) => ({
     default: m.EditServerFolderModal,
   })),
 );
-const EditUsernameModal = lazy(() =>
+const EditUsernameModal = windowPart(() =>
   import("./modals/EditUsername").then((m) => ({
     default: m.EditUsernameModal,
   })),
 );
-const EmojiPreviewModal = lazy(() =>
+const EmojiPreviewModal = windowPart(() =>
   import("./modals/EmojiPreview").then((m) => ({
     default: m.EmojiPreviewModal,
   })),
 );
-const InterestsModal = lazy(() =>
+const InterestsModal = windowPart(() =>
   import("./modals/InterestsModal").then((m) => ({
     default: m.InterestsModal,
   })),
 );
-const InviteModal = lazy(() =>
+const InviteModal = windowPart(() =>
   import("./modals/Invite").then((m) => ({ default: m.InviteModal })),
 );
-const JoinServerModal = lazy(() =>
+const JoinServerModal = windowPart(() =>
   import("./modals/JoinServer").then((m) => ({ default: m.JoinServerModal })),
 );
-const KickMemberModal = lazy(() =>
+const KickMemberModal = windowPart(() =>
   import("./modals/KickMember").then((m) => ({ default: m.KickMemberModal })),
 );
-const LeaveServerModal = lazy(() =>
+const LeaveServerModal = windowPart(() =>
   import("./modals/LeaveServer").then((m) => ({ default: m.LeaveServerModal })),
 );
-const LinkWarningModal = lazy(() =>
+const LinkWarningModal = windowPart(() =>
   import("./modals/LinkWarning").then((m) => ({ default: m.LinkWarningModal })),
 );
-const MoveSuperchargeModal = lazy(() =>
+const MoveSuperchargeModal = windowPart(() =>
   import("./modals/MoveSupercharge").then((m) => ({
     default: m.MoveSuperchargeModal,
   })),
 );
-const PinMessageModal = lazy(() =>
+const PinMessageModal = windowPart(() =>
   import("./modals/PinMessage").then((m) => ({ default: m.PinMessageModal })),
 );
-const RemindMessageModal = lazy(() =>
+const RemindMessageModal = windowPart(() =>
   import("./modals/RemindMessage").then((m) => ({
     default: m.RemindMessageModal,
   })),
 );
-const CreatePollModal = lazy(() =>
+const CreatePollModal = windowPart(() =>
   import("./modals/CreatePoll").then((m) => ({
     default: m.CreatePollModal,
   })),
 );
-const PollVotersModal = lazy(() =>
+const PollVotersModal = windowPart(() =>
   import("./modals/PollVoters").then((m) => ({
     default: m.PollVotersModal,
   })),
 );
-const EndPollModal = lazy(() =>
+const EndPollModal = windowPart(() =>
   import("./modals/EndPoll").then((m) => ({ default: m.EndPollModal })),
 );
-const ForwardMessageModal = lazy(() =>
+const QuickSwitcherModal = windowPart(() =>
+  import("./modals/QuickSwitcher").then((m) => ({
+    default: m.QuickSwitcherModal,
+  })),
+);
+const ForwardMessageModal = windowPart(() =>
   import("./modals/ForwardMessage").then((m) => ({
     default: m.ForwardMessageModal,
   })),
 );
-const RemoveMemberModal = lazy(() =>
+const RemoveMemberModal = windowPart(() =>
   import("./modals/RemoveMember").then((m) => ({
     default: m.RemoveMemberModal,
   })),
 );
-const RemoveTimeoutModal = lazy(() =>
+const RemoveTimeoutModal = windowPart(() =>
   import("./modals/RemoveTimeout").then((m) => ({
     default: m.RemoveTimeoutModal,
   })),
 );
-const RenameSessionModal = lazy(() =>
+const RenameSessionModal = windowPart(() =>
   import("./modals/RenameSession").then((m) => ({
     default: m.RenameSessionModal,
   })),
 );
-const ReportContentModal = lazy(() =>
+const ReportContentModal = windowPart(() =>
   import("./modals/ReportContent").then((m) => ({
     default: m.ReportContentModal,
   })),
 );
-const InteractionsEndpointModal = lazy(() =>
+const InteractionsEndpointModal = windowPart(() =>
   import("./modals/InteractionsEndpoint").then((m) => ({
     default: m.InteractionsEndpointModal,
   })),
 );
-const ResetBotTokenModal = lazy(() =>
+const ResetBotTokenModal = windowPart(() =>
   import("./modals/ResetBotToken").then((m) => ({
     default: m.ResetBotTokenModal,
   })),
 );
-const ServerIdentityModal = lazy(() =>
+const ServerIdentityModal = windowPart(() =>
   import("./modals/ServerIdentity").then((m) => ({
     default: m.ServerIdentityModal,
   })),
 );
-const ServerEventEditorModal = lazy(() =>
+const ServerEventEditorModal = windowPart(() =>
   import("./modals/ServerEventEditor").then((m) => ({
     default: m.ServerEventEditorModal,
   })),
 );
-const ServerInfoModal = lazy(() =>
+const ServerInfoModal = windowPart(() =>
   import("./modals/ServerInfo").then((m) => ({ default: m.ServerInfoModal })),
 );
-const SignOutSessionsModal = lazy(() =>
+const SignOutSessionsModal = windowPart(() =>
   import("./modals/SignOutSessions").then((m) => ({
     default: m.SignOutSessionsModal,
   })),
 );
-const TimeoutMemberModal = lazy(() =>
+const TimeoutMemberModal = windowPart(() =>
   import("./modals/TimeoutMember").then((m) => ({
     default: m.TimeoutMemberModal,
   })),
 );
-const UserProfileModal = lazy(() =>
+const UserProfileModal = windowPart(() =>
   import("./modals/UserProfile").then((m) => ({ default: m.UserProfileModal })),
 );
-const UserProfileMutualFriendsModal = lazy(() =>
+const UserProfileMutualFriendsModal = windowPart(() =>
   import("./modals/UserProfileMutualFriends").then((m) => ({
     default: m.UserProfileMutualFriendsModal,
   })),
 );
-const UserProfileMutualGroupsModal = lazy(() =>
+const UserProfileMutualGroupsModal = windowPart(() =>
   import("./modals/UserProfileMutualGroups").then((m) => ({
     default: m.UserProfileMutualGroupsModal,
   })),
 );
-const SteamGamesModal = lazy(() =>
+const SteamGamesModal = windowPart(() =>
   import("./modals/SteamGames").then((m) => ({
     default: m.SteamGamesModal,
   })),
 );
-const UserProfileRolesModal = lazy(() =>
+const UserProfileRolesModal = windowPart(() =>
   import("./modals/UserProfileRoles").then((m) => ({
     default: m.UserProfileRolesModal,
   })),
 );
 // big windows load the first time they open (smaller start-up bundle)
-const ChangelogModal = lazy(() =>
+const ChangelogModal = windowPart(() =>
   import("./modals/Changelog").then((m) => ({ default: m.ChangelogModal })),
 );
-const GiftPlusModal = lazy(() =>
+const GiftPlusModal = windowPart(() =>
   import("./modals/GiftPlus").then((m) => ({ default: m.GiftPlusModal })),
 );
-const ImageViewerModal = lazy(() =>
+const ImageViewerModal = windowPart(() =>
   import("./modals/ImageViewer").then((m) => ({ default: m.ImageViewerModal })),
 );
-const MFAEnableTOTPModal = lazy(() =>
+const MFAEnableTOTPModal = windowPart(() =>
   import("./modals/MFAEnableTOTP").then((m) => ({
     default: m.MFAEnableTOTPModal,
   })),
 );
-const MFAFlowModal = lazy(() =>
+const MFAFlowModal = windowPart(() =>
   import("./modals/MFAFlow").then((m) => ({ default: m.MFAFlowModal })),
 );
-const MFARecoveryModal = lazy(() =>
+const MFARecoveryModal = windowPart(() =>
   import("./modals/MFARecovery").then((m) => ({ default: m.MFARecoveryModal })),
 );
-const OnboardingModal = lazy(() =>
+const OnboardingModal = windowPart(() =>
   import("./modals/Onboarding").then((m) => ({ default: m.OnboardingModal })),
 );
-const PlusCheckoutModal = lazy(() =>
+const PlusCheckoutModal = windowPart(() =>
   import("./modals/PlusCheckout").then((m) => ({
     default: m.PlusCheckoutModal,
   })),
 );
-const PromoteServerModal = lazy(() =>
+const PromoteServerModal = windowPart(() =>
   import("./modals/PromoteServer").then((m) => ({
     default: m.PromoteServerModal,
   })),
 );
-const ScreenSharePickerModal = lazy(() =>
+const ScreenSharePickerModal = windowPart(() =>
   import("./modals/ScreenSharePicker").then((m) => ({
     default: m.ScreenSharePickerModal,
   })),
 );
-const ScreenShareSettingsModal = lazy(() =>
+const ScreenShareSettingsModal = windowPart(() =>
   import("./modals/ScreenShareSettings").then((m) => ({
     default: m.ScreenShareSettingsModal,
   })),
 );
-const SettingsModal = lazy(() =>
+const SettingsModal = windowPart(() =>
   import("./modals/Settings").then((m) => ({ default: m.SettingsModal })),
 );
-const SuperchargeServerModal = lazy(() =>
+const SuperchargeServerModal = windowPart(() =>
   import("./modals/SuperchargeServer").then((m) => ({
     default: m.SuperchargeServerModal,
   })),
@@ -541,6 +563,8 @@ export function RenderModal(props: ActiveModal & { onClose: () => void }) {
       return <EndPollModal {...modalProps} />;
     case "forward_message":
       return <ForwardMessageModal {...modalProps} />;
+    case "quick_switcher":
+      return <QuickSwitcherModal {...modalProps} />;
     case "edit_bot_username":
       return <EditBotUsernameModal {...modalProps} />;
     case "screen_share_settings":

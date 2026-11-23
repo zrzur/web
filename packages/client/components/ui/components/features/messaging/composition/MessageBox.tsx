@@ -1,4 +1,12 @@
-import { Accessor, JSX, Match, Show, Switch, onMount } from "solid-js";
+import {
+  Accessor,
+  JSX,
+  Match,
+  Show,
+  Switch,
+  onCleanup,
+  onMount,
+} from "solid-js";
 
 import { Trans } from "@lingui/solid/macro";
 import { styled } from "styled-system/jsx";
@@ -66,6 +74,17 @@ interface Props {
   hasActionsAppend: boolean;
 
   /**
+   * Called when the box becomes narrower or wider than
+   * COMPOSER_COMPACT_WIDTH (the poll, GIF and voice buttons then hide)
+   */
+  onCompact?: (compact: boolean) => void;
+
+  /**
+   * Whether a reply bar or a row of files shows above the box
+   */
+  crowded?: boolean;
+
+  /**
    * Placeholder in message box
    */
   placeholder: string;
@@ -124,6 +143,45 @@ const Base = styled("div", {
       boxShadow: "var(--z-dock-focus-lift)",
     },
 
+    // a long message stops growing the box at 40 % of the height that is
+    // seen (above the on-screen keyboard and a docked emoji panel) and
+    // scrolls inside the editor instead; the box used to grow past its row
+    // and over the message list, with the send button pushed off screen.
+    // Never below one dock row, so a very short screen still has a line.
+    "--z-composer-share": "0.4",
+    "--z-composer-max-height":
+      "max(var(--z-dock-height, 56px), calc((100dvh - max(var(--keyboard-inset, 0px), env(keyboard-inset-height, 0px)) - var(--z-picker-dock, 0px)) * var(--z-composer-share)))",
+    // browsers without dvh (before Safari 15.4 / Chrome 108): a custom
+    // property keeps an unknown unit and only fails where it is used, so the
+    // fallback has to be a separate rule, not a second line before it
+    "@supports not (height: 1dvh)": {
+      "--z-composer-max-height":
+        "max(var(--z-dock-height, 56px), calc((100vh - max(var(--keyboard-inset, 0px), env(keyboard-inset-height, 0px)) - var(--z-picker-dock, 0px)) * var(--z-composer-share)))",
+    },
+    // the editor gets what is left inside the padding (2 × 7) and border
+    // (2 × 1), at least one 40 px row. The box itself has no max-height: the
+    // action column (with the length counter it is 64 px) must never be cut
+    "--z-text-editor-max-height":
+      "max(40px, calc(var(--z-composer-max-height) - 16px))",
+
+    // a finger or wheel at the top or bottom of the text does not carry on
+    // into the message list behind it
+    "& .cm-scroller": {
+      overscrollBehavior: "contain",
+    },
+
+    // a narrow box (a 900 px window with the member list: 284 px) cannot
+    // hold the text and six buttons: the poll, GIF and voice buttons
+    // (data-composer-extra) step out and wait in the "+" menu instead, so
+    // the text keeps at least half of the box. 540 px = the six 40 px
+    // buttons, gaps, padding and border (266 px) plus as much again for the
+    // text; COMPOSER_COMPACT_WIDTH below is the same number for the "+" menu
+    containerType: "inline-size",
+    containerName: "composer",
+    "@container composer (max-width: 539.98px)": {
+      "& [data-composer-extra]": { display: "none" },
+    },
+
     display: "flex",
     alignItems: "flex-start",
     gap: "2px",
@@ -138,9 +196,16 @@ const Base = styled("div", {
       true: {},
       false: {},
     },
+    // a reply bar or a row of files sits above the box: a smaller share, so
+    // the message list keeps room on a phone with the keyboard open
+    crowded: {
+      true: { "--z-composer-share": "0.2" },
+      false: {},
+    },
   },
   defaultVariants: {
     hasActionsAppend: false,
+    crowded: false,
   },
 });
 
@@ -154,7 +219,6 @@ const Parent = styled("div", {
     gap: "8px",
     // same distance from the window bottom as the account panel
     margin: "0 0 var(--z-dock-gap, 8px) 0",
-    maxHeight: "var(--layout-height-message-box)",
   },
 });
 
@@ -268,9 +332,32 @@ const ActionContainer = styled("div", {
 });
 
 /**
+ * Below this width (the content box of the message box, px) the poll, GIF
+ * and voice buttons are hidden by the container query in Base and offered in
+ * the "+" menu (keep the two numbers equal)
+ */
+export const COMPOSER_COMPACT_WIDTH = 540;
+
+/**
  * Message box
  */
 export function MessageBox(props: Props) {
+  let box: HTMLDivElement | undefined;
+
+  // tell the composition when the box is narrow (same test as the
+  // container query), so the "+" opens a menu with the hidden buttons
+  onMount(() => {
+    if (!box || !props.onCompact || typeof ResizeObserver === "undefined")
+      return;
+    let last: boolean | undefined;
+    const observer = new ResizeObserver((entries) => {
+      const width = entries[entries.length - 1].contentRect.width;
+      const compact = width > 0 && width < COMPOSER_COMPACT_WIDTH;
+      if (compact !== last) props.onCompact?.((last = compact));
+    });
+    observer.observe(box);
+    onCleanup(() => observer.disconnect());
+  });
   // props.updateDraftSelection?.(
   //   event.currentTarget.selectionStart,
   //   event.currentTarget.selectionEnd,
@@ -285,7 +372,12 @@ export function MessageBox(props: Props) {
 
   return (
     <Parent>
-      <Base hasActionsAppend={props.hasActionsAppend}>
+      <Base
+        ref={box}
+        hasActionsAppend={props.hasActionsAppend}
+        crowded={!!props.crowded}
+        data-composer-box
+      >
         <Switch fallback={props.actionsStart}>
           <Match when={props.timeoutActive || !props.sendingAllowed}>
             <InlineIcon>

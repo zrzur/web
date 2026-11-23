@@ -76,6 +76,9 @@ export class SlideDrawer {
     root.addEventListener("touchmove", this.move);
     root.addEventListener("touchend", this.move);
     root.addEventListener("touchcancel", this.cancel);
+    // a row lifted by a resting finger (touchHold): the swipe that follows
+    // moves the row, not the drawer
+    root.addEventListener("touchhold", this.cancel);
 
     createRoot((dispose) => {
       this.dispose = dispose;
@@ -273,6 +276,7 @@ export class SlideDrawer {
     this.root.removeEventListener("touchmove", this.move);
     this.root.removeEventListener("touchend", this.move);
     this.root.removeEventListener("touchcancel", this.cancel);
+    this.root.removeEventListener("touchhold", this.cancel);
     this.dispose();
   }
 

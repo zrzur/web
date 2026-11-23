@@ -1,9 +1,12 @@
 import { describe, expect, it } from "vitest";
 
 import {
+  FORMATS,
   WAVEFORM_BARS,
   isVoiceMessageName,
+  opusTypeOf,
   placeholderBars,
+  playableVoiceSrc,
   toBars,
 } from "./voice";
 
@@ -38,5 +41,37 @@ describe("voice messages", () => {
       expect(bar).toBeGreaterThan(0);
       expect(bar).toBeLessThanOrEqual(1);
     }
+  });
+
+  it("asks about Opus in the file's own container", () => {
+    expect(opusTypeOf("audio/opus")).toBe('audio/ogg; codecs="opus"');
+    expect(opusTypeOf("audio/ogg")).toBe('audio/ogg; codecs="opus"');
+    expect(opusTypeOf("video/webm")).toBe('audio/webm; codecs="opus"');
+    expect(opusTypeOf(undefined, "voice-message-1.webm")).toBe(
+      'audio/webm; codecs="opus"',
+    );
+    expect(opusTypeOf("audio/mp4")).toBe('audio/mp4; codecs="opus"');
+  });
+
+  it("plays the AAC copy where the browser can't play the recording", () => {
+    const url = "https://cdn.test/attachments/A/original";
+    // Safari before 18.4: no Ogg at all
+    const oldSafari = (type: string) =>
+      type.startsWith("audio/ogg") || type.includes("opus") ? "" : "maybe";
+    expect(
+      playableVoiceSrc(url, { contentType: "audio/opus" }, oldSafari),
+    ).toBe(`${url}?format=m4a`);
+    // Chrome, Firefox, Safari 18.4+: the recording itself
+    expect(
+      playableVoiceSrc(url, { contentType: "audio/opus" }, () => "probably"),
+    ).toBe(url);
+    expect(
+      playableVoiceSrc(`${url}?x=1`, { contentType: "video/webm" }, oldSafari),
+    ).toBe(`${url}?x=1&format=m4a`);
+  });
+
+  it("records AAC in MP4 first where the browser can", () => {
+    expect(FORMATS[0]).toEqual(["audio/mp4;codecs=mp4a.40.2", "m4a"]);
+    expect(FORMATS.at(-1)).toEqual(["audio/mp4", "m4a"]);
   });
 });

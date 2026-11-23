@@ -47,6 +47,7 @@ import {
 import { Channel } from "@zrzur/sdk/solid";
 
 import { isSelecting } from "@revolt/app/interface/channels/text/messageSelection";
+import { useMessageKeys } from "@revolt/app/interface/channels/text/useMessageKeys";
 
 import { writeAccess } from "@revolt/app/interface/channels/threadAccess";
 import { MessageComposition } from "./Composition";
@@ -162,6 +163,9 @@ export function TextChannel(props: ChannelPageProps) {
   // Get a reference to the message box's load latest function
   let jumpToBottomRef: (() => void) | undefined;
 
+  // ... and its "go to this message" function
+  let jumpToMessageRef: ((messageId: string) => void) | undefined;
+
   // Whether the reader sees the newest message (the newest messages are
   // loaded and the list is scrolled to its bottom)
   const [atEnd, setEnd] = createSignal(true);
@@ -242,6 +246,10 @@ export function TextChannel(props: ChannelPageProps) {
     window.removeEventListener("focus", onFocus);
   });
 
+  // R reply, E edit, Delete, P pin, Ctrl+C on a message; Up and Down
+  // between messages; Page Up and Down (listed in Ctrl+/)
+  useMessageKeys();
+
   // Register ack/jump latest
   createKeybind(KeybindAction.CHAT_JUMP_END, () => {
     // Mark channel as read if not already
@@ -273,6 +281,19 @@ export function TextChannel(props: ChannelPageProps) {
       () => setSidebarState({ state: "default" }),
     ),
   );
+
+  // Phones and tablets: search, pins, members and the channel's details lie
+  // over the conversation (the whole screen on phones, a side panel on
+  // tablets). Going to a message from one of them (a result, a pin, a
+  // picture) shows the conversation, or the message lands under the panel.
+  // Called by every jump, also to the message already in the address (the
+  // same pin tapped twice). On desktop the panel sits beside the
+  // conversation and stays.
+  const makeWayForJump = () => {
+    if (overlaySidebar() && sidebarState().state !== "default") {
+      setSidebarState({ state: "default" });
+    }
+  };
 
   // If this is a server text channel, sync the members
   // todo: useQuery
@@ -345,6 +366,8 @@ export function TextChannel(props: ChannelPageProps) {
             highlightedMessageId={highlightMessageId}
             clearHighlightedMessage={() => navigate(".")}
             jumpToBottomRef={(ref) => (jumpToBottomRef = ref)}
+            jumpToMessageRef={(ref) => (jumpToMessageRef = ref)}
+            onJump={makeWayForJump}
             atPresent={[atEnd, setEnd]}
           />
 
@@ -466,6 +489,14 @@ export function TextChannel(props: ChannelPageProps) {
                     setSidebarState={setSidebarState}
                     scrollTargetElement={sidebarScrollTargetElement}
                     isLargeServer={isLargeServer(props.channel.server)}
+                    onJump={(message) => {
+                      makeWayForJump();
+                      // the details' cards are buttons: the message already
+                      // in the address is gone to again from here
+                      if (message.id === highlightMessageId()) {
+                        jumpToMessageRef?.(message.id);
+                      }
+                    }}
                   />
                 </Suspense>
               </Match>

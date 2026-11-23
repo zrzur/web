@@ -71,7 +71,7 @@ describe("compileKeymap", () => {
     );
   });
 
-  it("uses Command on a Mac and Control+Option to move between servers", () => {
+  it("uses Command on a Mac and Command+Option to move between servers", () => {
     const map = compileKeymap({}, MAC);
     expect(
       matchShortcut(map, press("KeyM", { metaKey: true, shiftKey: true }), MAC),
@@ -82,10 +82,18 @@ describe("compileKeymap", () => {
     expect(
       matchShortcut(
         map,
-        press("ArrowUp", { ctrlKey: true, altKey: true }),
+        press("ArrowUp", { metaKey: true, altKey: true }),
         MAC,
       ),
     ).toBe("navigation_server_up");
+    // Control+arrows is Mission Control on a Mac
+    expect(
+      matchShortcut(
+        map,
+        press("ArrowUp", { ctrlKey: true, altKey: true }),
+        MAC,
+      ),
+    ).toBe(undefined);
   });
 
   it("never matches the Windows key off a Mac", () => {

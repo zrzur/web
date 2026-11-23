@@ -4,6 +4,7 @@ import { Icon } from "@revolt/ui/icons/Icon";
 import {
   createEffect,
   createSignal,
+  createUniqueId,
   JSX,
   onCleanup,
   onMount,
@@ -11,6 +12,12 @@ import {
 } from "solid-js";
 import { Dynamic } from "solid-js/web";
 import "./media-player.css";
+import {
+  announcePlaybackFailure,
+  PlaybackFailure,
+  usePlaybackFailureText,
+} from "./PlaybackFailure";
+import { endTurn, playFailed, takeTurn } from "./voicePlayback";
 
 export function mediaTime(value: number): string {
   if (!Number.isFinite(value) || value < 0) return "0:00";
@@ -26,6 +33,10 @@ export function MediaPlayer(props: {
   contextMenu?: () => JSX.Element;
 }) {
   const { t } = useLingui();
+  const failureId = createUniqueId();
+  const failureText = usePlaybackFailureText();
+  /** the user pressed play here: a failure is said aloud */
+  let tapped = false;
   let volumePopup!: HTMLDivElement;
   let volumeButton!: HTMLButtonElement;
   let volumeRoot!: HTMLDivElement;
@@ -49,6 +60,7 @@ export function MediaPlayer(props: {
   onCleanup(() => clearTimeout(idleTimer));
   onCleanup(() => {
     if (media) {
+      endTurn(media);
       media.pause();
       media.removeAttribute("src");
       media.load();
@@ -67,15 +79,21 @@ export function MediaPlayer(props: {
     setDuration(media.duration);
   };
   async function togglePlay() {
+    tapped = true;
     if (!media.paused) {
       media.pause();
       return;
     }
+    // as voice messages: after a failed load a tap loads the file again
+    if (error()) {
+      setError(false);
+      media.load();
+    }
+    takeTurn(media);
     try {
       await media.play();
     } catch (failure) {
-      if (!(failure instanceof DOMException && failure.name === "AbortError"))
-        setError(true);
+      if (playFailed(failure)) setError(true);
     }
   }
   function seek(value: number) {
@@ -170,6 +188,8 @@ export function MediaPlayer(props: {
         preload={mediaPreload(saveData())}
         controls={false}
         onPlay={() => {
+          // one player at a time: a voice message or another video pauses
+          takeTurn(media);
           setPlaying(true);
           wake();
         }}
@@ -182,6 +202,7 @@ export function MediaPlayer(props: {
         onError={() => {
           setPlaying(false);
           setError(true);
+          if (tapped) announcePlaybackFailure(failureText());
         }}
         onClick={() => {
           if (props.kind === "video") void togglePlay();
@@ -198,10 +219,7 @@ export function MediaPlayer(props: {
         </button>
       </Show>
       <Show when={error()}>
-        <div
-          class="z-media-error"
-          role="alert"
-        >{t`Couldn't play this media.`}</div>
+        <PlaybackFailure id={failureId} />
       </Show>
       <div class="z-media-controls">
         <input
@@ -222,15 +240,21 @@ export function MediaPlayer(props: {
         <div class="z-media-toolbar">
           <button
             type="button"
-            aria-label={playing() ? t`Pause` : t`Play`}
-            disabled={error()}
+            aria-label={error() ? t`Try again` : playing() ? t`Pause` : t`Play`}
+            aria-describedby={error() ? failureId : undefined}
             onClick={() => void togglePlay()}
           >
-            <Icon name={playing() ? "pause" : "play"} size={18} filled />
+            <Icon
+              name={error() ? "arrow-clockwise" : playing() ? "pause" : "play"}
+              size={18}
+              filled={!error()}
+            />
           </button>
-          <span class="z-media-time">
-            {mediaTime(current())}
-            <span> / {mediaTime(duration())}</span>
+          <span class="z-media-time" data-failed={error()}>
+            <Show when={!error()} fallback={t`Try again`}>
+              {mediaTime(current())}
+              <span> / {mediaTime(duration())}</span>
+            </Show>
           </span>
           <div
             class="z-media-volume"

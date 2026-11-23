@@ -10,8 +10,10 @@ import {
   Suspense,
 } from "solid-js";
 
+import { plural } from "@lingui/core/macro";
 import { useLingui } from "@lingui/solid/macro";
 import { Channel, ConnectionState } from "@zrzur/sdk/solid";
+import { styled } from "styled-system/jsx";
 
 import { useClient } from "@revolt/client";
 import { levelPerks } from "@revolt/client/billing";
@@ -20,6 +22,10 @@ import { createIsTimedOut } from "@revolt/common/lib/createIsTimedOut";
 import { translatedError } from "@revolt/i18n";
 import { useInstance } from "@revolt/instance";
 import { createKeybind, Keybind, KeybindAction } from "@revolt/keybinds";
+import {
+  listenForMentionClicks,
+  setMentionTarget,
+} from "@revolt/keybinds/mention";
 import { useModals } from "@revolt/modal";
 import { useState } from "@revolt/state";
 import {
@@ -53,6 +59,9 @@ import {
 import { startAccess } from "@revolt/app/interface/channels/threadAccess";
 import { ContextMenu, ContextMenuButton } from "@revolt/app/menus/ContextMenu";
 import Breakpoint from "@revolt/common/Breakpoint";
+import { deviceMac, shortcutFor } from "@revolt/keybinds/active";
+import { ariaKeys } from "@revolt/keybinds/keyLabels";
+import type { ShortcutId } from "@revolt/keybinds/keymap";
 import { isMac } from "@revolt/keybinds/shortcuts";
 import type { AddChoice } from "./ComposerAddPanel";
 import { RulesGate } from "./RulesGate";
@@ -112,6 +121,34 @@ export function MessageComposition(props: Props) {
   const isAlmostTooLong = () => messageLength() > maxMessageLength() - 200;
   const wayTooLong = () => messageLength() > maxMessageLength() + 9999;
 
+  /**
+   * What to do about a message over the limit, in plain words (the counter
+   * alone only turned red, and Send did nothing)
+   */
+  function tooLongText() {
+    // plain digits, like the counter next to the box
+    const over = messageLength() - maxMessageLength();
+    const max = maxMessageLength();
+    return plural(over, {
+      one: `This message is too long. Remove # character to send it (up to ${max}).`,
+      other: `This message is too long. Remove # characters to send it (up to ${max}).`,
+    });
+  }
+
+  const isTooLong = () => messageLength() > maxMessageLength();
+
+  // read out once when the text first goes over the limit (a sentence
+  // without a number, so it is not repeated on every key); the region stays
+  // mounted and empty otherwise, so screen readers announce the change
+  const [tooLongSpoken, setTooLongSpoken] = createSignal("");
+  createEffect(
+    on(isTooLong, (over, was) => {
+      if (over && !was)
+        setTooLongSpoken(t`Your message is longer than the limit.`);
+      else if (!over) setTooLongSpoken("");
+    }),
+  );
+
   // Can the user upload files here?
   const canUploadFiles = createMemo(() => {
     return (
@@ -144,6 +181,15 @@ export function MessageComposition(props: Props) {
       !isTimedOut()
     );
   });
+
+  // Nothing typed or attached: the row has room for the poll, GIF and voice
+  // buttons. They used to follow !canSend(), so a message over the length
+  // limit (it cannot be sent) brought all three back while the text was
+  // still there, and the text column was squeezed to a few pixels
+  const draftEmpty = createMemo(
+    () =>
+      !(draft()?.content ?? "").trim().length && !(draft()?.files ?? []).length,
+  );
 
   // TEMP
   function currentValue() {
@@ -328,8 +374,12 @@ export function MessageComposition(props: Props) {
   const phone = window.matchMedia(Breakpoint.phone).matches;
   let pickerTriggers:
     | {
-        onClickGif: (event: unknown, ref?: HTMLDivElement) => void;
-        onClickAdd: (event: unknown, ref?: HTMLDivElement) => void;
+        onClickGif: (
+          event: unknown,
+          ref?: HTMLElement,
+          placement?: "top-start",
+        ) => void;
+        onClickAdd: (event: unknown, ref?: HTMLElement) => void;
       }
     | undefined;
   let addButton: HTMLDivElement | undefined;
@@ -359,7 +409,28 @@ export function MessageComposition(props: Props) {
   // Ctrl+Shift+8 (Command on a Mac) opens "Create poll" for the message box
   // focused last (listed in the shortcuts screen); not while a window is
   // open or something else already took the key
+  /** `aria-keyshortcuts` for a button, with the person's own keys */
+  const keysFor = (id: ShortcutId) =>
+    ariaKeys(state.keybinds.table().byId[id], deviceMac());
   const composerKey = `${props.channel.id}:${Math.random().toString(36).slice(2)}`;
+
+  // Shift+click on a person, role or channel mentions it here (Ctrl+/):
+  // in the box used last, else the box of the channel on screen
+  onCleanup(
+    setMentionTarget({
+      key: composerKey,
+      // the box stays when the channel changes: read it each time
+      get channelId() {
+        return props.channel.id;
+      },
+      insert: (text) => {
+        if (!props.channel.havePermission("SendMessage")) return false;
+        setNodeReplacement([text]);
+        return true;
+      },
+    }),
+  );
+  listenForMentionClicks();
   const mac = isMac();
   let composerRoot: HTMLDivElement | undefined;
   onMount(() => {
@@ -370,6 +441,21 @@ export function MessageComposition(props: Props) {
     };
     const onKeyDown = (event: KeyboardEvent) => {
       if (event.defaultPrevented || event.repeat) return;
+      // Ctrl+Shift+U uploads a file, Ctrl+E opens the emoji picker
+      // (Command on a Mac; changeable in Ctrl+/)
+      const id = shortcutFor(event);
+      if (id === "upload_file" || id === "open_emoji_picker") {
+        if (composerForShortcut() !== composerKey || isOpen()) return;
+        event.preventDefault();
+        if (id === "upload_file") addFile();
+        else
+          document
+            .querySelector<HTMLElement>(
+              `[data-shortcut-target="emoji"][data-composer="${composerKey}"]`,
+            )
+            ?.click();
+        return;
+      }
       if (!isCreatePollShortcut(event, mac)) return;
       if (composerForShortcut() !== composerKey || isOpen()) return;
       event.preventDefault();
@@ -515,6 +601,12 @@ export function MessageComposition(props: Props) {
 
   // voice messages: recorded audio is sent as a normal attachment
   const [recording, setRecording] = createSignal(false);
+
+  // the message box is narrow: poll, GIF and voice live in the "+" menu
+  const [compact, setCompact] = createSignal(false);
+  // the narrow "+" menu is open (for aria-expanded)
+  const [menuOpen, setMenuOpen] = createSignal(false);
+  const canGif = () => props.channel.havePermission("SendEmbeds");
   createEffect(
     on(
       () => props.channel.id,
@@ -589,6 +681,15 @@ export function MessageComposition(props: Props) {
       <Show when={props.channel.server?.mustAcceptRules}>
         <RulesGate server={props.channel.server!} />
       </Show>
+      <LiveRegion role="status" aria-live="polite" data-composer-too-long-live>
+        {tooLongSpoken()}
+      </LiveRegion>
+      <Show when={isTooLong()}>
+        <TooLong data-composer-too-long>
+          <Icon name="warning" size={18} />
+          <TooLongText>{tooLongText()}</TooLongText>
+        </TooLong>
+      </Show>
       <MessageBox
         initialValue={initialValue()}
         nodeReplacement={nodeReplacement()}
@@ -601,53 +702,138 @@ export function MessageComposition(props: Props) {
           <Show
             when={
               props.channel.havePermission("UploadFiles") ||
-              (phone && canPoll())
+              (phone && canPoll()) ||
+              (!phone && compact() && (canPoll() || canGif()))
             }
             fallback={<MessageBox.InlineIcon size="short" />}
           >
             <MessageBox.InlineIcon>
               {/* phones: the plus opens a sheet of things to add; wider
                   screens upload a file with one click, and a right-click
-                  offers a file or a poll where polls can be posted */}
+                  offers a file or a poll where polls can be posted. In a
+                  narrow box (MessageBox COMPOSER_COMPACT_WIDTH) the poll,
+                  GIF and voice buttons are hidden and the plus opens a
+                  menu with them on a click */}
               <div
                 ref={addButton}
-                style={{ display: "contents" }}
+                // a box of its own (not display: contents): the "+" menu and
+                // the GIF picker opened from it are placed against it
+                style={{ display: "flex" }}
                 use:floating={
-                  !phone && canPoll()
+                  !phone && (canPoll() || compact())
                     ? {
-                        contextMenu: () => (
-                          <ContextMenu>
-                            <Show when={canUploadFiles()}>
-                              <ContextMenuButton
-                                icon={<Icon name="file" size={20} />}
-                                onClick={() => addFile()}
+                        contextMenu: () => {
+                          onMount(() => setMenuOpen(true));
+                          onCleanup(() => setMenuOpen(false));
+                          return (
+                            <ContextMenu>
+                              {/* one order with the phone sheet: files, GIF,
+                                  voice, poll */}
+                              <Show when={canUploadFiles()}>
+                                <ContextMenuButton
+                                  icon={<Icon name="file" size={20} />}
+                                  onClick={() => addFile()}
+                                >
+                                  {t`Upload file`}
+                                </ContextMenuButton>
+                              </Show>
+                              <Show
+                                when={compact() && canGif() && draftEmpty()}
                               >
-                                {t`Upload file`}
-                              </ContextMenuButton>
-                            </Show>
-                            <ContextMenuButton
-                              icon={<Icon name="poll" size={20} />}
-                              onClick={createPoll}
-                              data-testid="composer-create-poll"
-                            >
-                              {t`Create poll`}
-                            </ContextMenuButton>
-                          </ContextMenu>
-                        ),
+                                <ContextMenuButton
+                                  icon={<Icon name="gif" size={20} />}
+                                  onClick={() => {
+                                    // the real "+" button is the anchor and
+                                    // the trigger: Escape gives focus back to it
+                                    const plus =
+                                      addButton?.querySelector("button") ??
+                                      undefined;
+                                    // start side: grows from the "+" over
+                                    // the text, in Arabic too (floating-ui
+                                    // reads start in the writing direction)
+                                    pickerTriggers?.onClickGif(
+                                      { currentTarget: plus },
+                                      plus,
+                                      "top-start",
+                                    );
+                                  }}
+                                >
+                                  {t`GIF picker`}
+                                </ContextMenuButton>
+                              </Show>
+                              <Show
+                                when={
+                                  compact() &&
+                                  draftEmpty() &&
+                                  canUploadFiles() &&
+                                  !recording()
+                                }
+                              >
+                                <ContextMenuButton
+                                  icon={<Icon name="microphone" size={20} />}
+                                  onClick={() => setRecording(true)}
+                                >
+                                  {t`Voice message`}
+                                </ContextMenuButton>
+                              </Show>
+                              <Show when={canPoll()}>
+                                <ContextMenuButton
+                                  icon={<Icon name="poll" size={20} />}
+                                  onClick={createPoll}
+                                  data-testid="composer-create-poll"
+                                >
+                                  {t`Create poll`}
+                                </ContextMenuButton>
+                              </Show>
+                            </ContextMenu>
+                          );
+                        },
+                        // narrow box: a click opens it above the "+", towards
+                        // the text (never over the account panel in Arabic)
+                        ...(compact()
+                          ? {
+                              contextMenuHandler: "click" as const,
+                              // floating-ui reads "start" in the writing
+                              // direction: the right edge in Arabic
+                              contextMenuPlacement: "top-start" as const,
+                            }
+                          : {}),
                       }
                     : {}
                 }
               >
                 <IconButton
                   aria-label={
-                    phone ? (adding() ? t`Close` : t`Add`) : t`Upload file`
+                    phone
+                      ? adding()
+                        ? t`Close`
+                        : t`Add`
+                      : compact()
+                        ? t`Add`
+                        : t`Upload file`
                   }
-                  aria-haspopup={phone ? "dialog" : undefined}
-                  aria-expanded={phone ? adding() : undefined}
+                  aria-haspopup={
+                    phone ? "dialog" : compact() ? "menu" : undefined
+                  }
+                  aria-expanded={
+                    phone ? adding() : compact() ? menuOpen() : undefined
+                  }
                   data-testid="composer-add"
+                  aria-keyshortcuts={keysFor("upload_file")}
                   onPress={(event) => {
                     if (phone) pickerTriggers?.onClickAdd(event, addButton);
-                    else addFile();
+                    // narrow box: a click opens the menu (use:floating on
+                    // the wrapper). Enter and Space press the button without
+                    // a native click, so give the wrapper one
+                    else if (compact()) {
+                      if (
+                        (event as { pointerType?: string }).pointerType ===
+                        "keyboard"
+                      )
+                        addButton?.dispatchEvent(
+                          new MouseEvent("click", { bubbles: true }),
+                        );
+                    } else if (canUploadFiles()) addFile();
                   }}
                 >
                   <span
@@ -669,10 +855,19 @@ export function MessageComposition(props: Props) {
               <MessageBox.FloatingAction
                 size="normal"
                 error={messageLength() > maxMessageLength()}
+                data-composer-counter
               >
-                {wayTooLong()
-                  ? t`Too long`
-                  : maxMessageLength() - messageLength()}
+                {wayTooLong() ? (
+                  t`Too long`
+                ) : (
+                  // the sign stays on the left of the number in Arabic too
+                  <bdi dir="ltr">
+                    {String(maxMessageLength() - messageLength()).replace(
+                      "-",
+                      "−",
+                    )}
+                  </bdi>
+                )}
               </MessageBox.FloatingAction>
             </Show>
             <MessageBox.ActionContainer>
@@ -698,8 +893,8 @@ export function MessageComposition(props: Props) {
                     {void (pickerTriggers = triggerProps)}
                     {/* polls: their own button where they can be posted
                         (phones have it in the "+" sheet) */}
-                    <Show when={canPoll() && !canSend() && !phone}>
-                      <MessageBox.InlineIcon>
+                    <Show when={canPoll() && draftEmpty() && !phone}>
+                      <MessageBox.InlineIcon data-composer-extra>
                         <IconButton
                           aria-label={t`Create poll`}
                           data-testid="composer-create-poll"
@@ -717,25 +912,28 @@ export function MessageComposition(props: Props) {
                     </Show>
                     <Show
                       when={
-                        !canSend() &&
+                        draftEmpty() &&
                         props.channel.havePermission("SendEmbeds") &&
                         !(phone && canUploadFiles())
                       }
                     >
-                      <MessageBox.InlineIcon>
+                      <MessageBox.InlineIcon
+                        data-composer-extra={phone ? undefined : ""}
+                      >
                         <IconButton
                           aria-label={t`Open GIF picker`}
                           onPress={triggerProps.onClickGif}
                         >
-                          <Symbol type="outlined" size={22}>
-                            gif
-                          </Symbol>
+                          <Icon name="gif" size={22} />
                         </IconButton>
                       </MessageBox.InlineIcon>
                     </Show>
                     <MessageBox.InlineIcon>
                       <IconButton
                         aria-label={t`Open emoji picker`}
+                        aria-keyshortcuts={keysFor("open_emoji_picker")}
+                        data-shortcut-target="emoji"
+                        data-composer={composerKey}
                         onPress={triggerProps.onClickEmoji}
                       >
                         <Symbol type="outlined" size={22}>
@@ -748,9 +946,11 @@ export function MessageComposition(props: Props) {
                 )}
               </CompositionMediaPicker>
               <Show
-                when={!canSend() && canUploadFiles() && !recording() && !phone}
+                when={
+                  draftEmpty() && canUploadFiles() && !recording() && !phone
+                }
               >
-                <MessageBox.InlineIcon>
+                <MessageBox.InlineIcon data-composer-extra>
                   <IconButton
                     aria-label={t`Record a voice message`}
                     onPress={() => setRecording(true)}
@@ -783,6 +983,10 @@ export function MessageComposition(props: Props) {
         hasActionsAppend={
           state.settings.getValue("appearance:show_send_button") || false
         }
+        onCompact={phone ? undefined : setCompact}
+        crowded={
+          (draft().files?.length ?? 0) > 0 || (draft().replies?.length ?? 0) > 0
+        }
         actionsAppend={
           <Show when={state.settings.getValue("appearance:show_send_button")}>
             <MessageBox.InlineIcon ready={canSend()}>
@@ -805,3 +1009,45 @@ export function MessageComposition(props: Props) {
     </>
   );
 }
+
+/**
+ * The line above the message box while the text is over the length limit:
+ * the shape of the rules bar (RulesGate), with the warning in the danger
+ * colour
+ */
+const TooLong = styled("div", {
+  base: {
+    display: "flex",
+    alignItems: "center",
+    gap: "8px",
+    marginInline: "16px",
+    marginBottom: "8px",
+    padding: "8px 12px",
+    borderRadius: "var(--z-radius, 10px)",
+    background: "var(--z-bg-input)",
+    color: "var(--z-danger)",
+    "--z-icon-color": "var(--z-danger)",
+  },
+});
+
+const TooLongText = styled("span", {
+  base: {
+    flex: 1,
+    minWidth: 0,
+    fontSize: "14px",
+    lineHeight: "20px",
+    overflowWrap: "anywhere",
+  },
+});
+
+/** Read out, not shown */
+const LiveRegion = styled("span", {
+  base: {
+    position: "absolute",
+    width: "1px",
+    height: "1px",
+    overflow: "hidden",
+    clipPath: "inset(50%)",
+    whiteSpace: "nowrap",
+  },
+});

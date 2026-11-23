@@ -1,6 +1,7 @@
 import { VoiceOccupancy } from "@revolt/ui/components/features/voice/VoiceOccupancy";
 import {
   Accessor,
+  ComponentProps,
   JSX,
   Match,
   Show,
@@ -14,7 +15,7 @@ import {
 
 import { Trans, useLingui } from "@lingui/solid/macro";
 import type { API, Channel, Server } from "@zrzur/sdk/solid";
-import { css } from "styled-system/css";
+import { css, cx } from "styled-system/css";
 import { styled } from "styled-system/jsx";
 
 import { ServerContextMenu } from "@revolt/app/menus";
@@ -22,6 +23,7 @@ import { useClient } from "@revolt/client";
 import { useDevice } from "@revolt/common";
 import Breakpoint from "@revolt/common/Breakpoint";
 import { KeybindAction, createKeybind } from "@revolt/keybinds";
+import { nextIndex } from "@revolt/keybinds/navigate";
 import { TextWithEmoji } from "@revolt/markdown";
 import { useModals } from "@revolt/modal";
 import {
@@ -53,6 +55,10 @@ import { ServerStatusBadges } from "@revolt/ui/components/features/profiles/Serv
 import { VoiceChannelPreview } from "@revolt/ui/components/features/voice/VoiceChannelPreview";
 import { createDragHandle } from "@revolt/ui/components/utils/Draggable";
 import { Symbol } from "@revolt/ui/components/utils/Symbol";
+import {
+  touchHitArea,
+  touchHitAreaSolo,
+} from "@revolt/ui/components/utils/touchHitArea";
 
 import { isPrivateCategory } from "@revolt/app/interface/settings/category/category";
 import { chevron_right as MdChevronRight } from "@revolt/ui/icons/legacy";
@@ -61,6 +67,12 @@ import { SidebarIcon } from "./SidebarIcon";
 
 import { RulesIcon } from "@revolt/ui/icons/RulesIcon";
 import { useListToggle } from "@revolt/ui/motion";
+import {
+  channelUnread,
+  forumUnread,
+  markServerRead,
+  serverHasNews,
+} from "../../channels/forum/unread";
 import { EventsLink } from "../../events/EventsLink";
 import { LobbyLink } from "../../lobby/LobbyLink";
 import { sidebarBase } from "./common";
@@ -131,10 +143,12 @@ const askedInterests = new Set<string>();
 export const ServerSidebar = (props: Props) => {
   const navigate = useNavigate();
   const state = useState();
-  const { isMobile, fingerFirst, layout } = useDevice();
-  // no dragging channels where the finger scrolls (phones, tablets)
-  const noDrag = isMobile || fingerFirst;
+  const { layout } = useDevice();
   const client = useClient();
+  const hasNews = (channel: Channel) =>
+    channelUnread(client(), channel, (post) =>
+      state.notifications.isMuted(post),
+    );
   const { openModal, showError } = useModals();
 
   /** phones: type under the server name to narrow the channel list */
@@ -227,7 +241,7 @@ export const ServerSidebar = (props: Props) => {
             : category.id;
         return (
           state.layout.getSectionState(sectionId, true) ||
-          channel.unread ||
+          hasNews(channel) ||
           channel.id === props.channelId
         );
       });
@@ -263,11 +277,28 @@ export const ServerSidebar = (props: Props) => {
     navigateChannel(1),
   );
 
+  /** Opens the nearest unread channel in one direction, wrapping around */
+  const navigateUnread = (step: 1 | -1) => {
+    const channels = visibleChannels();
+    const index = nextIndex(
+      channels.length,
+      channels.findIndex((channel) => channel.id === props.channelId),
+      step,
+      (i) => !!channels[i].unread,
+    );
+    if (index >= 0)
+      navigate(`/server/${props.server.id}/channel/${channels[index].id}`);
+  };
+
+  createKeybind(KeybindAction.NAVIGATION_UNREAD_UP, () => navigateUnread(-1));
+
+  createKeybind(KeybindAction.NAVIGATION_UNREAD_DOWN, () => navigateUnread(1));
+
   createKeybind(KeybindAction.CHAT_MARK_SERVER_AS_READ, () => {
-    if (props.server.unread) {
-      // a failed request is only a mark that comes back with the next sync
-      props.server.ack().catch(() => undefined);
-    }
+    const isMuted = (channel: Channel) => state.notifications.isMuted(channel);
+    // forums too: their posts are not in the server's channel list
+    if (serverHasNews(client(), props.server, isMuted))
+      void markServerRead(client(), props.server, isMuted);
   });
 
   const noOrdering = () => !props.server.havePermission("ManageChannel");
@@ -451,9 +482,9 @@ export const ServerSidebar = (props: Props) => {
             dragHandles
             dropIndicator
             type="category"
-            //TODO - No channel ordering on mobile due to usability issue
-            //Consider adding a way to enable reordering with dragHandles in server settings
-            disabled={noDrag || noOrdering()}
+            // a finger rests on the category name to lift it (touchHold)
+            touchHold
+            disabled={noOrdering()}
             items={categories().filter((category) => category.id !== "default")}
             onChange={(ids) => handleOrdering({ type: "categories", ids })}
           >
@@ -540,7 +571,7 @@ function ServerInfo(
           part of its accessible name. Its click reaches the row */}
       <button
         type="button"
-        class={serverMenuButton}
+        class={cx(serverMenuButton, touchHitAreaSolo)}
         aria-haspopup="menu"
         aria-expanded={open()}
         aria-label={t`Server menu`}
@@ -637,6 +668,11 @@ function Category(
     },
 ) {
   const state = useState();
+  const client = useClient();
+  const hasNews = (channel: Channel) =>
+    channelUnread(client(), channel, (post) =>
+      state.notifications.isMuted(post),
+    );
   const { t } = useLingui();
   const { openModal } = useModals();
   const sectionId = () =>
@@ -644,8 +680,6 @@ function Category(
       ? `${props.server.id}:default:${props.channelType}`
       : props.category.id;
   const isOpen = () => state.layout.getSectionState(sectionId(), true);
-  const { isMobile, fingerFirst } = useDevice();
-  const noDrag = isMobile || fingerFirst;
 
   // expand and collapse animate the channel rows
   let section: HTMLDivElement | undefined;
@@ -667,7 +701,9 @@ function Category(
       keep: (item) => {
         const id = rowChannelId(item);
         const channel = props.category.channels.find((c) => c.id === id);
-        return !!channel && (channel.unread || channel.id === props.channelId);
+        return (
+          !!channel && (hasNews(channel) || channel.id === props.channelId)
+        );
       },
       toggle: () => state.layout.toggleSectionState(sectionId(), true),
     });
@@ -716,7 +752,7 @@ function Category(
           (props.channelType === "Voice"
             ? channel.isVoice
             : !channel.isVoice)) &&
-        (isOpen() || channel.unread || channel.id === props.channelId),
+        (isOpen() || hasNews(channel) || channel.id === props.channelId),
     ),
   );
 
@@ -749,6 +785,7 @@ function Category(
             }}
           >
             <CategoryBase
+              class={touchHitArea}
               type="button"
               aria-expanded={isOpen()}
               open={isOpen()}
@@ -824,9 +861,9 @@ function Category(
             moved: reorderedIds.length !== current.length,
           });
         }}
-        //TODO - No channel ordering on mobile due to usability issue
-        //Consider adding a way to enable reordering with dragHandles in server settings
-        disabled={noDrag || props.noOrdering() || !isOpen()}
+        // a finger rests on a channel to lift it, a quick swipe scrolls
+        touchHold
+        disabled={props.noOrdering() || !isOpen()}
         minimumDropAreaHeight="42px"
         onDragChange={props.setDragging}
       >
@@ -943,9 +980,21 @@ function Entry(
    * One badge at most, by rank: a mention count, else an unread dot.
    * Muted channels only surface mentions.
    */
+  // a forum has no messages of its own: its posts (threads) carry them
+  const forum = createMemo(() =>
+    props.channel.isForum
+      ? forumUnread(client(), props.channel, (post) =>
+          state.notifications.isMuted(post),
+        )
+      : undefined,
+  );
+  const unread = () => forum()?.unread ?? props.channel.unread;
+  const mentionCount = () =>
+    forum()?.mentions ?? props.channel.mentions?.size ?? 0;
+
   const alertState = createMemo(() => {
-    if (props.active || !props.channel.unread) return false;
-    const mentions = props.channel.mentions?.size ?? 0;
+    if (props.active || !unread()) return false;
+    const mentions = mentionCount();
     if (mentions) return mentions;
     return !muted();
   });
@@ -1025,7 +1074,7 @@ function Entry(
         ? "active"
         : muted()
           ? "muted"
-          : props.channel.unread
+          : unread()
             ? "active"
             : locked()
               ? "muted"
@@ -1090,8 +1139,8 @@ function Entry(
           }}
           use:floating={props.menuGenerator(props.channel)}
           size="normal"
-          data-unread={props.channel.unread ? "" : undefined}
-          data-mentions={props.channel.mentions?.size || undefined}
+          data-unread={unread() ? "" : undefined}
+          data-mentions={mentionCount() || undefined}
           alert={alertState()}
           attention={attentionState()}
           icon={
@@ -1269,7 +1318,7 @@ const SectionHeader = styled("div", {
     },
   },
 });
-const ToolButton = styled("button", {
+const ToolButtonBase = styled("button", {
   base: {
     // phones: not shown. These are the actions a pointer finds on a row; a
     // finger has them in the row's long-press menu (owner, 2026-11-17: they
@@ -1296,6 +1345,11 @@ const ToolButton = styled("button", {
     "@media (pointer: coarse)": { width: "32px", height: "32px" },
   },
 });
+
+/** Row tools; a finger's tap area is 44 px tall (touchHitArea) */
+function ToolButton(props: ComponentProps<typeof ToolButtonBase>) {
+  return <ToolButtonBase {...props} class={cx(touchHitArea, props.class)} />;
+}
 const ChannelRow = styled("div", {
   base: {
     position: "relative",

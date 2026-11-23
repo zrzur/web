@@ -1,6 +1,7 @@
 import { describe, expect, it } from "vitest";
 
 import {
+  ASSET_TRY_TIMEOUT_MS,
   fetchWithRetry,
   isAppNavigation,
   isRuntimeAsset,
@@ -120,6 +121,71 @@ describe("a file that does not arrive", () => {
       ),
     ).rejects.toThrow("Failed to fetch");
     expect(tries).toBe(3);
+  });
+});
+
+describe("a try that hangs (half-dead connection)", () => {
+  const none = async () => undefined;
+
+  it("gives each try its own time limit, then asks again", async () => {
+    let tries = 0;
+    const answer = await fetchWithRetry(
+      (signal: AbortSignal) => {
+        tries++;
+        if (tries < 3)
+          // never answers: only the time limit ends it
+          return new Promise<{ status: number }>((_, reject) =>
+            signal?.addEventListener("abort", () => reject(signal.reason)),
+          );
+        return Promise.resolve({ status: 200 });
+      },
+      [0, 1, 1],
+      none,
+      20,
+    );
+    expect(answer.status).toBe(200);
+    expect(tries).toBe(3);
+  });
+
+  it("fails when every try runs out of time", async () => {
+    let tries = 0;
+    await expect(
+      fetchWithRetry(
+        (signal: AbortSignal) => {
+          tries++;
+          return new Promise<{ status: number }>((_, reject) =>
+            signal?.addEventListener("abort", () => reject(signal.reason)),
+          );
+        },
+        [0, 1, 1],
+        none,
+        20,
+      ),
+    ).rejects.toBeDefined();
+    expect(tries).toBe(3);
+  });
+
+  it("stops the clock once the answer has started: the body may take longer", async () => {
+    let seen: AbortSignal | undefined;
+    const answer = await fetchWithRetry(
+      (signal: AbortSignal) => {
+        seen = signal;
+        return new Promise<{ status: number }>((done) =>
+          setTimeout(() => done({ status: 200 }), 10),
+        );
+      },
+      [0],
+      none,
+      20,
+    );
+    expect(answer.status).toBe(200);
+    await new Promise((done) => setTimeout(done, 40));
+    expect(seen?.aborted).toBe(false);
+  });
+
+  it("allows about nine seconds per try by default", () => {
+    expect(ASSET_TRY_TIMEOUT_MS).toBeGreaterThanOrEqual(8000);
+    expect(ASSET_TRY_TIMEOUT_MS).toBeLessThanOrEqual(10000);
   });
 });
 

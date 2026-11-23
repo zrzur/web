@@ -70,6 +70,17 @@ describe("the phone's slide between the lists and the page", () => {
     expect(drawer.state).toBe(SlideState.SHOWN);
   });
 
+  it("lets go of a touch once a row under it lifts for a drag", () => {
+    drawer.setShown(true);
+    vi.advanceTimersByTime(400);
+    touch(root, "touchstart", 40);
+    // a finger rested on a channel: the list lifts it (touchHold)
+    root.dispatchEvent(new Event("touchhold", { bubbles: true }));
+    touch(root, "touchmove", 60);
+    touch(root, "touchmove", 120);
+    expect(drawer.state).toBe(SlideState.SHOWN);
+  });
+
   it("a touch whose end was lost is dropped by the next finger", () => {
     drawer.setShown(true);
     vi.advanceTimersByTime(400);

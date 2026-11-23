@@ -3870,6 +3870,10 @@ msgstr "Bot owners can submit theirs from the bot's settings."
 msgid "Bot permissions"
 msgstr "Bot permissions"
 
+#: src/interface/Developers.tsx
+msgid "The servers list shows servers the user is in. Check <0>can_manage</0> before letting them change settings."
+msgstr "The servers list shows servers the user is in. Check <0>can_manage</0> before letting them change settings."
+
 #: components/app/interface/settings/user/safety/SafetyDashboard.tsx
 #~ msgid "Bot requests couldn't be loaded."
 #~ msgstr "Bot requests couldn't be loaded."
@@ -31154,3 +31158,234 @@ msgstr "A member who left"
 #: components/app/interface/settings/channel/permissions/ChannelVisibility.tsx
 msgid "This thread follows who can see its channel."
 msgstr "This thread follows who can see its channel."
+
+#: components/app/interface/channels/text/EditMessage.tsx
+msgid "Escape to <0>cancel</0> · Enter to <1>save</1>"
+msgstr "Escape to <0>cancel</0> · Enter to <1>save</1>"
+
+#: src/interface/channels/text/Composition.tsx
+msgid "{over, plural, one {This message is too long. Remove # character to send it (up to {max}).} other {This message is too long. Remove # characters to send it (up to {max}).}}"
+msgstr "{over, plural, one {This message is too long. Remove # character to send it (up to {max}).} other {This message is too long. Remove # characters to send it (up to {max}).}}"
+
+#: src/interface/channels/text/Composition.tsx
+msgid "Your message is longer than the limit."
+msgstr "Your message is longer than the limit."
+
+#: components/ui/components/features/messaging/elements/PlaybackFailure.tsx
+msgid "This file could not be played. Check your connection and try again."
+msgstr "This file could not be played. Check your connection and try again."
+
+#: src/interface/channels/forum/ForumChannel.tsx
+msgctxt "forum post"
+msgid "New"
+msgstr "New"
+
+#. placeholder {0}: entry.mentions
+#: components/modal/modals/QuickSwitcher.tsx
+#: src/interface/channels/forum/ForumChannel.tsx
+msgid "{0, plural, one {# mention} other {# mentions}}"
+msgstr "{0, plural, one {# mention} other {# mentions}}"
+
+#: components/modal/index.tsx
+msgid "Could not open. Check your connection and try again."
+msgstr "Could not open. Check your connection and try again."
+
+#: components/ui/components/utils/PageBoundary.tsx
+msgid "Could not open."
+msgstr "Could not open."
+
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "Move the small call card to another corner"
+msgstr "Move the small call card to another corner"
+
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "While the small call card is focused (you are in a call and look at another page)."
+msgstr "While the small call card is focused (you are in a call and look at another page)."
+
+#: components/app/interface/settings/user/profile/UserProfileEditor.tsx
+msgid "Saving… one moment."
+msgstr "Saving… one moment."
+
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "Accept a suggestion"
+msgstr "Accept a suggestion"
+
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "Also closes the emoji picker."
+msgstr "Also closes the emoji picker."
+
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "Another system's keys, to read. You change your own on this device's set."
+msgstr "Another system's keys, to read. You change your own on this device's set."
+
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "Bold text"
+msgstr "Bold text"
+
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "Cancel a reply"
+msgstr "Cancel a reply"
+
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "Copy the text"
+msgstr "Copy the text"
+
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "In the message list. The keys below then work on that message."
+msgstr "In the message list. The keys below then work on that message."
+
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "Italic text"
+msgstr "Italic text"
+
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "Keys shown"
+msgstr "Keys shown"
+
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "Leave the call"
+msgstr "Leave the call"
+
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "Mention a role or a channel"
+msgstr "Mention a role or a channel"
+
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "Mention someone"
+msgstr "Mention someone"
+
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "Move between messages"
+msgstr "Move between messages"
+
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "Next unread channel"
+msgstr "Next unread channel"
+
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "Open the emoji picker"
+msgstr "Open the emoji picker"
+
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "Open your mentions"
+msgstr "Open your mentions"
+
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "Pin or unpin"
+msgstr "Pin or unpin"
+
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "Previous unread channel"
+msgstr "Previous unread channel"
+
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "Scroll the messages"
+msgstr "Scroll the messages"
+
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "Search this channel"
+msgstr "Search this channel"
+
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "Shift+click a name or picture: the mention goes in at the cursor."
+msgstr "Shift+click a name or picture: the mention goes in at the cursor."
+
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "Shift+click the role or the channel."
+msgstr "Shift+click the role or the channel."
+
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "Show the keys for"
+msgstr "Show the keys for"
+
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "This device's keys. Look at another system's set."
+msgstr "This device's keys. Look at another system's set."
+
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "Upload a file"
+msgstr "Upload a file"
+
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "When no text is selected."
+msgstr "When no text is selected."
+
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "Where you can send files."
+msgstr "Where you can send files."
+
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "Where you may pin messages."
+msgstr "Where you may pin messages."
+
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "While names or emoji are suggested."
+msgstr "While names or emoji are suggested."
+
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "Your own message."
+msgstr "Your own message."
+
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "Your own message. Asks first; with Shift it doesn't."
+msgstr "Your own message. Asks first; with Shift it doesn't."
+
+#: components/modal/modals/QuickSwitcher.tsx
+msgid "Channels, conversations, servers and friends"
+msgstr "Channels, conversations, servers and friends"
+
+#: components/modal/modals/QuickSwitcher.tsx
+msgid "Friend"
+msgstr "Friend"
+
+#: components/modal/modals/QuickSwitcher.tsx
+msgid "Go to"
+msgstr "Go to"
+
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "Go to a channel, conversation or server"
+msgstr "Go to a channel, conversation or server"
+
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "On the message with the keyboard focus. Reach it with ↑ and ↓."
+msgstr "On the message with the keyboard focus. Reach it with ↑ and ↓."
+
+#: components/modal/modals/QuickSwitcher.tsx
+msgid "Recent and unread places"
+msgstr "Recent and unread places"
+
+#: components/modal/modals/QuickSwitcher.tsx
+msgid "Results"
+msgstr "Results"
+
+#: components/modal/modals/QuickSwitcher.tsx
+msgid "Start with # for channels, @ for people or * for servers."
+msgstr "Start with # for channels, @ for people or * for servers."
+
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "Type a name. Start with # for channels, @ for people or * for servers."
+msgstr "Type a name. Start with # for channels, @ for people or * for servers."
+
+#: components/ui/components/features/messaging/elements/Container.tsx
+msgid "Message from {name}, {time}"
+msgstr "Message from {name}, {time}"
+
+#: components/app/interface/channels/text/useMessageKeys.ts
+msgid "Replying to {name}"
+msgstr "Replying to {name}"
+
+#: components/app/interface/channels/text/useMessageKeys.ts
+msgid "The text could not be copied."
+msgstr "The text could not be copied."
+
+#: components/modal/modals/QuickSwitcher.tsx
+msgid "{RESULT_LIMIT}+ results"
+msgstr "{RESULT_LIMIT}+ results"
+
+#: components/modal/modals/QuickSwitcher.tsx
+msgid "You can't open this channel any more."
+msgstr "You can't open this channel any more."
+
+#: components/app/interface/settings/user/Keybinds.tsx
+msgid "Your talk key holds these keys while talking from other apps is on."
+msgstr "Your talk key holds these keys while talking from other apps is on."
