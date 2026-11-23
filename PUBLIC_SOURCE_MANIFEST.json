@@ -262,8 +262,8 @@
     },
     {
       "path": "CHANGELOG.md",
-      "sha256": "9f27dfe99c233b8a9b4c5b0a550aa6e889fd565a8ba93abb8b2fb3330f3e2370",
-      "bytes": 195591,
+      "sha256": "10c0ed5dc81b1cce0606838cd3a2c2a1a278e6fc81b1c408c591d8ed18c5f715",
+      "bytes": 196058,
       "category": "public-documentation"
     },
     {
@@ -3130,8 +3130,8 @@
     },
     {
       "path": "packages/client/components/client/Controller.ts",
-      "sha256": "405346ffc9c7501b3a0332005cb4c2ca58fa9c8444b4ee2563e4a26229766198",
-      "bytes": 26292,
+      "sha256": "fc80aad6c87d16bafd0811f32b2eb7faa4d4319b02f62ce429b7bbb9ceb26729",
+      "bytes": 26803,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -3190,8 +3190,8 @@
     },
     {
       "path": "packages/client/components/client/keptStart.test.ts",
-      "sha256": "bfdaf6bb328f33783951c6895bad5fd1360f3d2cbac7b186eb048555d001a467",
-      "bytes": 4689,
+      "sha256": "d0b7a936ce9d2f54336f13017a9dabb07dcc93018fec990aec3090b12749b353",
+      "bytes": 5763,
       "category": "synthetic-test-source-or-fixture"
     },
     {
@@ -4360,8 +4360,8 @@
     },
     {
       "path": "packages/client/components/instance/Instance.ts",
-      "sha256": "5a531110eb3d9ad8a27d5754ad782a2ea0441ed9fd66778f3aa4479687236a22",
-      "bytes": 6649,
+      "sha256": "e832b18947a705dae7c6e3309d3e3ef86f38df70b91a302f3f90cb7123a4fc95",
+      "bytes": 6741,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -45198,7 +45198,7 @@
   "submodules": [
     {
       "path": "packages/stoat.js",
-      "commit": "f999de3101a3bd41f54f256cda876f09252abf57"
+      "commit": "2cf72bf58bbcc5b17168d041b1df0f1d19ff824f"
     }
   ]
 }
