@@ -838,8 +838,14 @@
     },
     {
       "path": "packages/client/components/app/interface/channels/text/interactions/InteractionModal.tsx",
-      "sha256": "11787cb8269f70c3ad36893085b2aa37e2113e60fb7d792f6b2eaa98233f76cc",
-      "bytes": 22858,
+      "sha256": "4d0ada147f101eb3f50188a87267f4cc6f1ca6ed909bf93bc31973472c65419d",
+      "bytes": 926,
+      "category": "product-source-or-build-manifest"
+    },
+    {
+      "path": "packages/client/components/app/interface/channels/text/interactions/InteractionModalForm.tsx",
+      "sha256": "6e0de519d7d7872b58382ce877fd2262d6df1b5b055c0fb99747b0be69f3f897",
+      "bytes": 22725,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -3148,8 +3154,8 @@
     },
     {
       "path": "packages/client/components/client/Controller.ts",
-      "sha256": "fe54941f6966eeab8833ef92f1c662059ac86d981ff2e89bfe264729535926de",
-      "bytes": 25371,
+      "sha256": "eeade920d272f4894318ece85ac8a066baa84b1651bfb58a0fe7f461df98f98f",
+      "bytes": 25372,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -4534,8 +4540,14 @@
     },
     {
       "path": "packages/client/components/keybinds/quickSwitch.ts",
-      "sha256": "f47bc962b3074643a081b77b5e90020bd82bb1855688b6814219b60346058710",
-      "bytes": 6935,
+      "sha256": "1fe150a9816f95ca9e351271ce422ead0e972fc593bb3ee7f7aa28f653909060",
+      "bytes": 5396,
+      "category": "product-source-or-build-manifest"
+    },
+    {
+      "path": "packages/client/components/keybinds/recentPlaces.ts",
+      "sha256": "599103b9261b57cb61b3b6f9c3bb5cdb69840396190a3496ca1cd7b3350e69fc",
+      "bytes": 1874,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -42826,8 +42838,8 @@
     },
     {
       "path": "packages/client/src/Interface.tsx",
-      "sha256": "ace5b88f2dc3d5cb0894285623dbbc40cb957b5909c5f74c1155fe6229747327",
-      "bytes": 14646,
+      "sha256": "a84de895fa670767b378c92ce547fa6823a06ff165cb83b91bcb6527ec722fa8",
+      "bytes": 14647,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -43054,8 +43066,14 @@
     },
     {
       "path": "packages/client/src/interface/channels/text/SearchFiltersPhone.tsx",
-      "sha256": "65c462feeca0a5e4e3619eb56c2e93315035681b1d359c5ff1563bacf13e9ea4",
-      "bytes": 14456,
+      "sha256": "38182a635aed113b163e2c5c5964254871eb467a5621d811bad7086579db06b3",
+      "bytes": 3547,
+      "category": "product-source-or-build-manifest"
+    },
+    {
+      "path": "packages/client/src/interface/channels/text/SearchFiltersSheet.tsx",
+      "sha256": "601dc7b49ab0cf572b0fd06d7e53ba114d8ae7774d59407c0c8ab0626a95b476",
+      "bytes": 11867,
       "category": "product-source-or-build-manifest"
     },
     {
