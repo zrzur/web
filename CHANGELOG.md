@@ -2,6 +2,14 @@
 
 ## Unreleased
 
+### Calls in direct messages and groups keep the chat visible (2026-11-23, owner's request)
+
+* **Fixed:** calling someone in a DM hid the conversation. The call was the floating card laid over the top 40 % of the message list (or over all of it when expanded), and the messages did not move. The call is now a block above the messages, in the page itself: the conversation scrolls below it and the composer works during the call.
+* **Desktop and tablet:** both people large and centred, with a ring that pulses while someone talks, microphone-off and deafened marks, and the other person's tile saying "Ringing…" until they answer. Cameras and shared screens use the call tiles. Under them: microphone and camera with a device menu each, share screen, More (deafen, full screen, fold, voice settings) and hang up. Drag the line under the call to make it taller or shorter (Arrow Up/Down, Home, End on the keyboard); Enter or a double-click folds it to a bar with the time, microphone and hang up.
+* **Others are in the call, you are not:** a bar above the messages shows who, for how long, and Join or Join with video.
+* **Phones:** the call fills the screen: minimise, the conversation's name and the call time, speaker, add people (groups); big tiles; a floating bar with camera, microphone, chat, more and hang up. Chat brings the conversation up under a short call strip; its handle goes back. Minimise returns to the app, and the floating call card opens the call again.
+* Reduced motion keeps the rings still. The call parts load the first time a call shows (precache shell 2,044,994 bytes).
+
 ### Name styles (2026-11-22, owner's request)
 
 * **More ways to write your name:** a spectrum of three to five colours that runs round the name, and four effects on top of any colour: Halo, Edge, Lifted and Sheen. With a role colour in a server, your font and effect stay. Settings → Profile → Look → Name style; the dialog is laid out for phones first, with the preview pinned on top and drawn in the theme you use.
