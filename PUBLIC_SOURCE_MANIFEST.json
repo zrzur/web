@@ -3694,8 +3694,8 @@
     },
     {
       "path": "packages/client/components/i18n/catalogs/ar/messages.po",
-      "sha256": "15a61708d67a6bd257f041a61b1ded8671e470fd553a9ea85a3dfcf27676cd09",
-      "bytes": 1291881,
+      "sha256": "73932891a0d8adebc7d19ba79d76fea2af89c2ccc360d01989c532b81427258f",
+      "bytes": 1291995,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -3838,8 +3838,8 @@
     },
     {
       "path": "packages/client/components/i18n/catalogs/de/messages.po",
-      "sha256": "4689b83dc03f94e6d192bd4a56a3f2b6ccd81aabb5e1d425c8e591cc5f2cfda2",
-      "bytes": 1192537,
+      "sha256": "84e9d4bfdc48347ecb71930b3791fc19f36175596623ff3e6dc41417bdb86d15",
+      "bytes": 1192649,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -3874,8 +3874,8 @@
     },
     {
       "path": "packages/client/components/i18n/catalogs/en/messages.po",
-      "sha256": "4367aea893b4c6c8387054abb5226190021fd4724ce497888d9ed4127293d18b",
-      "bytes": 1148228,
+      "sha256": "a4d2a24f1fff9a22d813d1b731c20ae2ca1e644d7f130d60d522e106b5c57232",
+      "bytes": 1148336,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -7978,8 +7978,8 @@
     },
     {
       "path": "packages/client/components/ui/components/features/voice/callCard/VoiceCallCard.tsx",
-      "sha256": "2ccfc77d6744d86db76e5b9e1f06608ae973a8fc2a0266eb6c61ea247e15f612",
-      "bytes": 16421,
+      "sha256": "aa7b480f2b9a50bbd47bf320624ae9ba0ef6a4fb793011de6d6b5be421d2cee9",
+      "bytes": 2553,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -7992,6 +7992,12 @@
       "path": "packages/client/components/ui/components/features/voice/callCard/VoiceCallCardActiveRoom.tsx",
       "sha256": "f8d5ee50fe70ff9d8de8be55da6df57ad8d557e058841d2e39e0ace2359dc4c7",
       "bytes": 12176,
+      "category": "product-source-or-build-manifest"
+    },
+    {
+      "path": "packages/client/components/ui/components/features/voice/callCard/VoiceCallCardFloat.tsx",
+      "sha256": "1da0d68dd90c0c3dec3030a7a89b0c29f521932923547517e6d7873f9ad23871",
+      "bytes": 15286,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -9958,8 +9964,8 @@
     },
     {
       "path": "packages/client/components/ui/safeArea.test.ts",
-      "sha256": "1c2dfd9b6219e083b1a9ceb1178039627f65d72842a74480419a3db7820d9e31",
-      "bytes": 5381,
+      "sha256": "51e5b45f1252c2a2166f22c4f83d1b473fff346e4749abc225f097dc61cfc9f7",
+      "bytes": 5373,
       "category": "synthetic-test-source-or-fixture"
     },
     {
@@ -42262,8 +42268,8 @@
     },
     {
       "path": "packages/client/scripts/i18n/ui-2026112301.json",
-      "sha256": "bb96a096c4a311ce99d0950007044585bb64326636399934328430824636bc92",
-      "bytes": 2053,
+      "sha256": "c9346e771bd5e795abd5dbedc0ac78c8268be36f5a91ca8209585e807a975df7",
+      "bytes": 2117,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -45780,7 +45786,7 @@
   "submodules": [
     {
       "path": "packages/stoat.js",
-      "commit": "207066bc324e913c49447bf4c547a8fca7309bb8"
+      "commit": "c89a03dc8e7097232c69c32c45540e4d202adf89"
     }
   ]
 }
