@@ -173,6 +173,9 @@ export function _newClient(apiUrl: string, configuration?: RevoltConfig) {
     autoReconnect: false,
     syncUnreads: true,
     debug: import.meta.env.DEV,
+    // large gateway frames (above all the first answer, Ready) come
+    // compressed where the server allows it; otherwise text as before
+    compression: true,
   };
 
   //Env overrides (already validated at CONFIGURATION load)

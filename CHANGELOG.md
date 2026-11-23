@@ -132,6 +132,10 @@
 * **Keyboard and screen readers:** after an add, focus returns to Add people; after a remove, it moves to the next Remove (or Add people), and a polite announcement says who was added to or removed from the list. You are never offered to yourself, and your own row has no Remove. A refused pick keeps the search; closing the picker clears the message. The row of someone who has left the server reads "A member who left" instead of an id, and keeps Remove; the server answer for them says they are no longer in the server.
 * **Threads** follow their channel's permissions, so a thread's Permissions page shows one line pointing to the channel (without a name while the channel isn't loaded) instead of the switch, the roles and the people.
 
+### Speed: the first answer of the live connection comes compressed (2026-11-21)
+
+* **Opening the app waits less on a slow connection:** the app asks the gateway for compressed frames (`compression: true` in `components/instance/Instance.ts`, SDK `Gateway` option). The first answer, which lists every server, channel and member, is about a sixth of its size where the server allows it; a server that does not compress sends text as before. Packets are still handled in the order they came.
+
 ### Speed: scrolling, switching and starting (2026-11-21)
 
 * **Scrolling back and opening a channel or server stall less:** a channel keeps 150 rows or more, and the browser styled, laid out and painted every one of them each time a page of older messages came in or a channel opened. In Chromium engines (Chrome, Edge, the desktop app, Android) the content of rows out of view is now skipped (`content-visibility: auto` on an inner box of the message row, which keeps its last height). The hover toolbar is outside that box, and the box has room for avatar frames, so neither is cut. WebKit keeps drawing every row: there, rows above the reader that changed size moved the text. Timings are measured in the speed report of 2026-11-21.
