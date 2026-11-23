@@ -42,6 +42,8 @@ import {
   CommandPicker,
   runActiveCommand,
 } from "@revolt/app/interface/channels/text/interactions";
+import { dmBot } from "@revolt/app/interface/channels/text/interactions/BotStart";
+import { markStarted } from "@revolt/app/interface/channels/text/interactions/botLinks";
 import { pollsEnabled } from "@revolt/app/interface/channels/text/poll/pollModel";
 import {
   composerForShortcut,
@@ -219,6 +221,17 @@ export function MessageComposition(props: Props) {
     }
   }
 
+  /** The bot's commands: a "/" in an empty box opens the list */
+  function openCommands() {
+    const content = draft()?.content ?? "";
+    if (!content.startsWith("/")) {
+      const next = content ? `/ ${content}` : "/";
+      state.draft.setDraft(props.channel.id, { content: next });
+      setInitialValue([next]);
+    }
+    setNodeReplacement(["_focus"]);
+  }
+
   /**
    * Stop typing after some time
    */
@@ -238,6 +251,8 @@ export function MessageComposition(props: Props) {
     }
     stopTyping();
     props.onMessageSend?.();
+    // writing to a bot first works like Start: the Start screen goes
+    if (dmBot(props.channel)) markStarted(props.channel.id);
 
     if (typeof useContent === "string") {
       const currentDraft = draft();
@@ -730,6 +745,24 @@ export function MessageComposition(props: Props) {
                           <Symbol type="outlined" size={22}>
                             gif
                           </Symbol>
+                        </IconButton>
+                      </MessageBox.InlineIcon>
+                    </Show>
+                    {/* a DM with a bot: its commands, one tap away */}
+                    <Show when={dmBot(props.channel)}>
+                      <MessageBox.InlineIcon>
+                        <IconButton
+                          aria-label={t`Commands`}
+                          data-testid="composer-commands"
+                          use:floating={{
+                            tooltip: {
+                              placement: "top",
+                              content: t`Commands`,
+                            },
+                          }}
+                          onPress={openCommands}
+                        >
+                          <Icon name="terminal" size={22} />
                         </IconButton>
                       </MessageBox.InlineIcon>
                     </Show>

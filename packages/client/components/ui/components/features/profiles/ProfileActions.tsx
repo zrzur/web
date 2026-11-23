@@ -171,6 +171,7 @@ export function ProfilePrimaryActions(props: Props & { compact?: boolean }) {
             shape="square"
             // beside Add bot the bot's own action leads
             variant={actions.publicBot() ? "tonal" : "filled"}
+            data-profile-message
             onPress={actions.openDm}
           >
             <Icon name="chat-circle" size={16} />
@@ -390,14 +391,26 @@ const edgeButton = cva({
 
 /**
  * The card's foot, its last part after every section: only the message box,
- * for someone else. Edit profile and View full profile are in the "⋯" menu
+ * for someone else (for a bot, Message: it opens the conversation with Start). Edit profile and View full profile are in the "⋯" menu
  * (owner, 2026-11-14), so your own card has no foot.
  */
 export function ProfileFooter(props: Props & { onOpenFull: () => void }) {
+  const actions = useProfileActions(props);
   return (
     <Show when={!props.user.self && props.user.relationship !== "Blocked"}>
       <Foot data-testid="profile-footer">
-        <ProfileMessage {...props} />
+        {/* a bot is started in its conversation, not with a first line here */}
+        <Show when={props.user.bot} fallback={<ProfileMessage {...props} />}>
+          <Button
+            size="sm"
+            shape="square"
+            data-profile-message
+            onPress={actions.openDm}
+          >
+            <Icon name="chat-circle" size={16} />
+            <Trans>Message</Trans>
+          </Button>
+        </Show>
       </Foot>
     </Show>
   );

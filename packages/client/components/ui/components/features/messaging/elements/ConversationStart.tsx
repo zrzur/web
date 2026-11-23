@@ -4,6 +4,10 @@ import { Trans } from "@lingui/solid/macro";
 import { Channel } from "@zrzur/sdk/solid";
 import { styled } from "styled-system/jsx";
 
+import {
+  BotStart,
+  dmBot,
+} from "@revolt/app/interface/channels/text/interactions/BotStart";
 import { isOfficialChannel } from "@revolt/app/interface/support/official";
 import { Markdown } from "@revolt/markdown";
 import { useNavigate } from "@revolt/routing";
@@ -23,37 +27,43 @@ interface Props {
 export function ConversationStart(props: Props) {
   const official = () => isOfficialChannel(props.channel);
 
+  // a bot: who it is, what it can do, and Start
   return (
-    <Base>
-      <Show when={props.channel.type !== "SavedMessages"}>
-        <ChannelName>
-          {props.channel.name ??
-            props.channel.recipient?.displayName ??
-            props.channel.recipient?.username}
-          <Show when={official()}>
-            <OfficialLabel />
-          </Show>
-        </ChannelName>
-      </Show>
-      <Description>
-        <Switch
-          fallback={<Trans>This is the start of your conversation.</Trans>}
-        >
-          <Match when={props.channel.type === "SavedMessages"}>
-            <Trans>This is the start of your notes.</Trans>
-          </Match>
-          <Match when={official()}>
-            <Trans>
-              Official messages from the Zrzur team: answers from support and
-              decisions about your account.
-            </Trans>
-          </Match>
-        </Switch>
-      </Description>
-      <Show when={props.channel.thread?.starterMessageId}>
-        {(id) => <StarterMessage channel={props.channel} messageId={id()} />}
-      </Show>
-    </Base>
+    <Show
+      when={!dmBot(props.channel)}
+      fallback={<BotStart channel={props.channel} />}
+    >
+      <Base>
+        <Show when={props.channel.type !== "SavedMessages"}>
+          <ChannelName>
+            {props.channel.name ??
+              props.channel.recipient?.displayName ??
+              props.channel.recipient?.username}
+            <Show when={official()}>
+              <OfficialLabel />
+            </Show>
+          </ChannelName>
+        </Show>
+        <Description>
+          <Switch
+            fallback={<Trans>This is the start of your conversation.</Trans>}
+          >
+            <Match when={props.channel.type === "SavedMessages"}>
+              <Trans>This is the start of your notes.</Trans>
+            </Match>
+            <Match when={official()}>
+              <Trans>
+                Official messages from the Zrzur team: answers from support and
+                decisions about your account.
+              </Trans>
+            </Match>
+          </Switch>
+        </Description>
+        <Show when={props.channel.thread?.starterMessageId}>
+          {(id) => <StarterMessage channel={props.channel} messageId={id()} />}
+        </Show>
+      </Base>
+    </Show>
   );
 }
 

@@ -31154,3 +31154,51 @@ msgstr "A member who left"
 #: components/app/interface/settings/channel/permissions/ChannelVisibility.tsx
 msgid "This thread follows who can see its channel."
 msgstr "This thread follows who can see its channel."
+
+#. placeholder {0}: more()
+#: components/app/interface/channels/text/interactions/BotStart.tsx
+msgid "and {0} more in Commands"
+msgstr "and {0} more in Commands"
+
+#: src/interface/channels/ChannelHeader.tsx
+msgid "Bot options"
+msgstr "Bot options"
+
+#: src/interface/developers/docs/DocsPortal.tsx
+msgid "Bots in direct messages"
+msgstr "Bots in direct messages"
+
+#: components/app/interface/channels/text/interactions/BotStart.tsx
+msgid "Restart bot"
+msgstr "Restart bot"
+
+#: components/app/interface/channels/text/interactions/BotStart.tsx
+msgid "Start"
+msgstr "Start"
+
+#. placeholder {0}: name()
+#: components/app/interface/channels/text/interactions/BotStart.tsx
+msgid "Start lets {0} send you messages here."
+msgstr "Start lets {0} send you messages here."
+
+#: components/app/interface/channels/text/interactions/InteractionHeader.tsx
+msgid "started the bot"
+msgstr "started the bot"
+
+#: components/app/interface/channels/text/interactions/BotStart.tsx
+msgid "Stop bot"
+msgstr "Stop bot"
+
+#: components/app/interface/channels/text/interactions/BotStart.tsx
+msgid "What this bot can do"
+msgstr "What this bot can do"
+
+#. placeholder {0}: name()
+#: components/app/interface/channels/text/interactions/BotStart.tsx
+msgid "You opened a link to {0}."
+msgstr "You opened a link to {0}."
+
+#. placeholder {0}: name()
+#: components/app/interface/channels/text/interactions/BotStart.tsx
+msgid "You stopped {0}. It can't send you messages."
+msgstr "You stopped {0}. It can't send you messages."

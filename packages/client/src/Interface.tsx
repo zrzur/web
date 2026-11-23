@@ -20,14 +20,19 @@ import { Titlebar } from "@revolt/app/interface/desktop/Titlebar";
 import { ChangeRequestNotice } from "@revolt/app/interface/settings/user/account/ChangeRequestNotice";
 import { NoticeCenter } from "@revolt/app/interface/support/NoticeCenter";
 import { SaveDataOffer } from "@revolt/app/interface/support/SaveDataOffer";
+import { ConfirmEmailStrip } from "@revolt/auth/src/invite/ConfirmEmailStrip";
 import { useClient, useClientLifecycle } from "@revolt/client";
 import { State } from "@revolt/client/Controller";
 import { NotificationsWorker } from "@revolt/client/NotificationsWorker";
 import { useDevice } from "@revolt/common";
 import { useModals } from "@revolt/modal";
 import { PluginHostGate } from "@revolt/plugins/PluginHostGate";
-import { ConfirmEmailStrip } from "@revolt/auth/src/invite/ConfirmEmailStrip";
-import { Navigate, useBeforeLeave, useLocation } from "@revolt/routing";
+import {
+  Navigate,
+  useBeforeLeave,
+  useLocation,
+  useNavigate,
+} from "@revolt/routing";
 import { useState } from "@revolt/state";
 import { LAYOUT_SECTIONS } from "@revolt/state/stores/Layout";
 import { lazyRetry } from "@revolt/ui/components/utils/lazyRetry";
@@ -75,6 +80,7 @@ const Interface = (props: { children?: JSX.Element }) => {
   const device = useDevice();
   // reactive copy, for the panel corner when the channel list is hidden
   const location = useLocation();
+  const navigate = useNavigate();
 
   useBeforeLeave((e) => {
     if (!e.defaultPrevented) {
@@ -83,7 +89,7 @@ const Interface = (props: { children?: JSX.Element }) => {
       const dialog = typeof e.to === "string" ? dialogAddress(e.to) : undefined;
       if (dialog) {
         e.preventDefault();
-        openDialogAt(dialog, client, { openModal, showError });
+        openDialogAt(dialog, client, { openModal, showError }, navigate);
       } else if (typeof e.to === "string") {
         state.layout.setLastActivePath(e.to);
       }

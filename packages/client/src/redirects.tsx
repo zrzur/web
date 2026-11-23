@@ -1,6 +1,8 @@
 /**
  * Addresses that open a dialog over the page the person is on:
  * `/settings`, `/invite/{code}`, `/bot/{id}` (and its short form `/b/{id}`).
+ * A bot link with `?start` (`/b/{id}?start=ref`) opens the conversation with
+ * the bot instead, where Start sends the bot `ref`.
  *
  * Inside the running app a link to one of them never leaves the page: the
  * app's layout (Interface.tsx) stops the move and calls `openDialogAt`. The
@@ -12,9 +14,13 @@
  * before this route is ever mounted, so `onMount` only ran on a full page load
  * and a clicked link did nothing.
  */
-import { Navigate, useParams } from "@solidjs/router";
+import { Navigate, useNavigate, useParams } from "@solidjs/router";
 import { PublicChannelInvite } from "@zrzur/sdk/solid";
 
+import {
+  startOf,
+  waitForStart,
+} from "@revolt/app/interface/channels/text/interactions/botLinks";
 import { useClient } from "@revolt/client";
 import { useModals } from "@revolt/modal";
 import { isInviteCode } from "@revolt/modal/modals/inviteLink";
@@ -22,12 +28,15 @@ import { useState } from "@revolt/state";
 
 type Client = ReturnType<typeof useClient>;
 type Modals = Pick<ReturnType<typeof useModals>, "openModal" | "showError">;
+/** Move to a page of the app (the router's navigate) */
+type Go = (path: string) => void;
 
 /** A dialog an address stands for */
 export type DialogAddress =
   | { kind: "settings" }
   | { kind: "invite"; code: string }
-  | { kind: "bot"; code: string; search: string };
+  | { kind: "bot"; code: string; search: string }
+  | { kind: "bot-start"; code: string; payload?: string };
 
 /**
  * Read the dialog out of an in-app address (`/invite/Dm8w7T5p`,
@@ -46,8 +55,10 @@ export function dialogAddress(to: string): DialogAddress | undefined {
     return undefined;
   }
   if (!isInviteCode(code)) return undefined;
-  return found[1] === "invite"
-    ? { kind: "invite", code }
+  if (found[1] === "invite") return { kind: "invite", code };
+  const start = startOf(search);
+  return start
+    ? { kind: "bot-start", code, payload: start.payload }
     : { kind: "bot", code, search };
 }
 
@@ -56,12 +67,23 @@ export function openDialogAt(
   address: DialogAddress,
   client: Client,
   { openModal, showError }: Modals,
+  go?: Go,
 ) {
   // after this pass: a change made while the router is switching pages
   // belongs to that switch and is dropped with it
   queueMicrotask(() => {
     if (address.kind === "settings") {
       openModal({ type: "settings", config: "user" });
+    } else if (address.kind === "bot-start") {
+      // the conversation with the bot, Start waiting with the link's payload
+      client()
+        .users.fetch(address.code)
+        .then((user) => user.openDM())
+        .then((channel) => {
+          waitForStart(channel.id, address.payload);
+          go?.(channel.path);
+        })
+        .catch(showError);
     } else if (address.kind === "invite") {
       client()
         // TODO: add a helper to stoat.js for this
@@ -121,9 +143,10 @@ export function InviteRedirect() {
  */
 export function BotRedirect() {
   const params = useParams();
+  const navigate = useNavigate();
   const address = dialogAddress(
     `/bot/${params.code ?? ""}${window.location.search}`,
   );
-  if (address) openDialogAt(address, useClient(), useModals());
+  if (address) openDialogAt(address, useClient(), useModals(), navigate);
   return <PWARedirect />;
 }
