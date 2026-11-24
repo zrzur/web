@@ -32,6 +32,8 @@ import { BadgeAdmin } from "./BadgeAdmin";
 import { BetaAdmin } from "./BetaAdmin";
 import { BugQueue } from "./BugQueue";
 import { BugReportDialog } from "./BugReportDialog";
+import { ApplicationsSection } from "./MyApplications";
+import { ProgramDialog } from "./ProgramDialog";
 import { OwnBadge, badgesApi, betaApi, can } from "./badgesApi";
 import {
   Empty,
@@ -52,6 +54,12 @@ import {
   TileText,
   TitleLine,
 } from "./parts";
+import {
+  BadgeApplication,
+  ProgramId,
+  programOf,
+  programsApi,
+} from "./programsApi";
 
 /** Days in the creator program Super Creator needs, when the server does
  * not say (servers from before the rule; the SDK pin moves later) */
@@ -78,6 +86,15 @@ export function MyBadges() {
   const [dialog, setDialog] = createSignal<
     "admin" | "beta" | "bugs" | "report"
   >();
+  // badge programs people apply for (Partner, Verified Server, Verified
+  // Bot Developer): your applications, and the one being written
+  const [applications, { refetch: refetchApplications }] = createResource(() =>
+    programsApi.mine(client()).catch(() => [] as BadgeApplication[]),
+  );
+  const [applying, setApplying] = createSignal<{
+    program: ProgramId;
+    application?: BadgeApplication;
+  }>();
 
   const now = Date.now();
   const heldGrant = (grant: OwnBadge) =>
@@ -233,10 +250,7 @@ export function MyBadges() {
               <Shelf role="list">
                 <For each={held()}>
                   {(entry) => (
-                    <ShelfItem
-                      role="listitem"
-                      title={text(entry.meta.id).name}
-                    >
+                    <ShelfItem role="listitem" title={text(entry.meta.id).name}>
                       <BadgeMark
                         id={entry.meta.id}
                         size="xl"
@@ -522,12 +536,36 @@ export function MyBadges() {
                         </Show>
                       </TitleLine>
                       <p>{text(badge.id).earn}</p>
+                      <Show when={programOf(badge.id)}>
+                        <RowActions>
+                          <Button
+                            size="sm"
+                            variant="tonal"
+                            data-apply={programOf(badge.id)}
+                            onPress={() =>
+                              setApplying({ program: programOf(badge.id)! })
+                            }
+                          >
+                            <Trans>Check and apply</Trans>
+                          </Button>
+                        </RowActions>
+                      </Show>
                     </TileText>
                   </Tile>
                 )}
               </For>
             </Grid>
           </Section>
+
+          <Show when={applications()?.length}>
+            <ApplicationsSection
+              applications={applications()!}
+              onContinue={(application) =>
+                setApplying({ program: application.program, application })
+              }
+              onChanged={() => void refetchApplications()}
+            />
+          </Show>
 
           <Show when={history().length}>
             <SettingsSection title={<Trans>Past badges</Trans>}>
@@ -618,6 +656,17 @@ export function MyBadges() {
             void refetch();
           }}
           beta={data()?.beta?.status === "Active" ? data()!.beta!.features : []}
+        />
+      </Show>
+      <Show when={applying()}>
+        <ProgramDialog
+          program={applying()!.program}
+          application={applying()!.application}
+          onClose={() => {
+            setApplying(undefined);
+            void refetchApplications();
+            void refetch();
+          }}
         />
       </Show>
       <Show when={data() && dialog() === "admin"}>
