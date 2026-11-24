@@ -32123,3 +32123,53 @@ msgstr "Two Years on Zrzur"
 #: components/app/interface/settings/user/badges/BadgeAdmin.tsx
 msgid "Waiting for a second staff member"
 msgstr "Waiting for a second staff member"
+
+#: components/ui/components/features/profiles/badges/useBadgeText.ts
+msgid "An outstanding Zrzur Designs creator, chosen by the team."
+msgstr "An outstanding Zrzur Designs creator, chosen by the team."
+
+#: components/ui/components/features/profiles/badges/useBadgeText.ts
+msgid "Complete a beta cycle with at least 3 reviewed feedback reports or 1 confirmed bug report; the team approves it after the cycle. It stays, but gives no beta access."
+msgstr "Complete a beta cycle with at least 3 reviewed feedback reports or 1 confirmed bug report; the team approves it after the cycle. It stays, but gives no beta access."
+
+#: components/ui/components/features/profiles/badges/useBadgeText.ts
+msgid "Completed a Zrzur beta cycle with real contributions."
+msgstr "Completed a Zrzur beta cycle with real contributions."
+
+#: components/ui/components/features/profiles/badges/useBadgeText.ts
+msgid "Designs and publishes profile designs in Zrzur Designs."
+msgstr "Designs and publishes profile designs in Zrzur Designs."
+
+#: components/ui/components/features/profiles/badges/useBadgeText.ts
+msgid "Given after you join the Designs creator program and publish your first original, approved design. It stays for good unless the work was fraudulent or infringing. Making bots or videos doesn't count."
+msgstr "Given after you join the Designs creator program and publish your first original, approved design. It stays for good unless the work was fraudulent or infringing. Making bots or videos doesn't count."
+
+#: components/ui/components/features/profiles/badges/useBadgeText.ts
+msgid "Hold Creator, with at least 25 approved, original, published designs and 180 days in the creator program. 25 is only a minimum: the team chooses. Duplicates, simple recolours and copied assets don't count."
+msgstr "Hold Creator, with at least 25 approved, original, published designs and 180 days in the creator program. 25 is only a minimum: the team chooses. Duplicates, simple recolours and copied assets don't count."
+
+#: components/ui/components/features/profiles/badges/useBadgeText.ts
+msgid "Own a server that reaches 1,000 genuine human members, counted as for Community Builder. It stays if the server gets smaller. It is not a partnership or a verification."
+msgstr "Own a server that reaches 1,000 genuine human members, counted as for Community Builder. It stays if the server gets smaller. It is not a partnership or a verification."
+
+#: components/ui/components/features/profiles/badges/useBadgeText.ts
+msgid "Own a server that reaches 100 genuine human members. Bots, deleted, banned or suspended accounts, accounts under 7 days old or without a confirmed e-mail, and people who joined less than a day ago don't count. Counted a few times a day; it stays if the server gets smaller."
+msgstr "Own a server that reaches 100 genuine human members. Bots, deleted, banned or suspended accounts, accounts under 7 days old or without a confirmed e-mail, and people who joined less than a day ago don't count. Counted a few times a day; it stays if the server gets smaller."
+
+#: components/ui/components/features/profiles/badges/useBadgeText.ts
+msgid "Owns a server that reached 1,000 genuine human members."
+msgstr "Owns a server that reached 1,000 genuine human members."
+
+#: components/ui/components/features/profiles/badges/useBadgeText.ts
+msgid "Owns a server that reached 100 genuine human members."
+msgstr "Owns a server that reached 100 genuine human members."
+
+#. placeholder {0}: data()!.creator.super_creator_designs
+#. placeholder {1}: superCreatorDays()
+#: components/app/interface/settings/user/badges/MyBadges.tsx
+msgid "Super Creator is chosen by the team after at least {0} approved, published designs and {1} days in the creator program."
+msgstr "Super Creator is chosen by the team after at least {0} approved, published designs and {1} days in the creator program."
+
+#: components/app/interface/settings/user/badges/MyBadges.tsx
+msgid "You completed the beta. The team approves Beta Veteran when you sent at least 3 reviewed feedback reports or 1 confirmed bug report during the cycle."
+msgstr "You completed the beta. The team approves Beta Veteran when you sent at least 3 reviewed feedback reports or 1 confirmed bug report during the cycle."

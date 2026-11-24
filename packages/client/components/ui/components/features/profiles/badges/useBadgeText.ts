@@ -42,13 +42,13 @@ export function useBadgeText(): (id: string) => BadgeText {
       },
       super_creator: {
         name: t`Super Creator`,
-        description: t`An outstanding designer of Zrzur profile designs and decorations, chosen by the team.`,
-        earn: t`Publish designs as a Creator; the Zrzur team picks Super Creators by hand.`,
+        description: t`An outstanding Zrzur Designs creator, chosen by the team.`,
+        earn: t`Hold Creator, with at least 25 approved, original, published designs and 180 days in the creator program. 25 is only a minimum: the team chooses. Duplicates, simple recolours and copied assets don't count.`,
       },
       creator: {
         name: t`Creator`,
-        description: t`Makes profile designs and decorations for Zrzur's community gallery.`,
-        earn: t`Become a Zrzur creator and publish your first decoration, nameplate or effect. Making bots doesn't count.`,
+        description: t`Designs and publishes profile designs in Zrzur Designs.`,
+        earn: t`Given after you join the Designs creator program and publish your first original, approved design. It stays for good unless the work was fraudulent or infringing. Making bots or videos doesn't count.`,
       },
       elite_bug_hunter: {
         name: t`Elite Bug Hunter`,
@@ -67,8 +67,8 @@ export function useBadgeText(): (id: string) => BadgeText {
       },
       beta_veteran: {
         name: t`Beta Veteran`,
-        description: t`Completed a Zrzur beta program.`,
-        earn: t`Complete the beta as an active tester who sent feedback or a bug report. It stays, but gives no beta access.`,
+        description: t`Completed a Zrzur beta cycle with real contributions.`,
+        earn: t`Complete a beta cycle with at least 3 reviewed feedback reports or 1 confirmed bug report; the team approves it after the cycle. It stays, but gives no beta access.`,
       },
       plus: {
         name: t`Zrzur Feather`,
@@ -137,13 +137,13 @@ export function useBadgeText(): (id: string) => BadgeText {
       },
       community_builder: {
         name: t`Community Builder`,
-        description: t`Built a server that reached 100 members.`,
-        earn: t`Own a server that reaches 100 members. It stays if the server gets smaller.`,
+        description: t`Owns a server that reached 100 genuine human members.`,
+        earn: t`Own a server that reaches 100 genuine human members. Bots, deleted, banned or suspended accounts, accounts under 7 days old or without a confirmed e-mail, and people who joined less than a day ago don't count. Counted a few times a day; it stays if the server gets smaller.`,
       },
       big_community: {
         name: t`Big Community`,
-        description: t`Built a server that reached 1,000 members.`,
-        earn: t`Own a server that reaches 1,000 members. It stays if the server gets smaller.`,
+        description: t`Owns a server that reached 1,000 genuine human members.`,
+        earn: t`Own a server that reaches 1,000 genuine human members, counted as for Community Builder. It stays if the server gets smaller. It is not a partnership or a verification.`,
       },
       verified_server_owner: {
         name: t`Verified Server Owner`,

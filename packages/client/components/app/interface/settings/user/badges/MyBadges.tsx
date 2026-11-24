@@ -53,6 +53,10 @@ import {
   TitleLine,
 } from "./parts";
 
+/** Days in the creator program Super Creator needs, when the server does
+ * not say (servers from before the rule; the SDK pin moves later) */
+const SUPER_CREATOR_DAYS = 180;
+
 /** A badge shown on the page: from a grant, or from live state (Plus) */
 type Shown = { meta: BadgeMeta; grant?: OwnBadge };
 
@@ -139,6 +143,12 @@ export function MyBadges() {
       Suspended: t`Suspended`,
       Revoked: t`Revoked`,
     })[data()?.creator.standing ?? "Revoked"];
+
+  /** Days in the creator program Super Creator needs (180; older servers
+   * don't send it) */
+  const superCreatorDays = () =>
+    (data()?.creator as { super_creator_days?: number } | undefined)
+      ?.super_creator_days || SUPER_CREATOR_DAYS;
 
   const betaStatus = () =>
     ({
@@ -356,7 +366,9 @@ export function MyBadges() {
                   >
                     <Trans>
                       Super Creator is chosen by the team after at least{" "}
-                      {data()!.creator.super_creator_designs} published designs.
+                      {data()!.creator.super_creator_designs} approved,
+                      published designs and {superCreatorDays()} days in the
+                      creator program.
                     </Trans>
                   </Show>
                 </Show>
@@ -402,6 +414,13 @@ export function MyBadges() {
                         {data()!.beta!.features.join(", ")}
                       </Trans>
                     </Show>
+                  </Match>
+                  <Match when={data()!.beta?.status === "Completed"}>
+                    <Trans>
+                      You completed the beta. The team approves Beta Veteran
+                      when you sent at least 3 reviewed feedback reports or 1
+                      confirmed bug report during the cycle.
+                    </Trans>
                   </Match>
                   <Match when={data()!.beta}>
                     <Trans>The team will let you know when you are in.</Trans>
