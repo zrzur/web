@@ -2,6 +2,12 @@
 
 ## Unreleased
 
+### Badges: Content Creator and the public badge guide (2026-11-24, badge plan phase 5)
+
+* **Zrzur badges** (`/badges`), open to everyone signed in or not: every badge given out today with its art, what it means, how it is earned (automatic, by application, given by the team) and the published criteria; no promised review dates. Reached from My Badges ("How every badge is earned").
+* **Content Creator** badge (art: concept B "The take") and its application: name one channel, its kind of content and recent works, put the code you get in the channel's description or a pinned post, and send; a person on the team checks the channel by hand.
+* "Check and apply" and "Your applications" show only while the server reports `badge_applications`.
+
 ### Badges: apply for Partner, Verified Server and Verified Bot Developer (2026-11-24, badge plan phase 4)
 
 * **Check and apply** on the Partner, Verified Server Owner and Verified Bot Developer badges in My Badges: pick your server or bot, read the checklist the server measured, write what it is, prove control of your domain (Verified Server: a DNS TXT record or a file on the website) and send it. Reviews have no promised date.
