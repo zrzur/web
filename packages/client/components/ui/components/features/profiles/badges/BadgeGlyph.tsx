@@ -541,27 +541,6 @@ const EMBLEMS: Partial<Record<string, Emblem>> = {
     ),
   },
 
-  // a trophy with a 1, first place
-  saha_champion: {
-    body: "M6.4 2.4h11.2v1.8h3.8v2.6c0 3-1.9 5.2-4.7 5.8a5.9 5.9 0 0 1-3.5 2.9v2.9h3.2a1.2 1.2 0 0 1 1.2 1.2v1.6H6.4v-1.6a1.2 1.2 0 0 1 1.2-1.2h3.2v-2.9a5.9 5.9 0 0 1-3.5-2.9C4.5 12 2.6 9.8 2.6 6.8V4.2h3.8Z",
-    details: (c) => (
-      <>
-        <path
-          d="M6.4 6.2H4.8v.6c0 1.5.7 2.7 1.8 3.3a9.6 9.6 0 0 1-.2-2ZM17.6 6.2h1.6v.6c0 1.5-.7 2.7-1.8 3.3.1-.6.2-1.3.2-2Z"
-          fill={c.deep}
-        />
-        <path
-          d="m10.8 7.4 1.6-1.2v5.8"
-          fill="none"
-          stroke="#fff"
-          stroke-width="1.9"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-        />
-      </>
-    ),
-  },
-
   // an open hand holding a heart
   community_helper: {
     body: "M7.4 12.6V5.4a1.5 1.5 0 0 1 3 0v4.4h.6V3.4a1.5 1.5 0 0 1 3 0v6.4h.6V4.6a1.5 1.5 0 0 1 3 0v5.6h.6V7a1.5 1.5 0 0 1 3 0v8.2c0 4-2.9 7-6.9 7h-1.3c-2.1 0-3.8-.9-5-2.6l-3.9-5.6a1.6 1.6 0 0 1 2.4-2.1Z",

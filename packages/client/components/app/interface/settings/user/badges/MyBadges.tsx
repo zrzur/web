@@ -18,7 +18,10 @@ import {
   BADGES,
   BADGE_BITS,
   BadgeMeta,
+  anniversaryBadge,
+  anniversaryYears,
   badgeMeta,
+  isAnniversary,
 } from "@revolt/ui/components/features/profiles/badges/catalog";
 import { useBadgeText } from "@revolt/ui/components/features/profiles/badges/useBadgeText";
 import { Icon } from "@revolt/ui/icons/Icon";
@@ -81,14 +84,28 @@ export function MyBadges() {
     if (!mine) return [];
     const shown: Shown[] = mine.badges
       .filter(heldGrant)
+      // the anniversaries are computed now: an old stored grant is history
+      .filter((grant) => !isAnniversary(grant.badge))
       .map((grant) => ({ meta: badgeMeta(grant.badge)!, grant }))
       .filter((entry) => entry.meta);
     if (mine.plus) shown.push({ meta: badgeMeta("plus")! });
-    const bits = client()?.user?.badges ?? 0;
+    const self = client()?.user;
+    const bits = self?.badges ?? 0;
     if (bits & BADGE_BITS.early_adopter)
       shown.push({ meta: badgeMeta("early_adopter")! });
+    const years = anniversaryBadge(
+      anniversaryYears(bits, self?.createdAt.getTime()),
+    );
+    if (years) shown.push({ meta: years });
     return shown.sort((a, b) => a.meta.priority - b.meta.priority);
   };
+
+  /** Full years already shown: lower anniversaries are not a goal any more */
+  const yearsHeld = () =>
+    anniversaryYears(
+      client()?.user?.badges ?? 0,
+      client()?.user?.createdAt.getTime(),
+    );
 
   const history = () =>
     (data()?.badges ?? []).filter((grant) => !heldGrant(grant));
@@ -98,7 +115,9 @@ export function MyBadges() {
       (badge) =>
         !badge.retired &&
         badge.id !== "founder" &&
-        !held().some((entry) => entry.meta.id === badge.id),
+        !held().some((entry) => entry.meta.id === badge.id) &&
+        !(badge.id === "one_year" && yearsHeld() >= 1) &&
+        !(badge.id === "three_years" && yearsHeld() >= 3),
     );
 
   async function run(action: () => Promise<unknown>) {

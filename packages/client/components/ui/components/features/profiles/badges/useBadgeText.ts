@@ -13,6 +13,7 @@ export type BadgeText = {
 export function useBadgeText(): (id: string) => BadgeText {
   const { t } = useLingui();
   return (id: string) => {
+    const years = t`Shown automatically for each full year of your account, counted in UTC; your profile shows the highest year. Hidden while you hide "Member since" on your profile.`;
     const texts: Record<AnyBadgeId, BadgeText> = {
       founder: {
         name: t`Zrzur Founder`,
@@ -82,17 +83,57 @@ export function useBadgeText(): (id: string) => BadgeText {
       early_adopter: {
         name: t`Early Adopter`,
         description: t`Joined Zrzur in its first days.`,
-        earn: t`Accounts created before the early adopter cut-off.`,
+        earn: t`Shown for accounts created before 1 March 2027, 00:00 UTC. Hidden while you hide "Member since" on your profile.`,
       },
       one_year: {
         name: t`One Year on Zrzur`,
         description: t`Has been on Zrzur for a year.`,
-        earn: t`Given automatically when your account turns one year old.`,
+        earn: years,
+      },
+      years_2: {
+        name: t`Two Years on Zrzur`,
+        description: t`Has been on Zrzur for two years.`,
+        earn: years,
       },
       three_years: {
         name: t`Three Years on Zrzur`,
         description: t`Has been on Zrzur for three years.`,
-        earn: t`Given automatically when your account turns three years old.`,
+        earn: years,
+      },
+      years_4: {
+        name: t`Four Years on Zrzur`,
+        description: t`Has been on Zrzur for four years.`,
+        earn: years,
+      },
+      years_5: {
+        name: t`Five Years on Zrzur`,
+        description: t`Has been on Zrzur for five years.`,
+        earn: years,
+      },
+      years_6: {
+        name: t`Six Years on Zrzur`,
+        description: t`Has been on Zrzur for six years.`,
+        earn: years,
+      },
+      years_7: {
+        name: t`Seven Years on Zrzur`,
+        description: t`Has been on Zrzur for seven years.`,
+        earn: years,
+      },
+      years_8: {
+        name: t`Eight Years on Zrzur`,
+        description: t`Has been on Zrzur for eight years.`,
+        earn: years,
+      },
+      years_9: {
+        name: t`Nine Years on Zrzur`,
+        description: t`Has been on Zrzur for nine years.`,
+        earn: years,
+      },
+      years_10: {
+        name: t`Ten Years on Zrzur`,
+        description: t`Has been on Zrzur for ten years.`,
+        earn: years,
       },
       community_builder: {
         name: t`Community Builder`,
@@ -113,11 +154,6 @@ export function useBadgeText(): (id: string) => BadgeText {
         name: t`Verified Bot Developer`,
         description: t`Made a bot the Zrzur team verified.`,
         earn: t`Own a verified bot. It is shown while you do.`,
-      },
-      saha_champion: {
-        name: t`Saha Champion`,
-        description: t`Won a tournament or came first in the games bot.`,
-        earn: t`Win a tournament, or come first in the games bot.`,
       },
       community_helper: {
         name: t`Community Helper`,

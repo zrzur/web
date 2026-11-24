@@ -2,13 +2,17 @@ import { readFileSync, readdirSync } from "node:fs";
 import { resolve } from "node:path";
 import { describe, expect, it } from "vitest";
 
+import { BADGE_ART } from "./badgeArt";
 import {
+  ANNIVERSARY_BADGES,
   BADGES,
   BADGE_BITS,
   BADGE_SIZES,
   CONTEXT_BADGES,
+  anniversaryYears,
   badgeMeta,
   badgesFromBits,
+  fullYears,
 } from "./catalog";
 
 function walk(dir: string): string[] {
@@ -48,9 +52,16 @@ describe("badge catalogue", () => {
       big_community: 8388608,
       verified_server_owner: 16777216,
       verified_bot_developer: 33554432,
-      saha_champion: 67108864,
       community_helper: 134217728,
     });
+  });
+
+  it("keeps Saha Champion retired: no badge, no art, its bit never shown", () => {
+    expect(badgeMeta("saha_champion")).toBeUndefined();
+    expect(BADGE_ART).not.toHaveProperty("saha_champion");
+    expect(BADGE_ART).not.toHaveProperty("verified_creator");
+    expect(badgesFromBits(67108864)).toEqual([]);
+    expect(Object.values(BADGE_BITS)).not.toContain(67108864);
   });
 
   it("orders a bitfield by priority, rarest first", () => {
@@ -137,9 +148,76 @@ describe("badge catalogue", () => {
     expect(offenders).toEqual([]);
   });
 
+  it("has art and a meta for every anniversary from one to ten years", () => {
+    const ids = [
+      "one_year",
+      "three_years",
+      ...ANNIVERSARY_BADGES.map((b) => b.id),
+    ];
+    expect(ids).toHaveLength(10);
+    for (const id of ids) {
+      expect(BADGE_ART).toHaveProperty(id);
+      expect(badgeMeta(id)?.id).toBe(id);
+    }
+    for (const badge of ANNIVERSARY_BADGES) expect(badge.bit).toBe(0);
+  });
+
   it("gives each top-tier badge a shape and ring of its own", () => {
     const top = BADGES.filter((b) => b.tier === 2);
     expect(new Set(top.map((badge) => badge.shape)).size).toBe(top.length);
     for (const badge of top) expect(badge.ring).toBeTruthy();
+  });
+});
+
+describe("time on Zrzur", () => {
+  const utc = (y: number, m: number, d: number, h = 0) =>
+    Date.UTC(y, m - 1, d, h);
+
+  it("counts full calendar years in UTC, as the server does", () => {
+    const made = utc(2026, 11, 24, 10);
+    expect(fullYears(made, made)).toBe(0);
+    expect(fullYears(made, utc(2027, 11, 24, 10) - 1)).toBe(0);
+    expect(fullYears(made, utc(2027, 11, 24, 10))).toBe(1);
+    expect(fullYears(made, utc(2036, 11, 24, 10))).toBe(10);
+    // 365 days are not a year when a 29 February lies between
+    const cutoff = utc(2027, 3, 1);
+    expect(cutoff).toBe(1803859200000);
+    expect(fullYears(cutoff, cutoff + 365 * 86400000)).toBe(0);
+    expect(fullYears(cutoff, cutoff + 366 * 86400000)).toBe(1);
+  });
+
+  it("gives a 29 February account its day on 28 February", () => {
+    const made = utc(2028, 2, 29, 10);
+    expect(fullYears(made, utc(2029, 2, 28, 10) - 1)).toBe(0);
+    expect(fullYears(made, utc(2029, 2, 28, 10))).toBe(1);
+    expect(fullYears(made, utc(2032, 2, 29, 10) - 1)).toBe(3);
+    expect(fullYears(made, utc(2032, 2, 29, 10))).toBe(4);
+    expect(fullYears(utc(2096, 2, 29), utc(2100, 2, 28))).toBe(4);
+  });
+
+  it("shows only the highest year, within what the bits allow", () => {
+    const made = utc(2026, 1, 1);
+    const one = BADGE_BITS.one_year;
+    const three = BADGE_BITS.three_years;
+    const ids = (bits: number, now: number) =>
+      badgesFromBits(bits, made, now).map((b) => b.id);
+    expect(ids(0, utc(2031, 6, 1))).toEqual([]);
+    expect(ids(one, utc(2027, 6, 1))).toEqual(["one_year"]);
+    expect(ids(one, utc(2028, 6, 1))).toEqual(["years_2"]);
+    expect(ids(one | three, utc(2029, 6, 1))).toEqual(["three_years"]);
+    expect(ids(one | three, utc(2031, 6, 1))).toEqual(["years_5"]);
+    expect(ids(one | three, utc(2045, 6, 1))).toEqual(["years_10"]);
+    expect(ids(one | three | BADGE_BITS.staff, utc(2032, 6, 1))).toEqual([
+      "staff",
+      "years_6",
+    ]);
+    // a clock far ahead never shows more than the server allows
+    expect(ids(one, utc(2040, 1, 1))).toEqual(["years_2"]);
+    // a clock behind never shows less than the bits say
+    expect(anniversaryYears(one | three, made, utc(2026, 6, 1))).toBe(3);
+    // without the creation time the bits alone decide
+    expect(badgesFromBits(one | three).map((b) => b.id)).toEqual([
+      "three_years",
+    ]);
   });
 });
