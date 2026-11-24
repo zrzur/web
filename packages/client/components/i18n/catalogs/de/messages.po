@@ -33158,3 +33158,36 @@ msgstr "Zrzur wird von Freiwilligen gebaut. Prüfungen erfolgen, sobald eine fre
 #: src/interface/badgeGuide/useBadgeGuide.ts
 msgid "Zrzur team"
 msgstr "Zrzur-Team"
+
+#: components/app/interface/settings/user/activity/ActivitySettings.tsx
+msgid "Activity is detected by the Zrzur desktop app. Open Zrzur in the desktop app to share games and apps."
+msgstr "Aktivitäten erkennt die Zrzur-Desktop-App. Öffne Zrzur in der Desktop-App, um Spiele und Apps zu teilen."
+
+#. placeholder {0}: label(activity())
+#: components/app/interface/settings/user/activity/ActivitySettings.tsx
+msgid "Detecting now: {0}"
+msgstr "Gerade erkannt: {0}"
+
+#: components/app/interface/settings/user/activity/ActivitySettings.tsx
+msgid "Detecting now: nothing running"
+msgstr "Gerade erkannt: nichts läuft"
+
+#: components/app/interface/settings/user/activity/ActivitySettings.tsx
+msgid "On this device"
+msgstr "Auf diesem Gerät"
+
+#: components/app/interface/settings/user/activity/ActivitySettings.tsx
+msgid "Sharing is off, so the desktop app detects nothing."
+msgstr "Teilen ist aus, daher erkennt die Desktop-App nichts."
+
+#: components/app/interface/settings/user/activity/ActivitySettings.tsx
+msgid "Steam is on too: a game you play on Steam shows even without the desktop app."
+msgstr "Steam ist ebenfalls an: Ein Spiel, das du auf Steam spielst, erscheint auch ohne die Desktop-App."
+
+#: components/app/interface/settings/user/activity/ActivitySettings.tsx
+msgid "Update the Zrzur desktop app to share what you are doing."
+msgstr "Aktualisiere die Zrzur-Desktop-App, um zu teilen, was du gerade tust."
+
+#: components/app/interface/settings/user/activity/ActivitySettings.tsx
+msgid "Without the desktop app, Steam can still show what you play: turn on “Show what you play on Steam”."
+msgstr "Auch ohne Desktop-App kann Steam zeigen, was du spielst: Schalte „Zeigen, was du auf Steam spielst“ ein."

@@ -9,6 +9,7 @@ import {
   type DesktopActivityUpdate,
   desktopActivity,
   richPresenceEnabled,
+  setDesktopDetected as setDetected,
   setActivitySharing as setSharing,
   activitySharing as sharing,
 } from "./ActivityWorker";
@@ -64,6 +65,8 @@ export default function ActivityBridge() {
   );
 
   const apply = (update: DesktopActivityUpdate) => {
+    // the settings page shows what is detected, sent or not
+    setDetected(update);
     if (sharing() !== true) return;
     sender.set("Rpc", update.rpc ?? null);
     sender.set("Desktop", update.desktop ?? null);

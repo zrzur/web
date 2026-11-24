@@ -1,6 +1,8 @@
 import {
   For,
+  Match,
   Show,
+  Switch,
   createEffect,
   createMemo,
   createResource,
@@ -18,7 +20,9 @@ import {
   type DesktopActivityEntry,
   type DesktopActivityState,
   desktopActivity,
+  desktopDetected,
   setActivitySharing,
+  setDesktopDetected,
 } from "@revolt/client/ActivityWorker";
 import { useModals } from "@revolt/modal";
 import {
@@ -30,8 +34,13 @@ import {
   TextField,
   Toggle,
 } from "@revolt/ui";
+import { useActivityLabel } from "@revolt/ui/components/features/activity/ActivityLineBody";
 import { ProfileActivity } from "@revolt/ui/components/features/activity/ProfileActivity";
+import type { Activity } from "@revolt/ui/components/features/activity/activityText";
 import { Symbol } from "@revolt/ui/components/utils/Symbol";
+import { Icon } from "@revolt/ui/icons/Icon";
+
+import { detectedNow, detectionStatus } from "./detectionStatus";
 
 type Privacy = {
   share_activity?: boolean | null;
@@ -105,7 +114,20 @@ export function ActivitySettings() {
     if (!bridge) return;
     void bridge.state().then(setState);
     onCleanup(bridge.onState(setState));
+    // what is detected now, also before the desktop sends its next change
+    void bridge.current().then(setDesktopDetected);
   });
+
+  /* where activity is detected, said plainly: a browser and a desktop app
+     from before rich presence detect nothing at all */
+  const label = useActivityLabel();
+  const status = () =>
+    detectionStatus({
+      native: !!window.native,
+      bridge: !!bridge,
+      sharing: shares(),
+    });
+  const now = () => detectedNow(desktopDetected()) as Activity | undefined;
 
   // a pairing code lasts five minutes and the desktop says nothing when it
   // runs out: look again while one is shown, so an old code never stays
@@ -208,7 +230,7 @@ export function ActivitySettings() {
     <Page data-testid="activity-settings">
       <SettingsSection title={<Trans>Share your activity</Trans>}>
         <SettingsRow
-          icon={<Symbol size={20}>sports_esports</Symbol>}
+          icon={<Icon name="pulse" size={20} />}
           title={<Trans>Share what you are doing</Trans>}
           description={
             <Lines>
@@ -283,6 +305,67 @@ export function ActivitySettings() {
             )}
           />
         </Show>
+        <SettingsRow
+          icon={<Icon name="desktop" size={20} />}
+          title={<Trans>On this device</Trans>}
+          data-testid="activity-status"
+          description={
+            <Lines>
+              <span data-state={status()} data-testid="activity-status-text">
+                <Switch>
+                  <Match when={status() === "browser"}>
+                    <span data-testid="activity-browser-note">
+                      <Trans>
+                        Activity is detected by the Zrzur desktop app. Open
+                        Zrzur in the desktop app to share games and apps.
+                      </Trans>
+                    </span>
+                  </Match>
+                  <Match when={status() === "update"}>
+                    <Trans>
+                      Update the Zrzur desktop app to share what you are doing.
+                    </Trans>
+                  </Match>
+                  <Match when={status() === "off"}>
+                    <Trans>
+                      Sharing is off, so the desktop app detects nothing.
+                    </Trans>
+                  </Match>
+                  <Match when={status() === "live"}>
+                    <Show
+                      when={now()}
+                      fallback={t`Detecting now: nothing running`}
+                    >
+                      {(activity) => (
+                        <bdi data-testid="activity-detected">
+                          {t`Detecting now: ${label(activity())}`}
+                        </bdi>
+                      )}
+                    </Show>
+                  </Match>
+                </Switch>
+              </span>
+              <Show when={steamFeature()}>
+                <span data-testid="activity-status-steam">
+                  <Show
+                    when={shares() && privacy()?.share_steam_activity}
+                    fallback={
+                      <Trans>
+                        Without the desktop app, Steam can still show what you
+                        play: turn on “Show what you play on Steam”.
+                      </Trans>
+                    }
+                  >
+                    <Trans>
+                      Steam is on too: a game you play on Steam shows even
+                      without the desktop app.
+                    </Trans>
+                  </Show>
+                </span>
+              </Show>
+            </Lines>
+          }
+        />
         <Show when={client().user}>
           {(me) => (
             <Preview>
@@ -309,19 +392,10 @@ export function ActivitySettings() {
         </Show>
       </SettingsSection>
 
-      <SettingsSection title={<Trans>Games and apps on this computer</Trans>}>
-        <Show
-          when={bridge}
-          fallback={
-            <Hint data-testid="activity-browser-note">
-              <Trans>
-                A browser cannot see which games or programs are running, so
-                nothing is detected here. The Zrzur desktop app can, and apps
-                can tell it what they do. Steam works everywhere.
-              </Trans>
-            </Hint>
-          }
-        >
+      {/* the desktop app's own parts: a browser or a desktop app from before
+          rich presence has none (the status row above says why) */}
+      <Show when={bridge}>
+        <SettingsSection title={<Trans>Games and apps on this computer</Trans>}>
           <SettingsRow
             icon={<Symbol size={20}>desktop_windows</Symbol>}
             title={<Trans>Detect games and apps</Trans>}
@@ -518,24 +592,15 @@ export function ActivitySettings() {
               </Show>
             </Button>
           </Show>
-        </Show>
-      </SettingsSection>
+        </SettingsSection>
 
-      <SettingsSection
-        title={<Trans>Connected apps</Trans>}
-        description={
-          <Trans>
-            Games and apps that told Zrzur what you are doing, through the
-            desktop app. Block one and it is never shown.
-          </Trans>
-        }
-      >
-        <Show
-          when={bridge}
-          fallback={
-            <Hint>
-              <Trans>Apps connect through the Zrzur desktop app.</Trans>
-            </Hint>
+        <SettingsSection
+          title={<Trans>Connected apps</Trans>}
+          description={
+            <Trans>
+              Games and apps that told Zrzur what you are doing, through the
+              desktop app. Block one and it is never shown.
+            </Trans>
           }
         >
           <Show
@@ -724,8 +789,8 @@ export function ActivitySettings() {
               />
             )}
           />
-        </Show>
-      </SettingsSection>
+        </SettingsSection>
+      </Show>
 
       <SettingsSection title={<Trans>Your privacy</Trans>}>
         {/* the same words as the privacy policy (legal RP-04) */}
