@@ -21830,10 +21830,6 @@ msgstr "Safety and reports"
 msgid "Sagittarius"
 msgstr "Sagittarius"
 
-#: components/ui/components/features/profiles/badges/useBadgeText.ts
-msgid "Saha Champion"
-msgstr "Saha Champion"
-
 #: components/ui/components/features/profiles/plateNames.ts
 msgid "Saint Kitts and Nevis"
 msgstr "Saint Kitts and Nevis"
@@ -30199,10 +30195,6 @@ msgstr "Will not come over"
 msgid "Will you come?"
 msgstr "Will you come?"
 
-#: components/ui/components/features/profiles/badges/useBadgeText.ts
-msgid "Win a tournament, or come first in the games bot."
-msgstr "Win a tournament, or come first in the games bot."
-
 #: components/app/interface/settings/user/Native.tsx
 msgid "Window"
 msgstr "Window"
@@ -30336,10 +30328,6 @@ msgstr "Without an end time it ends 12 hours after it starts, or when a manager 
 #: components/app/interface/settings/server/channels/ChannelsSettings.tsx
 msgid "Without category"
 msgstr "Without category"
-
-#: components/ui/components/features/profiles/badges/useBadgeText.ts
-msgid "Won a tournament or came first in the games bot."
-msgstr "Won a tournament or came first in the games bot."
 
 #: components/ui/components/features/profiles/pack/labels.generated.ts
 msgid "Woods Frame"
@@ -32003,3 +31991,135 @@ msgstr "Zrzur, right on <0>your desktop.</0>"
 #: components/app/interface/settings/user/appearance/AppearanceMenu.tsx
 #~ msgid "Zrzur's own look: very dark neutral panels with Zrzur Pink as the one accent."
 #~ msgstr "Zrzur's own look: very dark neutral panels with Zrzur Pink as the one accent."
+
+#: components/app/interface/settings/user/badges/BadgeAdmin.tsx
+msgid "Asked by"
+msgstr "Asked by"
+
+#: components/app/interface/settings/user/badges/BadgeAdmin.tsx
+msgid "Authenticator code"
+msgstr "Authenticator code"
+
+#: components/app/interface/settings/user/badges/BadgeAdmin.tsx
+msgid "Badges are changed with a staff session, as in the admin console. Enter the code from your authenticator app."
+msgstr "Badges are changed with a staff session, as in the admin console. Enter the code from your authenticator app."
+
+#: components/app/interface/settings/user/badges/BadgeAdmin.tsx
+msgid "Confirm with a fresh code"
+msgstr "Confirm with a fresh code"
+
+#: components/app/interface/settings/user/badges/BadgeAdmin.tsx
+msgid "Confirmed. Protected changes are open for five minutes."
+msgstr "Confirmed. Protected changes are open for five minutes."
+
+#: components/ui/components/features/profiles/badges/useBadgeText.ts
+msgid "Eight Years on Zrzur"
+msgstr "Eight Years on Zrzur"
+
+#: components/ui/components/features/profiles/badges/useBadgeText.ts
+msgid "Five Years on Zrzur"
+msgstr "Five Years on Zrzur"
+
+#: components/ui/components/features/profiles/badges/useBadgeText.ts
+msgid "Four Years on Zrzur"
+msgstr "Four Years on Zrzur"
+
+#: components/ui/components/features/profiles/badges/useBadgeText.ts
+msgid "Has been on Zrzur for eight years."
+msgstr "Has been on Zrzur for eight years."
+
+#: components/ui/components/features/profiles/badges/useBadgeText.ts
+msgid "Has been on Zrzur for five years."
+msgstr "Has been on Zrzur for five years."
+
+#: components/ui/components/features/profiles/badges/useBadgeText.ts
+msgid "Has been on Zrzur for four years."
+msgstr "Has been on Zrzur for four years."
+
+#: components/ui/components/features/profiles/badges/useBadgeText.ts
+msgid "Has been on Zrzur for nine years."
+msgstr "Has been on Zrzur for nine years."
+
+#: components/ui/components/features/profiles/badges/useBadgeText.ts
+msgid "Has been on Zrzur for seven years."
+msgstr "Has been on Zrzur for seven years."
+
+#: components/ui/components/features/profiles/badges/useBadgeText.ts
+msgid "Has been on Zrzur for six years."
+msgstr "Has been on Zrzur for six years."
+
+#: components/ui/components/features/profiles/badges/useBadgeText.ts
+msgid "Has been on Zrzur for ten years."
+msgstr "Has been on Zrzur for ten years."
+
+#: components/ui/components/features/profiles/badges/useBadgeText.ts
+msgid "Has been on Zrzur for two years."
+msgstr "Has been on Zrzur for two years."
+
+#: components/ui/components/features/profiles/badges/useBadgeText.ts
+msgid "Nine Years on Zrzur"
+msgstr "Nine Years on Zrzur"
+
+#: components/app/interface/settings/user/badges/BadgeAdmin.tsx
+msgid "No badge changes are waiting."
+msgstr "No badge changes are waiting."
+
+#: components/app/interface/settings/user/badges/BadgeAdmin.tsx
+msgid "No expiry"
+msgstr "No expiry"
+
+#: components/app/interface/settings/user/badges/BadgeAdmin.tsx
+msgid "Open a staff session"
+msgstr "Open a staff session"
+
+#: components/app/interface/settings/user/badges/BadgeAdmin.tsx
+msgid "Open staff session"
+msgstr "Open staff session"
+
+#: components/app/interface/settings/user/badges/BadgeAdmin.tsx
+msgid "Person"
+msgstr "Person"
+
+#: components/app/interface/settings/user/badges/BadgeAdmin.tsx
+msgid "Refuse"
+msgstr "Refuse"
+
+#: components/app/interface/settings/user/badges/BadgeAdmin.tsx
+msgid "Saved as a request: a second staff member must approve it."
+msgstr "Saved as a request: a second staff member must approve it."
+
+#: components/ui/components/features/profiles/badges/useBadgeText.ts
+msgid "Seven Years on Zrzur"
+msgstr "Seven Years on Zrzur"
+
+#: components/ui/components/features/profiles/badges/useBadgeText.ts
+msgid "Shown automatically for each full year of your account, counted in UTC; your profile shows the highest year. Hidden while you hide \"Member since\" on your profile."
+msgstr "Shown automatically for each full year of your account, counted in UTC; your profile shows the highest year. Hidden while you hide \"Member since\" on your profile."
+
+#: components/ui/components/features/profiles/badges/useBadgeText.ts
+msgid "Shown for accounts created before 1 March 2027, 00:00 UTC. Hidden while you hide \"Member since\" on your profile."
+msgstr "Shown for accounts created before 1 March 2027, 00:00 UTC. Hidden while you hide \"Member since\" on your profile."
+
+#: components/ui/components/features/profiles/badges/useBadgeText.ts
+msgid "Six Years on Zrzur"
+msgstr "Six Years on Zrzur"
+
+#: components/ui/components/features/profiles/badges/useBadgeText.ts
+msgid "Ten Years on Zrzur"
+msgstr "Ten Years on Zrzur"
+
+#: components/app/interface/settings/user/badges/BadgeAdmin.tsx
+msgid "This app may not open a staff session here, or the session ended. Use the admin console."
+msgstr "This app may not open a staff session here, or the session ended. Use the admin console."
+
+#: components/app/interface/settings/user/badges/BadgeAdmin.tsx
+msgid "This change is protected. Enter a new code from your authenticator app, then try again."
+msgstr "This change is protected. Enter a new code from your authenticator app, then try again."
+
+#: components/ui/components/features/profiles/badges/useBadgeText.ts
+msgid "Two Years on Zrzur"
+msgstr "Two Years on Zrzur"
+
+#: components/app/interface/settings/user/badges/BadgeAdmin.tsx
+msgid "Waiting for a second staff member"
+msgstr "Waiting for a second staff member"

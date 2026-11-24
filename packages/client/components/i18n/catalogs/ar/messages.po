@@ -21827,10 +21827,6 @@ msgstr "الأمان والبلاغات"
 msgid "Sagittarius"
 msgstr "القوس"
 
-#: components/ui/components/features/profiles/badges/useBadgeText.ts
-msgid "Saha Champion"
-msgstr "بطل الساحة"
-
 #: components/ui/components/features/profiles/plateNames.ts
 msgid "Saint Kitts and Nevis"
 msgstr "سانت كيتس ونيفيس"
@@ -30196,10 +30192,6 @@ msgstr "لن ينتقل"
 msgid "Will you come?"
 msgstr "هل ستحضر؟"
 
-#: components/ui/components/features/profiles/badges/useBadgeText.ts
-msgid "Win a tournament, or come first in the games bot."
-msgstr "افز ببطولة، أو احتل المركز الأول في بوت الألعاب."
-
 #: components/app/interface/settings/user/Native.tsx
 msgid "Window"
 msgstr "النافذة"
@@ -30333,10 +30325,6 @@ msgstr "دون وقت انتهاء، تنتهي الفعالية بعد 12 سا�
 #: components/app/interface/settings/server/channels/ChannelsSettings.tsx
 msgid "Without category"
 msgstr "بلا فئة"
-
-#: components/ui/components/features/profiles/badges/useBadgeText.ts
-msgid "Won a tournament or came first in the games bot."
-msgstr "فاز ببطولة أو حلّ أولًا في بوت الألعاب."
 
 #: components/ui/components/features/profiles/pack/labels.generated.ts
 msgid "Woods Frame"
@@ -32000,3 +31988,135 @@ msgstr "زرزور، مباشرةً على <0>سطح مكتبك.</0>"
 #: components/app/interface/settings/user/appearance/AppearanceMenu.tsx
 #~ msgid "Zrzur's own look: very dark neutral panels with Zrzur Pink as the one accent."
 #~ msgstr "مظهر زرزور الخاص: لوحات داكنة جدًا بألوان محايدة، وزهري زرزور هو اللون المميز الوحيد."
+
+#: components/app/interface/settings/user/badges/BadgeAdmin.tsx
+msgid "Asked by"
+msgstr "طلبه"
+
+#: components/app/interface/settings/user/badges/BadgeAdmin.tsx
+msgid "Authenticator code"
+msgstr "رمز تطبيق المصادقة"
+
+#: components/app/interface/settings/user/badges/BadgeAdmin.tsx
+msgid "Badges are changed with a staff session, as in the admin console. Enter the code from your authenticator app."
+msgstr "تُغيَّر الشارات بجلسة فريق كما في لوحة الإدارة. أدخل الرمز من تطبيق المصادقة."
+
+#: components/app/interface/settings/user/badges/BadgeAdmin.tsx
+msgid "Confirm with a fresh code"
+msgstr "أكّد برمز جديد"
+
+#: components/app/interface/settings/user/badges/BadgeAdmin.tsx
+msgid "Confirmed. Protected changes are open for five minutes."
+msgstr "تم التأكيد. التغييرات المحمية متاحة لخمس دقائق."
+
+#: components/ui/components/features/profiles/badges/useBadgeText.ts
+msgid "Eight Years on Zrzur"
+msgstr "ثمانية أعوام في زرزور"
+
+#: components/ui/components/features/profiles/badges/useBadgeText.ts
+msgid "Five Years on Zrzur"
+msgstr "خمسة أعوام في زرزور"
+
+#: components/ui/components/features/profiles/badges/useBadgeText.ts
+msgid "Four Years on Zrzur"
+msgstr "أربعة أعوام في زرزور"
+
+#: components/ui/components/features/profiles/badges/useBadgeText.ts
+msgid "Has been on Zrzur for eight years."
+msgstr "في زرزور منذ ثمانية أعوام."
+
+#: components/ui/components/features/profiles/badges/useBadgeText.ts
+msgid "Has been on Zrzur for five years."
+msgstr "في زرزور منذ خمسة أعوام."
+
+#: components/ui/components/features/profiles/badges/useBadgeText.ts
+msgid "Has been on Zrzur for four years."
+msgstr "في زرزور منذ أربعة أعوام."
+
+#: components/ui/components/features/profiles/badges/useBadgeText.ts
+msgid "Has been on Zrzur for nine years."
+msgstr "في زرزور منذ تسعة أعوام."
+
+#: components/ui/components/features/profiles/badges/useBadgeText.ts
+msgid "Has been on Zrzur for seven years."
+msgstr "في زرزور منذ سبعة أعوام."
+
+#: components/ui/components/features/profiles/badges/useBadgeText.ts
+msgid "Has been on Zrzur for six years."
+msgstr "في زرزور منذ ستة أعوام."
+
+#: components/ui/components/features/profiles/badges/useBadgeText.ts
+msgid "Has been on Zrzur for ten years."
+msgstr "في زرزور منذ عشرة أعوام."
+
+#: components/ui/components/features/profiles/badges/useBadgeText.ts
+msgid "Has been on Zrzur for two years."
+msgstr "في زرزور منذ عامين."
+
+#: components/ui/components/features/profiles/badges/useBadgeText.ts
+msgid "Nine Years on Zrzur"
+msgstr "تسعة أعوام في زرزور"
+
+#: components/app/interface/settings/user/badges/BadgeAdmin.tsx
+msgid "No badge changes are waiting."
+msgstr "لا توجد تغييرات شارات بانتظار الموافقة."
+
+#: components/app/interface/settings/user/badges/BadgeAdmin.tsx
+msgid "No expiry"
+msgstr "بلا انتهاء"
+
+#: components/app/interface/settings/user/badges/BadgeAdmin.tsx
+msgid "Open a staff session"
+msgstr "افتح جلسة فريق"
+
+#: components/app/interface/settings/user/badges/BadgeAdmin.tsx
+msgid "Open staff session"
+msgstr "افتح الجلسة"
+
+#: components/app/interface/settings/user/badges/BadgeAdmin.tsx
+msgid "Person"
+msgstr "الشخص"
+
+#: components/app/interface/settings/user/badges/BadgeAdmin.tsx
+msgid "Refuse"
+msgstr "ارفض"
+
+#: components/app/interface/settings/user/badges/BadgeAdmin.tsx
+msgid "Saved as a request: a second staff member must approve it."
+msgstr "حُفظ طلباً: يجب أن يوافق عليه عضو آخر من الفريق."
+
+#: components/ui/components/features/profiles/badges/useBadgeText.ts
+msgid "Seven Years on Zrzur"
+msgstr "سبعة أعوام في زرزور"
+
+#: components/ui/components/features/profiles/badges/useBadgeText.ts
+msgid "Shown automatically for each full year of your account, counted in UTC; your profile shows the highest year. Hidden while you hide \"Member since\" on your profile."
+msgstr "تظهر تلقائياً عن كل سنة كاملة من عمر حسابك، محسوبة بتوقيت UTC، ويعرض ملفك أعلى سنة بلغتها. تُخفى ما دمت تخفي قسم «عضو منذ» في ملفك."
+
+#: components/ui/components/features/profiles/badges/useBadgeText.ts
+msgid "Shown for accounts created before 1 March 2027, 00:00 UTC. Hidden while you hide \"Member since\" on your profile."
+msgstr "تظهر للحسابات المُنشأة قبل 1 مارس 2027 الساعة 00:00 بتوقيت UTC. تُخفى ما دمت تخفي قسم «عضو منذ» في ملفك."
+
+#: components/ui/components/features/profiles/badges/useBadgeText.ts
+msgid "Six Years on Zrzur"
+msgstr "ستة أعوام في زرزور"
+
+#: components/ui/components/features/profiles/badges/useBadgeText.ts
+msgid "Ten Years on Zrzur"
+msgstr "عشرة أعوام في زرزور"
+
+#: components/app/interface/settings/user/badges/BadgeAdmin.tsx
+msgid "This app may not open a staff session here, or the session ended. Use the admin console."
+msgstr "لا يمكن لهذا التطبيق فتح جلسة فريق هنا، أو انتهت الجلسة. استخدم لوحة الإدارة."
+
+#: components/app/interface/settings/user/badges/BadgeAdmin.tsx
+msgid "This change is protected. Enter a new code from your authenticator app, then try again."
+msgstr "هذا التغيير محمي. أدخل رمزاً جديداً من تطبيق المصادقة، ثم أعد المحاولة."
+
+#: components/ui/components/features/profiles/badges/useBadgeText.ts
+msgid "Two Years on Zrzur"
+msgstr "عامان في زرزور"
+
+#: components/app/interface/settings/user/badges/BadgeAdmin.tsx
+msgid "Waiting for a second staff member"
+msgstr "بانتظار عضو آخر من الفريق"
