@@ -1,4 +1,5 @@
 import { AvatarDecoration } from "@revolt/ui/components/features/profiles/AvatarDecoration";
+import { nameRoom } from "@revolt/ui/components/features/profiles/nameRoom";
 import { nameStyle } from "@revolt/ui/components/features/profiles/userStyle";
 import {
   type JSX,
@@ -149,7 +150,8 @@ export function AccountBar(props: { compact?: boolean; overPage?: boolean }) {
           <Show when={!props.compact}>
             <Meta>
               <Name>
-                <OverflowingText>
+                {/* room for a styled name's glow inside the cut */}
+                <OverflowingText class={nameRoom} data-name-room="">
                   <span style={nameStyle(user()?.style)}>
                     {user()?.displayName ?? user()?.username ?? ""}
                   </span>
