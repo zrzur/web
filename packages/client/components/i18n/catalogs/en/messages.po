@@ -32076,3 +32076,40 @@ msgstr "This browser plays calls on the device's own speaker choice."
 #: components/ui/components/features/voice/dmCall/DmCallRoom.tsx
 msgid "Voice settings"
 msgstr "Voice settings"
+
+#. js-lingui-explicit-id
+#. placeholder {0}: name()
+#: components/modal/modals/StartCall.tsx
+msgid "call.confirm.body.dm"
+msgstr "{0} will be rung on their devices."
+
+#. placeholder {0}: user().username
+#: components/ui/components/features/voice/dmCall/DmCallRoom.tsx
+msgid "{0}, ringing"
+msgstr "{0}, ringing"
+
+#. js-lingui-explicit-id
+#. placeholder {0}: name()
+#: components/modal/modals/StartCall.tsx
+msgid "call.confirm.body.group"
+msgstr "Everyone in {0} will be rung."
+
+#. js-lingui-explicit-id
+#: components/modal/modals/StartCall.tsx
+msgid "call.confirm.title.video"
+msgstr "Start a video call?"
+
+#. js-lingui-explicit-id
+#: components/modal/modals/StartCall.tsx
+msgid "call.confirm.title.voice"
+msgstr "Start a voice call?"
+
+#. js-lingui-explicit-id
+#: components/modal/modals/StartCall.tsx
+msgid "call.confirm.start"
+msgstr "Start call"
+
+#. js-lingui-explicit-id
+#: components/ui/components/features/voice/dmCall/DmCallRoom.tsx
+msgid "call.alone.line"
+msgstr "You're the only one here. The others can still join."

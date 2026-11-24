@@ -32073,3 +32073,40 @@ msgstr "Dieser Browser spielt Anrufe über den Lautsprecher ab, den das Gerät w
 #: components/ui/components/features/voice/dmCall/DmCallRoom.tsx
 msgid "Voice settings"
 msgstr "Spracheinstellungen"
+
+#. js-lingui-explicit-id
+#. placeholder {0}: name()
+#: components/modal/modals/StartCall.tsx
+msgid "call.confirm.body.dm"
+msgstr "Bei {0} klingeln die Geräte."
+
+#. placeholder {0}: user().username
+#: components/ui/components/features/voice/dmCall/DmCallRoom.tsx
+msgid "{0}, ringing"
+msgstr "{0}, klingelt"
+
+#. js-lingui-explicit-id
+#. placeholder {0}: name()
+#: components/modal/modals/StartCall.tsx
+msgid "call.confirm.body.group"
+msgstr "Bei allen in {0} klingelt es."
+
+#. js-lingui-explicit-id
+#: components/modal/modals/StartCall.tsx
+msgid "call.confirm.title.video"
+msgstr "Videoanruf starten?"
+
+#. js-lingui-explicit-id
+#: components/modal/modals/StartCall.tsx
+msgid "call.confirm.title.voice"
+msgstr "Sprachanruf starten?"
+
+#. js-lingui-explicit-id
+#: components/modal/modals/StartCall.tsx
+msgid "call.confirm.start"
+msgstr "Anruf starten"
+
+#. js-lingui-explicit-id
+#: components/ui/components/features/voice/dmCall/DmCallRoom.tsx
+msgid "call.alone.line"
+msgstr "Du bist allein hier. Die anderen können noch beitreten."
