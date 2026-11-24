@@ -449,6 +449,19 @@ export function nameStyle(
   return css;
 }
 
+/**
+ * Whether this viewer sees the person's own chosen name colour: they chose
+ * one, and "Show name styles" is on. Where it is true, it wins over a server
+ * role colour (see `Username`).
+ */
+export function hasOwnNameColour(style: UserStyle | undefined) {
+  return (
+    !!style &&
+    !nameView().plain &&
+    colours(style.name_colour, NAME_MAX_COLOURS).length > 0
+  );
+}
+
 /** The profile theme colours, if the user picked any */
 export function themeColours(style: UserStyle | undefined) {
   const list = colours(style?.theme);
