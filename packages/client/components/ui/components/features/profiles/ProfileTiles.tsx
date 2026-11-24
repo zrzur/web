@@ -169,7 +169,7 @@ const caption = cva({
       whiteSpace: "nowrap",
       color: "var(--profile-ink-2, var(--z-fg-muted))",
     },
-    // a narrow profile (a framed one on a phone): the tiles are narrower, so
+    // a narrow profile or card (framed on a phone): the tiles are narrower, so
     // a name and its line take up to two lines, broken between words only
     "[data-narrow] &": {
       "& bdi, & > span": {

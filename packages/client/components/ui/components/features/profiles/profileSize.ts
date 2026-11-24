@@ -30,12 +30,19 @@ export const FOUR_TILES_WIDTH = 336;
 export const tilesShown = (size: ProfileSize, width?: number) =>
   size === "full" && (width === undefined || width >= FOUR_TILES_WIDTH) ? 4 : 3;
 
+/** The card's content width on a desktop (360 px less its 16 px sides) */
+export const CARD_CONTENT_WIDTH = 328;
+
 /**
- * A full profile measured narrower than four tiles need (a framed one on a
- * phone); the card is always drawn at its own width and never counts
+ * A profile measured narrower than its usual width: a full profile too
+ * narrow for four tiles, or a card narrower than on a desktop. Both happen
+ * when it is framed on a phone and stands in from the screen's edges; then
+ * a tile's name and its line may take two lines instead of being cut short
+ * ("Moon h…").
  */
 export const narrowProfile = (size: ProfileSize, width?: number) =>
-  size === "full" && width !== undefined && width < FOUR_TILES_WIDTH;
+  width !== undefined &&
+  width < (size === "full" ? FOUR_TILES_WIDTH : CARD_CONTENT_WIDTH);
 
 /** Tiles in one row where these sections are drawn */
 export function useTilesShown() {

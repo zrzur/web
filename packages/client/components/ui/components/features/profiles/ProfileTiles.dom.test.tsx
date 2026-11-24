@@ -96,6 +96,17 @@ describe("Wearing and creations tiles", () => {
     });
   });
 
+  it("a framed card on a phone (inset from the edges) gives names two lines", () => {
+    // 375 px screen, frame room and 12 px on each side: 263 px of content;
+    // names were cut short there ("Moon h…", "Falling s…")
+    expect(mount("card", 263)).toEqual({
+      perRow: "3",
+      shown: 3,
+      more: true,
+      narrow: true,
+    });
+  });
+
   it("before the profile is measured, the size alone decides", () => {
     expect(mount("full")).toEqual({
       perRow: "4",
