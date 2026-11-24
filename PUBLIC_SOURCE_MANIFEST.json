@@ -268,8 +268,8 @@
     },
     {
       "path": "CHANGELOG.md",
-      "sha256": "4581576703f3fedec72ff13b57ba65395fc72e77e22fb94d90ee44eb2c620707",
-      "bytes": 236678,
+      "sha256": "367feb9fc39ac929cb5c536419b5b57b326ac2b71e775666be665faeee07bf3e",
+      "bytes": 237902,
       "category": "public-documentation"
     },
     {
@@ -2326,8 +2326,8 @@
     },
     {
       "path": "packages/client/components/app/interface/settings/user/badges/MyBadges.tsx",
-      "sha256": "70fab0a45e37027361a428125a7bd292dfaebeb2d32644750886961360c2c754",
-      "bytes": 24732,
+      "sha256": "a2e118eb39f8bfeec652390c079ba96ba78aa380da7ef5ee1cd7bd55804f1088",
+      "bytes": 24774,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -3778,8 +3778,8 @@
     },
     {
       "path": "packages/client/components/i18n/catalogs/ar/messages.po",
-      "sha256": "35d83d78e637fe7c5e361d2442f978874c30d012aa54b7b8fcc223da33a03026",
-      "bytes": 1369185,
+      "sha256": "6255e7059aa361346806f2eddc2b76e48bed0e58830b346304c9f58c5c3afce9",
+      "bytes": 1374424,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -3922,8 +3922,8 @@
     },
     {
       "path": "packages/client/components/i18n/catalogs/de/messages.po",
-      "sha256": "ad9765f041a36a5ae5e634ae0e24f85f96902db5bf8993e61af7501b36ce0d9e",
-      "bytes": 1264179,
+      "sha256": "4fbd8acad71ae6e54312c65a145944d63b2d46daede50aecea71bbc6ddacd540",
+      "bytes": 1269071,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -3958,8 +3958,8 @@
     },
     {
       "path": "packages/client/components/i18n/catalogs/en/messages.po",
-      "sha256": "d50c5249be29e2d37e6184e86f7424c192ee5b36456282937581fa79a0e9660c",
-      "bytes": 1217055,
+      "sha256": "56f46d10e520ed94ceeb28fe48b2e7f102fe2f3b673e06f1bab343fee1062195",
+      "bytes": 1221666,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -7576,8 +7576,8 @@
     },
     {
       "path": "packages/client/components/ui/components/features/profiles/badges/badgeRules.test.ts",
-      "sha256": "696208d6043e0a59d29a7afebe4f6d9ab30a57a5a67907c2147c45c1df78df31",
-      "bytes": 3593,
+      "sha256": "2f4e5e28e8074be562135df28c41eaadf39d1adfe579a79083e415173ed9ed49",
+      "bytes": 5163,
       "category": "synthetic-test-source-or-fixture"
     },
     {
@@ -7594,8 +7594,8 @@
     },
     {
       "path": "packages/client/components/ui/components/features/profiles/badges/useBadgeText.ts",
-      "sha256": "c39405ded2a68dc6796ba92dd55ef6828ba06b02f8ced317c460d5c26aa5d30e",
-      "bytes": 8771,
+      "sha256": "04d4b6dc850c834747004295967db42767545e9ee0b00787f8f05017fee1c0e6",
+      "bytes": 10215,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -42441,6 +42441,12 @@
       "category": "product-source-or-build-manifest"
     },
     {
+      "path": "packages/client/scripts/i18n/ui-2026112601.json",
+      "sha256": "7a9706bc6ba0bca340386714c445afcfe38b314d0753343579f699d829ac6ae2",
+      "bytes": 6390,
+      "category": "product-source-or-build-manifest"
+    },
+    {
       "path": "packages/client/scripts/i18n/ui-210.json",
       "sha256": "a2000336a3928f21687a94a1262b2adbd34f017573f3d1b9b342b3ca93df6d09",
       "bytes": 644,
@@ -43366,14 +43372,20 @@
     },
     {
       "path": "packages/client/src/interface/badgeGuide/BadgeGuide.tsx",
-      "sha256": "ce4675dfdcc83df56503e679ae7cd50201fb814a593c505e932e32030bbc04e6",
-      "bytes": 9455,
+      "sha256": "83a904d0726b4e3020b50fa2d364fd9c4f2610c707ef6bedb0f7c9423d8c7a40",
+      "bytes": 9828,
       "category": "product-source-or-build-manifest"
     },
     {
+      "path": "packages/client/src/interface/badgeGuide/badgeTexts.dom.test.tsx",
+      "sha256": "b33fc7ab6f6e0a8762c12637ad125c0108f265321f1ee86bc8f270e5377a271c",
+      "bytes": 4129,
+      "category": "synthetic-test-source-or-fixture"
+    },
+    {
       "path": "packages/client/src/interface/badgeGuide/useBadgeGuide.ts",
-      "sha256": "54c3200e564a40ab6cf609fcf3c4c2b584757315b882156abe4325debe676eaf",
-      "bytes": 13443,
+      "sha256": "2eac1e9f3535ac17005596943af98ac5c31354efbd550f8c0a7966ec9f415425",
+      "bytes": 9853,
       "category": "product-source-or-build-manifest"
     },
     {
