@@ -589,3 +589,101 @@
   font-weight: 600;
   color: var(--z-fg-muted);
 }
+
+/* ---------- alone in the call: your tile large, the others wait under it ---------- */
+
+.z-dmcall-alone {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  flex: 1;
+  min-height: 0;
+  min-width: 0;
+  container-type: size;
+}
+
+.z-dmcall-tiles.z-dmcall-alone-self {
+  width: 100%;
+  padding: 0;
+}
+
+.z-dmcall-alone-self > * {
+  max-width: 640px;
+}
+
+.z-dmcall-alone-members {
+  display: flex;
+  justify-content: safe center;
+  gap: 12px;
+  flex-shrink: 0;
+  max-width: 100%;
+  margin: 0;
+  padding: 0 4px;
+  list-style: none;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.z-dmcall-tile.z-dmcall-alone-member {
+  flex-shrink: 0;
+  gap: 4px;
+  padding: 0;
+  border: none;
+  background: none;
+  container-type: normal;
+}
+
+.z-dmcall-alone-member .z-dmcall-face {
+  width: 40px;
+  height: 40px;
+  min-width: 40px;
+  min-height: 40px;
+}
+
+.z-dmcall-alone-more {
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  width: 40px;
+  height: 40px;
+  border-radius: 999px;
+  background: var(--z-bg-raised);
+  color: var(--z-fg-secondary);
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.z-dmcall-alone-line {
+  flex-shrink: 0;
+  max-width: 100%;
+  margin: 0;
+  padding-inline: 8px;
+  font-size: 13px;
+  line-height: 18px;
+  text-align: center;
+  color: var(--z-fg-secondary);
+}
+
+/* a short stage: the faces under your tile give way first, then the line */
+@container (max-height: 239px) {
+  .z-dmcall-alone-members {
+    display: none;
+  }
+}
+
+@container (max-height: 159px) {
+  .z-dmcall-alone-line {
+    display: none;
+  }
+}
+
+.z-dmcall-phone[data-view="full"] .z-dmcall-alone {
+  padding: 8px 16px;
+}
+
+.z-dmcall-phone[data-view="chat"] .z-dmcall-alone {
+  flex: none;
+  height: 148px;
+  padding-inline: 16px;
+}

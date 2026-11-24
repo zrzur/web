@@ -4,8 +4,11 @@ import {
   STAGE_DEFAULT,
   STAGE_MIN,
   STAGE_STEP,
+  aloneInCall,
+  aloneMembers,
   callDuration,
   clampStageHeight,
+  needsCallConfirm,
   phoneCallView,
   reopenPhoneCall,
   setPhoneCallView,
@@ -84,5 +87,43 @@ describe("call time", () => {
     expect(callDuration(65_000)).toBe("1:05");
     expect(callDuration(3_725_000)).toBe("1:02:05");
     expect(callDuration(-5)).toBe("0:00");
+  });
+});
+
+describe("asking before a call starts (owner, 2026-11-24)", () => {
+  const conv = (type: string, inCall: string[] = []) => ({
+    type,
+    voiceParticipants: new Map(inCall.map((id) => [id, {}])),
+  });
+
+  it("asks when a DM or group call would ring people", () => {
+    expect(needsCallConfirm(conv("DirectMessage"), "me")).toBe(true);
+    expect(needsCallConfirm(conv("Group"), "me")).toBe(true);
+    // a seat of this account left over from a moment ago is not someone else
+    expect(needsCallConfirm(conv("DirectMessage", ["me"]), "me")).toBe(true);
+  });
+
+  it("does not ask to join a call that is already on", () => {
+    expect(needsCallConfirm(conv("DirectMessage", ["sara"]), "me")).toBe(false);
+    expect(needsCallConfirm(conv("Group", ["me", "omar"]), "me")).toBe(false);
+  });
+
+  it("never asks in a server channel", () => {
+    expect(needsCallConfirm(conv("TextChannel"), "me")).toBe(false);
+  });
+});
+
+describe("alone in the call (owner, 2026-11-24)", () => {
+  it("only once connected, and only while nobody else is in", () => {
+    expect(aloneInCall("CONNECTED", ["me"], "me")).toBe(true);
+    expect(aloneInCall("CONNECTING", ["me"], "me")).toBe(false);
+    expect(aloneInCall("CONNECTED", ["me", "sara"], "me")).toBe(false);
+  });
+
+  it("lists every other member, the people being rung first", () => {
+    expect(aloneMembers(["me", "sara", "omar"], "me", ["omar"])).toEqual([
+      { id: "omar", ringing: true },
+      { id: "sara", ringing: false },
+    ]);
   });
 });

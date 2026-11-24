@@ -49,6 +49,8 @@ import { callStart, useNow } from "./DmCallStage";
 import {
   type PhoneCallView,
   STAGE_MIN,
+  aloneInCall,
+  aloneMembers,
   callDuration,
   clampStageHeight,
   phoneCallView,
@@ -545,18 +547,114 @@ function Tiles(props: { channel: Channel; phone?: boolean }) {
     ),
   );
 
+  const alone = () =>
+    aloneInCall(
+      voice.state(),
+      tracks().map((track) => track.participant.identity),
+      client().user?.id,
+    );
+
   return (
-    <div
-      class="z-dmcall-tiles"
-      data-many={tracks().length + waiting().length > 2 ? "" : undefined}
+    <Show
+      when={!alone()}
+      fallback={<AloneView channel={props.channel} tracks={tracks} />}
     >
-      <TrackLoop tracks={tracks}>
-        {() => <TrackTile channel={props.channel} />}
-      </TrackLoop>
-      <For each={waiting()}>
-        {(member) => <WaitingTile id={member.id} ringing={member.ringing} />}
-      </For>
+      <div
+        class="z-dmcall-tiles"
+        data-many={tracks().length + waiting().length > 2 ? "" : undefined}
+      >
+        <TrackLoop tracks={tracks}>
+          {() => <TrackTile channel={props.channel} />}
+        </TrackLoop>
+        <For each={waiting()}>
+          {(member) => <WaitingTile id={member.id} ringing={member.ringing} />}
+        </For>
+      </div>
+    </Show>
+  );
+}
+
+/**
+ * Connected and nobody else is in the call yet: your own tile large, the
+ * other members dimmed under it until they join, and one line saying so
+ */
+function AloneView(props: {
+  channel: Channel;
+  tracks: () => ReturnType<ReturnType<typeof useVoice>["vidTracks"]>;
+}) {
+  const client = useClient();
+  const { t } = useLingui();
+  const members = createMemo(() =>
+    aloneMembers(
+      props.channel.recipientIds,
+      client().user?.id,
+      ringingIds(props.channel),
+    ),
+  );
+  const shown = () => members().slice(0, 8);
+  const more = () => members().length - shown().length;
+
+  return (
+    <div class="z-dmcall-alone" data-dm-call-alone>
+      <div class="z-dmcall-tiles z-dmcall-alone-self">
+        <TrackLoop tracks={props.tracks}>
+          {() => <TrackTile channel={props.channel} />}
+        </TrackLoop>
+      </div>
+      <Show when={members().length}>
+        <ul class="z-dmcall-alone-members" aria-label={t`Members`}>
+          <For each={shown()}>
+            {(member) => (
+              <AloneMember id={member.id} ringing={member.ringing} />
+            )}
+          </For>
+          <Show when={more() > 0}>
+            <li class="z-dmcall-alone-more">+{more()}</li>
+          </Show>
+        </ul>
+      </Show>
+      <p class="z-dmcall-alone-line" role="status">
+        {t({
+          id: "call.alone.line",
+          message: "You're the only one here. The others can still join.",
+        })}
+      </p>
     </div>
+  );
+}
+
+/** A member who has not joined: dimmed; a soft pulse while being rung */
+function AloneMember(props: { id: string; ringing: boolean }) {
+  const { t } = useLingui();
+  const user = useUser(() => props.id);
+
+  return (
+    <li
+      class="z-dmcall-tile z-dmcall-alone-member"
+      data-waiting
+      data-ringing={props.ringing ? "" : undefined}
+      data-dm-call-waiting={props.id}
+      aria-label={
+        props.ringing
+          ? t`${user().username as string}, ringing`
+          : (user().username as string)
+      }
+      use:floating={{
+        tooltip: { placement: "top", content: user().username as string },
+      }}
+    >
+      <div class="z-dmcall-face">
+        <Avatar
+          src={user().avatar}
+          fallback={user().username}
+          size={40}
+          interactive={false}
+        />
+      </div>
+      <Show when={props.ringing}>
+        <span class="z-dmcall-state">{t`Ringing…`}</span>
+      </Show>
+    </li>
   );
 }
 

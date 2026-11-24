@@ -158,3 +158,43 @@ export function callDuration(ms: number) {
   const pad = (n: number) => String(n).padStart(2, "0");
   return h ? `${h}:${pad(m)}:${pad(s)}` : `${m}:${pad(s)}`;
 }
+
+/**
+ * Starting a call in a direct message or group rings people: ask first.
+ * Joining a call others are already in does not ask (nor does answering a
+ * ring, which never comes through here); server channels never ask.
+ */
+export function needsCallConfirm(
+  channel: { type: string; voiceParticipants: { keys(): Iterable<string> } },
+  selfId: string | undefined,
+) {
+  if (channel.type !== "DirectMessage" && channel.type !== "Group")
+    return false;
+  for (const id of channel.voiceParticipants.keys())
+    if (id !== selfId) return false;
+  return true;
+}
+
+/**
+ * Who sits around your own tile while nobody else is in the call: everyone
+ * else in the conversation, the people being rung first
+ */
+export function aloneMembers(
+  memberIds: Iterable<string>,
+  selfId: string | undefined,
+  ringing: readonly string[] = [],
+) {
+  return waitingMembers(memberIds, [], selfId, ringing);
+}
+
+/**
+ * Connected and nobody else has joined: your own tile is shown large, the
+ * others wait under it
+ */
+export function aloneInCall(
+  state: string,
+  inCall: readonly string[],
+  selfId: string | undefined,
+) {
+  return state === "CONNECTED" && inCall.every((id) => id === selfId);
+}

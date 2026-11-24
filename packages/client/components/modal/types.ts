@@ -177,6 +177,14 @@ export type Modals =
       message: Message;
     }
   | {
+      /** Ask before ringing people in a direct message or group */
+      type: "start_call";
+      channel: Channel;
+      video?: boolean;
+      /** Starts the call (the caller's voice.connect) */
+      onStart: () => void;
+    }
+  | {
       type: "create_poll";
       channel: Channel;
     }
