@@ -18,14 +18,8 @@ import { BadgeMark } from "@revolt/ui/components/features/profiles/badges/BadgeM
 
 import { useDate } from "../profile/CommunityParts";
 
-import {
-  Checklist,
-  CodeBox,
-  ErrorText,
-  Field,
-  Hint,
-  RowActions,
-} from "./parts";
+import { CodeBox, ErrorText, Field, Hint, RowActions } from "./parts";
+import { ProgramChecklist } from "./ProgramChecklist";
 import {
   BadgeApplication,
   CREATOR_CATEGORIES,
@@ -56,6 +50,9 @@ export function ProgramDialog(props: {
   program: ProgramId;
   /** continue this application (a draft, or one the team asked more of) */
   application?: BadgeApplication;
+  /** the server or bot it is about, when the dialog is opened from its own
+   * settings (Verified Server: server settings); no picker is shown then */
+  target?: string;
   onClose: () => void;
 }) {
   const { t } = useLingui();
@@ -65,7 +62,9 @@ export function ProgramDialog(props: {
   const date = useDate();
 
   const [application, setApplication] = createSignal(props.application);
-  const [target, setTarget] = createSignal(props.application?.target_id ?? "");
+  const [target, setTarget] = createSignal(
+    props.application?.target_id ?? props.target ?? "",
+  );
   const [exception, setException] = createSignal(
     props.application?.exception ?? false,
   );
@@ -106,7 +105,7 @@ export function ProgramDialog(props: {
   // Content Creator is about you: no server or bot to choose
   if (creator() && !target()) setTarget("@me");
   const [targets] = createResource(
-    () => !creator(),
+    () => !creator() && !props.target,
     () =>
       programsApi
         .targets(client())
@@ -221,7 +220,7 @@ export function ProgramDialog(props: {
           when={sent()}
           fallback={
             <>
-              <Show when={!creator()}>
+              <Show when={!creator() && !props.target}>
                 <Field>
                   <span>
                     {kind() === "bot" ? (
@@ -293,50 +292,10 @@ export function ProgramDialog(props: {
                   <h4 id="program-checklist" style={{ margin: "0 0 8px" }}>
                     <Trans>What the server measured</Trans>
                   </h4>
-                  <Checklist role="list">
-                    <For each={checklist()!.checks}>
-                      {(line) => (
-                        <li
-                          role="listitem"
-                          data-met={
-                            line.met === undefined ? "person" : String(line.met)
-                          }
-                        >
-                          <span aria-hidden="true">
-                            {line.met === undefined
-                              ? "•"
-                              : line.met
-                                ? "✓"
-                                : "✕"}
-                          </span>
-                          <span>
-                            {words.check(line, props.program)}
-                            <Show
-                              when={
-                                line.met === undefined &&
-                                line.code !== "retention"
-                              }
-                            >
-                              {" · "}
-                              <Trans>a person checks it</Trans>
-                            </Show>
-                          </span>
-                        </li>
-                      )}
-                    </For>
-                  </Checklist>
-                  <Show when={checklist()!.blocked}>
-                    <ErrorText role="status">
-                      {words.failure(checklist()!.blocked)}
-                      <Show when={checklist()!.blocked_until}>
-                        {" "}
-                        <Trans>
-                          You can apply again from{" "}
-                          {date(checklist()!.blocked_until)}.
-                        </Trans>
-                      </Show>
-                    </ErrorText>
-                  </Show>
+                  <ProgramChecklist
+                    program={props.program}
+                    eligibility={checklist()!}
+                  />
                 </section>
               </Show>
 

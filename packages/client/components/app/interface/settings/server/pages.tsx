@@ -10,12 +10,15 @@ import { Icon } from "@revolt/ui/icons/Icon";
 import { useSettingsNavigation } from "../Settings";
 import { Discoverable } from "../shared/Discoverable";
 
-import Overview, { type ProfileDraft } from "./Overview";
+import { useClient } from "@revolt/client";
+import { applicationsOpen } from "../user/badges/programsApi";
 import { AutoModSettings } from "./AutoModSettings";
 import { EventsLobbySwitches } from "./EventsLobbySwitches";
-import { ServerBots } from "./ServerApps";
-import { ServerWebhooks } from "./webhooks/ServerWebhooks";
+import { OnJoinSettings } from "./OnJoinSettings";
+import Overview, { type ProfileDraft } from "./Overview";
+import { RulesScreening } from "./RulesScreening";
 import { ServerAccess } from "./ServerAccess";
+import { ServerBots } from "./ServerApps";
 import { ServerDefaultNotifications } from "./ServerDefaultNotifications";
 import { ServerEmergency } from "./ServerEmergency";
 import { ServerOwnership } from "./ServerOwnership";
@@ -23,12 +26,13 @@ import { ServerPreview } from "./ServerPreview";
 import { ServerVerification } from "./ServerVerification";
 import { ThreadFeatures } from "./ThreadFeatures";
 import { TicketsSettings } from "./TicketsSettings";
-import { ListServerBans } from "./bans/ListBans";
+import { VerifiedServerApplication } from "./VerifiedServerApplication";
+import { canSeeMembers } from "./access";
 import { AuditLog } from "./audit/AuditLog";
+import { ListServerBans } from "./bans/ListBans";
 import { ChannelExtras } from "./channels/ChannelExtras";
 import { ChannelsSettings } from "./channels/ChannelsSettings";
 import { EmojiList } from "./emojis/EmojiList";
-import { SoundboardList } from "./soundboard/SoundboardList";
 import { ListServerInvites } from "./invites/ListServerInvites";
 import { VanityInvite } from "./invites/VanityInvite";
 import {
@@ -40,17 +44,18 @@ import {
 } from "./layout";
 import { ListServerMembers } from "./members/ListMembers";
 import { PageSave } from "./pageSave";
-import { OnJoinSettings } from "./OnJoinSettings";
-import { RulesScreening } from "./RulesScreening";
 import { RoleQuestions } from "./roles/RoleQuestions";
 import { ServerRoleOverview } from "./roles/ServerRoleOverview";
-import { canSeeMembers } from "./access";
+import { SoundboardList } from "./soundboard/SoundboardList";
+import { showsVerifiedServer } from "./verifiedServer";
+import { ServerWebhooks } from "./webhooks/ServerWebhooks";
 
 const isOwner = (server: Server) => !!server.owner?.self;
 
 /** Overview: profile, discovery, invites, features, danger zone */
 export function OverviewPage(props: { server: Server }) {
   const [draft, setDraft] = createSignal<ProfileDraft>();
+  const client = useClient();
 
   return (
     <PageSave>
@@ -61,7 +66,9 @@ export function OverviewPage(props: { server: Server }) {
           id="profile"
           needs={missing(props.server, "ManageServer")}
           title={<Trans>Server profile</Trans>}
-          description={<Trans>The name, picture and description people see.</Trans>}
+          description={
+            <Trans>The name, picture and description people see.</Trans>
+          }
         >
           <Overview server={props.server} onDraft={setDraft} />
         </Anchor>
@@ -69,7 +76,9 @@ export function OverviewPage(props: { server: Server }) {
         <Anchor
           id="discovery"
           title={<Trans>Discovery</Trans>}
-          description={<Trans>Whether people can find the server in Discover.</Trans>}
+          description={
+            <Trans>Whether people can find the server in Discover.</Trans>
+          }
         >
           <Show
             when={isOwner(props.server)}
@@ -85,6 +94,23 @@ export function OverviewPage(props: { server: Server }) {
             <Discoverable discoverable={props.server} fullPage={true} />
           </Show>
         </Anchor>
+
+        <Show
+          when={showsVerifiedServer(props.server, applicationsOpen(client()))}
+        >
+          <Anchor
+            id="verified-server"
+            title={<Trans>Verified Server</Trans>}
+            description={
+              <Trans>
+                The Zrzur team's check that this is the official server of a
+                real game, company, creator or project.
+              </Trans>
+            }
+          >
+            <VerifiedServerApplication server={props.server} />
+          </Anchor>
+        </Show>
 
         <Anchor
           id="invites"
@@ -143,8 +169,7 @@ export function OverviewPage(props: { server: Server }) {
           title={<Trans>Default notifications</Trans>}
           description={
             <Trans>
-              What members are notified about until they choose for
-              themselves.
+              What members are notified about until they choose for themselves.
             </Trans>
           }
         >
@@ -171,10 +196,7 @@ export function OverviewPage(props: { server: Server }) {
 export function ChannelsPage(props: { server: Server }) {
   return (
     <PageStack>
-      <Anchor
-        id="channels"
-          needs={missing(props.server, "ManageChannel")}
-      >
+      <Anchor id="channels" needs={missing(props.server, "ManageChannel")}>
         <ChannelsSettings server={props.server} />
       </Anchor>
     </PageStack>
@@ -192,7 +214,9 @@ export function JoiningPage(props: { server: Server }) {
           id="join-mode"
           needs={missing(props.server, "ManageServer")}
           title={<Trans>Who can join</Trans>}
-          description={<Trans>How people get in, and who may invite them.</Trans>}
+          description={
+            <Trans>How people get in, and who may invite them.</Trans>
+          }
         >
           <ServerAccess server={props.server} />
         </Anchor>
@@ -201,7 +225,9 @@ export function JoiningPage(props: { server: Server }) {
           id="verification"
           needs={missing(props.server, "ManageServer")}
           title={<Trans context="server-settings">Verification</Trans>}
-          description={<Trans>What new members need before they can talk.</Trans>}
+          description={
+            <Trans>What new members need before they can talk.</Trans>
+          }
         >
           <ServerVerification server={props.server} />
         </Anchor>
@@ -210,7 +236,9 @@ export function JoiningPage(props: { server: Server }) {
           id="rules"
           needs={missing(props.server, "ManageServer")}
           title={<Trans>Rules to accept</Trans>}
-          description={<Trans>New members agree to the rules before they write.</Trans>}
+          description={
+            <Trans>New members agree to the rules before they write.</Trans>
+          }
         >
           <RulesScreening server={props.server} />
         </Anchor>
@@ -271,10 +299,7 @@ export function JoiningPage(props: { server: Server }) {
 export function EmojiPage(props: { server: Server }) {
   return (
     <PageStack>
-      <Anchor
-        id="emoji"
-          needs={missing(props.server, "ManageCustomisation")}
-      >
+      <Anchor id="emoji" needs={missing(props.server, "ManageCustomisation")}>
         <EmojiList server={props.server} />
       </Anchor>
     </PageStack>
@@ -335,15 +360,15 @@ export function MembersPage(props: { server: Server }) {
         <Anchor
           id="members"
           title={<Trans>Everyone in the server</Trans>}
-          description={<Trans>Search, change roles, time out, kick or ban.</Trans>}
+          description={
+            <Trans>Search, change roles, time out, kick or ban.</Trans>
+          }
         >
           <ListServerMembers server={props.server} />
         </Anchor>
       </Show>
       <Show when={props.server.havePermission("ManageServer")}>
-        <Anchor
-          id="invites"
-        >
+        <Anchor id="invites">
           <ListServerInvites server={props.server} />
         </Anchor>
       </Show>
@@ -355,8 +380,9 @@ export function MembersPage(props: { server: Server }) {
 export function RolesPage(props: { server: Server }) {
   return (
     <PageStack>
-      <Anchor id="roles"
-          needs={
+      <Anchor
+        id="roles"
+        needs={
           props.server.havePermission("ManagePermissions")
             ? undefined
             : missing(props.server, "ManageRole")
@@ -393,7 +419,9 @@ export function AppsPage(props: { server: Server }) {
           id="assistant"
           title={<Trans>Zrzur Assistant</Trans>}
           description={
-            <Trans>The official bot: safety, community and support in one place.</Trans>
+            <Trans>
+              The official bot: safety, community and support in one place.
+            </Trans>
           }
         >
           <SettingsSection>
