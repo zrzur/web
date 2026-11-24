@@ -249,6 +249,12 @@ export function ListingDetail(props: {
                   </Verified>
                 )}
               </Show>
+              <Show when={isBot()}>
+                <BotLabel
+                  verified={props.listing.verified}
+                  official={props.listing.official}
+                />
+              </Show>
             </Title>
 
             <Columns>
@@ -268,7 +274,10 @@ export function ListingDetail(props: {
                       <div>
                         <strong>
                           <bdi>{props.listing.name}</bdi>
-                          <BotLabel />
+                          <BotLabel
+                            verified={props.listing.verified}
+                            official={props.listing.official}
+                          />
                         </strong>
                         <p dir="auto">{firstLine()}</p>
                       </div>
