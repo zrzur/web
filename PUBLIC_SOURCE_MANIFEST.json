@@ -268,8 +268,8 @@
     },
     {
       "path": "CHANGELOG.md",
-      "sha256": "4581576703f3fedec72ff13b57ba65395fc72e77e22fb94d90ee44eb2c620707",
-      "bytes": 236678,
+      "sha256": "1debffe4a43237d80d12a2de6161b6aefa21ae03b85f7d125d77ed36ae1899de",
+      "bytes": 237317,
       "category": "public-documentation"
     },
     {
@@ -7000,14 +7000,14 @@
     },
     {
       "path": "packages/client/components/ui/components/features/legacy/Username.dom.test.tsx",
-      "sha256": "2ac4640b0a357ba365aafe2a23499c988a987c4b675fe72249b79581a66eb0ef",
-      "bytes": 3505,
+      "sha256": "55c3b828841a9760fcbd841f25d93cc13f7ceebce798840d4cff80360fe2df38",
+      "bytes": 4361,
       "category": "synthetic-test-source-or-fixture"
     },
     {
       "path": "packages/client/components/ui/components/features/legacy/Username.tsx",
-      "sha256": "f1677021eac4f64ba7d780444a731bcb2a4b4c957fe8454ffa4653ddf4e55302",
-      "bytes": 2188,
+      "sha256": "a22dae0cdacf61ba7ce3e5f03f14383207a2441beab1fc7f1d89aa47a92339f6",
+      "bytes": 2292,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -8428,8 +8428,8 @@
     },
     {
       "path": "packages/client/components/ui/components/utils/ColouredText.tsx",
-      "sha256": "75c777fb71587206693b54903f6ae7b68bab4663cfa51f2d6529bc2b9a09c335",
-      "bytes": 733,
+      "sha256": "5be30b11b4929850969bb37b4585f7b0dc50d89da8b885df187d255df25d02b5",
+      "bytes": 917,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -43462,8 +43462,8 @@
     },
     {
       "path": "packages/client/src/interface/channels/text/MemberSidebar.tsx",
-      "sha256": "fec458132c437bf6a3916c927faaf6911e2543e2918fe532cb84bad2453ec241",
-      "bytes": 17933,
+      "sha256": "338dd38d9bfe65d775ed33b63f83f9c033c0b80357f10f42e58106ce6a0cfdd8",
+      "bytes": 18136,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -43522,14 +43522,14 @@
     },
     {
       "path": "packages/client/src/interface/channels/text/plateInk.dom.test.tsx",
-      "sha256": "d64acb8e7fb68174466e02de22fe3da3bfb20a47dad747c5dd6524700065062f",
-      "bytes": 2043,
+      "sha256": "142050ab1338249bc54afd389e1565c397af5c3e6abab2b8ac508d4f9d2f23bb",
+      "bytes": 2694,
       "category": "synthetic-test-source-or-fixture"
     },
     {
       "path": "packages/client/src/interface/channels/text/plateInk.ts",
-      "sha256": "23b4eea1d60a70209275b09d0ef3e510f0bbf082194ddf9f5ba3482e587cd06a",
-      "bytes": 899,
+      "sha256": "bf841d2064daf255e45b6d06f4ad4bef4e80f470e3532929e3b5b5daadb8cca1",
+      "bytes": 1558,
       "category": "product-source-or-build-manifest"
     },
     {
