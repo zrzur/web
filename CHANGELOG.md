@@ -2,6 +2,12 @@
 
 ## Unreleased
 
+### Profile frames fit the window (2026-11-24, owner's report)
+
+* A profile frame (Crystal cave) shows whole on the card opened from the member list and on the full profile, at any window height: the card and the profile keep the frame's room from the window's edges, and the frame's pixels get smaller (3 px, then 2 px) on lower windows and phones.
+* On a phone, a framed card and a framed full profile sit as a rounded card inset from the screen's edges; their Wearing tiles give a name and its line two lines instead of cutting them short ("Moon h…").
+* Four rarely shown parts load the first time they are needed, so the files the app installs up front stay under their limit: the age gate of channels marked as mature, the banner of the conversation with Zrzur's official account, the voice message recorder and the cards of files waiting to be sent.
+
 ### Badges: Content Creator and the public badge guide (2026-11-24, badge plan phase 5)
 
 * **Zrzur badges** (`/badges`), open to everyone signed in or not: every badge given out today with its art, what it means, how it is earned (automatic, by application, given by the team) and the published criteria; no promised review dates. Reached from My Badges ("How every badge is earned").
