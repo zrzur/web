@@ -2,6 +2,12 @@
 
 ## Unreleased
 
+### Activity: says where it is detected, and its own icons (2026-11-24, owner's report)
+
+* **Settings → Activity says where activity is detected**, in a new row at the top ("On this device"): in a browser, that the Zrzur desktop app detects it and to open Zrzur there; in a desktop app from before rich presence (26.2.0 and older), to update it; in a current desktop app, what it detects right now ("Detecting now: Playing Rust", or "nothing running"), live; with sharing off, that nothing is detected. Where the server reads Steam, the row says Steam works without the desktop app. Before, a browser or an old desktop app showed nothing at all once sharing was on.
+* The desktop-only sections (games and apps on this computer, connected apps) show only in a desktop app that can detect; the row above explains the rest.
+* **Icons:** Connections (linked accounts) shows a link and Activity a pulse, drawn like the entries around them; both used to show a game controller. The "Share what you are doing" row shows the pulse too. Games keep the controller.
+
 ### Badges: Content Creator and the public badge guide (2026-11-24, badge plan phase 5)
 
 * **Zrzur badges** (`/badges`), open to everyone signed in or not: every badge given out today with its art, what it means, how it is earned (automatic, by application, given by the team) and the published criteria; no promised review dates. Reached from My Badges ("How every badge is earned").
