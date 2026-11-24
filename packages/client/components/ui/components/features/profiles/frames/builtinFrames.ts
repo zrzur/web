@@ -52,12 +52,12 @@ export function profileFrameSvg(
   id: ProfileFrameId,
   w: number,
   h: number,
-  options: { phone?: boolean; prefix?: string } = {},
+  options: { phone?: boolean; prefix?: string; cell?: number } = {},
 ) {
   const { svg, room } = FRAME_DRAWINGS[id].draw(
     w,
     h,
-    pixelSize(w, options.phone),
+    options.cell ?? pixelSize(w, options.phone),
   );
   return { svg: scoped(svg, options.prefix ?? `zf${++instances}`), room };
 }

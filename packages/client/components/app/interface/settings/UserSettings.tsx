@@ -368,14 +368,16 @@ const Config: SettingsConfiguration<{ server: Server }> = {
             {
               // accounts on other services shown on the profile (Steam)
               id: "connections",
-              icon: <Icon name="game-controller" size={20} />,
+              // linked accounts: a link, never a game (Activity is next to it)
+              icon: <Icon name="link" size={20} />,
               title: <Trans>Connections</Trans>,
             },
             {
               // what you are doing right now (rich presence); hidden while
               // the server has the feature off
               id: "activity",
-              icon: <Symbol size={20}>sports_esports</Symbol>,
+              // a live pulse: what you are doing now, not a game controller
+              icon: <Icon name="pulse" size={20} />,
               title: <Trans>Activity</Trans>,
               hidden: !richPresenceEnabled(client()),
             },

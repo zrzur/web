@@ -34,7 +34,6 @@ import { VoiceChannelCallCardMount } from "@revolt/ui/components/features/voice/
 import { MotionPresence } from "@revolt/ui/motion";
 
 import { isOfficialChannel } from "@revolt/app/interface/support/official";
-import { OfficialBanner } from "@revolt/app/interface/support/OfficialBanner";
 
 import { ChannelHeader } from "../ChannelHeader";
 import { ChannelPageProps } from "../ChannelPage";
@@ -73,6 +72,16 @@ const ChannelDetailsPhone = lazyRetry(
   () =>
     import("./ChannelDetailsPhone").then((m) => ({
       default: m.ChannelDetailsPhone,
+    })),
+  () => null,
+);
+
+// Only the conversation with Zrzur's official account shows it: loads there
+// (the installed shell has a size limit, scripts/precacheShell.mjs)
+const OfficialBanner = lazyRetry(
+  () =>
+    import("@revolt/app/interface/support/OfficialBanner").then((m) => ({
+      default: m.OfficialBanner,
     })),
   () => null,
 );

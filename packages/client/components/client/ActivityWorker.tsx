@@ -93,6 +93,13 @@ export function richPresenceEnabled(client: Client | undefined): boolean {
 const [sharing, setSharing] = createSignal<boolean | undefined>(undefined);
 export { sharing as activitySharing, setSharing as setActivitySharing };
 
+/**
+ * What the desktop app last said it detects (`ActivityBridge` keeps it), for
+ * the "Detecting now" row of the Activity settings page
+ */
+const [detected, setDetected] = createSignal<DesktopActivityUpdate>();
+export { detected as desktopDetected, setDetected as setDesktopDetected };
+
 /** The desktop app's bridge, downloaded only there (a browser has none) */
 const ActivityBridge = lazy(() => import("./ActivityBridge"));
 

@@ -1,0 +1,28 @@
+{
+  "On this device": ["على هذا الجهاز", "Auf diesem Gerät"],
+  "Activity is detected by the Zrzur desktop app. Open Zrzur in the desktop app to share games and apps.": [
+    "يكتشف تطبيق زرزور لسطح المكتب النشاط. افتح زرزور في تطبيق سطح المكتب لمشاركة الألعاب والتطبيقات.",
+    "Aktivitäten erkennt die Zrzur-Desktop-App. Öffne Zrzur in der Desktop-App, um Spiele und Apps zu teilen."
+  ],
+  "Update the Zrzur desktop app to share what you are doing.": [
+    "حدِّث تطبيق زرزور لسطح المكتب لمشاركة ما تفعله.",
+    "Aktualisiere die Zrzur-Desktop-App, um zu teilen, was du gerade tust."
+  ],
+  "Sharing is off, so the desktop app detects nothing.": [
+    "المشاركة متوقفة، لذا لا يكتشف تطبيق سطح المكتب شيئًا.",
+    "Teilen ist aus, daher erkennt die Desktop-App nichts."
+  ],
+  "Detecting now: {0}": ["يُكتشف الآن: {0}", "Gerade erkannt: {0}"],
+  "Detecting now: nothing running": [
+    "يُكتشف الآن: لا شيء قيد التشغيل",
+    "Gerade erkannt: nichts läuft"
+  ],
+  "Steam is on too: a game you play on Steam shows even without the desktop app.": [
+    "Steam مفعّل أيضًا: تظهر اللعبة التي تلعبها على Steam حتى دون تطبيق سطح المكتب.",
+    "Steam ist ebenfalls an: Ein Spiel, das du auf Steam spielst, erscheint auch ohne die Desktop-App."
+  ],
+  "Without the desktop app, Steam can still show what you play: turn on “Show what you play on Steam”.": [
+    "يمكن لـ Steam أن يعرض ما تلعبه حتى دون تطبيق سطح المكتب: فعِّل «اعرض ما تلعبه على Steam».",
+    "Auch ohne Desktop-App kann Steam zeigen, was du spielst: Schalte „Zeigen, was du auf Steam spielst“ ein."
+  ]
+}
