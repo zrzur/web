@@ -165,6 +165,9 @@ export const hugeiconsMap = {
   gift: "GiftIcon",
   confetti: "PartyIcon",
   "game-controller": "GameController01Icon",
+  // what you are doing right now (Settings → Activity); a game keeps the
+  // controller, so the two settings entries never look alike
+  pulse: "Activity03Icon",
   "list-checks": "CheckListIcon",
   "list-bullets": "LeftToRightListBulletIcon",
   "list-numbers": "LeftToRightListNumberIcon",
