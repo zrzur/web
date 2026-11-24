@@ -30,7 +30,6 @@ import { useModals } from "@revolt/modal";
 import { useState } from "@revolt/state";
 import {
   CompositionMediaPicker,
-  FileCarousel,
   FileDropAnywhereCollector,
   FilePasteCollector,
   humanFileSize,
@@ -38,7 +37,6 @@ import {
   MessageBox,
   MessageReplyPreview,
 } from "@revolt/ui";
-import { VoiceRecorder } from "@revolt/ui/components/features/messaging/composition/VoiceRecorder";
 import { Symbol } from "@revolt/ui/components/utils/Symbol";
 import { useSearchSpace } from "@revolt/ui/components/utils/autoComplete";
 import { lazyRetry } from "@revolt/ui/components/utils/lazyRetry";
@@ -77,6 +75,31 @@ const ComposerAddPanel = lazyRetry(
   () =>
     import("./ComposerAddPanel").then((m) => ({ default: m.ComposerAddPanel })),
   () => null,
+);
+
+// The cards of files waiting to be sent: load with the first file added
+// (scripts/precacheShell.mjs). If the file still does not arrive after a
+// second try, the cards stay hidden; the files are still sent.
+const FileCarousel = lazyRetry(
+  () =>
+    import(
+      "@revolt/ui/components/features/messaging/composition/FileCarousel"
+    ).then((m) => ({ default: m.FileCarousel })),
+  () => null,
+);
+
+// Shown only while a voice message is recorded: loads on the first recording
+// (scripts/precacheShell.mjs). If its file still does not arrive after a
+// second try, the recording closes so the button works again.
+const VoiceRecorder = lazyRetry(
+  () =>
+    import(
+      "@revolt/ui/components/features/messaging/composition/VoiceRecorder"
+    ).then((m) => ({ default: m.VoiceRecorder })),
+  (props: { onSend: (file: File) => void; onClose: () => void }) => {
+    queueMicrotask(props.onClose);
+    return null;
+  },
 );
 
 interface Props {
@@ -649,14 +672,16 @@ export function MessageComposition(props: Props) {
           onPressed={() => state.draft.popFromDraft(props.channel.id)}
         />
       </Show>
-      <FileCarousel
-        files={draft().files ?? []}
-        getFile={state.draft.getFile}
-        addFile={addFile}
-        removeFile={removeFile}
-        isSpoiler={isSpoiler}
-        toggleSpoiler={toggleSpoiler}
-      />
+      <Show when={draft().files?.length}>
+        <FileCarousel
+          files={draft().files ?? []}
+          getFile={state.draft.getFile}
+          addFile={addFile}
+          removeFile={removeFile}
+          isSpoiler={isSpoiler}
+          toggleSpoiler={toggleSpoiler}
+        />
+      </Show>
       <For each={draft().replies ?? []}>
         {(reply) => {
           const message = client()!.messages.get(reply.id);
