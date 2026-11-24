@@ -32170,3 +32170,417 @@ msgstr "يختار الفريق «المصمم المتميز» بعد بلوغ 
 #: components/app/interface/settings/user/badges/MyBadges.tsx
 msgid "You completed the beta. The team approves Beta Veteran when you sent at least 3 reviewed feedback reports or 1 confirmed bug report during the cycle."
 msgstr "أتممتَ النسخة التجريبية. يوافق الفريق على شارة «مختبِر مخضرم» إن أرسلت خلال الدورة ثلاثة تقارير ملاحظات راجعها الفريق على الأقل أو بلاغ خطأ مؤكداً واحداً."
+
+#: components/app/interface/settings/user/badges/ProgramDialog.tsx
+msgid "A DNS TXT record"
+msgstr "سجل DNS من نوع TXT"
+
+#: components/app/interface/settings/user/badges/ProgramDialog.tsx
+msgid "A file on the website"
+msgstr "ملف على الموقع"
+
+#: components/app/interface/settings/user/badges/useProgramText.ts
+msgid "A new check found the conditions are no longer met."
+msgstr "أظهرت مراجعة جديدة أن الشروط لم تعد مستوفاة."
+
+#: components/app/interface/settings/user/badges/ProgramDialog.tsx
+msgid "a person checks it"
+msgstr "يتحقق منه شخص"
+
+#. placeholder {0}: application()!.ownership!.record_name
+#: components/app/interface/settings/user/badges/ProgramDialog.tsx
+msgid "Add a TXT record named {0} with this value:"
+msgstr "أضف سجل TXT باسم {0} بهذه القيمة:"
+
+#: components/app/interface/settings/user/badges/useProgramText.ts
+msgid "Add at most five links."
+msgstr "أضف خمسة روابط على الأكثر."
+
+#: components/app/interface/settings/user/badges/useProgramText.ts
+msgid "After a refusal, a new application has to wait."
+msgstr "بعد الرفض، يجب الانتظار قبل تقديم طلب جديد."
+
+#: components/app/interface/settings/user/badges/useProgramText.ts
+msgid "Another reason, written below."
+msgstr "سبب آخر، مكتوب أدناه."
+
+#: components/app/interface/settings/user/badges/useProgramText.ts
+msgid "Anti-spam, anti-raid or account-security measures are missing."
+msgstr "تنقص إجراءات الحماية من السبام والغارات أو إجراءات أمان الحسابات."
+
+#: components/app/interface/settings/user/badges/MyApplications.tsx
+msgid "Appeal not accepted"
+msgstr "لم يُقبل الاعتراض"
+
+#: components/app/interface/settings/user/badges/MyApplications.tsx
+msgid "Appeal sent"
+msgstr "أُرسل الاعتراض"
+
+#: components/app/interface/settings/user/badges/MyApplications.tsx
+msgid "Appeal the decision"
+msgstr "الاعتراض على القرار"
+
+#. placeholder {0}: date(application.reapply_after)
+#: components/app/interface/settings/user/badges/MyApplications.tsx
+msgid "Apply again from {0}"
+msgstr "التقديم من جديد ابتداءً من {0}"
+
+#. placeholder {0}: words.program(props.program)
+#: components/app/interface/settings/user/badges/ProgramDialog.tsx
+msgid "Apply for {0}"
+msgstr "التقديم على {0}"
+
+#: components/app/interface/settings/user/badges/MyBadges.tsx
+msgid "Check and apply"
+msgstr "تحقّق وقدّم"
+
+#: components/app/interface/settings/user/badges/ProgramDialog.tsx
+msgid "Check now"
+msgstr "تحقّق الآن"
+
+#: components/app/interface/settings/user/badges/ProgramDialog.tsx
+msgid "Choose…"
+msgstr "اختر…"
+
+#: components/app/interface/settings/user/badges/useProgramText.ts
+msgid "Confirm that you may represent it before you send."
+msgstr "أكّد أنك مخوَّل بتمثيله قبل الإرسال."
+
+#. placeholder {0}: application()!.ownership!.domain
+#: components/app/interface/settings/user/badges/ProgramDialog.tsx
+msgid "Control of {0} is proven."
+msgstr "ثبتت السيطرة على {0}."
+
+#: components/app/interface/settings/user/badges/useProgramText.ts
+msgid "Control of the named website, domain or account was not proven."
+msgstr "لم تثبت السيطرة على الموقع أو النطاق أو الحساب المذكور."
+
+#: components/app/interface/settings/user/badges/useProgramText.ts
+msgid "Control of the official website or domain is proven"
+msgstr "ثبتت السيطرة على الموقع أو النطاق الرسمي"
+
+#: components/app/interface/settings/user/badges/useProgramText.ts
+msgid "Days since the bot was made: {value} of {needed}"
+msgstr "الأيام منذ إنشاء البوت: {value} من {needed}"
+
+#: components/app/interface/settings/user/badges/useProgramText.ts
+msgid "Days since the server was made: {value} of {needed}"
+msgstr "الأيام منذ إنشاء السيرفر: {value} من {needed}"
+
+#. placeholder {0}: date(application.decided_at)
+#: components/app/interface/settings/user/badges/MyApplications.tsx
+msgid "Decided {0}"
+msgstr "صدر القرار في {0}"
+
+#: components/app/interface/settings/user/badges/ProgramDialog.tsx
+msgid "Domain"
+msgstr "النطاق"
+
+#: components/app/interface/settings/user/badges/useProgramText.ts
+msgid "Ended"
+msgstr "انتهى"
+
+#: components/app/interface/settings/user/badges/useProgramText.ts
+msgid "Enter a domain name such as example.com, without https:// or a path."
+msgstr "أدخل اسم نطاق مثل example.com، دون https:// ودون مسار."
+
+#: components/app/interface/settings/user/badges/useProgramText.ts
+msgid "Genuine human members: {value} of {needed}"
+msgstr "الأعضاء البشريون الحقيقيون: {value} من {needed}"
+
+#: components/app/interface/settings/user/badges/ProgramDialog.tsx
+msgid "Get a code"
+msgstr "احصل على رمز"
+
+#: components/app/interface/settings/user/badges/ProgramDialog.tsx
+msgid "How"
+msgstr "الطريقة"
+
+#: components/app/interface/settings/user/badges/ProgramDialog.tsx
+msgid "I may represent this and everything I write is true."
+msgstr "أنا مخوَّل بتمثيله، وكل ما أكتبه صحيح."
+
+#. placeholder {0}: date(application()!.ownership!.expires_at)
+#: components/app/interface/settings/user/badges/ProgramDialog.tsx
+msgid "It is shown only now and works until {0}."
+msgstr "يظهر الآن فقط، ويبقى صالحاً حتى {0}."
+
+#: components/app/interface/settings/user/badges/useProgramText.ts
+msgid "Links must start with https:// and point to a public website."
+msgstr "يجب أن تبدأ الروابط بـ https:// وأن تشير إلى موقع عام."
+
+#: components/app/interface/settings/user/badges/ProgramDialog.tsx
+msgid "Meeting the numbers only lets you apply. A person on the Zrzur team reviews every application. Zrzur is run by volunteers, so we can't promise when."
+msgstr "بلوغ الأرقام يتيح التقديم فقط، ويراجع كلَّ طلب شخصٌ من فريق زرزور. يدير زرزورَ متطوعون، فلا نستطيع أن نعد بموعد."
+
+#: components/app/interface/settings/user/badges/useProgramText.ts
+msgid "More information needed"
+msgstr "مطلوب معلومات إضافية"
+
+#: components/app/interface/settings/user/badges/ProgramDialog.tsx
+msgid "Never send identity documents. Only you and the reviewers see what you write here; it is never published, and it is deleted 90 days after the final decision."
+msgstr "لا ترسل أبداً وثائق هوية. لا يرى ما تكتبه هنا إلا أنت والمراجعون، ولا يُنشر أبداً، ويُحذف بعد 90 يوماً من القرار النهائي."
+
+#: components/app/interface/settings/user/badges/useProgramText.ts
+msgid "New members still here after their first week: {value}% of {needed}%"
+msgstr "الأعضاء الجدد الباقون بعد أسبوعهم الأول: {value}% من {needed}%"
+
+#: components/app/interface/settings/user/badges/useProgramText.ts
+msgid "New members still here after their first week: not enough joins yet, a person checks it"
+msgstr "الأعضاء الجدد الباقون بعد أسبوعهم الأول: لا تكفي الانضمامات بعد، ويتحقق منه شخص"
+
+#. placeholder {0}: date(application.next_review_at)
+#: components/app/interface/settings/user/badges/MyApplications.tsx
+msgid "Next check around {0}"
+msgstr "المراجعة التالية في حدود {0}"
+
+#: components/app/interface/settings/user/badges/useProgramText.ts
+msgid "No sudden burst of joins or new accounts"
+msgstr "لا موجة مفاجئة من الانضمام أو الحسابات الجديدة"
+
+#: components/app/interface/settings/user/badges/useProgramText.ts
+msgid "Not approved"
+msgstr "لم تتم الموافقة"
+
+#: components/app/interface/settings/user/badges/useProgramText.ts
+msgid "Not every line of the checklist is met yet."
+msgstr "لم تُستوفَ كل بنود قائمة الشروط بعد."
+
+#: components/app/interface/settings/user/badges/ProgramDialog.tsx
+msgid "Only the owner of a bot can apply. You don't own a bot yet."
+msgstr "لا يقدّم الطلب إلا مالك البوت، وأنت لا تملك بوتاً بعد."
+
+#: components/app/interface/settings/user/badges/ProgramDialog.tsx
+msgid "Only the owner of a server can apply. You don't own a server yet."
+msgstr "لا يقدّم الطلب إلا مالك السيرفر، وأنت لا تملك سيرفراً بعد."
+
+#: components/app/interface/settings/user/badges/ProgramDialog.tsx
+msgid "Prove you control the official domain"
+msgstr "أثبت أنك تسيطر على النطاق الرسمي"
+
+#: components/app/interface/settings/user/badges/ProgramDialog.tsx
+msgid "Public links, one per line (website, rules page)"
+msgstr "روابط عامة، رابط في كل سطر (الموقع، صفحة القواعد)"
+
+#. placeholder {0}: application()!.ownership!.file_url
+#: components/app/interface/settings/user/badges/ProgramDialog.tsx
+msgid "Put this value in a file at {0}:"
+msgstr "ضع هذه القيمة في ملف على العنوان {0}:"
+
+#: components/app/interface/settings/user/badges/MyApplications.tsx
+msgid "Reviews happen when a volunteer is free; there is no promised date. Only you and the reviewers see what you sent."
+msgstr "تجري المراجعة حين يتاح متطوّع، ولا موعد نعد به. لا يرى ما أرسلته إلا أنت والمراجعون."
+
+#: components/app/interface/settings/user/badges/ProgramDialog.tsx
+msgid "Send application"
+msgstr "أرسل الطلب"
+
+#: components/app/interface/settings/user/badges/ProgramDialog.tsx
+msgid "Sent. A volunteer on the team reviews it when they can; you will get a message with the decision and its reasons."
+msgstr "أُرسل الطلب. يراجعه متطوّع من الفريق حين يتمكن، وستصلك رسالة بالقرار وأسبابه."
+
+#: components/app/interface/settings/user/badges/useProgramText.ts
+msgid "Servers that count: {value} of {needed}"
+msgstr "السيرفرات التي تُحسب: {value} من {needed}"
+
+#: components/app/interface/settings/user/badges/useProgramText.ts
+msgid "Some information is missing to decide."
+msgstr "تنقص بعض المعلومات اللازمة لاتخاذ القرار."
+
+#: components/app/interface/settings/user/badges/useProgramText.ts
+msgid "Something changed meanwhile. Reload and try again."
+msgstr "تغيّر شيء في هذه الأثناء. أعد التحميل وحاول من جديد."
+
+#: components/app/interface/settings/user/badges/useProgramText.ts
+msgid "The 30 days to appeal have passed."
+msgstr "انقضت مهلة الاعتراض البالغة 30 يوماً."
+
+#: components/app/interface/settings/user/badges/useProgramText.ts
+msgid "The bot asks for permissions it does not need for what it does."
+msgstr "يطلب البوت صلاحيات لا يحتاج إليها لما يقوم به."
+
+#: components/app/interface/settings/user/badges/useProgramText.ts
+msgid "The bot has harmful commands, collects data it may not, or deceives people."
+msgstr "للبوت أوامر ضارة، أو يجمع بيانات لا يجوز له جمعها، أو يخدع الناس."
+
+#: components/app/interface/settings/user/badges/useProgramText.ts
+msgid "The bot is not suspended"
+msgstr "البوت غير معلّق"
+
+#: components/app/interface/settings/user/badges/useProgramText.ts
+msgid "The bot processes user data but its privacy policy is missing or unclear."
+msgstr "يعالج البوت بيانات المستخدمين، وسياسة خصوصيته مفقودة أو غير واضحة."
+
+#: components/app/interface/settings/user/badges/useProgramText.ts
+msgid "The bot was deleted."
+msgstr "حُذف البوت."
+
+#: components/app/interface/settings/user/badges/useProgramText.ts
+msgid "The bot was suspended."
+msgstr "عُلّق البوت."
+
+#: components/app/interface/settings/user/badges/useProgramText.ts
+msgid "The bot's description is not clear or not accurate."
+msgstr "وصف البوت غير واضح أو غير دقيق."
+
+#: components/app/interface/settings/user/badges/useProgramText.ts
+msgid "The bot's servers were inflated with servers that do not count."
+msgstr "ضُخّم عدد سيرفرات البوت بسيرفرات لا تُحسب."
+
+#: components/app/interface/settings/user/badges/useProgramText.ts
+msgid "The code was not found yet. DNS changes can take a while; try again later."
+msgstr "لم يُعثر على الرمز بعد. قد تستغرق تغييرات DNS بعض الوقت، فحاول لاحقاً."
+
+#: components/app/interface/settings/user/badges/useProgramText.ts
+msgid "The name or branding is not the entity's own."
+msgstr "الاسم أو الهوية البصرية ليسا للجهة نفسها."
+
+#: components/app/interface/settings/user/badges/useProgramText.ts
+msgid "The numbers on the badge page are not met any more."
+msgstr "لم تعد الأرقام المذكورة في صفحة الشارة مستوفاة."
+
+#: components/app/interface/settings/user/badges/useProgramText.ts
+msgid "The published criteria are met."
+msgstr "الشروط المنشورة مستوفاة."
+
+#: components/app/interface/settings/user/badges/useProgramText.ts
+msgid "The server has no published rules, or they are too thin."
+msgstr "ليس للسيرفر قواعد منشورة، أو أنها غير كافية."
+
+#: components/app/interface/settings/user/badges/useProgramText.ts
+msgid "The server or bot exists"
+msgstr "السيرفر أو البوت موجود"
+
+#: components/app/interface/settings/user/badges/useProgramText.ts
+msgid "The server or bot has a new owner."
+msgstr "صار للسيرفر أو البوت مالك جديد."
+
+#: components/app/interface/settings/user/badges/useProgramText.ts
+msgid "The server was deleted."
+msgstr "حُذف السيرفر."
+
+#: components/app/interface/settings/user/badges/useProgramText.ts
+msgid "The server's purpose is not clear from what the team saw."
+msgstr "هدف السيرفر غير واضح مما اطّلع عليه الفريق."
+
+#: components/app/interface/settings/user/badges/useProgramText.ts
+msgid "The team could not confirm that the server officially represents the entity."
+msgstr "لم يتمكن الفريق من التأكد من أن السيرفر يمثّل الجهة رسمياً."
+
+#: components/app/interface/settings/user/badges/useProgramText.ts
+msgid "The team could not use a working feature of the bot."
+msgstr "لم يتمكن الفريق من استعمال ميزة عاملة في البوت."
+
+#: components/app/interface/settings/user/badges/useProgramText.ts
+msgid "The team did not see active, accountable moderation."
+msgstr "لم يجد الفريق إشرافاً نشطاً ومسؤولاً."
+
+#: components/app/interface/settings/user/badges/useProgramText.ts
+msgid "The team found signs of bought members or fake activity."
+msgstr "وجد الفريق مؤشرات على أعضاء مشتراة أو نشاط مزيّف."
+
+#: components/app/interface/settings/user/badges/useProgramText.ts
+msgid "The team took the mark away."
+msgstr "أزال الفريق العلامة."
+
+#: components/app/interface/settings/user/badges/useProgramText.ts
+msgid "There are unresolved serious safety violations."
+msgstr "توجد مخالفات أمان جسيمة لم تُعالج."
+
+#: components/app/interface/settings/user/badges/useProgramText.ts
+msgid "There is already an open application for this."
+msgstr "يوجد طلب مفتوح لهذا بالفعل."
+
+#: components/app/interface/settings/user/badges/useProgramText.ts
+msgid "This already has the badge or mark."
+msgstr "لهذا الشارة أو العلامة بالفعل."
+
+#: components/app/interface/settings/user/badges/useProgramText.ts
+msgid "This application can't be changed now."
+msgstr "لا يمكن تغيير هذا الطلب الآن."
+
+#: components/app/interface/settings/user/badges/useProgramText.ts
+msgid "This code has expired. Ask for a new one."
+msgstr "انتهت صلاحية هذا الرمز. اطلب رمزاً جديداً."
+
+#: components/app/interface/settings/user/badges/useProgramText.ts
+msgid "Verified Server"
+msgstr "سيرفر موثّق"
+
+#: components/app/interface/settings/user/badges/ProgramDialog.tsx
+msgid "We are an official organisation below the member numbers. A senior team member and a second person decide, with documented proof; being well known is not proof."
+msgstr "نحن جهة رسمية دون أعداد الأعضاء المطلوبة. يقرر عضو أقدم في الفريق مع شخص ثانٍ بناءً على أدلة موثّقة، والشهرة ليست دليلاً."
+
+#: components/app/interface/settings/user/badges/useProgramText.ts
+msgid "Weekly active members on average: {value} of {needed}"
+msgstr "متوسط الأعضاء النشطين في الأسبوع: {value} من {needed}"
+
+#: components/app/interface/settings/user/badges/useProgramText.ts
+msgid "Weekly contributors on average: {value} of {needed}"
+msgstr "متوسط المساهمين في الأسبوع: {value} من {needed}"
+
+#: components/app/interface/settings/user/badges/useProgramText.ts
+msgid "Weeks of activity measured: {value} of {needed}"
+msgstr "أسابيع النشاط المقيسة: {value} من {needed}"
+
+#: components/app/interface/settings/user/badges/ProgramDialog.tsx
+msgid "What is it, and why does it fit this program?"
+msgstr "ما هو، ولماذا يناسب هذا البرنامج؟"
+
+#: components/app/interface/settings/user/badges/ProgramDialog.tsx
+msgid "What the server measured"
+msgstr "ما قاسه زرزور"
+
+#: components/app/interface/settings/user/badges/MyApplications.tsx
+msgid "Withdraw the application"
+msgstr "سحب الطلب"
+
+#: components/app/interface/settings/user/badges/useProgramText.ts
+msgid "You already appealed this decision."
+msgstr "اعترضت على هذا القرار بالفعل."
+
+#: components/app/interface/settings/user/badges/useProgramText.ts
+msgid "You are 18 or older"
+msgstr "عمرك 18 سنة أو أكثر"
+
+#: components/app/interface/settings/user/badges/useProgramText.ts
+msgid "You are its owner"
+msgstr "أنت مالكه"
+
+#: components/app/interface/settings/user/badges/MyApplications.tsx
+msgid "You can appeal once. Say what the team missed or what changed; a person reads it."
+msgstr "يمكنك الاعتراض مرة واحدة. اذكر ما فات الفريق أو ما تغيّر، وسيقرؤه شخص."
+
+#. placeholder {0}: date(application.appeal_until)
+#: components/app/interface/settings/user/badges/MyApplications.tsx
+msgid "You can appeal until {0}"
+msgstr "يمكنك الاعتراض حتى {0}"
+
+#. placeholder {0}: date(checklist()!.blocked_until)
+#: components/app/interface/settings/user/badges/ProgramDialog.tsx
+msgid "You can apply again from {0}."
+msgstr "يمكنك التقديم من جديد ابتداءً من {0}."
+
+#: components/app/interface/settings/user/badges/useProgramText.ts
+msgid "You have three open applications. Finish or withdraw one first."
+msgstr "لديك ثلاثة طلبات مفتوحة. أكمل أحدها أو اسحبه أولاً."
+
+#: components/app/interface/settings/user/badges/MyApplications.tsx
+msgid "Your appeal"
+msgstr "اعتراضك"
+
+#: components/app/interface/settings/user/badges/MyApplications.tsx
+msgid "Your applications"
+msgstr "طلباتك"
+
+#: components/app/interface/settings/user/badges/ProgramDialog.tsx
+msgid "Your bot"
+msgstr "بوتك"
+
+#: components/app/interface/settings/user/badges/useProgramText.ts
+msgid "Your e-mail address is confirmed"
+msgstr "عنوان بريدك الإلكتروني مؤكد"
+
+#: components/app/interface/settings/user/badges/ProgramDialog.tsx
+msgid "Your server"
+msgstr "سيرفرك"
