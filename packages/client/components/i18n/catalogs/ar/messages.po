@@ -33191,3 +33191,23 @@ msgstr "حدِّث تطبيق زرزور لسطح المكتب لمشاركة م
 #: components/app/interface/settings/user/activity/ActivitySettings.tsx
 msgid "Without the desktop app, Steam can still show what you play: turn on “Show what you play on Steam”."
 msgstr "يمكن لـ Steam أن يعرض ما تلعبه حتى دون تطبيق سطح المكتب: فعِّل «اعرض ما تلعبه على Steam»."
+
+#: components/client/mfaLogin.ts
+msgid "The sign-in step ran out. Please sign in again."
+msgstr "انتهت مهلة خطوة تسجيل الدخول. يُرجى تسجيل الدخول مرة أخرى."
+
+#: components/client/mfaLogin.ts
+msgid "This code didn't work. Wait for the next code and enter it once."
+msgstr "لم يُقبل هذا الرمز. انتظر الرمز التالي وأدخله مرة واحدة."
+
+#: components/client/mfaLogin.ts
+msgid "This password didn't work. Check it and try again."
+msgstr "لم تُقبل كلمة المرور هذه. تحقّق منها ثم حاول مرة أخرى."
+
+#: components/client/mfaLogin.ts
+msgid "This recovery code didn't work. Check it and try again."
+msgstr "لم يُقبل رمز الاسترداد هذا. تحقّق منه ثم حاول مرة أخرى."
+
+#: components/client/mfaLogin.ts
+msgid "Too many wrong codes. Wait 15 minutes and try again."
+msgstr "أُدخلت رموز خاطئة كثيرة. انتظر 15 دقيقة ثم حاول مرة أخرى."

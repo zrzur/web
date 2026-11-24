@@ -33194,3 +33194,23 @@ msgstr "Update the Zrzur desktop app to share what you are doing."
 #: components/app/interface/settings/user/activity/ActivitySettings.tsx
 msgid "Without the desktop app, Steam can still show what you play: turn on “Show what you play on Steam”."
 msgstr "Without the desktop app, Steam can still show what you play: turn on “Show what you play on Steam”."
+
+#: components/client/mfaLogin.ts
+msgid "The sign-in step ran out. Please sign in again."
+msgstr "The sign-in step ran out. Please sign in again."
+
+#: components/client/mfaLogin.ts
+msgid "This code didn't work. Wait for the next code and enter it once."
+msgstr "This code didn't work. Wait for the next code and enter it once."
+
+#: components/client/mfaLogin.ts
+msgid "This password didn't work. Check it and try again."
+msgstr "This password didn't work. Check it and try again."
+
+#: components/client/mfaLogin.ts
+msgid "This recovery code didn't work. Check it and try again."
+msgstr "This recovery code didn't work. Check it and try again."
+
+#: components/client/mfaLogin.ts
+msgid "Too many wrong codes. Wait 15 minutes and try again."
+msgstr "Too many wrong codes. Wait 15 minutes and try again."

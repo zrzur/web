@@ -1,0 +1,22 @@
+{
+  "This code didn't work. Wait for the next code and enter it once.": [
+    "لم يُقبل هذا الرمز. انتظر الرمز التالي وأدخله مرة واحدة.",
+    "Dieser Code hat nicht funktioniert. Warte auf den nächsten Code und gib ihn einmal ein."
+  ],
+  "This recovery code didn't work. Check it and try again.": [
+    "لم يُقبل رمز الاسترداد هذا. تحقّق منه ثم حاول مرة أخرى.",
+    "Dieser Wiederherstellungscode hat nicht funktioniert. Prüfe ihn und versuche es erneut."
+  ],
+  "This password didn't work. Check it and try again.": [
+    "لم تُقبل كلمة المرور هذه. تحقّق منها ثم حاول مرة أخرى.",
+    "Dieses Passwort hat nicht funktioniert. Prüfe es und versuche es erneut."
+  ],
+  "Too many wrong codes. Wait 15 minutes and try again.": [
+    "أُدخلت رموز خاطئة كثيرة. انتظر 15 دقيقة ثم حاول مرة أخرى.",
+    "Zu viele falsche Codes. Warte 15 Minuten und versuche es dann erneut."
+  ],
+  "The sign-in step ran out. Please sign in again.": [
+    "انتهت مهلة خطوة تسجيل الدخول. يُرجى تسجيل الدخول مرة أخرى.",
+    "Der Anmeldeschritt ist abgelaufen. Bitte melde dich erneut an."
+  ]
+}

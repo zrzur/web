@@ -33191,3 +33191,23 @@ msgstr "Aktualisiere die Zrzur-Desktop-App, um zu teilen, was du gerade tust."
 #: components/app/interface/settings/user/activity/ActivitySettings.tsx
 msgid "Without the desktop app, Steam can still show what you play: turn on “Show what you play on Steam”."
 msgstr "Auch ohne Desktop-App kann Steam zeigen, was du spielst: Schalte „Zeigen, was du auf Steam spielst“ ein."
+
+#: components/client/mfaLogin.ts
+msgid "The sign-in step ran out. Please sign in again."
+msgstr "Der Anmeldeschritt ist abgelaufen. Bitte melde dich erneut an."
+
+#: components/client/mfaLogin.ts
+msgid "This code didn't work. Wait for the next code and enter it once."
+msgstr "Dieser Code hat nicht funktioniert. Warte auf den nächsten Code und gib ihn einmal ein."
+
+#: components/client/mfaLogin.ts
+msgid "This password didn't work. Check it and try again."
+msgstr "Dieses Passwort hat nicht funktioniert. Prüfe es und versuche es erneut."
+
+#: components/client/mfaLogin.ts
+msgid "This recovery code didn't work. Check it and try again."
+msgstr "Dieser Wiederherstellungscode hat nicht funktioniert. Prüfe ihn und versuche es erneut."
+
+#: components/client/mfaLogin.ts
+msgid "Too many wrong codes. Wait 15 minutes and try again."
+msgstr "Zu viele falsche Codes. Warte 15 Minuten und versuche es dann erneut."
