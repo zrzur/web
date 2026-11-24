@@ -2,6 +2,11 @@
 
 ## Unreleased
 
+### Role colours show on nameplates in the member list (2026-11-24, owner's report)
+
+* A member with a server role colour and a nameplate shows the role colour in the member list, plain or gradient. Before, the plate's ink drew every name on a plate white (dark themes) or dark (light themes), so the role colour never showed there.
+* One rule everywhere: your own chosen name colour wins; otherwise the role colour shows, on a nameplate too; with "Show name styles" off, role colours still show. A plain role colour on a plate keeps the plate's soft halo so it reads on the art; a gradient role colour is no longer covered by that halo.
+
 ### Profile frames fit the window (2026-11-24, owner's report)
 
 * A profile frame (Crystal cave) shows whole on the card opened from the member list and on the full profile, at any window height: the card and the profile keep the frame's room from the window's edges, and the frame's pixels get smaller (3 px, then 2 px) on lower windows and phones.
