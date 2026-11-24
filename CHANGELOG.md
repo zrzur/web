@@ -2,6 +2,13 @@
 
 ## Unreleased
 
+### Badges: one anniversary, Saha Champion retired, Discover bot marks (2026-11-24, badge plan phases 1 and 2)
+
+* **One time-on-Zrzur badge:** profiles and My Badges show only the highest full year reached (One Year up to Ten Years, counted in UTC); Two and Four to Ten Years appear for the first time. Early Adopter and the anniversaries are hidden while "Member since" is hidden on the profile, and their texts say so.
+* **Saha Champion retired:** no badge, art or text in the app; nobody held it.
+* **Discover:** a verified bot shows the check inside its Bot label and no seal beside it; an official bot that is not verified never shows a verified mark.
+* **Staff badge panel** (staff tools, still hidden): uses the admin console's routes with a staff session opened by an authenticator code, shows the changes waiting for a second staff member with Approve and Refuse, and picks an expiry with the app's date field.
+
 ### Name styles (2026-11-22, owner's request)
 
 * **More ways to write your name:** a spectrum of three to five colours that runs round the name, and four effects on top of any colour: Halo, Edge, Lifted and Sheen. With a role colour in a server, your font and effect stay. Settings → Profile → Look → Name style; the dialog is laid out for phones first, with the preview pinned on top and drawn in the theme you use.
