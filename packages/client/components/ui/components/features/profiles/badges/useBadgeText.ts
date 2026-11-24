@@ -183,12 +183,11 @@ export function useBadgeText(): (id: string) => BadgeText {
         earn: t`Automatic when a server you own reaches 1,000 genuine human members, counted as for Community Builder; it stays if the server gets smaller.`,
         how: "automatic",
       },
-      verified_server_owner: {
-        name: t`Verified Server Owner`,
-        description: t`Owns the verified official server of a real game, company, creator, organisation or project.`,
-        earn: t`By application, reviewed by the Zrzur team: at least 10,000 genuine human members, 180 days, and proven ownership of the official website (DNS or website check).`,
-        how: "application",
-      },
+      // cancelled (owner, 2026-11-24): named only for people who have it
+      verified_server_owner: retired(
+        t`Verified Server Owner`,
+        t`Owns a server the Zrzur team verified.`,
+      ),
       verified_bot_developer: {
         name: t`Verified Bot Developer`,
         description: t`Owns or develops a bot that passed Zrzur's verification review.`,
@@ -224,7 +223,7 @@ export function useBadgeText(): (id: string) => BadgeText {
       server_verified: {
         name: t`Verified server`,
         description: t`The Zrzur team confirmed who runs this server.`,
-        earn: t`By application, reviewed by the Zrzur team: shown on a server that passed the Verified Server review (see Verified Server Owner).`,
+        earn: t`By application, reviewed by the Zrzur team: at least 10,000 genuine human members, 180 days, and proven ownership of the official website (DNS or website check).`,
         how: "application",
       },
       bot_verified: {

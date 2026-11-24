@@ -168,7 +168,11 @@ export const BADGES: BadgeMeta[] = [
   // concept B "The take" (owner, 2026-11-23): mint enamel, gold rim
   meta("content_creator", 1, 44, "hex", ["#6FE0C4", "#16786A"]),
   meta("creator", 1, 45, "hex", ["#A783F0", "#6E4FC9"]),
-  meta("verified_server_owner", 1, 46, "hex", ["#5E86C4", "#3A5F9A"]),
+  // cancelled (owner, 2026-11-24): no longer given out; people who have it
+  // keep it, drawn with the verified seal. The Verified Server mark stays.
+  meta("verified_server_owner", 1, 46, "hex", ["#5E86C4", "#3A5F9A"], {
+    retired: true,
+  }),
   meta("verified_bot_developer", 1, 47, "hex", ["#6FB0C9", "#3F7890"]),
   meta("elite_bug_hunter", 2, 50, "banner", ["#E8B04A", "#B0702A"], {
     ring: "#FFE3A6",

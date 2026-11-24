@@ -9,9 +9,10 @@ import { BadgeMeta, BadgeShape } from "./catalog";
  * Every badge is an enamel pin: the rim metal shows the tier (silver regular,
  * gold rare, a double platinum rim on the top tier) and the enamel colour
  * shows the family. Founder, Staff and Official Server are the Zrzur mark on
- * its own, with no frame. Verified Server, Verified Bot and (until the
- * owner picks its drawing) Verified Server Owner share one verification
- * mark; Verified Bot Developer is the </> in a gear (owner, 2026-11-24).
+ * its own, with no frame. Verified Server, Verified Bot and the cancelled
+ * Verified Server Owner (drawn only for people who have it) share one
+ * verification mark; Verified Bot Developer is the </> in a gear (owner,
+ * 2026-11-24).
  *
  * The art (`badgeArt.ts`, generated, static, no user input) loads on its own
  * the first time a badge is drawn, so it stays out of the app shell. Until it

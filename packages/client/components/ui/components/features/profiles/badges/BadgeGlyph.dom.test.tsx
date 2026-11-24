@@ -71,8 +71,8 @@ describe("badge art", () => {
     const seen = new Map<string, string>();
     // Founder, Staff and Early Adopter are all the Zrzur mark on its own,
     // told apart by colour only (owner, 2026-11-12)
-    // and Verified Server Owner is still the one verified seal, until the
-    // owner picks its own drawing (2026-11-24)
+    // and the cancelled Verified Server Owner keeps the one verified seal for
+    // people who have it (owner, 2026-11-24)
     const sameMark = new Set([
       "founder",
       "staff",

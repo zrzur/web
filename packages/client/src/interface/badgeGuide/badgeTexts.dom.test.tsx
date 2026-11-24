@@ -8,6 +8,7 @@ import {
   AnyBadgeId,
   BADGES,
   CONTEXT_BADGES,
+  badgeMeta,
 } from "@revolt/ui/components/features/profiles/badges/catalog";
 import {
   BadgeText,
@@ -104,8 +105,23 @@ describe("badge texts: one source", () => {
       );
   });
 
-  it("says the approved rules for the two verified badges", () => {
-    const owner = text("verified_server_owner" as AnyBadgeId).earn;
+  it("no longer gives out Verified Server Owner, but still names it for people who have it", () => {
+    // owner 2026-11-24: the badge is cancelled; the Verified Server mark stays
+    expect(badgeMeta("verified_server_owner")?.retired).toBe(true);
+    expect(entries().map((entry) => entry.id)).not.toContain(
+      "verified_server_owner",
+    );
+    const words = text("verified_server_owner");
+    expect(words.name).toBe("Verified Server Owner");
+    expect(words.earn).toBe("");
+    expect(entries().map((entry) => entry.id)).toContain("server_verified");
+    expect(text("server_verified").earn).not.toContain(
+      "Verified Server Owner",
+    );
+  });
+
+  it("says the approved rules for Verified Server and Verified Bot Developer", () => {
+    const owner = text("server_verified" as AnyBadgeId).earn;
     expect(owner).toContain("10,000");
     expect(owner).toContain("180 days");
     expect(owner).toContain("DNS");

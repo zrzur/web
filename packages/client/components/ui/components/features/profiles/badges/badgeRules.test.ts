@@ -69,7 +69,7 @@ const RULES: { badge: string; text: string; numbers: string[] }[] = [
     numbers: ["5", "180"],
   },
   {
-    badge: "verified_server_owner",
+    badge: "server_verified",
     text: "By application, reviewed by the Zrzur team: at least 10,000 genuine human members, 180 days, and proven ownership of the official website (DNS or website check).",
     numbers: ["10", "180", "DNS"],
   },

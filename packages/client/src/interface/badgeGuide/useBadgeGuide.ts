@@ -93,15 +93,6 @@ export function useBadgeGuide(): () => {
             ],
           },
           {
-            id: "verified_server_owner",
-            details: [
-              t`Your server is the authentic official home of a real game, developer, company, creator, organisation, brand or established project: authenticity, not popularity.`,
-              t`Control of the official domain, proven with a DNS TXT record or a file on the website. Claiming to be famous is not proof.`,
-              t`A clearly official entity may qualify below these numbers with a senior approval and a second person.`,
-              t`Never automatic. The badge stays while you own the verified server and ends if the server changes hands.`,
-            ],
-          },
-          {
             id: "verified_bot_developer",
             details: [
               t`Servers of one owner count at most twice, and your own servers never count.`,
@@ -222,7 +213,11 @@ export function useBadgeGuide(): () => {
           },
           {
             id: "server_verified",
-            details: [],
+            details: [
+              t`Your server is the authentic official home of a real game, developer, company, creator, organisation, brand or established project: authenticity, not popularity.`,
+              t`Control of the official domain, proven with a DNS TXT record or a file on the website. Claiming to be famous is not proof.`,
+              t`A clearly official entity may qualify below these numbers with a senior approval and a second person.`,
+            ],
           },
           {
             id: "server_owner",

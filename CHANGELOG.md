@@ -2,12 +2,13 @@
 
 ## Unreleased
 
-### Badges: one text for every badge, and a drawing for Verified Bot Developer (2026-11-24, owner's report)
+### Badges: one text for every badge, Verified Bot Developer drawn, Verified Server Owner cancelled (2026-11-24, owner's report)
 
 * **One source for badge texts.** A badge's name, what it means and how it is earned now come from one place and read the same in My Badges ("Badges you can earn"), the badge tooltip and profile row, and the public guide at `/badges`, which adds only the details below that line. Before, My Badges still said "Own a verified server. It is shown while you do." while the guide said something else.
-* The texts follow the approved badge policy. **Verified Server Owner:** by application, reviewed by the Zrzur team: at least 10,000 genuine human members, 180 days, and proven ownership of the official website (DNS or website check). **Verified Bot Developer:** by application, reviewed by the Zrzur team: a bot in at least 25 legitimate servers, running for at least 30 days, with verified ownership. Partner, Content Creator, Community Builder, Big Community, Creator, Super Creator, Beta Veteran, Early Adopter, the years on Zrzur and the team badges are aligned the same way. No line tells you to apply while applications are closed, and none promises a review time.
+* The texts follow the approved badge policy. **Verified Bot Developer:** by application, reviewed by the Zrzur team: a bot in at least 25 legitimate servers, running for at least 30 days, with verified ownership. **Verified Server** (the mark on a server): by application, reviewed by the Zrzur team: at least 10,000 genuine human members, 180 days, and proven ownership of the official website (DNS or website check). Partner, Content Creator, Community Builder, Big Community, Creator, Super Creator, Beta Veteran, Early Adopter, the years on Zrzur and the team badges are aligned the same way. No line tells you to apply while applications are closed, and none promises a review time.
+* **Verified Bot Developer has its own drawing:** the `</>` of code inside a gear, in the same enamel-pin style; before, it was the same verified seal as Verified Server Owner and the two looked identical in My Badges.
+* **Verified Server Owner is no longer given out** (owner's decision): it is gone from "Badges you can earn" and from `/badges`. People who already have it keep it, still drawn with the verified seal. The Verified Server mark on servers stays as it is.
 * On `/badges`, the section "Programs you apply for" is now "Programs by application".
-* **Verified Bot Developer has its own drawing:** the `</>` of code inside a gear, in the same enamel-pin style; before, it was the same verified seal as Verified Server Owner and the two looked identical in My Badges. Verified Server Owner keeps the seal until its own drawing is chosen; verified servers and bots keep the seal.
 
 ### Profile frames fit the window (2026-11-24, owner's report)
 
