@@ -22,6 +22,7 @@ import {
   Time,
 } from "@revolt/ui/components/utils";
 
+import { nameRoom } from "../../profiles/nameRoom";
 import { MessageToolbar } from "./MessageToolbar";
 
 interface CommonProps {
@@ -283,6 +284,12 @@ const Body = styled("div", {
 
     minWidth: 0,
     overflow: "hidden",
+    // the author's name is the first line: room above it and at its start
+    // for a styled name's glow, pulled back so nothing moves (see nameRoom)
+    paddingBlockStart: "8px",
+    marginBlockStart: "-8px",
+    paddingInlineStart: "8px",
+    marginInlineStart: "-8px",
     paddingInlineEnd: "16px",
     // phones: the list already keeps 12 px from the far edge
     _phone: { paddingInlineEnd: "4px" },
@@ -614,7 +621,10 @@ export function MessageContainer(props: Props) {
           <Body editing={props.editing}>
             <Show when={!props.tail && !props.compact}>
               <Row gap="sm" align class={css({ minHeight: "20px" })}>
-                <OverflowingText>{props.username}</OverflowingText>
+                {/* room for a styled name's glow inside the cut */}
+                <OverflowingText class={nameRoom} data-name-room="">
+                  {props.username}
+                </OverflowingText>
                 <NonBreakingText class={infoText()}>
                   {props.info}
                 </NonBreakingText>
