@@ -93,7 +93,12 @@ export function ApplicationsSection(props: {
             title={
               <TitleLine data-application={application._id}>
                 {words.program(application.program)}
-                <Show when={application.target_name}>
+                <Show
+                  when={
+                    application.target_name &&
+                    application.program !== "content_creator"
+                  }
+                >
                   {" · "}
                   <bdi>{application.target_name}</bdi>
                 </Show>
@@ -107,6 +112,16 @@ export function ApplicationsSection(props: {
             }
             description={
               <>
+                <Show when={application.creator}>
+                  <Meta data-application-channel>
+                    {words.platform(
+                      application.creator!.platform,
+                      application.creator!.platform_name,
+                    )}
+                    {" · "}
+                    <bdi dir="ltr">{application.creator!.url}</bdi>
+                  </Meta>
+                </Show>
                 <Show when={application.reasons.length}>
                   <ul
                     style={{ margin: "4px 0", "padding-inline-start": "18px" }}

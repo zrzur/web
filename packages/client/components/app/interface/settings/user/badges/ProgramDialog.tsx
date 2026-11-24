@@ -28,6 +28,11 @@ import {
 } from "./parts";
 import {
   BadgeApplication,
+  CREATOR_CATEGORIES,
+  CREATOR_PLATFORMS,
+  CreatorCategory,
+  CreatorChannel,
+  CreatorPlatform,
   PROGRAM_BADGE,
   ProgramId,
   failureCode,
@@ -40,6 +45,12 @@ import { useProgramText } from "./useProgramText";
  * the checklist the server measured (in your language), write what it is,
  * prove control of the domain (Verified Server) and send it. A draft can be
  * picked up again from "Your applications".
+ *
+ * Content Creator is about you: name one channel or profile on another
+ * platform, its kind of content and recent works, put the code you get in
+ * its description or a pinned post, and send. A person on the team opens
+ * the channel, looks for the code and checks the numbers and the quality;
+ * Zrzur never connects to the platform.
  */
 export function ProgramDialog(props: {
   program: ProgramId;
@@ -68,6 +79,21 @@ export function ProgramDialog(props: {
     props.application?.authorized ?? false,
   );
   const [method, setMethod] = createSignal<"dns" | "website">("dns");
+  // Content Creator: the channel
+  const creator = () => props.program === "content_creator";
+  const channel = props.application?.creator;
+  const [platform, setPlatform] = createSignal<CreatorPlatform | "">(
+    channel?.platform ?? "",
+  );
+  const [platformName, setPlatformName] = createSignal(
+    channel?.platform_name ?? "",
+  );
+  const [channelUrl, setChannelUrl] = createSignal(channel?.url ?? "");
+  const [category, setCategory] = createSignal<CreatorCategory | "">(
+    channel?.category ?? "",
+  );
+  const [works, setWorks] = createSignal((channel?.works ?? []).join("\n"));
+  const [schedule, setSchedule] = createSignal(channel?.schedule ?? "");
   const [domain, setDomain] = createSignal(
     props.application?.ownership?.domain ?? "",
   );
@@ -77,10 +103,14 @@ export function ProgramDialog(props: {
   const [sent, setSent] = createSignal(false);
 
   const kind = () => (props.program === "verified_bot" ? "bot" : "server");
-  const [targets] = createResource(() =>
-    programsApi
-      .targets(client())
-      .then((list) => list.filter((entry) => entry.kind === kind())),
+  // Content Creator is about you: no server or bot to choose
+  if (creator() && !target()) setTarget("@me");
+  const [targets] = createResource(
+    () => !creator(),
+    () =>
+      programsApi
+        .targets(client())
+        .then((list) => list.filter((entry) => entry.kind === kind())),
   );
   // one server or bot: chosen for you
   createEffect(
@@ -107,14 +137,39 @@ export function ProgramDialog(props: {
     }
   }
 
-  const fields = () => ({
-    statement: statement(),
-    links: links()
+  const lines = (text: string) =>
+    text
       .split(/\s+/)
       .map((link) => link.trim())
-      .filter(Boolean),
+      .filter(Boolean);
+
+  const channelFields = (): CreatorChannel | undefined =>
+    creator() && platform() && category()
+      ? {
+          platform: platform() as CreatorPlatform,
+          platform_name:
+            platform() === "other" ? platformName().trim() : undefined,
+          url: channelUrl().trim(),
+          category: category() as CreatorCategory,
+          works: lines(works()),
+          schedule: schedule().trim() || undefined,
+        }
+      : undefined;
+
+  const fields = () => ({
+    statement: statement(),
+    links: lines(links()),
     authorized: authorized(),
+    ...(channelFields() ? { creator: channelFields() } : {}),
   });
+
+  /** Content Creator: enough to send (the server checks it again) */
+  const channelReady = () =>
+    !creator() ||
+    (!!channelFields() &&
+      channelUrl().trim().length > 0 &&
+      (lines(works()).length >= 5 || schedule().trim().length > 0) &&
+      !!application()?.ownership);
 
   /** The draft, made or brought up to date with the form */
   async function draft() {
@@ -136,6 +191,7 @@ export function ProgramDialog(props: {
     application()!.status === "Draft" ||
     application()!.status === "MoreInfo";
   const ownershipNeeded = () => props.program === "verified_server";
+  const [profileCode, setProfileCode] = createSignal<string>();
   const proven = () => !!application()?.ownership?.verified_at;
 
   return (
@@ -165,51 +221,55 @@ export function ProgramDialog(props: {
           when={sent()}
           fallback={
             <>
-              <Field>
-                <span>
-                  {kind() === "bot" ? (
-                    <Trans>Your bot</Trans>
-                  ) : (
-                    <Trans>Your server</Trans>
-                  )}
-                </span>
-                <Switch>
-                  <Match when={targets.loading}>
-                    <Hint>
-                      <Trans>Loading…</Trans>
-                    </Hint>
-                  </Match>
-                  <Match when={!targets()?.length}>
-                    <Hint role="status">
-                      {kind() === "bot" ? (
-                        <Trans>
-                          Only the owner of a bot can apply. You don't own a bot
-                          yet.
-                        </Trans>
-                      ) : (
-                        <Trans>
-                          Only the owner of a server can apply. You don't own a
-                          server yet.
-                        </Trans>
-                      )}
-                    </Hint>
-                  </Match>
-                  <Match when={targets()?.length}>
-                    <FloatingSelect
-                      value={target()}
-                      disabled={!!application()}
-                      onChange={(event) => setTarget(event.currentTarget.value)}
-                    >
-                      <MenuItem value="">{t`Choose…`}</MenuItem>
-                      <For each={targets()}>
-                        {(entry) => (
-                          <MenuItem value={entry.id}>{entry.name}</MenuItem>
+              <Show when={!creator()}>
+                <Field>
+                  <span>
+                    {kind() === "bot" ? (
+                      <Trans>Your bot</Trans>
+                    ) : (
+                      <Trans>Your server</Trans>
+                    )}
+                  </span>
+                  <Switch>
+                    <Match when={targets.loading}>
+                      <Hint>
+                        <Trans>Loading…</Trans>
+                      </Hint>
+                    </Match>
+                    <Match when={!targets()?.length}>
+                      <Hint role="status">
+                        {kind() === "bot" ? (
+                          <Trans>
+                            Only the owner of a bot can apply. You don't own a
+                            bot yet.
+                          </Trans>
+                        ) : (
+                          <Trans>
+                            Only the owner of a server can apply. You don't own
+                            a server yet.
+                          </Trans>
                         )}
-                      </For>
-                    </FloatingSelect>
-                  </Match>
-                </Switch>
-              </Field>
+                      </Hint>
+                    </Match>
+                    <Match when={targets()?.length}>
+                      <FloatingSelect
+                        value={target()}
+                        disabled={!!application()}
+                        onChange={(event) =>
+                          setTarget(event.currentTarget.value)
+                        }
+                      >
+                        <MenuItem value="">{t`Choose…`}</MenuItem>
+                        <For each={targets()}>
+                          {(entry) => (
+                            <MenuItem value={entry.id}>{entry.name}</MenuItem>
+                          )}
+                        </For>
+                      </FloatingSelect>
+                    </Match>
+                  </Switch>
+                </Field>
+              </Show>
 
               <Show
                 when={props.program === "verified_server" && !application()}
@@ -250,7 +310,7 @@ export function ProgramDialog(props: {
                                 : "✕"}
                           </span>
                           <span>
-                            {words.check(line)}
+                            {words.check(line, props.program)}
                             <Show
                               when={
                                 line.met === undefined &&
@@ -283,9 +343,154 @@ export function ProgramDialog(props: {
               <Show
                 when={application() || (checklist()?.can_apply && target())}
               >
+                <Show when={creator()}>
+                  <section
+                    aria-labelledby="program-channel"
+                    data-creator-channel
+                    style={{
+                      display: "flex",
+                      "flex-direction": "column",
+                      gap: "12px",
+                    }}
+                  >
+                    <h4 id="program-channel" style={{ margin: 0 }}>
+                      <Trans>Your channel</Trans>
+                    </h4>
+                    <Hint>
+                      <Trans>
+                        One channel or profile on one platform: followers on
+                        different platforms are not added together. Any kind of
+                        legitimate content counts; a genre is never a reason to
+                        refuse.
+                      </Trans>
+                    </Hint>
+                    <div
+                      style={{
+                        display: "grid",
+                        "grid-template-columns":
+                          "repeat(auto-fit, minmax(min(100%, 180px), 1fr))",
+                        gap: "12px",
+                      }}
+                    >
+                      <Field>
+                        <span>
+                          <Trans>Platform</Trans>
+                        </span>
+                        <FloatingSelect
+                          value={platform()}
+                          disabled={!editable()}
+                          onChange={(event) =>
+                            setPlatform(
+                              event.currentTarget.value as CreatorPlatform,
+                            )
+                          }
+                        >
+                          <MenuItem value="">{t`Choose…`}</MenuItem>
+                          <For each={[...CREATOR_PLATFORMS]}>
+                            {(id) => (
+                              <MenuItem value={id}>
+                                {words.platform(id)}
+                              </MenuItem>
+                            )}
+                          </For>
+                        </FloatingSelect>
+                      </Field>
+                      <Show when={platform() === "other"}>
+                        <Field>
+                          <span>
+                            <Trans>Name of the platform</Trans>
+                          </span>
+                          <input
+                            maxLength={40}
+                            disabled={!editable()}
+                            value={platformName()}
+                            onInput={(event) =>
+                              setPlatformName(event.currentTarget.value)
+                            }
+                          />
+                        </Field>
+                      </Show>
+                      <Field>
+                        <span>
+                          <Trans>Kind of content</Trans>
+                        </span>
+                        <FloatingSelect
+                          value={category()}
+                          disabled={!editable()}
+                          onChange={(event) =>
+                            setCategory(
+                              event.currentTarget.value as CreatorCategory,
+                            )
+                          }
+                        >
+                          <MenuItem value="">{t`Choose…`}</MenuItem>
+                          <For each={[...CREATOR_CATEGORIES]}>
+                            {(id) => (
+                              <MenuItem value={id}>
+                                {words.category(id)}
+                              </MenuItem>
+                            )}
+                          </For>
+                        </FloatingSelect>
+                      </Field>
+                    </div>
+                    <Field>
+                      <span>
+                        <Trans>Address of the channel or profile</Trans>
+                      </span>
+                      <input
+                        dir="ltr"
+                        maxLength={300}
+                        placeholder="https://"
+                        disabled={!editable()}
+                        value={channelUrl()}
+                        onInput={(event) =>
+                          setChannelUrl(event.currentTarget.value)
+                        }
+                      />
+                    </Field>
+                    <Field>
+                      <span>
+                        <Trans>
+                          Links to at least 5 original works from the last 90
+                          days, one per line
+                        </Trans>
+                      </span>
+                      <textarea
+                        dir="ltr"
+                        maxLength={3100}
+                        disabled={!editable()}
+                        value={works()}
+                        onInput={(event) => setWorks(event.currentTarget.value)}
+                      />
+                    </Field>
+                    <Field>
+                      <span>
+                        <Trans>
+                          Or, if you stream: your regular livestream schedule
+                        </Trans>
+                      </span>
+                      <textarea
+                        maxLength={500}
+                        disabled={!editable()}
+                        value={schedule()}
+                        onInput={(event) =>
+                          setSchedule(event.currentTarget.value)
+                        }
+                      />
+                    </Field>
+                  </section>
+                </Show>
+
                 <Field>
                   <span>
-                    <Trans>What is it, and why does it fit this program?</Trans>
+                    {creator() ? (
+                      <Trans>What do you make, and for whom?</Trans>
+                    ) : (
+                      <Trans>
+                        What is it, and why does it fit this program?
+                      </Trans>
+                    )}
                   </span>
                   <textarea
                     maxLength={2000}
@@ -294,20 +499,22 @@ export function ProgramDialog(props: {
                     onInput={(event) => setStatement(event.currentTarget.value)}
                   />
                 </Field>
-                <Field>
-                  <span>
-                    <Trans>
-                      Public links, one per line (website, rules page)
-                    </Trans>
-                  </span>
-                  <textarea
-                    dir="ltr"
-                    maxLength={1600}
-                    disabled={!editable()}
-                    value={links()}
-                    onInput={(event) => setLinks(event.currentTarget.value)}
-                  />
-                </Field>
+                <Show when={!creator()}>
+                  <Field>
+                    <span>
+                      <Trans>
+                        Public links, one per line (website, rules page)
+                      </Trans>
+                    </span>
+                    <textarea
+                      dir="ltr"
+                      maxLength={1600}
+                      disabled={!editable()}
+                      value={links()}
+                      onInput={(event) => setLinks(event.currentTarget.value)}
+                    />
+                  </Field>
+                </Show>
                 <Checkbox
                   checked={authorized()}
                   disabled={!editable()}
@@ -315,9 +522,15 @@ export function ProgramDialog(props: {
                     setAuthorized(event.currentTarget.checked)
                   }
                 >
-                  <Trans>
-                    I may represent this and everything I write is true.
-                  </Trans>
+                  {creator() ? (
+                    <Trans>
+                      This channel is mine and everything I write is true.
+                    </Trans>
+                  ) : (
+                    <Trans>
+                      I may represent this and everything I write is true.
+                    </Trans>
+                  )}
                 </Checkbox>
                 <Hint>
                   <Trans>
@@ -326,6 +539,74 @@ export function ProgramDialog(props: {
                     deleted 90 days after the final decision.
                   </Trans>
                 </Hint>
+
+                <Show when={creator() && editable()}>
+                  <section aria-labelledby="program-code" data-creator-code>
+                    <h4 id="program-code" style={{ margin: "0 0 8px" }}>
+                      <Trans>Show that the channel is yours</Trans>
+                    </h4>
+                    <Hint>
+                      <Trans>
+                        Put the code in your channel's description or a pinned
+                        post and leave it there until the team has decided. A
+                        person on the team looks for it; Zrzur never connects to
+                        the platform or reads your followers itself.
+                      </Trans>
+                    </Hint>
+                    <Show when={profileCode() && application()?.ownership}>
+                      <CodeBox>
+                        <span>
+                          <Trans>Your code:</Trans>
+                        </span>
+                        <code dir="ltr" data-profile-code>
+                          {profileCode()}
+                        </code>
+                        <small>
+                          <Trans>
+                            It is shown only now and works until{" "}
+                            {date(application()!.ownership!.expires_at)}.
+                          </Trans>
+                        </small>
+                      </CodeBox>
+                    </Show>
+                    <Show when={!profileCode() && application()?.ownership}>
+                      <Hint role="status">
+                        <Trans>
+                          You have a code. If you lost it, ask for a new one and
+                          replace it on the channel.
+                        </Trans>
+                      </Hint>
+                    </Show>
+                    <RowActions>
+                      <Button
+                        size="sm"
+                        variant="tonal"
+                        isDisabled={
+                          busy() || !channelFields() || !channelUrl().trim()
+                        }
+                        onPress={() =>
+                          void run(async () => {
+                            const current = await draft();
+                            const issued = await programsApi.challenge(
+                              client(),
+                              current._id,
+                              "profile",
+                              "",
+                            );
+                            setApplication(issued.application);
+                            setProfileCode(issued.value);
+                          })
+                        }
+                      >
+                        {application()?.ownership ? (
+                          <Trans>Get a new code</Trans>
+                        ) : (
+                          <Trans>Get a code</Trans>
+                        )}
+                      </Button>
+                    </RowActions>
+                  </section>
+                </Show>
 
                 <Show when={ownershipNeeded() && editable()}>
                   <section aria-labelledby="program-ownership">
@@ -476,7 +757,8 @@ export function ProgramDialog(props: {
                       !target() ||
                       !authorized() ||
                       statement().trim().length < 20 ||
-                      (ownershipNeeded() && !proven())
+                      (ownershipNeeded() && !proven()) ||
+                      !channelReady()
                     }
                     onPress={() =>
                       void run(async () => {

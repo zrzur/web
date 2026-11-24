@@ -12,6 +12,8 @@ import { Trans, useLingui } from "@lingui/solid/macro";
 import { useClient } from "@revolt/client";
 import { STAFF_TOOLS_ENABLED } from "@revolt/common/lib/staffTools";
 import { useError } from "@revolt/i18n";
+import { useModals } from "@revolt/modal";
+import { useNavigate } from "@revolt/routing";
 import { Button, SettingsRow, SettingsSection, Toggle } from "@revolt/ui";
 import { BadgeMark } from "@revolt/ui/components/features/profiles/badges/BadgeMark";
 import {
@@ -57,6 +59,7 @@ import {
 import {
   BadgeApplication,
   ProgramId,
+  applicationsOpen,
   programOf,
   programsApi,
 } from "./programsApi";
@@ -83,13 +86,19 @@ export function MyBadges() {
   const [data, { refetch }] = createResource(() => badgesApi.mine(client()));
   const [error, setError] = createSignal<string>();
   const [busy, setBusy] = createSignal(false);
+  const navigate = useNavigate();
+  const { pop } = useModals();
   const [dialog, setDialog] = createSignal<
     "admin" | "beta" | "bugs" | "report"
   >();
   // badge programs people apply for (Partner, Verified Server, Verified
-  // Bot Developer): your applications, and the one being written
-  const [applications, { refetch: refetchApplications }] = createResource(() =>
-    programsApi.mine(client()).catch(() => [] as BadgeApplication[]),
+  // Bot Developer, Content Creator): your applications, and the one being
+  // written. Only while the server lets people apply from the app
+  // (`badge_applications`); the team still reviews older ones either way.
+  const open = () => applicationsOpen(client());
+  const [applications, { refetch: refetchApplications }] = createResource(
+    open,
+    () => programsApi.mine(client()).catch(() => [] as BadgeApplication[]),
   );
   const [applying, setApplying] = createSignal<{
     program: ProgramId;
@@ -521,6 +530,20 @@ export function MyBadges() {
             <h3 id="my-badges-earn">
               <Trans>Badges you can earn</Trans>
             </h3>
+            <RowActions>
+              <Button
+                size="sm"
+                variant="text"
+                data-badge-guide-link
+                onPress={() => {
+                  // the guide is its own page: settings close first
+                  pop();
+                  navigate("/badges");
+                }}
+              >
+                <Trans>How every badge is earned</Trans>
+              </Button>
+            </RowActions>
             <Grid>
               <For each={earnable()}>
                 {(badge) => (
@@ -536,7 +559,7 @@ export function MyBadges() {
                         </Show>
                       </TitleLine>
                       <p>{text(badge.id).earn}</p>
-                      <Show when={programOf(badge.id)}>
+                      <Show when={open() && programOf(badge.id)}>
                         <RowActions>
                           <Button
                             size="sm"
@@ -557,7 +580,7 @@ export function MyBadges() {
             </Grid>
           </Section>
 
-          <Show when={applications()?.length}>
+          <Show when={open() && applications()?.length}>
             <ApplicationsSection
               applications={applications()!}
               onContinue={(application) =>

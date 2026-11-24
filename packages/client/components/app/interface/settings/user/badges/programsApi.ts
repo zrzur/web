@@ -3,19 +3,72 @@ import type { Client } from "@zrzur/sdk/solid";
 import type { AnyBadgeId } from "@revolt/ui/components/features/profiles/badges/catalog";
 
 /**
- * Badge programs people apply for: Zrzur Partner, Verified Server and
- * Verified Bot Developer. The SDK pin does not carry these routes yet, so
- * they are typed here from the backend contract (`/badges/programs/*`,
- * `/badges/applications/*`).
+ * Badge programs people apply for: Zrzur Partner, Verified Server,
+ * Verified Bot Developer and Content Creator. The SDK pin does not carry
+ * these routes yet, so they are typed here from the backend contract
+ * (`/badges/programs/*`, `/badges/applications/*`). Applying is open only
+ * while the server reports `badge_applications` (off by default).
  */
 
-export type ProgramId = "partner" | "verified_server" | "verified_bot";
+export type ProgramId =
+  | "partner"
+  | "verified_server"
+  | "verified_bot"
+  | "content_creator";
 
 /** The badge each program leads to, as the catalogue names it */
 export const PROGRAM_BADGE: Record<ProgramId, AnyBadgeId> = {
   partner: "partner",
   verified_server: "verified_server_owner",
   verified_bot: "verified_bot_developer",
+  content_creator: "content_creator",
+};
+
+/** Whether this server lets people apply from the app (`GET /` features) */
+export function applicationsOpen(client: Client | undefined): boolean {
+  const features = client?.configuration?.features as
+    | { badge_applications?: boolean }
+    | undefined;
+  return features?.badge_applications === true;
+}
+
+/** Content Creator: platforms, named in plain text (never a logo) */
+export const CREATOR_PLATFORMS = [
+  "youtube",
+  "tiktok",
+  "twitch",
+  "instagram",
+  "x",
+  "kick",
+  "facebook",
+  "other",
+] as const;
+export type CreatorPlatform = (typeof CREATOR_PLATFORMS)[number];
+
+/** Content Creator: kinds of content (a genre is never a reason to refuse) */
+export const CREATOR_CATEGORIES = [
+  "education",
+  "technology",
+  "gaming",
+  "livestream",
+  "tutorials",
+  "creative",
+  "comedy",
+  "art",
+  "film",
+  "commentary",
+  "other",
+] as const;
+export type CreatorCategory = (typeof CREATOR_CATEGORIES)[number];
+
+/** Content Creator: the one channel or profile an application is about */
+export type CreatorChannel = {
+  platform: CreatorPlatform;
+  platform_name?: string;
+  url: string;
+  category: CreatorCategory;
+  works: string[];
+  schedule?: string;
 };
 
 /** The program behind a badge, if people apply for it */
@@ -69,13 +122,14 @@ export type BadgeApplication = {
   links: string[];
   authorized: boolean;
   ownership?: {
-    method: "dns" | "website";
+    method: "dns" | "website" | "profile";
     domain: string;
     record_name: string;
     file_url: string;
     expires_at: number;
     verified_at?: number;
   };
+  creator?: CreatorChannel;
   checks: ProgramCheck[];
   created_at: number;
   submitted_at?: number;
@@ -135,13 +189,19 @@ export const programsApi = {
       statement?: string;
       links?: string[];
       authorized?: boolean;
+      creator?: CreatorChannel;
     },
   ) =>
     raw(client).post("/badges/applications", body) as Promise<BadgeApplication>,
   edit: (
     client: Client,
     id: string,
-    body: { statement?: string; links?: string[]; authorized?: boolean },
+    body: {
+      statement?: string;
+      links?: string[];
+      authorized?: boolean;
+      creator?: CreatorChannel;
+    },
   ) =>
     raw(client).patch(
       `/badges/applications/${id}`,
@@ -160,7 +220,7 @@ export const programsApi = {
   challenge: (
     client: Client,
     id: string,
-    method: "dns" | "website",
+    method: "dns" | "website" | "profile",
     domain: string,
   ) =>
     raw(client).post(`/badges/applications/${id}/ownership`, {
