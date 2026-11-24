@@ -82,9 +82,9 @@ const ComposerAddPanel = lazyRetry(
 // second try, the cards stay hidden; the files are still sent.
 const FileCarousel = lazyRetry(
   () =>
-    import(
-      "@revolt/ui/components/features/messaging/composition/FileCarousel"
-    ).then((m) => ({ default: m.FileCarousel })),
+    import("@revolt/ui/components/features/messaging/composition/FileCarousel").then(
+      (m) => ({ default: m.FileCarousel }),
+    ),
   () => null,
 );
 
@@ -93,9 +93,9 @@ const FileCarousel = lazyRetry(
 // second try, the recording closes so the button works again.
 const VoiceRecorder = lazyRetry(
   () =>
-    import(
-      "@revolt/ui/components/features/messaging/composition/VoiceRecorder"
-    ).then((m) => ({ default: m.VoiceRecorder })),
+    import("@revolt/ui/components/features/messaging/composition/VoiceRecorder").then(
+      (m) => ({ default: m.VoiceRecorder }),
+    ),
   (props: { onSend: (file: File) => void; onClose: () => void }) => {
     queueMicrotask(props.onClose);
     return null;
