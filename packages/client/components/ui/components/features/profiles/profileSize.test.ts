@@ -8,6 +8,13 @@ describe("profile sizes", () => {
     expect(tilesShown("full")).toBe(4);
   });
 
+  it("a full profile too narrow for four (a framed one on a phone) shows three", () => {
+    expect(tilesShown("full", 428)).toBe(4);
+    expect(tilesShown("full", 343)).toBe(4);
+    expect(tilesShown("full", 263)).toBe(3);
+    expect(tilesShown("card", 428)).toBe(3);
+  });
+
   it("achievements fill two rows: seven across the card, ten across the full profile", () => {
     expect(achievementsShown("card")).toBe(2 * 7);
     expect(achievementsShown("full")).toBe(2 * 10);

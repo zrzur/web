@@ -5620,8 +5620,8 @@
     },
     {
       "path": "packages/client/components/modal/modals/UserProfile.tsx",
-      "sha256": "eb0dabd609b5c4fdd6607cc0fbf18433b8b534e9ff98492714c366574bd33c1b",
-      "bytes": 8232,
+      "sha256": "926eacaee11e3927427265456c6b055636407198219db56dc1bb1704c1caf988",
+      "bytes": 9113,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -6622,8 +6622,8 @@
     },
     {
       "path": "packages/client/components/ui/components/design/Dialog.tsx",
-      "sha256": "c61f6bb3c7349ae9dd1321acb0411ff2bce348e4da8eea5b92dcf76e756becaf",
-      "bytes": 29329,
+      "sha256": "d089f5392d610ff99979a9b51101679434da2daffbcbc3cb89627b398447faf3",
+      "bytes": 29743,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -7498,8 +7498,8 @@
     },
     {
       "path": "packages/client/components/ui/components/features/profiles/ProfileSections.tsx",
-      "sha256": "4bd8d2a9879c806957c80feb42c2319701fad04756ac42029f802f5d411d123a",
-      "bytes": 6807,
+      "sha256": "401635aebf3aa7801f4727efd3896bdeba450b7209f4c80755199bdcca97767f",
+      "bytes": 7663,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -7509,9 +7509,15 @@
       "category": "product-source-or-build-manifest"
     },
     {
+      "path": "packages/client/components/ui/components/features/profiles/ProfileTiles.dom.test.tsx",
+      "sha256": "c2b6035e7c4d1da38753dc01559cad8e596fc5d636fe7027df717a35c4f0a7ea",
+      "bytes": 2851,
+      "category": "synthetic-test-source-or-fixture"
+    },
+    {
       "path": "packages/client/components/ui/components/features/profiles/ProfileTiles.tsx",
-      "sha256": "ec2a181d8fdeb0c01d3e961d17f464fe781395f08af5d950d4d26cd15f697e9e",
-      "bytes": 4166,
+      "sha256": "fe6ec165500299fb33b6e60b711aaea433a5c465a93504a607263c9e5104e80c",
+      "bytes": 4779,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -7665,9 +7671,15 @@
       "category": "product-source-or-build-manifest"
     },
     {
+      "path": "packages/client/components/ui/components/features/profiles/frames/FramedCard.dom.test.tsx",
+      "sha256": "daeee4a7b553f6de7840906ab564fd5be912b51a0fad35ddc9ff2e97e0980c26",
+      "bytes": 3366,
+      "category": "synthetic-test-source-or-fixture"
+    },
+    {
       "path": "packages/client/components/ui/components/features/profiles/frames/ProfileFrame.tsx",
-      "sha256": "b3cfc95cc68ec42b5bb58079a441cbf310b4d811af34fb4d23e39c9b9f2b8b89",
-      "bytes": 5418,
+      "sha256": "2ef46ae5b53f9d0d653d5d750b8eff8dee5932fb92e890369f95b73c00bdeb00",
+      "bytes": 7866,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -7684,8 +7696,8 @@
     },
     {
       "path": "packages/client/components/ui/components/features/profiles/frames/builtinFrames.ts",
-      "sha256": "20fae407687e082a5ba513bf660db6b6aa9981ccf2e85e67491b3619c5c61308",
-      "bytes": 1884,
+      "sha256": "cc200bc3356e77de9d4b04db1d5b1bb78d7247616e2142ab186cdacf695973cb",
+      "bytes": 1915,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -7695,6 +7707,12 @@
       "category": "product-source-or-build-manifest"
     },
     {
+      "path": "packages/client/components/ui/components/features/profiles/frames/frameFit.test.ts",
+      "sha256": "78bb9b12b4b1b1b6453cbee435a8a7d35e8a33de9eb9ff682b15cb744d9fa554",
+      "bytes": 3419,
+      "category": "synthetic-test-source-or-fixture"
+    },
+    {
       "path": "packages/client/components/ui/components/features/profiles/frames/frameIds.ts",
       "sha256": "bc9371e3df8c7240f1058dad5d54ec26261473c88b58f3aca869fe7167dd01f3",
       "bytes": 517,
@@ -7702,8 +7720,8 @@
     },
     {
       "path": "packages/client/components/ui/components/features/profiles/frames/frameRoom.ts",
-      "sha256": "7103697f91f6ba5a1c4348315c3d682c212842e41e2eed2d43302b4b78472621",
-      "bytes": 1242,
+      "sha256": "da491d7a9d954cd4ab03598d8d85b8adb36eab24f9291f9d6ba5a73083dbad9b",
+      "bytes": 3727,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -7834,14 +7852,14 @@
     },
     {
       "path": "packages/client/components/ui/components/features/profiles/profileSize.test.ts",
-      "sha256": "207fc610f9903d37ab029f437743724f05eae8bd89e6557e3141391c5f7f2547",
-      "bytes": 516,
+      "sha256": "fcf014b88477536be4de7842dac6248441ec0155e87cb10367f2880c8d7136d7",
+      "bytes": 792,
       "category": "synthetic-test-source-or-fixture"
     },
     {
       "path": "packages/client/components/ui/components/features/profiles/profileSize.ts",
-      "sha256": "0866ba50db038f4d6c86a7644ba17c72f2ed10f728f6a1e91d3533bee579db06",
-      "bytes": 722,
+      "sha256": "f548d539e9ba7635f72439600ced0ca1741781770afdc0e21730f260f2e35016",
+      "bytes": 1870,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -8272,8 +8290,8 @@
     },
     {
       "path": "packages/client/components/ui/components/floating/FloatingManager.tsx",
-      "sha256": "8d3c0977ff3adec5cc44171ef59e2264f4675d29c78e12e52fa24ddc6861bc6b",
-      "bytes": 15403,
+      "sha256": "744da9bd1dabd875468bf07213d132db85ab4e179b8a3fec27d3e9b6682e62b7",
+      "bytes": 16588,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -8284,8 +8302,8 @@
     },
     {
       "path": "packages/client/components/ui/components/floating/UserCard.tsx",
-      "sha256": "a14063b2f859a37fe9df3446eab25014fe67a14ea56a25ca9e404e16fa44627d",
-      "bytes": 6505,
+      "sha256": "fab1a61c704b47cd3aec749bc70e5c7239d374f28d263dca3d7555b2cdd3a2d1",
+      "bytes": 7091,
       "category": "product-source-or-build-manifest"
     },
     {

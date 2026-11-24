@@ -19,7 +19,7 @@ import { communityFileUrl, isCommunityRef } from "../userStyle";
 
 import { frameBorderImage } from "./communityFrame";
 import { isProfileFrameId } from "./frameIds";
-import { FRAME_FACTS } from "./frameRoom";
+import { FRAME_FACTS, fitCell, frameRoomOf } from "./frameRoom";
 import "./frames.css";
 
 /**
@@ -40,6 +40,8 @@ export function ProfileFrame(props: {
   file?: string;
   /** a phone-sized card; left out, a phone-sized window says */
   phone?: boolean;
+  /** pixel size of a built-in frame; left out, the box's width says */
+  cell?: number;
 }) {
   const instance = useInstance();
   const motion = useDesignMotion();
@@ -86,7 +88,10 @@ export function ProfileFrame(props: {
     const box = size();
     const art = drawings();
     if (!id || !box || !art) return undefined;
-    return art.profileFrameSvg(id, box.w, box.h, { phone: phone() });
+    return art.profileFrameSvg(id, box.w, box.h, {
+      phone: phone(),
+      cell: props.cell,
+    });
   };
 
   const moving = () => {
@@ -131,19 +136,85 @@ export function ProfileFrame(props: {
 /**
  * A box the size of the card that also holds its frame. The card goes in as
  * the child; nothing about its own layout changes.
+ *
+ * With `fit` (a profile shown in the window: the card beside a name, the full
+ * profile) the frame is drawn with smaller pixels on shorter windows
+ * (`fitCell`), and the box says the room its frame takes round it, so the
+ * profile can be sized and placed with the whole frame on screen:
+ * `--z-frame-x`, `--z-frame-top` and `--z-frame-bottom` for its styles, and
+ * `data-frame-room` for the code that places popups (`readFrameRoom`).
  */
 export function FramedCard(props: {
   frame?: string;
   file?: string;
   phone?: boolean;
+  fit?: boolean;
   children: JSX.Element;
   class?: string;
 }) {
+  const [width, setWidth] = createSignal(0);
+  const [tall, setTall] = createSignal(
+    typeof window === "undefined" ? Infinity : window.innerHeight,
+  );
+  const [narrow, setNarrow] = createSignal(false);
+  let host!: HTMLDivElement;
+
+  onMount(() => {
+    if (!props.fit) return;
+    if (typeof matchMedia === "function") {
+      const query = matchMedia(Breakpoint.phone);
+      setNarrow(query.matches);
+      const change = () => setNarrow(query.matches);
+      query.addEventListener?.("change", change);
+      onCleanup(() => query.removeEventListener?.("change", change));
+    }
+    const measure = () => {
+      setWidth(host.clientWidth);
+      setTall(window.innerHeight);
+    };
+    measure();
+    window.addEventListener("resize", measure);
+    onCleanup(() => window.removeEventListener("resize", measure));
+    if (typeof ResizeObserver === "undefined") return;
+    const observer = new ResizeObserver(measure);
+    observer.observe(host);
+    onCleanup(() => observer.disconnect());
+  });
+
+  const cell = () =>
+    props.fit && props.frame
+      ? fitCell(width() || 360, {
+          phone: props.phone ?? narrow(),
+          windowHeight: tall(),
+        })
+      : undefined;
+  const room = () => {
+    const c = cell();
+    return c === undefined ? undefined : frameRoomOf(props.frame, width(), c);
+  };
+  const px = (n: number) => `${Math.ceil(n)}px`;
+
   return (
     <Host
+      ref={host}
       class={props.class}
       data-frame-host
       data-framed={props.frame ? "" : undefined}
+      data-frame-cell={cell()}
+      data-frame-room={
+        room()
+          ? `${Math.ceil(room()!.x)} ${Math.ceil(room()!.top)} ${Math.ceil(room()!.bottom)}`
+          : undefined
+      }
+      style={
+        room()
+          ? {
+              "--z-frame-x": px(room()!.x),
+              "--z-frame-top": px(room()!.top),
+              "--z-frame-bottom": px(room()!.bottom),
+            }
+          : undefined
+      }
     >
       {props.children}
       <Show when={props.frame}>
@@ -151,6 +222,7 @@ export function FramedCard(props: {
           frame={props.frame}
           file={props.file}
           phone={props.phone}
+          cell={cell()}
         />
       </Show>
     </Host>

@@ -62,6 +62,7 @@ export function UserProfileModal(
       width={460}
     >
       <FramedCard
+        fit
         class={framedBox()}
         frame={style()?.profile_frame}
         file={style()?.profile_frame_file}
@@ -173,11 +174,22 @@ const Layout = styled("div", {
     minHeight: 0,
 
     // the window no longer clips when a frame reaches past it: the profile
-    // keeps the window's corners itself
+    // keeps the window's corners itself. It is centred in the window, so it
+    // leaves the frame's taller room on both ends, and 12 px past it; on a
+    // phone it stands in from the screen's edges as a card (FramedCard's
+    // margins below) and takes the height that leaves
     "&[data-framed]": {
       overflow: "hidden",
       borderRadius: "14px",
-      _phone: { borderRadius: "20px 20px 0 0" },
+      maxHeight:
+        "min(760px, calc(100dvh - 2 * max(var(--z-frame-top, 0px), var(--z-frame-bottom, 0px)) - 24px))",
+      _phone: {
+        height:
+          "calc(100dvh - var(--z-frame-top, 0px) - var(--z-frame-bottom, 0px) - 24px - var(--z-safe-top) - var(--z-safe-bottom) - max(var(--keyboard-inset, 0px), env(keyboard-inset-height, 0px)))",
+        maxHeight: "none",
+        paddingBlockEnd: 0,
+        boxShadow: "var(--z-popover-lift)",
+      },
     },
 
     // edge to edge on a phone: `data-sheet-edge` takes the sheet's padding off
@@ -196,6 +208,13 @@ const framedBox = cva({
     flex: "1 1 auto",
     minHeight: 0,
     "& > [data-sheet-edge]": { flex: "1 1 auto" },
+    _phone: {
+      "&[data-framed]": {
+        marginInline: "calc(var(--z-frame-x, 0px) + 12px)",
+        marginBlockEnd:
+          "calc(var(--z-frame-bottom, 0px) + 12px + var(--z-safe-bottom))",
+      },
+    },
   },
 });
 

@@ -1,11 +1,16 @@
-import { For, JSX, Show } from "solid-js";
+import { For, JSX, Show, useContext } from "solid-js";
 
 import { Trans } from "@lingui/solid/macro";
 import { cva } from "styled-system/css";
 import { styled } from "styled-system/jsx";
 
 import { itemBox } from "./ProfileCard";
-import { tilesShown, useProfileSize } from "./profileSize";
+import {
+  ProfileWidthContext,
+  narrowProfile,
+  useProfileSize,
+  useTilesShown,
+} from "./profileSize";
 
 export type ProfileTile = {
   key: string;
@@ -22,14 +27,15 @@ export type ProfileTile = {
  * full profile, so the two can never differ.
  */
 export function ProfileTiles(props: { tiles: ProfileTile[]; all?: boolean }) {
+  const perRow = useTilesShown();
   const size = useProfileSize();
+  const width = useContext(ProfileWidthContext);
   return (
-    <Grid style={{ "--tiles": tilesShown(size()) }}>
-      <For
-        each={
-          props.all ? props.tiles : props.tiles.slice(0, tilesShown(size()))
-        }
-      >
+    <Grid
+      style={{ "--tiles": perRow() }}
+      data-narrow={narrowProfile(size(), width()) || undefined}
+    >
+      <For each={props.all ? props.tiles : props.tiles.slice(0, perRow())}>
         {(tile) => (
           <button
             class={itemBox({ tile: true, press: true })}
@@ -57,9 +63,9 @@ export function ProfileTilesMore(props: {
   leaves?: boolean;
   onPress: () => void;
 }) {
-  const size = useProfileSize();
+  const perRow = useTilesShown();
   return (
-    <Show when={props.count > tilesShown(size())}>
+    <Show when={props.count > perRow()}>
       <More
         type="button"
         aria-expanded={props.leaves ? undefined : props.open}
@@ -113,6 +119,8 @@ const Grid = styled("div", {
     display: "grid",
     gridTemplateColumns: "repeat(var(--tiles, 3), minmax(0, 1fr))",
     gap: "8px",
+    // narrow tiles keep their text room: 8 px at the sides, not 12
+    "&[data-narrow] > button": { paddingInline: "8px" },
   },
 });
 
@@ -160,6 +168,16 @@ const caption = cva({
       textOverflow: "ellipsis",
       whiteSpace: "nowrap",
       color: "var(--profile-ink-2, var(--z-fg-muted))",
+    },
+    // a narrow profile (a framed one on a phone): the tiles are narrower, so
+    // a name and its line take up to two lines, broken between words only
+    "[data-narrow] &": {
+      "& bdi, & > span": {
+        lineClamp: 2,
+        whiteSpace: "normal",
+        overflowWrap: "normal",
+        wordBreak: "normal",
+      },
     },
   },
 });
