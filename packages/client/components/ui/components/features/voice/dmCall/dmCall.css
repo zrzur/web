@@ -180,7 +180,7 @@
 }
 
 .z-dmcall-tile[data-waiting] .z-dmcall-face > * {
-  opacity: 0.55;
+  opacity: 0.5;
 }
 
 .z-dmcall-tile[data-ringing] .z-dmcall-face::after {
@@ -686,4 +686,12 @@
   flex: none;
   height: 148px;
   padding-inline: 16px;
+}
+
+.z-dmcall-alone-calling {
+  display: block;
+  margin-top: 2px;
+  font-size: 12px;
+  line-height: 16px;
+  color: var(--z-fg-muted);
 }

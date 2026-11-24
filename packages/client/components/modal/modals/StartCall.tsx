@@ -7,13 +7,13 @@ import { Modals } from "../types";
 
 /**
  * Asked before a call in a direct message or group rings anyone. Joining a
- * call that is already on, or answering one, does not ask.
+ * call that is already on, or answering one, does not ask. The wording is
+ * shared with the phone app (same msgids).
  */
 export function StartCallModal(
   props: DialogProps & Modals & { type: "start_call" },
 ) {
   const { t } = useLingui();
-  const name = () => conversationName(props.channel) ?? "";
 
   return (
     <Dialog
@@ -22,21 +22,11 @@ export function StartCallModal(
       size="sm"
       show={props.show}
       onClose={props.onClose}
-      title={
-        props.video
-          ? t({
-              id: "call.confirm.title.video",
-              message: "Start a video call?",
-            })
-          : t({
-              id: "call.confirm.title.voice",
-              message: "Start a voice call?",
-            })
-      }
+      title={<bdi>{conversationName(props.channel) ?? ""}</bdi>}
       actions={[
         { text: <Trans>Cancel</Trans> },
         {
-          text: t({ id: "call.confirm.start", message: "Start call" }),
+          text: props.video ? t`Start a video call` : t`Start a call`,
           variant: "primary",
           onClick: () => {
             props.onStart();
@@ -46,15 +36,7 @@ export function StartCallModal(
       ]}
     >
       <span data-start-call-confirm={props.video ? "video" : "voice"}>
-        {props.channel.type === "Group"
-          ? t({
-              id: "call.confirm.body.group",
-              message: `Everyone in ${name()} will be rung.`,
-            })
-          : t({
-              id: "call.confirm.body.dm",
-              message: `${name()} will be rung on their devices.`,
-            })}
+        {t`No one is here yet. Start the call and others can join.`}
       </span>
     </Dialog>
   );

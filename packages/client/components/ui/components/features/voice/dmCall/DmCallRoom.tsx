@@ -49,6 +49,7 @@ import { callStart, useNow } from "./DmCallStage";
 import {
   type PhoneCallView,
   STAGE_MIN,
+  aloneFaces,
   aloneInCall,
   aloneMembers,
   callDuration,
@@ -591,8 +592,10 @@ function AloneView(props: {
       ringingIds(props.channel),
     ),
   );
-  const shown = () => members().slice(0, 8);
-  const more = () => members().length - shown().length;
+  const faces = createMemo(() => aloneFaces(members()));
+  const shown = () => faces().shown;
+  const more = () => faces().more;
+  const calling = () => members().some((member) => member.ringing);
 
   return (
     <div class="z-dmcall-alone" data-dm-call-alone>
@@ -613,11 +616,14 @@ function AloneView(props: {
           </Show>
         </ul>
       </Show>
+      {/* wording shared with the phone app (same msgids) */}
       <p class="z-dmcall-alone-line" role="status">
-        {t({
-          id: "call.alone.line",
-          message: "You're the only one here. The others can still join.",
-        })}
+        {t`Only you are here. The others can join while you stay in the call.`}
+        <Show when={calling()}>
+          <span class="z-dmcall-alone-calling" data-dm-call-calling>
+            {t`Calling…`}
+          </span>
+        </Show>
       </p>
     </div>
   );
@@ -651,9 +657,6 @@ function AloneMember(props: { id: string; ringing: boolean }) {
           interactive={false}
         />
       </div>
-      <Show when={props.ringing}>
-        <span class="z-dmcall-state">{t`Ringing…`}</span>
-      </Show>
     </li>
   );
 }

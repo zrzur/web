@@ -76,18 +76,17 @@ beforeEach(() => {
 afterEach(() => dispose?.());
 
 describe("asking before a call rings anyone", () => {
-  it("names the person and starts only on Start call", () => {
+  it("names the person and starts only on Start a call", () => {
     open(dm);
-    expect(document.querySelector("h2")!.textContent).toBe(
-      "Start a voice call?",
-    );
+    // the title is the call's name; one line under it
+    expect(document.querySelector("h2")!.textContent).toBe("Sara");
     expect(
       document.querySelector("[data-start-call-confirm]")!.textContent,
-    ).toBe("Sara will be rung on their devices.");
+    ).toBe("No one is here yet. Start the call and others can join.");
     const start = document.querySelector<HTMLButtonElement>(
       "[data-action='primary']",
     )!;
-    expect(start.textContent).toBe("Start call");
+    expect(start.textContent).toBe("Start a call");
     start.click();
     expect(onStart).toHaveBeenCalledTimes(1);
     expect(onClose).toHaveBeenCalled();
@@ -102,14 +101,13 @@ describe("asking before a call rings anyone", () => {
     expect(onClose).toHaveBeenCalled();
   });
 
-  it("says video for a video call and everyone for a group", () => {
+  it("names the group, and says video for a video call", () => {
     open(group, true);
-    expect(document.querySelector("h2")!.textContent).toBe(
-      "Start a video call?",
-    );
+    expect(document.querySelector("h2")!.textContent).toBe("Weekend trip");
     expect(
-      document.querySelector("[data-start-call-confirm]")!.textContent,
-    ).toBe("Everyone in Weekend trip will be rung.");
+      document.querySelector<HTMLButtonElement>("[data-action='primary']")!
+        .textContent,
+    ).toBe("Start a video call");
     expect(
       document
         .querySelector("[data-start-call-confirm]")!

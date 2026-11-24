@@ -198,3 +198,14 @@ export function aloneInCall(
 ) {
   return state === "CONNECTED" && inCall.every((id) => id === selfId);
 }
+
+/** Faces shown under your tile while alone: up to 5, else 4 and "+N" */
+export const ALONE_FACES = 5;
+
+export function aloneFaces<T>(members: readonly T[]) {
+  if (members.length <= ALONE_FACES) return { shown: [...members], more: 0 };
+  return {
+    shown: members.slice(0, ALONE_FACES - 1),
+    more: members.length - (ALONE_FACES - 1),
+  };
+}

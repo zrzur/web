@@ -1,12 +1,8 @@
 {
-  "call.confirm.title.voice": ["هل تريد بدء مكالمة صوتية؟", "Sprachanruf starten?"],
-  "call.confirm.title.video": ["هل تريد بدء مكالمة فيديو؟", "Videoanruf starten?"],
-  "call.confirm.start": ["ابدأ المكالمة", "Anruf starten"],
-  "call.confirm.body.dm": ["سيصل رنين المكالمة إلى أجهزة {0}.", "Bei {0} klingeln die Geräte."],
-  "call.confirm.body.group": ["سيصل رنين المكالمة إلى كل من في {0}.", "Bei allen in {0} klingelt es."],
-  "call.alone.line": [
-    "أنت وحدك هنا الآن، ويمكن للآخرين الانضمام في أي وقت.",
-    "Du bist allein hier. Die anderen können noch beitreten."
+  "Only you are here. The others can join while you stay in the call.": [
+    "أنت وحدك هنا. يمكن للآخرين الانضمام ما دمت في المكالمة.",
+    "Nur du bist hier. Die anderen können beitreten, solange du im Anruf bleibst."
   ],
+  "Calling…": ["جارٍ الاتصال…", "Ruft an …"],
   "{0}, ringing": ["{0}، يرنّ الآن", "{0}, klingelt"]
 }

@@ -32074,39 +32074,15 @@ msgstr "يشغّل هذا المتصفح المكالمات عبر مكبّر ا
 msgid "Voice settings"
 msgstr "إعدادات الصوت"
 
-#. js-lingui-explicit-id
-#. placeholder {0}: name()
-#: components/modal/modals/StartCall.tsx
-msgid "call.confirm.body.dm"
-msgstr "سيصل رنين المكالمة إلى أجهزة {0}."
-
 #. placeholder {0}: user().username
 #: components/ui/components/features/voice/dmCall/DmCallRoom.tsx
 msgid "{0}, ringing"
 msgstr "{0}، يرنّ الآن"
 
-#. js-lingui-explicit-id
-#. placeholder {0}: name()
-#: components/modal/modals/StartCall.tsx
-msgid "call.confirm.body.group"
-msgstr "سيصل رنين المكالمة إلى كل من في {0}."
-
-#. js-lingui-explicit-id
-#: components/modal/modals/StartCall.tsx
-msgid "call.confirm.title.video"
-msgstr "هل تريد بدء مكالمة فيديو؟"
-
-#. js-lingui-explicit-id
-#: components/modal/modals/StartCall.tsx
-msgid "call.confirm.title.voice"
-msgstr "هل تريد بدء مكالمة صوتية؟"
-
-#. js-lingui-explicit-id
-#: components/modal/modals/StartCall.tsx
-msgid "call.confirm.start"
-msgstr "ابدأ المكالمة"
-
-#. js-lingui-explicit-id
 #: components/ui/components/features/voice/dmCall/DmCallRoom.tsx
-msgid "call.alone.line"
-msgstr "أنت وحدك هنا الآن، ويمكن للآخرين الانضمام في أي وقت."
+msgid "Calling…"
+msgstr "جارٍ الاتصال…"
+
+#: components/ui/components/features/voice/dmCall/DmCallRoom.tsx
+msgid "Only you are here. The others can join while you stay in the call."
+msgstr "أنت وحدك هنا. يمكن للآخرين الانضمام ما دمت في المكالمة."

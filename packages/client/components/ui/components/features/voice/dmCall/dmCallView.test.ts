@@ -4,6 +4,7 @@ import {
   STAGE_DEFAULT,
   STAGE_MIN,
   STAGE_STEP,
+  aloneFaces,
   aloneInCall,
   aloneMembers,
   callDuration,
@@ -125,5 +126,18 @@ describe("alone in the call (owner, 2026-11-24)", () => {
       { id: "omar", ringing: true },
       { id: "sara", ringing: false },
     ]);
+  });
+});
+
+describe("faces under your tile while alone", () => {
+  it("shows up to five, else four and +N", () => {
+    expect(aloneFaces([1, 2, 3, 4, 5])).toEqual({
+      shown: [1, 2, 3, 4, 5],
+      more: 0,
+    });
+    expect(aloneFaces([1, 2, 3, 4, 5, 6, 7])).toEqual({
+      shown: [1, 2, 3, 4],
+      more: 3,
+    });
   });
 });
