@@ -2,6 +2,12 @@
 
 ## Unreleased
 
+### Badges: community and creator rules (2026-11-24, badge plan phase 3)
+
+* **Community Builder and Big Community** say what counts: genuine human members (no bots, deleted, banned or suspended accounts, accounts under 7 days or without a confirmed e-mail, members under a day), counted a few times a day, kept when the server shrinks.
+* **Creator** stays for good once earned; **Super Creator** names its minimum of 25 approved designs and 180 days in the creator program, on the badge and in My Badges.
+* **Beta Veteran:** the team approves it after a completed cycle with 3 reviewed feedback reports or 1 confirmed bug report; My Badges says so to a tester who completed the beta.
+
 ### Badges: one anniversary, Saha Champion retired, Discover bot marks (2026-11-24, badge plan phases 1 and 2)
 
 * **One time-on-Zrzur badge:** profiles and My Badges show only the highest full year reached (One Year up to Ten Years, counted in UTC); Two and Four to Ten Years appear for the first time. Early Adopter and the anniversaries are hidden while "Member since" is hidden on the profile, and their texts say so.
