@@ -32584,3 +32584,577 @@ msgstr "عنوان بريدك الإلكتروني مؤكد"
 #: components/app/interface/settings/user/badges/ProgramDialog.tsx
 msgid "Your server"
 msgstr "سيرفرك"
+
+#: src/interface/badgeGuide/useBadgeGuide.ts
+msgid "25 is only a minimum: the team chooses. Duplicates, simple recolours and copied assets do not count."
+msgstr "الرقم 25 حدّ أدنى فقط، والفريق يختار. لا تُحسب النسخ المكررة ولا تغيير الألوان البسيط ولا الأصول المنسوخة."
+
+#: src/interface/badgeGuide/useBadgeGuide.ts
+msgid "A badge can be removed if it was obtained by fraud, fake members or engagement, impersonation, stolen work, or a serious rule violation."
+msgstr "قد تُسحب الشارة إذا نيلت بالاحتيال أو بأعضاء أو تفاعل مزيّف أو بانتحال هوية أو بعمل مسروق أو بمخالفة جسيمة للقواعد."
+
+#: src/interface/badgeGuide/useBadgeGuide.ts
+msgid "A badge means only what this page says. It is not an endorsement and not a guarantee of quality or safety."
+msgstr "لا تعني الشارة إلا ما تقوله هذه الصفحة، وليست توصية ولا ضماناً للجودة أو الأمان."
+
+#: src/interface/badgeGuide/useBadgeGuide.ts
+msgid "A check in the Bot label of a bot that passed the Verified Bot review."
+msgstr "علامة ✓ داخل شارة «بوت» لبوت اجتاز مراجعة التوثيق."
+
+#: src/interface/badgeGuide/useBadgeGuide.ts
+msgid "A clear and accurate description, at least one working feature, a privacy policy if it handles user data, and permissions that fit what it does."
+msgstr "وصف واضح ودقيق، وميزة عاملة واحدة على الأقل، وسياسة خصوصية إن عالج بيانات المستخدمين، وصلاحيات تناسب وظيفته."
+
+#: src/interface/badgeGuide/useBadgeGuide.ts
+msgid "A clear purpose, published rules, active moderation and protection against spam and raids; no bought members or fake engagement."
+msgstr "هدف واضح وقواعد منشورة وإشراف نشط وحماية من السبام والغارات، ودون أعضاء مشتراة أو تفاعل مزيّف."
+
+#: src/interface/badgeGuide/useBadgeGuide.ts
+msgid "A meaningful, verified technical contribution to Zrzur itself, or an approved official development role."
+msgstr "مساهمة تقنية حقيقية وموثّقة في زرزور نفسه، أو دور تطوير رسمي معتمد."
+
+#: components/app/interface/settings/user/badges/useProgramText.ts
+msgid "A person on the team looks for the code on your channel after you send the application."
+msgstr "يبحث شخص من الفريق عن الرمز في قناتك بعد أن ترسل الطلب."
+
+#: components/app/interface/settings/user/badges/useProgramText.ts
+msgid "A reviewer found your code on the channel"
+msgstr "وجد مراجعٌ رمزك على القناة"
+
+#: src/interface/badgeGuide/useBadgeGuide.ts
+msgid "A server run by the Zrzur team itself. Set only by Zrzur, never by application."
+msgstr "سيرفر يديره فريق زرزور نفسه. يضعه زرزور وحده ولا يُطلب."
+
+#: src/interface/badgeGuide/useBadgeGuide.ts
+msgid "Accepted into the closed beta and following its rules and confidentiality."
+msgstr "مقبول في النسخة التجريبية المغلقة ويلتزم بقواعدها وسرّيتها."
+
+#: src/interface/badgeGuide/useBadgeGuide.ts
+msgid "Accepted into the Zrzur Designs creator program, with a first original, approved, published design."
+msgstr "القبول في برنامج مصممي التصاميم في زرزور، ونشر أول تصميم أصلي معتمد."
+
+#: src/interface/badgeGuide/useBadgeGuide.ts
+msgid "Achievements"
+msgstr "الإنجازات"
+
+#: components/app/interface/settings/user/badges/useProgramText.ts
+msgid "Add at most ten links to works."
+msgstr "أضف عشرة روابط أعمال على الأكثر."
+
+#: components/app/interface/settings/user/badges/useProgramText.ts
+msgid "Add the address of your channel first."
+msgstr "أضف عنوان قناتك أولاً."
+
+#: components/app/interface/settings/user/badges/ProgramDialog.tsx
+msgid "Address of the channel or profile"
+msgstr "عنوان القناة أو الملف"
+
+#: src/interface/badgeGuide/useBadgeGuide.ts
+msgid "After approval the bot shows a check in its Bot label. It ends if the bot changes hands, is suspended or is deleted."
+msgstr "بعد الموافقة تظهر علامة ✓ داخل شارة «بوت». وتنتهي إذا انتقلت ملكية البوت أو عُلّق أو حُذف."
+
+#: src/interface/badgeGuide/useBadgeGuide.ts
+msgid "Already a Bug Hunter, with at least 10 confirmed reports or one verified serious security vulnerability; the reviewer sets the severity."
+msgstr "صائد أخطاء لديه 10 بلاغات مؤكدة على الأقل أو ثغرة أمنية جسيمة موثّقة، ويحدد المراجع خطورتها."
+
+#: src/interface/badgeGuide/useBadgeGuide.ts
+msgid "An officially appointed member of the Zrzur team, with a recorded appointment."
+msgstr "عضو معيَّن رسمياً في فريق زرزور بتعيين مسجَّل."
+
+#: components/app/interface/settings/user/badges/useProgramText.ts
+msgid "Another platform"
+msgstr "منصة أخرى"
+
+#: src/interface/badgeGuide/useBadgeGuide.ts
+msgid "Appeal within 30 days; apply again after 90 days, or at once if only information was missing."
+msgstr "الاعتراض خلال 30 يوماً؛ وإعادة التقديم بعد 90 يوماً، أو فوراً إن كان النقص في المعلومات فقط."
+
+#: components/ui/components/features/profiles/badges/useBadgeText.ts
+msgid "Apply with one channel or profile that has at least 100,000 real followers on that one platform, 90 days of activity and 5 substantial original works in the last 90 days (or a regular livestream schedule). The team checks the channel is yours and reviews the quality; a second person approves."
+msgstr "قدّم بقناة أو ملف واحد لديه 100,000 متابع حقيقي على الأقل على تلك المنصة الواحدة، و90 يوماً من النشاط، و5 أعمال أصلية جوهرية خلال آخر 90 يوماً (أو جدول بث منتظم). يتحقق الفريق من أن القناة لك ويراجع الجودة، ويوافق شخص ثانٍ."
+
+#: components/app/interface/settings/user/badges/useProgramText.ts
+msgid "Art"
+msgstr "الفن"
+
+#. placeholder {0}: count(needed)
+#: components/app/interface/settings/user/badges/useProgramText.ts
+msgid "At least {0} real followers on that one platform"
+msgstr "{0} متابع حقيقي على الأقل على تلك المنصة الواحدة"
+
+#: components/app/interface/settings/user/badges/useProgramText.ts
+msgid "At least {needed} days of active publishing"
+msgstr "{needed} يوماً على الأقل من النشر النشط"
+
+#: components/app/interface/settings/user/badges/useProgramText.ts
+msgid "At least {needed} substantial original works in the last 90 days, or a regular livestream schedule"
+msgstr "{needed} أعمال أصلية جوهرية على الأقل خلال آخر 90 يوماً، أو جدول بث منتظم"
+
+#: src/interface/badgeGuide/useBadgeGuide.ts
+msgid "At least 10,000 genuine human members and 180 days. A clearly official entity may qualify below these numbers with a senior approval and a second person."
+msgstr "10,000 عضو بشري حقيقي على الأقل و180 يوماً. ويمكن لجهة رسمية واضحة أن توثَّق دون هذه الأرقام بموافقة عليا وموافقة شخص ثانٍ."
+
+#: src/interface/badgeGuide/useBadgeGuide.ts
+msgid "At least 100,000 real followers or subscribers on ONE platform; platforms are not added together."
+msgstr "100,000 متابع أو مشترك حقيقي على الأقل على منصة واحدة؛ لا تُجمع المنصات."
+
+#: src/interface/badgeGuide/useBadgeGuide.ts
+msgid "At least 5,000 genuine human members and a server at least 180 days old."
+msgstr "5,000 عضو بشري حقيقي على الأقل، وسيرفر عمره 180 يوماً على الأقل."
+
+#: src/interface/badgeGuide/useBadgeGuide.ts
+msgid "At least 90 days of active publishing, and at least 5 substantial original works in the last 90 days or an equivalent regular livestream schedule."
+msgstr "90 يوماً على الأقل من النشر النشط، و5 أعمال أصلية جوهرية على الأقل خلال آخر 90 يوماً أو جدول بث منتظم يعادلها."
+
+#: components/app/interface/settings/user/badges/useProgramText.ts
+msgid "Authenticity: the review found signs of bought followers or coordinated fake engagement."
+msgstr "المصداقية: وجدت المراجعة علامات على متابعين مشترَين أو تفاعل مزيّف منسَّق."
+
+#: src/interface/badgeGuide/useBadgeGuide.ts
+msgid "Automatic and permanent. Hidden while you hide \"Member since\" on your profile."
+msgstr "تلقائية ودائمة. تُخفى ما دمت تخفي «عضو منذ» في ملفك الشخصي."
+
+#: components/ui/components/features/profiles/badges/useBadgeText.ts
+msgid "Awarded to established creators of original, high-quality content who meet Zrzur's verification and quality standards."
+msgstr "شارة تُمنح لصنّاع المحتوى الأصلي والمتميز الذين يستوفون شروط الجودة والتوثيق المعتمدة لدى زرزور."
+
+#: src/interface/badgeGuide/useBadgeGuide.ts
+msgid "Bots never count as members, and bot accounts cannot hold profile badges."
+msgstr "البوتات لا تُحسب أعضاءً، ولا تحمل حسابات البوتات شارات الملف الشخصي."
+
+#: src/interface/badgeGuide/useBadgeGuide.ts
+msgid "Bots, deleted, banned or suspended accounts, new accounts and manipulated joins do not count."
+msgstr "لا تُحسب البوتات ولا الحسابات المحذوفة أو المحظورة أو المعلّقة ولا الحسابات الجديدة ولا الانضمامات المصطنعة."
+
+#: src/interface/badgeGuide/useBadgeGuide.ts
+msgid "Building your own bot does not qualify."
+msgstr "تطوير بوت خاص بك لا يكفي."
+
+#: src/interface/badgeGuide/BadgeGuide.tsx
+msgid "By application"
+msgstr "بطلب"
+
+#: components/app/interface/settings/user/badges/useProgramText.ts
+msgid "Choose the kind of content you make."
+msgstr "اختر نوع المحتوى الذي تصنعه."
+
+#: components/app/interface/settings/user/badges/useProgramText.ts
+msgid "Choose the platform of your channel."
+msgstr "اختر منصة قناتك."
+
+#: components/app/interface/settings/user/badges/useProgramText.ts
+msgid "Comedy and entertainment"
+msgstr "الكوميديا والترفيه"
+
+#: components/app/interface/settings/user/badges/useProgramText.ts
+msgid "Commentary"
+msgstr "التعليق"
+
+#: src/interface/badgeGuide/useBadgeGuide.ts
+msgid "Completed a beta cycle with at least 3 reviewed feedback reports or 1 confirmed bug report; the team approves it after the cycle."
+msgstr "أتمّ دورة اختبار بثلاثة تقارير ملاحظات مراجَعة على الأقل أو بلاغ خطأ مؤكد واحد، ويوافق الفريق بعد الدورة."
+
+#: components/app/interface/settings/user/badges/useProgramText.ts
+msgid "Consistency: the channel rests on one viral upload rather than regular work."
+msgstr "الاستمرارية: تعتمد القناة على عمل واحد واسع الانتشار لا على نشر منتظم."
+
+#: components/app/interface/settings/user/badges/useProgramText.ts
+#: components/ui/components/features/profiles/badges/useBadgeText.ts
+msgid "Content Creator"
+msgstr "صانع محتوى"
+
+#: src/interface/badgeGuide/useBadgeGuide.ts
+msgid "Control of the official domain, proven with a DNS TXT record or a file on the website. Claiming to be famous is not proof."
+msgstr "إثبات السيطرة على النطاق الرسمي بسجل DNS TXT أو بملف على الموقع. ادعاء الشهرة ليس دليلاً."
+
+#: components/app/interface/settings/user/badges/useProgramText.ts
+msgid "Creative production"
+msgstr "الإنتاج الإبداعي"
+
+#. placeholder {0}: changed()
+#: src/interface/badgeGuide/BadgeGuide.tsx
+msgid "Criteria last changed on {0}."
+msgstr "آخر تغيير للمعايير في {0}."
+
+#: components/app/interface/settings/user/badges/useProgramText.ts
+msgid "Days active: {value} of {needed}"
+msgstr "أيام النشاط: {value} من {needed}"
+
+#: components/app/interface/settings/user/badges/useProgramText.ts
+msgid "Describe your livestream schedule in at most 500 characters."
+msgstr "صف جدول بثك في 500 حرف على الأكثر."
+
+#: src/interface/badgeGuide/useBadgeGuide.ts
+msgid "Designs creators"
+msgstr "مصممو التصاميم"
+
+#: src/interface/badgeGuide/useBadgeGuide.ts
+msgid "Duplicates, invalid or made-up reports do not count; report security issues privately."
+msgstr "لا تُحسب البلاغات المكررة أو غير الصحيحة أو المختلقة، وتُبلَّغ الثغرات الأمنية بشكل خاص."
+
+#: components/app/interface/settings/user/badges/useProgramText.ts
+msgid "Effort: the works show little real effort, for example repetitive content made to collect views."
+msgstr "الجهد: لا تُظهر الأعمال جهداً حقيقياً، مثل محتوى متكرر لجمع المشاهدات."
+
+#: components/app/interface/settings/user/badges/useProgramText.ts
+msgid "Film"
+msgstr "السينما"
+
+#. placeholder {0}: count(value)
+#. placeholder {1}: count(needed)
+#: components/app/interface/settings/user/badges/useProgramText.ts
+msgid "Followers the reviewer saw: {0} of {1}"
+msgstr "المتابعون الذين رآهم المراجع: {0} من {1}"
+
+#: src/interface/badgeGuide/useBadgeGuide.ts
+msgid "For creators of educational, technology, gaming and livestream, tutorial, creative, comedy, art, film, commentary and other legitimate content, on any platform."
+msgstr "لصنّاع المحتوى التعليمي والتقني والألعاب والبث المباشر والشروحات والإنتاج الإبداعي والكوميديا والفن والأفلام والتعليق وغيرها من المحتوى المشروع، على أي منصة."
+
+#: src/interface/badgeGuide/useBadgeGuide.ts
+msgid "Formally appointed to platform-level moderation, after accepting the moderation rules and the team's conduct requirements."
+msgstr "معيَّن رسمياً للإشراف على مستوى المنصة بعد إقرار قواعد الإشراف ومتطلبات سلوك الفريق."
+
+#: components/app/interface/settings/user/badges/ProgramDialog.tsx
+msgid "Get a new code"
+msgstr "احصل على رمز جديد"
+
+#: src/interface/badgeGuide/BadgeGuide.tsx
+msgid "Given by the team"
+msgstr "يمنحها الفريق"
+
+#: src/interface/badgeGuide/useBadgeGuide.ts
+msgid "Given by the team to people who help others with constructive support; spam, copied or misleading answers earn nothing."
+msgstr "يمنحها الفريق لمن يساعد الآخرين بدعم بنّاء؛ السبام والإجابات المنسوخة أو المضلِّلة لا تُحسب."
+
+#: src/interface/badgeGuide/useBadgeGuide.ts
+msgid "Hold Creator, with at least 25 approved, original, published designs and 180 days in the creator program."
+msgstr "أن تحمل شارة مصمم، ولك 25 تصميماً أصلياً معتمداً منشوراً على الأقل و180 يوماً في برنامج المصممين."
+
+#: components/app/interface/settings/user/badges/useProgramText.ts
+msgid "Honesty: systematic misleading clickbait, impersonation or false claims."
+msgstr "الأمانة: عناوين مضلِّلة على نحو منهجي أو انتحال هوية أو ادعاءات كاذبة."
+
+#: components/app/interface/settings/user/badges/MyBadges.tsx
+msgid "How every badge is earned"
+msgstr "كيف تُنال كل شارة"
+
+#: src/interface/badgeGuide/useBadgeGuide.ts
+msgid "It ends when the subscription ends or after a full refund."
+msgstr "تنتهي بانتهاء الاشتراك أو بعد استرداد كامل."
+
+#: src/interface/badgeGuide/useBadgeGuide.ts
+msgid "It is not a partnership or a verification."
+msgstr "وليست شراكة ولا توثيقاً."
+
+#: src/interface/badgeGuide/useBadgeGuide.ts
+msgid "Kept as recognition unless obtained by fraud."
+msgstr "تبقى تقديراً ما لم تُنل بالاحتيال."
+
+#: components/app/interface/settings/user/badges/ProgramDialog.tsx
+msgid "Kind of content"
+msgstr "نوع المحتوى"
+
+#: components/app/interface/settings/user/badges/ProgramDialog.tsx
+msgid "Links to at least 5 original works from the last 90 days, one per line"
+msgstr "روابط 5 أعمال أصلية على الأقل من آخر 90 يوماً، رابط في كل سطر"
+
+#: components/app/interface/settings/user/badges/useProgramText.ts
+msgid "Livestreaming"
+msgstr "البث المباشر"
+
+#: components/app/interface/settings/user/badges/ProgramDialog.tsx
+msgid "Name of the platform"
+msgstr "اسم المنصة"
+
+#: src/interface/badgeGuide/useBadgeGuide.ts
+msgid "Never automatic. The badge stays while you own the verified server and ends if the server changes hands."
+msgstr "لا يتم التوثيق تلقائياً أبداً. تبقى الشارة ما دمت تملك السيرفر الموثّق، وتنتهي إذا انتقلت ملكيته."
+
+#: src/interface/badgeGuide/useBadgeGuide.ts
+msgid "No malicious commands, token theft, deception or inflated installs. 25 servers only unlock the application; a review decides."
+msgstr "دون أوامر خبيثة أو سرقة رموز أو خداع أو تضخيم للتثبيتات. بلوغ 25 سيرفراً يتيح التقديم فقط، والمراجعة تقرر."
+
+#: src/interface/badgeGuide/useBadgeGuide.ts
+msgid "Not eligible: mass reposts without an original contribution, repetitive low-effort view farming, stolen or impersonated identities, bought followers or coordinated fake engagement, systematically misleading or fraudulent content, serious repeated rule violations. A genre (comedy, gaming, memes) is never a reason to refuse."
+msgstr "لا يستحقها: إعادة النشر الجماعي دون إضافة أصلية، والمحتوى المتكرر قليل الجهد لجمع المشاهدات، والهويات المسروقة أو المنتحلة، والمتابعون المشترَون أو التفاعل المزيّف المنسَّق، والمحتوى المضلِّل أو الاحتيالي المنهجي، والمخالفات الجسيمة المتكررة. النوع (كوميديا، ألعاب، ميمز) ليس سبباً للرفض أبداً."
+
+#: src/interface/badgeGuide/useBadgeGuide.ts
+msgid "Not for video creators, streamers or bot developers."
+msgstr "ليست لصنّاع الفيديو أو البث أو مطوّري البوتات."
+
+#: src/interface/badgeGuide/BadgeGuide.tsx
+msgid "Not obtainable"
+msgstr "لا يمكن نيلها"
+
+#: components/app/interface/settings/user/badges/ProgramDialog.tsx
+msgid "One channel or profile on one platform: followers on different platforms are not added together. Any kind of legitimate content counts; a genre is never a reason to refuse."
+msgstr "قناة أو ملف واحد على منصة واحدة: لا يُجمع المتابعون من منصات مختلفة. كل محتوى مشروع يُحسب، والنوع ليس سبباً للرفض أبداً."
+
+#: src/interface/badgeGuide/useBadgeGuide.ts
+msgid "One original, reproducible bug report with enough detail, confirmed by a reviewer."
+msgstr "بلاغ أصلي واحد عن خطأ يمكن تكراره بتفاصيل كافية، يؤكده مراجع."
+
+#: components/app/interface/settings/user/badges/ProgramDialog.tsx
+msgid "Or, if you stream: your regular livestream schedule"
+msgstr "أو، إن كنت تبث: جدول بثك المنتظم"
+
+#: components/app/interface/settings/user/badges/useProgramText.ts
+msgid "Original works in the last 90 days: {value} of {needed}"
+msgstr "الأعمال الأصلية خلال آخر 90 يوماً: {value} من {needed}"
+
+#: components/app/interface/settings/user/badges/useProgramText.ts
+msgid "Originality: most of the work is reposted or copied without an original contribution."
+msgstr "الأصالة: معظم الأعمال منقولة أو منسوخة دون إضافة أصلية."
+
+#: src/interface/badgeGuide/useBadgeGuide.ts
+msgid "Over the last 8 weeks, on average at least 500 weekly active members and 200 weekly contributors, and at least 20% of new members still there after their first week."
+msgstr "خلال آخر 8 أسابيع: متوسط 500 عضو نشط أسبوعياً و200 مساهم أسبوعياً على الأقل، وبقاء 20% على الأقل من الأعضاء الجدد بعد أسبوعهم الأول."
+
+#: src/interface/badgeGuide/useBadgeGuide.ts
+msgid "Partnership is not verification. It ends if the server changes hands."
+msgstr "الشراكة ليست توثيقاً، وتنتهي إذا انتقلت ملكية السيرفر."
+
+#: src/interface/badgeGuide/useBadgeGuide.ts
+msgid "Permanent once legitimately earned, even if the server gets smaller."
+msgstr "دائمة متى نيلت بحق، حتى لو صغر السيرفر لاحقاً."
+
+#: src/interface/badgeGuide/useBadgeGuide.ts
+msgid "Permanent unless obtained by fraud or serious misconduct."
+msgstr "دائمة ما لم تُنل بالاحتيال أو بسوء سلوك جسيم."
+
+#: src/interface/badgeGuide/useBadgeGuide.ts
+msgid "Permanent unless obtained by fraud."
+msgstr "دائمة ما لم تُنل بالاحتيال."
+
+#: src/interface/badgeGuide/useBadgeGuide.ts
+msgid "Permanent unless the work was fraudulent or infringing."
+msgstr "دائمة ما لم يكن العمل احتيالياً أو منتهكاً للحقوق."
+
+#: src/interface/badgeGuide/useBadgeGuide.ts
+msgid "Permanent; it cannot be transferred."
+msgstr "دائمة ولا تُنقل."
+
+#: src/interface/badgeGuide/useBadgeGuide.ts
+msgid "Permanent; it gives no access to future betas."
+msgstr "دائمة، ولا تمنح دخولاً لنسخ تجريبية لاحقة."
+
+#: src/interface/badgeGuide/useBadgeGuide.ts
+msgid "Permanent."
+msgstr "دائمة."
+
+#: components/app/interface/settings/user/badges/ProgramDialog.tsx
+msgid "Platform"
+msgstr "المنصة"
+
+#: src/interface/badgeGuide/useBadgeGuide.ts
+msgid "Programs you apply for"
+msgstr "برامج تتقدّم إليها"
+
+#: components/app/interface/settings/user/badges/ProgramDialog.tsx
+msgid "Put the code in your channel's description or a pinned post and leave it there until the team has decided. A person on the team looks for it; Zrzur never connects to the platform or reads your followers itself."
+msgstr "ضع الرمز في وصف قناتك أو في منشور مثبّت، واتركه هناك حتى يقرر الفريق. يبحث عنه شخص من الفريق، ولا يتصل زرزور بالمنصة ولا يقرأ متابعيك بنفسه أبداً."
+
+#: components/app/interface/settings/user/badges/useProgramText.ts
+msgid "Quality criteria met: {value} of {needed}"
+msgstr "معايير الجودة المستوفاة: {value} من {needed}"
+
+#: src/interface/badgeGuide/useBadgeGuide.ts
+msgid "Removed when the appointment ends."
+msgstr "تُزال عند انتهاء التعيين."
+
+#: src/interface/badgeGuide/useBadgeGuide.ts
+msgid "Requirements are published here and applied the same way to everyone. Nobody on the team can approve their own application."
+msgstr "الشروط منشورة هنا وتُطبَّق على الجميع بالطريقة نفسها. لا يستطيع أي عضو في الفريق الموافقة على طلبه بنفسه."
+
+#: src/interface/badgeGuide/BadgeGuide.tsx
+msgid "Retired badges are not listed here; people who have one keep it."
+msgstr "لا تُدرج هنا الشارات المتقاعدة، ويحتفظ بها من يحملها."
+
+#: components/app/interface/settings/user/badges/useProgramText.ts
+msgid "Rights: repeated infringement, stolen content or unauthorised reuploads."
+msgstr "الحقوق: انتهاك متكرر للحقوق أو محتوى مسروق أو إعادة رفع دون إذن."
+
+#: src/interface/badgeGuide/BadgeGuide.tsx
+msgid "Rules for every badge"
+msgstr "قواعد لكل الشارات"
+
+#: components/app/interface/settings/user/badges/useProgramText.ts
+msgid "Safety and legality: the content breaks the law or Zrzur's rules."
+msgstr "الأمان والقانونية: يخالف المحتوى القانون أو قواعد زرزور."
+
+#: src/interface/badgeGuide/useBadgeGuide.ts
+msgid "Server and bot marks"
+msgstr "علامات السيرفرات والبوتات"
+
+#: src/interface/badgeGuide/useBadgeGuide.ts
+msgid "Server moderators and server staff do not qualify."
+msgstr "لا يستحقها مشرفو السيرفرات ولا طاقمها."
+
+#: components/app/interface/settings/user/badges/ProgramDialog.tsx
+msgid "Show that the channel is yours"
+msgstr "أثبت أن القناة لك"
+
+#: src/interface/badgeGuide/useBadgeGuide.ts
+msgid "Shown next to the person who owns the server now; it follows ownership."
+msgstr "يظهر بجانب من يملك السيرفر حالياً، ويتبع الملكية تلقائياً."
+
+#: src/interface/badgeGuide/useBadgeGuide.ts
+msgid "Shown on a server that passed the Verified Server review (see Verified Server Owner above)."
+msgstr "تظهر على سيرفر اجتاز مراجعة التوثيق (انظر «مالك سيرفر موثّق» أعلاه)."
+
+#: src/interface/badgeGuide/useBadgeGuide.ts
+msgid "Shown only while you take part."
+msgstr "تظهر فقط أثناء المشاركة."
+
+#: src/interface/badgeGuide/useBadgeGuide.ts
+msgid "Shown while you have an active Feather subscription; you can hide it."
+msgstr "تظهر ما دام لديك اشتراك ريشة نشط، ويمكنك إخفاؤها."
+
+#: src/interface/badgeGuide/useBadgeGuide.ts
+msgid "Supported Zrzur during its early-support period."
+msgstr "دعم زرزور خلال فترة الدعم المبكر."
+
+#: components/app/interface/settings/user/badges/useProgramText.ts
+msgid "Technology and programming"
+msgstr "التقنية والبرمجة"
+
+#: components/app/interface/settings/user/badges/useProgramText.ts
+msgid "The channel has not been active for long enough."
+msgstr "لم تكن القناة نشطة مدة كافية."
+
+#: src/interface/badgeGuide/useBadgeGuide.ts
+msgid "The first approval always includes a quality review against these criteria: originality, meaningful effort, consistency, authenticity, safety and legality, honesty, rights. Two people approve."
+msgstr "تشمل الموافقة الأولى دائماً مراجعة للجودة وفق هذه المعايير: الأصالة، والجهد الحقيقي، والاستمرارية، والمصداقية، والأمان والقانونية، والأمانة، والحقوق. ويوافق شخصان."
+
+#: components/app/interface/settings/user/badges/useProgramText.ts
+msgid "The follower number the team saw on that one platform is below the published minimum."
+msgstr "عدد المتابعين الذي رآه الفريق على تلك المنصة الواحدة أقل من الحد الأدنى المنشور."
+
+#: src/interface/badgeGuide/useBadgeGuide.ts
+msgid "The numbers only let you apply; two people on the team approve. Checked again every 180 days."
+msgstr "الأرقام تتيح التقديم فقط، ويوافق شخصان من الفريق. تُراجَع الشراكة كل 180 يوماً."
+
+#: src/interface/badgeGuide/useBadgeGuide.ts
+msgid "The one person who started Zrzur. No application, activity or command can give it."
+msgstr "الشخص الذي بدأ زرزور. لا يمنحها طلب ولا نشاط ولا أمر."
+
+#: src/interface/badgeGuide/useBadgeGuide.ts
+msgid "The period, the kinds of support that count and the evidence needed will be published here once decided."
+msgstr "ستُنشر هنا الفترة وأنواع الدعم المقبولة والأدلة المطلوبة متى تقررت."
+
+#: src/interface/badgeGuide/useBadgeGuide.ts
+msgid "The same as Community Builder, at 1,000 genuine human members."
+msgstr "مثل باني المجتمع، عند 1,000 عضو بشري حقيقي."
+
+#: components/app/interface/settings/user/badges/useProgramText.ts
+msgid "The team did not find enough substantial original works in the last 90 days, or an equivalent regular livestream schedule."
+msgstr "لم يجد الفريق عدداً كافياً من الأعمال الأصلية الجوهرية خلال آخر 90 يوماً، ولا جدول بث منتظماً يعادلها."
+
+#: components/app/interface/settings/user/badges/useProgramText.ts
+msgid "The team took the badge away."
+msgstr "سحب الفريق الشارة."
+
+#: components/app/interface/settings/user/badges/useProgramText.ts
+msgid "The team's quality review: originality, effort, consistency, authenticity, safety, honesty, rights"
+msgstr "مراجعة الفريق للجودة: الأصالة، والجهد، والاستمرارية، والمصداقية، والأمان، والأمانة، والحقوق"
+
+#: components/app/interface/settings/user/badges/ProgramDialog.tsx
+msgid "This channel is mine and everything I write is true."
+msgstr "هذه القناة لي، وكل ما أكتبه صحيح."
+
+#: src/interface/badgeGuide/useBadgeGuide.ts
+msgid "Time and support"
+msgstr "الوقت والدعم"
+
+#: src/interface/badgeGuide/useBadgeGuide.ts
+msgid "Two people on the team approve. Permanent."
+msgstr "يوافق عليها شخصان من الفريق، ودائمة."
+
+#: components/app/interface/settings/user/badges/ProgramDialog.tsx
+msgid "What do you make, and for whom?"
+msgstr "ماذا تصنع، ولمن؟"
+
+#: src/interface/badgeGuide/BadgeGuide.tsx
+msgid "What each badge means and how it is earned."
+msgstr "ما تعنيه كل شارة وكيف تُنال."
+
+#: src/interface/badgeGuide/BadgeGuide.tsx
+msgid "What it takes"
+msgstr "ما يلزم"
+
+#: src/interface/badgeGuide/useBadgeGuide.ts
+msgid "When a server is both official and verified, Official is shown."
+msgstr "إن اجتمع الرسمي والموثّق في سيرفر تظهر علامة الرسمي."
+
+#: src/interface/badgeGuide/useBadgeGuide.ts
+msgid "When an application is refused, you are told why and can appeal once within 30 days from your Badges settings. When a badge is suspended or removed for a rule breach, you get a statement of reasons and can appeal as for any other moderation decision."
+msgstr "عند رفض طلبك تُبلَّغ بالسبب، ويمكنك الاعتراض مرة واحدة خلال 30 يوماً من إعدادات الشارات. وعند تعليق شارة أو سحبها بسبب مخالفة للقواعد تتلقى بياناً بالأسباب، ويمكنك الطعن كما في سائر قرارات الإشراف."
+
+#: src/interface/badgeGuide/BadgeGuide.tsx
+msgid "Where a badge is by application, you apply in Settings → Badges when applications are open."
+msgstr "للشارات التي تُنال بطلب، تتقدّم من الإعدادات ← الشارات متى فُتحت الطلبات."
+
+#: components/app/interface/settings/user/badges/useProgramText.ts
+msgid "Write the name of the platform (at most 40 characters)."
+msgstr "اكتب اسم المنصة (40 حرفاً على الأكثر)."
+
+#: src/interface/badgeGuide/useBadgeGuide.ts
+msgid "Years on Zrzur"
+msgstr "سنوات في زرزور"
+
+#: components/app/interface/settings/user/badges/ProgramDialog.tsx
+msgid "You have a code. If you lost it, ask for a new one and replace it on the channel."
+msgstr "لديك رمز. إن فقدته فاطلب رمزاً جديداً واستبدله في القناة."
+
+#: src/interface/badgeGuide/useBadgeGuide.ts
+msgid "You own a server that reached 100 genuine human members."
+msgstr "تملك سيرفراً بلغ 100 عضو بشري حقيقي."
+
+#: src/interface/badgeGuide/useBadgeGuide.ts
+msgid "You show the channel is yours by placing a code in its description or a pinned post. A person on the team checks it and the follower number by hand; Zrzur does not connect to the platform."
+msgstr "تُثبت أن القناة لك بوضع رمز في وصفها أو في منشور مثبّت. يتحقق شخص من الفريق منه ومن عدد المتابعين يدوياً، ولا يتصل زرزور بالمنصة."
+
+#: src/interface/badgeGuide/useBadgeGuide.ts
+msgid "Your account has existed for full calendar years, counted in UTC from its creation; your profile shows the highest year, up to ten."
+msgstr "مضت على حسابك سنوات كاملة تُحسب بتوقيت UTC من وقت إنشائه، ويعرض ملفك أعلى سنة بلغتها حتى عشر سنوات."
+
+#: src/interface/badgeGuide/useBadgeGuide.ts
+msgid "Your account was created before 1 March 2027, 00:00 UTC."
+msgstr "أُنشئ حسابك قبل 1 مارس 2027 الساعة 00:00 بتوقيت UTC."
+
+#: src/interface/badgeGuide/useBadgeGuide.ts
+msgid "Your bot is in at least 25 legitimate servers and has run for at least 30 days. Servers of one owner count at most twice, and your own servers never count."
+msgstr "بوتك في 25 سيرفراً حقيقياً على الأقل ويعمل منذ 30 يوماً على الأقل. لا تُحسب سيرفرات المالك الواحد أكثر من مرتين، ولا تُحسب سيرفراتك أنت أبداً."
+
+#: components/app/interface/settings/user/badges/ProgramDialog.tsx
+msgid "Your channel"
+msgstr "قناتك"
+
+#. placeholder {0}: needed || 5
+#: components/app/interface/settings/user/badges/useProgramText.ts
+msgid "Your channel, its kind of content and {0} recent works or a livestream schedule are filled in"
+msgstr "عُبّئت قناتك ونوع محتواها و{0} أعمال حديثة أو جدول بث"
+
+#: components/app/interface/settings/user/badges/useProgramText.ts
+msgid "Your code is in the channel's description or a pinned post"
+msgstr "رمزك في وصف القناة أو في منشور مثبّت"
+
+#: components/app/interface/settings/user/badges/ProgramDialog.tsx
+msgid "Your code:"
+msgstr "رمزك:"
+
+#: src/interface/badgeGuide/useBadgeGuide.ts
+msgid "Your server is the authentic official home of a real game, developer, company, creator, organisation, brand or established project: authenticity, not popularity."
+msgstr "سيرفرك هو الموطن الرسمي الأصلي للعبة أو مطوّر أو شركة أو صانع محتوى أو منظمة أو علامة تجارية أو مشروع راسخ حقيقي: الأصالة لا الشهرة."
+
+#: src/interface/badgeGuide/BadgeGuide.tsx
+msgid "Zrzur badges"
+msgstr "شارات زرزور"
+
+#: src/interface/badgeGuide/useBadgeGuide.ts
+msgid "Zrzur is built by volunteers. Reviews happen when a volunteer is available; we do not promise a review time."
+msgstr "يبني زرزورَ متطوعون. تُراجَع الطلبات حين يتاح متطوّع، ولا نعد بمدة محددة للمراجعة."
+
+#: src/interface/badgeGuide/useBadgeGuide.ts
+msgid "Zrzur team"
+msgstr "فريق زرزور"
