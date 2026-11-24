@@ -27,8 +27,6 @@ const WAITING: Record<string, string> = {
   // a hidden input opened by its own swatch button: never seen
   "components/app/interface/settings/user/appearance/AppearanceMenu.tsx":
     "hidden",
-  // staff-only tool, an optional expiry day
-  "components/app/interface/settings/user/badges/BadgeAdmin.tsx": "staff",
   // plugin settings: plugins are off on every server for now
   "components/app/interface/settings/user/plugins/PluginDetail.tsx":
     "plugins off",
