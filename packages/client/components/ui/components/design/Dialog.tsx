@@ -710,6 +710,16 @@ const Container = styled("div", {
         "&[data-unclipped], &[data-unclipped] > [data-dialog-body]": {
           overflow: "visible",
         },
+        // a phone: what is drawn round the content (a profile frame) needs
+        // the screen's edges, so the sheet is only as big as its content and
+        // paints nothing of its own; the content keeps its own surface
+        _phone: {
+          "&[data-unclipped]:not([data-size='sm'])": {
+            height: "auto",
+            background: "none",
+            boxShadow: "none",
+          },
+        },
         "& > [data-dialog-body]": {
           margin: 0,
           padding: 0,
