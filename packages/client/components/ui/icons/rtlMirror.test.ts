@@ -34,6 +34,8 @@ const NOT_DIRECTION_ICONS: Record<string, string> = {
     "the feather fan",
   "components/modal/modals/PromoteServer.tsx": "the feather fan",
   "components/modal/modals/SuperchargeServer.tsx": "the feather fan",
+  "components/ui/components/features/profiles/frames/ProfileFrame.tsx":
+    "the profile frame drawing",
 };
 
 const FLIP = /(_rtl|dir\(rtl\)|dir=.?rtl).*(scaleX\(-1\)|scale: "-1 1")/;

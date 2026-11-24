@@ -39,11 +39,13 @@ import {
   UserStyle,
   userStyleOf,
 } from "@revolt/ui/components/features/profiles/userStyle";
+import { sendableStyle } from "@revolt/ui/components/features/profiles/userStyleExtras";
 import { useSettingsNavigation } from "../../Settings";
 
 import { useEffectLabels } from "@revolt/ui/components/features/profiles/labels";
 
 import { EffectDialog } from "./EffectDialog";
+import { FrameDialog } from "./FrameDialog";
 import {
   DecorationDialog,
   LookRow,
@@ -208,19 +210,8 @@ export function UserProfileEditor(props: Props) {
     if (editGroup.controls.style.isDirty) {
       // an empty style tells the server to remove it
       const style = editGroup.controls.style.value;
-      (changes as API.DataEditUser & { style?: UserStyle }).style = {
-        ...(style.theme?.length ? { theme: style.theme } : {}),
-        ...(style.name_font ? { name_font: style.name_font } : {}),
-        ...(style.name_colour?.length
-          ? { name_colour: style.name_colour }
-          : {}),
-        ...(style.decoration ? { decoration: style.decoration } : {}),
-        ...(style.nameplate ? { nameplate: style.nameplate } : {}),
-        ...(style.effect ? { effect: style.effect } : {}),
-        ...(style.effect && style.effect_file
-          ? { effect_file: style.effect_file }
-          : {}),
-      };
+      (changes as API.DataEditUser & { style?: UserStyle }).style =
+        sendableStyle(style);
     }
 
     let newBannerUrl: string | null = null;
@@ -322,6 +313,7 @@ export function UserProfileEditor(props: Props) {
   const [decorationDialog, setDecorationDialog] = createSignal(false);
   const [nameplateDialog, setNameplateDialog] = createSignal(false);
   const [effectDialog, setEffectDialog] = createSignal(false);
+  const [frameDialog, setFrameDialog] = createSignal(false);
   const effectLabel = useEffectLabels();
   const styleLabels = useStyleLabels();
   const fontLabel = () => {
@@ -329,11 +321,20 @@ export function UserProfileEditor(props: Props) {
     return index > 0 ? t`Font ` : t`Default font`;
   };
   const colourLabel = () =>
-    style().name_colour?.length === 2
-      ? t`Gradient`
-      : style().name_colour?.length === 1
-        ? t`Solid colour`
-        : t`No colour`;
+    (style().name_colour?.length ?? 0) >= 3
+      ? t`Spectrum`
+      : style().name_colour?.length === 2
+        ? t`Gradient`
+        : style().name_colour?.length === 1
+          ? t`Solid colour`
+          : t`No colour`;
+  const nameEffectLabel = () =>
+    ({
+      halo: t`Halo`,
+      edge: t`Edge`,
+      lifted: t`Lifted`,
+      sheen: t`Sheen`,
+    })[style().name_effect ?? ""];
   const shownName = () =>
     editGroup.controls.displayName.value?.trim() || props.user.username;
   const previewTheme = (): JSX.CSSProperties | undefined => {
@@ -466,6 +467,10 @@ export function UserProfileEditor(props: Props) {
                   value={
                     <>
                       {fontLabel()} · {colourLabel()}
+                      <Show when={nameEffectLabel()}>
+                        {" · "}
+                        {nameEffectLabel()}
+                      </Show>
                     </>
                   }
                   onClick={() => setNameDialog(true)}
@@ -481,6 +486,12 @@ export function UserProfileEditor(props: Props) {
                   title={<Trans>Profile effect</Trans>}
                   value={effectLabel(style().effect)}
                   onClick={() => setEffectDialog(true)}
+                />
+                <LookRow
+                  icon={<Icon name="user-focus" size={20} />}
+                  title={<Trans>Profile frame</Trans>}
+                  value={styleLabels.frame(style().profile_frame)}
+                  onClick={() => setFrameDialog(true)}
                 />
               </LookStack>
             </SettingsSection>
@@ -513,6 +524,19 @@ export function UserProfileEditor(props: Props) {
                         ? style().effect_file
                         : undefined,
                   })
+                }
+              />
+            </Show>
+            <Show when={frameDialog()}>
+              <FrameDialog
+                show={frameDialog()}
+                onClose={() => setFrameDialog(false)}
+                user={props.user}
+                style={style()}
+                value={style().profile_frame}
+                file={style().profile_frame_file}
+                onApply={(profile_frame, file) =>
+                  setStyle({ profile_frame, profile_frame_file: file })
                 }
               />
             </Show>
@@ -693,10 +717,16 @@ export function UserProfileEditor(props: Props) {
                 style={
                   previewTheme()
                     ? {
-                        ...nameStyle(style(), { colour: false }),
+                        // the themed preview is deep, whatever the app's theme
+                        ...nameStyle(style(), {
+                          colour: false,
+                          always: true,
+                          surface: "dark",
+                        }),
                         color: "#fff",
                       }
-                    : nameStyle(style())
+                    : // your own preview draws even with name styles off
+                      nameStyle(style(), { always: true })
                 }
               >
                 {editGroup.controls.displayName.value?.trim() ||

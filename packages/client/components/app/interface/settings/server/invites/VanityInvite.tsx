@@ -1,7 +1,7 @@
 import { For, Match, Show, Switch, createSignal, onMount } from "solid-js";
 
 import { Trans, useLingui } from "@lingui/solid/macro";
-import type { Server } from "@zrzur/sdk/solid";
+import type { Server, VanityEligibility } from "@zrzur/sdk/solid";
 import { styled } from "styled-system/jsx";
 
 import { useClient } from "@revolt/client";
@@ -28,10 +28,14 @@ import {
 import { Icon } from "@revolt/ui/icons/Icon";
 
 import { useSettingsNavigation } from "../../Settings";
+import { eligibilityFromError } from "./vanityEligibility";
 import { vanityState } from "./vanityState";
 
 /**
- * Custom invite link (zrzur.cc/<name>), unlocked by a Wings level
+ * Custom invite link (zrzur.cc/<name>). Official and partner servers may
+ * always have one; any other server needs enough members and recent
+ * activity (the numbers come from the server). With billing on, the Wings
+ * level that unlocks it is a second way in.
  */
 export function VanityInvite(props: { server: Server }) {
   const { t, i18n } = useLingui();
@@ -40,17 +44,35 @@ export function VanityInvite(props: { server: Server }) {
   const describeError = useError();
   const { navigate } = useSettingsNavigation();
 
+  const [eligibility, setEligibility] = createSignal<VanityEligibility>();
+  // an API without the rule (older backend): fall back to the Wings check
+  const [noRule, setNoRule] = createSignal(false);
+
+  async function loadEligibility() {
+    try {
+      setEligibility(await props.server.fetchVanityEligibility());
+      setNoRule(false);
+    } catch {
+      setNoRule(true);
+    }
+  }
+
   onMount(() => {
     if (!billingPlans()) refreshBilling(client());
+    loadEligibility();
   });
 
   const current = () => props.server.vanityInvite;
   const required = () => vanityLevel();
   const level = () => props.server.supercharge?.level ?? 0;
-  // with billing off nothing is paid for: the link is open to every server
-  const free = () => !!billingPlans() && !billingAvailable();
+  const wingsPath = () =>
+    !!billingPlans() && billingAvailable() && !!required();
+  const legacyUnlocked = () =>
+    (!!billingPlans() && !billingAvailable()) ||
+    (!!required() && level() >= required()!.level);
   const unlocked = () =>
-    free() || (!!required() && level() >= required()!.level);
+    noRule() ? legacyUnlocked() : !!eligibility()?.eligible;
+  const loading = () => !noRule() && !eligibility();
 
   const [code, setCode] = createSignal(current()?.code ?? "");
   const [channel, setChannel] = createSignal(current()?.channel ?? "");
@@ -74,11 +96,32 @@ export function VanityInvite(props: { server: Server }) {
   const textChannels = () =>
     props.server.channels.filter((entry) => entry.type === "TextChannel");
 
-  const state = () => vanityState(current()?.belowLevelSince);
+  const via = () => current()?.via;
+  const wingsLink = () => via() === "Wings";
+  const state = () =>
+    vanityState(current()?.belowLevelSince, new Date(), via());
   const date = (value: Date) =>
     new Intl.DateTimeFormat(i18n().locale, { dateStyle: "medium" }).format(
       value,
     );
+  const number = (value: number) =>
+    new Intl.NumberFormat(i18n().locale).format(value);
+
+  // the rule's numbers, from the server once loaded
+  const minMembers = () => number(eligibility()?.minMembers ?? 1000);
+  const minMessages = () => number(eligibility()?.minMessages ?? 100);
+  const minAuthors = () => number(eligibility()?.minAuthors ?? 20);
+  const days = () => number(eligibility()?.days ?? 30);
+  const membersOk = () =>
+    !!eligibility() && eligibility()!.members >= eligibility()!.minMembers;
+  const activityOk = () =>
+    !!eligibility() &&
+    eligibility()!.messages >= eligibility()!.minMessages &&
+    eligibility()!.authors >= eligibility()!.minAuthors;
+  // the date the current link ends: the server's own, else worked out here
+  const endsAt = () =>
+    eligibility()?.linkEndsAt ??
+    (state().kind === "grace" ? (state() as { ends: Date }).ends : undefined);
 
   async function save() {
     if (!canSave()) return;
@@ -88,7 +131,11 @@ export function VanityInvite(props: { server: Server }) {
       await props.server.claimVanityInvite(name(), channel() || undefined);
       setCode(props.server.vanityInvite?.code ?? name());
       setChannel(props.server.vanityInvite?.channel ?? "");
+      loadEligibility();
     } catch (err) {
+      // the server says what is missing: show it in the panel as well
+      const refused = eligibilityFromError(err, eligibility());
+      if (refused) setEligibility(refused);
       setError(describeError(err));
     } finally {
       setPending(false);
@@ -107,6 +154,7 @@ export function VanityInvite(props: { server: Server }) {
       await props.server.removeVanityInvite();
       setCode("");
       setChannel("");
+      loadEligibility();
     } catch (err) {
       setError(describeError(err));
     } finally {
@@ -123,24 +171,17 @@ export function VanityInvite(props: { server: Server }) {
   }
 
   return (
-    <Show when={free() || required()}>
+    <Show when={!noRule() || legacyUnlocked() || required()}>
       <SettingsSection
         title={<Trans>Custom invite link</Trans>}
         description={
-          <Show
-            when={free()}
-            fallback={
-              <Trans>
-                One short, memorable link for your server, like
-                zrzur.cc/your-name. Unlocked at Wings level{" "}
-                {required()!.level}.
-              </Trans>
-            }
-          >
+          <span data-testid="vanity-rule">
             <Trans>
-              One short, memorable link for your server, like zrzur.cc/your-name.
+              Official and partner servers can have one, and so can servers with{" "}
+              {minMembers()} members that are active ({minMessages()} messages
+              from {minAuthors()} members in {days()} days).
             </Trans>
-          </Show>
+          </span>
         }
         aside={
           <Show when={current()}>
@@ -165,7 +206,77 @@ export function VanityInvite(props: { server: Server }) {
         }
       >
         <Switch>
-          <Match when={!unlocked() && !current()}>
+          <Match when={loading() && !current()}>
+            <SettingsRow
+              icon={<Icon name="hourglass" size={20} />}
+              title={<Trans>Checking this server…</Trans>}
+            />
+          </Match>
+          <Match when={!unlocked() && !current() && !noRule()}>
+            <SettingsFormPanel>
+              <Why data-testid="vanity-why">
+                <WhyTitle>
+                  <Trans>This server can't have a custom link yet</Trans>
+                </WhyTitle>
+                <Need data-met={membersOk()} data-testid="vanity-need-members">
+                  <Icon
+                    name={membersOk() ? "check-circle" : "x-circle"}
+                    size={20}
+                  />
+                  <span>
+                    <Trans>
+                      Members: {number(eligibility()?.members ?? 0)} of{" "}
+                      {minMembers()}
+                    </Trans>
+                  </span>
+                </Need>
+                <Need
+                  data-met={activityOk()}
+                  data-testid="vanity-need-activity"
+                >
+                  <Icon
+                    name={activityOk() ? "check-circle" : "x-circle"}
+                    size={20}
+                  />
+                  <span>
+                    <Trans>
+                      Activity: {number(eligibility()?.messages ?? 0)} of{" "}
+                      {minMessages()} messages from{" "}
+                      {number(eligibility()?.authors ?? 0)} of {minAuthors()}{" "}
+                      members in the last {days()} days
+                    </Trans>
+                  </span>
+                </Need>
+              </Why>
+              <Show when={wingsPath()}>
+                <SettingsRow
+                  icon={<Icon name="lock-simple" size={20} />}
+                  title={
+                    <Trans>
+                      Or reach Wings level {required()!.level} (
+                      {required()!.supercharges} Wings)
+                    </Trans>
+                  }
+                  description={
+                    <Trans>
+                      This server is at level {level()} with{" "}
+                      {props.server.supercharge?.count ?? 0} Wings.
+                    </Trans>
+                  }
+                  control={() => (
+                    <Button
+                      size="sm"
+                      variant="tonal"
+                      onPress={() => navigate("wings")}
+                    >
+                      <Trans>See levels</Trans>
+                    </Button>
+                  )}
+                />
+              </Show>
+            </SettingsFormPanel>
+          </Match>
+          <Match when={noRule() && !legacyUnlocked() && !current()}>
             <SettingsRow
               icon={<Icon name="lock-simple" size={20} />}
               title={
@@ -193,12 +304,29 @@ export function VanityInvite(props: { server: Server }) {
           </Match>
           <Match when={true}>
             <SettingsFormPanel>
-              <Show when={state().kind === "grace"}>
+              <Show when={state().kind === "grace" && !wingsLink()}>
+                <Notice
+                  data-tone="warning"
+                  role="status"
+                  data-testid="vanity-ending"
+                >
+                  <Icon name="warning" size={18} />
+                  <span>
+                    <Trans>
+                      This server no longer meets the rule for a custom link.
+                      The link works until {date(endsAt()!)}, then the name is
+                      released. Reach {minMembers()} members and stay active to
+                      keep it.
+                    </Trans>
+                  </span>
+                </Notice>
+              </Show>
+              <Show when={state().kind === "grace" && wingsLink()}>
                 <Notice data-tone="warning" role="status">
                   <Icon name="warning" size={18} />
                   <span>
                     <Trans>
-                      This server is below level {required()!.level}. The link
+                      This server is below level {required()?.level}. The link
                       keeps working until{" "}
                       {date((state() as { ends: Date }).ends)}, then pauses.
                     </Trans>
@@ -212,7 +340,7 @@ export function VanityInvite(props: { server: Server }) {
                     <Trans>
                       The link is paused. The name stays yours until{" "}
                       {date((state() as { releasedAt: Date }).releasedAt)}.
-                      Reach level {required()!.level} again to turn it back on.
+                      Reach level {required()?.level} again to turn it back on.
                     </Trans>
                   </span>
                 </Notice>
@@ -260,7 +388,11 @@ export function VanityInvite(props: { server: Server }) {
               </Field>
 
               <Show when={error()}>
-                <Notice data-tone="danger" role="alert">
+                <Notice
+                  data-tone="danger"
+                  role="alert"
+                  data-testid="vanity-error"
+                >
                   <Icon name="warning-circle" size={18} />
                   <span>{error()}</span>
                 </Notice>
@@ -313,7 +445,44 @@ const Label = styled("span", {
 });
 
 const Actions = styled("div", {
-  base: { display: "flex", flexWrap: "wrap", gap: "8px" },
+  base: {
+    display: "flex",
+    flexWrap: "wrap",
+    gap: "8px",
+    // 44 px targets on phones
+    "@media (max-width: 600px)": {
+      "& > button": { minHeight: "44px" },
+    },
+  },
+});
+
+const Why = styled("div", {
+  base: { display: "flex", flexDirection: "column", gap: "12px" },
+});
+
+const WhyTitle = styled("span", {
+  base: {
+    fontSize: "14px",
+    fontWeight: 600,
+    lineHeight: "20px",
+    color: "var(--z-fg-primary)",
+  },
+});
+
+const Need = styled("div", {
+  base: {
+    display: "flex",
+    alignItems: "flex-start",
+    gap: "8px",
+    fontSize: "13px",
+    lineHeight: "20px",
+    color: "var(--z-fg-secondary)",
+    "--z-icon-color": "var(--z-danger)",
+    "&[data-met='true']": {
+      color: "var(--z-fg-primary)",
+      "--z-icon-color": "var(--z-status-success)",
+    },
+  },
 });
 
 const Notice = styled("div", {

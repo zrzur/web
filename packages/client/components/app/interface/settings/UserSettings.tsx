@@ -17,6 +17,7 @@ import { STAFF_TOOLS_ENABLED } from "@revolt/common/lib/staffTools";
 import { useInstance } from "@revolt/instance";
 import { useModals } from "@revolt/modal";
 import { fetchLatestChangelog } from "@revolt/modal/modals/changelogFeed";
+import { richPresenceEnabled } from "@revolt/client/ActivityWorker";
 import { pluginsEnabled } from "@revolt/plugins/enabled";
 import { useNavigate } from "@revolt/routing";
 import { ColouredText, Column, Text, iconSize } from "@revolt/ui";
@@ -53,6 +54,7 @@ import { MyAccount } from "./user/Account";
 import AdvancedSettings from "./user/Advanced";
 import { AppearanceMenu } from "./user/appearance";
 import { MyBadges } from "./user/badges/MyBadges";
+import { ActivitySettings } from "./user/activity/ActivitySettings";
 import { ConnectedApps } from "./user/ConnectedApps";
 import { Connections } from "./user/connections/Connections";
 import { Feedback } from "./user/Feedback";
@@ -139,6 +141,8 @@ const Config: SettingsConfiguration<{ server: Server }> = {
         return <ConnectedApps />;
       case "connections":
         return <Connections />;
+      case "activity":
+        return <ActivitySettings />;
       case "my-data":
         return <MyData />;
       case "language":
@@ -366,6 +370,14 @@ const Config: SettingsConfiguration<{ server: Server }> = {
               id: "connections",
               icon: <Icon name="game-controller" size={20} />,
               title: <Trans>Connections</Trans>,
+            },
+            {
+              // what you are doing right now (rich presence); hidden while
+              // the server has the feature off
+              id: "activity",
+              icon: <Symbol size={20}>sports_esports</Symbol>,
+              title: <Trans>Activity</Trans>,
+              hidden: !richPresenceEnabled(client()),
             },
             {
               // apps you let act for you through OAuth2, revoked here

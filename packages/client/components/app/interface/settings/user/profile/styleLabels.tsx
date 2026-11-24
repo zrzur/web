@@ -12,6 +12,9 @@ import { useCountryNames } from "@revolt/ui/components/features/profiles/plateNa
 /** Translated names for decorations and theme presets */
 export function useStyleLabels() {
   const { t } = useLingui();
+  const frames: Record<string, string> = {
+    crystal: t`Crystal cave`,
+  };
   const pack = usePackLabels();
   const decorations: Record<string, string> = {
     ...pack.decorations,
@@ -81,6 +84,13 @@ export function useStyleLabels() {
   return {
     decoration: (id?: string) => (id ? (decorations[id] ?? id) : t`None`),
     theme: (id: string) => themes[id] ?? id,
+    /** a profile frame: built-in name, or a creator's frame */
+    frame: (id: string | undefined) =>
+      !id
+        ? t`None`
+        : id.startsWith("c:")
+          ? t`Community frame`
+          : (frames[id] ?? id),
     nameplate: (id?: string) =>
       id?.startsWith("c:")
         ? t`Community nameplate`

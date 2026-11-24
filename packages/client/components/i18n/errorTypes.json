@@ -160,6 +160,7 @@
   "UnknownUser",
   "UnverifiedAccount",
   "UsernameTaken",
+  "VanityNotEligible",
   "VanityPaused",
   "VanityReserved",
   "VanityTaken",

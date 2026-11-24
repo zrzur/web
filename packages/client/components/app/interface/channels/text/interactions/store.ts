@@ -543,6 +543,32 @@ export function submitModal(
   );
 }
 
+/**
+ * Start a bot in the person's DM with it, with the payload of the bot link
+ * they came from. The button shows progress under `start:<channel>`.
+ */
+export function runStart(
+  client: Client,
+  channelId: string,
+  botId: string,
+  payload?: string,
+) {
+  const componentKey = `start:${channelId}`;
+  if (state.busy[componentKey]) return Promise.resolve(undefined);
+  return start(
+    client,
+    {
+      type: "Start",
+      application_id: botId,
+      channel_id: channelId,
+      payload,
+      nonce: nonce(),
+      locale: interactionLocale(),
+    },
+    { componentKey },
+  );
+}
+
 export function closeModal() {
   setState("modal", undefined);
 }

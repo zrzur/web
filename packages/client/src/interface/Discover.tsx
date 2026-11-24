@@ -16,6 +16,10 @@ import { isolate } from "@revolt/common/lib/isolate";
 import { styled } from "styled-system/jsx";
 
 import {
+  botDmsOn,
+  waitForStart,
+} from "@revolt/app/interface/channels/text/interactions/botLinks";
+import {
   CATEGORIES,
   CardRoom,
   DiscoverKind,
@@ -686,6 +690,29 @@ export function Discover() {
     try {
       const invite = await client().bots.fetchPublic(id);
       openModal({ type: "add_bot", invite });
+    } catch (error) {
+      showError(error);
+    } finally {
+      setBusy(undefined);
+    }
+  }
+
+  /** Whether a bot can be written to from here (`features.bot_dms`) */
+  // the site reads it from the API too: with it off, no Message anywhere
+  const botDms = () => botDmsOn(client());
+
+  /** The conversation with a bot, Start waiting in it */
+  async function messageBot(id: string) {
+    if (site) {
+      window.location.assign(`${appUrl()}/b/${id}?start`);
+      return;
+    }
+    setBusy(id);
+    try {
+      const user = await client().users.fetch(id);
+      const channel = await user.openDM();
+      waitForStart(channel.id);
+      navigate(channel.path);
     } catch (error) {
       showError(error);
     } finally {
@@ -1371,6 +1398,18 @@ export function Discover() {
                       </Show>
                     </PrimaryButton>
                   )}
+                </Show>
+                <Show when={item.kind === "bots" && botDms()}>
+                  <PrimaryButton
+                    type="button"
+                    data-variant="secondary"
+                    data-testid="discover-message-bot"
+                    disabled={busy() === item.id}
+                    onClick={() => messageBot(item.id)}
+                  >
+                    <Icon name="chat-circle" size={16} />
+                    <Trans>Message</Trans>
+                  </PrimaryButton>
                 </Show>
                 <PrimaryButton
                   type="button"

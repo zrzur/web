@@ -1,0 +1,28 @@
+{
+  "and {0} more in Commands": [
+    "و{0} غيرها في «الأوامر»",
+    "und {0} weitere unter Befehle"
+  ],
+  "Bot options": ["خيارات البوت", "Bot-Optionen"],
+  "Bots in direct messages": [
+    "البوتات في الرسائل المباشرة",
+    "Bots in Direktnachrichten"
+  ],
+  "Restart bot": ["أعد تشغيل البوت", "Bot neu starten"],
+  "Start": ["ابدأ", "Starten"],
+  "Start lets {0} send you messages here.": [
+    "يسمح «ابدأ» للبوت {0} بمراسلتك هنا.",
+    "Mit Starten darf {0} dir hier Nachrichten schicken."
+  ],
+  "started the bot": ["بدأ البوت", "hat den Bot gestartet"],
+  "Stop bot": ["أوقف البوت", "Bot stoppen"],
+  "What this bot can do": ["ما يستطيع هذا البوت فعله", "Was dieser Bot kann"],
+  "You opened a link to {0}.": [
+    "فتحت رابطًا إلى {0}.",
+    "Du hast einen Link zu {0} geöffnet."
+  ],
+  "You stopped {0}. It can't send you messages.": [
+    "أوقفت {0}، فلا يستطيع مراسلتك.",
+    "Du hast {0} gestoppt. Der Bot kann dir keine Nachrichten schicken."
+  ]
+}

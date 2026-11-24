@@ -1,15 +1,39 @@
-import { userHandle } from "../../../../../common/lib/userTag";
 import type {
   API as APITypes__,
   Client,
   WithoutNull as WithoutNull__,
 } from "@zrzur/sdk/solid";
 import { withoutNull } from "@zrzur/sdk/solid";
+import { userHandle } from "../../../../../common/lib/userTag";
 
 // relative, so unit tests run without the app aliases
 import { discoverRequest } from "../../../discover/api";
 
+import { fetchCommunityPermissions } from "./communityAccess";
+
 export type CommunityKind = "decorations" | "nameplates" | "effects";
+
+/**
+ * Every list the gallery reads. Profile frames are listed and worn, but not
+ * made in the Creator Studio yet, so its kinds above leave them out.
+ */
+export type CommunityListKind = CommunityKind | "frames";
+
+/**
+ * Whether creators' profile frames are open on this server (`GET /`
+ * `features.community_frames`). Off, or on a server that does not say, the
+ * app shows none: the gallery asks for no frames and no creator's frame is
+ * offered. Zrzur's own frames do not depend on it.
+ */
+export function communityFramesOpen(client: Pick<Client, "configuration">) {
+  return (
+    (
+      client.configuration?.features as
+        | { community_frames?: boolean }
+        | undefined
+    )?.community_frames === true
+  );
+}
 
 export type CommunityStatus =
   | "Draft"
@@ -189,30 +213,8 @@ export function hasOpenPage(creator?: CommunityCreator) {
   return !!creator?.open_page;
 }
 
-/** Whether the permission list allows something */
-export function can(
-  perms: CommunityPermissions | undefined,
-  permission: PlatformPermission,
-) {
-  return !!perms?.permissions.includes(permission);
-}
-
-/**
- * May publish designs: an active creator. The right to submit alone is not
- * the rank: privileged accounts hold every permission with no creator record.
- */
-export function mayCreate(perms: CommunityPermissions | undefined) {
-  return perms?.creator === "Active" && can(perms, "cosmetics.submit");
-}
-
-/**
- * May open the studio: active creators to work, and suspended creators to
- * see their own designs, read-only. Revoked
- * creators stay out.
- */
-export function maySeeStudio(perms: CommunityPermissions | undefined) {
-  return mayCreate(perms) || perms?.creator === "Suspended";
-}
+// permission checks live in a small file of their own (the first load needs them)
+export { can, mayCreate, maySeeStudio } from "./communityAccess";
 
 /** Creator Studio tabs and which statuses go in them */
 /**
@@ -321,12 +323,11 @@ export function parseTags(text: string) {
 const id = (value: string) => encodeURIComponent(value);
 
 export const communityApi = {
-  permissions: (client: Client) =>
-    client.api.get("/community/permissions").then(withoutNull),
+  permissions: fetchCommunityPermissions,
 
   list: (
     client: Client,
-    kind: CommunityKind,
+    kind: CommunityListKind,
     params: Partial<ReturnType<typeof communityParams>> & { creator?: string },
   ) => client.api.get(`/community/${kind}`, params).then(withoutNull),
 

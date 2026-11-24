@@ -6,9 +6,5 @@
   "forum post::New": [
     "جديد",
     "Neu"
-  ],
-  "{0, plural, one {# mention} other {# mentions}}": [
-    "{0, plural, zero {لا إشارات} one {إشارة واحدة} two {إشارتان} few {# إشارات} many {# إشارة} other {# إشارة}}",
-    "{0, plural, one {# Erwähnung} other {# Erwähnungen}}"
   ]
 }

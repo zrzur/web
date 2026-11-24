@@ -265,12 +265,18 @@ export function Message(props: Props) {
                 enabled={props.isLink === undefined}
               />
             </Show>
-            <Show when={props.message.interaction?.name}>
+            <Show
+              when={
+                props.message.interaction?.name ||
+                props.message.interaction?.type === "Start"
+              }
+            >
               <InteractionHeader
                 userId={props.message.interaction!.user}
-                name={props.message.interaction!.name!}
+                name={props.message.interaction!.name ?? ""}
                 serverId={props.message.server?.id}
                 botId={props.message.authorId}
+                started={props.message.interaction!.type === "Start"}
               />
             </Show>
             <For each={props.message.replyIds}>

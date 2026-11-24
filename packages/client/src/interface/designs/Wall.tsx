@@ -20,6 +20,7 @@ import {
   type CommunityItem,
   type CommunityPage,
   communityApi,
+  communityFramesOpen,
   creatorName,
 } from "@revolt/app/interface/settings/user/profile/communityApi";
 import { useStyleLabels } from "@revolt/app/interface/settings/user/profile/styleLabels";
@@ -33,6 +34,8 @@ import {
   EFFECT_IDS,
   EffectId,
 } from "@revolt/ui/components/features/profiles/effects/effectIds";
+import { ProfilePreview } from "@revolt/ui/components/features/profiles/frames/ProfilePreview";
+import { PROFILE_FRAME_IDS } from "@revolt/ui/components/features/profiles/frames/frameIds";
 import { useEffectLabels } from "@revolt/ui/components/features/profiles/labels";
 import {
   NAME_GRADIENTS,
@@ -42,10 +45,13 @@ import {
   DECORATIONS,
   NAMEPLATES,
   NAME_FONTS,
+  nameStyle,
+  userStyleOf,
+} from "@revolt/ui/components/features/profiles/userStyle";
+import {
   THEME_PRESETS,
   effectStillUrl,
-  nameStyle,
-} from "@revolt/ui/components/features/profiles/userStyle";
+} from "@revolt/ui/components/features/profiles/userStyleExtras";
 import { withoutNull } from "@zrzur/sdk/solid";
 
 import { isDesignsSite } from "../../DesignsSite";
@@ -102,7 +108,15 @@ export type Tile = {
   makerId?: string;
   avatar?: string;
   count?: number;
+  /** a frame tile past the first few: drawn as the sample card, not live */
+  sample?: boolean;
 };
+
+/**
+ * Frame tiles drawn as your own live profile card. Each is a whole profile
+ * (theme, badges, sections), so the rest show the light sample card.
+ */
+const LIVE_CARDS = 6;
 
 /** Community designs, a page at a time, for any list on the site */
 export function useCommunity(
@@ -139,8 +153,12 @@ export function useCommunity(
     setLoading(true);
     setFailed(false);
     try {
+      // creators' frames only where the server has them open
+      const kinds = communityFramesOpen(client())
+        ? (["decorations", "nameplates", "effects", "frames"] as const)
+        : (["decorations", "nameplates", "effects"] as const);
       const pages = await Promise.all(
-        (["decorations", "nameplates", "effects"] as const).map((kind) => {
+        kinds.map((kind) => {
           const ask = () =>
             communityApi.list(client(), kind, {
               query: now.query || undefined,
@@ -161,8 +179,9 @@ export function useCommunity(
               : undefined;
           const asked =
             first && !isLoggedIn() ? first.then(withoutNull).catch(ask) : ask();
-          // a server without effects still shows everything else
-          return kind === "effects"
+          // a server without effects or frames (switched off, or older)
+          // still shows everything else
+          return kind === "effects" || kind === "frames"
             ? asked.catch(() => ({ items: [], creators: [] }))
             : asked;
         }),
@@ -210,6 +229,7 @@ const tileKinds = {
   Decoration: "frame",
   Nameplate: "plate",
   Effect: "effect",
+  Frame: "card",
 } as const;
 
 /** What a community design puts on you */
@@ -220,6 +240,8 @@ export function wearOf(item: CommunityItem): Wear {
       return { nameplate: ref, nameplate_file: item.file._id };
     case "Effect":
       return { effect: ref, effect_file: item.file._id };
+    case "Frame":
+      return { profile_frame: ref, profile_frame_file: item.file._id };
     default:
       return { decoration: ref, decoration_file: item.file._id };
   }
@@ -301,6 +323,15 @@ export function useBuiltInTiles() {
         name: effectLabel(id),
         maker: team(),
         wear: { effect: id },
+      })),
+    cards: (): Tile[] =>
+      PROFILE_FRAME_IDS.map((id, i) => ({
+        key: `profile-frame-${id}`,
+        kind: "card",
+        name: labels.frame(id),
+        maker: team(),
+        wear: { profile_frame: id, profile_frame_file: undefined },
+        person: at(i + 4),
       })),
     types: (): Tile[] =>
       NAME_FONTS.filter((font) => font.id !== "default").map((font, i) => ({
@@ -419,10 +450,10 @@ function useTileActions(wear: () => Wear | undefined, name: () => string) {
     },
     onFocus: () => tryOn.peek(wear()),
     onBlur: () => tryOn.peek(undefined),
-    tap: (el: HTMLElement) => {
+    tap: (el: HTMLElement, fly = true) => {
       const pieces = wear();
       if (!pieces || isDesignsSite()) return;
-      if (!tryOn.wearing(pieces)) flyToDock(el);
+      if (fly && !tryOn.wearing(pieces)) flyToDock(el);
       tryOn.toggle(pieces, name());
     },
   };
@@ -471,6 +502,7 @@ function DesignTile(props: {
   const wearer = useWearer();
   const { t } = useLingui();
   const instance = useInstance();
+  const client = useClient();
   const act = useTileActions(
     () => props.tile.wear,
     () => props.tile.name,
@@ -515,7 +547,8 @@ function DesignTile(props: {
         }}
         onClick={(e) => {
           start();
-          act.tap(e.currentTarget);
+          // a whole framed profile is too big to fly to the dock
+          act.tap(e.currentTarget, props.tile.kind !== "card");
         }}
       >
         <Switch>
@@ -566,6 +599,27 @@ function DesignTile(props: {
           </Match>
           <Match when={props.tile.kind === "plate"}>
             <MemberRow style={props.tile.wear!} person={props.tile.person} />
+          </Match>
+          <Match when={props.tile.kind === "card"}>
+            {/* signed in: your own profile, as people will see it, with
+                your look and this frame; a visitor sees the sample card */}
+            <Show
+              when={!props.tile.sample && client().user}
+              fallback={
+                <StyleCard
+                  style={props.tile.wear!}
+                  person={props.tile.person}
+                  compact
+                />
+              }
+            >
+              {(me) => (
+                <ProfilePreview
+                  user={me()}
+                  style={{ ...userStyleOf(me()), ...props.tile.wear }}
+                />
+              )}
+            </Show>
           </Match>
           <Match when={props.tile.kind === "open"}>
             <OpenRing />
@@ -744,6 +798,12 @@ export function useGalleryTiles(input: {
       ...mine.filter((tile) => tile.kind === "effect"),
       ...built.effects(),
     ].filter(has);
+    const cards = [
+      ...mine.filter((tile) => tile.kind === "card"),
+      ...built.cards(),
+    ]
+      .filter(has)
+      .map((tile, i) => (i < LIVE_CARDS ? tile : { ...tile, sample: true }));
     const looks = built.looks(ids).filter(has);
     const types = built.types().filter(has);
     const inks = built.inks();
@@ -780,6 +840,8 @@ export function useGalleryTiles(input: {
         return plates;
       case "effects":
         return effects;
+      case "frames":
+        return cards;
       case "colours":
         return [paint];
       case "name":
@@ -789,6 +851,7 @@ export function useGalleryTiles(input: {
           frame: frames.filter((tile) => tile.item),
           plate: plates.filter((tile) => tile.item),
           effect: effects,
+          card: cards.filter((tile) => tile.item),
         });
       default:
         if (q || input.mood())
@@ -797,6 +860,7 @@ export function useGalleryTiles(input: {
             frame: frames,
             plate: plates,
             effect: effects,
+            card: cards,
             type: types,
           });
         return weave<Tile>({
@@ -970,6 +1034,9 @@ const TileBase = styled("div", {
     "&[data-kind='look']": { gridColumn: "span 3", gridRow: "span 3" },
     // as tall as a profile card, so the tile shows how the effect will look
     "&[data-kind='effect']": { gridRow: "span 4" },
+    // a whole profile card in its frame: a poster of a tile, with room
+    // round the card for the frame that reaches past it
+    "&[data-kind='card']": { gridColumn: "span 4", gridRow: "span 6" },
     "&[data-kind='frame'][data-big='true']": {
       gridColumn: "span 6",
       gridRow: "span 4",
@@ -1032,6 +1099,15 @@ const Art = styled("button", {
     // the whole name fits: its size is worked out from this box
     "[data-kind='ink'] > &": { containerType: "inline-size" },
     "[data-kind='effect'] > &": { padding: 0 },
+    // the card and the room its frame needs round it (ProfilePreview keeps
+    // its own; the sample card has framedCompact in Looks.tsx) fit the tile;
+    // the frame is never cut at the tile's edge
+    "[data-kind='card'] > &": {
+      alignItems: "start",
+      padding: "12px",
+      "& > div": { width: "100%" },
+      "&:hover > *": { transform: "none" },
+    },
     _focusVisible: {
       outline: "2px solid var(--z-focus)",
       outlineOffset: "-4px",

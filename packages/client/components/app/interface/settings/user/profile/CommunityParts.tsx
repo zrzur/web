@@ -15,10 +15,11 @@ import {
   sampleAvatar,
   sampleAvatarFor,
 } from "@revolt/ui/components/features/profiles/sampleAvatars";
+import { userStyleOf } from "@revolt/ui/components/features/profiles/userStyle";
 import {
   communityShownUrl,
-  userStyleOf,
-} from "@revolt/ui/components/features/profiles/userStyle";
+  sendableStyle,
+} from "@revolt/ui/components/features/profiles/userStyleExtras";
 import { FeatherField, WaveEdge } from "@revolt/ui/icons/PremiumArt";
 
 import {
@@ -39,24 +40,15 @@ export { useCommunityPermissions } from "./creatorAccess";
 export function useWearDesign() {
   const client = useClient();
   return async (
-    kind: "decoration" | "nameplate" | "effect",
+    kind: "decoration" | "nameplate" | "effect" | "profile_frame",
     ref: string | undefined,
   ) => {
     const user = client().user!;
     const current = userStyleOf(user) ?? {};
     const next = { ...current, [kind]: ref };
-    const style = {
-      ...(next.theme?.length ? { theme: next.theme } : {}),
-      ...(next.name_font ? { name_font: next.name_font } : {}),
-      ...(next.name_colour?.length ? { name_colour: next.name_colour } : {}),
-      ...(next.decoration ? { decoration: next.decoration } : {}),
-      ...(next.nameplate ? { nameplate: next.nameplate } : {}),
-      ...(next.effect ? { effect: next.effect } : {}),
-      ...(next.effect && kind !== "effect" && next.effect_file
-        ? { effect_file: next.effect_file }
-        : {}),
-    };
-    await user.edit({ style });
+    // a new effect is looked up by the server
+    if (kind === "effect") delete next.effect_file;
+    await user.edit({ style: sendableStyle(next) });
   };
 }
 

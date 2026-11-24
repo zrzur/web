@@ -21,11 +21,11 @@ import { EffectStill } from "@revolt/ui/components/features/profiles/effects/Pro
 import { isEffectId } from "@revolt/ui/components/features/profiles/effects/effectIds";
 import { useEffectLabels } from "@revolt/ui/components/features/profiles/labels";
 import {
-  effectStillUrl,
   isCommunityRef,
   nameplateBackground,
   userStyleOf,
 } from "@revolt/ui/components/features/profiles/userStyle";
+import { effectStillUrl } from "@revolt/ui/components/features/profiles/userStyleExtras";
 
 import { useStyleLabels } from "./StyleEditors";
 import { communityApi } from "./communityApi";

@@ -277,6 +277,25 @@ export function useError() {
       if ((err.type as string) === "VanityUnavailable") {
         return t`This server needs a higher Wings level for a custom link.`;
       }
+      if ((err.type as string) === "VanityNotEligible") {
+        const { missing, min_members, min_messages, min_authors, days } =
+          err as unknown as {
+            missing?: string;
+            min_members?: number;
+            min_messages?: number;
+            min_authors?: number;
+            days?: number;
+          };
+        const members = min_members ?? 1000;
+        const messages = min_messages ?? 100;
+        const authors = min_authors ?? 20;
+        const period = days ?? 30;
+        if (missing === "Members")
+          return t`This server needs at least ${members} members for a custom link.`;
+        if (missing === "Activity")
+          return t`This server needs to be more active for a custom link: ${messages} messages from ${authors} members in the last ${period} days.`;
+        return t`A custom link needs at least ${members} members and an active server: ${messages} messages from ${authors} members in the last ${period} days.`;
+      }
       if ((err.type as string) === "VanityTaken") {
         return t`Another server already uses this link name.`;
       }

@@ -1,6 +1,7 @@
-import type { JSX } from "solid-js";
+import { type JSX, createSignal } from "solid-js";
 
 import { isEffectId } from "./effects/effectIds";
+import { isProfileFrameId } from "./frames/frameIds";
 import {
   PACK_DECORATIONS,
   PACK_NAMEPLATES,
@@ -16,6 +17,8 @@ export type UserStyle = {
   theme?: string[];
   name_font?: string;
   name_colour?: string[];
+  /** one of `NAME_EFFECTS`, drawn on top of the colour */
+  name_effect?: string;
   /** built-in id, or `c:<id>` for a community decoration */
   decoration?: string;
   /** image of a community decoration (filled in by the server) */
@@ -28,6 +31,10 @@ export type UserStyle = {
   effect?: string;
   /** file of a community effect (filled in by the server) */
   effect_file?: string;
+  /** frame around the whole profile card: built-in id, or `c:<id>` */
+  profile_frame?: string;
+  /** image of a community frame (filled in by the server) */
+  profile_frame_file?: string;
 };
 
 /** Read the style the API attached to a user (absent on older servers) */
@@ -35,7 +42,7 @@ export function userStyleOf(user: unknown): UserStyle | undefined {
   const style = (user as { style?: UserStyle } | undefined)?.style;
   if (!style || typeof style !== "object") return undefined;
   // a design we no longer ship counts as none, so saving still works
-  const { decoration, nameplate, effect } = style;
+  const { decoration, nameplate, effect, profile_frame } = style;
   const staleDecoration =
     decoration &&
     !isCommunityRef(decoration) &&
@@ -45,7 +52,12 @@ export function userStyleOf(user: unknown): UserStyle | undefined {
     !isCommunityRef(nameplate) &&
     !NAMEPLATES.some((plate) => plate.id === nameplate);
   const staleEffect = effect && !isCommunityRef(effect) && !isEffectId(effect);
-  if (!staleDecoration && !stalePlate && !staleEffect) return style;
+  const staleFrame =
+    profile_frame &&
+    !isCommunityRef(profile_frame) &&
+    !isProfileFrameId(profile_frame);
+  if (!staleDecoration && !stalePlate && !staleEffect && !staleFrame)
+    return style;
   const rest = { ...style };
   if (staleDecoration) {
     delete rest.decoration;
@@ -59,12 +71,86 @@ export function userStyleOf(user: unknown): UserStyle | undefined {
     delete rest.effect;
     delete rest.effect_file;
   }
+  if (staleFrame) {
+    delete rest.profile_frame;
+    delete rest.profile_frame_file;
+  }
   return rest;
 }
 
 const HEX = /^#[0-9a-fA-F]{6}$/;
-const colours = (list: unknown) =>
-  Array.isArray(list) ? list.filter((c) => HEX.test(c)).slice(0, 2) : [];
+const colours = (list: unknown, most = 2) =>
+  Array.isArray(list) ? list.filter((c) => HEX.test(c)).slice(0, most) : [];
+
+/** Effects a display name can wear (same ids as the API's allow-list) */
+export const NAME_EFFECTS = ["halo", "edge", "lifted", "sheen"] as const;
+export type NameEffect = (typeof NAME_EFFECTS)[number];
+
+/** Most colours in a name: three to five make a spectrum */
+export const NAME_MAX_COLOURS = 5;
+
+/** How this viewer sees names, kept in step by `useNameStyleSync` */
+const [nameView, setNameView] = createSignal({
+  /** "Show name styles" is off: every name is plain */
+  plain: false,
+  /** light surfaces: colours are darkened until they read */
+  light: false,
+  /** reduced motion or no motion: nothing moves */
+  still: false,
+});
+export { setNameView };
+
+const rgb = (hex: string) =>
+  [1, 3, 5].map((at) => parseInt(hex.slice(at, at + 2), 16));
+const luminance = (channels: number[]) => {
+  const [r, g, b] = channels.map((value) => {
+    const v = value / 255;
+    return v <= 0.04045 ? v / 12.92 : ((v + 0.055) / 1.055) ** 2.4;
+  });
+  return 0.2126 * r + 0.7152 * g + 0.0722 * b;
+};
+const toHex = (channels: number[]) =>
+  "#" +
+  channels
+    .map((v) => Math.round(Math.max(0, v)).toString(16).padStart(2, "0"))
+    .join("");
+
+/**
+ * A name colour for light surfaces: the same hue, darkened step by step until
+ * it reads at 4.5:1 on the darkest light surface (the rail, #E4E6F0), so it
+ * reads on every lighter one too. Dark colours stay as they are.
+ */
+export function nameColourForLight(hex: string) {
+  const base = rgb(hex);
+  const rail = luminance(rgb("#E4E6F0")) + 0.05;
+  const reads = (c: number[]) => rail / (luminance(c) + 0.05) >= 4.5;
+  for (let k = 1; k > 0; k -= 0.02) {
+    // judge the rounded colour that will be drawn, not the exact one
+    const shade = toHex(base.map((v) => v * k));
+    if (reads(rgb(shade))) return shade;
+  }
+  return "#000000";
+}
+
+/**
+ * The bright band a sheen passes over the letters. On dark surfaces it is the
+ * colour mixed with white. On light surfaces white would make the letters
+ * vanish, so it is the lightest tint of the colour that still reads at 4.5:1
+ * (the same rule as `nameColourForLight`).
+ */
+export function sheenHighlight(hex: string, light: boolean) {
+  if (!light) return `color-mix(in srgb, ${hex} 30%, #fff)`;
+  const tint = toHex(rgb(hex).map((v) => v + (255 - v) * 0.5));
+  return nameColourForLight(tint);
+}
+
+/**
+ * The keyframes of the names that move (a flowing spectrum, a passing sheen),
+ * loaded the first time one moves: lists never ask for motion, so most
+ * people never download them.
+ */
+let nameMotion: Promise<unknown> | undefined;
+const loadNameMotion = () => (nameMotion ??= import("./nameEffects.css"));
 
 /** Keeps Arabic in Zrzur's own face when a font has no Arabic of its own */
 const ARABIC = "'IBM Plex Sans Arabic'";
@@ -90,8 +176,9 @@ export const NAME_FONTS: {
   },
   {
     id: "mono",
-    family: `'JetBrains Mono', 'Cascadia Code', Consolas, 'Courier New', ${ARABIC}, monospace`,
+    family: `'JetBrains Mono', ${ARABIC}, monospace`,
     weight: 700,
+    load: () => import("@fontsource/jetbrains-mono/700.css"),
   },
   {
     id: "script",
@@ -231,28 +318,30 @@ const BASE_DECORATIONS = [
 /** Built-in avatar decorations (same ids as the API's allow-list) */
 export const DECORATIONS = [...BASE_DECORATIONS, ...PACK_DECORATIONS] as const;
 
-/** Ready-made two-colour profile themes */
-export const THEME_PRESETS: { id: string; colours: [string, string] }[] = [
-  { id: "Sunset", colours: ["#ff6b4a", "#ffb347"] },
-  { id: "Ocean", colours: ["#1e9bb8", "#6fd3e8"] },
-  { id: "Grape", colours: ["#8b2be2", "#e0218a"] },
-  { id: "Mint", colours: ["#11998e", "#38ef7d"] },
-  { id: "Midnight", colours: ["#0f2027", "#2c5364"] },
-  { id: "Cherry", colours: ["#eb3349", "#f45c43"] },
-  { id: "Gold", colours: ["#f7971e", "#ffd200"] },
-  { id: "Aurora", colours: ["#00c6ff", "#0072ff"] },
-  { id: "Rose", colours: ["#ff9a9e", "#fecfef"] },
-  { id: "Forest", colours: ["#134e5e", "#71b280"] },
-  { id: "Neon", colours: ["#00f260", "#0575e6"] },
-  { id: "Candy", colours: ["#ff758c", "#ff7eb3"] },
-];
-
-/** Inline style for a display name in this user's chosen font and colour */
+/**
+ * Inline style for a display name in this user's chosen font, colours and
+ * effect.
+ *
+ * - `colour: false` keeps someone else's colour (a server role): the font and
+ *   the effects that need no colour of their own (halo, edge, lifted) stay.
+ * - `moving` lets a spectrum flow and a sheen pass. Only single places ask for
+ *   it (a profile, the editor); lists stay on one still frame, so a member
+ *   list costs nothing to keep.
+ * - `surface` and `always` are for previews: draw for that surface, and
+ *   ignore the viewer's "Show name styles" switch.
+ */
 export function nameStyle(
   style: UserStyle | undefined,
-  options: { colour?: boolean } = {},
+  options: {
+    colour?: boolean;
+    moving?: boolean;
+    surface?: "light" | "dark";
+    always?: boolean;
+  } = {},
 ): JSX.CSSProperties {
   if (!style) return {};
+  const view = nameView();
+  if (view.plain && !options.always) return {};
   const css: JSX.CSSProperties = {};
   const font = NAME_FONTS.find((f) => f.id === style.name_font);
   if (font && font.id !== "default") {
@@ -261,15 +350,101 @@ export function nameStyle(
     if (font.weight) css["font-weight"] = font.weight;
     Object.assign(css, font.extra);
   }
-  const list = colours(style.name_colour);
-  if (options.colour !== false && list.length === 1) {
-    css.color = list[0];
-  } else if (options.colour !== false && list.length === 2) {
-    css["background-image"] = `linear-gradient(90deg, ${list[0]}, ${list[1]})`;
+
+  const light = options.surface ? options.surface === "light" : view.light;
+  const moving = options.moving && !view.still;
+  const own = options.colour !== false;
+  const chosen = own ? colours(style.name_colour, NAME_MAX_COLOURS) : [];
+  const list = light ? chosen.map(nameColourForLight) : chosen;
+  const effect = (NAME_EFFECTS as readonly string[]).includes(
+    style.name_effect ?? "",
+  )
+    ? (style.name_effect as NameEffect)
+    : undefined;
+
+  const clip = (image: string) => {
+    css["background-image"] = image;
     css["-webkit-background-clip"] = "text";
     css["background-clip"] = "text";
     css.color = "transparent";
     css["-webkit-text-fill-color"] = "transparent";
+  };
+
+  // the fill
+  let clipped = false;
+  if (effect === "edge" && list.length) {
+    // edge: first colour fills, the second draws the border
+    css.color = list[0];
+  } else if (effect === "sheen" && list.length) {
+    const [a, b = list[0]] = list;
+    clip(
+      `linear-gradient(100deg, ${a} 0 42%, ${sheenHighlight(a, light)} 50%, ${b} 58% 100%)`,
+    );
+    css["background-size"] = "250% 100%";
+    css["background-position"] = moving ? undefined : "55% 0";
+    if (moving) {
+      void loadNameMotion();
+      css.animation = "z-name-sheen 5s ease-in-out infinite";
+    }
+    clipped = true;
+  } else if (list.length === 1) {
+    css.color = list[0];
+  } else if (list.length === 2) {
+    clip(`linear-gradient(90deg, ${list[0]}, ${list[1]})`);
+    clipped = true;
+  } else if (list.length >= 3) {
+    // spectrum: the colours run round once, so the flow has no seam
+    clip(`linear-gradient(90deg, ${[...list, list[0]].join(", ")})`);
+    css["background-size"] = "200% 100%";
+    css["background-position"] = moving ? undefined : "30% 0";
+    if (moving) {
+      void loadNameMotion();
+      css.animation = "z-name-flow 9s linear infinite";
+    }
+    clipped = true;
+  }
+
+  // the effect on top; a clipped or borrowed fill takes it as a filter
+  const glow = own ? (list[0] ?? "currentColor") : "currentColor";
+  // a halo is light: on a light surface it comes from the bright colour as
+  // chosen, not the darkened letters (a dark blur looks smudged there)
+  const shine = own ? (chosen[0] ?? "currentColor") : "currentColor";
+  const asFilter = clipped || !own;
+  if (effect === "halo") {
+    const near = `color-mix(in srgb, ${shine} ${light ? 60 : 70}%, transparent)`;
+    const far = `color-mix(in srgb, ${shine} ${light ? 30 : 40}%, transparent)`;
+    if (asFilter)
+      css.filter = `drop-shadow(0 0 4px ${near}) drop-shadow(0 0 10px ${far})`;
+    else css["text-shadow"] = `0 0 6px ${near}, 0 0 14px ${far}`;
+  } else if (effect === "edge") {
+    const ring = list[1] ?? `color-mix(in srgb, ${glow} 40%, #000)`;
+    const steps = [
+      [1.5, 0],
+      [-1.5, 0],
+      [0, 1.5],
+      [0, -1.5],
+      [1, 1],
+      [-1, -1],
+      [1, -1],
+      [-1, 1],
+    ];
+    if (asFilter)
+      css.filter = steps
+        .slice(0, 4)
+        .map(([x, y]) => `drop-shadow(${x}px ${y}px 0 ${ring})`)
+        .join(" ");
+    else
+      css["text-shadow"] = steps
+        .map(([x, y]) => `${x}px ${y}px 0 ${ring}`)
+        .join(", ");
+  } else if (effect === "lifted") {
+    const under = `color-mix(in srgb, ${glow} 45%, #000)`;
+    const shade = light ? "rgb(23 25 37 / 0.28)" : "rgb(0 0 0 / 0.55)";
+    if (asFilter)
+      css.filter = `drop-shadow(0 2px 0 ${under}) drop-shadow(0 3px 3px ${shade})`;
+    else
+      css["text-shadow"] =
+        `0 1px 0 ${under}, 0 2px 0 ${under}, 0 4px 6px ${shade}`;
   }
   return css;
 }
@@ -581,41 +756,6 @@ export function communityStillUrl(
   return fileId && /^[\w-]+$/.test(fileId)
     ? `${mediaUrl}/decorations/${fileId}`
     : undefined;
-}
-
-/** URL of an effect's file: what plays */
-export function effectFileUrl(mediaUrl: string, fileId: string | undefined) {
-  return fileId && /^[\w-]+$/.test(fileId)
-    ? `${mediaUrl}/effects/${fileId}/original`
-    : undefined;
-}
-
-/** URL of one still frame of an effect, drawn by the media server for tiles */
-export function effectStillUrl(mediaUrl: string, fileId: string | undefined) {
-  return fileId && /^[\w-]+$/.test(fileId)
-    ? `${mediaUrl}/effects/${fileId}`
-    : undefined;
-}
-
-/**
- * The address a community design is shown from in a gallery or a card: its
- * file as uploaded (it may move), or, for a viewer who is saving data, the
- * one still frame the media server draws (some twenty kilobytes instead of
- * up to a megabyte).
- */
-export function communityShownUrl(
-  mediaUrl: string,
-  kind: string,
-  fileId: string | undefined,
-  saving: boolean,
-) {
-  if (kind === "Effect")
-    return saving
-      ? effectStillUrl(mediaUrl, fileId)
-      : effectFileUrl(mediaUrl, fileId);
-  return saving
-    ? communityStillUrl(mediaUrl, fileId)
-    : communityFileUrl(mediaUrl, fileId);
 }
 
 /**

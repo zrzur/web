@@ -101,3 +101,15 @@ export const NAME_GRADIENTS: [string, string][] = [
   ["#fbc2eb", "#a6c1ee"],
   ["#fdfbfb", "#ebedee"],
 ];
+
+/** Spectra: three to five colours that run round the name */
+export const NAME_SPECTRA: string[][] = [
+  ["#ff5c8a", "#ffb347", "#7ee081", "#6dd5ed", "#b794ff"],
+  ["#ff6b4a", "#ffb347", "#ffd200"],
+  ["#ff8ac4", "#b794ff", "#7fb8ff"],
+  ["#38d39f", "#6dd5ed", "#a5b4ff"],
+  ["#ffd200", "#7ee081", "#5de0c8", "#6dd5ed"],
+  ["#ff9a44", "#ff5c8a", "#d58bff", "#7fb8ff"],
+  ["#f4e285", "#ffb3c7", "#c6a6ff", "#a5f3fc"],
+  ["#ff8a80", "#ffd180", "#c5e86c", "#6dd5ed", "#d58bff"],
+];
