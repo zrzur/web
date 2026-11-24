@@ -74,25 +74,98 @@ export const badgesApi = {
   mine: (client: Client) => client.api.get("/badges/@me").then(withoutNull),
   setHidden: (client: Client, badge: string, hidden: boolean) =>
     client.api.patch(`/badges/@me/${badge}`, { hidden }).then(withoutNull),
+  /** Read only (the beta tools look people up with it) */
   search: (client: Client, query: string, badge?: string) =>
     client.api.get("/badges/admin/users", { query, badge }).then(withoutNull),
-  user: (client: Client, id: string) =>
-    client.api.get(`/badges/admin/users/${id}`).then(withoutNull),
-  grant: (
-    client: Client,
-    user: string,
-    badge: string,
-    reason: string,
-    expires_at?: number,
-  ) =>
-    client.api
-      .post("/badges/admin/grant", { user, badge, reason, expires_at })
-      .then(withoutNull),
-  revoke: (client: Client, user: string, badge: string, reason: string) =>
-    client.api
-      .post("/badges/admin/revoke", { user, badge, reason })
-      .then(withoutNull),
 };
+
+/** A row of the staff user directory (`GET /staff/users`) */
+export type StaffUserRow = {
+  id: string;
+  username: string;
+  discriminator: string;
+  display_name?: string | null;
+  bot: boolean;
+  deleted: boolean;
+};
+
+/** A badge change waiting for a second staff member */
+export type BadgeRequest = {
+  id: string;
+  user_id: string;
+  badge: string;
+  /** true: give, false: take away */
+  grant: boolean;
+  reason: string;
+  requested_by: string;
+  status: "Pending" | "Approved" | "Refused" | "Expired";
+  created_at: number;
+  expires_at: number;
+};
+
+/** What a grant or revoke did: made now, or waiting for a second person */
+export type StaffBadgeChange = {
+  status: "applied" | "pending";
+  request?: BadgeRequest;
+};
+
+/** Header that carries the staff session */
+const STAFF_HEADER = "x-staff-session";
+
+/**
+ * Open a staff session with an authenticator code, as the admin console
+ * does. The token lives in memory only, for this panel.
+ */
+export const openStaffSession = (client: Client, totpCode: string) =>
+  client.api.raw<{ token: string; expires_at: number }>(
+    "post",
+    "/staff/session",
+    { totp_code: totpCode },
+  );
+
+/**
+ * The admin console's badge routes, with a staff session. Every change goes
+ * through the server's one badge gate: Founder never, Staff and Platform
+ * Moderator only by appointment, retired badges never, sensitive changes
+ * wait for a second staff member, protected ones need a fresh code.
+ */
+export function staffBadgesApi(client: Client, token: string) {
+  const call = <T>(
+    method: "get" | "post" | "delete",
+    path: string,
+    body?: unknown,
+  ) =>
+    client.api.raw<T>(method, path, body, {
+      headers: { [STAFF_HEADER]: token },
+    });
+  return {
+    search: (query: string) =>
+      call<StaffUserRow[]>("get", "/staff/users", { q: query, limit: 20 }),
+    user: (id: string) =>
+      call<AdminUserBadges>("get", `/staff/users/${id}/badges`),
+    grant: (id: string, badge: string, reason: string, expiresAt?: number) =>
+      call<StaffBadgeChange>("post", `/staff/users/${id}/badges/grant`, {
+        badge,
+        reason,
+        expires_at: expiresAt,
+      }),
+    revoke: (id: string, badge: string, reason: string) =>
+      call<StaffBadgeChange>("post", `/staff/users/${id}/badges/revoke`, {
+        badge,
+        reason,
+      }),
+    requests: () => call<BadgeRequest[]>("get", "/staff/badges/requests"),
+    approve: (id: string) =>
+      call<StaffBadgeChange>("post", `/staff/badges/requests/${id}/approve`),
+    refuse: (id: string) =>
+      call<BadgeRequest>("post", `/staff/badges/requests/${id}/refuse`),
+    stepUp: (totpCode: string) =>
+      call<{ step_up_until: number }>("post", "/staff/session/step-up", {
+        totp_code: totpCode,
+      }),
+    close: () => call<void>("delete", "/staff/session"),
+  };
+}
 
 export const betaApi = {
   me: (client: Client) => client.api.get("/beta/@me").then(withoutNull),

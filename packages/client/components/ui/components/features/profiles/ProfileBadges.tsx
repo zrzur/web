@@ -21,10 +21,20 @@ export function ProfileBadges(props: { ids: AnyBadgeId[] }) {
   );
 }
 
-/** A person's badges, most important first */
+/** A person's badges, most important first; one anniversary, the highest */
 export function profileBadgeIds(user: User) {
   if (user.bot) return [];
-  return badgesFromBits(user.badges || 0)
+  return badgesFromBits(user.badges || 0, createdMs(user))
     .sort((a, b) => a.priority - b.priority)
     .map((meta) => meta.id);
+}
+
+/** When the account was made (from its id), if that can be read */
+function createdMs(user: User) {
+  try {
+    const at = user.createdAt.getTime();
+    return Number.isFinite(at) ? at : undefined;
+  } catch {
+    return undefined;
+  }
 }
