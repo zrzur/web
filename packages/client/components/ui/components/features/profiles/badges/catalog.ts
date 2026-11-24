@@ -28,6 +28,7 @@ export type BadgeId =
   | "community_helper"
   | "super_creator"
   | "creator"
+  | "content_creator"
   | "elite_bug_hunter"
   | "bug_hunter"
   | "beta_tester"
@@ -129,6 +130,7 @@ export const BADGE_BITS = {
   verified_bot_developer: 33554432,
   // 67108864 was Saha Champion: retired for good (owner, 2026-11-24); the bit is never shown or reused
   community_helper: 134217728,
+  content_creator: 268435456,
 } as const satisfies Record<BadgeId, number>;
 
 const meta = (
@@ -163,6 +165,8 @@ export const BADGES: BadgeMeta[] = [
   meta("super_creator", 2, 40, "gem", ["#CF7BEB", "#7A52E0"], {
     ring: "#F1DDFF",
   }),
+  // concept B "The take" (owner, 2026-11-23): mint enamel, gold rim
+  meta("content_creator", 1, 44, "hex", ["#6FE0C4", "#16786A"]),
   meta("creator", 1, 45, "hex", ["#A783F0", "#6E4FC9"]),
   meta("verified_server_owner", 1, 46, "hex", ["#5E86C4", "#3A5F9A"]),
   meta("verified_bot_developer", 1, 47, "hex", ["#6FB0C9", "#3F7890"]),

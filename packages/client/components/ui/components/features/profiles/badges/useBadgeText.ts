@@ -50,6 +50,11 @@ export function useBadgeText(): (id: string) => BadgeText {
         description: t`Designs and publishes profile designs in Zrzur Designs.`,
         earn: t`Given after you join the Designs creator program and publish your first original, approved design. It stays for good unless the work was fraudulent or infringing. Making bots or videos doesn't count.`,
       },
+      content_creator: {
+        name: t`Content Creator`,
+        description: t`Awarded to established creators of original, high-quality content who meet Zrzur's verification and quality standards.`,
+        earn: t`Apply with one channel or profile that has at least 100,000 real followers on that one platform, 90 days of activity and 5 substantial original works in the last 90 days (or a regular livestream schedule). The team checks the channel is yours and reviews the quality; a second person approves.`,
+      },
       elite_bug_hunter: {
         name: t`Elite Bug Hunter`,
         description: t`Exceptional bug and security contributions, recognised by the team.`,

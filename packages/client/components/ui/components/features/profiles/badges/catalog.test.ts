@@ -53,6 +53,7 @@ describe("badge catalogue", () => {
       verified_server_owner: 16777216,
       verified_bot_developer: 33554432,
       community_helper: 134217728,
+      content_creator: 268435456,
     });
   });
 
@@ -160,6 +161,21 @@ describe("badge catalogue", () => {
       expect(badgeMeta(id)?.id).toBe(id);
     }
     for (const badge of ANNIVERSARY_BADGES) expect(badge.bit).toBe(0);
+  });
+
+  it("draws Content Creator with the approved art: concept B, mint enamel, gold rim, no platform mark", () => {
+    expect(badgeMeta("content_creator")?.tier).toBe(1);
+    const art = BADGE_ART.content_creator;
+    expect(art).toContain('stop-color="#6FE0C4"');
+    expect(art).toContain('stop-color="#16786A"');
+    expect(art).toContain('stop-color="#F2CB6B"');
+    expect(art).not.toMatch(/youtube|tiktok|twitch|play/i);
+    expect(art).not.toMatch(/cc1[a-z]/);
+  });
+
+  it("has art for every badge that is given out", () => {
+    for (const badge of BADGES.filter((b) => !b.retired))
+      expect(BADGE_ART, badge.id).toHaveProperty(badge.id);
   });
 
   it("gives each top-tier badge a shape and ring of its own", () => {
