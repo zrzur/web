@@ -268,8 +268,8 @@
     },
     {
       "path": "CHANGELOG.md",
-      "sha256": "4aa052ae5a0851a0255d2d9173d632dd5d92434d321f27248961b67c2c3f92ad",
-      "bytes": 231886,
+      "sha256": "3d6f03841194f290eb5873d9e07c214c2836f33b144fc7745d26b6c203a3c5b3",
+      "bytes": 232638,
       "category": "public-documentation"
     },
     {
@@ -2307,9 +2307,21 @@
       "category": "product-source-or-build-manifest"
     },
     {
+      "path": "packages/client/components/app/interface/settings/user/badges/MyApplications.tsx",
+      "sha256": "eebec963ea15af4bcdc21de52c2659cedad70831913b834702ef179396286d22",
+      "bytes": 9975,
+      "category": "product-source-or-build-manifest"
+    },
+    {
       "path": "packages/client/components/app/interface/settings/user/badges/MyBadges.tsx",
-      "sha256": "dacee03f00522b03d0933bc14884de58844656e370abe90b010a48abc2ae76ca",
-      "bytes": 22057,
+      "sha256": "6b7b77e93751a4d08c8e4bf3cb60555c421b8780d608a92dda206d561eea5aca",
+      "bytes": 23876,
+      "category": "product-source-or-build-manifest"
+    },
+    {
+      "path": "packages/client/components/app/interface/settings/user/badges/ProgramDialog.tsx",
+      "sha256": "96f5e6a057d844ffd815d7c650aec6daae9eb82ec353e5a92eb9b6360e86f6bd",
+      "bytes": 18567,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -2320,8 +2332,26 @@
     },
     {
       "path": "packages/client/components/app/interface/settings/user/badges/parts.tsx",
-      "sha256": "651519e7879a6c6b338f77c135f38fbdc82cf7970f7af40a28d36173265d2086",
-      "bytes": 12341,
+      "sha256": "68de40cb0e1cedd3c78b7be381f251ae9d40811e4857e5eb1d73716872c11fdd",
+      "bytes": 14971,
+      "category": "product-source-or-build-manifest"
+    },
+    {
+      "path": "packages/client/components/app/interface/settings/user/badges/programsApi.test.ts",
+      "sha256": "df39cd7df8870e05d0a729e8122bcd78fc2570c502015832502a7de87a881fef",
+      "bytes": 3885,
+      "category": "synthetic-test-source-or-fixture"
+    },
+    {
+      "path": "packages/client/components/app/interface/settings/user/badges/programsApi.ts",
+      "sha256": "bf18061a4d5192827cff801e4f92a0c726ef14be86130ec343d304dd80230b59",
+      "bytes": 5393,
+      "category": "product-source-or-build-manifest"
+    },
+    {
+      "path": "packages/client/components/app/interface/settings/user/badges/useProgramText.ts",
+      "sha256": "a17fed6e5fd76b47025760f02d26f922a3fe379e653b48e673173c750c4a42fd",
+      "bytes": 6226,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -3736,8 +3766,8 @@
     },
     {
       "path": "packages/client/components/i18n/catalogs/ar/messages.po",
-      "sha256": "189ea1848d0462fb11aa6883419bb526e8be96b448bb61f8a25c3891e31b9a0b",
-      "bytes": 1311520,
+      "sha256": "2a775a7aa7e3ca4ef25d97d05dfe3cdede456aa2f489fe59aac1aa40e7b57b40",
+      "bytes": 1331547,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -3880,8 +3910,8 @@
     },
     {
       "path": "packages/client/components/i18n/catalogs/de/messages.po",
-      "sha256": "5c19433eae35f0e06ae52c19a68718f944bbbfce23095e5fddee073af3db5888",
-      "bytes": 1210824,
+      "sha256": "d25568c892bc084430ab99d90ce64a3723057732f6bf2cecf09065e1a662e91f",
+      "bytes": 1229723,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -3916,8 +3946,8 @@
     },
     {
       "path": "packages/client/components/i18n/catalogs/en/messages.po",
-      "sha256": "6518a8dec739b78de6706bc660301e554122b8e9e245b3997b6f97ee389d6314",
-      "bytes": 1166172,
+      "sha256": "b507e5fc1b6b0438115039361f321bdeab59b6acc8d6c9fbafb4c8bc2b192426",
+      "bytes": 1184060,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -42342,6 +42372,12 @@
       "path": "packages/client/scripts/i18n/ui-2026112402.json",
       "sha256": "3464e78506471cc4f60e0389875ea7a0f2ec8ecb5f6ee9ed4fb2799afc6d74b9",
       "bytes": 6173,
+      "category": "product-source-or-build-manifest"
+    },
+    {
+      "path": "packages/client/scripts/i18n/ui-2026112403.json",
+      "sha256": "3e1c4e97da4120f781cd5e04ee737432d935746a03eedde7663454c5e18a3dec",
+      "bytes": 17557,
       "category": "product-source-or-build-manifest"
     },
     {
