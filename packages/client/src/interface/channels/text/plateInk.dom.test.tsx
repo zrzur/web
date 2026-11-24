@@ -2,7 +2,7 @@ import { readFileSync } from "node:fs";
 import { resolve } from "node:path";
 import { describe, expect, it } from "vitest";
 
-import { PLATE_INK, PLATE_OWN_COLOUR } from "./plateInk";
+import { PLATE_INK, PLATE_NAME_COLOUR, PLATE_OWN_COLOUR } from "./plateInk";
 
 /** A member row on a nameplate, as MemberSidebar draws it */
 function row(name: string) {
@@ -32,12 +32,24 @@ describe("words on a nameplate", () => {
     expect(inked(el, el.querySelector(".status")!)).toBe(true);
   });
 
-  it("gives an own-coloured name its fill back from the boxes around it", () => {
-    const el = row(`<span class="name" data-own-colour>Maher</span>`);
-    const own = [
-      ...el.querySelectorAll(PLATE_OWN_COLOUR.replace(/&/g, ":scope")),
+  it("leave a name in a server role colour, and everything inside it", () => {
+    // a role colour shows wherever the person chose none, a plate included
+    const el = row(
+      `<span class="name" data-role-colour><span class="inner">Maher</span></span>`,
+    );
+    expect(inked(el, el.querySelector(".name")!)).toBe(false);
+    expect(inked(el, el.querySelector(".inner")!)).toBe(false);
+    expect(inked(el, el.querySelector(".status")!)).toBe(true);
+  });
+
+  it("gives a name in its own or a role colour its fill back from the boxes around it", () => {
+    const el = row(
+      `<span class="own" data-own-colour>Maher</span><span class="role" data-role-colour>Rana</span>`,
+    );
+    const kept = [
+      ...el.querySelectorAll(PLATE_NAME_COLOUR.replace(/&/g, ":scope")),
     ];
-    expect(own).toEqual([el.querySelector(".name")]);
+    expect(kept).toEqual([el.querySelector(".own"), el.querySelector(".role")]);
   });
 
   it("is the rule the member list draws with", () => {
@@ -47,6 +59,7 @@ describe("words on a nameplate", () => {
       "utf8",
     );
     expect(source).toContain(JSON.stringify(PLATE_INK));
+    expect(source).toContain(JSON.stringify(PLATE_NAME_COLOUR));
     expect(source).toContain(JSON.stringify(PLATE_OWN_COLOUR));
   });
 });

@@ -55,6 +55,7 @@ describe("a name with a role colour", () => {
     expect(all.some((s) => /gradient/.test(s.backgroundImage))).toBe(false);
     // marked, so a nameplate row keeps the colour too
     expect(name.closest("[data-own-colour]")).not.toBeNull();
+    expect(el.querySelector("[data-role-colour]")).toBeNull();
   });
 
   it("takes the role colour when the person chose no colour", () => {
@@ -67,6 +68,23 @@ describe("a name with a role colour", () => {
     expect(all.some((s) => /gradient/.test(s.background))).toBe(true);
     // the chosen font still applies
     expect(all.some((s) => /Georgia/.test(s.fontFamily))).toBe(true);
+    expect(el.querySelector("[data-own-colour]")).toBeNull();
+    // marked, so a nameplate row keeps the role colour too
+    expect(letters(el).closest("[data-role-colour]")).not.toBeNull();
+  });
+
+  it("marks a plain role colour, with no style at all", () => {
+    const el = draw({ username: "Maher", colour: "#f59e0b" });
+    const name = letters(el);
+    expect(styles(name, el).some((s) => s.color === "rgb(245, 158, 11)")).toBe(
+      true,
+    );
+    expect(name.closest("[data-role-colour]")).not.toBeNull();
+  });
+
+  it("marks neither colour when there is none", () => {
+    const el = draw({ username: "Maher", userStyle: { name_font: "serif" } });
+    expect(el.querySelector("[data-role-colour]")).toBeNull();
     expect(el.querySelector("[data-own-colour]")).toBeNull();
   });
 
@@ -82,6 +100,7 @@ describe("a name with a role colour", () => {
     expect(all.some((s) => s.color === "rgb(59, 130, 246)")).toBe(false);
     expect(all.some((s) => /Georgia/.test(s.fontFamily))).toBe(false);
     expect(el.querySelector("[data-own-colour]")).toBeNull();
+    expect(letters(el).closest("[data-role-colour]")).not.toBeNull();
   });
 
   it("leaves room around the letters for a glow and slanted fonts", () => {
