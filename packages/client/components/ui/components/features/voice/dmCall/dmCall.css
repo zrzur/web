@@ -605,6 +605,7 @@
 
 .z-dmcall-tiles.z-dmcall-alone-self {
   width: 100%;
+  min-height: 72px;
   padding: 0;
 }
 
@@ -665,14 +666,15 @@
   color: var(--z-fg-secondary);
 }
 
-/* a short stage: the faces under your tile give way first, then the line */
-@container (max-height: 239px) {
+/* a very short stage: the faces under your tile give way first, then the
+   line; your own tile shrinks before either */
+@container (max-height: 179px) {
   .z-dmcall-alone-members {
     display: none;
   }
 }
 
-@container (max-height: 159px) {
+@container (max-height: 119px) {
   .z-dmcall-alone-line {
     display: none;
   }
