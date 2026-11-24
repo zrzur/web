@@ -2,6 +2,12 @@
 
 ## Unreleased
 
+### Badges: apply for Partner, Verified Server and Verified Bot Developer (2026-11-24, badge plan phase 4)
+
+* **Check and apply** on the Partner, Verified Server Owner and Verified Bot Developer badges in My Badges: pick your server or bot, read the checklist the server measured, write what it is, prove control of your domain (Verified Server: a DNS TXT record or a file on the website) and send it. Reviews have no promised date.
+* **Your applications** in My Badges: status, the reasons of a decision in your language, continue a draft, withdraw, and appeal a refusal once within 30 days.
+* Arabic badge names and descriptions get more line height, so marks such as the kasra in «مختبِر مخضرم» no longer touch the next line (WebKit).
+
 ### Badges: community and creator rules (2026-11-24, badge plan phase 3)
 
 * **Community Builder and Big Community** say what counts: genuine human members (no bots, deleted, banned or suspended accounts, accounts under 7 days or without a confirmed e-mail, members under a day), counted a few times a day, kept when the server shrinks.
