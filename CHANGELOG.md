@@ -2,6 +2,13 @@
 
 ## Unreleased
 
+### Your chosen name colour shows everywhere (2026-11-24, owner's report)
+
+* **Fixed:** a name colour chosen in Settings → Profile → Name style did not show in a server's member list or on the profile. One rule now holds in every place: your own name colour (and its effect) wins over a server role colour; the role colour shows only when you chose none; with Settings → Advanced → Show name styles off every name is plain (role colours still show, they are the server's).
+* **On a nameplate** in the member list, a name in its own chosen colour keeps it; the plate's white or dark ink is only for names without one and for the status line.
+* **On a themed profile card** a colour that does not read on the theme is lightened, same hue, until it reads at 4.5:1 (a blue stays blue); it gave way to the card's white before. The card's ink is used only when no shade of a colour reads.
+* **No grey box, no cut letters:** the boxes that cut a long name short with "…" were as tall as the line, so a Halo, Edge or Lifted effect was cut into a hard-edged grey block and slanted fonts (Script) lost the end of their last letter. Every box that clips a name now has 6 px of room on each side, pulled back by as much, so nothing moves: member list, message header, account bar, direct messages (desktop and phone), friends, the You menu, the user card and the full profile.
+
 ### Name styles (2026-11-22, owner's request)
 
 * **More ways to write your name:** a spectrum of three to five colours that runs round the name, and four effects on top of any colour: Halo, Edge, Lifted and Sheen. With a role colour in a server, your font and effect stay. Settings → Profile → Look → Name style; the dialog is laid out for phones first, with the preview pinned on top and drawn in the theme you use.
