@@ -3742,8 +3742,8 @@
     },
     {
       "path": "packages/client/components/i18n/catalog.test.ts",
-      "sha256": "ea555a2a94c6942011f945d2e4c518034a167055d3143f38cabcb1ab4169ef6e",
-      "bytes": 5671,
+      "sha256": "bcec36f8a20184451d2321acd2f8af732ce6c28f697ee20e14204176c4172865",
+      "bytes": 5962,
       "category": "synthetic-test-source-or-fixture"
     },
     {
