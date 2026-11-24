@@ -268,8 +268,8 @@
     },
     {
       "path": "CHANGELOG.md",
-      "sha256": "3d6f03841194f290eb5873d9e07c214c2836f33b144fc7745d26b6c203a3c5b3",
-      "bytes": 232638,
+      "sha256": "b46af365181974e7246d2e9e79b77647abcbac4853020f3609e05bd26584db45",
+      "bytes": 233385,
       "category": "public-documentation"
     },
     {
@@ -2308,20 +2308,20 @@
     },
     {
       "path": "packages/client/components/app/interface/settings/user/badges/MyApplications.tsx",
-      "sha256": "eebec963ea15af4bcdc21de52c2659cedad70831913b834702ef179396286d22",
-      "bytes": 9975,
+      "sha256": "323df7051fd4777cbca077f7a5b6919885e423b3048da8b9a022f2431c77de8b",
+      "bytes": 10533,
       "category": "product-source-or-build-manifest"
     },
     {
       "path": "packages/client/components/app/interface/settings/user/badges/MyBadges.tsx",
-      "sha256": "6b7b77e93751a4d08c8e4bf3cb60555c421b8780d608a92dda206d561eea5aca",
-      "bytes": 23876,
+      "sha256": "70fab0a45e37027361a428125a7bd292dfaebeb2d32644750886961360c2c754",
+      "bytes": 24732,
       "category": "product-source-or-build-manifest"
     },
     {
       "path": "packages/client/components/app/interface/settings/user/badges/ProgramDialog.tsx",
-      "sha256": "96f5e6a057d844ffd815d7c650aec6daae9eb82ec353e5a92eb9b6360e86f6bd",
-      "bytes": 18567,
+      "sha256": "afcb6f2a4a23d3eb8b080cfcb0330295531d26c1403103e832070d568d98d799",
+      "bytes": 30196,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -2332,8 +2332,8 @@
     },
     {
       "path": "packages/client/components/app/interface/settings/user/badges/parts.tsx",
-      "sha256": "68de40cb0e1cedd3c78b7be381f251ae9d40811e4857e5eb1d73716872c11fdd",
-      "bytes": 14971,
+      "sha256": "751105a9709d7cbd1d75d344043c826403a2b8c5942051294cacca0146ffb2b8",
+      "bytes": 15049,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -2344,14 +2344,14 @@
     },
     {
       "path": "packages/client/components/app/interface/settings/user/badges/programsApi.ts",
-      "sha256": "bf18061a4d5192827cff801e4f92a0c726ef14be86130ec343d304dd80230b59",
-      "bytes": 5393,
+      "sha256": "bb85f1b8bc9f8361943001aa597ca7e6b8666d2a678872f3f50dc16493d5efba",
+      "bytes": 6884,
       "category": "product-source-or-build-manifest"
     },
     {
       "path": "packages/client/components/app/interface/settings/user/badges/useProgramText.ts",
-      "sha256": "a17fed6e5fd76b47025760f02d26f922a3fe379e653b48e673173c750c4a42fd",
-      "bytes": 6226,
+      "sha256": "2561bdb03b2a41704f049eb09131fe34da7d572f9b313a64fcc087c8ac62927f",
+      "bytes": 10829,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -3766,8 +3766,8 @@
     },
     {
       "path": "packages/client/components/i18n/catalogs/ar/messages.po",
-      "sha256": "2a775a7aa7e3ca4ef25d97d05dfe3cdede456aa2f489fe59aac1aa40e7b57b40",
-      "bytes": 1331547,
+      "sha256": "a93e48ff87f39d387784a9249b452a5eff6125a0b8933d7c0ece7ac67891c40d",
+      "bytes": 1367213,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -3910,8 +3910,8 @@
     },
     {
       "path": "packages/client/components/i18n/catalogs/de/messages.po",
-      "sha256": "d25568c892bc084430ab99d90ce64a3723057732f6bf2cecf09065e1a662e91f",
-      "bytes": 1229723,
+      "sha256": "9c8cd757499ccecc5a2c71507ffa4219df6e050171547e84d92706470a3de8b7",
+      "bytes": 1262456,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -3946,8 +3946,8 @@
     },
     {
       "path": "packages/client/components/i18n/catalogs/en/messages.po",
-      "sha256": "b507e5fc1b6b0438115039361f321bdeab59b6acc8d6c9fbafb4c8bc2b192426",
-      "bytes": 1184060,
+      "sha256": "a6b99ececf686211a9b9fa52fa00d260ca4aa3758b6f96175250db5416681641",
+      "bytes": 1215379,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -7546,8 +7546,8 @@
     },
     {
       "path": "packages/client/components/ui/components/features/profiles/badges/badgeArt.ts",
-      "sha256": "32b0b7041f2f2906aa05e2c28e3ecdd0f09e4a643e8ddb11e2c6549a6468b694",
-      "bytes": 226522,
+      "sha256": "30e043e5f8f8ef67ef63e1e38742ad62584075a8b8fde58296a1c4d61136790c",
+      "bytes": 230630,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -7558,20 +7558,20 @@
     },
     {
       "path": "packages/client/components/ui/components/features/profiles/badges/catalog.test.ts",
-      "sha256": "09eb0dfa10b224f28938a754f739dfd1e54d12aa49601ec6c843c85bfa2842ad",
-      "bytes": 7681,
+      "sha256": "10e0566b679139483223cfea3c5902e57240264d1f429e19714e304fee2a0e88",
+      "bytes": 8370,
       "category": "synthetic-test-source-or-fixture"
     },
     {
       "path": "packages/client/components/ui/components/features/profiles/badges/catalog.ts",
-      "sha256": "0c2676c6a2e6806c03798f0ecb5c683cc86897e533147d46723510754dfa9c34",
-      "bytes": 9977,
+      "sha256": "052d9c8e87897915fba3b88817cb0bed58fb2722deb3b1862171ec9949e8e5de",
+      "bytes": 10163,
       "category": "product-source-or-build-manifest"
     },
     {
       "path": "packages/client/components/ui/components/features/profiles/badges/useBadgeText.ts",
-      "sha256": "f259e42c02a0d8d0ad9bb03323344d8e665a86fb1459301917ea5763ff181eea",
-      "bytes": 8247,
+      "sha256": "c39405ded2a68dc6796ba92dd55ef6828ba06b02f8ced317c460d5c26aa5d30e",
+      "bytes": 8771,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -42381,6 +42381,12 @@
       "category": "product-source-or-build-manifest"
     },
     {
+      "path": "packages/client/scripts/i18n/ui-2026112501.json",
+      "sha256": "e4d9b0e9d90d0c3cbdbb302a6e65333bac26e13ded0331d4b515e4eeb7d2a208",
+      "bytes": 40615,
+      "category": "product-source-or-build-manifest"
+    },
+    {
       "path": "packages/client/scripts/i18n/ui-210.json",
       "sha256": "a2000336a3928f21687a94a1262b2adbd34f017573f3d1b9b342b3ca93df6d09",
       "bytes": 644,
@@ -43180,8 +43186,8 @@
     },
     {
       "path": "packages/client/src/app.tsx",
-      "sha256": "6612995dc457ccbedd30904da7e4f18b467912bc51f76e826eb2261dae0acec8",
-      "bytes": 5026,
+      "sha256": "d5a5914dfa4aefb7f63882b0a04199b38a61c735773ec6f1c4b09a7951b372f4",
+      "bytes": 5282,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -43302,6 +43308,18 @@
       "path": "packages/client/src/interface/You.tsx",
       "sha256": "19472249656b5ba4f6ef1bdf6420465ccfc98cb56362484b8cc8885a28a8caf9",
       "bytes": 27095,
+      "category": "product-source-or-build-manifest"
+    },
+    {
+      "path": "packages/client/src/interface/badgeGuide/BadgeGuide.tsx",
+      "sha256": "ce4675dfdcc83df56503e679ae7cd50201fb814a593c505e932e32030bbc04e6",
+      "bytes": 9455,
+      "category": "product-source-or-build-manifest"
+    },
+    {
+      "path": "packages/client/src/interface/badgeGuide/useBadgeGuide.ts",
+      "sha256": "54c3200e564a40ab6cf609fcf3c4c2b584757315b882156abe4325debe676eaf",
+      "bytes": 13443,
       "category": "product-source-or-build-manifest"
     },
     {
