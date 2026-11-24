@@ -9,6 +9,11 @@ import {
 } from "./catalog";
 import { Language } from "./Languages";
 
+// these tests import a whole language catalog (a large module); in a full,
+// parallel run that alone can take longer than the 5 s default, so they get
+// the time their own waits already allow
+const FULL_IMPORT_MS = 30_000;
+
 describe("message catalogs", () => {
   afterEach(() => vi.unstubAllGlobals());
 
@@ -73,7 +78,7 @@ describe("message catalogs", () => {
     expect(locale).toBe(Language.ARABIC);
     expect(Object.keys(full).length).toBeGreaterThan(100);
     load.mockRestore();
-  });
+  }, FULL_IMPORT_MS);
 
   it("falls back to the full file when the small one fails", async () => {
     vi.stubGlobal(
@@ -83,7 +88,7 @@ describe("message catalogs", () => {
     preferSiteCatalogs({ en: "/assets/site-messages-en.json" });
     const messages = await importCatalog(Language.ENGLISH);
     expect(Object.keys(messages).length).toBeGreaterThan(100);
-  });
+  }, FULL_IMPORT_MS);
 
   it("tries the full file again on the next ask after it failed", async () => {
     const load = vi.spyOn(i18n, "load").mockImplementation(() => undefined);
@@ -112,7 +117,7 @@ describe("message catalogs", () => {
     expect(calls).toBe(2);
     load.mockRestore();
     setFullCatalogLoader();
-  });
+  }, FULL_IMPORT_MS);
 
   it("on the sites, asks for the full file only once the page has loaded", async () => {
     const load = vi.spyOn(i18n, "load").mockImplementation(() => undefined);
@@ -145,5 +150,5 @@ describe("message catalogs", () => {
     expect(calls).toBe(1);
     load.mockRestore();
     setFullCatalogLoader();
-  });
+  }, FULL_IMPORT_MS);
 });

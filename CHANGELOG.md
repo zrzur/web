@@ -2,6 +2,38 @@
 
 ## Unreleased
 
+### Badges: Content Creator and the public badge guide (2026-11-24, badge plan phase 5)
+
+* **Zrzur badges** (`/badges`), open to everyone signed in or not: every badge given out today with its art, what it means, how it is earned (automatic, by application, given by the team) and the published criteria; no promised review dates. Reached from My Badges ("How every badge is earned").
+* **Content Creator** badge (art: concept B "The take") and its application: name one channel, its kind of content and recent works, put the code you get in the channel's description or a pinned post, and send; a person on the team checks the channel by hand.
+* "Check and apply" and "Your applications" show only while the server reports `badge_applications`.
+
+### Badges: apply for Partner, Verified Server and Verified Bot Developer (2026-11-24, badge plan phase 4)
+
+* **Check and apply** on the Partner, Verified Server Owner and Verified Bot Developer badges in My Badges: pick your server or bot, read the checklist the server measured, write what it is, prove control of your domain (Verified Server: a DNS TXT record or a file on the website) and send it. Reviews have no promised date.
+* **Your applications** in My Badges: status, the reasons of a decision in your language, continue a draft, withdraw, and appeal a refusal once within 30 days.
+* Arabic badge names and descriptions get more line height, so marks such as the kasra in «مختبِر مخضرم» no longer touch the next line (WebKit).
+
+### Badges: community and creator rules (2026-11-24, badge plan phase 3)
+
+* **Community Builder and Big Community** say what counts: genuine human members (no bots, deleted, banned or suspended accounts, accounts under 7 days or without a confirmed e-mail, members under a day), counted a few times a day, kept when the server shrinks.
+* **Creator** stays for good once earned; **Super Creator** names its minimum of 25 approved designs and 180 days in the creator program, on the badge and in My Badges.
+* **Beta Veteran:** the team approves it after a completed cycle with 3 reviewed feedback reports or 1 confirmed bug report; My Badges says so to a tester who completed the beta.
+
+### Badges: one anniversary, Saha Champion retired, Discover bot marks (2026-11-24, badge plan phases 1 and 2)
+
+* **One time-on-Zrzur badge:** profiles and My Badges show only the highest full year reached (One Year up to Ten Years, counted in UTC); Two and Four to Ten Years appear for the first time. Early Adopter and the anniversaries are hidden while "Member since" is hidden on the profile, and their texts say so.
+* **Saha Champion retired:** no badge, art or text in the app; nobody held it.
+* **Discover:** a verified bot shows the check inside its Bot label and no seal beside it; an official bot that is not verified never shows a verified mark.
+* **Staff badge panel** (staff tools, still hidden): uses the admin console's routes with a staff session opened by an authenticator code, shows the changes waiting for a second staff member with Approve and Refuse, and picks an expiry with the app's date field.
+
+### Your chosen name colour shows everywhere (2026-11-24, owner's report)
+
+* **Fixed:** a name colour chosen in Settings → Profile → Name style did not show in a server's member list or on the profile. One rule now holds in every place: your own name colour (and its effect) wins over a server role colour; the role colour shows only when you chose none; with Settings → Advanced → Show name styles off every name is plain (role colours still show, they are the server's).
+* **On a nameplate** in the member list, a name in its own chosen colour keeps it; the plate's white or dark ink is only for names without one and for the status line.
+* **On a themed profile card** a colour that does not read on the theme is lightened, same hue, until it reads at 4.5:1 (a blue stays blue); it gave way to the card's white before. The card's ink is used only when no shade of a colour reads.
+* **No grey box, no cut letters:** the boxes that cut a long name short with "…" were as tall as the line, so a Halo, Edge or Lifted effect was cut into a hard-edged grey block and slanted fonts (Script) lost the end of their last letter. Every box that clips a name now has 6 px of room on each side, pulled back by as much, so nothing moves: member list, message header, account bar, direct messages (desktop and phone), friends, the You menu, the user card and the full profile.
+
 ### Name styles (2026-11-22, owner's request)
 
 * **More ways to write your name:** a spectrum of three to five colours that runs round the name, and four effects on top of any colour: Halo, Edge, Lifted and Sheen. With a role colour in a server, your font and effect stay. Settings → Profile → Look → Name style; the dialog is laid out for phones first, with the preview pinned on top and drawn in the theme you use.

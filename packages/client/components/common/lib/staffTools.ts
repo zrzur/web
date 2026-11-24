@@ -8,4 +8,6 @@
  * decision 2026-11-01). The code and the server's permission checks stay as
  * they are; set this to true to bring the tools back.
  */
-export const STAFF_TOOLS_ENABLED = false;
+export const STAFF_TOOLS_ENABLED =
+  // local test builds only (e2e of the staff tools); never set for a release
+  import.meta.env.VITE_STAFF_TOOLS_PREVIEW === "on";

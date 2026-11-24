@@ -49,8 +49,16 @@ describe("listingBadge", () => {
       "server_verified",
     );
   });
-  it("gives a verified bot the bot seal", () => {
-    expect(listingBadge({ kind: "bots", verified: true })).toBe("bot_verified");
+  it("gives a bot no seal: the check sits in its Bot label", () => {
+    expect(listingBadge({ kind: "bots", verified: true })).toBeUndefined();
+  });
+  it("never gives an official bot that is not verified a verified mark", () => {
+    expect(
+      listingBadge({ kind: "bots", verified: false, official: true }),
+    ).toBeUndefined();
+    expect(
+      listingBadge({ kind: "bots", verified: true, official: true }),
+    ).toBeUndefined();
   });
   it("gives nothing to the rest", () => {
     expect(listingBadge({ kind: "servers" })).toBeUndefined();

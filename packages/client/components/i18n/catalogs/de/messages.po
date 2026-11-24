@@ -21827,10 +21827,6 @@ msgstr "Sicherheit und Meldungen"
 msgid "Sagittarius"
 msgstr "Schütze"
 
-#: components/ui/components/features/profiles/badges/useBadgeText.ts
-msgid "Saha Champion"
-msgstr "Saha-Champion"
-
 #: components/ui/components/features/profiles/plateNames.ts
 msgid "Saint Kitts and Nevis"
 msgstr "St. Kitts und Nevis"
@@ -30196,10 +30192,6 @@ msgstr "Kommt nicht mit"
 msgid "Will you come?"
 msgstr "Kommst du?"
 
-#: components/ui/components/features/profiles/badges/useBadgeText.ts
-msgid "Win a tournament, or come first in the games bot."
-msgstr "Gewinne ein Turnier oder erreiche im Spiele-Bot den ersten Platz."
-
 #: components/app/interface/settings/user/Native.tsx
 msgid "Window"
 msgstr "Fenster"
@@ -30333,10 +30325,6 @@ msgstr "Ohne Endzeit endet es 12 Stunden nach dem Beginn oder wenn die Verwaltun
 #: components/app/interface/settings/server/channels/ChannelsSettings.tsx
 msgid "Without category"
 msgstr "Ohne Kategorie"
-
-#: components/ui/components/features/profiles/badges/useBadgeText.ts
-msgid "Won a tournament or came first in the games bot."
-msgstr "Hat ein Turnier gewonnen oder im Spiele-Bot den ersten Platz erreicht."
 
 #: components/ui/components/features/profiles/pack/labels.generated.ts
 msgid "Woods Frame"
@@ -32000,3 +31988,1173 @@ msgstr "Zrzur, direkt auf <0>deinem Desktop.</0>"
 #: components/app/interface/settings/user/appearance/AppearanceMenu.tsx
 #~ msgid "Zrzur's own look: very dark neutral panels with Zrzur Pink as the one accent."
 #~ msgstr "Zrzurs eigener Look: sehr dunkle, neutrale Flächen mit Zrzur-Pink als einziger Akzentfarbe."
+
+#: components/app/interface/settings/user/badges/BadgeAdmin.tsx
+msgid "Asked by"
+msgstr "Angefragt von"
+
+#: components/app/interface/settings/user/badges/BadgeAdmin.tsx
+msgid "Authenticator code"
+msgstr "Code der Authentifizierungs-App"
+
+#: components/app/interface/settings/user/badges/BadgeAdmin.tsx
+msgid "Badges are changed with a staff session, as in the admin console. Enter the code from your authenticator app."
+msgstr "Abzeichen werden wie in der Admin-Konsole mit einer Team-Sitzung geändert. Gib den Code aus deiner Authentifizierungs-App ein."
+
+#: components/app/interface/settings/user/badges/BadgeAdmin.tsx
+msgid "Confirm with a fresh code"
+msgstr "Mit neuem Code bestätigen"
+
+#: components/app/interface/settings/user/badges/BadgeAdmin.tsx
+msgid "Confirmed. Protected changes are open for five minutes."
+msgstr "Bestätigt. Geschützte Änderungen sind fünf Minuten lang möglich."
+
+#: components/ui/components/features/profiles/badges/useBadgeText.ts
+msgid "Eight Years on Zrzur"
+msgstr "Acht Jahre auf Zrzur"
+
+#: components/ui/components/features/profiles/badges/useBadgeText.ts
+msgid "Five Years on Zrzur"
+msgstr "Fünf Jahre auf Zrzur"
+
+#: components/ui/components/features/profiles/badges/useBadgeText.ts
+msgid "Four Years on Zrzur"
+msgstr "Vier Jahre auf Zrzur"
+
+#: components/ui/components/features/profiles/badges/useBadgeText.ts
+msgid "Has been on Zrzur for eight years."
+msgstr "Seit acht Jahren auf Zrzur."
+
+#: components/ui/components/features/profiles/badges/useBadgeText.ts
+msgid "Has been on Zrzur for five years."
+msgstr "Seit fünf Jahren auf Zrzur."
+
+#: components/ui/components/features/profiles/badges/useBadgeText.ts
+msgid "Has been on Zrzur for four years."
+msgstr "Seit vier Jahren auf Zrzur."
+
+#: components/ui/components/features/profiles/badges/useBadgeText.ts
+msgid "Has been on Zrzur for nine years."
+msgstr "Seit neun Jahren auf Zrzur."
+
+#: components/ui/components/features/profiles/badges/useBadgeText.ts
+msgid "Has been on Zrzur for seven years."
+msgstr "Seit sieben Jahren auf Zrzur."
+
+#: components/ui/components/features/profiles/badges/useBadgeText.ts
+msgid "Has been on Zrzur for six years."
+msgstr "Seit sechs Jahren auf Zrzur."
+
+#: components/ui/components/features/profiles/badges/useBadgeText.ts
+msgid "Has been on Zrzur for ten years."
+msgstr "Seit zehn Jahren auf Zrzur."
+
+#: components/ui/components/features/profiles/badges/useBadgeText.ts
+msgid "Has been on Zrzur for two years."
+msgstr "Seit zwei Jahren auf Zrzur."
+
+#: components/ui/components/features/profiles/badges/useBadgeText.ts
+msgid "Nine Years on Zrzur"
+msgstr "Neun Jahre auf Zrzur"
+
+#: components/app/interface/settings/user/badges/BadgeAdmin.tsx
+msgid "No badge changes are waiting."
+msgstr "Keine Abzeichen-Änderungen warten."
+
+#: components/app/interface/settings/user/badges/BadgeAdmin.tsx
+msgid "No expiry"
+msgstr "Kein Ablauf"
+
+#: components/app/interface/settings/user/badges/BadgeAdmin.tsx
+msgid "Open a staff session"
+msgstr "Team-Sitzung öffnen"
+
+#: components/app/interface/settings/user/badges/BadgeAdmin.tsx
+msgid "Open staff session"
+msgstr "Sitzung öffnen"
+
+#: components/app/interface/settings/user/badges/BadgeAdmin.tsx
+msgid "Person"
+msgstr "Person"
+
+#: components/app/interface/settings/user/badges/BadgeAdmin.tsx
+msgid "Refuse"
+msgstr "Ablehnen"
+
+#: components/app/interface/settings/user/badges/BadgeAdmin.tsx
+msgid "Saved as a request: a second staff member must approve it."
+msgstr "Als Anfrage gespeichert: Ein zweites Teammitglied muss zustimmen."
+
+#: components/ui/components/features/profiles/badges/useBadgeText.ts
+msgid "Seven Years on Zrzur"
+msgstr "Sieben Jahre auf Zrzur"
+
+#: components/ui/components/features/profiles/badges/useBadgeText.ts
+msgid "Shown automatically for each full year of your account, counted in UTC; your profile shows the highest year. Hidden while you hide \"Member since\" on your profile."
+msgstr "Erscheint automatisch für jedes volle Jahr deines Kontos, gezählt in UTC; dein Profil zeigt das höchste erreichte Jahr. Ausgeblendet, solange du „Mitglied seit“ in deinem Profil ausblendest."
+
+#: components/ui/components/features/profiles/badges/useBadgeText.ts
+msgid "Shown for accounts created before 1 March 2027, 00:00 UTC. Hidden while you hide \"Member since\" on your profile."
+msgstr "Für Konten, die vor dem 1. März 2027, 00:00 UTC erstellt wurden. Ausgeblendet, solange du „Mitglied seit“ in deinem Profil ausblendest."
+
+#: components/ui/components/features/profiles/badges/useBadgeText.ts
+msgid "Six Years on Zrzur"
+msgstr "Sechs Jahre auf Zrzur"
+
+#: components/ui/components/features/profiles/badges/useBadgeText.ts
+msgid "Ten Years on Zrzur"
+msgstr "Zehn Jahre auf Zrzur"
+
+#: components/app/interface/settings/user/badges/BadgeAdmin.tsx
+msgid "This app may not open a staff session here, or the session ended. Use the admin console."
+msgstr "Diese App darf hier keine Team-Sitzung öffnen, oder die Sitzung ist abgelaufen. Nutze die Admin-Konsole."
+
+#: components/app/interface/settings/user/badges/BadgeAdmin.tsx
+msgid "This change is protected. Enter a new code from your authenticator app, then try again."
+msgstr "Diese Änderung ist geschützt. Gib einen neuen Code aus deiner Authentifizierungs-App ein und versuche es erneut."
+
+#: components/ui/components/features/profiles/badges/useBadgeText.ts
+msgid "Two Years on Zrzur"
+msgstr "Zwei Jahre auf Zrzur"
+
+#: components/app/interface/settings/user/badges/BadgeAdmin.tsx
+msgid "Waiting for a second staff member"
+msgstr "Wartet auf ein zweites Teammitglied"
+
+#: components/ui/components/features/profiles/badges/useBadgeText.ts
+msgid "An outstanding Zrzur Designs creator, chosen by the team."
+msgstr "Herausragende Designs-Creator, vom Team ausgewählt."
+
+#: components/ui/components/features/profiles/badges/useBadgeText.ts
+msgid "Complete a beta cycle with at least 3 reviewed feedback reports or 1 confirmed bug report; the team approves it after the cycle. It stays, but gives no beta access."
+msgstr "Schließe einen Beta-Zyklus mit mindestens 3 geprüften Feedbackberichten oder 1 bestätigten Fehlerbericht ab; das Team gibt es nach dem Zyklus frei. Bleibt, gibt aber keinen Beta-Zugang."
+
+#: components/ui/components/features/profiles/badges/useBadgeText.ts
+msgid "Completed a Zrzur beta cycle with real contributions."
+msgstr "Hat einen Zrzur-Beta-Zyklus mit echten Beiträgen abgeschlossen."
+
+#: components/ui/components/features/profiles/badges/useBadgeText.ts
+msgid "Designs and publishes profile designs in Zrzur Designs."
+msgstr "Gestaltet und veröffentlicht Profildesigns in Zrzur Designs."
+
+#: components/ui/components/features/profiles/badges/useBadgeText.ts
+msgid "Given after you join the Designs creator program and publish your first original, approved design. It stays for good unless the work was fraudulent or infringing. Making bots or videos doesn't count."
+msgstr "Nach Aufnahme ins Designs-Creator-Programm und deinem ersten eigenen, geprüften, veröffentlichten Design. Dauerhaft, außer das Werk war betrügerisch oder rechtsverletzend. Bots oder Videos zählen nicht."
+
+#: components/ui/components/features/profiles/badges/useBadgeText.ts
+msgid "Hold Creator, with at least 25 approved, original, published designs and 180 days in the creator program. 25 is only a minimum: the team chooses. Duplicates, simple recolours and copied assets don't count."
+msgstr "Creator-Abzeichen, mindestens 25 geprüfte, eigene, veröffentlichte Designs und mindestens 180 Tage im Creator-Programm. 25 ist nur das Minimum; das Team wählt aus. Duplikate, einfache Umfärbungen und kopierte Assets zählen nicht."
+
+#: components/ui/components/features/profiles/badges/useBadgeText.ts
+msgid "Own a server that reaches 1,000 genuine human members, counted as for Community Builder. It stays if the server gets smaller. It is not a partnership or a verification."
+msgstr "Besitze einen Server, der 1.000 echte menschliche Mitglieder erreicht, gezählt wie bei Community-Aufbau. Bleibt, wenn der Server kleiner wird. Weder Partnerschaft noch Verifizierung."
+
+#: components/ui/components/features/profiles/badges/useBadgeText.ts
+msgid "Own a server that reaches 100 genuine human members. Bots, deleted, banned or suspended accounts, accounts under 7 days old or without a confirmed e-mail, and people who joined less than a day ago don't count. Counted a few times a day; it stays if the server gets smaller."
+msgstr "Besitze einen Server, der 100 echte menschliche Mitglieder erreicht. Bots, gelöschte, gesperrte oder suspendierte Konten, Konten unter 7 Tagen oder ohne bestätigte E-Mail und Personen, die vor weniger als einem Tag beigetreten sind, zählen nicht. Mehrmals täglich gezählt; bleibt, wenn der Server kleiner wird."
+
+#: components/ui/components/features/profiles/badges/useBadgeText.ts
+msgid "Owns a server that reached 1,000 genuine human members."
+msgstr "Besitzt einen Server mit 1.000 echten menschlichen Mitgliedern."
+
+#: components/ui/components/features/profiles/badges/useBadgeText.ts
+msgid "Owns a server that reached 100 genuine human members."
+msgstr "Besitzt einen Server mit 100 echten menschlichen Mitgliedern."
+
+#. placeholder {0}: data()!.creator.super_creator_designs
+#. placeholder {1}: superCreatorDays()
+#: components/app/interface/settings/user/badges/MyBadges.tsx
+msgid "Super Creator is chosen by the team after at least {0} approved, published designs and {1} days in the creator program."
+msgstr "Super Creator wählt das Team ab mindestens {0} geprüften, veröffentlichten Designs und {1} Tagen im Creator-Programm aus."
+
+#: components/app/interface/settings/user/badges/MyBadges.tsx
+msgid "You completed the beta. The team approves Beta Veteran when you sent at least 3 reviewed feedback reports or 1 confirmed bug report during the cycle."
+msgstr "Du hast die Beta abgeschlossen. Beta-Veteran gibt das Team frei, wenn du im Zyklus mindestens 3 geprüfte Feedbackberichte oder 1 bestätigten Fehlerbericht gesendet hast."
+
+#: components/app/interface/settings/user/badges/ProgramDialog.tsx
+msgid "A DNS TXT record"
+msgstr "Ein DNS-TXT-Eintrag"
+
+#: components/app/interface/settings/user/badges/ProgramDialog.tsx
+msgid "A file on the website"
+msgstr "Eine Datei auf der Website"
+
+#: components/app/interface/settings/user/badges/useProgramText.ts
+msgid "A new check found the conditions are no longer met."
+msgstr "Eine neue Prüfung hat ergeben, dass die Bedingungen nicht mehr erfüllt sind."
+
+#: components/app/interface/settings/user/badges/ProgramDialog.tsx
+msgid "a person checks it"
+msgstr "eine Person prüft das"
+
+#. placeholder {0}: application()!.ownership!.record_name
+#: components/app/interface/settings/user/badges/ProgramDialog.tsx
+msgid "Add a TXT record named {0} with this value:"
+msgstr "Lege einen TXT-Eintrag namens {0} mit diesem Wert an:"
+
+#: components/app/interface/settings/user/badges/useProgramText.ts
+msgid "Add at most five links."
+msgstr "Füge höchstens fünf Links hinzu."
+
+#: components/app/interface/settings/user/badges/useProgramText.ts
+msgid "After a refusal, a new application has to wait."
+msgstr "Nach einer Ablehnung muss eine neue Bewerbung warten."
+
+#: components/app/interface/settings/user/badges/useProgramText.ts
+msgid "Another reason, written below."
+msgstr "Ein anderer Grund, unten beschrieben."
+
+#: components/app/interface/settings/user/badges/useProgramText.ts
+msgid "Anti-spam, anti-raid or account-security measures are missing."
+msgstr "Schutz vor Spam und Raids oder Maßnahmen zur Kontosicherheit fehlen."
+
+#: components/app/interface/settings/user/badges/MyApplications.tsx
+msgid "Appeal not accepted"
+msgstr "Einspruch nicht angenommen"
+
+#: components/app/interface/settings/user/badges/MyApplications.tsx
+msgid "Appeal sent"
+msgstr "Einspruch gesendet"
+
+#: components/app/interface/settings/user/badges/MyApplications.tsx
+msgid "Appeal the decision"
+msgstr "Gegen die Entscheidung Einspruch einlegen"
+
+#. placeholder {0}: date(application.reapply_after)
+#: components/app/interface/settings/user/badges/MyApplications.tsx
+msgid "Apply again from {0}"
+msgstr "Erneut bewerben ab {0}"
+
+#. placeholder {0}: words.program(props.program)
+#: components/app/interface/settings/user/badges/ProgramDialog.tsx
+msgid "Apply for {0}"
+msgstr "Bewerbung für {0}"
+
+#: components/app/interface/settings/user/badges/MyBadges.tsx
+msgid "Check and apply"
+msgstr "Prüfen und bewerben"
+
+#: components/app/interface/settings/user/badges/ProgramDialog.tsx
+msgid "Check now"
+msgstr "Jetzt prüfen"
+
+#: components/app/interface/settings/user/badges/ProgramDialog.tsx
+msgid "Choose…"
+msgstr "Auswählen…"
+
+#: components/app/interface/settings/user/badges/useProgramText.ts
+msgid "Confirm that you may represent it before you send."
+msgstr "Bestätige vor dem Senden, dass du es vertreten darfst."
+
+#. placeholder {0}: application()!.ownership!.domain
+#: components/app/interface/settings/user/badges/ProgramDialog.tsx
+msgid "Control of {0} is proven."
+msgstr "Die Kontrolle über {0} ist nachgewiesen."
+
+#: components/app/interface/settings/user/badges/useProgramText.ts
+msgid "Control of the named website, domain or account was not proven."
+msgstr "Die Kontrolle über die genannte Website, Domain oder das Konto wurde nicht nachgewiesen."
+
+#: components/app/interface/settings/user/badges/useProgramText.ts
+msgid "Control of the official website or domain is proven"
+msgstr "Die Kontrolle über die offizielle Website oder Domain ist nachgewiesen"
+
+#: components/app/interface/settings/user/badges/useProgramText.ts
+msgid "Days since the bot was made: {value} of {needed}"
+msgstr "Tage seit Erstellung des Bots: {value} von {needed}"
+
+#: components/app/interface/settings/user/badges/useProgramText.ts
+msgid "Days since the server was made: {value} of {needed}"
+msgstr "Tage seit Erstellung des Servers: {value} von {needed}"
+
+#. placeholder {0}: date(application.decided_at)
+#: components/app/interface/settings/user/badges/MyApplications.tsx
+msgid "Decided {0}"
+msgstr "Entschieden am {0}"
+
+#: components/app/interface/settings/user/badges/ProgramDialog.tsx
+msgid "Domain"
+msgstr "Domain"
+
+#: components/app/interface/settings/user/badges/useProgramText.ts
+msgid "Ended"
+msgstr "Beendet"
+
+#: components/app/interface/settings/user/badges/useProgramText.ts
+msgid "Enter a domain name such as example.com, without https:// or a path."
+msgstr "Gib einen Domainnamen wie example.com ein, ohne https:// und ohne Pfad."
+
+#: components/app/interface/settings/user/badges/useProgramText.ts
+msgid "Genuine human members: {value} of {needed}"
+msgstr "Echte menschliche Mitglieder: {value} von {needed}"
+
+#: components/app/interface/settings/user/badges/ProgramDialog.tsx
+msgid "Get a code"
+msgstr "Code anfordern"
+
+#: components/app/interface/settings/user/badges/ProgramDialog.tsx
+msgid "How"
+msgstr "Wie"
+
+#: components/app/interface/settings/user/badges/ProgramDialog.tsx
+msgid "I may represent this and everything I write is true."
+msgstr "Ich darf es vertreten, und alles, was ich schreibe, ist wahr."
+
+#. placeholder {0}: date(application()!.ownership!.expires_at)
+#: components/app/interface/settings/user/badges/ProgramDialog.tsx
+msgid "It is shown only now and works until {0}."
+msgstr "Er wird nur jetzt angezeigt und gilt bis {0}."
+
+#: components/app/interface/settings/user/badges/useProgramText.ts
+msgid "Links must start with https:// and point to a public website."
+msgstr "Links müssen mit https:// beginnen und auf eine öffentliche Website zeigen."
+
+#: components/app/interface/settings/user/badges/ProgramDialog.tsx
+msgid "Meeting the numbers only lets you apply. A person on the Zrzur team reviews every application. Zrzur is run by volunteers, so we can't promise when."
+msgstr "Die Zahlen erlauben nur die Bewerbung. Eine Person aus dem Zrzur-Team prüft jede Bewerbung. Zrzur wird von Freiwilligen betrieben, daher können wir keinen Zeitpunkt versprechen."
+
+#: components/app/interface/settings/user/badges/useProgramText.ts
+msgid "More information needed"
+msgstr "Mehr Angaben nötig"
+
+#: components/app/interface/settings/user/badges/ProgramDialog.tsx
+msgid "Never send identity documents. Only you and the reviewers see what you write here; it is never published, and it is deleted 90 days after the final decision."
+msgstr "Sende nie Ausweisdokumente. Was du hier schreibst, sehen nur du und die prüfenden Personen; es wird nie veröffentlicht und 90 Tage nach der endgültigen Entscheidung gelöscht."
+
+#: components/app/interface/settings/user/badges/useProgramText.ts
+msgid "New members still here after their first week: {value}% of {needed}%"
+msgstr "Neue Mitglieder, die nach der ersten Woche noch da sind: {value} % von {needed} %"
+
+#: components/app/interface/settings/user/badges/useProgramText.ts
+msgid "New members still here after their first week: not enough joins yet, a person checks it"
+msgstr "Neue Mitglieder, die nach der ersten Woche noch da sind: noch zu wenige Beitritte, eine Person prüft das"
+
+#. placeholder {0}: date(application.next_review_at)
+#: components/app/interface/settings/user/badges/MyApplications.tsx
+msgid "Next check around {0}"
+msgstr "Nächste Prüfung etwa am {0}"
+
+#: components/app/interface/settings/user/badges/useProgramText.ts
+msgid "No sudden burst of joins or new accounts"
+msgstr "Kein plötzlicher Schub an Beitritten oder neuen Konten"
+
+#: components/app/interface/settings/user/badges/useProgramText.ts
+msgid "Not approved"
+msgstr "Nicht angenommen"
+
+#: components/app/interface/settings/user/badges/useProgramText.ts
+msgid "Not every line of the checklist is met yet."
+msgstr "Noch ist nicht jede Zeile der Checkliste erfüllt."
+
+#: components/app/interface/settings/user/badges/ProgramDialog.tsx
+msgid "Only the owner of a bot can apply. You don't own a bot yet."
+msgstr "Nur die Inhaberin oder der Inhaber eines Bots kann sich bewerben. Du besitzt noch keinen Bot."
+
+#: components/app/interface/settings/user/badges/ProgramDialog.tsx
+msgid "Only the owner of a server can apply. You don't own a server yet."
+msgstr "Nur die Inhaberin oder der Inhaber eines Servers kann sich bewerben. Du besitzt noch keinen Server."
+
+#: components/app/interface/settings/user/badges/ProgramDialog.tsx
+msgid "Prove you control the official domain"
+msgstr "Weise nach, dass du die offizielle Domain kontrollierst"
+
+#: components/app/interface/settings/user/badges/ProgramDialog.tsx
+msgid "Public links, one per line (website, rules page)"
+msgstr "Öffentliche Links, einer pro Zeile (Website, Regelseite)"
+
+#. placeholder {0}: application()!.ownership!.file_url
+#: components/app/interface/settings/user/badges/ProgramDialog.tsx
+msgid "Put this value in a file at {0}:"
+msgstr "Lege diesen Wert in einer Datei unter {0} ab:"
+
+#: components/app/interface/settings/user/badges/MyApplications.tsx
+msgid "Reviews happen when a volunteer is free; there is no promised date. Only you and the reviewers see what you sent."
+msgstr "Geprüft wird, sobald eine freiwillige Person Zeit hat; ein Datum versprechen wir nicht. Was du gesendet hast, sehen nur du und die prüfenden Personen."
+
+#: components/app/interface/settings/user/badges/ProgramDialog.tsx
+msgid "Send application"
+msgstr "Bewerbung senden"
+
+#: components/app/interface/settings/user/badges/ProgramDialog.tsx
+msgid "Sent. A volunteer on the team reviews it when they can; you will get a message with the decision and its reasons."
+msgstr "Gesendet. Eine freiwillige Person aus dem Team prüft sie, sobald sie kann; du bekommst eine Nachricht mit der Entscheidung und den Gründen."
+
+#: components/app/interface/settings/user/badges/useProgramText.ts
+msgid "Servers that count: {value} of {needed}"
+msgstr "Zählende Server: {value} von {needed}"
+
+#: components/app/interface/settings/user/badges/useProgramText.ts
+msgid "Some information is missing to decide."
+msgstr "Für eine Entscheidung fehlen Angaben."
+
+#: components/app/interface/settings/user/badges/useProgramText.ts
+msgid "Something changed meanwhile. Reload and try again."
+msgstr "Inzwischen hat sich etwas geändert. Lade neu und versuche es noch einmal."
+
+#: components/app/interface/settings/user/badges/useProgramText.ts
+msgid "The 30 days to appeal have passed."
+msgstr "Die 30 Tage für einen Einspruch sind vorbei."
+
+#: components/app/interface/settings/user/badges/useProgramText.ts
+msgid "The bot asks for permissions it does not need for what it does."
+msgstr "Der Bot verlangt Berechtigungen, die er für seine Aufgabe nicht braucht."
+
+#: components/app/interface/settings/user/badges/useProgramText.ts
+msgid "The bot has harmful commands, collects data it may not, or deceives people."
+msgstr "Der Bot hat schädliche Befehle, sammelt unzulässig Daten oder täuscht Menschen."
+
+#: components/app/interface/settings/user/badges/useProgramText.ts
+msgid "The bot is not suspended"
+msgstr "Der Bot ist nicht gesperrt"
+
+#: components/app/interface/settings/user/badges/useProgramText.ts
+msgid "The bot processes user data but its privacy policy is missing or unclear."
+msgstr "Der Bot verarbeitet Nutzerdaten, aber seine Datenschutzerklärung fehlt oder ist unklar."
+
+#: components/app/interface/settings/user/badges/useProgramText.ts
+msgid "The bot was deleted."
+msgstr "Der Bot wurde gelöscht."
+
+#: components/app/interface/settings/user/badges/useProgramText.ts
+msgid "The bot was suspended."
+msgstr "Der Bot wurde gesperrt."
+
+#: components/app/interface/settings/user/badges/useProgramText.ts
+msgid "The bot's description is not clear or not accurate."
+msgstr "Die Beschreibung des Bots ist unklar oder nicht zutreffend."
+
+#: components/app/interface/settings/user/badges/useProgramText.ts
+msgid "The bot's servers were inflated with servers that do not count."
+msgstr "Die Server des Bots wurden mit Servern aufgebläht, die nicht zählen."
+
+#: components/app/interface/settings/user/badges/useProgramText.ts
+msgid "The code was not found yet. DNS changes can take a while; try again later."
+msgstr "Der Code wurde noch nicht gefunden. DNS-Änderungen können dauern; versuche es später noch einmal."
+
+#: components/app/interface/settings/user/badges/useProgramText.ts
+msgid "The name or branding is not the entity's own."
+msgstr "Name oder Branding gehören nicht zur Stelle selbst."
+
+#: components/app/interface/settings/user/badges/useProgramText.ts
+msgid "The numbers on the badge page are not met any more."
+msgstr "Die Zahlen auf der Abzeichenseite sind nicht mehr erfüllt."
+
+#: components/app/interface/settings/user/badges/useProgramText.ts
+msgid "The published criteria are met."
+msgstr "Die veröffentlichten Kriterien sind erfüllt."
+
+#: components/app/interface/settings/user/badges/useProgramText.ts
+msgid "The server has no published rules, or they are too thin."
+msgstr "Der Server hat keine veröffentlichten Regeln, oder sie reichen nicht aus."
+
+#: components/app/interface/settings/user/badges/useProgramText.ts
+msgid "The server or bot exists"
+msgstr "Der Server oder Bot existiert"
+
+#: components/app/interface/settings/user/badges/useProgramText.ts
+msgid "The server or bot has a new owner."
+msgstr "Der Server oder Bot hat einen neuen Inhaber."
+
+#: components/app/interface/settings/user/badges/useProgramText.ts
+msgid "The server was deleted."
+msgstr "Der Server wurde gelöscht."
+
+#: components/app/interface/settings/user/badges/useProgramText.ts
+msgid "The server's purpose is not clear from what the team saw."
+msgstr "Der Zweck des Servers ist aus dem, was das Team gesehen hat, nicht klar."
+
+#: components/app/interface/settings/user/badges/useProgramText.ts
+msgid "The team could not confirm that the server officially represents the entity."
+msgstr "Das Team konnte nicht bestätigen, dass der Server die Stelle offiziell vertritt."
+
+#: components/app/interface/settings/user/badges/useProgramText.ts
+msgid "The team could not use a working feature of the bot."
+msgstr "Das Team konnte keine funktionierende Funktion des Bots nutzen."
+
+#: components/app/interface/settings/user/badges/useProgramText.ts
+msgid "The team did not see active, accountable moderation."
+msgstr "Das Team hat keine aktive, verantwortliche Moderation gesehen."
+
+#: components/app/interface/settings/user/badges/useProgramText.ts
+msgid "The team found signs of bought members or fake activity."
+msgstr "Das Team hat Hinweise auf gekaufte Mitglieder oder gefälschte Aktivität gefunden."
+
+#: components/app/interface/settings/user/badges/useProgramText.ts
+msgid "The team took the mark away."
+msgstr "Das Team hat das Kennzeichen entfernt."
+
+#: components/app/interface/settings/user/badges/useProgramText.ts
+msgid "There are unresolved serious safety violations."
+msgstr "Es gibt offene schwere Sicherheitsverstöße."
+
+#: components/app/interface/settings/user/badges/useProgramText.ts
+msgid "There is already an open application for this."
+msgstr "Dafür gibt es schon eine offene Bewerbung."
+
+#: components/app/interface/settings/user/badges/useProgramText.ts
+msgid "This already has the badge or mark."
+msgstr "Das hat das Abzeichen oder Kennzeichen bereits."
+
+#: components/app/interface/settings/user/badges/useProgramText.ts
+msgid "This application can't be changed now."
+msgstr "Diese Bewerbung kann jetzt nicht geändert werden."
+
+#: components/app/interface/settings/user/badges/useProgramText.ts
+msgid "This code has expired. Ask for a new one."
+msgstr "Dieser Code ist abgelaufen. Fordere einen neuen an."
+
+#: components/app/interface/settings/user/badges/useProgramText.ts
+msgid "Verified Server"
+msgstr "Verifizierter Server"
+
+#: components/app/interface/settings/user/badges/ProgramDialog.tsx
+msgid "We are an official organisation below the member numbers. A senior team member and a second person decide, with documented proof; being well known is not proof."
+msgstr "Wir sind eine offizielle Stelle unter den Mitgliederzahlen. Eine erfahrene Person aus dem Team und eine zweite Person entscheiden anhand belegter Nachweise; Bekanntheit ist kein Nachweis."
+
+#: components/app/interface/settings/user/badges/useProgramText.ts
+msgid "Weekly active members on average: {value} of {needed}"
+msgstr "Wöchentlich aktive Mitglieder im Schnitt: {value} von {needed}"
+
+#: components/app/interface/settings/user/badges/useProgramText.ts
+msgid "Weekly contributors on average: {value} of {needed}"
+msgstr "Wöchentlich Beitragende im Schnitt: {value} von {needed}"
+
+#: components/app/interface/settings/user/badges/useProgramText.ts
+msgid "Weeks of activity measured: {value} of {needed}"
+msgstr "Gemessene Aktivitätswochen: {value} von {needed}"
+
+#: components/app/interface/settings/user/badges/ProgramDialog.tsx
+msgid "What is it, and why does it fit this program?"
+msgstr "Was ist es, und warum passt es zu diesem Programm?"
+
+#: components/app/interface/settings/user/badges/ProgramDialog.tsx
+msgid "What the server measured"
+msgstr "Was Zrzur gemessen hat"
+
+#: components/app/interface/settings/user/badges/MyApplications.tsx
+msgid "Withdraw the application"
+msgstr "Bewerbung zurückziehen"
+
+#: components/app/interface/settings/user/badges/useProgramText.ts
+msgid "You already appealed this decision."
+msgstr "Gegen diese Entscheidung hast du bereits Einspruch eingelegt."
+
+#: components/app/interface/settings/user/badges/useProgramText.ts
+msgid "You are 18 or older"
+msgstr "Du bist 18 oder älter"
+
+#: components/app/interface/settings/user/badges/useProgramText.ts
+msgid "You are its owner"
+msgstr "Du bist Inhaberin oder Inhaber"
+
+#: components/app/interface/settings/user/badges/MyApplications.tsx
+msgid "You can appeal once. Say what the team missed or what changed; a person reads it."
+msgstr "Du kannst einmal Einspruch einlegen. Schreib, was das Team übersehen hat oder was sich geändert hat; eine Person liest es."
+
+#. placeholder {0}: date(application.appeal_until)
+#: components/app/interface/settings/user/badges/MyApplications.tsx
+msgid "You can appeal until {0}"
+msgstr "Einspruch möglich bis {0}"
+
+#. placeholder {0}: date(checklist()!.blocked_until)
+#: components/app/interface/settings/user/badges/ProgramDialog.tsx
+msgid "You can apply again from {0}."
+msgstr "Du kannst dich ab {0} erneut bewerben."
+
+#: components/app/interface/settings/user/badges/useProgramText.ts
+msgid "You have three open applications. Finish or withdraw one first."
+msgstr "Du hast drei offene Bewerbungen. Schließe zuerst eine ab oder ziehe sie zurück."
+
+#: components/app/interface/settings/user/badges/MyApplications.tsx
+msgid "Your appeal"
+msgstr "Dein Einspruch"
+
+#: components/app/interface/settings/user/badges/MyApplications.tsx
+msgid "Your applications"
+msgstr "Deine Bewerbungen"
+
+#: components/app/interface/settings/user/badges/ProgramDialog.tsx
+msgid "Your bot"
+msgstr "Dein Bot"
+
+#: components/app/interface/settings/user/badges/useProgramText.ts
+msgid "Your e-mail address is confirmed"
+msgstr "Deine E-Mail-Adresse ist bestätigt"
+
+#: components/app/interface/settings/user/badges/ProgramDialog.tsx
+msgid "Your server"
+msgstr "Dein Server"
+
+#: src/interface/badgeGuide/useBadgeGuide.ts
+msgid "25 is only a minimum: the team chooses. Duplicates, simple recolours and copied assets do not count."
+msgstr "25 ist nur das Minimum; das Team wählt aus. Duplikate, einfache Umfärbungen und kopierte Assets zählen nicht."
+
+#: src/interface/badgeGuide/useBadgeGuide.ts
+msgid "A badge can be removed if it was obtained by fraud, fake members or engagement, impersonation, stolen work, or a serious rule violation."
+msgstr "Ein Abzeichen kann entzogen werden, wenn es durch Betrug, gefälschte Mitglieder oder Interaktionen, Identitätsmissbrauch, gestohlene Werke oder einen schweren Regelverstoß erlangt wurde."
+
+#: src/interface/badgeGuide/useBadgeGuide.ts
+msgid "A badge means only what this page says. It is not an endorsement and not a guarantee of quality or safety."
+msgstr "Ein Abzeichen bedeutet nur, was auf dieser Seite steht. Es ist keine Empfehlung und keine Garantie für Qualität oder Sicherheit."
+
+#: src/interface/badgeGuide/useBadgeGuide.ts
+msgid "A check in the Bot label of a bot that passed the Verified Bot review."
+msgstr "Ein Häkchen im Bot-Label eines Bots, der die Prüfung zur Verifizierung bestanden hat."
+
+#: src/interface/badgeGuide/useBadgeGuide.ts
+msgid "A clear and accurate description, at least one working feature, a privacy policy if it handles user data, and permissions that fit what it does."
+msgstr "Eine klare und zutreffende Beschreibung, mindestens eine funktionierende Funktion, eine Datenschutzerklärung bei Nutzerdaten und Berechtigungen, die zur Aufgabe passen."
+
+#: src/interface/badgeGuide/useBadgeGuide.ts
+msgid "A clear purpose, published rules, active moderation and protection against spam and raids; no bought members or fake engagement."
+msgstr "Ein klarer Zweck, veröffentlichte Regeln, aktive Moderation und Schutz vor Spam und Raids; keine gekauften Mitglieder oder gefälschte Interaktion."
+
+#: src/interface/badgeGuide/useBadgeGuide.ts
+msgid "A meaningful, verified technical contribution to Zrzur itself, or an approved official development role."
+msgstr "Ein bedeutender, geprüfter technischer Beitrag zu Zrzur selbst oder eine genehmigte offizielle Entwicklerrolle."
+
+#: components/app/interface/settings/user/badges/useProgramText.ts
+msgid "A person on the team looks for the code on your channel after you send the application."
+msgstr "Eine Person im Team sucht den Code auf deinem Kanal, nachdem du die Bewerbung gesendet hast."
+
+#: components/app/interface/settings/user/badges/useProgramText.ts
+msgid "A reviewer found your code on the channel"
+msgstr "Eine prüfende Person hat deinen Code auf dem Kanal gefunden"
+
+#: src/interface/badgeGuide/useBadgeGuide.ts
+msgid "A server run by the Zrzur team itself. Set only by Zrzur, never by application."
+msgstr "Ein Server, den das Zrzur-Team selbst betreibt. Nur von Zrzur gesetzt, nie auf Antrag."
+
+#: src/interface/badgeGuide/useBadgeGuide.ts
+msgid "Accepted into the closed beta and following its rules and confidentiality."
+msgstr "In die geschlossene Beta aufgenommen und an ihre Regeln und Vertraulichkeit gebunden."
+
+#: src/interface/badgeGuide/useBadgeGuide.ts
+msgid "Accepted into the Zrzur Designs creator program, with a first original, approved, published design."
+msgstr "Aufnahme ins Creator-Programm von Zrzur Designs, mit einem ersten eigenen, geprüften, veröffentlichten Design."
+
+#: src/interface/badgeGuide/useBadgeGuide.ts
+msgid "Achievements"
+msgstr "Erfolge"
+
+#: components/app/interface/settings/user/badges/useProgramText.ts
+msgid "Add at most ten links to works."
+msgstr "Füge höchstens zehn Links zu Werken hinzu."
+
+#: components/app/interface/settings/user/badges/useProgramText.ts
+msgid "Add the address of your channel first."
+msgstr "Gib zuerst die Adresse deines Kanals an."
+
+#: components/app/interface/settings/user/badges/ProgramDialog.tsx
+msgid "Address of the channel or profile"
+msgstr "Adresse des Kanals oder Profils"
+
+#: src/interface/badgeGuide/useBadgeGuide.ts
+msgid "After approval the bot shows a check in its Bot label. It ends if the bot changes hands, is suspended or is deleted."
+msgstr "Danach zeigt der Bot ein Häkchen im Bot-Label. Es endet, wenn der Bot den Besitzer wechselt, gesperrt oder gelöscht wird."
+
+#: src/interface/badgeGuide/useBadgeGuide.ts
+msgid "Already a Bug Hunter, with at least 10 confirmed reports or one verified serious security vulnerability; the reviewer sets the severity."
+msgstr "Bereits Fehlerjagd, mit mindestens 10 bestätigten Berichten oder einer geprüften schweren Sicherheitslücke; den Schweregrad legt die prüfende Person fest."
+
+#: src/interface/badgeGuide/useBadgeGuide.ts
+msgid "An officially appointed member of the Zrzur team, with a recorded appointment."
+msgstr "Ein offiziell ernanntes Mitglied des Zrzur-Teams mit dokumentierter Ernennung."
+
+#: components/app/interface/settings/user/badges/useProgramText.ts
+msgid "Another platform"
+msgstr "Andere Plattform"
+
+#: src/interface/badgeGuide/useBadgeGuide.ts
+msgid "Appeal within 30 days; apply again after 90 days, or at once if only information was missing."
+msgstr "Einspruch innerhalb von 30 Tagen; neue Bewerbung nach 90 Tagen oder sofort, wenn nur Angaben fehlten."
+
+#: components/ui/components/features/profiles/badges/useBadgeText.ts
+msgid "Apply with one channel or profile that has at least 100,000 real followers on that one platform, 90 days of activity and 5 substantial original works in the last 90 days (or a regular livestream schedule). The team checks the channel is yours and reviews the quality; a second person approves."
+msgstr "Bewirb dich mit einem Kanal oder Profil, das auf dieser einen Plattform mindestens 100.000 echte Follower, 90 Tage Aktivität und 5 substanzielle eigene Werke in den letzten 90 Tagen (oder einen regelmäßigen Livestream-Plan) hat. Das Team prüft, ob der Kanal dir gehört, und bewertet die Qualität; eine zweite Person gibt frei."
+
+#: components/app/interface/settings/user/badges/useProgramText.ts
+msgid "Art"
+msgstr "Kunst"
+
+#. placeholder {0}: count(needed)
+#: components/app/interface/settings/user/badges/useProgramText.ts
+msgid "At least {0} real followers on that one platform"
+msgstr "Mindestens {0} echte Follower auf dieser einen Plattform"
+
+#: components/app/interface/settings/user/badges/useProgramText.ts
+msgid "At least {needed} days of active publishing"
+msgstr "Mindestens {needed} Tage aktive Veröffentlichung"
+
+#: components/app/interface/settings/user/badges/useProgramText.ts
+msgid "At least {needed} substantial original works in the last 90 days, or a regular livestream schedule"
+msgstr "Mindestens {needed} substanzielle eigene Werke in den letzten 90 Tagen oder ein regelmäßiger Livestream-Plan"
+
+#: src/interface/badgeGuide/useBadgeGuide.ts
+msgid "At least 10,000 genuine human members and 180 days. A clearly official entity may qualify below these numbers with a senior approval and a second person."
+msgstr "Mindestens 10.000 echte menschliche Mitglieder und 180 Tage. Eine eindeutig offizielle Stelle kann mit Freigabe auf höherer Ebene und einer zweiten Person auch darunter verifiziert werden."
+
+#: src/interface/badgeGuide/useBadgeGuide.ts
+msgid "At least 100,000 real followers or subscribers on ONE platform; platforms are not added together."
+msgstr "Mindestens 100.000 echte Follower oder Abonnenten auf EINER Plattform; Plattformen werden nicht addiert."
+
+#: src/interface/badgeGuide/useBadgeGuide.ts
+msgid "At least 5,000 genuine human members and a server at least 180 days old."
+msgstr "Mindestens 5.000 echte menschliche Mitglieder und ein Server, der mindestens 180 Tage alt ist."
+
+#: src/interface/badgeGuide/useBadgeGuide.ts
+msgid "At least 90 days of active publishing, and at least 5 substantial original works in the last 90 days or an equivalent regular livestream schedule."
+msgstr "Mindestens 90 Tage aktive Veröffentlichung und mindestens 5 substanzielle eigene Werke in den letzten 90 Tagen oder ein gleichwertiger regelmäßiger Livestream-Plan."
+
+#: components/app/interface/settings/user/badges/useProgramText.ts
+msgid "Authenticity: the review found signs of bought followers or coordinated fake engagement."
+msgstr "Echtheit: Die Prüfung hat Hinweise auf gekaufte Follower oder koordinierte Fake-Interaktion gefunden."
+
+#: src/interface/badgeGuide/useBadgeGuide.ts
+msgid "Automatic and permanent. Hidden while you hide \"Member since\" on your profile."
+msgstr "Automatisch und dauerhaft. Ausgeblendet, solange du „Mitglied seit“ in deinem Profil ausblendest."
+
+#: components/ui/components/features/profiles/badges/useBadgeText.ts
+msgid "Awarded to established creators of original, high-quality content who meet Zrzur's verification and quality standards."
+msgstr "Wird etablierten Creatorn verliehen, die hochwertige, eigene Inhalte erstellen und die Qualitäts- und Verifizierungsanforderungen von Zrzur erfüllen."
+
+#: src/interface/badgeGuide/useBadgeGuide.ts
+msgid "Bots never count as members, and bot accounts cannot hold profile badges."
+msgstr "Bots zählen nie als Mitglieder, und Bot-Konten tragen keine Profilabzeichen."
+
+#: src/interface/badgeGuide/useBadgeGuide.ts
+msgid "Bots, deleted, banned or suspended accounts, new accounts and manipulated joins do not count."
+msgstr "Bots, gelöschte, gesperrte oder suspendierte Konten, neue Konten und manipulierte Beitritte zählen nicht."
+
+#: src/interface/badgeGuide/useBadgeGuide.ts
+msgid "Building your own bot does not qualify."
+msgstr "Ein eigener Bot reicht nicht."
+
+#: src/interface/badgeGuide/BadgeGuide.tsx
+msgid "By application"
+msgstr "Auf Antrag"
+
+#: components/app/interface/settings/user/badges/useProgramText.ts
+msgid "Choose the kind of content you make."
+msgstr "Wähle die Art der Inhalte, die du machst."
+
+#: components/app/interface/settings/user/badges/useProgramText.ts
+msgid "Choose the platform of your channel."
+msgstr "Wähle die Plattform deines Kanals."
+
+#: components/app/interface/settings/user/badges/useProgramText.ts
+msgid "Comedy and entertainment"
+msgstr "Comedy und Unterhaltung"
+
+#: components/app/interface/settings/user/badges/useProgramText.ts
+msgid "Commentary"
+msgstr "Kommentar"
+
+#: src/interface/badgeGuide/useBadgeGuide.ts
+msgid "Completed a beta cycle with at least 3 reviewed feedback reports or 1 confirmed bug report; the team approves it after the cycle."
+msgstr "Einen Beta-Zyklus mit mindestens 3 geprüften Feedbackberichten oder 1 bestätigten Fehlerbericht abgeschlossen; das Team gibt nach dem Zyklus frei."
+
+#: components/app/interface/settings/user/badges/useProgramText.ts
+msgid "Consistency: the channel rests on one viral upload rather than regular work."
+msgstr "Beständigkeit: Der Kanal beruht auf einem einzelnen viralen Upload statt auf regelmäßiger Arbeit."
+
+#: components/app/interface/settings/user/badges/useProgramText.ts
+#: components/ui/components/features/profiles/badges/useBadgeText.ts
+msgid "Content Creator"
+msgstr "Content Creator"
+
+#: src/interface/badgeGuide/useBadgeGuide.ts
+msgid "Control of the official domain, proven with a DNS TXT record or a file on the website. Claiming to be famous is not proof."
+msgstr "Kontrolle über die offizielle Domain, nachgewiesen per DNS-TXT-Eintrag oder Datei auf der Website. Bekanntheit zu behaupten ist kein Beleg."
+
+#: components/app/interface/settings/user/badges/useProgramText.ts
+msgid "Creative production"
+msgstr "Kreative Produktion"
+
+#. placeholder {0}: changed()
+#: src/interface/badgeGuide/BadgeGuide.tsx
+msgid "Criteria last changed on {0}."
+msgstr "Kriterien zuletzt geändert am {0}."
+
+#: components/app/interface/settings/user/badges/useProgramText.ts
+msgid "Days active: {value} of {needed}"
+msgstr "Aktive Tage: {value} von {needed}"
+
+#: components/app/interface/settings/user/badges/useProgramText.ts
+msgid "Describe your livestream schedule in at most 500 characters."
+msgstr "Beschreibe deinen Livestream-Plan in höchstens 500 Zeichen."
+
+#: src/interface/badgeGuide/useBadgeGuide.ts
+msgid "Designs creators"
+msgstr "Designs-Creator"
+
+#: src/interface/badgeGuide/useBadgeGuide.ts
+msgid "Duplicates, invalid or made-up reports do not count; report security issues privately."
+msgstr "Duplikate, ungültige oder erfundene Berichte zählen nicht; Sicherheitslücken privat melden."
+
+#: components/app/interface/settings/user/badges/useProgramText.ts
+msgid "Effort: the works show little real effort, for example repetitive content made to collect views."
+msgstr "Aufwand: Die Werke zeigen wenig echten Aufwand, zum Beispiel wiederholte Inhalte, um Aufrufe zu sammeln."
+
+#: components/app/interface/settings/user/badges/useProgramText.ts
+msgid "Film"
+msgstr "Film"
+
+#. placeholder {0}: count(value)
+#. placeholder {1}: count(needed)
+#: components/app/interface/settings/user/badges/useProgramText.ts
+msgid "Followers the reviewer saw: {0} of {1}"
+msgstr "Follower, die die prüfende Person gesehen hat: {0} von {1}"
+
+#: src/interface/badgeGuide/useBadgeGuide.ts
+msgid "For creators of educational, technology, gaming and livestream, tutorial, creative, comedy, art, film, commentary and other legitimate content, on any platform."
+msgstr "Für Creator von Bildungs-, Technik-, Gaming- und Livestream-, Tutorial-, Kreativ-, Comedy-, Kunst-, Film-, Kommentar- und anderen legitimen Inhalten auf jeder Plattform."
+
+#: src/interface/badgeGuide/useBadgeGuide.ts
+msgid "Formally appointed to platform-level moderation, after accepting the moderation rules and the team's conduct requirements."
+msgstr "Offiziell für die Moderation auf Plattformebene ernannt, nach Bestätigung der Moderationsregeln und der Verhaltensanforderungen des Teams."
+
+#: components/app/interface/settings/user/badges/ProgramDialog.tsx
+msgid "Get a new code"
+msgstr "Neuen Code holen"
+
+#: src/interface/badgeGuide/BadgeGuide.tsx
+msgid "Given by the team"
+msgstr "Vom Team vergeben"
+
+#: src/interface/badgeGuide/useBadgeGuide.ts
+msgid "Given by the team to people who help others with constructive support; spam, copied or misleading answers earn nothing."
+msgstr "Vom Team vergeben an Menschen, die anderen konstruktiv helfen; Spam, kopierte oder irreführende Antworten zählen nicht."
+
+#: src/interface/badgeGuide/useBadgeGuide.ts
+msgid "Hold Creator, with at least 25 approved, original, published designs and 180 days in the creator program."
+msgstr "Creator-Abzeichen, mindestens 25 geprüfte, eigene, veröffentlichte Designs und 180 Tage im Creator-Programm."
+
+#: components/app/interface/settings/user/badges/useProgramText.ts
+msgid "Honesty: systematic misleading clickbait, impersonation or false claims."
+msgstr "Ehrlichkeit: systematisch irreführender Clickbait, Identitätsmissbrauch oder falsche Behauptungen."
+
+#: components/app/interface/settings/user/badges/MyBadges.tsx
+msgid "How every badge is earned"
+msgstr "Wie man jedes Abzeichen erhält"
+
+#: src/interface/badgeGuide/useBadgeGuide.ts
+msgid "It ends when the subscription ends or after a full refund."
+msgstr "Endet mit dem Abo oder nach vollständiger Erstattung."
+
+#: src/interface/badgeGuide/useBadgeGuide.ts
+msgid "It is not a partnership or a verification."
+msgstr "Es ist weder eine Partnerschaft noch eine Verifizierung."
+
+#: src/interface/badgeGuide/useBadgeGuide.ts
+msgid "Kept as recognition unless obtained by fraud."
+msgstr "Bleibt als Anerkennung, außer bei Betrug."
+
+#: components/app/interface/settings/user/badges/ProgramDialog.tsx
+msgid "Kind of content"
+msgstr "Art der Inhalte"
+
+#: components/app/interface/settings/user/badges/ProgramDialog.tsx
+msgid "Links to at least 5 original works from the last 90 days, one per line"
+msgstr "Links zu mindestens 5 eigenen Werken aus den letzten 90 Tagen, einer pro Zeile"
+
+#: components/app/interface/settings/user/badges/useProgramText.ts
+msgid "Livestreaming"
+msgstr "Livestreaming"
+
+#: components/app/interface/settings/user/badges/ProgramDialog.tsx
+msgid "Name of the platform"
+msgstr "Name der Plattform"
+
+#: src/interface/badgeGuide/useBadgeGuide.ts
+msgid "Never automatic. The badge stays while you own the verified server and ends if the server changes hands."
+msgstr "Nie automatisch. Das Abzeichen bleibt, solange dir der verifizierte Server gehört, und endet bei einem Eigentümerwechsel."
+
+#: src/interface/badgeGuide/useBadgeGuide.ts
+msgid "No malicious commands, token theft, deception or inflated installs. 25 servers only unlock the application; a review decides."
+msgstr "Keine schädlichen Befehle, kein Token-Diebstahl, keine Täuschung, keine künstlich erhöhten Installationen. 25 Server schalten nur den Antrag frei; eine Prüfung entscheidet."
+
+#: src/interface/badgeGuide/useBadgeGuide.ts
+msgid "Not eligible: mass reposts without an original contribution, repetitive low-effort view farming, stolen or impersonated identities, bought followers or coordinated fake engagement, systematically misleading or fraudulent content, serious repeated rule violations. A genre (comedy, gaming, memes) is never a reason to refuse."
+msgstr "Nicht berechtigt: massenhafte Reposts ohne eigenen Beitrag, wiederholte aufwandsarme Inhalte zum Klickfarmen, gestohlene oder vorgetäuschte Identitäten, gekaufte Follower oder koordinierte Fake-Interaktion, systematisch irreführende oder betrügerische Inhalte, schwere wiederholte Regelverstöße. Ein Genre (Comedy, Gaming, Memes) ist nie ein Ablehnungsgrund."
+
+#: src/interface/badgeGuide/useBadgeGuide.ts
+msgid "Not for video creators, streamers or bot developers."
+msgstr "Nicht für Video-Creator, Streamer oder Bot-Entwickler."
+
+#: src/interface/badgeGuide/BadgeGuide.tsx
+msgid "Not obtainable"
+msgstr "Nicht erhältlich"
+
+#: components/app/interface/settings/user/badges/ProgramDialog.tsx
+msgid "One channel or profile on one platform: followers on different platforms are not added together. Any kind of legitimate content counts; a genre is never a reason to refuse."
+msgstr "Ein Kanal oder Profil auf einer Plattform: Follower verschiedener Plattformen werden nicht addiert. Jede Art legitimer Inhalte zählt; ein Genre ist nie ein Ablehnungsgrund."
+
+#: src/interface/badgeGuide/useBadgeGuide.ts
+msgid "One original, reproducible bug report with enough detail, confirmed by a reviewer."
+msgstr "Ein eigener, reproduzierbarer Fehlerbericht mit ausreichenden Angaben, von einer prüfenden Person bestätigt."
+
+#: components/app/interface/settings/user/badges/ProgramDialog.tsx
+msgid "Or, if you stream: your regular livestream schedule"
+msgstr "Oder, wenn du streamst: dein regelmäßiger Livestream-Plan"
+
+#: components/app/interface/settings/user/badges/useProgramText.ts
+msgid "Original works in the last 90 days: {value} of {needed}"
+msgstr "Eigene Werke in den letzten 90 Tagen: {value} von {needed}"
+
+#: components/app/interface/settings/user/badges/useProgramText.ts
+msgid "Originality: most of the work is reposted or copied without an original contribution."
+msgstr "Originalität: Die Inhalte sind überwiegend übernommen oder kopiert, ohne eigenen Beitrag."
+
+#: src/interface/badgeGuide/useBadgeGuide.ts
+msgid "Over the last 8 weeks, on average at least 500 weekly active members and 200 weekly contributors, and at least 20% of new members still there after their first week."
+msgstr "In den letzten 8 Wochen im Schnitt mindestens 500 wöchentlich aktive Mitglieder und 200 wöchentlich Beitragende, und mindestens 20 % der neuen Mitglieder sind nach ihrer ersten Woche noch da."
+
+#: src/interface/badgeGuide/useBadgeGuide.ts
+msgid "Partnership is not verification. It ends if the server changes hands."
+msgstr "Partnerschaft ist keine Verifizierung. Sie endet, wenn der Server den Besitzer wechselt."
+
+#: src/interface/badgeGuide/useBadgeGuide.ts
+msgid "Permanent once legitimately earned, even if the server gets smaller."
+msgstr "Dauerhaft, sobald rechtmäßig erreicht, auch wenn der Server später schrumpft."
+
+#: src/interface/badgeGuide/useBadgeGuide.ts
+msgid "Permanent unless obtained by fraud or serious misconduct."
+msgstr "Dauerhaft, außer bei Betrug oder schwerem Fehlverhalten."
+
+#: src/interface/badgeGuide/useBadgeGuide.ts
+msgid "Permanent unless obtained by fraud."
+msgstr "Dauerhaft, außer bei Betrug."
+
+#: src/interface/badgeGuide/useBadgeGuide.ts
+msgid "Permanent unless the work was fraudulent or infringing."
+msgstr "Dauerhaft, außer das Werk war betrügerisch oder rechtsverletzend."
+
+#: src/interface/badgeGuide/useBadgeGuide.ts
+msgid "Permanent; it cannot be transferred."
+msgstr "Dauerhaft; nicht übertragbar."
+
+#: src/interface/badgeGuide/useBadgeGuide.ts
+msgid "Permanent; it gives no access to future betas."
+msgstr "Dauerhaft; kein Zugang zu künftigen Betas."
+
+#: src/interface/badgeGuide/useBadgeGuide.ts
+msgid "Permanent."
+msgstr "Dauerhaft."
+
+#: components/app/interface/settings/user/badges/ProgramDialog.tsx
+msgid "Platform"
+msgstr "Plattform"
+
+#: src/interface/badgeGuide/useBadgeGuide.ts
+msgid "Programs you apply for"
+msgstr "Programme mit Antrag"
+
+#: components/app/interface/settings/user/badges/ProgramDialog.tsx
+msgid "Put the code in your channel's description or a pinned post and leave it there until the team has decided. A person on the team looks for it; Zrzur never connects to the platform or reads your followers itself."
+msgstr "Setz den Code in die Beschreibung deines Kanals oder einen angehefteten Beitrag und lass ihn dort, bis das Team entschieden hat. Eine Person im Team sucht ihn; Zrzur verbindet sich nie mit der Plattform und liest deine Follower nicht selbst."
+
+#: components/app/interface/settings/user/badges/useProgramText.ts
+msgid "Quality criteria met: {value} of {needed}"
+msgstr "Erfüllte Qualitätskriterien: {value} von {needed}"
+
+#: src/interface/badgeGuide/useBadgeGuide.ts
+msgid "Removed when the appointment ends."
+msgstr "Entfällt mit dem Ende der Ernennung."
+
+#: src/interface/badgeGuide/useBadgeGuide.ts
+msgid "Requirements are published here and applied the same way to everyone. Nobody on the team can approve their own application."
+msgstr "Die Voraussetzungen stehen hier und gelten für alle gleich. Niemand im Team darf den eigenen Antrag genehmigen."
+
+#: src/interface/badgeGuide/BadgeGuide.tsx
+msgid "Retired badges are not listed here; people who have one keep it."
+msgstr "Ausgemusterte Abzeichen stehen hier nicht; wer eines hat, behält es."
+
+#: components/app/interface/settings/user/badges/useProgramText.ts
+msgid "Rights: repeated infringement, stolen content or unauthorised reuploads."
+msgstr "Rechte: wiederholte Rechtsverletzungen, gestohlene Inhalte oder nicht erlaubte Reuploads."
+
+#: src/interface/badgeGuide/BadgeGuide.tsx
+msgid "Rules for every badge"
+msgstr "Regeln für alle Abzeichen"
+
+#: components/app/interface/settings/user/badges/useProgramText.ts
+msgid "Safety and legality: the content breaks the law or Zrzur's rules."
+msgstr "Sicherheit und Rechtmäßigkeit: Die Inhalte verstoßen gegen Gesetze oder die Regeln von Zrzur."
+
+#: src/interface/badgeGuide/useBadgeGuide.ts
+msgid "Server and bot marks"
+msgstr "Server- und Bot-Kennzeichen"
+
+#: src/interface/badgeGuide/useBadgeGuide.ts
+msgid "Server moderators and server staff do not qualify."
+msgstr "Server-Moderatoren und Server-Teams zählen nicht."
+
+#: components/app/interface/settings/user/badges/ProgramDialog.tsx
+msgid "Show that the channel is yours"
+msgstr "Zeig, dass der Kanal dir gehört"
+
+#: src/interface/badgeGuide/useBadgeGuide.ts
+msgid "Shown next to the person who owns the server now; it follows ownership."
+msgstr "Erscheint neben der Person, der der Server gerade gehört; folgt dem Eigentum."
+
+#: src/interface/badgeGuide/useBadgeGuide.ts
+msgid "Shown on a server that passed the Verified Server review (see Verified Server Owner above)."
+msgstr "Erscheint bei einem Server, der die Prüfung zur Verifizierung bestanden hat (siehe „Verifizierter Serverinhaber“ oben)."
+
+#: src/interface/badgeGuide/useBadgeGuide.ts
+msgid "Shown only while you take part."
+msgstr "Nur während der Teilnahme sichtbar."
+
+#: src/interface/badgeGuide/useBadgeGuide.ts
+msgid "Shown while you have an active Feather subscription; you can hide it."
+msgstr "Sichtbar, solange du ein aktives Feather-Abo hast; du kannst es ausblenden."
+
+#: src/interface/badgeGuide/useBadgeGuide.ts
+msgid "Supported Zrzur during its early-support period."
+msgstr "Hat Zrzur in der frühen Unterstützungsphase unterstützt."
+
+#: components/app/interface/settings/user/badges/useProgramText.ts
+msgid "Technology and programming"
+msgstr "Technik und Programmierung"
+
+#: components/app/interface/settings/user/badges/useProgramText.ts
+msgid "The channel has not been active for long enough."
+msgstr "Der Kanal ist noch nicht lange genug aktiv."
+
+#: src/interface/badgeGuide/useBadgeGuide.ts
+msgid "The first approval always includes a quality review against these criteria: originality, meaningful effort, consistency, authenticity, safety and legality, honesty, rights. Two people approve."
+msgstr "Die erste Freigabe umfasst immer eine Qualitätsprüfung nach diesen Kriterien: Originalität, echter Aufwand, Beständigkeit, Echtheit, Sicherheit und Rechtmäßigkeit, Ehrlichkeit, Rechte. Zwei Personen geben frei."
+
+#: components/app/interface/settings/user/badges/useProgramText.ts
+msgid "The follower number the team saw on that one platform is below the published minimum."
+msgstr "Die Followerzahl, die das Team auf dieser einen Plattform gesehen hat, liegt unter dem veröffentlichten Minimum."
+
+#: src/interface/badgeGuide/useBadgeGuide.ts
+msgid "The numbers only let you apply; two people on the team approve. Checked again every 180 days."
+msgstr "Die Zahlen erlauben nur die Bewerbung; zwei Personen im Team geben frei. Erneute Prüfung alle 180 Tage."
+
+#: src/interface/badgeGuide/useBadgeGuide.ts
+msgid "The one person who started Zrzur. No application, activity or command can give it."
+msgstr "Die eine Person, die Zrzur begonnen hat. Kein Antrag, keine Aktivität und kein Befehl verleiht es."
+
+#: src/interface/badgeGuide/useBadgeGuide.ts
+msgid "The period, the kinds of support that count and the evidence needed will be published here once decided."
+msgstr "Zeitraum, anerkannte Unterstützungsarten und Nachweise werden hier veröffentlicht, sobald sie feststehen."
+
+#: src/interface/badgeGuide/useBadgeGuide.ts
+msgid "The same as Community Builder, at 1,000 genuine human members."
+msgstr "Wie Community-Aufbau, ab 1.000 echten menschlichen Mitgliedern."
+
+#: components/app/interface/settings/user/badges/useProgramText.ts
+msgid "The team did not find enough substantial original works in the last 90 days, or an equivalent regular livestream schedule."
+msgstr "Das Team hat in den letzten 90 Tagen nicht genug substanzielle eigene Werke oder einen gleichwertigen regelmäßigen Livestream-Plan gefunden."
+
+#: components/app/interface/settings/user/badges/useProgramText.ts
+msgid "The team took the badge away."
+msgstr "Das Team hat das Abzeichen entzogen."
+
+#: components/app/interface/settings/user/badges/useProgramText.ts
+msgid "The team's quality review: originality, effort, consistency, authenticity, safety, honesty, rights"
+msgstr "Qualitätsprüfung des Teams: Originalität, Aufwand, Beständigkeit, Echtheit, Sicherheit, Ehrlichkeit, Rechte"
+
+#: components/app/interface/settings/user/badges/ProgramDialog.tsx
+msgid "This channel is mine and everything I write is true."
+msgstr "Dieser Kanal gehört mir, und alles, was ich schreibe, ist wahr."
+
+#: src/interface/badgeGuide/useBadgeGuide.ts
+msgid "Time and support"
+msgstr "Zeit und Unterstützung"
+
+#: src/interface/badgeGuide/useBadgeGuide.ts
+msgid "Two people on the team approve. Permanent."
+msgstr "Zwei Personen im Team geben frei. Dauerhaft."
+
+#: components/app/interface/settings/user/badges/ProgramDialog.tsx
+msgid "What do you make, and for whom?"
+msgstr "Was machst du, und für wen?"
+
+#: src/interface/badgeGuide/BadgeGuide.tsx
+msgid "What each badge means and how it is earned."
+msgstr "Was jedes Abzeichen bedeutet und wie man es erhält."
+
+#: src/interface/badgeGuide/BadgeGuide.tsx
+msgid "What it takes"
+msgstr "Was es braucht"
+
+#: src/interface/badgeGuide/useBadgeGuide.ts
+msgid "When a server is both official and verified, Official is shown."
+msgstr "Hat ein Server beides, wird „offiziell“ angezeigt."
+
+#: src/interface/badgeGuide/useBadgeGuide.ts
+msgid "When an application is refused, you are told why and can appeal once within 30 days from your Badges settings. When a badge is suspended or removed for a rule breach, you get a statement of reasons and can appeal as for any other moderation decision."
+msgstr "Wird ein Antrag abgelehnt, erfährst du den Grund und kannst innerhalb von 30 Tagen einmal in den Abzeichen-Einstellungen Einspruch einlegen. Wird ein Abzeichen wegen eines Regelverstoßes ausgesetzt oder entzogen, erhältst du eine Begründung und kannst wie bei jeder anderen Moderationsentscheidung Beschwerde einlegen."
+
+#: src/interface/badgeGuide/BadgeGuide.tsx
+msgid "Where a badge is by application, you apply in Settings → Badges when applications are open."
+msgstr "Für Abzeichen auf Antrag bewirbst du dich unter Einstellungen → Abzeichen, sobald Bewerbungen offen sind."
+
+#: components/app/interface/settings/user/badges/useProgramText.ts
+msgid "Write the name of the platform (at most 40 characters)."
+msgstr "Schreib den Namen der Plattform (höchstens 40 Zeichen)."
+
+#: src/interface/badgeGuide/useBadgeGuide.ts
+msgid "Years on Zrzur"
+msgstr "Jahre auf Zrzur"
+
+#: components/app/interface/settings/user/badges/ProgramDialog.tsx
+msgid "You have a code. If you lost it, ask for a new one and replace it on the channel."
+msgstr "Du hast einen Code. Wenn er verloren ist, fordere einen neuen an und ersetze ihn auf dem Kanal."
+
+#: src/interface/badgeGuide/useBadgeGuide.ts
+msgid "You own a server that reached 100 genuine human members."
+msgstr "Dir gehört ein Server mit 100 echten menschlichen Mitgliedern."
+
+#: src/interface/badgeGuide/useBadgeGuide.ts
+msgid "You show the channel is yours by placing a code in its description or a pinned post. A person on the team checks it and the follower number by hand; Zrzur does not connect to the platform."
+msgstr "Du zeigst, dass der Kanal dir gehört, mit einem Code in seiner Beschreibung oder einem angehefteten Beitrag. Eine Person im Team prüft ihn und die Followerzahl von Hand; Zrzur verbindet sich nicht mit der Plattform."
+
+#: src/interface/badgeGuide/useBadgeGuide.ts
+msgid "Your account has existed for full calendar years, counted in UTC from its creation; your profile shows the highest year, up to ten."
+msgstr "Dein Konto besteht seit vollen Kalenderjahren, in UTC ab der Erstellung gezählt; dein Profil zeigt das höchste erreichte Jahr, bis zehn."
+
+#: src/interface/badgeGuide/useBadgeGuide.ts
+msgid "Your account was created before 1 March 2027, 00:00 UTC."
+msgstr "Dein Konto wurde vor dem 1. März 2027, 00:00 UTC erstellt."
+
+#: src/interface/badgeGuide/useBadgeGuide.ts
+msgid "Your bot is in at least 25 legitimate servers and has run for at least 30 days. Servers of one owner count at most twice, and your own servers never count."
+msgstr "Dein Bot ist auf mindestens 25 echten Servern und läuft seit mindestens 30 Tagen. Server einer Person zählen höchstens zweimal, deine eigenen nie."
+
+#: components/app/interface/settings/user/badges/ProgramDialog.tsx
+msgid "Your channel"
+msgstr "Dein Kanal"
+
+#. placeholder {0}: needed || 5
+#: components/app/interface/settings/user/badges/useProgramText.ts
+msgid "Your channel, its kind of content and {0} recent works or a livestream schedule are filled in"
+msgstr "Dein Kanal, die Art der Inhalte und {0} neue Werke oder ein Livestream-Plan sind ausgefüllt"
+
+#: components/app/interface/settings/user/badges/useProgramText.ts
+msgid "Your code is in the channel's description or a pinned post"
+msgstr "Dein Code steht in der Kanalbeschreibung oder einem angehefteten Beitrag"
+
+#: components/app/interface/settings/user/badges/ProgramDialog.tsx
+msgid "Your code:"
+msgstr "Dein Code:"
+
+#: src/interface/badgeGuide/useBadgeGuide.ts
+msgid "Your server is the authentic official home of a real game, developer, company, creator, organisation, brand or established project: authenticity, not popularity."
+msgstr "Dein Server ist das echte offizielle Zuhause eines realen Spiels, Entwicklers, Unternehmens, Creators, einer Organisation, Marke oder eines etablierten Projekts: Echtheit, nicht Beliebtheit."
+
+#: src/interface/badgeGuide/BadgeGuide.tsx
+msgid "Zrzur badges"
+msgstr "Zrzur-Abzeichen"
+
+#: src/interface/badgeGuide/useBadgeGuide.ts
+msgid "Zrzur is built by volunteers. Reviews happen when a volunteer is available; we do not promise a review time."
+msgstr "Zrzur wird von Freiwilligen gebaut. Prüfungen erfolgen, sobald eine freiwillige Person Zeit hat; eine Bearbeitungszeit versprechen wir nicht."
+
+#: src/interface/badgeGuide/useBadgeGuide.ts
+msgid "Zrzur team"
+msgstr "Zrzur-Team"

@@ -13,6 +13,7 @@ export type BadgeText = {
 export function useBadgeText(): (id: string) => BadgeText {
   const { t } = useLingui();
   return (id: string) => {
+    const years = t`Shown automatically for each full year of your account, counted in UTC; your profile shows the highest year. Hidden while you hide "Member since" on your profile.`;
     const texts: Record<AnyBadgeId, BadgeText> = {
       founder: {
         name: t`Zrzur Founder`,
@@ -41,13 +42,18 @@ export function useBadgeText(): (id: string) => BadgeText {
       },
       super_creator: {
         name: t`Super Creator`,
-        description: t`An outstanding designer of Zrzur profile designs and decorations, chosen by the team.`,
-        earn: t`Publish designs as a Creator; the Zrzur team picks Super Creators by hand.`,
+        description: t`An outstanding Zrzur Designs creator, chosen by the team.`,
+        earn: t`Hold Creator, with at least 25 approved, original, published designs and 180 days in the creator program. 25 is only a minimum: the team chooses. Duplicates, simple recolours and copied assets don't count.`,
       },
       creator: {
         name: t`Creator`,
-        description: t`Makes profile designs and decorations for Zrzur's community gallery.`,
-        earn: t`Become a Zrzur creator and publish your first decoration, nameplate or effect. Making bots doesn't count.`,
+        description: t`Designs and publishes profile designs in Zrzur Designs.`,
+        earn: t`Given after you join the Designs creator program and publish your first original, approved design. It stays for good unless the work was fraudulent or infringing. Making bots or videos doesn't count.`,
+      },
+      content_creator: {
+        name: t`Content Creator`,
+        description: t`Awarded to established creators of original, high-quality content who meet Zrzur's verification and quality standards.`,
+        earn: t`Apply with one channel or profile that has at least 100,000 real followers on that one platform, 90 days of activity and 5 substantial original works in the last 90 days (or a regular livestream schedule). The team checks the channel is yours and reviews the quality; a second person approves.`,
       },
       elite_bug_hunter: {
         name: t`Elite Bug Hunter`,
@@ -66,8 +72,8 @@ export function useBadgeText(): (id: string) => BadgeText {
       },
       beta_veteran: {
         name: t`Beta Veteran`,
-        description: t`Completed a Zrzur beta program.`,
-        earn: t`Complete the beta as an active tester who sent feedback or a bug report. It stays, but gives no beta access.`,
+        description: t`Completed a Zrzur beta cycle with real contributions.`,
+        earn: t`Complete a beta cycle with at least 3 reviewed feedback reports or 1 confirmed bug report; the team approves it after the cycle. It stays, but gives no beta access.`,
       },
       plus: {
         name: t`Zrzur Feather`,
@@ -82,27 +88,67 @@ export function useBadgeText(): (id: string) => BadgeText {
       early_adopter: {
         name: t`Early Adopter`,
         description: t`Joined Zrzur in its first days.`,
-        earn: t`Accounts created before the early adopter cut-off.`,
+        earn: t`Shown for accounts created before 1 March 2027, 00:00 UTC. Hidden while you hide "Member since" on your profile.`,
       },
       one_year: {
         name: t`One Year on Zrzur`,
         description: t`Has been on Zrzur for a year.`,
-        earn: t`Given automatically when your account turns one year old.`,
+        earn: years,
+      },
+      years_2: {
+        name: t`Two Years on Zrzur`,
+        description: t`Has been on Zrzur for two years.`,
+        earn: years,
       },
       three_years: {
         name: t`Three Years on Zrzur`,
         description: t`Has been on Zrzur for three years.`,
-        earn: t`Given automatically when your account turns three years old.`,
+        earn: years,
+      },
+      years_4: {
+        name: t`Four Years on Zrzur`,
+        description: t`Has been on Zrzur for four years.`,
+        earn: years,
+      },
+      years_5: {
+        name: t`Five Years on Zrzur`,
+        description: t`Has been on Zrzur for five years.`,
+        earn: years,
+      },
+      years_6: {
+        name: t`Six Years on Zrzur`,
+        description: t`Has been on Zrzur for six years.`,
+        earn: years,
+      },
+      years_7: {
+        name: t`Seven Years on Zrzur`,
+        description: t`Has been on Zrzur for seven years.`,
+        earn: years,
+      },
+      years_8: {
+        name: t`Eight Years on Zrzur`,
+        description: t`Has been on Zrzur for eight years.`,
+        earn: years,
+      },
+      years_9: {
+        name: t`Nine Years on Zrzur`,
+        description: t`Has been on Zrzur for nine years.`,
+        earn: years,
+      },
+      years_10: {
+        name: t`Ten Years on Zrzur`,
+        description: t`Has been on Zrzur for ten years.`,
+        earn: years,
       },
       community_builder: {
         name: t`Community Builder`,
-        description: t`Built a server that reached 100 members.`,
-        earn: t`Own a server that reaches 100 members. It stays if the server gets smaller.`,
+        description: t`Owns a server that reached 100 genuine human members.`,
+        earn: t`Own a server that reaches 100 genuine human members. Bots, deleted, banned or suspended accounts, accounts under 7 days old or without a confirmed e-mail, and people who joined less than a day ago don't count. Counted a few times a day; it stays if the server gets smaller.`,
       },
       big_community: {
         name: t`Big Community`,
-        description: t`Built a server that reached 1,000 members.`,
-        earn: t`Own a server that reaches 1,000 members. It stays if the server gets smaller.`,
+        description: t`Owns a server that reached 1,000 genuine human members.`,
+        earn: t`Own a server that reaches 1,000 genuine human members, counted as for Community Builder. It stays if the server gets smaller. It is not a partnership or a verification.`,
       },
       verified_server_owner: {
         name: t`Verified Server Owner`,
@@ -113,11 +159,6 @@ export function useBadgeText(): (id: string) => BadgeText {
         name: t`Verified Bot Developer`,
         description: t`Made a bot the Zrzur team verified.`,
         earn: t`Own a verified bot. It is shown while you do.`,
-      },
-      saha_champion: {
-        name: t`Saha Champion`,
-        description: t`Won a tournament or came first in the games bot.`,
-        earn: t`Win a tournament, or come first in the games bot.`,
       },
       community_helper: {
         name: t`Community Helper`,

@@ -90,6 +90,8 @@ const ServiceReturn = lazy(() =>
 );
 // the page behind an invite link: open to everyone, its own small chunk
 const InvitePage = lazy(() => import("@revolt/auth/src/invite/InvitePage"));
+// every badge and how it is earned: open to everyone, its own small chunk
+const BadgeGuide = lazy(() => import("./interface/badgeGuide/BadgeGuide"));
 const OAuthPages = lazy(() =>
   import("./interface/OAuth").then((m) => ({ default: m.OAuthPages })),
 );
@@ -99,6 +101,8 @@ const appRoutes = () => (
     {loginRoutes()}
     {/* an invite link shows the server before any form, signed in or not */}
     <Route path="/invite/:code" component={InvitePage} />
+    {/* the public badge guide, signed in or not */}
+    <Route path="/badges" component={BadgeGuide} />
     {/* an event's share link opens for people who are not signed in too */}
     <Route path="/e/:path" component={EventLinkPage} />
     {/* the docs never wait for the gateway, signed in or not */}

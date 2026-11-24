@@ -17,6 +17,7 @@ import { useState } from "@revolt/state";
 import { Avatar, UserStatus } from "@revolt/ui";
 import { AvatarDecoration } from "@revolt/ui/components/features/profiles/AvatarDecoration";
 import { OfficialLabel } from "@revolt/ui/components/features/profiles/OfficialLabel";
+import { nameRoom } from "@revolt/ui/components/features/profiles/nameRoom";
 import { nameStyle } from "@revolt/ui/components/features/profiles/userStyle";
 import { touchHitAreaSolo } from "@revolt/ui/components/utils/touchHitArea";
 import { Icon } from "@revolt/ui/icons/Icon";
@@ -290,7 +291,7 @@ function Entry(props: { channel: Channel; active: boolean }) {
 
       <Text>
         <Line>
-          <Name>
+          <Name class={nameRoom} data-name-room="">
             <Show
               when={!group()}
               fallback={<TextWithEmoji content={props.channel.name!} />}

@@ -11,6 +11,7 @@ import { Icon } from "@revolt/ui/icons/Icon";
 
 import { BotLabel } from "./BotLabel";
 import { ProfileBadges, profileBadgeIds } from "./ProfileBadges";
+import { nameRoom } from "./nameRoom";
 import { nameRowBadges } from "./nameRowBadges";
 import { profileNameStyle } from "./profileNameStyle";
 import { userStyleOf } from "./userStyle";
@@ -48,7 +49,13 @@ export function ProfileIdentity(props: {
     <Identity data-size={props.size}>
       <NameRow data-size={props.size}>
         <DisplayNameGroup>
-          <Name dir="auto" data-size={props.size} style={style()}>
+          <Name
+            dir="auto"
+            data-size={props.size}
+            class={nameRoom}
+            data-name-room=""
+            style={style()}
+          >
             {name()}
           </Name>
           <Show when={props.user.official}>

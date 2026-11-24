@@ -294,7 +294,10 @@ export function ListingCard(props: {
             {(badge) => <BadgeMark id={badge()} size="xs" mode="hover" />}
           </Show>
           <Show when={isBot()}>
-            <BotLabel />
+            <BotLabel
+              verified={props.listing.verified}
+              official={props.listing.official}
+            />
           </Show>
         </Name>
 
