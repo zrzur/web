@@ -5428,14 +5428,14 @@
     },
     {
       "path": "packages/client/components/modal/modals/MFAFlow.dom.test.tsx",
-      "sha256": "84e59074c5ac568544bf8e9a245cac3c5a4fab5b03a7fe6503cf98df27c0a995",
-      "bytes": 6149,
+      "sha256": "b3038e1b27c6856c08577c770f104ffe2c93b6742b09e175851f36fca148bb9f",
+      "bytes": 6701,
       "category": "synthetic-test-source-or-fixture"
     },
     {
       "path": "packages/client/components/modal/modals/MFAFlow.tsx",
-      "sha256": "d53be7e98f8da73e39355c147a22fca9fdd279898145fd8bfb815422b2d2a555",
-      "bytes": 8699,
+      "sha256": "3ae5abc24fa8d70b56070616212bb73904bd131a922fec6e8edb722f590d6f4e",
+      "bytes": 9138,
       "category": "product-source-or-build-manifest"
     },
     {
