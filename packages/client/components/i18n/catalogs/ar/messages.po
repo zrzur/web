@@ -33191,3 +33191,63 @@ msgstr "حدِّث تطبيق زرزور لسطح المكتب لمشاركة م
 #: components/app/interface/settings/user/activity/ActivitySettings.tsx
 msgid "Without the desktop app, Steam can still show what you play: turn on “Show what you play on Steam”."
 msgstr "يمكن لـ Steam أن يعرض ما تلعبه حتى دون تطبيق سطح المكتب: فعِّل «اعرض ما تلعبه على Steam»."
+
+#: src/interface/badgeGuide/useBadgeGuide.ts
+msgid "A clearly official entity may qualify below these numbers with a senior approval and a second person."
+msgstr "يمكن لجهة رسمية واضحة أن توثَّق دون هذه الأرقام بموافقة عليا وموافقة شخص ثانٍ."
+
+#: components/ui/components/features/profiles/badges/useBadgeText.ts
+msgid "An established community with long-term activity, quality and responsible moderation."
+msgstr "مجتمع راسخ ذو نشاط طويل وجودة وإشراف مسؤول."
+
+#: components/ui/components/features/profiles/badges/useBadgeText.ts
+msgid "Automatic when a server you own reaches 1,000 genuine human members, counted as for Community Builder; it stays if the server gets smaller."
+msgstr "تلقائية حين يبلغ سيرفر تملكه 1,000 عضو بشري حقيقي، يُحسبون كما في «باني مجتمع»، وتبقى إن صغر السيرفر."
+
+#: components/ui/components/features/profiles/badges/useBadgeText.ts
+msgid "Automatic when a server you own reaches 100 genuine human members; it stays if the server gets smaller."
+msgstr "تلقائية حين يبلغ سيرفر تملكه 100 عضو بشري حقيقي، وتبقى إن صغر السيرفر."
+
+#: src/interface/badgeGuide/useBadgeGuide.ts
+msgid "Bots, deleted, banned or suspended accounts, accounts under 7 days old or without a confirmed e-mail, and people who joined less than a day ago don't count. Counted a few times a day."
+msgstr "لا تُحسب البوتات ولا الحسابات المحذوفة أو المحظورة أو المعلّقة ولا الحسابات التي يقل عمرها عن 7 أيام أو التي لم يُؤكَّد بريدها، ولا من انضم قبل أقل من يوم. يُحسب العدد بضع مرات يومياً."
+
+#: components/ui/components/features/profiles/badges/useBadgeText.ts
+msgid "By application, reviewed by the Zrzur team: a bot in at least 25 legitimate servers, running for at least 30 days, with verified ownership."
+msgstr "بطلب يراجعه فريق زرزور: بوت في 25 سيرفراً حقيقياً على الأقل، يعمل منذ 30 يوماً على الأقل، بملكية موثّقة."
+
+#: components/ui/components/features/profiles/badges/useBadgeText.ts
+msgid "By application, reviewed by the Zrzur team: a check in the Bot label of a bot that passed the Verified Bot review."
+msgstr "بطلب يراجعه فريق زرزور: علامة ✓ داخل شارة «بوت» لبوت اجتاز مراجعة التوثيق."
+
+#: components/ui/components/features/profiles/badges/useBadgeText.ts
+msgid "By application, reviewed by the Zrzur team: at least 10,000 genuine human members, 180 days, and proven ownership of the official website (DNS or website check)."
+msgstr "بطلب يراجعه فريق زرزور: 10,000 عضو بشري حقيقي على الأقل، و180 يوماً، وملكية مثبتة للموقع الرسمي (تحقق عبر DNS أو عبر الموقع)."
+
+#: components/ui/components/features/profiles/badges/useBadgeText.ts
+msgid "By application, reviewed by the Zrzur team: at least 100,000 real followers on one platform, 90 days of activity and regular original work."
+msgstr "بطلب يراجعه فريق زرزور: 100,000 متابع حقيقي على الأقل على منصة واحدة، و90 يوماً من النشاط، وأعمال أصلية منتظمة."
+
+#: components/ui/components/features/profiles/badges/useBadgeText.ts
+msgid "By application, reviewed by the Zrzur team: at least 5,000 genuine human members, a server at least 180 days old and steady weekly activity."
+msgstr "بطلب يراجعه فريق زرزور: 5,000 عضو بشري حقيقي على الأقل، وسيرفر عمره 180 يوماً على الأقل، ونشاط أسبوعي ثابت."
+
+#: components/ui/components/features/profiles/badges/useBadgeText.ts
+msgid "By application, reviewed by the Zrzur team: shown on a server that passed the Verified Server review (see Verified Server Owner)."
+msgstr "بطلب يراجعه فريق زرزور: تظهر على سيرفر اجتاز مراجعة التوثيق (انظر «مالك سيرفر موثّق»)."
+
+#: components/ui/components/features/profiles/badges/useBadgeText.ts
+msgid "Owns or develops a bot that passed Zrzur's verification review."
+msgstr "يملك بوتاً أو يطوّره اجتاز مراجعة التوثيق في زرزور."
+
+#: components/ui/components/features/profiles/badges/useBadgeText.ts
+msgid "Owns the verified official server of a real game, company, creator, organisation or project."
+msgstr "يملك السيرفر الرسمي الموثّق للعبة أو شركة أو صانع محتوى أو منظمة أو مشروع حقيقي."
+
+#: src/interface/badgeGuide/useBadgeGuide.ts
+msgid "Programs by application"
+msgstr "برامج بطلب"
+
+#: src/interface/badgeGuide/useBadgeGuide.ts
+msgid "Servers of one owner count at most twice, and your own servers never count."
+msgstr "لا تُحسب سيرفرات المالك الواحد أكثر من مرتين، ولا تُحسب سيرفراتك أنت أبداً."

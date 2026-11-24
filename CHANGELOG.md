@@ -2,6 +2,12 @@
 
 ## Unreleased
 
+### Badges: one text for every badge (2026-11-24, owner's report)
+
+* **One source for badge texts.** A badge's name, what it means and how it is earned now come from one place and read the same in My Badges ("Badges you can earn"), the badge tooltip and profile row, and the public guide at `/badges`, which adds only the details below that line. Before, My Badges still said "Own a verified server. It is shown while you do." while the guide said something else.
+* The texts follow the approved badge policy. **Verified Server Owner:** by application, reviewed by the Zrzur team: at least 10,000 genuine human members, 180 days, and proven ownership of the official website (DNS or website check). **Verified Bot Developer:** by application, reviewed by the Zrzur team: a bot in at least 25 legitimate servers, running for at least 30 days, with verified ownership. Partner, Content Creator, Community Builder, Big Community, Creator, Super Creator, Beta Veteran, Early Adopter, the years on Zrzur and the team badges are aligned the same way. No line tells you to apply while applications are closed, and none promises a review time.
+* On `/badges`, the section "Programs you apply for" is now "Programs by application".
+
 ### Profile frames fit the window (2026-11-24, owner's report)
 
 * A profile frame (Crystal cave) shows whole on the card opened from the member list and on the full profile, at any window height: the card and the profile keep the frame's room from the window's edges, and the frame's pixels get smaller (3 px, then 2 px) on lower windows and phones.

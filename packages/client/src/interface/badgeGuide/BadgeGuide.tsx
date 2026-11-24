@@ -8,13 +8,18 @@ import { A } from "@revolt/routing";
 import { useState } from "@revolt/state";
 import { BrandName } from "@revolt/ui/components/design/BrandName";
 import { BadgeMark } from "@revolt/ui/components/features/profiles/badges/BadgeMark";
-import { useBadgeText } from "@revolt/ui/components/features/profiles/badges/useBadgeText";
+import {
+  BadgeHow,
+  useBadgeText,
+} from "@revolt/ui/components/features/profiles/badges/useBadgeText";
 
-import { CRITERIA_CHANGED, GuideHow, useBadgeGuide } from "./useBadgeGuide";
+import { CRITERIA_CHANGED, useBadgeGuide } from "./useBadgeGuide";
 
 /**
  * Zrzur badges (`/badges`): every badge given out today, its art, what it
- * means, how it is earned and the published criteria. Open to everyone,
+ * means, how it is earned and the published criteria. Name, meaning and the
+ * "how it is earned" line are the ones the app shows everywhere
+ * (`useBadgeText`); this page adds the details below them. Open to everyone,
  * signed in or not; its own small chunk, loaded only here.
  */
 export default function BadgeGuide() {
@@ -27,7 +32,7 @@ export default function BadgeGuide() {
     document.title = t`Zrzur badges`;
   });
 
-  const how = (value: GuideHow) =>
+  const how = (value: BadgeHow) =>
     ({
       automatic: t`Automatic`,
       application: t`By application`,
@@ -97,16 +102,21 @@ export default function BadgeGuide() {
                       <Body>
                         <NameLine>
                           <h3>{entry.name ?? text(entry.id).name}</h3>
-                          <How data-how={entry.how}>{how(entry.how)}</How>
+                          <How data-how={text(entry.id).how}>
+                            {how(text(entry.id).how)}
+                          </How>
                         </NameLine>
                         <Show when={text(entry.id).description}>
-                          <Meaning>{text(entry.id).description}</Meaning>
+                          <Meaning data-guide-meaning>
+                            {text(entry.id).description}
+                          </Meaning>
                         </Show>
                         <Criteria
                           aria-label={t`What it takes`}
                           data-guide-criteria
                         >
-                          <For each={entry.criteria}>
+                          <li data-guide-earn>{text(entry.id).earn}</li>
+                          <For each={entry.details}>
                             {(line) => <li>{line}</li>}
                           </For>
                         </Criteria>

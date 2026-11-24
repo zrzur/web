@@ -1,0 +1,62 @@
+{
+  "An established community with long-term activity, quality and responsible moderation.": [
+    "مجتمع راسخ ذو نشاط طويل وجودة وإشراف مسؤول.",
+    "Eine etablierte Community mit langfristiger Aktivität, Qualität und verantwortungsvoller Moderation."
+  ],
+  "By application, reviewed by the Zrzur team: at least 5,000 genuine human members, a server at least 180 days old and steady weekly activity.": [
+    "بطلب يراجعه فريق زرزور: 5,000 عضو بشري حقيقي على الأقل، وسيرفر عمره 180 يوماً على الأقل، ونشاط أسبوعي ثابت.",
+    "Auf Antrag, vom Zrzur-Team geprüft: mindestens 5.000 echte menschliche Mitglieder, ein Server, der mindestens 180 Tage alt ist, und beständige wöchentliche Aktivität."
+  ],
+  "By application, reviewed by the Zrzur team: at least 100,000 real followers on one platform, 90 days of activity and regular original work.": [
+    "بطلب يراجعه فريق زرزور: 100,000 متابع حقيقي على الأقل على منصة واحدة، و90 يوماً من النشاط، وأعمال أصلية منتظمة.",
+    "Auf Antrag, vom Zrzur-Team geprüft: mindestens 100.000 echte Follower auf einer Plattform, 90 Tage Aktivität und regelmäßig eigene Werke."
+  ],
+  "Automatic when a server you own reaches 100 genuine human members; it stays if the server gets smaller.": [
+    "تلقائية حين يبلغ سيرفر تملكه 100 عضو بشري حقيقي، وتبقى إن صغر السيرفر.",
+    "Automatisch, sobald ein Server, der dir gehört, 100 echte menschliche Mitglieder erreicht; bleibt, wenn der Server kleiner wird."
+  ],
+  "Automatic when a server you own reaches 1,000 genuine human members, counted as for Community Builder; it stays if the server gets smaller.": [
+    "تلقائية حين يبلغ سيرفر تملكه 1,000 عضو بشري حقيقي، يُحسبون كما في «باني مجتمع»، وتبقى إن صغر السيرفر.",
+    "Automatisch, sobald ein Server, der dir gehört, 1.000 echte menschliche Mitglieder erreicht, gezählt wie bei „Community-Gründer“; bleibt, wenn der Server kleiner wird."
+  ],
+  "Owns the verified official server of a real game, company, creator, organisation or project.": [
+    "يملك السيرفر الرسمي الموثّق للعبة أو شركة أو صانع محتوى أو منظمة أو مشروع حقيقي.",
+    "Besitzt den verifizierten offiziellen Server eines echten Spiels, Unternehmens, Creators, einer Organisation oder eines Projekts."
+  ],
+  "By application, reviewed by the Zrzur team: at least 10,000 genuine human members, 180 days, and proven ownership of the official website (DNS or website check).": [
+    "بطلب يراجعه فريق زرزور: 10,000 عضو بشري حقيقي على الأقل، و180 يوماً، وملكية مثبتة للموقع الرسمي (تحقق عبر DNS أو عبر الموقع).",
+    "Auf Antrag, vom Zrzur-Team geprüft: mindestens 10.000 echte menschliche Mitglieder, 180 Tage und nachgewiesenes Eigentum an der offiziellen Website (Prüfung per DNS oder auf der Website)."
+  ],
+  "Owns or develops a bot that passed Zrzur's verification review.": [
+    "يملك بوتاً أو يطوّره اجتاز مراجعة التوثيق في زرزور.",
+    "Besitzt oder entwickelt einen Bot, der Zrzurs Prüfung zur Verifizierung bestanden hat."
+  ],
+  "By application, reviewed by the Zrzur team: a bot in at least 25 legitimate servers, running for at least 30 days, with verified ownership.": [
+    "بطلب يراجعه فريق زرزور: بوت في 25 سيرفراً حقيقياً على الأقل، يعمل منذ 30 يوماً على الأقل، بملكية موثّقة.",
+    "Auf Antrag, vom Zrzur-Team geprüft: ein Bot auf mindestens 25 echten Servern, seit mindestens 30 Tagen in Betrieb, mit nachgewiesenem Eigentum."
+  ],
+  "By application, reviewed by the Zrzur team: shown on a server that passed the Verified Server review (see Verified Server Owner).": [
+    "بطلب يراجعه فريق زرزور: تظهر على سيرفر اجتاز مراجعة التوثيق (انظر «مالك سيرفر موثّق»).",
+    "Auf Antrag, vom Zrzur-Team geprüft: erscheint bei einem Server, der die Prüfung zur Verifizierung bestanden hat (siehe „Verifizierter Serverinhaber“)."
+  ],
+  "By application, reviewed by the Zrzur team: a check in the Bot label of a bot that passed the Verified Bot review.": [
+    "بطلب يراجعه فريق زرزور: علامة ✓ داخل شارة «بوت» لبوت اجتاز مراجعة التوثيق.",
+    "Auf Antrag, vom Zrzur-Team geprüft: ein Häkchen im Bot-Label eines Bots, der die Prüfung zur Verifizierung bestanden hat."
+  ],
+  "Bots, deleted, banned or suspended accounts, accounts under 7 days old or without a confirmed e-mail, and people who joined less than a day ago don't count. Counted a few times a day.": [
+    "لا تُحسب البوتات ولا الحسابات المحذوفة أو المحظورة أو المعلّقة ولا الحسابات التي يقل عمرها عن 7 أيام أو التي لم يُؤكَّد بريدها، ولا من انضم قبل أقل من يوم. يُحسب العدد بضع مرات يومياً.",
+    "Bots, gelöschte, gesperrte oder suspendierte Konten, Konten unter 7 Tagen oder ohne bestätigte E-Mail und Personen, die vor weniger als einem Tag beigetreten sind, zählen nicht. Mehrmals täglich gezählt."
+  ],
+  "A clearly official entity may qualify below these numbers with a senior approval and a second person.": [
+    "يمكن لجهة رسمية واضحة أن توثَّق دون هذه الأرقام بموافقة عليا وموافقة شخص ثانٍ.",
+    "Eine eindeutig offizielle Stelle kann mit Freigabe auf höherer Ebene und einer zweiten Person auch darunter verifiziert werden."
+  ],
+  "Servers of one owner count at most twice, and your own servers never count.": [
+    "لا تُحسب سيرفرات المالك الواحد أكثر من مرتين، ولا تُحسب سيرفراتك أنت أبداً.",
+    "Server einer Person zählen höchstens zweimal, deine eigenen nie."
+  ],
+  "Programs by application": [
+    "برامج بطلب",
+    "Programme auf Antrag"
+  ]
+}

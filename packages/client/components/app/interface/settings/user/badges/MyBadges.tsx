@@ -547,7 +547,7 @@ export function MyBadges() {
             <Grid>
               <For each={earnable()}>
                 {(badge) => (
-                  <Tile>
+                  <Tile data-earn-badge={badge.id}>
                     <BadgeMark id={badge.id} size="lg" state="locked" />
                     <TileText>
                       <TitleLine>
@@ -558,7 +558,7 @@ export function MyBadges() {
                           </Pill>
                         </Show>
                       </TitleLine>
-                      <p>{text(badge.id).earn}</p>
+                      <p data-earn-line>{text(badge.id).earn}</p>
                       <Show when={open() && programOf(badge.id)}>
                         <RowActions>
                           <Button
