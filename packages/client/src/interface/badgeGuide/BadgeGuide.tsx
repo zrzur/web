@@ -101,7 +101,9 @@ export default function BadgeGuide() {
                       </Art>
                       <Body>
                         <NameLine>
-                          <h3>{entry.name ?? text(entry.id).name}</h3>
+                          <h3 title={entry.name ?? text(entry.id).name}>
+                            {entry.name ?? text(entry.id).name}
+                          </h3>
                           <How data-how={text(entry.id).how}>
                             {how(text(entry.id).how)}
                           </How>
@@ -340,6 +342,13 @@ const NameLine = styled("div", {
       fontSize: "18px",
       lineHeight: "24px",
       fontWeight: 600,
+      // one line, never broken inside a name; "…" and the title when too long
+      whiteSpace: "nowrap",
+      overflow: "hidden",
+      textOverflow: "ellipsis",
+      minWidth: 0,
+      maxWidth: "100%",
+      "&:lang(ar)": { lineHeight: "28px" },
     },
   },
 });

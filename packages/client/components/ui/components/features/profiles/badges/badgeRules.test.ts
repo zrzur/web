@@ -122,6 +122,18 @@ describe("badge rules in the app", () => {
     }
   });
 
+  it("writes Arabic marks the way every browser draws them", () => {
+    // WebKit tore the tanween off the alif («يوماً») and drew the kasra of
+    // «مختبِر» above the letter («مختبَر», a lab): the fathatan goes before
+    // the alif («يومًا»), and «مختبر» needs no mark
+    const texts = [...source.matchAll(/[^\w]t`([^`]*)`/g)].map((m) => m[1]);
+    for (const text of texts) {
+      const arabic = ar.get(text.replace(/"/g, '\\"')) ?? "";
+      expect(arabic, text).not.toContain("اً");
+      expect(arabic, text).not.toContain("مختبِر");
+    }
+  });
+
   it("no longer says the old rules", () => {
     expect(source).not.toContain("Own a verified server.");
     expect(source).not.toContain("Own a verified bot.");

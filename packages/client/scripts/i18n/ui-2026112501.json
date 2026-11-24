@@ -56,7 +56,7 @@
     "Follower, die die prüfende Person gesehen hat: {0} von {1}"
   ],
   "At least {needed} days of active publishing": [
-    "{needed} يوماً على الأقل من النشر النشط",
+    "{needed} يومًا على الأقل من النشر النشط",
     "Mindestens {needed} Tage aktive Veröffentlichung"
   ],
   "Days active: {value} of {needed}": [
@@ -64,11 +64,11 @@
     "Aktive Tage: {value} von {needed}"
   ],
   "At least {needed} substantial original works in the last 90 days, or a regular livestream schedule": [
-    "{needed} أعمال أصلية جوهرية على الأقل خلال آخر 90 يوماً، أو جدول بث منتظم",
+    "{needed} أعمال أصلية جوهرية على الأقل خلال آخر 90 يومًا، أو جدول بث منتظم",
     "Mindestens {needed} substanzielle eigene Werke in den letzten 90 Tagen oder ein regelmäßiger Livestream-Plan"
   ],
   "Original works in the last 90 days: {value} of {needed}": [
-    "الأعمال الأصلية خلال آخر 90 يوماً: {value} من {needed}",
+    "الأعمال الأصلية خلال آخر 90 يومًا: {value} من {needed}",
     "Eigene Werke in den letzten 90 Tagen: {value} von {needed}"
   ],
   "The team's quality review: originality, effort, consistency, authenticity, safety, honesty, rights": [
@@ -88,7 +88,7 @@
     "Der Kanal ist noch nicht lange genug aktiv."
   ],
   "The team did not find enough substantial original works in the last 90 days, or an equivalent regular livestream schedule.": [
-    "لم يجد الفريق عدداً كافياً من الأعمال الأصلية الجوهرية خلال آخر 90 يوماً، ولا جدول بث منتظماً يعادلها.",
+    "لم يجد الفريق عددًا كافيًا من الأعمال الأصلية الجوهرية خلال آخر 90 يومًا، ولا جدول بث منتظمًا يعادلها.",
     "Das Team hat in den letzten 90 Tagen nicht genug substanzielle eigene Werke oder einen gleichwertigen regelmäßigen Livestream-Plan gefunden."
   ],
   "Originality: most of the work is reposted or copied without an original contribution.": [
@@ -96,7 +96,7 @@
     "Originalität: Die Inhalte sind überwiegend übernommen oder kopiert, ohne eigenen Beitrag."
   ],
   "Effort: the works show little real effort, for example repetitive content made to collect views.": [
-    "الجهد: لا تُظهر الأعمال جهداً حقيقياً، مثل محتوى متكرر لجمع المشاهدات.",
+    "الجهد: لا تُظهر الأعمال جهدًا حقيقيًا، مثل محتوى متكرر لجمع المشاهدات.",
     "Aufwand: Die Werke zeigen wenig echten Aufwand, zum Beispiel wiederholte Inhalte, um Aufrufe zu sammeln."
   ],
   "Consistency: the channel rests on one viral upload rather than regular work.": [
@@ -128,7 +128,7 @@
     "Wähle die Plattform deines Kanals."
   ],
   "Write the name of the platform (at most 40 characters).": [
-    "اكتب اسم المنصة (40 حرفاً على الأكثر).",
+    "اكتب اسم المنصة (40 حرفًا على الأكثر).",
     "Schreib den Namen der Plattform (höchstens 40 Zeichen)."
   ],
   "Choose the kind of content you make.": [
@@ -144,7 +144,7 @@
     "Beschreibe deinen Livestream-Plan in höchstens 500 Zeichen."
   ],
   "Add the address of your channel first.": [
-    "أضف عنوان قناتك أولاً.",
+    "أضف عنوان قناتك أولًا.",
     "Gib zuerst die Adresse deines Kanals an."
   ],
   "A person on the team looks for the code on your channel after you send the application.": [
@@ -156,7 +156,7 @@
     "Dein Kanal"
   ],
   "One channel or profile on one platform: followers on different platforms are not added together. Any kind of legitimate content counts; a genre is never a reason to refuse.": [
-    "قناة أو ملف واحد على منصة واحدة: لا يُجمع المتابعون من منصات مختلفة. كل محتوى مشروع يُحسب، والنوع ليس سبباً للرفض أبداً.",
+    "قناة أو ملف واحد على منصة واحدة: لا يُجمع المتابعون من منصات مختلفة. كل محتوى مشروع يُحسب، والنوع ليس سببًا للرفض أبدًا.",
     "Ein Kanal oder Profil auf einer Plattform: Follower verschiedener Plattformen werden nicht addiert. Jede Art legitimer Inhalte zählt; ein Genre ist nie ein Ablehnungsgrund."
   ],
   "Platform": [
@@ -176,7 +176,7 @@
     "Adresse des Kanals oder Profils"
   ],
   "Links to at least 5 original works from the last 90 days, one per line": [
-    "روابط 5 أعمال أصلية على الأقل من آخر 90 يوماً، رابط في كل سطر",
+    "روابط 5 أعمال أصلية على الأقل من آخر 90 يومًا، رابط في كل سطر",
     "Links zu mindestens 5 eigenen Werken aus den letzten 90 Tagen, einer pro Zeile"
   ],
   "Or, if you stream: your regular livestream schedule": [
@@ -196,7 +196,7 @@
     "Zeig, dass der Kanal dir gehört"
   ],
   "Put the code in your channel's description or a pinned post and leave it there until the team has decided. A person on the team looks for it; Zrzur never connects to the platform or reads your followers itself.": [
-    "ضع الرمز في وصف قناتك أو في منشور مثبّت، واتركه هناك حتى يقرر الفريق. يبحث عنه شخص من الفريق، ولا يتصل زرزور بالمنصة ولا يقرأ متابعيك بنفسه أبداً.",
+    "ضع الرمز في وصف قناتك أو في منشور مثبّت، واتركه هناك حتى يقرر الفريق. يبحث عنه شخص من الفريق، ولا يتصل زرزور بالمنصة ولا يقرأ متابعيك بنفسه أبدًا.",
     "Setz den Code in die Beschreibung deines Kanals oder einen angehefteten Beitrag und lass ihn dort, bis das Team entschieden hat. Eine Person im Team sucht ihn; Zrzur verbindet sich nie mit der Plattform und liest deine Follower nicht selbst."
   ],
   "Your code:": [
@@ -204,7 +204,7 @@
     "Dein Code:"
   ],
   "You have a code. If you lost it, ask for a new one and replace it on the channel.": [
-    "لديك رمز. إن فقدته فاطلب رمزاً جديداً واستبدله في القناة.",
+    "لديك رمز. إن فقدته فاطلب رمزًا جديدًا واستبدله في القناة.",
     "Du hast einen Code. Wenn er verloren ist, fordere einen neuen an und ersetze ihn auf dem Kanal."
   ],
   "Get a new code": [
@@ -288,7 +288,7 @@
     "Ein Abzeichen kann entzogen werden, wenn es durch Betrug, gefälschte Mitglieder oder Interaktionen, Identitätsmissbrauch, gestohlene Werke oder einen schweren Regelverstoß erlangt wurde."
   ],
   "When an application is refused, you are told why and can appeal once within 30 days from your Badges settings. When a badge is suspended or removed for a rule breach, you get a statement of reasons and can appeal as for any other moderation decision.": [
-    "عند رفض طلبك تُبلَّغ بالسبب، ويمكنك الاعتراض مرة واحدة خلال 30 يوماً من إعدادات الشارات. وعند تعليق شارة أو سحبها بسبب مخالفة للقواعد تتلقى بياناً بالأسباب، ويمكنك الطعن كما في سائر قرارات الإشراف.",
+    "عند رفض طلبك تُبلَّغ بالسبب، ويمكنك الاعتراض مرة واحدة خلال 30 يومًا من إعدادات الشارات. وعند تعليق شارة أو سحبها بسبب مخالفة للقواعد تتلقى بيانًا بالأسباب، ويمكنك الطعن كما في سائر قرارات الإشراف.",
     "Wird ein Antrag abgelehnt, erfährst du den Grund und kannst innerhalb von 30 Tagen einmal in den Abzeichen-Einstellungen Einspruch einlegen. Wird ein Abzeichen wegen eines Regelverstoßes ausgesetzt oder entzogen, erhältst du eine Begründung und kannst wie bei jeder anderen Moderationsentscheidung Beschwerde einlegen."
   ],
   "Bots never count as members, and bot accounts cannot hold profile badges.": [
@@ -296,7 +296,7 @@
     "Bots zählen nie als Mitglieder, und Bot-Konten tragen keine Profilabzeichen."
   ],
   "A badge means only what this page says. It is not an endorsement and not a guarantee of quality or safety.": [
-    "لا تعني الشارة إلا ما تقوله هذه الصفحة، وليست توصية ولا ضماناً للجودة أو الأمان.",
+    "لا تعني الشارة إلا ما تقوله هذه الصفحة، وليست توصية ولا ضمانًا للجودة أو الأمان.",
     "Ein Abzeichen bedeutet nur, was auf dieser Seite steht. Es ist keine Empfehlung und keine Garantie für Qualität oder Sicherheit."
   ],
   "Zrzur team": [
@@ -312,7 +312,7 @@
     "Dauerhaft; nicht übertragbar."
   ],
   "An officially appointed member of the Zrzur team, with a recorded appointment.": [
-    "عضو معيَّن رسمياً في فريق زرزور بتعيين مسجَّل.",
+    "عضو معيَّن رسميًا في فريق زرزور بتعيين مسجَّل.",
     "Ein offiziell ernanntes Mitglied des Zrzur-Teams mit dokumentierter Ernennung."
   ],
   "A meaningful, verified technical contribution to Zrzur itself, or an approved official development role.": [
@@ -324,11 +324,11 @@
     "Ein eigener Bot reicht nicht."
   ],
   "Kept as recognition unless obtained by fraud.": [
-    "تبقى تقديراً ما لم تُنل بالاحتيال.",
+    "تبقى تقديرًا ما لم تُنل بالاحتيال.",
     "Bleibt als Anerkennung, außer bei Betrug."
   ],
   "Formally appointed to platform-level moderation, after accepting the moderation rules and the team's conduct requirements.": [
-    "معيَّن رسمياً للإشراف على مستوى المنصة بعد إقرار قواعد الإشراف ومتطلبات سلوك الفريق.",
+    "معيَّن رسميًا للإشراف على مستوى المنصة بعد إقرار قواعد الإشراف ومتطلبات سلوك الفريق.",
     "Offiziell für die Moderation auf Plattformebene ernannt, nach Bestätigung der Moderationsregeln und der Verhaltensanforderungen des Teams."
   ],
   "Programs you apply for": [
@@ -340,7 +340,7 @@
     "Mindestens 5.000 echte menschliche Mitglieder und ein Server, der mindestens 180 Tage alt ist."
   ],
   "Over the last 8 weeks, on average at least 500 weekly active members and 200 weekly contributors, and at least 20% of new members still there after their first week.": [
-    "خلال آخر 8 أسابيع: متوسط 500 عضو نشط أسبوعياً و200 مساهم أسبوعياً على الأقل، وبقاء 20% على الأقل من الأعضاء الجدد بعد أسبوعهم الأول.",
+    "خلال آخر 8 أسابيع: متوسط 500 عضو نشط أسبوعيًا و200 مساهم أسبوعيًا على الأقل، وبقاء 20% على الأقل من الأعضاء الجدد بعد أسبوعهم الأول.",
     "In den letzten 8 Wochen im Schnitt mindestens 500 wöchentlich aktive Mitglieder und 200 wöchentlich Beitragende, und mindestens 20 % der neuen Mitglieder sind nach ihrer ersten Woche noch da."
   ],
   "A clear purpose, published rules, active moderation and protection against spam and raids; no bought members or fake engagement.": [
@@ -348,11 +348,11 @@
     "Ein klarer Zweck, veröffentlichte Regeln, aktive Moderation und Schutz vor Spam und Raids; keine gekauften Mitglieder oder gefälschte Interaktion."
   ],
   "The numbers only let you apply; two people on the team approve. Checked again every 180 days.": [
-    "الأرقام تتيح التقديم فقط، ويوافق شخصان من الفريق. تُراجَع الشراكة كل 180 يوماً.",
+    "الأرقام تتيح التقديم فقط، ويوافق شخصان من الفريق. تُراجَع الشراكة كل 180 يومًا.",
     "Die Zahlen erlauben nur die Bewerbung; zwei Personen im Team geben frei. Erneute Prüfung alle 180 Tage."
   ],
   "Partnership is not verification. It ends if the server changes hands.": [
-    "الشراكة ليست توثيقاً، وتنتهي إذا انتقلت ملكية السيرفر.",
+    "الشراكة ليست توثيقًا، وتنتهي إذا انتقلت ملكية السيرفر.",
     "Partnerschaft ist keine Verifizierung. Sie endet, wenn der Server den Besitzer wechselt."
   ],
   "Your server is the authentic official home of a real game, developer, company, creator, organisation, brand or established project: authenticity, not popularity.": [
@@ -364,7 +364,7 @@
     "Mindestens 10.000 echte menschliche Mitglieder und 180 Tage. Eine eindeutig offizielle Stelle kann mit Freigabe auf höherer Ebene und einer zweiten Person auch darunter verifiziert werden."
   ],
   "Control of the official domain, proven with a DNS TXT record or a file on the website. Claiming to be famous is not proof.": [
-    "إثبات السيطرة على النطاق الرسمي بسجل DNS TXT أو بملف على الموقع. ادعاء الشهرة ليس دليلاً.",
+    "إثبات السيطرة على النطاق الرسمي بسجل DNS TXT أو بملف على الموقع. ادعاء الشهرة ليس دليلًا.",
     "Kontrolle über die offizielle Domain, nachgewiesen per DNS-TXT-Eintrag oder Datei auf der Website. Bekanntheit zu behaupten ist kein Beleg."
   ],
   "Never automatic. The badge stays while you own the verified server and ends if the server changes hands.": [
@@ -380,7 +380,7 @@
     "Eine klare und zutreffende Beschreibung, mindestens eine funktionierende Funktion, eine Datenschutzerklärung bei Nutzerdaten und Berechtigungen, die zur Aufgabe passen."
   ],
   "No malicious commands, token theft, deception or inflated installs. 25 servers only unlock the application; a review decides.": [
-    "دون أوامر خبيثة أو سرقة رموز أو خداع أو تضخيم للتثبيتات. بلوغ 25 سيرفراً يتيح التقديم فقط، والمراجعة تقرر.",
+    "دون أوامر خبيثة أو سرقة رموز أو خداع أو تضخيم للتثبيتات. بلوغ 25 سيرفرًا يتيح التقديم فقط، والمراجعة تقرر.",
     "Keine schädlichen Befehle, kein Token-Diebstahl, keine Täuschung, keine künstlich erhöhten Installationen. 25 Server schalten nur den Antrag frei; eine Prüfung entscheidet."
   ],
   "After approval the bot shows a check in its Bot label. It ends if the bot changes hands, is suspended or is deleted.": [
@@ -396,23 +396,23 @@
     "Mindestens 100.000 echte Follower oder Abonnenten auf EINER Plattform; Plattformen werden nicht addiert."
   ],
   "At least 90 days of active publishing, and at least 5 substantial original works in the last 90 days or an equivalent regular livestream schedule.": [
-    "90 يوماً على الأقل من النشر النشط، و5 أعمال أصلية جوهرية على الأقل خلال آخر 90 يوماً أو جدول بث منتظم يعادلها.",
+    "90 يومًا على الأقل من النشر النشط، و5 أعمال أصلية جوهرية على الأقل خلال آخر 90 يومًا أو جدول بث منتظم يعادلها.",
     "Mindestens 90 Tage aktive Veröffentlichung und mindestens 5 substanzielle eigene Werke in den letzten 90 Tagen oder ein gleichwertiger regelmäßiger Livestream-Plan."
   ],
   "You show the channel is yours by placing a code in its description or a pinned post. A person on the team checks it and the follower number by hand; Zrzur does not connect to the platform.": [
-    "تُثبت أن القناة لك بوضع رمز في وصفها أو في منشور مثبّت. يتحقق شخص من الفريق منه ومن عدد المتابعين يدوياً، ولا يتصل زرزور بالمنصة.",
+    "تُثبت أن القناة لك بوضع رمز في وصفها أو في منشور مثبّت. يتحقق شخص من الفريق منه ومن عدد المتابعين يدويًا، ولا يتصل زرزور بالمنصة.",
     "Du zeigst, dass der Kanal dir gehört, mit einem Code in seiner Beschreibung oder einem angehefteten Beitrag. Eine Person im Team prüft ihn und die Followerzahl von Hand; Zrzur verbindet sich nicht mit der Plattform."
   ],
   "The first approval always includes a quality review against these criteria: originality, meaningful effort, consistency, authenticity, safety and legality, honesty, rights. Two people approve.": [
-    "تشمل الموافقة الأولى دائماً مراجعة للجودة وفق هذه المعايير: الأصالة، والجهد الحقيقي، والاستمرارية، والمصداقية، والأمان والقانونية، والأمانة، والحقوق. ويوافق شخصان.",
+    "تشمل الموافقة الأولى دائمًا مراجعة للجودة وفق هذه المعايير: الأصالة، والجهد الحقيقي، والاستمرارية، والمصداقية، والأمان والقانونية، والأمانة، والحقوق. ويوافق شخصان.",
     "Die erste Freigabe umfasst immer eine Qualitätsprüfung nach diesen Kriterien: Originalität, echter Aufwand, Beständigkeit, Echtheit, Sicherheit und Rechtmäßigkeit, Ehrlichkeit, Rechte. Zwei Personen geben frei."
   ],
   "Not eligible: mass reposts without an original contribution, repetitive low-effort view farming, stolen or impersonated identities, bought followers or coordinated fake engagement, systematically misleading or fraudulent content, serious repeated rule violations. A genre (comedy, gaming, memes) is never a reason to refuse.": [
-    "لا يستحقها: إعادة النشر الجماعي دون إضافة أصلية، والمحتوى المتكرر قليل الجهد لجمع المشاهدات، والهويات المسروقة أو المنتحلة، والمتابعون المشترَون أو التفاعل المزيّف المنسَّق، والمحتوى المضلِّل أو الاحتيالي المنهجي، والمخالفات الجسيمة المتكررة. النوع (كوميديا، ألعاب، ميمز) ليس سبباً للرفض أبداً.",
+    "لا يستحقها: إعادة النشر الجماعي دون إضافة أصلية، والمحتوى المتكرر قليل الجهد لجمع المشاهدات، والهويات المسروقة أو المنتحلة، والمتابعون المشترَون أو التفاعل المزيّف المنسَّق، والمحتوى المضلِّل أو الاحتيالي المنهجي، والمخالفات الجسيمة المتكررة. النوع (كوميديا، ألعاب، ميمز) ليس سببًا للرفض أبدًا.",
     "Nicht berechtigt: massenhafte Reposts ohne eigenen Beitrag, wiederholte aufwandsarme Inhalte zum Klickfarmen, gestohlene oder vorgetäuschte Identitäten, gekaufte Follower oder koordinierte Fake-Interaktion, systematisch irreführende oder betrügerische Inhalte, schwere wiederholte Regelverstöße. Ein Genre (Comedy, Gaming, Memes) ist nie ein Ablehnungsgrund."
   ],
   "Appeal within 30 days; apply again after 90 days, or at once if only information was missing.": [
-    "الاعتراض خلال 30 يوماً؛ وإعادة التقديم بعد 90 يوماً، أو فوراً إن كان النقص في المعلومات فقط.",
+    "الاعتراض خلال 30 يومًا؛ وإعادة التقديم بعد 90 يومًا، أو فورًا إن كان النقص في المعلومات فقط.",
     "Einspruch innerhalb von 30 Tagen; neue Bewerbung nach 90 Tagen oder sofort, wenn nur Angaben fehlten."
   ],
   "Designs creators": [
@@ -428,11 +428,11 @@
     "Nicht für Video-Creator, Streamer oder Bot-Entwickler."
   ],
   "Permanent unless the work was fraudulent or infringing.": [
-    "دائمة ما لم يكن العمل احتيالياً أو منتهكاً للحقوق.",
+    "دائمة ما لم يكن العمل احتياليًا أو منتهكًا للحقوق.",
     "Dauerhaft, außer das Werk war betrügerisch oder rechtsverletzend."
   ],
   "Hold Creator, with at least 25 approved, original, published designs and 180 days in the creator program.": [
-    "أن تحمل شارة مصمم، ولك 25 تصميماً أصلياً معتمداً منشوراً على الأقل و180 يوماً في برنامج المصممين.",
+    "أن تحمل شارة مصمم، ولك 25 تصميمًا أصليًا معتمدًا منشورًا على الأقل و180 يومًا في برنامج المصممين.",
     "Creator-Abzeichen, mindestens 25 geprüfte, eigene, veröffentlichte Designs und 180 Tage im Creator-Programm."
   ],
   "25 is only a minimum: the team chooses. Duplicates, simple recolours and copied assets do not count.": [
@@ -460,7 +460,7 @@
     "Wie Community-Aufbau, ab 1.000 echten menschlichen Mitgliedern."
   ],
   "It is not a partnership or a verification.": [
-    "وليست شراكة ولا توثيقاً.",
+    "وليست شراكة ولا توثيقًا.",
     "Es ist weder eine Partnerschaft noch eine Verifizierung."
   ],
   "Given by the team to people who help others with constructive support; spam, copied or misleading answers earn nothing.": [
@@ -500,7 +500,7 @@
     "Einen Beta-Zyklus mit mindestens 3 geprüften Feedbackberichten oder 1 bestätigten Fehlerbericht abgeschlossen; das Team gibt nach dem Zyklus frei."
   ],
   "Permanent; it gives no access to future betas.": [
-    "دائمة، ولا تمنح دخولاً لنسخ تجريبية لاحقة.",
+    "دائمة، ولا تمنح دخولًا لنسخ تجريبية لاحقة.",
     "Dauerhaft; kein Zugang zu künftigen Betas."
   ],
   "Time and support": [
@@ -552,7 +552,7 @@
     "Erscheint bei einem Server, der die Prüfung zur Verifizierung bestanden hat (siehe „Verifizierter Serverinhaber“ oben)."
   ],
   "Shown next to the person who owns the server now; it follows ownership.": [
-    "يظهر بجانب من يملك السيرفر حالياً، ويتبع الملكية تلقائياً.",
+    "يظهر بجانب من يملك السيرفر حاليًا، ويتبع الملكية تلقائيًا.",
     "Erscheint neben der Person, der der Server gerade gehört; folgt dem Eigentum."
   ],
   "A check in the Bot label of a bot that passed the Verified Bot review.": [

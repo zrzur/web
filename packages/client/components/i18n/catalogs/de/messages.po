@@ -33251,3 +33251,7 @@ msgstr "Programme auf Antrag"
 #: src/interface/badgeGuide/useBadgeGuide.ts
 msgid "Servers of one owner count at most twice, and your own servers never count."
 msgstr "Server einer Person zählen höchstens zweimal, deine eigenen nie."
+
+#: components/app/interface/settings/server/pages.tsx
+msgid "The Zrzur team's check that this is the official server of a real game, company, creator or project."
+msgstr "Die Prüfung des Zrzur-Teams, dass dies der offizielle Server eines echten Spiels, Unternehmens, Creators oder Projekts ist."

@@ -9,6 +9,8 @@
 * **Verified Bot Developer has its own drawing:** the `</>` of code inside a gear, in the same enamel-pin style; before, it was the same verified seal as Verified Server Owner and the two looked identical in My Badges.
 * **Verified Server Owner is no longer given out** (owner's decision): it is gone from "Badges you can earn" and from `/badges`. People who already have it keep it, still drawn with the verified seal. The Verified Server mark on servers stays as it is.
 * On `/badges`, the section "Programs you apply for" is now "Programs by application".
+* **Verified Server is applied for in Server settings** (owner's decision): Overview → Verified Server, shown to the server's owner only and only while the server takes badge applications (otherwise nothing is shown). It gives the Verified Server line, the checklist the server measured for this server in your language, "Check and apply" with the domain check (a DNS TXT record or a file on the website), and the application's status with continue, withdraw and appeal. Before, the only way in was the Verified Server Owner tile in My Badges, which is gone.
+* **Arabic on the badge screens:** badge names no longer break inside a word («مختبر مخضرم» on two lines); a name too long for its place ends in "…" with the whole name on hover. The tanween is written before the alif («يومًا») and «مختبر» without its kasra, because WebKit drew the mark torn off the alif or above the letter.
 
 ### Profile frames fit the window (2026-11-24, owner's report)
 

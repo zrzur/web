@@ -38,6 +38,7 @@ import { ApplicationsSection } from "./MyApplications";
 import { ProgramDialog } from "./ProgramDialog";
 import { OwnBadge, badgesApi, betaApi, can } from "./badgesApi";
 import {
+  BadgeName,
   Empty,
   ErrorText,
   Grid,
@@ -286,7 +287,12 @@ export function MyBadges() {
                     icon={<BadgeMark id={entry.meta.id} size="md" />}
                     title={
                       <TitleLine>
-                        {text(entry.meta.id).name}
+                        <BadgeName
+                          title={text(entry.meta.id).name}
+                          data-badge-name
+                        >
+                          {text(entry.meta.id).name}
+                        </BadgeName>
                         <Show when={tierLabel(entry.meta.tier)}>
                           <Pill data-tier={entry.meta.tier}>
                             {tierLabel(entry.meta.tier)}
@@ -551,7 +557,9 @@ export function MyBadges() {
                     <BadgeMark id={badge.id} size="lg" state="locked" />
                     <TileText>
                       <TitleLine>
-                        <strong>{text(badge.id).name}</strong>
+                        <strong title={text(badge.id).name} data-badge-name>
+                          {text(badge.id).name}
+                        </strong>
                         <Show when={tierLabel(badge.tier)}>
                           <Pill data-tier={badge.tier}>
                             {tierLabel(badge.tier)}
