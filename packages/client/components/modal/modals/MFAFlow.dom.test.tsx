@@ -188,6 +188,21 @@ describe("the two-factor step of signing in", () => {
     await settle();
   });
 
+  it("a code typed while the answer is on its way is kept", async () => {
+    let refuse: (error: Error) => void = () => {};
+    open(() => new Promise((_, reject) => (refuse = reject)));
+    type("000000");
+    confirm().click();
+    // the person already types the next code before the server answers
+    type("123456");
+    refuse(new Error("This code didn't work."));
+    await settle();
+    expect(field().value).toBe("123456");
+    expect(document.querySelector('[role="alert"]')?.textContent).toBe(
+      "This code didn't work.",
+    );
+  });
+
   it("cancelling ends the step with nothing", () => {
     open(async () => ({ type: "signedIn" }));
     const action = (text: string) =>

@@ -74,6 +74,12 @@ export function MFAFlowModal(
   async function onSubmit() {
     if (busy()) return;
     setBusy(true);
+    // what each field held when sent
+    const sent = new Map(
+      [group.controls.totp_code, group.controls.recovery_code].map(
+        (control) => [control, control.value] as const,
+      ),
+    );
     try {
       const method = selectedMethod();
       if (!method) return;
@@ -110,8 +116,14 @@ export function MFAFlowModal(
     } catch (err) {
       setError(err);
       if (props.state === "login") {
-        group.controls.totp_code.setValue("");
-        group.controls.recovery_code.setValue("");
+        // empty the field for the next code, unless the person has already
+        // typed one while the answer was on its way
+        for (const control of [
+          group.controls.totp_code,
+          group.controls.recovery_code,
+        ]) {
+          if (control.value === sent.get(control)) control.setValue("");
+        }
       }
     } finally {
       setBusy(false);
