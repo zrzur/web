@@ -251,17 +251,21 @@ const Rules = styled("section", {
     "& ul": {
       margin: 0,
       paddingInlineStart: "20px",
+      listStyle: "disc",
       display: "flex",
       flexDirection: "column",
       gap: "8px",
       fontSize: "15px",
       lineHeight: "24px",
+      // Arabic marks above and below the letters need room (WebKit)
+      "&:lang(ar)": { lineHeight: "28px" },
     },
     "& p": {
       margin: 0,
       fontSize: "14px",
       lineHeight: "20px",
       color: "var(--z-fg-secondary)",
+      "&:lang(ar)": { lineHeight: "24px" },
     },
   },
 });
@@ -351,6 +355,7 @@ const Meaning = styled("p", {
     margin: 0,
     fontSize: "15px",
     lineHeight: "24px",
+    "&:lang(ar)": { lineHeight: "28px" },
   },
 });
 
@@ -358,6 +363,7 @@ const Criteria = styled("ul", {
   base: {
     margin: 0,
     paddingInlineStart: "20px",
+    listStyle: "disc",
     display: "flex",
     flexDirection: "column",
     gap: "4px",
@@ -365,6 +371,7 @@ const Criteria = styled("ul", {
     lineHeight: "20px",
     color: "var(--z-fg-secondary)",
     overflowWrap: "anywhere",
+    "&:lang(ar)": { lineHeight: "26px" },
   },
 });
 

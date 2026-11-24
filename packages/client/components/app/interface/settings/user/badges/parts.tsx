@@ -497,7 +497,8 @@ export const Hint = styled("p", {
     lineHeight: "20px",
     color: "var(--z-fg-secondary)",
     overflowWrap: "anywhere",
-    "&:lang(ar)": { lineHeight: "22px" },
+    // tanween over an alef («أبداً») reached the line above in WebKit
+    "&:lang(ar)": { lineHeight: "24px" },
     "& > *:first-child:not(:only-child)": { flexShrink: 0 },
   },
 });
