@@ -71,8 +71,8 @@ describe("badge art", () => {
     const seen = new Map<string, string>();
     // Founder, Staff and Early Adopter are all the Zrzur mark on its own,
     // told apart by colour only (owner, 2026-11-12)
-    // and Verified Server Owner is the one verified seal, shared with Verified
-    // Bot Developer (owner, 2026-11-12)
+    // and Verified Server Owner is still the one verified seal, until the
+    // owner picks its own drawing (2026-11-24)
     const sameMark = new Set([
       "founder",
       "staff",
@@ -89,6 +89,20 @@ describe("badge art", () => {
       expect(seen.get(body), badge.id).toBeUndefined();
       seen.set(body, badge.id);
     }
+  });
+
+  it("draws Verified Bot Developer as its own badge, not the verified seal", () => {
+    // owner 2026-11-24: the two verified badges were the same grey seal in My
+    // Badges; he picked the </> in a gear for Verified Bot Developer. The
+    // server and bot marks keep the one verified seal (owner, 2026-11-12).
+    const outline = (id: string) =>
+      draw(id).querySelector("clipPath path")?.getAttribute("d") ?? "";
+    const developer = outline("verified_bot_developer");
+    const seal = outline("server_verified");
+    expect(developer).not.toBe("");
+    expect(developer).not.toBe(seal);
+    expect(developer).not.toBe(outline("verified_server_owner"));
+    expect(outline("bot_verified")).toBe(seal);
   });
 
   it("keeps the feather's shaft visible on light themes", () => {
