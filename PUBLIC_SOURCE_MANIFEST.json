@@ -6976,8 +6976,8 @@
     },
     {
       "path": "packages/client/components/ui/components/features/activity/ActivityArt.tsx",
-      "sha256": "71e4d31003be87933ab56a7bd9e3b9df977fec579661f05623c35744217eff83",
-      "bytes": 5200,
+      "sha256": "92ebef7cf1f222c75cce6fa08148b18cca54bb3ebf451e66225e92d2bac9e431",
+      "bytes": 5198,
       "category": "product-source-or-build-manifest"
     },
     {
