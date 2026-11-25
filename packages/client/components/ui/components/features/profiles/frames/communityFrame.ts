@@ -25,7 +25,30 @@ export const FRAME_TEMPLATE = {
   card: { left: 30, top: 70, right: 370, bottom: 470 },
   /** the slices: the frame's band plus what reaches into the card */
   slice: { top: 110, side: 40, bottom: 50 },
+  /**
+   * Must stay transparent, it lies over the card's content: the card less
+   * 10 px on every side (`safe` in the backend's template)
+   */
+  safe: { left: 40, top: 80, right: 360, bottom: 460 },
+  /** May be drawn on although inside `safe`: over the middle of the banner */
+  crest: { left: 120, top: 80, right: 280, bottom: 110 },
 } as const;
+
+/** The file's size in pixels (the backend's `PROFILE_FRAME_FILE_SIZE`) */
+export const FRAME_FILE = {
+  width: FRAME_TEMPLATE.width * FRAME_TEMPLATE.density,
+  height: FRAME_TEMPLATE.height * FRAME_TEMPLATE.density,
+} as const;
+
+/**
+ * Least alpha (of 255) that counts as drawn in the safe zone; anti-aliasing
+ * at the edge of the band may spill a hair inside (backend
+ * `FRAME_ALPHA_LIMIT`)
+ */
+export const FRAME_ALPHA_LIMIT = 16;
+
+/** Formats a frame file may be: one still picture */
+export const FRAME_TYPES = ["image/png", "image/webp", "image/gif"] as const;
 
 const T = FRAME_TEMPLATE;
 const OUT_TOP = T.card.top;

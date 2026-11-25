@@ -2,6 +2,16 @@
 
 ## Unreleased
 
+### Profile frames: a design guide, a frame kit and uploads in Creator Studio (2026-11-25)
+
+* **Creators make profile frames in Creator Studio**, the same way as other designs: New design → Profile frame, shown only while the server has community frames on (`features.community_frames`). The file must be one still PNG, WebP or GIF of exactly 800 × 1020 px, up to 2.5 MB, with the card's content clear: the app checks every pixel the way the server does (alpha above 16 of 255 inside the card less 10 px, except the crest window over the banner) before anything is uploaded.
+* **Errors say what to fix:** "The art covers the name area" (or the banner, or the text area), "A frame file is exactly 800 × 1020 px", "A frame is one still picture", and the file limits, in the same panel. The server's own refusals (`covers_content`, `frame_size`, `frame_still`) get the same plain words.
+* **Preview on your real profile card:** the picked file is laid round your own card exactly as others will see it, on a dark or light ground, with a "Show guides" switch that draws how far the art may reach, the safe zone and the crest window, and says what each means.
+* **"How to design a profile frame"** at `/designs/frame-guide`, reachable from the Designs home (while frames are on), the frame type in Creator Studio, its file step and Specs and templates: the canvas and the card's place in it, the safe zone, the room on each side in pixels, what stretches, the 4 px grid and how a frame scales, the file rules, light and dark checks, do's and don'ts, the review rules and how to submit. Its pictures are drawn from the same numbers the upload checks.
+* **The frame kit** (`/frame-kit/zrzur-frame-kit.zip`): `template.svg` with named layers (export area, reach area, stretch zones, 4 px grid, card outline, safe zone, crest window, labels), `template.png` at the exact size, `example-frame.png` (a finished frame that passes every check), a Zrzur palette as JSON and ASE, and a README in English, Arabic and German. The files are made by `scripts/designs/frame-kit.mjs`; a test keeps them equal to its output and to the upload's numbers. They are static files, not in the service worker's precache.
+
+- Opening the app on a computer shows one loading screen, the logo alone, and then the whole app at once, instead of an empty rail and list with the greeting first (owner report 2026-11-25). Phones keep their quiet frame.
+
 ### Activity: real pictures, links and a short settings page (2026-11-25, owner's report)
 
 * **Real pictures everywhere:** the profile card, the full profile and the member and DM line show each game's or app's own picture loaded only through Zrzur's image proxy or file server. A logo stands by itself, with no tile, background or frame; a Steam game's tall cover is the picture with a small rounded corner, centred in the same square so names line up. A hairline shadow in the text colour keeps a dark logo visible on a dark panel and a light one on a light panel. Without a picture, the first letter in a soft circle; never the generic laptop or controller icon. A picture that fails to load turns into the letter.
@@ -9,6 +19,11 @@
 * **The activity panel reads in layers:** "Playing" over the name, then the game's details and state on their own lines, then the time. Where it comes from moved into the time's tooltip, so the card stays short; the Steam credit stays.
 * **Settings → Activity, much less text:** one short line per row instead of paragraphs. The legal privacy words (the same as the privacy policy) are one tap away under "Details", with `aria-expanded`. Each program in the list shows its real picture (the desktop app's list picture through the image proxy, or the program's own icon from your computer, which never leaves it), its name, "Running now" in the success colour, Rename and its switch. Browsers say "Browser · off until you turn it on". Connected apps show their own icon too.
 * Needs the desktop app from this release for pictures, pages, local icons and browsers off; an older desktop app keeps working with letter tiles.
+
+### Early Adopter is a ticket now, not the Zrzur mark (2026-11-25, owner's decision)
+
+* **Early Adopter has a new drawing:** a cream admission ticket printed "01" in coral, with a torn-off stub, in the same enamel-pin style with a silver rim. Before, it was the Zrzur mark in pink-red, the same shape as Founder and Staff, so people took early members for Zrzur staff.
+* The "01" and the stub are drawn bold so the ticket reads at 16 px in the member list, and none of Founder's gold is used.
 
 ### Badges: one text for every badge, Verified Bot Developer drawn, Verified Server Owner cancelled (2026-11-24, owner's report)
 
@@ -75,6 +90,16 @@
 * **On a nameplate** in the member list, a name in its own chosen colour keeps it; the plate's white or dark ink is only for names without one and for the status line.
 * **On a themed profile card** a colour that does not read on the theme is lightened, same hue, until it reads at 4.5:1 (a blue stays blue); it gave way to the card's white before. The card's ink is used only when no shade of a colour reads.
 * **No grey box, no cut letters:** the boxes that cut a long name short with "…" were as tall as the line, so a Halo, Edge or Lifted effect was cut into a hard-edged grey block and slanted fonts (Script) lost the end of their last letter. Every box that clips a name now has 6 px of room on each side, pulled back by as much, so nothing moves: member list, message header, account bar, direct messages (desktop and phone), friends, the You menu, the user card and the full profile.
+
+### Calls in direct messages and groups keep the chat visible (2026-11-23, owner's request)
+
+* **Fixed:** calling someone in a DM hid the conversation. The call was the floating card laid over the top 40 % of the message list (or over all of it when expanded), and the messages did not move. The call is now a block above the messages, in the page itself: the conversation scrolls below it and the composer works during the call.
+* **Desktop and tablet:** both people large and centred, with a ring that pulses while someone talks, microphone-off and deafened marks, and the other person's tile saying "Ringing…" until they answer. Cameras and shared screens use the call tiles. Under them: microphone and camera with a device menu each, share screen, More (deafen, full screen, fold, voice settings) and hang up. Drag the line under the call to make it taller or shorter (Arrow Up/Down, Home, End on the keyboard); Enter or a double-click folds it to a bar with the time, microphone and hang up.
+* **Others are in the call, you are not:** a bar above the messages shows who, for how long, and Join or Join with video.
+* **Phones:** the call fills the screen: minimise, the conversation's name and the call time, speaker, add people (groups); big tiles; a floating bar with camera, microphone, chat, more and hang up. Chat brings the conversation up under a short call strip; its handle goes back. Minimise returns to the app, and the floating call card opens the call again.
+* **Asks before ringing (2026-11-24):** starting a call in a DM or group opens a short dialog titled with the person or group: "No one is here yet. Start the call and others can join.", with Start a call (or Start a video call) and Cancel. Joining a call that is already on, the Join bar and answering a ring do not ask.
+* **Alone in the call (2026-11-24):** once connected with nobody else in, your own tile is large; the other members' faces sit under it at half strength until they join (up to five, else four and +N), with "Only you are here. The others can join while you stay in the call." and "Calling…" while they are rung. Same wording as the phone app.
+* Reduced motion keeps the rings still. The call parts load the first time a call shows (precache shell 2,044,994 bytes).
 
 ### Name styles (2026-11-22, owner's request)
 

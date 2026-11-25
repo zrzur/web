@@ -1,0 +1,156 @@
+{
+  "name": "Zrzur frame kit",
+  "note": "Zrzur's interface colours and the ramps of the example frame. Five steps per ramp, dark to light; no gradients.",
+  "colours": [
+    {
+      "group": "Zrzur",
+      "name": "Action pink-red",
+      "value": "#E0195F"
+    },
+    {
+      "group": "Zrzur",
+      "name": "Action hover",
+      "value": "#C8155A"
+    },
+    {
+      "group": "Zrzur",
+      "name": "Action pressed",
+      "value": "#B0124F"
+    },
+    {
+      "group": "Zrzur",
+      "name": "Action text on dark",
+      "value": "#FF7AA8"
+    },
+    {
+      "group": "Zrzur",
+      "name": "Surface frame",
+      "value": "#0D0E16"
+    },
+    {
+      "group": "Zrzur",
+      "name": "Surface nav",
+      "value": "#171925"
+    },
+    {
+      "group": "Zrzur",
+      "name": "Surface chat",
+      "value": "#1D1F2D"
+    },
+    {
+      "group": "Zrzur",
+      "name": "Surface raised",
+      "value": "#242638"
+    },
+    {
+      "group": "Zrzur",
+      "name": "Selected",
+      "value": "#303348"
+    },
+    {
+      "group": "Zrzur",
+      "name": "Floating",
+      "value": "#11121C"
+    },
+    {
+      "group": "Zrzur",
+      "name": "Title text",
+      "value": "#F7F8FC"
+    },
+    {
+      "group": "Zrzur",
+      "name": "Text",
+      "value": "#F0F1F8"
+    },
+    {
+      "group": "Zrzur",
+      "name": "Secondary text",
+      "value": "#A1A5B8"
+    },
+    {
+      "group": "Zrzur",
+      "name": "Online aqua",
+      "value": "#55DCC8"
+    },
+    {
+      "group": "Zrzur",
+      "name": "Warning amber",
+      "value": "#F3B96B"
+    },
+    {
+      "group": "Zrzur",
+      "name": "Ink",
+      "value": "#191B27"
+    },
+    {
+      "group": "Zrzur",
+      "name": "Light surface",
+      "value": "#F5F6FB"
+    },
+    {
+      "group": "Example frame",
+      "name": "ink 1",
+      "value": "#120D1C"
+    },
+    {
+      "group": "Example frame",
+      "name": "rose 1",
+      "value": "#3A0A20"
+    },
+    {
+      "group": "Example frame",
+      "name": "rose 2",
+      "value": "#7A1240"
+    },
+    {
+      "group": "Example frame",
+      "name": "rose 3",
+      "value": "#B8155A"
+    },
+    {
+      "group": "Example frame",
+      "name": "rose 4",
+      "value": "#E0195F"
+    },
+    {
+      "group": "Example frame",
+      "name": "rose 5",
+      "value": "#FF9CC0"
+    },
+    {
+      "group": "Example frame",
+      "name": "aqua 1",
+      "value": "#0B3A3A"
+    },
+    {
+      "group": "Example frame",
+      "name": "aqua 2",
+      "value": "#127068"
+    },
+    {
+      "group": "Example frame",
+      "name": "aqua 3",
+      "value": "#24A596"
+    },
+    {
+      "group": "Example frame",
+      "name": "aqua 4",
+      "value": "#55DCC8"
+    },
+    {
+      "group": "Example frame",
+      "name": "aqua 5",
+      "value": "#C9FFF6"
+    },
+    {
+      "group": "Example frame",
+      "name": "gold 1",
+      "value": "#FFE29A"
+    },
+    {
+      "group": "Example frame",
+      "name": "gold 2",
+      "value": "#FFFFFF"
+    }
+  ]
+}

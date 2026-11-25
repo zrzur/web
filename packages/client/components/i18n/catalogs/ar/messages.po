@@ -33350,3 +33350,495 @@ msgstr "يشاهد"
 #: components/app/interface/settings/user/activity/ActivitySettings.tsx
 msgid "Your public Steam game, also without the desktop app. Link Steam in Connections first."
 msgstr "لعبتك العامة على Steam، حتى دون تطبيق سطح المكتب. اربط Steam في «الحسابات المرتبطة» أولًا."
+
+#: src/interface/designs/FrameGuide.tsx
+msgid "A clear outline, whole 4 px blocks"
+msgstr "حدود واضحة ومربعات كاملة بحجم 4 بكسل"
+
+#: src/interface/designs/FrameGuide.tsx
+msgid "A finished frame that passes every check"
+msgstr "إطار مكتمل يجتاز كل الفحوص"
+
+#: components/app/interface/settings/user/profile/studio/StudioEditor.tsx
+msgid "A frame file is exactly 800 × 1020 px. Start from the template in the frame kit."
+msgstr "ملف الإطار مقاسه 800 × 1020 بكسل تمامًا. ابدأ من القالب الموجود في حزمة الإطار."
+
+#: src/interface/designs/FrameGuide.tsx
+msgid "A frame is one still picture laid round your profile card. Draw it on our template, keep the card clear, and upload it in Creator Studio."
+msgstr "الإطار صورة ثابتة واحدة توضع حول بطاقة ملفك الشخصي. ارسمه على قالبنا، واترك البطاقة خالية، ثم ارفعه في استوديو المصممين."
+
+#: components/app/interface/settings/user/profile/studio/StudioEditor.tsx
+msgid "A frame is one still picture. Export a single frame as PNG or WebP."
+msgstr "الإطار صورة ثابتة واحدة. صدّر إطارًا واحدًا بصيغة PNG أو WebP."
+
+#: src/interface/designs/FrameGuide.tsx
+msgid "About 3 px a block"
+msgstr "نحو 3 بكسل للمربع"
+
+#: src/interface/designs/FrameGuide.tsx
+msgid "About 4 px a block"
+msgstr "نحو 4 بكسل للمربع"
+
+#: src/interface/designs/FrameGuide.tsx
+msgid "About 5 px a block"
+msgstr "نحو 5 بكسل للمربع"
+
+#: src/interface/designs/FrameGuide.tsx
+msgid "Above the card"
+msgstr "فوق البطاقة"
+
+#: src/interface/designs/FrameGuide.tsx
+msgid "Alpha 16 of 255 or less"
+msgstr "قيمة ألفا 16 من 255 أو أقل"
+
+#: src/interface/designs/FrameGuide.tsx
+msgid "Art over the name or the text"
+msgstr "رسم فوق الاسم أو النص"
+
+#: components/app/interface/settings/user/profile/studio/StudioEditor.tsx
+msgid "Art round the whole profile card, drawn on our template."
+msgstr "رسم يحيط ببطاقة الملف الشخصي كلها، مرسوم على قالبنا."
+
+#: src/interface/designs/FrameGuide.tsx
+msgid "Below the card"
+msgstr "تحت البطاقة"
+
+#: src/interface/designs/FrameGuide.tsx
+msgid "Canvas"
+msgstr "اللوحة"
+
+#: components/app/interface/settings/user/profile/studio/StudioEditor.tsx
+msgid "Card content clear"
+msgstr "محتوى البطاقة خالٍ"
+
+#: src/interface/designs/FrameGuide.tsx
+msgid "Card position"
+msgstr "موضع البطاقة"
+
+#: src/interface/designs/FrameGuide.tsx
+msgid "Counts as clear"
+msgstr "يُعدّ شفافًا"
+
+#: components/app/interface/settings/user/profile/studio/StudioEditor.tsx
+msgid "Covers the banner"
+msgstr "يغطي البانر"
+
+#: components/app/interface/settings/user/profile/studio/StudioEditor.tsx
+msgid "Covers the name area"
+msgstr "يغطي منطقة الاسم"
+
+#: components/app/interface/settings/user/profile/studio/StudioEditor.tsx
+msgid "Covers the text area"
+msgstr "يغطي منطقة النص"
+
+#: src/interface/designs/FrameGuide.tsx
+msgid "Creator Studio is open to people Zrzur has made creators."
+msgstr "استوديو المصممين متاح لمن منحهم زرزور صفة المصمم."
+
+#: src/interface/designs/FrameGuide.tsx
+msgid "Creator Studio names the design after the file; you can change the name there. Hide the template's guide layers before you export."
+msgstr "يسمّي استوديو المصممين التصميم باسم الملف، ويمكنك تغيير الاسم هناك. أخفِ طبقات الإرشاد في القالب قبل التصدير."
+
+#: src/interface/designs/FrameGuide.tsx
+msgid "Crest window"
+msgstr "نافذة الشعار"
+
+#: components/app/interface/settings/user/profile/studio/LivePreview.tsx
+msgid "Crest window: may be drawn on"
+msgstr "نافذة الشعار: يجوز الرسم فيها"
+
+#: src/interface/designs/FrameGuide.tsx
+msgid "Details in the corners and on top"
+msgstr "التفاصيل في الزوايا وفي الأعلى"
+
+#: src/interface/designs/FrameGuide.tsx
+msgid "Do and don't"
+msgstr "افعل ولا تفعل"
+
+#: src/interface/designs/FrameGuide.tsx
+msgid "Download the frame kit"
+msgstr "نزّل حزمة الإطار"
+
+#: src/interface/designs/FrameGuide.tsx
+msgid "Download the frame kit and open template.svg or template.png."
+msgstr "نزّل حزمة الإطار وافتح الملف template.svg أو template.png."
+
+#. placeholder {0}: CARD.left
+#. placeholder {1}: CARD.top
+#: src/interface/designs/FrameGuide.tsx
+msgid "Draw in blocks of {BLOCK} × {BLOCK} file pixels, counted from the card's top-left corner ({0}, {1}). One block shows as 4 px on a 340 px card. Single pixels blur when the frame is scaled."
+msgstr "ارسم بمربعات مقاسها {BLOCK} × {BLOCK} بكسل في الملف، تُعدّ من الزاوية العليا اليسرى للبطاقة ({0}، {1}). يظهر المربع الواحد بحجم 4 بكسل على بطاقة عرضها 340 بكسل. أما البكسلات المفردة فتصبح ضبابية عند تغيير حجم الإطار."
+
+#. placeholder {0}: FRAME_FILE.width
+#. placeholder {1}: FRAME_FILE.height
+#: src/interface/designs/FrameGuide.tsx
+msgid "Draw on a canvas of exactly {0} × {1} px. The card sits inside it; everything round the card is room for your art."
+msgstr "ارسم على لوحة مقاسها {0} × {1} بكسل تمامًا. تقع البطاقة داخلها، وكل ما حول البطاقة مساحة لرسمك."
+
+#: src/interface/designs/FrameGuide.tsx
+msgid "Draw on a layer of your own, inside the room round the card."
+msgstr "ارسم على طبقة خاصة بك، داخل المساحة المحيطة بالبطاقة."
+
+#: src/interface/designs/FrameGuide.tsx
+msgid "Everything below, with a README in three languages"
+msgstr "كل ما يلي، مع ملف README بثلاث لغات"
+
+#. placeholder {0}: FRAME_FILE.width
+#. placeholder {1}: FRAME_FILE.height
+#: src/interface/designs/FrameGuide.tsx
+msgid "Exactly {0} × {1} px"
+msgstr "{0} × {1} بكسل تمامًا"
+
+#: src/interface/designs/FrameGuide.tsx
+msgid "File name"
+msgstr "اسم الملف"
+
+#: src/interface/designs/FrameGuide.tsx
+msgid "Frame guide"
+msgstr "دليل الإطار"
+
+#: components/app/interface/settings/user/profile/studio/StudioEditor.tsx
+#: components/app/interface/settings/user/profile/studio/StudioHome.tsx
+msgid "Frame kit"
+msgstr "حزمة الإطار"
+
+#: src/interface/designs/FrameGuide.tsx
+msgid "Full profile, 460 px"
+msgstr "الملف الشخصي الكامل، 460 بكسل"
+
+#: src/interface/designs/FrameGuide.tsx
+msgid "Hide the guide layers and export the whole canvas as a PNG with a transparent background."
+msgstr "أخفِ طبقات الإرشاد وصدّر اللوحة كلها بصيغة PNG بخلفية شفافة."
+
+#: components/app/interface/settings/user/profile/studio/LivePreview.tsx
+msgid "How far the art may reach"
+msgstr "أقصى ما يمكن أن يمتد إليه الرسم"
+
+#: components/app/interface/settings/user/profile/studio/StudioEditor.tsx
+#: components/app/interface/settings/user/profile/studio/StudioHome.tsx
+#: src/interface/designs/Home.tsx
+msgid "How to design a frame"
+msgstr "كيف تصمم إطارًا"
+
+#: src/interface/designs/FrameGuide.tsx
+msgid "How to design a profile frame"
+msgstr "كيف تصمم إطارًا للبطاقة"
+
+#: src/interface/designs/FrameGuide.tsx
+msgid "How to submit"
+msgstr "طريقة الإرسال"
+
+#: src/interface/designs/FrameGuide.tsx
+msgid "In Creator Studio, choose New design, then Profile frame, and upload the file."
+msgstr "في استوديو المصممين، اختر «تصميم جديد» ثم «إطار البطاقة»، وارفع الملف."
+
+#: src/interface/designs/FrameGuide.tsx
+msgid "Inside the card's edge"
+msgstr "داخل حافة البطاقة"
+
+#: src/interface/designs/FrameGuide.tsx
+msgid "Keep clear"
+msgstr "اتركها خالية"
+
+#: components/app/interface/settings/user/profile/studio/LivePreview.tsx
+msgid "Keep clear: the card's content"
+msgstr "اتركها خالية: محتوى البطاقة"
+
+#: src/interface/designs/FrameGuide.tsx
+msgid "Keep the card clear"
+msgstr "اترك البطاقة خالية"
+
+#: components/app/interface/settings/user/profile/studio/StudioHome.tsx
+msgid "Keep the card clear 20 px in from its edge"
+msgstr "اترك البطاقة خالية بدءًا من 20 بكسل داخل حافتها"
+
+#: src/interface/designs/FrameGuide.tsx
+msgid "Light and dark"
+msgstr "الفاتح والداكن"
+
+#: src/interface/designs/FrameGuide.tsx
+msgid "Lowercase words with hyphens, such as desert-night.png"
+msgstr "كلمات بأحرف لاتينية صغيرة تفصل بينها شرطات، مثل desert-night.png"
+
+#: src/interface/designs/Home.tsx
+msgid "Make your own profile frame"
+msgstr "صمّم إطار بطاقتك بنفسك"
+
+#: components/app/interface/settings/user/profile/studio/StudioEditor.tsx
+msgid "Moves"
+msgstr "متحرك"
+
+#: src/interface/designs/FrameGuide.tsx
+msgid "Narrow phone card"
+msgstr "بطاقة ضيقة على الهاتف"
+
+#: src/interface/designs/FrameGuide.tsx
+msgid "No copied art, including frames and stickers from other apps and games."
+msgstr "لا رسوم منسوخة، بما في ذلك الإطارات والملصقات من التطبيقات والألعاب الأخرى."
+
+#: src/interface/designs/FrameGuide.tsx
+msgid "No hate: no slurs, hateful symbols or attacks on anyone."
+msgstr "لا كراهية: لا شتائم ولا رموز تحض على الكراهية ولا إساءة إلى أحد."
+
+#: src/interface/designs/FrameGuide.tsx
+msgid "No logos, brand marks or watermarks."
+msgstr "لا شعارات ولا علامات تجارية ولا علامات مائية."
+
+#: src/interface/designs/FrameGuide.tsx
+msgid "No real person without their consent."
+msgstr "لا يظهر شخص حقيقي دون موافقته."
+
+#: src/interface/designs/FrameGuide.tsx
+msgid "No text or letters in any language."
+msgstr "لا نصوص ولا حروف بأي لغة."
+
+#: components/app/interface/settings/user/profile/studio/StudioHome.tsx
+#: src/interface/designs/FrameGuide.tsx
+msgid "None: one still picture"
+msgstr "لا حركة: صورة ثابتة واحدة"
+
+#: src/interface/designs/FrameGuide.tsx
+msgid "On each side"
+msgstr "على كل جانب"
+
+#: src/interface/designs/FrameGuide.tsx
+msgid "People see your frame on dark and on light screens. Give the art a dark outline and a lighter edge so it reads on both, and check both in Creator Studio's preview before you publish."
+msgstr "يرى الناس إطارك على شاشات داكنة وفاتحة. اجعل للرسم حدودًا داكنة وحافة أفتح ليبقى واضحًا على كلتيهما، وتحقق من الحالتين في معاينة استوديو المصممين قبل النشر."
+
+#: src/interface/designs/FrameGuide.tsx
+msgid "Pixel grid"
+msgstr "شبكة البكسل"
+
+#: src/interface/designs/FrameGuide.tsx
+msgid "Plain sides that can stretch"
+msgstr "جوانب بسيطة يمكن أن تتمدد"
+
+#: src/interface/designs/FrameGuide.tsx
+msgid "PNG, WebP or GIF"
+msgstr "PNG أو WebP أو GIF"
+
+#: components/app/interface/settings/user/profile/studio/StudioHome.tsx
+msgid "PNG, WebP or GIF, with a transparent background"
+msgstr "PNG أو WebP أو GIF بخلفية شفافة"
+
+#: src/interface/designs/FrameGuide.tsx
+msgid "Profile card, 360 px"
+msgstr "بطاقة الملف الشخصي، 360 بكسل"
+
+#: src/interface/designs/FrameGuide.tsx
+msgid "Review rules"
+msgstr "قواعد المراجعة"
+
+#: src/interface/designs/FrameGuide.tsx
+msgid "Reviewers take down a frame that breaks these rules. The <0>Creator Terms</0> apply to every design."
+msgstr "يزيل المراجعون أي إطار يخالف هذه القواعد. وتسري <0>شروط المبدعين</0> على كل تصميم."
+
+#: src/interface/designs/FrameGuide.tsx
+msgid "Room for art"
+msgstr "مساحة للرسم"
+
+#: src/interface/designs/FrameGuide.tsx
+msgid "Safe zone"
+msgstr "المنطقة الآمنة"
+
+#: components/app/interface/settings/user/profile/studio/StudioEditor.tsx
+msgid "Show guides"
+msgstr "إظهار خطوط الإرشاد"
+
+#: src/interface/designs/FrameGuide.tsx
+msgid "Single-pixel details: they blur"
+msgstr "تفاصيل ببكسل واحد: تصبح ضبابية"
+
+#: components/app/interface/settings/user/profile/studio/StudioEditor.tsx
+msgid "Still picture"
+msgstr "صورة ثابتة"
+
+#: src/interface/designs/FrameGuide.tsx
+msgid "Stretches with the card"
+msgstr "يتمدد مع البطاقة"
+
+#: components/app/interface/settings/user/profile/studio/StudioEditor.tsx
+msgid "The art covers the banner. Keep the card clear 20 px in from its edge; only the crest window over the middle of the banner may be drawn on."
+msgstr "الرسم يغطي البانر. اترك البطاقة خالية بدءًا من 20 بكسل داخل حافتها، ولا يجوز الرسم إلا في نافذة الشعار فوق منتصف البانر."
+
+#: components/app/interface/settings/user/profile/studio/StudioEditor.tsx
+msgid "The art covers the card's content. Keep the card clear 20 px in from its edge; only the crest window over the middle of the banner may be drawn on."
+msgstr "الرسم يغطي محتوى البطاقة. اترك البطاقة خالية بدءًا من 20 بكسل داخل حافتها، ولا يجوز الرسم إلا في نافذة الشعار فوق منتصف البانر."
+
+#: components/app/interface/settings/user/profile/studio/StudioEditor.tsx
+msgid "The art covers the name area. Keep the card clear 20 px in from its edge, where the avatar and the name sit."
+msgstr "الرسم يغطي منطقة الاسم. اترك البطاقة خالية بدءًا من 20 بكسل داخل حافتها، حيث تقع الصورة الرمزية والاسم."
+
+#: components/app/interface/settings/user/profile/studio/StudioEditor.tsx
+msgid "The art covers the text area. Keep the card clear 20 px in from its edge, down to its foot."
+msgstr "الرسم يغطي منطقة النص. اترك البطاقة خالية بدءًا من 20 بكسل داخل حافتها حتى أسفلها."
+
+#: src/interface/designs/FrameGuide.tsx
+msgid "The canvas"
+msgstr "اللوحة"
+
+#: src/interface/designs/Home.tsx
+msgid "The canvas, the safe zone and a ready template, in one guide."
+msgstr "اللوحة والمنطقة الآمنة وقالب جاهز، في دليل واحد."
+
+#: src/interface/designs/FrameGuide.tsx
+msgid "The file"
+msgstr "الملف"
+
+#: src/interface/designs/FrameGuide.tsx
+msgid "The frame lies over the card as it is. The avatar, the name and the text area must stay fully transparent, or the upload is refused."
+msgstr "يوضع الإطار فوق البطاقة كما هو. لذا يجب أن تبقى الصورة الرمزية والاسم ومنطقة النص شفافة تمامًا، وإلا رُفض الرفع."
+
+#. placeholder {0}: ROOM.band
+#: src/interface/designs/FrameGuide.tsx
+msgid "The safe zone is the card less {0} px on every side. Only the crest window over the middle of the banner may be drawn on."
+msgstr "المنطقة الآمنة هي البطاقة مطروحًا منها {0} بكسل من كل جانب. ولا يجوز الرسم إلا في نافذة الشعار فوق منتصف البانر."
+
+#: src/interface/designs/FrameGuide.tsx
+msgid "The same template at the exact size"
+msgstr "القالب نفسه بالمقاس الدقيق"
+
+#: src/interface/designs/FrameGuide.tsx
+msgid "The template with named guide layers"
+msgstr "القالب مع طبقات إرشاد مسمّاة"
+
+#. placeholder {0}: FIXED.top
+#. placeholder {1}: FIXED.bottom
+#: src/interface/designs/FrameGuide.tsx
+msgid "The top {0} px and the bottom {1} px are shown as you drew them. The sides between them stretch with the card's height, so keep them plain: put stars and details in the corners, on top and at the foot."
+msgstr "يظهر أعلى {0} بكسل وأسفل {1} بكسل كما رسمتهما. أما الجانبان بينهما فيتمددان مع طول البطاقة، لذا اجعلهما بسيطين: ضع النجوم والتفاصيل في الزوايا وفي الأعلى وفي الأسفل."
+
+#: src/interface/designs/FrameGuide.tsx
+msgid "Transparent"
+msgstr "شفافة"
+
+#: src/interface/designs/FrameGuide.tsx
+msgid "Turn on Show guides, check dark and light, answer the rights questions and publish."
+msgstr "فعّل «إظهار خطوط الإرشاد»، وتحقق من الوضعين الداكن والفاتح، وأجب عن أسئلة الحقوق، ثم انشر."
+
+#. placeholder {0}: megabytes()
+#: components/app/interface/settings/user/profile/studio/StudioHome.tsx
+msgid "Up to {0} MB"
+msgstr "حتى {0} ميغابايت"
+
+#: src/interface/designs/FrameGuide.tsx
+msgid "Up to {MAX_MB} MB"
+msgstr "حتى {MAX_MB} ميغابايت"
+
+#: src/interface/designs/FrameGuide.tsx
+msgid "Upload a frame"
+msgstr "ارفع إطارًا"
+
+#: components/app/interface/settings/user/profile/studio/StudioEditor.tsx
+msgid "Use a PNG, WebP or GIF file. A frame is one still picture."
+msgstr "استخدم ملفًا بصيغة PNG أو WebP أو GIF. الإطار صورة ثابتة واحدة."
+
+#: src/interface/designs/FrameGuide.tsx
+msgid "What is in the kit"
+msgstr "محتويات الحزمة"
+
+#: src/interface/designs/FrameGuide.tsx
+msgid "Where the art may reach"
+msgstr "إلى أين يمكن أن يمتد الرسم"
+
+#: src/interface/designs/FrameGuide.tsx
+msgid "Words, letters or logos"
+msgstr "كلمات أو حروف أو شعارات"
+
+#: src/interface/designs/FrameGuide.tsx
+msgid "Your own work, or work you hold a clear licence to share."
+msgstr "عملك أنت، أو عمل تملك ترخيصًا واضحًا بمشاركته."
+
+#: src/interface/designs/FrameGuide.tsx
+msgid "Zrzur's own pixel frames are drawn at 4 px on tall windows, 3 px below 1080 px and 2 px below 640 px and on phones. At 4 px they reach 96 px above the card, 72 px below and 56 px beside it."
+msgstr "تُرسم إطارات زرزور البكسلية الخاصة بحجم 4 بكسل في النوافذ الطويلة، و3 بكسل إذا قل ارتفاع النافذة عن 1080 بكسل، و2 بكسل إذا قل عن 640 بكسل وعلى الهواتف. وبحجم 4 بكسل تمتد 96 بكسل فوق البطاقة، و72 بكسل تحتها، و56 بكسل على جانبيها."
+
+#: components/app/interface/settings/user/profile/studio/StudioEditor.tsx
+msgid "A frame is laid round the card exactly as you drew it, so there is nothing to fit."
+msgstr "يوضع الإطار حول البطاقة تمامًا كما رسمته، فلا حاجة إلى ضبطه."
+
+#. placeholder {0}: user().username
+#: components/ui/components/features/voice/dmCall/DmCallRoom.tsx
+msgid "{0}, speaking"
+msgstr "{0}، يتحدث الآن"
+
+#: components/ui/components/features/voice/dmCall/DmCallRoom.tsx
+msgid "Back to the call"
+msgstr "العودة إلى المكالمة"
+
+#: components/ui/components/features/voice/dmCall/DmCallRoom.tsx
+msgid "Call"
+msgstr "مكالمة"
+
+#: components/ui/components/features/voice/dmCall/DmCallRoom.tsx
+msgid "Call controls"
+msgstr "أدوات التحكم في المكالمة"
+
+#: components/ui/components/features/voice/dmCall/DmCallStage.tsx
+msgid "Call in this conversation"
+msgstr "مكالمة في هذه المحادثة"
+
+#: components/ui/components/features/voice/dmCall/DmCallRoom.tsx
+msgid "Call size"
+msgstr "حجم المكالمة"
+
+#: components/ui/components/features/voice/dmCall/DmCallRoom.tsx
+msgid "Drag to resize. Enter folds the call."
+msgstr "اسحب لتغيير الحجم. ومفتاح الإدخال يطوي المكالمة."
+
+#: components/ui/components/features/voice/dmCall/DmCallRoom.tsx
+msgid "Fold the call"
+msgstr "اطوِ المكالمة"
+
+#: components/ui/components/features/voice/dmCall/DmCallStage.tsx
+msgid "In a call"
+msgstr "مكالمة جارية"
+
+#: components/ui/components/features/voice/dmCall/DmCallStage.tsx
+msgid "Join with video"
+msgstr "انضم بالفيديو"
+
+#: components/ui/components/features/voice/dmCall/DmCallRoom.tsx
+msgid "Microphone and speaker"
+msgstr "الميكروفون ومكبّر الصوت"
+
+#: components/ui/components/features/voice/dmCall/DmCallRoom.tsx
+msgid "Minimise the call"
+msgstr "صغّر المكالمة"
+
+#: components/ui/components/features/voice/dmCall/DmCallRoom.tsx
+msgid "Open the chat"
+msgstr "افتح الدردشة"
+
+#: components/ui/components/features/voice/dmCall/DmCallRoom.tsx
+msgid "Ringing…"
+msgstr "يرنّ…"
+
+#: components/ui/components/features/voice/dmCall/DmCallRoom.tsx
+msgid "Show the call"
+msgstr "أظهر المكالمة"
+
+#: components/ui/components/features/voice/dmCall/DmCallRoom.tsx
+msgid "Speaker and microphone"
+msgstr "مكبّر الصوت والميكروفون"
+
+#: components/ui/components/features/voice/dmCall/DmCallRoom.tsx
+msgid "This browser plays calls on the device's own speaker choice."
+msgstr "يشغّل هذا المتصفح المكالمات عبر مكبّر الصوت الذي يختاره الجهاز."
+
+#: components/ui/components/features/voice/dmCall/DmCallRoom.tsx
+msgid "Voice settings"
+msgstr "إعدادات الصوت"
+
+#. placeholder {0}: user().username
+#: components/ui/components/features/voice/dmCall/DmCallRoom.tsx
+msgid "{0}, ringing"
+msgstr "{0}، يرنّ الآن"
+
+#: components/ui/components/features/voice/dmCall/DmCallRoom.tsx
+msgid "Calling…"
+msgstr "جارٍ الاتصال…"
+
+#: components/ui/components/features/voice/dmCall/DmCallRoom.tsx
+msgid "Only you are here. The others can join while you stay in the call."
+msgstr "أنت وحدك هنا. يمكن للآخرين الانضمام ما دمت في المكالمة."

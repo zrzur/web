@@ -36,6 +36,7 @@ export function useStudioWords() {
         decorations: t`Avatar decoration`,
         nameplates: t`Nameplate`,
         effects: t`Profile effect`,
+        frames: t`Profile frame`,
       })[kind],
     /** a line of a design's history, said to its creator */
     action: (action: string) =>

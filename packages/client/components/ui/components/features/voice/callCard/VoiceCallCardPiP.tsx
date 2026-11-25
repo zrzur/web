@@ -22,6 +22,7 @@ import { Avatar } from "@revolt/ui/components/design";
 import { Row } from "@revolt/ui/components/layout";
 import { Symbol } from "@revolt/ui/components/utils/Symbol";
 
+import { reopenPhoneCall } from "../dmCall/dmCallView";
 import { VoiceCallCardActions } from "./VoiceCallCardActions";
 
 /**
@@ -35,6 +36,8 @@ export function VoiceCallCardPiP() {
   const navigate = useNavigate();
   const { t } = useLingui();
   const backToCall = () => {
+    // a phone call in a conversation opens full screen again
+    reopenPhoneCall();
     navigate(voice.channel()?.path ?? "");
     state.appDrawer()?.setShown(true);
   };
