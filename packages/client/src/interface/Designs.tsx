@@ -27,6 +27,7 @@ import {
   useDate,
   useWearDesign,
 } from "@revolt/app/interface/settings/user/profile/CommunityParts";
+import { StaffEraseDialog } from "@revolt/app/interface/settings/user/profile/StaffErase";
 import {
   CommunityItem,
   can,
@@ -34,6 +35,7 @@ import {
   communityFramesOpen,
   creatorName,
   hasOpenPage,
+  mayDeleteAny,
   maySeeStudio,
 } from "@revolt/app/interface/settings/user/profile/communityApi";
 import { useCreatorAccess } from "@revolt/app/interface/settings/user/profile/creatorAccess";
@@ -523,6 +525,11 @@ function Gallery() {
             item={item()}
             onClose={() => setOpen(undefined)}
             onChanged={() => setVersion((v) => v + 1)}
+            mayErase={mayDeleteAny(perms())}
+            onErased={() => {
+              setOpen(undefined);
+              setVersion((v) => v + 1);
+            }}
             onCreator={(id) => {
               setOpen(undefined);
               go(`/creator/${id}`);
@@ -632,8 +639,12 @@ function DesignDialog(props: {
   onClose: () => void;
   onChanged: () => void;
   onCreator: (id: string) => void;
+  /** Zrzur staff delete anyone's design; the server checks again */
+  mayErase?: boolean;
+  onErased?: () => void;
 }) {
   const { t, i18n } = useLingui();
+  const [erasing, setErasing] = createSignal(false);
   const client = useClient();
   const { isLoggedIn } = useClientLifecycle();
   const { openModal } = useModals();
@@ -821,6 +832,31 @@ function DesignDialog(props: {
                 <Icon name="flag" size={14} />
                 <Trans>Report</Trans>
               </button>
+            </Show>
+            <Show when={props.mayErase && !isDesignsSite()}>
+              <button
+                type="button"
+                data-quiet
+                data-danger="true"
+                data-testid="staff-erase"
+                onClick={() => setErasing(true)}
+              >
+                <Icon name="trash" size={14} />
+                <Trans>Delete for everyone</Trans>
+              </button>
+              <StaffEraseDialog
+                show={erasing()}
+                item={{
+                  _id: item()._id,
+                  name: item().name,
+                  version: details()?.item.version,
+                }}
+                onClose={() => setErasing(false)}
+                onErased={() => {
+                  setErasing(false);
+                  props.onErased?.();
+                }}
+              />
             </Show>
           </Buttons>
           <Show when={wearing()}>

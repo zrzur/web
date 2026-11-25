@@ -146,8 +146,9 @@ export function actionsOf(item: CommunityItem, readOnly: boolean) {
       shown === "Draft" || shown === "ChangesRequested" || shown === "Rejected",
     withdraw: status !== "Archived" && status !== "Suspended",
     restore: status === "Archived",
-    // the server deletes only what nobody can see
-    remove: status !== "Published" && status !== "Suspended",
+    // anything they publish, they can delete (owner, 2026-11-25); a design
+    // a reviewer took down stays until the review is over
+    remove: status !== "Suspended",
     download: true,
   };
 }

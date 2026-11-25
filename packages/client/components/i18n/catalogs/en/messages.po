@@ -33877,3 +33877,33 @@ msgstr "Zrzur flock"
 #: components/app/interface/settings/user/profile/styleLabels.tsx
 msgid "Zrzur neon"
 msgstr "Zrzur neon"
+
+#. placeholder {0}: props.item.name
+#: components/app/interface/settings/user/profile/StaffErase.tsx
+msgid "<0>{0}</0> and its image are deleted for good, from Designs and from everyone wearing it. This can't be undone."
+msgstr "<0>{0}</0> and its image are deleted for good, from Designs and from everyone wearing it. This can't be undone."
+
+#: components/app/interface/settings/user/profile/StaffErase.tsx
+msgid "Delete this design for everyone?"
+msgstr "Delete this design for everyone?"
+
+#: components/app/interface/settings/user/profile/StaffErase.tsx
+msgid "Required. The creator sees it in the notice."
+msgstr "Required. The creator sees it in the notice."
+
+#: components/app/interface/settings/user/profile/StaffErase.tsx
+msgid "The creator is told why, with a statement of reasons they can appeal."
+msgstr "The creator is told why, with a statement of reasons they can appeal."
+
+#. placeholder {0}: props.item.popularity
+#: components/app/interface/settings/user/profile/studio/StudioDesign.tsx
+msgid "{0, plural, one {# person has used this design.} other {# people have used this design.}}"
+msgstr "{0, plural, one {# person has used this design.} other {# people have used this design.}}"
+
+#: components/app/interface/settings/user/profile/studio/StudioDesign.tsx
+msgid "The design and its image are deleted for good. It leaves Designs, and everyone wearing it loses it. This can't be undone; download your copy first if you want to keep it."
+msgstr "The design and its image are deleted for good. It leaves Designs, and everyone wearing it loses it. This can't be undone; download your copy first if you want to keep it."
+
+#: components/app/interface/settings/user/profile/studio/StudioDesign.tsx
+msgid "You can't delete it while the review is on. It stays until a reviewer decides."
+msgstr "You can't delete it while the review is on. It stays until a reviewer decides."

@@ -100,7 +100,17 @@ export type CommunityPermissions =
   WithoutNull__<APITypes__.CommunityPermissions> & {
     /** shown by name to visitors without an account (default off) */
     show_public_name?: boolean;
+    /**
+     * may delete anyone's design for good: a held Founder, Zrzur Staff or
+     * Platform Moderator rank (owner's decision, 2026-11-25) or
+     * `cosmetics.manage_all`; absent on older servers
+     */
+    can_delete_any?: boolean;
   };
+
+/** Whether the server says this person may delete anyone's design */
+export const mayDeleteAny = (perms: CommunityPermissions | undefined) =>
+  perms?.can_delete_any === true;
 
 export type CreatorRecord = WithoutNull__<APITypes__.CreatorRecord>;
 
@@ -462,6 +472,18 @@ export const communityApi = {
   /** Delete a design nobody can see, with its image, for good */
   remove: (client: Client, itemId: string) =>
     discoverRequest<void>(client, "DELETE", `/community/items/${id(itemId)}`),
+
+  /**
+   * Staff (`cosmetics.manage_all`): delete anyone's design for good, in any
+   * state. The reason goes to the creator with a statement they can appeal.
+   */
+  erase: (client: Client, itemId: string, reason: string, version?: number) =>
+    discoverRequest<void>(
+      client,
+      "POST",
+      `/community/items/${id(itemId)}/erase`,
+      { body: { reason: reason.trim(), version } },
+    ),
 
   // reviewers
   queue: (client: Client) =>

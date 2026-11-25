@@ -16,6 +16,7 @@ import {
   isRankRefusal,
   kindOf,
   mayCreate,
+  mayDeleteAny,
   maySeeStudio,
   parseTags,
   studioBuckets,
@@ -176,6 +177,28 @@ describe("communityApi", () => {
     expect(JSON.parse(String(init.body))).toEqual({
       reason: "too big",
       version: 3,
+    });
+  });
+
+  it("shows delete for everyone only when the server says so", () => {
+    expect(mayDeleteAny(undefined)).toBe(false);
+    expect(mayDeleteAny({ permissions: ["cosmetics.manage_all"] })).toBe(false);
+    expect(
+      mayDeleteAny({ permissions: [], can_delete_any: true } as never),
+    ).toBe(true);
+  });
+
+  it("sends a staff erasure to its own route with the reason", async () => {
+    const fetch = respond(204);
+    await communityApi.erase(client, "a/b", "  copied art ", 7);
+    const [url, init] = fetch.mock.calls[0] as unknown as [URL, RequestInit];
+    expect(String(url)).toBe(
+      "http://127.0.0.1:14702/community/items/a%2Fb/erase",
+    );
+    expect(init.method).toBe("POST");
+    expect(JSON.parse(String(init.body))).toEqual({
+      reason: "copied art",
+      version: 7,
     });
   });
 

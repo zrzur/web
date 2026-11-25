@@ -33874,3 +33874,33 @@ msgstr "Zrzur-Schwarm"
 #: components/app/interface/settings/user/profile/styleLabels.tsx
 msgid "Zrzur neon"
 msgstr "Zrzur-Neon"
+
+#. placeholder {0}: props.item.name
+#: components/app/interface/settings/user/profile/StaffErase.tsx
+msgid "<0>{0}</0> and its image are deleted for good, from Designs and from everyone wearing it. This can't be undone."
+msgstr "<0>{0}</0> und sein Bild werden endgültig gelöscht, aus Designs und bei allen, die es tragen. Das lässt sich nicht rückgängig machen."
+
+#: components/app/interface/settings/user/profile/StaffErase.tsx
+msgid "Delete this design for everyone?"
+msgstr "Dieses Design für alle löschen?"
+
+#: components/app/interface/settings/user/profile/StaffErase.tsx
+msgid "Required. The creator sees it in the notice."
+msgstr "Pflichtfeld. Der Designer sieht ihn in der Mitteilung."
+
+#: components/app/interface/settings/user/profile/StaffErase.tsx
+msgid "The creator is told why, with a statement of reasons they can appeal."
+msgstr "Der Designer erfährt den Grund in einer Begründung, gegen die er Einspruch einlegen kann."
+
+#. placeholder {0}: props.item.popularity
+#: components/app/interface/settings/user/profile/studio/StudioDesign.tsx
+msgid "{0, plural, one {# person has used this design.} other {# people have used this design.}}"
+msgstr "{0, plural, one {# Person hat dieses Design benutzt.} other {# Personen haben dieses Design benutzt.}}"
+
+#: components/app/interface/settings/user/profile/studio/StudioDesign.tsx
+msgid "The design and its image are deleted for good. It leaves Designs, and everyone wearing it loses it. This can't be undone; download your copy first if you want to keep it."
+msgstr "Das Design und sein Bild werden endgültig gelöscht. Es verschwindet aus Designs, und alle, die es tragen, verlieren es. Das lässt sich nicht rückgängig machen; lade vorher deine Kopie herunter, wenn du sie behalten willst."
+
+#: components/app/interface/settings/user/profile/studio/StudioDesign.tsx
+msgid "You can't delete it while the review is on. It stays until a reviewer decides."
+msgstr "Du kannst es nicht löschen, solange die Prüfung läuft. Es bleibt, bis eine prüfende Person entscheidet."
