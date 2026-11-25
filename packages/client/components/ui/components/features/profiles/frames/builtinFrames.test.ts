@@ -10,7 +10,17 @@ import { FRAME_FACTS, pixelSize } from "./frameRoom";
 import { CRYSTAL_ROOM } from "./pixel/crystalCave";
 
 /** what the backend accepts (USER_STYLE_PROFILE_FRAMES in users.rs) */
-const SERVER_IDS = ["crystal"];
+const SERVER_IDS = [
+  "crystal",
+  "desert-lanterns",
+  "damascus-jasmine",
+  "autumn-maple",
+  "coral-reef",
+  "mushroom-forest",
+  "zrzur-neon",
+  "zrzur-arcade",
+  "zrzur-flock",
+];
 
 /** every rect of a drawing, in card coordinates */
 const rects = (svg: string) =>

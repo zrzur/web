@@ -10,6 +10,7 @@ vi.mock("@revolt/instance", () => ({
 vi.mock("../NameplateMotion", () => ({ useDesignMotion: () => () => false }));
 // the drawing itself is not under test here
 vi.mock("./builtinFrames", () => ({
+  loadFrameArt: async () => {},
   profileFrameSvg: () => ({ svg: "", room: { x: 0, top: 0, bottom: 0 } }),
 }));
 
