@@ -34,9 +34,14 @@ import {
   TextField,
   Toggle,
 } from "@revolt/ui";
+import { ActivityArt } from "@revolt/ui/components/features/activity/ActivityArt";
 import { useActivityLabel } from "@revolt/ui/components/features/activity/ActivityLineBody";
 import { ProfileActivity } from "@revolt/ui/components/features/activity/ProfileActivity";
-import type { Activity } from "@revolt/ui/components/features/activity/activityText";
+import {
+  type Activity,
+  localIcon,
+  proxied,
+} from "@revolt/ui/components/features/activity/activityText";
 import { Symbol } from "@revolt/ui/components/utils/Symbol";
 import { Icon } from "@revolt/ui/icons/Icon";
 
@@ -110,10 +115,32 @@ export function ActivitySettings() {
   const [pickName, setPickName] = createSignal("");
   const [pickKind, setPickKind] = createSignal("Playing");
 
+  /* pictures: the list's own through Zrzur's image proxy, else the
+     program's icon from this computer (desktop apps since 26.3.0-beta.9) */
+  const proxy = () => {
+    const january = client()?.configuration?.features?.january;
+    return january?.enabled ? january.url : undefined;
+  };
+  const [icons, setIcons] = createSignal<Record<string, string>>({});
+  const loadIcons = () =>
+    void bridge
+      ?.icons?.()
+      .then((found) => setIcons(found ?? {}))
+      .catch(() => undefined);
+  const pictureOf = (id: string, icon?: string) =>
+    proxied(icon, proxy()) ?? localIcon(icons()[id]);
+  const [privacyOpen, setPrivacyOpen] = createSignal(false);
+
   onMount(() => {
     if (!bridge) return;
     void bridge.state().then(setState);
-    onCleanup(bridge.onState(setState));
+    onCleanup(
+      bridge.onState((next) => {
+        setState(next);
+        loadIcons();
+      }),
+    );
+    loadIcons();
     // what is detected now, also before the desktop sends its next change
     void bridge.current().then(setDesktopDetected);
   });
@@ -148,6 +175,7 @@ export function ActivitySettings() {
   const desktop = async (run: () => Promise<DesktopActivityState>) => {
     try {
       setState(await run());
+      loadIcons();
     } catch (error) {
       showError(error);
     }
@@ -187,14 +215,18 @@ export function ActivitySettings() {
       .map((app) => app.id),
   );
 
-  const kindLabel = (entry: Pick<DesktopActivityEntry, "kind" | "category">) =>
-    entry.kind === "Listening"
-      ? t`Music`
-      : entry.kind === "Watching"
-        ? t`Video`
-        : entry.category === "game"
-          ? t`Game`
-          : t`App`;
+  const kindLabel = (
+    entry: Pick<DesktopActivityEntry, "kind" | "category" | "browser">,
+  ) =>
+    entry.browser
+      ? t`Browser`
+      : entry.kind === "Listening"
+        ? t`Music`
+        : entry.kind === "Watching"
+          ? t`Video`
+          : entry.category === "game"
+            ? t`Game`
+            : t`App`;
 
   const appStatus = (app: DesktopApp) =>
     app.decided === false
@@ -236,10 +268,8 @@ export function ActivitySettings() {
             <Lines>
               <span>
                 <Trans>
-                  Off until you turn it on. Then friends and people in your
-                  servers see the game or app you are using. Hidden while you
-                  are invisible or offline; turn it off and it disappears at
-                  once.
+                  Friends and people in your servers see the game or app you
+                  use.
                 </Trans>
               </span>
               <Show when={friendsOnly()}>
@@ -252,9 +282,8 @@ export function ActivitySettings() {
               </Show>
               <span>
                 <Trans>
-                  Names of apps and sites can say something about your health,
-                  beliefs or private life. Turn off or rename any you do not
-                  want to show.
+                  App names can say private things about you. Turn off or rename
+                  any.
                 </Trans>
               </span>
             </Lines>
@@ -278,11 +307,8 @@ export function ActivitySettings() {
             title={<Trans>Show what you play on Steam</Trans>}
             description={
               <Trans>
-                While you are online, Zrzur asks Steam (Valve, USA) about once a
-                minute which game your linked account is playing, and shows it
-                as your activity. Only games your Steam profile shows publicly.
-                Turn it off and it stops at once. Works on the web and on phones
-                too. Link Steam in Connections first.
+                Your public Steam game, also without the desktop app. Link Steam
+                in Connections first.
               </Trans>
             }
             disabled={!privacy() || !shares()}
@@ -401,9 +427,7 @@ export function ActivitySettings() {
             title={<Trans>Detect games and apps</Trans>}
             description={
               <Trans>
-                Looks at the names of running programs every 15 seconds, on this
-                computer only. Only the program's name is shown, never window
-                titles, tabs or files.
+                Program names only, never window titles, tabs or files.
               </Trans>
             }
             disabled={!shares()}
@@ -490,11 +514,11 @@ export function ActivitySettings() {
                   <SettingsRow
                     data-testid={`activity-entry-${id}`}
                     icon={
-                      <Symbol size={20}>
-                        {entry().category === "game"
-                          ? "sports_esports"
-                          : "apps"}
-                      </Symbol>
+                      <ActivityArt
+                        size="row"
+                        name={entry().name}
+                        src={pictureOf(id, entry().icon)}
+                      />
                     }
                     title={
                       <Show
@@ -520,8 +544,16 @@ export function ActivitySettings() {
                     }
                     description={
                       <>
-                        {kindLabel(entry())}
-                        <Show when={entry().running}> · {t`Running now`}</Show>
+                        <Show
+                          when={entry().browser && entry().off}
+                          fallback={kindLabel(entry())}
+                        >
+                          {t`Browser · off until you turn it on`}
+                        </Show>
+                        <Show when={entry().running}>
+                          {" · "}
+                          <RunningNow>{t`Running now`}</RunningNow>
+                        </Show>
                         <Show when={entry().name !== entry().originalName}>
                           {" · "}
                           <bdi dir="auto">{entry().originalName}</bdi>
@@ -597,20 +629,14 @@ export function ActivitySettings() {
         <SettingsSection
           title={<Trans>Connected apps</Trans>}
           description={
-            <Trans>
-              Games and apps that told Zrzur what you are doing, through the
-              desktop app. Block one and it is never shown.
-            </Trans>
+            <Trans>Apps that report what you do. Block one to hide it.</Trans>
           }
         >
           <Show
             when={appIds().length}
             fallback={
               <Hint data-testid="activity-no-apps">
-                <Trans>
-                  No app has connected yet. Zrzur for VS Code and the Zrzur
-                  browser extension show here once they connect.
-                </Trans>
+                <Trans>No app has connected yet.</Trans>
               </Hint>
             }
           >
@@ -621,11 +647,16 @@ export function ActivitySettings() {
                     <SettingsRow
                       data-testid={`activity-app-${id}`}
                       icon={
-                        <Symbol size={20}>
-                          {id === "zrzur-browser-extension"
-                            ? "public"
-                            : "terminal"}
-                        </Symbol>
+                        <Show
+                          when={id !== "zrzur-browser-extension"}
+                          fallback={<Symbol size={20}>public</Symbol>}
+                        >
+                          <ActivityArt
+                            size="row"
+                            name={app().name}
+                            src={localIcon(icons()[`app:${id}`])}
+                          />
+                        </Show>
                       }
                       title={<span dir="auto">{app().name}</span>}
                       description={
@@ -755,11 +786,7 @@ export function ActivitySettings() {
             description={
               <Lines>
                 <span>
-                  <Trans>
-                    Many games report what you play to another chat app. While
-                    that app is closed, Zrzur can receive these reports instead.
-                    When that app starts, Zrzur steps aside.
-                  </Trans>
+                  <Trans>Receive their reports while that app is closed.</Trans>
                 </span>
                 <Show
                   when={
@@ -793,41 +820,77 @@ export function ActivitySettings() {
       </Show>
 
       <SettingsSection title={<Trans>Your privacy</Trans>}>
-        {/* the same words as the privacy policy (legal RP-04) */}
-        <Facts data-testid="activity-privacy">
-          <li>
+        <SettingsRow
+          icon={<Symbol size={20}>info</Symbol>}
+          title={<Trans>No history is kept</Trans>}
+          description={
             <Trans>
-              On your computer: when sharing and "Detect games and apps" are on,
-              the Zrzur desktop app reads the names of running programs every 15
-              seconds and compares them with its list and the programs you
-              added. This happens only on your computer: only the name of a
-              matched program is sent to Zrzur, the list of running programs
-              never leaves your computer, and window titles, files and tabs are
-              never read. Your choices (programs turned off, renamed or added,
-              blocked apps, the paired browser extension) are stored only on
-              your computer. Games, apps and the Zrzur extensions for browsers
-              and VS Code report to the desktop app on your computer; they learn
-              nothing about your account from Zrzur. With sharing off, the
-              desktop app reads nothing and listens for nothing.
+              Only in memory while you are online, at most 24 hours.
             </Trans>
-          </li>
-          <li>
-            <Trans>
-              Your activity is shown to the people who can see that you are
-              online: your friends and people in your Servers, and bots with
-              access to presence in those Servers. Nobody sees it while you are
-              invisible or offline, and people you blocked never see it. On
-              accounts of people aged 16 or 17, and accounts with no stated age,
-              only friends see it.
-            </Trans>
-          </li>
-          <li>
-            <Trans>
-              Activity: kept only in memory while you are online, and never
-              longer than 24 hours. We keep no history of what you did.
-            </Trans>
-          </li>
-        </Facts>
+          }
+          control={() => (
+            <Button
+              variant="text"
+              aria-expanded={privacyOpen()}
+              aria-controls="activity-privacy"
+              onPress={() => setPrivacyOpen(!privacyOpen())}
+              data-testid="activity-privacy-open"
+            >
+              <Show when={privacyOpen()} fallback={<Trans>Details</Trans>}>
+                <Trans>Hide details</Trans>
+              </Show>
+            </Button>
+          )}
+        />
+        {/* the same words as the privacy policy (legal RP-04), one tap away */}
+        <Show when={privacyOpen()}>
+          <Facts id="activity-privacy" data-testid="activity-privacy">
+            <li>
+              <Trans>
+                On your computer: when sharing and "Detect games and apps" are
+                on, the Zrzur desktop app reads the names of running programs
+                every 15 seconds and compares them with its list and the
+                programs you added. This happens only on your computer: only the
+                name of a matched program is sent to Zrzur, the list of running
+                programs never leaves your computer, and window titles, files
+                and tabs are never read. Your choices (programs turned off,
+                renamed or added, blocked apps, the paired browser extension)
+                are stored only on your computer. Games, apps and the Zrzur
+                extensions for browsers and VS Code report to the desktop app on
+                your computer; they learn nothing about your account from Zrzur.
+                With sharing off, the desktop app reads nothing and listens for
+                nothing.
+              </Trans>
+            </li>
+            <li>
+              <Trans>
+                Your activity is shown to the people who can see that you are
+                online: your friends and people in your Servers, and bots with
+                access to presence in those Servers. Nobody sees it while you
+                are invisible or offline, and people you blocked never see it.
+                On accounts of people aged 16 or 17, and accounts with no stated
+                age, only friends see it.
+              </Trans>
+            </li>
+            <li>
+              <Trans>
+                Activity: kept only in memory while you are online, and never
+                longer than 24 hours. We keep no history of what you did.
+              </Trans>
+            </li>
+            <Show when={steamFeature()}>
+              <li data-testid="activity-privacy-steam">
+                <Trans>
+                  While you are online, Zrzur asks Steam (Valve, USA) about once
+                  a minute which game your linked account is playing, and shows
+                  it as your activity. Only games your Steam profile shows
+                  publicly. Turn it off and it stops at once. Works on the web
+                  and on phones too. Link Steam in Connections first.
+                </Trans>
+              </li>
+            </Show>
+          </Facts>
+        </Show>
       </SettingsSection>
     </Page>
   );
@@ -919,6 +982,10 @@ const Actions = styled("div", {
 
 const Row = styled("div", {
   base: { display: "flex", gap: "4px" },
+});
+
+const RunningNow = styled("span", {
+  base: { color: "var(--z-status-success)", fontWeight: 500 },
 });
 
 /* Show and Block side by side, the same size */
