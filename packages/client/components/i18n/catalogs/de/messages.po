@@ -33350,3 +33350,35 @@ msgstr "Schaut"
 #: components/app/interface/settings/user/activity/ActivitySettings.tsx
 msgid "Your public Steam game, also without the desktop app. Link Steam in Connections first."
 msgstr "Dein öffentliches Steam-Spiel, auch ohne Desktop-App. Verknüpfe Steam zuerst unter Verknüpfungen."
+
+#: components/app/interface/settings/user/profile/styleLabels.tsx
+msgid "Autumn maple"
+msgstr "Herbstahorn"
+
+#: components/app/interface/settings/user/profile/styleLabels.tsx
+msgid "Coral reef"
+msgstr "Korallenriff"
+
+#: components/app/interface/settings/user/profile/styleLabels.tsx
+msgid "Damascus jasmine"
+msgstr "Damaszener Jasmin"
+
+#: components/app/interface/settings/user/profile/styleLabels.tsx
+msgid "Desert lanterns"
+msgstr "Wüstenlaternen"
+
+#: components/app/interface/settings/user/profile/styleLabels.tsx
+msgid "Mushroom forest"
+msgstr "Pilzwald"
+
+#: components/app/interface/settings/user/profile/styleLabels.tsx
+msgid "Zrzur arcade"
+msgstr "Zrzur-Arcade"
+
+#: components/app/interface/settings/user/profile/styleLabels.tsx
+msgid "Zrzur flock"
+msgstr "Zrzur-Schwarm"
+
+#: components/app/interface/settings/user/profile/styleLabels.tsx
+msgid "Zrzur neon"
+msgstr "Zrzur-Neon"
