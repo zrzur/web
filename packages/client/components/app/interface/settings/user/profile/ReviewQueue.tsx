@@ -34,6 +34,7 @@ import {
   can,
   communityApi,
   communityErrorType,
+  mayDeleteAny,
 } from "./communityApi";
 
 type Lane = "pending" | "revisions" | "reported";
@@ -479,7 +480,7 @@ export function ReviewQueue(props: {
                       </Show>
                     </Decisions>
                   </Show>
-                  <Show when={can(props.perms, "cosmetics.manage_all")}>
+                  <Show when={mayDeleteAny(props.perms)}>
                     <Decisions>
                       <button
                         type="button"

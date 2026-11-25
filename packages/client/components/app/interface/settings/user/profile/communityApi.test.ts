@@ -16,6 +16,7 @@ import {
   isRankRefusal,
   kindOf,
   mayCreate,
+  mayDeleteAny,
   maySeeStudio,
   parseTags,
   studioBuckets,
@@ -177,6 +178,14 @@ describe("communityApi", () => {
       reason: "too big",
       version: 3,
     });
+  });
+
+  it("shows delete for everyone only when the server says so", () => {
+    expect(mayDeleteAny(undefined)).toBe(false);
+    expect(mayDeleteAny({ permissions: ["cosmetics.manage_all"] })).toBe(false);
+    expect(
+      mayDeleteAny({ permissions: [], can_delete_any: true } as never),
+    ).toBe(true);
   });
 
   it("sends a staff erasure to its own route with the reason", async () => {

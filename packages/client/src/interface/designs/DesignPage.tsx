@@ -25,10 +25,10 @@ import {
 import { StaffEraseDialog } from "@revolt/app/interface/settings/user/profile/StaffErase";
 import {
   type CommunityItemDetails,
-  can,
   communityApi,
   communityFramesOpen,
   hasOpenPage,
+  mayDeleteAny,
 } from "@revolt/app/interface/settings/user/profile/communityApi";
 import { useStyleLabels } from "@revolt/app/interface/settings/user/profile/styleLabels";
 import { useClient, useClientLifecycle } from "@revolt/client";
@@ -197,8 +197,7 @@ export function DesignPage(props: {
   const [erasing, setErasing] = createSignal(false);
   /** Zrzur staff delete anyone's design; the server checks again */
   const { perms } = useCommunityPermissions();
-  const mayErase = () =>
-    !props.site && isLoggedIn() && can(perms(), "cosmetics.manage_all");
+  const mayErase = () => !props.site && isLoggedIn() && mayDeleteAny(perms());
 
   /** already part of the signed-in person's profile */
   const worn = () => {

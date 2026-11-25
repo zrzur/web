@@ -35,6 +35,7 @@ import {
   communityFramesOpen,
   creatorName,
   hasOpenPage,
+  mayDeleteAny,
   maySeeStudio,
 } from "@revolt/app/interface/settings/user/profile/communityApi";
 import { useCreatorAccess } from "@revolt/app/interface/settings/user/profile/creatorAccess";
@@ -524,7 +525,7 @@ function Gallery() {
             item={item()}
             onClose={() => setOpen(undefined)}
             onChanged={() => setVersion((v) => v + 1)}
-            mayErase={can(perms(), "cosmetics.manage_all")}
+            mayErase={mayDeleteAny(perms())}
             onErased={() => {
               setOpen(undefined);
               setVersion((v) => v + 1);

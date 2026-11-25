@@ -100,7 +100,17 @@ export type CommunityPermissions =
   WithoutNull__<APITypes__.CommunityPermissions> & {
     /** shown by name to visitors without an account (default off) */
     show_public_name?: boolean;
+    /**
+     * may delete anyone's design for good: a held Founder, Zrzur Staff or
+     * Platform Moderator rank (owner's decision, 2026-11-25) or
+     * `cosmetics.manage_all`; absent on older servers
+     */
+    can_delete_any?: boolean;
   };
+
+/** Whether the server says this person may delete anyone's design */
+export const mayDeleteAny = (perms: CommunityPermissions | undefined) =>
+  perms?.can_delete_any === true;
 
 export type CreatorRecord = WithoutNull__<APITypes__.CreatorRecord>;
 

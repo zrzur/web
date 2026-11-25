@@ -13,7 +13,7 @@ import { communityApi } from "./communityApi";
 const MAX_REASON = 500;
 
 /** The server's answer as an object, so "Details" shows its type */
-const parsed = (failure: unknown) => {
+export const parsedFailure = (failure: unknown) => {
   if (typeof failure !== "string") return failure;
   try {
     return JSON.parse(failure) as unknown;
@@ -66,7 +66,7 @@ export function StaffEraseDialog(props: {
       setReason("");
       props.onErased(id);
     } catch (error) {
-      setFailure(parsed(error));
+      setFailure(parsedFailure(error));
     } finally {
       setBusy(false);
     }

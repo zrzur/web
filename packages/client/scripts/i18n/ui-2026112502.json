@@ -14,5 +14,17 @@
   "Required. The creator sees it in the notice.": [
     "مطلوب. سيراه المصمم في الإشعار.",
     "Pflichtfeld. Der Designer sieht ihn in der Mitteilung."
+  ],
+  "The design and its image are deleted for good. It leaves Designs, and everyone wearing it loses it. This can't be undone; download your copy first if you want to keep it.": [
+    "يُحذف التصميم وصورته نهائيًا، فيختفي من صفحة التصاميم ويفقده كل من يستخدمه. لا يمكن التراجع عن ذلك؛ نزّل نسختك أولًا إن أردت الاحتفاظ بها.",
+    "Das Design und sein Bild werden endgültig gelöscht. Es verschwindet aus Designs, und alle, die es tragen, verlieren es. Das lässt sich nicht rückgängig machen; lade vorher deine Kopie herunter, wenn du sie behalten willst."
+  ],
+  "{0, plural, one {# person has used this design.} other {# people have used this design.}}": [
+    "{0, plural, zero {لم يستخدم أحد هذا التصميم.} one {استخدم شخص واحد هذا التصميم.} two {استخدم شخصان هذا التصميم.} few {استخدم # أشخاص هذا التصميم.} many {استخدم # شخصًا هذا التصميم.} other {استخدم # شخص هذا التصميم.}}",
+    "{0, plural, one {# Person hat dieses Design benutzt.} other {# Personen haben dieses Design benutzt.}}"
+  ],
+  "You can't delete it while the review is on. It stays until a reviewer decides.": [
+    "لا يمكنك حذفه ما دامت المراجعة جارية. يبقى حتى يتخذ المراجع قراره.",
+    "Du kannst es nicht löschen, solange die Prüfung läuft. Es bleibt, bis eine prüfende Person entscheidet."
   ]
 }

@@ -33892,3 +33892,15 @@ msgstr "Pflichtfeld. Der Designer sieht ihn in der Mitteilung."
 msgid "The creator is told why, with a statement of reasons they can appeal."
 msgstr "Der Designer erfährt den Grund in einer Begründung, gegen die er Einspruch einlegen kann."
 
+#. placeholder {0}: props.item.popularity
+#: components/app/interface/settings/user/profile/studio/StudioDesign.tsx
+msgid "{0, plural, one {# person has used this design.} other {# people have used this design.}}"
+msgstr "{0, plural, one {# Person hat dieses Design benutzt.} other {# Personen haben dieses Design benutzt.}}"
+
+#: components/app/interface/settings/user/profile/studio/StudioDesign.tsx
+msgid "The design and its image are deleted for good. It leaves Designs, and everyone wearing it loses it. This can't be undone; download your copy first if you want to keep it."
+msgstr "Das Design und sein Bild werden endgültig gelöscht. Es verschwindet aus Designs, und alle, die es tragen, verlieren es. Das lässt sich nicht rückgängig machen; lade vorher deine Kopie herunter, wenn du sie behalten willst."
+
+#: components/app/interface/settings/user/profile/studio/StudioDesign.tsx
+msgid "You can't delete it while the review is on. It stays until a reviewer decides."
+msgstr "Du kannst es nicht löschen, solange die Prüfung läuft. Es bleibt, bis eine prüfende Person entscheidet."

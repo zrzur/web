@@ -33895,3 +33895,15 @@ msgstr "Required. The creator sees it in the notice."
 msgid "The creator is told why, with a statement of reasons they can appeal."
 msgstr "The creator is told why, with a statement of reasons they can appeal."
 
+#. placeholder {0}: props.item.popularity
+#: components/app/interface/settings/user/profile/studio/StudioDesign.tsx
+msgid "{0, plural, one {# person has used this design.} other {# people have used this design.}}"
+msgstr "{0, plural, one {# person has used this design.} other {# people have used this design.}}"
+
+#: components/app/interface/settings/user/profile/studio/StudioDesign.tsx
+msgid "The design and its image are deleted for good. It leaves Designs, and everyone wearing it loses it. This can't be undone; download your copy first if you want to keep it."
+msgstr "The design and its image are deleted for good. It leaves Designs, and everyone wearing it loses it. This can't be undone; download your copy first if you want to keep it."
+
+#: components/app/interface/settings/user/profile/studio/StudioDesign.tsx
+msgid "You can't delete it while the review is on. It stays until a reviewer decides."
+msgstr "You can't delete it while the review is on. It stays until a reviewer decides."
