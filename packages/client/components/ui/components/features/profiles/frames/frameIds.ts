@@ -5,7 +5,18 @@
  * nothing else.
  */
 
-export const PROFILE_FRAME_IDS = ["crystal"] as const;
+export const PROFILE_FRAME_IDS = [
+  "crystal",
+  // the set of 2026-11-25, drawn ahead of time (pixel/set/)
+  "desert-lanterns",
+  "damascus-jasmine",
+  "autumn-maple",
+  "coral-reef",
+  "mushroom-forest",
+  "zrzur-neon",
+  "zrzur-arcade",
+  "zrzur-flock",
+] as const;
 
 export type ProfileFrameId = (typeof PROFILE_FRAME_IDS)[number];
 

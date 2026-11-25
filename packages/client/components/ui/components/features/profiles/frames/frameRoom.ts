@@ -2,19 +2,32 @@
  * What is known about each built-in frame without its drawing: the room it
  * takes round the card and whether it moves.
  */
-import { type ProfileFrameId, isProfileFrameId } from "./frameIds";
+import {
+  type ProfileFrameId,
+  isProfileFrameId,
+  PROFILE_FRAME_IDS,
+} from "./frameIds";
 
 /** Room round the card a drawing uses, in css px */
 export type FrameRoom = { x: number; top: number; bottom: number };
 
+/**
+ * The room every built-in frame needs round the card, in cells: Crystal cave
+ * (pixel/crystalCave.ts CRYSTAL_ROOM, a test keeps them equal) and the set
+ * of 2026-11-25 (pixel/set/) were drawn for the same room
+ */
+const ROOM: FrameRoom = { x: 14, top: 24, bottom: 18 };
+
+/** frames with nothing that twinkles */
+const STILL: readonly string[] = ["autumn-maple", "zrzur-flock"];
+
 /** What each frame's drawing needs round the card, in cells, and its motion */
-export const FRAME_FACTS: Record<
-  ProfileFrameId,
-  { room: FrameRoom; moves: boolean }
-> = {
-  // pixel/crystalCave.ts CRYSTAL_ROOM (a test keeps them equal)
-  crystal: { room: { x: 14, top: 24, bottom: 18 }, moves: true },
-};
+export const FRAME_FACTS = Object.fromEntries(
+  PROFILE_FRAME_IDS.map((id) => [
+    id,
+    { room: ROOM, moves: !STILL.includes(id) },
+  ]),
+) as Record<ProfileFrameId, { room: FrameRoom; moves: boolean }>;
 
 /**
  * The pixel size for a box this wide: 4 px on a card or a full profile,
