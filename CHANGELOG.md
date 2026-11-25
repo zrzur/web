@@ -10,6 +10,11 @@
 * **Settings → Activity, much less text:** one short line per row instead of paragraphs. The legal privacy words (the same as the privacy policy) are one tap away under "Details", with `aria-expanded`. Each program in the list shows its real picture (the desktop app's list picture through the image proxy, or the program's own icon from your computer, which never leaves it), its name, "Running now" in the success colour, Rename and its switch. Browsers say "Browser · off until you turn it on". Connected apps show their own icon too.
 * Needs the desktop app from this release for pictures, pages, local icons and browsers off; an older desktop app keeps working with letter tiles.
 
+### Early Adopter is a ticket now, not the Zrzur mark (2026-11-25, owner's decision)
+
+* **Early Adopter has a new drawing:** a cream admission ticket printed "01" in coral, with a torn-off stub, in the same enamel-pin style with a silver rim. Before, it was the Zrzur mark in pink-red, the same shape as Founder and Staff, so people took early members for Zrzur staff.
+* The "01" and the stub are drawn bold so the ticket reads at 16 px in the member list, and none of Founder's gold is used.
+
 ### Badges: one text for every badge, Verified Bot Developer drawn, Verified Server Owner cancelled (2026-11-24, owner's report)
 
 * **One source for badge texts.** A badge's name, what it means and how it is earned now come from one place and read the same in My Badges ("Badges you can earn"), the badge tooltip and profile row, and the public guide at `/badges`, which adds only the details below that line. Before, My Badges still said "Own a verified server. It is shown while you do." while the guide said something else.
