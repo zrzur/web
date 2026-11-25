@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+- Opening the app on a computer shows one loading screen, the logo alone, and then the whole app at once, instead of an empty rail and list with the greeting first (owner report 2026-11-25). Phones keep their quiet frame.
+
 ### Activity: real pictures, links and a short settings page (2026-11-25, owner's report)
 
 * **Real pictures everywhere:** the profile card, the full profile and the member and DM line show each game's or app's own picture loaded only through Zrzur's image proxy or file server. A logo stands by itself, with no tile, background or frame; a Steam game's tall cover is the picture with a small rounded corner, centred in the same square so names line up. A hairline shadow in the text colour keeps a dark logo visible on a dark panel and a light one on a light panel. Without a picture, the first letter in a soft circle; never the generic laptop or controller icon. A picture that fails to load turns into the letter.

@@ -268,8 +268,8 @@
     },
     {
       "path": "CHANGELOG.md",
-      "sha256": "775a9c6390cbb3c8f66a57edcd6a7607e349e9629ce794d9af4dc932da5057c0",
-      "bytes": 242908,
+      "sha256": "a68ff5ff8b6866f827c0ac3747891c78fd26132a0ae415b5d64783b78804178a",
+      "bytes": 243131,
       "category": "public-documentation"
     },
     {
@@ -44980,8 +44980,8 @@
     },
     {
       "path": "packages/client/src/interface/home/FirstScreen.tsx",
-      "sha256": "82c9fa1b632803a30ddc5d111ef5f8c980b57949f9efa71a754548e9020f3d6d",
-      "bytes": 4573,
+      "sha256": "24b17dba5b36722a546f9db6d30da5fc2dec646aeb76d57ee53d03441ceb2da8",
+      "bytes": 1270,
       "category": "product-source-or-build-manifest"
     },
     {
