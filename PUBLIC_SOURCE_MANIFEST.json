@@ -44734,8 +44734,8 @@
     },
     {
       "path": "packages/client/src/interface/developers/docs/docs.test.ts",
-      "sha256": "9b7c3e465724cb07254d7783afe432b613629180b67b32eb872da04c6f3976ea",
-      "bytes": 20514,
+      "sha256": "5ceb372dd979c6460c4ad640541eb7e1ca231b8568cc5dd1570b4c1fef73c9c1",
+      "bytes": 20738,
       "category": "synthetic-test-source-or-fixture"
     },
     {
