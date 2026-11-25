@@ -18,12 +18,13 @@ import { Symbol } from "../../utils/Symbol";
 import { ProfileSection, chip, panel } from "../profiles/ProfileCard";
 import { cutLine } from "../profiles/cutLine";
 
-import { useActivityLabel } from "./ActivityLineBody";
+import { ActivityArt } from "./ActivityArt";
+import { useActivityKind } from "./ActivityLineBody";
 import {
   type Activity,
   type ActivitySource,
-  activityIcon,
   ownPicture,
+  pageLink,
   relativeTime,
   safeButtonUrl,
   shownActivities,
@@ -57,8 +58,10 @@ const SOURCES: ActivitySource[] = ["Rpc", "Desktop", "Steam"];
  * What the person is doing right now, on the profile card and the full
  * profile, in the same panel as the Steam games card: one row per source,
  * the main one first. Each source keeps its own row while it updates, so
- * focus and the time stay put. Pictures load only from Zrzur's servers;
- * buttons open through the link warning.
+ * focus and the time stay put. Each shows its real picture (a letter tile
+ * without one; pictures load only from Zrzur's servers), what it is doing,
+ * since when, and its links: the official page of a program the desktop
+ * saw, or an app's own buttons, each through the link warning.
  */
 export function ProfileActivity(props: { user: User }) {
   const activities = createMemo(() =>
@@ -87,7 +90,7 @@ export function ProfileActivity(props: { user: User }) {
 
 function ActivityPanel(props: { activity: Activity }) {
   const { t, i18n } = useLingui();
-  const label = useActivityLabel();
+  const kind = useActivityKind();
   const client = useClient();
   const { openModal } = useModals();
   const clock = useNow();
@@ -99,23 +102,26 @@ function ActivityPanel(props: { activity: Activity }) {
       features?.autumn?.url,
     ];
   };
-  const picture = () =>
-    ownPicture(props.activity.large_image, hosts()) ??
-    ownPicture(props.activity.small_image, hosts());
+  const large = () => ownPicture(props.activity.large_image, hosts());
+  const small = () => ownPicture(props.activity.small_image, hosts());
   const started = () =>
     relativeTime(props.activity.started_at, clock(), i18n().locale);
   const ends = () =>
     relativeTime(props.activity.ends_at, clock(), i18n().locale, true);
-  const facts = () =>
-    [props.activity.details, props.activity.state].filter(Boolean).join(" · ");
+  // the official page of a program the desktop saw, else an app's own buttons
+  const page = createMemo(() => pageLink(props.activity));
   const buttons = createMemo(() =>
-    (props.activity.buttons ?? [])
-      .map((button) => ({
-        label: button.label,
-        url: safeButtonUrl(button.url),
-      }))
-      .filter((button): button is { label: string; url: URL } => !!button.url)
-      .slice(0, 2),
+    page()
+      ? []
+      : (props.activity.buttons ?? [])
+          .map((button) => ({
+            label: button.label,
+            url: safeButtonUrl(button.url),
+          }))
+          .filter(
+            (button): button is { label: string; url: URL } => !!button.url,
+          )
+          .slice(0, 2),
   );
   const source = () =>
     props.activity.source === "Steam"
@@ -123,6 +129,8 @@ function ActivityPanel(props: { activity: Activity }) {
       : props.activity.source === "Desktop"
         ? t`Seen by the Zrzur desktop app`
         : t`Reported by the app`;
+  const open = (url: URL) =>
+    openModal({ type: "link_warning", url, display: url.toString() });
 
   return (
     <div
@@ -131,45 +139,39 @@ function ActivityPanel(props: { activity: Activity }) {
       data-source={props.activity.source}
     >
       <div class={head()}>
-        <div class={tile()}>
-          <Show
-            when={picture()}
-            fallback={
-              <Symbol size={20} aria-hidden="true">
-                {activityIcon(props.activity.type)}
-              </Symbol>
-            }
-          >
-            {(url) => (
-              <img
-                src={url()}
-                alt=""
-                title={
-                  props.activity.large_text ??
-                  props.activity.small_text ??
-                  undefined
-                }
-                loading="lazy"
-                referrerpolicy="no-referrer"
-                class={image()}
-              />
-            )}
-          </Show>
-        </div>
+        <ActivityArt
+          size="card"
+          name={props.activity.name}
+          src={large() ?? small()}
+          badge={large() ? small() : undefined}
+          badgeTitle={props.activity.small_text ?? undefined}
+          title={props.activity.large_text ?? undefined}
+        />
         <div class={lines()}>
+          <span class={cx(cutLine(), caption())}>{kind(props.activity)}</span>
           <strong class={cx(cutLine(), title())} dir="auto">
-            {label(props.activity)}
+            {props.activity.name}
           </strong>
-          <Show when={facts()}>
+          <Show when={props.activity.details}>
             <span class={cx(cutLine(), fact())} dir="auto">
-              {facts()}
+              {props.activity.details}
             </span>
           </Show>
-          <span class={meta()} data-testid="activity-time">
+          <Show when={props.activity.state}>
+            <span class={cx(cutLine(), fact())} dir="auto">
+              {props.activity.state}
+            </span>
+          </Show>
+          {/* where it comes from is one hover away, so the card stays short */}
+          <span
+            class={cx(cutLine(), meta())}
+            data-testid="activity-time"
+            title={source()}
+          >
             <Show
               when={ends()}
               fallback={
-                <Show when={started()}>
+                <Show when={started()} fallback={source()}>
                   {(time) =>
                     t({
                       message: `Started ${time()}`,
@@ -181,28 +183,35 @@ function ActivityPanel(props: { activity: Activity }) {
             >
               {(time) => t`Ends ${time()}`}
             </Show>
-            <Show when={started() || ends()}>
-              <span aria-hidden="true"> · </span>
-            </Show>
-            <span>{source()}</span>
           </span>
         </div>
       </div>
-      <Show when={buttons().length}>
+      <Show when={page() || buttons().length}>
         <div class={row()}>
+          <Show when={page()}>
+            {(link) => (
+              <button
+                class={cx(chip({ press: true }), wide())}
+                type="button"
+                data-testid="activity-page-link"
+                title={link().url.toString()}
+                aria-label={t`Open the official page: ${link().host}`}
+                onClick={() => open(link().url)}
+              >
+                <Symbol size={14} aria-hidden="true">
+                  open_in_new
+                </Symbol>
+                <span dir="ltr">{link().host}</span>
+              </button>
+            )}
+          </Show>
           <For each={buttons()}>
             {(button) => (
               <button
                 class={cx(chip({ press: true }), wide())}
                 type="button"
                 title={button.url.toString()}
-                onClick={() =>
-                  openModal({
-                    type: "link_warning",
-                    url: button.url,
-                    display: button.url.toString(),
-                  })
-                }
+                onClick={() => open(button.url)}
               >
                 <Symbol size={14} aria-hidden="true">
                   open_in_new
@@ -214,7 +223,7 @@ function ActivityPanel(props: { activity: Activity }) {
         </div>
       </Show>
       {/* a Steam picture carries Valve's credit (legal RP-05, T-11) */}
-      <Show when={props.activity.source === "Steam" && picture()}>
+      <Show when={props.activity.source === "Steam" && (large() || small())}>
         <p class={credit()}>
           {t`From Steam. Steam is a trademark of Valve Corporation; Zrzur is not affiliated with Valve. Game pictures, achievement names and icons belong to their owners.`}
         </p>
@@ -224,30 +233,20 @@ function ActivityPanel(props: { activity: Activity }) {
 }
 
 const head = cva({
-  base: { display: "flex", alignItems: "center", gap: "8px", minWidth: 0 },
-});
-
-/* the same 36 px tile as a game on the Steam card */
-const tile = cva({
-  base: {
-    flexShrink: 0,
-    width: "36px",
-    height: "36px",
-    display: "grid",
-    placeItems: "center",
-    borderRadius: "var(--z-radius-xs, 4px)",
-    background: "var(--profile-chip, var(--z-bg-input))",
-    overflow: "hidden",
-    "--z-icon-color": "var(--profile-ink-2, var(--z-fg-secondary))",
-  },
-});
-
-const image = cva({
-  base: { width: "36px", height: "36px", objectFit: "cover" },
+  base: { display: "flex", alignItems: "center", gap: "12px", minWidth: 0 },
 });
 
 const lines = cva({
   base: { display: "flex", flexDirection: "column", flex: 1, minWidth: 0 },
+});
+
+const caption = cva({
+  base: {
+    fontSize: "12px",
+    lineHeight: "16px",
+    fontWeight: 500,
+    color: "var(--profile-ink-2, var(--z-fg-secondary))",
+  },
 });
 
 const title = cva({
@@ -262,8 +261,8 @@ const title = cva({
 
 const fact = cva({
   base: {
-    fontSize: "12px",
-    lineHeight: "16px",
+    fontSize: "13px",
+    lineHeight: "20px",
     color: "var(--profile-ink-2, var(--z-fg-secondary))",
   },
 });
@@ -272,7 +271,8 @@ const meta = cva({
   base: {
     fontSize: "12px",
     lineHeight: "16px",
-    color: "var(--profile-ink-2, var(--z-fg-secondary))",
+    color: "var(--profile-ink-2, var(--z-fg-muted))",
+    fontVariantNumeric: "tabular-nums",
   },
 });
 
