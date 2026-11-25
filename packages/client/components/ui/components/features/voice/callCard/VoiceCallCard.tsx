@@ -33,6 +33,11 @@ export type Info = {
   drawer?: SlideState;
   /** voice channel page: the call fills the whole channel view */
   stage?: boolean;
+  /**
+   * direct message or group: the call is shown in the page itself (above
+   * the conversation, dmCall/DmCallGate.tsx), so the floating card hides
+   */
+  inline?: boolean;
 };
 
 const callCardContext = createContext<(info?: Info) => void>();
@@ -91,4 +96,24 @@ export function VoiceChannelCallCardMount(props: {
   });
 
   return <div ref={ref!} />;
+}
+
+/**
+ * Marks that the call of this conversation is shown in the page itself
+ * (direct messages and groups): the floating card shows nothing meanwhile
+ */
+export function InlineCallMark(props: { channel: Channel }) {
+  const setInfo = useContext(callCardContext);
+
+  createEffect(() =>
+    setInfo?.({
+      channel: props.channel,
+      pos: new DOMRect(),
+      parentRect: new DOMRect(),
+      inline: true,
+    }),
+  );
+  onCleanup(() => setInfo?.());
+
+  return null;
 }

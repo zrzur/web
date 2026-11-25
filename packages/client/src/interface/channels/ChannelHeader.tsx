@@ -30,6 +30,7 @@ import {
   UserStatus,
 } from "@revolt/ui";
 import { OfficialLabel } from "@revolt/ui/components/features/profiles/OfficialLabel";
+import { needsCallConfirm } from "@revolt/ui/components/features/voice/dmCall/dmCallView";
 import { Symbol } from "@revolt/ui/components/utils/Symbol";
 import { lazyRetry } from "@revolt/ui/components/utils/lazyRetry";
 import { Icon } from "@revolt/ui/icons/Icon";
@@ -155,6 +156,26 @@ export function ChannelHeader(props: Props) {
     props.channel.type === "Group" ||
     !!props.channel.thread ||
     !!props.channel.ticket;
+
+  // a call in a DM or group rings people: it asks first; joining one that
+  // is already on does not (dmCall/dmCallView.ts)
+  const requestCall = (video = false) => {
+    const start = () =>
+      void voice.connect(
+        props.channel,
+        undefined,
+        undefined,
+        0,
+        video ? { video: true } : undefined,
+      );
+    if (!needsCallConfirm(props.channel, client().user?.id)) return start();
+    openModal({
+      type: "start_call",
+      channel: props.channel,
+      video,
+      onStart: start,
+    });
+  };
 
   const searchValue = () => {
     if (!props.sidebarState) return null;
@@ -362,7 +383,7 @@ export function ChannelHeader(props: Props) {
           <IconButton
             variant="toolbar"
             size="xs"
-            onPress={() => voice.connect(props.channel)}
+            onPress={() => requestCall()}
             aria-label={callLabel()}
             data-start-call
             use:floating={{
@@ -383,11 +404,7 @@ export function ChannelHeader(props: Props) {
             <IconButton
               variant="toolbar"
               size="xs"
-              onPress={() =>
-                voice.connect(props.channel, undefined, undefined, 0, {
-                  video: true,
-                })
-              }
+              onPress={() => requestCall(true)}
               aria-label={t`Start a video call`}
               data-start-video-call
               use:floating={{
@@ -732,11 +749,7 @@ export function ChannelHeader(props: Props) {
                   <Show when={videoCallInMore()}>
                     <ContextMenuButton
                       icon={<Icon name="video-camera" size={20} />}
-                      onClick={() =>
-                        voice.connect(props.channel, undefined, undefined, 0, {
-                          video: true,
-                        })
-                      }
+                      onClick={() => requestCall(true)}
                       data-start-video-call
                     >
                       {t`Start a video call`}

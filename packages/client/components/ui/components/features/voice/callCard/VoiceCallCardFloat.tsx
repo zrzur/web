@@ -166,7 +166,15 @@ export default function VoiceCallCardFloat(props: {
     const sty = ref.style;
 
     //Set mode based on state
-    if (voice.layout() === "fullscreen") {
+    if (inf?.inline) {
+      // a direct message or group shows its call in the page itself
+      // (dmCall/DmCallGate.tsx): nothing floats over the conversation
+      drag.cancel();
+      sty.transform = `translate(${innerWidth + 50}px, 0px)`;
+      sty.width = "";
+      sty.height = "";
+      setMode();
+    } else if (voice.layout() === "fullscreen") {
       drag.cancel();
       sty.transform = ``;
       sty.width = `100%`;
@@ -315,6 +323,7 @@ export default function VoiceCallCardFloat(props: {
         fullscreen={voice.layout() === "fullscreen"}
       >
         <Switch>
+          <Match when={info()?.inline}>{null}</Match>
           {/* floating: the small card, or nothing while the strip shows.
                 Never the full call card: it covered the channel list */}
           <Match when={mode() && inCall()}>

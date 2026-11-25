@@ -31,6 +31,10 @@ import {
   main,
 } from "@revolt/ui";
 import { VoiceChannelCallCardMount } from "@revolt/ui/components/features/voice/callCard/VoiceCallCard";
+import {
+  DmCallGate,
+  useDmCallCoversHeader,
+} from "@revolt/ui/components/features/voice/dmCall/DmCallGate";
 import { MotionPresence } from "@revolt/ui/motion";
 
 import { isOfficialChannel } from "@revolt/app/interface/support/official";
@@ -178,6 +182,13 @@ export function TextChannel(props: ChannelPageProps) {
 
   const canConnect = () =>
     props.channel.isVoice && props.channel.havePermission("Connect");
+
+  // direct messages and groups show their call above the conversation, in
+  // the page flow (the floating card covered the chat)
+  const conversation = () =>
+    props.channel.type === "DirectMessage" || props.channel.type === "Group";
+  // phones: the call screen has its own top bar while it is open
+  const callCoversHeader = useDmCallCoversHeader(() => props.channel);
 
   // Get a reference to the message box's load latest function
   let jumpToBottomRef: (() => void) | undefined;
@@ -337,7 +348,10 @@ export function TextChannel(props: ChannelPageProps) {
       {/* phones: the details screen has its own top line (back, search,
           notifications, settings); the channel's line would be a second one */}
       <Show
-        when={!(layout() === "phone" && sidebarState().state === "details")}
+        when={
+          !(layout() === "phone" && sidebarState().state === "details") &&
+          !callCoversHeader()
+        }
       >
         <Header placement="primary">
           <ChannelHeader
@@ -363,7 +377,12 @@ export function TextChannel(props: ChannelPageProps) {
               </BelowFloatingHeader>
             }
           >
-            <VoiceChannelCallCardMount channel={props.channel} />
+            <Show
+              when={conversation()}
+              fallback={<VoiceChannelCallCardMount channel={props.channel} />}
+            >
+              <DmCallGate channel={props.channel} />
+            </Show>
           </Show>
 
           <Messages
