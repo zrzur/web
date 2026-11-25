@@ -1,6 +1,6 @@
 {
   "name": "zrzur-web",
-  "version": "26.3.0-beta.9",
+  "version": "26.3.0-beta.10",
   "license": "AGPL-3.0-only",
   "description": "Zrzur web app (AGPL-3.0)",
   "devDependencies": {
