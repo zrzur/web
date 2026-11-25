@@ -86,7 +86,12 @@ export function StaffEraseDialog(props: {
           text: <Trans>Delete for everyone</Trans>,
           variant: "destructive",
           isLoading: busy(),
-          onClick: () => void erase(),
+          // the dialog stays open: a missing reason or a refusal shows in it,
+          // and the caller closes it once the design is gone
+          onClick: () => {
+            void erase();
+            return false;
+          },
         },
       ]}
       isDisabled={busy()}

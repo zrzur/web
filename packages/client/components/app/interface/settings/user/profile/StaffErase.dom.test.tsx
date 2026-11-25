@@ -9,6 +9,7 @@ type Action = { text: unknown; onClick?: () => unknown; variant?: string };
 vi.mock("@revolt/ui", () => ({
   Dialog: (props: {
     show: boolean;
+    onClose: () => void;
     children?: unknown;
     error?: unknown;
     actions?: Action[];
@@ -22,7 +23,10 @@ vi.mock("@revolt/ui", () => ({
             {(action) => (
               <button
                 data-variant={action.variant ?? "secondary"}
-                onClick={() => action.onClick?.()}
+                onClick={() => {
+                  // as the real Dialog: anything but false closes it
+                  if (action.onClick?.() !== false) props.onClose();
+                }}
               >
                 {action.text as never}
               </button>
@@ -68,6 +72,7 @@ import { StaffEraseDialog } from "./StaffErase";
 
 let dispose: (() => void) | undefined;
 let erased: string[] = [];
+let closed = 0;
 
 const confirm = () =>
   document.querySelector<HTMLButtonElement>('[data-variant="destructive"]')!;
@@ -81,6 +86,7 @@ const settle = () => new Promise((done) => setTimeout(done, 0));
 beforeEach(() => {
   erase.mockReset();
   erased = [];
+  closed = 0;
   i18n.loadAndActivate({ locale: "en", messages: {} });
   document.body.innerHTML = '<div id="root"></div>';
   dispose = render(
@@ -89,7 +95,7 @@ beforeEach(() => {
         <StaffEraseDialog
           show
           item={{ _id: "item1", name: "Rose ring", version: 4 }}
-          onClose={() => undefined}
+          onClose={() => closed++}
           onErased={(id) => erased.push(id)}
         />
       </I18nProvider>
@@ -112,6 +118,7 @@ describe("StaffEraseDialog", () => {
     await settle();
     expect(erase).not.toHaveBeenCalled();
     expect(document.querySelector("[data-field-error]")).not.toBeNull();
+    expect(closed).toBe(0);
 
     type("   ");
     confirm().click();
