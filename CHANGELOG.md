@@ -6,6 +6,8 @@
 
 The official release of everything tested in 26.3.0-beta.1 to 26.3.0-beta.11, for everyone.
 
+
+- **Wearing on a profile shows each design as it really looks** (owner, 2026-11-25). A nameplate takes a row of its own at its real shape, with the person's avatar and name on it as in the member list, moving when it moves. The square designs sit side by side under it (three on the card, four on the full profile): the decoration on the person's own avatar, the profile frame round a small copy of their card, the effect playing over a piece of their card (once when it comes into view, and again while the pointer or keyboard rests on it), and their name in its own font and colours. Under reduced motion, Save data or with profile effects off, each shows a still. Every tile keeps its name, its kind and the click that opens the design; right-to-left is mirrored. Everything new loads with Wearing itself, not with the app.
 - The small profile card shows every badge on a row under the name, the same as the full profile, instead of the first three at the far end of the name row (owner, 2026-11-25).
 
 ### Profile frames: a design guide, a frame kit and uploads in Creator Studio (2026-11-25)

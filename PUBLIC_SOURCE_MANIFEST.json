@@ -40,8 +40,8 @@
     },
     {
       "path": ".github/workflows/source-check.yml",
-      "sha256": "e3bd7c04a24b5b57360667806f1c31376f757f91f16b2b46ea0c239121c8cf1e",
-      "bytes": 952,
+      "sha256": "c97fba902e6913a039a6bd5bff0afa638bc4f7c730496fb8367201a6a545fb66",
+      "bytes": 960,
       "category": "reviewed-build-and-ci"
     },
     {
@@ -268,8 +268,8 @@
     },
     {
       "path": "CHANGELOG.md",
-      "sha256": "6ada82f7b89a0c38429c48fb23aa8e142e8ea2567614648d29cdc60e5b7d7ab5",
-      "bytes": 249808,
+      "sha256": "f3256f8aea2cc9e4bd25da90a87b74e2b27b7a66a5bb958949d95c4fda28011e",
+      "bytes": 250518,
       "category": "public-documentation"
     },
     {
@@ -328,8 +328,8 @@
     },
     {
       "path": "RELEASE.json",
-      "sha256": "779ba10276e6dfe57935b76695ba585184d72a62075c3c7b77590d7130663828",
-      "bytes": 281,
+      "sha256": "5abfc9a63bb25b44319e4b6b44c063ab3f06be20763b56b003d538ea2d95f31e",
+      "bytes": 297,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -346,8 +346,8 @@
     },
     {
       "path": "ZRZUR_RELEASE.md",
-      "sha256": "bbae20dd25ccb00b7bd59c4f844c428287ecddf16efd12ec221d3517dca43659",
-      "bytes": 1488,
+      "sha256": "a5ff2db51c01ea019bed3774ad7416f0f649755a6702bd1b57dedd09d0fe7fbc",
+      "bytes": 1615,
       "category": "public-documentation"
     },
     {
@@ -586,8 +586,8 @@
     },
     {
       "path": "package.json",
-      "sha256": "a14b30650708d80ea5a515526ca0d68d5872509c687d446a5693d0008b0c04d3",
-      "bytes": 728,
+      "sha256": "8ecae3adb35af5aba4b2c957c2adbceace5951cb6dc2360d1b12d6af8d53c5b3",
+      "bytes": 736,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -2692,8 +2692,8 @@
     },
     {
       "path": "packages/client/components/app/interface/settings/user/profile/ProfileWearing.tsx",
-      "sha256": "3df7c8d429c2c2d19124f902821703a23b5df2183b86acde7f4f3e2ad356dfae",
-      "bytes": 5635,
+      "sha256": "b376d774e913f54641d756c169989442cbb4161aec76bc5636b2c6f8b7bd0159",
+      "bytes": 5991,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -7606,14 +7606,14 @@
     },
     {
       "path": "packages/client/components/ui/components/features/profiles/ProfileTiles.dom.test.tsx",
-      "sha256": "ab8cbcdafd65a40d54fc9e79452c14c71c72c3f33229107ddc415722af5fbe3f",
-      "bytes": 3206,
+      "sha256": "552f948670d71e1a9c94ef988451d9b196f1b5bafba8906274ac7b8ddeac8eb3",
+      "bytes": 5468,
       "category": "synthetic-test-source-or-fixture"
     },
     {
       "path": "packages/client/components/ui/components/features/profiles/ProfileTiles.tsx",
-      "sha256": "7a84cefe568b9be0a283cffe75a9d768edc227b44bdf0b64f888b7570a2673d0",
-      "bytes": 4781,
+      "sha256": "6e426432b4978f1cd64e9ce39610b74ba529d515197be308f5fd45a488fdbd3f",
+      "bytes": 6032,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -7626,6 +7626,18 @@
       "path": "packages/client/components/ui/components/features/profiles/SteamTile.tsx",
       "sha256": "f3f0c483978c3d368c888e79757c73c3786cc2830647c0951e7f5a1df48ccaae",
       "bytes": 2787,
+      "category": "product-source-or-build-manifest"
+    },
+    {
+      "path": "packages/client/components/ui/components/features/profiles/WornPreviews.dom.test.tsx",
+      "sha256": "cf1b497959d517bc4fd3105bd1fb6e7f1f61a5d07532a55625f0700881503c3d",
+      "bytes": 4399,
+      "category": "synthetic-test-source-or-fixture"
+    },
+    {
+      "path": "packages/client/components/ui/components/features/profiles/WornPreviews.tsx",
+      "sha256": "315291c74c0c1c39dc917c3d010f2895cfc5bd590d7ad361c0338a733848cca1",
+      "bytes": 14490,
       "category": "product-source-or-build-manifest"
     },
     {
