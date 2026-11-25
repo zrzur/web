@@ -14,6 +14,14 @@ export function useStyleLabels() {
   const { t } = useLingui();
   const frames: Record<string, string> = {
     crystal: t`Crystal cave`,
+    "desert-lanterns": t`Desert lanterns`,
+    "damascus-jasmine": t`Damascus jasmine`,
+    "autumn-maple": t`Autumn maple`,
+    "coral-reef": t`Coral reef`,
+    "mushroom-forest": t`Mushroom forest`,
+    "zrzur-neon": t`Zrzur neon`,
+    "zrzur-arcade": t`Zrzur arcade`,
+    "zrzur-flock": t`Zrzur flock`,
   };
   const pack = usePackLabels();
   const decorations: Record<string, string> = {

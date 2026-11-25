@@ -33842,3 +33842,35 @@ msgstr "جارٍ الاتصال…"
 #: components/ui/components/features/voice/dmCall/DmCallRoom.tsx
 msgid "Only you are here. The others can join while you stay in the call."
 msgstr "أنت وحدك هنا. يمكن للآخرين الانضمام ما دمت في المكالمة."
+
+#: components/app/interface/settings/user/profile/styleLabels.tsx
+msgid "Autumn maple"
+msgstr "قيقب الخريف"
+
+#: components/app/interface/settings/user/profile/styleLabels.tsx
+msgid "Coral reef"
+msgstr "الشعاب المرجانية"
+
+#: components/app/interface/settings/user/profile/styleLabels.tsx
+msgid "Damascus jasmine"
+msgstr "ياسمين الشام"
+
+#: components/app/interface/settings/user/profile/styleLabels.tsx
+msgid "Desert lanterns"
+msgstr "فوانيس الصحراء"
+
+#: components/app/interface/settings/user/profile/styleLabels.tsx
+msgid "Mushroom forest"
+msgstr "غابة الفطر"
+
+#: components/app/interface/settings/user/profile/styleLabels.tsx
+msgid "Zrzur arcade"
+msgstr "أركيد زرزور"
+
+#: components/app/interface/settings/user/profile/styleLabels.tsx
+msgid "Zrzur flock"
+msgstr "سرب زرزور"
+
+#: components/app/interface/settings/user/profile/styleLabels.tsx
+msgid "Zrzur neon"
+msgstr "نيون زرزور"

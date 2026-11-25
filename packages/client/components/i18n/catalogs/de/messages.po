@@ -33842,3 +33842,35 @@ msgstr "Ruft an …"
 #: components/ui/components/features/voice/dmCall/DmCallRoom.tsx
 msgid "Only you are here. The others can join while you stay in the call."
 msgstr "Nur du bist hier. Die anderen können beitreten, solange du im Anruf bleibst."
+
+#: components/app/interface/settings/user/profile/styleLabels.tsx
+msgid "Autumn maple"
+msgstr "Herbstahorn"
+
+#: components/app/interface/settings/user/profile/styleLabels.tsx
+msgid "Coral reef"
+msgstr "Korallenriff"
+
+#: components/app/interface/settings/user/profile/styleLabels.tsx
+msgid "Damascus jasmine"
+msgstr "Damaszener Jasmin"
+
+#: components/app/interface/settings/user/profile/styleLabels.tsx
+msgid "Desert lanterns"
+msgstr "Wüstenlaternen"
+
+#: components/app/interface/settings/user/profile/styleLabels.tsx
+msgid "Mushroom forest"
+msgstr "Pilzwald"
+
+#: components/app/interface/settings/user/profile/styleLabels.tsx
+msgid "Zrzur arcade"
+msgstr "Zrzur-Arcade"
+
+#: components/app/interface/settings/user/profile/styleLabels.tsx
+msgid "Zrzur flock"
+msgstr "Zrzur-Schwarm"
+
+#: components/app/interface/settings/user/profile/styleLabels.tsx
+msgid "Zrzur neon"
+msgstr "Zrzur-Neon"

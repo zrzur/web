@@ -86,14 +86,21 @@ export function ProfileFrame(props: {
       : undefined;
 
   // the drawings load the first time a built-in frame is shown, so the app's
-  // first load carries no frame art
-  const [drawings] = createResource(builtIn, () => import("./builtinFrames"));
+  // first load carries no frame art; a frame drawn ahead of time loads its
+  // own file then
+  const [drawings] = createResource(builtIn, async (id) => {
+    const art = await import("./builtinFrames");
+    await art.loadFrameArt(id);
+    // a new object each time, so a second frame's art wakes the drawing too
+    return { art, id };
+  });
   const drawn = () => {
     const id = builtIn();
     const box = size();
-    const art = drawings();
-    if (!id || !box || !art) return undefined;
-    return art.profileFrameSvg(id, box.w, box.h, {
+    const loaded = drawings();
+    // while another frame's file loads, the last one is still here
+    if (!id || !box || loaded?.id !== id) return undefined;
+    return loaded.art.profileFrameSvg(id, box.w, box.h, {
       phone: phone(),
       cell: props.cell,
     });

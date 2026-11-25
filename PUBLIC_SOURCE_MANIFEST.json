@@ -40,7 +40,7 @@
     },
     {
       "path": ".github/workflows/source-check.yml",
-      "sha256": "9806f7afcde56878864b3b4ad8bbcaea28e03e88836bae916e7146243ce015a3",
+      "sha256": "c97fba902e6913a039a6bd5bff0afa638bc4f7c730496fb8367201a6a545fb66",
       "bytes": 960,
       "category": "reviewed-build-and-ci"
     },
@@ -268,8 +268,8 @@
     },
     {
       "path": "CHANGELOG.md",
-      "sha256": "da4b120dddc6097b6f9819d90c540e6aad0187dc49d341fc05c17627962e3cc1",
-      "bytes": 248088,
+      "sha256": "fdd68d3e6b901903919bb1bc12cab24b0b93c25ad82a4b5f243e40cee5f57dcc",
+      "bytes": 249513,
       "category": "public-documentation"
     },
     {
@@ -328,7 +328,7 @@
     },
     {
       "path": "RELEASE.json",
-      "sha256": "b0adf2c1d61517c96b5f2a212e62ec5796b682fe7a2246447a25beeedd0f1529",
+      "sha256": "5abfc9a63bb25b44319e4b6b44c063ab3f06be20763b56b003d538ea2d95f31e",
       "bytes": 297,
       "category": "product-source-or-build-manifest"
     },
@@ -346,7 +346,7 @@
     },
     {
       "path": "ZRZUR_RELEASE.md",
-      "sha256": "7360ace58fdbc37dece1b991473cfd27e1b6bd343ad0ab16b1bef2b78a604a68",
+      "sha256": "a5ff2db51c01ea019bed3774ad7416f0f649755a6702bd1b57dedd09d0fe7fbc",
       "bytes": 1615,
       "category": "public-documentation"
     },
@@ -586,7 +586,7 @@
     },
     {
       "path": "package.json",
-      "sha256": "a1c5a59f4b7ec4f5cdd86b0528a965e0bac2ddc7f3ba368a50e18e12244be5c9",
+      "sha256": "8ecae3adb35af5aba4b2c957c2adbceace5951cb6dc2360d1b12d6af8d53c5b3",
       "bytes": 736,
       "category": "product-source-or-build-manifest"
     },
@@ -2842,8 +2842,8 @@
     },
     {
       "path": "packages/client/components/app/interface/settings/user/profile/styleLabels.tsx",
-      "sha256": "a890e6c4fc6a78085c5d7d8d4c0b515588c5c6e2cd75f25cc6150e72a20ac95a",
-      "bytes": 3570,
+      "sha256": "210c3c201f19ebbdd7b4010119cf7b4b3aa3b29edef88d8f31e598d1af869244",
+      "bytes": 3876,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -3832,8 +3832,8 @@
     },
     {
       "path": "packages/client/components/i18n/catalogs/ar/messages.po",
-      "sha256": "0fa11ccabeef4da2f765fe6fb120677b548a4bbde86f6120c5d633088a5ccfd3",
-      "bytes": 1401144,
+      "sha256": "8a96e868db10c7c1b43bdb8317f4f9fc68c40954c4f7e91263244bde4ef3fb6a",
+      "bytes": 1402111,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -3976,8 +3976,8 @@
     },
     {
       "path": "packages/client/components/i18n/catalogs/de/messages.po",
-      "sha256": "85e991ed84ec44e4decad3ca0e6d27054c5d3d270e8d3b1316ae9d090b4dc304",
-      "bytes": 1292913,
+      "sha256": "950a0d0d84b0b1f3abfb522662f53780ae197cd41db44a49c8d9d8826a37db5f",
+      "bytes": 1293800,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -4012,8 +4012,8 @@
     },
     {
       "path": "packages/client/components/i18n/catalogs/en/messages.po",
-      "sha256": "1fedd8b9be99478589586548ea59a0d2590c62812ece95d0a670786e222ff092",
-      "bytes": 1244414,
+      "sha256": "cfdb43e699d0a1decdffde9269f62ea2d1eb4addcadbafa8b1f1d43931d79ecf",
+      "bytes": 1245304,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -7774,15 +7774,21 @@
     },
     {
       "path": "packages/client/components/ui/components/features/profiles/frames/FramedCard.dom.test.tsx",
-      "sha256": "daeee4a7b553f6de7840906ab564fd5be912b51a0fad35ddc9ff2e97e0980c26",
-      "bytes": 3366,
+      "sha256": "62592d9db3eca054083ea865aee5759b192af3b3b9f8fae2e410428d678159bf",
+      "bytes": 3398,
       "category": "synthetic-test-source-or-fixture"
     },
     {
       "path": "packages/client/components/ui/components/features/profiles/frames/ProfileFrame.tsx",
-      "sha256": "03eb0e5b0eaeb964a67a5c79152d962ce0fc25cfcd48bb6f20d40302f28f4874",
-      "bytes": 8139,
+      "sha256": "ee59b98af32d6f95677a4775fce0ab609740765f338359d492f7e20879aaa897",
+      "bytes": 8458,
       "category": "product-source-or-build-manifest"
+    },
+    {
+      "path": "packages/client/components/ui/components/features/profiles/frames/ProfileFrameSet.dom.test.tsx",
+      "sha256": "053c3531ec2ace939a665b132b57a31a5923961bf051809c18aebc82bf37a448",
+      "bytes": 2210,
+      "category": "synthetic-test-source-or-fixture"
     },
     {
       "path": "packages/client/components/ui/components/features/profiles/frames/ProfilePreview.tsx",
@@ -7792,14 +7798,14 @@
     },
     {
       "path": "packages/client/components/ui/components/features/profiles/frames/builtinFrames.test.ts",
-      "sha256": "f343e1d53a50f27158336eceef39df903f661baed08a3c2dff3af65225478ca0",
-      "bytes": 6272,
+      "sha256": "41fff4d72641a4a7d08e1a4a18f630371915d1669d387179090423f35fa6b111",
+      "bytes": 6426,
       "category": "synthetic-test-source-or-fixture"
     },
     {
       "path": "packages/client/components/ui/components/features/profiles/frames/builtinFrames.ts",
-      "sha256": "cc200bc3356e77de9d4b04db1d5b1bb78d7247616e2142ab186cdacf695973cb",
-      "bytes": 1915,
+      "sha256": "f65a7f6ab6d525753578394c41b603d9dbd9db94e07c2b9e7421846fc9989599",
+      "bytes": 3900,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -7816,14 +7822,14 @@
     },
     {
       "path": "packages/client/components/ui/components/features/profiles/frames/frameIds.ts",
-      "sha256": "bc9371e3df8c7240f1058dad5d54ec26261473c88b58f3aca869fe7167dd01f3",
-      "bytes": 517,
+      "sha256": "ef86e7d5f53f8842f6685cb8416cf404e0fe4e76f39460d5e703a3b5dc738348",
+      "bytes": 732,
       "category": "product-source-or-build-manifest"
     },
     {
       "path": "packages/client/components/ui/components/features/profiles/frames/frameRoom.ts",
-      "sha256": "da491d7a9d954cd4ab03598d8d85b8adb36eab24f9291f9d6ba5a73083dbad9b",
-      "bytes": 3727,
+      "sha256": "0e87c0dc95934985b3d6cf92737d6cca49205ff0ee4c12940b1b8af18b4a6b85",
+      "bytes": 4118,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -7837,6 +7843,66 @@
       "sha256": "e9324257c0eb4033dc9e670706a8ad84612fc3f771ea4f44d2be76a101acbb31",
       "bytes": 14001,
       "category": "product-source-or-build-manifest"
+    },
+    {
+      "path": "packages/client/components/ui/components/features/profiles/frames/pixel/pieces.ts",
+      "sha256": "7543f2740b6094eafc346da615e2c1c64e9b2890ab0f7952d89f5730a374a033",
+      "bytes": 1930,
+      "category": "product-source-or-build-manifest"
+    },
+    {
+      "path": "packages/client/components/ui/components/features/profiles/frames/pixel/set/autumnMaple.ts",
+      "sha256": "ef337697534c0c0979d110239244c00c78be4df35810ff06e3fc27ff8a69f7b0",
+      "bytes": 24498,
+      "category": "product-source-or-build-manifest"
+    },
+    {
+      "path": "packages/client/components/ui/components/features/profiles/frames/pixel/set/coralReef.ts",
+      "sha256": "608af0ea5635709ab47f773258c66a933681e5aae5a986f5f16fd7ad9ce1f4bd",
+      "bytes": 32855,
+      "category": "product-source-or-build-manifest"
+    },
+    {
+      "path": "packages/client/components/ui/components/features/profiles/frames/pixel/set/damascusJasmine.ts",
+      "sha256": "637f2c95644f26d9357b2954c0f2cb9d9088146d9c1ee2072e7a67f5a246dddc",
+      "bytes": 31676,
+      "category": "product-source-or-build-manifest"
+    },
+    {
+      "path": "packages/client/components/ui/components/features/profiles/frames/pixel/set/desertLanterns.ts",
+      "sha256": "696c9bf920f222f57e6b162fb44b67bf89118e261ad0dbb2ea7cf7dd9ea25b31",
+      "bytes": 25764,
+      "category": "product-source-or-build-manifest"
+    },
+    {
+      "path": "packages/client/components/ui/components/features/profiles/frames/pixel/set/mushroomForest.ts",
+      "sha256": "2db61974d73eccb5b881e56fc48e9718d2be0bf00a53058a598d20c21fc770f2",
+      "bytes": 26931,
+      "category": "product-source-or-build-manifest"
+    },
+    {
+      "path": "packages/client/components/ui/components/features/profiles/frames/pixel/set/zrzurArcade.ts",
+      "sha256": "66ec4fbce93af7d03a7cccb6c3276cea1fd8b7c75674e5cf2a00b31c65e622e5",
+      "bytes": 24546,
+      "category": "product-source-or-build-manifest"
+    },
+    {
+      "path": "packages/client/components/ui/components/features/profiles/frames/pixel/set/zrzurFlock.ts",
+      "sha256": "21b76b6457ceb632864ff0fa3e9673cc36b4784e49bdd0a94db950be36c80769",
+      "bytes": 21495,
+      "category": "product-source-or-build-manifest"
+    },
+    {
+      "path": "packages/client/components/ui/components/features/profiles/frames/pixel/set/zrzurNeon.ts",
+      "sha256": "0ab29500ee13ecaeff5a7d480cc5368ca6a25b0e1225b5ae71887b3a9454a9ef",
+      "bytes": 34675,
+      "category": "product-source-or-build-manifest"
+    },
+    {
+      "path": "packages/client/components/ui/components/features/profiles/frames/setFrames.test.ts",
+      "sha256": "58c967135b09c0fa4af09e9f370e7f344a921e706096f29be4e961e3a29c6545",
+      "bytes": 6533,
+      "category": "synthetic-test-source-or-fixture"
     },
     {
       "path": "packages/client/components/ui/components/features/profiles/index.ts",
@@ -42666,6 +42732,12 @@
       "path": "packages/client/scripts/i18n/ui-2026112580.json",
       "sha256": "7dc5f9fb0023915c41245612134d3cc6bdc580fecc78d9999beaa6453b910eb6",
       "bytes": 19751,
+      "category": "product-source-or-build-manifest"
+    },
+    {
+      "path": "packages/client/scripts/i18n/ui-2026112581.json",
+      "sha256": "4a162d80b7c502dd18c38ede7706b6f1a81b0f302ed9e70d8cf03fb726085ed2",
+      "bytes": 508,
       "category": "product-source-or-build-manifest"
     },
     {

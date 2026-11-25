@@ -33845,3 +33845,35 @@ msgstr "Calling…"
 #: components/ui/components/features/voice/dmCall/DmCallRoom.tsx
 msgid "Only you are here. The others can join while you stay in the call."
 msgstr "Only you are here. The others can join while you stay in the call."
+
+#: components/app/interface/settings/user/profile/styleLabels.tsx
+msgid "Autumn maple"
+msgstr "Autumn maple"
+
+#: components/app/interface/settings/user/profile/styleLabels.tsx
+msgid "Coral reef"
+msgstr "Coral reef"
+
+#: components/app/interface/settings/user/profile/styleLabels.tsx
+msgid "Damascus jasmine"
+msgstr "Damascus jasmine"
+
+#: components/app/interface/settings/user/profile/styleLabels.tsx
+msgid "Desert lanterns"
+msgstr "Desert lanterns"
+
+#: components/app/interface/settings/user/profile/styleLabels.tsx
+msgid "Mushroom forest"
+msgstr "Mushroom forest"
+
+#: components/app/interface/settings/user/profile/styleLabels.tsx
+msgid "Zrzur arcade"
+msgstr "Zrzur arcade"
+
+#: components/app/interface/settings/user/profile/styleLabels.tsx
+msgid "Zrzur flock"
+msgstr "Zrzur flock"
+
+#: components/app/interface/settings/user/profile/styleLabels.tsx
+msgid "Zrzur neon"
+msgstr "Zrzur neon"
