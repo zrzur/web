@@ -2,6 +2,10 @@
 
 ## Unreleased
 
+## 26.3.0 (2026-11-25)
+
+The official release of everything tested in 26.3.0-beta.1 to 26.3.0-beta.11, for everyone.
+
 - The small profile card shows every badge on a row under the name, the same as the full profile, instead of the first three at the far end of the name row (owner, 2026-11-25).
 
 ### Profile frames: a design guide, a frame kit and uploads in Creator Studio (2026-11-25)
