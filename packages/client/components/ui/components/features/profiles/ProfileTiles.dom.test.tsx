@@ -116,3 +116,64 @@ describe("Wearing and creations tiles", () => {
     });
   });
 });
+
+describe("Wearing: wide designs and square ones", () => {
+  const plate = {
+    key: "Nameplate",
+    name: "Aurora",
+    note: "Nameplate",
+    wide: true,
+    picture: <span data-worn-plate />,
+    onPress: () => {},
+  };
+
+  function mountWorn(size: ProfileSize, list = [plate, ...tiles], all = false) {
+    dispose = render(
+      () => (
+        <I18nProvider i18n={i18n}>
+          <ProfileSizeContext.Provider value={() => size}>
+            <ProfileWidthContext.Provider value={() => undefined}>
+              <ProfileTiles tiles={list} all={all} />
+            </ProfileWidthContext.Provider>
+          </ProfileSizeContext.Provider>
+        </I18nProvider>
+      ),
+      document.getElementById("root")!,
+    );
+    const buttons = [...document.querySelectorAll("button")];
+    const grid = document.querySelector<HTMLElement>("[style*='--tiles']");
+    return { buttons, grid };
+  }
+
+  it("a nameplate takes a row of its own, first, outside the square row", () => {
+    const { buttons, grid } = mountWorn("full");
+    expect(buttons[0].title).toBe("Aurora");
+    expect(buttons[0].hasAttribute("data-wide")).toBe(true);
+    // the plate is drawn whole, not squeezed into the 48 px picture box
+    expect(buttons[0].firstElementChild?.hasAttribute("data-worn-plate")).toBe(
+      true,
+    );
+    expect(grid!.contains(buttons[0])).toBe(false);
+    // four square designs side by side on the full profile
+    expect(grid!.querySelectorAll("button")).toHaveLength(4);
+  });
+
+  it("on the card the plate stays, and the squares keep their three", () => {
+    const { buttons, grid } = mountWorn("card");
+    expect(buttons.filter((b) => b.hasAttribute("data-wide"))).toHaveLength(1);
+    expect(grid!.querySelectorAll("button")).toHaveLength(3);
+  });
+
+  it("each tile keeps its name and its kind", () => {
+    const { buttons } = mountWorn("full");
+    expect(buttons[0].querySelector("bdi")!.textContent).toBe("Aurora");
+    expect(buttons[0].textContent).toContain("Nameplate");
+    expect(buttons[1].querySelector("bdi")!.textContent).toBe("Moon halo");
+  });
+
+  it("only a nameplate: no empty square row", () => {
+    const { buttons, grid } = mountWorn("card", [plate]);
+    expect(buttons).toHaveLength(1);
+    expect(grid).toBeNull();
+  });
+});
