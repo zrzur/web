@@ -51,9 +51,13 @@ const TRANSLATED = Symbol("zrzur.translatedError");
  * An error whose message is already in the reader's language (built with
  * `t`). Only these are shown as written; the text of any other Error is
  * technical and goes under "Details".
+ * @param message Plain words for the reader
+ * @param cause What went wrong underneath (e.g. the server's answer): its
+ * technical part goes under "Details"
  */
-export function translatedError(message: string): Error {
-  const error = new Error(message);
+export function translatedError(message: string, cause?: unknown): Error {
+  const error =
+    cause === undefined ? new Error(message) : new Error(message, { cause });
   (error as unknown as Record<symbol, boolean>)[TRANSLATED] = true;
   return error;
 }
@@ -708,6 +712,10 @@ export function useError() {
  * @returns One or more lines, or undefined if there is nothing to add
  */
 export function errorDetails(error: unknown): string | undefined {
+  // plain words over a technical cause: the cause is the detail
+  if (isTranslatedMessage(error) && error.cause !== undefined) {
+    return errorDetails(error.cause);
+  }
   const clean = cleanError(error);
   if (typeof clean === "string") {
     const text = new DOMParser()

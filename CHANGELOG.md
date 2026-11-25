@@ -17,6 +17,13 @@
 * A member with a server role colour and a nameplate shows the role colour in the member list, plain or gradient. Before, the plate's ink drew every name on a plate white (dark themes) or dark (light themes), so the role colour never showed there.
 * One rule everywhere: your own chosen name colour wins; otherwise the role colour shows, on a nameplate too; with "Show name styles" off, role colours still show. A plain role colour on a plate keeps the plate's soft halo so it reads on the art; a gradient role colour is no longer covered by that halo.
 
+### Two-factor sign-in no longer loops (2026-11-24, owner's report)
+
+* **The sign-in dialog sends the code itself and says what went wrong**, in the same dialog, with the server's answer under "Details". Before, a refused code closed the dialog and opened it again empty, with no message, and every later code went to the same used-up ticket, so even the right code never worked.
+* **A refused code gets a new sign-in step at once**, made with the password already given, so the next code always counts: "This code didn't work. Wait for the next code and enter it once." A wrong recovery code says so in its own words.
+* **Too many wrong codes:** the dialog closes and the password form says "Too many wrong codes. Wait 15 minutes and try again." When no new step can be had, it says "The sign-in step ran out. Please sign in again."
+* The code field opens the number pad on phones, takes the code from the phone's suggestion (`one-time-code`) and drops spaces and line breaks, so `123 456` works. Confirm shows that it is busy and sends once.
+
 ### Profile frames fit the window (2026-11-24, owner's report)
 
 * A profile frame (Crystal cave) shows whole on the card opened from the member list and on the full profile, at any window height: the card and the profile keep the frame's room from the window's edges, and the frame's pixels get smaller (3 px, then 2 px) on lower windows and phones.

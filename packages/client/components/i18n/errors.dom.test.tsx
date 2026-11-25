@@ -4,7 +4,7 @@ import { ApiError } from "@zrzur/sdk";
 import { render } from "solid-js/web";
 import { afterEach, beforeEach, describe, expect, it } from "vitest";
 
-import { errorDetails, useError } from "./errors";
+import { errorDetails, translatedError, useError } from "./errors";
 
 let dispose: (() => void) | undefined;
 let translate: ReturnType<typeof useError>;
@@ -185,5 +185,22 @@ describe("stage and soundboard limits", () => {
     expect(translate(error)).toBe(
       "The sound library isn't ready yet. Try again in a minute.",
     );
+  });
+});
+
+describe("a translated message with its cause", () => {
+  it("shows the message and puts the server's answer under Details", () => {
+    const cause = new ApiError(401, "POST", "/auth/session/login", {
+      type: "InvalidToken",
+    });
+    const error = translatedError("This code didn't work.", cause);
+    expect(translate(error)).toBe("This code didn't work.");
+    expect(errorDetails(error)).toBe("InvalidToken");
+  });
+
+  it("without a cause the details stay as they were", () => {
+    const error = translatedError("Plain words.");
+    expect(translate(error)).toBe("Plain words.");
+    expect(errorDetails(error)).toBe("Plain words.");
   });
 });

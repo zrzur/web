@@ -22,7 +22,8 @@ import {
 } from "@revolt/ui";
 import { Icon } from "@revolt/ui/icons/Icon";
 
-import { useError } from "@revolt/i18n";
+import { normaliseMfaResponse } from "@revolt/client/mfaLogin";
+import { TranslatedError } from "@revolt/i18n/errors";
 
 import { Modals } from "../types";
 
@@ -33,13 +34,14 @@ export function MFAFlowModal(
   props: DialogProps & Modals & { type: "mfa_flow" },
 ) {
   const { t } = useLingui();
-  const describeError = useError();
-  const [error, setError] = createSignal<string>();
+  const [error, setError] = createSignal<unknown>();
+  // an answer is on its way: no second send, Confirm shows it is busy
+  const [busy, setBusy] = createSignal(false);
 
   // Keep track of available methods
   const [methods, setMethods] = createSignal<API.MFAMethod[] | undefined>(
     // eslint-disable-next-line solid/reactivity
-    props.state === "unknown" ? props.available_methods : undefined,
+    props.state === "login" ? props.available_methods : undefined,
   );
 
   // Current state of the modal
@@ -70,6 +72,14 @@ export function MFAFlowModal(
    * Callback to generate a new ticket or send response back up the chain
    */
   async function onSubmit() {
+    if (busy()) return;
+    setBusy(true);
+    // what each field held when sent
+    const sent = new Map(
+      [group.controls.totp_code, group.controls.recovery_code].map(
+        (control) => [control, control.value] as const,
+      ),
+    );
     try {
       const method = selectedMethod();
       if (!method) return;
@@ -90,16 +100,33 @@ export function MFAFlowModal(
           return;
       }
 
+      // spaces and line breaks of a typed or pasted code never count
+      mfa_response = normaliseMfaResponse(mfa_response);
+      setError(undefined);
       if (props.state === "known") {
         const ticket = await props.mfa.createTicket(mfa_response);
         props.callback(ticket);
       } else {
-        props.callback(mfa_response);
+        // signing in: the step sends the answer; an error keeps the dialog
+        // open with the words for it, for the next code
+        props.callback(await props.submit(mfa_response));
       }
 
       props.onClose();
     } catch (err) {
-      setError(describeError(err));
+      setError(err);
+      if (props.state === "login") {
+        // empty the field for the next code, unless the person has already
+        // typed one while the answer was on its way
+        for (const control of [
+          group.controls.totp_code,
+          group.controls.recovery_code,
+        ]) {
+          if (control.value === sent.get(control)) control.setValue("");
+        }
+      }
+    } finally {
+      setBusy(false);
     }
   }
 
@@ -153,6 +180,7 @@ export function MFAFlowModal(
             return false;
           },
           isDisabled: !canSubmit(),
+          isLoading: busy(),
         },
       ];
     }
@@ -178,7 +206,9 @@ export function MFAFlowModal(
       // every dismissal (Escape, X, backdrop) cancels the flow, so the
       // pending action is told "no ticket" instead of waiting forever
       onClose={onCancel}
-      error={error()}
+      error={
+        error() === undefined ? undefined : <TranslatedError error={error()} />
+      }
       title={<Trans>Confirm action</Trans>}
       actions={getActions()}
       isDisabled={group.isPending}
@@ -217,6 +247,9 @@ export function MFAFlowModal(
                     name="totp_code"
                     control={group.controls.totp_code}
                     type="text"
+                    inputmode="numeric"
+                    autocomplete="one-time-code"
+                    autoFocus
                     label={t`Authenticator app`}
                   />
                 </Match>
@@ -225,6 +258,7 @@ export function MFAFlowModal(
                     name="recovery_code"
                     control={group.controls.recovery_code}
                     type="text"
+                    autocomplete="off"
                     label={t`Recovery code`}
                   />
                 </Match>

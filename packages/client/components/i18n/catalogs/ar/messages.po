@@ -33255,3 +33255,23 @@ msgstr "لا تُحسب سيرفرات المالك الواحد أكثر من �
 #: components/app/interface/settings/server/pages.tsx
 msgid "The Zrzur team's check that this is the official server of a real game, company, creator or project."
 msgstr "تحقق فريق زرزور من أن هذا هو السيرفر الرسمي للعبة أو شركة أو صانع محتوى أو مشروع حقيقي."
+
+#: components/client/mfaLogin.ts
+msgid "The sign-in step ran out. Please sign in again."
+msgstr "انتهت مهلة خطوة تسجيل الدخول. يُرجى تسجيل الدخول مرة أخرى."
+
+#: components/client/mfaLogin.ts
+msgid "This code didn't work. Wait for the next code and enter it once."
+msgstr "لم يُقبل هذا الرمز. انتظر الرمز التالي وأدخله مرة واحدة."
+
+#: components/client/mfaLogin.ts
+msgid "This password didn't work. Check it and try again."
+msgstr "لم تُقبل كلمة المرور هذه. تحقّق منها ثم حاول مرة أخرى."
+
+#: components/client/mfaLogin.ts
+msgid "This recovery code didn't work. Check it and try again."
+msgstr "لم يُقبل رمز الاسترداد هذا. تحقّق منه ثم حاول مرة أخرى."
+
+#: components/client/mfaLogin.ts
+msgid "Too many wrong codes. Wait 15 minutes and try again."
+msgstr "أُدخلت رموز خاطئة كثيرة. انتظر 15 دقيقة ثم حاول مرة أخرى."

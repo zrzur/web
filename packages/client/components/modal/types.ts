@@ -30,6 +30,7 @@ import {
 
 import type { ReportTargetSpec } from "@revolt/app/interface/safety/safetyApi";
 import type { OrderCheckout, Supercharge } from "@revolt/client/billing";
+import type { MfaLoginOutcome } from "@revolt/client/mfaLogin";
 import type { ProfileGames } from "@revolt/ui/components/features/profiles/linkedGames";
 
 import type { PromoteTarget } from "./modals/PromoteServer";
@@ -297,9 +298,13 @@ export type Modals =
           callback: (ticket?: MFATicket) => void;
         }
       | {
-          state: "unknown";
+          /** Signing in: the dialog sends each answer and shows the error */
+          state: "login";
           available_methods: API.MFAMethod[];
-          callback: (response?: API.MFAResponse) => void;
+          /** Throws an error to show in the dialog, which stays open */
+          submit: (response: API.MFAResponse) => Promise<MfaLoginOutcome>;
+          /** How the step ended; nothing when the person closed the dialog */
+          callback: (outcome?: MfaLoginOutcome) => void;
         }
     ))
   | { type: "mfa_recovery"; codes: string[]; mfa: MFA }
