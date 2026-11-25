@@ -2,6 +2,16 @@
 
 ## Unreleased
 
+### Badges: one text for every badge, Verified Bot Developer drawn, Verified Server Owner cancelled (2026-11-24, owner's report)
+
+* **One source for badge texts.** A badge's name, what it means and how it is earned now come from one place and read the same in My Badges ("Badges you can earn"), the badge tooltip and profile row, and the public guide at `/badges`, which adds only the details below that line. Before, My Badges still said "Own a verified server. It is shown while you do." while the guide said something else.
+* The texts follow the approved badge policy. **Verified Bot Developer:** by application, reviewed by the Zrzur team: a bot in at least 25 legitimate servers, running for at least 30 days, with verified ownership. **Verified Server** (the mark on a server): by application, reviewed by the Zrzur team: at least 10,000 genuine human members, 180 days, and proven ownership of the official website (DNS or website check). Partner, Content Creator, Community Builder, Big Community, Creator, Super Creator, Beta Veteran, Early Adopter, the years on Zrzur and the team badges are aligned the same way. No line tells you to apply while applications are closed, and none promises a review time.
+* **Verified Bot Developer has its own drawing:** the `</>` of code inside a gear, in the same enamel-pin style; before, it was the same verified seal as Verified Server Owner and the two looked identical in My Badges.
+* **Verified Server Owner is no longer given out** (owner's decision): it is gone from "Badges you can earn" and from `/badges`. People who already have it keep it, still drawn with the verified seal. The Verified Server mark on servers stays as it is.
+* On `/badges`, the section "Programs you apply for" is now "Programs by application".
+* **Verified Server is applied for in Server settings** (owner's decision): Overview → Verified Server, shown to the server's owner only and only while the server takes badge applications (otherwise nothing is shown). It gives the Verified Server line, the checklist the server measured for this server in your language, "Check and apply" with the domain check (a DNS TXT record or a file on the website), and the application's status with continue, withdraw and appeal. Before, the only way in was the Verified Server Owner tile in My Badges, which is gone.
+* **Arabic on the badge screens:** badge names no longer break inside a word («مختبر مخضرم» on two lines); a name too long for its place ends in "…" with the whole name on hover. The tanween is written before the alif («يومًا») and «مختبر» without its kasra, because WebKit drew the mark torn off the alif or above the letter.
+
 ### Profile frames fit the window (2026-11-24, owner's report)
 
 * A profile frame (Crystal cave) shows whole on the card opened from the member list and on the full profile, at any window height: the card and the profile keep the frame's room from the window's edges, and the frame's pixels get smaller (3 px, then 2 px) on lower windows and phones.

@@ -33194,3 +33194,67 @@ msgstr "Update the Zrzur desktop app to share what you are doing."
 #: components/app/interface/settings/user/activity/ActivitySettings.tsx
 msgid "Without the desktop app, Steam can still show what you play: turn on “Show what you play on Steam”."
 msgstr "Without the desktop app, Steam can still show what you play: turn on “Show what you play on Steam”."
+
+#: src/interface/badgeGuide/useBadgeGuide.ts
+msgid "A clearly official entity may qualify below these numbers with a senior approval and a second person."
+msgstr "A clearly official entity may qualify below these numbers with a senior approval and a second person."
+
+#: components/ui/components/features/profiles/badges/useBadgeText.ts
+msgid "An established community with long-term activity, quality and responsible moderation."
+msgstr "An established community with long-term activity, quality and responsible moderation."
+
+#: components/ui/components/features/profiles/badges/useBadgeText.ts
+msgid "Automatic when a server you own reaches 1,000 genuine human members, counted as for Community Builder; it stays if the server gets smaller."
+msgstr "Automatic when a server you own reaches 1,000 genuine human members, counted as for Community Builder; it stays if the server gets smaller."
+
+#: components/ui/components/features/profiles/badges/useBadgeText.ts
+msgid "Automatic when a server you own reaches 100 genuine human members; it stays if the server gets smaller."
+msgstr "Automatic when a server you own reaches 100 genuine human members; it stays if the server gets smaller."
+
+#: src/interface/badgeGuide/useBadgeGuide.ts
+msgid "Bots, deleted, banned or suspended accounts, accounts under 7 days old or without a confirmed e-mail, and people who joined less than a day ago don't count. Counted a few times a day."
+msgstr "Bots, deleted, banned or suspended accounts, accounts under 7 days old or without a confirmed e-mail, and people who joined less than a day ago don't count. Counted a few times a day."
+
+#: components/ui/components/features/profiles/badges/useBadgeText.ts
+msgid "By application, reviewed by the Zrzur team: a bot in at least 25 legitimate servers, running for at least 30 days, with verified ownership."
+msgstr "By application, reviewed by the Zrzur team: a bot in at least 25 legitimate servers, running for at least 30 days, with verified ownership."
+
+#: components/ui/components/features/profiles/badges/useBadgeText.ts
+msgid "By application, reviewed by the Zrzur team: a check in the Bot label of a bot that passed the Verified Bot review."
+msgstr "By application, reviewed by the Zrzur team: a check in the Bot label of a bot that passed the Verified Bot review."
+
+#: components/ui/components/features/profiles/badges/useBadgeText.ts
+msgid "By application, reviewed by the Zrzur team: at least 10,000 genuine human members, 180 days, and proven ownership of the official website (DNS or website check)."
+msgstr "By application, reviewed by the Zrzur team: at least 10,000 genuine human members, 180 days, and proven ownership of the official website (DNS or website check)."
+
+#: components/ui/components/features/profiles/badges/useBadgeText.ts
+msgid "By application, reviewed by the Zrzur team: at least 100,000 real followers on one platform, 90 days of activity and regular original work."
+msgstr "By application, reviewed by the Zrzur team: at least 100,000 real followers on one platform, 90 days of activity and regular original work."
+
+#: components/ui/components/features/profiles/badges/useBadgeText.ts
+msgid "By application, reviewed by the Zrzur team: at least 5,000 genuine human members, a server at least 180 days old and steady weekly activity."
+msgstr "By application, reviewed by the Zrzur team: at least 5,000 genuine human members, a server at least 180 days old and steady weekly activity."
+
+#: components/ui/components/features/profiles/badges/useBadgeText.ts
+msgid "By application, reviewed by the Zrzur team: shown on a server that passed the Verified Server review (see Verified Server Owner)."
+msgstr "By application, reviewed by the Zrzur team: shown on a server that passed the Verified Server review (see Verified Server Owner)."
+
+#: components/ui/components/features/profiles/badges/useBadgeText.ts
+msgid "Owns or develops a bot that passed Zrzur's verification review."
+msgstr "Owns or develops a bot that passed Zrzur's verification review."
+
+#: components/ui/components/features/profiles/badges/useBadgeText.ts
+msgid "Owns the verified official server of a real game, company, creator, organisation or project."
+msgstr "Owns the verified official server of a real game, company, creator, organisation or project."
+
+#: src/interface/badgeGuide/useBadgeGuide.ts
+msgid "Programs by application"
+msgstr "Programs by application"
+
+#: src/interface/badgeGuide/useBadgeGuide.ts
+msgid "Servers of one owner count at most twice, and your own servers never count."
+msgstr "Servers of one owner count at most twice, and your own servers never count."
+
+#: components/app/interface/settings/server/pages.tsx
+msgid "The Zrzur team's check that this is the official server of a real game, company, creator or project."
+msgstr "The Zrzur team's check that this is the official server of a real game, company, creator or project."

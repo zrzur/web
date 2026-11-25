@@ -73,7 +73,14 @@ export const TileText = styled("div", {
     "& strong": {
       fontSize: "14px",
       lineHeight: "20px",
-      overflowWrap: "anywhere",
+      // a badge name stays on one line, never broken inside a word
+      // («مختبر مخضرم» split in two); a name too long ends in "…" and the
+      // tile's title says it whole
+      whiteSpace: "nowrap",
+      overflow: "hidden",
+      textOverflow: "ellipsis",
+      minWidth: 0,
+      maxWidth: "100%",
       // Arabic marks above and below the letters (the kasra of «مختبِر
       // مخضرم») need room: WebKit drew them over the next line
       "&:lang(ar)": { lineHeight: "24px" },
@@ -305,6 +312,18 @@ export const TitleLine = styled("span", {
   },
 });
 
+/** a badge name in a row title: one line, "…" when too long, never broken
+ * inside a word */
+export const BadgeName = styled("span", {
+  base: {
+    whiteSpace: "nowrap",
+    overflow: "hidden",
+    textOverflow: "ellipsis",
+    minWidth: 0,
+    maxWidth: "100%",
+  },
+});
+
 /** small second line under a row description (dates) */
 export const Meta = styled("span", {
   base: {
@@ -402,7 +421,10 @@ export const ShelfItem = styled("div", {
       fontWeight: 600,
       lineHeight: "15px",
       color: "var(--z-fg-secondary)",
-      overflowWrap: "anywhere",
+      // two lines at most, broken between words only, never inside a name
+      overflowWrap: "normal",
+      lineClamp: 2,
+      maxWidth: "100%",
       // Arabic marks need room between lines (WebKit overlap)
       "&:lang(ar)": { lineHeight: "20px" },
     },
