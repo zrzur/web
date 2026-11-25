@@ -2,6 +2,14 @@
 
 ## Unreleased
 
+### Activity: real pictures, links and a short settings page (2026-11-25, owner's report)
+
+* **Real pictures everywhere:** the profile card, the full profile and the member and DM line show each game's or app's own picture (a Steam game keeps its tall cover on the profile), loaded only through Zrzur's image proxy or file server. Without a picture, a letter tile in Zrzur's colours; never the generic laptop or controller icon. A picture that fails to load turns into the tile.
+* **Links:** a program the desktop app saw shows its official page as one link with the site's name; an app's own buttons show as before. Both open through the link warning. On phones every link is a 44 px row.
+* **The activity panel reads in layers:** "Playing" over the name, then the game's details and state on their own lines, then the time. Where it comes from moved into the time's tooltip, so the card stays short; the Steam credit stays.
+* **Settings → Activity, much less text:** one short line per row instead of paragraphs. The legal privacy words (the same as the privacy policy) are one tap away under "Details", with `aria-expanded`. Each program in the list shows its real picture (the desktop app's list picture through the image proxy, or the program's own icon from your computer, which never leaves it), its name, "Running now" in the success colour, Rename and its switch. Browsers say "Browser · off until you turn it on". Connected apps show their own icon too.
+* Needs the desktop app from this release for pictures, pages, local icons and browsers off; an older desktop app keeps working with letter tiles.
+
 ### Badges: one text for every badge, Verified Bot Developer drawn, Verified Server Owner cancelled (2026-11-24, owner's report)
 
 * **One source for badge texts.** A badge's name, what it means and how it is earned now come from one place and read the same in My Badges ("Badges you can earn"), the badge tooltip and profile row, and the public guide at `/badges`, which adds only the details below that line. Before, My Badges still said "Own a verified server. It is shown while you do." while the guide said something else.
