@@ -12,6 +12,11 @@
 * **Verified Server is applied for in Server settings** (owner's decision): Overview → Verified Server, shown to the server's owner only and only while the server takes badge applications (otherwise nothing is shown). It gives the Verified Server line, the checklist the server measured for this server in your language, "Check and apply" with the domain check (a DNS TXT record or a file on the website), and the application's status with continue, withdraw and appeal. Before, the only way in was the Verified Server Owner tile in My Badges, which is gone.
 * **Arabic on the badge screens:** badge names no longer break inside a word («مختبر مخضرم» on two lines); a name too long for its place ends in "…" with the whole name on hover. The tanween is written before the alif («يومًا») and «مختبر» without its kasra, because WebKit drew the mark torn off the alif or above the letter.
 
+### Role colours show on nameplates in the member list (2026-11-24, owner's report)
+
+* A member with a server role colour and a nameplate shows the role colour in the member list, plain or gradient. Before, the plate's ink drew every name on a plate white (dark themes) or dark (light themes), so the role colour never showed there.
+* One rule everywhere: your own chosen name colour wins; otherwise the role colour shows, on a nameplate too; with "Show name styles" off, role colours still show. A plain role colour on a plate keeps the plate's soft halo so it reads on the art; a gradient role colour is no longer covered by that halo.
+
 ### Profile frames fit the window (2026-11-24, owner's report)
 
 * A profile frame (Crystal cave) shows whole on the card opened from the member list and on the full profile, at any window height: the card and the profile keep the frame's room from the window's edges, and the frame's pixels get smaller (3 px, then 2 px) on lower windows and phones.

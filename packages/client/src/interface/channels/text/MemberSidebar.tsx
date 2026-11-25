@@ -368,19 +368,22 @@ const memberRow = css({
   // the name starts where the plate is still faint, so it takes the theme's
   // own ink with a halo of the opposite tone: white on dark themes, dark on
   // light ones, readable on the page and on the art alike. A name in its
-  // own chosen colour keeps it. Panda reads only a written-out key, so
-  // this is `PLATE_INK` (plateInk.ts) spelt out; plateInk.dom.test checks it.
-  "&[data-plated] > :not([data-nameplate]) *:not([data-own-colour], [data-own-colour] *)":
+  // own chosen colour or in a server role colour keeps it. Panda reads only
+  // a written-out key, so these are `PLATE_INK`, `PLATE_NAME_COLOUR` and
+  // `PLATE_OWN_COLOUR` (plateInk.ts) spelt out; plateInk.dom.test checks it.
+  "&[data-plated] > :not([data-nameplate]) *:not([data-own-colour], [data-own-colour] *, [data-role-colour], [data-role-colour] *)":
     {
       color: "var(--z-plate-ink, #fff) !important",
       WebkitTextFillColor: "var(--z-plate-ink, #fff) !important",
       textShadow:
         "var(--z-plate-ink-halo, 0 0 2px rgb(0 0 0 / 60%), 0 1px 4px rgb(0 0 0 / 70%))",
     },
-  // ...and takes back the fill and halo it would inherit from the boxes
-  // around it (`PLATE_OWN_COLOUR`, spelt out for Panda as above)
-  "&[data-plated] [data-own-colour]": {
+  // ...and takes back the fill it would inherit from the boxes around it
+  "&[data-plated] :is([data-own-colour], [data-role-colour])": {
     WebkitTextFillColor: "currentColor",
+  },
+  // an own colour draws its own effect; a role colour keeps the plate's halo
+  "&[data-plated] [data-own-colour]": {
     textShadow: "none",
   },
 });

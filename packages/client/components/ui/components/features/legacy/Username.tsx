@@ -38,7 +38,8 @@ type Props = {
  *
  * The name sits in boxes that cut it short with an ellipsis; `nameRoom`
  * gives its glow and slanted letters room inside them. `data-own-colour`
- * keeps a nameplate's ink off the chosen colour (MemberSidebar).
+ * and `data-role-colour` keep a nameplate's ink off a name in its own or a
+ * role colour (MemberSidebar, plateInk.ts).
  *
  * @deprecated this seems unideal
  */
@@ -68,7 +69,10 @@ export function Username(props: Props) {
           </span>
         }
       >
-        <span style={nameStyle(local.userStyle, { colour: false })}>
+        <span
+          style={nameStyle(local.userStyle, { colour: false })}
+          data-role-colour=""
+        >
           <ColouredText colour={local.colour!}>{local.username}</ColouredText>
         </span>
       </Show>
