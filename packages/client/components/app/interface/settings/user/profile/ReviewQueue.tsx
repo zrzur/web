@@ -806,6 +806,7 @@ const Decisions = styled("div", {
       cursor: "pointer",
       "--z-icon-color": "currentColor",
       _disabled: { opacity: 0.5, cursor: "default" },
+      _phone: { height: "44px" },
     },
     "& button[data-primary]": {
       border: "none",
