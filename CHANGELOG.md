@@ -2,6 +2,12 @@
 
 ## Unreleased
 
+### Profile frames: eight more of Zrzur's own (2026-11-25, owner's request)
+
+* **Eight new frames next to Crystal cave,** hand-made pixel art like it: Desert lanterns, Damascus jasmine, Autumn maple, Coral reef, Mushroom forest, and three Zrzur frames with the Zrzur logo as it is: Zrzur neon, Zrzur arcade and Zrzur flock (a starling murmuration). They are in Settings → Profile → Look → Profile frame and in Designs → Frames, with names in Arabic, English and German. Each is drawn round two opposite corners of the card in the same room as Crystal cave, turns round in right-to-left languages, never covers the name, the buttons or what you wrote, and its sparkles, bubbles, fireflies and neon glow twinkle except under reduced motion, Save data or with profile effects off (Autumn maple and Zrzur flock stay still).
+* **Loaded only when shown:** each new frame is its own small file (5–9 KB compressed), fetched the first time someone wearing it is on screen; nothing of them is in the app's first load or in what the service worker installs, apart from their ids and names. They are drawn ahead of time (`frames/pixel/set/`, written by the internal design kit) and placed round a card of any size; on a very short card a corner is cut at the edge of the frame's room.
+* Needs the backend from this release, which accepts the eight new ids (`USER_STYLE_PROFILE_FRAMES`); an older backend refuses to save them.
+
 ### Activity: real pictures, links and a short settings page (2026-11-25, owner's report)
 
 * **Real pictures everywhere:** the profile card, the full profile and the member and DM line show each game's or app's own picture loaded only through Zrzur's image proxy or file server. A logo stands by itself, with no tile, background or frame; a Steam game's tall cover is the picture with a small rounded corner, centred in the same square so names line up. A hairline shadow in the text colour keeps a dark logo visible on a dark panel and a light one on a light panel. Without a picture, the first letter in a soft circle; never the generic laptop or controller icon. A picture that fails to load turns into the letter.
