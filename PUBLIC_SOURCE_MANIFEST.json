@@ -268,8 +268,8 @@
     },
     {
       "path": "CHANGELOG.md",
-      "sha256": "a3df38adce4d2f077a9d6747a7441faa9adcbd597681820df640754ac84be13c",
-      "bytes": 241054,
+      "sha256": "d61bcad3a6c0bf77b5e85e737141515d439db137ed7af0d4bd760723381b225a",
+      "bytes": 241548,
       "category": "public-documentation"
     },
     {
@@ -7588,8 +7588,8 @@
     },
     {
       "path": "packages/client/components/ui/components/features/profiles/badges/BadgeGlyph.dom.test.tsx",
-      "sha256": "a68eb787f16f65d3f21a6940aa5d57e4f01cdbbc16ff50e9a442692db7a3aeba",
-      "bytes": 4094,
+      "sha256": "44ebf9ce2e943d5d304130a9ebeece806cdad2e872d08d28b12a4911386b57f0",
+      "bytes": 4795,
       "category": "synthetic-test-source-or-fixture"
     },
     {
@@ -7612,8 +7612,8 @@
     },
     {
       "path": "packages/client/components/ui/components/features/profiles/badges/badgeArt.ts",
-      "sha256": "fe9ec9521e3732df9eaad03ab7cf70e8a6006a14bc2ac4b2ce39a8b2e4abae94",
-      "bytes": 225980,
+      "sha256": "ff789839a9c718798aed307abfb722f43e7cdd29d8108444b9672d0c0f12c6ff",
+      "bytes": 228840,
       "category": "product-source-or-build-manifest"
     },
     {
