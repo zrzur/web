@@ -33191,3 +33191,87 @@ msgstr "Aktualisiere die Zrzur-Desktop-App, um zu teilen, was du gerade tust."
 #: components/app/interface/settings/user/activity/ActivitySettings.tsx
 msgid "Without the desktop app, Steam can still show what you play: turn on “Show what you play on Steam”."
 msgstr "Auch ohne Desktop-App kann Steam zeigen, was du spielst: Schalte „Zeigen, was du auf Steam spielst“ ein."
+
+#: src/interface/badgeGuide/useBadgeGuide.ts
+msgid "A clearly official entity may qualify below these numbers with a senior approval and a second person."
+msgstr "Eine eindeutig offizielle Stelle kann mit Freigabe auf höherer Ebene und einer zweiten Person auch darunter verifiziert werden."
+
+#: components/ui/components/features/profiles/badges/useBadgeText.ts
+msgid "An established community with long-term activity, quality and responsible moderation."
+msgstr "Eine etablierte Community mit langfristiger Aktivität, Qualität und verantwortungsvoller Moderation."
+
+#: components/ui/components/features/profiles/badges/useBadgeText.ts
+msgid "Automatic when a server you own reaches 1,000 genuine human members, counted as for Community Builder; it stays if the server gets smaller."
+msgstr "Automatisch, sobald ein Server, der dir gehört, 1.000 echte menschliche Mitglieder erreicht, gezählt wie bei „Community-Gründer“; bleibt, wenn der Server kleiner wird."
+
+#: components/ui/components/features/profiles/badges/useBadgeText.ts
+msgid "Automatic when a server you own reaches 100 genuine human members; it stays if the server gets smaller."
+msgstr "Automatisch, sobald ein Server, der dir gehört, 100 echte menschliche Mitglieder erreicht; bleibt, wenn der Server kleiner wird."
+
+#: src/interface/badgeGuide/useBadgeGuide.ts
+msgid "Bots, deleted, banned or suspended accounts, accounts under 7 days old or without a confirmed e-mail, and people who joined less than a day ago don't count. Counted a few times a day."
+msgstr "Bots, gelöschte, gesperrte oder suspendierte Konten, Konten unter 7 Tagen oder ohne bestätigte E-Mail und Personen, die vor weniger als einem Tag beigetreten sind, zählen nicht. Mehrmals täglich gezählt."
+
+#: components/ui/components/features/profiles/badges/useBadgeText.ts
+msgid "By application, reviewed by the Zrzur team: a bot in at least 25 legitimate servers, running for at least 30 days, with verified ownership."
+msgstr "Auf Antrag, vom Zrzur-Team geprüft: ein Bot auf mindestens 25 echten Servern, seit mindestens 30 Tagen in Betrieb, mit nachgewiesenem Eigentum."
+
+#: components/ui/components/features/profiles/badges/useBadgeText.ts
+msgid "By application, reviewed by the Zrzur team: a check in the Bot label of a bot that passed the Verified Bot review."
+msgstr "Auf Antrag, vom Zrzur-Team geprüft: ein Häkchen im Bot-Label eines Bots, der die Prüfung zur Verifizierung bestanden hat."
+
+#: components/ui/components/features/profiles/badges/useBadgeText.ts
+msgid "By application, reviewed by the Zrzur team: at least 10,000 genuine human members, 180 days, and proven ownership of the official website (DNS or website check)."
+msgstr "Auf Antrag, vom Zrzur-Team geprüft: mindestens 10.000 echte menschliche Mitglieder, 180 Tage und nachgewiesenes Eigentum an der offiziellen Website (Prüfung per DNS oder auf der Website)."
+
+#: components/ui/components/features/profiles/badges/useBadgeText.ts
+msgid "By application, reviewed by the Zrzur team: at least 100,000 real followers on one platform, 90 days of activity and regular original work."
+msgstr "Auf Antrag, vom Zrzur-Team geprüft: mindestens 100.000 echte Follower auf einer Plattform, 90 Tage Aktivität und regelmäßig eigene Werke."
+
+#: components/ui/components/features/profiles/badges/useBadgeText.ts
+msgid "By application, reviewed by the Zrzur team: at least 5,000 genuine human members, a server at least 180 days old and steady weekly activity."
+msgstr "Auf Antrag, vom Zrzur-Team geprüft: mindestens 5.000 echte menschliche Mitglieder, ein Server, der mindestens 180 Tage alt ist, und beständige wöchentliche Aktivität."
+
+#: components/ui/components/features/profiles/badges/useBadgeText.ts
+msgid "By application, reviewed by the Zrzur team: shown on a server that passed the Verified Server review (see Verified Server Owner)."
+msgstr "Auf Antrag, vom Zrzur-Team geprüft: erscheint bei einem Server, der die Prüfung zur Verifizierung bestanden hat (siehe „Verifizierter Serverinhaber“)."
+
+#: components/ui/components/features/profiles/badges/useBadgeText.ts
+msgid "Owns or develops a bot that passed Zrzur's verification review."
+msgstr "Besitzt oder entwickelt einen Bot, der Zrzurs Prüfung zur Verifizierung bestanden hat."
+
+#: components/ui/components/features/profiles/badges/useBadgeText.ts
+msgid "Owns the verified official server of a real game, company, creator, organisation or project."
+msgstr "Besitzt den verifizierten offiziellen Server eines echten Spiels, Unternehmens, Creators, einer Organisation oder eines Projekts."
+
+#: src/interface/badgeGuide/useBadgeGuide.ts
+msgid "Programs by application"
+msgstr "Programme auf Antrag"
+
+#: src/interface/badgeGuide/useBadgeGuide.ts
+msgid "Servers of one owner count at most twice, and your own servers never count."
+msgstr "Server einer Person zählen höchstens zweimal, deine eigenen nie."
+
+#: components/app/interface/settings/server/pages.tsx
+msgid "The Zrzur team's check that this is the official server of a real game, company, creator or project."
+msgstr "Die Prüfung des Zrzur-Teams, dass dies der offizielle Server eines echten Spiels, Unternehmens, Creators oder Projekts ist."
+
+#: components/client/mfaLogin.ts
+msgid "The sign-in step ran out. Please sign in again."
+msgstr "Der Anmeldeschritt ist abgelaufen. Bitte melde dich erneut an."
+
+#: components/client/mfaLogin.ts
+msgid "This code didn't work. Wait for the next code and enter it once."
+msgstr "Dieser Code hat nicht funktioniert. Warte auf den nächsten Code und gib ihn einmal ein."
+
+#: components/client/mfaLogin.ts
+msgid "This password didn't work. Check it and try again."
+msgstr "Dieses Passwort hat nicht funktioniert. Prüfe es und versuche es erneut."
+
+#: components/client/mfaLogin.ts
+msgid "This recovery code didn't work. Check it and try again."
+msgstr "Dieser Wiederherstellungscode hat nicht funktioniert. Prüfe ihn und versuche es erneut."
+
+#: components/client/mfaLogin.ts
+msgid "Too many wrong codes. Wait 15 minutes and try again."
+msgstr "Zu viele falsche Codes. Warte 15 Minuten und versuche es dann erneut."

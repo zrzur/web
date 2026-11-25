@@ -19,7 +19,8 @@ export type ProgramId =
 /** The badge each program leads to, as the catalogue names it */
 export const PROGRAM_BADGE: Record<ProgramId, AnyBadgeId> = {
   partner: "partner",
-  verified_server: "verified_server_owner",
+  // the server's mark: Verified Server Owner is cancelled (owner, 2026-11-24)
+  verified_server: "server_verified",
   verified_bot: "verified_bot_developer",
   content_creator: "content_creator",
 };

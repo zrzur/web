@@ -11,7 +11,10 @@ import {
 describe("badge programs", () => {
   it("each program leads to its badge and back", () => {
     expect(programOf("partner")).toBe("partner");
-    expect(programOf("verified_server_owner")).toBe("verified_server");
+    // Verified Server Owner is cancelled (owner, 2026-11-24): the Verified
+    // Server program leads to the server's mark, applied for in server settings
+    expect(programOf("verified_server_owner")).toBeUndefined();
+    expect(PROGRAM_BADGE.verified_server).toBe("server_verified");
     expect(programOf("verified_bot_developer")).toBe("verified_bot");
     expect(programOf("creator")).toBeUndefined();
     expect(PROGRAM_BADGE.verified_bot).toBe("verified_bot_developer");

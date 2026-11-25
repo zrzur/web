@@ -43,9 +43,10 @@ import {
   forgetStoredEphemeral,
 } from "../app/interface/channels/text/interactions/ephemeralStorage";
 import { forgetCreators } from "../common/lib/creatorCache";
-import { forgetRecentPlaces } from "../keybinds/recentPlaces";
 import { stillFileUrlsWhenSaving } from "../common/lib/saveData";
 import Instance from "../instance/Instance";
+import { forgetRecentPlaces } from "../keybinds/recentPlaces";
+import { type MfaLoginOutcome, MfaLoginStep } from "./mfaLogin";
 import { killServiceWorkerSubscription } from "./NotificationsController";
 import { reconnectDelay } from "./reconnectDelay";
 
@@ -756,38 +757,42 @@ export default class ClientController {
       friendly_name,
     });
 
-    // Prompt for MFA verification if necessary
+    // Prompt for MFA verification if necessary. The dialog sends each answer
+    // itself and says in its own words what went wrong; a refused answer is
+    // followed by a new ticket (see MfaLoginStep), so a ticket that ran out
+    // or used its three tries never keeps the dialog coming back.
     if (session.result === "MFA") {
-      const { allowed_methods } = session;
-      while (session.result === "MFA") {
-        const mfa_response: API.MFAResponse | undefined = await new Promise(
-          (callback) =>
-            modals.openModal({
-              type: "mfa_flow",
-              state: "unknown",
-              available_methods: allowed_methods,
-              callback,
-            }),
-        );
-
-        if (typeof mfa_response === "undefined") {
-          break;
-        }
-
-        try {
-          session = await this.api.post("/auth/session/login", {
-            mfa_response,
-            mfa_ticket: session.ticket,
+      // the password was right, so a captcha (single use) is not asked again
+      const { captcha: _captcha, ...again } = credentials as API.DataLogin & {
+        captcha?: string;
+      };
+      const step = new MfaLoginStep(
+        session.ticket,
+        (answer) =>
+          this.api.post("/auth/session/login", { ...answer, friendly_name }),
+        () =>
+          this.api.post("/auth/session/login", {
+            ...(again as API.DataLogin),
             friendly_name,
-          });
-        } catch (err) {
-          console.error("Failed login:", err);
-        }
-      }
+          }),
+      );
 
-      if (session.result === "MFA") {
-        throw "Cancelled";
-      }
+      const allowed_methods = session.allowed_methods;
+      const outcome: MfaLoginOutcome | undefined = await new Promise(
+        (callback) =>
+          modals.openModal({
+            type: "mfa_flow",
+            state: "login",
+            available_methods: allowed_methods,
+            submit: (response) => step.answer(response),
+            callback,
+          }),
+      );
+
+      if (!outcome) throw "Cancelled";
+      // back to the password form, which shows why
+      if (outcome.type === "restart") throw outcome.error;
+      session = outcome.session;
     }
 
     if (session.result === "Disabled") {

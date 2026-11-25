@@ -24,6 +24,9 @@ export function ColouredText(props: {
             backgroundClip: "text !important",
             WebkitTextFillColor: "transparent",
             textDecoration: "none",
+            // a text shadow paints over a fill clipped to the letters, so an
+            // inherited one (a nameplate's halo) would hide the gradient
+            textShadow: "none",
           })}
           children={props.children}
         />

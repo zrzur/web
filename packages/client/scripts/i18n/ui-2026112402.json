@@ -24,7 +24,7 @@
     "Schließe einen Beta-Zyklus mit mindestens 3 geprüften Feedbackberichten oder 1 bestätigten Fehlerbericht ab; das Team gibt es nach dem Zyklus frei. Bleibt, gibt aber keinen Beta-Zugang."
   ],
   "Owns a server that reached 100 genuine human members.": [
-    "يملك سيرفراً بلغ 100 عضو بشري حقيقي.",
+    "يملك سيرفرًا بلغ 100 عضو بشري حقيقي.",
     "Besitzt einen Server mit 100 echten menschlichen Mitgliedern."
   ],
   "Own a server that reaches 100 genuine human members. Bots, deleted, banned or suspended accounts, accounts under 7 days old or without a confirmed e-mail, and people who joined less than a day ago don't count. Counted a few times a day; it stays if the server gets smaller.": [
@@ -32,7 +32,7 @@
     "Besitze einen Server, der 100 echte menschliche Mitglieder erreicht. Bots, gelöschte, gesperrte oder suspendierte Konten, Konten unter 7 Tagen oder ohne bestätigte E-Mail und Personen, die vor weniger als einem Tag beigetreten sind, zählen nicht. Mehrmals täglich gezählt; bleibt, wenn der Server kleiner wird."
   ],
   "Owns a server that reached 1,000 genuine human members.": [
-    "يملك سيرفراً بلغ 1,000 عضو بشري حقيقي.",
+    "يملك سيرفرًا بلغ 1,000 عضو بشري حقيقي.",
     "Besitzt einen Server mit 1.000 echten menschlichen Mitgliedern."
   ],
   "Own a server that reaches 1,000 genuine human members, counted as for Community Builder. It stays if the server gets smaller. It is not a partnership or a verification.": [
@@ -44,7 +44,7 @@
     "Super Creator wählt das Team ab mindestens {0} geprüften, veröffentlichten Designs und {1} Tagen im Creator-Programm aus."
   ],
   "You completed the beta. The team approves Beta Veteran when you sent at least 3 reviewed feedback reports or 1 confirmed bug report during the cycle.": [
-    "أتممتَ النسخة التجريبية. يوافق الفريق على شارة «مختبِر مخضرم» إن أرسلت خلال الدورة ثلاثة تقارير ملاحظات راجعها الفريق على الأقل أو بلاغ خطأ مؤكداً واحداً.",
+    "أتممتَ النسخة التجريبية. يوافق الفريق على شارة «مختبر مخضرم» إن أرسلت خلال الدورة ثلاثة تقارير ملاحظات راجعها الفريق على الأقل أو بلاغ خطأ مؤكدًا واحدًا.",
     "Du hast die Beta abgeschlossen. Beta-Veteran gibt das Team frei, wenn du im Zyklus mindestens 3 geprüfte Feedbackberichte oder 1 bestätigten Fehlerbericht gesendet hast."
   ]
 }

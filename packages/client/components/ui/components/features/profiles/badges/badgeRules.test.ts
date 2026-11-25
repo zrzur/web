@@ -18,38 +18,70 @@ function catalog(locale: "ar" | "de" | "en"): Map<string, string> {
   return entries;
 }
 
-const source = readFileSync(
+/** The one source of badge texts, and the guide's details below it */
+const source = [
   resolve(import.meta.dirname, "useBadgeText.ts"),
-  "utf8",
-);
+  resolve(
+    import.meta.dirname,
+    "../../../../../../src/interface/badgeGuide/useBadgeGuide.ts",
+  ),
+]
+  .map((path) => readFileSync(path, "utf8"))
+  .join(String.fromCharCode(10));
 
-/** The badge rules of 2026-11-24 (badge plan phase 3): every number the
- * server enforces is said in every language */
+/** The badge rules (badge plan phase 3, texts made one source on
+ * 2026-11-24): every number the server or the approved policy sets is said
+ * in every language */
 const RULES: { badge: string; text: string; numbers: string[] }[] = [
   {
     badge: "community_builder",
-    text: "Own a server that reaches 100 genuine human members. Bots, deleted, banned or suspended accounts, accounts under 7 days old or without a confirmed e-mail, and people who joined less than a day ago don't count. Counted a few times a day; it stays if the server gets smaller.",
-    numbers: ["100", "7"],
+    text: "Automatic when a server you own reaches 100 genuine human members; it stays if the server gets smaller.",
+    numbers: ["100"],
+  },
+  {
+    badge: "community_builder",
+    text: "Bots, deleted, banned or suspended accounts, accounts under 7 days old or without a confirmed e-mail, and people who joined less than a day ago don't count. Counted a few times a day.",
+    numbers: ["7"],
   },
   {
     badge: "big_community",
-    text: "Own a server that reaches 1,000 genuine human members, counted as for Community Builder. It stays if the server gets smaller. It is not a partnership or a verification.",
+    text: "Automatic when a server you own reaches 1,000 genuine human members, counted as for Community Builder; it stays if the server gets smaller.",
     numbers: ["1"],
   },
   {
     badge: "super_creator",
-    text: "Hold Creator, with at least 25 approved, original, published designs and 180 days in the creator program. 25 is only a minimum: the team chooses. Duplicates, simple recolours and copied assets don't count.",
+    text: "Hold Creator, with at least 25 approved, original, published designs and 180 days in the creator program.",
     numbers: ["25", "180"],
   },
   {
     badge: "beta_veteran",
-    text: "Complete a beta cycle with at least 3 reviewed feedback reports or 1 confirmed bug report; the team approves it after the cycle. It stays, but gives no beta access.",
+    text: "Completed a beta cycle with at least 3 reviewed feedback reports or 1 confirmed bug report; the team approves it after the cycle.",
     numbers: [],
   },
   {
     badge: "creator",
-    text: "Given after you join the Designs creator program and publish your first original, approved design. It stays for good unless the work was fraudulent or infringing. Making bots or videos doesn't count.",
+    text: "Accepted into the Zrzur Designs creator program, with a first original, approved, published design.",
     numbers: [],
+  },
+  {
+    badge: "partner",
+    text: "By application, reviewed by the Zrzur team: at least 5,000 genuine human members, a server at least 180 days old and steady weekly activity.",
+    numbers: ["5", "180"],
+  },
+  {
+    badge: "server_verified",
+    text: "By application, reviewed by the Zrzur team: at least 10,000 genuine human members, 180 days, and proven ownership of the official website (DNS or website check).",
+    numbers: ["10", "180", "DNS"],
+  },
+  {
+    badge: "verified_bot_developer",
+    text: "By application, reviewed by the Zrzur team: a bot in at least 25 legitimate servers, running for at least 30 days, with verified ownership.",
+    numbers: ["25", "30"],
+  },
+  {
+    badge: "content_creator",
+    text: "By application, reviewed by the Zrzur team: at least 100,000 real followers on one platform, 90 days of activity and regular original work.",
+    numbers: ["100", "90"],
   },
 ];
 
@@ -80,7 +112,32 @@ describe("badge rules in the app", () => {
     expect(ar.get(text)).toMatch(/بثلاثة.*واحد/);
   });
 
+  it("has every badge text in Arabic and German", () => {
+    const texts = [...source.matchAll(/[^\w]t`([^`]*)`/g)].map((m) => m[1]);
+    expect(texts.length).toBeGreaterThan(100);
+    for (const text of texts) {
+      const id = text.replace(/"/g, '\\"');
+      expect(ar.get(id), `ar: ${text}`).toMatch(/[؀-ۿ]/);
+      expect(de.get(id), `de: ${text}`).toBeTruthy();
+    }
+  });
+
+  it("writes Arabic marks the way every browser draws them", () => {
+    // WebKit tore the tanween off the alif («يوماً») and drew the kasra of
+    // «مختبِر» above the letter («مختبَر», a lab): the fathatan goes before
+    // the alif («يومًا»), and «مختبر» needs no mark
+    const texts = [...source.matchAll(/[^\w]t`([^`]*)`/g)].map((m) => m[1]);
+    for (const text of texts) {
+      const arabic = ar.get(text.replace(/"/g, '\\"')) ?? "";
+      expect(arabic, text).not.toContain("اً");
+      expect(arabic, text).not.toContain("مختبِر");
+    }
+  });
+
   it("no longer says the old rules", () => {
+    expect(source).not.toContain("Own a verified server.");
+    expect(source).not.toContain("Own a verified bot.");
+    expect(source).not.toContain("Apply as a partner");
     expect(source).not.toContain("Built a server that reached 100 members.");
     expect(source).not.toContain(
       "Complete the beta as an active tester who sent feedback or a bug report.",
