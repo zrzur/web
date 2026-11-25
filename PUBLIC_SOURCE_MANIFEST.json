@@ -2704,14 +2704,14 @@
     },
     {
       "path": "packages/client/components/app/interface/settings/user/profile/StaffErase.dom.test.tsx",
-      "sha256": "52efcf2b4700a78429dfef90fe1ac7326084bc49c49698fcb01174059312c627",
-      "bytes": 4316,
+      "sha256": "71e1238198026b6425ff4ae27dfcabec52137bc145a521dfe9fa61462f2b703e",
+      "bytes": 4538,
       "category": "synthetic-test-source-or-fixture"
     },
     {
       "path": "packages/client/components/app/interface/settings/user/profile/StaffErase.tsx",
-      "sha256": "90d5306555aaec089ca5cee8b8cc6ec794fe35c491294df6c8beb2310c375017",
-      "bytes": 3904,
+      "sha256": "36c28ecfad652981386b42bd67839d1fcab8dea6922f780862a299988ff0452f",
+      "bytes": 4098,
       "category": "product-source-or-build-manifest"
     },
     {
