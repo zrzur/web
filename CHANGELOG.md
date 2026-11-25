@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+- The small profile card shows every badge on a row under the name, the same as the full profile, instead of the first three at the far end of the name row (owner, 2026-11-25).
+
 ### Profile frames: a design guide, a frame kit and uploads in Creator Studio (2026-11-25)
 
 * **Creators make profile frames in Creator Studio**, the same way as other designs: New design → Profile frame, shown only while the server has community frames on (`features.community_frames`). The file must be one still PNG, WebP or GIF of exactly 800 × 1020 px, up to 2.5 MB, with the card's content clear: the app checks every pixel the way the server does (alpha above 16 of 255 inside the card less 10 px, except the crest window over the banner) before anything is uploaded.
