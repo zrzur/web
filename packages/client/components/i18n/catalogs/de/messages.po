@@ -33753,3 +33753,6 @@ msgstr "Deine eigene Arbeit oder eine, für die du eine klare Lizenz zum Teilen 
 msgid "Zrzur's own pixel frames are drawn at 4 px on tall windows, 3 px below 1080 px and 2 px below 640 px and on phones. At 4 px they reach 96 px above the card, 72 px below and 56 px beside it."
 msgstr "Zrzurs eigene Pixelrahmen werden in hohen Fenstern mit 4 px gezeichnet, unter 1080 px mit 3 px und unter 640 px sowie auf Handys mit 2 px. Mit 4 px reichen sie 96 px über die Karte, 72 px darunter und 56 px daneben."
 
+#: components/app/interface/settings/user/profile/studio/StudioEditor.tsx
+msgid "A frame is laid round the card exactly as you drew it, so there is nothing to fit."
+msgstr "Ein Rahmen wird genau so um die Karte gelegt, wie du ihn gezeichnet hast; es gibt nichts anzupassen."

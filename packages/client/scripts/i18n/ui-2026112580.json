@@ -19,10 +19,22 @@
     "الإطار صورة ثابتة واحدة. صدّر إطارًا واحدًا بصيغة PNG أو WebP.",
     "Ein Rahmen ist ein einzelnes Standbild. Exportiere ein einzelnes Bild als PNG oder WebP."
   ],
-  "About 3 px a block": ["نحو 3 بكسل للمربع", "Etwa 3 px pro Block"],
-  "About 4 px a block": ["نحو 4 بكسل للمربع", "Etwa 4 px pro Block"],
-  "About 5 px a block": ["نحو 5 بكسل للمربع", "Etwa 5 px pro Block"],
-  "Above the card": ["فوق البطاقة", "Über der Karte"],
+  "About 3 px a block": [
+    "نحو 3 بكسل للمربع",
+    "Etwa 3 px pro Block"
+  ],
+  "About 4 px a block": [
+    "نحو 4 بكسل للمربع",
+    "Etwa 4 px pro Block"
+  ],
+  "About 5 px a block": [
+    "نحو 5 بكسل للمربع",
+    "Etwa 5 px pro Block"
+  ],
+  "Above the card": [
+    "فوق البطاقة",
+    "Über der Karte"
+  ],
   "Alpha 16 of 255 or less": [
     "قيمة ألفا 16 من 255 أو أقل",
     "Alpha 16 von 255 oder weniger"
@@ -35,14 +47,38 @@
     "رسم يحيط ببطاقة الملف الشخصي كلها، مرسوم على قالبنا.",
     "Kunst rund um die ganze Profilkarte, auf unserer Vorlage gezeichnet."
   ],
-  "Below the card": ["تحت البطاقة", "Unter der Karte"],
-  "Canvas": ["اللوحة", "Fläche"],
-  "Card content clear": ["محتوى البطاقة خالٍ", "Karteninhalt frei"],
-  "Card position": ["موضع البطاقة", "Position der Karte"],
-  "Counts as clear": ["يُعدّ شفافًا", "Gilt als frei"],
-  "Covers the banner": ["يغطي البانر", "Bedeckt das Banner"],
-  "Covers the name area": ["يغطي منطقة الاسم", "Bedeckt den Namensbereich"],
-  "Covers the text area": ["يغطي منطقة النص", "Bedeckt den Textbereich"],
+  "Below the card": [
+    "تحت البطاقة",
+    "Unter der Karte"
+  ],
+  "Canvas": [
+    "اللوحة",
+    "Fläche"
+  ],
+  "Card content clear": [
+    "محتوى البطاقة خالٍ",
+    "Karteninhalt frei"
+  ],
+  "Card position": [
+    "موضع البطاقة",
+    "Position der Karte"
+  ],
+  "Counts as clear": [
+    "يُعدّ شفافًا",
+    "Gilt als frei"
+  ],
+  "Covers the banner": [
+    "يغطي البانر",
+    "Bedeckt das Banner"
+  ],
+  "Covers the name area": [
+    "يغطي منطقة الاسم",
+    "Bedeckt den Namensbereich"
+  ],
+  "Covers the text area": [
+    "يغطي منطقة النص",
+    "Bedeckt den Textbereich"
+  ],
   "Creator Studio is open to people Zrzur has made creators.": [
     "استوديو المصممين متاح لمن منحهم زرزور صفة المصمم.",
     "Das Creator-Studio steht Personen offen, die Zrzur zu Creators gemacht hat."
@@ -51,7 +87,10 @@
     "يسمّي استوديو المصممين التصميم باسم الملف، ويمكنك تغيير الاسم هناك. أخفِ طبقات الإرشاد في القالب قبل التصدير.",
     "Das Creator-Studio benennt das Design nach der Datei; du kannst den Namen dort ändern. Blende die Hilfsebenen der Vorlage vor dem Export aus."
   ],
-  "Crest window": ["نافذة الشعار", "Wappenfenster"],
+  "Crest window": [
+    "نافذة الشعار",
+    "Wappenfenster"
+  ],
   "Crest window: may be drawn on": [
     "نافذة الشعار: يجوز الرسم فيها",
     "Wappenfenster: darf bemalt werden"
@@ -60,8 +99,14 @@
     "التفاصيل في الزوايا وفي الأعلى",
     "Details in den Ecken und oben"
   ],
-  "Do and don't": ["افعل ولا تفعل", "Richtig und falsch"],
-  "Download the frame kit": ["نزّل حزمة الإطار", "Rahmen-Kit herunterladen"],
+  "Do and don't": [
+    "افعل ولا تفعل",
+    "Richtig und falsch"
+  ],
+  "Download the frame kit": [
+    "نزّل حزمة الإطار",
+    "Rahmen-Kit herunterladen"
+  ],
   "Download the frame kit and open template.svg or template.png.": [
     "نزّل حزمة الإطار وافتح الملف template.svg أو template.png.",
     "Lade das Rahmen-Kit herunter und öffne template.svg oder template.png."
@@ -82,10 +127,22 @@
     "كل ما يلي، مع ملف README بثلاث لغات",
     "Alles unten, mit einer README in drei Sprachen"
   ],
-  "Exactly {0} × {1} px": ["{0} × {1} بكسل تمامًا", "Genau {0} × {1} px"],
-  "File name": ["اسم الملف", "Dateiname"],
-  "Frame guide": ["دليل الإطار", "Rahmen-Anleitung"],
-  "Frame kit": ["حزمة الإطار", "Rahmen-Kit"],
+  "Exactly {0} × {1} px": [
+    "{0} × {1} بكسل تمامًا",
+    "Genau {0} × {1} px"
+  ],
+  "File name": [
+    "اسم الملف",
+    "Dateiname"
+  ],
+  "Frame guide": [
+    "دليل الإطار",
+    "Rahmen-Anleitung"
+  ],
+  "Frame kit": [
+    "حزمة الإطار",
+    "Rahmen-Kit"
+  ],
   "Full profile, 460 px": [
     "الملف الشخصي الكامل، 460 بكسل",
     "Volles Profil, 460 px"
@@ -98,28 +155,46 @@
     "أقصى ما يمكن أن يمتد إليه الرسم",
     "Wie weit die Kunst reichen darf"
   ],
-  "How to design a frame": ["كيف تصمم إطارًا", "So gestaltest du einen Rahmen"],
+  "How to design a frame": [
+    "كيف تصمم إطارًا",
+    "So gestaltest du einen Rahmen"
+  ],
   "How to design a profile frame": [
     "كيف تصمم إطارًا للبطاقة",
     "So gestaltest du einen Profilrahmen"
   ],
-  "How to submit": ["طريقة الإرسال", "So reichst du ein"],
+  "How to submit": [
+    "طريقة الإرسال",
+    "So reichst du ein"
+  ],
   "In Creator Studio, choose New design, then Profile frame, and upload the file.": [
     "في استوديو المصممين، اختر «تصميم جديد» ثم «إطار البطاقة»، وارفع الملف.",
     "Wähle im Creator-Studio „Neues Design“, dann „Profilrahmen“, und lade die Datei hoch."
   ],
-  "Inside the card's edge": ["داخل حافة البطاقة", "Innerhalb des Kartenrands"],
-  "Keep clear": ["اتركها خالية", "Freihalten"],
+  "Inside the card's edge": [
+    "داخل حافة البطاقة",
+    "Innerhalb des Kartenrands"
+  ],
+  "Keep clear": [
+    "اتركها خالية",
+    "Freihalten"
+  ],
   "Keep clear: the card's content": [
     "اتركها خالية: محتوى البطاقة",
     "Freihalten: der Inhalt der Karte"
   ],
-  "Keep the card clear": ["اترك البطاقة خالية", "Halte die Karte frei"],
+  "Keep the card clear": [
+    "اترك البطاقة خالية",
+    "Halte die Karte frei"
+  ],
   "Keep the card clear 20 px in from its edge": [
     "اترك البطاقة خالية بدءًا من 20 بكسل داخل حافتها",
     "Halte die Karte ab 20 px innerhalb ihres Rands frei"
   ],
-  "Light and dark": ["الفاتح والداكن", "Hell und dunkel"],
+  "Light and dark": [
+    "الفاتح والداكن",
+    "Hell und dunkel"
+  ],
   "Lowercase words with hyphens, such as desert-night.png": [
     "كلمات بأحرف لاتينية صغيرة تفصل بينها شرطات، مثل desert-night.png",
     "Kleine Wörter mit Bindestrichen, etwa desert-night.png"
@@ -128,8 +203,14 @@
     "صمّم إطار بطاقتك بنفسك",
     "Gestalte deinen eigenen Profilrahmen"
   ],
-  "Moves": ["متحرك", "Bewegt sich"],
-  "Narrow phone card": ["بطاقة ضيقة على الهاتف", "Schmale Handykarte"],
+  "Moves": [
+    "متحرك",
+    "Bewegt sich"
+  ],
+  "Narrow phone card": [
+    "بطاقة ضيقة على الهاتف",
+    "Schmale Handykarte"
+  ],
   "No copied art, including frames and stickers from other apps and games.": [
     "لا رسوم منسوخة، بما في ذلك الإطارات والملصقات من التطبيقات والألعاب الأخرى.",
     "Keine kopierte Kunst, auch keine Rahmen und Sticker aus anderen Apps und Spielen."
@@ -150,37 +231,70 @@
     "لا نصوص ولا حروف بأي لغة.",
     "Kein Text und keine Buchstaben in irgendeiner Sprache."
   ],
-  "None: one still picture": ["لا حركة: صورة ثابتة واحدة", "Keine: ein Standbild"],
-  "On each side": ["على كل جانب", "Auf jeder Seite"],
+  "None: one still picture": [
+    "لا حركة: صورة ثابتة واحدة",
+    "Keine: ein Standbild"
+  ],
+  "On each side": [
+    "على كل جانب",
+    "Auf jeder Seite"
+  ],
   "People see your frame on dark and on light screens. Give the art a dark outline and a lighter edge so it reads on both, and check both in Creator Studio's preview before you publish.": [
     "يرى الناس إطارك على شاشات داكنة وفاتحة. اجعل للرسم حدودًا داكنة وحافة أفتح ليبقى واضحًا على كلتيهما، وتحقق من الحالتين في معاينة استوديو المصممين قبل النشر.",
     "Andere sehen deinen Rahmen auf dunklen und hellen Bildschirmen. Gib der Kunst eine dunkle Kontur und einen helleren Rand, damit sie auf beiden wirkt, und prüfe beides in der Vorschau des Creator-Studios, bevor du veröffentlichst."
   ],
-  "Pixel grid": ["شبكة البكسل", "Pixelraster"],
+  "Pixel grid": [
+    "شبكة البكسل",
+    "Pixelraster"
+  ],
   "Plain sides that can stretch": [
     "جوانب بسيطة يمكن أن تتمدد",
     "Schlichte Seiten, die sich dehnen dürfen"
   ],
-  "PNG, WebP or GIF": ["PNG أو WebP أو GIF", "PNG, WebP oder GIF"],
+  "PNG, WebP or GIF": [
+    "PNG أو WebP أو GIF",
+    "PNG, WebP oder GIF"
+  ],
   "PNG, WebP or GIF, with a transparent background": [
     "PNG أو WebP أو GIF بخلفية شفافة",
     "PNG, WebP oder GIF mit transparentem Hintergrund"
   ],
-  "Profile card, 360 px": ["بطاقة الملف الشخصي، 360 بكسل", "Profilkarte, 360 px"],
-  "Review rules": ["قواعد المراجعة", "Prüfregeln"],
+  "Profile card, 360 px": [
+    "بطاقة الملف الشخصي، 360 بكسل",
+    "Profilkarte, 360 px"
+  ],
+  "Review rules": [
+    "قواعد المراجعة",
+    "Prüfregeln"
+  ],
   "Reviewers take down a frame that breaks these rules. The <0>Creator Terms</0> apply to every design.": [
     "يزيل المراجعون أي إطار يخالف هذه القواعد. وتسري <0>شروط المبدعين</0> على كل تصميم.",
     "Prüfer entfernen einen Rahmen, der gegen diese Regeln verstößt. Für jedes Design gelten die <0>Bedingungen für Creator</0>."
   ],
-  "Room for art": ["مساحة للرسم", "Platz für Kunst"],
-  "Safe zone": ["المنطقة الآمنة", "Schutzzone"],
-  "Show guides": ["إظهار خطوط الإرشاد", "Hilfslinien zeigen"],
+  "Room for art": [
+    "مساحة للرسم",
+    "Platz für Kunst"
+  ],
+  "Safe zone": [
+    "المنطقة الآمنة",
+    "Schutzzone"
+  ],
+  "Show guides": [
+    "إظهار خطوط الإرشاد",
+    "Hilfslinien zeigen"
+  ],
   "Single-pixel details: they blur": [
     "تفاصيل ببكسل واحد: تصبح ضبابية",
     "Details aus Einzelpixeln: sie verschwimmen"
   ],
-  "Still picture": ["صورة ثابتة", "Standbild"],
-  "Stretches with the card": ["يتمدد مع البطاقة", "Dehnt sich mit der Karte"],
+  "Still picture": [
+    "صورة ثابتة",
+    "Standbild"
+  ],
+  "Stretches with the card": [
+    "يتمدد مع البطاقة",
+    "Dehnt sich mit der Karte"
+  ],
   "The art covers the banner. Keep the card clear 20 px in from its edge; only the crest window over the middle of the banner may be drawn on.": [
     "الرسم يغطي البانر. اترك البطاقة خالية بدءًا من 20 بكسل داخل حافتها، ولا يجوز الرسم إلا في نافذة الشعار فوق منتصف البانر.",
     "Die Kunst bedeckt das Banner. Halte die Karte ab 20 px innerhalb ihres Rands frei; nur das Wappenfenster über der Mitte des Banners darf bemalt werden."
@@ -197,12 +311,18 @@
     "الرسم يغطي منطقة النص. اترك البطاقة خالية بدءًا من 20 بكسل داخل حافتها حتى أسفلها.",
     "Die Kunst bedeckt den Textbereich. Halte die Karte ab 20 px innerhalb ihres Rands frei, bis zu ihrem unteren Ende."
   ],
-  "The canvas": ["اللوحة", "Die Fläche"],
+  "The canvas": [
+    "اللوحة",
+    "Die Fläche"
+  ],
   "The canvas, the safe zone and a ready template, in one guide.": [
     "اللوحة والمنطقة الآمنة وقالب جاهز، في دليل واحد.",
     "Die Fläche, die Schutzzone und eine fertige Vorlage in einer Anleitung."
   ],
-  "The file": ["الملف", "Die Datei"],
+  "The file": [
+    "الملف",
+    "Die Datei"
+  ],
   "The frame lies over the card as it is. The avatar, the name and the text area must stay fully transparent, or the upload is refused.": [
     "يوضع الإطار فوق البطاقة كما هو. لذا يجب أن تبقى الصورة الرمزية والاسم ومنطقة النص شفافة تمامًا، وإلا رُفض الرفع.",
     "Der Rahmen liegt so, wie er ist, über der Karte. Avatar, Name und Textbereich müssen vollständig transparent bleiben, sonst wird der Upload abgelehnt."
@@ -223,24 +343,42 @@
     "يظهر أعلى {0} بكسل وأسفل {1} بكسل كما رسمتهما. أما الجانبان بينهما فيتمددان مع طول البطاقة، لذا اجعلهما بسيطين: ضع النجوم والتفاصيل في الزوايا وفي الأعلى وفي الأسفل.",
     "Die oberen {0} px und die unteren {1} px erscheinen so, wie du sie gezeichnet hast. Die Seiten dazwischen dehnen sich mit der Kartenhöhe, halte sie also schlicht: Sterne und Details gehören in die Ecken, nach oben und ans untere Ende."
   ],
-  "Transparent": ["شفافة", "Transparent"],
+  "Transparent": [
+    "شفافة",
+    "Transparent"
+  ],
   "Turn on Show guides, check dark and light, answer the rights questions and publish.": [
     "فعّل «إظهار خطوط الإرشاد»، وتحقق من الوضعين الداكن والفاتح، وأجب عن أسئلة الحقوق، ثم انشر.",
     "Schalte „Hilfslinien zeigen“ ein, prüfe Dunkel und Hell, beantworte die Fragen zu den Rechten und veröffentliche."
   ],
-  "Up to {0} MB": ["حتى {0} ميغابايت", "Bis zu {0} MB"],
-  "Up to {MAX_MB} MB": ["حتى {MAX_MB} ميغابايت", "Bis zu {MAX_MB} MB"],
-  "Upload a frame": ["ارفع إطارًا", "Rahmen hochladen"],
+  "Up to {0} MB": [
+    "حتى {0} ميغابايت",
+    "Bis zu {0} MB"
+  ],
+  "Up to {MAX_MB} MB": [
+    "حتى {MAX_MB} ميغابايت",
+    "Bis zu {MAX_MB} MB"
+  ],
+  "Upload a frame": [
+    "ارفع إطارًا",
+    "Rahmen hochladen"
+  ],
   "Use a PNG, WebP or GIF file. A frame is one still picture.": [
     "استخدم ملفًا بصيغة PNG أو WebP أو GIF. الإطار صورة ثابتة واحدة.",
     "Verwende eine PNG-, WebP- oder GIF-Datei. Ein Rahmen ist ein einzelnes Standbild."
   ],
-  "What is in the kit": ["محتويات الحزمة", "Was im Kit steckt"],
+  "What is in the kit": [
+    "محتويات الحزمة",
+    "Was im Kit steckt"
+  ],
   "Where the art may reach": [
     "إلى أين يمكن أن يمتد الرسم",
     "Wohin die Kunst reichen darf"
   ],
-  "Words, letters or logos": ["كلمات أو حروف أو شعارات", "Wörter, Buchstaben oder Logos"],
+  "Words, letters or logos": [
+    "كلمات أو حروف أو شعارات",
+    "Wörter, Buchstaben oder Logos"
+  ],
   "Your own work, or work you hold a clear licence to share.": [
     "عملك أنت، أو عمل تملك ترخيصًا واضحًا بمشاركته.",
     "Deine eigene Arbeit oder eine, für die du eine klare Lizenz zum Teilen hast."
@@ -248,5 +386,9 @@
   "Zrzur's own pixel frames are drawn at 4 px on tall windows, 3 px below 1080 px and 2 px below 640 px and on phones. At 4 px they reach 96 px above the card, 72 px below and 56 px beside it.": [
     "تُرسم إطارات زرزور البكسلية الخاصة بحجم 4 بكسل في النوافذ الطويلة، و3 بكسل إذا قل ارتفاع النافذة عن 1080 بكسل، و2 بكسل إذا قل عن 640 بكسل وعلى الهواتف. وبحجم 4 بكسل تمتد 96 بكسل فوق البطاقة، و72 بكسل تحتها، و56 بكسل على جانبيها.",
     "Zrzurs eigene Pixelrahmen werden in hohen Fenstern mit 4 px gezeichnet, unter 1080 px mit 3 px und unter 640 px sowie auf Handys mit 2 px. Mit 4 px reichen sie 96 px über die Karte, 72 px darunter und 56 px daneben."
+  ],
+  "A frame is laid round the card exactly as you drew it, so there is nothing to fit.": [
+    "يوضع الإطار حول البطاقة تمامًا كما رسمته، فلا حاجة إلى ضبطه.",
+    "Ein Rahmen wird genau so um die Karte gelegt, wie du ihn gezeichnet hast; es gibt nichts anzupassen."
   ]
 }

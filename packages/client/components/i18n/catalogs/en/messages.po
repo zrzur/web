@@ -33756,3 +33756,6 @@ msgstr "Your own work, or work you hold a clear licence to share."
 msgid "Zrzur's own pixel frames are drawn at 4 px on tall windows, 3 px below 1080 px and 2 px below 640 px and on phones. At 4 px they reach 96 px above the card, 72 px below and 56 px beside it."
 msgstr "Zrzur's own pixel frames are drawn at 4 px on tall windows, 3 px below 1080 px and 2 px below 640 px and on phones. At 4 px they reach 96 px above the card, 72 px below and 56 px beside it."
 
+#: components/app/interface/settings/user/profile/studio/StudioEditor.tsx
+msgid "A frame is laid round the card exactly as you drew it, so there is nothing to fit."
+msgstr "A frame is laid round the card exactly as you drew it, so there is nothing to fit."

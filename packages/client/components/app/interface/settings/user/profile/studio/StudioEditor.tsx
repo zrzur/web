@@ -1092,17 +1092,28 @@ export function StudioEditor(props: {
                   fallback={
                     <p>
                       <Show
-                        when={file()}
+                        when={!isFrame()}
                         fallback={
                           <Trans>
-                            Replace the image to move or scale it in its frame.
+                            A frame is laid round the card exactly as you drew
+                            it, so there is nothing to fit.
                           </Trans>
                         }
                       >
-                        <Trans>
-                          Fit works on still images. Animated files are shown as
-                          they are.
-                        </Trans>
+                        <Show
+                          when={file()}
+                          fallback={
+                            <Trans>
+                              Replace the image to move or scale it in its
+                              frame.
+                            </Trans>
+                          }
+                        >
+                          <Trans>
+                            Fit works on still images. Animated files are shown
+                            as they are.
+                          </Trans>
+                        </Show>
                       </Show>
                     </p>
                   }
@@ -1170,7 +1181,10 @@ export function StudioEditor(props: {
               </Panel>
               <Keys>
                 <span>
-                  <kbd>G</kbd> <Trans>Guide marks</Trans>
+                  <kbd>G</kbd>{" "}
+                  <Show when={isFrame()} fallback={<Trans>Guide marks</Trans>}>
+                    <Trans>Show guides</Trans>
+                  </Show>
                 </span>
                 <span>
                   <kbd>D</kbd> <Trans>Dark or light</Trans>

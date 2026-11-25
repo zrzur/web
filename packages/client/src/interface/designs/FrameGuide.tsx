@@ -572,7 +572,8 @@ function TemplateDiagram() {
         width={CREST.right - CREST.left}
         height={CREST.bottom - CREST.top}
       />
-      <g class="numbers">
+      {/* diagram units: the file is 800 px wide, drawn about 0.4 of that */}
+      <g class="numbers" font-size="40">
         <text x={FRAME_FILE.width / 2} y={CARD.top / 2 + 12}>
           {ROOM.top}
         </text>
@@ -642,7 +643,7 @@ function ScaleDemo() {
 
 /** the kit's example frame round a card on a dark and on a light ground */
 function ThemeCheck() {
-  const width = 132;
+  const width = 104;
   return (
     <Themes>
       <For each={["dark", "light"] as const}>
@@ -941,7 +942,8 @@ const Keys = styled("ul", {
     },
     "& [data-key='crest'] i": { border: "2px solid var(--z-fg-primary)" },
     "& [data-key='stretch'] i": {
-      background: "color-mix(in srgb, var(--z-success) 28%, transparent)",
+      background:
+        "color-mix(in srgb, var(--z-designs-status-online) 28%, transparent)",
     },
   },
 });
@@ -958,7 +960,7 @@ const Diagram = styled("svg", {
       strokeWidth: 2,
     },
     "& .stretch": {
-      fill: "color-mix(in srgb, var(--z-success) 20%, transparent)",
+      fill: "color-mix(in srgb, var(--z-designs-status-online) 20%, transparent)",
     },
     "& .card": { fill: "var(--z-bg-raised)" },
     "& .banner": { fill: "var(--z-nav-selected, var(--z-border-strong))" },
@@ -972,7 +974,6 @@ const Diagram = styled("svg", {
     "& .crest": { fill: "none", stroke: "var(--z-fg-primary)", strokeWidth: 4 },
     "& .numbers text": {
       fill: "var(--z-fg-primary)",
-      fontSize: "36px",
       fontWeight: 700,
       textAnchor: "middle",
     },
@@ -1012,7 +1013,7 @@ const Themes = styled("div", {
       alignItems: "center",
       gap: "12px",
       // room for the frame round the card: 70, 30 and 40 of 340
-      padding: "40px 24px 16px",
+      padding: "32px 20px 12px",
       borderRadius: "10px",
     },
     "& [data-ground='dark']": {
@@ -1026,7 +1027,7 @@ const Themes = styled("div", {
     "& .card": {
       display: "block",
       boxSizing: "border-box",
-      height: "156px",
+      height: "124px",
       borderRadius: "8px",
       background: "color-mix(in srgb, currentColor 10%, transparent)",
       marginBlockEnd: "12px",
@@ -1052,7 +1053,7 @@ const Examples = styled("ul", {
       background: "var(--z-designs-surface-raised, var(--z-bg-raised))",
       "--z-icon-color": "var(--z-danger)",
     },
-    "& li[data-good]": { "--z-icon-color": "var(--z-success)" },
+    "& li[data-good]": { "--z-icon-color": "var(--z-designs-status-online)" },
     "& svg": {
       display: "block",
       width: "100%",
