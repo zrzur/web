@@ -12,16 +12,15 @@ import { Icon } from "@revolt/ui/icons/Icon";
 import { BotLabel } from "./BotLabel";
 import { ProfileBadges, profileBadgeIds } from "./ProfileBadges";
 import { nameRoom } from "./nameRoom";
-import { nameRowBadges } from "./nameRowBadges";
 import { profileNameStyle } from "./profileNameStyle";
 import { userStyleOf } from "./userStyle";
 
 /**
  * Name block under the avatar: display name (+ Bot tag), then username#tag
- * with click-to-copy and pronouns on one line. Badges sit at the far end of
- * the name row: the first three on the small card, all of them on the full profile,
- * where they may run on to a second line. A themed profile keeps its chosen
- * name colour where it reads on the theme.
+ * with click-to-copy and pronouns on one line, then every badge on a row of
+ * its own, starting under the name (owner, 2026-11-25: the small card shows
+ * them all, the same as the full profile; they may run on to a second line).
+ * A themed profile keeps its chosen name colour where it reads on the theme.
  */
 export function ProfileIdentity(props: {
   user: User;
@@ -33,7 +32,7 @@ export function ProfileIdentity(props: {
 
   const name = () => props.member?.displayName ?? props.user.displayName;
   const pronouns = () => props.member?.pronouns ?? props.user.pronouns;
-  const badges = () => nameRowBadges(profileBadgeIds(props.user), props.size);
+  const badges = () => profileBadgeIds(props.user);
 
   const style = () => profileNameStyle(userStyleOf(props.user));
 
@@ -77,11 +76,6 @@ export function ProfileIdentity(props: {
             />
           </Show>
         </DisplayNameGroup>
-        <Show when={props.size === "card"}>
-          <RowBadges>
-            <ProfileBadges ids={badges()} />
-          </RowBadges>
-        </Show>
       </NameRow>
 
       <Meta>
@@ -104,7 +98,7 @@ export function ProfileIdentity(props: {
           <Pronouns dir="auto">{pronouns()}</Pronouns>
         </Show>
       </Meta>
-      <Show when={props.size === "full" && badges().length}>
+      <Show when={badges().length}>
         <BadgeRow data-testid="profile-badge-row">
           <ProfileBadges ids={badges()} />
         </BadgeRow>
@@ -128,8 +122,6 @@ const NameRow = styled("div", {
     alignItems: "center",
     gap: "8px",
     minWidth: 0,
-    // the full profile shows every badge: they may take a second line
-    "&[data-size='full']": { flexWrap: "wrap", rowGap: "4px" },
   },
 });
 
@@ -150,23 +142,6 @@ const DisplayNameGroup = styled("div", {
   },
 });
 
-const RowBadges = styled("div", {
-  base: {
-    flexShrink: 0,
-    display: "flex",
-    // at the far end of the row (right in LTR, left in RTL), not after the name
-    marginInlineStart: "auto",
-    // an empty slot must not take space from the name
-    _empty: { display: "none" },
-    _phone: {
-      // the username's 44 px target reaches up here: keep clear of it
-      paddingBlockEnd: "8px",
-      "& > [role=list]": { margin: 0 },
-    },
-  },
-});
-
-/** Every badge on a line of its own under the handle (the full profile) */
 const BadgeRow = styled("div", {
   base: {
     display: "flex",
