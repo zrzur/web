@@ -115,8 +115,12 @@ const art = cva({
   },
 });
 
+/* placed over the whole tile, so a picture of any shape fills exactly the
+   tile and never sets its height */
 const picture = cva({
   base: {
+    position: "absolute",
+    inset: 0,
     width: "100%",
     height: "100%",
     objectFit: "cover",
