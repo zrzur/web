@@ -286,8 +286,8 @@
     },
     {
       "path": "Dockerfile",
-      "sha256": "9826de649443d56879bda824fcca5b59edddb48d54ceb96d57462ac40b481ef3",
-      "bytes": 3564,
+      "sha256": "ea193555f7c20303be6102ef6be7fe7b21a12d879ac6309c6e3caeb3a19a00ef",
+      "bytes": 3620,
       "category": "product-source-or-build-manifest"
     },
     {

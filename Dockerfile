@@ -6,7 +6,8 @@ FROM node:26-alpine AS builder
 RUN apk add --no-cache git python3 make g++
 
 # Install pnpm
-RUN corepack enable && corepack prepare pnpm@11.3.0 --activate
+# Node 25+ images no longer ship corepack, so pnpm comes from npm (same pinned version)
+RUN npm install -g pnpm@11.3.0
 
 WORKDIR /build
 
