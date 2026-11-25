@@ -138,7 +138,7 @@ const picture = cva({
     height: "100%",
     display: "block",
     filter:
-      "drop-shadow(0 0 0.5px color-mix(in srgb, var(--z-fg-primary) 40%, transparent)) drop-shadow(0 1px 2px rgb(0 0 0 / 0.18))",
+      "drop-shadow(0 0 1px color-mix(in srgb, var(--z-fg-primary) 55%, transparent)) drop-shadow(0 1px 2px rgb(0 0 0 / 0.18))",
   },
   variants: {
     // a logo shown whole; an app icon keeps its own rounded shape
