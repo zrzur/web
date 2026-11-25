@@ -1,0 +1,32 @@
+type Rect = { left: number; top: number; right: number; bottom: number };
+type Raster = { width: number; height: number; data: Uint8Array };
+
+export const TEMPLATE: {
+  width: number;
+  height: number;
+  density: number;
+  card: Rect;
+  safe: Rect;
+  crest: Rect;
+  slice: { top: number; side: number; bottom: number };
+};
+export const FILE: { width: number; height: number };
+export const MAX_BYTES: number;
+export const ALPHA_LIMIT: number;
+export const BLOCK: number;
+export const CARD: Rect;
+export const SAFE: Rect;
+export const CREST: Rect;
+export const FIXED: { top: number; bottom: number };
+export const OUT: string;
+export function crc32(bytes: Uint8Array): number;
+export function encodePng(image: Raster): Buffer;
+export function coveredPixels(data: Uint8Array, width?: number): number;
+export function exampleFrame(): Raster;
+export function templateRaster(): Raster;
+export function templateSvg(): string;
+export function paletteJson(): string;
+export function paletteAse(): Buffer;
+export function readme(): string;
+export function zip(files: [string, Buffer][]): Buffer;
+export function frameKitFiles(): Map<string, Buffer>;
