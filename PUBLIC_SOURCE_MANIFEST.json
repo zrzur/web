@@ -268,8 +268,8 @@
     },
     {
       "path": "CHANGELOG.md",
-      "sha256": "bcc8eacd4ee14df8b773ca21cb105c04e1f807ea048df8733e038f10976231c3",
-      "bytes": 242669,
+      "sha256": "775a9c6390cbb3c8f66a57edcd6a7607e349e9629ce794d9af4dc932da5057c0",
+      "bytes": 242908,
       "category": "public-documentation"
     },
     {
@@ -6976,8 +6976,8 @@
     },
     {
       "path": "packages/client/components/ui/components/features/activity/ActivityArt.tsx",
-      "sha256": "4eb61f23ee79d2688402fea5c1f2adb23214ced1e237c0a7bc358df413780f1c",
-      "bytes": 4167,
+      "sha256": "71e4d31003be87933ab56a7bd9e3b9df977fec579661f05623c35744217eff83",
+      "bytes": 5200,
       "category": "product-source-or-build-manifest"
     },
     {
