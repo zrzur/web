@@ -33877,3 +33877,21 @@ msgstr "Zrzur flock"
 #: components/app/interface/settings/user/profile/styleLabels.tsx
 msgid "Zrzur neon"
 msgstr "Zrzur neon"
+
+#. placeholder {0}: props.item.name
+#: components/app/interface/settings/user/profile/StaffErase.tsx
+msgid "<0>{0}</0> and its image are deleted for good, from Designs and from everyone wearing it. This can't be undone."
+msgstr "<0>{0}</0> and its image are deleted for good, from Designs and from everyone wearing it. This can't be undone."
+
+#: components/app/interface/settings/user/profile/StaffErase.tsx
+msgid "Delete this design for everyone?"
+msgstr "Delete this design for everyone?"
+
+#: components/app/interface/settings/user/profile/StaffErase.tsx
+msgid "Required. The creator sees it in the notice."
+msgstr "Required. The creator sees it in the notice."
+
+#: components/app/interface/settings/user/profile/StaffErase.tsx
+msgid "The creator is told why, with a statement of reasons they can appeal."
+msgstr "The creator is told why, with a statement of reasons they can appeal."
+

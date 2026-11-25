@@ -463,6 +463,18 @@ export const communityApi = {
   remove: (client: Client, itemId: string) =>
     discoverRequest<void>(client, "DELETE", `/community/items/${id(itemId)}`),
 
+  /**
+   * Staff (`cosmetics.manage_all`): delete anyone's design for good, in any
+   * state. The reason goes to the creator with a statement they can appeal.
+   */
+  erase: (client: Client, itemId: string, reason: string, version?: number) =>
+    discoverRequest<void>(
+      client,
+      "POST",
+      `/community/items/${id(itemId)}/erase`,
+      { body: { reason: reason.trim(), version } },
+    ),
+
   // reviewers
   queue: (client: Client) =>
     client.api.get("/community/review").then(withoutNull),

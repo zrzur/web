@@ -26,6 +26,7 @@ import {
   StatusBadge,
   useDate,
 } from "./CommunityParts";
+import { StaffEraseDialog } from "./StaffErase";
 import {
   CommunityItem,
   CommunityPermissions,
@@ -59,6 +60,7 @@ export function ReviewQueue(props: {
   const [reason, setReason] = createSignal("");
   const [busy, setBusy] = createSignal(false);
   const [error, setError] = createSignal<string>();
+  const [erasing, setErasing] = createSignal(false);
 
   const [queue, { refetch }] = createResource(() =>
     communityApi.queue(client()),
@@ -476,6 +478,34 @@ export function ReviewQueue(props: {
                         </button>
                       </Show>
                     </Decisions>
+                  </Show>
+                  <Show when={can(props.perms, "cosmetics.manage_all")}>
+                    <Decisions>
+                      <button
+                        type="button"
+                        data-danger
+                        data-testid="staff-erase"
+                        disabled={busy()}
+                        onClick={() => setErasing(true)}
+                      >
+                        <Icon name="trash" size={14} />
+                        <Trans>Delete for everyone</Trans>
+                      </button>
+                    </Decisions>
+                    <StaffEraseDialog
+                      show={erasing()}
+                      item={{
+                        _id: current()._id,
+                        name: current().name,
+                        version: details()?.version,
+                      }}
+                      onClose={() => setErasing(false)}
+                      onErased={() => {
+                        setErasing(false);
+                        setSelected(undefined);
+                        void refetch();
+                      }}
+                    />
                   </Show>
                 </Panel>
               </Layout>

@@ -2,6 +2,7 @@
 
 ## Unreleased
 
+- **Delete for everyone (Zrzur staff):** with the design admin permission (`cosmetics.manage_all`), a design's page, its quick view in Designs and the review queue show **Delete for everyone**. The dialog says the design and its image go for good, from everyone wearing it, and that the creator is told why with a statement they can appeal; a reason is required. Refusals show in plain words with the technical part under "Details". Needs the backend's `POST /community/items/{id}/erase` (owner, 2026-11-25).
 - The small profile card shows every badge on a row under the name, the same as the full profile, instead of the first three at the far end of the name row (owner, 2026-11-25).
 
 ### Profile frames: a design guide, a frame kit and uploads in Creator Studio (2026-11-25)

@@ -179,6 +179,20 @@ describe("communityApi", () => {
     });
   });
 
+  it("sends a staff erasure to its own route with the reason", async () => {
+    const fetch = respond(204);
+    await communityApi.erase(client, "a/b", "  copied art ", 7);
+    const [url, init] = fetch.mock.calls[0] as unknown as [URL, RequestInit];
+    expect(String(url)).toBe(
+      "http://127.0.0.1:14702/community/items/a%2Fb/erase",
+    );
+    expect(init.method).toBe("POST");
+    expect(JSON.parse(String(init.body))).toEqual({
+      reason: "copied art",
+      version: 7,
+    });
+  });
+
   it("toggles favourites with PUT and DELETE", async () => {
     const fetch = respond(204);
     await communityApi.favourite(client, "a/b", true);

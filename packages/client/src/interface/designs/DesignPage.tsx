@@ -19,10 +19,13 @@ import {
 } from "@revolt/app/interface/discover/sites";
 import {
   CreatorChip,
+  useCommunityPermissions,
   useWearDesign,
 } from "@revolt/app/interface/settings/user/profile/CommunityParts";
+import { StaffEraseDialog } from "@revolt/app/interface/settings/user/profile/StaffErase";
 import {
   type CommunityItemDetails,
+  can,
   communityApi,
   communityFramesOpen,
   hasOpenPage,
@@ -191,6 +194,11 @@ export function DesignPage(props: {
   const [busy, setBusy] = createSignal(false);
   const [error, setError] = createSignal<string>();
   const [copied, setCopied] = createSignal(false);
+  const [erasing, setErasing] = createSignal(false);
+  /** Zrzur staff delete anyone's design; the server checks again */
+  const { perms } = useCommunityPermissions();
+  const mayErase = () =>
+    !props.site && isLoggedIn() && can(perms(), "cosmetics.manage_all");
 
   /** already part of the signed-in person's profile */
   const worn = () => {
@@ -531,6 +539,34 @@ export function DesignPage(props: {
                       <Trans>Report</Trans>
                     </Ghost>
                   </Show>
+                  <Show when={mayErase() && item().community}>
+                    {(found) => (
+                      <>
+                        <Ghost
+                          type="button"
+                          data-danger
+                          data-testid="staff-erase"
+                          onClick={() => setErasing(true)}
+                        >
+                          <Icon name="trash" size={18} />
+                          <Trans>Delete for everyone</Trans>
+                        </Ghost>
+                        <StaffEraseDialog
+                          show={erasing()}
+                          item={{
+                            _id: found().item._id,
+                            name: found().item.name,
+                            version: found().item.version,
+                          }}
+                          onClose={() => setErasing(false)}
+                          onErased={() => {
+                            setErasing(false);
+                            props.onRoom(item().tab);
+                          }}
+                        />
+                      </>
+                    )}
+                  </Show>
                 </Aside>
               </Columns>
 
@@ -749,6 +785,7 @@ const Ghost = styled("button", {
     fontSize: "14px",
     fontWeight: 400,
     "&:hover": { background: "var(--z-nav-hover)" },
+    "&[data-danger]": { color: "var(--z-danger)" },
   },
 });
 
