@@ -46,7 +46,7 @@ export type FileCheck = {
     | "video"
     // profile frames
     | "frame-size"
-    | "frame-still"
+    | "frame-moves"
     | "covers-banner"
     | "covers-name"
     | "covers-text";
@@ -129,9 +129,10 @@ export function fileChecks(kind: CommunityKind, facts: FileFacts): FileCheck[] {
 }
 
 /**
- * A profile frame is laid over the card as it is, so the server takes only
- * one still picture of the exact size whose card area is clear: each of
- * these fails, never warns.
+ * A profile frame is laid over the card as it is, so the server takes only a
+ * picture of the exact size whose card area is clear in every frame: each of
+ * these fails, never warns. A moving frame is fine; the motion row only says
+ * so.
  */
 function frameChecks(facts: FileFacts): FileCheck[] {
   const spec = STUDIO_SPECS.frames;
@@ -156,8 +157,8 @@ function frameChecks(facts: FileFacts): FileCheck[] {
   }
   checks.push({
     id: "motion",
-    state: facts.animated ? "fail" : "ok",
-    reason: facts.animated ? "frame-still" : undefined,
+    state: "ok",
+    reason: facts.animated ? "frame-moves" : undefined,
   });
   return checks;
 }

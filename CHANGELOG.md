@@ -2,6 +2,14 @@
 
 ## Unreleased
 
+### Profile frames may move (2026-11-25, owner's request)
+
+* **Animated GIF, animated WebP and animated PNG frames are accepted** in Creator Studio, at the same exact 800 x 1020 px and up to 2.5 MB. There is no length limit; the server allows up to 240 frames.
+* **The safe-zone check runs on every frame of the animation**, not only the first, so the art cannot pass over the name later in its loop. The browser's own decoder (`ImageDecoder`) reads the frames; a browser without it checks the first frame and the server checks them all on upload.
+* The File check's Animation row says "Moves, allowed" in a neutral tone, with "People who turn motion off see it as a still picture." Specs, the frame guide (`/designs/frame-guide`) and the kit README (en, ar, de) say a frame may be still or moving.
+* **Showing them:** a moving frame plays on the profile card, the full profile, the frame picker, Designs and Creator Studio. With reduced motion, Save data or profile effects off it is the media server's still of the file, and the moving file is never fetched. The frame's slices are now given as shares of the picture, so the smaller still is cut in the same places. Nothing is added to the precache.
+* Needs the backend from this release; an older one refuses a moving frame (`frame_still`, now explained as "Moving frames are not open yet").
+
 - The small profile card shows every badge on a row under the name, the same as the full profile, instead of the first three at the far end of the name row (owner, 2026-11-25).
 
 ### Profile frames: a design guide, a frame kit and uploads in Creator Studio (2026-11-25)

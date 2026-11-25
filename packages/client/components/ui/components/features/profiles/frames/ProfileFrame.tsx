@@ -15,7 +15,11 @@ import Breakpoint from "@revolt/common/Breakpoint";
 import { useInstance } from "@revolt/instance";
 
 import { useDesignMotion } from "../NameplateMotion";
-import { communityFileUrl, isCommunityRef } from "../userStyle";
+import {
+  communityFileUrl,
+  communityStillUrl,
+  isCommunityRef,
+} from "../userStyle";
 
 import { frameBorderImage } from "./communityFrame";
 import { isProfileFrameId } from "./frameIds";
@@ -80,9 +84,15 @@ export function ProfileFrame(props: {
 
   const builtIn = () =>
     isProfileFrameId(props.frame) ? props.frame : undefined;
+  // a creator's frame may move: anyone who sees no motion (reduced motion,
+  // Save data, effects off) gets the media server's still of it, and the
+  // moving file is never fetched
   const communityUrl = () =>
     isCommunityRef(props.frame)
-      ? (props.url ?? communityFileUrl(instance.mediaUrl, props.file))
+      ? (props.url ??
+        (motion()
+          ? communityFileUrl(instance.mediaUrl, props.file)
+          : communityStillUrl(instance.mediaUrl, props.file)))
       : undefined;
 
   // the drawings load the first time a built-in frame is shown, so the app's

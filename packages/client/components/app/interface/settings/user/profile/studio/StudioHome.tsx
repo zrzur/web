@@ -16,6 +16,7 @@ import {
 } from "../communityApi";
 import { type TemplateWords, downloadTemplate } from "../studioTemplates";
 
+import { FRAME_MAX_FRAMES } from "./frameCheck";
 import { downloadFrameKit } from "./frameKit";
 import {
   Actions,
@@ -553,7 +554,9 @@ export function SpecFacts(props: { kind: CommunityKind }) {
         <dd>
           <Switch>
             <Match when={props.kind === "frames"}>
-              <Trans>PNG, WebP or GIF, with a transparent background</Trans>
+              <Trans>
+                PNG, animated PNG, WebP or GIF, with a transparent background
+              </Trans>
             </Match>
             <Match when={spec().mustMove}>
               <Trans>Animated PNG, GIF, WebP or WebM</Trans>
@@ -584,7 +587,10 @@ export function SpecFacts(props: { kind: CommunityKind }) {
         <dd>
           <Switch>
             <Match when={props.kind === "frames"}>
-              <Trans>None: one still picture</Trans>
+              <Trans>
+                Allowed, any length, up to {FRAME_MAX_FRAMES} frames. People who
+                turn motion off see it as a still picture.
+              </Trans>
             </Match>
             <Match when={spec().mustMove}>
               <Trans>

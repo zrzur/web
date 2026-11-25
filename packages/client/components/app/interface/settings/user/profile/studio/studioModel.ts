@@ -322,7 +322,7 @@ export const STUDIO_SPECS: Record<
     mustMove: true,
     maxSeconds: 4,
   },
-  // one still picture of exactly this size (`FRAME_FILE`)
+  // a picture of exactly this size (`FRAME_FILE`), still or moving
   frames: {
     width: FRAME_FILE.width,
     height: FRAME_FILE.height,

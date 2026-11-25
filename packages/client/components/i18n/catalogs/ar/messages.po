@@ -33874,3 +33874,45 @@ msgstr "سرب زرزور"
 #: components/app/interface/settings/user/profile/styleLabels.tsx
 msgid "Zrzur neon"
 msgstr "نيون زرزور"
+
+#: src/interface/designs/FrameGuide.tsx
+msgid "A frame is a picture laid round your profile card, still or moving. Draw it on our template, keep the card clear, and upload it in Creator Studio."
+msgstr "الإطار صورة توضع حول بطاقة ملفك الشخصي، ثابتة أو متحركة. ارسمه على قالبنا، واترك البطاقة خالية، ثم ارفعه في استوديو المصممين."
+
+#: components/app/interface/settings/user/profile/studio/StudioHome.tsx
+#: src/interface/designs/FrameGuide.tsx
+msgid "Allowed, any length, up to {FRAME_MAX_FRAMES} frames. People who turn motion off see it as a still picture."
+msgstr "مسموح بها، بأي مدة، وبما لا يزيد على {FRAME_MAX_FRAMES} لقطة. من يوقف الحركة يراه صورة ثابتة."
+
+#: components/app/interface/settings/user/profile/studio/StudioEditor.tsx
+msgid "Moves, allowed"
+msgstr "متحرك، وهذا مسموح"
+
+#: components/app/interface/settings/user/profile/studio/StudioEditor.tsx
+msgid "People who turn motion off see it as a still picture."
+msgstr "من يوقف الحركة يراه صورة ثابتة."
+
+#: src/interface/designs/FrameGuide.tsx
+msgid "PNG, animated PNG, WebP or GIF"
+msgstr "PNG أو PNG متحرك أو WebP أو GIF"
+
+#: components/app/interface/settings/user/profile/studio/StudioHome.tsx
+msgid "PNG, animated PNG, WebP or GIF, with a transparent background"
+msgstr "PNG أو PNG متحرك أو WebP أو GIF بخلفية شفافة"
+
+#: src/interface/designs/FrameGuide.tsx
+msgid "The frame lies over the card as it is. The avatar, the name and the text area must stay fully transparent in every frame of an animation, or the upload is refused."
+msgstr "يوضع الإطار فوق البطاقة كما هو. لذا يجب أن تبقى الصورة الرمزية والاسم ومنطقة النص شفافة تمامًا في كل لقطة من الحركة، وإلا رُفض الرفع."
+
+#. placeholder {0}: number(FRAME_MAX_FRAMES)
+#: components/app/interface/settings/user/profile/studio/StudioEditor.tsx
+msgid "This frame has too many pictures. The limit is {0}."
+msgstr "عدد لقطات هذا الإطار كبير جدًا. الحد الأقصى {0}."
+
+#: components/app/interface/settings/user/profile/studio/StudioEditor.tsx
+msgid "Moving frames are not open yet. Export one picture as PNG or WebP."
+msgstr "الإطارات المتحركة غير متاحة بعد. صدّر صورة واحدة بصيغة PNG أو WebP."
+
+#: components/app/interface/settings/user/profile/studio/StudioEditor.tsx
+msgid "Use a PNG, animated PNG, WebP or GIF file."
+msgstr "استخدم ملفًا بصيغة PNG أو PNG متحرك أو WebP أو GIF."

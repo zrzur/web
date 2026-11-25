@@ -637,16 +637,17 @@ English · العربية · Deutsch
 
 ## English
 
-A profile frame is one still picture laid round your profile card. Draw it on this template.
+A profile frame is a picture laid round your profile card, still or moving. Draw it on this template.
 
 - **Canvas:** exactly ${FILE.width} × ${FILE.height} px (the server takes no other size).
 - **Card:** ${CARD.left},${CARD.top} to ${CARD.right},${CARD.bottom} (${CARD.right - CARD.left} × ${CARD.bottom - CARD.top} px).
 - **Room for art:** ${CARD.top} px above the card, ${CARD.left} px beside it, ${FILE.height - CARD.bottom} px below it, plus a ${SAFE.left - CARD.left} px band just inside its edge.
-- **Safe zone, keep fully transparent:** ${SAFE.left},${SAFE.top} to ${SAFE.right},${SAFE.bottom}. A pixel counts as drawn above alpha ${ALPHA_LIMIT} of 255.
+- **Safe zone, keep fully transparent in every frame:** ${SAFE.left},${SAFE.top} to ${SAFE.right},${SAFE.bottom}. A pixel counts as drawn above alpha ${ALPHA_LIMIT} of 255.
 - **Crest window, may be drawn on:** ${CREST.left},${CREST.top} to ${CREST.right},${CREST.bottom}, over the middle of the banner.
 - **Stretching:** the top ${FIXED.top} px and the bottom ${FILE.height - FIXED.bottom} px are shown as drawn; the sides between them stretch with the card's height. Keep the sides plain.
 - **Pixel grid:** draw in blocks of ${BLOCK} × ${BLOCK} file px, counted from the card's corner (${CARD.left},${CARD.top}). One block shows as 4 px on a 340 px card.
-- **File:** PNG, WebP or GIF, one still picture, transparent background, up to ${mb} MB.
+- **File:** PNG, animated PNG, WebP or GIF, transparent background, up to ${mb} MB.
+- **Animation:** allowed, of any length, up to 240 frames. People who turn motion off see it as a still picture.
 - **Naming:** lowercase words joined by hyphens, such as \`desert-night.png\`. Creator Studio names the design after the file; you can change it there.
 - **Rules:** your own work, no copied art, no logos, no text or letters, nothing hateful.
 
@@ -654,16 +655,17 @@ Hide every layer of the template before you export. \`example-frame.png\` is a f
 
 ## العربية
 
-الإطار صورة ثابتة واحدة تُوضع حول بطاقة ملفك الشخصي. ارسمه على هذا القالب.
+الإطار صورة تُوضع حول بطاقة ملفك الشخصي، ثابتة أو متحركة. ارسمه على هذا القالب.
 
 - **اللوحة:** ${FILE.width} × ${FILE.height} بكسل تمامًا (لا يقبل الخادم أي مقاس آخر).
 - **البطاقة:** من ${CARD.left},${CARD.top} إلى ${CARD.right},${CARD.bottom} (${CARD.right - CARD.left} × ${CARD.bottom - CARD.top} بكسل).
 - **مساحة الرسم:** ${CARD.top} بكسل فوق البطاقة، و${CARD.left} بكسل على كل جانب، و${FILE.height - CARD.bottom} بكسل تحتها، إضافة إلى شريط عرضه ${SAFE.left - CARD.left} بكسل داخل حافتها.
-- **المنطقة الآمنة، اتركها شفافة تمامًا:** من ${SAFE.left},${SAFE.top} إلى ${SAFE.right},${SAFE.bottom}. يُعدّ البكسل مرسومًا إذا زادت شفافيته (ألفا) على ${ALPHA_LIMIT} من 255.
+- **المنطقة الآمنة، اتركها شفافة تمامًا في كل لقطة:** من ${SAFE.left},${SAFE.top} إلى ${SAFE.right},${SAFE.bottom}. يُعدّ البكسل مرسومًا إذا زادت شفافيته (ألفا) على ${ALPHA_LIMIT} من 255.
 - **نافذة الشعار، يجوز الرسم فيها:** من ${CREST.left},${CREST.top} إلى ${CREST.right},${CREST.bottom}، فوق منتصف البانر.
 - **التمدد:** يظهر أعلى ${FIXED.top} بكسل وأسفل ${FILE.height - FIXED.bottom} بكسل كما رُسما، ويتمدد الجانبان بينهما مع طول البطاقة. اجعل الجانبين بسيطين.
 - **شبكة البكسل:** ارسم بمربعات ${BLOCK} × ${BLOCK} بكسل في الملف، تبدأ من زاوية البطاقة (${CARD.left},${CARD.top}). يظهر المربع الواحد بحجم 4 بكسل على بطاقة عرضها 340 بكسل.
-- **الملف:** PNG أو WebP أو GIF، صورة ثابتة واحدة بخلفية شفافة، بحجم لا يزيد على ${mb} ميغابايت.
+- **الملف:** PNG أو PNG متحرك أو WebP أو GIF، بخلفية شفافة، بحجم لا يزيد على ${mb} ميغابايت.
+- **الحركة:** مسموح بها، بأي مدة، وبما لا يزيد على 240 لقطة. من يوقف الحركة يراه صورة ثابتة.
 - **التسمية:** كلمات بأحرف لاتينية صغيرة تفصل بينها شرطات، مثل \`desert-night.png\`. يسمّي استوديو المصممين التصميم باسم الملف، ويمكنك تغييره هناك.
 - **القواعد:** عملك أنت، دون رسوم منسوخة أو شعارات أو نصوص أو حروف، ودون أي محتوى يحض على الكراهية.
 
@@ -671,16 +673,17 @@ Hide every layer of the template before you export. \`example-frame.png\` is a f
 
 ## Deutsch
 
-Ein Profilrahmen ist ein einzelnes Standbild, das um deine Profilkarte gelegt wird. Zeichne ihn auf dieser Vorlage.
+Ein Profilrahmen ist ein Bild, still oder bewegt, das um deine Profilkarte gelegt wird. Zeichne ihn auf dieser Vorlage.
 
 - **Fläche:** genau ${FILE.width} × ${FILE.height} px (der Server nimmt keine andere Größe an).
 - **Karte:** ${CARD.left},${CARD.top} bis ${CARD.right},${CARD.bottom} (${CARD.right - CARD.left} × ${CARD.bottom - CARD.top} px).
 - **Platz für Kunst:** ${CARD.top} px über der Karte, ${CARD.left} px daneben, ${FILE.height - CARD.bottom} px darunter, dazu ein ${SAFE.left - CARD.left}-px-Band direkt innerhalb ihres Rands.
-- **Schutzzone, vollständig transparent lassen:** ${SAFE.left},${SAFE.top} bis ${SAFE.right},${SAFE.bottom}. Ein Pixel gilt ab Alpha ${ALPHA_LIMIT} von 255 als gezeichnet.
+- **Schutzzone, in jedem Einzelbild vollständig transparent lassen:** ${SAFE.left},${SAFE.top} bis ${SAFE.right},${SAFE.bottom}. Ein Pixel gilt ab Alpha ${ALPHA_LIMIT} von 255 als gezeichnet.
 - **Wappenfenster, darf bemalt werden:** ${CREST.left},${CREST.top} bis ${CREST.right},${CREST.bottom}, über der Mitte des Banners.
 - **Dehnung:** Die oberen ${FIXED.top} px und die unteren ${FILE.height - FIXED.bottom} px erscheinen wie gezeichnet; die Seiten dazwischen dehnen sich mit der Kartenhöhe. Halte die Seiten schlicht.
 - **Pixelraster:** Zeichne in Blöcken von ${BLOCK} × ${BLOCK} Datei-px, gezählt ab der Kartenecke (${CARD.left},${CARD.top}). Ein Block erscheint auf einer 340 px breiten Karte als 4 px.
-- **Datei:** PNG, WebP oder GIF, ein Standbild, transparenter Hintergrund, höchstens ${mb} MB.
+- **Datei:** PNG, animiertes PNG, WebP oder GIF, transparenter Hintergrund, höchstens ${mb} MB.
+- **Animation:** erlaubt, beliebig lang, höchstens 240 Einzelbilder. Wer Bewegung ausschaltet, sieht ein Standbild.
 - **Benennung:** kleine Wörter mit Bindestrichen, etwa \`desert-night.png\`. Das Creator-Studio benennt das Design nach der Datei; du kannst den Namen dort ändern.
 - **Regeln:** eigene Arbeit, keine kopierte Kunst, keine Logos, keine Texte oder Buchstaben, nichts Hasserfülltes.
 

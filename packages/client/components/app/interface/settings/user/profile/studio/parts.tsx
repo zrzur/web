@@ -281,6 +281,8 @@ export const SpecList = styled("dl", {
       "--z-icon-color": "currentColor",
     },
     "& dd[data-state='ok'] svg": { color: "var(--z-status-success)" },
+    // a fact, neither good nor bad: a moving frame
+    "& dd[data-state='info'] svg": { color: "var(--z-fg-secondary)" },
     "& dd[data-state='warn']": { color: "var(--z-status-warning)" },
     "& dd[data-state='fail']": { color: "var(--z-danger)" },
   },

@@ -33877,3 +33877,45 @@ msgstr "Zrzur flock"
 #: components/app/interface/settings/user/profile/styleLabels.tsx
 msgid "Zrzur neon"
 msgstr "Zrzur neon"
+
+#: src/interface/designs/FrameGuide.tsx
+msgid "A frame is a picture laid round your profile card, still or moving. Draw it on our template, keep the card clear, and upload it in Creator Studio."
+msgstr "A frame is a picture laid round your profile card, still or moving. Draw it on our template, keep the card clear, and upload it in Creator Studio."
+
+#: components/app/interface/settings/user/profile/studio/StudioHome.tsx
+#: src/interface/designs/FrameGuide.tsx
+msgid "Allowed, any length, up to {FRAME_MAX_FRAMES} frames. People who turn motion off see it as a still picture."
+msgstr "Allowed, any length, up to {FRAME_MAX_FRAMES} frames. People who turn motion off see it as a still picture."
+
+#: components/app/interface/settings/user/profile/studio/StudioEditor.tsx
+msgid "Moves, allowed"
+msgstr "Moves, allowed"
+
+#: components/app/interface/settings/user/profile/studio/StudioEditor.tsx
+msgid "People who turn motion off see it as a still picture."
+msgstr "People who turn motion off see it as a still picture."
+
+#: src/interface/designs/FrameGuide.tsx
+msgid "PNG, animated PNG, WebP or GIF"
+msgstr "PNG, animated PNG, WebP or GIF"
+
+#: components/app/interface/settings/user/profile/studio/StudioHome.tsx
+msgid "PNG, animated PNG, WebP or GIF, with a transparent background"
+msgstr "PNG, animated PNG, WebP or GIF, with a transparent background"
+
+#: src/interface/designs/FrameGuide.tsx
+msgid "The frame lies over the card as it is. The avatar, the name and the text area must stay fully transparent in every frame of an animation, or the upload is refused."
+msgstr "The frame lies over the card as it is. The avatar, the name and the text area must stay fully transparent in every frame of an animation, or the upload is refused."
+
+#. placeholder {0}: number(FRAME_MAX_FRAMES)
+#: components/app/interface/settings/user/profile/studio/StudioEditor.tsx
+msgid "This frame has too many pictures. The limit is {0}."
+msgstr "This frame has too many pictures. The limit is {0}."
+
+#: components/app/interface/settings/user/profile/studio/StudioEditor.tsx
+msgid "Moving frames are not open yet. Export one picture as PNG or WebP."
+msgstr "Moving frames are not open yet. Export one picture as PNG or WebP."
+
+#: components/app/interface/settings/user/profile/studio/StudioEditor.tsx
+msgid "Use a PNG, animated PNG, WebP or GIF file."
+msgstr "Use a PNG, animated PNG, WebP or GIF file."
