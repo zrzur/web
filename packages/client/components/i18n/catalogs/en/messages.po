@@ -33353,3 +33353,409 @@ msgstr "Watching"
 #: components/app/interface/settings/user/activity/ActivitySettings.tsx
 msgid "Your public Steam game, also without the desktop app. Link Steam in Connections first."
 msgstr "Your public Steam game, also without the desktop app. Link Steam in Connections first."
+
+#: src/interface/designs/FrameGuide.tsx
+msgid "A clear outline, whole 4 px blocks"
+msgstr "A clear outline, whole 4 px blocks"
+
+#: src/interface/designs/FrameGuide.tsx
+msgid "A finished frame that passes every check"
+msgstr "A finished frame that passes every check"
+
+#: components/app/interface/settings/user/profile/studio/StudioEditor.tsx
+msgid "A frame file is exactly 800 × 1020 px. Start from the template in the frame kit."
+msgstr "A frame file is exactly 800 × 1020 px. Start from the template in the frame kit."
+
+#: src/interface/designs/FrameGuide.tsx
+msgid "A frame is one still picture laid round your profile card. Draw it on our template, keep the card clear, and upload it in Creator Studio."
+msgstr "A frame is one still picture laid round your profile card. Draw it on our template, keep the card clear, and upload it in Creator Studio."
+
+#: components/app/interface/settings/user/profile/studio/StudioEditor.tsx
+msgid "A frame is one still picture. Export a single frame as PNG or WebP."
+msgstr "A frame is one still picture. Export a single frame as PNG or WebP."
+
+#: src/interface/designs/FrameGuide.tsx
+msgid "About 3 px a block"
+msgstr "About 3 px a block"
+
+#: src/interface/designs/FrameGuide.tsx
+msgid "About 4 px a block"
+msgstr "About 4 px a block"
+
+#: src/interface/designs/FrameGuide.tsx
+msgid "About 5 px a block"
+msgstr "About 5 px a block"
+
+#: src/interface/designs/FrameGuide.tsx
+msgid "Above the card"
+msgstr "Above the card"
+
+#: src/interface/designs/FrameGuide.tsx
+msgid "Alpha 16 of 255 or less"
+msgstr "Alpha 16 of 255 or less"
+
+#: src/interface/designs/FrameGuide.tsx
+msgid "Art over the name or the text"
+msgstr "Art over the name or the text"
+
+#: components/app/interface/settings/user/profile/studio/StudioEditor.tsx
+msgid "Art round the whole profile card, drawn on our template."
+msgstr "Art round the whole profile card, drawn on our template."
+
+#: src/interface/designs/FrameGuide.tsx
+msgid "Below the card"
+msgstr "Below the card"
+
+#: src/interface/designs/FrameGuide.tsx
+msgid "Canvas"
+msgstr "Canvas"
+
+#: components/app/interface/settings/user/profile/studio/StudioEditor.tsx
+msgid "Card content clear"
+msgstr "Card content clear"
+
+#: src/interface/designs/FrameGuide.tsx
+msgid "Card position"
+msgstr "Card position"
+
+#: src/interface/designs/FrameGuide.tsx
+msgid "Counts as clear"
+msgstr "Counts as clear"
+
+#: components/app/interface/settings/user/profile/studio/StudioEditor.tsx
+msgid "Covers the banner"
+msgstr "Covers the banner"
+
+#: components/app/interface/settings/user/profile/studio/StudioEditor.tsx
+msgid "Covers the name area"
+msgstr "Covers the name area"
+
+#: components/app/interface/settings/user/profile/studio/StudioEditor.tsx
+msgid "Covers the text area"
+msgstr "Covers the text area"
+
+#: src/interface/designs/FrameGuide.tsx
+msgid "Creator Studio is open to people Zrzur has made creators."
+msgstr "Creator Studio is open to people Zrzur has made creators."
+
+#: src/interface/designs/FrameGuide.tsx
+msgid "Creator Studio names the design after the file; you can change the name there. Hide the template's guide layers before you export."
+msgstr "Creator Studio names the design after the file; you can change the name there. Hide the template's guide layers before you export."
+
+#: src/interface/designs/FrameGuide.tsx
+msgid "Crest window"
+msgstr "Crest window"
+
+#: components/app/interface/settings/user/profile/studio/LivePreview.tsx
+msgid "Crest window: may be drawn on"
+msgstr "Crest window: may be drawn on"
+
+#: src/interface/designs/FrameGuide.tsx
+msgid "Details in the corners and on top"
+msgstr "Details in the corners and on top"
+
+#: src/interface/designs/FrameGuide.tsx
+msgid "Do and don't"
+msgstr "Do and don't"
+
+#: src/interface/designs/FrameGuide.tsx
+msgid "Download the frame kit"
+msgstr "Download the frame kit"
+
+#: src/interface/designs/FrameGuide.tsx
+msgid "Download the frame kit and open template.svg or template.png."
+msgstr "Download the frame kit and open template.svg or template.png."
+
+#. placeholder {0}: CARD.left
+#. placeholder {1}: CARD.top
+#: src/interface/designs/FrameGuide.tsx
+msgid "Draw in blocks of {BLOCK} × {BLOCK} file pixels, counted from the card's top-left corner ({0}, {1}). One block shows as 4 px on a 340 px card. Single pixels blur when the frame is scaled."
+msgstr "Draw in blocks of {BLOCK} × {BLOCK} file pixels, counted from the card's top-left corner ({0}, {1}). One block shows as 4 px on a 340 px card. Single pixels blur when the frame is scaled."
+
+#. placeholder {0}: FRAME_FILE.width
+#. placeholder {1}: FRAME_FILE.height
+#: src/interface/designs/FrameGuide.tsx
+msgid "Draw on a canvas of exactly {0} × {1} px. The card sits inside it; everything round the card is room for your art."
+msgstr "Draw on a canvas of exactly {0} × {1} px. The card sits inside it; everything round the card is room for your art."
+
+#: src/interface/designs/FrameGuide.tsx
+msgid "Draw on a layer of your own, inside the room round the card."
+msgstr "Draw on a layer of your own, inside the room round the card."
+
+#: src/interface/designs/FrameGuide.tsx
+msgid "Everything below, with a README in three languages"
+msgstr "Everything below, with a README in three languages"
+
+#. placeholder {0}: FRAME_FILE.width
+#. placeholder {1}: FRAME_FILE.height
+#: src/interface/designs/FrameGuide.tsx
+msgid "Exactly {0} × {1} px"
+msgstr "Exactly {0} × {1} px"
+
+#: src/interface/designs/FrameGuide.tsx
+msgid "File name"
+msgstr "File name"
+
+#: src/interface/designs/FrameGuide.tsx
+msgid "Frame guide"
+msgstr "Frame guide"
+
+#: components/app/interface/settings/user/profile/studio/StudioEditor.tsx
+#: components/app/interface/settings/user/profile/studio/StudioHome.tsx
+msgid "Frame kit"
+msgstr "Frame kit"
+
+#: src/interface/designs/FrameGuide.tsx
+msgid "Full profile, 460 px"
+msgstr "Full profile, 460 px"
+
+#: src/interface/designs/FrameGuide.tsx
+msgid "Hide the guide layers and export the whole canvas as a PNG with a transparent background."
+msgstr "Hide the guide layers and export the whole canvas as a PNG with a transparent background."
+
+#: components/app/interface/settings/user/profile/studio/LivePreview.tsx
+msgid "How far the art may reach"
+msgstr "How far the art may reach"
+
+#: components/app/interface/settings/user/profile/studio/StudioEditor.tsx
+#: components/app/interface/settings/user/profile/studio/StudioHome.tsx
+#: src/interface/designs/Home.tsx
+msgid "How to design a frame"
+msgstr "How to design a frame"
+
+#: src/interface/designs/FrameGuide.tsx
+msgid "How to design a profile frame"
+msgstr "How to design a profile frame"
+
+#: src/interface/designs/FrameGuide.tsx
+msgid "How to submit"
+msgstr "How to submit"
+
+#: src/interface/designs/FrameGuide.tsx
+msgid "In Creator Studio, choose New design, then Profile frame, and upload the file."
+msgstr "In Creator Studio, choose New design, then Profile frame, and upload the file."
+
+#: src/interface/designs/FrameGuide.tsx
+msgid "Inside the card's edge"
+msgstr "Inside the card's edge"
+
+#: src/interface/designs/FrameGuide.tsx
+msgid "Keep clear"
+msgstr "Keep clear"
+
+#: components/app/interface/settings/user/profile/studio/LivePreview.tsx
+msgid "Keep clear: the card's content"
+msgstr "Keep clear: the card's content"
+
+#: src/interface/designs/FrameGuide.tsx
+msgid "Keep the card clear"
+msgstr "Keep the card clear"
+
+#: components/app/interface/settings/user/profile/studio/StudioHome.tsx
+msgid "Keep the card clear 20 px in from its edge"
+msgstr "Keep the card clear 20 px in from its edge"
+
+#: src/interface/designs/FrameGuide.tsx
+msgid "Light and dark"
+msgstr "Light and dark"
+
+#: src/interface/designs/FrameGuide.tsx
+msgid "Lowercase words with hyphens, such as desert-night.png"
+msgstr "Lowercase words with hyphens, such as desert-night.png"
+
+#: src/interface/designs/Home.tsx
+msgid "Make your own profile frame"
+msgstr "Make your own profile frame"
+
+#: components/app/interface/settings/user/profile/studio/StudioEditor.tsx
+msgid "Moves"
+msgstr "Moves"
+
+#: src/interface/designs/FrameGuide.tsx
+msgid "Narrow phone card"
+msgstr "Narrow phone card"
+
+#: src/interface/designs/FrameGuide.tsx
+msgid "No copied art, including frames and stickers from other apps and games."
+msgstr "No copied art, including frames and stickers from other apps and games."
+
+#: src/interface/designs/FrameGuide.tsx
+msgid "No hate: no slurs, hateful symbols or attacks on anyone."
+msgstr "No hate: no slurs, hateful symbols or attacks on anyone."
+
+#: src/interface/designs/FrameGuide.tsx
+msgid "No logos, brand marks or watermarks."
+msgstr "No logos, brand marks or watermarks."
+
+#: src/interface/designs/FrameGuide.tsx
+msgid "No real person without their consent."
+msgstr "No real person without their consent."
+
+#: src/interface/designs/FrameGuide.tsx
+msgid "No text or letters in any language."
+msgstr "No text or letters in any language."
+
+#: components/app/interface/settings/user/profile/studio/StudioHome.tsx
+#: src/interface/designs/FrameGuide.tsx
+msgid "None: one still picture"
+msgstr "None: one still picture"
+
+#: src/interface/designs/FrameGuide.tsx
+msgid "On each side"
+msgstr "On each side"
+
+#: src/interface/designs/FrameGuide.tsx
+msgid "People see your frame on dark and on light screens. Give the art a dark outline and a lighter edge so it reads on both, and check both in Creator Studio's preview before you publish."
+msgstr "People see your frame on dark and on light screens. Give the art a dark outline and a lighter edge so it reads on both, and check both in Creator Studio's preview before you publish."
+
+#: src/interface/designs/FrameGuide.tsx
+msgid "Pixel grid"
+msgstr "Pixel grid"
+
+#: src/interface/designs/FrameGuide.tsx
+msgid "Plain sides that can stretch"
+msgstr "Plain sides that can stretch"
+
+#: src/interface/designs/FrameGuide.tsx
+msgid "PNG, WebP or GIF"
+msgstr "PNG, WebP or GIF"
+
+#: components/app/interface/settings/user/profile/studio/StudioHome.tsx
+msgid "PNG, WebP or GIF, with a transparent background"
+msgstr "PNG, WebP or GIF, with a transparent background"
+
+#: src/interface/designs/FrameGuide.tsx
+msgid "Profile card, 360 px"
+msgstr "Profile card, 360 px"
+
+#: src/interface/designs/FrameGuide.tsx
+msgid "Review rules"
+msgstr "Review rules"
+
+#: src/interface/designs/FrameGuide.tsx
+msgid "Reviewers take down a frame that breaks these rules. The <0>Creator Terms</0> apply to every design."
+msgstr "Reviewers take down a frame that breaks these rules. The <0>Creator Terms</0> apply to every design."
+
+#: src/interface/designs/FrameGuide.tsx
+msgid "Room for art"
+msgstr "Room for art"
+
+#: src/interface/designs/FrameGuide.tsx
+msgid "Safe zone"
+msgstr "Safe zone"
+
+#: components/app/interface/settings/user/profile/studio/StudioEditor.tsx
+msgid "Show guides"
+msgstr "Show guides"
+
+#: src/interface/designs/FrameGuide.tsx
+msgid "Single-pixel details: they blur"
+msgstr "Single-pixel details: they blur"
+
+#: components/app/interface/settings/user/profile/studio/StudioEditor.tsx
+msgid "Still picture"
+msgstr "Still picture"
+
+#: src/interface/designs/FrameGuide.tsx
+msgid "Stretches with the card"
+msgstr "Stretches with the card"
+
+#: components/app/interface/settings/user/profile/studio/StudioEditor.tsx
+msgid "The art covers the banner. Keep the card clear 20 px in from its edge; only the crest window over the middle of the banner may be drawn on."
+msgstr "The art covers the banner. Keep the card clear 20 px in from its edge; only the crest window over the middle of the banner may be drawn on."
+
+#: components/app/interface/settings/user/profile/studio/StudioEditor.tsx
+msgid "The art covers the card's content. Keep the card clear 20 px in from its edge; only the crest window over the middle of the banner may be drawn on."
+msgstr "The art covers the card's content. Keep the card clear 20 px in from its edge; only the crest window over the middle of the banner may be drawn on."
+
+#: components/app/interface/settings/user/profile/studio/StudioEditor.tsx
+msgid "The art covers the name area. Keep the card clear 20 px in from its edge, where the avatar and the name sit."
+msgstr "The art covers the name area. Keep the card clear 20 px in from its edge, where the avatar and the name sit."
+
+#: components/app/interface/settings/user/profile/studio/StudioEditor.tsx
+msgid "The art covers the text area. Keep the card clear 20 px in from its edge, down to its foot."
+msgstr "The art covers the text area. Keep the card clear 20 px in from its edge, down to its foot."
+
+#: src/interface/designs/FrameGuide.tsx
+msgid "The canvas"
+msgstr "The canvas"
+
+#: src/interface/designs/Home.tsx
+msgid "The canvas, the safe zone and a ready template, in one guide."
+msgstr "The canvas, the safe zone and a ready template, in one guide."
+
+#: src/interface/designs/FrameGuide.tsx
+msgid "The file"
+msgstr "The file"
+
+#: src/interface/designs/FrameGuide.tsx
+msgid "The frame lies over the card as it is. The avatar, the name and the text area must stay fully transparent, or the upload is refused."
+msgstr "The frame lies over the card as it is. The avatar, the name and the text area must stay fully transparent, or the upload is refused."
+
+#. placeholder {0}: ROOM.band
+#: src/interface/designs/FrameGuide.tsx
+msgid "The safe zone is the card less {0} px on every side. Only the crest window over the middle of the banner may be drawn on."
+msgstr "The safe zone is the card less {0} px on every side. Only the crest window over the middle of the banner may be drawn on."
+
+#: src/interface/designs/FrameGuide.tsx
+msgid "The same template at the exact size"
+msgstr "The same template at the exact size"
+
+#: src/interface/designs/FrameGuide.tsx
+msgid "The template with named guide layers"
+msgstr "The template with named guide layers"
+
+#. placeholder {0}: FIXED.top
+#. placeholder {1}: FIXED.bottom
+#: src/interface/designs/FrameGuide.tsx
+msgid "The top {0} px and the bottom {1} px are shown as you drew them. The sides between them stretch with the card's height, so keep them plain: put stars and details in the corners, on top and at the foot."
+msgstr "The top {0} px and the bottom {1} px are shown as you drew them. The sides between them stretch with the card's height, so keep them plain: put stars and details in the corners, on top and at the foot."
+
+#: src/interface/designs/FrameGuide.tsx
+msgid "Transparent"
+msgstr "Transparent"
+
+#: src/interface/designs/FrameGuide.tsx
+msgid "Turn on Show guides, check dark and light, answer the rights questions and publish."
+msgstr "Turn on Show guides, check dark and light, answer the rights questions and publish."
+
+#. placeholder {0}: megabytes()
+#: components/app/interface/settings/user/profile/studio/StudioHome.tsx
+msgid "Up to {0} MB"
+msgstr "Up to {0} MB"
+
+#: src/interface/designs/FrameGuide.tsx
+msgid "Up to {MAX_MB} MB"
+msgstr "Up to {MAX_MB} MB"
+
+#: src/interface/designs/FrameGuide.tsx
+msgid "Upload a frame"
+msgstr "Upload a frame"
+
+#: components/app/interface/settings/user/profile/studio/StudioEditor.tsx
+msgid "Use a PNG, WebP or GIF file. A frame is one still picture."
+msgstr "Use a PNG, WebP or GIF file. A frame is one still picture."
+
+#: src/interface/designs/FrameGuide.tsx
+msgid "What is in the kit"
+msgstr "What is in the kit"
+
+#: src/interface/designs/FrameGuide.tsx
+msgid "Where the art may reach"
+msgstr "Where the art may reach"
+
+#: src/interface/designs/FrameGuide.tsx
+msgid "Words, letters or logos"
+msgstr "Words, letters or logos"
+
+#: src/interface/designs/FrameGuide.tsx
+msgid "Your own work, or work you hold a clear licence to share."
+msgstr "Your own work, or work you hold a clear licence to share."
+
+#: src/interface/designs/FrameGuide.tsx
+msgid "Zrzur's own pixel frames are drawn at 4 px on tall windows, 3 px below 1080 px and 2 px below 640 px and on phones. At 4 px they reach 96 px above the card, 72 px below and 56 px beside it."
+msgstr "Zrzur's own pixel frames are drawn at 4 px on tall windows, 3 px below 1080 px and 2 px below 640 px and on phones. At 4 px they reach 96 px above the card, 72 px below and 56 px beside it."
+
+#: components/app/interface/settings/user/profile/studio/StudioEditor.tsx
+msgid "A frame is laid round the card exactly as you drew it, so there is nothing to fit."
+msgstr "A frame is laid round the card exactly as you drew it, so there is nothing to fit."

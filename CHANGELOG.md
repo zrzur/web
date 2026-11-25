@@ -2,6 +2,14 @@
 
 ## Unreleased
 
+### Profile frames: a design guide, a frame kit and uploads in Creator Studio (2026-11-25)
+
+* **Creators make profile frames in Creator Studio**, the same way as other designs: New design → Profile frame, shown only while the server has community frames on (`features.community_frames`). The file must be one still PNG, WebP or GIF of exactly 800 × 1020 px, up to 2.5 MB, with the card's content clear: the app checks every pixel the way the server does (alpha above 16 of 255 inside the card less 10 px, except the crest window over the banner) before anything is uploaded.
+* **Errors say what to fix:** "The art covers the name area" (or the banner, or the text area), "A frame file is exactly 800 × 1020 px", "A frame is one still picture", and the file limits, in the same panel. The server's own refusals (`covers_content`, `frame_size`, `frame_still`) get the same plain words.
+* **Preview on your real profile card:** the picked file is laid round your own card exactly as others will see it, on a dark or light ground, with a "Show guides" switch that draws how far the art may reach, the safe zone and the crest window, and says what each means.
+* **"How to design a profile frame"** at `/designs/frame-guide`, reachable from the Designs home (while frames are on), the frame type in Creator Studio, its file step and Specs and templates: the canvas and the card's place in it, the safe zone, the room on each side in pixels, what stretches, the 4 px grid and how a frame scales, the file rules, light and dark checks, do's and don'ts, the review rules and how to submit. Its pictures are drawn from the same numbers the upload checks.
+* **The frame kit** (`/frame-kit/zrzur-frame-kit.zip`): `template.svg` with named layers (export area, reach area, stretch zones, 4 px grid, card outline, safe zone, crest window, labels), `template.png` at the exact size, `example-frame.png` (a finished frame that passes every check), a Zrzur palette as JSON and ASE, and a README in English, Arabic and German. The files are made by `scripts/designs/frame-kit.mjs`; a test keeps them equal to its output and to the upload's numbers. They are static files, not in the service worker's precache.
+
 ### Activity: real pictures, links and a short settings page (2026-11-25, owner's report)
 
 * **Real pictures everywhere:** the profile card, the full profile and the member and DM line show each game's or app's own picture loaded only through Zrzur's image proxy or file server. A logo stands by itself, with no tile, background or frame; a Steam game's tall cover is the picture with a small rounded corner, centred in the same square so names line up. A hairline shadow in the text colour keeps a dark logo visible on a dark panel and a light one on a light panel. Without a picture, the first letter in a soft circle; never the generic laptop or controller icon. A picture that fails to load turns into the letter.

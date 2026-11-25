@@ -1,4 +1,4 @@
-import { createMemo, createSignal, onCleanup, onMount } from "solid-js";
+import { Show, createMemo, createSignal, onCleanup, onMount } from "solid-js";
 
 import { useQuery } from "@tanstack/solid-query";
 import type { User } from "@zrzur/sdk/solid";
@@ -11,6 +11,7 @@ import { fetchFullProfile } from "../linkedGames";
 import { createProfileTheme } from "../profileTheme";
 import { type UserStyle, isCommunityRef, themeColours } from "../userStyle";
 
+import { FrameGuides } from "./FrameGuides";
 import { FramedCard } from "./ProfileFrame";
 import { isProfileFrameId } from "./frameIds";
 import { type FrameRoom, frameRoomAt, pixelSize } from "./frameRoom";
@@ -47,6 +48,13 @@ export function ProfilePreview(props: {
    * and cards with one are then drawn at the same size
    */
   sizeAs?: string;
+  /**
+   * a community frame's picture by address: a file being made in the
+   * Creator Studio, not uploaded yet
+   */
+  frameUrl?: string;
+  /** the frame template's guides over the card (Creator Studio) */
+  guides?: boolean;
 }) {
   const client = useClient();
   const query = useQuery(() => ({
@@ -110,6 +118,7 @@ export function ProfilePreview(props: {
         <FramedCard
           frame={props.style.profile_frame}
           file={props.style.profile_frame_file}
+          url={props.frameUrl}
           phone={false}
         >
           <Card style={theme()}>
@@ -131,6 +140,9 @@ export function ProfilePreview(props: {
               />
             </Body>
           </Card>
+          <Show when={props.guides}>
+            <FrameGuides width={CARD_WIDTH} />
+          </Show>
         </FramedCard>
       </Inner>
     </Outer>

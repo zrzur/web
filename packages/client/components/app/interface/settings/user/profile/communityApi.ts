@@ -9,15 +9,21 @@ import { userHandle } from "../../../../../common/lib/userTag";
 // relative, so unit tests run without the app aliases
 import { discoverRequest } from "../../../discover/api";
 
+import {
+  FRAME_FILE,
+  FRAME_TYPES,
+} from "../../../../../ui/components/features/profiles/frames/communityFrame";
+
 import { fetchCommunityPermissions } from "./communityAccess";
 
-export type CommunityKind = "decorations" | "nameplates" | "effects";
-
 /**
- * Every list the gallery reads. Profile frames are listed and worn, but not
- * made in the Creator Studio yet, so its kinds above leave them out.
+ * What a creator can make. Profile frames are made in the Creator Studio only
+ * while the server has them open (`communityFramesOpen`).
  */
-export type CommunityListKind = CommunityKind | "frames";
+export type CommunityKind = "decorations" | "nameplates" | "effects" | "frames";
+
+/** Every list the gallery reads */
+export type CommunityListKind = CommunityKind;
 
 /**
  * Whether creators' profile frames are open on this server (`GET /`
@@ -149,7 +155,11 @@ export type EffectProblem =
   | "too_long"
   | "too_many_pixels"
   | "webm"
-  | "webm_slow";
+  | "webm_slow"
+  // profile frames: art over the card's content, another size, moving
+  | "covers_content"
+  | "frame_size"
+  | "frame_still";
 
 const EFFECT_PROBLEMS: readonly string[] = [
   "flashing",
@@ -165,6 +175,9 @@ const EFFECT_PROBLEMS: readonly string[] = [
   "too_many_pixels",
   "webm",
   "webm_slow",
+  "covers_content",
+  "frame_size",
+  "frame_still",
 ];
 
 /** The refusal in an upload's error, if it is one an effect can get */
@@ -262,6 +275,12 @@ export function checkCommunityFile(
   kind: CommunityKind = "decorations",
 ) {
   if (!COMMUNITY_TYPES.includes(file.type)) return "type" as const;
+  // a frame is one still picture: no WebM, no animated PNG
+  if (
+    kind === "frames" &&
+    !(FRAME_TYPES as readonly string[]).includes(file.type)
+  )
+    return "type" as const;
   if (file.type === "video/webm")
     return file.size > COMMUNITY_WEBM_MAX_BYTES
       ? ("webm-size" as const)
@@ -277,7 +296,9 @@ export const kindOf = (item: { kind: string }): CommunityKind =>
     ? "nameplates"
     : item.kind === "Effect"
       ? "effects"
-      : "decorations";
+      : item.kind === "Frame"
+        ? "frames"
+        : "decorations";
 
 /**
  * Whether a design's image has the right shape for where it is shown. Only
@@ -290,6 +311,11 @@ export function artFit(kind: CommunityKind, width: number, height: number) {
   // the server refuses anything else for an effect
   if (kind === "effects")
     return Math.abs(ratio - 9 / 16) > 0.012 ? ("tall" as const) : undefined;
+  // the server takes a frame of this size only
+  if (kind === "frames")
+    return width === FRAME_FILE.width && height === FRAME_FILE.height
+      ? undefined
+      : ("frame-size" as const);
   return ratio < 4 || ratio > 7 ? ("wide" as const) : undefined;
 }
 

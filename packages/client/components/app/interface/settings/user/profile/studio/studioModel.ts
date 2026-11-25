@@ -10,6 +10,9 @@ import {
   kindOf,
 } from "../communityApi";
 
+// relative, so unit tests run without the app aliases
+import { FRAME_FILE } from "../../../../../../ui/components/features/profiles/frames/communityFrame";
+
 /** The tabs of the studio home */
 export type StudioFilter =
   | "all"
@@ -318,5 +321,13 @@ export const STUDIO_SPECS: Record<
     maxBytes: EFFECT_MAX_BYTES,
     mustMove: true,
     maxSeconds: 4,
+  },
+  // one still picture of exactly this size (`FRAME_FILE`)
+  frames: {
+    width: FRAME_FILE.width,
+    height: FRAME_FILE.height,
+    maxBytes: COMMUNITY_MAX_BYTES,
+    mustMove: false,
+    maxSeconds: 0,
   },
 };

@@ -27,6 +27,7 @@ import {
   Slider,
   Toggle,
 } from "@revolt/ui";
+import { FRAME_TYPES } from "@revolt/ui/components/features/profiles/frames/communityFrame";
 import { Icon } from "@revolt/ui/icons/Icon";
 
 import { CommunityImage, Field } from "../CommunityParts";
@@ -65,6 +66,8 @@ import {
   needsRedraw,
   renderFit,
 } from "./fit";
+import { frameCover, isFrameSize } from "./frameCheck";
+import { downloadFrameKit } from "./frameKit";
 import {
   Actions,
   Callout,
@@ -106,6 +109,10 @@ export function StudioEditor(props: {
   step?: StudioStep;
   /** this server takes effects */
   effects: boolean;
+  /** this server takes profile frames */
+  frames?: boolean;
+  /** open the guide to designing a profile frame */
+  onFrameGuide?: () => void;
   avatar?: string;
   name: string;
   dialog?: boolean;
@@ -161,10 +168,12 @@ export function StudioEditor(props: {
   let uploaded: { key: string; id: string } | undefined;
 
   const isEffect = () => kind() === "effects";
+  /** a profile frame: one still picture on a fixed template, never refitted */
+  const isFrame = () => kind() === "frames";
   const isVideo = () => file()?.type === "video/webm";
   const animated = () => !!facts()?.animated || isVideo();
   /** a still image the creator just picked can be moved in its frame */
-  const canFit = () => !!file() && !animated() && !isEffect();
+  const canFit = () => !!file() && !animated() && !isEffect() && !isFrame();
   const redraw = () => {
     const known = facts();
     const type = kind();
@@ -249,6 +258,15 @@ export function StudioEditor(props: {
       const canvas = document.createElement("canvas");
       const context = canvas.getContext("2d", { willReadFrequently: true });
       if (!context) return {};
+      // a frame is checked pixel for pixel, as the server checks it
+      if (type === "frames") {
+        if (!isFrameSize(width, height)) return {};
+        canvas.width = width;
+        canvas.height = height;
+        context.drawImage(image, 0, 0);
+        const { data } = context.getImageData(0, 0, width, height);
+        return { frameCover: frameCover(data, width, height) };
+      }
       if (canFit()) {
         const rect = fitRect(type, width, height, fit());
         const scale = MEASURE / Math.max(rect.frame.width, rect.frame.height);
@@ -303,7 +321,11 @@ export function StudioEditor(props: {
     if (!picked || !type) return;
     const issue = checkCommunityFile(picked, type);
     if (issue === "type") {
-      setProblem(t`Use a PNG, animated PNG, GIF, WebP or WebM file.`);
+      setProblem(
+        type === "frames"
+          ? t`Use a PNG, WebP or GIF file. A frame is one still picture.`
+          : t`Use a PNG, animated PNG, GIF, WebP or WebM file.`,
+      );
       return;
     }
     if (issue === "webm-size") {
@@ -453,6 +475,12 @@ export function StudioEditor(props: {
         return t`That WebM can't be read. Use VP8 or VP9, at most ${COMMUNITY_MAX_DIMENSION} px on each side, and export it again.`;
       case "webm_slow":
         return t`That WebM couldn't be turned into an image in time. Try a shorter one, or try again in a moment.`;
+      case "covers_content":
+        return t`The art covers the card's content. Keep the card clear 20 px in from its edge; only the crest window over the middle of the banner may be drawn on.`;
+      case "frame_size":
+        return t`A frame file is exactly 800 × 1020 px. Start from the template in the frame kit.`;
+      case "frame_still":
+        return t`A frame is one still picture. Export a single frame as PNG or WebP.`;
       default:
         return undefined;
     }
@@ -618,13 +646,36 @@ export function StudioEditor(props: {
           <Trans>No clear area</Trans>
         );
       case "safe":
-        return check.state === "ok" ? (
-          <Trans>Clear of the face</Trans>
-        ) : (
-          <Trans>Part covers the face</Trans>
+        return (
+          <Switch>
+            <Match when={check.reason === "covers-banner"}>
+              <Trans>Covers the banner</Trans>
+            </Match>
+            <Match when={check.reason === "covers-name"}>
+              <Trans>Covers the name area</Trans>
+            </Match>
+            <Match when={check.reason === "covers-text"}>
+              <Trans>Covers the text area</Trans>
+            </Match>
+            <Match when={isFrame()}>
+              <Trans>Card content clear</Trans>
+            </Match>
+            <Match when={check.state === "ok"}>
+              <Trans>Clear of the face</Trans>
+            </Match>
+            <Match when={true}>
+              <Trans>Part covers the face</Trans>
+            </Match>
+          </Switch>
         );
       case "motion":
-        return check.reason === "video" ? (
+        return isFrame() ? (
+          check.state === "ok" ? (
+            <Trans>Still picture</Trans>
+          ) : (
+            <Trans>Moves</Trans>
+          )
+        ) : check.reason === "video" ? (
           <Trans>Made on upload</Trans>
         ) : check.state === "ok" ? (
           <Trans>Animated</Trans>
@@ -662,6 +713,16 @@ export function StudioEditor(props: {
         return t`This effect covers too much of the profile. Keep at least half of each frame transparent so text stays readable.`;
       case "still":
         return t`An effect has to move. This file has only one frame.`;
+      case "frame-size":
+        return t`A frame file is exactly 800 × 1020 px. Start from the template in the frame kit.`;
+      case "frame-still":
+        return t`A frame is one still picture. Export a single frame as PNG or WebP.`;
+      case "covers-banner":
+        return t`The art covers the banner. Keep the card clear 20 px in from its edge; only the crest window over the middle of the banner may be drawn on.`;
+      case "covers-name":
+        return t`The art covers the name area. Keep the card clear 20 px in from its edge, where the avatar and the name sit.`;
+      case "covers-text":
+        return t`The art covers the text area. Keep the card clear 20 px in from its edge, down to its foot.`;
       default:
         return undefined;
     }
@@ -819,7 +880,7 @@ export function StudioEditor(props: {
         ref={input}
         type="file"
         data-testid="studio-file"
-        accept={COMMUNITY_TYPES.join(",")}
+        accept={(isFrame() ? FRAME_TYPES : COMMUNITY_TYPES).join(",")}
         hidden
         onChange={(event) => {
           pick(event.currentTarget.files?.[0]);
@@ -847,8 +908,12 @@ export function StudioEditor(props: {
             <TypeCards>
               <For
                 each={(
-                  ["decorations", "nameplates", "effects"] as const
-                ).filter((entry) => entry !== "effects" || props.effects)}
+                  ["decorations", "nameplates", "effects", "frames"] as const
+                ).filter(
+                  (entry) =>
+                    (entry !== "effects" || props.effects) &&
+                    (entry !== "frames" || props.frames),
+                )}
               >
                 {(entry) => (
                   <TypeCard
@@ -868,6 +933,12 @@ export function StudioEditor(props: {
                         <Match when={entry === "nameplates"}>
                           <Trans>Art behind the name in the member list.</Trans>
                         </Match>
+                        <Match when={entry === "frames"}>
+                          <Trans>
+                            Art round the whole profile card, drawn on our
+                            template.
+                          </Trans>
+                        </Match>
                         <Match when={true}>
                           <Trans>
                             A transparent animation that plays once over a
@@ -877,6 +948,16 @@ export function StudioEditor(props: {
                       </Switch>
                     </p>
                     <SpecFacts kind={entry} />
+                    <Show when={entry === "frames" && props.onFrameGuide}>
+                      <GuideLink
+                        type="button"
+                        data-testid="studio-frame-guide"
+                        onClick={() => props.onFrameGuide?.()}
+                      >
+                        <Icon name="books" size={16} />
+                        <Trans>How to design a frame</Trans>
+                      </GuideLink>
+                    </Show>
                   </TypeCard>
                 )}
               </For>
@@ -913,6 +994,30 @@ export function StudioEditor(props: {
                   <Trans>What this type needs</Trans>
                 </h2>
                 <SpecFacts kind={kind()!} />
+                <Show when={isFrame()}>
+                  <Actions>
+                    <Show when={props.onFrameGuide}>
+                      <Button
+                        variant="tonal"
+                        size="sm"
+                        data-testid="studio-file-frame-guide"
+                        onPress={() => props.onFrameGuide?.()}
+                      >
+                        <Icon name="books" size={16} />
+                        <Trans>How to design a frame</Trans>
+                      </Button>
+                    </Show>
+                    <Button
+                      variant="tonal"
+                      size="sm"
+                      data-testid="studio-frame-kit"
+                      onPress={() => downloadFrameKit("kit")}
+                    >
+                      <Icon name="download-simple" size={16} />
+                      <Trans>Frame kit</Trans>
+                    </Button>
+                  </Actions>
+                </Show>
               </Panel>
               <Show when={checks().length}>{checkPanel()}</Show>
             </Side>
@@ -960,7 +1065,12 @@ export function StudioEditor(props: {
                 <Show when={!isEffect() && !isVideo()}>
                   <GuideSwitch>
                     <span id="studio-guides-label">
-                      <Trans>Guide marks</Trans>
+                      <Show
+                        when={isFrame()}
+                        fallback={<Trans>Guide marks</Trans>}
+                      >
+                        <Trans>Show guides</Trans>
+                      </Show>
                     </span>
                     <Toggle
                       checked={guides()}
@@ -982,17 +1092,28 @@ export function StudioEditor(props: {
                   fallback={
                     <p>
                       <Show
-                        when={file()}
+                        when={!isFrame()}
                         fallback={
                           <Trans>
-                            Replace the image to move or scale it in its frame.
+                            A frame is laid round the card exactly as you drew
+                            it, so there is nothing to fit.
                           </Trans>
                         }
                       >
-                        <Trans>
-                          Fit works on still images. Animated files are shown as
-                          they are.
-                        </Trans>
+                        <Show
+                          when={file()}
+                          fallback={
+                            <Trans>
+                              Replace the image to move or scale it in its
+                              frame.
+                            </Trans>
+                          }
+                        >
+                          <Trans>
+                            Fit works on still images. Animated files are shown
+                            as they are.
+                          </Trans>
+                        </Show>
                       </Show>
                     </p>
                   }
@@ -1060,7 +1181,10 @@ export function StudioEditor(props: {
               </Panel>
               <Keys>
                 <span>
-                  <kbd>G</kbd> <Trans>Guide marks</Trans>
+                  <kbd>G</kbd>{" "}
+                  <Show when={isFrame()} fallback={<Trans>Guide marks</Trans>}>
+                    <Trans>Show guides</Trans>
+                  </Show>
                 </span>
                 <span>
                   <kbd>D</kbd> <Trans>Dark or light</Trans>
@@ -1800,6 +1924,33 @@ const TypeCard = styled("div", {
       color: "var(--z-fg-secondary)",
     },
     _phone: { padding: "16px", "& > label": { minHeight: "44px" } },
+  },
+});
+
+/** a quiet way to the frame guide, under the frame's type card */
+const GuideLink = styled("button", {
+  base: {
+    alignSelf: "flex-start",
+    display: "inline-flex",
+    alignItems: "center",
+    gap: "8px",
+    minHeight: "32px",
+    padding: "0 4px",
+    border: "none",
+    borderRadius: "6px",
+    background: "none",
+    font: "inherit",
+    fontSize: "14px",
+    fontWeight: 500,
+    color: "var(--z-accent-text)",
+    cursor: "pointer",
+    "--z-icon-color": "currentColor",
+    _hover: { textDecoration: "underline" },
+    _focusVisible: {
+      outline: "2px solid var(--z-focus)",
+      outlineOffset: "2px",
+    },
+    _phone: { minHeight: "44px" },
   },
 });
 

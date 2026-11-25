@@ -38,6 +38,11 @@ export function ProfileFrame(props: {
   frame?: string;
   /** file of a community frame (filled in by the server) */
   file?: string;
+  /**
+   * a community frame's picture by address instead of `file`: a file a
+   * creator picked and has not uploaded yet
+   */
+  url?: string;
   /** a phone-sized card; left out, a phone-sized window says */
   phone?: boolean;
   /** pixel size of a built-in frame; left out, the box's width says */
@@ -77,7 +82,7 @@ export function ProfileFrame(props: {
     isProfileFrameId(props.frame) ? props.frame : undefined;
   const communityUrl = () =>
     isCommunityRef(props.frame)
-      ? communityFileUrl(instance.mediaUrl, props.file)
+      ? (props.url ?? communityFileUrl(instance.mediaUrl, props.file))
       : undefined;
 
   // the drawings load the first time a built-in frame is shown, so the app's
@@ -147,6 +152,8 @@ export function ProfileFrame(props: {
 export function FramedCard(props: {
   frame?: string;
   file?: string;
+  /** a community frame's picture by address (`ProfileFrame` `url`) */
+  url?: string;
   phone?: boolean;
   fit?: boolean;
   children: JSX.Element;
@@ -221,6 +228,7 @@ export function FramedCard(props: {
         <ProfileFrame
           frame={props.frame}
           file={props.file}
+          url={props.url}
           phone={props.phone}
           cell={cell()}
         />

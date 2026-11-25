@@ -1,11 +1,14 @@
-import { For, Match, Switch } from "solid-js";
+import { For, Match, Show, Switch } from "solid-js";
 
 import { Trans, useLingui } from "@lingui/solid/macro";
 import { styled } from "styled-system/jsx";
 
+import { useClient } from "@revolt/client";
 import { Avatar } from "@revolt/ui";
 import { useEffectsAllowed } from "@revolt/ui/components/features/profiles/effects/ProfileEffect";
+import { ProfilePreview } from "@revolt/ui/components/features/profiles/frames/ProfilePreview";
 import { sampleAvatar } from "@revolt/ui/components/features/profiles/sampleAvatars";
+import { userStyleOf } from "@revolt/ui/components/features/profiles/userStyle";
 
 import { DecorationArt, EffectArt, NameplateArt } from "../CommunityParts";
 import type { CommunityKind } from "../communityApi";
@@ -19,6 +22,7 @@ export const PREVIEW_PLACES: Record<CommunityKind, PreviewPlace[]> = {
   decorations: ["profile", "members", "message", "sizes"],
   nameplates: ["members", "sizes"],
   effects: ["profile"],
+  frames: ["profile"],
 };
 
 /** Avatar sizes the app draws a decoration at */
@@ -45,6 +49,7 @@ export function LivePreview(props: {
   name: string;
 }) {
   const { t } = useLingui();
+  const client = useClient();
   const allowed = useEffectsAllowed();
   const others = () => [
     { name: t`Yusuf`, avatar: sampleAvatar(1) },
@@ -73,6 +78,42 @@ export function LivePreview(props: {
             loop={props.kind !== "effects"}
             controls={!allowed()}
           />
+        </Match>
+
+        {/* a frame round your own profile card, as others will see it */}
+        <Match when={props.kind === "frames"}>
+          <FrameStage data-place="profile">
+            <Show when={client().user} fallback={<span>{props.name}</span>}>
+              {(user) => (
+                <ProfilePreview
+                  user={user()}
+                  style={{
+                    ...userStyleOf(user()),
+                    profile_frame: "c:preview",
+                    profile_frame_file: undefined,
+                  }}
+                  frameUrl={props.url}
+                  guides={props.guides}
+                />
+              )}
+            </Show>
+            <Show when={props.guides}>
+              <Legend data-testid="frame-guide-legend">
+                <li data-key="safe">
+                  <i />
+                  <Trans>Keep clear: the card's content</Trans>
+                </li>
+                <li data-key="crest">
+                  <i />
+                  <Trans>Crest window: may be drawn on</Trans>
+                </li>
+                <li data-key="reach">
+                  <i />
+                  <Trans>How far the art may reach</Trans>
+                </li>
+              </Legend>
+            </Show>
+          </FrameStage>
         </Match>
 
         <Match when={props.guides && props.kind === "decorations"}>
@@ -270,6 +311,41 @@ const Ground = styled("div", {
         "color-mix(in srgb, var(--z-designs-on-light, currentColor) 68%, transparent)",
     },
     _phone: { minHeight: "320px", padding: "32px 16px" },
+  },
+});
+
+/** the framed card, as wide as the stage allows */
+const FrameStage = styled("div", {
+  base: {
+    display: "flex",
+    flexDirection: "column",
+    gap: "16px",
+    width: "min(100%, 460px)",
+    minWidth: 0,
+  },
+});
+
+/** what each guide means, under the framed card */
+const Legend = styled("ul", {
+  base: {
+    display: "flex",
+    flexWrap: "wrap",
+    gap: "8px 16px",
+    margin: 0,
+    padding: 0,
+    listStyle: "none",
+    fontSize: "13px",
+    lineHeight: "20px",
+    color: "var(--studio-soft)",
+    "& li": { display: "inline-flex", alignItems: "center", gap: "8px" },
+    "& i": { flexShrink: 0, width: "16px", height: "12px" },
+    "& [data-key='safe'] i": {
+      background: "color-mix(in srgb, var(--z-focus) 22%, transparent)",
+      outline: "2px dashed var(--z-focus)",
+      outlineOffset: "-2px",
+    },
+    "& [data-key='crest'] i": { border: "2px solid currentColor" },
+    "& [data-key='reach'] i": { border: "1px dashed currentColor" },
   },
 });
 
