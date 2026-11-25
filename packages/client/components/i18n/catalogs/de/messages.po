@@ -33275,3 +33275,78 @@ msgstr "Dieser Wiederherstellungscode hat nicht funktioniert. Prüfe ihn und ver
 #: components/client/mfaLogin.ts
 msgid "Too many wrong codes. Wait 15 minutes and try again."
 msgstr "Zu viele falsche Codes. Warte 15 Minuten und versuche es dann erneut."
+
+#: components/app/interface/settings/user/activity/ActivitySettings.tsx
+msgid "App names can say private things about you. Turn off or rename any."
+msgstr "App-Namen können Privates über dich verraten. Schalte sie aus oder benenne sie um."
+
+#: components/app/interface/settings/user/activity/ActivitySettings.tsx
+msgid "Apps that report what you do. Block one to hide it."
+msgstr "Apps, die melden, was du machst. Blockiere eine, um sie auszublenden."
+
+#: components/app/interface/settings/user/activity/ActivitySettings.tsx
+msgid "Browser · off until you turn it on"
+msgstr "Browser · aus, bis du ihn einschaltest"
+
+#: components/ui/components/features/activity/ActivityLineBody.tsx
+msgctxt "activity"
+msgid "Competing"
+msgstr "Tritt an"
+
+#: components/app/interface/settings/user/activity/ActivitySettings.tsx
+msgid "Friends and people in your servers see the game or app you use."
+msgstr "Freunde und Leute in deinen Servern sehen das Spiel oder die App, die du nutzt."
+
+#: components/ui/components/features/activity/ActivityLineBody.tsx
+msgctxt "activity"
+msgid "Listening"
+msgstr "Hört"
+
+#: components/app/interface/settings/user/activity/ActivitySettings.tsx
+msgid "No app has connected yet."
+msgstr "Noch keine App verbunden."
+
+#: components/app/interface/settings/user/activity/ActivitySettings.tsx
+msgid "No history is kept"
+msgstr "Es wird kein Verlauf gespeichert"
+
+#: components/app/interface/settings/user/activity/ActivitySettings.tsx
+msgid "Only in memory while you are online, at most 24 hours."
+msgstr "Nur im Speicher, solange du online bist, höchstens 24 Stunden."
+
+#. placeholder {0}: link().host
+#: components/ui/components/features/activity/ProfileActivity.tsx
+msgid "Open the official page: {0}"
+msgstr "Offizielle Seite öffnen: {0}"
+
+#: components/ui/components/features/activity/ActivityLineBody.tsx
+msgctxt "activity"
+msgid "Playing"
+msgstr "Spielt"
+
+#: components/app/interface/settings/user/activity/ActivitySettings.tsx
+msgid "Program names only, never window titles, tabs or files."
+msgstr "Nur Programmnamen, nie Fenstertitel, Tabs oder Dateien."
+
+#: components/app/interface/settings/user/activity/ActivitySettings.tsx
+msgid "Receive their reports while that app is closed."
+msgstr "Ihre Meldungen empfangen, solange diese App geschlossen ist."
+
+#: components/ui/components/features/activity/ActivityLineBody.tsx
+msgctxt "activity"
+msgid "Streaming"
+msgstr "Streamt"
+
+#: components/ui/components/features/activity/ActivityLineBody.tsx
+msgctxt "activity"
+msgid "Using"
+msgstr "Nutzt"
+
+#: components/ui/components/features/activity/ActivityLineBody.tsx
+msgctxt "activity"
+msgid "Watching"
+msgstr "Schaut"
+
+#: components/app/interface/settings/user/activity/ActivitySettings.tsx
+msgid "Your public Steam game, also without the desktop app. Link Steam in Connections first."
+msgstr "Dein öffentliches Steam-Spiel, auch ohne Desktop-App. Verknüpfe Steam zuerst unter Verknüpfungen."

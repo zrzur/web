@@ -40,7 +40,7 @@
     },
     {
       "path": ".github/workflows/source-check.yml",
-      "sha256": "577d5e955bfc81079ebfea263dccdd1098069894bc73725e6b3da07c4847d403",
+      "sha256": "f82176cf6baa8a7c6b3178e0e85d10adf0debdc05871b0e22c41c6b54834ae8b",
       "bytes": 959,
       "category": "reviewed-build-and-ci"
     },
@@ -268,8 +268,8 @@
     },
     {
       "path": "CHANGELOG.md",
-      "sha256": "a3df38adce4d2f077a9d6747a7441faa9adcbd597681820df640754ac84be13c",
-      "bytes": 241054,
+      "sha256": "775a9c6390cbb3c8f66a57edcd6a7607e349e9629ce794d9af4dc932da5057c0",
+      "bytes": 242908,
       "category": "public-documentation"
     },
     {
@@ -328,7 +328,7 @@
     },
     {
       "path": "RELEASE.json",
-      "sha256": "ebefb5058fa5183c61c35d871a785dda7f961ce9688c4841ee30e1662d3b2833",
+      "sha256": "e236a31d212fb05307a2a44a56d9753bbc99b26ab12dde9f46f67ee7a01584cc",
       "bytes": 295,
       "category": "product-source-or-build-manifest"
     },
@@ -346,7 +346,7 @@
     },
     {
       "path": "ZRZUR_RELEASE.md",
-      "sha256": "e539afae3c79b66683ab3d6fbd43daaabb8bc4738bf0582a189e10d5fbe5bdbf",
+      "sha256": "6a11263b42c6809d729daf9f1a96f8f6ac6ee8b88dacec580159cbdbf24bdd58",
       "bytes": 1612,
       "category": "public-documentation"
     },
@@ -586,7 +586,7 @@
     },
     {
       "path": "package.json",
-      "sha256": "3732b502c29fbdf2397490e4424938db9b22a6d3b0c7a9471441a498eec1ce4c",
+      "sha256": "70c2e9179cef1fd2b3abb6d09f05396193ecea6bc80622d6c5dca16668d356ff",
       "bytes": 735,
       "category": "product-source-or-build-manifest"
     },
@@ -2266,8 +2266,8 @@
     },
     {
       "path": "packages/client/components/app/interface/settings/user/activity/ActivitySettings.tsx",
-      "sha256": "8edfa4f1d74e48baf837ab256388c0da237d0657f732f57dcf4e1bc9b55affe1",
-      "bytes": 33885,
+      "sha256": "c78d21da8bf75e2585886986e5d243a7d91414965b8275c91157f17a4f3f24b9",
+      "bytes": 35944,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -3292,8 +3292,8 @@
     },
     {
       "path": "packages/client/components/client/ActivityWorker.tsx",
-      "sha256": "7619420ad734b898dcf03507ed4562cad45256017a1605c4a004f782a20e4142",
-      "bytes": 3961,
+      "sha256": "10e4c34303c8643528d31ff9463346132d9f2b448a8505a1320bdec1a39260f2",
+      "bytes": 4362,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -3814,8 +3814,8 @@
     },
     {
       "path": "packages/client/components/i18n/catalogs/ar/messages.po",
-      "sha256": "b4ccef9438cd7d954cf28b3219474f03eef88d2e9a0da525289cafb134f88173",
-      "bytes": 1375781,
+      "sha256": "ee3b47c6229498ba356652134ade19527f7f49052460ff0780516eadde64d9ab",
+      "bytes": 1379023,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -3958,8 +3958,8 @@
     },
     {
       "path": "packages/client/components/i18n/catalogs/de/messages.po",
-      "sha256": "f39878c4b502bbc2450f2e80560243563a0c5878f38604a8ae9640d0a5395c5f",
-      "bytes": 1270282,
+      "sha256": "31004ed0f06eee996734c0ab64451294ed8223037c8c4e3a4853dc45c38177e4",
+      "bytes": 1273203,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -3994,8 +3994,8 @@
     },
     {
       "path": "packages/client/components/i18n/catalogs/en/messages.po",
-      "sha256": "fd98ec77b924aac0d3584945b8555c2916e4dcb57e7ad5906015664d21eb2245",
-      "bytes": 1222741,
+      "sha256": "8d4d1ae790c19b8ede390b313906f133879811e371b29d2c6789eea390e20295",
+      "bytes": 1225565,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -6969,6 +6969,18 @@
       "category": "product-source-or-build-manifest"
     },
     {
+      "path": "packages/client/components/ui/components/features/activity/ActivityArt.dom.test.tsx",
+      "sha256": "c467373142904abd46525fd9c605838de9c0f5c08791ea6af2fa29881135b556",
+      "bytes": 2864,
+      "category": "synthetic-test-source-or-fixture"
+    },
+    {
+      "path": "packages/client/components/ui/components/features/activity/ActivityArt.tsx",
+      "sha256": "92ebef7cf1f222c75cce6fa08148b18cca54bb3ebf451e66225e92d2bac9e431",
+      "bytes": 5198,
+      "category": "product-source-or-build-manifest"
+    },
+    {
       "path": "packages/client/components/ui/components/features/activity/ActivityLine.tsx",
       "sha256": "15e8d9f976604fd3b428ed503137d431b08ebffa7615ac3dd813413ea1519c96",
       "bytes": 735,
@@ -6976,26 +6988,26 @@
     },
     {
       "path": "packages/client/components/ui/components/features/activity/ActivityLineBody.tsx",
-      "sha256": "a81a519519cd6c44718afe9ebf95698b55d56aa5aa2f851671ba495a350247cd",
-      "bytes": 2361,
+      "sha256": "bb40b13aef7e12be99ec0cd9a5caec5d3a105ef083af23a782eb191e4eb14e7a",
+      "bytes": 3455,
       "category": "product-source-or-build-manifest"
     },
     {
       "path": "packages/client/components/ui/components/features/activity/ProfileActivity.tsx",
-      "sha256": "fcea23b2729cf8b16a022c6ea440392ee3c5e6b76c52bc3ab90ea9d6854764b2",
-      "bytes": 8297,
+      "sha256": "5098259778e748482af0fe414d894ea431b624ba0e382c96d132cbdffaa4444e",
+      "bytes": 8831,
       "category": "product-source-or-build-manifest"
     },
     {
       "path": "packages/client/components/ui/components/features/activity/activityText.test.ts",
-      "sha256": "9176b0bc9bbdc323b8a4b04a7cf35b32d7a5943a8dcc348e9a46e1f853debf77",
-      "bytes": 3990,
+      "sha256": "7e258ab1e47dbbbbdc348300d0ce3b115a47cc4a155623ea0aa70a823baceca1",
+      "bytes": 6355,
       "category": "synthetic-test-source-or-fixture"
     },
     {
       "path": "packages/client/components/ui/components/features/activity/activityText.ts",
-      "sha256": "8adfb6d43890327c5475d5b82dab1df458de8061af31195cdc824fac822e0ffc",
-      "bytes": 4262,
+      "sha256": "a642a1f198124f5e2b0e51ff175e434932f02b0720ab75b8dd15758b567c4634",
+      "bytes": 5988,
       "category": "product-source-or-build-manifest"
     },
     {
@@ -42492,6 +42504,12 @@
       "path": "packages/client/scripts/i18n/ui-2026112501.json",
       "sha256": "135c88acb0f78966797b8f0d202fbc0820b3ef8a1513dcea522821f657b53da3",
       "bytes": 40615,
+      "category": "product-source-or-build-manifest"
+    },
+    {
+      "path": "packages/client/scripts/i18n/ui-2026112570.json",
+      "sha256": "fa5910935a7a94b11ee0a48be8e4d568af05acdca54addcbe21d3aa34370a9ba",
+      "bytes": 2707,
       "category": "product-source-or-build-manifest"
     },
     {

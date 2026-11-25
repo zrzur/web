@@ -137,20 +137,69 @@ export function safeButtonUrl(url: string): URL | undefined {
   }
 }
 
-/** The icon for a kind (names from the app's icon registry) */
-export function activityIcon(kind: ActivityKind): string {
-  switch (kind) {
-    case "Listening":
-      return "music_note";
-    case "Watching":
-      return "visibility";
-    case "Streaming":
-      return "videocam";
-    case "Competing":
-      return "workspace_premium";
-    case "Using":
-      return "desktop_windows";
-    default:
-      return "sports_esports";
+/**
+ * Percent-encode a query value exactly as the server does
+ * (`util::activity::encode_query`): letters, digits and `-_.~` stay. The
+ * proxy keeps one copy per address, so the page asks for the same address
+ * the server put in an activity.
+ */
+export function encodeQuery(value: string): string {
+  let out = "";
+  for (const byte of new TextEncoder().encode(value)) {
+    const c = String.fromCharCode(byte);
+    out += /[A-Za-z0-9\-_.~]/.test(c)
+      ? c
+      : `%${byte.toString(16).toUpperCase().padStart(2, "0")}`;
   }
+  return out;
+}
+
+/**
+ * An outside `https://` picture as Zrzur's image proxy serves it; nothing
+ * without a proxy. The browser never asks the outside host itself.
+ */
+export function proxied(
+  url: string | null | undefined,
+  proxy: string | undefined,
+): string | undefined {
+  if (!url || !proxy) return undefined;
+  try {
+    const parsed = new URL(url);
+    if (parsed.protocol !== "https:" || parsed.username) return undefined;
+  } catch {
+    return undefined;
+  }
+  return `${proxy.replace(/\/+$/, "")}/proxy?url=${encodeQuery(url)}`;
+}
+
+/**
+ * A program's own icon from the desktop app: a PNG, JPEG or WebP data
+ * address only (never SVG, never a page)
+ */
+export function localIcon(url: string | null | undefined): string | undefined {
+  return url && /^data:image\/(png|jpeg|webp);base64,[A-Za-z0-9+/=]+$/.test(url)
+    ? url
+    : undefined;
+}
+
+/** The first letter or digit of a name, for a tile without a picture */
+export function tileLetter(name: string): string {
+  for (const char of name) {
+    if (/[\p{L}\p{N}]/u.test(char)) return char.toLocaleUpperCase().slice(0, 1);
+  }
+  return "?";
+}
+
+/**
+ * The official page of a program the desktop app saw: its one `https://`
+ * link (the desktop sends the site's name as the label). An app's own
+ * buttons are shown as buttons instead.
+ */
+export function pageLink(
+  activity: Activity,
+): { url: URL; host: string } | undefined {
+  if (activity.source !== "Desktop") return undefined;
+  const first = activity.buttons?.[0];
+  const url = first ? safeButtonUrl(first.url) : undefined;
+  return url ? { url, host: url.hostname.replace(/^www\./, "") } : undefined;
 }
