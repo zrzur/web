@@ -33904,3 +33904,45 @@ msgstr "Das Design und sein Bild werden endgültig gelöscht. Es verschwindet au
 #: components/app/interface/settings/user/profile/studio/StudioDesign.tsx
 msgid "You can't delete it while the review is on. It stays until a reviewer decides."
 msgstr "Du kannst es nicht löschen, solange die Prüfung läuft. Es bleibt, bis eine prüfende Person entscheidet."
+
+#: src/interface/designs/FrameGuide.tsx
+msgid "A frame is a picture laid round your profile card, still or moving. Draw it on our template, keep the card clear, and upload it in Creator Studio."
+msgstr "Ein Rahmen ist ein Bild, still oder bewegt, das um deine Profilkarte gelegt wird. Zeichne ihn auf unserer Vorlage, halte die Karte frei und lade ihn im Creator-Studio hoch."
+
+#: components/app/interface/settings/user/profile/studio/StudioHome.tsx
+#: src/interface/designs/FrameGuide.tsx
+msgid "Allowed, any length, up to {FRAME_MAX_FRAMES} frames. People who turn motion off see it as a still picture."
+msgstr "Erlaubt, beliebig lang, höchstens {FRAME_MAX_FRAMES} Einzelbilder. Wer Bewegung ausschaltet, sieht ein Standbild."
+
+#: components/app/interface/settings/user/profile/studio/StudioEditor.tsx
+msgid "Moves, allowed"
+msgstr "Bewegt sich, erlaubt"
+
+#: components/app/interface/settings/user/profile/studio/StudioEditor.tsx
+msgid "People who turn motion off see it as a still picture."
+msgstr "Wer Bewegung ausschaltet, sieht ein Standbild."
+
+#: src/interface/designs/FrameGuide.tsx
+msgid "PNG, animated PNG, WebP or GIF"
+msgstr "PNG, animiertes PNG, WebP oder GIF"
+
+#: components/app/interface/settings/user/profile/studio/StudioHome.tsx
+msgid "PNG, animated PNG, WebP or GIF, with a transparent background"
+msgstr "PNG, animiertes PNG, WebP oder GIF mit transparentem Hintergrund"
+
+#: src/interface/designs/FrameGuide.tsx
+msgid "The frame lies over the card as it is. The avatar, the name and the text area must stay fully transparent in every frame of an animation, or the upload is refused."
+msgstr "Der Rahmen liegt so, wie er ist, über der Karte. Avatar, Name und Textbereich müssen in jedem Einzelbild einer Animation vollständig transparent bleiben, sonst wird der Upload abgelehnt."
+
+#. placeholder {0}: number(FRAME_MAX_FRAMES)
+#: components/app/interface/settings/user/profile/studio/StudioEditor.tsx
+msgid "This frame has too many pictures. The limit is {0}."
+msgstr "Dieser Rahmen hat zu viele Einzelbilder. Die Grenze liegt bei {0}."
+
+#: components/app/interface/settings/user/profile/studio/StudioEditor.tsx
+msgid "Moving frames are not open yet. Export one picture as PNG or WebP."
+msgstr "Bewegte Rahmen sind noch nicht freigegeben. Exportiere ein einzelnes Bild als PNG oder WebP."
+
+#: components/app/interface/settings/user/profile/studio/StudioEditor.tsx
+msgid "Use a PNG, animated PNG, WebP or GIF file."
+msgstr "Verwende eine PNG-, animierte PNG-, WebP- oder GIF-Datei."

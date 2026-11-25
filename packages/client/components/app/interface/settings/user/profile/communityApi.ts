@@ -285,7 +285,7 @@ export function checkCommunityFile(
   kind: CommunityKind = "decorations",
 ) {
   if (!COMMUNITY_TYPES.includes(file.type)) return "type" as const;
-  // a frame is one still picture: no WebM, no animated PNG
+  // a frame is a picture, still or moving: no WebM
   if (
     kind === "frames" &&
     !(FRAME_TYPES as readonly string[]).includes(file.type)

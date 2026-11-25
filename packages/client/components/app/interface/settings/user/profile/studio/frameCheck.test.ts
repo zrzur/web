@@ -13,7 +13,12 @@ import {
 } from "../communityApi";
 
 import { fileChecks, fileRefused } from "./fileCheck";
-import { frameCover, isFrameSize } from "./frameCheck";
+import {
+  FRAME_MAX_FRAMES,
+  frameCover,
+  frameCoverOfFrames,
+  isFrameSize,
+} from "./frameCheck";
 import { STUDIO_SPECS } from "./studioModel";
 
 const W = FRAME_FILE.width;
@@ -105,6 +110,39 @@ describe("frameCover", () => {
   });
 });
 
+describe("frameCoverOfFrames", () => {
+  const clear = () => file([0, 0, W, 160]);
+  const overName = () => file([0, 0, W, 160], [100, 400, 140, 440]);
+
+  it("checks every picture of a moving frame, not only the first", async () => {
+    const cover = await frameCoverOfFrames(
+      [clear(), clear(), overName()],
+      W,
+      H,
+    );
+    expect(cover).toMatchObject({ pixels: 1600, place: "name", frame: 2 });
+  });
+
+  it("passes when every picture keeps the card clear", async () => {
+    expect(await frameCoverOfFrames([clear(), clear()], W, H)).toEqual({
+      pixels: 0,
+    });
+  });
+
+  it("stops at the frame limit the server keeps", async () => {
+    let read = 0;
+    function* many() {
+      for (let i = 0; i < FRAME_MAX_FRAMES + 50; i++) {
+        read++;
+        yield clear();
+      }
+    }
+    expect(await frameCoverOfFrames(many(), W, H)).toEqual({ pixels: 0 });
+    expect(read).toBe(FRAME_MAX_FRAMES);
+    expect(FRAME_MAX_FRAMES).toBe(240);
+  });
+});
+
 describe("frame file checks", () => {
   it("a file of the exact size with a clear card passes", () => {
     const checks = fileChecks("frames", {
@@ -143,13 +181,33 @@ describe("frame file checks", () => {
     });
   });
 
-  it("a moving file fails: a frame is one still picture", () => {
-    const checks = fileChecks("frames", { ...facts(), animated: true });
+  it("a moving file passes and says it moves", () => {
+    const checks = fileChecks("frames", {
+      ...facts(),
+      type: "image/gif",
+      animated: true,
+      frameCover: { pixels: 0 },
+    });
     expect(checks.at(-1)).toEqual({
       id: "motion",
-      state: "fail",
-      reason: "frame-still",
+      state: "ok",
+      reason: "frame-moves",
     });
+    expect(fileRefused(checks)).toBe(false);
+  });
+
+  it("a moving file whose later picture covers the text fails", () => {
+    const checks = fileChecks("frames", {
+      ...facts(),
+      animated: true,
+      frameCover: { pixels: 1, place: "text", frame: 2 },
+    });
+    expect(checks.find((c) => c.id === "safe")).toEqual({
+      id: "safe",
+      state: "fail",
+      reason: "covers-text",
+    });
+    expect(fileRefused(checks)).toBe(true);
   });
 
   it("the studio's numbers are the template's", () => {
@@ -165,12 +223,12 @@ describe("frame file checks", () => {
 });
 
 describe("frames in the community API helpers", () => {
-  it("takes PNG, WebP and GIF, not WebM or animated PNG", () => {
-    for (const type of ["image/png", "image/webp", "image/gif"])
+  it("takes PNG, animated PNG, WebP and GIF, not WebM", () => {
+    for (const type of ["image/png", "image/apng", "image/webp", "image/gif"])
       expect(checkCommunityFile({ type, size: 1000 }, "frames")).toBe(
         undefined,
       );
-    for (const type of ["video/webm", "image/apng", "image/jpeg"])
+    for (const type of ["video/webm", "image/jpeg"])
       expect(checkCommunityFile({ type, size: 1000 }, "frames")).toBe("type");
   });
 

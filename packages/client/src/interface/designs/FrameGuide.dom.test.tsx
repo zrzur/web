@@ -77,7 +77,8 @@ describe("the frame guide", () => {
       "80 px",
       "20 px",
       "Up to 2.5 MB",
-      "PNG, WebP or GIF",
+      "PNG, animated PNG, WebP or GIF",
+      "up to 240 frames",
     ])
       expect(text).toContain(value);
   });

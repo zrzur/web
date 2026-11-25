@@ -1,5 +1,7 @@
 /**
- * A creator's profile frame is one still picture on a fixed template, laid
+ * A creator's profile frame is a picture on a fixed template, still or
+ * moving (animated GIF, WebP or PNG; anyone who turns motion off sees a still
+ * of it), laid
  * over the card with a nine-slice `border-image`: the corners keep their
  * shape, the sides stretch with the card's height, and the whole scales with
  * the card's width. The same numbers are in the backend
@@ -47,8 +49,19 @@ export const FRAME_FILE = {
  */
 export const FRAME_ALPHA_LIMIT = 16;
 
-/** Formats a frame file may be: one still picture */
-export const FRAME_TYPES = ["image/png", "image/webp", "image/gif"] as const;
+/**
+ * Most frames a moving profile frame may have: the server's `max_frames`
+ * (community settings). There is no length limit.
+ */
+export const FRAME_MAX_FRAMES = 240;
+
+/** Formats a frame file may be, still or moving */
+export const FRAME_TYPES = [
+  "image/png",
+  "image/apng",
+  "image/webp",
+  "image/gif",
+] as const;
 
 const T = FRAME_TEMPLATE;
 const OUT_TOP = T.card.top;
@@ -64,12 +77,16 @@ const CARD_WIDTH = T.card.right - T.card.left;
 export function frameBorderImage(url: string, width: number) {
   const s = width / CARD_WIDTH;
   const px = (n: number) => `${+(n * s).toFixed(2)}px`;
-  const d = T.density;
+  // shares of the picture, not its pixels: the still a viewer without motion
+  // gets is smaller than the file, and is cut in the same places
+  const pct = (n: number, of: number) => `${+((n / of) * 100).toFixed(4)}%`;
+  const vertical = (n: number) => pct(n, T.height);
+  const side = pct(T.slice.side, T.width);
   return {
     "border-style": "solid",
     "border-color": "transparent",
     "border-image-source": `url("${url}")`,
-    "border-image-slice": `${T.slice.top * d} ${T.slice.side * d} ${T.slice.bottom * d} ${T.slice.side * d}`,
+    "border-image-slice": `${vertical(T.slice.top)} ${side} ${vertical(T.slice.bottom)} ${side}`,
     "border-image-width": `${px(T.slice.top)} ${px(T.slice.side)} ${px(T.slice.bottom)} ${px(T.slice.side)}`,
     "border-image-outset": `${px(OUT_TOP)} ${px(OUT_SIDE)} ${px(OUT_BOTTOM)} ${px(OUT_SIDE)}`,
     "border-image-repeat": "stretch",

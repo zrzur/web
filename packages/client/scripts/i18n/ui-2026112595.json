@@ -1,0 +1,42 @@
+{
+  "A frame is a picture laid round your profile card, still or moving. Draw it on our template, keep the card clear, and upload it in Creator Studio.": [
+    "الإطار صورة توضع حول بطاقة ملفك الشخصي، ثابتة أو متحركة. ارسمه على قالبنا، واترك البطاقة خالية، ثم ارفعه في استوديو المصممين.",
+    "Ein Rahmen ist ein Bild, still oder bewegt, das um deine Profilkarte gelegt wird. Zeichne ihn auf unserer Vorlage, halte die Karte frei und lade ihn im Creator-Studio hoch."
+  ],
+  "Allowed, any length, up to {FRAME_MAX_FRAMES} frames. People who turn motion off see it as a still picture.": [
+    "مسموح بها، بأي مدة، وبما لا يزيد على {FRAME_MAX_FRAMES} لقطة. من يوقف الحركة يراه صورة ثابتة.",
+    "Erlaubt, beliebig lang, höchstens {FRAME_MAX_FRAMES} Einzelbilder. Wer Bewegung ausschaltet, sieht ein Standbild."
+  ],
+  "Moves, allowed": [
+    "متحرك، وهذا مسموح",
+    "Bewegt sich, erlaubt"
+  ],
+  "People who turn motion off see it as a still picture.": [
+    "من يوقف الحركة يراه صورة ثابتة.",
+    "Wer Bewegung ausschaltet, sieht ein Standbild."
+  ],
+  "PNG, animated PNG, WebP or GIF": [
+    "PNG أو PNG متحرك أو WebP أو GIF",
+    "PNG, animiertes PNG, WebP oder GIF"
+  ],
+  "PNG, animated PNG, WebP or GIF, with a transparent background": [
+    "PNG أو PNG متحرك أو WebP أو GIF بخلفية شفافة",
+    "PNG, animiertes PNG, WebP oder GIF mit transparentem Hintergrund"
+  ],
+  "The frame lies over the card as it is. The avatar, the name and the text area must stay fully transparent in every frame of an animation, or the upload is refused.": [
+    "يوضع الإطار فوق البطاقة كما هو. لذا يجب أن تبقى الصورة الرمزية والاسم ومنطقة النص شفافة تمامًا في كل لقطة من الحركة، وإلا رُفض الرفع.",
+    "Der Rahmen liegt so, wie er ist, über der Karte. Avatar, Name und Textbereich müssen in jedem Einzelbild einer Animation vollständig transparent bleiben, sonst wird der Upload abgelehnt."
+  ],
+  "This frame has too many pictures. The limit is {0}.": [
+    "عدد لقطات هذا الإطار كبير جدًا. الحد الأقصى {0}.",
+    "Dieser Rahmen hat zu viele Einzelbilder. Die Grenze liegt bei {0}."
+  ],
+  "Moving frames are not open yet. Export one picture as PNG or WebP.": [
+    "الإطارات المتحركة غير متاحة بعد. صدّر صورة واحدة بصيغة PNG أو WebP.",
+    "Bewegte Rahmen sind noch nicht freigegeben. Exportiere ein einzelnes Bild als PNG oder WebP."
+  ],
+  "Use a PNG, animated PNG, WebP or GIF file.": [
+    "استخدم ملفًا بصيغة PNG أو PNG متحرك أو WebP أو GIF.",
+    "Verwende eine PNG-, animierte PNG-, WebP- oder GIF-Datei."
+  ]
+}
