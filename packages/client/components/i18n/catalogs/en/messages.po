@@ -33278,3 +33278,78 @@ msgstr "This recovery code didn't work. Check it and try again."
 #: components/client/mfaLogin.ts
 msgid "Too many wrong codes. Wait 15 minutes and try again."
 msgstr "Too many wrong codes. Wait 15 minutes and try again."
+
+#: components/app/interface/settings/user/activity/ActivitySettings.tsx
+msgid "App names can say private things about you. Turn off or rename any."
+msgstr "App names can say private things about you. Turn off or rename any."
+
+#: components/app/interface/settings/user/activity/ActivitySettings.tsx
+msgid "Apps that report what you do. Block one to hide it."
+msgstr "Apps that report what you do. Block one to hide it."
+
+#: components/app/interface/settings/user/activity/ActivitySettings.tsx
+msgid "Browser · off until you turn it on"
+msgstr "Browser · off until you turn it on"
+
+#: components/ui/components/features/activity/ActivityLineBody.tsx
+msgctxt "activity"
+msgid "Competing"
+msgstr "Competing"
+
+#: components/app/interface/settings/user/activity/ActivitySettings.tsx
+msgid "Friends and people in your servers see the game or app you use."
+msgstr "Friends and people in your servers see the game or app you use."
+
+#: components/ui/components/features/activity/ActivityLineBody.tsx
+msgctxt "activity"
+msgid "Listening"
+msgstr "Listening"
+
+#: components/app/interface/settings/user/activity/ActivitySettings.tsx
+msgid "No app has connected yet."
+msgstr "No app has connected yet."
+
+#: components/app/interface/settings/user/activity/ActivitySettings.tsx
+msgid "No history is kept"
+msgstr "No history is kept"
+
+#: components/app/interface/settings/user/activity/ActivitySettings.tsx
+msgid "Only in memory while you are online, at most 24 hours."
+msgstr "Only in memory while you are online, at most 24 hours."
+
+#. placeholder {0}: link().host
+#: components/ui/components/features/activity/ProfileActivity.tsx
+msgid "Open the official page: {0}"
+msgstr "Open the official page: {0}"
+
+#: components/ui/components/features/activity/ActivityLineBody.tsx
+msgctxt "activity"
+msgid "Playing"
+msgstr "Playing"
+
+#: components/app/interface/settings/user/activity/ActivitySettings.tsx
+msgid "Program names only, never window titles, tabs or files."
+msgstr "Program names only, never window titles, tabs or files."
+
+#: components/app/interface/settings/user/activity/ActivitySettings.tsx
+msgid "Receive their reports while that app is closed."
+msgstr "Receive their reports while that app is closed."
+
+#: components/ui/components/features/activity/ActivityLineBody.tsx
+msgctxt "activity"
+msgid "Streaming"
+msgstr "Streaming"
+
+#: components/ui/components/features/activity/ActivityLineBody.tsx
+msgctxt "activity"
+msgid "Using"
+msgstr "Using"
+
+#: components/ui/components/features/activity/ActivityLineBody.tsx
+msgctxt "activity"
+msgid "Watching"
+msgstr "Watching"
+
+#: components/app/interface/settings/user/activity/ActivitySettings.tsx
+msgid "Your public Steam game, also without the desktop app. Link Steam in Connections first."
+msgstr "Your public Steam game, also without the desktop app. Link Steam in Connections first."

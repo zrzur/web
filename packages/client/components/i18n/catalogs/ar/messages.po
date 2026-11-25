@@ -33275,3 +33275,78 @@ msgstr "لم يُقبل رمز الاسترداد هذا. تحقّق منه ثم
 #: components/client/mfaLogin.ts
 msgid "Too many wrong codes. Wait 15 minutes and try again."
 msgstr "أُدخلت رموز خاطئة كثيرة. انتظر 15 دقيقة ثم حاول مرة أخرى."
+
+#: components/app/interface/settings/user/activity/ActivitySettings.tsx
+msgid "App names can say private things about you. Turn off or rename any."
+msgstr "قد تكشف أسماء التطبيقات أمورًا خاصة عنك. أوقف أيًّا منها أو غيّر اسمه."
+
+#: components/app/interface/settings/user/activity/ActivitySettings.tsx
+msgid "Apps that report what you do. Block one to hide it."
+msgstr "تطبيقات تُبلغ بما تفعله. احظر أيًّا منها لإخفائه."
+
+#: components/app/interface/settings/user/activity/ActivitySettings.tsx
+msgid "Browser · off until you turn it on"
+msgstr "متصفح · متوقف حتى تشغّله"
+
+#: components/ui/components/features/activity/ActivityLineBody.tsx
+msgctxt "activity"
+msgid "Competing"
+msgstr "ينافس"
+
+#: components/app/interface/settings/user/activity/ActivitySettings.tsx
+msgid "Friends and people in your servers see the game or app you use."
+msgstr "يرى أصدقاؤك والأشخاص في سيرفراتك اللعبة أو التطبيق الذي تستخدمه."
+
+#: components/ui/components/features/activity/ActivityLineBody.tsx
+msgctxt "activity"
+msgid "Listening"
+msgstr "يستمع"
+
+#: components/app/interface/settings/user/activity/ActivitySettings.tsx
+msgid "No app has connected yet."
+msgstr "لم يتصل أي تطبيق بعد."
+
+#: components/app/interface/settings/user/activity/ActivitySettings.tsx
+msgid "No history is kept"
+msgstr "لا يُحفظ أي سجل"
+
+#: components/app/interface/settings/user/activity/ActivitySettings.tsx
+msgid "Only in memory while you are online, at most 24 hours."
+msgstr "في الذاكرة فقط ما دمت متصلًا، و24 ساعة على الأكثر."
+
+#. placeholder {0}: link().host
+#: components/ui/components/features/activity/ProfileActivity.tsx
+msgid "Open the official page: {0}"
+msgstr "افتح الصفحة الرسمية: {0}"
+
+#: components/ui/components/features/activity/ActivityLineBody.tsx
+msgctxt "activity"
+msgid "Playing"
+msgstr "يلعب"
+
+#: components/app/interface/settings/user/activity/ActivitySettings.tsx
+msgid "Program names only, never window titles, tabs or files."
+msgstr "أسماء البرامج فقط، لا عناوين النوافذ ولا علامات التبويب ولا الملفات أبدًا."
+
+#: components/app/interface/settings/user/activity/ActivitySettings.tsx
+msgid "Receive their reports while that app is closed."
+msgstr "استقبل تقاريرها ما دام ذلك التطبيق مغلقًا."
+
+#: components/ui/components/features/activity/ActivityLineBody.tsx
+msgctxt "activity"
+msgid "Streaming"
+msgstr "يبث"
+
+#: components/ui/components/features/activity/ActivityLineBody.tsx
+msgctxt "activity"
+msgid "Using"
+msgstr "يستخدم"
+
+#: components/ui/components/features/activity/ActivityLineBody.tsx
+msgctxt "activity"
+msgid "Watching"
+msgstr "يشاهد"
+
+#: components/app/interface/settings/user/activity/ActivitySettings.tsx
+msgid "Your public Steam game, also without the desktop app. Link Steam in Connections first."
+msgstr "لعبتك العامة على Steam، حتى دون تطبيق سطح المكتب. اربط Steam في «الحسابات المرتبطة» أولًا."
